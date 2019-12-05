@@ -57,42 +57,6 @@ extern s32 gAnimMoveDmg;
 extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_2037F24;
 
-/*
-extern const struct OamData gOamData_83AC9C8;
-extern const struct OamData gOamData_83AC9D0;
-extern const struct OamData gOamData_83AC9D8;
-extern const struct OamData gOamData_83AC9E0;
-extern const struct OamData gOamData_83AC9F8;
-extern const struct OamData gOamData_83ACA00;
-extern const struct OamData gOamData_83ACA18;
-extern const struct OamData gOamData_83ACA20;
-extern const struct OamData gOamData_83ACA30;
-extern const struct OamData gOamData_83ACA38;
-extern const struct OamData gOamData_83ACA40;
-extern const struct OamData gOamData_83ACA80;
-extern const struct OamData gOamData_83ACA90;
-extern const struct OamData gOamData_83ACA98;
-extern const struct OamData gOamData_83ACAA0;
-extern const struct OamData gOamData_83ACAB8;
-extern const struct OamData gOamData_83ACAC8;
-extern const struct OamData gOamData_83ACAE8;
-extern const struct OamData gOamData_83ACAF0;
-extern const struct OamData gOamData_83ACAF8;
-extern const struct OamData gOamData_83ACB00;
-extern const struct OamData gOamData_83ACB10;
-extern const struct OamData gOamData_83ACB18;
-extern const struct OamData gOamData_83ACB20;
-extern const struct OamData gOamData_83ACB28;
-extern const struct OamData gOamData_83ACB38;
-extern const struct OamData gOamData_83ACB48;
-extern const struct OamData gOamData_83ACB50;
-extern const struct OamData gOamData_83ACB58;
-extern const struct OamData gOamData_83ACB60;
-extern const struct OamData gOamData_83ACB88;
-extern const struct OamData gOamData_83ACBC0;
-extern const struct OamData gOamData_83ACBE8;
-*/
-
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;

@@ -18,13 +18,7 @@
 #include "task.h"
 #include "constants/battle_anim.h"
 
-// Defines
 #define ANIM_SPRITE_INDEX_COUNT 8
-
-extern const u16 gMovesWithQuietBGM[];
-extern const u8 *const gBattleAnims_Moves[];
-//extern const struct CompressedSpriteSheet gUnknown_8399388[];
-//extern const struct CompressedSpritePalette gUnknown_8399C90[];
 
 // RAM
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
@@ -117,7 +111,10 @@ static void ScriptCmd_doublebattle_2E(void);
 static void ScriptCmd_stopsound(void);
 
 // Data
-const struct OamData gOamData_AffineOff_ObjNormal_8x8 =	//gOamData_83AC9C8
+extern const u16 gMovesWithQuietBGM[];
+extern const u8 *const gBattleAnims_Moves[];
+
+const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -132,7 +129,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x8 =	//gOamData_83AC9C8
 };
 
 
-const struct OamData gOamData_AffineOff_ObjNormal_16x16 =	//gOamData_83AC9D0
+const struct OamData gOamData_AffineOff_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -146,7 +143,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_16x16 =	//gOamData_83AC9D0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_32x32 =	//gOamData_83AC9D8
+const struct OamData gOamData_AffineOff_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -160,7 +157,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_32x32 =	//gOamData_83AC9D8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_64x64 =	//gOamData_83AC9E0
+const struct OamData gOamData_AffineOff_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -174,7 +171,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_64x64 =	//gOamData_83AC9E0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_16x8 =	//gOamData_83AC9E8
+const struct OamData gOamData_AffineOff_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -188,7 +185,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_16x8 =	//gOamData_83AC9E8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_32x8 =	//gOamData_83AC9F0
+const struct OamData gOamData_AffineOff_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -202,7 +199,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_32x8 =	//gOamData_83AC9F0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_32x16 =	//gOamData_83AC9F8
+const struct OamData gOamData_AffineOff_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -216,7 +213,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_32x16 =	//gOamData_83AC9F8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_64x32 =	//gOamData_83ACA00
+const struct OamData gOamData_AffineOff_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -230,7 +227,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_64x32 =	//gOamData_83ACA00
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_8x16 =	//gOamData_83ACA08
+const struct OamData gOamData_AffineOff_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -244,7 +241,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x16 =	//gOamData_83ACA08
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_8x32 =	//gOamData_83ACA10
+const struct OamData gOamData_AffineOff_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -258,7 +255,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x32 =	//gOamData_83ACA10
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_16x32 =	//gOamData_83ACA18
+const struct OamData gOamData_AffineOff_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -272,7 +269,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_16x32 =	//gOamData_83ACA18
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjNormal_32x64 =	//gOamData_83ACA20
+const struct OamData gOamData_AffineOff_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -286,7 +283,7 @@ const struct OamData gOamData_AffineOff_ObjNormal_32x64 =	//gOamData_83ACA20
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_8x8 =	//gOamData_83ACA28
+const struct OamData gOamData_AffineNormal_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -300,7 +297,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_8x8 =	//gOamData_83ACA28
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_16x16 =	//gOamData_83ACA30
+const struct OamData gOamData_AffineNormal_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -314,7 +311,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_16x16 =	//gOamData_83ACA30
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_32x32 =	//gOamData_83ACA38
+const struct OamData gOamData_AffineNormal_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -328,7 +325,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_32x32 =	//gOamData_83ACA38
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_64x64 =	//gOamData_83ACA40
+const struct OamData gOamData_AffineNormal_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -342,7 +339,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_64x64 =	//gOamData_83ACA40
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_16x8 =	//gOamData_83ACA48
+const struct OamData gOamData_AffineNormal_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -356,7 +353,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_16x8 =	//gOamData_83ACA48
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_32x8 =	//gOamData_83ACA50
+const struct OamData gOamData_AffineNormal_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -370,7 +367,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_32x8 =	//gOamData_83ACA50
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_32x16 =	//gOamData_83ACA58
+const struct OamData gOamData_AffineNormal_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -384,7 +381,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_32x16 =	//gOamData_83ACA58
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_64x32 =	//gOamData_83ACA60
+const struct OamData gOamData_AffineNormal_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -398,7 +395,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_64x32 =	//gOamData_83ACA60
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_8x16 =	//gOamData_83ACA68
+const struct OamData gOamData_AffineNormal_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -412,7 +409,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_8x16 =	//gOamData_83ACA68
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_8x32 =	//gOamData_83ACA70
+const struct OamData gOamData_AffineNormal_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -426,7 +423,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_8x32 =	//gOamData_83ACA70
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_16x32 =	//gOamData_83ACA78
+const struct OamData gOamData_AffineNormal_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -440,7 +437,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_16x32 =	//gOamData_83ACA78
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjNormal_32x64 =	//gOamData_83ACA80
+const struct OamData gOamData_AffineNormal_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -454,7 +451,7 @@ const struct OamData gOamData_AffineNormal_ObjNormal_32x64 =	//gOamData_83ACA80
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_8x8 =	//gOamData_83ACA88
+const struct OamData gOamData_AffineDouble_ObjNormal_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -468,7 +465,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_8x8 =	//gOamData_83ACA88
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_16x16 =	//gOamData_83ACA90
+const struct OamData gOamData_AffineDouble_ObjNormal_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -482,7 +479,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_16x16 =	//gOamData_83ACA90
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_32x32 =	//gOamData_83ACA98
+const struct OamData gOamData_AffineDouble_ObjNormal_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -496,7 +493,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_32x32 =	//gOamData_83ACA98
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_64x64 =	//gOamData_83ACAA0
+const struct OamData gOamData_AffineDouble_ObjNormal_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -510,7 +507,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_64x64 =	//gOamData_83ACAA0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_16x8 =	//gOamData_83ACAA8
+const struct OamData gOamData_AffineDouble_ObjNormal_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -524,7 +521,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_16x8 =	//gOamData_83ACAA8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_32x8 =	//gOamData_83ACAB0
+const struct OamData gOamData_AffineDouble_ObjNormal_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -538,7 +535,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_32x8 =	//gOamData_83ACAB0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_32x16 =	//gOamData_83ACAB8
+const struct OamData gOamData_AffineDouble_ObjNormal_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -552,7 +549,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_32x16 =	//gOamData_83ACAB8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_64x32 =	//gOamData_83ACAC0
+const struct OamData gOamData_AffineDouble_ObjNormal_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -566,7 +563,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_64x32 =	//gOamData_83ACAC0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_8x16 =	//gOamData_83ACAC8
+const struct OamData gOamData_AffineDouble_ObjNormal_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -580,7 +577,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_8x16 =	//gOamData_83ACAC8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_8x32 =	//gOamData_83ACAD0
+const struct OamData gOamData_AffineDouble_ObjNormal_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -594,7 +591,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_8x32 =	//gOamData_83ACAD0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_16x32 =	//gOamData_83ACAD8
+const struct OamData gOamData_AffineDouble_ObjNormal_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -608,7 +605,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_16x32 =	//gOamData_83ACAD8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjNormal_32x64 =	//gOamData_83ACAE0
+const struct OamData gOamData_AffineDouble_ObjNormal_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -622,7 +619,7 @@ const struct OamData gOamData_AffineDouble_ObjNormal_32x64 =	//gOamData_83ACAE0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_8x8 =	//gOamData_83ACAE8
+const struct OamData gOamData_AffineOff_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -636,7 +633,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_8x8 =	//gOamData_83ACAE8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_16x16 =	//gOamData_83ACAF0
+const struct OamData gOamData_AffineOff_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -650,7 +647,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_16x16 =	//gOamData_83ACAF0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_32x32 =	//gOamData_83ACAF8
+const struct OamData gOamData_AffineOff_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -664,7 +661,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x32 =	//gOamData_83ACAF8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_64x64 =	//gOamData_83ACB00
+const struct OamData gOamData_AffineOff_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -678,7 +675,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_64x64 =	//gOamData_83ACB00
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_16x8 =	//gOamData_83ACB08
+const struct OamData gOamData_AffineOff_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -692,7 +689,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_16x8 =	//gOamData_83ACB08
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_32x8 =	//gOamData_83ACB10
+const struct OamData gOamData_AffineOff_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -706,7 +703,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x8 =	//gOamData_83ACB10
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_32x16 =	//gOamData_83ACB18
+const struct OamData gOamData_AffineOff_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -720,7 +717,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x16 =	//gOamData_83ACB18
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_64x32 =	//gOamData_83ACB20
+const struct OamData gOamData_AffineOff_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -734,7 +731,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_64x32 =	//gOamData_83ACB20
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_8x16 =	//gOamData_83ACB28
+const struct OamData gOamData_AffineOff_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -748,7 +745,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_8x16 =	//gOamData_83ACB28
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_8x32 =	//gOamData_83ACB30
+const struct OamData gOamData_AffineOff_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -762,7 +759,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_8x32 =	//gOamData_83ACB30
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_16x32 =	//gOamData_83ACB38
+const struct OamData gOamData_AffineOff_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -776,7 +773,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_16x32 =	//gOamData_83ACB38
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineOff_ObjBlend_32x64 =	//gOamData_83ACB40
+const struct OamData gOamData_AffineOff_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -790,7 +787,7 @@ const struct OamData gOamData_AffineOff_ObjBlend_32x64 =	//gOamData_83ACB40
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_8x8 =	//gOamData_83ACB48
+const struct OamData gOamData_AffineNormal_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -804,7 +801,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_8x8 =	//gOamData_83ACB48
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_16x16 =	//gOamData_83ACB50
+const struct OamData gOamData_AffineNormal_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -818,7 +815,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_16x16 =	//gOamData_83ACB50
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_32x32 =	//gOamData_83ACB58
+const struct OamData gOamData_AffineNormal_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -832,7 +829,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_32x32 =	//gOamData_83ACB58
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_64x64 =	//gOamData_83ACB60
+const struct OamData gOamData_AffineNormal_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -846,7 +843,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_64x64 =	//gOamData_83ACB60
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_16x8 =	//gOamData_83ACB68
+const struct OamData gOamData_AffineNormal_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -860,7 +857,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_16x8 =	//gOamData_83ACB68
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_32x8 =	//gOamData_83ACB70
+const struct OamData gOamData_AffineNormal_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -874,7 +871,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_32x8 =	//gOamData_83ACB70
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_32x16 =	//gOamData_83ACB78
+const struct OamData gOamData_AffineNormal_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -888,7 +885,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_32x16 =	//gOamData_83ACB78
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_64x32 =	//gOamData_83ACB80
+const struct OamData gOamData_AffineNormal_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -902,7 +899,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_64x32 =	//gOamData_83ACB80
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_8x16 =	//gOamData_83ACB88
+const struct OamData gOamData_AffineNormal_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -916,7 +913,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_8x16 =	//gOamData_83ACB88
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_8x32 =	//gOamData_83ACB90
+const struct OamData gOamData_AffineNormal_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -930,7 +927,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_8x32 =	//gOamData_83ACB90
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_16x32 =	//gOamData_83ACB98
+const struct OamData gOamData_AffineNormal_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -944,7 +941,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_16x32 =	//gOamData_83ACB98
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineNormal_ObjBlend_32x64 =	//gOamData_83ACBA0	
+const struct OamData gOamData_AffineNormal_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
@@ -958,7 +955,7 @@ const struct OamData gOamData_AffineNormal_ObjBlend_32x64 =	//gOamData_83ACBA0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_8x8 =	//gOamData_83ACBA8
+const struct OamData gOamData_AffineDouble_ObjBlend_8x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -972,7 +969,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_8x8 =	//gOamData_83ACBA8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_16x16 =	//gOamData_83ACBB0
+const struct OamData gOamData_AffineDouble_ObjBlend_16x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -986,7 +983,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_16x16 =	//gOamData_83ACBB0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_32x32 =	//gOamData_83ACBB8
+const struct OamData gOamData_AffineDouble_ObjBlend_32x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1000,7 +997,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_32x32 =	//gOamData_83ACBB8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_64x64 =	//gOamData_83ACBC0
+const struct OamData gOamData_AffineDouble_ObjBlend_64x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1014,7 +1011,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_64x64 =	//gOamData_83ACBC0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_16x8 =	//gOamData_83ACBC8
+const struct OamData gOamData_AffineDouble_ObjBlend_16x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1028,7 +1025,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_16x8 =	//gOamData_83ACBC8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_32x8 =	//gOamData_83ACBD0
+const struct OamData gOamData_AffineDouble_ObjBlend_32x8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1042,7 +1039,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_32x8 =	//gOamData_83ACBD0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_32x16 =	//gOamData_83ACBD8
+const struct OamData gOamData_AffineDouble_ObjBlend_32x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1056,7 +1053,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_32x16 =	//gOamData_83ACBD8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_64x32 =	//gOamData_83ACBE0
+const struct OamData gOamData_AffineDouble_ObjBlend_64x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1070,7 +1067,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_64x32 =	//gOamData_83ACBE0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_8x16 =	//gOamData_83ACBE8
+const struct OamData gOamData_AffineDouble_ObjBlend_8x16 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1084,7 +1081,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_8x16 =	//gOamData_83ACBE8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_8x32 =	//gOamData_83ACBF0
+const struct OamData gOamData_AffineDouble_ObjBlend_8x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1098,7 +1095,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_8x32 =	//gOamData_83ACBF0
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_16x32 =	//gOamData_83ACBF8
+const struct OamData gOamData_AffineDouble_ObjBlend_16x32 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1112,7 +1109,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_16x32 =	//gOamData_83ACBF8
     .paletteNum = 0,
 };
 
-const struct OamData gOamData_AffineDouble_ObjBlend_32x64 =	//gOamData_83ACC00
+const struct OamData gOamData_AffineDouble_ObjBlend_32x64 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
@@ -1126,7 +1123,7 @@ const struct OamData gOamData_AffineDouble_ObjBlend_32x64 =	//gOamData_83ACC00
     .paletteNum = 0,
 };
 
-const struct CompressedSpriteSheet gBattleAnimPicTable[] =	// 83ACC08
+const struct CompressedSpriteSheet gBattleAnimPicTable[] =
 {
     {gBattleAnimSpriteGfx_Bone, 0x0200, ANIM_TAG_BONE},
     {gBattleAnimSpriteGfx_Spark, 0x0300, ANIM_TAG_SPARK},
@@ -1712,7 +1709,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlueRing2, ANIM_TAG_BLUE_RING_2},
 };
 
-const struct BattleAnimBackground gBattleAnimBackgroundTable[] =	// 83ADE18
+const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 {
     [BG_DARK_] = {gBattleAnimBgImage_Dark, gBattleAnimBgPalette_Dark, gBattleAnimBgTilemap_Dark},
     [BG_DARK] = {gBattleAnimBgImage_Dark, gBattleAnimBgPalette_Dark, gBattleAnimBgTilemap_Dark},
@@ -1743,7 +1740,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =	// 83ADE18
     [BG_SOLARBEAM_CONTESTS] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactContests},
 };
 
-static void (* const sScriptCmdTable[])(void) =	// 83ADF5C
+static void (* const sScriptCmdTable[])(void) =
 {
     ScriptCmd_loadspritegfx,
     ScriptCmd_unloadspritegfx,
@@ -1808,7 +1805,7 @@ void ClearBattleAnimationVars(void)
     gAnimMoveDmg = 0;
     gAnimMovePower = 0;
     gAnimFriendship = 0;
-	
+    
     // Clear index array.
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
         sAnimSpriteIndexArray[i] |= 0xFFFF;
@@ -1838,15 +1835,15 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 {
     s32 i;
 
-	sub_80767F0();
-	UpdateOamPriorityInAllHealthboxes(0);
-	for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-	{
-		if (GetBattlerSide(i) != B_SIDE_PLAYER)
-			gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
-		else
-			gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
-	}
+    sub_80767F0();
+    UpdateOamPriorityInAllHealthboxes(0);
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (GetBattlerSide(i) != B_SIDE_PLAYER)
+            gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
+        else
+            gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
+    }
 
     if (!isMoveAnim)
         sAnimMoveIndex = 0;
@@ -1958,14 +1955,9 @@ static void ScriptCmd_loadspritegfx(void)
 
     sBattleAnimScriptPtr++;
     index = T1_READ_16(sBattleAnimScriptPtr);
-    
-	LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[index]);
-	LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[index]);
-	
-	//LoadCompressedSpriteSheetUsingHeap(&gUnknown_8399388[GET_TRUE_SPRITE_INDEX(index)]);
-    //LoadCompressedSpritePaletteUsingHeap(&gUnknown_8399C90[GET_TRUE_SPRITE_INDEX(index)]);
-    
-	sBattleAnimScriptPtr += 2;
+    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
+    sBattleAnimScriptPtr += 2;
     AddSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
     gAnimFramesToWait = 1;
     gAnimScriptCallback = WaitAnimFrameCount;
@@ -2077,7 +2069,6 @@ static void ScriptCmd_delay(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
-// Wait for visual tasks to finish.
 static void ScriptCmd_waitforvisualfinish(void)
 {
     if (gAnimVisualTaskCount == 0)
@@ -2140,11 +2131,11 @@ static void ScriptCmd_end(void)
         }
     }
 
-    if (!continuousAnim) // May have been used for debug?
+    if (!continuousAnim)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
-		sub_80767F0();
-		UpdateOamPriorityInAllHealthboxes(1);
+        sub_80767F0();
+        UpdateOamPriorityInAllHealthboxes(1);
         gAnimScriptActive = FALSE;
     }
 }
@@ -2176,20 +2167,20 @@ static void ScriptCmd_monbg(void)
 
     sBattleAnimScriptPtr++;
     animBattler = sBattleAnimScriptPtr[0];
-	if (animBattler == 0)
-		animBattler = 2;
-	else if (animBattler == 1)
-        animBattler = 3;
+    if (animBattler == ANIM_ATTACKER)
+        animBattler = ANIM_ATK_PARTNER;
+    else if (animBattler == ANIM_TARGET)
+        animBattler = ANIM_DEF_PARTNER;
 
-    if (animBattler == 0 || animBattler == 2)
+    if (animBattler == ANIM_ATTACKER || animBattler == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
-	
+    
     if (IsBattlerSpriteVisible(battlerId))
     {
-        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition(battlerId);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -2217,10 +2208,10 @@ static void ScriptCmd_monbg(void)
     }
 
     battlerId ^= BIT_FLANK;
-    if (animBattler > 1 && IsBattlerSpriteVisible(battlerId))
+    if (animBattler > ANIM_TARGET && IsBattlerSpriteVisible(battlerId))
     {
-        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition(battlerId);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -2253,8 +2244,8 @@ static void ScriptCmd_monbg(void)
 bool8 IsBattlerSpriteVisible(u8 battlerId)
 {
     u8 battler = battlerId;
-	
-	if (!IsBattlerSpritePresent(battler))
+    
+    if (!IsBattlerSpritePresent(battler))
         return FALSE;
 
     if (!gBattleSpritesDataPtr->battlerData[battler].invisible || !gSprites[gBattlerSpriteIds[battler]].invisible)
@@ -2263,7 +2254,6 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
     return FALSE;
 }
 
-// re-check needed?
 void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
 {
     struct BattleAnimBgData animBg;
@@ -2273,8 +2263,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
     if (!toBG_2)
     {
 
-		RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
-		RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(8)), 0x2000, 1);
+        RequestDma3Fill(0, (void*)(BG_SCREEN_ADDR(28)), 0x1000, 1);
         sub_80752A0(&animBg);
         CpuFill16(toBG_2, animBg.bgTiles, 0x1000);
         CpuFill16(toBG_2, animBg.bgTilemap, 0x800);
@@ -2331,14 +2321,14 @@ void sub_80730C0(u16 a, u16 *b, s32 c, u8 d)
         var = 32;
     else
         var = 64;
-	
+    
     a <<= 12;
     for (i = 0; i < var; i++)
     {
         for (j = 0; j < 32; j++)
-		{
+        {
             b[32 * i + j] = ((b[32 * i + j] & 0xFFF) | a) + c;
-		}
+        }
     }
 }
 
@@ -2405,22 +2395,22 @@ static void ScriptCmd_clearmonbg(void)
 
     sBattleAnimScriptPtr++;
     animBattlerId = sBattleAnimScriptPtr[0];
-	if (animBattlerId == 0)
-		animBattlerId = 2;
-	else if (animBattlerId == 1)
-        animBattlerId = 3;
+    if (animBattlerId == ANIM_ATTACKER)
+        animBattlerId = ANIM_ATK_PARTNER;
+    else if (animBattlerId == ANIM_TARGET)
+        animBattlerId = ANIM_DEF_PARTNER;
 
-    if (animBattlerId == 0 || animBattlerId == 2)
+    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
 
     if (sMonAnimTaskIdArray[0] != 0xFF)
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
-    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != 0xFF)
+    if (animBattlerId > ANIM_TARGET && sMonAnimTaskIdArray[1] != 0xFF)
         gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
-        animBattlerId = 0;
+        animBattlerId = ANIM_ATTACKER;
 
     taskId = CreateTask(sub_807331C, 5);
     gTasks[taskId].data[0] = animBattlerId;
@@ -2431,14 +2421,14 @@ static void ScriptCmd_clearmonbg(void)
 
 static void sub_807331C(u8 taskId)
 {
-	u8 toBG_2;
-	u8 position;
-	
-	gTasks[taskId].data[1]++;
+    u8 toBG_2;
+    u8 position;
+    
+    gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
-        position = ((GetBattlerPosition((u8)gTasks[taskId].data[2]) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition((u8)gTasks[taskId].data[2]);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -2464,43 +2454,43 @@ static void ScriptCmd_monbg_22(void)
     bool8 toBG_2;
     u8 battlerId;
     u8 animBattlerId;
-	u8 position;
+    u8 position;
 
     sBattleAnimScriptPtr++;
     animBattlerId = sBattleAnimScriptPtr[0];
-	if (animBattlerId == 0)
-		animBattlerId = 2;
-	else if (animBattlerId == 1)
-        animBattlerId = 3;
+    if (animBattlerId == ANIM_ATTACKER)
+        animBattlerId = ANIM_ATK_PARTNER;
+    else if (animBattlerId == ANIM_TARGET)
+        animBattlerId = ANIM_DEF_PARTNER;
 
-    if (animBattlerId == 0 || animBattlerId == 2)
+    if (animBattlerId == ANIM_ATTACKER || animBattlerId == ANIM_ATK_PARTNER)
         battlerId = gBattleAnimAttacker;
     else
         battlerId = gBattleAnimTarget;
 
     if (IsBattlerSpriteVisible(battlerId))
     {
-        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition(battlerId);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
-		
+        
         MoveBattlerSpriteToBG(battlerId, toBG_2);
-		gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 
     battlerId ^= BIT_FLANK;
-    if (animBattlerId > 1 && IsBattlerSpriteVisible(battlerId))
+    if (animBattlerId > ANIM_TARGET && IsBattlerSpriteVisible(battlerId))
     {
-        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition(battlerId);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
         MoveBattlerSpriteToBG(battlerId, toBG_2);
-		gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 
     sBattleAnimScriptPtr++;
@@ -2527,10 +2517,10 @@ static void ScriptCmd_clearmonbg_23(void)
 
     if (IsBattlerSpriteVisible(battlerId))
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
-    if (animBattlerId > 1 && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
+    if (animBattlerId > ANIM_TARGET && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
         gSprites[gBattlerSpriteIds[battlerId ^ BIT_FLANK]].invisible = FALSE;
     else
-        animBattlerId = 0;
+        animBattlerId = ANIM_ATTACKER;
 
     taskId = CreateTask(sub_8073558, 5);
     gTasks[taskId].data[0] = animBattlerId;
@@ -2544,21 +2534,21 @@ static void sub_8073558(u8 taskId)
     bool8 to_BG2;
     u8 position;
     u8 battlerId;
-	
-	gTasks[taskId].data[1]++;
+    
+    gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
         bool8 toBG_2;
         battlerId = gTasks[taskId].data[2];
-        position = ((GetBattlerPosition(battlerId) << 0x18) + 0xFF000000) >> 0x18;	//make human code
-        if (position <= B_POSITION_OPPONENT_LEFT)
+        position = GetBattlerPosition(battlerId);
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
 
         if (IsBattlerSpriteVisible(battlerId))
             sub_8073128(toBG_2);
-		
+        
         if (gTasks[taskId].data[0] > 1 && IsBattlerSpriteVisible(battlerId ^ BIT_FLANK))
             sub_8073128(toBG_2 ^ 1);
 
@@ -2640,7 +2630,7 @@ static void ScriptCmd_choosetwoturnanim(void)
 static void ScriptCmd_jumpifmoveturn(void)
 {
     u8 toCheck;
-	
+    
     sBattleAnimScriptPtr++;
     toCheck = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
@@ -2659,7 +2649,7 @@ static void ScriptCmd_goto(void)
 
 bool8 IsContest(void)
 {
-	return FALSE;
+    return FALSE;
 }
 
 // Unused
@@ -2746,14 +2736,14 @@ static void Task_FadeToBg(u8 taskId)
 
 static void LoadMoveBg(u16 bgId)
 {
-	LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(BG_SCREEN_ADDR(26)));
-	LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
-	LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, 32, 32);
+    LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(BG_SCREEN_ADDR(26)));
+    LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
+    LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, 32, 32);
 }
 
 static void LoadDefaultBg(void)
 {
-	DrawMainBattleBackground();
+    DrawMainBattleBackground();
 }
 
 static void ScriptCmd_restorebg(void)
@@ -2957,18 +2947,18 @@ static void Task_PanFromInitialToTarget(u8 taskId)
         pan = currentPan + incrementPan;
         gTasks[taskId].tCurrentPan = pan;
 
-        if (incrementPan == 0) // If we're not incrementing, just cancel the task immediately.
+        if (incrementPan == 0)
         {
             destroyTask = TRUE;
         }
-        else if (initialPanning < targetPanning) // Panning increasing.
+        else if (initialPanning < targetPanning)
         {
-            if (pan >= targetPanning) // Target reached.
+            if (pan >= targetPanning)
                 destroyTask = TRUE;
         }
         else // Panning decreasing.
         {
-            if (pan <= targetPanning) // Target reached.
+            if (pan <= targetPanning)
                 destroyTask = TRUE;
         }
 
@@ -3213,7 +3203,7 @@ static void ScriptCmd_jumpargeq(void)
 
 static void ScriptCmd_jumpifcontest(void)
 {
-	sBattleAnimScriptPtr += 5;
+    sBattleAnimScriptPtr += 5;
 }
 
 static void ScriptCmd_monbgprio_28(void)

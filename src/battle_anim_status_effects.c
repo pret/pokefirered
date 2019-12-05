@@ -26,8 +26,6 @@ static void sub_8078380(struct Sprite *sprite);
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
-extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
-extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
 static const union AnimCmd gUnknown_83BF3E0[] =
 {
@@ -205,8 +203,7 @@ const struct SpriteTemplate gSpriteTemplate_83BF514 =
     .callback = sub_8076ED8,
 };
 
-//const u8 gUnknown_83BF52C[] = _("TASK OVER\nタスクがオーバーしました");	//wont compile...?
-const u8 gUnknown_83BF52C[] = {0xCE, 0xBB, 0xCD, 0xC5, 0x00, 0xC9, 0xD0, 0xBF, 0xCC, 0xFE, 0x60, 0x5D, 0x58, 0x37, 0x55, 0xAE, 0x96, 0xAE, 0x0C, 0x1F, 0x0C, 0x10, 0xFF};
+const u8 gUnknown_83BF52C[] = _("TASK OVER\nタスクがオ-バ-しました");
 
 static const struct Subsprite gSubsprites_83BF544[] =
 {
@@ -284,7 +281,6 @@ static u8 sub_8078178(u8 battlerId, bool8 b)
     return taskId;
 }
 
-// Functions
 static void sub_80782BC(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 2)
@@ -361,11 +357,13 @@ void sub_80783FC(u8 taskId)
 
     if (IsContest())
         x -= 6;
+    
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&gUnknown_83BF55C, x, y, 4);
     if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;
+    
     SetSubspriteTables(&gSprites[spriteId], gUnknown_83BF554);
     gTasks[taskId].data[15] = spriteId;
     gTasks[taskId].func = sub_80784D8;

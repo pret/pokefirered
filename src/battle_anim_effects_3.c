@@ -22,8 +22,7 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
-
+// Function Declarations
 void AnimBlackSmoke(struct Sprite *);
 void AnimWhiteHalo(struct Sprite *);
 void AnimTealAlert(struct Sprite *);
@@ -120,7 +119,9 @@ static void AnimRecycleStep(struct Sprite *);
 static void AnimTask_SlackOffSquishStep(u8);
 
 // Data
-const union AnimCmd gScratchAnimCmds[] =	//83FEDE4
+extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
+
+const union AnimCmd gScratchAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -130,12 +131,12 @@ const union AnimCmd gScratchAnimCmds[] =	//83FEDE4
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gScratchAnimTable[] =	//83FEDFC
+const union AnimCmd *const gScratchAnimTable[] =
 {
     gScratchAnimCmds,
 };
 
-const struct SpriteTemplate gScratchSpriteTemplate =	//83FEE00
+const struct SpriteTemplate gScratchSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SCRATCH,
     .paletteTag = ANIM_TAG_SCRATCH,
@@ -146,7 +147,7 @@ const struct SpriteTemplate gScratchSpriteTemplate =	//83FEE00
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gBlackSmokeSpriteTemplate =	//83FEE18
+const struct SpriteTemplate gBlackSmokeSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_BLACK_SMOKE,
     .paletteTag = ANIM_TAG_BLACK_SMOKE,
@@ -157,7 +158,7 @@ const struct SpriteTemplate gBlackSmokeSpriteTemplate =	//83FEE18
     .callback = AnimBlackSmoke,
 };
 
-const struct SpriteTemplate gBlackBallSpriteTemplate =	//83FEE30
+const struct SpriteTemplate gBlackBallSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_BLACK_BALL,
     .paletteTag = ANIM_TAG_BLACK_BALL,
@@ -168,7 +169,7 @@ const struct SpriteTemplate gBlackBallSpriteTemplate =	//83FEE30
     .callback = AnimThrowProjectile,
 };
 
-const union AnimCmd gOpeningEyeAnimCmds[] =	//83FEE48
+const union AnimCmd gOpeningEyeAnimCmds[] =    
 {
     ANIMCMD_FRAME(0, 40),
     ANIMCMD_FRAME(16, 8),
@@ -176,12 +177,12 @@ const union AnimCmd gOpeningEyeAnimCmds[] =	//83FEE48
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gOpeningEyeAnimTable[] =	//83FEE58
+const union AnimCmd *const gOpeningEyeAnimTable[] =    
 {
     gOpeningEyeAnimCmds,
 };
 
-const struct SpriteTemplate gOpeningEyeSpriteTemplate =	//83FEE5C
+const struct SpriteTemplate gOpeningEyeSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_OPENING_EYE,
     .paletteTag = ANIM_TAG_OPENING_EYE,
@@ -192,7 +193,7 @@ const struct SpriteTemplate gOpeningEyeSpriteTemplate =	//83FEE5C
     .callback = AnimSpriteOnMonPos,
 };
 
-const struct SpriteTemplate gWhiteHaloSpriteTemplate =	//83FEE74
+const struct SpriteTemplate gWhiteHaloSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ROUND_WHITE_HALO,
     .paletteTag = ANIM_TAG_ROUND_WHITE_HALO,
@@ -203,7 +204,7 @@ const struct SpriteTemplate gWhiteHaloSpriteTemplate =	//83FEE74
     .callback = AnimWhiteHalo,
 };
 
-const struct SpriteTemplate gTealAlertSpriteTemplate =	//83FEE8C
+const struct SpriteTemplate gTealAlertSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TEAL_ALERT,
     .paletteTag = ANIM_TAG_TEAL_ALERT,
@@ -214,7 +215,7 @@ const struct SpriteTemplate gTealAlertSpriteTemplate =	//83FEE8C
     .callback = AnimTealAlert,
 };
 
-const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =	//83FEEA4
+const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x180, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(-0x20, 0x18, 0, 5),
@@ -222,20 +223,20 @@ const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =	//83FEEA4
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gMeanLookEyeAffineAnimCmds2[] =	//83FEEC4
+const union AffineAnimCmd gMeanLookEyeAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x30, 0x30, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 6),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gMeanLookEyeAffineAnimTable[] =	//83FEEDC
+const union AffineAnimCmd *const gMeanLookEyeAffineAnimTable[] =
 {
     gMeanLookEyeAffineAnimCmds1,
     gMeanLookEyeAffineAnimCmds2,
 };
 
-const struct SpriteTemplate gMeanLookEyeSpriteTemplate =	//83FEEE4
+const struct SpriteTemplate gMeanLookEyeSpriteTemplate =
 {
     .tileTag = ANIM_TAG_EYE,
     .paletteTag = ANIM_TAG_EYE,
@@ -246,7 +247,7 @@ const struct SpriteTemplate gMeanLookEyeSpriteTemplate =	//83FEEE4
     .callback = AnimMeanLookEye,
 };
 
-const struct SpriteTemplate gSpikesSpriteTemplate =	//83FEEFC
+const struct SpriteTemplate gSpikesSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_SPIKES,
     .paletteTag = ANIM_TAG_SPIKES,
@@ -257,7 +258,7 @@ const struct SpriteTemplate gSpikesSpriteTemplate =	//83FEEFC
     .callback = AnimSpikes,
 };
 
-const union AnimCmd gLeerAnimCmds[] =	//83FEF14
+const union AnimCmd gLeerAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -267,12 +268,12 @@ const union AnimCmd gLeerAnimCmds[] =	//83FEF14
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gLeerAnimTable[] =	//83FEF2C
+const union AnimCmd *const gLeerAnimTable[] =
 {
     gLeerAnimCmds,
 };
 
-const struct SpriteTemplate gLeerSpriteTemplate =	//83FEF30
+const struct SpriteTemplate gLeerSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LEER,
     .paletteTag = ANIM_TAG_LEER,
@@ -283,30 +284,30 @@ const struct SpriteTemplate gLeerSpriteTemplate =	//83FEF30
     .callback = AnimLeer,
 };
 
-const union AnimCmd gLetterZAnimCmds[] =	//83FEF48
+const union AnimCmd gLetterZAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gLetterZAnimTable[] =	//83FEF50
+const union AnimCmd *const gLetterZAnimTable[] =
 {
     gLetterZAnimCmds,
 };
 
-const union AffineAnimCmd gLetterZAffineAnimCmds[] =	//83FEF54
+const union AffineAnimCmd gLetterZAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-7, -7, -3, 16),
     AFFINEANIMCMD_FRAME(7, 7, 3, 16),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gLetterZAffineAnimTable[] =	//83FEF6C
+const union AffineAnimCmd *const gLetterZAffineAnimTable[] =
 {
     gLetterZAffineAnimCmds,
 };
 
-const struct SpriteTemplate gLetterZSpriteTemplate =	//83FEF70
+const struct SpriteTemplate gLetterZSpriteTemplate =
 {
     .tileTag = ANIM_TAG_LETTER_Z,
     .paletteTag = ANIM_TAG_LETTER_Z,
@@ -317,7 +318,7 @@ const struct SpriteTemplate gLetterZSpriteTemplate =	//83FEF70
     .callback = AnimLetterZ,
 };
 
-const union AnimCmd gFangAnimCmds[] =	//83FEF88
+const union AnimCmd gFangAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(16, 16),
@@ -326,24 +327,24 @@ const union AnimCmd gFangAnimCmds[] =	//83FEF88
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gFangAnimTable[] =	//83FEF9C
+const union AnimCmd *const gFangAnimTable[] =
 {
     gFangAnimCmds,
 };
 
-const union AffineAnimCmd gFangAffineAnimCmds[] =	//83FEFA0
+const union AffineAnimCmd gFangAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_FRAME(-0x20, -0x20, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gFangAffineAnimTable[] =	//83FEFB8
+const union AffineAnimCmd *const gFangAffineAnimTable[] =
 {
     gFangAffineAnimCmds,
 };
 
-const struct SpriteTemplate gFangSpriteTemplate =	//83FEFBC
+const struct SpriteTemplate gFangSpriteTemplate =
 {
     .tileTag = ANIM_TAG_FANG_ATTACK,
     .paletteTag = ANIM_TAG_FANG_ATTACK,
@@ -354,27 +355,27 @@ const struct SpriteTemplate gFangSpriteTemplate =	//83FEFBC
     .callback = AnimFang,
 };
 
-const union AffineAnimCmd gSpotlightAffineAnimCmds1[] =	//83FEFD4
+const union AffineAnimCmd gSpotlightAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x0, 0, 20),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gSpotlightAffineAnimCmds2[] =	//83FEFEC
+const union AffineAnimCmd gSpotlightAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x140, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 19),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpotlightAffineAnimTable[] =	//83FF004
+const union AffineAnimCmd *const gSpotlightAffineAnimTable[] =
 {
     gSpotlightAffineAnimCmds1,
     gSpotlightAffineAnimCmds2,
 };
 
-const struct SpriteTemplate gSpotlightSpriteTemplate =	//83FF00C
+const struct SpriteTemplate gSpotlightSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPOTLIGHT,
     .paletteTag = ANIM_TAG_SPOTLIGHT,
@@ -385,7 +386,7 @@ const struct SpriteTemplate gSpotlightSpriteTemplate =	//83FF00C
     .callback = AnimSpotlight,
 };
 
-const struct SpriteTemplate gClappingHandSpriteTemplate =	//83FF024
+const struct SpriteTemplate gClappingHandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TAG_HAND,
     .paletteTag = ANIM_TAG_TAG_HAND,
@@ -396,7 +397,7 @@ const struct SpriteTemplate gClappingHandSpriteTemplate =	//83FF024
     .callback = AnimClappingHand,
 };
 
-const struct SpriteTemplate gClappingHand2SpriteTemplate =	//83FF03C
+const struct SpriteTemplate gClappingHand2SpriteTemplate =
 {
     .tileTag = ANIM_TAG_TAG_HAND,
     .paletteTag = ANIM_TAG_TAG_HAND,
@@ -407,7 +408,7 @@ const struct SpriteTemplate gClappingHand2SpriteTemplate =	//83FF03C
     .callback = AnimClappingHand2,
 };
 
-const union AnimCmd gRapidSpinAnimCmds[] =	//83FF054
+const union AnimCmd gRapidSpinAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(8, 2),
@@ -415,12 +416,12 @@ const union AnimCmd gRapidSpinAnimCmds[] =	//83FF054
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gRapidSpinAnimTable[] =	//83FF064
+const union AnimCmd *const gRapidSpinAnimTable[] =
 {
     gRapidSpinAnimCmds,
 };
 
-const struct SpriteTemplate gRapidSpinSpriteTemplate =	//83FF068
+const struct SpriteTemplate gRapidSpinSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RAPID_SPIN,
     .paletteTag = ANIM_TAG_RAPID_SPIN,
@@ -431,7 +432,7 @@ const struct SpriteTemplate gRapidSpinSpriteTemplate =	//83FF068
     .callback = AnimRapidSpin,
 };
 
-const union AffineAnimCmd gUnknown_83FF080[] =	//83FF080
+const union AffineAnimCmd gUnknown_83FF080[] =
 {
     AFFINEANIMCMD_FRAME(-12, 8, 0, 4),
     AFFINEANIMCMD_FRAME(20, -20, 0, 4),
@@ -439,18 +440,18 @@ const union AffineAnimCmd gUnknown_83FF080[] =	//83FF080
     AFFINEANIMCMD_END,
 };
 
-const union AnimCmd gTriAttackTriangleAnimCmds[] =	//83FF0A0
+const union AnimCmd gTriAttackTriangleAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gTriAttackTriangleAnimTable[] =	//83FF0A8
+const union AnimCmd *const gTriAttackTriangleAnimTable[] =
 {
     gTriAttackTriangleAnimCmds,
 };
 
-const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =	//83FF0AC
+const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 5, 40),
     AFFINEANIMCMD_FRAME(0, 0, 10, 10),
@@ -459,12 +460,12 @@ const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =	//83FF0AC
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gTriAttackTriangleAffineAnimTable[] =	//83FF0D4
+const union AffineAnimCmd *const gTriAttackTriangleAffineAnimTable[] =
 {
     gTriAttackTriangleAffineAnimCmds,
 };
 
-const struct SpriteTemplate gTriAttackTriangleSpriteTemplate =	//83FF0D8
+const struct SpriteTemplate gTriAttackTriangleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TRI_FORCE_TRIANGLE,
     .paletteTag = ANIM_TAG_TRI_FORCE_TRIANGLE,
@@ -475,7 +476,7 @@ const struct SpriteTemplate gTriAttackTriangleSpriteTemplate =	//83FF0D8
     .callback = AnimTriAttackTriangle,
 };
 
-const union AnimCmd gEclipsingOrbAnimCmds[] =	//83FF0F0
+const union AnimCmd gEclipsingOrbAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -488,12 +489,12 @@ const union AnimCmd gEclipsingOrbAnimCmds[] =	//83FF0F0
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gEclipsingOrbAnimTable[] =	//83FF114
+const union AnimCmd *const gEclipsingOrbAnimTable[] =
 {
     gEclipsingOrbAnimCmds,
 };
 
-const struct SpriteTemplate gEclipsingOrbSpriteTemplate =	//83FF118
+const struct SpriteTemplate gEclipsingOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ECLIPSING_ORB,
     .paletteTag = ANIM_TAG_ECLIPSING_ORB,
@@ -504,7 +505,7 @@ const struct SpriteTemplate gEclipsingOrbSpriteTemplate =	//83FF118
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =	//83FF130
+const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-12, 20, 0, 8),
     AFFINEANIMCMD_FRAME(12, -20, 0, 8),
@@ -512,7 +513,7 @@ const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =	//83FF130
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gBatonPassPokeballSpriteTemplate =	//83FF150
+const struct SpriteTemplate gBatonPassPokeballSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POKEBALL,
     .paletteTag = ANIM_TAG_POKEBALL,
@@ -523,7 +524,7 @@ const struct SpriteTemplate gBatonPassPokeballSpriteTemplate =	//83FF150
     .callback = AnimBatonPassPokeball,
 };
 
-const struct SpriteTemplate gWishStarSpriteTemplate =	//83FF168
+const struct SpriteTemplate gWishStarSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -534,7 +535,7 @@ const struct SpriteTemplate gWishStarSpriteTemplate =	//83FF168
     .callback = AnimWishStar,
 };
 
-const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =	//83FF180
+const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -545,7 +546,7 @@ const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =	//83FF180
     .callback = AnimMiniTwinklingStar,
 };
 
-const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =	//83FF198
+const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(8, -8, 0, 12),
     AFFINEANIMCMD_FRAME(-16, 16, 0, 12),
@@ -554,7 +555,7 @@ const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =	//83FF198
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =	//83FF1C0
+const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -565,7 +566,7 @@ const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =	//83FF1C0
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gSwallowBlueOrbSpriteTemplate =	//83FF1F8
+const struct SpriteTemplate gSwallowBlueOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_ORB,
     .paletteTag = ANIM_TAG_BLUE_ORB,
@@ -576,7 +577,7 @@ const struct SpriteTemplate gSwallowBlueOrbSpriteTemplate =	//83FF1F8
     .callback = AnimSwallowBlueOrb,
 };
 
-const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =	//83FF210
+const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -586,7 +587,7 @@ const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =	//83FF210
     AFFINEANIMCMD_END,
 };
 
-const s8 gMorningSunLightBeamCoordsTable[] =	//83FF240
+const s8 gMorningSunLightBeamCoordsTable[] =
 {
     0xE8,
     0x18,
@@ -594,33 +595,33 @@ const s8 gMorningSunLightBeamCoordsTable[] =	//83FF240
     0x00,
 };
 
-const union AnimCmd gGreenStarAnimCmds1[] =	//83FF244
+const union AnimCmd gGreenStarAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(4, 6),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gGreenStarAnimCmds2[] =	//83FF250
+const union AnimCmd gGreenStarAnimCmds2[] =
 {
     ANIMCMD_FRAME(8, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd gGreenStarAnimCmds3[] =	//83FF258
+const union AnimCmd gGreenStarAnimCmds3[] =    
 {
     ANIMCMD_FRAME(12, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gGreenStarAnimTable[] =	//83FF260
+const union AnimCmd *const gGreenStarAnimTable[] =    
 {
     gGreenStarAnimCmds1,
     gGreenStarAnimCmds2,
     gGreenStarAnimCmds3,
 };
 
-const struct SpriteTemplate gGreenStarSpriteTemplate =	//83FF26C
+const struct SpriteTemplate gGreenStarSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_GREEN_STAR,
     .paletteTag = ANIM_TAG_GREEN_STAR,
@@ -631,7 +632,7 @@ const struct SpriteTemplate gGreenStarSpriteTemplate =	//83FF26C
     .callback = AnimGreenStar,
 };
 
-const s8 gDoomDesireLightBeamCoordTable[] =	//83FF284
+const s8 gDoomDesireLightBeamCoordTable[] =    
 {
     0x78,
     0x50,
@@ -639,7 +640,7 @@ const s8 gDoomDesireLightBeamCoordTable[] =	//83FF284
     0x00,
 };
 
-const u8 gDoomDesireLightBeamDelayTable[] =	//83FF288
+const u8 gDoomDesireLightBeamDelayTable[] =    
 {
     0,
     0,
@@ -648,7 +649,7 @@ const u8 gDoomDesireLightBeamDelayTable[] =	//83FF288
     50,
 };
 
-const union AffineAnimCmd gStrongFrustrationAffineAnimCmds[] =	//83FF290
+const union AffineAnimCmd gStrongFrustrationAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(0, -15, 0, 7),
     AFFINEANIMCMD_FRAME(0, 15, 0, 7),
@@ -656,7 +657,7 @@ const union AffineAnimCmd gStrongFrustrationAffineAnimCmds[] =	//83FF290
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gWeakFrustrationAngerMarkSpriteTemplate =	//83FF2B0
+const struct SpriteTemplate gWeakFrustrationAngerMarkSpriteTemplate =
 {
     .tileTag = ANIM_TAG_ANGER,
     .paletteTag = ANIM_TAG_ANGER,
@@ -667,7 +668,7 @@ const struct SpriteTemplate gWeakFrustrationAngerMarkSpriteTemplate =	//83FF2B0
     .callback = AnimWeakFrustrationAngerMark,
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds1[] =	//83FF2C8
+const union AnimCmd gSweetScentPetalAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -680,7 +681,7 @@ const union AnimCmd gSweetScentPetalAnimCmds1[] =	//83FF2C8
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds2[] =	//83FF2EC
+const union AnimCmd gSweetScentPetalAnimCmds2[] =
 {
     ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
@@ -693,20 +694,20 @@ const union AnimCmd gSweetScentPetalAnimCmds2[] =	//83FF2EC
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds3[] =	//83FF310
+const union AnimCmd gSweetScentPetalAnimCmds3[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSweetScentPetalAnimCmdTable[] =	//83FF318
+const union AnimCmd *const gSweetScentPetalAnimCmdTable[] =    
 {
     gSweetScentPetalAnimCmds1,
     gSweetScentPetalAnimCmds2,
     gSweetScentPetalAnimCmds3,
 };
 
-const struct SpriteTemplate gSweetScentPetalSpriteTemplate =	//83FF324
+const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PINK_PETAL,
     .paletteTag = ANIM_TAG_PINK_PETAL,
@@ -717,9 +718,9 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =	//83FF324
     .callback = AnimSweetScentPetal,
 };
 
-const u16 gUnknown_83FF33C[] = INCBIN_U16("graphics/battle_anims/unk_83FF33C.gbapal");	//Unused
+const u16 gUnknown_83FF33C[] = INCBIN_U16("graphics/battle_anims/unk_83FF33C.gbapal");    //Unused
 
-const union AnimCmd gPainSplitAnimCmds[] =	//83FF35C
+const union AnimCmd gPainSplitAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 9),
@@ -727,12 +728,12 @@ const union AnimCmd gPainSplitAnimCmds[] =	//83FF35C
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gPainSplitAnimCmdTable[] =	//83FF36C
+const union AnimCmd *const gPainSplitAnimCmdTable[] =
 {
     gPainSplitAnimCmds,
 };
 
-const struct SpriteTemplate gPainSplitProjectileSpriteTemplate =	//83FF370
+const struct SpriteTemplate gPainSplitProjectileSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PAIN_SPLIT,
     .paletteTag = ANIM_TAG_PAIN_SPLIT,
@@ -743,7 +744,7 @@ const struct SpriteTemplate gPainSplitProjectileSpriteTemplate =	//83FF370
     .callback = AnimPainSplitProjectile,
 };
 
-const struct SpriteTemplate gFlatterConfettiSpriteTemplate =	//83FF388
+const struct SpriteTemplate gFlatterConfettiSpriteTemplate =
 {
     .tileTag = ANIM_TAG_CONFETTI,
     .paletteTag = ANIM_TAG_CONFETTI,
@@ -754,7 +755,7 @@ const struct SpriteTemplate gFlatterConfettiSpriteTemplate =	//83FF388
     .callback = AnimFlatterConfetti,
 };
 
-const struct SpriteTemplate gFlatterSpotlightSpriteTemplate =	//83FF3A0
+const struct SpriteTemplate gFlatterSpotlightSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPOTLIGHT,
     .paletteTag = ANIM_TAG_SPOTLIGHT,
@@ -765,7 +766,7 @@ const struct SpriteTemplate gFlatterSpotlightSpriteTemplate =	//83FF3A0
     .callback = AnimFlatterSpotlight,
 };
 
-const struct SpriteTemplate gReversalOrbSpriteTemplate =	//83FF3B8
+const struct SpriteTemplate gReversalOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_ORB,
     .paletteTag = ANIM_TAG_BLUE_ORB,
@@ -776,7 +777,7 @@ const struct SpriteTemplate gReversalOrbSpriteTemplate =	//83FF3B8
     .callback = AnimReversalOrb,
 };
 
-const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =	//83FF3D0
+const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(16, 0, 0, 4),
     AFFINEANIMCMD_FRAME(0, -3, 0, 16),
@@ -786,7 +787,7 @@ const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =	//83FF3D0
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =	//83FF400
+const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =    
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(-8, -8, 0, 8),
@@ -794,7 +795,7 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =	//83FF400
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =	//83FF420
+const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =    
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(8, 8, 0, 8),
@@ -802,7 +803,7 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =	//83FF420
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =	//83FF440
+const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(8, 8, 0, 8),
@@ -810,14 +811,14 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =	//83FF440
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gYawnCloudAffineAnimTable[] =	//83FF460
+const union AffineAnimCmd *const gYawnCloudAffineAnimTable[] =    
 {
     gYawnCloudAffineAnimCmds1,
     gYawnCloudAffineAnimCmds2,
     gYawnCloudAffineAnimCmds3,
 };
 
-const struct SpriteTemplate gYawnCloudSpriteTemplate =	//83FF46C
+const struct SpriteTemplate gYawnCloudSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PINK_CLOUD,
     .paletteTag = ANIM_TAG_PINK_CLOUD,
@@ -828,7 +829,7 @@ const struct SpriteTemplate gYawnCloudSpriteTemplate =	//83FF46C
     .callback = AnimYawnCloud,
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =	//83FF484
+const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =    
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(-4, -6, 0, 16),
@@ -836,7 +837,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =	//83FF484
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =	//83FF4A4
+const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =    
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(4, 6, 0, 16),
@@ -844,7 +845,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =	//83FF4A4
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =	//83FF4C4
+const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(4, 6, 0, 16),
@@ -852,7 +853,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =	//83FF4C4
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =	//83FF4E4
+const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(8, 10, 0, 30),
@@ -860,7 +861,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =	//83FF4E4
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[] =	//83FF504
+const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[] =    
 {
     gSmokeBallEscapeCloudAffineAnimCmds1,
     gSmokeBallEscapeCloudAffineAnimCmds2,
@@ -868,7 +869,7 @@ const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[] =	//83FF
     gSmokeBallEscapeCloudAffineAnimCmds4,
 };
 
-const struct SpriteTemplate gSmokeBallEscapeCloudSpriteTemplate =	//83FF514
+const struct SpriteTemplate gSmokeBallEscapeCloudSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_PINK_CLOUD,
     .paletteTag = ANIM_TAG_PINK_CLOUD,
@@ -879,7 +880,7 @@ const struct SpriteTemplate gSmokeBallEscapeCloudSpriteTemplate =	//83FF514
     .callback = AnimSmokeBallEscapeCloud,
 };
 
-const union AffineAnimCmd gFacadeSquishAffineAnimCmds[] =	//83FF52C
+const union AffineAnimCmd gFacadeSquishAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-16, 16, 0, 6),
     AFFINEANIMCMD_FRAME(16, -16, 0, 12),
@@ -887,7 +888,7 @@ const union AffineAnimCmd gFacadeSquishAffineAnimCmds[] =	//83FF52C
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gFacadeSweatDropSpriteTemplate =	//83FF54C
+const struct SpriteTemplate gFacadeSweatDropSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SWEAT_DROP,
     .paletteTag = ANIM_TAG_SWEAT_DROP,
@@ -898,7 +899,7 @@ const struct SpriteTemplate gFacadeSweatDropSpriteTemplate =	//83FF54C
     .callback = AnimFacadeSweatDrop,
 };
 
-const u16 gFacadeBlendColors[] = 	//83FF564
+const u16 gFacadeBlendColors[] = 
 {
     RGB(28, 25,  1),
     RGB(28, 21,  5),
@@ -926,27 +927,27 @@ const u16 gFacadeBlendColors[] = 	//83FF564
     RGB(29, 27,  0),
 };
 
-const union AnimCmd gRoarNoiseLineAnimCmds1[] =	//83FF594
+const union AnimCmd gRoarNoiseLineAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gRoarNoiseLineAnimCmds2[] =	//83FF5A0
+const union AnimCmd gRoarNoiseLineAnimCmds2[] =    
 {
     ANIMCMD_FRAME(32, 3),
     ANIMCMD_FRAME(48, 3),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gRoarNoiseLineAnimTable[] =	//83FF5AC
+const union AnimCmd *const gRoarNoiseLineAnimTable[] =
 {
     gRoarNoiseLineAnimCmds1,
     gRoarNoiseLineAnimCmds2,
 };
 
-const struct SpriteTemplate gRoarNoiseLineSpriteTemplate =	//83FF5B4
+const struct SpriteTemplate gRoarNoiseLineSpriteTemplate =
 {
     .tileTag = ANIM_TAG_NOISE_LINE,
     .paletteTag = ANIM_TAG_NOISE_LINE,
@@ -957,7 +958,7 @@ const struct SpriteTemplate gRoarNoiseLineSpriteTemplate =	//83FF5B4
     .callback = AnimRoarNoiseLine,
 };
 
-const struct SpriteTemplate gGlareEyeDotSpriteTemplate =	//83FF5CC
+const struct SpriteTemplate gGlareEyeDotSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_RED_EYE,
     .paletteTag = ANIM_TAG_SMALL_RED_EYE,
@@ -968,7 +969,7 @@ const struct SpriteTemplate gGlareEyeDotSpriteTemplate =	//83FF5CC
     .callback = AnimGlareEyeDot,
 };
 
-const struct SpriteTemplate gAssistPawprintSpriteTemplate =	//83FF5E4
+const struct SpriteTemplate gAssistPawprintSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_PAW_PRINT,
     .paletteTag = ANIM_TAG_PAW_PRINT,
@@ -979,26 +980,26 @@ const struct SpriteTemplate gAssistPawprintSpriteTemplate =	//83FF5E4
     .callback = AnimAssistPawprint,
 };
 
-const union AffineAnimCmd gBarrageBallAffineAnimCmds1[] =	//83FF5FC
+const union AffineAnimCmd gBarrageBallAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -4, 24),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gBarrageBallAffineAnimCmds2[] =	//83FF60C
+const union AffineAnimCmd gBarrageBallAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0, 0, 4, 24),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gBarrageBallAffineAnimTable[] =	//83FF624
+const union AffineAnimCmd *const gBarrageBallAffineAnimTable[] =
 {
     gBarrageBallAffineAnimCmds1,
     gBarrageBallAffineAnimCmds2,
 };
 
-const struct SpriteTemplate gBarrageBallSpriteTemplate =	//83FF62C
+const struct SpriteTemplate gBarrageBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RED_BALL,
     .paletteTag = ANIM_TAG_RED_BALL,
@@ -1009,7 +1010,7 @@ const struct SpriteTemplate gBarrageBallSpriteTemplate =	//83FF62C
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gSmellingSaltsHandSpriteTemplate =	//83FF644
+const struct SpriteTemplate gSmellingSaltsHandSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TAG_HAND,
     .paletteTag = ANIM_TAG_TAG_HAND,
@@ -1020,14 +1021,14 @@ const struct SpriteTemplate gSmellingSaltsHandSpriteTemplate =	//83FF644
     .callback = AnimSmellingSaltsHand,
 };
 
-const union AffineAnimCmd gSmellingSaltsSquishAffineAnimCmds[] =	//83FF65C
+const union AffineAnimCmd gSmellingSaltsSquishAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, -16, 0, 6),
     AFFINEANIMCMD_FRAME(0, 16, 0, 6),
     AFFINEANIMCMD_END,
 };
 
-const struct SpriteTemplate gSmellingSaltExclamationSpriteTemplate =	//83FF674
+const struct SpriteTemplate gSmellingSaltExclamationSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMELLINGSALT_EFFECT,
     .paletteTag = ANIM_TAG_SMELLINGSALT_EFFECT,
@@ -1038,7 +1039,7 @@ const struct SpriteTemplate gSmellingSaltExclamationSpriteTemplate =	//83FF674
     .callback = AnimSmellingSaltExclamation,
 };
 
-const struct SpriteTemplate gHelpingHandClapSpriteTemplate =	//83FF68C
+const struct SpriteTemplate gHelpingHandClapSpriteTemplate =
 {
     .tileTag = ANIM_TAG_TAG_HAND,
     .paletteTag = ANIM_TAG_TAG_HAND,
@@ -1049,7 +1050,7 @@ const struct SpriteTemplate gHelpingHandClapSpriteTemplate =	//83FF68C
     .callback = AnimHelpingHandClap,
 };
 
-const struct SpriteTemplate gForesightMagnifyingGlassSpriteTemplate =	//83FF6A4
+const struct SpriteTemplate gForesightMagnifyingGlassSpriteTemplate =
 {
     .tileTag = ANIM_TAG_MAGNIFYING_GLASS,
     .paletteTag = ANIM_TAG_MAGNIFYING_GLASS,
@@ -1060,7 +1061,7 @@ const struct SpriteTemplate gForesightMagnifyingGlassSpriteTemplate =	//83FF6A4
     .callback = AnimForesightMagnifyingGlass,
 };
 
-const struct SpriteTemplate gMeteorMashStarSpriteTemplate =	//83FF6BC
+const struct SpriteTemplate gMeteorMashStarSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -1071,7 +1072,7 @@ const struct SpriteTemplate gMeteorMashStarSpriteTemplate =	//83FF6BC
     .callback = AnimMeteorMashStar,
 };
 
-const struct SpriteTemplate gUnknown_83FF6D4 =	//83FF6D4
+const struct SpriteTemplate gUnknown_83FF6D4 =
 {
     .tileTag = ANIM_TAG_GOLD_STARS,
     .paletteTag = ANIM_TAG_GOLD_STARS,
@@ -1082,7 +1083,7 @@ const struct SpriteTemplate gUnknown_83FF6D4 =	//83FF6D4
     .callback = AnimParticuleBurst,
 };
 
-const struct SpriteTemplate gBlockXSpriteTemplate =	//83FF6EC
+const struct SpriteTemplate gBlockXSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_X_SIGN,
     .paletteTag = ANIM_TAG_X_SIGN,
@@ -1093,7 +1094,7 @@ const struct SpriteTemplate gBlockXSpriteTemplate =	//83FF6EC
     .callback = AnimBlockX,
 };
 
-const struct SpriteTemplate gUnknown_83FF704 =	//83FF704
+const struct SpriteTemplate gUnknown_83FF704 =
 {
     .tileTag = ANIM_TAG_ITEM_BAG,
     .paletteTag = ANIM_TAG_ITEM_BAG,
@@ -1104,39 +1105,39 @@ const struct SpriteTemplate gUnknown_83FF704 =	//83FF704
     .callback = sub_80E3E84,
 };
 
-const union AnimCmd gKnockOffStrikeAnimCmds[] =	//83FF71C
+const union AnimCmd gKnockOffStrikeAnimCmds[] =    
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(64, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gKnockOffStrikeAnimTable[] =	//83FF728
+const union AnimCmd *const gKnockOffStrikeAnimTable[] =    
 {
     gKnockOffStrikeAnimCmds,
 };
 
-const union AffineAnimCmd gKnockOffStrikeAffineanimCmds1[] =	//83FF72C
+const union AffineAnimCmd gKnockOffStrikeAffineanimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, -4, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gKnockOffStrikeAffineanimCmds2[] =	//83FF744
+const union AffineAnimCmd gKnockOffStrikeAffineanimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 4, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[] =	//83FF75C
+const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[] =
 {
     gKnockOffStrikeAffineanimCmds1,
     gKnockOffStrikeAffineanimCmds2,
 };
 
-const struct SpriteTemplate gKnockOffStrikeSpriteTemplate =	//83FF764
+const struct SpriteTemplate gKnockOffStrikeSpriteTemplate =    
 {
     .tileTag = ANIM_TAG_SLAM_HIT_2,
     .paletteTag = ANIM_TAG_SLAM_HIT_2,
@@ -1147,18 +1148,18 @@ const struct SpriteTemplate gKnockOffStrikeSpriteTemplate =	//83FF764
     .callback = AnimKnockOffStrike,
 };
 
-const union AffineAnimCmd gRecycleSpriteAffineAnimCmds[] =	//83FF77C
+const union AffineAnimCmd gRecycleSpriteAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -4, 64),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gRecycleSpriteAffineAnimTable[] =	//83FF78C
+const union AffineAnimCmd *const gRecycleSpriteAffineAnimTable[] =
 {
     gRecycleSpriteAffineAnimCmds,
 };
 
-const struct SpriteTemplate gRecycleSpriteTemplate =	//83FF790
+const struct SpriteTemplate gRecycleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RECYCLE,
     .paletteTag = ANIM_TAG_RECYCLE,
@@ -1169,7 +1170,7 @@ const struct SpriteTemplate gRecycleSpriteTemplate =	//83FF790
     .callback = AnimRecycle,
 };
 
-const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =	//83FF7A8
+const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(0, 16, 0, 4),
     AFFINEANIMCMD_FRAME(-2, 0, 0, 8),
@@ -1180,12 +1181,10 @@ const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =	//83FF7A8
 };
 
 // Functions
-// 80DE2C0
 void AnimBlackSmoke(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
-
     if (!gBattleAnimArgs[3])
         sprite->data[0] = gBattleAnimArgs[2];
     else
@@ -1212,10 +1211,7 @@ static void AnimBlackSmokeStep(struct Sprite *sprite)
 
 void AnimTask_SmokescreenImpact(u8 taskId)
 {
-    SmokescreenImpact(	//sub_804A76C
-        GetBattlerSpriteCoord(gBattleAnimTarget, 2) + 8,
-        GetBattlerSpriteCoord(gBattleAnimTarget, 3) + 8,
-        0);
+    SmokescreenImpact(GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) + 8, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) + 8, 0);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1249,18 +1245,16 @@ static void AnimWhiteHalo_Step2(struct Sprite *sprite)
 void AnimTealAlert(struct Sprite *sprite)
 {
     u16 rotation;
-    u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-    u8 y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    u8 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     InitSpritePosToAnimTarget(sprite, TRUE);
-
     rotation = ArcTan2Neg(sprite->pos1.x - x, sprite->pos1.y - y);
     rotation += 0x6000;
     if (IsContest())
         rotation += 0x4000;
 
     TrySetSpriteRotScale(sprite, FALSE, 0x100, 0x100, rotation);
-
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = x;
     sprite->data[4] = y;
@@ -1279,7 +1273,6 @@ void AnimMeanLookEye(struct Sprite *sprite)
 static void AnimMeanLookEye_Step1(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[0], 16 - sprite->data[0]));
-
     if (sprite->data[1])
         sprite->data[0]--;
     else
@@ -1353,7 +1346,6 @@ static void AnimMeanLookEye_Step3(struct Sprite *sprite)
 static void AnimMeanLookEye_Step4(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[0], 16 - sprite->data[0]));
-
     if (sprite->data[1]++ > 1)
     {
         sprite->data[0]--;
@@ -1435,7 +1427,6 @@ void AnimSpikes(struct Sprite *sprite)
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);
-
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
@@ -1443,7 +1434,6 @@ void AnimSpikes(struct Sprite *sprite)
     sprite->data[2] = x + gBattleAnimArgs[2];
     sprite->data[4] = y + gBattleAnimArgs[3];
     sprite->data[5] = -50;
-
     InitAnimArcTranslation(sprite);
     sprite->callback = AnimSpikes_Step1;
 }
@@ -1480,6 +1470,7 @@ void AnimLeer(struct Sprite *sprite)
 void AnimLetterZ(struct Sprite *sprite)
 {
     int var0;
+    
     if (sprite->data[0] == 0)
     {
         SetSpriteCoordsToAnimAttackerCoords(sprite);
@@ -1510,7 +1501,6 @@ void AnimLetterZ(struct Sprite *sprite)
     sprite->data[4] += sprite->data[2];
     sprite->pos2.x = sprite->data[3] / 2;
     sprite->pos2.y = Sin(var0 & 0xFF, 5) + (sprite->data[4] / 2);
-
     if ((u16)(sprite->pos1.x + sprite->pos2.x) > 240)
         DestroyAnimSprite(sprite);
 }
@@ -1549,9 +1539,7 @@ void AnimSpotlight(struct Sprite *sprite)
     gBattle_WIN0V = 0;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
-
     InitSpritePosToAnimTarget(sprite, FALSE);
-
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->invisible = 1;
     sprite->callback = AnimSpotlight_Step1;
@@ -1610,14 +1598,13 @@ void AnimClappingHand(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     }
 
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->oam.tileNum += 16;
-
     if (gBattleAnimArgs[2] == 0)
     {
         sprite->oam.matrixNum = ST_OAM_HFLIP;
@@ -1631,7 +1618,6 @@ void AnimClappingHand(struct Sprite *sprite)
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-
     if (sprite->data[3] != 255)
         sprite->data[3] = gBattleAnimArgs[2];
 
@@ -1712,17 +1698,16 @@ void AnimRapidSpin(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
     }
 
     sprite->pos2.y = gBattleAnimArgs[2];
-
     sprite->data[0] = (sprite->pos2.y > gBattleAnimArgs[3]);
     sprite->data[1] = 0;
     sprite->data[2] = gBattleAnimArgs[4];
@@ -1736,7 +1721,6 @@ static void AnimRapidSpin_Step(struct Sprite *sprite)
     sprite->data[1] = (sprite->data[1] + sprite->data[2]) & 0xFF;
     sprite->pos2.x = gSineTable[sprite->data[1]] >> 4;
     sprite->pos2.y += sprite->data[3];
-
     if (sprite->data[0])
     {
         if (sprite->pos2.y < sprite->data[4])
@@ -1782,7 +1766,6 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
     task->data[5] = gBattleAnimArgs[1];
     task->data[6] = 0;
     task->data[7] = 0;
-
     if (toBG2 == 1)
     {
         var3 = gBattle_BG1_X;
@@ -1798,7 +1781,6 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
 
     task->data[9] = var4;
     task->data[10] = gBattleAnimArgs[2];
-
     if (!gBattleAnimArgs[2])
     {
         task->data[11] = var4;
@@ -1811,7 +1793,6 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
     }
 
     task->data[15] = 0;
-
     i = task->data[2];
     while (i <= task->data[3])
     {
@@ -1898,8 +1879,8 @@ void AnimTask_TormentAttacker(u8 taskId)
 
     task->data[0] = 0;
     task->data[1] = 0;
-    task->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-    task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    task->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    task->data[3] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     task->data[4] = 32;
     task->data[5] = -20;
     task->data[6] = 0;
@@ -1990,7 +1971,6 @@ static void TormentAttacker_Step(u8 taskId)
                 gSprites[i].data[1] = 6;
                 StartSpriteAnim(&gSprites[i], 2);
                 gSprites[i].callback = TormentAttacker_Callback;
-
                 if (++j == 6)
                     break;
             }
@@ -2040,8 +2020,8 @@ void AnimTriAttackTriangle(struct Sprite *sprite)
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->data[0] = 20;
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
-        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->callback = StartAnimLinearTranslation;
     }
 }
@@ -2068,8 +2048,8 @@ void AnimBatonPassPokeball(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
-        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
         sprite->data[1] = 256;
         sprite->data[2] = 256;
@@ -2224,7 +2204,7 @@ void AnimSwallowBlueOrb(struct Sprite *sprite)
     case 0:
         InitSpritePosToAnimAttacker(sprite, FALSE);
         sprite->data[1] = 0x900;
-        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
         sprite->data[0]++;
         break;
     case 1:
@@ -2250,7 +2230,6 @@ void AnimTask_SwallowDeformMon(u8 taskId)
     }
 }
 
-// case 2 quite different :/
 void AnimTask_TransformMon(u8 taskId)
 {
     int i, j;
@@ -2357,25 +2336,25 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-		sub_80752A0(&animBg);
-		AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
-		AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
-		LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
-		if (IsContest())
-		{
-			sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
+        sub_80752A0(&animBg);
+        AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
+        AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
+        LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
+        if (IsContest())
+        {
+            sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
             gBattle_BG1_X = -56;
             gBattle_BG1_Y = 0;
-		}
-		else
-		{
+        }
+        else
+        {
             if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
                 gBattle_BG1_X = -135;
             else
                 gBattle_BG1_X = -10;
             
             gBattle_BG1_Y = 0;
-		}
+        }
 
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
@@ -2447,8 +2426,8 @@ void AnimGreenStar(struct Sprite *sprite)
     if (xOffset > 31)
         xOffset = 32 - xOffset;
 
-    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0) + xOffset;
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, 1) + 32;
+    sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X) + xOffset;
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 32;
     sprite->data[1] = gBattleAnimArgs[0];
     sprite->data[2] = gBattleAnimArgs[1];
 
@@ -2476,6 +2455,7 @@ void AnimGreenStar(struct Sprite *sprite)
 static void AnimGreenStar_Step1(struct Sprite *sprite)
 {
     s16 delta = sprite->data[3] + sprite->data[2];
+    
     sprite->pos2.y -= delta >> 8;
     sprite->data[3] += sprite->data[2];
     sprite->data[3] &= 0xFF;
@@ -2538,16 +2518,16 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         if (!IsContest())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
-		
-		sub_80752A0(&animBg);
-		AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
-		AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
-		LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
-				
+        
+        sub_80752A0(&animBg);
+        AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnim_MorningSunTilemap);
+        AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnim_MorningSunGfx, animBg.tilesOffset);
+        LoadCompressedPalette(gBattleAnim_MorningSunPal, animBg.paletteId * 16, 32);
+                
         if (IsContest())
         {
             sub_80730C0(animBg.paletteId, animBg.bgTilemap, 0, 0);
-			gBattle_BG1_X = -56;
+            gBattle_BG1_X = -56;
             gBattle_BG1_Y = 0;
         }
         else
@@ -2887,7 +2867,6 @@ static void AnimTask_FlailMovementStep(u8 taskId)
     SetSpriteRotScale(task->data[15], 0x100, 0x100, task->data[2]);
     SetBattlerSpriteYOffsetFromRotation(task->data[15]);
     gSprites[task->data[15]].pos2.x = -(((temp = task->data[2]) >= 0 ? task->data[2] : temp + 63) >> 6);
-
     if (++task->data[1] > 8)
     {
         if (task->data[12])
@@ -3069,7 +3048,6 @@ void AnimFlatterSpotlight(struct Sprite *sprite)
     gBattle_WIN0V = 0;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
-
     sprite->data[0] = gBattleAnimArgs[2];
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
@@ -3166,59 +3144,56 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     s16 coord1, coord2;
 
     GetAnimBattlerSpriteId(ANIM_ATTACKER);
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        isBackPic = 0;
+        personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
+        otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
+        if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
+        {
+            if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
+            else
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
+        }
+        else
+        {
+            species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
+        }
 
-	if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-	{
-		isBackPic = 0;
-		personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-		otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
-		if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
-		{
-			if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
-				species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-			else
-				species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-		}
-		else
-		{
-			species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
-		}
+        xOffset = 20;
+        priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
+    }
+    else
+    {
+        isBackPic = 1;
+        personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
+        otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
+        if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
+        {
+            if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
+            else
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
+        }
+        else
+        {
+            species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
+        }
 
-		xOffset = 20;
-		priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-	}
-	else
-	{
-		isBackPic = 1;
-		personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-		otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
-		if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
-		{
-			if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
-				species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-			else
-				species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-		}
-		else
-		{
-			species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
-		}
+        xOffset = -20;
+        priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
+    }
 
-		xOffset = -20;
-		priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-	}
-
-    coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-    coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
+    coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+    coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
     spriteId = sub_80768D0(species, isBackPic, 0, coord1 + xOffset, coord2, 5, personality, otId, gBattleAnimTarget, 1);
-
     gSprites[spriteId].oam.priority = priority;
     gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
     FillPalette(RGB_WHITE, (gSprites[spriteId].oam.paletteNum << 4) + 0x100, 32);
     gSprites[spriteId].oam.priority = priority;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[1], 16 - gTasks[taskId].data[1]));
-
     gTasks[taskId].data[0] = spriteId;
     gTasks[taskId].func = AnimTask_RolePlaySilhouetteStep1;
 }
@@ -3242,6 +3217,7 @@ static void AnimTask_RolePlaySilhouetteStep1(u8 taskId)
 static void AnimTask_RolePlaySilhouetteStep2(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[0];
+    
     gTasks[taskId].data[10] -= 16;
     gTasks[taskId].data[11] += 128;
     gSprites[spriteId].oam.affineMode |= ST_OAM_AFFINE_DOUBLE_MASK;
@@ -3437,6 +3413,7 @@ static void AnimTask_AcidArmorStep(u8 taskId)
 void AnimTask_DeepInhale(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    
     task->data[0] = 0;
     task->data[15] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     PrepareAffineAnimInTaskData(&gTasks[taskId], task->data[15], gDeepInhaleAffineAnimCmds);
@@ -3446,8 +3423,8 @@ void AnimTask_DeepInhale(u8 taskId)
 static void AnimTask_DeepInhaleStep(u8 taskId)
 {
     u16 var0;
-
     struct Task *task = &gTasks[taskId];
+    
     var0 = task->data[0];
     task->data[0]++;
     var0 -= 20;
@@ -3827,17 +3804,7 @@ static void AnimTask_FacadeColorBlendStep(u8 taskId)
 
 void sub_80E2084(u8 taskId)
 {
-    sub_80BBA20(taskId,
-				0,
-				0x1A0,
-				gBattleAnimAttacker,
-				gBattleAnimArgs[0],
-				10,
-				2,
-				30,
-				gCureBubblesGfx,
-				gCureBubblesTilemap,
-				gCureBubblesPal);
+    sub_80BBA20(taskId, 0, 0x1A0, gBattleAnimAttacker, gBattleAnimArgs[0], 10, 2, 30, gCureBubblesGfx, gCureBubblesTilemap, gCureBubblesPal);
 }
 
 // Moves a noise line from the mon.
@@ -3893,9 +3860,9 @@ void AnimTask_GlareEyeDots(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-	task->data[5] = 12;
-	task->data[6] = 3;
-	task->data[7] = 0;
+    task->data[5] = 12;
+    task->data[6] = 3;
+    task->data[7] = 0;
 
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
         task->data[11] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_HEIGHT) / 4;
@@ -4116,7 +4083,7 @@ void AnimSmellingSaltsHand(struct Sprite *sprite)
     sprite->oam.tileNum += 16;
     sprite->data[6] = gBattleAnimArgs[2];
     sprite->data[7] = gBattleAnimArgs[1] == 0 ? -1 : 1;
-    sprite->pos1.y = GetBattlerSpriteCoord(battler, 3);
+    sprite->pos1.y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET);
     if (gBattleAnimArgs[1] == 0)
     {
         sprite->oam.matrixNum |= ST_OAM_HFLIP;
@@ -4231,12 +4198,12 @@ void AnimSmellingSaltExclamation(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
         sprite->pos1.y = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP);
     }
     else
     {
-        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
         sprite->pos1.y = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP);
     }
 
@@ -4373,22 +4340,22 @@ void AnimTask_HelpingHandAttackerMovement(u8 taskId)
     struct Task *task = &gTasks[taskId];
 
     task->data[15] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-	if (IsDoubleBattle() == TRUE)
-	{
-		int x = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
-		int y = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimAttacker), 0);
-		if (x > y)
-			task->data[14] = 1;
-		else
-			task->data[14] = -1;
-	}
-	else
-	{
-		if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-			task->data[14] = -1;
-		else
-			task->data[14] = 1;
-	}
+    if (IsDoubleBattle() == TRUE)
+    {
+        int x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        int y = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
+        if (x > y)
+            task->data[14] = 1;
+        else
+            task->data[14] = -1;
+    }
+    else
+    {
+        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+            task->data[14] = -1;
+        else
+            task->data[14] = 1;
+    }
 
     task->func = AnimTask_HelpingHandAttackerMovementStep;
 }
@@ -4510,24 +4477,24 @@ static void AnimForesightMagnifyingGlassStep(struct Sprite *sprite)
             sprite->data[6] = 0;
         case 0:
         case 4:
-            x = GetBattlerSpriteCoordAttr(sprite->data[7], 5) - 4;
-            y = GetBattlerSpriteCoordAttr(sprite->data[7], 3) - 4;
+            x = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_RIGHT) - 4;
+            y = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_BOTTOM) - 4;
             break;
         case 1:
-            x = GetBattlerSpriteCoordAttr(sprite->data[7], 5) - 4;
-            y = GetBattlerSpriteCoordAttr(sprite->data[7], 2) + 4;
+            x = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_RIGHT) - 4;
+            y = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_TOP) + 4;
             break;
         case 2:
-            x = GetBattlerSpriteCoordAttr(sprite->data[7], 4) + 4;
-            y = GetBattlerSpriteCoordAttr(sprite->data[7], 3) - 4;
+            x = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_LEFT) + 4;
+            y = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_BOTTOM) - 4;
             break;
         case 3:
-            x = GetBattlerSpriteCoordAttr(sprite->data[7], 4) + 4;
-            y = GetBattlerSpriteCoordAttr(sprite->data[7], 2) - 4;
+            x = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_LEFT) + 4;
+            y = GetBattlerSpriteCoordAttr(sprite->data[7], BATTLER_COORD_ATTR_TOP) - 4;
             break;
         case 5:
-            x = GetBattlerSpriteCoord(sprite->data[7], 2);
-            y = GetBattlerSpriteCoord(sprite->data[7], 3);
+            x = GetBattlerSpriteCoord(sprite->data[7], BATTLER_COORD_X_2);
+            y = GetBattlerSpriteCoord(sprite->data[7], BATTLER_COORD_Y_PIC_OFFSET);
             break;
         }
 
@@ -4625,8 +4592,8 @@ static void AnimMeteorMashStarStep(struct Sprite *sprite)
 // arg 4: duration
 void AnimMeteorMashStar(struct Sprite *sprite)
 {
-    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);          // unused local variable
-    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET); // unused local variable
+    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
@@ -4752,7 +4719,7 @@ void AnimBlockX(struct Sprite *sprite)
         y = -96;
     }
 
-    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->pos2.y = y;
     sprite->callback = AnimBlockXStep;
 }
@@ -4880,6 +4847,7 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8 taskId)
 static void MoveOdorSleuthClone(struct Sprite *sprite)
 {
     int zero = 0;
+    
     if (++sprite->data[1] > 1)
     {
         sprite->data[1] = 0;
@@ -4931,152 +4899,8 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
 
 // Makes the mon run out of screen, run past the opposing mon, and return to its original position.
 // No args.
-/*
-attempt..
-void AnimTask_SnatchOpposingMonMove(u8 taskId)
-{
-    u8 spriteId, spriteId2;
-    u32 personality;
-    u32 otId;
-    u16 species;
-    u8 subpriority;
-    //bool8 isBackPic;
-    s16 x;
-
-    u16 tSpecies;
-
-    switch (gTasks[taskId].data[0])
-    {
-    case 0:
-        spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        gTasks[taskId].data[1] += 0x800;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            gSprites[spriteId].pos2.x += (gTasks[taskId].data[1] >> 8);
-        else
-            gSprites[spriteId].pos2.x -= (gTasks[taskId].data[1] >> 8);
-
-        gTasks[taskId].data[1] &= 0xFF;
-        x = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-        if ((u16)(x + 32) > 304)
-        {
-            gTasks[taskId].data[1] = 0;
-            gTasks[taskId].data[0]++;
-        }
-        break;
-    case 1:
-		if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-		{
-			personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-			otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-			
-            tSpecies = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-			if (tSpecies == SPECIES_NONE)
-				species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-			else
-				species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-
-			subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
-			//isBackPic = FALSE;
-			//x = 272;
-            spriteId = sub_80768D0(species, FALSE, 0, 272, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
-		}
-		else
-		{
-			personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-			otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-            
-            tSpecies = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-			if (tSpecies == SPECIES_NONE)
-				species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-			else
-				species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-
-			subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-			//isBackPic = TRUE;
-			//x = -32;
-            spriteId = sub_80768D0(species, TRUE, 0, -32, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
-		}
-
-        if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
-            BlendPalette((gSprites[spriteId].oam.paletteNum * 16) | 0x100, 16, 6, RGB_WHITE);
-
-        gTasks[taskId].data[15] = spriteId;
-        gTasks[taskId].data[0]++;
-        break;
-    case 2:
-        spriteId2 = gTasks[taskId].data[15];
-        gTasks[taskId].data[1] += 0x800;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            gSprites[spriteId2].pos2.x -= (gTasks[taskId].data[1] >> 8);
-        else
-            gSprites[spriteId2].pos2.x += (gTasks[taskId].data[1] >> 8);
-
-        gTasks[taskId].data[1] &= 0xFF;
-        x = gSprites[spriteId2].pos1.x + gSprites[spriteId2].pos2.x;
-        if (gTasks[taskId].data[14] == 0)
-        {
-            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            {
-                if (x < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
-                {
-                    gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = 0xFFFF;
-                }
-            }
-            else
-            {
-                if (x > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
-                {
-                    gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = 0xFFFF;
-                }
-            }
-        }
-
-        if ((u16)(x + 32) > 304)
-        {
-            gTasks[taskId].data[1] = 0;
-            gTasks[taskId].data[0]++;
-        }
-        break;
-    case 3:
-        spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        spriteId2 = gTasks[taskId].data[15];
-        DestroySpriteAndFreeResources_(&gSprites[spriteId2]);
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            gSprites[spriteId].pos2.x = -gSprites[spriteId].pos1.x - 32;
-        else
-            gSprites[spriteId].pos2.x = 272 - gSprites[spriteId].pos1.x;
-
-        gTasks[taskId].data[0]++;
-        break;
-    case 4:
-        spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        gTasks[taskId].data[1] += 0x800;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-        {
-            gSprites[spriteId].pos2.x += (gTasks[taskId].data[1] >> 8);
-            if (gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x >= GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X))
-                gSprites[spriteId].pos2.x = 0;
-        }
-        else
-        {
-            gSprites[spriteId].pos2.x -= (gTasks[taskId].data[1] >> 8);
-            if (gSprites[spriteId].pos2.x + gSprites[spriteId].pos1.x <= GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X))
-                gSprites[spriteId].pos2.x = 0;
-        }
-
-        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1];
-        if (gSprites[spriteId].pos2.x == 0)
-            DestroyAnimVisualTask(taskId);
-        break;
-    }
-}
-*/
-
 #ifdef NONMATCHING
 // `species` variable getting loaded into r6 instead of r5
-//https://cexplore.karathan.at/z/0gMuxf
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
@@ -5106,32 +4930,32 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         }
         break;
     case 1:
-		if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-		{
-			personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-			otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-			if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-				species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-			else
-				species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
+        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+        {
+            personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+            otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            else
+                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
 
-			subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
-			isBackPic = FALSE;
-			x = 272;
-		}
-		else
-		{
-			personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-			otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-			if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-				species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-			else
-				species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
+            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
+            isBackPic = FALSE;
+            x = 272;
+        }
+        else
+        {
+            personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+            otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+            else
+                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
 
-			subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-			isBackPic = TRUE;
-			x = -32;
-		}
+            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
+            isBackPic = TRUE;
+            x = -32;
+        }
 
         spriteId2 = sub_80768D0(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
@@ -5213,653 +5037,653 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
 NAKED
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
-	asm_unified("\tpush {r4-r7,lr}\n"
-		"\tmov r7, r10\n"
-		"\tmov r6, r9\n"
-		"\tmov r5, r8\n"
-		"\tpush {r5-r7}\n"
-		"\tsub sp, 0x1C\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tmov r8, r0\n"
-		"\tldr r1, _080E395C @ =gTasks\n"
-		"\tlsls r0, 2\n"
-		"\tadd r0, r8\n"
-		"\tlsls r0, 3\n"
-		"\tadds r0, r1\n"
-		"\tmovs r1, 0x8\n"
-		"\tldrsh r0, [r0, r1]\n"
-		"\tcmp r0, 0x4\n"
-		"\tbls _080E3952\n"
-		"\tb _080E3E6C\n"
-	"_080E3952:\n"
-		"\tlsls r0, 2\n"
-		"\tldr r1, _080E3960 @ =_080E3964\n"
-		"\tadds r0, r1\n"
-		"\tldr r0, [r0]\n"
-		"\tmov pc, r0\n"
-		"\t.align 2, 0\n"
-	"_080E395C: .4byte gTasks\n"
-	"_080E3960: .4byte _080E3964\n"
-		"\t.align 2, 0\n"
-	"_080E3964:\n"
-		"\t.4byte _080E3978\n"
-		"\t.4byte _080E3A2C\n"
-		"\t.4byte _080E3BEC\n"
-		"\t.4byte _080E3D0C\n"
-		"\t.4byte _080E3D90\n"
-	"_080E3978:\n"
-		"\tmovs r0, 0\n"
-		"\tbl GetAnimBattlerSpriteId\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r7, r0, 24\n"
-		"\tldr r1, _080E39C4 @ =gTasks\n"
-		"\tmov r2, r8\n"
-		"\tlsls r4, r2, 2\n"
-		"\tadds r0, r4, r2\n"
-		"\tlsls r0, 3\n"
-		"\tadds r6, r0, r1\n"
-		"\tmovs r3, 0x80\n"
-		"\tlsls r3, 4\n"
-		"\tadds r0, r3, 0\n"
-		"\tldrh r1, [r6, 0xA]\n"
-		"\tadds r0, r1\n"
-		"\tstrh r0, [r6, 0xA]\n"
-		"\tldr r0, _080E39C8 @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r0]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tmov r9, r4\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E39D0\n"
-		"\tldr r2, _080E39CC @ =gSprites\n"
-		"\tlsls r3, r7, 4\n"
-		"\tadds r1, r3, r7\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tldrh r0, [r6, 0xA]\n"
-		"\tlsls r0, 16\n"
-		"\tasrs r0, 24\n"
-		"\tldrh r4, [r1, 0x24]\n"
-		"\tadds r0, r4\n"
-		"\tstrh r0, [r1, 0x24]\n"
-		"\tb _080E39EA\n"
-		"\t.align 2, 0\n"
-	"_080E39C4: .4byte gTasks\n"
-	"_080E39C8: .4byte gBattleAnimAttacker\n"
-	"_080E39CC: .4byte gSprites\n"
-	"_080E39D0:\n"
-		"\tldr r3, _080E3A24 @ =gSprites\n"
-		"\tlsls r4, r7, 4\n"
-		"\tadds r2, r4, r7\n"
-		"\tlsls r2, 2\n"
-		"\tadds r2, r3\n"
-		"\tldrh r1, [r6, 0xA]\n"
-		"\tlsls r1, 16\n"
-		"\tasrs r1, 24\n"
-		"\tldrh r0, [r2, 0x24]\n"
-		"\tsubs r0, r1\n"
-		"\tstrh r0, [r2, 0x24]\n"
-		"\tadds r2, r3, 0\n"
-		"\tadds r3, r4, 0\n"
-	"_080E39EA:\n"
-		"\tldr r1, _080E3A28 @ =gTasks\n"
-		"\tmov r0, r9\n"
-		"\tadd r0, r8\n"
-		"\tlsls r0, 3\n"
-		"\tadds r4, r0, r1\n"
-		"\tldrb r0, [r4, 0xA]\n"
-		"\tstrh r0, [r4, 0xA]\n"
-		"\tadds r1, r3, r7\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tldrh r0, [r1, 0x24]\n"
-		"\tldrh r1, [r1, 0x20]\n"
-		"\tadds r0, r1\n"
-		"\tlsls r0, 16\n"
-		"\tmovs r1, 0x80\n"
-		"\tlsls r1, 14\n"
-		"\tadds r0, r1\n"
-		"\tmovs r1, 0x98\n"
-		"\tlsls r1, 17\n"
-		"\tcmp r0, r1\n"
-		"\tbhi _080E3A16\n"
-		"\tb _080E3E6C\n"
-	"_080E3A16:\n"
-		"\tmovs r0, 0\n"
-		"\tstrh r0, [r4, 0xA]\n"
-		"\tldrh r0, [r4, 0x8]\n"
-		"\tadds r0, 0x1\n"
-		"\tstrh r0, [r4, 0x8]\n"
-		"\tb _080E3E6C\n"
-		"\t.align 2, 0\n"
-	"_080E3A24: .4byte gSprites\n"
-	"_080E3A28: .4byte gTasks\n"
-	"_080E3A2C:\n"
-		"\tldr r4, _080E3A90 @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r4]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3ACC\n"
-		"\tldr r7, _080E3A94 @ =gBattlerPartyIndexes\n"
-		"\tldrb r0, [r4]\n"
-		"\tlsls r0, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmovs r6, 0x64\n"
-		"\tmuls r0, r6\n"
-		"\tldr r5, _080E3A98 @ =gPlayerParty\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetMonData\n"
-		"\tmov r10, r0\n"
-		"\tldrb r0, [r4]\n"
-		"\tlsls r0, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmuls r0, r6\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0x1\n"
-		"\tbl GetMonData\n"
-		"\tmov r9, r0\n"
-		"\tldr r0, _080E3A9C @ =gBattleSpritesDataPtr\n"
-		"\tldr r0, [r0]\n"
-		"\tldrb r2, [r4]\n"
-		"\tldr r1, [r0]\n"
-		"\tlsls r0, r2, 2\n"
-		"\tadds r1, r0, r1\n"
-		"\tldrh r0, [r1, 0x2]\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3AA0\n"
-		"\tlsls r0, r2, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmuls r0, r6\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0xB\n"
-		"\tbl GetMonData\n"
-		"\tlsls r0, 16\n"
-		"\tlsrs r5, r0, 16\n"
-		"\tb _080E3AA2\n"
-		"\t.align 2, 0\n"
-	"_080E3A90: .4byte gBattleAnimAttacker\n"
-	"_080E3A94: .4byte gBattlerPartyIndexes\n"
-	"_080E3A98: .4byte gPlayerParty\n"
-	"_080E3A9C: .4byte gBattleSpritesDataPtr\n"
-	"_080E3AA0:\n"
-		"\tldrh r5, [r1, 0x2]\n"
-	"_080E3AA2:\n"
-		"\tmovs r0, 0x1\n"
-		"\tbl GetAnimBattlerSpriteId\n"
-		"\tldr r2, _080E3AC8 @ =gSprites\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tlsls r1, r0, 4\n"
-		"\tadds r1, r0\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tadds r1, 0x43\n"
-		"\tldrb r0, [r1]\n"
-		"\tadds r0, 0x1\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r4, r0, 24\n"
-		"\tmovs r7, 0\n"
-		"\tmovs r6, 0x88\n"
-		"\tlsls r6, 1\n"
-		"\tb _080E3B54\n"
-		"\t.align 2, 0\n"
-	"_080E3AC8: .4byte gSprites\n"
-	"_080E3ACC:\n"
-		"\tldr r7, _080E3B24 @ =gBattlerPartyIndexes\n"
-		"\tldrb r0, [r4]\n"
-		"\tlsls r0, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmovs r6, 0x64\n"
-		"\tmuls r0, r6\n"
-		"\tldr r5, _080E3B28 @ =gEnemyParty\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetMonData\n"
-		"\tmov r10, r0\n"
-		"\tldrb r0, [r4]\n"
-		"\tlsls r0, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmuls r0, r6\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0x1\n"
-		"\tbl GetMonData\n"
-		"\tmov r9, r0\n"
-		"\tldr r0, _080E3B2C @ =gBattleSpritesDataPtr\n"
-		"\tldr r0, [r0]\n"
-		"\tldrb r2, [r4]\n"
-		"\tldr r1, [r0]\n"
-		"\tlsls r0, r2, 2\n"
-		"\tadds r1, r0, r1\n"
-		"\tldrh r0, [r1, 0x2]\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3B30\n"
-		"\tlsls r0, r2, 1\n"
-		"\tadds r0, r7\n"
-		"\tldrh r0, [r0]\n"
-		"\tmuls r0, r6\n"
-		"\tadds r0, r5\n"
-		"\tmovs r1, 0xB\n"
-		"\tbl GetMonData\n"
-		"\tlsls r0, 16\n"
-		"\tlsrs r5, r0, 16\n"
-		"\tb _080E3B32\n"
-		"\t.align 2, 0\n"
-	"_080E3B24: .4byte gBattlerPartyIndexes\n"
-	"_080E3B28: .4byte gEnemyParty\n"
-	"_080E3B2C: .4byte gBattleSpritesDataPtr\n"
-	"_080E3B30:\n"
-		"\tldrh r5, [r1, 0x2]\n"
-	"_080E3B32:\n"
-		"\tmovs r0, 0x1\n"
-		"\tbl GetAnimBattlerSpriteId\n"
-		"\tldr r2, _080E3BD0 @ =gSprites\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tlsls r1, r0, 4\n"
-		"\tadds r1, r0\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tadds r1, 0x43\n"
-		"\tldrb r0, [r1]\n"
-		"\tsubs r0, 0x1\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r4, r0, 24\n"
-		"\tmovs r7, 0x1\n"
-		"\tldr r6, _080E3BD4 @ =0x0000ffe0\n"
-	"_080E3B54:\n"
-		"\tldr r0, _080E3BD8 @ =gBattleAnimTarget\n"
-		"\tldrb r0, [r0]\n"
-		"\tmovs r1, 0x1\n"
-		"\tbl GetBattlerSpriteCoord\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tlsls r3, r6, 16\n"
-		"\tasrs r3, 16\n"
-		"\tstr r0, [sp]\n"
-		"\tstr r4, [sp, 0x4]\n"
-		"\tmov r2, r10\n"
-		"\tstr r2, [sp, 0x8]\n"
-		"\tmov r4, r9\n"
-		"\tstr r4, [sp, 0xC]\n"
-		"\tldr r4, _080E3BDC @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r4]\n"
-		"\tstr r0, [sp, 0x10]\n"
-		"\tmovs r0, 0\n"
-		"\tstr r0, [sp, 0x14]\n"
-		"\tadds r0, r5, 0\n"
-		"\tadds r1, r7, 0\n"
-		"\tmovs r2, 0\n"
-		"\tbl sub_80768D0\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r5, r0, 24\n"
-		"\tldr r0, _080E3BE0 @ =gBattleSpritesDataPtr\n"
-		"\tldr r1, [r0]\n"
-		"\tldrb r0, [r4]\n"
-		"\tldr r1, [r1]\n"
-		"\tlsls r0, 2\n"
-		"\tadds r0, r1\n"
-		"\tldrh r0, [r0, 0x2]\n"
-		"\tcmp r0, 0\n"
-		"\tbeq _080E3BBE\n"
-		"\tldr r1, _080E3BD0 @ =gSprites\n"
-		"\tlsls r0, r5, 4\n"
-		"\tadds r0, r5\n"
-		"\tlsls r0, 2\n"
-		"\tadds r0, r1\n"
-		"\tldrb r0, [r0, 0x5]\n"
-		"\tlsrs r0, 4\n"
-		"\tlsls r0, 4\n"
-		"\tmovs r2, 0x80\n"
-		"\tlsls r2, 1\n"
-		"\tadds r1, r2, 0\n"
-		"\torrs r0, r1\n"
-		"\tldr r3, _080E3BE4 @ =0x00007fff\n"
-		"\tmovs r1, 0x10\n"
-		"\tmovs r2, 0x6\n"
-		"\tbl BlendPalette\n"
-	"_080E3BBE:\n"
-		"\tldr r0, _080E3BE8 @ =gTasks\n"
-		"\tmov r3, r8\n"
-		"\tlsls r1, r3, 2\n"
-		"\tadd r1, r8\n"
-		"\tlsls r1, 3\n"
-		"\tadds r1, r0\n"
-		"\tstrh r5, [r1, 0x26]\n"
-		"\tb _080E3D82\n"
-		"\t.align 2, 0\n"
-	"_080E3BD0: .4byte gSprites\n"
-	"_080E3BD4: .4byte 0x0000ffe0\n"
-	"_080E3BD8: .4byte gBattleAnimTarget\n"
-	"_080E3BDC: .4byte gBattleAnimAttacker\n"
-	"_080E3BE0: .4byte gBattleSpritesDataPtr\n"
-	"_080E3BE4: .4byte 0x00007fff\n"
-	"_080E3BE8: .4byte gTasks\n"
-	"_080E3BEC:\n"
-		"\tldr r1, _080E3C38 @ =gTasks\n"
-		"\tmov r0, r8\n"
-		"\tlsls r4, r0, 2\n"
-		"\tadds r0, r4, r0\n"
-		"\tlsls r0, 3\n"
-		"\tadds r6, r0, r1\n"
-		"\tldrh r0, [r6, 0x26]\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r5, r0, 24\n"
-		"\tmovs r1, 0x80\n"
-		"\tlsls r1, 4\n"
-		"\tadds r0, r1, 0\n"
-		"\tldrh r2, [r6, 0xA]\n"
-		"\tadds r0, r2\n"
-		"\tstrh r0, [r6, 0xA]\n"
-		"\tldr r0, _080E3C3C @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r0]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tmov r9, r4\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3C44\n"
-		"\tldr r3, _080E3C40 @ =gSprites\n"
-		"\tlsls r4, r5, 4\n"
-		"\tadds r2, r4, r5\n"
-		"\tlsls r2, 2\n"
-		"\tadds r2, r3\n"
-		"\tldrh r1, [r6, 0xA]\n"
-		"\tlsls r1, 16\n"
-		"\tasrs r1, 24\n"
-		"\tldrh r0, [r2, 0x24]\n"
-		"\tsubs r0, r1\n"
-		"\tstrh r0, [r2, 0x24]\n"
-		"\tadds r2, r3, 0\n"
-		"\tadds r3, r4, 0\n"
-		"\tb _080E3C5A\n"
-		"\t.align 2, 0\n"
-	"_080E3C38: .4byte gTasks\n"
-	"_080E3C3C: .4byte gBattleAnimAttacker\n"
-	"_080E3C40: .4byte gSprites\n"
-	"_080E3C44:\n"
-		"\tldr r2, _080E3CA8 @ =gSprites\n"
-		"\tlsls r3, r5, 4\n"
-		"\tadds r1, r3, r5\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tldrh r0, [r6, 0xA]\n"
-		"\tlsls r0, 16\n"
-		"\tasrs r0, 24\n"
-		"\tldrh r4, [r1, 0x24]\n"
-		"\tadds r0, r4\n"
-		"\tstrh r0, [r1, 0x24]\n"
-	"_080E3C5A:\n"
-		"\tldr r1, _080E3CAC @ =gTasks\n"
-		"\tmov r0, r9\n"
-		"\tadd r0, r8\n"
-		"\tlsls r0, 3\n"
-		"\tadds r6, r0, r1\n"
-		"\tldrb r0, [r6, 0xA]\n"
-		"\tstrh r0, [r6, 0xA]\n"
-		"\tadds r1, r3, r5\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r2\n"
-		"\tldrh r0, [r1, 0x24]\n"
-		"\tldrh r1, [r1, 0x20]\n"
-		"\tadds r0, r1\n"
-		"\tlsls r0, 16\n"
-		"\tlsrs r5, r0, 16\n"
-		"\tmovs r1, 0x24\n"
-		"\tldrsh r0, [r6, r1]\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3CDA\n"
-		"\tldr r0, _080E3CB0 @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r0]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3CB8\n"
-		"\tlsls r4, r5, 16\n"
-		"\tasrs r4, 16\n"
-		"\tldr r0, _080E3CB4 @ =gBattleAnimTarget\n"
-		"\tldrb r0, [r0]\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetBattlerSpriteCoord\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tcmp r4, r0\n"
-		"\tbge _080E3CDA\n"
-		"\tb _080E3CCE\n"
-		"\t.align 2, 0\n"
-	"_080E3CA8: .4byte gSprites\n"
-	"_080E3CAC: .4byte gTasks\n"
-	"_080E3CB0: .4byte gBattleAnimAttacker\n"
-	"_080E3CB4: .4byte gBattleAnimTarget\n"
-	"_080E3CB8:\n"
-		"\tlsls r4, r5, 16\n"
-		"\tasrs r4, 16\n"
-		"\tldr r0, _080E3CFC @ =gBattleAnimTarget\n"
-		"\tldrb r0, [r0]\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetBattlerSpriteCoord\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tcmp r4, r0\n"
-		"\tble _080E3CDA\n"
-	"_080E3CCE:\n"
-		"\tldrh r0, [r6, 0x24]\n"
-		"\tadds r0, 0x1\n"
-		"\tstrh r0, [r6, 0x24]\n"
-		"\tldr r1, _080E3D00 @ =gBattleAnimArgs\n"
-		"\tldr r0, _080E3D04 @ =0x0000ffff\n"
-		"\tstrh r0, [r1, 0xE]\n"
-	"_080E3CDA:\n"
-		"\tlsls r0, r5, 16\n"
-		"\tmovs r2, 0x80\n"
-		"\tlsls r2, 14\n"
-		"\tadds r0, r2\n"
-		"\tmovs r1, 0x98\n"
-		"\tlsls r1, 17\n"
-		"\tcmp r0, r1\n"
-		"\tbhi _080E3CEC\n"
-		"\tb _080E3E6C\n"
-	"_080E3CEC:\n"
-		"\tldr r0, _080E3D08 @ =gTasks\n"
-		"\tmov r1, r9\n"
-		"\tadd r1, r8\n"
-		"\tlsls r1, 3\n"
-		"\tadds r1, r0\n"
-		"\tmovs r0, 0\n"
-		"\tstrh r0, [r1, 0xA]\n"
-		"\tb _080E3D82\n"
-		"\t.align 2, 0\n"
-	"_080E3CFC: .4byte gBattleAnimTarget\n"
-	"_080E3D00: .4byte gBattleAnimArgs\n"
-	"_080E3D04: .4byte 0x0000ffff\n"
-	"_080E3D08: .4byte gTasks\n"
-	"_080E3D0C:\n"
-		"\tmovs r0, 0\n"
-		"\tbl GetAnimBattlerSpriteId\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r7, r0, 24\n"
-		"\tldr r1, _080E3D58 @ =gTasks\n"
-		"\tmov r3, r8\n"
-		"\tlsls r4, r3, 2\n"
-		"\tadds r0, r4, r3\n"
-		"\tlsls r0, 3\n"
-		"\tadds r0, r1\n"
-		"\tldrh r0, [r0, 0x26]\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r5, r0, 24\n"
-		"\tlsls r0, r5, 4\n"
-		"\tadds r0, r5\n"
-		"\tlsls r0, 2\n"
-		"\tldr r5, _080E3D5C @ =gSprites\n"
-		"\tadds r0, r5\n"
-		"\tbl DestroySpriteAndFreeResources_\n"
-		"\tldr r0, _080E3D60 @ =gBattleAnimAttacker\n"
-		"\tldrb r0, [r0]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tmov r9, r4\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3D64\n"
-		"\tlsls r1, r7, 4\n"
-		"\tadds r1, r7\n"
-		"\tlsls r1, 2\n"
-		"\tadds r1, r5\n"
-		"\tldrh r0, [r1, 0x20]\n"
-		"\tnegs r0, r0\n"
-		"\tsubs r0, 0x20\n"
-		"\tstrh r0, [r1, 0x24]\n"
-		"\tb _080E3D78\n"
-		"\t.align 2, 0\n"
-	"_080E3D58: .4byte gTasks\n"
-	"_080E3D5C: .4byte gSprites\n"
-	"_080E3D60: .4byte gBattleAnimAttacker\n"
-	"_080E3D64:\n"
-		"\tlsls r0, r7, 4\n"
-		"\tadds r0, r7\n"
-		"\tlsls r0, 2\n"
-		"\tadds r0, r5\n"
-		"\tldrh r2, [r0, 0x20]\n"
-		"\tmovs r4, 0x88\n"
-		"\tlsls r4, 1\n"
-		"\tadds r1, r4, 0\n"
-		"\tsubs r1, r2\n"
-		"\tstrh r1, [r0, 0x24]\n"
-	"_080E3D78:\n"
-		"\tldr r0, _080E3D8C @ =gTasks\n"
-		"\tmov r1, r9\n"
-		"\tadd r1, r8\n"
-		"\tlsls r1, 3\n"
-		"\tadds r1, r0\n"
-	"_080E3D82:\n"
-		"\tldrh r0, [r1, 0x8]\n"
-		"\tadds r0, 0x1\n"
-		"\tstrh r0, [r1, 0x8]\n"
-		"\tb _080E3E6C\n"
-		"\t.align 2, 0\n"
-	"_080E3D8C: .4byte gTasks\n"
-	"_080E3D90:\n"
-		"\tmovs r0, 0\n"
-		"\tbl GetAnimBattlerSpriteId\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r7, r0, 24\n"
-		"\tldr r1, _080E3E04 @ =gTasks\n"
-		"\tmov r0, r8\n"
-		"\tlsls r4, r0, 2\n"
-		"\tadds r0, r4, r0\n"
-		"\tlsls r0, 3\n"
-		"\tadds r2, r0, r1\n"
-		"\tmovs r1, 0x80\n"
-		"\tlsls r1, 4\n"
-		"\tadds r0, r1, 0\n"
-		"\tldrh r3, [r2, 0xA]\n"
-		"\tadds r0, r3\n"
-		"\tstrh r0, [r2, 0xA]\n"
-		"\tldr r0, _080E3E08 @ =gBattleAnimAttacker\n"
-		"\tmov r10, r0\n"
-		"\tldrb r0, [r0]\n"
-		"\tstr r2, [sp, 0x18]\n"
-		"\tbl GetBattlerSide\n"
-		"\tlsls r0, 24\n"
-		"\tmov r9, r4\n"
-		"\tldr r2, [sp, 0x18]\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3E10\n"
-		"\tldr r1, _080E3E0C @ =gSprites\n"
-		"\tlsls r5, r7, 4\n"
-		"\tadds r0, r5, r7\n"
-		"\tlsls r0, 2\n"
-		"\tadds r6, r0, r1\n"
-		"\tldrh r0, [r2, 0xA]\n"
-		"\tlsls r0, 16\n"
-		"\tasrs r0, 24\n"
-		"\tldrh r1, [r6, 0x24]\n"
-		"\tadds r0, r1\n"
-		"\tstrh r0, [r6, 0x24]\n"
-		"\tmovs r2, 0x24\n"
-		"\tldrsh r4, [r6, r2]\n"
-		"\tmovs r3, 0x20\n"
-		"\tldrsh r0, [r6, r3]\n"
-		"\tadds r4, r0\n"
-		"\tmov r1, r10\n"
-		"\tldrb r0, [r1]\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetBattlerSpriteCoord\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tadds r3, r5, 0\n"
-		"\tcmp r4, r0\n"
-		"\tblt _080E3E48\n"
-		"\tmovs r2, 0\n"
-		"\tstrh r2, [r6, 0x24]\n"
-		"\tb _080E3E48\n"
-		"\t.align 2, 0\n"
-	"_080E3E04: .4byte gTasks\n"
-	"_080E3E08: .4byte gBattleAnimAttacker\n"
-	"_080E3E0C: .4byte gSprites\n"
-	"_080E3E10:\n"
-		"\tldr r1, _080E3E7C @ =gSprites\n"
-		"\tlsls r5, r7, 4\n"
-		"\tadds r0, r5, r7\n"
-		"\tlsls r0, 2\n"
-		"\tadds r6, r0, r1\n"
-		"\tldrh r1, [r2, 0xA]\n"
-		"\tlsls r1, 16\n"
-		"\tasrs r1, 24\n"
-		"\tldrh r0, [r6, 0x24]\n"
-		"\tsubs r0, r1\n"
-		"\tstrh r0, [r6, 0x24]\n"
-		"\tmovs r3, 0x24\n"
-		"\tldrsh r4, [r6, r3]\n"
-		"\tmovs r1, 0x20\n"
-		"\tldrsh r0, [r6, r1]\n"
-		"\tadds r4, r0\n"
-		"\tmov r2, r10\n"
-		"\tldrb r0, [r2]\n"
-		"\tmovs r1, 0\n"
-		"\tbl GetBattlerSpriteCoord\n"
-		"\tlsls r0, 24\n"
-		"\tlsrs r0, 24\n"
-		"\tadds r3, r5, 0\n"
-		"\tcmp r4, r0\n"
-		"\tbgt _080E3E48\n"
-		"\tmovs r4, 0\n"
-		"\tstrh r4, [r6, 0x24]\n"
-	"_080E3E48:\n"
-		"\tldr r1, _080E3E80 @ =gTasks\n"
-		"\tmov r0, r9\n"
-		"\tadd r0, r8\n"
-		"\tlsls r0, 3\n"
-		"\tadds r0, r1\n"
-		"\tldrb r1, [r0, 0xA]\n"
-		"\tstrh r1, [r0, 0xA]\n"
-		"\tldr r1, _080E3E7C @ =gSprites\n"
-		"\tadds r0, r3, r7\n"
-		"\tlsls r0, 2\n"
-		"\tadds r0, r1\n"
-		"\tmovs r1, 0x24\n"
-		"\tldrsh r0, [r0, r1]\n"
-		"\tcmp r0, 0\n"
-		"\tbne _080E3E6C\n"
-		"\tmov r0, r8\n"
-		"\tbl DestroyAnimVisualTask\n"
-	"_080E3E6C:\n"
-		"\tadd sp, 0x1C\n"
-		"\tpop {r3-r5}\n"
-		"\tmov r8, r3\n"
-		"\tmov r9, r4\n"
-		"\tmov r10, r5\n"
-		"\tpop {r4-r7}\n"
-		"\tpop {r0}\n"
-		"\tbx r0\n"
-		"\t.align 2, 0\n"
-	"_080E3E7C: .4byte gSprites\n"
-	"_080E3E80: .4byte gTasks\n");
+    asm_unified("\tpush {r4-r7,lr}\n"
+        "\tmov r7, r10\n"
+        "\tmov r6, r9\n"
+        "\tmov r5, r8\n"
+        "\tpush {r5-r7}\n"
+        "\tsub sp, 0x1C\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tmov r8, r0\n"
+        "\tldr r1, _080E395C @ =gTasks\n"
+        "\tlsls r0, 2\n"
+        "\tadd r0, r8\n"
+        "\tlsls r0, 3\n"
+        "\tadds r0, r1\n"
+        "\tmovs r1, 0x8\n"
+        "\tldrsh r0, [r0, r1]\n"
+        "\tcmp r0, 0x4\n"
+        "\tbls _080E3952\n"
+        "\tb _080E3E6C\n"
+    "_080E3952:\n"
+        "\tlsls r0, 2\n"
+        "\tldr r1, _080E3960 @ =_080E3964\n"
+        "\tadds r0, r1\n"
+        "\tldr r0, [r0]\n"
+        "\tmov pc, r0\n"
+        "\t.align 2, 0\n"
+    "_080E395C: .4byte gTasks\n"
+    "_080E3960: .4byte _080E3964\n"
+        "\t.align 2, 0\n"
+    "_080E3964:\n"
+        "\t.4byte _080E3978\n"
+        "\t.4byte _080E3A2C\n"
+        "\t.4byte _080E3BEC\n"
+        "\t.4byte _080E3D0C\n"
+        "\t.4byte _080E3D90\n"
+    "_080E3978:\n"
+        "\tmovs r0, 0\n"
+        "\tbl GetAnimBattlerSpriteId\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r7, r0, 24\n"
+        "\tldr r1, _080E39C4 @ =gTasks\n"
+        "\tmov r2, r8\n"
+        "\tlsls r4, r2, 2\n"
+        "\tadds r0, r4, r2\n"
+        "\tlsls r0, 3\n"
+        "\tadds r6, r0, r1\n"
+        "\tmovs r3, 0x80\n"
+        "\tlsls r3, 4\n"
+        "\tadds r0, r3, 0\n"
+        "\tldrh r1, [r6, 0xA]\n"
+        "\tadds r0, r1\n"
+        "\tstrh r0, [r6, 0xA]\n"
+        "\tldr r0, _080E39C8 @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r0]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tmov r9, r4\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E39D0\n"
+        "\tldr r2, _080E39CC @ =gSprites\n"
+        "\tlsls r3, r7, 4\n"
+        "\tadds r1, r3, r7\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tldrh r0, [r6, 0xA]\n"
+        "\tlsls r0, 16\n"
+        "\tasrs r0, 24\n"
+        "\tldrh r4, [r1, 0x24]\n"
+        "\tadds r0, r4\n"
+        "\tstrh r0, [r1, 0x24]\n"
+        "\tb _080E39EA\n"
+        "\t.align 2, 0\n"
+    "_080E39C4: .4byte gTasks\n"
+    "_080E39C8: .4byte gBattleAnimAttacker\n"
+    "_080E39CC: .4byte gSprites\n"
+    "_080E39D0:\n"
+        "\tldr r3, _080E3A24 @ =gSprites\n"
+        "\tlsls r4, r7, 4\n"
+        "\tadds r2, r4, r7\n"
+        "\tlsls r2, 2\n"
+        "\tadds r2, r3\n"
+        "\tldrh r1, [r6, 0xA]\n"
+        "\tlsls r1, 16\n"
+        "\tasrs r1, 24\n"
+        "\tldrh r0, [r2, 0x24]\n"
+        "\tsubs r0, r1\n"
+        "\tstrh r0, [r2, 0x24]\n"
+        "\tadds r2, r3, 0\n"
+        "\tadds r3, r4, 0\n"
+    "_080E39EA:\n"
+        "\tldr r1, _080E3A28 @ =gTasks\n"
+        "\tmov r0, r9\n"
+        "\tadd r0, r8\n"
+        "\tlsls r0, 3\n"
+        "\tadds r4, r0, r1\n"
+        "\tldrb r0, [r4, 0xA]\n"
+        "\tstrh r0, [r4, 0xA]\n"
+        "\tadds r1, r3, r7\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tldrh r0, [r1, 0x24]\n"
+        "\tldrh r1, [r1, 0x20]\n"
+        "\tadds r0, r1\n"
+        "\tlsls r0, 16\n"
+        "\tmovs r1, 0x80\n"
+        "\tlsls r1, 14\n"
+        "\tadds r0, r1\n"
+        "\tmovs r1, 0x98\n"
+        "\tlsls r1, 17\n"
+        "\tcmp r0, r1\n"
+        "\tbhi _080E3A16\n"
+        "\tb _080E3E6C\n"
+    "_080E3A16:\n"
+        "\tmovs r0, 0\n"
+        "\tstrh r0, [r4, 0xA]\n"
+        "\tldrh r0, [r4, 0x8]\n"
+        "\tadds r0, 0x1\n"
+        "\tstrh r0, [r4, 0x8]\n"
+        "\tb _080E3E6C\n"
+        "\t.align 2, 0\n"
+    "_080E3A24: .4byte gSprites\n"
+    "_080E3A28: .4byte gTasks\n"
+    "_080E3A2C:\n"
+        "\tldr r4, _080E3A90 @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r4]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3ACC\n"
+        "\tldr r7, _080E3A94 @ =gBattlerPartyIndexes\n"
+        "\tldrb r0, [r4]\n"
+        "\tlsls r0, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmovs r6, 0x64\n"
+        "\tmuls r0, r6\n"
+        "\tldr r5, _080E3A98 @ =gPlayerParty\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetMonData\n"
+        "\tmov r10, r0\n"
+        "\tldrb r0, [r4]\n"
+        "\tlsls r0, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmuls r0, r6\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0x1\n"
+        "\tbl GetMonData\n"
+        "\tmov r9, r0\n"
+        "\tldr r0, _080E3A9C @ =gBattleSpritesDataPtr\n"
+        "\tldr r0, [r0]\n"
+        "\tldrb r2, [r4]\n"
+        "\tldr r1, [r0]\n"
+        "\tlsls r0, r2, 2\n"
+        "\tadds r1, r0, r1\n"
+        "\tldrh r0, [r1, 0x2]\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3AA0\n"
+        "\tlsls r0, r2, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmuls r0, r6\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0xB\n"
+        "\tbl GetMonData\n"
+        "\tlsls r0, 16\n"
+        "\tlsrs r5, r0, 16\n"
+        "\tb _080E3AA2\n"
+        "\t.align 2, 0\n"
+    "_080E3A90: .4byte gBattleAnimAttacker\n"
+    "_080E3A94: .4byte gBattlerPartyIndexes\n"
+    "_080E3A98: .4byte gPlayerParty\n"
+    "_080E3A9C: .4byte gBattleSpritesDataPtr\n"
+    "_080E3AA0:\n"
+        "\tldrh r5, [r1, 0x2]\n"
+    "_080E3AA2:\n"
+        "\tmovs r0, 0x1\n"
+        "\tbl GetAnimBattlerSpriteId\n"
+        "\tldr r2, _080E3AC8 @ =gSprites\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tlsls r1, r0, 4\n"
+        "\tadds r1, r0\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tadds r1, 0x43\n"
+        "\tldrb r0, [r1]\n"
+        "\tadds r0, 0x1\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r4, r0, 24\n"
+        "\tmovs r7, 0\n"
+        "\tmovs r6, 0x88\n"
+        "\tlsls r6, 1\n"
+        "\tb _080E3B54\n"
+        "\t.align 2, 0\n"
+    "_080E3AC8: .4byte gSprites\n"
+    "_080E3ACC:\n"
+        "\tldr r7, _080E3B24 @ =gBattlerPartyIndexes\n"
+        "\tldrb r0, [r4]\n"
+        "\tlsls r0, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmovs r6, 0x64\n"
+        "\tmuls r0, r6\n"
+        "\tldr r5, _080E3B28 @ =gEnemyParty\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetMonData\n"
+        "\tmov r10, r0\n"
+        "\tldrb r0, [r4]\n"
+        "\tlsls r0, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmuls r0, r6\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0x1\n"
+        "\tbl GetMonData\n"
+        "\tmov r9, r0\n"
+        "\tldr r0, _080E3B2C @ =gBattleSpritesDataPtr\n"
+        "\tldr r0, [r0]\n"
+        "\tldrb r2, [r4]\n"
+        "\tldr r1, [r0]\n"
+        "\tlsls r0, r2, 2\n"
+        "\tadds r1, r0, r1\n"
+        "\tldrh r0, [r1, 0x2]\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3B30\n"
+        "\tlsls r0, r2, 1\n"
+        "\tadds r0, r7\n"
+        "\tldrh r0, [r0]\n"
+        "\tmuls r0, r6\n"
+        "\tadds r0, r5\n"
+        "\tmovs r1, 0xB\n"
+        "\tbl GetMonData\n"
+        "\tlsls r0, 16\n"
+        "\tlsrs r5, r0, 16\n"
+        "\tb _080E3B32\n"
+        "\t.align 2, 0\n"
+    "_080E3B24: .4byte gBattlerPartyIndexes\n"
+    "_080E3B28: .4byte gEnemyParty\n"
+    "_080E3B2C: .4byte gBattleSpritesDataPtr\n"
+    "_080E3B30:\n"
+        "\tldrh r5, [r1, 0x2]\n"
+    "_080E3B32:\n"
+        "\tmovs r0, 0x1\n"
+        "\tbl GetAnimBattlerSpriteId\n"
+        "\tldr r2, _080E3BD0 @ =gSprites\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tlsls r1, r0, 4\n"
+        "\tadds r1, r0\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tadds r1, 0x43\n"
+        "\tldrb r0, [r1]\n"
+        "\tsubs r0, 0x1\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r4, r0, 24\n"
+        "\tmovs r7, 0x1\n"
+        "\tldr r6, _080E3BD4 @ =0x0000ffe0\n"
+    "_080E3B54:\n"
+        "\tldr r0, _080E3BD8 @ =gBattleAnimTarget\n"
+        "\tldrb r0, [r0]\n"
+        "\tmovs r1, 0x1\n"
+        "\tbl GetBattlerSpriteCoord\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tlsls r3, r6, 16\n"
+        "\tasrs r3, 16\n"
+        "\tstr r0, [sp]\n"
+        "\tstr r4, [sp, 0x4]\n"
+        "\tmov r2, r10\n"
+        "\tstr r2, [sp, 0x8]\n"
+        "\tmov r4, r9\n"
+        "\tstr r4, [sp, 0xC]\n"
+        "\tldr r4, _080E3BDC @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r4]\n"
+        "\tstr r0, [sp, 0x10]\n"
+        "\tmovs r0, 0\n"
+        "\tstr r0, [sp, 0x14]\n"
+        "\tadds r0, r5, 0\n"
+        "\tadds r1, r7, 0\n"
+        "\tmovs r2, 0\n"
+        "\tbl sub_80768D0\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r5, r0, 24\n"
+        "\tldr r0, _080E3BE0 @ =gBattleSpritesDataPtr\n"
+        "\tldr r1, [r0]\n"
+        "\tldrb r0, [r4]\n"
+        "\tldr r1, [r1]\n"
+        "\tlsls r0, 2\n"
+        "\tadds r0, r1\n"
+        "\tldrh r0, [r0, 0x2]\n"
+        "\tcmp r0, 0\n"
+        "\tbeq _080E3BBE\n"
+        "\tldr r1, _080E3BD0 @ =gSprites\n"
+        "\tlsls r0, r5, 4\n"
+        "\tadds r0, r5\n"
+        "\tlsls r0, 2\n"
+        "\tadds r0, r1\n"
+        "\tldrb r0, [r0, 0x5]\n"
+        "\tlsrs r0, 4\n"
+        "\tlsls r0, 4\n"
+        "\tmovs r2, 0x80\n"
+        "\tlsls r2, 1\n"
+        "\tadds r1, r2, 0\n"
+        "\torrs r0, r1\n"
+        "\tldr r3, _080E3BE4 @ =0x00007fff\n"
+        "\tmovs r1, 0x10\n"
+        "\tmovs r2, 0x6\n"
+        "\tbl BlendPalette\n"
+    "_080E3BBE:\n"
+        "\tldr r0, _080E3BE8 @ =gTasks\n"
+        "\tmov r3, r8\n"
+        "\tlsls r1, r3, 2\n"
+        "\tadd r1, r8\n"
+        "\tlsls r1, 3\n"
+        "\tadds r1, r0\n"
+        "\tstrh r5, [r1, 0x26]\n"
+        "\tb _080E3D82\n"
+        "\t.align 2, 0\n"
+    "_080E3BD0: .4byte gSprites\n"
+    "_080E3BD4: .4byte 0x0000ffe0\n"
+    "_080E3BD8: .4byte gBattleAnimTarget\n"
+    "_080E3BDC: .4byte gBattleAnimAttacker\n"
+    "_080E3BE0: .4byte gBattleSpritesDataPtr\n"
+    "_080E3BE4: .4byte 0x00007fff\n"
+    "_080E3BE8: .4byte gTasks\n"
+    "_080E3BEC:\n"
+        "\tldr r1, _080E3C38 @ =gTasks\n"
+        "\tmov r0, r8\n"
+        "\tlsls r4, r0, 2\n"
+        "\tadds r0, r4, r0\n"
+        "\tlsls r0, 3\n"
+        "\tadds r6, r0, r1\n"
+        "\tldrh r0, [r6, 0x26]\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r5, r0, 24\n"
+        "\tmovs r1, 0x80\n"
+        "\tlsls r1, 4\n"
+        "\tadds r0, r1, 0\n"
+        "\tldrh r2, [r6, 0xA]\n"
+        "\tadds r0, r2\n"
+        "\tstrh r0, [r6, 0xA]\n"
+        "\tldr r0, _080E3C3C @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r0]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tmov r9, r4\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3C44\n"
+        "\tldr r3, _080E3C40 @ =gSprites\n"
+        "\tlsls r4, r5, 4\n"
+        "\tadds r2, r4, r5\n"
+        "\tlsls r2, 2\n"
+        "\tadds r2, r3\n"
+        "\tldrh r1, [r6, 0xA]\n"
+        "\tlsls r1, 16\n"
+        "\tasrs r1, 24\n"
+        "\tldrh r0, [r2, 0x24]\n"
+        "\tsubs r0, r1\n"
+        "\tstrh r0, [r2, 0x24]\n"
+        "\tadds r2, r3, 0\n"
+        "\tadds r3, r4, 0\n"
+        "\tb _080E3C5A\n"
+        "\t.align 2, 0\n"
+    "_080E3C38: .4byte gTasks\n"
+    "_080E3C3C: .4byte gBattleAnimAttacker\n"
+    "_080E3C40: .4byte gSprites\n"
+    "_080E3C44:\n"
+        "\tldr r2, _080E3CA8 @ =gSprites\n"
+        "\tlsls r3, r5, 4\n"
+        "\tadds r1, r3, r5\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tldrh r0, [r6, 0xA]\n"
+        "\tlsls r0, 16\n"
+        "\tasrs r0, 24\n"
+        "\tldrh r4, [r1, 0x24]\n"
+        "\tadds r0, r4\n"
+        "\tstrh r0, [r1, 0x24]\n"
+    "_080E3C5A:\n"
+        "\tldr r1, _080E3CAC @ =gTasks\n"
+        "\tmov r0, r9\n"
+        "\tadd r0, r8\n"
+        "\tlsls r0, 3\n"
+        "\tadds r6, r0, r1\n"
+        "\tldrb r0, [r6, 0xA]\n"
+        "\tstrh r0, [r6, 0xA]\n"
+        "\tadds r1, r3, r5\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r2\n"
+        "\tldrh r0, [r1, 0x24]\n"
+        "\tldrh r1, [r1, 0x20]\n"
+        "\tadds r0, r1\n"
+        "\tlsls r0, 16\n"
+        "\tlsrs r5, r0, 16\n"
+        "\tmovs r1, 0x24\n"
+        "\tldrsh r0, [r6, r1]\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3CDA\n"
+        "\tldr r0, _080E3CB0 @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r0]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3CB8\n"
+        "\tlsls r4, r5, 16\n"
+        "\tasrs r4, 16\n"
+        "\tldr r0, _080E3CB4 @ =gBattleAnimTarget\n"
+        "\tldrb r0, [r0]\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetBattlerSpriteCoord\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tcmp r4, r0\n"
+        "\tbge _080E3CDA\n"
+        "\tb _080E3CCE\n"
+        "\t.align 2, 0\n"
+    "_080E3CA8: .4byte gSprites\n"
+    "_080E3CAC: .4byte gTasks\n"
+    "_080E3CB0: .4byte gBattleAnimAttacker\n"
+    "_080E3CB4: .4byte gBattleAnimTarget\n"
+    "_080E3CB8:\n"
+        "\tlsls r4, r5, 16\n"
+        "\tasrs r4, 16\n"
+        "\tldr r0, _080E3CFC @ =gBattleAnimTarget\n"
+        "\tldrb r0, [r0]\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetBattlerSpriteCoord\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tcmp r4, r0\n"
+        "\tble _080E3CDA\n"
+    "_080E3CCE:\n"
+        "\tldrh r0, [r6, 0x24]\n"
+        "\tadds r0, 0x1\n"
+        "\tstrh r0, [r6, 0x24]\n"
+        "\tldr r1, _080E3D00 @ =gBattleAnimArgs\n"
+        "\tldr r0, _080E3D04 @ =0x0000ffff\n"
+        "\tstrh r0, [r1, 0xE]\n"
+    "_080E3CDA:\n"
+        "\tlsls r0, r5, 16\n"
+        "\tmovs r2, 0x80\n"
+        "\tlsls r2, 14\n"
+        "\tadds r0, r2\n"
+        "\tmovs r1, 0x98\n"
+        "\tlsls r1, 17\n"
+        "\tcmp r0, r1\n"
+        "\tbhi _080E3CEC\n"
+        "\tb _080E3E6C\n"
+    "_080E3CEC:\n"
+        "\tldr r0, _080E3D08 @ =gTasks\n"
+        "\tmov r1, r9\n"
+        "\tadd r1, r8\n"
+        "\tlsls r1, 3\n"
+        "\tadds r1, r0\n"
+        "\tmovs r0, 0\n"
+        "\tstrh r0, [r1, 0xA]\n"
+        "\tb _080E3D82\n"
+        "\t.align 2, 0\n"
+    "_080E3CFC: .4byte gBattleAnimTarget\n"
+    "_080E3D00: .4byte gBattleAnimArgs\n"
+    "_080E3D04: .4byte 0x0000ffff\n"
+    "_080E3D08: .4byte gTasks\n"
+    "_080E3D0C:\n"
+        "\tmovs r0, 0\n"
+        "\tbl GetAnimBattlerSpriteId\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r7, r0, 24\n"
+        "\tldr r1, _080E3D58 @ =gTasks\n"
+        "\tmov r3, r8\n"
+        "\tlsls r4, r3, 2\n"
+        "\tadds r0, r4, r3\n"
+        "\tlsls r0, 3\n"
+        "\tadds r0, r1\n"
+        "\tldrh r0, [r0, 0x26]\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r5, r0, 24\n"
+        "\tlsls r0, r5, 4\n"
+        "\tadds r0, r5\n"
+        "\tlsls r0, 2\n"
+        "\tldr r5, _080E3D5C @ =gSprites\n"
+        "\tadds r0, r5\n"
+        "\tbl DestroySpriteAndFreeResources_\n"
+        "\tldr r0, _080E3D60 @ =gBattleAnimAttacker\n"
+        "\tldrb r0, [r0]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tmov r9, r4\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3D64\n"
+        "\tlsls r1, r7, 4\n"
+        "\tadds r1, r7\n"
+        "\tlsls r1, 2\n"
+        "\tadds r1, r5\n"
+        "\tldrh r0, [r1, 0x20]\n"
+        "\tnegs r0, r0\n"
+        "\tsubs r0, 0x20\n"
+        "\tstrh r0, [r1, 0x24]\n"
+        "\tb _080E3D78\n"
+        "\t.align 2, 0\n"
+    "_080E3D58: .4byte gTasks\n"
+    "_080E3D5C: .4byte gSprites\n"
+    "_080E3D60: .4byte gBattleAnimAttacker\n"
+    "_080E3D64:\n"
+        "\tlsls r0, r7, 4\n"
+        "\tadds r0, r7\n"
+        "\tlsls r0, 2\n"
+        "\tadds r0, r5\n"
+        "\tldrh r2, [r0, 0x20]\n"
+        "\tmovs r4, 0x88\n"
+        "\tlsls r4, 1\n"
+        "\tadds r1, r4, 0\n"
+        "\tsubs r1, r2\n"
+        "\tstrh r1, [r0, 0x24]\n"
+    "_080E3D78:\n"
+        "\tldr r0, _080E3D8C @ =gTasks\n"
+        "\tmov r1, r9\n"
+        "\tadd r1, r8\n"
+        "\tlsls r1, 3\n"
+        "\tadds r1, r0\n"
+    "_080E3D82:\n"
+        "\tldrh r0, [r1, 0x8]\n"
+        "\tadds r0, 0x1\n"
+        "\tstrh r0, [r1, 0x8]\n"
+        "\tb _080E3E6C\n"
+        "\t.align 2, 0\n"
+    "_080E3D8C: .4byte gTasks\n"
+    "_080E3D90:\n"
+        "\tmovs r0, 0\n"
+        "\tbl GetAnimBattlerSpriteId\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r7, r0, 24\n"
+        "\tldr r1, _080E3E04 @ =gTasks\n"
+        "\tmov r0, r8\n"
+        "\tlsls r4, r0, 2\n"
+        "\tadds r0, r4, r0\n"
+        "\tlsls r0, 3\n"
+        "\tadds r2, r0, r1\n"
+        "\tmovs r1, 0x80\n"
+        "\tlsls r1, 4\n"
+        "\tadds r0, r1, 0\n"
+        "\tldrh r3, [r2, 0xA]\n"
+        "\tadds r0, r3\n"
+        "\tstrh r0, [r2, 0xA]\n"
+        "\tldr r0, _080E3E08 @ =gBattleAnimAttacker\n"
+        "\tmov r10, r0\n"
+        "\tldrb r0, [r0]\n"
+        "\tstr r2, [sp, 0x18]\n"
+        "\tbl GetBattlerSide\n"
+        "\tlsls r0, 24\n"
+        "\tmov r9, r4\n"
+        "\tldr r2, [sp, 0x18]\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3E10\n"
+        "\tldr r1, _080E3E0C @ =gSprites\n"
+        "\tlsls r5, r7, 4\n"
+        "\tadds r0, r5, r7\n"
+        "\tlsls r0, 2\n"
+        "\tadds r6, r0, r1\n"
+        "\tldrh r0, [r2, 0xA]\n"
+        "\tlsls r0, 16\n"
+        "\tasrs r0, 24\n"
+        "\tldrh r1, [r6, 0x24]\n"
+        "\tadds r0, r1\n"
+        "\tstrh r0, [r6, 0x24]\n"
+        "\tmovs r2, 0x24\n"
+        "\tldrsh r4, [r6, r2]\n"
+        "\tmovs r3, 0x20\n"
+        "\tldrsh r0, [r6, r3]\n"
+        "\tadds r4, r0\n"
+        "\tmov r1, r10\n"
+        "\tldrb r0, [r1]\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetBattlerSpriteCoord\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tadds r3, r5, 0\n"
+        "\tcmp r4, r0\n"
+        "\tblt _080E3E48\n"
+        "\tmovs r2, 0\n"
+        "\tstrh r2, [r6, 0x24]\n"
+        "\tb _080E3E48\n"
+        "\t.align 2, 0\n"
+    "_080E3E04: .4byte gTasks\n"
+    "_080E3E08: .4byte gBattleAnimAttacker\n"
+    "_080E3E0C: .4byte gSprites\n"
+    "_080E3E10:\n"
+        "\tldr r1, _080E3E7C @ =gSprites\n"
+        "\tlsls r5, r7, 4\n"
+        "\tadds r0, r5, r7\n"
+        "\tlsls r0, 2\n"
+        "\tadds r6, r0, r1\n"
+        "\tldrh r1, [r2, 0xA]\n"
+        "\tlsls r1, 16\n"
+        "\tasrs r1, 24\n"
+        "\tldrh r0, [r6, 0x24]\n"
+        "\tsubs r0, r1\n"
+        "\tstrh r0, [r6, 0x24]\n"
+        "\tmovs r3, 0x24\n"
+        "\tldrsh r4, [r6, r3]\n"
+        "\tmovs r1, 0x20\n"
+        "\tldrsh r0, [r6, r1]\n"
+        "\tadds r4, r0\n"
+        "\tmov r2, r10\n"
+        "\tldrb r0, [r2]\n"
+        "\tmovs r1, 0\n"
+        "\tbl GetBattlerSpriteCoord\n"
+        "\tlsls r0, 24\n"
+        "\tlsrs r0, 24\n"
+        "\tadds r3, r5, 0\n"
+        "\tcmp r4, r0\n"
+        "\tbgt _080E3E48\n"
+        "\tmovs r4, 0\n"
+        "\tstrh r4, [r6, 0x24]\n"
+    "_080E3E48:\n"
+        "\tldr r1, _080E3E80 @ =gTasks\n"
+        "\tmov r0, r9\n"
+        "\tadd r0, r8\n"
+        "\tlsls r0, 3\n"
+        "\tadds r0, r1\n"
+        "\tldrb r1, [r0, 0xA]\n"
+        "\tstrh r1, [r0, 0xA]\n"
+        "\tldr r1, _080E3E7C @ =gSprites\n"
+        "\tadds r0, r3, r7\n"
+        "\tlsls r0, 2\n"
+        "\tadds r0, r1\n"
+        "\tmovs r1, 0x24\n"
+        "\tldrsh r0, [r0, r1]\n"
+        "\tcmp r0, 0\n"
+        "\tbne _080E3E6C\n"
+        "\tmov r0, r8\n"
+        "\tbl DestroyAnimVisualTask\n"
+    "_080E3E6C:\n"
+        "\tadd sp, 0x1C\n"
+        "\tpop {r3-r5}\n"
+        "\tmov r8, r3\n"
+        "\tmov r9, r4\n"
+        "\tmov r10, r5\n"
+        "\tpop {r4-r7}\n"
+        "\tpop {r0}\n"
+        "\tbx r0\n"
+        "\t.align 2, 0\n"
+    "_080E3E7C: .4byte gSprites\n"
+    "_080E3E80: .4byte gTasks\n");
 }
 #endif
 
@@ -5972,6 +5796,7 @@ void AnimTask_SnatchPartnerMove(u8 taskId)
 void AnimTask_TeeterDanceMovement(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    
     task->data[3] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     task->data[4] = GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER ? 1 : -1;
     task->data[6] = gSprites[task->data[3]].pos1.y;
@@ -5986,6 +5811,7 @@ void AnimTask_TeeterDanceMovement(u8 taskId)
 static void AnimTask_TeeterDanceMovementStep(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    
     switch (task->data[0])
     {
     case 0:
@@ -6157,6 +5983,7 @@ void AnimTask_GetWeather(u8 taskId)
 void AnimTask_SlackOffSquish(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    
     task->data[0] = 0;
     task->data[15] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     PrepareAffineAnimInTaskData(task, task->data[15], gSlackOffSquishAffineAnimCmds);

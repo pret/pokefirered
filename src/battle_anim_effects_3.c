@@ -1188,7 +1188,7 @@ static void AnimWhiteHalo_Step1(struct Sprite *sprite)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[1], 16 - sprite->data[1]));
     if (--sprite->data[1] < 0)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = AnimWhiteHalo_Step2;
     }
 }
@@ -1245,7 +1245,7 @@ static void AnimMeanLookEye_Step1(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         StartSpriteAffineAnim(sprite, 1);
         sprite->data[2] = 0;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->affineAnimPaused = 1;
         sprite->callback = AnimMeanLookEye_Step2;
     }
@@ -1255,7 +1255,7 @@ static void AnimMeanLookEye_Step2(struct Sprite *sprite)
 {
     if (sprite->data[2]++ > 9)
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->affineAnimPaused = 0;
         if (sprite->affineAnimEnded)
             sprite->callback = AnimMeanLookEye_Step3;
@@ -1311,7 +1311,7 @@ static void AnimMeanLookEye_Step4(struct Sprite *sprite)
     }
 
     if (sprite->data[0] == 0)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 
     if (sprite->data[0] < 0)
     {
@@ -1499,7 +1499,7 @@ void AnimSpotlight(struct Sprite *sprite)
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = AnimSpotlight_Step1;
 }
 
@@ -1508,7 +1508,7 @@ static void AnimSpotlight_Step1(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         if (sprite->affineAnimEnded)
             sprite->data[0]++;
         break;
@@ -1538,7 +1538,7 @@ static void AnimSpotlight_Step1(struct Sprite *sprite)
     case 5:
         if (sprite->affineAnimEnded)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = AnimSpotlight_Step2;
         }
         break;
@@ -1962,13 +1962,13 @@ void AnimTriAttackTriangle(struct Sprite *sprite)
     {
         u16 var = sprite->data[0];
         if ((var & 1) == 0)
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         else
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
     }
 
     if (sprite->data[0] > 30)
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
 
     if (sprite->data[0] == 61)
     {
@@ -2029,7 +2029,7 @@ void AnimBatonPassPokeball(struct Sprite *sprite)
         if (++sprite->data[3] == 9)
         {
             sprite->data[3] = 0;
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
             ResetSpriteRotScale(spriteId);
             sprite->data[0]++;
         }
@@ -2112,11 +2112,11 @@ static void AnimMiniTwinklingStar_Step(struct Sprite *sprite)
     else
     {
         if (sprite->data[1] == 2)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
 
         if (sprite->data[1] == 3)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[1] = -1;
         }
 
@@ -2400,8 +2400,8 @@ void AnimGreenStar(struct Sprite *sprite)
     gSprites[spriteId2].data[2] = gBattleAnimArgs[1];
     gSprites[spriteId1].data[7] = -1;
     gSprites[spriteId2].data[7] = -1;
-    gSprites[spriteId1].invisible = 1;
-    gSprites[spriteId2].invisible = 1;
+    gSprites[spriteId1].invisible = TRUE;
+    gSprites[spriteId2].invisible = TRUE;
     gSprites[spriteId1].callback = AnimGreenStar_Callback;
     gSprites[spriteId2].callback = AnimGreenStar_Callback;
 
@@ -2419,19 +2419,19 @@ static void AnimGreenStar_Step1(struct Sprite *sprite)
     sprite->data[3] &= 0xFF;
     if (sprite->data[4] == 0 && sprite->pos2.y < -8)
     {
-        gSprites[sprite->data[6]].invisible = 0;
+        gSprites[sprite->data[6]].invisible = FALSE;
         sprite->data[4]++;
     }
 
     if (sprite->data[4] == 1 && sprite->pos2.y < -16)
     {
-        gSprites[sprite->data[7]].invisible = 0;
+        gSprites[sprite->data[7]].invisible = FALSE;
         sprite->data[4]++;
     }
 
     if (--sprite->data[1] == -1)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = AnimGreenStar_Step2;
     }
 }
@@ -2457,7 +2457,7 @@ static void AnimGreenStar_Callback(struct Sprite *sprite)
         sprite->data[3] &= 0xFF;
         if (--sprite->data[1] == -1)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = SpriteCallbackDummy;
         }
     }
@@ -3009,7 +3009,7 @@ void AnimFlatterSpotlight(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->callback = AnimFlatterSpotlightStep;
 }
 
@@ -3018,7 +3018,7 @@ static void AnimFlatterSpotlightStep(struct Sprite *sprite)
     switch (sprite->data[1])
     {
     case 0:
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         if (sprite->affineAnimEnded)
             sprite->data[1]++;
         break;
@@ -3032,7 +3032,7 @@ static void AnimFlatterSpotlightStep(struct Sprite *sprite)
     case 2:
         if (sprite->affineAnimEnded)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[1]++;
         }
         break;
@@ -4514,7 +4514,7 @@ static void AnimForesightMagnifyingGlassStep(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[1], sprite->data[2]));
         if (++sprite->data[0] == 32)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->data[5]++;
         }
         break;
@@ -4593,7 +4593,7 @@ void AnimTask_MonToSubstitute(u8 taskId)
         {
             gTasks[taskId].data[3] = 0;
             ResetSpriteRotScale(spriteId);
-            gSprites[spriteId].invisible = 1;
+            gSprites[spriteId].invisible = TRUE;
             gTasks[taskId].data[0]++;
         }
     }
@@ -4616,7 +4616,7 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
     case 0:
         gSprites[spriteId].pos2.y = -200;
         gSprites[spriteId].pos2.x = 200;
-        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].invisible = FALSE;
         gTasks[taskId].data[10] = 0;
         gTasks[taskId].data[0]++;
         break;
@@ -4780,13 +4780,13 @@ void AnimTask_OdorSleuthMovement(u8 taskId)
 
     if (!gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].invisible)
     {
-        gSprites[spriteId2].invisible = 0;
-        gSprites[spriteId1].invisible = 1;
+        gSprites[spriteId2].invisible = FALSE;
+        gSprites[spriteId1].invisible = TRUE;
     }
     else
     {
-        gSprites[spriteId2].invisible = 1;
-        gSprites[spriteId1].invisible = 1;
+        gSprites[spriteId2].invisible = TRUE;
+        gSprites[spriteId1].invisible = TRUE;
     }
 
     gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_NORMAL;
@@ -5656,13 +5656,13 @@ void sub_80E3E84(struct Sprite *sprite)
             sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;
             sprite->data[0] = -32;
             sprite->data[7]++;
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
                 sprite->subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
         }
         else
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
         }
         break;
     case 1:

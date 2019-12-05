@@ -40,9 +40,9 @@
 #define LOHALF(n) ((n) & 0xFFFF)
 
 // RAM
-EWRAM_DATA int gUnknown_3005424 = 0;
-EWRAM_DATA u16 gUnknown_3005428 = 0;
-EWRAM_DATA u16 gUnknown_300542C = 0;
+int gUnknown_3005424;
+u16 gUnknown_3005428;
+u16 gUnknown_300542C;
 
 // Function Declarations
 static void sub_80EEDF4(u8);

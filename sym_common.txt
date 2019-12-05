@@ -98,16 +98,8 @@ gUnknown_3005354: @ 3005354
 	.include "evolution_scene.o"
 	.align 2
 	.include "save.o"
-
 	.align 2
-gUnknown_3005424: @ 3005424
-	.space 0x4
-
-gUnknown_3005428: @ 3005428
-	.space 0x4
-
-gUnknown_300542C: @ 300542C
-	.space 0x4
+	.include "battle_anim_special.o"
 
 gUnknown_3005430: @ 3005430
 	.space 0x10

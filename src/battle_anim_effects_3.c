@@ -2320,7 +2320,6 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         gTasks[taskId].data[0]++;
         PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
         break;
-        break;
     case 1:
         if (gTasks[taskId].data[4]++ > 0)
         {
@@ -2329,7 +2328,6 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
                 gTasks[taskId].data[1] = 12;
 
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[1], 16 - gTasks[taskId].data[1]));
-
             if (gTasks[taskId].data[1] == 12)
                 gTasks[taskId].data[0]++;
         }
@@ -2339,7 +2337,6 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
             gTasks[taskId].data[1] = 0;
 
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].data[1], 16 - gTasks[taskId].data[1]));
-
         if (!gTasks[taskId].data[1])
         {
             gBattle_BG1_X = gMorningSunLightBeamCoordsTable[gTasks[taskId].data[2]] + gTasks[taskId].data[10];

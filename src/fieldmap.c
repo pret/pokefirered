@@ -463,7 +463,7 @@ u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
     return sub_8058F48(x, y, 0);
 }
 
-u8 MapGridGetMetatileLayerTypeAt(s32 x, s32 y)
+u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y)
 {
     return sub_8058F48(x, y, 6);
 }

@@ -97,6 +97,7 @@ extern const u8 gOtherText_Toss[];
 extern const u8 gOtherText_Give[];
 extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
+extern const u8 gText_SevenHyphens[];
 extern const u8 gOtherText_UnkF9_08_Clear_01[];
 extern const u8 gText_TimesStrVar1[];
 extern const u8 gText_IsSelected[];
@@ -927,5 +928,19 @@ extern const u8 gText_PkmnIsEvolving[];
 extern const u8 gText_CongratsPkmnEvolved[];
 extern const u8 gText_EllipsisQuestionMark[];
 extern const u8 gText_PkmnStoppedEvolving[];
+
+// shop
+extern const u8 gText_ShopBuy[];
+extern const u8 gText_ShopSell[];
+extern const u8 gText_ShopQuit[];
+extern const u8 gText_CanIHelpWithAnythingElse[];
+extern const u8 gText_QuitShopping[];
+extern const u8 gText_PokedollarVar1[];
+extern const u8 gText_YouDontHaveMoney[];
+extern const u8 gText_Var1CertainlyHowMany[];
+extern const u8 gText_InBagVar1[];
+extern const u8 gText_Var1AndYouWantedVar2[];
+extern const u8 gText_HereYouGoThankYou[];
+extern const u8 gText_NoMoreRoomForThis[];
 
 #endif //GUARD_STRINGS_H

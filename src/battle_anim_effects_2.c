@@ -865,8 +865,8 @@ const struct SpriteTemplate gMagentaHeartSpriteTemplate =
 
 const union AffineAnimCmd gUnknown_83E4200[] =
 {
-    AFFINEANIMCMD_FRAME(10, -13, 0x0, 0xA),
-    AFFINEANIMCMD_FRAME(-10, 0xD, 0x0, 0xA),
+    AFFINEANIMCMD_FRAME(10, -13, 0x0, 10),
+    AFFINEANIMCMD_FRAME(-10, 13, 0x0, 10),
     AFFINEANIMCMD_END,
 };
 

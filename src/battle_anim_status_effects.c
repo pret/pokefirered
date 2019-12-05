@@ -23,10 +23,6 @@ static void sub_807834C(struct Sprite *sprite);
 static void sub_8078380(struct Sprite *sprite);
 
 // Data
-extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
-extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const u8 *const gBattleAnims_StatusConditions[];
-
 static const union AnimCmd gUnknown_83BF3E0[] =
 {
     ANIMCMD_FRAME(0, 3),
@@ -207,15 +203,15 @@ const u8 gUnknown_83BF52C[] = _("TASK OVER\nタスクがオ-バ-しました");
 
 static const struct Subsprite gSubsprites_83BF544[] =
 {
-    {.x = -16, .y = -16, .shape = ST_OAM_SQUARE,      .size = 3, .tileOffset =   0, .priority = 2},
-    {.x = -16, .y =  48, .shape = ST_OAM_H_RECTANGLE, .size = 3, .tileOffset =  64, .priority = 2},
-    {.x =  48, .y = -16, .shape = ST_OAM_V_RECTANGLE, .size = 3, .tileOffset =  96, .priority = 2},
-    {.x =  48, .y =  48, .shape = ST_OAM_SQUARE,      .size = 2, .tileOffset = 128, .priority = 2},
+    {.x = -16, .y = -16, .shape = SPRITE_SHAPE(8x8),  .size = 3, .tileOffset =   0, .priority = 2},
+    {.x = -16, .y =  48, .shape = SPRITE_SHAPE(16x8), .size = 3, .tileOffset =  64, .priority = 2},
+    {.x =  48, .y = -16, .shape = SPRITE_SHAPE(8x16), .size = 3, .tileOffset =  96, .priority = 2},
+    {.x =  48, .y =  48, .shape = SPRITE_SHAPE(8x8),  .size = 2, .tileOffset = 128, .priority = 2},
 };
 
 static const struct SubspriteTable gUnknown_83BF554[] =
 {
-    {ARRAY_COUNT(gSubsprites_83BF544), gSubsprites_83BF544},
+    {NELEMS(gSubsprites_83BF544), gSubsprites_83BF544},
 };
 
 static const struct SpriteTemplate gUnknown_83BF55C =
@@ -361,7 +357,7 @@ void sub_80783FC(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&gUnknown_83BF55C, x, y, 4);
-    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
+    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == SPRITE_INVALID_TAG)
         gSprites[spriteId].invisible = TRUE;
     
     SetSubspriteTables(&gSprites[spriteId], gUnknown_83BF554);

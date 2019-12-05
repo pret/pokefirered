@@ -23,46 +23,6 @@
 #include "constants/weather.h"
 
 // Function Declarations
-void AnimBlackSmoke(struct Sprite *);
-void AnimWhiteHalo(struct Sprite *);
-void AnimTealAlert(struct Sprite *);
-void AnimMeanLookEye(struct Sprite *);
-void AnimSpikes(struct Sprite *);
-void AnimLeer(struct Sprite *);
-void AnimLetterZ(struct Sprite *);
-void AnimFang(struct Sprite *);
-void AnimSpotlight(struct Sprite *);
-void AnimClappingHand(struct Sprite *);
-void AnimClappingHand2(struct Sprite *);
-void AnimRapidSpin(struct Sprite *);
-void AnimTriAttackTriangle(struct Sprite *);
-void AnimBatonPassPokeball(struct Sprite *);
-void AnimWishStar(struct Sprite *);
-void AnimMiniTwinklingStar(struct Sprite *);
-void AnimSwallowBlueOrb(struct Sprite *);
-void AnimGreenStar(struct Sprite *);
-void AnimWeakFrustrationAngerMark(struct Sprite *);
-void AnimSweetScentPetal(struct Sprite *);
-void AnimPainSplitProjectile(struct Sprite *);
-void AnimFlatterConfetti(struct Sprite *);
-void AnimFlatterSpotlight(struct Sprite *);
-void AnimReversalOrb(struct Sprite *);
-void AnimYawnCloud(struct Sprite *);
-void AnimSmokeBallEscapeCloud(struct Sprite *);
-void AnimFacadeSweatDrop(struct Sprite *);
-void AnimRoarNoiseLine(struct Sprite *);
-void AnimGlareEyeDot(struct Sprite *);
-void AnimAssistPawprint(struct Sprite *);
-void AnimSmellingSaltsHand(struct Sprite *);
-void AnimSmellingSaltExclamation(struct Sprite *);
-void AnimHelpingHandClap(struct Sprite *);
-void AnimForesightMagnifyingGlass(struct Sprite *);
-void AnimMeteorMashStar(struct Sprite *);
-void AnimBlockX(struct Sprite *);
-void sub_80E3E84(struct Sprite *);
-void AnimParticuleBurst(struct Sprite *);
-void AnimKnockOffStrike(struct Sprite *);
-void AnimRecycle(struct Sprite *);
 static void AnimBlackSmokeStep(struct Sprite *);
 static void AnimWhiteHalo_Step1(struct Sprite *);
 static void AnimWhiteHalo_Step2(struct Sprite *);
@@ -119,8 +79,6 @@ static void AnimRecycleStep(struct Sprite *);
 static void AnimTask_SlackOffSquishStep(u8);
 
 // Data
-extern const struct SpriteTemplate gThoughtBubbleSpriteTemplate;
-
 const union AnimCmd gScratchAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -1634,7 +1592,7 @@ static void AnimClappingHand_Step(struct Sprite *sprite)
             sprite->data[2]++;
             if (sprite->data[3] == 0)
             {
-                PlaySE1WithPanning(SE_W227, BattleAnimAdjustPanning(-64));
+                PlaySE1WithPanning(SE_W227, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
             }
         }
     }
@@ -1664,18 +1622,18 @@ void AnimTask_CreateSpotlight(u8 taskId)
 {
     if (IsContest())
     {
-        SetGpuReg(REG_OFFSET_WININ, 0x1F3F);
-        gBattle_WIN1H = 0x98F0;
-        gBattle_WIN1V = 0x00A0;
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN1_OBJ | WININ_WIN1_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ | WININ_WIN0_BG_ALL);
+        gBattle_WIN1H = WININ_WIN1_OBJ | WININ_WIN1_BG3 | WIN_RANGE(0, 0xF0) | WIN_RANGE(0x80, 0x0);
+        gBattle_WIN1V = WININ_WIN0_CLR | WIN_RANGE(0, 0x80);
         SetGpuReg(REG_OFFSET_WIN1H, gBattle_WIN0H);
         SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN0V);
     }
     else
     {
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-        gBattle_WIN1H = 0x00F0;
-        gBattle_WIN1V = 0x78A0;
-        SetGpuReg(REG_OFFSET_WIN1H, 0x00F0);
+        gBattle_WIN1H = WIN_RANGE(0, 0xF0);
+        gBattle_WIN1V =    WININ_WIN0_CLR | WIN_RANGE(0, 0x80) | WININ_WIN1_BG3 | WININ_WIN1_OBJ | WININ_WIN1_CLR | WIN_RANGE(0x40, 0);
+        SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 0xF0));
         SetGpuReg(REG_OFFSET_WIN1V, gBattle_WIN1V);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
     }
@@ -1913,7 +1871,7 @@ static void TormentAttacker_Step(u8 taskId)
 
         y = task->data[3] + task->data[5];
         spriteId = CreateSprite(&gThoughtBubbleSpriteTemplate, x, y, 6 - task->data[1]);
-        PlaySE12WithPanning(SE_W118, BattleAnimAdjustPanning(-64));
+        PlaySE12WithPanning(SE_W118, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
 
         if (spriteId != MAX_SPRITES)
         {
@@ -2273,7 +2231,7 @@ void AnimTask_TransformMon(u8 taskId)
 
         src = gMonSpritesGfxPtr->sprites[position] + (gBattleMonForms[gBattleAnimAttacker] << 11);
         dest = animBg.bgTiles;
-        CpuSet(src, dest, 0x4000200);
+        CpuCopy32(src, dest, 0x800);
         LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
         gTasks[taskId].data[0]++;
         break;
@@ -2360,7 +2318,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         gTasks[taskId].data[11] = gBattle_BG1_Y;
 
         gTasks[taskId].data[0]++;
-        PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(-64));
+        PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
         break;
         break;
     case 1:
@@ -2396,7 +2354,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         {
             gTasks[taskId].data[3] = 0;
             gTasks[taskId].data[0] = 1;
-            PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
         }
         break;
     case 4:
@@ -3134,7 +3092,7 @@ static void AnimReversalOrbStep(struct Sprite *sprite)
 // Copies the target mon's sprite, and makes a white silhouette that shrinks away.
 void AnimTask_RolePlaySilhouette(u8 taskId)
 {
-    u8 isBackPic;
+    bool8 isBackPic;
     u32 personality;
     u32 otId;
     u16 species;
@@ -3146,7 +3104,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     GetAnimBattlerSpriteId(ANIM_ATTACKER);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
-        isBackPic = 0;
+        isBackPic = FALSE;
         personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
         otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
@@ -3166,7 +3124,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     }
     else
     {
-        isBackPic = 1;
+        isBackPic = TRUE;
         personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
         otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
@@ -3797,7 +3755,7 @@ static void AnimTask_FacadeColorBlendStep(u8 taskId)
     }
     else
     {
-        BlendPalette(gTasks[taskId].data[2], 16, 0, RGB(0, 0, 0));
+        BlendPalette(gTasks[taskId].data[2], 16, 0, RGB_BLACK);
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -3825,7 +3783,7 @@ void AnimRoarNoiseLine(struct Sprite *sprite)
     }
     else if (gBattleAnimArgs[2] == 1)
     {
-        sprite->vFlip = 1;
+        sprite->vFlip = TRUE;
         sprite->data[0] = 0x280;
         sprite->data[1] = 0x280;
     }
@@ -3838,7 +3796,7 @@ void AnimRoarNoiseLine(struct Sprite *sprite)
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
         sprite->data[0] = -sprite->data[0];
-        sprite->hFlip = 1;
+        sprite->hFlip = TRUE;
     }
 
     sprite->callback = AnimRoarNoiseLineStep;
@@ -4673,7 +4631,7 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
 
         if (gSprites[spriteId].pos2.y == 0)
         {
-            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
             gTasks[taskId].data[10] -= 0x800;
             gTasks[taskId].data[0]++;
         }
@@ -4695,7 +4653,7 @@ static void AnimTask_MonToSubstituteDoll(u8 taskId)
 
         if (gSprites[spriteId].pos2.y == 0)
         {
-            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_W145B, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
             DestroyAnimVisualTask(taskId);
         }
         break;
@@ -4732,7 +4690,7 @@ static void AnimBlockXStep(struct Sprite *sprite)
         sprite->pos2.y += 10;
         if (sprite->pos2.y >= 0)
         {
-            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(63));
+            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->pos2.y = 0;
             sprite->data[0]++;
         }
@@ -4742,7 +4700,7 @@ static void AnimBlockXStep(struct Sprite *sprite)
         sprite->pos2.y = -(gSineTable[sprite->data[1]] >> 3);
         if (sprite->data[1] > 0x7F)
         {
-            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(63));
+            PlaySE12WithPanning(SE_W166, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->data[1] = 0;
             sprite->pos2.y = 0;
             sprite->data[0]++;
@@ -4761,7 +4719,7 @@ static void AnimBlockXStep(struct Sprite *sprite)
     case 3:
         if (++sprite->data[1] > 8)
         {
-            PlaySE12WithPanning(SE_W043, BattleAnimAdjustPanning(63));
+            PlaySE12WithPanning(SE_W043, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->data[1] = 0;
             sprite->data[0]++;
         }
@@ -5694,7 +5652,7 @@ void sub_80E3E84(struct Sprite *sprite)
     case 0:
         if (gBattleAnimArgs[7] == -1)
         {
-            PlaySE12WithPanning(SE_W233, BattleAnimAdjustPanning(63));
+            PlaySE12WithPanning(SE_W233, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
             sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;
             sprite->data[0] = -32;
             sprite->data[7]++;

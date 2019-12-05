@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "link_rfu.h"
 #include "mevent.h"
+#include "battle_anim.h"
 
 struct UnkStruct_8467FB8
 {
@@ -58,8 +59,6 @@ void sub_8145A98(void);
 void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
-
-extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
 
 const u8 gUnknown_8467068[][3] = {
     {0, 2, 3},

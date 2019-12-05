@@ -370,7 +370,7 @@ const u16 gBallOpenFadeColors[] =
     [BALL_PREMIER] = RGB(31, 9, 10),
 
     // Unused
-    RGB(0, 0, 0),
+    RGB_BLACK,
     RGB(1, 16, 0),
     RGB(3, 0, 1),
     RGB(1, 8, 0),
@@ -412,9 +412,6 @@ const struct SpriteTemplate gUnknown_840C210 =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_80F1B3C,
 };
-
-extern const struct SpriteTemplate gWishStarSpriteTemplate;
-extern const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate;
 
 // Functions
 void sub_80EEC0C(u8 taskId)
@@ -639,7 +636,7 @@ void sub_80EF298(u8 taskId)
         break;
     case 2:
         ResetSpriteRotScale(spriteId);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
         break;
     }
@@ -918,7 +915,7 @@ static void sub_80EFA0C(struct Sprite *sprite)
         break;
     case 2:
         ResetSpriteRotScale(spriteId);
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         gTasks[taskId].data[0]++;
         break;
     default:
@@ -954,7 +951,7 @@ static void sub_80EFB9C(struct Sprite *sprite)
     bool8 lastBounce;
     int bounceCount;
 
-    lastBounce = 0;
+    lastBounce = FALSE;
     switch (sprite->data[3] & 0xFF)
     {
     case 0:
@@ -967,7 +964,7 @@ static void sub_80EFB9C(struct Sprite *sprite)
 
             bounceCount = sprite->data[3] >> 8;
             if (bounceCount == 4)
-                lastBounce = 1;
+                lastBounce = TRUE;
 
             // Play a different sound effect for each pokeball bounce.
             switch (bounceCount)
@@ -1022,7 +1019,7 @@ static void sub_80EFCA0(struct Sprite *sprite)
     if (++sprite->data[3] == 31)
     {
         sprite->data[3] = 0;
-        sprite->affineAnimPaused = 1;
+        sprite->affineAnimPaused = TRUE;
         StartSpriteAffineAnim(sprite, 1);
         gBattleSpritesDataPtr->animationData->field_C = 0;
         sprite->callback = sub_80EFCEC;
@@ -1049,7 +1046,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
         }
 
         sprite->data[5]++;
-        sprite->affineAnimPaused = 0;
+        sprite->affineAnimPaused = FALSE;
         var0 = sprite->data[5] + 7;
         if (var0 > 14)
         {
@@ -1064,7 +1061,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
             sprite->data[5] = 0;
             sprite->data[4] = -sprite->data[4];
             sprite->data[3]++;
-            sprite->affineAnimPaused = 0;
+            sprite->affineAnimPaused = FALSE;
             if (sprite->data[4] < 0)
                 ChangeSpriteAffineAnim(sprite, 2);
             else
@@ -1072,7 +1069,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
         }
         else
         {
-            sprite->affineAnimPaused = 1;
+            sprite->affineAnimPaused = TRUE;
         }
         break;
     case 2:
@@ -1087,7 +1084,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
         }
 
         sprite->data[5]++;
-        sprite->affineAnimPaused = 0;
+        sprite->affineAnimPaused = FALSE;
         var0 = sprite->data[5] + 12;
         if (var0 > 24)
         {
@@ -1099,14 +1096,14 @@ static void sub_80EFCEC(struct Sprite *sprite)
     case 3:
         if (sprite->data[5]++ < 0)
         {
-            sprite->affineAnimPaused = 1;
+            sprite->affineAnimPaused = TRUE;
             break;
         }
 
         sprite->data[5] = 0;
         sprite->data[4] = -sprite->data[4];
         sprite->data[3]++;
-        sprite->affineAnimPaused = 0;
+        sprite->affineAnimPaused = FALSE;
         if (sprite->data[4] < 0)
             ChangeSpriteAffineAnim(sprite, 2);
         else
@@ -1124,7 +1121,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
         }
 
         sprite->data[5]++;
-        sprite->affineAnimPaused = 0;
+        sprite->affineAnimPaused = FALSE;
         var0 = sprite->data[5] + 4;
         if (var0 > 8)
         {
@@ -1139,7 +1136,7 @@ static void sub_80EFCEC(struct Sprite *sprite)
         state = sprite->data[3] >> 8;
         if (state == gBattleSpritesDataPtr->animationData->ballThrowCaseId)
         {
-            sprite->affineAnimPaused = 1;
+            sprite->affineAnimPaused = TRUE;
             sprite->callback = sub_80EFF80;
         }
         else
@@ -1147,12 +1144,12 @@ static void sub_80EFCEC(struct Sprite *sprite)
             if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_3_SHAKES_SUCCESS && state == 3)
             {
                 sprite->callback = sub_80EFFA4;
-                sprite->affineAnimPaused = 1;
+                sprite->affineAnimPaused = TRUE;
             }
             else
             {
                 sprite->data[3]++;
-                sprite->affineAnimPaused = 1;
+                sprite->affineAnimPaused = TRUE;
             }
         }
         break;
@@ -1185,7 +1182,7 @@ static void sub_80EFF80(struct Sprite *sprite)
 
 static void sub_80EFFA4(struct Sprite *sprite)
 {
-    sprite->animPaused = 1;
+    sprite->animPaused = TRUE;
     sprite->callback = sub_80EFFC4;
     sprite->data[3] = 0;
     sprite->data[4] = 0;
@@ -1200,12 +1197,12 @@ static void sub_80EFFC4(struct Sprite *sprite)
     if (sprite->data[4] == 40)
     {
         PlaySE(SE_GETTING);
-        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB(0, 0, 0));
+        BlendPalettes(0x10000 << sprite->oam.paletteNum, 6, RGB_BLACK);
         sub_80F01B8(sprite);
     }
     else if (sprite->data[4] == 60)
     {
-        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB(0, 0, 0));
+        BeginNormalPaletteFade(0x10000 << sprite->oam.paletteNum, 2, 6, 0, RGB_BLACK);
     }
     else if (sprite->data[4] == 95)
     {
@@ -1236,7 +1233,7 @@ static void sub_80F00A4(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
         paletteIndex = IndexOfSpritePaletteTag(sprite->template->paletteTag);
-        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB(31, 31, 31));
+        BeginNormalPaletteFade(1 << (paletteIndex + 0x10), 0, 0, 16, RGB_WHITE);
         sprite->data[0]++;
         break;
     case 1:
@@ -1250,7 +1247,7 @@ static void sub_80F00A4(struct Sprite *sprite)
         }
         break;
     case 2:
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0]++;
         break;
     default:
@@ -1333,7 +1330,7 @@ static void sub_80F02B0(struct Sprite *sprite)
         break;
     }
 
-    gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = 0;
+    gSprites[gBattlerSpriteIds[gBattleAnimTarget]].invisible = FALSE;
     StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]], 1);
     AnimateSprite(&gSprites[gBattlerSpriteIds[gBattleAnimTarget]]);
     gSprites[gBattlerSpriteIds[gBattleAnimTarget]].data[1] = 0x1000;
@@ -1341,10 +1338,10 @@ static void sub_80F02B0(struct Sprite *sprite)
 
 static void sub_80F0378(struct Sprite *sprite)
 {
-    int next = FALSE;
+    bool32 next = FALSE;
 
     if (sprite->animEnded)
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
 
     if (gSprites[gBattlerSpriteIds[gBattleAnimTarget]].affineAnimEnded)
     {
@@ -1374,8 +1371,7 @@ static void sub_80F0478(struct Sprite *sprite)
 
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
-    sprite->pos2.y = 0;
-    sprite->pos2.x = 0;
+    sprite->pos2.x = sprite->pos2.y = 0;
     for (i = 0; i < 6; i++)
         sprite->data[i] = 0;
 
@@ -1880,7 +1876,7 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
     }
 }
 
-u8 LaunchBallFadeMonTask(u8 unfadeLater, u8 battler, u32 selectedPalettes, u8 ballId)
+u8 LaunchBallFadeMonTask(bool8 unfadeLater, u8 battler, u32 selectedPalettes, u8 ballId)
 {
     u8 taskId;
 
@@ -1903,7 +1899,7 @@ u8 LaunchBallFadeMonTask(u8 unfadeLater, u8 battler, u32 selectedPalettes, u8 ba
         gTasks[taskId].func = sub_80F1370;
     }
 
-    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB(31, 31, 31));
+    BeginNormalPaletteFade(selectedPalettes, 0, 0, 16, RGB_WHITE);
     return taskId;
 }
 
@@ -1920,7 +1916,7 @@ static void sub_80F12E0(u8 taskId)
     else if (!gPaletteFade.active)
     {
         u32 selectedPalettes = (u16)gTasks[taskId].data[10] | ((u16)gTasks[taskId].data[11] << 16);
-        BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB(31, 31, 31));
+        BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB_WHITE);
         DestroyTask(taskId);
     }
 }
@@ -1930,7 +1926,7 @@ static void sub_80F1370(u8 taskId)
     if (!gPaletteFade.active)
     {
         u32 selectedPalettes = (u16)gTasks[taskId].data[10] | ((u16)gTasks[taskId].data[11] << 16);
-        BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB(31, 31, 31));
+        BeginNormalPaletteFade(selectedPalettes, 0, 16, 0, RGB_WHITE);
         gTasks[taskId].func = sub_80F13C0;
     }
 }
@@ -1955,7 +1951,7 @@ void sub_80F1420(u8 taskId)
 {
     u8 spriteId;
     u32 x;
-    u32 done = FALSE;
+    bool32 done = FALSE;
 
     spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
     switch (gTasks[taskId].data[10])
@@ -2057,12 +2053,12 @@ void AnimTask_TargetToEffectBattler(u8 taskId)
 
 void sub_80F1720(u8 battler, struct Pokemon *mon)
 {
-    int isShiny;
+    bool32 isShiny;
     u32 otId, personality;
     u32 shinyValue;
     u8 taskId1, taskId2;
 
-    isShiny = 0;
+    isShiny = FALSE;
     gBattleSpritesDataPtr->healthBoxesData[battler].flag_x80 = 1;
     otId = GetMonData(mon, MON_DATA_OT_ID);
     personality = GetMonData(mon, MON_DATA_PERSONALITY);
@@ -2135,7 +2131,7 @@ static void sub_80F181C(u8 taskId)
         gSprites[spriteId].oam.tileNum += 5;
     }
 
-    if (gTasks[taskId].data[1] == 0)
+    if (gTasks[taskId].data[1] == FALSE)
     {
         gSprites[spriteId].callback = sub_80F1A2C;
     }
@@ -2144,13 +2140,13 @@ static void sub_80F181C(u8 taskId)
         gSprites[spriteId].callback = sub_80F1A80;
         gSprites[spriteId].pos2.x = -32;
         gSprites[spriteId].pos2.y = 32;
-        gSprites[spriteId].invisible = 1;
-        if (gTasks[taskId].data[11] == 0)
+        gSprites[spriteId].invisible = TRUE;
+        if (gTasks[taskId].data[11] == FALSE)
         {
             if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-                pan = -64;
+                pan = SOUND_PAN_ATTACKER;
             else
-                pan = 63;
+                pan = SOUND_PAN_TARGET;
 
             PlaySE12WithPanning(SE_REAPOKE, pan);
         }
@@ -2169,9 +2165,9 @@ static void sub_80F19E0(u8 taskId)
 {
     u8 battler;
 
-    if (gTasks[taskId].data[12] == 0)
+    if (gTasks[taskId].data[12] == FALSE)
     {
-        if (gTasks[taskId].data[1] == 1)
+        if (gTasks[taskId].data[1] == TRUE)
         {
             battler = gTasks[taskId].data[0];
             gBattleSpritesDataPtr->healthBoxesData[battler].field_1_x1 = 1;
@@ -2202,7 +2198,7 @@ static void sub_80F1A80(struct Sprite *sprite)
     }
     else
     {
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         sprite->pos2.x += 5;
         sprite->pos2.y -= 5;
         if (sprite->pos2.x > 32)
@@ -2254,7 +2250,7 @@ static void sub_80F1C04(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
     {
         sprite->data[0] = 0;
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->callback = sub_80F1C30;
     }
 }

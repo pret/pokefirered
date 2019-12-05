@@ -15,47 +15,6 @@
 #include "util.h"
 #include "constants/songs.h"
 
-void sub_80A6E48(struct Sprite *);
-void sub_80A6E98(struct Sprite *);
-void sub_80A6F8C(struct Sprite *);
-void sub_80A7020(struct Sprite *);
-void Anim_KinesisZapEnergy(struct Sprite *);
-void Anim_SwordsDanceBlade(struct Sprite *);
-void AnimSonicBoomProjectile(struct Sprite *);
-void AnimAirWaveProjectile(struct Sprite *);
-void sub_80A79E8(struct Sprite *);
-void AnimCoinThrow(struct Sprite *);
-void AnimFallingCoin(struct Sprite *);
-void AnimBulletSeed(struct Sprite *);
-void AnimRazorWindTornado(struct Sprite *);
-void AnimViceGripPincer(struct Sprite *);
-void AnimGuillotinePincer(struct Sprite *);
-void AnimBreathPuff(struct Sprite *);
-void AnimAngerMark(struct Sprite *);
-void AnimPencil(struct Sprite *);
-void AnimBlendThinRing(struct Sprite *);
-void AnimHyperVoiceRing(struct Sprite *);
-void AnimUproarRing(struct Sprite *);
-void AnimSoftBoiledEgg(struct Sprite *);
-void AnimSpeedDust(struct Sprite *);
-void AnimHealBellMusicNote(struct Sprite *);
-void AnimMagentaHeart(struct Sprite *);
-void AnimRedHeartProjectile(struct Sprite *);
-void AnimParticuleBurst(struct Sprite *);
-void AnimRedHeartRising(struct Sprite *);
-void AnimOrbitFast(struct Sprite *);
-void AnimOrbitScatter(struct Sprite *);
-void AnimSpitUpOrb(struct Sprite *);
-void AnimEyeSparkle(struct Sprite *);
-void AnimAngel(struct Sprite *);
-void AnimPinkHeart(struct Sprite *);
-void AnimDevil(struct Sprite *);
-void AnimFurySwipes(struct Sprite *);
-void AnimMovementWaves(struct Sprite *);
-void AnimJaggedMusicNote(struct Sprite *);
-void AnimPerishSongMusicNote2(struct Sprite *);
-void AnimPerishSongMusicNote(struct Sprite *);
-void AnimGuardRing(struct Sprite *);
 static void sub_80A6ED8(struct Sprite *);
 static void sub_80A7058(struct Sprite *);
 static void sub_80A7080(struct Sprite *);
@@ -105,8 +64,6 @@ static void AnimPerishSongMusicNote_Step1(struct Sprite *);
 static void AnimPerishSongMusicNote_Step2(struct Sprite *);
 
 // Data
-extern const union AffineAnimCmd *const gUnknown_83E7910[];
-extern const union AnimCmd *const gMusicNotesAnimTable[];
 // Unused
 const struct SpriteTemplate gUnknown_83E3ADC =
 {
@@ -289,11 +246,11 @@ const union AffineAnimCmd gGrowingRingAffineAnimCmds[] =
 const union AffineAnimCmd gWaterPulseRingAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 10),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
     AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 10),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
     AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 10),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
     AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
     AFFINEANIMCMD_END,
 };
@@ -583,7 +540,7 @@ const struct SpriteTemplate gBreathPuffSpriteTemplate =
 const union AffineAnimCmd gAngerMarkAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0xB, 0xB, 0, 8),
-    AFFINEANIMCMD_FRAME(0xFFF5, 0xFFF5, 0, 8),
+    AFFINEANIMCMD_FRAME(-11, -11, 0, 8),
     AFFINEANIMCMD_END,
 };
 
@@ -676,10 +633,10 @@ const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds2[] =
 
 const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds3[] =
 {
-    AFFINEANIMCMD_FRAME(0xFFF8, 0x4, 0, 8),
+    AFFINEANIMCMD_FRAME(-8, 0x4, 0, 8),
     AFFINEANIMCMD_LOOP(0),
-    AFFINEANIMCMD_FRAME(0x10, 0xFFF8, 0, 8),
-    AFFINEANIMCMD_FRAME(0xFFF0, 0x8, 0, 8),
+    AFFINEANIMCMD_FRAME(0x10, -8, 0, 8),
+    AFFINEANIMCMD_FRAME(-16, 0x8, 0, 8),
     AFFINEANIMCMD_LOOP(1),
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 15),
@@ -750,7 +707,7 @@ const struct SpriteTemplate gThinRingExpandingSpriteTemplate =
 const union AffineAnimCmd gThinRingShrinkingAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
-    AFFINEANIMCMD_FRAME(0xFFF0, 0xFFF0, 0, 30),
+    AFFINEANIMCMD_FRAME(-16, -16, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
@@ -908,8 +865,8 @@ const struct SpriteTemplate gMagentaHeartSpriteTemplate =
 
 const union AffineAnimCmd gUnknown_83E4200[] =
 {
-    AFFINEANIMCMD_FRAME(0x000A, 0xFFF3, 0x00, 0x0A),
-    AFFINEANIMCMD_FRAME(0xFFF6, 0x000D, 0x00, 0x0A),
+    AFFINEANIMCMD_FRAME(0xA, -13, 0x0, 0xA),
+    AFFINEANIMCMD_FRAME(-10, 0xD, 0x0, 0xA),
     AFFINEANIMCMD_END,
 };
 
@@ -1340,7 +1297,7 @@ void sub_80A6F8C(struct Sprite *sprite)
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = spriteId;
     sprite->callback = sub_80A6F3C;
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
 }
 
 void sub_80A7020(struct Sprite *sprite)
@@ -1439,14 +1396,14 @@ void Anim_KinesisZapEnergy(struct Sprite *sprite)
     sprite->pos1.y += gBattleAnimArgs[1];
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
-        sprite->hFlip = 1;
+        sprite->hFlip = TRUE;
         if (gBattleAnimArgs[2])
-            sprite->vFlip = 1;
+            sprite->vFlip = TRUE;
     }
     else
     {
         if (gBattleAnimArgs[2])
-            sprite->vFlip = 1;
+            sprite->vFlip = TRUE;
     }
 
     sprite->callback = RunStoredCallbackWhenAnimEnds;
@@ -1633,7 +1590,7 @@ static void AirCutterProjectileStep1(u8 taskId)
         gTasks[taskId].data[gTasks[taskId].data[1] + 13] = spriteId;
         gTasks[taskId].data[0] = gTasks[taskId].data[3];
         gTasks[taskId].data[1]++;
-        PlaySE12WithPanning(SE_W059B, BattleAnimAdjustPanning(-63));
+        PlaySE12WithPanning(SE_W059B, BattleAnimAdjustPanning(-SOUND_PAN_TARGET));
         if (gTasks[taskId].data[1] > 2)
             gTasks[taskId].func = AirCutterProjectileStep2;
     }
@@ -1821,7 +1778,7 @@ void AnimBulletSeed(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
     sprite->callback = StartAnimLinearTranslation;
-    sprite->affineAnimPaused = 1;
+    sprite->affineAnimPaused = TRUE;
     StoreSpriteCallbackInData6(sprite, AnimBulletSeed_Step1);
 }
 
@@ -1845,7 +1802,7 @@ static void AnimBulletSeed_Step1(struct Sprite *sprite)
     rand = Random();
     sprite->data[7] = (rand % 0xA0) + 0xA0;
     sprite->callback = AnimBulletSeed_Step2;
-    sprite->affineAnimPaused = 0;
+    sprite->affineAnimPaused = FALSE;
 }
 
 static void AnimBulletSeed_Step2(struct Sprite *sprite)
@@ -1959,7 +1916,7 @@ static void AnimGuillotinePincerStep1(struct Sprite *sprite)
     if (AnimTranslateLinear(sprite) && sprite->animEnded)
     {
         SeekSpriteAnim(sprite, 0);
-        sprite->animPaused = 1;
+        sprite->animPaused = TRUE;
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
         sprite->pos2.x = 2;
@@ -1988,7 +1945,7 @@ static void AnimGuillotinePincerStep2(struct Sprite *sprite)
         sprite->pos2.x = 0;
         sprite->data[4] = 0;
         sprite->data[3] = 0;
-        sprite->animPaused = 0;
+        sprite->animPaused = FALSE;
         StartSpriteAnim(sprite, sprite->data[5] ^ 1);
         sprite->callback = AnimGuillotinePincerStep3;
     }
@@ -2137,7 +2094,7 @@ static void CreateMinimizeSprite(struct Task* task, u8 taskId)
             gSprites[spriteId].data[2] = 6;
             gSprites[spriteId].callback = ClonedMinizeSprite_Step;
             SetSpriteRotScale(spriteId, task->data[4], task->data[4], 0);
-            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
             CalcCenterToCornerVec(&gSprites[spriteId], gSprites[spriteId].oam.shape, gSprites[spriteId].oam.size, gSprites[spriteId].oam.affineMode);
         }
     }
@@ -2492,7 +2449,7 @@ void AnimPencil(struct Sprite *sprite)
     sprite->data[3] = 16;
     sprite->data[4] = 0;
     sprite->data[5] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) + 2;
-    sprite->data[6] = BattleAnimAdjustPanning(63);
+    sprite->data[6] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     sprite->callback = AnimPencil_Step;
 }
 
@@ -2508,7 +2465,7 @@ static void AnimPencil_Step(struct Sprite *sprite)
         }
         if (++sprite->data[1] > 16)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             sprite->data[0]++;
         }
         break;
@@ -2548,7 +2505,7 @@ static void AnimPencil_Step(struct Sprite *sprite)
         }
         if (++sprite->data[1] > 16)
         {
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
             DestroyAnimSprite(sprite);
         }
         break;
@@ -2783,7 +2740,7 @@ static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         if (sprite->data[7] == 0)
             sprite->callback = AnimSoftBoiledEgg_Step4_Callback;
         else
@@ -2815,7 +2772,7 @@ static void StretchAttacker_Step(u8 taskId)
     if (!RunAffineAnimFromTaskData(task))
     {
         gSprites[task->data[0]].pos2.y = 0;
-        gSprites[task->data[0]].invisible = 1;
+        gSprites[task->data[0]].invisible = TRUE;
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -2913,9 +2870,9 @@ static void ExtremeSpeedMonReappear_Step(u8 taskId)
     {
         task->data[1] = 0;
         if (++task->data[2] & 1)
-            gSprites[task->data[15]].invisible = 0;
+            gSprites[task->data[15]].invisible = FALSE;
         else
-            gSprites[task->data[15]].invisible = 1;
+            gSprites[task->data[15]].invisible = TRUE;
 
         if (++task->data[3] >= task->data[13])
         {
@@ -2927,7 +2884,7 @@ static void ExtremeSpeedMonReappear_Step(u8 taskId)
             }
             else
             {
-                gSprites[task->data[15]].invisible = 0;
+                gSprites[task->data[15]].invisible = FALSE;
                 DestroyAnimVisualTask(taskId);
             }
         }
@@ -3104,10 +3061,10 @@ void AnimTask_FakeOut(u8 taskId)
     gBattle_WIN0V = 0xA0;
     SetGpuReg(REG_OFFSET_WIN0H, gBattle_WIN0H);
     SetGpuReg(REG_OFFSET_WIN0V, gBattle_WIN0V);
-    SetGpuReg(REG_OFFSET_WININ, 0x3F1F);
-    SetGpuReg(REG_OFFSET_WINOUT, 0x3F3F);
+    SetGpuReg(REG_OFFSET_WININ,  WININ_WIN1_CLR | WININ_WIN1_OBJ | WININ_WIN1_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_BG_ALL);
+    SetGpuReg(REG_OFFSET_WINOUT, WININ_WIN1_CLR | WININ_WIN1_OBJ | WININ_WIN1_BG_ALL | WININ_WIN0_CLR | WININ_WIN0_OBJ | WININ_WIN0_BG_ALL);    
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_DARKEN);
-    SetGpuReg(REG_OFFSET_BLDY, 0x10);
+    SetGpuReg(REG_OFFSET_BLDY, BLDCNT_TGT1_OBJ);
     gTasks[taskId].data[0] = win0v;
     gTasks[taskId].data[1] = win0h;
     gTasks[taskId].func = FakeOutStep1;
@@ -3134,7 +3091,7 @@ static void FakeOutStep2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(sub_8075BE8(1, 0, 0, 0, 0, 0, 0), 16, RGB(31, 31, 31));
+        BlendPalettes(sub_8075BE8(1, 0, 0, 0, 0, 0, 0), 16, RGB_WHITE);
     }
     else if (gTasks[taskId].data[10] > 4)
     {
@@ -3442,7 +3399,7 @@ void AnimOrbitFast(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
-    sprite->affineAnimPaused = 1;
+    sprite->affineAnimPaused = TRUE;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[7] = GetBattlerSpriteSubpriority(gBattleAnimAttacker);
@@ -3744,7 +3701,7 @@ void AnimPerishSongMusicNote2(struct Sprite *sprite)
     if (!sprite->data[0])
     {
         sprite->data[1] = 120 - gBattleAnimArgs[0];
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
     }
 
     if (++sprite->data[0] == sprite->data[1])

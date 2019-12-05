@@ -111,9 +111,6 @@ static void ScriptCmd_doublebattle_2E(void);
 static void ScriptCmd_stopsound(void);
 
 // Data
-extern const u16 gMovesWithQuietBGM[];
-extern const u8 *const gBattleAnims_Moves[];
-
 const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
 {
     .y = 0,
@@ -1740,7 +1737,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_SOLARBEAM_CONTESTS] = {gBattleAnimBgImage_Impact, gBattleAnimBgPalette_Solarbeam, gBattleAnimBgTilemap_ImpactContests},
 };
 
-static void (* const sScriptCmdTable[])(void) =
+static void (*const sScriptCmdTable[])(void) =
 {
     ScriptCmd_loadspritegfx,
     ScriptCmd_unloadspritegfx,

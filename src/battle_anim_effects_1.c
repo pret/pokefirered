@@ -19,66 +19,6 @@
 EWRAM_DATA s16 gUnknown_203999C[4] = {0};
 
 // Function Declarations
-void AnimMovePowderParticle(struct Sprite *);
-void AnimPowerAbsorptionOrb(struct Sprite *);
-void AnimSolarbeamBigOrb(struct Sprite *);
-void AnimSolarbeamSmallOrb(struct Sprite *);
-void AnimAbsorptionOrb(struct Sprite *);
-void AnimHyperBeamOrb(struct Sprite *);
-void AnimSporeParticle(struct Sprite *);
-void AnimPetalDanceBigFlower(struct Sprite *);
-void AnimPetalDanceSmallFlower(struct Sprite *);
-void AnimRazorLeafParticle(struct Sprite *);
-void AnimLeechSeed(struct Sprite *);
-void AnimTranslateLinearSingleSineWave(struct Sprite *);
-void AnimMoveTwisterParticle(struct Sprite *);
-void AnimConstrictBinding(struct Sprite *);
-void AnimMimicOrb(struct Sprite *);
-void AnimIngrainRoot(struct Sprite *);
-void AnimFrenzyPlantRoot(struct Sprite *);
-void AnimIngrainOrb(struct Sprite *);
-void AnimPresent(struct Sprite *);
-void AnimKnockOffItem(struct Sprite *);
-void AnimPresentHealParticle(struct Sprite *);
-void AnimItemSteal(struct Sprite *);
-void AnimTrickBag(struct Sprite *);
-void AnimFlyingParticle(struct Sprite *);
-void AnimNeedleArmSpike(struct Sprite *);
-void sub_80A43F8(struct Sprite *);
-void AnimWhipHit(struct Sprite *);
-void sub_80A4494(struct Sprite *);
-void AnimCuttingSlice(struct Sprite *);
-void AnimAirCutterSlice(struct Sprite *);
-void sub_80A481C(struct Sprite *);
-void AnimProtect(struct Sprite *);
-void AnimMilkBottle(struct Sprite *);
-void AnimGrantingStars(struct Sprite *);
-void AnimSparkingStars(struct Sprite *);
-void sub_80A4E40(struct Sprite *);
-void AnimSleepLetterZ(struct Sprite *);
-void AnimLockOnTarget(struct Sprite *);
-void AnimLockOnMoveTarget(struct Sprite *);
-void AnimBowMon(struct Sprite *);
-void sub_80A5590(struct Sprite *);
-void AnimSlashSlice(struct Sprite *);
-void AnimFalseSwipeSlice(struct Sprite *);
-void AnimFalseSwipePositionedSlice(struct Sprite *);
-void AnimEndureEnergy(struct Sprite *);
-void AnimSharpenSphere(struct Sprite *);
-void AnimConversion(struct Sprite *);
-void AnimConversion2(struct Sprite *);
-void AnimMoon(struct Sprite *);
-void AnimMoonlightSparkle(struct Sprite *);
-void AnimHornHit(struct Sprite *);
-void AnimSuperFang(struct Sprite *);
-void AnimWavyMusicNotes(struct Sprite *);
-void AnimFlyingMusicNotes(struct Sprite *);
-void AnimBellyDrumHand(struct Sprite *);
-void AnimSlowFlyingMusicNotes(struct Sprite *);
-void AnimThoughtBubble(struct Sprite *);
-void AnimMetronomeFinger(struct Sprite *);
-void AnimFollowMeFinger(struct Sprite *);
-void AnimTauntFinger(struct Sprite *);
 static void AnimMovePowderParticleStep(struct Sprite *);
 static void AnimSolarbeamSmallOrbStep(struct Sprite *);
 static void AnimAbsorptionOrbStep(struct Sprite *);
@@ -2003,10 +1943,10 @@ const struct SpriteTemplate gWavyMusicNotesSpriteTemplate =
 
 const u16 gParticlesColorBlendTable[][6] =    
 {
-    {ANIM_TAG_MUSIC_NOTES,     RGB(31, 31, 31), RGB(31, 26, 28), RGB(31, 22, 26), RGB(31, 17, 24), RGB(31, 13, 22)},
-    {ANIM_TAG_BENT_SPOON,      RGB(31, 31, 31), RGB(25, 31, 26), RGB(20, 31, 21), RGB(15, 31, 16), RGB(10, 31, 12)},
-    {ANIM_TAG_SPHERE_TO_CUBE,  RGB(31, 31, 31), RGB(31, 31, 24), RGB(31, 31, 17), RGB(31, 31, 10), RGB(31, 31, 3)},
-    {ANIM_TAG_LARGE_FRESH_EGG, RGB(31, 31, 31), RGB(26, 28, 31), RGB(21, 26, 31), RGB(16, 24, 31), RGB(12, 22, 31)},
+    {ANIM_TAG_MUSIC_NOTES,     RGB_WHITE, RGB(31, 26, 28), RGB(31, 22, 26), RGB(31, 17, 24), RGB(31, 13, 22)},
+    {ANIM_TAG_BENT_SPOON,      RGB_WHITE, RGB(25, 31, 26), RGB(20, 31, 21), RGB(15, 31, 16), RGB(10, 31, 12)},
+    {ANIM_TAG_SPHERE_TO_CUBE,  RGB_WHITE, RGB(31, 31, 24), RGB(31, 31, 17), RGB(31, 31, 10), RGB(31, 31, 3)},
+    {ANIM_TAG_LARGE_FRESH_EGG, RGB_WHITE, RGB(26, 28, 31), RGB(21, 26, 31), RGB(16, 24, 31), RGB(12, 22, 31)},
 };
 
 const struct SpriteTemplate gFastFlyingMusicNotesSpriteTemplate =
@@ -2450,7 +2390,7 @@ static void AnimLeechSeedStep(struct Sprite* sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
     {
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0] = 10;
         sprite->callback = WaitAnimForDuration;
         StoreSpriteCallbackInData6(sprite, AnimLeechSeedSprouts);
@@ -2459,7 +2399,7 @@ static void AnimLeechSeedStep(struct Sprite* sprite)
 
 static void AnimLeechSeedSprouts(struct Sprite* sprite)
 {
-    sprite->invisible = 0;
+    sprite->invisible = FALSE;
     StartSpriteAnim(sprite, 1);
     sprite->data[0] = 60;
     sprite->callback = WaitAnimForDuration;
@@ -2789,7 +2729,7 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
 void AnimConstrictBinding(struct Sprite* sprite)
 {
     InitSpritePosToAnimTarget(sprite, FALSE);
-    sprite->affineAnimPaused = 1;
+    sprite->affineAnimPaused = TRUE;
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]);
     sprite->data[6] = gBattleAnimArgs[2];
     sprite->data[7] = gBattleAnimArgs[3];
@@ -2802,7 +2742,7 @@ static void AnimConstrictBindingStep1(struct Sprite* sprite)
 
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
-        sprite->affineAnimPaused = 0;
+        sprite->affineAnimPaused = FALSE;
         spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         sprite->data[0] = 0x100;
         sprite->callback = AnimConstrictBindingStep2;
@@ -2908,11 +2848,11 @@ void AnimMimicOrb(struct Sprite* sprite)
 
         sprite->pos1.x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X) + gBattleAnimArgs[0];
         sprite->pos1.y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + gBattleAnimArgs[1];
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0]++;
         break;
     case 1:
-        sprite->invisible = 0;
+        sprite->invisible = FALSE;
         if (sprite->affineAnimEnded)
         {
             ChangeSpriteAffineAnim(sprite, 1);
@@ -3930,15 +3870,15 @@ void sub_80A4738(struct Sprite* sprite)
     {
         if (sprite->data[3] & 1)
         {
-            sprite->invisible = 0;
-            gSprites[sprite->data[0]].invisible = 0;
-            gSprites[sprite->data[1]].invisible = 0;
+            sprite->invisible = FALSE;
+            gSprites[sprite->data[0]].invisible = FALSE;
+            gSprites[sprite->data[1]].invisible = FALSE;
         }
         else
         {
-            sprite->invisible = 1;
-            gSprites[sprite->data[0]].invisible = 1;
-            gSprites[sprite->data[1]].invisible = 1;
+            sprite->invisible = TRUE;
+            gSprites[sprite->data[0]].invisible = TRUE;
+            gSprites[sprite->data[1]].invisible = TRUE;
         }
 
         sprite->data[2] = 0;
@@ -4048,7 +3988,7 @@ static void AnimProtectStep(struct Sprite *sprite)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16 - sprite->data[7], sprite->data[7]));
         if (sprite->data[7] == 16)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = DestroyAnimSpriteAndDisableBlend;
         }
     }
@@ -4132,7 +4072,7 @@ static void AnimMilkBottleStep1(struct Sprite* sprite)
         }
         break;
     case 3:
-        sprite->invisible = 1;
+        sprite->invisible = TRUE;
         sprite->data[0]++;
         break;
     case 4:
@@ -4386,7 +4326,7 @@ static void AnimLockOnTargetStep4(struct Sprite* sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(sub_8075BE8(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB(31, 31, 31));
+    BlendPalettes(sub_8075BE8(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB_WHITE);
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -4458,7 +4398,7 @@ void AnimLockOnMoveTarget(struct Sprite* sprite)
 
 void AnimBowMon(struct Sprite* sprite)
 {
-    sprite->invisible = 1;
+    sprite->invisible = TRUE;
     sprite->data[0] = 0;
     switch (gBattleAnimArgs[0])
     {
@@ -5228,7 +5168,7 @@ void AnimTask_DoubleTeam(u8 taskId)
     for (i = 1; i < 16; i++)
         gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
 
-    BlendPalette(r3, 16, 11, RGB(0, 0, 0));
+    BlendPalette(r3, 16, 11, RGB_BLACK);
     task->data[3] = 0;
     i = 0;
     while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
@@ -5303,17 +5243,17 @@ void AnimTask_MusicNotesRainbowBlend(u8 taskId)
     if (index != 0xFF)
     {
         index = (index << 4) + 0x100;
-        for (i = 1; i < ARRAY_COUNT(gParticlesColorBlendTable[0]); i++)
+        for (i = 1; i < NELEMS(gParticlesColorBlendTable[0]); i++)
             gPlttBufferFaded[index + i] = gParticlesColorBlendTable[0][i];
     }
 
-    for (j = 1; j < ARRAY_COUNT(gParticlesColorBlendTable); j++)
+    for (j = 1; j < NELEMS(gParticlesColorBlendTable); j++)
     {
         index = AllocSpritePalette(gParticlesColorBlendTable[j][0]);
         if (index != 0xFF)
         {
             index = (index << 4) + 0x100;
-            for (i = 1; i < ARRAY_COUNT(gParticlesColorBlendTable[0]); i++)
+            for (i = 1; i < NELEMS(gParticlesColorBlendTable[0]); i++)
                 gPlttBufferFaded[index + i] = gParticlesColorBlendTable[j][i];
         }
     }
@@ -5325,7 +5265,7 @@ void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
 {
     u16 i;
     
-    for (i = 1; i < ARRAY_COUNT(gParticlesColorBlendTable); i++)
+    for (i = 1; i < NELEMS(gParticlesColorBlendTable); i++)
         FreeSpritePaletteByTag(gParticlesColorBlendTable[i][0]);
 
     DestroyAnimVisualTask(taskId);

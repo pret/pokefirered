@@ -220,7 +220,6 @@ void AnimMetronomeFinger(struct Sprite *);
 void AnimFollowMeFinger(struct Sprite *);
 void AnimTauntFinger(struct Sprite *);
 void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
-void AnimMoveTwisterParticle(struct Sprite* sprite);
 
 // battle_anim_effects_2.c
 void sub_80A6E48(struct Sprite *);
@@ -317,9 +316,6 @@ u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
 void sub_80EEFC8(u8 *, u8 *, u8 battlerId);
 void sub_80EF0E0(u8 batterId);
 
-// water.c
-void AnimWaterPulseRing(struct Sprite *sprite);
-
 enum
 {
     BATTLER_COORD_X,
@@ -349,7 +345,7 @@ enum
 #define STAT_ANIM_MULTIPLE_PLUS2 56
 #define STAT_ANIM_MULTIPLE_MINUS1 57
 #define STAT_ANIM_MULTIPLE_MINUS2 58
-void LaunchStatusAnimation(u8 bank, u8 statusAnimId);
+void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 
 // battle_anim_mons.c
 extern const struct MonCoords gCastformFrontSpriteCoords[];

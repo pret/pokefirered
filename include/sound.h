@@ -46,5 +46,6 @@ void SE12PanpotControl(s8 pan);
 bool8 IsSEPlaying(void);
 bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
+void sub_8072474(u16 volume);
 
 #endif // GUARD_SOUND_H

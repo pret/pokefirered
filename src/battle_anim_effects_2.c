@@ -139,8 +139,8 @@ const union AnimCmd *const gUnknown_83E3B5C[] =
 
 const union AffineAnimCmd gUnknown_83E3B60[] =
 {
-    AFFINEANIMCMD_FRAME(0x50, 0x50, 0, 0),
-    AFFINEANIMCMD_FRAME(0x9, 0x9, 0, 18),
+    AFFINEANIMCMD_FRAME(80, 80, 0, 0),
+    AFFINEANIMCMD_FRAME(9, 9, 0, 18),
     AFFINEANIMCMD_END,
 };
 
@@ -192,9 +192,9 @@ const struct SpriteTemplate gKinesisZapEnergySpriteTemplate =
 
 const union AffineAnimCmd gSwordsDanceBladeAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(0x14, 0x0, 0, 12),
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 32),
+    AFFINEANIMCMD_FRAME(16, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(20, 0, 0, 12),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 32),
     AFFINEANIMCMD_END,
 };
 
@@ -238,20 +238,20 @@ const struct SpriteTemplate gAirWaveProjectileSpriteTemplate =
 
 const union AffineAnimCmd gGrowingRingAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
-    AFFINEANIMCMD_FRAME(0x7, 0x7, 0, -56),
+    AFFINEANIMCMD_FRAME(32, 32, 0, 0),
+    AFFINEANIMCMD_FRAME(7, 7, 0, -56),
     AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gWaterPulseRingAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
+    AFFINEANIMCMD_FRAME(5, 5, 0, 10),
     AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
-    AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
+    AFFINEANIMCMD_FRAME(10, 10, 0, 10),
     AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
-    AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
+    AFFINEANIMCMD_FRAME(10, 10, 0, 10),
     AFFINEANIMCMD_FRAME(-10, -10, 0, 10),
-    AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
+    AFFINEANIMCMD_FRAME(10, 10, 0, 10),
     AFFINEANIMCMD_END,
 };
 
@@ -344,7 +344,7 @@ const union AnimCmd *const gCoinAnimTable[] =
 
 const union AffineAnimCmd gFallingCoinAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 10, 1),
+    AFFINEANIMCMD_FRAME(0, 0, 10, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
@@ -377,7 +377,7 @@ const struct SpriteTemplate gFallingCoinSpriteTemplate =
 
 const union AffineAnimCmd gBulletSeedAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 20, 1),
+    AFFINEANIMCMD_FRAME(0, 0, 20, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
@@ -399,8 +399,8 @@ const struct SpriteTemplate gBulletSeedSpriteTemplate =
 
 const union AffineAnimCmd gRazorWindTornadoAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x10, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(0x4, 0x0, 0, 40),
+    AFFINEANIMCMD_FRAME(16, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(4, 0, 0, 40),
     AFFINEANIMCMD_END,
 };
 
@@ -539,7 +539,7 @@ const struct SpriteTemplate gBreathPuffSpriteTemplate =
 
 const union AffineAnimCmd gAngerMarkAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0xB, 0xB, 0, 8),
+    AFFINEANIMCMD_FRAME(11, 11, 0, 8),
     AFFINEANIMCMD_FRAME(-11, -11, 0, 8),
     AFFINEANIMCMD_END,
 };
@@ -619,27 +619,27 @@ const struct SpriteTemplate gExplosionSpriteTemplate =
 
 const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds1[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 2),
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 4),
-    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 2),
+    AFFINEANIMCMD_FRAME(0, 0, -8, 2),
+    AFFINEANIMCMD_FRAME(0, 0, 8, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -8, 2),
     AFFINEANIMCMD_JUMP(0),
 };
 
 const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds2[] =
 {
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds3[] =
 {
-    AFFINEANIMCMD_FRAME(-8, 0x4, 0, 8),
+    AFFINEANIMCMD_FRAME(-8, 4, 0, 8),
     AFFINEANIMCMD_LOOP(0),
-    AFFINEANIMCMD_FRAME(0x10, -8, 0, 8),
-    AFFINEANIMCMD_FRAME(-16, 0x8, 0, 8),
+    AFFINEANIMCMD_FRAME(16, -8, 0, 8),
+    AFFINEANIMCMD_FRAME(-16, 8, 0, 8),
     AFFINEANIMCMD_LOOP(1),
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 15),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 15),
     AFFINEANIMCMD_END,
 };
 
@@ -663,22 +663,22 @@ const struct SpriteTemplate gSoftBoiledEggSpriteTemplate =
 
 const union AffineAnimCmd gThinRingExpandingAffineAnimCmds1[] =
 {
-    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
-    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 30),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
 
 const union AffineAnimCmd gThinRingExpandingAffineAnimCmds2[] =
 {
-    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
-    AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 15),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(32, 32, 0, 15),
     AFFINEANIMCMD_END_ALT(1),
 };
 
 const union AffineAnimCmd gHyperVoiceRingAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
-    AFFINEANIMCMD_FRAME(0xB, 0xB, 0, 45),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(11, 11, 0, 45),
     AFFINEANIMCMD_END_ALT(1),
 };
 
@@ -706,7 +706,7 @@ const struct SpriteTemplate gThinRingExpandingSpriteTemplate =
 
 const union AffineAnimCmd gThinRingShrinkingAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
+    AFFINEANIMCMD_FRAME(512, 512, 0, 0),
     AFFINEANIMCMD_FRAME(-16, -16, 0, 30),
     AFFINEANIMCMD_END_ALT(1),
 };
@@ -865,8 +865,8 @@ const struct SpriteTemplate gMagentaHeartSpriteTemplate =
 
 const union AffineAnimCmd gUnknown_83E4200[] =
 {
-    AFFINEANIMCMD_FRAME(10, -13, 0x0, 10),
-    AFFINEANIMCMD_FRAME(-10, 13, 0x0, 10),
+    AFFINEANIMCMD_FRAME(10, -13, 0, 10),
+    AFFINEANIMCMD_FRAME(-10, 13, 0, 10),
     AFFINEANIMCMD_END,
 };
 
@@ -905,8 +905,8 @@ const struct SpriteTemplate gRedHeartRisingSpriteTemplate =
 
 const union AffineAnimCmd gHiddenPowerOrbAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
-    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 1),
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_FRAME(8, 8, 0, 1),
     AFFINEANIMCMD_JUMP(1),
 };
 
@@ -939,8 +939,8 @@ const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 
 const union AffineAnimCmd gSpitUpOrbAffineAnimCmds[] =
 {
-    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
-    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 1),
+    AFFINEANIMCMD_FRAME(128, 128, 0, 0),
+    AFFINEANIMCMD_FRAME(8, 8, 0, 1),
     AFFINEANIMCMD_JUMP(1),
 };
 
@@ -1139,19 +1139,19 @@ const struct SpriteTemplate gJaggedMusicNoteSpriteTemplate =
 
 const union AffineAnimCmd gPerishSongMusicNoteAffineAnimCmds1[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 5),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 5),
     AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gPerishSongMusicNoteAffineAnimCmds2[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 16),
+    AFFINEANIMCMD_FRAME(0, 0, -8, 16),
     AFFINEANIMCMD_END_ALT(1),
 };
 
 const union AffineAnimCmd gPerishSongMusicNoteAffineAnimCmds3[] =
 {
-    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 16),
+    AFFINEANIMCMD_FRAME(0, 0, 8, 16),
     AFFINEANIMCMD_END_ALT(1),
 };
 
@@ -1186,13 +1186,13 @@ const struct SpriteTemplate gPerishSongMusicNote2SpriteTemplate =
 
 const union AffineAnimCmd gGuardRingAffineAnimCmds1[] =
 {
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gGuardRingAffineAnimCmds2[] =
 {
-    AFFINEANIMCMD_FRAME(0x200, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(512, 256, 0, 0),
     AFFINEANIMCMD_END,
 };
 

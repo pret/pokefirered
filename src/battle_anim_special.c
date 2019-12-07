@@ -158,7 +158,7 @@ const struct CompressedSpritePalette gBallParticlePalettes[] =
     {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_PREMIERBALL},
 };
 
-const union AnimCmd gAnim_RegularBall[] =
+static const union AnimCmd gAnim_RegularBall[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(1, 1),
@@ -169,38 +169,38 @@ const union AnimCmd gAnim_RegularBall[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gAnim_MasterBall[] =
+static const union AnimCmd gAnim_MasterBall[] =
 {
     ANIMCMD_FRAME(3, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gAnim_NetDiveBall[] =
+static const union AnimCmd gAnim_NetDiveBall[] =
 {
     ANIMCMD_FRAME(4, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gAnim_NestBall[] =
+static const union AnimCmd gAnim_NestBall[] =
 {
     ANIMCMD_FRAME(5, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd gAnim_LuxuryPremierBall[] =
+static const union AnimCmd gAnim_LuxuryPremierBall[] =
 {
     ANIMCMD_FRAME(6, 4),
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gAnim_UltraRepeatTimerBall[] =    
+static const union AnimCmd gAnim_UltraRepeatTimerBall[] =    
 {
     ANIMCMD_FRAME(7, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gAnims_BallParticles[] =    
+static const union AnimCmd *const gAnims_BallParticles[] =    
 {
     gAnim_RegularBall,
     gAnim_MasterBall,
@@ -391,13 +391,13 @@ const struct SpriteTemplate gPokeblockSpriteTemplate =
     .callback = sub_80F1B3C,
 };
 
-const union AnimCmd gUnknown_840C204[] =
+static const union AnimCmd gUnknown_840C204[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_840C20C[] =
+static const union AnimCmd *const gSpriteAnimTable_840C20C[] =
 {
     gUnknown_840C204,
 };
@@ -2216,7 +2216,7 @@ void AnimTask_LoadPokeblockGfx(u8 taskId)
 
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_POKEBLOCK - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK); // unused
+    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_POKEBLOCK);
     DestroyAnimVisualTask(taskId);
 }
 

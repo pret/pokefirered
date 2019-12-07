@@ -36,9 +36,6 @@ struct BattleAnimBackground
 
 #define ANIM_ARGS_COUNT 8
 
-#define PAN_SIDE_PLAYER     -64
-#define PAN_SIDE_OPPONENT   63
-
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
@@ -52,7 +49,6 @@ extern u8 gAnimMoveTurn;
 extern u8 gBattleAnimAttacker;
 extern u8 gBattleAnimTarget;
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u16 gAnimMovePower;
 extern s32 gAnimMoveDmg;
 extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gUnknown_2037F24;
@@ -140,7 +136,6 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);
-bool8 IsAnimBankSpriteVisible(u8 battlerId);
 bool8 IsContest(void);
 s8 BattleAnimAdjustPanning(s8 pan);
 s8 BattleAnimAdjustPanning2(s8 pan);
@@ -220,6 +215,7 @@ void AnimMetronomeFinger(struct Sprite *);
 void AnimFollowMeFinger(struct Sprite *);
 void AnimTauntFinger(struct Sprite *);
 void SetSpriteNextToMonHead(u8 battler, struct Sprite* sprite);
+void sub_80A2F0C(u8 taskId);
 
 // battle_anim_effects_2.c
 void sub_80A6E48(struct Sprite *);

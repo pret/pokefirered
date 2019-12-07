@@ -79,7 +79,7 @@ static void AnimRecycleStep(struct Sprite *);
 static void AnimTask_SlackOffSquishStep(u8);
 
 // Data
-const union AnimCmd gScratchAnimCmds[] =
+static const union AnimCmd gScratchAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(16, 4),
@@ -89,7 +89,7 @@ const union AnimCmd gScratchAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gScratchAnimTable[] =
+static const union AnimCmd *const gScratchAnimTable[] =
 {
     gScratchAnimCmds,
 };
@@ -127,7 +127,7 @@ const struct SpriteTemplate gBlackBallSpriteTemplate =
     .callback = AnimThrowProjectile,
 };
 
-const union AnimCmd gOpeningEyeAnimCmds[] =    
+static const union AnimCmd gOpeningEyeAnimCmds[] =    
 {
     ANIMCMD_FRAME(0, 40),
     ANIMCMD_FRAME(16, 8),
@@ -135,7 +135,7 @@ const union AnimCmd gOpeningEyeAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gOpeningEyeAnimTable[] =    
+static const union AnimCmd *const gOpeningEyeAnimTable[] =    
 {
     gOpeningEyeAnimCmds,
 };
@@ -173,7 +173,7 @@ const struct SpriteTemplate gTealAlertSpriteTemplate =
     .callback = AnimTealAlert,
 };
 
-const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =
+static const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x180, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(-0x20, 0x18, 0, 5),
@@ -181,14 +181,14 @@ const union AffineAnimCmd gMeanLookEyeAffineAnimCmds1[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-const union AffineAnimCmd gMeanLookEyeAffineAnimCmds2[] =
+static const union AffineAnimCmd gMeanLookEyeAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x30, 0x30, 0, 0),
     AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 6),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gMeanLookEyeAffineAnimTable[] =
+static const union AffineAnimCmd *const gMeanLookEyeAffineAnimTable[] =
 {
     gMeanLookEyeAffineAnimCmds1,
     gMeanLookEyeAffineAnimCmds2,
@@ -216,7 +216,7 @@ const struct SpriteTemplate gSpikesSpriteTemplate =
     .callback = AnimSpikes,
 };
 
-const union AnimCmd gLeerAnimCmds[] =
+static const union AnimCmd gLeerAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -226,7 +226,7 @@ const union AnimCmd gLeerAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gLeerAnimTable[] =
+static const union AnimCmd *const gLeerAnimTable[] =
 {
     gLeerAnimCmds,
 };
@@ -242,25 +242,25 @@ const struct SpriteTemplate gLeerSpriteTemplate =
     .callback = AnimLeer,
 };
 
-const union AnimCmd gLetterZAnimCmds[] =
+static const union AnimCmd gLetterZAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gLetterZAnimTable[] =
+static const union AnimCmd *const gLetterZAnimTable[] =
 {
     gLetterZAnimCmds,
 };
 
-const union AffineAnimCmd gLetterZAffineAnimCmds[] =
+static const union AffineAnimCmd gLetterZAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-7, -7, -3, 16),
     AFFINEANIMCMD_FRAME(7, 7, 3, 16),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gLetterZAffineAnimTable[] =
+static const union AffineAnimCmd *const gLetterZAffineAnimTable[] =
 {
     gLetterZAffineAnimCmds,
 };
@@ -276,7 +276,7 @@ const struct SpriteTemplate gLetterZSpriteTemplate =
     .callback = AnimLetterZ,
 };
 
-const union AnimCmd gFangAnimCmds[] =
+static const union AnimCmd gFangAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(16, 16),
@@ -285,19 +285,19 @@ const union AnimCmd gFangAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gFangAnimTable[] =
+static const union AnimCmd *const gFangAnimTable[] =
 {
     gFangAnimCmds,
 };
 
-const union AffineAnimCmd gFangAffineAnimCmds[] =
+static const union AffineAnimCmd gFangAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_FRAME(-0x20, -0x20, 0, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gFangAffineAnimTable[] =
+static const union AffineAnimCmd *const gFangAffineAnimTable[] =
 {
     gFangAffineAnimCmds,
 };
@@ -313,21 +313,21 @@ const struct SpriteTemplate gFangSpriteTemplate =
     .callback = AnimFang,
 };
 
-const union AffineAnimCmd gSpotlightAffineAnimCmds1[] =
+static const union AffineAnimCmd gSpotlightAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(0x10, 0x0, 0, 20),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gSpotlightAffineAnimCmds2[] =
+static const union AffineAnimCmd gSpotlightAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x140, 0x180, 0, 0),
     AFFINEANIMCMD_FRAME(-0x10, 0x0, 0, 19),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSpotlightAffineAnimTable[] =
+static const union AffineAnimCmd *const gSpotlightAffineAnimTable[] =
 {
     gSpotlightAffineAnimCmds1,
     gSpotlightAffineAnimCmds2,
@@ -366,7 +366,7 @@ const struct SpriteTemplate gClappingHand2SpriteTemplate =
     .callback = AnimClappingHand2,
 };
 
-const union AnimCmd gRapidSpinAnimCmds[] =
+static const union AnimCmd gRapidSpinAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 2),
     ANIMCMD_FRAME(8, 2),
@@ -374,7 +374,7 @@ const union AnimCmd gRapidSpinAnimCmds[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gRapidSpinAnimTable[] =
+static const union AnimCmd *const gRapidSpinAnimTable[] =
 {
     gRapidSpinAnimCmds,
 };
@@ -390,7 +390,7 @@ const struct SpriteTemplate gRapidSpinSpriteTemplate =
     .callback = AnimRapidSpin,
 };
 
-const union AffineAnimCmd gUnknown_83FF080[] =
+static const union AffineAnimCmd gUnknown_83FF080[] =
 {
     AFFINEANIMCMD_FRAME(-12, 8, 0, 4),
     AFFINEANIMCMD_FRAME(20, -20, 0, 4),
@@ -398,18 +398,18 @@ const union AffineAnimCmd gUnknown_83FF080[] =
     AFFINEANIMCMD_END,
 };
 
-const union AnimCmd gTriAttackTriangleAnimCmds[] =
+static const union AnimCmd gTriAttackTriangleAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gTriAttackTriangleAnimTable[] =
+static const union AnimCmd *const gTriAttackTriangleAnimTable[] =
 {
     gTriAttackTriangleAnimCmds,
 };
 
-const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =
+static const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, 5, 40),
     AFFINEANIMCMD_FRAME(0, 0, 10, 10),
@@ -418,7 +418,7 @@ const union AffineAnimCmd gTriAttackTriangleAffineAnimCmds[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gTriAttackTriangleAffineAnimTable[] =
+static const union AffineAnimCmd *const gTriAttackTriangleAffineAnimTable[] =
 {
     gTriAttackTriangleAffineAnimCmds,
 };
@@ -434,7 +434,7 @@ const struct SpriteTemplate gTriAttackTriangleSpriteTemplate =
     .callback = AnimTriAttackTriangle,
 };
 
-const union AnimCmd gEclipsingOrbAnimCmds[] =
+static const union AnimCmd gEclipsingOrbAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
@@ -447,7 +447,7 @@ const union AnimCmd gEclipsingOrbAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gEclipsingOrbAnimTable[] =
+static const union AnimCmd *const gEclipsingOrbAnimTable[] =
 {
     gEclipsingOrbAnimCmds,
 };
@@ -463,7 +463,7 @@ const struct SpriteTemplate gEclipsingOrbSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =
+static const union AffineAnimCmd DefenseCurlDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-12, 20, 0, 8),
     AFFINEANIMCMD_FRAME(12, -20, 0, 8),
@@ -504,7 +504,7 @@ const struct SpriteTemplate gMiniTwinklingStarSpriteTemplate =
     .callback = AnimMiniTwinklingStar,
 };
 
-const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =
+static const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(8, -8, 0, 12),
     AFFINEANIMCMD_FRAME(-16, 16, 0, 12),
@@ -513,7 +513,7 @@ const union AffineAnimCmd gStockpileDeformMonAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =
+static const union AffineAnimCmd gSpitUpDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -535,7 +535,7 @@ const struct SpriteTemplate gSwallowBlueOrbSpriteTemplate =
     .callback = AnimSwallowBlueOrb,
 };
 
-const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
+static const union AffineAnimCmd gSwallowDeformMonAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 6, 0, 20),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
@@ -553,26 +553,26 @@ const s8 gMorningSunLightBeamCoordsTable[] =
     0x00,
 };
 
-const union AnimCmd gGreenStarAnimCmds1[] =
+static const union AnimCmd gGreenStarAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(4, 6),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gGreenStarAnimCmds2[] =
+static const union AnimCmd gGreenStarAnimCmds2[] =
 {
     ANIMCMD_FRAME(8, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd gGreenStarAnimCmds3[] =    
+static const union AnimCmd gGreenStarAnimCmds3[] =    
 {
     ANIMCMD_FRAME(12, 6),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gGreenStarAnimTable[] =    
+static const union AnimCmd *const gGreenStarAnimTable[] =    
 {
     gGreenStarAnimCmds1,
     gGreenStarAnimCmds2,
@@ -607,7 +607,7 @@ const u8 gDoomDesireLightBeamDelayTable[] =
     50,
 };
 
-const union AffineAnimCmd gStrongFrustrationAffineAnimCmds[] =    
+static const union AffineAnimCmd gStrongFrustrationAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(0, -15, 0, 7),
     AFFINEANIMCMD_FRAME(0, 15, 0, 7),
@@ -626,7 +626,7 @@ const struct SpriteTemplate gWeakFrustrationAngerMarkSpriteTemplate =
     .callback = AnimWeakFrustrationAngerMark,
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds1[] =
+static const union AnimCmd gSweetScentPetalAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
@@ -639,7 +639,7 @@ const union AnimCmd gSweetScentPetalAnimCmds1[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds2[] =
+static const union AnimCmd gSweetScentPetalAnimCmds2[] =
 {
     ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
     ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
@@ -652,13 +652,13 @@ const union AnimCmd gSweetScentPetalAnimCmds2[] =
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gSweetScentPetalAnimCmds3[] =
+static const union AnimCmd gSweetScentPetalAnimCmds3[] =
 {
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSweetScentPetalAnimCmdTable[] =    
+static const union AnimCmd *const gSweetScentPetalAnimCmdTable[] =    
 {
     gSweetScentPetalAnimCmds1,
     gSweetScentPetalAnimCmds2,
@@ -676,9 +676,9 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
     .callback = AnimSweetScentPetal,
 };
 
-const u16 gUnknown_83FF33C[] = INCBIN_U16("graphics/battle_anims/unk_83FF33C.gbapal");    //Unused
+static const u16 gUnknown_83FF33C[] = INCBIN_U16("graphics/battle_anims/unk_83FF33C.gbapal");    //Unused
 
-const union AnimCmd gPainSplitAnimCmds[] =
+static const union AnimCmd gPainSplitAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(4, 9),
@@ -686,7 +686,7 @@ const union AnimCmd gPainSplitAnimCmds[] =
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gPainSplitAnimCmdTable[] =
+static const union AnimCmd *const gPainSplitAnimCmdTable[] =
 {
     gPainSplitAnimCmds,
 };
@@ -735,7 +735,7 @@ const struct SpriteTemplate gReversalOrbSpriteTemplate =
     .callback = AnimReversalOrb,
 };
 
-const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =    
+static const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(16, 0, 0, 4),
     AFFINEANIMCMD_FRAME(0, -3, 0, 16),
@@ -745,7 +745,7 @@ const union AffineAnimCmd gDeepInhaleAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =    
+static const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =    
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(-8, -8, 0, 8),
@@ -753,7 +753,7 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds1[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =    
+static const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =    
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(8, 8, 0, 8),
@@ -761,7 +761,7 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds2[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =    
+static const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(8, 8, 0, 8),
@@ -769,7 +769,7 @@ const union AffineAnimCmd gYawnCloudAffineAnimCmds3[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gYawnCloudAffineAnimTable[] =    
+static const union AffineAnimCmd *const gYawnCloudAffineAnimTable[] =    
 {
     gYawnCloudAffineAnimCmds1,
     gYawnCloudAffineAnimCmds2,
@@ -787,7 +787,7 @@ const struct SpriteTemplate gYawnCloudSpriteTemplate =
     .callback = AnimYawnCloud,
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =    
+static const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =    
 {
     AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
     AFFINEANIMCMD_FRAME(-4, -6, 0, 16),
@@ -795,7 +795,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds1[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =    
+static const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =    
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(4, 6, 0, 16),
@@ -803,7 +803,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds2[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =    
+static const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(4, 6, 0, 16),
@@ -811,7 +811,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds3[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =    
+static const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =    
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(8, 10, 0, 30),
@@ -819,7 +819,7 @@ const union AffineAnimCmd gSmokeBallEscapeCloudAffineAnimCmds4[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[] =    
+static const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[] =    
 {
     gSmokeBallEscapeCloudAffineAnimCmds1,
     gSmokeBallEscapeCloudAffineAnimCmds2,
@@ -838,7 +838,7 @@ const struct SpriteTemplate gSmokeBallEscapeCloudSpriteTemplate =
     .callback = AnimSmokeBallEscapeCloud,
 };
 
-const union AffineAnimCmd gFacadeSquishAffineAnimCmds[] =
+static const union AffineAnimCmd gFacadeSquishAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(-16, 16, 0, 6),
     AFFINEANIMCMD_FRAME(16, -16, 0, 12),
@@ -885,21 +885,21 @@ const u16 gFacadeBlendColors[] =
     RGB(29, 27,  0),
 };
 
-const union AnimCmd gRoarNoiseLineAnimCmds1[] =
+static const union AnimCmd gRoarNoiseLineAnimCmds1[] =
 {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd gRoarNoiseLineAnimCmds2[] =    
+static const union AnimCmd gRoarNoiseLineAnimCmds2[] =    
 {
     ANIMCMD_FRAME(32, 3),
     ANIMCMD_FRAME(48, 3),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gRoarNoiseLineAnimTable[] =
+static const union AnimCmd *const gRoarNoiseLineAnimTable[] =
 {
     gRoarNoiseLineAnimCmds1,
     gRoarNoiseLineAnimCmds2,
@@ -938,20 +938,20 @@ const struct SpriteTemplate gAssistPawprintSpriteTemplate =
     .callback = AnimAssistPawprint,
 };
 
-const union AffineAnimCmd gBarrageBallAffineAnimCmds1[] =
+static const union AffineAnimCmd gBarrageBallAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -4, 24),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gBarrageBallAffineAnimCmds2[] =
+static const union AffineAnimCmd gBarrageBallAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, -64, 0),
     AFFINEANIMCMD_FRAME(0, 0, 4, 24),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gBarrageBallAffineAnimTable[] =
+static const union AffineAnimCmd *const gBarrageBallAffineAnimTable[] =
 {
     gBarrageBallAffineAnimCmds1,
     gBarrageBallAffineAnimCmds2,
@@ -979,7 +979,7 @@ const struct SpriteTemplate gSmellingSaltsHandSpriteTemplate =
     .callback = AnimSmellingSaltsHand,
 };
 
-const union AffineAnimCmd gSmellingSaltsSquishAffineAnimCmds[] =
+static const union AffineAnimCmd gSmellingSaltsSquishAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, -16, 0, 6),
     AFFINEANIMCMD_FRAME(0, 16, 0, 6),
@@ -1063,33 +1063,33 @@ const struct SpriteTemplate gUnknown_83FF704 =
     .callback = sub_80E3E84,
 };
 
-const union AnimCmd gKnockOffStrikeAnimCmds[] =    
+static const union AnimCmd gKnockOffStrikeAnimCmds[] =    
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(64, 4),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gKnockOffStrikeAnimTable[] =    
+static const union AnimCmd *const gKnockOffStrikeAnimTable[] =    
 {
     gKnockOffStrikeAnimCmds,
 };
 
-const union AffineAnimCmd gKnockOffStrikeAffineanimCmds1[] =
+static const union AffineAnimCmd gKnockOffStrikeAffineanimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, -4, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gKnockOffStrikeAffineanimCmds2[] =
+static const union AffineAnimCmd gKnockOffStrikeAffineanimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(0, 0, 4, 8),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[] =
+static const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[] =
 {
     gKnockOffStrikeAffineanimCmds1,
     gKnockOffStrikeAffineanimCmds2,
@@ -1106,13 +1106,13 @@ const struct SpriteTemplate gKnockOffStrikeSpriteTemplate =
     .callback = AnimKnockOffStrike,
 };
 
-const union AffineAnimCmd gRecycleSpriteAffineAnimCmds[] =
+static const union AffineAnimCmd gRecycleSpriteAffineAnimCmds[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -4, 64),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gRecycleSpriteAffineAnimTable[] =
+static const union AffineAnimCmd *const gRecycleSpriteAffineAnimTable[] =
 {
     gRecycleSpriteAffineAnimCmds,
 };
@@ -1128,7 +1128,7 @@ const struct SpriteTemplate gRecycleSpriteTemplate =
     .callback = AnimRecycle,
 };
 
-const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =    
+static const union AffineAnimCmd gSlackOffSquishAffineAnimCmds[] =    
 {
     AFFINEANIMCMD_FRAME(0, 16, 0, 4),
     AFFINEANIMCMD_FRAME(-2, 0, 0, 8),

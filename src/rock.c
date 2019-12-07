@@ -583,8 +583,8 @@ void sub_80B4BD0(u8 taskId)
     task->data[5] = ((var3 - var1) * 8) / task->data[8];
     task->data[6] = 0;
     task->data[7] = 0;
-    pan1 = BattleAnimAdjustPanning(PAN_SIDE_PLAYER);
-    pan2 = BattleAnimAdjustPanning(PAN_SIDE_OPPONENT);
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
     task->data[1] = var4;

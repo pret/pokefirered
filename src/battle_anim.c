@@ -59,7 +59,6 @@ static void LoadDefaultBg(void);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
 static void sub_807331C(u8 taskId);
-static bool8 sub_807378C(u16 a);
 
 static void ScriptCmd_loadspritegfx(void);
 static void ScriptCmd_unloadspritegfx(void);
@@ -124,7 +123,6 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
     .priority = 2,
     .paletteNum = 0,
 };
-
 
 const struct OamData gOamData_AffineOff_ObjNormal_16x16 =
 {
@@ -2082,6 +2080,7 @@ static void ScriptCmd_waitforvisualfinish(void)
 static void ScriptCmd_hang1(void)
 {
 }
+
 static void ScriptCmd_hang2(void)
 {
 }
@@ -3281,7 +3280,7 @@ static void ScriptCmd_visible(void)
 static void ScriptCmd_doublebattle_2D(void)
 {
     u8 wantedBattler;
-    u8 r4;
+    u8 priority;
     u8 spriteId;
 
     wantedBattler = sBattleAnimScriptPtr[1];
@@ -3291,21 +3290,21 @@ static void ScriptCmd_doublebattle_2D(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
+            priority = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+            priority = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
         if (spriteId != 0xFF)
         {
             gSprites[spriteId].invisible = FALSE;
-            if (r4 == 2)
+            if (priority == 2)
                 gSprites[spriteId].oam.priority = 3;
 
-            if (r4 == 1)
+            if (priority == 1)
                 sub_8073128(FALSE);
             else
                 sub_8073128(TRUE);
@@ -3316,7 +3315,7 @@ static void ScriptCmd_doublebattle_2D(void)
 static void ScriptCmd_doublebattle_2E(void)
 {
     u8 wantedBattler;
-    u8 r4;
+    u8 priority;
     u8 spriteId;
 
     wantedBattler = sBattleAnimScriptPtr[1];
@@ -3326,16 +3325,16 @@ static void ScriptCmd_doublebattle_2E(void)
     {
         if (wantedBattler == ANIM_ATTACKER)
         {
-            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
+            priority = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
             spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         }
         else
         {
-            r4 = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
+            priority = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
             spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
         }
 
-        if (spriteId != 0xFF && r4 == 2)
+        if (spriteId != 0xFF && priority == 2)
             gSprites[spriteId].oam.priority = 2;
     }
 }

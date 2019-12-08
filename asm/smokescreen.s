@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_804A76C
-sub_804A76C: @ 804A76C
+	thumb_func_start SmokescreenImpact
+SmokescreenImpact: @ 804A76C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -156,7 +156,7 @@ _0804A8B0: .4byte sub_804A8C0
 _0804A8B4: .4byte gSprites
 _0804A8B8: .4byte gUnknown_82509F4
 _0804A8BC: .4byte 0xfff00000
-	thumb_func_end sub_804A76C
+	thumb_func_end SmokescreenImpact
 
 	thumb_func_start sub_804A8C0
 sub_804A8C0: @ 804A8C0

@@ -43,7 +43,7 @@ const struct SpriteTemplate gUnknown_83E6DF8 =
 {
     .tileTag = ANIM_TAG_SPIRAL,
     .paletteTag = ANIM_TAG_SPIRAL,
-    .oam = &gOamData_83ACB60,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E6DF4,
@@ -54,7 +54,7 @@ const struct SpriteTemplate gUnknown_83E6E10 =
 {
     .tileTag = ANIM_TAG_GREEN_LIGHT_WALL,
     .paletteTag = ANIM_TAG_GREEN_LIGHT_WALL,
-    .oam = &gOamData_83ACB00,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -65,7 +65,7 @@ const struct SpriteTemplate gUnknown_83E6E28 =
 {
     .tileTag = ANIM_TAG_BLUE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_BLUE_LIGHT_WALL,
-    .oam = &gOamData_83ACB00,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -76,7 +76,7 @@ const struct SpriteTemplate gUnknown_83E6E40 =
 {
     .tileTag = ANIM_TAG_RED_LIGHT_WALL,
     .paletteTag = ANIM_TAG_RED_LIGHT_WALL,
-    .oam = &gOamData_83ACB00,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -87,7 +87,7 @@ const struct SpriteTemplate gUnknown_83E6E58 =
 {
     .tileTag = ANIM_TAG_GRAY_LIGHT_WALL,
     .paletteTag = ANIM_TAG_GRAY_LIGHT_WALL,
-    .oam = &gOamData_83ACB00,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -98,7 +98,7 @@ const struct SpriteTemplate gUnknown_83E6E70 =
 {
     .tileTag = ANIM_TAG_ORANGE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_ORANGE_LIGHT_WALL,
-    .oam = &gOamData_83ACB00,
+    .oam = &gOamData_AffineOff_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -124,7 +124,7 @@ const struct SpriteTemplate gUnknown_83E6EA4 =
 {
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E6EA0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -149,7 +149,7 @@ const struct SpriteTemplate gUnknown_83E6ED4 =
 {
     .tileTag = ANIM_TAG_SPARKLE_3,
     .paletteTag = ANIM_TAG_SPARKLE_3,
-    .oam = &gOamData_83AC9D0,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gUnknown_83E6ED0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -160,7 +160,7 @@ const struct SpriteTemplate gUnknown_83E6EEC =
 {
     .tileTag = ANIM_TAG_GOLD_RING,
     .paletteTag = ANIM_TAG_GOLD_RING,
-    .oam = &gOamData_83ACA18,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -217,7 +217,7 @@ const struct SpriteTemplate gUnknown_83E6F8C =
 {
     .tileTag = ANIM_TAG_BENT_SPOON,
     .paletteTag = ANIM_TAG_BENT_SPOON,
-    .oam = &gOamData_83ACA18,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gUnknown_83E6F84,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -259,7 +259,7 @@ const struct SpriteTemplate gUnknown_83E6FF4 =
 {
     .tileTag = ANIM_TAG_AMNESIA,
     .paletteTag = ANIM_TAG_AMNESIA,
-    .oam = &gOamData_83AC9D8,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gUnknown_83E6FC4,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -285,7 +285,7 @@ static const struct SpriteTemplate gUnknown_83E7044 =
 {
     .tileTag = ANIM_TAG_HOLLOW_ORB,
     .paletteTag = ANIM_TAG_HOLLOW_ORB,
-    .oam = &gOamData_83ACAF0,
+    .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -296,7 +296,7 @@ const struct SpriteTemplate gUnknown_83E705C =
 {
     .tileTag = 0x280A,
     .paletteTag = 0x280A,
-    .oam = &gOamData_83AC9E0,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -349,7 +349,7 @@ static const struct SpriteTemplate gUnknown_83E7114 =
 {
     .tileTag = ANIM_TAG_BLUEGREEN_ORB,
     .paletteTag = ANIM_TAG_BLUEGREEN_ORB,
-    .oam = &gOamData_83ACA30,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7104,
@@ -372,7 +372,7 @@ const struct SpriteTemplate gUnknown_83E7148 =
 {
     .tileTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_WHITE_CIRCLE_OF_LIGHT,
-    .oam = &gOamData_83ACBC0,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7144,
@@ -410,7 +410,7 @@ const struct SpriteTemplate gUnknown_83E71D0 =
 {
     .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
     .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
-    .oam = &gOamData_83ACBC0,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E71C8,

@@ -15,7 +15,7 @@
 #include "constants/songs.h"
 
 extern u8 gGlyphInfo[0x90];
-extern const struct OamData gOamData_83AC9D0;
+extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
 static void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese);
@@ -59,7 +59,7 @@ const struct SpriteTemplate gUnknown_81EA6B4 =
 {
     .tileTag = 0x8000,
     .paletteTag = 0x8000,
-    .oam = &gOamData_83AC9D0,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

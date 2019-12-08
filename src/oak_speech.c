@@ -328,12 +328,12 @@ static const union AnimCmd *const sGrassPlatformAnims3[] = {
     sGrassPlatformAnim3
 };
 
-extern const struct OamData gOamData_83ACAF8;
+extern const struct OamData gOamData_AffineOff_ObjBlend_32x32;
 
 static const struct SpriteTemplate sOakSpeech_GrassPlatformSpriteTemplates[3] = {
-    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1000, 0x1000, &gOamData_83ACAF8, sGrassPlatformAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gOamData_AffineOff_ObjBlend_32x32, sGrassPlatformAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gOamData_AffineOff_ObjBlend_32x32, sGrassPlatformAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1000, 0x1000, &gOamData_AffineOff_ObjBlend_32x32, sGrassPlatformAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
 };
 
 static const union AnimCmd sPikaAnim1[] = {
@@ -389,14 +389,14 @@ static const union AnimCmd *const sPikaAnims3[] = {
     sPikaAnim3
 };
 
-extern const struct OamData gOamData_83AC9D8;
-extern const struct OamData gOamData_83AC9F8;
-extern const struct OamData gOamData_83AC9E8;
+extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;
+extern const struct OamData gOamData_AffineOff_ObjNormal_32x16;
+extern const struct OamData gOamData_AffineOff_ObjNormal_16x8;
 
 static const struct SpriteTemplate sOakSpeech_PikaSpriteTemplates[3] = {
-    { 0x1001, 0x1001, &gOamData_83AC9D8, sPikaAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1002, 0x1001, &gOamData_83AC9F8, sPikaAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
-    { 0x1003, 0x1001, &gOamData_83AC9E8, sPikaAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
+    { 0x1001, 0x1001, &gOamData_AffineOff_ObjNormal_32x32, sPikaAnims1, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1002, 0x1001, &gOamData_AffineOff_ObjNormal_32x16, sPikaAnims2, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy },
+    { 0x1003, 0x1001, &gOamData_AffineOff_ObjNormal_16x8, sPikaAnims3, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy }
 };
 
 static const u8 *const sHelpDocsPtrs[] = {

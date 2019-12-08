@@ -88,7 +88,7 @@ static const struct SpriteTemplate gUnknown_83AE054[] =
     {
         .tileTag = 0xD755,
         .paletteTag = 0xD755,
-        .oam = &gOamData_83ACA40,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -97,7 +97,7 @@ static const struct SpriteTemplate gUnknown_83AE054[] =
     {
         .tileTag = 0xD756,
         .paletteTag = 0xD756,
-        .oam = &gOamData_83ACA40,
+        .oam = &gOamData_AffineNormal_ObjNormal_64x64,
         .anims = gDummySpriteAnimTable,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -884,7 +884,7 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src)
     CopyBgTilemapBufferToVram(bgId);
 }
 
-u8 sub_8075454(void)
+u8 GetBattleBgPaletteNum(void)
 {
     return 2;
 }

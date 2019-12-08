@@ -496,9 +496,9 @@ static void sub_80BB2A0(u8 taskId)
     gTasks[taskId].data[7] = gBattlerSpriteIds[sAnimStatsChangeData->battler2];
     gTasks[taskId].func = sub_80BB4B8;
     if (sAnimStatsChangeData->data[0] == 0)
-        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(PAN_SIDE_PLAYER));
+        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
     else
-        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(PAN_SIDE_PLAYER));
+        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER));
 }
 
 static void sub_80BB4B8(u8 taskId)

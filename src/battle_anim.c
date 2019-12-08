@@ -24,7 +24,7 @@
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
-EWRAM_DATA static s8 gAnimFramesToWait = 0;
+EWRAM_DATA static s8 sAnimFramesToWait = 0;
 EWRAM_DATA bool8 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
 EWRAM_DATA u8 gAnimSoundTaskCount = 0;
@@ -1792,7 +1792,7 @@ void ClearBattleAnimationVars(void)
 {
     s32 i;
 
-    gAnimFramesToWait = 0;
+    sAnimFramesToWait = 0;
     gAnimScriptActive = FALSE;
     gAnimVisualTaskCount = 0;
     gAnimSoundTaskCount = 0;
@@ -1852,7 +1852,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     sMonAnimTaskIdArray[1] = (s8)-1;
     sBattleAnimScriptPtr = animsTable[tableId];
     gAnimScriptActive = TRUE;
-    gAnimFramesToWait = 0;
+    sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
@@ -1925,14 +1925,14 @@ static void ClearSpriteIndex(u16 index)
 
 static void WaitAnimFrameCount(void)
 {
-    if (gAnimFramesToWait <= 0)
+    if (sAnimFramesToWait <= 0)
     {
         gAnimScriptCallback = RunAnimScriptCommand;
-        gAnimFramesToWait = 0;
+        sAnimFramesToWait = 0;
     }
     else
     {
-        gAnimFramesToWait--;
+        sAnimFramesToWait--;
     }
 }
 
@@ -1941,7 +1941,7 @@ static void RunAnimScriptCommand(void)
     do
     {
         sScriptCmdTable[sBattleAnimScriptPtr[0]]();
-    } while (gAnimFramesToWait == 0 && gAnimScriptActive);
+    } while (sAnimFramesToWait == 0 && gAnimScriptActive);
 }
 
 static void ScriptCmd_loadspritegfx(void)
@@ -1954,7 +1954,7 @@ static void ScriptCmd_loadspritegfx(void)
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
     sBattleAnimScriptPtr += 2;
     AddSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
-    gAnimFramesToWait = 1;
+    sAnimFramesToWait = 1;
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
@@ -2057,9 +2057,9 @@ static void ScriptCmd_createvisualtask(void)
 static void ScriptCmd_delay(void)
 {
     sBattleAnimScriptPtr++;
-    gAnimFramesToWait = sBattleAnimScriptPtr[0];
-    if (gAnimFramesToWait == 0)
-        gAnimFramesToWait = -1;
+    sAnimFramesToWait = sBattleAnimScriptPtr[0];
+    if (sAnimFramesToWait == 0)
+        sAnimFramesToWait = -1;
     sBattleAnimScriptPtr++;
     gAnimScriptCallback = WaitAnimFrameCount;
 }
@@ -2069,11 +2069,11 @@ static void ScriptCmd_waitforvisualfinish(void)
     if (gAnimVisualTaskCount == 0)
     {
         sBattleAnimScriptPtr++;
-        gAnimFramesToWait = 0;
+        sAnimFramesToWait = 0;
     }
     else
     {
-        gAnimFramesToWait = 1;
+        sAnimFramesToWait = 1;
     }
 }
 
@@ -2095,7 +2095,7 @@ static void ScriptCmd_end(void)
      || sMonAnimTaskIdArray[0] != 0xFF || sMonAnimTaskIdArray[1] != 0xFF)
     {
         sSoundAnimFramesToWait = 0;
-        gAnimFramesToWait = 1;
+        sAnimFramesToWait = 1;
         return;
     }
 
@@ -2104,7 +2104,7 @@ static void ScriptCmd_end(void)
     {
         if (++sSoundAnimFramesToWait <= 90) // Wait 90 frames, then halt the sound effect.
         {
-            gAnimFramesToWait = 1;
+            sAnimFramesToWait = 1;
             return;
         }
         else
@@ -2760,11 +2760,11 @@ static void ScriptCmd_waitbgfadeout(void)
     if (sAnimBackgroundFadeState == 2)
     {
         sBattleAnimScriptPtr++;
-        gAnimFramesToWait = 0;
+        sAnimFramesToWait = 0;
     }
     else
     {
-        gAnimFramesToWait = 1;
+        sAnimFramesToWait = 1;
     }
 }
 
@@ -2773,11 +2773,11 @@ static void ScriptCmd_waitbgfadein(void)
     if (sAnimBackgroundFadeState == 0)
     {
         sBattleAnimScriptPtr++;
-        gAnimFramesToWait = 0;
+        sAnimFramesToWait = 0;
     }
     else
     {
-        gAnimFramesToWait = 1;
+        sAnimFramesToWait = 1;
     }
 }
 
@@ -3159,7 +3159,7 @@ static void ScriptCmd_waitsound(void)
     if (gAnimSoundTaskCount != 0)
     {
         sSoundAnimFramesToWait = 0;
-        gAnimFramesToWait = 1;
+        sAnimFramesToWait = 1;
     }
     else if (IsSEPlaying())
     {
@@ -3171,14 +3171,14 @@ static void ScriptCmd_waitsound(void)
         }
         else
         {
-            gAnimFramesToWait = 1;
+            sAnimFramesToWait = 1;
         }
     }
     else
     {
         sSoundAnimFramesToWait = 0;
         sBattleAnimScriptPtr++;
-        gAnimFramesToWait = 0;
+        sAnimFramesToWait = 0;
     }
 }
 

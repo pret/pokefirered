@@ -11,5 +11,6 @@ void sub_800F6FC(u8 taskId);
 void LoadBattleMenuWindowGfx(void);
 void LoadBattleTextboxAndBackground(void);
 void sub_800F324(void);
+void DrawMainBattleBackground(void);
 
 #endif // GUARD_BATTLE_BG_H

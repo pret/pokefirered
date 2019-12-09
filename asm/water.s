@@ -3493,8 +3493,8 @@ _080AC6D0:
 	bx r0
 	thumb_func_end sub_80AC698
 
-	thumb_func_start sub_80AC6D8
-sub_80AC6D8: @ 80AC6D8
+	thumb_func_start AnimWaterPulseRing
+AnimWaterPulseRing: @ 80AC6D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
@@ -3526,7 +3526,7 @@ sub_80AC6D8: @ 80AC6D8
 _080AC714: .4byte gBattleAnimTarget
 _080AC718: .4byte gBattleAnimArgs
 _080AC71C: .4byte sub_80AC720
-	thumb_func_end sub_80AC6D8
+	thumb_func_end AnimWaterPulseRing
 
 	thumb_func_start sub_80AC720
 sub_80AC720: @ 80AC720

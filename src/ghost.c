@@ -63,7 +63,7 @@ const struct SpriteTemplate gUnknown_83E75C4 =
 {
     .tileTag = ANIM_TAG_YELLOW_BALL,
     .paletteTag = ANIM_TAG_YELLOW_BALL,
-    .oam = &gOamData_83ACA90,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E75C0,
@@ -74,7 +74,7 @@ const struct SpriteTemplate gUnknown_83E75DC =
 {
     .tileTag = ANIM_TAG_YELLOW_BALL,
     .paletteTag = ANIM_TAG_YELLOW_BALL,
-    .oam = &gOamData_83ACAF0,
+    .oam = &gOamData_AffineOff_ObjBlend_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -96,7 +96,7 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SHADOW_BALL,
     .paletteTag = ANIM_TAG_SHADOW_BALL,
-    .oam = &gOamData_83ACA38,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gUnknown_83E7604,
@@ -122,7 +122,7 @@ const struct SpriteTemplate gUnknown_83E763C =
 {
     .tileTag = ANIM_TAG_LICK,
     .paletteTag = ANIM_TAG_LICK,
-    .oam = &gOamData_83ACA18,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gUnknown_83E7638,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -146,7 +146,7 @@ const struct SpriteTemplate gUnknown_83E7668 =
 {
     .tileTag = ANIM_TAG_WHITE_SHADOW,
     .paletteTag = ANIM_TAG_WHITE_SHADOW,
-    .oam = &gOamData_83ACB20,
+    .oam = &gOamData_AffineOff_ObjBlend_64x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -157,7 +157,7 @@ const struct SpriteTemplate gUnknown_83E7680 =
 {
     .tileTag = ANIM_TAG_NAIL,
     .paletteTag = ANIM_TAG_NAIL,
-    .oam = &gOamData_83ACB18,
+    .oam = &gOamData_AffineOff_ObjBlend_32x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -168,7 +168,7 @@ const struct SpriteTemplate gUnknown_83E7698 =
 {
     .tileTag = ANIM_TAG_GHOSTLY_SPIRIT,
     .paletteTag = ANIM_TAG_GHOSTLY_SPIRIT,
-    .oam = &gOamData_83ACAF8,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -179,7 +179,7 @@ const struct SpriteTemplate gUnknown_83E76B0 =
 {
     .tileTag = ANIM_TAG_DEVIL,
     .paletteTag = ANIM_TAG_DEVIL,
-    .oam = &gOamData_83ACAF8,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -204,7 +204,7 @@ const struct SpriteTemplate gUnknown_83E76E0 =
 {
     .tileTag = ANIM_TAG_PURPLE_FLAME,
     .paletteTag = ANIM_TAG_PURPLE_FLAME,
-    .oam = &gOamData_83ACB38,
+    .oam = &gOamData_AffineOff_ObjBlend_16x32,
     .anims = gUnknown_83E76DC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -1319,13 +1319,13 @@ static void sub_80B6BE4(u8 taskId)
         SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
         SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
         sub_80752C8(&animBgData, 2);
-        AnimLoadCompressedBgGfx(animBgData.bgId, gFile_graphics_battle_anims_backgrounds_scary_face_sheet, animBgData.tilesOffset);
-        LoadCompressedPalette(gFile_graphics_battle_anims_backgrounds_scary_face_palette, 16 * animBgData.paletteId, 0x20);
+        AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnim_ScaryFaceGfx, animBgData.tilesOffset);
+        LoadCompressedPalette(gBattleAnim_ScaryFacePal, 16 * animBgData.paletteId, 0x20);
         break;
     case 3:
         sub_80752C8(&animBgData, 2);
         gMonSpritesGfxPtr->field_17C = AllocZeroed(0x2000);
-        LZDecompressWram(gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap, gMonSpritesGfxPtr->field_17C);
+        LZDecompressWram(gBattleAnimBgTilemap_ScaryFacePlayer, gMonSpritesGfxPtr->field_17C);
         sub_80730C0(animBgData.paletteId, gMonSpritesGfxPtr->field_17C, 256, 0);
         CopyToBgTilemapBufferRect_ChangePalette(animBgData.bgId, gMonSpritesGfxPtr->field_17C, 0, 0, 0x20, 0x20, 0x11);
         CopyBgTilemapBufferToVram(2);

@@ -30,7 +30,7 @@ const struct SpriteTemplate gUnknown_83E69AC =
 {
     .tileTag = ANIM_TAG_TOXIC_BUBBLE,
     .paletteTag = ANIM_TAG_TOXIC_BUBBLE,
-    .oam = &gOamData_83ACA18,
+    .oam = &gOamData_AffineOff_ObjNormal_16x32,
     .anims = gUnknown_83E69A8,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -98,7 +98,7 @@ const struct SpriteTemplate gUnknown_83E6A20 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gOamData_83ACA90,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_83E69DC,
     .images = NULL,
     .affineAnims = gUnknown_83E6A18,
@@ -109,7 +109,7 @@ const struct SpriteTemplate gUnknown_83E6A38 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gOamData_83ACA90,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_83E69DC,
     .images = NULL,
     .affineAnims = gUnknown_83E6A18,
@@ -120,7 +120,7 @@ const struct SpriteTemplate gUnknown_83E6A50 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gOamData_83ACA30,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gUnknown_83E69E4,
     .images = NULL,
     .affineAnims = gUnknown_83E6A1C,
@@ -143,7 +143,7 @@ const struct SpriteTemplate gUnknown_83E6A84 =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gOamData_83ACA90,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
     .anims = gUnknown_83E69E0,
     .images = NULL,
     .affineAnims = gUnknown_83E6A80,
@@ -166,7 +166,7 @@ const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_POISON_BUBBLE,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
-    .oam = &gOamData_83ACA30,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gUnknown_83E69DC,
     .images = NULL,
     .affineAnims = gUnknown_83E6AB4,
@@ -177,7 +177,7 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
-    .oam = &gOamData_83ACB50,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gUnknown_83E5A78,
     .images = NULL,
     .affineAnims = gUnknown_83E6AB4,

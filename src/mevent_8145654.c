@@ -13,6 +13,7 @@
 #include "string_util.h"
 #include "link_rfu.h"
 #include "mevent.h"
+#include "battle_anim.h"
 
 struct UnkStruct_8467FB8
 {
@@ -58,8 +59,6 @@ void sub_8145A98(void);
 void sub_8145D18(u8 whichWindow);
 void sub_8146060(void);
 void sub_81461D8(void);
-
-extern const struct OamData gOamData_83AC9F8;
 
 const u8 gUnknown_8467068[][3] = {
     {0, 2, 3},
@@ -114,7 +113,7 @@ const struct SpritePalette gUnknown_8467F60[] = {
     {gUnknown_8467ED4, 0x8000}
 };
 const struct SpriteTemplate gUnknown_8467FA0 = {
-    0x8000, 0x8000, &gOamData_83AC9F8, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    0x8000, 0x8000, &gOamData_AffineOff_ObjNormal_32x16, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 const struct UnkStruct_8467FB8 gUnknown_8467FB8[8] = {
     {1, 0, 0, 0, gUnknown_846718C, gUnknown_8467288, gUnknown_846708C},

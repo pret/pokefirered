@@ -47,5 +47,6 @@ bool8 IsSEPlaying(void);
 bool8 IsBGMPlaying(void);
 bool8 IsSpecialSEPlaying(void);
 void sub_8072474(u16 volume);
+void sub_807249C(void);
 
 #endif // GUARD_SOUND_H

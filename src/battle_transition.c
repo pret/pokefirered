@@ -1599,12 +1599,7 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
             }
         }
     }
-    // PROBLEM #3: We need (a2 << 16) & 0x30000 here. 
-    // Is it because the programmer declared a s32 var to
-    // hold the value of a2 and then cast the result to s16? 
-    // Currently I have to write it explicitly. 
-    // (around line 460 in ASM)
-    if (!a3 || !((a2 << 16) & 0x30000))
+    if (a3 == 0 || a2 % 4 == 0)
     {
         for (i = 0; i < 160; ++i)
             gScanlineEffectRegBuffers[1][i * 2 + a3] = (gScanlineEffectRegBuffers[1][i + 320] << 8) | gScanlineEffectRegBuffers[1][i + 480];
@@ -1618,49 +1613,14 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
         case 0:
             if (res > 80)
                 res = 80;
-            // PROBLEM #4: 
+            // PROBLEM #3: 
             // (around line 550 in ASM)
-            // Case 0-3 are very similar, so it's very likely
-            // that they have the same problem. 
-            // The code is definitely functional equivalent,
-            // but the vanilla game used some extra shifts and
-            // used unsigned comparison. Another difference is
-            // that I can't figure out a way to make gUnknown_83FA444[a2]
-            // happen outside the loop body. 
-            // It seems that sTransitionStructPtr->data[2] need
-            // to be used in the first statement so that the
-            // struct pointer sTransitionStructPtr will be loaded
-            // early enough. 
-            //
-            // Logically the generated code is following if + do-while structure.
-            // But it seems that it can only make the situation even worse.  
-            /*
-            i = res;
-            if (i > 0)
-            {
-                // This happens before loop body. 
-                s16 unk = gUnknown_83FA444[a2];
-                
-                do
-                {
-                    sTransitionStructPtr->data[2] = ((i * unk) >> 8) + 120;
-                    if (sTransitionStructPtr->data[2] <= 255)
-                    {
-                        sTransitionStructPtr->bg123HOfs = 400 - i;
-                        sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
-                        if (gScanlineEffectRegBuffers[1][560 - i] < sTransitionStructPtr->data[2])
-                            gScanlineEffectRegBuffers[1][560 - i] = 120;
-                        else if (gScanlineEffectRegBuffers[1][400 - i] < sTransitionStructPtr->data[2])
-                            gScanlineEffectRegBuffers[1][400 - i] = sTransitionStructPtr->data[2];
-                    }
-                }
-                while (--i > 0);
-            }
-            */
+            // Case 0 ... 3 are very similar, so it's very likely that they have the same problem. 
+            // Weird shifts around writing to sTransitionStructPtr->data[2], and the following comparison. 
             for (i = res; i > 0; --i)
             {
                 sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
-                if (sTransitionStructPtr->data[2] <= 255)
+                if (sTransitionStructPtr->data[2] <= 255u) // why is this unsigned? 
                 {
                     sTransitionStructPtr->bg123HOfs = 400 - i;
                     sTransitionStructPtr->data[10] = gScanlineEffectRegBuffers[1][400 - i];
@@ -1674,7 +1634,7 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
         case 1:
             if (res > 80)
                 res = 80; 
-            // same as PROBLEM #4
+            // same as PROBLEM #3
             for (i = res; i > 0; --i)
             {
                 s16 unkVal;
@@ -1692,7 +1652,7 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
         case 2:
             if (res < -79)
                 res = -79;
-            // same as PROBLEM #4
+            // same as PROBLEM #3
             for (i = res; i <= 0; ++i)
             {
                 sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;
@@ -1710,7 +1670,7 @@ static void sub_80D1F64(s16 a1, s16 a2, u8 a3)
         case 3:
             if (res < -79)
                 res = -79; 
-            // same as PROBLEM #4
+            // same as PROBLEM #3
             for (i = res; i <= 0; ++i)
             {
                 sTransitionStructPtr->data[2] = ((i * gUnknown_83FA444[a2]) >> 8) + 120;

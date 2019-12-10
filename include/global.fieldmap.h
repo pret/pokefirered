@@ -62,13 +62,12 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ union MapObjectRange range;
-    ///*0x0B*/ u8 fillerB[1];
-    /*0x0C*/ u16 unkC;
-    /*0x0E*/ u16 unkE;
+    /*0x0A*/ u16 movementRangeX:4;
+             u16 movementRangeY:4;
+    /*0x0C*/ u16 trainerType;
+    /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ const u8 *script;
     /*0x14*/ u16 flagId;
-    /*0x16*/ u8 filler_16[2];
 };  /*size = 0x18*/
 
 struct WarpEvent

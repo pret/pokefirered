@@ -965,4 +965,12 @@ extern const u8 gText_Var1AndYouWantedVar2[];
 extern const u8 gText_HereYouGoThankYou[];
 extern const u8 gText_NoMoreRoomForThis[];
 
+// pokedex_screen
+extern const u8 gUnknown_8415D9C[];
+extern const u8 gUnknown_8415DB8[];
+extern const u8 gUnknown_8415DC4[];
+extern const u8 gUnknown_8415DCA[];
+extern const u8 gUnknown_8415DD1[];
+extern const u8 gUnknown_8415DD7[];
+
 #endif //GUARD_STRINGS_H

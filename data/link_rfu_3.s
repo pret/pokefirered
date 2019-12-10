@@ -7,85 +7,311 @@
 	.align 2
 
 gUnknown_8456C74:: @ 8456C74
-	.incbin "baserom.gba", 0x456C74, 0x5C
+	.word gUnknown_84571AC
+	.word gUnknown_8459394
+	.word gUnknown_84593A4
+	.word gUnknown_84593B4
+	.word gUnknown_84593C4
+	.word gUnknown_84593D4
+	.word gUnknown_84593E4
+	.word gUnknown_84593F4
+	.word gUnknown_84593DC
+	.word gUnknown_8459400
+	.word gUnknown_8459410
+	.word gUnknown_845941C
+	.word gUnknown_845942C
+	.word gUnknown_8459434
+	.word gUnknown_8459440
+	.word gUnknown_84571AC
+	.word gUnknown_84571AC
+	.word gUnknown_84571AC
+	.word gUnknown_84571AC
+	.word gUnknown_84571AC
+	.word gUnknown_84571AC
+	.word gUnknown_84593E4
+	.word gUnknown_84593F4
 
 gUnknown_8456CD0:: @ 8456CD0
-	.incbin "baserom.gba", 0x456CD0, 0x8
+	.byte 0x00, 0x00, 0x00, 0x1E, 0x02, 0x0F @ window template
+	.2byte 0x0008
 
+	@ pal table?
 gUnknown_8456CD8:: @ 8456CD8
-	.incbin "baserom.gba", 0x456CD8, 0x24
+	.2byte 0x0201, 0x0000
+	.2byte 0x0202, 0x0000
+	.2byte 0x0403, 0x0000
+	.2byte 0x0204, 0x0000
+	.2byte 0x2509, 0x0000
+	.2byte 0x250A, 0x0000
+	.2byte 0x350B, 0x0000
+	.2byte 0x350D, 0x0000
+	.2byte 0x350E, 0x0000
 
 gUnknown_8456CFC:: @ 8456CFC
-	.incbin "baserom.gba", 0x456CFC, 0x8
+	.byte 0x00, 0x01, 0x03, 0x0D, 0x0A, 0x0F @ window template
+	.2byte 0x0044
 
 gUnknown_8456D04:: @ 8456D04
-	.incbin "baserom.gba", 0x456D04, 0x30
+	.byte 0x00, 0x10, 0x03, 0x07, 0x04, 0x0F @ window template
+	.2byte 0x00C6
+	
+gUnknown_8456D0C:: @ 8456D0C
+	.word gUnknown_84571AC, 0
+	.word gUnknown_84571AC, 1
+	.word gUnknown_84571AC, 2
+	.word gUnknown_84571AC, 3
+	.word gUnknown_84571AC, 4
 
 gUnknown_8456D34:: @ 8456D34
-	.incbin "baserom.gba", 0x456D34, 0x18
+	.word gUnknown_8456D0C 
+	.word NULL
+	.word sub_81164C8
+	.2byte 0x0005
+	.2byte 0x0005
+	.byte 0x00, 0x00, 0x01, 0x00, 0x20, 0x31, 0x10, 0x42
 
 gUnknown_8456D4C:: @ 8456D4C
-	.incbin "baserom.gba", 0x456D4C, 0x8
+	.byte 0x00, 0x01, 0x03, 0x11, 0x0A, 0x0F @ window template
+	.2byte 0x0044
 
 gUnknown_8456D54:: @ 8456D54
-	.incbin "baserom.gba", 0x456D54, 0x88
+	.byte 0x00, 0x14, 0x03, 0x07, 0x04, 0x0F @ window template
+	.2byte 0x00EE
+
+gUnknown_8456D5C:: @ 8456D5C
+	.word gUnknown_84571AC, 0 
+	.word gUnknown_84571AC, 1 
+	.word gUnknown_84571AC, 2 
+	.word gUnknown_84571AC, 3 
+	.word gUnknown_84571AC, 4 
+	.word gUnknown_84571AC, 5 
+	.word gUnknown_84571AC, 6 
+	.word gUnknown_84571AC, 7 
+	.word gUnknown_84571AC, 8 
+	.word gUnknown_84571AC, 9 
+	.word gUnknown_84571AC, 10
+	.word gUnknown_84571AC, 11
+	.word gUnknown_84571AC, 12
+	.word gUnknown_84571AC, 13
+	.word gUnknown_84571AC, 14
+	.word gUnknown_84571AC, 15
 
 gUnknown_8456DDC:: @ 8456DDC
-	.incbin "baserom.gba", 0x456DDC, 0x18
+	.word gUnknown_8456D5C
+	.word ListMenuDefaultCursorMoveFunc
+	.word sub_8116F94
+	.2byte 0x0010
+	.2byte 0x0005
+	.byte 0x00, 0x00, 0x08, 0x00, 0x20, 0x31, 0x50, 0x02
 
 gUnknown_8456DF4:: @ 8456DF4
-	.incbin "baserom.gba", 0x456DF4, 0x28
+	.byte 0x00, 0x14, 0x06, 0x08, 0x07, 0x0F @ window template?
+	.2byte 0x0001
+
+gUnknown_8456DFC:: @ 8456DFC
+	.word gUnknown_8459354, 0x00000208
+	.word gUnknown_8459344, 0x00000241
+	.word gUnknown_845934C, 0x00000245
+	.word gUnknown_8459360, 0x00000040
 
 gUnknown_8456E1C:: @ 8456E1C
-	.incbin "baserom.gba", 0x456E1C, 0x18
+	.word gUnknown_8456DFC
+	.word ListMenuDefaultCursorMoveFunc
+	.word NULL
+	.2byte 0x0004
+	.2byte 0x0004
+	.byte 0x00, 0x00, 0x08, 0x00, 0x20, 0x31, 0x01, 0x02
 
 gUnknown_8456E34:: @ 8456E34
-	.incbin "baserom.gba", 0x456E34, 0x20
+	.byte 0x00, 0x12, 0x08, 0x0B, 0x05, 0x0F @ window template
+	.2byte 0x0001
+
+gUnknown_8456E3C:: @ 8456E3C
+	.word gText_Register, 1
+	.word gUnknown_8459370, 2
+	.word gUnknown_8459360, 3
 
 gUnknown_8456E54:: @ 8456E54
-	.incbin "baserom.gba", 0x456E54, 0x18
+	.word gUnknown_8456E3C
+	.word ListMenuDefaultCursorMoveFunc
+	.word NULL
+	.2byte 0x0003
+	.2byte 0x0003
+	.byte 0x00, 0x00, 0x08, 0x00, 0x20, 0x31, 0x01, 0x02
 
 gUnknown_8456E6C:: @ 8456E6C
-	.incbin "baserom.gba", 0x456E6C, 0x98
+	.byte 0x00, 0x14, 0x02, 0x09, 0x0B, 0x0F @ window template
+	.2byte 0x0001
+
+gUnknown_8456E74:: @ 8456E74
+	.word gTypeNames + 0x00, 0
+	.word gTypeNames + 0x46, 10
+	.word gTypeNames + 0x4D, 11
+	.word gTypeNames + 0x5B, 13
+	.word gTypeNames + 0x54, 12
+	.word gTypeNames + 0x69, 15
+	.word gTypeNames + 0x1C, 4
+	.word gTypeNames + 0x23, 5
+	.word gTypeNames + 0x0E, 2
+	.word gTypeNames + 0x62, 14
+	.word gTypeNames + 0x07, 1
+	.word gTypeNames + 0x15, 3
+	.word gTypeNames + 0x2A, 6
+	.word gTypeNames + 0x31, 7
+	.word gTypeNames + 0x70, 16
+	.word gTypeNames + 0x38, 8
+	.word gTypeNames + 0x77, 17
+	.word gUnknown_8459360, 18
 
 gUnknown_8456F04:: @ 8456F04
-	.incbin "baserom.gba", 0x456F04, 0x18
+	.word gUnknown_8456E74
+	.word ListMenuDefaultCursorMoveFunc
+	.word NULL
+	.2byte 0x0012
+	.2byte 0x0006
+	.byte 0x00, 0x00, 0x08, 0x00, 0x22, 0x31, 0x01, 0x02
 
 gUnknown_8456F1C:: @ 8456F1C
-	.incbin "baserom.gba", 0x456F1C, 0x8
+	.byte 0x00, 0x01, 0x01, 0x1C, 0x02, 0x0D @ window template
+	.2byte 0x0001
 
 gUnknown_8456F24:: @ 8456F24
-	.incbin "baserom.gba", 0x456F24, 0x58
+	.byte 0x00, 0x01, 0x05, 0x1C, 0x0A, 0x0D @ window template
+	.2byte 0x0039
+
+gUnknown_8456F2C:: @ 8456F2C
+	.word gUnknown_84571AC, -3
+	.word gUnknown_84571AC, 0
+	.word gUnknown_84571AC, 1
+	.word gUnknown_84571AC, 2
+	.word gUnknown_84571AC, 3
+	.word gUnknown_84571AC, 4
+	.word gUnknown_84571AC, 5
+	.word gUnknown_84571AC, 6
+	.word gUnknown_84571AC, 7
+	.word gUnknown_8459368, 8
 
 gUnknown_8456F7C:: @ 8456F7C
-	.incbin "baserom.gba", 0x456F7C, 0xB8
+	.word gUnknown_8456F2C
+	.word ListMenuDefaultCursorMoveFunc
+	.word sub_811ACA4
+	.2byte 0x000A 
+	.2byte 0x0005 
+	.byte 0x00, 0x00, 0x0C, 0x00, 0xE2, 0xDF, 0x09, 0x02
+
+	@ unused window template?
+	.byte 0x00, 0x01, 0x05, 0x1C, 0x0A, 0x0D
+	.2byte 0x0039
+
+gUnknown_8456F9C:: @ 8456F9C
+	.word gUnknown_84571AC, 0
+	.word gUnknown_84571AC, 1
+	.word gUnknown_84571AC, 2
+	.word gUnknown_84571AC, 3
+	.word gUnknown_84571AC, 4
+	.word gUnknown_84571AC, 5
+	.word gUnknown_84571AC, 6
+	.word gUnknown_84571AC, 7
+	.word gUnknown_84571AC, 8
+	.word gUnknown_84571AC, 9
+	.word gUnknown_84571AC, 10
+	.word gUnknown_84571AC, 11
+	.word gUnknown_84571AC, 12
+	.word gUnknown_84571AC, 13
+	.word gUnknown_84571AC, 14
+	.word gUnknown_84571AC, 15
+
+gUnknown_845701C:: @ 845701C
+	.word gUnknown_8456F9C
+	.word ListMenuDefaultCursorMoveFunc
+	.word nullsub_92
+	.2byte 0x0010
+	.2byte 0x0004
+	.byte 0x00, 0x00, 0x08, 0x01, 0x20, 0x31, 0x41, 0x02
 
 gUnknown_8457034:: @ 8457034
-	.incbin "baserom.gba", 0x457034, 0x60
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	
+	@ starts at gUnknown_082F0474 in pokeemerald, union link groups
+gUnknown_845704C:: @ 845704C
+	.byte 0x01, 0xFF, 0x00, 0x00
+gUnknown_8457050:: @ 8457050
+	.byte 0x02, 0xFF, 0x00, 0x00
+gUnknown_8457054:: @ 8457054
+	.byte 0x03, 0xFF, 0x00, 0x00
+gUnknown_8457058:: @ 8457058	
+	.byte 0x04, 0xFF, 0x00, 0x00
+gUnknown_845705C:: @ 845705C
+	.byte 0x09, 0xFF, 0x00, 0x00
+gUnknown_8457060:: @ 8457060
+	.byte 0x0A, 0xFF, 0x00, 0x00
+gUnknown_8457064:: @ 8457064
+	.byte 0x0B, 0xFF, 0x00, 0x00
+gUnknown_8457068:: @ 8457068
+	.byte 0x15, 0xFF, 0x00, 0x00
+gUnknown_845706C:: @ 845706C
+	.byte 0x16, 0xFF, 0x00, 0x00
+gUnknown_8457070:: @ 8457070
+	.byte 0x40, 0x41, 0x44, 0x45, 0x48, 0x51, 0x52, 0x53, 0x54, 0xFF, 0x00, 0x00
+gUnknown_845707C:: @ 845707C
+	.byte 0x0C, 0xFF, 0x00, 0x00
+gUnknown_8457080:: @ 8457080
+	.byte 0x01, 0x02, 0x03, 0x04, 0x09, 0x0A, 0x0B, 0x15, 0x16, 0x0D, 0xFF, 0x00
+gUnknown_845708C:: @ 845708C
+	.byte 0x01, 0x02, 0x03, 0x04, 0x0A, 0xFF, 0x00, 0x00
 
 gUnknown_8457094:: @ 8457094
-	.incbin "baserom.gba", 0x457094, 0x34
+	.word gUnknown_845704C
+	.word gUnknown_8457050
+	.word gUnknown_8457054
+	.word gUnknown_8457058
+	.word gUnknown_845705C
+	.word gUnknown_8457060
+	.word gUnknown_8457064
+	.word gUnknown_8457068
+	.word gUnknown_845706C
+	.word gUnknown_8457070
+	.word gUnknown_845707C
+	.word gUnknown_8457080
+	.word gUnknown_845708C
 
 gUnknown_84570C8:: @ 84570C8
-	.incbin "baserom.gba", 0x4570C8, 0x10
+	.byte 0x01, 0x02, 0x03, 0x04, 0x09, 0x0A, 0x0B, 0x15, 0x16, 0xF7, 0x00, 0xAF, 0xF7, 0x01, 0xFF, 0x00
 
 gUnknown_84570D8:: @ 84570D8
-	.incbin "baserom.gba", 0x4570D8, 0x14
+	.byte 0x29, 0x36, 0x27, 0x12, 0x13, 0x14, 0x19, 0x1A, 0x00, 0x00, 0x2A, 0x3A, 0x28, 0x16, 0x17, 0x18, 0x1C, 0x1D, 0x00, 0x00
 
 gUnknown_84570EC:: @ 84570EC
-	.incbin "baserom.gba", 0x4570EC, 0x20
+	.2byte 0x0004
+	.2byte 0x0006
+	.2byte 0x000D
+	.2byte 0x0008
+	.2byte 0x000A
+	.2byte 0x0006
+	.2byte 0x0001
+	.2byte 0x0008
+	.2byte 0x000D
+	.2byte 0x0004
+	.2byte 0x0007
+	.2byte 0x0004
+	.2byte 0x0001
+	.2byte 0x0004
+	.2byte 0x0007
+	.2byte 0x0008
 
 gUnknown_845710C:: @ 845710C
-	.incbin "baserom.gba", 0x45710C, 0xA
+	.byte 0x00, 0x00, 0x01, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x01
 
 gUnknown_8457116:: @ 8457116
-	.incbin "baserom.gba", 0x457116, 0x5
+	.byte 0x00, 0x02, 0x01, 0x04, 0x03
 
 gUnknown_845711B:: @ 845711B
-	.incbin "baserom.gba", 0x45711B, 0x5
+	.byte 0x01, 0x03, 0x01, 0x04, 0x02
 
 gUnknown_8457120:: @ 8457120
-	.incbin "baserom.gba", 0x457120, 0x18
+	.byte 0x09, 0x08, 0x07, 0x02, 0x06, 0x05, 0x04, 0x03, 0x63, 0x00, 0x64, 0x00, 0x65, 0x00, 0x66, 0x00, 0x67, 0x00, 0x68, 0x00, 0x69, 0x00, 0x6A, 0x00
 
 	.align 2
 gUnknown_8457138:: @ 8457138
@@ -100,113 +326,430 @@ gUnknown_8457178:: @ 8457178
 	.asciz "UnionObjWork != NULL"
 
 gUnknown_845718D:: @ 845718D
-	.incbin "baserom.gba", 0x45718D, 0x2
+	.byte 0xA4, 0xFE
 
 gUnknown_845718F:: @ 845718F
-	.incbin "baserom.gba", 0x45718F, 0x5
+	.byte 0xA5, 0xFE, 0x00, 0x00, 0x00
 
 gUnknown_8457194:: @ 8457194
-	.incbin "baserom.gba", 0x457194, 0x4
+	.2byte 0x01FC, 0x0000 @ BgTemplate
 
 gUnknown_8457198:: @ 8457198
-	.incbin "baserom.gba", 0x457198, 0x10
+	.byte 0x00, 0x02, 0x0F, 0x1A, 0x04, 0x0E @ window template
+	.2byte 0x0014
+
+	@ ???
+	.byte -1, 0, 0, 0
+	.byte 0, 0, 0, 0
 
 gUnknown_84571A8:: @ 84571A8
-	.incbin "baserom.gba", 0x4571A8, 0x8
+	.byte 0x01, 0x02, 0x03, 0x00
 
+gUnknown_84571AC:: @ 84571AC
+	.string "$"
+
+	.align 2
 gUnknown_84571B0:: @ 84571B0
-	.incbin "baserom.gba", 0x4571B0, 0x4
+	.string ":$"
 
+	.align 2
 gUnknown_84571B4:: @ 84571B4
-	.incbin "baserom.gba", 0x4571B4, 0x4
+	.string "{EXTRA 7}$"
 
+	.align 2
 gUnknown_84571B8:: @ 84571B8
-	.incbin "baserom.gba", 0x4571B8, 0x28
+	.string "Please start over from the beginning.$"
 
+	.align 2
 gUnknown_84571E0:: @ 84571E0
-	.incbin "baserom.gba", 0x4571E0, 0x54
+	.string "The WIRELESS COMMUNICATION\n"
+	.string "SYSTEM search has been canceled.$"
 
+	.align 2
+	.string "ともだちからの れんらくを\n" @ something about waiting for a friend to connect?
+	.string "まっています$"
+
+	.align 2
 gUnknown_8457234:: @ 8457234
-	.incbin "baserom.gba", 0x457234, 0x30
+	.string "{STR_VAR_1}! Awaiting\n"
+	.string "communication from another player.$"
 
+	.align 2
 gUnknown_8457264:: @ 8457264
-	.incbin "baserom.gba", 0x457264, 0x1C8
+	.string "{STR_VAR_1}! Awaiting link!\n"
+	.string "Press START when everyone's ready.$"
+
+	.align 2
+gJPText_SingleBattle::
+	.string "シングルバトルを かいさいする$"
+
+	.align 2
+gJPText_DoubleBattle::
+	.string "ダブルバトルを かいさいする$"
+
+	.align 2
+gJPText_MultiBattle::
+	.string "マルチバトルを かいさいする$"
+
+	.align 2
+gJPText_TradePokemon::
+	.string "ポケモンこうかんを かいさいする$"
+
+	.align 2
+gJPText_Chat::
+	.string "チャットを かいさいする$"
+
+	.align 2
+gJPText_DistWonderCard::
+	.string "ふしぎなカードをくばる$"
+
+	.align 2
+gJPText_DistWonderNews::
+	.string "ふしぎなニュースをくばる$"
+
+	.align 2
+unref_text_union_room_1::
+	.string "ふしぎなできごとを かいさいする$"
+
+	.align 2
+gJPText_HoldPokemonJump::
+	.string "なわとびを かいさいする$"
+
+	.align 2
+gJPText_HoldBerryCrush::
+	.string "きのみマッシャーを かいさいする$"
+
+	.align 2
+gJPText_HoldBerryPicking::
+	.string "きのみどりを かいさいする$"
+
+	.align 2
+gJPText_HoldSpinTrade::
+	.string "ぐるぐるこうかんを かいさいする$"
+
+	.align 2
+gJPText_HoldSpinShop::
+	.string "ぐるぐるショップを かいさいする$"
+
+	.align 2
+unref_text_ptrs_union_room_0::
+	.word gJPText_SingleBattle
+	.word gJPText_DoubleBattle
+	.word gJPText_MultiBattle
+	.word gJPText_TradePokemon
+	.word gJPText_Chat
+	.word gJPText_DistWonderCard
+	.word gJPText_DistWonderNews
+	.word gJPText_DistWonderCard
+	.word gJPText_HoldPokemonJump
+	.word gJPText_HoldBerryCrush
+	.word gJPText_HoldBerryPicking
+	.word gJPText_HoldBerryPicking
+	.word gJPText_HoldSpinTrade
+	.word gJPText_HoldSpinShop
+
+gText_1PlayerNeeded::
+	.string "1 player\n"
+	.string "needed.$"
+gText_2PlayersNeeded::
+	.string "2 players\n"
+	.string "needed.$"
+gText_3PlayersNeeded::
+	.string "3 players\n"
+	.string "needed.$"
+gText_4PlayersNeeded:: @ uhhhh this one is JP but not the others??? but its english in emerald???
+	.string "あと4にん\n"
+	.string "ひつよう$"
+gText_2PlayerMode::
+	.string "2-PLAYER\n"
+	.string "MODE$"
+gText_3PlayerMode::
+	.string "3-PLAYER\n"
+	.string "MODE$"
+gText_4PlayerMode::
+	.string "4-PLAYER\n"
+	.string "MODE$"
+gText_5PlayerMode::
+	.string "5-PLAYER\n"
+	.string "MODE$"
 
 gUnknown_845742C:: @ 845742C
-	.incbin "baserom.gba", 0x45742C, 0x50
+	.word gText_1PlayerNeeded
+	.word gText_2PlayerMode
+	.word NULL
+	.word NULL
+	.word NULL
 
+	.word gText_3PlayersNeeded
+	.word gText_2PlayersNeeded
+	.word gText_1PlayerNeeded
+	.word gText_4PlayerMode
+	.word NULL
+
+	.word gText_1PlayerNeeded
+	.word gText_2PlayerMode
+	.word gText_3PlayerMode
+	.word gText_4PlayerMode
+	.word gText_5PlayerMode
+
+	.word gText_2PlayersNeeded
+	.word gText_1PlayerNeeded
+	.word gText_3PlayerMode
+	.word gText_4PlayerMode
+	.word gText_5PlayerMode
+
+	@ Huh? No 4 ptrs here from pokeemerald?
+
+	.align 2
 gUnknown_845747C:: @ 845747C
-	.incbin "baserom.gba", 0x45747C, 0x24
+	.string "{B_BUTTON}CANCEL$"
 
+	.align 2
+unref_text_union_room_2::
+	.string "ため\nさんかしゃ ぼしゅうちゅう です！$"
+
+	.align 2
 gUnknown_84574A0:: @ 84574A0
-	.incbin "baserom.gba", 0x4574A0, 0x24
+	.string "{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?$"
 
+	.align 2
 gUnknown_84574C4:: @ 84574C4
-	.incbin "baserom.gba", 0x4574C4, 0x28
+	.string "{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?$"
 
+	.align 2
 gUnknown_84574EC:: @ 84574EC
-	.incbin "baserom.gba", 0x4574EC, 0x28
+	.string "{STR_VAR_2} contacted you.\nAdd to the members?$"
 
+	.align 2
 gUnknown_8457514:: @ 8457514
-	.incbin "baserom.gba", 0x457514, 0x1C
+	.string "{STR_VAR_1}!\nAre these members OK?$"
 
+	.align 2
 gUnknown_8457530:: @ 8457530
-	.incbin "baserom.gba", 0x457530, 0x24
+	.string "Cancel {STR_VAR_1} MODE\nwith these members?$"
 
+	.align 2
 gUnknown_8457554:: @ 8457554
-	.incbin "baserom.gba", 0x457554, 0xB4
+	.string "An “OK” was sent\nto {STR_VAR_1}.$"
 
+	.align 2
+gUnknown_845756C:: @ 845756C	
+	.string "The other TRAINER doesn't appear\nto be available now…\p$"
+
+	.align 2
+gUnknown_84575A4:: @ 84575A4
+	.string "You can't transmit with a TRAINER\nwho is too far away.\p$"
+
+	.align 2
+gUnknown_84575DC:: @ 84575DC
+	.string "The other TRAINER(S) is/are not\nready yet.\p$"
+
+	.align 2
 gUnknown_8457608:: @ 8457608
-	.incbin "baserom.gba", 0x457608, 0x8
+	.word gUnknown_84575A4
+	.word gUnknown_84575DC
 
+	.align 2
 gUnknown_8457610:: @ 8457610
-	.incbin "baserom.gba", 0x457610, 0x6C
+	.string "The {STR_VAR_1} MODE with\nthese members will be canceled.{PAUSE 90}$"
 
+	.align 2
+gUnknown_8457644:: @ 8457644
+	.string "There is a member who can no\nlonger remain available.\p$"
+
+	.align 2
 gUnknown_845767C:: @ 845767C
-	.incbin "baserom.gba", 0x45767C, 0x30
+	.word gUnknown_845756C
+	.word gUnknown_8457644
 
+	.align 2
+gUnknown_8457684:: @ 8457684
+	.string "The other TRAINER appears\nunavailable…\p$"
+
+	.align 2
 gUnknown_84576AC:: @ 84576AC
-	.incbin "baserom.gba", 0x4576AC, 0x18
+	.string "{STR_VAR_1} sent back an “OK”!$"
 
+	.align 2
 gUnknown_84576C4:: @ 84576C4
-	.incbin "baserom.gba", 0x4576C4, 0x3C
+	.string "{STR_VAR_1} OK'd your registration as\na member.$"
 
+	.align 2
+gUnknown_84576EC:: @ 84576EC
+	.string "{STR_VAR_1} replied, “No…”\p$"
+
+	.align 2
 gUnknown_8457700:: @ 8457700
-	.incbin "baserom.gba", 0x457700, 0x1C
+	.string "{STR_VAR_1}!\nAwaiting other members!$"
 
+	.align 2
 gUnknown_845771C:: @ 845771C
-	.incbin "baserom.gba", 0x45771C, 0x38
+	.string "Quit being a member?$"
 
+	.align 2
+gUnknown_8457734:: @ 8457734	
+	.string "You stopped being a member.\p$"
+
+	.align 2
 gUnknown_8457754:: @ 8457754
-	.incbin "baserom.gba", 0x457754, 0x28
+	.word NULL
+	.word gUnknown_8457644
+	.word gUnknown_8457684
+	.word NULL
+	.word NULL
+	.word NULL
+	.word gUnknown_84576EC
+	.word NULL
+	.word NULL
+	.word gUnknown_8457734
 
+	.align 2
 gUnknown_845777C:: @ 845777C
-	.incbin "baserom.gba", 0x45777C, 0x40
+	.string "The WIRELESS COMMUNICATION\nSYSTEM link has been established.$"
 
+	.align 2
 gUnknown_84577BC:: @ 84577BC
-	.incbin "baserom.gba", 0x4577BC, 0x3C
+	.string "The WIRELESS COMMUNICATION\nSYSTEM link has been dropped…$"
 
+	.align 2
 gUnknown_84577F8:: @ 84577F8
-	.incbin "baserom.gba", 0x4577F8, 0x40
+	.string "The link with your friend has been\ndropped…$"
 
+	.align 2
+gUnknown_8457824:: @ 8457824
+	.string "{STR_VAR_1} replied, “No…”$"
+
+	.align 2
 gUnknown_8457838:: @ 8457838
-	.incbin "baserom.gba", 0x457838, 0x84
+	.word NULL
+	.word gUnknown_84577F8
+	.word gUnknown_84577F8
+	.word NULL
+	.word NULL
+	.word NULL
+	.word gUnknown_8457824
+	.word NULL
+	.word NULL
+	.word NULL
 
+	.align 2
+gUnknown_8457860:: @ 8457860
+	.string "Do you want the {STR_VAR_2}\nMODE?$"
+
+	.align 2
+gUnknown_845787C:: @ 845787C
+	.string "Do you want the {STR_VAR_2}\nMODE?$"
+
+	.align 2
+gUnknown_8457898:: @ 8457898
+	.word gUnknown_8457860
+	.word gUnknown_845787C
+
+	.align 2
+gUnknown_84578A0:: @ 84578A0
+	.string "はなしかけています…\n" @ Communicating... please wait
+	.string "しょうしょう おまちください$"
+
+	.align 2
 gUnknown_84578BC:: @ 84578BC
-	.incbin "baserom.gba", 0x4578BC, 0x178
+	.string "Awaiting {STR_VAR_1}'s response about\nthe trade…$"
 
+	.align 2
+gUnknown_84578E4:: @ 84578E4
+	.string "Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+
+	.align 2
+gUnknown_8457950:: @ 8457950
+	.string "Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+
+	.align 2
+gUnknown_84579BC:: @ 84579BC
+	.string "Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+
+	.align 2
 gUnknown_8457A34:: @ 8457A34
-	.incbin "baserom.gba", 0x457A34, 0xD0
+	.word gUnknown_84578E4
+	.word gUnknown_8457950
+	.word gUnknown_84579BC
 
+	.align 2
+gUnknown_8457A40:: @ 8457A40
+	.string "Hiya! Is there something that you\nwanted to do?$"
+
+	.align 2
+gUnknown_8457A70:: @ 8457A70
+	.string "Hello!\nWould you like to do something?$"
+
+	.align 2
+gUnknown_8457A98:: @ 8457A98
+	.string "{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?$"
+
+	.align 2
+gUnknown_8457AD0:: @ 8457AD0
+	.string "{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?$"
+
+	.align 2
 gUnknown_8457B04:: @ 8457B04
-	.incbin "baserom.gba", 0x457B04, 0xC8
+	.word gUnknown_8457A40
+	.word gUnknown_8457A70
+	.word gUnknown_8457A98
+	.word gUnknown_8457AD0
 
+	.align 2
+gUnknown_8457B14:: @ 8457B14
+	.string "Want to do something?$"
+
+	.align 2
+gUnknown_8457B2C:: @ 8457B2C
+	.string "Would you like to do something?$"
+
+	.align 2
+gUnknown_8457B4C:: @ 8457B4C
+	.string "{STR_VAR_1}: What would you like to\ndo now?$"
+
+	.align 2
+gUnknown_8457B70:: @ 8457B70
+	.string "{STR_VAR_1}‘また なにかする？$" @ Want to do anything else?
+
+	.align 2
+gUnknown_8457B80:: @ 8457B80
+	.word gUnknown_8457B14
+	.word gUnknown_8457B2C
+	.word gUnknown_8457B4C
+	.word gUnknown_8457B4C
+
+	.align 2
+gUnknown_8457B90:: @ 8457B90
+	.string "Somebody has contacted you.{PAUSE 60}$"
+
+	.align 2
+gUnknown_8457BA0:: @ 8457BA0
+	.string "{STR_VAR_1} has contacted you.{PAUSE 60}$"
+
+	.align 2
 gUnknown_8457BCC:: @ 8457BCC
-	.incbin "baserom.gba", 0x457BCC, 0x54
+	.word gUnknown_8457B90
+	.word gUnknown_8457BA0
 
+	.align 2
+gUnknown_8457BD4:: @ 8457BD4
+	.string "Awaiting a response from\nthe other TRAINER…$"
+
+	.align 2
+gUnknown_8457C00:: @ 8457C00
+	.string "Awaiting a response from\n{STR_VAR_1}…$"
+
+	.align 2
 gUnknown_8457C20:: @ 8457C20
-	.incbin "baserom.gba", 0x457C20, 0x28
+	.word gUnknown_8457BD4
+	.word gUnknown_8457C00
 
+	.align 2
+gUnknown_8457C28:: @ 8457C28
+	.string "あいての ていあんを まっています\n"
+	.string "ビーボタンで キャンセル$"
+
+	.align 2
 gUnknown_8457C48:: @ 8457C48
 	.string "The other TRAINER showed\n"
 	.string "you their TRAINER CARD.\p"
@@ -339,7 +882,8 @@ gUnknown_84580F4:: @ 84580F4
 	.4byte gUnknown_84580C0
 
 	.align 2
-	.incbin "baserom.gba", 0x458114, 0x18
+	.string "チャットだね！\n" @ You want to chat, huh? Sure, just wait a little.
+	.string "わかった ちょっと まってて！$"
 
 	.align 2
 gUnknown_845812C::
@@ -665,10 +1209,14 @@ gUnknown_8458B44:: @ 8458B44
 	.string "your POKéMON?$"
 
 	.align 2
-	.incbin "baserom.gba", 0x00458c80, 0x31
+	.string "こうかんけいじばん の とうろくが\n"
+	.string "かんりょう しました\p"
+	.string "ごりよう ありがとう\n"
+	.string "ございました！\p$"
 
 	.align 2
-	.incbin "baserom.gba", 0x00458cb4, 0x20
+	.string "けいじばんに だれも ポケモンを\n"
+	.string "とうろく していません\p\n$"
 
 	.align 2
 gUnknown_8458CD4:: @ 8458CD4
@@ -707,15 +1255,27 @@ gUnknown_8458E10:: @ 8458E10
 	.string "The registration has been canceled.\p$"
 
 	.align 2
-	.incbin "baserom.gba", 0x00458e38, 0x38
+	.string "こうかんを きぼうしているひとを\n"
+	.string "ひょうじします$"
 
+	.align 2
+	.string "こうかん したい トレーナーを\n"
+	.string "えらんで ください$"
+
+	.align 2
 gUnknown_8458E70:: @ 8458E70
 	.string "Would you like to ask {STR_VAR_1} to\n"
 	.string "make a trade?$"
 
 	.align 2
-	.incbin "baserom.gba", 0x00458e9c, 0x34
+	.string "……\n"
+	.string "あいての へんじを まっています$"
 
+	.align 2
+	.string "あなたが こうかんにだす\n"
+	.string "ポケモンが とうろくされていません\p$"
+
+	.align 2
 gUnknown_8458ED0:: @ 8458ED0
 	.string "You don't have a {STR_VAR_2}-type\n"
 	.string "POKéMON that {STR_VAR_1} wants.\p$"
@@ -724,13 +1284,21 @@ gUnknown_8458ED0:: @ 8458ED0
 gUnknown_8458F04:: @ 8458F04
 	.string "You don't have an EGG that\n"
 	.string "{STR_VAR_1} wants.\p$"
+
 	.align 2
+gUnknown_8458F2C:: @ 8458F2C
 	.string "{STR_VAR_1} can't make a trade for\n"
 	.string "your POKéMON right now.\p$"
+
 	.align 2
+gUnknown_8458F60:: @ 8458F60
 	.string "You can't make a trade for\n"
 	.string "{STR_VAR_1}'s POKéMON right now.\p$"
-	.incbin "baserom.gba", 0x00458f94, 0x8
+
+	.align 2
+gUnknown_8458F94:: @ 8458F94
+	.word gUnknown_8458F2C
+	.word gUnknown_8458F60
 
 gUnknown_8458F9C:: @ 8458F9C
 	.string "Your trade offer was rejected.\p$"
@@ -809,46 +1377,179 @@ gUnknown_84591DC:: @ 84591DC
 	.string "COMMUNICATION SYSTEM. Wait...$"
 
 	.align 2
-	.incbin "baserom.gba", 0x00459214, 0x24
+	.string "ダブルバトルでは 2ひき いじょうの\n"
+	.string "ポケモンが ひつようです\p$"
 
+	.align 2
 gUnknown_8459238:: @ 8459238
 	.string "Awaiting {STR_VAR_1}'s response…$"
 
+	.align 2
 gUnknown_8459250:: @ 8459250
 	.string "{STR_VAR_1} has been asked to register\n"
 	.string "you as a member. Please wait.$"
 
+	.align 2
 gUnknown_845928C:: @ 845928C
 	.string "Awaiting a response from the\n"
 	.string "WIRELESS COMMUNICATION SYSTEM.$"
-	.incbin "baserom.gba", 0x004592c8, 0x20
+	
+	.align 2
+	.string "ほかの さんかしゃが そろうまで\n"
+	.string "しょうしょう おまちください$"
+
+	.align 2
+gUnknown_84592E8:: @ 84592E8
 	.string "No CARDS appear to be shared \n"
 	.string "right now.$"
+
 	.align 2
+gUnknown_8459314:: @ 8459314
 	.string "No NEWS appears to be shared\n"
 	.string "right now.$"
 
 gUnknown_845933C:: @ 845933C
-	.incbin "baserom.gba", 0x45933C, 0x3C
+	.word gUnknown_84592E8
+	.word gUnknown_8459314
 
+	.align 2
+gUnknown_8459344:: @ 8459344
+	.string "BATTLE$"
+
+	.align 2
+gUnknown_845934C:: @ 845934C
+	.string "CHAT$"
+
+	.align 2
+gUnknown_8459354:: @ 8459354
+	.string "GREETINGS$"
+
+	.align 2
+gUnknown_8459360:: @ 8459360
+	.string "EXIT$"
+
+	.align 2
+gUnknown_8459368:: @ 8459368
+	.string "EXIT$"
+
+	.align 2
+gUnknown_8459370:: @ 8459370
+	.string "INFO$"
+
+	.align 2
 gUnknown_8459378:: @ 8459378
-	.incbin "baserom.gba", 0x459378, 0x138
+	.string "NAME{CLEAR_TO 0x3C}WANTED{CLEAR_TO 0x6E}OFFER{CLEAR_TO 0xC6}LV.$"
 
+	.align 2
+gUnknown_8459394:: @ 8459394
+	.string "SINGLE BATTLE$"
+
+	.align 2
+gUnknown_84593A4:: @ 84593A4
+	.string "DOUBLE BATTLE$"
+
+	.align 2
+gUnknown_84593B4:: @ 84593B4
+	.string "MULTI BATTLE$"
+
+	.align 2
+gUnknown_84593C4:: @ 84593C4
+	.string "POKéMON TRADES$"
+
+	.align 2
+gUnknown_84593D4:: @ 84593D4
+	.string "CHAT$"
+
+	.align 2
+gUnknown_84593DC:: @ 84593DC
+	.string "CARDS$"
+
+	.align 2
+gUnknown_84593E4:: @ 84593E4
+	.string "WONDER CARDS$"
+
+	.align 2
+gUnknown_84593F4:: @ 84593F4
+	.string "WONDER NEWS$"
+
+	.align 2
+gUnknown_8459400:: @ 8459400
+	.string "POKéMON JUMP$"
+
+	.align 2
+gUnknown_8459410:: @ 8459410
+	.string "BERRY CRUSH$"
+
+	.align 2
+gUnknown_845941C:: @ 845941C
+	.string "BERRY-PICKING$"
+
+	.align 2
+gUnknown_845942C:: @ 845942C
+	.string "SEARCH$"
+
+	.align 2
+gUnknown_8459434:: @ 8459434
+	.string "ぐるぐるこうかん$"
+
+	.align 2
+gUnknown_8459440:: @ 8459440
+	.string "アイテムトレード$"
+
+	.align 2
+gUnknown_845944C:: @ 845944C
+	.string "It's a NORMAL CARD.$"
+
+	.align 2
+gUnknown_8459460:: @ 459460
+	.string "It's a BRONZE CARD!$"
+
+	.align 2
+gUnknown_8459474:: @ 8459474
+	.string "It's a COPPER CARD!$"
+
+	.align 2
+gUnknown_8459488:: @ 8459488
+	.string "It's a SILVER CARD!$"
+
+	.align 2
+gUnknown_845949C:: @ 845949C
+	.string "It's a GOLD CARD!$"
+
+	.align 2
 gUnknown_84594B0:: @ 84594B0
-	.incbin "baserom.gba", 0x4594B0, 0x14
+	.word gUnknown_845944C
+	.word gUnknown_8459460
+	.word gUnknown_8459474
+	.word gUnknown_8459488
+	.word gUnknown_845949C
 
+	.align 2
 gUnknown_84594C4:: @ 84594C4
-	.incbin "baserom.gba", 0x4594C4, 0x40
+	.string "This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p$"
 
+	.align 2
 gUnknown_8459504:: @ 8459504
-	.incbin "baserom.gba", 0x459504, 0x7C
+	.string "BATTLES: {SPECIAL_F7 0x00} WINS  {SPECIAL_F7 0x02} LOSSES\nTRADES:  {SPECIAL_F7 0x03} TIMES\p“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p$"
 
+	.align 2
+gUnknown_8459544:: @ 8459544
+	.string "{SPECIAL_F7 0x01}: Glad to have met you!{PAUSE 60}$"
+
+	.align 2
+gUnknown_8459564:: @ 8459564
+	.string "{SPECIAL_F7 0x01}: Glad to meet you!{PAUSE 60}$"
+
+	.align 2
 gUnknown_8459580:: @ 8459580
-	.incbin "baserom.gba", 0x459580, 0x8
+	.word gUnknown_8459544
+	.word gUnknown_8459564
 
+	.align 2
 gUnknown_8459588:: @ 8459588
-	.incbin "baserom.gba", 0x459588, 0x28
+	.string "Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}$"
 
+	.align 2
 gUnknown_84595B0::
 	.string "Canceled reading the Card.$"
 

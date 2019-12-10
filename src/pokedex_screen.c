@@ -49,7 +49,7 @@ struct PokedexScreenData
     u8 field_40;
     u8 field_41;
     u8 field_42;
-    void * field_44;
+    struct ListMenuItem * field_44;
     u16 field_48;
     u8 filler_4A[0x10];
     u16 field_5A;
@@ -74,8 +74,10 @@ EWRAM_DATA struct PokedexScreenData * gUnknown_203ACF0 = NULL;
 void sub_810287C(u8 taskId);
 void sub_8102C28(void);
 void sub_8102F80(u8 taskId);
-void sub_8103238(u8 taskId);
 void sub_810317C(void);
+void sub_8103238(u8 taskId);
+void sub_810345C(void);
+void sub_8103924(struct ListMenuTemplate * a0, u8 a1);
 u8 sub_81039F0(void);
 u16 sub_8103518(u8 a0);
 void sub_8103988(u8 a0);
@@ -87,6 +89,7 @@ u16 sub_8104BBC(u8 a0, u8 a1);
 void sub_8104C2C(const u8 *a0);
 void sub_81042EC(u8 taskId);
 u8 sub_81068A0(u8 a0);
+bool8 sub_8106A20(u16 a0);
 void sub_8106E78(const u8 *a0, s32 a1);
 
 extern const u32 gUnknown_8440274[];
@@ -101,6 +104,8 @@ extern const struct PokedexScreenData gUnknown_8451EE4;
 extern const struct WindowTemplate gUnknown_8451F54;
 extern const struct WindowTemplate gUnknown_8451F5C;
 extern const struct WindowTemplate gUnknown_8451F64;
+extern const struct WindowTemplate gUnknown_845216C;
+extern const struct ListMenuTemplate gUnknown_8452174;
 extern const struct ListMenuTemplate gUnknown_8452004;
 extern const struct ListMenuTemplate gUnknown_84520BC;
 extern const struct ScrollArrowsTemplate gUnknown_84520D4;
@@ -160,7 +165,7 @@ void sub_810250C(void)
     gUnknown_203ACF0 = Alloc(sizeof(*gUnknown_203ACF0));
     *gUnknown_203ACF0 = gUnknown_8451EE4;
     gUnknown_203ACF0->field_00 = taskId;
-    gUnknown_203ACF0->field_44 = Alloc(0xC10);
+    gUnknown_203ACF0->field_44 = Alloc(386 * sizeof(struct ListMenuItem));
     gUnknown_203ACF0->field_6A = sub_8104BBC(0, 1);
     gUnknown_203ACF0->field_6C = sub_8104BBC(1, 1);
     gUnknown_203ACF0->field_66 = sub_8104BBC(0, 0);
@@ -516,4 +521,109 @@ void sub_8102F80(u8 taskId)
         gUnknown_203ACF0->field_01 = 0;
         break;
     }
+}
+
+void sub_810317C(void)
+{
+    struct ListMenuTemplate template;
+    FillBgTilemapBufferRect(3, 0x00E, 0, 0, 30, 20, 0x00);
+    FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
+    gUnknown_203ACF0->field_40 = AddWindow(&gUnknown_845216C);
+    template = gUnknown_8452174;
+    template.items = gUnknown_203ACF0->field_44;
+    template.windowId = gUnknown_203ACF0->field_40;
+    template.totalItems = gUnknown_203ACF0->field_48;
+    sub_8103924(&template, gUnknown_203ACF0->field_42);
+    FillWindowPixelBuffer(0, PIXEL_FILL(15));
+    sub_8106E78(gUnknown_8415F3D, 1);
+    FillWindowPixelBuffer(1, PIXEL_FILL(15));
+    sub_8104C2C(gText_PickOKExit);
+    CopyWindowToVram(0, 2);
+    CopyWindowToVram(1, 2);
+}
+
+void sub_8103238(u8 taskId)
+{
+    switch (gUnknown_203ACF0->field_01)
+    {
+    case 0:
+        sub_8107D38(0x10, 0);
+        sub_8107D38(0x20, 1);
+        gUnknown_203ACF0->field_48 = sub_8103518(gUnknown_203ACF0->field_42);
+        gUnknown_203ACF0->field_01 = 2;
+        break;
+    case 1:
+        sub_8103988(gUnknown_203ACF0->field_42);
+        HideBg(1);
+        sub_81047B0(&gUnknown_203ACF0->field_40);
+        gTasks[taskId].func = sub_810287C;
+        gUnknown_203ACF0->field_01 = 0;
+        break;
+    case 2:
+        sub_810345C();
+        gUnknown_203ACF0->field_01 = 3;
+        break;
+    case 3:
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(1);
+        gUnknown_203ACF0->field_01 = 4;
+        break;
+    case 4:
+        ShowBg(1);
+        BeginNormalPaletteFade(0xFFFF7FFF, 0, 16, 0, RGB_WHITEALPHA);
+        gUnknown_203ACF0->field_01 = 5;
+        break;
+    case 5:
+        ListMenuGetScrollAndRow(gUnknown_203ACF0->field_17, &gUnknown_203ACF0->field_62, NULL);
+        gUnknown_203ACF0->field_60 = sub_81039F0();
+        gUnknown_203ACF0->field_01 = 6;
+        break;
+    case 6:
+        gUnknown_203ACF0->field_30 = ListMenu_ProcessInput(gUnknown_203ACF0->field_41);
+        ListMenuGetScrollAndRow(gUnknown_203ACF0->field_17, &gUnknown_203ACF0->field_62, NULL);
+        if (JOY_NEW(A_BUTTON))
+        {
+            if (((gUnknown_203ACF0->field_30 >> 16) & 1) && !sub_8106A20(gUnknown_203ACF0->field_30))
+            {
+                RemoveScrollIndicatorArrowPair(gUnknown_203ACF0->field_60);
+                BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+                gUnknown_203ACF0->field_01 = 7;
+            }
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            RemoveScrollIndicatorArrowPair(gUnknown_203ACF0->field_60);
+            BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+            gUnknown_203ACF0->field_01 = 1;
+        }
+        break;
+    case 7:
+        sub_8103988(gUnknown_203ACF0->field_42);
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 32, 20);
+        CopyBgTilemapBufferToVram(1);
+        sub_81047B0(&gUnknown_203ACF0->field_40);
+        gUnknown_203ACF0->field_2F = 1;
+        gTasks[taskId].func = sub_8103AC8;
+        gUnknown_203ACF0->field_01 = 0;
+        break;
+    }
+}
+
+void sub_810345C(void)
+{
+    struct ListMenuTemplate template;
+    FillBgTilemapBufferRect(3, 0x00E, 0, 0, 30, 20, 0x00);
+    FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 0x11);
+    gUnknown_203ACF0->field_40 = AddWindow(&gUnknown_845216C);
+    template = gUnknown_8452174;
+    template.items = gUnknown_203ACF0->field_44;
+    template.windowId = gUnknown_203ACF0->field_40;
+    template.totalItems = gUnknown_203ACF0->field_48;
+    sub_8103924(&template, gUnknown_203ACF0->field_42);
+    FillWindowPixelBuffer(0, PIXEL_FILL(15));
+    sub_8106E78(gUnknown_8415F4A, 1);
+    FillWindowPixelBuffer(1, PIXEL_FILL(15));
+    sub_8104C2C(gText_PickOKExit);
+    CopyWindowToVram(0, 2);
+    CopyWindowToVram(1, 2);
 }

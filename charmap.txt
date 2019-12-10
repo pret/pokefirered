@@ -412,6 +412,9 @@ B_BUFF3 = FD 34
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
 
+@ special 0xF7 character
+SPECIAL_F7  =   F7
+
 @ more text functions
 
 COLOR = FC 01 @ use a color listed below right after

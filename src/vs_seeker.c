@@ -621,7 +621,7 @@ void sub_810C444(void)
 
     for (i = 0; i < gMapHeader.events->mapObjectCount; i++)
     {
-        if ((templates[i].unkC == 1 || templates[i].unkC == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
+        if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
         {
             r6 = sub_810CF54();
             TryGetFieldObjectIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
@@ -864,7 +864,7 @@ static void GatherNearbyTrainerInfo(void)
 
     for (mapObjectIdx = 0; mapObjectIdx < gMapHeader.events->mapObjectCount; mapObjectIdx++)
     {
-        if (templates[mapObjectIdx].unkC == 1 || templates[mapObjectIdx].unkC == 3)
+        if (templates[mapObjectIdx].trainerType == 1 || templates[mapObjectIdx].trainerType == 3)
         {
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[mapObjectIdx].script;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[mapObjectIdx].script);
@@ -1232,7 +1232,7 @@ void sub_810CB90(void)
 
         for (r8 = 0; r8 < gMapHeader.events->mapObjectCount; r8++)
         {
-            if ((r4[r8].unkC == 1 || r4[r8].unkC == 3) && r9 == sub_810CE10(sVsSeekerData, GetTrainerFlagFromScript(r4[r8].script)))
+            if ((r4[r8].trainerType == 1 || r4[r8].trainerType == 3) && r9 == sub_810CE10(sVsSeekerData, GetTrainerFlagFromScript(r4[r8].script)))
             {
                 struct MapObject *r4_2;
 

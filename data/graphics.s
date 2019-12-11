@@ -16218,16 +16218,16 @@ gUnknown_8E990F8:: @ 8E990F8
 gUnknown_8E99118:: @ 8E99118
 	.incbin "graphics/tm_case/unk_8E99118.4bpp"
 
-gUnknown_8E99198::
+gFireRedTrainerCard_Pal:: @ 8E99198
 	.incbin "graphics/trainer_card/0star.gbapal"
 
-gUnknown_8E991F8:: @ 8E991F8
+gFireRedTrainerCard_Gfx:: @ 8E991F8
 	.incbin "graphics/trainer_card/card.4bpp.lz"
 
-gUnknown_8E9986C:: @ 8E9986C
+gEmeraldTrainerCard_Pal:: @ 8E9986C
 	.incbin "graphics/trainer_card/0star_em.gbapal"
 
-gUnknown_8E998CC:: @ 8E998CC
+gEmeraldTrainerCard_Gfx:: @ 8E998CC
 	.incbin "graphics/trainer_card/card_em.4bpp.lz"
 
 gUnknown_8E99D8C:: @ 8E99D8C

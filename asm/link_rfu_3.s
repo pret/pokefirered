@@ -3252,7 +3252,7 @@ _08117384:
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _081173BC @ =CB2_ReturnToField
-	bl InitLinkPartnerTrainerCard
+	bl ShowTrainerCardInLink
 _081173A2:
 	bl RunTasks
 	bl RunTextPrinters
@@ -3489,7 +3489,7 @@ sub_8117594: @ 8117594
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_80898E8
+	bl TrainerCard_GenerateCardForLinkPlayer
 	cmp r5, 0
 	beq _081175AE
 	bl sub_81440E8

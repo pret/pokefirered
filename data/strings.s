@@ -2846,61 +2846,61 @@ gUnknown_8419CB9:: @ 8419CB9
 	.string "HM moves can't be\n"
 	.string "forgotten now.$"
 
-gUnknown_8419CDA:: @ 8419CDA
+gText_TrainerCardName:: @ 8419CDA
 	.string "NAME: $"
 
-gUnknown_8419CE1:: @ 8419CE1
+gText_TrainerCardIDNo:: @ 8419CE1
 	.string "IDNo.$"
 
-gUnknown_8419CE7:: @ 8419CE7
+gText_TrainerCardMoney:: @ 8419CE7
 	.string "MONEY$"
 
-gUnknown_8419CED:: @ 8419CED
+gText_TrainerCardYen:: @ 8419CED
 	.string "¥$"
 
-gUnknown_8419CEF:: @ 8419CEF
+gText_TrainerCardPokedex:: @ 8419CEF
 	.string "POKéDEX$"
 
-gUnknown_8419CF7:: @ 8419CF7
+gText_TrainerCardNull:: @ 8419CF7
 	.string "$"
 
-gUnknown_8419CF8:: @ 8419CF8
+gText_Colon2:: @ 8419CF8
 	.string ":$"
 
 gUnknown_8419CFA:: @ 0x8419CFA
 	.string "てん$"
 
-gUnknown_8419CFD:: @ 8419CFD
+gText_TrainerCardTime:: @ 8419CFD
 	.string "TIME$"
 
 gUnknown_8419D02:: @ 0x8419D02
 	.string "ゲ-ムポイント$"
 
-gUnknown_8419D0A:: @ 8419D0A
+gText_Var1sTrainerCard:: @ 8419D0A
 	.string "'s TRAINER CARD$"
 
-gUnknown_8419D1A:: @ 8419D1A
+gText_HallOfFameDebut:: @ 8419D1A
 	.string "HALL OF FAME DEBUT  $"
 
-gUnknown_8419D2F:: @ 0x8419D2F
+gText_LinkBattles:: @ 0x8419D2F
 	.string "LINK BATTLES$"
 
-gUnknown_8419D3C:: @ 0x8419D3C
+gText_LinkCableBattles:: @ 0x8419D3C
 	.string "LINK CABLE BATTLES$"
 
-gUnknown_8419D4F:: @ 8419D4F
+gText_WinLossRatio:: @ 8419D4F
 	.string "W:{CLEAR_TO 0x30}L:$"
 
-gUnknown_8419D57:: @ 8419D57
+gText_PokemonTrades:: @ 8419D57
 	.string "POKéMON TRADES$"
 
-gUnknown_8419D66:: @ 8419D66
+gText_UnionRoomTradesBattles:: @ 8419D66
 	.string "UNION TRADES & BATTLES$"
 
-gUnknown_8419D7D:: @ 8419D7D
+gText_BerryCrushes:: @ 8419D7D
 	.string "BERRY CRUSH$"
 
-gUnknown_8419D89:: @ 8419D89
+gText_WaitingTrainerFinishReading:: @ 8419D89
 	.string "Waiting for the other TRAINER to\n"
 	.string "finish reading your TRAINER CARD.$"
 

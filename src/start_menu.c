@@ -504,7 +504,7 @@ static bool8 StartMenuPlayerCallback(void)
         PlayRainStoppingSoundEffect();
         DestroySafariZoneStatsWindow();
         CleanupOverworldWindowsAndTilemaps();
-        InitTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;
@@ -554,7 +554,7 @@ static bool8 StartMenuLinkPlayerCallback(void)
     {
         PlayRainStoppingSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        InitLinkPartnerTrainerCard(gUnknown_300502C, CB2_ReturnToFieldWithOpenMenu);
+        ShowTrainerCardInLink(gUnknown_300502C, CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;

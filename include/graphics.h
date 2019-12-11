@@ -4258,4 +4258,10 @@ extern const u32 gBuyMenuFrame_Pal[];
 // battle_message
 extern const u16 gUnknown_8D2FBB4[];
 
+// trainer card
+extern const u16 gFireRedTrainerCard_Pal[];
+extern const u32 gFireRedTrainerCard_Gfx[];
+extern const u16 gEmeraldTrainerCard_Pal[];
+extern const u32 gEmeraldTrainerCard_Gfx[];
+
 #endif //GUARD_GRAPHICS_H

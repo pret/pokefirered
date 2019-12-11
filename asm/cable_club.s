@@ -781,7 +781,7 @@ _08080D54:
 	ldrb r0, [r4]
 	bl sub_800A900
 	ldr r0, _08080D84 @ =gBlockSendBuffer
-	bl sub_80898E8
+	bl TrainerCard_GenerateCardForLinkPlayer
 	ldr r0, _08080D88 @ =sub_8080E6C
 _08080D72:
 	str r0, [r5]
@@ -884,7 +884,7 @@ _08080E20:
 	ldrb r0, [r4]
 	bl sub_800A900
 	ldr r0, _08080E60 @ =gBlockSendBuffer
-	bl sub_80898E8
+	bl TrainerCard_GenerateCardForLinkPlayer
 	ldr r1, _08080E64 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -2388,7 +2388,7 @@ sp02A_crash_sound: @ 8081A1C
 	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
 	ldr r1, _08081A30 @ =CB2_ReturnToFieldContinueScriptPlayMapMusic
-	bl InitLinkPartnerTrainerCard
+	bl ShowTrainerCardInLink
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2412,7 +2412,7 @@ sub_8081A34: @ 8081A34
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_808B1BC
+	bl GetTrainerCardStars
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0

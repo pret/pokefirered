@@ -18,7 +18,11 @@
 #include "overworld.h"
 #include "strings.h"
 #include "menu.h"
+#include "pokedex_screen.h"
+#include "data.h"
+#include "pokedex.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 
 struct PokedexScreenData
 {
@@ -42,10 +46,12 @@ struct PokedexScreenData
     u8 field_2E;
     u8 field_2F;
     u32 field_30;
-    u8 filler_34[0x4];
+    u16 field_34;
+    u16 field_36;
     u16 field_38;
     u16 field_3A;
-    u8 filler_3C[0x4];
+    u16 field_3C;
+    u16 field_3E;
     u8 field_40;
     u8 field_41;
     u8 field_42;
@@ -77,14 +83,15 @@ void sub_8102F80(u8 taskId);
 void sub_810317C(void);
 void sub_8103238(u8 taskId);
 void sub_810345C(void);
-void sub_8103924(struct ListMenuTemplate * a0, u8 a1);
-u8 sub_81039F0(void);
 u16 sub_8103518(u8 a0);
+void sub_8103924(const struct ListMenuTemplate * a0, u8 a1);
+u8 sub_81039F0(void);
 void sub_8103988(u8 a0);
 void sub_8103AC8(u8 taskId);
 void sub_81047B0(u8 *a0);
 void sub_81047C8(u8 a0, u8 a1, const u8 *a2, u8 a3, u8 a4, u8 a5);
 void sub_810491C(u8 a0, u8 a1, u16 a2, u8 a3, u8 a4, u8 a5);
+void sub_8104A34(u8 windowId, u8 a1, u16 species, u8 a3, u8 y);
 u16 sub_8104BBC(u8 a0, u8 a1);
 void sub_8104C2C(const u8 *a0);
 void sub_81042EC(u8 taskId);
@@ -98,6 +105,10 @@ extern const u16 gUnknown_84404C8[];
 extern const u16 gUnknown_84406E0[];
 extern const u16 gUnknown_8440EF0[];
 extern const u16 gUnknown_8443460[];
+extern const u16 gUnknown_8443FC0[];
+extern const u16 gUnknown_84442F6[];
+extern const u16 gUnknown_84448FE[];
+extern const u16 gUnknown_84445FA[];
 extern const struct BgTemplate gUnknown_8451EBC[4];
 extern const struct WindowTemplate gUnknown_8451ECC[];
 extern const struct PokedexScreenData gUnknown_8451EE4;
@@ -111,6 +122,8 @@ extern const struct ListMenuTemplate gUnknown_84520BC;
 extern const struct ScrollArrowsTemplate gUnknown_84520D4;
 extern const struct ScrollArrowsTemplate gUnknown_84520E4;
 extern const struct PokedexScreenWindowGfx gUnknown_84520F4[];
+extern const struct ListMenuWindowRect gUnknown_845218C;
+extern const struct ScrollArrowsTemplate gUnknown_84521B4;
 
 void sub_81024C0(void)
 {
@@ -626,4 +639,199 @@ void sub_810345C(void)
     sub_8104C2C(gText_PickOKExit);
     CopyWindowToVram(0, 2);
     CopyWindowToVram(1, 2);
+}
+
+u16 sub_8103518(u8 a0)
+{
+    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_DEOXYS : NATIONAL_DEX_MEW;
+    u16 ndex_num;
+    u16 ret = NATIONAL_DEX_NONE;
+    s32 i;
+    bool8 caught;
+    bool8 seen;
+
+    switch (a0)
+    {
+    default:
+    case 0:
+        for (i = 0; i < NATIONAL_DEX_MEW; i++)
+        {
+            ndex_num = i + 1;
+            seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+            caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+            if (seen)
+            {
+                gUnknown_203ACF0->field_44[i].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                ret = ndex_num;
+            }
+            else
+            {
+                gUnknown_203ACF0->field_44[i].label = gUnknown_8415F66;
+            }
+            gUnknown_203ACF0->field_44[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+        }
+        break;
+    case 1:
+        for (i = 0; i < SPECIES_CHIMECHO; i++)
+        {
+            ndex_num = gUnknown_8443FC0[i];
+            if (ndex_num <= max_n)
+            {
+                seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+                caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+                if (seen)
+                {
+                    gUnknown_203ACF0->field_44[ret].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                    gUnknown_203ACF0->field_44[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+                    ret++;
+                }
+            }
+        }
+        break;
+    case 2:
+        for (i = 0; i < SPECIES_CHIMECHO; i++)
+        {
+            ndex_num = SpeciesToNationalPokedexNum(gUnknown_84448FE[i]);
+            if (ndex_num <= max_n)
+            {
+                seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+                caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+                if (caught)
+                {
+                    gUnknown_203ACF0->field_44[ret].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                    gUnknown_203ACF0->field_44[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+                    ret++;
+                }
+            }
+        }
+        break;
+    case 3:
+        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        {
+            ndex_num = gUnknown_84442F6[i];
+            if (ndex_num <= max_n)
+            {
+                seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+                caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+                if (caught)
+                {
+                    gUnknown_203ACF0->field_44[ret].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                    gUnknown_203ACF0->field_44[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+                    ret++;
+                }
+            }
+        }
+        break;
+    case 4:
+        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        {
+            ndex_num = gUnknown_84445FA[i];
+            if (ndex_num <= max_n)
+            {
+                seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+                caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+                if (caught)
+                {
+                    gUnknown_203ACF0->field_44[ret].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                    gUnknown_203ACF0->field_44[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+                    ret++;
+                }
+            }
+        }
+        break;
+    case 5:
+        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        {
+            ndex_num = i + 1;
+            seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
+            caught = sub_8104AB0(ndex_num, FLAG_GET_CAUGHT, 0);
+            if (seen)
+            {
+                gUnknown_203ACF0->field_44[i].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+                ret = ndex_num;
+            }
+            else
+            {
+                gUnknown_203ACF0->field_44[i].label = gUnknown_8415F66;
+            }
+            gUnknown_203ACF0->field_44[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+        }
+        break;
+    }
+    return ret;
+}
+
+void sub_8103924(const struct ListMenuTemplate * template, u8 a1)
+{
+    switch (a1)
+    {
+    default:
+    case 0:
+        gUnknown_203ACF0->field_41 = ListMenuInitInRect(template, &gUnknown_845218C, gUnknown_203ACF0->field_36, gUnknown_203ACF0->field_34);
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        gUnknown_203ACF0->field_41 = ListMenuInitInRect(template, &gUnknown_845218C, gUnknown_203ACF0->field_3A, gUnknown_203ACF0->field_38);
+        break;
+    case 5:
+        gUnknown_203ACF0->field_41 = ListMenuInitInRect(template, &gUnknown_845218C, gUnknown_203ACF0->field_3E, gUnknown_203ACF0->field_3C);
+        break;
+    }
+}
+
+void sub_8103988(u8 a0)
+{
+    switch (a0)
+    {
+    default:
+    case 0:
+        DestroyListMenuTask(gUnknown_203ACF0->field_41, &gUnknown_203ACF0->field_36, &gUnknown_203ACF0->field_34);
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        DestroyListMenuTask(gUnknown_203ACF0->field_41, &gUnknown_203ACF0->field_3A, &gUnknown_203ACF0->field_38);
+        break;
+    case 5:
+        DestroyListMenuTask(gUnknown_203ACF0->field_41, &gUnknown_203ACF0->field_3E, &gUnknown_203ACF0->field_3C);
+        break;
+    }
+}
+
+u8 sub_81039F0(void)
+{
+    struct ScrollArrowsTemplate template = gUnknown_84521B4;
+    if (gUnknown_203ACF0->field_48 > gUnknown_8452174.maxShowed)
+        template.fullyDownThreshold = gUnknown_203ACF0->field_48 - gUnknown_8452174.maxShowed;
+    else
+        template.fullyDownThreshold = 0;
+    return AddScrollIndicatorArrowPair(&template, &gUnknown_203ACF0->field_62);
+}
+
+struct PokedexListItem
+{
+    u16 species;
+    bool8 seen:1;
+    bool8 caught:1;
+};
+
+void sub_8103A40(u8 windowId, s32 itemId, u8 y)
+{
+    u32 itemId_ = itemId;
+    u16 species = itemId_;
+    bool8 seen = (itemId_ >> 16) & 1;  // not used but required to match
+    bool8 caught = (itemId_ >> 17) & 1;
+    u8 type1;
+    sub_8104A34(gUnknown_203ACF0->field_40, 0, species, 12, y);
+    if (caught)
+    {
+        BlitMoveInfoIcon(gUnknown_203ACF0->field_40, 0, 0x28, y);
+        type1 = gBaseStats[species].type1;
+        BlitMoveInfoIcon(gUnknown_203ACF0->field_40, type1 + 1, 0x78, y);
+        if (type1 != gBaseStats[species].type2)
+            BlitMoveInfoIcon(gUnknown_203ACF0->field_40, gBaseStats[species].type2 + 1, 0x98, y);
+    }
 }

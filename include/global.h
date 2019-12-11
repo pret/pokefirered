@@ -257,7 +257,7 @@ struct BattleTowerData // Leftover from R/S
     /*0x04CC, 0x057C*/ u16 currentWinStreaks[2];
     /*0x04D0, 0x0580*/ u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
     /*0x04D1, 0x0581*/ u8 filler_4D1[0x317];
-};
+}; /* size = 0x7E8 */
 
 struct SaveBlock2
 {

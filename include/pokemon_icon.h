@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern const u16 gMonIconPalettes[][16];
+
 const u8 *GetMonIconPtr(u16 speciesId, u32 personality, u32 frameNo);
 const u8 *GetMonIconTiles(u16 iconSpecies, bool32 extra);
 const u16 *GetValidMonIconPalettePtr(u16 speciesId);
@@ -23,5 +25,6 @@ u8 UpdateMonIconFrame(struct Sprite * sprite);
 void LoadMonIconPalette(u16 iconId);
 void FreeMonIconPalette(u16 iconId);
 void SetPartyHPBarSprite(struct Sprite * sprite, u8 animNum);
+u8 GetMonIconPaletteIndexFromSpecies(u16 species);
 
 #endif // GUARD_POKEMON_ICON_H

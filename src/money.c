@@ -4,9 +4,7 @@
 #include "string_util.h"
 #include "menu.h"
 #include "text_window.h"
-
-extern const u8 gText_PokedollarVar1[];
-extern const u8 gText_TrainerCardMoney[];
+#include "strings.h"
 
 #define MAX_MONEY 999999
 

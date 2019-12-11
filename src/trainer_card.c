@@ -56,6 +56,7 @@ enum
     TRAINER_CARD_STRING_BERRY_CRUSH_COUNT,
     TRAINER_CARD_STRING_UNION_ROOM,
     TRAINER_CARD_STRING_UNION_ROOM_NUM,
+    TRAINER_CARD_STRING_COUNT,
 };
 
 struct TrainerCardData
@@ -79,7 +80,7 @@ struct TrainerCardData
     /*0x0010*/ bool8 hasTrades;
     /*0x0011*/ bool8 hasBadge[BADGE_COUNT];
     /*0x0019*/ u8 var_19[4][13];
-    /*0x004D*/ u8 strings[12][70];
+    /*0x004D*/ u8 strings[TRAINER_CARD_STRING_COUNT][70];
     /*0x0395*/ u8 var_395;
     /*0x0396*/ u16 monIconPals[0x30];
     /*0x03F6*/ u8 var_3DB[0x60];

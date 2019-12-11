@@ -28,7 +28,9 @@ struct PokedexScreenData
 {
     u8 field_00;
     u8 field_01;
-    u8 filler_02[0x6];
+    u8 field_02;
+    u8 field_03;
+    u8 filler_04[0x4];
     u32 field_08;
     u32 field_0C;
     u16 field_10;
@@ -37,9 +39,10 @@ struct PokedexScreenData
     u8 field_15;
     u8 field_16;
     u8 field_17;
-    u8 filler_18[0x10];
+    u16 field_18[0x8];
     u8 field_28;
-    u8 filler_29[0x2];
+    u8 field_29;
+    u8 field_2A;
     u8 field_2B;
     u8 field_2C;
     u8 field_2D;
@@ -61,6 +64,7 @@ struct PokedexScreenData
     u16 field_5A;
     u8 filler_5C[0x4];
     u8 field_60;
+    u8 field_61;
     u16 field_62;
     u8 filler_64[0x2];
     u16 field_66;
@@ -88,15 +92,30 @@ void sub_8103924(const struct ListMenuTemplate * a0, u8 a1);
 u8 sub_81039F0(void);
 void sub_8103988(u8 a0);
 void sub_8103AC8(u8 taskId);
+int sub_8104284(void);
+u8 sub_8104234(void);
+void sub_81042EC(u8 taskId);
 void sub_81047B0(u8 *a0);
 void sub_81047C8(u8 a0, u8 a1, const u8 *a2, u8 a3, u8 a4, u8 a5);
 void sub_810491C(u8 a0, u8 a1, u16 a2, u8 a3, u8 a4, u8 a5);
 void sub_8104A34(u8 windowId, u8 a1, u16 species, u8 a3, u8 y);
 u16 sub_8104BBC(u8 a0, u8 a1);
 void sub_8104C2C(const u8 *a0);
-void sub_81042EC(u8 taskId);
+void sub_8104E90(void);
+void sub_8104F0C(u8 a0);
+void sub_8105058(u8 a0);
+void sub_8105178(u8 a0, u8 a1, u8 a2);
+bool8 sub_81052D0(u8 a0);
+void sub_8105594(u8 a0, u8 a1);
+void sub_8105E1C(u8 a0);
+void sub_8106014(void);
+void sub_810603C(void);
+bool8 sub_8106838(u8 a0, u8 a1);
 u8 sub_81068A0(u8 a0);
+void sub_810699C(u8 a0);
 bool8 sub_8106A20(u16 a0);
+void sub_81067C0(void);
+void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
 
 extern const u32 gUnknown_8440274[];
@@ -124,6 +143,7 @@ extern const struct ScrollArrowsTemplate gUnknown_84520E4;
 extern const struct PokedexScreenWindowGfx gUnknown_84520F4[];
 extern const struct ListMenuWindowRect gUnknown_845218C;
 extern const struct ScrollArrowsTemplate gUnknown_84521B4;
+extern const struct CursorStruct gUnknown_84524C4;
 
 void sub_81024C0(void)
 {
@@ -833,5 +853,313 @@ void sub_8103A40(u8 windowId, s32 itemId, u8 y)
         BlitMoveInfoIcon(gUnknown_203ACF0->field_40, type1 + 1, 0x78, y);
         if (type1 != gBaseStats[species].type2)
             BlitMoveInfoIcon(gUnknown_203ACF0->field_40, gBaseStats[species].type2 + 1, 0x98, y);
+    }
+}
+
+void sub_8103AC8(u8 taskId)
+{
+    int r4;
+    u8 *ptr;
+    switch (gUnknown_203ACF0->field_01)
+    {
+    case 0:
+        HideBg(3);
+        HideBg(2);
+        HideBg(1);
+        sub_810699C(gUnknown_203ACF0->field_28);
+        if (gUnknown_203ACF0->field_2B < gUnknown_203ACF0->field_29)
+            gUnknown_203ACF0->field_2B = gUnknown_203ACF0->field_29;
+        gUnknown_203ACF0->field_01 = 2;
+        break;
+    case 1:
+        sub_8104E90();
+        HideBg(2);
+        HideBg(1);
+        switch (gUnknown_203ACF0->field_2F)
+        {
+        case 0:
+        default:
+            gTasks[taskId].func = sub_810287C;
+            break;
+        case 1:
+            gTasks[taskId].func = sub_8103238;
+            break;
+        }
+        gUnknown_203ACF0->field_01 = 0;
+        break;
+    case 2:
+        sub_8104F0C(0);
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        sub_8105058(0xFF);
+        gUnknown_203ACF0->field_01 = 3;
+        break;
+    case 3:
+        BeginNormalPaletteFade(0xFFFF7FFF, 0, 16, 0, RGB_WHITEALPHA);
+        ShowBg(3);
+        ShowBg(2);
+        ShowBg(1);
+        gUnknown_203ACF0->field_01 = 4;
+        break;
+    case 4:
+        gUnknown_203ACF0->field_60 = sub_8104234();
+        gUnknown_203ACF0->field_61 = ListMenuAddCursorObjectInternal(&gUnknown_84524C4, 0);
+        gUnknown_203ACF0->field_01 = 5;
+        break;
+    case 5:
+        sub_8105058(gUnknown_203ACF0->field_2D);
+        sub_8105178(gUnknown_203ACF0->field_61, gUnknown_203ACF0->field_2D, gUnknown_203ACF0->field_2C);
+        gUnknown_203ACF0->field_62 = gUnknown_203ACF0->field_2B;
+        r4 = 0;
+        if (JOY_NEW(A_BUTTON) && sub_8104AB0(gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2D], FLAG_GET_SEEN, 1))
+        {
+            RemoveScrollIndicatorArrowPair(gUnknown_203ACF0->field_60);
+            ListMenuRemoveCursorObject(gUnknown_203ACF0->field_61, 0);
+            gUnknown_203ACF0->field_01 = 12;
+        }
+        else
+        {
+            if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_LEFT))
+            {
+                if (gUnknown_203ACF0->field_2D != 0)
+                {
+                    gUnknown_203ACF0->field_2D--;
+                    PlaySE(SE_SELECT);
+                    break;
+                }
+                else
+                    r4 = 1;
+            }
+            if (!JOY_HELD(R_BUTTON) && JOY_REPT(DPAD_RIGHT))
+            {
+                if (gUnknown_203ACF0->field_2D < gUnknown_203ACF0->field_2C - 1)
+                {
+                    gUnknown_203ACF0->field_2D++;
+                    PlaySE(SE_SELECT);
+                    break;
+                }
+                else
+                    r4 = 2;
+            }
+            if (r4 == 0)
+                r4 = sub_8104284();
+            switch (r4)
+            {
+            case 0:
+                break;
+            case 1:
+                while (gUnknown_203ACF0->field_2B > gUnknown_203ACF0->field_29)
+                {
+                    gUnknown_203ACF0->field_2B--;
+                    if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
+                    {
+                        gUnknown_203ACF0->field_01 = 8;
+                        break;
+                    }
+                }
+                if (gUnknown_203ACF0->field_01 != 8)
+                    gUnknown_203ACF0->field_01 = 6;
+                break;
+            case 2:
+                while (gUnknown_203ACF0->field_2B < gUnknown_203ACF0->field_2A - 1)
+                {
+                    gUnknown_203ACF0->field_2B++;
+                    if (sub_8106838(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B))
+                    {
+                        gUnknown_203ACF0->field_01 = 10;
+                        break;
+                    }
+                }
+                if (gUnknown_203ACF0->field_01 != 10)
+                    gUnknown_203ACF0->field_01 = 6;
+                break;
+            }
+            if (JOY_NEW(B_BUTTON))
+            {
+                gUnknown_203ACF0->field_01 = 6;
+            }
+        }
+        break;
+    case 6:
+    case 7:
+        RemoveScrollIndicatorArrowPair(gUnknown_203ACF0->field_60);
+        ListMenuRemoveCursorObject(gUnknown_203ACF0->field_61, 0);
+        BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+        gUnknown_203ACF0->field_01 = 1;
+        break;
+    case 8:
+    case 10:
+        sub_8104E90();
+        sub_8105058(0xFF);
+        ListMenuUpdateCursorObject(gUnknown_203ACF0->field_61, 0, 0xA0, 0);
+        gUnknown_203ACF0->field_2E = 0;
+        gUnknown_203ACF0->field_02 = 0;
+        gUnknown_203ACF0->field_01++;
+        break;
+    case 9:
+        if (sub_81052D0(0))
+        {
+            gUnknown_203ACF0->field_2D = gUnknown_203ACF0->field_2C - 1;
+            gUnknown_203ACF0->field_01 = 5;
+        }
+        break;
+    case 11:
+        if (sub_81052D0(1))
+        {
+            gUnknown_203ACF0->field_2D = 0;
+            gUnknown_203ACF0->field_01 = 5;
+        }
+        break;
+    case 12:
+        gUnknown_203ACF0->field_5A = gUnknown_203ACF0->field_18[gUnknown_203ACF0->field_2D];
+        PlaySE(SE_SELECT);
+        gUnknown_203ACF0->field_01 = 14;
+        break;
+    case 13:
+        sub_8106014();
+        gUnknown_203ACF0->field_01 = 4;
+        break;
+    case 14:
+        sub_8105E1C(0);
+        gUnknown_203ACF0->field_01 = 15;
+        break;
+    case 15:
+        gUnknown_203ACF0->field_02 = 0;
+        gUnknown_203ACF0->field_03 = 0;
+        gUnknown_203ACF0->field_01++;
+        // fallthrough
+    case 16:
+        if (gUnknown_203ACF0->field_03 < 6)
+        {
+            if (!gUnknown_203ACF0->field_02)
+            {
+                gUnknown_203ACF0->field_02--;
+            }
+            else
+            {
+                sub_8105594(0, gUnknown_203ACF0->field_03);
+                CopyBgTilemapBufferToVram(0);
+                gUnknown_203ACF0->field_02 = 4;
+                gUnknown_203ACF0->field_03++;
+            }
+        }
+        else
+        {
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(3);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(0);
+            PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
+            gUnknown_203ACF0->field_02 = 0;
+            gUnknown_203ACF0->field_01 = 17;
+        }
+        break;
+    case 17:
+        if (JOY_NEW(A_BUTTON))
+        {
+            sub_8106014();
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(1);
+            gUnknown_203ACF0->field_01 = 21;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            gUnknown_203ACF0->field_01 = 18;
+        }
+        else
+        {
+            sub_8106B34();
+        }
+        break;
+    case 18:
+        sub_8104F0C(0);
+        sub_8105594(0, 6);
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 19;
+        break;
+    case 19:
+        gUnknown_203ACF0->field_02 = 0;
+        gUnknown_203ACF0->field_03 = 6;
+        gUnknown_203ACF0->field_01++;
+        // fallthrough
+    case 20:
+        if (gUnknown_203ACF0->field_03)
+        {
+            if (gUnknown_203ACF0->field_02)
+            {
+                gUnknown_203ACF0->field_03--;
+                FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+                sub_8105594(0, gUnknown_203ACF0->field_03);
+                CopyBgTilemapBufferToVram(0);
+                gUnknown_203ACF0->field_02 = 1;
+            }
+            else
+                gUnknown_203ACF0->field_02--;
+        }
+        else
+        {
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203ACF0->field_01 = 13;
+        }
+        break;
+    case 21:
+        sub_810603C();
+        gUnknown_203ACF0->field_01 = 22;
+        break;
+    case 22:
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 23;
+        break;
+    case 23:
+        if (JOY_NEW(A_BUTTON))
+        {
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203ACF0->field_01 = 26;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203ACF0->field_01 = 24;
+        }
+        else
+        {
+            sub_8106B34();
+        }
+        break;
+    case 24:
+        sub_81067C0();
+        gUnknown_203ACF0->field_01 = 25;
+        break;
+    case 25:
+        sub_8105E1C(0);
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 17;
+        break;
+    case 26:
+        sub_81067C0();
+        gUnknown_203ACF0->field_01 = 18;
+        break;
     }
 }

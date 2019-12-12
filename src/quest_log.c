@@ -571,30 +571,30 @@ static void sub_8110BE8(u8 a0)
 
     sub_815A008(questLog);
 
-    for (i = 0; i < NELEMS(gSaveBlock1Ptr->mapObjectTemplates); i++)
+    for (i = 0; i < NELEMS(gSaveBlock1Ptr->objectEventTemplates); i++)
     {
-        if (gSaveBlock1Ptr->mapObjectTemplates[i].x < 0)
+        if (gSaveBlock1Ptr->objectEventTemplates[i].x < 0)
         {
-            questLog->npcData[i].x = -1 * gSaveBlock1Ptr->mapObjectTemplates[i].x;
+            questLog->npcData[i].x = -1 * gSaveBlock1Ptr->objectEventTemplates[i].x;
             questLog->npcData[i].negx = TRUE;
         }
         else
         {
-            questLog->npcData[i].x = (u8)gSaveBlock1Ptr->mapObjectTemplates[i].x;
+            questLog->npcData[i].x = (u8)gSaveBlock1Ptr->objectEventTemplates[i].x;
             questLog->npcData[i].negx = FALSE;
         }
-        if (gSaveBlock1Ptr->mapObjectTemplates[i].y < 0)
+        if (gSaveBlock1Ptr->objectEventTemplates[i].y < 0)
         {
-            questLog->npcData[i].y = (-gSaveBlock1Ptr->mapObjectTemplates[i].y << 24) >> 24;
+            questLog->npcData[i].y = (-gSaveBlock1Ptr->objectEventTemplates[i].y << 24) >> 24;
             questLog->npcData[i].negy = TRUE;
         }
         else
         {
-            questLog->npcData[i].y = (u8)gSaveBlock1Ptr->mapObjectTemplates[i].y;
+            questLog->npcData[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
             questLog->npcData[i].negy = FALSE;
         }
-        questLog->npcData[i].elevation = gSaveBlock1Ptr->mapObjectTemplates[i].elevation;
-        questLog->npcData[i].movementType = gSaveBlock1Ptr->mapObjectTemplates[i].movementType;
+        questLog->npcData[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].elevation;
+        questLog->npcData[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].movementType;
     }
 }
 
@@ -776,18 +776,18 @@ static void sub_8111150(u8 a0)
     for (i = 0; i < 64; i++)
     {
         if (questLog->npcData[i].negx)
-            gSaveBlock1Ptr->mapObjectTemplates[i].x = -questLog->npcData[i].x;
+            gSaveBlock1Ptr->objectEventTemplates[i].x = -questLog->npcData[i].x;
         else
-            gSaveBlock1Ptr->mapObjectTemplates[i].x = questLog->npcData[i].x;
+            gSaveBlock1Ptr->objectEventTemplates[i].x = questLog->npcData[i].x;
         if (questLog->npcData[i].negy)
-            gSaveBlock1Ptr->mapObjectTemplates[i].y = -(u8)questLog->npcData[i].y;
+            gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->npcData[i].y;
         else
-            gSaveBlock1Ptr->mapObjectTemplates[i].y = questLog->npcData[i].y;
-        gSaveBlock1Ptr->mapObjectTemplates[i].elevation = questLog->npcData[i].elevation;
-        gSaveBlock1Ptr->mapObjectTemplates[i].movementType = questLog->npcData[i].movementType;
+            gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->npcData[i].y;
+        gSaveBlock1Ptr->objectEventTemplates[i].elevation = questLog->npcData[i].elevation;
+        gSaveBlock1Ptr->objectEventTemplates[i].movementType = questLog->npcData[i].movementType;
     }
 
-    sub_815A1F8(questLog, gSaveBlock1Ptr->mapObjectTemplates);
+    sub_815A1F8(questLog, gSaveBlock1Ptr->objectEventTemplates);
 }
 
 void sub_8111274(u8 a0, u8 a1)

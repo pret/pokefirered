@@ -51,7 +51,7 @@ void sub_815A008(struct QuestLog * questLog)
 void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTemplate * templates)
 {
     u32 i, j;
-    const struct QuestLogMapObject * questLogObjectEvents = questLog->unk_008;
+    const struct QuestLogObjectEvent * questLogObjectEvents = questLog->unk_008;
 
     CpuFill16(0, gObjectEvents, sizeof(gObjectEvents));
 
@@ -129,7 +129,7 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         }
     }
 
-    CpuCopy16(gObjectEvents, gSaveBlock1Ptr->mapObjects, sizeof(gObjectEvents));
+    CpuCopy16(gObjectEvents, gSaveBlock1Ptr->objectEvents, sizeof(gObjectEvents));
 }
 
 void sub_815A540(void)

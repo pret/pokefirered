@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_camera.h"
 
 static EWRAM_DATA u8 gUnknown_2039984 = 0;

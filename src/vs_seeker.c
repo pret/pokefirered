@@ -613,7 +613,7 @@ static void sub_810C3B8(u8 taskId)
 
 void sub_810C444(void)
 {
-    struct ObjectEventTemplate * templates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct ObjectEventTemplate * templates = gSaveBlock1Ptr->objectEventTemplates;
     u8 i;
     u8 r6;
     u8 sp0;
@@ -857,7 +857,7 @@ static void Task_VsSeeker_2(u8 taskId)
 
 static void GatherNearbyTrainerInfo(void)
 {
-    struct ObjectEventTemplate *templates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct ObjectEventTemplate *templates = gSaveBlock1Ptr->objectEventTemplates;
     u8 fieldObjectId = 0;
     u8 vsSeekerObjectIdx = 0;
     s32 mapObjectIdx;
@@ -1223,7 +1223,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 void sub_810CB90(void)
 {
     u8 sp0 = 0;
-    struct ObjectEventTemplate *r4 = gSaveBlock1Ptr->mapObjectTemplates;
+    struct ObjectEventTemplate *r4 = gSaveBlock1Ptr->objectEventTemplates;
     s32 r9 = sub_810CE10(sVsSeekerData, gTrainerBattleOpponent_A);
 
     if (r9 != -1)

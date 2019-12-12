@@ -1325,3 +1325,272 @@ void sub_81042EC(u8 taskId)
         break;
     }
 }
+
+#ifdef NONMATCHING
+// HOLY HECK THIS FUNCTION NotLikeThis
+bool32 sub_8104664(u8 a0)
+{
+    u16 *r12;
+    u16 *r6;
+    int r3;
+
+    switch (gUnknown_203ACF0->field_42)
+    {
+    case 0:
+    default:
+        r12 = &gUnknown_203ACF0->field_36;
+        r6 = &gUnknown_203ACF0->field_34;
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        r12 = &gUnknown_203ACF0->field_3A;
+        r6 = &gUnknown_203ACF0->field_38;
+        break;
+    case 5:
+        r12 = &gUnknown_203ACF0->field_3E;
+        r6 = &gUnknown_203ACF0->field_3C;
+        break;
+    }
+    r3 = *r12 + *r6;
+    if (a0)
+    {
+        if (r3 == 0)
+            return FALSE;
+        while (r3-- >= 0)
+        {
+            if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
+                break;
+        }
+        if (r3 < 0)
+            return FALSE;
+    }
+    else
+    {
+        if (r3 == gUnknown_203ACF0->field_48 - 1)
+            return FALSE;
+        while (r3++ < gUnknown_203ACF0->field_48)
+        {
+            if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
+                break;
+        }
+        if (r3 >= gUnknown_203ACF0->field_48)
+            return FALSE;
+    }
+    gUnknown_203ACF0->field_30 = gUnknown_203ACF0->field_44[r3].index;
+    if (gUnknown_203ACF0->field_48 > 9)
+    {
+        if (r3 < 4)
+        {
+            *r12 = 0;
+            *r6 = r3;
+        }
+        else if (r3 >= gUnknown_203ACF0->field_48 - 4)
+        {
+            *r12 = gUnknown_203ACF0->field_48 - 9;
+            *r6 = r3 + 9 - gUnknown_203ACF0->field_48;
+        }
+        else
+        {
+            *r12 = r3 - 4;
+            *r6 = 4;
+        }
+    }
+    else
+    {
+        *r12 = 0;
+        *r6 = r3;
+    }
+    return TRUE;
+}
+#else
+NAKED
+bool32 sub_8104664(u8 a0)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r8\n"
+                "\tpush {r7}\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tldr r0, _08104684 @ =gUnknown_203ACF0\n"
+                "\tldr r3, [r0]\n"
+                "\tadds r2, r3, 0\n"
+                "\tadds r2, 0x42\n"
+                "\tldrb r2, [r2]\n"
+                "\tmov r8, r0\n"
+                "\tcmp r2, 0x4\n"
+                "\tbgt _08104688\n"
+                "\tcmp r2, 0x1\n"
+                "\tbge _0810469C\n"
+                "\tb _0810468C\n"
+                "\t.align 2, 0\n"
+                "_08104684: .4byte gUnknown_203ACF0\n"
+                "_08104688:\n"
+                "\tcmp r2, 0x5\n"
+                "\tbeq _081046A8\n"
+                "_0810468C:\n"
+                "\tmov r1, r8\n"
+                "\tldr r0, [r1]\n"
+                "\tmovs r2, 0x36\n"
+                "\tadds r2, r0\n"
+                "\tmov r12, r2\n"
+                "\tadds r6, r0, 0\n"
+                "\tadds r6, 0x34\n"
+                "\tb _081046B2\n"
+                "_0810469C:\n"
+                "\tmovs r0, 0x3A\n"
+                "\tadds r0, r3\n"
+                "\tmov r12, r0\n"
+                "\tadds r6, r3, 0\n"
+                "\tadds r6, 0x38\n"
+                "\tb _081046B2\n"
+                "_081046A8:\n"
+                "\tmovs r1, 0x3E\n"
+                "\tadds r1, r3\n"
+                "\tmov r12, r1\n"
+                "\tadds r6, r3, 0\n"
+                "\tadds r6, 0x3C\n"
+                "_081046B2:\n"
+                "\tmov r2, r12\n"
+                "\tldrh r1, [r2]\n"
+                "\tldrh r0, [r6]\n"
+                "\tadds r3, r1, r0\n"
+                "\tcmp r4, 0\n"
+                "\tbeq _08104700\n"
+                "\tcmp r3, 0\n"
+                "\tbeq _0810474C\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tblt _0810474C\n"
+                "\tmov r1, r8\n"
+                "\tldr r0, [r1]\n"
+                "\tldr r0, [r0, 0x44]\n"
+                "\tlsls r2, r3, 3\n"
+                "\tadds r0, r2, r0\n"
+                "\tldrh r0, [r0, 0x6]\n"
+                "\tmovs r1, 0x1\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _081046FA\n"
+                "\tmov r5, r8\n"
+                "\tmovs r4, 0x1\n"
+                "\tadds r1, r2, 0\n"
+                "_081046E2:\n"
+                "\tsubs r1, 0x8\n"
+                "\tsubs r3, 0x1\n"
+                "\tcmp r3, 0\n"
+                "\tblt _0810474C\n"
+                "\tldr r0, [r5]\n"
+                "\tldr r0, [r0, 0x44]\n"
+                "\tadds r0, r1, r0\n"
+                "\tldrh r0, [r0, 0x6]\n"
+                "\tands r0, r4\n"
+                "\tadds r2, r1, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _081046E2\n"
+                "_081046FA:\n"
+                "\tcmp r3, 0\n"
+                "\tbge _08104750\n"
+                "\tb _0810474C\n"
+                "_08104700:\n"
+                "\tmov r2, r8\n"
+                "\tldr r5, [r2]\n"
+                "\tadds r0, r5, 0\n"
+                "\tadds r0, 0x48\n"
+                "\tldrh r4, [r0]\n"
+                "\tsubs r0, r4, 0x1\n"
+                "\tcmp r3, r0\n"
+                "\tbeq _0810474C\n"
+                "\tadds r3, 0x1\n"
+                "\tcmp r3, r4\n"
+                "\tbge _0810474C\n"
+                "\tldr r0, [r5, 0x44]\n"
+                "\tlsls r2, r3, 3\n"
+                "\tadds r0, r2, r0\n"
+                "\tldrh r0, [r0, 0x6]\n"
+                "\tmovs r1, 0x1\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08104740\n"
+                "\tadds r1, r2, 0\n"
+                "\tmovs r7, 0x1\n"
+                "_0810472A:\n"
+                "\tadds r1, 0x8\n"
+                "\tadds r3, 0x1\n"
+                "\tcmp r3, r4\n"
+                "\tbge _0810474C\n"
+                "\tldr r0, [r5, 0x44]\n"
+                "\tadds r0, r1, r0\n"
+                "\tldrh r0, [r0, 0x6]\n"
+                "\tands r0, r7\n"
+                "\tadds r2, r1, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _0810472A\n"
+                "_08104740:\n"
+                "\tmov r1, r8\n"
+                "\tldr r0, [r1]\n"
+                "\tadds r0, 0x48\n"
+                "\tldrh r0, [r0]\n"
+                "\tcmp r3, r0\n"
+                "\tblt _08104750\n"
+                "_0810474C:\n"
+                "\tmovs r0, 0\n"
+                "\tb _081047A6\n"
+                "_08104750:\n"
+                "\tmov r0, r8\n"
+                "\tldr r1, [r0]\n"
+                "\tldr r0, [r1, 0x44]\n"
+                "\tadds r0, r2, r0\n"
+                "\tldr r0, [r0, 0x4]\n"
+                "\tstr r0, [r1, 0x30]\n"
+                "\tadds r1, 0x48\n"
+                "\tldrh r0, [r1]\n"
+                "\tcmp r0, 0x9\n"
+                "\tbls _0810479C\n"
+                "\tcmp r3, 0x3\n"
+                "\tbgt _08104770\n"
+                "\tmovs r0, 0\n"
+                "\tmov r1, r12\n"
+                "\tstrh r0, [r1]\n"
+                "\tb _081047A2\n"
+                "_08104770:\n"
+                "\tldrh r1, [r1]\n"
+                "\tsubs r0, r1, 0x4\n"
+                "\tcmp r3, r0\n"
+                "\tblt _08104790\n"
+                "\tsubs r0, 0x5\n"
+                "\tmov r2, r12\n"
+                "\tstrh r0, [r2]\n"
+                "\tadds r1, r3, 0\n"
+                "\tadds r1, 0x9\n"
+                "\tmov r2, r8\n"
+                "\tldr r0, [r2]\n"
+                "\tadds r0, 0x48\n"
+                "\tldrh r0, [r0]\n"
+                "\tsubs r1, r0\n"
+                "\tstrh r1, [r6]\n"
+                "\tb _081047A4\n"
+                "_08104790:\n"
+                "\tsubs r0, r3, 0x4\n"
+                "\tmov r1, r12\n"
+                "\tstrh r0, [r1]\n"
+                "\tmovs r0, 0x4\n"
+                "\tstrh r0, [r6]\n"
+                "\tb _081047A4\n"
+                "_0810479C:\n"
+                "\tmovs r0, 0\n"
+                "\tmov r2, r12\n"
+                "\tstrh r0, [r2]\n"
+                "_081047A2:\n"
+                "\tstrh r3, [r6]\n"
+                "_081047A4:\n"
+                "\tmovs r0, 0x1\n"
+                "_081047A6:\n"
+                "\tpop {r3}\n"
+                "\tmov r8, r3\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif //NONMATCHING

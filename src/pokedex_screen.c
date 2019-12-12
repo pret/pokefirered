@@ -96,9 +96,9 @@ u8 sub_8104234(void);
 int sub_8104284(void);
 void sub_81042EC(u8 taskId);
 bool32 sub_8104664(u8 a0);
-void sub_81047B0(u8 *a0);
-void sub_81047C8(u8 a0, u8 a1, const u8 *a2, u8 a3, u8 a4, u8 a5);
-void sub_810491C(u8 a0, u8 a1, u16 a2, u8 a3, u8 a4, u8 a5);
+void sub_81047B0(u8 *windowId_p);
+void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
+void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
 void sub_8104A34(u8 windowId, u8 a1, u16 species, u8 a3, u8 y);
 u16 sub_8104BBC(u8 a0, u8 a1);
 void sub_8104C2C(const u8 *a0);
@@ -1594,3 +1594,73 @@ bool32 sub_8104664(u8 a0)
                 "\tbx r1");
 }
 #endif //NONMATCHING
+
+void sub_81047B0(u8 *windowId_p)
+{
+    if (*windowId_p != 0xFF)
+    {
+        RemoveWindow(*windowId_p);
+        *windowId_p = 0xFF;
+    }
+}
+
+void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
+{
+    u8 textColor[3];
+    switch (colorIdx)
+    {
+    case 0:
+        textColor[0] = 0;
+        textColor[1] = 1;
+        textColor[2] = 3;
+        break;
+    case 1:
+        textColor[0] = 0;
+        textColor[1] = 5;
+        textColor[2] = 1;
+        break;
+    case 2:
+        textColor[0] = 0;
+        textColor[1] = 15;
+        textColor[2] = 14;
+        break;
+    case 3:
+        textColor[0] = 0;
+        textColor[1] = 11;
+        textColor[2] = 1;
+        break;
+    case 4:
+        textColor[0] = 0;
+        textColor[1] = 1;
+        textColor[2] = 2;
+        break;
+    }
+    AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == 0 ? 0 : 1, 0, textColor, -1, str);
+}
+
+void sub_8104880(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
+{
+    u8 buff[4];
+    buff[0] = (num / 100) + CHAR_0;
+    buff[1] = ((num %= 100) / 10) + CHAR_0;
+    buff[2] = (num % 10) + CHAR_0;
+    buff[3] = EOS;
+    sub_81047C8(windowId, fontId, buff, x, y, colorIdx);
+}
+
+void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
+{
+    u8 buff[4];
+    int i;
+    buff[0] = (num / 100) + CHAR_0;
+    buff[1] = ((num %= 100) / 10) + CHAR_0;
+    buff[2] = (num % 10) + CHAR_0;
+    buff[3] = EOS;
+    for (i = 0; i < 3; i++)
+    {
+        if (buff[i] != CHAR_0)
+            break;
+        buff[i] = CHAR_SPACE;
+    }
+    sub_81047C8(windowId, fontId, buff, x, y, colorIdx);
+}

@@ -4,9 +4,7 @@
 #include "string_util.h"
 #include "menu.h"
 #include "text_window.h"
-
-extern const u8 gText_PokedollarVar1[];
-extern const u8 gUnknown_8419CE7[];
+#include "strings.h"
 
 #define MAX_MONEY 999999
 
@@ -110,7 +108,7 @@ void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, tileStart, pallete);
-    AddTextPrinterParameterized(windowId, 2, gUnknown_8419CE7, 0, 0, 0xFF, 0);
+    AddTextPrinterParameterized(windowId, 2, gText_TrainerCardMoney, 0, 0, 0xFF, 0);
     PrintMoneyAmountInMoneyBox(windowId, amount, 0);
 }
 

@@ -158,12 +158,8 @@ gFieldEffectArguments: @ 20386E0
 
 	.align 2
 	.include "src/option_menu.o"
-
-gTrainerCards: @ 2039624
-	.space 0x180
-
-gUnknown_20397A4: @ 20397A4
-	.space 0x4
+	.align 2
+	.include "src/trainer_card.o"
 
 gUnknown_20397A8: @ 20397A8
 	.space 0x4

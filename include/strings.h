@@ -976,4 +976,23 @@ extern const u8 gUnknown_8415F3D[];
 extern const u8 gUnknown_8415F4A[];
 extern const u8 gUnknown_8415F66[];
 
+// trainer card
+extern const u8 gText_WaitingTrainerFinishReading[];
+extern const u8 gText_TrainerCardName[];
+extern const u8 gText_TrainerCardIDNo[];
+extern const u8 gText_TrainerCardMoney[];
+extern const u8 gText_TrainerCardYen[];
+extern const u8 gText_TrainerCardPokedex[];
+extern const u8 gText_TrainerCardNull[];
+extern const u8 gText_Colon2[];
+extern const u8 gText_TrainerCardTime[];
+extern const u8 gText_Var1sTrainerCard[];
+extern const u8 gText_HallOfFameDebut[];
+extern const u8 gText_WinLossRatio[];
+extern const u8 gText_PokemonTrades[];
+extern const u8 gText_BerryCrushes[];
+extern const u8 gText_UnionRoomTradesBattles[];
+extern const u8 gText_LinkBattles[];
+extern const u8 gText_LinkCableBattles[];
+
 #endif //GUARD_STRINGS_H

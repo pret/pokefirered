@@ -92,9 +92,10 @@ void sub_8103924(const struct ListMenuTemplate * a0, u8 a1);
 u8 sub_81039F0(void);
 void sub_8103988(u8 a0);
 void sub_8103AC8(u8 taskId);
-int sub_8104284(void);
 u8 sub_8104234(void);
+int sub_8104284(void);
 void sub_81042EC(u8 taskId);
+bool32 sub_8104664(u8 a0);
 void sub_81047B0(u8 *a0);
 void sub_81047C8(u8 a0, u8 a1, const u8 *a2, u8 a3, u8 a4, u8 a5);
 void sub_810491C(u8 a0, u8 a1, u16 a2, u8 a3, u8 a4, u8 a5);
@@ -143,6 +144,7 @@ extern const struct ScrollArrowsTemplate gUnknown_84520E4;
 extern const struct PokedexScreenWindowGfx gUnknown_84520F4[];
 extern const struct ListMenuWindowRect gUnknown_845218C;
 extern const struct ScrollArrowsTemplate gUnknown_84521B4;
+extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
 
 void sub_81024C0(void)
@@ -1160,6 +1162,166 @@ void sub_8103AC8(u8 taskId)
     case 26:
         sub_81067C0();
         gUnknown_203ACF0->field_01 = 18;
+        break;
+    }
+}
+
+u8 sub_8104234(void)
+{
+    struct ScrollArrowsTemplate template = gUnknown_84524B4;
+    template.fullyUpThreshold = gUnknown_203ACF0->field_29;
+    template.fullyDownThreshold = gUnknown_203ACF0->field_2A - 1;
+    gUnknown_203ACF0->field_62 = gUnknown_203ACF0->field_2B;
+    return AddScrollIndicatorArrowPair(&template, &gUnknown_203ACF0->field_62);
+}
+
+int sub_8104284(void)
+{
+    switch (gSaveBlock2Ptr->optionsButtonMode)
+    {
+    case OPTIONS_BUTTON_MODE_L_EQUALS_A:
+        // Using the JOY_HELD and JOY_NEW macros here does not match!
+        if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_LEFT))
+            return 1;
+        else if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_RIGHT))
+            return 2;
+        else
+            return 0;
+    case OPTIONS_BUTTON_MODE_LR:
+        if (gMain.newKeys & L_BUTTON)
+            return 1;
+        else if (gMain.newKeys & R_BUTTON)
+            return 2;
+        else
+            return 0;
+    default:
+    case OPTIONS_BUTTON_MODE_HELP:
+        return 0;
+    }
+}
+
+void sub_81042EC(u8 taskId)
+{
+    switch (gUnknown_203ACF0->field_01)
+    {
+    case 0:
+        HideBg(3);
+        HideBg(2);
+        HideBg(1);
+        gUnknown_203ACF0->field_01 = 2;
+        break;
+    case 1:
+        HideBg(2);
+        HideBg(1);
+        gTasks[taskId].func = sub_8102F80;
+        gUnknown_203ACF0->field_01 = 0;
+        break;
+    case 2:
+        gUnknown_203ACF0->field_2C = 1;
+        sub_8105E1C(0);
+        gUnknown_203ACF0->field_01 = 3;
+        break;
+    case 3:
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        PlayCry2(gUnknown_203ACF0->field_5A, 0, 125, 10);
+        gUnknown_203ACF0->field_01 = 4;
+        break;
+    case 4:
+        BeginNormalPaletteFade(0xFFFF7FFF, 0, 16, 0, RGB_WHITEALPHA);
+        ShowBg(3);
+        ShowBg(2);
+        ShowBg(1);
+        gUnknown_203ACF0->field_01 = 5;
+        break;
+    case 5:
+        if (JOY_NEW(A_BUTTON))
+        {
+            sub_8106014();
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(1);
+            gUnknown_203ACF0->field_01 = 7;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            sub_8106014();
+            BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+            gUnknown_203ACF0->field_01 = 1;
+        }
+        else if (JOY_NEW(DPAD_UP) && sub_8104664(1))
+        {
+            sub_8106014();
+            BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+            gUnknown_203ACF0->field_01 = 6;
+        }
+        else if (JOY_NEW(DPAD_DOWN) && sub_8104664(0))
+        {
+            sub_8106014();
+            BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+            gUnknown_203ACF0->field_01 = 6;
+        }
+        else
+        {
+            sub_8106B34();
+        }
+        break;
+    case 6:
+        HideBg(2);
+        HideBg(1);
+        gUnknown_203ACF0->field_5A = gUnknown_203ACF0->field_30;
+        gUnknown_203ACF0->field_01 = 2;
+        break;
+    case 7:
+        sub_810603C();
+        gUnknown_203ACF0->field_01 = 8;
+        break;
+    case 8:
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 9;
+        break;
+    case 9:
+        if (JOY_NEW(A_BUTTON))
+        {
+            BeginNormalPaletteFade(0xFFFF7FFF, 0, 0, 16, RGB_WHITEALPHA);
+            gUnknown_203ACF0->field_01 = 12;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
+            FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+            CopyBgTilemapBufferToVram(2);
+            CopyBgTilemapBufferToVram(1);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203ACF0->field_01 = 10;
+        }
+        else
+        {
+            sub_8106B34();
+        }
+        break;
+    case 10:
+        sub_81067C0();
+        gUnknown_203ACF0->field_01 = 11;
+        break;
+    case 11:
+        sub_8105E1C(0);
+        CopyBgTilemapBufferToVram(3);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 5;
+        break;
+    case 12:
+        sub_81067C0();
+        FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203ACF0->field_01 = 1;
         break;
     }
 }

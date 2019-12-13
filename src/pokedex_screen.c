@@ -21,6 +21,7 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 
@@ -99,7 +100,7 @@ bool32 sub_8104664(u8 a0);
 void sub_81047B0(u8 *windowId_p);
 void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
-void sub_8104A34(u8 windowId, u8 a1, u16 species, u8 a3, u8 y);
+void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
 u16 sub_8104BBC(u8 a0, u8 a1);
 void sub_8104C2C(const u8 *a0);
 void sub_8104E90(void);
@@ -1663,4 +1664,29 @@ void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx)
         buff[i] = CHAR_SPACE;
     }
     sub_81047C8(windowId, fontId, buff, x, y, colorIdx);
+}
+
+u32 sub_81049CC(int species)
+{
+    switch (species)
+    {
+    case SPECIES_SPINDA:
+        return gSaveBlock2Ptr->pokedex.spindaPersonality;
+    case SPECIES_UNOWN:
+        return gSaveBlock2Ptr->pokedex.unownPersonality;
+    default:
+        return 0;
+    }
+}
+
+void sub_81049FC(u8 windowId, u16 species, u16 paletteOffset)
+{
+    LoadMonPicInWindow(species, 8, sub_81049CC(species), TRUE, paletteOffset >> 4, windowId);
+}
+
+void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)
+{
+    u16 dexNum = SpeciesToNationalPokedexNum(species);
+    sub_81047C8(windowId, fontId, gUnknown_8415FFF, x, y, 0);
+    sub_8104880(windowId, fontId, dexNum, x + 9, y, 0);
 }

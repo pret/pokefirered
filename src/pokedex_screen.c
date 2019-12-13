@@ -21,6 +21,7 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -40,7 +41,9 @@ struct PokedexScreenData
     u8 field_15;
     u8 field_16;
     u8 field_17;
-    u16 field_18[0x8];
+    u16 field_18[0x4];
+    u8 field_20[0x4];
+    u8 field_24[0x4];
     u8 field_28;
     u8 field_29;
     u8 field_2A;
@@ -120,12 +123,14 @@ void sub_81067C0(void);
 void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
 
+extern const u16 gUnknown_8440124[];
 extern const u32 gUnknown_8440274[];
 extern const u32 gUnknown_84403AC[];
 extern const u16 gUnknown_84404C8[];
 extern const u16 gUnknown_84406E0[];
 extern const u16 gUnknown_8440EF0[];
 extern const u16 gUnknown_8443460[];
+extern const u8 gUnknown_8443600[];
 extern const u16 gUnknown_8443FC0[];
 extern const u16 gUnknown_84442F6[];
 extern const u16 gUnknown_84448FE[];
@@ -136,15 +141,19 @@ extern const struct PokedexScreenData gUnknown_8451EE4;
 extern const struct WindowTemplate gUnknown_8451F54;
 extern const struct WindowTemplate gUnknown_8451F5C;
 extern const struct WindowTemplate gUnknown_8451F64;
-extern const struct WindowTemplate gUnknown_845216C;
-extern const struct ListMenuTemplate gUnknown_8452174;
 extern const struct ListMenuTemplate gUnknown_8452004;
 extern const struct ListMenuTemplate gUnknown_84520BC;
 extern const struct ScrollArrowsTemplate gUnknown_84520D4;
 extern const struct ScrollArrowsTemplate gUnknown_84520E4;
 extern const struct PokedexScreenWindowGfx gUnknown_84520F4[];
+extern const struct WindowTemplate gUnknown_845216C;
+extern const struct ListMenuTemplate gUnknown_8452174;
 extern const struct ListMenuWindowRect gUnknown_845218C;
 extern const struct ScrollArrowsTemplate gUnknown_84521B4;
+extern const struct WindowTemplate gUnknown_84521C4;
+extern const struct WindowTemplate gUnknown_84521CC;
+extern const u16 gUnknown_845228C[];
+extern const u8 (*const gUnknown_8452334[])[4];
 extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
 
@@ -1766,4 +1775,69 @@ u16 sub_8104BBC(u8 caseID, bool8 whichDex)
 void sub_8104C2C(const u8 *src)
 {
     sub_81047C8(1, 0, src, 236 - GetStringWidth(0, src, 0), 2, 4);
+}
+
+bool8 sub_8104C64(u16 a0, u8 a1, u8 a2)
+{
+    struct WindowTemplate template;
+    a2--;
+    CopyToBgTilemapBufferRect_ChangePalette(3, gUnknown_845228C, gUnknown_8452334[a2][a1][0], gUnknown_8452334[a2][a1][1], 8, 8, a1 + 5);
+    if (gUnknown_203ACF0->field_20[a1] == 0xFF)
+    {
+        template = gUnknown_84521C4;
+        template.tilemapLeft = gUnknown_8452334[a2][a1][0];
+        template.tilemapTop = gUnknown_8452334[a2][a1][1];
+        template.paletteNum = a1 + 1;
+        template.baseBlock = a1 * 64 + 8;
+        gUnknown_203ACF0->field_20[a1] = AddWindow(&template);
+        FillWindowPixelBuffer(gUnknown_203ACF0->field_20[a1], PIXEL_FILL(0));
+        sub_81049FC(gUnknown_203ACF0->field_20[a1], a0, a1 * 16 + 16);
+        PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
+        CopyWindowToVram(gUnknown_203ACF0->field_20[a1], 2);
+    }
+    else
+        PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
+
+    if (gUnknown_203ACF0->field_24[a1] == 0xFF)
+    {
+        if (a0 != SPECIES_NONE)
+        {
+            template = gUnknown_84521CC;
+            template.tilemapLeft = gUnknown_8452334[a2][a1][2];
+            template.tilemapTop = gUnknown_8452334[a2][a1][3];
+            template.baseBlock = a1 * 40 + 0x108;
+            gUnknown_203ACF0->field_24[a1] = AddWindow(&template);
+            CopyToWindowPixelBuffer(gUnknown_203ACF0->field_24[a1], gUnknown_8440124, 0, 0);
+            sub_8104A34(gUnknown_203ACF0->field_24[a1], 0, a0, 12, 0);
+            sub_81047C8(gUnknown_203ACF0->field_24[a1], 2, gSpeciesNames[a0], 2, 13, 0);
+            if (sub_8104AB0(a0, FLAG_GET_CAUGHT, TRUE))
+                BlitBitmapRectToWindow(gUnknown_203ACF0->field_24[a1], gUnknown_8443600, 0, 0, 8, 8, 2, 3, 8, 8);
+            PutWindowTilemap(gUnknown_203ACF0->field_24[a1]);
+            CopyWindowToVram(gUnknown_203ACF0->field_24[a1], 2);
+        }
+    }
+    else
+        PutWindowTilemap(gUnknown_203ACF0->field_24[a1]);
+
+    return TRUE;
+}
+
+void sub_8104E90(void)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        sub_81047B0(&gUnknown_203ACF0->field_20[i]);
+        sub_81047B0(&gUnknown_203ACF0->field_24[i]);
+    }
+}
+
+void sub_8104EC0(u8 unused, u16 a1, u16 a2)
+{
+    u8 buffer[30];
+    u8 *ptr = StringCopy(buffer, gUnknown_8416002);
+    ptr = ConvertIntToDecimalStringN(ptr, a1, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    *ptr++ = CHAR_SLASH;
+    ptr = ConvertIntToDecimalStringN(ptr, a2, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    sub_8106E78(buffer, 2);
 }

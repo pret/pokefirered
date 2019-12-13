@@ -101,8 +101,8 @@ void sub_81047B0(u8 *windowId_p);
 void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
 void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
-u16 sub_8104BBC(u8 a0, u8 a1);
-void sub_8104C2C(const u8 *a0);
+u16 sub_8104BBC(u8 caseID, bool8 whichDex);
+void sub_8104C2C(const u8 *src);
 void sub_8104E90(void);
 void sub_8104F0C(u8 a0);
 void sub_8105058(u8 a0);
@@ -666,7 +666,7 @@ void sub_810345C(void)
 
 u16 sub_8103518(u8 a0)
 {
-    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_DEOXYS : NATIONAL_DEX_MEW;
+    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_COUNT : KANTO_DEX_COUNT;
     u16 ndex_num;
     u16 ret = NATIONAL_DEX_NONE;
     s32 i;
@@ -677,7 +677,7 @@ u16 sub_8103518(u8 a0)
     {
     default:
     case 0:
-        for (i = 0; i < NATIONAL_DEX_MEW; i++)
+        for (i = 0; i < KANTO_DEX_COUNT; i++)
         {
             ndex_num = i + 1;
             seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -729,7 +729,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 3:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gUnknown_84442F6[i];
             if (ndex_num <= max_n)
@@ -746,7 +746,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 4:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gUnknown_84445FA[i];
             if (ndex_num <= max_n)
@@ -763,7 +763,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 5:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = i + 1;
             seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -1689,4 +1689,81 @@ void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)
     u16 dexNum = SpeciesToNationalPokedexNum(species);
     sub_81047C8(windowId, fontId, gUnknown_8415FFF, x, y, 0);
     sub_8104880(windowId, fontId, dexNum, x + 9, y, 0);
+}
+
+s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, bool8 indexIsSpecies)
+{
+    u8 index;
+    u8 bit;
+    u8 mask;
+    s8 retVal;
+
+    if (indexIsSpecies)
+        nationalDexNo = SpeciesToNationalPokedexNum(nationalDexNo);
+
+    nationalDexNo--;
+    index = nationalDexNo / 8;
+    bit = nationalDexNo % 8;
+    mask = 1 << bit;
+    retVal = 0;
+    switch (caseID)
+    {
+    case FLAG_GET_SEEN:
+        if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+        }
+        break;
+    case FLAG_GET_CAUGHT:
+        if (gSaveBlock2Ptr->pokedex.owned[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+        }
+        break;
+    case FLAG_SET_SEEN:
+        gSaveBlock2Ptr->pokedex.seen[index] |= mask;
+        gSaveBlock1Ptr->seen1[index] |= mask;
+        gSaveBlock1Ptr->seen2[index] |= mask;
+        break;
+    case FLAG_SET_CAUGHT:
+        gSaveBlock2Ptr->pokedex.owned[index] |= mask;
+        break;
+    }
+    return retVal;
+}
+
+u16 sub_8104BBC(u8 caseID, bool8 whichDex)
+{
+    u16 count = 0;
+    u16 i;
+
+    switch (whichDex)
+    {
+    case 0: // Kanto
+        for (i = 0; i < KANTO_DEX_COUNT; i++)
+        {
+            if (sub_8104AB0(i + 1, caseID, FALSE))
+                count++;
+        }
+        break;
+    case 1: // National
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+        {
+            if (sub_8104AB0(i + 1, caseID, FALSE))
+                count++;
+
+        }
+        break;
+    }
+    return count;
+}
+
+void sub_8104C2C(const u8 *src)
+{
+    sub_81047C8(1, 0, src, 236 - GetStringWidth(0, src, 0), 2, 4);
 }

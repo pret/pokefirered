@@ -66,7 +66,7 @@ struct PokedexScreenData
     u16 field_48;
     u8 filler_4A[0x10];
     u16 field_5A;
-    u8 filler_5C[0x4];
+    u16 * field_5C;
     u8 field_60;
     u8 field_61;
     u16 field_62;
@@ -158,6 +158,7 @@ extern const struct WindowTemplate gUnknown_84521CC;
 extern const u16 gUnknown_845228C[];
 extern const u8 (*const gUnknown_8452334[])[4];
 extern const u8 *const gUnknown_8452344[];
+extern const u8 gUnknown_8452388[][30];
 extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
 
@@ -1945,5 +1946,37 @@ bool8 sub_81051D0(u16 a0, u16 *a1, u8 a2)
         *dst = a0;
         dst += 32;
     }
+    return FALSE;
+}
+
+bool8 sub_81051F0(u8 a0)
+{
+    int i;
+    int r4;
+    u16 *bg1buff = GetBgTilemapBuffer(1);
+    u16 *bg2buff = GetBgTilemapBuffer(2);
+    u16 *bg3buff = GetBgTilemapBuffer(3);
+    u16 *sp04 = gUnknown_203ACF0->field_5C + 0x800;
+    u16 *sp08 = gUnknown_203ACF0->field_5C + 0x400;
+    u16 *sp0C = gUnknown_203ACF0->field_5C + 0x000;
+    for (i = 0; i < 30; i++)
+    {
+        r4 = gUnknown_8452388[a0][i];
+        if (r4 == 30)
+        {
+            sub_81051D0(0x000, bg1buff, i);
+            sub_81051D0(0x000, bg2buff, i);
+            sub_81051D0(0x00C, bg3buff, i);
+        }
+        else
+        {
+            sub_81051AC(sp04, r4, bg1buff, i);
+            sub_81051AC(sp08, r4, bg2buff, i);
+            sub_81051AC(sp0C, r4, bg3buff, i);
+        }
+    }
+    CopyBgTilemapBufferToVram(1);
+    CopyBgTilemapBufferToVram(2);
+    CopyBgTilemapBufferToVram(3);
     return FALSE;
 }

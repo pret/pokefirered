@@ -107,7 +107,7 @@ void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
 u16 sub_8104BBC(u8 caseID, bool8 whichDex);
 void sub_8104C2C(const u8 *src);
 void sub_8104E90(void);
-void sub_8104F0C(u8 a0);
+bool8 sub_8104F0C(bool8 a0);
 void sub_8105058(u8 a0);
 void sub_8105178(u8 a0, u8 a1, u8 a2);
 bool8 sub_81052D0(u8 a0);
@@ -120,6 +120,8 @@ u8 sub_81068A0(u8 a0);
 void sub_810699C(u8 a0);
 bool8 sub_8106A20(u16 a0);
 void sub_81067C0(void);
+void sub_81068DC(u8 a0, u8 a1);
+u8 sub_8106AF8(u16 a0);
 void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
 
@@ -127,6 +129,7 @@ extern const u16 gUnknown_8440124[];
 extern const u32 gUnknown_8440274[];
 extern const u32 gUnknown_84403AC[];
 extern const u16 gUnknown_84404C8[];
+extern const u16 gUnknown_84406C8[];
 extern const u16 gUnknown_84406E0[];
 extern const u16 gUnknown_8440EF0[];
 extern const u16 gUnknown_8443460[];
@@ -154,6 +157,7 @@ extern const struct WindowTemplate gUnknown_84521C4;
 extern const struct WindowTemplate gUnknown_84521CC;
 extern const u16 gUnknown_845228C[];
 extern const u8 (*const gUnknown_8452334[])[4];
+extern const u8 *const gUnknown_8452344[];
 extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
 
@@ -1832,7 +1836,7 @@ void sub_8104E90(void)
     }
 }
 
-void sub_8104EC0(u8 unused, u16 a1, u16 a2)
+void sub_8104EC0(u8 unused, u16 a1, u16 a2, u8 unused2, u8 unused3)
 {
     u8 buffer[30];
     u8 *ptr = StringCopy(buffer, gUnknown_8416002);
@@ -1840,4 +1844,106 @@ void sub_8104EC0(u8 unused, u16 a1, u16 a2)
     *ptr++ = CHAR_SLASH;
     ptr = ConvertIntToDecimalStringN(ptr, a2, STR_CONV_MODE_RIGHT_ALIGN, 2);
     sub_8106E78(buffer, 2);
+}
+
+bool8 sub_8104F0C(bool8 a0)
+{
+    FillBgTilemapBufferRect_Palette0(3, 2, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 32, 20);
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
+    sub_81068DC(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B);
+    FillWindowPixelBuffer(0, PIXEL_FILL(15));
+    if (a0)
+    {
+        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 1);
+    }
+    else
+    {
+        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 0);
+        sub_8104EC0(0, sub_8106AF8(gUnknown_203ACF0->field_2B), sub_8106AF8(gUnknown_203ACF0->field_2A - 1), 160, 2);
+    }
+    CopyWindowToVram(0, 2);
+    FillWindowPixelBuffer(1, PIXEL_FILL(15));
+    if (!a0)
+        sub_8104C2C(gUnknown_8415F6C);
+    CopyWindowToVram(1, 2);
+    if (gUnknown_203ACF0->field_18[0] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[0], 0, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[1] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[1], 1, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[2] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[2], 2, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[3] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[3], 3, gUnknown_203ACF0->field_2C);
+    return FALSE;
+}
+
+void sub_8105058(u8 a0)
+{
+    int i;
+    u32 r7;
+
+    if (a0 == 0xFF)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            LoadPalette(&gUnknown_84406C8[0], 0x52 + 0x10 * i, 2);
+            LoadPalette(&gUnknown_84406C8[1], 0x58 + 0x10 * i, 2);
+        }
+        LoadPalette(&gUnknown_84406C8[0], 0x141, 2);
+        gUnknown_203ACF0->field_2E = 0;
+    }
+    else
+    {
+        gUnknown_203ACF0->field_2E++;
+        if (gUnknown_203ACF0->field_2E == 16)
+            gUnknown_203ACF0->field_2E = 0;
+        r7 = gUnknown_203ACF0->field_2E >> 2;
+        for (i = 0; i < 4; i++)
+        {
+            if (i == a0)
+            {
+                LoadPalette(&gUnknown_84406C8[2 * r7 + 2], 0x52 + 0x10 * i, 2);
+                LoadPalette(&gUnknown_84406C8[2 * r7 + 3], 0x58 + 0x10 * i, 2);
+            }
+            else
+            {
+                LoadPalette(&gUnknown_84406C8[0], 0x52 + 0x10 * i, 2);
+                LoadPalette(&gUnknown_84406C8[1], 0x58 + 0x10 * i, 2);
+            }
+        }
+        LoadPalette(&gUnknown_84406C8[2 * r7 + 2], 0x141, 2);
+    }
+}
+
+void sub_8105178(u8 a0, u8 a1, u8 a2)
+{
+    a2--;
+    ListMenuUpdateCursorObject(a0, gUnknown_8452334[a2][a1][2] * 8, gUnknown_8452334[a2][a1][3] * 8, 0);
+}
+
+bool8 sub_81051AC(const u16 *a0, u8 a1, u16 *a2, u8 a3)
+{
+    int i;
+    const u16 *src = &a0[a1];
+    u16 *dst = &a2[a3];
+    for (i = 0; i < 20; i++)
+    {
+        *dst = *src;
+        dst += 32;
+        src += 32;
+    }
+    return FALSE;
+}
+
+bool8 sub_81051D0(u16 a0, u16 *a1, u8 a2)
+{
+    int i;
+    u16 *dst = &a1[a2];
+    for (i = 0; i < 20; i++)
+    {
+        *dst = a0;
+        dst += 32;
+    }
+    return FALSE;
 }

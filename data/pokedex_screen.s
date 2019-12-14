@@ -2,6 +2,7 @@
 #include "constants/flags.h"
 #include "constants/moves.h"
 #include "constants/species.h"
+#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -423,142 +424,147 @@ gUnknown_843FAB0:: @ 843FAB0
 	.4byte gMonFootprint_Bulbasaur
 
 gUnknown_8440124:: @ 8440124 bin.lz
-	.incbin "baserom.gba", 0x440124, 0x150
+	.incbin "graphics/pokedex/unk_8440124.bin.lz"
 
 gUnknown_8440274:: @ 8440274 4bpp.lz
-	.incbin "baserom.gba", 0x440274, 0x138
+	.incbin "graphics/pokedex/unk_8440274.4bpp.lz"
 
 gUnknown_84403AC:: @ 84403AC 4bpp.lz
-	.incbin "baserom.gba", 0x4403AC, 0x11C
+	.incbin "graphics/pokedex/unk_84403AC.4bpp.lz"
 
 gUnknown_84404C8:: @ 84404C8 gbapal
-	.incbin "baserom.gba", 0x4404C8, 0x200
+	.incbin "graphics/pokedex/unk_84404C8.gbapal"
 
 gUnknown_84406C8:: @ 84406C8 data16
-	.2byte 0x46d8, 0x531a
-
-gUnknown_84406CC:: @ 84406CC data16
-	.2byte 0x3e9a
-
-gUnknown_84406CE:: @ 84406CE data16
-	.2byte 0x4efb, 0x3e5c, 0x4edc, 0x361e, 0x4abd, 0x3e5c, 0x4edc, 0x3e9a, 0x4efb
+	.2byte RGB(24, 22, 17), RGB(26, 24, 20)
+	.2byte RGB(26, 20, 15), RGB(27, 23, 19)
+	.2byte RGB(28, 18, 15), RGB(28, 22, 19)
+	.2byte RGB(30, 16, 13), RGB(29, 21, 18)
+	.2byte RGB(28, 18, 15), RGB(28, 22, 19)
+	.2byte RGB(26, 20, 15), RGB(27, 23, 19)
 
 gUnknown_84406E0:: @ 84406E0 gbapal
-	.incbin "baserom.gba", 0x4406E0, 0x200
+	.incbin "graphics/pokedex/unk_84406E0.gbapal"
 
-gUnknown_84408E0::
-	.incbin "baserom.gba", 0x4408E0, 0x2F8
+gUnknown_84408E0:: @ bin.lz
+	.incbin "graphics/pokedex/unk_84408E0.bin.lz"
 
-gUnknown_8440BD8::
-	.incbin "baserom.gba", 0x440BD8, 0x318
+gUnknown_8440BD8:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8440BD8.bin.lz"
 
 gUnknown_8440EF0:: @ 8440EF0 bin.lz
-	.incbin "baserom.gba", 0x440EF0, 0x23C
+	.incbin "graphics/pokedex/unk_8440EF0.bin.lz"
 
-gUnknown_844112C::
-	.incbin "baserom.gba", 0x44112C, 0x390
+gUnknown_844112C:: @ bin.lz
+	.incbin "graphics/pokedex/unk_844112C.bin.lz"
 
-gUnknown_84414BC::
-	.incbin "baserom.gba", 0x4414BC, 0x584
+gUnknown_84414BC:: @ bin.lz
+	.incbin "graphics/pokedex/unk_84414BC.bin.lz"
 
-gUnknown_8441A40::
-	.incbin "baserom.gba", 0x441A40, 0x314
+gUnknown_8441808:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8441808.bin.lz"
 
-gUnknown_8441D54::
-	.incbin "baserom.gba", 0x441D54, 0x2B0
+gUnknown_8441A40:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8441A40.bin.lz"
 
-gUnknown_8442004::
-	.incbin "baserom.gba", 0x442004, 0x238
+gUnknown_8441D54:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8441D54.bin.lz"
 
-gUnknown_844223C::
-	.incbin "baserom.gba", 0x44223C, 0x2A8
+gUnknown_8442004:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8442004.bin.lz"
 
-gUnknown_84424E4::
-	.incbin "baserom.gba", 0x4424E4, 0x354
+gUnknown_844223C:: @ bin.lz
+	.incbin "graphics/pokedex/unk_844223C.bin.lz"
 
-gUnknown_8442838::
-	.incbin "baserom.gba", 0x442838, 0x388
+gUnknown_84424E4:: @ bin.lz
+	.incbin "graphics/pokedex/unk_84424E4.bin.lz"
 
-gUnknown_8442BC0::
-	.incbin "baserom.gba", 0x442BC0, 0x338
+gUnknown_8442838:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8442838.bin.lz"
 
-gUnknown_8442EF8::
-	.incbin "baserom.gba", 0x442EF8, 0x294
+gUnknown_8442BC0:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8442BC0.bin.lz"
 
-gUnknown_844318C::
-	.incbin "baserom.gba", 0x44318C, 0x294
+gUnknown_8442EF8:: @ bin.lz
+	.incbin "graphics/pokedex/unk_8442EF8.bin.lz"
 
-gUnknown_8443420::
-	.incbin "baserom.gba", 0x443420, 0x20
+gUnknown_844318C:: @ bin.lz
+	.incbin "graphics/pokedex/unk_844318C.bin.lz"
 
-gUnknown_8443440::
-	.incbin "baserom.gba", 0x443440, 0x20
+gUnknown_8443420:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443420.gbapal"
+
+gUnknown_8443440:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443440.gbapal"
 
 gUnknown_8443460:: @ 8443460 gbapal
-	.incbin "baserom.gba", 0x443460, 0x20
+	.incbin "graphics/pokedex/unk_8443460.gbapal"
 
-gUnknown_8443480::
-	.incbin "baserom.gba", 0x443480, 0x20
+gUnknown_8443480:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443480.gbapal"
 
-gUnknown_84434A0::
-	.incbin "baserom.gba", 0x4434A0, 0x40
+gUnknown_84434A0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84434A0.gbapal"
 
-gUnknown_84434E0::
-	.incbin "baserom.gba", 0x4434E0, 0x20
+gUnknown_84434C0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84434C0.gbapal"
 
-gUnknown_8443500::
-	.incbin "baserom.gba", 0x443500, 0x20
+gUnknown_84434E0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84434E0.gbapal"
 
-gUnknown_8443520::
-	.incbin "baserom.gba", 0x443520, 0x20
+gUnknown_8443500:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443500.gbapal"
 
-gUnknown_8443540::
-	.incbin "baserom.gba", 0x443540, 0x20
+gUnknown_8443520:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443520.gbapal"
 
-gUnknown_8443560::
-	.incbin "baserom.gba", 0x443560, 0x20
+gUnknown_8443540:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443540.gbapal"
 
-gUnknown_8443580::
-	.incbin "baserom.gba", 0x443580, 0x20
+gUnknown_8443560:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443560.gbapal"
 
-gUnknown_84435A0::
-	.incbin "baserom.gba", 0x4435A0, 0x20
+gUnknown_8443580:: @ gbapal
+	.incbin "graphics/pokedex/unk_8443580.gbapal"
 
-gUnknown_84435C0::
-	.incbin "baserom.gba", 0x4435C0, 0x20
+gUnknown_84435A0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84435A0.gbapal"
 
-gUnknown_84435E0::
-	.incbin "baserom.gba", 0x4435E0, 0x20
+gUnknown_84435C0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84435C0.gbapal"
+
+gUnknown_84435E0:: @ gbapal
+	.incbin "graphics/pokedex/unk_84435E0.gbapal"
 
 gUnknown_8443600:: @ 8443600 4bpp
-	.incbin "baserom.gba", 0x443600, 0x20
+	.incbin "graphics/pokedex/unk_8443600.4bpp"
 
 gUnknown_8443620:: @ 8443620 bin.lz
-	.incbin "baserom.gba", 0x443620, 0x2F0
+	.incbin "graphics/pokedex/unk_8443620.bin.lz"
 
-gUnknown_8443910:: @ 8443910
-	.incbin "baserom.gba", 0x443910, 0x78
+gUnknown_8443910:: @ 8443910 bin.lz
+	.incbin "graphics/pokedex/unk_8443910.bin.lz"
 
-gUnknown_8443988:: @ 8443988
-	.incbin "baserom.gba", 0x443988, 0x74
+gUnknown_8443988:: @ 8443988 bin.lz
+	.incbin "graphics/pokedex/unk_8443988.bin.lz"
 
-gUnknown_84439FC:: @ 84439FC
-	.incbin "baserom.gba", 0x4439FC, 0x7C
+gUnknown_84439FC:: @ 84439FC bin.lz
+	.incbin "graphics/pokedex/unk_84439FC.bin.lz"
 
-gUnknown_8443A78:: @ 8443A78
-	.incbin "baserom.gba", 0x443A78, 0x80
+gUnknown_8443A78:: @ 8443A78 bin.lz
+	.incbin "graphics/pokedex/unk_8443A78.bin.lz"
 
-gUnknown_8443AF8:: @ 8443AF8
-	.incbin "baserom.gba", 0x443AF8, 0xB8
+gUnknown_8443AF8:: @ 8443AF8 bin.lz
+	.incbin "graphics/pokedex/unk_8443AF8.bin.lz"
 
-gUnknown_8443BB0:: @ 8443BB0
-	.incbin "baserom.gba", 0x443BB0, 0xA4
+gUnknown_8443BB0:: @ 8443BB0 bin.lz
+	.incbin "graphics/pokedex/unk_8443BB0.bin.lz"
 
-gUnknown_8443C54:: @ 8443C54
-	.incbin "baserom.gba", 0x443C54, 0xAC
+gUnknown_8443C54:: @ 8443C54 bin.lz
+	.incbin "graphics/pokedex/unk_8443C54.bin.lz"
 
 gUnknown_8443D00:: @ 8443D00 4bpp
-	.incbin "baserom.gba", 0x443D00, 0x2C0
+	.incbin "graphics/pokedex/unk_8443D00.4bpp"
 
 gUnknown_8443FC0:: @ 8443FC0
 	.2byte NATIONAL_DEX_OLD_UNOWN_B
@@ -2398,8 +2404,8 @@ gUnknown_8452174:: @ 8452174 ListMenuTemplate
 gUnknown_845218C:: @ 845218C ListMenuWindowRect
 	.byte 0x00, 0x00, 0x05, 0x10, 0x00, 0x00, 0x00, 0x00
 
-gUnknown_8452194::
-	.incbin "baserom.gba", 0x452194, 0x20
+gUnknown_8452194:: @ unknown
+	.byte 0x05, 0x00, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00, 0x07, 0x00, 0x08, 0x10, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x08, 0x10, 0x02, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00
 
 gUnknown_84521B4:: @ 84521B4 ScrollArrowsTemplate
 	.byte 2, 200, 19, 3, 200, 141
@@ -2642,6 +2648,7 @@ gUnknown_845224C::
 	@ }
 
 gUnknown_8452254:: @ 8452254 struct { dataptr; dataptr; }
+	@ window template, tilemap.lz
 	.4byte gUnknown_845221C, gUnknown_8443910
 	.4byte gUnknown_8452224, gUnknown_8443988
 	.4byte gUnknown_845222C, gUnknown_84439FC
@@ -2651,19 +2658,25 @@ gUnknown_8452254:: @ 8452254 struct { dataptr; dataptr; }
 	.4byte gUnknown_845224C, gUnknown_8443C54
 
 gUnknown_845228C:: @ 845228C bin
-	.incbin "baserom.gba", 0x45228C, 0x80
+	.incbin "graphics/pokedex/unk_845228C.bin"
 
 gUnknown_845230C::
-	.incbin "baserom.gba", 0x45230C, 0x4
+	.byte 0x0b, 0x03, 0x0b, 0x0b
 
 gUnknown_8452310::
-	.incbin "baserom.gba", 0x452310, 0x8
+	.byte 0x03, 0x03, 0x0b, 0x03
+	.byte 0x12, 0x09, 0x0a, 0x0b
 
 gUnknown_8452318::
-	.incbin "baserom.gba", 0x452318, 0xC
+	.byte 0x01, 0x02, 0x09, 0x02
+	.byte 0x0b, 0x09, 0x03, 0x0b
+	.byte 0x15, 0x03, 0x15, 0x0b
 
 gUnknown_8452324::
-	.incbin "baserom.gba", 0x452324, 0x10
+	.byte 0x00, 0x02, 0x06, 0x03
+	.byte 0x07, 0x0a, 0x00, 0x0c
+	.byte 0x0f, 0x0a, 0x16, 0x0b
+	.byte 0x16, 0x02, 0x0f, 0x04
 
 gUnknown_8452334:: @ 8452334 dataptr
 	.4byte gUnknown_845230C
@@ -2683,10 +2696,19 @@ gUnknown_8452344:: @ 8452344 dataptr
 	.4byte gUnknown_8415E7B
 
 gUnknown_8452368:: @ 8452368 gbapal
-	.incbin "baserom.gba", 0x452368, 0x20
+	.incbin "graphics/pokedex/unk_8452368.gbapal"
 
-gUnknown_8452388:: @ 8452388 data16
-	.incbin "baserom.gba", 0x452388, 0x12C
+gUnknown_8452388:: @ 8452388 data8
+	.byte 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x05, 0x0b, 0x11, 0x17, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x02, 0x05, 0x08, 0x0b, 0x0e, 0x11, 0x14, 0x17, 0x1a, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x02, 0x03, 0x05, 0x07, 0x09, 0x0b, 0x0d, 0x0f, 0x11, 0x13, 0x15, 0x17, 0x19, 0x1b, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x02, 0x04, 0x05, 0x07, 0x08, 0x0a, 0x0b, 0x0d, 0x0e, 0x10, 0x11, 0x13, 0x14, 0x16, 0x17, 0x19, 0x1a, 0x1c, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x01, 0x02, 0x03, 0x04, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0f, 0x10, 0x11, 0x13, 0x14, 0x15, 0x17, 0x18, 0x19, 0x1b, 0x1c, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x14, 0x15, 0x16, 0x17, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1e, 0x1e, 0x1e
+	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1e, 0x1e
+	.byte 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e
+	.byte 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d
 
 gUnknown_84524B4:: @ 84524B4 ScrollArrowsTemplate
 	.byte 0, 16, 80, 1, 224, 80

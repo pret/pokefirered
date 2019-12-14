@@ -975,7 +975,9 @@ extern const u8 gUnknown_8415DD7[];
 extern const u8 gUnknown_8415F3D[];
 extern const u8 gUnknown_8415F4A[];
 extern const u8 gUnknown_8415F66[];
+extern const u8 gUnknown_8415F6C[];
 extern const u8 gUnknown_8415FFF[];
+extern const u8 gUnknown_8416002[];
 
 // trainer card
 extern const u8 gText_WaitingTrainerFinishReading[];

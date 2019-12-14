@@ -21,6 +21,7 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -40,7 +41,9 @@ struct PokedexScreenData
     u8 field_15;
     u8 field_16;
     u8 field_17;
-    u16 field_18[0x8];
+    u16 field_18[0x4];
+    u8 field_20[0x4];
+    u8 field_24[0x4];
     u8 field_28;
     u8 field_29;
     u8 field_2A;
@@ -63,7 +66,7 @@ struct PokedexScreenData
     u16 field_48;
     u8 filler_4A[0x10];
     u16 field_5A;
-    u8 filler_5C[0x4];
+    u16 * field_5C;
     u8 field_60;
     u8 field_61;
     u16 field_62;
@@ -101,10 +104,10 @@ void sub_81047B0(u8 *windowId_p);
 void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
 void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
-u16 sub_8104BBC(u8 a0, u8 a1);
-void sub_8104C2C(const u8 *a0);
+u16 sub_8104BBC(u8 caseID, bool8 whichDex);
+void sub_8104C2C(const u8 *src);
 void sub_8104E90(void);
-void sub_8104F0C(u8 a0);
+bool8 sub_8104F0C(bool8 a0);
 void sub_8105058(u8 a0);
 void sub_8105178(u8 a0, u8 a1, u8 a2);
 bool8 sub_81052D0(u8 a0);
@@ -117,15 +120,20 @@ u8 sub_81068A0(u8 a0);
 void sub_810699C(u8 a0);
 bool8 sub_8106A20(u16 a0);
 void sub_81067C0(void);
+void sub_81068DC(u8 a0, u8 a1);
+u8 sub_8106AF8(u16 a0);
 void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
 
+extern const u16 gUnknown_8440124[];
 extern const u32 gUnknown_8440274[];
 extern const u32 gUnknown_84403AC[];
 extern const u16 gUnknown_84404C8[];
+extern const u16 gUnknown_84406C8[];
 extern const u16 gUnknown_84406E0[];
 extern const u16 gUnknown_8440EF0[];
 extern const u16 gUnknown_8443460[];
+extern const u8 gUnknown_8443600[];
 extern const u16 gUnknown_8443FC0[];
 extern const u16 gUnknown_84442F6[];
 extern const u16 gUnknown_84448FE[];
@@ -136,15 +144,21 @@ extern const struct PokedexScreenData gUnknown_8451EE4;
 extern const struct WindowTemplate gUnknown_8451F54;
 extern const struct WindowTemplate gUnknown_8451F5C;
 extern const struct WindowTemplate gUnknown_8451F64;
-extern const struct WindowTemplate gUnknown_845216C;
-extern const struct ListMenuTemplate gUnknown_8452174;
 extern const struct ListMenuTemplate gUnknown_8452004;
 extern const struct ListMenuTemplate gUnknown_84520BC;
 extern const struct ScrollArrowsTemplate gUnknown_84520D4;
 extern const struct ScrollArrowsTemplate gUnknown_84520E4;
 extern const struct PokedexScreenWindowGfx gUnknown_84520F4[];
+extern const struct WindowTemplate gUnknown_845216C;
+extern const struct ListMenuTemplate gUnknown_8452174;
 extern const struct ListMenuWindowRect gUnknown_845218C;
 extern const struct ScrollArrowsTemplate gUnknown_84521B4;
+extern const struct WindowTemplate gUnknown_84521C4;
+extern const struct WindowTemplate gUnknown_84521CC;
+extern const u16 gUnknown_845228C[];
+extern const u8 (*const gUnknown_8452334[])[4];
+extern const u8 *const gUnknown_8452344[];
+extern const u8 gUnknown_8452388[][30];
 extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
 
@@ -666,7 +680,7 @@ void sub_810345C(void)
 
 u16 sub_8103518(u8 a0)
 {
-    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_DEOXYS : NATIONAL_DEX_MEW;
+    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_COUNT : KANTO_DEX_COUNT;
     u16 ndex_num;
     u16 ret = NATIONAL_DEX_NONE;
     s32 i;
@@ -677,7 +691,7 @@ u16 sub_8103518(u8 a0)
     {
     default:
     case 0:
-        for (i = 0; i < NATIONAL_DEX_MEW; i++)
+        for (i = 0; i < KANTO_DEX_COUNT; i++)
         {
             ndex_num = i + 1;
             seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -729,7 +743,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 3:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gUnknown_84442F6[i];
             if (ndex_num <= max_n)
@@ -746,7 +760,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 4:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gUnknown_84445FA[i];
             if (ndex_num <= max_n)
@@ -763,7 +777,7 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 5:
-        for (i = 0; i < NATIONAL_DEX_DEOXYS; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = i + 1;
             seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -1689,4 +1703,280 @@ void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)
     u16 dexNum = SpeciesToNationalPokedexNum(species);
     sub_81047C8(windowId, fontId, gUnknown_8415FFF, x, y, 0);
     sub_8104880(windowId, fontId, dexNum, x + 9, y, 0);
+}
+
+s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, bool8 indexIsSpecies)
+{
+    u8 index;
+    u8 bit;
+    u8 mask;
+    s8 retVal;
+
+    if (indexIsSpecies)
+        nationalDexNo = SpeciesToNationalPokedexNum(nationalDexNo);
+
+    nationalDexNo--;
+    index = nationalDexNo / 8;
+    bit = nationalDexNo % 8;
+    mask = 1 << bit;
+    retVal = 0;
+    switch (caseID)
+    {
+    case FLAG_GET_SEEN:
+        if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+        }
+        break;
+    case FLAG_GET_CAUGHT:
+        if (gSaveBlock2Ptr->pokedex.owned[index] & mask)
+        {
+            if ((gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock2Ptr->pokedex.seen[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
+                && (gSaveBlock2Ptr->pokedex.owned[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
+                retVal = 1;
+        }
+        break;
+    case FLAG_SET_SEEN:
+        gSaveBlock2Ptr->pokedex.seen[index] |= mask;
+        gSaveBlock1Ptr->seen1[index] |= mask;
+        gSaveBlock1Ptr->seen2[index] |= mask;
+        break;
+    case FLAG_SET_CAUGHT:
+        gSaveBlock2Ptr->pokedex.owned[index] |= mask;
+        break;
+    }
+    return retVal;
+}
+
+u16 sub_8104BBC(u8 caseID, bool8 whichDex)
+{
+    u16 count = 0;
+    u16 i;
+
+    switch (whichDex)
+    {
+    case 0: // Kanto
+        for (i = 0; i < KANTO_DEX_COUNT; i++)
+        {
+            if (sub_8104AB0(i + 1, caseID, FALSE))
+                count++;
+        }
+        break;
+    case 1: // National
+        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+        {
+            if (sub_8104AB0(i + 1, caseID, FALSE))
+                count++;
+
+        }
+        break;
+    }
+    return count;
+}
+
+void sub_8104C2C(const u8 *src)
+{
+    sub_81047C8(1, 0, src, 236 - GetStringWidth(0, src, 0), 2, 4);
+}
+
+bool8 sub_8104C64(u16 a0, u8 a1, u8 a2)
+{
+    struct WindowTemplate template;
+    a2--;
+    CopyToBgTilemapBufferRect_ChangePalette(3, gUnknown_845228C, gUnknown_8452334[a2][a1][0], gUnknown_8452334[a2][a1][1], 8, 8, a1 + 5);
+    if (gUnknown_203ACF0->field_20[a1] == 0xFF)
+    {
+        template = gUnknown_84521C4;
+        template.tilemapLeft = gUnknown_8452334[a2][a1][0];
+        template.tilemapTop = gUnknown_8452334[a2][a1][1];
+        template.paletteNum = a1 + 1;
+        template.baseBlock = a1 * 64 + 8;
+        gUnknown_203ACF0->field_20[a1] = AddWindow(&template);
+        FillWindowPixelBuffer(gUnknown_203ACF0->field_20[a1], PIXEL_FILL(0));
+        sub_81049FC(gUnknown_203ACF0->field_20[a1], a0, a1 * 16 + 16);
+        PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
+        CopyWindowToVram(gUnknown_203ACF0->field_20[a1], 2);
+    }
+    else
+        PutWindowTilemap(gUnknown_203ACF0->field_20[a1]);
+
+    if (gUnknown_203ACF0->field_24[a1] == 0xFF)
+    {
+        if (a0 != SPECIES_NONE)
+        {
+            template = gUnknown_84521CC;
+            template.tilemapLeft = gUnknown_8452334[a2][a1][2];
+            template.tilemapTop = gUnknown_8452334[a2][a1][3];
+            template.baseBlock = a1 * 40 + 0x108;
+            gUnknown_203ACF0->field_24[a1] = AddWindow(&template);
+            CopyToWindowPixelBuffer(gUnknown_203ACF0->field_24[a1], gUnknown_8440124, 0, 0);
+            sub_8104A34(gUnknown_203ACF0->field_24[a1], 0, a0, 12, 0);
+            sub_81047C8(gUnknown_203ACF0->field_24[a1], 2, gSpeciesNames[a0], 2, 13, 0);
+            if (sub_8104AB0(a0, FLAG_GET_CAUGHT, TRUE))
+                BlitBitmapRectToWindow(gUnknown_203ACF0->field_24[a1], gUnknown_8443600, 0, 0, 8, 8, 2, 3, 8, 8);
+            PutWindowTilemap(gUnknown_203ACF0->field_24[a1]);
+            CopyWindowToVram(gUnknown_203ACF0->field_24[a1], 2);
+        }
+    }
+    else
+        PutWindowTilemap(gUnknown_203ACF0->field_24[a1]);
+
+    return TRUE;
+}
+
+void sub_8104E90(void)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        sub_81047B0(&gUnknown_203ACF0->field_20[i]);
+        sub_81047B0(&gUnknown_203ACF0->field_24[i]);
+    }
+}
+
+void sub_8104EC0(u8 unused, u16 a1, u16 a2, u8 unused2, u8 unused3)
+{
+    u8 buffer[30];
+    u8 *ptr = StringCopy(buffer, gUnknown_8416002);
+    ptr = ConvertIntToDecimalStringN(ptr, a1, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    *ptr++ = CHAR_SLASH;
+    ptr = ConvertIntToDecimalStringN(ptr, a2, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    sub_8106E78(buffer, 2);
+}
+
+bool8 sub_8104F0C(bool8 a0)
+{
+    FillBgTilemapBufferRect_Palette0(3, 2, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 32, 20);
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 32, 20);
+    sub_81068DC(gUnknown_203ACF0->field_28, gUnknown_203ACF0->field_2B);
+    FillWindowPixelBuffer(0, PIXEL_FILL(15));
+    if (a0)
+    {
+        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 1);
+    }
+    else
+    {
+        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 0);
+        sub_8104EC0(0, sub_8106AF8(gUnknown_203ACF0->field_2B), sub_8106AF8(gUnknown_203ACF0->field_2A - 1), 160, 2);
+    }
+    CopyWindowToVram(0, 2);
+    FillWindowPixelBuffer(1, PIXEL_FILL(15));
+    if (!a0)
+        sub_8104C2C(gUnknown_8415F6C);
+    CopyWindowToVram(1, 2);
+    if (gUnknown_203ACF0->field_18[0] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[0], 0, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[1] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[1], 1, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[2] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[2], 2, gUnknown_203ACF0->field_2C);
+    if (gUnknown_203ACF0->field_18[3] != 0xFFFF)
+        sub_8104C64(gUnknown_203ACF0->field_18[3], 3, gUnknown_203ACF0->field_2C);
+    return FALSE;
+}
+
+void sub_8105058(u8 a0)
+{
+    int i;
+    u32 r7;
+
+    if (a0 == 0xFF)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            LoadPalette(&gUnknown_84406C8[0], 0x52 + 0x10 * i, 2);
+            LoadPalette(&gUnknown_84406C8[1], 0x58 + 0x10 * i, 2);
+        }
+        LoadPalette(&gUnknown_84406C8[0], 0x141, 2);
+        gUnknown_203ACF0->field_2E = 0;
+    }
+    else
+    {
+        gUnknown_203ACF0->field_2E++;
+        if (gUnknown_203ACF0->field_2E == 16)
+            gUnknown_203ACF0->field_2E = 0;
+        r7 = gUnknown_203ACF0->field_2E >> 2;
+        for (i = 0; i < 4; i++)
+        {
+            if (i == a0)
+            {
+                LoadPalette(&gUnknown_84406C8[2 * r7 + 2], 0x52 + 0x10 * i, 2);
+                LoadPalette(&gUnknown_84406C8[2 * r7 + 3], 0x58 + 0x10 * i, 2);
+            }
+            else
+            {
+                LoadPalette(&gUnknown_84406C8[0], 0x52 + 0x10 * i, 2);
+                LoadPalette(&gUnknown_84406C8[1], 0x58 + 0x10 * i, 2);
+            }
+        }
+        LoadPalette(&gUnknown_84406C8[2 * r7 + 2], 0x141, 2);
+    }
+}
+
+void sub_8105178(u8 a0, u8 a1, u8 a2)
+{
+    a2--;
+    ListMenuUpdateCursorObject(a0, gUnknown_8452334[a2][a1][2] * 8, gUnknown_8452334[a2][a1][3] * 8, 0);
+}
+
+bool8 sub_81051AC(const u16 *a0, u8 a1, u16 *a2, u8 a3)
+{
+    int i;
+    const u16 *src = &a0[a1];
+    u16 *dst = &a2[a3];
+    for (i = 0; i < 20; i++)
+    {
+        *dst = *src;
+        dst += 32;
+        src += 32;
+    }
+    return FALSE;
+}
+
+bool8 sub_81051D0(u16 a0, u16 *a1, u8 a2)
+{
+    int i;
+    u16 *dst = &a1[a2];
+    for (i = 0; i < 20; i++)
+    {
+        *dst = a0;
+        dst += 32;
+    }
+    return FALSE;
+}
+
+bool8 sub_81051F0(u8 a0)
+{
+    int i;
+    int r4;
+    u16 *bg1buff = GetBgTilemapBuffer(1);
+    u16 *bg2buff = GetBgTilemapBuffer(2);
+    u16 *bg3buff = GetBgTilemapBuffer(3);
+    u16 *sp04 = gUnknown_203ACF0->field_5C + 0x800;
+    u16 *sp08 = gUnknown_203ACF0->field_5C + 0x400;
+    u16 *sp0C = gUnknown_203ACF0->field_5C + 0x000;
+    for (i = 0; i < 30; i++)
+    {
+        r4 = gUnknown_8452388[a0][i];
+        if (r4 == 30)
+        {
+            sub_81051D0(0x000, bg1buff, i);
+            sub_81051D0(0x000, bg2buff, i);
+            sub_81051D0(0x00C, bg3buff, i);
+        }
+        else
+        {
+            sub_81051AC(sp04, r4, bg1buff, i);
+            sub_81051AC(sp08, r4, bg2buff, i);
+            sub_81051AC(sp0C, r4, bg3buff, i);
+        }
+    }
+    CopyBgTilemapBufferToVram(1);
+    CopyBgTilemapBufferToVram(2);
+    CopyBgTilemapBufferToVram(3);
+    return FALSE;
 }

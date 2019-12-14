@@ -1980,3 +1980,97 @@ bool8 sub_81051F0(u8 a0)
     CopyBgTilemapBufferToVram(3);
     return FALSE;
 }
+
+bool8 sub_81052D0(u8 a0)
+{
+    u16 r4;
+    if (IsNationalPokedexEnabled())
+        r4 = gUnknown_84406E0[7];
+    else
+        r4 = gUnknown_84404C8[7];
+    switch (gUnknown_203ACF0->field_02)
+    {
+    case 0:
+        gUnknown_203ACF0->field_5C = Alloc(3 * BG_SCREEN_SIZE);
+        if (a0)
+            gUnknown_203ACF0->field_02 = 6;
+        else
+            gUnknown_203ACF0->field_02 = 2;
+        break;
+    case 1:
+        Free(gUnknown_203ACF0->field_5C);
+        return TRUE;
+    case 2:
+        BeginNormalPaletteFade(0x00007FFF, 0, 0, 16, r4);
+        gUnknown_203ACF0->field_02++;
+        break;
+    case 3:
+        FillBgTilemapBufferRect_Palette0(3, 0x00C, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 32, 20);
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 32, 20);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
+        gUnknown_203ACF0->field_02++;
+        break;
+    case 4:
+        BeginNormalPaletteFade(0x00007FFF, 0, 0, 0, r4);
+        sub_8104F0C(FALSE);
+        CpuFastCopy(GetBgTilemapBuffer(3), &gUnknown_203ACF0->field_5C[0 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        CpuFastCopy(GetBgTilemapBuffer(2), &gUnknown_203ACF0->field_5C[1 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        CpuFastCopy(GetBgTilemapBuffer(1), &gUnknown_203ACF0->field_5C[2 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        FillBgTilemapBufferRect_Palette0(3, 0x00C, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(2, 0x000, 0, 0, 32, 20);
+        FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 0, 32, 20);
+        gUnknown_203ACF0->field_03 = 0;
+        gUnknown_203ACF0->field_02++;
+        PlaySE(SE_TB_START);
+        break;
+    case 5:
+        if (gUnknown_203ACF0->field_03 < 10)
+        {
+            sub_81051F0(gUnknown_203ACF0->field_03);
+            gUnknown_203ACF0->field_03++;
+        }
+        else
+        {
+            gUnknown_203ACF0->field_02 = 1;
+        }
+        break;
+    case 6:
+        CpuFastCopy(GetBgTilemapBuffer(3), &gUnknown_203ACF0->field_5C[0 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        CpuFastCopy(GetBgTilemapBuffer(2), &gUnknown_203ACF0->field_5C[1 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        CpuFastCopy(GetBgTilemapBuffer(1), &gUnknown_203ACF0->field_5C[2 * BG_SCREEN_SIZE / 2], BG_SCREEN_SIZE);
+        gUnknown_203ACF0->field_03 = 9;
+        gUnknown_203ACF0->field_02++;
+        PlaySE(SE_TB_START);
+        break;
+    case 7:
+        if (gUnknown_203ACF0->field_03 != 0)
+        {
+            sub_81051F0(gUnknown_203ACF0->field_03);
+            gUnknown_203ACF0->field_03--;
+        }
+        else
+        {
+            sub_81051F0(gUnknown_203ACF0->field_02);
+            BeginNormalPaletteFade(0x00007FFF, 0, 16, 16, r4);
+            gUnknown_203ACF0->field_02++;
+        }
+        break;
+    case 8:
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        sub_8104F0C(FALSE);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
+        gUnknown_203ACF0->field_02++;
+        break;
+    case 9:
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        BeginNormalPaletteFade(0x00007FFF, 0, 16, 0, r4);
+        gUnknown_203ACF0->field_02 = 1;
+        break;
+    }
+    return FALSE;
+}

@@ -104,7 +104,7 @@ void sub_81047B0(u8 *windowId_p);
 void sub_81047C8(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_810491C(u8 windowId, u8 fontId, u16 num, u8 x, u8 y, u8 colorIdx);
 void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y);
-u16 sub_8104BBC(u8 caseID, bool8 whichDex);
+u16 sub_8104BBC(u8 caseId, bool8 whichDex);
 void sub_8104C2C(const u8 *src);
 void sub_8104E90(void);
 bool8 sub_8104F0C(bool8 a0);
@@ -215,7 +215,7 @@ void sub_810250C(void)
     gUnknown_203ACF0 = Alloc(sizeof(*gUnknown_203ACF0));
     *gUnknown_203ACF0 = gUnknown_8451EE4;
     gUnknown_203ACF0->field_00 = taskId;
-    gUnknown_203ACF0->field_44 = Alloc(386 * sizeof(struct ListMenuItem));
+    gUnknown_203ACF0->field_44 = Alloc(NATIONAL_DEX_COUNT * sizeof(struct ListMenuItem));
     gUnknown_203ACF0->field_6A = sub_8104BBC(0, 1);
     gUnknown_203ACF0->field_6C = sub_8104BBC(1, 1);
     gUnknown_203ACF0->field_66 = sub_8104BBC(0, 0);
@@ -349,7 +349,6 @@ void sub_810287C(u8 taskId)
         ListMenuGetScrollAndRow(gUnknown_203ACF0->field_17, &gUnknown_203ACF0->field_62, NULL);
         if (JOY_NEW(A_BUTTON))
         {
-            // FIXME: Get this switch to behave
             switch (gUnknown_203ACF0->field_0C)
             {
             case LIST_CANCEL:
@@ -1373,7 +1372,7 @@ bool32 sub_8104664(u8 a0)
     {
         if (r3 == 0)
             return FALSE;
-        while (r3-- >= 0)
+        while (--r3 >= 0)
         {
             if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
                 break;
@@ -1385,7 +1384,7 @@ bool32 sub_8104664(u8 a0)
     {
         if (r3 == gUnknown_203ACF0->field_48 - 1)
             return FALSE;
-        while (r3++ < gUnknown_203ACF0->field_48)
+        while (++r3 < gUnknown_203ACF0->field_48)
         {
             if ((((u32)gUnknown_203ACF0->field_44[r3].index) >> 16) & 1)
                 break;
@@ -1705,7 +1704,7 @@ void sub_8104A34(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)
     sub_8104880(windowId, fontId, dexNum, x + 9, y, 0);
 }
 
-s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, bool8 indexIsSpecies)
+s8 sub_8104AB0(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecies)
 {
     u8 index;
     u8 bit;
@@ -1720,7 +1719,7 @@ s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, bool8 indexIsSpecies)
     bit = nationalDexNo % 8;
     mask = 1 << bit;
     retVal = 0;
-    switch (caseID)
+    switch (caseId)
     {
     case FLAG_GET_SEEN:
         if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
@@ -1751,7 +1750,7 @@ s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, bool8 indexIsSpecies)
     return retVal;
 }
 
-u16 sub_8104BBC(u8 caseID, bool8 whichDex)
+u16 sub_8104BBC(u8 caseId, bool8 whichDex)
 {
     u16 count = 0;
     u16 i;
@@ -1761,14 +1760,14 @@ u16 sub_8104BBC(u8 caseID, bool8 whichDex)
     case 0: // Kanto
         for (i = 0; i < KANTO_DEX_COUNT; i++)
         {
-            if (sub_8104AB0(i + 1, caseID, FALSE))
+            if (sub_8104AB0(i + 1, caseId, FALSE))
                 count++;
         }
         break;
     case 1: // National
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
-            if (sub_8104AB0(i + 1, caseID, FALSE))
+            if (sub_8104AB0(i + 1, caseId, FALSE))
                 count++;
 
         }

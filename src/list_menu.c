@@ -70,7 +70,7 @@ static EWRAM_DATA struct MysteryGiftLinkMenuStruct sMysteryGiftLinkMenu = {0};
 struct ListMenuOverride gListMenuOverride;
 struct ListMenuTemplate gMultiuseListMenuTemplate;
 
-static u8 ListMenuInitInternal(struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
+static u8 ListMenuInitInternal(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
 static bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAndCallCallback, u8 count, bool8 movingDown);
 static void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOffset, u16 count);
 static void ListMenuDrawCursor(struct ListMenu *list);
@@ -172,7 +172,7 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
     return LIST_NOTHING_CHOSEN;
 }
 
-u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove)
+u8 ListMenuInit(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove)
 {
     u8 taskId = ListMenuInitInternal(listMenuTemplate, cursorPos, itemsAbove);
     PutWindowTilemap(listMenuTemplate->windowId);
@@ -180,7 +180,7 @@ u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 it
     return taskId;
 }
 
-u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove)
+u8 ListMenuInitInRect(const struct ListMenuTemplate *listMenuTemplate, const struct ListMenuWindowRect *rect, u16 cursorPos, u16 itemsAbove)
 {
     s32 i;
     u8 taskId = ListMenuInitInternal(listMenuTemplate, cursorPos, itemsAbove);
@@ -338,7 +338,7 @@ u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId)
     return list->itemsAbove * yMultiplier + list->template.upText_Y;
 }
 
-static u8 ListMenuInitInternal(struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove)
+static u8 ListMenuInitInternal(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove)
 {
     u8 listTaskId = CreateTask(ListMenuDummyTask, 0);
     struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;

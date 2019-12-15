@@ -1,8 +1,7 @@
 #include "global.h"
 #include "pokedex.h"
+#include "pokedex_screen.h"
 #include "constants/species.h"
-
-extern s8 sub_8104AB0(u16 nationalDexNo, u8 caseID, u8 unk);
 
 ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 

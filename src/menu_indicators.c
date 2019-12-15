@@ -50,7 +50,7 @@ static EWRAM_DATA struct ScrollArrowsTemplate sTempScrollArrowTemplate = {0};
 static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite);
 static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);
 static void Task_ScrollIndicatorArrowPair(u8 taskId);
-static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor);
+static u8 ListMenuAddRedArrowCursorObject(const struct CursorStruct *cursor);
 static void ListMenuUpdateRedArrowCursorObject(u8 taskId, u16 x, u16 y);
 static void ListMenuRemoveRedArrowCursorObject(u8 taskId);
 
@@ -422,7 +422,7 @@ void RemoveScrollIndicatorArrowPair(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 ListMenuAddCursorObjectInternal(struct CursorStruct *cursor, u32 cursorKind)
+u8 ListMenuAddCursorObjectInternal(const struct CursorStruct *cursor, u32 cursorKind)
 {
     switch (cursorKind)
     {
@@ -528,7 +528,7 @@ void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, st
     }
 }
 
-u8 ListMenuAddRedOutlineCursorObject(struct CursorStruct *cursor)
+u8 ListMenuAddRedOutlineCursorObject(const struct CursorStruct *cursor)
 {
     struct CompressedSpriteSheet spriteSheet;
     struct SpritePalette spritePal;
@@ -601,7 +601,7 @@ static void Task_RedArrowCursor(u8 taskId)
 {
 }
 
-static u8 ListMenuAddRedArrowCursorObject(struct CursorStruct *cursor)
+static u8 ListMenuAddRedArrowCursorObject(const struct CursorStruct *cursor)
 {
     struct CompressedSpriteSheet spriteSheet;
     struct SpritePalette spritePal;

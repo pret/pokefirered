@@ -1523,7 +1523,7 @@ MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex: @ 805E940
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 16
-	ldr r4, _0805E95C @ =gUnknown_839FBC8
+	ldr r4, _0805E95C @ =gMovementTypeCallbacks
 	lsrs r1, 14
 	adds r1, r4
 	ldr r1, [r1]
@@ -1532,7 +1532,7 @@ MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex: @ 805E940
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E95C: .4byte gUnknown_839FBC8
+_0805E95C: .4byte gMovementTypeCallbacks
 	thumb_func_end MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
 
 	thumb_func_start MakeObjectTemplateFromObjectEventTemplate
@@ -12235,7 +12235,7 @@ SetTrainerMovementType: @ 8063610
 	adds r2, r4, 0
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r2, _08063658 @ =gUnknown_839FBC8
+	ldr r2, _08063658 @ =gMovementTypeCallbacks
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
@@ -12252,7 +12252,7 @@ SetTrainerMovementType: @ 8063610
 	bx r0
 	.align 2, 0
 _08063654: .4byte gSprites
-_08063658: .4byte gUnknown_839FBC8
+_08063658: .4byte gMovementTypeCallbacks
 	thumb_func_end SetTrainerMovementType
 
 	thumb_func_start GetTrainerFacingDirectionMovementType

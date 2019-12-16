@@ -898,202 +898,282 @@ gUnknown_839A908:: @ 839A908
 	.incbin "graphics/object_events/pics/unknown/839A908.4bpp"
 
 gUnknown_839A988:: @ 839A988
-	.incbin "baserom.gba", 0x39A988, 0x40
+	.incbin "graphics/object_events/pics/unknown/839A988.4bpp"
 
 gUnknown_839A9C8:: @ 839A9C8
-	.incbin "baserom.gba", 0x39A9C8, 0x40
+	.incbin "graphics/object_events/pics/unknown/839A9C8.4bpp"
 
 gUnknown_839AA08:: @ 839AA08
-	.incbin "baserom.gba", 0x39AA08, 0x40
+	.incbin "graphics/object_events/pics/unknown/839AA08.4bpp"
 
 gUnknown_839AA48:: @ 839AA48
-	.incbin "baserom.gba", 0x39AA48, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AA48.4bpp"
 
 gUnknown_839AAC8:: @ 839AAC8
-	.incbin "baserom.gba", 0x39AAC8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AAC8.4bpp"
 
 gUnknown_839AB48:: @ 839AB48
-	.incbin "baserom.gba", 0x39AB48, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AB48.4bpp"
 
 gUnknown_839ABC8:: @ 839ABC8
-	.incbin "baserom.gba", 0x39ABC8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839ABC8.4bpp"
 
 gUnknown_839AC48:: @ 839AC48
-	.incbin "baserom.gba", 0x39AC48, 0x40
+	.incbin "graphics/object_events/pics/unknown/839AC48.4bpp"
 
 gUnknown_839AC88:: @ 839AC88
-	.incbin "baserom.gba", 0x39AC88, 0x40
+	.incbin "graphics/object_events/pics/unknown/839AC88.4bpp"
 
 gUnknown_839ACC8:: @ 839ACC8
-	.incbin "baserom.gba", 0x39ACC8, 0x40
+	.incbin "graphics/object_events/pics/unknown/839ACC8.4bpp"
 
 gUnknown_839AD08:: @ 839AD08
-	.incbin "baserom.gba", 0x39AD08, 0x40
+	.incbin "graphics/object_events/pics/unknown/839AD08.4bpp"
 
 gUnknown_839AD48:: @ 839AD48
-	.incbin "baserom.gba", 0x39AD48, 0x40
+	.incbin "graphics/object_events/pics/unknown/839AD48.4bpp"
 
 gUnknown_839AD88:: @ 839AD88
-	.incbin "baserom.gba", 0x39AD88, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AD88.4bpp"
 
 gUnknown_839AE08:: @ 839AE08
-	.incbin "baserom.gba", 0x39AE08, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AE08.4bpp"
 
 gUnknown_839AE88:: @ 839AE88
-	.incbin "baserom.gba", 0x39AE88, 0x80
+	.incbin "graphics/object_events/pics/unknown/839AE88.4bpp"
 
 gUnknown_839AF08:: @ 839AF08
-	.incbin "baserom.gba", 0x39AF08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839AF08.4bpp"
 
 gUnknown_839B008:: @ 839B008
-	.incbin "baserom.gba", 0x39B008, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B008.4bpp"
 
 gUnknown_839B108:: @ 839B108
-	.incbin "baserom.gba", 0x39B108, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B108.4bpp"
 
 gUnknown_839B208:: @ 839B208
-	.incbin "baserom.gba", 0x39B208, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B208.4bpp"
 
 gUnknown_839B308:: @ 839B308
-	.incbin "baserom.gba", 0x39B308, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B308.4bpp"
 
 gUnknown_839B408:: @ 839B408
-	.incbin "baserom.gba", 0x39B408, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B408.4bpp"
 
 gUnknown_839B508:: @ 839B508
-	.incbin "baserom.gba", 0x39B508, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B508.4bpp"
 
 gUnknown_839B608:: @ 839B608
-	.incbin "baserom.gba", 0x39B608, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B608.4bpp"
 
 gUnknown_839B708:: @ 839B708
-	.incbin "baserom.gba", 0x39B708, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B708.4bpp"
 
 gUnknown_839B808:: @ 839B808
-	.incbin "baserom.gba", 0x39B808, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B808.4bpp"
 
 gUnknown_839B908:: @ 839B908
-	.incbin "baserom.gba", 0x39B908, 0x100
+	.incbin "graphics/object_events/pics/unknown/839B908.4bpp"
 
 gUnknown_839BA08:: @ 839BA08
-	.incbin "baserom.gba", 0x39BA08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BA08.4bpp"
 
 gUnknown_839BB08:: @ 839BB08
-	.incbin "baserom.gba", 0x39BB08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BB08.4bpp"
 
 gUnknown_839BC08:: @ 839BC08
-	.incbin "baserom.gba", 0x39BC08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BC08.4bpp"
 
 gUnknown_839BD08:: @ 839BD08
-	.incbin "baserom.gba", 0x39BD08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BD08.4bpp"
 
 gUnknown_839BE08:: @ 839BE08
-	.incbin "baserom.gba", 0x39BE08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BE08.4bpp"
 
 gUnknown_839BF08:: @ 839BF08
-	.incbin "baserom.gba", 0x39BF08, 0x100
+	.incbin "graphics/object_events/pics/unknown/839BF08.4bpp"
 
 gUnknown_839C008:: @ 839C008
-	.incbin "baserom.gba", 0x39C008, 0x100
+	.incbin "graphics/object_events/pics/unknown/839C008.4bpp"
 
 gUnknown_839C108:: @ 839C108
-	.incbin "baserom.gba", 0x39C108, 0x100
+	.incbin "graphics/object_events/pics/unknown/839C108.4bpp"
 
 gUnknown_839C208:: @ 839C208
-	.incbin "baserom.gba", 0x39C208, 0x100
+	.incbin "graphics/object_events/pics/unknown/839C208.4bpp"
 
 gUnknown_839C308:: @ 839C308
-	.incbin "baserom.gba", 0x39C308, 0x100
+	.incbin "graphics/object_events/pics/unknown/839C308.4bpp"
 
 gUnknown_839C408:: @ 839C408
-	.incbin "baserom.gba", 0x39C408, 0x100
+	.incbin "graphics/object_events/pics/unknown/839C408.4bpp"
 
 gUnknown_839C508:: @ 839C508
-	.incbin "baserom.gba", 0x39C508, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C508.4bpp"
 
 gUnknown_839C588:: @ 839C588
-	.incbin "baserom.gba", 0x39C588, 0x20
+	.incbin "graphics/object_events/palettes/839C588.gbapal"
 
 gUnknown_839C5A8:: @ 839C5A8
-	.incbin "baserom.gba", 0x39C5A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C5A8.4bpp"
 
 gUnknown_839C628:: @ 839C628
-	.incbin "baserom.gba", 0x39C628, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C628.4bpp"
 
 gUnknown_839C6A8:: @ 839C6A8
-	.incbin "baserom.gba", 0x39C6A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C6A8.4bpp"
 
 gUnknown_839C728:: @ 839C728
-	.incbin "baserom.gba", 0x39C728, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C728.4bpp"
 
 gUnknown_839C7A8:: @ 839C7A8
-	.incbin "baserom.gba", 0x39C7A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C7A8.4bpp"
 
 gUnknown_839C828:: @ 839C828
-	.incbin "baserom.gba", 0x39C828, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C828.4bpp"
 
 gUnknown_839C8A8:: @ 839C8A8
-	.incbin "baserom.gba", 0x39C8A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C8A8.4bpp"
 
 gUnknown_839C928:: @ 839C928
-	.incbin "baserom.gba", 0x39C928, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C928.4bpp"
 
 gUnknown_839C9A8:: @ 839C9A8
-	.incbin "baserom.gba", 0x39C9A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839C9A8.4bpp"
 
 gUnknown_839CA28:: @ 839CA28
-	.incbin "baserom.gba", 0x39CA28, 0x80
+	.incbin "graphics/object_events/pics/unknown/839CA28.4bpp"
 
 gUnknown_839CAA8:: @ 839CAA8
-	.incbin "baserom.gba", 0x39CAA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CAA8.4bpp"
 
 gUnknown_839CBA8:: @ 839CBA8
-	.incbin "baserom.gba", 0x39CBA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CBA8.4bpp"
 
 gUnknown_839CCA8:: @ 839CCA8
-	.incbin "baserom.gba", 0x39CCA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CCA8.4bpp"
 
 gUnknown_839CDA8:: @ 839CDA8
-	.incbin "baserom.gba", 0x39CDA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CDA8.4bpp"
 
 gUnknown_839CEA8:: @ 839CEA8
-	.incbin "baserom.gba", 0x39CEA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CEA8.4bpp"
 
 gUnknown_839CFA8:: @ 839CFA8
-	.incbin "baserom.gba", 0x39CFA8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839CFA8.4bpp"
 
 gUnknown_839D0A8:: @ 839D0A8
-	.incbin "baserom.gba", 0x39D0A8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839D0A8.4bpp"
 
 gUnknown_839D1A8:: @ 839D1A8
-	.incbin "baserom.gba", 0x39D1A8, 0x100
+	.incbin "graphics/object_events/pics/unknown/839D1A8.4bpp"
 
 gUnknown_839D2A8:: @ 839D2A8
-	.incbin "baserom.gba", 0x39D2A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/839D2A8.4bpp"
 
 gUnknown_839D328:: @ 839D328
-	.incbin "baserom.gba", 0x39D328, 0x80
+	.incbin "graphics/object_events/pics/unknown/839D328.4bpp"
 
 gUnknown_839D3A8:: @ 839D3A8
-	.incbin "baserom.gba", 0x39D3A8, 0x20
+	.incbin "graphics/object_events/palettes/839D3A8.gbapal"
 
 gUnknown_839D3C8:: @ 839D3C8
-	.incbin "baserom.gba", 0x39D3C8, 0x800
+	.incbin "graphics/object_events/pics/unknown/839D3C8.4bpp"
 
 gUnknown_839DBC8:: @ 839DBC8
-	.incbin "baserom.gba", 0x39DBC8, 0x800
+	.incbin "graphics/object_events/pics/unknown/839DBC8.4bpp"
 
 gUnknown_839E3C8:: @ 839E3C8
-	.incbin "baserom.gba", 0x39E3C8, 0x800
+	.incbin "graphics/object_events/pics/unknown/839E3C8.4bpp"
 
 gUnknown_839EBC8:: @ 839EBC8
-	.incbin "baserom.gba", 0x39EBC8, 0x800
+	.incbin "graphics/object_events/pics/unknown/839EBC8.4bpp"
 
 gUnknown_839F3C8:: @ 839F3C8
-	.incbin "baserom.gba", 0x39F3C8, 0x800
+	.incbin "graphics/object_events/pics/unknown/839F3C8.4bpp"
 
-gUnknown_839FBC8:: @ 839FBC8
-	.incbin "baserom.gba", 0x39FBC8, 0x144
+gMovementTypeCallbacks:: @ 839FBC8
+	.4byte sub_805FFB4
+	.4byte sub_806058C
+	.4byte sub_805FFDC
+	.4byte sub_80606CC
+	.4byte sub_80606CC
+	.4byte sub_8060850
+	.4byte sub_8060850
+	.4byte sub_80609D4
+	.4byte sub_80609D4
+	.4byte sub_80609D4
+	.4byte sub_80609D4
+	.4byte sub_805B3B8
+	.4byte NULL
+	.4byte sub_8060A74
+	.4byte sub_8060BB4
+	.4byte sub_8060CF4
+	.4byte sub_8060E34
+	.4byte sub_8060F74
+	.4byte sub_80610B4
+	.4byte sub_80611F4
+	.4byte sub_8061334
+	.4byte sub_8061474
+	.4byte sub_80615B4
+	.4byte sub_80616F4
+	.4byte sub_80617F8
+	.4byte sub_80618FC
+	.4byte sub_80618FC
+	.4byte sub_80618FC
+	.4byte sub_80618FC
+	.4byte sub_8061B5C
+	.4byte sub_8061BE8
+	.4byte sub_8061C74
+	.4byte sub_8061D00
+	.4byte sub_8061D8C
+	.4byte sub_8061E18
+	.4byte sub_8061EA4
+	.4byte sub_8061F30
+	.4byte sub_8061FBC
+	.4byte sub_8062048
+	.4byte sub_80620D4
+	.4byte sub_8062160
+	.4byte sub_80621EC
+	.4byte sub_8062278
+	.4byte sub_8062304
+	.4byte sub_8062390
+	.4byte sub_806241C
+	.4byte sub_80624A8
+	.4byte sub_8062534
+	.4byte sub_80625C0
+	.4byte sub_806264C
+	.4byte sub_80626D8
+	.4byte sub_8062764
+	.4byte sub_80627F0
+	.4byte sub_806287C
+	.4byte sub_806287C
+	.4byte sub_806287C
+	.4byte sub_806287C
+	.4byte ObjectEventCB_TreeDisguise
+	.4byte ObjectEventCB_MountainDisguise
+	.4byte sub_8062E60
+	.4byte sub_8062E60
+	.4byte sub_8062E60
+	.4byte sub_8062E60
+	.4byte ObjectEventCB_Hidden1
+	.4byte sub_80630A0
+	.4byte sub_80630A0
+	.4byte sub_80630A0
+	.4byte sub_80630A0
+	.4byte sub_8063110
+	.4byte sub_8063110
+	.4byte sub_8063110
+	.4byte sub_8063110
+	.4byte sub_8063180
+	.4byte sub_8063180
+	.4byte sub_8063180
+	.4byte sub_8063180
+	.4byte sub_80631F0
+	.4byte sub_8063298
+	.4byte sub_80632BC
+	.4byte sub_80632E0
+	.4byte sub_8060020
 
 gRangedMovementTypes:: @ 839FD0C
 	.byte FALSE @ MOVEMENT_TYPE_NONE

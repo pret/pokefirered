@@ -537,16 +537,16 @@ gUnknown_8398028:: @ 8398028
 	.incbin "graphics/object_events/12.gbapal"
 
 gUnknown_8398048:: @ 8398048
-	.incbin "baserom.gba", 0x398048, 0x20
+	.incbin "graphics/object_events/pics/effects/shadow_small.4bpp"
 
 gUnknown_8398068:: @ 8398068
-	.incbin "baserom.gba", 0x398068, 0x40
+	.incbin "graphics/object_events/pics/effects/shadow_medium.4bpp"
 
 gUnknown_83980A8:: @ 83980A8
-	.incbin "baserom.gba", 0x3980A8, 0x80
+	.incbin "graphics/object_events/pics/effects/shadow_large.4bpp"
 
 gUnknown_8398128:: @ 8398128
-	.incbin "baserom.gba", 0x398128, 0x400
+	.incbin "graphics/object_events/pics/effects/shadow_extra_large.4bpp"
 
 filler_8398528:: @ 8398528
 	.fill 0x48, 0x4, 0x00
@@ -559,7 +559,7 @@ gUnknown_8398688::
 	.incbin "graphics/object_events/fldeff_cut.gbapal"
 
 gUnknown_83986A8:: @ 83986A8
-	.incbin "baserom.gba", 0x3986A8, 0x80
+	.incbin "graphics/object_events/pics/unknown/83986A8.4bpp"
 
 gUnknown_8398728:: @ 8398728
 	.incbin "baserom.gba", 0x398728, 0x80

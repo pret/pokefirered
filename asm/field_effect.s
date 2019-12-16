@@ -4116,7 +4116,7 @@ FldEff_LavaridgeGymWarp: @ 808534C
 	movs r2, 0x8
 	movs r3, 0x8
 	bl sub_8063BC4
-	ldr r0, _080853A8 @ =gUnknown_83A0010
+	ldr r0, _080853A8 @ =gFieldEffectObjectTemplatePointers
 	adds r0, 0x84
 	ldr r0, [r0]
 	movs r2, 0
@@ -4152,7 +4152,7 @@ FldEff_LavaridgeGymWarp: @ 808534C
 	bx r1
 	.align 2, 0
 _080853A4: .4byte gFieldEffectArguments
-_080853A8: .4byte gUnknown_83A0010
+_080853A8: .4byte gFieldEffectObjectTemplatePointers
 _080853AC: .4byte gSprites
 	thumb_func_end FldEff_LavaridgeGymWarp
 
@@ -4420,7 +4420,7 @@ FldEff_PopOutOfAsh: @ 80855A0
 	movs r2, 0x8
 	movs r3, 0x8
 	bl sub_8063BC4
-	ldr r0, _080855FC @ =gUnknown_83A0010
+	ldr r0, _080855FC @ =gFieldEffectObjectTemplatePointers
 	adds r0, 0x80
 	ldr r0, [r0]
 	movs r2, 0
@@ -4456,7 +4456,7 @@ FldEff_PopOutOfAsh: @ 80855A0
 	bx r1
 	.align 2, 0
 _080855F8: .4byte gFieldEffectArguments
-_080855FC: .4byte gUnknown_83A0010
+_080855FC: .4byte gFieldEffectObjectTemplatePointers
 _08085600: .4byte gSprites
 	thumb_func_end FldEff_PopOutOfAsh
 
@@ -7431,7 +7431,7 @@ _08086D34: .4byte sub_8086BD0
 	thumb_func_start sub_8086D38
 sub_8086D38: @ 8086D38
 	push {r4,lr}
-	ldr r0, _08086D84 @ =gUnknown_83A0010
+	ldr r0, _08086D84 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x68]
 	movs r1, 0x78
 	movs r2, 0
@@ -7466,7 +7466,7 @@ sub_8086D38: @ 8086D38
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08086D84: .4byte gUnknown_83A0010
+_08086D84: .4byte gFieldEffectObjectTemplatePointers
 _08086D88: .4byte gSprites
 _08086D8C: .4byte sub_8086D94
 _08086D90: .4byte gFieldEffectArguments
@@ -7967,7 +7967,7 @@ _08087164: .4byte sub_8086E40
 	thumb_func_start sub_8087168
 sub_8087168: @ 8087168
 	push {lr}
-	ldr r0, _080871A0 @ =gUnknown_83A0010
+	ldr r0, _080871A0 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x68]
 	movs r1, 0xFF
 	movs r2, 0xB4
@@ -7994,7 +7994,7 @@ sub_8087168: @ 8087168
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080871A0: .4byte gUnknown_83A0010
+_080871A0: .4byte gFieldEffectObjectTemplatePointers
 _080871A4: .4byte gSprites
 _080871A8: .4byte sub_8087220
 	thumb_func_end sub_8087168

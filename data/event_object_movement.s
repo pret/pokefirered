@@ -1496,8 +1496,43 @@ gObjectEventGraphicsInfoPointers:: @ 839FDB0
 	.4byte gObjectEventGraphicsInfo_83A4E40
 	.4byte gObjectEventGraphicsInfo_83A5134
 
-gUnknown_83A0010:: @ 83A0010
-	.incbin "baserom.gba", 0x3A0010, 0x90
+gFieldEffectObjectTemplatePointers:: @ 83A0010
+	.4byte gUnknown_83A537C
+	.4byte gUnknown_83A5394
+	.4byte gUnknown_83A53AC
+	.4byte gUnknown_83A53C4
+	.4byte gUnknown_83A5420
+	.4byte gUnknown_83A5488
+	.4byte gUnknown_83A54E4
+	.4byte gUnknown_83A556C
+	.4byte gUnknown_83A5604
+	.4byte gUnknown_83A5648
+	.4byte gUnknown_83A5698
+	.4byte gUnknown_83A56F4
+	.4byte gUnknown_83A583C
+	.4byte gUnknown_83A589C
+	.4byte gUnknown_83A58E0
+	.4byte gUnknown_83A593C
+	.4byte gUnknown_83A59A4
+	.4byte gUnknown_83A5A30
+	.4byte gUnknown_83A5A88
+	.4byte gUnknown_83A5AD8
+	.4byte gUnknown_83A5B74
+	.4byte gUnknown_83A5C34
+	.4byte NULL
+	.4byte gUnknown_83A5750
+	.4byte gUnknown_83A5CB4
+	.4byte gUnknown_83A5D34
+	.4byte gUnknown_83A5E00
+	.4byte gUnknown_83A57EC
+	.4byte gUnknown_83A5D84
+	.4byte gUnknown_83A5B1C
+	.4byte gUnknown_83A5E38
+	.4byte gUnknown_83A5E64
+	.4byte gUnknown_83A5EC0
+	.4byte gUnknown_83A5F24
+	.4byte gUnknown_83A5FA4
+	.4byte gUnknown_83A5FE0
 
 gSpriteImages_83A00A0:: @ 83A00A0
 	obj_frame_tiles gUnknown_835BB68, 0x100
@@ -3950,7 +3985,22 @@ gAnimCmd_83A3298:: @ 83A3298
 	obj_image_anim_frame 3, 30, 0x40
 	obj_image_anim_jump 0
 
-	.incbin "baserom.gba", 0x3A32AC, 0x68
+gUnknown_83A32AC:: @ 83A32AC
+	obj_rot_scal_anim_frame 0, 0, 1, 1
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_loop 7
+	obj_rot_scal_anim_jump 0
+
+gUnknown_83A32DC:: @ 83A32DC
+	obj_rot_scal_anim_frame 0, 0, -1, 1
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_loop 15
+	obj_rot_scal_anim_frame 0, 0, 1, 1
+	obj_rot_scal_anim_frame 0, 0, 0, 1
+	obj_rot_scal_anim_loop 15
+	obj_rot_scal_anim_jump 0
 
 gAnimTable_83A3314:: @ 83A3314
 	.4byte gAnimCmd_83A2950
@@ -4363,19 +4413,70 @@ gSubspriteTables_83A37F0:: @ 83A37F0
 	.4byte gSubsprites_83A37E8
 
 gUnknown_83A3820:: @ 83A3820
-	.incbin "baserom.gba", 0x3A3820, 0x60
+	subsprite 232, 232, 2, 0, 32x8
+	subsprite 8, 232, 2, 4, 16x8
+	subsprite 232, 240, 2, 6, 32x8
+	subsprite 8, 240, 2, 10, 16x8
+	subsprite 232, 248, 2, 12, 32x8
+	subsprite 8, 248, 2, 16, 16x8
+	subsprite 232, 0, 2, 18, 32x8
+	subsprite 8, 0, 2, 22, 16x8
+	subsprite 232, 8, 2, 24, 32x8
+	subsprite 8, 8, 2, 28, 16x8
+	subsprite 232, 16, 2, 30, 32x8
+	subsprite 8, 16, 2, 34, 16x8
+
+gUnknown_83A3850:: @ 83A3850
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
+	.byte 0xC
+	.align 2
+	.4byte gUnknown_83A3820
 
 gUnknown_83A3880:: @ 83A3880
-	.incbin "baserom.gba", 0x3A3880, 0x4
+	subsprite 224, 240, 2, 0, 64x32
 
 gUnknown_83A3884:: @ 83A3884
-	.incbin "baserom.gba", 0x3A3884, 0x4
+	subsprite 224, 240, 1, 0, 64x32
 
 gUnknown_83A3888:: @ 83A3888
-	.incbin "baserom.gba", 0x3A3888, 0x4
+	subsprite 224, 240, 2, 0, 64x32
 
 gUnknown_83A388C:: @ 83A388C
-	.incbin "baserom.gba", 0x3A388C, 0x34
+	subsprite 224, 240, 2, 0, 64x32
+
+gUnknown_83A3890:: @ 83A3890
+	.byte 0x0
+	.align 2
+	.4byte NULL
+	.byte 1
+	.align 2
+	.4byte gUnknown_83A3880
+	.byte 1
+	.align 2
+	.4byte gUnknown_83A3884
+	.byte 1
+	.align 2
+	.4byte gUnknown_83A3888
+	.byte 1
+	.align 2
+	.4byte gUnknown_83A388C
+	.byte 1
+	.align 2
+	.4byte gUnknown_83A388C
 
 gSubsprites_83A38C0:: @ 83A38C0
 	subsprite 224, 224, 2, 0x0000, 64x64
@@ -4410,16 +4511,92 @@ gSubspriteTables_83A38D0:: @ 83A38D0
 	.4byte gSubsprites_83A38CC
 
 gUnknown_83A3900:: @ 83A3900
-	.incbin "baserom.gba", 0x3A3900, 0x3C
+	subsprite 208, 236, 2, 0, 32x8
+	subsprite 240, 236, 2, 4, 32x8
+	subsprite 16, 236, 2, 8, 32x8
+	subsprite 208, 244, 2, 12, 32x8
+	subsprite 240, 244, 2, 16, 32x8
+	subsprite 16, 244, 2, 20, 32x8
+	subsprite 208, 252, 2, 24, 32x8
+	subsprite 240, 252, 2, 28, 32x8
+	subsprite 16, 252, 2, 32, 32x8
+	subsprite 208, 4, 2, 36, 32x8
+	subsprite 240, 4, 2, 40, 32x8
+	subsprite 16, 4, 2, 44, 32x8
+	subsprite 208, 12, 2, 48, 32x8
+	subsprite 240, 12, 2, 52, 32x8
+	subsprite 16, 12, 2, 56, 32x8
 
 gUnknown_83A393C:: @ 83A393C
-	.incbin "baserom.gba", 0x3A393C, 0x3C
+	subsprite 208, 236, 1, 0, 32x8
+	subsprite 240, 236, 1, 4, 32x8
+	subsprite 16, 236, 1, 8, 32x8
+	subsprite 208, 244, 1, 12, 32x8
+	subsprite 240, 244, 1, 16, 32x8
+	subsprite 16, 244, 1, 20, 32x8
+	subsprite 208, 252, 1, 24, 32x8
+	subsprite 240, 252, 1, 28, 32x8
+	subsprite 16, 252, 1, 32, 32x8
+	subsprite 208, 4, 1, 36, 32x8
+	subsprite 240, 4, 1, 40, 32x8
+	subsprite 16, 4, 1, 44, 32x8
+	subsprite 208, 12, 1, 48, 32x8
+	subsprite 240, 12, 1, 52, 32x8
+	subsprite 16, 12, 1, 56, 32x8
 
 gUnknown_83A3978:: @ 83A3978
-	.incbin "baserom.gba", 0x3A3978, 0x3C
+	subsprite 208, 236, 2, 0, 32x8
+	subsprite 240, 236, 2, 4, 32x8
+	subsprite 16, 236, 2, 8, 32x8
+	subsprite 208, 244, 2, 12, 32x8
+	subsprite 240, 244, 2, 16, 32x8
+	subsprite 16, 244, 2, 20, 32x8
+	subsprite 208, 252, 2, 24, 32x8
+	subsprite 240, 252, 2, 28, 32x8
+	subsprite 16, 252, 2, 32, 32x8
+	subsprite 208, 4, 2, 36, 32x8
+	subsprite 240, 4, 2, 40, 32x8
+	subsprite 16, 4, 2, 44, 32x8
+	subsprite 208, 12, 2, 48, 32x8
+	subsprite 240, 12, 2, 52, 32x8
+	subsprite 16, 12, 2, 56, 32x8
 
 gUnknown_83A39B4:: @ 83A39B4
-	.incbin "baserom.gba", 0x3A39B4, 0x6C
+	subsprite 208, 236, 1, 0, 32x8
+	subsprite 240, 236, 1, 4, 32x8
+	subsprite 16, 236, 1, 8, 32x8
+	subsprite 208, 244, 1, 12, 32x8
+	subsprite 240, 244, 1, 16, 32x8
+	subsprite 16, 244, 1, 20, 32x8
+	subsprite 208, 252, 2, 24, 32x8
+	subsprite 240, 252, 2, 28, 32x8
+	subsprite 16, 252, 2, 32, 32x8
+	subsprite 208, 4, 2, 36, 32x8
+	subsprite 240, 4, 2, 40, 32x8
+	subsprite 16, 4, 2, 44, 32x8
+	subsprite 208, 12, 2, 48, 32x8
+	subsprite 240, 12, 2, 52, 32x8
+	subsprite 16, 12, 2, 56, 32x8
+
+gUnknown_83A39F0:: @ 83A39F0
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A3900
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A3900
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A393C
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A3978
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A39B4
+	.byte 0xF
+	.align 2
+	.4byte gUnknown_83A39B4
 
 gSubsprites_83A3A20:: @ 83A3A20
 	subsprite 224, 240, 2, 0x0000, 64x32
@@ -4460,16 +4637,96 @@ gSubspriteTables_83A3A50:: @ 83A3A50
 	.4byte gSubsprites_83A3A40
 
 gUnknown_83A3A80:: @ 83A3A80
-	.incbin "baserom.gba", 0x3A3A80, 0x40
+	subsprite 208, 236, 2, 0, 32x8
+	subsprite 240, 236, 2, 4, 32x8
+	subsprite 16, 236, 2, 8, 16x8
+	subsprite 32, 236, 2, 10, 8x8
+	subsprite 208, 244, 2, 11, 32x8
+	subsprite 240, 244, 2, 15, 32x8
+	subsprite 16, 244, 2, 19, 16x8
+	subsprite 32, 244, 2, 21, 8x8
+	subsprite 208, 252, 2, 22, 32x8
+	subsprite 240, 252, 2, 26, 32x8
+	subsprite 16, 252, 2, 30, 16x8
+	subsprite 32, 252, 2, 32, 8x8
+	subsprite 208, 4, 2, 33, 32x8
+	subsprite 240, 4, 2, 37, 32x8
+	subsprite 16, 4, 2, 41, 16x8
+	subsprite 32, 4, 2, 43, 8x8
 
 gUnknown_83A3AC0:: @ 83A3AC0
-	.incbin "baserom.gba", 0x3A3AC0, 0x40
+	subsprite 208, 236, 1, 0, 32x8
+	subsprite 240, 236, 1, 4, 32x8
+	subsprite 16, 236, 1, 8, 16x8
+	subsprite 32, 236, 1, 10, 8x8
+	subsprite 208, 244, 1, 11, 32x8
+	subsprite 240, 244, 1, 15, 32x8
+	subsprite 16, 244, 1, 19, 16x8
+	subsprite 32, 244, 1, 21, 8x8
+	subsprite 208, 252, 1, 22, 32x8
+	subsprite 240, 252, 1, 26, 32x8
+	subsprite 16, 252, 1, 30, 16x8
+	subsprite 32, 252, 1, 32, 8x8
+	subsprite 208, 4, 1, 33, 32x8
+	subsprite 240, 4, 1, 37, 32x8
+	subsprite 16, 4, 1, 41, 16x8
+	subsprite 32, 4, 1, 43, 8x8
 
 gUnknown_83A3B00:: @ 83A3B00
-	.incbin "baserom.gba", 0x3A3B00, 0x40
+	subsprite 208, 236, 2, 0, 32x8
+	subsprite 240, 236, 2, 4, 32x8
+	subsprite 16, 236, 2, 8, 16x8
+	subsprite 32, 236, 2, 10, 8x8
+	subsprite 208, 244, 2, 11, 32x8
+	subsprite 240, 244, 2, 15, 32x8
+	subsprite 16, 244, 2, 19, 16x8
+	subsprite 32, 244, 2, 21, 8x8
+	subsprite 208, 252, 2, 22, 32x8
+	subsprite 240, 252, 2, 26, 32x8
+	subsprite 16, 252, 2, 30, 16x8
+	subsprite 32, 252, 2, 32, 8x8
+	subsprite 208, 4, 2, 33, 32x8
+	subsprite 240, 4, 2, 37, 32x8
+	subsprite 16, 4, 2, 41, 16x8
+	subsprite 32, 4, 2, 43, 8x8
 
 gUnknown_83A3B40:: @ 83A3B40
-	.incbin "baserom.gba", 0x3A3B40, 0x70
+	subsprite 208, 236, 1, 0, 32x8
+	subsprite 240, 236, 1, 4, 32x8
+	subsprite 16, 236, 1, 8, 16x8
+	subsprite 32, 236, 1, 10, 8x8
+	subsprite 208, 244, 1, 11, 32x8
+	subsprite 240, 244, 1, 15, 32x8
+	subsprite 16, 244, 1, 19, 16x8
+	subsprite 32, 244, 1, 21, 8x8
+	subsprite 208, 252, 2, 22, 32x8
+	subsprite 240, 252, 2, 26, 32x8
+	subsprite 16, 252, 2, 30, 16x8
+	subsprite 32, 252, 2, 32, 8x8
+	subsprite 208, 4, 2, 33, 32x8
+	subsprite 240, 4, 2, 37, 32x8
+	subsprite 16, 4, 2, 41, 16x8
+	subsprite 32, 4, 2, 43, 8x8
+
+gUnknown_83A3B80:: @ 83A3B80
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3A80
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3A80
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3AC0
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3B00
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3B40
+	.byte 0x10
+	.align 2
+	.4byte gUnknown_83A3B40
 
 gObjectEventGraphicsInfo_83A3BB0:: @ 83A3BB0
 	.2byte 0xFFFF, 0x1100, 0x1102, 0x200, 16, 32
@@ -6435,6 +6692,7 @@ gUnknown_83A536C:: @ 83A536C
 gUnknown_83A5374:: @ 83A5374
 	.incbin "baserom.gba", 0x3A5374, 0x8
 
+@ this is a field effect object template
 gUnknown_83A537C:: @ 83A537C
 	.incbin "baserom.gba", 0x3A537C, 0x18
 

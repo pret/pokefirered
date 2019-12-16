@@ -65,7 +65,7 @@ sub_805DE8C: @ 805DE8C
 	mov r5, r9
 	mov r4, r8
 	push {r4-r6}
-	ldr r0, _0805DF28 @ =gUnknown_83A0010
+	ldr r0, _0805DF28 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x54]
 	mov r9, r0
 	movs r1, 0
@@ -133,7 +133,7 @@ sub_805DE8C: @ 805DE8C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DF28: .4byte gUnknown_83A0010
+_0805DF28: .4byte gFieldEffectObjectTemplatePointers
 _0805DF2C: .4byte gSprites
 	thumb_func_end sub_805DE8C
 

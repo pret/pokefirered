@@ -333,16 +333,18 @@ gUnknown_8416002:: @ 8416002
 gText_WelcomeToHOF:: @ 8416008
 	.string "Welcome to the HALL OF FAME!$"
 
-gUnknown_8416025:: @ 0x8416025
-	.string "   みつけた ポケモン {STR_VAR_1}!\n"
+	.align 2
+gUnknown_8416028:: @ 0x8416028
+	.string "みつけた ポケモン {STR_VAR_1}!\n"
 	.string "つかまえた ポケモン {STR_VAR_2}!\p"
 	.string "オダマキはかせの\n"
 	.string "ポケモンずかん ひょうか!\p"
 	.string "オダマキ“どれどれ\p"
 	.string "$"
 
-gUnknown_8416067:: @ 0x8416067
-	.string " ここまでの レポ-トを かきしるしています!\n"
+	.align 2
+gUnknown_8416068:: @ 0x8416068
+	.string "ここまでの レポ-トを かきしるしています!\n"
 	.string "でんげんを きらないでください$"
 
 	.align 2

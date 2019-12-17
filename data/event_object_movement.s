@@ -7027,13 +7027,24 @@ gUnknown_83A583C:: @ 83A583C
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5838, gUnknown_83A5804, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A5854:: @ 83A5854
-	.incbin "baserom.gba", 0x3A5854, 0x10
+	overworld_frame gUnknown_839AC48, 2, 1, 0
+	overworld_frame gUnknown_839AC48, 2, 1, 1
 
 gUnknown_83A5864:: @ 83A5864
-	.incbin "baserom.gba", 0x3A5864, 0xC
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_end
 
 gUnknown_83A5870:: @ 83A5870
-	.incbin "baserom.gba", 0x3A5870, 0x24
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 0, 6
+	obj_image_anim_frame 1, 6
+	obj_image_anim_frame 0, 8
+	obj_image_anim_frame 1, 8
+	obj_image_anim_frame 0, 6
+	obj_image_anim_frame 1, 6
+	obj_image_anim_jump 0
 
 gUnknown_83A5894:: @ 83A5894
 	.4byte gUnknown_83A5864
@@ -7043,10 +7054,15 @@ gUnknown_83A589C:: @ 83A589C
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, sub_80DBC2C
 
 gUnknown_83A58B4:: @ 83A58B4
-	.incbin "baserom.gba", 0x3A58B4, 0x18
+	overworld_frame gUnknown_839ACC8, 2, 1, 0
+	overworld_frame gUnknown_839ACC8, 2, 1, 1
+	overworld_frame gUnknown_839ACC8, 2, 1, 2
 
 gUnknown_83A58CC:: @ 83A58CC
-	.incbin "baserom.gba", 0x3A58CC, 0x10
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_end
 
 gUnknown_83A58DC:: @ 83A58DC
 	.4byte gUnknown_83A58CC
@@ -7055,10 +7071,20 @@ gUnknown_83A58E0:: @ 83A58E0
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A58DC, gUnknown_83A58B4, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A58F8:: @ 83A58F8
-	.incbin "baserom.gba", 0x3A58F8, 0x20
+	overworld_frame gUnknown_8399E08, 2, 2, 0
+	overworld_frame gUnknown_8399E08, 2, 2, 1
+	overworld_frame gUnknown_8399E08, 2, 2, 2
+	overworld_frame gUnknown_8399E08, 2, 2, 3
 
 gUnknown_83A5918:: @ 83A5918
-	.incbin "baserom.gba", 0x3A5918, 0x20
+	obj_image_anim_frame 1, 3
+	obj_image_anim_frame 2, 3
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 0, 4
+	obj_image_anim_end
 
 gUnknown_83A5938:: @ 83A5938
 	.4byte gUnknown_83A5918
@@ -7067,10 +7093,21 @@ gUnknown_83A593C:: @ 83A593C
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, unc_grass_tall
 
 gUnknown_83A5954:: @ 83A5954
-	.incbin "baserom.gba", 0x3A5954, 0x30
+	overworld_frame gUnknown_8399488, 2, 2, 0
+	overworld_frame gUnknown_8399488, 2, 2, 1
+	overworld_frame gUnknown_8399488, 2, 2, 2
+	overworld_frame gUnknown_8399488, 2, 2, 3
+	overworld_frame gUnknown_8399488, 2, 2, 4
+	overworld_frame gUnknown_8399488, 2, 2, 6
 
 gUnknown_83A5984:: @ 83A5984
-	.incbin "baserom.gba", 0x3A5984, 0x1C
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 8
+	obj_image_anim_frame 3, 8
+	obj_image_anim_frame 4, 8
+	obj_image_anim_frame 5, 8
+	obj_image_anim_end
 
 gUnknown_83A59A0:: @ 83A59A0
 	.4byte gUnknown_83A5984
@@ -7079,10 +7116,27 @@ gUnknown_83A59A4:: @ 83A59A4
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A59A0, gUnknown_83A5954, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A59BC:: @ 83A59BC
-	.incbin "baserom.gba", 0x3A59BC, 0x48
+	overworld_frame gUnknown_8399788, 2, 2, 0
+	overworld_frame gUnknown_8399788, 2, 2, 1
+	overworld_frame gUnknown_8399788, 2, 2, 2
+	overworld_frame gUnknown_8399788, 2, 2, 3
+	overworld_frame gUnknown_8399788, 2, 2, 4
+	overworld_frame gUnknown_8399788, 2, 2, 5
+	overworld_frame gUnknown_8399788, 2, 2, 6
+	overworld_frame gUnknown_8399788, 2, 2, 7
+	overworld_frame gUnknown_8399788, 2, 2, 8
 
 gUnknown_83A5A04:: @ 83A5A04
-	.incbin "baserom.gba", 0x3A5A04, 0x28
+	obj_image_anim_frame 0, 10
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 4, 4
+	obj_image_anim_frame 5, 4
+	obj_image_anim_frame 6, 4
+	obj_image_anim_frame 7, 4
+	obj_image_anim_frame 8, 4
+	obj_image_anim_jump 7
 
 gUnknown_83A5A2C:: @ 83A5A2C
 	.4byte gUnknown_83A5A04
@@ -7091,10 +7145,19 @@ gUnknown_83A5A30:: @ 83A5A30
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5A48:: @ 83A5A48
-	.incbin "baserom.gba", 0x3A5A48, 0x20
+	overworld_frame gUnknown_8399C08, 2, 2, 0
+	overworld_frame gUnknown_8399C08, 2, 2, 1
+	overworld_frame gUnknown_8399C08, 2, 2, 2
+	overworld_frame gUnknown_8399C08, 2, 2, 3
 
 gUnknown_83A5A68:: @ 83A5A68
-	.incbin "baserom.gba", 0x3A5A68, 0x1C
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_jump 0
 
 gUnknown_83A5A84:: @ 83A5A84
 	.4byte gUnknown_83A5A68
@@ -7103,10 +7166,17 @@ gUnknown_83A5A88:: @ 83A5A88
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5AA0:: @ 83A5AA0
-	.incbin "baserom.gba", 0x3A5AA0, 0x20
+	overworld_frame gUnknown_839A788, 2, 2, 0
+	overworld_frame gUnknown_839A788, 2, 2, 1
+	overworld_frame gUnknown_839A788, 2, 2, 2
+	overworld_frame gUnknown_839A788, 2, 2, 3
 
 gUnknown_83A5AC0:: @ 83A5AC0
-	.incbin "baserom.gba", 0x3A5AC0, 0x14
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_jump 0
 
 gUnknown_83A5AD4:: @ 83A5AD4
 	.4byte gUnknown_83A5AC0
@@ -7115,10 +7185,15 @@ gUnknown_83A5AD8:: @ 83A5AD8
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5AF0:: @ 83A5AF0
-	.incbin "baserom.gba", 0x3A5AF0, 0x18
+	overworld_frame gUnknown_839A988, 2, 1, 0
+	overworld_frame gUnknown_839A988, 2, 1, 1
+	overworld_frame gUnknown_839A988, 2, 1, 2
 
 gUnknown_83A5B08:: @ 83A5B08
-	.incbin "baserom.gba", 0x3A5B08, 0x10
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_end
 
 gUnknown_83A5B18:: @ 83A5B18
 	.4byte gUnknown_83A5B08
@@ -7127,10 +7202,19 @@ gUnknown_83A5B1C:: @ 83A5B1C
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, sub_80DC86C
 
 gUnknown_83A5B34:: @ 83A5B34
-	.incbin "baserom.gba", 0x3A5B34, 0x20
+	overworld_frame gUnknown_839AD88, 2, 2, 0
+	overworld_frame gUnknown_839AD88, 2, 2, 1
+	overworld_frame gUnknown_839AD88, 2, 2, 2
+	overworld_frame gUnknown_839AD88, 2, 2, 3
 
 gUnknown_83A5B54:: @ 83A5B54
-	.incbin "baserom.gba", 0x3A5B54, 0x1C
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_jump 0
 
 gUnknown_83A5B70:: @ 83A5B70
 	.4byte gUnknown_83A5B54
@@ -7139,10 +7223,28 @@ gUnknown_83A5B74:: @ 83A5B74
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5B8C:: @ 83A5B8C
-	.incbin "baserom.gba", 0x3A5B8C, 0x50
+	obj_rot_scal_anim_frame 0xFF00, 256, 128, 0
+	obj_rot_scal_anim_frame 1, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 1, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_jump 1
 
 gUnknown_83A5BDC:: @ 83A5BDC
-	.incbin "baserom.gba", 0x3A5BDC, 0x50
+	obj_rot_scal_anim_frame 256, 256, 128, 0
+	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 1, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 1, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame 0, 0, 0, 8
+	obj_rot_scal_anim_jump 1
 
 gUnknown_83A5C2C:: @ 83A5C2C
 	.4byte gUnknown_83A5B8C
@@ -7152,13 +7254,27 @@ gUnknown_83A5C34:: @ 83A5C34
 	spr_template 0x0, 0xFFFF, gDummyOamData, gDummySpriteAnimTable, NULL, gUnknown_83A5C2C, SpriteCallbackDummy
 
 gUnknown_83A5C4C:: @ 83A5C4C
-	.incbin "baserom.gba", 0x3A5C4C, 0x38
+	overworld_frame gUnknown_839B008, 2, 4, 0
+	overworld_frame gUnknown_839B008, 2, 4, 1
+	overworld_frame gUnknown_839B008, 2, 4, 2
+	overworld_frame gUnknown_839B008, 2, 4, 3
+	overworld_frame gUnknown_839B008, 2, 4, 4
+	overworld_frame gUnknown_839B008, 2, 4, 5
+	overworld_frame gUnknown_839B008, 2, 4, 6
 
 gUnknown_83A5C84:: @ 83A5C84
-	.incbin "baserom.gba", 0x3A5C84, 0x8
+	obj_image_anim_frame 0, 16
+	obj_image_anim_end
 
 gUnknown_83A5C8C:: @ 83A5C8C
-	.incbin "baserom.gba", 0x3A5C8C, 0x20
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 4, 4
+	obj_image_anim_frame 5, 4
+	obj_image_anim_frame 6, 4
+	obj_image_anim_end
 
 gUnknown_83A5CAC:: @ 83A5CAC
 	.4byte gUnknown_83A5C84
@@ -7168,13 +7284,27 @@ gUnknown_83A5CB4:: @ 83A5CB4
 	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5CCC:: @ 83A5CCC
-	.incbin "baserom.gba", 0x3A5CCC, 0x38
+	overworld_frame gUnknown_839B708, 2, 4, 0
+	overworld_frame gUnknown_839B708, 2, 4, 1
+	overworld_frame gUnknown_839B708, 2, 4, 2
+	overworld_frame gUnknown_839B708, 2, 4, 3
+	overworld_frame gUnknown_839B708, 2, 4, 4
+	overworld_frame gUnknown_839B708, 2, 4, 5
+	overworld_frame gUnknown_839B708, 2, 4, 6
 
 gUnknown_83A5D04:: @ 83A5D04
-	.incbin "baserom.gba", 0x3A5D04, 0x8
+	obj_image_anim_frame 0, 16
+	obj_image_anim_end
 
 gUnknown_83A5D0C:: @ 83A5D0C
-	.incbin "baserom.gba", 0x3A5D0C, 0x20
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 4
+	obj_image_anim_frame 4, 4
+	obj_image_anim_frame 5, 4
+	obj_image_anim_frame 6, 4
+	obj_image_anim_end
 
 gUnknown_83A5D2C:: @ 83A5D2C
 	.4byte gUnknown_83A5D04
@@ -7184,28 +7314,43 @@ gUnknown_83A5D34:: @ 83A5D34
 	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5D4C:: @ 83A5D4C
-	.incbin "baserom.gba", 0x3A5D4C, 0x38
+	overworld_frame gUnknown_839BE08, 2, 4, 0
+	overworld_frame gUnknown_839BE08, 2, 4, 1
+	overworld_frame gUnknown_839BE08, 2, 4, 2
+	overworld_frame gUnknown_839BE08, 2, 4, 3
+	overworld_frame gUnknown_839BE08, 2, 4, 4
+	overworld_frame gUnknown_839BE08, 2, 4, 5
+	overworld_frame gUnknown_839BE08, 2, 4, 6
 
 gUnknown_83A5D84:: @ 83A5D84
 	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5D9C:: @ 83A5D9C
-	.incbin "baserom.gba", 0x3A5D9C, 0x28
+	overworld_frame gUnknown_839D3C8, 8, 8, 0
+	overworld_frame gUnknown_839D3C8, 8, 8, 1
+	overworld_frame gUnknown_839D3C8, 8, 8, 2
+	overworld_frame gUnknown_839D3C8, 8, 8, 3
+	overworld_frame gUnknown_839D3C8, 8, 8, 4
 
 gUnknown_83A5DC4:: @ 83A5DC4
-	.incbin "baserom.gba", 0x3A5DC4, 0x8
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
 
 gUnknown_83A5DCC:: @ 83A5DCC
-	.incbin "baserom.gba", 0x3A5DCC, 0x8
+	obj_image_anim_frame 1, 1
+	obj_image_anim_end
 
 gUnknown_83A5DD4:: @ 83A5DD4
-	.incbin "baserom.gba", 0x3A5DD4, 0x8
+	obj_image_anim_frame 2, 1
+	obj_image_anim_end
 
 gUnknown_83A5DDC:: @ 83A5DDC
-	.incbin "baserom.gba", 0x3A5DDC, 0x8
+	obj_image_anim_frame 3, 1
+	obj_image_anim_end
 
 gUnknown_83A5DE4:: @ 83A5DE4
-	.incbin "baserom.gba", 0x3A5DE4, 0x8
+	obj_image_anim_frame 4, 1
+	obj_image_anim_end
 
 gUnknown_83A5DEC:: @ 83A5DEC
 	.4byte gUnknown_83A5DC4
@@ -7218,10 +7363,13 @@ gUnknown_83A5E00:: @ 83A5E00
 	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_64x64, gUnknown_83A5DEC, gUnknown_83A5D9C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_83A5E18:: @ 83A5E18
-	.incbin "baserom.gba", 0x3A5E18, 0x10
+	overworld_frame gUnknown_839A288, 2, 2, 0
+	overworld_frame gUnknown_839A288, 2, 2, 1
 
 gUnknown_83A5E28:: @ 83A5E28
-	.incbin "baserom.gba", 0x3A5E28, 0xC
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_end
 
 gUnknown_83A5E34:: @ 83A5E34
 	.4byte gUnknown_83A5E28
@@ -7230,10 +7378,11 @@ gUnknown_83A5E38:: @ 83A5E38
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, sub_80DB8AC
 
 gUnknown_83A5E50:: @ 83A5E50
-	.incbin "baserom.gba", 0x3A5E50, 0x8
+	overworld_frame gUnknown_839C508, 2, 2, 0
 
 gUnknown_83A5E58:: @ 83A5E58
-	.incbin "baserom.gba", 0x3A5E58, 0x8
+	obj_image_anim_frame 0, 4
+	obj_image_anim_end
 
 gUnknown_83A5E60:: @ 83A5E60
 	.4byte gUnknown_83A5E58
@@ -7242,10 +7391,19 @@ gUnknown_83A5E64:: @ 83A5E64
 	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, sub_80DBFF4
 
 gUnknown_83A5E7C:: @ 83A5E7C
-	.incbin "baserom.gba", 0x3A5E7C, 0x28
+	overworld_frame gUnknown_839C5A8, 2, 2, 0
+	overworld_frame gUnknown_839C5A8, 2, 2, 1
+	overworld_frame gUnknown_839C5A8, 2, 2, 2
+	overworld_frame gUnknown_839C5A8, 2, 2, 3
+	overworld_frame gUnknown_839C5A8, 2, 2, 4
 
 gUnknown_83A5EA4:: @ 83A5EA4
-	.incbin "baserom.gba", 0x3A5EA4, 0x18
+	obj_image_anim_frame 0, 6
+	obj_image_anim_frame 1, 6
+	obj_image_anim_frame 2, 6
+	obj_image_anim_frame 3, 6
+	obj_image_anim_frame 4, 6
+	obj_image_anim_end
 
 gUnknown_83A5EBC:: @ 83A5EBC
 	.4byte gUnknown_83A5EA4
@@ -7257,10 +7415,19 @@ gUnknown_83A5ED8:: @ 83A5ED8
 	.incbin "baserom.gba", 0x3A5ED8, 0x8
 
 gUnknown_83A5EE0:: @ 83A5EE0
-	.incbin "baserom.gba", 0x3A5EE0, 0x28
+	overworld_frame gUnknown_839C828, 2, 2, 0
+	overworld_frame gUnknown_839C828, 2, 2, 1
+	overworld_frame gUnknown_839C828, 2, 2, 2
+	overworld_frame gUnknown_839C828, 2, 2, 3
+	overworld_frame gUnknown_839C828, 2, 2, 4
 
 gUnknown_83A5F08:: @ 83A5F08
-	.incbin "baserom.gba", 0x3A5F08, 0x18
+	obj_image_anim_frame 0, 6
+	obj_image_anim_frame 1, 6
+	obj_image_anim_frame 2, 6
+	obj_image_anim_frame 3, 6
+	obj_image_anim_frame 4, 6
+	obj_image_anim_end
 
 gUnknown_83A5F20:: @ 83A5F20
 	.4byte gUnknown_83A5F08
@@ -7269,10 +7436,25 @@ gUnknown_83A5F24:: @ 83A5F24
 	spr_template 0xFFFF, 0x100D, gEventObjectBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, sub_80853B0
 
 gUnknown_83A5F3C:: @ 83A5F3C
-	.incbin "baserom.gba", 0x3A5F3C, 0x40
+	overworld_frame gUnknown_839CAA8, 2, 4, 0
+	overworld_frame gUnknown_839CAA8, 2, 4, 1
+	overworld_frame gUnknown_839CAA8, 2, 4, 2
+	overworld_frame gUnknown_839CAA8, 2, 4, 3
+	overworld_frame gUnknown_839CAA8, 2, 4, 4
+	overworld_frame gUnknown_839CAA8, 2, 4, 5
+	overworld_frame gUnknown_839CAA8, 2, 4, 6
+	overworld_frame gUnknown_839CAA8, 2, 4, 7
 
 gUnknown_83A5F7C:: @ 83A5F7C
-	.incbin "baserom.gba", 0x3A5F7C, 0x24
+	obj_image_anim_frame 0, 4
+	obj_image_anim_frame 1, 4
+	obj_image_anim_frame 2, 4
+	obj_image_anim_frame 3, 6
+	obj_image_anim_frame 4, 6
+	obj_image_anim_frame 5, 4
+	obj_image_anim_frame 6, 4
+	obj_image_anim_frame 7, 4
+	obj_image_anim_end
 
 gUnknown_83A5FA0:: @ 83A5FA0
 	.4byte gUnknown_83A5F7C
@@ -7281,10 +7463,14 @@ gUnknown_83A5FA4:: @ 83A5FA4
 	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, sub_80DC99C
 
 gUnknown_83A5FBC:: @ 83A5FBC
-	.incbin "baserom.gba", 0x3A5FBC, 0x10
+	overworld_frame gUnknown_839D2A8, 2, 2, 0
+	overworld_frame gUnknown_839D2A8, 2, 2, 1
 
 gUnknown_83A5FCC:: @ 83A5FCC
-	.incbin "baserom.gba", 0x3A5FCC, 0x10
+	obj_image_anim_frame 0, 3
+	obj_image_anim_frame 1, 5
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
 gUnknown_83A5FDC:: @ 83A5FDC
 	.4byte gUnknown_83A5FCC

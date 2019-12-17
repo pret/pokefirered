@@ -46,10 +46,10 @@ gUnknown_835E9A8:: @ 835E9A8
 gUnknown_835F2A8:: @ 835F2A8
 	.incbin "graphics/object_events/012.4bpp"
 
-@ 35FBA8
+gObjectEventPic_MaleSurfing:: @ 835FBA8
 	.incbin "graphics/object_events/male_surf.4bpp"
 
-@ 360DA8
+gObjectEventPic_FemaleSurfing:: @ 360DA8
 	.incbin "graphics/object_events/female_surf.4bpp"
 
 gUnknown_8361FA8:: @ 8361FA8
@@ -565,56 +565,11 @@ gUnknown_8398688::
 gUnknown_83986A8:: @ 83986A8
 	.incbin "graphics/object_events/pics/unknown/83986A8.4bpp"
 
-gUnknown_8398728:: @ 8398728
-	.incbin "graphics/object_events/pics/unknown/8398728.4bpp"
-
-gUnknown_83987A8:: @ 83987A8
-	.incbin "graphics/object_events/pics/unknown/83987A8.4bpp"
-
-gUnknown_8398828:: @ 8398828
-	.incbin "graphics/object_events/pics/unknown/8398828.4bpp"
-
-gUnknown_83988A8:: @ 83988A8
-	.incbin "graphics/object_events/pics/unknown/83988A8.4bpp"
-
 gUnknown_8398928:: @ 8398928
 	.incbin "graphics/object_events/pics/unknown/8398928.4bpp"
 
-gUnknown_83989A8:: @ 83989A8
-	.incbin "graphics/object_events/pics/unknown/83989A8.4bpp"
-
-gUnknown_8398A28:: @ 8398A28
-	.incbin "graphics/object_events/pics/unknown/8398A28.4bpp"
-
-gUnknown_8398AA8:: @ 8398AA8
-	.incbin "graphics/object_events/pics/unknown/8398AA8.4bpp"
-
-gUnknown_8398B28:: @ 8398B28
-	.incbin "graphics/object_events/pics/unknown/8398B28.4bpp"
-
 gUnknown_8398BA8:: @ 8398BA8
 	.incbin "graphics/object_events/pics/unknown/8398BA8.4bpp"
-
-gUnknown_8398C28:: @ 8398C28
-	.incbin "graphics/object_events/pics/unknown/8398C28.4bpp"
-
-gUnknown_8398CA8:: @ 8398CA8
-	.incbin "graphics/object_events/pics/unknown/8398CA8.4bpp"
-
-gUnknown_8398D28:: @ 8398D28
-	.incbin "graphics/object_events/pics/unknown/8398D28.4bpp"
-
-gUnknown_8398DA8:: @ 8398DA8
-	.incbin "graphics/object_events/pics/unknown/8398DA8.4bpp"
-
-gUnknown_8398E28:: @ 8398E28
-	.incbin "graphics/object_events/pics/unknown/8398E28.4bpp"
-
-gUnknown_8398EA8:: @ 8398EA8
-	.incbin "graphics/object_events/pics/unknown/8398EA8.4bpp"
-
-gUnknown_8398F28:: @ 8398F28
-	.incbin "graphics/object_events/pics/unknown/8398F28.4bpp"
 
 gUnknown_8398FA8:: @ 8398FA8
 	.incbin "graphics/object_events/palettes/8398FA8.gbapal"
@@ -625,212 +580,23 @@ gUnknown_8398FC8:: @ 8398FC8
 gUnknown_8399008:: @ 8399008
 	.incbin "graphics/object_events/pics/unknown/8399008.4bpp"
 
-gUnknown_8399048:: @ 8399048
-	.incbin "graphics/object_events/pics/unknown/8399048.4bpp"
-
-gUnknown_8399088:: @ 8399088
-	.incbin "graphics/object_events/pics/unknown/8399088.4bpp"
-
 gUnknown_83990C8:: @ 83990C8
 	.incbin "graphics/object_events/pics/unknown/83990C8.4bpp"
 
 gUnknown_8399188:: @ 8399188
 	.incbin "graphics/object_events/pics/unknown/8399188.4bpp"
 
-gUnknown_83991C8:: @ 83991C8
-	.incbin "graphics/object_events/pics/unknown/83991C8.4bpp"
-
-gUnknown_8399208:: @ 8399208
-	.incbin "graphics/object_events/pics/unknown/8399208.4bpp"
-
-gUnknown_8399248:: @ 8399248
-	.incbin "graphics/object_events/pics/unknown/8399248.4bpp"
-
-gUnknown_8399388:: @ 8399388
-	.incbin "graphics/object_events/pics/unknown/8399388.4bpp"
+gUnknown_8399288:: @ 8399288
+	.incbin "graphics/object_events/pics/unknown/8399288.4bpp"
 
 gUnknown_8399488:: @ 8399488
 	.incbin "graphics/object_events/pics/unknown/8399488.4bpp"
 
-gUnknown_8399508:: @ 8399508
-	.incbin "graphics/object_events/pics/unknown/8399508.4bpp"
-
-gUnknown_8399588:: @ 8399588
-	.incbin "graphics/object_events/pics/unknown/8399588.4bpp"
-
-gUnknown_8399608:: @ 8399608
-	.incbin "graphics/object_events/pics/unknown/8399608.4bpp"
-
-gUnknown_8399688:: @ 8399688
-	.incbin "graphics/object_events/pics/unknown/8399688.4bpp"
-
 gUnknown_8399788:: @ 8399788
 	.incbin "graphics/object_events/pics/unknown/8399788.4bpp"
 
-gUnknown_8399808:: @ 8399808
-	.incbin "graphics/object_events/pics/unknown/8399808.4bpp"
-
-gUnknown_8399888:: @ 8399888
-	.incbin "graphics/object_events/pics/unknown/8399888.4bpp"
-
-gUnknown_8399908:: @ 8399908
-	.incbin "graphics/object_events/pics/unknown/8399908.4bpp"
-
-gUnknown_8399988:: @ 8399988
-	.incbin "graphics/object_events/pics/unknown/8399988.4bpp"
-
-gUnknown_8399A08:: @ 8399A08
-	.incbin "graphics/object_events/pics/unknown/8399A08.4bpp"
-
-gUnknown_8399A88:: @ 8399A88
-	.incbin "graphics/object_events/pics/unknown/8399A88.4bpp"
-
-gUnknown_8399B08:: @ 8399B08
-	.incbin "graphics/object_events/pics/unknown/8399B08.4bpp"
-
-gUnknown_8399B88:: @ 8399B88
-	.incbin "graphics/object_events/pics/unknown/8399B88.4bpp"
-
 gUnknown_8399C08:: @ 8399C08
 	.incbin "graphics/object_events/pics/unknown/8399C08.4bpp"
-
-gUnknown_8399C88:: @ 8399C88
-	.byte 0xF0
-	.byte 0x44
-	.byte 0xF4
-	.byte 0xF0
-	.byte 0x44
-	.byte 0x23
-	.byte 0x42
-	.byte 0x43
-
-gUnknown_8399C90:: @ 8399C90
-	.byte 0x33
-	.byte 0x34
-	.byte 0x23
-	.byte 0x24
-	.byte 0x21
-	.byte 0x43
-	.byte 0x43
-	.byte 0x42
-	.byte 0x13
-	.byte 0x32
-	.byte 0x44
-	.byte 0x32
-	.byte 0x40
-	.byte 0x33
-	.byte 0x43
-	.byte 0x34
-	.byte 0x4F
-	.byte 0x34
-	.byte 0x44
-	.byte 0x44
-	.byte 0x34
-	.byte 0x44
-	.byte 0x43
-	.byte 0x34
-	.byte 0x43
-	.byte 0x44
-	.byte 0x0F
-	.byte 0x0F
-	.byte 0x12
-	.byte 0x21
-	.byte 0xF2
-	.byte 0xF0
-	.byte 0x42
-	.byte 0x33
-	.byte 0x43
-	.byte 0x0F
-	.byte 0x33
-	.byte 0x43
-	.byte 0xF4
-	.byte 0xF0
-	.byte 0x43
-	.byte 0x44
-	.byte 0x44
-	.byte 0x0F
-	.byte 0x44
-	.byte 0x34
-	.byte 0x33
-	.byte 0xF4
-	.byte 0x44
-	.byte 0x44
-	.byte 0x33
-	.byte 0x04
-	.byte 0x33
-	.byte 0x43
-	.byte 0x44
-	.byte 0xF0
-	.byte 0x24
-	.byte 0x32
-	.byte 0x23
-	.byte 0x42
-	.byte 0x1F
-	.byte 0x24
-	.byte 0x32
-	.byte 0x11
-	.byte 0x40
-	.byte 0x12
-	.byte 0x32
-	.byte 0x43
-	.byte 0x0F
-	.byte 0x11
-	.byte 0x33
-	.byte 0x43
-	.byte 0x40
-	.byte 0x31
-	.byte 0x44
-	.byte 0x33
-	.byte 0x3F
-	.byte 0x44
-	.byte 0x44
-	.byte 0x34
-	.byte 0x40
-	.byte 0x44
-	.byte 0x34
-	.byte 0x34
-	.byte 0x3F
-	.byte 0x44
-	.byte 0x03
-	.byte 0x43
-	.byte 0x34
-	.byte 0x23
-	.byte 0x43
-	.byte 0x43
-	.byte 0x34
-	.byte 0x22
-	.byte 0x32
-	.byte 0x04
-	.byte 0x44
-	.byte 0x13
-	.byte 0x31
-	.byte 0xF4
-	.byte 0x44
-	.byte 0x34
-	.byte 0x41
-	.byte 0x43
-	.byte 0x44
-	.byte 0x44
-	.byte 0x34
-	.byte 0x43
-	.byte 0x44
-	.byte 0x44
-	.byte 0x44
-	.byte 0x04
-	.byte 0x44
-	.byte 0x34
-	.byte 0x44
-	.byte 0xF4
-	.byte 0x34
-	.byte 0x34
-	.byte 0x30
-	.byte 0x0F
-
-gUnknown_8399D08:: @ 8399D08
-	.incbin "graphics/object_events/pics/unknown/8399D08.4bpp"
-
-gUnknown_8399D88:: @ 8399D88
-	.incbin "graphics/object_events/pics/unknown/8399D88.4bpp"
 
 gUnknown_8399E08:: @ 8399E08
 	.incbin "graphics/object_events/pics/unknown/8399E08.4bpp"
@@ -847,23 +613,8 @@ gUnknown_8399F88:: @ 8399F88
 gUnknown_839A008:: @ 839A008
 	.incbin "graphics/object_events/pics/unknown/839A008.4bpp"
 
-gUnknown_839A088:: @ 839A088
-	.incbin "graphics/object_events/pics/unknown/839A088.4bpp"
-
-gUnknown_839A108:: @ 839A108
-	.incbin "graphics/object_events/pics/unknown/839A108.4bpp"
-
-gUnknown_839A188:: @ 839A188
-	.incbin "graphics/object_events/pics/unknown/839A188.4bpp"
-
-gUnknown_839A208:: @ 839A208
-	.incbin "graphics/object_events/pics/unknown/839A208.4bpp"
-
 gUnknown_839A288:: @ 839A288
 	.incbin "graphics/object_events/pics/unknown/839A288.4bpp"
-
-gUnknown_839A308:: @ 839A308
-	.incbin "graphics/object_events/pics/unknown/839A308.4bpp"
 
 gUnknown_839A388:: @ 839A388
 	.incbin "graphics/object_events/pics/unknown/839A388.4bpp"
@@ -892,23 +643,8 @@ gUnknown_839A708:: @ 839A708
 gUnknown_839A788:: @ 839A788
 	.incbin "graphics/object_events/pics/unknown/839A788.4bpp"
 
-gUnknown_839A808:: @ 839A808
-	.incbin "graphics/object_events/pics/unknown/839A808.4bpp"
-
-gUnknown_839A888:: @ 839A888
-	.incbin "graphics/object_events/pics/unknown/839A888.4bpp"
-
-gUnknown_839A908:: @ 839A908
-	.incbin "graphics/object_events/pics/unknown/839A908.4bpp"
-
 gUnknown_839A988:: @ 839A988
 	.incbin "graphics/object_events/pics/unknown/839A988.4bpp"
-
-gUnknown_839A9C8:: @ 839A9C8
-	.incbin "graphics/object_events/pics/unknown/839A9C8.4bpp"
-
-gUnknown_839AA08:: @ 839AA08
-	.incbin "graphics/object_events/pics/unknown/839AA08.4bpp"
 
 gUnknown_839AA48:: @ 839AA48
 	.incbin "graphics/object_events/pics/unknown/839AA48.4bpp"
@@ -940,77 +676,14 @@ gUnknown_839AD48:: @ 839AD48
 gUnknown_839AD88:: @ 839AD88
 	.incbin "graphics/object_events/pics/unknown/839AD88.4bpp"
 
-gUnknown_839AE08:: @ 839AE08
-	.incbin "graphics/object_events/pics/unknown/839AE08.4bpp"
-
-gUnknown_839AE88:: @ 839AE88
-	.incbin "graphics/object_events/pics/unknown/839AE88.4bpp"
-
-gUnknown_839AF08:: @ 839AF08
-	.incbin "graphics/object_events/pics/unknown/839AF08.4bpp"
-
 gUnknown_839B008:: @ 839B008
 	.incbin "graphics/object_events/pics/unknown/839B008.4bpp"
-
-gUnknown_839B108:: @ 839B108
-	.incbin "graphics/object_events/pics/unknown/839B108.4bpp"
-
-gUnknown_839B208:: @ 839B208
-	.incbin "graphics/object_events/pics/unknown/839B208.4bpp"
-
-gUnknown_839B308:: @ 839B308
-	.incbin "graphics/object_events/pics/unknown/839B308.4bpp"
-
-gUnknown_839B408:: @ 839B408
-	.incbin "graphics/object_events/pics/unknown/839B408.4bpp"
-
-gUnknown_839B508:: @ 839B508
-	.incbin "graphics/object_events/pics/unknown/839B508.4bpp"
-
-gUnknown_839B608:: @ 839B608
-	.incbin "graphics/object_events/pics/unknown/839B608.4bpp"
 
 gUnknown_839B708:: @ 839B708
 	.incbin "graphics/object_events/pics/unknown/839B708.4bpp"
 
-gUnknown_839B808:: @ 839B808
-	.incbin "graphics/object_events/pics/unknown/839B808.4bpp"
-
-gUnknown_839B908:: @ 839B908
-	.incbin "graphics/object_events/pics/unknown/839B908.4bpp"
-
-gUnknown_839BA08:: @ 839BA08
-	.incbin "graphics/object_events/pics/unknown/839BA08.4bpp"
-
-gUnknown_839BB08:: @ 839BB08
-	.incbin "graphics/object_events/pics/unknown/839BB08.4bpp"
-
-gUnknown_839BC08:: @ 839BC08
-	.incbin "graphics/object_events/pics/unknown/839BC08.4bpp"
-
-gUnknown_839BD08:: @ 839BD08
-	.incbin "graphics/object_events/pics/unknown/839BD08.4bpp"
-
 gUnknown_839BE08:: @ 839BE08
 	.incbin "graphics/object_events/pics/unknown/839BE08.4bpp"
-
-gUnknown_839BF08:: @ 839BF08
-	.incbin "graphics/object_events/pics/unknown/839BF08.4bpp"
-
-gUnknown_839C008:: @ 839C008
-	.incbin "graphics/object_events/pics/unknown/839C008.4bpp"
-
-gUnknown_839C108:: @ 839C108
-	.incbin "graphics/object_events/pics/unknown/839C108.4bpp"
-
-gUnknown_839C208:: @ 839C208
-	.incbin "graphics/object_events/pics/unknown/839C208.4bpp"
-
-gUnknown_839C308:: @ 839C308
-	.incbin "graphics/object_events/pics/unknown/839C308.4bpp"
-
-gUnknown_839C408:: @ 839C408
-	.incbin "graphics/object_events/pics/unknown/839C408.4bpp"
 
 gUnknown_839C508:: @ 839C508
 	.incbin "graphics/object_events/pics/unknown/839C508.4bpp"
@@ -1083,18 +756,6 @@ gUnknown_839D3A8:: @ 839D3A8
 
 gUnknown_839D3C8:: @ 839D3C8
 	.incbin "graphics/object_events/pics/unknown/839D3C8.4bpp"
-
-gUnknown_839DBC8:: @ 839DBC8
-	.incbin "graphics/object_events/pics/unknown/839DBC8.4bpp"
-
-gUnknown_839E3C8:: @ 839E3C8
-	.incbin "graphics/object_events/pics/unknown/839E3C8.4bpp"
-
-gUnknown_839EBC8:: @ 839EBC8
-	.incbin "graphics/object_events/pics/unknown/839EBC8.4bpp"
-
-gUnknown_839F3C8:: @ 839F3C8
-	.incbin "graphics/object_events/pics/unknown/839F3C8.4bpp"
 
 gMovementTypeCallbacks:: @ 839FBC8
 	.4byte sub_805FFB4

@@ -169,7 +169,7 @@ gUnknown_83716A8:: @ 83716A8
 gUnknown_83720A8:: @ 83720A8
 	.incbin "graphics/object_events/024.4bpp"
 
-@ 8372AA8
+gUnknown_8372AA8:: @ 8372AA8
 	.incbin "graphics/object_events/unk_8372AA8.4bpp"
 
 gUnknown_83733A8:: @ 83733A8
@@ -7412,7 +7412,9 @@ gUnknown_83A5EC0:: @ 83A5EC0
 	spr_template 0xFFFF, 0x100D, gEventObjectBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
 
 gUnknown_83A5ED8:: @ 83A5ED8
-	.incbin "baserom.gba", 0x3A5ED8, 0x8
+	.4byte gUnknown_839C588
+	.2byte 0x100D
+	.2byte 0x0000 @ filler
 
 gUnknown_83A5EE0:: @ 83A5EE0
 	overworld_frame gUnknown_839C828, 2, 2, 0
@@ -7479,112 +7481,262 @@ gUnknown_83A5FE0:: @ 83A5FE0
 	spr_template 0xFFFF, 0x100F, gEventObjectBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
 
 gUnknown_83A5FF8::
-	.incbin "baserom.gba", 0x3A5FF8, 0x8
+	.4byte gUnknown_839D3A8
+	.2byte 0x100F
+	.2byte 0x0000 @ filler
 
 gUnknown_83A6000:: @ 83A6000
-	.incbin "baserom.gba", 0x3A6000, 0x10
+	.2byte 0x0020
+	.2byte 0x0040
+	.2byte 0x0060
+	.2byte 0x0080
+
+gUnknown_83A6008:: @ 83A6008
+	.2byte 0x0020
+	.2byte 0x0040
+	.2byte 0x0080
+	.2byte 0x00C0
 
 gUnknown_83A6010:: @ 83A6010
-	.incbin "baserom.gba", 0x3A6010, 0x8
+	.2byte 0x0020
+	.2byte 0x0030
+	.2byte 0x0040
+	.2byte 0x0050
 
 gUnknown_83A6018:: @ 83A6018
-	.incbin "baserom.gba", 0x3A6018, 0x1C
+	.4byte sub_8060064
+	.4byte sub_8060078
+	.4byte sub_80600A4
+	.4byte sub_80600E0
+	.4byte sub_8060100
+	.4byte sub_806014C
+	.4byte sub_80601AC
 
 gUnknown_83A6034:: @ 83A6034
-	.incbin "baserom.gba", 0x3A6034, 0x1C
+	.4byte sub_8060064
+	.4byte sub_8060078
+	.4byte sub_80600A4
+	.4byte sub_80600E0
+	.4byte sub_8060100
+	.4byte sub_806017C
+	.4byte sub_80601AC
 
 gUnknown_83A6050:: @ 83A6050
-	.incbin "baserom.gba", 0x3A6050, 0x4
+	.byte 1 @ DIR_SOUTH
+	.byte 2 @ DIR_NORTH
+	.byte 3 @ DIR_WEST
+	.byte 4 @ DIR_EAST
 
 gUnknown_83A6054:: @ 83A6054
-	.incbin "baserom.gba", 0x3A6054, 0x2C
+	.4byte GetRegularRunningPastFacingDirection
+	.4byte GetNorthSouthRunningPastFacingDirection
+	.4byte GetEastWestRunningPastFacingDirection
+	.4byte GetNorthEastRunningPastFacingDirection
+	.4byte GetNorthWestRunningPastFacingDirection
+	.4byte GetSouthEastRunningPastFacingDirection
+	.4byte GetSouthWestRunningPastFacingDirection
+	.4byte GetNonEastRunningPastFacingDirection
+	.4byte GetNonWestRunningPastFacingDirection
+	.4byte GetNonSouthRunningPastFacingDirection
+	.4byte GetNonNorthRunningPastFacingDirection
 
 gUnknown_83A6080:: @ 83A6080
-	.incbin "baserom.gba", 0x3A6080, 0x14
+	.4byte sub_80605D0
+	.4byte sub_80605E4
+	.4byte sub_8060610
+	.4byte sub_8060654
+	.4byte sub_8060684
 
 gUnknown_83A6094:: @ 83A6094
-	.incbin "baserom.gba", 0x3A6094, 0x1C
+	.4byte sub_8060710
+	.4byte sub_8060724
+	.4byte sub_8060750
+	.4byte sub_806078C
+	.4byte sub_80607AC
+	.4byte sub_80607F8
+	.4byte sub_8060828
 
 gUnknown_83A60B0:: @ 83A60B0
-	.incbin "baserom.gba", 0x3A60B0, 0x4
+	.byte 1 @ DIR_SOUTH
+	.byte 2 @ DIR_NORTH
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A60B4:: @ 83A60B4
-	.incbin "baserom.gba", 0x3A60B4, 0x1C
+	.4byte sub_8060894
+	.4byte sub_80608A8
+	.4byte sub_80608D4
+	.4byte sub_8060910
+	.4byte sub_8060930
+	.4byte sub_806097C
+	.4byte sub_80609AC
 
 gUnknown_83A60D0:: @ 83A60D0
-	.incbin "baserom.gba", 0x3A60D0, 0x4
+	.byte 3 @ DIR_WEST
+	.byte 4 @ DIR_EAST
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A60D4:: @ 83A60D4
-	.incbin "baserom.gba", 0x3A60D4, 0xC
+	.4byte sub_8060A18
+	.4byte sub_8060A44
+	.4byte sub_8060A64
 
 gUnknown_83A60E0:: @ 83A60E0
-	.incbin "baserom.gba", 0x3A60E0, 0x14
+	.4byte sub_8060AB8
+	.4byte sub_8060ACC
+	.4byte sub_8060AF8
+	.4byte sub_8060B3C
+	.4byte sub_8060B6C
 
 gUnknown_83A60F4:: @ 83A60F4
-	.incbin "baserom.gba", 0x3A60F4, 0x14
+	.4byte sub_8060BF8
+	.4byte sub_8060C0C
+	.4byte sub_8060C38
+	.4byte sub_8060C7C
+	.4byte sub_8060CAC
 
 gUnknown_83A6108:: @ 83A6108
-	.incbin "baserom.gba", 0x3A6108, 0x14
+	.4byte sub_8060D38
+	.4byte sub_8060D4C
+	.4byte sub_8060D78
+	.4byte sub_8060DBC
+	.4byte sub_8060DEC
 
 gUnknown_83A611C:: @ 83A611C
-	.incbin "baserom.gba", 0x3A611C, 0x4
+	.byte 2 @ DIR_NORTH
+	.byte 3 @ DIR_WEST
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A6120:: @ 83A6120
-	.incbin "baserom.gba", 0x3A6120, 0x14
+	.4byte sub_8060E78
+	.4byte sub_8060E8C
+	.4byte sub_8060EB8
+	.4byte sub_8060EFC
+	.4byte sub_8060F2C
 
 gUnknown_83A6134:: @ 83A6134
-	.incbin "baserom.gba", 0x3A6134, 0x4
+	.byte 2 @ DIR_NORTH
+	.byte 4 @ DIR_EAST
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A6138:: @ 83A6138
-	.incbin "baserom.gba", 0x3A6138, 0x14
+	.4byte sub_8060FB8
+	.4byte sub_8060FCC
+	.4byte sub_8060FF8
+	.4byte sub_806103C
+	.4byte sub_806106C
 
 gUnknown_83A614C:: @ 83A614C
-	.incbin "baserom.gba", 0x3A614C, 0x4
+	.byte 1 @ DIR_SOUTH
+	.byte 3 @ DIR_WEST
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A6150:: @ 83A6150
-	.incbin "baserom.gba", 0x3A6150, 0x14
+	.4byte sub_80610F8
+	.4byte sub_806110C
+	.4byte sub_8061138
+	.4byte sub_806117C
+	.4byte sub_80611AC
 
 gUnknown_83A6164:: @ 83A6164
-	.incbin "baserom.gba", 0x3A6164, 0x4
+	.byte 1 @ DIR_SOUTH
+	.byte 4 @ DIR_EAST
+	.byte 0 @ DIR_NONE
+	.byte 0 @ DIR_NONE
 
 gUnknown_83A6168:: @ 83A6168
-	.incbin "baserom.gba", 0x3A6168, 0x14
+	.4byte sub_8061238
+	.4byte sub_806124C
+	.4byte sub_8061278
+	.4byte sub_80612BC
+	.4byte sub_80612EC
 
 gUnknown_83A617C:: @ 83A617C
-	.incbin "baserom.gba", 0x3A617C, 0x4
+	.byte 2 @ DIR_NORTH
+	.byte 1 @ DIR_SOUTH
+	.byte 3 @ DIR_WEST
+	.byte 1 @ DIR_SOUTH
 
 gUnknown_83A6180:: @ 83A6180
-	.incbin "baserom.gba", 0x3A6180, 0x14
+	.4byte sub_8061378
+	.4byte sub_806138C
+	.4byte sub_80613B8
+	.4byte sub_80613FC
+	.4byte sub_806142C
 
 gUnknown_83A6194:: @ 83A6194
-	.incbin "baserom.gba", 0x3A6194, 0x4
+	.byte 1 @ DIR_SOUTH
+	.byte 2 @ DIR_NORTH
+	.byte 4 @ DIR_EAST
+	.byte 1 @ DIR_SOUTH
 
 gUnknown_83A6198:: @ 83A6198
-	.incbin "baserom.gba", 0x3A6198, 0x14
+	.4byte sub_80614B8
+	.4byte sub_80614CC
+	.4byte sub_80614F8
+	.4byte sub_806153C
+	.4byte sub_806156C
 
 gUnknown_83A61AC:: @ 83A61AC
-	.incbin "baserom.gba", 0x3A61AC, 0x4
+	.byte 2 @ DIR_NORTH
+	.byte 3 @ DIR_WEST
+	.byte 4 @ DIR_EAST
+	.byte 2 @ DIR_NORTH
 
 gUnknown_83A61B0:: @ 83A61B0
-	.incbin "baserom.gba", 0x3A61B0, 0x14
+	.4byte sub_80615F8
+	.4byte sub_806160C
+	.4byte sub_8061638
+	.4byte sub_806167C
+	.4byte sub_80616AC
 
 gUnknown_83A61C4:: @ 83A61C4
-	.incbin "baserom.gba", 0x3A61C4, 0x4
+	.byte 3 @ DIR_WEST
+	.byte 4 @ DIR_EAST
+	.byte 1 @ DIR_SOUTH
+	.byte 1 @ DIR_SOUTH
 
 gUnknown_83A61C8:: @ 83A61C8
-	.incbin "baserom.gba", 0x3A61C8, 0x10
+	.4byte sub_8061738
+	.4byte sub_8061764
+	.4byte sub_8061788
+	.4byte sub_80617B4
 
 gUnknown_83A61D8:: @ 83A61D8
-	.incbin "baserom.gba", 0x3A61D8, 0x8
+	.byte 0x01
+	.byte 0x04
+	.byte 0x03
+	.byte 0x01
+	.byte 0x02
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
 
 gUnknown_83A61E0:: @ 83A61E0
-	.incbin "baserom.gba", 0x3A61E0, 0x10
+	.4byte sub_806183C
+	.4byte sub_8061868
+	.4byte sub_806188C
+	.4byte sub_80618B8
 
 gUnknown_83A61F0:: @ 83A61F0
-	.incbin "baserom.gba", 0x3A61F0, 0x8
+	.byte 0x01
+	.byte 0x03
+	.byte 0x04
+	.byte 0x02
+	.byte 0x01
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
 
 gUnknown_83A61F8:: @ 83A61F8
-	.incbin "baserom.gba", 0x3A61F8, 0x10
+	.4byte sub_8061940
+	.4byte sub_8061954
+	.4byte sub_806198C
+	.4byte sub_8061A44
 
 gUnknown_83A6208:: @ 83A6208
 	.4byte sub_8061A6C

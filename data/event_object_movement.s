@@ -6094,63 +6094,25 @@ gObjectEventGraphicsInfo_83A5134:: @ 83A5134
 	.4byte gDummySpriteAffineAnimTable
 
 gObjectEventSpritePalettes:: @ 83A5158
-	.4byte gUnknown_836D828
-	.2byte 0x1103
-	.2byte 0x0000
-	.4byte gUnknown_836D848
-	.2byte 0x1104
-	.2byte 0x0000
-	.4byte gUnknown_836D868
-	.2byte 0x1105
-	.2byte 0x0000
-	.4byte gUnknown_836D888
-	.2byte 0x1106
-	.2byte 0x0000
-	.4byte gUnknown_836D8A8
-	.2byte 0x1107
-	.2byte 0x0000
-	.4byte gUnknown_836D8C8
-	.2byte 0x1108
-	.2byte 0x0000
-	.4byte gUnknown_836D8E8
-	.2byte 0x1109
-	.2byte 0x0000
-	.4byte gUnknown_836D908
-	.2byte 0x110a
-	.2byte 0x0000
-	.4byte gUnknown_835B968
-	.2byte 0x1100
-	.2byte 0x0000
-	.4byte gUnknown_835E968
-	.2byte 0x1101
-	.2byte 0x0000
-	.4byte gUnknown_835E988
-	.2byte 0x1102
-	.2byte 0x0000
-	.4byte gUnknown_8398008
-	.2byte 0x110b
-	.2byte 0x0000
-	.4byte gUnknown_8398028
-	.2byte 0x110c
-	.2byte 0x0000
-	.4byte gUnknown_835B968
-	.2byte 0x1110
-	.2byte 0x0000
-	.4byte gUnknown_835E968
-	.2byte 0x1111
-	.2byte 0x0000
-	.4byte gUnknown_8394EA8
-	.2byte 0x1113
-	.2byte 0x0000
-	.4byte gUnknown_8395AE8
-	.2byte 0x1115
-	.2byte 0x0000
-	.4byte gUnknown_83952C8
-	.2byte 0x1114
-	.2byte 0x0000
-	.4byte NULL
-	.2byte 0x0000
-	.2byte 0x0000
+	obj_pal gUnknown_836D828, 0x1103
+	obj_pal gUnknown_836D848, 0x1104
+	obj_pal gUnknown_836D868, 0x1105
+	obj_pal gUnknown_836D888, 0x1106
+	obj_pal gUnknown_836D8A8, 0x1107
+	obj_pal gUnknown_836D8C8, 0x1108
+	obj_pal gUnknown_836D8E8, 0x1109
+	obj_pal gUnknown_836D908, 0x110a
+	obj_pal gUnknown_835B968, 0x1100
+	obj_pal gUnknown_835E968, 0x1101
+	obj_pal gUnknown_835E988, 0x1102
+	obj_pal gUnknown_8398008, 0x110b
+	obj_pal gUnknown_8398028, 0x110c
+	obj_pal gUnknown_835B968, 0x1110
+	obj_pal gUnknown_835E968, 0x1111
+	obj_pal gUnknown_8394EA8, 0x1113
+	obj_pal gUnknown_8395AE8, 0x1115
+	obj_pal gUnknown_83952C8, 0x1114
+	null_obj_pal
 
 gPlayerReflectionPaletteTags:: @ 83A51F0
 	.2byte 0x1101
@@ -6338,14 +6300,10 @@ gUnknown_83A5330:: @ 83A5330
 	.4byte gUnknownPaletteTags_83A531C
 
 gUnknown_83A5340::
-	.4byte gUnknown_8398FA8
-	.2byte 0x1004
-	.2byte 0x0000
+	obj_pal gUnknown_8398FA8, 0x1004
 
 gUnknown_83A5348:: @ 83A5348
-	.4byte gUnknown_8398FC8
-	.2byte 0x1005
-	.2byte 0x0000
+	obj_pal gUnknown_8398FC8, 0x1005
 
 gUnknown_83A5350:: @ 83A5350
 	obj_image_anim_frame 0, 1, 0
@@ -7073,9 +7031,7 @@ gUnknown_83A5EC0:: @ 83A5EC0
 	spr_template 0xFFFF, 0x100D, gEventObjectBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
 
 gUnknown_83A5ED8:: @ 83A5ED8
-	.4byte gUnknown_839C588
-	.2byte 0x100D
-	.2byte 0x0000 @ filler
+	obj_pal gUnknown_839C588, 0x100D
 
 gUnknown_83A5EE0:: @ 83A5EE0
 	overworld_frame gUnknown_839C828, 2, 2, 0
@@ -7142,9 +7098,7 @@ gUnknown_83A5FE0:: @ 83A5FE0
 	spr_template 0xFFFF, 0x100F, gEventObjectBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
 
 gUnknown_83A5FF8::
-	.4byte gUnknown_839D3A8
-	.2byte 0x100F
-	.2byte 0x0000 @ filler
+	obj_pal gUnknown_839D3A8, 0x100F
 
 gUnknown_83A6000:: @ 83A6000
 	.2byte 0x0020

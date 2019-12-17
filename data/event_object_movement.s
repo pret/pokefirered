@@ -7476,66 +7476,222 @@ gUnknown_83A63FC:: @ 83A63FC
 gUnknown_83A6404:: @ 83A6404
 	.incbin "baserom.gba", 0x3A6404, 0x8
 
+@ gFaceDirectionAnimNums ?
 gUnknown_83A640C:: @ 83A640C
-	.incbin "baserom.gba", 0x3A640C, 0x9
+	.byte 0x00
+	.byte 0x00
+	.byte 0x01
+	.byte 0x02
+	.byte 0x03
+	.byte 0x00
+	.byte 0x00
+	.byte 0x01
+	.byte 0x01
 
 gUnknown_83A6415:: @ 83A6415
-	.incbin "baserom.gba", 0x3A6415, 0x9
+	.byte 0x4 @ DIR_NONE
+	.byte 0x4 @ DIR_SOUTH
+	.byte 0x5 @ DIR_NORTH
+	.byte 0x6 @ DIR_WEST
+	.byte 0x7 @ DIR_EAST
+	.byte 0x4 @ DIR_SOUTHWEST
+	.byte 0x4 @ DIR_SOUTHEAST
+	.byte 0x5 @ DIR_NORTHWEST
+	.byte 0x5 @ DIR_NORTHEAST
 
 gUnknown_83A641E:: @ 83A641E
-	.incbin "baserom.gba", 0x3A641E, 0x9
+	.byte 0x8 @ DIR_NONE
+	.byte 0x8 @ DIR_SOUTH
+	.byte 0x9 @ DIR_NORTH
+	.byte 0xA @ DIR_WEST
+	.byte 0xB @ DIR_EAST
+	.byte 0x8 @ DIR_SOUTHWEST
+	.byte 0x8 @ DIR_SOUTHEAST
+	.byte 0x9 @ DIR_NORTHWEST
+	.byte 0x9 @ DIR_NORTHEAST
 
 gUnknown_83A6427:: @ 83A6427
-	.incbin "baserom.gba", 0x3A6427, 0x9
+	.byte 0xC @ DIR_NONE
+	.byte 0xC @ DIR_SOUTH
+	.byte 0xD @ DIR_NORTH
+	.byte 0xE @ DIR_WEST
+	.byte 0xF @ DIR_EAST
+	.byte 0xC @ DIR_SOUTHWEST
+	.byte 0xC @ DIR_SOUTHEAST
+	.byte 0xD @ DIR_NORTHWEST
+	.byte 0xD @ DIR_NORTHEAST
 
 gUnknown_83A6430:: @ 83A6430
-	.incbin "baserom.gba", 0x3A6430, 0x9
+	.byte 0x10 @ DIR_NONE
+	.byte 0x10 @ DIR_SOUTH
+	.byte 0x11 @ DIR_NORTH
+	.byte 0x12 @ DIR_WEST
+	.byte 0x13 @ DIR_EAST
+	.byte 0x10 @ DIR_SOUTHWEST
+	.byte 0x10 @ DIR_SOUTHEAST
+	.byte 0x11 @ DIR_NORTHWEST
+	.byte 0x11 @ DIR_NORTHEAST
 
 gUnknown_83A6439:: @ 83A6439
-	.incbin "baserom.gba", 0x3A6439, 0x9
+	.byte 0x14 @ DIR_NONE
+	.byte 0x14 @ DIR_SOUTH
+	.byte 0x15 @ DIR_NORTH
+	.byte 0x16 @ DIR_WEST
+	.byte 0x17 @ DIR_EAST
+	.byte 0x14 @ DIR_SOUTHWEST
+	.byte 0x14 @ DIR_SOUTHEAST
+	.byte 0x15 @ DIR_NORTHWEST
+	.byte 0x15 @ DIR_NORTHEAST
 
 gUnknown_83A6442:: @ 83A6442
-	.incbin "baserom.gba", 0x3A6442, 0x9
+	.byte 0x14 @ DIR_NONE
+	.byte 0x14 @ DIR_SOUTH
+	.byte 0x15 @ DIR_NORTH
+	.byte 0x16 @ DIR_WEST
+	.byte 0x17 @ DIR_EAST
+	.byte 0x14 @ DIR_SOUTHWEST
+	.byte 0x14 @ DIR_SOUTHEAST
+	.byte 0x15 @ DIR_NORTHWEST
+	.byte 0x15 @ DIR_NORTHEAST
 
 gUnknown_83A644B:: @ 83A644B
-	.incbin "baserom.gba", 0x3A644B, 0x9
+	.byte 0x18 @ DIR_NONE
+	.byte 0x18 @ DIR_SOUTH
+	.byte 0x19 @ DIR_NORTH
+	.byte 0x1A @ DIR_WEST
+	.byte 0x1B @ DIR_EAST
+	.byte 0x18 @ DIR_SOUTHWEST
+	.byte 0x18 @ DIR_SOUTHEAST
+	.byte 0x19 @ DIR_NORTHWEST
+	.byte 0x19 @ DIR_NORTHEAST
 
 gUnknown_83A6454:: @ 83A6454
-	.incbin "baserom.gba", 0x3A6454, 0x9
+	.byte 0x1C @ DIR_NONE
+	.byte 0x1C @ DIR_SOUTH
+	.byte 0x1D @ DIR_NORTH
+	.byte 0x1E @ DIR_WEST
+	.byte 0x1F @ DIR_EAST
+	.byte 0x1C @ DIR_SOUTHWEST
+	.byte 0x1C @ DIR_SOUTHEAST
+	.byte 0x1D @ DIR_NORTHWEST
+	.byte 0x1D @ DIR_NORTHEAST
 
 gUnknown_83A645D:: @ 83A645D
-	.incbin "baserom.gba", 0x3A645D, 0x9
+	.byte 0x18 @ DIR_NONE
+	.byte 0x18 @ DIR_SOUTH
+	.byte 0x19 @ DIR_NORTH
+	.byte 0x1A @ DIR_WEST
+	.byte 0x1B @ DIR_EAST
+	.byte 0x18 @ DIR_SOUTHWEST
+	.byte 0x19 @ DIR_SOUTHEAST
+	.byte 0x1A @ DIR_NORTHWEST
+	.byte 0x1B @ DIR_NORTHEAST
 
 gUnknown_83A6466:: @ 83A6466
-	.incbin "baserom.gba", 0x3A6466, 0x9
+	.byte 0x20 @ DIR_NONE
+	.byte 0x20 @ DIR_SOUTH
+	.byte 0x21 @ DIR_NORTH
+	.byte 0x22 @ DIR_WEST
+	.byte 0x23 @ DIR_EAST
+	.byte 0x20 @ DIR_SOUTHWEST
+	.byte 0x20 @ DIR_SOUTHEAST
+	.byte 0x21 @ DIR_NORTHWEST
+	.byte 0x21 @ DIR_NORTHEAST
 
 gUnknown_83A646F:: @ 83A646F
-	.incbin "baserom.gba", 0x3A646F, 0x9
+	.byte 0x24 @ DIR_NONE
+	.byte 0x24 @ DIR_SOUTH
+	.byte 0x25 @ DIR_NORTH
+	.byte 0x26 @ DIR_WEST
+	.byte 0x27 @ DIR_EAST
+	.byte 0x24 @ DIR_SOUTHWEST
+	.byte 0x24 @ DIR_SOUTHEAST
+	.byte 0x25 @ DIR_NORTHWEST
+	.byte 0x25 @ DIR_NORTHEAST
 
 gUnknown_83A6478:: @ 83A6478
-	.incbin "baserom.gba", 0x3A6478, 0x9
+	.byte 0x0 @ DIR_NONE
+	.byte 0x0 @ DIR_SOUTH
+	.byte 0x1 @ DIR_NORTH
+	.byte 0x2 @ DIR_WEST
+	.byte 0x3 @ DIR_EAST
+	.byte 0x0 @ DIR_SOUTHWEST
+	.byte 0x0 @ DIR_SOUTHEAST
+	.byte 0x1 @ DIR_NORTHWEST
+	.byte 0x1 @ DIR_NORTHEAST
 
 gUnknown_83A6481:: @ 83A6481
-	.incbin "baserom.gba", 0x3A6481, 0x9
+	.byte 0x4 @ DIR_NONE
+	.byte 0x4 @ DIR_SOUTH
+	.byte 0x5 @ DIR_NORTH
+	.byte 0x6 @ DIR_WEST
+	.byte 0x7 @ DIR_EAST
+	.byte 0x4 @ DIR_SOUTHWEST
+	.byte 0x4 @ DIR_SOUTHEAST
+	.byte 0x5 @ DIR_NORTHWEST
+	.byte 0x5 @ DIR_NORTHEAST
 
 gUnknown_83A648A:: @ 83A648A
-	.incbin "baserom.gba", 0x3A648A, 0x9
+	.byte 0x8 @ DIR_NONE
+	.byte 0x8 @ DIR_SOUTH
+	.byte 0x9 @ DIR_NORTH
+	.byte 0xA @ DIR_WEST
+	.byte 0xB @ DIR_EAST
+	.byte 0x8 @ DIR_SOUTHWEST
+	.byte 0x8 @ DIR_SOUTHEAST
+	.byte 0x9 @ DIR_NORTHWEST
+	.byte 0x9 @ DIR_NORTHEAST
 
 gUnknown_83A6493:: @ 83A6493
-	.incbin "baserom.gba", 0x3A6493, 0x9
+	.byte 0x14 @ DIR_NONE
+	.byte 0x14 @ DIR_SOUTH
+	.byte 0x15 @ DIR_NORTH
+	.byte 0x16 @ DIR_WEST
+	.byte 0x17 @ DIR_EAST
+	.byte 0x14 @ DIR_SOUTHWEST
+	.byte 0x14 @ DIR_SOUTHEAST
+	.byte 0x15 @ DIR_NORTHWEST
+	.byte 0x15 @ DIR_NORTHEAST
 
 gUnknown_83A649C:: @ 83A649C
-	.incbin "baserom.gba", 0x3A649C, 0xC
+	.byte 0x08
+	.byte 0x08
+	.byte 0x07
+	.byte 0x09
+	.byte 0x0A
+	.byte 0x08
+	.byte 0x08
+	.byte 0x07
+	.byte 0x07
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
 
 gUnknown_83A64A8:: @ 83A64A8
-	.incbin "baserom.gba", 0x3A64A8, 0x10
+	.4byte MetatileBehavior_IsSouthBlocked
+	.4byte MetatileBehavior_IsNorthBlocked
+	.4byte MetatileBehavior_IsWestBlocked
+	.4byte MetatileBehavior_IsEastBlocked
 
 gUnknown_83A64B8:: @ 83A64B8
-	.incbin "baserom.gba", 0x3A64B8, 0x10
+	.4byte MetatileBehavior_IsNorthBlocked
+	.4byte MetatileBehavior_IsSouthBlocked
+	.4byte MetatileBehavior_IsEastBlocked
+	.4byte MetatileBehavior_IsWestBlocked
 
+@ sDirectionToVectors
 gUnknown_83A64C8:: @ 83A64C8
-	.incbin "baserom.gba", 0x3A64C8, 0x24
+	.2byte  0,  0 @ DIR_NONE
+	.2byte  0,  1 @ DIR_SOUTH
+	.2byte  0, -1 @ DIR_NORTH
+	.2byte -1,  0 @ DIR_WEST
+	.2byte  1,  0 @ DIR_EAST
+	.2byte -1,  1 @ DIR_SOUTHWEST
+	.2byte  1,  1 @ DIR_SOUTHEAST
+	.2byte -1, -1 @ DIR_NORTHWEST
+	.2byte  1, -1 @ DIR_NORTHEAST
 
+@ gFaceDirectionMovementActions
 gUnknown_83A64EC:: @ 83A64EC
 	.byte 0x0 @ DIR_NONE
 	.byte 0x0 @ DIR_SOUTH

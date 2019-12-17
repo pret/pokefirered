@@ -46,7 +46,7 @@ struct TransitionData
 static EWRAM_DATA struct TransitionData *sTransitionStructPtr = NULL;
 
 // TODO: Move this declaration to include/event_object_movement.h
-extern const struct OamData gEventObjectBaseOam_32x32;
+extern const struct OamData gObjectEventBaseOam_32x32;
 
 static bool8 BT_Phase1_FadeOut(struct Task *task);
 static bool8 BT_Phase1_FadeIn(struct Task *task);
@@ -470,7 +470,7 @@ static const struct SpriteTemplate sSpriteTemplate_SlidingPokeball =
 {
     .tileTag = SPRITE_INVALID_TAG,
     .paletteTag = 0x1009,
-    .oam = &gEventObjectBaseOam_32x32,
+    .oam = &gObjectEventBaseOam_32x32,
     .anims = sSpriteAnimTable_SlidingPokeball,
     .images = sSpriteImageTable_SlidingPokeball,
     .affineAnims = sSpriteAffineAnimTable_SlidingPokeball,

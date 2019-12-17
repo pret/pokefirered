@@ -322,14 +322,14 @@ static void sub_807DFBC(u8 taskId)
     {
     case 0: // Never reached
         sub_807DCB0(0);
-        FreezeEventObjects();
+        FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         FieldSetDoorOpened(*x, *y);
         task->data[0] = 1;
         break;
     case 5:
         sub_807DCB0(0);
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_807F114();
         sub_807DBAC();
         task->data[0] = 6;
@@ -407,7 +407,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
     {
     case 0:
         sub_807DCB0(0);
-        FreezeEventObjects();
+        FreezeObjectEvents();
         PlayerGetDestCoords(x, y);
         task->data[0] = 1;
         break;
@@ -438,7 +438,7 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        FreezeEventObjects();
+        FreezeObjectEvents();
         ScriptContext2_Enable();
         gTasks[taskId].data[0]++;
         break;
@@ -458,7 +458,7 @@ static void sub_807E31C(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        FreezeEventObjects();
+        FreezeObjectEvents();
         ScriptContext2_Enable();
         sub_805DC04();
         gTasks[taskId].data[0]++;
@@ -688,7 +688,7 @@ static void sub_807E718(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeEventObjects();
+        FreezeObjectEvents();
         ScriptContext2_Enable();
         task->data[0]++;
         break;
@@ -710,7 +710,7 @@ static void sub_807E784(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeEventObjects();
+        FreezeObjectEvents();
         ScriptContext2_Enable();
         PlaySE(SE_TK_WARPIN);
         sub_805DAB0();
@@ -743,7 +743,7 @@ static void sub_807E80C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeEventObjects();
+        FreezeObjectEvents();
         PlayerGetDestCoords(xp, yp);
         PlaySE(GetDoorSoundEffect(*xp, *yp - 1));
         task->data[1] = FieldAnimateDoorOpen(*xp, *yp - 1);
@@ -797,7 +797,7 @@ static void sub_807E980(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        FreezeEventObjects();
+        FreezeObjectEvents();
         CameraObjectReset2();
         data[0]++;
         break;

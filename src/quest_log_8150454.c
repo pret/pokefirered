@@ -172,7 +172,7 @@ static void sub_8150794(u8 taskId)
 
 static void sub_81507BC(struct ObjectEvent * a0, u8 a1)
 {
-    EventObjectSetGraphicsId(a0, a1);
+    ObjectEventSetGraphicsId(a0, a1);
 }
 
 static void sub_81507CC(void)

@@ -3940,31 +3940,31 @@ gUnknown_83A3698:: @ 83A3698
 	.byte 3, 7, 0, 4
 	.4byte 0x00000000, 0x00000000
 
-gEventObjectBaseOam_128x64::
+gObjectEventBaseOam_128x64::
 	.4byte 0x00000000, 0x00000800
 
-gEventObjectBaseOam_Unknown1::
+gObjectEventBaseOam_Unknown1::
 	.4byte 0x00004000, 0x00000800
 
-gEventObjectBaseOam_16x16::
+gObjectEventBaseOam_16x16::
 	.4byte 0x40000000, 0x00000800
 
-gEventObjectBaseOam_32x16::
+gObjectEventBaseOam_32x16::
 	.4byte 0x80004000, 0x00000800
 
-gEventObjectBaseOam_Unknown2::
+gObjectEventBaseOam_Unknown2::
 	.4byte 0x40004000, 0x00000800
 
-gEventObjectBaseOam_Unknown3::
+gObjectEventBaseOam_Unknown3::
 	.4byte 0xc0004000, 0x00000800
 
-gEventObjectBaseOam_16x32::
+gObjectEventBaseOam_16x32::
 	.4byte 0x80008000, 0x00000800
 
-gEventObjectBaseOam_32x32:: @ 83A3718
+gObjectEventBaseOam_32x32:: @ 83A3718
 	.4byte 0x80000000, 0x00000800
 
-gEventObjectBaseOam_64x64:: @ 83A3720
+gObjectEventBaseOam_64x64:: @ 83A3720
 	.4byte 0xc0000000, 0x00000800
 
 gSubsprites_83A3728:: @ 83A3728
@@ -4404,7 +4404,7 @@ gObjectEventGraphicsInfo_83A3BB0:: @ 83A3BB0
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3470
 	.4byte gSpriteImages_83A00A0
@@ -4415,7 +4415,7 @@ gObjectEventGraphicsInfo_83A3BD4:: @ 83A3BD4
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 2
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0140
@@ -4426,7 +4426,7 @@ gObjectEventGraphicsInfo_83A3BF8:: @ 83A3BF8
 	.byte 0 | (1 << 4) | (0 << 6) | (1 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3584
 	.4byte gSpriteImages_83A0270
@@ -4437,7 +4437,7 @@ gObjectEventGraphicsInfo_83A3C1C:: @ 83A3C1C
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3638
 	.4byte gSpriteImages_83A0330
@@ -4448,7 +4448,7 @@ gObjectEventGraphicsInfo_83A3C40:: @ 83A3C40
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A04C0
@@ -4459,7 +4459,7 @@ gObjectEventGraphicsInfo_83A3C64:: @ 83A3C64
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0420
@@ -4470,7 +4470,7 @@ gObjectEventGraphicsInfo_83A3C88:: @ 83A3C88
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0470
@@ -4481,7 +4481,7 @@ gObjectEventGraphicsInfo_83A3CAC:: @ 83A3CAC
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0508
@@ -4492,7 +4492,7 @@ gObjectEventGraphicsInfo_83A3CD0:: @ 83A3CD0
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0550
@@ -4503,7 +4503,7 @@ gObjectEventGraphicsInfo_83A3CF4:: @ 83A3CF4
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A05A0
@@ -4514,7 +4514,7 @@ gObjectEventGraphicsInfo_83A3D18:: @ 83A3D18
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A05E8
@@ -4525,7 +4525,7 @@ gObjectEventGraphicsInfo_83A3D3C:: @ 83A3D3C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0638
@@ -4536,7 +4536,7 @@ gObjectEventGraphicsInfo_83A3D60:: @ 83A3D60
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0688
@@ -4547,7 +4547,7 @@ gObjectEventGraphicsInfo_83A3D84:: @ 83A3D84
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A06D8
@@ -4558,7 +4558,7 @@ gObjectEventGraphicsInfo_83A3DA8:: @ 83A3DA8
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0C40
@@ -4569,7 +4569,7 @@ gObjectEventGraphicsInfo_83A3DCC:: @ 83A3DCC
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0720
@@ -4580,7 +4580,7 @@ gObjectEventGraphicsInfo_83A3DF0:: @ 83A3DF0
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0770
@@ -4591,7 +4591,7 @@ gObjectEventGraphicsInfo_83A3E14:: @ 83A3E14
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A07C0
@@ -4602,7 +4602,7 @@ gObjectEventGraphicsInfo_83A3E38:: @ 83A3E38
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0808
@@ -4613,7 +4613,7 @@ gObjectEventGraphicsInfo_83A3E5C:: @ 83A3E5C
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0858
@@ -4624,7 +4624,7 @@ gObjectEventGraphicsInfo_83A3E80:: @ 83A3E80
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A08A8
@@ -4635,7 +4635,7 @@ gObjectEventGraphicsInfo_83A3EA4:: @ 83A3EA4
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A08F8
@@ -4646,7 +4646,7 @@ gObjectEventGraphicsInfo_83A3EC8:: @ 83A3EC8
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0940
@@ -4657,7 +4657,7 @@ gObjectEventGraphicsInfo_83A3EEC:: @ 83A3EEC
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0988
@@ -4668,7 +4668,7 @@ gObjectEventGraphicsInfo_83A3F10:: @ 83A3F10
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A09D8
@@ -4679,7 +4679,7 @@ gObjectEventGraphicsInfo_83A3F34:: @ 83A3F34
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0A20
@@ -4690,7 +4690,7 @@ gObjectEventGraphicsInfo_83A3F58:: @ 83A3F58
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0AB8
@@ -4701,7 +4701,7 @@ gObjectEventGraphicsInfo_83A3F7C:: @ 83A3F7C
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0B00
@@ -4712,7 +4712,7 @@ gObjectEventGraphicsInfo_83A3FA0:: @ 83A3FA0
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0B50
@@ -4723,7 +4723,7 @@ gObjectEventGraphicsInfo_83A3FC4:: @ 83A3FC4
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0BA0
@@ -4734,7 +4734,7 @@ gObjectEventGraphicsInfo_83A3FE8:: @ 83A3FE8
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0BF0
@@ -4745,7 +4745,7 @@ gObjectEventGraphicsInfo_83A400C:: @ 83A400C
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0C90
@@ -4756,7 +4756,7 @@ gObjectEventGraphicsInfo_83A4030:: @ 83A4030
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0CE0
@@ -4767,7 +4767,7 @@ gObjectEventGraphicsInfo_83A4054:: @ 83A4054
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0D30
@@ -4778,7 +4778,7 @@ gObjectEventGraphicsInfo_83A4078:: @ 83A4078
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0D78
@@ -4789,7 +4789,7 @@ gObjectEventGraphicsInfo_83A409C:: @ 83A409C
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0DC8
@@ -4800,7 +4800,7 @@ gObjectEventGraphicsInfo_83A40C0:: @ 83A40C0
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0E18
@@ -4811,7 +4811,7 @@ gObjectEventGraphicsInfo_83A40E4:: @ 83A40E4
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0E68
@@ -4822,7 +4822,7 @@ gObjectEventGraphicsInfo_83A4108:: @ 83A4108
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0EB8
@@ -4833,7 +4833,7 @@ gObjectEventGraphicsInfo_83A412C:: @ 83A412C
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0F08
@@ -4844,7 +4844,7 @@ gObjectEventGraphicsInfo_83A4150:: @ 83A4150
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0F58
@@ -4855,7 +4855,7 @@ gObjectEventGraphicsInfo_83A4174:: @ 83A4174
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0FA8
@@ -4866,7 +4866,7 @@ gObjectEventGraphicsInfo_83A4198:: @ 83A4198
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0FF8
@@ -4877,7 +4877,7 @@ gObjectEventGraphicsInfo_83A41BC:: @ 83A41BC
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1040
@@ -4888,7 +4888,7 @@ gObjectEventGraphicsInfo_83A41E0:: @ 83A41E0
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1090
@@ -4899,7 +4899,7 @@ gObjectEventGraphicsInfo_83A4204:: @ 83A4204
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A10D8
@@ -4910,7 +4910,7 @@ gObjectEventGraphicsInfo_83A4228:: @ 83A4228
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1120
@@ -4921,7 +4921,7 @@ gObjectEventGraphicsInfo_83A424C:: @ 83A424C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1170
@@ -4932,7 +4932,7 @@ gObjectEventGraphicsInfo_83A4270:: @ 83A4270
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A11C0
@@ -4943,7 +4943,7 @@ gObjectEventGraphicsInfo_83A4294:: @ 83A4294
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1210
@@ -4954,7 +4954,7 @@ gObjectEventGraphicsInfo_83A42B8:: @ 83A42B8
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 2
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1260
@@ -4965,7 +4965,7 @@ gObjectEventGraphicsInfo_83A42DC:: @ 83A42DC
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 2
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A12B0
@@ -4976,7 +4976,7 @@ gObjectEventGraphicsInfo_83A4300:: @ 83A4300
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A35E4
 	.4byte gSpriteImages_83A12F8
@@ -4987,7 +4987,7 @@ gObjectEventGraphicsInfo_83A4324:: @ 83A4324
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1348
@@ -4998,7 +4998,7 @@ gObjectEventGraphicsInfo_83A4348:: @ 83A4348
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1390
@@ -5009,7 +5009,7 @@ gObjectEventGraphicsInfo_83A436C:: @ 83A436C
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1398
@@ -5020,7 +5020,7 @@ gObjectEventGraphicsInfo_83A4390:: @ 83A4390
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A13E0
@@ -5031,7 +5031,7 @@ gObjectEventGraphicsInfo_83A43B4:: @ 83A43B4
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1430
@@ -5042,7 +5042,7 @@ gObjectEventGraphicsInfo_83A43D8:: @ 83A43D8
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1480
@@ -5053,7 +5053,7 @@ gObjectEventGraphicsInfo_83A43FC:: @ 83A43FC
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A14C8
@@ -5064,7 +5064,7 @@ gObjectEventGraphicsInfo_83A4420:: @ 83A4420
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0A70
@@ -5075,7 +5075,7 @@ gObjectEventGraphicsInfo_83A4444:: @ 83A4444
 	.byte 4 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3660
 	.4byte gSpriteImages_83A1510
@@ -5086,7 +5086,7 @@ gObjectEventGraphicsInfo_83A4468:: @ 83A4468
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1530
@@ -5097,7 +5097,7 @@ gObjectEventGraphicsInfo_83A448C:: @ 83A448C
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1578
@@ -5108,7 +5108,7 @@ gObjectEventGraphicsInfo_83A44B0:: @ 83A44B0
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A15C0
@@ -5119,7 +5119,7 @@ gObjectEventGraphicsInfo_83A44D4:: @ 83A44D4
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1608
@@ -5130,7 +5130,7 @@ gObjectEventGraphicsInfo_83A44F8:: @ 83A44F8
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1650
@@ -5141,7 +5141,7 @@ gObjectEventGraphicsInfo_83A451C:: @ 83A451C
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3658
 	.4byte gSpriteImages_83A1698
@@ -5152,7 +5152,7 @@ gObjectEventGraphicsInfo_83A4540:: @ 83A4540
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A16B8
@@ -5163,7 +5163,7 @@ gObjectEventGraphicsInfo_83A4564:: @ 83A4564
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3470
 	.4byte gSpriteImages_83A0188
@@ -5174,7 +5174,7 @@ gObjectEventGraphicsInfo_83A4588:: @ 83A4588
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 2
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0228
@@ -5185,7 +5185,7 @@ gObjectEventGraphicsInfo_83A45AC:: @ 83A45AC
 	.byte 0 | (1 << 4) | (0 << 6) | (1 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3584
 	.4byte gSpriteImages_83A02D0
@@ -5196,7 +5196,7 @@ gObjectEventGraphicsInfo_83A45D0:: @ 83A45D0
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3638
 	.4byte gSpriteImages_83A0378
@@ -5207,7 +5207,7 @@ gObjectEventGraphicsInfo_83A45F4:: @ 83A45F4
 	.byte 10 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 2
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A0140
@@ -5218,7 +5218,7 @@ gObjectEventGraphicsInfo_83A4618:: @ 83A4618
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A16C0
@@ -5229,7 +5229,7 @@ gObjectEventGraphicsInfo_83A463C:: @ 83A463C
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1708
@@ -5240,7 +5240,7 @@ gObjectEventGraphicsInfo_83A4660:: @ 83A4660
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1750
@@ -5251,7 +5251,7 @@ gObjectEventGraphicsInfo_83A4684:: @ 83A4684
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1798
@@ -5262,7 +5262,7 @@ gObjectEventGraphicsInfo_83A46A8:: @ 83A46A8
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A17E0
@@ -5273,7 +5273,7 @@ gObjectEventGraphicsInfo_83A46CC:: @ 83A46CC
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1828
@@ -5284,7 +5284,7 @@ gObjectEventGraphicsInfo_83A46F0:: @ 83A46F0
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1870
@@ -5295,7 +5295,7 @@ gObjectEventGraphicsInfo_83A4714:: @ 83A4714
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A18B8
@@ -5306,7 +5306,7 @@ gObjectEventGraphicsInfo_83A4738:: @ 83A4738
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1900
@@ -5317,7 +5317,7 @@ gObjectEventGraphicsInfo_83A475C:: @ 83A475C
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1948
@@ -5328,7 +5328,7 @@ gObjectEventGraphicsInfo_83A4780:: @ 83A4780
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1990
@@ -5339,7 +5339,7 @@ gObjectEventGraphicsInfo_83A47A4:: @ 83A47A4
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A19D8
@@ -5350,7 +5350,7 @@ gObjectEventGraphicsInfo_83A47C8:: @ 83A47C8
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1A20
@@ -5361,7 +5361,7 @@ gObjectEventGraphicsInfo_83A47EC:: @ 83A47EC
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1A68
@@ -5372,7 +5372,7 @@ gObjectEventGraphicsInfo_83A4810:: @ 83A4810
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1AB0
@@ -5383,7 +5383,7 @@ gObjectEventGraphicsInfo_83A4834:: @ 83A4834
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1AF8
@@ -5394,7 +5394,7 @@ gObjectEventGraphicsInfo_83A4858:: @ 83A4858
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3668
 	.4byte gSpriteImages_83A1B40
@@ -5405,7 +5405,7 @@ gObjectEventGraphicsInfo_83A487C:: @ 83A487C
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3668
 	.4byte gSpriteImages_83A1BA0
@@ -5416,7 +5416,7 @@ gObjectEventGraphicsInfo_83A48A0:: @ 83A48A0
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A363C
 	.4byte gSpriteImages_83A0330
@@ -5427,7 +5427,7 @@ gObjectEventGraphicsInfo_83A48C4:: @ 83A48C4
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3640
 	.4byte gSpriteImages_83A03C0
@@ -5438,7 +5438,7 @@ gObjectEventGraphicsInfo_83A48E8:: @ 83A48E8
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A363C
 	.4byte gSpriteImages_83A0378
@@ -5449,7 +5449,7 @@ gObjectEventGraphicsInfo_83A490C:: @ 83A490C
 	.byte 0 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3640
 	.4byte gSpriteImages_83A03F0
@@ -5460,7 +5460,7 @@ gObjectEventGraphicsInfo_83A4930:: @ 83A4930
 	.byte 2 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_32x16
+	.4byte gObjectEventBaseOam_32x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C00
@@ -5471,7 +5471,7 @@ gObjectEventGraphicsInfo_83A4954:: @ 83A4954
 	.byte 2 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C08
@@ -5482,7 +5482,7 @@ gObjectEventGraphicsInfo_83A4978:: @ 83A4978
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1C10
@@ -5493,7 +5493,7 @@ gObjectEventGraphicsInfo_83A499C:: @ 83A499C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1D38
@@ -5504,7 +5504,7 @@ gObjectEventGraphicsInfo_83A49C0:: @ 83A49C0
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C58
@@ -5515,7 +5515,7 @@ gObjectEventGraphicsInfo_83A49E4:: @ 83A49E4
 	.byte 2 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C60
@@ -5526,7 +5526,7 @@ gObjectEventGraphicsInfo_83A4A08:: @ 83A4A08
 	.byte 2 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C68
@@ -5537,7 +5537,7 @@ gObjectEventGraphicsInfo_83A4A2C:: @ 83A4A2C
 	.byte 2 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C70
@@ -5548,7 +5548,7 @@ gObjectEventGraphicsInfo_83A4A50:: @ 83A4A50
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C78
@@ -5559,7 +5559,7 @@ gObjectEventGraphicsInfo_83A4A74:: @ 83A4A74
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C80
@@ -5570,7 +5570,7 @@ gObjectEventGraphicsInfo_83A4A98:: @ 83A4A98
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C88
@@ -5581,7 +5581,7 @@ gObjectEventGraphicsInfo_83A4ABC:: @ 83A4ABC
 	.byte 5 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C90
@@ -5592,7 +5592,7 @@ gObjectEventGraphicsInfo_83A4AE0:: @ 83A4AE0
 	.byte 10 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1C98
@@ -5603,7 +5603,7 @@ gObjectEventGraphicsInfo_83A4B04:: @ 83A4B04
 	.byte 3 | (0 << 4) | (1 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3314
 	.4byte gSpriteImages_83A1CA0
@@ -5614,7 +5614,7 @@ gObjectEventGraphicsInfo_83A4B28:: @ 83A4B28
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1D80
@@ -5625,7 +5625,7 @@ gObjectEventGraphicsInfo_83A4B4C:: @ 83A4B4C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1E10
@@ -5636,7 +5636,7 @@ gObjectEventGraphicsInfo_83A4B70:: @ 83A4B70
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1E58
@@ -5647,7 +5647,7 @@ gObjectEventGraphicsInfo_83A4B94:: @ 83A4B94
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1EA0
@@ -5658,7 +5658,7 @@ gObjectEventGraphicsInfo_83A4BB8:: @ 83A4BB8
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1EE8
@@ -5669,7 +5669,7 @@ gObjectEventGraphicsInfo_83A4BDC:: @ 83A4BDC
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1F30
@@ -5680,7 +5680,7 @@ gObjectEventGraphicsInfo_83A4C00:: @ 83A4C00
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1F78
@@ -5691,7 +5691,7 @@ gObjectEventGraphicsInfo_83A4C24:: @ 83A4C24
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1FC0
@@ -5702,7 +5702,7 @@ gObjectEventGraphicsInfo_83A4C48:: @ 83A4C48
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2008
@@ -5713,7 +5713,7 @@ gObjectEventGraphicsInfo_83A4C6C:: @ 83A4C6C
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2050
@@ -5724,7 +5724,7 @@ gObjectEventGraphicsInfo_83A4C90:: @ 83A4C90
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2098
@@ -5735,7 +5735,7 @@ gObjectEventGraphicsInfo_83A4CB4:: @ 83A4CB4
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A20E0
@@ -5746,7 +5746,7 @@ gObjectEventGraphicsInfo_83A4CD8:: @ 83A4CD8
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2128
@@ -5757,7 +5757,7 @@ gObjectEventGraphicsInfo_83A4CFC:: @ 83A4CFC
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2170
@@ -5768,7 +5768,7 @@ gObjectEventGraphicsInfo_83A4D20:: @ 83A4D20
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A21B8
@@ -5779,7 +5779,7 @@ gObjectEventGraphicsInfo_83A4D44:: @ 83A4D44
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2200
@@ -5790,7 +5790,7 @@ gObjectEventGraphicsInfo_83A4D68:: @ 83A4D68
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2248
@@ -5801,7 +5801,7 @@ gObjectEventGraphicsInfo_83A4D8C:: @ 83A4D8C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2290
@@ -5812,7 +5812,7 @@ gObjectEventGraphicsInfo_83A4DB0:: @ 83A4DB0
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A22D8
@@ -5823,7 +5823,7 @@ gObjectEventGraphicsInfo_83A4DD4:: @ 83A4DD4
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2320
@@ -5834,7 +5834,7 @@ gObjectEventGraphicsInfo_83A4DF8:: @ 83A4DF8
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2368
@@ -5845,7 +5845,7 @@ gObjectEventGraphicsInfo_83A4E1C:: @ 83A4E1C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A23B0
@@ -5856,7 +5856,7 @@ gObjectEventGraphicsInfo_83A4E40:: @ 83A4E40
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A23F8
@@ -5867,7 +5867,7 @@ gObjectEventGraphicsInfo_83A4E64:: @ 83A4E64
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2440
@@ -5878,7 +5878,7 @@ gObjectEventGraphicsInfo_83A4E88:: @ 83A4E88
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2488
@@ -5889,7 +5889,7 @@ gObjectEventGraphicsInfo_83A4EAC:: @ 83A4EAC
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A24D0
@@ -5900,7 +5900,7 @@ gObjectEventGraphicsInfo_83A4ED0:: @ 83A4ED0
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2518
@@ -5911,7 +5911,7 @@ gObjectEventGraphicsInfo_83A4EF4:: @ 83A4EF4
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2560
@@ -5922,7 +5922,7 @@ gObjectEventGraphicsInfo_83A4F18:: @ 83A4F18
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A25A8
@@ -5933,7 +5933,7 @@ gObjectEventGraphicsInfo_83A4F3C:: @ 83A4F3C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_32x32
+	.4byte gObjectEventBaseOam_32x32
 	.4byte gSubspriteTables_83A37F0
 	.4byte gAnimTable_83A33BC
 	.4byte gSpriteImages_83A25F0
@@ -5944,7 +5944,7 @@ gObjectEventGraphicsInfo_83A4F60:: @ 83A4F60
 	.byte 4 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2638
@@ -5955,7 +5955,7 @@ gObjectEventGraphicsInfo_83A4F84:: @ 83A4F84
 	.byte 5 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2680
@@ -5966,7 +5966,7 @@ gObjectEventGraphicsInfo_83A4FA8:: @ 83A4FA8
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2878
@@ -5977,7 +5977,7 @@ gObjectEventGraphicsInfo_83A4FCC:: @ 83A4FCC
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A28C0
@@ -5988,7 +5988,7 @@ gObjectEventGraphicsInfo_83A4FF0:: @ 83A4FF0
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A26C8
@@ -5999,7 +5999,7 @@ gObjectEventGraphicsInfo_83A5014:: @ 83A5014
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1DC8
@@ -6010,7 +6010,7 @@ gObjectEventGraphicsInfo_83A5038:: @ 83A5038
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2710
@@ -6021,7 +6021,7 @@ gObjectEventGraphicsInfo_83A505C:: @ 83A505C
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2758
@@ -6032,7 +6032,7 @@ gObjectEventGraphicsInfo_83A5080:: @ 83A5080
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A27A0
@@ -6043,7 +6043,7 @@ gObjectEventGraphicsInfo_83A50A4:: @ 83A50A4
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A27E8
@@ -6054,7 +6054,7 @@ gObjectEventGraphicsInfo_83A50C8:: @ 83A50C8
 	.byte 3 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x16
+	.4byte gObjectEventBaseOam_16x16
 	.4byte gSubspriteTables_83A3748
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2830
@@ -6065,7 +6065,7 @@ gObjectEventGraphicsInfo_83A50EC:: @ 83A50EC
 	.byte 2 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 1
 	.align 2
-	.4byte gEventObjectBaseOam_16x32
+	.4byte gObjectEventBaseOam_16x32
 	.4byte gSubspriteTables_83A379C
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A2908
@@ -6076,7 +6076,7 @@ gObjectEventGraphicsInfo_83A5110:: @ 83A5110
 	.byte 10 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_64x64
+	.4byte gObjectEventBaseOam_64x64
 	.4byte gSubspriteTables_83A38D0
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1CA8
@@ -6087,7 +6087,7 @@ gObjectEventGraphicsInfo_83A5134:: @ 83A5134
 	.byte 10 | (1 << 4) | (0 << 6) | (0 << 7)
 	.byte 0
 	.align 2
-	.4byte gEventObjectBaseOam_128x64
+	.4byte gObjectEventBaseOam_128x64
 	.4byte gSubspriteTables_83A3A50
 	.4byte gAnimTable_83A3368
 	.4byte gSpriteImages_83A1CF0
@@ -6325,16 +6325,16 @@ gUnknown_83A5374:: @ 83A5374
 	obj_frame_tiles gUnknown_8398128, 0x400
 
 gUnknown_83A537C:: @ 83A537C
-	spr_template 65535, 65535, gEventObjectBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, oamc_shadow
 
 gUnknown_83A5394:: @ 83A5394
-	spr_template 65535, 65535, gEventObjectBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, oamc_shadow
 
 gUnknown_83A53AC:: @ 83A53AC
-	spr_template 65535, 65535, gEventObjectBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, oamc_shadow
 
 gUnknown_83A53C4:: @ 83A53C4
-	spr_template 65535, 65535, gEventObjectBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, oamc_shadow
 
 gUnknown_83A53DC:: @ 83A53DC
 	overworld_frame gUnknown_839A008, 2, 2, 0
@@ -6355,7 +6355,7 @@ gUnknown_83A541C:: @ 83A541C
 	.4byte gUnknown_83A5404
 
 gUnknown_83A5420:: @ 83A5420
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, unc_grass_normal
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, unc_grass_normal
 
 gUnknown_83A5438:: @ 83A5438
 	overworld_frame gUnknown_83986A8, 2, 2, 0
@@ -6379,7 +6379,7 @@ gUnknown_83A5484:: @ 83A5484
 	.4byte gUnknown_83A5460
 
 gUnknown_83A5488:: @ 83A5488
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A54A0:: @ 83A54A0
 	overworld_frame gUnknown_8398928, 2, 2, 0
@@ -6400,7 +6400,7 @@ gUnknown_83A54E0:: @ 83A54E0
 	.4byte gUnknown_83A54C8
 
 gUnknown_83A54E4:: @ 83A54E4
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, sub_80DC2FC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, sub_80DC2FC
 
 gUnknown_83A54FC:: @ 83A54FC
 	overworld_frame gUnknown_8396B08, 2, 8, 0
@@ -6437,7 +6437,7 @@ gUnknown_83A555C:: @ 83A555C
 	.4byte gUnknown_83A5550
 
 gUnknown_83A556C:: @ 83A556C
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, sub_80DC4F8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, sub_80DC4F8
 
 gUnknown_83A5584:: @ 83A5584
 	overworld_frame gUnknown_8398BA8, 2, 2, 0
@@ -6476,7 +6476,7 @@ gUnknown_83A55F4:: @ 83A55F4
 	.4byte gUnknown_83A55E8
 
 gUnknown_83A5604:: @ 83A5604
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x16, gUnknown_83A55F4, gUnknown_83A5584, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x16, gUnknown_83A55F4, gUnknown_83A5584, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_83A561C:: @ 83A561C
 	overworld_frame gUnknown_8399008, 2, 1, 0
@@ -6493,7 +6493,7 @@ gUnknown_83A5644:: @ 83A5644
 	.4byte gUnknown_83A5634
 
 gUnknown_83A5648:: @ 83A5648
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A5644, gUnknown_83A561C, gDummySpriteAffineAnimTable, sub_80DCCE0
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5644, gUnknown_83A561C, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A5660:: @ 83A5660
 	overworld_frame gUnknown_8399188, 2, 1, 0
@@ -6512,7 +6512,7 @@ gUnknown_83A5694:: @ 83A5694
 	.4byte gUnknown_83A5680
 
 gUnknown_83A5698:: @ 83A5698
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_Unknown1, gUnknown_83A5694, gUnknown_83A5660, gDummySpriteAffineAnimTable, sub_80DCCE0
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_Unknown1, gUnknown_83A5694, gUnknown_83A5660, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A56B0:: @ 83A56B0
 	overworld_frame gUnknown_839A388, 2, 2, 0
@@ -6542,7 +6542,7 @@ gUnknown_83A56E0:: @ 83A56E0
 	.4byte gUnknown_83A56D8
 
 gUnknown_83A56F4:: @ 83A56F4
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, sub_80DBAFC
 
 gUnknown_83A570C:: @ 83A570C
 	overworld_frame gUnknown_839A488, 2, 2, 0
@@ -6572,7 +6572,7 @@ gUnknown_83A573C:: @ 83A573C
 	.4byte gUnknown_83A5734
 
 gUnknown_83A5750:: @ 83A5750
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, sub_80DBAFC
 
 gUnknown_83A5768:: @ 83A5768
 	overworld_frame gUnknown_839A588, 2, 2, 0
@@ -6624,7 +6624,7 @@ gUnknown_83A57C8:: @ 83A57C8
 	.4byte gUnknown_83A57C0
 
 gUnknown_83A57EC:: @ 83A57EC
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, sub_80DBAFC
 
 gUnknown_83A5804:: @ 83A5804
 	overworld_frame gUnknown_839AA48, 2, 2, 0
@@ -6643,7 +6643,7 @@ gUnknown_83A5838:: @ 83A5838
 	.4byte gUnknown_83A5824
 
 gUnknown_83A583C:: @ 83A583C
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5838, gUnknown_83A5804, gDummySpriteAffineAnimTable, sub_80DCCE0
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5838, gUnknown_83A5804, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A5854:: @ 83A5854
 	overworld_frame gUnknown_839AC48, 2, 1, 0
@@ -6670,7 +6670,7 @@ gUnknown_83A5894:: @ 83A5894
 	.4byte gUnknown_83A5870
 
 gUnknown_83A589C:: @ 83A589C
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, sub_80DBC2C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, sub_80DBC2C
 
 gUnknown_83A58B4:: @ 83A58B4
 	overworld_frame gUnknown_839ACC8, 2, 1, 0
@@ -6687,7 +6687,7 @@ gUnknown_83A58DC:: @ 83A58DC
 	.4byte gUnknown_83A58CC
 
 gUnknown_83A58E0:: @ 83A58E0
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A58DC, gUnknown_83A58B4, gDummySpriteAffineAnimTable, sub_80DCCE0
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A58DC, gUnknown_83A58B4, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A58F8:: @ 83A58F8
 	overworld_frame gUnknown_8399E08, 2, 2, 0
@@ -6709,7 +6709,7 @@ gUnknown_83A5938:: @ 83A5938
 	.4byte gUnknown_83A5918
 
 gUnknown_83A593C:: @ 83A593C
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, unc_grass_tall
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, unc_grass_tall
 
 gUnknown_83A5954:: @ 83A5954
 	overworld_frame gUnknown_8399488, 2, 2, 0
@@ -6732,7 +6732,7 @@ gUnknown_83A59A0:: @ 83A59A0
 	.4byte gUnknown_83A5984
 
 gUnknown_83A59A4:: @ 83A59A4
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A59A0, gUnknown_83A5954, gDummySpriteAffineAnimTable, sub_80DCCE0
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A59A0, gUnknown_83A5954, gDummySpriteAffineAnimTable, sub_80DCCE0
 
 gUnknown_83A59BC:: @ 83A59BC
 	overworld_frame gUnknown_8399788, 2, 2, 0
@@ -6761,7 +6761,7 @@ gUnknown_83A5A2C:: @ 83A5A2C
 	.4byte gUnknown_83A5A04
 
 gUnknown_83A5A30:: @ 83A5A30
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5A48:: @ 83A5A48
 	overworld_frame gUnknown_8399C08, 2, 2, 0
@@ -6782,7 +6782,7 @@ gUnknown_83A5A84:: @ 83A5A84
 	.4byte gUnknown_83A5A68
 
 gUnknown_83A5A88:: @ 83A5A88
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5AA0:: @ 83A5AA0
 	overworld_frame gUnknown_839A788, 2, 2, 0
@@ -6801,7 +6801,7 @@ gUnknown_83A5AD4:: @ 83A5AD4
 	.4byte gUnknown_83A5AC0
 
 gUnknown_83A5AD8:: @ 83A5AD8
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5AF0:: @ 83A5AF0
 	overworld_frame gUnknown_839A988, 2, 1, 0
@@ -6818,7 +6818,7 @@ gUnknown_83A5B18:: @ 83A5B18
 	.4byte gUnknown_83A5B08
 
 gUnknown_83A5B1C:: @ 83A5B1C
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, sub_80DC86C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, sub_80DC86C
 
 gUnknown_83A5B34:: @ 83A5B34
 	overworld_frame gUnknown_839AD88, 2, 2, 0
@@ -6839,7 +6839,7 @@ gUnknown_83A5B70:: @ 83A5B70
 	.4byte gUnknown_83A5B54
 
 gUnknown_83A5B74:: @ 83A5B74
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5B8C:: @ 83A5B8C
 	obj_rot_scal_anim_frame 0xFF00, 256, 128, 0
@@ -6900,7 +6900,7 @@ gUnknown_83A5CAC:: @ 83A5CAC
 	.4byte gUnknown_83A5C8C
 
 gUnknown_83A5CB4:: @ 83A5CB4
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5CCC:: @ 83A5CCC
 	overworld_frame gUnknown_839B708, 2, 4, 0
@@ -6930,7 +6930,7 @@ gUnknown_83A5D2C:: @ 83A5D2C
 	.4byte gUnknown_83A5D0C
 
 gUnknown_83A5D34:: @ 83A5D34
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 0
@@ -6942,7 +6942,7 @@ gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 6
 
 gUnknown_83A5D84:: @ 83A5D84
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, sub_80DCAC8
 
 gUnknown_83A5D9C:: @ 83A5D9C
 	overworld_frame gUnknown_839D3C8, 8, 8, 0
@@ -6979,7 +6979,7 @@ gUnknown_83A5DEC:: @ 83A5DEC
 	.4byte gUnknown_83A5DE4
 
 gUnknown_83A5E00:: @ 83A5E00
-	spr_template 0xFFFF, 0xFFFF, gEventObjectBaseOam_64x64, gUnknown_83A5DEC, gUnknown_83A5D9C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_64x64, gUnknown_83A5DEC, gUnknown_83A5D9C, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_83A5E18:: @ 83A5E18
 	overworld_frame gUnknown_839A288, 2, 2, 0
@@ -6994,7 +6994,7 @@ gUnknown_83A5E34:: @ 83A5E34
 	.4byte gUnknown_83A5E28
 
 gUnknown_83A5E38:: @ 83A5E38
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, sub_80DB8AC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, sub_80DB8AC
 
 gUnknown_83A5E50:: @ 83A5E50
 	overworld_frame gUnknown_839C508, 2, 2, 0
@@ -7007,7 +7007,7 @@ gUnknown_83A5E60:: @ 83A5E60
 	.4byte gUnknown_83A5E58
 
 gUnknown_83A5E64:: @ 83A5E64
-	spr_template 0xFFFF, 0x1005, gEventObjectBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, sub_80DBFF4
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, sub_80DBFF4
 
 gUnknown_83A5E7C:: @ 83A5E7C
 	overworld_frame gUnknown_839C5A8, 2, 2, 0
@@ -7028,7 +7028,7 @@ gUnknown_83A5EBC:: @ 83A5EBC
 	.4byte gUnknown_83A5EA4
 
 gUnknown_83A5EC0:: @ 83A5EC0
-	spr_template 0xFFFF, 0x100D, gEventObjectBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
 
 gUnknown_83A5ED8:: @ 83A5ED8
 	obj_pal gUnknown_839C588, 0x100D
@@ -7052,7 +7052,7 @@ gUnknown_83A5F20:: @ 83A5F20
 	.4byte gUnknown_83A5F08
 
 gUnknown_83A5F24:: @ 83A5F24
-	spr_template 0xFFFF, 0x100D, gEventObjectBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, sub_80853B0
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, sub_80853B0
 
 gUnknown_83A5F3C:: @ 83A5F3C
 	overworld_frame gUnknown_839CAA8, 2, 4, 0
@@ -7079,7 +7079,7 @@ gUnknown_83A5FA0:: @ 83A5FA0
 	.4byte gUnknown_83A5F7C
 
 gUnknown_83A5FA4:: @ 83A5FA4
-	spr_template 0xFFFF, 0x1004, gEventObjectBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, sub_80DC99C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, sub_80DC99C
 
 gUnknown_83A5FBC:: @ 83A5FBC
 	overworld_frame gUnknown_839D2A8, 2, 2, 0
@@ -7095,7 +7095,7 @@ gUnknown_83A5FDC:: @ 83A5FDC
 	.4byte gUnknown_83A5FCC
 
 gUnknown_83A5FE0:: @ 83A5FE0
-	spr_template 0xFFFF, 0x100F, gEventObjectBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
+	spr_template 0xFFFF, 0x100F, gObjectEventBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
 
 gUnknown_83A5FF8::
 	obj_pal gUnknown_839D3A8, 0x100F

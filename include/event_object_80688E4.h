@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void FreezeEventObjects(void);
+void FreezeObjectEvents(void);
 void FreezeObjectEvent(struct ObjectEvent *);
 void FreezeObjectEventsExceptOne(u8 objEventId);
 

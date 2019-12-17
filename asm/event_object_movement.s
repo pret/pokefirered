@@ -1550,8 +1550,8 @@ MakeObjectTemplateFromObjectEventTemplate: @ 805E960
 	bx r0
 	thumb_func_end MakeObjectTemplateFromObjectEventTemplate
 
-	thumb_func_start AddPseudoEventObject
-AddPseudoEventObject: @ 805E978
+	thumb_func_start AddPseudoObjectEvent
+AddPseudoObjectEvent: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,7 +1612,7 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
-	thumb_func_end AddPseudoEventObject
+	thumb_func_end AddPseudoObjectEvent
 
 	thumb_func_start sprite_new
 sprite_new: @ 805E9F8
@@ -2440,8 +2440,8 @@ _0805F058: .4byte gPlayerAvatar
 _0805F05C: .4byte gObjectEvents
 	thumb_func_end SetPlayerAvatarObjectEventIdAndObjectId
 
-	thumb_func_start EventObjectSetGraphicsId
-EventObjectSetGraphicsId: @ 805F060
+	thumb_func_start ObjectEventSetGraphicsId
+ObjectEventSetGraphicsId: @ 805F060
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2625,7 +2625,7 @@ _0805F1BA:
 _0805F1CC: .4byte gSprites
 _0805F1D0: .4byte 0x000003ff
 _0805F1D4: .4byte 0xfffffc00
-	thumb_func_end EventObjectSetGraphicsId
+	thumb_func_end ObjectEventSetGraphicsId
 
 	thumb_func_start ObjectEventSetGraphicsIdByLocalIdAndMap
 ObjectEventSetGraphicsIdByLocalIdAndMap: @ 805F1D8
@@ -2652,7 +2652,7 @@ ObjectEventSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	ldr r1, _0805F214 @ =gObjectEvents
 	adds r0, r1
 	adds r1, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 _0805F20C:
 	add sp, 0x4
 	pop {r4}

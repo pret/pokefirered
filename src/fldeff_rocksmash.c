@@ -90,7 +90,7 @@ static void sub_80C98FC(u8 taskId)
             gFieldEffectArguments[2] = 2;
         if (gFieldEffectArguments[1] == 4)
             gFieldEffectArguments[2] = 3;
-        EventObjectSetGraphicsId(&gObjectEvents[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
+        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_80C99A0;

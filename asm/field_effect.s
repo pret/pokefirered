@@ -1989,7 +1989,7 @@ mapldr_080842E8: @ 80842E8
 	movs r1, 0
 	bl CreateTask
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _0808430C @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -2092,7 +2092,7 @@ mapldr_08084390: @ 8084390
 	bl ObjectEventTurn
 _080843D2:
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _080843F4 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -2158,7 +2158,7 @@ sub_8084454: @ 8084454
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r0, _0808447C @ =sub_8084484
 	movs r1, 0
 	bl CreateTask
@@ -2626,7 +2626,7 @@ _080847F4: .4byte gUnknown_83CC050
 sub_80847F8: @ 80847F8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl CameraObjectReset2
 	ldrb r0, [r4, 0xA]
 	bl sub_809C448
@@ -2889,7 +2889,7 @@ sub_80849F4: @ 80849F4
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r0, _08084A1C @ =sub_8084A24
 	movs r1, 0
 	bl CreateTask
@@ -3630,7 +3630,7 @@ sub_8084FA0: @ 8084FA0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
@@ -3977,7 +3977,7 @@ sub_8085244: @ 8085244
 	adds r5, r0, 0
 	adds r4, r1, 0
 	bl CameraObjectReset2
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _08085270 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4239,7 +4239,7 @@ sub_8085440: @ 8085440
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl CameraObjectReset2
 	ldr r1, _0808546C @ =gPlayerAvatar
 	movs r0, 0x1
@@ -4482,7 +4482,7 @@ _0808561C:
 sub_8085620: @ 8085620
 	push {lr}
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r0, _08085638 @ =sub_808563C
 	movs r1, 0x50
 	bl CreateTask
@@ -4969,7 +4969,7 @@ sub_80859D4: @ 80859D4
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _08085A14 @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -5198,7 +5198,7 @@ sub_8085BA8: @ 8085BA8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl CameraObjectReset2
 	bl GetPlayerFacingDirection
 	lsls r0, 24
@@ -5435,7 +5435,7 @@ mapldr_08085D88: @ 8085D88
 	bl pal_fill_for_maplights
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _08085DCC @ =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
@@ -7000,7 +7000,7 @@ sub_80869C0: @ 80869C0
 	push {r6}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r5, _08086A18 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
@@ -7135,7 +7135,7 @@ sub_8086AB4: @ 8086AB4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	adds r0, r4, 0
 	bl ObjectEventClearHeldMovementIfFinished
 	ldrb r0, [r4, 0x18]
@@ -7276,7 +7276,7 @@ sub_8086C00: @ 8086C00
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r1, _08086C20 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -7366,7 +7366,7 @@ _08086CAE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	b _08086CD2
 _08086CC0:
 	movs r0, 0
@@ -7375,7 +7375,7 @@ _08086CC0:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 _08086CD2:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -7809,7 +7809,7 @@ sub_8086FFC: @ 8086FFC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -8468,7 +8468,7 @@ _0808751A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	bl CameraObjectReset2
 	adds r0, r5, 0
 	movs r1, 0x3
@@ -8795,7 +8795,7 @@ _080877B4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl ObjectEventTurn

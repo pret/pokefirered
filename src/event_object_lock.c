@@ -37,7 +37,7 @@ bool8 sub_8069590(void)
 
 void ScriptFreezeObjectEvents(void)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     CreateTask(sub_8069570, 80);
 }
 

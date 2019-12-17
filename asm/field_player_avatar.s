@@ -3257,7 +3257,7 @@ sub_805CB70: @ 805CB70
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3318,7 +3318,7 @@ sub_805CBE8: @ 805CBE8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3964,7 +3964,7 @@ sub_805D0F8: @ 805D0F8
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl sav1_reset_battle_music_maybe
 	bl Overworld_ChangeMusicToDefault
 	ldr r2, _0805D148 @ =gPlayerAvatar
@@ -4005,7 +4005,7 @@ sub_805D154: @ 805D154
 	lsls r4, 24
 	lsrs r4, 24
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	ldr r2, _0805D19C @ =gPlayerAvatar
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -4134,7 +4134,7 @@ sub_805D240: @ 805D240
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -4734,7 +4734,7 @@ _0805D6EA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
@@ -4978,7 +4978,7 @@ sub_805D8D8: @ 805D8D8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0

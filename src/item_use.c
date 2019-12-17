@@ -223,7 +223,7 @@ static void sub_80A1184(void)
 
 static bool8 sub_80A1194(void)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     ScriptContext2_Enable();
     sub_807DC00();
     CreateTask(sub_80A11C0, 10);

@@ -392,7 +392,7 @@ void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_805C270();
         sub_805C780();
     }

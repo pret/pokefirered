@@ -139,7 +139,7 @@ static void sub_809B764(void);
 static void BuyMenuDrawMapBg(void);
 static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType);
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
-static void BuyMenuCollectEventObjectData(void);
+static void BuyMenuCollectObjectEventData(void);
 static void BuyMenuDrawObjectEvents(void);
 static void BuyMenuCopyTilemapData(void);
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId);
@@ -735,7 +735,7 @@ static void BuyMenuRemoveScrollIndicatorArrows(void)
 
 static void sub_809B764(void)
 {
-    BuyMenuCollectEventObjectData();
+    BuyMenuCollectObjectEventData();
     BuyMenuDrawObjectEvents();
     BuyMenuDrawMapBg();
 }
@@ -801,7 +801,7 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
     dest[offset1 + offset2 + 33] = src[3]; // bottom right
 }
 
-static void BuyMenuCollectEventObjectData(void)
+static void BuyMenuCollectObjectEventData(void)
 {
     s16 facingX, facingY;
     u8 x, y, z;
@@ -857,7 +857,7 @@ static void BuyMenuDrawObjectEvents(void)
             continue;
 
         graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId);        
-        spriteId = AddPseudoEventObject(
+        spriteId = AddPseudoObjectEvent(
             gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)sViewportObjectEvents[i][X_COORD] * 16 - 8,

@@ -60,6 +60,7 @@ static void UpdateScanlineEffectRegBuffer(s16 a0);
 static void ScheduleStopScanlineEffect(void);
 static void LoadMainTitleScreenPalsAndResetBgs(void);
 static void CB2_FadeOutTransitionToSaveClearScreen(void);
+static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite);
 static void CB2_FadeOutTransitionToBerryFix(void);
 static void LoadSpriteGfxAndPals(void);
 static void Task_FlameOrLeafSpawner(u8 taskId);
@@ -237,6 +238,12 @@ static const struct SpritePalette sSpritePals[] = {
 static const u8 gUnknown_83BFBD4[] = {
     0x04, 0x10, 0x1a, 0x20, 0x30, 0xc8, 0xd8, 0xe0, 0xe8, 0x3c, 0x4c, 0x5c, 0x6c, 0x80, 0x90
 };
+
+#if defined(LEAFGREEN)
+static const u16 gUnknown_LG_83BFA10[] = {
+    50, 80, 110, 60, 90, 70, 100, 50
+};
+#endif
 
 void CB2_InitTitleScreen(void)
 {
@@ -876,6 +883,7 @@ static void SpriteCallback_TitleScreenFlameOrLeaf(struct Sprite * sprite)
 #endif
 }
 
+#if defined(FIRERED)
 static bool32 CreateFlameOrLeafSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 templateId)
 {
     u8 spriteId;
@@ -901,6 +909,35 @@ static bool32 CreateFlameOrLeafSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool
     }
     return FALSE;
 }
+#elif defined(LEAFGREEN)
+void _CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
+{
+    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, 0xF0, y0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].data[0] = 0xF00;
+        gSprites[spriteId].data[1] = x1;
+        gSprites[spriteId].data[2] = y0 << 4;
+        gSprites[spriteId].data[3] = y1;
+        gSprites[spriteId].callback = SpriteCallback_TitleScreenFlameOrLeaf;
+    }
+}
+
+void SpriteCallback_LG_8079800(struct Sprite * sprite)
+{
+    sprite->pos1.x -= 7;
+    if (sprite->pos1.x < -16)
+    {
+        sprite->pos1.x = 0x100;
+        sprite->data[7]++;
+        if (sprite->data[7] >= NELEMS(gUnknown_LG_83BFA10))
+            sprite->data[7] = 0;
+        sprite->pos1.y = gUnknown_LG_83BFA10[sprite->data[7]];
+    }
+}
+
+#define CreateFlameOrLeafSprite ((bool32 (*)())_CreateFlameOrLeafSprite)
+#endif //FRLG
 
 static void Task_FlameOrLeafSpawner(u8 taskId)
 {

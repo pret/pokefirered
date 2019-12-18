@@ -46,6 +46,7 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
+#if defined(FIRERED)
 	.4byte          4
 	.4byte          2
 	.ascii "pokemon red version"
@@ -106,6 +107,68 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte       0x34 @ size of SaveBlock1 map header reconstruction data?
 	.4byte          0
 	.4byte 0xFFFFFFFF
+#elif defined(LEAFGREEN)
+	.4byte          5
+	.4byte          2
+	.ascii "pokemon green version"
+	.space 11
+	.4byte  0x8235088 @ gMonFrontPicTable
+	.4byte  0x8236528 @ gMonBackPicTable
+	.4byte  0x82372E8 @ gMonPaletteTable
+	.4byte  0x82380A8 @ gMonShinyPaletteTable
+	.4byte  0x83D35DC @ gMonIconTable
+	.4byte  0x83D3CBC @ gMonIconPaletteIndices
+	.4byte  0x83D3E74 @ gMonIconPaletteTable
+	.4byte  0x8245EBC @ gSpeciesNames
+	.4byte  0x8247070 @ gMoveNames
+	.4byte  0x8455118 @ gDecorations
+	.4byte      0xEE0 @ offsetof(struct SaveBlock1, flags)
+	.4byte     0x1000 @ offsetof(struct SaveBlock1, vars)
+	.4byte       0x18 @ offsetof(struct SaveBlock2, pokedex)
+	.4byte      0x5F8 @ offsetof(struct SaveBlock1, seen1)
+	.4byte     0x3A18 @ offsetof(struct SaveBlock1, seen2)
+	.4byte       0x3C
+	.4byte      0x838
+	.4byte      0x839
+	.4byte      0x182
+	.4byte  0xA0A0A07
+	.4byte  0xC060C0C
+	.4byte  0xC121006
+	.4byte  0x8010B0F
+	.4byte        0xC
+	.4byte      0xF24 @ sizeof(struct SaveBlock2)
+	.4byte     0x3D68 @ sizeof(struct SaveBlock1)
+	.4byte       0x34 @ offsetof(struct SaveBlock1, playerPartyCount)
+	.4byte       0x38 @ offsetof(struct SaveBlock1, playerParty)
+	.4byte          9 @ offsetof(struct SaveBlock2, specialSaveWarp)
+	.4byte        0xA @ offsetof(struct SaveBlock2, playerTrainerId)
+	.4byte          0 @ offsetof(struct SaveBlock2, playerName)
+	.4byte          8 @ offsetof(struct SaveBlock2, playerGender)
+
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
+	.4byte       0xAD @ offsetof(struct SaveBlock2, ?????? (0xAD))
+	.4byte     0x30BB
+	.4byte     0x30A7
+	.4byte          0
+	.4byte  0x8254760 @ gBaseStats
+	.4byte  0x824FC1C @ gAbilityNames
+	.4byte  0x824FAE4 @ gAbilityDescriptionPointers
+	.4byte  0x83DAE64 @ gItems
+	.4byte  0x8250BE0 @ gBattleMoves
+	.4byte  0x826054C @ gBallSpriteSheets
+	.4byte  0x82605AC @ gBallSpritePalettes
+	.4byte       0xA8
+	.4byte      0x82C
+	.4byte      0x83B
+	.4byte 0x3A0D1E2A
+	.4byte     0x1E2B
+	.4byte      0x298 @ offsetof(struct SaveBlock1, pcItems)  // maybe all items were in a struct together?
+	.4byte     0x309C @ offsetof(struct SaveBlock1, giftRibbons)
+	.4byte     0x30EC @ offsetof(struct SaveBlock1, enigmaBerry)
+	.4byte       0x34 @ size of SaveBlock1 map header reconstruction data?
+	.4byte          0
+	.4byte 0xFFFFFFFF
+#endif
 
 	.arm
 	.align 2, 0

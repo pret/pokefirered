@@ -6842,12 +6842,12 @@ gUnknown_83A5B74:: @ 83A5B74
 	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
 
 gUnknown_83A5B8C:: @ 83A5B8C
-	obj_rot_scal_anim_frame 0xFF00, 256, 128, 0
+	obj_rot_scal_anim_frame -256, 256, 128, 0
 	obj_rot_scal_anim_frame 1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
-	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame -1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
-	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame -1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
 	obj_rot_scal_anim_frame 1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
@@ -6855,13 +6855,13 @@ gUnknown_83A5B8C:: @ 83A5B8C
 
 gUnknown_83A5BDC:: @ 83A5BDC
 	obj_rot_scal_anim_frame 256, 256, 128, 0
-	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame -1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
 	obj_rot_scal_anim_frame 1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
 	obj_rot_scal_anim_frame 1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
-	obj_rot_scal_anim_frame 0xFFFF, 0, 0, 4
+	obj_rot_scal_anim_frame -1, 0, 0, 4
 	obj_rot_scal_anim_frame 0, 0, 0, 8
 	obj_rot_scal_anim_jump 1
 

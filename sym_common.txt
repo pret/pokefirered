@@ -49,7 +49,7 @@ gUnknown_300506C: @ 300506C
 
 	.include "scrcmd.o"
 
-gSelectedEventObject: @ 3005074
+gSelectedObjectEvent: @ 3005074
 	.space 0x4
 
 gUnknown_3005078: @ 3005078

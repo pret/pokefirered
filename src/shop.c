@@ -31,7 +31,7 @@
 #include "menu_indicators.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "money.h"
 #include "quest_log.h"
 #include "script.h"
@@ -55,7 +55,7 @@ enum
 // shop view window NPC info enum
 enum
 {
-    EVENT_OBJ_ID,
+    OBJECT_EVENT_ID,
     X_COORD,
     Y_COORD,
     ANIM_NUM
@@ -89,7 +89,7 @@ struct MartHistory
     /*0x0B*/ u8 unkB;
 }; /* size = 12 */
 
-static EWRAM_DATA s16 sViewportMapObjects[MAP_OBJECTS_COUNT][4] = {0};
+static EWRAM_DATA s16 sViewportObjectEvents[OBJECT_EVENTS_COUNT][4] = {0};
 EWRAM_DATA struct ShopData gShopData = {0};
 static EWRAM_DATA u8 sShopMenuWindowId = 0;
 EWRAM_DATA u16 (*gShopTilemapBuffer1)[0x400] = {0};
@@ -139,8 +139,8 @@ static void sub_809B764(void);
 static void BuyMenuDrawMapBg(void);
 static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType);
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
-static void BuyMenuCollectEventObjectData(void);
-static void BuyMenuDrawEventObjects(void);
+static void BuyMenuCollectObjectEventData(void);
+static void BuyMenuDrawObjectEvents(void);
 static void BuyMenuCopyTilemapData(void);
 static void BuyMenuPrintItemQuantityAndPrice(u8 taskId);
 static void Task_BuyMenu(u8 taskId);
@@ -735,19 +735,19 @@ static void BuyMenuRemoveScrollIndicatorArrows(void)
 
 static void sub_809B764(void)
 {
-    BuyMenuCollectEventObjectData();
-    BuyMenuDrawEventObjects();
+    BuyMenuCollectObjectEventData();
+    BuyMenuDrawObjectEvents();
     BuyMenuDrawMapBg();
 }
 
 static void BuyMenuDrawMapBg(void)
 {    
     s16 i, j, x, y;
-    const struct MapData *mapData;
+    const struct MapLayout *mapLayout;
     u16 metatile;
     u8 metatileLayerType;
 
-    mapData = gMapHeader.mapData;
+    mapLayout = gMapHeader.mapLayout;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     x -= 2;
     y -= 3;
@@ -761,11 +761,11 @@ static void BuyMenuDrawMapBg(void)
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
             {
-                BuyMenuDrawMapMetatile(i, j, (u16*)mapData->primaryTileset->metatiles + metatile * 8, metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->primaryTileset->metatiles + metatile * 8, metatileLayerType);
             }
             else
             {
-                BuyMenuDrawMapMetatile(i, j, (u16*)mapData->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
+                BuyMenuDrawMapMetatile(i, j, (u16*)mapLayout->secondaryTileset->metatiles + ((metatile - NUM_METATILES_IN_PRIMARY) * 8), metatileLayerType);
             }
         }
     }
@@ -801,7 +801,7 @@ static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, con
     dest[offset1 + offset2 + 33] = src[3]; // bottom right
 }
 
-static void BuyMenuCollectEventObjectData(void)
+static void BuyMenuCollectObjectEventData(void)
 {
     s16 facingX, facingY;
     u8 x, y, z;
@@ -810,34 +810,34 @@ static void BuyMenuCollectEventObjectData(void)
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     z = PlayerGetZCoord();
     
-    for (y = 0; y < MAP_OBJECTS_COUNT; y++)
-        sViewportMapObjects[y][EVENT_OBJ_ID] = MAP_OBJECTS_COUNT;
+    for (y = 0; y < OBJECT_EVENTS_COUNT; y++)
+        sViewportObjectEvents[y][OBJECT_EVENT_ID] = OBJECT_EVENTS_COUNT;
     
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 eventObjId = GetFieldObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
-            if (eventObjId != MAP_OBJECTS_COUNT)
+            u8 eventObjId = GetObjectEventIdByXYZ(facingX - 3 + x, facingY - 2 + y, z);
+            if (eventObjId != OBJECT_EVENTS_COUNT)
             {
-                sViewportMapObjects[num][EVENT_OBJ_ID] = eventObjId;
-                sViewportMapObjects[num][X_COORD] = x;
-                sViewportMapObjects[num][Y_COORD] = y;
+                sViewportObjectEvents[num][OBJECT_EVENT_ID] = eventObjId;
+                sViewportObjectEvents[num][X_COORD] = x;
+                sViewportObjectEvents[num][Y_COORD] = y;
 
-                switch (gMapObjects[eventObjId].facingDirection)
+                switch (gObjectEvents[eventObjId].facingDirection)
                 {
                     case DIR_SOUTH:
-                        sViewportMapObjects[num][ANIM_NUM] = 0;
+                        sViewportObjectEvents[num][ANIM_NUM] = 0;
                         break;
                     case DIR_NORTH:
-                        sViewportMapObjects[num][ANIM_NUM] = 1;
+                        sViewportObjectEvents[num][ANIM_NUM] = 1;
                         break;
                     case DIR_WEST:
-                        sViewportMapObjects[num][ANIM_NUM] = 2;
+                        sViewportObjectEvents[num][ANIM_NUM] = 2;
                         break;
                     case DIR_EAST:
                     default:
-                        sViewportMapObjects[num][ANIM_NUM] = 3;
+                        sViewportObjectEvents[num][ANIM_NUM] = 3;
                         break;
                 }
                 num++;
@@ -846,24 +846,24 @@ static void BuyMenuCollectEventObjectData(void)
     }
 }
 
-static void BuyMenuDrawEventObjects(void)
+static void BuyMenuDrawObjectEvents(void)
 {
     u8 i, spriteId;
-    const struct MapObjectGraphicsInfo *graphicsInfo;
+    const struct ObjectEventGraphicsInfo *graphicsInfo;
 
-    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (sViewportMapObjects[i][EVENT_OBJ_ID] == MAP_OBJECTS_COUNT)
+        if (sViewportObjectEvents[i][OBJECT_EVENT_ID] == OBJECT_EVENTS_COUNT)
             continue;
 
-        graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[sViewportMapObjects[i][EVENT_OBJ_ID]].graphicsId);        
-        spriteId = AddPseudoEventObject(
-            gMapObjects[sViewportMapObjects[i][EVENT_OBJ_ID]].graphicsId,
+        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId);        
+        spriteId = AddPseudoObjectEvent(
+            gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId,
             SpriteCallbackDummy,
-            (u16)sViewportMapObjects[i][X_COORD] * 16 - 8,
-            (u16)sViewportMapObjects[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
+            (u16)sViewportObjectEvents[i][X_COORD] * 16 - 8,
+            (u16)sViewportObjectEvents[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,
             2);
-        StartSpriteAnim(&gSprites[spriteId], sViewportMapObjects[i][ANIM_NUM]);
+        StartSpriteAnim(&gSprites[spriteId], sViewportObjectEvents[i][ANIM_NUM]);
     }
 }
 

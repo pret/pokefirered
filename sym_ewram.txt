@@ -90,7 +90,7 @@ gUnknown_2036E30: @ 2036E30
 gUnknown_2036E34: @ 2036E34
 	.space 0x4
 
-gMapObjects: @ 2036E38
+gObjectEvents: @ 2036E38
 	.space 0x240
 
 gPlayerAvatar: @ 2037078

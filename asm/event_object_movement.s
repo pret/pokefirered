@@ -28,7 +28,7 @@ npc_clear_ids_and_state: @ 805DE2C
 npcs_clear_ids_and_state: @ 805DE4C
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _0805DE70 @ =gMapObjects
+	ldr r5, _0805DE70 @ =gObjectEvents
 _0805DE52:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -44,7 +44,7 @@ _0805DE52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DE70: .4byte gMapObjects
+_0805DE70: .4byte gObjectEvents
 	thumb_func_end npcs_clear_ids_and_state
 
 	thumb_func_start sub_805DE74
@@ -65,7 +65,7 @@ sub_805DE8C: @ 805DE8C
 	mov r5, r9
 	mov r4, r8
 	push {r4-r6}
-	ldr r0, _0805DF28 @ =gUnknown_83A0010
+	ldr r0, _0805DF28 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x54]
 	mov r9, r0
 	movs r1, 0
@@ -133,7 +133,7 @@ sub_805DE8C: @ 805DE8C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DF28: .4byte gUnknown_83A0010
+_0805DF28: .4byte gFieldEffectObjectTemplatePointers
 _0805DF2C: .4byte gSprites
 	thumb_func_end sub_805DE8C
 
@@ -141,11 +141,11 @@ _0805DF2C: .4byte gSprites
 sub_805DF30: @ 805DF30
 	push {lr}
 	movs r1, 0
-	ldr r2, _0805DF3C @ =gMapObjects
+	ldr r2, _0805DF3C @ =gObjectEvents
 	ldrb r0, [r2]
 	b _0805DF54
 	.align 2, 0
-_0805DF3C: .4byte gMapObjects
+_0805DF3C: .4byte gObjectEvents
 _0805DF40:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -167,8 +167,8 @@ _0805DF5A:
 	bx r1
 	thumb_func_end sub_805DF30
 
-	thumb_func_start GetFieldObjectIdByLocalIdAndMap
-GetFieldObjectIdByLocalIdAndMap: @ 805DF60
+	thumb_func_start GetObjectEventIdByLocalIdAndMap
+GetObjectEventIdByLocalIdAndMap: @ 805DF60
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -178,19 +178,19 @@ GetFieldObjectIdByLocalIdAndMap: @ 805DF60
 	lsrs r2, 24
 	cmp r0, 0xFE
 	bls _0805DF78
-	bl GetFieldObjectIdByLocalId
+	bl GetObjectEventIdByLocalId
 	b _0805DF7C
 _0805DF78:
-	bl GetFieldObjectIdByLocalIdAndMapInternal
+	bl GetObjectEventIdByLocalIdAndMapInternal
 _0805DF7C:
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectIdByLocalIdAndMap
+	thumb_func_end GetObjectEventIdByLocalIdAndMap
 
-	thumb_func_start TryGetFieldObjectIdByLocalIdAndMap
-TryGetFieldObjectIdByLocalIdAndMap: @ 805DF84
+	thumb_func_start TryGetObjectEventIdByLocalIdAndMap
+TryGetObjectEventIdByLocalIdAndMap: @ 805DF84
 	push {r4,lr}
 	adds r4, r3, 0
 	lsls r0, 24
@@ -199,7 +199,7 @@ TryGetFieldObjectIdByLocalIdAndMap: @ 805DF84
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl GetFieldObjectIdByLocalIdAndMap
+	bl GetObjectEventIdByLocalIdAndMap
 	strb r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -213,13 +213,13 @@ _0805DFA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end TryGetFieldObjectIdByLocalIdAndMap
+	thumb_func_end TryGetObjectEventIdByLocalIdAndMap
 
-	thumb_func_start GetFieldObjectIdByXY
-GetFieldObjectIdByXY: @ 805DFB0
+	thumb_func_start GetObjectEventIdByXY
+GetObjectEventIdByXY: @ 805DFB0
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r5, _0805DFF0 @ =gMapObjects
+	ldr r5, _0805DFF0 @ =gObjectEvents
 	lsls r0, 16
 	asrs r4, r0, 16
 	lsls r1, 16
@@ -253,11 +253,11 @@ _0805DFE8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805DFF0: .4byte gMapObjects
-	thumb_func_end GetFieldObjectIdByXY
+_0805DFF0: .4byte gObjectEvents
+	thumb_func_end GetObjectEventIdByXY
 
-	thumb_func_start GetFieldObjectIdByLocalIdAndMapInternal
-GetFieldObjectIdByLocalIdAndMapInternal: @ 805DFF4
+	thumb_func_start GetObjectEventIdByLocalIdAndMapInternal
+GetObjectEventIdByLocalIdAndMapInternal: @ 805DFF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -266,7 +266,7 @@ GetFieldObjectIdByLocalIdAndMapInternal: @ 805DFF4
 	lsls r2, 24
 	lsrs r2, 24
 	movs r1, 0
-	ldr r6, _0805E02C @ =gMapObjects
+	ldr r6, _0805E02C @ =gObjectEvents
 _0805E006:
 	lsls r0, r1, 3
 	adds r0, r1
@@ -288,7 +288,7 @@ _0805E006:
 	adds r0, r1, 0
 	b _0805E03C
 	.align 2, 0
-_0805E02C: .4byte gMapObjects
+_0805E02C: .4byte gObjectEvents
 _0805E030:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -300,15 +300,15 @@ _0805E03C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectIdByLocalIdAndMapInternal
+	thumb_func_end GetObjectEventIdByLocalIdAndMapInternal
 
-	thumb_func_start GetFieldObjectIdByLocalId
-GetFieldObjectIdByLocalId: @ 805E044
+	thumb_func_start GetObjectEventIdByLocalId
+GetObjectEventIdByLocalId: @ 805E044
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, _0805E068 @ =gMapObjects
+	ldr r4, _0805E068 @ =gObjectEvents
 _0805E04E:
 	lsls r0, r2, 3
 	adds r0, r2
@@ -324,7 +324,7 @@ _0805E04E:
 	adds r0, r2, 0
 	b _0805E078
 	.align 2, 0
-_0805E068: .4byte gMapObjects
+_0805E068: .4byte gObjectEvents
 _0805E06C:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -336,7 +336,7 @@ _0805E078:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectIdByLocalId
+	thumb_func_end GetObjectEventIdByLocalId
 
 	thumb_func_start sub_805E080
 sub_805E080: @ 805E080
@@ -389,7 +389,7 @@ _0805E0DA:
 	adds r1, r7, 0
 	adds r2, r6, 0
 	mov r3, sp
-	bl GetAvailableFieldObjectSlot
+	bl GetAvailableObjectEventSlot
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E106
@@ -414,7 +414,7 @@ _0805E10A:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805E13C @ =gMapObjects
+	ldr r1, _0805E13C @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl npc_clear_ids_and_state
@@ -434,7 +434,7 @@ _0805E10A:
 	adds r0, r1
 	b _0805E14E
 	.align 2, 0
-_0805E13C: .4byte gMapObjects
+_0805E13C: .4byte gObjectEvents
 _0805E140:
 	ldrh r0, [r5, 0x4]
 	adds r0, 0x7
@@ -501,7 +501,7 @@ _0805E14E:
 	strb r0, [r4, 0x7]
 	ldrh r0, [r5, 0xE]
 	strb r0, [r4, 0x1D]
-	ldr r1, _0805E230 @ =gUnknown_839FD5D
+	ldr r1, _0805E230 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r5, 0x9]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -510,10 +510,10 @@ _0805E14E:
 	strb r1, [r0]
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r4, 0
-	bl FieldObjectHandleDynamicGraphicsId
-	ldr r1, _0805E234 @ =gUnknown_839FD0C
+	bl ObjectEventHandleDynamicGraphicsId
+	ldr r1, _0805E234 @ =gRangedMovementTypes
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -559,8 +559,8 @@ _0805E220:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E230: .4byte gUnknown_839FD5D
-_0805E234: .4byte gUnknown_839FD0C
+_0805E230: .4byte gInitialMovementTypeFacingDirections
+_0805E234: .4byte gRangedMovementTypes
 	thumb_func_end sub_805E080
 
 	thumb_func_start sub_805E238
@@ -828,8 +828,8 @@ _0805E406:
 _0805E410: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805E3A0
 
-	thumb_func_start GetAvailableFieldObjectSlot
-GetAvailableFieldObjectSlot: @ 805E414
+	thumb_func_start GetAvailableObjectEventSlot
+GetAvailableObjectEventSlot: @ 805E414
 	push {r4-r7,lr}
 	mov r12, r3
 	lsls r0, 16
@@ -839,7 +839,7 @@ GetAvailableFieldObjectSlot: @ 805E414
 	lsls r2, 24
 	lsrs r4, r2, 24
 	movs r2, 0
-	ldr r1, _0805E470 @ =gMapObjects
+	ldr r1, _0805E470 @ =gObjectEvents
 	ldrb r0, [r1]
 	lsls r0, 31
 	adds r7, r1, 0
@@ -881,11 +881,11 @@ _0805E46C:
 	movs r0, 0x1
 	b _0805E4A8
 	.align 2, 0
-_0805E470: .4byte gMapObjects
+_0805E470: .4byte gObjectEvents
 _0805E474:
 	mov r0, r12
 	strb r2, [r0]
-	ldr r1, _0805E4B0 @ =gMapObjects
+	ldr r1, _0805E4B0 @ =gObjectEvents
 _0805E47A:
 	lsls r0, r2, 3
 	adds r0, r2
@@ -916,24 +916,24 @@ _0805E4A8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805E4B0: .4byte gMapObjects
-	thumb_func_end GetAvailableFieldObjectSlot
+_0805E4B0: .4byte gObjectEvents
+	thumb_func_end GetAvailableObjectEventSlot
 
-	thumb_func_start RemoveFieldObject
-RemoveFieldObject: @ 805E4B4
+	thumb_func_start RemoveObjectEvent
+RemoveObjectEvent: @ 805E4B4
 	push {lr}
 	ldrb r2, [r0]
 	movs r1, 0x2
 	negs r1, r1
 	ands r1, r2
 	strb r1, [r0]
-	bl RemoveFieldObjectInternal
+	bl RemoveObjectEventInternal
 	pop {r0}
 	bx r0
-	thumb_func_end RemoveFieldObject
+	thumb_func_end RemoveObjectEvent
 
-	thumb_func_start RemoveFieldObjectByLocalIdAndMap
-RemoveFieldObjectByLocalIdAndMap: @ 805E4C8
+	thumb_func_start RemoveObjectEventByLocalIdAndMap
+RemoveObjectEventByLocalIdAndMap: @ 805E4C8
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -943,13 +943,13 @@ RemoveFieldObjectByLocalIdAndMap: @ 805E4C8
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E506
 	mov r0, sp
 	ldrb r0, [r0]
-	bl GetFieldObjectFlagIdByFieldObjectId
+	bl GetObjectEventFlagIdByObjectEventId
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -958,24 +958,24 @@ RemoveFieldObjectByLocalIdAndMap: @ 805E4C8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805E50C @ =gMapObjects
+	ldr r1, _0805E50C @ =gObjectEvents
 	adds r0, r1
-	bl RemoveFieldObject
+	bl RemoveObjectEvent
 _0805E506:
 	add sp, 0x4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E50C: .4byte gMapObjects
-	thumb_func_end RemoveFieldObjectByLocalIdAndMap
+_0805E50C: .4byte gObjectEvents
+	thumb_func_end RemoveObjectEventByLocalIdAndMap
 
-	thumb_func_start RemoveFieldObjectInternal
-RemoveFieldObjectInternal: @ 805E510
+	thumb_func_start RemoveObjectEventInternal
+RemoveObjectEventInternal: @ 805E510
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrh r2, [r0, 0x6]
 	ldr r1, _0805E554 @ =0xffff0000
 	ldr r0, [sp, 0x4]
@@ -1005,7 +1005,7 @@ RemoveFieldObjectInternal: @ 805E510
 	.align 2, 0
 _0805E554: .4byte 0xffff0000
 _0805E558: .4byte gSprites
-	thumb_func_end RemoveFieldObjectInternal
+	thumb_func_end RemoveObjectEventInternal
 
 	thumb_func_start unref_sub_808D958
 unref_sub_808D958: @ 805E55C
@@ -1019,9 +1019,9 @@ _0805E560:
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _0805E58C @ =gMapObjects
+	ldr r1, _0805E58C @ =gObjectEvents
 	adds r0, r1
-	bl RemoveFieldObject
+	bl RemoveObjectEvent
 _0805E576:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -1033,7 +1033,7 @@ _0805E576:
 	bx r0
 	.align 2, 0
 _0805E588: .4byte gPlayerAvatar
-_0805E58C: .4byte gMapObjects
+_0805E58C: .4byte gObjectEvents
 	thumb_func_end unref_sub_808D958
 
 	thumb_func_start sub_805E590
@@ -1071,10 +1071,10 @@ _0805E5CA:
 	lsls r4, r0, 3
 	adds r0, r4, r0
 	lsls r0, 2
-	ldr r1, _0805E5F4 @ =gMapObjects
+	ldr r1, _0805E5F4 @ =gObjectEvents
 	adds r5, r0, r1
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r6, r0, 0
 	ldrb r1, [r6, 0xC]
 	movs r0, 0xF
@@ -1087,7 +1087,7 @@ _0805E5CA:
 	bl npc_load_two_palettes__no_record
 	b _0805E606
 	.align 2, 0
-_0805E5F4: .4byte gMapObjects
+_0805E5F4: .4byte gObjectEvents
 _0805E5F8:
 	cmp r0, 0xA
 	bne _0805E606
@@ -1116,7 +1116,7 @@ _0805E614:
 	lsrs r7, r0, 24
 	cmp r7, 0x40
 	bne _0805E650
-	ldr r0, _0805E64C @ =gMapObjects
+	ldr r0, _0805E64C @ =gObjectEvents
 	mov r2, r8
 	adds r1, r4, r2
 	lsls r1, 2
@@ -1130,7 +1130,7 @@ _0805E614:
 	b _0805E718
 	.align 2, 0
 _0805E648: .4byte 0x0000ffff
-_0805E64C: .4byte gMapObjects
+_0805E64C: .4byte gObjectEvents
 _0805E650:
 	lsls r0, r7, 4
 	adds r0, r7
@@ -1212,7 +1212,7 @@ _0805E650:
 	ldrb r0, [r5, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1240,8 +1240,8 @@ _0805E718:
 _0805E728: .4byte gSprites
 	thumb_func_end sub_805E590
 
-	thumb_func_start SpawnFieldObject
-SpawnFieldObject: @ 805E72C
+	thumb_func_start SpawnObjectEvent
+SpawnObjectEvent: @ 805E72C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1266,12 +1266,12 @@ SpawnFieldObject: @ 805E72C
 	str r0, [sp, 0x20]
 	mov r1, r9
 	ldrb r0, [r1, 0x1]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r7, r0, 0
 	add r2, sp, 0x20
 	mov r0, r9
 	add r1, sp, 0x8
-	bl MakeObjectTemplateFromFieldObjectTemplate
+	bl MakeObjectTemplateFromObjectEventTemplate
 	ldrh r3, [r7, 0x6]
 	ldr r2, _0805E7A4 @ =0xffff0000
 	add r1, sp, 0x24
@@ -1302,7 +1302,7 @@ SpawnFieldObject: @ 805E72C
 _0805E7A4: .4byte 0xffff0000
 _0805E7A8:
 	ldr r4, _0805E7EC @ =gSprites
-	ldr r1, _0805E7F0 @ =gMapObjects
+	ldr r1, _0805E7F0 @ =gObjectEvents
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
@@ -1338,11 +1338,11 @@ _0805E7DE:
 	bx r1
 	.align 2, 0
 _0805E7EC: .4byte gSprites
-_0805E7F0: .4byte gMapObjects
-	thumb_func_end SpawnFieldObject
+_0805E7F0: .4byte gObjectEvents
+	thumb_func_end SpawnObjectEvent
 
-	thumb_func_start SpawnSpecialFieldObject
-SpawnSpecialFieldObject: @ 805E7F4
+	thumb_func_start SpawnSpecialObjectEvent
+SpawnSpecialObjectEvent: @ 805E7F4
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -1350,7 +1350,7 @@ SpawnSpecialFieldObject: @ 805E7F4
 	adds r4, 0x6
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl GetFieldObjectMovingCameraOffset
+	bl GetObjectEventMovingCameraOffset
 	ldr r0, _0805E82C @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
@@ -1362,7 +1362,7 @@ SpawnSpecialFieldObject: @ 805E7F4
 	ldrsh r0, [r4, r6]
 	str r0, [sp]
 	adds r0, r5, 0
-	bl SpawnFieldObject
+	bl SpawnObjectEvent
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
@@ -1371,10 +1371,10 @@ SpawnSpecialFieldObject: @ 805E7F4
 	bx r1
 	.align 2, 0
 _0805E82C: .4byte gSaveBlock1Ptr
-	thumb_func_end SpawnSpecialFieldObject
+	thumb_func_end SpawnSpecialObjectEvent
 
-	thumb_func_start SpawnSpecialFieldObjectParameterized
-SpawnSpecialFieldObjectParameterized: @ 805E830
+	thumb_func_start SpawnSpecialObjectEventParameterized
+SpawnSpecialObjectEventParameterized: @ 805E830
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1414,7 +1414,7 @@ SpawnSpecialFieldObjectParameterized: @ 805E830
 	strb r5, [r0, 0xA]
 	strh r6, [r0, 0xC]
 	strh r6, [r0, 0xE]
-	bl SpawnSpecialFieldObject
+	bl SpawnSpecialObjectEvent
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x18
@@ -1425,7 +1425,7 @@ SpawnSpecialFieldObjectParameterized: @ 805E830
 	bx r1
 	.align 2, 0
 _0805E894: .4byte 0xfff90000
-	thumb_func_end SpawnSpecialFieldObjectParameterized
+	thumb_func_end SpawnSpecialObjectEventParameterized
 
 	thumb_func_start show_sprite
 show_sprite: @ 805E898
@@ -1439,7 +1439,7 @@ show_sprite: @ 805E898
 	lsrs r6, r2, 24
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl GetFieldObjectTemplateByLocalIdAndMap
+	bl GetObjectEventTemplateByLocalIdAndMap
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0805E8DE
@@ -1447,7 +1447,7 @@ show_sprite: @ 805E898
 	adds r4, 0x6
 	add r0, sp, 0x4
 	adds r1, r4, 0
-	bl GetFieldObjectMovingCameraOffset
+	bl GetObjectEventMovingCameraOffset
 	add r0, sp, 0x4
 	movs r1, 0
 	ldrsh r3, [r0, r1]
@@ -1457,7 +1457,7 @@ show_sprite: @ 805E898
 	adds r0, r5, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl SpawnFieldObject
+	bl SpawnObjectEvent
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805E8E0
@@ -1478,7 +1478,7 @@ sub_805E8E8: @ 805E8E8
 	adds r7, r3, 0
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r5, r0, 0
 	ldrh r0, [r5]
 	strh r0, [r4]
@@ -1517,13 +1517,13 @@ _0805E936:
 	bx r0
 	thumb_func_end sub_805E8E8
 
-	thumb_func_start MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
-MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex: @ 805E940
+	thumb_func_start MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
+MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex: @ 805E940
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 16
-	ldr r4, _0805E95C @ =gUnknown_839FBC8
+	ldr r4, _0805E95C @ =gMovementTypeCallbacks
 	lsrs r1, 14
 	adds r1, r4
 	ldr r1, [r1]
@@ -1532,11 +1532,11 @@ MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex: @ 805E940
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E95C: .4byte gUnknown_839FBC8
-	thumb_func_end MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
+_0805E95C: .4byte gMovementTypeCallbacks
+	thumb_func_end MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
 
-	thumb_func_start MakeObjectTemplateFromFieldObjectTemplate
-MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
+	thumb_func_start MakeObjectTemplateFromObjectEventTemplate
+MakeObjectTemplateFromObjectEventTemplate: @ 805E960
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1544,14 +1544,14 @@ MakeObjectTemplateFromFieldObjectTemplate: @ 805E960
 	ldrb r0, [r4, 0x1]
 	ldrb r1, [r4, 0x9]
 	adds r2, r5, 0
-	bl MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
+	bl MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
+	thumb_func_end MakeObjectTemplateFromObjectEventTemplate
 
-	thumb_func_start AddPseudoEventObject
-AddPseudoEventObject: @ 805E978
+	thumb_func_start AddPseudoObjectEvent
+AddPseudoObjectEvent: @ 805E978
 	push {r4-r6,lr}
 	sub sp, 0x1C
 	ldr r4, [sp, 0x2C]
@@ -1612,7 +1612,7 @@ _0805E9E4:
 	.align 2, 0
 _0805E9F0: .4byte 0x0000ffff
 _0805E9F4: .4byte gSprites
-	thumb_func_end AddPseudoEventObject
+	thumb_func_end AddPseudoObjectEvent
 
 	thumb_func_start sprite_new
 sprite_new: @ 805E9F8
@@ -1643,7 +1643,7 @@ sprite_new: @ 805E9F8
 	lsrs r4, 24
 	str r4, [sp, 0x20]
 	adds r0, r5, 0
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r4, r0, 0
 	ldr r1, _0805EB38 @ =sub_8068FA8
 	add r3, sp, 0x1C
@@ -1752,7 +1752,7 @@ _0805EB00:
 	movs r2, 0x1
 	bl SetObjectSubpriorityByZCoord
 	ldr r0, [sp, 0x20]
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1793,7 +1793,7 @@ sub_805EB44: @ 805EB44
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r7, r0, 0
 	ldr r1, _0805EC24 @ =SpriteCallbackDummy
 	add r3, sp, 0x18
@@ -1869,7 +1869,7 @@ _0805EBE6:
 	strb r1, [r2]
 _0805EC02:
 	movs r0, 0x1
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1983,7 +1983,7 @@ _0805EC86:
 	str r0, [sp]
 	adds r0, r4, 0
 	asrs r3, 16
-	bl SpawnFieldObject
+	bl SpawnObjectEvent
 _0805ECEC:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -2005,8 +2005,8 @@ _0805ED08: .4byte gMapHeader
 _0805ED0C: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_805EC30
 
-	thumb_func_start RemoveFieldObjectsOutsideView
-RemoveFieldObjectsOutsideView: @ 805ED10
+	thumb_func_start RemoveObjectEventsOutsideView
+RemoveObjectEventsOutsideView: @ 805ED10
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r6, _0805ED64 @ =gUnknown_2031DEC
@@ -2035,7 +2035,7 @@ _0805ED2E:
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r1, _0805ED68 @ =gMapObjects
+	ldr r1, _0805ED68 @ =gObjectEvents
 	adds r2, r0, r1
 	ldr r0, [r2]
 	ldr r1, _0805ED6C @ =0x00010001
@@ -2043,7 +2043,7 @@ _0805ED2E:
 	cmp r0, 0x1
 	bne _0805ED56
 	adds r0, r2, 0
-	bl RemoveFieldObjectIfOutsideView
+	bl RemoveObjectEventIfOutsideView
 _0805ED56:
 	lsls r0, r5, 24
 	lsrs r3, r0, 24
@@ -2054,12 +2054,12 @@ _0805ED56:
 	bx r0
 	.align 2, 0
 _0805ED64: .4byte gUnknown_2031DEC
-_0805ED68: .4byte gMapObjects
+_0805ED68: .4byte gObjectEvents
 _0805ED6C: .4byte 0x00010001
-	thumb_func_end RemoveFieldObjectsOutsideView
+	thumb_func_end RemoveObjectEventsOutsideView
 
-	thumb_func_start RemoveFieldObjectIfOutsideView
-RemoveFieldObjectIfOutsideView: @ 805ED70
+	thumb_func_start RemoveObjectEventIfOutsideView
+RemoveObjectEventIfOutsideView: @ 805ED70
 	push {r4-r7,lr}
 	adds r3, r0, 0
 	ldr r0, _0805EDEC @ =gSaveBlock1Ptr
@@ -2118,14 +2118,14 @@ _0805EDB6:
 	ble _0805EDE4
 _0805EDDE:
 	adds r0, r3, 0
-	bl RemoveFieldObject
+	bl RemoveObjectEvent
 _0805EDE4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0805EDEC: .4byte gSaveBlock1Ptr
-	thumb_func_end RemoveFieldObjectIfOutsideView
+	thumb_func_end RemoveObjectEventIfOutsideView
 
 	thumb_func_start sub_805EDF0
 sub_805EDF0: @ 805EDF0
@@ -2138,7 +2138,7 @@ sub_805EDF0: @ 805EDF0
 	lsrs r5, 16
 	bl ClearPlayerAvatarInfo
 	movs r6, 0
-	ldr r7, _0805EE38 @ =gMapObjects
+	ldr r7, _0805EE38 @ =gObjectEvents
 	lsls r4, 16
 	lsls r5, 16
 _0805EE0A:
@@ -2165,7 +2165,7 @@ _0805EE24:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EE38: .4byte gMapObjects
+_0805EE38: .4byte gObjectEvents
 	thumb_func_end sub_805EDF0
 
 	thumb_func_start sub_805EE3C
@@ -2207,12 +2207,12 @@ _0805EE70:
 	lsls r0, r1, 3
 	add r0, r8
 	lsls r0, 2
-	ldr r1, _0805EFE4 @ =gMapObjects
+	ldr r1, _0805EFE4 @ =gObjectEvents
 	adds r6, r0, r1
 	movs r0, 0
 	str r0, [sp, 0x20]
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r5, r0, 0
 	ldrh r2, [r5, 0x6]
 	ldr r1, _0805EFE8 @ =0xffff0000
@@ -2225,7 +2225,7 @@ _0805EE70:
 	ldrb r1, [r6, 0x6]
 	add r3, sp, 0x20
 	mov r2, sp
-	bl MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
+	bl MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
 	str r4, [sp, 0xC]
 	mov r0, sp
 	ldr r2, _0805EFEC @ =0x0000ffff
@@ -2314,7 +2314,7 @@ _0805EEDC:
 	bne _0805EF6A
 	mov r0, r8
 	adds r1, r7, 0
-	bl SetPlayerAvatarFieldObjectIdAndObjectId
+	bl SetPlayerAvatarObjectEventIdAndObjectId
 	bl sub_80DB0C4
 	strb r0, [r6, 0x1B]
 _0805EF6A:
@@ -2351,7 +2351,7 @@ _0805EF76:
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2376,7 +2376,7 @@ _0805EFCE:
 	bx r0
 	.align 2, 0
 _0805EFE0: .4byte gUnknown_2031DEC
-_0805EFE4: .4byte gMapObjects
+_0805EFE4: .4byte gObjectEvents
 _0805EFE8: .4byte 0xffff0000
 _0805EFEC: .4byte 0x0000ffff
 _0805EFF0: .4byte gSprites
@@ -2408,20 +2408,20 @@ sub_805EFF4: @ 805EFF4
 	subs r2, 0x10
 	ands r1, r2
 	strb r1, [r0, 0x2]
-	bl FieldObjectClearAnim
+	bl ObjectEventClearAnim
 	pop {r0}
 	bx r0
 	thumb_func_end sub_805EFF4
 
-	thumb_func_start SetPlayerAvatarFieldObjectIdAndObjectId
-SetPlayerAvatarFieldObjectIdAndObjectId: @ 805F02C
+	thumb_func_start SetPlayerAvatarObjectEventIdAndObjectId
+SetPlayerAvatarObjectEventIdAndObjectId: @ 805F02C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, _0805F058 @ =gPlayerAvatar
 	strb r0, [r5, 0x5]
 	strb r1, [r5, 0x4]
-	ldr r1, _0805F05C @ =gMapObjects
+	ldr r1, _0805F05C @ =gObjectEvents
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
@@ -2437,11 +2437,11 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 805F02C
 	bx r0
 	.align 2, 0
 _0805F058: .4byte gPlayerAvatar
-_0805F05C: .4byte gMapObjects
-	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
+_0805F05C: .4byte gObjectEvents
+	thumb_func_end SetPlayerAvatarObjectEventIdAndObjectId
 
-	thumb_func_start EventObjectSetGraphicsId
-EventObjectSetGraphicsId: @ 805F060
+	thumb_func_start ObjectEventSetGraphicsId
+ObjectEventSetGraphicsId: @ 805F060
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2453,7 +2453,7 @@ EventObjectSetGraphicsId: @ 805F060
 	lsrs r1, 24
 	str r1, [sp]
 	adds r0, r1, 0
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r5, r0, 0
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
@@ -2625,10 +2625,10 @@ _0805F1BA:
 _0805F1CC: .4byte gSprites
 _0805F1D0: .4byte 0x000003ff
 _0805F1D4: .4byte 0xfffffc00
-	thumb_func_end EventObjectSetGraphicsId
+	thumb_func_end ObjectEventSetGraphicsId
 
-	thumb_func_start FieldObjectSetGraphicsIdByLocalIdAndMap
-FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
+	thumb_func_start ObjectEventSetGraphicsIdByLocalIdAndMap
+ObjectEventSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2640,7 +2640,7 @@ FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F20C
@@ -2649,26 +2649,26 @@ FieldObjectSetGraphicsIdByLocalIdAndMap: @ 805F1D8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F214 @ =gMapObjects
+	ldr r1, _0805F214 @ =gObjectEvents
 	adds r0, r1
 	adds r1, r4, 0
-	bl EventObjectSetGraphicsId
+	bl ObjectEventSetGraphicsId
 _0805F20C:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F214: .4byte gMapObjects
-	thumb_func_end FieldObjectSetGraphicsIdByLocalIdAndMap
+_0805F214: .4byte gObjectEvents
+	thumb_func_end ObjectEventSetGraphicsIdByLocalIdAndMap
 
-	thumb_func_start FieldObjectTurn
-FieldObjectTurn: @ 805F218
+	thumb_func_start ObjectEventTurn
+ObjectEventTurn: @ 805F218
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	ldrb r0, [r6, 0x1]
 	lsls r0, 27
 	cmp r0, 0
@@ -2682,7 +2682,7 @@ FieldObjectTurn: @ 805F218
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2701,10 +2701,10 @@ _0805F25E:
 	bx r0
 	.align 2, 0
 _0805F264: .4byte gSprites
-	thumb_func_end FieldObjectTurn
+	thumb_func_end ObjectEventTurn
 
-	thumb_func_start FieldObjectTurnByLocalIdAndMap
-FieldObjectTurnByLocalIdAndMap: @ 805F268
+	thumb_func_start ObjectEventTurnByLocalIdAndMap
+ObjectEventTurnByLocalIdAndMap: @ 805F268
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2716,7 +2716,7 @@ FieldObjectTurnByLocalIdAndMap: @ 805F268
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F29C
@@ -2725,18 +2725,18 @@ FieldObjectTurnByLocalIdAndMap: @ 805F268
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F2A4 @ =gMapObjects
+	ldr r1, _0805F2A4 @ =gObjectEvents
 	adds r0, r1
 	adds r1, r4, 0
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 _0805F29C:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F2A4: .4byte gMapObjects
-	thumb_func_end FieldObjectTurnByLocalIdAndMap
+_0805F2A4: .4byte gObjectEvents
+	thumb_func_end ObjectEventTurnByLocalIdAndMap
 
 	thumb_func_start PlayerObjectTurn
 PlayerObjectTurn: @ 805F2A8
@@ -2747,17 +2747,17 @@ PlayerObjectTurn: @ 805F2A8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0805F2C4 @ =gMapObjects
+	ldr r2, _0805F2C4 @ =gObjectEvents
 	adds r0, r2
-	bl FieldObjectTurn
+	bl ObjectEventTurn
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F2C4: .4byte gMapObjects
+_0805F2C4: .4byte gObjectEvents
 	thumb_func_end PlayerObjectTurn
 
-	thumb_func_start GetFieldObjectGraphicsInfo
-GetFieldObjectGraphicsInfo: @ 805F2C8
+	thumb_func_start GetObjectEventGraphicsInfo
+GetObjectEventGraphicsInfo: @ 805F2C8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -2767,25 +2767,25 @@ GetFieldObjectGraphicsInfo: @ 805F2C8
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	bl VarGetFieldObjectGraphicsId
+	bl VarGetObjectEventGraphicsId
 	adds r1, r0, 0
 _0805F2E0:
 	cmp r1, 0x97
 	bls _0805F2E6
 	movs r1, 0x10
 _0805F2E6:
-	ldr r0, _0805F2F4 @ =gMapObjectGraphicsInfoPointers
+	ldr r0, _0805F2F4 @ =gObjectEventGraphicsInfoPointers
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805F2F4: .4byte gMapObjectGraphicsInfoPointers
-	thumb_func_end GetFieldObjectGraphicsInfo
+_0805F2F4: .4byte gObjectEventGraphicsInfoPointers
+	thumb_func_end GetObjectEventGraphicsInfo
 
-	thumb_func_start FieldObjectHandleDynamicGraphicsId
-FieldObjectHandleDynamicGraphicsId: @ 805F2F8
+	thumb_func_start ObjectEventHandleDynamicGraphicsId
+ObjectEventHandleDynamicGraphicsId: @ 805F2F8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x5]
@@ -2794,13 +2794,13 @@ FieldObjectHandleDynamicGraphicsId: @ 805F2F8
 	adds r0, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	bl VarGetFieldObjectGraphicsId
+	bl VarGetObjectEventGraphicsId
 	strb r0, [r4, 0x5]
 _0805F30E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectHandleDynamicGraphicsId
+	thumb_func_end ObjectEventHandleDynamicGraphicsId
 
 	thumb_func_start npc_by_local_id_and_map_set_field_1_bit_x20
 npc_by_local_id_and_map_set_field_1_bit_x20: @ 805F314
@@ -2815,11 +2815,11 @@ npc_by_local_id_and_map_set_field_1_bit_x20: @ 805F314
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F356
-	ldr r2, _0805F360 @ =gMapObjects
+	ldr r2, _0805F360 @ =gObjectEvents
 	mov r0, sp
 	ldrb r0, [r0]
 	lsls r1, r0, 3
@@ -2842,11 +2842,11 @@ _0805F356:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F360: .4byte gMapObjects
+_0805F360: .4byte gObjectEvents
 	thumb_func_end npc_by_local_id_and_map_set_field_1_bit_x20
 
-	thumb_func_start FieldObjectGetLocalIdAndMap
-FieldObjectGetLocalIdAndMap: @ 805F364
+	thumb_func_start ObjectEventGetLocalIdAndMap
+ObjectEventGetLocalIdAndMap: @ 805F364
 	push {r4,lr}
 	ldrb r4, [r0, 0x8]
 	strb r4, [r1]
@@ -2857,7 +2857,7 @@ FieldObjectGetLocalIdAndMap: @ 805F364
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectGetLocalIdAndMap
+	thumb_func_end ObjectEventGetLocalIdAndMap
 
 	thumb_func_start sub_805F378
 sub_805F378: @ 805F378
@@ -2866,7 +2866,7 @@ sub_805F378: @ 805F378
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
-	bl GetFieldObjectIdByXY
+	bl GetObjectEventIdByXY
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x10
@@ -2874,7 +2874,7 @@ sub_805F378: @ 805F378
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805F3A4 @ =gMapObjects
+	ldr r1, _0805F3A4 @ =gObjectEvents
 	adds r0, r1
 	ldrb r1, [r0]
 	movs r2, 0x4
@@ -2884,7 +2884,7 @@ _0805F3A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F3A4: .4byte gMapObjects
+_0805F3A4: .4byte gObjectEvents
 	thumb_func_end sub_805F378
 
 	thumb_func_start sub_805F3A8
@@ -2900,7 +2900,7 @@ sub_805F3A8: @ 805F3A8
 	lsls r3, 24
 	lsrs r4, r3, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F3EE
@@ -2909,7 +2909,7 @@ sub_805F3A8: @ 805F3A8
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _0805F3F8 @ =gMapObjects
+	ldr r0, _0805F3F8 @ =gObjectEvents
 	adds r2, r0
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -2929,7 +2929,7 @@ _0805F3EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F3F8: .4byte gMapObjects
+_0805F3F8: .4byte gObjectEvents
 _0805F3FC: .4byte gSprites
 	thumb_func_end sub_805F3A8
 
@@ -2944,7 +2944,7 @@ sub_805F400: @ 805F400
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F43C
@@ -2953,7 +2953,7 @@ sub_805F400: @ 805F400
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _0805F444 @ =gMapObjects
+	ldr r0, _0805F444 @ =gObjectEvents
 	adds r1, r0
 	ldrb r2, [r1, 0x3]
 	movs r0, 0x5
@@ -2969,7 +2969,7 @@ _0805F43C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F444: .4byte gMapObjects
+_0805F444: .4byte gObjectEvents
 	thumb_func_end sub_805F400
 
 	thumb_func_start sub_805F448
@@ -2988,11 +2988,11 @@ sub_805F448: @ 805F448
 	lsls r4, 16
 	lsrs r4, 16
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F48C
-	ldr r2, _0805F494 @ =gMapObjects
+	ldr r2, _0805F494 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3013,7 +3013,7 @@ _0805F48C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F494: .4byte gMapObjects
+_0805F494: .4byte gObjectEvents
 _0805F498: .4byte gSprites
 	thumb_func_end sub_805F448
 
@@ -3035,14 +3035,14 @@ sub_805F4B0: @ 805F4B0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl FindFieldObjectPaletteIndexByTag
+	bl FindObjectEventPaletteIndexByTag
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, _0805F4D4 @ =0x000011ff
 	cmp r1, r0
 	beq _0805F4CE
 	lsls r0, r1, 3
-	ldr r1, _0805F4D8 @ =gUnknown_83A5158
+	ldr r1, _0805F4D8 @ =gObjectEventSpritePalettes
 	adds r0, r1
 	bl sub_805F510
 _0805F4CE:
@@ -3050,7 +3050,7 @@ _0805F4CE:
 	bx r0
 	.align 2, 0
 _0805F4D4: .4byte 0x000011ff
-_0805F4D8: .4byte gUnknown_83A5158
+_0805F4D8: .4byte gObjectEventSpritePalettes
 	thumb_func_end sub_805F4B0
 
 	thumb_func_start sub_805F4DC
@@ -3115,9 +3115,9 @@ pal_patch_for_npc: @ 805F538
 	lsrs r0, 16
 	lsls r4, 24
 	lsrs r4, 24
-	bl FindFieldObjectPaletteIndexByTag
+	bl FindObjectEventPaletteIndexByTag
 	lsls r0, 24
-	ldr r1, _0805F570 @ =gUnknown_83A5158
+	ldr r1, _0805F570 @ =gObjectEventSpritePalettes
 	lsrs r0, 21
 	adds r0, r1
 	ldr r0, [r0]
@@ -3134,7 +3134,7 @@ pal_patch_for_npc: @ 805F538
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F570: .4byte gUnknown_83A5158
+_0805F570: .4byte gObjectEventSpritePalettes
 	thumb_func_end pal_patch_for_npc
 
 	thumb_func_start pal_patch_for_npc_range
@@ -3163,13 +3163,13 @@ _0805F598:
 	bx r0
 	thumb_func_end pal_patch_for_npc_range
 
-	thumb_func_start FindFieldObjectPaletteIndexByTag
-FindFieldObjectPaletteIndexByTag: @ 805F5A0
+	thumb_func_start FindObjectEventPaletteIndexByTag
+FindObjectEventPaletteIndexByTag: @ 805F5A0
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r2, 0
-	ldr r0, _0805F5C8 @ =gUnknown_83A5158
+	ldr r0, _0805F5C8 @ =gObjectEventSpritePalettes
 	ldrh r1, [r0, 0x4]
 	ldr r3, _0805F5CC @ =0x000011ff
 	adds r4, r0, 0
@@ -3186,7 +3186,7 @@ _0805F5B8:
 	adds r0, r2, 0
 	b _0805F5E2
 	.align 2, 0
-_0805F5C8: .4byte gUnknown_83A5158
+_0805F5C8: .4byte gObjectEventSpritePalettes
 _0805F5CC: .4byte 0x000011ff
 _0805F5D0:
 	adds r0, r2, 0x1
@@ -3203,7 +3203,7 @@ _0805F5E2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end FindFieldObjectPaletteIndexByTag
+	thumb_func_end FindObjectEventPaletteIndexByTag
 
 	thumb_func_start npc_load_two_palettes__no_record
 npc_load_two_palettes__no_record: @ 805F5E8
@@ -3395,7 +3395,7 @@ sub_805F724: @ 805F724
 	ldr r1, _0805F7C0 @ =gSprites
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	mov r8, r0
 	lsls r4, 16
 	asrs r4, 16
@@ -3472,7 +3472,7 @@ sub_805F7C4: @ 805F7C4
 	lsls r4, 16
 	lsrs r4, 16
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F80C
@@ -3483,7 +3483,7 @@ sub_805F7C4: @ 805F7C4
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r3, _0805F814 @ =gMapObjects
+	ldr r3, _0805F814 @ =gObjectEvents
 	adds r0, r3
 	movs r3, 0xE0
 	lsls r3, 11
@@ -3498,7 +3498,7 @@ _0805F80C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F814: .4byte gMapObjects
+_0805F814: .4byte gObjectEvents
 	thumb_func_end sub_805F7C4
 
 	thumb_func_start npc_coords_shift_still
@@ -3513,8 +3513,8 @@ npc_coords_shift_still: @ 805F818
 	bx r0
 	thumb_func_end npc_coords_shift_still
 
-	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
-UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
+	thumb_func_start UpdateObjectEventCoordsForCameraUpdate
+UpdateObjectEventCoordsForCameraUpdate: @ 805F82C
 	push {r4,r5,lr}
 	ldr r2, _0805F88C @ =gCamera
 	ldrb r1, [r2]
@@ -3523,7 +3523,7 @@ UpdateFieldObjectCoordsForCameraUpdate: @ 805F82C
 	cmp r0, 0
 	beq _0805F884
 	movs r3, 0
-	ldr r5, _0805F890 @ =gMapObjects
+	ldr r5, _0805F890 @ =gObjectEvents
 	movs r0, 0x4
 	ldrsh r4, [r2, r0]
 	movs r0, 0x8
@@ -3567,11 +3567,11 @@ _0805F884:
 	bx r0
 	.align 2, 0
 _0805F88C: .4byte gCamera
-_0805F890: .4byte gMapObjects
-	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
+_0805F890: .4byte gObjectEvents
+	thumb_func_end UpdateObjectEventCoordsForCameraUpdate
 
-	thumb_func_start GetFieldObjectIdByXYZ
-GetFieldObjectIdByXYZ: @ 805F894
+	thumb_func_start GetObjectEventIdByXYZ
+GetObjectEventIdByXYZ: @ 805F894
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3582,7 +3582,7 @@ GetFieldObjectIdByXYZ: @ 805F894
 	lsls r2, 24
 	lsrs r5, r2, 24
 	movs r4, 0
-	ldr r0, _0805F8E0 @ =gMapObjects
+	ldr r0, _0805F8E0 @ =gObjectEvents
 	mov r8, r0
 _0805F8AC:
 	lsls r0, r4, 3
@@ -3604,14 +3604,14 @@ _0805F8AC:
 	bne _0805F8E4
 	adds r0, r1, 0
 	adds r1, r5, 0
-	bl FieldObjectDoesZCoordMatch
+	bl ObjectEventDoesZCoordMatch
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805F8E4
 	adds r0, r4, 0
 	b _0805F8F0
 	.align 2, 0
-_0805F8E0: .4byte gMapObjects
+_0805F8E0: .4byte gObjectEvents
 _0805F8E4:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -3625,10 +3625,10 @@ _0805F8F0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectIdByXYZ
+	thumb_func_end GetObjectEventIdByXYZ
 
-	thumb_func_start FieldObjectDoesZCoordMatch
-FieldObjectDoesZCoordMatch: @ 805F8FC
+	thumb_func_start ObjectEventDoesZCoordMatch
+ObjectEventDoesZCoordMatch: @ 805F8FC
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -3650,10 +3650,10 @@ _0805F91C:
 _0805F91E:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectDoesZCoordMatch
+	thumb_func_end ObjectEventDoesZCoordMatch
 
-	thumb_func_start UpdateFieldObjectsForCameraUpdate
-UpdateFieldObjectsForCameraUpdate: @ 805F924
+	thumb_func_start UpdateObjectEventsForCameraUpdate
+UpdateObjectEventsForCameraUpdate: @ 805F924
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3661,7 +3661,7 @@ UpdateFieldObjectsForCameraUpdate: @ 805F924
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	bl UpdateFieldObjectCoordsForCameraUpdate
+	bl UpdateObjectEventCoordsForCameraUpdate
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -3669,11 +3669,11 @@ UpdateFieldObjectsForCameraUpdate: @ 805F924
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_805EC30
-	bl RemoveFieldObjectsOutsideView
+	bl RemoveObjectEventsOutsideView
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end UpdateFieldObjectsForCameraUpdate
+	thumb_func_end UpdateObjectEventsForCameraUpdate
 
 	thumb_func_start AddCameraObject
 AddCameraObject: @ 805F950
@@ -4040,8 +4040,8 @@ _0805FBD2:
 	bx r1
 	thumb_func_end obj_unfreeze
 
-	thumb_func_start FieldObjectSetDirection
-FieldObjectSetDirection: @ 805FBDC
+	thumb_func_start ObjectEventSetDirection
+ObjectEventSetDirection: @ 805FBDC
 	push {r4,lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -4076,10 +4076,10 @@ _0805FC0C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectSetDirection
+	thumb_func_end ObjectEventSetDirection
 
-	thumb_func_start GetFieldObjectScriptPointerByLocalIdAndMap
-GetFieldObjectScriptPointerByLocalIdAndMap: @ 805FC20
+	thumb_func_start GetObjectEventScriptPointerByLocalIdAndMap
+GetObjectEventScriptPointerByLocalIdAndMap: @ 805FC20
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4087,18 +4087,18 @@ GetFieldObjectScriptPointerByLocalIdAndMap: @ 805FC20
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl GetFieldObjectTemplateByLocalIdAndMap
+	bl GetObjectEventTemplateByLocalIdAndMap
 	ldr r0, [r0, 0x10]
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectScriptPointerByLocalIdAndMap
+	thumb_func_end GetObjectEventScriptPointerByLocalIdAndMap
 
-	thumb_func_start GetFieldObjectScriptPointerByFieldObjectId
-GetFieldObjectScriptPointerByFieldObjectId: @ 805FC38
+	thumb_func_start GetObjectEventScriptPointerByObjectEventId
+GetObjectEventScriptPointerByObjectEventId: @ 805FC38
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0805FC58 @ =gMapObjects
+	ldr r1, _0805FC58 @ =gObjectEvents
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -4106,15 +4106,15 @@ GetFieldObjectScriptPointerByFieldObjectId: @ 805FC38
 	ldrb r0, [r2, 0x8]
 	ldrb r1, [r2, 0x9]
 	ldrb r2, [r2, 0xA]
-	bl GetFieldObjectScriptPointerByLocalIdAndMap
+	bl GetObjectEventScriptPointerByLocalIdAndMap
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805FC58: .4byte gMapObjects
-	thumb_func_end GetFieldObjectScriptPointerByFieldObjectId
+_0805FC58: .4byte gObjectEvents
+	thumb_func_end GetObjectEventScriptPointerByObjectEventId
 
-	thumb_func_start GetFieldObjectFlagIdByLocalIdAndMap
-GetFieldObjectFlagIdByLocalIdAndMap: @ 805FC5C
+	thumb_func_start GetObjectEventFlagIdByLocalIdAndMap
+GetObjectEventFlagIdByLocalIdAndMap: @ 805FC5C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4122,18 +4122,18 @@ GetFieldObjectFlagIdByLocalIdAndMap: @ 805FC5C
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl GetFieldObjectTemplateByLocalIdAndMap
+	bl GetObjectEventTemplateByLocalIdAndMap
 	ldrh r0, [r0, 0x14]
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectFlagIdByLocalIdAndMap
+	thumb_func_end GetObjectEventFlagIdByLocalIdAndMap
 
-	thumb_func_start GetFieldObjectFlagIdByFieldObjectId
-GetFieldObjectFlagIdByFieldObjectId: @ 805FC74
+	thumb_func_start GetObjectEventFlagIdByObjectEventId
+GetObjectEventFlagIdByObjectEventId: @ 805FC74
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0805FC98 @ =gMapObjects
+	ldr r1, _0805FC98 @ =gObjectEvents
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -4141,14 +4141,14 @@ GetFieldObjectFlagIdByFieldObjectId: @ 805FC74
 	ldrb r0, [r2, 0x8]
 	ldrb r1, [r2, 0x9]
 	ldrb r2, [r2, 0xA]
-	bl GetFieldObjectFlagIdByLocalIdAndMap
+	bl GetObjectEventFlagIdByLocalIdAndMap
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805FC98: .4byte gMapObjects
-	thumb_func_end GetFieldObjectFlagIdByFieldObjectId
+_0805FC98: .4byte gObjectEvents
+	thumb_func_end GetObjectEventFlagIdByObjectEventId
 
 	thumb_func_start sub_805FC9C
 sub_805FC9C: @ 805FC9C
@@ -4161,11 +4161,11 @@ sub_805FC9C: @ 805FC9C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FCD0
-	ldr r2, _0805FCCC @ =gMapObjects
+	ldr r2, _0805FCCC @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -4175,7 +4175,7 @@ sub_805FC9C: @ 805FC9C
 	ldrb r0, [r0, 0x7]
 	b _0805FCD2
 	.align 2, 0
-_0805FCCC: .4byte gMapObjects
+_0805FCCC: .4byte gObjectEvents
 _0805FCD0:
 	movs r0, 0xFF
 _0805FCD2:
@@ -4193,7 +4193,7 @@ sub_805FCD8: @ 805FCD8
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	bl GetFieldObjectTemplateByLocalIdAndMap
+	bl GetObjectEventTemplateByLocalIdAndMap
 	ldrh r0, [r0, 0xC]
 	pop {r1}
 	bx r1
@@ -4203,7 +4203,7 @@ sub_805FCD8: @ 805FCD8
 sub_805FCF0: @ 805FCF0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0805FD04 @ =gMapObjects
+	ldr r2, _0805FD04 @ =gObjectEvents
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -4211,7 +4211,7 @@ sub_805FCF0: @ 805FCF0
 	ldrb r0, [r1, 0x7]
 	bx lr
 	.align 2, 0
-_0805FD04: .4byte gMapObjects
+_0805FD04: .4byte gObjectEvents
 	thumb_func_end sub_805FCF0
 
 	thumb_func_start sub_805FD08
@@ -4225,11 +4225,11 @@ sub_805FD08: @ 805FD08
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FD3C
-	ldr r2, _0805FD38 @ =gMapObjects
+	ldr r2, _0805FD38 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -4239,7 +4239,7 @@ sub_805FD08: @ 805FD08
 	ldrb r0, [r0, 0x1D]
 	b _0805FD3E
 	.align 2, 0
-_0805FD38: .4byte gMapObjects
+_0805FD38: .4byte gObjectEvents
 _0805FD3C:
 	movs r0, 0xFF
 _0805FD3E:
@@ -4248,11 +4248,11 @@ _0805FD3E:
 	bx r1
 	thumb_func_end sub_805FD08
 
-	thumb_func_start FieldObjectGetBerryTreeId
-FieldObjectGetBerryTreeId: @ 805FD44
+	thumb_func_start ObjectEventGetBerryTreeId
+ObjectEventGetBerryTreeId: @ 805FD44
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0805FD58 @ =gMapObjects
+	ldr r2, _0805FD58 @ =gObjectEvents
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -4260,11 +4260,11 @@ FieldObjectGetBerryTreeId: @ 805FD44
 	ldrb r0, [r1, 0x1D]
 	bx lr
 	.align 2, 0
-_0805FD58: .4byte gMapObjects
-	thumb_func_end FieldObjectGetBerryTreeId
+_0805FD58: .4byte gObjectEvents
+	thumb_func_end ObjectEventGetBerryTreeId
 
-	thumb_func_start GetFieldObjectTemplateByLocalIdAndMap
-GetFieldObjectTemplateByLocalIdAndMap: @ 805FD5C
+	thumb_func_start GetObjectEventTemplateByLocalIdAndMap
+GetObjectEventTemplateByLocalIdAndMap: @ 805FD5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4300,14 +4300,14 @@ _0805FD94:
 _0805FDA0:
 	ldrb r2, [r0]
 	adds r0, r4, 0
-	bl FindFieldObjectTemplateInArrayByLocalId
+	bl FindObjectEventTemplateInArrayByLocalId
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end GetFieldObjectTemplateByLocalIdAndMap
+	thumb_func_end GetObjectEventTemplateByLocalIdAndMap
 
-	thumb_func_start FindFieldObjectTemplateInArrayByLocalId
-FindFieldObjectTemplateInArrayByLocalId: @ 805FDB0
+	thumb_func_start FindObjectEventTemplateInArrayByLocalId
+FindObjectEventTemplateInArrayByLocalId: @ 805FDB0
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -4339,7 +4339,7 @@ _0805FDE0:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end FindFieldObjectTemplateInArrayByLocalId
+	thumb_func_end FindObjectEventTemplateInArrayByLocalId
 
 	thumb_func_start sub_805FDE8
 sub_805FDE8: @ 805FDE8
@@ -4454,7 +4454,7 @@ sub_805FE94: @ 805FE94
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FEC2
@@ -4463,7 +4463,7 @@ sub_805FE94: @ 805FE94
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0805FEC8 @ =gMapObjects
+	ldr r1, _0805FEC8 @ =gObjectEvents
 	adds r0, r1
 	bl sub_805FE5C
 _0805FEC2:
@@ -4471,7 +4471,7 @@ _0805FEC2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FEC8: .4byte gMapObjects
+_0805FEC8: .4byte gObjectEvents
 	thumb_func_end sub_805FE94
 
 	thumb_func_start npc_paltag_set_load
@@ -4602,14 +4602,14 @@ sub_805FFB4: @ 805FFB4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0805FFD0 @ =gMapObjects
+	ldr r2, _0805FFD0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0805FFD4 @ =sub_805FFD8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FFD0: .4byte gMapObjects
+_0805FFD0: .4byte gObjectEvents
 _0805FFD4: .4byte sub_805FFD8
 	thumb_func_end sub_805FFB4
 
@@ -4628,14 +4628,14 @@ sub_805FFDC: @ 805FFDC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0805FFF8 @ =gMapObjects
+	ldr r2, _0805FFF8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0805FFFC @ =sub_8060000
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FFF8: .4byte gMapObjects
+_0805FFF8: .4byte gObjectEvents
 _0805FFFC: .4byte sub_8060000
 	thumb_func_end sub_805FFDC
 
@@ -4667,14 +4667,14 @@ sub_8060020: @ 8060020
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806003C @ =gMapObjects
+	ldr r2, _0806003C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060040 @ =sub_8060044
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806003C: .4byte gMapObjects
+_0806003C: .4byte gObjectEvents
 _08060040: .4byte sub_8060044
 	thumb_func_end sub_8060020
 
@@ -4750,7 +4750,7 @@ sub_80600A4: @ 80600A4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _080600DA
@@ -4769,7 +4769,7 @@ sub_80600E0: @ 80600E0
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080600F4
@@ -4803,7 +4803,7 @@ sub_8060100: @ 8060100
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
@@ -4899,8 +4899,8 @@ _080601CA:
 	bx r1
 	thumb_func_end sub_80601AC
 
-	thumb_func_start FieldObjectIsTrainerAndCloseToPlayer
-FieldObjectIsTrainerAndCloseToPlayer: @ 80601D4
+	thumb_func_start ObjectEventIsTrainerAndCloseToPlayer
+ObjectEventIsTrainerAndCloseToPlayer: @ 80601D4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -4964,7 +4964,7 @@ _08060246:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectIsTrainerAndCloseToPlayer
+	thumb_func_end ObjectEventIsTrainerAndCloseToPlayer
 
 	thumb_func_start GetRegularRunningPastFacingDirection
 GetRegularRunningPastFacingDirection: @ 8060250
@@ -5362,7 +5362,7 @@ GetRunningPastFacingDirection: @ 8060504
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r6, r1, 24
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806051C
@@ -5437,14 +5437,14 @@ sub_806058C: @ 806058C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080605A8 @ =gMapObjects
+	ldr r2, _080605A8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080605AC @ =sub_80605B0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080605A8: .4byte gMapObjects
+_080605A8: .4byte gObjectEvents
 _080605AC: .4byte sub_80605B0
 	thumb_func_end sub_806058C
 
@@ -5521,7 +5521,7 @@ sub_8060610: @ 8060610
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -5543,12 +5543,12 @@ sub_8060654: @ 8060654
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060672
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806067A
@@ -5590,7 +5590,7 @@ sub_8060684: @ 8060684
 	ldrb r1, [r0]
 _080606B4:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -5610,14 +5610,14 @@ sub_80606CC: @ 80606CC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080606E8 @ =gMapObjects
+	ldr r2, _080606E8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080606EC @ =sub_80606F0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080606E8: .4byte gMapObjects
+_080606E8: .4byte gObjectEvents
 _080606EC: .4byte sub_80606F0
 	thumb_func_end sub_80606CC
 
@@ -5693,7 +5693,7 @@ sub_8060750: @ 8060750
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _08060786
@@ -5712,7 +5712,7 @@ sub_806078C: @ 806078C
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080607A0
@@ -5747,7 +5747,7 @@ sub_80607AC: @ 80607AC
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
@@ -5825,14 +5825,14 @@ sub_8060850: @ 8060850
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806086C @ =gMapObjects
+	ldr r2, _0806086C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060870 @ =sub_8060874
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806086C: .4byte gMapObjects
+_0806086C: .4byte gObjectEvents
 _08060870: .4byte sub_8060874
 	thumb_func_end sub_8060850
 
@@ -5908,7 +5908,7 @@ sub_80608D4: @ 80608D4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _0806090A
@@ -5927,7 +5927,7 @@ sub_8060910: @ 8060910
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060924
@@ -5962,7 +5962,7 @@ sub_8060930: @ 8060930
 	ldrb r4, [r0]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x5
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
@@ -6040,14 +6040,14 @@ sub_80609D4: @ 80609D4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080609F0 @ =gMapObjects
+	ldr r2, _080609F0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080609F4 @ =sub_80609F8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080609F0: .4byte gMapObjects
+_080609F0: .4byte gObjectEvents
 _080609F4: .4byte sub_80609F8
 	thumb_func_end sub_80609D4
 
@@ -6133,14 +6133,14 @@ sub_8060A74: @ 8060A74
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08060A90 @ =gMapObjects
+	ldr r2, _08060A90 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060A94 @ =sub_8060A98
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08060A90: .4byte gMapObjects
+_08060A90: .4byte gObjectEvents
 _08060A94: .4byte sub_8060A98
 	thumb_func_end sub_8060A74
 
@@ -6217,7 +6217,7 @@ sub_8060AF8: @ 8060AF8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6239,12 +6239,12 @@ sub_8060B3C: @ 8060B3C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060B5A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060B62
@@ -6286,7 +6286,7 @@ sub_8060B6C: @ 8060B6C
 	ldrb r1, [r0]
 _08060B9C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6306,14 +6306,14 @@ sub_8060BB4: @ 8060BB4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08060BD0 @ =gMapObjects
+	ldr r2, _08060BD0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060BD4 @ =sub_8060BD8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08060BD0: .4byte gMapObjects
+_08060BD0: .4byte gObjectEvents
 _08060BD4: .4byte sub_8060BD8
 	thumb_func_end sub_8060BB4
 
@@ -6390,7 +6390,7 @@ sub_8060C38: @ 8060C38
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6412,12 +6412,12 @@ sub_8060C7C: @ 8060C7C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060C9A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060CA2
@@ -6459,7 +6459,7 @@ sub_8060CAC: @ 8060CAC
 	ldrb r1, [r0]
 _08060CDC:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6479,14 +6479,14 @@ sub_8060CF4: @ 8060CF4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08060D10 @ =gMapObjects
+	ldr r2, _08060D10 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060D14 @ =sub_8060D18
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08060D10: .4byte gMapObjects
+_08060D10: .4byte gObjectEvents
 _08060D14: .4byte sub_8060D18
 	thumb_func_end sub_8060CF4
 
@@ -6563,7 +6563,7 @@ sub_8060D78: @ 8060D78
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6585,12 +6585,12 @@ sub_8060DBC: @ 8060DBC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060DDA
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060DE2
@@ -6632,7 +6632,7 @@ sub_8060DEC: @ 8060DEC
 	ldrb r1, [r0]
 _08060E1C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6652,14 +6652,14 @@ sub_8060E34: @ 8060E34
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08060E50 @ =gMapObjects
+	ldr r2, _08060E50 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060E54 @ =sub_8060E58
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08060E50: .4byte gMapObjects
+_08060E50: .4byte gObjectEvents
 _08060E54: .4byte sub_8060E58
 	thumb_func_end sub_8060E34
 
@@ -6736,7 +6736,7 @@ sub_8060EB8: @ 8060EB8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6758,12 +6758,12 @@ sub_8060EFC: @ 8060EFC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060F1A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060F22
@@ -6805,7 +6805,7 @@ sub_8060F2C: @ 8060F2C
 	ldrb r1, [r0]
 _08060F5C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6825,14 +6825,14 @@ sub_8060F74: @ 8060F74
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08060F90 @ =gMapObjects
+	ldr r2, _08060F90 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08060F94 @ =sub_8060F98
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08060F90: .4byte gMapObjects
+_08060F90: .4byte gObjectEvents
 _08060F94: .4byte sub_8060F98
 	thumb_func_end sub_8060F74
 
@@ -6909,7 +6909,7 @@ sub_8060FF8: @ 8060FF8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -6931,12 +6931,12 @@ sub_806103C: @ 806103C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806105A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061062
@@ -6978,7 +6978,7 @@ sub_806106C: @ 806106C
 	ldrb r1, [r0]
 _0806109C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -6998,14 +6998,14 @@ sub_80610B4: @ 80610B4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080610D0 @ =gMapObjects
+	ldr r2, _080610D0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080610D4 @ =sub_80610D8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080610D0: .4byte gMapObjects
+_080610D0: .4byte gObjectEvents
 _080610D4: .4byte sub_80610D8
 	thumb_func_end sub_80610B4
 
@@ -7082,7 +7082,7 @@ sub_8061138: @ 8061138
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7104,12 +7104,12 @@ sub_806117C: @ 806117C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806119A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080611A2
@@ -7151,7 +7151,7 @@ sub_80611AC: @ 80611AC
 	ldrb r1, [r0]
 _080611DC:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7171,14 +7171,14 @@ sub_80611F4: @ 80611F4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061210 @ =gMapObjects
+	ldr r2, _08061210 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061214 @ =sub_8061218
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061210: .4byte gMapObjects
+_08061210: .4byte gObjectEvents
 _08061214: .4byte sub_8061218
 	thumb_func_end sub_80611F4
 
@@ -7255,7 +7255,7 @@ sub_8061278: @ 8061278
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7277,12 +7277,12 @@ sub_80612BC: @ 80612BC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080612DA
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080612E2
@@ -7324,7 +7324,7 @@ sub_80612EC: @ 80612EC
 	ldrb r1, [r0]
 _0806131C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7344,14 +7344,14 @@ sub_8061334: @ 8061334
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061350 @ =gMapObjects
+	ldr r2, _08061350 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061354 @ =sub_8061358
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061350: .4byte gMapObjects
+_08061350: .4byte gObjectEvents
 _08061354: .4byte sub_8061358
 	thumb_func_end sub_8061334
 
@@ -7428,7 +7428,7 @@ sub_80613B8: @ 80613B8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7450,12 +7450,12 @@ sub_80613FC: @ 80613FC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806141A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061422
@@ -7497,7 +7497,7 @@ sub_806142C: @ 806142C
 	ldrb r1, [r0]
 _0806145C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7517,14 +7517,14 @@ sub_8061474: @ 8061474
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061490 @ =gMapObjects
+	ldr r2, _08061490 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061494 @ =sub_8061498
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061490: .4byte gMapObjects
+_08061490: .4byte gObjectEvents
 _08061494: .4byte sub_8061498
 	thumb_func_end sub_8061474
 
@@ -7601,7 +7601,7 @@ sub_80614F8: @ 80614F8
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7623,12 +7623,12 @@ sub_806153C: @ 806153C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806155A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061562
@@ -7670,7 +7670,7 @@ sub_806156C: @ 806156C
 	ldrb r1, [r0]
 _0806159C:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7690,14 +7690,14 @@ sub_80615B4: @ 80615B4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080615D0 @ =gMapObjects
+	ldr r2, _080615D0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080615D4 @ =sub_80615D8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080615D0: .4byte gMapObjects
+_080615D0: .4byte gObjectEvents
 _080615D4: .4byte sub_80615D8
 	thumb_func_end sub_80615B4
 
@@ -7774,7 +7774,7 @@ sub_8061638: @ 8061638
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -7796,12 +7796,12 @@ sub_806167C: @ 806167C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806169A
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080616A2
@@ -7843,7 +7843,7 @@ sub_80616AC: @ 80616AC
 	ldrb r1, [r0]
 _080616DC:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	add sp, 0x4
@@ -7863,14 +7863,14 @@ sub_80616F4: @ 80616F4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061710 @ =gMapObjects
+	ldr r2, _08061710 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061714 @ =sub_8061718
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061710: .4byte gMapObjects
+_08061710: .4byte gObjectEvents
 _08061714: .4byte sub_8061718
 	thumb_func_end sub_80616F4
 
@@ -7926,7 +7926,7 @@ sub_8061764: @ 8061764
 	beq _0806177E
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _0806177E:
@@ -7942,12 +7942,12 @@ sub_8061788: @ 8061788
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080617A6
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080617AA
@@ -7985,7 +7985,7 @@ sub_80617B4: @ 80617B4
 	ldrb r1, [r0]
 _080617E0:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8006,14 +8006,14 @@ sub_80617F8: @ 80617F8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061814 @ =gMapObjects
+	ldr r2, _08061814 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061818 @ =sub_806181C
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061814: .4byte gMapObjects
+_08061814: .4byte gObjectEvents
 _08061818: .4byte sub_806181C
 	thumb_func_end sub_80617F8
 
@@ -8069,7 +8069,7 @@ sub_8061868: @ 8061868
 	beq _08061882
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _08061882:
@@ -8085,12 +8085,12 @@ sub_806188C: @ 806188C
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080618AA
 	adds r0, r4, 0
-	bl FieldObjectIsTrainerAndCloseToPlayer
+	bl ObjectEventIsTrainerAndCloseToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _080618AE
@@ -8128,7 +8128,7 @@ sub_80618B8: @ 80618B8
 	ldrb r1, [r0]
 _080618E4:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8149,14 +8149,14 @@ sub_80618FC: @ 80618FC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061918 @ =gMapObjects
+	ldr r2, _08061918 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0806191C @ =sub_8061920
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061918: .4byte gMapObjects
+_08061918: .4byte gObjectEvents
 _0806191C: .4byte sub_8061920
 	thumb_func_end sub_80618FC
 
@@ -8196,7 +8196,7 @@ sub_8061954: @ 8061954
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r0, _08061988 @ =gUnknown_839FD5D
+	ldr r0, _08061988 @ =gInitialMovementTypeFacingDirections
 	ldrb r1, [r4, 0x6]
 	adds r1, r0
 	ldrb r1, [r1]
@@ -8211,7 +8211,7 @@ sub_8061954: @ 8061954
 	lsrs r1, r0, 24
 _08061976:
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -8219,7 +8219,7 @@ _08061976:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08061988: .4byte gUnknown_839FD5D
+_08061988: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8061954
 
 	thumb_func_start sub_806198C
@@ -8245,7 +8245,7 @@ sub_806198C: @ 806198C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 _080619BC:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
@@ -8272,7 +8272,7 @@ _080619BC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8345,8 +8345,8 @@ sub_8061A6C: @ 8061A6C
 	bx r1
 	thumb_func_end sub_8061A6C
 
-	thumb_func_start MoveFieldObjectInNextDirectionInSequence
-MoveFieldObjectInNextDirectionInSequence: @ 8061A80
+	thumb_func_start MoveObjectEventInNextDirectionInSequence
+MoveObjectEventInNextDirectionInSequence: @ 8061A80
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8371,7 +8371,7 @@ _08061AA2:
 	adds r0, r7, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8392,7 +8392,7 @@ _08061AA2:
 	adds r0, r7, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
 	bl sub_8063F84
@@ -8431,7 +8431,7 @@ _08061B0E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end MoveFieldObjectInNextDirectionInSequence
+	thumb_func_end MoveObjectEventInNextDirectionInSequence
 
 	thumb_func_start sub_8061B34
 sub_8061B34: @ 8061B34
@@ -8465,14 +8465,14 @@ sub_8061B5C: @ 8061B5C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061B78 @ =gMapObjects
+	ldr r2, _08061B78 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061B7C @ =sub_8061B80
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061B78: .4byte gMapObjects
+_08061B78: .4byte gObjectEvents
 _08061B7C: .4byte sub_8061B80
 	thumb_func_end sub_8061B5C
 
@@ -8522,7 +8522,7 @@ _08061BCC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8542,14 +8542,14 @@ sub_8061BE8: @ 8061BE8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061C04 @ =gMapObjects
+	ldr r2, _08061C04 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061C08 @ =sub_8061C0C
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061C04: .4byte gMapObjects
+_08061C04: .4byte gObjectEvents
 _08061C08: .4byte sub_8061C0C
 	thumb_func_end sub_8061BE8
 
@@ -8599,7 +8599,7 @@ _08061C58:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8619,14 +8619,14 @@ sub_8061C74: @ 8061C74
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061C90 @ =gMapObjects
+	ldr r2, _08061C90 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061C94 @ =sub_8061C98
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061C90: .4byte gMapObjects
+_08061C90: .4byte gObjectEvents
 _08061C94: .4byte sub_8061C98
 	thumb_func_end sub_8061C74
 
@@ -8676,7 +8676,7 @@ _08061CE4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8696,14 +8696,14 @@ sub_8061D00: @ 8061D00
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061D1C @ =gMapObjects
+	ldr r2, _08061D1C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061D20 @ =sub_8061D24
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061D1C: .4byte gMapObjects
+_08061D1C: .4byte gObjectEvents
 _08061D20: .4byte sub_8061D24
 	thumb_func_end sub_8061D00
 
@@ -8753,7 +8753,7 @@ _08061D70:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8773,14 +8773,14 @@ sub_8061D8C: @ 8061D8C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061DA8 @ =gMapObjects
+	ldr r2, _08061DA8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061DAC @ =sub_8061DB0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061DA8: .4byte gMapObjects
+_08061DA8: .4byte gObjectEvents
 _08061DAC: .4byte sub_8061DB0
 	thumb_func_end sub_8061D8C
 
@@ -8830,7 +8830,7 @@ _08061DFC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8850,14 +8850,14 @@ sub_8061E18: @ 8061E18
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061E34 @ =gMapObjects
+	ldr r2, _08061E34 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061E38 @ =sub_8061E3C
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061E34: .4byte gMapObjects
+_08061E34: .4byte gObjectEvents
 _08061E38: .4byte sub_8061E3C
 	thumb_func_end sub_8061E18
 
@@ -8907,7 +8907,7 @@ _08061E88:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -8927,14 +8927,14 @@ sub_8061EA4: @ 8061EA4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061EC0 @ =gMapObjects
+	ldr r2, _08061EC0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061EC4 @ =sub_8061EC8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061EC0: .4byte gMapObjects
+_08061EC0: .4byte gObjectEvents
 _08061EC4: .4byte sub_8061EC8
 	thumb_func_end sub_8061EA4
 
@@ -8984,7 +8984,7 @@ _08061F14:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9004,14 +9004,14 @@ sub_8061F30: @ 8061F30
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061F4C @ =gMapObjects
+	ldr r2, _08061F4C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061F50 @ =sub_8061F54
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061F4C: .4byte gMapObjects
+_08061F4C: .4byte gObjectEvents
 _08061F50: .4byte sub_8061F54
 	thumb_func_end sub_8061F30
 
@@ -9061,7 +9061,7 @@ _08061FA0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9081,14 +9081,14 @@ sub_8061FBC: @ 8061FBC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08061FD8 @ =gMapObjects
+	ldr r2, _08061FD8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08061FDC @ =sub_8061FE0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08061FD8: .4byte gMapObjects
+_08061FD8: .4byte gObjectEvents
 _08061FDC: .4byte sub_8061FE0
 	thumb_func_end sub_8061FBC
 
@@ -9138,7 +9138,7 @@ _0806202C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9158,14 +9158,14 @@ sub_8062048: @ 8062048
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062064 @ =gMapObjects
+	ldr r2, _08062064 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062068 @ =sub_806206C
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062064: .4byte gMapObjects
+_08062064: .4byte gObjectEvents
 _08062068: .4byte sub_806206C
 	thumb_func_end sub_8062048
 
@@ -9215,7 +9215,7 @@ _080620B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9235,14 +9235,14 @@ sub_80620D4: @ 80620D4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080620F0 @ =gMapObjects
+	ldr r2, _080620F0 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080620F4 @ =sub_80620F8
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080620F0: .4byte gMapObjects
+_080620F0: .4byte gObjectEvents
 _080620F4: .4byte sub_80620F8
 	thumb_func_end sub_80620D4
 
@@ -9292,7 +9292,7 @@ _08062144:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9312,14 +9312,14 @@ sub_8062160: @ 8062160
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806217C @ =gMapObjects
+	ldr r2, _0806217C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062180 @ =sub_8062184
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806217C: .4byte gMapObjects
+_0806217C: .4byte gObjectEvents
 _08062180: .4byte sub_8062184
 	thumb_func_end sub_8062160
 
@@ -9369,7 +9369,7 @@ _080621D0:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9389,14 +9389,14 @@ sub_80621EC: @ 80621EC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062208 @ =gMapObjects
+	ldr r2, _08062208 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0806220C @ =sub_8062210
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062208: .4byte gMapObjects
+_08062208: .4byte gObjectEvents
 _0806220C: .4byte sub_8062210
 	thumb_func_end sub_80621EC
 
@@ -9446,7 +9446,7 @@ _0806225C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9466,14 +9466,14 @@ sub_8062278: @ 8062278
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062294 @ =gMapObjects
+	ldr r2, _08062294 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062298 @ =sub_806229C
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062294: .4byte gMapObjects
+_08062294: .4byte gObjectEvents
 _08062298: .4byte sub_806229C
 	thumb_func_end sub_8062278
 
@@ -9523,7 +9523,7 @@ _080622E8:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9543,14 +9543,14 @@ sub_8062304: @ 8062304
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062320 @ =gMapObjects
+	ldr r2, _08062320 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062324 @ =sub_8062328
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062320: .4byte gMapObjects
+_08062320: .4byte gObjectEvents
 _08062324: .4byte sub_8062328
 	thumb_func_end sub_8062304
 
@@ -9600,7 +9600,7 @@ _08062374:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9620,14 +9620,14 @@ sub_8062390: @ 8062390
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080623AC @ =gMapObjects
+	ldr r2, _080623AC @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080623B0 @ =sub_80623B4
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080623AC: .4byte gMapObjects
+_080623AC: .4byte gObjectEvents
 _080623B0: .4byte sub_80623B4
 	thumb_func_end sub_8062390
 
@@ -9677,7 +9677,7 @@ _08062400:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9697,14 +9697,14 @@ sub_806241C: @ 806241C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062438 @ =gMapObjects
+	ldr r2, _08062438 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0806243C @ =sub_8062440
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062438: .4byte gMapObjects
+_08062438: .4byte gObjectEvents
 _0806243C: .4byte sub_8062440
 	thumb_func_end sub_806241C
 
@@ -9754,7 +9754,7 @@ _0806248C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9774,14 +9774,14 @@ sub_80624A8: @ 80624A8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080624C4 @ =gMapObjects
+	ldr r2, _080624C4 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080624C8 @ =sub_80624CC
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080624C4: .4byte gMapObjects
+_080624C4: .4byte gObjectEvents
 _080624C8: .4byte sub_80624CC
 	thumb_func_end sub_80624A8
 
@@ -9831,7 +9831,7 @@ _08062518:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9851,14 +9851,14 @@ sub_8062534: @ 8062534
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062550 @ =gMapObjects
+	ldr r2, _08062550 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062554 @ =sub_8062558
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062550: .4byte gMapObjects
+_08062550: .4byte gObjectEvents
 _08062554: .4byte sub_8062558
 	thumb_func_end sub_8062534
 
@@ -9908,7 +9908,7 @@ _080625A4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -9928,14 +9928,14 @@ sub_80625C0: @ 80625C0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080625DC @ =gMapObjects
+	ldr r2, _080625DC @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080625E0 @ =sub_80625E4
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080625DC: .4byte gMapObjects
+_080625DC: .4byte gObjectEvents
 _080625E0: .4byte sub_80625E4
 	thumb_func_end sub_80625C0
 
@@ -9985,7 +9985,7 @@ _08062630:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10005,14 +10005,14 @@ sub_806264C: @ 806264C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062668 @ =gMapObjects
+	ldr r2, _08062668 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0806266C @ =sub_8062670
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062668: .4byte gMapObjects
+_08062668: .4byte gObjectEvents
 _0806266C: .4byte sub_8062670
 	thumb_func_end sub_806264C
 
@@ -10062,7 +10062,7 @@ _080626BC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10082,14 +10082,14 @@ sub_80626D8: @ 80626D8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080626F4 @ =gMapObjects
+	ldr r2, _080626F4 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080626F8 @ =sub_80626FC
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080626F4: .4byte gMapObjects
+_080626F4: .4byte gObjectEvents
 _080626F8: .4byte sub_80626FC
 	thumb_func_end sub_80626D8
 
@@ -10139,7 +10139,7 @@ _08062748:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10159,14 +10159,14 @@ sub_8062764: @ 8062764
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062780 @ =gMapObjects
+	ldr r2, _08062780 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062784 @ =sub_8062788
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062780: .4byte gMapObjects
+_08062780: .4byte gObjectEvents
 _08062784: .4byte sub_8062788
 	thumb_func_end sub_8062764
 
@@ -10216,7 +10216,7 @@ _080627D4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10236,14 +10236,14 @@ sub_80627F0: @ 80627F0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806280C @ =gMapObjects
+	ldr r2, _0806280C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062810 @ =sub_8062814
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806280C: .4byte gMapObjects
+_0806280C: .4byte gObjectEvents
 _08062810: .4byte sub_8062814
 	thumb_func_end sub_80627F0
 
@@ -10293,7 +10293,7 @@ _08062860:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
-	bl MoveFieldObjectInNextDirectionInSequence
+	bl MoveObjectEventInNextDirectionInSequence
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -10313,14 +10313,14 @@ sub_806287C: @ 806287C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062898 @ =gMapObjects
+	ldr r2, _08062898 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0806289C @ =sub_80628A0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062898: .4byte gMapObjects
+_08062898: .4byte gObjectEvents
 _0806289C: .4byte sub_80628A0
 	thumb_func_end sub_806287C
 
@@ -10368,7 +10368,7 @@ sub_80628E4: @ 80628E4
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	ldr r2, _08062908 @ =gMapObjects
+	ldr r2, _08062908 @ =gObjectEvents
 	ldr r3, _0806290C @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -10385,7 +10385,7 @@ _08062904:
 	movs r0, 0
 	b _08062938
 	.align 2, 0
-_08062908: .4byte gMapObjects
+_08062908: .4byte gObjectEvents
 _0806290C: .4byte gPlayerAvatar
 _08062910:
 	ldr r5, _08062940 @ =gUnknown_83A6390
@@ -10449,7 +10449,7 @@ sub_8062970: @ 8062970
 	adds r5, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r1, _080629B4 @ =gUnknown_839FD5D
+	ldr r1, _080629B4 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10475,7 +10475,7 @@ sub_8062970: @ 8062970
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080629B4: .4byte gUnknown_839FD5D
+_080629B4: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062970
 
 	thumb_func_start sub_80629B8
@@ -10489,7 +10489,7 @@ sub_80629B8: @ 80629B8
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062A6C @ =gUnknown_839FD5D
+	ldr r1, _08062A6C @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10505,7 +10505,7 @@ sub_80629B8: @ 80629B8
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8063F84
 	adds r2, r0, 0
@@ -10564,7 +10564,7 @@ _08062A52:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062A6C: .4byte gUnknown_839FD5D
+_08062A6C: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_80629B8
 
 	thumb_func_start sub_8062A70
@@ -10578,7 +10578,7 @@ sub_8062A70: @ 8062A70
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062B24 @ =gUnknown_839FD5D
+	ldr r1, _08062B24 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10594,7 +10594,7 @@ sub_8062A70: @ 8062A70
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8063FB0
 	adds r2, r0, 0
@@ -10653,7 +10653,7 @@ _08062B0A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062B24: .4byte gUnknown_839FD5D
+_08062B24: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062A70
 
 	thumb_func_start sub_8062B28
@@ -10667,7 +10667,7 @@ sub_8062B28: @ 8062B28
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062BDC @ =gUnknown_839FD5D
+	ldr r1, _08062BDC @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10683,7 +10683,7 @@ sub_8062B28: @ 8062B28
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064034
 	adds r2, r0, 0
@@ -10742,7 +10742,7 @@ _08062BC2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062BDC: .4byte gUnknown_839FD5D
+_08062BDC: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062B28
 
 	thumb_func_start sub_8062BE0
@@ -10756,7 +10756,7 @@ sub_8062BE0: @ 8062BE0
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062C94 @ =gUnknown_839FD5D
+	ldr r1, _08062C94 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10772,7 +10772,7 @@ sub_8062BE0: @ 8062BE0
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064060
 	adds r2, r0, 0
@@ -10831,7 +10831,7 @@ _08062C7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062C94: .4byte gUnknown_839FD5D
+_08062C94: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062BE0
 
 	thumb_func_start cph_IM_DIFFERENT
@@ -10841,7 +10841,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	adds r5, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r1, _08062CDC @ =gUnknown_839FD5D
+	ldr r1, _08062CDC @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10867,7 +10867,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062CDC: .4byte gUnknown_839FD5D
+_08062CDC: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end cph_IM_DIFFERENT
 
 	thumb_func_start sub_8062CE0
@@ -10881,7 +10881,7 @@ sub_8062CE0: @ 8062CE0
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062D94 @ =gUnknown_839FD5D
+	ldr r1, _08062D94 @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10897,7 +10897,7 @@ sub_8062CE0: @ 8062CE0
 	adds r1, r6, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl FieldObjectMoveDestCoords
+	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
 	bl sub_8064194
 	adds r2, r0, 0
@@ -10956,7 +10956,7 @@ _08062D7A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062D94: .4byte gUnknown_839FD5D
+_08062D94: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_8062CE0
 
 	thumb_func_start oac_hopping
@@ -10970,7 +10970,7 @@ oac_hopping: @ 8062D98
 	mov r8, r3
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r1, _08062E5C @ =gUnknown_839FD5D
+	ldr r1, _08062E5C @ =gInitialMovementTypeFacingDirections
 	ldrb r0, [r4, 0x6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -11052,7 +11052,7 @@ _08062E40:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062E5C: .4byte gUnknown_839FD5D
+_08062E5C: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end oac_hopping
 
 	thumb_func_start sub_8062E60
@@ -11064,14 +11064,14 @@ sub_8062E60: @ 8062E60
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _08062E7C @ =gMapObjects
+	ldr r2, _08062E7C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08062E80 @ =sub_8062E84
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062E7C: .4byte gMapObjects
+_08062E7C: .4byte gObjectEvents
 _08062E80: .4byte sub_8062E84
 	thumb_func_end sub_8062E60
 
@@ -11099,7 +11099,7 @@ mss_08062EA4: @ 8062EA4
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	ldr r2, _08062EC8 @ =gMapObjects
+	ldr r2, _08062EC8 @ =gObjectEvents
 	ldr r3, _08062ECC @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -11116,7 +11116,7 @@ _08062EC4:
 	movs r0, 0
 	b _08062EF8
 	.align 2, 0
-_08062EC8: .4byte gMapObjects
+_08062EC8: .4byte gObjectEvents
 _08062ECC: .4byte gPlayerAvatar
 _08062ED0:
 	ldr r5, _08062F00 @ =gUnknown_83A6390
@@ -11145,8 +11145,8 @@ _08062F00: .4byte gUnknown_83A6390
 _08062F04: .4byte MetatileBehavior_IsTallGrass
 	thumb_func_end mss_08062EA4
 
-	thumb_func_start FieldObjectCB_TreeDisguise
-FieldObjectCB_TreeDisguise: @ 8062F08
+	thumb_func_start ObjectEventCB_TreeDisguise
+ObjectEventCB_TreeDisguise: @ 8062F08
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x2E
@@ -11154,7 +11154,7 @@ FieldObjectCB_TreeDisguise: @ 8062F08
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08062F6C @ =gMapObjects
+	ldr r0, _08062F6C @ =gObjectEvents
 	adds r4, r1, r0
 	adds r6, r4, 0
 	adds r6, 0x21
@@ -11173,7 +11173,7 @@ _08062F30:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x1C
 	bl FieldEffectStart
 	strb r0, [r4, 0x1A]
@@ -11188,19 +11188,19 @@ _08062F50:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08062F6C @ =gMapObjects
+	ldr r1, _08062F6C @ =gObjectEvents
 	adds r0, r1
 	ldr r2, _08062F74 @ =sub_8062F78
 	adds r1, r5, 0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062F6C: .4byte gMapObjects
+_08062F6C: .4byte gObjectEvents
 _08062F70: .4byte gFieldEffectArguments
 _08062F74: .4byte sub_8062F78
-	thumb_func_end FieldObjectCB_TreeDisguise
+	thumb_func_end ObjectEventCB_TreeDisguise
 
 	thumb_func_start sub_8062F78
 sub_8062F78: @ 8062F78
@@ -11211,8 +11211,8 @@ sub_8062F78: @ 8062F78
 	bx r1
 	thumb_func_end sub_8062F78
 
-	thumb_func_start FieldObjectCB_MountainDisguise
-FieldObjectCB_MountainDisguise: @ 8062F84
+	thumb_func_start ObjectEventCB_MountainDisguise
+ObjectEventCB_MountainDisguise: @ 8062F84
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0x2E
@@ -11220,7 +11220,7 @@ FieldObjectCB_MountainDisguise: @ 8062F84
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08062FE8 @ =gMapObjects
+	ldr r0, _08062FE8 @ =gObjectEvents
 	adds r4, r1, r0
 	adds r6, r4, 0
 	adds r6, 0x21
@@ -11239,7 +11239,7 @@ _08062FAC:
 	adds r3, r1, 0
 	adds r3, 0x8
 	adds r0, r4, 0
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x1D
 	bl FieldEffectStart
 	strb r0, [r4, 0x1A]
@@ -11254,27 +11254,27 @@ _08062FCC:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08062FE8 @ =gMapObjects
+	ldr r1, _08062FE8 @ =gObjectEvents
 	adds r0, r1
 	ldr r2, _08062FF0 @ =sub_8062F78
 	adds r1, r5, 0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08062FE8: .4byte gMapObjects
+_08062FE8: .4byte gObjectEvents
 _08062FEC: .4byte gFieldEffectArguments
 _08062FF0: .4byte sub_8062F78
-	thumb_func_end FieldObjectCB_MountainDisguise
+	thumb_func_end ObjectEventCB_MountainDisguise
 
-	thumb_func_start FieldObjectCB_Hidden1
-FieldObjectCB_Hidden1: @ 8062FF4
+	thumb_func_start ObjectEventCB_Hidden1
+ObjectEventCB_Hidden1: @ 8062FF4
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r1, 0x3C
 	ldrsh r0, [r3, r1]
-	ldr r4, _08063050 @ =gMapObjects
+	ldr r4, _08063050 @ =gObjectEvents
 	cmp r0, 0
 	bne _08063034
 	movs r0, 0x2E
@@ -11311,14 +11311,14 @@ _08063034:
 	adds r0, r4
 	ldr r2, _08063054 @ =sub_8063058
 	adds r1, r3, 0
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063050: .4byte gMapObjects
+_08063050: .4byte gObjectEvents
 _08063054: .4byte sub_8063058
-	thumb_func_end FieldObjectCB_Hidden1
+	thumb_func_end ObjectEventCB_Hidden1
 
 	thumb_func_start sub_8063058
 sub_8063058: @ 8063058
@@ -11374,14 +11374,14 @@ sub_80630A0: @ 80630A0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080630BC @ =gMapObjects
+	ldr r2, _080630BC @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080630C0 @ =sub_80630C4
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080630BC: .4byte gMapObjects
+_080630BC: .4byte gObjectEvents
 _080630C0: .4byte sub_80630C4
 	thumb_func_end sub_80630A0
 
@@ -11436,14 +11436,14 @@ sub_8063110: @ 8063110
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806312C @ =gMapObjects
+	ldr r2, _0806312C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08063130 @ =sub_8063134
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806312C: .4byte gMapObjects
+_0806312C: .4byte gObjectEvents
 _08063130: .4byte sub_8063134
 	thumb_func_end sub_8063110
 
@@ -11498,14 +11498,14 @@ sub_8063180: @ 8063180
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806319C @ =gMapObjects
+	ldr r2, _0806319C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080631A0 @ =sub_80631A4
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806319C: .4byte gMapObjects
+_0806319C: .4byte gObjectEvents
 _080631A0: .4byte sub_80631A4
 	thumb_func_end sub_8063180
 
@@ -11560,14 +11560,14 @@ sub_80631F0: @ 80631F0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _0806320C @ =gMapObjects
+	ldr r2, _0806320C @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08063210 @ =sub_8063214
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806320C: .4byte gMapObjects
+_0806320C: .4byte gObjectEvents
 _08063210: .4byte sub_8063214
 	thumb_func_end sub_80631F0
 
@@ -11657,14 +11657,14 @@ sub_8063298: @ 8063298
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080632B4 @ =gMapObjects
+	ldr r2, _080632B4 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080632B8 @ =sub_8063304
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080632B4: .4byte gMapObjects
+_080632B4: .4byte gObjectEvents
 _080632B8: .4byte sub_8063304
 	thumb_func_end sub_8063298
 
@@ -11677,14 +11677,14 @@ sub_80632BC: @ 80632BC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080632D8 @ =gMapObjects
+	ldr r2, _080632D8 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _080632DC @ =sub_8063324
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080632D8: .4byte gMapObjects
+_080632D8: .4byte gObjectEvents
 _080632DC: .4byte sub_8063324
 	thumb_func_end sub_80632BC
 
@@ -11697,14 +11697,14 @@ sub_80632E0: @ 80632E0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, _080632FC @ =gMapObjects
+	ldr r2, _080632FC @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _08063300 @ =sub_8063344
-	bl FieldObjectStep
+	bl ObjectEventStep
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080632FC: .4byte gMapObjects
+_080632FC: .4byte gObjectEvents
 _08063300: .4byte sub_8063344
 	thumb_func_end sub_80632E0
 
@@ -11885,8 +11885,8 @@ npc_reset: @ 8063410
 	bx lr
 	thumb_func_end npc_reset
 
-	thumb_func_start FieldObjectDirectionToImageAnimId
-FieldObjectDirectionToImageAnimId: @ 8063430
+	thumb_func_start ObjectEventDirectionToImageAnimId
+ObjectEventDirectionToImageAnimId: @ 8063430
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806343C @ =gUnknown_83A640C
@@ -11895,7 +11895,7 @@ FieldObjectDirectionToImageAnimId: @ 8063430
 	bx lr
 	.align 2, 0
 _0806343C: .4byte gUnknown_83A640C
-	thumb_func_end FieldObjectDirectionToImageAnimId
+	thumb_func_end ObjectEventDirectionToImageAnimId
 
 	thumb_func_start get_go_image_anim_num
 get_go_image_anim_num: @ 8063440
@@ -12235,7 +12235,7 @@ SetTrainerMovementType: @ 8063610
 	adds r2, r4, 0
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r2, _08063658 @ =gUnknown_839FBC8
+	ldr r2, _08063658 @ =gMovementTypeCallbacks
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
@@ -12252,7 +12252,7 @@ SetTrainerMovementType: @ 8063610
 	bx r0
 	.align 2, 0
 _08063654: .4byte gSprites
-_08063658: .4byte gUnknown_839FBC8
+_08063658: .4byte gMovementTypeCallbacks
 	thumb_func_end SetTrainerMovementType
 
 	thumb_func_start GetTrainerFacingDirectionMovementType
@@ -12323,7 +12323,7 @@ npc_block_way: @ 80636AC
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl IsCoordOutsideFieldObjectMovementRect
+	bl IsCoordOutsideObjectEventMovementRect
 	lsls r0, 24
 	cmp r0, 0
 	beq _080636E2
@@ -12384,7 +12384,7 @@ _0806374C:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl CheckForCollisionBetweenFieldObjects
+	bl CheckForCollisionBetweenObjectEvents
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063760
@@ -12424,7 +12424,7 @@ sub_8063770: @ 8063770
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl IsCoordOutsideFieldObjectMovementRect
+	bl IsCoordOutsideObjectEventMovementRect
 	lsls r0, 24
 	lsrs r0, 24
 	negs r1, r0
@@ -12486,7 +12486,7 @@ _08063814:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl CheckForCollisionBetweenFieldObjects
+	bl CheckForCollisionBetweenObjectEvents
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806382C
@@ -12505,8 +12505,8 @@ _0806382C:
 	bx r1
 	thumb_func_end sub_8063770
 
-	thumb_func_start IsCoordOutsideFieldObjectMovementRect
-IsCoordOutsideFieldObjectMovementRect: @ 806383C
+	thumb_func_start IsCoordOutsideObjectEventMovementRect
+IsCoordOutsideObjectEventMovementRect: @ 806383C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 16
@@ -12567,7 +12567,7 @@ _080638A6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end IsCoordOutsideFieldObjectMovementRect
+	thumb_func_end IsCoordOutsideObjectEventMovementRect
 
 	thumb_func_start IsMetatileDirectionallyImpassable
 IsMetatileDirectionallyImpassable: @ 80638AC
@@ -12615,8 +12615,8 @@ _080638FE:
 	bx r1
 	thumb_func_end IsMetatileDirectionallyImpassable
 
-	thumb_func_start CheckForCollisionBetweenFieldObjects
-CheckForCollisionBetweenFieldObjects: @ 8063904
+	thumb_func_start CheckForCollisionBetweenObjectEvents
+CheckForCollisionBetweenObjectEvents: @ 8063904
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -12628,7 +12628,7 @@ _08063912:
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08063968 @ =gMapObjects
+	ldr r1, _08063968 @ =gObjectEvents
 	adds r2, r0, r1
 	ldrb r0, [r2]
 	lsls r0, 31
@@ -12669,7 +12669,7 @@ _0806394C:
 	movs r0, 0x1
 	b _08063978
 	.align 2, 0
-_08063968: .4byte gMapObjects
+_08063968: .4byte gObjectEvents
 _0806396C:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -12681,7 +12681,7 @@ _08063978:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end CheckForCollisionBetweenFieldObjects
+	thumb_func_end CheckForCollisionBetweenObjectEvents
 
 	thumb_func_start IsBerryTreeSparkling
 IsBerryTreeSparkling: @ 8063980
@@ -12694,12 +12694,12 @@ IsBerryTreeSparkling: @ 8063980
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080639CC
 	ldr r3, _080639C4 @ =gSprites
-	ldr r2, _080639C8 @ =gMapObjects
+	ldr r2, _080639C8 @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -12720,7 +12720,7 @@ IsBerryTreeSparkling: @ 8063980
 	b _080639CE
 	.align 2, 0
 _080639C4: .4byte gSprites
-_080639C8: .4byte gMapObjects
+_080639C8: .4byte gObjectEvents
 _080639CC:
 	movs r0, 0
 _080639CE:
@@ -12740,12 +12740,12 @@ sub_80639D4: @ 80639D4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063A12
 	ldr r3, _08063A18 @ =gSprites
-	ldr r2, _08063A1C @ =gMapObjects
+	ldr r2, _08063A1C @ =gObjectEvents
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -12767,7 +12767,7 @@ _08063A12:
 	bx r0
 	.align 2, 0
 _08063A18: .4byte gSprites
-_08063A1C: .4byte gMapObjects
+_08063A1C: .4byte gObjectEvents
 	thumb_func_end sub_80639D4
 
 	thumb_func_start MoveCoords
@@ -13039,8 +13039,8 @@ sub_8063BC4: @ 8063BC4
 	bx r0
 	thumb_func_end sub_8063BC4
 
-	thumb_func_start GetFieldObjectMovingCameraOffset
-GetFieldObjectMovingCameraOffset: @ 8063C10
+	thumb_func_start GetObjectEventMovingCameraOffset
+GetObjectEventMovingCameraOffset: @ 8063C10
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0
@@ -13077,10 +13077,10 @@ _08063C48:
 	bx r0
 	.align 2, 0
 _08063C4C: .4byte gUnknown_3005050
-	thumb_func_end GetFieldObjectMovingCameraOffset
+	thumb_func_end GetObjectEventMovingCameraOffset
 
-	thumb_func_start FieldObjectMoveDestCoords
-FieldObjectMoveDestCoords: @ 8063C50
+	thumb_func_start ObjectEventMoveDestCoords
+ObjectEventMoveDestCoords: @ 8063C50
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -13095,10 +13095,10 @@ FieldObjectMoveDestCoords: @ 8063C50
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectMoveDestCoords
+	thumb_func_end ObjectEventMoveDestCoords
 
-	thumb_func_start FieldObjectIsMovementOverridden
-FieldObjectIsMovementOverridden: @ 8063C70
+	thumb_func_start ObjectEventIsMovementOverridden
+ObjectEventIsMovementOverridden: @ 8063C70
 	push {lr}
 	ldrb r1, [r0]
 	movs r0, 0x42
@@ -13112,10 +13112,10 @@ _08063C80:
 _08063C82:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectIsMovementOverridden
+	thumb_func_end ObjectEventIsMovementOverridden
 
-	thumb_func_start FieldObjectIsSpecialAnimActive
-FieldObjectIsSpecialAnimActive: @ 8063C88
+	thumb_func_start ObjectEventIsSpecialAnimActive
+ObjectEventIsSpecialAnimActive: @ 8063C88
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13132,10 +13132,10 @@ _08063C9E:
 _08063CA0:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectIsSpecialAnimActive
+	thumb_func_end ObjectEventIsSpecialAnimActive
 
-	thumb_func_start FieldObjectSetHeldMovement
-FieldObjectSetHeldMovement: @ 8063CA4
+	thumb_func_start ObjectEventSetHeldMovement
+ObjectEventSetHeldMovement: @ 8063CA4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -13146,7 +13146,7 @@ FieldObjectSetHeldMovement: @ 8063CA4
 	cmp r0, 0x1
 	beq _08063CC8
 	adds r0, r4, 0
-	bl FieldObjectIsMovementOverridden
+	bl ObjectEventIsMovementOverridden
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063CCE
@@ -13154,7 +13154,7 @@ FieldObjectSetHeldMovement: @ 8063CA4
 	b _08063CF4
 _08063CC8:
 	adds r0, r4, 0
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl ObjectEventClearAnimIfSpecialAnimActive
 _08063CCE:
 	adds r0, r4, 0
 	bl npc_sync_anim_pause_bits
@@ -13180,25 +13180,25 @@ _08063CF4:
 	bx r1
 	.align 2, 0
 _08063CFC: .4byte gSprites
-	thumb_func_end FieldObjectSetHeldMovement
+	thumb_func_end ObjectEventSetHeldMovement
 
-	thumb_func_start FieldObjectForceSetSpecialAnim
-FieldObjectForceSetSpecialAnim: @ 8063D00
+	thumb_func_start ObjectEventForceSetSpecialAnim
+ObjectEventForceSetSpecialAnim: @ 8063D00
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl ObjectEventClearAnimIfSpecialAnimActive
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectForceSetSpecialAnim
+	thumb_func_end ObjectEventForceSetSpecialAnim
 
-	thumb_func_start FieldObjectClearAnimIfSpecialAnimActive
-FieldObjectClearAnimIfSpecialAnimActive: @ 8063D1C
+	thumb_func_start ObjectEventClearAnimIfSpecialAnimActive
+ObjectEventClearAnimIfSpecialAnimActive: @ 8063D1C
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13206,14 +13206,14 @@ FieldObjectClearAnimIfSpecialAnimActive: @ 8063D1C
 	cmp r0, 0
 	bge _08063D2E
 	adds r0, r1, 0
-	bl FieldObjectClearAnim
+	bl ObjectEventClearAnim
 _08063D2E:
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectClearAnimIfSpecialAnimActive
+	thumb_func_end ObjectEventClearAnimIfSpecialAnimActive
 
-	thumb_func_start FieldObjectClearAnim
-FieldObjectClearAnim: @ 8063D34
+	thumb_func_start ObjectEventClearAnim
+ObjectEventClearAnim: @ 8063D34
 	movs r1, 0xFF
 	strb r1, [r0, 0x1C]
 	ldrb r2, [r0]
@@ -13240,10 +13240,10 @@ FieldObjectClearAnim: @ 8063D34
 	bx lr
 	.align 2, 0
 _08063D64: .4byte gSprites
-	thumb_func_end FieldObjectClearAnim
+	thumb_func_end ObjectEventClearAnim
 
-	thumb_func_start FieldObjectCheckHeldMovementStatus
-FieldObjectCheckHeldMovementStatus: @ 8063D68
+	thumb_func_start ObjectEventCheckHeldMovementStatus
+ObjectEventCheckHeldMovementStatus: @ 8063D68
 	push {lr}
 	ldrb r1, [r0]
 	lsls r0, r1, 25
@@ -13256,13 +13256,13 @@ _08063D76:
 _08063D78:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectCheckHeldMovementStatus
+	thumb_func_end ObjectEventCheckHeldMovementStatus
 
-	thumb_func_start FieldObjectClearHeldMovementIfFinished
-FieldObjectClearHeldMovementIfFinished: @ 8063D7C
+	thumb_func_start ObjectEventClearHeldMovementIfFinished
+ObjectEventClearHeldMovementIfFinished: @ 8063D7C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl FieldObjectCheckHeldMovementStatus
+	bl ObjectEventCheckHeldMovementStatus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -13270,16 +13270,16 @@ FieldObjectClearHeldMovementIfFinished: @ 8063D7C
 	cmp r4, 0x10
 	beq _08063D96
 	adds r0, r5, 0
-	bl FieldObjectClearAnimIfSpecialAnimActive
+	bl ObjectEventClearAnimIfSpecialAnimActive
 _08063D96:
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectClearHeldMovementIfFinished
+	thumb_func_end ObjectEventClearHeldMovementIfFinished
 
-	thumb_func_start FieldObjectGetSpecialAnim
-FieldObjectGetSpecialAnim: @ 8063DA0
+	thumb_func_start ObjectEventGetSpecialAnim
+ObjectEventGetSpecialAnim: @ 8063DA0
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1]
@@ -13293,10 +13293,10 @@ _08063DB0:
 _08063DB2:
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectGetSpecialAnim
+	thumb_func_end ObjectEventGetSpecialAnim
 
-	thumb_func_start FieldObjectStep
-FieldObjectStep: @ 8063DB8
+	thumb_func_start ObjectEventStep
+ObjectEventStep: @ 8063DB8
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -13306,13 +13306,13 @@ FieldObjectStep: @ 8063DB8
 	adds r1, r5, 0
 	bl sub_80679C8
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimActive
+	bl ObjectEventIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063DE2
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectExecSpecialAnim
+	bl ObjectEventExecSpecialAnim
 	b _08063DF8
 _08063DE2:
 	ldrb r0, [r4, 0x1]
@@ -13341,11 +13341,11 @@ _08063DF8:
 	bl sub_80679F8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectUpdateSubpriority
+	bl ObjectEventUpdateSubpriority
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectStep
+	thumb_func_end ObjectEventStep
 
 	thumb_func_start sub_8063E28
 sub_8063E28: @ 8063E28
@@ -13357,7 +13357,7 @@ sub_8063E28: @ 8063E28
 	adds r1, r5, 0
 	bl sub_80679C8
 	adds r0, r4, 0
-	bl FieldObjectIsSpecialAnimActive
+	bl ObjectEventIsSpecialAnimActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063E5C
@@ -13410,7 +13410,7 @@ _08063E88:
 	bl sub_80679F8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectUpdateSubpriority
+	bl ObjectEventUpdateSubpriority
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14009,8 +14009,8 @@ _080642B4:
 _080642C4: .4byte gUnknown_83A655F
 	thumb_func_end GetStepInPlaceDelay4AnimId
 
-	thumb_func_start FieldObjectFaceOppositeDirection
-FieldObjectFaceOppositeDirection: @ 80642C8
+	thumb_func_start ObjectEventFaceOppositeDirection
+ObjectEventFaceOppositeDirection: @ 80642C8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r0, r1, 24
@@ -14023,13 +14023,13 @@ FieldObjectFaceOppositeDirection: @ 80642C8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetHeldMovement
+	bl ObjectEventSetHeldMovement
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end FieldObjectFaceOppositeDirection
+	thumb_func_end ObjectEventFaceOppositeDirection
 
 	thumb_func_start sub_80642F4
 sub_80642F4: @ 80642F4
@@ -14340,8 +14340,8 @@ _08064502:
 _08064508: .4byte gUnknown_83A65A9
 	thumb_func_end state_to_direction
 
-	thumb_func_start FieldObjectExecSpecialAnim
-FieldObjectExecSpecialAnim: @ 806450C
+	thumb_func_start ObjectEventExecSpecialAnim
+ObjectEventExecSpecialAnim: @ 806450C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, _08064540 @ =gUnknown_83A65BC
@@ -14369,7 +14369,7 @@ _08064538:
 	bx r0
 	.align 2, 0
 _08064540: .4byte gUnknown_83A65BC
-	thumb_func_end FieldObjectExecSpecialAnim
+	thumb_func_end ObjectEventExecSpecialAnim
 
 	thumb_func_start sub_8064544
 sub_8064544: @ 8064544
@@ -14477,7 +14477,7 @@ an_look_any: @ 80645F4
 	adds r5, r1, 0
 	lsls r1, r2, 24
 	lsrs r1, 24
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r4, 0
 	bl npc_coords_shift_still
 	ldrb r0, [r4, 0x18]
@@ -14568,7 +14568,7 @@ sub_8064678: @ 8064678
 	strh r0, [r5]
 	mov r0, r8
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r4, 0
 	mov r1, sp
 	adds r2, r5, 0
@@ -14731,7 +14731,7 @@ sub_80647C0: @ 80647C0
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
@@ -14842,7 +14842,7 @@ sub_8064894: @ 8064894
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
@@ -15249,7 +15249,7 @@ sub_8064B68: @ 8064B68
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
@@ -15675,7 +15675,7 @@ sub_8064E3C: @ 8064E3C
 	strh r0, [r6]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	mov r1, r8
 	lsls r0, r1, 1
 	add r0, sp
@@ -15947,7 +15947,7 @@ _08065072:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -16468,7 +16468,7 @@ sub_80653F8: @ 80653F8
 	cmp r0, 0x1
 	beq _0806541A
 	movs r0, 0x1
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16526,7 +16526,7 @@ sub_8065464: @ 8065464
 	cmp r0, 0x2
 	beq _08065486
 	movs r0, 0x2
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16584,7 +16584,7 @@ sub_80654D0: @ 80654D0
 	cmp r0, 0x3
 	beq _080654F2
 	movs r0, 0x3
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16642,7 +16642,7 @@ sub_806553C: @ 806553C
 	cmp r0, 0x4
 	beq _0806555E
 	movs r0, 0x4
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16696,7 +16696,7 @@ sub_80655A8: @ 80655A8
 	adds r5, r1, 0
 	lsls r1, r2, 24
 	lsrs r1, 24
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r4, 0
 	bl npc_coords_shift_still
 	adds r2, r5, 0
@@ -16724,7 +16724,7 @@ sub_80655D4: @ 80655D4
 	cmp r0, 0x1
 	beq _080655F6
 	movs r0, 0x1
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16754,7 +16754,7 @@ sub_8065610: @ 8065610
 	cmp r0, 0x2
 	beq _08065632
 	movs r0, 0x2
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16784,7 +16784,7 @@ sub_806564C: @ 806564C
 	cmp r0, 0x3
 	beq _0806566E
 	movs r0, 0x3
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16814,7 +16814,7 @@ sub_8065688: @ 8065688
 	cmp r0, 0x4
 	beq _080656AA
 	movs r0, 0x4
-	bl FieldObjectDirectionToImageAnimId
+	bl ObjectEventDirectionToImageAnimId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -16849,7 +16849,7 @@ sub_80656C4: @ 80656C4
 	lsrs r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	mov r0, r8
 	adds r1, r6, 0
 	adds r2, r4, 0
@@ -18002,7 +18002,7 @@ sub_8065EF0: @ 8065EF0
 	strh r0, [r4]
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r5, 0
 	mov r1, sp
 	adds r2, r4, 0
@@ -18258,7 +18258,7 @@ npc_set_direction_and_anim__an_proceed: @ 80660C4
 	bl obj_anim_image_set_and_seek
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	movs r0, 0x1
 	strh r0, [r5, 0x32]
 	pop {r4-r6}
@@ -18653,7 +18653,7 @@ sub_806637C: @ 806637C
 	movs r1, 0
 	movs r2, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _080663C6
@@ -18661,7 +18661,7 @@ sub_806637C: @ 806637C
 	ldrsh r0, [r5, r1]
 	movs r2, 0x12
 	ldrsh r1, [r5, r2]
-	ldr r4, _080663D4 @ =gMapObjects
+	ldr r4, _080663D4 @ =gObjectEvents
 	mov r2, sp
 	ldrb r2, [r2]
 	lsls r3, r2, 3
@@ -18687,7 +18687,7 @@ _080663C6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080663D4: .4byte gMapObjects
+_080663D4: .4byte gObjectEvents
 	thumb_func_end sub_806637C
 
 	thumb_func_start sub_80663D8
@@ -18700,7 +18700,7 @@ sub_80663D8: @ 80663D8
 	movs r1, 0
 	movs r2, 0
 	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
+	bl TryGetObjectEventIdByLocalIdAndMap
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806642A
@@ -18708,7 +18708,7 @@ sub_80663D8: @ 80663D8
 	ldrsh r0, [r5, r1]
 	movs r2, 0x12
 	ldrsh r1, [r5, r2]
-	ldr r4, _08066438 @ =gMapObjects
+	ldr r4, _08066438 @ =gObjectEvents
 	mov r2, sp
 	ldrb r2, [r2]
 	lsls r3, r2, 3
@@ -18737,7 +18737,7 @@ _0806642A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066438: .4byte gMapObjects
+_08066438: .4byte gObjectEvents
 	thumb_func_end sub_80663D8
 
 	thumb_func_start sub_806643C
@@ -19354,7 +19354,7 @@ _08066874:
 	thumb_func_start sub_806687C
 sub_806687C: @ 806687C
 	push {lr}
-	ldr r3, _08066890 @ =gUnknown_839FD5D
+	ldr r3, _08066890 @ =gInitialMovementTypeFacingDirections
 	ldrb r2, [r0, 0x6]
 	adds r2, r3
 	ldrb r2, [r2]
@@ -19363,7 +19363,7 @@ sub_806687C: @ 806687C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08066890: .4byte gUnknown_839FD5D
+_08066890: .4byte gInitialMovementTypeFacingDirections
 	thumb_func_end sub_806687C
 
 	thumb_func_start sub_8066894
@@ -19417,7 +19417,7 @@ sub_80668D4: @ 80668D4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldrb r1, [r0, 0xC]
 	lsls r1, 25
 	lsrs r1, 31
@@ -19466,7 +19466,7 @@ do_exclamation_mark_bubble_1: @ 8066920
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0
 	bl FieldEffectStart
 	movs r0, 0x1
@@ -19486,7 +19486,7 @@ do_exclamation_mark_bubble_2: @ 8066944
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x21
 	bl FieldEffectStart
 	movs r0, 0x1
@@ -19506,7 +19506,7 @@ do_heart_bubble: @ 8066968
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x2E
 	bl FieldEffectStart
 	movs r0, 0x1
@@ -19526,7 +19526,7 @@ sub_806698C: @ 806698C
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x42
 	bl FieldEffectStart
 	movs r0, 0x1
@@ -19546,7 +19546,7 @@ sub_80669B0: @ 80669B0
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
-	bl FieldObjectGetLocalIdAndMap
+	bl ObjectEventGetLocalIdAndMap
 	movs r0, 0x40
 	bl FieldEffectStart
 	movs r0, 0x1
@@ -19643,7 +19643,7 @@ sub_8066A54: @ 8066A54
 	beq _08066A70
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _08066A70:
@@ -19669,7 +19669,7 @@ sub_8066A78: @ 8066A78
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066AAA
@@ -19713,7 +19713,7 @@ sub_8066AD0: @ 8066AD0
 	beq _08066AEC
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl SetFieldObjectStepTimer
+	bl SetObjectEventStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _08066AEC:
@@ -19739,7 +19739,7 @@ sub_8066AF4: @ 8066AF4
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl RunFieldObjectStepTimer
+	bl RunObjectEventStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066B26
@@ -19943,7 +19943,7 @@ sub_8066C70: @ 8066C70
 	lsls r4, r2, 24
 	lsrs r4, 24
 	adds r1, r4, 0
-	bl FieldObjectSetDirection
+	bl ObjectEventSetDirection
 	adds r0, r5, 0
 	bl npc_coords_shift_still
 	adds r0, r4, 0
@@ -21913,7 +21913,7 @@ sub_8067A10: @ 8067A10
 	ands r0, r1
 	strb r0, [r5, 0x1]
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r0, 0x3E

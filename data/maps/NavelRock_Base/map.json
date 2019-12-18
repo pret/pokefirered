@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_LUGIA",
+      "graphics_id": "OBJECT_EVENT_GFX_LUGIA",
       "x": 10,
       "y": 15,
       "elevation": 3,

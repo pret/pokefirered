@@ -24,7 +24,7 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/vars.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 
 static EWRAM_DATA u16 sSpecialVar_0x8004_Copy = 0;
 
@@ -389,7 +389,7 @@ void ChooseNextBattleTowerTrainer(void)
 
 static void SetBattleTowerTrainerGfxId(u8 trainerClass)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_YOUNGSTER);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_YOUNGSTER);
 }
 
 void SetEReaderTrainerGfxId(void)

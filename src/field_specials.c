@@ -19,7 +19,7 @@
 #include "battle_tower.h"
 #include "field_camera.h"
 #include "field_effect.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "menu_indicators.h"
 #include "random.h"
 #include "mail_data.h"
@@ -41,7 +41,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 #include "constants/maps.h"
 #include "constants/region_map.h"
 #include "constants/moves.h"
@@ -314,15 +314,15 @@ void Special_AnimatePcTurnOff()
 
 void SpawnCameraObject(void)
 {
-    u8 mapObjectId = SpawnSpecialFieldObjectParameterized(MAP_OBJ_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
-    gMapObjects[mapObjectId].mapobj_bit_13 = TRUE;
-    CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
+    u8 objectEventId = SpawnSpecialObjectEventParameterized(OBJECT_EVENT_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    gObjectEvents[objectEventId].mapobj_bit_13 = TRUE;
+    CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
 
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveFieldObjectByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 void Special_BufferEReaderTrainerName5(void)
@@ -1499,7 +1499,7 @@ void Special_SetSeenMon(void)
 
 void sub_80CBDE8(void)
 {
-    gSelectedEventObject = 0;
+    gSelectedObjectEvent = 0;
     gSpecialVar_TextColor = 0xFF;
 }
 
@@ -1508,13 +1508,13 @@ u8 ContextNpcGetTextColor(void)
     u8 gfxId;
     if (gSpecialVar_TextColor != 0xFF)
         return gSpecialVar_TextColor;
-    else if (gSelectedEventObject == 0)
+    else if (gSelectedObjectEvent == 0)
         return 3;
     else
     {
-        gfxId = gMapObjects[gSelectedEventObject].graphicsId;
-        if (gfxId >= MAP_OBJ_GFX_VAR_0)
-            gfxId = VarGetFieldObjectGraphicsId(gfxId - MAP_OBJ_GFX_VAR_0);
+        gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
+        if (gfxId >= OBJECT_EVENT_GFX_VAR_0)
+            gfxId = VarGetObjectEventGraphicsId(gfxId - OBJECT_EVENT_GFX_VAR_0);
         return GetColorFromTextColorTable(gfxId);
     }
 }
@@ -2359,7 +2359,7 @@ static void MoveDeoxysObject(u8 num)
     u8 mapObjId;
     LoadPalette(sDeoxysObjectPals[num], 0x1A0, 0x08);
     sub_8083598(10);
-    TryGetFieldObjectIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
+    TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
         PlaySE(SE_W109);
     else

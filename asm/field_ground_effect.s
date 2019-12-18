@@ -10,7 +10,7 @@ GetAllGroundEffectFlags_OnSpawn: @ 8067B34
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl FieldObjectUpdateMetatileBehaviors
+	bl ObjectEventUpdateMetatileBehaviors
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl GetGroundEffectFlags_Reflection
@@ -42,7 +42,7 @@ GetAllGroundEffectFlags_OnBeginStep: @ 8067B7C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl FieldObjectUpdateMetatileBehaviors
+	bl ObjectEventUpdateMetatileBehaviors
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl GetGroundEffectFlags_Reflection
@@ -80,7 +80,7 @@ GetAllGroundEffectFlags_OnFinishStep: @ 8067BD4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl FieldObjectUpdateMetatileBehaviors
+	bl ObjectEventUpdateMetatileBehaviors
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl GetGroundEffectFlags_ShallowFlowingWater
@@ -110,8 +110,8 @@ GetAllGroundEffectFlags_OnFinishStep: @ 8067BD4
 	bx r0
 	thumb_func_end GetAllGroundEffectFlags_OnFinishStep
 
-	thumb_func_start FieldObjectUpdateMetatileBehaviors
-FieldObjectUpdateMetatileBehaviors: @ 8067C24
+	thumb_func_start ObjectEventUpdateMetatileBehaviors
+ObjectEventUpdateMetatileBehaviors: @ 8067C24
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x14
@@ -129,7 +129,7 @@ FieldObjectUpdateMetatileBehaviors: @ 8067C24
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectUpdateMetatileBehaviors
+	thumb_func_end ObjectEventUpdateMetatileBehaviors
 
 	thumb_func_start GetGroundEffectFlags_Reflection
 GetGroundEffectFlags_Reflection: @ 8067C4C
@@ -602,7 +602,7 @@ sub_8067F88: @ 8067F88
 	push {r5-r7}
 	adds r5, r0, 0
 	ldrb r0, [r5, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	movs r4, 0
 	movs r0, 0x1
 	mov r10, r0
@@ -828,8 +828,8 @@ _0806814E:
 	bx r1
 	thumb_func_end GetLedgeJumpDirection
 
-	thumb_func_start FieldObjectSetSpriteOamTableForLongGrass
-FieldObjectSetSpriteOamTableForLongGrass: @ 8068154
+	thumb_func_start ObjectEventSetSpriteOamTableForLongGrass
+ObjectEventSetSpriteOamTableForLongGrass: @ 8068154
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -873,7 +873,7 @@ _080681A8:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectSetSpriteOamTableForLongGrass
+	thumb_func_end ObjectEventSetSpriteOamTableForLongGrass
 
 	thumb_func_start IsZCoordMismatchAt
 IsZCoordMismatchAt: @ 80681B0
@@ -910,8 +910,8 @@ _080681E4:
 	bx r1
 	thumb_func_end IsZCoordMismatchAt
 
-	thumb_func_start FieldObjectUpdateZCoordAndPriority
-FieldObjectUpdateZCoordAndPriority: @ 80681EC
+	thumb_func_start ObjectEventUpdateZCoordAndPriority
+ObjectEventUpdateZCoordAndPriority: @ 80681EC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -920,7 +920,7 @@ FieldObjectUpdateZCoordAndPriority: @ 80681EC
 	cmp r0, 0
 	blt _0806823A
 	adds r0, r4, 0
-	bl FieldObjectUpdateZCoord
+	bl ObjectEventUpdateZCoord
 	ldr r1, _08068240 @ =gUnknown_83A708C
 	ldrb r2, [r4, 0xB]
 	lsls r2, 24
@@ -957,7 +957,7 @@ _0806823A:
 	.align 2, 0
 _08068240: .4byte gUnknown_83A708C
 _08068244: .4byte gUnknown_83A707C
-	thumb_func_end FieldObjectUpdateZCoordAndPriority
+	thumb_func_end ObjectEventUpdateZCoordAndPriority
 
 	thumb_func_start InitObjectPriorityByZCoord
 InitObjectPriorityByZCoord: @ 8068248
@@ -1012,8 +1012,8 @@ ZCoordToPriority: @ 8068294
 _080682A0: .4byte gUnknown_83A707C
 	thumb_func_end ZCoordToPriority
 
-	thumb_func_start FieldObjectUpdateZCoord
-FieldObjectUpdateZCoord: @ 80682A4
+	thumb_func_start ObjectEventUpdateZCoord
+ObjectEventUpdateZCoord: @ 80682A4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x10
@@ -1055,7 +1055,7 @@ _080682F2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectUpdateZCoord
+	thumb_func_end ObjectEventUpdateZCoord
 
 	thumb_func_start SetObjectSubpriorityByZCoord
 SetObjectSubpriorityByZCoord: @ 80682F8
@@ -1096,8 +1096,8 @@ _08068338: .4byte gSpriteCoordOffsetY
 _0806833C: .4byte gUnknown_83A706C
 	thumb_func_end SetObjectSubpriorityByZCoord
 
-	thumb_func_start FieldObjectUpdateSubpriority
-FieldObjectUpdateSubpriority: @ 8068340
+	thumb_func_start ObjectEventUpdateSubpriority
+ObjectEventUpdateSubpriority: @ 8068340
 	push {lr}
 	adds r2, r0, 0
 	ldrb r0, [r2, 0x3]
@@ -1111,7 +1111,7 @@ FieldObjectUpdateSubpriority: @ 8068340
 _08068356:
 	pop {r0}
 	bx r0
-	thumb_func_end FieldObjectUpdateSubpriority
+	thumb_func_end ObjectEventUpdateSubpriority
 
 	thumb_func_start AreZCoordsCompatible
 AreZCoordsCompatible: @ 806835C
@@ -1330,7 +1330,7 @@ GroundEffect_SandTracks: @ 80684D4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldr r1, _080684FC @ =gUnknown_83A709C
 	ldrb r0, [r0, 0xD]
 	lsls r0, 2
@@ -1353,7 +1353,7 @@ GroundEffect_DeepSandTracks: @ 8068500
 	adds r4, r0, 0
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x5]
-	bl GetFieldObjectGraphicsInfo
+	bl GetObjectEventGraphicsInfo
 	ldr r1, _08068528 @ =gUnknown_83A709C
 	ldrb r0, [r0, 0xD]
 	lsls r0, 2
@@ -1781,13 +1781,13 @@ DoGroundEffects_OnSpawn: @ 80687F0
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
-	bl FieldObjectUpdateZCoordAndPriority
+	bl ObjectEventUpdateZCoordAndPriority
 	adds r0, r4, 0
 	mov r1, sp
 	bl GetAllGroundEffectFlags_OnSpawn
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectSetSpriteOamTableForLongGrass
+	bl ObjectEventSetSpriteOamTableForLongGrass
 	ldr r2, [sp]
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -1820,13 +1820,13 @@ DoGroundEffects_OnBeginStep: @ 806883C
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
-	bl FieldObjectUpdateZCoordAndPriority
+	bl ObjectEventUpdateZCoordAndPriority
 	adds r0, r4, 0
 	mov r1, sp
 	bl GetAllGroundEffectFlags_OnBeginStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectSetSpriteOamTableForLongGrass
+	bl ObjectEventSetSpriteOamTableForLongGrass
 	adds r0, r4, 0
 	mov r1, sp
 	bl filters_out_some_ground_effects
@@ -1862,13 +1862,13 @@ DoGroundEffects_OnFinishStep: @ 8068890
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
-	bl FieldObjectUpdateZCoordAndPriority
+	bl ObjectEventUpdateZCoordAndPriority
 	adds r0, r4, 0
 	mov r1, sp
 	bl GetAllGroundEffectFlags_OnFinishStep
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl FieldObjectSetSpriteOamTableForLongGrass
+	bl ObjectEventSetSpriteOamTableForLongGrass
 	adds r0, r4, 0
 	mov r1, sp
 	bl FilterOutStepOnPuddleGroundEffectIfJumping

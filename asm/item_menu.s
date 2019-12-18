@@ -5845,7 +5845,7 @@ _0810AD1E:
 	cmp r6, 0x1
 	bne _0810AD90
 	bl ScriptContext2_Enable
-	bl FreezeEventObjects
+	bl FreezeObjectEvents
 	bl sub_805C270
 	bl sub_805C780
 	ldr r2, _0810AD88 @ =gSpecialVar_ItemId

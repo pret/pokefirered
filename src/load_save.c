@@ -174,32 +174,32 @@ void LoadPlayerParty(void)
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
 }
 
-void SaveMapObjects(void)
+void SaveObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < NUM_FIELD_OBJECTS; i++)
-        gSaveBlock1Ptr->mapObjects[i] = gMapObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
 }
 
-void LoadMapObjects(void)
+void LoadObjectEvents(void)
 {
     int i;
 
-    for (i = 0; i < NUM_FIELD_OBJECTS; i++)
-        gMapObjects[i] = gSaveBlock1Ptr->mapObjects[i];
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
 }
 
 void SaveSerializedGame(void)
 {
     SavePlayerParty();
-    SaveMapObjects();
+    SaveObjectEvents();
 }
 
 void LoadSerializedGame(void)
 {
     LoadPlayerParty();
-    LoadMapObjects();
+    LoadObjectEvents();
 }
 
 void LoadPlayerBag(void)

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_2",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_2",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
       "x": 11,
       "y": 6,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 5,
       "elevation": 3,

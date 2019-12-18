@@ -15,7 +15,7 @@
 #include "item_menu.h"
 #include "item.h"
 #include "menu_indicators.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "random.h"
 #include "text.h"
 #include "constants/songs.h"
@@ -112,11 +112,11 @@ static void TeachyTvGrassAnimationObjCallback(struct Sprite *sprite);
 static void TeachyTvRestorePlayerPartyCallback(void);
 static void TeachyTvPreBattleAnimAndSetBattleCallback(u8 taskId);
 static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u16 size);
-static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
+static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset);
 static void TeachyTvComputeMapTilesFromTilesetAndMetaTiles(u16 *metaTilesArray, u8 *blockBuf, u8 *tileset);
 static void TeachyTvComputeSingleMapTileBlockFromTilesetAndMetaTiles(u8 *blockBuf, u8 *tileset, u8 metaTile);
 static u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16 metaTile);
-static void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 *palIndexArray);
+static void TeachyTvLoadMapPalette(const struct MapLayout * mStruct, const u8 *palIndexArray);
 
 static const struct BgTemplate sBgTemplates[] = 
 {
@@ -619,7 +619,7 @@ static void TeachyTvInitIo(void)
 
 static u8 TeachyTvSetupObjEventAndOam(void)
 {
-    u8 objId = AddPseudoEventObject(90, SpriteCallbackDummy, 0, 0, 8);
+    u8 objId = AddPseudoObjectEvent(90, SpriteCallbackDummy, 0, 0, 8);
     gSprites[objId].oam.priority = 2;
     gSprites[objId].invisible = 1;
     return objId;
@@ -1125,7 +1125,7 @@ static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, 
 
     if (sResources->grassAnimDisabled != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
     {
-        spriteId = CreateSprite(gUnknown_83A0010[4], 0, 0, subpriority);
+        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[4], 0, 0, subpriority);
         obj = &gSprites[spriteId];
         obj->pos2.x = x;
         obj->pos2.y = y + 8;
@@ -1240,7 +1240,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     void * tilesetsBuffer;
     void * palIndicesBuffer;
     u16 numMapTilesRows = 0;
-    const struct MapData *layout = &Route1_Layout;
+    const struct MapLayout *layout = &Route1_Layout;
     u16 * blockIndicesBuffer = AllocZeroed(0x800);
     tilesetsBuffer = AllocZeroed(0x8000);
     palIndicesBuffer = Alloc(16);
@@ -1307,7 +1307,7 @@ static void TeachyTvLoadMapTilesetToBuffer(struct Tileset *ts, u8 *dstBuffer, u1
     }
 }
 
-static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapData *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
+static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mStruct, u16 *buf1, u8 *palIndexArray, u16 mapEntry, u16 offset)
 {
     u16 * metaTileEntryAddr = mapEntry <= 0x27F ? &((u16*)(mStruct->primaryTileset->metatiles))[8 * mapEntry] : &((u16*)(mStruct->secondaryTileset->metatiles))[8 * (mapEntry - 0x280)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
@@ -1397,7 +1397,7 @@ static u16 TeachyTvComputePalIndexArrayEntryByMetaTile(u8 *palIndexArrayBuf, u16
     return (0xF - i);
 }
 
-static void TeachyTvLoadMapPalette(const struct MapData * mStruct, const u8 * palIndexArray)
+static void TeachyTvLoadMapPalette(const struct MapLayout * mStruct, const u8 * palIndexArray)
 {
     u8 i;
     const struct Tileset * ts;

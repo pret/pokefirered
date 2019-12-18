@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 14,
       "y": 10,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 20,
       "y": 17,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 61,
       "y": 16,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 26,
       "y": 7,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 26,
       "y": 1,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BUG_CATCHER",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 49,
       "y": 7,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 53,
       "y": 2,
       "elevation": 3,
@@ -116,7 +116,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 60,
       "y": 9,
       "elevation": 3,
@@ -129,7 +129,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 36,
       "y": 6,
       "elevation": 3,
@@ -142,7 +142,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
+      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
       "x": 2,
       "y": 8,
       "elevation": 3,
@@ -155,7 +155,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 17,
       "elevation": 3,
@@ -168,7 +168,7 @@
       "flag": "FLAG_HIDE_ROUTE9_TM40"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 65,
       "y": 17,
       "elevation": 3,

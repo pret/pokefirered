@@ -23,8 +23,8 @@
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "new_menu_helpers.h"
-#include "map_obj_80688E4.h"
-#include "map_obj_lock.h"
+#include "event_object_80688E4.h"
+#include "event_object_lock.h"
 #include "script.h"
 #include "sound.h"
 #include "quest_log.h"
@@ -392,7 +392,7 @@ void ShowStartMenu(void)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        FreezeEventObjects();
+        FreezeObjectEvents();
         sub_805C270();
         sub_805C780();
     }

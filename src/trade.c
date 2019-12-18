@@ -142,7 +142,7 @@ static u32 sub_804FA14(struct Pokemon * party, int partyCount, int cursorPos);
 static const size_t gUnknown_8260814[] = {
     sizeof(struct SaveBlock2),
     sizeof(struct SaveBlock1),
-    sizeof(struct MapData),
+    sizeof(struct MapLayout),
     0x530, // unk
     0x34, // unk
     sizeof(struct MailStruct),

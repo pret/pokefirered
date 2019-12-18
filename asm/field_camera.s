@@ -939,7 +939,7 @@ _0805AC54:
 	bl CameraMove
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl UpdateFieldObjectsForCameraUpdate
+	bl UpdateObjectEventsForCameraUpdate
 	ldr r6, _0805ACA8 @ =gUnknown_3000E90
 	lsls r4, 1
 	lsls r5, 1
@@ -987,7 +987,7 @@ sub_805ACB4: @ 805ACB4
 	asrs r0, 16
 	lsls r1, r5, 16
 	asrs r1, 16
-	bl UpdateFieldObjectsForCameraUpdate
+	bl UpdateObjectEventsForCameraUpdate
 	bl DrawWholeMapView
 	ldr r1, _0805ACE8 @ =gUnknown_300506C
 	lsls r4, 4

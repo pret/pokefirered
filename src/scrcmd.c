@@ -16,9 +16,8 @@
 #include "field_player_avatar.h"
 #include "sound.h"
 #include "script_movement.h"
-#include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
-#include "map_obj_lock.h"
+#include "event_object_movement.h"
+#include "event_object_lock.h"
 #include "field_message_box.h"
 #include "new_menu_helpers.h"
 #include "window.h"
@@ -60,7 +59,7 @@ static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 struct ScriptContext * gUnknown_3005070;
 
-extern u8 gSelectedEventObject;
+extern u8 gSelectedObjectEvent;
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1048,7 +1047,7 @@ bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    RemoveFieldObjectByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 
@@ -1058,7 +1057,7 @@ bool8 ScrCmd_removeobject_at(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    RemoveFieldObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
+    RemoveObjectEventByLocalIdAndMap(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1151,9 +1150,9 @@ bool8 ScrCmd_resetobjectpriority(struct ScriptContext *ctx)
 
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
-    if (gMapObjects[gSelectedEventObject].active)
+    if (gObjectEvents[gSelectedObjectEvent].active)
     {
-        FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedEventObject],
+        ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent],
                                          GetPlayerFacingDirection());
     }
     return FALSE;
@@ -1164,7 +1163,7 @@ bool8 ScrCmd_turnobject(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 direction = ScriptReadByte(ctx);
 
-    FieldObjectTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
+    ObjectEventTurnByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, direction);
     return FALSE;
 }
 
@@ -1207,7 +1206,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     }
     else
     {
-        ScriptFreezeMapObjects();
+        ScriptFreezeObjectEvents();
         SetupNativeScript(ctx, sub_8069590);
         return TRUE;
     }
@@ -1221,14 +1220,14 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
     }
     else
     {
-        if (gMapObjects[gSelectedEventObject].active)
+        if (gObjectEvents[gSelectedObjectEvent].active)
         {
-            LockSelectedMapObject();
+            LockSelectedObjectEvent();
             SetupNativeScript(ctx, sub_8069648);
         }
         else
         {
-            ScriptFreezeMapObjects();
+            ScriptFreezeObjectEvents();
             SetupNativeScript(ctx, sub_8069590);
         }
         return TRUE;
@@ -1240,10 +1239,10 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     u8 playerObjectId;
 
     HideFieldMessageBox();
-    playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearHeldMovementIfFinished(&gMapObjects[playerObjectId]);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     sub_80974D8();
-    UnfreezeMapObjects();
+    UnfreezeObjectEvents();
     return FALSE;
 }
 
@@ -1252,12 +1251,12 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     u8 playerObjectId;
 
     HideFieldMessageBox();
-    if (gMapObjects[gSelectedEventObject].active)
-        FieldObjectClearHeldMovementIfFinished(&gMapObjects[gSelectedEventObject]);
-    playerObjectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearHeldMovementIfFinished(&gMapObjects[playerObjectId]);
+    if (gObjectEvents[gSelectedObjectEvent].active)
+        ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     sub_80974D8();
-    UnfreezeMapObjects();
+    UnfreezeObjectEvents();
     return FALSE;
 }
 

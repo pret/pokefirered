@@ -10,7 +10,7 @@ struct UnkPlayerStruct
     u8 player_field_1;
 };
 
-struct LinkPlayerMapObject
+struct LinkPlayerObjectEvent
 {
     u8 active;
     u8 linkPlayerId;
@@ -32,7 +32,7 @@ struct CreditsOverworldCmd
 
 extern struct UCoords32 gDirectionToVectors[];
 
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern MainCallback gFieldCallback;
 
 extern struct WarpData gUnknown_2031DB4;
@@ -73,7 +73,7 @@ bool32 IsUpdateLinkStateCBActive(void);
 
 void strange_npc_table_clear(void);
 const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16, u16);
-void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
+void ObjectEventMoveDestCoords(struct ObjectEvent *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void CB2_ReturnToField(void);
 bool32 sub_8087598(void);
@@ -99,11 +99,11 @@ void Overworld_PlaySpecialMapMusic(void);
 
 u8 GetCurrentRegionMapSectionId(void);
 
-void SetCurrentMapLayout(u16 mapDataId);
+void SetCurrentMapLayout(u16 mapLayoutId);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 
 void ResetInitialPlayerAvatarState(void);
-void sub_8055D40(u16 mapDataId);
+void sub_8055D40(u16 mapLayoutId);
 void CleanupOverworldWindowsAndTilemaps(void);
 u32 ComputeWhiteOutMoneyLoss(void);
 

@@ -194,8 +194,8 @@ static void _InitPrimaryTilesetAnimation(void)
     sPrimaryTilesetAnimCounter = 0;
     sPrimaryTilesetAnimCounterMax = 0;
     sPrimaryTilesetAnimCallback = NULL;
-    if (gMapHeader.mapData->primaryTileset && gMapHeader.mapData->primaryTileset->callback)
-        gMapHeader.mapData->primaryTileset->callback();
+    if (gMapHeader.mapLayout->primaryTileset && gMapHeader.mapLayout->primaryTileset->callback)
+        gMapHeader.mapLayout->primaryTileset->callback();
 }
 
 static void _InitSecondaryTilesetAnimation(void)
@@ -203,8 +203,8 @@ static void _InitSecondaryTilesetAnimation(void)
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 0;
     sSecondaryTilesetAnimCallback = NULL;
-    if (gMapHeader.mapData->secondaryTileset && gMapHeader.mapData->secondaryTileset->callback)
-        gMapHeader.mapData->secondaryTileset->callback();
+    if (gMapHeader.mapLayout->secondaryTileset && gMapHeader.mapLayout->secondaryTileset->callback)
+        gMapHeader.mapLayout->secondaryTileset->callback();
 }
 
 static void sub_80700A4(u16 timer)

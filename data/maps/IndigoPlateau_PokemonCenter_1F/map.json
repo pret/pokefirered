@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_CLERK",
+      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
       "x": 0,
       "y": 7,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_NURSE",
+      "graphics_id": "OBJECT_EVENT_GFX_NURSE",
       "x": 13,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_GYM_GUY",
+      "graphics_id": "OBJECT_EVENT_GFX_GYM_GUY",
       "x": 7,
       "y": 14,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_F",
       "x": 5,
       "y": 3,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BLACKBELT",
+      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
       "x": 23,
       "y": 13,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_M",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
       "x": 16,
       "y": 15,
       "elevation": 3,

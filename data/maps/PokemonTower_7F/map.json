@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_MR_FUJI",
+      "graphics_id": "OBJECT_EVENT_GFX_MR_FUJI",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "FLAG_HIDE_TOWER_FUJI"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 9,
       "y": 10,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "FLAG_HIDE_TOWER_ROCKET_1"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 13,
       "y": 8,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "FLAG_HIDE_TOWER_ROCKET_2"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 9,
       "y": 6,
       "elevation": 3,

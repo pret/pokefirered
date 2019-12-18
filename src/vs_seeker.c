@@ -3,13 +3,13 @@
 #include "sound.h"
 #include "task.h"
 #include "malloc.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "new_menu_helpers.h"
 #include "item_use.h"
 #include "event_scripts.h"
 #include "event_data.h"
 #include "script.h"
-#include "map_obj_lock.h"
+#include "event_object_lock.h"
 #include "field_specials.h"
 #include "item_menu.h"
 #include "field_effect.h"
@@ -17,14 +17,14 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "random.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "map_obj_80688E4.h"
-#include "map_obj_8097404.h"
+#include "event_object_80688E4.h"
+#include "event_object_8097404.h"
 #include "unk_810c3a4.h"
 #include "vs_seeker.h"
 #include "constants/movement_commands.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
 
@@ -48,7 +48,7 @@ struct VsSeekerTrainerInfo
     const u8 *script;
     u16 trainerIdx;
     u8 localId;
-    u8 fieldObjectId;
+    u8 objectEventId;
     s16 xCoord;
     s16 yCoord;
     u8 graphicsId;
@@ -56,10 +56,10 @@ struct VsSeekerTrainerInfo
 
 struct VsSeekerStruct
 {
-    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[MAP_OBJECTS_COUNT];
+    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
     /*0x100*/ u8 filler_100[0x300];
-    /*0x400*/ u16 trainerIdxArray[MAP_OBJECTS_COUNT];
-    /*0x420*/ u8 runningBehaviourEtcArray[MAP_OBJECTS_COUNT];
+    /*0x400*/ u16 trainerIdxArray[OBJECT_EVENTS_COUNT];
+    /*0x420*/ u8 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
     /*0x430*/ u8 numRematchableTrainers;
     /*0x431*/ u8 trainerHasNotYetBeenFought:1;
     /*0x431*/ u8 trainerDoesNotWantRematch:1;
@@ -68,8 +68,8 @@ struct VsSeekerStruct
 };
 
 extern u16 gSpecialVar_LastTalked;
-extern struct MapObject gMapObjects[MAP_OBJECTS_COUNT];
-extern u8 gSelectedEventObject;
+extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
+extern u8 gSelectedObjectEvent;
 
 // static declarations
 static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
@@ -591,13 +591,13 @@ static void sub_810C3B8(u8 taskId)
 
     if (task->data[1] == 0)
     {
-        for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+        for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
             if (sub_810CF04(i) == TRUE)
             {
-                if (gMapObjects[i].mapobj_bit_1)
+                if (gObjectEvents[i].mapobj_bit_1)
                     return;
-                FreezeMapObject(&gMapObjects[i]);
+                FreezeObjectEvent(&gObjectEvents[i]);
             }
         }
     }
@@ -613,22 +613,22 @@ static void sub_810C3B8(u8 taskId)
 
 void sub_810C444(void)
 {
-    struct MapObjectTemplate * templates = gSaveBlock1Ptr->mapObjectTemplates;
+    struct ObjectEventTemplate * templates = gSaveBlock1Ptr->objectEventTemplates;
     u8 i;
     u8 r6;
     u8 sp0;
-    struct MapObject * mapObject;
+    struct ObjectEvent * objectEvent;
 
-    for (i = 0; i < gMapHeader.events->mapObjectCount; i++)
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
         if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
         {
             r6 = sub_810CF54();
-            TryGetFieldObjectIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
-            mapObject = &gMapObjects[sp0];
+            TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
+            objectEvent = &gObjectEvents[sp0];
             if (sub_810CF04(sp0) == TRUE)
             {
-                SetTrainerMovementType(mapObject, r6);
+                SetTrainerMovementType(objectEvent, r6);
             }
             templates[i].movementType = r6;
         }
@@ -756,17 +756,17 @@ static void sub_810C594(void)
 {
     u8 i;
 
-    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        struct MapObject * mapObject = &gMapObjects[i];
-        if (mapObject->animPattern == 0x4D || mapObject->animPattern == 0x4E || mapObject->animPattern == 0x4F)
+        struct ObjectEvent * objectEvent = &gObjectEvents[i];
+        if (objectEvent->animPattern == 0x4D || objectEvent->animPattern == 0x4E || objectEvent->animPattern == 0x4F)
         {
             u8 r3 = sub_810CF54();
-            if (mapObject->active && gSprites[mapObject->spriteId].data[0] == i)
+            if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)
             {
-                gSprites[mapObject->spriteId].pos2.x = 0;
-                gSprites[mapObject->spriteId].pos2.y = 0;
-                SetTrainerMovementType(mapObject, r3);
+                gSprites[objectEvent->spriteId].pos2.x = 0;
+                gSprites[objectEvent->spriteId].pos2.y = 0;
+                SetTrainerMovementType(objectEvent, r3);
             }
         }
     }
@@ -857,23 +857,23 @@ static void Task_VsSeeker_2(u8 taskId)
 
 static void GatherNearbyTrainerInfo(void)
 {
-    struct MapObjectTemplate *templates = gSaveBlock1Ptr->mapObjectTemplates;
-    u8 fieldObjectId = 0;
+    struct ObjectEventTemplate *templates = gSaveBlock1Ptr->objectEventTemplates;
+    u8 objectEventId = 0;
     u8 vsSeekerObjectIdx = 0;
-    s32 mapObjectIdx;
+    s32 objectEventIdx;
 
-    for (mapObjectIdx = 0; mapObjectIdx < gMapHeader.events->mapObjectCount; mapObjectIdx++)
+    for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->objectEventCount; objectEventIdx++)
     {
-        if (templates[mapObjectIdx].trainerType == 1 || templates[mapObjectIdx].trainerType == 3)
+        if (templates[objectEventIdx].trainerType == 1 || templates[objectEventIdx].trainerType == 3)
         {
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[mapObjectIdx].script;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[mapObjectIdx].script);
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[mapObjectIdx].localId;
-            TryGetFieldObjectIdByLocalIdAndMap(templates[mapObjectIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &fieldObjectId);
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].fieldObjectId = fieldObjectId;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gMapObjects[fieldObjectId].coords2.x - 7;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gMapObjects[fieldObjectId].coords2.y - 7;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[mapObjectIdx].graphicsId;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[objectEventIdx].localId;
+            TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].objectEventId = objectEventId;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].coords2.x - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].coords2.y - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[objectEventIdx].graphicsId;
             vsSeekerObjectIdx++;
         }
     }
@@ -960,7 +960,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     else
                     {
                         gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
-                        npc_coords_shift_still(&gMapObjects[sVsSeeker->trainerInfo[vsSeekerIdx].fieldObjectId]);
+                        npc_coords_shift_still(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
                         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F64);
                         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
                         sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
@@ -1120,7 +1120,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 "\tlsls r0, r1, 3\n"
                 "\tadds r0, r1\n"
                 "\tlsls r0, 2\n"
-                "\tldr r1, _0810CB5C @ =gMapObjects\n"
+                "\tldr r1, _0810CB5C @ =gObjectEvents\n"
                 "\tadds r0, r1\n"
                 "\tbl npc_coords_shift_still\n"
                 "\tldr r0, [r6]\n"
@@ -1194,7 +1194,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 "\t.align 2, 0\n"
                 "_0810CB54: .4byte gSaveBlock1Ptr\n"
                 "_0810CB58: .4byte 0x0000063a\n"
-                "_0810CB5C: .4byte gMapObjects\n"
+                "_0810CB5C: .4byte gObjectEvents\n"
                 "_0810CB60: .4byte gUnknown_8453F64\n"
                 "_0810CB64: .4byte 0x00000431\n"
                 "_0810CB68: .4byte sVsSeeker\n"
@@ -1223,25 +1223,25 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 void sub_810CB90(void)
 {
     u8 sp0 = 0;
-    struct MapObjectTemplate *r4 = gSaveBlock1Ptr->mapObjectTemplates;
+    struct ObjectEventTemplate *r4 = gSaveBlock1Ptr->objectEventTemplates;
     s32 r9 = sub_810CE10(sVsSeekerData, gTrainerBattleOpponent_A);
 
     if (r9 != -1)
     {
         s32 r8;
 
-        for (r8 = 0; r8 < gMapHeader.events->mapObjectCount; r8++)
+        for (r8 = 0; r8 < gMapHeader.events->objectEventCount; r8++)
         {
             if ((r4[r8].trainerType == 1 || r4[r8].trainerType == 3) && r9 == sub_810CE10(sVsSeekerData, GetTrainerFlagFromScript(r4[r8].script)))
             {
-                struct MapObject *r4_2;
+                struct ObjectEvent *r4_2;
 
-                TryGetFieldObjectIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
-                r4_2 = &gMapObjects[sp0];
+                TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
+                r4_2 = &gObjectEvents[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
                 sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
-                if (gSelectedEventObject == sp0)
+                if (gSelectedObjectEvent == sp0)
                     r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
                 else
                     r4_2->animPattern = 0x08;
@@ -1384,9 +1384,9 @@ static bool8 sub_810CED0(const VsSeekerData * a0, u16 a1)
 
 bool8 sub_810CF04(u8 a0)
 {
-    struct MapObject *r1 = &gMapObjects[a0];
+    struct ObjectEvent *r1 = &gObjectEvents[a0];
 
-    if (r1->active && gMapHeader.events->mapObjectCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
+    if (r1->active && gMapHeader.events->objectEventCount >= r1->localId && gSprites[r1->spriteId].data[0] == a0)
         return TRUE;
     return FALSE;
 }
@@ -1414,32 +1414,32 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
     switch (graphicsId)
     {
-        case MAP_OBJ_GFX_LITTLE_GIRL:
-        case MAP_OBJ_GFX_YOUNGSTER:
-        case MAP_OBJ_GFX_BOY:
-        case MAP_OBJ_GFX_BUG_CATCHER:
-        case MAP_OBJ_GFX_LASS:
-        case MAP_OBJ_GFX_WOMAN_1:
-        case MAP_OBJ_GFX_BATTLE_GIRL:
-        case MAP_OBJ_GFX_MAN:
-        case MAP_OBJ_GFX_ROCKER:
-        case MAP_OBJ_GFX_WOMAN_2:
-        case MAP_OBJ_GFX_BEAUTY:
-        case MAP_OBJ_GFX_BALDING_MAN:
-        case MAP_OBJ_GFX_TUBER_F:
-        case MAP_OBJ_GFX_CAMPER:
-        case MAP_OBJ_GFX_PICNICKER:
-        case MAP_OBJ_GFX_COOLTRAINER_M:
-        case MAP_OBJ_GFX_COOLTRAINER_F:
-        case MAP_OBJ_GFX_SWIMMER_M_LAND:
-        case MAP_OBJ_GFX_SWIMMER_F_LAND:
-        case MAP_OBJ_GFX_BLACKBELT:
-        case MAP_OBJ_GFX_HIKER:
-        case MAP_OBJ_GFX_SAILOR:
+        case OBJECT_EVENT_GFX_LITTLE_GIRL:
+        case OBJECT_EVENT_GFX_YOUNGSTER:
+        case OBJECT_EVENT_GFX_BOY:
+        case OBJECT_EVENT_GFX_BUG_CATCHER:
+        case OBJECT_EVENT_GFX_LASS:
+        case OBJECT_EVENT_GFX_WOMAN_1:
+        case OBJECT_EVENT_GFX_BATTLE_GIRL:
+        case OBJECT_EVENT_GFX_MAN:
+        case OBJECT_EVENT_GFX_ROCKER:
+        case OBJECT_EVENT_GFX_WOMAN_2:
+        case OBJECT_EVENT_GFX_BEAUTY:
+        case OBJECT_EVENT_GFX_BALDING_MAN:
+        case OBJECT_EVENT_GFX_TUBER_F:
+        case OBJECT_EVENT_GFX_CAMPER:
+        case OBJECT_EVENT_GFX_PICNICKER:
+        case OBJECT_EVENT_GFX_COOLTRAINER_M:
+        case OBJECT_EVENT_GFX_COOLTRAINER_F:
+        case OBJECT_EVENT_GFX_SWIMMER_M_LAND:
+        case OBJECT_EVENT_GFX_SWIMMER_F_LAND:
+        case OBJECT_EVENT_GFX_BLACKBELT:
+        case OBJECT_EVENT_GFX_HIKER:
+        case OBJECT_EVENT_GFX_SAILOR:
             return 0x4e;
-        case MAP_OBJ_GFX_TUBER_M_1:
-        case MAP_OBJ_GFX_SWIMMER_M_WATER:
-        case MAP_OBJ_GFX_SWIMMER_F_WATER:
+        case OBJECT_EVENT_GFX_TUBER_M_1:
+        case OBJECT_EVENT_GFX_SWIMMER_M_WATER:
+        case OBJECT_EVENT_GFX_SWIMMER_F_WATER:
             return 0x4f;
         default:
             return 0x4d;
@@ -1508,7 +1508,7 @@ static bool8 IsTrainerVisibleOnScreen(struct VsSeekerTrainerInfo * trainerInfo)
         && x + 7 >= trainerInfo->xCoord
         && y - 5 <= trainerInfo->yCoord
         && y + 5 >= trainerInfo->yCoord
-        && sub_810CF04(trainerInfo->fieldObjectId) == 1)
+        && sub_810CF04(trainerInfo->objectEventId) == 1)
         return TRUE;
     return FALSE;
 }
@@ -1560,7 +1560,7 @@ static u8 GetRematchableTrainerLocalId(void)
 
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u8 * script)
 {
-    npc_sync_anim_pause_bits(&gMapObjects[trainerInfo->fieldObjectId]);
+    npc_sync_anim_pause_bits(&gObjectEvents[trainerInfo->objectEventId]);
     ScriptMovement_StartObjectMovementScript(trainerInfo->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, script);
 }
 
@@ -1596,9 +1596,9 @@ static void StartAllRespondantIdleMovements(void)
         {
             if (sVsSeeker->trainerInfo[j].trainerIdx == sVsSeeker->trainerIdxArray[i])
             {
-                struct MapObject *r4 = &gMapObjects[sVsSeeker->trainerInfo[j].fieldObjectId];
+                struct ObjectEvent *r4 = &gObjectEvents[sVsSeeker->trainerInfo[j].objectEventId];
 
-                if (sub_810CF04(sVsSeeker->trainerInfo[j].fieldObjectId) == 1)
+                if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);

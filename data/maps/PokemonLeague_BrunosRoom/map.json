@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_BRUNO",
+      "graphics_id": "OBJECT_EVENT_GFX_BRUNO",
       "x": 6,
       "y": 5,
       "elevation": 3,

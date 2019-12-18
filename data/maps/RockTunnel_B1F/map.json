@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
+      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
       "x": 2,
       "y": 6,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 11,
       "y": 15,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 36,
       "y": 11,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_HIKER",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 41,
       "y": 5,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
+      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
       "x": 23,
       "y": 23,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_PICNICKER",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 15,
       "y": 33,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
+      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
       "x": 29,
       "y": 35,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 2,
       "y": 29,
       "elevation": 3,
@@ -131,7 +131,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 37,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "FLAG_HIDE_ROCK_TUNNEL_B1F_REVIVE"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 2,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "FLAG_HIDE_ROCK_TUNNEL_B1F_MAX_ETHER"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 1,
       "y": 20,
       "elevation": 3,
@@ -170,7 +170,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 1,
       "y": 22,
       "elevation": 3,
@@ -183,7 +183,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 23,
       "elevation": 3,
@@ -196,7 +196,7 @@
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 2,
       "y": 23,
       "elevation": 3,
@@ -209,7 +209,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 39,
       "y": 26,
       "elevation": 3,
@@ -222,7 +222,7 @@
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 42,
       "y": 26,
       "elevation": 3,
@@ -235,7 +235,7 @@
       "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 43,
       "y": 28,
       "elevation": 3,
@@ -248,7 +248,7 @@
       "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 45,
       "y": 30,
       "elevation": 3,
@@ -261,7 +261,7 @@
       "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 45,
       "y": 33,
       "elevation": 3,
@@ -274,7 +274,7 @@
       "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 25,
       "y": 1,
       "elevation": 3,
@@ -287,7 +287,7 @@
       "flag": "FLAG_TEMP_1B"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 27,
       "y": 4,
       "elevation": 3,
@@ -300,7 +300,7 @@
       "flag": "FLAG_TEMP_1C"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 23,
       "y": 2,
       "elevation": 3,
@@ -313,7 +313,7 @@
       "flag": "FLAG_TEMP_1D"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 26,
       "y": 2,
       "elevation": 3,
@@ -326,7 +326,7 @@
       "flag": "FLAG_TEMP_1E"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 24,
       "y": 7,
       "elevation": 3,
@@ -339,7 +339,7 @@
       "flag": "FLAG_TEMP_1F"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 27,
       "y": 6,
       "elevation": 3,

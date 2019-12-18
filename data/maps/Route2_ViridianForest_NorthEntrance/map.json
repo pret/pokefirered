@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_YOUNGSTER",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
       "x": 4,
       "y": 7,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_COOLTRAINER_F",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_F",
       "x": 10,
       "y": 5,
       "elevation": 3,

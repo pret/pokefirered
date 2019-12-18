@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_CLERK",
+      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
       "x": 28,
       "y": 4,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_WOMAN_1",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_1",
       "x": 31,
       "y": 6,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "FLAG_HIDE_TWO_ISLAND_WOMAN"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BEAUTY",
+      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
       "x": 30,
       "y": 11,
       "elevation": 3,
@@ -59,7 +59,7 @@
       "flag": "FLAG_HIDE_TWO_ISLAND_BEAUTY"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SAILOR",
+      "graphics_id": "OBJECT_EVENT_GFX_SAILOR",
       "x": 26,
       "y": 5,
       "elevation": 3,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SUPER_NERD",
+      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
       "x": 27,
       "y": 6,
       "elevation": 3,
@@ -85,7 +85,7 @@
       "flag": "FLAG_HIDE_TWO_ISLAND_SUPER_NERD"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_CUT_TREE",
+      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
       "x": 30,
       "y": 16,
       "elevation": 3,
@@ -98,7 +98,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 39,
       "y": 16,
       "elevation": 3,
@@ -111,7 +111,7 @@
       "flag": "FLAG_HIDE_TWO_ISLAND_REVIVE"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_LITTLE_BOY",
+      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_BOY",
       "x": 37,
       "y": 12,
       "elevation": 3,
@@ -124,7 +124,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BOY",
+      "graphics_id": "OBJECT_EVENT_GFX_BOY",
       "x": 24,
       "y": 12,
       "elevation": 3,

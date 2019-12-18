@@ -7,7 +7,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
-#include "field_map_obj_helpers.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -19,8 +19,8 @@
 #include "mail.h"
 #include "main.h"
 #include "malloc.h"
-#include "map_obj_80688E4.h"
-#include "map_obj_lock.h"
+#include "event_object_80688E4.h"
+#include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -223,7 +223,7 @@ static void sub_80A1184(void)
 
 static bool8 sub_80A1194(void)
 {
-    FreezeEventObjects();
+    FreezeObjectEvents();
     ScriptContext2_Enable();
     sub_807DC00();
     CreateTask(sub_80A11C0, 10);
@@ -235,7 +235,7 @@ static void sub_80A11C0(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
-        UnfreezeMapObjects();
+        UnfreezeObjectEvents();
         ScriptContext2_Disable();
         DestroyTask(taskId);
     }

@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_OLD_MAN_1",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
       "x": 16,
       "y": 13,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_DODUO",
+      "graphics_id": "OBJECT_EVENT_GFX_DODUO",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_NIDORAN_F",
+      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_F",
       "x": 13,
       "y": 7,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_NIDORAN_M",
+      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_M",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_PSYDUCK",
+      "graphics_id": "OBJECT_EVENT_GFX_PSYDUCK",
       "x": 17,
       "y": 9,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_OLD_WOMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_WOMAN",
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -118,7 +118,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STAR_PIECE"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 19,
       "elevation": 3,
@@ -131,7 +131,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STARDUST"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_BLUE",
+      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
       "x": 8,
       "y": 25,
       "elevation": 3,
@@ -144,7 +144,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_RIVAL"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_FAT_MAN",
+      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
       "x": 36,
       "y": 13,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
       "x": 31,
       "y": 21,
       "elevation": 3,

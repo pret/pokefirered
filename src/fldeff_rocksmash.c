@@ -106,7 +106,7 @@ static void sub_80C99A0(u8 taskId)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(/*OBJECT_EVENT_GFX_BREAKABLE_ROCK*/0x60) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJECT_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_80C9A10;

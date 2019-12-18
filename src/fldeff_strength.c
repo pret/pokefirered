@@ -14,7 +14,7 @@ static void sub_80D08A8(void);
 
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(/*OBJECT_EVENT_GFX_PUSHABLE_BOULDER*/0x61) != TRUE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJECT_EVENT_GFX_STRENGTH_BOULDER) != TRUE)
     {
     	return FALSE;
     }

@@ -87,19 +87,19 @@ void LockSelectedObjectEvent(void)
 
 void sub_80696C0(void)
 {
-    u8 fieldObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
-    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[fieldObjectId]);
+    u8 objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
     sub_80974D8();
     UnfreezeObjectEvents();
 }
 
 void sub_80696F0(void)
 {
-    u8 fieldObjectId;
+    u8 objectEventId;
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    fieldObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
-    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[fieldObjectId]);
+    objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
     sub_80974D8();
     UnfreezeObjectEvents();
 }

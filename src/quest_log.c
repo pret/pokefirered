@@ -1532,12 +1532,12 @@ void sub_8112450(void)
 
 void sub_811246C(struct Sprite *sprite)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[sprite->data[0]];
-    if (mapObject->localId == 0xFF)
+    struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
+    if (objectEvent->localId == 0xFF)
     {
         if (gUnknown_203AF9A[0][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(mapObject, gUnknown_203AF9A[0][0]);
+            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[0][0]);
             gUnknown_203AF9A[0][0] = 0xFF;
         }
         if (gUnknown_203AF9A[0][1] != 0xFF)
@@ -1545,16 +1545,16 @@ void sub_811246C(struct Sprite *sprite)
             sub_8150454();
             gUnknown_203AF9A[0][1] = 0xFF;
         }
-        sub_8063E28(mapObject, sprite);
+        sub_8063E28(objectEvent, sprite);
     }
     else
     {
-        if (gUnknown_203AF9A[mapObject->localId][0] != 0xFF)
+        if (gUnknown_203AF9A[objectEvent->localId][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(mapObject, gUnknown_203AF9A[mapObject->localId][0]);
-            gUnknown_203AF9A[mapObject->localId][0] = 0xFF;
+            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[objectEvent->localId][0]);
+            gUnknown_203AF9A[objectEvent->localId][0] = 0xFF;
         }
-        sub_8063E28(mapObject, sprite);
+        sub_8063E28(objectEvent, sprite);
     }
 }
 

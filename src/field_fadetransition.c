@@ -791,7 +791,7 @@ static void sub_807E80C(u8 taskId)
 static void sub_807E980(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
     switch (data[0])
     {
@@ -843,7 +843,7 @@ static void sub_807E980(u8 taskId)
 static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
 {
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
-    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (a1 > 0 || *a4 > 6)
         *a3 += a1;
     *a2 += a0;
@@ -858,7 +858,7 @@ static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
 
 static void sub_807EB64(u16 a0, s16 *a1, s16 *a2)
 {
-    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.mapObjectId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
+    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.objectEventId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
     sub_807EBBC(a0, a1, a2);
 }
 
@@ -930,7 +930,7 @@ static void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
         r1 = 3;
     else
         r1 = 4;
-    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.mapObjectId], sub_8064270(r1));
+    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.objectEventId], sub_8064270(r1));
     sub_807EBBC(behavior, a0, a1);
     *a2 = *a0 * 16;
     *a3 = *a1 * 16;

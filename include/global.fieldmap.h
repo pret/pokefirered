@@ -288,7 +288,7 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x02*/ u8 running2;
     /*0x03*/ u8 running1;
     /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 mapObjectId;
+    /*0x05*/ u8 objectEventId;
     /*0x06*/ u8 unk6;
     /*0x07*/ u8 gender;
     u8 acroBikeState;

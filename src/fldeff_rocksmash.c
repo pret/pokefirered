@@ -50,7 +50,7 @@ static void task08_080C9820(u8 taskId)
 
     ScriptContext2_Enable();
     gPlayerAvatar.unk6 = TRUE;
-    mapObjId = gPlayerAvatar.mapObjectId;
+    mapObjId = gPlayerAvatar.objectEventId;
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[mapObjId])
      || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[mapObjId]))
     {
@@ -70,7 +70,7 @@ static void task08_080C9820(u8 taskId)
 
 static void sub_80C98B0(u8 taskId)
 {
-    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.mapObjectId]) == TRUE)
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_80C98FC;
@@ -90,7 +90,7 @@ static void sub_80C98FC(u8 taskId)
             gFieldEffectArguments[2] = 2;
         if (gFieldEffectArguments[1] == 4)
             gFieldEffectArguments[2] = 3;
-        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
+        ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_80C99A0;

@@ -314,9 +314,9 @@ void Special_AnimatePcTurnOff()
 
 void SpawnCameraObject(void)
 {
-    u8 mapObjectId = SpawnSpecialObjectEventParameterized(MAP_OBJ_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
-    gObjectEvents[mapObjectId].mapobj_bit_13 = TRUE;
-    CameraObjectSetFollowedObjectId(gObjectEvents[mapObjectId].spriteId);
+    u8 objectEventId = SpawnSpecialObjectEventParameterized(MAP_OBJ_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    gObjectEvents[objectEventId].mapobj_bit_13 = TRUE;
+    CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
 
 void RemoveCameraObject(void)

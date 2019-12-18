@@ -141,9 +141,9 @@ void sub_815A540(void)
         PlayerGetDestCoords(&x, &y);
         if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
-            struct ObjectEvent * mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
+            struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
             SetPlayerAvatarTransitionFlags(0x01);
-            DestroySprite(&gSprites[mapObject->mapobj_unk_1A]);
+            DestroySprite(&gSprites[objectEvent->mapobj_unk_1A]);
         }
     }
 }

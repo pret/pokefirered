@@ -56,25 +56,25 @@ void sub_8150498(u8 a0)
 
 static void sub_81504A8(void)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
-    sub_81507BC(mapObject, sub_805C808(0));
-    ObjectEventTurn(mapObject, mapObject->placeholder18);
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    sub_81507BC(objectEvent, sub_805C808(0));
+    ObjectEventTurn(objectEvent, objectEvent->placeholder18);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 static void sub_81504E8(void)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
-    sub_81507BC(mapObject, sub_805C808(1));
-    ObjectEventTurn(mapObject, mapObject->placeholder18);
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    sub_81507BC(objectEvent, sub_805C808(1));
+    ObjectEventTurn(objectEvent, objectEvent->placeholder18);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     sub_80BD620(0, 0);
 }
 
 static void sub_8150530(void)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
-    struct Sprite *sprite = &gSprites[mapObject->spriteId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
 
     if (gUnknown_3005E88 == 1 || gUnknown_3005E88 == 3)
     {
@@ -86,23 +86,23 @@ static void sub_8150530(void)
     }
     else
     {
-        sub_81507BC(mapObject, sub_805C808(4));
-        StartSpriteAnim(sprite, sub_80634F0(mapObject->facingDirection));
+        sub_81507BC(objectEvent, sub_805C808(4));
+        StartSpriteAnim(sprite, sub_80634F0(objectEvent->facingDirection));
     }
 }
 
 static void sub_81505C4(u8 taskId)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
-    struct Sprite *sprite = &gSprites[mapObject->spriteId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
 
     switch (gTasks[taskId].data[0])
     {
         case 0:
-            ObjectEventClearAnimIfSpecialAnimActive(mapObject);
-            mapObject->mapobj_bit_11 = TRUE;
-            sub_81507BC(mapObject, sub_805C808(4));
-            StartSpriteAnim(sprite, sub_80634F0(mapObject->facingDirection));
+            ObjectEventClearAnimIfSpecialAnimActive(objectEvent);
+            objectEvent->mapobj_bit_11 = TRUE;
+            sub_81507BC(objectEvent, sub_805C808(4));
+            StartSpriteAnim(sprite, sub_80634F0(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
             break;
@@ -122,10 +122,10 @@ static void sub_81505C4(u8 taskId)
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
-                    sub_81507BC(mapObject, sub_805C808(0));
+                    sub_81507BC(objectEvent, sub_805C808(0));
                 else
-                    sub_81507BC(mapObject, sub_805C808(2));
-                ObjectEventTurn(mapObject, mapObject->placeholder18);
+                    sub_81507BC(objectEvent, sub_805C808(2));
+                ObjectEventTurn(objectEvent, objectEvent->placeholder18);
                 sprite->pos2.x = 0;
                 sprite->pos2.y = 0;
                 ScriptContext2_Disable();
@@ -137,19 +137,19 @@ static void sub_81505C4(u8 taskId)
 
 static void sub_8150708(void)
 {
-    struct ObjectEvent *mapObject = &gObjectEvents[gPlayerAvatar.mapObjectId];
+    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     u8 fieldEffectId;
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
-        sub_81507BC(mapObject, sub_805C808(2));
-        ObjectEventTurn(mapObject, mapObject->placeholder18);
+        sub_81507BC(objectEvent, sub_805C808(2));
+        ObjectEventTurn(objectEvent, objectEvent->placeholder18);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
-        gFieldEffectArguments[0] = mapObject->coords2.x;
-        gFieldEffectArguments[1] = mapObject->coords2.y;
-        gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
+        gFieldEffectArguments[0] = objectEvent->coords2.x;
+        gFieldEffectArguments[1] = objectEvent->coords2.y;
+        gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
         fieldEffectId = FieldEffectStart(FLDEFF_SURF_BLOB);
-        mapObject->mapobj_unk_1A = fieldEffectId;
+        objectEvent->mapobj_unk_1A = fieldEffectId;
         sub_80DC44C(fieldEffectId, 1);
     }
 }

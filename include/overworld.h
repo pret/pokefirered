@@ -32,7 +32,7 @@ struct CreditsOverworldCmd
 
 extern struct UCoords32 gDirectionToVectors[];
 
-extern struct LinkPlayerObjectEvent gLinkPlayerMapObjects[4];
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern MainCallback gFieldCallback;
 
 extern struct WarpData gUnknown_2031DB4;

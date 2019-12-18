@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_BOY",
+      "graphics_id": "OBJECT_EVENT_GFX_BOY",
       "x": 11,
       "y": 8,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SCIENTIST",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 12,
       "y": 3,
       "elevation": 3,

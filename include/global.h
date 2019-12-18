@@ -544,7 +544,6 @@ typedef union QuestLogScene QuestLogScene;
 
 // This name is a complete guess and may change.
 
-#define MAP_OBJECTS_COUNT  16
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        288 // 300
 #define VARS_COUNT         256
@@ -609,7 +608,7 @@ struct QuestLog
     /*0x0003*/ s8 unk_003;
     /*0x0004*/ s16 unk_004;
     /*0x0006*/ s16 unk_006;
-    /*0x0008*/ struct QuestLogObjectEvent unk_008[MAP_OBJECTS_COUNT];
+    /*0x0008*/ struct QuestLogObjectEvent unk_008[OBJECT_EVENTS_COUNT];
 
     // These arrays hold the game state for
     // playing back the quest log
@@ -744,7 +743,7 @@ struct SaveBlock1
     /*0x0632*/ u8 field_632[6]; // unused?
     /*0x0638*/ u16 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[100];
-    /*0x06A0*/ struct ObjectEvent objectEvents[MAP_OBJECTS_COUNT];
+    /*0x06A0*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0x08E0*/ struct ObjectEventTemplate objectEventTemplates[64];
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];

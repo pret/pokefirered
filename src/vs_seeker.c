@@ -24,7 +24,7 @@
 #include "unk_810c3a4.h"
 #include "vs_seeker.h"
 #include "constants/movement_commands.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
 
@@ -56,10 +56,10 @@ struct VsSeekerTrainerInfo
 
 struct VsSeekerStruct
 {
-    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[MAP_OBJECTS_COUNT];
+    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
     /*0x100*/ u8 filler_100[0x300];
-    /*0x400*/ u16 trainerIdxArray[MAP_OBJECTS_COUNT];
-    /*0x420*/ u8 runningBehaviourEtcArray[MAP_OBJECTS_COUNT];
+    /*0x400*/ u16 trainerIdxArray[OBJECT_EVENTS_COUNT];
+    /*0x420*/ u8 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
     /*0x430*/ u8 numRematchableTrainers;
     /*0x431*/ u8 trainerHasNotYetBeenFought:1;
     /*0x431*/ u8 trainerDoesNotWantRematch:1;
@@ -68,7 +68,7 @@ struct VsSeekerStruct
 };
 
 extern u16 gSpecialVar_LastTalked;
-extern struct ObjectEvent gObjectEvents[MAP_OBJECTS_COUNT];
+extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
 extern u8 gSelectedObjectEvent;
 
 // static declarations
@@ -591,7 +591,7 @@ static void sub_810C3B8(u8 taskId)
 
     if (task->data[1] == 0)
     {
-        for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+        for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         {
             if (sub_810CF04(i) == TRUE)
             {
@@ -756,7 +756,7 @@ static void sub_810C594(void)
 {
     u8 i;
 
-    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
         if (objectEvent->animPattern == 0x4D || objectEvent->animPattern == 0x4E || objectEvent->animPattern == 0x4F)
@@ -1414,32 +1414,32 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
     switch (graphicsId)
     {
-        case MAP_OBJ_GFX_LITTLE_GIRL:
-        case MAP_OBJ_GFX_YOUNGSTER:
-        case MAP_OBJ_GFX_BOY:
-        case MAP_OBJ_GFX_BUG_CATCHER:
-        case MAP_OBJ_GFX_LASS:
-        case MAP_OBJ_GFX_WOMAN_1:
-        case MAP_OBJ_GFX_BATTLE_GIRL:
-        case MAP_OBJ_GFX_MAN:
-        case MAP_OBJ_GFX_ROCKER:
-        case MAP_OBJ_GFX_WOMAN_2:
-        case MAP_OBJ_GFX_BEAUTY:
-        case MAP_OBJ_GFX_BALDING_MAN:
-        case MAP_OBJ_GFX_TUBER_F:
-        case MAP_OBJ_GFX_CAMPER:
-        case MAP_OBJ_GFX_PICNICKER:
-        case MAP_OBJ_GFX_COOLTRAINER_M:
-        case MAP_OBJ_GFX_COOLTRAINER_F:
-        case MAP_OBJ_GFX_SWIMMER_M_LAND:
-        case MAP_OBJ_GFX_SWIMMER_F_LAND:
-        case MAP_OBJ_GFX_BLACKBELT:
-        case MAP_OBJ_GFX_HIKER:
-        case MAP_OBJ_GFX_SAILOR:
+        case OBJECT_EVENT_GFX_LITTLE_GIRL:
+        case OBJECT_EVENT_GFX_YOUNGSTER:
+        case OBJECT_EVENT_GFX_BOY:
+        case OBJECT_EVENT_GFX_BUG_CATCHER:
+        case OBJECT_EVENT_GFX_LASS:
+        case OBJECT_EVENT_GFX_WOMAN_1:
+        case OBJECT_EVENT_GFX_BATTLE_GIRL:
+        case OBJECT_EVENT_GFX_MAN:
+        case OBJECT_EVENT_GFX_ROCKER:
+        case OBJECT_EVENT_GFX_WOMAN_2:
+        case OBJECT_EVENT_GFX_BEAUTY:
+        case OBJECT_EVENT_GFX_BALDING_MAN:
+        case OBJECT_EVENT_GFX_TUBER_F:
+        case OBJECT_EVENT_GFX_CAMPER:
+        case OBJECT_EVENT_GFX_PICNICKER:
+        case OBJECT_EVENT_GFX_COOLTRAINER_M:
+        case OBJECT_EVENT_GFX_COOLTRAINER_F:
+        case OBJECT_EVENT_GFX_SWIMMER_M_LAND:
+        case OBJECT_EVENT_GFX_SWIMMER_F_LAND:
+        case OBJECT_EVENT_GFX_BLACKBELT:
+        case OBJECT_EVENT_GFX_HIKER:
+        case OBJECT_EVENT_GFX_SAILOR:
             return 0x4e;
-        case MAP_OBJ_GFX_TUBER_M_1:
-        case MAP_OBJ_GFX_SWIMMER_M_WATER:
-        case MAP_OBJ_GFX_SWIMMER_F_WATER:
+        case OBJECT_EVENT_GFX_TUBER_M_1:
+        case OBJECT_EVENT_GFX_SWIMMER_M_WATER:
+        case OBJECT_EVENT_GFX_SWIMMER_F_WATER:
             return 0x4f;
         default:
             return 0x4d;

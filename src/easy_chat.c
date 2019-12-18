@@ -25,7 +25,7 @@
 #include "text_window.h"
 #include "window.h"
 #include "constants/easy_chat.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/species.h"

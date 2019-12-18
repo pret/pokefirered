@@ -20,7 +20,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_ROCKET_M",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 9,
       "y": 24,
       "elevation": 3,
@@ -33,7 +33,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_FISHER",
+      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
       "x": 12,
       "y": 15,
       "elevation": 3,
@@ -46,7 +46,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
       "x": 13,
       "y": 34,
       "elevation": 1,
@@ -59,7 +59,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
       "x": 14,
       "y": 61,
       "elevation": 1,
@@ -72,7 +72,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
       "x": 10,
       "y": 44,
       "elevation": 1,
@@ -85,7 +85,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_TUBER_M_1",
+      "graphics_id": "OBJECT_EVENT_GFX_TUBER_M_1",
       "x": 11,
       "y": 44,
       "elevation": 1,
@@ -98,7 +98,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_ITEM_BALL",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 16,
       "elevation": 3,

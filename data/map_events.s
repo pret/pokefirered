@@ -10,7 +10,7 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 @#include "constants/trainer_hill.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
     .include "asm/macros.inc"
     .include "constants/constants.inc"
     .include "constants/item_data_constants.inc"

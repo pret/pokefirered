@@ -2,8 +2,8 @@
 // Created by scott on 9/7/2017.
 //
 
-#ifndef GUARD_MAP_OBJ_8097404_H
-#define GUARD_MAP_OBJ_8097404_H
+#ifndef GUARD_EVENT_OBJECT_8097404_H
+#define GUARD_EVENT_OBJECT_8097404_H
 
 #include "global.h"
 
@@ -31,4 +31,4 @@ bool8 sub_8097758(struct Sprite *);
 void sub_8097FA4(struct ObjectEvent *);
 void sub_8098044(u8);
 
-#endif //GUARD_MAP_OBJ_8097404_H
+#endif // GUARD_EVENT_OBJECT_8097404_H

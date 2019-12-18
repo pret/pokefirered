@@ -25,7 +25,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 15,
       "y": 149,
       "elevation": 3,
@@ -38,7 +38,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 8,
       "y": 140,
       "elevation": 3,
@@ -51,7 +51,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 14,
       "y": 123,
       "elevation": 3,
@@ -64,7 +64,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 16,
       "y": 112,
       "elevation": 3,
@@ -77,7 +77,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 10,
       "y": 94,
       "elevation": 3,
@@ -90,7 +90,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 14,
       "y": 61,
       "elevation": 3,
@@ -103,7 +103,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_POLICEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 6,
       "y": 35,
       "elevation": 3,

@@ -15,7 +15,7 @@
 #include "wild_encounter.h"
 #include "event_object_movement.h"
 #include "constants/songs.h"
-#include "constants/map_objects.h"
+#include "constants/object_events.h"
 #include "constants/map_types.h"
 
 static void task08_080C9820(u8 taskId);
@@ -106,7 +106,7 @@ static void sub_80C99A0(u8 taskId)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(/*MAP_OBJ_GFX_BREAKABLE_ROCK*/0x60) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(/*OBJECT_EVENT_GFX_BREAKABLE_ROCK*/0x60) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_80C9A10;

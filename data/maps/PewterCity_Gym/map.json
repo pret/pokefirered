@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_BROCK",
+      "graphics_id": "OBJECT_EVENT_GFX_BROCK",
       "x": 6,
       "y": 5,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_CAMPER",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 3,
       "y": 8,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "MAP_OBJ_GFX_GYM_GUY",
+      "graphics_id": "OBJECT_EVENT_GFX_GYM_GUY",
       "x": 7,
       "y": 12,
       "elevation": 3,

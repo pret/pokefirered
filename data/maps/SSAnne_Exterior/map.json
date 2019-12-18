@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_SS_ANNE",
+      "graphics_id": "OBJECT_EVENT_GFX_SS_ANNE",
       "x": 30,
       "y": 16,
       "elevation": 1,

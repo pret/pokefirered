@@ -14,7 +14,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "MAP_OBJ_GFX_GENTLEMAN",
+      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
       "x": 2,
       "y": 5,
       "elevation": 3,

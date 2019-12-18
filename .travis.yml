@@ -25,10 +25,6 @@ matrix:
             - g++-7
       env: _="Build"
       script:
-        - head -c 16777216 /dev/zero > tmp.bin
-        - make ips_patch -C tools/br_ips
-        - tools/br_ips/ips_patch tmp.bin baserom.ips baserom.gba
-        - rm tmp.bin
         - make tools CXX=g++-7
         - make -j2 compare
 after_success:

@@ -46,8 +46,6 @@ src/data/wild_encounters.h
 tags
 tools/agbcc
 tools/binutils
-tools/br_ips/br_ips
-tools/br_ips/ips_patch
 types_*.taghl
 !.travis/calcrom/calcrom.pl
 !sound/programmable_wave_samples/*.pcm

@@ -1,1822 +1,1821 @@
-
 	.align 2
-gDirectSoundWaveData_0:: @ 84A3DA8
-	.incbin "sound/direct_sound_samples/wave_0.bin"
+DirectSoundWaveData_sc88_glockenspiel::
+	.incbin "sound/direct_sound_samples/sc88_glockenspiel.bin"
 
-gDirectSoundWaveData_1:: @ 84A444C
-	.incbin "sound/direct_sound_samples/wave_1.bin"
+DirectSoundWaveData_sc88_organ2::
+	.incbin "sound/direct_sound_samples/sc88_organ2.bin"
 
-gDirectSoundWaveData_2:: @ 84A4C44
-	.incbin "sound/direct_sound_samples/wave_2.bin"
+DirectSoundWaveData_sc88_fretless_bass::
+	.incbin "sound/direct_sound_samples/sc88_fretless_bass.bin"
 
-gDirectSoundWaveData_3:: @ 84A5810
-	.incbin "sound/direct_sound_samples/wave_3.bin"
+DirectSoundWaveData_jv1080_slap_bass::
+	.incbin "sound/direct_sound_samples/jv1080_slap_bass.bin"
 
-gDirectSoundWaveData_4:: @ 84A6748
-	.incbin "sound/direct_sound_samples/wave_4.bin"
+DirectSoundWaveData_sc88_synth_bass::
+	.incbin "sound/direct_sound_samples/sc88_synth_bass.bin"
 
-gDirectSoundWaveData_5:: @ 84A73BC
-	.incbin "sound/direct_sound_samples/wave_5.bin"
+DirectSoundWaveData_sc88_timpani::
+	.incbin "sound/direct_sound_samples/sc88_timpani.bin"
 
-gDirectSoundWaveData_6:: @ 84A888C
-	.incbin "sound/direct_sound_samples/wave_6.bin"
+DirectSoundWaveData_classical_choir_voice_ahhs::
+	.incbin "sound/direct_sound_samples/classical_choir_voice_ahhs.bin"
 
-gDirectSoundWaveData_7:: @ 84A9F3C
-	.incbin "sound/direct_sound_samples/wave_7.bin"
+DirectSoundWaveData_sd90_classical_oboe::
+	.incbin "sound/direct_sound_samples/sd90_classical_oboe.bin"
 
-gDirectSoundWaveData_8:: @ 84AB280
-	.incbin "sound/direct_sound_samples/wave_8.bin"
+DirectSoundWaveData_unused_sd90_oboe::
+	.incbin "sound/direct_sound_samples/unused_sd90_oboe.bin"
 
-gDirectSoundWaveData_9:: @ 84ABD24
-	.incbin "sound/direct_sound_samples/wave_9.bin"
+DirectSoundWaveData_unused_electric_guitar::
+	.incbin "sound/direct_sound_samples/unused_electric_guitar.bin"
 
-gDirectSoundWaveData_10:: @ 84AD038
-	.incbin "sound/direct_sound_samples/wave_10.bin"
+DirectSoundWaveData_unused_sc88_unison_slap::
+	.incbin "sound/direct_sound_samples/unused_sc88_unison_slap.bin"
 
-gDirectSoundWaveData_11:: @ 84B0634
-	.incbin "sound/direct_sound_samples/wave_11.bin"
+DirectSoundWaveData_unknown_snare::
+	.incbin "sound/direct_sound_samples/unknown_snare.bin"
 
-gDirectSoundWaveData_12:: @ 84B0B0C
-	.incbin "sound/direct_sound_samples/wave_12.bin"
+DirectSoundWaveData_unknown_wood_block_low::
+	.incbin "sound/direct_sound_samples/unknown_wood_block_low.bin"
 
-gDirectSoundWaveData_13:: @ 84B23E8
-	.incbin "sound/direct_sound_samples/wave_13.bin"
+DirectSoundWaveData_unknown_wood_block_high::
+	.incbin "sound/direct_sound_samples/unknown_wood_block_high.bin"
 
-gDirectSoundWaveData_14:: @ 84B3710
-	.incbin "sound/direct_sound_samples/wave_14.bin"
+DirectSoundWaveData_sc88_standard_kick::
+	.incbin "sound/direct_sound_samples/sc88_standard_kick.bin"
 
-gDirectSoundWaveData_15:: @ 84B3BB0
-	.incbin "sound/direct_sound_samples/wave_15.bin"
+DirectSoundWaveData_sc88_standard3_snare::
+	.incbin "sound/direct_sound_samples/sc88_standard3_snare.bin"
 
-gDirectSoundWaveData_16:: @ 84B42A4
-	.incbin "sound/direct_sound_samples/wave_16.bin"
+DirectSoundWaveData_sc88_standard_hand_clap::
+	.incbin "sound/direct_sound_samples/sc88_standard_hand_clap.bin"
 
-gDirectSoundWaveData_17:: @ 84B4B34
-	.incbin "sound/direct_sound_samples/wave_17.bin"
+DirectSoundWaveData_sc88_orchestra_snare::
+	.incbin "sound/direct_sound_samples/sc88_orchestra_snare.bin"
 
-gDirectSoundWaveData_18:: @ 84B53AC
-	.incbin "sound/direct_sound_samples/wave_18.bin"
+DirectSoundWaveData_unknown_tambourine::
+	.incbin "sound/direct_sound_samples/unknown_tambourine.bin"
 
-gDirectSoundWaveData_19:: @ 84B5C60
-	.incbin "sound/direct_sound_samples/wave_19.bin"
+DirectSoundWaveData_trinity_cymbal_crash::
+	.incbin "sound/direct_sound_samples/trinity_cymbal_crash.bin"
 
-gDirectSoundWaveData_20:: @ 84B6544
-	.incbin "sound/direct_sound_samples/wave_20.bin"
+DirectSoundWaveData_sc88_orchestra_cymbal_crash::
+	.incbin "sound/direct_sound_samples/sc88_orchestra_cymbal_crash.bin"
 
-gDirectSoundWaveData_21:: @ 84B7470
-	.incbin "sound/direct_sound_samples/wave_21.bin"
+DirectSoundWaveData_sc88_bongo::
+	.incbin "sound/direct_sound_samples/sc88_bongo.bin"
 
-gDirectSoundWaveData_22:: @ 84B7988
-	.incbin "sound/direct_sound_samples/wave_22.bin"
+DirectSoundWaveData_sc88_bongo_low::
+	.incbin "sound/direct_sound_samples/sc88_bongo_low.bin"
 
-gDirectSoundWaveData_23:: @ 84B7F50
-	.incbin "sound/direct_sound_samples/wave_23.bin"
+DirectSoundWaveData_drum_and_percussion_kick::
+	.incbin "sound/direct_sound_samples/drum_and_percussion_kick.bin"
 
-gDirectSoundWaveData_24:: @ 84B8E68
-	.incbin "sound/direct_sound_samples/wave_24.bin"
+DirectSoundWaveData_sd90_solo_snare::
+	.incbin "sound/direct_sound_samples/sd90_solo_snare.bin"
 
-gDirectSoundWaveData_25:: @ 84BA7DC
-	.incbin "sound/direct_sound_samples/wave_25.bin"
+DirectSoundWaveData_sd90_ambient_tom::
+	.incbin "sound/direct_sound_samples/sd90_ambient_tom.bin"
 
-gDirectSoundWaveData_26:: @ 84BC8B8
-	.incbin "sound/direct_sound_samples/wave_26.bin"
+DirectSoundWaveData_dance_drums_ride_bell::
+	.incbin "sound/direct_sound_samples/dance_drums_ride_bell.bin"
 
-gDirectSoundWaveData_27:: @ 84C40E8
-	.incbin "sound/direct_sound_samples/wave_27.bin"
+DirectSoundWaveData_unknown_cowbell::
+	.incbin "sound/direct_sound_samples/unknown_cowbell.bin"
 
-gDirectSoundWaveData_28:: @ 84C4AA0
-	.incbin "sound/direct_sound_samples/wave_28.bin"
+DirectSoundWaveData_unknown_djembe::
+	.incbin "sound/direct_sound_samples/unknown_djembe.bin"
 
-gDirectSoundWaveData_29:: @ 84C5920
-	.incbin "sound/direct_sound_samples/wave_29.bin"
+DirectSoundWaveData_unknown_anvil_high::
+	.incbin "sound/direct_sound_samples/unknown_anvil_high.bin"
 
-gDirectSoundWaveData_30:: @ 84C6794
-	.incbin "sound/direct_sound_samples/wave_30.bin"
+DirectSoundWaveData_sc88_standard_bells::
+	.incbin "sound/direct_sound_samples/sc88_standard_bells.bin"
 
-gDirectSoundWaveData_31:: @ 84C7FA8
-	.incbin "sound/direct_sound_samples/wave_31.bin"
+DirectSoundWaveData_unknown_anvil_low::
+	.incbin "sound/direct_sound_samples/unknown_anvil_low.bin"
 
-gDirectSoundWaveData_32:: @ 84C954C
-	.incbin "sound/direct_sound_samples/wave_32.bin"
+DirectSoundWaveData_unknown_ethnic_drum::
+	.incbin "sound/direct_sound_samples/unknown_ethnic_drum.bin"
 
-gDirectSoundWaveData_33:: @ 84CAB30
-	.incbin "sound/direct_sound_samples/wave_33.bin"
+DirectSoundWaveData_unknown_tsuzumi::
+	.incbin "sound/direct_sound_samples/unknown_tsuzumi.bin"
 
-gDirectSoundWaveData_34:: @ 84CBC24
-	.incbin "sound/direct_sound_samples/wave_34.bin"
+DirectSoundWaveData_sc88_piano1_48::
+	.incbin "sound/direct_sound_samples/sc88_piano1_48.bin"
 
-gDirectSoundWaveData_35:: @ 84CCB84
-	.incbin "sound/direct_sound_samples/wave_35.bin"
+DirectSoundWaveData_sc88_piano1_60::
+	.incbin "sound/direct_sound_samples/sc88_piano1_60.bin"
 
-gDirectSoundWaveData_36:: @ 84CE1E4
-	.incbin "sound/direct_sound_samples/wave_36.bin"
+DirectSoundWaveData_sc88_piano1_72::
+	.incbin "sound/direct_sound_samples/sc88_piano1_72.bin"
 
-gDirectSoundWaveData_37:: @ 84CF740
-	.incbin "sound/direct_sound_samples/wave_37.bin"
+DirectSoundWaveData_sc88_piano1_84::
+	.incbin "sound/direct_sound_samples/sc88_piano1_84.bin"
 
-gDirectSoundWaveData_38:: @ 84D02CC
-	.incbin "sound/direct_sound_samples/wave_38.bin"
+DirectSoundWaveData_sc88_string_ensemble_60::
+	.incbin "sound/direct_sound_samples/sc88_string_ensemble_60.bin"
 
-gDirectSoundWaveData_39:: @ 84D3870
-	.incbin "sound/direct_sound_samples/wave_39.bin"
+DirectSoundWaveData_sc88_string_ensemble_72::
+	.incbin "sound/direct_sound_samples/sc88_string_ensemble_72.bin"
 
-gDirectSoundWaveData_40:: @ 84D5B8C
-	.incbin "sound/direct_sound_samples/wave_40.bin"
+DirectSoundWaveData_sc88_string_ensemble_84::
+	.incbin "sound/direct_sound_samples/sc88_string_ensemble_84.bin"
 
-gDirectSoundWaveData_41:: @ 84D9258
-	.incbin "sound/direct_sound_samples/wave_41.bin"
+DirectSoundWaveData_sc88_trumpet_60::
+	.incbin "sound/direct_sound_samples/sc88_trumpet_60.bin"
 
-gDirectSoundWaveData_42:: @ 84DA5A8
-	.incbin "sound/direct_sound_samples/wave_42.bin"
+DirectSoundWaveData_sc88_trumpet_72::
+	.incbin "sound/direct_sound_samples/sc88_trumpet_72.bin"
 
-gDirectSoundWaveData_43:: @ 84DBAB8
-	.incbin "sound/direct_sound_samples/wave_43.bin"
+DirectSoundWaveData_sc88_trumpet_84::
+	.incbin "sound/direct_sound_samples/sc88_trumpet_84.bin"
 
-gDirectSoundWaveData_44:: @ 84DCED8
-	.incbin "sound/direct_sound_samples/wave_44.bin"
+DirectSoundWaveData_unknown_trombone_39::
+	.incbin "sound/direct_sound_samples/unknown_trombone_39.bin"
 
-gDirectSoundWaveData_45:: @ 84DDF74
-	.incbin "sound/direct_sound_samples/wave_45.bin"
+DirectSoundWaveData_unknown_trombone_51::
+	.incbin "sound/direct_sound_samples/unknown_trombone_51.bin"
 
-gDirectSoundWaveData_46:: @ 84DEFD0
-	.incbin "sound/direct_sound_samples/wave_46.bin"
+DirectSoundWaveData_sc88_french_horn_60::
+	.incbin "sound/direct_sound_samples/sc88_french_horn_60.bin"
 
-gDirectSoundWaveData_47:: @ 84E5F64
-	.incbin "sound/direct_sound_samples/wave_47.bin"
+DirectSoundWaveData_sc88_french_horn_72::
+	.incbin "sound/direct_sound_samples/sc88_french_horn_72.bin"
 
-gDirectSoundWaveData_48:: @ 84EA4E8
-	.incbin "sound/direct_sound_samples/wave_48.bin"
+DirectSoundWaveData_sc88_flute::
+	.incbin "sound/direct_sound_samples/sc88_flute.bin"
 
-gDirectSoundWaveData_49:: @ 84EAC4C
-	.incbin "sound/direct_sound_samples/wave_49.bin"
+DirectSoundWaveData_sc88_pick_bass::
+	.incbin "sound/direct_sound_samples/sc88_pick_bass.bin"
 
-gDirectSoundWaveData_50:: @ 84EC89C
-	.incbin "sound/direct_sound_samples/wave_50.bin"
+DirectSoundWaveData_sc88_timpani_with_snare::
+	.incbin "sound/direct_sound_samples/sc88_timpani_with_snare.bin"
 
-gDirectSoundWaveData_51:: @ 84EDD6C
-	.incbin "sound/direct_sound_samples/wave_51.bin"
+DirectSoundWaveData_unknown_synth_snare::
+	.incbin "sound/direct_sound_samples/unknown_synth_snare.bin"
 
-gDirectSoundWaveData_52:: @ 84EE778
-	.incbin "sound/direct_sound_samples/wave_52.bin"
+DirectSoundWaveData_sc88_square_wave::
+	.incbin "sound/direct_sound_samples/sc88_square_wave.bin"
 
-gDirectSoundWaveData_53:: @ 84F038C
-	.incbin "sound/direct_sound_samples/wave_53.bin"
+DirectSoundWaveData_bicycle_bell::
+	.incbin "sound/direct_sound_samples/bicycle_bell.bin"
 
-gDirectSoundWaveData_54:: @ 84F1CEC
+DirectSoundWaveData_wave_54::
 	.incbin "sound/direct_sound_samples/wave_54.bin"
 
-gDirectSoundWaveData_55:: @ 84F31B0
-	.incbin "sound/direct_sound_samples/wave_55.bin"
+DirectSoundWaveData_sc88_pizzicato_strings::
+	.incbin "sound/direct_sound_samples/sc88_pizzicato_strings.bin"
 
-gDirectSoundWaveData_56:: @ 84F38EC
+DirectSoundWaveData_wave_56::
 	.incbin "sound/direct_sound_samples/wave_56.bin"
 
-gDirectSoundWaveData_57:: @ 84F54DC
+DirectSoundWaveData_wave_57::
 	.incbin "sound/direct_sound_samples/wave_57.bin"
 
-gDirectSoundWaveData_58:: @ 84F6890
+DirectSoundWaveData_wave_58::
 	.incbin "sound/direct_sound_samples/wave_58.bin"
 
-gDirectSoundWaveData_59:: @ 84F8F14
-	.incbin "sound/direct_sound_samples/wave_59.bin"
+DirectSoundWaveData_sc88_wind::
+	.incbin "sound/direct_sound_samples/sc88_wind.bin"
 
-gDirectSoundWaveData_60:: @ 84FA158
-	.incbin "sound/direct_sound_samples/wave_60.bin"
+DirectSoundWaveData_sc88_bubbles::
+	.incbin "sound/direct_sound_samples/sc88_bubbles.bin"
 
-gDirectSoundWaveData_61:: @ 84FB168
+DirectSoundWaveData_wave_61::
 	.incbin "sound/direct_sound_samples/wave_61.bin"
 
-gDirectSoundWaveData_62:: @ 84FC470
+DirectSoundWaveData_wave_62::
 	.incbin "sound/direct_sound_samples/wave_62.bin"
 
-gDirectSoundWaveData_63:: @ 84FE57C
-	.incbin "sound/direct_sound_samples/wave_63.bin"
+DirectSoundWaveData_unused_acid_bass::
+	.incbin "sound/direct_sound_samples/unused_acid_bass.bin"
 
-gDirectSoundWaveData_64:: @ 8500558
+DirectSoundWaveData_wave_64::
 	.incbin "sound/direct_sound_samples/wave_64.bin"
 
-gDirectSoundWaveData_65:: @ 8502768
+DirectSoundWaveData_wave_65::
 	.incbin "sound/direct_sound_samples/wave_65.bin"
 
-gDirectSoundWaveData_66:: @ 8502F34
-	.incbin "sound/direct_sound_samples/wave_66.bin"
+DirectSoundWaveData_sc88_tubular_bell::
+	.incbin "sound/direct_sound_samples/sc88_tubular_bell.bin"
 
-gDirectSoundWaveData_67:: @ 85048A4
-	.incbin "sound/direct_sound_samples/wave_67.bin"
+DirectSoundWaveData_unknown_close_hihat::
+	.incbin "sound/direct_sound_samples/unknown_close_hihat.bin"
 
-gDirectSoundWaveData_68:: @ 8504CB8
+DirectSoundWaveData_wave_68::
 	.incbin "sound/direct_sound_samples/wave_68.bin"
 
-gDirectSoundWaveData_69:: @ 8506C68
-	.incbin "sound/direct_sound_samples/wave_69.bin"
+DirectSoundWaveData_unknown_polysynth::
+	.incbin "sound/direct_sound_samples/unknown_polysynth.bin"
 
-gDirectSoundWaveData_70:: @ 8509F48
-	.incbin "sound/direct_sound_samples/wave_70.bin"
+DirectSoundWaveData_sc88_harp::
+	.incbin "sound/direct_sound_samples/sc88_harp.bin"
 
-gDirectSoundWaveData_71:: @ 850A978
-	.incbin "sound/direct_sound_samples/wave_71.bin"
+DirectSoundWaveData_sc88_xylophone::
+	.incbin "sound/direct_sound_samples/sc88_xylophone.bin"
 
-gDirectSoundWaveData_72:: @ 850B3AC
+DirectSoundWaveData_wave_72::
 	.incbin "sound/direct_sound_samples/wave_72.bin"
 
-gDirectSoundWaveData_73:: @ 850CEEC
+DirectSoundWaveData_wave_73::
 	.incbin "sound/direct_sound_samples/wave_73.bin"
 
-gDirectSoundWaveData_74:: @ 850D7B4
-	.incbin "sound/direct_sound_samples/wave_74.bin"
+DirectSoundWaveData_sc88_accordion::
+	.incbin "sound/direct_sound_samples/sc88_accordion.bin"
 
-gDirectSoundWaveData_75:: @ 850EB84
-	.incbin "sound/direct_sound_samples/wave_75.bin"
+DirectSoundWaveData_unknown_tom::
+	.incbin "sound/direct_sound_samples/unknown_tom.bin"
 
 	.align 2
-Cry_Bulbasaur:: @ 850FBC4
+Cry_Bulbasaur::
 	.incbin "sound/direct_sound_samples/cry_bulbasaur.bin"
 
 	.align 2
-Cry_Ivysaur:: @ 8510C50
+Cry_Ivysaur::
 	.incbin "sound/direct_sound_samples/cry_ivysaur.bin"
 
 	.align 2
-Cry_Venusaur:: @ 8511CE0
+Cry_Venusaur::
 	.incbin "sound/direct_sound_samples/cry_venusaur.bin"
 
 	.align 2
-Cry_Charmander:: @ 8513038
+Cry_Charmander::
 	.incbin "sound/direct_sound_samples/cry_charmander.bin"
 
 	.align 2
-Cry_Charmeleon:: @ 8513EA8
+Cry_Charmeleon::
 	.incbin "sound/direct_sound_samples/cry_charmeleon.bin"
 
 	.align 2
-Cry_Charizard:: @ 8514D28
+Cry_Charizard::
 	.incbin "sound/direct_sound_samples/cry_charizard.bin"
 
 	.align 2
-Cry_Squirtle:: @ 8516070
+Cry_Squirtle::
 	.incbin "sound/direct_sound_samples/cry_squirtle.bin"
 
 	.align 2
-Cry_Wartortle:: @ 8516EE4
+Cry_Wartortle::
 	.incbin "sound/direct_sound_samples/cry_wartortle.bin"
 
 	.align 2
-Cry_Blastoise:: @ 8518024
+Cry_Blastoise::
 	.incbin "sound/direct_sound_samples/cry_blastoise.bin"
 
 	.align 2
-Cry_Caterpie:: @ 851936C
+Cry_Caterpie::
 	.incbin "sound/direct_sound_samples/cry_caterpie.bin"
 
 	.align 2
-Cry_Metapod:: @ 8519BC4
+Cry_Metapod::
 	.incbin "sound/direct_sound_samples/cry_metapod.bin"
 
 	.align 2
-Cry_Butterfree:: @ 851B314
+Cry_Butterfree::
 	.incbin "sound/direct_sound_samples/cry_butterfree.bin"
 
 	.align 2
-Cry_Weedle:: @ 851BD1C
+Cry_Weedle::
 	.incbin "sound/direct_sound_samples/cry_weedle.bin"
 
 	.align 2
-Cry_Kakuna:: @ 851CD60
+Cry_Kakuna::
 	.incbin "sound/direct_sound_samples/cry_kakuna.bin"
 
 	.align 2
-Cry_Beedrill:: @ 851DF9C
+Cry_Beedrill::
 	.incbin "sound/direct_sound_samples/cry_beedrill.bin"
 
 	.align 2
-Cry_Pidgey:: @ 851F2F8
+Cry_Pidgey::
 	.incbin "sound/direct_sound_samples/cry_pidgey.bin"
 
 	.align 2
-Cry_Pidgeotto:: @ 851F6E0
+Cry_Pidgeotto::
 	.incbin "sound/direct_sound_samples/cry_pidgeotto.bin"
 
 	.align 2
-Cry_Pidgeot:: @ 85205E8
+Cry_Pidgeot::
 	.incbin "sound/direct_sound_samples/cry_pidgeot.bin"
 
 	.align 2
-Cry_Rattata:: @ 852171C
+Cry_Rattata::
 	.incbin "sound/direct_sound_samples/cry_rattata.bin"
 
 	.align 2
-Cry_Raticate:: @ 8521EFC
+Cry_Raticate::
 	.incbin "sound/direct_sound_samples/cry_raticate.bin"
 
 	.align 2
-Cry_Spearow:: @ 8522880
+Cry_Spearow::
 	.incbin "sound/direct_sound_samples/cry_spearow.bin"
 
 	.align 2
-Cry_Fearow:: @ 8523A24
+Cry_Fearow::
 	.incbin "sound/direct_sound_samples/cry_fearow.bin"
 
 	.align 2
-Cry_Ekans:: @ 8524B60
+Cry_Ekans::
 	.incbin "sound/direct_sound_samples/cry_ekans.bin"
 
 	.align 2
-Cry_Arbok:: @ 8525EAC
+Cry_Arbok::
 	.incbin "sound/direct_sound_samples/cry_arbok.bin"
 
 	.align 2
-Cry_Pikachu:: @ 8527204
+Cry_Pikachu::
 	.incbin "sound/direct_sound_samples/cry_pikachu.bin"
 
 	.align 2
-Cry_Raichu:: @ 85282AC
+Cry_Raichu::
 	.incbin "sound/direct_sound_samples/cry_raichu.bin"
 
 	.align 2
-Cry_Sandshrew:: @ 8529A6C
+Cry_Sandshrew::
 	.incbin "sound/direct_sound_samples/cry_sandshrew.bin"
 
 	.align 2
-Cry_Sandslash:: @ 852A3C0
+Cry_Sandslash::
 	.incbin "sound/direct_sound_samples/cry_sandslash.bin"
 
 	.align 2
-Cry_NidoranF:: @ 852B150
+Cry_NidoranF::
 	.incbin "sound/direct_sound_samples/cry_nidoran_f.bin"
 
 	.align 2
-Cry_Nidorina:: @ 852BB00
+Cry_Nidorina::
 	.incbin "sound/direct_sound_samples/cry_nidorina.bin"
 
 	.align 2
-Cry_Nidoqueen:: @ 852C7C8
+Cry_Nidoqueen::
 	.incbin "sound/direct_sound_samples/cry_nidoqueen.bin"
 
 	.align 2
-Cry_NidoranM:: @ 852D8A8
+Cry_NidoranM::
 	.incbin "sound/direct_sound_samples/cry_nidoran_m.bin"
 
 	.align 2
-Cry_Nidorino:: @ 852E310
+Cry_Nidorino::
 	.incbin "sound/direct_sound_samples/cry_nidorino.bin"
 
 	.align 2
-Cry_Nidoking:: @ 852EF24
+Cry_Nidoking::
 	.incbin "sound/direct_sound_samples/cry_nidoking.bin"
 
 	.align 2
-Cry_Clefairy:: @ 8530790
+Cry_Clefairy::
 	.incbin "sound/direct_sound_samples/cry_clefairy.bin"
 
 	.align 2
-Cry_Clefable:: @ 8531000
+Cry_Clefable::
 	.incbin "sound/direct_sound_samples/cry_clefable.bin"
 
 	.align 2
-Cry_Vulpix:: @ 8531A90
+Cry_Vulpix::
 	.incbin "sound/direct_sound_samples/cry_vulpix.bin"
 
 	.align 2
-Cry_Ninetales:: @ 8533260
+Cry_Ninetales::
 	.incbin "sound/direct_sound_samples/cry_ninetales.bin"
 
 	.align 2
-Cry_Jigglypuff:: @ 8534ACC
+Cry_Jigglypuff::
 	.incbin "sound/direct_sound_samples/cry_jigglypuff.bin"
 
 	.align 2
-Cry_Wigglytuff:: @ 8535030
+Cry_Wigglytuff::
 	.incbin "sound/direct_sound_samples/cry_wigglytuff.bin"
 
 	.align 2
-Cry_Zubat:: @ 85356F8
+Cry_Zubat::
 	.incbin "sound/direct_sound_samples/cry_zubat.bin"
 
 	.align 2
-Cry_Golbat:: @ 8536A64
+Cry_Golbat::
 	.incbin "sound/direct_sound_samples/cry_golbat.bin"
 
 	.align 2
-Cry_Oddish:: @ 8537DC8
+Cry_Oddish::
 	.incbin "sound/direct_sound_samples/cry_oddish.bin"
 
 	.align 2
-Cry_Gloom:: @ 8538C64
+Cry_Gloom::
 	.incbin "sound/direct_sound_samples/cry_gloom.bin"
 
 	.align 2
-Cry_Vileplume:: @ 85398E0
+Cry_Vileplume::
 	.incbin "sound/direct_sound_samples/cry_vileplume.bin"
 
 	.align 2
-Cry_Paras:: @ 853B27C
+Cry_Paras::
 	.incbin "sound/direct_sound_samples/cry_paras.bin"
 
 	.align 2
-Cry_Parasect:: @ 853CE70
+Cry_Parasect::
 	.incbin "sound/direct_sound_samples/cry_parasect.bin"
 
 	.align 2
-Cry_Venonat:: @ 853ECD8
+Cry_Venonat::
 	.incbin "sound/direct_sound_samples/cry_venonat.bin"
 
 	.align 2
-Cry_Venomoth:: @ 853FC58
+Cry_Venomoth::
 	.incbin "sound/direct_sound_samples/cry_venomoth.bin"
 
 	.align 2
-Cry_Diglett:: @ 8540C5C
+Cry_Diglett::
 	.incbin "sound/direct_sound_samples/cry_diglett.bin"
 
 	.align 2
-Cry_Dugtrio:: @ 8541FCC
+Cry_Dugtrio::
 	.incbin "sound/direct_sound_samples/cry_dugtrio.bin"
 
 	.align 2
-Cry_Meowth:: @ 8543338
+Cry_Meowth::
 	.incbin "sound/direct_sound_samples/cry_meowth.bin"
 
 	.align 2
-Cry_Persian:: @ 8543CC8
+Cry_Persian::
 	.incbin "sound/direct_sound_samples/cry_persian.bin"
 
 	.align 2
-Cry_Psyduck:: @ 8544FA4
+Cry_Psyduck::
 	.incbin "sound/direct_sound_samples/cry_psyduck.bin"
 
 	.align 2
-Cry_Golduck:: @ 8545CCC
+Cry_Golduck::
 	.incbin "sound/direct_sound_samples/cry_golduck.bin"
 
 	.align 2
-Cry_Mankey:: @ 8546814
+Cry_Mankey::
 	.incbin "sound/direct_sound_samples/cry_mankey.bin"
 
 	.align 2
-Cry_Primeape:: @ 8547874
+Cry_Primeape::
 	.incbin "sound/direct_sound_samples/cry_primeape.bin"
 
 	.align 2
-Cry_Growlithe:: @ 85488A4
+Cry_Growlithe::
 	.incbin "sound/direct_sound_samples/cry_growlithe.bin"
 
 	.align 2
-Cry_Arcanine:: @ 8549608
+Cry_Arcanine::
 	.incbin "sound/direct_sound_samples/cry_arcanine.bin"
 
 	.align 2
-Cry_Poliwag:: @ 854A744
+Cry_Poliwag::
 	.incbin "sound/direct_sound_samples/cry_poliwag.bin"
 
 	.align 2
-Cry_Poliwhirl:: @ 854B260
+Cry_Poliwhirl::
 	.incbin "sound/direct_sound_samples/cry_poliwhirl.bin"
 
 	.align 2
-Cry_Poliwrath:: @ 854B908
+Cry_Poliwrath::
 	.incbin "sound/direct_sound_samples/cry_poliwrath.bin"
 
 	.align 2
-Cry_Abra:: @ 854C42C
+Cry_Abra::
 	.incbin "sound/direct_sound_samples/cry_abra.bin"
 
 	.align 2
-Cry_Kadabra:: @ 854DB90
+Cry_Kadabra::
 	.incbin "sound/direct_sound_samples/cry_kadabra.bin"
 
 	.align 2
-Cry_Alakazam:: @ 854F678
+Cry_Alakazam::
 	.incbin "sound/direct_sound_samples/cry_alakazam.bin"
 
 	.align 2
-Cry_Machop:: @ 8551614
+Cry_Machop::
 	.incbin "sound/direct_sound_samples/cry_machop.bin"
 
 	.align 2
-Cry_Machoke:: @ 8552378
+Cry_Machoke::
 	.incbin "sound/direct_sound_samples/cry_machoke.bin"
 
 	.align 2
-Cry_Machamp:: @ 8553108
+Cry_Machamp::
 	.incbin "sound/direct_sound_samples/cry_machamp.bin"
 
 	.align 2
-Cry_Bellsprout:: @ 8554190
+Cry_Bellsprout::
 	.incbin "sound/direct_sound_samples/cry_bellsprout.bin"
 
 	.align 2
-Cry_Weepinbell:: @ 855491C
+Cry_Weepinbell::
 	.incbin "sound/direct_sound_samples/cry_weepinbell.bin"
 
 	.align 2
-Cry_Victreebel:: @ 85557BC
+Cry_Victreebel::
 	.incbin "sound/direct_sound_samples/cry_victreebel.bin"
 
 	.align 2
-Cry_Tentacool:: @ 8556B08
+Cry_Tentacool::
 	.incbin "sound/direct_sound_samples/cry_tentacool.bin"
 
 	.align 2
-Cry_Tentacruel:: @ 8557AF8
+Cry_Tentacruel::
 	.incbin "sound/direct_sound_samples/cry_tentacruel.bin"
 
 	.align 2
-Cry_Geodude:: @ 85591F4
+Cry_Geodude::
 	.incbin "sound/direct_sound_samples/cry_geodude.bin"
 
 	.align 2
-Cry_Graveler:: @ 855A9A8
+Cry_Graveler::
 	.incbin "sound/direct_sound_samples/cry_graveler.bin"
 
 	.align 2
-Cry_Golem:: @ 855C590
+Cry_Golem::
 	.incbin "sound/direct_sound_samples/cry_golem.bin"
 
 	.align 2
-Cry_Ponyta:: @ 855D3BC
+Cry_Ponyta::
 	.incbin "sound/direct_sound_samples/cry_ponyta.bin"
 
 	.align 2
-Cry_Rapidash:: @ 855E2CC
+Cry_Rapidash::
 	.incbin "sound/direct_sound_samples/cry_rapidash.bin"
 
 	.align 2
-Cry_Slowpoke:: @ 855F56C
+Cry_Slowpoke::
 	.incbin "sound/direct_sound_samples/cry_slowpoke.bin"
 
 	.align 2
-Cry_Slowbro:: @ 855FCD4
+Cry_Slowbro::
 	.incbin "sound/direct_sound_samples/cry_slowbro.bin"
 
 	.align 2
-Cry_Magnemite:: @ 8560A44
+Cry_Magnemite::
 	.incbin "sound/direct_sound_samples/cry_magnemite.bin"
 
 	.align 2
-Cry_Magneton:: @ 8561D88
+Cry_Magneton::
 	.incbin "sound/direct_sound_samples/cry_magneton.bin"
 
 	.align 2
-Cry_Farfetchd:: @ 8563570
+Cry_Farfetchd::
 	.incbin "sound/direct_sound_samples/cry_farfetchd.bin"
 
 	.align 2
-Cry_Doduo:: @ 8563CEC
+Cry_Doduo::
 	.incbin "sound/direct_sound_samples/cry_doduo.bin"
 
 	.align 2
-Cry_Dodrio:: @ 8565030
+Cry_Dodrio::
 	.incbin "sound/direct_sound_samples/cry_dodrio.bin"
 
 	.align 2
-Cry_Seel:: @ 85663A8
+Cry_Seel::
 	.incbin "sound/direct_sound_samples/cry_seel.bin"
 
 	.align 2
-Cry_Dewgong:: @ 8567598
+Cry_Dewgong::
 	.incbin "sound/direct_sound_samples/cry_dewgong.bin"
 
 	.align 2
-Cry_Grimer:: @ 8568ABC
+Cry_Grimer::
 	.incbin "sound/direct_sound_samples/cry_grimer.bin"
 
 	.align 2
-Cry_Muk:: @ 8569544
+Cry_Muk::
 	.incbin "sound/direct_sound_samples/cry_muk.bin"
 
 	.align 2
-Cry_Shellder:: @ 856A404
+Cry_Shellder::
 	.incbin "sound/direct_sound_samples/cry_shellder.bin"
 
 	.align 2
-Cry_Cloyster:: @ 856B378
+Cry_Cloyster::
 	.incbin "sound/direct_sound_samples/cry_cloyster.bin"
 
 	.align 2
-Cry_Gastly:: @ 856C83C
+Cry_Gastly::
 	.incbin "sound/direct_sound_samples/cry_gastly.bin"
 
 	.align 2
-Cry_Haunter:: @ 856DF8C
+Cry_Haunter::
 	.incbin "sound/direct_sound_samples/cry_haunter.bin"
 
 	.align 2
-Cry_Gengar:: @ 856F70C
+Cry_Gengar::
 	.incbin "sound/direct_sound_samples/cry_gengar.bin"
 
 	.align 2
-Cry_Onix:: @ 85705CC
+Cry_Onix::
 	.incbin "sound/direct_sound_samples/cry_onix.bin"
 
 	.align 2
-Cry_Drowzee:: @ 8571E90
+Cry_Drowzee::
 	.incbin "sound/direct_sound_samples/cry_drowzee.bin"
 
 	.align 2
-Cry_Hypno:: @ 8573BA8
+Cry_Hypno::
 	.incbin "sound/direct_sound_samples/cry_hypno.bin"
 
 	.align 2
-Cry_Krabby:: @ 85758AC
+Cry_Krabby::
 	.incbin "sound/direct_sound_samples/cry_krabby.bin"
 
 	.align 2
-Cry_Kingler:: @ 85770F8
+Cry_Kingler::
 	.incbin "sound/direct_sound_samples/cry_kingler.bin"
 
 	.align 2
-Cry_Voltorb:: @ 8578950
+Cry_Voltorb::
 	.incbin "sound/direct_sound_samples/cry_voltorb.bin"
 
 	.align 2
-Cry_Electrode:: @ 857A214
+Cry_Electrode::
 	.incbin "sound/direct_sound_samples/cry_electrode.bin"
 
 	.align 2
-Cry_Exeggcute:: @ 857BB4C
+Cry_Exeggcute::
 	.incbin "sound/direct_sound_samples/cry_exeggcute.bin"
 
 	.align 2
-Cry_Exeggutor:: @ 857CE2C
+Cry_Exeggutor::
 	.incbin "sound/direct_sound_samples/cry_exeggutor.bin"
 
 	.align 2
-Cry_Cubone:: @ 857EE10
+Cry_Cubone::
 	.incbin "sound/direct_sound_samples/cry_cubone.bin"
 
 	.align 2
-Cry_Marowak:: @ 857FD30
+Cry_Marowak::
 	.incbin "sound/direct_sound_samples/cry_marowak.bin"
 
 	.align 2
-Cry_Hitmonlee:: @ 8580BA0
+Cry_Hitmonlee::
 	.incbin "sound/direct_sound_samples/cry_hitmonlee.bin"
 
 	.align 2
-Cry_Hitmonchan:: @ 8581E4C
+Cry_Hitmonchan::
 	.incbin "sound/direct_sound_samples/cry_hitmonchan.bin"
 
 	.align 2
-Cry_Lickitung:: @ 8583024
+Cry_Lickitung::
 	.incbin "sound/direct_sound_samples/cry_lickitung.bin"
 
 	.align 2
-Cry_Koffing:: @ 8583F4C
+Cry_Koffing::
 	.incbin "sound/direct_sound_samples/cry_koffing.bin"
 
 	.align 2
-Cry_Weezing:: @ 85853A8
+Cry_Weezing::
 	.incbin "sound/direct_sound_samples/cry_weezing.bin"
 
 	.align 2
-Cry_Rhyhorn:: @ 8586954
+Cry_Rhyhorn::
 	.incbin "sound/direct_sound_samples/cry_rhyhorn.bin"
 
 	.align 2
-Cry_Rhydon:: @ 8587CC0
+Cry_Rhydon::
 	.incbin "sound/direct_sound_samples/cry_rhydon.bin"
 
 	.align 2
-Cry_Chansey:: @ 858912C
+Cry_Chansey::
 	.incbin "sound/direct_sound_samples/cry_chansey.bin"
 
 	.align 2
-Cry_Tangela:: @ 8589FF8
+Cry_Tangela::
 	.incbin "sound/direct_sound_samples/cry_tangela.bin"
 
 	.align 2
-Cry_Kangaskhan:: @ 858AF14
+Cry_Kangaskhan::
 	.incbin "sound/direct_sound_samples/cry_kangaskhan.bin"
 
 	.align 2
-Cry_Horsea:: @ 858C1C8
+Cry_Horsea::
 	.incbin "sound/direct_sound_samples/cry_horsea.bin"
 
 	.align 2
-Cry_Seadra:: @ 858CB44
+Cry_Seadra::
 	.incbin "sound/direct_sound_samples/cry_seadra.bin"
 
 	.align 2
-Cry_Goldeen:: @ 858D3B0
+Cry_Goldeen::
 	.incbin "sound/direct_sound_samples/cry_goldeen.bin"
 
 	.align 2
-Cry_Seaking:: @ 858DD88
+Cry_Seaking::
 	.incbin "sound/direct_sound_samples/cry_seaking.bin"
 
 	.align 2
-Cry_Staryu:: @ 858F0E0
+Cry_Staryu::
 	.incbin "sound/direct_sound_samples/cry_staryu.bin"
 
 	.align 2
-Cry_Starmie:: @ 85904C8
+Cry_Starmie::
 	.incbin "sound/direct_sound_samples/cry_starmie.bin"
 
 	.align 2
-Cry_MrMime:: @ 85919A4
+Cry_MrMime::
 	.incbin "sound/direct_sound_samples/cry_mr_mime.bin"
 
 	.align 2
-Cry_Scyther:: @ 8592C94
+Cry_Scyther::
 	.incbin "sound/direct_sound_samples/cry_scyther.bin"
 
 	.align 2
-Cry_Jynx:: @ 85939F0
+Cry_Jynx::
 	.incbin "sound/direct_sound_samples/cry_jynx.bin"
 
 	.align 2
-Cry_Electabuzz:: @ 8596964
+Cry_Electabuzz::
 	.incbin "sound/direct_sound_samples/cry_electabuzz.bin"
 
 	.align 2
-Cry_Magmar:: @ 8598848
+Cry_Magmar::
 	.incbin "sound/direct_sound_samples/cry_magmar.bin"
 
 	.align 2
-Cry_Pinsir:: @ 85997C4
+Cry_Pinsir::
 	.incbin "sound/direct_sound_samples/cry_pinsir.bin"
 
 	.align 2
-Cry_Tauros:: @ 859A420
+Cry_Tauros::
 	.incbin "sound/direct_sound_samples/cry_tauros.bin"
 
 	.align 2
-Cry_Magikarp:: @ 859B674
+Cry_Magikarp::
 	.incbin "sound/direct_sound_samples/cry_magikarp.bin"
 
 	.align 2
-Cry_Gyarados:: @ 859C97C
+Cry_Gyarados::
 	.incbin "sound/direct_sound_samples/cry_gyarados.bin"
 
 	.align 2
-Cry_Lapras:: @ 859DDB0
+Cry_Lapras::
 	.incbin "sound/direct_sound_samples/cry_lapras.bin"
 
 	.align 2
-Cry_Ditto:: @ 859EC84
+Cry_Ditto::
 	.incbin "sound/direct_sound_samples/cry_ditto.bin"
 
 	.align 2
-Cry_Eevee:: @ 859F7A0
+Cry_Eevee::
 	.incbin "sound/direct_sound_samples/cry_eevee.bin"
 
 	.align 2
-Cry_Vaporeon:: @ 85A05D8
+Cry_Vaporeon::
 	.incbin "sound/direct_sound_samples/cry_vaporeon.bin"
 
 	.align 2
-Cry_Jolteon:: @ 85A1BF0
+Cry_Jolteon::
 	.incbin "sound/direct_sound_samples/cry_jolteon.bin"
 
 	.align 2
-Cry_Flareon:: @ 85A2BC4
+Cry_Flareon::
 	.incbin "sound/direct_sound_samples/cry_flareon.bin"
 
 	.align 2
-Cry_Porygon:: @ 85A3B48
+Cry_Porygon::
 	.incbin "sound/direct_sound_samples/cry_porygon.bin"
 
 	.align 2
-Cry_Omanyte:: @ 85A4F54
+Cry_Omanyte::
 	.incbin "sound/direct_sound_samples/cry_omanyte.bin"
 
 	.align 2
-Cry_Omastar:: @ 85A5CAC
+Cry_Omastar::
 	.incbin "sound/direct_sound_samples/cry_omastar.bin"
 
 	.align 2
-Cry_Kabuto:: @ 85A6A00
+Cry_Kabuto::
 	.incbin "sound/direct_sound_samples/cry_kabuto.bin"
 
 	.align 2
-Cry_Kabutops:: @ 85A7654
+Cry_Kabutops::
 	.incbin "sound/direct_sound_samples/cry_kabutops.bin"
 
 	.align 2
-Cry_Aerodactyl:: @ 85A8410
+Cry_Aerodactyl::
 	.incbin "sound/direct_sound_samples/cry_aerodactyl.bin"
 
 	.align 2
-Cry_Snorlax:: @ 85A9C6C
+Cry_Snorlax::
 	.incbin "sound/direct_sound_samples/cry_snorlax.bin"
 
 	.align 2
-Cry_Articuno:: @ 85AA1A8
+Cry_Articuno::
 	.incbin "sound/direct_sound_samples/cry_articuno.bin"
 
 	.align 2
-Cry_Zapdos:: @ 85AB950
+Cry_Zapdos::
 	.incbin "sound/direct_sound_samples/cry_zapdos.bin"
 
 	.align 2
-Cry_Moltres:: @ 85AC8C8
+Cry_Moltres::
 	.incbin "sound/direct_sound_samples/cry_moltres.bin"
 
 	.align 2
-Cry_Dratini:: @ 85AE074
+Cry_Dratini::
 	.incbin "sound/direct_sound_samples/cry_dratini.bin"
 
 	.align 2
-Cry_Dragonair:: @ 85AEC10
+Cry_Dragonair::
 	.incbin "sound/direct_sound_samples/cry_dragonair.bin"
 
 	.align 2
-Cry_Dragonite:: @ 85AFCB8
+Cry_Dragonite::
 	.incbin "sound/direct_sound_samples/cry_dragonite.bin"
 
 	.align 2
-Cry_Mewtwo:: @ 85B0FC4
+Cry_Mewtwo::
 	.incbin "sound/direct_sound_samples/cry_mewtwo.bin"
 
 	.align 2
-Cry_Mew:: @ 85B2E2C
+Cry_Mew::
 	.incbin "sound/direct_sound_samples/cry_mew.bin"
 
 	.align 2
-Cry_Chikorita:: @ 85B4C94
+Cry_Chikorita::
 	.incbin "sound/direct_sound_samples/cry_chikorita.bin"
 
 	.align 2
-Cry_Bayleef:: @ 85B51D4
+Cry_Bayleef::
 	.incbin "sound/direct_sound_samples/cry_bayleef.bin"
 
 	.align 2
-Cry_Meganium:: @ 85B5AA0
+Cry_Meganium::
 	.incbin "sound/direct_sound_samples/cry_meganium.bin"
 
 	.align 2
-Cry_Cyndaquil:: @ 85B6AD8
+Cry_Cyndaquil::
 	.incbin "sound/direct_sound_samples/cry_cyndaquil.bin"
 
 	.align 2
-Cry_Quilava:: @ 85B71DC
+Cry_Quilava::
 	.incbin "sound/direct_sound_samples/cry_quilava.bin"
 
 	.align 2
-Cry_Typhlosion:: @ 85B7DC4
+Cry_Typhlosion::
 	.incbin "sound/direct_sound_samples/cry_typhlosion.bin"
 
 	.align 2
-Cry_Totodile:: @ 85BA3D4
+Cry_Totodile::
 	.incbin "sound/direct_sound_samples/cry_totodile.bin"
 
 	.align 2
-Cry_Croconaw:: @ 85BB62C
+Cry_Croconaw::
 	.incbin "sound/direct_sound_samples/cry_croconaw.bin"
 
 	.align 2
-Cry_Feraligatr:: @ 85BCA68
+Cry_Feraligatr::
 	.incbin "sound/direct_sound_samples/cry_feraligatr.bin"
 
 	.align 2
-Cry_Sentret:: @ 85BE3EC
+Cry_Sentret::
 	.incbin "sound/direct_sound_samples/cry_sentret.bin"
 
 	.align 2
-Cry_Furret:: @ 85BE814
+Cry_Furret::
 	.incbin "sound/direct_sound_samples/cry_furret.bin"
 
 	.align 2
-Cry_Hoothoot:: @ 85BEE5C
+Cry_Hoothoot::
 	.incbin "sound/direct_sound_samples/cry_hoothoot.bin"
 
 	.align 2
-Cry_Noctowl:: @ 85BF940
+Cry_Noctowl::
 	.incbin "sound/direct_sound_samples/cry_noctowl.bin"
 
 	.align 2
-Cry_Ledyba:: @ 85C0E70
+Cry_Ledyba::
 	.incbin "sound/direct_sound_samples/cry_ledyba.bin"
 
 	.align 2
-Cry_Ledian:: @ 85C1568
+Cry_Ledian::
 	.incbin "sound/direct_sound_samples/cry_ledian.bin"
 
 	.align 2
-Cry_Spinarak:: @ 85C1DCC
+Cry_Spinarak::
 	.incbin "sound/direct_sound_samples/cry_spinarak.bin"
 
 	.align 2
-Cry_Ariados:: @ 85C2B30
+Cry_Ariados::
 	.incbin "sound/direct_sound_samples/cry_ariados.bin"
 
 	.align 2
-Cry_Crobat:: @ 85C3784
+Cry_Crobat::
 	.incbin "sound/direct_sound_samples/cry_crobat.bin"
 
 	.align 2
-Cry_Chinchou:: @ 85C4EB4
+Cry_Chinchou::
 	.incbin "sound/direct_sound_samples/cry_chinchou.bin"
 
 	.align 2
-Cry_Lanturn:: @ 85C5B64
+Cry_Lanturn::
 	.incbin "sound/direct_sound_samples/cry_lanturn.bin"
 
 	.align 2
-Cry_Pichu:: @ 85C65F0
+Cry_Pichu::
 	.incbin "sound/direct_sound_samples/cry_pichu.bin"
 
 	.align 2
-Cry_Cleffa:: @ 85C6D44
+Cry_Cleffa::
 	.incbin "sound/direct_sound_samples/cry_cleffa.bin"
 
 	.align 2
-Cry_Igglybuff:: @ 85C7334
+Cry_Igglybuff::
 	.incbin "sound/direct_sound_samples/cry_igglybuff.bin"
 
 	.align 2
-Cry_Togepi:: @ 85C7A30
+Cry_Togepi::
 	.incbin "sound/direct_sound_samples/cry_togepi.bin"
 
 	.align 2
-Cry_Togetic:: @ 85C8518
+Cry_Togetic::
 	.incbin "sound/direct_sound_samples/cry_togetic.bin"
 
 	.align 2
-Cry_Natu:: @ 85C8C18
+Cry_Natu::
 	.incbin "sound/direct_sound_samples/cry_natu.bin"
 
 	.align 2
-Cry_Xatu:: @ 85C96A8
+Cry_Xatu::
 	.incbin "sound/direct_sound_samples/cry_xatu.bin"
 
 	.align 2
-Cry_Mareep:: @ 85CA574
+Cry_Mareep::
 	.incbin "sound/direct_sound_samples/cry_mareep.bin"
 
 	.align 2
-Cry_Flaaffy:: @ 85CACCC
+Cry_Flaaffy::
 	.incbin "sound/direct_sound_samples/cry_flaaffy.bin"
 
 	.align 2
-Cry_Ampharos:: @ 85CBA80
+Cry_Ampharos::
 	.incbin "sound/direct_sound_samples/cry_ampharos.bin"
 
 	.align 2
-Cry_Bellossom:: @ 85CCB00
+Cry_Bellossom::
 	.incbin "sound/direct_sound_samples/cry_bellossom.bin"
 
 	.align 2
-Cry_Marill:: @ 85CD918
+Cry_Marill::
 	.incbin "sound/direct_sound_samples/cry_marill.bin"
 
 	.align 2
-Cry_Azumarill:: @ 85CE62C
+Cry_Azumarill::
 	.incbin "sound/direct_sound_samples/cry_azumarill.bin"
 
 	.align 2
-Cry_Sudowoodo:: @ 85CF718
+Cry_Sudowoodo::
 	.incbin "sound/direct_sound_samples/cry_sudowoodo.bin"
 
 	.align 2
-Cry_Politoed:: @ 85D0748
+Cry_Politoed::
 	.incbin "sound/direct_sound_samples/cry_politoed.bin"
 
 	.align 2
-Cry_Hoppip:: @ 85D198C
+Cry_Hoppip::
 	.incbin "sound/direct_sound_samples/cry_hoppip.bin"
 
 	.align 2
-Cry_Skiploom:: @ 85D21F8
+Cry_Skiploom::
 	.incbin "sound/direct_sound_samples/cry_skiploom.bin"
 
 	.align 2
-Cry_Jumpluff:: @ 85D2F00
+Cry_Jumpluff::
 	.incbin "sound/direct_sound_samples/cry_jumpluff.bin"
 
 	.align 2
-Cry_Aipom:: @ 85D3F3C
+Cry_Aipom::
 	.incbin "sound/direct_sound_samples/cry_aipom.bin"
 
 	.align 2
-Cry_Sunkern:: @ 85D4D5C
+Cry_Sunkern::
 	.incbin "sound/direct_sound_samples/cry_sunkern.bin"
 
 	.align 2
-Cry_Sunflora:: @ 85D5570
+Cry_Sunflora::
 	.incbin "sound/direct_sound_samples/cry_sunflora.bin"
 
 	.align 2
-Cry_Yanma:: @ 85D6550
+Cry_Yanma::
 	.incbin "sound/direct_sound_samples/cry_yanma.bin"
 
 	.align 2
-Cry_Wooper:: @ 85D7658
+Cry_Wooper::
 	.incbin "sound/direct_sound_samples/cry_wooper.bin"
 
 	.align 2
-Cry_Quagsire:: @ 85D7DB8
+Cry_Quagsire::
 	.incbin "sound/direct_sound_samples/cry_quagsire.bin"
 
 	.align 2
-Cry_Espeon:: @ 85D8B18
+Cry_Espeon::
 	.incbin "sound/direct_sound_samples/cry_espeon.bin"
 
 	.align 2
-Cry_Umbreon:: @ 85D9ECC
+Cry_Umbreon::
 	.incbin "sound/direct_sound_samples/cry_umbreon.bin"
 
 	.align 2
-Cry_Murkrow:: @ 85DAE4C
+Cry_Murkrow::
 	.incbin "sound/direct_sound_samples/cry_murkrow.bin"
 
 	.align 2
-Cry_Slowking:: @ 85DBF10
+Cry_Slowking::
 	.incbin "sound/direct_sound_samples/cry_slowking.bin"
 
 	.align 2
-Cry_Misdreavus:: @ 85DD6F4
+Cry_Misdreavus::
 	.incbin "sound/direct_sound_samples/cry_misdreavus.bin"
 
 	.align 2
-Cry_Unown:: @ 85DE294
+Cry_Unown::
 	.incbin "sound/direct_sound_samples/cry_unown.bin"
 
 	.align 2
-Cry_Wobbuffet:: @ 85DEFBC
+Cry_Wobbuffet::
 	.incbin "sound/direct_sound_samples/cry_wobbuffet.bin"
 
 	.align 2
-Cry_Girafarig:: @ 85E0458
+Cry_Girafarig::
 	.incbin "sound/direct_sound_samples/cry_girafarig.bin"
 
 	.align 2
-Cry_Pineco:: @ 85E130C
+Cry_Pineco::
 	.incbin "sound/direct_sound_samples/cry_pineco.bin"
 
 	.align 2
-Cry_Forretress:: @ 85E206C
+Cry_Forretress::
 	.incbin "sound/direct_sound_samples/cry_forretress.bin"
 
 	.align 2
-Cry_Dunsparce:: @ 85E3474
+Cry_Dunsparce::
 	.incbin "sound/direct_sound_samples/cry_dunsparce.bin"
 
 	.align 2
-Cry_Gligar:: @ 85E4454
+Cry_Gligar::
 	.incbin "sound/direct_sound_samples/cry_gligar.bin"
 
 	.align 2
-Cry_Steelix:: @ 85E5074
+Cry_Steelix::
 	.incbin "sound/direct_sound_samples/cry_steelix.bin"
 
 	.align 2
-Cry_Snubbull:: @ 85E769C
+Cry_Snubbull::
 	.incbin "sound/direct_sound_samples/cry_snubbull.bin"
 
 	.align 2
-Cry_Granbull:: @ 85E8510
+Cry_Granbull::
 	.incbin "sound/direct_sound_samples/cry_granbull.bin"
 
 	.align 2
-Cry_Qwilfish:: @ 85E9CB4
+Cry_Qwilfish::
 	.incbin "sound/direct_sound_samples/cry_qwilfish.bin"
 
 	.align 2
-Cry_Scizor:: @ 85EA850
+Cry_Scizor::
 	.incbin "sound/direct_sound_samples/cry_scizor.bin"
 
 	.align 2
-Cry_Shuckle:: @ 85EBF4C
+Cry_Shuckle::
 	.incbin "sound/direct_sound_samples/cry_shuckle.bin"
 
 	.align 2
-Cry_Heracross:: @ 85EC980
+Cry_Heracross::
 	.incbin "sound/direct_sound_samples/cry_heracross.bin"
 
 	.align 2
-Cry_Sneasel:: @ 85EDBD4
+Cry_Sneasel::
 	.incbin "sound/direct_sound_samples/cry_sneasel.bin"
 
 	.align 2
-Cry_Teddiursa:: @ 85EE4F8
+Cry_Teddiursa::
 	.incbin "sound/direct_sound_samples/cry_teddiursa.bin"
 
 	.align 2
-Cry_Ursaring:: @ 85EF584
+Cry_Ursaring::
 	.incbin "sound/direct_sound_samples/cry_ursaring.bin"
 
 	.align 2
-Cry_Slugma:: @ 85F135C
+Cry_Slugma::
 	.incbin "sound/direct_sound_samples/cry_slugma.bin"
 
 	.align 2
-Cry_Magcargo:: @ 85F2474
+Cry_Magcargo::
 	.incbin "sound/direct_sound_samples/cry_magcargo.bin"
 
 	.align 2
-Cry_Swinub:: @ 85F397C
+Cry_Swinub::
 	.incbin "sound/direct_sound_samples/cry_swinub.bin"
 
 	.align 2
-Cry_Piloswine:: @ 85F4624
+Cry_Piloswine::
 	.incbin "sound/direct_sound_samples/cry_piloswine.bin"
 
 	.align 2
-Cry_Corsola:: @ 85F5318
+Cry_Corsola::
 	.incbin "sound/direct_sound_samples/cry_corsola.bin"
 
 	.align 2
-Cry_Remoraid:: @ 85F5FF8
+Cry_Remoraid::
 	.incbin "sound/direct_sound_samples/cry_remoraid.bin"
 
 	.align 2
-Cry_Octillery:: @ 85F6A88
+Cry_Octillery::
 	.incbin "sound/direct_sound_samples/cry_octillery.bin"
 
 	.align 2
-Cry_Delibird:: @ 85F84CC
+Cry_Delibird::
 	.incbin "sound/direct_sound_samples/cry_delibird.bin"
 
 	.align 2
-Cry_Mantine:: @ 85F9500
+Cry_Mantine::
 	.incbin "sound/direct_sound_samples/cry_mantine.bin"
 
 	.align 2
-Cry_Skarmory:: @ 85FA4C8
+Cry_Skarmory::
 	.incbin "sound/direct_sound_samples/cry_skarmory.bin"
 
 	.align 2
-Cry_Houndour:: @ 85FBCD0
+Cry_Houndour::
 	.incbin "sound/direct_sound_samples/cry_houndour.bin"
 
 	.align 2
-Cry_Houndoom:: @ 85FC978
+Cry_Houndoom::
 	.incbin "sound/direct_sound_samples/cry_houndoom.bin"
 
 	.align 2
-Cry_Kingdra:: @ 85FDD28
+Cry_Kingdra::
 	.incbin "sound/direct_sound_samples/cry_kingdra.bin"
 
 	.align 2
-Cry_Phanpy:: @ 85FEB00
+Cry_Phanpy::
 	.incbin "sound/direct_sound_samples/cry_phanpy.bin"
 
 	.align 2
-Cry_Donphan:: @ 85FF650
+Cry_Donphan::
 	.incbin "sound/direct_sound_samples/cry_donphan.bin"
 
 	.align 2
-Cry_Porygon2:: @ 8600774
+Cry_Porygon2::
 	.incbin "sound/direct_sound_samples/cry_porygon2.bin"
 
 	.align 2
-Cry_Stantler:: @ 860172C
+Cry_Stantler::
 	.incbin "sound/direct_sound_samples/cry_stantler.bin"
 
 	.align 2
-Cry_Smeargle:: @ 8602DA8
+Cry_Smeargle::
 	.incbin "sound/direct_sound_samples/cry_smeargle.bin"
 
 	.align 2
-Cry_Tyrogue:: @ 86037DC
+Cry_Tyrogue::
 	.incbin "sound/direct_sound_samples/cry_tyrogue.bin"
 
 	.align 2
-Cry_Hitmontop:: @ 8604804
+Cry_Hitmontop::
 	.incbin "sound/direct_sound_samples/cry_hitmontop.bin"
 
 	.align 2
-Cry_Smoochum:: @ 86055E4
+Cry_Smoochum::
 	.incbin "sound/direct_sound_samples/cry_smoochum.bin"
 
 	.align 2
-Cry_Elekid:: @ 8606198
+Cry_Elekid::
 	.incbin "sound/direct_sound_samples/cry_elekid.bin"
 
 	.align 2
-Cry_Magby:: @ 8606C24
+Cry_Magby::
 	.incbin "sound/direct_sound_samples/cry_magby.bin"
 
 	.align 2
-Cry_Miltank:: @ 8607A94
+Cry_Miltank::
 	.incbin "sound/direct_sound_samples/cry_miltank.bin"
 
 	.align 2
-Cry_Blissey:: @ 8608970
+Cry_Blissey::
 	.incbin "sound/direct_sound_samples/cry_blissey.bin"
 
 	.align 2
-Cry_Raikou:: @ 8609A04
+Cry_Raikou::
 	.incbin "sound/direct_sound_samples/cry_raikou.bin"
 
 	.align 2
-Cry_Entei:: @ 860AB74
+Cry_Entei::
 	.incbin "sound/direct_sound_samples/cry_entei.bin"
 
 	.align 2
-Cry_Suicune:: @ 860BFE8
+Cry_Suicune::
 	.incbin "sound/direct_sound_samples/cry_suicune.bin"
 
 	.align 2
-Cry_Larvitar:: @ 860D230
+Cry_Larvitar::
 	.incbin "sound/direct_sound_samples/cry_larvitar.bin"
 
 	.align 2
-Cry_Pupitar:: @ 860DEE0
+Cry_Pupitar::
 	.incbin "sound/direct_sound_samples/cry_pupitar.bin"
 
 	.align 2
-Cry_Tyranitar:: @ 860E750
+Cry_Tyranitar::
 	.incbin "sound/direct_sound_samples/cry_tyranitar.bin"
 
 	.align 2
-Cry_Lugia:: @ 860FEB0
+Cry_Lugia::
 	.incbin "sound/direct_sound_samples/cry_lugia.bin"
 
 	.align 2
-Cry_HoOh:: @ 86124A8
+Cry_HoOh::
 	.incbin "sound/direct_sound_samples/cry_ho_oh.bin"
 
 	.align 2
-Cry_Celebi:: @ 8613B3C
+Cry_Celebi::
 	.incbin "sound/direct_sound_samples/cry_celebi.bin"
 
 	.align 2
-Cry_Kecleon:: @ 86149B4
+Cry_Kecleon::
 	.incbin "sound/direct_sound_samples/cry_kecleon.bin"
 
 	.align 2
-Cry_Roselia:: @ 8615214
+Cry_Roselia::
 	.incbin "sound/direct_sound_samples/cry_roselia.bin"
 
 	.align 2
-Cry_Torkoal:: @ 8615CD4
+Cry_Torkoal::
 	.incbin "sound/direct_sound_samples/cry_torkoal.bin"
 
 	.align 2
-Cry_Electrike:: @ 8616620
+Cry_Electrike::
 	.incbin "sound/direct_sound_samples/cry_electrike.bin"
 
 	.align 2
-Cry_Manectric:: @ 861727C
+Cry_Manectric::
 	.incbin "sound/direct_sound_samples/cry_manectric.bin"
 
 	.align 2
-Cry_Duskull:: @ 8618784
+Cry_Duskull::
 	.incbin "sound/direct_sound_samples/cry_duskull.bin"
 
 	.align 2
-Cry_Latias:: @ 861921C
+Cry_Latias::
 	.incbin "sound/direct_sound_samples/cry_latias.bin"
 
 	.align 2
-Cry_Wynaut:: @ 8619E4C
+Cry_Wynaut::
 	.incbin "sound/direct_sound_samples/cry_wynaut.bin"
 
 	.align 2
-Cry_Seviper:: @ 861AC2C
+Cry_Seviper::
 	.incbin "sound/direct_sound_samples/cry_seviper.bin"
 
 	.align 2
-Cry_Sharpedo:: @ 861B7CC
+Cry_Sharpedo::
 	.incbin "sound/direct_sound_samples/cry_sharpedo.bin"
 
 	.align 2
-Cry_Zangoose:: @ 861CED8
+Cry_Zangoose::
 	.incbin "sound/direct_sound_samples/cry_zangoose.bin"
 
 	.align 2
-Cry_Azurill:: @ 861D868
+Cry_Azurill::
 	.incbin "sound/direct_sound_samples/cry_azurill.bin"
 
 	.align 2
-Cry_Swablu:: @ 861E2D0
+Cry_Swablu::
 	.incbin "sound/direct_sound_samples/cry_swablu.bin"
 
 	.align 2
-Cry_Altaria:: @ 861E868
+Cry_Altaria::
 	.incbin "sound/direct_sound_samples/cry_altaria.bin"
 
 	.align 2
-Cry_Unused265:: @ 861F384
+Cry_Unused265::
 	.incbin "sound/direct_sound_samples/cry_unused_265.bin"
 
 	.align 2
-Cry_Taillow:: @ 861FCD8
+Cry_Taillow::
 	.incbin "sound/direct_sound_samples/cry_taillow.bin"
 
 	.align 2
-Cry_Swellow:: @ 86202D8
+Cry_Swellow::
 	.incbin "sound/direct_sound_samples/cry_swellow.bin"
 
 	.align 2
-Cry_Unused268:: @ 8620BDC
+Cry_Unused268::
 	.incbin "sound/direct_sound_samples/cry_unused_268.bin"
 
 	.align 2
-Cry_Spinda:: @ 8621D8C
+Cry_Spinda::
 	.incbin "sound/direct_sound_samples/cry_spinda.bin"
 
 	.align 2
-Cry_Torchic:: @ 86229F8
+Cry_Torchic::
 	.incbin "sound/direct_sound_samples/cry_torchic.bin"
 
 	.align 2
-Cry_Combusken:: @ 86233A0
+Cry_Combusken::
 	.incbin "sound/direct_sound_samples/cry_combusken.bin"
 
 	.align 2
-Cry_Blaziken:: @ 8625074
+Cry_Blaziken::
 	.incbin "sound/direct_sound_samples/cry_blaziken.bin"
 
 	.align 2
-Cry_Treecko:: @ 8626FF4
+Cry_Treecko::
 	.incbin "sound/direct_sound_samples/cry_treecko.bin"
 
 	.align 2
-Cry_Grovyle:: @ 8627B9C
+Cry_Grovyle::
 	.incbin "sound/direct_sound_samples/cry_grovyle.bin"
 
 	.align 2
-Cry_Sceptile:: @ 8629010
+Cry_Sceptile::
 	.incbin "sound/direct_sound_samples/cry_sceptile.bin"
 
 	.align 2
-Cry_Mudkip:: @ 862AA2C
+Cry_Mudkip::
 	.incbin "sound/direct_sound_samples/cry_mudkip.bin"
 
 	.align 2
-Cry_Marshtomp:: @ 862B1B0
+Cry_Marshtomp::
 	.incbin "sound/direct_sound_samples/cry_marshtomp.bin"
 
 	.align 2
-Cry_Swampert:: @ 862C2B4
+Cry_Swampert::
 	.incbin "sound/direct_sound_samples/cry_swampert.bin"
 
 	.align 2
-Cry_Pelipper:: @ 862D934
+Cry_Pelipper::
 	.incbin "sound/direct_sound_samples/cry_pelipper.bin"
 
 	.align 2
-Cry_Wingull:: @ 862E4FC
+Cry_Wingull::
 	.incbin "sound/direct_sound_samples/cry_wingull.bin"
 
 	.align 2
-Cry_Banette:: @ 862F13C
+Cry_Banette::
 	.incbin "sound/direct_sound_samples/cry_banette.bin"
 
 	.align 2
-Cry_Shuppet:: @ 862FDE4
+Cry_Shuppet::
 	.incbin "sound/direct_sound_samples/cry_shuppet.bin"
 
 	.align 2
-Cry_Lotad:: @ 8630624
+Cry_Lotad::
 	.incbin "sound/direct_sound_samples/cry_lotad.bin"
 
 	.align 2
-Cry_Lombre:: @ 8630A8C
+Cry_Lombre::
 	.incbin "sound/direct_sound_samples/cry_lombre.bin"
 
 	.align 2
-Cry_Ludicolo:: @ 8631920
+Cry_Ludicolo::
 	.incbin "sound/direct_sound_samples/cry_ludicolo.bin"
 
 	.align 2
-Cry_Seedot:: @ 86329F0
+Cry_Seedot::
 	.incbin "sound/direct_sound_samples/cry_seedot.bin"
 
 	.align 2
-Cry_Nuzleaf:: @ 863321C
+Cry_Nuzleaf::
 	.incbin "sound/direct_sound_samples/cry_nuzleaf.bin"
 
 	.align 2
-Cry_Shiftry:: @ 8633D84
+Cry_Shiftry::
 	.incbin "sound/direct_sound_samples/cry_shiftry.bin"
 
 	.align 2
-Cry_Carvanha:: @ 8635148
+Cry_Carvanha::
 	.incbin "sound/direct_sound_samples/cry_carvanha.bin"
 
 	.align 2
-Cry_Wurmple:: @ 8635B5C
+Cry_Wurmple::
 	.incbin "sound/direct_sound_samples/cry_wurmple.bin"
 
 	.align 2
-Cry_Silcoon:: @ 8636428
+Cry_Silcoon::
 	.incbin "sound/direct_sound_samples/cry_silcoon.bin"
 
 	.align 2
-Cry_Beautifly:: @ 8637454
+Cry_Beautifly::
 	.incbin "sound/direct_sound_samples/cry_beautifly.bin"
 
 	.align 2
-Cry_Cascoon:: @ 8637C8C
+Cry_Cascoon::
 	.incbin "sound/direct_sound_samples/cry_cascoon.bin"
 
 	.align 2
-Cry_Dustox:: @ 8638CD0
+Cry_Dustox::
 	.incbin "sound/direct_sound_samples/cry_dustox.bin"
 
 	.align 2
-Cry_Ralts:: @ 863997C
+Cry_Ralts::
 	.incbin "sound/direct_sound_samples/cry_ralts.bin"
 
 	.align 2
-Cry_Kirlia:: @ 863A398
+Cry_Kirlia::
 	.incbin "sound/direct_sound_samples/cry_kirlia.bin"
 
 	.align 2
-Cry_Gardevoir:: @ 863AFC8
+Cry_Gardevoir::
 	.incbin "sound/direct_sound_samples/cry_gardevoir.bin"
 
 	.align 2
-Cry_Slakoth:: @ 863C82C
+Cry_Slakoth::
 	.incbin "sound/direct_sound_samples/cry_slakoth.bin"
 
 	.align 2
-Cry_Vigoroth:: @ 863D0B0
+Cry_Vigoroth::
 	.incbin "sound/direct_sound_samples/cry_vigoroth.bin"
 
 	.align 2
-Cry_Slaking:: @ 863DF08
+Cry_Slaking::
 	.incbin "sound/direct_sound_samples/cry_slaking.bin"
 
 	.align 2
-Cry_Nincada:: @ 863E8F4
+Cry_Nincada::
 	.incbin "sound/direct_sound_samples/cry_nincada.bin"
 
 	.align 2
-Cry_Ninjask:: @ 863EF64
+Cry_Ninjask::
 	.incbin "sound/direct_sound_samples/cry_ninjask.bin"
 
 	.align 2
-Cry_Shedinja:: @ 863FB8C
+Cry_Shedinja::
 	.incbin "sound/direct_sound_samples/cry_shedinja.bin"
 
 	.align 2
-Cry_Makuhita:: @ 8640344
+Cry_Makuhita::
 	.incbin "sound/direct_sound_samples/cry_makuhita.bin"
 
 	.align 2
-Cry_Hariyama:: @ 8640AA0
+Cry_Hariyama::
 	.incbin "sound/direct_sound_samples/cry_hariyama.bin"
 
 	.align 2
-Cry_Nosepass:: @ 8641B58
+Cry_Nosepass::
 	.incbin "sound/direct_sound_samples/cry_nosepass.bin"
 
 	.align 2
-Cry_Glalie:: @ 86428BC
+Cry_Glalie::
 	.incbin "sound/direct_sound_samples/cry_glalie.bin"
 
 	.align 2
-Cry_Plusle:: @ 8643DA0
+Cry_Plusle::
 	.incbin "sound/direct_sound_samples/cry_plusle.bin"
 
 	.align 2
-Cry_Minun:: @ 864469C
+Cry_Minun::
 	.incbin "sound/direct_sound_samples/cry_minun.bin"
 
 	.align 2
-Cry_Surskit:: @ 86456A4
+Cry_Surskit::
 	.incbin "sound/direct_sound_samples/cry_surskit.bin"
 
 	.align 2
-Cry_Masquerain:: @ 8646124
+Cry_Masquerain::
 	.incbin "sound/direct_sound_samples/cry_masquerain.bin"
 
 	.align 2
-Cry_Skitty:: @ 86474D8
+Cry_Skitty::
 	.incbin "sound/direct_sound_samples/cry_skitty.bin"
 
 	.align 2
-Cry_Delcatty:: @ 8647BEC
+Cry_Delcatty::
 	.incbin "sound/direct_sound_samples/cry_delcatty.bin"
 
 	.align 2
-Cry_Gulpin:: @ 8649104
+Cry_Gulpin::
 	.incbin "sound/direct_sound_samples/cry_gulpin.bin"
 
 	.align 2
-Cry_Swalot:: @ 8649908
+Cry_Swalot::
 	.incbin "sound/direct_sound_samples/cry_swalot.bin"
 
 	.align 2
-Cry_Numel:: @ 864AA68
+Cry_Numel::
 	.incbin "sound/direct_sound_samples/cry_numel.bin"
 
 	.align 2
-Cry_Camerupt:: @ 864B3B4
+Cry_Camerupt::
 	.incbin "sound/direct_sound_samples/cry_camerupt.bin"
 
 	.align 2
-Cry_Barboach:: @ 864CAD4
+Cry_Barboach::
 	.incbin "sound/direct_sound_samples/cry_barboach.bin"
 
 	.align 2
-Cry_Whiscash:: @ 864D410
+Cry_Whiscash::
 	.incbin "sound/direct_sound_samples/cry_whiscash.bin"
 
 	.align 2
-Cry_Corphish:: @ 864E50C
+Cry_Corphish::
 	.incbin "sound/direct_sound_samples/cry_corphish.bin"
 
 	.align 2
-Cry_Crawdaunt:: @ 864F110
+Cry_Crawdaunt::
 	.incbin "sound/direct_sound_samples/cry_crawdaunt.bin"
 
 	.align 2
-Cry_Spoink:: @ 86509C8
+Cry_Spoink::
 	.incbin "sound/direct_sound_samples/cry_spoink.bin"
 
 	.align 2
-Cry_Grumpig:: @ 8651108
+Cry_Grumpig::
 	.incbin "sound/direct_sound_samples/cry_grumpig.bin"
 
 	.align 2
-Cry_Trapinch:: @ 8651DA8
+Cry_Trapinch::
 	.incbin "sound/direct_sound_samples/cry_trapinch.bin"
 
 	.align 2
-Cry_Vibrava:: @ 86527CC
+Cry_Vibrava::
 	.incbin "sound/direct_sound_samples/cry_vibrava.bin"
 
 	.align 2
-Cry_Flygon:: @ 86535D0
+Cry_Flygon::
 	.incbin "sound/direct_sound_samples/cry_flygon.bin"
 
 	.align 2
-Cry_Cacnea:: @ 8654FD8
+Cry_Cacnea::
 	.incbin "sound/direct_sound_samples/cry_cacnea.bin"
 
 	.align 2
-Cry_Cacturne:: @ 86558C8
+Cry_Cacturne::
 	.incbin "sound/direct_sound_samples/cry_cacturne.bin"
 
 	.align 2
-Cry_Baltoy:: @ 8656F78
+Cry_Baltoy::
 	.incbin "sound/direct_sound_samples/cry_baltoy.bin"
 
 	.align 2
-Cry_Claydol:: @ 8657BFC
+Cry_Claydol::
 	.incbin "sound/direct_sound_samples/cry_claydol.bin"
 
 	.align 2
-Cry_Lunatone:: @ 8658F5C
+Cry_Lunatone::
 	.incbin "sound/direct_sound_samples/cry_lunatone.bin"
 
 	.align 2
-Cry_Solrock:: @ 865A758
+Cry_Solrock::
 	.incbin "sound/direct_sound_samples/cry_solrock.bin"
 
 	.align 2
-Cry_Feebas:: @ 865B784
+Cry_Feebas::
 	.incbin "sound/direct_sound_samples/cry_feebas.bin"
 
 	.align 2
-Cry_Milotic:: @ 865BF58
+Cry_Milotic::
 	.incbin "sound/direct_sound_samples/cry_milotic.bin"
 
 	.align 2
-Cry_Absol:: @ 865E69C
+Cry_Absol::
 	.incbin "sound/direct_sound_samples/cry_absol.bin"
 
 	.align 2
-Cry_Meditite:: @ 865F118
+Cry_Meditite::
 	.incbin "sound/direct_sound_samples/cry_meditite.bin"
 
 	.align 2
-Cry_Medicham:: @ 865F938
+Cry_Medicham::
 	.incbin "sound/direct_sound_samples/cry_medicham.bin"
 
 	.align 2
-Cry_Spheal:: @ 86609BC
+Cry_Spheal::
 	.incbin "sound/direct_sound_samples/cry_spheal.bin"
 
 	.align 2
-Cry_Sealeo:: @ 8660F70
+Cry_Sealeo::
 	.incbin "sound/direct_sound_samples/cry_sealeo.bin"
 
 	.align 2
-Cry_Walrein:: @ 8661B48
+Cry_Walrein::
 	.incbin "sound/direct_sound_samples/cry_walrein.bin"
 
 	.align 2
-Cry_Clamperl:: @ 8663F94
+Cry_Clamperl::
 	.incbin "sound/direct_sound_samples/cry_clamperl.bin"
 
 	.align 2
-Cry_Huntail:: @ 86651E4
+Cry_Huntail::
 	.incbin "sound/direct_sound_samples/cry_huntail.bin"
 
 	.align 2
-Cry_Gorebyss:: @ 86661CC
+Cry_Gorebyss::
 	.incbin "sound/direct_sound_samples/cry_gorebyss.bin"
 
 	.align 2
-Cry_Lileep:: @ 8667838
+Cry_Lileep::
 	.incbin "sound/direct_sound_samples/cry_lileep.bin"
 
 	.align 2
-Cry_Cradily:: @ 86681E0
+Cry_Cradily::
 	.incbin "sound/direct_sound_samples/cry_cradily.bin"
 
 	.align 2
-Cry_Anorith:: @ 8669F10
+Cry_Anorith::
 	.incbin "sound/direct_sound_samples/cry_anorith.bin"
 
 	.align 2
-Cry_Armaldo:: @ 866AAC8
+Cry_Armaldo::
 	.incbin "sound/direct_sound_samples/cry_armaldo.bin"
 
 	.align 2
-Cry_Beldum:: @ 866C19C
+Cry_Beldum::
 	.incbin "sound/direct_sound_samples/cry_beldum.bin"
 
 	.align 2
-Cry_Metang:: @ 866CB3C
+Cry_Metang::
 	.incbin "sound/direct_sound_samples/cry_metang.bin"
 
 	.align 2
-Cry_Metagross:: @ 866DE10
+Cry_Metagross::
 	.incbin "sound/direct_sound_samples/cry_metagross.bin"
 
 	.align 2
-Cry_Bagon:: @ 8670588
+Cry_Bagon::
 	.incbin "sound/direct_sound_samples/cry_bagon.bin"
 
 	.align 2
-Cry_Shelgon:: @ 8670D5C
+Cry_Shelgon::
 	.incbin "sound/direct_sound_samples/cry_shelgon.bin"
 
 	.align 2
-Cry_Regirock:: @ 8672164
+Cry_Regirock::
 	.incbin "sound/direct_sound_samples/cry_regirock.bin"
 
 	.align 2
-Cry_Regice:: @ 8674140
+Cry_Regice::
 	.incbin "sound/direct_sound_samples/cry_regice.bin"
 
 	.align 2
-Cry_Registeel:: @ 8676140
+Cry_Registeel::
 	.incbin "sound/direct_sound_samples/cry_registeel.bin"
 
 	.align 2
-Cry_Castform:: @ 8677844
+Cry_Castform::
 	.incbin "sound/direct_sound_samples/cry_castform.bin"
 
 	.align 2
-Cry_Volbeat:: @ 86784DC
+Cry_Volbeat::
 	.incbin "sound/direct_sound_samples/cry_volbeat.bin"
 
 	.align 2
-Cry_Illumise:: @ 8679064
+Cry_Illumise::
 	.incbin "sound/direct_sound_samples/cry_illumise.bin"
 
 	.align 2
-Cry_Poochyena:: @ 867A17C
+Cry_Poochyena::
 	.incbin "sound/direct_sound_samples/cry_poochyena.bin"
 
 	.align 2
-Cry_Mightyena:: @ 867AAC4
+Cry_Mightyena::
 	.incbin "sound/direct_sound_samples/cry_mightyena.bin"
 
 	.align 2
-Cry_Dusclops:: @ 867BE50
+Cry_Dusclops::
 	.incbin "sound/direct_sound_samples/cry_dusclops.bin"
 
 	.align 2
-Cry_Sableye:: @ 867CC08
+Cry_Sableye::
 	.incbin "sound/direct_sound_samples/cry_sableye.bin"
 
 	.align 2
-Cry_Mawile:: @ 867D7AC
+Cry_Mawile::
 	.incbin "sound/direct_sound_samples/cry_mawile.bin"
 
 	.align 2
-Cry_Aron:: @ 867E32C
+Cry_Aron::
 	.incbin "sound/direct_sound_samples/cry_aron.bin"
 
 	.align 2
-Cry_Lairon:: @ 867EC58
+Cry_Lairon::
 	.incbin "sound/direct_sound_samples/cry_lairon.bin"
 
 	.align 2
-Cry_Aggron:: @ 8680130
+Cry_Aggron::
 	.incbin "sound/direct_sound_samples/cry_aggron.bin"
 
 	.align 2
-Cry_Relicanth:: @ 8681AD4
+Cry_Relicanth::
 	.incbin "sound/direct_sound_samples/cry_relicanth.bin"
 
 	.align 2
-Cry_Luvdisc:: @ 8682F04
+Cry_Luvdisc::
 	.incbin "sound/direct_sound_samples/cry_luvdisc.bin"
 
 	.align 2
-Cry_Groudon:: @ 86833E0
+Cry_Groudon::
 	.incbin "sound/direct_sound_samples/cry_groudon.bin"
 
 	.align 2
-Cry_Kyogre:: @ 86858EC
+Cry_Kyogre::
 	.incbin "sound/direct_sound_samples/cry_kyogre.bin"
 
 	.align 2
-Cry_Rayquaza:: @ 8687CA4
+Cry_Rayquaza::
 	.incbin "sound/direct_sound_samples/cry_rayquaza.bin"
 
 	.align 2
-Cry_Salamence:: @ 86899D0
+Cry_Salamence::
 	.incbin "sound/direct_sound_samples/cry_salamence.bin"
 
 	.align 2
-Cry_Breloom:: @ 868B2EC
+Cry_Breloom::
 	.incbin "sound/direct_sound_samples/cry_breloom.bin"
 
 	.align 2
-Cry_Shroomish:: @ 868BFAC
+Cry_Shroomish::
 	.incbin "sound/direct_sound_samples/cry_shroomish.bin"
 
 	.align 2
-Cry_Linoone:: @ 868C884
+Cry_Linoone::
 	.incbin "sound/direct_sound_samples/cry_linoone.bin"
 
 	.align 2
-Cry_Tropius:: @ 868E720
+Cry_Tropius::
 	.incbin "sound/direct_sound_samples/cry_tropius.bin"
 
 	.align 2
-Cry_Wailmer:: @ 86907E4
+Cry_Wailmer::
 	.incbin "sound/direct_sound_samples/cry_wailmer.bin"
 
 	.align 2
-Cry_Zigzagoon:: @ 8692444
+Cry_Zigzagoon::
 	.incbin "sound/direct_sound_samples/cry_zigzagoon.bin"
 
 	.align 2
-Cry_Exploud:: @ 8692FD4
+Cry_Exploud::
 	.incbin "sound/direct_sound_samples/cry_exploud.bin"
 
 	.align 2
-Cry_Loudred:: @ 8694C1C
+Cry_Loudred::
 	.incbin "sound/direct_sound_samples/cry_loudred.bin"
 
 	.align 2
-Cry_Wailord:: @ 8695944
+Cry_Wailord::
 	.incbin "sound/direct_sound_samples/cry_wailord.bin"
 
 	.align 2
-Cry_Whismur:: @ 8698354
+Cry_Whismur::
 	.incbin "sound/direct_sound_samples/cry_whismur.bin"
 
 	.align 2
-Cry_Snorunt:: @ 8698B78
+Cry_Snorunt::
 	.incbin "sound/direct_sound_samples/cry_snorunt.bin"
 
 	.align 2
-Cry_Latios:: @ 8699C80
+Cry_Latios::
 	.incbin "sound/direct_sound_samples/cry_latios.bin"
 
 	.align 2
-Cry_Jirachi:: @ 869B278
+Cry_Jirachi::
 	.incbin "sound/direct_sound_samples/cry_jirachi.bin"
 
 	.align 2
-Cry_Deoxys:: @ 869BFFC
+Cry_Deoxys::
 	.incbin "sound/direct_sound_samples/cry_deoxys.bin"
 
 	.align 2
-Cry_Chimecho:: @ 869D4D0
+Cry_Chimecho::
 	.incbin "sound/direct_sound_samples/cry_chimecho.bin"
 
 	.align 2
 
-gDirectSoundWaveData_76:: @ 869DEE0
-	.incbin "sound/direct_sound_samples/wave_76.bin"
+DirectSoundWaveData_register_noise::
+	.incbin "sound/direct_sound_samples/register_noise.bin"
 
-gDirectSoundWaveData_77:: @ 869FE40
+DirectSoundWaveData_wave_77::
 	.incbin "sound/direct_sound_samples/wave_77.bin"
 
-gDirectSoundWaveData_78:: @ 86A18E0
-	.incbin "sound/direct_sound_samples/wave_78.bin"
+DirectSoundWaveData_sc88_nylon_str_guitar::
+	.incbin "sound/direct_sound_samples/sc88_nylon_str_guitar.bin"
 
-gDirectSoundWaveData_79:: @ 86A3850
-	.incbin "sound/direct_sound_samples/wave_79.bin"
+DirectSoundWaveData_sd90_special_scream_drive::
+	.incbin "sound/direct_sound_samples/sd90_special_scream_drive.bin"
 
-gDirectSoundWaveData_80:: @ 86A5088
-	.incbin "sound/direct_sound_samples/wave_80.bin"
+DirectSoundWaveData_sc88_accordion_duplicate::
+	.incbin "sound/direct_sound_samples/sc88_accordion_duplicate.bin"
 
-gDirectSoundWaveData_81:: @ 86A6458
-	.incbin "sound/direct_sound_samples/wave_81.bin"
+DirectSoundWaveData_steinway_b_piano::
+	.incbin "sound/direct_sound_samples/steinway_b_piano.bin"
 
-gDirectSoundWaveData_82:: @ 86A761C
-	.incbin "sound/direct_sound_samples/wave_82.bin"
+DirectSoundWaveData_sd90_classical_overdrive_guitar::
+	.incbin "sound/direct_sound_samples/sd90_classical_overdrive_guitar.bin"
 
-gDirectSoundWaveData_83:: @ 86A948C
-	.incbin "sound/direct_sound_samples/wave_83.bin"
+DirectSoundWaveData_sd90_classical_distortion_guitar_high::
+	.incbin "sound/direct_sound_samples/sd90_classical_distortion_guitar_high.bin"
 
-gDirectSoundWaveData_84:: @ 86AC47C
-	.incbin "sound/direct_sound_samples/wave_84.bin"
+DirectSoundWaveData_sd90_classical_distortion_guitar_low::
+	.incbin "sound/direct_sound_samples/sd90_classical_distortion_guitar_low.bin"
 
-gDirectSoundWaveData_85:: @ 86AF0D0
-	.incbin "sound/direct_sound_samples/wave_85.bin"
+DirectSoundWaveData_sd90_classical_whistle::
+	.incbin "sound/direct_sound_samples/sd90_classical_whistle.bin"
 
-gDirectSoundWaveData_86:: @ 86AFB30
-	.incbin "sound/direct_sound_samples/wave_86.bin"
+DirectSoundWaveData_sd90_classical_detuned_ep1_low::
+	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_low.bin"
 
-gDirectSoundWaveData_87:: @ 86B2198
-	.incbin "sound/direct_sound_samples/wave_87.bin"
+DirectSoundWaveData_sd90_classical_detuned_ep1_high::
+	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_high.bin"
 
-gDirectSoundWaveData_88:: @ 86B3540
-	.incbin "sound/direct_sound_samples/wave_88.bin"
+DirectSoundWaveData_sd90_enhanced_delay_shaku::
+	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"

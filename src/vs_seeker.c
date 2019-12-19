@@ -11,6 +11,7 @@
 #include "script.h"
 #include "event_object_lock.h"
 #include "field_specials.h"
+#include "item.h"
 #include "item_menu.h"
 #include "field_effect.h"
 #include "script_movement.h"
@@ -27,6 +28,7 @@
 #include "constants/object_events.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
+#include "constants/items.h"
 
 typedef enum
 {

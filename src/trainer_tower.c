@@ -431,7 +431,7 @@ static const u8 sKnockoutChallengeMonIdxs[][3] = {
     {0x01, 0x04, 0x05}
 };
 
-extern const struct Unk_203F458_Header gUnknown_84827AC;
+extern const struct EReaderTrainerHillSetSubstruct gUnknown_84827AC;
 extern const struct TrainerTowerFloor *const gUnknown_84827B4[][8];
 
 void sub_815D9E8(void)
@@ -527,9 +527,9 @@ static void sub_815DC8C(void) // fakematching
     else
     {
         struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
-        const struct Unk_203F458_Header * r1 = &gUnknown_84827AC;
+        const struct EReaderTrainerHillSetSubstruct * r1 = &gUnknown_84827AC;
 //        *r0_ = *r1;
-        memcpy(&r0_->unk_0004.floorIdx, r1, sizeof(struct Unk_203F458_Header));
+        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerHillSetSubstruct));
 //        sTrainerTowerState->unk_0004.floorIdx = gUnknown_84827AC;
         r7 = gUnknown_84827B4[whichTimer];
         for (r4 = 0; r4 < 8; r4++)
@@ -540,7 +540,7 @@ static void sub_815DC8C(void) // fakematching
             memcpy(r0, r7[r4], sizeof(struct TrainerTowerFloor));
 //            r0[r4] = *r7[r4];
         }
-        sTrainerTowerState->unk_0004.unk4 = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
+        sTrainerTowerState->unk_0004.checksum = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
         ValidateOrResetCurTrainerTowerRecord();
     }
 }

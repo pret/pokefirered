@@ -25,11 +25,12 @@ struct TrainerTowerFloor
     /* 0x3DC */ u32 checksum;
 };
 
-struct Unk_203F458_Header
+struct EReaderTrainerHillSetSubstruct
 {
-    u8 unk0;
-    u8 unk1;
-    u32 unk4;
+    u8 count;
+    u8 id;
+    u16 dummy;
+    u32 checksum;
 };
 
 struct EReaderTrainerHillSet
@@ -41,7 +42,9 @@ struct EReaderTrainerHillSet
     struct TrainerTowerFloor floors[8];
 };
 
-bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * a0);
-bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * a0);
+bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata);
+bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata);
+bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata);
+u8 sub_815D654(void);
 
 #endif //GUARD_CEREADER_TOOL_H

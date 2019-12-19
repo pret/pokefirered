@@ -909,35 +909,6 @@ static bool32 CreateFlameOrLeafSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool
     }
     return FALSE;
 }
-#elif defined(LEAFGREEN)
-void _CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
-{
-    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, 0xF0, y0, 0);
-    if (spriteId != MAX_SPRITES)
-    {
-        gSprites[spriteId].data[0] = 0xF00;
-        gSprites[spriteId].data[1] = x1;
-        gSprites[spriteId].data[2] = y0 << 4;
-        gSprites[spriteId].data[3] = y1;
-        gSprites[spriteId].callback = SpriteCallback_TitleScreenFlameOrLeaf;
-    }
-}
-
-void SpriteCallback_LG_8079800(struct Sprite * sprite)
-{
-    sprite->pos1.x -= 7;
-    if (sprite->pos1.x < -16)
-    {
-        sprite->pos1.x = 0x100;
-        sprite->data[7]++;
-        if (sprite->data[7] >= NELEMS(gUnknown_LG_83BFA10))
-            sprite->data[7] = 0;
-        sprite->pos1.y = gUnknown_LG_83BFA10[sprite->data[7]];
-    }
-}
-
-#define CreateFlameOrLeafSprite ((bool32 (*)())_CreateFlameOrLeafSprite)
-#endif //FRLG
 
 static void Task_FlameOrLeafSpawner(u8 taskId)
 {
@@ -987,6 +958,88 @@ static void Task_FlameOrLeafSpawner(u8 taskId)
         }
     }
 }
+
+#elif defined(LEAFGREEN)
+
+static void CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
+{
+    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, 0xF0, y0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].data[0] = 0xF00;
+        gSprites[spriteId].data[1] = x1;
+        gSprites[spriteId].data[2] = y0 << 4;
+        gSprites[spriteId].data[3] = y1;
+        gSprites[spriteId].callback = SpriteCallback_TitleScreenFlameOrLeaf;
+    }
+}
+
+static void SpriteCallback_LG_8079800(struct Sprite * sprite)
+{
+    sprite->pos1.x -= 7;
+    if (sprite->pos1.x < -16)
+    {
+        sprite->pos1.x = 0x100;
+        sprite->data[7]++;
+        if (sprite->data[7] >= NELEMS(gUnknown_LG_83BFA10))
+            sprite->data[7] = 0;
+        sprite->pos1.y = gUnknown_LG_83BFA10[sprite->data[7]];
+    }
+}
+
+static void sub_LG_8079844(void)
+{
+    int i;
+    u8 spriteId;
+    for (i = 0; i < 4; i++)
+    {
+        spriteId = CreateSprite(&sUnknownEmptySprite, 0x100 + 0x28 * i, gUnknown_LG_83BFA10[i], 0xFF);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[7] = i;
+            gSprites[spriteId].callback = SpriteCallback_LG_8079800;
+        }
+    }
+}
+
+static void Task_FlameOrLeafSpawner(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    s32 rval;
+    s32 r6;
+    s32 r4;
+    s32 r0;
+
+    switch (data[0])
+    {
+    case 0:
+        sub_LG_8079844();
+        TitleScreen_srand(taskId, 3, 30840);
+        data[0]++;
+        break;
+    case 1:
+        data[1]++;
+        if (data[1] >= data[2])
+        {
+            data[1] = 0;
+            data[2] = (TitleScreen_rand(taskId, 3) % 6) + 6;
+            rval = TitleScreen_rand(taskId, 3) % 48;
+            r6 = 16;
+            if (rval >= 6)
+            {
+                r6 = 48;
+                if (rval < 18)
+                    r6 = 24;
+            }
+            r4 = (TitleScreen_rand(taskId, 3) % 4) - 2;
+            r0 = (TitleScreen_rand(taskId, 3) % 88) + 32;
+            CreateFlameOrLeafSprite(r0, r6, r4);
+        }
+        break;
+    }
+}
+
+#endif //FRLG
 
 static void TitleScreen_srand(u8 taskId, u8 field, u16 seed)
 {

@@ -1599,31 +1599,12 @@ static struct Sprite * sub_80EDF68(void)
 }
 
 #if REVISION >= 1
-static const struct OamData sOamData_840BD64 = {
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(8x32),
-    .size = SPRITE_SIZE(8x32),
-    .priority = 3
-};
-
-static const struct SpriteTemplate sSprTemplate_rev1_840BD6C = {
-    .tileTag = 4,
-    .paletteTag = 3,
-    .oam = &sOamData_840BD64,
-    .anims = gDummySpriteAnimTable,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
-};
-
 static void sub_rev1_80EDFAC(void)
 {
     int i;
     for (i = 0; i < 2; i++)
     {
-        gSprites[CreateSprite(&sSprTemplate_rev1_840BD6C, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
+        gSprites[CreateSprite(&gUnknown_840BCFC, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
     }
 }
 #endif

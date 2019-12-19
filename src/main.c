@@ -66,7 +66,11 @@ const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;
 
+#if REVISION == 0
 const char BuildDateTime[] = "2004 04 26 11:20";
+#else
+const char BuildDateTime[] = "2004 07 20 09:30";
+#endif
 
 const IntrFunc gIntrTableTemplate[] =
 {

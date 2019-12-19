@@ -221,10 +221,10 @@ gUnknown_843F9A0::
 	obj_image_anim_end
 
 gUnknown_843F9A8::
-	.4byte 0x843f988
-	.4byte 0x843f990
-	.4byte 0x843f998
-	.4byte 0x843f9a0
+	.4byte gUnknown_843F988
+	.4byte gUnknown_843F990
+	.4byte gUnknown_843F998
+	.4byte gUnknown_843F9A0
 
 gUnknown_843F9B8:: @ 843F9B8 sprite_template
 	spr_template 1, 1, gUnknown_843F980, gUnknown_843F9A8, NULL, gDummySpriteAffineAnimTable, sub_8101B20

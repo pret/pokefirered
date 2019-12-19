@@ -95,7 +95,7 @@ gUnknown_843ED88:: @ 843ED88
 
 	.align 2
 gUnknown_843ED94:: @ 843ED94
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu.c"
+	abspath "rfu.c"
 
 	.align 2
 gUnknown_843EDC4:: @ 843EDC4

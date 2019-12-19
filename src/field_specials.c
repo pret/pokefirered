@@ -1915,7 +1915,7 @@ u16 Special_BattleCardAction(void)
     case 4:
         return sub_81445C0(2);
     default:
-        AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scr_tool.c", 3873);
+        AGB_ASSERT_EX(0, ABSPATH("scr_tool.c"), 3873);
         return 0;
     }
 }

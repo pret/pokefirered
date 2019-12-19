@@ -41,8 +41,8 @@ bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata)
 
 static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerHillSet * ttdata, u8 * buffer)
 {
-    AGB_ASSERT_EX(ttdata->dummy == 0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c", 198);
-    AGB_ASSERT_EX(ttdata->id == 0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/cereader_tool.c", 199)
+    AGB_ASSERT_EX(ttdata->dummy == 0, ABSPATH("cereader_tool.c"), 198);
+    AGB_ASSERT_EX(ttdata->id == 0, ABSPATH("cereader_tool.c"), 199)
 
     memset(buffer, 0, 0x1000);
     memcpy(buffer, ttdata, SEC30_SIZE);

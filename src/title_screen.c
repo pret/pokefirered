@@ -75,13 +75,23 @@ static void SpriteCallback_Slash(struct Sprite * sprite);
 
 // bg3
 static const u8 sBorderBgTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
+#if defined(FIRERED)
 static const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/unk_83BF5A8.bin.lz");
+#elif defined(LEAFGREEN)
+static const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/lg_border_bg.bin.lz");
+#endif
 
 //sprites
 static const u8 sSlashSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf64c.4bpp.lz");
+#if defined(FIRERED)
 static const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_83bf77c.gbapal");
 static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf79c.4bpp.lz");
 static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
+#elif defined(LEAFGREEN)
+static const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_lg_83bf764.gbapal");
+static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf784.4bpp.lz");
+static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf89c.4bpp.lz");
+#endif
 
 static const struct OamData sOamData_FlameOrLeaf = {
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -92,6 +102,7 @@ static const struct OamData sOamData_FlameOrLeaf = {
     .paletteNum = 0
 };
 
+#if defined(FIRERED)
 static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
     ANIMCMD_FRAME(0x00, 3),
     ANIMCMD_FRAME(0x04, 6),
@@ -118,6 +129,27 @@ static const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
     sSpriteAnims_FlameOrLeaf_0,
     sSpriteAnims_FlameOrLeaf_1
 };
+
+#elif defined(LEAFGREEN)
+static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
+    ANIMCMD_FRAME(0x00, 8),
+    ANIMCMD_FRAME(0x04, 8),
+    ANIMCMD_FRAME(0x08, 8),
+    ANIMCMD_FRAME(0x0c, 8),
+    ANIMCMD_FRAME(0x10, 8),
+    ANIMCMD_FRAME(0x14, 8),
+    ANIMCMD_FRAME(0x18, 8),
+    ANIMCMD_FRAME(0x1c, 8),
+    ANIMCMD_FRAME(0x20, 8),
+    ANIMCMD_FRAME(0x24, 8),
+    ANIMCMD_FRAME(0x28, 8),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
+    sSpriteAnims_FlameOrLeaf_0
+};
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
     .tileTag = 0,

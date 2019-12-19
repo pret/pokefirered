@@ -11,9 +11,7 @@
 // #define NDEBUG
 
 // Fire Red likely forgot to define NDEBUG/NOAGBPRN before release, leading
-// to the inclusion of asserts in the retail ROM. Don't try to re-enable this yet
-// since not all baseroms and pointers have been dumped yet and will result in
-// a broken ROM.
+// to the inclusion of asserts in the retail ROM.
 
 #if REVISION == 0
 #define CODE_ROOT "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/"

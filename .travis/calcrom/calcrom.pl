@@ -136,25 +136,10 @@ print "$documented symbols documented ($docPct%)\n";
 print "$partial_documented symbols partially documented ($partialPct%)\n";
 print "$undocumented symbols undocumented ($undocPct%)\n";
 
-my $foundLines = `git grep '\.incbin "baserom\.gba"' data/`;
-my @allLines = split('\n', $foundLines);
-my $incbinTotal = 0;
-my $incbinNum = 0;
-foreach my $line (@allLines)
-{
-    if ($line =~ /\.incbin\s+"baserom\.gba",\s*0x\w+,\s*(.+?)\s*(\@.*)?$/)
-    {
-        my $size = hex($1);
-        $incbinTotal += $size;
-        $incbinNum++;
-    }
-}
 print "\n";
 my $dataTotal = $srcdata + $data;
 my $srcDataPct = sprintf("%.4f", 100 * $srcdata / $dataTotal);
 my $dataPct = sprintf("%.4f", 100 * $data / $dataTotal);
-my $incbinTotalPct = sprintf("%.4f", 100 * $incbinTotal / $dataTotal);
 print "$dataTotal total bytes of data\n";
 print "$srcdata bytes of data in src ($srcDataPct%)\n";
 print "$data bytes of data in data ($dataPct%)\n";
-print "$incbinNum baserom incbins with a combined $incbinTotal bytes ($incbinTotalPct%)\n";

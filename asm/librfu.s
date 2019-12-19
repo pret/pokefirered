@@ -2363,7 +2363,7 @@ _081E0668:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _081E0668
-	ldr r1, _081E06E0 @ =0x081E1B25
+	ldr r1, _081E06E0 @ =sub_81E1B24
 	movs r5, 0x2
 	negs r5, r5
 	ands r5, r1
@@ -2371,7 +2371,7 @@ _081E0668:
 	ldr r0, [r2]
 	adds r4, r0, 0
 	adds r4, 0x8
-	ldr r0, _081E06E4 @ =0x081E1B55
+	ldr r0, _081E06E4 @ =rfu_REQ_changeMasterSlave
 	subs r0, r1
 	lsls r0, 15
 	lsrs r3, r0, 16
@@ -2408,8 +2408,8 @@ _081E06D0: .4byte gUnknown_3007464
 _081E06D4: .4byte gUnknown_3007468
 _081E06D8: .4byte gUnknown_3007450
 _081E06DC: .4byte gUnknown_3007440
-_081E06E0: .4byte 0x081E1B25
-_081E06E4: .4byte 0x081E1B55
+_081E06E0: .4byte sub_81E1B24
+_081E06E4: .4byte rfu_REQ_changeMasterSlave
 _081E06E8: .4byte 0x0000ffff
 	thumb_func_end sub_81E05B0
 

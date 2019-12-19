@@ -1,3 +1,5 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
 
@@ -88,7 +90,7 @@ gUnknown_83A7208:: @ 83A7208
 
 	.align 2
 gUnknown_83A720C:: @ 83A720C
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/evobjmv.c"
+	abspath "evobjmv.c"
 
 	.align 2
 gUnknown_83A7240:: @ 83A7240

@@ -45,6 +45,9 @@ gUnknown_83CBB10:: @ 83CBB10 gbapal gUnknown_83CBA90
 gUnknown_83CBB30:: @ 83CBB30 4bpp
 	.incbin "graphics/field_effects/unk_83CBB30.bin"
 
+gUnknown_83CBDB0::
+	.incbin "graphics/field_effects/unk_83CBDB0.4bpp"
+
 	.align 2
 gUnknown_83CBE30:: @ 83CBE30 dataptr
 	.4byte FieldEffectCmd_loadtiles
@@ -398,10 +401,10 @@ gUnknown_83CC244:: @ 83CC244 dataptr
 	.4byte sub_8087CB4
 
 gUnknown_83CC250:: @ 83CC250 sprite_frames
-	obj_frame_tiles 0x083cbdb0, 0x0020
-	obj_frame_tiles 0x083cbdd0, 0x0020
-	obj_frame_tiles 0x083cbdf0, 0x0020
-	obj_frame_tiles 0x083cbe10, 0x0020
+	obj_frame_tiles gUnknown_83CBDB0 + 0x00, 0x0020
+	obj_frame_tiles gUnknown_83CBDB0 + 0x20, 0x0020
+	obj_frame_tiles gUnknown_83CBDB0 + 0x40, 0x0020
+	obj_frame_tiles gUnknown_83CBDB0 + 0x60, 0x0020
 
 gUnknown_83CC270:: @ 83CC270 animcmd
 	obj_image_anim_frame 0x0000, 0

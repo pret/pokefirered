@@ -131,6 +131,11 @@ static void sub_80EE9D4(struct Sprite * sprite);
 static void sub_80EEA94(struct IntroSequenceData * ptr);
 static void sub_80EEB08(struct Sprite * sprite);
 static void sub_80EEBE4(void);
+#if REVISION >= 1
+static void sub_rev1_80EDFAC(void);
+#else
+#define sub_rev1_80EDFAC()
+#endif
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
@@ -828,6 +833,7 @@ static void sub_80ECD60(struct IntroSequenceData * this)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             DestroySprite(this->field_0014);
+            sub_rev1_80EDFAC();
             this->field_0012 = 0;
             this->field_0004++;
         }
@@ -1591,6 +1597,17 @@ static struct Sprite * sub_80EDF68(void)
     u8 spriteId = CreateSprite(&gUnknown_840BCDC, 120, 70, 4);
     return &gSprites[spriteId];
 }
+
+#if REVISION >= 1
+static void sub_rev1_80EDFAC(void)
+{
+    int i;
+    for (i = 0; i < 2; i++)
+    {
+        gSprites[CreateSprite(&gUnknown_840BCFC, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
+    }
+}
+#endif
 
 static void sub_80EDF94(struct IntroSequenceData * this)
 {

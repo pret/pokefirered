@@ -68,7 +68,7 @@ static void mevent_srv_free_resources(struct mevent_srv_common * svr)
 
 static void mevent_srv_common_init_send(struct mevent_srv_common * svr, u32 ident, const void * src, u32 size)
 {
-     AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 257);
+     AGB_ASSERT_EX(size <= ME_SEND_BUF_SIZE, ABSPATH("mevent_server.c"), 257);
     mevent_srv_sub_init_send(&svr->manager, ident, src, size);
 }
 
@@ -129,7 +129,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
     switch (cmd->instr)
     {
         case 0:
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 354);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 354);
             svr->mainseqno = 1;
             svr->param = cmd->flag;
             break;
@@ -137,23 +137,23 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             svr->mainseqno = 3;
             break;
         case 2:
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 364);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 364);
             mevent_srv_sub_init_recv(&svr->manager, cmd->flag, svr->recvBuffer);
             svr->mainseqno = 2;
             break;
         case 3:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 370);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 370);
             svr->cmdidx = 0;
             svr->cmdBuffer = cmd->parameter;
             break;
         case 5:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 376);
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 377);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 376);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 377);
             memcpy(svr->mevent_unk1442cc, svr->recvBuffer, sizeof(struct MEventClientHeaderStruct));
             break;
         case 6:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 382);
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 383);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 382);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 383);
             svr->param = ValidateMEventClientHeader(svr->mevent_unk1442cc);
             break;
         case 4:
@@ -164,42 +164,42 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             }
             break;
         case 7:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 396);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 396);
             ptr = mevent_first_if_not_null_else_second(cmd->parameter, svr->card);
             svr->param = sub_8144418(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 8:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 402);
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 403);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 402);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 403);
             svr->param = *(u32 *)svr->recvBuffer;
             break;
         case 9:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 408);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 408);
             ptr = mevent_first_if_not_null_else_second(cmd->parameter, &svr->sendWord);
             svr->param = sub_8144434(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 10:
-            AGB_ASSERT_EX(cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 415);
+            AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 415);
             svr->param = sub_81444B0(svr->mevent_unk1442cc, cmd->flag);
             break;
         case 11:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 420);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 420);
             svr->param = sub_8144474(svr->mevent_unk1442cc, cmd->parameter);
             break;
         case 12:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 426);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 426);
             svr->param = mevent_compare_pointers(cmd->parameter, *(void **)svr->recvBuffer);
             break;
         case 14:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 432);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 432);
             mevent_srv_common_init_send(svr, 0x17, mevent_first_if_not_null_else_second(cmd->parameter, svr->news), sizeof(struct MEWonderNewsData));
             break;
         case 13:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 438);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 438);
             mevent_srv_common_init_send(svr, 0x16, mevent_first_if_not_null_else_second(cmd->parameter, svr->card), sizeof(struct MEWonderCardData));
             break;
         case 16:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 444);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 444);
             mevent_srv_common_init_send(svr, 0x18, mevent_first_if_not_null_else_second(cmd->parameter, &svr->sendWord), 4);
             break;
         case 15:
@@ -215,7 +215,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
                 mevent_srv_common_init_send(svr, 0x10, cmd->parameter, cmd->flag);
             break;
         case 19:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 466);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 466);
             mevent_srv_common_init_send(svr, 0x1a, cmd->parameter, 188);
             break;
         case 20:
@@ -225,15 +225,15 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             mevent_srv_common_init_send(svr, 0x1c, cmd->parameter, cmd->flag);
             break;
         case 22:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 481);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 481);
             memcpy(svr->card, cmd->parameter, 332);
             break;
         case 23:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 486);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 486);
             memcpy(svr->news, cmd->parameter, 444);
             break;
         case 21:
-            AGB_ASSERT_EX(cmd->flag == FALSE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 491);
+            AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 491);
             svr->sendWord = *(u32 *)cmd->parameter;
             break;
         case 24:
@@ -245,16 +245,16 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
             svr->sendBuffer2Size = cmd->flag;
             break;
         case 26:
-            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 506);
+            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 506);
             memcpy(svr->card, GetSavedWonderCard(), 332);
             sub_814410C(svr->card);
             break;
         case 27:
-            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 512);
+            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 512);
             memcpy(svr->news, GetSavedWonderNews(), 444);
             break;
         case 28:
-            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 517);
+            AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 517);
             svr->sendBuffer1 = sub_8069E48();
             break;
         case 29:
@@ -276,8 +276,8 @@ static u32 (*const func_tbl[])(struct mevent_srv_common *) = {
 static u32 mevent_srv_exec_common(struct mevent_srv_common * svr)
 {
     u32 response;
-    AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 546);
+    AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), ABSPATH("mevent_server.c"), 546);
     response = func_tbl[svr->mainseqno](svr);
-    AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/mevent_server.c", 548);
+    AGB_ASSERT_EX(svr->mainseqno < NELEMS(func_tbl), ABSPATH("mevent_server.c"), 548);
     return response;
 }

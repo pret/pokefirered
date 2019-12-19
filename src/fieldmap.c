@@ -83,7 +83,7 @@ void sub_8058A00(struct MapHeader * mapHeader)
     VMap.map = gBackupMapLayout;
     VMap.Xsize = mapLayout->width + 15;
     VMap.Ysize = mapLayout->height + 14;
-    AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/fieldmap.c", 158);
+    AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, ABSPATH("fieldmap.c"), 158);
     map_copy_with_padding(mapLayout->map, mapLayout->width, mapLayout->height);
     mapheader_copy_mapdata_of_adjacent_maps(mapHeader);
 }

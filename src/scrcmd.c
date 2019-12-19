@@ -105,7 +105,7 @@ bool8 ScrCmd_special(struct ScriptContext *ctx)
     if (specialPtr < gSpecialsEnd)
         (*specialPtr)();
     else
-        AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c", 241);
+        AGB_ASSERT_EX(0, ABSPATH("scrcmd.c"), 241);
     return FALSE;
 }
 
@@ -116,7 +116,7 @@ bool8 ScrCmd_specialvar(struct ScriptContext *ctx)
     if (specialPtr < gSpecialsEnd)
         *varPtr = (*specialPtr)();
     else
-        AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/scrcmd.c", 263);
+        AGB_ASSERT_EX(0, ABSPATH("scrcmd.c"), 263);
     return FALSE;
 }
 

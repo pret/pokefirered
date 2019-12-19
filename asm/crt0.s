@@ -46,20 +46,29 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
+	.ifdef FIRERED
 	.4byte          4
 	.4byte          2
 	.ascii "pokemon red version"
 	.space 13
-	.4byte  0x82350AC @ gMonFrontPicTable
-	.4byte  0x823654C @ gMonBackPicTable
-	.4byte  0x823730C @ gMonPaletteTable
-	.4byte  0x82380CC @ gMonShinyPaletteTable
-	.4byte  0x83D37A0 @ gMonIconTable
-	.4byte  0x83D3E80 @ gMonIconPaletteIndices
-	.4byte  0x83D4038 @ gMonIconPaletteTable
-	.4byte  0x8245EE0 @ gSpeciesNames
-	.4byte  0x8247094 @ gMoveNames
-	.4byte  0x84556F8 @ gDecorations
+	.else
+	.ifdef LEAFGREEN
+	.4byte          5
+	.4byte          2
+	.ascii "pokemon green version"
+	.space 11
+	.endif
+	.endif
+	.4byte  gMonFrontPicTable
+	.4byte  gMonBackPicTable
+	.4byte  gMonPaletteTable
+	.4byte  gMonShinyPaletteTable
+	.4byte  gMonIconTable
+	.4byte  gMonIconPaletteIndices
+	.4byte  gMonIconPaletteTable
+	.4byte  gSpeciesNames
+	.4byte  gMoveNames
+	.4byte  gDecorations
 	.4byte      0xEE0 @ offsetof(struct SaveBlock1, flags)
 	.4byte     0x1000 @ offsetof(struct SaveBlock1, vars)
 	.4byte       0x18 @ offsetof(struct SaveBlock2, pokedex)
@@ -88,13 +97,13 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte     0x30BB
 	.4byte     0x30A7
 	.4byte          0
-	.4byte  0x8254784 @ gBaseStats
-	.4byte  0x824FC40 @ gAbilityNames
-	.4byte  0x824FB08 @ gAbilityDescriptionPointers
-	.4byte  0x83DB028 @ gItems
-	.4byte  0x8250C04 @ gBattleMoves
-	.4byte  0x826056C @ gBallSpriteSheets
-	.4byte  0x82605CC @ gBallSpritePalettes
+	.4byte  gBaseStats
+	.4byte  gAbilityNames
+	.4byte  gAbilityDescriptionPointers
+	.4byte  gItems
+	.4byte  gBattleMoves
+	.4byte  gBallSpriteSheets
+	.4byte  gBallSpritePalettes
 	.4byte       0xA8
 	.4byte      0x82C
 	.4byte      0x83B

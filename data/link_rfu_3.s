@@ -315,7 +315,7 @@ gUnknown_8457120:: @ 8457120
 
 	.align 2
 gUnknown_8457138:: @ 8457138
-	.asciz "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/rfu_union_tool.c"
+	abspath "rfu_union_tool.c"
 
 	.align 2
 gUnknown_8457174:: @ 8457174

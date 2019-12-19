@@ -1,5 +1,5 @@
 language: generic
-dist: trusty
+dist: bionic
 sudo: false
 addons:
   apt:
@@ -27,5 +27,6 @@ matrix:
       script:
         - make tools CXX=g++-7
         - make -j2 compare
+        - make -j2 compare_firered_rev1
 after_success:
   - .travis/calcrom/webhook.sh pokefirered

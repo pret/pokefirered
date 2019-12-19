@@ -337,7 +337,11 @@ sub_8105800: @ 8105800
 	cmp r0, 0
 	beq _08105864
 	ldrb r0, [r5]
+	.if REVISION == 0
 	cmp r0, 0
+	.else
+	cmp r0, 0xFF
+	.endif
 	beq _08105878
 _08105840:
 	mov r1, sp
@@ -351,7 +355,11 @@ _08105840:
 	lsrs r4, r0, 24
 	adds r0, r5, r4
 	ldrb r0, [r0]
+	.if REVISION == 0
 	cmp r0, 0
+	.else
+	cmp r0, 0xFF
+	.endif
 	beq _08105878
 	cmp r4, 0xA
 	bls _08105840

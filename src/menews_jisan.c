@@ -142,7 +142,7 @@ static u32 GetMENewsJisanState(struct MENewsJisanStruct *a0)
             return 4;
         return 5;
     default:
-        AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/menews_jisan.c", 383);
+        AGB_ASSERT_EX(0, ABSPATH("menews_jisan.c"), 383);
         return 0;
     }
 }

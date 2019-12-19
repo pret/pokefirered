@@ -93,7 +93,7 @@ void *AllocInternal(void *heapStart, u32 size)
 
         if (pos->next == head)
         {
-            AGB_ASSERT_EX(0, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 174);
+            AGB_ASSERT_EX(0, ABSPATH("gflib/malloc.c"), 174);
             return NULL;
         }
 
@@ -103,20 +103,20 @@ void *AllocInternal(void *heapStart, u32 size)
 
 void FreeInternal(void *heapStart, void *p)
 {
-    AGB_ASSERT_EX(p != NULL, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 195);
+    AGB_ASSERT_EX(p != NULL, ABSPATH("gflib/malloc.c"), 195);
 
     if (p) {
         struct MemBlock *head = (struct MemBlock *)heapStart;
         struct MemBlock *pos = (struct MemBlock *)((u8 *)p - sizeof(struct MemBlock));
-        AGB_ASSERT_EX(pos->magic_number == MALLOC_SYSTEM_ID, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 204);
-        AGB_ASSERT_EX(pos->flag == TRUE, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 205);
+        AGB_ASSERT_EX(pos->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 204);
+        AGB_ASSERT_EX(pos->flag == TRUE, ABSPATH("gflib/malloc.c"), 205);
         pos->flag = FALSE;
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.
         if (pos->next != head) {
             if (!pos->next->flag) {
-                AGB_ASSERT_EX(pos->next->magic_number == MALLOC_SYSTEM_ID, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 211);
+                AGB_ASSERT_EX(pos->next->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 211);
                 pos->size += sizeof(struct MemBlock) + pos->next->size;
                 pos->next->magic_number = 0;
                 pos->next = pos->next->next;
@@ -129,7 +129,7 @@ void FreeInternal(void *heapStart, void *p)
         // if it's not in use.
         if (pos != head) {
             if (!pos->prev->flag) {
-                AGB_ASSERT_EX(pos->prev->magic_number == MALLOC_SYSTEM_ID, "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/gflib/malloc.c", 228);
+                AGB_ASSERT_EX(pos->prev->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 228);
 
                 pos->prev->next = pos->next;
 

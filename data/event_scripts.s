@@ -12361,9 +12361,8 @@ gUnknown_81C1300:: @ 81C1300
 	.string "It looks like it's having fun.$"
 
 EventScript_1C1338:: @ 81C1338
-	waitse
-	setdivewarp MAP_UNKNOWN_MAP_00_00, 72, 7187, 8
-	nop
+	map_script_2 VAR_0x4030, 0, EventScript_1C1348
+	.2byte 0
 	copyvar VAR_0x4030, 1
 	end
 
@@ -14474,8 +14473,9 @@ Text_1C55A4:: @ 81C55A4
 	.string "テストよう　メッセージです！\n"
 	.string "ざひょう　チェックの　イベントです$"
 
-Text_1C55C5:: @ 81C55C5
-	.string "   $"
+	.align 2
+Text_1C55C8:: @ 81C55C8
+	.string "$"
 
 gText_WouldYouLikeToSaveTheGame:: @ 81C55C9
 	.string "Would you like to save the game?$"

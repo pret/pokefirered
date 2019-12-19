@@ -5,36 +5,7 @@ CPP := $(CC) -E
 LD := tools/binutils/bin/arm-none-eabi-ld
 OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
-GAME_VERSION := FIRERED
-REVISION := 0
-GAME_LANGUAGE := ENGLISH
-
-# So long as baserom.gba is required, we error out if the
-# user tries to build any ROM other than FireRed.
-ifneq ($(GAME_VERSION),FIRERED)
-$(error We can only build English Pokemon FireRed v1.0 currently)
-else ifneq ($(REVISION),0)
-$(error We can only build English Pokemon FireRed v1.0 currently)
-else ifneq ($(GAME_LANGUAGE),ENGLISH)
-$(error We can only build English Pokemon FireRed v1.0 currently)
-endif
-
-ifeq ($(GAME_VERSION),FIRERED)
-TITLE       := POKEMON FIRE
-GAME_CODE   := BPR
-BUILD_NAME  := firered
-else
-TITLE       := POKEMON LEAF
-GAME_CODE   := BPL
-BUILD_NAME  := leafgreen
-endif
-ifeq ($(GAME_LANGUAGE),ENGLISH)
-GAME_CODE   := $(GAME_CODE)E
-endif
-ifneq ($(REVISION),0)
-BUILD_NAME  := $(BUILD_NAME)_rev$(REVISION)
-endif
-MAKER_CODE  := 01
+include config.mk
 
 SHELL := /bin/bash -o pipefail
 
@@ -57,12 +28,12 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(GAME_LANGUAGE)=1
+ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1
 
 CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
 
-CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
+CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -nostdinc -undef -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE)
 
 LDFLAGS = -Map ../../$(MAP)
 
@@ -133,7 +104,7 @@ all: tools rom
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
-	@$(SHA1) rom.sha1
+	@$(SHA1) $(BUILD_NAME).sha1
 endif
 
 tools: $(TOOLDIRS)
@@ -252,8 +223,18 @@ $(OBJ_DIR)/ld_script.ld: ld_script.txt $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_comm
 
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && ../../$(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
+# "friendly" target names for convenience sake
+firered:                ; @$(MAKE) GAME_VERSION=FIRERED
+firered_rev1:           ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1
+leafgreen:              ; @$(MAKE) GAME_VERSION=LEAFGREEN
+leafgreen_rev1:         ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1
+
+compare_firered:        ; @$(MAKE) GAME_VERSION=FIRERED COMPARE=1
+compare_firered_rev1:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 COMPARE=1
+compare_leafgreen:      ; @$(MAKE) GAME_VERSION=LEAFGREEN COMPARE=1
+compare_leafgreen_rev1: ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1 COMPARE=1

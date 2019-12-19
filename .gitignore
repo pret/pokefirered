@@ -10,6 +10,9 @@
 *.exe
 *.fwjpnfont
 *.gba
+*.sgm
+*.sa1
+*.sg1
 *.gbapal
 *.hwjpnfont
 *.i

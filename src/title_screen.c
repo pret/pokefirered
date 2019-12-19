@@ -54,7 +54,7 @@ static void SetGpuRegsForTitleScreenRun(void);
 static void SetTitleScreenScene_Restart(s16 * data);
 static void SetTitleScreenScene_Cry(s16 * data);
 static void Task_TitleScreen_SlideWin0(u8 taskId);
-static void Task_TitleScreen_PaletteSomething(u8 taskId);
+static void Task_TitleScreen_BlinkPressStart(u8 taskId);
 static void SignalEndTitleScreenPaletteSomethingTask(void);
 static void UpdateScanlineEffectRegBuffer(s16 a0);
 static void ScheduleStopScanlineEffect(void);
@@ -509,7 +509,7 @@ static void SetTitleScreenScene_Run(s16 * data)
     {
     case 0:
         HelpSystem_SetSomeVariable2(1);
-        CreateTask(Task_TitleScreen_PaletteSomething, 0);
+        CreateTask(Task_TitleScreen_BlinkPressStart, 0);
         CreateTask(Task_FlameOrLeafSpawner, 5);
         SetGpuRegsForTitleScreenRun();
         data[6] = CreateSlashSprite();
@@ -569,7 +569,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
     case 2:
         if (IsNotWaitingForBGMStop() && !gPaletteFade.active)
         {
-            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_PaletteSomething));
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_BlinkPressStart));
             data[2] = 0;
             data[1]++;
         }
@@ -578,7 +578,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
         data[2]++;
         if (data[2] >= 20)
         {
-            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_PaletteSomething));
+            DestroyTask(FindTaskIdByFunc(Task_TitleScreen_BlinkPressStart));
             data[1]++;
         }
         break;
@@ -692,7 +692,7 @@ static void Task_TitleScreen_SlideWin0(u8 taskId)
     }
 }
 
-static void Task_TitleScreen_PaletteSomething(u8 taskId)
+static void Task_TitleScreen_BlinkPressStart(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     s32 i;
@@ -738,7 +738,7 @@ static void Task_TitleScreen_PaletteSomething(u8 taskId)
 
 static void SignalEndTitleScreenPaletteSomethingTask(void)
 {
-    u8 taskId = FindTaskIdByFunc(Task_TitleScreen_PaletteSomething);
+    u8 taskId = FindTaskIdByFunc(Task_TitleScreen_BlinkPressStart);
     gTasks[taskId].data[15] = TRUE;
 }
 

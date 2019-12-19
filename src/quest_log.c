@@ -179,9 +179,9 @@ static void sub_8113A1C(u16);
 static void sub_811381C(void);
 static bool8 sub_8113A44(u16, const u16 *);
 static u16 *QuestLog_SkipCommand(u16 *, u16 **);
-static void sub_8113ABC(u16 *);
-static bool8 sub_8113AE8(u16 *);
-static bool8 sub_8113B44(u16 *);
+static void sub_8113ABC(const u16 *);
+static bool8 sub_8113AE8(const u16 *);
+static bool8 sub_8113B44(const u16 *);
 static void sub_8113B88(void);
 static void sub_8113B94(u16);
 static void sub_8113BD8(void);
@@ -2831,19 +2831,24 @@ static u16 *QuestLog_SkipCommand(u16 *curPtr, u16 **prevPtr_p)
     return sQuestLogEventCmdSizes[idx] + (sQuestLogEventCmdSizes[idx] - 4) * cnt + (void *)curPtr;
 }
 
-static void sub_8113ABC(u16 *a0)
+static void sub_8113ABC(const u16 *a0)
 {
-    u8 *r2 = (u8 *)(a0 + 2);
+    const u8 *r2 = (const u8 *)(a0 + 2);
     if ((a0[0] & 0xFFF) != 35)
         gUnknown_203B04A = 0;
     else
         gUnknown_203B04A = r2[1] + 1;
 }
 
-#ifdef NONMATCHING
-static bool8 sub_8113AE8(u16 *a0)
+static bool8 sub_8113AE8(const u16 *a0)
 {
-    if (a0 == NULL || a0[1] > sQuestLogIdx)
+#ifndef NONMATCHING
+    register const u16 *r0 asm("r0") = a0;
+#else
+    const u16 *r0 = a0;
+#endif
+    
+    if (r0 == NULL || r0[1] > sQuestLogIdx)
         return FALSE;
 
     sQuestLogScriptParsingCBs[a0[0] & 0xFFF](a0);
@@ -2853,60 +2858,8 @@ static bool8 sub_8113AE8(u16 *a0)
         gUnknown_203B044.unk_2 = 1;
     return TRUE;
 }
-#else
-NAKED
-static bool8 sub_8113AE8(u16 *a0)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tadds r4, r0, 0\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08113AFA\n"
-                "\tldr r1, _08113B00 @ =sQuestLogIdx\n"
-                "\tldrh r0, [r0, 0x2]\n"
-                "\tldrh r1, [r1]\n"
-                "\tcmp r0, r1\n"
-                "\tbls _08113B04\n"
-                "_08113AFA:\n"
-                "\tmovs r0, 0\n"
-                "\tb _08113B32\n"
-                "\t.align 2, 0\n"
-                "_08113B00: .4byte sQuestLogIdx\n"
-                "_08113B04:\n"
-                "\tldr r2, _08113B38 @ =sQuestLogScriptParsingCBs\n"
-                "\tldrh r1, [r4]\n"
-                "\tldr r0, _08113B3C @ =0x00000fff\n"
-                "\tands r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tadds r0, r2\n"
-                "\tldr r1, [r0]\n"
-                "\tadds r0, r4, 0\n"
-                "\tbl _call_via_r1\n"
-                "\tldr r2, _08113B40 @ =gUnknown_203B044\n"
-                "\tldrh r1, [r4]\n"
-                "\tstrb r1, [r2]\n"
-                "\tmovs r0, 0xF0\n"
-                "\tlsls r0, 8\n"
-                "\tands r0, r1\n"
-                "\tlsrs r0, 12\n"
-                "\tstrb r0, [r2, 0x1]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _08113B30\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r2, 0x2]\n"
-                "_08113B30:\n"
-                "\tmovs r0, 0x1\n"
-                "_08113B32:\n"
-                "\tpop {r4}\n"
-                "\tpop {r1}\n"
-                "\tbx r1\n"
-                "\t.align 2, 0\n"
-                "_08113B38: .4byte sQuestLogScriptParsingCBs\n"
-                "_08113B3C: .4byte 0x00000fff\n"
-                "_08113B40: .4byte gUnknown_203B044");
-}
-#endif
 
-static bool8 sub_8113B44(u16 *a0)
+static bool8 sub_8113B44(const u16 *a0)
 {
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;

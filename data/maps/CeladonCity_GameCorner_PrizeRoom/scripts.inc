@@ -42,32 +42,67 @@ EventScript_16CC10:: @ 816CC10
 	end
 
 EventScript_16CC15:: @ 816CC15
+	.ifdef FIRERED
 	setvar VAR_0x4001, SPECIES_ABRA
 	setvar VAR_0x4002, 180
+	.else
+	.ifdef LEAFGREEN
+	setvar VAR_0x4001, SPECIES_ABRA
+	setvar VAR_0x4002, 120
+	.endif
+	.endif
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC25:: @ 816CC25
+	.ifdef FIRERED
 	setvar VAR_0x4001, SPECIES_CLEFAIRY
 	setvar VAR_0x4002, 500
+	.else
+	.ifdef LEAFGREEN
+	setvar VAR_0x4001, SPECIES_CLEFAIRY
+	setvar VAR_0x4002, 750
+	.endif
+	.endif
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC35:: @ 816CC35
+	.ifdef FIRERED
 	setvar VAR_0x4001, SPECIES_DRATINI
 	setvar VAR_0x4002, 2800
+	.else
+	.ifdef LEAFGREEN
+	setvar VAR_0x4001, SPECIES_PINSIR
+	setvar VAR_0x4002, 2500
+	.endif
+	.endif
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC45:: @ 816CC45
+	.ifdef FIRERED
 	setvar VAR_0x4001, SPECIES_SCYTHER
 	setvar VAR_0x4002, 5500
+	.else
+	.ifdef LEAFGREEN
+	setvar VAR_0x4001, SPECIES_DRATINI
+	setvar VAR_0x4002, 4600
+	.endif
+	.endif
 	goto EventScript_16CC65
 	end
 
 EventScript_16CC55:: @ 816CC55
+	.ifdef FIRERED
 	setvar VAR_0x4001, SPECIES_PORYGON
 	setvar VAR_0x4002, 9999
+	.else
+	.ifdef LEAFGREEN
+	setvar VAR_0x4001, SPECIES_PORYGON
+	setvar VAR_0x4002, 6500
+	.endif
+	.endif
 	goto EventScript_16CC65
 	end
 
@@ -90,17 +125,35 @@ EventScript_16CC65:: @ 816CC65
 	end
 
 EventScript_16CCD4:: @ 816CCD4
+	.ifdef FIRERED
 	givemon VAR_0x4001, 9, ITEM_NONE, 0, 0, 0
+	.else
+	.ifdef LEAFGREEN
+	givemon VAR_0x4001, 7, ITEM_NONE, 0, 0, 0
+	.endif
+	.endif
 	goto EventScript_16CD52
 	end
 
 EventScript_16CCE9:: @ 816CCE9
+	.ifdef FIRERED
 	givemon VAR_0x4001, 8, ITEM_NONE, 0, 0, 0
+	.else
+	.ifdef LEAFGREEN
+	givemon VAR_0x4001, 12, ITEM_NONE, 0, 0, 0
+	.endif
+	.endif
 	goto EventScript_16CD52
 	end
 
 EventScript_16CCFE:: @ 816CCFE
+	.ifdef FIRERED
 	givemon VAR_0x4001, 18, ITEM_NONE, 0, 0, 0
+	.else
+	.ifdef LEAFGREEN
+	givemon VAR_0x4001, 24, ITEM_NONE, 0, 0, 0
+	.endif
+	.endif
 	goto EventScript_16CD52
 	end
 
@@ -110,7 +163,13 @@ EventScript_16CD13:: @ 816CD13
 	end
 
 EventScript_16CD28:: @ 816CD28
+	.ifdef FIRERED
 	givemon VAR_0x4001, 26, ITEM_NONE, 0, 0, 0
+	.else
+	.ifdef LEAFGREEN
+	givemon VAR_0x4001, 18, ITEM_NONE, 0, 0, 0
+	.endif
+	.endif
 	goto EventScript_16CD52
 	end
 

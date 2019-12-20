@@ -1006,7 +1006,7 @@ static void Task_FlameOrLeafSpawner(u8 taskId)
 
 static void CreateFlameOrLeafSprite(s32 y0, s32 x1, s32 y1)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, 0xF0, y0, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State1, 0xF0, y0, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[0] = 0xF00;
@@ -1036,7 +1036,7 @@ static void sub_LG_8079844(void)
     u8 spriteId;
     for (i = 0; i < 4; i++)
     {
-        spriteId = CreateSprite(&sUnknownEmptySprite, 0x100 + 0x28 * i, gUnknown_LG_83BFA10[i], 0xFF);
+        spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf_State0, 0x100 + 0x28 * i, gUnknown_LG_83BFA10[i], 0xFF);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[7] = i;
@@ -1066,12 +1066,12 @@ static void Task_FlameOrLeafSpawner(u8 taskId)
         {
             data[1] = 0;
             data[2] = (TitleScreen_rand(taskId, 3) % 6) + 6;
-            rval = TitleScreen_rand(taskId, 3) % 48;
+            rval = TitleScreen_rand(taskId, 3) % 30;
             r6 = 16;
             if (rval >= 6)
             {
                 r6 = 48;
-                if (rval < 18)
+                if (rval < 12)
                     r6 = 24;
             }
             r4 = (TitleScreen_rand(taskId, 3) % 4) - 2;

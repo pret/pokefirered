@@ -162,14 +162,21 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
 };
 
 #if defined(FIRERED)
-#define sOamData_LG_83BF950 sOamData_FlameOrLeaf
+static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
+    .tileTag = 1,
+    .paletteTag = 0,
+    .oam = &sOamData_FlameOrLeaf,
+    .anims = sSpriteAnimTable_FlameOrLeaf,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 #elif defined(LEAFGREEN)
 static const struct OamData sOamData_LG_83BF950 = {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 3
 };
-#endif
 
 static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
     .tileTag = 1,
@@ -180,8 +187,9 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
+#endif
 
-static const struct OamData sOamData_UnknownTemptySprite = {
+static const struct OamData sOamData_UnknownEmptySprite = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .shape = ST_OAM_V_RECTANGLE,
     .size = ST_OAM_SIZE_3,
@@ -193,7 +201,7 @@ static const struct OamData sOamData_UnknownTemptySprite = {
 static const struct SpriteTemplate sUnknownEmptySprite = {
     .tileTag = 2,
     .paletteTag = 2,
-    .oam = &sOamData_UnknownTemptySprite,
+    .oam = &sOamData_UnknownEmptySprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,

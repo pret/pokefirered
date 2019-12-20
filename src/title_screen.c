@@ -89,7 +89,7 @@ static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_8
 static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
 #elif defined(LEAFGREEN)
 static const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_lg_83bf764.gbapal");
-static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf784.4bpp.lz");
+static const u8 sLeafSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf784.4bpp.lz");
 static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf89c.4bpp.lz");
 #endif
 
@@ -165,8 +165,8 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
 #define sOamData_LG_83BF950 sOamData_FlameOrLeaf
 #elif defined(LEAFGREEN)
 static const struct OamData sOamData_LG_83BF950 = {
-    .shape = SPRITE_SHAPE(16x32),
-    .size = SPRITE_SIZE(16x32),
+    .shape = SPRITE_SHAPE(32x16),
+    .size = SPRITE_SIZE(32x16),
     .priority = 3
 };
 #endif
@@ -175,7 +175,7 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
     .tileTag = 1,
     .paletteTag = 0,
     .oam = &sOamData_LG_83BF950,
-    .anims = sSpriteAnimTable_FlameOrLeaf,
+    .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
@@ -264,12 +264,21 @@ static void (*const sSceneFuncs[])(s16 * data) = {
     SetTitleScreenScene_Cry
 };
 
+#if defined(FIRERED)
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {(const void *)sFireSpriteTiles, 0x500, 0},
     {(const void *)sBlankFireSpriteTiles, 0x500, 1},
     {(const void *)gGraphics_TitleScreen_BlankObjTiles, 0x400, 2},
     {(const void *)sSlashSpriteTiles, 0x800, 3}
 };
+#elif defined(LEAFGREEN)
+static const struct CompressedSpriteSheet sSpriteSheets[] = {
+    {(const void *)sLeafSpriteTiles, 0x580, 0},
+    {(const void *)sBlankFireSpriteTiles, 0x100, 1},
+    {(const void *)gGraphics_TitleScreen_BlankObjTiles, 0x400, 2},
+    {(const void *)sSlashSpriteTiles, 0x800, 3}
+};
+#endif
 
 static const struct SpritePalette sSpritePals[] = {
     {sSlashSpritePals, 0},
@@ -284,7 +293,7 @@ static const u8 gUnknown_83BFBD4[] = {
 
 #elif defined(LEAFGREEN)
 static const u16 gUnknown_LG_83BFA10[] = {
-    50, 80, 110, 60, 90, 70, 100, 50
+    40, 80, 110, 60, 90, 70, 100, 50
 };
 #endif
 

@@ -9167,10 +9167,10 @@ _080FCB88:
 	negs r0, r0
 	ands r0, r2
 	.ifdef FIRERED
-	movs r2, 0x10
+	movs r2, 0x10 @ VERSION_FIRE_RED << 2
 	.else
 	.ifdef LEAFGREEN
-	movs r2, 0x14
+	movs r2, 0x14 @ VERSION_LEAF_GREEN << 2
 	.endif
 	.endif
 	orrs r0, r2

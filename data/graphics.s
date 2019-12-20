@@ -16548,6 +16548,9 @@ gGraphics_TitleScreen_CharizardTiles:: @ 8EAD608
 
 gGraphics_TitleScreen_CharizardMap:: @ 8EADEE4
 	.incbin "graphics/title_screen/unk_8eadee4.bin.lz"
+
+gGraphics_TitleScreen_BackgroundPals:: @ 8EAE094
+	.incbin "graphics/title_screen/unk_8eae094.gbapal"
 	.else
 	.ifdef LEAFGREEN
 gGraphics_TitleScreen_PokemonFireRedLogoPals:: @ 8EAB6C4
@@ -16567,11 +16570,11 @@ gGraphics_TitleScreen_CharizardTiles:: @ 8EAD608
 
 gGraphics_TitleScreen_CharizardMap:: @ 8EADEE4
 	.incbin "graphics/title_screen/unk_lg_8eae1ec.bin.lz"
-	.endif
-	.endif
 
 gGraphics_TitleScreen_BackgroundPals:: @ 8EAE094
-	.incbin "graphics/title_screen/unk_8eae094.gbapal"
+	.incbin "graphics/title_screen/unk_lg_8eae388.gbapal"
+	.endif
+	.endif
 
 gGraphics_TitleScreen_CopyrightPressStartTiles:: @ 8EAE0B4
 	.incbin "graphics/title_screen/unk_8eae0b4.4bpp.lz"
@@ -16579,8 +16582,15 @@ gGraphics_TitleScreen_CopyrightPressStartTiles:: @ 8EAE0B4
 gGraphics_TitleScreen_CopyrightPressStartMap:: @ 8EAE374
 	.incbin "graphics/title_screen/unk_8eae374.bin.lz"
 
+	.ifdef FIRERED
 gGraphics_TitleScreen_FirePals:: @ 8EAE488
 	.incbin "graphics/title_screen/unk_8eae488.gbapal"
+	.else
+	.ifdef LEAFGREEN
+gGraphics_TitleScreen_FirePals:: @ 8EAE488
+	.incbin "graphics/title_screen/unk_lg_8eae77c.gbapal"
+	.endif
+	.endif
 
 gGraphics_TitleScreen_BlankObjTiles:: @ 8EAE4A8
 	.incbin "graphics/title_screen/unk_8eae4a8.4bpp.lz"

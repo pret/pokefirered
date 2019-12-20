@@ -145,7 +145,7 @@ static void sub_8141BA0(u8 a0);
 static void sub_8141BE4(void);
 static void sub_8141C30(u8, u8);
 
-static const u8 gUnknown_8464890[][2] = {
+/*static*/ const u8 gUnknown_8464890[][2] = {
     {0x00, 0x03},
     {0x00, 0x06},
     {0x03, 0x06},
@@ -167,7 +167,7 @@ static const u8 gUnknown_8464890[][2] = {
     {0x04, 0x06}
 };
 
-static const u8 gUnknown_84648AE[][3] = {
+/*static*/ const u8 gUnknown_84648AE[][3] = {
     {0x00, 0x03, 0x06}, // top row
     {0x01, 0x04, 0x07}, // middle row
     {0x02, 0x05, 0x08}, // bottom row
@@ -175,7 +175,7 @@ static const u8 gUnknown_84648AE[][3] = {
     {0x02, 0x04, 0x06}  // bl-tr
 };
 
-static const u8 gUnknown_84648BD[][4] = {
+/*static*/ const u8 gUnknown_84648BD[][4] = {
     {0x00, 0x04, 0x08, 0x03}, // tl-br
     {0x00, 0x03, 0x06, 0x02}, // top row
     {0x01, 0x04, 0x07, 0x01}, // middle row
@@ -183,7 +183,7 @@ static const u8 gUnknown_84648BD[][4] = {
     {0x02, 0x04, 0x06, 0x03}  // bl-tr
 };
 
-static const u16 gUnknown_84648D2[][7] = {
+/*static*/ const u16 gUnknown_84648D2[][7] = {
     {0x1fa1, 0x2eab, 0x3630, 0x39f3, 0x3bd4, 0x3bfc, 0x0049},
     {0x1f97, 0x2ea2, 0x3627, 0x39e9, 0x3bca, 0x3bf8, 0x0049},
     {0x1f91, 0x2e9b, 0x3620, 0x39e3, 0x3bc4, 0x3bf4, 0x0049},
@@ -192,13 +192,13 @@ static const u16 gUnknown_84648D2[][7] = {
     {0x1fc9, 0x2efc, 0x3696, 0x3a63, 0x3c49, 0x3c8b, 0x0073},
 };
 
-static const u8 gUnknown_8464926[][21] = {
+/*static*/ const u8 gUnknown_8464926[][21] = {
     {0x00, 0x03, 0x04, 0x01, 0x02, 0x06, 0x02, 0x05, 0x00, 0x06, 0x03, 0x01, 0x04, 0x02, 0x06, 0x00, 0x05, 0x02, 0x01, 0x06, 0x02},
     {0x00, 0x05, 0x04, 0x03, 0x01, 0x05, 0x04, 0x03, 0x02, 0x05, 0x04, 0x03, 0x00, 0x05, 0x04, 0x01, 0x03, 0x06, 0x05, 0x03, 0x04},
     {0x00, 0x03, 0x06, 0x05, 0x02, 0x03, 0x06, 0x05, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x01},
 };
 
-static const u16 gUnknown_8464966[] = {
+/*static*/ const u16 gUnknown_8464966[] = {
       0,
       2,
       6,
@@ -208,24 +208,32 @@ static const u16 gUnknown_8464966[] = {
     300
 };
 
-static const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
-static const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
-static const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
-static const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
-static const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
-static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
-static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
-static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
-static const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
-static const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+/*static*/ const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
+/*static*/ const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
+/*static*/ const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
+/*static*/ const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
+/*static*/ const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
+#if defined(FIRERED)
+/*static*/ const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
+#elif defined(LEAFGREEN)
+/*static*/ const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464434.4bpp.lz");
+#endif
+/*static*/ const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
+#if defined(FIRERED)
+/*static*/ const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+#elif defined(LEAFGREEN)
+/*static*/ const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464a3c.4bpp.lz");
+#endif
+/*static*/ const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
+/*static*/ const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
 
-static const struct CompressedSpriteSheet gUnknown_84655B0[] = {
+/*static*/ const struct CompressedSpriteSheet gUnknown_84655B0[] = {
     {(const void *)gUnknown_8464A14, 0xe00, 0},
     {(const void *)gUnknown_846506C, 0xc00, 1},
     {(const void *)gUnknown_8465544, 0x280, 2},
 };
 
-static const struct SpritePalette gUnknown_84655C8[] = {
+/*static*/ const struct SpritePalette gUnknown_84655C8[] = {
     {gUnknown_8464974, 0},
     {gUnknown_8464994, 1},
     {gUnknown_84649B4, 2},
@@ -236,7 +244,7 @@ static const struct SpritePalette gUnknown_84655C8[] = {
     {NULL}
 };
 
-static const u16 gUnknown_8465608[] = {
+/*static*/ const u16 gUnknown_8465608[] = {
     2,
     2,
     0,
@@ -246,7 +254,7 @@ static const u16 gUnknown_8465608[] = {
     3
 };
 
-static const u16 gUnknown_8465616[] = {
+/*static*/ const u16 gUnknown_8465616[] = {
     0x0120, 0x011f, 0x011e, 0x011d, 0x011c, 0x011b, 0x011a, 0x0119, 0x0118, 0x0117, 0x0116, 0x0115, 0x0114, 0x0113, 0x0112, 0x0111,
     0x0110, 0x010f, 0x010e, 0x010d, 0x010c, 0x010b, 0x010a, 0x0109, 0x0108, 0x0107, 0x0106, 0x0105, 0x0104, 0x0103, 0x0102, 0x0101,
     0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100, 0x0100,
@@ -255,13 +263,13 @@ static const u16 gUnknown_8465616[] = {
     0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118, 0x0119, 0x011a, 0x011b, 0x011c, 0x011d, 0x011e, 0x011f, 0x0120
 };
 
-static const u8 gUnknown_84656D6[] = {
+/*static*/ const u8 gUnknown_84656D6[] = {
     0x10, 0x10, 0x10, 0x10, 0x0f, 0x0e, 0x0d, 0x0d, 0x0c, 0x0b, 0x0a, 0x0a, 0x09, 0x08, 0x07, 0x07, 0x06, 0x05, 0x04, 0x04, 0x03, 0x02, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x04, 0x05, 0x06, 0x06, 0x07, 0x08, 0x09, 0x09, 0x0a, 0x0b, 0x0c, 0x0c, 0x0d, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f
 };
 
-static const struct OamData gUnknown_8465738 = {
+/*static*/ const struct OamData gUnknown_8465738 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -277,67 +285,67 @@ static const struct OamData gUnknown_8465738 = {
     .affineParam = 0
 };
 
-static const union AnimCmd gUnknown_8465740[] = {
+/*static*/ const union AnimCmd gUnknown_8465740[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465748[] = {
+/*static*/ const union AnimCmd gUnknown_8465748[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465750[] = {
+/*static*/ const union AnimCmd gUnknown_8465750[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465758[] = {
+/*static*/ const union AnimCmd gUnknown_8465758[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465760[] = {
+/*static*/ const union AnimCmd gUnknown_8465760[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465768[] = {
+/*static*/ const union AnimCmd gUnknown_8465768[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465770[] = {
+/*static*/ const union AnimCmd gUnknown_8465770[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465778[] = {
+/*static*/ const union AnimCmd gUnknown_8465778[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465780[] = {
+/*static*/ const union AnimCmd gUnknown_8465780[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465788[] = {
+/*static*/ const union AnimCmd gUnknown_8465788[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465790[] = {
+/*static*/ const union AnimCmd gUnknown_8465790[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465798[] = {
+/*static*/ const union AnimCmd gUnknown_8465798[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_84657A0[] = {
+/*static*/ const union AnimCmd *const gUnknown_84657A0[] = {
     gUnknown_8465740,
     gUnknown_8465748,
     gUnknown_8465750,
@@ -352,20 +360,20 @@ static const union AnimCmd *const gUnknown_84657A0[] = {
     gUnknown_8465798
 };
 
-static const union AffineAnimCmd gUnknown_84657D0[] = {
+/*static*/ const union AffineAnimCmd gUnknown_84657D0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 1),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gUnknown_84657E0[] = {
+/*static*/ const union AffineAnimCmd *const gUnknown_84657E0[] = {
     gUnknown_84657D0
 };
 
-static const struct SpriteTemplate gUnknown_84657E4 = {
+/*static*/ const struct SpriteTemplate gUnknown_84657E4 = {
     0, 0, &gUnknown_8465738, gUnknown_84657A0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_84657FC = {
+/*static*/ const struct OamData gUnknown_84657FC = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -381,57 +389,57 @@ static const struct OamData gUnknown_84657FC = {
     .affineParam = 0
 };
 
-static const union AnimCmd gUnknown_8465804[] = {
+/*static*/ const union AnimCmd gUnknown_8465804[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846580C[] = {
+/*static*/ const union AnimCmd gUnknown_846580C[] = {
     ANIMCMD_FRAME(0x02, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465814[] = {
+/*static*/ const union AnimCmd gUnknown_8465814[] = {
     ANIMCMD_FRAME(0x04, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846581C[] = {
+/*static*/ const union AnimCmd gUnknown_846581C[] = {
     ANIMCMD_FRAME(0x06, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465824[] = {
+/*static*/ const union AnimCmd gUnknown_8465824[] = {
     ANIMCMD_FRAME(0x08, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846582C[] = {
+/*static*/ const union AnimCmd gUnknown_846582C[] = {
     ANIMCMD_FRAME(0x0a, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465834[] = {
+/*static*/ const union AnimCmd gUnknown_8465834[] = {
     ANIMCMD_FRAME(0x0c, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846583C[] = {
+/*static*/ const union AnimCmd gUnknown_846583C[] = {
     ANIMCMD_FRAME(0x0e, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465844[] = {
+/*static*/ const union AnimCmd gUnknown_8465844[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846584C[] = {
+/*static*/ const union AnimCmd gUnknown_846584C[] = {
     ANIMCMD_FRAME(0x12, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_8465854[] = {
+/*static*/ const union AnimCmd *const gUnknown_8465854[] = {
     gUnknown_8465804,
     gUnknown_846580C,
     gUnknown_8465814,
@@ -444,11 +452,11 @@ static const union AnimCmd *const gUnknown_8465854[] = {
     gUnknown_846584C
 };
 
-static const struct SpriteTemplate gUnknown_846587C = {
+/*static*/ const struct SpriteTemplate gUnknown_846587C = {
     2, 6, &gUnknown_84657FC, gUnknown_8465854, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_8465894 = {
+/*static*/ const struct OamData gUnknown_8465894 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -464,37 +472,37 @@ static const struct OamData gUnknown_8465894 = {
     .affineParam = 0
 };
 
-static const union AnimCmd gUnknown_846589C[] = {
+/*static*/ const union AnimCmd gUnknown_846589C[] = {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_84658A4[] = {
+/*static*/ const union AnimCmd gUnknown_84658A4[] = {
     ANIMCMD_FRAME( 0, 24),
     ANIMCMD_FRAME(16, 24),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gUnknown_84658B0[] = {
+/*static*/ const union AnimCmd gUnknown_84658B0[] = {
     ANIMCMD_FRAME(32, 28),
     ANIMCMD_FRAME(48, 28),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd gUnknown_84658BC[] = {
+/*static*/ const union AnimCmd gUnknown_84658BC[] = {
     ANIMCMD_FRAME(64, 12),
     ANIMCMD_FRAME(80, 12),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gUnknown_84658C8[] = {
+/*static*/ const union AnimCmd *const gUnknown_84658C8[] = {
     gUnknown_846589C,
     gUnknown_84658A4,
     gUnknown_84658B0,
     gUnknown_84658BC
 };
 
-static const struct SpriteTemplate gUnknown_84658D8 = {
+/*static*/ const struct SpriteTemplate gUnknown_84658D8 = {
     1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
@@ -517,23 +525,23 @@ bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
     sub_8141764
 };
 
-static const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
-static const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
-static const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
-static const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
-static const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
-static const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
-static const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
-static const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
-static const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
-static const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
-static const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
-static const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
-static const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
-static const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
-static const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
+/*static*/ const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
+/*static*/ const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
+/*static*/ const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
+/*static*/ const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
+/*static*/ const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
+/*static*/ const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
+/*static*/ const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
+/*static*/ const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
+/*static*/ const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
+/*static*/ const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
+/*static*/ const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
+/*static*/ const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
+/*static*/ const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
+/*static*/ const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
+/*static*/ const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
 
-static const struct BgTemplate gUnknown_8466B10[] = {
+/*static*/ const struct BgTemplate gUnknown_8466B10[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -569,7 +577,7 @@ static const struct BgTemplate gUnknown_8466B10[] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8466B20[] = {
+/*static*/ const struct WindowTemplate gUnknown_8466B20[] = {
     {
         .bg = 0,
         .tilemapLeft = 5,
@@ -590,27 +598,27 @@ static const struct WindowTemplate gUnknown_8466B20[] = {
     DUMMY_WIN_TEMPLATE
 };
 
-static const u16 gUnknown_8466B38[] = {
+/*static*/ const u16 gUnknown_8466B38[] = {
     0x00a4, 0x00a5, 0x00a6, 0x00c4, 0x00c5, 0x00c6, 0x00c7, 0x00e7, 0x012c, 0x014c, 0x0191, 0x01b1, 0x01f6, 0x0216, 0x0217, 0x0218, 0x0219, 0x0237, 0x0238, 0x0239
 };
 
-static const u16 gUnknown_8466B60[] = {
+/*static*/ const u16 gUnknown_8466B60[] = {
     0x00e4, 0x00e5, 0x00e6, 0x00f7, 0x00f8, 0x00f9, 0x0104, 0x0105, 0x0106, 0x0107, 0x010c, 0x0111, 0x0116, 0x0117, 0x0118, 0x0119, 0x0124, 0x0125, 0x0126, 0x0137, 0x0138, 0x0139
 };
 
-static const u16 gUnknown_8466B8C[] = {
+/*static*/ const u16 gUnknown_8466B8C[] = {
     0x0144, 0x0145, 0x0146, 0x0157, 0x0158, 0x0159, 0x0164, 0x0165, 0x0166, 0x0167, 0x016c, 0x0171, 0x0176, 0x0177, 0x0178, 0x0179, 0x0184, 0x0185, 0x0186, 0x0197, 0x0198, 0x0199
 };
 
-static const u16 gUnknown_8466BB8[] = {
+/*static*/ const u16 gUnknown_8466BB8[] = {
     0x01a4, 0x01a5, 0x01a6, 0x01b7, 0x01b8, 0x01b9, 0x01c4, 0x01c5, 0x01c6, 0x01c7, 0x01cc, 0x01d1, 0x01d6, 0x01d7, 0x01d8, 0x01d9, 0x01e4, 0x01e5, 0x01e6, 0x01f7, 0x01f8, 0x01f9
 };
 
-static const u16 gUnknown_8466BE4[] = {
+/*static*/ const u16 gUnknown_8466BE4[] = {
     0x0204, 0x0205, 0x0206, 0x0224, 0x0225, 0x0226, 0x01e7, 0x0207, 0x018c, 0x01ac, 0x0131, 0x0151, 0x00d6, 0x00f6, 0x00b7, 0x00b8, 0x00b9, 0x00d7, 0x00d8, 0x00d9
 };
 
-static const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
+/*static*/ const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
     { gUnknown_8466B38, NELEMS(gUnknown_8466B38) },
     { gUnknown_8466B60, NELEMS(gUnknown_8466B60) },
     { gUnknown_8466B8C, NELEMS(gUnknown_8466B8C) },
@@ -618,9 +626,9 @@ static const struct UnkStruct_8466C0C gUnknown_8466C0C[] = {
     { gUnknown_8466BE4, NELEMS(gUnknown_8466BE4) }
 };
 
-static const u8 gUnknown_8466C34[2] = {2, 4};
+/*static*/ const u8 gUnknown_8466C34[2] = {2, 4};
 
-static const struct WindowTemplate gUnknown_8466C38 = {
+/*static*/ const struct WindowTemplate gUnknown_8466C38 = {
     .bg = 0,
     .tilemapLeft = 19,
     .tilemapTop = 9,
@@ -630,7 +638,7 @@ static const struct WindowTemplate gUnknown_8466C38 = {
     .baseBlock = 0x9F
 };
 
-static const u16 gUnknown_8466C40[][4] = {
+/*static*/ const u16 gUnknown_8466C40[][4] = {
     {0x0229, 0x022a, 0x0249, 0x024a},
     {0x022e, 0x022f, 0x024e, 0x024f},
     {0x0233, 0x0234, 0x0253, 0x0254}

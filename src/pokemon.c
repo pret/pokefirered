@@ -1603,6 +1603,7 @@ static const u16 sHMMoves[] =
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, 0xFFFF
 };
 
+#if defined(FIRERED)
 static const u16 sDeoxysBaseStats[] = 
 {
     50, // Hp
@@ -1612,6 +1613,17 @@ static const u16 sDeoxysBaseStats[] =
     180, // Sp.Attack
     20, // Sp.Defense
 };
+#elif defined LEAFGREEN
+static const u16 sDeoxysBaseStats[] =
+{
+    50, // Hp
+    70, // Attack
+    160, // Defense
+    90, // Speed
+    70, // Sp.Attack
+    160, // Sp.Defense
+};
+#endif
 
 const u16 gLinkPlayerFacilityClasses[] = 
 {

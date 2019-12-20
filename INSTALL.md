@@ -1,6 +1,6 @@
 ## Prerequisites
 
-| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows Vista, 7, 8, 8.1, and 10 (1507, 1511, 1607, 1703)
+| Linux | macOS | Windows 10 (build 18917+) | Windows 10 (1709+) | Windows 8, 8.1, and 10 (1507, 1511, 1607, 1703)
 | ----- | ----- | ------------------------- | ------------------ | ---------------------------------------------------------
 | none | [Xcode Command Line Tools package][xcode] | [Windows Subsystem for Linux 2][wsl2] | [Windows Subsystem for Linux][wsl] | [Cygwin][cygwin]
 
@@ -41,5 +41,18 @@ To confirm it matches the official ROM image while building, do this instead:
 If only `.c` or `.s` files were changed, turn off the dependency scanning temporarily. Changes to any other files will be ignored and the build will either fail or not reflect those changes.
 
 	make -j$(nproc) NODEP=1
+
+Convenient targets have been defined to build Pokémon LeafGreen and the 1.1 revisions of both games:
+
+    # LeafGreen 1.0
+    make -j$(nproc) leafgreen
+    # FireRed 1.1
+    make -j$(nproc) firered_rev1
+    # LeafGreen 1.1
+    make -j$(nproc) leafgreen_rev1
+
+To confirm these match the respective official ROM images, prefix `compare_` to each target name. For example:
+
+    make -j$(nproc) compare_leafgreen
 
 **Note:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.

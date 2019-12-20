@@ -530,16 +530,26 @@ bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
 /*static*/ const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
 /*static*/ const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_8465990.gbapal");
 /*static*/ const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_84659b0.gbapal");
+#if defined(FIRERED)
 /*static*/ const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_84659d0.4bpp.lz");
 /*static*/ const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
+#elif defined(LEAFGREEN)
+/*static*/ const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_lg_846535c.4bpp.lz");
+/*static*/ const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465ab8.bin.lz");
+#endif
 /*static*/ const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
 /*static*/ const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
 /*static*/ const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
 /*static*/ const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
 /*static*/ const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
 /*static*/ const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
+#if defined(FIRERED)
 /*static*/ const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
 /*static*/ const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
+#elif defined(LEAFGREEN)
+/*static*/ const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465f00.4bpp.lz");
+/*static*/ const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_lg_8466278.bin.lz");
+#endif
 
 /*static*/ const struct BgTemplate gUnknown_8466B10[] = {
     {

@@ -13,6 +13,16 @@
 // Fire Red likely forgot to define NDEBUG/NOAGBPRN before release, leading
 // to the inclusion of asserts in the retail ROM.
 
+// Define the game version for use elsewhere
+#if defined(FIRERED)
+#define GAME_VERSION VERSION_FIRE_RED
+#elif defined(LEAFGREEN)
+#define GAME_VERSION VERSION_LEAF_GREEN
+#else
+#error unknown version
+#endif
+
+// rev1 renamed the source folder for reasons
 #if REVISION == 0
 #define CODE_ROOT "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/"
 #else

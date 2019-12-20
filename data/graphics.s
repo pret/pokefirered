@@ -11885,7 +11885,13 @@ gMonFootprint_Jirachi:: @ 8E3956C
 
 	.align 2
 gMonFrontPic_Deoxys:: @ 8E3958C
+	.ifdef FIRERED
 	.incbin "graphics/pokemon/deoxys/front.4bpp.lz"
+	.else
+	.ifdef LEAFGREEN
+	.incbin "graphics/pokemon/deoxys/front_def.4bpp.lz"
+	.endif
+	.endif
 
 	.align 2
 gMonPalette_Deoxys:: @ 8E39D48
@@ -11893,7 +11899,13 @@ gMonPalette_Deoxys:: @ 8E39D48
 
 	.align 2
 gMonBackPic_Deoxys:: @ 8E39D70
+	.ifdef FIRERED
 	.incbin "graphics/pokemon/deoxys/back.4bpp.lz"
+	.else
+	.ifdef LEAFGREEN
+	.incbin "graphics/pokemon/deoxys/back_def.4bpp.lz"
+	.endif
+	.endif
 
 	.align 2
 gMonShinyPalette_Deoxys:: @ 8E3A360
@@ -11903,7 +11915,13 @@ gMonShinyPalette_Deoxys:: @ 8E3A360
 gMonIcon_Deoxys:: @ 8E3A388
 	.incbin "graphics/pokemon/deoxys/icon.4bpp"
 	@ Referenced as part of the same array as normal deoxys
+	.ifdef FIRERED
 	.incbin "graphics/pokemon/deoxys/icon_attack.4bpp"
+	.else
+	.ifdef LEAFGREEN
+	.incbin "graphics/pokemon/deoxys/icon_defense.4bpp"
+	.endif
+	.endif
 
 	.align 2
 gMonFootprint_Deoxys:: @ 8E3AB88
@@ -16512,26 +16530,51 @@ gCreditsPokeballBgGfxMap:: @ 8EAB30C
 	.incbin "graphics/credits/unk_8EAB30C.bin.lz"
 
 	@ title_screen
-gGraphics_TitleScreen_PokemonFireRedLogoPals:: @ 8EAB6C4
+	.ifdef FIRERED
+gGraphics_TitleScreen_GameTitleLogoPals:: @ 8EAB6C4
 	.incbin "graphics/title_screen/unk_8eab6c4.gbapal"
 
-gGraphics_TitleScreen_PokemonFireRedLogoTiles:: @ 8EAB8C4
+gGraphics_TitleScreen_GameTitleLogoTiles:: @ 8EAB8C4
 	.incbin "graphics/title_screen/unk_8eab8c4.8bpp.lz"
 
-gGraphics_TitleScreen_PokemonFireRedLogoMap:: @ 8EAD390
+gGraphics_TitleScreen_GameTitleLogoMap:: @ 8EAD390
 	.incbin "graphics/title_screen/unk_8ead390.bin.lz"
 
-gGraphics_TitleScreen_CharizardPals:: @ 8EAD5E8
+gGraphics_TitleScreen_BoxArtMonPals:: @ 8EAD5E8
 	.incbin "graphics/title_screen/unk_8ead5e8.gbapal"
 
-gGraphics_TitleScreen_CharizardTiles:: @ 8EAD608
+gGraphics_TitleScreen_BoxArtMonTiles:: @ 8EAD608
 	.incbin "graphics/title_screen/unk_8ead608.4bpp.lz"
 
-gGraphics_TitleScreen_CharizardMap:: @ 8EADEE4
+gGraphics_TitleScreen_BoxArtMonMap:: @ 8EADEE4
 	.incbin "graphics/title_screen/unk_8eadee4.bin.lz"
 
 gGraphics_TitleScreen_BackgroundPals:: @ 8EAE094
 	.incbin "graphics/title_screen/unk_8eae094.gbapal"
+	.else
+	.ifdef LEAFGREEN
+gGraphics_TitleScreen_GameTitleLogoPals:: @ 8EAB6C4
+	.incbin "graphics/title_screen/unk_lg_8eab744.gbapal"
+
+gGraphics_TitleScreen_GameTitleLogoTiles:: @ 8EAB8C4
+	.incbin "graphics/title_screen/unk_lg_8eab944.8bpp.lz"
+
+gGraphics_TitleScreen_GameTitleLogoMap:: @ 8EAD390
+	.incbin "graphics/title_screen/unk_lg_8ead508.bin.lz"
+
+gGraphics_TitleScreen_BoxArtMonPals:: @ 8EAD5E8
+	.incbin "graphics/title_screen/unk_lg_8ead768.gbapal"
+
+gGraphics_TitleScreen_BoxArtMonTiles:: @ 8EAD608
+	.incbin "graphics/title_screen/unk_lg_8ead788.4bpp.lz"
+
+gGraphics_TitleScreen_BoxArtMonMap:: @ 8EADEE4
+	.incbin "graphics/title_screen/unk_lg_8eae1ec.bin.lz"
+
+gGraphics_TitleScreen_BackgroundPals:: @ 8EAE094
+	.incbin "graphics/title_screen/unk_lg_8eae388.gbapal"
+	.endif
+	.endif
 
 gGraphics_TitleScreen_CopyrightPressStartTiles:: @ 8EAE0B4
 	.incbin "graphics/title_screen/unk_8eae0b4.4bpp.lz"
@@ -16539,8 +16582,15 @@ gGraphics_TitleScreen_CopyrightPressStartTiles:: @ 8EAE0B4
 gGraphics_TitleScreen_CopyrightPressStartMap:: @ 8EAE374
 	.incbin "graphics/title_screen/unk_8eae374.bin.lz"
 
-gGraphics_TitleScreen_FirePals:: @ 8EAE488
+	.ifdef FIRERED
+gGraphics_TitleScreen_FireOrLeafPals:: @ 8EAE488
 	.incbin "graphics/title_screen/unk_8eae488.gbapal"
+	.else
+	.ifdef LEAFGREEN
+gGraphics_TitleScreen_FireOrLeafPals:: @ 8EAE488
+	.incbin "graphics/title_screen/unk_lg_8eae77c.gbapal"
+	.endif
+	.endif
 
 gGraphics_TitleScreen_BlankObjTiles:: @ 8EAE4A8
 	.incbin "graphics/title_screen/unk_8eae4a8.4bpp.lz"

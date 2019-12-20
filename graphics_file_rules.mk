@@ -506,6 +506,9 @@ $(ITEMPCGFXDIR)/unk_8E85090.4bpp: %.4bpp: %.png
 $(TITLESCREENGFXDIR)/unk_8ead608.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 135
 
+$(TITLESCREENGFXDIR)/unk_lg_8ead788.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 123
+
 $(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 

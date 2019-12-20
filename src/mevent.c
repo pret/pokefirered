@@ -750,6 +750,12 @@ bool32 sub_8144254(const u16 * data)
     return FALSE;
 }
 
+#if defined(FIRERED)
+#define MEVENT_HEADER_VERSION_CODE 1
+#elif defined(LEAFGREEN)
+#define MEVENT_HEADER_VERSION_CODE 2
+#endif
+
 void BuildMEventClientHeader(struct MEventClientHeaderStruct * data)
 {
     s32 i;
@@ -759,7 +765,7 @@ void BuildMEventClientHeader(struct MEventClientHeaderStruct * data)
     data->unk_04 = 1;
     data->unk_08 = 1;
     data->unk_0C = 1;
-    data->unk_10 = 1;
+    data->unk_10 = MEVENT_HEADER_VERSION_CODE;
 
     // Check whether a card already exists
     if (ValidateReceivedWonderCard())

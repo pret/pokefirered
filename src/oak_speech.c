@@ -271,11 +271,11 @@ static const struct WindowTemplate sNewGameAdventureIntroWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const u8 sTextColor_HelpSystem[4] = {
+static const u8 sTextColor_HelpSystem[4] = {
     0x00, 0x01, 0x02
 };
 
-const u8 sTextColor_OakSpeech[4] = {
+static const u8 sTextColor_OakSpeech[4] = {
     0x00, 0x02, 0x03
 };
 
@@ -405,11 +405,19 @@ static const u8 *const sHelpDocsPtrs[] = {
 };
 
 static const u8 *const sMaleNameChoices[] = {
+#if defined(FIRERED)
     gNameChoice_Red,
     gNameChoice_Fire,
     gNameChoice_Ash,
     gNameChoice_Kene,
     gNameChoice_Geki,
+#elif defined(LEAFGREEN)
+    gNameChoice_Green,
+    gNameChoice_Leaf,
+    gNameChoice_Gary,
+    gNameChoice_Kaz,
+    gNameChoice_Toru,
+#endif
     gNameChoice_Jak,
     gNameChoice_Janne,
     gNameChoice_Jonn,
@@ -427,8 +435,13 @@ static const u8 *const sMaleNameChoices[] = {
 };
 
 static const u8 *const sFemaleNameChoices[] = {
+#if defined(FIRERED)
     gNameChoice_Red,
     gNameChoice_Fire,
+#elif defined(LEAFGREEN)
+    gNameChoice_Green,
+    gNameChoice_Leaf,
+#endif
     gNameChoice_Omi,
     gNameChoice_Jodi,
     gNameChoice_Amanda,
@@ -449,10 +462,17 @@ static const u8 *const sFemaleNameChoices[] = {
 };
 
 static const u8 *const sRivalNameChoices[] = {
+#if defined(FIRERED)
     gNameChoice_Green,
     gNameChoice_Gary,
     gNameChoice_Kaz,
     gNameChoice_Toru
+#elif defined(LEAFGREEN)
+    gNameChoice_Red,
+    gNameChoice_Ash,
+    gNameChoice_Kene,
+    gNameChoice_Geki
+#endif
 };
 
 static void VBlankCB_NewGameOaksSpeech(void)

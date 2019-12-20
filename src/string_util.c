@@ -405,37 +405,65 @@ static u8 *ExpandPlaceholder_RivalName(void)
 
 static u8 *ExpandPlaceholder_Version(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Ruby;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Sapphire;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Magma(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Magma;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Aqua;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Aqua(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Aqua;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Magma;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Maxie(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Maxie;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Archie;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Archie(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Archie;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Maxie;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Groudon(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Groudon;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Kyogre;
+#endif
 }
 
 static u8 *ExpandPlaceholder_Kyogre(void)
 {
+#if defined(FIRERED)
     return gExpandedPlaceholder_Kyogre;
+#elif defined(LEAFGREEN)
+    return gExpandedPlaceholder_Groudon;
+#endif
 }
 
 u8 *GetExpandedPlaceholder(u32 id)

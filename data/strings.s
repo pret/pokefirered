@@ -12,7 +12,7 @@ gExpandedPlaceholder_Kun:: @ 8415A21
 gExpandedPlaceholder_Chan:: @ 8415A22
 	.string "$"
 
-gUnknown_8415A23:: @ 0x8415A23
+gExpandedPlaceholder_Sapphire:: @ 0x8415A23
 	.string "SAPPHIRE$"
 
 gExpandedPlaceholder_Ruby:: @ 8415A2C

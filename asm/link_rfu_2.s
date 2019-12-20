@@ -9166,7 +9166,13 @@ _080FCB88:
 	movs r0, 0x3D
 	negs r0, r0
 	ands r0, r2
-	movs r2, 0x10
+	.ifdef FIRERED
+	movs r2, 0x10 @ VERSION_FIRE_RED << 2
+	.else
+	.ifdef LEAFGREEN
+	movs r2, 0x14 @ VERSION_LEAF_GREEN << 2
+	.endif
+	.endif
 	orrs r0, r2
 	strb r0, [r7, 0x1]
 	movs r0, 0x11

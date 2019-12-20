@@ -27,6 +27,8 @@ matrix:
       script:
         - make tools CXX=g++-7
         - make -j2 compare
+        - make -j2 compare_leafgreen
         - make -j2 compare_firered_rev1
+        - make -j2 compare_leafgreen_rev1
 after_success:
   - .travis/calcrom/webhook.sh pokefirered

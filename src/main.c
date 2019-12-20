@@ -55,13 +55,6 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
-#if defined(FIRERED)
-#define GAME_VERSION VERSION_FIRE_RED
-#elif defined(LEAFGREEN)
-#define GAME_VERSION VERSION_LEAF_GREEN
-#else
-#error unknown version
-#endif
 const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;

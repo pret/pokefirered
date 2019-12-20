@@ -213,9 +213,15 @@ static const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464
 static const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
 static const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
 static const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
+#if defined(FIRERED)
 static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
-static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846504c.gbapal");
+static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846506c.gbapal");
 static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+#elif defined(LEAFGREEN)
+static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464434.4bpp.lz");
+static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_lg_8464a3c.gbapal");
+static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464a3c.4bpp.lz");
+#endif
 static const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
 static const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
 
@@ -236,6 +242,7 @@ static const struct SpritePalette gUnknown_84655C8[] = {
     {NULL}
 };
 
+#if defined(FIRERED)
 static const u16 gUnknown_8465608[] = {
     2,
     2,
@@ -245,6 +252,17 @@ static const u16 gUnknown_8465608[] = {
     4,
     3
 };
+#elif defined(LEAFGREEN)
+static const u16 gUnknown_8465608[] = {
+    2,
+    2,
+    0,
+    3,
+    2,
+    1,
+    1
+};
+#endif
 
 static const u16 gUnknown_8465616[] = {
     0x0120, 0x011f, 0x011e, 0x011d, 0x011c, 0x011b, 0x011a, 0x0119, 0x0118, 0x0117, 0x0116, 0x0115, 0x0114, 0x0113, 0x0112, 0x0111,
@@ -517,6 +535,7 @@ bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
     sub_8141764
 };
 
+#if defined(FIRERED)
 static const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_8465930.gbapal");
 static const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_8465950.gbapal");
 static const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_8465970.gbapal");
@@ -526,12 +545,28 @@ static const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_8465
 static const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_84661d4.bin.lz");
 static const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_84664bc.gbapal");
 static const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_84664dc.gbapal","graphics/slot_machine/unk_84664fc.gbapal", "graphics/slot_machine/unk_846651c.gbapal");
+#elif defined(LEAFGREEN)
+static const u16 gUnknown_8465930[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652bc.gbapal");
+static const u16 gUnknown_8465950[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652dc.gbapal");
+static const u16 gUnknown_8465970[] = INCBIN_U16("graphics/slot_machine/unk_lg_84652fc.gbapal");
+static const u16 gUnknown_8465990[] = INCBIN_U16("graphics/slot_machine/unk_lg_846531c.gbapal");
+static const u16 gUnknown_84659B0[] = INCBIN_U16("graphics/slot_machine/unk_lg_846533c.gbapal");
+static const u32 gUnknown_84659D0[] = INCBIN_U32("graphics/slot_machine/unk_lg_846535c.4bpp.lz");
+static const u32 gUnknown_84661D4[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465ab8.bin.lz");
+static const u16 gUnknown_84664BC[] = INCBIN_U16("graphics/slot_machine/unk_lg_8465d9c.gbapal");
+static const u16 gUnknown_84664DC[] = INCBIN_U16("graphics/slot_machine/unk_lg_8465dbc.gbapal","graphics/slot_machine/unk_lg_8465ddc.gbapal", "graphics/slot_machine/unk_lg_8465dfc.gbapal");
+#endif
 static const u32 gUnknown_846653C[] = INCBIN_U32("graphics/slot_machine/unk_846653c.4bpp.lz");
 static const u16 gUnknown_84665C0[] = INCBIN_U16("graphics/slot_machine/unk_84665c0.gbapal");
 static const u16 gUnknown_84665E0[] = INCBIN_U16("graphics/slot_machine/unk_84665e0.gbapal");
 static const u16 gUnknown_8466600[] = INCBIN_U16("graphics/slot_machine/unk_8466600.gbapal");
+#if defined(FIRERED)
 static const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_8466620.4bpp.lz");
 static const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_8466998.bin.lz");
+#elif defined(LEAFGREEN)
+static const u32 gUnknown_8466620[] = INCBIN_U32("graphics/slot_machine/unk_lg_8465f00.4bpp.lz");
+static const u32 gUnknown_8466998[] = INCBIN_U32("graphics/slot_machine/unk_lg_8466278.bin.lz");
+#endif
 
 static const struct BgTemplate gUnknown_8466B10[] = {
     {

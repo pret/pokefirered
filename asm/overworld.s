@@ -3949,7 +3949,7 @@ sub_8056A34: @ 8056A34
 	lsrs r0, 24
 	cmp r0, 0
 	beq _08056A52
-	bl sub_807F074
+	bl WriteFlashScanlineEffectBuffer
 	ldr r2, _08056A58 @ =gUnknown_826D330
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]

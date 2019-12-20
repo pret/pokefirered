@@ -365,41 +365,58 @@ static const u8 sTradeMonSpriteCoords[][2] = {
     {0x17, 0x12},
 };
 
-// No idea if a 4D array is correct
-static const u8 gUnknown_8261E5A[][2][6][2] = {
+static const u8 gUnknown_8261E5A[][2][2] = {
     {
-        {
-            {0x05, 0x04},
-            {0x0c, 0x04},
-            {0x05, 0x09},
-            {0x0c, 0x09},
-            {0x05, 0x0e},
-            {0x0c, 0x0e}
-        }, {
-            {0x14, 0x04},
-            {0x1b, 0x04},
-            {0x14, 0x09},
-            {0x1b, 0x09},
-            {0x14, 0x0e},
-            {0x1b, 0x0e}
-        }
-    }, {
-        {
-            {0x01, 0x03},
-            {0x08, 0x03},
-            {0x01, 0x08},
-            {0x08, 0x08},
-            {0x01, 0x0d},
-            {0x08, 0x0d}
-        }, {
-            {0x10, 0x03},
-            {0x17, 0x03},
-            {0x10, 0x08},
-            {0x17, 0x08},
-            {0x10, 0x0d},
-            {0x17, 0x0d}
-        }
-    }
+        {0x05, 0x04},
+        {0x0c, 0x04},
+    },
+    {
+        {0x05, 0x09},
+        {0x0c, 0x09},
+    },
+    {
+        {0x05, 0x0e},
+        {0x0c, 0x0e}
+    },
+    {
+        {0x14, 0x04},
+        {0x1b, 0x04},
+    },
+    {
+        {0x14, 0x09},
+        {0x1b, 0x09},
+    },
+    {
+        {0x14, 0x0e},
+        {0x1b, 0x0e},
+    },
+};
+
+static const u8 gUnknown_8261E72[][2][2] = {
+    {
+        {0x01, 0x03},
+        {0x08, 0x03},
+    },
+    {
+        {0x01, 0x08},
+        {0x08, 0x08},
+    },
+    {
+        {0x01, 0x0d},
+        {0x08, 0x0d}
+    },
+    {
+        {0x10, 0x03},
+        {0x17, 0x03},
+    },
+    {
+        {0x10, 0x08},
+        {0x17, 0x08},
+    },
+    {
+        {0x10, 0x0d},
+        {0x17, 0x0d},
+    },
 };
 
 static const u8 sTradeUnknownSpriteCoords[][4] = {
@@ -2328,78 +2345,28 @@ static void sub_804F08C(u8 whichParty, u8 monIdx, u8 a2, u8 a3, u8 a4, u8 a5)
     sTradeMenuResourcesPtr->tilemapBuffer[(a3 - 1) * 32 + a2 + 1] = r2;
 }
 
-#ifdef NONMATCHING
-// Instruction swap when setting r5 and r4
 static void sub_804F284(u8 whichParty)
 {
     s32 i;
     for (i = 0; i < sTradeMenuResourcesPtr->partyCounts[whichParty]; i++)
     {
+        const u8 (*r5)[2];
+        const u8 (*r4)[2];
+        u32 r0 = 3 * whichParty;
+        const u8 (*r1)[2][2] = gUnknown_8261E5A;
+        r5 = r1[r0];
+        r4 = gUnknown_8261E72[r0];
+
         sub_804F08C(
             whichParty,
             i,
-            gUnknown_8261E5A[0][whichParty][i][0],
-            gUnknown_8261E5A[0][whichParty][i][1],
-            gUnknown_8261E5A[1][whichParty][i][0],
-            gUnknown_8261E5A[1][whichParty][i][1]
+            r5[i][0],
+            r5[i][1],
+            r4[i][0],
+            r4[i][1]
         );
     }
 }
-#else
-NAKED
-static void sub_804F284(u8 whichParty)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tsub sp, 0x8\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tmovs r7, 0\n"
-                "\tldr r0, _0804F2DC @ =sTradeMenuResourcesPtr\n"
-                "\tldr r0, [r0]\n"
-                "\tadds r0, 0x36\n"
-                "\tadds r0, r6\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r7, r0\n"
-                "\tbge _0804F2D4\n"
-                "\tlsls r0, r6, 1\n"
-                "\tadds r0, r6\n"
-                "\tldr r1, _0804F2E0 @ =gUnknown_8261E5A\n"
-                "\tlsls r0, 2\n"
-                "\tadds r5, r0, r1\n"
-                "\tldr r1, _0804F2E4 @ =gUnknown_8261E5A+24\n"
-                "\tadds r4, r0, r1\n"
-                "_0804F2AA:\n"
-                "\tlsls r1, r7, 24\n"
-                "\tlsrs r1, 24\n"
-                "\tldrb r2, [r5]\n"
-                "\tldrb r3, [r5, 0x1]\n"
-                "\tldrb r0, [r4]\n"
-                "\tstr r0, [sp]\n"
-                "\tldrb r0, [r4, 0x1]\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl sub_804F08C\n"
-                "\tadds r5, 0x2\n"
-                "\tadds r4, 0x2\n"
-                "\tadds r7, 0x1\n"
-                "\tldr r0, _0804F2DC @ =sTradeMenuResourcesPtr\n"
-                "\tldr r0, [r0]\n"
-                "\tadds r0, 0x36\n"
-                "\tadds r0, r6\n"
-                "\tldrb r0, [r0]\n"
-                "\tcmp r7, r0\n"
-                "\tblt _0804F2AA\n"
-                "_0804F2D4:\n"
-                "\tadd sp, 0x8\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0804F2DC: .4byte sTradeMenuResourcesPtr\n"
-                "_0804F2E0: .4byte gUnknown_8261E5A\n"
-                "_0804F2E4: .4byte gUnknown_8261E5A+24");
-}
-#endif //NONMATCHING
 
 static void sub_804F2E8(u8 whichParty)
 {

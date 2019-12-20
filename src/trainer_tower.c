@@ -513,7 +513,6 @@ void sub_815DC40(u8 *dest, u8 opponentIdx)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose2, dest);
 }
 
-#ifdef NONMATCHING
 static void sub_815DC8C(void) // fakematching
 {
     u32 whichTimer = gSaveBlock1Ptr->unkArrayIdx;
@@ -528,97 +527,25 @@ static void sub_815DC8C(void) // fakematching
     {
         struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
         const struct EReaderTrainerHillSetSubstruct * r1 = &gUnknown_84827AC;
-//        *r0_ = *r1;
         memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerHillSetSubstruct));
-//        sTrainerTowerState->unk_0004.floorIdx = gUnknown_84827AC;
         r7 = gUnknown_84827B4[whichTimer];
         for (r4 = 0; r4 < 8; r4++)
         {
-            void * r0 = sTrainerTowerState;
-            r0 = r4 * sizeof(struct TrainerTowerFloor) + r0;
+        #ifndef NONMATCHING
+            void * r5;
+            register void * r0 asm("r0") = sTrainerTowerState;
+            r5 = (void *)(r4 * sizeof(struct TrainerTowerFloor));
+            r0  = r5 + (uintptr_t)r0;
             r0 += offsetof(struct UnkStruct_203F458, unk_0004.floors);
             memcpy(r0, r7[r4], sizeof(struct TrainerTowerFloor));
-//            r0[r4] = *r7[r4];
+        #else
+            memcpy(&sTrainerTowerState->unk_0004.floors[r4], r7[r4], sizeof(struct TrainerTowerFloor));
+        #endif
         }
         sTrainerTowerState->unk_0004.checksum = CalcByteArraySum((void *)sTrainerTowerState->unk_0004.floors, sizeof(sTrainerTowerState->unk_0004.floors));
         ValidateOrResetCurTrainerTowerRecord();
     }
 }
-#else
-NAKED
-static void sub_815DC8C(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tldr r0, _0815DCBC @ =gSaveBlock1Ptr\n"
-                "\tldr r0, [r0]\n"
-                "\tldr r1, _0815DCC0 @ =0x00003d34\n"
-                "\tadds r0, r1\n"
-                "\tldr r5, [r0]\n"
-                "\tldr r4, _0815DCC4 @ =sTrainerTowerState\n"
-                "\tldr r0, _0815DCC8 @ =0x00001f0c\n"
-                "\tbl AllocZeroed\n"
-                "\tstr r0, [r4]\n"
-                "\tldr r1, _0815DCCC @ =gMapHeader\n"
-                "\tldrb r1, [r1, 0x12]\n"
-                "\tsubs r1, 0x2A\n"
-                "\tstrb r1, [r0]\n"
-                "\tbl sub_815D834\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0815DCD0\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, 0x4\n"
-                "\tbl CEReaderTool_LoadTrainerTower\n"
-                "\tb _0815DD18\n"
-                "\t.align 2, 0\n"
-                "_0815DCBC: .4byte gSaveBlock1Ptr\n"
-                "_0815DCC0: .4byte 0x00003d34\n"
-                "_0815DCC4: .4byte sTrainerTowerState\n"
-                "_0815DCC8: .4byte 0x00001f0c\n"
-                "_0815DCCC: .4byte gMapHeader\n"
-                "_0815DCD0:\n"
-                "\tldr r0, [r4]\n"
-                "\tldr r1, _0815DD20 @ =gUnknown_84827AC\n"
-                "\tadds r0, 0x4\n"
-                "\tmovs r2, 0x8\n"
-                "\tbl memcpy\n"
-                "\tlsls r1, r5, 5\n"
-                "\tldr r0, _0815DD24 @ =gUnknown_84827B4\n"
-                "\tadds r7, r1, r0\n"
-                "\tmovs r5, 0\n"
-                "\tmovs r4, 0x7\n"
-                "_0815DCE6:\n"
-                "\tldr r6, _0815DD28 @ =sTrainerTowerState\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5, r0\n"
-                "\tadds r0, 0xC\n"
-                "\tldm r7!, {r1}\n"
-                "\tmovs r2, 0xF8\n"
-                "\tlsls r2, 2\n"
-                "\tbl memcpy\n"
-                "\tmovs r0, 0xF8\n"
-                "\tlsls r0, 2\n"
-                "\tadds r5, r0\n"
-                "\tsubs r4, 0x1\n"
-                "\tcmp r4, 0\n"
-                "\tbge _0815DCE6\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, 0xC\n"
-                "\tmovs r1, 0xF8\n"
-                "\tlsls r1, 5\n"
-                "\tbl CalcByteArraySum\n"
-                "\tldr r1, [r6]\n"
-                "\tstr r0, [r1, 0x8]\n"
-                "\tbl ValidateOrResetCurTrainerTowerRecord\n"
-                "_0815DD18:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_0815DD20: .4byte gUnknown_84827AC\n"
-                "_0815DD24: .4byte gUnknown_84827B4\n"
-                "_0815DD28: .4byte sTrainerTowerState");
-}
-#endif // NONMATCHING
 
 static void sub_815DD2C(void)
 {

@@ -74,26 +74,26 @@ static bool32 IsSlashSpriteHidden(u8 spriteId);
 static void SpriteCallback_Slash(struct Sprite * sprite);
 
 // bg3
-static const u8 sBorderBgTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
+/*static*/ const u8 sBorderBgTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83BF58C.4bpp.lz");
 #if defined(FIRERED)
-static const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/unk_83BF5A8.bin.lz");
+/*static*/ const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/unk_83BF5A8.bin.lz");
 #elif defined(LEAFGREEN)
-static const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/lg_border_bg.bin.lz");
+/*static*/ const u8 sBorderBgMap[] = INCBIN_U8("data/graphics/title_screen/lg_border_bg.bin.lz");
 #endif
 
 //sprites
-static const u8 sSlashSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf64c.4bpp.lz");
+/*static*/ const u8 sSlashSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf64c.4bpp.lz");
 #if defined(FIRERED)
-static const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_83bf77c.gbapal");
-static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf79c.4bpp.lz");
-static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
+/*static*/ const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_83bf77c.gbapal");
+/*static*/ const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bf79c.4bpp.lz");
+/*static*/ const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_83bfa14.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_lg_83bf764.gbapal");
-static const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf784.4bpp.lz");
-static const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf89c.4bpp.lz");
+/*static*/ const u16 sSlashSpritePals[] = INCBIN_U16("data/graphics/title_screen/unk_lg_83bf764.gbapal");
+/*static*/ const u8 sFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf784.4bpp.lz");
+/*static*/ const u8 sBlankFireSpriteTiles[] = INCBIN_U8("data/graphics/title_screen/unk_lg_83bf89c.4bpp.lz");
 #endif
 
-static const struct OamData sOamData_FlameOrLeaf = {
+/*static*/ const struct OamData sOamData_FlameOrLeaf = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .shape = ST_OAM_SQUARE,
     .size = ST_OAM_SIZE_1,
@@ -103,7 +103,7 @@ static const struct OamData sOamData_FlameOrLeaf = {
 };
 
 #if defined(FIRERED)
-static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
+/*static*/ const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
     ANIMCMD_FRAME(0x00, 3),
     ANIMCMD_FRAME(0x04, 6),
     ANIMCMD_FRAME(0x08, 6),
@@ -117,7 +117,7 @@ static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnims_FlameOrLeaf_1[] = {
+/*static*/ const union AnimCmd sSpriteAnims_FlameOrLeaf_1[] = {
     ANIMCMD_FRAME(0x18, 6),
     ANIMCMD_FRAME(0x1c, 6),
     ANIMCMD_FRAME(0x20, 6),
@@ -125,13 +125,13 @@ static const union AnimCmd sSpriteAnims_FlameOrLeaf_1[] = {
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
+/*static*/ const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
     sSpriteAnims_FlameOrLeaf_0,
     sSpriteAnims_FlameOrLeaf_1
 };
 
 #elif defined(LEAFGREEN)
-static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
+/*static*/ const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
     ANIMCMD_FRAME(0x00, 8),
     ANIMCMD_FRAME(0x04, 8),
     ANIMCMD_FRAME(0x08, 8),
@@ -146,12 +146,12 @@ static const union AnimCmd sSpriteAnims_FlameOrLeaf_0[] = {
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
+/*static*/ const union AnimCmd *const sSpriteAnimTable_FlameOrLeaf[] = {
     sSpriteAnims_FlameOrLeaf_0
 };
 #endif
 
-static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
+/*static*/ const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
     .tileTag = 0,
     .paletteTag = 0,
     .oam = &sOamData_FlameOrLeaf,
@@ -161,17 +161,27 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State1 = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
+#if defined(FIRERED)
+#define sOamData_LG_83BF950 sOamData_FlameOrLeaf
+#elif defined(LEAFGREEN)
+const struct OamData sOamData_LG_83BF950 = {
+    .shape = SPRITE_SHAPE(16x32),
+    .size = SPRITE_SIZE(16x32),
+    .priority = 3
+};
+#endif
+
+/*static*/ const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf_State0 = {
     .tileTag = 1,
     .paletteTag = 0,
-    .oam = &sOamData_FlameOrLeaf,
+    .oam = &sOamData_LG_83BF950,
     .anims = sSpriteAnimTable_FlameOrLeaf,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData sOamData_UnknownTemptySprite = {
+/*static*/ const struct OamData sOamData_UnknownTemptySprite = {
     .objMode = ST_OAM_OBJ_NORMAL,
     .shape = ST_OAM_V_RECTANGLE,
     .size = ST_OAM_SIZE_3,
@@ -180,7 +190,7 @@ static const struct OamData sOamData_UnknownTemptySprite = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sUnknownEmptySprite = {
+/*static*/ const struct SpriteTemplate sUnknownEmptySprite = {
     .tileTag = 2,
     .paletteTag = 2,
     .oam = &sOamData_UnknownTemptySprite,
@@ -190,7 +200,7 @@ static const struct SpriteTemplate sUnknownEmptySprite = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData sOamData_SlashSprite = {
+/*static*/ const struct OamData sOamData_SlashSprite = {
     .objMode = ST_OAM_OBJ_WINDOW,
     .shape = ST_OAM_SQUARE,
     .size = ST_OAM_SIZE_3,
@@ -199,7 +209,7 @@ static const struct OamData sOamData_SlashSprite = {
     .paletteNum = 0
 };
 
-static const struct SpriteTemplate sSlashSpriteTemplate = {
+/*static*/ const struct SpriteTemplate sSlashSpriteTemplate = {
     .tileTag = 3,
     .paletteTag = 2,
     .oam = &sOamData_SlashSprite,
@@ -209,7 +219,7 @@ static const struct SpriteTemplate sSlashSpriteTemplate = {
     .callback = SpriteCallbackDummy
 };
 
-static const struct BgTemplate sBgTemplates[] = {
+/*static*/ const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -254,25 +264,26 @@ static void (*const sSceneFuncs[])(s16 * data) = {
     SetTitleScreenScene_Cry
 };
 
-static const struct CompressedSpriteSheet sSpriteSheets[] = {
+/*static*/ const struct CompressedSpriteSheet sSpriteSheets[] = {
     {(const void *)sFireSpriteTiles, 0x500, 0},
     {(const void *)sBlankFireSpriteTiles, 0x500, 1},
     {(const void *)gGraphics_TitleScreen_BlankObjTiles, 0x400, 2},
     {(const void *)sSlashSpriteTiles, 0x800, 3}
 };
 
-static const struct SpritePalette sSpritePals[] = {
+/*static*/ const struct SpritePalette sSpritePals[] = {
     {sSlashSpritePals, 0},
     {gGraphics_TitleScreen_FirePals, 2},
     {}
 };
 
-static const u8 gUnknown_83BFBD4[] = {
+#if defined(FIRERED)
+/*static*/ const u8 gUnknown_83BFBD4[] = {
     0x04, 0x10, 0x1a, 0x20, 0x30, 0xc8, 0xd8, 0xe0, 0xe8, 0x3c, 0x4c, 0x5c, 0x6c, 0x80, 0x90
 };
 
-#if defined(LEAFGREEN)
-static const u16 gUnknown_LG_83BFA10[] = {
+#elif defined(LEAFGREEN)
+/*static*/ const u16 gUnknown_LG_83BFA10[] = {
     50, 80, 110, 60, 90, 70, 100, 50
 };
 #endif

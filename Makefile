@@ -5,8 +5,6 @@ CPP := $(CC) -E
 LD := tools/binutils/bin/arm-none-eabi-ld
 OBJCOPY := tools/binutils/bin/arm-none-eabi-objcopy
 
-RM := rm -f
-
 include config.mk
 
 SHELL := /bin/bash -o pipefail

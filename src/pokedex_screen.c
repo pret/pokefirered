@@ -115,12 +115,12 @@ void sub_8105594(u8 a0, u8 a1);
 void sub_8105E1C(u8 a0);
 void sub_8106014(void);
 void sub_810603C(void);
-bool8 sub_8106838(u8 a0, u8 a1);
+bool8 sub_8106838(u8 category, u8 a1);
 u8 sub_81068A0(u8 a0);
-void sub_810699C(u8 a0);
+void sub_810699C(u8 category);
 bool8 sub_8106A20(u16 a0);
 void sub_81067C0(void);
-void sub_81068DC(u8 a0, u8 a1);
+void sub_81068DC(u8 category, u8 a1);
 u8 sub_8106AF8(u16 a0);
 void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
@@ -157,7 +157,7 @@ extern const struct WindowTemplate gUnknown_84521C4;
 extern const struct WindowTemplate gUnknown_84521CC;
 extern const u16 gUnknown_845228C[];
 extern const u8 (*const gUnknown_8452334[])[4];
-extern const u8 *const gUnknown_8452344[];
+extern const u8 *const gDexCategoryNamePtrs[];
 extern const u8 gUnknown_8452388[][30];
 extern const struct ScrollArrowsTemplate gUnknown_84524B4;
 extern const struct CursorStruct gUnknown_84524C4;
@@ -1855,11 +1855,11 @@ bool8 sub_8104F0C(bool8 a0)
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     if (a0)
     {
-        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 1);
+        sub_8106E78(gDexCategoryNamePtrs[gUnknown_203ACF0->field_28], 1);
     }
     else
     {
-        sub_8106E78(gUnknown_8452344[gUnknown_203ACF0->field_28], 0);
+        sub_8106E78(gDexCategoryNamePtrs[gUnknown_203ACF0->field_28], 0);
         sub_8104EC0(0, sub_8106AF8(gUnknown_203ACF0->field_2B), sub_8106AF8(gUnknown_203ACF0->field_2A - 1), 160, 2);
     }
     CopyWindowToVram(0, 2);

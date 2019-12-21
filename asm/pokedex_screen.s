@@ -1026,7 +1026,7 @@ sub_8105D64: @ 8105D64
 	lsls r0, 24
 	cmp r0, 0
 	beq _08105E02
-	ldr r1, _08105E14 @ =gUnknown_843FAB0
+	ldr r1, _08105E14 @ =gMonFootprintPtrs
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -1092,7 +1092,7 @@ _08105E02:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08105E14: .4byte gUnknown_843FAB0
+_08105E14: .4byte gMonFootprintPtrs
 _08105E18: .4byte gDecompressionBuffer
 	thumb_func_end sub_8105D64
 
@@ -2269,7 +2269,7 @@ sub_8106838: @ 8106838
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r1, _08106888 @ =gUnknown_8452C4C
+	ldr r1, _08106888 @ =gDexCategories
 	lsrs r0, 21
 	adds r0, r1
 	ldr r2, [r0]
@@ -2303,7 +2303,7 @@ _08106858:
 	movs r0, 0x1
 	b _08106894
 	.align 2, 0
-_08106888: .4byte gUnknown_8452C4C
+_08106888: .4byte gDexCategories
 _0810688C:
 	adds r5, 0x1
 	cmp r5, 0x3
@@ -2322,7 +2322,7 @@ sub_81068A0: @ 81068A0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _081068C8 @ =gUnknown_8452C4C
+	ldr r1, _081068C8 @ =gDexCategories
 	lsls r0, r6, 3
 	adds r0, r1
 	ldrb r5, [r0, 0x4]
@@ -2340,7 +2340,7 @@ _081068B4:
 	movs r0, 0x1
 	b _081068D4
 	.align 2, 0
-_081068C8: .4byte gUnknown_8452C4C
+_081068C8: .4byte gDexCategories
 _081068CC:
 	adds r4, 0x1
 	cmp r4, r5
@@ -2363,7 +2363,7 @@ sub_81068DC: @ 81068DC
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r1, _08106990 @ =gUnknown_8452C4C
+	ldr r1, _08106990 @ =gDexCategories
 	lsls r0, r4, 3
 	adds r0, r1
 	ldr r1, [r0]
@@ -2393,7 +2393,7 @@ _0810690C:
 	movs r5, 0
 	cmp r5, r9
 	bge _08106982
-	ldr r1, _08106990 @ =gUnknown_8452C4C
+	ldr r1, _08106990 @ =gDexCategories
 	lsls r0, r4, 3
 	adds r0, r1
 	mov r8, r0
@@ -2447,7 +2447,7 @@ _08106982:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08106990: .4byte gUnknown_8452C4C
+_08106990: .4byte gDexCategories
 _08106994: .4byte gUnknown_203ACF0
 _08106998: .4byte 0x0000ffff
 	thumb_func_end sub_81068DC
@@ -2458,7 +2458,7 @@ sub_810699C: @ 810699C
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, _081069F8 @ =gUnknown_8452C4C
+	ldr r1, _081069F8 @ =gDexCategories
 	lsls r0, r7, 3
 	adds r0, r1
 	ldrb r6, [r0, 0x4]
@@ -2503,7 +2503,7 @@ _081069DE:
 	movs r0, 0x1
 	b _08106A12
 	.align 2, 0
-_081069F8: .4byte gUnknown_8452C4C
+_081069F8: .4byte gDexCategories
 _081069FC: .4byte gUnknown_203ACF0
 _08106A00:
 	ldr r1, _08106A1C @ =gUnknown_203ACF0
@@ -2537,7 +2537,7 @@ sub_8106A20: @ 8106A20
 	str r0, [sp]
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r1, _08106A98 @ =gUnknown_8452C4C
+	ldr r1, _08106A98 @ =gDexCategories
 	str r1, [sp, 0x10]
 _08106A3A:
 	ldr r2, [sp, 0x10]
@@ -2589,7 +2589,7 @@ _08106A64:
 	movs r0, 0
 	b _08106AE8
 	.align 2, 0
-_08106A98: .4byte gUnknown_8452C4C
+_08106A98: .4byte gDexCategories
 _08106A9C: .4byte gUnknown_203ACF0
 _08106AA0:
 	adds r0, r4, 0

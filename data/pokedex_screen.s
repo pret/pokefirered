@@ -3554,7 +3554,7 @@ gDexCategory_RarePkmn::
 	.4byte gUnknown_84527D0, 1
 	.4byte gUnknown_84527D2, 1
 
-gDexCategoryPtrs:: @ 8452C4C struct { dataptr; data8; }
+gDexCategories:: @ 8452C4C struct { dataptr; data8; }
 	.4byte gDexCategory_GrasslandPkmn, 27
 	.4byte gDexCategory_ForestPkmn, 26
 	.4byte gDexCategory_WatersEdgePkmn, 16

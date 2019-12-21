@@ -8,7 +8,7 @@
 	.section .rodata
 	.align 2
 
-gUnknown_843FAB0:: @ 843FAB0
+gMonFootprintPtrs:: @ 843FAB0
 	.4byte gMonFootprint_Bulbasaur
 	.4byte gMonFootprint_Bulbasaur
 	.4byte gMonFootprint_Ivysaur
@@ -2296,15 +2296,15 @@ gUnknown_8451F6C::
 	.4byte gUnknown_8415EFB, -3
 	.4byte gUnknown_8415E95, 9
 	.4byte gUnknown_8415DE0, -3
-	.4byte gUnknown_8415DF7, 0
-	.4byte gUnknown_8415E09, 1
-	.4byte gUnknown_8415E18, 2
-	.4byte gUnknown_8415E2D, 3
-	.4byte gUnknown_8415E39, 4
-	.4byte gUnknown_8415E46, 5
-	.4byte gUnknown_8415E57, 6
-	.4byte gUnknown_8415E6D, 7
-	.4byte gUnknown_8415E7B, 8
+	.4byte gText_DexCategory_GrasslandPkmn, 0
+	.4byte gText_DexCategory_ForestPkmn, 1
+	.4byte gText_DexCategory_WatersEdgePkmn, 2
+	.4byte gText_DexCategory_SeaPkmn, 3
+	.4byte gText_DexCategory_CavePkmn, 4
+	.4byte gText_DexCategory_MountainPkmn, 5
+	.4byte gText_DexCategory_RoughTerrainPkmn, 6
+	.4byte gText_DexCategory_UrbanPkmn, 7
+	.4byte gText_DexCategory_RarePkmn, 8
 	.4byte gUnknown_8415E88, -3
 	.4byte gUnknown_8415EA4, 10
 	.4byte gUnknown_8415ED5, 11
@@ -2326,15 +2326,15 @@ gUnknown_845201C::
 	.4byte gUnknown_8415F0E, 9
 	.4byte gUnknown_8415F24, 14
 	.4byte gUnknown_8415DE0, -3
-	.4byte gUnknown_8415DF7, 0
-	.4byte gUnknown_8415E09, 1
-	.4byte gUnknown_8415E18, 2
-	.4byte gUnknown_8415E2D, 3
-	.4byte gUnknown_8415E39, 4
-	.4byte gUnknown_8415E46, 5
-	.4byte gUnknown_8415E57, 6
-	.4byte gUnknown_8415E6D, 7
-	.4byte gUnknown_8415E7B, 8
+	.4byte gText_DexCategory_GrasslandPkmn, 0
+	.4byte gText_DexCategory_ForestPkmn, 1
+	.4byte gText_DexCategory_WatersEdgePkmn, 2
+	.4byte gText_DexCategory_SeaPkmn, 3
+	.4byte gText_DexCategory_CavePkmn, 4
+	.4byte gText_DexCategory_MountainPkmn, 5
+	.4byte gText_DexCategory_RoughTerrainPkmn, 6
+	.4byte gText_DexCategory_UrbanPkmn, 7
+	.4byte gText_DexCategory_RarePkmn, 8
 	.4byte gUnknown_8415E88, -3
 	.4byte gUnknown_8415EA4, 10
 	.4byte gUnknown_8415ED5, 11
@@ -2684,16 +2684,16 @@ gUnknown_8452334:: @ 8452334 dataptr
 	.4byte gUnknown_8452318
 	.4byte gUnknown_8452324
 
-gUnknown_8452344:: @ 8452344 dataptr
-	.4byte gUnknown_8415DF7
-	.4byte gUnknown_8415E09
-	.4byte gUnknown_8415E18
-	.4byte gUnknown_8415E2D
-	.4byte gUnknown_8415E39
-	.4byte gUnknown_8415E46
-	.4byte gUnknown_8415E57
-	.4byte gUnknown_8415E6D
-	.4byte gUnknown_8415E7B
+gDexCategoryNamePtrs:: @ 8452344 dataptr
+	.4byte gText_DexCategory_GrasslandPkmn
+	.4byte gText_DexCategory_ForestPkmn
+	.4byte gText_DexCategory_WatersEdgePkmn
+	.4byte gText_DexCategory_SeaPkmn
+	.4byte gText_DexCategory_CavePkmn
+	.4byte gText_DexCategory_MountainPkmn
+	.4byte gText_DexCategory_RoughTerrainPkmn
+	.4byte gText_DexCategory_UrbanPkmn
+	.4byte gText_DexCategory_RarePkmn
 
 gUnknown_8452368:: @ 8452368 gbapal
 	.incbin "graphics/pokedex/unk_8452368.gbapal"
@@ -3393,7 +3393,7 @@ gUnknown_84527D0:: @ 84527D0
 gUnknown_84527D2:: @ 84527D2
 	.2byte SPECIES_MEW
 
-gUnknown_84527D4::
+gDexCategory_GrasslandPkmn::
 	.4byte gUnknown_84524D0, 4
 	.4byte gUnknown_84524D8, 4
 	.4byte gUnknown_84524E0, 3
@@ -3422,7 +3422,7 @@ gUnknown_84527D4::
 	.4byte gUnknown_8452564, 3
 	.4byte gUnknown_845256A, 3
 
-gUnknown_84528AC::
+gDexCategory_ForestPkmn::
 	.4byte gUnknown_8452570, 3
 	.4byte gUnknown_8452576, 3
 	.4byte gUnknown_845257C, 3
@@ -3450,7 +3450,7 @@ gUnknown_84528AC::
 	.4byte gUnknown_84525F6, 3
 	.4byte gUnknown_84525FC, 1
 
-gUnknown_845297C::
+gDexCategory_WatersEdgePkmn::
 	.4byte gUnknown_84525FE, 2
 	.4byte gUnknown_8452602, 4
 	.4byte gUnknown_845260A, 4
@@ -3468,7 +3468,7 @@ gUnknown_845297C::
 	.4byte gUnknown_8452652, 3
 	.4byte gUnknown_8452658, 2
 
-gUnknown_84529FC::
+gDexCategory_SeaPkmn::
 	.4byte gUnknown_845265C, 2
 	.4byte gUnknown_8452660, 2
 	.4byte gUnknown_8452664, 2
@@ -3486,7 +3486,7 @@ gUnknown_84529FC::
 	.4byte gUnknown_84526A6, 2
 	.4byte gUnknown_84526AA, 1
 
-gUnknown_8452A7C::
+gDexCategory_CavePkmn::
 	.4byte gUnknown_84526AC, 3
 	.4byte gUnknown_84526B2, 4
 	.4byte gUnknown_84526BA, 4
@@ -3498,7 +3498,7 @@ gUnknown_8452A7C::
 	.4byte gUnknown_84526DC, 2
 	.4byte gUnknown_84526E0, 3
 
-gUnknown_8452ACC::
+gDexCategory_MountainPkmn::
 	.4byte gUnknown_84526E6, 3
 	.4byte gUnknown_84526EC, 4
 	.4byte gUnknown_84526F4, 3
@@ -3517,7 +3517,7 @@ gUnknown_8452ACC::
 	.4byte gUnknown_8452738, 3
 	.4byte gUnknown_845273E, 1
 
-gUnknown_8452B54::
+gDexCategory_RoughTerrainPkmn::
 	.4byte gUnknown_8452740, 2
 	.4byte gUnknown_8452744, 4
 	.4byte gUnknown_845274C, 2
@@ -3530,7 +3530,7 @@ gUnknown_8452B54::
 	.4byte gUnknown_845276E, 3
 	.4byte gUnknown_8452774, 1
 
-gUnknown_8452BAC::
+gDexCategory_UrbanPkmn::
 	.4byte gUnknown_8452776, 4
 	.4byte gUnknown_845277E, 4
 	.4byte gUnknown_8452786, 2
@@ -3544,7 +3544,7 @@ gUnknown_8452BAC::
 	.4byte gUnknown_84527B4, 4
 	.4byte gUnknown_84527BC, 2
 
-gUnknown_8452C0C::
+gDexCategory_RarePkmn::
 	.4byte gUnknown_84527C0, 1
 	.4byte gUnknown_84527C2, 3
 	.4byte gUnknown_84527C8, 1
@@ -3554,13 +3554,13 @@ gUnknown_8452C0C::
 	.4byte gUnknown_84527D0, 1
 	.4byte gUnknown_84527D2, 1
 
-gUnknown_8452C4C:: @ 8452C4C struct { dataptr; data8; }
-	.4byte gUnknown_84527D4, 27
-	.4byte gUnknown_84528AC, 26
-	.4byte gUnknown_845297C, 16
-	.4byte gUnknown_84529FC, 16
-	.4byte gUnknown_8452A7C, 10
-	.4byte gUnknown_8452ACC, 17
-	.4byte gUnknown_8452B54, 11
-	.4byte gUnknown_8452BAC, 12
-	.4byte gUnknown_8452C0C, 8
+gDexCategoryPtrs:: @ 8452C4C struct { dataptr; data8; }
+	.4byte gDexCategory_GrasslandPkmn, 27
+	.4byte gDexCategory_ForestPkmn, 26
+	.4byte gDexCategory_WatersEdgePkmn, 16
+	.4byte gDexCategory_SeaPkmn, 16
+	.4byte gDexCategory_CavePkmn, 10
+	.4byte gDexCategory_MountainPkmn, 17
+	.4byte gDexCategory_RoughTerrainPkmn, 11
+	.4byte gDexCategory_UrbanPkmn, 12
+	.4byte gDexCategory_RarePkmn, 8

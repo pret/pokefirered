@@ -206,31 +206,31 @@ gUnknown_8415DD7:: @ 8415DD7
 gUnknown_8415DE0:: @ 0x8415DE0
 	.string "{COLOR WHITE2}{SHADOW LIGHT_BLUE}POKéMON HABITATS$"
 
-gUnknown_8415DF7:: @ 0x8415DF7
+gText_DexCategory_GrasslandPkmn:: @ 0x8415DF7
 	.string "Grassland POKéMON$"
 
-gUnknown_8415E09:: @ 0x8415E09
+gText_DexCategory_ForestPkmn:: @ 0x8415E09
 	.string "Forest POKéMON$"
 
-gUnknown_8415E18:: @ 0x8415E18
+gText_DexCategory_WatersEdgePkmn:: @ 0x8415E18
 	.string "Water's-edge POKéMON$"
 
-gUnknown_8415E2D:: @ 0x8415E2D
+gText_DexCategory_SeaPkmn:: @ 0x8415E2D
 	.string "Sea POKéMON$"
 
-gUnknown_8415E39:: @ 0x8415E39
+gText_DexCategory_CavePkmn:: @ 0x8415E39
 	.string "Cave POKéMON$"
 
-gUnknown_8415E46:: @ 0x8415E46
+gText_DexCategory_MountainPkmn:: @ 0x8415E46
 	.string "Mountain POKéMON$"
 
-gUnknown_8415E57:: @ 0x8415E57
+gText_DexCategory_RoughTerrainPkmn:: @ 0x8415E57
 	.string "Rough-terrain POKéMON$"
 
-gUnknown_8415E6D:: @ 0x8415E6D
+gText_DexCategory_UrbanPkmn:: @ 0x8415E6D
 	.string "Urban POKéMON$"
 
-gUnknown_8415E7B:: @ 0x8415E7B
+gText_DexCategory_RarePkmn:: @ 0x8415E7B
 	.string "Rare POKéMON$"
 
 gUnknown_8415E88:: @ 0x8415E88

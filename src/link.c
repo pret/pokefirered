@@ -163,7 +163,7 @@ static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
 
-ALIGNED(4) static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
+static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/interface/wireless_link_display.gbapal");
 static const u16 sWirelessLinkDisplay4bpp[] = INCBIN_U16("graphics/interface/wireless_link_display.4bpp.lz");
 static const u16 sWirelessLinkDisplayBin[] = INCBIN_U16("graphics/interface/wireless_link_display.bin.lz");
 static const u16 sLinkTestFontPal[] = INCBIN_U16("graphics/interface/link_test_font.gbapal");

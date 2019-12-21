@@ -6,7 +6,6 @@
 
 extern u8 gGlyphInfo[];
 
-ALIGNED(4)
 static const u8 gUnknown_846FB08[] = {1, 2, 4};
 static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("data/graphics/fonts/font6.fwjpnfont");
 

@@ -375,7 +375,7 @@ SECTIONS {
     } =0
 
     .rodata :
-    ALIGN(4)
+    SUBALIGN(4)
     {
         src/main.o(.rodata);
         src/bg.o(.rodata);
@@ -550,7 +550,6 @@ SECTIONS {
         src/mevent_scripts.o(.rodata);
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
-        . = ALIGN(4);
         src/seagallop.o(.rodata);
         data/pokemon_jump.o(.rodata);
         data/berry_crush.o(.rodata);
@@ -932,7 +931,7 @@ SECTIONS {
     }
 
     lib_rodata :
-    ALIGN(4)
+    SUBALIGN(4)
     {
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);

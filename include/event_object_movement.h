@@ -104,5 +104,6 @@ void sub_8069058(u8, u8);
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
+extern const struct OamData gObjectEventBaseOam_32x32;
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

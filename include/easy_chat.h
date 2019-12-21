@@ -1,5 +1,5 @@
-#ifndef GUARD_EASYCHAT_H
-#define GUARD_EASYCHAT_H
+#ifndef GUARD_EASY_CHAT_H
+#define GUARD_EASY_CHAT_H
 
 #include "global.h"
 #include "constants/easy_chat.h"
@@ -45,6 +45,6 @@ u16 GetDisplayedWordByIndex(u16 index);
 u16 GetNumDisplayedWords(void);
 const u8 *GetEasyChatWordGroupName(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
-void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback); // TODO: currently in link_rfu.s. further file split needed? 
+void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback);
 
-#endif // GUARD_EASYCHAT_H
+#endif // GUARD_EASY_CHAT_H

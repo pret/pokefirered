@@ -15,6 +15,7 @@
 #include "field_camera.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
+#include "event_object_movement.h"
 #include "constants/songs.h"
 
 typedef bool8 (*TransitionStateFunc)(struct Task *task);
@@ -44,9 +45,6 @@ struct TransitionData
 };
 
 static EWRAM_DATA struct TransitionData *sTransitionStructPtr = NULL;
-
-// TODO: Move this declaration to include/event_object_movement.h
-extern const struct OamData gObjectEventBaseOam_32x32;
 
 static bool8 BT_Phase1_FadeOut(struct Task *task);
 static bool8 BT_Phase1_FadeIn(struct Task *task);

@@ -270,9 +270,8 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
         data[i] = 0;
 
     // Items are allowed to use in ONLY trainer battles.
-    // TODO: Use proper flags
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        && (gTrainerBattleOpponent_A != 0x400)
+        && (gTrainerBattleOpponent_A != SECRET_BASE_OPPONENT)
         && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_SAFARI | BATTLE_TYPE_LINK))
         )
     {

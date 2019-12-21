@@ -94,7 +94,9 @@ TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS)
+ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
+
+.PHONY: all rom tools clean-tools mostlyclean clean compare tidy berry_fix $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%)
 
 MAKEFLAGS += --no-print-directory
 
@@ -117,14 +119,14 @@ compare:
 	@$(MAKE) COMPARE=1
 
 mostlyclean: tidy
-	rm -f sound/direct_sound_samples/*.bin
-	rm -f $(SONG_OBJS) $(MID_SUBDIR)/*.s
+	$(RM) sound/direct_sound_samples/*.bin
+	$(RM) $(SONG_OBJS) $(MID_SUBDIR)/*.s
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
-	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
+	$(RM) $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
+	$(RM) $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	rm -f $(AUTO_GEN_TARGETS)
-	@$(MAKE) clean -C berry_fix
+	$(RM) $(AUTO_GEN_TARGETS)
+	@$(MAKE) -C berry_fix clean
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
@@ -132,8 +134,8 @@ clean-tools:
 clean: mostlyclean clean-tools
 
 tidy:
-	rm -f $(ROM) $(ELF) $(MAP)
-	rm -r build/*
+	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) -r build
 	@$(MAKE) -C berry_fix tidy
 
 include graphics_file_rules.mk

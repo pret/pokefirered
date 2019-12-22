@@ -32,7 +32,7 @@ struct PokedexScreenData
     u8 field_01;
     u8 field_02;
     u8 field_03;
-    u8 filler_04[0x4];
+    u8 field_04;
     u32 field_08;
     u32 field_0C;
     u16 field_10;
@@ -64,13 +64,13 @@ struct PokedexScreenData
     u8 field_42;
     struct ListMenuItem * field_44;
     u16 field_48;
-    u8 filler_4A[0x10];
+    u8 field_4A[0x10];
     u16 field_5A;
     u16 * field_5C;
     u8 field_60;
     u8 field_61;
     u16 field_62;
-    u8 filler_64[0x2];
+    u8 field_64;
     u16 field_66;
     u16 field_68;
     u16 field_6A;
@@ -125,19 +125,71 @@ u8 sub_8106AF8(u16 a0);
 void sub_8106B34(void);
 void sub_8106E78(const u8 *a0, s32 a1);
 
-extern const u16 gUnknown_8440124[];
-extern const u32 gUnknown_8440274[];
-extern const u32 gUnknown_84403AC[];
-extern const u16 gUnknown_84404C8[];
-extern const u16 gUnknown_84406C8[];
-extern const u16 gUnknown_84406E0[];
-extern const u16 gUnknown_8440EF0[];
-extern const u16 gUnknown_8443460[];
-extern const u8 gUnknown_8443600[];
-extern const u16 gUnknown_8443FC0[];
-extern const u16 gUnknown_84442F6[];
-extern const u16 gUnknown_84448FE[];
-extern const u16 gUnknown_84445FA[];
+#include "data/pokemon_graphics/footprint_table.h"
+
+const u32 gUnknown_8440124[] = INCBIN_U32("graphics/pokedex/unk_8440124.bin.lz");
+const u32 gUnknown_8440274[] = INCBIN_U32("graphics/pokedex/unk_8440274.4bpp.lz");
+const u32 gUnknown_84403AC[] = INCBIN_U32("graphics/pokedex/unk_84403AC.4bpp.lz");
+const u16 gUnknown_84404C8[] = INCBIN_U16("graphics/pokedex/unk_84404C8.gbapal");
+
+const u16 gUnknown_84406C8[] = {
+    RGB(24, 22, 17), RGB(26, 24, 20),
+    RGB(26, 20, 15), RGB(27, 23, 19),
+    RGB(28, 18, 15), RGB(28, 22, 19),
+    RGB(30, 16, 13), RGB(29, 21, 18),
+    RGB(28, 18, 15), RGB(28, 22, 19),
+    RGB(26, 20, 15), RGB(27, 23, 19)
+};
+
+const u16 gUnknown_84406E0[] = INCBIN_U16("graphics/pokedex/unk_84406E0.gbapal");
+const u32 gUnknown_84408E0[] = INCBIN_U32("graphics/pokedex/unk_84408E0.bin.lz");
+const u32 gUnknown_8440BD8[] = INCBIN_U32("graphics/pokedex/unk_8440BD8.bin.lz");
+const u32 gUnknown_8440EF0[] = INCBIN_U32("graphics/pokedex/unk_8440EF0.bin.lz");
+const u32 gUnknown_844112C[] = INCBIN_U32("graphics/pokedex/unk_844112C.bin.lz");
+const u32 gUnknown_84414BC[] = INCBIN_U32("graphics/pokedex/unk_84414BC.bin.lz");
+const u32 gUnknown_8441808[] = INCBIN_U32("graphics/pokedex/unk_8441808.bin.lz");
+const u32 gUnknown_8441A40[] = INCBIN_U32("graphics/pokedex/unk_8441A40.bin.lz");
+const u32 gUnknown_8441D54[] = INCBIN_U32("graphics/pokedex/unk_8441D54.bin.lz");
+const u32 gUnknown_8442004[] = INCBIN_U32("graphics/pokedex/unk_8442004.bin.lz");
+const u32 gUnknown_844223C[] = INCBIN_U32("graphics/pokedex/unk_844223C.bin.lz");
+const u32 gUnknown_84424E4[] = INCBIN_U32("graphics/pokedex/unk_84424E4.bin.lz");
+const u32 gUnknown_8442838[] = INCBIN_U32("graphics/pokedex/unk_8442838.bin.lz");
+const u32 gUnknown_8442BC0[] = INCBIN_U32("graphics/pokedex/unk_8442BC0.bin.lz");
+const u32 gUnknown_8442EF8[] = INCBIN_U32("graphics/pokedex/unk_8442EF8.bin.lz");
+const u32 gUnknown_844318C[] = INCBIN_U32("graphics/pokedex/unk_844318C.bin.lz");
+const u16 gUnknown_8443420[] = INCBIN_U16("graphics/pokedex/unk_8443420.gbapal");
+const u16 gUnknown_8443440[] = INCBIN_U16("graphics/pokedex/unk_8443440.gbapal");
+const u16 gUnknown_8443460[] = INCBIN_U16("graphics/pokedex/unk_8443460.gbapal");
+const u16 gUnknown_8443480[] = INCBIN_U16("graphics/pokedex/unk_8443480.gbapal");
+const u16 gUnknown_84434A0[] = INCBIN_U16("graphics/pokedex/unk_84434A0.gbapal");
+const u16 gUnknown_84434C0[] = INCBIN_U16("graphics/pokedex/unk_84434C0.gbapal");
+const u16 gUnknown_84434E0[] = INCBIN_U16("graphics/pokedex/unk_84434E0.gbapal");
+const u16 gUnknown_8443500[] = INCBIN_U16("graphics/pokedex/unk_8443500.gbapal");
+const u16 gUnknown_8443520[] = INCBIN_U16("graphics/pokedex/unk_8443520.gbapal");
+const u16 gUnknown_8443540[] = INCBIN_U16("graphics/pokedex/unk_8443540.gbapal");
+const u16 gUnknown_8443560[] = INCBIN_U16("graphics/pokedex/unk_8443560.gbapal");
+const u16 gUnknown_8443580[] = INCBIN_U16("graphics/pokedex/unk_8443580.gbapal");
+const u16 gUnknown_84435A0[] = INCBIN_U16("graphics/pokedex/unk_84435A0.gbapal");
+const u16 gUnknown_84435C0[] = INCBIN_U16("graphics/pokedex/unk_84435C0.gbapal");
+const u16 gUnknown_84435E0[] = INCBIN_U16("graphics/pokedex/unk_84435E0.gbapal");
+const u8 gUnknown_8443600[] = INCBIN_U8("graphics/pokedex/unk_8443600.4bpp");
+const u32 gUnknown_8443620[] = INCBIN_U32("graphics/pokedex/unk_8443620.bin.lz");
+const u32 gUnknown_8443910[] = INCBIN_U32("graphics/pokedex/unk_8443910.bin.lz");
+const u32 gUnknown_8443988[] = INCBIN_U32("graphics/pokedex/unk_8443988.bin.lz");
+const u32 gUnknown_84439FC[] = INCBIN_U32("graphics/pokedex/unk_84439FC.bin.lz");
+const u32 gUnknown_8443A78[] = INCBIN_U32("graphics/pokedex/unk_8443A78.bin.lz");
+const u32 gUnknown_8443AF8[] = INCBIN_U32("graphics/pokedex/unk_8443AF8.bin.lz");
+const u32 gUnknown_8443BB0[] = INCBIN_U32("graphics/pokedex/unk_8443BB0.bin.lz");
+const u32 gUnknown_8443C54[] = INCBIN_U32("graphics/pokedex/unk_8443C54.bin.lz");
+const u16 gUnknown_8443D00[] = INCBIN_U16("graphics/pokedex/unk_8443D00.4bpp");
+
+#include "data/pokemon/pokedex_orders.h"
+
+static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
+
+#include "data/pokemon/pokedex_text.h"
+#include "data/pokemon/pokedex_entries.h"
+
 extern const struct BgTemplate gUnknown_8451EBC[4];
 extern const struct WindowTemplate gUnknown_8451ECC[];
 extern const struct PokedexScreenData gUnknown_8451EE4;
@@ -710,7 +762,7 @@ u16 sub_8103518(u8 a0)
     case 1:
         for (i = 0; i < SPECIES_CHIMECHO; i++)
         {
-            ndex_num = gUnknown_8443FC0[i];
+            ndex_num = gPokedexOrder_Alphabetical[i];
             if (ndex_num <= max_n)
             {
                 seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -725,9 +777,9 @@ u16 sub_8103518(u8 a0)
         }
         break;
     case 2:
-        for (i = 0; i < SPECIES_CHIMECHO; i++)
+        for (i = 0; i < NUM_SPECIES - 1; i++)
         {
-            ndex_num = SpeciesToNationalPokedexNum(gUnknown_84448FE[i]);
+            ndex_num = SpeciesToNationalPokedexNum(gPokedexOrder_Type[i]);
             if (ndex_num <= max_n)
             {
                 seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -744,7 +796,7 @@ u16 sub_8103518(u8 a0)
     case 3:
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
-            ndex_num = gUnknown_84442F6[i];
+            ndex_num = gPokedexOrder_Weight[i];
             if (ndex_num <= max_n)
             {
                 seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);
@@ -761,7 +813,7 @@ u16 sub_8103518(u8 a0)
     case 4:
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
-            ndex_num = gUnknown_84445FA[i];
+            ndex_num = gPokedexOrder_Height[i];
             if (ndex_num <= max_n)
             {
                 seen = sub_8104AB0(ndex_num, FLAG_GET_SEEN, 0);

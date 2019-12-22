@@ -186,7 +186,7 @@ SECTIONS {
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
         asm/fldeff_flash.o(.text);
-        asm/post_battle_event_funcs.o(.text);
+        src/post_battle_event_funcs.o(.text);
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);

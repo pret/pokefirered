@@ -302,6 +302,7 @@ DirectSoundWaveData_sc88_accordion::
 DirectSoundWaveData_unknown_tom::
 	.incbin "sound/direct_sound_samples/unknown_tom.bin"
 
+
 	.align 2
 Cry_Bulbasaur::
 	.incbin "sound/direct_sound_samples/cry_bulbasaur.bin"
@@ -1854,7 +1855,6 @@ Cry_Deoxys::
 Cry_Chimecho::
 	.incbin "sound/direct_sound_samples/cry_chimecho.bin"
 
-	.align 2
 
 	.align 2
 DirectSoundWaveData_register_noise::

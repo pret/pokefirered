@@ -146,4 +146,6 @@ void c2_8056854(void);
 void sub_8054F38(u32 newKey);
 void sub_8055778(int);
 
+void sub_8055738(u8 loc);
+
 #endif //GUARD_OVERWORLD_H

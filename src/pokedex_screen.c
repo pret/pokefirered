@@ -32,7 +32,7 @@ struct PokedexScreenData
     u8 field_01;
     u8 field_02;
     u8 field_03;
-    u8 filler_04[0x4];
+    u8 field_04;
     u32 field_08;
     u32 field_0C;
     u16 field_10;
@@ -64,13 +64,13 @@ struct PokedexScreenData
     u8 field_42;
     struct ListMenuItem * field_44;
     u16 field_48;
-    u8 filler_4A[0x10];
+    u8 field_4A[0x10];
     u16 field_5A;
     u16 * field_5C;
     u8 field_60;
     u8 field_61;
     u16 field_62;
-    u8 filler_64[0x2];
+    u8 field_64;
     u16 field_66;
     u16 field_68;
     u16 field_6A;

@@ -11,6 +11,10 @@
 #define DEX_CATEGORY_URBAN         7
 #define DEX_CATEGORY_RARE          8
 
+#include "pokedex.h"
+
+extern const struct PokedexEntry gPokedexEntries[];
+
 void CB2_OpenPokedexFromStartMenu(void);
 s8 sub_8104AB0(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecies);
 

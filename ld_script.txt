@@ -508,9 +508,8 @@ SECTIONS {
         src/map_preview_screen.o(.rodata);
         data/link_rfu_2.o(.rodata);
         data/link_rfu.o(.rodata);
+        src/pokedex_screen.o(.rodata);
         data/pokedex_screen.o(.rodata);
-        src/pokedex.o(.rodata);
-        data/pokedex_screen.o(.rodata.after);
         src/list_menu.o(.rodata);
         data/item_menu.o(.rodata);
         src/save_location.o(.rodata);

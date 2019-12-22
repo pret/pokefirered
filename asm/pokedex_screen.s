@@ -1026,7 +1026,7 @@ sub_8105D64: @ 8105D64
 	lsls r0, 24
 	cmp r0, 0
 	beq _08105E02
-	ldr r1, _08105E14 @ =gMonFootprintPtrs
+	ldr r1, _08105E14 @ =gMonFootprintTable
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -1092,7 +1092,7 @@ _08105E02:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08105E14: .4byte gMonFootprintPtrs
+_08105E14: .4byte gMonFootprintTable
 _08105E18: .4byte gDecompressionBuffer
 	thumb_func_end sub_8105D64
 

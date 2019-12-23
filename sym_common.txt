@@ -163,19 +163,19 @@ gUnknown_3005E94: @ 3005E94
 gRfuState: @ 3007438
 	.space 0x8
 
-gUnknown_3007440: @ 3007440
+gRfuSlotStatusUNI: @ 3007440
 	.space 0x10
 
-gUnknown_3007450: @ 3007450
+gRfuSlotStatusNI: @ 3007450
 	.space 0x10
 
-gUnknown_3007460: @ 3007460
+gRfuLinkStatus: @ 3007460
 	.space 0x4
 
-gUnknown_3007464: @ 3007464
+gRfuStatic: @ 3007464
 	.space 0x4
 
-gUnknown_3007468: @ 3007468
+gRfuFixed: @ 3007468
 	.space 0x8
 
 gUnknown_3007470: @ 3007470

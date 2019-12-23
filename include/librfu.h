@@ -76,9 +76,9 @@ struct UnkLinkRfuStruct_02022B14Substruct
     u16 unk_00_4:1;
     u16 unk_00_5:1;
     u16 unk_00_6:1;
-    u16 unk_00_7:1;
-    u16 unk_01_0:1;
-    u16 unk_01_1:1;
+    u16 isChampion:1;
+    u16 hasNationalDex:1;
+    u16 gameClear:1;
     u16 unk_01_2:4;
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
@@ -93,36 +93,35 @@ struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
     u8 unk_0a_0:7;
     u8 unk_0a_7:1;
     u8 playerGender:1;
-    u8 unk_0b_1:7;
+    u8 level:7;
     u8 unk_0c;
 };
 
 struct RfuStruct
 {
-    vs32 unk_0;
-    u8 txParams;
-    u8 unk_5;
-    u8 activeCommand;
-    u8 unk_7;
-    u8 unk_8;
-    u8 unk_9;
+    vs32 state;
+    u8 reqLength;
+    u8 reqNext;
+    u8 reqActiveCommand;
+    u8 ackLength;
+    u8 ackNext;
+    u8 ackActiveCommand;
     u8 timerSelect;
     u8 unk_b;
-    int timerState;
+    s32 timerState;
     vu8 timerActive;
     u8 unk_11;
-    vu16 unk_12;
+    vu16 error;
     vu8 msMode;
-    u8 unk_15;
+    u8 recoveryCount;
     u8 unk_16;
     u8 unk_17;
     void (*callbackM)();
     void (*callbackS)();
-    u32 callbackID;
-    union RfuPacket * txPacket;
-    union RfuPacket * rxPacket;
+    u32 callbackId;
+    union RfuPacket *txPacket;
+    union RfuPacket *rxPacket;
     vu8 unk_2c;
-    u8 padding[3];
 };
 
 struct RfuIntrStruct
@@ -133,90 +132,149 @@ struct RfuIntrStruct
     u8 block2[0x30];
 };
 
-struct RfuUnk1
+struct RfuSlotStatusUNI
 {
-    u16 unk_0;
-    u8 unk_2;
-    u8 unk_3;
-    u8 fill_4[14];
-    u8 unk_12;
-    u32 unk_14;
-    u32 unk_18;
-    struct RfuIntrStruct unk_1c;
+    u16 sendState;
+    u8 dataReadyFlag;
+    u8 bmSlot;
+    u16 payloadSize;
+    void *src; // TODO: is it correct? 
+    u16 recvState;
+    u16 errorCode;
+    u16 dataSize;
+    u8 newDataFlag;
+    u8 dataBlockFlag;
+    void *recvBuffer;
+    u32 recvBuffSize;
 };
 
-struct RfuUnk2
+struct NIComm
 {
-    u16 unk_0;
-    u16 unk_2;
-    u8 fill_4[0x16];
-    u8 unk_1a;
-    u8 fill_1b[0x19];
-    u16 unk_34;
-    u16 unk_36;
-    u8 fill_38[0x16];
-    u8 unk_4e;
-    u8 fill_4f[0x12];
-    u8 unk_61;
-    u8 fill_62[6];
-    void *unk_68;
-    void *unk_6c;
-    u8 unk_70[0x70];
+    u16 state;
+    u16 failCounter;
+    u32 nowP[4]; // ???
+    u32 remainSize;
+    u16 errorCode;
+    u8 bmSlot;
+    u8 unk_1b;
+    u8 recvAckFlag[4];
+    u8 ack;
+    u8 phase;
+    u8 n[4]; // ???
+    void *src;
+    u8 bmSlotOrg;
+    u8 dataType;
+    u16 payloadSize;
+    u32 dataSize;
 };
 
-struct RfuUnk3
+struct RfuSlotStatusNI
 {
-    u32 unk_0;
-    u32 unk_4;
-    u8 unk_8[0xD4];
-    u32 unk_dc;
+    struct NIComm send;
+    struct NIComm recv;
+    void *recvBuffer;
+    void *recvBufferSize;
 };
 
-struct RfuUnk5Sub
+struct RfuFixed
 {
-    u16 unk_00;
-    u8 unk_02;
-    u16 unk_04;
-    struct UnkLinkRfuStruct_02022B14 unk_06;
-    u8 fill_13[1];
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
+    void *reqCallback;
+    void *fastCopyPtr;
+    u16 fastCopyBuffer[24];
+    u32 fastCopyBuffer2[12];
+    u32 LLFBuffer[29];
+    u8 *STWIBuffer;
 };
 
-struct RfuUnk5
+struct RfuStatic
 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    u8 unk_07;
-    u8 unk_08;
-    u8 filler_09[1];
-    u8 unk_0a[4];
-    u8 filler_0e[6];
-    struct RfuUnk5Sub unk_14[4];
+    u8 flags;
+    u8 NIEndRecvFlag;
+    u8 RecvRenewalFlag;
+    u8 commExistFlag;
+    u8 recvErrorFlag;
+    u8 recoveryBmSlot;
+    u8 nowWatchInterval;
+    u8 nullFrameCount;
+    u8 emberCount;
+    u8 SCStartFlag;
+    u8 linkEmergencyFlag[4];
+    u8 lsFixedCount[4];
+    u16 cidBak[4];
+    u16 unk_1a;
+    u16 reqResult;
+    u16 tryPid;
+    u32 watchdogTimer;
+    u32 totalPacketSize;
 };
 
-extern struct RfuStruct * gRfuState;
+struct RfuTgtData
+{
+    u16 id;
+    u8 slot;
+    u8 multibootFlag;
+    u16 serialNum;
+    u8 gname[15];
+    u8 uname[9];
+};
 
-extern struct RfuUnk5 * gUnknown_3007460;
-extern u32 *gUnknown_3007464;
-extern struct RfuUnk3 * gUnknown_3007468;
-extern struct RfuUnk2 * gUnknown_3007450[4];
-extern struct RfuUnk1 * gUnknown_3007440[4];
-extern struct {
+struct RfuLinkStatus
+{
+    u8 connMode;
+    u8 connCount;
+    u8 connSlotFlag;
+    u8 linkLossSlotFlag;
+    u8 sendSlotNIFlag;
+    u8 recvSlotNIFlag;
+    u8 sendSlotUNIFlag;
+    u8 getNameFlag;
+    u8 findParentCount;
+    u8 watchInterval;
+    u8 stength[4];
+    u8 LLFReadyFlag;
+    u8 remainLLFrameSizeParent;
+    u8 remainLLFrameSizeChild[4];
+    struct RfuTgtData partner[4];
+    struct RfuTgtData my;
+};
+
+struct Unk_3007470
+{
     u8 unk0;
     u8 unk1;
     u16 unk2;
     u16 unk4;
     u8 fill6[4];
     u16 unkA;
-} gUnknown_3007470;
+};
 
-extern void rfu_STC_clearAPIVariables(void);
+struct STWIStruct
+{
+    // TODO: resolve the struct
+    u8 unk_0[232];
+    u8 function[2400];
+    struct RfuStruct STWIStatus;
+};
 
+struct Unk_3001190
+{
+    struct RfuLinkStatus linkStatus;
+    struct RfuStatic static_;
+    struct RfuFixed fixed;
+    struct RfuSlotStatusNI NI[4];
+    struct RfuSlotStatusUNI UNI[4];
+    struct STWIStruct STWI;
+};
+
+extern struct RfuStruct *gRfuState;
+extern struct RfuLinkStatus *gRfuLinkStatus;
+extern struct RfuStatic *gRfuStatic;
+extern struct RfuFixed *gRfuFixed;
+extern struct RfuSlotStatusNI *gRfuSlotStatusNI[4];
+extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
+extern struct Unk_3007470 gUnknown_3007470;
+
+void rfu_STC_clearAPIVariables(void);
 void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);

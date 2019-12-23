@@ -10493,7 +10493,7 @@ _0811AFF8:
 _0811AFFA:
 	cmp r4, 0x3
 	bgt _0811B030
-	ldr r0, _0811B044 @ =gUnknown_3007460
+	ldr r0, _0811B044 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	lsls r1, r4, 5
 	adds r0, r1
@@ -10526,7 +10526,7 @@ _0811B030:
 	bl StringCopy
 	b _0811B080
 	.align 2, 0
-_0811B044: .4byte gUnknown_3007460
+_0811B044: .4byte gRfuLinkStatus
 _0811B048: .4byte gSpeciesNames
 _0811B04C: .4byte gUnknown_8457DB8
 _0811B050:

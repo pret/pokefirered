@@ -137,7 +137,7 @@ sub_80F86F4: @ 80F86F4
 	ldr r4, _080F8730 @ =gIntrTable + 0x4
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl sub_81E05B0
+	bl rfu_initializeAPI
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -871,7 +871,7 @@ _080F8D2A:
 	bge _080F8D2A
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
-	ldr r1, _080F8D94 @ =gUnknown_3007440
+	ldr r1, _080F8D94 @ =gRfuSlotStatusUNI
 	ldr r3, _080F8D90 @ =gUnknown_3005450
 	ldr r0, _080F8D98 @ =0x000008f6
 	adds r4, r3, r0
@@ -911,7 +911,7 @@ _080F8D84:
 	bx r0
 	.align 2, 0
 _080F8D90: .4byte gUnknown_3005450
-_080F8D94: .4byte gUnknown_3007440
+_080F8D94: .4byte gRfuSlotStatusUNI
 _080F8D98: .4byte 0x000008f6
 _080F8D9C: .4byte 0x00000988
 _080F8DA0: .4byte 0x000008f7
@@ -1074,7 +1074,7 @@ sub_80F8ECC: @ 80F8ECC
 	ldrh r0, [r4, 0x4]
 	cmp r0, 0x7
 	bne _080F8F08
-	ldr r0, _080F8F00 @ =gUnknown_3007460
+	ldr r0, _080F8F00 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldr r2, _080F8F04 @ =0x000008f5
 	adds r0, r4, r2
@@ -1093,7 +1093,7 @@ sub_80F8ECC: @ 80F8ECC
 	b _080F8F0A
 	.align 2, 0
 _080F8EFC: .4byte gUnknown_3005450
-_080F8F00: .4byte gUnknown_3007460
+_080F8F00: .4byte gRfuLinkStatus
 _080F8F04: .4byte 0x000008f5
 _080F8F08:
 	movs r0, 0
@@ -1363,7 +1363,7 @@ _080F90D8: .4byte 0x000008f2
 	thumb_func_start IsRfuRecvQueueEmpty
 IsRfuRecvQueueEmpty: @ 80F90DC
 	push {r4,lr}
-	ldr r0, _080F90EC @ =gUnknown_3007460
+	ldr r0, _080F90EC @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
@@ -1372,7 +1372,7 @@ _080F90E8:
 	movs r0, 0
 	b _080F9110
 	.align 2, 0
-_080F90EC: .4byte gUnknown_3007460
+_080F90EC: .4byte gRfuLinkStatus
 _080F90F0:
 	movs r3, 0
 	ldr r4, _080F9118 @ =gRecvCmds
@@ -1422,7 +1422,7 @@ _080F913C:
 	strb r0, [r1]
 	ldr r0, _080F919C @ =0x0000099a
 	adds r1, r6, r0
-	ldr r0, _080F91A0 @ =gUnknown_3007460
+	ldr r0, _080F91A0 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r1]
 	ldrb r0, [r0, 0x2]
@@ -1460,7 +1460,7 @@ _080F913C:
 	.align 2, 0
 _080F9198: .4byte 0x00000993
 _080F919C: .4byte 0x0000099a
-_080F91A0: .4byte gUnknown_3007460
+_080F91A0: .4byte gRfuLinkStatus
 _080F91A4: .4byte 0x00000994
 _080F91A8: .4byte 0x0000099b
 _080F91AC: .4byte 0x0000099c
@@ -1815,7 +1815,7 @@ _080F947E:
 	adds r0, r6, r1
 	ldrb r0, [r0]
 	adds r1, r0, 0
-	ldr r0, _080F94A0 @ =gUnknown_3007460
+	ldr r0, _080F94A0 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
@@ -1826,7 +1826,7 @@ _080F947E:
 	.align 2, 0
 _080F9498: .4byte 0x00000994
 _080F949C: .4byte gUnknown_3005450
-_080F94A0: .4byte gUnknown_3007460
+_080F94A0: .4byte gRfuLinkStatus
 _080F94A4:
 	movs r0, 0
 	b _080F94AA
@@ -1950,7 +1950,7 @@ _080F9538:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080F95E4
-	ldr r0, _080F964C @ =gUnknown_3007460
+	ldr r0, _080F964C @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -2042,7 +2042,7 @@ _080F963C: .4byte gRecvCmds
 _080F9640: .4byte gUnknown_3005E10
 _080F9644: .4byte gUnknown_3005450
 _080F9648: .4byte 0x0000099c
-_080F964C: .4byte gUnknown_3007460
+_080F964C: .4byte gRfuLinkStatus
 _080F9650: .4byte gReceivedRemoteLinkPlayers
 _080F9654: .4byte 0x00000988
 _080F9658: .4byte gSendCmd
@@ -2435,7 +2435,7 @@ _080F9902:
 	beq _080F9914
 	b _080F9C40
 _080F9914:
-	ldr r0, _080F9944 @ =gUnknown_3007460
+	ldr r0, _080F9944 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	mov r6, r8
@@ -2458,7 +2458,7 @@ _080F9924:
 	.align 2, 0
 _080F993C: .4byte gUnknown_3005450
 _080F9940: .4byte gReceivedRemoteLinkPlayers
-_080F9944: .4byte gUnknown_3007460
+_080F9944: .4byte gRfuLinkStatus
 _080F9948: .4byte gRecvCmds + 2
 _080F994C: .4byte gRecvCmds + 4
 _080F9950: .4byte gUnknown_3005DD6
@@ -2688,7 +2688,7 @@ _080F9B00:
 	ldr r0, _080F9B54 @ =gRecvCmds + 2
 	adds r4, r5, r0
 	ldrh r1, [r4]
-	ldr r0, _080F9B58 @ =gUnknown_3007460
+	ldr r0, _080F9B58 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x2]
 	ands r1, r0
@@ -2715,7 +2715,7 @@ _080F9B38:
 _080F9B4C: .4byte gUnknown_3005450
 _080F9B50: .4byte gReceivedRemoteLinkPlayers
 _080F9B54: .4byte gRecvCmds + 2
-_080F9B58: .4byte gUnknown_3007460
+_080F9B58: .4byte gRfuLinkStatus
 _080F9B5C: .4byte gRecvCmds + 4
 _080F9B60: .4byte 0x0000099c
 _080F9B64: .4byte gRecvCmds
@@ -3502,7 +3502,7 @@ _080FA13C: .4byte gUnknown_3005450
 	thumb_func_start sub_80FA140
 sub_80FA140: @ 80FA140
 	push {lr}
-	ldr r0, _080FA15C @ =gUnknown_3007460
+	ldr r0, _080FA15C @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -3513,7 +3513,7 @@ sub_80FA140: @ 80FA140
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA15C: .4byte gUnknown_3007460
+_080FA15C: .4byte gRfuLinkStatus
 	thumb_func_end sub_80FA140
 
 	thumb_func_start sub_80FA160
@@ -3552,7 +3552,7 @@ sub_80FA190: @ 80FA190
 	adds r1, r2, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, _080FA1BC @ =gUnknown_3007460
+	ldr r0, _080FA1BC @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -3565,7 +3565,7 @@ sub_80FA190: @ 80FA190
 	.align 2, 0
 _080FA1B4: .4byte gUnknown_3005450
 _080FA1B8: .4byte 0x0000099c
-_080FA1BC: .4byte gUnknown_3007460
+_080FA1BC: .4byte gRfuLinkStatus
 _080FA1C0: .4byte 0x0000099b
 	thumb_func_end sub_80FA190
 
@@ -4065,7 +4065,7 @@ _080FA53A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080FA5C2
-	ldr r1, _080FA5A0 @ =gUnknown_3007450
+	ldr r1, _080FA5A0 @ =gRfuSlotStatusNI
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -4103,7 +4103,7 @@ _080FA55E:
 _080FA594: .4byte gUnknown_3005450
 _080FA598: .4byte 0x000008f6
 _080FA59C: .4byte 0x00000989
-_080FA5A0: .4byte gUnknown_3007450
+_080FA5A0: .4byte gRfuSlotStatusNI
 _080FA5A4: .4byte 0x0000098d
 _080FA5A8:
 	mov r2, r8
@@ -4300,7 +4300,7 @@ sub_80FA6FC: @ 80FA6FC
 	movs r0, 0x2
 	b _080FA732
 _080FA718:
-	ldr r1, _080FA72C @ =gUnknown_3007450
+	ldr r1, _080FA72C @ =gRfuSlotStatusNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -4310,7 +4310,7 @@ _080FA718:
 	movs r0, 0
 	b _080FA732
 	.align 2, 0
-_080FA72C: .4byte gUnknown_3007450
+_080FA72C: .4byte gRfuSlotStatusNI
 _080FA730:
 	movs r0, 0x1
 _080FA732:
@@ -4327,7 +4327,7 @@ sub_80FA738: @ 80FA738
 	ldr r1, _080FA780 @ =0x0000098d
 	adds r5, r0, r1
 _080FA746:
-	ldr r1, _080FA784 @ =gUnknown_3007450
+	ldr r1, _080FA784 @ =gRfuSlotStatusNI
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -4358,7 +4358,7 @@ _080FA770:
 	.align 2, 0
 _080FA77C: .4byte gUnknown_3005450
 _080FA780: .4byte 0x0000098d
-_080FA784: .4byte gUnknown_3007450
+_080FA784: .4byte gRfuSlotStatusNI
 	thumb_func_end sub_80FA738
 
 	thumb_func_start sub_80FA788
@@ -4371,7 +4371,7 @@ sub_80FA788: @ 80FA788
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080FA7C2
-	ldr r2, _080FA808 @ =gUnknown_3007450
+	ldr r2, _080FA808 @ =gRfuSlotStatusNI
 	ldr r0, _080FA80C @ =0x000008f6
 	adds r1, r0
 	ldrb r0, [r1]
@@ -4393,7 +4393,7 @@ _080FA7BA:
 	movs r0, 0x4
 	bl rfu_clearSlot
 _080FA7C2:
-	ldr r2, _080FA808 @ =gUnknown_3007450
+	ldr r2, _080FA808 @ =gRfuSlotStatusNI
 	ldr r5, _080FA800 @ =gUnknown_3005450
 	ldr r0, _080FA80C @ =0x000008f6
 	adds r1, r5, r0
@@ -4425,7 +4425,7 @@ _080FA7E6:
 	.align 2, 0
 _080FA800: .4byte gUnknown_3005450
 _080FA804: .4byte 0x0000093d
-_080FA808: .4byte gUnknown_3007450
+_080FA808: .4byte gRfuSlotStatusNI
 _080FA80C: .4byte 0x000008f6
 _080FA810: .4byte 0x0000093e
 _080FA814:
@@ -5772,7 +5772,7 @@ _080FB21E:
 	ands r0, r1
 	cmp r0, 0
 	beq _080FB286
-	ldr r0, _080FB274 @ =gUnknown_3007460
+	ldr r0, _080FB274 @ =gRfuLinkStatus
 	lsls r1, r5, 5
 	adds r1, 0x14
 	ldr r0, [r0]
@@ -5803,7 +5803,7 @@ _080FB21E:
 _080FB268: .4byte gUnknown_3005E10
 _080FB26C: .4byte gUnknown_3005450
 _080FB270: .4byte 0x0000098d
-_080FB274: .4byte gUnknown_3007460
+_080FB274: .4byte gRfuLinkStatus
 _080FB278: .4byte 0x00000989
 _080FB27C:
 	mov r0, r8
@@ -6216,7 +6216,7 @@ sub_80FB5A0: @ 80FB5A0
 	movs r3, 0
 	movs r2, 0
 	movs r4, 0x1
-	ldr r6, _080FB5E8 @ =gUnknown_3007460
+	ldr r6, _080FB5E8 @ =gRfuLinkStatus
 	movs r7, 0x7F
 _080FB5AE:
 	adds r0, r5, 0
@@ -6249,7 +6249,7 @@ _080FB5D4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080FB5E8: .4byte gUnknown_3007460
+_080FB5E8: .4byte gRfuLinkStatus
 	thumb_func_end sub_80FB5A0
 
 	thumb_func_start sub_80FB5EC
@@ -6601,7 +6601,7 @@ _080FB894:
 	adds r1, 0xF0
 	movs r0, 0x3
 	strb r0, [r1]
-	ldr r0, _080FB8B8 @ =gUnknown_3007460
+	ldr r0, _080FB8B8 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -6615,7 +6615,7 @@ _080FB8AA:
 	b _080FB9C0
 	.align 2, 0
 _080FB8B4: .4byte gUnknown_3005450
-_080FB8B8: .4byte gUnknown_3007460
+_080FB8B8: .4byte gRfuLinkStatus
 _080FB8BC: .4byte 0x000008f4
 _080FB8C0:
 	ldr r0, _080FB900 @ =gUnknown_3005450
@@ -6674,7 +6674,7 @@ _080FB916:
 	movs r0, 0
 	bl sub_80FD760
 _080FB934:
-	ldr r0, _080FB96C @ =gUnknown_3007460
+	ldr r0, _080FB96C @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -6700,7 +6700,7 @@ _080FB95A:
 	.align 2, 0
 _080FB964: .4byte 0x0000099c
 _080FB968: .4byte gReceivedRemoteLinkPlayers
-_080FB96C: .4byte gUnknown_3007460
+_080FB96C: .4byte gRfuLinkStatus
 _080FB970: .4byte gUnknown_3005E10
 _080FB974: .4byte sub_80F8B34
 _080FB978: .4byte gUnknown_3005450
@@ -7108,7 +7108,7 @@ sub_80FBC70: @ 80FBC70
 	movs r0, 0xFF
 	mov r9, r0
 	movs r7, 0
-	ldr r1, _080FBCF4 @ =gUnknown_3007460
+	ldr r1, _080FBCF4 @ =gRfuLinkStatus
 	mov r8, r1
 _080FBC8E:
 	lsls r4, r7, 5
@@ -7162,7 +7162,7 @@ _080FBCE2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080FBCF4: .4byte gUnknown_3007460
+_080FBCF4: .4byte gRfuLinkStatus
 	thumb_func_end sub_80FBC70
 
 	thumb_func_start sub_80FBCF8
@@ -7391,7 +7391,7 @@ sub_80FBE80: @ 80FBE80
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080FBF18
-	ldr r0, _080FBEDC @ =gUnknown_3007460
+	ldr r0, _080FBEDC @ =gRfuLinkStatus
 	ldr r0, [r0]
 	lsls r1, r2, 5
 	adds r0, r1
@@ -7408,7 +7408,7 @@ sub_80FBE80: @ 80FBE80
 	b _080FBF10
 	.align 2, 0
 _080FBED8: .4byte gTasks+0x8
-_080FBEDC: .4byte gUnknown_3007460
+_080FBEDC: .4byte gRfuLinkStatus
 _080FBEE0: .4byte gUnknown_3005450
 _080FBEE4: .4byte 0x000008f5
 _080FBEE8:
@@ -7638,7 +7638,7 @@ _080FC070:
 	beq _080FC108
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
-	ldr r7, _080FC0F4 @ =gUnknown_3007460
+	ldr r7, _080FC0F4 @ =gRfuLinkStatus
 	lsls r4, r2, 5
 	adds r2, r4, 0
 	adds r2, 0x14
@@ -7670,7 +7670,7 @@ _080FC0E4: .4byte gTasks
 _080FC0E8: .4byte 0x00000985
 _080FC0EC: .4byte gUnknown_3005E10
 _080FC0F0: .4byte 0x00000119
-_080FC0F4: .4byte gUnknown_3007460
+_080FC0F4: .4byte gRfuLinkStatus
 _080FC0F8:
 	movs r1, 0xE0
 	lsls r1, 7
@@ -7845,7 +7845,7 @@ sub_80FC228: @ 80FC228
 	movs r2, 0x13
 	movs r3, 0x2
 	bl nullsub_88
-	ldr r4, _080FC2F8 @ =gUnknown_3007460
+	ldr r4, _080FC2F8 @ =gRfuLinkStatus
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x2]
 	movs r1, 0x14
@@ -7934,7 +7934,7 @@ _080FC2CE:
 	bl nullsub_87
 	b _080FC436
 	.align 2, 0
-_080FC2F8: .4byte gUnknown_3007460
+_080FC2F8: .4byte gRfuLinkStatus
 _080FC2FC: .4byte gUnknown_3005450
 _080FC300: .4byte gUnknown_843EE64
 _080FC304:
@@ -7969,7 +7969,7 @@ _080FC318:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _080FC318
-	ldr r5, _080FC394 @ =gUnknown_3007460
+	ldr r5, _080FC394 @ =gRfuLinkStatus
 	ldr r1, [r5]
 	ldr r4, _080FC398 @ =gUnknown_3005450
 	ldr r0, _080FC39C @ =0x000008f6
@@ -8004,12 +8004,12 @@ _080FC318:
 	.align 2, 0
 _080FC38C: .4byte gUnknown_843EE47
 _080FC390: .4byte gUnknown_843EE57
-_080FC394: .4byte gUnknown_3007460
+_080FC394: .4byte gRfuLinkStatus
 _080FC398: .4byte gUnknown_3005450
 _080FC39C: .4byte 0x000008f6
 _080FC3A0:
 	movs r6, 0
-	ldr r1, _080FC440 @ =gUnknown_3007460
+	ldr r1, _080FC440 @ =gRfuLinkStatus
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	cmp r6, r0
@@ -8088,7 +8088,7 @@ _080FC436:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FC440: .4byte gUnknown_3007460
+_080FC440: .4byte gRfuLinkStatus
 _080FC444: .4byte gUnknown_843EE47
 _080FC448: .4byte gUnknown_843EE57
 	thumb_func_end sub_80FC228
@@ -9032,7 +9032,7 @@ sub_80FCADC: @ 80FCADC
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0
-	ldr r0, _080FCB04 @ =gUnknown_3007460
+	ldr r0, _080FCB04 @ =gRfuLinkStatus
 	ldr r4, [r0]
 	ldrb r2, [r4, 0x2]
 	ldrb r1, [r4]
@@ -9048,7 +9048,7 @@ sub_80FCADC: @ 80FCADC
 	ldrb r0, [r4, 0xA]
 	b _080FCB4C
 	.align 2, 0
-_080FCB04: .4byte gUnknown_3007460
+_080FCB04: .4byte gRfuLinkStatus
 _080FCB08:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -9234,7 +9234,7 @@ sub_80FCC3C: @ 80FCC3C
 	bne _080FCC98
 	movs r0, 0x1
 	mov r9, r0
-	ldr r6, _080FCC94 @ =gUnknown_3007460
+	ldr r6, _080FCC94 @ =gRfuLinkStatus
 	ldr r0, [r6]
 	lsls r4, r5, 5
 	adds r0, r4
@@ -9261,11 +9261,11 @@ _080FCC78:
 	b _080FCCE4
 	.align 2, 0
 _080FCC90: .4byte gUnknown_3005E10
-_080FCC94: .4byte gUnknown_3007460
+_080FCC94: .4byte gRfuLinkStatus
 _080FCC98:
 	movs r0, 0
 	mov r9, r0
-	ldr r6, _080FCCCC @ =gUnknown_3007460
+	ldr r6, _080FCCCC @ =gRfuLinkStatus
 	ldr r0, [r6]
 	lsls r4, r5, 5
 	adds r0, r4
@@ -9288,7 +9288,7 @@ _080FCCB0:
 	bl memcpy
 	b _080FCCE4
 	.align 2, 0
-_080FCCCC: .4byte gUnknown_3007460
+_080FCCCC: .4byte gRfuLinkStatus
 _080FCCD0:
 	adds r0, r7, 0
 	movs r1, 0
@@ -9315,7 +9315,7 @@ sub_80FCCF4: @ 80FCCF4
 	adds r5, r1, 0
 	lsls r2, 24
 	movs r7, 0
-	ldr r6, _080FCD2C @ =gUnknown_3007460
+	ldr r6, _080FCD2C @ =gRfuLinkStatus
 	ldr r0, [r6]
 	lsrs r4, r2, 19
 	adds r2, r0, r4
@@ -9337,7 +9337,7 @@ sub_80FCCF4: @ 80FCCF4
 	movs r7, 0x1
 	b _080FCD48
 	.align 2, 0
-_080FCD2C: .4byte gUnknown_3007460
+_080FCD2C: .4byte gRfuLinkStatus
 _080FCD30: .4byte 0x00007f7d
 _080FCD34:
 	adds r0, r3, 0
@@ -9388,7 +9388,7 @@ CreateWirelessStatusIndicatorSprite: @ 80FCD74
 	movs r3, 0xE7
 	movs r2, 0x8
 _080FCD8A:
-	ldr r0, _080FCDCC @ =gUnknown_3007460
+	ldr r0, _080FCDCC @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -9420,7 +9420,7 @@ _080FCD8A:
 	strb r5, [r0]
 	b _080FCE2A
 	.align 2, 0
-_080FCDCC: .4byte gUnknown_3007460
+_080FCDCC: .4byte gRfuLinkStatus
 _080FCDD0: .4byte gUnknown_843F284
 _080FCDD4: .4byte gSprites
 _080FCDD8: .4byte 0x00001234
@@ -9551,7 +9551,7 @@ _080FCEE0: .4byte gUnknown_203ACE4
 	thumb_func_start sub_80FCEE4
 sub_80FCEE4: @ 80FCEE4
 	push {r4,lr}
-	ldr r1, _080FCF04 @ =gUnknown_3007460
+	ldr r1, _080FCF04 @ =gRfuLinkStatus
 	ldr r0, [r1]
 	ldrb r2, [r0, 0x2]
 	movs r3, 0
@@ -9567,7 +9567,7 @@ _080FCEF0:
 	ldrb r0, [r0]
 	b _080FCF16
 	.align 2, 0
-_080FCF04: .4byte gUnknown_3007460
+_080FCF04: .4byte gRfuLinkStatus
 _080FCF08:
 	lsrs r2, 1
 	adds r0, r3, 0x1
@@ -9626,7 +9626,7 @@ _080FCF5C:
 	adds r6, r2, 0
 	movs r5, 0xFF
 	movs r4, 0
-	ldr r0, _080FCF84 @ =gUnknown_3007460
+	ldr r0, _080FCF84 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -9641,7 +9641,7 @@ _080FCF5C:
 _080FCF78: .4byte gUnknown_203ACE4
 _080FCF7C: .4byte gSprites
 _080FCF80: .4byte 0x00001234
-_080FCF84: .4byte gUnknown_3007460
+_080FCF84: .4byte gRfuLinkStatus
 _080FCF88:
 	adds r0, r4, 0x1
 	lsls r0, 24

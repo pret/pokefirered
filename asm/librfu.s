@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81E05B0
-sub_81E05B0: @ 81E05B0
+	thumb_func_start rfu_initializeAPI
+rfu_initializeAPI: @ 81E05B0
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	mov r12, r2
@@ -48,21 +48,21 @@ _081E05EA:
 	.align 2, 0
 _081E05F4: .4byte 0x00000504
 _081E05F8:
-	ldr r0, _081E06CC @ =gUnknown_3007460
+	ldr r0, _081E06CC @ =gRfuLinkStatus
 	str r4, [r0]
-	ldr r1, _081E06D0 @ =gUnknown_3007464
+	ldr r1, _081E06D0 @ =gRfuStatic
 	adds r0, r4, 0
 	adds r0, 0xB4
 	str r0, [r1]
-	ldr r1, _081E06D4 @ =gUnknown_3007468
+	ldr r1, _081E06D4 @ =gRfuFixed
 	adds r0, 0x28
 	str r0, [r1]
-	ldr r2, _081E06D8 @ =gUnknown_3007450
+	ldr r2, _081E06D8 @ =gRfuSlotStatusNI
 	movs r1, 0xDE
 	lsls r1, 1
 	adds r0, r4, r1
 	str r0, [r2]
-	ldr r1, _081E06DC @ =gUnknown_3007440
+	ldr r1, _081E06DC @ =gRfuSlotStatusUNI
 	movs r3, 0xDF
 	lsls r3, 2
 	adds r0, r4, r3
@@ -89,10 +89,10 @@ _081E0624:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _081E0624
-	ldr r0, _081E06D4 @ =gUnknown_3007468
+	ldr r0, _081E06D4 @ =gRfuFixed
 	ldr r1, [r0]
 	adds r1, 0xDC
-	ldr r4, _081E06DC @ =gUnknown_3007440
+	ldr r4, _081E06DC @ =gRfuSlotStatusUNI
 	ldr r0, [r4, 0xC]
 	adds r0, 0x1C
 	str r0, [r1]
@@ -101,7 +101,7 @@ _081E0624:
 	bl STWI_init_all
 	bl rfu_STC_clearAPIVariables
 	movs r5, 0
-	ldr r3, _081E06D8 @ =gUnknown_3007450
+	ldr r3, _081E06D8 @ =gRfuSlotStatusNI
 	movs r2, 0
 _081E0668:
 	lsls r1, r5, 2
@@ -118,11 +118,11 @@ _081E0668:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _081E0668
-	ldr r1, _081E06E0 @ =sub_81E1B24
+	ldr r1, _081E06E0 @ =rfu_STC_fastCopy
 	movs r5, 0x2
 	negs r5, r5
 	ands r5, r1
-	ldr r2, _081E06D4 @ =gUnknown_3007468
+	ldr r2, _081E06D4 @ =gRfuFixed
 	ldr r0, [r2]
 	adds r4, r0, 0
 	adds r4, 0x8
@@ -158,15 +158,15 @@ _081E06C6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E06CC: .4byte gUnknown_3007460
-_081E06D0: .4byte gUnknown_3007464
-_081E06D4: .4byte gUnknown_3007468
-_081E06D8: .4byte gUnknown_3007450
-_081E06DC: .4byte gUnknown_3007440
-_081E06E0: .4byte sub_81E1B24
+_081E06CC: .4byte gRfuLinkStatus
+_081E06D0: .4byte gRfuStatic
+_081E06D4: .4byte gRfuFixed
+_081E06D8: .4byte gRfuSlotStatusNI
+_081E06DC: .4byte gRfuSlotStatusUNI
+_081E06E0: .4byte rfu_STC_fastCopy
 _081E06E4: .4byte rfu_REQ_changeMasterSlave
 _081E06E8: .4byte 0x0000ffff
-	thumb_func_end sub_81E05B0
+	thumb_func_end rfu_initializeAPI
 
 	thumb_func_start rfu_STC_clearAPIVariables
 rfu_STC_clearAPIVariables: @ 81E06EC
@@ -177,7 +177,7 @@ rfu_STC_clearAPIVariables: @ 81E06EC
 	adds r7, r0, 0
 	movs r6, 0
 	strh r6, [r1]
-	ldr r5, _081E0764 @ =gUnknown_3007464
+	ldr r5, _081E0764 @ =gRfuStatic
 	ldr r1, [r5]
 	ldrb r4, [r1]
 	mov r0, sp
@@ -192,7 +192,7 @@ rfu_STC_clearAPIVariables: @ 81E06EC
 	mov r0, sp
 	adds r0, 0x2
 	strh r1, [r0]
-	ldr r4, _081E076C @ =gUnknown_3007460
+	ldr r4, _081E076C @ =gRfuLinkStatus
 	ldr r1, [r4]
 	ldr r2, _081E0770 @ =0x0100005a
 	bl CpuSet
@@ -228,9 +228,9 @@ _081E0740:
 	bx r0
 	.align 2, 0
 _081E0760: .4byte 0x04000208
-_081E0764: .4byte gUnknown_3007464
+_081E0764: .4byte gRfuStatic
 _081E0768: .4byte 0x01000014
-_081E076C: .4byte gUnknown_3007460
+_081E076C: .4byte gRfuLinkStatus
 _081E0770: .4byte 0x0100005a
 	thumb_func_end rfu_STC_clearAPIVariables
 
@@ -252,7 +252,7 @@ rfu_UNI_PARENT_getDRAC_ACK: @ 81E0788
 	adds r4, r0, 0
 	movs r0, 0
 	strb r0, [r4]
-	ldr r5, _081E07A0 @ =gUnknown_3007460
+	ldr r5, _081E07A0 @ =gRfuLinkStatus
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -261,7 +261,7 @@ rfu_UNI_PARENT_getDRAC_ACK: @ 81E0788
 	lsls r0, 2
 	b _081E07CA
 	.align 2, 0
-_081E07A0: .4byte gUnknown_3007460
+_081E07A0: .4byte gRfuLinkStatus
 _081E07A4:
 	bl rfu_getSTWIRecvBuffer
 	adds r1, r0, 0
@@ -306,13 +306,13 @@ rfu_setTimerInterrupt: @ 81E07D0
 
 	thumb_func_start rfu_getSTWIRecvBuffer
 rfu_getSTWIRecvBuffer: @ 81E07E4
-	ldr r0, _081E07F0 @ =gUnknown_3007468
+	ldr r0, _081E07F0 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
-_081E07F0: .4byte gUnknown_3007468
+_081E07F0: .4byte gRfuFixed
 	thumb_func_end rfu_getSTWIRecvBuffer
 
 	thumb_func_start rfu_setMSCCallback
@@ -327,7 +327,7 @@ rfu_setMSCCallback: @ 81E07F4
 rfu_setREQCallback: @ 81E0800
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _081E0818 @ =gUnknown_3007468
+	ldr r0, _081E0818 @ =gRfuFixed
 	ldr r0, [r0]
 	str r1, [r0]
 	negs r0, r1
@@ -337,7 +337,7 @@ rfu_setREQCallback: @ 81E0800
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0818: .4byte gUnknown_3007468
+_081E0818: .4byte gRfuFixed
 	thumb_func_end rfu_setREQCallback
 
 	thumb_func_start rfu_enableREQCallback
@@ -346,16 +346,16 @@ rfu_enableREQCallback: @ 81E081C
 	lsls r0, 24
 	cmp r0, 0
 	beq _081E0834
-	ldr r0, _081E0830 @ =gUnknown_3007464
+	ldr r0, _081E0830 @ =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x8
 	orrs r0, r1
 	b _081E083E
 	.align 2, 0
-_081E0830: .4byte gUnknown_3007464
+_081E0830: .4byte gRfuStatic
 _081E0834:
-	ldr r0, _081E0844 @ =gUnknown_3007464
+	ldr r0, _081E0844 @ =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0xF7
@@ -365,7 +365,7 @@ _081E083E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0844: .4byte gUnknown_3007464
+_081E0844: .4byte gRfuStatic
 	thumb_func_end rfu_enableREQCallback
 
 	thumb_func_start rfu_STC_REQ_callback
@@ -377,7 +377,7 @@ rfu_STC_REQ_callback: @ 81E0848
 	lsrs r4, r1, 16
 	ldr r0, _081E087C @ =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
-	ldr r0, _081E0880 @ =gUnknown_3007464
+	ldr r0, _081E0880 @ =gRfuStatic
 	ldr r0, [r0]
 	strh r4, [r0, 0x1C]
 	ldrb r1, [r0]
@@ -385,7 +385,7 @@ rfu_STC_REQ_callback: @ 81E0848
 	ands r0, r1
 	cmp r0, 0
 	beq _081E0876
-	ldr r0, _081E0884 @ =gUnknown_3007468
+	ldr r0, _081E0884 @ =gRfuFixed
 	ldr r0, [r0]
 	ldr r2, [r0]
 	adds r0, r5, 0
@@ -397,8 +397,8 @@ _081E0876:
 	bx r0
 	.align 2, 0
 _081E087C: .4byte rfu_CB_defaultCallback
-_081E0880: .4byte gUnknown_3007464
-_081E0884: .4byte gUnknown_3007468
+_081E0880: .4byte gRfuStatic
+_081E0884: .4byte gRfuFixed
 	thumb_func_end rfu_STC_REQ_callback
 
 	thumb_func_start rfu_CB_defaultCallback
@@ -410,21 +410,21 @@ rfu_CB_defaultCallback: @ 81E0888
 	lsrs r3, r1, 16
 	cmp r0, 0xFF
 	bne _081E08E4
-	ldr r0, _081E08EC @ =gUnknown_3007464
+	ldr r0, _081E08EC @ =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
 	cmp r0, 0
 	beq _081E08B2
-	ldr r0, _081E08F0 @ =gUnknown_3007468
+	ldr r0, _081E08F0 @ =gRfuFixed
 	ldr r0, [r0]
 	ldr r2, [r0]
 	movs r0, 0xFF
 	adds r1, r3, 0
 	bl _call_via_r2
 _081E08B2:
-	ldr r0, _081E08F4 @ =gUnknown_3007460
+	ldr r0, _081E08F4 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -446,7 +446,7 @@ _081E08D2:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _081E08C0
-	ldr r0, _081E08F4 @ =gUnknown_3007460
+	ldr r0, _081E08F4 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -455,22 +455,22 @@ _081E08E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E08EC: .4byte gUnknown_3007464
-_081E08F0: .4byte gUnknown_3007468
-_081E08F4: .4byte gUnknown_3007460
+_081E08EC: .4byte gRfuStatic
+_081E08F0: .4byte gRfuFixed
+_081E08F4: .4byte gRfuLinkStatus
 	thumb_func_end rfu_CB_defaultCallback
 
 	thumb_func_start rfu_waitREQComplete
 rfu_waitREQComplete: @ 81E08F8
 	push {lr}
 	bl STWI_poll_CommandEnd
-	ldr r0, _081E0908 @ =gUnknown_3007464
+	ldr r0, _081E0908 @ =gRfuStatic
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x1C]
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E0908: .4byte gUnknown_3007464
+_081E0908: .4byte gRfuStatic
 	thumb_func_end rfu_waitREQComplete
 
 	thumb_func_start rfu_REQ_RFUStatus
@@ -489,7 +489,7 @@ _081E091C: .4byte rfu_STC_REQ_callback
 rfu_getRFUStatus: @ 81E0920
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, _081E0938 @ =gUnknown_3007468
+	ldr r5, _081E0938 @ =gRfuFixed
 	ldr r0, [r5]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -499,7 +499,7 @@ rfu_getRFUStatus: @ 81E0920
 	movs r0, 0x10
 	b _081E0956
 	.align 2, 0
-_081E0938: .4byte gUnknown_3007468
+_081E0938: .4byte gRfuFixed
 _081E093C:
 	bl STWI_poll_CommandEnd
 	lsls r0, 16
@@ -521,8 +521,8 @@ _081E0956:
 	bx r1
 	thumb_func_end rfu_getRFUStatus
 
-	thumb_func_start sub_81E095C
-sub_81E095C: @ 81E095C
+	thumb_func_start rfu_MBOOT_CHILD_inheritanceLinkStatus
+rfu_MBOOT_CHILD_inheritanceLinkStatus: @ 81E095C
 	push {lr}
 	ldr r2, _081E0964 @ =_Str_RFU_MBOOT
 	ldr r3, _081E0968 @ =0x30000F0
@@ -561,11 +561,11 @@ _081E0984:
 	bne _081E09CC
 	movs r0, 0xC0
 	lsls r0, 18
-	ldr r1, _081E09C4 @ =gUnknown_3007460
+	ldr r1, _081E09C4 @ =gRfuLinkStatus
 	ldr r1, [r1]
 	movs r2, 0x5A
 	bl CpuSet
-	ldr r0, _081E09C8 @ =gUnknown_3007464
+	ldr r0, _081E09C8 @ =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -575,14 +575,14 @@ _081E0984:
 	b _081E09CE
 	.align 2, 0
 _081E09C0: .4byte 0x30000FA
-_081E09C4: .4byte gUnknown_3007460
-_081E09C8: .4byte gUnknown_3007464
+_081E09C4: .4byte gRfuLinkStatus
+_081E09C8: .4byte gRfuStatic
 _081E09CC:
 	movs r0, 0x1
 _081E09CE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81E095C
+	thumb_func_end rfu_MBOOT_CHILD_inheritanceLinkStatus
 
 	thumb_func_start rfu_REQ_stopMode
 rfu_REQ_stopMode: @ 81E09D4
@@ -777,14 +777,14 @@ rfu_REQ_configSystem: @ 81E0B1C
 	bl STWI_send_SystemConfigREQ
 	cmp r6, 0
 	bne _081E0B5C
-	ldr r0, _081E0B58 @ =gUnknown_3007464
+	ldr r0, _081E0B58 @ =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0x1
 	strh r0, [r1, 0x1A]
 	b _081E0B76
 	.align 2, 0
 _081E0B54: .4byte rfu_STC_REQ_callback
-_081E0B58: .4byte gUnknown_3007464
+_081E0B58: .4byte gRfuStatic
 _081E0B5C:
 	ldr r5, _081E0B7C @ =0x04000208
 	ldrh r4, [r5]
@@ -794,7 +794,7 @@ _081E0B5C:
 	lsls r0, 2
 	adds r1, r6, 0
 	bl Div
-	ldr r1, _081E0B80 @ =gUnknown_3007464
+	ldr r1, _081E0B80 @ =gRfuStatic
 	ldr r1, [r1]
 	strh r0, [r1, 0x1A]
 	strh r4, [r5]
@@ -804,7 +804,7 @@ _081E0B76:
 	bx r0
 	.align 2, 0
 _081E0B7C: .4byte 0x04000208
-_081E0B80: .4byte gUnknown_3007464
+_081E0B80: .4byte gRfuStatic
 	thumb_func_end rfu_REQ_configSystem
 
 	thumb_func_start rfu_REQ_configGameData
@@ -896,7 +896,7 @@ rfu_CB_configGameData: @ 81E0C10
 	ldr r0, _081E0C54 @ =gRfuState
 	ldr r0, [r0]
 	ldr r1, [r0, 0x24]
-	ldr r0, _081E0C58 @ =gUnknown_3007460
+	ldr r0, _081E0C58 @ =gRfuLinkStatus
 	ldr r6, [r0]
 	ldrb r2, [r1, 0x4]
 	adds r5, r6, 0
@@ -921,7 +921,7 @@ rfu_CB_configGameData: @ 81E0C10
 	b _081E0C62
 	.align 2, 0
 _081E0C54: .4byte gRfuState
-_081E0C58: .4byte gUnknown_3007460
+_081E0C58: .4byte gRfuLinkStatus
 _081E0C5C:
 	adds r1, r6, 0
 	adds r1, 0x97
@@ -929,7 +929,7 @@ _081E0C5C:
 _081E0C62:
 	strb r0, [r1]
 	movs r2, 0
-	ldr r3, _081E0CA8 @ =gUnknown_3007460
+	ldr r3, _081E0CA8 @ =gRfuLinkStatus
 _081E0C68:
 	ldr r0, [r3]
 	adds r0, 0x9A
@@ -944,7 +944,7 @@ _081E0C68:
 	bls _081E0C68
 	adds r4, 0x1
 	movs r2, 0
-	ldr r3, _081E0CA8 @ =gUnknown_3007460
+	ldr r3, _081E0CA8 @ =gRfuLinkStatus
 _081E0C84:
 	ldr r0, [r3]
 	adds r0, 0xA9
@@ -965,11 +965,11 @@ _081E0C9A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0CA8: .4byte gUnknown_3007460
+_081E0CA8: .4byte gRfuLinkStatus
 	thumb_func_end rfu_CB_configGameData
 
-	thumb_func_start sub_81E0CAC
-sub_81E0CAC: @ 81E0CAC
+	thumb_func_start rfu_REQ_startSearchChild
+rfu_REQ_startSearchChild: @ 81E0CAC
 	push {lr}
 	ldr r0, _081E0CDC @ =rfu_CB_defaultCallback
 	bl STWI_set_Callback_M
@@ -979,7 +979,7 @@ sub_81E0CAC: @ 81E0CAC
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _081E0CE4
-	ldr r0, _081E0CE0 @ =gUnknown_3007468
+	ldr r0, _081E0CE0 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -991,7 +991,7 @@ sub_81E0CAC: @ 81E0CAC
 	b _081E0CEA
 	.align 2, 0
 _081E0CDC: .4byte rfu_CB_defaultCallback
-_081E0CE0: .4byte gUnknown_3007468
+_081E0CE0: .4byte gRfuFixed
 _081E0CE4:
 	movs r0, 0x19
 	bl rfu_STC_REQ_callback
@@ -1003,7 +1003,7 @@ _081E0CEA:
 	bx r0
 	.align 2, 0
 _081E0CF8: .4byte rfu_CB_startSearchChild
-	thumb_func_end sub_81E0CAC
+	thumb_func_end rfu_REQ_startSearchChild
 
 	thumb_func_start rfu_CB_startSearchChild
 rfu_CB_startSearchChild: @ 81E0CFC
@@ -1015,7 +1015,7 @@ rfu_CB_startSearchChild: @ 81E0CFC
 	adds r2, r1, 0
 	cmp r2, 0
 	bne _081E0D14
-	ldr r0, _081E0D20 @ =gUnknown_3007464
+	ldr r0, _081E0D20 @ =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
@@ -1026,7 +1026,7 @@ _081E0D14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0D20: .4byte gUnknown_3007464
+_081E0D20: .4byte gRfuStatic
 	thumb_func_end rfu_CB_startSearchChild
 
 	thumb_func_start rfu_STC_clearLinkStatus
@@ -1042,7 +1042,7 @@ rfu_STC_clearLinkStatus: @ 81E0D24
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, _081E0D80 @ =gUnknown_3007460
+	ldr r4, _081E0D80 @ =gRfuLinkStatus
 	ldr r1, [r4]
 	adds r1, 0x14
 	ldr r2, _081E0D84 @ =0x01000040
@@ -1051,7 +1051,7 @@ rfu_STC_clearLinkStatus: @ 81E0D24
 	strb r5, [r0, 0x8]
 _081E0D4C:
 	movs r1, 0
-	ldr r2, _081E0D80 @ =gUnknown_3007460
+	ldr r2, _081E0D80 @ =gRfuLinkStatus
 	adds r4, r2, 0
 	movs r3, 0
 _081E0D54:
@@ -1078,7 +1078,7 @@ _081E0D54:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0D80: .4byte gUnknown_3007460
+_081E0D80: .4byte gRfuLinkStatus
 _081E0D84: .4byte 0x01000040
 	thumb_func_end rfu_STC_clearLinkStatus
 
@@ -1115,11 +1115,11 @@ rfu_CB_pollAndEndSearchChild: @ 81E0DB0
 	lsrs r6, r1, 16
 	cmp r6, 0
 	bne _081E0DC2
-	bl sub_81E0E38
+	bl rfu_STC_readChildList
 _081E0DC2:
 	cmp r4, 0x1A
 	bne _081E0E04
-	ldr r5, _081E0DF8 @ =gUnknown_3007460
+	ldr r5, _081E0DF8 @ =gRfuLinkStatus
 	ldr r0, [r5]
 	adds r0, 0x94
 	ldrh r0, [r0]
@@ -1133,7 +1133,7 @@ _081E0DC2:
 	cmp r0, 0
 	bne _081E0E20
 	ldr r1, [r5]
-	ldr r0, _081E0E00 @ =gUnknown_3007468
+	ldr r0, _081E0E00 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1142,13 +1142,13 @@ _081E0DC2:
 	strh r0, [r1]
 	b _081E0E20
 	.align 2, 0
-_081E0DF8: .4byte gUnknown_3007460
+_081E0DF8: .4byte gRfuLinkStatus
 _081E0DFC: .4byte rfu_CB_defaultCallback
-_081E0E00: .4byte gUnknown_3007468
+_081E0E00: .4byte gRfuFixed
 _081E0E04:
 	cmp r4, 0x1B
 	bne _081E0E20
-	ldr r0, _081E0E30 @ =gUnknown_3007460
+	ldr r0, _081E0E30 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -1157,7 +1157,7 @@ _081E0E04:
 	movs r0, 0
 	strh r0, [r1]
 _081E0E18:
-	ldr r0, _081E0E34 @ =gUnknown_3007464
+	ldr r0, _081E0E34 @ =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0x9]
@@ -1169,19 +1169,19 @@ _081E0E20:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0E30: .4byte gUnknown_3007460
-_081E0E34: .4byte gUnknown_3007464
+_081E0E30: .4byte gRfuLinkStatus
+_081E0E34: .4byte gRfuStatic
 	thumb_func_end rfu_CB_pollAndEndSearchChild
 
-	thumb_func_start sub_81E0E38
-sub_81E0E38: @ 81E0E38
+	thumb_func_start rfu_STC_readChildList
+rfu_STC_readChildList: @ 81E0E38
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r1, _081E0F64 @ =gUnknown_3007468
+	ldr r1, _081E0F64 @ =gRfuFixed
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1215,7 +1215,7 @@ _081E0E76:
 	cmp r2, 0x3
 	bls _081E0E76
 _081E0E8A:
-	ldr r0, _081E0F64 @ =gUnknown_3007468
+	ldr r0, _081E0F64 @ =gRfuFixed
 	ldr r1, [r0]
 	adds r1, 0xDC
 	ldr r1, [r1]
@@ -1229,9 +1229,9 @@ _081E0E96:
 	mov r1, r8
 	cmp r1, 0
 	beq _081E0F52
-	ldr r2, _081E0F6C @ =gUnknown_3007464
+	ldr r2, _081E0F6C @ =gRfuStatic
 	mov r9, r2
-	ldr r7, _081E0F70 @ =gUnknown_3007460
+	ldr r7, _081E0F70 @ =gRfuLinkStatus
 	mov r10, r9
 _081E0EAC:
 	ldrb r2, [r4, 0x2]
@@ -1329,11 +1329,11 @@ _081E0F52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0F64: .4byte gUnknown_3007468
+_081E0F64: .4byte gRfuFixed
 _081E0F68: .4byte rfu_CB_defaultCallback
-_081E0F6C: .4byte gUnknown_3007464
-_081E0F70: .4byte gUnknown_3007460
-	thumb_func_end sub_81E0E38
+_081E0F6C: .4byte gRfuStatic
+_081E0F70: .4byte gRfuLinkStatus
+	thumb_func_end rfu_STC_readChildList
 
 	thumb_func_start rfu_REQ_startSearchParent
 rfu_REQ_startSearchParent: @ 81E0F74
@@ -1371,17 +1371,17 @@ _081E0F9E:
 	thumb_func_start rfu_REQ_pollSearchParent
 rfu_REQ_pollSearchParent: @ 81E0FAC
 	push {lr}
-	ldr r0, _081E0FBC @ =sub_81E0FC0
+	ldr r0, _081E0FBC @ =rfu_CB_pollSearchParent
 	bl STWI_set_Callback_M
 	bl STWI_send_SP_PollingREQ
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E0FBC: .4byte sub_81E0FC0
+_081E0FBC: .4byte rfu_CB_pollSearchParent
 	thumb_func_end rfu_REQ_pollSearchParent
 
-	thumb_func_start sub_81E0FC0
-sub_81E0FC0: @ 81E0FC0
+	thumb_func_start rfu_CB_pollSearchParent
+rfu_CB_pollSearchParent: @ 81E0FC0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1398,7 +1398,7 @@ _081E0FD4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81E0FC0
+	thumb_func_end rfu_CB_pollSearchParent
 
 	thumb_func_start rfu_REQ_endSearchParent
 rfu_REQ_endSearchParent: @ 81E0FE4
@@ -1421,12 +1421,12 @@ rfu_STC_readParentCandidateList: @ 81E0FF8
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r5, _081E10A0 @ =gUnknown_3007460
+	ldr r5, _081E10A0 @ =gRfuLinkStatus
 	ldr r1, [r5]
 	adds r1, 0x14
 	ldr r2, _081E10A4 @ =0x01000040
 	bl CpuSet
-	ldr r0, _081E10A8 @ =gUnknown_3007468
+	ldr r0, _081E10A8 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1500,9 +1500,9 @@ _081E1048:
 	strb r0, [r4, 0x3]
 	b _081E10B2
 	.align 2, 0
-_081E10A0: .4byte gUnknown_3007460
+_081E10A0: .4byte gRfuLinkStatus
 _081E10A4: .4byte 0x01000040
-_081E10A8: .4byte gUnknown_3007468
+_081E10A8: .4byte gRfuFixed
 _081E10AC: .4byte 0x00007fff
 _081E10B0:
 	strb r3, [r4, 0x3]
@@ -1563,7 +1563,7 @@ rfu_REQ_startConnectParent: @ 81E1108
 	lsrs r4, r0, 16
 	movs r3, 0
 	movs r2, 0
-	ldr r1, _081E1154 @ =gUnknown_3007460
+	ldr r1, _081E1154 @ =gRfuLinkStatus
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x14]
 	cmp r0, r4
@@ -1589,7 +1589,7 @@ _081E1134:
 _081E113C:
 	cmp r3, 0
 	bne _081E1160
-	ldr r0, _081E1158 @ =gUnknown_3007464
+	ldr r0, _081E1158 @ =gRfuStatic
 	ldr r0, [r0]
 	strh r4, [r0, 0x1E]
 	ldr r0, _081E115C @ =rfu_STC_REQ_callback
@@ -1598,8 +1598,8 @@ _081E113C:
 	bl STWI_send_CP_StartREQ
 	b _081E1168
 	.align 2, 0
-_081E1154: .4byte gUnknown_3007460
-_081E1158: .4byte gUnknown_3007464
+_081E1154: .4byte gRfuLinkStatus
+_081E1158: .4byte gRfuStatic
 _081E115C: .4byte rfu_STC_REQ_callback
 _081E1160:
 	movs r0, 0x1F
@@ -1639,7 +1639,7 @@ rfu_CB_pollConnectParent: @ 81E1184
 	str r1, [sp, 0x28]
 	cmp r1, 0
 	bne _081E1286
-	ldr r0, _081E1240 @ =gUnknown_3007468
+	ldr r0, _081E1240 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -1653,7 +1653,7 @@ rfu_CB_pollConnectParent: @ 81E1184
 	lsls r0, 17
 	lsls r0, r1
 	lsrs r2, r0, 24
-	ldr r4, _081E1244 @ =gUnknown_3007460
+	ldr r4, _081E1244 @ =gRfuLinkStatus
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
 	adds r0, r2, 0
@@ -1677,7 +1677,7 @@ rfu_CB_pollConnectParent: @ 81E1184
 	strb r0, [r1, 0x1]
 	ldr r0, [r4]
 	strb r2, [r0]
-	ldr r3, _081E1248 @ =gUnknown_3007464
+	ldr r3, _081E1248 @ =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x80
@@ -1719,9 +1719,9 @@ _081E1202:
 	strb r1, [r0, 0x8]
 	b _081E1264
 	.align 2, 0
-_081E1240: .4byte gUnknown_3007468
-_081E1244: .4byte gUnknown_3007460
-_081E1248: .4byte gUnknown_3007464
+_081E1240: .4byte gRfuFixed
+_081E1244: .4byte gRfuLinkStatus
+_081E1248: .4byte gRfuStatic
 _081E124C: .4byte 0x01000040
 _081E1250:
 	adds r0, r4, 0
@@ -1738,7 +1738,7 @@ _081E125A:
 _081E1264:
 	cmp r5, 0x3
 	bhi _081E1286
-	ldr r4, _081E12A0 @ =gUnknown_3007460
+	ldr r4, _081E12A0 @ =gRfuLinkStatus
 	mov r0, r10
 	lsls r5, r0, 5
 	adds r0, r5, 0
@@ -1765,7 +1765,7 @@ _081E1286:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E12A0: .4byte gUnknown_3007460
+_081E12A0: .4byte gRfuLinkStatus
 	thumb_func_end rfu_CB_pollConnectParent
 
 	thumb_func_start rfu_getConnectParentStatus
@@ -1774,7 +1774,7 @@ rfu_getConnectParentStatus: @ 81E12A4
 	adds r3, r0, 0
 	movs r0, 0xFF
 	strb r0, [r3]
-	ldr r0, _081E12C4 @ =gUnknown_3007468
+	ldr r0, _081E12C4 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -1787,7 +1787,7 @@ rfu_getConnectParentStatus: @ 81E12A4
 	movs r0, 0x10
 	b _081E12D4
 	.align 2, 0
-_081E12C4: .4byte gUnknown_3007468
+_081E12C4: .4byte gRfuFixed
 _081E12C8:
 	adds r2, 0x6
 	ldrb r0, [r2]
@@ -1806,14 +1806,14 @@ rfu_REQ_endConnectParent: @ 81E12D8
 	ldr r0, _081E1304 @ =rfu_CB_pollConnectParent
 	bl STWI_set_Callback_M
 	bl STWI_send_CP_EndREQ
-	ldr r0, _081E1308 @ =gUnknown_3007468
+	ldr r0, _081E1308 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0x3
 	bhi _081E1300
-	ldr r0, _081E130C @ =gUnknown_3007464
+	ldr r0, _081E130C @ =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xA
 	ldrb r1, [r1, 0x6]
@@ -1825,20 +1825,20 @@ _081E1300:
 	bx r0
 	.align 2, 0
 _081E1304: .4byte rfu_CB_pollConnectParent
-_081E1308: .4byte gUnknown_3007468
-_081E130C: .4byte gUnknown_3007464
+_081E1308: .4byte gRfuFixed
+_081E130C: .4byte gRfuStatic
 	thumb_func_end rfu_REQ_endConnectParent
 
 	thumb_func_start rfu_syncVBlank
 rfu_syncVBlank: @ 81E1310
 	push {r4,r5,lr}
 	bl rfu_NI_checkCommFailCounter
-	ldr r0, _081E1358 @ =gUnknown_3007460
+	ldr r0, _081E1358 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	beq _081E13E8
-	ldr r4, _081E135C @ =gUnknown_3007464
+	ldr r4, _081E135C @ =gRfuStatic
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
@@ -1866,8 +1866,8 @@ _081E132E:
 	strh r0, [r1, 0x20]
 	b _081E136A
 	.align 2, 0
-_081E1358: .4byte gUnknown_3007460
-_081E135C: .4byte gUnknown_3007464
+_081E1358: .4byte gRfuLinkStatus
+_081E135C: .4byte gRfuStatic
 _081E1360:
 	cmp r3, 0
 	beq _081E1380
@@ -1878,16 +1878,16 @@ _081E136A:
 	cmp r3, 0
 	beq _081E1380
 _081E136E:
-	ldr r3, _081E137C @ =gUnknown_3007464
+	ldr r3, _081E137C @ =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0xFD
 	ands r0, r1
 	b _081E138A
 	.align 2, 0
-_081E137C: .4byte gUnknown_3007464
+_081E137C: .4byte gRfuStatic
 _081E1380:
-	ldr r3, _081E13DC @ =gUnknown_3007464
+	ldr r3, _081E13DC @ =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -1906,7 +1906,7 @@ _081E138A:
 	movs r0, 0xFB
 	ands r0, r1
 	strb r0, [r3]
-	ldr r0, _081E13E0 @ =gUnknown_3007460
+	ldr r0, _081E13E0 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -1928,15 +1928,15 @@ _081E13C4:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _081E13B2
-	ldr r0, _081E13E0 @ =gUnknown_3007460
+	ldr r0, _081E13E0 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	movs r0, 0xFF
 	strb r0, [r1]
 	movs r0, 0x1
 	b _081E13EA
 	.align 2, 0
-_081E13DC: .4byte gUnknown_3007464
-_081E13E0: .4byte gUnknown_3007460
+_081E13DC: .4byte gRfuStatic
+_081E13E0: .4byte gRfuLinkStatus
 _081E13E4:
 	subs r0, 0x1
 	strh r0, [r3, 0x20]
@@ -1948,8 +1948,8 @@ _081E13EA:
 	bx r1
 	thumb_func_end rfu_syncVBlank
 
-	thumb_func_start sub_81E13F0
-sub_81E13F0: @ 81E13F0
+	thumb_func_start rfu_REQBN_watchLink
+rfu_REQBN_watchLink: @ 81E13F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1975,7 +1975,7 @@ sub_81E13F0: @ 81E13F0
 	ldrb r0, [r2, 0xC]
 	ldr r2, [sp, 0x4]
 	strb r0, [r2]
-	ldr r4, _081E1490 @ =gUnknown_3007460
+	ldr r4, _081E1490 @ =gRfuLinkStatus
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -1989,7 +1989,7 @@ _081E142E:
 	bne _081E143A
 	b _081E178E
 _081E143A:
-	ldr r3, _081E1498 @ =gUnknown_3007464
+	ldr r3, _081E1498 @ =gRfuStatic
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	movs r0, 0x4
@@ -2014,7 +2014,7 @@ _081E1460:
 	lsrs r0, 24
 	cmp r0, 0x29
 	bne _081E14A0
-	ldr r0, _081E149C @ =gUnknown_3007468
+	ldr r0, _081E149C @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2036,16 +2036,16 @@ _081E148A:
 	str r2, [sp, 0x8]
 	b _081E14F8
 	.align 2, 0
-_081E1490: .4byte gUnknown_3007460
+_081E1490: .4byte gRfuLinkStatus
 _081E1494: .4byte gRfuState
-_081E1498: .4byte gUnknown_3007464
-_081E149C: .4byte gUnknown_3007468
+_081E1498: .4byte gRfuStatic
+_081E149C: .4byte gRfuFixed
 _081E14A0:
 	movs r0, 0x9B
 	lsls r0, 1
 	cmp r5, r0
 	bne _081E14F0
-	ldr r0, _081E154C @ =gUnknown_3007468
+	ldr r0, _081E154C @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2068,7 +2068,7 @@ _081E14C6:
 	ands r0, r1
 	cmp r0, 0
 	beq _081E14E6
-	ldr r0, _081E1550 @ =gUnknown_3007460
+	ldr r0, _081E1550 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
@@ -2088,7 +2088,7 @@ _081E14F0:
 	bne _081E14F8
 	b _081E178E
 _081E14F8:
-	ldr r4, _081E154C @ =gUnknown_3007468
+	ldr r4, _081E154C @ =gRfuFixed
 	ldr r0, [r4]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2110,7 +2110,7 @@ _081E14F8:
 	ldr r0, [r0]
 	adds r2, r0, 0x4
 	movs r5, 0
-	ldr r3, _081E1550 @ =gUnknown_3007460
+	ldr r3, _081E1550 @ =gRfuLinkStatus
 _081E152C:
 	ldr r0, [r3]
 	adds r0, 0xA
@@ -2128,8 +2128,8 @@ _081E152C:
 	movs r5, 0
 	b _081E1564
 	.align 2, 0
-_081E154C: .4byte gUnknown_3007468
-_081E1550: .4byte gUnknown_3007460
+_081E154C: .4byte gRfuFixed
+_081E1550: .4byte gRfuLinkStatus
 _081E1554: .4byte rfu_CB_defaultCallback
 _081E1558:
 	movs r0, 0x11
@@ -2152,7 +2152,7 @@ _081E1578:
 	ldr r2, [sp, 0x8]
 	cmp r2, 0x1
 	bne _081E164E
-	ldr r4, _081E15B8 @ =gUnknown_3007460
+	ldr r4, _081E15B8 @ =gRfuLinkStatus
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x2]
 	ands r0, r6
@@ -2167,7 +2167,7 @@ _081E1578:
 	ldrb r0, [r1]
 	cmp r0, 0x1
 	bne _081E15C0
-	ldr r2, _081E15BC @ =gUnknown_3007464
+	ldr r2, _081E15BC @ =gRfuStatic
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r1, r5
@@ -2182,15 +2182,15 @@ _081E1578:
 	bls _081E164E
 	b _081E1626
 	.align 2, 0
-_081E15B8: .4byte gUnknown_3007460
-_081E15BC: .4byte gUnknown_3007464
+_081E15B8: .4byte gRfuLinkStatus
+_081E15BC: .4byte gRfuStatic
 _081E15C0:
 	bl STWI_send_SystemStatusREQ
 	bl STWI_poll_CommandEnd
 	lsls r0, 16
 	cmp r0, 0
 	bne _081E164E
-	ldr r0, _081E15F0 @ =gUnknown_3007468
+	ldr r0, _081E15F0 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2207,9 +2207,9 @@ _081E15C0:
 	ldr r0, [sp]
 	b _081E164C
 	.align 2, 0
-_081E15F0: .4byte gUnknown_3007468
+_081E15F0: .4byte gRfuFixed
 _081E15F4:
-	ldr r2, _081E163C @ =gUnknown_3007464
+	ldr r2, _081E163C @ =gRfuStatic
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r1, r5
@@ -2245,9 +2245,9 @@ _081E1626:
 	strb r0, [r2]
 	b _081E164E
 	.align 2, 0
-_081E163C: .4byte gUnknown_3007464
+_081E163C: .4byte gRfuStatic
 _081E1640:
-	ldr r0, _081E16B0 @ =gUnknown_3007464
+	ldr r0, _081E16B0 @ =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
@@ -2256,7 +2256,7 @@ _081E1640:
 _081E164C:
 	strb r1, [r0]
 _081E164E:
-	ldr r2, _081E16B4 @ =gUnknown_3007460
+	ldr r2, _081E16B4 @ =gRfuLinkStatus
 	mov r12, r2
 	ldr r1, [r2]
 	ldrb r7, [r1]
@@ -2298,15 +2298,15 @@ _081E164E:
 	ldrb r0, [r1, 0x1]
 	adds r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r0, _081E16B0 @ =gUnknown_3007464
+	ldr r0, _081E16B0 @ =gRfuStatic
 	ldr r0, [r0]
 	adds r0, 0xA
 	adds r0, r5
 	strb r3, [r0]
 	b _081E1742
 	.align 2, 0
-_081E16B0: .4byte gUnknown_3007464
-_081E16B4: .4byte gUnknown_3007460
+_081E16B0: .4byte gRfuStatic
+_081E16B4: .4byte gRfuLinkStatus
 _081E16B8:
 	movs r0, 0
 	strb r0, [r4]
@@ -2319,7 +2319,7 @@ _081E16BE:
 	bne _081E1742
 	bl STWI_send_SlotStatusREQ
 	bl STWI_poll_CommandEnd
-	ldr r0, _081E1708 @ =gUnknown_3007468
+	ldr r0, _081E1708 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r2, [r0]
@@ -2334,7 +2334,7 @@ _081E16BE:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _081E1710
-	ldr r0, _081E170C @ =gUnknown_3007464
+	ldr r0, _081E170C @ =gRfuStatic
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2348,8 +2348,8 @@ _081E16BE:
 	lsls r0, 24
 	b _081E173E
 	.align 2, 0
-_081E1708: .4byte gUnknown_3007468
-_081E170C: .4byte gUnknown_3007464
+_081E1708: .4byte gRfuFixed
+_081E170C: .4byte gRfuStatic
 _081E1710:
 	adds r2, 0x4
 	subs r0, r3, 0x1
@@ -2361,7 +2361,7 @@ _081E1710:
 	ldrb r0, [r2, 0x2]
 	cmp r0, r5
 	bne _081E1710
-	ldr r0, _081E17A0 @ =gUnknown_3007464
+	ldr r0, _081E17A0 @ =gRfuStatic
 	ldr r0, [r0]
 	lsls r1, r5, 1
 	adds r0, 0x12
@@ -2378,7 +2378,7 @@ _081E173E:
 	lsrs r0, 24
 	mov r9, r0
 _081E1742:
-	ldr r0, _081E17A4 @ =gUnknown_3007460
+	ldr r0, _081E17A4 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	mov r2, r8
@@ -2405,7 +2405,7 @@ _081E1768:
 	bl STWI_send_DisconnectREQ
 	bl STWI_poll_CommandEnd
 _081E1778:
-	ldr r1, _081E17A8 @ =gUnknown_3007468
+	ldr r1, _081E17A8 @ =gRfuFixed
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2428,10 +2428,10 @@ _081E1790:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E17A0: .4byte gUnknown_3007464
-_081E17A4: .4byte gUnknown_3007460
-_081E17A8: .4byte gUnknown_3007468
-	thumb_func_end sub_81E13F0
+_081E17A0: .4byte gRfuStatic
+_081E17A4: .4byte gRfuLinkStatus
+_081E17A8: .4byte gRfuFixed
+	thumb_func_end rfu_REQBN_watchLink
 
 	thumb_func_start rfu_STC_removeLinkData
 rfu_STC_removeLinkData: @ 81E17AC
@@ -2448,7 +2448,7 @@ rfu_STC_removeLinkData: @ 81E17AC
 	lsls r0, 17
 	lsls r0, r7
 	lsrs r5, r0, 24
-	ldr r1, _081E1850 @ =gUnknown_3007460
+	ldr r1, _081E1850 @ =gRfuLinkStatus
 	ldr r4, [r1]
 	ldrb r0, [r4, 0x2]
 	ands r0, r5
@@ -2520,7 +2520,7 @@ _081E1844:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E1850: .4byte gUnknown_3007460
+_081E1850: .4byte gRfuLinkStatus
 _081E1854: .4byte 0x00ff00ff
 _081E1858: .4byte 0x01000010
 	thumb_func_end rfu_STC_removeLinkData
@@ -2530,7 +2530,7 @@ rfu_REQ_disconnect: @ 81E185C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _081E18A0 @ =gUnknown_3007460
+	ldr r2, _081E18A0 @ =gRfuLinkStatus
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2538,7 +2538,7 @@ rfu_REQ_disconnect: @ 81E185C
 	ands r0, r4
 	cmp r0, 0
 	beq _081E18E0
-	ldr r0, _081E18A4 @ =gUnknown_3007464
+	ldr r0, _081E18A4 @ =gRfuStatic
 	ldr r1, [r0]
 	strb r4, [r1, 0x5]
 	ldr r2, [r2]
@@ -2561,8 +2561,8 @@ rfu_REQ_disconnect: @ 81E185C
 	bl rfu_CB_disconnect
 	b _081E18E0
 	.align 2, 0
-_081E18A0: .4byte gUnknown_3007460
-_081E18A4: .4byte gUnknown_3007464
+_081E18A0: .4byte gRfuLinkStatus
+_081E18A4: .4byte gRfuStatic
 _081E18A8:
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x9]
@@ -2603,7 +2603,7 @@ rfu_CB_disconnect: @ 81E18EC
 	lsrs r5, r1, 16
 	cmp r5, 0x3
 	bne _081E1928
-	ldr r0, _081E19BC @ =gUnknown_3007460
+	ldr r0, _081E19BC @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2615,7 +2615,7 @@ rfu_CB_disconnect: @ 81E18EC
 	lsls r0, 16
 	cmp r0, 0
 	bne _081E1928
-	ldr r0, _081E19C4 @ =gUnknown_3007468
+	ldr r0, _081E19C4 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -2624,9 +2624,9 @@ rfu_CB_disconnect: @ 81E18EC
 	bne _081E1928
 	movs r5, 0
 _081E1928:
-	ldr r3, _081E19C8 @ =gUnknown_3007464
+	ldr r3, _081E19C8 @ =gRfuStatic
 	ldr r2, [r3]
-	ldr r0, _081E19BC @ =gUnknown_3007460
+	ldr r0, _081E19BC @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -2634,7 +2634,7 @@ _081E1928:
 	ldrb r1, [r2, 0x5]
 	ands r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, _081E19C4 @ =gUnknown_3007468
+	ldr r0, _081E19C4 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2649,7 +2649,7 @@ _081E1950:
 	lsls r0, 17
 	lsls r0, r4
 	lsrs r0, 24
-	ldr r1, _081E19C8 @ =gUnknown_3007464
+	ldr r1, _081E19C8 @ =gRfuStatic
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x5]
 	ands r0, r1
@@ -2665,7 +2665,7 @@ _081E196C:
 	cmp r4, 0x3
 	bls _081E1950
 _081E1976:
-	ldr r0, _081E19BC @ =gUnknown_3007460
+	ldr r0, _081E19BC @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x2]
 	ldrb r0, [r2, 0x3]
@@ -2678,7 +2678,7 @@ _081E1988:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl rfu_STC_REQ_callback
-	ldr r0, _081E19C8 @ =gUnknown_3007464
+	ldr r0, _081E19C8 @ =gRfuStatic
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x9]
 	cmp r0, 0
@@ -2698,10 +2698,10 @@ _081E19B6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E19BC: .4byte gUnknown_3007460
+_081E19BC: .4byte gRfuLinkStatus
 _081E19C0: .4byte rfu_CB_defaultCallback
-_081E19C4: .4byte gUnknown_3007468
-_081E19C8: .4byte gUnknown_3007464
+_081E19C4: .4byte gRfuFixed
+_081E19C8: .4byte gRfuStatic
 	thumb_func_end rfu_CB_disconnect
 
 	thumb_func_start rfu_REQ_CHILD_startConnectRecovery
@@ -2709,7 +2709,7 @@ rfu_REQ_CHILD_startConnectRecovery: @ 81E19CC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _081E1A1C @ =gUnknown_3007464
+	ldr r0, _081E1A1C @ =gRfuStatic
 	ldr r0, [r0]
 	strb r5, [r0, 0x5]
 	movs r4, 0
@@ -2733,7 +2733,7 @@ _081E19E6:
 _081E19FA:
 	adds r0, r2, 0
 	bl STWI_set_Callback_M
-	ldr r0, _081E1A24 @ =gUnknown_3007460
+	ldr r0, _081E1A24 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	lsls r0, r4, 5
 	adds r0, r1, r0
@@ -2746,9 +2746,9 @@ _081E19FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E1A1C: .4byte gUnknown_3007464
+_081E1A1C: .4byte gRfuStatic
 _081E1A20: .4byte rfu_STC_REQ_callback
-_081E1A24: .4byte gUnknown_3007460
+_081E1A24: .4byte gRfuLinkStatus
 	thumb_func_end rfu_REQ_CHILD_startConnectRecovery
 
 	thumb_func_start rfu_REQ_CHILD_pollConnectRecovery
@@ -2775,20 +2775,20 @@ rfu_CB_CHILD_pollConnectRecovery: @ 81E1A3C
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _081E1AC0
-	ldr r0, _081E1AD4 @ =gUnknown_3007468
+	ldr r0, _081E1AD4 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	bne _081E1AC0
-	ldr r0, _081E1AD8 @ =gUnknown_3007464
+	ldr r0, _081E1AD8 @ =gRfuStatic
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x5]
 	adds r6, r0, 0
 	cmp r1, 0
 	beq _081E1AC0
-	ldr r1, _081E1ADC @ =gUnknown_3007460
+	ldr r1, _081E1ADC @ =gRfuLinkStatus
 	ldr r0, [r1]
 	strb r7, [r0]
 	movs r4, 0
@@ -2843,9 +2843,9 @@ _081E1AC0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E1AD4: .4byte gUnknown_3007468
-_081E1AD8: .4byte gUnknown_3007464
-_081E1ADC: .4byte gUnknown_3007460
+_081E1AD4: .4byte gRfuFixed
+_081E1AD8: .4byte gRfuStatic
+_081E1ADC: .4byte gRfuLinkStatus
 	thumb_func_end rfu_CB_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CHILD_getConnectRecoveryStatus
@@ -2854,7 +2854,7 @@ rfu_CHILD_getConnectRecoveryStatus: @ 81E1AE0
 	adds r2, r0, 0
 	movs r0, 0xFF
 	strb r0, [r2]
-	ldr r0, _081E1B00 @ =gUnknown_3007468
+	ldr r0, _081E1B00 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -2867,7 +2867,7 @@ rfu_CHILD_getConnectRecoveryStatus: @ 81E1AE0
 	movs r0, 0x10
 	b _081E1B0A
 	.align 2, 0
-_081E1B00: .4byte gUnknown_3007468
+_081E1B00: .4byte gRfuFixed
 _081E1B04:
 	ldrb r0, [r1, 0x4]
 	strb r0, [r2]
@@ -2889,8 +2889,8 @@ rfu_REQ_CHILD_endConnectRecovery: @ 81E1B10
 _081E1B20: .4byte rfu_CB_CHILD_pollConnectRecovery
 	thumb_func_end rfu_REQ_CHILD_endConnectRecovery
 
-	thumb_func_start sub_81E1B24
-sub_81E1B24: @ 81E1B24
+	thumb_func_start rfu_STC_fastCopy
+rfu_STC_fastCopy: @ 81E1B24
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -2916,7 +2916,7 @@ _081E1B48:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81E1B24
+	thumb_func_end rfu_STC_fastCopy
 
 	thumb_func_start rfu_REQ_changeMasterSlave
 rfu_REQ_changeMasterSlave: @ 81E1B54
@@ -2994,7 +2994,7 @@ rfu_clearAllSlot: @ 81E1BB8
 _081E1BD4:
 	mov r0, sp
 	strh r7, [r0]
-	ldr r0, _081E1C40 @ =gUnknown_3007450
+	ldr r0, _081E1C40 @ =gRfuSlotStatusNI
 	lsls r4, r5, 2
 	adds r0, r4, r0
 	ldr r1, [r0]
@@ -3002,13 +3002,13 @@ _081E1BD4:
 	ldr r2, _081E1C44 @ =0x01000034
 	bl CpuSet
 	strh r7, [r6]
-	ldr r0, _081E1C48 @ =gUnknown_3007440
+	ldr r0, _081E1C48 @ =gRfuSlotStatusUNI
 	adds r4, r0
 	ldr r1, [r4]
 	adds r0, r6, 0
 	ldr r2, _081E1C4C @ =0x0100000a
 	bl CpuSet
-	ldr r3, _081E1C50 @ =gUnknown_3007460
+	ldr r3, _081E1C50 @ =gRfuLinkStatus
 	ldr r0, [r3]
 	adds r0, 0x10
 	adds r0, r5
@@ -3029,7 +3029,7 @@ _081E1BD4:
 	strb r1, [r0, 0x5]
 	ldr r0, [r3]
 	strb r1, [r0, 0x6]
-	ldr r0, _081E1C54 @ =gUnknown_3007464
+	ldr r0, _081E1C54 @ =gRfuStatic
 	ldr r0, [r0]
 	strb r1, [r0, 0x2]
 	ldr r0, _081E1C3C @ =0x04000208
@@ -3043,12 +3043,12 @@ _081E1BD4:
 	bx r0
 	.align 2, 0
 _081E1C3C: .4byte 0x04000208
-_081E1C40: .4byte gUnknown_3007450
+_081E1C40: .4byte gRfuSlotStatusNI
 _081E1C44: .4byte 0x01000034
-_081E1C48: .4byte gUnknown_3007440
+_081E1C48: .4byte gRfuSlotStatusUNI
 _081E1C4C: .4byte 0x0100000a
-_081E1C50: .4byte gUnknown_3007460
-_081E1C54: .4byte gUnknown_3007464
+_081E1C50: .4byte gRfuLinkStatus
+_081E1C54: .4byte gRfuStatic
 	thumb_func_end rfu_clearAllSlot
 
 	thumb_func_start rfu_STC_releaseFrame
@@ -3060,14 +3060,14 @@ rfu_STC_releaseFrame: @ 81E1C58
 	adds r5, r2, 0
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r0, _081E1C90 @ =gUnknown_3007464
+	ldr r0, _081E1C90 @ =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _081E1C98
-	ldr r6, _081E1C94 @ =gUnknown_3007460
+	ldr r6, _081E1C94 @ =gRfuLinkStatus
 	cmp r3, 0
 	bne _081E1C84
 	ldr r1, [r6]
@@ -3082,10 +3082,10 @@ _081E1C84:
 	strb r0, [r1, 0xF]
 	b _081E1CB8
 	.align 2, 0
-_081E1C90: .4byte gUnknown_3007464
-_081E1C94: .4byte gUnknown_3007460
+_081E1C90: .4byte gRfuStatic
+_081E1C94: .4byte gRfuLinkStatus
 _081E1C98:
-	ldr r6, _081E1CC0 @ =gUnknown_3007460
+	ldr r6, _081E1CC0 @ =gRfuLinkStatus
 	cmp r3, 0
 	bne _081E1CAC
 	ldr r1, [r6]
@@ -3107,7 +3107,7 @@ _081E1CB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E1CC0: .4byte gUnknown_3007460
+_081E1CC0: .4byte gRfuLinkStatus
 	thumb_func_end rfu_STC_releaseFrame
 
 	thumb_func_start rfu_clearSlot
@@ -3149,7 +3149,7 @@ _081E1CF4:
 	cmp r0, 0
 	beq _081E1DBC
 	movs r3, 0
-	ldr r1, _081E1D3C @ =gUnknown_3007450
+	ldr r1, _081E1D3C @ =gRfuSlotStatusNI
 	lsls r0, r7, 2
 	adds r0, r1
 	mov r9, r0
@@ -3164,7 +3164,7 @@ _081E1D12:
 	beq _081E1D64
 	mov r2, r9
 	ldr r4, [r2]
-	ldr r0, _081E1D40 @ =gUnknown_3007460
+	ldr r0, _081E1D40 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r0, 0x2C
@@ -3175,8 +3175,8 @@ _081E1D12:
 	b _081E1D64
 	.align 2, 0
 _081E1D38: .4byte 0x04000208
-_081E1D3C: .4byte gUnknown_3007450
-_081E1D40: .4byte gUnknown_3007460
+_081E1D3C: .4byte gRfuSlotStatusNI
+_081E1D40: .4byte gRfuLinkStatus
 _081E1D44:
 	movs r0, 0x8
 	mov r1, r8
@@ -3187,7 +3187,7 @@ _081E1D44:
 	ldr r0, [r2]
 	adds r4, r0, 0
 	adds r4, 0x34
-	ldr r0, _081E1DF8 @ =gUnknown_3007460
+	ldr r0, _081E1DF8 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r7
@@ -3247,7 +3247,7 @@ _081E1DBC:
 	ands r0, r4
 	cmp r0, 0
 	beq _081E1E32
-	ldr r1, _081E1E00 @ =gUnknown_3007440
+	ldr r1, _081E1E00 @ =gRfuSlotStatusUNI
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r3, [r0]
@@ -3257,14 +3257,14 @@ _081E1DBC:
 	ands r0, r1
 	cmp r0, 0
 	beq _081E1E24
-	ldr r0, _081E1E04 @ =gUnknown_3007464
+	ldr r0, _081E1E04 @ =gRfuStatic
 	ldr r0, [r0]
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _081E1E08
-	ldr r2, _081E1DF8 @ =gUnknown_3007460
+	ldr r2, _081E1DF8 @ =gRfuLinkStatus
 	ldr r1, [r2]
 	ldrb r0, [r1, 0xF]
 	adds r0, 0x3
@@ -3273,12 +3273,12 @@ _081E1DBC:
 	strb r0, [r1, 0xF]
 	b _081E1E1A
 	.align 2, 0
-_081E1DF8: .4byte gUnknown_3007460
+_081E1DF8: .4byte gRfuLinkStatus
 _081E1DFC: .4byte 0x0100001a
-_081E1E00: .4byte gUnknown_3007440
-_081E1E04: .4byte gUnknown_3007464
+_081E1E00: .4byte gRfuSlotStatusUNI
+_081E1E04: .4byte gRfuStatic
 _081E1E08:
-	ldr r2, _081E1E6C @ =gUnknown_3007460
+	ldr r2, _081E1E6C @ =gRfuLinkStatus
 	ldr r1, [r2]
 	adds r1, 0x10
 	adds r1, r7
@@ -3309,7 +3309,7 @@ _081E1E32:
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _081E1E74 @ =gUnknown_3007440
+	ldr r1, _081E1E74 @ =gRfuSlotStatusUNI
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -3332,9 +3332,9 @@ _081E1E5C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E1E6C: .4byte gUnknown_3007460
+_081E1E6C: .4byte gRfuLinkStatus
 _081E1E70: .4byte 0x01000006
-_081E1E74: .4byte gUnknown_3007440
+_081E1E74: .4byte gRfuSlotStatusUNI
 _081E1E78: .4byte 0x01000004
 _081E1E7C: .4byte 0x04000208
 	thumb_func_end rfu_clearSlot
@@ -3360,7 +3360,7 @@ _081E1E9C:
 	ands r0, r3
 	cmp r0, 0
 	beq _081E1EB8
-	ldr r0, _081E1EB4 @ =gUnknown_3007450
+	ldr r0, _081E1EB4 @ =gRfuSlotStatusNI
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3368,7 +3368,7 @@ _081E1E9C:
 	str r6, [r0, 0x6C]
 	b _081E1ED2
 	.align 2, 0
-_081E1EB4: .4byte gUnknown_3007450
+_081E1EB4: .4byte gRfuSlotStatusNI
 _081E1EB8:
 	movs r0, 0x10
 	ands r2, r0
@@ -3378,7 +3378,7 @@ _081E1EB8:
 	lsls r0, 3
 	b _081E1ED4
 _081E1EC6:
-	ldr r0, _081E1EDC @ =gUnknown_3007440
+	ldr r0, _081E1EDC @ =gRfuSlotStatusUNI
 	lsls r1, r4, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -3391,7 +3391,7 @@ _081E1ED4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E1EDC: .4byte gUnknown_3007440
+_081E1EDC: .4byte gRfuSlotStatusUNI
 	thumb_func_end rfu_setRecvBuffer
 
 	thumb_func_start rfu_NI_setSendData
@@ -3428,7 +3428,7 @@ rfu_UNI_setSendData: @ 81E1F0C
 	lsrs r1, r0, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _081E1F28 @ =gUnknown_3007460
+	ldr r0, _081E1F28 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -3436,7 +3436,7 @@ rfu_UNI_setSendData: @ 81E1F0C
 	adds r0, r2, 0x3
 	b _081E1F2E
 	.align 2, 0
-_081E1F28: .4byte gUnknown_3007460
+_081E1F28: .4byte gRfuLinkStatus
 _081E1F2C:
 	adds r0, r2, 0x2
 _081E1F2E:
@@ -3466,7 +3466,7 @@ rfu_NI_CHILD_setSendGameName: @ 81E1F48
 	lsls r1, 17
 	lsls r1, r0
 	lsrs r1, 24
-	ldr r0, _081E1F78 @ =gUnknown_3007460
+	ldr r0, _081E1F78 @ =gRfuLinkStatus
 	ldr r3, [r0]
 	adds r3, 0x98
 	movs r0, 0x1A
@@ -3479,7 +3479,7 @@ rfu_NI_CHILD_setSendGameName: @ 81E1F48
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E1F78: .4byte gUnknown_3007460
+_081E1F78: .4byte gRfuLinkStatus
 	thumb_func_end rfu_NI_CHILD_setSendGameName
 
 	thumb_func_start rfu_STC_setSendData_org
@@ -3498,7 +3498,7 @@ rfu_STC_setSendData_org: @ 81E1F7C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r0, _081E1FA8 @ =gUnknown_3007460
+	ldr r0, _081E1FA8 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	mov r10, r0
@@ -3507,7 +3507,7 @@ rfu_STC_setSendData_org: @ 81E1F7C
 	ldr r0, _081E1FAC @ =0x00000301
 	b _081E2166
 	.align 2, 0
-_081E1FA8: .4byte gUnknown_3007460
+_081E1FA8: .4byte gRfuLinkStatus
 _081E1FAC: .4byte 0x00000301
 _081E1FB0:
 	movs r0, 0xF
@@ -3614,7 +3614,7 @@ _081E204E:
 	cmp r6, 0x40
 	bne _081E2124
 _081E2068:
-	ldr r1, _081E20A0 @ =gUnknown_3007450
+	ldr r1, _081E20A0 @ =gRfuSlotStatusNI
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -3641,7 +3641,7 @@ _081E2068:
 	b _081E20A8
 	.align 2, 0
 _081E209C: .4byte 0x04000208
-_081E20A0: .4byte gUnknown_3007450
+_081E20A0: .4byte gRfuSlotStatusNI
 _081E20A4:
 	movs r0, 0x1
 	strb r0, [r1]
@@ -3674,7 +3674,7 @@ _081E20C8:
 	bls _081E20C8
 	movs r2, 0
 	movs r5, 0x1
-	ldr r4, _081E211C @ =gUnknown_3007450
+	ldr r4, _081E211C @ =gRfuSlotStatusNI
 	movs r1, 0
 _081E20E2:
 	adds r0, r3, 0
@@ -3708,14 +3708,14 @@ _081E20F4:
 	strh r0, [r2]
 	b _081E215C
 	.align 2, 0
-_081E211C: .4byte gUnknown_3007450
+_081E211C: .4byte gRfuSlotStatusNI
 _081E2120: .4byte 0x00008021
 _081E2124:
 	movs r0, 0x10
 	ands r0, r6
 	cmp r0, 0
 	beq _081E215C
-	ldr r1, _081E2178 @ =gUnknown_3007440
+	ldr r1, _081E2178 @ =gRfuSlotStatusUNI
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -3755,7 +3755,7 @@ _081E2166:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E2178: .4byte gUnknown_3007440
+_081E2178: .4byte gRfuSlotStatusUNI
 _081E217C: .4byte 0x00008024
 _081E2180: .4byte 0x04000208
 	thumb_func_end rfu_STC_setSendData_org
@@ -3783,7 +3783,7 @@ rfu_changeSendTarget: @ 81E2184
 _081E21A8:
 	cmp r0, 0x20
 	bne _081E2248
-	ldr r0, _081E2238 @ =gUnknown_3007450
+	ldr r0, _081E2238 @ =gRfuSlotStatusNI
 	mov r12, r0
 	lsls r0, r7, 2
 	add r0, r12
@@ -3834,7 +3834,7 @@ _081E2202:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _081E21EE
-	ldr r0, _081E2244 @ =gUnknown_3007460
+	ldr r0, _081E2244 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	ldr r2, [sp]
@@ -3856,14 +3856,14 @@ _081E222E:
 	strh r1, [r0]
 	b _081E22DA
 	.align 2, 0
-_081E2238: .4byte gUnknown_3007450
+_081E2238: .4byte gRfuSlotStatusNI
 _081E223C: .4byte 0x00008020
 _081E2240: .4byte 0x04000208
-_081E2244: .4byte gUnknown_3007460
+_081E2244: .4byte gRfuLinkStatus
 _081E2248:
 	cmp r3, 0x10
 	bne _081E22D4
-	ldr r3, _081E2264 @ =gUnknown_3007440
+	ldr r3, _081E2264 @ =gRfuSlotStatusUNI
 	lsls r1, r7, 2
 	adds r0, r1, r3
 	ldr r0, [r0]
@@ -3876,7 +3876,7 @@ _081E225E:
 	ldr r0, _081E226C @ =0x00000403
 	b _081E22DC
 	.align 2, 0
-_081E2264: .4byte gUnknown_3007440
+_081E2264: .4byte gRfuSlotStatusUNI
 _081E2268: .4byte 0x00008024
 _081E226C: .4byte 0x00000403
 _081E2270:
@@ -3911,7 +3911,7 @@ _081E22A0:
 	ldrh r0, [r3]
 	mov r8, r0
 	strh r2, [r3]
-	ldr r4, _081E22D0 @ =gUnknown_3007460
+	ldr r4, _081E22D0 @ =gRfuLinkStatus
 	ldr r2, [r4]
 	adds r5, r1, r5
 	ldr r0, [r5]
@@ -3931,7 +3931,7 @@ _081E22A0:
 	b _081E22DA
 	.align 2, 0
 _081E22CC: .4byte 0x04000208
-_081E22D0: .4byte gUnknown_3007460
+_081E22D0: .4byte gRfuLinkStatus
 _081E22D4:
 	movs r0, 0xC0
 	lsls r0, 3
@@ -3960,7 +3960,7 @@ rfu_NI_stopReceivingData: @ 81E22EC
 	lsls r0, 3
 	b _081E2356
 _081E22FC:
-	ldr r1, _081E2328 @ =gUnknown_3007450
+	ldr r1, _081E2328 @ =gRfuSlotStatusNI
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -3983,14 +3983,14 @@ _081E22FC:
 	movs r0, 0x48
 	b _081E2336
 	.align 2, 0
-_081E2328: .4byte gUnknown_3007450
+_081E2328: .4byte gRfuSlotStatusNI
 _081E232C: .4byte 0x04000208
 _081E2330: .4byte 0x00008043
 _081E2334:
 	movs r0, 0x47
 _081E2336:
 	strh r0, [r2, 0x34]
-	ldr r0, _081E235C @ =gUnknown_3007460
+	ldr r0, _081E235C @ =gRfuLinkStatus
 	ldr r2, [r0]
 	movs r1, 0x1
 	lsls r1, r3
@@ -4010,7 +4010,7 @@ _081E2356:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E235C: .4byte gUnknown_3007460
+_081E235C: .4byte gRfuLinkStatus
 _081E2360: .4byte 0x04000208
 	thumb_func_end rfu_NI_stopReceivingData
 
@@ -4029,7 +4029,7 @@ rfu_UNI_changeAndReadySendData: @ 81E2364
 	lsls r0, 3
 	b _081E23F0
 _081E237C:
-	ldr r1, _081E2390 @ =gUnknown_3007440
+	ldr r1, _081E2390 @ =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -4040,11 +4040,11 @@ _081E237C:
 	ldr r0, _081E2398 @ =0x00000403
 	b _081E23F0
 	.align 2, 0
-_081E2390: .4byte gUnknown_3007440
+_081E2390: .4byte gRfuSlotStatusUNI
 _081E2394: .4byte 0x00008024
 _081E2398: .4byte 0x00000403
 _081E239C:
-	ldr r0, _081E23B0 @ =gUnknown_3007460
+	ldr r0, _081E23B0 @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -4055,7 +4055,7 @@ _081E239C:
 	ldrb r1, [r1, 0xF]
 	b _081E23C2
 	.align 2, 0
-_081E23B0: .4byte gUnknown_3007460
+_081E23B0: .4byte gRfuLinkStatus
 _081E23B4:
 	adds r0, r3, 0
 	adds r0, 0x10
@@ -4101,7 +4101,7 @@ rfu_UNI_readySendData: @ 81E23F8
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _081E2416
-	ldr r1, _081E241C @ =gUnknown_3007440
+	ldr r1, _081E241C @ =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -4115,7 +4115,7 @@ _081E2416:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E241C: .4byte gUnknown_3007440
+_081E241C: .4byte gRfuSlotStatusUNI
 _081E2420: .4byte 0x00008024
 	thumb_func_end rfu_UNI_readySendData
 
@@ -4126,7 +4126,7 @@ rfu_UNI_clearRecvNewDataFlag: @ 81E2424
 	lsrs r0, 24
 	cmp r0, 0x3
 	bhi _081E243A
-	ldr r1, _081E2440 @ =gUnknown_3007440
+	ldr r1, _081E2440 @ =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
@@ -4136,7 +4136,7 @@ _081E243A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E2440: .4byte gUnknown_3007440
+_081E2440: .4byte gRfuSlotStatusUNI
 	thumb_func_end rfu_UNI_clearRecvNewDataFlag
 
 	thumb_func_start rfu_REQ_sendData
@@ -4144,7 +4144,7 @@ rfu_REQ_sendData: @ 81E2444
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _081E2490 @ =gUnknown_3007460
+	ldr r0, _081E2490 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	adds r4, r0, 0
@@ -4162,7 +4162,7 @@ _081E2458:
 	orrs r3, r0
 	cmp r3, 0
 	bne _081E24E8
-	ldr r0, _081E2494 @ =gUnknown_3007464
+	ldr r0, _081E2494 @ =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x3]
 	adds r4, r0, 0
@@ -4181,8 +4181,8 @@ _081E2480:
 	strb r0, [r1, 0x8]
 	b _081E249E
 	.align 2, 0
-_081E2490: .4byte gUnknown_3007460
-_081E2494: .4byte gUnknown_3007464
+_081E2490: .4byte gRfuLinkStatus
+_081E2494: .4byte gRfuStatic
 _081E2498:
 	ldrb r0, [r1, 0x7]
 	adds r0, 0x1
@@ -4198,13 +4198,13 @@ _081E249E:
 	cmp r0, 0
 	bne _081E2542
 _081E24B0:
-	ldr r4, _081E24D4 @ =gUnknown_3007468
+	ldr r4, _081E24D4 @ =gRfuFixed
 	ldr r1, [r4]
 	movs r0, 0x1
 	str r0, [r1, 0x68]
 	movs r0, 0xFF
 	str r0, [r1, 0x78]
-	ldr r0, _081E24D8 @ =sub_81E2630
+	ldr r0, _081E24D8 @ =rfu_CB_sendData3
 	bl STWI_set_Callback_M
 	cmp r5, 0
 	bne _081E24DC
@@ -4214,8 +4214,8 @@ _081E24B0:
 	bl STWI_send_DataTxREQ
 	b _081E257E
 	.align 2, 0
-_081E24D4: .4byte gUnknown_3007468
-_081E24D8: .4byte sub_81E2630
+_081E24D4: .4byte gRfuFixed
+_081E24D8: .4byte rfu_CB_sendData3
 _081E24DC:
 	ldr r0, [r4]
 	adds r0, 0x68
@@ -4237,10 +4237,10 @@ _081E24F4:
 	bl STWI_set_Callback_M
 	cmp r5, 0
 	beq _081E252C
-	ldr r0, _081E2524 @ =gUnknown_3007468
+	ldr r0, _081E2524 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, _081E2528 @ =gUnknown_3007464
+	ldr r1, _081E2528 @ =gRfuStatic
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4250,13 +4250,13 @@ _081E24F4:
 	b _081E257E
 	.align 2, 0
 _081E2520: .4byte rfu_CB_sendData
-_081E2524: .4byte gUnknown_3007468
-_081E2528: .4byte gUnknown_3007464
+_081E2524: .4byte gRfuFixed
+_081E2528: .4byte gRfuStatic
 _081E252C:
-	ldr r0, _081E2564 @ =gUnknown_3007468
+	ldr r0, _081E2564 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x68
-	ldr r1, _081E2568 @ =gUnknown_3007464
+	ldr r1, _081E2568 @ =gRfuStatic
 	ldr r1, [r1]
 	ldr r1, [r1, 0x24]
 	adds r1, 0x4
@@ -4266,7 +4266,7 @@ _081E252C:
 _081E2542:
 	cmp r5, 0
 	beq _081E257E
-	ldr r0, _081E256C @ =gUnknown_3007460
+	ldr r0, _081E256C @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4280,9 +4280,9 @@ _081E2542:
 	bl _call_via_r1
 	b _081E257E
 	.align 2, 0
-_081E2564: .4byte gUnknown_3007468
-_081E2568: .4byte gUnknown_3007464
-_081E256C: .4byte gUnknown_3007460
+_081E2564: .4byte gRfuFixed
+_081E2568: .4byte gRfuStatic
+_081E256C: .4byte gRfuLinkStatus
 _081E2570: .4byte gRfuState
 _081E2574:
 	ldr r0, _081E2584 @ =rfu_CB_sendData2
@@ -4309,7 +4309,7 @@ rfu_CB_sendData: @ 81E2588
 	ldr r0, _081E2610 @ =0x00008020
 	mov r8, r0
 _081E259C:
-	ldr r0, _081E2614 @ =gUnknown_3007440
+	ldr r0, _081E2614 @ =gRfuSlotStatusUNI
 	lsls r2, r6, 2
 	adds r0, r2, r0
 	ldr r1, [r0]
@@ -4319,7 +4319,7 @@ _081E259C:
 	movs r0, 0
 	strb r0, [r1, 0x2]
 _081E25AE:
-	ldr r0, _081E2618 @ =gUnknown_3007450
+	ldr r0, _081E2618 @ =gRfuSlotStatusNI
 	adds r0, r2, r0
 	ldr r4, [r0]
 	ldrh r0, [r4]
@@ -4329,7 +4329,7 @@ _081E25AE:
 	movs r1, 0
 	adds r2, r4, 0
 	bl rfu_STC_releaseFrame
-	ldr r5, _081E261C @ =gUnknown_3007460
+	ldr r5, _081E261C @ =gRfuLinkStatus
 	ldr r2, [r5]
 	ldrb r1, [r4, 0x1A]
 	ldrb r0, [r2, 0x4]
@@ -4355,7 +4355,7 @@ _081E25E8:
 	cmp r6, 0x3
 	bls _081E259C
 _081E25F2:
-	ldr r0, _081E261C @ =gUnknown_3007460
+	ldr r0, _081E261C @ =gRfuLinkStatus
 	ldr r1, [r0]
 	ldrb r0, [r1, 0xE]
 	movs r0, 0
@@ -4370,9 +4370,9 @@ _081E25F2:
 	bx r0
 	.align 2, 0
 _081E2610: .4byte 0x00008020
-_081E2614: .4byte gUnknown_3007440
-_081E2618: .4byte gUnknown_3007450
-_081E261C: .4byte gUnknown_3007460
+_081E2614: .4byte gRfuSlotStatusUNI
+_081E2618: .4byte gRfuSlotStatusNI
+_081E261C: .4byte gRfuLinkStatus
 	thumb_func_end rfu_CB_sendData
 
 	thumb_func_start rfu_CB_sendData2
@@ -4386,8 +4386,8 @@ rfu_CB_sendData2: @ 81E2620
 	bx r0
 	thumb_func_end rfu_CB_sendData2
 
-	thumb_func_start sub_81E2630
-sub_81E2630: @ 81E2630
+	thumb_func_start rfu_CB_sendData3
+rfu_CB_sendData3: @ 81E2630
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -4407,7 +4407,7 @@ _081E2646:
 _081E2652:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81E2630
+	thumb_func_end rfu_CB_sendData3
 
 	thumb_func_start rfu_constructSendLLFrame
 rfu_constructSendLLFrame: @ 81E2658
@@ -4417,7 +4417,7 @@ rfu_constructSendLLFrame: @ 81E2658
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, _081E2704 @ =gUnknown_3007460
+	ldr r0, _081E2704 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0xFF
@@ -4435,7 +4435,7 @@ _081E2670:
 	movs r0, 0
 	strb r0, [r2, 0xE]
 	mov r8, r0
-	ldr r0, _081E2708 @ =gUnknown_3007468
+	ldr r0, _081E2708 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0x6C
 	str r0, [sp]
@@ -4447,7 +4447,7 @@ _081E2670:
 	mov r10, r1
 _081E269A:
 	movs r5, 0
-	ldr r0, _081E2710 @ =gUnknown_3007450
+	ldr r0, _081E2710 @ =gRfuSlotStatusNI
 	lsls r7, r6, 2
 	adds r4, r7, r0
 	ldr r2, [r4]
@@ -4476,7 +4476,7 @@ _081E26BA:
 	lsrs r0, 16
 	adds r5, r0
 _081E26D6:
-	ldr r0, _081E2714 @ =gUnknown_3007440
+	ldr r0, _081E2714 @ =gRfuSlotStatusUNI
 	adds r0, r7, r0
 	ldr r0, [r0]
 	ldrh r0, [r0]
@@ -4491,7 +4491,7 @@ _081E26D6:
 _081E26F0:
 	cmp r5, 0
 	beq _081E2724
-	ldr r0, _081E2704 @ =gUnknown_3007460
+	ldr r0, _081E2704 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4499,11 +4499,11 @@ _081E26F0:
 	add r8, r5
 	b _081E2724
 	.align 2, 0
-_081E2704: .4byte gUnknown_3007460
-_081E2708: .4byte gUnknown_3007468
+_081E2704: .4byte gRfuLinkStatus
+_081E2708: .4byte gRfuFixed
 _081E270C: .4byte 0x00008024
-_081E2710: .4byte gUnknown_3007450
-_081E2714: .4byte gUnknown_3007440
+_081E2710: .4byte gRfuSlotStatusNI
+_081E2714: .4byte gRfuSlotStatusUNI
 _081E2718:
 	adds r0, r7, r6
 	adds r0, 0x8
@@ -4517,15 +4517,15 @@ _081E2724:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _081E269A
-	ldr r6, _081E2784 @ =gUnknown_3007464
+	ldr r6, _081E2784 @ =gRfuStatic
 	mov r0, r8
 	cmp r0, 0
 	beq _081E276E
 	ldr r2, [sp]
 	movs r0, 0x3
 	ands r0, r2
-	ldr r5, _081E2788 @ =gUnknown_3007460
-	ldr r1, _081E278C @ =gUnknown_3007468
+	ldr r5, _081E2788 @ =gRfuLinkStatus
+	ldr r1, _081E278C @ =gRfuFixed
 	cmp r0, 0
 	beq _081E2756
 	movs r4, 0
@@ -4565,9 +4565,9 @@ _081E2774:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E2784: .4byte gUnknown_3007464
-_081E2788: .4byte gUnknown_3007460
-_081E278C: .4byte gUnknown_3007468
+_081E2784: .4byte gRfuStatic
+_081E2788: .4byte gRfuLinkStatus
+_081E278C: .4byte gRfuFixed
 	thumb_func_end rfu_constructSendLLFrame
 
 	thumb_func_start rfu_STC_NI_constructLLSF
@@ -4583,7 +4583,7 @@ rfu_STC_NI_constructLLSF: @ 81E2790
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r2, _081E280C @ =gUnknown_3007460
+	ldr r2, _081E280C @ =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	lsls r0, 4
@@ -4637,7 +4637,7 @@ _081E27FA:
 	movs r5, 0
 	b _081E285C
 	.align 2, 0
-_081E280C: .4byte gUnknown_3007460
+_081E280C: .4byte gRfuLinkStatus
 _081E2810: .4byte _Str_RfuHeader
 _081E2814: .4byte 0x00008022
 _081E2818:
@@ -4709,7 +4709,7 @@ _081E2860:
 	orrs r3, r0
 	orrs r3, r5
 	str r3, [sp]
-	ldr r2, _081E291C @ =gUnknown_3007460
+	ldr r2, _081E291C @ =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4750,7 +4750,7 @@ _081E28D2:
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [sp, 0x4]
-	ldr r0, _081E2920 @ =gUnknown_3007468
+	ldr r0, _081E2920 @ =gRfuFixed
 	ldr r1, [r0]
 	add r0, sp, 0x4
 	ldr r3, [r1, 0x4]
@@ -4772,7 +4772,7 @@ _081E28F2:
 	movs r0, 0
 	strb r0, [r6]
 _081E290C:
-	ldr r0, _081E291C @ =gUnknown_3007460
+	ldr r0, _081E291C @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r1, [r2]
 	cmp r1, 0x1
@@ -4781,8 +4781,8 @@ _081E290C:
 	strb r1, [r2, 0xE]
 	b _081E2936
 	.align 2, 0
-_081E291C: .4byte gUnknown_3007460
-_081E2920: .4byte gUnknown_3007468
+_081E291C: .4byte gRfuLinkStatus
+_081E2920: .4byte gRfuFixed
 _081E2924: .4byte 0x00008022
 _081E2928:
 	movs r0, 0x1
@@ -4818,7 +4818,7 @@ rfu_STC_UNI_constructLLSF: @ 81E2950
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r1, _081E2978 @ =gUnknown_3007440
+	ldr r1, _081E2978 @ =gRfuSlotStatusUNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -4832,9 +4832,9 @@ _081E2974:
 	movs r0, 0
 	b _081E2A18
 	.align 2, 0
-_081E2978: .4byte gUnknown_3007440
+_081E2978: .4byte gRfuSlotStatusUNI
 _081E297C:
-	ldr r0, _081E29F4 @ =gUnknown_3007460
+	ldr r0, _081E29F4 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	lsls r0, 4
@@ -4858,7 +4858,7 @@ _081E297C:
 _081E29A6:
 	mov r2, sp
 	movs r3, 0
-	ldr r1, _081E29FC @ =gUnknown_3007468
+	ldr r1, _081E29FC @ =gRfuFixed
 	mov r12, r1
 	add r7, sp, 0x4
 	ldrb r0, [r5]
@@ -4887,7 +4887,7 @@ _081E29CE:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl _call_via_r3
-	ldr r0, _081E29F4 @ =gUnknown_3007460
+	ldr r0, _081E29F4 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2]
 	cmp r0, 0x1
@@ -4896,9 +4896,9 @@ _081E29CE:
 	movs r0, 0x10
 	b _081E2A0C
 	.align 2, 0
-_081E29F4: .4byte gUnknown_3007460
+_081E29F4: .4byte gRfuLinkStatus
 _081E29F8: .4byte _Str_RfuHeader
-_081E29FC: .4byte gUnknown_3007468
+_081E29FC: .4byte gRfuFixed
 _081E2A00:
 	movs r0, 0x10
 	mov r1, r8
@@ -4925,12 +4925,12 @@ _081E2A18:
 	thumb_func_start rfu_REQ_recvData
 rfu_REQ_recvData: @ 81E2A24
 	push {r4,lr}
-	ldr r0, _081E2A58 @ =gUnknown_3007460
+	ldr r0, _081E2A58 @ =gRfuLinkStatus
 	ldr r4, [r0]
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq _081E2A50
-	ldr r2, _081E2A5C @ =gUnknown_3007464
+	ldr r2, _081E2A5C @ =gRfuStatic
 	ldr r3, [r2]
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
@@ -4949,8 +4949,8 @@ _081E2A50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E2A58: .4byte gUnknown_3007460
-_081E2A5C: .4byte gUnknown_3007464
+_081E2A58: .4byte gRfuLinkStatus
+_081E2A5C: .4byte gRfuStatic
 _081E2A60: .4byte rfu_CB_recvData
 	thumb_func_end rfu_REQ_recvData
 
@@ -4968,17 +4968,17 @@ rfu_CB_recvData: @ 81E2A64
 	lsrs r7, r1, 16
 	cmp r7, 0
 	bne _081E2B28
-	ldr r0, _081E2AA0 @ =gUnknown_3007468
+	ldr r0, _081E2AA0 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _081E2B28
-	ldr r0, _081E2AA4 @ =gUnknown_3007464
+	ldr r0, _081E2AA4 @ =gRfuStatic
 	ldr r0, [r0]
 	strb r7, [r0, 0x1]
-	ldr r0, _081E2AA8 @ =gUnknown_3007460
+	ldr r0, _081E2AA8 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -4986,25 +4986,25 @@ rfu_CB_recvData: @ 81E2A64
 	bl rfu_STC_PARENT_analyzeRecvPacket
 	b _081E2AB0
 	.align 2, 0
-_081E2AA0: .4byte gUnknown_3007468
-_081E2AA4: .4byte gUnknown_3007464
-_081E2AA8: .4byte gUnknown_3007460
+_081E2AA0: .4byte gRfuFixed
+_081E2AA4: .4byte gRfuStatic
+_081E2AA8: .4byte gRfuLinkStatus
 _081E2AAC:
 	bl rfu_STC_CHILD_analyzeRecvPacket
 _081E2AB0:
 	movs r6, 0
 	ldr r0, _081E2B40 @ =0x00008043
 	mov r8, r0
-	ldr r3, _081E2B44 @ =gUnknown_3007460
+	ldr r3, _081E2B44 @ =gRfuLinkStatus
 _081E2AB8:
-	ldr r0, _081E2B48 @ =gUnknown_3007450
+	ldr r0, _081E2B48 @ =gRfuSlotStatusNI
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r4, [r1]
 	ldrh r0, [r4, 0x34]
 	cmp r0, r8
 	bne _081E2B0A
-	ldr r0, _081E2B4C @ =gUnknown_3007464
+	ldr r0, _081E2B4C @ =gRfuStatic
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	asrs r0, r6
@@ -5044,7 +5044,7 @@ _081E2B0A:
 	lsrs r6, r0, 24
 	cmp r6, 0x3
 	bls _081E2AB8
-	ldr r0, _081E2B4C @ =gUnknown_3007464
+	ldr r0, _081E2B4C @ =gRfuStatic
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
@@ -5067,16 +5067,16 @@ _081E2B28:
 	bx r0
 	.align 2, 0
 _081E2B40: .4byte 0x00008043
-_081E2B44: .4byte gUnknown_3007460
-_081E2B48: .4byte gUnknown_3007450
-_081E2B4C: .4byte gUnknown_3007464
+_081E2B44: .4byte gRfuLinkStatus
+_081E2B48: .4byte gRfuSlotStatusNI
+_081E2B4C: .4byte gRfuStatic
 	thumb_func_end rfu_CB_recvData
 
 	thumb_func_start rfu_STC_PARENT_analyzeRecvPacket
 rfu_STC_PARENT_analyzeRecvPacket: @ 81E2B50
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, _081E2BE0 @ =gUnknown_3007468
+	ldr r1, _081E2BE0 @ =gRfuFixed
 	ldr r0, [r1]
 	adds r0, 0xDC
 	ldr r0, [r0]
@@ -5085,7 +5085,7 @@ rfu_STC_PARENT_analyzeRecvPacket: @ 81E2B50
 	movs r5, 0
 	mov r12, r1
 	movs r7, 0x1F
-	ldr r4, _081E2BE4 @ =gUnknown_3007464
+	ldr r4, _081E2BE4 @ =gRfuStatic
 	movs r6, 0x1
 _081E2B6A:
 	mov r0, sp
@@ -5151,14 +5151,14 @@ _081E2BD0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E2BE0: .4byte gUnknown_3007468
-_081E2BE4: .4byte gUnknown_3007464
+_081E2BE0: .4byte gRfuFixed
+_081E2BE4: .4byte gRfuStatic
 	thumb_func_end rfu_STC_PARENT_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_CHILD_analyzeRecvPacket
 rfu_STC_CHILD_analyzeRecvPacket: @ 81E2BE8
 	push {r4-r6,lr}
-	ldr r0, _081E2C38 @ =gUnknown_3007468
+	ldr r0, _081E2C38 @ =gRfuFixed
 	ldr r0, [r0]
 	adds r0, 0xDC
 	ldr r1, [r0]
@@ -5169,7 +5169,7 @@ rfu_STC_CHILD_analyzeRecvPacket: @ 81E2BE8
 	adds r5, 0x8
 	cmp r4, 0
 	bne _081E2C08
-	ldr r0, _081E2C3C @ =gUnknown_3007464
+	ldr r0, _081E2C3C @ =gRfuStatic
 	ldr r1, [r0]
 	movs r0, 0xF
 	strb r0, [r1, 0x1]
@@ -5199,8 +5199,8 @@ _081E2C30:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E2C38: .4byte gUnknown_3007468
-_081E2C3C: .4byte gUnknown_3007464
+_081E2C38: .4byte gRfuFixed
+_081E2C3C: .4byte gRfuStatic
 	thumb_func_end rfu_STC_CHILD_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_analyzeLLSF
@@ -5217,7 +5217,7 @@ rfu_STC_analyzeLLSF: @ 81E2C40
 	mov r12, r0
 	lsls r2, 16
 	lsrs r3, r2, 16
-	ldr r2, _081E2C74 @ =gUnknown_3007460
+	ldr r2, _081E2C74 @ =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r0, [r0]
 	mvns r0, r0
@@ -5232,7 +5232,7 @@ rfu_STC_analyzeLLSF: @ 81E2C40
 	adds r0, r3, 0
 	b _081E2E6E
 	.align 2, 0
-_081E2C74: .4byte gUnknown_3007460
+_081E2C74: .4byte gRfuLinkStatus
 _081E2C78: .4byte _Str_RfuHeader
 _081E2C7C:
 	movs r5, 0
@@ -5341,7 +5341,7 @@ _081E2CA4:
 	beq _081E2D4A
 	b _081E2E6C
 _081E2D4A:
-	ldr r2, _081E2D90 @ =gUnknown_3007460
+	ldr r2, _081E2D90 @ =gRfuLinkStatus
 	ldr r3, [r2]
 	ldrb r2, [r3]
 	cmp r2, 0x1
@@ -5371,7 +5371,7 @@ _081E2D80: .4byte 0xffff00ff
 _081E2D84: .4byte 0xff00ffff
 _081E2D88: .4byte 0x00ffffff
 _081E2D8C: .4byte 0x0000ffff
-_081E2D90: .4byte gUnknown_3007460
+_081E2D90: .4byte gRfuLinkStatus
 _081E2D94:
 	mov r5, r9
 	ldrb r0, [r5, 0x3]
@@ -5384,7 +5384,7 @@ _081E2D94:
 	b _081E2E6C
 _081E2DA8:
 	movs r4, 0
-	ldr r1, _081E2DC0 @ =gUnknown_3007450
+	ldr r1, _081E2DC0 @ =gRfuSlotStatusNI
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1A]
 	mov r5, r12
@@ -5395,7 +5395,7 @@ _081E2DA8:
 	ldrb r0, [r3, 0x4]
 	b _081E2DEA
 	.align 2, 0
-_081E2DC0: .4byte gUnknown_3007450
+_081E2DC0: .4byte gRfuSlotStatusNI
 _081E2DC4:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -5412,7 +5412,7 @@ _081E2DC4:
 	ands r0, r2
 	cmp r0, 0
 	beq _081E2DC4
-	ldr r3, _081E2E04 @ =gUnknown_3007460
+	ldr r3, _081E2E04 @ =gRfuLinkStatus
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x4]
 	mov r5, r12
@@ -5430,7 +5430,7 @@ _081E2DEA:
 	bl rfu_STC_NI_receive_Sender
 	b _081E2E6C
 	.align 2, 0
-_081E2E04: .4byte gUnknown_3007460
+_081E2E04: .4byte gRfuLinkStatus
 _081E2E08:
 	ldrb r1, [r3, 0x2]
 	mov r2, r9
@@ -5465,7 +5465,7 @@ _081E2E36:
 	bl rfu_STC_NI_receive_Receiver
 	b _081E2E62
 _081E2E48:
-	ldr r0, _081E2E80 @ =gUnknown_3007460
+	ldr r0, _081E2E80 @ =gRfuLinkStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	asrs r0, r4
@@ -5495,7 +5495,7 @@ _081E2E6E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081E2E80: .4byte gUnknown_3007460
+_081E2E80: .4byte gRfuLinkStatus
 	thumb_func_end rfu_STC_analyzeLLSF
 
 	thumb_func_start rfu_STC_UNI_receive
@@ -5506,7 +5506,7 @@ rfu_STC_UNI_receive: @ 81E2E84
 	str r2, [sp]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r2, _081E2EB8 @ =gUnknown_3007440
+	ldr r2, _081E2EB8 @ =gRfuSlotStatusUNI
 	lsls r1, r7, 2
 	adds r1, r2
 	ldr r3, [r1]
@@ -5527,7 +5527,7 @@ rfu_STC_UNI_receive: @ 81E2E84
 	strh r0, [r5, 0x2]
 	b _081E2F0E
 	.align 2, 0
-_081E2EB8: .4byte gUnknown_3007440
+_081E2EB8: .4byte gRfuSlotStatusUNI
 _081E2EBC: .4byte 0x00000701
 _081E2EC0:
 	ldrb r0, [r5, 0x7]
@@ -5560,7 +5560,7 @@ _081E2EE4:
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	str r0, [sp, 0x4]
-	ldr r0, _081E2F30 @ =gUnknown_3007468
+	ldr r0, _081E2F30 @ =gRfuFixed
 	ldr r0, [r0]
 	add r1, sp, 0x4
 	ldr r3, [r0, 0x4]
@@ -5573,7 +5573,7 @@ _081E2F0E:
 	ldrh r0, [r5, 0x2]
 	cmp r0, 0
 	beq _081E2F22
-	ldr r0, _081E2F34 @ =gUnknown_3007464
+	ldr r0, _081E2F34 @ =gRfuStatic
 	ldr r2, [r0]
 	movs r0, 0x10
 	lsls r0, r7
@@ -5587,8 +5587,8 @@ _081E2F22:
 	bx r0
 	.align 2, 0
 _081E2F2C: .4byte 0x00008042
-_081E2F30: .4byte gUnknown_3007468
-_081E2F34: .4byte gUnknown_3007464
+_081E2F30: .4byte gRfuFixed
+_081E2F34: .4byte gRfuStatic
 	thumb_func_end rfu_STC_UNI_receive
 
 	thumb_func_start rfu_STC_NI_receive_Sender
@@ -5604,7 +5604,7 @@ rfu_STC_NI_receive_Sender: @ 81E2F38
 	lsls r1, 24
 	lsrs r1, 24
 	mov r10, r1
-	ldr r1, _081E3004 @ =gUnknown_3007450
+	ldr r1, _081E3004 @ =gRfuSlotStatusNI
 	lsrs r0, 22
 	adds r0, r1
 	ldr r0, [r0]
@@ -5700,7 +5700,7 @@ _081E2FB2:
 	str r0, [r1]
 	b _081E302E
 	.align 2, 0
-_081E3004: .4byte gUnknown_3007450
+_081E3004: .4byte gRfuSlotStatusNI
 _081E3008: .4byte 0x00008022
 _081E300C: .4byte 0x00008021
 _081E3010: .4byte 0x00008023
@@ -5811,7 +5811,7 @@ _081E30D8:
 	ldrh r2, [r4]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r0, _081E311C @ =gUnknown_3007464
+	ldr r0, _081E311C @ =gRfuStatic
 	ldr r3, [r0]
 	movs r0, 0x10
 	mov r7, r10
@@ -5821,7 +5821,7 @@ _081E30D8:
 	movs r1, 0
 	strb r0, [r3, 0x2]
 	lsls r0, r7, 2
-	ldr r3, _081E3120 @ =gUnknown_3007450
+	ldr r3, _081E3120 @ =gRfuSlotStatusNI
 	adds r0, r3
 	ldr r0, [r0]
 	strh r1, [r0, 0x2]
@@ -5839,8 +5839,8 @@ _081E30FE:
 _081E3110: .4byte 0x80230000
 _081E3114: .4byte 0x00008020
 _081E3118: .4byte 0x04000208
-_081E311C: .4byte gUnknown_3007464
-_081E3120: .4byte gUnknown_3007450
+_081E311C: .4byte gRfuStatic
+_081E3120: .4byte gRfuSlotStatusNI
 	thumb_func_end rfu_STC_NI_receive_Sender
 
 	thumb_func_start rfu_STC_NI_receive_Receiver
@@ -5857,7 +5857,7 @@ rfu_STC_NI_receive_Receiver: @ 81E3124
 	lsrs r0, 24
 	mov r8, r0
 	movs r7, 0
-	ldr r1, _081E3184 @ =gUnknown_3007450
+	ldr r1, _081E3184 @ =gRfuSlotStatusNI
 	lsls r0, 2
 	adds r0, r1
 	ldr r4, [r0]
@@ -5874,7 +5874,7 @@ rfu_STC_NI_receive_Receiver: @ 81E3124
 	ldrb r0, [r6, 0x2]
 	cmp r0, 0x3
 	bne _081E3194
-	ldr r0, _081E3188 @ =gUnknown_3007464
+	ldr r0, _081E3188 @ =gRfuStatic
 	ldr r2, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -5894,8 +5894,8 @@ rfu_STC_NI_receive_Receiver: @ 81E3124
 	strh r0, [r4, 0x34]
 	b _081E31DA
 	.align 2, 0
-_081E3184: .4byte gUnknown_3007450
-_081E3188: .4byte gUnknown_3007464
+_081E3184: .4byte gRfuSlotStatusNI
+_081E3188: .4byte gRfuStatic
 _081E318C: .4byte 0x00008042
 _081E3190: .4byte 0x00008043
 _081E3194:
@@ -5947,7 +5947,7 @@ _081E31DE:
 	ands r0, r1
 	cmp r2, r0
 	bne _081E3234
-	ldr r0, _081E3290 @ =gUnknown_3007468
+	ldr r0, _081E3290 @ =gRfuFixed
 	ldr r0, [r0]
 	lsls r1, r3, 2
 	adds r1, 0x4
@@ -6005,7 +6005,7 @@ _081E325C:
 	ldrh r2, [r3]
 	movs r0, 0
 	strh r0, [r3]
-	ldr r0, _081E329C @ =gUnknown_3007464
+	ldr r0, _081E329C @ =gRfuStatic
 	ldr r4, [r0]
 	movs r0, 0x1
 	mov r1, r8
@@ -6027,10 +6027,10 @@ _081E327A:
 	bx r0
 	.align 2, 0
 _081E328C: .4byte 0x00008041
-_081E3290: .4byte gUnknown_3007468
+_081E3290: .4byte gRfuFixed
 _081E3294: .4byte 0x00008042
 _081E3298: .4byte 0x04000208
-_081E329C: .4byte gUnknown_3007464
+_081E329C: .4byte gRfuStatic
 	thumb_func_end rfu_STC_NI_receive_Receiver
 
 	thumb_func_start rfu_STC_NI_initSlot_asRecvControllData
@@ -6039,7 +6039,7 @@ rfu_STC_NI_initSlot_asRecvControllData: @ 81E32A0
 	adds r2, r1, 0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _081E32BC @ =gUnknown_3007460
+	ldr r0, _081E32BC @ =gRfuLinkStatus
 	ldr r3, [r0]
 	ldrb r1, [r3]
 	mov r12, r0
@@ -6050,7 +6050,7 @@ rfu_STC_NI_initSlot_asRecvControllData: @ 81E32A0
 	adds r1, 0xF
 	b _081E32C8
 	.align 2, 0
-_081E32BC: .4byte gUnknown_3007460
+_081E32BC: .4byte gRfuLinkStatus
 _081E32C0:
 	movs r5, 0x2
 	adds r0, r4, 0
@@ -6073,7 +6073,7 @@ _081E32C8:
 	strh r0, [r2]
 	ldr r0, _081E32F8 @ =0x00000702
 	strh r0, [r2, 0x18]
-	ldr r0, _081E32FC @ =gUnknown_3007464
+	ldr r0, _081E32FC @ =gRfuStatic
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x4]
 	adds r0, r6, 0
@@ -6082,7 +6082,7 @@ _081E32C8:
 	b _081E3326
 	.align 2, 0
 _081E32F8: .4byte 0x00000702
-_081E32FC: .4byte gUnknown_3007464
+_081E32FC: .4byte gRfuStatic
 _081E3300:
 	strh r3, [r2, 0x18]
 	ldrb r0, [r1]
@@ -6122,7 +6122,7 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 81E3330
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _081E3354
-	ldr r0, _081E3350 @ =gUnknown_3007460
+	ldr r0, _081E3350 @ =gRfuLinkStatus
 	lsls r1, r5, 5
 	adds r1, 0x14
 	ldr r0, [r0]
@@ -6130,9 +6130,9 @@ rfu_STC_NI_initSlot_asRecvDataEntity: @ 81E3330
 	adds r0, 0x4
 	b _081E33AA
 	.align 2, 0
-_081E3350: .4byte gUnknown_3007460
+_081E3350: .4byte gRfuLinkStatus
 _081E3354:
-	ldr r1, _081E3398 @ =gUnknown_3007450
+	ldr r1, _081E3398 @ =gRfuSlotStatusNI
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -6144,13 +6144,13 @@ _081E3354:
 	lsls r1, 17
 	lsls r1, r5
 	lsrs r1, 24
-	ldr r0, _081E339C @ =gUnknown_3007464
+	ldr r0, _081E339C @ =gRfuStatic
 	ldr r3, [r0]
 	ldrb r2, [r3, 0x4]
 	adds r0, r1, 0
 	orrs r0, r2
 	strb r0, [r3, 0x4]
-	ldr r0, _081E33A0 @ =gUnknown_3007460
+	ldr r0, _081E33A0 @ =gRfuLinkStatus
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x5]
 	bics r0, r1
@@ -6165,9 +6165,9 @@ _081E3354:
 	bl rfu_STC_releaseFrame
 	b _081E33DC
 	.align 2, 0
-_081E3398: .4byte gUnknown_3007450
-_081E339C: .4byte gUnknown_3007464
-_081E33A0: .4byte gUnknown_3007460
+_081E3398: .4byte gRfuSlotStatusNI
+_081E339C: .4byte gRfuStatic
+_081E33A0: .4byte gRfuLinkStatus
 _081E33A4: .4byte 0x00000701
 _081E33A8:
 	ldr r0, [r2, 0x68]
@@ -6209,7 +6209,7 @@ _081E33E4: .4byte 0x00008042
 	thumb_func_start rfu_NI_checkCommFailCounter
 rfu_NI_checkCommFailCounter: @ 81E33E8
 	push {r4-r7,lr}
-	ldr r2, _081E3474 @ =gUnknown_3007460
+	ldr r2, _081E3474 @ =gRfuLinkStatus
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x4]
 	ldrb r0, [r0, 0x5]
@@ -6221,14 +6221,14 @@ rfu_NI_checkCommFailCounter: @ 81E33E8
 	mov r12, r0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _081E347C @ =gUnknown_3007464
+	ldr r1, _081E347C @ =gRfuStatic
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x2]
 	lsrs r7, r0, 4
 	movs r3, 0
 	adds r6, r1, 0
 	adds r5, r2, 0
-	ldr r4, _081E3480 @ =gUnknown_3007450
+	ldr r4, _081E3480 @ =gRfuSlotStatusNI
 _081E3412:
 	movs r0, 0x80
 	lsls r0, 17
@@ -6283,10 +6283,10 @@ _081E346E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081E3474: .4byte gUnknown_3007460
+_081E3474: .4byte gRfuLinkStatus
 _081E3478: .4byte 0x04000208
-_081E347C: .4byte gUnknown_3007464
-_081E3480: .4byte gUnknown_3007450
+_081E347C: .4byte gRfuStatic
+_081E3480: .4byte gRfuSlotStatusNI
 	thumb_func_end rfu_NI_checkCommFailCounter
 
 	thumb_func_start rfu_REQ_noise

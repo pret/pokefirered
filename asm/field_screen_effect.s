@@ -5,112 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_807EE00
-sub_807EE00: @ 807EE00
-	push {lr}
-	cmp r1, 0xA0
-	bhi _0807EE28
-	cmp r2, 0
-	bge _0807EE0C
-	movs r2, 0
-_0807EE0C:
-	cmp r2, 0xFF
-	ble _0807EE12
-	movs r2, 0xFF
-_0807EE12:
-	cmp r3, 0
-	bge _0807EE18
-	movs r3, 0
-_0807EE18:
-	cmp r3, 0xFF
-	ble _0807EE1E
-	movs r3, 0xFF
-_0807EE1E:
-	lsls r1, 1
-	adds r1, r0
-	lsls r0, r2, 8
-	orrs r0, r3
-	strh r0, [r1]
-_0807EE28:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_807EE00
-
-	thumb_func_start sub_807EE2C
-sub_807EE2C: @ 807EE2C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	str r0, [sp]
-	mov r10, r1
-	mov r9, r2
-	adds r6, r3, 0
-	mov r8, r6
-	movs r7, 0
-	cmp r6, 0
-	blt _0807EEA8
-_0807EE48:
-	mov r0, r9
-	subs r1, r0, r7
-	mov r0, r10
-	subs r4, r0, r6
-	adds r5, r0, r6
-	ldr r0, [sp]
-	adds r2, r4, 0
-	adds r3, r5, 0
-	bl sub_807EE00
-	mov r0, r9
-	adds r1, r0, r7
-	ldr r0, [sp]
-	adds r2, r4, 0
-	adds r3, r5, 0
-	bl sub_807EE00
-	mov r0, r9
-	subs r1, r0, r6
-	mov r0, r10
-	subs r4, r0, r7
-	adds r5, r0, r7
-	ldr r0, [sp]
-	adds r2, r4, 0
-	adds r3, r5, 0
-	bl sub_807EE00
-	mov r0, r9
-	adds r1, r0, r6
-	ldr r0, [sp]
-	adds r2, r4, 0
-	adds r3, r5, 0
-	bl sub_807EE00
-	mov r1, r8
-	adds r1, 0x1
-	lsls r0, r7, 1
-	subs r1, r0
-	mov r8, r1
-	adds r7, 0x1
-	cmp r1, 0
-	bge _0807EEA4
-	subs r1, r6, 0x1
-	lsls r0, r1, 1
-	add r8, r0
-	adds r6, r1, 0
-_0807EEA4:
-	cmp r6, r7
-	bge _0807EE48
-_0807EEA8:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_807EE2C
-
-	thumb_func_start sub_807EEB8
-sub_807EEB8: @ 807EEB8
+	thumb_func_start UpdateFlashLevelEffect
+UpdateFlashLevelEffect: @ 807EEB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -148,7 +44,7 @@ _0807EEE6:
 	ldrsh r2, [r4, r3]
 	movs r5, 0x6
 	ldrsh r3, [r4, r5]
-	bl sub_807EE2C
+	bl SetFlashScanlineEffectWindowBoundaries
 	movs r0, 0x1
 	strh r0, [r4]
 	b _0807EF76
@@ -169,7 +65,7 @@ _0807EF14:
 	ldrsh r2, [r4, r3]
 	movs r6, 0x6
 	ldrsh r3, [r4, r6]
-	bl sub_807EE2C
+	bl SetFlashScanlineEffectWindowBoundaries
 	movs r0, 0
 	strh r0, [r4]
 	ldrh r0, [r4, 0xA]
@@ -205,14 +101,14 @@ _0807EF76:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_807EEB8
+	thumb_func_end UpdateFlashLevelEffect
 
 	thumb_func_start sub_807EF7C
 sub_807EF7C: @ 807EF7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0807EFA0 @ =sub_807EEB8
+	ldr r0, _0807EFA0 @ =UpdateFlashLevelEffect
 	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
@@ -225,7 +121,7 @@ _0807EF98:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807EFA0: .4byte sub_807EEB8
+_0807EFA0: .4byte UpdateFlashLevelEffect
 	thumb_func_end sub_807EF7C
 
 	thumb_func_start sub_807EFA4
@@ -262,7 +158,7 @@ sub_807EFC8: @ 807EFC8
 	ldr r0, [sp, 0x20]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _0807F00C @ =sub_807EEB8
+	ldr r0, _0807F00C @ =UpdateFlashLevelEffect
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -284,7 +180,7 @@ sub_807EFC8: @ 807EFC8
 	strh r7, [r1, 0xA]
 	b _0807F018
 	.align 2, 0
-_0807F00C: .4byte sub_807EEB8
+_0807F00C: .4byte UpdateFlashLevelEffect
 _0807F010: .4byte gTasks+0x8
 _0807F014:
 	negs r0, r7
@@ -314,7 +210,7 @@ sub_807F028: @ 807F028
 	bne _0807F042
 	movs r5, 0x1
 _0807F042:
-	ldr r1, _0807F070 @ =gUnknown_83C68D4
+	ldr r1, _0807F070 @ =sFlashLevelPixelRadii
 	lsls r0, 1
 	adds r0, r1
 	ldrh r2, [r0]
@@ -334,25 +230,25 @@ _0807F042:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807F070: .4byte gUnknown_83C68D4
+_0807F070: .4byte sFlashLevelPixelRadii
 	thumb_func_end sub_807F028
 
-	thumb_func_start sub_807F074
-sub_807F074: @ 807F074
+	thumb_func_start WriteFlashScanlineEffectBuffer
+WriteFlashScanlineEffectBuffer: @ 807F074
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
 	beq _0807F0A2
 	ldr r4, _0807F0A8 @ =gScanlineEffectRegBuffers
-	ldr r1, _0807F0AC @ =gUnknown_83C68D4
+	ldr r1, _0807F0AC @ =sFlashLevelPixelRadii
 	lsls r0, 1
 	adds r0, r1
 	ldrh r3, [r0]
 	adds r0, r4, 0
 	movs r1, 0x78
 	movs r2, 0x50
-	bl sub_807EE2C
+	bl SetFlashScanlineEffectWindowBoundaries
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r1, r4, r0
@@ -366,8 +262,8 @@ _0807F0A2:
 	bx r0
 	.align 2, 0
 _0807F0A8: .4byte gScanlineEffectRegBuffers
-_0807F0AC: .4byte gUnknown_83C68D4
-	thumb_func_end sub_807F074
+_0807F0AC: .4byte sFlashLevelPixelRadii
+	thumb_func_end WriteFlashScanlineEffectBuffer
 
 	thumb_func_start sub_807F0B0
 sub_807F0B0: @ 807F0B0

@@ -7,8 +7,6 @@
 	.section .rodata
 	.align 2
 
-	.include "data/text/map_section_names.inc"
-
 gUnknown_83EF23C:: @ 83EF23C gbapal
 	.incbin "graphics/region_map/unk_83EF23C.gbapal"
 
@@ -239,16 +237,74 @@ gUnknown_83F1A9C:: @ 83F1A9C
 	.4byte gUnknown_83F1A94
 	.4byte gUnknown_83F1A98
 
-gUnknown_83F1AA4:: @ 83F1AA4
-	.byte 0x8f, 0x90, 0x91, 0x96, 0x97, 0x98, 0x99, 0x9a, 0xaf, 0xb0, 0xb9, 0xc3, 0xc5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+sSeviiMapsecs:: @ 83F1AA4
+	.byte MAPSEC_ONE_ISLAND
+	.byte MAPSEC_TWO_ISLAND
+	.byte MAPSEC_THREE_ISLAND
+	.byte MAPSEC_KINDLE_ROAD
+	.byte MAPSEC_TREASURE_BEACH
+	.byte MAPSEC_CAPE_BRINK
+	.byte MAPSEC_BOND_BRIDGE
+	.byte MAPSEC_THREE_ISLE_PORT
+	.byte MAPSEC_MT_EMBER
+	.byte MAPSEC_BERRY_FOREST
+	.byte MAPSEC_THREE_ISLE_PATH
+	.byte MAPSEC_EMBER_SPA
+	.byte MAPSEC_NONE
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.byte 0x92, 0x93, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f, 0xa0, 0xa1, 0xa2, 0xae, 0xb1, 0xb2, 0xb5, 0xc5, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	.byte MAPSEC_FOUR_ISLAND
+    .byte MAPSEC_FIVE_ISLAND
+    .byte MAPSEC_SEVII_ISLE_6
+    .byte MAPSEC_SEVII_ISLE_7
+    .byte MAPSEC_SEVII_ISLE_8
+    .byte MAPSEC_SEVII_ISLE_9
+    .byte MAPSEC_RESORT_GORGEOUS
+    .byte MAPSEC_WATER_LABYRINTH
+    .byte MAPSEC_FIVE_ISLE_MEADOW
+    .byte MAPSEC_MEMORIAL_PILLAR
+    .byte MAPSEC_NAVEL_ROCK
+    .byte MAPSEC_ICEFALL_CAVE
+    .byte MAPSEC_ROCKET_WAREHOUSE
+    .byte MAPSEC_LOST_CAVE
+    .byte MAPSEC_NONE
+	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.byte 0x94, 0x95, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xb3, 0xb4, 0xb6, 0xb7, 0xb8, 0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0xbf, 0xc0, 0xc1, 0xc2, 0xc5, 0x00, 0x00
+	.byte MAPSEC_SEVEN_ISLAND
+    .byte MAPSEC_SIX_ISLAND
+    .byte MAPSEC_OUTCAST_ISLAND
+    .byte MAPSEC_GREEN_PATH
+    .byte MAPSEC_WATER_PATH
+    .byte MAPSEC_RUIN_VALLEY
+    .byte MAPSEC_TRAINER_TOWER
+    .byte MAPSEC_CANYON_ENTRANCE
+    .byte MAPSEC_SEVAULT_CANYON
+    .byte MAPSEC_TANOBY_RUINS
+    .byte MAPSEC_SEVII_ISLE_22
+    .byte MAPSEC_SEVII_ISLE_23
+    .byte MAPSEC_SEVII_ISLE_24
+    .byte MAPSEC_TRAINER_TOWER_2
+    .byte MAPSEC_DOTTED_HOLE
+    .byte MAPSEC_PATTERN_BUSH
+    .byte MAPSEC_ALTERING_CAVE
+    .byte MAPSEC_TANOBY_CHAMBERS
+    .byte MAPSEC_TANOBY_KEY
+    .byte MAPSEC_BIRTH_ISLAND
+    .byte MAPSEC_MONEAN_CHAMBER
+    .byte MAPSEC_LIPTOO_CHAMBER
+    .byte MAPSEC_WEEPTH_CHAMBER
+    .byte MAPSEC_DILFORD_CHAMBER
+    .byte MAPSEC_SCUFIB_CHAMBER
+    .byte MAPSEC_RIXY_CHAMBER
+    .byte MAPSEC_VIAPOIS_CHAMBER
+    .byte MAPSEC_NONE
+	.byte 0x00, 0x00
 
 	.align 2
 gUnknown_83F1B00:: @ 83F1B00
-	.byte 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01
+	.byte 1, 1, 1, 0
+	.byte 0, 0, 0, 0
+	.byte 0, 0, 0, 1
 
 gUnknown_83F1B0C:: @ 83F1B0C
 	.2byte 0x0018, 0x0010, 0x0090, 0x0020

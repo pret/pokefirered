@@ -267,35 +267,10 @@ gUnknown_203998C: @ 203998C
 	.include "src/mail.o"
 	.align 2
 	.include "src/menu_helpers.o"
+	.align 2
+	.include "src/region_map.o"
 
 	.align 2
-gUnknown_20399D4: @ 20399D4
-	.space 0x4
-
-gUnknown_20399D8: @ 20399D8
-	.space 0x4
-
-gUnknown_20399DC: @ 20399DC
-	.space 0x4
-
-gUnknown_20399E0: @ 20399E0
-	.space 0x4
-
-gUnknown_20399E4: @ 20399E4
-	.space 0x4
-
-gUnknown_20399E8: @ 20399E8
-	.space 0x4
-
-gUnknown_20399EC: @ 20399EC
-	.space 0x4
-
-gUnknown_20399F0: @ 20399F0
-	.space 0xC
-
-gUnknown_20399FC: @ 20399FC
-	.space 0x4
-
 gAIScriptPtr: @ 2039A00
 	.space 0x4
 

@@ -108,7 +108,7 @@ struct RfuStruct
     u8 ackActiveCommand;
     u8 timerSelect;
     u8 unk_b;
-    s32 timerState;
+    u32 timerState; // this field is s32 in emerald
     vu8 timerActive;
     u8 unk_11;
     vu16 error;
@@ -126,10 +126,10 @@ struct RfuStruct
 
 struct RfuIntrStruct
 {
-    u8 rxPacketAlloc[0x74];
-    u8 txPacketAlloc[0x74];
-    u8 block1[0x960];
-    u8 block2[0x30];
+    union RfuPacket rxPacketAlloc;
+    union RfuPacket txPacketAlloc;
+    u8 block1[0x960]; // size of librfu_intr.s binary
+    struct RfuStruct block2;
 };
 
 struct RfuSlotStatusUNI
@@ -248,14 +248,6 @@ struct Unk_3007470
     u16 unkA;
 };
 
-struct STWIStruct
-{
-    // TODO: resolve the struct
-    u8 unk_0[232];
-    u8 function[2400];
-    struct RfuStruct STWIStatus;
-};
-
 struct Unk_3001190
 {
     struct RfuLinkStatus linkStatus;
@@ -263,7 +255,7 @@ struct Unk_3001190
     struct RfuFixed fixed;
     struct RfuSlotStatusNI NI[4];
     struct RfuSlotStatusUNI UNI[4];
-    struct STWIStruct STWI;
+    struct RfuIntrStruct intr;
 };
 
 extern struct RfuStruct *gRfuState;
@@ -275,7 +267,6 @@ extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
 extern struct Unk_3007470 gUnknown_3007470;
 
 void rfu_STC_clearAPIVariables(void);
-void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_REQ_stopMode(void);
 void rfu_waitREQComplete(void);
 u32 rfu_REQBN_softReset_and_checkID(void);
@@ -322,5 +313,51 @@ void rfu_UNI_readySendData(u8 a0);
 void rfu_UNI_clearRecvNewDataFlag(u8 a0);
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
 void rfu_NI_setSendData(u8, u8, const void *, u32);
+
+// librfu_intr
+void IntrSIO32(void);
+
+// librfu_stwi
+void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void STWI_set_MS_mode(u8 mode);
+void STWI_init_Callback_M(void);
+void STWI_init_Callback_S(void);
+void STWI_set_Callback_M(void (*callbackM)());
+void STWI_set_Callback_S(void (*callbackS)());
+void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
+void AgbRFU_SoftReset(void);
+void STWI_set_Callback_ID(u32 id);
+u16 STWI_read_status(u8 index);
+u16 STWI_poll_CommandEnd(void);
+void STWI_send_DataRxREQ(void);
+void STWI_send_MS_ChangeREQ(void);
+void STWI_send_StopModeREQ(void);
+void STWI_send_SystemStatusREQ(void);
+void STWI_send_GameConfigREQ(u8 *unk1, u8 *data);
+void STWI_send_ResetREQ(void);
+void STWI_send_LinkStatusREQ(void);
+void STWI_send_VersionStatusREQ(void);
+void STWI_send_SlotStatusREQ(void);
+void STWI_send_ConfigStatusREQ(void);
+void STWI_send_ResumeRetransmitAndChangeREQ(void);
+void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3);
+void STWI_send_SC_StartREQ(void);
+void STWI_send_SC_PollingREQ(void);
+void STWI_send_SC_EndREQ(void);
+void STWI_send_SP_StartREQ(void);
+void STWI_send_SP_PollingREQ(void);
+void STWI_send_SP_EndREQ(void);
+void STWI_send_CP_StartREQ(u16 unk1);
+void STWI_send_CP_PollingREQ(void);
+void STWI_send_CP_EndREQ(void);
+void STWI_send_DataTxREQ(const void *in, u8 size);
+void STWI_send_DataTxAndChangeREQ(const void *in, u8 size);
+void STWI_send_DataReadyAndChangeREQ(u8 unk);
+void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1);
+void STWI_send_DisconnectREQ(u8 unk);
+void STWI_send_TestModeREQ(u8 unk0, u8 unk1);
+void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2);
+void STWI_send_CPR_PollingREQ(void);
+void STWI_send_CPR_EndREQ(void);
 
 #endif // GUARD_LIBRFU_H

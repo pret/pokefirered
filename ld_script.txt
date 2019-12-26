@@ -317,7 +317,7 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/agb_flash_le.o(.text);
-        asm/librfu_stwi.o(.text);
+        src/librfu_stwi.o(.text);
         asm/librfu_intr.o(.text);
         asm/librfu.o(.text);
         src/isagbprn.o(.text);

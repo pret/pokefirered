@@ -608,7 +608,7 @@ bool8 ScrCmd_setworldmapflag(struct ScriptContext *ctx)
 
 bool8 ScrCmd_animateflash(struct ScriptContext *ctx)
 {
-    sub_807F028(ScriptReadByte(ctx));
+    AnimateFlash(ScriptReadByte(ctx));
     ScriptContext1_Stop();
     return TRUE;
 }

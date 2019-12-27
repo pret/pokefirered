@@ -432,6 +432,7 @@ SECTIONS {
         src/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
+        src/field_screen_effect.o(.rodata);
         data/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);

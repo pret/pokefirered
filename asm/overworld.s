@@ -1737,7 +1737,7 @@ _080558D4:
 	bl RoamerMove
 	bl sub_8110920
 	bl DoCurrentWeather
-	bl wild_encounter_reset_coro_args
+	bl ResetFieldTasksArgs
 	bl mapheader_run_script_with_tag_x5
 	bl sub_80561B4
 	ldr r1, _0805591C @ =gMapHeader
@@ -4648,7 +4648,7 @@ _08057056:
 	bl sub_807B1B8
 	cmp r4, 0
 	bne _0805706A
-	bl sub_806E87C
+	bl SetUpFieldTasks
 _0805706A:
 	bl mapheader_run_script_with_tag_x5
 	pop {r4}
@@ -5402,7 +5402,7 @@ _0805769C:
 	bl FieldEffectActiveListClear
 	bl sub_8079C08
 	bl sub_807B1B8
-	bl sub_806E87C
+	bl SetUpFieldTasks
 	bl mapheader_run_script_with_tag_x5
 	b _0805772A
 _080576C2:

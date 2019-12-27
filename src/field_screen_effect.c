@@ -261,17 +261,17 @@ void Task_BarnDoorWipe(u8 taskId)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
             if (data[10] == 0)
             {
-                SetGpuReg(REG_OFFSET_WIN0H, 0);
+                SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 0));
                 SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(240, 255));
-                SetGpuReg(REG_OFFSET_WIN0V, 255);
-                SetGpuReg(REG_OFFSET_WIN1V, 255);
+                SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
+                SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0, 255));
             }
             else
             {
-                SetGpuReg(REG_OFFSET_WIN0H, 120);
-                SetGpuReg(REG_OFFSET_WIN0V, 255);
+                SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 120));
+                SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
                 SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(120, 255));
-                SetGpuReg(REG_OFFSET_WIN1V, 255);
+                SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(0, 255));
             }
             SetGpuReg(REG_OFFSET_WININ, 0);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
@@ -294,17 +294,16 @@ void Task_BarnDoorWipe(u8 taskId)
     }
 }
 
-// TODO: Find an implicit way to generate lhs/rhs shifts.
 static void Task_BarnDoorWipeChild(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 	u8 parentTaskId = FindTaskIdByFunc(Task_BarnDoorWipe);
-    u32 lhs, rhs;
+    s16 lhs, rhs;
     if (gTasks[parentTaskId].tDirection == DIR_WIPE_IN)
     {
-        lhs = (u16)tChildOffset;
-        rhs = (u16)(240 - lhs);
-        if ((s16)lhs > 120)
+        lhs = tChildOffset;
+        rhs = 240 - tChildOffset;
+        if (lhs > 120)
         {
             DestroyTask(taskId);
             return;
@@ -312,22 +311,17 @@ static void Task_BarnDoorWipeChild(u8 taskId)
     }
     else
     {
-        u16 offset = tChildOffset;
-        u32 lhs2 = (120 - offset) << 16;
-        u32 rhs2 = (120 + offset) << 16;
-        lhs = lhs2 >> 16;
-        rhs = rhs2 >> 16;
-        if ((s16)(lhs2 >> 16) < 0)
+        lhs = 120 - tChildOffset;
+        rhs = 120 + tChildOffset;
+        if (lhs < 0)
         {
             DestroyTask(taskId);
             return;
         }
     }
-    lhs <<= 16;
-    SetGpuReg(REG_OFFSET_WIN0H, lhs >> 16);
-    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE((((s16)rhs) << 16) >> 16, 240));
-    lhs = (s32)lhs >> 16;
-    if ((s32)lhs <= 89)
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, lhs));
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(rhs, 240));
+    if (lhs <= 89)
     {
         tChildOffset += 4;
     }

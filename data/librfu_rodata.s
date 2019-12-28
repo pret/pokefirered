@@ -25,4 +25,3 @@ _Str_RFU_MBOOT::
 	.align 2
 _Str_Sio32ID::
 	.asciz "NINTENDOSio32ID_030820"
-

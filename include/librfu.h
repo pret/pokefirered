@@ -117,7 +117,7 @@ struct RfuStruct
     u8 unk_16;
     u8 unk_17;
     void (*callbackM)();
-    void (*callbackS)();
+    void (*callbackS)(u16);
     u32 callbackId;
     union RfuPacket *txPacket;
     union RfuPacket *rxPacket;
@@ -145,7 +145,7 @@ struct RfuSlotStatusUNI
     u8 newDataFlag;
     u8 dataBlockFlag;
     void *recvBuffer;
-    u32 recvBuffSize;
+    u32 recvBufferSize;
 };
 
 struct NIComm
@@ -178,12 +178,12 @@ struct RfuSlotStatusNI
 
 struct RfuFixed
 {
-    void *reqCallback;
+    void (*reqCallback)(u16, u16);
     void *fastCopyPtr;
     u16 fastCopyBuffer[24];
     u32 fastCopyBuffer2[12];
     u32 LLFBuffer[29];
-    u8 *STWIBuffer;
+    struct RfuIntrStruct *STWIBuffer;
 };
 
 struct RfuStatic
@@ -204,7 +204,7 @@ struct RfuStatic
     u16 unk_1a;
     u16 reqResult;
     u16 tryPid;
-    u32 watchdogTimer;
+    u16 watchdogTimer;
     u32 totalPacketSize;
 };
 
@@ -230,7 +230,7 @@ struct RfuLinkStatus
     u8 getNameFlag;
     u8 findParentCount;
     u8 watchInterval;
-    u8 stength[4];
+    u8 strength[4];
     u8 LLFReadyFlag;
     u8 remainLLFrameSizeParent;
     u8 remainLLFrameSizeChild[4];
@@ -266,19 +266,20 @@ extern struct RfuSlotStatusNI *gRfuSlotStatusNI[4];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
 extern struct Unk_3007470 gUnknown_3007470;
 
+// librfu_rfu
 void rfu_STC_clearAPIVariables(void);
 void rfu_REQ_stopMode(void);
-void rfu_waitREQComplete(void);
-u32 rfu_REQBN_softReset_and_checkID(void);
+u16 rfu_waitREQComplete(void);
+s32 rfu_REQBN_softReset_and_checkID(void);
 void rfu_REQ_sendData(u8);
 void rfu_setMSCCallback(void (*func)(u16));
 void rfu_setREQCallback(void (*func)(u16, u16));
 bool8 rfu_getMasterSlave(void);
 void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
-bool16 rfu_syncVBlank(void);
+u16 rfu_syncVBlank(void);
 void rfu_REQ_reset(void);
 void rfu_REQ_configSystem(u16, u8, u8);
-void rfu_REQ_configGameData(u8, u16, struct UnkLinkRfuStruct_02022B14 *, u8 *);
+void rfu_REQ_configGameData(u8 r6, u16 r2, const u8 *r4, const u8 *r7);
 void rfu_REQ_startSearchChild(void);
 void rfu_REQ_pollSearchChild(void);
 void rfu_REQ_endSearchChild(void);
@@ -293,18 +294,18 @@ void rfu_REQ_CHILD_pollConnectRecovery(void);
 void rfu_REQ_CHILD_endConnectRecovery(void);
 void rfu_REQ_changeMasterSlave(void);
 void rfu_REQ_RFUStatus(void);
-void rfu_getRFUStatus(u8 *status);
-u8 *rfu_getSTWIRecvBuffer(void);
+u32 rfu_getRFUStatus(u8 *status);
+struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void);
 u8 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
 void rfu_clearSlot(u8 a0, u8 a1);
 void rfu_clearAllSlot(void);
 bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
-bool16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
+u16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
 bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);
 void rfu_REQ_disconnect(u8 who);
 void rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
 void rfu_NI_stopReceivingData(u8 who);
-u16 rfu_initializeAPI(u32 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
+u16 rfu_initializeAPI(struct Unk_3001190 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);
 void rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
 bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
@@ -318,12 +319,12 @@ void rfu_NI_setSendData(u8, u8, const void *, u32);
 void IntrSIO32(void);
 
 // librfu_stwi
-void STWI_init_all(struct RfuIntrStruct * interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
+void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void STWI_set_MS_mode(u8 mode);
 void STWI_init_Callback_M(void);
 void STWI_init_Callback_S(void);
-void STWI_set_Callback_M(void (*callbackM)());
-void STWI_set_Callback_S(void (*callbackS)());
+void STWI_set_Callback_M(void *callbackM);
+void STWI_set_Callback_S(void (*callbackS)(u16));
 void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
 void AgbRFU_SoftReset(void);
 void STWI_set_Callback_ID(u32 id);
@@ -333,7 +334,7 @@ void STWI_send_DataRxREQ(void);
 void STWI_send_MS_ChangeREQ(void);
 void STWI_send_StopModeREQ(void);
 void STWI_send_SystemStatusREQ(void);
-void STWI_send_GameConfigREQ(u8 *unk1, u8 *data);
+void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data);
 void STWI_send_ResetREQ(void);
 void STWI_send_LinkStatusREQ(void);
 void STWI_send_VersionStatusREQ(void);

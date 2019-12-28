@@ -1,4 +1,4 @@
- #ifndef GUARD_CONSTANTS_TRADE_H
+#ifndef GUARD_CONSTANTS_TRADE_H
 #define GUARD_CONSTANTS_TRADE_H
 
 // TODO: document trade.c and trade_scene.c with corresponding macros
@@ -115,4 +115,4 @@
 #define CANT_REGISTER_MON  1
 #define CANT_REGISTER_EGG  2
 
-#endif //GUARD_CONSTANTS_TRADE_H
+#endif // GUARD_CONSTANTS_TRADE_H

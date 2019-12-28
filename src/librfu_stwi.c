@@ -64,7 +64,7 @@ void AgbRFU_SoftReset(void)
     timerH = &REG_TMCNT_H(gRfuState->timerSelect);
     *timerH = 0;
     *timerL = 0;
-    *timerH = 0x83;
+    *timerH = TIMER_ENABLE | TIMER_1024CLK;
     while (*timerL <= 0x11)
         REG_RCNT = 0x80A2;
     *timerH = 3;
@@ -117,12 +117,13 @@ void STWI_init_Callback_S(void)
     STWI_set_Callback_S(NULL);
 }
 
-void STWI_set_Callback_M(void (*callbackM)())
+// The callback can take 2 or 3 arguments. 
+void STWI_set_Callback_M(void *callbackM)
 {
     gRfuState->callbackM = callbackM;
 }
 
-void STWI_set_Callback_S(void (*callbackS)())
+void STWI_set_Callback_S(void (*callbackS)(u16))
 {
     gRfuState->callbackS = callbackS;
 }
@@ -193,7 +194,7 @@ void STWI_send_ConfigStatusREQ(void)
     }
 }
 
-void STWI_send_GameConfigREQ(u8 *unk1, u8 *data)
+void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data)
 {
     u8 *packetBytes;
     s32 i;
@@ -496,7 +497,7 @@ static void STWI_intr_timer(void)
         gRfuState->timerActive = 1;
         STWI_stop_timer();
         STWI_reset_ClockCounter();
-        if (gRfuState->callbackM)
+        if (gRfuState->callbackM != NULL)
             gRfuState->callbackM(255, 0);
         break;
     }
@@ -546,7 +547,7 @@ static u16 STWI_init(u8 request)
     if (!REG_IME)
     {
         gRfuState->error = 6;
-        if (gRfuState->callbackM)
+        if (gRfuState->callbackM != NULL)
             gRfuState->callbackM(request, gRfuState->error);
         return TRUE;
     }
@@ -554,14 +555,14 @@ static u16 STWI_init(u8 request)
     {
         gRfuState->error = 2;
         gRfuState->unk_2c = FALSE;
-        if (gRfuState->callbackM)
+        if (gRfuState->callbackM != NULL)
             gRfuState->callbackM(request, gRfuState->error);
         return TRUE;
     }
     else if(!gRfuState->msMode)
     {
         gRfuState->error = 4;
-        if (gRfuState->callbackM)
+        if (gRfuState->callbackM != NULL)
             gRfuState->callbackM(request, gRfuState->error, gRfuState);
         return TRUE;
     }
@@ -617,14 +618,14 @@ static s32 STWI_restart_Command(void)
         {
             gRfuState->error = 1;
             gRfuState->unk_2c = 0;
-            if (gRfuState->callbackM)
+            if (gRfuState->callbackM != NULL)
                 gRfuState->callbackM(gRfuState->reqActiveCommand, gRfuState->error);
         }
         else
         {
             gRfuState->error = 1;
             gRfuState->unk_2c = 0;
-            if (gRfuState->callbackM)
+            if (gRfuState->callbackM != NULL)
                 gRfuState->callbackM(gRfuState->reqActiveCommand, gRfuState->error);
             gRfuState->state = 4; // TODO: what's 4
         }

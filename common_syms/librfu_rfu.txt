@@ -1,0 +1,7 @@
+gRfuState
+gRfuSlotStatusUNI
+gRfuSlotStatusNI
+gRfuLinkStatus
+gRfuStatic
+gRfuFixed
+gUnknown_3007470

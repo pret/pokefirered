@@ -3,6 +3,12 @@
 
 #include "main.h"
 
+/* TODOs:
+ * - documentation
+ * - check if any field needs to be volatile
+ * - decompile librfu_intr.s once arm support is back again
+ */
+
 enum
 {
     RFU_RESET = 0x10,
@@ -134,16 +140,25 @@ struct RfuIntrStruct
 
 struct RfuSlotStatusUNI
 {
-    u16 sendState;
-    u8 dataReadyFlag;
-    u8 bmSlot;
-    u16 payloadSize;
-    void *src; // TODO: is it correct? 
-    u16 recvState;
-    u16 errorCode;
-    u16 dataSize;
-    u8 newDataFlag;
-    u8 dataBlockFlag;
+    struct
+    {
+        struct UNISend
+        {
+            u16 state;
+            u8 dataReadyFlag;
+            u8 bmSlot;
+            u16 payloadSize;
+            const void *src;
+        } send;
+        struct UNIRecv
+        {
+            u16 state;
+            u16 errorCode;
+            u16 dataSize;
+            u8 newDataFlag;
+            u8 dataBlockFlag;
+        } recv;
+    } sub;
     void *recvBuffer;
     u32 recvBufferSize;
 };
@@ -152,16 +167,15 @@ struct NIComm
 {
     u16 state;
     u16 failCounter;
-    u32 nowP[4]; // ???
+    const u8 *nowP[4];
     u32 remainSize;
     u16 errorCode;
     u8 bmSlot;
-    u8 unk_1b;
     u8 recvAckFlag[4];
     u8 ack;
     u8 phase;
-    u8 n[4]; // ???
-    void *src;
+    u8 n[4];
+    const void *src;
     u8 bmSlotOrg;
     u8 dataType;
     u16 payloadSize;
@@ -170,16 +184,19 @@ struct NIComm
 
 struct RfuSlotStatusNI
 {
-    struct NIComm send;
-    struct NIComm recv;
+    struct
+    {
+        struct NIComm send;
+        struct NIComm recv;
+    } sub;
     void *recvBuffer;
-    void *recvBufferSize;
+    u32 recvBufferSize;
 };
 
 struct RfuFixed
 {
     void (*reqCallback)(u16, u16);
-    void *fastCopyPtr;
+    void (*fastCopyPtr)(const u8 **, u8 **, s32);
     u16 fastCopyBuffer[24];
     u32 fastCopyBuffer2[12];
     u32 LLFBuffer[29];
@@ -190,7 +207,7 @@ struct RfuStatic
 {
     u8 flags;
     u8 NIEndRecvFlag;
-    u8 RecvRenewalFlag;
+    u8 recvRenewalFlag;
     u8 commExistFlag;
     u8 recvErrorFlag;
     u8 recoveryBmSlot;
@@ -231,7 +248,7 @@ struct RfuLinkStatus
     u8 findParentCount;
     u8 watchInterval;
     u8 strength[4];
-    u8 LLFReadyFlag;
+    vu8 LLFReadyFlag;
     u8 remainLLFrameSizeParent;
     u8 remainLLFrameSizeChild[4];
     struct RfuTgtData partner[4];
@@ -275,7 +292,7 @@ void rfu_REQ_sendData(u8);
 void rfu_setMSCCallback(void (*func)(u16));
 void rfu_setREQCallback(void (*func)(u16, u16));
 bool8 rfu_getMasterSlave(void);
-void rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
+s32 rfu_REQBN_watchLink(u16 a0, u8 *a1, u8 *a2, u8 *a3);
 u16 rfu_syncVBlank(void);
 void rfu_REQ_reset(void);
 void rfu_REQ_configSystem(u16, u8, u8);
@@ -296,24 +313,24 @@ void rfu_REQ_changeMasterSlave(void);
 void rfu_REQ_RFUStatus(void);
 u32 rfu_getRFUStatus(u8 *status);
 struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void);
-u8 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
-void rfu_clearSlot(u8 a0, u8 a1);
+s32 rfu_NI_CHILD_setSendGameName(u8 a0, u8 a1);
+s32 rfu_clearSlot(u8 a0, u8 a1);
 void rfu_clearAllSlot(void);
-bool16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
+u16 rfu_CHILD_getConnectRecoveryStatus(u8 *status);
 u16 rfu_getConnectParentStatus(u8 *status, u8 *a1);
 bool16 rfu_UNI_PARENT_getDRAC_ACK(u8 *a0);
 void rfu_REQ_disconnect(u8 who);
-void rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
-void rfu_NI_stopReceivingData(u8 who);
+s32 rfu_changeSendTarget(u8 a0, u8 who, u8 a2);
+s32 rfu_NI_stopReceivingData(u8 who);
 u16 rfu_initializeAPI(struct Unk_3001190 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam);
 void rfu_setTimerInterrupt(u8 which, IntrFunc *intr);
-void rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
-bool16 rfu_UNI_setSendData(u8 flag, void *ptr, u8 size);
+s32 rfu_setRecvBuffer(u8 a0, u8 a1, void *a2, size_t a3);
+s32 rfu_UNI_setSendData(u8 flag, const void *ptr, u8 size);
 void rfu_REQ_recvData(void);
 void rfu_UNI_readySendData(u8 a0);
 void rfu_UNI_clearRecvNewDataFlag(u8 a0);
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
-void rfu_NI_setSendData(u8, u8, const void *, u32);
+s32 rfu_NI_setSendData(u8, u8, const void *, u32);
 
 // librfu_intr
 void IntrSIO32(void);

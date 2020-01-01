@@ -1,6 +1,35 @@
 #include "global.h"
 #include "librfu.h"
 
+struct RfuHeader
+{
+    u8 unk00;
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u8 unk04;
+    u8 unk05;
+    u8 unk06;
+    u8 unk07;
+    u8 unk08;
+    u8 unk09;
+    u8 unk0A;
+    u8 unk0B;
+    u8 unk0C;
+    u16 unk0E;
+};
+
+struct RfuTest
+{
+    u8 unk00;
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u8 unk04;
+    u8 unk05;
+    u16 unk06;
+};
+
 void rfu_CB_defaultCallback(u8, u16);
 void rfu_CB_reset(u8, u16);
 void rfu_CB_configGameData(u8, u16);
@@ -19,6 +48,7 @@ void rfu_CB_sendData3(u8, u16);
 void rfu_CB_recvData(u8, u16);
 s32 sub_81E349C(u8);
 void rfu_enableREQCallback(bool8);
+void rfu_STC_clearAPIVariables(void);
 void rfu_STC_readChildList(void);
 void rfu_STC_readParentCandidateList(void);
 void rfu_STC_REQ_callback(u8, u16);
@@ -32,10 +62,13 @@ u16 rfu_STC_NI_constructLLSF(u8, u8 **, struct NIComm *);
 u16 rfu_STC_UNI_constructLLSF(u8, u8 **);
 void rfu_STC_PARENT_analyzeRecvPacket(void);
 void rfu_STC_CHILD_analyzeRecvPacket(void);
-u16 rfu_STC_analyzeLLSF(u8, u8 *, u16);
+u16 rfu_STC_analyzeLLSF(u8, const u8 *, u16);
+void rfu_STC_UNI_receive(u8, const struct RfuTest *, const u8 *);
+void rfu_STC_NI_receive_Receiver(u8, const struct RfuTest *, const u8 *);
+void rfu_STC_NI_receive_Sender(u8, u8, const struct RfuTest *, UNUSED const u8 *);
 
 extern const char _Str_RFU_MBOOT[];
-extern const u8 _Str_RfuHeader[];
+extern const struct RfuHeader _Str_RfuHeader[2];
 
 struct RfuStruct *gRfuState;
 ALIGNED(8) struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
@@ -1284,7 +1317,7 @@ u16 rfu_STC_setSendData_org(u8 r6, u8 r3, u8 r8, const void *sp00, u32 sp28)
         r9 = &gRfuLinkStatus->remainLLFrameSizeParent;
     else if (gRfuLinkStatus->connMode == 0)
         r9 = &gRfuLinkStatus->remainLLFrameSizeChild[r2];
-    r4 = _Str_RfuHeader[16 * gRfuLinkStatus->connMode];
+    r4 = _Str_RfuHeader[gRfuLinkStatus->connMode].unk00;
     if (r8 > *r9 || r8 <= r4)
         return 0x500;
     sp04 = REG_IME;
@@ -1644,7 +1677,7 @@ u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
     u32 sp00;
     u8 i;
     u8 *r2;
-    const u8 *r8 = &_Str_RfuHeader[16 * gRfuLinkStatus->connMode];
+    const struct RfuHeader *r8 = &_Str_RfuHeader[gRfuLinkStatus->connMode];
 
     if (r4->state == 0x8022)
     {
@@ -1673,15 +1706,15 @@ u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
         else
             r5 = r4->remainSize;
     }
-    sp00 = (r4->state & 0xF) << r8[3]
-         | r4->ack << r8[4]
-         | r4->phase << r8[5]
-         | r4->n[r4->phase] << r8[6]
+    sp00 = (r4->state & 0xF) << r8->unk03
+         | r4->ack << r8->unk04
+         | r4->phase << r8->unk05
+         | r4->n[r4->phase] << r8->unk06
          | r5;
     if (gRfuLinkStatus->connMode == 1)
         sp00 |= r4->bmSlot << 18;
     r2 = (u8 *)&sp00;
-    for (i = 0; i < *r8; ++i)
+    for (i = 0; i < r8->unk00; ++i)
         *(*r12)++ = *r2++;
     if (r5 != 0)
     {
@@ -1699,12 +1732,12 @@ u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
         gRfuLinkStatus->LLFReadyFlag = 1;
     else
         gRfuLinkStatus->LLFReadyFlag |= 1 << r10;
-    return r5 + *r8;
+    return r5 + r8->unk00;
 }
 
 u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
 {
-    const u8 *r5;
+    const struct RfuHeader *r5;
     const u8 *sp04;
     u32 sp00;
     u8 *r2;
@@ -1713,13 +1746,13 @@ u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
 
     if (!r4->dataReadyFlag || !r4->bmSlot)
         return 0;
-    r5 = &_Str_RfuHeader[16 * gRfuLinkStatus->connMode];
-    sp00 = (r4->state & 0xF) << r5[3]
+    r5 = &_Str_RfuHeader[gRfuLinkStatus->connMode];
+    sp00 = (r4->state & 0xF) << r5->unk03
          | r4->payloadSize;
     if (gRfuLinkStatus->connMode == 1)
         sp00 |= r4->bmSlot << 18;
     r2 = (u8 *)&sp00;
-    for (i = 0; i < *r5; ++i)
+    for (i = 0; i < r5->unk00; ++i)
         *(*r6)++ = *r2++;
     sp04 = r4->src;
     gRfuFixed->fastCopyPtr(&sp04, r6, r4->payloadSize);
@@ -1727,7 +1760,7 @@ u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
         gRfuLinkStatus->LLFReadyFlag = 16;
     else
         gRfuLinkStatus->LLFReadyFlag |= 16 << r8;
-    return *r5 + r4->payloadSize;
+    return r5->unk00 + r4->payloadSize;
 }
 
 void rfu_REQ_recvData(void)
@@ -1824,4 +1857,116 @@ void rfu_STC_CHILD_analyzeRecvPacket(void)
         r5 += r0;
         r4 -= r0;
     } while (!(r4 & 0x8000));
+}
+
+u16 rfu_STC_analyzeLLSF(u8 r12, const u8 *r7, u16 r3)
+{
+    struct RfuTest sp00;
+    const struct RfuHeader *r6;
+    u32 r5;
+    u8 r4;
+    u32 r0;
+    u16 r10;
+
+    r6 = &_Str_RfuHeader[~gRfuLinkStatus->connMode & 1];
+    if (r3 < r6->unk00)
+        return r3;
+    r5 = 0;
+    for (r4 = 0; r4 < r6->unk00; ++r4)
+        r5 |= *r7++ << 8 * r4;
+    sp00.unk00 = (r5 >> r6->unk01) & r6->unk07;
+    sp00.unk01 = (r5 >> r6->unk02) & r6->unk08;
+    sp00.unk02 = (r5 >> r6->unk03) & r6->unk09;
+    sp00.unk03 = (r5 >> r6->unk04) & r6->unk0A;
+    sp00.unk04 = (r5 >> r6->unk05) & r6->unk0B;
+    sp00.unk05 = (r5 >> r6->unk06) & r6->unk0C;
+    sp00.unk06 = (r5  & r6->unk0E) & r5;
+    r10 = sp00.unk06 + r6->unk00;
+    if (sp00.unk00 == 0)
+    {
+        if (gRfuLinkStatus->connMode == 1)
+        {
+            if ((gRfuLinkStatus->connSlotFlag >> r12) & 1)
+            {
+                if (sp00.unk02 == 4)
+                {
+                    rfu_STC_UNI_receive(r12, &sp00, r7);
+                }
+                else if (sp00.unk03 == 0)
+                {
+                    rfu_STC_NI_receive_Receiver(r12, &sp00, r7);
+                }
+                else
+                {
+                    for (r4 = 0; r4 < NELEMS(gRfuSlotStatusNI); ++r4)
+                        if (((gRfuSlotStatusNI[r4]->sub.send.bmSlot >> r12) & 1)
+                        && ((gRfuLinkStatus->sendSlotNIFlag >> r12) & 1))
+                            break;
+                    if (r4 <= 3)
+                        rfu_STC_NI_receive_Sender(r4, r12, &sp00, r7);
+                }
+            }
+        }
+        else
+        {
+            s32 r5 = gRfuLinkStatus->connSlotFlag & sp00.unk01;
+
+            if (r5)
+            {
+                for (r4 = 0; r4 < 4; ++r4)
+                {
+                    if ((r5 >> r4) & 1)
+                    {
+                        if (sp00.unk02 == 4)
+                            rfu_STC_UNI_receive(r4, &sp00, r7);
+                        else if (sp00.unk03 == 0)
+                            rfu_STC_NI_receive_Receiver(r4, &sp00, r7);
+                        else if ((gRfuLinkStatus->sendSlotNIFlag >> r4) & 1)
+                            rfu_STC_NI_receive_Sender(r4, r4, &sp00, r7);
+                    }
+                }
+            }
+        }
+    }
+    return r10;
+}
+
+void rfu_STC_UNI_receive(u8 r7, const struct RfuTest *r6, const u8 *sp00)
+{
+    u8 *sp04;
+    u32 r2;
+    struct RfuSlotStatusUNI *r3 = gRfuSlotStatusUNI[r7];
+    struct UNIRecv *r5 = &r3->sub.recv;
+
+    r5->errorCode = 0;
+    if (gRfuSlotStatusUNI[r7]->recvBufferSize < r6->unk06)
+    {
+        r3->sub.recv.state = 73;
+        r5->errorCode = 0x701;
+    }
+    else
+    { 
+        if (r5->dataBlockFlag)
+        {
+            if (r5->newDataFlag)
+            {
+                r5->errorCode = 0x709;
+                goto _081E2F0E;
+            }
+        }
+        else
+        {
+            if (r5->newDataFlag)
+                r5->errorCode = 0x708;
+        }
+        r5->state = 0x8042;
+        r2 = r5->dataSize = r6->unk06;
+        sp04 = gRfuSlotStatusUNI[r7]->recvBuffer;
+        gRfuFixed->fastCopyPtr(&sp00, &sp04, r2);
+        r5->newDataFlag = 1;
+        r5->state = 0;
+    }
+_081E2F0E:
+    if (r5->errorCode)
+        gRfuStatic->recvErrorFlag |= 16 << r7;
 }

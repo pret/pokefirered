@@ -284,7 +284,6 @@ extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
 extern struct Unk_3007470 gUnknown_3007470;
 
 // librfu_rfu
-void rfu_STC_clearAPIVariables(void);
 void rfu_REQ_stopMode(void);
 u16 rfu_waitREQComplete(void);
 s32 rfu_REQBN_softReset_and_checkID(void);

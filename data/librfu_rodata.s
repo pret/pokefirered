@@ -11,6 +11,7 @@ _Str_RfuHeader::
 	.byte 3, 22, 18, 14, 13, 9, 11, 3
 	.byte 15, 15, 1, 3, 3, 0, 0x7f, 0
 
+	@ .ascii "RFU_V1024"
 	.ascii "RFU_V"
 	.byte VERSION_MAJOR + 0x30
 	.byte VERSION_MINOR + 0x30

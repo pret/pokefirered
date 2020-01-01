@@ -128,9 +128,9 @@ void STWI_set_Callback_S(void (*callbackS)(u16))
     gRfuState->callbackS = callbackS;
 }
 
-void STWI_set_Callback_ID(u32 id)
+void STWI_set_CallbackUnk(void (*func)(void))
 {
-    gRfuState->callbackId = id;
+    gRfuState->unk_20 = func;
 }
 
 u16 STWI_poll_CommandEnd(void)

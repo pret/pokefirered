@@ -3,9 +3,11 @@
 
 #include "main.h"
 
-/* TODOs:
+/* TODOs: 
+ * - decide file boundaries
  * - documentation
  * - check if any field needs to be volatile
+ * - check if field names make sense
  * - decompile librfu_intr.s once arm support is back again
  */
 
@@ -124,7 +126,7 @@ struct RfuStruct
     u8 unk_17;
     void (*callbackM)();
     void (*callbackS)(u16);
-    u32 callbackId;
+    void (*unk_20)(void);
     union RfuPacket *txPacket;
     union RfuPacket *rxPacket;
     vu8 unk_2c;
@@ -168,7 +170,7 @@ struct NIComm
     u16 state;
     u16 failCounter;
     const u8 *nowP[4];
-    u32 remainSize;
+    s32 remainSize;
     u16 errorCode;
     u8 bmSlot;
     u8 recvAckFlag[4];
@@ -261,7 +263,8 @@ struct Unk_3007470
     u8 unk1;
     u16 unk2;
     u16 unk4;
-    u8 fill6[4];
+    u16 unk6;
+    u16 unk8; // unused
     u16 unkA;
 };
 
@@ -330,6 +333,7 @@ void rfu_UNI_readySendData(u8 a0);
 void rfu_UNI_clearRecvNewDataFlag(u8 a0);
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
 s32 rfu_NI_setSendData(u8, u8, const void *, u32);
+void rfu_REQ_noise(void);
 
 // librfu_intr
 void IntrSIO32(void);
@@ -343,7 +347,7 @@ void STWI_set_Callback_M(void *callbackM);
 void STWI_set_Callback_S(void (*callbackS)(u16));
 void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
 void AgbRFU_SoftReset(void);
-void STWI_set_Callback_ID(u32 id);
+void STWI_set_CallbackUnk(void (*func)(void));
 u16 STWI_read_status(u8 index);
 u16 STWI_poll_CommandEnd(void);
 void STWI_send_DataRxREQ(void);

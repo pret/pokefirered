@@ -1,5 +1,7 @@
 #include "global.h"
 #include "palette.h"
+#include "gpu_regs.h"
+#include "scanline_effect.h"
 #include "task.h"
 #include "malloc.h"
 #include "overworld.h"
@@ -17,7 +19,10 @@ struct UnkStruct_20399D4
 {
     u8 filler_0000[0x0026];
     u16 field_0026[5][600];
-    u8 filler_1796[0x3000];
+    // Inefficiency: these should be u8 or have half the elements each
+    u16 field_1796[BG_SCREEN_SIZE];
+    u16 field_2796[BG_SCREEN_SIZE];
+    u16 field_3796[BG_SCREEN_SIZE];
     u8 field_4796;
     u8 field_4797[4];
     u8 field_479B;
@@ -54,8 +59,10 @@ void sub_80C08B4(void);
 void sub_80C08E0(void);
 void sub_80C08F4(void);
 void sub_80C0904(void);
+void sub_80C0A2C(void);
 void sub_80C0A6C(void);
 void sub_80C0A88(u8 a0);
+void sub_80C0AB8(void);
 void sub_80C0B18(void);
 void sub_80C0B9C(void);
 void sub_80C0BB0(void);
@@ -65,25 +72,30 @@ u8 sub_80C0E20(void);
 void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C2208(u8 taskId, TaskFunc taskFunc);
+void sub_80C25BC(void);
 void sub_80C2C1C(u8 taskId);
 void sub_80C3008(u16 a0, u16 a1);
 void sub_80C3154(u8 a0);
 void sub_80C3178(void);
-u8 sub_80C3400(void);
-u16 sub_80C3508(void);
-u16 sub_80C3514(void);
-u16 sub_80C3580(void);
+void sub_80C3188(void);
 u8 sub_80C3AC8(u8 a0);
+u8 sub_80C3400(void);
 u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
 void sub_80C41D8(u16 a0, u16 a1);
 void sub_80C4324(u8 a0);
 void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C4348(void);
 void sub_80C48BC(u8 a0, u8 a1, u8 a2);
 void sub_80C4960(u8 a0, u8 a1, u8 a2);
+void sub_80C4A04(void);
+void sub_80C4D30(void);
 void sub_80C4E18(const u8 *str);
 void sub_80C4E74(const u8 *str);
 void sub_80C4ED0(bool8 a0);
 void sub_80C4F08(u8 taskId);
+u16 sub_80C3508(void);
+u16 sub_80C3514(void);
+u16 sub_80C3580(void);
 
 #include "data/text/map_section_names.h"
 
@@ -96,6 +108,8 @@ extern const u32 gUnknown_83F0C0C[];
 extern const u32 gUnknown_83F0CF0[];
 extern const u32 gUnknown_83F1978[];
 extern const u32 gUnknown_83F19A0[];
+extern const struct BgTemplate gUnknown_83F1A50[4];
+extern const struct WindowTemplate gUnknown_83F1A60[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
 
@@ -459,6 +473,129 @@ void sub_80C04E4(u8 taskId)
         {
             sub_80C0820(taskId);
         }
+        break;
+    }
+}
+
+void sub_80C07D0(TaskFunc taskFunc)
+{
+    gUnknown_20399D4->field_47B8 = taskFunc;
+}
+
+TaskFunc sub_80C07E4(void)
+{
+    return gUnknown_20399D4->field_47B8;
+}
+
+void sub_80C07F8(u8 taskId)
+{
+    gTasks[taskId].func = gUnknown_20399D4->field_47B8;
+}
+
+void sub_80C0820(u8 taskId)
+{
+    if (sub_80C0E04(2) == TRUE)
+        sub_80C25BC();
+    sub_80C4A04();
+    sub_80C3188();
+    sub_80C4348();
+    sub_80C4D30();
+    DestroyTask(taskId);
+    FreeAllWindowBuffers();
+    if (gUnknown_20399D4->field_47BC == NULL)
+        SetMainCallback2(gMain.savedCallback);
+    else
+        SetMainCallback2(gUnknown_20399D4->field_47BC);
+    if (gUnknown_20399D4 != NULL)
+    {
+        FREE_AND_SET_NULL(gUnknown_20399D4);
+    }
+}
+
+void sub_80C0898(void)
+{
+    if (gUnknown_20399D4 != NULL)
+    {
+        FREE_AND_SET_NULL(gUnknown_20399D4);
+    }
+}
+
+void sub_80C08B4(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_80C08CC(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_80C08E0(void)
+{
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+}
+
+void sub_80C08F4(void)
+{
+    SetVBlankCallback(sub_80C08CC);
+}
+
+void sub_80C0904(void)
+{
+    DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
+    DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
+    DmaFill16Defvars(3, 0, (void *)PLTT, PLTT_SIZE);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, gUnknown_83F1A50, NELEMS(gUnknown_83F1A50));
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+    InitWindows(gUnknown_83F1A60);
+    DeactivateAllTextPrinters();
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+    sub_80C0A2C();
+    sub_80C0AB8();
+}
+
+void sub_80C0A2C(void)
+{
+    SetBgTilemapBuffer(0, gUnknown_20399D4->field_1796);
+    SetBgTilemapBuffer(1, gUnknown_20399D4->field_2796);
+    SetBgTilemapBuffer(2, gUnknown_20399D4->field_3796);
+}
+
+void sub_80C0A6C(void)
+{
+    ResetSpriteData();
+    ResetPaletteFade();
+    FreeAllSpritePalettes();
+    ResetTasks();
+    ScanlineEffect_Stop();
+}
+
+void sub_80C0A88(u8 mode)
+{
+    switch (mode)
+    {
+    case 0:
+        ShowBg(0);
+        ShowBg(3);
+        break;
+    case 1:
+        HideBg(0);
+        HideBg(3);
         break;
     }
 }

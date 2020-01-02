@@ -5,120 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80C0AB8
-sub_80C0AB8: @ 80C0AB8
-	push {r4,lr}
-	bl sub_80C4BE4
-	movs r0, 0
-	movs r1, 0x11
-	movs r2, 0xC0
-	bl sub_80C4C2C
-	movs r0, 0x6
-	bl sub_80C4C48
-	movs r0, 0x39
-	movs r1, 0x39
-	bl sub_80C4C74
-	movs r0, 0x1B
-	bl sub_80C4C88
-	ldr r4, _080C0B14 @ =gUnknown_83F1B0C
-	movs r0, 0
-	adds r1, r4, 0
-	bl sub_80C4CF0
-	adds r4, 0x8
-	movs r0, 0x1
-	adds r1, r4, 0
-	bl sub_80C4CF0
-	movs r0, 0
-	movs r1, 0
-	bl sub_80C4C9C
-	bl sub_80C3580
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xC5
-	beq _080C0B0C
-	movs r0, 0x1
-	movs r1, 0
-	bl sub_80C4C9C
-_080C0B0C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C0B14: .4byte gUnknown_83F1B0C
-	thumb_func_end sub_80C0AB8
-
-	thumb_func_start sub_80C0B18
-sub_80C0B18: @ 80C0B18
-	push {r4,r5,lr}
-	sub sp, 0xC
-	movs r0, 0
-	bl ClearWindowTilemap
-	movs r0, 0
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	bl sub_80C3520
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xC5
-	bne _080C0B44
-	ldr r1, _080C0B40 @ =gUnknown_83F1B1C
-	movs r0, 0
-	bl sub_80C4CF0
-	b _080C0B88
-	.align 2, 0
-_080C0B40: .4byte gUnknown_83F1B1C
-_080C0B44:
-	ldr r5, _080C0B90 @ =gUnknown_20399D4
-	ldr r4, [r5]
-	bl sub_80C3520
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0
-	bl GetMapName
-	ldr r0, _080C0B94 @ =gUnknown_83F1A90
-	str r0, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	ldr r0, [r5]
-	str r0, [sp, 0x8]
-	movs r0, 0
-	movs r1, 0x2
-	movs r2, 0x2
-	movs r3, 0x2
-	bl AddTextPrinterParameterized3
-	movs r0, 0
-	bl PutWindowTilemap
-	movs r0, 0
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldr r1, _080C0B98 @ =gUnknown_83F1B0C
-	movs r0, 0
-	bl sub_80C4CF0
-_080C0B88:
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C0B90: .4byte gUnknown_20399D4
-_080C0B94: .4byte gUnknown_83F1A90
-_080C0B98: .4byte gUnknown_83F1B0C
-	thumb_func_end sub_80C0B18
-
-	thumb_func_start sub_80C0B9C
-sub_80C0B9C: @ 80C0B9C
-	push {lr}
-	ldr r1, _080C0BAC @ =gUnknown_83F1B14
-	movs r0, 0x1
-	bl sub_80C4CF0
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C0BAC: .4byte gUnknown_83F1B14
-	thumb_func_end sub_80C0B9C
-
 	thumb_func_start sub_80C0BB0
 sub_80C0BB0: @ 80C0BB0
 	push {r4-r6,lr}
@@ -973,7 +859,7 @@ sub_80C1280: @ 80C1280
 	bl sub_80C4E74
 	bl sub_80C0AB8
 	bl sub_80C0B9C
-	ldr r1, _080C12E8 @ =gUnknown_83F1B1C
+	ldr r1, _080C12E8 @ =gUnknown_83F1B0C+16
 	movs r0, 0
 	bl sub_80C4CF0
 	ldr r0, [r4]
@@ -992,7 +878,7 @@ _080C12D8: .4byte gUnknown_20399D8
 _080C12DC: .4byte 0x00001cd0
 _080C12E0: .4byte gUnknown_8418EB5
 _080C12E4: .4byte gUnknown_8418EA7
-_080C12E8: .4byte gUnknown_83F1B1C
+_080C12E8: .4byte gUnknown_83F1B0C+16
 	thumb_func_end sub_80C1280
 
 	thumb_func_start sub_80C12EC

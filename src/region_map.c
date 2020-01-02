@@ -10,6 +10,7 @@
 #include "window.h"
 #include "sound.h"
 #include "new_menu_helpers.h"
+#include "menu.h"
 #include "strings.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
@@ -17,7 +18,7 @@
 
 struct UnkStruct_20399D4
 {
-    u8 filler_0000[0x0026];
+    u8 field_0000[38];
     u16 field_0026[5][600];
     // Inefficiency: these should be u8 or have half the elements each
     u16 field_1796[BG_SCREEN_SIZE];
@@ -66,7 +67,14 @@ void sub_80C0AB8(void);
 void sub_80C0B18(void);
 void sub_80C0B9C(void);
 void sub_80C0BB0(void);
+void sub_80C4BE4(void);
+void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
+void sub_80C4C48(u16 a0);
+void sub_80C4C74(u16 a0, u16 a1);
+void sub_80C4C88(u16 a0);
+void sub_80C4C9C(u8 a0, u8 a1);
 void sub_80C0CC8(u8 bg, u16 *map);
+void sub_80C4CF0(u8 a0, const u16 *a1);
 bool8 sub_80C0E04(u8 a0);
 u8 sub_80C0E20(void);
 void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
@@ -85,6 +93,7 @@ void sub_80C41D8(u16 a0, u16 a1);
 void sub_80C4324(u8 a0);
 void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C4348(void);
+u16 sub_80C3520(void);
 void sub_80C48BC(u8 a0, u8 a1, u8 a2);
 void sub_80C4960(u8 a0, u8 a1, u8 a2);
 void sub_80C4A04(void);
@@ -110,8 +119,10 @@ extern const u32 gUnknown_83F1978[];
 extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
 extern const struct WindowTemplate gUnknown_83F1A60[];
+extern const u8 gUnknown_83F1A90[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
+extern const u16 gUnknown_83F1B0C[3][4];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 {
@@ -455,6 +466,7 @@ void sub_80C04E4(u8 taskId)
         if (sub_80C0E04(2) == 1)
         {
             sub_80C2C1C(taskId);
+            // FIXME: goto required to match
             // gUnknown_20399D4->field_47A0++;
             goto _080C0798;
         }
@@ -598,4 +610,41 @@ void sub_80C0A88(u8 mode)
         HideBg(3);
         break;
     }
+}
+
+void sub_80C0AB8(void)
+{
+    sub_80C4BE4();
+    sub_80C4C2C(0, 0x11, 0xc0);
+    sub_80C4C48(6);
+    sub_80C4C74(0x39, 0x39);
+    sub_80C4C88(0x1b);
+    sub_80C4CF0(0, gUnknown_83F1B0C[0]);
+    sub_80C4CF0(1, gUnknown_83F1B0C[1]);
+    sub_80C4C9C(0, 0);
+    if (sub_80C3580() != MAPSEC_NONE)
+        sub_80C4C9C(1, 0);
+}
+
+void sub_80C0B18(void)
+{
+    ClearWindowTilemap(0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    if (sub_80C3520() == MAPSEC_NONE)
+    {
+        sub_80C4CF0(0, gUnknown_83F1B0C[2]);
+    }
+    else
+    {
+        GetMapName(gUnknown_20399D4->field_0000, sub_80C3520(), 0);
+        AddTextPrinterParameterized3(0, 2, 2, 2, gUnknown_83F1A90, 0, gUnknown_20399D4->field_0000);
+        PutWindowTilemap(0);
+        CopyWindowToVram(0, 2);
+        sub_80C4CF0(0, gUnknown_83F1B0C[0]);
+    }
+}
+
+void sub_80C0B9C(void)
+{
+    sub_80C4CF0(1, gUnknown_83F1B0C[1]);
 }

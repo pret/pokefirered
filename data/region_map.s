@@ -308,11 +308,7 @@ gUnknown_83F1B00:: @ 83F1B00
 
 gUnknown_83F1B0C:: @ 83F1B0C
 	.2byte 0x0018, 0x0010, 0x0090, 0x0020
-
-gUnknown_83F1B14:: @ 83F1B14
 	.2byte 0x0018, 0x0020, 0x0090, 0x0030
-
-gUnknown_83F1B1C:: @ 83F1B1C
 	.2byte 0x0000, 0x0000, 0x0000, 0x0000
 
 gUnknown_83F1B24:: @ 83F1B24

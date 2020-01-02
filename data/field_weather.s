@@ -391,5 +391,5 @@ gUnknown_83C68B8::
 gUnknown_83C68BC:: @ 83C68BC
 	spr_template 4613, 4608, gOamData_AffineOff_ObjNormal_8x8, gUnknown_83C68B8, NULL, gDummySpriteAffineAnimTable, unc_0807DAB4
 
-gUnknown_83C68D4:: @ 83C68D4
+sFlashLevelPixelRadii:: @ 83C68D4
 	.2byte 0x00c8, 0x0048, 0x0038, 0x0028, 0x0018, 0x0000

@@ -8,6 +8,7 @@
 #include "window.h"
 #include "sound.h"
 #include "new_menu_helpers.h"
+#include "strings.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/region_map.h"
@@ -47,6 +48,8 @@ void sub_80C0100(void);
 bool8 sub_80C0238(void);
 void sub_80C03E8(void);
 void sub_80C04E4(u8 taskId);
+void sub_80C07F8(u8 taskId);
+void sub_80C0820(u8 taskId);
 void sub_80C08B4(void);
 void sub_80C08E0(void);
 void sub_80C08F4(void);
@@ -54,17 +57,32 @@ void sub_80C0904(void);
 void sub_80C0A6C(void);
 void sub_80C0A88(u8 a0);
 void sub_80C0B18(void);
+void sub_80C0B9C(void);
 void sub_80C0BB0(void);
 void sub_80C0CC8(u8 bg, u16 *map);
 bool8 sub_80C0E04(u8 a0);
 u8 sub_80C0E20(void);
+void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C2208(u8 taskId, TaskFunc taskFunc);
+void sub_80C2C1C(u8 taskId);
 void sub_80C3008(u16 a0, u16 a1);
+void sub_80C3154(u8 a0);
+void sub_80C3178(void);
+u8 sub_80C3400(void);
 u16 sub_80C3508(void);
 u16 sub_80C3514(void);
+u16 sub_80C3580(void);
 u8 sub_80C3AC8(u8 a0);
 u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
 void sub_80C41D8(u16 a0, u16 a1);
+void sub_80C4324(u8 a0);
 void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C48BC(u8 a0, u8 a1, u8 a2);
+void sub_80C4960(u8 a0, u8 a1, u8 a2);
+void sub_80C4E18(const u8 *str);
+void sub_80C4E74(const u8 *str);
+void sub_80C4ED0(bool8 a0);
 void sub_80C4F08(u8 taskId);
 
 #include "data/text/map_section_names.h"
@@ -321,5 +339,126 @@ void sub_80C0450(void)
             PlaySE(SE_W255);
         else if (sub_80C3508() == 21 && sub_80C3514() == 13)
             PlaySE(SE_W255);
+    }
+}
+
+void sub_80C04E4(u8 taskId)
+{
+    switch (gUnknown_20399D4->field_47A0)
+    {
+    case 0:
+        sub_80C4398(sub_80C0E20(), taskId, gUnknown_20399D4->field_47B8);
+        sub_80C3008(0, 0);
+        sub_80C41D8(1, 1);
+        gUnknown_20399D4->field_47A0++;
+        break;
+    case 1:
+        if (gUnknown_20399D4->field_4797[2] == 1)
+        {
+            sub_80C2208(taskId, gUnknown_20399D4->field_47B8);
+        }
+        else
+        {
+            ShowBg(0);
+            ShowBg(3);
+            ShowBg(1);
+            sub_80C4E18(gUnknown_8418EB5);
+            sub_80C4E74(gUnknown_8418E8B);
+            sub_80C4ED0(FALSE);
+            sub_80C4324(0);
+            sub_80C3154(0);
+            sub_80C48BC(sub_80C0E20(), 25, 0);
+            sub_80C4960(sub_80C0E20(), 25, 0);
+        }
+        gUnknown_20399D4->field_47A0++;
+        break;
+    case 2:
+        if (!gPaletteFade.active && !IsDma3ManagerBusyWithBgCopy())
+        {
+            sub_80C0B18();
+            PutWindowTilemap(0);
+            sub_80C0BB0();
+            PutWindowTilemap(1);
+            gUnknown_20399D4->field_47A0++;
+        }
+        break;
+    case 3:
+        switch (sub_80C3400())
+        {
+        case 1:
+            sub_80C3178();
+            break;
+        case 3:
+            sub_80C0B18();
+            sub_80C0BB0();
+            sub_80C0B9C();
+            sub_80C0450();
+            if (sub_80C3580() != MAPSEC_NONE)
+            {
+                if (sub_80C0E04(1) == TRUE)
+                {
+                    if (sub_80C3AC8(1) == 2)
+                    {
+                        sub_80C4E74(gUnknown_8418E8D);
+                    }
+                    else
+                    {
+                        sub_80C4E74(gUnknown_8418E8B);
+                    }
+                }
+            }
+            else
+            {
+                if (sub_80C3508() == 21 && sub_80C3514() == 11 && sub_80C0E04(0) == TRUE)
+                {
+                    sub_80C4E74(gUnknown_8418EA7);
+                }
+                else if (sub_80C3508() == 21 && sub_80C3514() == 13)
+                {
+                    sub_80C4E74(gUnknown_8418E95);
+                }
+                else
+                {
+                    sub_80C4E74(gUnknown_8418E8B);
+                }
+            }
+            break;
+        case 4:
+            if (sub_80C3AC8(1) == 2 && gUnknown_20399D4->field_4797[1] == 1)
+            {
+                sub_80C195C(0, taskId, sub_80C07F8);
+            }
+            break;
+        case 5:
+            sub_80C0E70(gUnknown_20399D4->field_479B, taskId, sub_80C07F8);
+            break;
+        case 6:
+            gUnknown_20399D4->field_47A0++;
+            break;
+        }
+        break;
+    case 4:
+        if (sub_80C0E04(2) == 1)
+        {
+            sub_80C2C1C(taskId);
+            // gUnknown_20399D4->field_47A0++;
+            goto _080C0798;
+        }
+        else
+        {
+            gUnknown_20399D4->field_47A0++;
+        }
+        break;
+    case 5:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    _080C0798:
+        gUnknown_20399D4->field_47A0++;
+        break;
+    default:
+        if (!gPaletteFade.active)
+        {
+            sub_80C0820(taskId);
+        }
+        break;
     }
 }

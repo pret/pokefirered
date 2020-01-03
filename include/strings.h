@@ -1007,8 +1007,8 @@ extern const u8 gText_LinkCableBattles[];
 extern const u8 gUnknown_8418EB5[];
 extern const u8 gUnknown_8418E8B[];
 extern const u8 gUnknown_8418E8D[];
-extern const u8 gUnknown_8418E8B[];
-extern const u8 gUnknown_8418EA7[];
 extern const u8 gUnknown_8418E95[];
+extern const u8 gUnknown_8418EA7[];
+extern const u8 gUnknown_8418EB0[];
 
 #endif //GUARD_STRINGS_H

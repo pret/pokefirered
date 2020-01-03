@@ -41,13 +41,27 @@ struct UnkStruct_20399D4
     u8 filler_47B2[6];
     TaskFunc field_47B8;
     MainCallback field_47BC;
-};
+}; // size = 0x47C0
 
 struct UnkStruct_20399D8
 {
-    u8 filler_0000[0x1CCA];
+    u8 field_0000[0x1000];
+    u8 field_1000[0x4B0];
+    u8 filler_14B0[0x408];
+    u16 field_18B8;
+    u8 filler_18BA[0x40A];
+    u16 field_1CC4;
+    u8 filler_1CC6[0x2];
+    u8 field_1CC8;
+    u8 field_1CC9;
     u8 field_1CCA;
-};
+    u8 field_1CCB;
+    u8 field_1CCC;
+    u8 field_1CCD;
+    u16 field_1CCE;
+    TaskFunc field_1CD0;
+    u8 filler_1CD4[0xC];
+}; // size = 0x1CE0
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
@@ -77,9 +91,12 @@ void sub_80C0AB8(void);
 void sub_80C0B18(void);
 void sub_80C0B9C(void);
 void sub_80C0BB0(void);
+void sub_80C1098(u8 taskId);
+void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
 void sub_80C4C48(u16 a0);
+void sub_80C4C5C(u16 a0);
 void sub_80C4C74(u16 a0, u16 a1);
 void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
@@ -117,14 +134,17 @@ u16 sub_80C3514(void);
 u16 sub_80C3580(void);
 
 #include "data/text/map_section_names.h"
-
 extern const u16 gUnknown_83EF23C[];
 extern const u16 gUnknown_83EF2DC[];
 extern const u32 gUnknown_83EF61C[];
+extern const u32 gUnknown_83F0580[];
 extern const u32 gUnknown_83F089C[];
 extern const u32 gUnknown_83F0AFC[];
 extern const u32 gUnknown_83F0C0C[];
 extern const u32 gUnknown_83F0CF0[];
+extern const u32 gUnknown_83F0F1C[];
+extern const u32 gUnknown_83F1084[];
+extern const u32 gUnknown_83F1190[];
 extern const u32 gUnknown_83F1978[];
 extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
@@ -750,4 +770,76 @@ void sub_80C0E48(u8 a0)
 void sub_80C0E5C(u8 a0)
 {
     gUnknown_20399D4->field_479C = a0;
+}
+
+void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc)
+{
+    gUnknown_20399D8 = AllocZeroed(sizeof(struct UnkStruct_20399D8));
+    if (FlagGet(FLAG_SYS_SEVII_MAP_4567))
+        gUnknown_20399D8->field_1CCC = 3;
+    else if (FlagGet(FLAG_SYS_SEVII_MAP_123))
+        gUnknown_20399D8->field_1CCC = 1;
+    else
+        gUnknown_20399D8->field_1CCC = 0;
+    gUnknown_20399D8->field_18B8 = 0x58;
+    gUnknown_20399D8->field_1CC4 = 0x98;
+    switch (gUnknown_20399D8->field_1CCC)
+    {
+    case 1:
+        LZ77UnCompWram(gUnknown_83F1084, gUnknown_20399D8->field_1000);
+        gUnknown_20399D8->field_1CCE = 6;
+        break;
+    case 2: // never reached
+        LZ77UnCompWram(gUnknown_83F1190, gUnknown_20399D8->field_1000);
+        gUnknown_20399D8->field_1CCE = 4;
+        break;
+    case 3:
+    default:
+        gUnknown_20399D8->field_1CCE = 3;
+        LZ77UnCompWram(gUnknown_83F0F1C, gUnknown_20399D8->field_1000);
+        break;
+    }
+    LZ77UnCompWram(gUnknown_83F0580, gUnknown_20399D8->field_0000);
+    gUnknown_20399D8->field_1CC8 = 0;
+    gUnknown_20399D8->field_1CCA = a0;
+    gUnknown_20399D8->field_1CD0 = taskFunc;
+    gUnknown_20399D8->field_1CCB = sub_80C0E34();
+    sub_80C4AAC(0);
+    sub_80C4E74(gUnknown_8418EB0);
+    gTasks[taskId].func = sub_80C1098;
+}
+
+void sub_80C0FE0(void)
+{
+    sub_80C4BE4();
+    sub_80C4C2C(27, 4, 64);
+    sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+}
+
+bool8 sub_80C1014(void)
+{
+    if (gUnknown_20399D8->field_1CCD < 16)
+    {
+        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+        gUnknown_20399D8->field_1CCD += 2;
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+bool8 sub_80C1058(void)
+{
+    if (gUnknown_20399D8->field_1CCD >= 2)
+    {
+        gUnknown_20399D8->field_1CCD -= 2;
+        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
 }

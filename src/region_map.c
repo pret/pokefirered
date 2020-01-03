@@ -46,7 +46,7 @@ struct UnkStruct_20399D4
 struct UnkStruct_20399D8
 {
     u8 field_0000[0x1000];
-    u8 field_1000[0x4B0];
+    u16 field_1000[0x258];
     u8 filler_14B0[0x408];
     u16 field_18B8;
     u8 filler_18BA[0x40A];
@@ -60,8 +60,17 @@ struct UnkStruct_20399D8
     u8 field_1CCD;
     u16 field_1CCE;
     TaskFunc field_1CD0;
-    u8 filler_1CD4[0xC];
+    u16 field_1CD4[4];
+    u16 field_1CDC;
 }; // size = 0x1CE0
+
+struct UnkStruct_80C4CF0
+{
+    u16 v0;
+    u16 v2;
+    u16 v4;
+    u16 v6;
+};
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
@@ -91,7 +100,19 @@ void sub_80C0AB8(void);
 void sub_80C0B18(void);
 void sub_80C0B9C(void);
 void sub_80C0BB0(void);
+void sub_80C0CC8(u8 bg, u16 *map);
+bool8 sub_80C0E04(u8 a0);
+u8 sub_80C0E20(void);
+void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C1098(u8 taskId);
+void sub_80C1280(u8 taskId);
+bool8 sub_80C12EC(void);
+void sub_80C1324(u8 bg, u16 *map);
+void sub_80C1390(void);
+bool8 sub_80C144C(void);
+bool8 sub_80C1478(void);
+bool8 sub_80C16D0(void);
+void sub_80C1880(void);
 void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
@@ -100,11 +121,7 @@ void sub_80C4C5C(u16 a0);
 void sub_80C4C74(u16 a0, u16 a1);
 void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
-void sub_80C0CC8(u8 bg, u16 *map);
-void sub_80C4CF0(u8 a0, const u16 *a1);
-bool8 sub_80C0E04(u8 a0);
-u8 sub_80C0E20(void);
-void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
 void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C2208(u8 taskId, TaskFunc taskFunc);
 void sub_80C25BC(void);
@@ -152,7 +169,7 @@ extern const struct WindowTemplate gUnknown_83F1A60[];
 extern const u8 gUnknown_83F1A90[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
-extern const u16 gUnknown_83F1B0C[3][4];
+extern const struct UnkStruct_80C4CF0 gUnknown_83F1B0C[3];
 extern const u8 *const gUnknown_83F1A9C[];
 extern const u8 *const gUnknown_83F1CAC[];
 
@@ -651,8 +668,8 @@ void sub_80C0AB8(void)
     sub_80C4C48(6);
     sub_80C4C74(0x39, 0x39);
     sub_80C4C88(0x1b);
-    sub_80C4CF0(0, gUnknown_83F1B0C[0]);
-    sub_80C4CF0(1, gUnknown_83F1B0C[1]);
+    sub_80C4CF0(0, &gUnknown_83F1B0C[0]);
+    sub_80C4CF0(1, &gUnknown_83F1B0C[1]);
     sub_80C4C9C(0, 0);
     if (sub_80C3580() != MAPSEC_NONE)
         sub_80C4C9C(1, 0);
@@ -664,7 +681,7 @@ void sub_80C0B18(void)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     if (sub_80C3520() == MAPSEC_NONE)
     {
-        sub_80C4CF0(0, gUnknown_83F1B0C[2]);
+        sub_80C4CF0(0, &gUnknown_83F1B0C[2]);
     }
     else
     {
@@ -672,13 +689,13 @@ void sub_80C0B18(void)
         AddTextPrinterParameterized3(0, 2, 2, 2, gUnknown_83F1A90, 0, gUnknown_20399D4->field_0000);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 2);
-        sub_80C4CF0(0, gUnknown_83F1B0C[0]);
+        sub_80C4CF0(0, &gUnknown_83F1B0C[0]);
     }
 }
 
 void sub_80C0B9C(void)
 {
-    sub_80C4CF0(1, gUnknown_83F1B0C[1]);
+    sub_80C4CF0(1, &gUnknown_83F1B0C[1]);
 }
 
 void sub_80C0BB0(void)
@@ -836,6 +853,169 @@ bool8 sub_80C1058(void)
     {
         gUnknown_20399D8->field_1CCD -= 2;
         sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+void sub_80C1098(u8 taskId)
+{
+    switch (gUnknown_20399D8->field_1CC8)
+    {
+    case 0:
+        sub_80C08E0();
+        sub_80C4E18(gUnknown_8418EBC);
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 1:
+        LoadBgTiles(2, gUnknown_20399D8->field_0000, 0x1000, 0x000);
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 2:
+        sub_80C1324(2, gUnknown_20399D8->field_1000);
+        CopyBgTilemapBufferToVram(2);
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 3:
+        sub_80C0CA0();
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 4:
+        sub_80C0FE0();
+        ShowBg(2);
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 5:
+        sub_80C08F4();
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    case 6:
+        if (sub_80C1014() == TRUE)
+        {
+            sub_80C1390();
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 7:
+        if (sub_80C144C() == TRUE)
+        {
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 8:
+        if (sub_80C16D0() == TRUE)
+        {
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 9:
+        if (sub_80C1478() == TRUE)
+        {
+            sub_80C0E48(gUnknown_20399D8->field_1CCA);
+            if (sub_80C0E34() == gUnknown_20399D8->field_1CCA)
+            {
+                sub_80C4324(0);
+                sub_80C48BC(gUnknown_20399D8->field_1CCA, 25, 0);
+                sub_80C4960(gUnknown_20399D8->field_1CCA, 25, 0);
+            }
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 10:
+        if (sub_80C12EC() == TRUE)
+        {
+            sub_80C1880();
+            sub_80C0FE0();
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 11:
+        if (sub_80C1058() == TRUE)
+        {
+            gUnknown_20399D8->field_1CC8++;
+        }
+        break;
+    case 12:
+        sub_80C3154(0);
+        gUnknown_20399D8->field_1CC8++;
+        break;
+    default:
+        sub_80C1280(taskId);
+        break;
+    }
+}
+
+void sub_80C1280(u8 taskId)
+{
+    gTasks[taskId].func = gUnknown_20399D8->field_1CD0;
+    HideBg(2);
+    sub_80C4E18(gUnknown_8418EB5);
+    sub_80C4E74(gUnknown_8418EA7);
+    sub_80C0AB8();
+    sub_80C0B9C();
+    sub_80C4CF0(0, &gUnknown_83F1B0C[2]);
+    if (gUnknown_20399D8 != NULL)
+    {
+        FREE_AND_SET_NULL(gUnknown_20399D8);
+    }
+}
+
+bool8 sub_80C12EC(void)
+{
+    if (gUnknown_20399D8->field_1CDC != 0)
+    {
+        gUnknown_20399D8->field_1CDC--;
+        SetGpuReg(REG_OFFSET_BLDY, gUnknown_20399D8->field_1CDC);
+        return FALSE;
+    }
+    else
+    {
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        return TRUE;
+    }
+}
+
+void sub_80C1324(u8 bg, u16 *map)
+{
+    s16 i;
+    s16 j;
+    u16 *buffer = gUnknown_20399D4->field_1796[bg];
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 32; j++)
+        {
+            if (j < 30)
+                buffer[32 * i + j] = map[30 * i + j];
+            else
+                buffer[32 * i + j] = map[0];
+        }
+    }
+}
+
+void sub_80C1390(void)
+{
+    struct UnkStruct_80C4CF0 data;
+    data.v0 = gUnknown_20399D8->field_1CD4[0] = 0x48;
+    data.v2 = gUnknown_20399D8->field_1CD4[1] = 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA);
+    data.v4 = gUnknown_20399D8->field_1CD4[2] = 0xA8;
+    data.v6 = gUnknown_20399D8->field_1CD4[3] = gUnknown_20399D8->field_1CD4[1] + 32;
+    sub_80C4BE4();
+    sub_80C4C2C(0, 0x15, 0xc0);
+    sub_80C4C74(0x1f, 0x15);
+    sub_80C4C88(0x3f);
+    sub_80C4C9C(1, 0);
+    sub_80C4CF0(1, &data);
+}
+
+bool8 sub_80C144C(void)
+{
+    if (gUnknown_20399D8->field_1CDC < 6)
+    {
+        gUnknown_20399D8->field_1CDC++;
+        sub_80C4C48(gUnknown_20399D8->field_1CDC);
         return FALSE;
     }
     else

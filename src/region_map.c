@@ -43,15 +43,20 @@ struct UnkStruct_20399D4
     MainCallback field_47BC;
 }; // size = 0x47C0
 
+struct UnkStruct_20399D8_14B0
+{
+    u8 field_000[0x400];
+    struct Sprite * field_400;
+    u16 field_404;
+    u16 field_406;
+    s16 field_408;
+};
+
 struct UnkStruct_20399D8
 {
     u8 field_0000[0x1000];
     u16 field_1000[0x258];
-    u8 filler_14B0[0x408];
-    u16 field_18B8;
-    u8 filler_18BA[0x40A];
-    u16 field_1CC4;
-    u8 filler_1CC6[0x2];
+    struct UnkStruct_20399D8_14B0 field_14B0[2];
     u8 field_1CC8;
     u8 field_1CC9;
     u8 field_1CCA;
@@ -70,6 +75,13 @@ struct UnkStruct_80C4CF0
     u16 v2;
     u16 v4;
     u16 v6;
+};
+
+struct UnkStruct_83F1B3C
+{
+    u16 field_0;
+    const u8 *field_4;
+    const u8 *field_8;
 };
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
@@ -112,6 +124,8 @@ void sub_80C1390(void);
 bool8 sub_80C144C(void);
 bool8 sub_80C1478(void);
 bool8 sub_80C16D0(void);
+void sub_80C1754(u8 a0, u16 a1, u16 a2);
+void sub_80C176C(u8 a0, u16 a1, u16 a2);
 void sub_80C1880(void);
 void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
@@ -153,6 +167,9 @@ u16 sub_80C3580(void);
 #include "data/text/map_section_names.h"
 extern const u16 gUnknown_83EF23C[];
 extern const u16 gUnknown_83EF2DC[];
+extern const u16 gUnknown_83EF384[];
+extern const u32 gUnknown_83EF3C4[];
+extern const u32 gUnknown_83EF450[];
 extern const u32 gUnknown_83EF61C[];
 extern const u32 gUnknown_83F0580[];
 extern const u32 gUnknown_83F089C[];
@@ -167,10 +184,13 @@ extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
 extern const struct WindowTemplate gUnknown_83F1A60[];
 extern const u8 gUnknown_83F1A90[];
+extern const u8 *const gUnknown_83F1A9C[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
 extern const struct UnkStruct_80C4CF0 gUnknown_83F1B0C[3];
-extern const u8 *const gUnknown_83F1A9C[];
+extern const struct OamData gUnknown_83F1B24;
+extern const union AnimCmd *const gUnknown_83F1B38[];
+extern const struct UnkStruct_83F1B3C gUnknown_83F1B3C[];
 extern const u8 *const gUnknown_83F1CAC[];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -798,8 +818,8 @@ void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc)
         gUnknown_20399D8->field_1CCC = 1;
     else
         gUnknown_20399D8->field_1CCC = 0;
-    gUnknown_20399D8->field_18B8 = 0x58;
-    gUnknown_20399D8->field_1CC4 = 0x98;
+    gUnknown_20399D8->field_14B0[0].field_408 = 0x58;
+    gUnknown_20399D8->field_14B0[1].field_408 = 0x98;
     switch (gUnknown_20399D8->field_1CCC)
     {
     case 1:
@@ -1022,4 +1042,159 @@ bool8 sub_80C144C(void)
     {
         return TRUE;
     }
+}
+
+bool8 sub_80C1478(void)
+{
+    bool8 r6 = FALSE;
+    struct UnkStruct_80C4CF0 data;
+    data.v0 = gUnknown_20399D8->field_1CD4[0] = 0x48;
+    data.v2 = gUnknown_20399D8->field_1CD4[1] = 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA);
+    data.v4 = gUnknown_20399D8->field_1CD4[2] = 0xA8;
+    data.v6 = gUnknown_20399D8->field_1CD4[3] = gUnknown_20399D8->field_1CD4[1] + 32;
+    if (JOY_NEW(DPAD_UP) && gUnknown_20399D8->field_1CCA != 0)
+    {
+        PlaySE(SE_BAG1);
+        gUnknown_20399D8->field_1CCA--;
+        r6 = TRUE;
+    }
+    if (JOY_NEW(DPAD_DOWN) && gUnknown_20399D8->field_1CCA < gUnknown_20399D8->field_1CCC)
+    {
+        PlaySE(SE_BAG1);
+        gUnknown_20399D8->field_1CCA++;
+        r6 = TRUE;
+    }
+    if (JOY_NEW(A_BUTTON) && gUnknown_20399D8->field_1CDC == 6)
+    {
+        PlaySE(SE_W129);
+        gUnknown_20399D8->field_1CCB = gUnknown_20399D8->field_1CCA;
+        return TRUE;
+    }
+    if (JOY_NEW(B_BUTTON))
+    {
+        gUnknown_20399D8->field_1CCA = gUnknown_20399D8->field_1CCB;
+        sub_80C0CC8(0, gUnknown_20399D4->field_0026[gUnknown_20399D8->field_1CCA]);
+        CopyBgTilemapBufferToVram(0);
+        sub_80C48BC(255, 25, 1);
+        sub_80C4960(255, 25, 1);
+        return TRUE;
+    }
+    if (r6)
+    {
+        sub_80C0CC8(0, gUnknown_20399D4->field_0026[gUnknown_20399D8->field_1CCA]);
+        sub_80C4E74(gUnknown_8418EB0);
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(3);
+        sub_80C48BC(255, 25, 1);
+        sub_80C4960(255, 25, 1);
+        sub_80C48BC(gUnknown_20399D8->field_1CCA, 25, 0);
+        sub_80C4960(gUnknown_20399D8->field_1CCA, 25, 0);
+    }
+    if (gUnknown_20399D8->field_1CCA != sub_80C0E34())
+        sub_80C4324(1);
+    else
+        sub_80C4324(0);
+    sub_80C4CF0(1, &data);
+    return FALSE;
+}
+
+void sub_80C16B8(struct Sprite * sprite)
+{
+    sprite->pos1.y = gUnknown_20399D8->field_1CD4[1] + 16;
+}
+
+bool8 sub_80C16D0(void)
+{
+    switch (gUnknown_20399D8->field_1CC9)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_83EF3C4, gUnknown_20399D8->field_14B0[0].field_000);
+        break;
+    case 1:
+        LZ77UnCompWram(gUnknown_83EF450, gUnknown_20399D8->field_14B0[1].field_000);
+        break;
+    case 2:
+        sub_80C1754(0, 2, 2);
+        sub_80C1754(1, 3, 3);
+        break;
+    default:
+        return TRUE;
+    }
+    gUnknown_20399D8->field_1CC9++;
+    return FALSE;
+}
+
+void sub_80C1754(u8 a0, u16 a1, u16 a2)
+{
+    sub_80C176C(a0, a1, a2);
+}
+
+void sub_80C176C(u8 a0, u16 a1, u16 a2)
+{
+    u8 spriteId;
+
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399D8->field_14B0[a0].field_000,
+        .size = 0x400,
+        .tag = a1
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF384,
+        .tag = a2
+    };
+    struct SpriteTemplate template = {
+        .tileTag = a1,
+        .paletteTag = a2,
+        .oam = &gUnknown_83F1B24,
+        .anims = gUnknown_83F1B38,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_80C16B8
+    };
+
+    gUnknown_20399D8->field_14B0[a0].field_404 = a1;
+    gUnknown_20399D8->field_14B0[a0].field_406 = a2;
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+
+    spriteId = CreateSprite(&template, gUnknown_20399D8->field_14B0[a0].field_408, 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA), 0);
+    gUnknown_20399D8->field_14B0[a0].field_400 = &gSprites[spriteId];
+    gSprites[spriteId].invisible = FALSE;
+}
+
+void sub_80C1880(void)
+{
+    u8 i;
+    for (i = 0; i < 2; i++)
+    {
+        if (gUnknown_20399D8->field_14B0[i].field_400 != NULL)
+        {
+            DestroySprite(gUnknown_20399D8->field_14B0[i].field_400);
+            FreeSpriteTilesByTag(gUnknown_20399D8->field_14B0[i].field_404);
+            FreeSpritePaletteByTag(gUnknown_20399D8->field_14B0[i].field_406);
+        }
+    }
+}
+
+const u8 *sub_80C18E0(u16 a0)
+{
+    u8 i;
+    for (i = 0; i < 19; i++)
+    {
+        if (gUnknown_83F1B3C[i].field_0 == a0)
+            return gUnknown_83F1B3C[i].field_8;
+    }
+    return gUnknown_8418EC3;
+}
+
+const u8 *sub_80C1920(u16 a0)
+{
+    u8 i;
+    for (i = 0; i < 19; i++)
+    {
+        if (gUnknown_83F1B3C[i].field_0 == a0)
+            return gUnknown_83F1B3C[i].field_4;
+    }
+    return gUnknown_8418EC3;
 }

@@ -11,6 +11,7 @@
 #include "sound.h"
 #include "new_menu_helpers.h"
 #include "menu.h"
+#include "string_util.h"
 #include "strings.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
@@ -18,12 +19,11 @@
 
 struct UnkStruct_20399D4
 {
-    u8 field_0000[38];
+    u8 field_0000[19];
+    u8 field_0013[19];
     u16 field_0026[5][600];
     // Inefficiency: these should be u8 or have half the elements each
-    u16 field_1796[BG_SCREEN_SIZE];
-    u16 field_2796[BG_SCREEN_SIZE];
-    u16 field_3796[BG_SCREEN_SIZE];
+    u16 field_1796[3][BG_SCREEN_SIZE];
     u8 field_4796;
     u8 field_4797[4];
     u8 field_479B;
@@ -34,13 +34,23 @@ struct UnkStruct_20399D4
     u8 field_47A4;
     u8 filler_47A5[3];
     u8 field_47A8;
-    u8 filler_47A9[15];
+    u16 field_47AA;
+    u16 field_47AC;
+    u16 field_47AE;
+    u16 field_47B0;
+    u8 filler_47B2[6];
     TaskFunc field_47B8;
     MainCallback field_47BC;
 };
 
+struct UnkStruct_20399D8
+{
+    u8 filler_0000[0x1CCA];
+    u8 field_1CCA;
+};
+
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
-EWRAM_DATA void * gUnknown_20399D8 = NULL;
+EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
 EWRAM_DATA void * gUnknown_20399DC = NULL;
 EWRAM_DATA void * gUnknown_20399E0 = NULL;
 EWRAM_DATA void * gUnknown_20399E4 = NULL;
@@ -123,6 +133,8 @@ extern const u8 gUnknown_83F1A90[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
 extern const u16 gUnknown_83F1B0C[3][4];
+extern const u8 *const gUnknown_83F1A9C[];
+extern const u8 *const gUnknown_83F1CAC[];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 {
@@ -583,9 +595,9 @@ void sub_80C0904(void)
 
 void sub_80C0A2C(void)
 {
-    SetBgTilemapBuffer(0, gUnknown_20399D4->field_1796);
-    SetBgTilemapBuffer(1, gUnknown_20399D4->field_2796);
-    SetBgTilemapBuffer(2, gUnknown_20399D4->field_3796);
+    SetBgTilemapBuffer(0, gUnknown_20399D4->field_1796[0]);
+    SetBgTilemapBuffer(1, gUnknown_20399D4->field_1796[1]);
+    SetBgTilemapBuffer(2, gUnknown_20399D4->field_1796[2]);
 }
 
 void sub_80C0A6C(void)
@@ -647,4 +659,95 @@ void sub_80C0B18(void)
 void sub_80C0B9C(void)
 {
     sub_80C4CF0(1, gUnknown_83F1B0C[1]);
+}
+
+void sub_80C0BB0(void)
+{
+    u16 mapsecId;
+    u16 descOffset;
+    gUnknown_20399D4->field_47AC = 0;
+    gUnknown_20399D4->field_47AE = 24;
+    gUnknown_20399D4->field_47B0 = 32;
+    sub_80C4C9C(1, 1);
+    ClearWindowTilemap(1);
+    mapsecId = sub_80C3580();
+    if (mapsecId != MAPSEC_NONE)
+    {
+         descOffset = mapsecId - MAPSECS_KANTO;
+         sub_80C4C9C(1, 0);
+         gUnknown_20399D4->field_47AC = 1;
+         gUnknown_20399D4->field_47AA = StringLength(gUnknown_83F1CAC[descOffset]);
+         gUnknown_20399D4->field_47AE = gUnknown_20399D4->field_47AA * 10 + 50;
+         gUnknown_20399D4->field_47B0 = 48;
+         FillWindowPixelBuffer(1, PIXEL_FILL(0));
+         StringCopy(gUnknown_20399D4->field_0013, gUnknown_83F1CAC[descOffset]);
+         AddTextPrinterParameterized3(1, 2, 12, 2, gUnknown_83F1A9C[sub_80C3AC8(1) - 2], 0, gUnknown_20399D4->field_0013);
+         PutWindowTilemap(1);
+         CopyWindowToVram(1, 3);
+    }
+}
+
+void sub_80C0CA0(void)
+{
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    CopyWindowToVram(0, 3);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    CopyWindowToVram(1, 3);
+}
+
+void sub_80C0CC8(u8 bg, u16 *map)
+{
+    s16 i;
+    s16 j;
+    u8 r4;
+    u16 *buffer = gUnknown_20399D4->field_1796[bg];
+    for (i = 0; i < 20; i++)
+    {
+        for (j = 0; j < 32; j++)
+        {
+            if (j < 30)
+                buffer[32 * i + j] = map[30 * i + j];
+            else
+                buffer[32 * i + j] = map[0];
+        }
+    }
+    if (gUnknown_20399D4->field_4797[0] == 1)
+    {
+        WriteSequenceToBgTilemapBuffer(0, 0x0F0, 0x18, 0x0E, 3, 1, 0x3, 0x001);
+        WriteSequenceToBgTilemapBuffer(0, 0x100, 0x18, 0x0F, 3, 1, 0x3, 0x001);
+        WriteSequenceToBgTilemapBuffer(0, 0x110, 0x18, 0x10, 3, 1, 0x3, 0x001);
+    }
+    if (gUnknown_20399D8 != NULL)
+        r4 = gUnknown_20399D8->field_1CCA;
+    else
+        r4 = gUnknown_20399D4->field_479B;
+    if (r4 == 2 && !FlagGet(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR))
+        FillBgTilemapBufferRect_Palette0(0, 0x003, 13, 11, 3, 2);
+    if (r4 == 3 && !FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR))
+        FillBgTilemapBufferRect_Palette0(0, 0x003, 21, 16, 3, 3);
+}
+
+u8 sub_80C0E04(u8 a0)
+{
+    return gUnknown_20399D4->field_4797[a0];
+}
+
+u8 sub_80C0E20(void)
+{
+    return gUnknown_20399D4->field_479B;
+}
+
+u8 sub_80C0E34(void)
+{
+    return gUnknown_20399D4->field_479C;
+}
+
+void sub_80C0E48(u8 a0)
+{
+    gUnknown_20399D4->field_479B = a0;
+}
+
+void sub_80C0E5C(u8 a0)
+{
+    gUnknown_20399D4->field_479C = a0;
 }

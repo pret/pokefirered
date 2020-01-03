@@ -90,7 +90,8 @@
 #define MAPSEC_SECRET_BASE                  0x56
 #define MAPSEC_DYNAMIC                      0x57
 
-// Kanto landmarks
+#define MAPSECS_KANTO                       0x58
+
 #define MAPSEC_PALLET_TOWN                  0x58
 #define MAPSEC_VIRIDIAN_CITY                0x59
 #define MAPSEC_PEWTER_CITY                  0x5A

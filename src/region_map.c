@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "string_util.h"
 #include "strings.h"
+#include "map_preview_screen.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/region_map.h"
@@ -84,9 +85,23 @@ struct UnkStruct_83F1B3C
     const u8 *field_8;
 };
 
+struct UnkStruct_20399DC
+{
+    u16 field_0000[0x1C20];
+    u16 field_3840[0x280];
+    const struct MapPreviewScreen * field_3D40;
+    TaskFunc field_3D44;
+    u8 field_3D48;
+    u8 field_3D49;
+    u8 field_3D4A;
+    u8 filler_3D4B[0xC9];
+    u16 field_3E14;
+    u8 filler_3E16[0x12];
+}; // size = 0x3E28
+
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
-EWRAM_DATA void * gUnknown_20399DC = NULL;
+EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
 EWRAM_DATA void * gUnknown_20399E0 = NULL;
 EWRAM_DATA void * gUnknown_20399E4 = NULL;
 EWRAM_DATA void * gUnknown_20399E8 = NULL;
@@ -127,6 +142,12 @@ bool8 sub_80C16D0(void);
 void sub_80C1754(u8 a0, u16 a1, u16 a2);
 void sub_80C176C(u8 a0, u16 a1, u16 a2);
 void sub_80C1880(void);
+void sub_80C1A94(u8 taskId);
+void sub_80C1BE0(u8 taskId);
+void sub_80C1E14(u8 taskId);
+void sub_80C1E94(void);
+void sub_80C1E78(u8 bgId, const u16 * tilemap);
+bool8 sub_80C1F80(u8 a0);
 void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
@@ -1197,4 +1218,97 @@ const u8 *sub_80C1920(u16 a0)
             return gUnknown_83F1B3C[i].field_4;
     }
     return gUnknown_8418EC3;
+}
+
+void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc)
+{
+    u8 r0;
+    gUnknown_20399DC = AllocZeroed(sizeof(struct UnkStruct_20399DC));
+    r0 = sub_80C3580();
+    if (r0 == MAPSEC_TANOBY_CHAMBERS)
+        r0 = MAPSEC_MONEAN_CHAMBER;
+    gUnknown_20399DC->field_3D40 = sub_80F8544(r0);
+    if (gUnknown_20399DC->field_3D40 == NULL)
+        gUnknown_20399DC->field_3D40 = sub_80F8544(MAPSEC_ROCK_TUNNEL);
+    gUnknown_20399DC->field_3D48 = 0;
+    gUnknown_20399DC->field_3D4A = 0;
+    gUnknown_20399DC->field_3D44 = taskFunc;
+    gUnknown_20399DC->field_3E14 = 0;
+    sub_80C4AAC(0);
+    sub_80C4BE4();
+    sub_80C0CA0();
+    gTasks[taskId].func = sub_80C1A94;
+}
+
+bool8 sub_80C19FC(void)
+{
+    switch (gUnknown_20399DC->field_3D4A)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_20399DC->field_3D40->tilesptr, gUnknown_20399DC->field_0000);
+        break;
+    case 1:
+        LZ77UnCompWram(gUnknown_20399DC->field_3D40->tilemapptr, gUnknown_20399DC->field_3840);
+        break;
+    case 2:
+        LoadBgTiles(2, gUnknown_20399DC->field_0000, 0x3840, 0x000);
+        break;
+    case 3:
+        LoadPalette(gUnknown_20399DC->field_3D40->palptr, 0xD0, 0x60);
+        break;
+    default:
+        return TRUE;
+    }
+    gUnknown_20399DC->field_3D4A++;
+    return FALSE;
+}
+
+void sub_80C1A94(u8 taskId)
+{
+    switch (gUnknown_20399DC->field_3D48)
+    {
+    case 0:
+        sub_80C08E0();
+        gUnknown_20399DC->field_3D48++;
+        break;
+    case 1:
+        if (sub_80C19FC() == TRUE)
+            gUnknown_20399DC->field_3D48++;
+        break;
+    case 2:
+        sub_80C1E94();
+        sub_80C4E74(gUnknown_8418E9E);
+        gUnknown_20399DC->field_3D48++;
+        break;
+    case 3:
+        sub_80C1E78(2, gUnknown_20399DC->field_3840);
+        CopyBgTilemapBufferToVram(2);
+        gUnknown_20399DC->field_3D48++;
+        break;
+    case 4:
+        ShowBg(2);
+        gUnknown_20399DC->field_3D48++;
+        break;
+    case 5:
+        sub_80C08F4();
+        gUnknown_20399DC->field_3D48++;
+        break;
+    case 6:
+        if (sub_80C1F80(0) == TRUE)
+            gUnknown_20399DC->field_3D48++;
+        break;
+    case 7:
+        gTasks[taskId].func = sub_80C1BE0;
+        break;
+    case 8:
+        if (sub_80C1F80(1) == TRUE)
+        {
+            gUnknown_20399DC->field_3D48++;
+        }
+        break;
+    case 9:
+        sub_80C1E14(taskId);
+        gUnknown_20399DC->field_3D48++;
+        break;
+    }
 }

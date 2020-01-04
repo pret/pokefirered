@@ -112,10 +112,28 @@ struct UnkStruct_20399DC
     u16 field_3E24;
 }; // size = 0x3E28
 
+struct UnkStruct_20399E0_000
+{
+    u16 field_000[0x200];
+    struct Sprite * field_400;
+    s16 field_404;
+    s16 field_406;
+    u16 field_408;
+    u16 field_40A;
+};
+
+struct UnkStruct_20399E0
+{
+    struct UnkStruct_20399E0_000 * field_000[6];
+    u8 filler_018[0xCB0];
+    TaskFunc field_CC8;
+    u8 filler_CCC[0x8];
+}; // size = 0xCD4
+
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
 EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
-EWRAM_DATA void * gUnknown_20399E0 = NULL;
+EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
 EWRAM_DATA void * gUnknown_20399E4 = NULL;
 EWRAM_DATA void * gUnknown_20399E8 = NULL;
 EWRAM_DATA void * gUnknown_20399EC = NULL;
@@ -161,7 +179,7 @@ void sub_80C1BE0(u8 taskId);
 void sub_80C1E14(u8 taskId);
 void sub_80C1E94(void);
 void sub_80C1E78(u8 bgId, const u16 * tilemap);
-bool8 sub_80C1F80(u8 a0);
+bool8 sub_80C1F80(bool8 a0);
 void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
@@ -172,6 +190,8 @@ void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
 void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
 void sub_80C2208(u8 taskId, TaskFunc taskFunc);
+void sub_80C24BC(void);
+void sub_80C267C(u8 taskId);
 void sub_80C25BC(void);
 void sub_80C2C1C(u8 taskId);
 void sub_80C3008(u16 a0, u16 a1);
@@ -203,6 +223,7 @@ u16 sub_80C3580(void);
 extern const u16 gUnknown_83EF23C[];
 extern const u16 gUnknown_83EF2DC[];
 extern const u16 gUnknown_83EF384[];
+extern const u16 gUnknown_83EF3A4[];
 extern const u32 gUnknown_83EF3C4[];
 extern const u32 gUnknown_83EF450[];
 extern const u32 gUnknown_83EF61C[];
@@ -227,6 +248,8 @@ extern const struct UnkStruct_80C4CF0 gUnknown_83F1B0C[3];
 extern const struct OamData gUnknown_83F1B24;
 extern const union AnimCmd *const gUnknown_83F1B38[];
 extern const struct UnkStruct_83F1B3C gUnknown_83F1B3C[];
+extern const struct OamData gUnknown_83F1C20;
+extern const union AnimCmd *const gUnknown_83F1C30[];
 extern const u8 *const gUnknown_83F1CAC[];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -1309,14 +1332,14 @@ void sub_80C1A94(u8 taskId)
         gUnknown_20399DC->field_3D48++;
         break;
     case 6:
-        if (sub_80C1F80(0) == TRUE)
+        if (sub_80C1F80(FALSE) == TRUE)
             gUnknown_20399DC->field_3D48++;
         break;
     case 7:
         gTasks[taskId].func = sub_80C1BE0;
         break;
     case 8:
-        if (sub_80C1F80(1) == TRUE)
+        if (sub_80C1F80(TRUE) == TRUE)
         {
             gUnknown_20399DC->field_3D48++;
         }
@@ -1426,4 +1449,122 @@ void sub_80C1E94(void)
     gUnknown_20399DC->field_3E20 = (0x20 - gUnknown_20399DC->field_3E18) / 8;
     gUnknown_20399DC->field_3E22 = (0xE0 - gUnknown_20399DC->field_3E1A) / 8;
     gUnknown_20399DC->field_3E24 = (0x88 - gUnknown_20399DC->field_3E1C) / 8;
+}
+
+bool8 sub_80C1F80(bool8 a0)
+{
+    struct UnkStruct_80C4CF0 data;
+
+    if (!a0)
+    {
+        if (gUnknown_20399DC->field_3D4B < 8)
+        {
+            gUnknown_20399DC->field_3E16 += gUnknown_20399DC->field_3E1E;
+            gUnknown_20399DC->field_3E18 += gUnknown_20399DC->field_3E20;
+            gUnknown_20399DC->field_3E1A += gUnknown_20399DC->field_3E22;
+            gUnknown_20399DC->field_3E1C += gUnknown_20399DC->field_3E24;
+            gUnknown_20399DC->field_3D4B++;
+            if (gUnknown_20399DC->field_3E14 < 6)
+                gUnknown_20399DC->field_3E14++;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+    else
+    {
+        if (gUnknown_20399DC->field_3D4B == 0)
+        {
+            return TRUE;
+        }
+        else
+        {
+            gUnknown_20399DC->field_3E16 -= gUnknown_20399DC->field_3E1E;
+            gUnknown_20399DC->field_3E18 -= gUnknown_20399DC->field_3E20;
+            gUnknown_20399DC->field_3E1A -= gUnknown_20399DC->field_3E22;
+            gUnknown_20399DC->field_3E1C -= gUnknown_20399DC->field_3E24;
+            gUnknown_20399DC->field_3D4B--;
+            if (gUnknown_20399DC->field_3E14 > 0)
+                gUnknown_20399DC->field_3E14--;
+        }
+    }
+    data.v0 = gUnknown_20399DC->field_3E16;
+    data.v2 = gUnknown_20399DC->field_3E18;
+    data.v4 = gUnknown_20399DC->field_3E1A;
+    data.v6 = gUnknown_20399DC->field_3E1C;
+    sub_80C4CF0(1, &data);
+    sub_80C4C48(gUnknown_20399DC->field_3E14);
+    return FALSE;
+}
+
+void nullsub_63(struct Sprite * sprite)
+{
+
+}
+
+void sub_80C210C(u8 a0, u8 a1, u8 a2)
+{
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399E0->field_000[a0],
+        .size = 0x400,
+        .tag = a1
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF3A4,
+        .tag = a2
+    };
+    struct SpriteTemplate template = {
+        .tileTag = a1,
+        .paletteTag = a2,
+        .oam = &gUnknown_83F1C20,
+        .anims = gUnknown_83F1C30,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = nullsub_63
+    };
+
+    gUnknown_20399E0->field_000[a0]->field_408 = a1;
+    gUnknown_20399E0->field_000[a0]->field_40A = a2;
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&template, gUnknown_20399E0->field_000[a0]->field_404, gUnknown_20399E0->field_000[a0]->field_406, 0);
+    gUnknown_20399E0->field_000[a0]->field_400 = &gSprites[spriteId];
+    gSprites[spriteId].invisible = TRUE;
+}
+
+void sub_80C2208(u8 taskId, TaskFunc taskFunc)
+{
+    u8 i;
+
+    gUnknown_20399E0 = AllocZeroed(sizeof(struct UnkStruct_20399E0));
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_20399E0->field_000[i] = AllocZeroed(sizeof(struct UnkStruct_20399E0_000));
+        gUnknown_20399E0->field_000[i]->field_404 = 32 * (i / 3) + 0x68;
+        gUnknown_20399E0->field_000[i]->field_406 = 64 * (i % 3) + 0x28;
+    }
+    sub_80C4AAC(0);
+    sub_80C4BE4();
+    sub_80C24BC();
+    sub_80C0A88(1);
+    gUnknown_20399E0->field_CC8 = taskFunc;
+    gTasks[taskId].func = sub_80C267C;
+}
+
+void sub_80C22C4(u8 a0, bool8 a1)
+{
+    u8 i;
+    if (a0 == 6)
+    {
+        for (i = 0; i < 6; i++)
+        {
+            gUnknown_20399E0->field_000[i]->field_400->invisible = a1;
+        }
+    }
+    else
+    {
+        gUnknown_20399E0->field_000[a0]->field_400->invisible = a1;
+    }
 }

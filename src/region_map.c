@@ -97,12 +97,19 @@ struct UnkStruct_20399DC
     u8 field_3D4B;
     u8 field_3D4C;
     u16 field_3D4E[0x30];
-    u8 field_3DAE[0x60];
+    u8 filler_3DAE[0x60];
     u16 field_3E0E;
     u16 field_3E10;
     u16 field_3E12;
     u16 field_3E14;
-    u8 filler_3E16[0x12];
+    u16 field_3E16;
+    u16 field_3E18;
+    u16 field_3E1A;
+    u16 field_3E1C;
+    u16 field_3E1E;
+    u16 field_3E20;
+    u16 field_3E22;
+    u16 field_3E24;
 }; // size = 0x3E28
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
@@ -1397,4 +1404,26 @@ void sub_80C1E14(u8 taskId)
 void sub_80C1E78(u8 bgId, const u16 * tilemap)
 {
     CopyToBgTilemapBufferRect(2, tilemap, 0, 0, 32, 20);
+}
+
+void sub_80C1E94(void)
+{
+    u16 r4;
+    u16 r0;
+    sub_80C4BE4();
+    sub_80C4C2C(0, 17, 192);
+    sub_80C4C48(gUnknown_20399DC->field_3E14);
+    sub_80C4C74(0, 13);
+    sub_80C4C88(59);
+    sub_80C4C9C(1, 0);
+    r4 = sub_80C3508();
+    r0 = sub_80C3514();
+    gUnknown_20399DC->field_3E16 = 8 * r4 + 32;
+    gUnknown_20399DC->field_3E18 = 8 * r0 + 24;
+    gUnknown_20399DC->field_3E1A = gUnknown_20399DC->field_3E16 + 8;
+    gUnknown_20399DC->field_3E1C = gUnknown_20399DC->field_3E18 + 8;
+    gUnknown_20399DC->field_3E1E = (0x10 - gUnknown_20399DC->field_3E16) / 8;
+    gUnknown_20399DC->field_3E20 = (0x20 - gUnknown_20399DC->field_3E18) / 8;
+    gUnknown_20399DC->field_3E22 = (0xE0 - gUnknown_20399DC->field_3E1A) / 8;
+    gUnknown_20399DC->field_3E24 = (0x88 - gUnknown_20399DC->field_3E1C) / 8;
 }

@@ -94,7 +94,13 @@ struct UnkStruct_20399DC
     u8 field_3D48;
     u8 field_3D49;
     u8 field_3D4A;
-    u8 filler_3D4B[0xC9];
+    u8 field_3D4B;
+    u8 field_3D4C;
+    u16 field_3D4E[0x30];
+    u8 field_3DAE[0x60];
+    u16 field_3E0E;
+    u16 field_3E10;
+    u16 field_3E12;
     u16 field_3E14;
     u8 filler_3E16[0x12];
 }; // size = 0x3E28
@@ -142,6 +148,7 @@ bool8 sub_80C16D0(void);
 void sub_80C1754(u8 a0, u16 a1, u16 a2);
 void sub_80C176C(u8 a0, u16 a1, u16 a2);
 void sub_80C1880(void);
+void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C1A94(u8 taskId);
 void sub_80C1BE0(u8 taskId);
 void sub_80C1E14(u8 taskId);
@@ -157,7 +164,6 @@ void sub_80C4C74(u16 a0, u16 a1);
 void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
 void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
-void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C2208(u8 taskId, TaskFunc taskFunc);
 void sub_80C25BC(void);
 void sub_80C2C1C(u8 taskId);
@@ -176,6 +182,7 @@ u16 sub_80C3520(void);
 void sub_80C48BC(u8 a0, u8 a1, u8 a2);
 void sub_80C4960(u8 a0, u8 a1, u8 a2);
 void sub_80C4A04(void);
+void sub_80C4B30(u8 a0);
 void sub_80C4D30(void);
 void sub_80C4E18(const u8 *str);
 void sub_80C4E74(const u8 *str);
@@ -205,6 +212,7 @@ extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
 extern const struct WindowTemplate gUnknown_83F1A60[];
 extern const u8 gUnknown_83F1A90[];
+extern const u8 gUnknown_83F1A94[];
 extern const u8 *const gUnknown_83F1A9C[];
 extern const u8 sSeviiMapsecs[3][30];
 extern const u8 gUnknown_83F1B00[3][4];
@@ -1311,4 +1319,82 @@ void sub_80C1A94(u8 taskId)
         gUnknown_20399DC->field_3D48++;
         break;
     }
+}
+
+void sub_80C1BE0(u8 taskId)
+{
+    switch (gUnknown_20399DC->field_3D49)
+    {
+    case 0:
+        gUnknown_20399DC->field_3E0E = 0x0133;
+        gUnknown_20399DC->field_3E10 = 0x0100;
+        gUnknown_20399DC->field_3E12 = 0x00F0;
+        gUnknown_20399DC->field_3D49++;
+        break;
+    case 1:
+        if (gUnknown_20399DC->field_3D4C++ > 40)
+        {
+            gUnknown_20399DC->field_3D4C = 0;
+            gUnknown_20399DC->field_3D49++;
+        }
+        break;
+    case 2:
+        FillWindowPixelBuffer(2, PIXEL_FILL(0));
+        CopyWindowToVram(2, 3);
+        PutWindowTilemap(2);
+        gUnknown_20399DC->field_3D49++;
+        break;
+    case 3:
+        if (gUnknown_20399DC->field_3D4C > 25)
+        {
+            AddTextPrinterParameterized3(2, 2, 4, 0, gUnknown_83F1A94, -1, sub_80C1920(sub_80C3580()));
+            AddTextPrinterParameterized3(2, 2, 2, 14, gUnknown_83F1A90, -1, sub_80C18E0(sub_80C3580()));
+            CopyWindowToVram(2, 3);
+            gUnknown_20399DC->field_3D49++;
+        }
+        else if (gUnknown_20399DC->field_3D4C > 20)
+        {
+            gUnknown_20399DC->field_3E0E -= 6;
+            gUnknown_20399DC->field_3E10 -= 5;
+            gUnknown_20399DC->field_3E12 -= 5;
+            CpuCopy16(gUnknown_20399DC->field_3D40->palptr, gUnknown_20399DC->field_3D4E, 0x60);
+            TintPalette_CustomTone(gUnknown_20399DC->field_3D4E, 0x30, gUnknown_20399DC->field_3E0E, gUnknown_20399DC->field_3E10, gUnknown_20399DC->field_3E12);
+            LoadPalette(gUnknown_20399DC->field_3D4E, 0xD0, 0x60);
+        }
+        gUnknown_20399DC->field_3D4C++;
+        break;
+    case 4:
+        if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
+        {
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            CopyWindowToVram(2, 3);
+            gUnknown_20399DC->field_3D48++;
+            gUnknown_20399DC->field_3D49++;
+        }
+        break;
+    default:
+        gTasks[taskId].func = sub_80C1A94;
+        break;
+    }
+}
+
+void sub_80C1E14(u8 taskId)
+{
+    gTasks[taskId].func = gUnknown_20399DC->field_3D44;
+    HideBg(2);
+    sub_80C4B30(0);
+    sub_80C0B18();
+    sub_80C0BB0();
+    sub_80C0AB8();
+    sub_80C0B9C();
+    sub_80C4E74(gUnknown_8418E8D);
+    if (gUnknown_20399DC != NULL)
+    {
+        FREE_AND_SET_NULL(gUnknown_20399DC);
+    }
+}
+
+void sub_80C1E78(u8 bgId, const u16 * tilemap)
+{
+    CopyToBgTilemapBufferRect(2, tilemap, 0, 0, 32, 20);
 }

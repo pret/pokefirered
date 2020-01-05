@@ -125,10 +125,20 @@ struct UnkStruct_20399E0_000
 struct UnkStruct_20399E0
 {
     struct UnkStruct_20399E0_000 * field_000[6];
-    u8 filler_018[0xCB0];
+    u16 field_018[0x400];
+    u16 field_818[0x258];
     TaskFunc field_CC8;
-    u8 filler_CCC[0x8];
+    u8 field_CCC;
+    u8 field_CCD;
+    u8 filler_CCE[2];
+    u8 field_CD0;
 }; // size = 0xCD4
+
+#define FREE_IF_NOT_NULL(ptr) ({       \
+    if (ptr) {                  \
+        FREE_AND_SET_NULL(ptr); \
+    }                           \
+})
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
@@ -180,6 +190,28 @@ void sub_80C1E14(u8 taskId);
 void sub_80C1E94(void);
 void sub_80C1E78(u8 bgId, const u16 * tilemap);
 bool8 sub_80C1F80(bool8 a0);
+void sub_80C2208(u8 taskId, TaskFunc taskFunc);
+void sub_80C24BC(void);
+void sub_80C267C(u8 taskId);
+void sub_80C25BC(void);
+void sub_80C2604(void);
+void sub_80C2C1C(u8 taskId);
+void sub_80C3008(u16 a0, u16 a1);
+void sub_80C3154(u8 a0);
+void sub_80C3178(void);
+void sub_80C3188(void);
+u8 sub_80C3400(void);
+u16 sub_80C3520(void);
+u8 sub_80C3AC8(u8 a0);
+u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
+void sub_80C41D8(u16 a0, u16 a1);
+void sub_80C4324(u8 a0);
+void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C4348(void);
+void sub_80C48BC(u8 a0, u8 a1, u8 a2);
+void sub_80C4960(u8 a0, u8 a1, u8 a2);
+void sub_80C4A04(void);
+void sub_80C4B30(u8 a0);
 void sub_80C4AAC(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
@@ -189,27 +221,6 @@ void sub_80C4C74(u16 a0, u16 a1);
 void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
 void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
-void sub_80C2208(u8 taskId, TaskFunc taskFunc);
-void sub_80C24BC(void);
-void sub_80C267C(u8 taskId);
-void sub_80C25BC(void);
-void sub_80C2C1C(u8 taskId);
-void sub_80C3008(u16 a0, u16 a1);
-void sub_80C3154(u8 a0);
-void sub_80C3178(void);
-void sub_80C3188(void);
-u8 sub_80C3AC8(u8 a0);
-u8 sub_80C3400(void);
-u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
-void sub_80C41D8(u16 a0, u16 a1);
-void sub_80C4324(u8 a0);
-void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
-void sub_80C4348(void);
-u16 sub_80C3520(void);
-void sub_80C48BC(u8 a0, u8 a1, u8 a2);
-void sub_80C4960(u8 a0, u8 a1, u8 a2);
-void sub_80C4A04(void);
-void sub_80C4B30(u8 a0);
 void sub_80C4D30(void);
 void sub_80C4E18(const u8 *str);
 void sub_80C4E74(const u8 *str);
@@ -227,6 +238,8 @@ extern const u16 gUnknown_83EF3A4[];
 extern const u32 gUnknown_83EF3C4[];
 extern const u32 gUnknown_83EF450[];
 extern const u32 gUnknown_83EF61C[];
+extern const u32 gUnknown_83F0330[];
+extern const u32 gUnknown_83F0E0C[];
 extern const u32 gUnknown_83F0580[];
 extern const u32 gUnknown_83F089C[];
 extern const u32 gUnknown_83F0AFC[];
@@ -235,6 +248,12 @@ extern const u32 gUnknown_83F0CF0[];
 extern const u32 gUnknown_83F0F1C[];
 extern const u32 gUnknown_83F1084[];
 extern const u32 gUnknown_83F1190[];
+extern const u32 gUnknown_83F12CC[];
+extern const u32 gUnknown_83F13EC[];
+extern const u32 gUnknown_83F1550[];
+extern const u32 gUnknown_83F1640[];
+extern const u32 gUnknown_83F1738[];
+extern const u32 gUnknown_83F1804[];
 extern const u32 gUnknown_83F1978[];
 extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
@@ -250,6 +269,7 @@ extern const union AnimCmd *const gUnknown_83F1B38[];
 extern const struct UnkStruct_83F1B3C gUnknown_83F1B3C[];
 extern const struct OamData gUnknown_83F1C20;
 extern const union AnimCmd *const gUnknown_83F1C30[];
+extern const struct UnkStruct_80C4CF0 gUnknown_83F1C34;
 extern const u8 *const gUnknown_83F1CAC[];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -646,18 +666,12 @@ void sub_80C0820(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
     else
         SetMainCallback2(gUnknown_20399D4->field_47BC);
-    if (gUnknown_20399D4 != NULL)
-    {
-        FREE_AND_SET_NULL(gUnknown_20399D4);
-    }
+    FREE_IF_NOT_NULL(gUnknown_20399D4);
 }
 
 void sub_80C0898(void)
 {
-    if (gUnknown_20399D4 != NULL)
-    {
-        FREE_AND_SET_NULL(gUnknown_20399D4);
-    }
+    FREE_IF_NOT_NULL(gUnknown_20399D4);
 }
 
 void sub_80C08B4(void)
@@ -1036,10 +1050,7 @@ void sub_80C1280(u8 taskId)
     sub_80C0AB8();
     sub_80C0B9C();
     sub_80C4CF0(0, &gUnknown_83F1B0C[2]);
-    if (gUnknown_20399D8 != NULL)
-    {
-        FREE_AND_SET_NULL(gUnknown_20399D8);
-    }
+    FREE_IF_NOT_NULL(gUnknown_20399D8);
 }
 
 bool8 sub_80C12EC(void)
@@ -1418,10 +1429,7 @@ void sub_80C1E14(u8 taskId)
     sub_80C0AB8();
     sub_80C0B9C();
     sub_80C4E74(gUnknown_8418E8D);
-    if (gUnknown_20399DC != NULL)
-    {
-        FREE_AND_SET_NULL(gUnknown_20399DC);
-    }
+    FREE_IF_NOT_NULL(gUnknown_20399DC);
 }
 
 void sub_80C1E78(u8 bgId, const u16 * tilemap)
@@ -1566,5 +1574,107 @@ void sub_80C22C4(u8 a0, bool8 a1)
     else
     {
         gUnknown_20399E0->field_000[a0]->field_400->invisible = a1;
+    }
+}
+
+bool8 sub_80C2344(void)
+{
+    switch (gUnknown_20399E0->field_CCD)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_83F12CC, gUnknown_20399E0->field_000[0]->field_000);
+        sub_80C210C(0, 4, 4);
+        break;
+    case 1:
+        LZ77UnCompWram(gUnknown_83F1550, gUnknown_20399E0->field_000[1]->field_000);
+        sub_80C210C(1, 5, 5);
+        break;
+    case 2:
+        LZ77UnCompWram(gUnknown_83F1738, gUnknown_20399E0->field_000[2]->field_000);
+        sub_80C210C(2, 6, 6);
+        break;
+    case 3:
+        LZ77UnCompWram(gUnknown_83F13EC, gUnknown_20399E0->field_000[3]->field_000);
+        sub_80C210C(3, 7, 7);
+        break;
+    case 4:
+        LZ77UnCompWram(gUnknown_83F1640, gUnknown_20399E0->field_000[4]->field_000);
+        sub_80C210C(4, 8, 8);
+        break;
+    case 5:
+        LZ77UnCompWram(gUnknown_83F1804, gUnknown_20399E0->field_000[5]->field_000);
+        sub_80C210C(5, 9, 9);
+        break;
+    case 6:
+        LZ77UnCompWram(gUnknown_83F0330, gUnknown_20399E0->field_018);
+        break;
+    case 7:
+        LZ77UnCompWram(gUnknown_83F0E0C, gUnknown_20399E0->field_818);
+        break;
+    case 8:
+        LoadBgTiles(1, gUnknown_20399E0->field_018, BG_SCREEN_SIZE, 0x000);
+        break;
+    default:
+        return TRUE;
+    }
+    gUnknown_20399E0->field_CCD++;
+    return FALSE;
+}
+
+void sub_80C24BC(void)
+{
+    struct UnkStruct_80C4CF0 data;
+    data.v0 = gUnknown_20399E0->field_000[0]->field_404 + 8;
+    data.v2 = 0x10;
+    data.v4 = gUnknown_20399E0->field_000[3]->field_404 - 8;
+    data.v6 = 0xA0;
+    sub_80C4C2C(0, 2, 0);
+    sub_80C4C74(18, 0);
+    sub_80C4C88(16);
+    sub_80C4CF0(0, &data);
+    sub_80C4C9C(0, 0);
+}
+
+void sub_80C253C(void)
+{
+    struct UnkStruct_80C4CF0 data = gUnknown_83F1C34;
+    sub_80C4BE4();
+    sub_80C4C2C(2, 41, 128);
+    sub_80C4C48(gUnknown_20399E0->field_CD0);
+    sub_80C4C74(55, 0);
+    sub_80C4C88(18);
+    sub_80C4CF0(0, &data);
+    sub_80C4C9C(0, 0);
+}
+
+void sub_80C2594(u8 taskId)
+{
+    gTasks[taskId].func = gUnknown_20399E0->field_CC8;
+}
+
+void sub_80C25BC(void)
+{
+    u8 i;
+    sub_80C2604();
+    for (i = 0; i < 6; i++)
+    {
+        FREE_IF_NOT_NULL(gUnknown_20399E0->field_000[i]);
+    }
+    FREE_IF_NOT_NULL(gUnknown_20399E0);
+}
+
+void sub_80C2604(void)
+{
+    u8 i;
+    for (i = 0; i < 6; i++)
+    {
+        gUnknown_20399E0->field_000[i]->field_404 = gUnknown_20399E0->field_000[i]->field_400->pos1.x;
+        gUnknown_20399E0->field_000[i]->field_406 = gUnknown_20399E0->field_000[i]->field_400->pos1.y;
+        if (gUnknown_20399E0->field_000[i]->field_400 != NULL)
+        {
+            DestroySprite(gUnknown_20399E0->field_000[i]->field_400);
+            FreeSpriteTilesByTag(gUnknown_20399E0->field_000[i]->field_408);
+            FreeSpritePaletteByTag(gUnknown_20399E0->field_000[i]->field_40A);
+        }
     }
 }

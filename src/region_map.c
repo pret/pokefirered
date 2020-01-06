@@ -19,6 +19,12 @@
 #include "constants/songs.h"
 #include "constants/region_map.h"
 
+#define FREE_IF_NOT_NULL(ptr) ({ \
+    if (ptr) {                   \
+        FREE_AND_SET_NULL(ptr);  \
+    }                            \
+})
+
 struct UnkStruct_20399D4
 {
     u8 field_0000[19];
@@ -131,21 +137,29 @@ struct UnkStruct_20399E0
     TaskFunc field_CC8;
     u8 field_CCC;
     u8 field_CCD;
-    u8 filler_CCE[2];
+    u8 field_CCE;
+    u8 field_CCF;
     u8 field_CD0;
 }; // size = 0xCD4
 
-#define FREE_IF_NOT_NULL(ptr) ({       \
-    if (ptr) {                  \
-        FREE_AND_SET_NULL(ptr); \
-    }                           \
-})
+struct UnkStruct_20399E4
+{
+    s16 field_000;
+    s16 field_002;
+    u8 filler_004[4];
+    u16 field_008;
+    u16 field_00A;
+    u16 field_00C;
+    u8 filler_00E[14];
+    struct Sprite * field_01C;
+    u8 filler_020[0x104];
+};
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
 EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
 EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
-EWRAM_DATA void * gUnknown_20399E4 = NULL;
+EWRAM_DATA struct UnkStruct_20399E4 * gUnknown_20399E4 = NULL;
 EWRAM_DATA void * gUnknown_20399E8 = NULL;
 EWRAM_DATA void * gUnknown_20399EC = NULL;
 EWRAM_DATA void * gUnknown_20399F0[3] = {};
@@ -199,6 +213,8 @@ void sub_80C2604(void);
 bool8 sub_80C29A4(void);
 void sub_80C2B48(void);
 void sub_80C2C1C(u8 taskId);
+void sub_80C2C7C(u8 taskId);
+bool8 sub_80C2E1C(void);
 void sub_80C3008(u16 a0, u16 a1);
 void sub_80C3154(u8 a0);
 void sub_80C3178(void);
@@ -1787,5 +1803,232 @@ void sub_80C267C(u8 taskId)
         sub_80C2604();
         sub_80C2594(taskId);
         break;
+    }
+}
+
+bool8 sub_80C29A4(void)
+{
+    sub_80C2B48();
+    if (gUnknown_20399E0->field_000[0]->field_400->pos1.x == 0)
+    {
+        return TRUE;
+    }
+    else if (gUnknown_20399E0->field_CCE > 17)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x -= 1;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x -= 1;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x -= 1;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x += 1;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x += 1;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x += 1;
+    }
+    else if (gUnknown_20399E0->field_CCE > 14)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x -= 2;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x -= 2;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x -= 2;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x += 2;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x += 2;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x += 2;
+    }
+    else if (gUnknown_20399E0->field_CCE > 10)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x -= 3;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x -= 3;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x -= 3;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x += 3;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x += 3;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x += 3;
+    }
+    else if (gUnknown_20399E0->field_CCE > 6)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x -= 5;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x -= 5;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x -= 5;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x += 5;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x += 5;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x += 5;
+    }
+    else
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x -= 8;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x -= 8;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x -= 8;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x += 8;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x += 8;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x += 8;
+    }
+    gUnknown_20399E0->field_CCE++;
+    return FALSE;
+}
+
+void sub_80C2B48(void)
+{
+    struct UnkStruct_80C4CF0 data;
+    data.v0 = gUnknown_20399E0->field_000[0]->field_400->pos1.x;
+    data.v2 = 0x10;
+    data.v4 = gUnknown_20399E0->field_000[3]->field_400->pos1.x;
+    data.v6 = 0xA0;
+    sub_80C4CF0(0, &data);
+}
+
+void sub_80C2B9C(void)
+{
+    struct UnkStruct_80C4CF0 data;
+    data.v0 = gUnknown_20399E0->field_000[0]->field_404 + 16;
+    data.v2 = 0x10;
+    data.v4 = gUnknown_20399E0->field_000[3]->field_404 - 16;
+    data.v6 = 0xA0;
+    sub_80C4C2C(0, 2, 0);
+    sub_80C4C74(18, 0);
+    sub_80C4C88(16);
+    sub_80C4CF0(0, &data);
+    sub_80C4C9C(0, 0);
+}
+
+void sub_80C2C1C(u8 taskId)
+{
+    gTasks[taskId].func = sub_80C2C7C;
+}
+
+void sub_80C2C38(void)
+{
+    sub_80C210C(0, 4, 4);
+    sub_80C210C(1, 5, 5);
+    sub_80C210C(2, 6, 6);
+    sub_80C210C(3, 7, 7);
+    sub_80C210C(4, 8, 8);
+    sub_80C210C(5, 9, 9);
+}
+
+void sub_80C2C7C(u8 taskId)
+{
+    switch (gUnknown_20399E0->field_CCF)
+    {
+    case 0:
+        sub_80C4ED0(TRUE);
+        CopyWindowToVram(3, 3);
+        CopyWindowToVram(4, 3);
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 1:
+        sub_80C2C38();
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 2:
+        LoadPalette(gUnknown_83EF2DC, 0x00, 0xA0);
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 3:
+        sub_80C22C4(6, FALSE);
+        sub_80C4324(1);
+        sub_80C3154(1);
+        sub_80C4960(255, 25, 1);
+        sub_80C48BC(255, 25, 1);
+        gUnknown_20399E0->field_CCE = 0;
+        gUnknown_20399E0->field_CD0 = 0;
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 4:
+        sub_80C253C();
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 5:
+        if (gUnknown_20399E0->field_CD0 == 15)
+        {
+            sub_80C4C48(gUnknown_20399E0->field_CD0);
+            gUnknown_20399E0->field_CCF++;
+        }
+        else
+        {
+            gUnknown_20399E0->field_CD0++;
+            sub_80C4C48(gUnknown_20399E0->field_CD0);
+        }
+        break;
+    case 6:
+        sub_80C2B9C();
+        sub_80C2B48();
+        PlaySE(SE_CARD2);
+        gUnknown_20399E0->field_CCF++;
+        break;
+    case 7:
+        if (sub_80C2E1C() == TRUE)
+            gUnknown_20399E0->field_CCF++;
+        break;
+    default:
+        gTasks[taskId].func = gUnknown_20399E0->field_CC8;
+        break;
+    }
+}
+
+
+bool8 sub_80C2E1C(void)
+{
+    sub_80C2B48();
+    if (gUnknown_20399E0->field_000[0]->field_400->pos1.x == 104)
+    {
+        return TRUE;
+    }
+    else if (gUnknown_20399E0->field_CCE > 17)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x += 1;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x += 1;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x += 1;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x -= 1;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x -= 1;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x -= 1;
+    }
+    else if (gUnknown_20399E0->field_CCE > 14)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x += 2;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x += 2;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x += 2;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x -= 2;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x -= 2;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x -= 2;
+    }
+    else if (gUnknown_20399E0->field_CCE > 10)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x += 3;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x += 3;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x += 3;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x -= 3;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x -= 3;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x -= 3;
+    }
+    else if (gUnknown_20399E0->field_CCE > 6)
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x += 5;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x += 5;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x += 5;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x -= 5;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x -= 5;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x -= 5;
+    }
+    else
+    {
+        gUnknown_20399E0->field_000[0]->field_400->pos1.x += 8;
+        gUnknown_20399E0->field_000[1]->field_400->pos1.x += 8;
+        gUnknown_20399E0->field_000[2]->field_400->pos1.x += 8;
+        gUnknown_20399E0->field_000[3]->field_400->pos1.x -= 8;
+        gUnknown_20399E0->field_000[4]->field_400->pos1.x -= 8;
+        gUnknown_20399E0->field_000[5]->field_400->pos1.x -= 8;
+    }
+    gUnknown_20399E0->field_CCE++;
+    return FALSE;
+}
+
+void sub_80C2FC0(struct Sprite * sprite)
+{
+    if (gUnknown_20399E4->field_00C != 0)
+    {
+        sprite->pos1.x += gUnknown_20399E4->field_008;
+        sprite->pos1.y += gUnknown_20399E4->field_00A;
+        gUnknown_20399E4->field_00C--;
+    }
+    else
+    {
+        gUnknown_20399E4->field_01C->pos1.x = 8 * gUnknown_20399E4->field_000 + 36;
+        gUnknown_20399E4->field_01C->pos1.y = 8 * gUnknown_20399E4->field_002 + 36;
     }
 }

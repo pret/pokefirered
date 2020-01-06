@@ -146,13 +146,20 @@ struct UnkStruct_20399E4
 {
     s16 field_000;
     s16 field_002;
-    u8 filler_004[4];
-    u16 field_008;
-    u16 field_00A;
+    u16 field_004;
+    u16 field_006;
+    s16 field_008;
+    s16 field_00A;
     u16 field_00C;
-    u8 filler_00E[14];
+    u8 field_00E;
+    u8 (*field_010)(void);
+    u16 field_014;
+    u16 field_016;
+    u16 field_018;
     struct Sprite * field_01C;
-    u8 filler_020[0x104];
+    u16 field_020;
+    u16 field_022;
+    u16 field_024[0x080];
 };
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
@@ -216,12 +223,19 @@ void sub_80C2C1C(u8 taskId);
 void sub_80C2C7C(u8 taskId);
 bool8 sub_80C2E1C(void);
 void sub_80C3008(u16 a0, u16 a1);
-void sub_80C3154(u8 a0);
+void sub_80C309C(void);
+void sub_80C3154(bool8 a0);
 void sub_80C3178(void);
 void sub_80C3188(void);
+u8 sub_80C31C0(void);
+u8 sub_80C3348(void);
 u8 sub_80C3400(void);
+void sub_80C3418(void);
+u8 sub_80C3878(u8 a0);
 u16 sub_80C3520(void);
+u8 sub_80C35DC(u8 a0);
 u8 sub_80C3AC8(u8 a0);
+void sub_80C3D40(void);
 u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
 void sub_80C41D8(u16 a0, u16 a1);
 void sub_80C4324(u8 a0);
@@ -251,11 +265,13 @@ u16 sub_80C3580(void);
 
 #include "data/text/map_section_names.h"
 extern const u16 gUnknown_83EF23C[];
+extern const u16 gUnknown_83EF25C[];
 extern const u16 gUnknown_83EF2DC[];
 extern const u16 gUnknown_83EF384[];
 extern const u16 gUnknown_83EF3A4[];
 extern const u32 gUnknown_83EF3C4[];
 extern const u32 gUnknown_83EF450[];
+extern const u32 gUnknown_83EF4E0[];
 extern const u32 gUnknown_83EF61C[];
 extern const u32 gUnknown_83F0330[];
 extern const u32 gUnknown_83F0E0C[];
@@ -289,6 +305,8 @@ extern const struct UnkStruct_83F1B3C gUnknown_83F1B3C[];
 extern const struct OamData gUnknown_83F1C20;
 extern const union AnimCmd *const gUnknown_83F1C30[];
 extern const struct UnkStruct_80C4CF0 gUnknown_83F1C34;
+extern const struct OamData gUnknown_83F1C3C;
+extern const union AnimCmd *const gUnknown_83F1C50[];
 extern const u8 *const gUnknown_83F1CAC[];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -558,7 +576,7 @@ void sub_80C04E4(u8 taskId)
             sub_80C4E74(gUnknown_8418E8B);
             sub_80C4ED0(FALSE);
             sub_80C4324(0);
-            sub_80C3154(0);
+            sub_80C3154(FALSE);
             sub_80C48BC(sub_80C0E20(), 25, 0);
             sub_80C4960(sub_80C0E20(), 25, 0);
         }
@@ -579,6 +597,8 @@ void sub_80C04E4(u8 taskId)
         {
         case 1:
             sub_80C3178();
+            break;
+        case 2:
             break;
         case 3:
             sub_80C0B18();
@@ -1051,7 +1071,7 @@ void sub_80C1098(u8 taskId)
         }
         break;
     case 12:
-        sub_80C3154(0);
+        sub_80C3154(FALSE);
         gUnknown_20399D8->field_1CC8++;
         break;
     default:
@@ -1742,7 +1762,7 @@ void sub_80C267C(u8 taskId)
         break;
     case 7:
         sub_80C4324(0);
-        sub_80C3154(0);
+        sub_80C3154(FALSE);
         gUnknown_20399E0->field_CCC++;
         break;
     case 8:
@@ -1922,7 +1942,7 @@ void sub_80C2C7C(u8 taskId)
     case 3:
         sub_80C22C4(6, FALSE);
         sub_80C4324(1);
-        sub_80C3154(1);
+        sub_80C3154(TRUE);
         sub_80C4960(255, 25, 1);
         sub_80C48BC(255, 25, 1);
         gUnknown_20399E0->field_CCE = 0;
@@ -2031,4 +2051,175 @@ void sub_80C2FC0(struct Sprite * sprite)
         gUnknown_20399E4->field_01C->pos1.x = 8 * gUnknown_20399E4->field_000 + 36;
         gUnknown_20399E4->field_01C->pos1.y = 8 * gUnknown_20399E4->field_002 + 36;
     }
+}
+
+void sub_80C3008(u16 a0, u16 a1)
+{
+    gUnknown_20399E4 = AllocZeroed(sizeof(struct UnkStruct_20399E4));
+    LZ77UnCompWram(gUnknown_83EF4E0, gUnknown_20399E4->field_024);
+    gUnknown_20399E4->field_020 = a0;
+    gUnknown_20399E4->field_022 = a1;
+    sub_80C3D40();
+    gUnknown_20399E4->field_004 = 8 * gUnknown_20399E4->field_000 + 36;
+    gUnknown_20399E4->field_006 = 8 * gUnknown_20399E4->field_002 + 36;
+    gUnknown_20399E4->field_010 = sub_80C31C0;
+    gUnknown_20399E4->field_016 = sub_80C35DC(gUnknown_20399E4->field_014);
+    gUnknown_20399E4->field_018 = sub_80C3878(sub_80C4164(sub_80C0E20(), 1, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000));
+    sub_80C309C();
+}
+
+void sub_80C309C(void)
+{
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399E4->field_024,
+        .size = 0x100,
+        .tag = gUnknown_20399E4->field_020
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF25C,
+        .tag = gUnknown_20399E4->field_022
+    };
+    struct SpriteTemplate template = {
+        .tileTag = gUnknown_20399E4->field_020,
+        .paletteTag = gUnknown_20399E4->field_022,
+        .oam = &gUnknown_83F1C3C,
+        .anims = gUnknown_83F1C50,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_80C2FC0
+    };
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&template, gUnknown_20399E4->field_004, gUnknown_20399E4->field_006, 0);
+    gUnknown_20399E4->field_01C = &gSprites[spriteId];
+    sub_80C3154(TRUE);
+}
+
+void sub_80C3154(bool8 a0)
+{
+    gUnknown_20399E4->field_01C->invisible = a0;
+}
+
+void sub_80C3178(void)
+{
+    gUnknown_20399E4->field_00E = 0;
+}
+
+void sub_80C3188(void)
+{
+    if (gUnknown_20399E4->field_01C != NULL)
+    {
+        DestroySprite(gUnknown_20399E4->field_01C);
+        FreeSpriteTilesByTag(gUnknown_20399E4->field_020);
+        FreeSpritePaletteByTag(gUnknown_20399E4->field_022);
+    }
+    FREE_IF_NOT_NULL(gUnknown_20399E4);
+}
+
+u8 sub_80C31C0(void)
+{
+    u8 ret = 0;
+    gUnknown_20399E4->field_008 = 0;
+    gUnknown_20399E4->field_00A = 0;
+
+    if (JOY_HELD(DPAD_UP))
+    {
+        if (gUnknown_20399E4->field_002 > 0)
+        {
+            gUnknown_20399E4->field_00A = -2;
+            ret = 1;
+        }
+    }
+    if (JOY_HELD(DPAD_DOWN))
+    {
+        if (gUnknown_20399E4->field_002 < 14)
+        {
+            gUnknown_20399E4->field_00A = 2;
+            ret = 1;
+        }
+    }
+    if (JOY_HELD(DPAD_RIGHT))
+    {
+        if (gUnknown_20399E4->field_000 < 21)
+        {
+            gUnknown_20399E4->field_008 = 2;
+            ret = 1;
+        }
+    }
+    if (JOY_HELD(DPAD_LEFT))
+    {
+        if (gUnknown_20399E4->field_000 > 0)
+        {
+            gUnknown_20399E4->field_008 = -2;
+            ret = 1;
+        }
+    }
+    if (JOY_NEW(A_BUTTON))
+    {
+        ret = 4;
+        if (gUnknown_20399E4->field_000 == 21 && gUnknown_20399E4->field_002 == 13)
+        {
+            PlaySE(SE_W063B);
+            ret = 6;
+        }
+        if (gUnknown_20399E4->field_000 == 21 && gUnknown_20399E4->field_002 == 11)
+        {
+            if (sub_80C0E04(0) == TRUE)
+            {
+                PlaySE(SE_W063B);
+                ret = 5;
+            }
+        }
+    }
+    else if (!JOY_NEW(B_BUTTON))
+    {
+        if (JOY_REPT(START_BUTTON))
+        {
+            sub_80C3418();
+            gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+            gUnknown_20399E4->field_016 = sub_80C35DC(gUnknown_20399E4->field_014);
+            gUnknown_20399E4->field_018 = sub_80C3878(sub_80C4164(sub_80C0E20(), 1, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000));
+            return 3;
+        }
+        else if (JOY_NEW(SELECT_BUTTON) && gUnknown_20399D4->field_47BC == CB2_ReturnToField)
+        {
+            ret = 6;
+        }
+    }
+    else
+    {
+        ret = 6;
+    }
+    if (ret == 1)
+    {
+        gUnknown_20399E4->field_00C = 4;
+        gUnknown_20399E4->field_010 = sub_80C3348;
+    }
+    return ret;
+}
+
+u8 sub_80C3348(void)
+{
+    if (gUnknown_20399E4->field_00C != 0)
+        return 2;
+    if (gUnknown_20399E4->field_008 > 0)
+        gUnknown_20399E4->field_000++;
+    if (gUnknown_20399E4->field_008 < 0)
+        gUnknown_20399E4->field_000--;
+    if (gUnknown_20399E4->field_00A > 0)
+        gUnknown_20399E4->field_002++;
+    if (gUnknown_20399E4->field_00A < 0)
+        gUnknown_20399E4->field_002--;
+    gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+    gUnknown_20399E4->field_016 = sub_80C35DC(gUnknown_20399E4->field_014);
+    gUnknown_20399E4->field_018 = sub_80C3878(sub_80C4164(sub_80C0E20(), 1, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000));
+    gUnknown_20399E4->field_010 = sub_80C31C0;
+    return 3;
+}
+
+u8 sub_80C3400(void)
+{
+    return gUnknown_20399E4->field_010();
 }

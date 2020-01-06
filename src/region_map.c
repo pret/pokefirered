@@ -3,6 +3,7 @@
 #include "gpu_regs.h"
 #include "scanline_effect.h"
 #include "task.h"
+#include "m4a.h"
 #include "malloc.h"
 #include "overworld.h"
 #include "event_data.h"
@@ -195,6 +196,8 @@ void sub_80C24BC(void);
 void sub_80C267C(u8 taskId);
 void sub_80C25BC(void);
 void sub_80C2604(void);
+bool8 sub_80C29A4(void);
+void sub_80C2B48(void);
 void sub_80C2C1C(u8 taskId);
 void sub_80C3008(u16 a0, u16 a1);
 void sub_80C3154(u8 a0);
@@ -1676,5 +1679,113 @@ void sub_80C2604(void)
             FreeSpriteTilesByTag(gUnknown_20399E0->field_000[i]->field_408);
             FreeSpritePaletteByTag(gUnknown_20399E0->field_000[i]->field_40A);
         }
+    }
+}
+
+void sub_80C267C(u8 taskId)
+{
+    switch (gUnknown_20399E0->field_CCC)
+    {
+    case 0:
+        sub_80C08E0();
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 1:
+        if (sub_80C2344() == TRUE)
+            gUnknown_20399E0->field_CCC++;
+        break;
+    case 2:
+        CopyToBgTilemapBufferRect(1, gUnknown_20399E0->field_818, 0, 0, 30, 20);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 3:
+        CopyBgTilemapBufferToVram(1);
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        sub_80C08F4();
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 4:
+        ShowBg(0);
+        ShowBg(3);
+        ShowBg(1);
+        sub_80C22C4(6, FALSE);
+        sub_80C2B48();
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 5:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_20399E0->field_CCC++;
+            PlaySE(SE_CARD3);
+        }
+        break;
+    case 6:
+        if (sub_80C29A4() == TRUE)
+            gUnknown_20399E0->field_CCC++;
+        break;
+    case 7:
+        sub_80C4324(0);
+        sub_80C3154(0);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 8:
+        gUnknown_20399E0->field_CD0 = 15;
+        sub_80C253C();
+        sub_80C0A88(0);
+        sub_80C48BC(sub_80C0E20(), 25, 0);
+        sub_80C4960(sub_80C0E20(), 25, 0);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 9:
+        sub_80C4E18(gUnknown_8418EB5);
+        if (sub_80C3AC8(1) != 2)
+            sub_80C4E74(gUnknown_8418E8B);
+        else
+            sub_80C4E74(gUnknown_8418E8D);
+        sub_80C4ED0(FALSE);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 10:
+        LoadPalette(&gUnknown_83EF23C[15], 0x00, 2);
+        LoadPalette(&gUnknown_83EF23C[15], 0x10, 2);
+        LoadPalette(&gUnknown_83EF23C[15], 0x20, 2);
+        LoadPalette(&gUnknown_83EF23C[15], 0x30, 2);
+        LoadPalette(&gUnknown_83EF23C[15], 0x40, 2);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 11:
+        FillBgTilemapBufferRect(1, 0x002, 0, 1, 1, 1, 0x2);
+        FillBgTilemapBufferRect(1, 0x003, 1, 1, 1, 1, 0x2);
+        FillBgTilemapBufferRect(1, 0x03E, 28, 1, 1, 1, 0x2);
+        FillBgTilemapBufferRect(1, 0x03F, 29, 1, 1, 1, 0x2);
+        FillBgTilemapBufferRect(1, 0x03D, 2, 1, 26, 1, 0x2);
+        CopyBgTilemapBufferToVram(1);
+        m4aSongNumStop(SE_CARD3);
+        PlaySE(SE_HI_TURUN);
+        gUnknown_20399E0->field_CCC++;
+        break;
+    case 12:
+        if (gUnknown_20399E0->field_CD0 == 2)
+        {
+            sub_80C22C4(6, TRUE);
+            gUnknown_20399E0->field_CCC++;
+            sub_80C4C48(0);
+        }
+        else
+        {
+            gUnknown_20399E0->field_CD0--;
+            sub_80C4C48(gUnknown_20399E0->field_CD0);
+        }
+        break;
+    case 13:
+        sub_80C4B30(0);
+        sub_80C0BB0();
+        gUnknown_20399E0->field_CCC++;
+        break;
+    default:
+        sub_80C2604();
+        sub_80C2594(taskId);
+        break;
     }
 }

@@ -317,7 +317,7 @@ gSpecials:: @ 815FD60
 	def_special Special_DrawElevatorCurrentFloorWindow
 	def_special nullsub_75
 	def_special Special_CheckPartyPokerus
-	def_special sub_806E99C
+	def_special Special_SetIcefallCaveCrackedIceMetatiles
 	def_special Special_ShakeScreen
 	def_special Special_StartGroudonKyogreBattle
 	def_special Special_StartLegendaryBattle

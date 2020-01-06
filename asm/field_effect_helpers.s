@@ -2691,8 +2691,8 @@ _080DC234: .4byte gFieldEffectObjectTemplatePointers
 _080DC238: .4byte gSprites
 	thumb_func_end FldEff_Unknown22
 
-	thumb_func_start ash
-ash: @ 80DC23C
+	thumb_func_start StartAshFieldEffect
+StartAshFieldEffect: @ 80DC23C
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
@@ -2718,7 +2718,7 @@ ash: @ 80DC23C
 	bx r0
 	.align 2, 0
 _080DC26C: .4byte gFieldEffectArguments
-	thumb_func_end ash
+	thumb_func_end StartAshFieldEffect
 
 	thumb_func_start oei_ash
 oei_ash: @ 80DC270

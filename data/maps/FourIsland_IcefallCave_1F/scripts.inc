@@ -9,7 +9,7 @@ FourIsland_IcefallCave_1F_MapScript1_163D54:: @ 8163D54
 	end
 
 FourIsland_IcefallCave_1F_MapScript2_163D57:: @ 8163D57
-	special sub_806E99C
+	special Special_SetIcefallCaveCrackedIceMetatiles
 	end
 
 FourIsland_IcefallCave_1F_MapScript3_163D5B:: @ 8163D5B

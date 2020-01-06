@@ -106,7 +106,7 @@ SECTIONS {
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
-        asm/field_tasks.o(.text);
+        src/field_tasks.o(.text);
         src/start_menu.o(.text);
         src/tileset_anims.o(.text);
         src/palette.o(.text);
@@ -422,7 +422,7 @@ SECTIONS {
         data/event_object_80688E4.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
-        data/field_tasks.o(.rodata);
+        src/field_tasks.o(.rodata);
         src/start_menu.o(.rodata);
         src/tileset_anims.o(.rodata);
         src/palette.o(.rodata);
@@ -433,6 +433,7 @@ SECTIONS {
         src/battle_anim_status_effects.o(.rodata);
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
+        src/field_screen_effect.o(.rodata);
         data/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);

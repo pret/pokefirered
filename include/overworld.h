@@ -122,7 +122,7 @@ void Overworld_ResetStateAfterTeleport(void);
 
 void Overworld_FadeOutMapMusic(void);
 void CB2_LoadMap(void);
-bool8 sub_8055FC4(void);
+bool8 BGMusicStopped(void);
 bool8 is_light_level_8_or_9(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
@@ -147,5 +147,7 @@ void sub_8054F38(u32 newKey);
 void sub_8055778(int);
 
 void sub_8055738(u8 loc);
+
+void sub_8056078(void *, void *);
 
 #endif //GUARD_OVERWORLD_H

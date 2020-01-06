@@ -1737,7 +1737,7 @@ _080558D4:
 	bl RoamerMove
 	bl sub_8110920
 	bl DoCurrentWeather
-	bl wild_encounter_reset_coro_args
+	bl ResetFieldTasksArgs
 	bl mapheader_run_script_with_tag_x5
 	bl sub_80561B4
 	ldr r1, _0805591C @ =gMapHeader
@@ -2640,15 +2640,15 @@ _08055FB8:
 _08055FC0: .4byte 0x00004001
 	thumb_func_end sub_8055F88
 
-	thumb_func_start sub_8055FC4
-sub_8055FC4: @ 8055FC4
+	thumb_func_start BGMusicStopped
+BGMusicStopped: @ 8055FC4
 	push {lr}
 	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055FC4
+	thumb_func_end BGMusicStopped
 
 	thumb_func_start Overworld_FadeOutMapMusic
 Overworld_FadeOutMapMusic: @ 8055FD4
@@ -3941,8 +3941,8 @@ VBlankCB_Field: @ 8056A14
 	bx r0
 	thumb_func_end VBlankCB_Field
 
-	thumb_func_start sub_8056A34
-sub_8056A34: @ 8056A34
+	thumb_func_start InitCurrentFlashLevelScanlineEffect
+InitCurrentFlashLevelScanlineEffect: @ 8056A34
 	push {lr}
 	bl Overworld_GetFlashLevel
 	lsls r0, 24
@@ -3950,7 +3950,7 @@ sub_8056A34: @ 8056A34
 	cmp r0, 0
 	beq _08056A52
 	bl WriteFlashScanlineEffectBuffer
-	ldr r2, _08056A58 @ =gUnknown_826D330
+	ldr r2, _08056A58 @ =gFlashEffectParams
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
@@ -3959,8 +3959,8 @@ _08056A52:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056A58: .4byte gUnknown_826D330
-	thumb_func_end sub_8056A34
+_08056A58: .4byte gFlashEffectParams
+	thumb_func_end InitCurrentFlashLevelScanlineEffect
 
 	thumb_func_start sub_8056A5C
 sub_8056A5C: @ 8056A5C
@@ -4015,7 +4015,7 @@ _08056ACE:
 	bl sub_812B35C
 	b _08056B62
 _08056AE4:
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	b _08056B62
 _08056AEE:
@@ -4157,7 +4157,7 @@ _08056C16:
 	.align 2, 0
 _08056C1C: .4byte gUnknown_203ADFA
 _08056C20:
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	b _08056CCA
 _08056C2A:
@@ -4346,7 +4346,7 @@ _08056DAE:
 	bl sub_812B35C
 	b _08056E3E
 _08056DC0:
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	b _08056E3E
 _08056DCA:
@@ -4513,7 +4513,7 @@ _08056F04: .4byte 0x81000800
 	thumb_func_start sub_8056F08
 sub_8056F08: @ 8056F08
 	push {lr}
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	bl mapdata_load_assets_to_gpu_and_full_redraw
 	pop {r0}
@@ -4648,7 +4648,7 @@ _08057056:
 	bl sub_807B1B8
 	cmp r4, 0
 	bne _0805706A
-	bl sub_806E87C
+	bl SetUpFieldTasks
 _0805706A:
 	bl mapheader_run_script_with_tag_x5
 	pop {r4}
@@ -5057,7 +5057,7 @@ _080573AE:
 	bl sub_8057114
 	b _08057412
 _080573B8:
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	b _08057412
 _080573C2:
@@ -5402,11 +5402,11 @@ _0805769C:
 	bl FieldEffectActiveListClear
 	bl sub_8079C08
 	bl sub_807B1B8
-	bl sub_806E87C
+	bl SetUpFieldTasks
 	bl mapheader_run_script_with_tag_x5
 	b _0805772A
 _080576C2:
-	bl sub_8056A34
+	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C
 	b _0805772A
 _080576CC:

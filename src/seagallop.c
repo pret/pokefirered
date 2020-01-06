@@ -303,7 +303,7 @@ static void Task_Seagallop_1(u8 taskId)
 static void Task_Seagallop_2(u8 taskId)
 {
     ScrollBG();
-    if (sub_8055FC4() && !gPaletteFade.active)
+    if (BGMusicStopped() && !gPaletteFade.active)
     {
         Task_Seagallop_3();
         HelpSystem_Enable();

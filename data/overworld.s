@@ -97,7 +97,7 @@ gUnknown_826D320:: @ 826D320
 	@ 	.baseTile = 0x0000
 	@ }
 
-gUnknown_826D330:: @ 826D330
+gFlashEffectParams:: @ 826D330
 	.4byte REG_WIN0H
 	.4byte (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16)
 	.byte 1, 0

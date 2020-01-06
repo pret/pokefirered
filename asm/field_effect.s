@@ -2854,7 +2854,7 @@ sub_80849A0: @ 80849A0
 	ands r0, r1
 	cmp r0, 0
 	bne _080849DC
-	bl sub_8055FC4
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3878,7 +3878,7 @@ sub_8085168: @ 8085168
 	ands r0, r1
 	cmp r0, 0
 	bne _080851A0
-	bl sub_8055FC4
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4383,7 +4383,7 @@ sub_808554C: @ 808554C
 	ands r0, r1
 	cmp r0, 0
 	bne _08085584
-	bl sub_8055FC4
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4601,7 +4601,7 @@ _08085702:
 	ands r0, r1
 	cmp r0, 0
 	bne _08085750
-	bl sub_8055FC4
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5400,7 +5400,7 @@ sub_8085D34: @ 8085D34
 	ands r0, r1
 	cmp r0, 0
 	bne _08085D70
-	bl sub_8055FC4
+	bl BGMusicStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

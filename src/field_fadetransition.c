@@ -330,7 +330,7 @@ static void sub_807DFBC(u8 taskId)
     case 5:
         sub_807DCB0(0);
         FreezeObjectEvents();
-        sub_807F114();
+        DoOutwardBarnDoorWipe();
         sub_807DBAC();
         task->data[0] = 6;
         break;
@@ -362,7 +362,7 @@ static void sub_807DFBC(u8 taskId)
         }
         break;
     case 9:
-        if (sub_807E418() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(sub_807F204))
+        if (sub_807E418() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
         {
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             task->data[0] = 4;
@@ -627,7 +627,7 @@ static void sub_807E5EC(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && sub_8055FC4())
+        if (!sub_807E40C() && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -660,7 +660,7 @@ static void sub_807E678(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && sub_8055FC4())
+        if (!sub_807E40C() && BGMusicStopped())
         {
             sub_800AAC0();
             data[0]++;
@@ -693,7 +693,7 @@ static void sub_807E718(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && sub_8055FC4())
+        if (!sub_807E40C() && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -724,7 +724,7 @@ static void sub_807E784(u8 taskId)
         }
         break;
     case 2:
-        if (!sub_807E40C() && sub_8055FC4())
+        if (!sub_807E40C() && BGMusicStopped())
             task->data[0]++;
         break;
     case 3:
@@ -828,7 +828,7 @@ static void sub_807E980(u8 taskId)
         break;
     case 3:
         sub_807EAC4(data[2], data[3], &data[4], &data[5], &data[6]);
-        if (!sub_807E40C() && sub_8055FC4())
+        if (!sub_807E40C() && BGMusicStopped())
             data[0]++;
         break;
     default:

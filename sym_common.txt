@@ -61,37 +61,8 @@ gUnknown_3005078: @ 3005078
 	
 	@ what is this?
 	.space 0x20
-
-gUnknown_3005330: @ 3005330
-	.space 0x4
-
-gUnknown_3005334: @ 3005334
-	.space 0x4
-
-gUnknown_3005338: @ 3005338
-	.space 0x4
-
-gUnknown_300533C: @ 300533C
-	.space 0x4
-
-gUnknown_3005340: @ 3005340
-	.space 0x4
-
-gUnknown_3005344: @ 3005344
-	.space 0x4
-
-gUnknown_3005348: @ 3005348
-	.space 0x4
-
-gUnknown_300534C: @ 300534C
-	.space 0x4
-
-gUnknown_3005350: @ 3005350
-	.space 0x4
-
-gUnknown_3005354: @ 3005354
-	.space 0xC
-
+	.align 2
+	.include "image_processing_effects.o"
 	.align 2
 	.include "field_specials.o"
 	.align 2

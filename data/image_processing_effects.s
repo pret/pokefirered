@@ -1,7 +1,7 @@
 	.section .rodata
 	.align 2, 0
 
-gUnknown_83F3024:: @ 83F3024
+gPointillismPoints:: @ 83F3024
 	.byte 0x00, 0x1d, 0x1c
 	.byte 0x0e, 0x1e, 0x1b
 	.byte 0x00, 0x01, 0x32

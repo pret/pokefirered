@@ -181,7 +181,7 @@ SECTIONS {
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        asm/image_processing_effects.o(.text);
+        src/image_processing_effects.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);

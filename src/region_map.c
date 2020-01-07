@@ -310,6 +310,8 @@ extern const struct UnkStruct_80C4CF0 gUnknown_83F1C34;
 extern const struct OamData gUnknown_83F1C3C;
 extern const union AnimCmd *const gUnknown_83F1C50[];
 extern const u8 *const gUnknown_83F1CAC[];
+extern const u16 gUnknown_83F1E60[][2];
+extern const u16 gUnknown_83F2178[][2];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 {
@@ -2439,4 +2441,100 @@ u8 sub_80C3878(u8 mapsec)
     default:
         return 1;
     }
+}
+
+u8 sub_80C3AC8(u8 a0)
+{
+    switch (a0)
+    {
+    default:
+        return gUnknown_20399E4->field_016;
+    case 0:
+        return gUnknown_20399E4->field_016;
+    case 1:
+        return gUnknown_20399E4->field_018;
+    }
+}
+
+u8 sub_80C3B00(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
+}
+
+void sub_80C3B28(void)
+{
+    u16 width;
+    u32 divisor;
+    u16 height;
+    u16 x;
+    u16 y;
+    u32 r6;
+    const struct MapHeader * mapHeader;
+    struct WarpData * warp;
+
+    switch (get_map_light_level_by_bank_and_number(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+    {
+    default:
+    case 1:
+    case 2:
+    case 3:
+    case 5:
+    case 6:
+        gUnknown_20399E4->field_014 = gMapHeader.regionMapSectionId;
+        width = gMapHeader.mapLayout->width;
+        height = gMapHeader.mapLayout->height;
+        x = gSaveBlock1Ptr->pos.x;
+        y = gSaveBlock1Ptr->pos.y;
+        break;
+    case 4:
+    case 7:
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
+        gUnknown_20399E4->field_014 = mapHeader->regionMapSectionId;
+        width = mapHeader->mapLayout->width;
+        height = mapHeader->mapLayout->height;
+        x = gSaveBlock1Ptr->escapeWarp.x;
+        y = gSaveBlock1Ptr->escapeWarp.y;
+        break;
+    case 9:
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->warp2.mapGroup, gSaveBlock1Ptr->warp2.mapNum);
+        gUnknown_20399E4->field_014 = mapHeader->regionMapSectionId;
+        width = mapHeader->mapLayout->width;
+        height = mapHeader->mapLayout->height;
+        x = gSaveBlock1Ptr->warp2.x;
+        y = gSaveBlock1Ptr->warp2.y;
+        break;
+    case 8:
+        if ((gUnknown_20399E4->field_014 = gMapHeader.regionMapSectionId) != MAPSEC_SPECIAL_AREA)
+        {
+            warp = &gSaveBlock1Ptr->escapeWarp;
+            mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
+        }
+        else
+        {
+            warp = &gSaveBlock1Ptr->warp2;
+            mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
+            gUnknown_20399E4->field_014 = mapHeader->regionMapSectionId;
+        }
+        width = mapHeader->mapLayout->width;
+        height = mapHeader->mapLayout->height;
+        x = warp->x;
+        y = warp->y;
+        break;
+    }
+
+    gUnknown_20399E4->field_014 -= MAPSECS_KANTO;
+    divisor = width / gUnknown_83F2178[gUnknown_20399E4->field_014][0];
+    if (divisor == 0)
+        divisor = 1;
+    x /= divisor;
+    if (x >= gUnknown_83F2178[gUnknown_20399E4->field_014][0])
+        x = gUnknown_83F2178[gUnknown_20399E4->field_014][0] - 1;
+    divisor = height / gUnknown_83F2178[gUnknown_20399E4->field_014][1];
+    if (divisor == 0)
+        divisor = 1;
+    y /= divisor;
+    if (y >= gUnknown_83F2178[gUnknown_20399E4->field_014][1])
+        y = gUnknown_83F2178[gUnknown_20399E4->field_014][1] - 1;
+    gUnknown_20399E4->field_000 = x + gUnknown_83F1E60[gUnknown_20399E4->field_014][0];
+    gUnknown_20399E4->field_002 = y + gUnknown_83F1E60[gUnknown_20399E4->field_014][1];
 }

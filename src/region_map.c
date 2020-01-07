@@ -231,16 +231,18 @@ u8 sub_80C31C0(void);
 u8 sub_80C3348(void);
 u8 sub_80C3400(void);
 void sub_80C3418(void);
-u8 sub_80C3878(u8 a0);
 u16 sub_80C3520(void);
 u8 sub_80C35DC(u8 a0);
+u8 sub_80C3878(u8 a0);
 u8 sub_80C3AC8(u8 a0);
 void sub_80C3D40(void);
 u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
 void sub_80C41D8(u16 a0, u16 a1);
 void sub_80C4324(u8 a0);
-void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C4348(void);
+u16 sub_80C4380();
+u16 sub_80C438C();
+void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
 void sub_80C48BC(u8 a0, u8 a1, u8 a2);
 void sub_80C4960(u8 a0, u8 a1, u8 a2);
 void sub_80C4A04(void);
@@ -2222,4 +2224,93 @@ u8 sub_80C3348(void)
 u8 sub_80C3400(void)
 {
     return gUnknown_20399E4->field_010();
+}
+
+void sub_80C3418(void)
+{
+    if (sub_80C0E04(0) == 1)
+    {
+        gUnknown_20399E4->field_00E++;
+        gUnknown_20399E4->field_00E %= 3;
+        if (gUnknown_20399E4->field_00E == 0 && sub_80C0E20() != sub_80C0E34())
+        {
+            gUnknown_20399E4->field_00E++;
+        }
+        switch (gUnknown_20399E4->field_00E)
+        {
+        case 0:
+        default:
+            gUnknown_20399E4->field_000 = sub_80C4380();
+            gUnknown_20399E4->field_002 = sub_80C438C();
+            break;
+        case 1:
+            gUnknown_20399E4->field_000 = 21;
+            gUnknown_20399E4->field_002 = 11;
+            break;
+        case 2:
+            gUnknown_20399E4->field_002 = 13;
+            gUnknown_20399E4->field_000 = 21;
+            break;
+        }
+    }
+    else
+    {
+        gUnknown_20399E4->field_00E++;
+        gUnknown_20399E4->field_00E %= 2;
+        switch (gUnknown_20399E4->field_00E)
+        {
+        case 0:
+        default:
+            gUnknown_20399E4->field_000 = sub_80C4380();
+            gUnknown_20399E4->field_002 = sub_80C438C();
+            break;
+        case 1:
+            gUnknown_20399E4->field_002 = 13;
+            gUnknown_20399E4->field_000 = 21;
+            break;
+        }
+    }
+    gUnknown_20399E4->field_01C->pos1.x = 8 * gUnknown_20399E4->field_000 + 36;
+    gUnknown_20399E4->field_01C->pos1.y = 8 * gUnknown_20399E4->field_002 + 36;
+    gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+}
+
+u16 sub_80C3508(void)
+{
+    return gUnknown_20399E4->field_000;
+}
+
+u16 sub_80C3514(void)
+{
+    return gUnknown_20399E4->field_002;
+}
+
+u16 sub_80C3520(void)
+{
+    u8 ret;
+    if (gUnknown_20399E4->field_002 < 0
+     || gUnknown_20399E4->field_002 > 14
+     || gUnknown_20399E4->field_000 < 0
+     || gUnknown_20399E4->field_000 > 21)
+        return MAPSEC_NONE;
+
+    ret = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+    if ((ret == MAPSEC_NAVEL_ROCK || ret == MAPSEC_BIRTH_ISLAND) && !FlagGet(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR))
+        ret = MAPSEC_NONE;
+    return ret;
+}
+
+u16 sub_80C3580(void)
+{
+    u8 ret;
+    if (gUnknown_20399E4->field_002 < 0
+     || gUnknown_20399E4->field_002 > 14
+     || gUnknown_20399E4->field_000 < 0
+     || gUnknown_20399E4->field_000 > 21)
+        return MAPSEC_NONE;
+
+    ret = sub_80C4164(sub_80C0E20(), 1, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+    if (ret == MAPSEC_CERULEAN_CAVE && !FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
+        ret = MAPSEC_NONE;
+    return ret;
 }

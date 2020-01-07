@@ -161,7 +161,7 @@ struct UnkStruct_20399E4
     u16 field_020;
     u16 field_022;
     u16 field_024[0x080];
-};
+}; // size = 0x124
 
 struct UnkStruct_20399E8
 {
@@ -171,7 +171,29 @@ struct UnkStruct_20399E8
     u16 field_08;
     u16 field_0A;
     u16 field_0C[0x40];
+}; // size = 0x8C
+
+struct UnkStruct_20399EC_2D4
+{
+    u8 field_0;
+    struct Sprite * field_4;
+    u8 filler_8[8];
 };
+
+struct UnkStruct_20399EC
+{
+    u8 field_000[0x40];
+    u8 field_040[0x100];
+    u8 field_140[4];
+    struct UnkStruct_20399EC_2D4 field_144[25];
+    struct UnkStruct_20399EC_2D4 field_2D4[24];
+    u8 field_454[0xC];
+    u8 field_460;
+    u8 filler_461[2];
+    u8 field_463;
+    u8 filler_464[4];
+    TaskFunc field_468;
+}; // size = 0x46C
 
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
@@ -179,7 +201,7 @@ EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
 EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
 EWRAM_DATA struct UnkStruct_20399E4 * gUnknown_20399E4 = NULL;
 EWRAM_DATA struct UnkStruct_20399E8 * gUnknown_20399E8 = NULL;
-EWRAM_DATA void * gUnknown_20399EC = NULL;
+EWRAM_DATA struct UnkStruct_20399EC * gUnknown_20399EC = NULL;
 EWRAM_DATA void * gUnknown_20399F0[3] = {};
 EWRAM_DATA void * gUnknown_20399FC = NULL;
 
@@ -258,6 +280,10 @@ void sub_80C4348(void);
 u16 sub_80C4380();
 u16 sub_80C438C();
 void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
+void sub_80C440C(u8 taskId);
+void sub_80C44E4(u8 taskId);
+void sub_80C4750(void);
+void sub_80C47F0(void);
 void sub_80C48BC(u8 a0, u8 a1, u8 a2);
 void sub_80C4960(u8 a0, u8 a1, u8 a2);
 void sub_80C4A04(void);
@@ -282,6 +308,7 @@ extern const u16 gUnknown_83EF23C[];
 extern const u16 gUnknown_83EF25C[];
 extern const u16 gUnknown_83EF27C[];
 extern const u16 gUnknown_83EF29C[];
+extern const u16 gUnknown_83EF2BC[];
 extern const u16 gUnknown_83EF2DC[];
 extern const u16 gUnknown_83EF384[];
 extern const u16 gUnknown_83EF3A4[];
@@ -307,6 +334,8 @@ extern const u32 gUnknown_83F1550[];
 extern const u32 gUnknown_83F1640[];
 extern const u32 gUnknown_83F1738[];
 extern const u32 gUnknown_83F1804[];
+extern const u32 gUnknown_83F18D8[];
+extern const u32 gUnknown_83F1908[];
 extern const u32 gUnknown_83F1978[];
 extern const u32 gUnknown_83F19A0[];
 extern const struct BgTemplate gUnknown_83F1A50[4];
@@ -327,6 +356,10 @@ extern const struct OamData gUnknown_83F1C3C;
 extern const union AnimCmd *const gUnknown_83F1C50[];
 extern const struct OamData gUnknown_83F1C54;
 extern const union AnimCmd *const gUnknown_83F1C64[];
+extern const struct OamData gUnknown_83F1C68;
+extern const struct OamData gUnknown_83F1C70;
+extern const union AnimCmd *const gUnknown_83F1C94[];
+extern const union AnimCmd *const gUnknown_83F1C98[];
 extern const u8 *const gUnknown_83F1CAC[];
 extern const u16 gUnknown_83F1E60[][2];
 extern const u16 gUnknown_83F2178[][2];
@@ -2828,4 +2861,166 @@ u16 sub_80C4380(void)
 u16 sub_80C438C(void)
 {
     return gUnknown_20399E8->field_02;
+}
+
+void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc)
+{
+    gUnknown_20399EC = AllocZeroed(sizeof(struct UnkStruct_20399EC));
+    gUnknown_20399EC->field_468 = taskFunc;
+    gUnknown_20399EC->field_460 = a0;
+    LZ77UnCompWram(gUnknown_83F18D8, gUnknown_20399EC->field_000);
+    LZ77UnCompWram(gUnknown_83F1908, gUnknown_20399EC->field_040);
+    gTasks[taskId].func = sub_80C440C;
+}
+
+void sub_80C440C(u8 taskId)
+{
+    switch (gUnknown_20399EC->field_463)
+    {
+    case 0:
+        sub_80C08E0();
+        gUnknown_20399EC->field_463++;
+        break;
+    case 1:
+        sub_80C47F0();
+        gUnknown_20399EC->field_463++;
+        break;
+    case 2:
+        sub_80C4750();
+        gUnknown_20399EC->field_463++;
+        break;
+    case 3:
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+        gUnknown_20399EC->field_463++;
+        break;
+    case 4:
+        sub_80C08F4();
+        gUnknown_20399EC->field_463++;
+        break;
+    default:
+        SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) | DISPCNT_OBJ_ON);
+        sub_80C44E4(taskId);
+        break;
+    }
+}
+
+void sub_80C44E4(u8 taskId)
+{
+    gTasks[taskId].func = gUnknown_20399EC->field_468;
+}
+
+void sub_80C450C(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
+{
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399EC->field_040,
+        .size = 0x100,
+        .tag = a4
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF2BC,
+        .tag = a5
+    };
+    struct SpriteTemplate template = {
+        .tileTag = a4,
+        .paletteTag = a5,
+        .oam = &gUnknown_83F1C68,
+        .anims = gUnknown_83F1C94,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    };
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&template, 8 * a2 + 36, 8 * a3 + 36, 1);
+    gUnknown_20399EC->field_2D4[a1].field_4 = &gSprites[spriteId];
+    gSprites[spriteId].invisible = TRUE;
+    gUnknown_20399EC->field_2D4[a1].field_0 = a0;
+}
+
+void sub_80C4614(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
+{
+    u8 spriteId;
+    u8 r4;
+    s16 r7 = 0;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399EC->field_000,
+        .size = 0x40,
+        .tag = a4
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF2BC,
+        .tag = a5
+    };
+    struct SpriteTemplate template = {
+        .tileTag = a4,
+        .paletteTag = a5,
+        .oam = &gUnknown_83F1C70,
+        .anims = gUnknown_83F1C98,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    };
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    r4 = sub_80C4164(a0, 0, a3, a2);
+    if ((sub_80C35DC(r4) == 2 || sub_80C35DC(r4) == 3) && r4 != MAPSEC_ROUTE_10_FLYDUP)
+        r7 = 2;
+    spriteId = CreateSprite(&template, 8 * a2 + 36 + r7, 8 * a3 + 36 + r7, 3);
+    gUnknown_20399EC->field_144[a1].field_4 = &gSprites[spriteId];
+    gSprites[spriteId].invisible = TRUE;
+    gUnknown_20399EC->field_144[a1].field_0 = a0;
+}
+
+void sub_80C4750(void)
+{
+    u16 i, j, k;
+    u8 r7 = 0;
+    if (sub_80C0E04(3))
+    {
+        for (i = 0; i < 4; i++)
+        {
+            for (j = 0; j < 15; j++)
+            {
+                for (k = 0; k < 22; k++)
+                {
+                    if (sub_80C35DC(sub_80C4164(i, 0, j, k)) == 2)
+                    {
+                        sub_80C450C(i, r7, k, j, r7 + 10, 10);
+                        r7++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void sub_80C47F0(void)
+{
+    u16 i, j, k;
+    u8 r6 = 0;
+    u8 mapsec;
+    for (i = 0; i < 4; i++)
+    {
+        for (j = 0; j < 15; j++)
+        {
+            for (k = 0; k < 22; k++)
+            {
+                mapsec = sub_80C4164(i, 1, j, k);
+                if (mapsec == MAPSEC_NONE)
+                    continue;
+                if (mapsec == MAPSEC_CERULEAN_CAVE && !FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
+                    continue;
+                sub_80C4614(i, r6, k, j, r6 + 35, 10);
+                if (sub_80C3878(mapsec) != 2)
+                {
+                    StartSpriteAnim(gUnknown_20399EC->field_144[r6].field_4, 1);
+                }
+                r6++;
+            }
+        }
+    }
 }

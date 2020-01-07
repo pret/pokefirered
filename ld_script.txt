@@ -1,5 +1,3 @@
-ENTRY(Start)
-
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 

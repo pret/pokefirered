@@ -347,7 +347,7 @@ void STWI_set_Callback_M(void *callbackM);
 void STWI_set_Callback_S(void (*callbackS)(u16));
 void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
 void AgbRFU_SoftReset(void);
-void STWI_set_CallbackUnk(void (*func)(void));
+void STWI_set_Callback_ID(void (*func)(void));
 u16 STWI_read_status(u8 index);
 u16 STWI_poll_CommandEnd(void);
 void STWI_send_DataRxREQ(void);

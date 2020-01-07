@@ -1455,17 +1455,14 @@ s32 rfu_changeSendTarget(u8 r3, u8 r7, u8 r6)
 
 s32 rfu_NI_stopReceivingData(u8 who)
 {
-#ifndef NONMATCHING // r4, r5 register swap
-    register struct NIComm *r5 asm("r5");
-#else
     struct NIComm *r5;
-#endif
     u16 r4, r1;
 
     if (who > 3)
         return 0x400;
     r5 = &gRfuSlotStatusNI[who]->sub.recv;
     r4 = REG_IME;
+    ++r4; --r4; // fix r4, r5 register swap
     REG_IME = 0;
     if (gRfuSlotStatusNI[who]->sub.recv.state & 0x8000)
     {
@@ -2227,7 +2224,7 @@ static s32 sub_81E349C(u8 r5)
         return -1;
     r8 = REG_IE;
     gRfuState->state = 10;
-    STWI_set_CallbackUnk(sub_81E36B8);
+    STWI_set_Callback_ID(sub_81E36B8);
     sub_81E3550();
     r4 = &REG_TMCNT_L(gRfuState->timerSelect);
     r5 *= 8;
@@ -2248,7 +2245,7 @@ static s32 sub_81E349C(u8 r5)
     REG_IE = r8;
     REG_IME = 1;
     gRfuState->state = 0;
-    STWI_set_CallbackUnk(NULL);
+    STWI_set_Callback_ID(NULL);
     return r6;
 }
 
@@ -2322,8 +2319,8 @@ static void sub_81E36B8(void)
     u32 r5;
     u16 r0;
 #ifndef NONMATCHING
-    register u32 r1 asm("a2");
-    register u16 r0_ asm("a1");
+    register u32 r1 asm("r1");
+    register u16 r0_ asm("r0");
 #else
     u32 r1;
     u16 r0_;

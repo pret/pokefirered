@@ -128,7 +128,7 @@ void STWI_set_Callback_S(void (*callbackS)(u16))
     gRfuState->callbackS = callbackS;
 }
 
-void STWI_set_CallbackUnk(void (*func)(void))
+void STWI_set_Callback_ID(void (*func)(void)) // name in SDK, but is actually setting a function pointer
 {
     gRfuState->unk_20 = func;
 }

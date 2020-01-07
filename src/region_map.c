@@ -163,12 +163,22 @@ struct UnkStruct_20399E4
     u16 field_024[0x080];
 };
 
+struct UnkStruct_20399E8
+{
+    s16 field_00;
+    s16 field_02;
+    struct Sprite * field_04;
+    u16 field_08;
+    u16 field_0A;
+    u16 field_0C[0x40];
+};
+
 EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
 EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
 EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
 EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
 EWRAM_DATA struct UnkStruct_20399E4 * gUnknown_20399E4 = NULL;
-EWRAM_DATA void * gUnknown_20399E8 = NULL;
+EWRAM_DATA struct UnkStruct_20399E8 * gUnknown_20399E8 = NULL;
 EWRAM_DATA void * gUnknown_20399EC = NULL;
 EWRAM_DATA void * gUnknown_20399F0[3] = {};
 EWRAM_DATA void * gUnknown_20399FC = NULL;
@@ -232,14 +242,18 @@ u8 sub_80C31C0(void);
 u8 sub_80C3348(void);
 u8 sub_80C3400(void);
 void sub_80C3418(void);
+u16 sub_80C3508(void);
+u16 sub_80C3514(void);
 u16 sub_80C3520(void);
+u16 sub_80C3580(void);
 u8 sub_80C35DC(u8 a0);
 u8 sub_80C3878(u8 a0);
 u8 sub_80C3AC8(u8 a0);
 void sub_80C3D40(void);
 u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
 void sub_80C41D8(u16 a0, u16 a1);
-void sub_80C4324(u8 a0);
+void sub_80C4244(void);
+void sub_80C4324(bool8 a0);
 void sub_80C4348(void);
 u16 sub_80C4380();
 u16 sub_80C438C();
@@ -262,19 +276,20 @@ void sub_80C4E18(const u8 *str);
 void sub_80C4E74(const u8 *str);
 void sub_80C4ED0(bool8 a0);
 void sub_80C4F08(u8 taskId);
-u16 sub_80C3508(void);
-u16 sub_80C3514(void);
-u16 sub_80C3580(void);
 
 #include "data/text/map_section_names.h"
 extern const u16 gUnknown_83EF23C[];
 extern const u16 gUnknown_83EF25C[];
+extern const u16 gUnknown_83EF27C[];
+extern const u16 gUnknown_83EF29C[];
 extern const u16 gUnknown_83EF2DC[];
 extern const u16 gUnknown_83EF384[];
 extern const u16 gUnknown_83EF3A4[];
 extern const u32 gUnknown_83EF3C4[];
 extern const u32 gUnknown_83EF450[];
 extern const u32 gUnknown_83EF4E0[];
+extern const u32 gUnknown_83EF524[];
+extern const u32 gUnknown_83EF59C[];
 extern const u32 gUnknown_83EF61C[];
 extern const u32 gUnknown_83F0330[];
 extern const u32 gUnknown_83F0E0C[];
@@ -310,9 +325,15 @@ extern const union AnimCmd *const gUnknown_83F1C30[];
 extern const struct UnkStruct_80C4CF0 gUnknown_83F1C34;
 extern const struct OamData gUnknown_83F1C3C;
 extern const union AnimCmd *const gUnknown_83F1C50[];
+extern const struct OamData gUnknown_83F1C54;
+extern const union AnimCmd *const gUnknown_83F1C64[];
 extern const u8 *const gUnknown_83F1CAC[];
 extern const u16 gUnknown_83F1E60[][2];
 extern const u16 gUnknown_83F2178[][2];
+extern const u8 gUnknown_83F2490[][15][22];
+extern const u8 gUnknown_83F2724[][15][22];
+extern const u8 gUnknown_83F29B8[][15][22];
+extern const u8 gUnknown_83F2C4C[][15][22];
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 {
@@ -580,7 +601,7 @@ void sub_80C04E4(u8 taskId)
             sub_80C4E18(gUnknown_8418EB5);
             sub_80C4E74(gUnknown_8418E8B);
             sub_80C4ED0(FALSE);
-            sub_80C4324(0);
+            sub_80C4324(FALSE);
             sub_80C3154(FALSE);
             sub_80C48BC(sub_80C0E20(), 25, 0);
             sub_80C4960(sub_80C0E20(), 25, 0);
@@ -1054,7 +1075,7 @@ void sub_80C1098(u8 taskId)
             sub_80C0E48(gUnknown_20399D8->field_1CCA);
             if (sub_80C0E34() == gUnknown_20399D8->field_1CCA)
             {
-                sub_80C4324(0);
+                sub_80C4324(FALSE);
                 sub_80C48BC(gUnknown_20399D8->field_1CCA, 25, 0);
                 sub_80C4960(gUnknown_20399D8->field_1CCA, 25, 0);
             }
@@ -1205,9 +1226,9 @@ bool8 sub_80C1478(void)
         sub_80C4960(gUnknown_20399D8->field_1CCA, 25, 0);
     }
     if (gUnknown_20399D8->field_1CCA != sub_80C0E34())
-        sub_80C4324(1);
+        sub_80C4324(TRUE);
     else
-        sub_80C4324(0);
+        sub_80C4324(FALSE);
     sub_80C4CF0(1, &data);
     return FALSE;
 }
@@ -1766,7 +1787,7 @@ void sub_80C267C(u8 taskId)
             gUnknown_20399E0->field_CCC++;
         break;
     case 7:
-        sub_80C4324(0);
+        sub_80C4324(FALSE);
         sub_80C3154(FALSE);
         gUnknown_20399E0->field_CCC++;
         break;
@@ -1946,7 +1967,7 @@ void sub_80C2C7C(u8 taskId)
         break;
     case 3:
         sub_80C22C4(6, FALSE);
-        sub_80C4324(1);
+        sub_80C4324(TRUE);
         sub_80C3154(TRUE);
         sub_80C4960(255, 25, 1);
         sub_80C48BC(255, 25, 1);
@@ -2718,4 +2739,93 @@ void sub_80C3D40(void)
         break;
     }
     gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
+}
+
+u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3)
+{
+    switch (a0)
+    {
+    case 0:
+        return gUnknown_83F2490[a1][a2][a3];
+    case 1:
+        return gUnknown_83F2724[a1][a2][a3];
+    case 2:
+        return gUnknown_83F29B8[a1][a2][a3];
+    case 3:
+        return gUnknown_83F2C4C[a1][a2][a3];
+    default:
+        return MAPSEC_NONE;
+    }
+}
+
+void sub_80C41D8(u16 a0, u16 a1)
+{
+    gUnknown_20399E8 = AllocZeroed(sizeof(struct UnkStruct_20399E8));
+    if (gSaveBlock2Ptr->playerGender == FEMALE)
+        LZ77UnCompWram(gUnknown_83EF59C, gUnknown_20399E8->field_0C);
+    else
+        LZ77UnCompWram(gUnknown_83EF524, gUnknown_20399E8->field_0C);
+    gUnknown_20399E8->field_08 = a0;
+    gUnknown_20399E8->field_0A = a1;
+    gUnknown_20399E8->field_00 = sub_80C3508();
+    gUnknown_20399E8->field_02 = sub_80C3514();
+    sub_80C4244();
+}
+
+void sub_80C4244(void)
+{
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_20399E8->field_0C,
+        .size = 0x80,
+        .tag = gUnknown_20399E8->field_08
+    };
+    struct SpritePalette spritePalette = {
+        .data = gUnknown_83EF27C,
+        .tag = gUnknown_20399E8->field_0A
+    };
+    struct SpriteTemplate template = {
+        .tileTag = gUnknown_20399E8->field_08,
+        .paletteTag = gUnknown_20399E8->field_0A,
+        .oam = &gUnknown_83F1C54,
+        .anims = gUnknown_83F1C64,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    };
+
+    if (gSaveBlock2Ptr->playerGender == FEMALE)
+        spritePalette.data = gUnknown_83EF29C;
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&template, 8 * gUnknown_20399E8->field_00 + 36, 8 * gUnknown_20399E8->field_02 + 36, 2);
+    gUnknown_20399E8->field_04 = &gSprites[spriteId];
+    sub_80C4324(TRUE);
+}
+
+void sub_80C4324(bool8 a0)
+{
+    gUnknown_20399E8->field_04->invisible = a0;
+}
+
+void sub_80C4348(void)
+{
+    if (gUnknown_20399E8->field_04 != NULL)
+    {
+        DestroySprite(gUnknown_20399E8->field_04);
+        FreeSpriteTilesByTag(gUnknown_20399E8->field_08);
+        FreeSpritePaletteByTag(gUnknown_20399E8->field_0A);
+    }
+    FREE_IF_NOT_NULL(gUnknown_20399E8);
+}
+
+u16 sub_80C4380(void)
+{
+    return gUnknown_20399E8->field_00;
+}
+
+u16 sub_80C438C(void)
+{
+    return gUnknown_20399E8->field_02;
 }

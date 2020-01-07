@@ -36,7 +36,7 @@ extern bool32 sub_80F5118(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
-extern u32 IntrMain[];
+extern u32 intr_main[];
 extern u8 gHeap[];
 extern struct SaveBlock1 gSaveBlock1;
 extern struct SaveBlock2 gSaveBlock2;
@@ -313,7 +313,7 @@ void InitIntrHandlers(void)
     for (i = 0; i < INTR_COUNT; i++)
         gIntrTable[i] = gIntrTableTemplate[i];
 
-    DmaCopy32(3, IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer));
+    DmaCopy32(3, intr_main, IntrMain_Buffer, sizeof(IntrMain_Buffer));
 
     INTR_VECTOR = IntrMain_Buffer;
 

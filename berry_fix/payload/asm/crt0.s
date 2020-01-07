@@ -16,7 +16,7 @@ Init:
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
 	ldr r1, =INTR_VECTOR
-	ldr r0, =IntrMain
+	ldr r0, =intr_main
 	str r0, [r1]
 	ldr r1, =AgbMain + 1
 	mov lr, pc
@@ -32,8 +32,8 @@ sp_irq: .word IWRAM_END - 0x60
 
 	.arm
 	.align 2, 0
-	.global IntrMain
-IntrMain: @ 0x2010048
+	.global intr_main
+intr_main: @ 0x2010048
 	mov ip, REG_BASE
 	add r3, ip, OFFSET_REG_IE
 	ldr r2, [r3]
@@ -79,4 +79,4 @@ _020100DC:
 	ldr r0, [r1]
 	bx r0
 	.pool
-	.size IntrMain, .-IntrMain
+	.size intr_main, .-intr_main

@@ -461,10 +461,14 @@ gUnknown_83F1C98:: @ 83F1C98
 	.4byte gAnimCmd_83F1C8C
 
 gUnknown_83F1CA0:: @ 83F1CA0
-	.2byte 0x2000, 0x4000
+	.2byte 0x2000 @ DISPCNT_WIN0_ON
+	.2byte 0x4000 @ DISPCNT_WIN1_ON
 
 gUnknown_83F1CA4:: @ 83F1CA4
-	.2byte 0x4044, 0x4246
+	.byte OFFSET_REG_WIN0V
+	.byte OFFSET_REG_WIN0H
+	.byte OFFSET_REG_WIN1V
+	.byte OFFSET_REG_WIN1H
 
 gUnknown_83F1CA8:: @ 83F1CA8
 	.byte 15, 1, 2

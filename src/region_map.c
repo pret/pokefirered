@@ -305,7 +305,7 @@ bool8 sub_80C4B30(u8 a0);
 void sub_80C4BE4(void);
 void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
 void sub_80C4C48(u16 a0);
-void sub_80C4C5C(u16 a0);
+void sub_80C4C5C(u16 a0, u16 a1);
 void sub_80C4C74(u16 a0, u16 a1);
 void sub_80C4C88(u16 a0);
 void sub_80C4C9C(u8 a0, u8 a1);
@@ -373,6 +373,8 @@ extern const struct OamData gUnknown_83F1C68;
 extern const struct OamData gUnknown_83F1C70;
 extern const union AnimCmd *const gUnknown_83F1C94[];
 extern const union AnimCmd *const gUnknown_83F1C98[];
+extern const u16 gUnknown_83F1CA0[];
+extern const u8 gUnknown_83F1CA4[][2];
 extern const u8 *const gUnknown_83F1CAC[];
 extern const u16 gUnknown_83F1E60[][2];
 extern const u16 gUnknown_83F2178[][2];
@@ -1034,14 +1036,14 @@ void sub_80C0FE0(void)
 {
     sub_80C4BE4();
     sub_80C4C2C(27, 4, 64);
-    sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+    sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD, gUnknown_20399D8->field_1CCD);
 }
 
 bool8 sub_80C1014(void)
 {
     if (gUnknown_20399D8->field_1CCD < 16)
     {
-        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD, gUnknown_20399D8->field_1CCD);
         gUnknown_20399D8->field_1CCD += 2;
         return FALSE;
     }
@@ -1056,7 +1058,7 @@ bool8 sub_80C1058(void)
     if (gUnknown_20399D8->field_1CCD >= 2)
     {
         gUnknown_20399D8->field_1CCD -= 2;
-        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD);
+        sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD, gUnknown_20399D8->field_1CCD);
         return FALSE;
     }
     else
@@ -3139,4 +3141,75 @@ void sub_80C4BB8(void)
     {
         FREE_IF_NOT_NULL(gUnknown_20399F0[i]);
     }
+}
+
+void sub_80C4BE4(void)
+{
+    struct UnkStruct_80C4CF0 data = {};
+    sub_80C4C2C(0, 0, 0);
+    sub_80C4C48(0);
+    sub_80C4CF0(0, &data);
+    sub_80C4CF0(1, &data);
+    sub_80C4C74(0, 0);
+    sub_80C4C9C(0, 1);
+    sub_80C4C9C(1, 1);
+}
+
+void sub_80C4C2C(u8 a0, u16 a1, u16 a2)
+{
+    u16 regval = a0 << 8;
+    regval |= a1;
+    regval |= a2;
+    SetGpuReg(REG_OFFSET_BLDCNT, regval);
+}
+
+void sub_80C4C48(u16 a0)
+{
+    SetGpuReg(REG_OFFSET_BLDY, a0);
+}
+
+void sub_80C4C5C(u16 a0, u16 a1)
+{
+    u16 regval = a0 << 8;
+    regval |= a1;
+    SetGpuReg(REG_OFFSET_BLDALPHA, regval);
+}
+
+void sub_80C4C74(u16 a0, u16 a1)
+{
+    u16 regval = a1 << 8;
+    regval |= a0;
+    SetGpuReg(REG_OFFSET_WININ, regval);
+}
+
+void sub_80C4C88(u16 a0)
+{
+    SetGpuReg(REG_OFFSET_WINOUT, a0);
+}
+
+void sub_80C4C9C(u8 a0, u8 a1)
+{
+    u16 data[2];
+    memcpy(data, gUnknown_83F1CA0, 4);
+    switch (a1)
+    {
+    case 0:
+        SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) | data[a0]);
+        break;
+    case 1:
+        ClearGpuRegBits(REG_OFFSET_DISPCNT, data[a0]);
+        break;
+    }
+}
+
+void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1)
+{
+    SetGpuReg(gUnknown_83F1CA4[a0][0], (a1->v2 << 8) | a1->v6);
+    SetGpuReg(gUnknown_83F1CA4[a0][1], (a1->v0 << 8) | a1->v4);
+}
+
+void sub_80C4D30(void)
+{
+    sub_80C4BB8();
+    sub_80C4BE4();
 }

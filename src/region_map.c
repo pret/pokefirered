@@ -18,6 +18,7 @@
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/region_map.h"
+#include "constants/maps.h"
 
 #define FREE_IF_NOT_NULL(ptr) ({ \
     if (ptr) {                   \
@@ -2456,7 +2457,7 @@ u8 sub_80C3AC8(u8 a0)
     }
 }
 
-u8 sub_80C3B00(void)
+u16 sub_80C3B00(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
 }
@@ -2537,4 +2538,184 @@ void sub_80C3B28(void)
         y = gUnknown_83F2178[gUnknown_20399E4->field_014][1] - 1;
     gUnknown_20399E4->field_000 = x + gUnknown_83F1E60[gUnknown_20399E4->field_014][0];
     gUnknown_20399E4->field_002 = y + gUnknown_83F1E60[gUnknown_20399E4->field_014][1];
+}
+
+void sub_80C3D40(void)
+{
+    switch (sub_80C3B00())
+    {
+    case MAPSEC_KANTO_SAFARI_ZONE:
+        gUnknown_20399E4->field_000 = 12;
+        gUnknown_20399E4->field_002 = 12;
+        break;
+    case MAPSEC_SILPH_CO:
+        gUnknown_20399E4->field_000 = 14;
+        gUnknown_20399E4->field_002 = 6;
+        break;
+    case MAPSEC_POKEMON_MANSION:
+        gUnknown_20399E4->field_000 = 4;
+        gUnknown_20399E4->field_002 = 14;
+        break;
+    case MAPSEC_POKEMON_TOWER:
+        gUnknown_20399E4->field_000 = 18;
+        gUnknown_20399E4->field_002 = 6;
+        break;
+    case MAPSEC_POWER_PLANT:
+        gUnknown_20399E4->field_000 = 18;
+        gUnknown_20399E4->field_002 = 4;
+        break;
+    case MAPSEC_S_S_ANNE:
+        gUnknown_20399E4->field_000 = 14;
+        gUnknown_20399E4->field_002 = 9;
+        break;
+    case MAPSEC_POKEMON_LEAGUE:
+        gUnknown_20399E4->field_000 = 2;
+        gUnknown_20399E4->field_002 = 3;
+        break;
+    case MAPSEC_ROCKET_HIDEOUT:
+        gUnknown_20399E4->field_000 = 11;
+        gUnknown_20399E4->field_002 = 6;
+        break;
+    case MAPSEC_UNDERGROUND_PATH:
+        gUnknown_20399E4->field_000 = 14;
+        gUnknown_20399E4->field_002 = 7;
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(UNDERGROUND_PATH_NORTH_ENTRANCE))
+        {
+            gUnknown_20399E4->field_000 = 14; // optimized out but required to match
+            gUnknown_20399E4->field_002 = 5;
+        }
+        break;
+    case MAPSEC_UNDERGROUND_PATH_2:
+        gUnknown_20399E4->field_000 = 12;
+        gUnknown_20399E4->field_002 = 6;
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(UNDERGROUND_PATH_EAST_ENTRANCE))
+        {
+            gUnknown_20399E4->field_000 = 15;
+            gUnknown_20399E4->field_002 = 6; // optimized out but required to match
+        }
+        break;
+    case MAPSEC_BIRTH_ISLAND:
+        gUnknown_20399E4->field_000 = 18;
+        gUnknown_20399E4->field_002 = 13;
+        break;
+    case MAPSEC_NAVEL_ROCK:
+        gUnknown_20399E4->field_000 = 10;
+        gUnknown_20399E4->field_002 = 8;
+        break;
+    case MAPSEC_TRAINER_TOWER_2:
+        gUnknown_20399E4->field_000 = 5;
+        gUnknown_20399E4->field_002 = 6;
+        break;
+    case MAPSEC_MT_EMBER:
+        gUnknown_20399E4->field_000 = 2;
+        gUnknown_20399E4->field_002 = 3;
+        break;
+    case MAPSEC_BERRY_FOREST:
+        gUnknown_20399E4->field_000 = 14;
+        gUnknown_20399E4->field_002 = 12;
+        break;
+    case MAPSEC_PATTERN_BUSH:
+        gUnknown_20399E4->field_000 = 17;
+        gUnknown_20399E4->field_002 = 3;
+        break;
+    case MAPSEC_ROCKET_WAREHOUSE:
+        gUnknown_20399E4->field_000 = 17;
+        gUnknown_20399E4->field_002 = 11;
+        break;
+    case MAPSEC_DILFORD_CHAMBER:
+    case MAPSEC_LIPTOO_CHAMBER:
+    case MAPSEC_MONEAN_CHAMBER:
+    case MAPSEC_RIXY_CHAMBER:
+    case MAPSEC_SCUFIB_CHAMBER:
+    case MAPSEC_TANOBY_CHAMBERS:
+    case MAPSEC_VIAPOIS_CHAMBER:
+    case MAPSEC_WEEPTH_CHAMBER:
+        gUnknown_20399E4->field_000 = 9;
+        gUnknown_20399E4->field_002 = 12;
+        break;
+    case MAPSEC_DOTTED_HOLE:
+        gUnknown_20399E4->field_000 = 16;
+        gUnknown_20399E4->field_002 = 8;
+        break;
+    case MAPSEC_VIRIDIAN_FOREST:
+        gUnknown_20399E4->field_000 = 4;
+        gUnknown_20399E4->field_002 = 6;
+        break;
+    case MAPSEC_ROUTE_2:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN))
+        {
+            gUnknown_20399E4->field_000 = 4;
+            gUnknown_20399E4->field_002 = 7;
+        }
+        else if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(CERULEAN_CITY))
+        {
+            gUnknown_20399E4->field_000 = 4;
+            gUnknown_20399E4->field_002 = 5;
+        }
+        else
+        {
+            sub_80C3B28();
+        }
+        break;
+    case MAPSEC_ROUTE_21:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE21_NORTH))
+        {
+            gUnknown_20399E4->field_000 = 4;
+            gUnknown_20399E4->field_002 = 12;
+        }
+        else if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE21_SOUTH))
+        {
+            gUnknown_20399E4->field_000 = 4;
+            gUnknown_20399E4->field_002 = 13;
+        }
+        break;
+    case MAPSEC_ROUTE_5:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(VIRIDIAN_CITY))
+        {
+            gUnknown_20399E4->field_000 = 14;
+            gUnknown_20399E4->field_002 = 5;
+        }
+        else
+        {
+            sub_80C3B28();
+        }
+        break;
+    case MAPSEC_ROUTE_6:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN))
+        {
+            gUnknown_20399E4->field_000 = 14;
+            gUnknown_20399E4->field_002 = 7;
+        }
+        else
+        {
+            sub_80C3B28();
+        }
+        break;
+    case MAPSEC_ROUTE_7:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN))
+        {
+            gUnknown_20399E4->field_000 = 13;
+            gUnknown_20399E4->field_002 = 6;
+        }
+        else
+        {
+            sub_80C3B28();
+        }
+        break;
+    case MAPSEC_ROUTE_8:
+        if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN))
+        {
+            gUnknown_20399E4->field_000 = 15;
+            gUnknown_20399E4->field_002 = 6;
+        }
+        else
+        {
+            sub_80C3B28();
+        }
+        break;
+    default:
+        sub_80C3B28();
+        break;
+    }
+    gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
 }

@@ -2314,3 +2314,129 @@ u16 sub_80C3580(void)
         ret = MAPSEC_NONE;
     return ret;
 }
+
+u8 sub_80C35DC(u8 mapsec)
+{
+    switch (mapsec)
+    {
+    case MAPSEC_PALLET_TOWN:
+        return FlagGet(FLAG_WORLD_MAP_PALLET_TOWN) ? 2 : 3;
+    case MAPSEC_VIRIDIAN_CITY:
+        return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_CITY) ? 2 : 3;
+    case MAPSEC_PEWTER_CITY:
+        return FlagGet(FLAG_WORLD_MAP_PEWTER_CITY) ? 2 : 3;
+    case MAPSEC_CERULEAN_CITY:
+        return FlagGet(FLAG_WORLD_MAP_CERULEAN_CITY) ? 2 : 3;
+    case MAPSEC_LAVENDER_TOWN:
+        return FlagGet(FLAG_WORLD_MAP_LAVENDER_TOWN) ? 2 : 3;
+    case MAPSEC_VERMILION_CITY:
+        return FlagGet(FLAG_WORLD_MAP_VERMILION_CITY) ? 2 : 3;
+    case MAPSEC_CELADON_CITY:
+        return FlagGet(FLAG_WORLD_MAP_CELADON_CITY) ? 2 : 3;
+    case MAPSEC_FUCHSIA_CITY:
+        return FlagGet(FLAG_WORLD_MAP_FUCHSIA_CITY) ? 2 : 3;
+    case MAPSEC_CINNABAR_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_CINNABAR_ISLAND) ? 2 : 3;
+    case MAPSEC_INDIGO_PLATEAU:
+        return FlagGet(FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR) ? 2 : 3;
+    case MAPSEC_SAFFRON_CITY:
+        return FlagGet(FLAG_WORLD_MAP_SAFFRON_CITY) ? 2 : 3;
+    case MAPSEC_ONE_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_ONE_ISLAND) ? 2 : 3;
+    case MAPSEC_TWO_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_TWO_ISLAND) ? 2 : 3;
+    case MAPSEC_THREE_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_THREE_ISLAND) ? 2 : 3;
+    case MAPSEC_FOUR_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_FOUR_ISLAND) ? 2 : 3;
+    case MAPSEC_FIVE_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_FIVE_ISLAND) ? 2 : 3;
+    case MAPSEC_SEVEN_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND) ? 2 : 3;
+    case MAPSEC_SIX_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_SIX_ISLAND) ? 2 : 3;
+    case MAPSEC_ROUTE_4_FLYDUP:
+        if (!sub_80C0E04(3))
+            return 0;
+        return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? 2 : 3;
+    case MAPSEC_ROUTE_10_FLYDUP:
+        return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? 2 : 3;
+    case MAPSEC_NONE:
+        return 0;
+    default:
+        return 1;
+    }
+}
+
+u8 sub_80C3878(u8 mapsec)
+{
+    switch (mapsec)
+    {
+    case MAPSEC_NONE:
+        return 0;
+    case MAPSEC_VIRIDIAN_FOREST:
+        return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST) ? 2 : 3;
+    case MAPSEC_MT_MOON:
+        return FlagGet(FLAG_WORLD_MAP_MT_MOON_1F) ? 2 : 3;
+    case MAPSEC_S_S_ANNE:
+        return FlagGet(FLAG_WORLD_MAP_SSANNE_EXTERIOR) ? 2 : 3;
+    case MAPSEC_UNDERGROUND_PATH:
+        return FlagGet(FLAG_WORLD_MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL) ? 2 : 3;
+    case MAPSEC_UNDERGROUND_PATH_2:
+        return FlagGet(FLAG_WORLD_MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL) ? 2 : 3;
+    case MAPSEC_DIGLETTS_CAVE:
+        return FlagGet(FLAG_WORLD_MAP_DIGLETTS_CAVE_B1F) ? 2 : 3;
+    case MAPSEC_KANTO_VICTORY_ROAD:
+        return FlagGet(FLAG_WORLD_MAP_VICTORY_ROAD_1F) ? 2 : 3;
+    case MAPSEC_ROCKET_HIDEOUT:
+        return FlagGet(FLAG_WORLD_MAP_ROCKET_HIDEOUT_B1F) ? 2 : 3;
+    case MAPSEC_SILPH_CO:
+        return FlagGet(FLAG_WORLD_MAP_SILPH_CO_1F) ? 2 : 3;
+    case MAPSEC_POKEMON_MANSION:
+        return FlagGet(FLAG_WORLD_MAP_POKEMON_MANSION_1F) ? 2 : 3;
+    case MAPSEC_KANTO_SAFARI_ZONE:
+        return FlagGet(FLAG_WORLD_MAP_SAFARI_ZONE_CENTER) ? 2 : 3;
+    case MAPSEC_POKEMON_LEAGUE:
+        return FlagGet(FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM) ? 2 : 3;
+    case MAPSEC_ROCK_TUNNEL:
+        return FlagGet(FLAG_WORLD_MAP_ROCK_TUNNEL_1F) ? 2 : 3;
+    case MAPSEC_SEAFOAM_ISLANDS:
+        return FlagGet(FLAG_WORLD_MAP_SEAFOAM_ISLANDS_1F) ? 2 : 3;
+    case MAPSEC_POKEMON_TOWER:
+        return FlagGet(FLAG_WORLD_MAP_POKEMON_TOWER_1F) ? 2 : 3;
+    case MAPSEC_CERULEAN_CAVE:
+        return FlagGet(FLAG_WORLD_MAP_CERULEAN_CAVE_1F) ? 2 : 3;
+    case MAPSEC_POWER_PLANT:
+        return FlagGet(FLAG_WORLD_MAP_POWER_PLANT) ? 2 : 3;
+    case MAPSEC_NAVEL_ROCK:
+        return FlagGet(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR) ? 2 : 3;
+    case MAPSEC_MT_EMBER:
+        return FlagGet(FLAG_WORLD_MAP_MT_EMBER_EXTERIOR) ? 2 : 3;
+    case MAPSEC_BERRY_FOREST:
+        return FlagGet(FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST) ? 2 : 3;
+    case MAPSEC_ICEFALL_CAVE:
+        return FlagGet(FLAG_WORLD_MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE) ? 2 : 3;
+    case MAPSEC_ROCKET_WAREHOUSE:
+        return FlagGet(FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE) ? 2 : 3;
+    case MAPSEC_TRAINER_TOWER_2:
+        return FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY) ? 2 : 3;
+    case MAPSEC_DOTTED_HOLE:
+        return FlagGet(FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F) ? 2 : 3;
+    case MAPSEC_LOST_CAVE:
+        return FlagGet(FLAG_WORLD_MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE) ? 2 : 3;
+    case MAPSEC_PATTERN_BUSH:
+        return FlagGet(FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH) ? 2 : 3;
+    case MAPSEC_ALTERING_CAVE:
+        return FlagGet(FLAG_WORLD_MAP_SIX_ISLAND_ALTERING_CAVE) ? 2 : 3;
+    case MAPSEC_TANOBY_CHAMBERS:
+        return FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER) ? 2 : 3;
+    case MAPSEC_THREE_ISLE_PATH:
+        return FlagGet(FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL) ? 2 : 3;
+    case MAPSEC_TANOBY_KEY:
+        return FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY) ? 2 : 3;
+    case MAPSEC_BIRTH_ISLAND:
+        return FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR) ? 2 : 3;
+    default:
+        return 1;
+    }
+}

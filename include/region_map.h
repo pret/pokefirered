@@ -92,9 +92,9 @@ void FreeRegionMapIconResources(void);
 u16 GetRegionMapSectionIdAt(u16 x, u16 y);
 void CreateRegionMapPlayerIcon(u16 x, u16 y);
 void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
-u8 *GetMapName(u8 *, u16, u16);
+u8 *GetMapName(u8 *dest, u16 mapsec, u16 fill);
 bool32 sub_8124668(u8 mapSecId);
-void GetMapNameGeneric(u8 *, u8);
+u8 *GetMapNameGeneric(u8 *dest, u16 mapsec);
 void sub_80BFF50(u8 a0, void (*a1)(void));
 void MCB2_FlyMap(void);
 

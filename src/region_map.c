@@ -3213,3 +3213,59 @@ void sub_80C4D30(void)
     sub_80C4BB8();
     sub_80C4BE4();
 }
+
+bool32 sub_80C4D40(u16 a0)
+{
+    if (gUnknown_20399D4 != NULL)
+        return FALSE;
+    if (a0 != MAPSEC_CELADON_CITY)
+        return FALSE;
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F))
+        return FALSE;
+    if (gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_1F)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_2F)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_3F)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_4F)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_5F)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ROOF)
+     && gSaveBlock1Ptr->location.mapNum != MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR))
+        return FALSE;
+    return TRUE;
+}
+
+u8 *GetMapName(u8 *dst0, u16 mapsec, u16 fill)
+{
+    u8 *dst;
+    u16 i;
+    u16 idx;;
+    if ((idx = mapsec - MAPSECS_KANTO) <= MAPSEC_SPECIAL_AREA - MAPSECS_KANTO)
+    {
+        if (sub_80C4D40(mapsec) == TRUE)
+            dst = StringCopy(dst0, gMapSecName_CeladonDept);
+        else
+            dst = StringCopy(dst0, gUnknown_83F1CAC[idx]);
+    }
+    else
+    {
+        if (fill == 0)
+            fill = 18;
+        return StringFill(dst0, CHAR_SPACE, fill);
+    }
+    if (fill != 0)
+    {
+        for (i = dst - dst0; i < fill; i++)
+            *dst++ = CHAR_SPACE;
+        *dst = EOS;
+    }
+    return dst;
+}
+
+u8 *GetMapNameGeneric(u8 *dest, u16 mapsec)
+{
+    return GetMapName(dest, mapsec, 0);
+}
+
+u8 *sub_80C4E08(u8 *dest, u16 mapsec)
+{
+    return GetMapNameGeneric(dest, mapsec);
+}

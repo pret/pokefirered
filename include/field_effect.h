@@ -23,5 +23,6 @@ void sub_80853CC(u8 a0);
 void sub_8083598(u8 a0);
 void sub_8083A5C(struct Sprite * sprite, u8 spriteId);
 u8 sub_8083970(u16 species, s16 x, s16 y, bool8 unused);
+void sub_80842C8(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

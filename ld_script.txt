@@ -479,7 +479,7 @@ SECTIONS {
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
-        data/image_processing_effects.o(.rodata);
+        src/image_processing_effects.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);

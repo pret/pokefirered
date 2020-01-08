@@ -552,7 +552,7 @@ static void sub_80F83D0(u8 taskId)
     }
 }
 
-const struct MapPreviewScreen * sub_80F8544(u8 mapsec)
+const struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(u8 mapsec)
 {
     u8 idx;
 

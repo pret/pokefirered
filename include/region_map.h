@@ -24,6 +24,20 @@ enum {
     MAPSECTYPE_CITY_CANTFLY,
 };
 
+enum {
+    MAPPERM_0,
+    MAPPERM_1,
+    MAPPERM_2,
+    MAPPERM_3
+};
+
+enum {
+    REGIONMAP_KANTO,
+    REGIONMAP_SEVII123,
+    REGIONMAP_SEVII45,
+    REGIONMAP_SEVII67
+};
+
 // Exported RAM declarations
 
 // Exported ROM declarations

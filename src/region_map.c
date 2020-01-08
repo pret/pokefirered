@@ -337,7 +337,7 @@ static const u16 gUnknown_83EF27C[] = INCBIN_U16("graphics/region_map/unk_83EF27
 static const u16 gUnknown_83EF29C[] = INCBIN_U16("graphics/region_map/unk_83EF29C.gbapal");
 static const u16 gUnknown_83EF2BC[] = INCBIN_U16("graphics/region_map/unk_83EF2BC.gbapal");
 static const u16 gUnknown_83EF2DC[] = INCBIN_U16("graphics/region_map/unk_83EF2DC.gbapal");
-static const u16 _83EF2FC[] = {
+static const u16 unref_83EF37C[] = {
     RGB(0, 0, 31),
     RGB(0, 12, 31),
     RGB_WHITE,

@@ -1013,5 +1013,24 @@ extern const u8 gUnknown_8418EA7[];
 extern const u8 gUnknown_8418EB0[];
 extern const u8 gUnknown_8418EBC[];
 extern const u8 gUnknown_8418EC3[];
+extern const u8 gUnknown_8418ECB[];
+extern const u8 gUnknown_8418F3A[];
+extern const u8 gUnknown_8418FB8[];
+extern const u8 gUnknown_841901C[];
+extern const u8 gUnknown_841908E[];
+extern const u8 gUnknown_8419103[];
+extern const u8 gUnknown_841917D[];
+extern const u8 gUnknown_8419201[];
+extern const u8 gUnknown_841926D[];
+extern const u8 gUnknown_84192E2[];
+extern const u8 gUnknown_841935B[];
+extern const u8 gUnknown_84193D5[];
+extern const u8 gUnknown_8419444[];
+extern const u8 gUnknown_84194C9[];
+extern const u8 gUnknown_841953F[];
+extern const u8 gUnknown_84195AC[];
+extern const u8 gUnknown_8419629[];
+extern const u8 gUnknown_841969D[];
+extern const u8 gUnknown_841971A[];
 
 #endif //GUARD_STRINGS_H

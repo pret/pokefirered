@@ -218,161 +218,161 @@ struct UnkStruct_20399FC
     u8 field_2;
 };
 
-EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
-EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
-EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
-EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
-EWRAM_DATA struct UnkStruct_20399E4 * gUnknown_20399E4 = NULL;
-EWRAM_DATA struct UnkStruct_20399E8 * gUnknown_20399E8 = NULL;
-EWRAM_DATA struct UnkStruct_20399EC * gUnknown_20399EC = NULL;
-EWRAM_DATA struct UnkStruct_20399F0 * gUnknown_20399F0[3] = {};
-EWRAM_DATA struct UnkStruct_20399FC * gUnknown_20399FC = NULL;
+static EWRAM_DATA struct UnkStruct_20399D4 * gUnknown_20399D4 = NULL;
+static EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
+static EWRAM_DATA struct UnkStruct_20399DC * gUnknown_20399DC = NULL;
+static EWRAM_DATA struct UnkStruct_20399E0 * gUnknown_20399E0 = NULL;
+static EWRAM_DATA struct UnkStruct_20399E4 * gUnknown_20399E4 = NULL;
+static EWRAM_DATA struct UnkStruct_20399E8 * gUnknown_20399E8 = NULL;
+static EWRAM_DATA struct UnkStruct_20399EC * gUnknown_20399EC = NULL;
+static EWRAM_DATA struct UnkStruct_20399F0 * gUnknown_20399F0[3] = {};
+static EWRAM_DATA struct UnkStruct_20399FC * gUnknown_20399FC = NULL;
 
 static void sub_80BFFD0(void);
-void sub_80C0100(void);
-bool8 sub_80C0238(void);
-void sub_80C03E8(void);
-void sub_80C04E4(u8 taskId);
-void sub_80C07F8(u8 taskId);
-void sub_80C0820(u8 taskId);
-void sub_80C08B4(void);
-void sub_80C08E0(void);
-void sub_80C08F4(void);
-void sub_80C0904(void);
-void sub_80C0A2C(void);
-void sub_80C0A6C(void);
-void sub_80C0A88(u8 a0);
-void sub_80C0AB8(void);
-void sub_80C0B18(void);
-void sub_80C0B9C(void);
-void sub_80C0BB0(void);
-void sub_80C0CC8(u8 bg, u16 *map);
-bool8 sub_80C0E04(u8 a0);
-u8 sub_80C0E20(void);
-void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
-void sub_80C1098(u8 taskId);
-void sub_80C1280(u8 taskId);
-bool8 sub_80C12EC(void);
-void sub_80C1324(u8 bg, u16 *map);
-void sub_80C1390(void);
-bool8 sub_80C144C(void);
-bool8 sub_80C1478(void);
-bool8 sub_80C16D0(void);
-void sub_80C1754(u8 a0, u16 a1, u16 a2);
-void sub_80C176C(u8 a0, u16 a1, u16 a2);
-void sub_80C1880(void);
-void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
-void sub_80C1A94(u8 taskId);
-void sub_80C1BE0(u8 taskId);
-void sub_80C1E14(u8 taskId);
-void sub_80C1E94(void);
-void sub_80C1E78(u8 bgId, const u16 * tilemap);
-bool8 sub_80C1F80(bool8 a0);
-void sub_80C2208(u8 taskId, TaskFunc taskFunc);
-void sub_80C24BC(void);
-void sub_80C267C(u8 taskId);
-void sub_80C25BC(void);
-void sub_80C2604(void);
-bool8 sub_80C29A4(void);
-void sub_80C2B48(void);
-void sub_80C2C1C(u8 taskId);
-void sub_80C2C7C(u8 taskId);
-bool8 sub_80C2E1C(void);
-void sub_80C3008(u16 a0, u16 a1);
-void sub_80C309C(void);
-void sub_80C3154(bool8 a0);
-void sub_80C3178(void);
-void sub_80C3188(void);
-u8 sub_80C31C0(void);
-u8 sub_80C3348(void);
-u8 sub_80C3400(void);
-void sub_80C3418(void);
-u16 sub_80C3508(void);
-u16 sub_80C3514(void);
-u16 sub_80C3520(void);
-u16 sub_80C3580(void);
-u8 sub_80C35DC(u8 a0);
-u8 sub_80C3878(u8 a0);
-u8 sub_80C3AC8(u8 a0);
-void sub_80C3D40(void);
-u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
-void sub_80C41D8(u16 a0, u16 a1);
-void sub_80C4244(void);
-void sub_80C4324(bool8 a0);
-void sub_80C4348(void);
-u16 sub_80C4380();
-u16 sub_80C438C();
-void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
-void sub_80C440C(u8 taskId);
-void sub_80C44E4(u8 taskId);
-void sub_80C4750(void);
-void sub_80C47F0(void);
-void sub_80C48BC(u8 a0, u8 a1, bool8 a2);
-void sub_80C4960(u8 a0, u8 a1, bool8 a2);
-void sub_80C4A04(void);
-bool8 sub_80C4AAC(u8 a0);
-bool8 sub_80C4B30(u8 a0);
-void sub_80C4BE4(void);
-void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
-void sub_80C4C48(u16 a0);
-void sub_80C4C5C(u16 a0, u16 a1);
-void sub_80C4C74(u16 a0, u16 a1);
-void sub_80C4C88(u16 a0);
-void sub_80C4C9C(u8 a0, u8 a1);
-void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
-void sub_80C4D30(void);
-void sub_80C4E18(const u8 *str);
-void sub_80C4E74(const u8 *str);
-void sub_80C4ED0(bool8 a0);
-void sub_80C4F08(u8 taskId);
-void sub_80C51E8(void);
-void sub_80C5208(u8 taskId);
-void sub_80C527C(u16 a0);
+static void sub_80C0100(void);
+static bool8 sub_80C0238(void);
+static void sub_80C03E8(void);
+static void sub_80C04E4(u8 taskId);
+static void sub_80C07F8(u8 taskId);
+static void sub_80C0820(u8 taskId);
+static void sub_80C08B4(void);
+static void sub_80C08E0(void);
+static void sub_80C08F4(void);
+static void sub_80C0904(void);
+static void sub_80C0A2C(void);
+static void sub_80C0A6C(void);
+static void sub_80C0A88(u8 a0);
+static void sub_80C0AB8(void);
+static void sub_80C0B18(void);
+static void sub_80C0B9C(void);
+static void sub_80C0BB0(void);
+static void sub_80C0CC8(u8 bg, u16 *map);
+static bool8 sub_80C0E04(u8 a0);
+static u8 sub_80C0E20(void);
+static void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc);
+static void sub_80C1098(u8 taskId);
+static void sub_80C1280(u8 taskId);
+static bool8 sub_80C12EC(void);
+static void sub_80C1324(u8 bg, u16 *map);
+static void sub_80C1390(void);
+static bool8 sub_80C144C(void);
+static bool8 sub_80C1478(void);
+static bool8 sub_80C16D0(void);
+static void sub_80C1754(u8 a0, u16 a1, u16 a2);
+static void sub_80C176C(u8 a0, u16 a1, u16 a2);
+static void sub_80C1880(void);
+static void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc);
+static void sub_80C1A94(u8 taskId);
+static void sub_80C1BE0(u8 taskId);
+static void sub_80C1E14(u8 taskId);
+static void sub_80C1E94(void);
+static void sub_80C1E78(u8 bgId, const u16 * tilemap);
+static bool8 sub_80C1F80(bool8 a0);
+static void sub_80C2208(u8 taskId, TaskFunc taskFunc);
+static void sub_80C24BC(void);
+static void sub_80C267C(u8 taskId);
+static void sub_80C25BC(void);
+static void sub_80C2604(void);
+static bool8 sub_80C29A4(void);
+static void sub_80C2B48(void);
+static void sub_80C2C1C(u8 taskId);
+static void sub_80C2C7C(u8 taskId);
+static bool8 sub_80C2E1C(void);
+static void sub_80C3008(u16 a0, u16 a1);
+static void sub_80C309C(void);
+static void sub_80C3154(bool8 a0);
+static void sub_80C3178(void);
+static void sub_80C3188(void);
+static u8 sub_80C31C0(void);
+static u8 sub_80C3348(void);
+static u8 sub_80C3400(void);
+static void sub_80C3418(void);
+static u16 sub_80C3508(void);
+static u16 sub_80C3514(void);
+static u16 sub_80C3520(void);
+static u16 sub_80C3580(void);
+static u8 sub_80C35DC(u8 a0);
+static u8 sub_80C3878(u8 a0);
+static u8 sub_80C3AC8(u8 a0);
+static void sub_80C3D40(void);
+static u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3);
+static void sub_80C41D8(u16 a0, u16 a1);
+static void sub_80C4244(void);
+static void sub_80C4324(bool8 a0);
+static void sub_80C4348(void);
+static u16 sub_80C4380();
+static u16 sub_80C438C();
+static void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc);
+static void sub_80C440C(u8 taskId);
+static void sub_80C44E4(u8 taskId);
+static void sub_80C4750(void);
+static void sub_80C47F0(void);
+static void sub_80C48BC(u8 a0, u8 a1, bool8 a2);
+static void sub_80C4960(u8 a0, u8 a1, bool8 a2);
+static void sub_80C4A04(void);
+static bool8 sub_80C4AAC(u8 a0);
+static bool8 sub_80C4B30(u8 a0);
+static void sub_80C4BE4(void);
+static void sub_80C4C2C(u8 a0, u16 a1, u16 a2);
+static void sub_80C4C48(u16 a0);
+static void sub_80C4C5C(u16 a0, u16 a1);
+static void sub_80C4C74(u16 a0, u16 a1);
+static void sub_80C4C88(u16 a0);
+static void sub_80C4C9C(u8 a0, u8 a1);
+static void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1);
+static void sub_80C4D30(void);
+static void sub_80C4E18(const u8 *str);
+static void sub_80C4E74(const u8 *str);
+static void sub_80C4ED0(bool8 a0);
+static void sub_80C4F08(u8 taskId);
+static void sub_80C51E8(void);
+static void sub_80C5208(u8 taskId);
+static void sub_80C527C(u16 a0);
 
 #include "data/text/map_section_names.h"
 
-const u16 gUnknown_83EF23C[] = INCBIN_U16("graphics/region_map/unk_83EF23C.gbapal");
-const u16 gUnknown_83EF25C[] = INCBIN_U16("graphics/region_map/unk_83EF25C.gbapal");
-const u16 gUnknown_83EF27C[] = INCBIN_U16("graphics/region_map/unk_83EF27C.gbapal");
-const u16 gUnknown_83EF29C[] = INCBIN_U16("graphics/region_map/unk_83EF29C.gbapal");
-const u16 gUnknown_83EF2BC[] = INCBIN_U16("graphics/region_map/unk_83EF2BC.gbapal");
-const u16 gUnknown_83EF2DC[] = INCBIN_U16("graphics/region_map/unk_83EF2DC.gbapal");
-const u16 _83EF2FC[] = {
+static const u16 gUnknown_83EF23C[] = INCBIN_U16("graphics/region_map/unk_83EF23C.gbapal");
+static const u16 gUnknown_83EF25C[] = INCBIN_U16("graphics/region_map/unk_83EF25C.gbapal");
+static const u16 gUnknown_83EF27C[] = INCBIN_U16("graphics/region_map/unk_83EF27C.gbapal");
+static const u16 gUnknown_83EF29C[] = INCBIN_U16("graphics/region_map/unk_83EF29C.gbapal");
+static const u16 gUnknown_83EF2BC[] = INCBIN_U16("graphics/region_map/unk_83EF2BC.gbapal");
+static const u16 gUnknown_83EF2DC[] = INCBIN_U16("graphics/region_map/unk_83EF2DC.gbapal");
+static const u16 _83EF2FC[] = {
     RGB(0, 0, 31),
     RGB(0, 12, 31),
     RGB_WHITE,
     RGB_WHITE
 };
-const u16 gUnknown_83EF384[] = INCBIN_U16("graphics/region_map/unk_83EF384.gbapal");
-const u16 gUnknown_83EF3A4[] = INCBIN_U16("graphics/region_map/unk_83EF3A4.gbapal");
-const u32 gUnknown_83EF3C4[] = INCBIN_U32("graphics/region_map/unk_83EF3C4.4bpp.lz");
-const u32 gUnknown_83EF450[] = INCBIN_U32("graphics/region_map/unk_83EF450.4bpp.lz");
-const u32 gUnknown_83EF4E0[] = INCBIN_U32("graphics/region_map/unk_83EF4E0.4bpp.lz");
-const u32 gUnknown_83EF524[] = INCBIN_U32("graphics/region_map/unk_83EF524.4bpp.lz");
-const u32 gUnknown_83EF59C[] = INCBIN_U32("graphics/region_map/unk_83EF59C.4bpp.lz");
-const u32 gUnknown_83EF61C[] = INCBIN_U32("graphics/region_map/unk_83EF61C.4bpp.lz");
-const u32 gUnknown_83F0330[] = INCBIN_U32("graphics/region_map/unk_83F0330.4bpp.lz");
-const u32 gUnknown_83F0580[] = INCBIN_U32("graphics/region_map/unk_83F0580.bin.lz");
-const u32 gUnknown_83F089C[] = INCBIN_U32("graphics/region_map/unk_83F089C.bin.lz");
-const u32 gUnknown_83F0AFC[] = INCBIN_U32("graphics/region_map/unk_83F0AFC.bin.lz");
-const u32 gUnknown_83F0C0C[] = INCBIN_U32("graphics/region_map/unk_83F0C0C.bin.lz");
-const u32 gUnknown_83F0CF0[] = INCBIN_U32("graphics/region_map/unk_83F0CF0.bin.lz");
-const u32 gUnknown_83F0E0C[] = INCBIN_U32("graphics/region_map/unk_83F0E0C.bin.lz");
-const u32 gUnknown_83F0F1C[] = INCBIN_U32("graphics/region_map/unk_83F0F1C.bin.lz");
-const u32 gUnknown_83F1084[] = INCBIN_U32("graphics/region_map/unk_83F1084.bin.lz");
-const u32 gUnknown_83F1190[] = INCBIN_U32("graphics/region_map/unk_83F1190.bin.lz");
-const u32 gUnknown_83F12CC[] = INCBIN_U32("graphics/region_map/unk_83F12CC.4bpp.lz");
-const u32 gUnknown_83F13EC[] = INCBIN_U32("graphics/region_map/unk_83F13EC.4bpp.lz");
-const u32 gUnknown_83F1550[] = INCBIN_U32("graphics/region_map/unk_83F1550.4bpp.lz");
-const u32 gUnknown_83F1640[] = INCBIN_U32("graphics/region_map/unk_83F1640.4bpp.lz");
-const u32 gUnknown_83F1738[] = INCBIN_U32("graphics/region_map/unk_83F1738.4bpp.lz");
-const u32 gUnknown_83F1804[] = INCBIN_U32("graphics/region_map/unk_83F1804.4bpp.lz");
-const u32 gUnknown_83F18D8[] = INCBIN_U32("graphics/region_map/unk_83F18D8.4bpp.lz");
-const u32 gUnknown_83F1908[] = INCBIN_U32("graphics/region_map/unk_83F1908.4bpp.lz");
-const u32 gUnknown_83F1978[] = INCBIN_U32("graphics/region_map/unk_83F1978.4bpp.lz");
-const u32 gUnknown_83F19A0[] = INCBIN_U32("graphics/region_map/unk_83F19A0.bin.lz");
+static const u16 gUnknown_83EF384[] = INCBIN_U16("graphics/region_map/unk_83EF384.gbapal");
+static const u16 gUnknown_83EF3A4[] = INCBIN_U16("graphics/region_map/unk_83EF3A4.gbapal");
+static const u32 gUnknown_83EF3C4[] = INCBIN_U32("graphics/region_map/unk_83EF3C4.4bpp.lz");
+static const u32 gUnknown_83EF450[] = INCBIN_U32("graphics/region_map/unk_83EF450.4bpp.lz");
+static const u32 gUnknown_83EF4E0[] = INCBIN_U32("graphics/region_map/unk_83EF4E0.4bpp.lz");
+static const u32 gUnknown_83EF524[] = INCBIN_U32("graphics/region_map/unk_83EF524.4bpp.lz");
+static const u32 gUnknown_83EF59C[] = INCBIN_U32("graphics/region_map/unk_83EF59C.4bpp.lz");
+static const u32 gUnknown_83EF61C[] = INCBIN_U32("graphics/region_map/unk_83EF61C.4bpp.lz");
+static const u32 gUnknown_83F0330[] = INCBIN_U32("graphics/region_map/unk_83F0330.4bpp.lz");
+static const u32 gUnknown_83F0580[] = INCBIN_U32("graphics/region_map/unk_83F0580.bin.lz");
+static const u32 gUnknown_83F089C[] = INCBIN_U32("graphics/region_map/unk_83F089C.bin.lz");
+static const u32 gUnknown_83F0AFC[] = INCBIN_U32("graphics/region_map/unk_83F0AFC.bin.lz");
+static const u32 gUnknown_83F0C0C[] = INCBIN_U32("graphics/region_map/unk_83F0C0C.bin.lz");
+static const u32 gUnknown_83F0CF0[] = INCBIN_U32("graphics/region_map/unk_83F0CF0.bin.lz");
+static const u32 gUnknown_83F0E0C[] = INCBIN_U32("graphics/region_map/unk_83F0E0C.bin.lz");
+static const u32 gUnknown_83F0F1C[] = INCBIN_U32("graphics/region_map/unk_83F0F1C.bin.lz");
+static const u32 gUnknown_83F1084[] = INCBIN_U32("graphics/region_map/unk_83F1084.bin.lz");
+static const u32 gUnknown_83F1190[] = INCBIN_U32("graphics/region_map/unk_83F1190.bin.lz");
+static const u32 gUnknown_83F12CC[] = INCBIN_U32("graphics/region_map/unk_83F12CC.4bpp.lz");
+static const u32 gUnknown_83F13EC[] = INCBIN_U32("graphics/region_map/unk_83F13EC.4bpp.lz");
+static const u32 gUnknown_83F1550[] = INCBIN_U32("graphics/region_map/unk_83F1550.4bpp.lz");
+static const u32 gUnknown_83F1640[] = INCBIN_U32("graphics/region_map/unk_83F1640.4bpp.lz");
+static const u32 gUnknown_83F1738[] = INCBIN_U32("graphics/region_map/unk_83F1738.4bpp.lz");
+static const u32 gUnknown_83F1804[] = INCBIN_U32("graphics/region_map/unk_83F1804.4bpp.lz");
+static const u32 gUnknown_83F18D8[] = INCBIN_U32("graphics/region_map/unk_83F18D8.4bpp.lz");
+static const u32 gUnknown_83F1908[] = INCBIN_U32("graphics/region_map/unk_83F1908.4bpp.lz");
+static const u32 gUnknown_83F1978[] = INCBIN_U32("graphics/region_map/unk_83F1978.4bpp.lz");
+static const u32 gUnknown_83F19A0[] = INCBIN_U32("graphics/region_map/unk_83F19A0.bin.lz");
 
-const struct BgTemplate gUnknown_83F1A50[] = {
+static const struct BgTemplate gUnknown_83F1A50[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -408,7 +408,7 @@ const struct BgTemplate gUnknown_83F1A50[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_83F1A60[] = {
+static const struct WindowTemplate gUnknown_83F1A60[] = {
     {
         .bg = 3,
         .tilemapLeft = 3,
@@ -456,12 +456,12 @@ ALIGNED(4) const u8 gUnknown_83F1A90[] = {0, 1, 2};
 ALIGNED(4) const u8 gUnknown_83F1A94[] = {0, 7, 2};
 ALIGNED(4) const u8 gUnknown_83F1A98[] = {0, 10, 2};
 
-const u8 *const gUnknown_83F1A9C[] = {
+static const u8 *const gUnknown_83F1A9C[] = {
     gUnknown_83F1A94,
     gUnknown_83F1A98
 };
 
-const u8 sSeviiMapsecs[3][30] = {
+static const u8 sSeviiMapsecs[3][30] = {
     {
         MAPSEC_ONE_ISLAND,
         MAPSEC_TWO_ISLAND,
@@ -530,28 +530,28 @@ ALIGNED(4) const u8 gUnknown_83F1B00[3][4] = {
     {0, 0, 0, 1}
 };
 
-const struct UnkStruct_80C4CF0 gUnknown_83F1B0C[3] = {
+static const struct UnkStruct_80C4CF0 gUnknown_83F1B0C[3] = {
     {0x18, 0x10, 0x90, 0x20},
     {0x18, 0x20, 0x90, 0x30},
     {0x00, 0x00, 0x00, 0x00}
 };
 
-const struct OamData gUnknown_83F1B24 = {
+static const struct OamData gUnknown_83F1B24 = {
     .shape = SPRITE_SHAPE(32x32),
     .size = SPRITE_SIZE(32x32)
 };
 
-const union AnimCmd gUnknown_83F1B2C[] = {
+static const union AnimCmd gUnknown_83F1B2C[] = {
     ANIMCMD_FRAME(0x00, 20),
     ANIMCMD_FRAME(0x10, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_83F1B38[] = {
+static const union AnimCmd *const gUnknown_83F1B38[] = {
     gUnknown_83F1B2C
 };
 
-const struct UnkStruct_83F1B3C gUnknown_83F1B3C[] = {
+static const struct UnkStruct_83F1B3C gUnknown_83F1B3C[] = {
     {
         .field_0 = MAPSEC_VIRIDIAN_FOREST,
         .field_4 = gMapSecName_ViridianForest,
@@ -631,105 +631,105 @@ const struct UnkStruct_83F1B3C gUnknown_83F1B3C[] = {
     }
 };
 
-const struct OamData gUnknown_83F1C20 = {
+static const struct OamData gUnknown_83F1C20 = {
     .shape = SPRITE_SHAPE(32x64),
     .size = SPRITE_SIZE(32x64)
 };
 
-const union AnimCmd gAnimCmd_83F1C28[] = {
+static const union AnimCmd gAnimCmd_83F1C28[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_83F1C30[] = {
+static const union AnimCmd *const gUnknown_83F1C30[] = {
     gAnimCmd_83F1C28
 };
 
-const struct UnkStruct_80C4CF0 gUnknown_83F1C34 = {
+static const struct UnkStruct_80C4CF0 gUnknown_83F1C34 = {
     0x18, 0x10, 0xD8, 0xA0
 };
 
-const struct OamData gUnknown_83F1C3C = {
+static const struct OamData gUnknown_83F1C3C = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-const union AnimCmd gAnimCmd_83F1C44[] = {
+static const union AnimCmd gAnimCmd_83F1C44[] = {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_83F1C50[] = {
+static const union AnimCmd *const gUnknown_83F1C50[] = {
     gAnimCmd_83F1C44
 };
 
-const struct OamData gUnknown_83F1C54 = {
+static const struct OamData gUnknown_83F1C54 = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-const union AnimCmd gAnimCmd_83F1C5C[] = {
+static const union AnimCmd gAnimCmd_83F1C5C[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83F1C64[] = {
+static const union AnimCmd *const gUnknown_83F1C64[] = {
     gAnimCmd_83F1C5C
 };
 
-const struct OamData gUnknown_83F1C68 = {
+static const struct OamData gUnknown_83F1C68 = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-const struct OamData gUnknown_83F1C70 = {
+static const struct OamData gUnknown_83F1C70 = {
     .shape = SPRITE_SHAPE(8x8),
     .size = SPRITE_SIZE(8x8),
     .priority = 2
 };
 
-const union AnimCmd gAnimCmd_83F1C78[] = {
+static const union AnimCmd gAnimCmd_83F1C78[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_FRAME(4, 60),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gAnimCmd_83F1C84[] = {
+static const union AnimCmd gAnimCmd_83F1C84[] = {
     ANIMCMD_FRAME(1, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gAnimCmd_83F1C8C[] = {
+static const union AnimCmd gAnimCmd_83F1C8C[] = {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_83F1C94[] = {
+static const union AnimCmd *const gUnknown_83F1C94[] = {
     gAnimCmd_83F1C78
 };
 
-const union AnimCmd *const gUnknown_83F1C98[] = {
+static const union AnimCmd *const gUnknown_83F1C98[] = {
     gAnimCmd_83F1C84,
     gAnimCmd_83F1C8C
 };
 
-const u16 gUnknown_83F1CA0[] = {
+static const u16 gUnknown_83F1CA0[] = {
     DISPCNT_WIN0_ON,
     DISPCNT_WIN1_ON
 };
 
-const u8 gUnknown_83F1CA4[][2] = {
+static const u8 gUnknown_83F1CA4[][2] = {
     {REG_OFFSET_WIN0V, REG_OFFSET_WIN0H},
     {REG_OFFSET_WIN1V, REG_OFFSET_WIN1H}
 };
 
-const u8 gUnknown_83F1CA8[] = {15, 1, 2};
+static const u8 gUnknown_83F1CA8[] = {15, 1, 2};
 
-const u8 *const gUnknown_83F1CAC[] = {
+static const u8 *const gUnknown_83F1CAC[] = {
     [MAPSEC_PALLET_TOWN        - MAPSECS_KANTO] = gMapSecName_PalletTown,
     [MAPSEC_VIRIDIAN_CITY      - MAPSECS_KANTO] = gMapSecName_ViridianCity,
     [MAPSEC_PEWTER_CITY        - MAPSECS_KANTO] = gMapSecName_PewterCity,
@@ -841,7 +841,7 @@ const u8 *const gUnknown_83F1CAC[] = {
     [MAPSEC_SPECIAL_AREA       - MAPSECS_KANTO] = gMapSecName_CeladonDept
 };
 
-const u16 gUnknown_83F1E60[0xC6][2] = {
+static const u16 gUnknown_83F1E60[0xC6][2] = {
     [MAPSEC_PALLET_TOWN        - MAPSECS_KANTO] = {0x04, 0x0b},
     [MAPSEC_VIRIDIAN_CITY      - MAPSECS_KANTO] = {0x04, 0x08},
     [MAPSEC_PEWTER_CITY        - MAPSECS_KANTO] = {0x04, 0x04},
@@ -915,7 +915,7 @@ const u16 gUnknown_83F1E60[0xC6][2] = {
     [MAPSEC_BIRTH_ISLAND       - MAPSECS_KANTO] = {0x12, 0x0d},
 };
 
-const u16 gUnknown_83F2178[0xC6][2] = {
+static const u16 gUnknown_83F2178[0xC6][2] = {
     [MAPSEC_PALLET_TOWN        - MAPSECS_KANTO] = {0x01, 0x01},
     [MAPSEC_VIRIDIAN_CITY      - MAPSECS_KANTO] = {0x01, 0x01},
     [MAPSEC_PEWTER_CITY        - MAPSECS_KANTO] = {0x01, 0x01},
@@ -1026,7 +1026,7 @@ const u16 gUnknown_83F2178[0xC6][2] = {
     [MAPSEC_EMBER_SPA          - MAPSECS_KANTO] = {0x01, 0x01}
 };
 
-const u8 gUnknown_83F2490[][15][22] = {
+static const u8 gUnknown_83F2490[][15][22] = {
     {
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
          MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE,
@@ -1096,7 +1096,7 @@ const u8 gUnknown_83F2490[][15][22] = {
     }
 };
 
-const u8 gUnknown_83F2724[][15][22] = {
+static const u8 gUnknown_83F2724[][15][22] = {
     {
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
@@ -1132,7 +1132,7 @@ const u8 gUnknown_83F2724[][15][22] = {
     }
 };
 
-const u8 gUnknown_83F29B8[][15][22] = {
+static const u8 gUnknown_83F29B8[][15][22] = {
     {
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
@@ -1168,7 +1168,7 @@ const u8 gUnknown_83F29B8[][15][22] = {
     }
 };
 
-const u8 gUnknown_83F2C4C[][15][22] = {
+static const u8 gUnknown_83F2C4C[][15][22] = {
     {
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_OUTCAST_ISLAND, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
         {MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_OUTCAST_ISLAND, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE, MAPSEC_NONE},
@@ -1204,7 +1204,7 @@ const u8 gUnknown_83F2C4C[][15][22] = {
     }
 };
 
-const u8 gUnknown_83F2EE0[][3] = {
+static const u8 gUnknown_83F2EE0[][3] = {
     [MAPSEC_PALLET_TOWN        - MAPSECS_KANTO] = {MAP_GROUP(PALLET_TOWN), MAP_NUM(PALLET_TOWN), SPAWN_PALLET_TOWN},
     [MAPSEC_VIRIDIAN_CITY      - MAPSECS_KANTO] = {MAP_GROUP(VIRIDIAN_CITY), MAP_NUM(VIRIDIAN_CITY), SPAWN_VIRIDIAN_CITY},
     [MAPSEC_PEWTER_CITY        - MAPSECS_KANTO] = {MAP_GROUP(PEWTER_CITY), MAP_NUM(PEWTER_CITY), SPAWN_PEWTER_CITY},
@@ -1335,7 +1335,7 @@ static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
     }
 }
 
-void sub_80BFEA0(void)
+static void sub_80BFEA0(void)
 {
     u16 pal[16];
     CpuCopy16(&gUnknown_83EF2DC[0x20], pal, sizeof(pal));
@@ -1344,7 +1344,7 @@ void sub_80BFEA0(void)
     LoadPalette(&gUnknown_83EF2DC[0x2F], 0x2F, sizeof(u16));
 }
 
-void sub_80BFEDC(u8 kind)
+static void sub_80BFEDC(u8 kind)
 {
     gUnknown_20399D4 = AllocZeroed(sizeof(struct UnkStruct_20399D4));
     if (gUnknown_20399D4 == NULL)
@@ -1427,7 +1427,7 @@ static void sub_80BFFD0(void)
     gUnknown_20399D4->field_479C = r7;
 }
 
-void sub_80C0100(void)
+static void sub_80C0100(void)
 {
     switch (gUnknown_20399D4->field_47A4)
     {
@@ -1478,7 +1478,7 @@ void sub_80C0100(void)
     gUnknown_20399D4->field_47A4++;
 }
 
-bool8 sub_80C0238(void)
+static bool8 sub_80C0238(void)
 {
     switch (gUnknown_20399D4->field_47A8)
     {
@@ -1531,13 +1531,13 @@ bool8 sub_80C0238(void)
     return FALSE;
 }
 
-void sub_80C03E8(void)
+static void sub_80C03E8(void)
 {
     CreateTask(gUnknown_20399D4->field_47B8, 0);
     SetMainCallback2(sub_80C08B4);
 }
 
-bool32 sub_80C0410(void)
+static bool32 sub_80C0410(void)
 {
     if (sub_80C4164(sub_80C0E20(), 0, sub_80C3514(), sub_80C3508()) == 99)
         return FALSE;
@@ -1545,7 +1545,7 @@ bool32 sub_80C0410(void)
         return TRUE;
 }
 
-void sub_80C0450(void)
+static void sub_80C0450(void)
 {
     if (sub_80C0410())
     {
@@ -1558,7 +1558,7 @@ void sub_80C0450(void)
     }
 }
 
-void sub_80C04E4(u8 taskId)
+static void sub_80C04E4(u8 taskId)
 {
     switch (gUnknown_20399D4->field_47A0)
     {
@@ -1682,7 +1682,7 @@ void sub_80C04E4(u8 taskId)
     }
 }
 
-void sub_80C07D0(TaskFunc taskFunc)
+static void sub_80C07D0(TaskFunc taskFunc)
 {
     gUnknown_20399D4->field_47B8 = taskFunc;
 }
@@ -1692,12 +1692,12 @@ TaskFunc sub_80C07E4(void)
     return gUnknown_20399D4->field_47B8;
 }
 
-void sub_80C07F8(u8 taskId)
+static void sub_80C07F8(u8 taskId)
 {
     gTasks[taskId].func = gUnknown_20399D4->field_47B8;
 }
 
-void sub_80C0820(u8 taskId)
+static void sub_80C0820(u8 taskId)
 {
     if (sub_80C0E04(2) == TRUE)
         sub_80C25BC();
@@ -1714,12 +1714,12 @@ void sub_80C0820(u8 taskId)
     FREE_IF_NOT_NULL(gUnknown_20399D4);
 }
 
-void sub_80C0898(void)
+static void sub_80C0898(void)
 {
     FREE_IF_NOT_NULL(gUnknown_20399D4);
 }
 
-void sub_80C08B4(void)
+static void sub_80C08B4(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1727,25 +1727,25 @@ void sub_80C08B4(void)
     UpdatePaletteFade();
 }
 
-void sub_80C08CC(void)
+static void sub_80C08CC(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80C08E0(void)
+static void sub_80C08E0(void)
 {
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
 }
 
-void sub_80C08F4(void)
+static void sub_80C08F4(void)
 {
     SetVBlankCallback(sub_80C08CC);
 }
 
-void sub_80C0904(void)
+static void sub_80C0904(void)
 {
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, (void *)OAM, OAM_SIZE);
@@ -1768,14 +1768,14 @@ void sub_80C0904(void)
     sub_80C0AB8();
 }
 
-void sub_80C0A2C(void)
+static void sub_80C0A2C(void)
 {
     SetBgTilemapBuffer(0, gUnknown_20399D4->field_1796[0]);
     SetBgTilemapBuffer(1, gUnknown_20399D4->field_1796[1]);
     SetBgTilemapBuffer(2, gUnknown_20399D4->field_1796[2]);
 }
 
-void sub_80C0A6C(void)
+static void sub_80C0A6C(void)
 {
     ResetSpriteData();
     ResetPaletteFade();
@@ -1784,7 +1784,7 @@ void sub_80C0A6C(void)
     ScanlineEffect_Stop();
 }
 
-void sub_80C0A88(u8 mode)
+static void sub_80C0A88(u8 mode)
 {
     switch (mode)
     {
@@ -1799,7 +1799,7 @@ void sub_80C0A88(u8 mode)
     }
 }
 
-void sub_80C0AB8(void)
+static void sub_80C0AB8(void)
 {
     sub_80C4BE4();
     sub_80C4C2C(0, 0x11, 0xc0);
@@ -1813,7 +1813,7 @@ void sub_80C0AB8(void)
         sub_80C4C9C(1, 0);
 }
 
-void sub_80C0B18(void)
+static void sub_80C0B18(void)
 {
     ClearWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
@@ -1831,12 +1831,12 @@ void sub_80C0B18(void)
     }
 }
 
-void sub_80C0B9C(void)
+static void sub_80C0B9C(void)
 {
     sub_80C4CF0(1, &gUnknown_83F1B0C[1]);
 }
 
-void sub_80C0BB0(void)
+static void sub_80C0BB0(void)
 {
     u16 mapsecId;
     u16 descOffset;
@@ -1862,7 +1862,7 @@ void sub_80C0BB0(void)
     }
 }
 
-void sub_80C0CA0(void)
+static void sub_80C0CA0(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     CopyWindowToVram(0, 3);
@@ -1870,7 +1870,7 @@ void sub_80C0CA0(void)
     CopyWindowToVram(1, 3);
 }
 
-void sub_80C0CC8(u8 bg, u16 *map)
+static void sub_80C0CC8(u8 bg, u16 *map)
 {
     s16 i;
     s16 j;
@@ -1902,32 +1902,32 @@ void sub_80C0CC8(u8 bg, u16 *map)
         FillBgTilemapBufferRect_Palette0(0, 0x003, 21, 16, 3, 3);
 }
 
-u8 sub_80C0E04(u8 a0)
+static u8 sub_80C0E04(u8 a0)
 {
     return gUnknown_20399D4->field_4797[a0];
 }
 
-u8 sub_80C0E20(void)
+static u8 sub_80C0E20(void)
 {
     return gUnknown_20399D4->field_479B;
 }
 
-u8 sub_80C0E34(void)
+static u8 sub_80C0E34(void)
 {
     return gUnknown_20399D4->field_479C;
 }
 
-void sub_80C0E48(u8 a0)
+static void sub_80C0E48(u8 a0)
 {
     gUnknown_20399D4->field_479B = a0;
 }
 
-void sub_80C0E5C(u8 a0)
+static void sub_80C0E5C(u8 a0)
 {
     gUnknown_20399D4->field_479C = a0;
 }
 
-void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc)
+static void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc)
 {
     gUnknown_20399D8 = AllocZeroed(sizeof(struct UnkStruct_20399D8));
     if (FlagGet(FLAG_SYS_SEVII_MAP_4567))
@@ -1964,14 +1964,14 @@ void sub_80C0E70(u8 a0, u8 taskId, TaskFunc taskFunc)
     gTasks[taskId].func = sub_80C1098;
 }
 
-void sub_80C0FE0(void)
+static void sub_80C0FE0(void)
 {
     sub_80C4BE4();
     sub_80C4C2C(27, 4, 64);
     sub_80C4C5C(16 - gUnknown_20399D8->field_1CCD, gUnknown_20399D8->field_1CCD);
 }
 
-bool8 sub_80C1014(void)
+static bool8 sub_80C1014(void)
 {
     if (gUnknown_20399D8->field_1CCD < 16)
     {
@@ -1985,7 +1985,7 @@ bool8 sub_80C1014(void)
     }
 }
 
-bool8 sub_80C1058(void)
+static bool8 sub_80C1058(void)
 {
     if (gUnknown_20399D8->field_1CCD >= 2)
     {
@@ -1999,7 +1999,7 @@ bool8 sub_80C1058(void)
     }
 }
 
-void sub_80C1098(u8 taskId)
+static void sub_80C1098(u8 taskId)
 {
     switch (gUnknown_20399D8->field_1CC8)
     {
@@ -2086,7 +2086,7 @@ void sub_80C1098(u8 taskId)
     }
 }
 
-void sub_80C1280(u8 taskId)
+static void sub_80C1280(u8 taskId)
 {
     gTasks[taskId].func = gUnknown_20399D8->field_1CD0;
     HideBg(2);
@@ -2098,7 +2098,7 @@ void sub_80C1280(u8 taskId)
     FREE_IF_NOT_NULL(gUnknown_20399D8);
 }
 
-bool8 sub_80C12EC(void)
+static bool8 sub_80C12EC(void)
 {
     if (gUnknown_20399D8->field_1CDC != 0)
     {
@@ -2113,7 +2113,7 @@ bool8 sub_80C12EC(void)
     }
 }
 
-void sub_80C1324(u8 bg, u16 *map)
+static void sub_80C1324(u8 bg, u16 *map)
 {
     s16 i;
     s16 j;
@@ -2130,7 +2130,7 @@ void sub_80C1324(u8 bg, u16 *map)
     }
 }
 
-void sub_80C1390(void)
+static void sub_80C1390(void)
 {
     struct UnkStruct_80C4CF0 data;
     data.v0 = gUnknown_20399D8->field_1CD4[0] = 0x48;
@@ -2145,7 +2145,7 @@ void sub_80C1390(void)
     sub_80C4CF0(1, &data);
 }
 
-bool8 sub_80C144C(void)
+static bool8 sub_80C144C(void)
 {
     if (gUnknown_20399D8->field_1CDC < 6)
     {
@@ -2159,7 +2159,7 @@ bool8 sub_80C144C(void)
     }
 }
 
-bool8 sub_80C1478(void)
+static bool8 sub_80C1478(void)
 {
     bool8 r6 = FALSE;
     struct UnkStruct_80C4CF0 data;
@@ -2213,12 +2213,12 @@ bool8 sub_80C1478(void)
     return FALSE;
 }
 
-void sub_80C16B8(struct Sprite * sprite)
+static void sub_80C16B8(struct Sprite * sprite)
 {
     sprite->pos1.y = gUnknown_20399D8->field_1CD4[1] + 16;
 }
 
-bool8 sub_80C16D0(void)
+static bool8 sub_80C16D0(void)
 {
     switch (gUnknown_20399D8->field_1CC9)
     {
@@ -2239,12 +2239,12 @@ bool8 sub_80C16D0(void)
     return FALSE;
 }
 
-void sub_80C1754(u8 a0, u16 a1, u16 a2)
+static void sub_80C1754(u8 a0, u16 a1, u16 a2)
 {
     sub_80C176C(a0, a1, a2);
 }
 
-void sub_80C176C(u8 a0, u16 a1, u16 a2)
+static void sub_80C176C(u8 a0, u16 a1, u16 a2)
 {
     u8 spriteId;
 
@@ -2278,7 +2278,7 @@ void sub_80C176C(u8 a0, u16 a1, u16 a2)
     gSprites[spriteId].invisible = FALSE;
 }
 
-void sub_80C1880(void)
+static void sub_80C1880(void)
 {
     u8 i;
     for (i = 0; i < 2; i++)
@@ -2292,7 +2292,7 @@ void sub_80C1880(void)
     }
 }
 
-const u8 *sub_80C18E0(u16 a0)
+static const u8 *sub_80C18E0(u16 a0)
 {
     u8 i;
     for (i = 0; i < NELEMS(gUnknown_83F1B3C); i++)
@@ -2303,7 +2303,7 @@ const u8 *sub_80C18E0(u16 a0)
     return gUnknown_8418EC3;
 }
 
-const u8 *sub_80C1920(u16 a0)
+static const u8 *sub_80C1920(u16 a0)
 {
     u8 i;
     for (i = 0; i < NELEMS(gUnknown_83F1B3C); i++)
@@ -2314,7 +2314,7 @@ const u8 *sub_80C1920(u16 a0)
     return gUnknown_8418EC3;
 }
 
-void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc)
+static void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc)
 {
     u8 r0;
     gUnknown_20399DC = AllocZeroed(sizeof(struct UnkStruct_20399DC));
@@ -2334,7 +2334,7 @@ void sub_80C195C(u8 a0, u8 taskId, TaskFunc taskFunc)
     gTasks[taskId].func = sub_80C1A94;
 }
 
-bool8 sub_80C19FC(void)
+static bool8 sub_80C19FC(void)
 {
     switch (gUnknown_20399DC->field_3D4A)
     {
@@ -2357,7 +2357,7 @@ bool8 sub_80C19FC(void)
     return FALSE;
 }
 
-void sub_80C1A94(u8 taskId)
+static void sub_80C1A94(u8 taskId)
 {
     switch (gUnknown_20399DC->field_3D48)
     {
@@ -2407,7 +2407,7 @@ void sub_80C1A94(u8 taskId)
     }
 }
 
-void sub_80C1BE0(u8 taskId)
+static void sub_80C1BE0(u8 taskId)
 {
     switch (gUnknown_20399DC->field_3D49)
     {
@@ -2464,7 +2464,7 @@ void sub_80C1BE0(u8 taskId)
     }
 }
 
-void sub_80C1E14(u8 taskId)
+static void sub_80C1E14(u8 taskId)
 {
     gTasks[taskId].func = gUnknown_20399DC->field_3D44;
     HideBg(2);
@@ -2477,12 +2477,12 @@ void sub_80C1E14(u8 taskId)
     FREE_IF_NOT_NULL(gUnknown_20399DC);
 }
 
-void sub_80C1E78(u8 bgId, const u16 * tilemap)
+static void sub_80C1E78(u8 bgId, const u16 * tilemap)
 {
     CopyToBgTilemapBufferRect(2, tilemap, 0, 0, 32, 20);
 }
 
-void sub_80C1E94(void)
+static void sub_80C1E94(void)
 {
     u16 r4;
     u16 r0;
@@ -2504,7 +2504,7 @@ void sub_80C1E94(void)
     gUnknown_20399DC->field_3E24 = (0x88 - gUnknown_20399DC->field_3E1C) / 8;
 }
 
-bool8 sub_80C1F80(bool8 a0)
+static bool8 sub_80C1F80(bool8 a0)
 {
     struct UnkStruct_80C4CF0 data;
 
@@ -2551,12 +2551,12 @@ bool8 sub_80C1F80(bool8 a0)
     return FALSE;
 }
 
-void nullsub_63(struct Sprite * sprite)
+static void nullsub_63(struct Sprite * sprite)
 {
 
 }
 
-void sub_80C210C(u8 a0, u8 a1, u8 a2)
+static void sub_80C210C(u8 a0, u8 a1, u8 a2)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
@@ -2587,7 +2587,7 @@ void sub_80C210C(u8 a0, u8 a1, u8 a2)
     gSprites[spriteId].invisible = TRUE;
 }
 
-void sub_80C2208(u8 taskId, TaskFunc taskFunc)
+static void sub_80C2208(u8 taskId, TaskFunc taskFunc)
 {
     u8 i;
 
@@ -2606,7 +2606,7 @@ void sub_80C2208(u8 taskId, TaskFunc taskFunc)
     gTasks[taskId].func = sub_80C267C;
 }
 
-void sub_80C22C4(u8 a0, bool8 a1)
+static void sub_80C22C4(u8 a0, bool8 a1)
 {
     u8 i;
     if (a0 == 6)
@@ -2622,7 +2622,7 @@ void sub_80C22C4(u8 a0, bool8 a1)
     }
 }
 
-bool8 sub_80C2344(void)
+static bool8 sub_80C2344(void)
 {
     switch (gUnknown_20399E0->field_CCD)
     {
@@ -2666,7 +2666,7 @@ bool8 sub_80C2344(void)
     return FALSE;
 }
 
-void sub_80C24BC(void)
+static void sub_80C24BC(void)
 {
     struct UnkStruct_80C4CF0 data;
     data.v0 = gUnknown_20399E0->field_000[0]->field_404 + 8;
@@ -2680,7 +2680,7 @@ void sub_80C24BC(void)
     sub_80C4C9C(0, 0);
 }
 
-void sub_80C253C(void)
+static void sub_80C253C(void)
 {
     struct UnkStruct_80C4CF0 data = gUnknown_83F1C34;
     sub_80C4BE4();
@@ -2692,12 +2692,12 @@ void sub_80C253C(void)
     sub_80C4C9C(0, 0);
 }
 
-void sub_80C2594(u8 taskId)
+static void sub_80C2594(u8 taskId)
 {
     gTasks[taskId].func = gUnknown_20399E0->field_CC8;
 }
 
-void sub_80C25BC(void)
+static void sub_80C25BC(void)
 {
     u8 i;
     sub_80C2604();
@@ -2708,7 +2708,7 @@ void sub_80C25BC(void)
     FREE_IF_NOT_NULL(gUnknown_20399E0);
 }
 
-void sub_80C2604(void)
+static void sub_80C2604(void)
 {
     u8 i;
     for (i = 0; i < 6; i++)
@@ -2724,7 +2724,7 @@ void sub_80C2604(void)
     }
 }
 
-void sub_80C267C(u8 taskId)
+static void sub_80C267C(u8 taskId)
 {
     switch (gUnknown_20399E0->field_CCC)
     {
@@ -2832,7 +2832,7 @@ void sub_80C267C(u8 taskId)
     }
 }
 
-bool8 sub_80C29A4(void)
+static bool8 sub_80C29A4(void)
 {
     sub_80C2B48();
     if (gUnknown_20399E0->field_000[0]->field_400->pos1.x == 0)
@@ -2888,7 +2888,7 @@ bool8 sub_80C29A4(void)
     return FALSE;
 }
 
-void sub_80C2B48(void)
+static void sub_80C2B48(void)
 {
     struct UnkStruct_80C4CF0 data;
     data.v0 = gUnknown_20399E0->field_000[0]->field_400->pos1.x;
@@ -2898,7 +2898,7 @@ void sub_80C2B48(void)
     sub_80C4CF0(0, &data);
 }
 
-void sub_80C2B9C(void)
+static void sub_80C2B9C(void)
 {
     struct UnkStruct_80C4CF0 data;
     data.v0 = gUnknown_20399E0->field_000[0]->field_404 + 16;
@@ -2912,12 +2912,12 @@ void sub_80C2B9C(void)
     sub_80C4C9C(0, 0);
 }
 
-void sub_80C2C1C(u8 taskId)
+static void sub_80C2C1C(u8 taskId)
 {
     gTasks[taskId].func = sub_80C2C7C;
 }
 
-void sub_80C2C38(void)
+static void sub_80C2C38(void)
 {
     sub_80C210C(0, 4, 4);
     sub_80C210C(1, 5, 5);
@@ -2927,7 +2927,7 @@ void sub_80C2C38(void)
     sub_80C210C(5, 9, 9);
 }
 
-void sub_80C2C7C(u8 taskId)
+static void sub_80C2C7C(u8 taskId)
 {
     switch (gUnknown_20399E0->field_CCF)
     {
@@ -2988,7 +2988,7 @@ void sub_80C2C7C(u8 taskId)
 }
 
 
-bool8 sub_80C2E1C(void)
+static bool8 sub_80C2E1C(void)
 {
     sub_80C2B48();
     if (gUnknown_20399E0->field_000[0]->field_400->pos1.x == 104)
@@ -3044,7 +3044,7 @@ bool8 sub_80C2E1C(void)
     return FALSE;
 }
 
-void sub_80C2FC0(struct Sprite * sprite)
+static void sub_80C2FC0(struct Sprite * sprite)
 {
     if (gUnknown_20399E4->field_00C != 0)
     {
@@ -3059,7 +3059,7 @@ void sub_80C2FC0(struct Sprite * sprite)
     }
 }
 
-void sub_80C3008(u16 a0, u16 a1)
+static void sub_80C3008(u16 a0, u16 a1)
 {
     gUnknown_20399E4 = AllocZeroed(sizeof(struct UnkStruct_20399E4));
     LZ77UnCompWram(gUnknown_83EF4E0, gUnknown_20399E4->field_024);
@@ -3074,7 +3074,7 @@ void sub_80C3008(u16 a0, u16 a1)
     sub_80C309C();
 }
 
-void sub_80C309C(void)
+static void sub_80C309C(void)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
@@ -3103,17 +3103,17 @@ void sub_80C309C(void)
     sub_80C3154(TRUE);
 }
 
-void sub_80C3154(bool8 a0)
+static void sub_80C3154(bool8 a0)
 {
     gUnknown_20399E4->field_01C->invisible = a0;
 }
 
-void sub_80C3178(void)
+static void sub_80C3178(void)
 {
     gUnknown_20399E4->field_00E = 0;
 }
 
-void sub_80C3188(void)
+static void sub_80C3188(void)
 {
     if (gUnknown_20399E4->field_01C != NULL)
     {
@@ -3124,7 +3124,7 @@ void sub_80C3188(void)
     FREE_IF_NOT_NULL(gUnknown_20399E4);
 }
 
-u8 sub_80C31C0(void)
+static u8 sub_80C31C0(void)
 {
     u8 ret = 0;
     gUnknown_20399E4->field_008 = 0;
@@ -3206,7 +3206,7 @@ u8 sub_80C31C0(void)
     return ret;
 }
 
-u8 sub_80C3348(void)
+static u8 sub_80C3348(void)
 {
     if (gUnknown_20399E4->field_00C != 0)
         return 2;
@@ -3225,12 +3225,12 @@ u8 sub_80C3348(void)
     return 3;
 }
 
-u8 sub_80C3400(void)
+static u8 sub_80C3400(void)
 {
     return gUnknown_20399E4->field_010();
 }
 
-void sub_80C3418(void)
+static void sub_80C3418(void)
 {
     if (sub_80C0E04(0) == 1)
     {
@@ -3279,17 +3279,17 @@ void sub_80C3418(void)
     gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
 }
 
-u16 sub_80C3508(void)
+static u16 sub_80C3508(void)
 {
     return gUnknown_20399E4->field_000;
 }
 
-u16 sub_80C3514(void)
+static u16 sub_80C3514(void)
 {
     return gUnknown_20399E4->field_002;
 }
 
-u16 sub_80C3520(void)
+static u16 sub_80C3520(void)
 {
     u8 ret;
     if (gUnknown_20399E4->field_002 < 0
@@ -3304,7 +3304,7 @@ u16 sub_80C3520(void)
     return ret;
 }
 
-u16 sub_80C3580(void)
+static u16 sub_80C3580(void)
 {
     u8 ret;
     if (gUnknown_20399E4->field_002 < 0
@@ -3319,7 +3319,7 @@ u16 sub_80C3580(void)
     return ret;
 }
 
-u8 sub_80C35DC(u8 mapsec)
+static u8 sub_80C35DC(u8 mapsec)
 {
     switch (mapsec)
     {
@@ -3372,7 +3372,7 @@ u8 sub_80C35DC(u8 mapsec)
     }
 }
 
-u8 sub_80C3878(u8 mapsec)
+static u8 sub_80C3878(u8 mapsec)
 {
     switch (mapsec)
     {
@@ -3445,7 +3445,7 @@ u8 sub_80C3878(u8 mapsec)
     }
 }
 
-u8 sub_80C3AC8(u8 a0)
+static u8 sub_80C3AC8(u8 a0)
 {
     switch (a0)
     {
@@ -3458,12 +3458,12 @@ u8 sub_80C3AC8(u8 a0)
     }
 }
 
-u16 sub_80C3B00(void)
+static u16 sub_80C3B00(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
 }
 
-void sub_80C3B28(void)
+static void sub_80C3B28(void)
 {
     u16 width;
     u32 divisor;
@@ -3541,7 +3541,7 @@ void sub_80C3B28(void)
     gUnknown_20399E4->field_002 = y + gUnknown_83F1E60[gUnknown_20399E4->field_014][1];
 }
 
-void sub_80C3D40(void)
+static void sub_80C3D40(void)
 {
     switch (sub_80C3B00())
     {
@@ -3721,7 +3721,7 @@ void sub_80C3D40(void)
     gUnknown_20399E4->field_014 = sub_80C4164(sub_80C0E20(), 0, gUnknown_20399E4->field_002, gUnknown_20399E4->field_000);
 }
 
-u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3)
+static u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3)
 {
     switch (a0)
     {
@@ -3738,7 +3738,7 @@ u8 sub_80C4164(u8 a0, u8 a1, s16 a2, s16 a3)
     }
 }
 
-void sub_80C41D8(u16 a0, u16 a1)
+static void sub_80C41D8(u16 a0, u16 a1)
 {
     gUnknown_20399E8 = AllocZeroed(sizeof(struct UnkStruct_20399E8));
     if (gSaveBlock2Ptr->playerGender == FEMALE)
@@ -3752,7 +3752,7 @@ void sub_80C41D8(u16 a0, u16 a1)
     sub_80C4244();
 }
 
-void sub_80C4244(void)
+static void sub_80C4244(void)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
@@ -3784,12 +3784,12 @@ void sub_80C4244(void)
     sub_80C4324(TRUE);
 }
 
-void sub_80C4324(bool8 a0)
+static void sub_80C4324(bool8 a0)
 {
     gUnknown_20399E8->field_04->invisible = a0;
 }
 
-void sub_80C4348(void)
+static void sub_80C4348(void)
 {
     if (gUnknown_20399E8->field_04 != NULL)
     {
@@ -3800,17 +3800,17 @@ void sub_80C4348(void)
     FREE_IF_NOT_NULL(gUnknown_20399E8);
 }
 
-u16 sub_80C4380(void)
+static u16 sub_80C4380(void)
 {
     return gUnknown_20399E8->field_00;
 }
 
-u16 sub_80C438C(void)
+static u16 sub_80C438C(void)
 {
     return gUnknown_20399E8->field_02;
 }
 
-void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc)
+static void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc)
 {
     gUnknown_20399EC = AllocZeroed(sizeof(struct UnkStruct_20399EC));
     gUnknown_20399EC->field_468 = taskFunc;
@@ -3820,7 +3820,7 @@ void sub_80C4398(u8 a0, u8 taskId, TaskFunc taskFunc)
     gTasks[taskId].func = sub_80C440C;
 }
 
-void sub_80C440C(u8 taskId)
+static void sub_80C440C(u8 taskId)
 {
     switch (gUnknown_20399EC->field_463)
     {
@@ -3852,12 +3852,12 @@ void sub_80C440C(u8 taskId)
     }
 }
 
-void sub_80C44E4(u8 taskId)
+static void sub_80C44E4(u8 taskId)
 {
     gTasks[taskId].func = gUnknown_20399EC->field_468;
 }
 
-void sub_80C450C(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
+static void sub_80C450C(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
@@ -3887,7 +3887,7 @@ void sub_80C450C(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
     gUnknown_20399EC->field_2D0[a1].field_4 = a0;
 }
 
-void sub_80C4614(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
+static void sub_80C4614(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
 {
     u8 spriteId;
     u8 r4;
@@ -3922,7 +3922,7 @@ void sub_80C4614(u8 a0, u8 a1, u16 a2, u16 a3, u8 a4, u8 a5)
     gUnknown_20399EC->field_140[a1].field_4 = a0;
 }
 
-void sub_80C4750(void)
+static void sub_80C4750(void)
 {
     u16 i, j, k;
     u8 r7 = 0;
@@ -3945,7 +3945,7 @@ void sub_80C4750(void)
     }
 }
 
-void sub_80C47F0(void)
+static void sub_80C47F0(void)
 {
     u16 i, j, k;
     u8 r6 = 0;
@@ -3972,7 +3972,7 @@ void sub_80C47F0(void)
     }
 }
 
-void sub_80C48BC(u8 a0, u8 a1, bool8 a2)
+static void sub_80C48BC(u8 a0, u8 a1, bool8 a2)
 {
     u8 i;
     if (a1 == 25)
@@ -3990,7 +3990,7 @@ void sub_80C48BC(u8 a0, u8 a1, bool8 a2)
     }
 }
 
-void sub_80C4960(u8 a0, u8 a1, bool8 a2)
+static void sub_80C4960(u8 a0, u8 a1, bool8 a2)
 {
     u8 i;
     if (a1 == 25)
@@ -4008,7 +4008,7 @@ void sub_80C4960(u8 a0, u8 a1, bool8 a2)
     }
 }
 
-void sub_80C4A04(void)
+static void sub_80C4A04(void)
 {
     u8 i;
     for (i = 0; i < 25; i++)
@@ -4032,7 +4032,7 @@ void sub_80C4A04(void)
     FREE_IF_NOT_NULL(gUnknown_20399EC);
 }
 
-bool8 sub_80C4AAC(u8 a0)
+static bool8 sub_80C4AAC(u8 a0)
 {
     if (gUnknown_20399F0[a0] != NULL)
         return FALSE;
@@ -4049,7 +4049,7 @@ bool8 sub_80C4AAC(u8 a0)
     return TRUE;
 }
 
-bool8 sub_80C4B30(u8 a0)
+static bool8 sub_80C4B30(u8 a0)
 {
     if (gUnknown_20399F0[a0] == NULL)
         return FALSE;
@@ -4066,7 +4066,7 @@ bool8 sub_80C4B30(u8 a0)
     return TRUE;
 }
 
-void sub_80C4BB8(void)
+static void sub_80C4BB8(void)
 {
     u8 i;
     for (i = 0; i < 3; i++)
@@ -4075,7 +4075,7 @@ void sub_80C4BB8(void)
     }
 }
 
-void sub_80C4BE4(void)
+static void sub_80C4BE4(void)
 {
     struct UnkStruct_80C4CF0 data = {};
     sub_80C4C2C(0, 0, 0);
@@ -4087,7 +4087,7 @@ void sub_80C4BE4(void)
     sub_80C4C9C(1, 1);
 }
 
-void sub_80C4C2C(u8 a0, u16 a1, u16 a2)
+static void sub_80C4C2C(u8 a0, u16 a1, u16 a2)
 {
     u16 regval = a0 << 8;
     regval |= a1;
@@ -4095,31 +4095,31 @@ void sub_80C4C2C(u8 a0, u16 a1, u16 a2)
     SetGpuReg(REG_OFFSET_BLDCNT, regval);
 }
 
-void sub_80C4C48(u16 a0)
+static void sub_80C4C48(u16 a0)
 {
     SetGpuReg(REG_OFFSET_BLDY, a0);
 }
 
-void sub_80C4C5C(u16 a0, u16 a1)
+static void sub_80C4C5C(u16 a0, u16 a1)
 {
     u16 regval = a0 << 8;
     regval |= a1;
     SetGpuReg(REG_OFFSET_BLDALPHA, regval);
 }
 
-void sub_80C4C74(u16 a0, u16 a1)
+static void sub_80C4C74(u16 a0, u16 a1)
 {
     u16 regval = a1 << 8;
     regval |= a0;
     SetGpuReg(REG_OFFSET_WININ, regval);
 }
 
-void sub_80C4C88(u16 a0)
+static void sub_80C4C88(u16 a0)
 {
     SetGpuReg(REG_OFFSET_WINOUT, a0);
 }
 
-void sub_80C4C9C(u8 a0, u8 a1)
+static void sub_80C4C9C(u8 a0, u8 a1)
 {
     u16 data[2];
     memcpy(data, gUnknown_83F1CA0, 4);
@@ -4134,19 +4134,19 @@ void sub_80C4C9C(u8 a0, u8 a1)
     }
 }
 
-void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1)
+static void sub_80C4CF0(u8 a0, const struct UnkStruct_80C4CF0 *a1)
 {
     SetGpuReg(gUnknown_83F1CA4[a0][0], (a1->v2 << 8) | a1->v6);
     SetGpuReg(gUnknown_83F1CA4[a0][1], (a1->v0 << 8) | a1->v4);
 }
 
-void sub_80C4D30(void)
+static void sub_80C4D30(void)
 {
     sub_80C4BB8();
     sub_80C4BE4();
 }
 
-bool32 sub_80C4D40(u16 a0)
+static bool32 sub_80C4D40(u16 a0)
 {
     if (gUnknown_20399D4 != NULL)
         return FALSE;
@@ -4202,7 +4202,7 @@ u8 *sub_80C4E08(u8 *dest, u16 mapsec)
     return GetMapNameGeneric(dest, mapsec);
 }
 
-void sub_80C4E18(const u8 *str)
+static void sub_80C4E18(const u8 *str)
 {
     if (gUnknown_20399D4->field_4797[2] == 1)
         FillWindowPixelBuffer(3, PIXEL_FILL(0));
@@ -4212,7 +4212,7 @@ void sub_80C4E18(const u8 *str)
     CopyWindowToVram(3, 2);
 }
 
-void sub_80C4E74(const u8 *str)
+static void sub_80C4E74(const u8 *str)
 {
     if (gUnknown_20399D4->field_4797[2] == 1)
         FillWindowPixelBuffer(4, PIXEL_FILL(0));
@@ -4222,7 +4222,7 @@ void sub_80C4E74(const u8 *str)
     CopyWindowToVram(4, 3);
 }
 
-void sub_80C4ED0(bool8 mode)
+static void sub_80C4ED0(bool8 mode)
 {
     if (!mode)
     {
@@ -4242,7 +4242,7 @@ void MCB2_FlyMap(void)
     sub_80BFEDC(2);
 }
 
-void sub_80C4F08(u8 taskId)
+static void sub_80C4F08(u8 taskId)
 {
     switch (gUnknown_20399FC->field_0)
     {
@@ -4361,14 +4361,14 @@ void sub_80C4F08(u8 taskId)
     }
 }
 
-void sub_80C51E8(void)
+static void sub_80C51E8(void)
 {
     gUnknown_20399FC = AllocZeroed(sizeof(struct UnkStruct_20399FC));
     gUnknown_20399FC->field_0 = 0;
     gUnknown_20399FC->field_1 = 0;
 }
 
-void sub_80C5208(u8 taskId)
+static void sub_80C5208(u8 taskId)
 {
     if (sub_80C0E04(2) == TRUE)
         sub_80C25BC();
@@ -4386,7 +4386,7 @@ void sub_80C5208(u8 taskId)
     FREE_IF_NOT_NULL(gUnknown_20399FC);
 }
 
-void sub_80C527C(u16 mapsec)
+static void sub_80C527C(u16 mapsec)
 {
     u16 idx = mapsec - MAPSECS_KANTO;
     if (gUnknown_83F2EE0[idx][2])

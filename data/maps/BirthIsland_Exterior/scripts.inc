@@ -38,7 +38,7 @@ BirthIsland_Exterior_MapScript2_165253:: @ 8165253
 
 EventScript_16525D:: @ 816525D
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject 2
 	return
@@ -47,7 +47,7 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	lock
 	faceplayer
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special Special_DeoxysSound
@@ -96,11 +96,11 @@ EventScript_1652C0:: @ 81652C0
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16533A
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_165348
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_165348
 	setflag FLAG_FOUGHT_DEOXYS
 	release

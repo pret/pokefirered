@@ -7,7 +7,7 @@ FuchsiaCity_House2_EventScript_16D817:: @ 816D817
 	checkflag FLAG_GOT_GOOD_ROD
 	goto_if TRUE, EventScript_16D83F
 	msgbox gUnknown_819918E, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16D849
 	msgbox gUnknown_8199337
 	release
@@ -21,7 +21,7 @@ EventScript_16D83F:: @ 816D83F
 EventScript_16D849:: @ 816D849
 	msgbox gUnknown_8199207
 	checkitemspace ITEM_GOOD_ROD, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16D88A
 	additem ITEM_GOOD_ROD, 1
 	giveitemfanfaremsg gUnknown_819925E, ITEM_GOOD_ROD

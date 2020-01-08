@@ -1,18 +1,18 @@
 SevenIsland_TrainerTower_Lobby_MapScripts:: @ 8164839
-	map_script 5, SevenIsland_TrainerTower_Lobby_MapScript1_164853
-	map_script 7, SevenIsland_TrainerTower_Lobby_MapScript2_164887
-	map_script 3, SevenIsland_TrainerTower_Lobby_MapScript3_1648AD
-	map_script 1, SevenIsland_TrainerTower_Lobby_MapScript4_164897
-	map_script 2, SevenIsland_TrainerTower_Lobby_MapScript5_1648B6
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_Lobby_OnResume
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, SevenIsland_TrainerTower_Lobby_OnReturnToField
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TrainerTower_Lobby_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, SevenIsland_TrainerTower_Lobby_OnLoad
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_Lobby_OnFrame
 	.byte 0
 
-SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
+SevenIsland_TrainerTower_Lobby_OnResume:: @ 8164853
 	setvar VAR_0x4002, 0
 	setvar VAR_0x8004, 10
 	special sub_815D9E8
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_164886
 	setvar VAR_0x4000, 0
 	setobjectxy 255, 9, 7
@@ -21,7 +21,7 @@ SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
 EventScript_164886:: @ 8164886
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
+SevenIsland_TrainerTower_Lobby_OnReturnToField:: @ 8164887
 	addobject 1
 	addobject 2
 	addobject 3
@@ -29,8 +29,8 @@ SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
 	addobject 5
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript4_164897:: @ 8164897
-	compare_var_to_value VAR_0x400D, 17
+SevenIsland_TrainerTower_Lobby_OnLoad:: @ 8164897
+	compare VAR_0x400D, 17
 	call_if eq, EventScript_1648A3
 	end
 
@@ -38,12 +38,12 @@ EventScript_1648A3:: @ 81648A3
 	setmetatile 17, 10, 647, 0
 	return
 
-SevenIsland_TrainerTower_Lobby_MapScript3_1648AD:: @ 81648AD
+SevenIsland_TrainerTower_Lobby_OnTransition:: @ 81648AD
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY
 	getplayerxy VAR_0x400D, VAR_RESULT
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript5_1648B6:: @ 81648B6
+SevenIsland_TrainerTower_Lobby_OnFrame:: @ 81648B6
 	map_script_2 VAR_0x4000, 0, EventScript_1648ED
 	map_script_2 VAR_0x400D, 0x11, EventScript_1648C8
 	.2byte 0
@@ -111,7 +111,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164966:: @ 8164966
 	faceplayer
 	setvar VAR_0x8004, 20
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_164988
 	msgbox gUnknown_817C9A2
 	goto EventScript_164990
@@ -125,7 +125,7 @@ EventScript_164990:: @ 8164990
 
 SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
@@ -158,7 +158,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	msgbox gUnknown_817C794
 	setvar VAR_0x8004, 17
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_164A00
 	msgbox gUnknown_817C7D9
 	goto EventScript_164A08

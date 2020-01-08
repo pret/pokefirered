@@ -78,7 +78,7 @@ FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
 
 EventScript_16402F:: @ 816402F
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 24
+	compare VAR_0x8004, 24
 	call_if le, EventScript_164065
 	msgbox gUnknown_817BA64
 	closemessage
@@ -112,36 +112,36 @@ FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
 EventScript_1640A2:: @ 81640A2
 	getplayerxy VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	call_if eq, EventScript_16412E
 	msgbox gUnknown_817B7AE
 	closemessage
-	compare_var_to_value VAR_0x8004, 24
+	compare VAR_0x8004, 24
 	call_if le, EventScript_164144
-	compare_var_to_value VAR_0x8004, 25
+	compare VAR_0x8004, 25
 	call_if eq, EventScript_16414F
-	compare_var_to_value VAR_0x8004, 26
+	compare VAR_0x8004, 26
 	call_if eq, EventScript_16415A
-	compare_var_to_value VAR_0x8004, 27
+	compare VAR_0x8004, 27
 	call_if eq, EventScript_16415A
 	playse SE_PIN
 	call EventScript_163F47
 	special DrawWholeMapView
 	waitse
-	compare_var_to_value VAR_0x8004, 24
+	compare VAR_0x8004, 24
 	call_if le, EventScript_164165
-	compare_var_to_value VAR_0x8004, 25
+	compare VAR_0x8004, 25
 	call_if eq, EventScript_164165
-	compare_var_to_value VAR_0x8004, 26
+	compare VAR_0x8004, 26
 	call_if eq, EventScript_164165
-	compare_var_to_value VAR_0x8004, 27
+	compare VAR_0x8004, 27
 	call_if eq, EventScript_164170
 	msgbox gUnknown_817B7FA
 	release
 	end
 
 EventScript_16412E:: @ 816412E
-	compare_var_to_value VAR_0x8004, 27
+	compare VAR_0x8004, 27
 	goto_if eq, EventScript_1A77A9
 	applymovement 255, Movement_1A75EB
 	waitmovement 0

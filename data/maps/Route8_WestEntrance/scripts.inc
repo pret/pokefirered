@@ -54,11 +54,11 @@ EventScript_16FBC1:: @ 816FBC1
 EventScript_16FBCC:: @ 816FBCC
 	msgbox gUnknown_819E43D
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16FC05
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16FC10
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_16FC1B
 	msgbox gUnknown_819E463
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1

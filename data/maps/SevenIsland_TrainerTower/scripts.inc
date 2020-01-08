@@ -1,8 +1,8 @@
 SevenIsland_TrainerTower_MapScripts:: @ 8168BD5
-	map_script 3, SevenIsland_TrainerTower_MapScript1_168BDB
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TrainerTower_OnTransition
 	.byte 0
 
-SevenIsland_TrainerTower_MapScript1_168BDB:: @ 8168BDB
+SevenIsland_TrainerTower_OnTransition:: @ 8168BDB
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	end
 

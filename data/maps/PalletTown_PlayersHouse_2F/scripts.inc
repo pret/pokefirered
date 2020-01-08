@@ -4,7 +4,7 @@ PalletTown_PlayersHouse_2F_MapScripts:: @ 8168CA3
 	.byte 0
 
 PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
+	compare VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
 	call_if eq, EventScript_168CBA
 	end
 
@@ -32,7 +32,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CDB:: @ 8168CDB
 gUnknown_8168CE4:: @ 8168CE4
 PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	setvar VAR_0x8004, 32

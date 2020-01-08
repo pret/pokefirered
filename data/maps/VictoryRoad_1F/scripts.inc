@@ -4,7 +4,7 @@ VictoryRoad_1F_MapScripts:: @ 8160F05
 	.byte 0
 
 VictoryRoad_1F_MapScript1_160F10:: @ 8160F10
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
 	call_if ne, EventScript_160F1C
 	end
 
@@ -19,7 +19,7 @@ VictoryRoad_1F_MapScript2_160F2F:: @ 8160F2F
 
 VictoryRoad_1F_EventScript_160F33:: @ 8160F33
 	lockall
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
 	goto_if eq, EventScript_160F62
 	setmetatile 12, 14, 721, 0
 	setmetatile 12, 15, 737, 0

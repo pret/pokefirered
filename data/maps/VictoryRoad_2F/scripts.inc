@@ -3,9 +3,9 @@ VictoryRoad_2F_MapScripts:: @ 8160F92
 	.byte 0
 
 VictoryRoad_2F_MapScript1_160F98:: @ 8160F98
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
 	call_if ne, EventScript_160FAF
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
 	call_if ne, EventScript_160FC2
 	end
 
@@ -21,7 +21,7 @@ EventScript_160FC2:: @ 8160FC2
 
 VictoryRoad_2F_EventScript_160FD5:: @ 8160FD5
 	lockall
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
 	goto_if eq, EventScript_161004
 	setmetatile 13, 10, 721, 0
 	setmetatile 13, 11, 737, 0
@@ -39,7 +39,7 @@ EventScript_161004:: @ 8161004
 
 VictoryRoad_2F_EventScript_161006:: @ 8161006
 	lockall
-	compare_var_to_value VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
+	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100
 	goto_if eq, EventScript_161035
 	setmetatile 33, 16, 721, 0
 	setmetatile 33, 17, 737, 0

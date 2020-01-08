@@ -43,7 +43,7 @@ MysteryEventScript_SurfPichu:: @ 8488EB5
 
 SurfPichu_GiveIfPossible: @ 8488EC4
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 6
+	compare VAR_EVENT_PICHU_SLOT, 6
 	vgoto_if TRUE, SurfPichu_FullParty
 	setflag FLAG_MYSTERY_EVENT_DONE
 	vcall SurfPichu_GiveEgg
@@ -70,15 +70,15 @@ SurfPichu_GiveEgg: @ 8488EF6
 	giveegg SPECIES_PICHU
 	setmonobedient VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, 0xff
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 1
+	compare VAR_EVENT_PICHU_SLOT, 1
 	vgoto_if TRUE, SurfPichu_Slot1
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 2
+	compare VAR_EVENT_PICHU_SLOT, 2
 	vgoto_if TRUE, SurfPichu_Slot2
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 3
+	compare VAR_EVENT_PICHU_SLOT, 3
 	vgoto_if TRUE, SurfPichu_Slot3
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 4
+	compare VAR_EVENT_PICHU_SLOT, 4
 	vgoto_if TRUE, SurfPichu_Slot4
-	compare_var_to_value VAR_EVENT_PICHU_SLOT, 5
+	compare VAR_EVENT_PICHU_SLOT, 5
 	vgoto_if TRUE, SurfPichu_Slot5
 	return
 
@@ -118,7 +118,7 @@ sText_FullParty: @ 8488FE3
 MysteryEventScript_VisitingTrainer:: @ 848903A
 	setvaddress MysteryEventScript_VisitingTrainer
 	special ValidateEReaderTrainer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	vgoto_if TRUE, MysteryEventScript_VisitingTrainerArrived
 	lock
 	faceplayer
@@ -171,7 +171,7 @@ MysteryEventScript_BattleCard:: @ 84892B9
 	vgoto_if TRUE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
 	specialvar VAR_0x8008, Special_BattleCardAction
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	vgoto_if FALSE, MysteryEventScript_BattleCardInfo
 	lock
 	faceplayer
@@ -222,13 +222,13 @@ MysteryEventScript_AuroraTicket:: @ 84894B9
 	checkflag FLAG_FOUGHT_DEOXYS
 	vgoto_if TRUE, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	vgoto_if TRUE, AuroraTicket_Obtained
 	vmessage sText_AuroraTicket1
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	vgoto_if TRUE, AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
 	setflag FLAG_SYS_GOT_AURORA_TICKET
@@ -286,13 +286,13 @@ MysteryEventScript_MysticTicket:: @ 8489689
 	checkflag FLAG_FOUGHT_HO_OH
 	vgoto_if TRUE, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	vgoto_if TRUE, MysticTicket_Obtained
 	vmessage sText_MysticTicket2
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	vgoto_if TRUE, MysticTicket_NoBagSpace
 	giveitem ITEM_MYSTIC_TICKET
 	setflag FLAG_SYS_GOT_MYSTIC_TICKET
@@ -342,7 +342,7 @@ sText_MysticTicketNoPlace: @ 84897EE
 MysteryEventScript_AlteringCave:: @ 8489862
 	setvaddress MysteryEventScript_AlteringCave
 	addvar VAR_ALTERING_CAVE_WILD_SET, 1
-	compare_var_to_value VAR_ALTERING_CAVE_WILD_SET, 10
+	compare VAR_ALTERING_CAVE_WILD_SET, 10
 	vgoto_if FALSE, MysteryEventScript_AlteringCave_
 	setvar VAR_ALTERING_CAVE_WILD_SET, 0
 MysteryEventScript_AlteringCave_: @ 848987C

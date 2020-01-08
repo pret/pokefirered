@@ -9,9 +9,9 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	checkflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
 	goto_if TRUE, EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16D7E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16D7F1
 	release
 	end
@@ -25,9 +25,9 @@ EventScript_16D780:: @ 816D780
 	msgbox gUnknown_8198EAA
 	call EventScript_1A6675
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16D7D6
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16D7DF
 	additem ITEM_HM04, 1
 	giveitemfanfaremsg gUnknown_8199068, ITEM_HM04

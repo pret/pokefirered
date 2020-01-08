@@ -5,9 +5,9 @@ LavenderTown_House2_EventScript_16B266:: @ 816B266
 	lock
 	faceplayer
 	msgbox gUnknown_8193A4B, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B287
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16B2AA
 	end
 
@@ -15,9 +15,9 @@ EventScript_16B287:: @ 816B287
 	msgbox gUnknown_8193AA6
 	special Special_ChooseMonFromParty
 	waitstate
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if lt, EventScript_16B2B4
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_16B2AA
 	end
 
@@ -28,20 +28,20 @@ EventScript_16B2AA:: @ 816B2AA
 
 EventScript_16B2B4:: @ 816B2B4
 	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
-	compare_var_to_value VAR_RESULT, SPECIES_EGG
+	compare VAR_RESULT, SPECIES_EGG
 	goto_if eq, EventScript_16B307
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	special TV_CheckMonOTIDEqualsPlayerID
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B311
 	specialvar VAR_RESULT, Special_BufferMonOTNameAndCompareToPlayerName
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B311
 	msgbox gUnknown_8193AD2, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B31B
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16B2AA
 	end
 
@@ -60,7 +60,7 @@ EventScript_16B31B:: @ 816B31B
 	call EventScript_1A74EB
 	specialvar VAR_RESULT, NameRaterWasNicknameChanged
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B345
 	msgbox gUnknown_8193BF0
 	release

@@ -823,7 +823,7 @@ extern const u8 gText_Tough_2[];
 extern const u8 gText_Items[];
 extern const u8 gText_KeyItems[];
 extern const u8 gText_PokeBalls[];
-extern const u8 gText_TmsgUnknown_8417B2CHms[];
+extern const u8 gText_TMsAndHMs[];
 extern const u8 gText_Berries[];
 extern const u8 gText_Boulderbadge[];
 extern const u8 gText_Cascadebadge[];

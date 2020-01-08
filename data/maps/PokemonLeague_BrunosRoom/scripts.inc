@@ -13,7 +13,7 @@ PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
 PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
 	checkflag FLAG_DEFEATED_BRUNO
 	call_if TRUE, EventScript_1626C0
-	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 2
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 2
 	call_if eq, EventScript_1626BA
 	end
 
@@ -87,13 +87,13 @@ EventScript_16276E:: @ 816276E
 EventScript_162779:: @ 8162779
 	msgbox gUnknown_8178420
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_1627FA
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if eq, EventScript_1627EF
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_162805
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_162805
 	release
 	end
@@ -103,13 +103,13 @@ EventScript_1627B0:: @ 81627B0
 	call EventScript_1A7506
 	msgbox gUnknown_8178420
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_1627FA
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if eq, EventScript_1627EF
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_162805
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_162805
 	release
 	end

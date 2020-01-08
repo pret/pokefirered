@@ -3,13 +3,13 @@ CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
 
 CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	call EventScript_16BCF6
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	goto_if eq, EventScript_16C00E
 	goto EventScript_16BD3E
 	end
@@ -17,13 +17,13 @@ CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 EventScript_16BCF6:: @ 816BCF6
 	setvar VAR_0x4001, 0
 	checkitem ITEM_FRESH_WATER, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16BD2C
 	checkitem ITEM_SODA_POP, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16BD32
 	checkitem ITEM_LEMONADE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16BD38
 	return
 
@@ -41,7 +41,7 @@ EventScript_16BD38:: @ 816BD38
 
 EventScript_16BD3E:: @ 816BD3E
 	msgbox gUnknown_8195D22, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C00C
 	textcolor 3
 	message Text_195D5F
@@ -150,7 +150,7 @@ EventScript_16BF7C:: @ 816BF7C
 	getitemname 1, VAR_0x8009
 	removeitem VAR_0x8008, 1
 	checkitemspace VAR_0x8009, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C002
 	additem VAR_0x8009, 1
 	textcolor 3
@@ -160,11 +160,11 @@ EventScript_16BF7C:: @ 816BF7C
 	waitfanfare
 	giveitem VAR_0x8009, 1, 8
 	call EventScript_1A6675
-	compare_var_to_value VAR_0x8008, ITEM_FRESH_WATER
+	compare VAR_0x8008, ITEM_FRESH_WATER
 	call_if eq, EventScript_16BFDE
-	compare_var_to_value VAR_0x8008, ITEM_SODA_POP
+	compare VAR_0x8008, ITEM_SODA_POP
 	call_if eq, EventScript_16BFEA
-	compare_var_to_value VAR_0x8008, ITEM_LEMONADE
+	compare VAR_0x8008, ITEM_LEMONADE
 	call_if eq, EventScript_16BFF6
 	release
 	end
@@ -261,16 +261,16 @@ EventScript_16C0C4:: @ 816C0C4
 	return
 
 EventScript_16C0CB:: @ 816C0CB
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C131
 	checkitemspace VAR_0x4000, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C13F
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16C0B6
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16C0BD
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
 	getitemname 0, VAR_0x4000

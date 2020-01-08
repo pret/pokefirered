@@ -4,13 +4,13 @@ ViridianCity_MapScripts:: @ 81658D3
 
 ViridianCity_MapScript1_1658D9:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	call_if eq, EventScript_165920
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	call_if eq, EventScript_16590F
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	call_if ge, EventScript_165909
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
 	call_if eq, EventScript_165931
 	end
 
@@ -90,7 +90,7 @@ ViridianCity_EventScript_1659C1:: @ 81659C1
 ViridianCity_EventScript_1659CA:: @ 81659CA
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	goto_if eq, EventScript_1659EC
 	msgbox gUnknown_817DB39
 	closemessage
@@ -109,17 +109,17 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 	faceplayer
 	checkflag FLAG_BADGE01_GET
 	goto_if TRUE, EventScript_165A23
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
 	goto_if ge, EventScript_165A4A
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	goto_if eq, EventScript_165A54
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	goto_if eq, EventScript_165A84
 	end
 
 EventScript_165A23:: @ 8165A23
 	msgbox gUnknown_817E046, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_165A40
 	msgbox gUnknown_817E0EA
 	release
@@ -148,7 +148,7 @@ EventScript_165A5B:: @ 8165A5B
 EventScript_165A65:: @ 8165A65
 	msgbox gUnknown_817DE9B
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle
@@ -166,9 +166,9 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	lock
 	faceplayer
 	msgbox gUnknown_817DB98, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_165AB0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_165ABA
 	end
 
@@ -185,7 +185,7 @@ EventScript_165ABA:: @ 8165ABA
 ViridianCity_EventScript_165AC4:: @ 8165AC4
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	goto_if eq, EventScript_165ADB
 	msgbox gUnknown_817DC99
 	release
@@ -243,7 +243,7 @@ EventScript_165B4C:: @ 8165B4C
 	msgbox gUnknown_817DD4E
 	closemessage
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle

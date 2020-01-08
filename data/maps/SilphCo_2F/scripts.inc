@@ -4,9 +4,9 @@ SilphCo_2F_MapScripts:: @ 8161641
 
 SilphCo_2F_MapScript1_161647:: @ 8161647
 	checkflag FLAG_SILPH_2F_DOOR_1
-	call_if FALSE, EventScript_1A8149
+	call_if FALSE, EventScript_Close2FDoor1
 	checkflag FLAG_SILPH_2F_DOOR_2
-	call_if FALSE, EventScript_1A8177
+	call_if FALSE, EventScript_Close2FDoor2
 	end
 
 SilphCo_2F_EventScript_16165A:: @ 816165A

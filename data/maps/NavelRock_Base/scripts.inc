@@ -27,14 +27,14 @@ NavelRock_Base_MapScript2_165116:: @ 8165116
 
 EventScript_165120:: @ 8165120
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject 1
 	return
 
 NavelRock_Base_EventScript_165134:: @ 8165134
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -69,11 +69,11 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_1651D9
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_1651E7
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_1651E7
 	setflag FLAG_FOUGHT_LUGIA
 	release

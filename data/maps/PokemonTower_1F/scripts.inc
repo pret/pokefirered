@@ -22,7 +22,7 @@ PokemonTower_1F_EventScript_16325A:: @ 816325A
 	lock
 	faceplayer
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_163272
 	msgbox gUnknown_8179BFC
 	release

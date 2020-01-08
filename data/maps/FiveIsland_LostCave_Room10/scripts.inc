@@ -26,7 +26,7 @@ EventScript_164C52:: @ 8164C52
 	waitmovement 0
 	msgbox gUnknown_817D062
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_164CB6
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_LADY_SELPHY, 0, Text_17D086
 	msgbox gUnknown_817D0B2

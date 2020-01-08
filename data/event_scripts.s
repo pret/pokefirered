@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
@@ -18,6 +19,7 @@
 #include "constants/game_stat.h"
 #include "constants/menu.h"
 #include "constants/battle_setup.h"
+#include "constants/map_scripts.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -57,12 +59,12 @@ gSpecialVars:: @ 815FD0C
 gStdScripts:: @ 8160450
 	.4byte gStdScript_0
 	.4byte gStdScript_1
-	.4byte gStdScript_2
-	.4byte gStdScript_3
-	.4byte gStdScript_4
-	.4byte gStdScript_5
+	.4byte Std_MsgboxNPC
+	.4byte Std_MsgboxSign
+	.4byte Std_MsgboxDefault
+	.4byte Std_MsgboxYesNo
 	.4byte gStdScript_Message_WaitButton_AndRelease
-	.4byte gStdScript_7
+	.4byte Std_ObtainDecoration
 	.4byte gStdScript_8
 	.4byte gStdScript_ItemMessageAndFanfare
 gStdScriptsEnd::
@@ -778,7 +780,7 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_WaterPath_House2/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/text.inc"
 
-gStdScript_2:: @ 81A4E3F
+Std_MsgboxNPC:: @ 81A4E3F
 	lock
 	faceplayer
 	message 0x0
@@ -787,7 +789,7 @@ gStdScript_2:: @ 81A4E3F
 	release
 	return
 
-gStdScript_3:: @ 81A4E4A
+Std_MsgboxSign:: @ 81A4E4A
 	lockall
 	message 0x0
 	waitmessage
@@ -795,13 +797,13 @@ gStdScript_3:: @ 81A4E4A
 	releaseall
 	return
 
-gStdScript_4:: @ 81A4E54
+Std_MsgboxDefault:: @ 81A4E54
 	message 0x0
 	waitmessage
 	waitbuttonpress
 	return
 
-gStdScript_5:: @ 81A4E5C
+Std_MsgboxYesNo:: @ 81A4E5C
 	message 0x0
 	waitmessage
 	yesnobox 20, 8
@@ -809,14 +811,14 @@ gStdScript_5:: @ 81A4E5C
 
 gStdScript_ItemMessageAndFanfare:: @ 81A4E66
 	textcolor 3
-	compare_var_to_value VAR_0x8002, MUS_FANFA1
+	compare VAR_0x8002, MUS_FANFA1
 	call_if eq, EventScript_1A4EA2
-	compare_var_to_value VAR_0x8002, MUS_FAN5
+	compare VAR_0x8002, MUS_FAN5
 	call_if eq, EventScript_1A4EA6
 	message 0x0
 	waitmessage
 	waitfanfare
-	compare_var_to_value VAR_0x8002, MUS_FANFA1
+	compare VAR_0x8002, MUS_FANFA1
 	call_if eq, EventScript_1A4EAA
 	giveitem VAR_0x8000, VAR_0x8001, 8
 	call EventScript_1A6675
@@ -855,7 +857,7 @@ EventScript_TryDoNormalTrainerBattle:: @ 81A4EC1
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
 	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1A4EE8
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -869,10 +871,10 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	faceplayer
 	call EventScript_1A4FBA
 	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F20
 	special CheckForAlivePartyMons
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F19
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -893,7 +895,7 @@ EventScript_DoTrainerBattle:: @ 81A4F21
 	waitmovement 0
 	special PlayTrainerEncounterMusic
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A501A
 	battlebegin
 	ontrainerbattleend
@@ -901,7 +903,7 @@ EventScript_DoTrainerBattle:: @ 81A4F21
 EventScript_TryDoRematchBattle:: @ 81A4F3E
 	call EventScript_1A4FBA
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A4F72
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -909,7 +911,7 @@ EventScript_TryDoRematchBattle:: @ 81A4F3E
 	waitmessage
 	waitbuttonpress
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A4FB8
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
@@ -921,10 +923,10 @@ EventScript_1A4F72:: @ 81A4F72
 
 EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A4FB0
 	special CheckForAlivePartyMons
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1A4FB1
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -932,7 +934,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	waitmessage
 	waitbuttonpress
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A4FB8
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
@@ -967,19 +969,19 @@ EventScript_1A4FC7:: @ 81A4FC7
 	waitmessage
 	waitbuttonpress
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A501A
 	battlebegin
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerBattleMode
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A5017
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A5019
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A5019
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1A5019
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1A5019
 
 EventScript_1A5017:: @ 81A5017
@@ -1001,14 +1003,16 @@ gStdScript_Message_WaitButton_AndRelease:: @ 81A501F
 	release
 	return
 
-gUnknown_81A5028:: @ 81A5028
+@ Unused
+Text_WouldYouLikeToMixRecords:: @ 81A5028
 	.string "Would you like to mix records with\n"
 	.string "other TRAINERS?$"
 
-Text_1A505B:: @ 81A505B
+@ Unused
+Text_WeHopeToSeeYouAgain:: @ 81A505B
 	.string "We hope to see you again!$"
 
-Text_1A5075:: @ 81A5075
+Text_BootedUpPC:: @ 81A5075
 	.string "{PLAYER} booted up the PC.$"
 
 gUnknown_81A508A:: @ 81A508A
@@ -1155,7 +1159,7 @@ Text_1A556E:: @ 81A556E
 Text_1A55A5:: @ 81A55A5
 	.string "{STR_VAR_1} used SURF!$"
 
-Text_1A55B3:: @ 81A55B3
+Text_CurrentTooFast:: @ 81A55B3
 	.string "The current is much too fast!\n"
 	.string "SURF can't be used here…$"
 
@@ -1300,11 +1304,11 @@ gUnknown_81A5B60:: @ 81A5B60
 	.string "How is my old {STR_VAR_2}?\n"
 	.string "My {STR_VAR_1} is doing great!$"
 
-Text_1A5B88:: @ 81A5B88
+Text_CardKeyOpenedDoor:: @ 81A5B88
 	.string "Bingo!\n"
 	.string "The CARD KEY opened the door!$"
 
-Text_1A5BAD:: @ 81A5BAD
+Text_ItNeedsCardKey:: @ 81A5BAD
 	.string "No!\n"
 	.string "It needs a CARD KEY!$"
 
@@ -1345,7 +1349,7 @@ Text_1A5CCE:: @ 81A5CCE
 Text_1A5CD3:: @ 81A5CD3
 	.string "ドアは　しまっている‥$"
 
-Text_1A5CDF:: @ 81A5CDF
+Text_TheDoorIsOpen:: @ 81A5CDF
 	.string "The door is open…$"
 
 Text_1A5CF1:: @ 81A5CF1
@@ -1554,7 +1558,7 @@ EventScript_1A651A:: @ 81A651A
 	call EventScript_1A6551
 	special sub_81130A8
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1A653B
 	call EventScript_1A6541
 	return
@@ -1590,7 +1594,7 @@ EventScript_1A6551:: @ 81A6551
 
 EventScript_1A6578:: @ 81A6578
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	message Text_1A5483
 	waitmessage
@@ -1622,13 +1626,13 @@ EventScript_1A65CE:: @ 81A65CE
 
 EventScript_1A65EC:: @ 81A65EC
 	specialvar VAR_RESULT, Special_PlayerIsNotInTrainerTowerLobby
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A661D
 	specialvar VAR_RESULT, sp182_move_string
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	goto_if eq, EventScript_1A661D
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	goto_if eq, EventScript_1A6636
 	end
 
@@ -1682,53 +1686,48 @@ EventScript_1A6697:: @ 81A6697
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6749
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if eq, EventScript_1A675E
 	return
 
 EventScript_1A66BC:: @ 81A66BC
 	switch VAR_RESULT
-	compare_var_to_value VAR_0x8000, 1
-	goto_if eq, EventScript_1A66F9
-	compare_var_to_value VAR_0x8000, 2
-	goto_if eq, EventScript_1A6709
-	compare_var_to_value VAR_0x8000, 3
-	goto_if eq, EventScript_1A6719
-	compare_var_to_value VAR_0x8000, 4
-	goto_if eq, EventScript_1A6729
-	compare_var_to_value VAR_0x8000, 5
-	goto_if eq, EventScript_1A6739
+	case POCKET_ITEMS, EventScript_1A66F9
+	case POCKET_KEY_ITEMS, EventScript_1A6709
+	case POCKET_POKE_BALLS, EventScript_1A6719
+	case POCKET_TM_CASE, EventScript_1A6729
+	case POCKET_BERRY_POUCH, EventScript_1A6739
 	end
 
 EventScript_1A66F9:: @ 81A66F9
 	getstdstring 2, 24
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6764
 	return
 
 EventScript_1A6709:: @ 81A6709
 	getstdstring 2, 25
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6764
 	return
 
 EventScript_1A6719:: @ 81A6719
 	getstdstring 2, 26
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6764
 	return
 
 EventScript_1A6729:: @ 81A6729
 	getstdstring 2, 27
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6768
 	return
 
 EventScript_1A6739:: @ 81A6739
 	getstdstring 2, 28
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6764
 	return
 
@@ -1752,7 +1751,7 @@ EventScript_1A6768:: @ 81A6768
 	playfanfare MUS_FANFA1
 	return
 
-gStdScript_7:: @ 81A676C
+Std_ObtainDecoration:: @ 81A676C
 	adddecor VAR_0x8000
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_1A677A
@@ -1760,9 +1759,9 @@ gStdScript_7:: @ 81A676C
 
 EventScript_1A677A:: @ 81A677A
 	getdecorname 1, VAR_0x8000
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A6795
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if eq, EventScript_1A67AD
 	return
 
@@ -1790,9 +1789,9 @@ gStdScript_1:: @ 81A67B3
 	getitemname 1, VAR_0x8000
 	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	call_if eq, EventScript_1A67EE
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	call_if eq, EventScript_1A682D
 	release
 	return
@@ -1802,9 +1801,9 @@ EventScript_1A67EE:: @ 81A67EE
 	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, Special_ItemIsTM_GetMoveName
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_1A6821
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if eq, EventScript_1A6827
 	waitfanfare
 	waitmessage
@@ -1829,12 +1828,12 @@ EventScript_PickUpHiddenItem:: @ 81A6843
 	lockall
 	textcolor 3
 	waitse
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	goto_if eq, EventScript_PickUpHiddenCoins
 	call EventScript_GiveItem
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_if eq, EventScript_ItemInPocketMessage
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_BagIsFullMessage
 	end
 
@@ -1847,9 +1846,9 @@ EventScript_GiveItem::
 	return
 
 EventScript_ItemInPocketMessage::
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	call_if eq, EventScript_FoundSingleItemMessage
-	compare_var_to_value VAR_0x8006, 1
+	compare VAR_0x8006, 1
 	call_if ne, EventScript_FoundMultipleItemsMessage
 	waitfanfare
 	waitmessage
@@ -1884,7 +1883,7 @@ EventScript_PickUpHiddenCoins::
 	goto_if FALSE, EventScript_HiddenCoinsButNoCoinCase
 	checkcoins VAR_RESULT
 	specialvar VAR_RESULT, Special_CheckAddCoins
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_HiddenCoinsButTheCoinCaseIsFull
 	givecoins VAR_0x8006
 	getstdstring 1, 0x17
@@ -1917,7 +1916,7 @@ EventScript_HiddenCoinsButNoCoinCase::
 
 gUnknown_81A6955:: @ 81A6955
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkflag FLAG_SYS_PC_STORAGE_DISABLED
@@ -1927,7 +1926,7 @@ gUnknown_81A6955:: @ 81A6955
 	setvar VAR_0x8004, 0
 	special Special_AnimatePcTurnOn
 	playse SE_PC_ON
-	msgbox Text_1A5075
+	msgbox Text_BootedUpPC
 	goto EventScript_1A6998
 	end
 
@@ -2011,7 +2010,7 @@ EventScript_1A6A7A:: @ 81A6A7A
 	playse SE_PC_LOGIN
 	msgbox Text_1A5BC6
 	msgbox Text_1A5C03, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A6AB2
 	setflag FLAG_OAKS_RATING_IS_VIA_PC
 	call EventScript_1A73E0
@@ -2030,60 +2029,60 @@ EventScript_1A6AC0:: @ 81A6AC0
 	fadescreen 0
 	return
 
-EventScript_1A6AC8:: @ 81A6AC8
+EventScript_UseSurf:: @ 81A6AC8
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A6AC8_End
+	compare VAR_RESULT, 2
+	goto_if eq, EventScript_UseSurfEnd
 	checkpartymove MOVE_SURF
-	compare_var_to_value VAR_RESULT, 6
-	goto_if eq, EventScript_1A6AC8_End
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if eq, EventScript_UseSurfEnd
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	lockall
 	msgbox Text_1A556E, 5
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_1A6AC8_Release
+	compare VAR_RESULT, 0
+	goto_if eq, EventScript_UseSurfRelease
 	msgbox Text_1A55A5
 	dofieldeffect FLDEFF_USE_SURF
-EventScript_1A6AC8_Release:@ 81A6B0B
+EventScript_UseSurfRelease:@ 81A6B0B
 	releaseall
-EventScript_1A6AC8_End: @ 81A6B0C
+EventScript_UseSurfEnd: @ 81A6B0C
 	end
 
 gUnknown_81A6B0D:: @ 81A6B0D
 	lockall
-	msgbox Text_1A55B3
+	msgbox Text_CurrentTooFast
 	releaseall
 	end
 
-EventScript_1A6B18:: @ 81A6B18
+EventScript_SetGymTrainers:: @ 81A6B18
 	switch VAR_0x8008
-	case 1, EventScript_1A6B76
-	case 2, EventScript_1A6B7A
-	case 3, EventScript_1A6B81
-	case 4, EventScript_1A6B8B
-	case 5, EventScript_1A6BA1
-	case 6, EventScript_1A6BB4
-	case 7, EventScript_1A6BCA
-	case 8, EventScript_1A6BE0
+	case 1, EventScript_SetPewterGymTrainers
+	case 2, EventScript_SetCeruleanGymTrainers
+	case 3, EventScript_SetVermilionGymTrainers
+	case 4, EventScript_SetCeladonGymTrainers
+	case 5, EventScript_SetFuchsiaGymTrainers
+	case 6, EventScript_SetSaffronGymTrainers
+	case 7, EventScript_SetCinnabarGymTrainers
+	case 8, EventScript_SetViridianGymTrainers
 	end
 
-EventScript_1A6B76:: @ 81A6B76
+EventScript_SetPewterGymTrainers:: @ 81A6B76
 	settrainerflag TRAINER_CAMPER_LIAM
 	return
 
-EventScript_1A6B7A:: @ 81A6B7A
+EventScript_SetCeruleanGymTrainers:: @ 81A6B7A
 	settrainerflag TRAINER_PICNICKER_DIANA
 	settrainerflag TRAINER_SWIMMER_MALE_LUIS
 	return
 
-EventScript_1A6B81:: @ 81A6B81
+EventScript_SetVermilionGymTrainers:: @ 81A6B81
 	settrainerflag TRAINER_SAILOR_DWAYNE
 	settrainerflag TRAINER_ENGINEER_BAILY
 	settrainerflag TRAINER_GENTLEMAN_TUCKER
 	return
 
-EventScript_1A6B8B:: @ 81A6B8B
+EventScript_SetCeladonGymTrainers:: @ 81A6B8B
 	settrainerflag TRAINER_LASS_KAY
 	settrainerflag TRAINER_LASS_LISA
 	settrainerflag TRAINER_PICNICKER_TINA
@@ -2093,7 +2092,7 @@ EventScript_1A6B8B:: @ 81A6B8B
 	settrainerflag TRAINER_COOLTRAINER_MARY
 	return
 
-EventScript_1A6BA1:: @ 81A6BA1
+EventScript_SetFuchsiaGymTrainers:: @ 81A6BA1
 	settrainerflag TRAINER_TAMER_PHIL
 	settrainerflag TRAINER_TAMER_EDGAR
 	settrainerflag TRAINER_JUGGLER_KIRK
@@ -2102,7 +2101,7 @@ EventScript_1A6BA1:: @ 81A6BA1
 	settrainerflag TRAINER_JUGGLER_NATE
 	return
 
-EventScript_1A6BB4:: @ 81A6BB4
+EventScript_SetSaffronGymTrainers:: @ 81A6BB4
 	settrainerflag TRAINER_PSYCHIC_JOHAN
 	settrainerflag TRAINER_PSYCHIC_TYRON
 	settrainerflag TRAINER_PSYCHIC_CAMERON
@@ -2112,7 +2111,7 @@ EventScript_1A6BB4:: @ 81A6BB4
 	settrainerflag TRAINER_CHANNELER_TASHA
 	return
 
-EventScript_1A6BCA:: @ 81A6BCA
+EventScript_SetCinnabarGymTrainers:: @ 81A6BCA
 	settrainerflag TRAINER_SUPER_NERD_ERIK
 	settrainerflag TRAINER_SUPER_NERD_AVERY
 	settrainerflag TRAINER_SUPER_NERD_DEREK
@@ -2122,7 +2121,7 @@ EventScript_1A6BCA:: @ 81A6BCA
 	settrainerflag TRAINER_BURGLAR_DUSTY
 	return
 
-EventScript_1A6BE0:: @ 81A6BE0
+EventScript_SetViridianGymTrainers:: @ 81A6BE0
 	settrainerflag TRAINER_TAMER_JASON
 	settrainerflag TRAINER_TAMER_COLE
 	settrainerflag TRAINER_BLACK_BELT_ATSUSHI
@@ -2169,7 +2168,7 @@ gUnknown_81A6C32:: @ 81A6C32
 	lockall
 	msgbox Text_1C0DF1
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	fadescreen 1
 	special Special_TownMap
@@ -2188,6 +2187,7 @@ Text_1A6CA3:: @ 81A6CA3
 	.string "{STR_VAR_1} POKéMON seen and\n"
 	.string "{STR_VAR_2} POKéMON owned.\p"
 	.string "{SIZE}ÁPROF. OAK's rating:$"
+
 gUnknown_81A6D17:: @ 81A6D17
 	.string "You still have lots to do.\p"
 	.string "Go into every patch of grass you\n"
@@ -2302,7 +2302,7 @@ Text_1A72F2:: @ 81A72F2
 
 EventScript_1A737B:: @ 81A737B
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	checkflag FLAG_OAK_SAW_DEX_COMPLETION
@@ -2324,9 +2324,9 @@ EventScript_1A73B6:: @ 81A73B6
 	copyvar VAR_0x8004, VAR_0x8009
 	special Special_GetProfOaksRatingMessage
 	waitmessage
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1A73D8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_1A73DC
 	waitfanfare
 	waitbuttonpress
@@ -2355,7 +2355,7 @@ EventScript_1A73E0:: @ 81A73E0
 	checkflag FLAG_OAKS_RATING_IS_VIA_PC
 	call_if FALSE, EventScript_1A746D
 	call EventScript_1A73B6
-	compare_var_to_value VAR_0x800A, 0
+	compare VAR_0x800A, 0
 	goto_if eq, EventScript_1A748F
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, Special_GetPokedexCount
@@ -2365,9 +2365,9 @@ EventScript_1A73E0:: @ 81A73E0
 	getnumberstring 1, VAR_0x8009
 	msgbox Text_1A71AA
 	specialvar VAR_RESULT, HasAllMons
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A7470
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A747E
 	end
 
@@ -2701,7 +2701,7 @@ gUnknown_81A7702:: @ 81A7702
 	lockall
 	textcolor 3
 	msgbox Text_1A622C, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A778A
 	setvar VAR_0x8004, 14
 	call EventScript_1A6AC0
@@ -2709,11 +2709,11 @@ gUnknown_81A7702:: @ 81A7702
 	faceplayer
 	specialvar VAR_0x8008, Special_GetMartClerkObjectId
 	textcolor 0
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_if eq, EventScript_1A774D
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A778A
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A778C
 	end
 
@@ -2808,7 +2808,7 @@ EventScript_1A77F9:: @ 81A77F9
 	end
 
 EventScript_1A7803:: @ 81A7803
-	compare_var_to_var VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	compare VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	goto_if ge, EventScript_1A77EC
 	switch VAR_0x4001
 	case 1, EventScript_1A78D5
@@ -2822,7 +2822,7 @@ EventScript_1A7803:: @ 81A7803
 	end
 
 EventScript_1A786C:: @ 81A786C
-	compare_var_to_var VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	compare VAR_MAP_SCENE_ROUTE23, VAR_0x4001
 	goto_if ge, EventScript_1A77F9
 	switch VAR_0x4001
 	case 1, EventScript_1A78D5
@@ -3036,7 +3036,7 @@ EventScript_1A7AE0:: @ 81A7AE0
 
 EventScript_1A7AE2:: @ 81A7AE2
 	msgbox Text_177460, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A7B70
 	msgbox Text_17747B
 	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
@@ -3260,17 +3260,17 @@ EventScript_1A80FE:: @ 81A80FE
 	releaseall
 	end
 
-EventScript_1A8135:: @ 81A8135
-	msgbox Text_1A5BAD
+EventScript_NeedCardKey:: @ 81A8135
+	msgbox Text_ItNeedsCardKey
 	releaseall
 	end
 
-EventScript_1A813F:: @ 81A813F
-	msgbox Text_1A5CDF
+EventScript_DoorUnlocked:: @ 81A813F
+	msgbox Text_TheDoorIsOpen
 	releaseall
 	end
 
-EventScript_1A8149:: @ 81A8149
+EventScript_Close2FDoor1:: @ 81A8149
 	setmetatile 5, 8, 944, 1
 	setmetatile 6, 8, 945, 1
 	setmetatile 5, 9, 952, 1
@@ -3278,7 +3278,7 @@ EventScript_1A8149:: @ 81A8149
 	setmetatile 6, 10, 821, 0
 	return
 
-EventScript_1A8177:: @ 81A8177
+EventScript_Close2FDoor2:: @ 81A8177
 	setmetatile 5, 15, 944, 1
 	setmetatile 6, 15, 945, 1
 	setmetatile 5, 16, 952, 1
@@ -3286,7 +3286,7 @@ EventScript_1A8177:: @ 81A8177
 	setmetatile 6, 17, 821, 0
 	return
 
-EventScript_1A81A5:: @ 81A81A5
+EventScript_Close3FDoor1:: @ 81A81A5
 	setmetatile 9, 11, 960, 1
 	setmetatile 10, 11, 961, 1
 	setmetatile 9, 12, 962, 1
@@ -3295,7 +3295,7 @@ EventScript_1A81A5:: @ 81A81A5
 	setmetatile 10, 13, 965, 1
 	return
 
-EventScript_1A81DC:: @ 81A81DC
+EventScript_Close3FDoor2:: @ 81A81DC
 	setmetatile 20, 11, 960, 1
 	setmetatile 21, 11, 961, 1
 	setmetatile 20, 12, 962, 1
@@ -3304,7 +3304,7 @@ EventScript_1A81DC:: @ 81A81DC
 	setmetatile 21, 13, 965, 1
 	return
 
-EventScript_1A8213:: @ 81A8213
+EventScript_Close4FDoor1:: @ 81A8213
 	setmetatile 3, 16, 944, 1
 	setmetatile 4, 16, 945, 1
 	setmetatile 3, 17, 952, 1
@@ -3312,7 +3312,7 @@ EventScript_1A8213:: @ 81A8213
 	setmetatile 4, 18, 821, 0
 	return
 
-EventScript_1A8241:: @ 81A8241
+EventScript_Close4FDoor2:: @ 81A8241
 	setmetatile 14, 11, 944, 1
 	setmetatile 15, 11, 945, 1
 	setmetatile 14, 12, 952, 1
@@ -3320,7 +3320,7 @@ EventScript_1A8241:: @ 81A8241
 	setmetatile 15, 13, 821, 0
 	return
 
-EventScript_1A826F:: @ 81A826F
+EventScript_Close5FDoor1:: @ 81A826F
 	setmetatile 7, 8, 960, 1
 	setmetatile 8, 8, 961, 1
 	setmetatile 7, 9, 962, 1
@@ -3329,7 +3329,7 @@ EventScript_1A826F:: @ 81A826F
 	setmetatile 8, 10, 965, 1
 	return
 
-EventScript_1A82A6:: @ 81A82A6
+EventScript_Close5FDoor2:: @ 81A82A6
 	setmetatile 7, 17, 960, 1
 	setmetatile 8, 17, 961, 1
 	setmetatile 7, 18, 962, 1
@@ -3338,7 +3338,7 @@ EventScript_1A82A6:: @ 81A82A6
 	setmetatile 8, 19, 965, 1
 	return
 
-EventScript_1A82DD:: @ 81A82DD
+EventScript_Close5FDoor3:: @ 81A82DD
 	setmetatile 18, 12, 960, 1
 	setmetatile 19, 12, 961, 1
 	setmetatile 18, 13, 962, 1
@@ -3347,7 +3347,7 @@ EventScript_1A82DD:: @ 81A82DD
 	setmetatile 19, 14, 965, 1
 	return
 
-EventScript_1A8314:: @ 81A8314
+EventScript_Close6FDoor:: @ 81A8314
 	setmetatile 5, 14, 960, 1
 	setmetatile 6, 14, 961, 1
 	setmetatile 5, 15, 962, 1
@@ -3356,7 +3356,7 @@ EventScript_1A8314:: @ 81A8314
 	setmetatile 6, 16, 965, 1
 	return
 
-EventScript_1A834B:: @ 81A834B
+EventScript_Close7FDoor1:: @ 81A834B
 	setmetatile 11, 8, 944, 1
 	setmetatile 12, 8, 945, 1
 	setmetatile 11, 9, 952, 1
@@ -3364,7 +3364,7 @@ EventScript_1A834B:: @ 81A834B
 	setmetatile 12, 10, 821, 0
 	return
 
-EventScript_1A8379:: @ 81A8379
+EventScript_Close7FDoor2:: @ 81A8379
 	setmetatile 24, 7, 944, 1
 	setmetatile 25, 7, 945, 1
 	setmetatile 24, 8, 952, 1
@@ -3372,7 +3372,7 @@ EventScript_1A8379:: @ 81A8379
 	setmetatile 25, 9, 821, 0
 	return
 
-EventScript_1A83A7:: @ 81A83A7
+EventScript_Close7FDoor3:: @ 81A83A7
 	setmetatile 25, 13, 944, 1
 	setmetatile 26, 13, 945, 1
 	setmetatile 25, 14, 952, 1
@@ -3380,7 +3380,7 @@ EventScript_1A83A7:: @ 81A83A7
 	setmetatile 26, 15, 821, 0
 	return
 
-EventScript_1A83D5:: @ 81A83D5
+EventScript_Close8FDoor:: @ 81A83D5
 	setmetatile 5, 9, 960, 1
 	setmetatile 6, 9, 961, 1
 	setmetatile 5, 10, 962, 1
@@ -3389,7 +3389,7 @@ EventScript_1A83D5:: @ 81A83D5
 	setmetatile 6, 11, 965, 1
 	return
 
-EventScript_1A840C:: @ 81A840C
+EventScript_Close9FDoor1:: @ 81A840C
 	setmetatile 2, 9, 960, 1
 	setmetatile 3, 9, 961, 1
 	setmetatile 2, 10, 962, 1
@@ -3398,7 +3398,7 @@ EventScript_1A840C:: @ 81A840C
 	setmetatile 3, 11, 965, 1
 	return
 
-EventScript_1A8443:: @ 81A8443
+EventScript_Close9FDoor2:: @ 81A8443
 	setmetatile 12, 15, 960, 1
 	setmetatile 13, 15, 961, 1
 	setmetatile 12, 16, 962, 1
@@ -3407,7 +3407,7 @@ EventScript_1A8443:: @ 81A8443
 	setmetatile 13, 17, 965, 1
 	return
 
-EventScript_1A847A:: @ 81A847A
+EventScript_Close9FDoor3:: @ 81A847A
 	setmetatile 21, 6, 944, 1
 	setmetatile 22, 6, 945, 1
 	setmetatile 21, 7, 952, 1
@@ -3415,7 +3415,7 @@ EventScript_1A847A:: @ 81A847A
 	setmetatile 22, 8, 821, 0
 	return
 
-EventScript_1A84A8:: @ 81A84A8
+EventScript_Close9FDoor4:: @ 81A84A8
 	setmetatile 21, 12, 944, 1
 	setmetatile 22, 12, 945, 1
 	setmetatile 21, 13, 952, 1
@@ -3423,7 +3423,7 @@ EventScript_1A84A8:: @ 81A84A8
 	setmetatile 22, 14, 821, 0
 	return
 
-EventScript_1A84D6:: @ 81A84D6
+EventScript_Close10FDoor:: @ 81A84D6
 	setmetatile 12, 11, 944, 1
 	setmetatile 13, 11, 945, 1
 	setmetatile 12, 12, 952, 1
@@ -3431,7 +3431,7 @@ EventScript_1A84D6:: @ 81A84D6
 	setmetatile 13, 13, 821, 0
 	return
 
-EventScript_1A8504:: @ 81A8504
+EventScript_Close11FDoor:: @ 81A8504
 	setmetatile 5, 16, 944, 1
 	setmetatile 6, 16, 945, 1
 	setmetatile 5, 17, 952, 1
@@ -3439,7 +3439,7 @@ EventScript_1A8504:: @ 81A8504
 	setmetatile 6, 18, 821, 0
 	return
 
-EventScript_1A8532:: @ 81A8532
+EventScript_Open2FDoor1:: @ 81A8532
 	setmetatile 5, 8, 821, 0
 	setmetatile 6, 8, 820, 0
 	setmetatile 5, 9, 821, 0
@@ -3447,7 +3447,7 @@ EventScript_1A8532:: @ 81A8532
 	setmetatile 6, 10, 820, 0
 	return
 
-EventScript_1A8560:: @ 81A8560
+EventScript_Open2FDoor2:: @ 81A8560
 	setmetatile 5, 15, 821, 0
 	setmetatile 6, 15, 820, 0
 	setmetatile 5, 16, 821, 0
@@ -3455,7 +3455,7 @@ EventScript_1A8560:: @ 81A8560
 	setmetatile 6, 17, 820, 0
 	return
 
-EventScript_1A858E:: @ 81A858E
+EventScript_Open3FDoor1:: @ 81A858E
 	setmetatile 9, 11, 839, 1
 	setmetatile 10, 11, 838, 1
 	setmetatile 9, 12, 821, 0
@@ -3464,7 +3464,7 @@ EventScript_1A858E:: @ 81A858E
 	setmetatile 10, 13, 826, 0
 	return
 
-EventScript_1A85C5:: @ 81A85C5
+EventScript_Open3FDoor2:: @ 81A85C5
 	setmetatile 20, 11, 839, 1
 	setmetatile 21, 11, 838, 1
 	setmetatile 20, 12, 821, 0
@@ -3473,7 +3473,7 @@ EventScript_1A85C5:: @ 81A85C5
 	setmetatile 21, 13, 826, 0
 	return
 
-EventScript_1A85FC:: @ 81A85FC
+EventScript_Open4FDoor1:: @ 81A85FC
 	setmetatile 3, 16, 821, 0
 	setmetatile 4, 16, 820, 0
 	setmetatile 3, 17, 821, 0
@@ -3481,7 +3481,7 @@ EventScript_1A85FC:: @ 81A85FC
 	setmetatile 4, 18, 820, 0
 	return
 
-EventScript_1A862A:: @ 81A862A
+EventScript_Open4FDoor2:: @ 81A862A
 	setmetatile 14, 11, 821, 0
 	setmetatile 15, 11, 820, 0
 	setmetatile 14, 12, 821, 0
@@ -3489,7 +3489,7 @@ EventScript_1A862A:: @ 81A862A
 	setmetatile 15, 13, 820, 0
 	return
 
-EventScript_1A8658:: @ 81A8658
+EventScript_Open5FDoor1:: @ 81A8658
 	setmetatile 7, 8, 839, 1
 	setmetatile 8, 8, 838, 1
 	setmetatile 7, 9, 821, 0
@@ -3498,7 +3498,7 @@ EventScript_1A8658:: @ 81A8658
 	setmetatile 8, 10, 826, 0
 	return
 
-EventScript_1A868F:: @ 81A868F
+EventScript_Open5FDoor2:: @ 81A868F
 	setmetatile 7, 17, 839, 1
 	setmetatile 8, 17, 838, 1
 	setmetatile 7, 18, 821, 0
@@ -3507,7 +3507,7 @@ EventScript_1A868F:: @ 81A868F
 	setmetatile 8, 19, 826, 0
 	return
 
-EventScript_1A86C6:: @ 81A86C6
+EventScript_Open5FDoor3:: @ 81A86C6
 	setmetatile 18, 12, 839, 1
 	setmetatile 19, 12, 838, 1
 	setmetatile 18, 13, 821, 0
@@ -3516,7 +3516,7 @@ EventScript_1A86C6:: @ 81A86C6
 	setmetatile 19, 14, 826, 0
 	return
 
-EventScript_1A86FD:: @ 81A86FD
+EventScript_Open6FDoor:: @ 81A86FD
 	setmetatile 5, 14, 839, 1
 	setmetatile 6, 14, 838, 1
 	setmetatile 5, 15, 821, 0
@@ -3525,7 +3525,7 @@ EventScript_1A86FD:: @ 81A86FD
 	setmetatile 6, 16, 826, 0
 	return
 
-EventScript_1A8734:: @ 81A8734
+EventScript_Open7FDoor1:: @ 81A8734
 	setmetatile 11, 8, 821, 0
 	setmetatile 12, 8, 820, 0
 	setmetatile 11, 9, 821, 0
@@ -3533,7 +3533,7 @@ EventScript_1A8734:: @ 81A8734
 	setmetatile 12, 10, 820, 0
 	return
 
-EventScript_1A8762:: @ 81A8762
+EventScript_Open7FDoor2:: @ 81A8762
 	setmetatile 24, 7, 821, 0
 	setmetatile 25, 7, 820, 0
 	setmetatile 24, 8, 821, 0
@@ -3541,7 +3541,7 @@ EventScript_1A8762:: @ 81A8762
 	setmetatile 25, 9, 820, 0
 	return
 
-EventScript_1A8790:: @ 81A8790
+EventScript_Open7FDoor3:: @ 81A8790
 	setmetatile 25, 13, 821, 0
 	setmetatile 26, 13, 820, 0
 	setmetatile 25, 14, 821, 0
@@ -3549,7 +3549,7 @@ EventScript_1A8790:: @ 81A8790
 	setmetatile 26, 15, 820, 0
 	return
 
-EventScript_1A87BE:: @ 81A87BE
+EventScript_Open8FDoor:: @ 81A87BE
 	setmetatile 5, 9, 839, 1
 	setmetatile 6, 9, 838, 1
 	setmetatile 5, 10, 821, 0
@@ -3558,7 +3558,7 @@ EventScript_1A87BE:: @ 81A87BE
 	setmetatile 6, 11, 826, 0
 	return
 
-EventScript_1A87F5:: @ 81A87F5
+EventScript_Open9FDoor1:: @ 81A87F5
 	setmetatile 2, 9, 839, 1
 	setmetatile 3, 9, 838, 1
 	setmetatile 2, 10, 821, 0
@@ -3567,7 +3567,7 @@ EventScript_1A87F5:: @ 81A87F5
 	setmetatile 3, 11, 826, 0
 	return
 
-EventScript_1A882C:: @ 81A882C
+EventScript_Open9FDoor2:: @ 81A882C
 	setmetatile 12, 15, 839, 1
 	setmetatile 13, 15, 838, 1
 	setmetatile 12, 16, 821, 0
@@ -3576,7 +3576,7 @@ EventScript_1A882C:: @ 81A882C
 	setmetatile 13, 17, 826, 0
 	return
 
-EventScript_1A8863:: @ 81A8863
+EventScript_Open9FDoor3:: @ 81A8863
 	setmetatile 21, 6, 821, 0
 	setmetatile 22, 6, 820, 0
 	setmetatile 21, 7, 821, 0
@@ -3584,7 +3584,7 @@ EventScript_1A8863:: @ 81A8863
 	setmetatile 22, 8, 820, 0
 	return
 
-EventScript_1A8891:: @ 81A8891
+EventScript_Open9FDoor4:: @ 81A8891
 	setmetatile 21, 12, 821, 0
 	setmetatile 22, 12, 820, 0
 	setmetatile 21, 13, 821, 0
@@ -3592,7 +3592,7 @@ EventScript_1A8891:: @ 81A8891
 	setmetatile 22, 14, 820, 0
 	return
 
-EventScript_1A88BF:: @ 81A88BF
+EventScript_Open10FDoor:: @ 81A88BF
 	setmetatile 12, 11, 821, 0
 	setmetatile 13, 11, 820, 0
 	setmetatile 12, 12, 821, 0
@@ -3600,7 +3600,7 @@ EventScript_1A88BF:: @ 81A88BF
 	setmetatile 13, 13, 820, 0
 	return
 
-EventScript_1A88ED:: @ 81A88ED
+EventScript_Open11FDoor:: @ 81A88ED
 	setmetatile 5, 16, 821, 0
 	setmetatile 6, 16, 820, 0
 	setmetatile 5, 17, 821, 0
@@ -3608,236 +3608,236 @@ EventScript_1A88ED:: @ 81A88ED
 	setmetatile 6, 18, 820, 0
 	return
 
-SilphCo_2F_EventScript_1A891B:: @ 81A891B
+SilphCo_2F_EventScript_Door1:: @ 81A891B
 	lockall
 	setvar VAR_0x4001, 1
 	setvar VAR_0x8004, 634
 	checkflag FLAG_SILPH_2F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_2F_EventScript_1A8935:: @ 81A8935
+SilphCo_2F_EventScript_Door2:: @ 81A8935
 	lockall
 	setvar VAR_0x4001, 2
 	setvar VAR_0x8004, 635
 	checkflag FLAG_SILPH_2F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_3F_EventScript_1A894F:: @ 81A894F
+SilphCo_3F_EventScript_Door1:: @ 81A894F
 	lockall
 	setvar VAR_0x4001, 3
 	setvar VAR_0x8004, 636
 	checkflag FLAG_SILPH_3F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_3F_EventScript_1A8969:: @ 81A8969
+SilphCo_3F_EventScript_Door2:: @ 81A8969
 	lockall
 	setvar VAR_0x4001, 4
 	setvar VAR_0x8004, 637
 	checkflag FLAG_SILPH_3F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_4F_EventScript_1A8983:: @ 81A8983
+SilphCo_4F_EventScript_Door1:: @ 81A8983
 	lockall
 	setvar VAR_0x4001, 5
 	setvar VAR_0x8004, 638
 	checkflag FLAG_SILPH_4F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_4F_EventScript_1A899D:: @ 81A899D
+SilphCo_4F_EventScript_Door2:: @ 81A899D
 	lockall
 	setvar VAR_0x4001, 6
 	setvar VAR_0x8004, 639
 	checkflag FLAG_SILPH_4F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_5F_EventScript_1A89B7:: @ 81A89B7
+SilphCo_5F_EventScript_Door1:: @ 81A89B7
 	lockall
 	setvar VAR_0x4001, 7
 	setvar VAR_0x8004, 640
 	checkflag FLAG_SILPH_5F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_5F_EventScript_1A89D1:: @ 81A89D1
+SilphCo_5F_EventScript_Door2:: @ 81A89D1
 	lockall
 	setvar VAR_0x4001, 8
 	setvar VAR_0x8004, 641
 	checkflag FLAG_SILPH_5F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_5F_EventScript_1A89EB:: @ 81A89EB
+SilphCo_5F_EventScript_Door3:: @ 81A89EB
 	lockall
 	setvar VAR_0x4001, 9
 	setvar VAR_0x8004, 642
 	checkflag FLAG_SILPH_5F_DOOR_3
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_6F_EventScript_1A8A05:: @ 81A8A05
+SilphCo_6F_EventScript_Door:: @ 81A8A05
 	lockall
 	setvar VAR_0x4001, 10
 	setvar VAR_0x8004, 643
 	checkflag FLAG_SILPH_6F_DOOR
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_7F_EventScript_1A8A1F:: @ 81A8A1F
+SilphCo_7F_EventScript_Door1:: @ 81A8A1F
 	lockall
 	setvar VAR_0x4001, 11
 	setvar VAR_0x8004, 644
 	checkflag FLAG_SILPH_7F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_7F_EventScript_1A8A39:: @ 81A8A39
+SilphCo_7F_EventScript_Door2:: @ 81A8A39
 	lockall
 	setvar VAR_0x4001, 12
 	setvar VAR_0x8004, 645
 	checkflag FLAG_SILPH_7F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_7F_EventScript_1A8A53:: @ 81A8A53
+SilphCo_7F_EventScript_Door3:: @ 81A8A53
 	lockall
 	setvar VAR_0x4001, 13
 	setvar VAR_0x8004, 646
 	checkflag FLAG_SILPH_7F_DOOR_3
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_8F_EventScript_1A8A6D:: @ 81A8A6D
+SilphCo_8F_EventScript_Door:: @ 81A8A6D
 	lockall
 	setvar VAR_0x4001, 14
 	setvar VAR_0x8004, 647
 	checkflag FLAG_SILPH_8F_DOOR
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_9F_EventScript_1A8A87:: @ 81A8A87
+SilphCo_9F_EventScript_Door1:: @ 81A8A87
 	lockall
 	setvar VAR_0x4001, 15
 	setvar VAR_0x8004, 648
 	checkflag FLAG_SILPH_9F_DOOR_1
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_9F_EventScript_1A8AA1:: @ 81A8AA1
+SilphCo_9F_EventScript_Door2:: @ 81A8AA1
 	lockall
 	setvar VAR_0x4001, 16
 	setvar VAR_0x8004, 649
 	checkflag FLAG_SILPH_9F_DOOR_2
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_9F_EventScript_1A8ABB:: @ 81A8ABB
+SilphCo_9F_EventScript_Door3:: @ 81A8ABB
 	lockall
 	setvar VAR_0x4001, 17
 	setvar VAR_0x8004, 650
 	checkflag FLAG_SILPH_9F_DOOR_3
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_9F_EventScript_1A8AD5:: @ 81A8AD5
+SilphCo_9F_EventScript_Door4:: @ 81A8AD5
 	lockall
 	setvar VAR_0x4001, 18
 	setvar VAR_0x8004, 651
 	checkflag FLAG_SILPH_9F_DOOR_4
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_10F_EventScript_1A8AEF:: @ 81A8AEF
+SilphCo_10F_EventScript_Door:: @ 81A8AEF
 	lockall
 	setvar VAR_0x4001, 19
 	setvar VAR_0x8004, 652
 	checkflag FLAG_SILPH_10F_DOOR
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-SilphCo_11F_EventScript_1A8B09:: @ 81A8B09
+SilphCo_11F_EventScript_Door:: @ 81A8B09
 	lockall
 	setvar VAR_0x4001, 20
 	setvar VAR_0x8004, 653
 	checkflag FLAG_SILPH_11F_DOOR
-	goto_if TRUE, EventScript_1A813F
-	goto EventScript_1A8B23
+	goto_if TRUE, EventScript_DoorUnlocked
+	goto EventScript_TryUnlockDoor
 	end
 
-EventScript_1A8B23:: @ 81A8B23
+EventScript_TryUnlockDoor:: @ 81A8B23
 	checkflag FLAG_HIDE_SILPH_CO_5F_CARD_KEY
-	goto_if TRUE, EventScript_1A8B32
-	goto EventScript_1A8135
+	goto_if TRUE, EventScript_OpenDoor
+	goto EventScript_NeedCardKey
 	end
 
-EventScript_1A8B32:: @ 81A8B32
+EventScript_OpenDoor:: @ 81A8B32
 	playfanfare MUS_FANFA1
-	msgbox Text_1A5B88
+	msgbox Text_CardKeyOpenedDoor
 	waitfanfare
-	compare_var_to_value VAR_0x4001, 1
-	call_if eq, EventScript_1A8532
-	compare_var_to_value VAR_0x4001, 2
-	call_if eq, EventScript_1A8560
-	compare_var_to_value VAR_0x4001, 3
-	call_if eq, EventScript_1A858E
-	compare_var_to_value VAR_0x4001, 4
-	call_if eq, EventScript_1A85C5
-	compare_var_to_value VAR_0x4001, 5
-	call_if eq, EventScript_1A85FC
-	compare_var_to_value VAR_0x4001, 6
-	call_if eq, EventScript_1A862A
-	compare_var_to_value VAR_0x4001, 7
-	call_if eq, EventScript_1A8658
-	compare_var_to_value VAR_0x4001, 8
-	call_if eq, EventScript_1A868F
-	compare_var_to_value VAR_0x4001, 9
-	call_if eq, EventScript_1A86C6
-	compare_var_to_value VAR_0x4001, 10
-	call_if eq, EventScript_1A86FD
-	compare_var_to_value VAR_0x4001, 11
-	call_if eq, EventScript_1A8734
-	compare_var_to_value VAR_0x4001, 12
-	call_if eq, EventScript_1A8762
-	compare_var_to_value VAR_0x4001, 13
-	call_if eq, EventScript_1A8790
-	compare_var_to_value VAR_0x4001, 14
-	call_if eq, EventScript_1A87BE
-	compare_var_to_value VAR_0x4001, 15
-	call_if eq, EventScript_1A87F5
-	compare_var_to_value VAR_0x4001, 16
-	call_if eq, EventScript_1A882C
-	compare_var_to_value VAR_0x4001, 17
-	call_if eq, EventScript_1A8863
-	compare_var_to_value VAR_0x4001, 18
-	call_if eq, EventScript_1A8891
-	compare_var_to_value VAR_0x4001, 19
-	call_if eq, EventScript_1A88BF
-	compare_var_to_value VAR_0x4001, 20
-	call_if eq, EventScript_1A88ED
+	compare VAR_0x4001, 1
+	call_if eq, EventScript_Open2FDoor1
+	compare VAR_0x4001, 2
+	call_if eq, EventScript_Open2FDoor2
+	compare VAR_0x4001, 3
+	call_if eq, EventScript_Open3FDoor1
+	compare VAR_0x4001, 4
+	call_if eq, EventScript_Open3FDoor2
+	compare VAR_0x4001, 5
+	call_if eq, EventScript_Open4FDoor1
+	compare VAR_0x4001, 6
+	call_if eq, EventScript_Open4FDoor2
+	compare VAR_0x4001, 7
+	call_if eq, EventScript_Open5FDoor1
+	compare VAR_0x4001, 8
+	call_if eq, EventScript_Open5FDoor2
+	compare VAR_0x4001, 9
+	call_if eq, EventScript_Open5FDoor3
+	compare VAR_0x4001, 10
+	call_if eq, EventScript_Open6FDoor
+	compare VAR_0x4001, 11
+	call_if eq, EventScript_Open7FDoor1
+	compare VAR_0x4001, 12
+	call_if eq, EventScript_Open7FDoor2
+	compare VAR_0x4001, 13
+	call_if eq, EventScript_Open7FDoor3
+	compare VAR_0x4001, 14
+	call_if eq, EventScript_Open8FDoor
+	compare VAR_0x4001, 15
+	call_if eq, EventScript_Open9FDoor1
+	compare VAR_0x4001, 16
+	call_if eq, EventScript_Open9FDoor2
+	compare VAR_0x4001, 17
+	call_if eq, EventScript_Open9FDoor3
+	compare VAR_0x4001, 18
+	call_if eq, EventScript_Open9FDoor4
+	compare VAR_0x4001, 19
+	call_if eq, EventScript_Open10FDoor
+	compare VAR_0x4001, 20
+	call_if eq, EventScript_Open11FDoor
 	waitse
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
@@ -3871,7 +3871,7 @@ EventScript_1A8C3C:: @ 81A8C3C
 
 EventScript_1A8C57:: @ 81A8C57
 	specialvar VAR_RESULT, sub_80CC7B4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A8C70
 	msgbox Text_1A5CF1
 	return
@@ -3884,7 +3884,7 @@ EventScript_1A8C70:: @ 81A8C70
 
 EventScript_1A8C82:: @ 81A8C82
 	specialvar VAR_RESULT, sub_80CC7B4
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A8C9B
 	msgbox Text_1A5D31
 	return
@@ -4009,7 +4009,7 @@ VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	msgbox Text_194234
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9
 	msgbox Text_19430F
 	release
@@ -4025,9 +4025,9 @@ EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
 	textcolor 3
 	waitse
 	call EventScript_GiveItem
-	compare_var_to_value VAR_0x8007, 1
+	compare VAR_0x8007, 1
 	goto_if eq, EventScript_DigUpItemPutInPocket
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_DigUpItemBagIsFull
 	end
 
@@ -4088,16 +4088,16 @@ EventScript_PoisonWhiteOut:: @ 81A8DFD
 	textcolor 3
 	special ExecuteWhiteOut
 	waitstate
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A8E11
 	releaseall
 	end
 
 EventScript_1A8E11:: @ 81A8E11
 	checkmoney 1, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A8E2E
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A8E3C
 	end
 
@@ -4157,9 +4157,9 @@ EventScript_1A8EC0:: @ 81A8EC0
 	return
 
 EventScript_1A8EC5:: @ 81A8EC5
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if ge, EventScript_1A911E
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A8F12
 	multichoice 19, 6, MULTICHOICE_ISLAND_23, FALSE
 	switch VAR_RESULT
@@ -4180,9 +4180,9 @@ EventScript_1A8F12:: @ 81A8F12
 	end
 
 EventScript_1A8F54:: @ 81A8F54
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if ge, EventScript_1A911E
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A8FA1
 	multichoice 19, 6, MULTICHOICE_ISLAND_13, FALSE
 	switch VAR_RESULT
@@ -4223,9 +4223,9 @@ EventScript_1A9004:: @ 81A9004
 	end
 
 EventScript_1A900F:: @ 81A900F
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if ge, EventScript_1A911E
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 4
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
 	goto_if ge, EventScript_1A905C
 	multichoice 19, 6, MULTICHOICE_ISLAND_12, FALSE
 	switch VAR_RESULT
@@ -4248,9 +4248,9 @@ EventScript_1A905C:: @ 81A905C
 EventScript_1A909E:: @ 81A909E
 	specialvar VAR_RESULT, sub_8147500
 	getnumberstring 0, VAR_RESULT
-	compare_var_to_value VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	goto_if eq, EventScript_1A90BE
-	compare_var_to_value VAR_0x8004, SEAGALLOP_VERMILION_CITY
+	compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	goto_if ne, EventScript_1A90CC
 	end
 
@@ -4268,7 +4268,7 @@ EventScript_1A90DA:: @ 81A90DA
 	closemessage
 	delay 20
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	fadescreen 1
@@ -4278,7 +4278,7 @@ EventScript_1A90DA:: @ 81A90DA
 
 EventScript_1A90F6:: @ 81A90F6
 	specialvar VAR_RESULT, sub_8147594
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9108
 	release
 	end
@@ -4529,7 +4529,7 @@ gUnknown_81A93C0:: @ 81A93C0
 Route3_EventScript_1A93C9:: @ 81A93C9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_BEN, 0, Text_183560, Text_1835A0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A93F0
 	msgbox Text_1835B4, 6
 	end
@@ -4542,7 +4542,7 @@ EventScript_1A93F0:: @ 81A93F0
 Route3_EventScript_1A9407:: @ 81A9407
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_CALVIN, 0, Text_183786, Text_1837BD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A942E
 	msgbox Text_1837CF, 6
 	end
@@ -4555,7 +4555,7 @@ EventScript_1A942E:: @ 81A942E
 Route3_EventScript_1A9445:: @ 81A9445
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_COLTON, 0, Text_1834E6, Text_183509
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A946C
 	msgbox Text_18351C, 6
 	end
@@ -4568,7 +4568,7 @@ EventScript_1A946C:: @ 81A946C
 Route3_EventScript_1A9483:: @ 81A9483
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_GREG, 0, Text_183682, Text_1836B3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A94AA
 	msgbox Text_1836D9, 6
 	end
@@ -4581,7 +4581,7 @@ EventScript_1A94AA:: @ 81A94AA
 Route3_EventScript_1A94C1:: @ 81A94C1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_JAMES, 0, Text_183807, Text_183837
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A94E8
 	msgbox Text_183849, 6
 	end
@@ -4594,7 +4594,7 @@ EventScript_1A94E8:: @ 81A94E8
 Route3_EventScript_1A94FF:: @ 81A94FF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_JANICE, 0, Text_183616, Text_18363F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9526
 	msgbox Text_18364C, 6
 	end
@@ -4607,7 +4607,7 @@ EventScript_1A9526:: @ 81A9526
 Route3_EventScript_1A953D:: @ 81A953D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_SALLY, 0, Text_18371B, Text_183746
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9564
 	msgbox Text_18374F, 6
 	end
@@ -4620,7 +4620,7 @@ EventScript_1A9564:: @ 81A9564
 Route3_EventScript_1A957B:: @ 81A957B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_ROBIN, 0, Text_18387A, Text_183891
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A95A2
 	msgbox Text_18389C, 6
 	end
@@ -4633,7 +4633,7 @@ EventScript_1A95A2:: @ 81A95A2
 Route4_EventScript_1A95B9:: @ 81A95B9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_CRISSY, 0, Text_183906, Text_183938
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A95E0
 	msgbox Text_183957, 6
 	end
@@ -4646,7 +4646,7 @@ EventScript_1A95E0:: @ 81A95E0
 Route24_EventScript_1A95F7:: @ 81A95F7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_TIMMY, 0, Text_188F76, Text_188F95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A961E
 	msgbox Text_188FA7, 6
 	end
@@ -4659,7 +4659,7 @@ EventScript_1A961E:: @ 81A961E
 Route24_EventScript_1A9635:: @ 81A9635
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_CALE, 0, Text_18901B, Text_18908C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A965C
 	msgbox Text_18909E, 6
 	end
@@ -4672,7 +4672,7 @@ EventScript_1A965C:: @ 81A965C
 Route24_EventScript_1A9673:: @ 81A9673
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_RELI, 0, Text_188F2C, Text_188F46
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A969A
 	msgbox Text_188F53, 6
 	end
@@ -4685,7 +4685,7 @@ EventScript_1A969A:: @ 81A969A
 Route24_EventScript_1A96B1:: @ 81A96B1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_ALI, 0, Text_188FC9, Text_188FE7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A96D8
 	msgbox Text_188FF9, 6
 	end
@@ -4698,7 +4698,7 @@ EventScript_1A96D8:: @ 81A96D8
 Route24_EventScript_1A96EF:: @ 81A96EF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_SHANE, 0, Text_188E74, Text_188E94
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9716
 	msgbox Text_188EA3, 6
 	end
@@ -4711,7 +4711,7 @@ EventScript_1A9716:: @ 81A9716
 Route24_EventScript_1A972D:: @ 81A972D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_ETHAN, 0, Text_188ED9, Text_188EFA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9754
 	msgbox Text_188F0A, 6
 	end
@@ -4724,7 +4724,7 @@ EventScript_1A9754:: @ 81A9754
 Route25_EventScript_1A976B:: @ 81A976B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_JOEY, 0, Text_1890C0, Text_1890E6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9792
 	msgbox Text_1890F5, 6
 	end
@@ -4737,7 +4737,7 @@ EventScript_1A9792:: @ 81A9792
 Route25_EventScript_1A97A9:: @ 81A97A9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_DAN, 0, Text_189165, Text_1891A6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A97D0
 	msgbox Text_1891B3, 6
 	end
@@ -4750,7 +4750,7 @@ EventScript_1A97D0:: @ 81A97D0
 Route25_EventScript_1A97E7:: @ 81A97E7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_CHAD, 0, Text_1892A9, Text_1892D9
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A980E
 	msgbox Text_1892EF, 6
 	end
@@ -4763,7 +4763,7 @@ EventScript_1A980E:: @ 81A980E
 Route25_EventScript_1A9825:: @ 81A9825
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_KELSEY, 0, Text_189247, Text_189261
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A984C
 	msgbox Text_189281, 6
 	end
@@ -4776,7 +4776,7 @@ EventScript_1A984C:: @ 81A984C
 Route25_EventScript_1A9863:: @ 81A9863
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_HALEY, 0, Text_189333, Text_189364
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A988A
 	msgbox Text_189378, 6
 	end
@@ -4789,7 +4789,7 @@ EventScript_1A988A:: @ 81A988A
 Route25_EventScript_1A98A1:: @ 81A98A1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_FRANKLIN, 0, Text_1893A7, Text_1893EA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A98C8
 	msgbox Text_1893FB, 6
 	end
@@ -4802,7 +4802,7 @@ EventScript_1A98C8:: @ 81A98C8
 Route25_EventScript_1A98DF:: @ 81A98DF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_NOB, 0, Text_189423, Text_189459
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9906
 	msgbox Text_18947E, 6
 	end
@@ -4815,7 +4815,7 @@ EventScript_1A9906:: @ 81A9906
 Route25_EventScript_1A991D:: @ 81A991D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_WAYNE, 0, Text_1894DE, Text_18950A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9944
 	msgbox Text_18951C, 6
 	end
@@ -4828,7 +4828,7 @@ EventScript_1A9944:: @ 81A9944
 Route25_EventScript_1A995B:: @ 81A995B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_FLINT, 0, Text_1891EB, Text_189212
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9982
 	msgbox Text_18921D, 6
 	end
@@ -4841,7 +4841,7 @@ EventScript_1A9982:: @ 81A9982
 Route6_EventScript_1A9999:: @ 81A9999
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_KEIGO, 0, Text_183E9F, Text_183EC0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A99C0
 	msgbox Text_183ED4, 6
 	end
@@ -4854,7 +4854,7 @@ EventScript_1A99C0:: @ 81A99C0
 Route6_EventScript_1A99D7:: @ 81A99D7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_ELIJAH, 0, Text_183FF0, Text_18401A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A99FE
 	msgbox Text_18402B, 6
 	end
@@ -4867,7 +4867,7 @@ EventScript_1A99FE:: @ 81A99FE
 Route6_EventScript_1A9A15:: @ 81A9A15
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_RICKY, 0, Text_183E04, Text_183E2A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9A3C
 	msgbox Text_183E3C, 6
 	end
@@ -4880,7 +4880,7 @@ EventScript_1A9A3C:: @ 81A9A3C
 Route6_EventScript_1A9A53:: @ 81A9A53
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_JEFF, 0, Text_183F07, Text_183F24
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9A7A
 	msgbox Text_183F51, 6
 	end
@@ -4893,7 +4893,7 @@ EventScript_1A9A7A:: @ 81A9A7A
 Route6_EventScript_1A9A91:: @ 81A9A91
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_NANCY, 0, Text_183E4E, Text_183E79
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9AB8
 	msgbox Text_183E8D, 6
 	end
@@ -4906,7 +4906,7 @@ EventScript_1A9AB8:: @ 81A9AB8
 Route6_EventScript_1A9ACF:: @ 81A9ACF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_ISABELLE, 0, Text_183F90, Text_183FAB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9AF6
 	msgbox Text_183FC4, 6
 	end
@@ -4919,7 +4919,7 @@ EventScript_1A9AF6:: @ 81A9AF6
 Route11_EventScript_1A9B0D:: @ 81A9B0D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_EDDIE, 0, Text_184FBD, Text_184FD8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9B34
 	msgbox Text_184FEF, 6
 	end
@@ -4932,7 +4932,7 @@ EventScript_1A9B34:: @ 81A9B34
 Route11_EventScript_1A9B4B:: @ 81A9B4B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_DILLON, 0, Text_18506A, Text_18509B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9B72
 	msgbox Text_1850CF, 6
 	end
@@ -4945,7 +4945,7 @@ EventScript_1A9B72:: @ 81A9B72
 Route11_EventScript_1A9B89:: @ 81A9B89
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_YASU, 0, Text_18517B, Text_1851AC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9BB0
 	msgbox Text_1851D2, 6
 	end
@@ -4958,7 +4958,7 @@ EventScript_1A9BB0:: @ 81A9BB0
 Route11_EventScript_1A9BC7:: @ 81A9BC7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_DAVE, 0, Text_185285, Text_1852C1
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9BEE
 	msgbox Text_1852E3, 6
 	end
@@ -4971,7 +4971,7 @@ EventScript_1A9BEE:: @ 81A9BEE
 Route11_EventScript_1A9C05:: @ 81A9C05
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_ENGINEER_BRAXTON, 0, Text_185011, Text_185037
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9C2C
 	msgbox Text_18504A, 6
 	end
@@ -4984,7 +4984,7 @@ EventScript_1A9C2C:: @ 81A9C2C
 Route11_EventScript_1A9C43:: @ 81A9C43
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_ENGINEER_BERNIE, 0, Text_185236, Text_185250
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9C6A
 	msgbox Text_185266, 6
 	end
@@ -4997,7 +4997,7 @@ EventScript_1A9C6A:: @ 81A9C6A
 Route11_EventScript_1A9C81:: @ 81A9C81
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_HUGO, 0, Text_184F01, Text_184F15
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9CA8
 	msgbox Text_184F2E, 6
 	end
@@ -5010,7 +5010,7 @@ EventScript_1A9CA8:: @ 81A9CA8
 Route11_EventScript_1A9CBF:: @ 81A9CBF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_JASPER, 0, Text_184F5D, Text_184F7E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9CE6
 	msgbox Text_184F8E, 6
 	end
@@ -5023,7 +5023,7 @@ EventScript_1A9CE6:: @ 81A9CE6
 Route11_EventScript_1A9CFD:: @ 81A9CFD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_DIRK, 0, Text_1850E9, Text_185105
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9D24
 	msgbox Text_185114, 6
 	end
@@ -5036,7 +5036,7 @@ EventScript_1A9D24:: @ 81A9D24
 Route11_EventScript_1A9D3B:: @ 81A9D3B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_DARIAN, 0, Text_185135, Text_18514E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9D62
 	msgbox Text_185161, 6
 	end
@@ -5049,7 +5049,7 @@ EventScript_1A9D62:: @ 81A9D62
 Route9_EventScript_1A9D79:: @ 81A9D79
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_BRENT, 0, Text_184A2F, Text_184A6A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9DA0
 	msgbox Text_184A8C, 6
 	end
@@ -5062,7 +5062,7 @@ EventScript_1A9DA0:: @ 81A9DA0
 Route9_EventScript_1A9DB7:: @ 81A9DB7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BUG_CATCHER_CONNER, 0, Text_184B18, Text_184B32
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9DDE
 	msgbox Text_184B3B, 6
 	end
@@ -5075,7 +5075,7 @@ EventScript_1A9DDE:: @ 81A9DDE
 Route9_EventScript_1A9DF5:: @ 81A9DF5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_CHRIS, 0, Text_184844, Text_18487E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9E1C
 	msgbox Text_184890, 6
 	end
@@ -5088,7 +5088,7 @@ EventScript_1A9E1C:: @ 81A9E1C
 Route9_EventScript_1A9E33:: @ 81A9E33
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_DREW, 0, Text_18489E, Text_1848CC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9E5A
 	msgbox Text_1848DE, 6
 	end
@@ -5101,7 +5101,7 @@ EventScript_1A9E5A:: @ 81A9E5A
 Route9_EventScript_1A9E71:: @ 81A9E71
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_ALICIA, 0, Text_1847B7, Text_1847DF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9E98
 	msgbox Text_1847F0, 6
 	end
@@ -5114,7 +5114,7 @@ EventScript_1A9E98:: @ 81A9E98
 Route9_EventScript_1A9EAF:: @ 81A9EAF
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_CAITLIN, 0, Text_1848FF, Text_18491C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9ED6
 	msgbox Text_184931, 6
 	end
@@ -5127,7 +5127,7 @@ EventScript_1A9ED6:: @ 81A9ED6
 Route9_EventScript_1A9EED:: @ 81A9EED
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_ALAN, 0, Text_184ABE, Text_184AD5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9F14
 	msgbox Text_184AF1, 6
 	end
@@ -5140,7 +5140,7 @@ EventScript_1A9F14:: @ 81A9F14
 Route9_EventScript_1A9F2B:: @ 81A9F2B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_BRICE, 0, Text_1849DF, Text_184A04
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9F52
 	msgbox Text_184A11, 6
 	end
@@ -5153,7 +5153,7 @@ EventScript_1A9F52:: @ 81A9F52
 Route9_EventScript_1A9F69:: @ 81A9F69
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_JEREMY, 0, Text_18495E, Text_18497F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9F90
 	msgbox Text_1849B0, 6
 	end
@@ -5166,7 +5166,7 @@ EventScript_1A9F90:: @ 81A9F90
 Route10_EventScript_1A9FA7:: @ 81A9FA7
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_HEIDI, 0, Text_184CF1, Text_184D31
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1A9FCE
 	msgbox Text_184D4D, 6
 	end
@@ -5179,7 +5179,7 @@ EventScript_1A9FCE:: @ 81A9FCE
 Route10_EventScript_1A9FE5:: @ 81A9FE5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_CAROL, 0, Text_184E04, Text_184E3B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA00C
 	msgbox Text_184E5E, 6
 	end
@@ -5192,7 +5192,7 @@ EventScript_1AA00C:: @ 81AA00C
 Route10_EventScript_1AA023:: @ 81AA023
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_POKEMANIAC_MARK, 0, Text_184B8A, Text_184BE5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA04A
 	msgbox Text_184BFB, 6
 	end
@@ -5205,7 +5205,7 @@ EventScript_1AA04A:: @ 81AA04A
 Route10_EventScript_1AA061:: @ 81AA061
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_POKEMANIAC_HERMAN, 0, Text_184C86, Text_184CA7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA088
 	msgbox Text_184CBB, 6
 	end
@@ -5218,7 +5218,7 @@ EventScript_1AA088:: @ 81AA088
 Route10_EventScript_1AA09F:: @ 81AA09F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_CLARK, 0, Text_184C1D, Text_184C2D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA0C6
 	msgbox Text_184C60, 6
 	end
@@ -5231,7 +5231,7 @@ EventScript_1AA0C6:: @ 81AA0C6
 Route10_EventScript_1AA0DD:: @ 81AA0DD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_TRENT, 0, Text_184DAA, Text_184DCE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA104
 	msgbox Text_184DE4, 6
 	end
@@ -5244,7 +5244,7 @@ EventScript_1AA104:: @ 81AA104
 Route8_EventScript_1AA11B:: @ 81AA11B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_PAIGE, 0, Text_1841ED, Text_184210
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA142
 	msgbox Text_18421B, 6
 	end
@@ -5257,7 +5257,7 @@ EventScript_1AA142:: @ 81AA142
 Route8_EventScript_1AA159:: @ 81AA159
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_ANDREA, 0, Text_184321, Text_184346
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA180
 	msgbox Text_184350, 6
 	end
@@ -5270,7 +5270,7 @@ EventScript_1AA180:: @ 81AA180
 Route8_EventScript_1AA197:: @ 81AA197
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_MEGAN, 0, Text_18437A, Text_1843A6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA1BE
 	msgbox Text_1843D2, 6
 	end
@@ -5283,7 +5283,7 @@ EventScript_1AA1BE:: @ 81AA1BE
 Route8_EventScript_1AA1D5:: @ 81AA1D5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LASS_JULIA, 0, Text_1844AC, Text_1844D6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA1FC
 	msgbox Text_1844FD, 6
 	end
@@ -5296,7 +5296,7 @@ EventScript_1AA1FC:: @ 81AA1FC
 Route8_EventScript_1AA213:: @ 81AA213
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SUPER_NERD_AIDAN, 0, Text_1840C5, Text_184100
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA23A
 	msgbox Text_18410E, 6
 	end
@@ -5309,7 +5309,7 @@ EventScript_1AA23A:: @ 81AA23A
 Route8_EventScript_1AA251:: @ 81AA251
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SUPER_NERD_GLENN, 0, Text_18417C, Text_1841B6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA278
 	msgbox Text_1841C8, 6
 	end
@@ -5322,7 +5322,7 @@ EventScript_1AA278:: @ 81AA278
 Route8_EventScript_1AA28F:: @ 81AA28F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SUPER_NERD_LESLIE, 0, Text_184257, Text_18427A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA2B6
 	msgbox Text_1842B3, 6
 	end
@@ -5335,7 +5335,7 @@ EventScript_1AA2B6:: @ 81AA2B6
 Route8_EventScript_1AA2CD:: @ 81AA2CD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_STAN, 0, Text_18412F, Text_18414D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA2F4
 	msgbox Text_184162, 6
 	end
@@ -5348,7 +5348,7 @@ EventScript_1AA2F4:: @ 81AA2F4
 Route8_EventScript_1AA30B:: @ 81AA30B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GAMER_RICH, 0, Text_184432, Text_18444F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA332
 	msgbox Text_184466, 6
 	end
@@ -5361,7 +5361,7 @@ EventScript_1AA332:: @ 81AA332
 Route8_EventScript_1AA349:: @ 81AA349
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_ELI_ANNE, 0, Text_1845A4, Text_1845D0, Text_184616
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA374
 	msgbox Text_1845F2, 6
 	end
@@ -5374,7 +5374,7 @@ EventScript_1AA374:: @ 81AA374
 Route8_EventScript_1AA38F:: @ 81AA38F
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_ELI_ANNE, 0, Text_18464A, Text_184675, Text_1846AF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA3BA
 	msgbox Text_18468B, 6
 	end
@@ -5387,7 +5387,7 @@ EventScript_1AA3BA:: @ 81AA3BA
 Route8_EventScript_1AA3D5:: @ 81AA3D5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_RICARDO, 0, Text_1846E2, Text_1846FC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA3FC
 	msgbox Text_184719, 6
 	end
@@ -5400,7 +5400,7 @@ EventScript_1AA3FC:: @ 81AA3FC
 Route8_EventScript_1AA413:: @ 81AA413
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_JAREN, 0, Text_184742, Text_184767
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA43A
 	msgbox Text_18477A, 6
 	end
@@ -5413,7 +5413,7 @@ EventScript_1AA43A:: @ 81AA43A
 Route12_EventScript_1AA451:: @ 81AA451
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_NED, 0, Text_185402, Text_18541B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA478
 	msgbox Text_185432, 6
 	end
@@ -5426,7 +5426,7 @@ EventScript_1AA478:: @ 81AA478
 Route12_EventScript_1AA48F:: @ 81AA48F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_CHIP, 0, Text_18544E, Text_185475
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA4B6
 	msgbox Text_185488, 6
 	end
@@ -5439,7 +5439,7 @@ EventScript_1AA4B6:: @ 81AA4B6
 Route12_EventScript_1AA4CD:: @ 81AA4CD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_HANK, 0, Text_1855E1, Text_185606
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA4F4
 	msgbox Text_185616, 6
 	end
@@ -5452,7 +5452,7 @@ EventScript_1AA4F4:: @ 81AA4F4
 Route12_EventScript_1AA50B:: @ 81AA50B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_ELLIOT, 0, Text_185682, Text_1856D0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA532
 	msgbox Text_1856DF, 6
 	end
@@ -5465,7 +5465,7 @@ EventScript_1AA532:: @ 81AA532
 Route12_EventScript_1AA549:: @ 81AA549
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_ANDREW, 0, Text_18570E, Text_185744
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA570
 	msgbox Text_18574D, 6
 	end
@@ -5478,7 +5478,7 @@ EventScript_1AA570:: @ 81AA570
 Route12_EventScript_1AA587:: @ 81AA587
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_ROCKER_LUCA, 0, Text_185547, Text_18559B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA5AE
 	msgbox Text_1855A6, 6
 	end
@@ -5491,7 +5491,7 @@ EventScript_1AA5AE:: @ 81AA5AE
 Route12_EventScript_1AA5C5:: @ 81AA5C5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_JUSTIN, 0, Text_1854B9, Text_1854ED
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA5EC
 	msgbox Text_1854F2, 6
 	end
@@ -5504,7 +5504,7 @@ EventScript_1AA5EC:: @ 81AA5EC
 Route12_EventScript_1AA603:: @ 81AA603
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_GIA_JES, 0, Text_1857C5, Text_1857F1, Text_185842
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA62E
 	msgbox Text_18581F, 6
 	end
@@ -5517,7 +5517,7 @@ EventScript_1AA62E:: @ 81AA62E
 Route12_EventScript_1AA649:: @ 81AA649
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_GIA_JES, 0, Text_1858A6, Text_1858D0, Text_185908
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA674
 	msgbox Text_1858E2, 6
 	end
@@ -5530,7 +5530,7 @@ EventScript_1AA674:: @ 81AA674
 Route13_EventScript_1AA68F:: @ 81AA68F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_JARED, 0, Text_185D05, Text_185D1D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA6B6
 	msgbox Text_185D33, 6
 	end
@@ -5543,7 +5543,7 @@ EventScript_1AA6B6:: @ 81AA6B6
 Route13_EventScript_1AA6CD:: @ 81AA6CD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_LOLA, 0, Text_185BFC, Text_185C1F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA6F4
 	msgbox Text_185C35, 6
 	end
@@ -5556,7 +5556,7 @@ EventScript_1AA6F4:: @ 81AA6F4
 Route13_EventScript_1AA70B:: @ 81AA70B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_SHEILA, 0, Text_185C69, Text_185C95
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA732
 	msgbox Text_185CA8, 6
 	end
@@ -5569,7 +5569,7 @@ EventScript_1AA732:: @ 81AA732
 Route13_EventScript_1AA749:: @ 81AA749
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_SEBASTIAN, 0, Text_185955, Text_18597E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA770
 	msgbox Text_1859A2, 6
 	end
@@ -5582,7 +5582,7 @@ EventScript_1AA770:: @ 81AA770
 Route13_EventScript_1AA787:: @ 81AA787
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_PERRY, 0, Text_185B8F, Text_185BCA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA7AE
 	msgbox Text_185BDB, 6
 	end
@@ -5595,7 +5595,7 @@ EventScript_1AA7AE:: @ 81AA7AE
 Route13_EventScript_1AA7C5:: @ 81AA7C5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_ROBERT, 0, Text_185D3D, Text_185D7B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA7EC
 	msgbox Text_185D89, 6
 	end
@@ -5608,7 +5608,7 @@ EventScript_1AA7EC:: @ 81AA7EC
 Route13_EventScript_1AA803:: @ 81AA803
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_ALMA, 0, Text_185B12, Text_185B48
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA82A
 	msgbox Text_185B67, 6
 	end
@@ -5621,7 +5621,7 @@ EventScript_1AA82A:: @ 81AA82A
 Route13_EventScript_1AA841:: @ 81AA841
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_SUSIE, 0, Text_1859CF, Text_1859EC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA868
 	msgbox Text_1859F9, 6
 	end
@@ -5634,7 +5634,7 @@ EventScript_1AA868:: @ 81AA868
 Route13_EventScript_1AA87F:: @ 81AA87F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_VALERIE, 0, Text_185A37, Text_185A56
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA8A6
 	msgbox Text_185A62, 6
 	end
@@ -5647,7 +5647,7 @@ EventScript_1AA8A6:: @ 81AA8A6
 Route13_EventScript_1AA8BD:: @ 81AA8BD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_GWEN, 0, Text_185A91, Text_185AC1
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA8E4
 	msgbox Text_185ADE, 6
 	end
@@ -5660,7 +5660,7 @@ EventScript_1AA8E4:: @ 81AA8E4
 Route14_EventScript_1AA8FB:: @ 81AA8FB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_MALIK, 0, Text_186344, Text_186362
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA922
 	msgbox Text_18636E, 6
 	end
@@ -5673,7 +5673,7 @@ EventScript_1AA922:: @ 81AA922
 Route14_EventScript_1AA939:: @ 81AA939
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_LUKAS, 0, Text_1861F7, Text_186223
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA960
 	msgbox Text_186239, 6
 	end
@@ -5686,7 +5686,7 @@ EventScript_1AA960:: @ 81AA960
 Route14_EventScript_1AA977:: @ 81AA977
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_ISAAC, 0, Text_186263, Text_186291
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA99E
 	msgbox Text_18629D, 6
 	end
@@ -5699,7 +5699,7 @@ EventScript_1AA99E:: @ 81AA99E
 Route14_EventScript_1AA9B5:: @ 81AA9B5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_GERALD, 0, Text_1862BD, Text_1862EF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AA9DC
 	msgbox Text_1862F8, 6
 	end
@@ -5712,7 +5712,7 @@ EventScript_1AA9DC:: @ 81AA9DC
 Route14_EventScript_1AA9F3:: @ 81AA9F3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_DONALD, 0, Text_1860D9, Text_18610A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAA1A
 	msgbox Text_18611D, 6
 	end
@@ -5725,7 +5725,7 @@ EventScript_1AAA1A:: @ 81AAA1A
 Route14_EventScript_1AAA31:: @ 81AAA31
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_BENNY, 0, Text_18618E, Text_1861B3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAA58
 	msgbox Text_1861BE, 6
 	end
@@ -5738,7 +5738,7 @@ EventScript_1AAA58:: @ 81AAA58
 Route14_EventScript_1AAA6F:: @ 81AAA6F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_CARTER, 0, Text_185E4D, Text_185E81
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAA96
 	msgbox Text_185E9C, 6
 	end
@@ -5751,7 +5751,7 @@ EventScript_1AAA96:: @ 81AAA96
 Route14_EventScript_1AAAAD:: @ 81AAAAD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_MITCH, 0, Text_185EDF, Text_185F0B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAAD4
 	msgbox Text_185F1A, 6
 	end
@@ -5764,7 +5764,7 @@ EventScript_1AAAD4:: @ 81AAAD4
 Route14_EventScript_1AAAEB:: @ 81AAAEB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_BECK, 0, Text_185F46, Text_185FAE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAB12
 	msgbox Text_185FBB, 6
 	end
@@ -5777,7 +5777,7 @@ EventScript_1AAB12:: @ 81AAB12
 Route14_EventScript_1AAB29:: @ 81AAB29
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_MARLON, 0, Text_186021, Text_18607C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAB50
 	msgbox Text_186091, 6
 	end
@@ -5790,7 +5790,7 @@ EventScript_1AAB50:: @ 81AAB50
 Route14_EventScript_1AAB67:: @ 81AAB67
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_KIRI_JAN, 0, Text_1863B7, Text_1863EA, Text_18642E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAB92
 	msgbox Text_18640D, 6
 	end
@@ -5803,7 +5803,7 @@ EventScript_1AAB92:: @ 81AAB92
 Route14_EventScript_1AABAD:: @ 81AABAD
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_KIRI_JAN, 0, Text_18645B, Text_186487, Text_1864D3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AABD8
 	msgbox Text_18649C, 6
 	end
@@ -5816,7 +5816,7 @@ EventScript_1AABD8:: @ 81AABD8
 Route15_EventScript_1AABF3:: @ 81AABF3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_ERNEST, 0, Text_1868B6, Text_1868E8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAC1A
 	msgbox Text_1868F1, 6
 	end
@@ -5829,7 +5829,7 @@ EventScript_1AAC1A:: @ 81AAC1A
 Route15_EventScript_1AAC31:: @ 81AAC31
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_ALEX, 0, Text_186936, Text_186968
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAC58
 	msgbox Text_18697C, 6
 	end
@@ -5842,7 +5842,7 @@ EventScript_1AAC58:: @ 81AAC58
 Route15_EventScript_1AAC6F:: @ 81AAC6F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_GRACE, 0, Text_18678B, Text_1867C1
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAC96
 	msgbox Text_1867DA, 6
 	end
@@ -5855,7 +5855,7 @@ EventScript_1AAC96:: @ 81AAC96
 Route15_EventScript_1AACAD:: @ 81AACAD
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BEAUTY_OLIVIA, 0, Text_18680C, Text_186841
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AACD4
 	msgbox Text_18686F, 6
 	end
@@ -5868,7 +5868,7 @@ EventScript_1AACD4:: @ 81AACD4
 Route15_EventScript_1AACEB:: @ 81AACEB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_EDWIN, 0, Text_18664F, Text_18667A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAD12
 	msgbox Text_18668D, 6
 	end
@@ -5881,7 +5881,7 @@ EventScript_1AAD12:: @ 81AAD12
 Route15_EventScript_1AAD29:: @ 81AAD29
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_CHESTER, 0, Text_1866D1, Text_186707
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAD50
 	msgbox Text_18671A, 6
 	end
@@ -5894,7 +5894,7 @@ EventScript_1AAD50:: @ 81AAD50
 Route15_EventScript_1AAD67:: @ 81AAD67
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_YAZMIN, 0, Text_186A22, Text_186A40
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAD8E
 	msgbox Text_186A55, 6
 	end
@@ -5907,7 +5907,7 @@ EventScript_1AAD8E:: @ 81AAD8E
 Route15_EventScript_1AADA5:: @ 81AADA5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_KINDRA, 0, Text_18650B, Text_186549
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AADCC
 	msgbox Text_18655A, 6
 	end
@@ -5920,7 +5920,7 @@ EventScript_1AADCC:: @ 81AADCC
 Route15_EventScript_1AADE3:: @ 81AADE3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_BECKY, 0, Text_1865D3, Text_186612
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAE0A
 	msgbox Text_18661D, 6
 	end
@@ -5933,7 +5933,7 @@ EventScript_1AAE0A:: @ 81AAE0A
 Route15_EventScript_1AAE21:: @ 81AAE21
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_CELIA, 0, Text_1869BA, Text_1869E6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAE48
 	msgbox Text_1869F4, 6
 	end
@@ -5946,7 +5946,7 @@ EventScript_1AAE48:: @ 81AAE48
 Route15_EventScript_1AAE5F:: @ 81AAE5F
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_CRUSH_KIN_RON_MYA, 0, Text_186A95, Text_186ACB, Text_186B46
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAE8A
 	msgbox Text_186B0A, 6
 	end
@@ -5959,7 +5959,7 @@ EventScript_1AAE8A:: @ 81AAE8A
 Route15_EventScript_1AAEA5:: @ 81AAEA5
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_CRUSH_KIN_RON_MYA, 0, Text_186B89, Text_186BB1, Text_186BFE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAED0
 	msgbox Text_186BD2, 6
 	end
@@ -5972,7 +5972,7 @@ EventScript_1AAED0:: @ 81AAED0
 Route16_EventScript_1AAEEB:: @ 81AAEEB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_LAO, 0, Text_186C4D, Text_186C5F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAF12
 	msgbox Text_186C75, 6
 	end
@@ -5985,7 +5985,7 @@ EventScript_1AAF12:: @ 81AAF12
 Route16_EventScript_1AAF29:: @ 81AAF29
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_HIDEO, 0, Text_186D39, Text_186D52
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAF50
 	msgbox Text_186D5A, 6
 	end
@@ -5998,7 +5998,7 @@ EventScript_1AAF50:: @ 81AAF50
 Route16_EventScript_1AAF67:: @ 81AAF67
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_RUBEN, 0, Text_186E86, Text_186EB4
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAF8E
 	msgbox Text_186EC7, 6
 	end
@@ -6011,7 +6011,7 @@ EventScript_1AAF8E:: @ 81AAF8E
 Route16_EventScript_1AAFA5:: @ 81AAFA5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_KOJI, 0, Text_186CA2, Text_186CBB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AAFCC
 	msgbox Text_186CC5, 6
 	end
@@ -6024,7 +6024,7 @@ EventScript_1AAFCC:: @ 81AAFCC
 Route16_EventScript_1AAFE3:: @ 81AAFE3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_LUKE, 0, Text_186CE5, Text_186D06
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB00A
 	msgbox Text_186D16, 6
 	end
@@ -6037,7 +6037,7 @@ EventScript_1AB00A:: @ 81AB00A
 Route16_EventScript_1AB021:: @ 81AB021
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_CAMRON, 0, Text_186DD9, Text_186E0D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB048
 	msgbox Text_186E1C, 6
 	end
@@ -6050,7 +6050,7 @@ EventScript_1AB048:: @ 81AB048
 Route16_EventScript_1AB05F:: @ 81AB05F
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_LEA_JED, 0, Text_186FBD, Text_186FFA, Text_187057
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB08A
 	msgbox Text_187027, 6
 	end
@@ -6063,7 +6063,7 @@ EventScript_1AB08A:: @ 81AB08A
 Route16_EventScript_1AB0A5:: @ 81AB0A5
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_LEA_JED, 0, Text_187097, Text_1870CC, Text_187120
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB0D0
 	msgbox Text_1870F9, 6
 	end
@@ -6076,7 +6076,7 @@ EventScript_1AB0D0:: @ 81AB0D0
 Route17_EventScript_1AB0EB:: @ 81AB0EB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_BILLY, 0, Text_1872BD, Text_1872E3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB112
 	msgbox Text_1872EB, 6
 	end
@@ -6089,7 +6089,7 @@ EventScript_1AB112:: @ 81AB112
 Route17_EventScript_1AB129:: @ 81AB129
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_NIKOLAS, 0, Text_18730A, Text_187325
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB150
 	msgbox Text_187333, 6
 	end
@@ -6102,7 +6102,7 @@ EventScript_1AB150:: @ 81AB150
 Route17_EventScript_1AB167:: @ 81AB167
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_JAXON, 0, Text_187456, Text_187472
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB18E
 	msgbox Text_187479, 6
 	end
@@ -6115,7 +6115,7 @@ EventScript_1AB18E:: @ 81AB18E
 Route17_EventScript_1AB1A5:: @ 81AB1A5
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_WILLIAM, 0, Text_18749B, Text_1874B6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB1CC
 	msgbox Text_1874C9, 6
 	end
@@ -6128,7 +6128,7 @@ EventScript_1AB1CC:: @ 81AB1CC
 Route17_EventScript_1AB1E3:: @ 81AB1E3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_RAUL, 0, Text_18717E, Text_1871AE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB20A
 	msgbox Text_1871BA, 6
 	end
@@ -6141,7 +6141,7 @@ EventScript_1AB20A:: @ 81AB20A
 Route17_EventScript_1AB221:: @ 81AB221
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_ISAIAH, 0, Text_187228, Text_187254
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB248
 	msgbox Text_18725A, 6
 	end
@@ -6154,7 +6154,7 @@ EventScript_1AB248:: @ 81AB248
 Route17_EventScript_1AB25F:: @ 81AB25F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_ZEEK, 0, Text_187362, Text_187395
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB286
 	msgbox Text_18739F, 6
 	end
@@ -6167,7 +6167,7 @@ EventScript_1AB286:: @ 81AB286
 Route17_EventScript_1AB29D:: @ 81AB29D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_JAMAL, 0, Text_1873D1, Text_1873EB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB2C4
 	msgbox Text_1873FF, 6
 	end
@@ -6180,7 +6180,7 @@ EventScript_1AB2C4:: @ 81AB2C4
 Route17_EventScript_1AB2DB:: @ 81AB2DB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CUE_BALL_COREY, 0, Text_18741D, Text_187429
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB302
 	msgbox Text_187432, 6
 	end
@@ -6193,7 +6193,7 @@ EventScript_1AB302:: @ 81AB302
 Route17_EventScript_1AB319:: @ 81AB319
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIKER_VIRGIL, 0, Text_18727D, Text_187295
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB340
 	msgbox Text_1872A5, 6
 	end
@@ -6206,7 +6206,7 @@ EventScript_1AB340:: @ 81AB340
 Route18_EventScript_1AB357:: @ 81AB357
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_WILTON, 0, Text_187640, Text_187672
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB37E
 	msgbox Text_187677, 6
 	end
@@ -6219,7 +6219,7 @@ EventScript_1AB37E:: @ 81AB37E
 Route18_EventScript_1AB395:: @ 81AB395
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_RAMIRO, 0, Text_18768C, Text_1876B3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB3BC
 	msgbox Text_1876C5, 6
 	end
@@ -6232,7 +6232,7 @@ EventScript_1AB3BC:: @ 81AB3BC
 Route18_EventScript_1AB3D3:: @ 81AB3D3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_JACOB, 0, Text_187704, Text_187726
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB3FA
 	msgbox Text_18772C, 6
 	end
@@ -6245,7 +6245,7 @@ EventScript_1AB3FA:: @ 81AB3FA
 Route19_EventScript_1AB411:: @ 81AB411
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_RICHARD, 0, Text_1877A3, Text_1877DF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB438
 	msgbox Text_1877EE, 6
 	end
@@ -6258,7 +6258,7 @@ EventScript_1AB438:: @ 81AB438
 Route19_EventScript_1AB44F:: @ 81AB44F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_REECE, 0, Text_187811, Text_18783E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB476
 	msgbox Text_187852, 6
 	end
@@ -6271,7 +6271,7 @@ EventScript_1AB476:: @ 81AB476
 Route19_EventScript_1AB48D:: @ 81AB48D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_MATTHEW, 0, Text_187884, Text_1878A5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB4B4
 	msgbox Text_1878B1, 6
 	end
@@ -6284,7 +6284,7 @@ EventScript_1AB4B4:: @ 81AB4B4
 Route19_EventScript_1AB4CB:: @ 81AB4CB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_DOUGLAS, 0, Text_1878DD, Text_1878F8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB4F2
 	msgbox Text_1878FE, 6
 	end
@@ -6297,7 +6297,7 @@ EventScript_1AB4F2:: @ 81AB4F2
 Route19_EventScript_1AB509:: @ 81AB509
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_DAVID, 0, Text_187925, Text_187955
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB530
 	msgbox Text_18795B, 6
 	end
@@ -6310,7 +6310,7 @@ EventScript_1AB530:: @ 81AB530
 Route19_EventScript_1AB547:: @ 81AB547
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_TONY, 0, Text_187985, Text_1879C3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB56E
 	msgbox Text_1879D3, 6
 	end
@@ -6323,7 +6323,7 @@ EventScript_1AB56E:: @ 81AB56E
 Route19_EventScript_1AB585:: @ 81AB585
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_AXLE, 0, Text_187AFA, Text_187B25
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB5AC
 	msgbox Text_187B35, 6
 	end
@@ -6336,7 +6336,7 @@ EventScript_1AB5AC:: @ 81AB5AC
 Route19_EventScript_1AB5C3:: @ 81AB5C3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_ANYA, 0, Text_187A11, Text_187A44
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB5EA
 	msgbox Text_187A50, 6
 	end
@@ -6349,7 +6349,7 @@ EventScript_1AB5EA:: @ 81AB5EA
 Route19_EventScript_1AB601:: @ 81AB601
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_ALICE, 0, Text_187A9E, Text_187AC1
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB628
 	msgbox Text_187ACA, 6
 	end
@@ -6362,7 +6362,7 @@ EventScript_1AB628:: @ 81AB628
 Route19_EventScript_1AB63F:: @ 81AB63F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_CONNIE, 0, Text_187B5D, Text_187B85
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB666
 	msgbox Text_187B94, 6
 	end
@@ -6375,7 +6375,7 @@ EventScript_1AB666:: @ 81AB666
 Route19_EventScript_1AB67D:: @ 81AB67D
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_LIA_LUC, 0, Text_187C32, Text_187C6F, Text_187CF2
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB6A8
 	msgbox Text_187C9E, 6
 	end
@@ -6388,7 +6388,7 @@ EventScript_1AB6A8:: @ 81AB6A8
 Route19_EventScript_1AB6C3:: @ 81AB6C3
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_LIA_LUC, 0, Text_187D45, Text_187D7E, Text_187DE8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB6EE
 	msgbox Text_187DAD, 6
 	end
@@ -6401,7 +6401,7 @@ EventScript_1AB6EE:: @ 81AB6EE
 Route20_EventScript_1AB709:: @ 81AB709
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_BARRY, 0, Text_187E40, Text_187E7B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB730
 	msgbox Text_187E83, 6
 	end
@@ -6414,7 +6414,7 @@ EventScript_1AB730:: @ 81AB730
 Route20_EventScript_1AB747:: @ 81AB747
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_DEAN, 0, Text_187FDB, Text_187FF7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB76E
 	msgbox Text_187FFE, 6
 	end
@@ -6427,7 +6427,7 @@ EventScript_1AB76E:: @ 81AB76E
 Route20_EventScript_1AB785:: @ 81AB785
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_DARRIN, 0, Text_18802E, Text_18805C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB7AC
 	msgbox Text_18806D, 6
 	end
@@ -6440,7 +6440,7 @@ EventScript_1AB7AC:: @ 81AB7AC
 Route20_EventScript_1AB7C3:: @ 81AB7C3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_TIFFANY, 0, Text_187F24, Text_187F5A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB7EA
 	msgbox Text_187F61, 6
 	end
@@ -6453,7 +6453,7 @@ EventScript_1AB7EA:: @ 81AB7EA
 Route20_EventScript_1AB801:: @ 81AB801
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_NORA, 0, Text_1880F8, Text_188119
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB828
 	msgbox Text_188139, 6
 	end
@@ -6466,7 +6466,7 @@ EventScript_1AB828:: @ 81AB828
 Route20_EventScript_1AB83F:: @ 81AB83F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_MELISSA, 0, Text_188218, Text_18825C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB866
 	msgbox Text_18827B, 6
 	end
@@ -6479,7 +6479,7 @@ EventScript_1AB866:: @ 81AB866
 Route20_EventScript_1AB87D:: @ 81AB87D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_SHIRLEY, 0, Text_187EBB, Text_187EED
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB8A4
 	msgbox Text_187EF6, 6
 	end
@@ -6492,7 +6492,7 @@ EventScript_1AB8A4:: @ 81AB8A4
 Route20_EventScript_1AB8BB:: @ 81AB8BB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_ROGER, 0, Text_18808E, Text_1880AB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB8E2
 	msgbox Text_1880C8, 6
 	end
@@ -6505,7 +6505,7 @@ EventScript_1AB8E2:: @ 81AB8E2
 Route20_EventScript_1AB8F9:: @ 81AB8F9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_MISSY, 0, Text_188165, Text_1881A3
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB920
 	msgbox Text_1881B8, 6
 	end
@@ -6518,7 +6518,7 @@ EventScript_1AB920:: @ 81AB920
 Route20_EventScript_1AB937:: @ 81AB937
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_IRENE, 0, Text_187F78, Text_187F92
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB95E
 	msgbox Text_187FA3, 6
 	end
@@ -6531,7 +6531,7 @@ EventScript_1AB95E:: @ 81AB95E
 Route21_North_EventScript_1AB975:: @ 81AB975
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_RONALD, 0, Text_18835A, Text_188383
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB99C
 	msgbox Text_188389, 6
 	end
@@ -6544,7 +6544,7 @@ EventScript_1AB99C:: @ 81AB99C
 Route21_South_EventScript_1AB9B3:: @ 81AB9B3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_CLAUDE, 0, Text_1885D8, Text_1885F8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AB9DA
 	msgbox Text_188632, 6
 	end
@@ -6557,7 +6557,7 @@ EventScript_1AB9DA:: @ 81AB9DA
 Route21_North_EventScript_1AB9F1:: @ 81AB9F1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_WADE, 0, Text_1883C6, Text_1883E9
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABA18
 	msgbox Text_18841D, 6
 	end
@@ -6570,7 +6570,7 @@ EventScript_1ABA18:: @ 81ABA18
 Route21_South_EventScript_1ABA2F:: @ 81ABA2F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_NOLAN, 0, Text_18868C, Text_1886AE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABA56
 	msgbox Text_1886C5, 6
 	end
@@ -6583,7 +6583,7 @@ EventScript_1ABA56:: @ 81ABA56
 Route21_North_EventScript_1ABA6D:: @ 81ABA6D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_SPENCER, 0, Text_18843C, Text_18845F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABA94
 	msgbox Text_188465, 6
 	end
@@ -6596,7 +6596,7 @@ EventScript_1ABA94:: @ 81ABA94
 Route21_South_EventScript_1ABAAB:: @ 81ABAAB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_JACK, 0, Text_1884D4, Text_1884F0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABAD2
 	msgbox Text_1884FF, 6
 	end
@@ -6609,7 +6609,7 @@ EventScript_1ABAD2:: @ 81ABAD2
 Route21_South_EventScript_1ABAE9:: @ 81ABAE9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_JEROME, 0, Text_18851F, Text_188543
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABB10
 	msgbox Text_188555, 6
 	end
@@ -6622,7 +6622,7 @@ EventScript_1ABB10:: @ 81ABB10
 Route21_South_EventScript_1ABB27:: @ 81ABB27
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_ROLAND, 0, Text_188592, Text_1885B2
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABB4E
 	msgbox Text_1885BF, 6
 	end
@@ -6635,7 +6635,7 @@ EventScript_1ABB4E:: @ 81ABB4E
 Route21_North_EventScript_1ABB65:: @ 81ABB65
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_LIL_IAN, 0, Text_1886E2, Text_188712, Text_18875E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABB90
 	msgbox Text_188734, 6
 	end
@@ -6648,7 +6648,7 @@ EventScript_1ABB90:: @ 81ABB90
 Route21_North_EventScript_1ABBAB:: @ 81ABBAB
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_LIL_IAN, 0, Text_1887B4, Text_1887F1, Text_188850
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABBD6
 	msgbox Text_188812, 6
 	end
@@ -6661,7 +6661,7 @@ EventScript_1ABBD6:: @ 81ABBD6
 OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_MARIA, 0, Text_18961F, Text_18964D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABC18
 	msgbox Text_189657, 6
 	end
@@ -6674,7 +6674,7 @@ EventScript_1ABC18:: @ 81ABC18
 OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_ABIGAIL, 0, Text_18968C, Text_1896AC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABC56
 	msgbox Text_1896C1, 6
 	end
@@ -6687,7 +6687,7 @@ EventScript_1ABC56:: @ 81ABC56
 OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_FINN, 0, Text_1896F9, Text_189728
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABC94
 	msgbox Text_189740, 6
 	end
@@ -6700,7 +6700,7 @@ EventScript_1ABC94:: @ 81ABC94
 OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_GARRETT, 0, Text_189767, Text_1897A4
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABCD2
 	msgbox Text_1897C5, 6
 	end
@@ -6713,7 +6713,7 @@ EventScript_1ABCD2:: @ 81ABCD2
 OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_TOMMY, 0, Text_1897FF, Text_189833
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABD10
 	msgbox Text_18984B, 6
 	end
@@ -6726,7 +6726,7 @@ EventScript_1ABD10:: @ 81ABD10
 OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CRUSH_GIRL_SHARON, 0, Text_189883, Text_1898AB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABD4E
 	msgbox Text_1898C4, 6
 	end
@@ -6739,7 +6739,7 @@ EventScript_1ABD4E:: @ 81ABD4E
 OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CRUSH_GIRL_TANYA, 0, Text_1898F0, Text_18991B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABD8C
 	msgbox Text_18992C, 6
 	end
@@ -6752,7 +6752,7 @@ EventScript_1ABD8C:: @ 81ABD8C
 OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_SHEA, 0, Text_189950, Text_18998C
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABDCA
 	msgbox Text_189998, 6
 	end
@@ -6765,7 +6765,7 @@ EventScript_1ABDCA:: @ 81ABDCA
 OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BLACK_BELT_HUGH, 0, Text_1899CE, Text_189A0A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABE08
 	msgbox Text_189A13, 6
 	end
@@ -6778,7 +6778,7 @@ EventScript_1ABE08:: @ 81ABE08
 OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CAMPER_BRYCE, 0, Text_189A53, Text_189A92
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABE46
 	msgbox Text_189A9F, 6
 	end
@@ -6791,7 +6791,7 @@ EventScript_1ABE46:: @ 81ABE46
 OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_CLAIRE, 0, Text_189ACB, Text_189B0B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABE84
 	msgbox Text_189B24, 6
 	end
@@ -6804,7 +6804,7 @@ EventScript_1ABE84:: @ 81ABE84
 OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_CRUSH_KIN_MIK_KIA, 0, Text_189B4D, Text_189B84, Text_189BDE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABEC6
 	msgbox Text_189BA3, 6
 	end
@@ -6817,7 +6817,7 @@ EventScript_1ABEC6:: @ 81ABEC6
 OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_CRUSH_KIN_MIK_KIA, 0, Text_189C33, Text_189C62, Text_189CAB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABF0C
 	msgbox Text_189C7E, 6
 	end
@@ -6830,7 +6830,7 @@ EventScript_1ABF0C:: @ 81ABF0C
 OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_AMARA, 0, Text_189D5A, Text_189D8B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABF4E
 	msgbox Text_189DA3, 6
 	end
@@ -6843,7 +6843,7 @@ EventScript_1ABF4E:: @ 81ABF4E
 ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_AROMA_LADY_NIKKI, 0, Text_189E42, Text_189E72
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABF8C
 	msgbox Text_189E9E, 6
 	end
@@ -6856,7 +6856,7 @@ EventScript_1ABF8C:: @ 81ABF8C
 ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_AROMA_LADY_VIOLET, 0, Text_189ED4, Text_189EFA
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ABFCA
 	msgbox Text_189F21, 6
 	end
@@ -6869,7 +6869,7 @@ EventScript_1ABFCA:: @ 81ABFCA
 ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TUBER_AMIRA, 0, Text_189F63, Text_189F9A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC008
 	msgbox Text_189FA8, 6
 	end
@@ -6882,7 +6882,7 @@ EventScript_1AC008:: @ 81AC008
 ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TUBER_ALEXIS, 0, Text_189FDB, Text_189FEE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC046
 	msgbox Text_18A000, 6
 	end
@@ -6895,7 +6895,7 @@ EventScript_1AC046:: @ 81AC046
 ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_TISHA, 0, Text_18A01F, Text_18A053
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC084
 	msgbox Text_18A082, 6
 	end
@@ -6908,7 +6908,7 @@ EventScript_1AC084:: @ 81AC084
 ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_JOY_MEG, 0, Text_18A0C4, Text_18A0F7, Text_18A138
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC0C6
 	msgbox Text_18A106, 6
 	end
@@ -6921,7 +6921,7 @@ EventScript_1AC0C6:: @ 81AC0C6
 ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_JOY_MEG, 0, Text_18A179, Text_18A1A3, Text_18A1CD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC10C
 	msgbox Text_18A1B2, 6
 	end
@@ -6934,7 +6934,7 @@ EventScript_1AC10C:: @ 81AC10C
 FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PAINTER_DAISY, 0, Text_18A3E2, Text_18A40E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC14E
 	msgbox Text_18A430, 6
 	end
@@ -6947,7 +6947,7 @@ EventScript_1AC14E:: @ 81AC14E
 FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PAINTER_CELINA, 0, Text_18A461, Text_18A49E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC18C
 	msgbox Text_18A4C6, 6
 	end
@@ -6960,7 +6960,7 @@ EventScript_1AC18C:: @ 81AC18C
 FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PAINTER_RAYNA, 0, Text_18A50E, Text_18A535
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC1CA
 	msgbox Text_18A555, 6
 	end
@@ -6973,7 +6973,7 @@ EventScript_1AC1CA:: @ 81AC1CA
 FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LADY_JACKI, 0, Text_18A5B9, Text_18A5EE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC208
 	msgbox Text_18A601, 6
 	end
@@ -6986,7 +6986,7 @@ EventScript_1AC208:: @ 81AC208
 FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_LADY_GILLIAN, 0, Text_18A645, Text_18A67F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC246
 	msgbox Text_18A699, 6
 	end
@@ -6999,7 +6999,7 @@ EventScript_1AC246:: @ 81AC246
 FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_DESTIN, 0, Text_18A6DA, Text_18A6FE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC284
 	msgbox Text_18A715, 6
 	end
@@ -7012,7 +7012,7 @@ EventScript_1AC284:: @ 81AC284
 FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_TOBY, 0, Text_18A74A, Text_18A786
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC2C2
 	msgbox Text_18A7AC, 6
 	end
@@ -7025,7 +7025,7 @@ EventScript_1AC2C2:: @ 81AC2C2
 FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PKMN_BREEDER_ALIZE, 0, Text_18AAD5, Text_18AB0B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC300
 	msgbox Text_18AB37, 6
 	end
@@ -7038,7 +7038,7 @@ EventScript_1AC300:: @ 81AC300
 FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_MILO, 0, Text_18AE50, Text_18AEA8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC33E
 	msgbox Text_18AEB6, 6
 	end
@@ -7051,7 +7051,7 @@ EventScript_1AC33E:: @ 81AC33E
 FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_CHAZ, 0, Text_18AEDC, Text_18AF39
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC37C
 	msgbox Text_18AF45, 6
 	end
@@ -7064,7 +7064,7 @@ EventScript_1AC37C:: @ 81AC37C
 FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BIRD_KEEPER_HAROLD, 0, Text_18AF72, Text_18AFCC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC3BA
 	msgbox Text_18AFF2, 6
 	end
@@ -7077,7 +7077,7 @@ EventScript_1AC3BA:: @ 81AC3BA
 SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_FISHERMAN_TYLOR, 0, Text_18B400, Text_18B43B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC3F8
 	msgbox Text_18B451, 6
 	end
@@ -7090,7 +7090,7 @@ EventScript_1AC3F8:: @ 81AC3F8
 SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_MYMO, 0, Text_18B48F, Text_18B4C5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC436
 	msgbox Text_18B4D1, 6
 	end
@@ -7103,7 +7103,7 @@ EventScript_1AC436:: @ 81AC436
 SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_NICOLE, 0, Text_18B4FA, Text_18B539
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC474
 	msgbox Text_18B573, 6
 	end
@@ -7116,7 +7116,7 @@ EventScript_1AC474:: @ 81AC474
 SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_AVA_GEB, 0, Text_18B5C8, Text_18B5F4, Text_18B660
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC4B6
 	msgbox Text_18B62E, 6
 	end
@@ -7129,7 +7129,7 @@ EventScript_1AC4B6:: @ 81AC4B6
 SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_SIS_AND_BRO_AVA_GEB, 0, Text_18B6C1, Text_18B6EF, Text_18B762
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC4FC
 	msgbox Text_18B720, 6
 	end
@@ -7142,7 +7142,7 @@ EventScript_1AC4FC:: @ 81AC4FC
 SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_JACLYN, 0, Text_18B7B0, Text_18B7F0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC53E
 	msgbox Text_18B7FD, 6
 	end
@@ -7155,7 +7155,7 @@ EventScript_1AC53E:: @ 81AC53E
 SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_AROMA_LADY_ROSE, 0, Text_18B896, Text_18B8C8
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC57C
 	msgbox Text_18B8F7, 6
 	end
@@ -7168,7 +7168,7 @@ EventScript_1AC57C:: @ 81AC57C
 SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_EDWARD, 0, Text_18B959, Text_18B988
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC5BA
 	msgbox Text_18B9A5, 6
 	end
@@ -7181,7 +7181,7 @@ EventScript_1AC5BA:: @ 81AC5BA
 SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_MALE_SAMIR, 0, Text_18B9EC, Text_18BA47
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC5F8
 	msgbox Text_18BA57, 6
 	end
@@ -7194,7 +7194,7 @@ EventScript_1AC5F8:: @ 81AC5F8
 SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SWIMMER_FEMALE_DENISE, 0, Text_18BA86, Text_18BAC0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC636
 	msgbox Text_18BAE0, 6
 	end
@@ -7207,7 +7207,7 @@ EventScript_1AC636:: @ 81AC636
 SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_MIU_MIA, 0, Text_18BBBA, Text_18BBE2, Text_18BC24
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC678
 	msgbox Text_18BBF6, 6
 	end
@@ -7220,7 +7220,7 @@ EventScript_1AC678:: @ 81AC678
 SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_TWINS_MIU_MIA, 0, Text_18BC5A, Text_18BC84, Text_18BCCF
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC6BE
 	msgbox Text_18BCAE, 6
 	end
@@ -7233,7 +7233,7 @@ EventScript_1AC6BE:: @ 81AC6BE
 SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_EARL, 0, Text_18BB2D, Text_18BB62
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC700
 	msgbox Text_18BB8B, 6
 	end
@@ -7246,7 +7246,7 @@ EventScript_1AC700:: @ 81AC700
 SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_RUIN_MANIAC_STANLY, 0, Text_18BE5D, Text_18BE9B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC73E
 	msgbox Text_18BEA0, 6
 	end
@@ -7259,7 +7259,7 @@ EventScript_1AC73E:: @ 81AC73E
 SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_RUIN_MANIAC_FOSTER, 0, Text_18BF05, Text_18BF33
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC77C
 	msgbox Text_18BF6C, 6
 	end
@@ -7272,7 +7272,7 @@ EventScript_1AC77C:: @ 81AC77C
 SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_RUIN_MANIAC_LARRY, 0, Text_18BFC5, Text_18C03B
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC7BA
 	msgbox Text_18C04C, 6
 	end
@@ -7285,7 +7285,7 @@ EventScript_1AC7BA:: @ 81AC7BA
 SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_DARYL, 0, Text_18C09C, Text_18C0BB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC7F8
 	msgbox Text_18C0EA, 6
 	end
@@ -7298,7 +7298,7 @@ EventScript_1AC7F8:: @ 81AC7F8
 SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_POKEMANIAC_HECTOR, 0, Text_18C10A, Text_18C140
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC836
 	msgbox Text_18C17A, 6
 	end
@@ -7311,7 +7311,7 @@ EventScript_1AC836:: @ 81AC836
 SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_DARIO, 0, Text_18C1ED, Text_18C205
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC874
 	msgbox Text_18C20E, 6
 	end
@@ -7324,7 +7324,7 @@ EventScript_1AC874:: @ 81AC874
 SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PSYCHIC_RODETTE, 0, Text_18C283, Text_18C2BC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC8B2
 	msgbox Text_18C2D5, 6
 	end
@@ -7337,7 +7337,7 @@ EventScript_1AC8B2:: @ 81AC8B2
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_AROMA_LADY_MIAH, 0, Text_18C3BC, Text_18C3E7
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC8F0
 	msgbox Text_18C3FF, 6
 	end
@@ -7350,7 +7350,7 @@ EventScript_1AC8F0:: @ 81AC8F0
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_EVE_JON, 0, Text_18C632, Text_18C662, Text_18C6AB
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC932
 	msgbox Text_18C683, 6
 	end
@@ -7363,7 +7363,7 @@ EventScript_1AC932:: @ 81AC932
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_YOUNG_COUPLE_EVE_JON, 0, Text_18C700, Text_18C73B, Text_18C7BD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC978
 	msgbox Text_18C773, 6
 	end
@@ -7376,7 +7376,7 @@ EventScript_1AC978:: @ 81AC978
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_MASON, 0, Text_18C44B, Text_18C473
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC9BA
 	msgbox Text_18C4BA, 6
 	end
@@ -7389,7 +7389,7 @@ EventScript_1AC9BA:: @ 81AC9BA
 SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PKMN_RANGER_NICOLAS, 0, Text_18C500, Text_18C543
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1AC9F8
 	msgbox Text_18C54B, 6
 	end
@@ -7402,7 +7402,7 @@ EventScript_1AC9F8:: @ 81AC9F8
 SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PKMN_RANGER_MADELINE, 0, Text_18C5AA, Text_18C5CD
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACA36
 	msgbox Text_18C5F5, 6
 	end
@@ -7415,7 +7415,7 @@ EventScript_1ACA36:: @ 81ACA36
 SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CRUSH_GIRL_CYNDY, 0, Text_18C887, Text_18C8A6
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACA74
 	msgbox Text_18C8C2, 6
 	end
@@ -7428,7 +7428,7 @@ EventScript_1ACA74:: @ 81ACA74
 SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TAMER_EVAN, 0, Text_18C8FD, Text_18C980
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACAB2
 	msgbox Text_18C999, 6
 	end
@@ -7441,7 +7441,7 @@ EventScript_1ACAB2:: @ 81ACAB2
 SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PKMN_RANGER_JACKSON, 0, Text_18CA2F, Text_18CA6F
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACAF0
 	msgbox Text_18CA9C, 6
 	end
@@ -7454,7 +7454,7 @@ EventScript_1ACAF0:: @ 81ACAF0
 SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PKMN_RANGER_KATELYN, 0, Text_18CB16, Text_18CB3E
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACB2E
 	msgbox Text_18CB6C, 6
 	end
@@ -7467,7 +7467,7 @@ EventScript_1ACB2E:: @ 81ACB2E
 SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_COOLTRAINER_LEROY, 0, Text_18CBB4, Text_18CBE0
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACB6C
 	msgbox Text_18CC09, 6
 	end
@@ -7480,7 +7480,7 @@ EventScript_1ACB6C:: @ 81ACB6C
 SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_COOLTRAINER_MICHELLE, 0, Text_18CC4F, Text_18CCAE
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACBAA
 	msgbox Text_18CCEA, 6
 	end
@@ -7493,7 +7493,7 @@ EventScript_1ACBAA:: @ 81ACBAA
 SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_COOL_COUPLE_LEX_NYA, 0, Text_18CD49, Text_18CD75, Text_18CDE2
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACBEC
 	msgbox Text_18CD9C, 6
 	end
@@ -7506,7 +7506,7 @@ EventScript_1ACBEC:: @ 81ACBEC
 SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
 	trainerbattle TRAINER_BATTLE_DOUBLE, TRAINER_COOL_COUPLE_LEX_NYA, 0, Text_18CE20, Text_18CE5A, Text_18CEF4
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACC32
 	msgbox Text_18CE78, 6
 	end
@@ -7519,7 +7519,7 @@ EventScript_1ACC32:: @ 81ACC32
 SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_RUIN_MANIAC_BRANDON, 0, Text_18CFFB, Text_18D02A
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACC74
 	msgbox Text_18D061, 6
 	end
@@ -7532,7 +7532,7 @@ EventScript_1ACC74:: @ 81ACC74
 SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_RUIN_MANIAC_BENJAMIN, 0, Text_18D0D9, Text_18D108
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACCB2
 	msgbox Text_18D125, 6
 	end
@@ -7545,7 +7545,7 @@ EventScript_1ACCB2:: @ 81ACCB2
 SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PAINTER_EDNA, 0, Text_18D18F, Text_18D1B5
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACCF0
 	msgbox Text_18D1E3, 6
 	end
@@ -7558,7 +7558,7 @@ EventScript_1ACCF0:: @ 81ACCF0
 SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
 	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_GENTLEMAN_CLIFFORD, 0, Text_18D22F, Text_18D26D
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1ACD2E
 	msgbox Text_18D284, 6
 	end
@@ -7867,10 +7867,10 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	lockall
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_81B1D7D, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1B2926
 	checkmoney 50, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1B292B
 	playse SE_SHOP
 	takemoney 50, 0
@@ -7956,7 +7956,7 @@ EventScript_1B2951:: @ 81B2951
 	waitmovement 0
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	goto_if eq, EventScript_1B2B8E
 	message gUnknown_81B1EF8
 	waitmessage
@@ -7969,10 +7969,10 @@ EventScript_1B2994:: @ 81B2994
 	applymovement 1, Movement_1A75E1
 	waitmovement 0
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	goto_if eq, EventScript_1B29C6
 	message gUnknown_81B2025
 	waitmessage
@@ -8064,18 +8064,18 @@ EventScript_1B2B8E:: @ 81B2B8E
 	end
 
 EventScript_1B2B98:: @ 81B2B98
-	compare_var_to_value VAR_0x8004, 39
+	compare VAR_0x8004, 39
 	goto_if le, EventScript_1B2BC5
-	compare_var_to_value VAR_0x8004, 99
+	compare VAR_0x8004, 99
 	goto_if le, EventScript_1B2BE3
-	compare_var_to_value VAR_0x8004, 199
+	compare VAR_0x8004, 199
 	goto_if le, EventScript_1B2C01
-	compare_var_to_value VAR_0x8004, 200
+	compare VAR_0x8004, 200
 	goto_if ge, EventScript_1B2C1F
 	end
 
 EventScript_1B2BC5:: @ 81B2BC5
-	compare_var_to_value VAR_HOF_BRAG_STATE, 1
+	compare VAR_HOF_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 1
 	msgbox gUnknown_81B206E
@@ -8085,7 +8085,7 @@ EventScript_1B2BE2:: @ 81B2BE2
 	end
 
 EventScript_1B2BE3:: @ 81B2BE3
-	compare_var_to_value VAR_HOF_BRAG_STATE, 2
+	compare VAR_HOF_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 2
 	msgbox gUnknown_81B20CF
@@ -8095,7 +8095,7 @@ EventScript_1B2C00:: @ 81B2C00
 	end
 
 EventScript_1B2C01:: @ 81B2C01
-	compare_var_to_value VAR_HOF_BRAG_STATE, 3
+	compare VAR_HOF_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 3
 	msgbox gUnknown_81B2133
@@ -8105,7 +8105,7 @@ EventScript_1B2C1E:: @ 81B2C1E
 	end
 
 EventScript_1B2C1F:: @ 81B2C1F
-	compare_var_to_value VAR_HOF_BRAG_STATE, 4
+	compare VAR_HOF_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2C47
 	setvar VAR_HOF_BRAG_STATE, 4
 	msgbox gUnknown_81B21C4
@@ -8135,18 +8135,18 @@ EventScript_1B2C51:: @ 81B2C51
 	end
 
 EventScript_1B2C62:: @ 81B2C62
-	compare_var_to_value VAR_0x8005, 99
+	compare VAR_0x8005, 99
 	goto_if le, EventScript_1B2C8F
-	compare_var_to_value VAR_0x8005, 199
+	compare VAR_0x8005, 199
 	goto_if le, EventScript_1B2CAD
-	compare_var_to_value VAR_0x8005, 299
+	compare VAR_0x8005, 299
 	goto_if le, EventScript_1B2CCB
-	compare_var_to_value VAR_0x8005, 300
+	compare VAR_0x8005, 300
 	goto_if ge, EventScript_1B2CE9
 	end
 
 EventScript_1B2C8F:: @ 81B2C8F
-	compare_var_to_value VAR_EGG_BRAG_STATE, 1
+	compare VAR_EGG_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 1
 	msgbox gUnknown_81B2308
@@ -8156,7 +8156,7 @@ EventScript_1B2CAC:: @ 81B2CAC
 	end
 
 EventScript_1B2CAD:: @ 81B2CAD
-	compare_var_to_value VAR_EGG_BRAG_STATE, 2
+	compare VAR_EGG_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 2
 	msgbox gUnknown_81B2372
@@ -8166,7 +8166,7 @@ EventScript_1B2CCA:: @ 81B2CCA
 	end
 
 EventScript_1B2CCB:: @ 81B2CCB
-	compare_var_to_value VAR_EGG_BRAG_STATE, 3
+	compare VAR_EGG_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 3
 	msgbox gUnknown_81B23E0
@@ -8176,7 +8176,7 @@ EventScript_1B2CE8:: @ 81B2CE8
 	end
 
 EventScript_1B2CE9:: @ 81B2CE9
-	compare_var_to_value VAR_EGG_BRAG_STATE, 4
+	compare VAR_EGG_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2D11
 	setvar VAR_EGG_BRAG_STATE, 4
 	msgbox gUnknown_81B2448
@@ -8206,18 +8206,18 @@ EventScript_1B2D1B:: @ 81B2D1B
 	end
 
 EventScript_1B2D2C:: @ 81B2D2C
-	compare_var_to_value VAR_0x8006, 19
+	compare VAR_0x8006, 19
 	goto_if le, EventScript_1B2D59
-	compare_var_to_value VAR_0x8006, 49
+	compare VAR_0x8006, 49
 	goto_if le, EventScript_1B2D77
-	compare_var_to_value VAR_0x8006, 99
+	compare VAR_0x8006, 99
 	goto_if le, EventScript_1B2D95
-	compare_var_to_value VAR_0x8006, 100
+	compare VAR_0x8006, 100
 	goto_if ge, EventScript_1B2DB3
 	end
 
 EventScript_1B2D59:: @ 81B2D59
-	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 1
+	compare VAR_LINK_WIN_BRAG_STATE, 1
 	goto_if eq, EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 1
 	msgbox gUnknown_81B25A7
@@ -8227,7 +8227,7 @@ EventScript_1B2D76:: @ 81B2D76
 	end
 
 EventScript_1B2D77:: @ 81B2D77
-	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 2
+	compare VAR_LINK_WIN_BRAG_STATE, 2
 	goto_if eq, EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 2
 	msgbox gUnknown_81B2609
@@ -8237,7 +8237,7 @@ EventScript_1B2D94:: @ 81B2D94
 	end
 
 EventScript_1B2D95:: @ 81B2D95
-	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 3
+	compare VAR_LINK_WIN_BRAG_STATE, 3
 	goto_if eq, EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 3
 	msgbox gUnknown_81B267B
@@ -8247,7 +8247,7 @@ EventScript_1B2DB2:: @ 81B2DB2
 	end
 
 EventScript_1B2DB3:: @ 81B2DB3
-	compare_var_to_value VAR_LINK_WIN_BRAG_STATE, 4
+	compare VAR_LINK_WIN_BRAG_STATE, 4
 	goto_if eq, EventScript_1B2DDB
 	setvar VAR_LINK_WIN_BRAG_STATE, 4
 	msgbox gUnknown_81B26F6
@@ -8306,7 +8306,7 @@ ViridianCity_PokemonCenter_2F_MapScript4_1BB1B4:: @ 81BB1B4
 
 EventScript_1BB1BA:: @ 81BB1BA
 	specialvar VAR_RESULT, ValidateReceivedWonderCard
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB1CE
 	clearflag FLAG_HIDE_MG_DELIVERYMEN
 	return
@@ -8336,7 +8336,7 @@ CeladonCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
 LavenderTown_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
 ViridianCity_PokemonCenter_2F_EventScript_1BB1D2:: @ 81BB1D2
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	execram
@@ -8374,7 +8374,7 @@ ViridianCity_PokemonCenter_2F_MapScript2_1BB1ED:: @ 81BB1ED
 	.2byte 0
 
 EventScript_1BB227:: @ 81BB227
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_1BB236
 	turnobject VAR_0x8007, 3
 EventScript_1BB236:
@@ -8400,19 +8400,19 @@ TwoIsland_JoyfulGameCorner_MapScript4_1BB237:: @ 81BB237
 TwoIsland_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
 VermilionCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
 ViridianCity_PokemonCenter_2F_MapScript3_1BB237:: @ 81BB237
-	compare_var_to_value VAR_0x406F, 1
+	compare VAR_0x406F, 1
 	goto_if eq, EventScript_1BB285
-	compare_var_to_value VAR_0x406F, 2
+	compare VAR_0x406F, 2
 	goto_if eq, EventScript_1BB285
-	compare_var_to_value VAR_0x406F, 5
+	compare VAR_0x406F, 5
 	goto_if eq, EventScript_1BB285
-	compare_var_to_value VAR_0x406F, 3
+	compare VAR_0x406F, 3
 	goto_if eq, EventScript_1BB28B
-	compare_var_to_value VAR_0x406F, 6
+	compare VAR_0x406F, 6
 	goto_if eq, EventScript_1BB291
-	compare_var_to_value VAR_0x406F, 7
+	compare VAR_0x406F, 7
 	goto_if eq, EventScript_1BB297
-	compare_var_to_value VAR_0x406F, 8
+	compare VAR_0x406F, 8
 	goto_if eq, EventScript_1BB29D
 	end
 
@@ -8491,7 +8491,7 @@ EventScript_1BB315:: @ 81BB315
 	special sub_811390C
 	setvar VAR_0x406F, 0
 	textcolor 1
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_1BB40A
 	applymovement VAR_0x8007, Movement_1BB88F
 	waitmovement 0
@@ -8517,7 +8517,7 @@ EventScript_1BB367:: @ 81BB367
 	special sub_811390C
 	setvar VAR_0x406F, 0
 	textcolor 1
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_1BB40A
 	applymovement 255, Movement_1BB8A0
 	waitmovement 0
@@ -8541,7 +8541,7 @@ EventScript_1BB3B4:: @ 81BB3B4
 	special sub_811390C
 	setvar VAR_0x406F, 0
 	textcolor 1
-	compare_var_to_value VAR_0x8007, 0
+	compare VAR_0x8007, 0
 	goto_if eq, EventScript_1BB40A
 	applymovement 255, Movement_1BB8A0
 	waitmovement 0
@@ -8645,7 +8645,7 @@ EventScript_1BB519:: @ 81BB519
 
 EventScript_1BB51A:: @ 81BB51A
 	special CheckForAlivePartyMons
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1BB533
 	setvar VAR_0x8004, 2
 	goto EventScript_1BB54C
@@ -8669,7 +8669,7 @@ EventScript_1BB54B:: @ 81BB54B
 
 EventScript_1BB54C:: @ 81BB54C
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	message gUnknown_81BC4AC
 	waitmessage
@@ -8678,17 +8678,17 @@ EventScript_1BB54C:: @ 81BB54C
 	special sub_8081064
 	waitstate
 	call EventScript_1A6675
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB5B3
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1BB80F
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if eq, EventScript_1BB81F
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if eq, EventScript_1BB63C
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BB82F
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BB7FF
 	end
 
@@ -8716,7 +8716,7 @@ EventScript_1BB5B3:: @ 81BB5B3
 	closedoor 9, 1
 	waitdooranim
 	release
-	compare_var_to_value VAR_0x8004, 5
+	compare VAR_0x8004, 5
 	goto_if eq, EventScript_1BB62C
 	special SetCableClubWarp
 	warp MAP_UNKNOWN_MAP_00_00, 255, 6, 8
@@ -8780,10 +8780,10 @@ EventScript_1BB69B:: @ 81BB69B
 EventScript_1BB6AB:: @ 81BB6AB
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call EventScript_1BB79C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	message gUnknown_81BC4AC
 	waitmessage
@@ -8792,21 +8792,21 @@ EventScript_1BB6AB:: @ 81BB6AB
 	special sub_80810CC
 	waitstate
 	call EventScript_1A6675
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB73D
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1BB80F
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if eq, EventScript_1BB81F
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if eq, EventScript_1BB857
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BB82F
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BB7FF
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_1BB7DF
-	compare_var_to_value VAR_RESULT, 9
+	compare VAR_RESULT, 9
 	goto_if eq, EventScript_1BB7EF
 	end
 
@@ -8840,10 +8840,10 @@ EventScript_1BB73D:: @ 81BB73D
 
 EventScript_1BB79C:: @ 81BB79C
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if lt, EventScript_1BB7C2
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB7D0
 	setvar VAR_RESULT, 1
 	return
@@ -8990,7 +8990,7 @@ Movement_1BB8A2:: @ 81BB8A2
 
 gUnknown_81BB8A7:: @ 81BB8A7
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	fadescreen 1
@@ -9021,7 +9021,7 @@ UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
 	fadescreen 1
 	special sub_80A0334
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
 	setvar VAR_0x8005, 0
 	textcolor 3
@@ -9034,7 +9034,7 @@ UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
 	fadescreen 1
 	special sub_80A0334
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
 	setvar VAR_0x8005, 1
 	textcolor 3
@@ -9047,7 +9047,7 @@ UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
 	fadescreen 1
 	special sub_80A0334
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
 	setvar VAR_0x8005, 2
 	textcolor 3
@@ -9060,7 +9060,7 @@ UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
 	fadescreen 1
 	special sub_80A0334
 	waitstate
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
 	setvar VAR_0x8005, 3
 	textcolor 3
@@ -9149,7 +9149,7 @@ UnknownMap_00_02_EventScript_1BB9D3:: @ 81BB9D3
 gUnknown_81BB9D4:: @ 81BB9D4
 	textcolor 3
 	msgbox gUnknown_81BC7A1, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB9F0
 	erasebox 0, 0, 29, 19
 	releaseall
@@ -9170,7 +9170,7 @@ gUnknown_81BB9FC:: @ 81BB9FC
 
 EventScript_1BBA04:: @ 81BBA04
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -9178,11 +9178,11 @@ EventScript_1BBA04:: @ 81BBA04
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB877
 	specialvar VAR_RESULT, Special_BadEggInParty
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB867
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BBB60
 	message Text_1BD65B
 	waitmessage
@@ -9210,10 +9210,10 @@ EventScript_1BBA93:: @ 81BBA93
 
 EventScript_1BBA94:: @ 81BBA94
 	call EventScript_1BBB1E
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	msgbox gUnknown_81BD86A
 	closemessage
@@ -9246,10 +9246,10 @@ EventScript_1BBA94:: @ 81BBA94
 
 EventScript_1BBB1E:: @ 81BBB1E
 	specialvar VAR_RESULT, CountPartyNonEggMons
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if lt, EventScript_1BBB44
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBB52
 	setvar VAR_RESULT, 1
 	return
@@ -9279,7 +9279,7 @@ EventScript_1BBB6A:: @ 81BBB6A
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB877
 	msgbox gUnknown_81BDB85, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BBB92
 	msgbox gUnknown_81BDBF8
 	release
@@ -9292,7 +9292,7 @@ EventScript_1BBB92:: @ 81BBB92
 
 EventScript_1BBB9C:: @ 81BBB9C
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -9300,10 +9300,10 @@ EventScript_1BBB9C:: @ 81BBB9C
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB877
 	specialvar VAR_RESULT, Special_BadEggInParty
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BB867
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB44A
 	message Text_1BD28D
 	waitmessage
@@ -9336,10 +9336,10 @@ EventScript_1BBC32:: @ 81BBC32
 
 EventScript_1BBC69:: @ 81BBC69
 	msgbox gUnknown_81BD317, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	call EventScript_1BB79C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	setvar VAR_0x8004, 3
 	goto EventScript_1BBD6F
@@ -9369,7 +9369,7 @@ EventScript_1BBCF4:: @ 81BBCF4
 
 EventScript_1BBCF5:: @ 81BBCF5
 	special CheckForAlivePartyMons
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1BBD0E
 	setvar VAR_0x8004, 1
 	goto EventScript_1BBD6F
@@ -9400,10 +9400,10 @@ EventScript_1BBD34:: @ 81BBD34
 
 EventScript_1BBD35:: @ 81BBD35
 	msgbox gUnknown_81BD362, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	special CheckHasAtLeastOneBerry
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BBD61
 	setvar VAR_0x8004, 5
 	goto EventScript_1BBD6F
@@ -9420,7 +9420,7 @@ EventScript_1BBD6E:: @ 81BBD6E
 
 EventScript_1BBD6F:: @ 81BBD6F
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB82F
 	switch VAR_0x8004
 	case 3, EventScript_1BBDBC
@@ -9445,22 +9445,22 @@ EventScript_1BBDBC:: @ 81BBDBC
 
 EventScript_1BBE00:: @ 81BBE00
 	call EventScript_1BBF78
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBDBC
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBE00
 	release
 	return
 
 EventScript_1BBE28:: @ 81BBE28
 	call EventScript_1BBF80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBDBC
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBE28
 	release
 	return
@@ -9480,22 +9480,22 @@ EventScript_1BBE50:: @ 81BBE50
 
 EventScript_1BBE94:: @ 81BBE94
 	call EventScript_1BBF78
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBE50
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBE94
 	release
 	return
 
 EventScript_1BBEBC:: @ 81BBEBC
 	call EventScript_1BBF80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBE50
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBEBC
 	release
 	return
@@ -9515,22 +9515,22 @@ EventScript_1BBEE4:: @ 81BBEE4
 
 EventScript_1BBF28:: @ 81BBF28
 	call EventScript_1BBF78
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBEE4
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBF28
 	release
 	return
 
 EventScript_1BBF50:: @ 81BBF50
 	call EventScript_1BBF80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BBF88
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BBEE4
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BBF50
 	release
 	return
@@ -9575,13 +9575,13 @@ EventScript_1BBF88:: @ 81BBF88
 
 gUnknown_81BBFD8:: @ 81BBFD8
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_1BB881
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BC016
 	special HelpSystem_Disable
 	fadescreen 1
@@ -9645,7 +9645,7 @@ ViridianCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
 
 EventScript_1BC060:: @ 81BC060
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -9677,7 +9677,7 @@ EventScript_1BC0C4:: @ 81BC0C4
 
 EventScript_1BC0CE:: @ 81BC0CE
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -9685,7 +9685,7 @@ EventScript_1BC0CE:: @ 81BC0CE
 	message Text_1BCF69
 	waitmessage
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BC29C
 	delay 60
 	special HelpSystem_Disable
@@ -9702,16 +9702,16 @@ EventScript_1BC0CE:: @ 81BC0CE
 EventScript_1BC13A:: @ 81BC13A
 	setvar VAR_0x8005, 0
 	special sub_8149A18
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BC2A6
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
 	waitstate
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_1BB83F
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB83F
 	setvar VAR_0x8004, 4
 	goto EventScript_1BC1CE
@@ -9722,16 +9722,16 @@ EventScript_1BC183:: @ 81BC183
 EventScript_1BC184:: @ 81BC184
 	setvar VAR_0x8005, 1
 	special sub_81537C0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BC2A6
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
 	waitstate
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_1BB83F
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB83F
 	setvar VAR_0x8004, 6
 	goto EventScript_1BC1CE
@@ -9754,22 +9754,22 @@ EventScript_1BC1CE:: @ 81BC1CE
 
 EventScript_1BC212:: @ 81BC212
 	call EventScript_1BBF78
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BC262
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BC1CE
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BC212
 	release
 	return
 
 EventScript_1BC23A:: @ 81BC23A
 	call EventScript_1BBF80
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BC262
-	compare_var_to_value VAR_RESULT, 5
+	compare VAR_RESULT, 5
 	goto_if eq, EventScript_1BC1CE
-	compare_var_to_value VAR_RESULT, 8
+	compare VAR_RESULT, 8
 	goto_if eq, EventScript_1BC23A
 	release
 	return
@@ -9801,11 +9801,11 @@ EventScript_1BC29C:: @ 81BC29C
 
 EventScript_1BC2A6:: @ 81BC2A6
 	msgbox gUnknown_81BD0CF, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BB83F
-	compare_var_to_value VAR_0x8005, 0
+	compare VAR_0x8005, 0
 	call_if eq, EventScript_1BC2D5
-	compare_var_to_value VAR_0x8005, 1
+	compare VAR_0x8005, 1
 	call_if eq, EventScript_1BC2DE
 	goto EventScript_1BB83F
 
@@ -9822,7 +9822,7 @@ EventScript_1BC2DE:: @ 81BC2DE
 
 TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	special sub_814B504
@@ -9832,7 +9832,7 @@ TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
 
 TwoIsland_JoyfulGameCorner_EventScript_1BC2FC:: @ 81BC2FC
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	special sub_8153810
@@ -10296,19 +10296,19 @@ gUnknown_81BDEDF:: @ 81BDEDF
 
 EventScript_InteractWithCutTreeObject:: @ 81BDF13
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkflag FLAG_BADGE02_GET
 	goto_if FALSE, EventScript_1BDF87
 	checkpartymove MOVE_CUT
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BDF87
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_CUT
 	msgbox gUnknown_81BDF94, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BDF91
 	msgbox gUnknown_81BDFD7
 	closemessage
@@ -10359,19 +10359,19 @@ gUnknown_81BDFE3:: @ 81BDFE3
 
 EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkflag FLAG_BADGE06_GET
 	goto_if FALSE, EventScript_1BE091
 	checkpartymove MOVE_ROCK_SMASH
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BE091
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_ROCK_SMASH
 	msgbox Text_1BE09D, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE09A
 	msgbox gUnknown_81BDFD7
 	closemessage
@@ -10392,7 +10392,7 @@ EventScript_1BE06F:: @ 81BE06F
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	special ScrSpecial_RockSmashWildEncounter
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE08D
 	waitstate
 	releaseall
@@ -10425,7 +10425,7 @@ gUnknown_81BE0E2:: @ 81BE0E2
 
 EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkflag FLAG_BADGE04_GET
@@ -10433,11 +10433,11 @@ EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
 	checkflag FLAG_SYS_STRENGTH_ACTIVE
 	goto_if TRUE, EventScript_1BE18E
 	checkpartymove MOVE_STRENGTH
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BE185
 	setfieldeffectarg 0, VAR_RESULT
 	msgbox gUnknown_81BE19A, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE197
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -10490,16 +10490,16 @@ gUnknown_81BE284:: @ 81BE284
 
 gUnknown_81BE2B7:: @ 81BE2B7
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lockall
 	checkpartymove MOVE_WATERFALL
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BE300
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	msgbox gUnknown_81BE33F, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE308
 	msgbox gUnknown_81BE378
 	dofieldeffect FLDEFF_USE_WATERFALL
@@ -10528,13 +10528,13 @@ gUnknown_81BE378:: @ 81BE378
 EventScript_1BE38B:: @ 81BE38B
 	lockall
 	checkpartymove MOVE_DIVE
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BE3CA
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
 	msgbox gUnknown_81BE469, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE3D2
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
@@ -10551,13 +10551,13 @@ EventScript_1BE3D2:
 EventScript_1BE3D4:: @ 81BE3D4
 	lockall
 	checkpartymove MOVE_DIVE
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BE412
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
 	msgbox gUnknown_81BE4EF, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BE429
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
@@ -11280,7 +11280,7 @@ SilphCo_4F_EventScript_1BEE09:: @ 81BEE09
 PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_if eq, EventScript_1BEE3A
 	checkflag FLAG_SYS_SET_TRAINER_CARD_PROFILE
 	goto_if TRUE, EventScript_1BEECD
@@ -11382,11 +11382,11 @@ EventScript_1BEF5A:: @ 81BEF5A
 	call EventScript_1A6AC0
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x8004, 0
+	compare VAR_0x8004, 0
 	goto_if eq, EventScript_1BEF3F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BEE9E
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BEEA8
 	end
 
@@ -11460,16 +11460,16 @@ gUnknown_81BF36A:: @ 81BF36A
 
 Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BF46E
 	msgbox Text_19DD66, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BF3DD
 	msgbox Text_19DDB2
 	goto EventScript_1BF541
@@ -11477,7 +11477,7 @@ Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 
 EventScript_1BF3DD:: @ 81BF3DD
 	specialvar VAR_RESULT, CountPartyNonEggMons
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BF452
 	msgbox Text_19DDBE
 	fadescreen 1
@@ -11485,10 +11485,10 @@ EventScript_1BF3DD:: @ 81BF3DD
 	special ChooseSendDaycareMon
 	waitstate
 	showmoneybox 0, 0, 0
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_1BF444
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1BF460
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	msgbox Text_19DDF9
@@ -11519,13 +11519,13 @@ EventScript_1BF460:: @ 81BF460
 EventScript_1BF46E:: @ 81BF46E
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetNumLevelsGainedForRoute5DaycareMon
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if ne, EventScript_1BF4AA
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1BF4B3
 	special GetCostToWithdrawRoute5DaycareMon
 	msgbox Text_19DE80, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BF4BC
 	goto EventScript_1BF444
 	end
@@ -11540,10 +11540,10 @@ EventScript_1BF4B3:: @ 81BF4B3
 
 EventScript_1BF4BC:: @ 81BF4BC
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if eq, EventScript_1BF533
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BF4EA
 	msgbox Text_19E001
 	goto EventScript_1BF541
@@ -11744,7 +11744,7 @@ EventScript_1BFB98:: @ 81BFB98
 EventScript_SafariRetire:: @ 81BFBAA
 	lockall
 	msgbox Text_1BFBE9, 5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1BFBC0
 	releaseall
 	end
@@ -13405,15 +13405,15 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	checkflag FLAG_TUTOR_DOUBLE_EDGE
 	goto_if TRUE, EventScript_1C480C
 	msgbox Text_1749F9, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4802
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4802
 	msgbox Text_174AE2
 	setvar VAR_0x8005, MOVETUTOR_DOUBLE_EDGE
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4802
 	setflag FLAG_TUTOR_DOUBLE_EDGE
 	goto EventScript_1C480C
@@ -13435,15 +13435,15 @@ EventScript_1C4816:: @ 81C4816
 	checkflag FLAG_TUTOR_THUNDER_WAVE
 	goto_if TRUE, EventScript_1C4874
 	msgbox Text_175711, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C486A
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C486A
 	msgbox Text_1757C1
 	setvar VAR_0x8005, MOVETUTOR_THUNDER_WAVE
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C486A
 	setflag FLAG_TUTOR_THUNDER_WAVE
 	goto EventScript_1C4874
@@ -13465,15 +13465,15 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	checkflag FLAG_TUTOR_ROCK_SLIDE
 	goto_if TRUE, EventScript_1C48DC
 	msgbox Text_1799E0, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C48D2
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C48D2
 	msgbox Text_179AE1
 	setvar VAR_0x8005, MOVETUTOR_ROCK_SLIDE
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C48D2
 	setflag FLAG_TUTOR_ROCK_SLIDE
 	goto EventScript_1C48DC
@@ -13495,15 +13495,15 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	checkflag FLAG_TUTOR_EXPLOSION
 	goto_if TRUE, EventScript_1C4944
 	msgbox Text_17A642, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C493A
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C493A
 	msgbox Text_17A717
 	setvar VAR_0x8005, MOVETUTOR_EXPLOSION
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C493A
 	setflag FLAG_TUTOR_EXPLOSION
 	goto EventScript_1C4944
@@ -13525,15 +13525,15 @@ Route4_EventScript_1C494E:: @ 81C494E
 	checkflag FLAG_TUTOR_META_PUNCH
 	goto_if TRUE, EventScript_1C49AC
 	msgbox Text_1839D5, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C49A2
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C49A2
 	msgbox Text_183ABF
 	setvar VAR_0x8005, MOVETUTOR_MEGA_PUNCH
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C49A2
 	setflag FLAG_TUTOR_META_PUNCH
 	goto EventScript_1C49AC
@@ -13555,15 +13555,15 @@ Route4_EventScript_1C49B6:: @ 81C49B6
 	checkflag FLAG_TUTOR_MEGA_KICK
 	goto_if TRUE, EventScript_1C4A14
 	msgbox Text_183B74, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A0A
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A0A
 	msgbox Text_183C68
 	setvar VAR_0x8005, MOVETUTOR_MEGA_KICK
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A0A
 	setflag FLAG_TUTOR_MEGA_KICK
 	goto EventScript_1C4A14
@@ -13585,15 +13585,15 @@ EventScript_1C4A1E:: @ 81C4A1E
 	checkflag FLAG_TUTOR_DREAM_EATER
 	goto_if TRUE, EventScript_1C4A7C
 	msgbox Text_17E316, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A72
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A72
 	msgbox Text_17E3F1
 	setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4A72
 	setflag FLAG_TUTOR_DREAM_EATER
 	goto EventScript_1C4A7C
@@ -13615,15 +13615,15 @@ EventScript_1C4A86:: @ 81C4A86
 	checkflag FLAG_TUTOR_SOFT_BOILED
 	goto_if TRUE, EventScript_1C4AE4
 	msgbox Text_180388, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4ADA
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4ADA
 	msgbox Text_180484
 	setvar VAR_0x8005, MOVETUTOR_SOFT_BOILED
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4ADA
 	setflag FLAG_TUTOR_SOFT_BOILED
 	goto EventScript_1C4AE4
@@ -13645,15 +13645,15 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	checkflag FLAG_TUTOR_SUBSTITUTE
 	goto_if TRUE, EventScript_1C4B4C
 	msgbox Text_180948, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4B42
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4B42
 	msgbox Text_180A57
 	setvar VAR_0x8005, MOVETUTOR_SUBSTITUTE
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4B42
 	setflag FLAG_TUTOR_SUBSTITUTE
 	goto EventScript_1C4B4C
@@ -13675,15 +13675,15 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	checkflag FLAG_TUTOR_SWORDS_DANCE
 	goto_if TRUE, EventScript_1C4BB4
 	msgbox Text_182F01, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4BAA
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4BAA
 	msgbox Text_182FD9
 	setvar VAR_0x8005, MOVETUTOR_SWORDS_DANCE
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4BAA
 	setflag FLAG_TUTOR_SWORDS_DANCE
 	goto EventScript_1C4BB4
@@ -13705,15 +13705,15 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	checkflag FLAG_TUTOR_SEISMIC_TOSS
 	goto_if TRUE, EventScript_1C4C1C
 	msgbox Text_1909A3, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C12
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C12
 	msgbox Text_190AD5
 	setvar VAR_0x8005, MOVETUTOR_SEISMIC_TOSS
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C12
 	setflag FLAG_TUTOR_SEISMIC_TOSS
 	goto EventScript_1C4C1C
@@ -13735,15 +13735,15 @@ EventScript_1C4C26:: @ 81C4C26
 	checkflag FLAG_TUTOR_COUNTER
 	goto_if TRUE, EventScript_1C4C84
 	msgbox Text_195928, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C7A
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C7A
 	msgbox Text_195A08
 	setvar VAR_0x8005, MOVETUTOR_COUNTER
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4C7A
 	setflag FLAG_TUTOR_COUNTER
 	goto EventScript_1C4C84
@@ -13765,15 +13765,15 @@ EventScript_1C4C8E:: @ 81C4C8E
 	checkflag FLAG_TUTOR_METRONOME
 	goto_if TRUE, EventScript_1C4CEC
 	msgbox Text_19A137, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4CE2
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4CE2
 	msgbox Text_19A1EA
 	setvar VAR_0x8005, MOVETUTOR_METRONOME
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4CE2
 	setflag FLAG_TUTOR_METRONOME
 	goto EventScript_1C4CEC
@@ -13793,17 +13793,17 @@ EventScript_1C4CF6:: @ 81C4CF6
 	checkflag FLAG_TUTOR_MIMIC
 	goto_if TRUE, EventScript_1C4D59
 	msgbox Text_19AD85, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4D4F
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4D4F
 	msgbox Text_19ADEE
 	setvar VAR_0x8005, MOVETUTOR_MIMIC
 	call EventScript_1C4F30
 	lock
 	faceplayer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4D4F
 	removeitem ITEM_POKE_DOLL, 1
 	setflag FLAG_TUTOR_MIMIC
@@ -13817,9 +13817,9 @@ EventScript_1C4D4F:: @ 81C4D4F
 
 EventScript_1C4D59:: @ 81C4D59
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1C4D72
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_1C4D7B
 	release
 	end
@@ -13838,15 +13838,15 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	checkflag FLAG_TUTOR_BODY_SLAM
 	goto_if TRUE, EventScript_1C4DE2
 	msgbox Text_1A3505, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4DD8
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4DD8
 	msgbox Text_1A35DA
 	setvar VAR_0x8005, MOVETUTOR_BODY_SLAM
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4DD8
 	setflag FLAG_TUTOR_BODY_SLAM
 	goto EventScript_1C4DE2
@@ -13864,7 +13864,7 @@ EventScript_1C4DE2:: @ 81C4DE2
 
 TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -13876,22 +13876,22 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	getfirstpartymonname 0
 	msgbox Text_1A46C6
 	specialvar VAR_RESULT, Special_CapeBrinkGetMoveToTeachLeadPokemon
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F26
 	copyvar VAR_0x8009, VAR_0x8005
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_1C4EF0
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if eq, EventScript_1C4EFB
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_1C4F06
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_1C4F11
 	msgbox Text_1A4751, 5
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F1C
 	call EventScript_1C4F37
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F1C
 	msgbox Text_1A4814
 	closemessage
@@ -13916,7 +13916,7 @@ EventScript_1C4EA1:: @ 81C4EA1
 EventScript_1C4EAB:: @ 81C4EAB
 	copyvar VAR_0x8005, VAR_0x8009
 	specialvar VAR_RESULT, Special_HasLearnedAllMovesFromCapeBrinkTutor
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1C4ECD
 	msgbox Text_1A4865
 	setflag FLAG_TEMP_2
@@ -13931,7 +13931,7 @@ EventScript_1C4ECD:: @ 81C4ECD
 
 EventScript_1C4EDA:: @ 81C4EDA
 	call EventScript_1C4F30
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F1C
 	goto EventScript_1C4EAB
 	end
@@ -14050,7 +14050,7 @@ EventScript_1C4FC5:: @ 81C4FC5
 	setvar VAR_0x400E, 1
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1C4FFE
 	setobjectxyperm 2, 10, 12
 	setobjectmovementtype 2, 9
@@ -14095,14 +14095,14 @@ EventScript_1C5050:: @ 81C5050
 	setvar VAR_0x4002, 1
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C5072
 	setvar VAR_0x400E, 1
 	setvar VAR_0x400F, 1
 EventScript_1C5072:
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1C5086
 	end
 
@@ -14144,7 +14144,7 @@ EventScript_1C510D:: @ 81C510D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
 	addvar VAR_0x4003, 1
-	compare_var_to_value VAR_0x4003, 1
+	compare VAR_0x4003, 1
 	goto_if eq, EventScript_1C5146
 	setvar VAR_0x4003, 0
 EventScript_1C5146:
@@ -14377,7 +14377,7 @@ SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
 	setvar VAR_0x4003, 0
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
@@ -14397,7 +14397,7 @@ SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
 	setvar VAR_0x4003, 1
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if ne, EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8

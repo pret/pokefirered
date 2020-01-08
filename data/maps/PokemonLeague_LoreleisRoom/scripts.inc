@@ -14,7 +14,7 @@ PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
 PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
 	checkflag FLAG_DEFEATED_LORELEI
 	call_if TRUE, EventScript_1625AC
-	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 1
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
 	call_if eq, EventScript_1625A6
 	end
 

@@ -6,7 +6,7 @@ ThreeIsland_MapScript1_1677B3:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	checkflag FLAG_RESCUED_LOSTELLE
 	call_if TRUE, EventScript_1677CB
-	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	call_if eq, EventScript_1677CF
 	end
 
@@ -30,7 +30,7 @@ ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
 	checkflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
 	goto_if TRUE, EventScript_167806
-	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if eq, EventScript_16781A
 	setvar VAR_0x4001, 0
 	call EventScript_16786F
@@ -49,7 +49,7 @@ EventScript_16781A:: @ 816781A
 	waitmovement 0
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_167865
 	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE, 1
@@ -64,36 +64,36 @@ EventScript_167865:: @ 8167865
 	end
 
 EventScript_16786F:: @ 816786F
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_167947
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81820C0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_167952
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_167952
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_8182125
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_167931
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_167931
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81821A9
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_167952
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_167952
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
@@ -122,21 +122,21 @@ EventScript_167952:: @ 8167952
 
 EventScript_16795D:: @ 816795D
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 9
+	compare VAR_0x8004, 9
 	goto_if ge, EventScript_167931
 	goto EventScript_167952
 	end
 
 EventScript_167973:: @ 8167973
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 9
+	compare VAR_0x8004, 9
 	goto_if ge, EventScript_167947
 	goto EventScript_167931
 	end
 
 ThreeIsland_EventScript_167989:: @ 8167989
 	lock
-	compare_var_to_value VAR_MAP_SCENE_THREE_ISLAND, 4
+	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if eq, EventScript_1679A1
 	setvar VAR_0x4001, 1
 	call EventScript_16786F
@@ -223,7 +223,7 @@ EventScript_167A59:: @ 8167A59
 	waitmovement 0
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
@@ -256,15 +256,15 @@ EventScript_167A59:: @ 8167A59
 	msgbox gUnknown_81825E2
 	closemessage
 	delay 45
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_167BC6
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_167BD8
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_167BEA
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if eq, EventScript_167C03
-	compare_var_to_value VAR_0x4001, 4
+	compare VAR_0x4001, 4
 	call_if eq, EventScript_167C1C
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623

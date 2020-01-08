@@ -16,7 +16,7 @@ EventScript_162F6D:: @ 8162F6D
 	call_if FALSE, EventScript_162FF0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
 	call_if FALSE, EventScript_162FF0
-	compare_var_to_value VAR_0x4002, 2
+	compare VAR_0x4002, 2
 	call_if eq, EventScript_162F90
 	return
 
@@ -39,12 +39,12 @@ EventScript_162FA2:: @ 8162FA2
 	call_if FALSE, EventScript_162FF0
 	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
 	call_if FALSE, EventScript_162FF0
-	compare_var_to_value VAR_0x4002, 2
+	compare VAR_0x4002, 2
 	goto_if eq, EventScript_16300C
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare_var_to_value VAR_0x8008, 24
+	compare VAR_0x8008, 24
 	call_if lt, EventScript_162FF6
-	compare_var_to_value VAR_0x8008, 24
+	compare VAR_0x8008, 24
 	call_if ge, EventScript_163001
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
 	warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21

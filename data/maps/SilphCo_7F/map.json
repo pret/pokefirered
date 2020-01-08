@@ -227,84 +227,84 @@
       "x": 11,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 24,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 24,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "hidden_item",

@@ -13,7 +13,7 @@ SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
 
 EventScript_163052:: @ 8163052
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -33,7 +33,7 @@ EventScript_163082:: @ 8163082
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare_var_to_value VAR_0x4002, 2
+	compare VAR_0x4002, 2
 	call_if eq, EventScript_1630A5
 	return
 
@@ -55,7 +55,7 @@ SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare_var_to_value VAR_0x4002, 2
+	compare VAR_0x4002, 2
 	goto_if eq, EventScript_1630D4
 	end
 
@@ -99,12 +99,12 @@ EventScript_163121:: @ 8163121
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare_var_to_value VAR_0x4002, 2
+	compare VAR_0x4002, 2
 	goto_if eq, EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if lt, EventScript_16316F
-	compare_var_to_value VAR_0x8008, 9
+	compare VAR_0x8008, 9
 	call_if ge, EventScript_16317A
 	special sub_805D1A8
 	setvar VAR_0x4001, 0
@@ -164,7 +164,7 @@ Movement_1631AA:: @ 81631AA
 
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -183,11 +183,11 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16320F
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163218
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163218
 	setflag FLAG_FOUGHT_ARTICUNO
 	release

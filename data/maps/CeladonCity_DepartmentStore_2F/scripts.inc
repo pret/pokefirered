@@ -15,7 +15,7 @@ CeladonCity_DepartmentStore_2F_EventScript_16BB07:: @ 816BB07
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
@@ -43,7 +43,7 @@ Items_16BB38:: @ 816BB38
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB4E:: @ 816BB4E
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer

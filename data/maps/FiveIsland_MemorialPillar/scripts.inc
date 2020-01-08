@@ -27,7 +27,7 @@ EventScript_168A18:: @ 8168A18
 EventScript_168A22:: @ 8168A22
 	msgbox gUnknown_818B282
 	giveitem ITEM_TM42
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168AFE
 	call EventScript_168AE8
 	release
@@ -35,7 +35,7 @@ EventScript_168A22:: @ 8168A22
 
 FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lockall
@@ -45,14 +45,14 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	goto_if TRUE, EventScript_168B0B
 	msgbox gUnknown_818B095
 	checkitem ITEM_LEMONADE, 1
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_168A86
 	releaseall
 	end
 
 EventScript_168A86:: @ 8168A86
 	msgbox gUnknown_818B105, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_168A9B
 	releaseall
 	end
@@ -69,7 +69,7 @@ EventScript_168A9B:: @ 8168A9B
 	textcolor 0
 	msgbox gUnknown_818B171
 	giveitem ITEM_TM42
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168AFE
 	call EventScript_168AE8
 	releaseall

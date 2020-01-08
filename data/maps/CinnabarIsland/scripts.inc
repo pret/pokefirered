@@ -6,11 +6,11 @@ CinnabarIsland_MapScripts:: @ 8166ED6
 CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 1
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 1
 	call_if eq, EventScript_166F24
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 3
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 3
 	call_if eq, EventScript_166F52
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	call_if eq, EventScript_166F0B
 	end
 
@@ -24,7 +24,7 @@ EventScript_166F0B:: @ 8166F0B
 
 EventScript_166F24:: @ 8166F24
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 18
+	compare VAR_0x8004, 18
 	goto_if ge, EventScript_166F4A
 	setflag FLAG_TEMP_2
 	setobjectxyperm 3, 18, 12
@@ -108,9 +108,9 @@ EventScript_166FCD:: @ 8166FCD
 	call_if TRUE, EventScript_167053
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_167068
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_167078
 	end
 

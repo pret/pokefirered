@@ -10,7 +10,7 @@ CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
 
 EventScript_1624D3:: @ 81624D3
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -26,7 +26,7 @@ EventScript_1624F1:: @ 81624F1
 
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -45,11 +45,11 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_162558
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_162561
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_162561
 	setflag FLAG_FOUGHT_MEWTWO
 	release

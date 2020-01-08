@@ -7,7 +7,7 @@ VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	checkflag FLAG_GOT_BIKE_VOUCHER
 	goto_if TRUE, EventScript_16B4A7
 	msgbox gUnknown_819457E, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B4B1
 	msgbox gUnknown_8194860
 	release
@@ -21,7 +21,7 @@ EventScript_16B4A7:: @ 816B4A7
 EventScript_16B4B1:: @ 816B4B1
 	msgbox gUnknown_8194628
 	checkitemspace ITEM_BIKE_VOUCHER, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16B4F2
 	setflag FLAG_GOT_BIKE_VOUCHER
 	additem ITEM_BIKE_VOUCHER, 1

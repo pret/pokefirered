@@ -8,7 +8,7 @@ RocketHideout_B4F_MapScript1_1612EE:: @ 81612EE
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if ne, EventScript_16146A
 	end
 
@@ -42,7 +42,7 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 	faceplayer
 	removeobject 2
 	giveitem ITEM_SILPH_SCOPE
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9
 	release
 	end
@@ -66,7 +66,7 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9
 	release
 	end
@@ -82,9 +82,9 @@ EventScript_1613E9:: @ 81613E9
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_1614A1
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_161462
 	release
 	end
@@ -100,9 +100,9 @@ EventScript_161433:: @ 8161433
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_1614A1
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_161462
 	release
 	end

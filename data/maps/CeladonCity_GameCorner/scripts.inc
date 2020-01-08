@@ -21,7 +21,7 @@ CeladonCity_GameCorner_EventScript_16C684:: @ 816C684
 
 CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
@@ -41,18 +41,18 @@ CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
 EventScript_16C6E6:: @ 816C6E6
 	checkflag FLAG_GOT_COIN_CASE
 	goto_if FALSE, EventScript_16C790
-	compare_var_to_value VAR_0x8009, 0
+	compare VAR_0x8009, 0
 	goto_if eq, EventScript_16C734
-	compare_var_to_value VAR_0x8009, 1
+	compare VAR_0x8009, 1
 	goto_if eq, EventScript_16C706
 	end
 
 EventScript_16C706:: @ 816C706
 	checkcoins VAR_0x4001
-	compare_var_to_value VAR_0x4001, 9500
+	compare VAR_0x4001, 9500
 	goto_if ge, EventScript_16C79E
 	checkmoney 10000, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C7AC
 	givecoins 500
 	takemoney 10000, 0
@@ -61,10 +61,10 @@ EventScript_16C706:: @ 816C706
 
 EventScript_16C734:: @ 816C734
 	checkcoins VAR_0x4001
-	compare_var_to_value VAR_0x4001, 9950
+	compare VAR_0x4001, 9950
 	goto_if ge, EventScript_16C79E
 	checkmoney 1000, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C7AC
 	givecoins 50
 	takemoney 1000, 0
@@ -135,7 +135,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	checkflag FLAG_GOT_COIN_CASE
 	goto_if FALSE, EventScript_16C839
 	checkcoins VAR_0x4001
-	compare_var_to_value VAR_0x4001, 9990
+	compare VAR_0x4001, 9990
 	goto_if ge, EventScript_16C82B
 	givecoins 10
 	textcolor 3
@@ -199,7 +199,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	checkflag FLAG_GOT_COIN_CASE
 	goto_if FALSE, EventScript_16C839
 	checkcoins VAR_0x4001
-	compare_var_to_value VAR_0x4001, 9980
+	compare VAR_0x4001, 9980
 	goto_if ge, EventScript_16C8E2
 	givecoins 20
 	textcolor 3
@@ -229,7 +229,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	checkflag FLAG_GOT_COIN_CASE
 	goto_if FALSE, EventScript_16C839
 	checkcoins VAR_0x4001
-	compare_var_to_value VAR_0x4001, 9980
+	compare VAR_0x4001, 9980
 	goto_if ge, EventScript_16C942
 	givecoins 20
 	textcolor 3
@@ -264,7 +264,7 @@ EventScript_16C96C:: @ 816C96C
 	checkflag FLAG_GOT_COIN_CASE
 	goto_if FALSE, EventScript_16CAA0
 	msgbox gUnknown_8196F46, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C96A
 	setfieldeffectarg 0, 255
 	setfieldeffectarg 1, 10
@@ -434,9 +434,9 @@ CeladonCity_GameCorner_EventScript_16CAF5:: @ 816CAF5
 EventScript_16CB10:: @ 816CB10
 	msgbox gUnknown_8196E9B
 	closemessage
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_16CB34
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if ne, EventScript_16CB3F
 	removeobject 11
 	release

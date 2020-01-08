@@ -141,28 +141,28 @@
       "x": 5,
       "y": 16,
       "elevation": 3,
-      "script": "SilphCo_11F_EventScript_1A8B09"
+      "script": "SilphCo_11F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 17,
       "elevation": 3,
-      "script": "SilphCo_11F_EventScript_1A8B09"
+      "script": "SilphCo_11F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 6,
       "y": 16,
       "elevation": 3,
-      "script": "SilphCo_11F_EventScript_1A8B09"
+      "script": "SilphCo_11F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 6,
       "y": 17,
       "elevation": 3,
-      "script": "SilphCo_11F_EventScript_1A8B09"
+      "script": "SilphCo_11F_EventScript_Door"
     },
     {
       "type": "hidden_item",

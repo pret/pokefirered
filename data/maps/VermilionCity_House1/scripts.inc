@@ -7,7 +7,7 @@ VermilionCity_House1_EventScript_16B3A7:: @ 816B3A7
 	checkflag FLAG_GOT_OLD_ROD
 	goto_if TRUE, EventScript_16B3CF
 	msgbox gUnknown_8193EC1, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16B3D9
 	msgbox gUnknown_8194028
 	release
@@ -20,7 +20,7 @@ EventScript_16B3CF:: @ 816B3CF
 
 EventScript_16B3D9:: @ 816B3D9
 	checkitemspace ITEM_OLD_ROD, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16B41A
 	additem ITEM_OLD_ROD, 1
 	msgbox gUnknown_8193F2A

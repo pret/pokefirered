@@ -29,7 +29,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	textcolor 0
 	msgbox gUnknown_819B44E, MSGBOX_YESNO
 	call EventScript_1A6675
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16EC82
 	erasemonpic
 	release
@@ -52,7 +52,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	textcolor 0
 	msgbox gUnknown_819B49E, MSGBOX_YESNO
 	call EventScript_1A6675
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16EC82
 	erasemonpic
 	release
@@ -61,11 +61,11 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 EventScript_16EC82:: @ 816EC82
 	erasemonpic
 	givemon VAR_0x4001, 25, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16ECB5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16ECEC
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A927C
 	release
 	end
@@ -79,7 +79,7 @@ EventScript_16ECB5:: @ 816ECB5
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16ED29
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -95,7 +95,7 @@ EventScript_16ECEC:: @ 816ECEC
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16ED1E
 	call EventScript_1A8C33
 	goto EventScript_16ED1E

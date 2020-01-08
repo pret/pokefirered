@@ -28,9 +28,9 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	goto_if TRUE, EventScript_17064A
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170580
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_17058E
 	end
 
@@ -45,18 +45,18 @@ EventScript_17058E:: @ 817058E
 	end
 
 EventScript_17059C:: @ 817059C
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_170600
 	msgbox gUnknown_819FFD3
 	closemessage
 	delay 10
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if eq, EventScript_17062A
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_170635
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_170635
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_170635
 	opendoor 10, 3
 	waitdooranim
@@ -72,9 +72,9 @@ EventScript_17059C:: @ 817059C
 
 EventScript_170600:: @ 8170600
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_170618
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_170621
 	return
 
@@ -104,12 +104,12 @@ EventScript_170640:: @ 8170640
 EventScript_17064A:: @ 817064A
 	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1706AC
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1706BE
 	additem ITEM_SS_TICKET, 1
 	giveitemfanfaremsg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5

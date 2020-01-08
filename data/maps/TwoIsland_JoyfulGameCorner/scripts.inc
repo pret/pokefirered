@@ -125,7 +125,7 @@ Movement_17152F:: @ 817152F
 TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if eq, EventScript_1BC060
 	checkflag FLAG_RESCUED_LOSTELLE
 	goto_if TRUE, EventScript_171555
@@ -141,11 +141,11 @@ EventScript_171555:: @ 8171555
 TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	goto_if eq, EventScript_1BC0CE
 	checkflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
 	goto_if TRUE, EventScript_1715F5
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if eq, EventScript_17158A
 	msgbox gUnknown_81A2743
 	release
@@ -169,7 +169,7 @@ EventScript_17158A:: @ 817158A
 
 EventScript_1715C4:: @ 81715C4
 	checkitemspace ITEM_MOON_STONE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1715FF
 	additem ITEM_MOON_STONE, 1
 	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER

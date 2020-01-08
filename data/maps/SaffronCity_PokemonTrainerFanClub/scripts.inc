@@ -71,9 +71,9 @@ Movement_16F13E:: @ 816F13E
 	step_end
 
 SaffronCity_PokemonTrainerFanClub_MapScript2_16F144:: @ 816F144
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
 	goto_if eq, EventScript_16F267
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
 	goto_if eq, EventScript_16F15B
 	end
 
@@ -81,35 +81,35 @@ EventScript_16F15B:: @ 816F15B
 	special UpdateMovedSaffronFanClubMembers
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F207
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F213
 	setvar VAR_0x8004, 2
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F21F
 	setvar VAR_0x8004, 3
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F22B
 	setvar VAR_0x8004, 4
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F237
 	setvar VAR_0x8004, 5
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F243
 	setvar VAR_0x8004, 6
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F24F
 	setvar VAR_0x8004, 7
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16F25B
 	end
 
@@ -166,13 +166,13 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F281:: @ 816F281
 	faceplayer
 	setvar VAR_0x8004, 0
 	special BufferStreakTrainerText
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if eq, EventScript_16F2EE
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F2C0
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F2E4
 	msgbox gUnknown_819C420
 	release
@@ -180,7 +180,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F281:: @ 816F281
 
 EventScript_16F2C0:: @ 816F2C0
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F2DA
 	msgbox gUnknown_819C390
 	release
@@ -206,13 +206,13 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F2F8:: @ 816F2F8
 	faceplayer
 	setvar VAR_0x8004, 3
 	special BufferStreakTrainerText
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if eq, EventScript_16F365
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F337
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F35B
 	msgbox gUnknown_819CBD3
 	release
@@ -220,7 +220,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F2F8:: @ 816F2F8
 
 EventScript_16F337:: @ 816F337
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F351
 	msgbox gUnknown_819CB32
 	release
@@ -246,13 +246,13 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F36F:: @ 816F36F
 	faceplayer
 	setvar VAR_0x8004, 1
 	special BufferStreakTrainerText
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if eq, EventScript_16F3DC
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F3AE
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F3D2
 	msgbox gUnknown_819C6BA
 	release
@@ -260,7 +260,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F36F:: @ 816F36F
 
 EventScript_16F3AE:: @ 816F3AE
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F3C8
 	msgbox gUnknown_819C5A9
 	release
@@ -286,13 +286,13 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F3E6:: @ 816F3E6
 	faceplayer
 	setvar VAR_0x8004, 2
 	special BufferStreakTrainerText
-	compare_var_to_value VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
+	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if eq, EventScript_16F453
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F425
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F449
 	msgbox gUnknown_819C986
 	release
@@ -300,7 +300,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F3E6:: @ 816F3E6
 
 EventScript_16F425:: @ 816F425
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F43F
 	msgbox gUnknown_819C81E
 	release
@@ -327,10 +327,10 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F45D:: @ 816F45D
 	setvar VAR_0x8004, 5
 	special BufferStreakTrainerText
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F491
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F4B5
 	msgbox gUnknown_819D01F
 	release
@@ -338,7 +338,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F45D:: @ 816F45D
 
 EventScript_16F491:: @ 816F491
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F4AB
 	msgbox gUnknown_819CEDF
 	release
@@ -360,10 +360,10 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F4BF:: @ 816F4BF
 	setvar VAR_0x8004, 4
 	special BufferStreakTrainerText
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F4F3
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F517
 	msgbox gUnknown_819CDDA
 	release
@@ -371,7 +371,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F4BF:: @ 816F4BF
 
 EventScript_16F4F3:: @ 816F4F3
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F50D
 	msgbox gUnknown_819CCF3
 	release
@@ -393,10 +393,10 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F521:: @ 816F521
 	setvar VAR_0x8004, 6
 	special BufferStreakTrainerText
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F555
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F579
 	msgbox gUnknown_819D1AE
 	release
@@ -404,7 +404,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F521:: @ 816F521
 
 EventScript_16F555:: @ 816F555
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F56F
 	msgbox gUnknown_819D0E3
 	release
@@ -426,10 +426,10 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F583:: @ 816F583
 	setvar VAR_0x8004, 7
 	special BufferStreakTrainerText
 	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F5B7
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 7
+	compare VAR_RESULT, 7
 	goto_if eq, EventScript_16F5DB
 	msgbox gUnknown_819D3D2
 	release
@@ -437,7 +437,7 @@ SaffronCity_PokemonTrainerFanClub_EventScript_16F583:: @ 816F583
 
 EventScript_16F5B7:: @ 816F5B7
 	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16F5D1
 	msgbox gUnknown_819D2B4
 	release

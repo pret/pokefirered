@@ -19,11 +19,11 @@ SSAnne_Kitchen_EventScript_160ACE:: @ 8160ACE
 	msgbox gUnknown_8173570
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if eq, EventScript_160B03
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_160B0C
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if eq, EventScript_160B15
 	release
 	end

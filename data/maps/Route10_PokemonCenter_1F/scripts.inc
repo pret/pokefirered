@@ -34,17 +34,17 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	checkflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE
 	goto_if TRUE, EventScript_16FCE7
 	msgbox gUnknown_819E5FB, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_16FCF1
-	compare_var_to_value VAR_0x8006, 20
+	compare VAR_0x8006, 20
 	goto_if lt, EventScript_1A7ABD
 	msgbox gUnknown_819E733
 	checkitemspace ITEM_EVERSTONE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A7AC7
 	additem ITEM_EVERSTONE, 1
 	giveitemfanfaremsg gUnknown_819E786, ITEM_EVERSTONE

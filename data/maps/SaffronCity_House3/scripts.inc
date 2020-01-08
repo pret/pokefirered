@@ -8,7 +8,7 @@ SaffronCity_House3_EventScript_16F05F:: @ 816F05F
 	goto_if TRUE, EventScript_16F0B5
 	msgbox gUnknown_819C142
 	checkitemspace ITEM_TM29, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16F0AB
 	additem ITEM_TM29, 1
 	giveitemfanfaremsg gUnknown_819C16C, ITEM_TM29

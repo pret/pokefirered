@@ -6,7 +6,7 @@ OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
 	.byte 0
 
 OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	call_if ge, EventScript_170C22
 	checkflag FLAG_SYS_CAN_LINK_WITH_RS
 	call_if TRUE, EventScript_170C36
@@ -28,11 +28,11 @@ EventScript_170C36:: @ 8170C36
 
 OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
 	setrespawn SPAWN_ONE_ISLAND
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	call_if eq, EventScript_170C73
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0
 	call_if eq, EventScript_170C79
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	call_if eq, EventScript_170C90
 	end
 
@@ -112,9 +112,9 @@ EventScript_170CB1:: @ 8170CB1
 	additem ITEM_TRI_PASS, 1
 	giveitemfanfaremsg gUnknown_81A231B, ITEM_TRI_PASS, 1, MUS_FAN5
 	msgbox gUnknown_81A1150
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if ge, EventScript_170E46
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if lt, EventScript_170E58
 	setflag FLAG_SYS_SEVII_MAP_123
 	msgbox gUnknown_81A1230
@@ -208,22 +208,22 @@ EventScript_170EB1:: @ 8170EB1
 OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 7
 	goto_if eq, EventScript_170F35
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	goto_if eq, EventScript_170F9B
 	checkflag FLAG_RECOVERED_SAPPHIRE
 	goto_if TRUE, EventScript_170FA5
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	goto_if eq, EventScript_17103A
 	checkflag FLAG_GOT_RUBY
 	goto_if TRUE, EventScript_171044
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if eq, EventScript_1710F2
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_1710FC
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 3
 	goto_if eq, EventScript_171134
 	msgbox gUnknown_81A1321
 	closemessage
@@ -235,9 +235,9 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 EventScript_170F35:: @ 8170F35
 	msgbox gUnknown_81A1EBD
 	random 3
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170F6D
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_170F84
 	famechecker FAMECHECKER_BILL, 5
 	msgbox gUnknown_81A2076
@@ -324,14 +324,14 @@ EventScript_171044:: @ 8171044
 	applymovement 3, Movement_1A75E1
 	waitmovement 0
 	msgbox gUnknown_81A19AA, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_171099
 	goto EventScript_1710B2
 	end
 
 EventScript_171099:: @ 8171099
 	msgbox gUnknown_81A1A08, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_171099
 	goto EventScript_1710B2
 	end
@@ -466,13 +466,13 @@ EventScript_1711DA:: @ 81711DA
 	waitmovement 0
 	msgbox gUnknown_81A13B8
 	closemessage
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_1712E4
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_1712EF
-	compare_var_to_value VAR_0x4001, 3
+	compare VAR_0x4001, 3
 	call_if eq, EventScript_1712FA
-	compare_var_to_value VAR_0x4001, 4
+	compare VAR_0x4001, 4
 	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB

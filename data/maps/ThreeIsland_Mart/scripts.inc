@@ -3,7 +3,7 @@ ThreeIsland_Mart_MapScripts:: @ 817188C
 
 ThreeIsland_Mart_EventScript_17188D:: @ 817188D
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer

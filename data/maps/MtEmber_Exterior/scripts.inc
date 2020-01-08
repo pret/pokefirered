@@ -5,7 +5,7 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 
 MtEmber_Exterior_MapScript1_163951:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
-	compare_var_to_value VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
+	compare VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	call_if eq, EventScript_163960
 	end
 
@@ -15,7 +15,7 @@ EventScript_163960:: @ 8163960
 	return
 
 MtEmber_Exterior_MapScript2_163969:: @ 8163969
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	call_if ge, EventScript_163975
 	end
 
@@ -27,7 +27,7 @@ MtEmber_Exterior_EventScript_16397F:: @ 816397F
 	lock
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_43
 	goto_if eq, EventScript_16399E
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if eq, EventScript_1639A8
 	msgbox gUnknown_817A82A
 	release
@@ -65,7 +65,7 @@ MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
 	faceplayer
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_44
 	goto_if eq, EventScript_163A1B
-	compare_var_to_value VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
+	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if eq, EventScript_163A25
 	msgbox gUnknown_817A88C
 	closemessage

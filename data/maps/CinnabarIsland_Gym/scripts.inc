@@ -75,7 +75,7 @@ EventScript_16DA06:: @ 816DA06
 EventScript_16DA34:: @ 816DA34
 	msgbox gUnknown_819969E
 	checkitemspace ITEM_TM38, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DA75
 	additem ITEM_TM38, 1
 	giveitemfanfaremsg gUnknown_81996FF, ITEM_TM38
@@ -227,9 +227,9 @@ CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
 EventScript_16DC00:: @ 816DC00
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D5A, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16DC43
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DC6A
 	end
 
@@ -275,9 +275,9 @@ EventScript_16DC6A:: @ 816DC6A
 	end
 
 EventScript_16DC7A:: @ 816DC7A
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16DCB4
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16DCC6
 	textcolor 0
 	msgbox gUnknown_819983F
@@ -324,9 +324,9 @@ CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 EventScript_16DCF5:: @ 816DCF5
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D79, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16DD41
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DD1C
 	end
 
@@ -354,9 +354,9 @@ EventScript_16DD41:: @ 816DD41
 	end
 
 EventScript_16DD51:: @ 816DD51
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16DD8B
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16DD9D
 	textcolor 0
 	msgbox gUnknown_81998BD
@@ -412,9 +412,9 @@ CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 EventScript_16DDD3:: @ 816DDD3
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DA9, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16DE1F
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DDFA
 	end
 
@@ -442,9 +442,9 @@ EventScript_16DE1F:: @ 816DE1F
 	end
 
 EventScript_16DE2F:: @ 816DE2F
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16DE69
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16DE7B
 	textcolor 0
 	msgbox gUnknown_8199948
@@ -491,9 +491,9 @@ CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 EventScript_16DEAA:: @ 816DEAA
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DC6, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16DEF6
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DED1
 	end
 
@@ -521,9 +521,9 @@ EventScript_16DEF6:: @ 816DEF6
 	end
 
 EventScript_16DF06:: @ 816DF06
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16DF40
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16DF52
 	textcolor 0
 	msgbox gUnknown_81999B7
@@ -570,9 +570,9 @@ CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 EventScript_16DF81:: @ 816DF81
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E00, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16DFA8
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16DFCD
 	end
 
@@ -600,9 +600,9 @@ EventScript_16DFCD:: @ 816DFCD
 	end
 
 EventScript_16DFDD:: @ 816DFDD
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16E017
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16E029
 	textcolor 0
 	msgbox gUnknown_8199A7F
@@ -649,9 +649,9 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 EventScript_16E058:: @ 816E058
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E36, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16E0A4
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16E07F
 	end
 
@@ -679,9 +679,9 @@ EventScript_16E0A4:: @ 816E0A4
 	end
 
 EventScript_16E0B4:: @ 816E0B4
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16E0EE
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16E100
 	textcolor 0
 	msgbox gUnknown_8199AFC

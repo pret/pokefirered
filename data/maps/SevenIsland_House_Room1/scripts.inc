@@ -5,9 +5,9 @@ SevenIsland_House_Room1_MapScripts:: @ 817088A
 
 SevenIsland_House_Room1_MapScript1_170895:: @ 8170895
 	special ValidateEReaderTrainer
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_1708AF
-	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	call_if ne, EventScript_1708C3
 	end
 
@@ -39,11 +39,11 @@ EventScript_1708E9:: @ 1708E9
 	moveobjectoffscreen 1
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
-	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	call_if eq, EventScript_170938
-	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
 	call_if eq, EventScript_170941
-	compare_var_to_value VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
+	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
 	call_if eq, EventScript_17094A
 	special LoadPlayerParty
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
@@ -75,9 +75,9 @@ SevenIsland_House_Room1_EventScript_170958:: @ 8170958
 	lock
 	faceplayer
 	special ValidateEReaderTrainer
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_17097D
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_if eq, EventScript_170987
 	msgbox gUnknown_81A049B
 	release
@@ -92,27 +92,27 @@ EventScript_170987:: @ 8170987
 	special SavePlayerParty
 	special Special_BufferEReaderTrainerName5
 	msgbox gUnknown_81A0598, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170A11
 	call EventScript_170A1E
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170A11
 	msgbox gUnknown_81A0788, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170A11
 	special LoadPlayerParty
 	call EventScript_1A4EAF
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_170A11
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
 	msgbox gUnknown_81A07C4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_170A2D
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_170A3F
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_170A51
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
 	waitstate

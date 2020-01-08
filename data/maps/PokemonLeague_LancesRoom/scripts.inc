@@ -11,7 +11,7 @@ PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
 	end
 
 PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
-	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	call_if eq, EventScript_162962
 	checkflag FLAG_DEFEATED_LANCE
 	call_if TRUE, EventScript_162968

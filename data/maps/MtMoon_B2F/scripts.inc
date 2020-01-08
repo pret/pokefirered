@@ -57,7 +57,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	lock
 	faceplayer
 	msgbox gUnknown_8172E77, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1607DE
 	removeobject 1
 	additem ITEM_DOME_FOSSIL, 1
@@ -90,7 +90,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	lock
 	faceplayer
 	msgbox gUnknown_8172E94, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1607DE
 	removeobject 2
 	additem ITEM_HELIX_FOSSIL, 1

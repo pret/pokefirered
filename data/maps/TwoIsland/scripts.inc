@@ -69,15 +69,15 @@ EventScript_167606:: @ 8167606
 
 TwoIsland_EventScript_16760F:: @ 816760F
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 4
+	compare VAR_MAP_SCENE_TWO_ISLAND, 4
 	goto_if eq, EventScript_167646
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 3
+	compare VAR_MAP_SCENE_TWO_ISLAND, 3
 	goto_if eq, EventScript_16765E
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 2
+	compare VAR_MAP_SCENE_TWO_ISLAND, 2
 	goto_if eq, EventScript_167676
 	goto EventScript_16768E
 	end
@@ -121,11 +121,11 @@ EventScript_16768E:: @ 816768E
 EventScript_1676A6:: @ 81676A6
 	message Text_1A6211
 	waitmessage
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 4
+	compare VAR_MAP_SCENE_TWO_ISLAND, 4
 	goto_if eq, EventScript_167728
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 3
+	compare VAR_MAP_SCENE_TWO_ISLAND, 3
 	goto_if eq, EventScript_167708
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND, 2
+	compare VAR_MAP_SCENE_TWO_ISLAND, 2
 	goto_if eq, EventScript_1676EC
 	goto EventScript_1676D3
 	end

@@ -1,7 +1,7 @@
 SevenIsland_TrainerTower_1F_MapScripts:: @ 81646B8
-	map_script 5, SevenIsland_TrainerTower_1F_MapScript1_1C4F54
-	map_script 3, SevenIsland_TrainerTower_1F_MapScript2_1C4F62
-	map_script 2, SevenIsland_TrainerTower_1F_MapScript3_1C5046
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_1F_MapScript1_1C4F54
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TrainerTower_1F_MapScript2_1C4F62
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_1F_MapScript3_1C5046
 	.byte 0
 
 SevenIsland_TrainerTower_2F_EventScript_1646C8:: @ 81646C8

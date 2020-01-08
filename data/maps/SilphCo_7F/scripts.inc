@@ -5,15 +5,15 @@ SilphCo_7F_MapScripts:: @ 8161984
 
 SilphCo_7F_MapScript1_16198F:: @ 816198F
 	checkflag FLAG_SILPH_7F_DOOR_1
-	call_if FALSE, EventScript_1A834B
+	call_if FALSE, EventScript_Close7FDoor1
 	checkflag FLAG_SILPH_7F_DOOR_2
-	call_if FALSE, EventScript_1A8379
+	call_if FALSE, EventScript_Close7FDoor2
 	checkflag FLAG_SILPH_7F_DOOR_3
-	call_if FALSE, EventScript_1A83A7
+	call_if FALSE, EventScript_Close7FDoor3
 	end
 
 SilphCo_7F_MapScript2_1619AB:: @ 81619AB
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	call_if ge, EventScript_1619B7
 	end
 
@@ -46,24 +46,24 @@ EventScript_1619D4:: @ 81619D4
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
 	msgbox gUnknown_8176710
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_161A73
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_161A7F
 	msgbox gUnknown_8176727
 	setvar VAR_LAST_TALKED, 1
-	compare_var_to_value VAR_STARTER_MON, 2
+	compare VAR_STARTER_MON, 2
 	call_if eq, EventScript_161A80
-	compare_var_to_value VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 1
 	call_if eq, EventScript_161A8B
-	compare_var_to_value VAR_STARTER_MON, 0
+	compare VAR_STARTER_MON, 0
 	call_if eq, EventScript_161A96
 	msgbox gUnknown_8176827
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_161AA1
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_161AAC
 	playse SE_TK_WARPIN
 	fadedefaultbgm
@@ -135,11 +135,11 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	msgbox gUnknown_8176266
 	setvar VAR_0x4001, SPECIES_LAPRAS
 	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_161B12
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_161B45
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A927C
 	release
 	end
@@ -152,7 +152,7 @@ EventScript_161B12:: @ 8161B12
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_161B7E
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -169,7 +169,7 @@ EventScript_161B45:: @ 8161B45
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_161B73
 	call EventScript_1A8C33
 	goto EventScript_161B73
@@ -199,7 +199,7 @@ EventScript_161B8D:: @ 8161B8D
 SilphCo_7F_EventScript_161B97:: @ 8161B97
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_161BAE
 	msgbox gUnknown_8176444
 	release
@@ -213,7 +213,7 @@ EventScript_161BAE:: @ 8161BAE
 SilphCo_7F_EventScript_161BB8:: @ 8161BB8
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_161BCF
 	msgbox gUnknown_81764C2
 	release
@@ -227,7 +227,7 @@ EventScript_161BCF:: @ 8161BCF
 SilphCo_7F_EventScript_161BD9:: @ 8161BD9
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_161BF0
 	msgbox gUnknown_8176532
 	release

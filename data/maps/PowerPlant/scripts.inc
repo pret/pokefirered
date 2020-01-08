@@ -10,7 +10,7 @@ PowerPlant_MapScript1_16376F:: @ 816376F
 
 EventScript_163779:: @ 8163779
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if ne, EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
@@ -39,7 +39,7 @@ EventScript_1637B4:: @ 81637B4
 
 PowerPlant_EventScript_1637B8:: @ 81637B8
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
@@ -58,11 +58,11 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_16381B
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163824
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163824
 	setflag FLAG_FOUGHT_ZAPDOS
 	release
@@ -80,7 +80,7 @@ EventScript_163824:: @ 8163824
 
 PowerPlant_EventScript_16382F:: @ 816382F
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
@@ -94,11 +94,11 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_163884
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_163884
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_163884
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	release
@@ -111,7 +111,7 @@ EventScript_163884:: @ 8163884
 
 PowerPlant_EventScript_16388D:: @ 816388D
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
@@ -125,11 +125,11 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
+	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if eq, EventScript_1638E2
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
+	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if eq, EventScript_1638E2
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if eq, EventScript_1638E2
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	release

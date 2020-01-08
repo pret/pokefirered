@@ -579,7 +579,7 @@ const u8 *const gStdStringPtrs[] = {
     gText_Items,
     gText_KeyItems,
     gText_PokeBalls,
-    gText_TmsgUnknown_8417B2CHms,
+    gText_TMsAndHMs,
     gText_Berries,
     gText_Boulderbadge,
     gText_Cascadebadge,

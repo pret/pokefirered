@@ -1,6 +1,6 @@
 SevenIsland_TrainerTower_Elevator_MapScripts:: @ 8164AF8
-	map_script 5, SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54
-	map_script 2, SevenIsland_TrainerTower_Elevator_MapScript2_1C5046
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_Elevator_MapScript2_1C5046
 	.byte 0
 
 SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
@@ -40,7 +40,7 @@ EventScript_164B5E:: @ 8164B5E
 EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 3
+	compare VAR_ELEVATOR_FLOOR, 3
 	goto_if eq, EventScript_164BD3
 	call EventScript_164BD8
 	setvar VAR_ELEVATOR_FLOOR, 3

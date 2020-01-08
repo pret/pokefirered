@@ -3,9 +3,9 @@ PalletTown_GarysHouse_MapScripts:: @ 8168D27
 	.byte 0
 
 PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if lt, EventScript_168D44
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if ge, EventScript_168D50
 	end
 
@@ -24,13 +24,13 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_168DB9
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	goto_if eq, EventScript_168EEC
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	goto_if eq, EventScript_168F59
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
 	goto_if eq, EventScript_168EF6
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	goto_if ge, EventScript_168DAF
 	msgbox gUnknown_818D58C
 	closemessage
@@ -46,23 +46,23 @@ EventScript_168DAF:: @ 8168DAF
 
 EventScript_168DB9:: @ 8168DB9
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	compare_var_to_value VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
+	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	goto_if lt, EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168E3C
 	msgbox gUnknown_818D8B2
 	special Special_ChooseMonFromParty
 	waitstate
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_168E3C
 	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
-	compare_var_to_value VAR_RESULT, SPECIES_EGG
+	compare VAR_RESULT, SPECIES_EGG
 	goto_if eq, EventScript_168E32
 	msgbox gUnknown_818D8CC
 	closemessage
@@ -143,7 +143,7 @@ EventScript_168EF6:: @ 8168EF6
 	msgbox gUnknown_818D60A
 	closemessage
 	checkitemspace ITEM_TOWN_MAP, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168F4F
 	applymovement 1, Movement_1A75EB
 	waitmovement 0

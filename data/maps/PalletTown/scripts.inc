@@ -7,16 +7,16 @@ PalletTown_MapScript1_165465:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
 	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	call_if TRUE, EventScript_165488
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
+	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 0
 	call_if eq, EventScript_1654A8
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	call_if eq, EventScript_1654A2
 	end
 
 EventScript_165488:: @ 8165488
 	checkflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
 	goto_if FALSE, EventScript_1A77A9
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if ge, EventScript_1A77A9
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
@@ -59,7 +59,7 @@ EventScript_1654D8:: @ 81654D8
 	copyvar VAR_0x8009, VAR_0x8006
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
-	compare_var_to_value VAR_0x8009, 60
+	compare VAR_0x8009, 60
 	goto_if lt, EventScript_165593
 	msgbox gUnknown_817D9AA
 	closemessage
@@ -199,17 +199,17 @@ EventScript_165605:: @ 8165605
 	waitmovement 0
 	delay 30
 	addobject 3
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1656B8
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_1656C3
 	delay 30
 	msgbox gUnknown_817D74A
 	closemessage
 	delay 30
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1656CE
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_1656E0
 	opendoor 16, 13
 	waitdooranim
@@ -374,11 +374,11 @@ Movement_165758:: @ 8165758
 
 PalletTown_EventScript_16575C:: @ 816575C
 	lock
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 2
 	goto_if eq, EventScript_1657ED
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if eq, EventScript_165815
-	compare_var_to_value VAR_0x4002, 1
+	compare VAR_0x4002, 1
 	goto_if eq, EventScript_1658C2
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_165801
@@ -392,9 +392,9 @@ PalletTown_EventScript_16575C:: @ 816575C
 	waitmovement 0
 	msgbox gUnknown_81B1C9F
 	closemessage
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_1657D7
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if ne, EventScript_1657E2
 	moveobjectoffscreen 1
 	setflag FLAG_TEMP_2

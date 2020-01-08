@@ -3,16 +3,16 @@ FiveIsland_ResortGorgeous_House_MapScripts:: @ 8171EBD
 
 FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_172043
-	compare_var_to_value VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF
+	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, 0xFFFF
 	goto_if eq, EventScript_171F0B
-	compare_var_to_value VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
+	compare VAR_RESORT_GORGEOUS_REQUESTED_MON, SPECIES_NONE
 	goto_if ne, EventScript_171F19
 	msgbox gUnknown_81A42A0
 	goto EventScript_171EFE
@@ -32,7 +32,7 @@ EventScript_171F0B:: @ 8171F0B
 EventScript_171F19:: @ 8171F19
 	copyvar VAR_0x8004, VAR_RESORT_GORGEOUS_REQUESTED_MON
 	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_171F34
 	goto EventScript_171EFE
 	end
@@ -52,18 +52,18 @@ EventScript_171F34:: @ 8171F34
 	textcolor 0
 	msgbox gUnknown_81A4566
 	closemessage
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	call_if eq, EventScript_171FCD
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	call_if eq, EventScript_171FE9
-	compare_var_to_value VAR_FACING, 4
+	compare VAR_FACING, 4
 	call_if eq, EventScript_171FFE
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	call_if eq, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E
 	giveitem VAR_RESORT_GORGEOUS_REWARD
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_172025
 	setflag FLAG_TEMP_2
 	setvar VAR_RESORT_GORGEOUS_REQUESTED_MON, 0

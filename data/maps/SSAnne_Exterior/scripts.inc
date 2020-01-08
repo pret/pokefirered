@@ -14,9 +14,9 @@ SSAnne_Exterior_MapScript2_16084F:: @ 816084F
 SSAnne_Exterior_160859:: @ 8160859
 	lockall
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8005, 6
+	compare VAR_0x8005, 6
 	call_if le, EventScript_1608A1
-	compare_var_to_value VAR_0x8005, 7
+	compare VAR_0x8005, 7
 	call_if ge, EventScript_1608AC
 	fadenewbgm MUS_NAMINORI
 	delay 50

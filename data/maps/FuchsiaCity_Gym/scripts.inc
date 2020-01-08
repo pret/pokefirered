@@ -22,7 +22,7 @@ EventScript_16D580:: @ 816D580
 EventScript_16D5A6:: @ 816D5A6
 	msgbox gUnknown_819850E
 	checkitemspace ITEM_TM06, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16D5E7
 	additem ITEM_TM06, 1
 	giveitemfanfaremsg gUnknown_819858F, ITEM_TM06

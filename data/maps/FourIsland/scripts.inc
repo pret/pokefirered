@@ -5,7 +5,7 @@ FourIsland_MapScripts:: @ 8167CAE
 
 FourIsland_MapScript1_167CB9:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
-	compare_var_to_value VAR_MAP_SCENE_FOUR_ISLAND, 0
+	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
 	call_if eq, EventScript_167CCD
 	call EventScript_167CD1
 	end
@@ -72,18 +72,18 @@ Movement_167D52:: @ 8167D52
 
 FourIsland_EventScript_167D55:: @ 8167D55
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_167D9B
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_167E0C
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if eq, EventScript_167E19
 	msgbox gUnknown_81BF555
 	release
@@ -91,10 +91,10 @@ FourIsland_EventScript_167D55:: @ 8167D55
 
 EventScript_167D9B:: @ 8167D9B
 	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_167DD1
 	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_167DD1
 	msgbox gUnknown_81BF6CF
 	clearflag FLAG_PENDING_DAYCARE_EGG
@@ -104,7 +104,7 @@ EventScript_167D9B:: @ 8167D9B
 
 EventScript_167DD1:: @ 8167DD1
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_RESULT, 6
+	compare VAR_RESULT, 6
 	goto_if ne, EventScript_167DEB
 	msgbox gUnknown_81BF6F0
 	release

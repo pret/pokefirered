@@ -8,7 +8,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B14A:: @ 816B14A
 	goto_if TRUE, EventScript_16B196
 	msgbox gUnknown_81936FF
 	checkitemspace ITEM_POKE_FLUTE, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16B1A0
 	setflag FLAG_GOT_POKE_FLUTE
 	additem ITEM_POKE_FLUTE, 1

@@ -24,7 +24,7 @@ EventScript_16A5C5:: @ 816A5C5
 EventScript_16A5F3:: @ 816A5F3
 	msgbox gUnknown_8190FC1
 	checkitemspace ITEM_TM39, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A634
 	additem ITEM_TM39, 1
 	giveitemfanfaremsg gUnknown_8190FDB, ITEM_TM39
@@ -49,9 +49,9 @@ PewterCity_Gym_EventScript_16A655:: @ 816A655
 	checkflag FLAG_DEFEATED_BROCK
 	goto_if TRUE, EventScript_16A67F
 	msgbox gUnknown_8191298, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16A689
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A697
 	end
 

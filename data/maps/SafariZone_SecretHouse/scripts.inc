@@ -8,7 +8,7 @@ SafariZone_SecretHouse_EventScript_162453:: @ 8162453
 	goto_if TRUE, EventScript_1624A9
 	msgbox gUnknown_8177DC1
 	checkitemspace ITEM_HM03, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16249F
 	additem ITEM_HM03, 1
 	giveitemfanfaremsg gUnknown_8177E92, ITEM_HM03

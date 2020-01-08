@@ -54,10 +54,10 @@ Movement_16A262:: @ 816A262
 ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
+	compare VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	goto_if eq, EventScript_16A2A4
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	message Text_1A6211
 	waitmessage

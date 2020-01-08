@@ -13,7 +13,7 @@ CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
 	msgbox gUnknown_81960C9
 	setflag FLAG_GOT_TEA
 	giveitem ITEM_TEA
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1A6BF9
 	msgbox gUnknown_8196109
 	release

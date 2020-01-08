@@ -43,21 +43,21 @@ EventScript_1664CC:: @ 81664CC
 	waitmovement 0
 	msgbox gUnknown_817EAD7
 	setvar VAR_LAST_TALKED, 8
-	compare_var_to_value VAR_STARTER_MON, 2
+	compare VAR_STARTER_MON, 2
 	call_if eq, EventScript_166582
-	compare_var_to_value VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 1
 	call_if eq, EventScript_16658D
-	compare_var_to_value VAR_STARTER_MON, 0
+	compare VAR_STARTER_MON, 0
 	call_if eq, EventScript_166598
 	famechecker FAMECHECKER_BILL, 0
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1665A3
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_1665A3
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_1665B5
 	msgbox gUnknown_817ECD4
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
@@ -185,7 +185,7 @@ CeruleanCity_EventScript_166603:: @ 8166603
 EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_166677
 	additem ITEM_TM28, 1
 	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
@@ -283,11 +283,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	lock
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if eq, EventScript_1667B0
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_1667B6
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if eq, EventScript_1667BC
 	waitmessage
 	delay 40
@@ -295,11 +295,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	applymovement 5, Movement_1A75D9
 	waitmovement 0
 	delay 30
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if eq, EventScript_1667C2
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_1667CB
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if eq, EventScript_1667D4
 	release
 	end
@@ -332,13 +332,13 @@ CeruleanCity_EventScript_1667DD:: @ 81667DD
 	lock
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
+	compare VAR_0x8008, 0
 	call_if eq, EventScript_166814
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_16681D
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if eq, EventScript_166826
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if eq, EventScript_16682F
 	release
 	end

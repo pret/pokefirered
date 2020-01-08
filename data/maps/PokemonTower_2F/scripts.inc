@@ -20,9 +20,9 @@ PokemonTower_2F_EventScript_16329B:: @ 816329B
 EventScript_1632A7:: @ 81632A7
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_163339
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16334B
 	applymovement 1, Movement_1A75DB
 	waitmovement 0
@@ -30,18 +30,18 @@ EventScript_1632A7:: @ 81632A7
 	waitmovement 0
 	msgbox gUnknown_8179CFF
 	setvar VAR_LAST_TALKED, 1
-	compare_var_to_value VAR_STARTER_MON, 2
+	compare VAR_STARTER_MON, 2
 	call_if eq, EventScript_16335D
-	compare_var_to_value VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 1
 	call_if eq, EventScript_163368
-	compare_var_to_value VAR_STARTER_MON, 0
+	compare VAR_STARTER_MON, 0
 	call_if eq, EventScript_163373
 	msgbox gUnknown_8179DD4
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16337E
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_163389
 	playse SE_KAIDAN
 	delay 25

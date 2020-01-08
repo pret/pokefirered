@@ -5,7 +5,7 @@ FuchsiaCity_House3_EventScript_16D895:: @ 816D895
 	lock
 	faceplayer
 	msgbox gUnknown_81993B9, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16D8B0
 	goto EventScript_16D941
 	end
@@ -14,23 +14,23 @@ EventScript_16D8B0:: @ 816D8B0
 	msgbox gUnknown_8199421
 	special Special_ChooseMonFromParty
 	waitstate
-	compare_var_to_value VAR_0x8004, 6
+	compare VAR_0x8004, 6
 	goto_if ge, EventScript_16D941
 	special IsSelectedMonEgg
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16D937
 	special ScrSpecial_CountPokemonMoves
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16D92A
 	msgbox gUnknown_8199445
 	fadescreen 1
 	special SelectMove
 	fadescreen 0
-	compare_var_to_value VAR_0x8005, 4
+	compare VAR_0x8005, 4
 	goto_if eq, EventScript_16D8B0
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox gUnknown_8199485, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16D919
 	goto EventScript_16D941
 	end

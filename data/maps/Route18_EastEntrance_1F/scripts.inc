@@ -53,13 +53,13 @@ EventScript_1703D6:: @ 81703D6
 	applymovement 255, Movement_1A75E9
 	waitmovement 0
 	delay 20
-	compare_var_to_value VAR_0x8008, 1
+	compare VAR_0x8008, 1
 	call_if eq, EventScript_17042F
-	compare_var_to_value VAR_0x8008, 2
+	compare VAR_0x8008, 2
 	call_if eq, EventScript_17043A
-	compare_var_to_value VAR_0x8008, 3
+	compare VAR_0x8008, 3
 	call_if eq, EventScript_170445
-	compare_var_to_value VAR_0x8008, 4
+	compare VAR_0x8008, 4
 	call_if eq, EventScript_170450
 	msgbox gUnknown_819FD0C
 	closemessage

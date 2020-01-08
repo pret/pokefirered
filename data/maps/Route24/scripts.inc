@@ -4,11 +4,11 @@ Route24_MapScripts:: @ 816861F
 Route24_EventScript_168620:: @ 8168620
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_ROUTE24, 1
+	compare VAR_MAP_SCENE_ROUTE24, 1
 	goto_if eq, EventScript_168656
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16864C
 	call EventScript_1686B9
 	release
@@ -38,15 +38,15 @@ Route24_EventScript_16866C:: @ 816866C
 
 EventScript_168678:: @ 8168678
 	textcolor 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1686FD
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_168708
 	applymovement 255, Movement_1A75EB
 	waitmovement 0
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168713
 	call EventScript_1686B9
 	releaseall
@@ -80,7 +80,7 @@ EventScript_168713:: @ 8168713
 	closemessage
 	applymovement 255, Movement_168743
 	waitmovement 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_168733
 	release
 	end

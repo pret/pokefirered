@@ -10,11 +10,11 @@ CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
 	faceplayer
 	setvar VAR_0x4001, SPECIES_EEVEE
 	givemon SPECIES_EEVEE, 25, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C4A6
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16C4DA
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A927C
 	release
 	end
@@ -27,7 +27,7 @@ EventScript_16C4A6:: @ 816C4A6
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C514
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -42,7 +42,7 @@ EventScript_16C4DA:: @ 816C4DA
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C509
 	call EventScript_1A8C33
 	goto EventScript_16C509

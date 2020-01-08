@@ -12,7 +12,7 @@ LavenderTown_EventScript_16687D:: @ 816687D
 	lock
 	faceplayer
 	msgbox gUnknown_817F52E, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16689C
 	msgbox gUnknown_817F568
 	release

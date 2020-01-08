@@ -4,17 +4,17 @@ SilphCo_5F_MapScripts:: @ 81617BE
 
 SilphCo_5F_MapScript1_1617C4:: @ 81617C4
 	checkflag FLAG_SILPH_5F_DOOR_1
-	call_if FALSE, EventScript_1A826F
+	call_if FALSE, EventScript_Close5FDoor1
 	checkflag FLAG_SILPH_5F_DOOR_2
-	call_if FALSE, EventScript_1A82A6
+	call_if FALSE, EventScript_Close5FDoor2
 	checkflag FLAG_SILPH_5F_DOOR_3
-	call_if FALSE, EventScript_1A82DD
+	call_if FALSE, EventScript_Close5FDoor3
 	end
 
 SilphCo_5F_EventScript_1617E0:: @ 81617E0
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_1617F7
 	msgbox gUnknown_8175B70
 	release

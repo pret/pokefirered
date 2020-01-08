@@ -13,7 +13,7 @@ PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
 PokemonLeague_AgathasRoom_MapScript2_162830:: @ 8162830
 	checkflag FLAG_DEFEATED_AGATHA
 	call_if TRUE, EventScript_16284B
-	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 3
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 3
 	call_if eq, EventScript_162845
 	end
 

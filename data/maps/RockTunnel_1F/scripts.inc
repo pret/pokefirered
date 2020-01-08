@@ -1,8 +1,8 @@
 RockTunnel_1F_MapScripts:: @ 8162DD6
-	map_script 3, RockTunnel_1F_MapScript1_162DDC
+	map_script MAP_SCRIPT_ON_TRANSITION, RockTunnel_1F_OnTransition
 	.byte 0
 
-RockTunnel_1F_MapScript1_162DDC:: @ 8162DDC
+RockTunnel_1F_OnTransition:: @ 8162DDC
 	setworldmapflag FLAG_WORLD_MAP_ROCK_TUNNEL_1F
 	end
 

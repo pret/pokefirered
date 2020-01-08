@@ -4,13 +4,13 @@ SilphCo_10F_MapScripts:: @ 8161D86
 
 SilphCo_10F_MapScript1_161D8C:: @ 8161D8C
 	checkflag FLAG_SILPH_10F_DOOR
-	call_if FALSE, EventScript_1A84D6
+	call_if FALSE, EventScript_Close10FDoor
 	end
 
 SilphCo_10F_EventScript_161D96:: @ 8161D96
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_161DAD
 	msgbox gUnknown_8176DBA
 	release

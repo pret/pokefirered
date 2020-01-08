@@ -35,29 +35,29 @@ EventScript_160903:: @ 8160903
 	applymovement 1, Movement_1A75ED
 	waitmovement 0
 	delay 20
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1609AD
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_1609B8
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_1609CA
 	msgbox gUnknown_8173035
 	setvar VAR_LAST_TALKED, 1
-	compare_var_to_value VAR_STARTER_MON, 2
+	compare VAR_STARTER_MON, 2
 	call_if eq, EventScript_1609DC
-	compare_var_to_value VAR_STARTER_MON, 1
+	compare VAR_STARTER_MON, 1
 	call_if eq, EventScript_1609E7
-	compare_var_to_value VAR_STARTER_MON, 0
+	compare VAR_STARTER_MON, 0
 	call_if eq, EventScript_1609F2
 	msgbox gUnknown_8173164
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_1609FD
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_160A08
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_160A13
 	fadedefaultbgm
 	removeobject 1

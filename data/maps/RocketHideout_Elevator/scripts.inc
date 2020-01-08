@@ -53,7 +53,7 @@ EventScript_161554:: @ 8161554
 EventScript_161591:: @ 8161591
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 3
+	compare VAR_ELEVATOR_FLOOR, 3
 	goto_if eq, EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 3
@@ -65,7 +65,7 @@ EventScript_1615B8:: @ 81615B8
 EventScript_1615B9:: @ 81615B9
 	setvar VAR_0x8006, 2
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 2
+	compare VAR_ELEVATOR_FLOOR, 2
 	goto_if eq, EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 2
@@ -77,7 +77,7 @@ EventScript_1615E0:: @ 81615E0
 EventScript_1615E1:: @ 81615E1
 	setvar VAR_0x8006, 0
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 0
+	compare VAR_ELEVATOR_FLOOR, 0
 	goto_if eq, EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 0

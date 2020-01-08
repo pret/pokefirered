@@ -295,8 +295,6 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
-#define PARTY_SIZE 6
-
 struct SecretBaseParty
 {
     u32 personality[PARTY_SIZE];
@@ -406,7 +404,7 @@ struct UnkMauvilleOldManStruct
     u8 unk_2D95;
     /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
     /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[8];
+    /*0x2DAE*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x2DB6*/ u8 filler_2DB6[0x3];
     /*0x2DB9*/ u8 playerTrainerId[4];
     u8 unk_2DBD;

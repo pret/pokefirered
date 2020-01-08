@@ -7,9 +7,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
 	checkflag FLAG_BEAT_RIVAL_IN_OAKS_LAB
 	goto_if TRUE, EventScript_168C4A
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_168C38
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_168C41
 	closemessage
 	applymovement 1, Movement_1A75E5
@@ -35,7 +35,7 @@ EventScript_168C4A:: @ 8168C4A
 
 PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 	lockall
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	goto_if eq, EventScript_168C78
 	msgbox gUnknown_818D4F9
 	releaseall
@@ -43,9 +43,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 
 EventScript_168C78:: @ 8168C78
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_168C91
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_168C9A
 	releaseall
 	end

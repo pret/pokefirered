@@ -4,19 +4,19 @@ SilphCo_9F_MapScripts:: @ 8161CDE
 
 SilphCo_9F_MapScript1_161CE4:: @ 8161CE4
 	checkflag FLAG_SILPH_9F_DOOR_1
-	call_if FALSE, EventScript_1A840C
+	call_if FALSE, EventScript_Close9FDoor1
 	checkflag FLAG_SILPH_9F_DOOR_2
-	call_if FALSE, EventScript_1A8443
+	call_if FALSE, EventScript_Close9FDoor2
 	checkflag FLAG_SILPH_9F_DOOR_3
-	call_if FALSE, EventScript_1A847A
+	call_if FALSE, EventScript_Close9FDoor3
 	checkflag FLAG_SILPH_9F_DOOR_4
-	call_if FALSE, EventScript_1A84A8
+	call_if FALSE, EventScript_Close9FDoor4
 	end
 
 SilphCo_9F_EventScript_161D09:: @ 8161D09
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	goto_if ge, EventScript_161D2E
 	msgbox gUnknown_8176B54
 	closemessage

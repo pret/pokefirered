@@ -4,11 +4,11 @@ PewterCity_Museum_1F_MapScripts:: @ 816A31A
 PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	lock
 	faceplayer
-	compare_var_to_value VAR_FACING, 3
+	compare VAR_FACING, 3
 	goto_if eq, EventScript_16A348
-	compare_var_to_value VAR_FACING, 1
+	compare VAR_FACING, 1
 	goto_if eq, EventScript_16A348
-	compare_var_to_value VAR_FACING, 2
+	compare VAR_FACING, 2
 	goto_if eq, EventScript_16A348
 	msgbox gUnknown_8190539
 	release
@@ -16,9 +16,9 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 
 EventScript_16A348:: @ 816A348
 	msgbox gUnknown_8190550, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16A367
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A37B
 	end
 
@@ -64,7 +64,7 @@ EventScript_16A3D1:: @ 816A3D1
 	textcolor 0
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_81904B5, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	goto_if eq, EventScript_16A402
 	msgbox gUnknown_81904F9
 	closemessage
@@ -76,14 +76,14 @@ EventScript_16A3D1:: @ 816A3D1
 
 EventScript_16A402:: @ 816A402
 	checkmoney 50, 0
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A476
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
+	compare VAR_0x4001, 0
 	call_if eq, EventScript_16A455
-	compare_var_to_value VAR_0x4001, 1
+	compare VAR_0x4001, 1
 	call_if eq, EventScript_16A460
-	compare_var_to_value VAR_0x4001, 2
+	compare VAR_0x4001, 2
 	call_if eq, EventScript_16A46B
 	playse SE_SHOP
 	takemoney 50, 0
@@ -156,7 +156,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	goto_if TRUE, EventScript_16A4FF
 	msgbox gUnknown_8190717
 	checkitemspace ITEM_OLD_AMBER, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A4F5
 	setflag FLAG_GOT_OLD_AMBER
 	removeobject 4

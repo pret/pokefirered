@@ -27,7 +27,7 @@ SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	checkflag FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE
 	goto_if TRUE, EventScript_168BC1
 	msgbox gUnknown_818BDC0, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168BCB
 	msgbox gUnknown_818BE11
 	braillemessage gUnknown_81A929B

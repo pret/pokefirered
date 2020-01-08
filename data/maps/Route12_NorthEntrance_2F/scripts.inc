@@ -15,12 +15,12 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	checkflag FLAG_GOT_TM27
 	goto_if TRUE, EventScript_16FF01
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	call_if eq, EventScript_16FEE5
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 1
 	call_if eq, EventScript_16FEEE
 	checkitemspace ITEM_TM27, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16FEF7
 	additem ITEM_TM27, 1
 	giveitemfanfaremsg gUnknown_819EE9F, ITEM_TM27

@@ -9,7 +9,7 @@
 IntrSIO32: @ 81DFC50
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
-	ldr r3, _081DFCB0 @ =gRfuState
+	ldr r3, _081DFCB0 @ =gSTWIStatus
 	ldr r0, [r3]
 	ldr r2, [r0]
 	sub r11, r12, 0x4
@@ -34,7 +34,7 @@ _081DFCA4:
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_081DFCB0: .4byte gRfuState
+_081DFCB0: .4byte gSTWIStatus
 	arm_func_end IntrSIO32
 
 	arm_func_start sio32intr_clock_master
@@ -45,7 +45,7 @@ sio32intr_clock_master: @ 81DFCB4
 	sub r11, r12, 0x4
 	bl STWI_set_timer_in_RAM
 	mov r4, 0x120
-	ldr r2, _081DFF28 @ =gRfuState
+	ldr r2, _081DFF28 @ =gSTWIStatus
 	add r4, r4, 0x4000000
 	ldr lr, [r4]
 	ldr r12, [r2]
@@ -208,7 +208,7 @@ _081DFEFC:
 	bl sub_81E05A4
 	b _081DFF3C
 	.align 2, 0
-_081DFF28: .4byte gRfuState
+_081DFF28: .4byte gSTWIStatus
 _081DFF2C:
 	add r3, r5, 0x3
 	strh r3, [r4]
@@ -223,7 +223,7 @@ _081DFF3C:
 sio32intr_clock_slave: @ 81DFF44
 	mov r12, sp
 	stmdb sp!, {r4-r6,r11,r12,lr,pc}
-	ldr r4, _081E02F0 @ =gRfuState
+	ldr r4, _081E02F0 @ =gSTWIStatus
 	mov r0, 0x64
 	ldr r3, [r4]
 	mov r6, 0
@@ -473,7 +473,7 @@ _081E02E0:
 	bhi _081E02E0
 	b _081E031C
 	.align 2, 0
-_081E02F0: .4byte gRfuState
+_081E02F0: .4byte gSTWIStatus
 _081E02F4: .4byte 0x996601ee
 _081E02F8:
 	mov r2, 0xFF00
@@ -510,7 +510,7 @@ handshake_wait: @ 81E0350
 	mov r1, 0x128
 	add r1, r1, 0x4000000
 	mov r0, r0, lsl 16
-	ldr r2, _081E03B4 @ =gRfuState
+	ldr r2, _081E03B4 @ =gSTWIStatus
 	sub r11, r12, 0x4
 	mov lr, r0, lsr 14
 	ldr r12, [r2]
@@ -533,7 +533,7 @@ _081E03A0:
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_081E03B4: .4byte gRfuState
+_081E03B4: .4byte gSTWIStatus
 	arm_func_end handshake_wait
 
 	arm_func_start STWI_set_timer_in_RAM
@@ -544,7 +544,7 @@ STWI_set_timer_in_RAM: @ 81E03B8
 	add r1, r1, 0x4000000
 	mov r3, 0
 	sub r11, r12, 0x4
-	ldr r12, _081E0470 @ =gRfuState
+	ldr r12, _081E0470 @ =gSTWIStatus
 	and lr, r0, 0xFF
 	ldr r2, [r12]
 	cmp lr, 0x50
@@ -589,7 +589,7 @@ _081E0458:
 	mov r3, 0x3
 	b _081E0488
 	.align 2, 0
-_081E0470: .4byte gRfuState
+_081E0470: .4byte gSTWIStatus
 _081E0474:
 	mvn r3, 0x850
 	sub r3, r3, 0x2
@@ -621,7 +621,7 @@ STWI_stop_timer_in_RAM: @ 81E04C8
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
 	mov r1, 0x100
-	ldr lr, _081E0514 @ =gRfuState
+	ldr lr, _081E0514 @ =gSTWIStatus
 	add r0, r1, 0x4000000
 	ldr r2, [lr]
 	sub r11, r12, 0x4
@@ -638,14 +638,14 @@ STWI_stop_timer_in_RAM: @ 81E04C8
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_081E0514: .4byte gRfuState
+_081E0514: .4byte gSTWIStatus
 	arm_func_end STWI_stop_timer_in_RAM
 
 	arm_func_start STWI_init_slave
 STWI_init_slave: @ 81E0518
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
-	ldr r0, _081E05A0 @ =gRfuState
+	ldr r0, _081E05A0 @ =gSTWIStatus
 	ldr r2, [r0]
 	mov r3, 0x5
 	str r3, [r2]
@@ -678,7 +678,7 @@ STWI_init_slave: @ 81E0518
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 	.align 2, 0
-_081E05A0: .4byte gRfuState
+_081E05A0: .4byte gSTWIStatus
 	arm_func_end STWI_init_slave
 
 	arm_func_start sub_81E05A4

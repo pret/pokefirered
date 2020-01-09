@@ -17,10 +17,10 @@ s32 AgbRFU_checkID(u8 r5)
     if (REG_IME == 0)
         return -1;
     r8 = REG_IE;
-    gRfuState->state = 10;
+    gSTWIStatus->state = 10;
     STWI_set_Callback_ID(Sio32IDIntr);
     Sio32IDInit();
-    r4 = &REG_TMCNT_L(gRfuState->timerSelect);
+    r4 = &REG_TMCNT_L(gSTWIStatus->timerSelect);
     r5 *= 8;
     while (--r5 != 0xFF)
     {
@@ -38,7 +38,7 @@ s32 AgbRFU_checkID(u8 r5)
     REG_IME = 0;
     REG_IE = r8;
     REG_IME = 1;
-    gRfuState->state = 0;
+    gSTWIStatus->state = 0;
     STWI_set_Callback_ID(NULL);
     return r6;
 }
@@ -46,7 +46,7 @@ s32 AgbRFU_checkID(u8 r5)
 static void Sio32IDInit(void)
 {
     REG_IME = 0;
-    REG_IE &= ~((8 << gRfuState->timerSelect) | INTR_FLAG_SERIAL);
+    REG_IE &= ~((8 << gSTWIStatus->timerSelect) | INTR_FLAG_SERIAL);
     REG_IME = 1;
     REG_RCNT = 0;
     REG_SIOCNT = SIO_32BIT_MODE;

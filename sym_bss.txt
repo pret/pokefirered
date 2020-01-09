@@ -74,7 +74,7 @@ gUnknown_3000FE8: @ 3000FE8
 gUnknown_3001188: @ 3001188
 	.space 0x8
 
-gUnknown_3001190: @ 3001190
+gRfuAPIBuffer: @ 3001190
 	.space 0xE68
 
 gUnknown_3001FF8: @ 3001FF8

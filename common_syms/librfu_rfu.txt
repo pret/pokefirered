@@ -1,4 +1,3 @@
-gRfuState
 gRfuSlotStatusUNI
 gRfuSlotStatusNI
 gRfuLinkStatus

@@ -137,18 +137,20 @@
 // Definition Data Returned by Return Values for Library Functions
 // *******************************************************
 
+// The function doesn't have return value. 
 // Value of u8 *status for rfu_REQ_pollConnectParent (Connection Trial Status)
-#define CP_STATUS_DONE                  0x00               // Connection successful
-#define CP_STATUS_IN_PROCESS            0x01               // Connecting
-#define CP_STATUS_SLOT_CLOSED           0x02               // Parent device is not in connection mode with child device
-#define CP_STATUS_DISCONNECTED          0x03               // Disconnected by parent device while connecting
-#define CP_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
+// #define CP_STATUS_DONE                  0x00               // Connection successful
+// #define CP_STATUS_IN_PROCESS            0x01               // Connecting
+// #define CP_STATUS_SLOT_CLOSED           0x02               // Parent device is not in connection mode with child device
+// #define CP_STATUS_DISCONNECTED          0x03               // Disconnected by parent device while connecting
+// #define CP_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
 
+// The function doesn't exist. 
 // Value of u8 *status argument for rfu_REQ_pollRecoveryConnect (Link Restore Status)
-#define RC_STATUS_DONE                  0x00               // Connection restore successful
-#define RC_STATUS_FAILED                0x01               // Connection restore failure (meaningless to try anymore)
-#define RC_STATUS_SEARCHING_PARENT      0x02               // Searching for parent device
-#define RC_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
+// #define RC_STATUS_DONE                  0x00               // Connection restore successful
+// #define RC_STATUS_FAILED                0x01               // Connection restore failure (meaningless to try anymore)
+// #define RC_STATUS_SEARCHING_PARENT      0x02               // Searching for parent device
+// #define RC_STATUS_UNKNOWN               0xff               // Cannot read status due to REQ-API execution error
 
 // Value of u8 *linkLossReason argument for rfu_REQBN_watchLink (Reason for Link Loss)
 #define REASON_DISCONNECTED             0x00               // State of complete disconnection with rfuLL_disconnect and no possibility of restoring the link (can detect only child device)
@@ -189,6 +191,7 @@
 
 // Error codes returned by rfu_NI_setSendData, rfu_UNI_setSendData, and rfu_NI_CHILD_setSendGameName
 #define ERR_MODE                        0x0300
+#define ERR_MODE_NOT_PARENT            (ERR_MODE | 0x0000)    // not in SDK
 #define ERR_MODE_NOT_CONNECTED         (ERR_MODE | 0x0001)    // RFU is not in connection mode (parent or child)
 
 #define ERR_SLOT                        0x0400
@@ -215,6 +218,8 @@
 // Error code during UNI-type communication (code entered into gRfuSlotStatusUNI[x]->recv.errorCode)
 #define ERR_RECV_DATA_OVERWRITED        (ERR_DATA_RECV | 0x0008)  // Received new data when gRfuSlotStatusUNI[x]->recv.newDataFlag=1
 
+// not in SDK header
+#define ERR_RECV_UNK                    (ERR_DATA_RECV | 0x0001 | 0x0008)
 
 // *******************************************************
 // Definition Data Used by Global Variables in the Library
@@ -496,7 +501,7 @@ struct RfuS32Id
     u16 unkA;
 };
 
-struct RfuStructsBuffer
+struct RfuAPIBuffer
 {
     struct RfuLinkStatus linkStatus;
     struct RfuStatic static_;
@@ -506,7 +511,7 @@ struct RfuStructsBuffer
     struct RfuIntrStruct intr;
 };
 
-extern struct STWIStatus *gRfuState;
+extern struct STWIStatus *gSTWIStatus;
 extern struct RfuLinkStatus *gRfuLinkStatus;
 extern struct RfuStatic *gRfuStatic;
 extern struct RfuFixed *gRfuFixed;
@@ -522,7 +527,7 @@ s32 AgbRFU_checkID(u8);
 // librfu_rfu
 // API Initialization and Initial Settings
     // API Initialization
-u16 rfu_initializeAPI(struct RfuStructsBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
+u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
     // Set Timer Interrupt
 void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p);
     // Resident Function called from within a V-Blank Interrupt

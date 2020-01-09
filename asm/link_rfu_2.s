@@ -132,7 +132,7 @@ _080F86F0: .4byte 0x04000208
 	thumb_func_start sub_80F86F4
 sub_80F86F4: @ 80F86F4
 	push {r4,lr}
-	ldr r0, _080F8728 @ =gUnknown_3001190
+	ldr r0, _080F8728 @ =gRfuAPIBuffer
 	ldr r1, _080F872C @ =0x00000e64
 	ldr r4, _080F8730 @ =gIntrTable + 0x4
 	adds r2, r4, 0
@@ -155,7 +155,7 @@ _080F8722:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F8728: .4byte gUnknown_3001190
+_080F8728: .4byte gRfuAPIBuffer
 _080F872C: .4byte 0x00000e64
 _080F8730: .4byte gIntrTable + 0x4
 _080F8734: .4byte gLinkType

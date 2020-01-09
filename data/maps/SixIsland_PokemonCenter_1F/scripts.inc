@@ -1,10 +1,10 @@
 SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
-	map_script 3, SixIsland_PokemonCenter_1F_MapScript1_171D7A
-	map_script 5, SixIsland_PokemonCenter_1F_MapScript2_1BC05C
-	map_script 2, SixIsland_PokemonCenter_1F_MapScript3_171D8D
+	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, SixIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SixIsland_PokemonCenter_1F_OnFrame
 	.byte 0
 
-SixIsland_PokemonCenter_1F_MapScript1_171D7A:: @ 8171D7A
+SixIsland_PokemonCenter_1F_OnTransition:: @ 8171D7A
 	setrespawn SPAWN_SIX_ISLAND
 	compare VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
 	call_if eq, EventScript_171D89
@@ -14,7 +14,7 @@ EventScript_171D89:: @ 8171D89
 	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
 	return
 
-SixIsland_PokemonCenter_1F_MapScript3_171D8D:: @ 8171D8D
+SixIsland_PokemonCenter_1F_OnFrame:: @ 8171D8D
 	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, EventScript_171D97
 	.2byte 0
 

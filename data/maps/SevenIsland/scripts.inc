@@ -1,8 +1,8 @@
 SevenIsland_MapScripts:: @ 8167EB3
-	map_script 3, SevenIsland_MapScript1_167EB9
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_OnTransition
 	.byte 0
 
-SevenIsland_MapScript1_167EB9:: @ 8167EB9
+SevenIsland_OnTransition:: @ 8167EB9
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND
 	end
 

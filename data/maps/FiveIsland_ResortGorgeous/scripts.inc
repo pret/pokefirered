@@ -1,9 +1,9 @@
 FiveIsland_ResortGorgeous_MapScripts:: @ 81687E4
-	map_script 4, FiveIsland_ResortGorgeous_MapScript1_1687EF
-	map_script 2, FiveIsland_ResortGorgeous_MapScript2_1687FE
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FiveIsland_ResortGorgeous_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_ResortGorgeous_OnFrame
 	.byte 0
 
-FiveIsland_ResortGorgeous_MapScript1_1687EF:: @ 81687EF
+FiveIsland_ResortGorgeous_OnWarp:: @ 81687EF
 	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, EventScript_1687F9
 	.2byte 0
 
@@ -11,7 +11,7 @@ EventScript_1687F9:: @ 81687F9
 	turnobject 255, 2
 	end
 
-FiveIsland_ResortGorgeous_MapScript2_1687FE:: @ 81687FE
+FiveIsland_ResortGorgeous_OnFrame:: @ 81687FE
 	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_RESORT_GORGEOUS, 1, EventScript_168808
 	.2byte 0
 

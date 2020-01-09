@@ -1,8 +1,8 @@
 VictoryRoad_2F_MapScripts:: @ 8160F92
-	map_script 1, VictoryRoad_2F_MapScript1_160F98
+	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_2F_OnLoad
 	.byte 0
 
-VictoryRoad_2F_MapScript1_160F98:: @ 8160F98
+VictoryRoad_2F_OnLoad:: @ 8160F98
 	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, 100
 	call_if ne, EventScript_160FAF
 	compare VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, 100

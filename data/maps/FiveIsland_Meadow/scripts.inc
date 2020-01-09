@@ -1,8 +1,8 @@
 FiveIsland_Meadow_MapScripts:: @ 8168932
-	map_script 1, FiveIsland_Meadow_MapScript1_168938
+	map_script MAP_SCRIPT_ON_LOAD, FiveIsland_Meadow_OnLoad
 	.byte 0
 
-FiveIsland_Meadow_MapScript1_168938:: @ 8168938
+FiveIsland_Meadow_OnLoad:: @ 8168938
 	checkflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
 	call_if TRUE, EventScript_168983
 	end

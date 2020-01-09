@@ -1,8 +1,8 @@
 FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
-	map_script 3, FourIsland_IcefallCave_Back_MapScript1_163D88
+	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_IcefallCave_Back_OnTransition
 	.byte 0
 
-FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
+FourIsland_IcefallCave_Back_OnTransition:: @ 8163D88
 	compare VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	call_if eq, EventScript_163D94
 	end

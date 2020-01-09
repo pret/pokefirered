@@ -1,8 +1,8 @@
 ThreeIsland_Port_MapScripts:: @ 8168789
-	map_script 3, ThreeIsland_Port_MapScript1_16878F
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_Port_OnTransition
 	.byte 0
 
-ThreeIsland_Port_MapScript1_16878F:: @ 816878F
+ThreeIsland_Port_OnTransition:: @ 816878F
 	clearflag FLAG_SYS_PC_STORAGE_DISABLED
 	setflag FLAG_SEVII_DETOUR_FINISHED
 	end

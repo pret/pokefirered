@@ -1,8 +1,8 @@
 SevenIsland_PokemonCenter_2F_MapScripts:: @ 8170BBC
-	map_script 2, SevenIsland_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, SevenIsland_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, SevenIsland_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, SevenIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_PokemonCenter_2F_MapScript1_1BB2A3
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SevenIsland_PokemonCenter_2F_MapScript2_1BB1ED
+	map_script MAP_SCRIPT_ON_LOAD, SevenIsland_PokemonCenter_2F_MapScript3_1BB237
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_PokemonCenter_2F_MapScript4_1BB1B4
 	.byte 0
 
 SevenIsland_PokemonCenter_2F_EventScript_170BD1:: @ 8170BD1

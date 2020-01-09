@@ -1,9 +1,9 @@
 ViridianCity_Mart_MapScripts:: @ 816A1D3
-	map_script 1, ViridianCity_Mart_MapScript1_16A1DE
-	map_script 2, ViridianCity_Mart_MapScript2_16A1FB
+	map_script MAP_SCRIPT_ON_LOAD, ViridianCity_Mart_OnLoad
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, ViridianCity_Mart_OnFrame
 	.byte 0
 
-ViridianCity_Mart_MapScript1_16A1DE:: @ 816A1DE
+ViridianCity_Mart_OnLoad:: @ 816A1DE
 	checkflag FLAG_SYS_POKEDEX_GET
 	goto_if FALSE, EventScript_16A1E8
 	end
@@ -13,7 +13,7 @@ EventScript_16A1E8:: @ 816A1E8
 	setmetatile 1, 4, 704, 1
 	end
 
-ViridianCity_Mart_MapScript2_16A1FB:: @ 816A1FB
+ViridianCity_Mart_OnFrame:: @ 816A1FB
 	map_script_2 VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 0, EventScript_16A205
 	.2byte 0
 

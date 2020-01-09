@@ -1,8 +1,8 @@
 FuchsiaCity_MapScripts:: @ 8166D75
-	map_script 3, FuchsiaCity_MapScript1_166D7B
+	map_script MAP_SCRIPT_ON_TRANSITION, FuchsiaCity_OnTransition
 	.byte 0
 
-FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
+FuchsiaCity_OnTransition:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
 	checkflag FLAG_GOT_DOME_FOSSIL
 	call_if TRUE, EventScript_166D91

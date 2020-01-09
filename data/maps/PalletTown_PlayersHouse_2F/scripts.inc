@@ -1,9 +1,9 @@
 PalletTown_PlayersHouse_2F_MapScripts:: @ 8168CA3
-	map_script 3, PalletTown_PlayersHouse_2F_MapScript1_168CAE
-	map_script 4, PalletTown_PlayersHouse_2F_MapScript2_168CBE
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_PlayersHouse_2F_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PalletTown_PlayersHouse_2F_OnWarp
 	.byte 0
 
-PalletTown_PlayersHouse_2F_MapScript1_168CAE:: @ 8168CAE
+PalletTown_PlayersHouse_2F_OnTransition:: @ 8168CAE
 	compare VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
 	call_if eq, EventScript_168CBA
 	end
@@ -12,7 +12,7 @@ EventScript_168CBA:: @ 8168CBA
 	setrespawn SPAWN_PALLET_TOWN
 	return
 
-PalletTown_PlayersHouse_2F_MapScript2_168CBE:: @ 8168CBE
+PalletTown_PlayersHouse_2F_OnWarp:: @ 8168CBE
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0, EventScript_168CC8
 	.2byte 0
 

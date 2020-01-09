@@ -1,9 +1,9 @@
 NavelRock_Base_MapScripts:: @ 81650E7
-	map_script 3, NavelRock_Base_MapScript1_1650F2
-	map_script 5, NavelRock_Base_MapScript2_165116
+	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Base_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Base_OnResume
 	.byte 0
 
-NavelRock_Base_MapScript1_1650F2:: @ 81650F2
+NavelRock_Base_OnTransition:: @ 81650F2
 	checkflag FLAG_FOUGHT_LUGIA
 	call_if TRUE, EventScript_165105
 	checkflag FLAG_FOUGHT_LUGIA
@@ -20,7 +20,7 @@ EventScript_165109:: @ 8165109
 	clearflag FLAG_HIDE_LUGIA
 	return
 
-NavelRock_Base_MapScript2_165116:: @ 8165116
+NavelRock_Base_OnResume:: @ 8165116
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_165120
 	end

@@ -1,11 +1,11 @@
 OneIsland_PokemonCenter_1F_MapScripts:: @ 8170BF8
-	map_script 3, OneIsland_PokemonCenter_1F_MapScript1_170C4E
-	map_script 5, OneIsland_PokemonCenter_1F_MapScript2_1BC05C
-	map_script 1, OneIsland_PokemonCenter_1F_MapScript3_170C0D
-	map_script 2, OneIsland_PokemonCenter_1F_MapScript4_170CA7
+	map_script MAP_SCRIPT_ON_TRANSITION, OneIsland_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, OneIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_LOAD, OneIsland_PokemonCenter_1F_OnLoad
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_PokemonCenter_1F_OnFrame
 	.byte 0
 
-OneIsland_PokemonCenter_1F_MapScript3_170C0D:: @ 8170C0D
+OneIsland_PokemonCenter_1F_OnLoad:: @ 8170C0D
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
 	call_if ge, EventScript_170C22
 	checkflag FLAG_SYS_CAN_LINK_WITH_RS
@@ -26,7 +26,7 @@ EventScript_170C36:: @ 8170C36
 	setmetatile 15, 4, 859, 1
 	return
 
-OneIsland_PokemonCenter_1F_MapScript1_170C4E:: @ 8170C4E
+OneIsland_PokemonCenter_1F_OnTransition:: @ 8170C4E
 	setrespawn SPAWN_ONE_ISLAND
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	call_if eq, EventScript_170C73
@@ -54,7 +54,7 @@ EventScript_170C90:: @ 8170C90
 	setobjectmovementtype 3, 9
 	return
 
-OneIsland_PokemonCenter_1F_MapScript4_170CA7:: @ 8170CA7
+OneIsland_PokemonCenter_1F_OnFrame:: @ 8170CA7
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 0, EventScript_170CB1
 	.2byte 0
 

@@ -1,9 +1,9 @@
 OneIsland_Harbor_MapScripts:: @ 8171378
-	map_script 4, OneIsland_Harbor_MapScript1_171383
-	map_script 2, OneIsland_Harbor_MapScript2_171392
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, OneIsland_Harbor_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_Harbor_OnFrame
 	.byte 0
 
-OneIsland_Harbor_MapScript1_171383:: @ 8171383
+OneIsland_Harbor_OnWarp:: @ 8171383
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, EventScript_17138D
 	.2byte 0
 
@@ -11,7 +11,7 @@ EventScript_17138D:: @ 817138D
 	turnobject 255, 2
 	end
 
-OneIsland_Harbor_MapScript2_171392:: @ 8171392
+OneIsland_Harbor_OnFrame:: @ 8171392
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1, EventScript_17139C
 	.2byte 0
 

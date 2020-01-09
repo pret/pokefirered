@@ -1,9 +1,9 @@
 VermilionCity_PokemonCenter_1F_MapScripts:: @ 816B424
-	map_script 3, VermilionCity_PokemonCenter_1F_MapScript1_16B42F
-	map_script 5, VermilionCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, VermilionCity_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-VermilionCity_PokemonCenter_1F_MapScript1_16B42F:: @ 816B42F
+VermilionCity_PokemonCenter_1F_OnTransition:: @ 816B42F
 	setrespawn SPAWN_VERMILION_CITY
 	end
 

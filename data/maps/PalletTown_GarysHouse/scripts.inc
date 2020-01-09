@@ -1,8 +1,8 @@
 PalletTown_GarysHouse_MapScripts:: @ 8168D27
-	map_script 3, PalletTown_GarysHouse_MapScript1_168D2D
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_GarysHouse_OnTransition
 	.byte 0
 
-PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
+PalletTown_GarysHouse_OnTransition:: @ 8168D2D
 	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	call_if lt, EventScript_168D44
 	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2

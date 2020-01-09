@@ -1,8 +1,8 @@
 MtMoon_1F_MapScripts:: @ 81605E4
-	map_script 3, MtMoon_1F_MapScript1_1605EA
+	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_1F_OnTransition
 	.byte 0
 
-MtMoon_1F_MapScript1_1605EA:: @ 81605EA
+MtMoon_1F_OnTransition:: @ 81605EA
 	setworldmapflag FLAG_WORLD_MAP_MT_MOON_1F
 	end
 

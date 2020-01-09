@@ -1,8 +1,8 @@
 MtMoon_B2F_MapScripts:: @ 8160699
-	map_script 3, MtMoon_B2F_MapScript1_16069F
+	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_B2F_OnTransition
 	.byte 0
 
-MtMoon_B2F_MapScript1_16069F:: @ 816069F
+MtMoon_B2F_OnTransition:: @ 816069F
 	checkflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	call_if FALSE, EventScript_1606A9
 	end

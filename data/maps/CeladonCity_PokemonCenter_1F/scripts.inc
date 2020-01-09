@@ -1,9 +1,9 @@
 CeladonCity_PokemonCenter_1F_MapScripts:: @ 816C5EC
-	map_script 3, CeladonCity_PokemonCenter_1F_MapScript1_16C5F7
-	map_script 5, CeladonCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, CeladonCity_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CeladonCity_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-CeladonCity_PokemonCenter_1F_MapScript1_16C5F7:: @ 816C5F7
+CeladonCity_PokemonCenter_1F_OnTransition:: @ 816C5F7
 	setrespawn SPAWN_CELADON_CITY
 	end
 

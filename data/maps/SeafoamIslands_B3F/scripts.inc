@@ -1,9 +1,9 @@
 SeafoamIslands_B3F_MapScripts:: @ 8162F4F
-	map_script 3, SeafoamIslands_B3F_MapScript1_162F5A
-	map_script 2, SeafoamIslands_B3F_MapScript2_162F98
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_B3F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B3F_OnFrame
 	.byte 0
 
-SeafoamIslands_B3F_MapScript1_162F5A:: @ 8162F5A
+SeafoamIslands_B3F_OnTransition:: @ 8162F5A
 	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	call_if FALSE, EventScript_162F6D
 	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
@@ -28,7 +28,7 @@ EventScript_162F94:: @ 8162F94
 	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_833B6EC
 	return
 
-SeafoamIslands_B3F_MapScript2_162F98:: @ 8162F98
+SeafoamIslands_B3F_OnFrame:: @ 8162F98
 	map_script_2 VAR_0x4001, 1, EventScript_162FA2
 	.2byte 0
 

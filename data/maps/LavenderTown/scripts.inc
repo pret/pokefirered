@@ -1,8 +1,8 @@
 LavenderTown_MapScripts:: @ 816686B
-	map_script 3, LavenderTown_MapScript1_166871
+	map_script MAP_SCRIPT_ON_TRANSITION, LavenderTown_OnTransition
 	.byte 0
 
-LavenderTown_MapScript1_166871:: @ 8166871
+LavenderTown_OnTransition:: @ 8166871
 	setworldmapflag FLAG_WORLD_MAP_LAVENDER_TOWN
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	setflag FLAG_HIDE_SS_ANNE_RIVAL

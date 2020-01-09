@@ -1,9 +1,9 @@
 SaffronCity_PokemonTrainerFanClub_MapScripts:: @ 816F0BF
-	map_script 2, SaffronCity_PokemonTrainerFanClub_MapScript1_16F0CA
-	map_script 3, SaffronCity_PokemonTrainerFanClub_MapScript2_16F144
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SaffronCity_PokemonTrainerFanClub_OnFrame
+	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonTrainerFanClub_OnTransition
 	.byte 0
 
-SaffronCity_PokemonTrainerFanClub_MapScript1_16F0CA:: @ 816F0CA
+SaffronCity_PokemonTrainerFanClub_OnFrame:: @ 816F0CA
 	map_script_2 VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, EventScript_16F0D4
 	.2byte 0
 
@@ -70,7 +70,7 @@ Movement_16F13E:: @ 816F13E
 	step_2d
 	step_end
 
-SaffronCity_PokemonTrainerFanClub_MapScript2_16F144:: @ 816F144
+SaffronCity_PokemonTrainerFanClub_OnTransition:: @ 816F144
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1
 	goto_if eq, EventScript_16F267
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2

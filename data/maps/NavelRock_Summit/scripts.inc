@@ -1,9 +1,9 @@
 NavelRock_Summit_MapScripts:: @ 8164F9F
-	map_script 3, NavelRock_Summit_MapScript1_164FAA
-	map_script 5, NavelRock_Summit_MapScript2_164FDD
+	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Summit_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Summit_OnResume
 	.byte 0
 
-NavelRock_Summit_MapScript1_164FAA:: @ 8164FAA
+NavelRock_Summit_OnTransition:: @ 8164FAA
 	checkflag FLAG_FOUGHT_HO_OH
 	call_if TRUE, EventScript_164FBD
 	checkflag FLAG_FOUGHT_HO_OH
@@ -23,7 +23,7 @@ EventScript_164FC6:: @ 8164FC6
 	clearflag FLAG_HIDE_HO_OH
 	return
 
-NavelRock_Summit_MapScript2_164FDD:: @ 8164FDD
+NavelRock_Summit_OnResume:: @ 8164FDD
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_164FE7
 	end

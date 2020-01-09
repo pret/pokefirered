@@ -1,9 +1,9 @@
 FourIsland_MapScripts:: @ 8167CAE
-	map_script 3, FourIsland_MapScript1_167CB9
-	map_script 2, FourIsland_MapScript2_167CE2
+	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
 	.byte 0
 
-FourIsland_MapScript1_167CB9:: @ 8167CB9
+FourIsland_OnTransition:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
 	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
 	call_if eq, EventScript_167CCD
@@ -22,7 +22,7 @@ EventScript_167CD1:: @ 8167CD1
 EventScript_167CE1:: @ 8167CE1
 	return
 
-FourIsland_MapScript2_167CE2:: @ 8167CE2
+FourIsland_OnFrame:: @ 8167CE2
 	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, EventScript_167CEC
 	.2byte 0
 

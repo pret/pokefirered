@@ -1,8 +1,8 @@
 CinnabarIsland_Gym_MapScripts:: @ 816D94B
-	map_script 1, CinnabarIsland_Gym_MapScript1_16D951
+	map_script MAP_SCRIPT_ON_LOAD, CinnabarIsland_Gym_OnLoad
 	.byte 0
 
-CinnabarIsland_Gym_MapScript1_16D951:: @ 816D951
+CinnabarIsland_Gym_OnLoad:: @ 816D951
 	checkflag FLAG_DEFEATED_BLAINE
 	goto_if TRUE, EventScript_16D991
 	checkflag FLAG_CINNABAR_GYM_QUIZ_1

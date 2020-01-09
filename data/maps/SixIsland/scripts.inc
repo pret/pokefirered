@@ -1,8 +1,8 @@
 SixIsland_MapScripts:: @ 8167ED8
-	map_script 3, SixIsland_MapScript1_167EDE
+	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_OnTransition
 	.byte 0
 
-SixIsland_MapScript1_167EDE:: @ 8167EDE
+SixIsland_OnTransition:: @ 8167EDE
 	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND
 	end
 

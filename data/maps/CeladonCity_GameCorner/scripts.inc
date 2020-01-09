@@ -1,8 +1,8 @@
 CeladonCity_GameCorner_MapScripts:: @ 816C646
-	map_script 1, CeladonCity_GameCorner_MapScript1_16C64C
+	map_script MAP_SCRIPT_ON_LOAD, CeladonCity_GameCorner_OnLoad
 	.byte 0
 
-CeladonCity_GameCorner_MapScript1_16C64C:: @ 816C64C
+CeladonCity_GameCorner_OnLoad:: @ 816C64C
 	checkflag FLAG_OPENED_ROCKET_HIDEOUT
 	call_if FALSE, EventScript_16C656
 	end

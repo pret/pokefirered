@@ -1,8 +1,8 @@
 SaffronCity_MapScripts:: @ 816735F
-	map_script 3, SaffronCity_MapScript1_167365
+	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_OnTransition
 	.byte 0
 
-SaffronCity_MapScript1_167365:: @ 8167365
+SaffronCity_OnTransition:: @ 8167365
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
 	checkflag FLAG_RESCUED_MR_FUJI
 	call_if FALSE, EventScript_167372

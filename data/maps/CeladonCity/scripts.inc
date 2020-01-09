@@ -1,8 +1,8 @@
 CeladonCity_MapScripts:: @ 8166C8F
-	map_script 3, CeladonCity_MapScript1_166C95
+	map_script MAP_SCRIPT_ON_TRANSITION, CeladonCity_OnTransition
 	.byte 0
 
-CeladonCity_MapScript1_166C95:: @ 8166C95
+CeladonCity_OnTransition:: @ 8166C95
 	setworldmapflag FLAG_WORLD_MAP_CELADON_CITY
 	end
 

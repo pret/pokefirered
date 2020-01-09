@@ -1,8 +1,8 @@
 ViridianForest_MapScripts:: @ 816051F
-	map_script 3, ViridianForest_MapScript1_160525
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianForest_OnTransition
 	.byte 0
 
-ViridianForest_MapScript1_160525:: @ 8160525
+ViridianForest_OnTransition:: @ 8160525
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_FOREST
 	end
 

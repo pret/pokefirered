@@ -1,16 +1,16 @@
 PokemonLeague_AgathasRoom_MapScripts:: @ 8162810
-	map_script 5, PokemonLeague_AgathasRoom_MapScript1_162825
-	map_script 1, PokemonLeague_AgathasRoom_MapScript2_162830
-	map_script 4, PokemonLeague_AgathasRoom_MapScript3_162851
-	map_script 2, PokemonLeague_AgathasRoom_MapScript4_162860
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_AgathasRoom_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_AgathasRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_AgathasRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_AgathasRoom_OnFrame
 	.byte 0
 
-PokemonLeague_AgathasRoom_MapScript1_162825:: @ 8162825
+PokemonLeague_AgathasRoom_OnResume:: @ 8162825
 	setvar VAR_0x8004, 2
 	call EventScript_1A75D5
 	end
 
-PokemonLeague_AgathasRoom_MapScript2_162830:: @ 8162830
+PokemonLeague_AgathasRoom_OnLoad:: @ 8162830
 	checkflag FLAG_DEFEATED_AGATHA
 	call_if TRUE, EventScript_16284B
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 3
@@ -25,7 +25,7 @@ EventScript_16284B:: @ 816284B
 	call EventScript_1A7538
 	return
 
-PokemonLeague_AgathasRoom_MapScript3_162851:: @ 8162851
+PokemonLeague_AgathasRoom_OnWarp:: @ 8162851
 	map_script_2 VAR_0x4001, 0, EventScript_16285B
 	.2byte 0
 
@@ -33,7 +33,7 @@ EventScript_16285B:: @ 816285B
 	turnobject 255, 2
 	end
 
-PokemonLeague_AgathasRoom_MapScript4_162860:: @ 8162860
+PokemonLeague_AgathasRoom_OnFrame:: @ 8162860
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 2, EventScript_16286A
 	.2byte 0
 

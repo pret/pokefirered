@@ -1,8 +1,8 @@
 SilphCo_1F_MapScripts:: @ 8161625
-	map_script 3, SilphCo_1F_MapScript1_16162B
+	map_script MAP_SCRIPT_ON_TRANSITION, SilphCo_1F_OnTransition
 	.byte 0
 
-SilphCo_1F_MapScript1_16162B:: @ 816162B
+SilphCo_1F_OnTransition:: @ 816162B
 	setworldmapflag FLAG_WORLD_MAP_SILPH_CO_1F
 	end
 

@@ -1,12 +1,12 @@
 SeafoamIslands_B4F_MapScripts:: @ 816302E
-	map_script 3, SeafoamIslands_B4F_MapScript1_163066
-	map_script 5, SeafoamIslands_B4F_MapScript2_163048
-	map_script 1, SeafoamIslands_B4F_MapScript3_1630B1
-	map_script 4, SeafoamIslands_B4F_MapScript4_1630E7
-	map_script 2, SeafoamIslands_B4F_MapScript5_1630F9
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_B4F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, SeafoamIslands_B4F_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, SeafoamIslands_B4F_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SeafoamIslands_B4F_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B4F_OnFrame
 	.byte 0
 
-SeafoamIslands_B4F_MapScript2_163048:: @ 8163048
+SeafoamIslands_B4F_OnResume:: @ 8163048
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_163052
 	end
@@ -18,7 +18,7 @@ EventScript_163052:: @ 8163052
 	removeobject VAR_LAST_TALKED
 	return
 
-SeafoamIslands_B4F_MapScript1_163066:: @ 8163066
+SeafoamIslands_B4F_OnTransition:: @ 8163066
 	checkflag FLAG_FOUGHT_ARTICUNO
 	call_if FALSE, EventScript_1630AD
 	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
@@ -49,7 +49,7 @@ EventScript_1630AD:: @ 81630AD
 	clearflag FLAG_HIDE_ARTICUNO
 	return
 
-SeafoamIslands_B4F_MapScript3_1630B1:: @ 81630B1
+SeafoamIslands_B4F_OnLoad:: @ 81630B1
 	setvar VAR_0x4002, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
 	call_if FALSE, EventScript_163169
@@ -64,7 +64,7 @@ EventScript_1630D4:: @ 81630D4
 	setmetatile 13, 14, 299, 0
 	end
 
-SeafoamIslands_B4F_MapScript4_1630E7:: @ 81630E7
+SeafoamIslands_B4F_OnWarp:: @ 81630E7
 	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, EventScript_1630F1
 	.2byte 0
 
@@ -73,7 +73,7 @@ EventScript_1630F1:: @ 81630F1
 	special Special_ForcePlayerToStartSurfing
 	end
 
-SeafoamIslands_B4F_MapScript5_1630F9:: @ 81630F9
+SeafoamIslands_B4F_OnFrame:: @ 81630F9
 	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, EventScript_16310B
 	map_script_2 VAR_0x4001, 1, EventScript_163121
 	.2byte 0

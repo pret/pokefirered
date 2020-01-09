@@ -1,9 +1,9 @@
 SevenIsland_PokemonCenter_1F_MapScripts:: @ 8170B89
-	map_script 3, SevenIsland_PokemonCenter_1F_MapScript1_170B94
-	map_script 5, SevenIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-SevenIsland_PokemonCenter_1F_MapScript1_170B94:: @ 8170B94
+SevenIsland_PokemonCenter_1F_OnTransition:: @ 8170B94
 	setrespawn SPAWN_SEVEN_ISLAND
 	end
 

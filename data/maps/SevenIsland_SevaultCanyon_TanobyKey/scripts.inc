@@ -1,8 +1,8 @@
 SevenIsland_SevaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
-	map_script 3, SevenIsland_SevaultCanyon_TanobyKey_MapScript1_164DD2
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_SevaultCanyon_TanobyKey_OnTransition
 	.byte 0
 
-SevenIsland_SevaultCanyon_TanobyKey_MapScript1_164DD2:: @ 8164DD2
+SevenIsland_SevaultCanyon_TanobyKey_OnTransition:: @ 8164DD2
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY
 	checkflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
 	call_if TRUE, EventScript_164E07

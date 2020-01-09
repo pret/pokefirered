@@ -1,9 +1,9 @@
 Route4_PokemonCenter_1F_MapScripts:: @ 816F739
-	map_script 3, Route4_PokemonCenter_1F_MapScript1_16F744
-	map_script 5, Route4_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route4_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, Route4_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-Route4_PokemonCenter_1F_MapScript1_16F744:: @ 816F744
+Route4_PokemonCenter_1F_OnTransition:: @ 816F744
 	setworldmapflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
 	setrespawn SPAWN_ROUTE4
 	end

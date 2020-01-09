@@ -1,8 +1,8 @@
 Route18_EastEntrance_1F_MapScripts:: @ 8170378
-	map_script 3, Route18_EastEntrance_1F_MapScript1_17037E
+	map_script MAP_SCRIPT_ON_TRANSITION, Route18_EastEntrance_1F_OnTransition
 	.byte 0
 
-Route18_EastEntrance_1F_MapScript1_17037E:: @ 817037E
+Route18_EastEntrance_1F_OnTransition:: @ 817037E
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	checkflag FLAG_GOT_BICYCLE
 	call_if TRUE, EventScript_17038B

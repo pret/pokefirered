@@ -1,10 +1,10 @@
 PokemonLeague_ChampionsRoom_MapScripts:: @ 8162AE2
-	map_script 4, PokemonLeague_ChampionsRoom_MapScript1_162B5D
-	map_script 5, PokemonLeague_ChampionsRoom_MapScript2_162AF2
-	map_script 2, PokemonLeague_ChampionsRoom_MapScript3_162B6C
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_ChampionsRoom_OnWarp
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_ChampionsRoom_OnResume
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_ChampionsRoom_OnFrame
 	.byte 0
 
-PokemonLeague_ChampionsRoom_MapScript2_162AF2:: @ 8162AF2
+PokemonLeague_ChampionsRoom_OnResume:: @ 8162AF2
 	setvar VAR_0x8004, 4
 	call EventScript_1A75D5
 	compare VAR_STARTER_MON, 2
@@ -40,7 +40,7 @@ EventScript_162B57:: @ 8162B57
 	setvar VAR_0x4001, 1
 	return
 
-PokemonLeague_ChampionsRoom_MapScript1_162B5D:: @ 8162B5D
+PokemonLeague_ChampionsRoom_OnWarp:: @ 8162B5D
 	map_script_2 VAR_0x4001, 0, EventScript_162B67
 	.2byte 0
 
@@ -48,7 +48,7 @@ EventScript_162B67:: @ 8162B67
 	turnobject 255, 2
 	end
 
-PokemonLeague_ChampionsRoom_MapScript3_162B6C:: @ 8162B6C
+PokemonLeague_ChampionsRoom_OnFrame:: @ 8162B6C
 	map_script_2 VAR_0x4001, 0, EventScript_162B76
 	.2byte 0
 

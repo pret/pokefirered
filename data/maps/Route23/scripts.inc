@@ -1,8 +1,8 @@
 Route23_MapScripts:: @ 81684EB
-	map_script 3, Route23_MapScript1_1684F1
+	map_script MAP_SCRIPT_ON_TRANSITION, Route23_OnTransition
 	.byte 0
 
-Route23_MapScript1_1684F1:: @ 81684F1
+Route23_OnTransition:: @ 81684F1
 	clearflag FLAG_HIDE_VICTORY_ROAD_3F_BOULDER
 	setflag FLAG_HIDE_VICTORY_ROAD_2F_BOULDER
 	setvar VAR_MAP_SCENE_VICTORY_ROAD_1F, 0

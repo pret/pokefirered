@@ -1,16 +1,16 @@
 PokemonLeague_LancesRoom_MapScripts:: @ 816292D
-	map_script 5, PokemonLeague_LancesRoom_MapScript1_162942
-	map_script 1, PokemonLeague_LancesRoom_MapScript2_16294D
-	map_script 4, PokemonLeague_LancesRoom_MapScript3_16296E
-	map_script 2, PokemonLeague_LancesRoom_MapScript4_16297D
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LancesRoom_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LancesRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_LancesRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_LancesRoom_OnFrame
 	.byte 0
 
-PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
+PokemonLeague_LancesRoom_OnResume:: @ 8162942
 	setvar VAR_0x8004, 3
 	call EventScript_1A75D5
 	end
 
-PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
+PokemonLeague_LancesRoom_OnLoad:: @ 816294D
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
 	call_if eq, EventScript_162962
 	checkflag FLAG_DEFEATED_LANCE
@@ -25,7 +25,7 @@ EventScript_162968:: @ 8162968
 	call EventScript_1A7589
 	return
 
-PokemonLeague_LancesRoom_MapScript3_16296E:: @ 816296E
+PokemonLeague_LancesRoom_OnWarp:: @ 816296E
 	map_script_2 VAR_0x4001, 0, EventScript_162978
 	.2byte 0
 
@@ -33,7 +33,7 @@ EventScript_162978:: @ 8162978
 	turnobject 255, 2
 	end
 
-PokemonLeague_LancesRoom_MapScript4_16297D:: @ 816297D
+PokemonLeague_LancesRoom_OnFrame:: @ 816297D
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, EventScript_162987
 	.2byte 0
 

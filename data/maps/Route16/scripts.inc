@@ -1,10 +1,10 @@
 Route16_MapScripts:: @ 81680E5
-	map_script 5, Route16_MapScript1_1680F5
-	map_script 3, Route16_MapScript2_168103
-	map_script 4, Route16_MapScript3_168113
+	map_script MAP_SCRIPT_ON_RESUME, Route16_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, Route16_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, Route16_OnWarp
 	.byte 0
 
-Route16_MapScript1_1680F5:: @ 81680F5
+Route16_OnResume:: @ 81680F5
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_1680FF
 	end
@@ -13,7 +13,7 @@ EventScript_1680FF:: @ 81680FF
 	removeobject VAR_LAST_TALKED
 	return
 
-Route16_MapScript2_168103:: @ 8168103
+Route16_OnTransition:: @ 8168103
 	compare VAR_MAP_SCENE_ROUTE16, 1
 	call_if eq, EventScript_16810F
 	end
@@ -22,7 +22,7 @@ EventScript_16810F:: @ 816810F
 	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
-Route16_MapScript3_168113:: @ 8168113
+Route16_OnWarp:: @ 8168113
 	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, EventScript_16811D
 	.2byte 0
 

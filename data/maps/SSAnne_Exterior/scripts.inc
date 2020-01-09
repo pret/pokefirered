@@ -1,13 +1,13 @@
 SSAnne_Exterior_MapScripts:: @ 8160840
-	map_script 3, SSAnne_Exterior_MapScript1_16084B
-	map_script 2, SSAnne_Exterior_MapScript2_16084F
+	map_script MAP_SCRIPT_ON_TRANSITION, SSAnne_Exterior_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSAnne_Exterior_OnFrame
 	.byte 0
 
-SSAnne_Exterior_MapScript1_16084B:: @ 816084B
+SSAnne_Exterior_OnTransition:: @ 816084B
 	setworldmapflag FLAG_WORLD_MAP_SSANNE_EXTERIOR
 	end
 
-SSAnne_Exterior_MapScript2_16084F:: @ 816084F
+SSAnne_Exterior_OnFrame:: @ 816084F
 	map_script_2 VAR_MAP_SCENE_VERMILION_CITY, 1, SSAnne_Exterior_160859
 	.2byte 0
 

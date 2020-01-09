@@ -1,9 +1,9 @@
 SevenIsland_House_Room1_MapScripts:: @ 817088A
-	map_script 3, SevenIsland_House_Room1_MapScript1_170895
-	map_script 2, SevenIsland_House_Room1_MapScript2_1708CF
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room1_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_OnFrame
 	.byte 0
 
-SevenIsland_House_Room1_MapScript1_170895:: @ 8170895
+SevenIsland_House_Room1_OnTransition:: @ 8170895
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
 	call_if eq, EventScript_1708AF
@@ -23,7 +23,7 @@ EventScript_1708C3:: @ 81708C3
 	setobjectmovementtype 1, 10
 	return
 
-SevenIsland_House_Room1_MapScript2_1708CF:: @ 81708CF
+SevenIsland_House_Room1_OnFrame:: @ 81708CF
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, EventScript_1708E9
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, EventScript_1708E9
 	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, EventScript_1708E9

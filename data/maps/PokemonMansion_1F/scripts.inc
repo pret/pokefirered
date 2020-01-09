@@ -1,14 +1,14 @@
 PokemonMansion_1F_MapScripts:: @ 81621F9
-	map_script 1, PokemonMansion_1F_MapScript1_162204
-	map_script 3, PokemonMansion_1F_MapScript2_16220E
+	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_1F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonMansion_1F_OnTransition
 	.byte 0
 
-PokemonMansion_1F_MapScript1_162204:: @ 8162204
+PokemonMansion_1F_OnLoad:: @ 8162204
 	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
 	call_if TRUE, EventScript_1A7B7A
 	end
 
-PokemonMansion_1F_MapScript2_16220E:: @ 816220E
+PokemonMansion_1F_OnTransition:: @ 816220E
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_MANSION_1F
 	end
 

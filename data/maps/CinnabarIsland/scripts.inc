@@ -1,9 +1,9 @@
 CinnabarIsland_MapScripts:: @ 8166ED6
-	map_script 3, CinnabarIsland_MapScript1_166EE1
-	map_script 2, CinnabarIsland_MapScript2_166F6E
+	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CinnabarIsland_OnFrame
 	.byte 0
 
-CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
+CinnabarIsland_OnTransition:: @ 8166EE1
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
 	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 1
@@ -50,7 +50,7 @@ EventScript_166F68:: @ 8166F68
 	setvar VAR_0x4001, 1
 	return
 
-CinnabarIsland_MapScript2_166F6E:: @ 8166F6E
+CinnabarIsland_OnFrame:: @ 8166F6E
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1, EventScript_166F88
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 1, EventScript_166FCD
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 3, EventScript_166FA0

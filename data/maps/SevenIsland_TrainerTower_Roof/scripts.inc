@@ -1,6 +1,6 @@
 SevenIsland_TrainerTower_Roof_MapScripts:: @ 8164828
-	map_script 5, SevenIsland_TrainerTower_Roof_MapScript1_1C4F54
-	map_script 2, SevenIsland_TrainerTower_Roof_MapScript2_1C5046
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_Roof_MapScript1_1C4F54
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_Roof_MapScript2_1C5046
 	.byte 0
 
 SevenIsland_TrainerTower_Roof_EventScript_164833:: @ 8164833

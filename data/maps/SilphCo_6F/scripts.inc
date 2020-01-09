@@ -1,8 +1,8 @@
 SilphCo_6F_MapScripts:: @ 8161881
-	map_script 1, SilphCo_6F_MapScript1_161887
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_6F_OnLoad
 	.byte 0
 
-SilphCo_6F_MapScript1_161887:: @ 8161887
+SilphCo_6F_OnLoad:: @ 8161887
 	checkflag FLAG_SILPH_6F_DOOR
 	call_if FALSE, EventScript_Close6FDoor
 	end

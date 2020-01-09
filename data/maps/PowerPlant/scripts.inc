@@ -1,9 +1,9 @@
 PowerPlant_MapScripts:: @ 8163764
-	map_script 5, PowerPlant_MapScript1_16376F
-	map_script 3, PowerPlant_MapScript2_16378D
+	map_script MAP_SCRIPT_ON_RESUME, PowerPlant_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, PowerPlant_OnTransition
 	.byte 0
 
-PowerPlant_MapScript1_16376F:: @ 816376F
+PowerPlant_OnResume:: @ 816376F
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_163779
 	end
@@ -15,7 +15,7 @@ EventScript_163779:: @ 8163779
 	removeobject VAR_LAST_TALKED
 	return
 
-PowerPlant_MapScript2_16378D:: @ 816378D
+PowerPlant_OnTransition:: @ 816378D
 	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
 	checkflag FLAG_FOUGHT_ZAPDOS
 	call_if FALSE, EventScript_1637AC

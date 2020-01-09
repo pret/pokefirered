@@ -1,9 +1,9 @@
 VermilionCity_Gym_MapScripts:: @ 816B69E
-	map_script 1, VermilionCity_Gym_MapScript1_16B6A9
-	map_script 3, VermilionCity_Gym_MapScript2_16B772
+	map_script MAP_SCRIPT_ON_LOAD, VermilionCity_Gym_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_Gym_OnTransition
 	.byte 0
 
-VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
+VermilionCity_Gym_OnLoad:: @ 816B6A9
 	checkflag FLAG_TEMP_1
 	call_if TRUE, EventScript_16B6BC
 	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
@@ -36,7 +36,7 @@ EventScript_16B717:: @ 816B717
 	setmetatile 7, 7, 670, 1
 	return
 
-VermilionCity_Gym_MapScript2_16B772:: @ 816B772
+VermilionCity_Gym_OnTransition:: @ 816B772
 	call EventScript_16B778
 	end
 

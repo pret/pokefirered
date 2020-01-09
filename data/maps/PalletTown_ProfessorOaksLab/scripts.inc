@@ -1,10 +1,10 @@
 PalletTown_ProfessorOaksLab_MapScripts:: @ 8168F7E
-	map_script 3, PalletTown_ProfessorOaksLab_MapScript1_168F8E
-	map_script 4, PalletTown_ProfessorOaksLab_MapScript2_168FE1
-	map_script 2, PalletTown_ProfessorOaksLab_MapScript3_168FF0
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_ProfessorOaksLab_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PalletTown_ProfessorOaksLab_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_ProfessorOaksLab_OnFrame
 	.byte 0
 
-PalletTown_ProfessorOaksLab_MapScript1_168F8E:: @ 8168F8E
+PalletTown_ProfessorOaksLab_OnTransition:: @ 8168F8E
 	setflag FLAG_VISITED_OAKS_LAB
 	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	call_if eq, EventScript_168FC6
@@ -35,7 +35,7 @@ EventScript_168FD5:: @ 8168FD5
 	setobjectmovementtype 4, 7
 	return
 
-PalletTown_ProfessorOaksLab_MapScript2_168FE1:: @ 8168FE1
+PalletTown_ProfessorOaksLab_OnWarp:: @ 8168FE1
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, EventScript_168FEB
 	.2byte 0
 
@@ -43,7 +43,7 @@ EventScript_168FEB:: @ 8168FEB
 	turnobject 255, 2
 	end
 
-PalletTown_ProfessorOaksLab_MapScript3_168FF0:: @ 8168FF0
+PalletTown_ProfessorOaksLab_OnFrame:: @ 8168FF0
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, EventScript_16923E
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7, EventScript_169002
 	.2byte 0

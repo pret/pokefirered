@@ -1,8 +1,8 @@
 ThreeIsland_MapScripts:: @ 81677AD
-	map_script 3, ThreeIsland_MapScript1_1677B3
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_OnTransition
 	.byte 0
 
-ThreeIsland_MapScript1_1677B3:: @ 81677B3
+ThreeIsland_OnTransition:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
 	checkflag FLAG_RESCUED_LOSTELLE
 	call_if TRUE, EventScript_1677CB

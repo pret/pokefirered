@@ -1,8 +1,8 @@
 ThreeIsland_BerryForest_MapScripts:: @ 8163C71
-	map_script 3, ThreeIsland_BerryForest_MapScript1_163C77
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_BerryForest_OnTransition
 	.byte 0
 
-ThreeIsland_BerryForest_MapScript1_163C77:: @ 8163C77
+ThreeIsland_BerryForest_OnTransition:: @ 8163C77
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST
 	setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 255, 12, 6
 	end

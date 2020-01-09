@@ -1,8 +1,8 @@
 CeruleanCity_MapScripts:: @ 8166471
-	map_script 3, CeruleanCity_MapScript1_166477
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_OnTransition
 	.byte 0
 
-CeruleanCity_MapScript1_166477:: @ 8166477
+CeruleanCity_OnTransition:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	checkflag FLAG_GOT_SS_TICKET
 	call_if FALSE, EventScript_166484

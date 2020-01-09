@@ -1,8 +1,8 @@
 SilphCo_11F_MapScripts:: @ 8161DEE
-	map_script 1, SilphCo_11F_MapScript1_161DF4
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_11F_OnLoad
 	.byte 0
 
-SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
+SilphCo_11F_OnLoad:: @ 8161DF4
 	checkflag FLAG_SILPH_11F_DOOR
 	call_if FALSE, EventScript_Close11FDoor
 	end

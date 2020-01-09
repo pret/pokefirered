@@ -1,9 +1,9 @@
 SilphCo_7F_MapScripts:: @ 8161984
-	map_script 1, SilphCo_7F_MapScript1_16198F
-	map_script 3, SilphCo_7F_MapScript2_1619AB
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_7F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, SilphCo_7F_OnTransition
 	.byte 0
 
-SilphCo_7F_MapScript1_16198F:: @ 816198F
+SilphCo_7F_OnLoad:: @ 816198F
 	checkflag FLAG_SILPH_7F_DOOR_1
 	call_if FALSE, EventScript_Close7FDoor1
 	checkflag FLAG_SILPH_7F_DOOR_2
@@ -12,7 +12,7 @@ SilphCo_7F_MapScript1_16198F:: @ 816198F
 	call_if FALSE, EventScript_Close7FDoor3
 	end
 
-SilphCo_7F_MapScript2_1619AB:: @ 81619AB
+SilphCo_7F_OnTransition:: @ 81619AB
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
 	call_if ge, EventScript_1619B7
 	end

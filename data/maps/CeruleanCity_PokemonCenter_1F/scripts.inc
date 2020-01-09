@@ -1,9 +1,9 @@
 CeruleanCity_PokemonCenter_1F_MapScripts:: @ 816AA2D
-	map_script 3, CeruleanCity_PokemonCenter_1F_MapScript1_16AA38
-	map_script 5, CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-CeruleanCity_PokemonCenter_1F_MapScript1_16AA38:: @ 816AA38
+CeruleanCity_PokemonCenter_1F_OnTransition:: @ 816AA38
 	setrespawn SPAWN_CERULEAN_CITY
 	end
 

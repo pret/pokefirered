@@ -1,9 +1,9 @@
 VictoryRoad_1F_MapScripts:: @ 8160F05
-	map_script 1, VictoryRoad_1F_MapScript1_160F10
-	map_script 3, VictoryRoad_1F_MapScript2_160F2F
+	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_1F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_OnTransition
 	.byte 0
 
-VictoryRoad_1F_MapScript1_160F10:: @ 8160F10
+VictoryRoad_1F_OnLoad:: @ 8160F10
 	compare VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
 	call_if ne, EventScript_160F1C
 	end
@@ -13,7 +13,7 @@ EventScript_160F1C:: @ 8160F1C
 	setmetatile 12, 15, 791, 1
 	return
 
-VictoryRoad_1F_MapScript2_160F2F:: @ 8160F2F
+VictoryRoad_1F_OnTransition:: @ 8160F2F
 	setworldmapflag FLAG_WORLD_MAP_VICTORY_ROAD_1F
 	end
 

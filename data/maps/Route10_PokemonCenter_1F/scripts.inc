@@ -1,9 +1,9 @@
 Route10_PokemonCenter_1F_MapScripts:: @ 816FC2F
-	map_script 3, Route10_PokemonCenter_1F_MapScript1_16FC3A
-	map_script 5, Route10_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route10_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, Route10_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-Route10_PokemonCenter_1F_MapScript1_16FC3A:: @ 816FC3A
+Route10_PokemonCenter_1F_OnTransition:: @ 816FC3A
 	setworldmapflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
 	setrespawn SPAWN_ROUTE10
 	end

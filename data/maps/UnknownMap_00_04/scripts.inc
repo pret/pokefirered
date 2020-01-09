@@ -1,9 +1,9 @@
 UnknownMap_00_04_MapScripts:: @ 816047C
-	map_script 5, UnknownMap_00_04_MapScript1_160487
-	map_script 3, UnknownMap_00_04_MapScript2_1604BB
+	map_script MAP_SCRIPT_ON_RESUME, UnknownMap_00_04_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, UnknownMap_00_04_OnTransition
 	.byte 0
 
-UnknownMap_00_04_MapScript1_160487:: @ 8160487
+UnknownMap_00_04_OnResume:: @ 8160487
 	setflag FLAG_HIDE_UNION_ROOM_1
 	setflag FLAG_HIDE_UNION_ROOM_2
 	setflag FLAG_HIDE_UNION_ROOM_3
@@ -23,7 +23,7 @@ UnknownMap_00_04_MapScript1_160487:: @ 8160487
 	special UnionRoomSpecial
 	end
 
-UnknownMap_00_04_MapScript2_1604BB:: @ 81604BB
+UnknownMap_00_04_OnTransition:: @ 81604BB
 	end
 
 UnknownMap_00_04_EventScript_1604BC:: @ 81604BC

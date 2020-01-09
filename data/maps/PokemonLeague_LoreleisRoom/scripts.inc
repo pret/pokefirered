@@ -1,17 +1,17 @@
 PokemonLeague_LoreleisRoom_MapScripts:: @ 816256C
-	map_script 5, PokemonLeague_LoreleisRoom_MapScript1_162586
-	map_script 1, PokemonLeague_LoreleisRoom_MapScript2_162591
-	map_script 3, PokemonLeague_LoreleisRoom_MapScript3_1625B2
-	map_script 4, PokemonLeague_LoreleisRoom_MapScript4_1625B6
-	map_script 2, PokemonLeague_LoreleisRoom_MapScript5_1625C5
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LoreleisRoom_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LoreleisRoom_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonLeague_LoreleisRoom_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_LoreleisRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_LoreleisRoom_OnFrame
 	.byte 0
 
-PokemonLeague_LoreleisRoom_MapScript1_162586:: @ 8162586
+PokemonLeague_LoreleisRoom_OnResume:: @ 8162586
 	setvar VAR_0x8004, 0
 	call EventScript_1A75D5
 	end
 
-PokemonLeague_LoreleisRoom_MapScript2_162591:: @ 8162591
+PokemonLeague_LoreleisRoom_OnLoad:: @ 8162591
 	checkflag FLAG_DEFEATED_LORELEI
 	call_if TRUE, EventScript_1625AC
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
@@ -26,11 +26,11 @@ EventScript_1625AC:: @ 81625AC
 	call EventScript_1A7538
 	return
 
-PokemonLeague_LoreleisRoom_MapScript3_1625B2:: @ 81625B2
+PokemonLeague_LoreleisRoom_OnTransition:: @ 81625B2
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM
 	end
 
-PokemonLeague_LoreleisRoom_MapScript4_1625B6:: @ 81625B6
+PokemonLeague_LoreleisRoom_OnWarp:: @ 81625B6
 	map_script_2 VAR_0x4001, 0, EventScript_1625C0
 	.2byte 0
 
@@ -38,7 +38,7 @@ EventScript_1625C0:: @ 81625C0
 	turnobject 255, 2
 	end
 
-PokemonLeague_LoreleisRoom_MapScript5_1625C5:: @ 81625C5
+PokemonLeague_LoreleisRoom_OnFrame:: @ 81625C5
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 0, EventScript_1625CF
 	.2byte 0
 

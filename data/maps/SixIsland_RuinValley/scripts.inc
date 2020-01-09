@@ -1,8 +1,8 @@
 SixIsland_RuinValley_MapScripts:: @ 8168B53
-	map_script 1, SixIsland_RuinValley_MapScript1_168B59
+	map_script MAP_SCRIPT_ON_LOAD, SixIsland_RuinValley_OnLoad
 	.byte 0
 
-SixIsland_RuinValley_MapScript1_168B59:: @ 8168B59
+SixIsland_RuinValley_OnLoad:: @ 8168B59
 	checkflag FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE
 	call_if TRUE, EventScript_168B63
 	end

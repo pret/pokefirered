@@ -1,8 +1,8 @@
 PokemonMansion_2F_MapScripts:: @ 8162254
-	map_script 1, PokemonMansion_2F_MapScript1_16225A
+	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_2F_OnLoad
 	.byte 0
 
-PokemonMansion_2F_MapScript1_16225A:: @ 816225A
+PokemonMansion_2F_OnLoad:: @ 816225A
 	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
 	call_if TRUE, EventScript_1A7D3E
 	end

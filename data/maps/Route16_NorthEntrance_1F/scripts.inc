@@ -1,8 +1,8 @@
 Route16_NorthEntrance_1F_MapScripts:: @ 81701C2
-	map_script 3, Route16_NorthEntrance_1F_MapScript1_1701C8
+	map_script MAP_SCRIPT_ON_TRANSITION, Route16_NorthEntrance_1F_OnTransition
 	.byte 0
 
-Route16_NorthEntrance_1F_MapScript1_1701C8:: @ 81701C8
+Route16_NorthEntrance_1F_OnTransition:: @ 81701C8
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	checkflag FLAG_GOT_BICYCLE
 	call_if TRUE, EventScript_1701D5

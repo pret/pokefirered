@@ -1,9 +1,9 @@
 PalletTown_MapScripts:: @ 816545A
-	map_script 3, PalletTown_MapScript1_165465
-	map_script 2, PalletTown_MapScript2_1654CE
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_OnFrame
 	.byte 0
 
-PalletTown_MapScript1_165465:: @ 8165465
+PalletTown_OnTransition:: @ 8165465
 	setworldmapflag FLAG_WORLD_MAP_PALLET_TOWN
 	checkflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	call_if TRUE, EventScript_165488
@@ -38,7 +38,7 @@ EventScript_1654BD:: @ 81654BD
 	setvar VAR_0x4002, 1
 	return
 
-PalletTown_MapScript2_1654CE:: @ 81654CE
+PalletTown_OnFrame:: @ 81654CE
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_OAK, 2, EventScript_1654D8
 	.2byte 0
 

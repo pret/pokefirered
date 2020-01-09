@@ -1,9 +1,9 @@
 ViridianCity_PokemonCenter_1F_MapScripts:: @ 816A2C0
-	map_script 3, ViridianCity_PokemonCenter_1F_MapScript1_16A2CB
-	map_script 5, ViridianCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, ViridianCity_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-ViridianCity_PokemonCenter_1F_MapScript1_16A2CB:: @ 816A2CB
+ViridianCity_PokemonCenter_1F_OnTransition:: @ 816A2CB
 	setrespawn SPAWN_VIRIDIAN_CITY
 	end
 

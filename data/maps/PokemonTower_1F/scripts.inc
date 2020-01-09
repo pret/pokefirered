@@ -1,8 +1,8 @@
 PokemonTower_1F_MapScripts:: @ 8163235
-	map_script 3, PokemonTower_1F_MapScript1_16323B
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonTower_1F_OnTransition
 	.byte 0
 
-PokemonTower_1F_MapScript1_16323B:: @ 816323B
+PokemonTower_1F_OnTransition:: @ 816323B
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_TOWER_1F
 	end
 

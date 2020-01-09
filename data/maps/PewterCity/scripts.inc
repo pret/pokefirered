@@ -1,8 +1,8 @@
 PewterCity_MapScripts:: @ 8165B8E
-	map_script 3, PewterCity_MapScript1_165B94
+	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_OnTransition
 	.byte 0
 
-PewterCity_MapScript1_165B94:: @ 8165B94
+PewterCity_OnTransition:: @ 8165B94
 	setworldmapflag FLAG_WORLD_MAP_PEWTER_CITY
 	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 0
 	end

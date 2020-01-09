@@ -1,8 +1,8 @@
 RocketHideout_B4F_MapScripts:: @ 81612E8
-	map_script 1, RocketHideout_B4F_MapScript1_1612EE
+	map_script MAP_SCRIPT_ON_LOAD, RocketHideout_B4F_OnLoad
 	.byte 0
 
-RocketHideout_B4F_MapScript1_1612EE:: @ 81612EE
+RocketHideout_B4F_OnLoad:: @ 81612EE
 	setvar VAR_0x4001, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
 	call_if eq, EventScript_161311

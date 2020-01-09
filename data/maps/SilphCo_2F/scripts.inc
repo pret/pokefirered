@@ -1,8 +1,8 @@
 SilphCo_2F_MapScripts:: @ 8161641
-	map_script 1, SilphCo_2F_MapScript1_161647
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_2F_OnLoad
 	.byte 0
 
-SilphCo_2F_MapScript1_161647:: @ 8161647
+SilphCo_2F_OnLoad:: @ 8161647
 	checkflag FLAG_SILPH_2F_DOOR_1
 	call_if FALSE, EventScript_Close2FDoor1
 	checkflag FLAG_SILPH_2F_DOOR_2

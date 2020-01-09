@@ -1,13 +1,13 @@
 FiveIsland_RocketWarehouse_MapScripts:: @ 8163F2E
-	map_script 1, FiveIsland_RocketWarehouse_MapScript1_163F3D
-	map_script 3, FiveIsland_RocketWarehouse_MapScript2_163F39
+	map_script MAP_SCRIPT_ON_LOAD, FiveIsland_RocketWarehouse_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, FiveIsland_RocketWarehouse_OnTransition
 	.byte 0
 
-FiveIsland_RocketWarehouse_MapScript2_163F39:: @ 8163F39
+FiveIsland_RocketWarehouse_OnTransition:: @ 8163F39
 	setworldmapflag FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE
 	end
 
-FiveIsland_RocketWarehouse_MapScript1_163F3D:: @ 8163F3D
+FiveIsland_RocketWarehouse_OnLoad:: @ 8163F3D
 	checktrainerflag TRAINER_TEAM_ROCKET_ADMIN
 	call_if eq, EventScript_163F47
 	end

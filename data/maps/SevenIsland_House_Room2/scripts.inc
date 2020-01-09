@@ -1,13 +1,13 @@
 SevenIsland_House_Room2_MapScripts:: @ 8170A7E
-	map_script 3, SevenIsland_House_Room2_MapScript1_170A89
-	map_script 2, SevenIsland_House_Room2_MapScript2_170A8D
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room2_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room2_OnFrame
 	.byte 0
 
-SevenIsland_House_Room2_MapScript1_170A89:: @ 8170A89
+SevenIsland_House_Room2_OnTransition:: @ 8170A89
 	special SetEReaderTrainerGfxId
 	end
 
-SevenIsland_House_Room2_MapScript2_170A8D:: @ 8170A8D
+SevenIsland_House_Room2_OnFrame:: @ 8170A8D
 	map_script_2 VAR_0x4001, 0, EventScript_170A97
 	.2byte 0
 

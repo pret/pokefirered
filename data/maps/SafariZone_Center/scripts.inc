@@ -1,8 +1,8 @@
 SafariZone_Center_MapScripts:: @ 8162357
-	map_script 3, SafariZone_Center_MapScript1_16235D
+	map_script MAP_SCRIPT_ON_TRANSITION, SafariZone_Center_OnTransition
 	.byte 0
 
-SafariZone_Center_MapScript1_16235D:: @ 816235D
+SafariZone_Center_OnTransition:: @ 816235D
 	setworldmapflag FLAG_WORLD_MAP_SAFARI_ZONE_CENTER
 	end
 

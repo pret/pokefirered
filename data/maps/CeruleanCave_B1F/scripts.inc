@@ -1,9 +1,9 @@
 CeruleanCave_B1F_MapScripts:: @ 81624BE
-	map_script 5, CeruleanCave_B1F_MapScript1_1624C9
-	map_script 3, CeruleanCave_B1F_MapScript2_1624E7
+	map_script MAP_SCRIPT_ON_RESUME, CeruleanCave_B1F_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCave_B1F_OnTransition
 	.byte 0
 
-CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
+CeruleanCave_B1F_OnResume:: @ 81624C9
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_1624D3
 	end
@@ -15,7 +15,7 @@ EventScript_1624D3:: @ 81624D3
 	removeobject VAR_LAST_TALKED
 	return
 
-CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
+CeruleanCave_B1F_OnTransition:: @ 81624E7
 	checkflag FLAG_FOUGHT_MEWTWO
 	call_if FALSE, EventScript_1624F1
 	end

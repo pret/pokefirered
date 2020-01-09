@@ -1,8 +1,8 @@
 VictoryRoad_3F_MapScripts:: @ 81610AA
-	map_script 1, VictoryRoad_3F_MapScript1_1610B0
+	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_3F_OnLoad
 	.byte 0
 
-VictoryRoad_3F_MapScript1_1610B0:: @ 81610B0
+VictoryRoad_3F_OnLoad:: @ 81610B0
 	compare VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	call_if ne, EventScript_1610BC
 	end

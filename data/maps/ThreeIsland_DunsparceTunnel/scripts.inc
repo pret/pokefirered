@@ -1,8 +1,8 @@
 ThreeIsland_DunsparceTunnel_MapScripts:: @ 8164D26
-	map_script 3, ThreeIsland_DunsparceTunnel_MapScript1_164D2C
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_DunsparceTunnel_OnTransition
 	.byte 0
 
-ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
+ThreeIsland_DunsparceTunnel_OnTransition:: @ 8164D2C
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	copyvar VAR_0x8008, VAR_RESULT

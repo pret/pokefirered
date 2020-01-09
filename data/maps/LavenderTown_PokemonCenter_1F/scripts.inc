@@ -1,9 +1,9 @@
 LavenderTown_PokemonCenter_1F_MapScripts:: @ 816B0EF
-	map_script 3, LavenderTown_PokemonCenter_1F_MapScript1_16B0FA
-	map_script 5, LavenderTown_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, LavenderTown_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, LavenderTown_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-LavenderTown_PokemonCenter_1F_MapScript1_16B0FA:: @ 816B0FA
+LavenderTown_PokemonCenter_1F_OnTransition:: @ 816B0FA
 	setrespawn SPAWN_LAVENDER_TOWN
 	end
 

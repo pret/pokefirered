@@ -1,8 +1,8 @@
 SilphCo_5F_MapScripts:: @ 81617BE
-	map_script 1, SilphCo_5F_MapScript1_1617C4
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_5F_OnLoad
 	.byte 0
 
-SilphCo_5F_MapScript1_1617C4:: @ 81617C4
+SilphCo_5F_OnLoad:: @ 81617C4
 	checkflag FLAG_SILPH_5F_DOOR_1
 	call_if FALSE, EventScript_Close5FDoor1
 	checkflag FLAG_SILPH_5F_DOOR_2

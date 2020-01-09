@@ -1,8 +1,8 @@
 ViridianCity_MapScripts:: @ 81658D3
-	map_script 3, ViridianCity_MapScript1_1658D9
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_OnTransition
 	.byte 0
 
-ViridianCity_MapScript1_1658D9:: @ 81658D9
+ViridianCity_OnTransition:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
 	call_if eq, EventScript_165920

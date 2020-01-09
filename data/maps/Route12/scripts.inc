@@ -1,8 +1,8 @@
 Route12_MapScripts:: @ 8168000
-	map_script 5, Route12_MapScript1_168006
+	map_script MAP_SCRIPT_ON_RESUME, Route12_OnResume
 	.byte 0
 
-Route12_MapScript1_168006:: @ 8168006
+Route12_OnResume:: @ 8168006
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_168010
 	end

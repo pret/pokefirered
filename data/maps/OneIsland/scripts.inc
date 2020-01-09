@@ -1,13 +1,13 @@
 OneIsland_MapScripts:: @ 8167484
-	map_script 3, OneIsland_MapScript1_16748F
-	map_script 2, OneIsland_MapScript2_167493
+	map_script MAP_SCRIPT_ON_TRANSITION, OneIsland_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_OnFrame
 	.byte 0
 
-OneIsland_MapScript1_16748F:: @ 816748F
+OneIsland_OnTransition:: @ 816748F
 	setworldmapflag FLAG_WORLD_MAP_ONE_ISLAND
 	end
 
-OneIsland_MapScript2_167493:: @ 8167493
+OneIsland_OnFrame:: @ 8167493
 	map_script_2 VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2, EventScript_16749D
 	.2byte 0
 

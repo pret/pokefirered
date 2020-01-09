@@ -1,8 +1,8 @@
 SilphCo_3F_MapScripts:: @ 81616C5
-	map_script 1, SilphCo_3F_MapScript1_1616CB
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_3F_OnLoad
 	.byte 0
 
-SilphCo_3F_MapScript1_1616CB:: @ 81616CB
+SilphCo_3F_OnLoad:: @ 81616CB
 	checkflag FLAG_SILPH_3F_DOOR_1
 	call_if FALSE, EventScript_Close3FDoor1
 	checkflag FLAG_SILPH_3F_DOOR_2

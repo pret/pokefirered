@@ -1,9 +1,9 @@
 IndigoPlateau_PokemonCenter_1F_MapScripts:: @ 816EA5A
-	map_script 3, IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65
-	map_script 5, IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
+IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, 1

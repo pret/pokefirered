@@ -1,8 +1,8 @@
 Route25_SeaCottage_MapScripts:: @ 8170523
-	map_script 3, Route25_SeaCottage_MapScript1_170529
+	map_script MAP_SCRIPT_ON_TRANSITION, Route25_SeaCottage_OnTransition
 	.byte 0
 
-Route25_SeaCottage_MapScript1_170529:: @ 8170529
+Route25_SeaCottage_OnTransition:: @ 8170529
 	checkflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	call_if FALSE, EventScript_17053C
 	checkflag FLAG_GOT_SS_TICKET

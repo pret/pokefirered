@@ -1,8 +1,8 @@
 TwoIsland_MapScripts:: @ 8167564
-	map_script 3, TwoIsland_MapScript1_16756A
+	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_OnTransition
 	.byte 0
 
-TwoIsland_MapScript1_16756A:: @ 816756A
+TwoIsland_OnTransition:: @ 816756A
 	setworldmapflag FLAG_WORLD_MAP_TWO_ISLAND
 	setflag FLAG_VISITED_TWO_ISLAND
 	call EventScript_167576

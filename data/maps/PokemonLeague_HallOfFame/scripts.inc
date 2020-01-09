@@ -1,9 +1,9 @@
 PokemonLeague_HallOfFame_MapScripts:: @ 8162D4C
-	map_script 2, PokemonLeague_HallOfFame_MapScript1_162D66
-	map_script 4, PokemonLeague_HallOfFame_MapScript2_162D57
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_HallOfFame_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_HallOfFame_OnWarp
 	.byte 0
 
-PokemonLeague_HallOfFame_MapScript2_162D57:: @ 8162D57
+PokemonLeague_HallOfFame_OnWarp:: @ 8162D57
 	map_script_2 VAR_0x4001, 0, EventScript_162D61
 	.2byte 0
 
@@ -11,7 +11,7 @@ EventScript_162D61:: @ 8162D61
 	turnobject 255, 2
 	end
 
-PokemonLeague_HallOfFame_MapScript1_162D66:: @ 8162D66
+PokemonLeague_HallOfFame_OnFrame:: @ 8162D66
 	map_script_2 VAR_0x4001, 0, EventScript_162D70
 	.2byte 0
 

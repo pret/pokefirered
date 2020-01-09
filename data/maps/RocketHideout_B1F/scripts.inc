@@ -1,14 +1,14 @@
 RocketHideout_B1F_MapScripts:: @ 8161195
-	map_script 1, RocketHideout_B1F_MapScript1_1611A0
-	map_script 3, RocketHideout_B1F_MapScript2_1611AA
+	map_script MAP_SCRIPT_ON_LOAD, RocketHideout_B1F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, RocketHideout_B1F_OnTransition
 	.byte 0
 
-RocketHideout_B1F_MapScript1_1611A0:: @ 81611A0
+RocketHideout_B1F_OnLoad:: @ 81611A0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_12
 	call_if lt, EventScript_161233
 	end
 
-RocketHideout_B1F_MapScript2_1611AA:: @ 81611AA
+RocketHideout_B1F_OnTransition:: @ 81611AA
 	setworldmapflag FLAG_WORLD_MAP_ROCKET_HIDEOUT_B1F
 	end
 

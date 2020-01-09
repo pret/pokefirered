@@ -1,9 +1,9 @@
 VermilionCity_MapScripts:: @ 81668DC
-	map_script 3, VermilionCity_MapScript1_166906
-	map_script 2, VermilionCity_MapScript2_1668E7
+	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, VermilionCity_OnFrame
 	.byte 0
 
-VermilionCity_MapScript2_1668E7:: @ 81668E7
+VermilionCity_OnFrame:: @ 81668E7
 	map_script_2 VAR_MAP_SCENE_VERMILION_CITY, 2, EventScript_1668F1
 	.2byte 0
 
@@ -20,7 +20,7 @@ Movement_166903:: @ 8166903
 	step_11
 	step_end
 
-VermilionCity_MapScript1_166906:: @ 8166906
+VermilionCity_OnTransition:: @ 8166906
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
 	checkflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
 	call_if TRUE, EventScript_166913

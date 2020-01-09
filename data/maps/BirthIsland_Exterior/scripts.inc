@@ -1,14 +1,14 @@
 BirthIsland_Exterior_MapScripts:: @ 8165203
-	map_script 3, BirthIsland_Exterior_MapScript1_165217
-	map_script 5, BirthIsland_Exterior_MapScript2_165253
-	map_script 7, BirthIsland_Exterior_MapScript3_165213
+	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, BirthIsland_Exterior_OnResume
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, BirthIsland_Exterior_OnReturnToField
 	.byte 0
 
-BirthIsland_Exterior_MapScript3_165213:: @ 8165213
+BirthIsland_Exterior_OnReturnToField:: @ 8165213
 	special Special_SetDeoxysTriangleObjectPal
 	end
 
-BirthIsland_Exterior_MapScript1_165217:: @ 8165217
+BirthIsland_Exterior_OnTransition:: @ 8165217
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
 	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_DEOXYS_N
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
@@ -31,7 +31,7 @@ EventScript_165243:: @ 8165243
 	clearflag FLAG_SYS_DEOXYS_AWAKENED
 	return
 
-BirthIsland_Exterior_MapScript2_165253:: @ 8165253
+BirthIsland_Exterior_OnResume:: @ 8165253
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_16525D
 	end

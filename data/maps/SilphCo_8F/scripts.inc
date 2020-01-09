@@ -1,8 +1,8 @@
 SilphCo_8F_MapScripts:: @ 8161C5F
-	map_script 1, SilphCo_8F_MapScript1_161C65
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_8F_OnLoad
 	.byte 0
 
-SilphCo_8F_MapScript1_161C65:: @ 8161C65
+SilphCo_8F_OnLoad:: @ 8161C65
 	checkflag FLAG_SILPH_8F_DOOR
 	call_if FALSE, EventScript_Close8FDoor
 	end

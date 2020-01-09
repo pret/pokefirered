@@ -1,9 +1,9 @@
 ThreeIsland_PokemonCenter_1F_MapScripts:: @ 8171832
-	map_script 3, ThreeIsland_PokemonCenter_1F_MapScript1_17183D
-	map_script 5, ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C
 	.byte 0
 
-ThreeIsland_PokemonCenter_1F_MapScript1_17183D:: @ 817183D
+ThreeIsland_PokemonCenter_1F_OnTransition:: @ 817183D
 	setrespawn SPAWN_THREE_ISLAND
 	end
 

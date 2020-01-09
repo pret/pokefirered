@@ -1,8 +1,8 @@
 FourIsland_LoreleisHouse_MapScripts:: @ 8171C4E
-	map_script 3, FourIsland_LoreleisHouse_MapScript1_171C54
+	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_LoreleisHouse_OnTransition
 	.byte 0
 
-FourIsland_LoreleisHouse_MapScript1_171C54:: @ 8171C54
+FourIsland_LoreleisHouse_OnTransition:: @ 8171C54
 	special Special_ComputeLoreleiDollCollection
 	end
 

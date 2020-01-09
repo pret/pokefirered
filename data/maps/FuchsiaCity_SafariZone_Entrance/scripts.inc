@@ -1,8 +1,8 @@
 FuchsiaCity_SafariZone_Entrance_MapScripts:: @ 816D2A8
-	map_script 2, FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FuchsiaCity_SafariZone_Entrance_OnFrame
 	.byte 0
 
-FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE:: @ 816D2AE
+FuchsiaCity_SafariZone_Entrance_OnFrame:: @ 816D2AE
 	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1, EventScript_16D2F2
 	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2, EventScript_16D312
 	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3, EventScript_16D2C8

@@ -1,9 +1,9 @@
 MtEmber_Summit_MapScripts:: @ 8163AFC
-	map_script 3, MtEmber_Summit_MapScript1_163B25
-	map_script 5, MtEmber_Summit_MapScript2_163B07
+	map_script MAP_SCRIPT_ON_TRANSITION, MtEmber_Summit_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, MtEmber_Summit_OnResume
 	.byte 0
 
-MtEmber_Summit_MapScript2_163B07:: @ 8163B07
+MtEmber_Summit_OnResume:: @ 8163B07
 	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	call_if TRUE, EventScript_163B11
 	end
@@ -15,7 +15,7 @@ EventScript_163B11:: @ 8163B11
 	removeobject VAR_LAST_TALKED
 	return
 
-MtEmber_Summit_MapScript1_163B25:: @ 8163B25
+MtEmber_Summit_OnTransition:: @ 8163B25
 	checkflag FLAG_FOUGHT_MOLTRES
 	call_if FALSE, EventScript_163B2F
 	end

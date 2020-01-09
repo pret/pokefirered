@@ -1,9 +1,9 @@
 MtEmber_Exterior_MapScripts:: @ 8163946
-	map_script 3, MtEmber_Exterior_MapScript1_163951
-	map_script 1, MtEmber_Exterior_MapScript2_163969
+	map_script MAP_SCRIPT_ON_TRANSITION, MtEmber_Exterior_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, MtEmber_Exterior_OnLoad
 	.byte 0
 
-MtEmber_Exterior_MapScript1_163951:: @ 8163951
+MtEmber_Exterior_OnTransition:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
 	compare VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	call_if eq, EventScript_163960
@@ -14,7 +14,7 @@ EventScript_163960:: @ 8163960
 	setobjectmovementtype 3, 8
 	return
 
-MtEmber_Exterior_MapScript2_163969:: @ 8163969
+MtEmber_Exterior_OnLoad:: @ 8163969
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	call_if ge, EventScript_163975
 	end

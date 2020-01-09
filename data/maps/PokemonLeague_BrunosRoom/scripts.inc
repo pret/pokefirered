@@ -1,16 +1,16 @@
 PokemonLeague_BrunosRoom_MapScripts:: @ 8162685
-	map_script 5, PokemonLeague_BrunosRoom_MapScript1_16269A
-	map_script 1, PokemonLeague_BrunosRoom_MapScript2_1626A5
-	map_script 4, PokemonLeague_BrunosRoom_MapScript3_1626C6
-	map_script 2, PokemonLeague_BrunosRoom_MapScript4_1626D5
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_BrunosRoom_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_BrunosRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_BrunosRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_BrunosRoom_OnFrame
 	.byte 0
 
-PokemonLeague_BrunosRoom_MapScript1_16269A:: @ 816269A
+PokemonLeague_BrunosRoom_OnResume:: @ 816269A
 	setvar VAR_0x8004, 1
 	call EventScript_1A75D5
 	end
 
-PokemonLeague_BrunosRoom_MapScript2_1626A5:: @ 81626A5
+PokemonLeague_BrunosRoom_OnLoad:: @ 81626A5
 	checkflag FLAG_DEFEATED_BRUNO
 	call_if TRUE, EventScript_1626C0
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 2
@@ -25,7 +25,7 @@ EventScript_1626C0:: @ 81626C0
 	call EventScript_1A7538
 	return
 
-PokemonLeague_BrunosRoom_MapScript3_1626C6:: @ 81626C6
+PokemonLeague_BrunosRoom_OnWarp:: @ 81626C6
 	map_script_2 VAR_0x4001, 0, EventScript_1626D0
 	.2byte 0
 
@@ -33,7 +33,7 @@ EventScript_1626D0:: @ 81626D0
 	turnobject 255, 2
 	end
 
-PokemonLeague_BrunosRoom_MapScript4_1626D5:: @ 81626D5
+PokemonLeague_BrunosRoom_OnFrame:: @ 81626D5
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 1, EventScript_1626DF
 	.2byte 0
 

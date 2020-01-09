@@ -1,9 +1,9 @@
 IndigoPlateau_Exterior_MapScripts:: @ 816723B
-	map_script 3, IndigoPlateau_Exterior_MapScript1_167246
-	map_script 2, IndigoPlateau_Exterior_MapScript2_16725A
+	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_Exterior_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, IndigoPlateau_Exterior_OnFrame
 	.byte 0
 
-IndigoPlateau_Exterior_MapScript1_167246:: @ 8167246
+IndigoPlateau_Exterior_OnTransition:: @ 8167246
 	setworldmapflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
 	compare VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1
 	call_if eq, EventScript_IndigoPlateau_Exterior_PlayCreditsMusic
@@ -13,7 +13,7 @@ EventScript_IndigoPlateau_Exterior_PlayCreditsMusic:: @ 8167255
 	playbgm MUS_ENDING, 0
 	return
 
-IndigoPlateau_Exterior_MapScript2_16725A:: @ 816725A
+IndigoPlateau_Exterior_OnFrame:: @ 816725A
 	map_script_2 VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1, EventScript_IndigoPlateau_Exterior_Credits
 	.2byte 0
 

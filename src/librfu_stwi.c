@@ -1,4 +1,3 @@
-#include "global.h"
 #include "librfu.h"
 
 static void STWI_intr_timer(void);
@@ -12,7 +11,7 @@ static s32 STWI_reset_ClockCounter(void);
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
     // If we're copying our interrupt into RAM, DMA it to block1 and use
-    // block2 for our RfuStruct, otherwise block1 holds the RfuStruct.
+    // block2 for our STWIStatus, otherwise block1 holds the STWIStatus.
     // interrupt usually is a pointer to gIntrTable[1]
     if (copyInterruptToRam == TRUE)
     {
@@ -23,7 +22,7 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     else
     {
         *interrupt = IntrSIO32;
-        gRfuState = (struct RfuStruct *)interruptStruct->block1;
+        gRfuState = (struct STWIStatus *)interruptStruct->block1;
     }
     gRfuState->rxPacket = &interruptStruct->rxPacketAlloc;
     gRfuState->txPacket = &interruptStruct->txPacketAlloc;
@@ -142,7 +141,7 @@ u16 STWI_poll_CommandEnd(void)
 
 void STWI_send_ResetREQ(void)
 {
-    if (!STWI_init(RFU_RESET))
+    if (!STWI_init(ID_RESET_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -151,7 +150,7 @@ void STWI_send_ResetREQ(void)
 
 void STWI_send_LinkStatusREQ(void)
 {
-    if (!STWI_init(RFU_LINK_STATUS))
+    if (!STWI_init(ID_LINK_STATUS_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -160,7 +159,7 @@ void STWI_send_LinkStatusREQ(void)
 
 void STWI_send_VersionStatusREQ(void)
 {
-    if (!STWI_init(RFU_VERSION_STATUS))
+    if (!STWI_init(ID_VERSION_STATUS_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -169,7 +168,7 @@ void STWI_send_VersionStatusREQ(void)
 
 void STWI_send_SystemStatusREQ(void)
 {
-    if (!STWI_init(RFU_SYSTEM_STATUS))
+    if (!STWI_init(ID_SYSTEM_STATUS_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -178,7 +177,7 @@ void STWI_send_SystemStatusREQ(void)
 
 void STWI_send_SlotStatusREQ(void)
 {
-    if (!STWI_init(RFU_SLOT_STATUS))
+    if (!STWI_init(ID_SLOT_STATUS_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -187,7 +186,7 @@ void STWI_send_SlotStatusREQ(void)
 
 void STWI_send_ConfigStatusREQ(void)
 {
-    if (!STWI_init(RFU_CONFIG_STATUS))
+    if (!STWI_init(ID_CONFIG_STATUS_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -199,7 +198,7 @@ void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data)
     u8 *packetBytes;
     s32 i;
 
-    if (!STWI_init(RFU_GAME_CONFIG))
+    if (!STWI_init(ID_GAME_CONFIG_REQ))
     {
         gRfuState->reqLength = 6;
         // TODO: what is unk1
@@ -226,7 +225,7 @@ void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data)
 
 void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
 {
-    if (!STWI_init(RFU_SYSTEM_CONFIG))
+    if (!STWI_init(ID_SYSTEM_CONFIG_REQ))
     {
         u8 *packetBytes;
 
@@ -242,7 +241,7 @@ void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
 
 void STWI_send_SC_StartREQ(void)
 {
-    if (!STWI_init(RFU_SC_START))
+    if (!STWI_init(ID_SC_START_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -251,7 +250,7 @@ void STWI_send_SC_StartREQ(void)
 
 void STWI_send_SC_PollingREQ(void)
 {
-    if (!STWI_init(RFU_SC_POLLING))
+    if (!STWI_init(ID_SC_POLL_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -260,7 +259,7 @@ void STWI_send_SC_PollingREQ(void)
 
 void STWI_send_SC_EndREQ(void)
 {
-    if (!STWI_init(RFU_SC_END))
+    if (!STWI_init(ID_SC_END_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -269,7 +268,7 @@ void STWI_send_SC_EndREQ(void)
 
 void STWI_send_SP_StartREQ(void)
 {
-    if (!STWI_init(RFU_SP_START))
+    if (!STWI_init(ID_SP_START_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -278,7 +277,7 @@ void STWI_send_SP_StartREQ(void)
 
 void STWI_send_SP_PollingREQ(void)
 {
-    if (!STWI_init(RFU_SP_POLLING))
+    if (!STWI_init(ID_SP_POLL_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -287,7 +286,7 @@ void STWI_send_SP_PollingREQ(void)
 
 void STWI_send_SP_EndREQ(void)
 {
-    if (!STWI_init(RFU_SP_END))
+    if (!STWI_init(ID_SP_END_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -296,7 +295,7 @@ void STWI_send_SP_EndREQ(void)
 
 void STWI_send_CP_StartREQ(u16 unk1)
 {
-    if (!STWI_init(RFU_CP_START))
+    if (!STWI_init(ID_CP_START_REQ))
     {
         gRfuState->reqLength = 1;
         gRfuState->txPacket->rfuPacket32.data[0] = unk1;
@@ -306,7 +305,7 @@ void STWI_send_CP_StartREQ(u16 unk1)
 
 void STWI_send_CP_PollingREQ(void)
 {
-    if (!STWI_init(RFU_CP_POLLING))
+    if (!STWI_init(ID_CP_POLL_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -315,7 +314,7 @@ void STWI_send_CP_PollingREQ(void)
 
 void STWI_send_CP_EndREQ(void)
 {
-    if (!STWI_init(RFU_CP_END))
+    if (!STWI_init(ID_CP_END_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -324,7 +323,7 @@ void STWI_send_CP_EndREQ(void)
 
 void STWI_send_DataTxREQ(const void *in, u8 size)
 {
-    if (!STWI_init(RFU_DATA_TX))
+    if (!STWI_init(ID_DATA_TX_REQ))
     {
         u8 reqLength = (size / sizeof(u32));
         if (size & (sizeof(u32) - 1))
@@ -337,7 +336,7 @@ void STWI_send_DataTxREQ(const void *in, u8 size)
 
 void STWI_send_DataTxAndChangeREQ(const void *in, u8 size)
 {
-    if (!STWI_init(RFU_DATA_TX_AND_CHANGE))
+    if (!STWI_init(ID_DATA_TX_AND_CHANGE_REQ))
     {
         u8 reqLength = (size / sizeof(u32));
         if (size & (sizeof(u32) - 1))
@@ -350,7 +349,7 @@ void STWI_send_DataTxAndChangeREQ(const void *in, u8 size)
 
 void STWI_send_DataRxREQ(void)
 {
-    if (!STWI_init(RFU_DATA_RX))
+    if (!STWI_init(ID_DATA_RX_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -359,7 +358,7 @@ void STWI_send_DataRxREQ(void)
 
 void STWI_send_MS_ChangeREQ(void)
 {
-    if (!STWI_init(RFU_MS_CHANGE))
+    if (!STWI_init(ID_MS_CHANGE_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -368,7 +367,7 @@ void STWI_send_MS_ChangeREQ(void)
 
 void STWI_send_DataReadyAndChangeREQ(u8 unk)
 {
-    if (!STWI_init(RFU_DATA_READY_AND_CHANGE))
+    if (!STWI_init(ID_DATA_READY_AND_CHANGE_REQ))
     {
         if (!unk)
         {
@@ -392,7 +391,7 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
 
 void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
 {
-    if (!STWI_init(RFU_DISCONNECTED_AND_CHANGE))
+    if (!STWI_init(ID_DISCONNECTED_AND_CHANGE_REQ))
     {
         u8 *packetBytes;
 
@@ -409,7 +408,7 @@ void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
 
 void STWI_send_ResumeRetransmitAndChangeREQ(void)
 {
-    if (!STWI_init(RFU_RESUME_RETRANSMIT_AND_CHANGE))
+    if (!STWI_init(ID_RESUME_RETRANSMIT_AND_CHANGE_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -418,7 +417,7 @@ void STWI_send_ResumeRetransmitAndChangeREQ(void)
 
 void STWI_send_DisconnectREQ(u8 unk)
 {
-    if (!STWI_init(RFU_DISCONNECT))
+    if (!STWI_init(ID_DISCONNECT_REQ))
     {
         gRfuState->reqLength = 1;
         gRfuState->txPacket->rfuPacket32.data[0] = unk;
@@ -428,7 +427,7 @@ void STWI_send_DisconnectREQ(u8 unk)
 
 void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
 {
-    if (!STWI_init(RFU_TEST_MODE))
+    if (!STWI_init(ID_TEST_MODE_REQ))
     {
         gRfuState->reqLength = 1;
         gRfuState->txPacket->rfuPacket32.data[0] = unk0 | (unk1 << 8);
@@ -441,7 +440,7 @@ void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
     u32 *packetData;
     u32 arg1;
 
-    if (!STWI_init(RFU_CPR_START))
+    if (!STWI_init(ID_CPR_START_REQ))
     {
         gRfuState->reqLength = 2;
         arg1 = unk1 | (unk0 << 16);
@@ -454,7 +453,7 @@ void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
 
 void STWI_send_CPR_PollingREQ(void)
 {
-    if (!STWI_init(RFU_CPR_POLLING))
+    if (!STWI_init(ID_CPR_POLL_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -463,7 +462,7 @@ void STWI_send_CPR_PollingREQ(void)
 
 void STWI_send_CPR_EndREQ(void)
 {
-    if (!STWI_init(RFU_CPR_END))
+    if (!STWI_init(ID_CPR_END_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -472,7 +471,7 @@ void STWI_send_CPR_EndREQ(void)
 
 void STWI_send_StopModeREQ(void)
 {
-    if (!STWI_init(RFU_STOP_MODE))
+    if (!STWI_init(ID_STOP_MODE_REQ))
     {
         gRfuState->reqLength = 0;
         STWI_start_Command();
@@ -614,7 +613,7 @@ static s32 STWI_restart_Command(void)
     }
     else
     {
-        if (gRfuState->reqActiveCommand == RFU_MS_CHANGE || gRfuState->reqActiveCommand == RFU_DATA_TX_AND_CHANGE || gRfuState->reqActiveCommand == RFU_UNK35 || gRfuState->reqActiveCommand == RFU_RESUME_RETRANSMIT_AND_CHANGE)
+        if (gRfuState->reqActiveCommand == ID_MS_CHANGE_REQ || gRfuState->reqActiveCommand == ID_DATA_TX_AND_CHANGE_REQ || gRfuState->reqActiveCommand == ID_UNK35_REQ || gRfuState->reqActiveCommand == ID_RESUME_RETRANSMIT_AND_CHANGE_REQ)
         {
             gRfuState->error = 1;
             gRfuState->unk_2c = 0;

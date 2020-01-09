@@ -320,6 +320,7 @@ SECTIONS {
         src/librfu_stwi.o(.text);
         asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
+        src/librfu_s32id.o(.text);
         src/isagbprn.o(.text);
         asm/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);

@@ -1,4 +1,3 @@
-#include "global.h"
 #include "librfu.h"
 
 struct RfuHeader
@@ -46,10 +45,6 @@ static void rfu_CB_sendData(UNUSED u8, u16);
 static void rfu_CB_sendData2(UNUSED u8, u16);
 static void rfu_CB_sendData3(u8, u16);
 static void rfu_CB_recvData(u8, u16);
-static s32 sub_81E349C(u8);
-static void sub_81E36B8(void);
-static void sub_81E3550(void);
-static s32 sub_81E35C4(void);
 static void rfu_enableREQCallback(bool8);
 static void rfu_STC_clearAPIVariables(void);
 static void rfu_STC_readChildList(void);
@@ -74,17 +69,15 @@ static void rfu_STC_NI_initSlot_asRecvControllData(u8, struct NIComm *);
 
 extern const char _Str_RFU_MBOOT[];
 extern const struct RfuHeader _Str_RfuHeader[2];
-extern const u16 _Str_Sio32ID[];
 
-struct RfuStruct *gRfuState;
-ALIGNED(8) struct RfuSlotStatusUNI *gRfuSlotStatusUNI[4];
-struct RfuSlotStatusNI *gRfuSlotStatusNI[4];
+struct STWIStatus *gRfuState;
+ALIGNED(8) struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
+struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 struct RfuLinkStatus *gRfuLinkStatus;
 struct RfuStatic *gRfuStatic;
 struct RfuFixed *gRfuFixed;
-ALIGNED(8) struct Unk_3007470 gUnknown_3007470;
 
-u16 rfu_initializeAPI(struct Unk_3001190 *unk0, u16 unk1, IntrFunc *interrupt, bool8 copyInterruptToRam)
+u16 rfu_initializeAPI(struct RfuStructsBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
 {
     u16 i;
     u16 *dst;
@@ -92,44 +85,44 @@ u16 rfu_initializeAPI(struct Unk_3001190 *unk0, u16 unk1, IntrFunc *interrupt, b
     u16 r3;
 
     // is in EWRAM? 
-    if (((u32)unk0 & 0xF000000) == 0x2000000 && copyInterruptToRam)
+    if (((u32)APIBuffer & 0xF000000) == 0x2000000 && copyInterruptToRam)
         return 2;
     // is not 4-byte aligned? 
-    if ((u32)unk0 & 3)
+    if ((u32)APIBuffer & 3)
         return 2;
     if (copyInterruptToRam)
     {
         // An assert/debug print may have existed before, ie
-        // printf("%s %u < %u", "somefile.c:12345", unk1, num)
+        // printf("%s %u < %u", "somefile.c:12345", buffByteSize, num)
         // to push this into r3?
         r3 = 0xe64;
-        if (unk1 < r3)
+        if (buffByteSize < r3)
             return 1;
     }
     if (!copyInterruptToRam)
     {
         r3 = 0x504; // same as above, this should be r3 not r0
-        if (unk1 < r3)
+        if (buffByteSize < r3)
             return 1;
     }
-    gRfuLinkStatus = &unk0->linkStatus;
-    gRfuStatic = &unk0->static_;
-    gRfuFixed = &unk0->fixed;
-    gRfuSlotStatusNI[0] = &unk0->NI[0];
-    gRfuSlotStatusUNI[0] = &unk0->UNI[0];
-    for (i = 1; i < NELEMS(gRfuSlotStatusNI); ++i)
+    gRfuLinkStatus = &APIBuffer->linkStatus;
+    gRfuStatic = &APIBuffer->static_;
+    gRfuFixed = &APIBuffer->fixed;
+    gRfuSlotStatusNI[0] = &APIBuffer->NI[0];
+    gRfuSlotStatusUNI[0] = &APIBuffer->UNI[0];
+    for (i = 1; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
         gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
     }
     // TODO: Is it possible to fix the following 2 statements? 
     // It's equivalent to: 
-    // gRfuFixed->STWIBuffer = &unk0->intr;
-    // STWI_init_all(&unk0->intr, interrupt, copyInterruptToRam);
+    // gRfuFixed->STWIBuffer = &APIBuffer->intr;
+    // STWI_init_all(&APIBuffer->intr, sioIntrTable_p, copyInterruptToRam);
     gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
-    STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], interrupt, copyInterruptToRam);
+    STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
     rfu_STC_clearAPIVariables();
-    for (i = 0; i < NELEMS(gRfuSlotStatusNI); ++i)
+    for (i = 0; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i]->recvBuffer = 0;
         gRfuSlotStatusNI[i]->recvBufferSize = 0;
@@ -157,7 +150,7 @@ static void rfu_STC_clearAPIVariables(void)
     CpuFill16(0, gRfuLinkStatus, sizeof(struct RfuLinkStatus));
     gRfuLinkStatus->watchInterval = 4;
     gRfuStatic->nowWatchInterval = 0;
-    gRfuLinkStatus->connMode = 0xFF;
+    gRfuLinkStatus->parentChild = 0xFF;
     rfu_clearAllSlot();
     gRfuStatic->SCStartFlag = 0;
     for (i = 0; i < NELEMS(gRfuStatic->cidBak); ++i)
@@ -176,7 +169,7 @@ u16 rfu_UNI_PARENT_getDRAC_ACK(u8 *ackFlag)
     struct RfuIntrStruct *buf;
 
     *ackFlag = 0;
-    if (gRfuLinkStatus->connMode != 1)
+    if (gRfuLinkStatus->parentChild != 1)
         return 0x300;
     buf = rfu_getSTWIRecvBuffer();
     switch (buf->rxPacketAlloc.rfuPacket8.data[0])
@@ -193,9 +186,9 @@ u16 rfu_UNI_PARENT_getDRAC_ACK(u8 *ackFlag)
     }
 }
 
-void rfu_setTimerInterrupt(u8 which, IntrFunc *intr)
+void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p)
 {
-    STWI_init_timer(intr, which);
+    STWI_init_timer(timerIntrTable_p, timerNo);
 }
 
 struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void)
@@ -203,12 +196,12 @@ struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void)
     return gRfuFixed->STWIBuffer;
 }
 
-void rfu_setMSCCallback(void (*callback)(u16))
+void rfu_setMSCCallback(void (*callback)(u16 reqCommandId))
 {
     STWI_set_Callback_S(callback);
 }
 
-void rfu_setREQCallback(void (*callback)(u16, u16))
+void rfu_setREQCallback(void (*callback)(u16 reqCommandId, u16 reqResult))
 {
     gRfuFixed->reqCallback = callback;
     rfu_enableREQCallback(callback != NULL);
@@ -243,7 +236,7 @@ static void rfu_CB_defaultCallback(u8 r0, u16 reqResult)
         for (i = 0; i < 4; ++i)
             if ((r5 >> i) & 1)
                 rfu_STC_removeLinkData(i, 1);
-        gRfuLinkStatus->connMode = 0xFF;
+        gRfuLinkStatus->parentChild = 0xFF;
     }
 }
 
@@ -259,18 +252,18 @@ void rfu_REQ_RFUStatus(void)
     STWI_send_SystemStatusREQ();
 }
 
-u32 rfu_getRFUStatus(u8 *status)
+u16 rfu_getRFUStatus(u8 *rfuState)
 {
     if (gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[0] != 0x93)
         return 0x10;
     if (STWI_poll_CommandEnd() == 0)
-        *status = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[7];
+        *rfuState = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[7];
     else
-        *status = 0xFF;
+        *rfuState = 0xFF;
     return 0;
 }
 
-static s32 rfu_MBOOT_CHILD_inheritanceLinkStatus(void)
+u16 rfu_MBOOT_CHILD_inheritanceLinkStatus(void)
 {
     const char *s1 = _Str_RFU_MBOOT;
     char *s2 = (char *)0x30000F0;
@@ -305,7 +298,7 @@ void rfu_REQ_stopMode(void)
     {
         AgbRFU_SoftReset();
         rfu_STC_clearAPIVariables();
-        if (sub_81E349C(8) == 0x8001)
+        if (AgbRFU_checkID(8) == 0x8001)
         {
             timerReg = &REG_TMCNT(gRfuState->timerSelect);
             *timerReg = 0;
@@ -331,7 +324,7 @@ static void rfu_CB_stopMode(u8 a1, u16 reqResult)
     rfu_STC_REQ_callback(a1, reqResult);
 }
 
-s32 rfu_REQBN_softReset_and_checkID(void)
+u32 rfu_REQBN_softReset_and_checkID(void)
 {
     s32 r2;
 
@@ -339,7 +332,7 @@ s32 rfu_REQBN_softReset_and_checkID(void)
         return -1;
     AgbRFU_SoftReset();
     rfu_STC_clearAPIVariables();
-    if ((r2 = sub_81E349C(30)) == 0)
+    if ((r2 = AgbRFU_checkID(30)) == 0)
         REG_SIOCNT = SIO_MULTI_MODE;
     return r2;
 }
@@ -357,11 +350,11 @@ static void rfu_CB_reset(u8 a1, u16 reqResult)
     rfu_STC_REQ_callback(a1, reqResult);
 }
 
-void rfu_REQ_configSystem(u16 r4, u8 r5, u8 r6)
+void rfu_REQ_configSystem(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
 {
     STWI_set_Callback_M(rfu_STC_REQ_callback);
-    STWI_send_SystemConfigREQ((r4 & 3) | 0x3C, r5, r6);
-    if (r6 == 0)
+    STWI_send_SystemConfigREQ((availSlotFlag & 3) | 0x3C, maxMFrame, mcTimer);
+    if (mcTimer == 0)
     {
         gRfuStatic->unk_1a = 1;
     }
@@ -370,37 +363,37 @@ void rfu_REQ_configSystem(u16 r4, u8 r5, u8 r6)
         u16 IMEBackup = REG_IME;
 
         REG_IME = 0;
-        gRfuStatic->unk_1a = Div(600, r6);
+        gRfuStatic->unk_1a = Div(600, mcTimer);
         REG_IME = IMEBackup;
     }
 }
 
-void rfu_REQ_configGameData(u8 r6, u16 r2, const u8 *r4, const u8 *r7)
+void rfu_REQ_configGameData(u8 mbootFlag, u16 serialNo, const u8 *gname, const u8 *uname)
 {
     u8 sp[16];
     u8 i;
     u8 r3;
-    const u8 *r5 = r4;
-    const u8 *r1;
+    const u8 *gnameBackup = gname;
+    const u8 *unameBackup;
 
-    sp[0] = r2;
-    sp[1] = r2 >> 8;
-    if (r6 != 0)
-        sp[1] = (r2 >> 8) | 0x80;
+    sp[0] = serialNo;
+    sp[1] = serialNo >> 8;
+    if (mbootFlag != 0)
+        sp[1] = (serialNo >> 8) | 0x80;
     for (i = 2; i < 15; ++i)
-        sp[i] = *r4++;
+        sp[i] = *gname++;
     r3 = 0;
-    r1 = r7;
+    unameBackup = uname;
     for (i = 0; i < 8; ++i)
     {
-        r3 += *r1++;
-        r3 += *r5++;
+        r3 += *unameBackup++;
+        r3 += *gnameBackup++;
     }
     sp[15] = ~r3;
-    if (r6 != 0)
+    if (mbootFlag != 0)
         sp[14] = 0;
     STWI_set_Callback_M(rfu_CB_configGameData);
-    STWI_send_GameConfigREQ(sp, r7);
+    STWI_send_GameConfigREQ(sp, uname);
 }
 
 static void rfu_CB_configGameData(u8 ip, u16 r7)
@@ -413,22 +406,22 @@ static void rfu_CB_configGameData(u8 ip, u16 r7)
     if (r7 == 0)
     {
         r1 = gRfuState->txPacket->rfuPacket8.data;
-        r2 = gRfuLinkStatus->my.serialNum = r1[4];
-        gRfuLinkStatus->my.serialNum = (r1[5] << 8) | r2;
+        r2 = gRfuLinkStatus->my.serialNo = r1[4];
+        gRfuLinkStatus->my.serialNo = (r1[5] << 8) | r2;
         r4 = &r1[6];
-        if (gRfuLinkStatus->my.serialNum & 0x8000)
+        if (gRfuLinkStatus->my.serialNo & 0x8000)
         {
-            gRfuLinkStatus->my.serialNum = gRfuLinkStatus->my.serialNum ^ 0x8000;
-            gRfuLinkStatus->my.multibootFlag = 1;
+            gRfuLinkStatus->my.serialNo = gRfuLinkStatus->my.serialNo ^ 0x8000;
+            gRfuLinkStatus->my.mbootFlag = 1;
         }
         else
         {
-            gRfuLinkStatus->my.multibootFlag = 0;
+            gRfuLinkStatus->my.mbootFlag = 0;
         }
-        for (i = 0; i < NELEMS(gRfuLinkStatus->my.gname) - 2; ++i)
+        for (i = 0; i < RFU_GAME_NAME_LENGTH; ++i)
             gRfuLinkStatus->my.gname[i] = *r4++;
         ++r4;
-        for (i = 0; i < NELEMS(gRfuLinkStatus->my.uname) - 1; ++i)
+        for (i = 0; i < RFU_USER_NAME_LENGTH; ++i)
             gRfuLinkStatus->my.uname[i] = *r4++;
     }
     rfu_STC_REQ_callback(ip, r7);
@@ -471,7 +464,7 @@ static void rfu_STC_clearLinkStatus(u8 r4)
         CpuFill16(0, gRfuLinkStatus->partner, sizeof(gRfuLinkStatus->partner));
         gRfuLinkStatus->findParentCount = 0;
     }
-    for (i = 0; i < NELEMS(gRfuLinkStatus->strength); ++i)
+    for (i = 0; i < RFU_CHILD_MAX; ++i)
         gRfuLinkStatus->strength[i] = 0;
     gRfuLinkStatus->connCount = 0;
     gRfuLinkStatus->connSlotFlag = 0;
@@ -507,7 +500,7 @@ static void rfu_CB_pollAndEndSearchChild(u8 r4, u16 reqResult)
     }
     else if (r4 == 27)
     {
-        if (gRfuLinkStatus->connMode == 255)
+        if (gRfuLinkStatus->parentChild == 255)
             gRfuLinkStatus->my.id = 0;
         gRfuStatic->SCStartFlag = 0;
     }
@@ -553,7 +546,7 @@ static void rfu_STC_readChildList(void)
                 ++gRfuLinkStatus->connCount;
                 gRfuLinkStatus->partner[r2].id = *(u16 *)r4;
                 gRfuLinkStatus->partner[r2].slot = r2;
-                gRfuLinkStatus->connMode = 1;
+                gRfuLinkStatus->parentChild = 1;
                 gRfuStatic->flags &= 0x7F;
                 gRfuStatic->cidBak[r2] = gRfuLinkStatus->partner[r2].id;
             }
@@ -626,35 +619,35 @@ static void rfu_STC_readParentCandidateList(void)
             r2 += 2;
             r4_->slot = *r2;
             r2 += 2;
-            r4_->serialNum = *(u16 *)r2 & 0x7FFF;
+            r4_->serialNo = *(u16 *)r2 & 0x7FFF;
             if (*(u16 *)r2 & 0x8000)
-                r4_->multibootFlag = 1;
+                r4_->mbootFlag = 1;
             else
-                r4_->multibootFlag = 0;
+                r4_->mbootFlag = 0;
             r2 += 2;
-            for (r3 = 0; r3 < NELEMS(r4_->gname) - 2; ++r3)
+            for (r3 = 0; r3 < RFU_GAME_NAME_LENGTH; ++r3)
                 r4_->gname[r3] = *r2++;
             ++r2;
-            for (r3 = 0; r3 < NELEMS(r4_->uname) - 1; ++r3)
+            for (r3 = 0; r3 < RFU_USER_NAME_LENGTH; ++r3)
                 r4_->uname[r3] = *r2++;
             ++gRfuLinkStatus->findParentCount;
         }
     }
 }
 
-void rfu_REQ_startConnectParent(u16 r4)
+void rfu_REQ_startConnectParent(u16 pid)
 {
     u16 r3 = 0;
     u8 i;
-    for (i = 0; i < NELEMS(gRfuLinkStatus->partner) && gRfuLinkStatus->partner[i].id != r4; ++i)
+    for (i = 0; i < RFU_CHILD_MAX && gRfuLinkStatus->partner[i].id != pid; ++i)
         ;
     if (i == 4)
         r3 = 256;
     if (r3 == 0)
     {
-        gRfuStatic->tryPid = r4;
+        gRfuStatic->tryPid = pid;
         STWI_set_Callback_M(rfu_STC_REQ_callback);
-        STWI_send_CP_StartREQ(r4);
+        STWI_send_CP_StartREQ(pid);
     }
     else
     {
@@ -689,9 +682,9 @@ static void rfu_CB_pollConnectParent(u8 sp24, u16 sp28)
                 gRfuLinkStatus->linkLossSlotFlag &= ~r2;
                 gRfuLinkStatus->my.id = id;
                 ++gRfuLinkStatus->connCount;
-                gRfuLinkStatus->connMode = 0;
+                gRfuLinkStatus->parentChild = 0;
                 gRfuStatic->flags |= 0x80;
-                for (r5 = 0; r5 < NELEMS(gRfuLinkStatus->partner); ++r5)
+                for (r5 = 0; r5 < RFU_CHILD_MAX; ++r5)
                 {
                     if (gRfuLinkStatus->partner[r5].id == gRfuStatic->tryPid)
                     {
@@ -720,7 +713,7 @@ static void rfu_CB_pollConnectParent(u8 sp24, u16 sp28)
     rfu_STC_REQ_callback(sp24, sp28);
 }
 
-u16 rfu_getConnectParentStatus(u8 *status, u8 *r1)
+u16 rfu_getConnectParentStatus(u8 *status, u8 *connectSlotNo)
 {
     u8 r0, *r2;
 
@@ -730,7 +723,7 @@ u16 rfu_getConnectParentStatus(u8 *status, u8 *r1)
     if (r0 <= 1)
     {
         r2 += 6;
-        *r1 = r2[0];
+        *connectSlotNo = r2[0];
         *status = r2[1];
         return 0;
     }
@@ -751,7 +744,7 @@ u16 rfu_syncVBlank(void)
     s32 r5;
 
     rfu_NI_checkCommFailCounter();
-    if (gRfuLinkStatus->connMode == 0xFF)
+    if (gRfuLinkStatus->parentChild == 0xFF)
         return 0;
     if (gRfuStatic->nowWatchInterval != 0)
         --gRfuStatic->nowWatchInterval;
@@ -781,26 +774,26 @@ u16 rfu_syncVBlank(void)
         for (r4 = 0; r4 < 4; ++r4)
             if ((r5 >> r4) & 1)
                 rfu_STC_removeLinkData(r4, 1);
-        gRfuLinkStatus->connMode = 0xFF;
+        gRfuLinkStatus->parentChild = 0xFF;
         return 1;
     }
     --gRfuStatic->watchdogTimer;
     return 0;
 }
 
-s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
+u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason, u8 *parentBmLinkRecoverySlot)
 {
     u8 sp08 = 0;
     u8 sp0C = 0;
     u8 i;
     s32 sp10, sp14;
     u8 *r2;
-    u8 r9, r6, r3, r1, r0;
+    u8 r9, r6, r3, connSlotFlag, r0;
     
-    *r8 = 0;
-    *sp00 = 0;
-    *sp04 = 0;
-    if (gRfuLinkStatus->connMode == 0xFF || gRfuState->msMode == 0)
+    *bmLinkLossSlot = 0;
+    *linkLossReason = 0;
+    *parentBmLinkRecoverySlot = 0;
+    if (gRfuLinkStatus->parentChild == 0xFF || gRfuState->msMode == 0)
         return 0;
     if (gRfuStatic->flags & 4)
         gRfuStatic->watchdogTimer = 360;
@@ -809,27 +802,27 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
         gRfuStatic->nowWatchInterval = gRfuLinkStatus->watchInterval;
         sp08 = 1;
     }
-    if ((u8)r5 == 41)
+    if ((u8)reqCommandId == 41)
     {
         u8 *r1 = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data;
         
-        *r8 = r1[4];
-        *sp00 = r1[5];
-        if (*sp00 == 1)
-            *r8 = gRfuLinkStatus->connSlotFlag;
+        *bmLinkLossSlot = r1[4];
+        *linkLossReason = r1[5];
+        if (*linkLossReason == 1)
+            *bmLinkLossSlot = gRfuLinkStatus->connSlotFlag;
         sp08 = 2;
     }
     else
     {
-        if (r5 == 310)
+        if (reqCommandId == 310)
         {
             r6 = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[5];
             r6 ^= gRfuLinkStatus->connSlotFlag;
-            *r8 = r6 & gRfuLinkStatus->connSlotFlag;
-            *sp00 = 1;
-            for (i = 0; i < NELEMS(gRfuLinkStatus->strength); ++i)
+            *bmLinkLossSlot = r6 & gRfuLinkStatus->connSlotFlag;
+            *linkLossReason = 1;
+            for (i = 0; i < RFU_CHILD_MAX; ++i)
             {
-                if ((*r8 >> i) & 1)
+                if ((*bmLinkLossSlot >> i) & 1)
                 {
                     gRfuLinkStatus->strength[i] = 0;
                     rfu_STC_removeLinkData(i, 0);
@@ -847,7 +840,7 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
     if (sp0C == 0)
     {
         r2 = &gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[4];
-        for (i = 0; i < NELEMS(gRfuLinkStatus->strength); ++i)
+        for (i = 0; i < RFU_CHILD_MAX; ++i)
             gRfuLinkStatus->strength[i] = *r2++;
         r9 = 0;
         i = 0;
@@ -866,13 +859,13 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
             {
                 if (gRfuLinkStatus->strength[i] == 0)
                 {
-                    if (gRfuLinkStatus->connMode == 1)
+                    if (gRfuLinkStatus->parentChild == 1)
                     {
                         ++gRfuStatic->linkEmergencyFlag[i];
                         if (gRfuStatic->linkEmergencyFlag[i] > 3)
                         {
-                            *r8 |= r6;
-                            *sp00 = sp08; // why not directly use 1?
+                            *bmLinkLossSlot |= r6;
+                            *linkLossReason = sp08; // why not directly use 1?
                         }
                     }
                     else
@@ -882,8 +875,8 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
                         {
                             if (gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[7] == 0)
                             {
-                                *r8 |= r6;
-                                *sp00 = sp08;
+                                *bmLinkLossSlot |= r6;
+                                *linkLossReason = sp08;
                             }
                             else
                             {
@@ -892,8 +885,8 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
                                     gRfuStatic->linkEmergencyFlag[i] = 0;
                                     STWI_send_DisconnectREQ(gRfuLinkStatus->connSlotFlag);
                                     STWI_poll_CommandEnd();
-                                    *r8 |= r6;
-                                    *sp00 = sp08; // why not directly use 1?
+                                    *bmLinkLossSlot |= r6;
+                                    *linkLossReason = sp08; // why not directly use 1?
                                 }
                             }
                         }
@@ -904,13 +897,13 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
                     gRfuStatic->linkEmergencyFlag[i] = sp0C; // why not directly use 0? 
                 }
             }
-            if (gRfuLinkStatus->connMode == 1 && gRfuLinkStatus->strength[i] != 0)
+            if (gRfuLinkStatus->parentChild == 1 && gRfuLinkStatus->strength[i] != 0)
             {
                 if (r6 & gRfuLinkStatus->linkLossSlotFlag)
                 {
                     if (gRfuLinkStatus->strength[i] > 10)
                     {
-                        *sp04 |= r6;
+                        *parentBmLinkRecoverySlot |= r6;
                         gRfuLinkStatus->connSlotFlag |= r6;
                         gRfuLinkStatus->linkLossSlotFlag &= ~r6;
                         ++gRfuLinkStatus->connCount;
@@ -943,9 +936,9 @@ s32 rfu_REQBN_watchLink(u16 r5, u8 *r8, u8 *sp00, u8 *sp04)
                 }
             }
         }
-        r1 = gRfuLinkStatus->connSlotFlag;
-        r0 = *r8;
-        r0 &= r1;
+        connSlotFlag = gRfuLinkStatus->connSlotFlag;
+        r0 = *bmLinkLossSlot;
+        r0 &= connSlotFlag;
         if (r6 & r0)
             rfu_STC_removeLinkData(i, 0);
     }
@@ -971,7 +964,7 @@ static void rfu_STC_removeLinkData(u8 r7, u8 r12)
     gRfuLinkStatus->connSlotFlag &= r6 = ~r5;
     gRfuLinkStatus->linkLossSlotFlag |= r5;
     if ((*(u32 *)gRfuLinkStatus & 0xFF00FF) == 0)
-        gRfuLinkStatus->connMode = 0xFF;
+        gRfuLinkStatus->parentChild = 0xFF;
     if (r12 != 0)
     {
         CpuFill16(0, &gRfuLinkStatus->partner[r7], sizeof(struct RfuTgtData));
@@ -981,16 +974,16 @@ static void rfu_STC_removeLinkData(u8 r7, u8 r12)
     }
 }
 
-void rfu_REQ_disconnect(u8 who)
+void rfu_REQ_disconnect(u8 bmDisconnectSlot)
 {
     u16 r1;
 
-    if ((gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag) & who)
+    if ((gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag) & bmDisconnectSlot)
     {
-        gRfuStatic->recoveryBmSlot = who;
-        if (gRfuLinkStatus->connMode == 0xFF && gRfuStatic->flags & 0x80)
+        gRfuStatic->recoveryBmSlot = bmDisconnectSlot;
+        if (gRfuLinkStatus->parentChild == 0xFF && gRfuStatic->flags & 0x80)
         {
-            if (gRfuLinkStatus->linkLossSlotFlag & who)
+            if (gRfuLinkStatus->linkLossSlotFlag & bmDisconnectSlot)
                 rfu_CB_disconnect(48, 0);
         }
         else if (gRfuStatic->SCStartFlag
@@ -1003,7 +996,7 @@ void rfu_REQ_disconnect(u8 who)
         else
         {
             STWI_set_Callback_M(rfu_CB_disconnect);
-            STWI_send_DisconnectREQ(who);
+            STWI_send_DisconnectREQ(bmDisconnectSlot);
         }
     }
 }
@@ -1012,7 +1005,7 @@ static void rfu_CB_disconnect(u8 r6, u16 r5)
 {
     u8 r4, r0;
 
-    if (r5 == 3 && gRfuLinkStatus->connMode == 0)
+    if (r5 == 3 && gRfuLinkStatus->parentChild == 0)
     {
         STWI_set_Callback_M(rfu_CB_defaultCallback);
         STWI_send_SystemStatusREQ();
@@ -1031,7 +1024,7 @@ static void rfu_CB_disconnect(u8 r6, u16 r5)
         }
     }
     if ((gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag) == 0)
-        gRfuLinkStatus->connMode = 0xFF;
+        gRfuLinkStatus->parentChild = 0xFF;
     rfu_STC_REQ_callback(r6, r5);
     if (gRfuStatic->SCStartFlag)
     {
@@ -1043,16 +1036,16 @@ static void rfu_CB_disconnect(u8 r6, u16 r5)
     }
 }
 
-void rfu_REQ_CHILD_startConnectRecovery(u8 r5)
+void rfu_REQ_CHILD_startConnectRecovery(u8 bmRecoverySlot)
 {
     u8 i;
 
-    gRfuStatic->recoveryBmSlot = r5;
-    for (i = 0; i < 4 && !((r5 >> i) & 1); ++i)
+    gRfuStatic->recoveryBmSlot = bmRecoverySlot;
+    for (i = 0; i < 4 && !((bmRecoverySlot >> i) & 1); ++i)
         ;
     STWI_set_Callback_M(rfu_STC_REQ_callback);
     // if i == 4, gRfuLinkStatus->partner[i].id becomes gRfuLinkStatus->my.id
-    STWI_send_CPR_StartREQ(gRfuLinkStatus->partner[i].id, gRfuLinkStatus->my.id, r5);
+    STWI_send_CPR_StartREQ(gRfuLinkStatus->partner[i].id, gRfuLinkStatus->my.id, bmRecoverySlot);
 }
 
 void rfu_REQ_CHILD_pollConnectRecovery(void)
@@ -1068,7 +1061,7 @@ static void rfu_CB_CHILD_pollConnectRecovery(u8 r8, u16 r7)
 
     if (r7 == 0 && gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[4] == 0 && gRfuStatic->recoveryBmSlot)
     {
-        gRfuLinkStatus->connMode = 0;
+        gRfuLinkStatus->parentChild = 0;
         for (r4 = 0; r4 < NELEMS(gRfuStatic->linkEmergencyFlag); ++r4)
         {
             r3 = 1 << r4;
@@ -1154,10 +1147,10 @@ void rfu_clearAllSlot(void)
     u16 IMEBackup = REG_IME;
     
     REG_IME = 0;
-    for (i = 0; i < NELEMS(gRfuSlotStatusNI); ++i)
+    for (i = 0; i < RFU_CHILD_MAX; ++i)
     {
-        CpuFill16(0, gRfuSlotStatusNI[i], sizeof(gRfuSlotStatusNI[i]->sub));
-        CpuFill16(0, gRfuSlotStatusUNI[i], sizeof(gRfuSlotStatusUNI[i]->sub));
+        CpuFill16(0, gRfuSlotStatusNI[i], 2 * sizeof(struct NIComm));
+        CpuFill16(0, gRfuSlotStatusUNI[i], sizeof(struct UNISend) + sizeof(struct UNIRecv));
         gRfuLinkStatus->remainLLFrameSizeChild[i] = 16;
     }
     gRfuLinkStatus->remainLLFrameSizeParent = 87;
@@ -1185,43 +1178,43 @@ static void rfu_STC_releaseFrame(u8 r5, u8 r3, struct NIComm *r4)
     }
 }
 
-s32 rfu_clearSlot(u8 r8, u8 r7)
+u16 rfu_clearSlot(u8 connTypeFlag, u8 slotStatusIndex)
 {
     u16 r10, r3, r1;
     struct NIComm *r4;
 
-    if (r7 > 3)
+    if (slotStatusIndex >= RFU_CHILD_MAX)
         return 0x400;
-    if ((r8 & 0xF) == 0)
+    if ((connTypeFlag & 0xF) == 0)
         return 0x600;
     r10 = REG_IME;
     REG_IME = 0;
-    if (r8 & 0xC)
+    if (connTypeFlag & 0xC)
     {
         for (r3 = 0; r3 < 2; ++r3)
         {
             r4 = NULL;
             if (r3 == 0)
             {
-                if (r8 & 4)
+                if (connTypeFlag & 4)
                 {
-                    r4 = &gRfuSlotStatusNI[r7]->sub.send;
+                    r4 = &gRfuSlotStatusNI[slotStatusIndex]->send;
                     gRfuLinkStatus->sendSlotNIFlag &= ~r4->bmSlotOrg;
                 }
             }
             else
             {
-                if (r8 & 8)
+                if (connTypeFlag & 8)
                 {
-                    r4 = &gRfuSlotStatusNI[r7]->sub.recv;
-                    gRfuLinkStatus->recvSlotNIFlag &= ~(1 << r7);
+                    r4 = &gRfuSlotStatusNI[slotStatusIndex]->recv;
+                    gRfuLinkStatus->recvSlotNIFlag &= ~(1 << slotStatusIndex);
                 }
             }
             if (r4 != NULL)
             {
                 if (r4->state & 0x8000)
                 {
-                    rfu_STC_releaseFrame(r7, r3, r4);
+                    rfu_STC_releaseFrame(slotStatusIndex, r3, r4);
                     for (r1 = 0; r1 < 4; ++r1)
                         if ((r4->bmSlotOrg >> r1) & 1)
                             r4->failCounter = 0;
@@ -1230,71 +1223,71 @@ s32 rfu_clearSlot(u8 r8, u8 r7)
             }
         }
     }
-    if (r8 & 1)
+    if (connTypeFlag & 1)
     {
-        struct RfuSlotStatusUNI *r3 = gRfuSlotStatusUNI[r7];
+        struct RfuSlotStatusUNI *r3 = gRfuSlotStatusUNI[slotStatusIndex];
 
-        if (r3->sub.send.state & 0x8000)
+        if (r3->send.state & 0x8000)
         {
             if (!(gRfuStatic->flags & 0x80))
-                gRfuLinkStatus->remainLLFrameSizeParent += 3 + (u8)r3->sub.send.payloadSize;
+                gRfuLinkStatus->remainLLFrameSizeParent += 3 + (u8)r3->send.payloadSize;
             else
-                gRfuLinkStatus->remainLLFrameSizeChild[r7] += 2 + (u8)r3->sub.send.payloadSize;
-            gRfuLinkStatus->sendSlotUNIFlag &= ~r3->sub.send.bmSlot;
+                gRfuLinkStatus->remainLLFrameSizeChild[slotStatusIndex] += 2 + (u8)r3->send.payloadSize;
+            gRfuLinkStatus->sendSlotUNIFlag &= ~r3->send.bmSlot;
         }
-        CpuFill16(0, &r3->sub.send, sizeof(struct UNISend));
+        CpuFill16(0, &r3->send, sizeof(struct UNISend));
     }
-    if (r8 & 2)
+    if (connTypeFlag & 2)
     {
-        CpuFill16(0, &gRfuSlotStatusUNI[r7]->sub.recv, sizeof(struct UNIRecv));
+        CpuFill16(0, &gRfuSlotStatusUNI[slotStatusIndex]->recv, sizeof(struct UNIRecv));
     }
     REG_IME = r10;
     return 0;
 }
 
-s32 rfu_setRecvBuffer(u8 r3, u8 r4, void *r5, size_t r6)
+u16 rfu_setRecvBuffer(u8 connType, u8 slotNo, void *buffer, u32 buffSize)
 {
-    if (r4 > 3)
+    if (slotNo >= RFU_CHILD_MAX)
         return 0x400;
-    if (r3 & 0x20)
+    if (connType & 0x20)
     {
-        gRfuSlotStatusNI[r4]->recvBuffer = r5;
-        gRfuSlotStatusNI[r4]->recvBufferSize = r6;
+        gRfuSlotStatusNI[slotNo]->recvBuffer = buffer;
+        gRfuSlotStatusNI[slotNo]->recvBufferSize = buffSize;
     }
-    else if (!(r3 & 0x10))
+    else if (!(connType & 0x10))
     {
         return 0x600;
     }
     else
     {
-        gRfuSlotStatusUNI[r4]->recvBuffer = r5;
-        gRfuSlotStatusUNI[r4]->recvBufferSize = r6;
+        gRfuSlotStatusUNI[slotNo]->recvBuffer = buffer;
+        gRfuSlotStatusUNI[slotNo]->recvBufferSize = buffSize;
     }
     return 0;
 }
 
-s32 rfu_NI_setSendData(u8 a1, u8 a2, const void *a3, u32 a4)
+u16 rfu_NI_setSendData(u8 bmSendSlot, u8 subFrameSize, const void *src, u32 size)
 {
-    return rfu_STC_setSendData_org(32, a1, a2, a3, a4);
+    return rfu_STC_setSendData_org(32, bmSendSlot, subFrameSize, src, size);
 }
 
-s32 rfu_UNI_setSendData(u8 flag, const void *ptr, u8 size)
+u16 rfu_UNI_setSendData(u8 bmSendSlot, const void *src, u8 size)
 {
-    u8 r0;
+    u8 subFrameSize;
 
-    if (gRfuLinkStatus->connMode == 1)
-        r0 = size + 3;
+    if (gRfuLinkStatus->parentChild == 1)
+        subFrameSize = size + 3;
     else
-        r0 = size + 2;
-    return rfu_STC_setSendData_org(16, flag, r0, ptr, 0);
+        subFrameSize = size + 2;
+    return rfu_STC_setSendData_org(16, bmSendSlot, subFrameSize, src, 0);
 }
 
-s32 rfu_NI_CHILD_setSendGameName(u8 a1, u8 a2)
+u16 rfu_NI_CHILD_setSendGameName(u8 slotNo, u8 subFrameSize)
 {
-    return rfu_STC_setSendData_org(64, 1 << a1, a2, &gRfuLinkStatus->my.serialNum, 26);
+    return rfu_STC_setSendData_org(64, 1 << slotNo, subFrameSize, &gRfuLinkStatus->my.serialNo, 26);
 }
 
-static u16 rfu_STC_setSendData_org(u8 r6, u8 r3, u8 r8, const void *sp00, u32 sp28)
+static u16 rfu_STC_setSendData_org(u8 r6, u8 bmSendSlot, u8 subFrameSize, const void *src, u32 sp28)
 {
     u8 r2, r0;
     u8 r4;
@@ -1305,26 +1298,26 @@ static u16 rfu_STC_setSendData_org(u8 r6, u8 r3, u8 r8, const void *sp00, u32 sp
     struct RfuSlotStatusUNI *r1;
     struct RfuSlotStatusNI *r12;
 
-    if (gRfuLinkStatus->connMode == 0xFF)
+    if (gRfuLinkStatus->parentChild == 0xFF)
         return 0x301;
-    if (!(r3 & 0xF))
+    if (!(bmSendSlot & 0xF))
         return 0x400;
-    if (((gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag) & r3) != r3)
+    if (((gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag) & bmSendSlot) != bmSendSlot)
         return 0x401;
     if (r6 & 0x10)
         r0 = gRfuLinkStatus->sendSlotUNIFlag;
     else
         r0 = gRfuLinkStatus->sendSlotNIFlag;
-    if (r0 & r3)
+    if (r0 & bmSendSlot)
         return 0x402;
-    for (r2 = 0; r2 < 4 && !((r3 >> r2) & 1); ++r2)
+    for (r2 = 0; r2 < 4 && !((bmSendSlot >> r2) & 1); ++r2)
         ;
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
         r9 = &gRfuLinkStatus->remainLLFrameSizeParent;
-    else if (gRfuLinkStatus->connMode == 0)
+    else if (gRfuLinkStatus->parentChild == 0)
         r9 = &gRfuLinkStatus->remainLLFrameSizeChild[r2];
-    r4 = _Str_RfuHeader[gRfuLinkStatus->connMode].unk00;
-    if (r8 > *r9 || r8 <= r4)
+    r4 = _Str_RfuHeader[gRfuLinkStatus->parentChild].unk00;
+    if (subFrameSize > *r9 || subFrameSize <= r4)
         return 0x500;
     sp04 = REG_IME;
     REG_IME = 0;
@@ -1335,82 +1328,82 @@ static u16 rfu_STC_setSendData_org(u8 r6, u8 r3, u8 r8, const void *sp00, u32 sp
 
         r12 = gRfuSlotStatusNI[r2];
         r1 = NULL;
-        r12->sub.send.errorCode = 0;
-        *r12->sub.send.nowP = r1 = &r12->sub.send.dataType;
-        r12->sub.send.remainSize = 7;
-        r12->sub.send.bmSlotOrg = r3;
-        r12->sub.send.bmSlot = r3;
-        r12->sub.send.payloadSize = r8 - r4;
+        r12->send.errorCode = 0;
+        *r12->send.now_p = r1 = &r12->send.dataType;
+        r12->send.remainSize = 7;
+        r12->send.bmSlotOrg = bmSendSlot;
+        r12->send.bmSlot = bmSendSlot;
+        r12->send.payloadSize = subFrameSize - r4;
         if (r5 != 0)
             *r1 = 0;
         else
             *r1 = 1;
-        r12->sub.send.dataSize = sp28;
-        r12->sub.send.src = sp00;
-        r12->sub.send.ack = 0;
-        r12->sub.send.phase = 0;
+        r12->send.dataSize = sp28;
+        r12->send.src = src;
+        r12->send.ack = 0;
+        r12->send.phase = 0;
     #ifndef NONMATCHING // to fix r2, r3, r4, r5 register roulette
         asm("":::"r2");
     #endif
-        for (i = 0; i < NELEMS(r12->sub.send.recvAckFlag); ++i)
+        for (i = 0; i < WINDOW_COUNT; ++i)
         {
-            r12->sub.send.recvAckFlag[i] = 0;
-            r12->sub.send.n[i] = 1;
+            r12->send.recvAckFlag[i] = 0;
+            r12->send.n[i] = 1;
         }
-        for (r2 = 0; r2 < NELEMS(gRfuSlotStatusNI); ++r2)
-            if ((r3 >> r2) & 1)
-                gRfuSlotStatusNI[r2]->sub.send.failCounter = 0;
-        gRfuLinkStatus->sendSlotNIFlag |= r3;
-        *r9 -= r8;
-        r12->sub.send.state = 0x8021;
+        for (r2 = 0; r2 < RFU_CHILD_MAX; ++r2)
+            if ((bmSendSlot >> r2) & 1)
+                gRfuSlotStatusNI[r2]->send.failCounter = 0;
+        gRfuLinkStatus->sendSlotNIFlag |= bmSendSlot;
+        *r9 -= subFrameSize;
+        r12->send.state = 0x8021;
     }
     else if (r6 & 0x10)
     {
         r1 = gRfuSlotStatusUNI[r2];
-        r1->sub.send.bmSlot = r3;
-        r1->sub.send.src = sp00;
-        r1->sub.send.payloadSize = r8 - r4;
-        *r9 -= r8;
-        r1->sub.send.state = 0x8024;
-        gRfuLinkStatus->sendSlotUNIFlag |= r3;
+        r1->send.bmSlot = bmSendSlot;
+        r1->send.src = src;
+        r1->send.payloadSize = subFrameSize - r4;
+        *r9 -= subFrameSize;
+        r1->send.state = 0x8024;
+        gRfuLinkStatus->sendSlotUNIFlag |= bmSendSlot;
     }
     REG_IME = sp04;
     return 0;
 }
 
-s32 rfu_changeSendTarget(u8 r3, u8 r7, u8 r6)
+u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot)
 {
     struct RfuSlotStatusNI *r5;
     u16 r8;
     u8 r2;
 
-    if (r7 >= NELEMS(gRfuSlotStatusNI))
+    if (slotStatusIndex >= RFU_CHILD_MAX)
         return 0x400;
-    if (r3 == 0x20)
+    if (connType == 0x20)
     {
-        r5 = gRfuSlotStatusNI[r7];
-        if ((r5->sub.send.state & 0x8000)
-         && (r5->sub.send.state & 0x20))
+        r5 = gRfuSlotStatusNI[slotStatusIndex];
+        if ((r5->send.state & 0x8000)
+         && (r5->send.state & 0x20))
         {
-            r3 = r6 ^ r5->sub.send.bmSlot;
+            connType = bmNewTgtSlot ^ r5->send.bmSlot;
             
-            if (!(r3 & r6))
+            if (!(connType & bmNewTgtSlot))
             {
-                if (r3)
+                if (connType)
                 {
                     r8 = REG_IME;
                     REG_IME = 0;
-                    for (r2 = 0; r2 < NELEMS(gRfuSlotStatusNI); ++r2)
+                    for (r2 = 0; r2 < RFU_CHILD_MAX; ++r2)
                     {
-                        if ((r3 >> r2) & 1)
-                            gRfuSlotStatusNI[r2]->sub.send.failCounter = 0;
+                        if ((connType >> r2) & 1)
+                            gRfuSlotStatusNI[r2]->send.failCounter = 0;
                     }
-                    gRfuLinkStatus->sendSlotNIFlag &= ~r3;
-                    r5->sub.send.bmSlot = r6;
-                    if (r5->sub.send.bmSlot == 0)
+                    gRfuLinkStatus->sendSlotNIFlag &= ~connType;
+                    r5->send.bmSlot = bmNewTgtSlot;
+                    if (r5->send.bmSlot == 0)
                     {
-                        rfu_STC_releaseFrame(r7, 0, &r5->sub.send);
-                        r5->sub.send.state = 39;
+                        rfu_STC_releaseFrame(slotStatusIndex, 0, &r5->send);
+                        r5->send.state = 39;
                     }
                     REG_IME = r8;
                 }
@@ -1427,22 +1420,22 @@ s32 rfu_changeSendTarget(u8 r3, u8 r7, u8 r6)
     }
     else
     {
-        if (r3 == 16)
+        if (connType == 16)
         {
             s32 r3;
 
-            if (gRfuSlotStatusUNI[r7]->sub.send.state != 0x8024)
+            if (gRfuSlotStatusUNI[slotStatusIndex]->send.state != 0x8024)
                 return 0x403;
-            for (r3 = 0, r2 = 0; r2 < NELEMS(gRfuSlotStatusUNI); ++r2)
-                if (r2 != r7)
-                    r3 |= gRfuSlotStatusUNI[r2]->sub.send.bmSlot;
-            if (r6 & r3)
+            for (r3 = 0, r2 = 0; r2 < RFU_CHILD_MAX; ++r2)
+                if (r2 != slotStatusIndex)
+                    r3 |= gRfuSlotStatusUNI[r2]->send.bmSlot;
+            if (bmNewTgtSlot & r3)
                 return 0x404;
             r8 = REG_IME;
             REG_IME = 0;
-            gRfuLinkStatus->sendSlotUNIFlag &= ~gRfuSlotStatusUNI[r7]->sub.send.bmSlot;
-            gRfuLinkStatus->sendSlotUNIFlag |= r6;
-            gRfuSlotStatusUNI[r7]->sub.send.bmSlot = r6;
+            gRfuLinkStatus->sendSlotUNIFlag &= ~gRfuSlotStatusUNI[slotStatusIndex]->send.bmSlot;
+            gRfuLinkStatus->sendSlotUNIFlag |= bmNewTgtSlot;
+            gRfuSlotStatusUNI[slotStatusIndex]->send.bmSlot = bmNewTgtSlot;
             REG_IME = r8;
         }
         else
@@ -1453,84 +1446,84 @@ s32 rfu_changeSendTarget(u8 r3, u8 r7, u8 r6)
     return 0;
 }
 
-s32 rfu_NI_stopReceivingData(u8 who)
+u16 rfu_NI_stopReceivingData(u8 slotStatusIndex)
 {
     struct NIComm *r5;
     u16 r4, r1;
 
-    if (who > 3)
+    if (slotStatusIndex > 3)
         return 0x400;
-    r5 = &gRfuSlotStatusNI[who]->sub.recv;
+    r5 = &gRfuSlotStatusNI[slotStatusIndex]->recv;
     r4 = REG_IME;
     ++r4; --r4; // fix r4, r5 register swap
     REG_IME = 0;
-    if (gRfuSlotStatusNI[who]->sub.recv.state & 0x8000)
+    if (gRfuSlotStatusNI[slotStatusIndex]->recv.state & 0x8000)
     {
-        if (gRfuSlotStatusNI[who]->sub.recv.state == 0x8043)
-            gRfuSlotStatusNI[who]->sub.recv.state = 72;
+        if (gRfuSlotStatusNI[slotStatusIndex]->recv.state == 0x8043)
+            gRfuSlotStatusNI[slotStatusIndex]->recv.state = 72;
         else
-            gRfuSlotStatusNI[who]->sub.recv.state = 71;
-        gRfuLinkStatus->recvSlotNIFlag &= ~(1 << who);
-        rfu_STC_releaseFrame(who, 1, r5);
+            gRfuSlotStatusNI[slotStatusIndex]->recv.state = 71;
+        gRfuLinkStatus->recvSlotNIFlag &= ~(1 << slotStatusIndex);
+        rfu_STC_releaseFrame(slotStatusIndex, 1, r5);
     }
     REG_IME = r4;
     return 0;
 }
 
-s32 rfu_UNI_changeAndReadySendData(u8 r3, const void *r7, u8 r5)
+u16 rfu_UNI_changeAndReadySendData(u8 slotStatusIndex, const void *src, u8 size)
 {
     struct UNISend *r4;
     u8 *r6;
     u16 r1;
     u8 r3_;
 
-    if (r3 >= 4)
+    if (slotStatusIndex >= RFU_CHILD_MAX)
         return 0x400;
-    r4 = &gRfuSlotStatusUNI[r3]->sub.send;
+    r4 = &gRfuSlotStatusUNI[slotStatusIndex]->send;
     if (r4->state != 0x8024)
         return 0x403;
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
     {
         r6 = &gRfuLinkStatus->remainLLFrameSizeParent;
         r3_ = gRfuLinkStatus->remainLLFrameSizeParent + (u8)r4->payloadSize;
     }
     else
     {
-        r6 = &gRfuLinkStatus->remainLLFrameSizeChild[r3];
-        r3_ = gRfuLinkStatus->remainLLFrameSizeChild[r3] + (u8)r4->payloadSize;
+        r6 = &gRfuLinkStatus->remainLLFrameSizeChild[slotStatusIndex];
+        r3_ = gRfuLinkStatus->remainLLFrameSizeChild[slotStatusIndex] + (u8)r4->payloadSize;
     }
-    if (r3_ < r5)
+    if (r3_ < size)
         return 0x500;
     r1 = REG_IME;
     REG_IME = 0;
-    r4->src = r7;
-    *r6 = r3_ - r5;
-    r4->payloadSize = r5;
+    r4->src = src;
+    *r6 = r3_ - size;
+    r4->payloadSize = size;
     r4->dataReadyFlag = 1;
     REG_IME = r1;
     return 0;
 }
 
-void rfu_UNI_readySendData(u8 a1)
+void rfu_UNI_readySendData(u8 slotStatusIndex)
 {
-    if (a1 < NELEMS(gRfuSlotStatusUNI))
+    if (slotStatusIndex < RFU_CHILD_MAX)
     {
-        if (gRfuSlotStatusUNI[a1]->sub.send.state == 0x8024)
-            gRfuSlotStatusUNI[a1]->sub.send.dataReadyFlag = 1;
+        if (gRfuSlotStatusUNI[slotStatusIndex]->send.state == 0x8024)
+            gRfuSlotStatusUNI[slotStatusIndex]->send.dataReadyFlag = 1;
     }
 }
 
-void rfu_UNI_clearRecvNewDataFlag(u8 a1)
+void rfu_UNI_clearRecvNewDataFlag(u8 slotStatusIndex)
 {
-    if (a1 < NELEMS(gRfuSlotStatusUNI))
-        gRfuSlotStatusUNI[a1]->sub.recv.newDataFlag = 0;
+    if (slotStatusIndex < RFU_CHILD_MAX)
+        gRfuSlotStatusUNI[slotStatusIndex]->recv.newDataFlag = 0;
 }
 
-void rfu_REQ_sendData(u8 r5)
+void rfu_REQ_sendData(u8 clockChangeFlag)
 {
-    if (gRfuLinkStatus->connMode != 0xFF)
+    if (gRfuLinkStatus->parentChild != 0xFF)
     {
-        if (gRfuLinkStatus->connMode == 1
+        if (gRfuLinkStatus->parentChild == 1
          && !(gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag))
         {
             if (gRfuStatic->commExistFlag)
@@ -1548,7 +1541,7 @@ void rfu_REQ_sendData(u8 r5)
                 gRfuFixed->LLFBuffer[0] = 1;
                 gRfuFixed->LLFBuffer[4] = 0xFF;
                 STWI_set_Callback_M(rfu_CB_sendData3);
-                if (r5 == 0)
+                if (clockChangeFlag == 0)
                     STWI_send_DataTxREQ(gRfuFixed->LLFBuffer, 1);
                 else
                     STWI_send_DataTxAndChangeREQ(gRfuFixed->LLFBuffer, 1);
@@ -1562,7 +1555,7 @@ void rfu_REQ_sendData(u8 r5)
             if (gRfuLinkStatus->LLFReadyFlag)
             {
                 STWI_set_Callback_M(rfu_CB_sendData);
-                if (r5 != 0)
+                if (clockChangeFlag != 0)
                 {
                     STWI_send_DataTxAndChangeREQ(gRfuFixed->LLFBuffer, gRfuStatic->totalPacketSize + 4);
                     return;
@@ -1570,9 +1563,9 @@ void rfu_REQ_sendData(u8 r5)
                 STWI_send_DataTxREQ(gRfuFixed->LLFBuffer, gRfuStatic->totalPacketSize + 4);
             }
         }
-        if (r5 != 0)
+        if (clockChangeFlag != 0)
         {
-            if (gRfuLinkStatus->connMode == 1)
+            if (gRfuLinkStatus->parentChild == 1)
             {
                 if (gRfuState->callbackS != NULL)
                     gRfuState->callbackS(39);
@@ -1593,11 +1586,11 @@ static void rfu_CB_sendData(UNUSED u8 r0, u16 r7)
 
     if (r7 == 0)
     {
-        for (r6 = 0; r6 < NELEMS(gRfuSlotStatusNI); ++r6)
+        for (r6 = 0; r6 < RFU_CHILD_MAX; ++r6)
         {
-            if (gRfuSlotStatusUNI[r6]->sub.send.dataReadyFlag)
-                gRfuSlotStatusUNI[r6]->sub.send.dataReadyFlag = 0;
-            r4 = &gRfuSlotStatusNI[r6]->sub.send;
+            if (gRfuSlotStatusUNI[r6]->send.dataReadyFlag)
+                gRfuSlotStatusUNI[r6]->send.dataReadyFlag = 0;
+            r4 = &gRfuSlotStatusNI[r6]->send;
             if (r4->state == 0x8020)
             {
                 rfu_STC_releaseFrame(r6, 0, r4);
@@ -1632,24 +1625,24 @@ static void rfu_constructSendLLFrame(void)
     u8 *sp00;
     struct RfuSlotStatusNI *r2;
 
-    if (gRfuLinkStatus->connMode != 0xFF
+    if (gRfuLinkStatus->parentChild != 0xFF
      && gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag)
     {
         gRfuLinkStatus->LLFReadyFlag = 0;
         r8 = 0;
         sp00 = (u8 *)&gRfuFixed->LLFBuffer[1];
-        for (r6 = 0; r6 < NELEMS(gRfuSlotStatusUNI); ++r6)
+        for (r6 = 0; r6 < RFU_CHILD_MAX; ++r6)
         {
             r5 = 0;
-            if (gRfuSlotStatusNI[r6]->sub.send.state & 0x8000)
-                r5 = rfu_STC_NI_constructLLSF(r6, &sp00, &gRfuSlotStatusNI[r6]->sub.send);
-            if (gRfuSlotStatusNI[r6]->sub.recv.state & 0x8000)
-                r5 += rfu_STC_NI_constructLLSF(r6, &sp00, &gRfuSlotStatusNI[r6]->sub.recv);
-            if (gRfuSlotStatusUNI[r6]->sub.send.state == 0x8024)
+            if (gRfuSlotStatusNI[r6]->send.state & 0x8000)
+                r5 = rfu_STC_NI_constructLLSF(r6, &sp00, &gRfuSlotStatusNI[r6]->send);
+            if (gRfuSlotStatusNI[r6]->recv.state & 0x8000)
+                r5 += rfu_STC_NI_constructLLSF(r6, &sp00, &gRfuSlotStatusNI[r6]->recv);
+            if (gRfuSlotStatusUNI[r6]->send.state == 0x8024)
                 r5 += rfu_STC_UNI_constructLLSF(r6, &sp00);
             if (r5 != 0)
             {
-                if (gRfuLinkStatus->connMode == 1)
+                if (gRfuLinkStatus->parentChild == 1)
                     r8 += r5;
                 else
                     r8 |= r5 << (5 * r6 + 8);
@@ -1660,7 +1653,7 @@ static void rfu_constructSendLLFrame(void)
             while ((u32)sp00 & 3)
                 *sp00++ = 0;
             gRfuFixed->LLFBuffer[0] = r8;
-            if (gRfuLinkStatus->connMode == 0)
+            if (gRfuLinkStatus->parentChild == 0)
             {
                 u8 *r0 = sp00 - offsetof(struct RfuFixed, LLFBuffer[1]);
                 
@@ -1680,11 +1673,11 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
     u32 sp00;
     u8 i;
     u8 *r2;
-    const struct RfuHeader *r8 = &_Str_RfuHeader[gRfuLinkStatus->connMode];
+    const struct RfuHeader *r8 = &_Str_RfuHeader[gRfuLinkStatus->parentChild];
 
     if (r4->state == 0x8022)
     {
-        while (r4->nowP[r4->phase] >= (const u8 *)r4->src + r4->dataSize)
+        while (r4->now_p[r4->phase] >= (const u8 *)r4->src + r4->dataSize)
         {
             ++r4->phase;
             if (r4->phase == 4)
@@ -1697,8 +1690,8 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
     }
     else if (r4->state == 0x8022)
     {
-        if (r4->nowP[r4->phase] + r4->payloadSize > (const u8 *)r4->src + r4->dataSize)
-            r5 = (const u8 *)r4->src + r4->dataSize - r4->nowP[r4->phase];
+        if (r4->now_p[r4->phase] + r4->payloadSize > (const u8 *)r4->src + r4->dataSize)
+            r5 = (const u8 *)r4->src + r4->dataSize - r4->now_p[r4->phase];
         else
             r5 = r4->payloadSize;
     }
@@ -1714,14 +1707,14 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
          | r4->phase << r8->unk05
          | r4->n[r4->phase] << r8->unk06
          | r5;
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
         sp00 |= r4->bmSlot << 18;
     r2 = (u8 *)&sp00;
     for (i = 0; i < r8->unk00; ++i)
         *(*r12)++ = *r2++;
     if (r5 != 0)
     {
-        const u8 *sp04 = r4->nowP[r4->phase];
+        const u8 *sp04 = r4->now_p[r4->phase];
 
         gRfuFixed->fastCopyPtr(&sp04, r12, r5);
     }
@@ -1731,7 +1724,7 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
         if (r4->phase == 4)
             r4->phase = 0;
     }
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
         gRfuLinkStatus->LLFReadyFlag = 1;
     else
         gRfuLinkStatus->LLFReadyFlag |= 1 << r10;
@@ -1745,21 +1738,21 @@ static u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
     u32 sp00;
     u8 *r2;
     u8 i;
-    struct UNISend *r4 = &gRfuSlotStatusUNI[r8]->sub.send;
+    struct UNISend *r4 = &gRfuSlotStatusUNI[r8]->send;
 
     if (!r4->dataReadyFlag || !r4->bmSlot)
         return 0;
-    r5 = &_Str_RfuHeader[gRfuLinkStatus->connMode];
+    r5 = &_Str_RfuHeader[gRfuLinkStatus->parentChild];
     sp00 = (r4->state & 0xF) << r5->unk03
          | r4->payloadSize;
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
         sp00 |= r4->bmSlot << 18;
     r2 = (u8 *)&sp00;
     for (i = 0; i < r5->unk00; ++i)
         *(*r6)++ = *r2++;
     sp04 = r4->src;
     gRfuFixed->fastCopyPtr(&sp04, r6, r4->payloadSize);
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
         gRfuLinkStatus->LLFReadyFlag = 16;
     else
         gRfuLinkStatus->LLFReadyFlag |= 16 << r8;
@@ -1768,7 +1761,7 @@ static u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
 
 void rfu_REQ_recvData(void)
 {
-    if (gRfuLinkStatus->connMode != 0xFF)
+    if (gRfuLinkStatus->parentChild != 0xFF)
     {
         gRfuStatic->commExistFlag = gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag;
         gRfuStatic->recvErrorFlag = 0;
@@ -1786,21 +1779,21 @@ static void rfu_CB_recvData(u8 r9, u16 r7)
     if (r7 == 0 && gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[1])
     {
         gRfuStatic->NIEndRecvFlag = 0;
-        if (gRfuLinkStatus->connMode == 1)
+        if (gRfuLinkStatus->parentChild == 1)
             rfu_STC_PARENT_analyzeRecvPacket();
         else
             rfu_STC_CHILD_analyzeRecvPacket();
-        for (r6 = 0; r6 < NELEMS(gRfuSlotStatusNI); ++r6)
+        for (r6 = 0; r6 < RFU_CHILD_MAX; ++r6)
         {
             r4 = gRfuSlotStatusNI[r6];
-            if (r4->sub.recv.state == 0x8043 && !((gRfuStatic->NIEndRecvFlag >> r6) & 1))
+            if (r4->recv.state == 0x8043 && !((gRfuStatic->NIEndRecvFlag >> r6) & 1))
             {
-                r5 = &r4->sub.recv;
+                r5 = &r4->recv;
                 if (r5->dataType == 1)
                     gRfuLinkStatus->getNameFlag |= 1 << r6;
                 rfu_STC_releaseFrame(r6, 1, r5);
                 gRfuLinkStatus->recvSlotNIFlag &= ~r5->bmSlot;
-                r4->sub.recv.state = 70;
+                r4->recv.state = 70;
             }
         }
         if (gRfuStatic->recvErrorFlag)
@@ -1871,7 +1864,7 @@ static u16 rfu_STC_analyzeLLSF(u8 r12, const u8 *r7, u16 r3)
     u32 r0;
     u16 r10;
 
-    r6 = &_Str_RfuHeader[~gRfuLinkStatus->connMode & 1];
+    r6 = &_Str_RfuHeader[~gRfuLinkStatus->parentChild & 1];
     if (r3 < r6->unk00)
         return r3;
     r5 = 0;
@@ -1887,7 +1880,7 @@ static u16 rfu_STC_analyzeLLSF(u8 r12, const u8 *r7, u16 r3)
     r10 = sp00.unk06 + r6->unk00;
     if (sp00.unk00 == 0)
     {
-        if (gRfuLinkStatus->connMode == 1)
+        if (gRfuLinkStatus->parentChild == 1)
         {
             if ((gRfuLinkStatus->connSlotFlag >> r12) & 1)
             {
@@ -1901,8 +1894,8 @@ static u16 rfu_STC_analyzeLLSF(u8 r12, const u8 *r7, u16 r3)
                 }
                 else
                 {
-                    for (r4 = 0; r4 < NELEMS(gRfuSlotStatusNI); ++r4)
-                        if (((gRfuSlotStatusNI[r4]->sub.send.bmSlot >> r12) & 1)
+                    for (r4 = 0; r4 < RFU_CHILD_MAX; ++r4)
+                        if (((gRfuSlotStatusNI[r4]->send.bmSlot >> r12) & 1)
                          && ((gRfuLinkStatus->sendSlotNIFlag >> r12) & 1))
                             break;
                     if (r4 <= 3)
@@ -1939,12 +1932,12 @@ static void rfu_STC_UNI_receive(u8 r7, const struct RfuLocalStruct *r6, const u8
     u8 *sp04;
     u32 r2;
     struct RfuSlotStatusUNI *r3 = gRfuSlotStatusUNI[r7];
-    struct UNIRecv *r5 = &r3->sub.recv;
+    struct UNIRecv *r5 = &r3->recv;
 
     r5->errorCode = 0;
     if (gRfuSlotStatusUNI[r7]->recvBufferSize < r6->unk06)
     {
-        r3->sub.recv.state = 73;
+        r3->recv.state = 73;
         r5->errorCode = 0x701;
     }
     else
@@ -1976,7 +1969,7 @@ _081E2F0E:
 
 static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct *r6, const u8 *r3)
 {
-    struct NIComm *r12 = &gRfuSlotStatusNI[r0]->sub.send;
+    struct NIComm *r12 = &gRfuSlotStatusNI[r0]->send;
     u16 r9 = r12->state;
     u8 sp00 = r12->n[r6->unk04];
     u8 *r8;
@@ -1997,9 +1990,9 @@ static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct
         if ((u16)(r12->state + ~0x8020) <= 1)
         {
             if (r12->state == 0x8021)
-                r12->nowP[r6->unk04] += r12->payloadSize;
+                r12->now_p[r6->unk04] += r12->payloadSize;
             else
-                r12->nowP[r6->unk04] += r12->payloadSize << 2;
+                r12->now_p[r6->unk04] += r12->payloadSize << 2;
             r12->remainSize -= r12->payloadSize;
             if (r12->remainSize != 0)
                 if (r12->remainSize >= 0)
@@ -2012,10 +2005,10 @@ static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct
                 r12->phase = 0;
                 if (r12->state == 0x8021)
                 {
-                    for (r4 = 0; r4 < NELEMS(r12->n); ++r4)
+                    for (r4 = 0; r4 < WINDOW_COUNT; ++r4)
                     {
                         r12->n[r4] = 1;
-                        r12->nowP[r4] = r12->src + r12->payloadSize * r4;
+                        r12->now_p[r4] = r12->src + r12->payloadSize * r4;
                     }
                     r12->remainSize = r12->dataSize;
                     r12->state = 0x8022;
@@ -2041,7 +2034,7 @@ static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct
         r2 = REG_IME;
         REG_IME = 0;
         gRfuStatic->recvRenewalFlag |= 16 << r10;
-        gRfuSlotStatusNI[r10]->sub.send.failCounter = 0;
+        gRfuSlotStatusNI[r10]->send.failCounter = 0;
         REG_IME = r2;
     }
 }
@@ -2051,18 +2044,18 @@ static void rfu_STC_NI_receive_Receiver(u8 r8, const struct RfuLocalStruct *r6, 
     u16 r2;
     u32 r7 = 0;
     struct RfuSlotStatusNI *r4 = gRfuSlotStatusNI[r8];
-    struct NIComm *r5 = &r4->sub.recv;
-    u16 r9 = r4->sub.recv.state;
-    u8 r10 = r4->sub.recv.n[r6->unk04];
+    struct NIComm *r5 = &r4->recv;
+    u16 r9 = r4->recv.state;
+    u8 r10 = r4->recv.n[r6->unk04];
 
     if (r6->unk02 == 3)
     {
         gRfuStatic->NIEndRecvFlag |= 1 << r8;
-        if (r4->sub.recv.state == 0x8042)
+        if (r4->recv.state == 0x8042)
         {
-            r4->sub.recv.phase = 0;
-            r4->sub.recv.n[0] = 0;
-            r4->sub.recv.state = 0x8043;
+            r4->recv.phase = 0;
+            r4->recv.n[0] = 0;
+            r4->recv.state = 0x8043;
         }
     }
     else if (r6->unk02 == 2)
@@ -2081,7 +2074,7 @@ static void rfu_STC_NI_receive_Receiver(u8 r8, const struct RfuLocalStruct *r6, 
         else
         {
             rfu_STC_NI_initSlot_asRecvControllData(r8, r5);
-            if (r4->sub.recv.state != 0x8041)
+            if (r4->recv.state != 0x8041)
                 return;
             r7 = 1;
         }
@@ -2090,9 +2083,9 @@ static void rfu_STC_NI_receive_Receiver(u8 r8, const struct RfuLocalStruct *r6, 
     {
         if (r6->unk05 == ((r5->n[r6->unk04] + 1) & 3))
         {
-            gRfuFixed->fastCopyPtr(&sp00, (u8 **)&r5->nowP[r6->unk04], r6->unk06);
+            gRfuFixed->fastCopyPtr(&sp00, (u8 **)&r5->now_p[r6->unk04], r6->unk06);
             if (r5->state == 0x8042)
-                r5->nowP[r6->unk04] += 3 * r5->payloadSize;
+                r5->now_p[r6->unk04] += 3 * r5->payloadSize;
             r5->remainSize -= r6->unk06;
             r5->n[r6->unk04] = r6->unk05;
         }
@@ -2117,7 +2110,7 @@ static void rfu_STC_NI_initSlot_asRecvControllData(u8 r4, struct NIComm *r2)
     u32 r5;
     u8 r6;
 
-    if (gRfuLinkStatus->connMode == 1)
+    if (gRfuLinkStatus->parentChild == 1)
     {
         r5 = 3;
         r1 = &gRfuLinkStatus->remainLLFrameSizeParent;
@@ -2140,7 +2133,7 @@ static void rfu_STC_NI_initSlot_asRecvControllData(u8 r4, struct NIComm *r2)
         {
             r2->errorCode = 0;
             *r1 -= r5;
-            r2->nowP[0] = &r2->dataType;
+            r2->now_p[0] = &r2->dataType;
             r2->remainSize = 7;
             r2->ack = 1;
             r2->payloadSize = 0;
@@ -2157,7 +2150,7 @@ static void rfu_STC_NI_initSlot_asRecvDataEntity(u8 r5, struct NIComm *r4)
 
     if (r4->dataType == 1)
     {
-        r4->nowP[0] = (void *)&gRfuLinkStatus->partner[r5].serialNum;
+        r4->now_p[0] = (void *)&gRfuLinkStatus->partner[r5].serialNo;
     }
     else
     {
@@ -2171,12 +2164,12 @@ static void rfu_STC_NI_initSlot_asRecvDataEntity(u8 r5, struct NIComm *r4)
             rfu_STC_releaseFrame(r5, 1, r4);
             return;
         }
-        r4->nowP[0] = gRfuSlotStatusNI[r5]->recvBuffer;
+        r4->now_p[0] = gRfuSlotStatusNI[r5]->recvBuffer;
     }
     for (r3 = 0; r3 < 4; ++r3)
     {
         r4->n[r3] = 0;
-        r4->nowP[r3] = &r4->nowP[0][r4->payloadSize * r3];
+        r4->now_p[r3] = &r4->now_p[0][r4->payloadSize * r3];
     }
     r4->remainSize = r4->dataSize;
     r4->state = 0x8042;
@@ -2193,15 +2186,15 @@ static void rfu_NI_checkCommFailCounter(void)
         r12 = REG_IME;
         REG_IME = 0;
         r7 = gRfuStatic->recvRenewalFlag >> 4;
-        for (r3 = 0; r3 < NELEMS(gRfuSlotStatusNI); ++r3)
+        for (r3 = 0; r3 < RFU_CHILD_MAX; ++r3)
         {
             r2 = 1 << r3;
             if (gRfuLinkStatus->sendSlotNIFlag & r2
              && !(gRfuStatic->recvRenewalFlag & r2))
-                ++gRfuSlotStatusNI[r3]->sub.send.failCounter;
+                ++gRfuSlotStatusNI[r3]->send.failCounter;
             if (gRfuLinkStatus->recvSlotNIFlag & r2
              && !(r7 & r2))
-                ++gRfuSlotStatusNI[r3]->sub.recv.failCounter;
+                ++gRfuSlotStatusNI[r3]->recv.failCounter;
         }
         gRfuStatic->recvRenewalFlag = 0;
         REG_IME = r12;
@@ -2212,158 +2205,4 @@ void rfu_REQ_noise(void)
 {
     STWI_set_Callback_M(rfu_STC_REQ_callback);
     STWI_send_TestModeREQ(1, 0);
-}
-
-static s32 sub_81E349C(u8 r5)
-{
-    u16 r8;
-    vu16 *r4;
-    s32 r6;
-
-    if (REG_IME == 0)
-        return -1;
-    r8 = REG_IE;
-    gRfuState->state = 10;
-    STWI_set_Callback_ID(sub_81E36B8);
-    sub_81E3550();
-    r4 = &REG_TMCNT_L(gRfuState->timerSelect);
-    r5 *= 8;
-    while (--r5 != 0xFF)
-    {
-        r6 = sub_81E35C4();
-        if (r6 != 0)
-            break;
-        r4[1] = 0;
-        r4[0] = 0;
-        r4[1] = TIMER_1024CLK | TIMER_ENABLE;
-        while (r4[0] < 32)
-            ;
-        r4[1] = 0;
-        r4[0] = 0;
-    }
-    REG_IME = 0;
-    REG_IE = r8;
-    REG_IME = 1;
-    gRfuState->state = 0;
-    STWI_set_Callback_ID(NULL);
-    return r6;
-}
-
-static void sub_81E3550(void)
-{
-    REG_IME = 0;
-    REG_IE &= ~((8 << gRfuState->timerSelect) | INTR_FLAG_SERIAL);
-    REG_IME = 1;
-    REG_RCNT = 0;
-    REG_SIOCNT = SIO_32BIT_MODE;
-    REG_SIOCNT |= SIO_INTR_ENABLE | SIO_ENABLE;
-    CpuFill32(0, &gUnknown_3007470, sizeof(struct Unk_3007470));
-    REG_IF = INTR_FLAG_SERIAL;
-}
-
-static s32 sub_81E35C4(void)
-{
-    u8 r12;
-
-    switch (r12 = gUnknown_3007470.unk1)
-    {
-    case 0:
-        gUnknown_3007470.unk0 = 1;
-        REG_SIOCNT |= SIO_38400_BPS;
-        REG_IME = r12;
-        REG_IE |= INTR_FLAG_SERIAL;
-        REG_IME = 1;
-        gUnknown_3007470.unk1 = 1;
-        *(vu8 *)&REG_SIOCNT |= SIO_ENABLE;
-        break;
-    case 1:
-        if (gUnknown_3007470.unkA == 0)
-        {
-            if (gUnknown_3007470.unk0 == 1)
-            {
-                if (gUnknown_3007470.unk2 == 0)
-                {
-                    REG_IME = gUnknown_3007470.unk2;
-                    REG_SIOCNT |= SIO_ENABLE;
-                    REG_IME = r12;
-                }
-            }
-            else if (gUnknown_3007470.unk4 != 0x8001 && !gUnknown_3007470.unk2)
-            {
-                REG_IME = gUnknown_3007470.unk2;
-                REG_IE &= ~INTR_FLAG_SERIAL;
-                REG_IME = r12;
-                REG_SIOCNT = gUnknown_3007470.unk2;
-                REG_SIOCNT = SIO_32BIT_MODE;
-                REG_IF = INTR_FLAG_SERIAL;
-                REG_SIOCNT |= SIO_INTR_ENABLE | SIO_ENABLE;
-                REG_IME = gUnknown_3007470.unk2;
-                REG_IE |= INTR_FLAG_SERIAL;
-                REG_IME = r12;
-            }
-            break;
-        }
-        else
-        {
-            gUnknown_3007470.unk1 = 2;
-            // fallthrough
-        }
-    default:
-        return gUnknown_3007470.unkA;
-    }
-    return 0;
-}
-
-static void sub_81E36B8(void)
-{
-    u32 r5;
-    u16 r0;
-#ifndef NONMATCHING
-    register u32 r1 asm("r1");
-    register u16 r0_ asm("r0");
-#else
-    u32 r1;
-    u16 r0_;
-#endif
-
-    r5 = REG_SIODATA32;
-    if (gUnknown_3007470.unk0 != 1)
-        REG_SIOCNT |= SIO_ENABLE;
-    r1 = 16 * gUnknown_3007470.unk0; // to handle side effect of inline asm
-    r1 = (r5 << r1) >> 16;
-    r5 = (r5 << 16 * (1 - gUnknown_3007470.unk0)) >> 16;
-    if (gUnknown_3007470.unkA == 0)
-    {
-        if (r1 == gUnknown_3007470.unk6)
-        {
-            if (gUnknown_3007470.unk2 > 3)
-            {
-                gUnknown_3007470.unkA = r5;
-            }
-            else if (r1 == (u16)~gUnknown_3007470.unk4)
-            {
-                r0_ = ~gUnknown_3007470.unk6;
-                if (r5 == r0_)
-                    ++gUnknown_3007470.unk2;
-            }
-        }
-        else
-        {
-            gUnknown_3007470.unk2 = gUnknown_3007470.unkA;
-        }
-    }
-    if (gUnknown_3007470.unk2 < 4)
-        gUnknown_3007470.unk4 = *(gUnknown_3007470.unk2 + _Str_Sio32ID);
-    else
-        gUnknown_3007470.unk4 = 0x8001;
-    gUnknown_3007470.unk6 = ~r5;
-    REG_SIODATA32 = (gUnknown_3007470.unk4 << 16 * (1 - gUnknown_3007470.unk0))
-                  + (gUnknown_3007470.unk6 << 16 * gUnknown_3007470.unk0);
-    if (gUnknown_3007470.unk0 == 1 && (gUnknown_3007470.unk2 || r5 == 0x494E))
-    {
-        for (r0 = 0; r0 < 600; ++r0)
-            ;
-        if (gUnknown_3007470.unkA == 0)
-            REG_SIOCNT |= SIO_ENABLE;
-    }
 }

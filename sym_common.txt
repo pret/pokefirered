@@ -161,3 +161,5 @@ gUnknown_3005E94: @ 3005E94
 	.include "agb_flash.o"
 	.align 2
 	.include "librfu_rfu.o"
+	.align 4
+	.include "librfu_s32id.o"

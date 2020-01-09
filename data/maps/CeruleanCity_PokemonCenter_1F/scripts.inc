@@ -10,7 +10,7 @@ CeruleanCity_PokemonCenter_1F_OnTransition:: @ 816AA38
 CeruleanCity_PokemonCenter_1F_EventScript_16AA3C:: @ 816AA3C
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

@@ -197,7 +197,7 @@ Movement_1670DE:: @ 81670DE
 Movement_1670E2:: @ 81670E2
 	step_11
 	step_1a
-	step_60
+	set_invisible
 	step_end
 
 EventScript_1670E6:: @ 81670E6
@@ -269,7 +269,7 @@ Movement_16719D:: @ 816719D
 	step_10
 	step_13
 	step_1a
-	step_60
+	set_invisible
 	step_end
 
 Movement_1671A4:: @ 81671A4
@@ -301,7 +301,7 @@ Movement_1671AF:: @ 81671AF
 Movement_1671B6:: @ 81671B6
 	step_13
 	step_1a
-	step_60
+	set_invisible
 	step_end
 
 Movement_1671BA:: @ 81671BA
@@ -313,7 +313,7 @@ Movement_1671BA:: @ 81671BA
 	step_1a
 	step_13
 	step_1a
-	step_60
+	set_invisible
 	step_end
 
 Movement_1671C4:: @ 81671C4
@@ -321,7 +321,7 @@ Movement_1671C4:: @ 81671C4
 	step_1a
 	step_13
 	step_1a
-	step_60
+	set_invisible
 	step_end
 
 CinnabarIsland_EventScript_1671CA:: @ 81671CA

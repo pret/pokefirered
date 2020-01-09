@@ -13,7 +13,7 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	goto_if eq, EventScript_1A6BF9
 	getitemname 1, ITEM_POTION
 	playfanfare MUS_FANFA1
-	message Text_1A51F6
+	message Text_ObtainedTheX
 	waitmessage
 	waitfanfare
 	additem ITEM_POTION, 1

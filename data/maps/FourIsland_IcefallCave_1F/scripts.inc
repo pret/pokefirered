@@ -29,5 +29,5 @@ EventScript_163D65:: @ 8163D65
 	end
 
 Movement_163D7F:: @ 8163D7F
-	step_60
+	set_invisible
 	step_end

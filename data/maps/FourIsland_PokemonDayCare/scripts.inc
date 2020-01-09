@@ -171,7 +171,7 @@ Movement_171B71:: @ 8171B71
 	step_1c
 	step_01
 	step_up
-	step_60
+	set_invisible
 	step_1c
 	step_1c
 	step_1c

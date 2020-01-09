@@ -10,7 +10,7 @@ LavenderTown_PokemonCenter_1F_OnTransition:: @ 816B0FA
 LavenderTown_PokemonCenter_1F_EventScript_16B0FE:: @ 816B0FE
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

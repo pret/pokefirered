@@ -320,7 +320,7 @@ Movement_165719:: @ 8165719
 
 Movement_16572E:: @ 816572E
 	step_11
-	step_60
+	set_invisible
 	step_end
 
 Movement_165731:: @ 8165731
@@ -369,7 +369,7 @@ Movement_165744:: @ 8165744
 Movement_165758:: @ 8165758
 	step_13
 	step_11
-	step_60
+	set_invisible
 	step_end
 
 PalletTown_EventScript_16575C:: @ 816575C

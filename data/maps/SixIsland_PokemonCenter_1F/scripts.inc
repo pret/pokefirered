@@ -66,7 +66,7 @@ Movement_171E02:: @ 8171E02
 SixIsland_PokemonCenter_1F_EventScript_171E05:: @ 8171E05
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

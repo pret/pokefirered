@@ -142,7 +142,7 @@ EventScript_16F8AC:: @ 816F8AC
 Route4_PokemonCenter_1F_EventScript_16F8BB:: @ 816F8BB
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

@@ -10,7 +10,7 @@ PewterCity_PokemonCenter_1F_OnTransition:: @ 816A76B
 PewterCity_PokemonCenter_1F_EventScript_16A76F:: @ 816A76F
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

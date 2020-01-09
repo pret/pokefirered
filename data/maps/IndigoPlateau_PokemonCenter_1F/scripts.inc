@@ -71,6 +71,6 @@ Items_16EAF4:: @ 816EAF4
 IndigoPlateau_PokemonCenter_1F_EventScript_16EB06:: @ 816EB06
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end

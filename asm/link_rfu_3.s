@@ -7763,8 +7763,8 @@ _08119B5C:
 _08119B64: .4byte gUnknown_203B05C
 	thumb_func_end sub_81199FC
 
-	thumb_func_start sp182_move_string
-sp182_move_string: @ 8119B68
+	thumb_func_start BufferUnionRoomPlayerName
+BufferUnionRoomPlayerName: @ 8119B68
 	push {r4,lr}
 	ldr r4, _08119B78 @ =gUnknown_203B04C
 	ldrb r0, [r4]
@@ -7787,7 +7787,7 @@ _08119B8A:
 	bx r1
 	.align 2, 0
 _08119B90: .4byte gStringVar1
-	thumb_func_end sp182_move_string
+	thumb_func_end BufferUnionRoomPlayerName
 
 	thumb_func_start sub_8119B94
 sub_8119B94: @ 8119B94

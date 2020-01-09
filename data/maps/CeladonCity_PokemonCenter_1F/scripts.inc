@@ -10,7 +10,7 @@ CeladonCity_PokemonCenter_1F_OnTransition:: @ 816C5F7
 CeladonCity_PokemonCenter_1F_EventScript_16C5FB:: @ 816C5FB
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

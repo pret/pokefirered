@@ -164,7 +164,7 @@ EventScript_16B055:: @ 816B055
 	end
 
 EventScript_16B0BF:: @ 816B0BF
-	msgbox gUnknown_81A5207
+	msgbox Text_BagIsFull
 	special sub_815F114
 	release
 	end

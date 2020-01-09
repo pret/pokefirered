@@ -10,7 +10,7 @@ SevenIsland_PokemonCenter_1F_OnTransition:: @ 8170B94
 SevenIsland_PokemonCenter_1F_EventScript_170B98:: @ 8170B98
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

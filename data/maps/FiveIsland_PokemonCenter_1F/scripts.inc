@@ -10,7 +10,7 @@ FiveIsland_PokemonCenter_1F_OnTransition:: @ 8171CFC
 FiveIsland_PokemonCenter_1F_EventScript_171D00:: @ 8171D00
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

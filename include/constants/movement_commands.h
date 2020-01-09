@@ -99,7 +99,7 @@ enum
     step_5d,
     step_5e,
     step_5f,
-    step_60,
+    set_invisible,
     step_61,
     step_62,
     step_63,

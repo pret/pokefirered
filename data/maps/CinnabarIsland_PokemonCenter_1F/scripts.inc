@@ -10,7 +10,7 @@ CinnabarIsland_PokemonCenter_1F_OnTransition:: @ 816E8E2
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
@@ -85,7 +85,7 @@ Movement_16E9AF:: @ 816E9AF
 	step_10
 	step_10
 	step_1b
-	step_60
+	set_invisible
 	step_end
 
 Movement_16E9B9:: @ 816E9B9
@@ -111,7 +111,7 @@ Movement_16E9C3:: @ 816E9C3
 	step_10
 	step_10
 	step_1b
-	step_60
+	set_invisible
 	step_end
 
 Movement_16E9CF:: @ 816E9CF
@@ -128,7 +128,7 @@ Movement_16E9CF:: @ 816E9CF
 	step_1b
 	step_10
 	step_1b
-	step_60
+	set_invisible
 	step_end
 
 Movement_16E9DE:: @ 816E9DE

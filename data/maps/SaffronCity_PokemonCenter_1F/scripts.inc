@@ -10,7 +10,7 @@ SaffronCity_PokemonCenter_1F_OnTransition:: @ 816EFF7
 SaffronCity_PokemonCenter_1F_EventScript_16EFFB:: @ 816EFFB
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

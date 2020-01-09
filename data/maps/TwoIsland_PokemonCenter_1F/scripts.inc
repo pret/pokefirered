@@ -10,7 +10,7 @@ TwoIsland_PokemonCenter_1F_OnTransition:: @ 81717BF
 TwoIsland_PokemonCenter_1F_EventScript_1717C3:: @ 81717C3
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

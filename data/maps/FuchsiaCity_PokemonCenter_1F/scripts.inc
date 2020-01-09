@@ -10,7 +10,7 @@ FuchsiaCity_PokemonCenter_1F_OnTransition:: @ 816D6FC
 FuchsiaCity_PokemonCenter_1F_EventScript_16D700:: @ 816D700
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

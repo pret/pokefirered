@@ -102,7 +102,7 @@ EventScript_16495C:: @ 816495C
 SevenIsland_TrainerTower_Lobby_EventScript_16495D:: @ 816495D
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

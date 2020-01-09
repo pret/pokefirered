@@ -102,7 +102,7 @@
 	create_movement step_5d
 	create_movement step_5e
 	create_movement step_5f
-	create_movement step_60
+	create_movement set_invisible
 	create_movement step_61
 	create_movement step_62
 	create_movement step_63

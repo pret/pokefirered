@@ -190,7 +190,7 @@ Movement_162D12:: @ 8162D12
 	step_11
 	step_11
 	step_1b
-	step_60
+	set_invisible
 	step_end
 
 Movement_162D1F:: @ 8162D1F
@@ -230,7 +230,7 @@ Movement_162D37:: @ 8162D37
 	step_11
 	step_11
 	step_1b
-	step_60
+	set_invisible
 	step_end
 
 Movement_162D41:: @ 8162D41

@@ -186,7 +186,7 @@ Movement_170E91:: @ 8170E91
 OneIsland_PokemonCenter_1F_EventScript_170E94:: @ 8170E94
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

@@ -11,7 +11,7 @@ Route10_PokemonCenter_1F_OnTransition:: @ 816FC3A
 Route10_PokemonCenter_1F_EventScript_16FC41:: @ 816FC41
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

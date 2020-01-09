@@ -395,7 +395,7 @@ gSpecials:: @ 815FD60
 	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special sub_811999C
-	def_special sp182_move_string
+	def_special BufferUnionRoomPlayerName
 	def_special sub_811390C
 	def_special Special_GetMartClerkObjectId
 	def_special Special_BattleCardAction

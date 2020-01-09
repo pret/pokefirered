@@ -53,7 +53,7 @@ Movement_1674F4:: @ 81674F4
 Movement_167501:: @ 8167501
 	step_11
 	step_11
-	step_60
+	set_invisible
 	step_end
 
 Movement_167505:: @ 8167505
@@ -77,7 +77,7 @@ Movement_167507:: @ 8167507
 
 Movement_167514:: @ 8167514
 	step_11
-	step_60
+	set_invisible
 	step_end
 
 OneIsland_EventScript_167517:: @ 8167517

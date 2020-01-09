@@ -10,7 +10,7 @@ VermilionCity_PokemonCenter_1F_OnTransition:: @ 816B42F
 VermilionCity_PokemonCenter_1F_EventScript_16B433:: @ 816B433
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 

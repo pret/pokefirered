@@ -437,25 +437,25 @@ EventScript_1711A0:: @ 81711A0
 
 OneIsland_PokemonCenter_1F_EventScript_1711AA:: @ 81711AA
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_1711DA
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_1711B6:: @ 81711B6
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_1711DA
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_1711C2:: @ 81711C2
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto EventScript_1711DA
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_1711CE:: @ 81711CE
 	lockall
-	setvar VAR_0x4001, 4
+	setvar VAR_TEMP_1, 4
 	goto EventScript_1711DA
 	end
 
@@ -466,13 +466,13 @@ EventScript_1711DA:: @ 81711DA
 	waitmovement 0
 	msgbox gUnknown_81A13B8
 	closemessage
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1712E4
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1712EF
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if eq, EventScript_1712FA
-	compare VAR_0x4001, 4
+	compare VAR_TEMP_1, 4
 	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB

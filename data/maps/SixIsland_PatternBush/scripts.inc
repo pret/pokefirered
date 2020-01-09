@@ -4,10 +4,10 @@ SixIsland_PatternBush_MapScripts:: @ 8164559
 
 SixIsland_PatternBush_OnTransition:: @ 816455F
 	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH
-	getplayerxy VAR_0x4001, VAR_0x4002
-	compare VAR_0x4001, 50
+	getplayerxy VAR_TEMP_1, VAR_TEMP_2
+	compare VAR_TEMP_1, 50
 	call_if ge, EventScript_16457E
-	compare VAR_0x4001, 49
+	compare VAR_TEMP_1, 49
 	call_if le, EventScript_164587
 	end
 

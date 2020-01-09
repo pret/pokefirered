@@ -1,7 +1,7 @@
 PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
 	lock
 	faceplayer
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if eq, EventScript_1BEE3A
 	checkflag FLAG_SYS_SET_TRAINER_CARD_PROFILE
 	goto_if TRUE, EventScript_1BEECD
@@ -42,7 +42,7 @@ EventScript_1BEE9E:: @ 81BEE9E
 	end
 
 EventScript_1BEEA8:: @ 81BEEA8
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setvar VAR_0x8004, 0
 	special Special_BufferEasyChatMessage
 	waitmessage
@@ -89,7 +89,7 @@ EventScript_1BEF35:: @ 81BEF35
 	end
 
 EventScript_1BEF3F:: @ 81BEF3F
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setvar VAR_0x8004, 0
 	special Special_BufferEasyChatMessage
 	waitmessage

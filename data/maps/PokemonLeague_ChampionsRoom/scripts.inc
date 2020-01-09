@@ -37,11 +37,11 @@ EventScript_162B44:: @ 8162B44
 	return
 
 EventScript_162B57:: @ 8162B57
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 PokemonLeague_ChampionsRoom_OnWarp:: @ 8162B5D
-	map_script_2 VAR_0x4001, 0, EventScript_162B67
+	map_script_2 VAR_TEMP_1, 0, EventScript_162B67
 	.2byte 0
 
 EventScript_162B67:: @ 8162B67
@@ -49,7 +49,7 @@ EventScript_162B67:: @ 8162B67
 	end
 
 PokemonLeague_ChampionsRoom_OnFrame:: @ 8162B6C
-	map_script_2 VAR_0x4001, 0, EventScript_162B76
+	map_script_2 VAR_TEMP_1, 0, EventScript_162B76
 	.2byte 0
 
 EventScript_162B76:: @ 8162B76
@@ -104,7 +104,7 @@ EventScript_162B76:: @ 8162B76
 	applymovement 2, Movement_162D37
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_162D12
 	waitmovement 0
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12
 	waitstate
 	releaseall

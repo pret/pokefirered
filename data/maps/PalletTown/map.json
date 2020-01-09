@@ -111,7 +111,7 @@
       "x": 13,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_0x4002",
+      "var": "VAR_TEMP_2",
       "var_value": 1,
       "script": "PalletTown_EventScript_16587B"
     }

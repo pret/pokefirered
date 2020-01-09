@@ -213,7 +213,7 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
                 PlaySE(SE_RU_GASYAN);
                 MapGridSetMetatileIdAt(x, y, 0x35b);
                 CurrentMapDrawMetatileAt(x, y);
-                VarSet(VAR_0x4001, 1);
+                VarSet(VAR_TEMP_1, 1);
                 data[1] = 1;
             }
             break;

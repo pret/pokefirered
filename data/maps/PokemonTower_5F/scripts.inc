@@ -11,13 +11,13 @@ PokemonTower_5F_EventScript_16343C:: @ 816343C
 	special sp000_heal_pokemon
 	fadescreen 2
 	msgbox gUnknown_817A1FA
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end
 
 PokemonTower_5F_EventScript_163453:: @ 8163453
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end
 

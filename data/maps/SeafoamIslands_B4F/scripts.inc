@@ -28,12 +28,12 @@ SeafoamIslands_B4F_OnTransition:: @ 8163066
 	end
 
 EventScript_163082:: @ 8163082
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	call_if eq, EventScript_1630A5
 	return
 
@@ -50,12 +50,12 @@ EventScript_1630AD:: @ 81630AD
 	return
 
 SeafoamIslands_B4F_OnLoad:: @ 81630B1
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_if eq, EventScript_1630D4
 	end
 
@@ -75,7 +75,7 @@ EventScript_1630F1:: @ 81630F1
 
 SeafoamIslands_B4F_OnFrame:: @ 81630F9
 	map_script_2 VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1, EventScript_16310B
-	map_script_2 VAR_0x4001, 1, EventScript_163121
+	map_script_2 VAR_TEMP_1, 1, EventScript_163121
 	.2byte 0
 
 EventScript_16310B:: @ 816310B
@@ -94,12 +94,12 @@ Movement_16311D:: @ 816311D
 
 EventScript_163121:: @ 8163121
 	lockall
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
 	call_if FALSE, EventScript_163169
 	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	call_if FALSE, EventScript_163169
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_if eq, EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare VAR_0x8008, 9
@@ -107,12 +107,12 @@ EventScript_163121:: @ 8163121
 	compare VAR_0x8008, 9
 	call_if ge, EventScript_16317A
 	special sub_805D1A8
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end
 
 EventScript_163169:: @ 8163169
-	addvar VAR_0x4002, 1
+	addvar VAR_TEMP_2, 1
 	return
 
 EventScript_16316F:: @ 816316F
@@ -126,7 +126,7 @@ EventScript_16317A:: @ 816317A
 	return
 
 EventScript_163185:: @ 8163185
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end
 

@@ -51,7 +51,7 @@ SilphCo_11F_EventScript_161E7F:: @ 8161E7F
 
 SilphCo_11F_EventScript_161E88:: @ 8161E88
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_161EA0
 
 EventScript_161E93:: @ 8161E93
@@ -59,7 +59,7 @@ EventScript_161E93:: @ 8161E93
 
 SilphCo_11F_EventScript_161E94:: @ 8161E94
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_161EA0
 
 EventScript_161E9F:: @ 8161E9F
@@ -72,9 +72,9 @@ EventScript_161EA0:: @ 8161EA0
 	delay 25
 	msgbox gUnknown_8177108
 	closemessage
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_161F00
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB

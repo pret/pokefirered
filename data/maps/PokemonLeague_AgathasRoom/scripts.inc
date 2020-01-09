@@ -26,7 +26,7 @@ EventScript_16284B:: @ 816284B
 	return
 
 PokemonLeague_AgathasRoom_OnWarp:: @ 8162851
-	map_script_2 VAR_0x4001, 0, EventScript_16285B
+	map_script_2 VAR_TEMP_1, 0, EventScript_16285B
 	.2byte 0
 
 EventScript_16285B:: @ 816285B

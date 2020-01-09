@@ -9,13 +9,13 @@ CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 	lock
 	faceplayer
 	call EventScript_16BCF6
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	goto_if eq, EventScript_16C00E
 	goto EventScript_16BD3E
 	end
 
 EventScript_16BCF6:: @ 816BCF6
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checkitem ITEM_FRESH_WATER, 1
 	compare VAR_RESULT, 1
 	call_if eq, EventScript_16BD2C
@@ -28,15 +28,15 @@ EventScript_16BCF6:: @ 816BCF6
 	return
 
 EventScript_16BD2C:: @ 816BD2C
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	return
 
 EventScript_16BD32:: @ 816BD32
-	addvar VAR_0x4001, 2
+	addvar VAR_TEMP_1, 2
 	return
 
 EventScript_16BD38:: @ 816BD38
-	addvar VAR_0x4001, 4
+	addvar VAR_TEMP_1, 4
 	return
 
 EventScript_16BD3E:: @ 816BD3E
@@ -47,7 +47,7 @@ EventScript_16BD3E:: @ 816BD3E
 	message Text_195D5F
 	waitmessage
 	textcolor 1
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 1, EventScript_16BDAE
 	case 2, EventScript_16BDDA
 	case 3, EventScript_16BE06
@@ -221,8 +221,8 @@ CeladonCity_DepartmentStore_Roof_EventScript_16C034:: @ 816C034
 
 EventScript_16C045:: @ 816C045
 	multichoice 12, 0, MULTICHOICE_CELADON_VENDING_MACHINE, FALSE
-	copyvar VAR_0x4001, VAR_RESULT
-	switch VAR_0x4001
+	copyvar VAR_TEMP_1, VAR_RESULT
+	switch VAR_TEMP_1
 	case 0, EventScript_16C083
 	case 1, EventScript_16C094
 	case 2, EventScript_16C0A5
@@ -231,19 +231,19 @@ EventScript_16C045:: @ 816C045
 	end
 
 EventScript_16C083:: @ 816C083
-	setvar VAR_0x4000, ITEM_FRESH_WATER
+	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	checkmoney 200, 0
 	goto EventScript_16C0CB
 	end
 
 EventScript_16C094:: @ 816C094
-	setvar VAR_0x4000, ITEM_SODA_POP
+	setvar VAR_TEMP_0, ITEM_SODA_POP
 	checkmoney 300, 0
 	goto EventScript_16C0CB
 	end
 
 EventScript_16C0A5:: @ 816C0A5
-	setvar VAR_0x4000, ITEM_LEMONADE
+	setvar VAR_TEMP_0, ITEM_LEMONADE
 	checkmoney 350, 0
 	goto EventScript_16C0CB
 	end
@@ -263,20 +263,20 @@ EventScript_16C0C4:: @ 816C0C4
 EventScript_16C0CB:: @ 816C0CB
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C131
-	checkitemspace VAR_0x4000, 1
+	checkitemspace VAR_TEMP_0, 1
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16C13F
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16C0B6
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16C0BD
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16C0C4
 	updatemoneybox 0, 0, 0
-	getitemname 0, VAR_0x4000
+	getitemname 0, VAR_TEMP_0
 	playse SE_JIHANKI
 	msgbox gUnknown_8196076
-	additem VAR_0x4000, 1
+	additem VAR_TEMP_0, 1
 	goto EventScript_16C125
 	end
 

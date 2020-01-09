@@ -47,7 +47,7 @@ EventScript_166F5E:: @ 8166F5E
 	return
 
 EventScript_166F68:: @ 8166F68
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 CinnabarIsland_OnFrame:: @ 8166F6E

@@ -7,22 +7,22 @@ PokemonTower_2F_EventScript_163286:: @ 8163286
 
 PokemonTower_2F_EventScript_16328F:: @ 816328F
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_1632A7
 	end
 
 PokemonTower_2F_EventScript_16329B:: @ 816329B
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_1632A7
 	end
 
 EventScript_1632A7:: @ 81632A7
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_163339
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16334B
 	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
@@ -39,9 +39,9 @@ EventScript_1632A7:: @ 81632A7
 	msgbox gUnknown_8179DD4
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16337E
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_163389
 	playse SE_KAIDAN
 	delay 25

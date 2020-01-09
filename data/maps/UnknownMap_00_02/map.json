@@ -63,7 +63,7 @@
       "x": 6,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4000",
+      "var": "VAR_TEMP_0",
       "var_value": 0,
       "script": "UnknownMap_00_02_EventScript_1BB980"
     },
@@ -72,7 +72,7 @@
       "x": 6,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4000",
+      "var": "VAR_TEMP_0",
       "var_value": 0,
       "script": "UnknownMap_00_02_EventScript_1BB980"
     },
@@ -81,7 +81,7 @@
       "x": 13,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4000",
+      "var": "VAR_TEMP_0",
       "var_value": 0,
       "script": "UnknownMap_00_02_EventScript_1BB980"
     },
@@ -90,7 +90,7 @@
       "x": 13,
       "y": 6,
       "elevation": 3,
-      "var": "VAR_0x4000",
+      "var": "VAR_TEMP_0",
       "var_value": 0,
       "script": "UnknownMap_00_02_EventScript_1BB980"
     }

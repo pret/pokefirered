@@ -26,21 +26,21 @@ EventScript_168656:: @ 8168656
 
 Route24_EventScript_168660:: @ 8168660
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_168678
 	end
 
 Route24_EventScript_16866C:: @ 816866C
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_168678
 	end
 
 EventScript_168678:: @ 8168678
 	textcolor 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1686FD
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_168708
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
@@ -80,7 +80,7 @@ EventScript_168713:: @ 8168713
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_168743
 	waitmovement 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_168733
 	release
 	end

@@ -214,13 +214,13 @@ EventScript_16DBDE:: @ 816DBDE
 
 CinnabarIsland_Gym_EventScript_16DBE8:: @ 816DBE8
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16DC00
 	end
 
 CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16DC00
 	end
 
@@ -275,9 +275,9 @@ EventScript_16DC6A:: @ 816DC6A
 	end
 
 EventScript_16DC7A:: @ 816DC7A
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16DCB4
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16DCC6
 	textcolor 0
 	msgbox gUnknown_819983F
@@ -311,13 +311,13 @@ Movement_16DCDB:: @ 816DCDB
 
 CinnabarIsland_Gym_EventScript_16DCDD:: @ 816DCDD
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16DCF5
 	end
 
 CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16DCF5
 	end
 
@@ -354,9 +354,9 @@ EventScript_16DD41:: @ 816DD41
 	end
 
 EventScript_16DD51:: @ 816DD51
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16DD8B
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16DD9D
 	textcolor 0
 	msgbox gUnknown_81998BD
@@ -399,13 +399,13 @@ Movement_16DDB7:: @ 816DDB7
 
 CinnabarIsland_Gym_EventScript_16DDBB:: @ 816DDBB
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16DDD3
 	end
 
 CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16DDD3
 	end
 
@@ -442,9 +442,9 @@ EventScript_16DE1F:: @ 816DE1F
 	end
 
 EventScript_16DE2F:: @ 816DE2F
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16DE69
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16DE7B
 	textcolor 0
 	msgbox gUnknown_8199948
@@ -478,13 +478,13 @@ Movement_16DE90:: @ 816DE90
 
 CinnabarIsland_Gym_EventScript_16DE92:: @ 816DE92
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16DEAA
 	end
 
 CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16DEAA
 	end
 
@@ -521,9 +521,9 @@ EventScript_16DEF6:: @ 816DEF6
 	end
 
 EventScript_16DF06:: @ 816DF06
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16DF40
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16DF52
 	textcolor 0
 	msgbox gUnknown_81999B7
@@ -557,13 +557,13 @@ Movement_16DF67:: @ 816DF67
 
 CinnabarIsland_Gym_EventScript_16DF69:: @ 816DF69
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16DF81
 	end
 
 CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16DF81
 	end
 
@@ -600,9 +600,9 @@ EventScript_16DFCD:: @ 816DFCD
 	end
 
 EventScript_16DFDD:: @ 816DFDD
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16E017
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16E029
 	textcolor 0
 	msgbox gUnknown_8199A7F
@@ -636,13 +636,13 @@ Movement_16E03E:: @ 816E03E
 
 CinnabarIsland_Gym_EventScript_16E040:: @ 816E040
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16E058
 	end
 
 CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16E058
 	end
 
@@ -679,9 +679,9 @@ EventScript_16E0A4:: @ 816E0A4
 	end
 
 EventScript_16E0B4:: @ 816E0B4
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16E0EE
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16E100
 	textcolor 0
 	msgbox gUnknown_8199AFC

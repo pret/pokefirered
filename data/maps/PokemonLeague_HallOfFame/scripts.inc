@@ -4,7 +4,7 @@ PokemonLeague_HallOfFame_MapScripts:: @ 8162D4C
 	.byte 0
 
 PokemonLeague_HallOfFame_OnWarp:: @ 8162D57
-	map_script_2 VAR_0x4001, 0, EventScript_162D61
+	map_script_2 VAR_TEMP_1, 0, EventScript_162D61
 	.2byte 0
 
 EventScript_162D61:: @ 8162D61
@@ -12,7 +12,7 @@ EventScript_162D61:: @ 8162D61
 	end
 
 PokemonLeague_HallOfFame_OnFrame:: @ 8162D66
-	map_script_2 VAR_0x4001, 0, EventScript_162D70
+	map_script_2 VAR_TEMP_1, 0, EventScript_162D70
 	.2byte 0
 
 EventScript_162D70:: @ 8162D70
@@ -33,7 +33,7 @@ EventScript_162D70:: @ 8162D70
 	dofieldeffect 62
 	waitfieldeffect 62
 	delay 40
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call EventScript_1A651A
 	setrespawn SPAWN_PALLET_TOWN
 	fadescreenspeed 1, 24

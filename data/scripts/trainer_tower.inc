@@ -8,7 +8,7 @@ SevenIsland_TrainerTower_7F_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_8F_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54:: @ 81C4F54
 SevenIsland_TrainerTower_Roof_MapScript1_1C4F54:: @ 81C4F54
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 10
 	special sub_815D9E8
 	end
@@ -31,15 +31,15 @@ SevenIsland_TrainerTower_8F_MapScript2_1C4F62:: @ 81C4F62
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_4
 	setflag FLAG_TEMP_5
-	setvar VAR_0x400E, 1
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_E, 1
+	setvar VAR_TEMP_F, 1
 	end
 
 EventScript_1C4FA7:: @ 81C4FA7
 	setflag FLAG_TEMP_2
 	setflag FLAG_TEMP_4
 	setflag FLAG_TEMP_5
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	setobjectxyperm 3, 15, 13
 	setobjectmovementtype 3, 9
 	goto EventScript_1C5042
@@ -47,7 +47,7 @@ EventScript_1C4FA7:: @ 81C4FA7
 EventScript_1C4FC5:: @ 81C4FC5
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_4
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
 	compare VAR_RESULT, 1
@@ -67,7 +67,7 @@ EventScript_1C4FFE:: @ 81C4FFE
 
 EventScript_1C5019:: @ 81C5019
 	setflag FLAG_TEMP_5
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	setobjectxyperm 2, 10, 10
 	setobjectmovementtype 2, 8
 	setobjectxyperm 3, 14, 13
@@ -88,17 +88,17 @@ SevenIsland_TrainerTower_7F_MapScript3_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_8F_MapScript3_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_Elevator_MapScript2_1C5046:: @ 81C5046
 SevenIsland_TrainerTower_Roof_MapScript2_1C5046:: @ 81C5046
-	map_script_2 VAR_0x4002, 0, EventScript_1C5050
+	map_script_2 VAR_TEMP_2, 0, EventScript_1C5050
 	.2byte 0
 
 EventScript_1C5050:: @ 81C5050
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C5072
-	setvar VAR_0x400E, 1
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_E, 1
+	setvar VAR_TEMP_F, 1
 EventScript_1C5072:
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
@@ -124,7 +124,7 @@ EventScript_1C50C2:
 	waitmovement 0
 	applymovement 3, Movement_Delay48
 	waitmovement 0
-	setvar VAR_0x400E, 1
+	setvar VAR_TEMP_E, 1
 	applymovement 3, Movement_1C5541
 	waitmovement 0
 	setvar VAR_0x8004, 1
@@ -138,24 +138,24 @@ EventScript_1C50C2:
 EventScript_1C510D:: @ 81C510D
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_0x4003
+	copyvar VAR_0x8006, VAR_TEMP_3
 	special sub_815D9E8
 	msgbox gStringVar4
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	addvar VAR_0x4003, 1
-	compare VAR_0x4003, 1
+	addvar VAR_TEMP_3, 1
+	compare VAR_TEMP_3, 1
 	goto_if eq, EventScript_1C5146
-	setvar VAR_0x4003, 0
+	setvar VAR_TEMP_3, 0
 EventScript_1C5146:
-	copyvar VAR_0x8006, VAR_0x4003
+	copyvar VAR_0x8006, VAR_TEMP_3
 	special sub_815D9E8
 	msgbox gStringVar4
 	closemessage
 	goto EventScript_1C5219
 
 EventScript_1C515C:: @ 81C515C
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, EventScript_1C5182
 	case 1, EventScript_1C51AD
 	case 2, EventScript_1C51D8
@@ -193,7 +193,7 @@ EventScript_1C51D8:: @ 81C51D8
 EventScript_1C51FE:
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_0x4001
+	copyvar VAR_0x8006, VAR_TEMP_1
 	special sub_815D9E8
 	msgbox gStringVar4
 	closemessage
@@ -215,16 +215,16 @@ EventScript_1C524D:
 	case 1, EventScript_1C52BA
 	case 2, EventScript_1C5280
 EventScript_1C5280:
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 0, EventScript_1C52A6
 	case 1, EventScript_1C52B0
 	case 2, EventScript_1C52D0
 EventScript_1C52A6:
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	goto EventScript_1C515C
 
 EventScript_1C52B0:: @ 81C52B0
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	goto EventScript_1C515C
 
 EventScript_1C52BA:: @ 81C52BA
@@ -374,7 +374,7 @@ SevenIsland_TrainerTower_5F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_7F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_3F_EventScript_1C54B4:: @ 81C54B4
 SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
-	setvar VAR_0x4003, 0
+	setvar VAR_TEMP_3, 0
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
 	compare VAR_RESULT, 0
@@ -394,7 +394,7 @@ SevenIsland_TrainerTower_5F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_7F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_3F_EventScript_1C54EA:: @ 81C54EA
 SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
 	compare VAR_RESULT, 0
@@ -406,7 +406,7 @@ SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
 	applymovement 5, Movement_Delay48
 EventScript_1C551B:
 	waitmovement 0
-	setvar VAR_0x400F, 1
+	setvar VAR_TEMP_F, 1
 	goto EventScript_1C508F
 
 EventScript_1C5528:: @ 81C5528

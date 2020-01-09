@@ -30,9 +30,9 @@ EventScript_1A77F9:: @ 81A77F9
 	end
 
 EventScript_1A7803:: @ 81A7803
-	compare VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	compare VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	goto_if ge, EventScript_1A77EC
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 1, EventScript_1A78D5
 	case 2, EventScript_1A78E4
 	case 3, EventScript_1A78F3
@@ -44,9 +44,9 @@ EventScript_1A7803:: @ 81A7803
 	end
 
 EventScript_1A786C:: @ 81A786C
-	compare VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	compare VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	goto_if ge, EventScript_1A77F9
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 1, EventScript_1A78D5
 	case 2, EventScript_1A78E4
 	case 3, EventScript_1A78F3
@@ -111,13 +111,13 @@ EventScript_1A794D:: @ 81A794D
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	release
 	end
 
 EventScript_1A795F:: @ 81A795F
 	msgbox Text_OnlyPassWithBadgeOhGoAhead
-	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	release
 	end
 
@@ -125,7 +125,7 @@ EventScript_1A796E:: @ 81A796E
 	textcolor 0
 	applymovement VAR_0x8009, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	switch VAR_0x4001
+	switch VAR_TEMP_1
 	case 1, EventScript_1A79D8
 	case 2, EventScript_1A79E7
 	case 3, EventScript_1A79F6
@@ -214,13 +214,13 @@ EventScript_1A7A96:: @ 81A7A96
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	releaseall
 	end
 
 EventScript_1A7AA8:: @ 81A7AA8
 	msgbox Text_OnlyPassWithBadgeOhGoAhead
-	copyvar VAR_MAP_SCENE_ROUTE23, VAR_0x4001
+	copyvar VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
 	releaseall
 	end
 

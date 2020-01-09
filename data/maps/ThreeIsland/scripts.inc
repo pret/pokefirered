@@ -21,7 +21,7 @@ EventScript_1677CF:: @ 81677CF
 
 ThreeIsland_EventScript_1677D8:: @ 81677D8
 	lock
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	call EventScript_16786F
 	release
 	end
@@ -32,7 +32,7 @@ ThreeIsland_EventScript_1677E5:: @ 81677E5
 	goto_if TRUE, EventScript_167806
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if eq, EventScript_16781A
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	call EventScript_16786F
 	release
 	end
@@ -64,36 +64,36 @@ EventScript_167865:: @ 8167865
 	end
 
 EventScript_16786F:: @ 816786F
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_167947
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81820C0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_167952
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_167952
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_8182125
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_167931
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_167931
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81821A9
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_167952
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_167952
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
@@ -138,7 +138,7 @@ ThreeIsland_EventScript_167989:: @ 8167989
 	lock
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
 	goto_if eq, EventScript_1679A1
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call EventScript_16786F
 	release
 	end
@@ -182,31 +182,31 @@ Movement_167A1B:: @ 8167A1B
 
 ThreeIsland_EventScript_167A1D:: @ 8167A1D
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_167A59
 	end
 
 ThreeIsland_EventScript_167A29:: @ 8167A29
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_167A59
 	end
 
 ThreeIsland_EventScript_167A35:: @ 8167A35
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_167A59
 	end
 
 ThreeIsland_EventScript_167A41:: @ 8167A41
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto EventScript_167A59
 	end
 
 ThreeIsland_EventScript_167A4D:: @ 8167A4D
 	lockall
-	setvar VAR_0x4001, 4
+	setvar VAR_TEMP_1, 4
 	goto EventScript_167A59
 	end
 
@@ -256,15 +256,15 @@ EventScript_167A59:: @ 8167A59
 	msgbox gUnknown_81825E2
 	closemessage
 	delay 45
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_167BC6
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_167BD8
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_167BEA
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if eq, EventScript_167C03
-	compare VAR_0x4001, 4
+	compare VAR_TEMP_1, 4
 	call_if eq, EventScript_167C1C
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623

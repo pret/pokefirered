@@ -16,20 +16,20 @@ EventScript_166484:: @ 8166484
 
 CeruleanCity_EventScript_16649A:: @ 816649A
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_1664CC
 	end
 
 CeruleanCity_EventScript_1664A6:: @ 81664A6
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 8, 23, 0
 	goto EventScript_1664CC
 	end
 
 CeruleanCity_EventScript_1664B9:: @ 81664B9
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	setobjectxyperm 8, 24, 0
 	goto EventScript_1664CC
 	end
@@ -53,11 +53,11 @@ EventScript_1664CC:: @ 81664CC
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1665A3
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1665A3
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1665B5
 	msgbox gUnknown_817ECD4
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
@@ -206,7 +206,7 @@ EventScript_166677:: @ 8166677
 
 CeruleanCity_EventScript_166683:: @ 8166683
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
@@ -216,7 +216,7 @@ CeruleanCity_EventScript_166683:: @ 8166683
 
 CeruleanCity_EventScript_1666A3:: @ 81666A3
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp

@@ -418,25 +418,25 @@ Movement_165D83:: @ 8165D83
 
 PewterCity_EventScript_165D8E:: @ 8165D8E
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_165DBE
 	end
 
 PewterCity_EventScript_165D9A:: @ 8165D9A
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_165DBE
 	end
 
 PewterCity_EventScript_165DA6:: @ 8165DA6
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_165DBE
 	end
 
 PewterCity_EventScript_165DB2:: @ 8165DB2
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	goto EventScript_165DBE
 	end
 
@@ -445,11 +445,11 @@ EventScript_165DBE:: @ 8165DBE
 	msgbox gUnknown_817E67E
 	closemessage
 	playbgm MUS_ANNAI, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_165E0A
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_165E26
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_165E42
 	msgbox gUnknown_817E6C7
 	closemessage
@@ -1388,39 +1388,39 @@ PewterCity_EventScript_1662A0:: @ 81662A0
 PewterCity_EventScript_1662A9:: @ 81662A9
 	lock
 	faceplayer
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	call EventScript_1662DE
 	release
 	end
 
 PewterCity_EventScript_1662B7:: @ 81662B7
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	call EventScript_1662DE
 	releaseall
 	end
 
 PewterCity_EventScript_1662C4:: @ 81662C4
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	call EventScript_1662DE
 	releaseall
 	end
 
 PewterCity_EventScript_1662D1:: @ 81662D1
 	lockall
-	setvar VAR_0x4001, 3
+	setvar VAR_TEMP_1, 3
 	call EventScript_1662DE
 	releaseall
 	end
 
 EventScript_1662DE:: @ 81662DE
 	textcolor 0
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1663CA
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1663CA
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if eq, EventScript_1663CA
 	waitse
 	playse SE_PIN
@@ -1429,13 +1429,13 @@ EventScript_1662DE:: @ 81662DE
 	applymovement 7, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_817E902
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1663D5
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1663DA
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1663E6
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if eq, EventScript_1663FC
 	msgbox gUnknown_817E90C
 	textcolor 3
@@ -1451,13 +1451,13 @@ EventScript_1662DE:: @ 81662DE
 	call EventScript_1A6675
 	msgbox gUnknown_817EA06
 	closemessage
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_166412
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16641D
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_166428
-	compare VAR_0x4001, 3
+	compare VAR_TEMP_1, 3
 	call_if eq, EventScript_166433
 	delay 30
 	textcolor 3

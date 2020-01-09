@@ -284,19 +284,19 @@ Movement_1692E5:: @ 81692E5
 
 PalletTown_ProfessorOaksLab_EventScript_1692E7:: @ 81692E7
 	lockall
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto EventScript_16930B
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_1692F3:: @ 81692F3
 	lockall
-	setvar VAR_0x4002, 2
+	setvar VAR_TEMP_2, 2
 	goto EventScript_16930B
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_1692FF:: @ 81692FF
 	lockall
-	setvar VAR_0x4002, 3
+	setvar VAR_TEMP_2, 3
 	goto EventScript_16930B
 	end
 
@@ -320,11 +320,11 @@ EventScript_16930B:: @ 816930B
 	end
 
 EventScript_16935A:: @ 816935A
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_if eq, EventScript_16937C
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_if eq, EventScript_16938C
-	compare VAR_0x4002, 3
+	compare VAR_TEMP_2, 3
 	goto_if eq, EventScript_16939C
 	end
 
@@ -376,11 +376,11 @@ Movement_1693CD:: @ 81693CD
 	step_end
 
 EventScript_1693D2:: @ 81693D2
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_if eq, EventScript_1693F4
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_if eq, EventScript_169404
-	compare VAR_0x4002, 3
+	compare VAR_TEMP_2, 3
 	goto_if eq, EventScript_169414
 	end
 
@@ -435,11 +435,11 @@ Movement_169447:: @ 8169447
 	step_end
 
 EventScript_16944D:: @ 816944D
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_if eq, EventScript_16946F
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	goto_if eq, EventScript_16947F
-	compare VAR_0x4002, 3
+	compare VAR_TEMP_2, 3
 	goto_if eq, EventScript_16948F
 	end
 
@@ -492,11 +492,11 @@ EventScript_1694C2:: @ 81694C2
 	msgbox gUnknown_818DE38
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	call_if eq, EventScript_169504
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	call_if eq, EventScript_169516
-	compare VAR_0x4002, 3
+	compare VAR_TEMP_2, 3
 	call_if eq, EventScript_169528
 	removeobject 8
 	playse SE_KAIDAN
@@ -1141,10 +1141,10 @@ Movement_169BA4:: @ 8169BA4
 	walk_down
 	step_end
 
-	.equ VAR_OAKSLAB_PLAYER_STARTER_NO,       VAR_0x4001
-	.equ VAR_OAKSLAB_PLAYER_STARTER_SPECIES,  VAR_0x4002
-	.equ VAR_OAKSLAB_RIVAL_STARTER_SPECIES,   VAR_0x4003
-	.equ VAR_OAKSLAB_RIVAL_STARTER_OBJID,     VAR_0x4004
+	.equ VAR_OAKSLAB_PLAYER_STARTER_NO,       VAR_TEMP_1
+	.equ VAR_OAKSLAB_PLAYER_STARTER_SPECIES,  VAR_TEMP_2
+	.equ VAR_OAKSLAB_RIVAL_STARTER_SPECIES,   VAR_TEMP_3
+	.equ VAR_OAKSLAB_RIVAL_STARTER_OBJID,     VAR_TEMP_4
 
 PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	lock

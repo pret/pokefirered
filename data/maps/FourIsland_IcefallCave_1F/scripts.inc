@@ -13,7 +13,7 @@ FourIsland_IcefallCave_1F_OnLoad:: @ 8163D57
 	end
 
 FourIsland_IcefallCave_1F_OnFrame:: @ 8163D5B
-	map_script_2 VAR_0x4001, 1, EventScript_163D65
+	map_script_2 VAR_TEMP_1, 1, EventScript_163D65
 	.2byte 0
 
 EventScript_163D65:: @ 8163D65

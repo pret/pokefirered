@@ -216,7 +216,7 @@ EventScript_16E736:: @ 816E736
 	end
 
 EventScript_16E758:: @ 816E758
-	setvar VAR_0x4001, SPECIES_OMANYTE
+	setvar VAR_TEMP_1, SPECIES_OMANYTE
 	getspeciesname 0, SPECIES_OMANYTE
 	msgbox gUnknown_819A34F
 	givemon SPECIES_OMANYTE, 5, ITEM_NONE, 0, 0, 0
@@ -230,7 +230,7 @@ EventScript_16E758:: @ 816E758
 	end
 
 EventScript_16E79D:: @ 816E79D
-	setvar VAR_0x4001, SPECIES_KABUTO
+	setvar VAR_TEMP_1, SPECIES_KABUTO
 	getspeciesname 0, SPECIES_KABUTO
 	msgbox gUnknown_819A34F
 	givemon SPECIES_KABUTO, 5, ITEM_NONE, 0, 0, 0
@@ -244,7 +244,7 @@ EventScript_16E79D:: @ 816E79D
 	end
 
 EventScript_16E7E2:: @ 816E7E2
-	setvar VAR_0x4001, SPECIES_AERODACTYL
+	setvar VAR_TEMP_1, SPECIES_AERODACTYL
 	getspeciesname 0, SPECIES_AERODACTYL
 	msgbox gUnknown_819A34F
 	givemon SPECIES_AERODACTYL, 5, ITEM_NONE, 0, 0, 0

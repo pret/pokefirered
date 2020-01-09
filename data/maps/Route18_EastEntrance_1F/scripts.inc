@@ -9,7 +9,7 @@ Route18_EastEntrance_1F_OnTransition:: @ 817037E
 	end
 
 EventScript_17038B:: @ 817038B
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 Route18_EastEntrance_1F_EventScript_170391:: @ 8170391

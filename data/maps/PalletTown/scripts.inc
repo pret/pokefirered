@@ -35,7 +35,7 @@ EventScript_1654A8:: @ 81654A8
 EventScript_1654BD:: @ 81654BD
 	setobjectxyperm 1, 12, 2
 	setobjectmovementtype 1, 8
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	return
 
 PalletTown_OnFrame:: @ 81654CE
@@ -173,13 +173,13 @@ Movement_1655DD:: @ 81655DD
 
 PalletTown_EventScript_1655ED:: @ 81655ED
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_165605
 	end
 
 PalletTown_EventScript_1655F9:: @ 81655F9
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_165605
 	end
 
@@ -199,17 +199,17 @@ EventScript_165605:: @ 8165605
 	waitmovement 0
 	delay 30
 	addobject 3
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1656B8
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1656C3
 	delay 30
 	msgbox gUnknown_817D74A
 	closemessage
 	delay 30
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1656CE
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1656E0
 	opendoor 16, 13
 	waitdooranim
@@ -378,7 +378,7 @@ PalletTown_EventScript_16575C:: @ 816575C
 	goto_if eq, EventScript_1657ED
 	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if eq, EventScript_165815
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	goto_if eq, EventScript_1658C2
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_165801
@@ -489,7 +489,7 @@ EventScript_165894:: @ 8165894
 	textcolor 3
 	setflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	special sub_80699E0
 	special sub_80699BC
 	signmsg

@@ -38,7 +38,7 @@ EventScript_16A37B:: @ 816A37B
 
 PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
@@ -46,7 +46,7 @@ PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 
 PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
@@ -54,7 +54,7 @@ PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 
 PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
@@ -79,11 +79,11 @@ EventScript_16A402:: @ 816A402
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16A476
 	closemessage
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16A455
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16A460
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16A46B
 	playse SE_SHOP
 	takemoney 50, 0

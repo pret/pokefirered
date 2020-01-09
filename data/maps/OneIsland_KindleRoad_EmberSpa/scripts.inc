@@ -48,6 +48,6 @@ OneIsland_KindleRoad_EmberSpa_EventScript_1653CF:: @ 81653CF
 	special sp000_heal_pokemon
 	fadescreen 2
 	msgbox gUnknown_817D450
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	releaseall
 	end

@@ -12,7 +12,7 @@ SevenIsland_House_Room1_OnTransition:: @ 8170895
 	end
 
 EventScript_1708AF:: @ 81708AF
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 4, 2
 	setobjectmovementtype 1, 8
 	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_8338B4C
@@ -77,7 +77,7 @@ SevenIsland_House_Room1_EventScript_170958:: @ 8170958
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 1
 	call_if eq, EventScript_17097D
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if eq, EventScript_170987
 	msgbox gUnknown_81A049B
 	release

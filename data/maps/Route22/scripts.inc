@@ -3,7 +3,7 @@ Route22_MapScripts:: @ 816828B
 
 Route22_EventScript_16828C:: @ 816828C
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_1682BE
 
 EventScript_168297:: @ 8168297
@@ -11,7 +11,7 @@ EventScript_168297:: @ 8168297
 
 Route22_EventScript_168298:: @ 8168298
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 25, 5
 	goto EventScript_1682BE
 
@@ -20,7 +20,7 @@ EventScript_1682AA:: @ 81682AA
 
 Route22_EventScript_1682AB:: @ 81682AB
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	setobjectxyperm 1, 25, 5
 	goto EventScript_1682BE
 
@@ -31,11 +31,11 @@ EventScript_1682BE:: @ 81682BE
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
 	addobject 1
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_168350
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_168350
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16835B
 	delay 6
 	msgbox gUnknown_8188890
@@ -49,11 +49,11 @@ EventScript_1682BE:: @ 81682BE
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16839A
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16839A
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1683A5
 	fadedefaultbgm
 	removeobject 1
@@ -169,7 +169,7 @@ Movement_1683E3:: @ 81683E3
 
 Route22_EventScript_1683ED:: @ 81683ED
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16841F
 
 EventScript_1683F8:: @ 81683F8
@@ -177,7 +177,7 @@ EventScript_1683F8:: @ 81683F8
 
 Route22_EventScript_1683F9:: @ 81683F9
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 25, 5
 	goto EventScript_16841F
 
@@ -186,7 +186,7 @@ EventScript_16840B:: @ 816840B
 
 Route22_EventScript_16840C:: @ 816840C
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	setobjectxyperm 1, 25, 5
 	goto EventScript_16841F
 
@@ -197,11 +197,11 @@ EventScript_16841F:: @ 816841F
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
 	addobject 1
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16849C
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16849C
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1684A7
 	msgbox gUnknown_8188A3C
 	setvar VAR_LAST_TALKED, 1

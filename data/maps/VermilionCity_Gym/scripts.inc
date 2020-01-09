@@ -44,8 +44,8 @@ EventScript_16B778:: @ 816B778
 	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
 	goto_if TRUE, EventScript_1A77A9
 	special Special_SetVermilionTrashCans
-	copyvar VAR_0x4000, VAR_0x8004
-	copyvar VAR_0x4001, VAR_0x8005
+	copyvar VAR_TEMP_0, VAR_0x8004
+	copyvar VAR_TEMP_1, VAR_0x8005
 	return
 
 VermilionCity_Gym_EventScript_16B78F:: @ 816B78F
@@ -143,8 +143,8 @@ EventScript_16B843:: @ 816B843
 	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
-	copyvar VAR_0x8004, VAR_0x4000
-	copyvar VAR_0x8005, VAR_0x4001
+	copyvar VAR_0x8004, VAR_TEMP_0
+	copyvar VAR_0x8005, VAR_TEMP_1
 	checkflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
 	goto_if TRUE, EventScript_16B8E5
 	checkflag FLAG_TEMP_1
@@ -171,8 +171,8 @@ EventScript_16B89E:: @ 816B89E
 	msgbox gUnknown_819536C
 	clearflag FLAG_TEMP_1
 	special Special_SetVermilionTrashCans
-	copyvar VAR_0x4000, VAR_0x8004
-	copyvar VAR_0x4001, VAR_0x8005
+	copyvar VAR_TEMP_0, VAR_0x8004
+	copyvar VAR_TEMP_1, VAR_0x8005
 	call EventScript_16B8EF
 	special DrawWholeMapView
 	releaseall

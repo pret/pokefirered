@@ -23,7 +23,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONLEE, 10, 3
-	setvar VAR_0x4001, SPECIES_HITMONLEE
+	setvar VAR_TEMP_1, SPECIES_HITMONLEE
 	applymovement 5, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 0
@@ -46,7 +46,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	checkflag FLAG_GOT_HITMON_FROM_DOJO
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONCHAN, 10, 3
-	setvar VAR_0x4001, SPECIES_HITMONCHAN
+	setvar VAR_TEMP_1, SPECIES_HITMONCHAN
 	applymovement 5, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 0
@@ -60,7 +60,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 
 EventScript_16EC82:: @ 816EC82
 	erasemonpic
-	givemon VAR_0x4001, 25, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 25, ITEM_NONE, 0, 0, 0
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16ECB5
 	compare VAR_RESULT, 1
@@ -72,7 +72,7 @@ EventScript_16EC82:: @ 816EC82
 
 EventScript_16ECB5:: @ 816ECB5
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, VAR_0x4001
+	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
 	message Text_19B473
 	waitmessage
@@ -88,7 +88,7 @@ EventScript_16ECB5:: @ 816ECB5
 
 EventScript_16ECEC:: @ 816ECEC
 	removeobject VAR_LAST_TALKED
-	getspeciesname 0, VAR_0x4001
+	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
 	message Text_19B473
 	waitmessage

@@ -7,19 +7,19 @@ Route5_SouthEntrance_EventScript_16F901:: @ 816F901
 
 Route5_SouthEntrance_EventScript_16F90A:: @ 816F90A
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_16F92E
 	end
 
 Route5_SouthEntrance_EventScript_16F916:: @ 816F916
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_16F92E
 	end
 
 Route5_SouthEntrance_EventScript_16F922:: @ 816F922
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_16F92E
 	end
 
@@ -44,11 +44,11 @@ EventScript_16F958:: @ 816F958
 EventScript_16F963:: @ 816F963
 	msgbox gUnknown_819E09B
 	closemessage
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_16F99C
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_16F9A7
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_16F9B2
 	msgbox gUnknown_819E0C1
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1

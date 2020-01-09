@@ -3,7 +3,7 @@ SSAnne_2F_Corridor_MapScripts:: @ 81608DE
 
 SSAnne_2F_Corridor_EventScript_1608DF:: @ 81608DF
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_160903
 
 EventScript_1608EA:: @ 81608EA
@@ -11,7 +11,7 @@ EventScript_1608EA:: @ 81608EA
 
 SSAnne_2F_Corridor_EventScript_1608EB:: @ 81608EB
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_160903
 
 EventScript_1608F6:: @ 81608F6
@@ -19,7 +19,7 @@ EventScript_1608F6:: @ 81608F6
 
 SSAnne_2F_Corridor_EventScript_1608F7:: @ 81608F7
 	lockall
-	setvar VAR_0x4001, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_160903
 
 EventScript_160902:: @ 8160902
@@ -35,11 +35,11 @@ EventScript_160903:: @ 8160903
 	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1609AD
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_1609B8
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1609CA
 	msgbox gUnknown_8173035
 	setvar VAR_LAST_TALKED, 1
@@ -53,11 +53,11 @@ EventScript_160903:: @ 8160903
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_1609FD
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_160A08
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_160A13
 	fadedefaultbgm
 	removeobject 1

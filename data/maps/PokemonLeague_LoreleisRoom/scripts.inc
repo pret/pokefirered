@@ -31,7 +31,7 @@ PokemonLeague_LoreleisRoom_OnTransition:: @ 81625B2
 	end
 
 PokemonLeague_LoreleisRoom_OnWarp:: @ 81625B6
-	map_script_2 VAR_0x4001, 0, EventScript_1625C0
+	map_script_2 VAR_TEMP_1, 0, EventScript_1625C0
 	.2byte 0
 
 EventScript_1625C0:: @ 81625C0

@@ -225,7 +225,7 @@
       "x": 22,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "VermilionCity_EventScript_166B98"
     },
@@ -234,7 +234,7 @@
       "x": 23,
       "y": 32,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "VermilionCity_EventScript_166B98"
     }

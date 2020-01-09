@@ -463,7 +463,7 @@ void InitTrainerTowerBattleStruct(void)
 
     sub_815DC8C();
     sTrainerTowerOpponent = AllocZeroed(sizeof(*sTrainerTowerOpponent));
-    r10 = VarGet(VAR_0x4001);
+    r10 = VarGet(VAR_TEMP_1);
     StringCopyN(sTrainerTowerOpponent->name, sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].name, 11);
 
     for (r9 = 0; r9 < 6; r9++)
@@ -494,7 +494,7 @@ void FreeTrainerTowerBattleStruct(void)
 void sub_815DBF4(u8 *dest, u8 opponentIdx)
 // TTower_GetBeforeBattleMessage?
 {
-    VarSet(VAR_0x4003, opponentIdx);
+    VarSet(VAR_TEMP_3, opponentIdx);
     TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
     if (opponentIdx == 0)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechWin, dest);
@@ -505,7 +505,7 @@ void sub_815DBF4(u8 *dest, u8 opponentIdx)
 void sub_815DC40(u8 *dest, u8 opponentIdx)
 // TTower_GetAfterBattleMessage?
 {
-    VarSet(VAR_0x4003, opponentIdx);
+    VarSet(VAR_TEMP_3, opponentIdx);
     TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
     if (opponentIdx == 0)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose, dest);
@@ -706,7 +706,7 @@ static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass)
         }
         if (r4 != NELEMS(sDoubleBattleTrainerInfo))
         {
-            if (VarGet(VAR_0x4003))
+            if (VarGet(VAR_TEMP_3))
                 r5 = sDoubleBattleTrainerInfo[r4].gender2;
             else
                 r5 = sDoubleBattleTrainerInfo[r4].gender1;
@@ -905,12 +905,12 @@ static void sub_815E720(void)
 
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, 3);
-    VarSet(VAR_0x4001, windowId);
+    VarSet(VAR_TEMP_1, windowId);
 }
 
 static void sub_815E88C(void)
 {
-    u8 windowId = VarGet(VAR_0x4001);
+    u8 windowId = VarGet(VAR_TEMP_1);
     ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
@@ -948,7 +948,7 @@ static void sub_815E908(void)
 static void sub_815E948(void)
 {
     s32 i;
-    u16 var_4001 = VarGet(VAR_0x4001);
+    u16 var_4001 = VarGet(VAR_TEMP_1);
     u8 r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[var_4001].facilityClass;
 
     for (i = 0; i < NELEMS(sTrainerEncounterMusicLUT); i++)
@@ -974,7 +974,7 @@ static void sub_815E9C8(void)
 
 static void BuildEnemyParty(void)
 {
-    u16 trainerIdx = VarGet(VAR_0x4001);
+    u16 trainerIdx = VarGet(VAR_TEMP_1);
     s32 level = GetPartyMaxLevel();
     u8 floorIdx = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
     s32 i;

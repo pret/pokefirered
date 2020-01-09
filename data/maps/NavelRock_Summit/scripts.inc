@@ -11,15 +11,15 @@ NavelRock_Summit_OnTransition:: @ 8164FAA
 	end
 
 EventScript_164FBD:: @ 8164FBD
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	setflag FLAG_HIDE_HO_OH
 	return
 
 EventScript_164FC6:: @ 8164FC6
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	checkflag FLAG_HO_OH_FLEW_AWAY
 	goto_if TRUE, EventScript_1A77A9
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
 
@@ -41,7 +41,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	goto_if eq, EventScript_1A7AE0
 	special sub_8112364
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35

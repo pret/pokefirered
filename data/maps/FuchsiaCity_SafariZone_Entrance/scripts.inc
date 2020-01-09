@@ -79,19 +79,19 @@ Movement_16D36A:: @ 816D36A
 
 FuchsiaCity_SafariZone_Entrance_EventScript_16D36D:: @ 816D36D
 	lockall
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	goto EventScript_16D391
 	end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_16D379:: @ 816D379
 	lockall
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto EventScript_16D391
 	end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_16D385:: @ 816D385
 	lockall
-	setvar VAR_0x4002, 2
+	setvar VAR_TEMP_2, 2
 	goto EventScript_16D391
 	end
 
@@ -124,11 +124,11 @@ EventScript_16D3CA:: @ 816D3CA
 	msgbox gUnknown_8197D80
 	closemessage
 	hidemoneybox 0, 0
-	compare VAR_0x4002, 0
+	compare VAR_TEMP_2, 0
 	call_if eq, EventScript_16D44C
-	compare VAR_0x4002, 1
+	compare VAR_TEMP_2, 1
 	call_if eq, EventScript_16D441
-	compare VAR_0x4002, 2
+	compare VAR_TEMP_2, 2
 	call_if eq, EventScript_16D457
 	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2

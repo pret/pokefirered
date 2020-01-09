@@ -15,7 +15,7 @@ EventScript_168D44:: @ 8168D44
 	return
 
 EventScript_168D50:: @ 8168D50
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
@@ -24,7 +24,7 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkflag FLAG_SYS_GAME_CLEAR
 	goto_if TRUE, EventScript_168DB9
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	goto_if eq, EventScript_168EEC
 	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	goto_if eq, EventScript_168F59

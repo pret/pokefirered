@@ -9,7 +9,7 @@ Route16_NorthEntrance_1F_OnTransition:: @ 81701C8
 	end
 
 EventScript_1701D5:: @ 81701D5
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 Route16_NorthEntrance_1F_EventScript_1701DB:: @ 81701DB

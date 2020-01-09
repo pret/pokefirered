@@ -23,7 +23,7 @@ EventScript_1619B7:: @ 81619B7
 
 SilphCo_7F_EventScript_1619BC:: @ 81619BC
 	lockall
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_1619D4
 
 EventScript_1619C7:: @ 81619C7
@@ -31,7 +31,7 @@ EventScript_1619C7:: @ 81619C7
 
 SilphCo_7F_EventScript_1619C8:: @ 81619C8
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_1619D4
 
 EventScript_1619D3:: @ 81619D3
@@ -46,9 +46,9 @@ EventScript_1619D4:: @ 81619D4
 	applymovement 1, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_8176710
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_161A73
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_161A7F
 	msgbox gUnknown_8176727
 	setvar VAR_LAST_TALKED, 1
@@ -61,9 +61,9 @@ EventScript_1619D4:: @ 81619D4
 	msgbox gUnknown_8176827
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_0x4001, 0
+	compare VAR_TEMP_1, 0
 	call_if eq, EventScript_161AA1
-	compare VAR_0x4001, 1
+	compare VAR_TEMP_1, 1
 	call_if eq, EventScript_161AAC
 	playse SE_TK_WARPIN
 	fadedefaultbgm
@@ -133,7 +133,7 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	checkflag FLAG_GOT_LAPRAS_FROM_SILPH
 	goto_if TRUE, EventScript_161B8D
 	msgbox gUnknown_8176266
-	setvar VAR_0x4001, SPECIES_LAPRAS
+	setvar VAR_TEMP_1, SPECIES_LAPRAS
 	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_161B12

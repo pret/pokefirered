@@ -26,7 +26,7 @@ EventScript_1626C0:: @ 81626C0
 	return
 
 PokemonLeague_BrunosRoom_OnWarp:: @ 81626C6
-	map_script_2 VAR_0x4001, 0, EventScript_1626D0
+	map_script_2 VAR_TEMP_1, 0, EventScript_1626D0
 	.2byte 0
 
 EventScript_1626D0:: @ 81626D0

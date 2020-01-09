@@ -48,7 +48,7 @@ EventScript_16F7A2:: @ 816F7A2
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16F895
 	textcolor 3
-	setvar VAR_0x4001, 129
+	setvar VAR_TEMP_1, 129
 	givemon SPECIES_MAGIKARP, 5, ITEM_NONE, 0, 0, 0
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_16F7F6

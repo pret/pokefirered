@@ -8,7 +8,7 @@ SevenIsland_House_Room2_OnTransition:: @ 8170A89
 	end
 
 SevenIsland_House_Room2_OnFrame:: @ 8170A8D
-	map_script_2 VAR_0x4001, 0, EventScript_170A97
+	map_script_2 VAR_TEMP_1, 0, EventScript_170A97
 	.2byte 0
 
 EventScript_170A97:: @ 8170A97
@@ -33,7 +33,7 @@ EventScript_170A97:: @ 8170A97
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B28
 	waitmovement 0
 	special LoadPlayerParty
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM1, 255, 4, 1
 	waitstate
 	releaseall

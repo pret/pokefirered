@@ -3,17 +3,17 @@ RocketHideout_B4F_MapScripts:: @ 81612E8
 	.byte 0
 
 RocketHideout_B4F_OnLoad:: @ 81612EE
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if ne, EventScript_16146A
 	end
 
 EventScript_161311:: @ 8161311
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	return
 
 RocketHideout_B4F_EventScript_161317:: @ 8161317
@@ -77,14 +77,14 @@ RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
 	end
 
 EventScript_1613E9:: @ 81613E9
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1614A1
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_161462
 	release
 	end
@@ -95,14 +95,14 @@ RocketHideout_B4F_EventScript_161418:: @ 8161418
 	end
 
 EventScript_161433:: @ 8161433
-	setvar VAR_0x4001, 0
+	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
 	call_if eq, EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
 	call_if eq, EventScript_161311
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_1614A1
-	compare VAR_0x4001, 2
+	compare VAR_TEMP_1, 2
 	call_if eq, EventScript_161462
 	release
 	end

@@ -26,7 +26,7 @@ EventScript_162968:: @ 8162968
 	return
 
 PokemonLeague_LancesRoom_OnWarp:: @ 816296E
-	map_script_2 VAR_0x4001, 0, EventScript_162978
+	map_script_2 VAR_TEMP_1, 0, EventScript_162978
 	.2byte 0
 
 EventScript_162978:: @ 8162978

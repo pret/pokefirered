@@ -7,14 +7,14 @@ SevenIsland_TrainerTower_Lobby_MapScripts:: @ 8164839
 	.byte 0
 
 SevenIsland_TrainerTower_Lobby_OnResume:: @ 8164853
-	setvar VAR_0x4002, 0
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 10
 	special sub_815D9E8
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_164886
-	setvar VAR_0x4000, 0
+	setvar VAR_TEMP_0, 0
 	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 7
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 
@@ -30,7 +30,7 @@ SevenIsland_TrainerTower_Lobby_OnReturnToField:: @ 8164887
 	end
 
 SevenIsland_TrainerTower_Lobby_OnLoad:: @ 8164897
-	compare VAR_0x400D, 17
+	compare VAR_TEMP_D, 17
 	call_if eq, EventScript_1648A3
 	end
 
@@ -40,12 +40,12 @@ EventScript_1648A3:: @ 81648A3
 
 SevenIsland_TrainerTower_Lobby_OnTransition:: @ 81648AD
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY
-	getplayerxy VAR_0x400D, VAR_RESULT
+	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end
 
 SevenIsland_TrainerTower_Lobby_OnFrame:: @ 81648B6
-	map_script_2 VAR_0x4000, 0, EventScript_1648ED
-	map_script_2 VAR_0x400D, 0x11, EventScript_1648C8
+	map_script_2 VAR_TEMP_0, 0, EventScript_1648ED
+	map_script_2 VAR_TEMP_D, 0x11, EventScript_1648C8
 	.2byte 0
 
 EventScript_1648C8:: @ 81648C8
@@ -56,7 +56,7 @@ EventScript_1648C8:: @ 81648C8
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	waitse
-	setvar VAR_0x400D, 0
+	setvar VAR_TEMP_D, 0
 	releaseall
 	end
 
@@ -66,7 +66,7 @@ Movement_1648EA:: @ 81648EA
 	step_end
 
 EventScript_1648ED:: @ 81648ED
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 12
 	special sub_815D9E8
 	switch VAR_RESULT

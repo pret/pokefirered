@@ -1270,19 +1270,19 @@ gUnknown_81A6C32:: @ 81A6C32
 
 EventScript_1A7493:: @ 81A7493
 	lockall
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_1A74B7
 	end
 
 EventScript_1A749F:: @ 81A749F
 	lockall
-	setvar VAR_0x4002, 1
+	setvar VAR_TEMP_2, 1
 	goto EventScript_1A74B7
 	end
 
 EventScript_1A74AB:: @ 81A74AB
 	lockall
-	setvar VAR_0x4003, 1
+	setvar VAR_TEMP_3, 1
 	goto EventScript_1A74B7
 	end
 
@@ -1297,11 +1297,11 @@ EventScript_1A74B7:: @ 81A74B7
 	end
 
 EventScript_1A74D1:: @ 81A74D1
-	setvar VAR_0x4001, 1
-	setvar VAR_0x4002, 1
-	setvar VAR_0x4003, 1
-	setvar VAR_0x4004, 1
-	setvar VAR_0x4005, 1
+	setvar VAR_TEMP_1, 1
+	setvar VAR_TEMP_2, 1
+	setvar VAR_TEMP_3, 1
+	setvar VAR_TEMP_4, 1
+	setvar VAR_TEMP_5, 1
 	return
 
 EventScript_1A74EB:: @ 81A74EB
@@ -1851,7 +1851,7 @@ EventScript_1A8C33:: @ 81A8C33
 
 EventScript_1A8C3C:: @ 81A8C3C
 	bufferboxname 0, VAR_0x4037
-	getspeciesname 1, VAR_0x4001
+	getspeciesname 1, VAR_TEMP_1
 	checkflag FLAG_SYS_NOT_SOMEONES_PC
 	call_if FALSE, EventScript_1A8C57
 	checkflag FLAG_SYS_NOT_SOMEONES_PC

@@ -38,7 +38,7 @@ CableClub_OnWarp:: @ 81BB1ED
 EventScript_CheckTurnAttendant:: @ 81BB227
 	compare VAR_0x8007, 0
 	goto_if eq, EventScript_CheckTurnAttendantEnd
-	turnobject VAR_0x8007, 3
+	turnobject VAR_0x8007, DIR_WEST
 EventScript_CheckTurnAttendantEnd:
 	end
 

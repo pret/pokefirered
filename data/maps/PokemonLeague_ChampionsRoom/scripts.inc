@@ -45,7 +45,7 @@ PokemonLeague_ChampionsRoom_OnWarp:: @ 8162B5D
 	.2byte 0
 
 EventScript_162B67:: @ 8162B67
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_ChampionsRoom_OnFrame:: @ 8162B6C

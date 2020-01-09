@@ -35,7 +35,7 @@ EventScript_168C4A:: @ 8168C4A
 
 PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 	lockall
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	goto_if eq, EventScript_168C78
 	msgbox gUnknown_818D4F9
 	releaseall

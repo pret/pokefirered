@@ -30,7 +30,7 @@ PokemonLeague_AgathasRoom_OnWarp:: @ 8162851
 	.2byte 0
 
 EventScript_16285B:: @ 816285B
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_AgathasRoom_OnFrame:: @ 8162860

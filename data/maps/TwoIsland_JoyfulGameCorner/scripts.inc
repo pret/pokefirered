@@ -23,7 +23,7 @@ TwoIsland_JoyfulGameCorner_OnWarp:: @ 8171404
 	.2byte 0
 
 EventScript_171416:: @ 8171416
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 TwoIsland_JoyfulGameCorner_OnFrame:: @ 817141B

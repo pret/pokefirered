@@ -112,7 +112,7 @@ FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
 EventScript_1640A2:: @ 81640A2
 	getplayerxy VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare VAR_RESULT, 2
+	compare VAR_RESULT, DIR_NORTH
 	call_if eq, EventScript_16412E
 	msgbox gUnknown_817B7AE
 	closemessage

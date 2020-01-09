@@ -50,13 +50,13 @@ EventScript_17059C:: @ 817059C
 	msgbox gUnknown_819FFD3
 	closemessage
 	delay 10
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_17062A
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_170635
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_170635
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_170635
 	opendoor 10, 3
 	waitdooranim

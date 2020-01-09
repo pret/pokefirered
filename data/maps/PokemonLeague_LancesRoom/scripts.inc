@@ -30,7 +30,7 @@ PokemonLeague_LancesRoom_OnWarp:: @ 816296E
 	.2byte 0
 
 EventScript_162978:: @ 8162978
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_LancesRoom_OnFrame:: @ 816297D

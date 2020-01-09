@@ -392,9 +392,9 @@ PalletTown_EventScript_16575C:: @ 816575C
 	waitmovement 0
 	msgbox gUnknown_81B1C9F
 	closemessage
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_1657D7
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if ne, EventScript_1657E2
 	moveobjectoffscreen 1
 	setflag FLAG_TEMP_2

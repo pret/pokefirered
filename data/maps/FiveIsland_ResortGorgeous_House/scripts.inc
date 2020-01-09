@@ -52,13 +52,13 @@ EventScript_171F34:: @ 8171F34
 	textcolor 0
 	msgbox gUnknown_81A4566
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_171FCD
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_171FE9
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_171FFE
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_17201A
 	moveobjectoffscreen 2
 	msgbox gUnknown_81A458E

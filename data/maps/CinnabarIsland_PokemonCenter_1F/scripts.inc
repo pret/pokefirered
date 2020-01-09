@@ -39,11 +39,11 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	setflag FLAG_SPECIAL_FLAG_0x4001
 	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	delay 20
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_16E96F
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16E981
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_16E993
 	removeobject 7
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1

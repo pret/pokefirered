@@ -17,7 +17,7 @@ PalletTown_PlayersHouse_2F_OnWarp:: @ 8168CBE
 	.2byte 0
 
 EventScript_168CC8:: @ 8168CC8
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
 	end
 

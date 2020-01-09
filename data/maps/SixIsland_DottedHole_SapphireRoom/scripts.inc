@@ -16,13 +16,13 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	applymovement 2, Movement_16440F
 	waitmovement 0
 	playse SE_W070
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_16430F
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_16430F
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16431A
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_16431A
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
@@ -30,43 +30,43 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	setvar VAR_0x8007, 3
 	special Special_ShakeScreen
 	delay 60
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_164325
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_164330
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16433B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_164346
 	textcolor 0
 	msgbox gUnknown_817BD97
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_164351
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_164366
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16437B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_164390
 	removeobject 1
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_1642F9
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_1642F9
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_164304
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_164304
 	msgbox gUnknown_817BDD4
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_1643A5
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_1643B7
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_1643C9
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_1643DB
 	playse SE_KAIDAN
 	delay 35

@@ -8,7 +8,7 @@ PokemonLeague_HallOfFame_OnWarp:: @ 8162D57
 	.2byte 0
 
 EventScript_162D61:: @ 8162D61
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_HallOfFame_OnFrame:: @ 8162D66

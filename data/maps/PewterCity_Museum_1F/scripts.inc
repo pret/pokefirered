@@ -4,11 +4,11 @@ PewterCity_Museum_1F_MapScripts:: @ 816A31A
 PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	lock
 	faceplayer
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	goto_if eq, EventScript_16A348
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	goto_if eq, EventScript_16A348
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	goto_if eq, EventScript_16A348
 	msgbox gUnknown_8190539
 	release

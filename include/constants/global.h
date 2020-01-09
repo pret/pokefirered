@@ -58,6 +58,12 @@
 #define NUM_BAG_POCKETS 5
 
 #define PARTY_SIZE 6
-#define MULTI_PARTY_SIZE PARTY_SIZE / 2
+#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
+
+#define DIR_NONE        0
+#define DIR_SOUTH       1
+#define DIR_NORTH       2
+#define DIR_WEST        3
+#define DIR_EAST        4
 
 #endif //GUARD_CONSTANTS_GLOBAL_H

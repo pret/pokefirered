@@ -69,7 +69,7 @@ SeafoamIslands_B4F_OnWarp:: @ 81630E7
 	.2byte 0
 
 EventScript_1630F1:: @ 81630F1
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	special Special_ForcePlayerToStartSurfing
 	end
 

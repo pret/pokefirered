@@ -478,13 +478,13 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1C4F26
 	copyvar VAR_0x8009, VAR_0x8005
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_1C4EF0
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_1C4EFB
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_1C4F06
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_1C4F11
 	msgbox Text_1A4751, MSGBOX_YESNO
 	compare VAR_RESULT, NO

@@ -40,7 +40,7 @@ PalletTown_ProfessorOaksLab_OnWarp:: @ 8168FE1
 	.2byte 0
 
 EventScript_168FEB:: @ 8168FEB
-	turnobject OBJ_EVENT_ID_PLAYER, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PalletTown_ProfessorOaksLab_OnFrame:: @ 8168FF0
@@ -50,7 +50,7 @@ PalletTown_ProfessorOaksLab_OnFrame:: @ 8168FF0
 
 EventScript_169002:: @ 8169002 
 	lockall
-	setvar VAR_FACING, 2
+	setvar VAR_FACING, DIR_NORTH
 	textcolor 0
 	applymovement 4, Movement_1692B0
 	waitmovement 0
@@ -66,32 +66,32 @@ EventScript_169002:: @ 8169002
 EventScript_169035:: @ 8169035
 	msgbox gUnknown_818EE60
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169174
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_1691BB
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169194
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169194
 	msgbox gUnknown_818EF59
 	fadedefaultbgm
 	msgbox gUnknown_818F004
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_1691DB
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_1691E6
 	textcolor 3
 	msgbox gUnknown_818F062
 	closemessage
 	call EventScript_1A6675
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_1691F1
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_1691FC
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169215
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169227
 	addobject 9
 	addobject 10
@@ -101,13 +101,13 @@ EventScript_169035:: @ 8169035
 	removeobject 9
 	removeobject 10
 	delay 30
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169845
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169850
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16985B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_16986D
 	textcolor 3
 	playfanfare MUS_FAN5
@@ -120,13 +120,13 @@ EventScript_169035:: @ 8169035
 	msgbox gUnknown_818F1DB
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169B69
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169B7B
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169B7B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
@@ -645,13 +645,13 @@ EventScript_16961E:: @ 816961E
 	playbgm MUS_RIVAL1, 0
 	msgbox gUnknown_818DE8D
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169A82
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169AC1
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169A9E
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169A9E
 	fadedefaultbgm
 	msgbox gUnknown_818DE99
@@ -662,23 +662,23 @@ EventScript_16961E:: @ 816961E
 	waitmovement 0
 	applymovement 4, Movement_Delay48
 	waitmovement 0
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169ADD
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169B14
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169AF5
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169B86
 	msgbox gUnknown_818E508
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169882
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_16988D
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_1698A6
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_1698B8
 	msgbox gUnknown_818E536
 	closemessage
@@ -691,13 +691,13 @@ EventScript_16961E:: @ 816961E
 	delay 10
 	removeobject 10
 	delay 25
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169845
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169850
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16985B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_16986D
 	delay 10
 	textcolor 3
@@ -716,24 +716,24 @@ EventScript_16961E:: @ 816961E
 	famechecker FAMECHECKER_OAK, 1
 	msgbox gUnknown_818E784
 	msgbox gUnknown_818DEC8
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169B33
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169B45
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169B57
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169B57
 	msgbox gUnknown_818DEF3
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169B69
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_169B7B
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_169B7B
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169B7B
 	removeobject 8
 	fadedefaultbgm
@@ -856,13 +856,13 @@ EventScript_169913:: @ 8169913
 	delay 40
 	message Text_1A7291
 	waitmessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_169964
-	compare VAR_FACING, 1
+	compare VAR_FACING, DIR_SOUTH
 	call_if eq, EventScript_16996F
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_16997A
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_169985
 	applymovement 4, Movement_FacePlayer
 	waitmovement 0

@@ -434,9 +434,9 @@ CeladonCity_GameCorner_EventScript_16CAF5:: @ 816CAF5
 EventScript_16CB10:: @ 816CB10
 	msgbox gUnknown_8196E9B
 	closemessage
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_16CB34
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if ne, EventScript_16CB3F
 	removeobject 11
 	release

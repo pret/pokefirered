@@ -108,11 +108,11 @@ EventScript_170987:: @ 8170987
 	special ReducePlayerPartyToThree
 	msgbox gUnknown_81A07C4
 	closemessage
-	compare VAR_FACING, 2
+	compare VAR_FACING, DIR_NORTH
 	call_if eq, EventScript_170A2D
-	compare VAR_FACING, 4
+	compare VAR_FACING, DIR_EAST
 	call_if eq, EventScript_170A3F
-	compare VAR_FACING, 3
+	compare VAR_FACING, DIR_WEST
 	call_if eq, EventScript_170A51
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
 	waitstate

@@ -207,7 +207,7 @@ jump_intr:
 	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
-	mov r1, 0x8
+	mov r1, INTR_FLAG_TIMER0
 	mov r0, r1, lsl r0
 	orr r0, r0, INTR_FLAG_GAMEPAK
 	orr r1, r0, INTR_FLAG_SERIAL | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_HBLANK

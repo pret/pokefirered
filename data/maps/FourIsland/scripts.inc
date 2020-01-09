@@ -29,12 +29,12 @@ FourIsland_OnFrame:: @ 8167CE2
 EventScript_167CEC:: @ 8167CEC
 	lockall
 	textcolor 0
-	applymovement 10, Movement_1A75ED
+	applymovement 10, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 10, Movement_1A75DB
+	applymovement 10, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 10, Movement_1A75DD
+	applymovement 10, Movement_Delay48
 	waitmovement 0
 	delay 25
 	applymovement 10, Movement_167D49
@@ -53,21 +53,21 @@ EventScript_167CEC:: @ 8167CEC
 	end
 
 Movement_167D49:: @ 8167D49
-	step_13
-	step_13
-	step_10
-	step_10
+	walk_right
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_167D4E:: @ 8167D4E
-	step_1c
-	step_1a
-	step_10
+	delay_16
+	delay_4
+	walk_down
 	step_end
 
 Movement_167D52:: @ 8167D52
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 FourIsland_EventScript_167D55:: @ 8167D55

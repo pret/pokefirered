@@ -20,14 +20,14 @@ EventScript_162D70:: @ 8162D70
 	textcolor 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_162DCD
 	waitmovement 0
-	applymovement 1, Movement_1A75E7
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement 1, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 18
 	msgbox gUnknown_817922F
 	closemessage
-	applymovement 1, Movement_1A75E9
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement 1, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	dofieldeffect 62
@@ -43,12 +43,12 @@ EventScript_162D70:: @ 8162D70
 	end
 
 Movement_162DCD:: @ 8162DCD
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end

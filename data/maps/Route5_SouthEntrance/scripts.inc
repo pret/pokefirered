@@ -25,7 +25,7 @@ Route5_SouthEntrance_EventScript_16F922:: @ 816F922
 
 EventScript_16F92E:: @ 816F92E
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16F958
@@ -71,18 +71,18 @@ EventScript_16F9B2:: @ 816F9B2
 	return
 
 Movement_16F9BD:: @ 816F9BD
-	step_12
+	walk_left
 	step_end
 
 Movement_16F9BF:: @ 816F9BF
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16F9C2:: @ 816F9C2
-	step_27
+	walk_in_place_left
 	step_end
 
 Movement_16F9C4:: @ 816F9C4
-	step_11
+	walk_up
 	step_end

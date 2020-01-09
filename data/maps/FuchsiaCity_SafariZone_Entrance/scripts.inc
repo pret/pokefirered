@@ -59,22 +59,22 @@ EventScript_16D345:: @ 816D345
 	end
 
 Movement_16D362:: @ 816D362
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 Movement_16D365:: @ 816D365
-	step_11
+	walk_up
 	step_end
 
 Movement_16D367:: @ 816D367
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 Movement_16D36A:: @ 816D36A
-	step_10
-	step_1b
+	walk_down
+	delay_8
 	step_end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_16D36D:: @ 816D36D
@@ -98,7 +98,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D385:: @ 816D385
 EventScript_16D391:: @ 816D391
 	textcolor 0
 	msgbox gUnknown_8197C6B
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_8197C87, MSGBOX_YESNO
@@ -176,24 +176,24 @@ EventScript_16D49A:: @ 816D49A
 	end
 
 Movement_16D4AA:: @ 816D4AA
-	step_10
+	walk_down
 	step_end
 
 Movement_16D4AC:: @ 816D4AC
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_16D4AF:: @ 816D4AF
-	step_11
-	step_12
-	step_11
+	walk_up
+	walk_left
+	walk_up
 	step_end
 
 Movement_16D4B3:: @ 816D4B3
-	step_11
-	step_13
-	step_11
+	walk_up
+	walk_right
+	walk_up
 	step_end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7

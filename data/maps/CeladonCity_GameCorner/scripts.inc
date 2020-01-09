@@ -114,7 +114,7 @@ CeladonCity_GameCorner_EventScript_16C7BA:: @ 816C7BA
 
 EventScript_16C7CA:: @ 816C7CA
 	closemessage
-	applymovement VAR_LAST_TALKED, Movement_1A75E5
+	applymovement VAR_LAST_TALKED, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -453,23 +453,23 @@ EventScript_16CB3F:: @ 816CB3F
 	return
 
 Movement_16CB4A:: @ 816CB4A
-	step_10
-	step_13
-	step_13
-	step_11
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_down
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_16CB53:: @ 816CB53
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 CeladonCity_GameCorner_EventScript_16CB5A:: @ 816CB5A

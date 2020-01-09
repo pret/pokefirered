@@ -16,7 +16,7 @@ PewterCity_House1_EventScript_16A736:: @ 816A736
 	lock
 	faceplayer
 	call EventScript_16A749
-	applymovement 3, Movement_1A75E5
+	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -36,7 +36,7 @@ FiveIsland_RocketWarehouse_EventScript_163F78:: @ 8163F78
 
 FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 	lockall
-	applymovement 4, Movement_1A75E7
+	applymovement 4, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	releaseall
@@ -95,7 +95,7 @@ EventScript_16402F:: @ 816402F
 	end
 
 EventScript_164065:: @ 8164065
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -143,7 +143,7 @@ EventScript_1640A2:: @ 81640A2
 EventScript_16412E:: @ 816412E
 	compare VAR_0x8004, 27
 	goto_if eq, EventScript_1A77A9
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -158,27 +158,27 @@ EventScript_16414F:: @ 816414F
 	return
 
 EventScript_16415A:: @ 816415A
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_164165:: @ 8164165
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_164170:: @ 8164170
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 Movement_16417B:: @ 816417B
-	step_13
-	step_13
-	step_2e
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_16417F:: @ 816417F
-	step_13
-	step_2e
+	walk_right
+	walk_in_place_fastest_up
 	step_end

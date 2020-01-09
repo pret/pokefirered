@@ -2050,7 +2050,7 @@ EventScript_1A74F2:: @ 81A74F2
 	return
 
 EventScript_1A7506:: @ 81A7506
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75FE
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
 	playse SE_DOOR
 	call EventScript_1A7538
@@ -2059,7 +2059,7 @@ EventScript_1A7506:: @ 81A7506
 	return
 
 EventScript_1A751F:: @ 81A751F
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75F3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkUp5
 	waitmovement 0
 	setflag FLAG_TEMP_2
 	playse SE_KI_GASYAN
@@ -2083,7 +2083,7 @@ EventScript_1A754B:: @ 81A754B
 	end
 
 EventScript_1A7563:: @ 81A7563
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75FE
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
 	waitmovement 0
 	playse SE_DOOR
 	setmetatile 6, 4, 654, 1
@@ -2107,91 +2107,14 @@ EventScript_1A759C:: @ 81A759C
 	return
 
 Movement_1A75D3:: @ 81A75D3
-	step_11
+	walk_up
 	step_end
 
 EventScript_1A75D5:: @ 81A75D5
 	special Special_PokemonLeagueLightingEffect
 	return
 
-Movement_1A75D9:: @ 81A75D9
-	step_63
-	step_end
-
-Movement_1A75DB:: @ 81A75DB
-	step_62
-	step_end
-
-Movement_1A75DD:: @ 81A75DD
-	step_1c
-	step_1c
-	step_1c
-	step_end
-
-Movement_1A75E1:: @ 81A75E1
-	step_4a
-	step_end
-
-Movement_1A75E3:: @ 81A75E3
-	step_4b
-	step_end
-
-Movement_1A75E5:: @ 81A75E5
-	step_5a
-	step_end
-
-Movement_1A75E7:: @ 81A75E7
-	step_2f
-	step_end
-
-Movement_1A75E9:: @ 81A75E9
-	step_2e
-	step_end
-
-Movement_1A75EB:: @ 81A75EB
-	step_30
-	step_end
-
-Movement_1A75ED:: @ 81A75ED
-	step_2d
-	step_end
-
-Movement_1A75EF:: @ 81A75EF
-	step_03
-	step_end
-
-Movement_1A75F1:: @ 81A75F1
-	step_00
-	step_end
-
-Movement_1A75F3:: @ 81A75F3
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_end
-
-Movement_1A75F9:: @ 81A75F9
-	step_11
-	step_11
-	step_11
-	step_11
-	step_end
-
-Movement_1A75FE:: @ 81A75FE
-	step_1c
-	step_1c
-	step_end
-
-Movement_1A7601:: @ 81A7601
-	step_11
-	step_end
-
-Movement_1A7603:: @ 81A7603
-	step_11
-	step_11
-	step_end
+	.include "data/scripts/movement.inc"	
 
 gUnknown_81A7606:: @ 81A7606
 	msgbox gUnknown_81C0DB0, MSGBOX_SIGN
@@ -2326,12 +2249,12 @@ gUnknown_81A7702:: @ 81A7702
 	end
 
 EventScript_1A774D:: @ 81A774D
-	applymovement VAR_0x8008, Movement_1A75F1
+	applymovement VAR_0x8008, Movement_FaceDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement VAR_0x8008, Movement_1A75DB
+	applymovement VAR_0x8008, Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8008, Movement_1A75DD
+	applymovement VAR_0x8008, Movement_Delay48
 	waitmovement 0
 	msgbox Text_1A62D3
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
@@ -2348,7 +2271,7 @@ EventScript_1A778A:: @ 81A778A
 	end
 
 EventScript_1A778C:: @ 81A778C
-	applymovement VAR_0x8008, Movement_1A75F1
+	applymovement VAR_0x8008, Movement_FaceDown
 	waitmovement 0
 	msgbox Text_1A6265
 	releaseall
@@ -2509,7 +2432,7 @@ EventScript_1A795F:: @ 81A795F
 
 EventScript_1A796E:: @ 81A796E
 	textcolor 0
-	applymovement VAR_0x8009, Movement_1A75E7
+	applymovement VAR_0x8009, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	switch VAR_0x4001
 	case 1, EventScript_1A79D8
@@ -2576,7 +2499,7 @@ EventScript_1A7A50:: @ 81A7A50
 	msgbox Text_1A5776
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A7AB7
-	applymovement VAR_0x8009, Movement_1A75ED
+	applymovement VAR_0x8009, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	releaseall
 	end
@@ -2589,7 +2512,7 @@ EventScript_1A7A77:: @ 81A7A77
 	closemessage
 	waitse
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A7AB7
-	applymovement VAR_0x8009, Movement_1A75ED
+	applymovement VAR_0x8009, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	releaseall
 	end
@@ -2611,7 +2534,7 @@ EventScript_1A7AA8:: @ 81A7AA8
 	end
 
 Movement_1A7AB7:: @ 81A7AB7
-	step_10
+	walk_down
 	step_end
 
 EventScript_1A7AB9:: @ 81A7AB9
@@ -2853,16 +2776,16 @@ EventScript_1A8025:: @ 81A8025
 
 EventScript_1A80FE:: @ 81A80FE
 	lockall
-	applymovement VAR_0x8004, Movement_1A75E7
+	applymovement VAR_0x8004, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_1A75E9
+	applymovement VAR_0x8004, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_1A75EB
+	applymovement VAR_0x8004, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8004, Movement_1A75ED
+	applymovement VAR_0x8004, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
 	releaseall
@@ -3682,7 +3605,7 @@ EventScript_1A8DCF:: @ 81A8DCF
 EventScript_MomHeal:: @ 81A8DD8
 	lockall
 	textcolor 1
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Text_1A5FDF
 	call EventScript_FadeOut_Heal_FadeIn
@@ -3893,14 +3816,14 @@ EventScript_1A90F6:: @ 81A90F6
 
 EventScript_1A9108:: @ 81A9108
 	closemessage
-	applymovement 6, Movement_1A75E5
+	applymovement 6, Movement_FaceOriginalDirection
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A911C
 	waitmovement 0
 	releaseall
 	end
 
 Movement_1A911C:: @ 81A911C
-	step_11
+	walk_up
 	step_end
 
 EventScript_1A911E:: @ 81A911E
@@ -4231,12 +4154,12 @@ FourIsland_House2_EventScript_1B2938:: @ 81B2938
 EventScript_1B2951:: @ 81B2951
 	setflag FLAG_MET_STICKER_LADY
 	msgbox gUnknown_81B1EB3
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 0
 	goto_if eq, EventScript_1B2B8E
@@ -4248,7 +4171,7 @@ EventScript_1B2993:: @ 81B2993
 	end
 
 EventScript_1B2994:: @ 81B2994
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	special sub_8110AB4
 	compare VAR_RESULT, 2
@@ -5331,9 +5254,9 @@ EventScript_1C508F::
 EventScript_1C50C2:
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 3, Movement_1A75DB
+	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement 3, Movement_Delay48
 	waitmovement 0
 	setvar VAR_0x400E, 1
 	applymovement 3, Movement_1C5541
@@ -5373,9 +5296,9 @@ EventScript_1C515C:: @ 81C515C
 EventScript_1C5182:
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 4, Movement_1A75DB
+	applymovement 4, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, Movement_1A75DD
+	applymovement 4, Movement_Delay48
 	waitmovement 0
 	applymovement 4, Movement_1C5546
 	waitmovement 0
@@ -5384,9 +5307,9 @@ EventScript_1C5182:
 EventScript_1C51AD:: @ 81C51AD
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 2, Movement_1A75DB
+	applymovement 2, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_1A75DD
+	applymovement 2, Movement_Delay48
 	waitmovement 0
 	applymovement 2, Movement_1C5549
 	waitmovement 0
@@ -5395,9 +5318,9 @@ EventScript_1C51AD:: @ 81C51AD
 EventScript_1C51D8:: @ 81C51D8
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 3, Movement_1A75DB
+	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement 3, Movement_Delay48
 	waitmovement 0
 	applymovement 3, Movement_1C5542
 	waitmovement 0
@@ -5592,9 +5515,9 @@ SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
 	goto_if ne, EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 2, Movement_1A75DB
+	applymovement 2, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_1A75DD
+	applymovement 2, Movement_Delay48
 	goto EventScript_1C551B
 
 SevenIsland_TrainerTower_2F_EventScript_1C54EA:: @ 81C54EA
@@ -5612,9 +5535,9 @@ SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
 	goto_if ne, EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
-	applymovement 5, Movement_1A75DB
+	applymovement 5, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, Movement_1A75DD
+	applymovement 5, Movement_Delay48
 EventScript_1C551B:
 	waitmovement 0
 	setvar VAR_0x400F, 1
@@ -5631,33 +5554,33 @@ EventScript_1C5528:: @ 81C5528
 	end
 
 Movement_1C5541:
-	step_12
+	walk_left
 Movement_1C5542:: @ 81C5542
-	step_12
-	step_12
+	walk_left
+	walk_left
 Movement_1C5544:
-	step_12
+	walk_left
 	step_end
 
 Movement_1C5546:: @ 81C5546
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_1C5549:: @ 81C5549
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 Movement_1C554C:: @ 81C554C
-	step_13
+	walk_right
 Movement_1C554D:
-	step_11
-	step_00
+	walk_up
+	face_down
 	step_end
 
 Movement_1C5550:: @ 81C5550
-	step_00
+	face_down
 	step_end
 
 EventScript_1C5550:: @ 81C5552

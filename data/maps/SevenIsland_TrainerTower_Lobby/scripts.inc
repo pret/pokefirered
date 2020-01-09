@@ -61,8 +61,8 @@ EventScript_1648C8:: @ 81648C8
 	end
 
 Movement_1648EA:: @ 81648EA
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1648ED:: @ 81648ED
@@ -212,11 +212,11 @@ EventScript_164ABF:: @ 8164ABF
 	end
 
 Movement_164AD4:: @ 8164AD4
-	step_03
+	face_right
 	step_end
 
 Movement_164AD6:: @ 8164AD6
-	step_10
+	walk_down
 	step_end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8

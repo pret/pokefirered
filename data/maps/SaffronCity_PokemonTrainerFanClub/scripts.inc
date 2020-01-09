@@ -10,18 +10,18 @@ SaffronCity_PokemonTrainerFanClub_OnFrame:: @ 816F0CA
 EventScript_16F0D4:: @ 816F0D4
 	lockall
 	textcolor 1
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_819C22B
 	closemessage
 	applymovement 1, Movement_16F124
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_819C235
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
@@ -29,45 +29,45 @@ EventScript_16F0D4:: @ 816F0D4
 	end
 
 Movement_16F124:: @ 816F124
-	step_1c
-	step_1b
-	step_10
-	step_1c
-	step_10
-	step_1b
-	step_12
+	delay_16
+	delay_8
+	walk_down
+	delay_16
+	walk_down
+	delay_8
+	walk_left
 	step_end
 
 Movement_16F12C:: @ 816F12C
-	step_1b
-	step_2d
-	step_10
-	step_10
-	step_10
-	step_12
-	step_12
+	delay_8
+	walk_in_place_fastest_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
 	step_end
 
 Movement_16F134:: @ 816F134
-	step_1f
-	step_1f
-	step_1d
-	step_1d
-	step_1f
-	step_1d
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
 	step_end
 
 Movement_16F13B:: @ 816F13B
-	step_10
-	step_30
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_16F13E:: @ 816F13E
-	step_55
-	step_1e
-	step_1e
-	step_20
-	step_2d
+	jump_in_place_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_in_place_fastest_down
 	step_end
 
 SaffronCity_PokemonTrainerFanClub_OnTransition:: @ 816F144

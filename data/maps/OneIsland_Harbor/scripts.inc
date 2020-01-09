@@ -27,9 +27,9 @@ EventScript_17139C:: @ 817139C
 	end
 
 Movement_1713B9:: @ 81713B9
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 OneIsland_Harbor_EventScript_1713BD:: @ 81713BD

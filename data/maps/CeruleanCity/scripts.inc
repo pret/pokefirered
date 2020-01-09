@@ -97,75 +97,75 @@ EventScript_1665B5:: @ 81665B5
 	return
 
 Movement_1665C7:: @ 81665C7
-	step_1c
-	step_1b
-	step_30
-	step_1c
-	step_2d
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_1665CD:: @ 81665CD
-	step_1c
-	step_1b
-	step_2f
-	step_1c
-	step_2d
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_1665D3:: @ 81665D3
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1665D9:: @ 81665D9
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1c
-	step_1c
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1665EA:: @ 81665EA
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1c
-	step_1c
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1665FB:: @ 81665FB
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 CeruleanCity_EventScript_166603:: @ 8166603
@@ -207,9 +207,9 @@ EventScript_166677:: @ 8166677
 CeruleanCity_EventScript_166683:: @ 8166683
 	lockall
 	setvar VAR_0x4001, 0
-	applymovement 2, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	goto EventScript_1666C3
 	end
@@ -217,9 +217,9 @@ CeruleanCity_EventScript_166683:: @ 8166683
 CeruleanCity_EventScript_1666A3:: @ 81666A3
 	lockall
 	setvar VAR_0x4001, 1
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	goto EventScript_1666C3
 	end
@@ -238,7 +238,7 @@ CeruleanCity_EventScript_1666E7:: @ 81666E7
 	faceplayer
 	msgbox gUnknown_817F0F1
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -274,7 +274,7 @@ CeruleanCity_EventScript_166738:: @ 8166738
 	faceplayer
 	msgbox gUnknown_817F2CF
 	closemessage
-	applymovement 11, Movement_1A75E5
+	applymovement 11, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -292,7 +292,7 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	waitmessage
 	delay 40
 	playse SE_PIN
-	applymovement 5, Movement_1A75D9
+	applymovement 5, Movement_QuestionMark
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 0

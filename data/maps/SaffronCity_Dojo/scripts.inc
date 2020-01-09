@@ -4,7 +4,7 @@ SaffronCity_Dojo_MapScripts:: @ 816EBDB
 SaffronCity_Dojo_EventScript_16EBDC:: @ 816EBDC
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
-	applymovement 5, Movement_1A75E7
+	applymovement 5, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	releaseall
 	end
@@ -12,7 +12,7 @@ SaffronCity_Dojo_EventScript_16EBDC:: @ 816EBDC
 SaffronCity_Dojo_EventScript_16EBEE:: @ 816EBEE
 	lockall
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1
-	applymovement 5, Movement_1A75EB
+	applymovement 5, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	releaseall
 	end
@@ -24,7 +24,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONLEE, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONLEE
-	applymovement 5, Movement_1A75E9
+	applymovement 5, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_819B44E, MSGBOX_YESNO
@@ -47,7 +47,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	goto_if TRUE, EventScript_16EC3C
 	drawmonpic SPECIES_HITMONCHAN, 10, 3
 	setvar VAR_0x4001, SPECIES_HITMONCHAN
-	applymovement 5, Movement_1A75E9
+	applymovement 5, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_819B49E, MSGBOX_YESNO

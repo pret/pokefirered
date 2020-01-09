@@ -82,12 +82,12 @@ EventScript_166FA0:: @ 8166FA0
 	end
 
 Movement_166FC6:: @ 8166FC6
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 EventScript_166FCD:: @ 8166FCD
@@ -98,9 +98,9 @@ EventScript_166FCD:: @ 8166FCD
 	checkflag FLAG_TEMP_2
 	call_if TRUE, EventScript_16703D
 	playse SE_PIN
-	applymovement 3, Movement_1A75DB
+	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement 3, Movement_Delay48
 	waitmovement 0
 	checkflag FLAG_TEMP_2
 	call_if FALSE, EventScript_167048
@@ -115,12 +115,12 @@ EventScript_166FCD:: @ 8166FCD
 	end
 
 EventScript_167032:: @ 8167032
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_16703D:: @ 816703D
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -132,7 +132,7 @@ EventScript_167048:: @ 8167048
 EventScript_167053:: @ 8167053
 	applymovement 3, Movement_1671A6
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -162,13 +162,13 @@ EventScript_1670A0:: @ 81670A0
 	return
 
 Movement_1670AB:: @ 81670AB
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1670B3:: @ 81670B3
@@ -184,19 +184,19 @@ EventScript_1670B3:: @ 81670B3
 	return
 
 Movement_1670DB:: @ 81670DB
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_1670DE:: @ 81670DE
-	step_1c
-	step_12
-	step_2e
+	delay_16
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1670E2:: @ 81670E2
-	step_11
-	step_1a
+	walk_up
+	delay_4
 	set_invisible
 	step_end
 
@@ -254,79 +254,79 @@ EventScript_167183:: @ 8167183
 	return
 
 Movement_167195:: @ 8167195
-	step_1c
-	step_1c
-	step_1f
-	step_1f
-	step_12
-	step_left
-	step_left
+	delay_16
+	delay_16
+	walk_fast_left
+	walk_fast_left
+	walk_left
+	walk_slowest_left
+	walk_slowest_left
 	step_end
 
 Movement_16719D:: @ 816719D
-	step_13
-	step_10
-	step_10
-	step_13
-	step_1a
+	walk_right
+	walk_down
+	walk_down
+	walk_right
+	delay_4
 	set_invisible
 	step_end
 
 Movement_1671A4:: @ 81671A4
-	step_11
+	walk_up
 	step_end
 
 Movement_1671A6:: @ 81671A6
-	step_12
-	step_12
-	step_12
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Movement_1671AA:: @ 81671AA
-	step_1c
-	step_1c
-	step_1b
-	step_30
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 Movement_1671AF:: @ 81671AF
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_1671B6:: @ 81671B6
-	step_13
-	step_1a
+	walk_right
+	delay_4
 	set_invisible
 	step_end
 
 Movement_1671BA:: @ 81671BA
-	step_10
-	step_13
-	step_10
-	step_10
-	step_30
-	step_1a
-	step_13
-	step_1a
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
+	delay_4
+	walk_right
+	delay_4
 	set_invisible
 	step_end
 
 Movement_1671C4:: @ 81671C4
-	step_13
-	step_1a
-	step_13
-	step_1a
+	walk_right
+	delay_4
+	walk_right
+	delay_4
 	set_invisible
 	step_end
 
 CinnabarIsland_EventScript_1671CA:: @ 81671CA
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	msgbox gUnknown_8180B20
@@ -337,7 +337,7 @@ CinnabarIsland_EventScript_1671CA:: @ 81671CA
 	end
 
 Movement_1671ED:: @ 81671ED
-	step_10
+	walk_down
 	step_end
 
 CinnabarIsland_EventScript_1671EF:: @ 81671EF

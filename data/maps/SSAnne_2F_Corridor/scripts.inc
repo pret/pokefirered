@@ -32,7 +32,7 @@ EventScript_160903:: @ 8160903
 	playbgm MUS_RIVAL1, 0
 	addobject 1
 	delay 10
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
 	compare VAR_0x4001, 0
@@ -110,73 +110,73 @@ EventScript_160A13:: @ 8160A13
 	return
 
 Movement_160A1E:: @ 8160A1E
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_2f
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 Movement_160A24:: @ 8160A24
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_2f
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 Movement_160A2A:: @ 8160A2A
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_160A2E:: @ 8160A2E
-	step_10
-	step_10
-	step_10
-	step_10
-	step_30
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_160A34:: @ 8160A34
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_1a
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	delay_4
 	step_end
 
 Movement_160A3B:: @ 8160A3B
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_160A44:: @ 8160A44
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_160A4C:: @ 8160A4C
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 SSAnne_2F_Corridor_EventScript_160A54:: @ 8160A54

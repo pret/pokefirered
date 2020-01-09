@@ -139,20 +139,20 @@ EventScript_1706C8:: @ 81706C8
 	end
 
 Movement_1706D2:: @ 81706D2
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_1706D5:: @ 81706D5
-	step_13
-	step_11
-	step_11
-	step_12
-	step_2e
+	walk_right
+	walk_up
+	walk_up
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1706DB:: @ 81706DB
-	step_11
+	walk_up
 	step_end
 
 Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
@@ -225,19 +225,19 @@ EventScript_1707B6:: @ 81707B6
 	return
 
 Movement_1707BE:: @ 81707BE
-	step_11
-	step_11
-	step_13
-	step_13
+	walk_up
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 Movement_1707C3:: @ 81707C3
-	step_1c
-	step_1c
-	step_10
-	step_10
-	step_12
-	step_12
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_left
+	walk_left
 	step_end
 
 EventScript_1707CA:: @ 81707CA
@@ -299,14 +299,14 @@ EventScript_17087F:: @ 817087F
 	end
 
 Movement_170881:: @ 8170881
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_170888:: @ 8170888
-	step_10
+	walk_down
 	step_end

@@ -21,11 +21,11 @@ EventScript_PkmnCenterNurse_HealPkmn:: @ 81A65B8
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 81A65CE
-	applymovement VAR_LAST_TALKED, Movement_1A75E7
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
-	applymovement VAR_LAST_TALKED, Movement_1A75ED
+	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	special sp000_heal_pokemon
 	return
@@ -67,6 +67,6 @@ EventScript_PkmnCenterNurse_Goodbye:: @ 81A6663
 	return
 
 Movement_1A666C:: @ 81A666C
-	step_5b
-	step_1a
+	nurse_joy_bow
+	delay_4
 	step_end

@@ -38,30 +38,30 @@ EventScript_1608A1:: @ 81608A1
 	return
 
 EventScript_1608AC:: @ 81608AC
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 Movement_1608B7:: @ 81608B7
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1608C1:: @ 81608C1
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end

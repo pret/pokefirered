@@ -24,14 +24,14 @@ EventScript_16A348:: @ 816A348
 
 EventScript_16A367:: @ 816A367
 	msgbox gUnknown_81905B1
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 EventScript_16A37B:: @ 816A37B
 	msgbox gUnknown_8190627
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -39,7 +39,7 @@ EventScript_16A37B:: @ 816A37B
 PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 	lockall
 	setvar VAR_0x4001, 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -47,7 +47,7 @@ PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 	lockall
 	setvar VAR_0x4001, 1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -55,7 +55,7 @@ PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
 	lockall
 	setvar VAR_0x4001, 2
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -120,25 +120,25 @@ EventScript_16A476:: @ 816A476
 	end
 
 Movement_16A48E:: @ 816A48E
-	step_10
+	walk_down
 	step_end
 
 Movement_16A490:: @ 816A490
-	step_13
-	step_13
-	step_1b
-	step_28
+	walk_right
+	walk_right
+	delay_8
+	walk_in_place_right
 	step_end
 
 Movement_16A495:: @ 816A495
-	step_13
-	step_1b
-	step_28
+	walk_right
+	delay_8
+	walk_in_place_right
 	step_end
 
 Movement_16A499:: @ 816A499
-	step_1b
-	step_28
+	delay_8
+	walk_in_place_right
 	step_end
 
 PewterCity_Museum_1F_EventScript_16A49C:: @ 816A49C

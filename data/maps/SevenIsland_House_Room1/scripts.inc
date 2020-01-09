@@ -37,7 +37,7 @@ EventScript_1708E9:: @ 1708E9
 	applymovement 1, Movement_170955
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	call_if eq, EventScript_170938
@@ -63,12 +63,12 @@ EventScript_17094A:: @ 817094A
 	return
 
 Movement_170953:: @ 8170953
-	step_10
+	walk_down
 	step_end
 
 Movement_170955:: @ 8170955
-	step_13
-	step_2d
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 SevenIsland_House_Room1_EventScript_170958:: @ 8170958
@@ -151,31 +151,31 @@ EventScript_170A51:: @ 8170A51
 	return
 
 Movement_170A63:: @ 8170A63
-	step_1c
-	step_11
-	step_11
+	delay_16
+	walk_up
+	walk_up
 	step_end
 
 Movement_170A67:: @ 8170A67
-	step_1c
-	step_13
-	step_11
+	delay_16
+	walk_right
+	walk_up
 	step_end
 
 Movement_170A6B:: @ 8170A6B
-	step_1c
-	step_12
-	step_11
+	delay_16
+	walk_left
+	walk_up
 	step_end
 
 Movement_170A6F:: @ 8170A6F
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_170A72:: @ 8170A72
-	step_13
-	step_2f
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 SevenIsland_House_Room1_EventScript_170A75:: @ 8170A75

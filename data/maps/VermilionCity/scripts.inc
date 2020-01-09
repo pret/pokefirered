@@ -16,8 +16,8 @@ EventScript_1668F1:: @ 81668F1
 	end
 
 Movement_166903:: @ 8166903
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 VermilionCity_OnTransition:: @ 8166906
@@ -206,8 +206,8 @@ VermilionCity_EventScript_166B98:: @ 8166B98
 
 EventScript_166BA0:: @ 8166BA0
 	textcolor 0
-	applymovement 6, Movement_1A75E7
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement 6, Movement_WalkInPlaceFastestLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if eq, EventScript_166BED

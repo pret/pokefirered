@@ -12,7 +12,7 @@ PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
 	compare VAR_RESULT, 1
 	call_if eq, EventScript_168C41
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

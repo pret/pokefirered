@@ -118,11 +118,11 @@ EventScript_165348:: @ 8165348
 	end
 
 Movement_165353:: @ 8165353
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
+	walk_slowest_down
+	walk_slowest_down
+	walk_slowest_down
+	walk_slowest_down
+	walk_slowest_down
+	walk_slowest_down
+	walk_slowest_down
 	step_end

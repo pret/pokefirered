@@ -49,7 +49,7 @@ EventScript_CeruleanCity_House4_News2:: @ 816AD89
 	end
 
 EventScript_CeruleanCity_House4_NewsNotSpread:: @ 816ADAF
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_8192CD5
 	release
@@ -74,7 +74,7 @@ EventScript_CeruleanCity_House4_NewsSpread2:: @ 816ADE9
 	end
 
 EventScript_CeruleanCity_House4_NewsDone:: @ 816AE0F
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_8192EC5
 	release
@@ -82,11 +82,11 @@ EventScript_CeruleanCity_House4_NewsDone:: @ 816AE0F
 
 EventScript_CeruleanCity_House4_MovementReactionToNews:: @ 816AE23
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	return
 

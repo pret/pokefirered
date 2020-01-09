@@ -25,7 +25,7 @@ Route7_EastEntrance_EventScript_16FAAF:: @ 816FAAF
 
 EventScript_16FABB:: @ 816FABB
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FAE5
@@ -71,18 +71,18 @@ EventScript_16FB3F:: @ 816FB3F
 	return
 
 Movement_16FB4A:: @ 816FB4A
-	step_11
+	walk_up
 	step_end
 
 Movement_16FB4C:: @ 816FB4C
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_16FB4F:: @ 816FB4F
-	step_26
+	walk_in_place_up
 	step_end
 
 Movement_16FB51:: @ 816FB51
-	step_12
+	walk_left
 	step_end

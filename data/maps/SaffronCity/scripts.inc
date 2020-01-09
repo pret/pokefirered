@@ -44,7 +44,7 @@ SaffronCity_EventScript_1673B9:: @ 81673B9
 	lock
 	checkflag FLAG_RESCUED_MR_FUJI
 	goto_if TRUE, EventScript_1673D7
-	applymovement 6, Movement_1A75E1
+	applymovement 6, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81812CA
 	release

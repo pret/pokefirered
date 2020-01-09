@@ -38,14 +38,14 @@ ThreeIsland_EventScript_1677E5:: @ 81677E5
 	end
 
 EventScript_167806:: @ 8167806
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81827F1
 	release
 	end
 
 EventScript_16781A:: @ 816781A
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
@@ -101,22 +101,22 @@ EventScript_16786F:: @ 816786F
 	return
 
 EventScript_167931:: @ 8167931
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_16793C:: @ 816793C
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_167947:: @ 8167947
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_167952:: @ 8167952
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -144,7 +144,7 @@ ThreeIsland_EventScript_167989:: @ 8167989
 	end
 
 EventScript_1679A1:: @ 81679A1
-	applymovement 2, Movement_1A75E1
+	applymovement 2, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_8182823
 	release
@@ -173,11 +173,11 @@ ThreeIsland_EventScript_1679B5:: @ 81679B5
 	end
 
 Movement_167A19:: @ 8167A19
-	step_27
+	walk_in_place_left
 	step_end
 
 Movement_167A1B:: @ 8167A1B
-	step_28
+	walk_in_place_right
 	step_end
 
 ThreeIsland_EventScript_167A1D:: @ 8167A1D
@@ -212,12 +212,12 @@ ThreeIsland_EventScript_167A4D:: @ 8167A4D
 
 EventScript_167A59:: @ 8167A59
 	textcolor 0
-	applymovement 5, Movement_1A75ED
+	applymovement 5, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 5, Movement_1A75DB
+	applymovement 5, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, Movement_1A75DD
+	applymovement 5, Movement_Delay48
 	waitmovement 0
 	applymovement 5, Movement_167C57
 	waitmovement 0
@@ -248,10 +248,10 @@ EventScript_167A59:: @ 8167A59
 	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON_3, 0, Text_1825D4
-	applymovement 4, Movement_1A75E7
+	applymovement 4, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement 6, Movement_1A75ED
-	applymovement 8, Movement_1A75ED
+	applymovement 6, Movement_WalkInPlaceFastestDown
+	applymovement 8, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_81825E2
 	closemessage
@@ -286,33 +286,33 @@ EventScript_167A59:: @ 8167A59
 	end
 
 EventScript_167BC6:: @ 8167BC6
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement 3, Movement_167C5E
 	waitmovement 0
 	return
 
 EventScript_167BD8:: @ 8167BD8
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement 3, Movement_167C62
 	waitmovement 0
 	return
 
 EventScript_167BEA:: @ 8167BEA
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement 3, Movement_167C64
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	waitmovement 0
 	return
 
 EventScript_167C03:: @ 8167C03
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	applymovement 3, Movement_167C6C
 	waitmovement 0
 	return
 
 EventScript_167C1C:: @ 8167C1C
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	applymovement 3, Movement_167C71
 	waitmovement 0
@@ -330,57 +330,57 @@ EventScript_167C35:: @ 8167C35
 	end
 
 Movement_167C55:: @ 8167C55
-	step_10
+	walk_down
 	step_end
 
 Movement_167C57:: @ 8167C57
-	step_10
+	walk_down
 	step_end
 
 Movement_167C59:: @ 8167C59
-	step_11
-	step_2f
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 Movement_167C5C:: @ 8167C5C
-	step_25
+	walk_in_place_down
 	step_end
 
 Movement_167C5E:: @ 8167C5E
-	step_10
-	step_12
-	step_2d
+	walk_down
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 Movement_167C62:: @ 8167C62
-	step_10
+	walk_down
 	step_end
 
 Movement_167C64:: @ 8167C64
-	step_10
-	step_10
-	step_30
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_167C68:: @ 8167C68
-	step_1c
-	step_1c
-	step_2f
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 Movement_167C6C:: @ 8167C6C
-	step_10
-	step_10
-	step_13
-	step_30
+	walk_down
+	walk_down
+	walk_right
+	walk_in_place_fastest_right
 	step_end
 
 Movement_167C71:: @ 8167C71
-	step_10
-	step_10
-	step_13
-	step_13
-	step_30
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_in_place_fastest_right
 	step_end
 
 ThreeIsland_EventScript_167C77:: @ 8167C77

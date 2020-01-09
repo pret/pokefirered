@@ -13,7 +13,7 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 	waitfanfare
 	call EventScript_1A6675
 	delay 50
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81736A6
 	additem ITEM_HM01, 1
@@ -27,13 +27,13 @@ SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
 EventScript_160BA0:: @ 8160BA0
 	msgbox gUnknown_81738C3
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 EventScript_160BB5:: @ 8160BB5
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_8173831
 	release

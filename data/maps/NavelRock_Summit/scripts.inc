@@ -96,35 +96,35 @@ EventScript_1650C2:: @ 81650C2
 	end
 
 Movement_1650CD:: @ 81650CD
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1650D1:: @ 81650D1
-	step_1c
-	step_1c
-	step_10
-	step_10
-	step_10
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1650D7:: @ 81650D7
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_25
-	step_1c
-	step_1c
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_down
+	delay_16
+	delay_16
 	step_end
 
 Movement_1650E0:: @ 81650E0
-	step_1c
-	step_1c
-	step_25
-	step_25
-	step_25
-	step_25
+	delay_16
+	delay_16
+	walk_in_place_down
+	walk_in_place_down
+	walk_in_place_down
+	walk_in_place_down
 	step_end

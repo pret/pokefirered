@@ -32,7 +32,7 @@ EventScript_1634F5:: @ 81634F5
 	end
 
 Movement_163512:: @ 8163512
-	step_11
+	walk_up
 	step_end
 
 PokemonTower_6F_EventScript_163514:: @ 8163514

@@ -33,7 +33,7 @@ CeladonCity_EventScript_166CC5:: @ 8166CC5
 	faceplayer
 	msgbox gUnknown_818001B
 	closemessage
-	applymovement 2, Movement_1A75E5
+	applymovement 2, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -46,7 +46,7 @@ CeladonCity_EventScript_166CDC:: @ 8166CDC
 	msgbox gUnknown_8180075
 	closemessage
 	waitmoncry
-	applymovement 3, Movement_1A75E5
+	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

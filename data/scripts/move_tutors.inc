@@ -582,17 +582,17 @@ EventScript_1C4F37:: @ 81C4F37
 	return
 
 Movement_1C4F4C:: @ 81C4F4C
-	step_52
+	jump_in_place_down
 	step_end
 
 Movement_1C4F4E:: @ 81C4F4E
-	step_53
+	jump_in_place_up
 	step_end
 
 Movement_1C4F50:: @ 81C4F50
-	step_54
+	jump_in_place_left
 	step_end
 
 Movement_1C4F52:: @ 81C4F52
-	step_55
+	jump_in_place_right
 	step_end

@@ -72,32 +72,32 @@ EventScript_16300C:: @ 816300C
 	end
 
 Movement_163013:: @ 8163013
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_20
-	step_20
-	step_20
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
 Movement_163021:: @ 8163021
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_20
-	step_20
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end

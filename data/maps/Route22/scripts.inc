@@ -95,76 +95,76 @@ EventScript_1683A5:: @ 81683A5
 	return
 
 Movement_1683B0:: @ 8
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_1683B8:: @ 81683B8
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1683C5:: @ 81683C5
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1683D1:: @ 81683D1
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_1683D9:: @ 81683D9
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2d
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
 	step_end
 
 Movement_1683E3:: @ 81683E3
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1b
-	step_2e
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 Route22_EventScript_1683ED:: @ 81683ED
@@ -247,13 +247,13 @@ EventScript_1684CF:: @ 81684CF
 	return
 
 Movement_1684DA:: @ 81684DA
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Route22_EventScript_1684E2:: @ 81684E2

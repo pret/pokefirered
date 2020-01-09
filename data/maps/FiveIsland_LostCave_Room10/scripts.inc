@@ -51,16 +51,16 @@ EventScript_164CB6:: @ 8164CB6
 	end
 
 Movement_164CC0:: @ 8164CC0
-	step_12
-	step_1c
-	step_13
-	step_1c
-	step_2e
-	step_1c
-	step_2d
+	walk_left
+	delay_16
+	walk_right
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_164CC8:: @ 8164CC8
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end

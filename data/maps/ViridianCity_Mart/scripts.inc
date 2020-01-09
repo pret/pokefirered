@@ -20,7 +20,7 @@ ViridianCity_Mart_OnFrame:: @ 816A1FB
 EventScript_16A205:: @ 816A205
 	lockall
 	textcolor 0
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_819021A
 	closemessage
@@ -36,19 +36,19 @@ EventScript_16A205:: @ 816A205
 	end
 
 Movement_16A25C:: @ 816A25C
-	step_11
-	step_11
-	step_11
-	step_11
-	step_2f
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 Movement_16A262:: @ 816A262
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_30
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 ViridianCity_Mart_EventScript_16A268:: @ 816A268

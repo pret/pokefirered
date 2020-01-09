@@ -65,48 +65,48 @@ EventScript_170CB1:: @ 8170CB1
 	applymovement 2, Movement_170E86
 	waitmovement 0
 	msgbox gUnknown_81A0CDE
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	playse SE_PIN
-	applymovement 3, Movement_1A75DB
+	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement 3, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_81A0CF7
 	msgbox gUnknown_81A0D27
-	applymovement 2, Movement_1A75ED
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81A0D72
-	applymovement 2, Movement_1A75EB
+	applymovement 2, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if TRUE, EventScript_170E34
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if FALSE, EventScript_170E3D
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_81A0E17
 	msgbox gUnknown_81A0E90
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox gUnknown_81A0ECC
 	closemessage
-	applymovement 2, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81A0F40
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81A0FB1
 	giveitemfanfaremsg gUnknown_81A10EE, ITEM_METEORITE, 1, MUS_FAN5
 	additem ITEM_METEORITE, 1
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_81A1113
 	additem ITEM_TRI_PASS, 1
@@ -119,9 +119,9 @@ EventScript_170CB1:: @ 8170CB1
 	setflag FLAG_SYS_SEVII_MAP_123
 	msgbox gUnknown_81A1230
 	closemessage
-	applymovement 2, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	setflag FLAG_SYS_PC_STORAGE_DISABLED
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
@@ -153,34 +153,34 @@ EventScript_170E58:: @ 8170E58
 	return
 
 Movement_170E7D:: @ 8170E7D
-	step_11
-	step_11
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_170E86:: @ 8170E86
-	step_11
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_11
-	step_30
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 Movement_170E8F:: @ 8170E8F
-	step_11
+	walk_up
 	step_end
 
 Movement_170E91:: @ 8170E91
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 OneIsland_PokemonCenter_1F_EventScript_170E94:: @ 8170E94
@@ -199,7 +199,7 @@ OneIsland_PokemonCenter_1F_EventScript_170E9D:: @ 8170E9D
 	end
 
 EventScript_170EB1:: @ 8170EB1
-	applymovement 2, Movement_1A75E1
+	applymovement 2, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A128C
 	release
@@ -227,7 +227,7 @@ OneIsland_PokemonCenter_1F_EventScript_170EC5:: @ 8170EC5
 	goto_if eq, EventScript_171134
 	msgbox gUnknown_81A1321
 	closemessage
-	applymovement 3, Movement_1A75E5
+	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -289,7 +289,7 @@ EventScript_170FA5:: @ 8170FA5
 	call EventScript_170C36
 	special DrawWholeMapView
 	msgbox gUnknown_81A1D59
-	applymovement 3, Movement_1A75E1
+	applymovement 3, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A1D7D
 	special sub_810B82C
@@ -321,7 +321,7 @@ EventScript_171044:: @ 8171044
 	call EventScript_170C22
 	special DrawWholeMapView
 	delay 30
-	applymovement 3, Movement_1A75E1
+	applymovement 3, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A19AA, MSGBOX_YESNO
 	compare VAR_RESULT, 0
@@ -363,10 +363,10 @@ EventScript_1710F2:: @ 81710F2
 
 EventScript_1710FC:: @ 81710FC
 	msgbox gUnknown_81A169B
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81A1723
-	applymovement 3, Movement_1A75E1
+	applymovement 3, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A17DF
 	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 1
@@ -380,17 +380,17 @@ EventScript_171134:: @ 8171134
 	end
 
 Movement_17113E:: @ 817113E
-	step_26
-	step_1b
-	step_26
+	walk_in_place_up
+	delay_8
+	walk_in_place_up
 	step_end
 
 Movement_171142:: @ 8171142
-	step_2e
-	step_26
-	step_1c
-	step_26
-	step_26
+	walk_in_place_fastest_up
+	walk_in_place_up
+	delay_16
+	walk_in_place_up
+	walk_in_place_up
 	step_end
 
 OneIsland_PokemonCenter_1F_EventScript_171148:: @ 8171148
@@ -462,7 +462,7 @@ OneIsland_PokemonCenter_1F_EventScript_1711CE:: @ 81711CE
 EventScript_1711DA:: @ 81711DA
 	textcolor 0
 	playse SE_PIN
-	applymovement 2, Movement_1A75DB
+	applymovement 2, Movement_ExclamationMark
 	waitmovement 0
 	msgbox gUnknown_81A13B8
 	closemessage
@@ -476,30 +476,30 @@ EventScript_1711DA:: @ 81711DA
 	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_81A1431
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81A1470
 	msgbox gUnknown_81A14E1
 	closemessage
-	applymovement 2, Movement_1A75E7
+	applymovement 2, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 10
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 15
 	msgbox gUnknown_81A14FB
 	closemessage
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 15
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox gUnknown_81A1574
 	closemessage
@@ -538,53 +538,53 @@ EventScript_171305:: @ 8171305
 	return
 
 Movement_171310:: @ 8171310
-	step_13
-	step_10
-	step_30
+	walk_right
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_171314:: @ 8171314
-	step_13
+	walk_right
 	step_end
 
 Movement_171316:: @ 8171316
-	step_13
-	step_11
-	step_30
+	walk_right
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 Movement_17131A:: @ 817131A
-	step_13
-	step_11
-	step_11
-	step_30
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 Movement_17131F:: @ 817131F
-	step_1c
-	step_1c
-	step_1a
-	step_2f
+	delay_16
+	delay_16
+	delay_4
+	walk_in_place_fastest_left
 	step_end
 
 Movement_171324:: @ 8171324
-	step_29
+	walk_in_place_fast_down
 	step_end
 
 Movement_171326:: @ 8171326
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_17132D:: @ 817132D
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end

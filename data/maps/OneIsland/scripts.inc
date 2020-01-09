@@ -36,47 +36,47 @@ EventScript_16749D:: @ 816749D
 	end
 
 Movement_1674F4:: @ 81674F4
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_13
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_167501:: @ 8167501
-	step_11
-	step_11
+	walk_up
+	walk_up
 	set_invisible
 	step_end
 
 Movement_167505:: @ 8167505
-	step_11
+	walk_up
 	step_end
 
 Movement_167507:: @ 8167507
-	step_11
-	step_11
-	step_11
-	step_11
-	step_13
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_167514:: @ 8167514
-	step_11
+	walk_up
 	set_invisible
 	step_end
 

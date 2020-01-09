@@ -161,25 +161,25 @@ EventScript_171B67:: @ 8171B67
 	end
 
 Movement_171B71:: @ 8171B71
-	step_1c
-	step_1c
-	step_03
-	step_1c
-	step_1c
-	step_02
-	step_1c
-	step_1c
-	step_01
-	step_up
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_up
+	walk_slowest_up
 	set_invisible
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_00
-	step_61
-	step_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_down
+	set_visible
+	walk_slowest_down
 	step_end
 
 EventScript_171B85:: @ 8171B85

@@ -87,9 +87,9 @@ EventScript_16310B:: @ 816310B
 	end
 
 Movement_16311D:: @ 816311D
-	step_1e
-	step_1e
-	step_1e
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
 	step_end
 
 EventScript_163121:: @ 8163121
@@ -131,24 +131,24 @@ EventScript_163185:: @ 8163185
 	end
 
 Movement_16318C:: @ 816318C
-	step_11
-	step_11
-	step_11
-	step_13
-	step_13
-	step_13
-	step_13
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 Movement_163195:: @ 8163195
-	step_11
-	step_11
-	step_11
-	step_13
-	step_13
-	step_13
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 SeafoamIslands_B4F_EventScript_16319D:: @ 816319D
@@ -159,7 +159,7 @@ SeafoamIslands_B4F_EventScript_16319D:: @ 816319D
 	end
 
 Movement_1631AA:: @ 81631AA
-	step_11
+	walk_up
 	step_end
 
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC

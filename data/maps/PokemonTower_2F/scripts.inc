@@ -24,9 +24,9 @@ EventScript_1632A7:: @ 81632A7
 	call_if eq, EventScript_163339
 	compare VAR_0x4001, 1
 	call_if eq, EventScript_16334B
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_8179CFF
 	setvar VAR_LAST_TALKED, 1
@@ -52,14 +52,14 @@ EventScript_1632A7:: @ 81632A7
 	end
 
 EventScript_163339:: @ 8163339
-	applymovement 1, Movement_1A75EB
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement 1, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_16334B:: @ 816334B
-	applymovement 1, Movement_1A75ED
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement 1, Movement_WalkInPlaceFastestDown
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -86,23 +86,23 @@ EventScript_163389:: @ 8163389
 	return
 
 Movement_163394:: @ 8163394
-	step_10
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_30
+	walk_down
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_16339D:: @ 816339D
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_30
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end

@@ -40,7 +40,7 @@ EventScript_171435:: @ 8171435
 	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_81A2931
 	closemessage
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	releaseall
@@ -53,16 +53,16 @@ EventScript_17145F:: @ 817145F
 	waitmovement 0
 	msgbox gUnknown_81A2408
 	closemessage
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	applymovement 1, Movement_171527
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_81A2465
 	closemessage
@@ -75,12 +75,12 @@ EventScript_17145F:: @ 817145F
 	applymovement 2, Movement_17152F
 	waitmovement 0
 	msgbox gUnknown_81A259A
-	applymovement 2, Movement_1A75EB
+	applymovement 2, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_81A2658
 	msgbox gUnknown_81A26D5
 	closemessage
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 2
@@ -94,32 +94,32 @@ EventScript_17145F:: @ 817145F
 	end
 
 Movement_171520:: @ 8171520
-	step_12
-	step_13
-	step_13
-	step_1b
-	step_2e
-	step_1c
+	walk_left
+	walk_right
+	walk_right
+	delay_8
+	walk_in_place_fastest_up
+	delay_16
 	step_end
 
 Movement_171527:: @ 8171527
-	step_10
-	step_10
-	step_10
-	step_2f
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 Movement_17152C:: @ 817152C
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_17152F:: @ 817152F
-	step_2f
-	step_1b
-	step_30
-	step_1b
-	step_2e
+	walk_in_place_fastest_left
+	delay_8
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535

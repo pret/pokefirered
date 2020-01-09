@@ -59,19 +59,19 @@ EventScript_170B17:: @ 8170B17
 	return
 
 Movement_170B22:: @ 8170B22
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
 	step_end
 
 Movement_170B28:: @ 8170B28
-	step_12
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_1b
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
 	step_end

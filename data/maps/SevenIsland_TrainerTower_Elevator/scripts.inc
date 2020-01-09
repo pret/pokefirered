@@ -72,10 +72,10 @@ EventScript_164BD8:: @ 8164BD8
 	return
 
 Movement_164BE5:: @ 8164BE5
-	step_2d
-	step_1c
-	step_10
-	step_13
-	step_13
-	step_10
+	walk_in_place_fastest_down
+	delay_16
+	walk_down
+	walk_right
+	walk_right
+	walk_down
 	step_end

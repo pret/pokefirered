@@ -40,10 +40,10 @@ EventScript_1619D3:: @ 81619D3
 EventScript_1619D4:: @ 81619D4
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
-	applymovement 1, Movement_1A75DD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_8176710
 	compare VAR_0x4001, 0
@@ -105,26 +105,26 @@ EventScript_161AAC:: @ 8161AAC
 	return
 
 Movement_161AB7:: @ 8161AB7
-	step_11
+	walk_up
 	step_end
 
 Movement_161AB9:: @ 8161AB9
-	step_13
-	step_13
-	step_13
-	step_11
-	step_1c
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	delay_16
 	step_end
 
 Movement_161ABF:: @ 8161ABF
-	step_12
-	step_11
-	step_11
-	step_13
-	step_13
-	step_13
-	step_13
-	step_1c
+	walk_left
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	delay_16
 	step_end
 
 SilphCo_7F_EventScript_161AC8:: @ 8161AC8

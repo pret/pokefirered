@@ -50,7 +50,7 @@ EventScript_1703D6:: @ 81703D6
 	textcolor 0
 	msgbox gUnknown_819FD60
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	compare VAR_0x8008, 1
@@ -89,27 +89,27 @@ EventScript_170450:: @ 8170450
 	return
 
 Movement_17045B:: @ 817045B
-	step_11
+	walk_up
 	step_end
 
 Movement_17045D:: @ 817045D
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_170460:: @ 8170460
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_170464:: @ 8170464
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_170469:: @ 8170469
-	step_13
+	walk_right
 	step_end

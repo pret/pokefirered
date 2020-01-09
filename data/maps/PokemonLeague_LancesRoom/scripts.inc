@@ -62,40 +62,40 @@ EventScript_1629A8:: @ 81629A8
 	return
 
 Movement_1629F1:: @ 81629F1
-	step_11
-	step_11
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
@@ -164,11 +164,11 @@ EventScript_162AD1:: @ 8162AD1
 	return
 
 Movement_162ADC:: @ 8162ADC
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_162ADF:: @ 8162ADF
-	step_13
-	step_2f
+	walk_right
+	walk_in_place_fastest_left
 	step_end

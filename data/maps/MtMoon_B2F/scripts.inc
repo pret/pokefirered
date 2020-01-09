@@ -14,7 +14,7 @@ EventScript_1606A9:: @ 81606A9
 
 MtMoon_B2F_EventScript_1606B0:: @ 81606B0
 	lockall
-	applymovement 3, Movement_1A75EB
+	applymovement 3, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	call EventScript_1606DD
 	releaseall
@@ -80,10 +80,10 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	end
 
 Movement_16077A:: @ 816077A
-	step_13
-	step_11
-	step_11
-	step_11
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 MtMoon_B2F_EventScript_16077F:: @ 816077F
@@ -117,9 +117,9 @@ EventScript_1607DE:: @ 81607DE
 	end
 
 Movement_1607E0:: @ 81607E0
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 MtMoon_B2F_EventScript_1607E4:: @ 81607E4

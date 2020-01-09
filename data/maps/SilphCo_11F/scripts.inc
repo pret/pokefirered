@@ -67,7 +67,7 @@ EventScript_161E9F:: @ 8161E9F
 
 EventScript_161EA0:: @ 8161EA0
 	textcolor 0
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 25
 	msgbox gUnknown_8177108
@@ -103,26 +103,26 @@ EventScript_161F12:: @ 8161F12
 	return
 
 Movement_161F1D:: @ 8161F1D
-	step_10
-	step_10
-	step_10
-	step_10
-	step_2f
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 Movement_161F23:: @ 8161F23
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_161F27:: @ 8161F27
-	step_1c
-	step_1c
-	step_1c
-	step_1b
-	step_1a
-	step_30
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_fastest_right
 	step_end
 
 EventScript_161F2E:: @ 8161F2E

@@ -289,24 +289,24 @@ EventScript_16DC7A:: @ 816DC7A
 	end
 
 EventScript_16DCB4:: @ 816DCB4
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 1, Movement_16DCD8
 	waitmovement 0
 	return
 
 EventScript_16DCC6:: @ 816DCC6
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 1, Movement_16DCDB
 	waitmovement 0
 	return
 
 Movement_16DCD8:: @ 816DCD8
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16DCDB:: @ 816DCDB
-	step_12
+	walk_left
 	step_end
 
 CinnabarIsland_Gym_EventScript_16DCDD:: @ 816DCDD
@@ -380,21 +380,21 @@ EventScript_16DD9D:: @ 816DD9D
 	return
 
 Movement_16DDAF:: @ 816DDAF
-	step_11
-	step_11
-	step_12
+	walk_up
+	walk_up
+	walk_left
 	step_end
 
 Movement_16DDB3:: @ 816DDB3
-	step_11
-	step_11
-	step_2f
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
 	step_end
 
 Movement_16DDB7:: @ 816DDB7
-	step_1c
-	step_1c
-	step_30
+	delay_16
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 CinnabarIsland_Gym_EventScript_16DDBB:: @ 816DDBB
@@ -456,24 +456,24 @@ EventScript_16DE2F:: @ 816DE2F
 	end
 
 EventScript_16DE69:: @ 816DE69
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 4, Movement_16DE8D
 	waitmovement 0
 	return
 
 EventScript_16DE7B:: @ 816DE7B
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 4, Movement_16DE90
 	waitmovement 0
 	return
 
 Movement_16DE8D:: @ 816DE8D
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16DE90:: @ 816DE90
-	step_12
+	walk_left
 	step_end
 
 CinnabarIsland_Gym_EventScript_16DE92:: @ 816DE92
@@ -535,24 +535,24 @@ EventScript_16DF06:: @ 816DF06
 	end
 
 EventScript_16DF40:: @ 816DF40
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 5, Movement_16DF64
 	waitmovement 0
 	return
 
 EventScript_16DF52:: @ 816DF52
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 5, Movement_16DF67
 	waitmovement 0
 	return
 
 Movement_16DF64:: @ 816DF64
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16DF67:: @ 816DF67
-	step_12
+	walk_left
 	step_end
 
 CinnabarIsland_Gym_EventScript_16DF69:: @ 816DF69
@@ -614,24 +614,24 @@ EventScript_16DFDD:: @ 816DFDD
 	end
 
 EventScript_16E017:: @ 816E017
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 6, Movement_16E03B
 	waitmovement 0
 	return
 
 EventScript_16E029:: @ 816E029
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 6, Movement_16E03E
 	waitmovement 0
 	return
 
 Movement_16E03B:: @ 816E03B
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16E03E:: @ 816E03E
-	step_12
+	walk_left
 	step_end
 
 CinnabarIsland_Gym_EventScript_16E040:: @ 816E040
@@ -693,24 +693,24 @@ EventScript_16E0B4:: @ 816E0B4
 	end
 
 EventScript_16E0EE:: @ 816E0EE
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 7, Movement_16E112
 	waitmovement 0
 	return
 
 EventScript_16E100:: @ 816E100
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	applymovement 7, Movement_16E115
 	waitmovement 0
 	return
 
 Movement_16E112:: @ 816E112
-	step_12
-	step_12
+	walk_left
+	walk_left
 	step_end
 
 Movement_16E115:: @ 816E115
-	step_12
+	walk_left
 	step_end
 
 EventScript_16E117:: @ 816E117

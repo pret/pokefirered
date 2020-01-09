@@ -34,7 +34,7 @@ PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	goto_if ge, EventScript_168DAF
 	msgbox gUnknown_818D58C
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -145,12 +145,12 @@ EventScript_168EF6:: @ 8168EF6
 	checkitemspace ITEM_TOWN_MAP, 1
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_168F4F
-	applymovement 1, Movement_1A75EB
+	applymovement 1, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	removeobject 2
 	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	delay 15
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	delay 12
 	additem ITEM_TOWN_MAP, 1

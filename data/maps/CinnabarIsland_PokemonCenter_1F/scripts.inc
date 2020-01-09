@@ -77,68 +77,68 @@ EventScript_16E9A5:: @ 816E9A5
 	end
 
 Movement_16E9AF:: @ 816E9AF
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_1b
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	set_invisible
 	step_end
 
 Movement_16E9B9:: @ 816E9B9
-	step_10
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_1c
-	step_10
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	delay_16
+	walk_down
 	step_end
 
 Movement_16E9C3:: @ 816E9C3
-	step_11
-	step_12
-	step_12
-	step_10
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_1b
+	walk_up
+	walk_left
+	walk_left
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	set_invisible
 	step_end
 
 Movement_16E9CF:: @ 816E9CF
-	step_1c
-	step_1c
-	step_1c
-	step_02
-	step_1c
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_1b
-	step_10
-	step_1b
+	delay_16
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	delay_8
+	walk_down
+	delay_8
 	set_invisible
 	step_end
 
 Movement_16E9DE:: @ 816E9DE
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_1c
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	delay_16
+	walk_down
 	step_end

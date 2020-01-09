@@ -36,7 +36,7 @@ EventScript_1BDF76:: @ 81BDF76
 	end
 
 Movement_1BDF85:: @ 81BDF85
-	step_69
+	cut_tree
 	step_end
 
 EventScript_1BDF87:: @ 81BDF87
@@ -107,7 +107,7 @@ EventScript_1BE08D:: @ 81BE08D
 	end
 
 Movement_1BE08F:: @ 81BE08F
-	step_68
+	rock_smash_break
 	step_end
 
 EventScript_1BE091:: @ 81BE091

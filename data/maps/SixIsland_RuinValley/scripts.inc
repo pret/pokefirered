@@ -14,10 +14,10 @@ EventScript_168B63:: @ 8168B63
 SixIsland_RuinValley_EventScript_168B6D:: @ 8168B6D
 	lock
 	msgbox gUnknown_818BD47
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_818BD7A
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

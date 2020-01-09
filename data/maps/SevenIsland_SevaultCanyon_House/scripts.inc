@@ -10,7 +10,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A4D72
 	textcolor 3
@@ -35,12 +35,12 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	end
 
 EventScript_172206:: @ 8172206
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_172211:: @ 8172211
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A4D72
 	release
@@ -53,22 +53,22 @@ EventScript_172225:: @ 8172225
 	end
 
 Movement_172231:: @ 8172231
-	step_25
-	step_1c
-	step_25
-	step_1c
-	step_25
-	step_1c
-	step_25
-	step_1c
-	step_30
-	step_1a
-	step_2e
-	step_1a
-	step_2f
-	step_1a
-	step_2d
-	step_1a
+	walk_in_place_down
+	delay_16
+	walk_in_place_down
+	delay_16
+	walk_in_place_down
+	delay_16
+	walk_in_place_down
+	delay_16
+	walk_in_place_fastest_right
+	delay_4
+	walk_in_place_fastest_up
+	delay_4
+	walk_in_place_fastest_left
+	delay_4
+	walk_in_place_fastest_down
+	delay_4
 	step_end
 
 SevenIsland_SevaultCanyon_House_EventScript_172242:: @ 8172242

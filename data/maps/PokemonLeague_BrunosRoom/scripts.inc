@@ -115,16 +115,16 @@ EventScript_1627B0:: @ 81627B0
 	end
 
 EventScript_1627EF:: @ 81627EF
-	applymovement 1, Movement_1A75E7
+	applymovement 1, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_1627FA:: @ 81627FA
-	applymovement 1, Movement_1A75EB
+	applymovement 1, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 EventScript_162805:: @ 8162805
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return

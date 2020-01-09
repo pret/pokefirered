@@ -102,73 +102,73 @@ EventScript_1655A1:: @ 81655A1
 	end
 
 Movement_1655AF:: @ 81655AF
-	step_12
-	step_12
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_2e
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1655BE:: @ 81655BE
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_1655CC:: @ 81655CC
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1655DD:: @ 81655DD
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 PalletTown_EventScript_1655ED:: @ 81655ED
@@ -192,10 +192,10 @@ EventScript_165605:: @ 8165605
 	waitmessage
 	delay 85
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75DB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ExclamationMark
 	waitmovement 0
 	delay 30
 	addobject 3
@@ -251,124 +251,124 @@ EventScript_1656E0:: @ 81656E0
 	return
 
 Movement_1656F2:: @ 81656F2
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 Movement_1656FB:: @ 81656FB
-	step_13
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 Movement_165705:: @ 8165705
-	step_10
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_165719:: @ 8165719
-	step_10
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_16572E:: @ 816572E
-	step_11
+	walk_up
 	set_invisible
 	step_end
 
 Movement_165731:: @ 8165731
-	step_10
-	step_10
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_165744:: @ 8165744
-	step_10
-	step_10
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_165758:: @ 8165758
-	step_13
-	step_11
+	walk_right
+	walk_up
 	set_invisible
 	step_end
 
@@ -383,12 +383,12 @@ PalletTown_EventScript_16575C:: @ 816575C
 	checkflag FLAG_TEMP_2
 	goto_if TRUE, EventScript_165801
 	msgbox gUnknown_81B1C8B
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	msgbox gUnknown_81B1C9F
 	closemessage
@@ -412,34 +412,34 @@ EventScript_1657E2:: @ 81657E2
 	return
 
 EventScript_1657ED:: @ 81657ED
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_817D7C8
 	release
 	end
 
 EventScript_165801:: @ 8165801
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81B1CAF
 	release
 	end
 
 EventScript_165815:: @ 8165815
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81B1CEC
 	release
 	end
 
 Movement_165829:: @ 8165829
-	step_13
-	step_2f
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 Movement_16582C:: @ 816582C
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 PalletTown_EventScript_16582F:: @ 816582F
@@ -474,8 +474,8 @@ PalletTown_EventScript_16586B:: @ 816586B
 
 PalletTown_EventScript_16587B:: @ 816587B
 	lockall
-	applymovement 1, Movement_1A75EB
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement 1, Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	call EventScript_165894
 	releaseall
@@ -498,7 +498,7 @@ EventScript_165894:: @ 8165894
 	return
 
 EventScript_1658C2:: @ 81658C2
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	call EventScript_165894
 	release

@@ -12,7 +12,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	faceplayer
 	msgbox gUnknown_817ADD6
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
 	applymovement 1, Movement_163D22
 	waitmovement 0
@@ -26,7 +26,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	setwildbattle SPECIES_HYPNO, 30, ITEM_NONE
 	dowildbattle
 	special sub_8112364
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_817AEE1
 	giveitem ITEM_IAPAPA_BERRY
@@ -49,11 +49,11 @@ EventScript_163D19:: @ 8163D19
 	return
 
 Movement_163D22:: @ 8163D22
-	step_2f
-	step_1c
-	step_30
-	step_1b
-	step_2f
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 ThreeIsland_BerryForest_EventScript_163D28:: @ 8163D28

@@ -25,7 +25,7 @@ Route6_NorthEntrance_EventScript_16F9E8:: @ 816F9E8
 
 EventScript_16F9F4:: @ 816F9F4
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FA1E
@@ -71,18 +71,18 @@ EventScript_16FA78:: @ 816FA78
 	return
 
 Movement_16FA83:: @ 816FA83
-	step_13
-	step_13
+	walk_right
+	walk_right
 	step_end
 
 Movement_16FA86:: @ 816FA86
-	step_13
+	walk_right
 	step_end
 
 Movement_16FA88:: @ 816FA88
-	step_28
+	walk_in_place_right
 	step_end
 
 Movement_16FA8A:: @ 816FA8A
-	step_10
+	walk_down
 	step_end

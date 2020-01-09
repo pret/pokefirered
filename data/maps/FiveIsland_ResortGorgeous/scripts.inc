@@ -20,7 +20,7 @@ EventScript_168808:: @ 8168808
 	textcolor 1
 	msgbox gUnknown_818A7DB
 	closemessage
-	applymovement 8, Movement_1A75E9
+	applymovement 8, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	opendoor 39, 8
 	waitdooranim
@@ -35,7 +35,7 @@ EventScript_168808:: @ 8168808
 	end
 
 Movement_168841:: @ 8168841
-	step_11
+	walk_up
 	set_invisible
 	step_end
 

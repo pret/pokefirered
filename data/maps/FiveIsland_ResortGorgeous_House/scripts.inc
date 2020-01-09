@@ -45,7 +45,7 @@ EventScript_171F34:: @ 8171F34
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_81A450B
-	applymovement 1, Movement_1A75E9
+	applymovement 1, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 1
 	msgbox gUnknown_81A4521
@@ -71,25 +71,25 @@ EventScript_171F34:: @ 8171F34
 	end
 
 EventScript_171FCD:: @ 8171FCD
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	applymovement 2, Movement_17204D
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_171FE9:: @ 8171FE9
 	applymovement 2, Movement_172055
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_171FFE:: @ 8171FFE
-	applymovement 1, Movement_1A75E7
+	applymovement 1, Movement_WalkInPlaceFastestLeft
 	applymovement 2, Movement_172059
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
@@ -114,34 +114,34 @@ EventScript_172043:: @ 8172043
 	end
 
 Movement_17204D:: @ 817204D
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_30
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
 	step_end
 
 Movement_172055:: @ 8172055
-	step_12
-	step_12
-	step_2d
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
 	step_end
 
 Movement_172059:: @ 8172059
-	step_12
-	step_12
-	step_12
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_down
 	step_end
 
 Movement_17205E:: @ 817205E
-	step_11
+	walk_up
 	step_end
 
 Movement_172060:: @ 8172060
-	step_25
+	walk_in_place_down
 	step_end
 
 FiveIsland_ResortGorgeous_House_EventScript_172062:: @ 8172062

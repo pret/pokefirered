@@ -39,7 +39,7 @@ EventScript_16399E:: @ 816399E
 	end
 
 EventScript_1639A8:: @ 81639A8
-	applymovement 2, Movement_1A75E1
+	applymovement 2, Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_ROCKET, 0
 	msgbox gUnknown_817AA06
@@ -69,7 +69,7 @@ MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
 	goto_if eq, EventScript_163A25
 	msgbox gUnknown_817A88C
 	closemessage
-	applymovement 3, Movement_1A75E5
+	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -96,18 +96,18 @@ MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
 	message Text_17A8EE
 	waitmessage
 	playse SE_PIN
-	applymovement 3, Movement_1A75D9
+	applymovement 3, Movement_QuestionMark
 	waitmovement 0
 	waitbuttonpress
 	msgbox gUnknown_817A970
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 2, Movement_1A75DB
+	applymovement 2, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_1A75DD
+	applymovement 2, Movement_Delay48
 	waitmovement 0
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	call EventScript_163960
 	msgbox gUnknown_817A9E1

@@ -195,7 +195,7 @@ CableClub_EventScript_PlayerExitLinkRoom:: @ 81BB40A
 CableClub_EventScript_Tutorial:: @ 81BB415
 	lockall
 	textcolor 1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_81BD898
 	closemessage
@@ -208,8 +208,8 @@ CableClub_EventScript_Tutorial:: @ 81BB415
 	end
 
 Movement_1BB447:: @ 81BB447
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 EventScript_1BB44A:: @ 81BB44A
@@ -556,51 +556,51 @@ EventScript_1BB881:: @ 81BB881
 	end
 
 Movement_1BB88B:: @ 81BB88B
-	step_00
+	face_down
 	step_end
 
 Movement_1BB88D:: @ 81BB88D
-	step_03
+	face_right
 	step_end
 
 Movement_1BB88F:: @ 81BB88F
-	step_02
+	face_left
 	step_end
 
 Movement_1BB891:: @ 81BB891
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 Movement_1BB894:: @ 81BB894
-	step_13
-	step_11
-	step_11
+	walk_right
+	walk_up
+	walk_up
 	step_end
 
 Movement_1BB898:: @ 81BB898
-	step_12
-	step_11
-	step_11
+	walk_left
+	walk_up
+	walk_up
 	step_end
 
 Movement_1BB89C:: @ 81BB89C
-	step_11
+	walk_up
 	step_end
 
 Movement_1BB89E:: @ 81BB89E
-	step_02
+	face_left
 	step_end
 
 Movement_1BB8A0:: @ 81BB8A0
-	step_03
+	face_right
 	step_end
 
 Movement_1BB8A2:: @ 81BB8A2
-	step_12
-	step_11
-	step_11
-	step_11
+	walk_left
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 gUnknown_81BB8A7:: @ 81BB8A7

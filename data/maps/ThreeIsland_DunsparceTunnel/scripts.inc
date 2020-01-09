@@ -31,7 +31,7 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	goto_if eq, EventScript_164D90
 	msgbox gUnknown_817D13B
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

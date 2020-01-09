@@ -147,7 +147,7 @@ EventScript_169194:: @ 8169194
 	setobjectxyperm 8, 6, 10
 	addobject 8
 	playbgm MUS_RIVAL1, 0
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B91
 	applymovement 8, Movement_169B9D
 	waitmovement 0
@@ -157,18 +157,18 @@ EventScript_1691BB:: @ 81691BB
 	setobjectxyperm 8, 6, 10
 	addobject 8
 	playbgm MUS_RIVAL1, 0
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
 
 EventScript_1691DB:: @ 81691DB
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_1691E6:: @ 81691E6
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -196,19 +196,19 @@ EventScript_169227:: @ 8169227
 	return
 
 Movement_169232:: @ 8169232
-	step_11
-	step_12
-	step_2e
-	step_1c
-	step_1a
+	walk_up
+	walk_left
+	walk_in_place_fastest_up
+	delay_16
+	delay_4
 	step_end
 
 Movement_169238:: @ 8169238
-	step_12
-	step_12
-	step_11
-	step_1c
-	step_1a
+	walk_left
+	walk_left
+	walk_up
+	delay_16
+	delay_4
 	step_end
 
 EventScript_16923E:: @ 816923E
@@ -222,7 +222,7 @@ EventScript_16923E:: @ 816923E
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1692B7
 	waitmovement 0
-	applymovement 8, Movement_1A75E9
+	applymovement 8, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	clearflag FLAG_SPECIAL_FLAG_0x4001
 	savebgm SE_STOP
@@ -242,34 +242,34 @@ EventScript_16923E:: @ 816923E
 	end
 
 Movement_1692B0:: @ 81692B0
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1692B7:: @ 81692B7
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1692C0:: @ 81692C0
-	step_26
-	step_26
+	walk_in_place_up
+	walk_in_place_up
 	step_end
 
 PalletTown_ProfessorOaksLab_EventScript_1692C3:: @ 81692C3
 	lockall
 	textcolor 0
-	applymovement 4, Movement_1A75F1
+	applymovement 4, Movement_FaceDown
 	waitmovement 0
 	msgbox gUnknown_818E177
 	closemessage
@@ -279,7 +279,7 @@ PalletTown_ProfessorOaksLab_EventScript_1692C3:: @ 81692C3
 	end
 
 Movement_1692E5:: @ 81692E5
-	step_11
+	walk_up
 	step_end
 
 PalletTown_ProfessorOaksLab_EventScript_1692E7:: @ 81692E7
@@ -303,13 +303,13 @@ PalletTown_ProfessorOaksLab_EventScript_1692FF:: @ 81692FF
 EventScript_16930B:: @ 816930B
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 8, Movement_1A75ED
+	applymovement 8, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_818DDA4
 	closemessage
-	applymovement 4, Movement_1A75F1
+	applymovement 4, Movement_FaceDown
 	waitmovement 0
 	compare VAR_STARTER_MON, 0
 	goto_if eq, EventScript_1693D2
@@ -352,27 +352,27 @@ EventScript_1693AC:: @ 81693AC
 	end
 
 Movement_1693C0:: @ 81693C0
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_1693C7:: @ 81693C7
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_1693CD:: @ 81693CD
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1693D2:: @ 81693D2
@@ -408,30 +408,30 @@ EventScript_169424:: @ 8169424
 	end
 
 Movement_169438:: @ 8169438
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_169440:: @ 8169440
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_169447:: @ 8169447
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EventScript_16944D:: @ 816944D
@@ -467,24 +467,24 @@ EventScript_16949F:: @ 816949F
 	end
 
 Movement_1694B3:: @ 81694B3
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_1694B9:: @ 81694B9
-	step_12
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 Movement_1694BE:: @ 81694BE
-	step_12
-	step_10
-	step_10
+	walk_left
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1694C2:: @ 81694C2
@@ -525,50 +525,50 @@ EventScript_169528:: @ 8169528
 	return
 
 Movement_16953A:: @ 816953A
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1b
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 Movement_169542:: @ 8169542
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1b
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 Movement_16954A:: @ 816954A
-	step_13
-	step_10
-	step_10
-	step_10
-	step_12
-	step_10
-	step_10
-	step_1b
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	delay_8
 	step_end
 
 Movement_169553:: @ 8169553
-	step_1c
-	step_1b
-	step_30
-	step_1c
-	step_2d
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_169559:: @ 8169559
-	step_1c
-	step_1b
-	step_2f
-	step_1c
-	step_2d
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 PalletTown_ProfessorOaksLab_EventScript_16955F:: @ 816955F
@@ -658,9 +658,9 @@ EventScript_16961E:: @ 816961E
 	closemessage
 	delay 30
 	playse SE_PIN
-	applymovement 4, Movement_1A75DB
+	applymovement 4, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 4, Movement_1A75DD
+	applymovement 4, Movement_Delay48
 	waitmovement 0
 	compare VAR_FACING, 1
 	call_if eq, EventScript_169ADD
@@ -685,7 +685,7 @@ EventScript_16961E:: @ 816961E
 	delay 40
 	msgbox gUnknown_818E5C5
 	closemessage
-	applymovement 4, Movement_1A75E9
+	applymovement 4, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	removeobject 9
 	delay 10
@@ -767,19 +767,19 @@ EventScript_16986D:: @ 816986D
 	return
 
 Movement_169878:: @ 8169878
-	step_1c
-	step_1b
-	step_30
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 Movement_16987C:: @ 816987C
-	step_13
-	step_10
+	walk_right
+	walk_down
 	step_end
 
 Movement_16987F:: @ 816987F
-	step_10
-	step_13
+	walk_down
+	walk_right
 	step_end
 
 EventScript_169882:: @ 8169882
@@ -806,30 +806,30 @@ EventScript_1698B8:: @ 81698B8
 	return
 
 Movement_1698C3:: @ 81698C3
-	step_1c
-	step_1b
-	step_2e
+	delay_16
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1698C7:: @ 81698C7
-	step_1c
-	step_1b
-	step_2f
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 Movement_1698CB:: @ 81698CB
-	step_11
-	step_12
-	step_1c
-	step_2d
+	walk_up
+	walk_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_1698D0:: @ 81698D0
-	step_12
-	step_12
-	step_11
-	step_1c
-	step_30
+	walk_left
+	walk_left
+	walk_up
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 EventScript_1698D6:: @ 81698D6
@@ -864,7 +864,7 @@ EventScript_169913:: @ 8169913
 	call_if eq, EventScript_16997A
 	compare VAR_FACING, 3
 	call_if eq, EventScript_169985
-	applymovement 4, Movement_1A75E1
+	applymovement 4, Movement_FacePlayer
 	waitmovement 0
 	closemessage
 	delay 70
@@ -894,77 +894,77 @@ EventScript_169985:: @ 8169985
 	return
 
 Movement_169990:: @ 8169990
-	step_25
-	step_29
-	step_25
-	step_25
-	step_29
-	step_25
+	walk_in_place_down
+	walk_in_place_fast_down
+	walk_in_place_down
+	walk_in_place_down
+	walk_in_place_fast_down
+	walk_in_place_down
 	step_end
 
 Movement_169997:: @ 8169997
-	step_26
-	step_2a
-	step_26
-	step_26
-	step_2a
-	step_26
+	walk_in_place_up
+	walk_in_place_fast_up
+	walk_in_place_up
+	walk_in_place_up
+	walk_in_place_fast_up
+	walk_in_place_up
 	step_end
 
 Movement_16999E:: @ 816999E
-	step_27
-	step_2b
-	step_27
-	step_27
-	step_2b
-	step_27
+	walk_in_place_left
+	walk_in_place_fast_left
+	walk_in_place_left
+	walk_in_place_left
+	walk_in_place_fast_left
+	walk_in_place_left
 	step_end
 
 Movement_1699A5:: @ 81699A5
-	step_28
-	step_2c
-	step_28
-	step_28
-	step_2c
-	step_28
+	walk_in_place_right
+	walk_in_place_fast_right
+	walk_in_place_right
+	walk_in_place_right
+	walk_in_place_fast_right
+	walk_in_place_right
 	step_end
 
 Movement_1699AC:: @ 81699AC
-	step_12
-	step_2d
-	step_1b
-	step_30
-	step_1b
-	step_2e
-	step_1b
-	step_2f
-	step_1b
-	step_2d
-	step_1b
-	step_13
-	step_13
-	step_2e
-	step_1b
-	step_2f
-	step_1b
-	step_2d
-	step_1b
-	step_30
-	step_1b
-	step_2e
-	step_1b
-	step_12
+	walk_left
+	walk_in_place_fastest_down
+	delay_8
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_fastest_left
+	delay_8
+	walk_in_place_fastest_down
+	delay_8
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_fastest_left
+	delay_8
+	walk_in_place_fastest_down
+	delay_8
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_up
+	delay_8
+	walk_left
 	step_end
 
 Movement_1699C5:
-	step_11
-	step_10
-	step_10
-	step_25
-	step_11
-	step_1c
-	step_1c
-	step_1c
+	walk_up
+	walk_down
+	walk_down
+	walk_in_place_down
+	walk_up
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 EventScript_1699CE:: @ 81699CE
@@ -1033,7 +1033,7 @@ EventScript_169A82:: @ 8169A82
 EventScript_169A9E:: @ 8169A9E
 	setobjectxyperm 8, 6, 10
 	addobject 8
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B91
 	applymovement 8, Movement_169B9D
 	waitmovement 0
@@ -1042,52 +1042,52 @@ EventScript_169A9E:: @ 8169A9E
 EventScript_169AC1:: @ 8169AC1
 	setobjectxyperm 8, 6, 10
 	addobject 8
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
 
 EventScript_169ADD:: @ 8169ADD
-	applymovement 4, Movement_1A75E1
+	applymovement 4, Movement_FacePlayer
 	waitmovement 0
 	delay 15
-	applymovement 4, Movement_1A75ED
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_169AF5:: @ 8169AF5
-	applymovement 4, Movement_1A75E1
+	applymovement 4, Movement_FacePlayer
 	waitmovement 0
 	delay 15
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
-	applymovement 4, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_169B14:: @ 8169B14
-	applymovement 4, Movement_1A75E1
+	applymovement 4, Movement_FacePlayer
 	waitmovement 0
 	delay 15
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
-	applymovement 4, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	applymovement 4, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_169B33:: @ 8169B33
-	applymovement 8, Movement_1A75E1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement 8, Movement_FacePlayer
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_169B45:: @ 8169B45
-	applymovement 8, Movement_1A75E9
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement 8, Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_169B57:: @ 8169B57
-	applymovement 8, Movement_1A75E1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
+	applymovement 8, Movement_FacePlayer
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -1103,42 +1103,42 @@ EventScript_169B7B:: @ 8169B7B
 	return
 
 EventScript_169B86:: @ 8169B86
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 Movement_169B91:: @ 8169B91
-	step_1a
-	step_2d
+	delay_4
+	walk_in_place_fastest_down
 	step_end
 
 Movement_169B94:: @ 8169B94
-	step_2d
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1b
-	step_2f
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
 	step_end
 
 Movement_169B9D:: @ 8169B9D
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_169BA4:: @ 8169BA4
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 	.equ VAR_OAKSLAB_PLAYER_STARTER_NO,       VAR_0x4001
@@ -1162,7 +1162,7 @@ PalletTown_ProfessorOaksLab_EventScript_169BAB:: @ 8169BAB
 	end
 
 EventScript_169BE1:: @ 8169BE1
-	applymovement 4, Movement_1A75EF
+	applymovement 4, Movement_FaceRight
 	waitmovement 0
 	drawmonpic VAR_OAKSLAB_PLAYER_STARTER_SPECIES, 10, 3
 	textcolor 0
@@ -1279,31 +1279,31 @@ EventScript_169D5C:: @ 8169D5C
 	return
 
 Movement_RivalWalksToCharmander:: @ 8169D62
-	step_10
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_11
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
 	step_end
 
 Movement_RivalWalksToBulbasaur:: @ 8169D6B
-	step_10
-	step_13
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_RivalWalksToSquirtle:: @ 8169D72
-	step_10
-	step_13
-	step_13
-	step_13
-	step_2e
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 PalletTown_ProfessorOaksLab_EventScript_169D78:: @ 8169D78

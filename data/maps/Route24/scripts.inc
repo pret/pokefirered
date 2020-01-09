@@ -42,7 +42,7 @@ EventScript_168678:: @ 8168678
 	call_if eq, EventScript_1686FD
 	compare VAR_0x4001, 1
 	call_if eq, EventScript_168708
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
@@ -71,7 +71,7 @@ EventScript_1686FD:: @ 81686FD
 	return
 
 EventScript_168708:: @ 8168708
-	applymovement 1, Movement_1A75E7
+	applymovement 1, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -91,14 +91,14 @@ EventScript_168733:: @ 8168733
 	return
 
 Movement_16873E:: @ 816873E
-	step_12
+	walk_left
 	step_end
 
 Movement_168740:: @ 8168740
-	step_13
-	step_2f
+	walk_right
+	walk_in_place_fastest_left
 	step_end
 
 Movement_168743:: @ 8168743
-	step_10
+	walk_down
 	step_end

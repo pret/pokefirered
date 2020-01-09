@@ -25,7 +25,7 @@ Route8_WestEntrance_EventScript_16FB75:: @ 816FB75
 
 EventScript_16FB81:: @ 816FB81
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FBAB
@@ -81,18 +81,18 @@ EventScript_16FC1B:: @ 816FC1B
 	return
 
 Movement_16FC26:: @ 816FC26
-	step_11
+	walk_up
 	step_end
 
 Movement_16FC28:: @ 816FC28
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_16FC2B:: @ 816FC2B
-	step_26
+	walk_in_place_up
 	step_end
 
 Movement_16FC2D:: @ 816FC2D
-	step_13
+	walk_right
 	step_end

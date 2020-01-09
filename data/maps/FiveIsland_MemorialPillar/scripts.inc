@@ -9,11 +9,11 @@ FiveIsland_MemorialPillar_EventScript_1689D3:: @ 81689D3
 	goto_if TRUE, EventScript_168A22
 	msgbox gUnknown_818B02E
 	closemessage
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	delay 45
 	msgbox gUnknown_818B03C
-	applymovement 1, Movement_1A75E9
+	applymovement 1, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	msgbox gUnknown_818B05E
 	release
@@ -61,10 +61,10 @@ EventScript_168A9B:: @ 8168A9B
 	removeitem ITEM_LEMONADE, 1
 	msgbox gUnknown_818B13E
 	closemessage
-	applymovement 1, Movement_1A75EB
+	applymovement 1, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 45
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_818B171
@@ -77,7 +77,7 @@ EventScript_168A9B:: @ 8168A9B
 
 EventScript_168AE8:: @ 8168AE8
 	msgbox gUnknown_818B219
-	applymovement 1, Movement_1A75E9
+	applymovement 1, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
 	return

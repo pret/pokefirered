@@ -90,12 +90,12 @@ EventScript_162B76:: @ 8162B76
 	specialvar VAR_RESULT, ScrSpecial_GetStarter
 	getspeciesname 0, VAR_RESULT
 	msgbox gUnknown_8178FCF
-	applymovement 2, Movement_1A75EB
-	applymovement 1, Movement_1A75E7
+	applymovement 2, Movement_WalkInPlaceFastestRight
+	applymovement 1, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox gUnknown_817908F
 	closemessage
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 20
 	msgbox gUnknown_81791A3
@@ -166,82 +166,82 @@ EventScript_162CFC:: @ 8162CFC
 	return
 
 Movement_162D07:: @ 8162D07
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_162D12:: @ 8162D12
-	step_1c
-	step_12
-	step_11
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_1b
+	delay_16
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
 	set_invisible
 	step_end
 
 Movement_162D1F:: @ 8162D1F
-	step_1b
-	step_2d
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_2f
+	delay_8
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end
 
 Movement_162D2A:: @ 8162D2A
-	step_1c
-	step_1c
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_12
-	step_11
-	step_11
-	step_2d
-	step_1c
+	delay_16
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	delay_16
 	step_end
 
 Movement_162D37:: @ 8162D37
-	step_11
-	step_11
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_1b
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
 	set_invisible
 	step_end
 
 Movement_162D41:: @ 8162D41
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_1c
-	step_2f
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
 	step_end

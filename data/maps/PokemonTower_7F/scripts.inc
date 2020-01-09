@@ -61,45 +61,45 @@ EventScript_163616:: @ 8163616
 	end
 
 Movement_16361B:: @ 816361B
-	step_10
-	step_13
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_163624:: @ 8163624
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_16362C:: @ 816362C
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_163633:: @ 8163633
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
-	step_2f
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 PokemonTower_7F_EventScript_16363D:: @ 816363D
@@ -139,33 +139,33 @@ EventScript_1636B9:: @ 81636B9
 	end
 
 Movement_1636BE:: @ 81636BE
-	step_10
-	step_10
-	step_10
-	step_12
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1636C6:: @ 81636C6
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1636CD:: @ 81636CD
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 PokemonTower_7F_EventScript_1636D6:: @ 81636D6
@@ -208,31 +208,31 @@ EventScript_16374A:: @ 816374A
 	end
 
 Movement_16374C:: @ 816374C
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
 	step_end
 
 Movement_163754:: @ 8163754
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_16375B:: @ 816375B
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end

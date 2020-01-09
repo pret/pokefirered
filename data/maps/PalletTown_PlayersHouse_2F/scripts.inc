@@ -40,7 +40,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	setvar VAR_0x8004, 1
 	special Special_AnimatePcTurnOn
 	playse SE_PC_ON
-	msgbox gUnknown_81A5420
+	msgbox Text_PlayerBootedUpPC
 	special BedroomPC
 	waitstate
 	special sub_812B35C

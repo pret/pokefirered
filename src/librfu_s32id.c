@@ -1,12 +1,13 @@
 #include "librfu.h"
 
-extern const u16 _Str_Sio32ID[];
-
 static void Sio32IDIntr(void);
 static void Sio32IDInit(void);
 static s32 Sio32IDMain(void);
 
 struct RfuS32Id gRfuS32Id;
+
+static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
+static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
 s32 AgbRFU_checkID(u8 r5)
 {
@@ -147,7 +148,7 @@ static void Sio32IDIntr(void)
         }
     }
     if (gRfuS32Id.unk2 < 4)
-        gRfuS32Id.unk4 = *(gRfuS32Id.unk2 + _Str_Sio32ID);
+        gRfuS32Id.unk4 = *(gRfuS32Id.unk2 + Sio32ConnectionData);
     else
         gRfuS32Id.unk4 = 0x8001;
     gRfuS32Id.unk6 = ~r5;

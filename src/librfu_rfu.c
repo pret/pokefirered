@@ -1,6 +1,6 @@
 #include "librfu.h"
 
-struct RfuHeader
+struct LLSFStruct
 {
     u8 unk00;
     u8 unk01;
@@ -67,14 +67,29 @@ static void rfu_STC_NI_receive_Sender(u8, u8, const struct RfuLocalStruct *, UNU
 static void rfu_STC_NI_initSlot_asRecvDataEntity(u8, struct NIComm *);
 static void rfu_STC_NI_initSlot_asRecvControllData(u8, struct NIComm *);
 
-extern const char _Str_RFU_MBOOT[];
-extern const struct RfuHeader _Str_RfuHeader[2];
-
 struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
 struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 struct RfuLinkStatus *gRfuLinkStatus;
 struct RfuStatic *gRfuStatic;
 struct RfuFixed *gRfuFixed;
+
+static const struct LLSFStruct llsf_struct[2] = {
+  {
+    2, 14, 0, 10, 9, 5, 7, 2,
+    0, 15, 1, 3, 3, 0x1f
+  }, {
+    3, 22, 18, 14, 13, 9, 11, 3,
+    15, 15, 1, 3, 3, 0x7f
+  }
+};
+
+#ifdef EMERALD
+static const char lib_ver[] = "RFU_V1026";
+#else
+static const char lib_ver[] = "RFU_V1024";
+#endif
+
+static const char str_checkMbootLL[] = "RFU-MBOOT";
 
 u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
 {
@@ -264,7 +279,7 @@ u16 rfu_getRFUStatus(u8 *rfuState)
 
 u16 rfu_MBOOT_CHILD_inheritanceLinkStatus(void)
 {
-    const char *s1 = _Str_RFU_MBOOT;
+    const char *s1 = str_checkMbootLL;
     char *s2 = (char *)0x30000F0;
     u16 checksum;
     u16 *r2;
@@ -1315,7 +1330,7 @@ static u16 rfu_STC_setSendData_org(u8 r6, u8 bmSendSlot, u8 subFrameSize, const 
         r9 = &gRfuLinkStatus->remainLLFrameSizeParent;
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
         r9 = &gRfuLinkStatus->remainLLFrameSizeChild[r2];
-    r4 = _Str_RfuHeader[gRfuLinkStatus->parentChild].unk00;
+    r4 = llsf_struct[gRfuLinkStatus->parentChild].unk00;
     if (subFrameSize > *r9 || subFrameSize <= r4)
         return ERR_SUBFRAME_SIZE;
     sp04 = REG_IME;
@@ -1672,7 +1687,7 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
     u32 sp00;
     u8 i;
     u8 *r2;
-    const struct RfuHeader *r8 = &_Str_RfuHeader[gRfuLinkStatus->parentChild];
+    const struct LLSFStruct *r8 = &llsf_struct[gRfuLinkStatus->parentChild];
 
     if (r4->state == SLOT_STATE_SENDING)
     {
@@ -1732,7 +1747,7 @@ static u16 rfu_STC_NI_constructLLSF(u8 r10, u8 **r12, struct NIComm *r4)
 
 static u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
 {
-    const struct RfuHeader *r5;
+    const struct LLSFStruct *r5;
     const u8 *sp04;
     u32 sp00;
     u8 *r2;
@@ -1741,7 +1756,7 @@ static u16 rfu_STC_UNI_constructLLSF(u8 r8, u8 **r6)
 
     if (!r4->dataReadyFlag || !r4->bmSlot)
         return 0;
-    r5 = &_Str_RfuHeader[gRfuLinkStatus->parentChild];
+    r5 = &llsf_struct[gRfuLinkStatus->parentChild];
     sp00 = (r4->state & 0xF) << r5->unk03
          | r4->payloadSize;
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
@@ -1857,13 +1872,13 @@ static void rfu_STC_CHILD_analyzeRecvPacket(void)
 static u16 rfu_STC_analyzeLLSF(u8 r12, const u8 *r7, u16 r3)
 {
     struct RfuLocalStruct sp00;
-    const struct RfuHeader *r6;
+    const struct LLSFStruct *r6;
     u32 r5;
     u8 r4;
     u32 r0;
     u16 r10;
 
-    r6 = &_Str_RfuHeader[~gRfuLinkStatus->parentChild & (MODE_NEUTRAL & MODE_PARENT)];
+    r6 = &llsf_struct[~gRfuLinkStatus->parentChild & (MODE_NEUTRAL & MODE_PARENT)];
     if (r3 < r6->unk00)
         return r3;
     r5 = 0;

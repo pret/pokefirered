@@ -15,7 +15,7 @@ CeruleanCity_Mart_EventScript_16ACB0:: @ 816ACB0
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16ACD8
 	msgbox gUnknown_81A5190

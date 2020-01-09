@@ -1007,7 +1007,7 @@ static void CreatePCMenuWindow(void)
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     sub_80F7768(0, TRUE);
-    AddTextPrinterParameterized2(0, 2, gUnknown_81A508A, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 2, Text_AccessWhichPC, 0, NULL, 2, 1, 3);
 }
 
 static void Task_ScriptShowMonPic(u8 taskId)

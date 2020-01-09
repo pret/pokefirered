@@ -59,7 +59,7 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if eq, EventScript_1A7AE0
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A298
 	msgbox gUnknown_81A5190

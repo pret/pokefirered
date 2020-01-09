@@ -15,7 +15,7 @@ FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16D518
 	msgbox gUnknown_81A5190

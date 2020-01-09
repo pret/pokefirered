@@ -15,7 +15,7 @@ PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A708
 	msgbox gUnknown_81A5190

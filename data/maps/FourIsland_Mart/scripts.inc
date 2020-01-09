@@ -7,7 +7,7 @@ FourIsland_Mart_EventScript_171CAE:: @ 8171CAE
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_171CD4
 	msgbox gUnknown_81A5190

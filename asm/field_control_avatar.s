@@ -801,7 +801,7 @@ _0806CEB8:
 	ldr r0, _0806CED8 @ =gUnknown_8168CE4
 	cmp r4, r0
 	beq _0806CECA
-	ldr r0, _0806CEDC @ =gUnknown_81A6955
+	ldr r0, _0806CEDC @ =EventScript_PC
 	cmp r4, r0
 	beq _0806CECA
 	movs r0, 0x5
@@ -816,7 +816,7 @@ _0806CED2:
 	bx r1
 	.align 2, 0
 _0806CED8: .4byte gUnknown_8168CE4
-_0806CEDC: .4byte gUnknown_81A6955
+_0806CEDC: .4byte EventScript_PC
 	thumb_func_end sub_806CEA0
 
 	thumb_func_start TryGetScriptOnPressingA
@@ -1219,11 +1219,11 @@ sub_806D1F0: @ 806D1F0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D218
-	ldr r0, _0806D214 @ =gUnknown_81A6955
+	ldr r0, _0806D214 @ =EventScript_PC
 	b _0806D53E
 	.align 2, 0
 _0806D210: .4byte gSpecialVar_Facing
-_0806D214: .4byte gUnknown_81A6955
+_0806D214: .4byte EventScript_PC
 _0806D218:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsRegionMap

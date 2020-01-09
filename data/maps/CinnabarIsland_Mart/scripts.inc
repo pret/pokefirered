@@ -15,7 +15,7 @@ CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EA48
 	msgbox gUnknown_81A5190

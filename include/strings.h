@@ -706,6 +706,7 @@ extern const u8 gText_HpUp_1000[];
 extern const u8 gText_PpUp_3000[];
 
 // script_menu
+extern const u8 Text_AccessWhichPC[];
 extern const u8 gText_SomeoneSPc[];
 extern const u8 gText_BillSPc[];
 extern const u8 gText_SPc[];
@@ -713,7 +714,6 @@ extern const u8 gText_HallOfFame_2[];
 extern const u8 gText_LogOff[];
 extern const u8 gText_ProfOakSPc[];
 extern const u8 gText_Other[];
-extern const u8 gUnknown_81A508A[];
 extern const u8 gOtherText_Double[];
 extern const u8 gOtherText_Knockout[];
 extern const u8 gOtherText_Mixed[];

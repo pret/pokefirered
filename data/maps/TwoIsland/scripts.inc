@@ -119,7 +119,7 @@ EventScript_16768E:: @ 816768E
 	end
 
 EventScript_1676A6:: @ 81676A6
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	compare VAR_MAP_SCENE_TWO_ISLAND, 4
 	goto_if eq, EventScript_167728

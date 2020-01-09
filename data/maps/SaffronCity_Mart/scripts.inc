@@ -15,7 +15,7 @@ SaffronCity_Mart_EventScript_16EFB5:: @ 816EFB5
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EFDC
 	msgbox gUnknown_81A5190

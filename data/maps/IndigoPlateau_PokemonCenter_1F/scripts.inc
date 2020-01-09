@@ -48,7 +48,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EAF4
 	msgbox gUnknown_81A5190

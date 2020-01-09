@@ -19,7 +19,7 @@ CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16BB38
 	msgbox gUnknown_81A5190
@@ -47,7 +47,7 @@ CeladonCity_DepartmentStore_2F_EventScript_16BB4E:: @ 816BB4E
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16BB74
 	msgbox gUnknown_81A5190

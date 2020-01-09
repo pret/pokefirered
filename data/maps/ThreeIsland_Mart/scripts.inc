@@ -7,7 +7,7 @@ ThreeIsland_Mart_EventScript_17188D:: @ 817188D
 	goto_if eq, EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_1718B4
 	msgbox gUnknown_81A5190

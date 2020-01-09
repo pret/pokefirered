@@ -26,28 +26,28 @@ PewterCity_EventScript_165B9D:: @ 8165B9D
 	end
 
 EventScript_165BD3:: @ 8165BD3
-	applymovement 255, Movement_165C3C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165C3C
 	applymovement 5, Movement_165CDE
 	waitmovement 0
-	applymovement 255, Movement_165C41
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165C41
 	applymovement 5, Movement_165CE3
 	waitmovement 0
 	return
 
 EventScript_165BF6:: @ 8165BF6
-	applymovement 255, Movement_165C80
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165C80
 	applymovement 5, Movement_165D23
 	waitmovement 0
-	applymovement 255, Movement_165C82
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165C82
 	applymovement 5, Movement_165D25
 	waitmovement 0
 	return
 
 EventScript_165C19:: @ 8165C19
-	applymovement 255, Movement_165CAF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165CAF
 	applymovement 5, Movement_165D53
 	waitmovement 0
-	applymovement 255, Movement_165CB1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165CB1
 	applymovement 5, Movement_165D55
 	waitmovement 0
 	return
@@ -464,7 +464,7 @@ EventScript_165DBE:: @ 8165DBE
 EventScript_165E0A:: @ 8165E0A
 	applymovement 5, Movement_165F6C
 	waitmovement 0
-	applymovement 255, Movement_165E7A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165E7A
 	applymovement 5, Movement_165F7F
 	waitmovement 0
 	return
@@ -472,7 +472,7 @@ EventScript_165E0A:: @ 8165E0A
 EventScript_165E26:: @ 8165E26
 	applymovement 5, Movement_165F71
 	waitmovement 0
-	applymovement 255, Movement_165EB9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165EB9
 	applymovement 5, Movement_165FBF
 	waitmovement 0
 	return
@@ -480,7 +480,7 @@ EventScript_165E26:: @ 8165E26
 EventScript_165E42:: @ 8165E42
 	applymovement 5, Movement_165F74
 	waitmovement 0
-	applymovement 255, Movement_165EF9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165EF9
 	applymovement 5, Movement_166000
 	waitmovement 0
 	return
@@ -488,7 +488,7 @@ EventScript_165E42:: @ 8165E42
 EventScript_165E5E:: @ 8165E5E
 	applymovement 5, Movement_165F78
 	waitmovement 0
-	applymovement 255, Movement_165F3A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165F3A
 	applymovement 5, Movement_166042
 	waitmovement 0
 	return
@@ -1059,25 +1059,25 @@ PewterCity_EventScript_16607E:: @ 816607E
 
 EventScript_1660EE:: @ 81660EE
 	applymovement 2, Movement_16615C
-	applymovement 255, Movement_166140
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_166140
 	waitmovement 0
 	return
 
 EventScript_166100:: @ 8166100
 	applymovement 2, Movement_166193
-	applymovement 255, Movement_166177
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_166177
 	waitmovement 0
 	return
 
 EventScript_166112:: @ 8166112
 	applymovement 2, Movement_1661CA
-	applymovement 255, Movement_1661AE
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1661AE
 	waitmovement 0
 	return
 
 EventScript_166124:: @ 8166124
 	applymovement 2, Movement_166201
-	applymovement 255, Movement_1661E5
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1661E5
 	waitmovement 0
 	return
 
@@ -1480,7 +1480,7 @@ EventScript_1663D5:: @ 81663D5
 
 EventScript_1663DA:: @ 81663DA
 	closemessage
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
@@ -1488,7 +1488,7 @@ EventScript_1663E6:: @ 81663E6
 	closemessage
 	applymovement 7, Movement_16643E
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
@@ -1496,7 +1496,7 @@ EventScript_1663FC:: @ 81663FC
 	closemessage
 	applymovement 7, Movement_166441
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 

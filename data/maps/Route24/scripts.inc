@@ -42,7 +42,7 @@ EventScript_168678:: @ 8168678
 	call_if eq, EventScript_1686FD
 	compare VAR_0x4001, 1
 	call_if eq, EventScript_168708
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
@@ -78,7 +78,7 @@ EventScript_168708:: @ 8168708
 EventScript_168713:: @ 8168713
 	msgbox gUnknown_8188CC2
 	closemessage
-	applymovement 255, Movement_168743
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_168743
 	waitmovement 0
 	compare VAR_0x4001, 0
 	call_if eq, EventScript_168733

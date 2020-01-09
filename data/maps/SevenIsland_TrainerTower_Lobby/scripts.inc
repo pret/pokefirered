@@ -15,8 +15,8 @@ SevenIsland_TrainerTower_Lobby_OnResume:: @ 8164853
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_164886
 	setvar VAR_0x4000, 0
-	setobjectxy 255, 9, 7
-	applymovement 255, Movement_164AD4
+	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 
 EventScript_164886:: @ 8164886
 	end
@@ -50,7 +50,7 @@ SevenIsland_TrainerTower_Lobby_OnFrame:: @ 81648B6
 
 EventScript_1648C8:: @ 81648C8
 	lockall
-	applymovement 255, Movement_1648EA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1648EA
 	waitmovement 0
 	setmetatile 17, 10, 692, 1
 	special DrawWholeMapView
@@ -77,7 +77,7 @@ EventScript_1648ED:: @ 81648ED
 EventScript_164920:: @ 8164920
 	lock
 	faceplayer
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C937
 	goto EventScript_16494B
@@ -85,13 +85,13 @@ EventScript_164920:: @ 8164920
 EventScript_164938:: @ 8164938
 	lock
 	faceplayer
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C9C0
 
 EventScript_16494B:: @ 816494B
 	closemessage
-	applymovement 255, Movement_164AD6
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD6
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	release
@@ -153,7 +153,7 @@ Items_1649B8:: @ 81649B8
 
 SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	lockall
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C794
 	setvar VAR_0x8004, 17
@@ -206,7 +206,7 @@ EventScript_164AA0:: @ 8164AA0
 EventScript_164ABF:: @ 8164ABF
 	msgbox gUnknown_817C91D
 	closemessage
-	applymovement 255, Movement_164AD6
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD6
 	waitmovement 0
 	releaseall
 	end

@@ -47,7 +47,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8005, 35
 	special Special_LoopWingFlapSound
 	applymovement 1, Movement_1650E0
-	applymovement 127, Movement_1650CD
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_1650CD
 	waitmovement 0
 	delay 50
 	setweather 0
@@ -60,7 +60,7 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 35
 	special Special_LoopWingFlapSound
-	applymovement 127, Movement_1650D1
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_1650D1
 	applymovement 1, Movement_1650D7
 	waitmovement 0
 	special RemoveCameraObject

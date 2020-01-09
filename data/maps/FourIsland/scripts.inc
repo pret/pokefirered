@@ -41,7 +41,7 @@ EventScript_167CEC:: @ 8167CEC
 	waitmovement 0
 	msgbox gUnknown_8182B37
 	closemessage
-	applymovement 255, Movement_167D52
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167D52
 	applymovement 10, Movement_167D4E
 	waitmovement 0
 	fadedefaultbgm

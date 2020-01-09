@@ -85,13 +85,13 @@ EventScript_166598:: @ 8166598
 	return
 
 EventScript_1665A3:: @ 81665A3
-	applymovement 255, Movement_1665C7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1665C7
 	applymovement 8, Movement_1665D9
 	waitmovement 0
 	return
 
 EventScript_1665B5:: @ 81665B5
-	applymovement 255, Movement_1665CD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1665CD
 	applymovement 8, Movement_1665EA
 	waitmovement 0
 	return
@@ -209,7 +209,7 @@ CeruleanCity_EventScript_166683:: @ 8166683
 	setvar VAR_0x4001, 0
 	applymovement 2, Movement_1A75E9
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	goto EventScript_1666C3
 	end
@@ -219,7 +219,7 @@ CeruleanCity_EventScript_1666A3:: @ 81666A3
 	setvar VAR_0x4001, 1
 	applymovement 2, Movement_1A75ED
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	goto EventScript_1666C3
 	end

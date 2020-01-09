@@ -58,7 +58,7 @@ EventScript_169002:: @ 8169002
 	setobjectxyperm 4, 6, 3
 	setobjectmovementtype 4, 8
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
-	applymovement 255, Movement_1692B7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1692B7
 	waitmovement 0
 	goto EventScript_169035
 	end
@@ -138,7 +138,7 @@ EventScript_169174:: @ 8169174
 	setobjectxyperm 8, 5, 10
 	addobject 8
 	playbgm MUS_RIVAL1, 0
-	applymovement 255, Movement_169B94
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B94
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
@@ -148,7 +148,7 @@ EventScript_169194:: @ 8169194
 	addobject 8
 	playbgm MUS_RIVAL1, 0
 	applymovement 4, Movement_1A75ED
-	applymovement 255, Movement_169B91
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B91
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
@@ -163,12 +163,12 @@ EventScript_1691BB:: @ 81691BB
 	return
 
 EventScript_1691DB:: @ 81691DB
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
 EventScript_1691E6:: @ 81691E6
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
@@ -179,14 +179,14 @@ EventScript_1691F1:: @ 81691F1
 
 EventScript_1691FC:: @ 81691FC
 	applymovement 4, Movement_169238
-	applymovement 255, Movement_1698C7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1698C7
 	applymovement 8, Movement_1698C7
 	waitmovement 4
 	return
 
 EventScript_169215:: @ 8169215
 	applymovement 4, Movement_169232
-	applymovement 255, Movement_1698C3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1698C3
 	waitmovement 4
 	return
 
@@ -220,7 +220,7 @@ EventScript_16923E:: @ 816923E
 	setobjectxyperm 4, 6, 3
 	setobjectmovementtype 4, 8
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
-	applymovement 255, Movement_1692B7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1692B7
 	waitmovement 0
 	applymovement 8, Movement_1A75E9
 	waitmovement 0
@@ -273,7 +273,7 @@ PalletTown_ProfessorOaksLab_EventScript_1692C3:: @ 81692C3
 	waitmovement 0
 	msgbox gUnknown_818E177
 	closemessage
-	applymovement 255, Movement_1692E5
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1692E5
 	waitmovement 0
 	releaseall
 	end
@@ -305,7 +305,7 @@ EventScript_16930B:: @ 816930B
 	playbgm MUS_RIVAL1, 0
 	applymovement 8, Movement_1A75ED
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	msgbox gUnknown_818DDA4
 	closemessage
@@ -508,19 +508,19 @@ EventScript_1694C2:: @ 81694C2
 
 EventScript_169504:: @ 8169504
 	applymovement 8, Movement_16953A
-	applymovement 255, Movement_169553
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169553
 	waitmovement 8
 	return
 
 EventScript_169516:: @ 8169516
 	applymovement 8, Movement_16954A
-	applymovement 255, Movement_169553
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169553
 	waitmovement 8
 	return
 
 EventScript_169528:: @ 8169528
 	applymovement 8, Movement_169542
-	applymovement 255, Movement_169559
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169559
 	waitmovement 8
 	return
 
@@ -757,7 +757,7 @@ EventScript_169850:: @ 8169850
 
 EventScript_16985B:: @ 816985B
 	applymovement 4, Movement_16987C
-	applymovement 255, Movement_169878
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169878
 	waitmovement 0
 	return
 
@@ -789,14 +789,14 @@ EventScript_169882:: @ 8169882
 
 EventScript_16988D:: @ 816988D
 	applymovement 4, Movement_1698D0
-	applymovement 255, Movement_1698C7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1698C7
 	applymovement 8, Movement_1698C7
 	waitmovement 4
 	return
 
 EventScript_1698A6:: @ 81698A6
 	applymovement 4, Movement_1698CB
-	applymovement 255, Movement_1698C3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1698C3
 	waitmovement 4
 	return
 
@@ -1025,7 +1025,7 @@ EventScript_169A78:: @ 8169A78
 EventScript_169A82:: @ 8169A82
 	setobjectxyperm 8, 5, 10
 	addobject 8
-	applymovement 255, Movement_169B94
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B94
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
@@ -1034,7 +1034,7 @@ EventScript_169A9E:: @ 8169A9E
 	setobjectxyperm 8, 6, 10
 	addobject 8
 	applymovement 4, Movement_1A75ED
-	applymovement 255, Movement_169B91
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B91
 	applymovement 8, Movement_169B9D
 	waitmovement 0
 	return
@@ -1059,7 +1059,7 @@ EventScript_169AF5:: @ 8169AF5
 	applymovement 4, Movement_1A75E1
 	waitmovement 0
 	delay 15
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	applymovement 4, Movement_1A75ED
 	waitmovement 0
 	return
@@ -1068,31 +1068,31 @@ EventScript_169B14:: @ 8169B14
 	applymovement 4, Movement_1A75E1
 	waitmovement 0
 	delay 15
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 4, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_169B33:: @ 8169B33
 	applymovement 8, Movement_1A75E1
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_169B45:: @ 8169B45
 	applymovement 8, Movement_1A75E9
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_169B57:: @ 8169B57
 	applymovement 8, Movement_1A75E1
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_169B69:: @ 8169B69
-	applymovement 255, Movement_169B91
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_169B91
 	applymovement 8, Movement_169BA4
 	waitmovement 0
 	return
@@ -1103,7 +1103,7 @@ EventScript_169B7B:: @ 8169B7B
 	return
 
 EventScript_169B86:: @ 8169B86
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 

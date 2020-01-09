@@ -9,7 +9,7 @@ VermilionCity_OnFrame:: @ 81668E7
 
 EventScript_1668F1:: @ 81668F1
 	lockall
-	applymovement 255, Movement_166903
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_166903
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 3
 	releaseall
@@ -207,7 +207,7 @@ VermilionCity_EventScript_166B98:: @ 8166B98
 EventScript_166BA0:: @ 8166BA0
 	textcolor 0
 	applymovement 6, Movement_1A75E7
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
 	goto_if eq, EventScript_166BED

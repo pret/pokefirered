@@ -31,13 +31,13 @@ EventScript_IndigoPlateau_Exterior_Credits:: @ 8167264
 	special SpawnCameraObject
 	addobject 1
 	applymovement 1, Movement_167346
-	applymovement 255, Movement_167337
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167337
 	waitmovement 0
 	closedoor 11, 6
 	waitdooranim
 
 	@ Rival runs off
-	applymovement 255, Movement_16731B
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16731B
 	applymovement 1, Movement_16733E
 	waitmovement 0
 	delay 100
@@ -53,23 +53,23 @@ EventScript_IndigoPlateau_Exterior_Credits:: @ 8167264
 	delay 160
 
 	@ Oak looks at player, then walks off
-	applymovement 255, Movement_16731F
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16731F
 	applymovement 2, Movement_167348
 	waitmovement 0
 	delay 100
-	applymovement 255, Movement_16732E
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16732E
 	waitmovement 0
 	delay 155
 
 	@ Player turns to face the League
-	applymovement 255, Movement_16733C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16733C
 	waitmovement 0
 	delay 90
 
 	@ Player runs off
-	applymovement 255, Movement_167335
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167335
 	waitmovement 0
-	applymovement 255, Movement_167311
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167311
 	waitmovement 0
 
 	@ Reset the map state and roll the credits

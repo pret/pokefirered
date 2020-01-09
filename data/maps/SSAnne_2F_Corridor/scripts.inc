@@ -72,12 +72,12 @@ EventScript_1609AD:: @ 81609AD
 
 EventScript_1609B8:: @ 81609B8
 	applymovement 1, Movement_160A2E
-	applymovement 255, Movement_160A24
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_160A24
 	waitmovement 0
 	return
 
 EventScript_1609CA:: @ 81609CA
-	applymovement 255, Movement_160A1E
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_160A1E
 	applymovement 1, Movement_160A34
 	waitmovement 0
 	return

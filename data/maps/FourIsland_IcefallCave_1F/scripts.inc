@@ -19,7 +19,7 @@ FourIsland_IcefallCave_1F_OnFrame:: @ 8163D5B
 EventScript_163D65:: @ 8163D65
 	lockall
 	delay 20
-	applymovement 255, Movement_163D7F
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163D7F
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60

@@ -64,7 +64,7 @@ EventScript_168A9B:: @ 8168A9B
 	applymovement 1, Movement_1A75EB
 	waitmovement 0
 	delay 45
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	textcolor 0
 	msgbox gUnknown_818B171

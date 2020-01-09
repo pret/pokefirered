@@ -18,16 +18,16 @@ PokemonLeague_HallOfFame_OnFrame:: @ 8162D66
 EventScript_162D70:: @ 8162D70
 	lockall
 	textcolor 0
-	applymovement 255, Movement_162DCD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_162DCD
 	waitmovement 0
 	applymovement 1, Movement_1A75E7
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	delay 18
 	msgbox gUnknown_817922F
 	closemessage
 	applymovement 1, Movement_1A75E9
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	delay 20
 	dofieldeffect 62

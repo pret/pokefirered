@@ -24,7 +24,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	call_if ne, EventScript_172206
 	delay 30
 	playbgm MUS_P_SCHOOL, 0
-	applymovement 255, Movement_172231
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_172231
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
@@ -35,7 +35,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	end
 
 EventScript_172206:: @ 8172206
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 

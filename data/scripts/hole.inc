@@ -7,7 +7,7 @@ EventScript_1C1338:: @ 81C1338
 EventScript_1C1348:: @ 81C1348
 	lockall
 	delay 20
-	applymovement 255, Movement_1C137A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1C137A
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60
@@ -18,7 +18,7 @@ EventScript_1C1348:: @ 81C1348
 EventScript_1C1361:: @ 81C1361
 	lockall
 	delay 20
-	applymovement 255, Movement_1C137A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1C137A
 	waitmovement 0
 	playse SE_RU_HYUU
 	delay 60

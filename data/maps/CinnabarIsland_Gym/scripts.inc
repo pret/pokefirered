@@ -289,13 +289,13 @@ EventScript_16DC7A:: @ 816DC7A
 	end
 
 EventScript_16DCB4:: @ 816DCB4
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 1, Movement_16DCD8
 	waitmovement 0
 	return
 
 EventScript_16DCC6:: @ 816DCC6
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 1, Movement_16DCDB
 	waitmovement 0
 	return
@@ -368,13 +368,13 @@ EventScript_16DD51:: @ 816DD51
 	end
 
 EventScript_16DD8B:: @ 816DD8B
-	applymovement 255, Movement_16DDB7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16DDB7
 	applymovement 3, Movement_16DDAF
 	waitmovement 0
 	return
 
 EventScript_16DD9D:: @ 816DD9D
-	applymovement 255, Movement_16DDB7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16DDB7
 	applymovement 3, Movement_16DDB3
 	waitmovement 0
 	return
@@ -456,13 +456,13 @@ EventScript_16DE2F:: @ 816DE2F
 	end
 
 EventScript_16DE69:: @ 816DE69
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 4, Movement_16DE8D
 	waitmovement 0
 	return
 
 EventScript_16DE7B:: @ 816DE7B
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 4, Movement_16DE90
 	waitmovement 0
 	return
@@ -535,13 +535,13 @@ EventScript_16DF06:: @ 816DF06
 	end
 
 EventScript_16DF40:: @ 816DF40
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 5, Movement_16DF64
 	waitmovement 0
 	return
 
 EventScript_16DF52:: @ 816DF52
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 5, Movement_16DF67
 	waitmovement 0
 	return
@@ -614,13 +614,13 @@ EventScript_16DFDD:: @ 816DFDD
 	end
 
 EventScript_16E017:: @ 816E017
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 6, Movement_16E03B
 	waitmovement 0
 	return
 
 EventScript_16E029:: @ 816E029
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 6, Movement_16E03E
 	waitmovement 0
 	return
@@ -693,13 +693,13 @@ EventScript_16E0B4:: @ 816E0B4
 	end
 
 EventScript_16E0EE:: @ 816E0EE
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 7, Movement_16E112
 	waitmovement 0
 	return
 
 EventScript_16E100:: @ 816E100
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	applymovement 7, Movement_16E115
 	waitmovement 0
 	return

@@ -39,7 +39,7 @@ EventScript_16A37B:: @ 816A37B
 PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 	lockall
 	setvar VAR_0x4001, 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -47,7 +47,7 @@ PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
 PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 	lockall
 	setvar VAR_0x4001, 1
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -55,7 +55,7 @@ PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
 PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
 	lockall
 	setvar VAR_0x4001, 2
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	goto EventScript_16A3D1
 	end
@@ -69,7 +69,7 @@ EventScript_16A3D1:: @ 816A3D1
 	msgbox gUnknown_81904F9
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, Movement_16A48E
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A48E
 	waitmovement 0
 	releaseall
 	end
@@ -96,17 +96,17 @@ EventScript_16A402:: @ 816A402
 	end
 
 EventScript_16A455:: @ 816A455
-	applymovement 255, Movement_16A490
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A490
 	waitmovement 0
 	return
 
 EventScript_16A460:: @ 816A460
-	applymovement 255, Movement_16A495
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A495
 	waitmovement 0
 	return
 
 EventScript_16A46B:: @ 816A46B
-	applymovement 255, Movement_16A499
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A499
 	waitmovement 0
 	return
 
@@ -114,7 +114,7 @@ EventScript_16A476:: @ 816A476
 	msgbox gUnknown_819051C
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, Movement_16A48E
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A48E
 	waitmovement 0
 	releaseall
 	end

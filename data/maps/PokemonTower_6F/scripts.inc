@@ -14,7 +14,7 @@ PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	special sub_8112364
 	compare VAR_RESULT, 0
 	goto_if eq, EventScript_1634F5
-	applymovement 255, Movement_163512
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163512
 	waitmovement 0
 	releaseall
 	end

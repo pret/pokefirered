@@ -172,7 +172,7 @@ EventScript_1706FA:: @ 81706FA
 	clearflag FLAG_TEMP_2
 	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	special SpawnCameraObject
-	applymovement 127, Movement_1707BE
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_1707BE
 	waitmovement 0
 	delay 35
 	playse SE_PIN
@@ -207,7 +207,7 @@ EventScript_1706FA:: @ 81706FA
 	applymovement 1, Movement_170888
 	waitmovement 0
 	waitfanfare
-	applymovement 127, Movement_1707C3
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_1707C3
 	waitmovement 0
 	playse SE_C_MAKU_D
 	closedoor 3, 3

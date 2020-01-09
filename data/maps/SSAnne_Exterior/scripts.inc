@@ -23,7 +23,7 @@ SSAnne_Exterior_160859:: @ 8160859
 	special Special_SSAnneDepartureCutscene
 	waitstate
 	removeobject 1
-	applymovement 255, Movement_1608B7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1608B7
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 2
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
@@ -33,12 +33,12 @@ SSAnne_Exterior_160859:: @ 8160859
 	end
 
 EventScript_1608A1:: @ 81608A1
-	applymovement 255, Movement_1608C1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1608C1
 	waitmovement 0
 	return
 
 EventScript_1608AC:: @ 81608AC
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 

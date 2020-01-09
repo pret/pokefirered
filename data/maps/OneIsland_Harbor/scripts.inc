@@ -18,7 +18,7 @@ OneIsland_Harbor_OnFrame:: @ 8171392
 EventScript_17139C:: @ 817139C
 	lockall
 	textcolor 0
-	applymovement 255, Movement_1713B9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1713B9
 	waitmovement 0
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 2
 	warp MAP_ONE_ISLAND, 255, 12, 18

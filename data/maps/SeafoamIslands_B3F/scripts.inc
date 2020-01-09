@@ -57,12 +57,12 @@ EventScript_162FF0:: @ 8162FF0
 	return
 
 EventScript_162FF6:: @ 8162FF6
-	applymovement 255, Movement_163013
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163013
 	waitmovement 0
 	return
 
 EventScript_163001:: @ 8163001
-	applymovement 255, Movement_163021
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163021
 	waitmovement 0
 	return
 

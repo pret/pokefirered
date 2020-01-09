@@ -32,12 +32,12 @@ SevenIsland_House_Room1_OnFrame:: @ 81708CF
 EventScript_1708E9:: @ 1708E9
 	lockall
 	textcolor 1
-	applymovement 255, Movement_170953
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170953
 	waitmovement 0
 	applymovement 1, Movement_170955
 	waitmovement 0
 	moveobjectoffscreen 1
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	call_if eq, EventScript_170938
@@ -134,19 +134,19 @@ EventScript_170A1E:: @ 8170A1E
 
 EventScript_170A2D:: @ 8170A2D
 	applymovement VAR_LAST_TALKED, Movement_170A6F
-	applymovement 255, Movement_170A63
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A63
 	waitmovement 0
 	return
 
 EventScript_170A3F:: @ 8170A3F
 	applymovement VAR_LAST_TALKED, Movement_170A72
-	applymovement 255, Movement_170A67
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A67
 	waitmovement 0
 	return
 
 EventScript_170A51:: @ 8170A51
 	applymovement VAR_LAST_TALKED, Movement_170A6F
-	applymovement 255, Movement_170A6B
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A6B
 	waitmovement 0
 	return
 

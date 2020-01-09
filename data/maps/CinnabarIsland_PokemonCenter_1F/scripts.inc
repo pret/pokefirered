@@ -55,19 +55,19 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 
 EventScript_16E96F:: @ 816E96F
 	applymovement 7, Movement_16E9AF
-	applymovement 255, Movement_16E9B9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9B9
 	waitmovement 0
 	return
 
 EventScript_16E981:: @ 816E981
 	applymovement 7, Movement_16E9C3
-	applymovement 255, Movement_16E9CF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9CF
 	waitmovement 0
 	return
 
 EventScript_16E993:: @ 816E993
 	applymovement 7, Movement_16E9AF
-	applymovement 255, Movement_16E9DE
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9DE
 	waitmovement 0
 	return
 

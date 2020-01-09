@@ -25,13 +25,13 @@ Route6_NorthEntrance_EventScript_16F9E8:: @ 816F9E8
 
 EventScript_16F9F4:: @ 816F9F4
 	textcolor 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FA1E
 	msgbox gUnknown_819E181
 	closemessage
-	applymovement 255, Movement_16FA8A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FA8A
 	waitmovement 0
 	releaseall
 	end
@@ -56,17 +56,17 @@ EventScript_16FA29:: @ 816FA29
 	end
 
 EventScript_16FA62:: @ 816FA62
-	applymovement 255, Movement_16FA83
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FA83
 	waitmovement 0
 	return
 
 EventScript_16FA6D:: @ 816FA6D
-	applymovement 255, Movement_16FA86
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FA86
 	waitmovement 0
 	return
 
 EventScript_16FA78:: @ 816FA78
-	applymovement 255, Movement_16FA88
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FA88
 	waitmovement 0
 	return
 

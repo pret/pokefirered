@@ -80,7 +80,7 @@ SeafoamIslands_B4F_OnFrame:: @ 81630F9
 
 EventScript_16310B:: @ 816310B
 	lockall
-	applymovement 255, Movement_16311D
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16311D
 	waitmovement 0
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 0
 	releaseall
@@ -116,12 +116,12 @@ EventScript_163169:: @ 8163169
 	return
 
 EventScript_16316F:: @ 816316F
-	applymovement 255, Movement_16318C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16318C
 	waitmovement 0
 	return
 
 EventScript_16317A:: @ 816317A
-	applymovement 255, Movement_163195
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163195
 	waitmovement 0
 	return
 
@@ -153,7 +153,7 @@ Movement_163195:: @ 8163195
 
 SeafoamIslands_B4F_EventScript_16319D:: @ 816319D
 	lockall
-	applymovement 255, Movement_1631AA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1631AA
 	waitmovement 0
 	releaseall
 	end

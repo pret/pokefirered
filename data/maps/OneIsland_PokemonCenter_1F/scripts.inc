@@ -61,11 +61,11 @@ OneIsland_PokemonCenter_1F_OnFrame:: @ 8170CA7
 EventScript_170CB1:: @ 8170CB1
 	lockall
 	textcolor 0
-	applymovement 255, Movement_170E7D
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170E7D
 	applymovement 2, Movement_170E86
 	waitmovement 0
 	msgbox gUnknown_81A0CDE
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	playse SE_PIN
 	applymovement 3, Movement_1A75DB
@@ -77,12 +77,12 @@ EventScript_170CB1:: @ 8170CB1
 	msgbox gUnknown_81A0CF7
 	msgbox gUnknown_81A0D27
 	applymovement 2, Movement_1A75ED
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	msgbox gUnknown_81A0D72
 	applymovement 2, Movement_1A75EB
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	checkflag FLAG_SYS_GAME_CLEAR
 	call_if TRUE, EventScript_170E34
@@ -101,7 +101,7 @@ EventScript_170CB1:: @ 8170CB1
 	msgbox gUnknown_81A0F40
 	applymovement 2, Movement_1A75ED
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	msgbox gUnknown_81A0FB1
 	giveitemfanfaremsg gUnknown_81A10EE, ITEM_METEORITE, 1, MUS_FAN5
@@ -476,7 +476,7 @@ EventScript_1711DA:: @ 81711DA
 	call_if eq, EventScript_171305
 	delay 10
 	msgbox gUnknown_81A13CB
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	msgbox gUnknown_81A1431
 	applymovement 2, Movement_1A75ED
@@ -489,7 +489,7 @@ EventScript_1711DA:: @ 81711DA
 	applymovement 2, Movement_1A75E7
 	waitmovement 0
 	delay 10
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	delay 15
 	msgbox gUnknown_81A14FB
@@ -499,12 +499,12 @@ EventScript_1711DA:: @ 81711DA
 	delay 15
 	applymovement 3, Movement_1A75E7
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	msgbox gUnknown_81A1574
 	closemessage
 	delay 25
-	applymovement 255, Movement_171326
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_171326
 	applymovement 2, Movement_17132D
 	waitmovement 0
 	playse SE_KAIDAN
@@ -518,22 +518,22 @@ EventScript_1711DA:: @ 81711DA
 	end
 
 EventScript_1712E4:: @ 81712E4
-	applymovement 255, Movement_171310
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_171310
 	waitmovement 0
 	return
 
 EventScript_1712EF:: @ 81712EF
-	applymovement 255, Movement_171314
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_171314
 	waitmovement 0
 	return
 
 EventScript_1712FA:: @ 81712FA
-	applymovement 255, Movement_171316
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_171316
 	waitmovement 0
 	return
 
 EventScript_171305:: @ 8171305
-	applymovement 255, Movement_17131A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_17131A
 	waitmovement 0
 	return
 

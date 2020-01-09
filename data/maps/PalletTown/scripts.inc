@@ -64,13 +64,13 @@ EventScript_1654D8:: @ 81654D8
 	msgbox gUnknown_817D9AA
 	closemessage
 	playbgm MUS_ANNAI, 0
-	applymovement 255, Movement_1655DD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1655DD
 	applymovement 3, Movement_1655CC
 	waitmovement 0
 	opendoor 16, 13
 	waitdooranim
 	applymovement 3, Movement_16572E
-	applymovement 255, Movement_165758
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165758
 	waitmovement 0
 	closedoor 16, 13
 	waitdooranim
@@ -192,10 +192,10 @@ EventScript_165605:: @ 8165605
 	waitmessage
 	delay 85
 	closemessage
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	playse SE_PIN
-	applymovement 255, Movement_1A75DB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75DB
 	waitmovement 0
 	delay 30
 	addobject 3
@@ -214,7 +214,7 @@ EventScript_165605:: @ 8165605
 	opendoor 16, 13
 	waitdooranim
 	applymovement 3, Movement_16572E
-	applymovement 255, Movement_165758
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165758
 	waitmovement 0
 	closedoor 16, 13
 	waitdooranim
@@ -240,13 +240,13 @@ EventScript_1656C3:: @ 81656C3
 
 EventScript_1656CE:: @ 81656CE
 	applymovement 3, Movement_165705
-	applymovement 255, Movement_165731
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165731
 	waitmovement 0
 	return
 
 EventScript_1656E0:: @ 81656E0
 	applymovement 3, Movement_165719
-	applymovement 255, Movement_165744
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165744
 	waitmovement 0
 	return
 
@@ -475,7 +475,7 @@ PalletTown_EventScript_16586B:: @ 816586B
 PalletTown_EventScript_16587B:: @ 816587B
 	lockall
 	applymovement 1, Movement_1A75EB
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	call EventScript_165894
 	releaseall

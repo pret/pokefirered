@@ -46,7 +46,7 @@ EventScript_164B90:: @ 8164B90
 	setvar VAR_ELEVATOR_FLOOR, 3
 	special Special_CloseElevatorCurrentFloorWindow
 	delay 25
-	applymovement 255, Movement_164BE5
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164BE5
 	waitmovement 0
 	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
 	waitstate

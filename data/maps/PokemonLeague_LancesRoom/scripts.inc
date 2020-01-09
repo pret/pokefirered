@@ -39,7 +39,7 @@ PokemonLeague_LancesRoom_OnFrame:: @ 816297D
 
 EventScript_162987:: @ 8162987
 	lockall
-	applymovement 255, Movement_1629F1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1629F1
 	waitmovement 0
 	setflag FLAG_TEMP_2
 	call EventScript_1629A8

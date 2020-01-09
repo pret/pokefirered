@@ -14,17 +14,17 @@ OneIsland_OnFrame:: @ 8167493
 EventScript_16749D:: @ 816749D
 	lockall
 	textcolor 0
-	applymovement 255, Movement_167505
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167505
 	waitmovement 0
 	msgbox gUnknown_818161B
 	closemessage
 	applymovement 1, Movement_167507
-	applymovement 255, Movement_1674F4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1674F4
 	waitmovement 0
 	opendoor 14, 5
 	waitdooranim
 	applymovement 1, Movement_167514
-	applymovement 255, Movement_167501
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167501
 	waitmovement 0
 	closedoor 14, 5
 	waitdooranim

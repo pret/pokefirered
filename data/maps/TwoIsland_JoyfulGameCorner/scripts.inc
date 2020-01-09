@@ -62,13 +62,13 @@ EventScript_17145F:: @ 817145F
 	waitmovement 0
 	applymovement 1, Movement_171527
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	msgbox gUnknown_81A2465
 	closemessage
 	playse SE_DOOR
 	waitse
-	applymovement 255, Movement_17152C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_17152C
 	waitmovement 0
 	playbgm MUS_SHOUNEN, 0
 	addobject 2

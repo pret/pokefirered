@@ -101,22 +101,22 @@ EventScript_16786F:: @ 816786F
 	return
 
 EventScript_167931:: @ 8167931
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
 EventScript_16793C:: @ 816793C
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_167947:: @ 8167947
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_167952:: @ 8167952
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	return
 
@@ -300,20 +300,20 @@ EventScript_167BD8:: @ 8167BD8
 EventScript_167BEA:: @ 8167BEA
 	applymovement 4, Movement_1A75ED
 	applymovement 3, Movement_167C64
-	applymovement 255, Movement_167C68
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	waitmovement 0
 	return
 
 EventScript_167C03:: @ 8167C03
 	applymovement 4, Movement_1A75ED
-	applymovement 255, Movement_167C68
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	applymovement 3, Movement_167C6C
 	waitmovement 0
 	return
 
 EventScript_167C1C:: @ 8167C1C
 	applymovement 4, Movement_1A75ED
-	applymovement 255, Movement_167C68
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C68
 	applymovement 3, Movement_167C71
 	waitmovement 0
 	return
@@ -321,7 +321,7 @@ EventScript_167C1C:: @ 8167C1C
 EventScript_167C35:: @ 8167C35
 	msgbox gUnknown_8182453
 	closemessage
-	applymovement 255, Movement_167C55
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167C55
 	waitmovement 0
 	applymovement 5, Movement_167C59
 	waitmovement 0

@@ -50,7 +50,7 @@ EventScript_1703D6:: @ 81703D6
 	textcolor 0
 	msgbox gUnknown_819FD60
 	closemessage
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	delay 20
 	compare VAR_0x8008, 1
@@ -63,28 +63,28 @@ EventScript_1703D6:: @ 81703D6
 	call_if eq, EventScript_170450
 	msgbox gUnknown_819FD0C
 	closemessage
-	applymovement 255, Movement_170469
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170469
 	waitmovement 0
 	releaseall
 	end
 
 EventScript_17042F:: @ 817042F
-	applymovement 255, Movement_17045B
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_17045B
 	waitmovement 0
 	return
 
 EventScript_17043A:: @ 817043A
-	applymovement 255, Movement_17045D
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_17045D
 	waitmovement 0
 	return
 
 EventScript_170445:: @ 8170445
-	applymovement 255, Movement_170460
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170460
 	waitmovement 0
 	return
 
 EventScript_170450:: @ 8170450
-	applymovement 255, Movement_170464
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170464
 	waitmovement 0
 	return
 

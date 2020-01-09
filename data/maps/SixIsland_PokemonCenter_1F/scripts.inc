@@ -33,7 +33,7 @@ EventScript_171D97:: @ 8171D97
 	waitmovement 0
 	msgbox gUnknown_81A3F30
 	closemessage
-	applymovement 255, Movement_171E02
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_171E02
 	applymovement 2, Movement_171DFE
 	waitmovement 0
 	fadedefaultbgm

@@ -42,7 +42,7 @@ EventScript_1619D4:: @ 81619D4
 	playbgm MUS_RIVAL1, 0
 	applymovement 1, Movement_1A75DB
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	applymovement 1, Movement_1A75DD
 	waitmovement 0
 	msgbox gUnknown_8176710

@@ -76,22 +76,22 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	end
 
 EventScript_1642F9:: @ 81642F9
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_164304:: @ 8164304
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_16430F:: @ 816430F
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_16431A:: @ 816431A
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
@@ -118,51 +118,51 @@ EventScript_164346:: @ 8164346
 EventScript_164351:: @ 8164351
 	applymovement 2, Movement_1643F5
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
 EventScript_164366:: @ 8164366
 	applymovement 2, Movement_1643F5
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75ED
 	waitmovement 0
 	return
 
 EventScript_16437B:: @ 816437B
 	applymovement 2, Movement_1643F7
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	return
 
 EventScript_164390:: @ 8164390
 	applymovement 2, Movement_1643F7
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_1643A5:: @ 81643A5
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_1643F9
 	waitmovement 0
 	return
 
 EventScript_1643B7:: @ 81643B7
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164401
 	waitmovement 0
 	return
 
 EventScript_1643C9:: @ 81643C9
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164409
 	waitmovement 0
 	return
 
 EventScript_1643DB:: @ 81643DB
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164409
 	waitmovement 0
 	return

@@ -49,12 +49,12 @@ EventScript_165931:: @ 8165931
 ViridianCity_EventScript_16596D:: @ 816596D
 	lockall
 	textcolor 3
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	delay 20
 	msgbox gUnknown_817E2F5
 	closemessage
-	applymovement 255, Movement_165992
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165992
 	waitmovement 0
 	releaseall
 	end
@@ -208,7 +208,7 @@ ViridianCity_EventScript_165AF6:: @ 8165AF6
 	textcolor 0
 	msgbox gUnknown_817DD03
 	closemessage
-	applymovement 255, Movement_165B0E
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_165B0E
 	waitmovement 0
 	releaseall
 	end
@@ -222,7 +222,7 @@ ViridianCity_EventScript_165B10:: @ 8165B10
 	textcolor 0
 	applymovement 4, Movement_1A75E7
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	call EventScript_165B4C
 	release
@@ -233,7 +233,7 @@ ViridianCity_EventScript_165B2E:: @ 8165B2E
 	textcolor 0
 	applymovement 4, Movement_1A75EB
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	call EventScript_165B4C
 	release

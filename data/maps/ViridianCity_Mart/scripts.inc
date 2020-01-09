@@ -25,7 +25,7 @@ EventScript_16A205:: @ 816A205
 	msgbox gUnknown_819021A
 	closemessage
 	applymovement 1, Movement_16A262
-	applymovement 255, Movement_16A25C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16A25C
 	waitmovement 0
 	msgbox gUnknown_819023A
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1

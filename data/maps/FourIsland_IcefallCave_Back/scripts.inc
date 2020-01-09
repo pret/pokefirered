@@ -38,7 +38,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	delay 35
 	applymovement 4, Movement_163F11
 	applymovement 3, Movement_163F18
-	applymovement 255, Movement_163EDD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163EDD
 	waitmovement 0
 	applymovement 2, Movement_163EE8
 	waitmovement 0
@@ -66,7 +66,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	msgbox gUnknown_817B399
 	closemessage
 	applymovement 3, Movement_163F1D
-	applymovement 255, Movement_163EE2
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_163EE2
 	applymovement 1, Movement_163EF0
 	applymovement 2, Movement_163EFA
 	applymovement 4, Movement_163F05
@@ -77,7 +77,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	delay 50
 	applymovement 3, Movement_163F23
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	textcolor 1
 	msgbox gUnknown_817B457

@@ -11,11 +11,11 @@ FuchsiaCity_SafariZone_Entrance_OnFrame:: @ 816D2AE
 EventScript_16D2C8:: @ 816D2C8
 	lockall
 	textcolor 0
-	applymovement 255, Movement_16D36A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D36A
 	waitmovement 0
 	msgbox gUnknown_8197E85
 	closemessage
-	applymovement 255, Movement_16D367
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D367
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -27,7 +27,7 @@ EventScript_16D2F2:: @ 816D2F2
 	textcolor 0
 	msgbox gUnknown_8197E85
 	closemessage
-	applymovement 255, Movement_16D362
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D362
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -42,7 +42,7 @@ EventScript_16D312:: @ 816D312
 	goto_if eq, EventScript_16D345
 	msgbox gUnknown_8197E48
 	closemessage
-	applymovement 255, Movement_16D362
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D362
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -52,7 +52,7 @@ EventScript_16D312:: @ 816D312
 EventScript_16D345:: @ 816D345
 	msgbox gUnknown_8197E7A
 	closemessage
-	applymovement 255, Movement_16D365
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D365
 	waitmovement 0
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
 	waitstate
@@ -98,7 +98,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D385:: @ 816D385
 EventScript_16D391:: @ 816D391
 	textcolor 0
 	msgbox gUnknown_8197C6B
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_8197C87, MSGBOX_YESNO
@@ -137,17 +137,17 @@ EventScript_16D3CA:: @ 816D3CA
 	end
 
 EventScript_16D441:: @ 816D441
-	applymovement 255, Movement_16D4AF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D4AF
 	waitmovement 0
 	return
 
 EventScript_16D44C:: @ 816D44C
-	applymovement 255, Movement_16D4AC
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D4AC
 	waitmovement 0
 	return
 
 EventScript_16D457:: @ 816D457
-	applymovement 255, Movement_16D4B3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D4B3
 	waitmovement 0
 	return
 
@@ -170,7 +170,7 @@ EventScript_16D48C:: @ 816D48C
 EventScript_16D49A:: @ 816D49A
 	closemessage
 	hidemoneybox 0, 0
-	applymovement 255, Movement_16D4AA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D4AA
 	waitmovement 0
 	releaseall
 	end

@@ -132,7 +132,7 @@ EventScript_167048:: @ 8167048
 EventScript_167053:: @ 8167053
 	applymovement 3, Movement_1671A6
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	return
 
@@ -172,7 +172,7 @@ Movement_1670AB:: @ 81670AB
 	step_end
 
 EventScript_1670B3:: @ 81670B3
-	applymovement 255, Movement_1670DB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1670DB
 	applymovement 3, Movement_1670DE
 	waitmovement 0
 	opendoor 14, 11
@@ -226,7 +226,7 @@ EventScript_1670E6:: @ 81670E6
 
 EventScript_167142:: @ 8167142
 	applymovement 3, Movement_1671AF
-	applymovement 255, Movement_1671AF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671AF
 	waitmovement 0
 	return
 
@@ -243,13 +243,13 @@ EventScript_167166:: @ 8167166
 
 EventScript_167171:: @ 8167171
 	applymovement 3, Movement_16719D
-	applymovement 255, Movement_1671BA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671BA
 	waitmovement 0
 	return
 
 EventScript_167183:: @ 8167183
 	applymovement 3, Movement_1671B6
-	applymovement 255, Movement_1671C4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671C4
 	waitmovement 0
 	return
 
@@ -326,12 +326,12 @@ Movement_1671C4:: @ 81671C4
 
 CinnabarIsland_EventScript_1671CA:: @ 81671CA
 	lockall
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	delay 20
 	msgbox gUnknown_8180B20
 	closemessage
-	applymovement 255, Movement_1671ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671ED
 	waitmovement 0
 	releaseall
 	end

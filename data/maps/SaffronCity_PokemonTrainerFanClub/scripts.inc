@@ -21,7 +21,7 @@ EventScript_16F0D4:: @ 816F0D4
 	closemessage
 	applymovement 1, Movement_16F124
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	msgbox gUnknown_819C235
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2

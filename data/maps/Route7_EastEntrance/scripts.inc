@@ -25,13 +25,13 @@ Route7_EastEntrance_EventScript_16FAAF:: @ 816FAAF
 
 EventScript_16FABB:: @ 816FABB
 	textcolor 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16FAE5
 	msgbox gUnknown_819E2B7
 	closemessage
-	applymovement 255, Movement_16FB51
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FB51
 	waitmovement 0
 	releaseall
 	end
@@ -56,17 +56,17 @@ EventScript_16FAF0:: @ 816FAF0
 	end
 
 EventScript_16FB29:: @ 816FB29
-	applymovement 255, Movement_16FB4F
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FB4F
 	waitmovement 0
 	return
 
 EventScript_16FB34:: @ 816FB34
-	applymovement 255, Movement_16FB4A
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FB4A
 	waitmovement 0
 	return
 
 EventScript_16FB3F:: @ 816FB3F
-	applymovement 255, Movement_16FB4C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FB4C
 	waitmovement 0
 	return
 

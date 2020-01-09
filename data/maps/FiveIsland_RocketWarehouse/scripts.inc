@@ -95,7 +95,7 @@ EventScript_16402F:: @ 816402F
 	end
 
 EventScript_164065:: @ 8164065
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	return
 
@@ -143,7 +143,7 @@ EventScript_1640A2:: @ 81640A2
 EventScript_16412E:: @ 816412E
 	compare VAR_0x8004, 27
 	goto_if eq, EventScript_1A77A9
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75EB
 	waitmovement 0
 	return
 

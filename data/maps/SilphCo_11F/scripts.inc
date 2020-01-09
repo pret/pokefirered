@@ -93,7 +93,7 @@ EventScript_161EA0:: @ 8161EA0
 
 EventScript_161F00:: @ 8161F00
 	applymovement 3, Movement_161F1D
-	applymovement 255, Movement_161F27
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_161F27
 	waitmovement 0
 	return
 

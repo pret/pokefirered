@@ -13,7 +13,7 @@ SevenIsland_House_Room2_OnFrame:: @ 8170A8D
 
 EventScript_170A97:: @ 8170A97
 	lockall
-	applymovement 255, Movement_170B22
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B22
 	waitmovement 0
 	special PrintEReaderTrainerGreeting
 	msgbox gStringVar4
@@ -30,7 +30,7 @@ EventScript_170A97:: @ 8170A97
 	call_if eq, EventScript_170B17
 	closemessage
 	special sp000_heal_pokemon
-	applymovement 255, Movement_170B28
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B28
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_0x4001, 1

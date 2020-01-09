@@ -68,7 +68,7 @@ EventScript_168350:: @ 8168350
 
 EventScript_16835B:: @ 816835B
 	applymovement 1, Movement_1683D9
-	applymovement 255, Movement_1683E3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1683E3
 	waitmovement 0
 	return
 
@@ -230,7 +230,7 @@ EventScript_16849C:: @ 816849C
 
 EventScript_1684A7:: @ 81684A7
 	applymovement 1, Movement_1683D9
-	applymovement 255, Movement_1683E3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1683E3
 	waitmovement 0
 	return
 

@@ -25,13 +25,13 @@ Route5_SouthEntrance_EventScript_16F922:: @ 816F922
 
 EventScript_16F92E:: @ 816F92E
 	textcolor 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	checkflag FLAG_GOT_TEA
 	goto_if TRUE, EventScript_16F958
 	msgbox gUnknown_819E04B
 	closemessage
-	applymovement 255, Movement_16F9C4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16F9C4
 	waitmovement 0
 	releaseall
 	end
@@ -56,17 +56,17 @@ EventScript_16F963:: @ 816F963
 	end
 
 EventScript_16F99C:: @ 816F99C
-	applymovement 255, Movement_16F9C2
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16F9C2
 	waitmovement 0
 	return
 
 EventScript_16F9A7:: @ 816F9A7
-	applymovement 255, Movement_16F9BD
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16F9BD
 	waitmovement 0
 	return
 
 EventScript_16F9B2:: @ 816F9B2
-	applymovement 255, Movement_16F9BF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16F9BF
 	waitmovement 0
 	return
 

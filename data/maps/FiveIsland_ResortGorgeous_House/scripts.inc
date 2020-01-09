@@ -74,14 +74,14 @@ EventScript_171FCD:: @ 8171FCD
 	applymovement 1, Movement_1A75ED
 	applymovement 2, Movement_17204D
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E7
 	waitmovement 0
 	return
 
 EventScript_171FE9:: @ 8171FE9
 	applymovement 2, Movement_172055
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 
@@ -89,7 +89,7 @@ EventScript_171FFE:: @ 8171FFE
 	applymovement 1, Movement_1A75E7
 	applymovement 2, Movement_172059
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75E9
 	waitmovement 0
 	return
 

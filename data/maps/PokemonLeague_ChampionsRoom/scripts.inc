@@ -56,7 +56,7 @@ EventScript_162B76:: @ 8162B76
 	lockall
 	textcolor 0
 	setflag FLAG_TEMP_2
-	applymovement 255, Movement_162D07
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_162D07
 	waitmovement 0
 	delay 20
 	checkflag FLAG_SYS_GAME_CLEAR
@@ -82,7 +82,7 @@ EventScript_162B76:: @ 8162B76
 	addobject 2
 	msgbox gUnknown_8178FC6
 	closemessage
-	applymovement 255, Movement_162D1F
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_162D1F
 	applymovement 1, Movement_162D41
 	applymovement 2, Movement_162D2A
 	waitmovement 0
@@ -102,7 +102,7 @@ EventScript_162B76:: @ 8162B76
 	closemessage
 	delay 13
 	applymovement 2, Movement_162D37
-	applymovement 255, Movement_162D12
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_162D12
 	waitmovement 0
 	setvar VAR_0x4001, 1
 	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 255, 5, 12

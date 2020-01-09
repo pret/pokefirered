@@ -1,5 +1,3 @@
-ENTRY(Start)
-
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
@@ -182,7 +180,8 @@ SECTIONS {
         src/menu_helpers.o(.text);
         asm/script_pokemon_util_80BF8FC.o(.text);
         src/heal_location.o(.text);
-        asm/region_map.o(.text);
+        src/region_map.o(.text);
+        src/image_processing_effects.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
@@ -479,7 +478,8 @@ SECTIONS {
         src/mon_markings.o(.rodata);
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);
-        data/region_map.o(.rodata);
+        src/region_map.o(.rodata);
+        src/image_processing_effects.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);

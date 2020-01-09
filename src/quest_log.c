@@ -3119,7 +3119,7 @@ static const u16 *sub_8113FBC(const u16 *a0)
         StringCopy(gStringVar1, ItemId_GetName(r5[0]));
         if (r5[0] == ITEM_ESCAPE_ROPE)
         {
-            GetMapNameGeneric(gStringVar2, r5[2]);
+            GetMapNameGeneric(gStringVar2, (u8)r5[2]);
             StringExpandPlaceholders(gStringVar4, gUnknown_841AFA6);
         }
         else if (r5[1] != 0xFFFF)
@@ -4373,7 +4373,7 @@ static u16 *sub_81157DC(u16 *a0, const u16 *a1)
 static const u16 *sub_8115800(const u16 *a0)
 {
     const u16 *r4 = sub_8113E88(42, a0);
-    GetMapNameGeneric(gStringVar1, r4[0]);
+    GetMapNameGeneric(gStringVar1, (u8)r4[0]);
     StringExpandPlaceholders(gStringVar4, gUnknown_841B064);
     return r4 + 1;
 }

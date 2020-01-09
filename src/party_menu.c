@@ -4201,7 +4201,7 @@ static void sub_8124BB0(struct Pokemon *mon, u8 fieldMove)
     Free(ptr);
 }
 
-void sub_8124C1C(const u8 *healLocCtrlData) // TODO: confirm the type of data chunk at 0x83F2EE0
+void sub_8124C1C(const u8 *healLocCtrlData)
 {
     const struct MapHeader *mapHeader;
     struct FieldMoveWarpParams *ptr2;

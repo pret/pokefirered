@@ -2,7 +2,7 @@ TwoIsland_JoyfulGameCorner_MapScripts:: @ 81713D0
 	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_JoyfulGameCorner_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, TwoIsland_JoyfulGameCorner_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, TwoIsland_JoyfulGameCorner_OnFrame
-	map_script MAP_SCRIPT_ON_LOAD, TwoIsland_JoyfulGameCorner_MapScript4_1BB237
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
 	.byte 0
 
 TwoIsland_JoyfulGameCorner_OnTransition:: @ 81713E5
@@ -19,17 +19,17 @@ EventScript_1713EF:: @ 81713EF
 
 TwoIsland_JoyfulGameCorner_OnWarp:: @ 8171404
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171416
-	map_script_2 VAR_0x406F, 8, EventScript_1BB227
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, EventScript_CheckTurnAttendant
 	.2byte 0
 
 EventScript_171416:: @ 8171416
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 TwoIsland_JoyfulGameCorner_OnFrame:: @ 817141B
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 0, EventScript_17145F
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171435
-	map_script_2 VAR_0x406F, 8, EventScript_1BB2FD
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_ExitMinigameRoom
 	.2byte 0
 
 EventScript_171435:: @ 8171435

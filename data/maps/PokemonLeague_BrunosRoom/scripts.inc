@@ -30,7 +30,7 @@ PokemonLeague_BrunosRoom_OnWarp:: @ 81626C6
 	.2byte 0
 
 EventScript_1626D0:: @ 81626D0
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 PokemonLeague_BrunosRoom_OnFrame:: @ 81626D5

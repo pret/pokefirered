@@ -150,7 +150,7 @@ EventScript_1A501A:: @ 81A501A
 	releaseall
 	end
 
-gStdScript_Message_WaitButton_AndRelease:: @ 81A501F
+Std_MsgboxAutoclose:: @ 81A501F
 	message 0x0
 	waitmessage
 	waitbuttonpress

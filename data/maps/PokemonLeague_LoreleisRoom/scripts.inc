@@ -35,7 +35,7 @@ PokemonLeague_LoreleisRoom_OnWarp:: @ 81625B6
 	.2byte 0
 
 EventScript_1625C0:: @ 81625C0
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 PokemonLeague_LoreleisRoom_OnFrame:: @ 81625C5

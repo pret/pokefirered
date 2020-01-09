@@ -340,7 +340,7 @@ EventScript_16CF3F:: @ 816CF3F
 
 EventScript_16CF79:: @ 816CF79
 	textcolor 3
-	msgbox gUnknown_81A5242
+	msgbox Text_TooBadBagFull
 	hidecoinsbox 0, 0
 	release
 	end

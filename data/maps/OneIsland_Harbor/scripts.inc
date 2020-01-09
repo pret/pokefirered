@@ -8,7 +8,7 @@ OneIsland_Harbor_OnWarp:: @ 8171383
 	.2byte 0
 
 EventScript_17138D:: @ 817138D
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 OneIsland_Harbor_OnFrame:: @ 8171392

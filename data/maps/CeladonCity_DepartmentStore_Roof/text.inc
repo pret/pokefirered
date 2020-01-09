@@ -12,7 +12,7 @@ gUnknown_8195D75:: @ 8195D75
     .string "Thank you!\n"
     .string "You can have this from me!$"
 
-Text_195DAD:: @ 8195DAD
+Text_ReceivedItemFromLittleGirl:: @ 8195DAD
     .string "{PLAYER} received a {STR_VAR_2}\n"
     .string "from the little girl.$"
 

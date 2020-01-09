@@ -8,7 +8,7 @@ FiveIsland_ResortGorgeous_OnWarp:: @ 81687EF
 	.2byte 0
 
 EventScript_1687F9:: @ 81687F9
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 FiveIsland_ResortGorgeous_OnFrame:: @ 81687FE

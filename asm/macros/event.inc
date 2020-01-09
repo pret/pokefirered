@@ -1432,15 +1432,36 @@
 	.endm
 
 	@ Message box types
+	MSGBOX_NPC = 2
+	MSGBOX_SIGN = 3
+	MSGBOX_DEFAULT = 4
 	MSGBOX_YESNO = 5
+	MSGBOX_AUTOCLOSE = 6
 
 	YES = 1
 	NO  = 0
 
-	.macro giveitem item, amount=1, function=0
+	@ Other callstd function names
+	STD_OBTAIN_ITEM = 0
+	STD_FIND_ITEM = 1
+	STD_PUT_ITEM_AWAY = 8
+
+	.macro giveitem item, amount=1
 	setorcopyvar 0x8000, \item
 	setorcopyvar 0x8001, \amount
-	callstd \function
+	callstd STD_OBTAIN_ITEM
+	.endm
+
+	.macro finditem item, amount=1
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	callstd STD_FIND_ITEM
+	.endm
+
+	.macro putitemaway item, amount=1
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	callstd STD_PUT_ITEM_AWAY
 	.endm
 
 	.macro giveitemfanfaremsg msg, item, amount=1, fanfare=MUS_FANFA1

@@ -3,8 +3,8 @@ VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
 	faceplayer
 	checkflag FLAG_TUTOR_DOUBLE_EDGE
 	goto_if TRUE, EventScript_1C480C
-	msgbox Text_1749F9, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1749F9, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4802
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -33,8 +33,8 @@ EventScript_1C4816:: @ 81C4816
 	faceplayer
 	checkflag FLAG_TUTOR_THUNDER_WAVE
 	goto_if TRUE, EventScript_1C4874
-	msgbox Text_175711, 5
-	compare VAR_RESULT, 0
+	msgbox Text_175711, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C486A
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -63,8 +63,8 @@ RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
 	faceplayer
 	checkflag FLAG_TUTOR_ROCK_SLIDE
 	goto_if TRUE, EventScript_1C48DC
-	msgbox Text_1799E0, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1799E0, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C48D2
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -93,8 +93,8 @@ MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
 	faceplayer
 	checkflag FLAG_TUTOR_EXPLOSION
 	goto_if TRUE, EventScript_1C4944
-	msgbox Text_17A642, 5
-	compare VAR_RESULT, 0
+	msgbox Text_17A642, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C493A
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -123,8 +123,8 @@ Route4_EventScript_1C494E:: @ 81C494E
 	faceplayer
 	checkflag FLAG_TUTOR_META_PUNCH
 	goto_if TRUE, EventScript_1C49AC
-	msgbox Text_1839D5, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1839D5, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C49A2
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -153,8 +153,8 @@ Route4_EventScript_1C49B6:: @ 81C49B6
 	faceplayer
 	checkflag FLAG_TUTOR_MEGA_KICK
 	goto_if TRUE, EventScript_1C4A14
-	msgbox Text_183B74, 5
-	compare VAR_RESULT, 0
+	msgbox Text_183B74, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4A0A
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -183,8 +183,8 @@ EventScript_1C4A1E:: @ 81C4A1E
 	faceplayer
 	checkflag FLAG_TUTOR_DREAM_EATER
 	goto_if TRUE, EventScript_1C4A7C
-	msgbox Text_17E316, 5
-	compare VAR_RESULT, 0
+	msgbox Text_17E316, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4A72
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -213,8 +213,8 @@ EventScript_1C4A86:: @ 81C4A86
 	faceplayer
 	checkflag FLAG_TUTOR_SOFT_BOILED
 	goto_if TRUE, EventScript_1C4AE4
-	msgbox Text_180388, 5
-	compare VAR_RESULT, 0
+	msgbox Text_180388, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4ADA
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -243,8 +243,8 @@ FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
 	faceplayer
 	checkflag FLAG_TUTOR_SUBSTITUTE
 	goto_if TRUE, EventScript_1C4B4C
-	msgbox Text_180948, 5
-	compare VAR_RESULT, 0
+	msgbox Text_180948, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4B42
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -273,8 +273,8 @@ SevenIsland_EventScript_1C4B56:: @ 81C4B56
 	faceplayer
 	checkflag FLAG_TUTOR_SWORDS_DANCE
 	goto_if TRUE, EventScript_1C4BB4
-	msgbox Text_182F01, 5
-	compare VAR_RESULT, 0
+	msgbox Text_182F01, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4BAA
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -303,8 +303,8 @@ PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
 	faceplayer
 	checkflag FLAG_TUTOR_SEISMIC_TOSS
 	goto_if TRUE, EventScript_1C4C1C
-	msgbox Text_1909A3, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1909A3, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4C12
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -333,8 +333,8 @@ EventScript_1C4C26:: @ 81C4C26
 	faceplayer
 	checkflag FLAG_TUTOR_COUNTER
 	goto_if TRUE, EventScript_1C4C84
-	msgbox Text_195928, 5
-	compare VAR_RESULT, 0
+	msgbox Text_195928, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4C7A
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -363,8 +363,8 @@ EventScript_1C4C8E:: @ 81C4C8E
 	faceplayer
 	checkflag FLAG_TUTOR_METRONOME
 	goto_if TRUE, EventScript_1C4CEC
-	msgbox Text_19A137, 5
-	compare VAR_RESULT, 0
+	msgbox Text_19A137, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4CE2
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -391,8 +391,8 @@ EventScript_1C4CEC:: @ 81C4CEC
 EventScript_1C4CF6:: @ 81C4CF6
 	checkflag FLAG_TUTOR_MIMIC
 	goto_if TRUE, EventScript_1C4D59
-	msgbox Text_19AD85, 5
-	compare VAR_RESULT, 0
+	msgbox Text_19AD85, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4D4F
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -436,8 +436,8 @@ FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
 	faceplayer
 	checkflag FLAG_TUTOR_BODY_SLAM
 	goto_if TRUE, EventScript_1C4DE2
-	msgbox Text_1A3505, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1A3505, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4DD8
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -486,8 +486,8 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	call_if eq, EventScript_1C4F06
 	compare VAR_FACING, 3
 	call_if eq, EventScript_1C4F11
-	msgbox Text_1A4751, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1A4751, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if eq, EventScript_1C4F1C
 	call EventScript_1C4F37
 	compare VAR_RESULT, 0
@@ -576,7 +576,7 @@ EventScript_1C4F37:: @ 81C4F37
 	textcolor 3
 	special sub_80699BC
 	signmsg
-	msgbox Text_1A644F, 5
+	msgbox Text_1A644F, MSGBOX_YESNO
 	normalmsg
 	call EventScript_1A6675
 	return

@@ -155,10 +155,10 @@ EventScript_16BF7C:: @ 816BF7C
 	additem VAR_0x8009, 1
 	textcolor 3
 	playfanfare MUS_FANFA1
-	message Text_195DAD
+	message Text_ReceivedItemFromLittleGirl
 	waitmessage
 	waitfanfare
-	giveitem VAR_0x8009, 1, 8
+	putitemaway VAR_0x8009
 	call EventScript_1A6675
 	compare VAR_0x8008, ITEM_FRESH_WATER
 	call_if eq, EventScript_16BFDE

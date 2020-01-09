@@ -1,8 +1,8 @@
 PewterCity_PokemonCenter_2F_MapScripts:: @ 816A7B5
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, PewterCity_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PewterCity_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script MAP_SCRIPT_ON_LOAD, PewterCity_PokemonCenter_2F_MapScript3_1BB237
-	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
 PewterCity_PokemonCenter_2F_EventScript_16A7CA:: @ 816A7CA

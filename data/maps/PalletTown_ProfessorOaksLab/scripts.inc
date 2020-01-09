@@ -40,7 +40,7 @@ PalletTown_ProfessorOaksLab_OnWarp:: @ 8168FE1
 	.2byte 0
 
 EventScript_168FEB:: @ 8168FEB
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, 2
 	end
 
 PalletTown_ProfessorOaksLab_OnFrame:: @ 8168FF0

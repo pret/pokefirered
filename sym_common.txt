@@ -159,24 +159,9 @@ gUnknown_3005E94: @ 3005E94
 	.include "berry_fix_program.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
-
-gRfuState: @ 3007438
-	.space 0x8
-
-gUnknown_3007440: @ 3007440
-	.space 0x10
-
-gUnknown_3007450: @ 3007450
-	.space 0x10
-
-gUnknown_3007460: @ 3007460
-	.space 0x4
-
-gUnknown_3007464: @ 3007464
-	.space 0x4
-
-gUnknown_3007468: @ 3007468
-	.space 0x8
-
-gUnknown_3007470: @ 3007470
-	.space 0xC
+	.align 2
+	.include "librfu_stwi.o"
+	.align 4
+	.include "librfu_rfu.o"
+	.align 4
+	.include "librfu_s32id.o"

@@ -5,1202 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8047B0C
-sub_8047B0C: @ 8047B0C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	adds r7, r1, 0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r2, 24
-	lsrs r2, 24
-	mov r10, r2
-	movs r3, 0
-	movs r2, 0
-_08047B28:
-	lsls r0, r3, 24
-	asrs r0, 24
-	mov r3, sp
-	adds r1, r3, r0
-	strb r2, [r1]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _08047B28
-	movs r3, 0x3
-	movs r0, 0x1
-	negs r0, r0
-	mov r9, r0
-	mov r8, sp
-_08047B48:
-	lsls r0, r5, 16
-	asrs r6, r0, 16
-	cmp r6, 0
-	ble _08047B76
-	lsls r4, r3, 24
-	asrs r4, 24
-	mov r1, sp
-	adds r5, r1, r4
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __modsi3
-	strb r0, [r5]
-	adds r0, r6, 0
-	movs r1, 0xA
-	bl __divsi3
-	lsls r0, 16
-	lsrs r5, r0, 16
-	subs r4, 0x1
-	lsls r4, 24
-	lsrs r3, r4, 24
-	b _08047B48
-_08047B76:
-	lsls r1, r3, 24
-	asrs r0, r1, 24
-	cmp r0, r9
-	ble _08047B9A
-	movs r4, 0xFF
-	movs r3, 0x1
-	negs r3, r3
-_08047B84:
-	asrs r2, r1, 24
-	mov r5, sp
-	adds r1, r5, r2
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	subs r2, 0x1
-	lsls r1, r2, 24
-	asrs r0, r1, 24
-	cmp r0, r3
-	bgt _08047B84
-_08047B9A:
-	mov r1, r8
-	ldrb r0, [r1, 0x3]
-	cmp r0, 0xFF
-	bne _08047BA6
-	movs r0, 0
-	strb r0, [r1, 0x3]
-_08047BA6:
-	mov r2, r10
-	cmp r2, 0
-	bne _08047C36
-	movs r3, 0
-	movs r1, 0
-	movs r6, 0xFC
-	lsls r6, 8
-	movs r5, 0x1E
-	mov r12, r5
-_08047BB8:
-	lsls r1, 24
-	asrs r2, r1, 24
-	mov r0, sp
-	adds r5, r0, r2
-	ldrb r0, [r5]
-	mov r8, r1
-	cmp r0, 0xFF
-	bne _08047BEE
-	lsls r1, r2, 1
-	adds r1, r7
-	ldrh r2, [r1]
-	adds r0, r6, 0
-	ands r0, r2
-	mov r2, r12
-	orrs r0, r2
-	strh r0, [r1]
-	lsls r3, 24
-	asrs r1, r3, 23
-	adds r1, r7
-	adds r1, 0x40
-	ldrh r2, [r1]
-	adds r0, r6, 0
-	ands r0, r2
-	mov r5, r12
-	orrs r0, r5
-	strh r0, [r1]
-	b _08047C1E
-_08047BEE:
-	lsls r2, 1
-	adds r2, r7
-	ldrh r0, [r2]
-	adds r1, r6, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x14
-	orrs r1, r0
-	strh r1, [r2]
-	lsls r4, r3, 24
-	asrs r3, r4, 24
-	lsls r2, r3, 1
-	adds r2, r7
-	adds r2, 0x40
-	ldrh r0, [r2]
-	adds r1, r6, 0
-	ands r1, r0
-	mov r5, sp
-	adds r0, r5, r3
-	ldrb r0, [r0]
-	adds r0, 0x34
-	orrs r1, r0
-	strh r1, [r2]
-	adds r3, r4, 0
-_08047C1E:
-	movs r0, 0x80
-	lsls r0, 17
-	add r0, r8
-	lsrs r1, r0, 24
-	movs r2, 0x80
-	lsls r2, 17
-	adds r0, r3, r2
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _08047BB8
-	b _08047C9A
-_08047C36:
-	movs r3, 0
-	movs r4, 0xFC
-	lsls r4, 8
-	movs r6, 0x1E
-_08047C3E:
-	lsls r1, r3, 24
-	asrs r2, r1, 24
-	mov r3, sp
-	adds r5, r3, r2
-	ldrb r0, [r5]
-	adds r3, r1, 0
-	cmp r0, 0xFF
-	bne _08047C6A
-	lsls r1, r2, 1
-	adds r1, r7
-	ldrh r2, [r1]
-	adds r0, r4, 0
-	ands r0, r2
-	orrs r0, r6
-	strh r0, [r1]
-	adds r1, 0x40
-	ldrh r2, [r1]
-	adds r0, r4, 0
-	ands r0, r2
-	orrs r0, r6
-	strh r0, [r1]
-	b _08047C8C
-_08047C6A:
-	lsls r2, 1
-	adds r2, r7
-	ldrh r0, [r2]
-	adds r1, r4, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x14
-	orrs r1, r0
-	strh r1, [r2]
-	adds r2, 0x40
-	ldrh r0, [r2]
-	adds r1, r4, 0
-	ands r1, r0
-	ldrb r0, [r5]
-	adds r0, 0x34
-	orrs r1, r0
-	strh r1, [r2]
-_08047C8C:
-	movs r5, 0x80
-	lsls r5, 17
-	adds r0, r3, r5
-	lsrs r3, r0, 24
-	asrs r0, 24
-	cmp r0, 0x3
-	ble _08047C3E
-_08047C9A:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8047B0C
-
-	thumb_func_start sub_8047CAC
-sub_8047CAC: @ 8047CAC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r0, r1, 0
-	adds r5, r2, 0
-	lsls r4, 16
-	lsrs r4, 16
-	movs r1, 0x1E
-	strh r1, [r5, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	adds r1, r5, 0
-	movs r2, 0
-	bl sub_8047B0C
-	lsls r4, 16
-	asrs r4, 16
-	adds r5, 0xA
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x1
-	bl sub_8047B0C
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8047CAC
-
-	thumb_func_start CreateBattlerHealthboxSprites
-CreateBattlerHealthboxSprites: @ 8047CE0
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	movs r0, 0
-	str r0, [sp]
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	bne _08047DF4
-	mov r0, r10
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08047D78
-	ldr r4, _08047D68 @ =gUnknown_8260278
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, _08047D6C @ =gSprites
-	lsls r1, r6, 4
-	adds r1, r6
-	lsls r1, 2
-	adds r1, r4
-	ldrb r2, [r1, 0x1]
-	movs r3, 0x3F
-	adds r0, r3, 0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r2, r4
-	ldrb r0, [r2, 0x1]
-	ands r3, r0
-	strb r3, [r2, 0x1]
-	ldrh r3, [r2, 0x4]
-	lsls r1, r3, 22
-	lsrs r1, 22
-	adds r1, 0x40
-	ldr r4, _08047D70 @ =0x000003ff
-	adds r0, r4, 0
-	ands r1, r0
-	ldr r0, _08047D74 @ =0xfffffc00
-	ands r0, r3
-	orrs r0, r1
-	strh r0, [r2, 0x4]
-	b _08047DBE
-	.align 2, 0
-_08047D68: .4byte gUnknown_8260278
-_08047D6C: .4byte gSprites
-_08047D70: .4byte 0x000003ff
-_08047D74: .4byte 0xfffffc00
-_08047D78:
-	ldr r4, _08047DE0 @ =gUnknown_82602A8
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r0, _08047DE4 @ =gSprites
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r2, r0
-	ldrh r3, [r2, 0x4]
-	lsls r1, r3, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, _08047DE8 @ =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, _08047DEC @ =0xfffffc00
-	ands r0, r3
-	orrs r0, r1
-	strh r0, [r2, 0x4]
-	movs r0, 0x2
-	str r0, [sp]
-_08047DBE:
-	ldr r2, _08047DE4 @ =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r2
-	strh r7, [r0, 0x6]
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r0, 2
-	adds r1, r0, r2
-	strh r6, [r1, 0x38]
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, _08047DF0 @ =sub_8048128
-	str r1, [r0]
-	b _08047F1C
-	.align 2, 0
-_08047DE0: .4byte gUnknown_82602A8
-_08047DE4: .4byte gSprites
-_08047DE8: .4byte 0x000003ff
-_08047DEC: .4byte 0xfffffc00
-_08047DF0: .4byte sub_8048128
-_08047DF4:
-	mov r0, r10
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08047E98
-	mov r0, r10
-	bl GetBattlerPosition
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r4, _08047E84 @ =gUnknown_8260278
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r0, r10
-	bl GetBattlerPosition
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, _08047E88 @ =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r4
-	strh r7, [r0, 0x6]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r3, r2, r4
-	strh r6, [r3, 0x38]
-	ldrh r1, [r3, 0x4]
-	mov r8, r1
-	mov r5, r8
-	lsls r1, r5, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, _08047E8C @ =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, _08047E90 @ =0xfffffc00
-	mov r5, r8
-	ands r0, r5
-	orrs r0, r1
-	strh r0, [r3, 0x4]
-	adds r4, 0x1C
-	adds r2, r4
-	ldr r0, _08047E94 @ =sub_8048128
-	str r0, [r2]
-	movs r0, 0x1
-	b _08047F1A
-	.align 2, 0
-_08047E84: .4byte gUnknown_8260278
-_08047E88: .4byte gSprites
-_08047E8C: .4byte 0x000003ff
-_08047E90: .4byte 0xfffffc00
-_08047E94: .4byte sub_8048128
-_08047E98:
-	mov r0, r10
-	bl GetBattlerPosition
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r4, _08047FE0 @ =gUnknown_82602A8
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r6, r0, 24
-	mov r0, r10
-	bl GetBattlerPosition
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 25
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r4
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, _08047FE4 @ =gSprites
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r4
-	strh r7, [r0, 0x6]
-	lsls r2, r7, 4
-	adds r2, r7
-	lsls r2, 2
-	adds r3, r2, r4
-	strh r6, [r3, 0x38]
-	ldrh r1, [r3, 0x4]
-	mov r8, r1
-	mov r5, r8
-	lsls r1, r5, 22
-	lsrs r1, 22
-	adds r1, 0x20
-	ldr r5, _08047FE8 @ =0x000003ff
-	adds r0, r5, 0
-	ands r1, r0
-	ldr r0, _08047FEC @ =0xfffffc00
-	mov r5, r8
-	ands r0, r5
-	orrs r0, r1
-	strh r0, [r3, 0x4]
-	adds r4, 0x1C
-	adds r2, r4
-	ldr r0, _08047FF0 @ =sub_8048128
-	str r0, [r2]
-	movs r0, 0x2
-_08047F1A:
-	str r0, [sp]
-_08047F1C:
-	ldr r0, _08047FF4 @ =gBattlerPositions
-	add r0, r10
-	ldrb r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	ldr r1, _08047FF8 @ =gUnknown_82602F8
-	adds r0, r1
-	movs r1, 0x8C
-	movs r2, 0x3C
-	movs r3, 0
-	bl CreateSpriteAtEnd
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, r5, 4
-	adds r4, r5
-	lsls r4, 2
-	ldr r1, _08047FE4 @ =gSprites
-	mov r8, r1
-	add r4, r8
-	mov r0, r10
-	bl GetBattlerSide
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 21
-	ldr r0, _08047FFC @ =gUnknown_82603C4
-	adds r1, r0
-	adds r0, r4, 0
-	bl SetSubspriteTables
-	adds r2, r4, 0
-	adds r2, 0x42
-	ldrb r1, [r2]
-	movs r0, 0x3F
-	ands r0, r1
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-	ldrb r1, [r4, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r1
-	movs r2, 0x4
-	mov r9, r2
-	mov r1, r9
-	orrs r0, r1
-	strb r0, [r4, 0x5]
-	movs r0, 0x1
-	bl GetHealthboxElementGfxPtr
-	ldrh r1, [r4, 0x4]
-	lsls r1, 22
-	lsrs r1, 17
-	ldr r2, _08048000 @ =0x06010000
-	adds r1, r2
-	ldr r2, _08048004 @ =0x04000010
-	bl CpuSet
-	lsls r0, r6, 4
-	adds r0, r6
-	lsls r0, 2
-	add r0, r8
-	strh r5, [r0, 0x38]
-	mov r2, r10
-	strh r2, [r0, 0x3A]
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	mov r5, r9
-	orrs r1, r5
-	strb r1, [r0]
-	lsls r0, r7, 4
-	adds r0, r7
-	lsls r0, 2
-	add r0, r8
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r5
-	strb r1, [r0]
-	strh r6, [r4, 0x38]
-	mov r0, sp
-	ldrh r0, [r0]
-	strh r0, [r4, 0x3A]
-	adds r4, 0x3E
-	ldrb r0, [r4]
-	orrs r0, r5
-	strb r0, [r4]
-	adds r0, r6, 0
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08047FE0: .4byte gUnknown_82602A8
-_08047FE4: .4byte gSprites
-_08047FE8: .4byte 0x000003ff
-_08047FEC: .4byte 0xfffffc00
-_08047FF0: .4byte sub_8048128
-_08047FF4: .4byte gBattlerPositions
-_08047FF8: .4byte gUnknown_82602F8
-_08047FFC: .4byte gUnknown_82603C4
-_08048000: .4byte 0x06010000
-_08048004: .4byte 0x04000010
-	thumb_func_end CreateBattlerHealthboxSprites
-
-	thumb_func_start CreateSafariPlayerHealthboxSprites
-CreateSafariPlayerHealthboxSprites: @ 8048008
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r4, _08048094 @ =gUnknown_82602D8
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSprite
-	adds r6, r0, 0
-	lsls r6, 24
-	lsrs r6, 24
-	adds r0, r4, 0
-	movs r1, 0xF0
-	movs r2, 0xA0
-	movs r3, 0x1
-	bl CreateSpriteAtEnd
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _08048098 @ =gSprites
-	mov r9, r1
-	lsls r4, r6, 4
-	adds r4, r6
-	lsls r4, 2
-	add r4, r9
-	ldrb r3, [r4, 0x1]
-	movs r2, 0x3F
-	adds r1, r2, 0
-	ands r1, r3
-	strb r1, [r4, 0x1]
-	lsls r3, r0, 4
-	adds r3, r0
-	lsls r3, 2
-	mov r7, r9
-	adds r5, r3, r7
-	ldrb r1, [r5, 0x1]
-	ands r2, r1
-	strb r2, [r5, 0x1]
-	ldrh r1, [r5, 0x4]
-	mov r8, r1
-	mov r7, r8
-	lsls r2, r7, 22
-	lsrs r2, 22
-	adds r2, 0x40
-	ldr r7, _0804809C @ =0x000003ff
-	adds r1, r7, 0
-	ands r2, r1
-	ldr r1, _080480A0 @ =0xfffffc00
-	mov r7, r8
-	ands r1, r7
-	orrs r1, r2
-	strh r1, [r5, 0x4]
-	strh r0, [r4, 0x6]
-	strh r6, [r5, 0x38]
-	movs r0, 0x1C
-	add r9, r0
-	add r3, r9
-	ldr r0, _080480A4 @ =sub_8048128
-	str r0, [r3]
-	adds r0, r6, 0
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08048094: .4byte gUnknown_82602D8
-_08048098: .4byte gSprites
-_0804809C: .4byte 0x000003ff
-_080480A0: .4byte 0xfffffc00
-_080480A4: .4byte sub_8048128
-	thumb_func_end CreateSafariPlayerHealthboxSprites
-
-	thumb_func_start GetHealthboxElementGfxPtr
-GetHealthboxElementGfxPtr: @ 80480A8
-	lsls r0, 24
-	lsrs r0, 19
-	ldr r1, _080480B4 @ =gHealthboxElementsGfxTable
-	adds r0, r1
-	bx lr
-	.align 2, 0
-_080480B4: .4byte gHealthboxElementsGfxTable
-	thumb_func_end GetHealthboxElementGfxPtr
-
-	thumb_func_start sub_80480B8
-sub_80480B8: @ 80480B8
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x38]
-	lsls r0, 24
-	lsrs r5, r0, 24
-	movs r1, 0x3A
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _080480E8
-	cmp r0, 0x1
-	bgt _080480FC
-	cmp r0, 0
-	bne _080480FC
-	ldr r2, _080480E4 @ =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x10
-	b _0804810A
-	.align 2, 0
-_080480E4: .4byte gSprites
-_080480E8:
-	ldr r2, _080480F8 @ =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x10
-	b _0804810A
-	.align 2, 0
-_080480F8: .4byte gSprites
-_080480FC:
-	ldr r2, _08048124 @ =gSprites
-	lsls r3, r5, 4
-	adds r1, r3, r5
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x8
-_0804810A:
-	strh r0, [r4, 0x20]
-	ldrh r0, [r1, 0x22]
-	strh r0, [r4, 0x22]
-	adds r0, r3, r5
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0, 0x24]
-	strh r1, [r4, 0x24]
-	ldrh r0, [r0, 0x26]
-	strh r0, [r4, 0x26]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048124: .4byte gSprites
-	thumb_func_end sub_80480B8
-
-	thumb_func_start sub_8048128
-sub_8048128: @ 8048128
-	ldrh r1, [r0, 0x38]
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r3, _0804814C @ =gSprites
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r3
-	ldrh r1, [r2, 0x20]
-	adds r1, 0x40
-	strh r1, [r0, 0x20]
-	ldrh r1, [r2, 0x22]
-	strh r1, [r0, 0x22]
-	ldrh r1, [r2, 0x24]
-	strh r1, [r0, 0x24]
-	ldrh r1, [r2, 0x26]
-	strh r1, [r0, 0x26]
-	bx lr
-	.align 2, 0
-_0804814C: .4byte gSprites
-	thumb_func_end sub_8048128
-
-	thumb_func_start SetBattleBarStruct
-SetBattleBarStruct: @ 8048150
-	push {r4-r7,lr}
-	ldr r7, [sp, 0x14]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r6, _08048180 @ =gBattleSpritesDataPtr
-	ldr r4, [r6]
-	ldr r5, [r4, 0xC]
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 2
-	adds r5, r4, r5
-	strb r1, [r5]
-	ldr r0, [r6]
-	ldr r0, [r0, 0xC]
-	adds r4, r0
-	str r2, [r4, 0x4]
-	str r3, [r4, 0x8]
-	str r7, [r4, 0xC]
-	ldr r0, _08048184 @ =0xffff8000
-	str r0, [r4, 0x10]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048180: .4byte gBattleSpritesDataPtr
-_08048184: .4byte 0xffff8000
-	thumb_func_end SetBattleBarStruct
-
-	thumb_func_start SetHealthboxSpriteInvisible
-SetHealthboxSpriteInvisible: @ 8048188
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r4, _080481D0 @ =gSprites
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r4
-	adds r1, r2, 0
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	movs r3, 0x4
-	orrs r0, r3
-	strb r0, [r1]
-	movs r0, 0x38
-	ldrsh r1, [r2, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-	ldrh r1, [r2, 0x6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080481D0: .4byte gSprites
-	thumb_func_end SetHealthboxSpriteInvisible
-
-	thumb_func_start SetHealthboxSpriteVisible
-SetHealthboxSpriteVisible: @ 80481D4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _08048224 @ =gSprites
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r5
-	adds r4, r2, 0
-	adds r4, 0x3E
-	ldrb r1, [r4]
-	movs r3, 0x5
-	negs r3, r3
-	adds r0, r3, 0
-	ands r0, r1
-	strb r0, [r4]
-	movs r0, 0x38
-	ldrsh r1, [r2, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r4, [r0]
-	adds r1, r3, 0
-	ands r1, r4
-	strb r1, [r0]
-	ldrh r1, [r2, 0x6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	ands r3, r1
-	strb r3, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048224: .4byte gSprites
-	thumb_func_end SetHealthboxSpriteVisible
-
-	thumb_func_start UpdateSpritePos
-UpdateSpritePos: @ 8048228
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r4, _08048244 @ =gSprites
-	lsls r3, r0, 4
-	adds r3, r0
-	lsls r3, 2
-	adds r3, r4
-	strh r1, [r3, 0x20]
-	strh r2, [r3, 0x22]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048244: .4byte gSprites
-	thumb_func_end UpdateSpritePos
-
-	thumb_func_start DestoryHealthboxSprite
-DestoryHealthboxSprite: @ 8048248
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _08048284 @ =gSprites
-	lsls r4, r0, 4
-	adds r4, r0
-	lsls r4, 2
-	adds r4, r5
-	ldrh r1, [r4, 0x6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	bl DestroySprite
-	movs r0, 0x38
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	bl DestroySprite
-	adds r0, r4, 0
-	bl DestroySprite
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048284: .4byte gSprites
-	thumb_func_end DestoryHealthboxSprite
-
-	thumb_func_start DummyBattleInterfaceFunc
-DummyBattleInterfaceFunc: @ 8048288
-	bx lr
-	thumb_func_end DummyBattleInterfaceFunc
-
-	thumb_func_start UpdateOamPriorityInAllHealthboxes
-UpdateOamPriorityInAllHealthboxes: @ 804828C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r6, 0
-	ldr r1, _08048310 @ =gBattlersCount
-	mov r8, r1
-	ldrb r2, [r1]
-	cmp r6, r2
-	bge _08048304
-	ldr r1, _08048314 @ =gSprites
-	mov r12, r1
-	movs r1, 0x3
-	ands r0, r1
-	lsls r5, r0, 2
-	movs r7, 0xD
-	negs r7, r7
-	ldr r2, _08048318 @ =gHealthboxSpriteIds
-	mov r9, r2
-_080482B6:
-	mov r1, r9
-	adds r0, r6, r1
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	add r1, r12
-	ldrb r4, [r1, 0x6]
-	ldrh r3, [r1, 0x38]
-	lsls r3, 24
-	lsrs r3, 24
-	ldrb r2, [r1, 0x5]
-	adds r0, r7, 0
-	ands r0, r2
-	orrs r0, r5
-	strb r0, [r1, 0x5]
-	lsls r1, r4, 4
-	adds r1, r4
-	lsls r1, 2
-	add r1, r12
-	ldrb r2, [r1, 0x5]
-	adds r0, r7, 0
-	ands r0, r2
-	orrs r0, r5
-	strb r0, [r1, 0x5]
-	lsls r1, r3, 4
-	adds r1, r3
-	lsls r1, 2
-	add r1, r12
-	ldrb r2, [r1, 0x5]
-	adds r0, r7, 0
-	ands r0, r2
-	orrs r0, r5
-	strb r0, [r1, 0x5]
-	adds r6, 0x1
-	mov r2, r8
-	ldrb r2, [r2]
-	cmp r6, r2
-	blt _080482B6
-_08048304:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048310: .4byte gBattlersCount
-_08048314: .4byte gSprites
-_08048318: .4byte gHealthboxSpriteIds
-	thumb_func_end UpdateOamPriorityInAllHealthboxes
-
-	thumb_func_start InitBattlerHealthboxCoords
-InitBattlerHealthboxCoords: @ 804831C
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r5, 0
-	movs r4, 0
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048348
-	adds r0, r6, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _08048342
-	movs r5, 0x2C
-	movs r4, 0x1E
-	b _08048380
-_08048342:
-	movs r5, 0x9E
-	movs r4, 0x58
-	b _08048380
-_08048348:
-	adds r0, r6, 0
-	bl GetBattlerPosition
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08048376
-	cmp r0, 0x1
-	bgt _08048360
-	cmp r0, 0
-	beq _0804836A
-	b _08048380
-_08048360:
-	cmp r0, 0x2
-	beq _08048370
-	cmp r0, 0x3
-	beq _0804837C
-	b _08048380
-_0804836A:
-	movs r5, 0x9F
-	movs r4, 0x4B
-	b _08048380
-_08048370:
-	movs r5, 0xAB
-	movs r4, 0x64
-	b _08048380
-_08048376:
-	movs r5, 0x2C
-	movs r4, 0x13
-	b _08048380
-_0804837C:
-	movs r5, 0x20
-	movs r4, 0x2C
-_08048380:
-	ldr r0, _08048394 @ =gHealthboxSpriteIds
-	adds r0, r6, r0
-	ldrb r0, [r0]
-	adds r1, r5, 0
-	adds r2, r4, 0
-	bl UpdateSpritePos
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048394: .4byte gHealthboxSpriteIds
-	thumb_func_end InitBattlerHealthboxCoords
-
-	thumb_func_start UpdateLvlInHealthbox
-UpdateLvlInHealthbox: @ 8048398
-	push {r4-r6,lr}
-	sub sp, 0x14
-	adds r5, r0, 0
-	adds r4, r1, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r1, _08048410 @ =gUnknown_826051C
-	mov r0, sp
-	movs r2, 0x10
-	bl memcpy
-	mov r0, sp
-	adds r0, 0x2
-	adds r1, r4, 0
-	movs r2, 0
-	movs r3, 0x3
-	bl ConvertIntToDecimalStringN
-	adds r1, r0, 0
-	subs r1, 0x2
-	mov r0, sp
-	subs r1, r0
-	movs r0, 0x3
-	subs r0, r1
-	lsls r1, r0, 2
-	adds r1, r0
-	add r3, sp, 0x10
-	mov r0, sp
-	movs r2, 0x3
-	bl AddTextPrinterAndCreateWindowOnHealthbox
-	adds r6, r0, 0
-	ldr r0, _08048414 @ =gSprites
-	lsls r1, r5, 4
-	adds r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrh r0, [r1, 0x4]
-	lsls r0, 22
-	lsrs r4, r0, 17
-	ldrh r0, [r1, 0x3A]
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048420
-	bl IsDoubleBattle
-	lsls r0, 24
-	ldr r2, _08048418 @ =0x06010420
-	adds r1, r4, r2
-	cmp r0, 0
-	bne _08048424
-	ldr r0, _0804841C @ =0x06010820
-	adds r1, r4, r0
-	b _08048424
-	.align 2, 0
-_08048410: .4byte gUnknown_826051C
-_08048414: .4byte gSprites
-_08048418: .4byte 0x06010420
-_0804841C: .4byte 0x06010820
-_08048420:
-	ldr r2, _0804843C @ =0x06010400
-	adds r1, r4, r2
-_08048424:
-	adds r0, r1, 0
-	adds r1, r6, 0
-	movs r2, 0x3
-	bl sub_804A6E8
-	ldr r0, [sp, 0x10]
-	bl sub_804A6D8
-	add sp, 0x14
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804843C: .4byte 0x06010400
-	thumb_func_end UpdateLvlInHealthbox
-
 	thumb_func_start UpdateHpTextInHealthbox
 UpdateHpTextInHealthbox: @ 8048440
 	push {r4-r7,lr}
@@ -1285,7 +89,7 @@ _080484BC:
 	adds r0, r4, r1
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	ldr r2, _08048510 @ =0x06010a00
 	adds r4, r2
 	adds r1, r5, 0
@@ -1293,9 +97,9 @@ _080484BC:
 	adds r0, r4, 0
 _080484FE:
 	movs r2, 0x2
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	ldr r0, [sp, 0x2C]
-	bl sub_804A6D8
+	bl RemoveWindowOnHealthbox
 	b _080485F8
 	.align 2, 0
 _0804850C: .4byte 0x060102e0
@@ -1332,7 +136,7 @@ _0804854C:
 	asrs r1, 16
 	mov r0, r9
 	mov r2, r8
-	bl sub_8048618
+	bl UpdateHpTextInHealthboxInDoubles
 	b _080485F8
 	.align 2, 0
 _0804855C: .4byte gUnknown_826052C
@@ -1427,8 +231,8 @@ _08048610: .4byte 0x06010000
 _08048614: .4byte 0x04000008
 	thumb_func_end UpdateHpTextInHealthbox
 
-	thumb_func_start sub_8048618
-sub_8048618: @ 8048618
+	thumb_func_start UpdateHpTextInHealthboxInDoubles
+UpdateHpTextInHealthboxInDoubles: @ 8048618
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1651,10 +455,10 @@ _080487DC:
 _080487EC: .4byte gSprites
 _080487F0: .4byte 0x06010000
 _080487F4: .4byte 0x04000008
-	thumb_func_end sub_8048618
+	thumb_func_end UpdateHpTextInHealthboxInDoubles
 
-	thumb_func_start sub_80487F8
-sub_80487F8: @ 80487F8
+	thumb_func_start PrintSafariMonInfo
+PrintSafariMonInfo: @ 80487F8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1943,7 +747,7 @@ _08048A2C:
 	.align 2, 0
 _08048A44: .4byte 0x060100c0
 _08048A48: .4byte 0x04000008
-	thumb_func_end sub_80487F8
+	thumb_func_end PrintSafariMonInfo
 
 	thumb_func_start SwapHpBarsWithHpText
 SwapHpBarsWithHpText: @ 8048A4C
@@ -2087,7 +891,7 @@ _08048B16:
 	asrs r1, 16
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8048618
+	bl UpdateHpTextInHealthboxInDoubles
 	ldrb r4, [r6]
 	mov r2, r8
 	ldrh r0, [r2]
@@ -2153,7 +957,7 @@ _08048BE8:
 	muls r1, r2
 	ldr r2, _08048C10 @ =gEnemyParty
 	adds r1, r2
-	bl sub_80487F8
+	bl PrintSafariMonInfo
 	b _08048CCA
 	.align 2, 0
 _08048C0C: .4byte gBattleTypeFlags
@@ -2194,7 +998,7 @@ _08048C14:
 	asrs r1, 16
 	adds r0, r4, 0
 	movs r2, 0
-	bl sub_8048618
+	bl UpdateHpTextInHealthboxInDoubles
 	ldrb r4, [r6]
 	mov r2, r8
 	ldrh r0, [r2]
@@ -2210,7 +1014,7 @@ _08048C6E:
 	asrs r1, 16
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_8048618
+	bl UpdateHpTextInHealthboxInDoubles
 	b _08048CCA
 	.align 2, 0
 _08048C88: .4byte 0x06010000
@@ -3667,7 +2471,7 @@ _08049782:
 	adds r0, r4, r1
 	adds r1, r6, 0
 	movs r2, 0x6
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	bl IsDoubleBattle
 	lsls r0, 24
 	ldr r2, _080497F0 @ =0x06010400
@@ -3681,7 +2485,7 @@ _080497D4:
 	adds r1, 0xC0
 	adds r0, r5, 0
 	movs r2, 0x1
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	b _08049804
 	.align 2, 0
 _080497E4: .4byte gDisplayedStringBattle
@@ -3694,10 +2498,10 @@ _080497F8:
 	adds r0, r4, r1
 	adds r1, r6, 0
 	movs r2, 0x7
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 _08049804:
 	ldr r0, [sp, 0xC]
-	bl sub_804A6D8
+	bl RemoveWindowOnHealthbox
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -4276,16 +3080,16 @@ UpdateSafariBallsTextOnHealthbox: @ 8049CAC
 	adds r0, r4, r1
 	adds r1, r5, 0
 	movs r2, 0x6
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	ldr r0, _08049D0C @ =0x06010800
 	adds r4, r0
 	adds r5, 0xC0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl sub_804A6E8
+	bl TextIntoHealthboxObject
 	ldr r0, [sp]
-	bl sub_804A6D8
+	bl RemoveWindowOnHealthbox
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -4344,7 +3148,7 @@ UpdateLeftNoOfBallsTextOnHealthbox: @ 8049D10
 	movs r2, 0x4
 	bl sub_804A734
 	ldr r0, [sp, 0x10]
-	bl sub_804A6D8
+	bl RemoveWindowOnHealthbox
 	add sp, 0x14
 	pop {r4,r5}
 	pop {r0}
@@ -5577,18 +4381,18 @@ AddTextPrinterAndCreateWindowOnHealthbox: @ 804A648
 _0804A6D4: .4byte gUnknown_8260564
 	thumb_func_end AddTextPrinterAndCreateWindowOnHealthbox
 
-	thumb_func_start sub_804A6D8
-sub_804A6D8: @ 804A6D8
+	thumb_func_start RemoveWindowOnHealthbox
+RemoveWindowOnHealthbox: @ 804A6D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	bl RemoveWindow
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804A6D8
+	thumb_func_end RemoveWindowOnHealthbox
 
-	thumb_func_start sub_804A6E8
-sub_804A6E8: @ 804A6E8
+	thumb_func_start TextIntoHealthboxObject
+TextIntoHealthboxObject: @ 804A6E8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r5, r1, 0
@@ -5625,7 +4429,7 @@ _0804A724:
 	.align 2, 0
 _0804A72C: .4byte 0x001fffff
 _0804A730: .4byte 0x04000003
-	thumb_func_end sub_804A6E8
+	thumb_func_end TextIntoHealthboxObject
 
 	thumb_func_start sub_804A734
 sub_804A734: @ 804A734

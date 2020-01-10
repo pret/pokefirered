@@ -14,25 +14,25 @@
 gUnknown_8260270:: @ 8260270
 	.4byte 0xc0004000, 0x00000400
 
-gUnknown_8260278:: @ 8260278
+sHealthboxPlayerSpriteTemplates:: @ 8260278
 	spr_template 55039, 55039, gUnknown_8260270, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 	spr_template 55040, 55039, gUnknown_8260270, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_82602A8:: @ 82602A8
+sHealthboxOpponentSpriteTemplates:: @ 82602A8
 	spr_template 55041, 55039, gUnknown_8260270, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 	spr_template 55042, 55039, gUnknown_8260270, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_82602D8:: @ 82602D8
+sHealthboxSafariSpriteTemplate:: @ 82602D8
 	spr_template 55051, 55039, gUnknown_8260270, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_82602F0::
 	.4byte 0x40004000, 0x00000400
 
 gUnknown_82602F8:: @ 82602F8
-	spr_template 55044, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80480B8
-	spr_template 55045, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80480B8
-	spr_template 55046, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80480B8
-	spr_template 55047, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80480B8
+	spr_template 55044, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_HealthBar
+	spr_template 55045, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_HealthBar
+	spr_template 55046, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_HealthBar
+	spr_template 55047, 55044, gUnknown_82602F0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_HealthBar
 
 gUnknown_8260358::
 	subsprite 240, 0, 1, 0x0000, 64x32

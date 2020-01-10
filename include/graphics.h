@@ -4854,4 +4854,7 @@ extern const u32 gFireRedTrainerCard_Gfx[];
 extern const u16 gEmeraldTrainerCard_Pal[];
 extern const u32 gEmeraldTrainerCard_Gfx[];
 
+// battle_interface
+extern const u8 gHealthboxElementsGfxTable[][32];
+
 #endif //GUARD_GRAPHICS_H

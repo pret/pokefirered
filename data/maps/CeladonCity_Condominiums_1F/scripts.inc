@@ -59,5 +59,5 @@ CeladonCity_Condominiums_1F_EventScript_16C3B4:: @ 816C3B4
 	end
 
 CeladonCity_Condominiums_1F_EventScript_16C3C7:: @ 816C3C7
-	msgbox gUnknown_8196287, 3
+	msgbox gUnknown_8196287, MSGBOX_SIGN
 	end

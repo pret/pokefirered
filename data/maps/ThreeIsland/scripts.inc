@@ -221,7 +221,7 @@ EventScript_167A59:: @ 8167A59
 	waitmovement 0
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
@@ -382,11 +382,11 @@ Movement_167C71:: @ 8167C71
 	step_end
 
 ThreeIsland_EventScript_167C77:: @ 8167C77
-	msgbox gUnknown_81828EB, 2
+	msgbox gUnknown_81828EB, MSGBOX_NPC
 	end
 
 ThreeIsland_EventScript_167C80:: @ 8167C80
-	msgbox gUnknown_818298A, 2
+	msgbox gUnknown_818298A, MSGBOX_NPC
 	end
 
 ThreeIsland_EventScript_167C89:: @ 8167C89
@@ -400,9 +400,9 @@ ThreeIsland_EventScript_167C89:: @ 8167C89
 	end
 
 ThreeIsland_EventScript_167C9C:: @ 8167C9C
-	msgbox gUnknown_8182061, 3
+	msgbox gUnknown_8182061, MSGBOX_SIGN
 	end
 
 ThreeIsland_EventScript_167CA5:: @ 8167CA5
-	msgbox gUnknown_818208B, 2
+	msgbox gUnknown_818208B, MSGBOX_NPC
 	end

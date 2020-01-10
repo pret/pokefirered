@@ -7,40 +7,40 @@ RockTunnel_1F_OnTransition:: @ 8162DDC
 	end
 
 RockTunnel_1F_EventScript_162DE0:: @ 8162DE0
-	msgbox gUnknown_817962D, 3
+	msgbox gUnknown_817962D, MSGBOX_SIGN
 	end
 
 RockTunnel_1F_EventScript_162DE9:: @ 8162DE9
 	trainerbattle_single TRAINER_HIKER_LENNY, Text_179366, Text_179388
-	msgbox gUnknown_8179396, 6
+	msgbox gUnknown_8179396, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E00:: @ 8162E00
 	trainerbattle_single TRAINER_HIKER_OLIVER, Text_1793F1, Text_17940E
-	msgbox gUnknown_817943A, 6
+	msgbox gUnknown_817943A, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E17:: @ 8162E17
 	trainerbattle_single TRAINER_HIKER_LUCAS, Text_17947B, Text_1794AC
-	msgbox gUnknown_81794B4, 6
+	msgbox gUnknown_81794B4, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E2E:: @ 8162E2E
 	trainerbattle_single TRAINER_POKEMANIAC_ASHTON, Text_1794D4, Text_1794EE
-	msgbox gUnknown_81794F9, 6
+	msgbox gUnknown_81794F9, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E45:: @ 8162E45
 	trainerbattle_single TRAINER_PICNICKER_LEAH, Text_17951C, Text_179547
-	msgbox gUnknown_8179558, 6
+	msgbox gUnknown_8179558, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E5C:: @ 8162E5C
 	trainerbattle_single TRAINER_PICNICKER_ARIANA, Text_1795E5, Text_179604
-	msgbox gUnknown_8179613, 6
+	msgbox gUnknown_8179613, MSGBOX_AUTOCLOSE
 	end
 
 RockTunnel_1F_EventScript_162E73:: @ 8162E73
 	trainerbattle_single TRAINER_PICNICKER_DANA, Text_179577, Text_1795A1
-	msgbox gUnknown_81795B5, 6
+	msgbox gUnknown_81795B5, MSGBOX_AUTOCLOSE
 	end

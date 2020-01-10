@@ -30,7 +30,7 @@ EventScript_166913:: @ 8166913
 	return
 
 VermilionCity_EventScript_166917:: @ 8166917
-	msgbox gUnknown_817F723, 2
+	msgbox gUnknown_817F723, MSGBOX_NPC
 	end
 
 VermilionCity_EventScript_166920:: @ 8166920
@@ -229,7 +229,7 @@ EventScript_166BED:: @ 8166BED
 	end
 
 VermilionCity_EventScript_166C17:: @ 8166C17
-	msgbox gUnknown_817F8AC, 2
+	msgbox gUnknown_817F8AC, MSGBOX_NPC
 	end
 
 VermilionCity_EventScript_166C20:: @ 8166C20
@@ -241,7 +241,7 @@ VermilionCity_EventScript_166C20:: @ 8166C20
 	end
 
 VermilionCity_EventScript_166C2F:: @ 8166C2F
-	msgbox gUnknown_817F7FD, 2
+	msgbox gUnknown_817F7FD, MSGBOX_NPC
 	end
 
 VermilionCity_EventScript_166C38:: @ 8166C38
@@ -256,15 +256,15 @@ VermilionCity_EventScript_166C38:: @ 8166C38
 	end
 
 VermilionCity_EventScript_166C53:: @ 8166C53
-	msgbox gUnknown_817F8FB, 3
+	msgbox gUnknown_817F8FB, MSGBOX_SIGN
 	end
 
 VermilionCity_EventScript_166C5C:: @ 8166C5C
-	msgbox gUnknown_817F928, 3
+	msgbox gUnknown_817F928, MSGBOX_SIGN
 	end
 
 VermilionCity_EventScript_166C65:: @ 8166C65
-	msgbox gUnknown_817F9A1, 3
+	msgbox gUnknown_817F9A1, MSGBOX_SIGN
 	end
 
 VermilionCity_EventScript_166C6E:: @ 8166C6E
@@ -275,5 +275,5 @@ VermilionCity_EventScript_166C6E:: @ 8166C6E
 	end
 
 VermilionCity_EventScript_166C86:: @ 8166C86
-	msgbox gUnknown_817FA11, 3
+	msgbox gUnknown_817FA11, MSGBOX_SIGN
 	end

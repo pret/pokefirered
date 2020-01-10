@@ -243,18 +243,18 @@ EventScript_16B9F0:: @ 816B9F0
 VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
 	trainerbattle_single TRAINER_SAILOR_DWAYNE, Text_194FBD, Text_194FF1
 	famechecker FAMECHECKER_LTSURGE, 4
-	msgbox gUnknown_8195004, 6
+	msgbox gUnknown_8195004, MSGBOX_AUTOCLOSE
 	end
 
 VermilionCity_Gym_EventScript_16BA1E:: @ 816BA1E
 	trainerbattle_single TRAINER_ENGINEER_BAILY, Text_194F1F, Text_194F6F
-	msgbox gUnknown_8194F76, 6
+	msgbox gUnknown_8194F76, MSGBOX_AUTOCLOSE
 	end
 
 VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
 	trainerbattle_single TRAINER_GENTLEMAN_TUCKER, Text_194E57, Text_194EA5, EventScript_16BA5D
 	famechecker FAMECHECKER_LTSURGE, 3
-	msgbox gUnknown_8194EBD, 6
+	msgbox gUnknown_8194EBD, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16BA5D:: @ 816BA5D

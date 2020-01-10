@@ -51,7 +51,7 @@ EventScript_168DB9:: @ 8168DB9
 	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	goto_if_lt EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_168E3C
 	msgbox gUnknown_818D8B2
 	special Special_ChooseMonFromParty
@@ -167,13 +167,13 @@ EventScript_168F59:: @ 8168F59
 	end
 
 PalletTown_GarysHouse_EventScript_168F63:: @ 8168F63
-	msgbox gUnknown_818D763, 2
+	msgbox gUnknown_818D763, MSGBOX_NPC
 	end
 
 PalletTown_GarysHouse_EventScript_168F6C:: @ 8168F6C
-	msgbox gUnknown_818D7A1, 3
+	msgbox gUnknown_818D7A1, MSGBOX_SIGN
 	end
 
 PalletTown_GarysHouse_EventScript_168F75:: @ 8168F75
-	msgbox gUnknown_818DC47, 3
+	msgbox gUnknown_818DC47, MSGBOX_SIGN
 	end

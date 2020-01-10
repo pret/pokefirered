@@ -198,9 +198,9 @@ EventScript_163222:: @ 8163222
 	end
 
 SeafoamIslands_B4F_EventScript_163223:: @ 8163223
-	msgbox gUnknown_8179B36, 3
+	msgbox gUnknown_8179B36, MSGBOX_SIGN
 	end
 
 SeafoamIslands_B4F_EventScript_16322C:: @ 816322C
-	msgbox gUnknown_8179B65, 3
+	msgbox gUnknown_8179B65, MSGBOX_SIGN
 	end

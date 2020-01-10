@@ -27,20 +27,20 @@ EventScript_161D2E:: @ 8161D2E
 	end
 
 SilphCo_9F_EventScript_161D38:: @ 8161D38
-	msgbox gUnknown_8176CD4, 3
+	msgbox gUnknown_8176CD4, MSGBOX_SIGN
 	end
 
 SilphCo_9F_EventScript_161D41:: @ 8161D41
 	trainerbattle_single TRAINER_SCIENTIST_ED, Text_176BFB, Text_176C2B
-	msgbox gUnknown_8176C3C, 6
+	msgbox gUnknown_8176C3C, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_9F_EventScript_161D58:: @ 8161D58
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_37, Text_176BA3, Text_176BC8
-	msgbox gUnknown_8176BD0, 6
+	msgbox gUnknown_8176BD0, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_9F_EventScript_161D6F:: @ 8161D6F
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_38, Text_176C7A, Text_176CA0
-	msgbox gUnknown_8176CB8, 6
+	msgbox gUnknown_8176CB8, MSGBOX_AUTOCLOSE
 	end

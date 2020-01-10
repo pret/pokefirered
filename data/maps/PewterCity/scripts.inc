@@ -1025,14 +1025,14 @@ Movement_166042:: @ 8166042
 	step_end
 
 PewterCity_EventScript_166075:: @ 8166075
-	msgbox gUnknown_817E436, 2
+	msgbox gUnknown_817E436, MSGBOX_NPC
 	end
 
 PewterCity_EventScript_16607E:: @ 816607E
 	lock
 	faceplayer
 	msgbox gUnknown_817E53E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_166136
 	msgbox gUnknown_817E589
 	closemessage
@@ -1351,7 +1351,7 @@ PewterCity_EventScript_166244:: @ 8166244
 	lock
 	faceplayer
 	msgbox gUnknown_817E602, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_166263
 	msgbox gUnknown_817E644
 	release
@@ -1363,15 +1363,15 @@ EventScript_166263:: @ 8166263
 	end
 
 PewterCity_EventScript_16626D:: @ 816626D
-	msgbox gUnknown_817E6F6, 3
+	msgbox gUnknown_817E6F6, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_166276:: @ 8166276
-	msgbox gUnknown_817E748, 3
+	msgbox gUnknown_817E748, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_16627F:: @ 816627F
-	msgbox gUnknown_817E7C5, 3
+	msgbox gUnknown_817E7C5, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_166288:: @ 8166288
@@ -1382,7 +1382,7 @@ PewterCity_EventScript_166288:: @ 8166288
 	end
 
 PewterCity_EventScript_1662A0:: @ 81662A0
-	msgbox gUnknown_817E824, 3
+	msgbox gUnknown_817E824, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_1662A9:: @ 81662A9

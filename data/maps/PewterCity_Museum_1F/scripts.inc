@@ -16,9 +16,9 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 
 EventScript_16A348:: @ 816A348
 	msgbox gUnknown_8190550, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16A367
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16A37B
 	end
 
@@ -64,7 +64,7 @@ EventScript_16A3D1:: @ 816A3D1
 	textcolor 0
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_81904B5, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16A402
 	msgbox gUnknown_81904F9
 	closemessage
@@ -142,11 +142,11 @@ Movement_16A499:: @ 816A499
 	step_end
 
 PewterCity_Museum_1F_EventScript_16A49C:: @ 816A49C
-	msgbox gUnknown_81908CD, 2
+	msgbox gUnknown_81908CD, MSGBOX_NPC
 	end
 
 PewterCity_Museum_1F_EventScript_16A4A5:: @ 816A4A5
-	msgbox gUnknown_81906B4, 2
+	msgbox gUnknown_81906B4, MSGBOX_NPC
 	end
 
 PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
@@ -174,7 +174,7 @@ EventScript_16A4FF:: @ 816A4FF
 	end
 
 PewterCity_Museum_1F_EventScript_16A509:: @ 816A509
-	msgbox gUnknown_819090A, 2
+	msgbox gUnknown_819090A, MSGBOX_NPC
 	end
 
 PewterCity_Museum_1F_EventScript_16A512:: @ 816A512

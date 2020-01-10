@@ -2,11 +2,11 @@ SaffronCity_House2_MapScripts:: @ 816EF73
 	.byte 0
 
 SaffronCity_House2_EventScript_16EF74:: @ 816EF74
-	msgbox gUnknown_819BE74, 2
+	msgbox gUnknown_819BE74, MSGBOX_NPC
 	end
 
 SaffronCity_House2_EventScript_16EF7D:: @ 816EF7D
-	msgbox gUnknown_819BED5, 2
+	msgbox gUnknown_819BED5, MSGBOX_NPC
 	end
 
 SaffronCity_House2_EventScript_16EF86:: @ 816EF86
@@ -20,5 +20,5 @@ SaffronCity_House2_EventScript_16EF86:: @ 816EF86
 	end
 
 SaffronCity_House2_EventScript_16EF99:: @ 816EF99
-	msgbox gUnknown_819BF07, 3
+	msgbox gUnknown_819BF07, MSGBOX_SIGN
 	end

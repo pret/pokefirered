@@ -2,11 +2,11 @@ CeladonCity_GameCorner_PrizeRoom_MapScripts:: @ 816CB75
 	.byte 0
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB76:: @ 816CB76
-	msgbox gUnknown_8196FC1, 2
+	msgbox gUnknown_8196FC1, MSGBOX_NPC
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB7F:: @ 816CB7F
-	msgbox gUnknown_8196FFF, 2
+	msgbox gUnknown_8196FFF, MSGBOX_NPC
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
@@ -108,7 +108,7 @@ EventScript_16CC55:: @ 816CC55
 EventScript_16CC65:: @ 816CC65
 	getspeciesname 0, VAR_TEMP_1
 	msgbox gUnknown_819709D, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16CC10
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
@@ -221,7 +221,7 @@ EventScript_16CDB3:: @ 816CDB3
 	waitmessage
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16CD83
 	goto EventScript_16CC10
 	end
@@ -235,7 +235,7 @@ EventScript_16CDE0:: @ 816CDE0
 	waitmessage
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16CE12
 	call EventScript_1A8C33
 	goto EventScript_16CE12
@@ -309,7 +309,7 @@ EventScript_16CEF5:: @ 816CEF5
 
 EventScript_16CF09:: @ 816CF09
 	msgbox gUnknown_81970B2, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16CC10
 	goto EventScript_16CF3F
 	end
@@ -317,7 +317,7 @@ EventScript_16CF09:: @ 816CF09
 EventScript_16CF22:: @ 816CF22
 	getitemname 0, VAR_TEMP_1
 	msgbox gUnknown_819709D, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16CC10
 	goto EventScript_16CF3F
 	end

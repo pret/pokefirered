@@ -6,7 +6,7 @@ Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 	faceplayer
 	goto_if_set FLAG_GOT_SUPER_ROD, EventScript_16FF7F
 	msgbox gUnknown_819EFE0, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16FF34
 	msgbox gUnknown_819F1FA
 	release

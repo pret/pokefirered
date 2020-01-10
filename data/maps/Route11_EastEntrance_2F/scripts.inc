@@ -14,7 +14,7 @@ EventScript_16FD49:: @ 816FD49
 	end
 
 Route11_EastEntrance_2F_EventScript_16FD53:: @ 816FD53
-	msgbox gUnknown_819ED1F, 3
+	msgbox gUnknown_819ED1F, MSGBOX_SIGN
 	end
 
 Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
@@ -24,7 +24,7 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_NINA_TRADE, EventScript_16FDCE
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16FDB6
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
@@ -60,7 +60,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	call EventScript_16FE64
 	goto_if_set FLAG_GOT_ITEMFINDER, EventScript_16FE5A
 	msgbox gUnknown_819E9E5, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount

@@ -6,7 +6,7 @@ VermilionCity_House1_EventScript_16B3A7:: @ 816B3A7
 	faceplayer
 	goto_if_set FLAG_GOT_OLD_ROD, EventScript_16B3CF
 	msgbox gUnknown_8193EC1, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16B3D9
 	msgbox gUnknown_8194028
 	release

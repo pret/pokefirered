@@ -100,13 +100,13 @@ EventScript_16753F:: @ 816753F
 	end
 
 OneIsland_EventScript_167549:: @ 8167549
-	msgbox gUnknown_8181A4A, 2
+	msgbox gUnknown_8181A4A, MSGBOX_NPC
 	end
 
 OneIsland_EventScript_167552:: @ 8167552
-	msgbox gUnknown_81819E1, 3
+	msgbox gUnknown_81819E1, MSGBOX_SIGN
 	end
 
 OneIsland_EventScript_16755B:: @ 816755B
-	msgbox gUnknown_8181A0A, 3
+	msgbox gUnknown_8181A0A, MSGBOX_SIGN
 	end

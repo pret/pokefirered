@@ -57,25 +57,25 @@ EventScript_161035:: @ 8161035
 
 VictoryRoad_2F_EventScript_161037:: @ 8161037
 	trainerbattle_single TRAINER_POKEMANIAC_DAWSON, Text_1747EF, Text_17482C
-	msgbox gUnknown_817483E, 6
+	msgbox gUnknown_817483E, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_2F_EventScript_16104E:: @ 816104E
 	trainerbattle_single TRAINER_BLACK_BELT_DAISUKE, Text_174877, Text_1748B4
-	msgbox gUnknown_81748BB, 6
+	msgbox gUnknown_81748BB, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_2F_EventScript_161065:: @ 8161065
 	trainerbattle_single TRAINER_JUGGLER_NELSON, Text_1748EE, Text_17491B
-	msgbox gUnknown_8174927, 6
+	msgbox gUnknown_8174927, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_2F_EventScript_16107C:: @ 816107C
 	trainerbattle_single TRAINER_JUGGLER_GREGORY, Text_174995, Text_1749B0
-	msgbox gUnknown_81749BB, 6
+	msgbox gUnknown_81749BB, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_2F_EventScript_161093:: @ 8161093
 	trainerbattle_single TRAINER_TAMER_VINCENT, Text_174942, Text_17495A
-	msgbox gUnknown_8174969, 6
+	msgbox gUnknown_8174969, MSGBOX_AUTOCLOSE
 	end

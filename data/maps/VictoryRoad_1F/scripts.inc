@@ -37,10 +37,10 @@ EventScript_160F62:: @ 8160F62
 
 VictoryRoad_1F_EventScript_160F64:: @ 8160F64
 	trainerbattle_single TRAINER_COOLTRAINER_NAOMI, Text_174710, Text_174738
-	msgbox gUnknown_8174744, 6
+	msgbox gUnknown_8174744, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_160F7B:: @ 8160F7B
 	trainerbattle_single TRAINER_COOLTRAINER_ROLANDO, Text_174784, Text_1747B8
-	msgbox gUnknown_81747C8, 6
+	msgbox gUnknown_81747C8, MSGBOX_AUTOCLOSE
 	end

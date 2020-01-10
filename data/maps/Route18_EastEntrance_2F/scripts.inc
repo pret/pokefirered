@@ -2,11 +2,11 @@ Route18_EastEntrance_2F_MapScripts:: @ 817046B
 	.byte 0
 
 Route18_EastEntrance_2F_EventScript_17046C:: @ 817046C
-	msgbox gUnknown_819FD6B, 3
+	msgbox gUnknown_819FD6B, MSGBOX_SIGN
 	end
 
 Route18_EastEntrance_2F_EventScript_170475:: @ 8170475
-	msgbox gUnknown_819FDB3, 3
+	msgbox gUnknown_819FDB3, MSGBOX_SIGN
 	end
 
 Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
@@ -16,7 +16,7 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_MARC_TRADE, EventScript_1704F0
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1704D8
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6

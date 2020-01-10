@@ -2,7 +2,7 @@ Route5_SouthEntrance_MapScripts:: @ 816F900
 	.byte 0
 
 Route5_SouthEntrance_EventScript_16F901:: @ 816F901
-	msgbox gUnknown_819E16D, 2
+	msgbox gUnknown_819E16D, MSGBOX_NPC
 	end
 
 Route5_SouthEntrance_EventScript_16F90A:: @ 816F90A

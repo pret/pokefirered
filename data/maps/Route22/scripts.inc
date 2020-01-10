@@ -257,5 +257,5 @@ Movement_1684DA:: @ 81684DA
 	step_end
 
 Route22_EventScript_1684E2:: @ 81684E2
-	msgbox gUnknown_8188BFF, 3
+	msgbox gUnknown_8188BFF, MSGBOX_SIGN
 	end

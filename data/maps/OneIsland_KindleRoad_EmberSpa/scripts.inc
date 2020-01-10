@@ -2,19 +2,19 @@ OneIsland_KindleRoad_EmberSpa_MapScripts:: @ 816535B
 	.byte 0
 
 OneIsland_KindleRoad_EmberSpa_EventScript_16535C:: @ 816535C
-	msgbox gUnknown_817D34A, 2
+	msgbox gUnknown_817D34A, MSGBOX_NPC
 	end
 
 OneIsland_KindleRoad_EmberSpa_EventScript_165365:: @ 8165365
-	msgbox gUnknown_817D3DE, 2
+	msgbox gUnknown_817D3DE, MSGBOX_NPC
 	end
 
 OneIsland_KindleRoad_EmberSpa_EventScript_16536E:: @ 816536E
-	msgbox gUnknown_817D4AA, 2
+	msgbox gUnknown_817D4AA, MSGBOX_NPC
 	end
 
 OneIsland_KindleRoad_EmberSpa_EventScript_165377:: @ 8165377
-	msgbox gUnknown_817D4E3, 2
+	msgbox gUnknown_817D4E3, MSGBOX_NPC
 	end
 
 OneIsland_KindleRoad_EmberSpa_EventScript_165380:: @ 8165380

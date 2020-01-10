@@ -2,15 +2,15 @@ CeladonCity_DepartmentStore_2F_MapScripts:: @ 816BAF4
 	.byte 0
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAF5:: @ 816BAF5
-	msgbox gUnknown_81955C7, 2
+	msgbox gUnknown_81955C7, MSGBOX_NPC
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAFE:: @ 816BAFE
-	msgbox gUnknown_819560F, 2
+	msgbox gUnknown_819560F, MSGBOX_NPC
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB07:: @ 816BB07
-	msgbox gUnknown_8195638, 3
+	msgbox gUnknown_8195638, MSGBOX_SIGN
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10

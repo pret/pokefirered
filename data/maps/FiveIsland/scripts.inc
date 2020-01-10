@@ -7,13 +7,13 @@ FiveIsland_OnTransition:: @ 8167E94
 	end
 
 FiveIsland_EventScript_167E98:: @ 8167E98
-	msgbox gUnknown_8182DFB, 3
+	msgbox gUnknown_8182DFB, MSGBOX_SIGN
 	end
 
 FiveIsland_EventScript_167EA1:: @ 8167EA1
-	msgbox gUnknown_8182E26, 2
+	msgbox gUnknown_8182E26, MSGBOX_NPC
 	end
 
 FiveIsland_EventScript_167EAA:: @ 8167EAA
-	msgbox gUnknown_8182E96, 2
+	msgbox gUnknown_8182E96, MSGBOX_NPC
 	end

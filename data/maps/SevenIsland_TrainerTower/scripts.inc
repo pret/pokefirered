@@ -7,9 +7,9 @@ SevenIsland_TrainerTower_OnTransition:: @ 8168BDB
 	end
 
 SevenIsland_TrainerTower_EventScript_168BE1:: @ 8168BE1
-	msgbox gUnknown_818C338, 3
+	msgbox gUnknown_818C338, MSGBOX_SIGN
 	end
 
 SevenIsland_TrainerTower_EventScript_168BEA:: @ 8168BEA
-	msgbox gUnknown_818C370, 3
+	msgbox gUnknown_818C370, MSGBOX_SIGN
 	end

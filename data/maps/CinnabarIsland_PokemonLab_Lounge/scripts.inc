@@ -2,7 +2,7 @@ CinnabarIsland_PokemonLab_Lounge_MapScripts:: @ 816E2B8
 	.byte 0
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2B9:: @ 816E2B9
-	msgbox gUnknown_8199FB3, 2
+	msgbox gUnknown_8199FB3, MSGBOX_NPC
 	end
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
@@ -12,7 +12,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_ESPHERE_TRADE, EventScript_16E334
 	msgbox gUnknown_81A59FE, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E31C
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
@@ -51,7 +51,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	copyvar VAR_0x8009, VAR_RESULT
 	goto_if_set FLAG_DID_TANGENY_TRADE, EventScript_16E3D4
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E3BC
 	special Special_ChooseMonFromParty
 	waitstate

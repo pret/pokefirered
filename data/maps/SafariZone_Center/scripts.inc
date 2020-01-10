@@ -7,13 +7,13 @@ SafariZone_Center_OnTransition:: @ 816235D
 	end
 
 SafariZone_Center_EventScript_162361:: @ 8162361
-	msgbox gUnknown_81777F2, 3
+	msgbox gUnknown_81777F2, MSGBOX_SIGN
 	end
 
 SafariZone_Center_EventScript_16236A:: @ 816236A
-	msgbox gUnknown_81777FD, 3
+	msgbox gUnknown_81777FD, MSGBOX_SIGN
 	end
 
 SafariZone_Center_EventScript_162373:: @ 8162373
-	msgbox gUnknown_817782F, 3
+	msgbox gUnknown_817782F, MSGBOX_SIGN
 	end

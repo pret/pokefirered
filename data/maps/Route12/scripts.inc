@@ -19,7 +19,7 @@ Route12_EventScript_168014:: @ 8168014
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	msgbox gUnknown_81853CC, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16808D
 	call EventScript_1A924B
 	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
@@ -57,9 +57,9 @@ EventScript_168099:: @ 8168099
 	end
 
 Route12_EventScript_1680A3:: @ 81680A3
-	msgbox gUnknown_8185797, 3
+	msgbox gUnknown_8185797, MSGBOX_SIGN
 	end
 
 Route12_EventScript_1680AC:: @ 81680AC
-	msgbox gUnknown_81857B3, 3
+	msgbox gUnknown_81857B3, MSGBOX_SIGN
 	end

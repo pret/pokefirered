@@ -37,7 +37,7 @@ EventScript_16EAB9:: @ 816EAB9
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_16EAC3:: @ 816EAC3
-	msgbox gUnknown_819A837, 2
+	msgbox gUnknown_819A837, MSGBOX_NPC
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC

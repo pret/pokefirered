@@ -2,7 +2,7 @@ FuchsiaCity_House1_MapScripts:: @ 816D6C5
 	.byte 0
 
 FuchsiaCity_House1_EventScript_16D6C6:: @ 816D6C6
-	msgbox gUnknown_8198BBB, 2
+	msgbox gUnknown_8198BBB, MSGBOX_NPC
 	end
 
 FuchsiaCity_House1_EventScript_16D6CF:: @ 816D6CF
@@ -14,5 +14,5 @@ FuchsiaCity_House1_EventScript_16D6CF:: @ 816D6CF
 	end
 
 FuchsiaCity_House1_EventScript_16D6E8:: @ 816D6E8
-	msgbox gUnknown_8198C7B, 2
+	msgbox gUnknown_8198C7B, MSGBOX_NPC
 	end

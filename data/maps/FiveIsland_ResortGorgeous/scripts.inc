@@ -40,5 +40,5 @@ Movement_168841:: @ 8168841
 	step_end
 
 FiveIsland_ResortGorgeous_EventScript_168844:: @ 8168844
-	msgbox gUnknown_818A7FE, 3
+	msgbox gUnknown_818A7FE, MSGBOX_SIGN
 	end

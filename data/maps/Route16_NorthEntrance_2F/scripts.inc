@@ -2,19 +2,19 @@ Route16_NorthEntrance_2F_MapScripts:: @ 81702BE
 	.byte 0
 
 Route16_NorthEntrance_2F_EventScript_1702BF:: @ 81702BF
-	msgbox gUnknown_819FA07, 2
+	msgbox gUnknown_819FA07, MSGBOX_NPC
 	end
 
 Route16_NorthEntrance_2F_EventScript_1702C8:: @ 81702C8
-	msgbox gUnknown_819FA41, 2
+	msgbox gUnknown_819FA41, MSGBOX_NPC
 	end
 
 Route16_NorthEntrance_2F_EventScript_1702D1:: @ 81702D1
-	msgbox gUnknown_819FA6F, 3
+	msgbox gUnknown_819FA6F, MSGBOX_SIGN
 	end
 
 Route16_NorthEntrance_2F_EventScript_1702DA:: @ 81702DA
-	msgbox gUnknown_819FAB9, 3
+	msgbox gUnknown_819FAB9, MSGBOX_SIGN
 	end
 
 Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
@@ -23,7 +23,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	call EventScript_17036F
 	goto_if_set FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE, EventScript_170365
 	msgbox gUnknown_819FB0E, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount

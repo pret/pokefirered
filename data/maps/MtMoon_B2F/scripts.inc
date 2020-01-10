@@ -55,7 +55,7 @@ MtMoon_B2F_EventScript_16071B:: @ 816071B
 	lock
 	faceplayer
 	msgbox gUnknown_8172E77, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1607DE
 	removeobject 1
 	giveitem_msg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, MUS_FAN5
@@ -87,7 +87,7 @@ MtMoon_B2F_EventScript_16077F:: @ 816077F
 	lock
 	faceplayer
 	msgbox gUnknown_8172E94, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1607DE
 	removeobject 2
 	giveitem_msg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, MUS_FAN5
@@ -120,20 +120,20 @@ Movement_1607E0:: @ 81607E0
 
 MtMoon_B2F_EventScript_1607E4:: @ 81607E4
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT, Text_172C5A, Text_172CB8
-	msgbox gUnknown_8172CCB, 6
+	msgbox gUnknown_8172CCB, MSGBOX_AUTOCLOSE
 	end
 
 MtMoon_B2F_EventScript_1607FB:: @ 81607FB
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_2, Text_172CFC, Text_172D46
-	msgbox gUnknown_8172D51, 6
+	msgbox gUnknown_8172D51, MSGBOX_AUTOCLOSE
 	end
 
 MtMoon_B2F_EventScript_160812:: @ 8160812
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_3, Text_172D82, Text_172DAF
-	msgbox gUnknown_8172DC1, 6
+	msgbox gUnknown_8172DC1, MSGBOX_AUTOCLOSE
 	end
 
 MtMoon_B2F_EventScript_160829:: @ 8160829
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, Text_172DF0, Text_172E3E
-	msgbox gUnknown_8172E4B, 6
+	msgbox gUnknown_8172E4B, MSGBOX_AUTOCLOSE
 	end

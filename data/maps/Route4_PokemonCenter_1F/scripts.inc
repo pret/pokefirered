@@ -9,7 +9,7 @@ Route4_PokemonCenter_1F_OnTransition:: @ 816F744
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F74B:: @ 816F74B
-	msgbox gUnknown_819D9D4, 2
+	msgbox gUnknown_819D9D4, MSGBOX_NPC
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
@@ -41,7 +41,7 @@ EventScript_16F794:: @ 816F794
 	end
 
 EventScript_16F7A2:: @ 816F7A2
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F888
 	checkmoney 500, 0
 	compare VAR_RESULT, 0
@@ -60,7 +60,7 @@ EventScript_16F7A2:: @ 816F7A2
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F861
 	call EventScript_1A8C27
 	fadescreen 1
@@ -73,7 +73,7 @@ EventScript_16F7F6:: @ 816F7F6
 EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F84B
 	fadescreen 1
 	hidemoneybox 0, 0
@@ -146,7 +146,7 @@ Route4_PokemonCenter_1F_EventScript_16F8BB:: @ 816F8BB
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8C4:: @ 816F8C4
-	msgbox gUnknown_819DCDB, 2
+	msgbox gUnknown_819DCDB, MSGBOX_NPC
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8CD:: @ 816F8CD

@@ -82,12 +82,12 @@ EventScript_16DA75:: @ 816DA75
 
 CinnabarIsland_Gym_EventScript_16DA7F:: @ 816DA7F
 	trainerbattle_single TRAINER_SUPER_NERD_ERIK, Text_1997A5, Text_1997D6
-	msgbox gUnknown_81997EA, 6
+	msgbox gUnknown_81997EA, MSGBOX_AUTOCLOSE
 	end
 
 CinnabarIsland_Gym_EventScript_16DA96:: @ 816DA96
 	trainerbattle_single TRAINER_SUPER_NERD_AVERY, Text_1998BD, Text_1998ED, EventScript_16DAB1
-	msgbox gUnknown_8199911, 6
+	msgbox gUnknown_8199911, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DAB1:: @ 816DAB1
@@ -102,7 +102,7 @@ EventScript_16DABC:: @ 816DABC
 CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
 	trainerbattle_single TRAINER_SUPER_NERD_DEREK, Text_1999B7, Text_1999DB, EventScript_16DAEA
 	famechecker FAMECHECKER_BLAINE, 2
-	msgbox gUnknown_81999DF, 6
+	msgbox gUnknown_81999DF, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DAEA:: @ 816DAEA
@@ -116,7 +116,7 @@ EventScript_16DAF5:: @ 816DAF5
 
 CinnabarIsland_Gym_EventScript_16DAFB:: @ 816DAFB
 	trainerbattle_single TRAINER_SUPER_NERD_ZAC, Text_199AFC, Text_199B16, EventScript_16DB16
-	msgbox gUnknown_8199B27, 6
+	msgbox gUnknown_8199B27, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB16:: @ 816DB16
@@ -130,7 +130,7 @@ EventScript_16DB21:: @ 816DB21
 
 CinnabarIsland_Gym_EventScript_16DB27:: @ 816DB27
 	trainerbattle_single TRAINER_BURGLAR_QUINN, Text_19983F, Text_199870, EventScript_16DB42
-	msgbox gUnknown_819987D, 6
+	msgbox gUnknown_819987D, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB42:: @ 816DB42
@@ -144,7 +144,7 @@ EventScript_16DB4D:: @ 816DB4D
 
 CinnabarIsland_Gym_EventScript_16DB53:: @ 816DB53
 	trainerbattle_single TRAINER_BURGLAR_RAMON, Text_199948, Text_199973, EventScript_16DB6E
-	msgbox gUnknown_8199986, 6
+	msgbox gUnknown_8199986, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB6E:: @ 816DB6E
@@ -158,7 +158,7 @@ EventScript_16DB79:: @ 816DB79
 
 CinnabarIsland_Gym_EventScript_16DB7F:: @ 816DB7F
 	trainerbattle_single TRAINER_BURGLAR_DUSTY, Text_199A7F, Text_199AB9, EventScript_16DB9A
-	msgbox gUnknown_8199AC9, 6
+	msgbox gUnknown_8199AC9, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB9A:: @ 816DB9A
@@ -210,9 +210,9 @@ CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
 EventScript_16DC00:: @ 816DC00
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D5A, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DC43
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16DC6A
 	end
 
@@ -305,9 +305,9 @@ CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 EventScript_16DCF5:: @ 816DCF5
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199D79, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DD41
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16DD1C
 	end
 
@@ -391,9 +391,9 @@ CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 EventScript_16DDD3:: @ 816DDD3
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DA9, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DE1F
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16DDFA
 	end
 
@@ -468,9 +468,9 @@ CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 EventScript_16DEAA:: @ 816DEAA
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199DC6, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DEF6
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16DED1
 	end
 
@@ -545,9 +545,9 @@ CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 EventScript_16DF81:: @ 816DF81
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E00, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DFA8
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16DFCD
 	end
 
@@ -622,9 +622,9 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 EventScript_16E058:: @ 816E058
 	msgbox gUnknown_8199C9F
 	msgbox gUnknown_8199E36, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16E0A4
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E07F
 	end
 

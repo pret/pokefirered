@@ -117,15 +117,15 @@ MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
 
 MtEmber_Exterior_EventScript_163AB4:: @ 8163AB4
 	trainerbattle_single TRAINER_PKMN_RANGER_LOGAN, Text_17AB73, Text_17ABAA
-	msgbox gUnknown_817ABD8, 6
+	msgbox gUnknown_817ABD8, MSGBOX_AUTOCLOSE
 	end
 
 MtEmber_Exterior_EventScript_163ACB:: @ 8163ACB
 	trainerbattle_single TRAINER_PKMN_RANGER_BETH, Text_17AC55, Text_17AC82
-	msgbox gUnknown_817ACA2, 6
+	msgbox gUnknown_817ACA2, MSGBOX_AUTOCLOSE
 	end
 
 MtEmber_Exterior_EventScript_163AE2:: @ 8163AE2
 	trainerbattle_single TRAINER_CRUSH_GIRL_JOCELYN, Text_17AD06, Text_17AD6B
-	msgbox gUnknown_817AD89, 6
+	msgbox gUnknown_817AD89, MSGBOX_AUTOCLOSE
 	end

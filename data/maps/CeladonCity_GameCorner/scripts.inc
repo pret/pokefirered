@@ -15,7 +15,7 @@ EventScript_16C656:: @ 816C656
 	return
 
 CeladonCity_GameCorner_EventScript_16C684:: @ 816C684
-	msgbox gUnknown_8196940, 2
+	msgbox gUnknown_8196940, MSGBOX_NPC
 	end
 
 CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
@@ -254,7 +254,7 @@ EventScript_16C96A:: @ 816C96A
 EventScript_16C96C:: @ 816C96C
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CAA0
 	msgbox gUnknown_8196F46, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C96A
 	setfieldeffectarg 0, 255
 	setfieldeffectarg 1, 10
@@ -417,7 +417,7 @@ EventScript_16CABE:: @ 816CABE
 
 CeladonCity_GameCorner_EventScript_16CAF5:: @ 816CAF5
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_7, Text_196E69, Text_196E95, EventScript_16CB10
-	msgbox gUnknown_8196E9B, 6
+	msgbox gUnknown_8196E9B, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16CB10:: @ 816CB10
@@ -462,13 +462,13 @@ Movement_16CB53:: @ 816CB53
 	step_end
 
 CeladonCity_GameCorner_EventScript_16CB5A:: @ 816CB5A
-	msgbox gUnknown_8196F64, 3
+	msgbox gUnknown_8196F64, MSGBOX_SIGN
 	end
 
 CeladonCity_GameCorner_EventScript_16CB63:: @ 816CB63
-	msgbox gUnknown_8196F81, 3
+	msgbox gUnknown_8196F81, MSGBOX_SIGN
 	end
 
 CeladonCity_GameCorner_EventScript_16CB6C:: @ 816CB6C
-	msgbox gUnknown_8196FA0, 3
+	msgbox gUnknown_8196FA0, MSGBOX_SIGN
 	end

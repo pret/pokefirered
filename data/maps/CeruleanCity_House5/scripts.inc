@@ -6,7 +6,7 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	faceplayer
 	goto_if_set FLAG_GOT_POWDER_JAR, EventScript_16AEB7
 	msgbox gUnknown_8192F67, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16AEAD
 	goto_if_unset FLAG_SYS_GOT_BERRY_POUCH, EventScript_16AEA3
 	msgbox gUnknown_8193003
@@ -141,7 +141,7 @@ EventScript_16B048:: @ 816B048
 
 EventScript_16B055:: @ 816B055
 	msgbox gUnknown_819331E, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16AEC8
 	copyvar VAR_0x8004, VAR_0x8009
 	specialvar VAR_RESULT, sub_815EEB0
@@ -154,7 +154,7 @@ EventScript_16B055:: @ 816B055
 	special sub_815EF5C
 	special sub_815F070
 	msgbox gUnknown_819337A, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16AEC8
 	msgbox gUnknown_81933FB
 	special sub_815F114

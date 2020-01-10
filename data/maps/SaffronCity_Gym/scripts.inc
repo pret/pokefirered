@@ -37,38 +37,38 @@ EventScript_16EE7E:: @ 816EE7E
 
 SaffronCity_Gym_EventScript_16EE88:: @ 816EE88
 	trainerbattle_single TRAINER_PSYCHIC_JOHAN, Text_19B936, Text_19B957
-	msgbox gUnknown_819B96D, 6
+	msgbox gUnknown_819B96D, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EE9F:: @ 816EE9F
 	trainerbattle_single TRAINER_PSYCHIC_TYRON, Text_19BA45, Text_19BA9E
 	famechecker FAMECHECKER_SABRINA, 5
-	msgbox gUnknown_819BAB4, 6
+	msgbox gUnknown_819BAB4, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EEC3:: @ 816EEC3
 	trainerbattle_single TRAINER_PSYCHIC_CAMERON, Text_19BB49, Text_19BBA1
-	msgbox gUnknown_819BBB3, 6
+	msgbox gUnknown_819BBB3, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EEDA:: @ 816EEDA
 	trainerbattle_single TRAINER_PSYCHIC_PRESTON, Text_19BC57, Text_19BCBC
-	msgbox gUnknown_819BCC4, 6
+	msgbox gUnknown_819BCC4, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EEF1:: @ 816EEF1
 	trainerbattle_single TRAINER_CHANNELER_AMANDA, Text_19B86A, Text_19B8A8
-	msgbox gUnknown_819B8B9, 6
+	msgbox gUnknown_819B8B9, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EF08:: @ 816EF08
 	trainerbattle_single TRAINER_CHANNELER_STACY, Text_19B998, Text_19B9EC
-	msgbox gUnknown_819B9F7, 6
+	msgbox gUnknown_819B9F7, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EF1F:: @ 816EF1F
 	trainerbattle_single TRAINER_CHANNELER_TASHA, Text_19BAE8, Text_19BB0D
-	msgbox gUnknown_819BB1F, 6
+	msgbox gUnknown_819BB1F, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Gym_EventScript_16EF36:: @ 816EF36

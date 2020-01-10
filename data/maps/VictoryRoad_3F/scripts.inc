@@ -33,30 +33,30 @@ EventScript_161101:: @ 8161101
 
 VictoryRoad_3F_EventScript_161103:: @ 8161103
 	trainerbattle_single TRAINER_COOLTRAINER_GEORGE, Text_174B60, Text_174B83
-	msgbox gUnknown_8174B99, 6
+	msgbox gUnknown_8174B99, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_3F_EventScript_16111A:: @ 816111A
 	trainerbattle_single TRAINER_COOLTRAINER_COLBY, Text_174C8A, Text_174CA9
-	msgbox gUnknown_8174CBD, 6
+	msgbox gUnknown_8174CBD, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_3F_EventScript_161131:: @ 8161131
 	trainerbattle_single TRAINER_COOLTRAINER_CAROLINE, Text_174C30, Text_174C5A
-	msgbox gUnknown_8174C67, 6
+	msgbox gUnknown_8174C67, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_3F_EventScript_161148:: @ 8161148
 	trainerbattle_single TRAINER_COOLTRAINER_ALEXA, Text_174BCA, Text_174BF4
-	msgbox gUnknown_8174C03, 6
+	msgbox gUnknown_8174C03, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_3F_EventScript_16115F:: @ 816115F
 	trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, Text_174D0C, Text_174D45, Text_174D96
-	msgbox gUnknown_8174D64, 6
+	msgbox gUnknown_8174D64, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_3F_EventScript_16117A:: @ 816117A
 	trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, Text_174E08, Text_174E39, Text_174E8D
-	msgbox gUnknown_8174E48, 6
+	msgbox gUnknown_8174E48, MSGBOX_AUTOCLOSE
 	end

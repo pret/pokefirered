@@ -180,5 +180,5 @@ Movement_160A4C:: @ 8160A4C
 	step_end
 
 SSAnne_2F_Corridor_EventScript_160A54:: @ 8160A54
-	msgbox gUnknown_8172FC3, 2
+	msgbox gUnknown_8172FC3, MSGBOX_NPC
 	end

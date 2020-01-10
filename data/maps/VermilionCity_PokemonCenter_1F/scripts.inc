@@ -15,13 +15,13 @@ VermilionCity_PokemonCenter_1F_EventScript_16B433:: @ 816B433
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B43C:: @ 816B43C
-	msgbox gUnknown_8194145, 2
+	msgbox gUnknown_8194145, MSGBOX_NPC
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B445:: @ 816B445
-	msgbox gUnknown_81940AF, 2
+	msgbox gUnknown_81940AF, MSGBOX_NPC
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_16B44E:: @ 816B44E
-	msgbox gUnknown_8194180, 2
+	msgbox gUnknown_8194180, MSGBOX_NPC
 	end

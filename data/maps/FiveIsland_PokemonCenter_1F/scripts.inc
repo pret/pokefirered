@@ -15,9 +15,9 @@ FiveIsland_PokemonCenter_1F_EventScript_171D00:: @ 8171D00
 	end
 
 FiveIsland_PokemonCenter_1F_EventScript_171D09:: @ 8171D09
-	msgbox gUnknown_81A3BBA, 2
+	msgbox gUnknown_81A3BBA, MSGBOX_NPC
 	end
 
 FiveIsland_PokemonCenter_1F_EventScript_171D12:: @ 8171D12
-	msgbox gUnknown_81A3BFD, 2
+	msgbox gUnknown_81A3BFD, MSGBOX_NPC
 	end

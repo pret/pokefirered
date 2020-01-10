@@ -2,7 +2,7 @@ Route6_NorthEntrance_MapScripts:: @ 816F9C6
 	.byte 0
 
 Route6_NorthEntrance_EventScript_16F9C7:: @ 816F9C7
-	msgbox gUnknown_819E2A3, 2
+	msgbox gUnknown_819E2A3, MSGBOX_NPC
 	end
 
 Route6_NorthEntrance_EventScript_16F9D0:: @ 816F9D0

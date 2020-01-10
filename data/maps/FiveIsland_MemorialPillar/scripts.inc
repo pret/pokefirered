@@ -48,7 +48,7 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 
 EventScript_168A86:: @ 8168A86
 	msgbox gUnknown_818B105, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_168A9B
 	releaseall
 	end

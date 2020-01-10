@@ -5,7 +5,7 @@ FuchsiaCity_House3_EventScript_16D895:: @ 816D895
 	lock
 	faceplayer
 	msgbox gUnknown_81993B9, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16D8B0
 	goto EventScript_16D941
 	end
@@ -30,7 +30,7 @@ EventScript_16D8B0:: @ 816D8B0
 	goto_if_eq EventScript_16D8B0
 	special ScrSpecial_GetPokemonNicknameAndMoveName
 	msgbox gUnknown_8199485, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16D919
 	goto EventScript_16D941
 	end

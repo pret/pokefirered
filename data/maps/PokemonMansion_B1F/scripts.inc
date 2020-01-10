@@ -17,15 +17,15 @@ PokemonMansion_B1F_EventScript_16230C:: @ 816230C
 	end
 
 PokemonMansion_B1F_EventScript_162320:: @ 8162320
-	msgbox gUnknown_8177798, 3
+	msgbox gUnknown_8177798, MSGBOX_SIGN
 	end
 
 PokemonMansion_B1F_EventScript_162329:: @ 8162329
 	trainerbattle_single TRAINER_BURGLAR_LEWIS, Text_1776C0, Text_1776D7
-	msgbox gUnknown_81776DE, 6
+	msgbox gUnknown_81776DE, MSGBOX_AUTOCLOSE
 	end
 
 PokemonMansion_B1F_EventScript_162340:: @ 8162340
 	trainerbattle_single TRAINER_SCIENTIST_IVAN, Text_177720, Text_177757
-	msgbox gUnknown_817776A, 6
+	msgbox gUnknown_817776A, MSGBOX_AUTOCLOSE
 	end

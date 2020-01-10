@@ -28,7 +28,7 @@ SaffronCity_Dojo_EventScript_16EC00:: @ 816EC00
 	textcolor 0
 	msgbox gUnknown_819B44E, MSGBOX_YESNO
 	call EventScript_1A6675
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16EC82
 	erasemonpic
 	release
@@ -50,7 +50,7 @@ SaffronCity_Dojo_EventScript_16EC46:: @ 816EC46
 	textcolor 0
 	msgbox gUnknown_819B49E, MSGBOX_YESNO
 	call EventScript_1A6675
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16EC82
 	erasemonpic
 	release
@@ -77,7 +77,7 @@ EventScript_16ECB5:: @ 816ECB5
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16ED29
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -93,7 +93,7 @@ EventScript_16ECEC:: @ 816ECEC
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16ED1E
 	call EventScript_1A8C33
 	goto EventScript_16ED1E
@@ -109,41 +109,41 @@ EventScript_16ED29:: @ 816ED29
 	end
 
 SaffronCity_Dojo_EventScript_16ED2B:: @ 816ED2B
-	msgbox gUnknown_819B52E, 3
+	msgbox gUnknown_819B52E, MSGBOX_SIGN
 	end
 
 SaffronCity_Dojo_EventScript_16ED34:: @ 816ED34
-	msgbox gUnknown_819B4F8, 3
+	msgbox gUnknown_819B4F8, MSGBOX_SIGN
 	end
 
 SaffronCity_Dojo_EventScript_16ED3D:: @ 816ED3D
-	msgbox gUnknown_819B50F, 3
+	msgbox gUnknown_819B50F, MSGBOX_SIGN
 	end
 
 SaffronCity_Dojo_EventScript_16ED46:: @ 816ED46
 	trainerbattle_single TRAINER_BLACK_BELT_HITOSHI, Text_19B3DF, Text_19B40F
-	msgbox gUnknown_819B41F, 6
+	msgbox gUnknown_819B41F, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Dojo_EventScript_16ED5D:: @ 816ED5D
 	trainerbattle_single TRAINER_BLACK_BELT_HIDEKI, Text_19B2E0, Text_19B2FD
-	msgbox gUnknown_819B30F, 6
+	msgbox gUnknown_819B30F, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Dojo_EventScript_16ED74:: @ 816ED74
 	trainerbattle_single TRAINER_BLACK_BELT_AARON, Text_19B341, Text_19B396
-	msgbox gUnknown_819B3AC, 6
+	msgbox gUnknown_819B3AC, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Dojo_EventScript_16ED8B:: @ 816ED8B
 	trainerbattle_single TRAINER_BLACK_BELT_MIKE, Text_19B275, Text_19B292
-	msgbox gUnknown_819B29D, 6
+	msgbox gUnknown_819B29D, MSGBOX_AUTOCLOSE
 	end
 
 SaffronCity_Dojo_EventScript_16EDA2:: @ 816EDA2
 	trainerbattle_single TRAINER_BLACK_BELT_KOICHI, Text_19B12C, Text_19B193, EventScript_16EDD0
 	goto_if_set FLAG_GOT_HITMON_FROM_DOJO, EventScript_16EDC6
-	msgbox gUnknown_819B1A7, 6
+	msgbox gUnknown_819B1A7, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16EDC6:: @ 816EDC6

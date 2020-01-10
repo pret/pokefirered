@@ -7,15 +7,15 @@ PokemonTower_1F_OnTransition:: @ 816323B
 	end
 
 PokemonTower_1F_EventScript_16323F:: @ 816323F
-	msgbox gUnknown_8179CAB, 2
+	msgbox gUnknown_8179CAB, MSGBOX_NPC
 	end
 
 PokemonTower_1F_EventScript_163248:: @ 8163248
-	msgbox gUnknown_8179C8C, 2
+	msgbox gUnknown_8179C8C, MSGBOX_NPC
 	end
 
 PokemonTower_1F_EventScript_163251:: @ 8163251
-	msgbox gUnknown_8179C41, 2
+	msgbox gUnknown_8179C41, MSGBOX_NPC
 	end
 
 PokemonTower_1F_EventScript_16325A:: @ 816325A
@@ -34,5 +34,5 @@ EventScript_163272:: @ 8163272
 	end
 
 PokemonTower_1F_EventScript_16327C:: @ 816327C
-	msgbox gUnknown_8179B7A, 2
+	msgbox gUnknown_8179B7A, MSGBOX_NPC
 	end

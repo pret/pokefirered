@@ -2,7 +2,7 @@ Route2_House_MapScripts:: @ 816F5F8
 	.byte 0
 
 Route2_House_EventScript_16F5F9:: @ 816F5F9
-	msgbox gUnknown_819D5E7, 2
+	msgbox gUnknown_819D5E7, MSGBOX_NPC
 	end
 
 Route2_House_EventScript_16F602:: @ 816F602
@@ -12,7 +12,7 @@ Route2_House_EventScript_16F602:: @ 816F602
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_MIMIEN_TRADE, EventScript_16F674
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F65C
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6

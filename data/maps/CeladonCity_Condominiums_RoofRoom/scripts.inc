@@ -2,7 +2,7 @@ CeladonCity_Condominiums_RoofRoom_MapScripts:: @ 816C463
 	.byte 0
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C464:: @ 816C464
-	msgbox gUnknown_81964D7, 2
+	msgbox gUnknown_81964D7, MSGBOX_NPC
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
@@ -27,7 +27,7 @@ EventScript_16C4A6:: @ 816C4A6
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C514
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -42,7 +42,7 @@ EventScript_16C4DA:: @ 816C4DA
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C509
 	call EventScript_1A8C33
 	goto EventScript_16C509
@@ -59,7 +59,7 @@ EventScript_16C514:: @ 816C514
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C519:: @ 816C519
-	msgbox gUnknown_81967E3, 3
+	msgbox gUnknown_81967E3, MSGBOX_SIGN
 	end
 
 CeladonCity_Condominiums_RoofRoom_EventScript_16C522:: @ 816C522

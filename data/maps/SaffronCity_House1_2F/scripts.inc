@@ -44,9 +44,9 @@ EventScript_16EBC0:: @ 816EBC0
 	return
 
 SaffronCity_House1_2F_EventScript_16EBC9:: @ 816EBC9
-	msgbox gUnknown_819B0D0, 3
+	msgbox gUnknown_819B0D0, MSGBOX_SIGN
 	end
 
 SaffronCity_House1_2F_EventScript_16EBD2:: @ 816EBD2
-	msgbox gUnknown_819B0A0, 3
+	msgbox gUnknown_819B0A0, MSGBOX_SIGN
 	end

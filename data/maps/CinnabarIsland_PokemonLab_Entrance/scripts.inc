@@ -12,21 +12,21 @@ EventScript_16E285:: @ 816E285
 	return
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_16E28B:: @ 816E28B
-	msgbox gUnknown_8199EE5, 2
+	msgbox gUnknown_8199EE5, MSGBOX_NPC
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_16E294:: @ 816E294
-	msgbox gUnknown_8199F41, 3
+	msgbox gUnknown_8199F41, MSGBOX_SIGN
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_16E29D:: @ 816E29D
-	msgbox gUnknown_8199F6A, 3
+	msgbox gUnknown_8199F6A, MSGBOX_SIGN
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_16E2A6:: @ 816E2A6
-	msgbox gUnknown_8199F83, 3
+	msgbox gUnknown_8199F83, MSGBOX_SIGN
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_16E2AF:: @ 816E2AF
-	msgbox gUnknown_8199F9A, 3
+	msgbox gUnknown_8199F9A, MSGBOX_SIGN
 	end

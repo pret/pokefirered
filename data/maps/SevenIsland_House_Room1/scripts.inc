@@ -92,13 +92,13 @@ EventScript_170987:: @ 8170987
 	special SavePlayerParty
 	special Special_BufferEReaderTrainerName5
 	msgbox gUnknown_81A0598, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_170A11
 	call EventScript_170A1E
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_170A11
 	msgbox gUnknown_81A0788, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_170A11
 	special LoadPlayerParty
 	call EventScript_1A4EAF
@@ -179,5 +179,5 @@ Movement_170A72:: @ 8170A72
 	step_end
 
 SevenIsland_House_Room1_EventScript_170A75:: @ 8170A75
-	msgbox gUnknown_81A0567, 3
+	msgbox gUnknown_81A0567, MSGBOX_SIGN
 	end

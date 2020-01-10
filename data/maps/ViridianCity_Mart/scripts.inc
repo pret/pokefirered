@@ -80,9 +80,9 @@ EventScript_16A2A4:: @ 816A2A4
 	end
 
 ViridianCity_Mart_EventScript_16A2AE:: @ 816A2AE
-	msgbox gUnknown_81902F5, 2
+	msgbox gUnknown_81902F5, MSGBOX_NPC
 	end
 
 ViridianCity_Mart_EventScript_16A2B7:: @ 816A2B7
-	msgbox gUnknown_819032C, 2
+	msgbox gUnknown_819032C, MSGBOX_NPC
 	end

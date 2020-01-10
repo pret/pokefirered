@@ -7,9 +7,9 @@ FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	goto_if_set FLAG_GOT_HM04, EventScript_16D7FA
 	goto_if_set FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH, EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	call_if_eq EventScript_16D7E8
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	call_if_eq EventScript_16D7F1
 	release
 	end
@@ -55,9 +55,9 @@ EventScript_16D7FA:: @ 816D7FA
 	end
 
 FuchsiaCity_Building1_EventScript_16D804:: @ 816D804
-	msgbox gUnknown_819913C, 3
+	msgbox gUnknown_819913C, MSGBOX_SIGN
 	end
 
 FuchsiaCity_Building1_EventScript_16D80D:: @ 816D80D
-	msgbox gUnknown_8199167, 3
+	msgbox gUnknown_8199167, MSGBOX_SIGN
 	end

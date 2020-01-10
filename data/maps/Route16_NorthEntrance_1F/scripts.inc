@@ -12,7 +12,7 @@ EventScript_1701D5:: @ 81701D5
 	return
 
 Route16_NorthEntrance_1F_EventScript_1701DB:: @ 81701DB
-	msgbox gUnknown_819F98B, 2
+	msgbox gUnknown_819F98B, MSGBOX_NPC
 	end
 
 Route16_NorthEntrance_1F_EventScript_1701E4:: @ 81701E4
@@ -114,5 +114,5 @@ Movement_1702B3:: @ 81702B3
 	step_end
 
 Route16_NorthEntrance_1F_EventScript_1702B5:: @ 81702B5
-	msgbox gUnknown_819F9E8, 2
+	msgbox gUnknown_819F9E8, MSGBOX_NPC
 	end

@@ -12,7 +12,7 @@ EventScript_17038B:: @ 817038B
 	return
 
 Route18_EastEntrance_1F_EventScript_170391:: @ 8170391
-	msgbox gUnknown_819FD3A, 2
+	msgbox gUnknown_819FD3A, MSGBOX_NPC
 	end
 
 Route18_EastEntrance_1F_EventScript_17039A:: @ 817039A

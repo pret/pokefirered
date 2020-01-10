@@ -30,7 +30,7 @@ EventScript_163F6E:: @ 8163F6E
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F78:: @ 8163F78
-	msgbox gUnknown_817BB15, 3
+	msgbox gUnknown_817BB15, MSGBOX_SIGN
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
@@ -44,12 +44,12 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
 	trainerbattle_single TRAINER_SCIENTIST_GIDEON, Text_17BBAF, Text_17BC55, EventScript_163FCD
 	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_163FB7
-	msgbox gUnknown_817BCA3, 6
+	msgbox gUnknown_817BCA3, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_163FB7:: @ 8163FB7
 	famechecker FAMECHECKER_GIOVANNI, 5
-	msgbox gUnknown_817BCD7, 6
+	msgbox gUnknown_817BCD7, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_163FCD:: @ 8163FCD
@@ -61,17 +61,17 @@ EventScript_163FCD:: @ 8163FCD
 
 FiveIsland_RocketWarehouse_EventScript_163FE6:: @ 8163FE6
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_47, Text_17B54D, Text_17B585
-	msgbox gUnknown_817B5A6, 6
+	msgbox gUnknown_817B5A6, MSGBOX_AUTOCLOSE
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FFD:: @ 8163FFD
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_48, Text_17B677, Text_17B6D9
-	msgbox gUnknown_817B6EF, 6
+	msgbox gUnknown_817B6EF, MSGBOX_AUTOCLOSE
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
 	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN_2, Text_17B8DA, Text_17B9FB, EventScript_16402F
-	msgbox gUnknown_817BA64, 6
+	msgbox gUnknown_817BA64, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16402F:: @ 816402F
@@ -99,12 +99,12 @@ EventScript_164065:: @ 8164065
 
 FiveIsland_RocketWarehouse_EventScript_164070:: @ 8164070
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_42, Text_17B5D6, Text_17B62F
-	msgbox gUnknown_817B642, 6
+	msgbox gUnknown_817B642, MSGBOX_AUTOCLOSE
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
 	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN, Text_17B72D, Text_17B79C, EventScript_1640A2
-	msgbox gUnknown_817B7FA, 6
+	msgbox gUnknown_817B7FA, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_1640A2:: @ 81640A2

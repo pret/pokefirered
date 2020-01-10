@@ -8,8 +8,8 @@ Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_1BF46E
-	msgbox Text_19DD66, 5
-	compare VAR_RESULT, 1
+	msgbox Text_19DD66, MSGBOX_YESNO
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_1BF3DD
 	msgbox Text_19DDB2
 	goto EventScript_1BF541
@@ -64,8 +64,8 @@ EventScript_1BF46E:: @ 81BF46E
 	compare VAR_RESULT, 0
 	call_if_eq EventScript_1BF4B3
 	special GetCostToWithdrawRoute5DaycareMon
-	msgbox Text_19DE80, 5
-	compare VAR_RESULT, 1
+	msgbox Text_19DE80, MSGBOX_YESNO
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_1BF4BC
 	goto EventScript_1BF444
 	end

@@ -16,15 +16,15 @@ Route10_PokemonCenter_1F_EventScript_16FC41:: @ 816FC41
 	end
 
 Route10_PokemonCenter_1F_EventScript_16FC4A:: @ 816FC4A
-	msgbox gUnknown_819E59D, 2
+	msgbox gUnknown_819E59D, MSGBOX_NPC
 	end
 
 Route10_PokemonCenter_1F_EventScript_16FC53:: @ 816FC53
-	msgbox gUnknown_819E523, 2
+	msgbox gUnknown_819E523, MSGBOX_NPC
 	end
 
 Route10_PokemonCenter_1F_EventScript_16FC5C:: @ 816FC5C
-	msgbox gUnknown_819E5D2, 2
+	msgbox gUnknown_819E5D2, MSGBOX_NPC
 	end
 
 Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
@@ -33,7 +33,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	call EventScript_16FCF1
 	goto_if_set FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE, EventScript_16FCE7
 	msgbox gUnknown_819E5FB, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount

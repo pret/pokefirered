@@ -438,7 +438,7 @@ Movement_16582C:: @ 816582C
 	step_end
 
 PalletTown_EventScript_16582F:: @ 816582F
-	msgbox gUnknown_817D80D, 2
+	msgbox gUnknown_817D80D, MSGBOX_NPC
 	end
 
 PalletTown_EventScript_165838:: @ 8165838
@@ -449,15 +449,15 @@ PalletTown_EventScript_165838:: @ 8165838
 	end
 
 PalletTown_EventScript_165850:: @ 8165850
-	msgbox gUnknown_817D87F, 3
+	msgbox gUnknown_817D87F, MSGBOX_SIGN
 	end
 
 PalletTown_EventScript_165859:: @ 8165859
-	msgbox gUnknown_817D88A, 3
+	msgbox gUnknown_817D88A, MSGBOX_SIGN
 	end
 
 PalletTown_EventScript_165862:: @ 8165862
-	msgbox gUnknown_817D895, 3
+	msgbox gUnknown_817D895, MSGBOX_SIGN
 	end
 
 PalletTown_EventScript_16586B:: @ 816586B

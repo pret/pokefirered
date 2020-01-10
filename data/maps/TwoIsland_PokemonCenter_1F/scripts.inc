@@ -15,9 +15,9 @@ TwoIsland_PokemonCenter_1F_EventScript_1717C3:: @ 81717C3
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717CC:: @ 81717CC
-	msgbox gUnknown_81A2E59, 2
+	msgbox gUnknown_81A2E59, MSGBOX_NPC
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717D5:: @ 81717D5
-	msgbox gUnknown_81A2EBE, 2
+	msgbox gUnknown_81A2EBE, MSGBOX_NPC
 	end

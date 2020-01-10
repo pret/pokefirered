@@ -38,7 +38,7 @@ EventScript_16A634:: @ 816A634
 
 PewterCity_Gym_EventScript_16A63E:: @ 816A63E
 	trainerbattle_single TRAINER_CAMPER_LIAM, Text_1911EC, Text_191237
-	msgbox gUnknown_819126B, 6
+	msgbox gUnknown_819126B, MSGBOX_AUTOCLOSE
 	end
 
 PewterCity_Gym_EventScript_16A655:: @ 816A655
@@ -46,9 +46,9 @@ PewterCity_Gym_EventScript_16A655:: @ 816A655
 	faceplayer
 	goto_if_set FLAG_DEFEATED_BROCK, EventScript_16A67F
 	msgbox gUnknown_8191298, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16A689
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16A697
 	end
 

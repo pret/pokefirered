@@ -30,13 +30,13 @@ Items_170B58:: @ 8170B58
 	end
 
 SevenIsland_Mart_EventScript_170B6E:: @ 8170B6E
-	msgbox gUnknown_81A0A4F, 2
+	msgbox gUnknown_81A0A4F, MSGBOX_NPC
 	end
 
 SevenIsland_Mart_EventScript_170B77:: @ 8170B77
-	msgbox gUnknown_81A0ACC, 2
+	msgbox gUnknown_81A0ACC, MSGBOX_NPC
 	end
 
 SevenIsland_Mart_EventScript_170B80:: @ 8170B80
-	msgbox gUnknown_81A0B09, 2
+	msgbox gUnknown_81A0B09, MSGBOX_NPC
 	end

@@ -22,20 +22,20 @@ EventScript_161766:: @ 8161766
 	end
 
 SilphCo_4F_EventScript_161770:: @ 8161770
-	msgbox gUnknown_8175B57, 3
+	msgbox gUnknown_8175B57, MSGBOX_SIGN
 	end
 
 SilphCo_4F_EventScript_161779:: @ 8161779
 	trainerbattle_single TRAINER_SCIENTIST_RODNEY, Text_175A90, Text_175AB0
-	msgbox gUnknown_8175AC8, 6
+	msgbox gUnknown_8175AC8, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_4F_EventScript_161790:: @ 8161790
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_26, Text_175A2F, Text_175A5B
-	msgbox gUnknown_8175A62, 6
+	msgbox gUnknown_8175A62, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_4F_EventScript_1617A7:: @ 81617A7
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_27, Text_175B19, Text_175B2B
-	msgbox gUnknown_8175B38, 6
+	msgbox gUnknown_8175B38, MSGBOX_AUTOCLOSE
 	end

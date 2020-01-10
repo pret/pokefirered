@@ -8,7 +8,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_SEELOR_TRADE, EventScript_16E473
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E45B
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
@@ -147,7 +147,7 @@ EventScript_16E668:: @ 816E668
 	getspeciesname 0, SPECIES_OMANYTE
 	getitemname 1, ITEM_HELIX_FOSSIL
 	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E722
 	msgbox gUnknown_819A45D
 	textcolor 0
@@ -162,7 +162,7 @@ EventScript_16E6A6:: @ 816E6A6
 	getspeciesname 0, SPECIES_KABUTO
 	getitemname 1, ITEM_DOME_FOSSIL
 	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E722
 	msgbox gUnknown_819A45D
 	textcolor 0
@@ -177,7 +177,7 @@ EventScript_16E6E4:: @ 816E6E4
 	getspeciesname 0, SPECIES_AERODACTYL
 	getitemname 1, ITEM_OLD_AMBER
 	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E722
 	msgbox gUnknown_819A45D
 	textcolor 0
@@ -257,7 +257,7 @@ EventScript_16E827:: @ 816E827
 	waitfanfare
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E895
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -272,7 +272,7 @@ EventScript_16E85B:: @ 816E85B
 	waitfanfare
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E88A
 	call EventScript_1A8C33
 	goto EventScript_16E88A

@@ -41,7 +41,7 @@ EventScript_171696:: @ 8171696
 
 EventScript_1716A5:: @ 81716A5
 	msgbox gUnknown_81A2C63, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_17179E
 	goto EventScript_1716BE
 	end

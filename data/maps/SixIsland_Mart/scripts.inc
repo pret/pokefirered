@@ -29,5 +29,5 @@ Items_171E8C:: @ 8171E8C
 	end
 
 SixIsland_Mart_EventScript_171EA0:: @ 8171EA0
-	msgbox gUnknown_81A4271, 2
+	msgbox gUnknown_81A4271, MSGBOX_NPC
 	end

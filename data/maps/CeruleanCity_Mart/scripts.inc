@@ -2,11 +2,11 @@ CeruleanCity_Mart_MapScripts:: @ 816AC9D
 	.byte 0
 
 CeruleanCity_Mart_EventScript_16AC9E:: @ 816AC9E
-	msgbox gUnknown_81929C2, 2
+	msgbox gUnknown_81929C2, MSGBOX_NPC
 	end
 
 CeruleanCity_Mart_EventScript_16ACA7:: @ 816ACA7
-	msgbox gUnknown_8192A79, 2
+	msgbox gUnknown_8192A79, MSGBOX_NPC
 	end
 
 CeruleanCity_Mart_EventScript_16ACB0:: @ 816ACB0

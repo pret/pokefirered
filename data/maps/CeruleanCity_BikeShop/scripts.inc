@@ -48,7 +48,7 @@ EventScript_16AC62:: @ 816AC62
 	end
 
 CeruleanCity_BikeShop_EventScript_16AC6C:: @ 816AC6C
-	msgbox gUnknown_81928CF, 2
+	msgbox gUnknown_81928CF, MSGBOX_NPC
 	end
 
 CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
@@ -66,5 +66,5 @@ EventScript_16AC8A:: @ 816AC8A
 
 CeruleanCity_BikeShop_EventScript_16AC94:: @ 816AC94
 CeruleanCity_EventScript_16AC94:: @ 816AC94
-	msgbox gUnknown_81929AD, 3
+	msgbox gUnknown_81929AD, MSGBOX_SIGN
 	end

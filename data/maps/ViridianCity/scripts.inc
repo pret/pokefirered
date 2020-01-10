@@ -58,27 +58,27 @@ Movement_165992:: @ 8165992
 	step_end
 
 ViridianCity_EventScript_165994:: @ 8165994
-	msgbox gUnknown_817E1BB, 3
+	msgbox gUnknown_817E1BB, MSGBOX_SIGN
 	end
 
 ViridianCity_EventScript_16599D:: @ 816599D
-	msgbox gUnknown_817E1E7, 3
+	msgbox gUnknown_817E1E7, MSGBOX_SIGN
 	end
 
 ViridianCity_EventScript_1659A6:: @ 81659A6
-	msgbox gUnknown_817E24D, 3
+	msgbox gUnknown_817E24D, MSGBOX_SIGN
 	end
 
 ViridianCity_EventScript_1659AF:: @ 81659AF
-	msgbox gUnknown_817E2DB, 3
+	msgbox gUnknown_817E2DB, MSGBOX_SIGN
 	end
 
 ViridianCity_EventScript_1659B8:: @ 81659B8
-	msgbox gUnknown_817E2F5, 3
+	msgbox gUnknown_817E2F5, MSGBOX_SIGN
 	end
 
 ViridianCity_EventScript_1659C1:: @ 81659C1
-	msgbox gUnknown_817DABB, 2
+	msgbox gUnknown_817DABB, MSGBOX_NPC
 	end
 
 ViridianCity_EventScript_1659CA:: @ 81659CA
@@ -112,7 +112,7 @@ ViridianCity_EventScript_1659F6:: @ 81659F6
 
 EventScript_165A23:: @ 8165A23
 	msgbox gUnknown_817E046, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_165A40
 	msgbox gUnknown_817E0EA
 	release
@@ -159,9 +159,9 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	lock
 	faceplayer
 	msgbox gUnknown_817DB98, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_165AB0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_165ABA
 	end
 

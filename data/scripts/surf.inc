@@ -8,8 +8,8 @@ EventScript_UseSurf:: @ 81A6AC8
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	lockall
-	msgbox Text_1A556E, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1A556E, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_UseSurfRelease
 	msgbox Text_1A55A5
 	dofieldeffect FLDEFF_USE_SURF

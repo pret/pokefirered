@@ -21,15 +21,15 @@ EventScript_161DAD:: @ 8161DAD
 	end
 
 SilphCo_10F_EventScript_161DB7:: @ 8161DB7
-	msgbox gUnknown_8176DF8, 3
+	msgbox gUnknown_8176DF8, MSGBOX_SIGN
 	end
 
 SilphCo_10F_EventScript_161DC0:: @ 8161DC0
 	trainerbattle_single TRAINER_SCIENTIST_TRAVIS, Text_176D57, Text_176D73
-	msgbox gUnknown_8176D86, 6
+	msgbox gUnknown_8176D86, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_10F_EventScript_161DD7:: @ 8161DD7
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_39, Text_176CED, Text_176D18
-	msgbox gUnknown_8176D25, 6
+	msgbox gUnknown_8176D25, MSGBOX_AUTOCLOSE
 	end

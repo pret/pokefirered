@@ -15,11 +15,11 @@ SaffronCity_PokemonCenter_1F_EventScript_16EFFB:: @ 816EFFB
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F004:: @ 816F004
-	msgbox gUnknown_819C058, 2
+	msgbox gUnknown_819C058, MSGBOX_NPC
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F00D:: @ 816F00D
-	msgbox gUnknown_819C023, 2
+	msgbox gUnknown_819C023, MSGBOX_NPC
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_16F016:: @ 816F016

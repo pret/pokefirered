@@ -103,9 +103,9 @@ EventScript_166FCD:: @ 8166FCD
 	call_if_set FLAG_TEMP_2, EventScript_167053
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_167068
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_167078
 	end
 
@@ -337,15 +337,15 @@ CinnabarIsland_EventScript_1671EF:: @ 81671EF
 	end
 
 CinnabarIsland_EventScript_167208:: @ 8167208
-	msgbox gUnknown_8180BA0, 2
+	msgbox gUnknown_8180BA0, MSGBOX_NPC
 	end
 
 CinnabarIsland_EventScript_167211:: @ 8167211
-	msgbox gUnknown_8180C0D, 3
+	msgbox gUnknown_8180C0D, MSGBOX_SIGN
 	end
 
 CinnabarIsland_EventScript_16721A:: @ 816721A
-	msgbox gUnknown_8180C3E, 3
+	msgbox gUnknown_8180C3E, MSGBOX_SIGN
 	end
 
 CinnabarIsland_EventScript_167223:: @ 8167223

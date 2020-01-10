@@ -2,7 +2,7 @@ PewterCity_House1_MapScripts:: @ 816A71C
 	.byte 0
 
 PewterCity_House1_EventScript_16A71D:: @ 816A71D
-	msgbox gUnknown_81915DB, 2
+	msgbox gUnknown_81915DB, MSGBOX_NPC
 	end
 
 PewterCity_House1_EventScript_16A726:: @ 816A726

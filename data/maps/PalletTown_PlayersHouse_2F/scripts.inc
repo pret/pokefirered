@@ -22,11 +22,11 @@ EventScript_168CC8:: @ 8168CC8
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_168CD2:: @ 8168CD2
-	msgbox gUnknown_818D50B, 3
+	msgbox gUnknown_818D50B, MSGBOX_SIGN
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_168CDB:: @ 8168CDB
-	msgbox gUnknown_818D53B, 3
+	msgbox gUnknown_818D53B, MSGBOX_SIGN
 	end
 
 gUnknown_8168CE4:: @ 8168CE4

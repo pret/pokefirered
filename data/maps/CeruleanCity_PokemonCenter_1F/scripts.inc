@@ -15,11 +15,11 @@ CeruleanCity_PokemonCenter_1F_EventScript_16AA3C:: @ 816AA3C
 	end
 
 CeruleanCity_PokemonCenter_1F_EventScript_16AA45:: @ 816AA45
-	msgbox gUnknown_8192079, 2
+	msgbox gUnknown_8192079, MSGBOX_NPC
 	end
 
 CeruleanCity_PokemonCenter_1F_EventScript_16AA4E:: @ 816AA4E
-	msgbox gUnknown_8191FFB, 2
+	msgbox gUnknown_8191FFB, MSGBOX_NPC
 	end
 
 CeruleanCity_PokemonCenter_1F_EventScript_16AA57:: @ 816AA57
@@ -31,5 +31,5 @@ CeruleanCity_PokemonCenter_1F_EventScript_16AA57:: @ 816AA57
 	end
 
 CeruleanCity_PokemonCenter_1F_EventScript_16AA70:: @ 816AA70
-	msgbox gUnknown_819214C, 2
+	msgbox gUnknown_819214C, MSGBOX_NPC
 	end

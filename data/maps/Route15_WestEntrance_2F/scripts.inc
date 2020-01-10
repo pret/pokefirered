@@ -14,7 +14,7 @@ Route15_WestEntrance_2F_EventScript_170093:: @ 8170093
 	end
 
 Route15_WestEntrance_2F_EventScript_1700B0:: @ 81700B0
-	msgbox gUnknown_819F7F8, 3
+	msgbox gUnknown_819F7F8, MSGBOX_SIGN
 	end
 
 Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
@@ -23,7 +23,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	call EventScript_170145
 	goto_if_set FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE, EventScript_17013B
 	msgbox gUnknown_819F5AB, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount

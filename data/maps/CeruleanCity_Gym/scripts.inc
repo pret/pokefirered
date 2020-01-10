@@ -36,13 +36,13 @@ EventScript_16AB3A:: @ 816AB3A
 
 CeruleanCity_Gym_EventScript_16AB44:: @ 816AB44
 	trainerbattle_single TRAINER_PICNICKER_DIANA, Text_192481, Text_1924D0
-	msgbox gUnknown_81924E4, 6
+	msgbox gUnknown_81924E4, MSGBOX_AUTOCLOSE
 	end
 
 CeruleanCity_Gym_EventScript_16AB5B:: @ 816AB5B
 	trainerbattle_single TRAINER_SWIMMER_MALE_LUIS, Text_192524, Text_192547
 	famechecker FAMECHECKER_MISTY, 2
-	msgbox gUnknown_8192556, 6
+	msgbox gUnknown_8192556, MSGBOX_AUTOCLOSE
 	end
 
 CeruleanCity_Gym_EventScript_16AB7F:: @ 816AB7F

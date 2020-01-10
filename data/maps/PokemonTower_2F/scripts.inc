@@ -2,7 +2,7 @@ PokemonTower_2F_MapScripts:: @ 8163285
 	.byte 0
 
 PokemonTower_2F_EventScript_163286:: @ 8163286
-	msgbox gUnknown_8179EAE, 2
+	msgbox gUnknown_8179EAE, MSGBOX_NPC
 	end
 
 PokemonTower_2F_EventScript_16328F:: @ 816328F

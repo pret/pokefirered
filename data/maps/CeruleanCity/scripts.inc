@@ -255,15 +255,15 @@ EventScript_166713:: @ 8166713
 	end
 
 CeruleanCity_EventScript_16671D:: @ 816671D
-	msgbox gUnknown_817F0B2, 2
+	msgbox gUnknown_817F0B2, MSGBOX_NPC
 	end
 
 CeruleanCity_EventScript_166726:: @ 8166726
-	msgbox gUnknown_817EF3F, 2
+	msgbox gUnknown_817EF3F, MSGBOX_NPC
 	end
 
 CeruleanCity_EventScript_16672F:: @ 816672F
-	msgbox gUnknown_817F319, 2
+	msgbox gUnknown_817F319, MSGBOX_NPC
 	end
 
 CeruleanCity_EventScript_166738:: @ 8166738
@@ -357,15 +357,15 @@ EventScript_16682F:: @ 816682F
 	return
 
 CeruleanCity_EventScript_166838:: @ 8166838
-	msgbox gUnknown_817F420, 3
+	msgbox gUnknown_817F420, MSGBOX_SIGN
 	end
 
 CeruleanCity_EventScript_166841:: @ 8166841
-	msgbox gUnknown_817F453, 3
+	msgbox gUnknown_817F453, MSGBOX_SIGN
 	end
 
 CeruleanCity_EventScript_16684A:: @ 816684A
-	msgbox gUnknown_817F4C5, 3
+	msgbox gUnknown_817F4C5, MSGBOX_SIGN
 	end
 
 CeruleanCity_EventScript_166853:: @ 8166853

@@ -34,7 +34,7 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B1AA:: @ 816B1AA
 	end
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B1C3:: @ 816B1C3
-	msgbox gUnknown_81936B4, 2
+	msgbox gUnknown_81936B4, MSGBOX_NPC
 	end
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B1CC:: @ 816B1CC
@@ -78,5 +78,5 @@ LavenderTown_VolunteerPokemonHouse_EventScript_16B211:: @ 816B211
 	end
 
 LavenderTown_VolunteerPokemonHouse_EventScript_16B229:: @ 816B229
-	msgbox gUnknown_819392B, 3
+	msgbox gUnknown_819392B, MSGBOX_SIGN
 	end

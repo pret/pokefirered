@@ -10,5 +10,5 @@ ThreeIsland_House1_EventScript_17181A:: @ 817181A
 	end
 
 ThreeIsland_House1_EventScript_171829:: @ 8171829
-	msgbox gUnknown_81A2F92, 3
+	msgbox gUnknown_81A2F92, MSGBOX_SIGN
 	end

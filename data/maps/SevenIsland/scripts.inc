@@ -7,13 +7,13 @@ SevenIsland_OnTransition:: @ 8167EB9
 	end
 
 SevenIsland_EventScript_167EBD:: @ 8167EBD
-	msgbox gUnknown_8183046, 3
+	msgbox gUnknown_8183046, MSGBOX_SIGN
 	end
 
 SevenIsland_EventScript_167EC6:: @ 8167EC6
-	msgbox gUnknown_818306C, 2
+	msgbox gUnknown_818306C, MSGBOX_NPC
 	end
 
 SevenIsland_EventScript_167ECF:: @ 8167ECF
-	msgbox gUnknown_8183143, 2
+	msgbox gUnknown_8183143, MSGBOX_NPC
 	end

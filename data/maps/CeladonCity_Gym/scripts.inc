@@ -37,39 +37,39 @@ EventScript_16D107:: @ 816D107
 
 CeladonCity_Gym_EventScript_16D111:: @ 816D111
 	trainerbattle_single TRAINER_LASS_KAY, Text_19747C, Text_1974C4
-	msgbox gUnknown_81974D6, 6
+	msgbox gUnknown_81974D6, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D128:: @ 816D128
 	trainerbattle_single TRAINER_LASS_LISA, Text_1976C5, Text_1976FF
 	famechecker FAMECHECKER_ERIKA, 2
-	msgbox gUnknown_8197708, 6
+	msgbox gUnknown_8197708, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D14C:: @ 816D14C
 	trainerbattle_single TRAINER_PICNICKER_TINA, Text_197595, Text_1975BB
-	msgbox gUnknown_81975D1, 6
+	msgbox gUnknown_81975D1, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D163:: @ 816D163
 	trainerbattle_single TRAINER_BEAUTY_BRIDGET, Text_1974FA, Text_19751C
-	msgbox gUnknown_8197527, 6
+	msgbox gUnknown_8197527, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
 	trainerbattle_single TRAINER_BEAUTY_TAMIA, Text_19760B, Text_197660
 	famechecker FAMECHECKER_ERIKA, 3
-	msgbox gUnknown_8197664, 6
+	msgbox gUnknown_8197664, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D19E:: @ 816D19E
 	trainerbattle_single TRAINER_BEAUTY_LORI, Text_197747, Text_19777A
-	msgbox gUnknown_8197788, 6
+	msgbox gUnknown_8197788, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
 	trainerbattle_single TRAINER_COOLTRAINER_MARY, Text_1977E5, Text_197832
-	msgbox gUnknown_819783E, 6
+	msgbox gUnknown_819783E, MSGBOX_AUTOCLOSE
 	end
 
 CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC

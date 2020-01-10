@@ -148,7 +148,7 @@ EventScript_161B12:: @ 8161B12
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B7E
 	call EventScript_1A8C27
 	call EventScript_1A74EB
@@ -165,7 +165,7 @@ EventScript_161B45:: @ 8161B45
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B73
 	call EventScript_1A8C33
 	goto EventScript_161B73
@@ -235,25 +235,25 @@ EventScript_161BF0:: @ 8161BF0
 	end
 
 SilphCo_7F_EventScript_161BFA:: @ 8161BFA
-	msgbox gUnknown_8176954, 3
+	msgbox gUnknown_8176954, MSGBOX_SIGN
 	end
 
 SilphCo_7F_EventScript_161C03:: @ 8161C03
 	trainerbattle_single TRAINER_SCIENTIST_JOSHUA, Text_1765E2, Text_17660C
-	msgbox gUnknown_8176616, 6
+	msgbox gUnknown_8176616, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_7F_EventScript_161C1A:: @ 8161C1A
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_33, Text_176643, Text_176669
-	msgbox gUnknown_8176681, 6
+	msgbox gUnknown_8176681, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_7F_EventScript_161C31:: @ 8161C31
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_34, Text_1766B3, Text_1766D7
-	msgbox gUnknown_81766E5, 6
+	msgbox gUnknown_81766E5, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_7F_EventScript_161C48:: @ 8161C48
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_35, Text_176586, Text_1765A5
-	msgbox gUnknown_81765B1, 6
+	msgbox gUnknown_81765B1, MSGBOX_AUTOCLOSE
 	end

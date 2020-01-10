@@ -90,10 +90,10 @@ FourIsland_EventScript_167D55:: @ 8167D55
 
 EventScript_167D9B:: @ 8167D9B
 	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_167DD1
 	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_167DD1
 	msgbox gUnknown_81BF6CF
 	clearflag FLAG_PENDING_DAYCARE_EGG
@@ -161,13 +161,13 @@ FourIsland_EventScript_167E5A:: @ 8167E5A
 	end
 
 FourIsland_EventScript_167E73:: @ 8167E73
-	msgbox gUnknown_8182D8E, 2
+	msgbox gUnknown_8182D8E, MSGBOX_NPC
 	end
 
 FourIsland_EventScript_167E7C:: @ 8167E7C
-	msgbox gUnknown_8182A03, 3
+	msgbox gUnknown_8182A03, MSGBOX_SIGN
 	end
 
 FourIsland_EventScript_167E85:: @ 8167E85
-	msgbox gUnknown_8182DEB, 3
+	msgbox gUnknown_8182DEB, MSGBOX_SIGN
 	end

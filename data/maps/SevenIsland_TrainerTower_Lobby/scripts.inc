@@ -229,9 +229,9 @@ SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AE6:: @ 8164AE6
-	msgbox gUnknown_817CE38, 2
+	msgbox gUnknown_817CE38, MSGBOX_NPC
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AEF:: @ 8164AEF
-	msgbox gUnknown_817CE9F, 2
+	msgbox gUnknown_817CE9F, MSGBOX_NPC
 	end

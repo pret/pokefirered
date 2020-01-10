@@ -15,13 +15,13 @@ FuchsiaCity_PokemonCenter_1F_EventScript_16D700:: @ 816D700
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D709:: @ 816D709
-	msgbox gUnknown_8198CB7, 2
+	msgbox gUnknown_8198CB7, MSGBOX_NPC
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D712:: @ 816D712
-	msgbox gUnknown_8198D2E, 2
+	msgbox gUnknown_8198D2E, MSGBOX_NPC
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_16D71B:: @ 816D71B
-	msgbox gUnknown_8198D9B, 2
+	msgbox gUnknown_8198D9B, MSGBOX_NPC
 	end

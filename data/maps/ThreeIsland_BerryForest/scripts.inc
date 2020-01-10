@@ -57,9 +57,9 @@ Movement_163D22:: @ 8163D22
 	step_end
 
 ThreeIsland_BerryForest_EventScript_163D28:: @ 8163D28
-	msgbox gUnknown_817AFD6, 3
+	msgbox gUnknown_817AFD6, MSGBOX_SIGN
 	end
 
 ThreeIsland_BerryForest_EventScript_163D31:: @ 8163D31
-	msgbox gUnknown_817B029, 3
+	msgbox gUnknown_817B029, MSGBOX_SIGN
 	end

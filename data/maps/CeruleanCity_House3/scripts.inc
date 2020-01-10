@@ -2,7 +2,7 @@ CeruleanCity_House3_MapScripts:: @ 816A9A7
 	.byte 0
 
 CeruleanCity_House3_EventScript_16A9A8:: @ 816A9A8
-	msgbox gUnknown_8191F80, 2
+	msgbox gUnknown_8191F80, MSGBOX_NPC
 	end
 
 CeruleanCity_House3_EventScript_16A9B1:: @ 816A9B1
@@ -12,7 +12,7 @@ CeruleanCity_House3_EventScript_16A9B1:: @ 816A9B1
 	call EventScript_1A8CAD
 	goto_if_set FLAG_DID_ZYNX_TRADE, EventScript_16AA23
 	msgbox gUnknown_81A59FE, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16AA0B
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6

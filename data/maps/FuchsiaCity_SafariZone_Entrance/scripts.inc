@@ -38,7 +38,7 @@ EventScript_16D312:: @ 816D312
 	lockall
 	textcolor 0
 	msgbox gUnknown_8197E1A, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16D345
 	msgbox gUnknown_8197E48
 	closemessage
@@ -102,7 +102,7 @@ EventScript_16D391:: @ 816D391
 	waitmovement 0
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_8197C87, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16D3CA
 	msgbox gUnknown_8197DE9
 	goto EventScript_16D49A
@@ -200,7 +200,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7
 	lock
 	faceplayer
 	msgbox gUnknown_8197EB0, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16D4D6
 	msgbox gUnknown_819809E
 	release

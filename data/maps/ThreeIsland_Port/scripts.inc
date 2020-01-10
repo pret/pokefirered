@@ -29,7 +29,7 @@ EventScript_1687C2:: @ 81687C2
 	end
 
 ThreeIsland_Port_EventScript_1687CC:: @ 81687CC
-	msgbox gUnknown_818A261, 2
+	msgbox gUnknown_818A261, MSGBOX_NPC
 	end
 
 ThreeIsland_Port_EventScript_1687D5:: @ 81687D5

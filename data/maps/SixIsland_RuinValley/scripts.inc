@@ -25,7 +25,7 @@ SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	lockall
 	goto_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, EventScript_168BC1
 	msgbox gUnknown_818BDC0, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_168BCB
 	msgbox gUnknown_818BE11
 	braillemessage gUnknown_81A929B

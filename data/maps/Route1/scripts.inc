@@ -28,9 +28,9 @@ EventScript_167F48:: @ 8167F48
 	end
 
 Route1_EventScript_167F52:: @ 8167F52
-	msgbox gUnknown_81833B9, 2
+	msgbox gUnknown_81833B9, MSGBOX_NPC
 	end
 
 Route1_EventScript_167F5B:: @ 8167F5B
-	msgbox gUnknown_818343A, 3
+	msgbox gUnknown_818343A, MSGBOX_SIGN
 	end

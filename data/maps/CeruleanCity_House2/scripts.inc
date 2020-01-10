@@ -15,9 +15,9 @@ EventScript_16A98B:: @ 816A98B
 	end
 
 CeruleanCity_House2_EventScript_16A995:: @ 816A995
-	msgbox gUnknown_8191F2A, 2
+	msgbox gUnknown_8191F2A, MSGBOX_NPC
 	end
 
 CeruleanCity_House2_EventScript_16A99E:: @ 816A99E
-	msgbox gUnknown_8191F64, 3
+	msgbox gUnknown_8191F64, MSGBOX_SIGN
 	end

@@ -36,33 +36,33 @@ EventScript_16D5E7:: @ 816D5E7
 
 FuchsiaCity_Gym_EventScript_16D5F1:: @ 816D5F1
 	trainerbattle_single TRAINER_TAMER_PHIL, Text_198866, Text_1988B6
-	msgbox gUnknown_81988CB, 6
+	msgbox gUnknown_81988CB, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D608:: @ 816D608
 	trainerbattle_single TRAINER_TAMER_EDGAR, Text_19891F, Text_19897F
-	msgbox gUnknown_8198985, 6
+	msgbox gUnknown_8198985, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D61F:: @ 816D61F
 	trainerbattle_single TRAINER_JUGGLER_KIRK, Text_19871E, Text_198779
 	famechecker FAMECHECKER_KOGA, 2
-	msgbox gUnknown_8198787, 6
+	msgbox gUnknown_8198787, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D643:: @ 816D643
 	trainerbattle_single TRAINER_JUGGLER_SHAWN, Text_1989A1, Text_1989EA
-	msgbox gUnknown_8198A10, 6
+	msgbox gUnknown_8198A10, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D65A:: @ 816D65A
 	trainerbattle_single TRAINER_JUGGLER_KAYDEN, Text_198629, Text_1986B4
-	msgbox gUnknown_81986C9, 6
+	msgbox gUnknown_81986C9, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D671:: @ 816D671
 	trainerbattle_single TRAINER_JUGGLER_NATE, Text_1987E8, Text_198812
-	msgbox gUnknown_8198825, 6
+	msgbox gUnknown_8198825, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D688:: @ 816D688

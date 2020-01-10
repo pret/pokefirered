@@ -2,15 +2,15 @@ LavenderTown_Mart_MapScripts:: @ 816B34F
 	.byte 0
 
 LavenderTown_Mart_EventScript_16B350:: @ 816B350
-	msgbox gUnknown_8193CE5, 2
+	msgbox gUnknown_8193CE5, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B359:: @ 816B359
-	msgbox gUnknown_8193DB6, 2
+	msgbox gUnknown_8193DB6, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B362:: @ 816B362
-	msgbox gUnknown_8193DF1, 2
+	msgbox gUnknown_8193DF1, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B36B:: @ 816B36B

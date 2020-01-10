@@ -2,11 +2,11 @@ FuchsiaCity_Mart_MapScripts:: @ 816D4E0
 	.byte 0
 
 FuchsiaCity_Mart_EventScript_16D4E1:: @ 816D4E1
-	msgbox gUnknown_8198134, 2
+	msgbox gUnknown_8198134, MSGBOX_NPC
 	end
 
 FuchsiaCity_Mart_EventScript_16D4EA:: @ 816D4EA
-	msgbox gUnknown_81980BC, 2
+	msgbox gUnknown_81980BC, MSGBOX_NPC
 	end
 
 FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3

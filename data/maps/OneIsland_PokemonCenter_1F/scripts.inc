@@ -316,14 +316,14 @@ EventScript_171044:: @ 8171044
 	applymovement 3, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81A19AA, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_171099
 	goto EventScript_1710B2
 	end
 
 EventScript_171099:: @ 8171099
 	msgbox gUnknown_81A1A08, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_171099
 	goto EventScript_1710B2
 	end
@@ -386,11 +386,11 @@ Movement_171142:: @ 8171142
 	step_end
 
 OneIsland_PokemonCenter_1F_EventScript_171148:: @ 8171148
-	msgbox gUnknown_81A20D5, 2
+	msgbox gUnknown_81A20D5, MSGBOX_NPC
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_171151:: @ 8171151
-	msgbox gUnknown_81A212D, 2
+	msgbox gUnknown_81A212D, MSGBOX_NPC
 	end
 
 OneIsland_PokemonCenter_1F_EventScript_17115A:: @ 817115A

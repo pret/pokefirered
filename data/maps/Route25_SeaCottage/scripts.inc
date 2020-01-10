@@ -40,7 +40,7 @@ EventScript_17058E:: @ 817058E
 	end
 
 EventScript_17059C:: @ 817059C
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	call_if_eq EventScript_170600
 	msgbox gUnknown_819FFD3
 	closemessage

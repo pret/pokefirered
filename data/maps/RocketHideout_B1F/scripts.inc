@@ -14,27 +14,27 @@ RocketHideout_B1F_OnTransition:: @ 81611AA
 
 RocketHideout_B1F_EventScript_1611AE:: @ 81611AE
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_8, Text_174ECA, Text_174EED
-	msgbox gUnknown_8174EFA, 6
+	msgbox gUnknown_8174EFA, MSGBOX_AUTOCLOSE
 	end
 
 RocketHideout_B1F_EventScript_1611C5:: @ 81611C5
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_9, Text_174F2C, Text_174F60
-	msgbox gUnknown_8174F66, 6
+	msgbox gUnknown_8174F66, MSGBOX_AUTOCLOSE
 	end
 
 RocketHideout_B1F_EventScript_1611DC:: @ 81611DC
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_10, Text_174F94, Text_174FA4
-	msgbox gUnknown_8174FB3, 6
+	msgbox gUnknown_8174FB3, MSGBOX_AUTOCLOSE
 	end
 
 RocketHideout_B1F_EventScript_1611F3:: @ 81611F3
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_11, Text_174FE1, Text_174FF8
-	msgbox gUnknown_8175007, 6
+	msgbox gUnknown_8175007, MSGBOX_AUTOCLOSE
 	end
 
 RocketHideout_B1F_EventScript_16120A:: @ 816120A
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_12, Text_17503A, Text_17505A, EventScript_161225
-	msgbox gUnknown_8175060, 6
+	msgbox gUnknown_8175060, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_161225:: @ 8161225

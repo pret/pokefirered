@@ -41,7 +41,7 @@ EventScript_16BD38:: @ 816BD38
 
 EventScript_16BD3E:: @ 816BD3E
 	msgbox gUnknown_8195D22, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C00C
 	textcolor 3
 	message Text_195D5F
@@ -201,11 +201,11 @@ EventScript_16C018:: @ 816C018
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C022:: @ 816C022
-	msgbox gUnknown_8195F98, 2
+	msgbox gUnknown_8195F98, MSGBOX_NPC
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C02B:: @ 816C02B
-	msgbox gUnknown_8196017, 3
+	msgbox gUnknown_8196017, MSGBOX_SIGN
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_16C034:: @ 816C034

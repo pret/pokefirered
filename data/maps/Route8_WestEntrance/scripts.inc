@@ -2,7 +2,7 @@ Route8_WestEntrance_MapScripts:: @ 816FB53
 	.byte 0
 
 Route8_WestEntrance_EventScript_16FB54:: @ 816FB54
-	msgbox gUnknown_819E50F, 2
+	msgbox gUnknown_819E50F, MSGBOX_NPC
 	end
 
 Route8_WestEntrance_EventScript_16FB5D:: @ 816FB5D

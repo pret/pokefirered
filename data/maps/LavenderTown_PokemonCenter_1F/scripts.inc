@@ -15,13 +15,13 @@ LavenderTown_PokemonCenter_1F_EventScript_16B0FE:: @ 816B0FE
 	end
 
 LavenderTown_PokemonCenter_1F_EventScript_16B107:: @ 816B107
-	msgbox gUnknown_8193465, 2
+	msgbox gUnknown_8193465, MSGBOX_NPC
 	end
 
 LavenderTown_PokemonCenter_1F_EventScript_16B110:: @ 816B110
-	msgbox gUnknown_81934DE, 2
+	msgbox gUnknown_81934DE, MSGBOX_NPC
 	end
 
 LavenderTown_PokemonCenter_1F_EventScript_16B119:: @ 816B119
-	msgbox gUnknown_819353A, 2
+	msgbox gUnknown_819353A, MSGBOX_NPC
 	end

@@ -28,5 +28,5 @@ EventScript_16826D:: @ 816826D
 	return
 
 Route20_EventScript_168280:: @ 8168280
-	msgbox gUnknown_81882D1, 3
+	msgbox gUnknown_81882D1, MSGBOX_SIGN
 	end

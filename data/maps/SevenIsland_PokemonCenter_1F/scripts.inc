@@ -15,13 +15,13 @@ SevenIsland_PokemonCenter_1F_EventScript_170B98:: @ 8170B98
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BA1:: @ 8170BA1
-	msgbox gUnknown_81A0B98, 2
+	msgbox gUnknown_81A0B98, MSGBOX_NPC
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BAA:: @ 8170BAA
-	msgbox gUnknown_81A0C1F, 2
+	msgbox gUnknown_81A0C1F, MSGBOX_NPC
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_170BB3:: @ 8170BB3
-	msgbox gUnknown_81A0CA5, 2
+	msgbox gUnknown_81A0CA5, MSGBOX_NPC
 	end

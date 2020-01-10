@@ -185,11 +185,11 @@ Items_167738:: @ 8167738
 	end
 
 TwoIsland_EventScript_16774C:: @ 816774C
-	msgbox gUnknown_8181D2F, 2
+	msgbox gUnknown_8181D2F, MSGBOX_NPC
 	end
 
 TwoIsland_EventScript_167755:: @ 8167755
-	msgbox gUnknown_8181DCA, 2
+	msgbox gUnknown_8181DCA, MSGBOX_NPC
 	end
 
 TwoIsland_EventScript_16775E:: @ 816775E
@@ -201,25 +201,25 @@ TwoIsland_EventScript_16775E:: @ 816775E
 	end
 
 TwoIsland_EventScript_167777:: @ 8167777
-	msgbox gUnknown_8181F28, 2
+	msgbox gUnknown_8181F28, MSGBOX_NPC
 	end
 
 TwoIsland_EventScript_167780:: @ 8167780
-	msgbox gUnknown_8181F5D, 2
+	msgbox gUnknown_8181F5D, MSGBOX_NPC
 	end
 
 TwoIsland_EventScript_167789:: @ 8167789
-	msgbox gUnknown_8181FCE, 2
+	msgbox gUnknown_8181FCE, MSGBOX_NPC
 	end
 
 TwoIsland_EventScript_167792:: @ 8167792
-	msgbox gUnknown_8181A88, 3
+	msgbox gUnknown_8181A88, MSGBOX_SIGN
 	end
 
 TwoIsland_EventScript_16779B:: @ 816779B
-	msgbox gUnknown_8181AA7, 3
+	msgbox gUnknown_8181AA7, MSGBOX_SIGN
 	end
 
 TwoIsland_EventScript_1677A4:: @ 81677A4
-	msgbox gUnknown_8181AC8, 3
+	msgbox gUnknown_8181AC8, MSGBOX_SIGN
 	end

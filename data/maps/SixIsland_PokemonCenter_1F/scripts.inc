@@ -71,9 +71,9 @@ SixIsland_PokemonCenter_1F_EventScript_171E05:: @ 8171E05
 	end
 
 SixIsland_PokemonCenter_1F_EventScript_171E0E:: @ 8171E0E
-	msgbox gUnknown_81A3E02, 2
+	msgbox gUnknown_81A3E02, MSGBOX_NPC
 	end
 
 SixIsland_PokemonCenter_1F_EventScript_171E17:: @ 8171E17
-	msgbox gUnknown_81A3E87, 2
+	msgbox gUnknown_81A3E87, MSGBOX_NPC
 	end

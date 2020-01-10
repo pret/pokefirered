@@ -6,7 +6,7 @@ FuchsiaCity_House2_EventScript_16D817:: @ 816D817
 	faceplayer
 	goto_if_set FLAG_GOT_GOOD_ROD, EventScript_16D83F
 	msgbox gUnknown_819918E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16D849
 	msgbox gUnknown_8199337
 	release

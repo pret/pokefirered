@@ -27,13 +27,13 @@ Items_1718B4:: @ 81718B4
 	end
 
 ThreeIsland_Mart_EventScript_1718C4:: @ 81718C4
-	msgbox gUnknown_81A3114, 2
+	msgbox gUnknown_81A3114, MSGBOX_NPC
 	end
 
 ThreeIsland_Mart_EventScript_1718CD:: @ 81718CD
-	msgbox gUnknown_81A315C, 2
+	msgbox gUnknown_81A315C, MSGBOX_NPC
 	end
 
 ThreeIsland_Mart_EventScript_1718D6:: @ 81718D6
-	msgbox gUnknown_81A31F0, 2
+	msgbox gUnknown_81A31F0, MSGBOX_NPC
 	end

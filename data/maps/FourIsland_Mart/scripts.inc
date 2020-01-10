@@ -29,5 +29,5 @@ Items_171CD4:: @ 8171CD4
 	end
 
 FourIsland_Mart_EventScript_171CE8:: @ 8171CE8
-	msgbox gUnknown_81A3B14, 2
+	msgbox gUnknown_81A3B14, MSGBOX_NPC
 	end

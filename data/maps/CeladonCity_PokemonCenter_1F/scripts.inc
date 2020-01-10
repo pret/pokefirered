@@ -15,13 +15,13 @@ CeladonCity_PokemonCenter_1F_EventScript_16C5FB:: @ 816C5FB
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C604:: @ 816C604
-	msgbox gUnknown_819685B, 2
+	msgbox gUnknown_819685B, MSGBOX_NPC
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C60D:: @ 816C60D
-	msgbox gUnknown_81968C2, 2
+	msgbox gUnknown_81968C2, MSGBOX_NPC
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_16C616:: @ 816C616
-	msgbox gUnknown_8196913, 2
+	msgbox gUnknown_8196913, MSGBOX_NPC
 	end

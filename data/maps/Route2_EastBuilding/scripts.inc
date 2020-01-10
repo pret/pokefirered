@@ -7,7 +7,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	call EventScript_16F70B
 	goto_if_set FLAG_GOT_HM05, EventScript_16F701
 	msgbox gUnknown_819D64F, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A7AD1
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
@@ -36,5 +36,5 @@ EventScript_16F70B:: @ 816F70B
 	return
 
 Route2_EastBuilding_EventScript_16F714:: @ 816F714
-	msgbox gUnknown_819D81E, 2
+	msgbox gUnknown_819D81E, MSGBOX_NPC
 	end

@@ -73,7 +73,7 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 
 RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, Text_1753D0, Text_1753FE, EventScript_1613E9
-	msgbox gUnknown_817540C, 6
+	msgbox gUnknown_817540C, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_1613E9:: @ 81613E9
@@ -91,7 +91,7 @@ EventScript_1613E9:: @ 81613E9
 
 RocketHideout_B4F_EventScript_161418:: @ 8161418
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, Text_175437, Text_175463, EventScript_161433
-	msgbox gUnknown_817546A, 6
+	msgbox gUnknown_817546A, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_161433:: @ 8161433

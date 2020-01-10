@@ -15,22 +15,22 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8EF:: @ 816E8EF
-	msgbox gUnknown_819A5BE, 2
+	msgbox gUnknown_819A5BE, MSGBOX_NPC
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E8F8:: @ 816E8F8
-	msgbox gUnknown_819A4F8, 2
+	msgbox gUnknown_819A4F8, MSGBOX_NPC
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E901:: @ 816E901
-	msgbox gUnknown_819A6B1, 2
+	msgbox gUnknown_819A6B1, MSGBOX_NPC
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	lock
 	faceplayer
 	msgbox gUnknown_819A725, MSGBOX_YESNO
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E9A5
 	msgbox gUnknown_819A785
 	closemessage

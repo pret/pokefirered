@@ -2,7 +2,7 @@ Route7_EastEntrance_MapScripts:: @ 816FA8D
 	.byte 0
 
 Route7_EastEntrance_EventScript_16FA8E:: @ 816FA8E
-	msgbox gUnknown_819E3D9, 2
+	msgbox gUnknown_819E3D9, MSGBOX_NPC
 	end
 
 Route7_EastEntrance_EventScript_16FA97:: @ 816FA97

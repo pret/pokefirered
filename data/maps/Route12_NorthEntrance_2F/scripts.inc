@@ -2,11 +2,11 @@ Route12_NorthEntrance_2F_MapScripts:: @ 816FE77
 	.byte 0
 
 Route12_NorthEntrance_2F_EventScript_16FE78:: @ 816FE78
-	msgbox gUnknown_819EF5D, 3
+	msgbox gUnknown_819EF5D, MSGBOX_SIGN
 	end
 
 Route12_NorthEntrance_2F_EventScript_16FE81:: @ 816FE81
-	msgbox gUnknown_819EFA0, 3
+	msgbox gUnknown_819EFA0, MSGBOX_SIGN
 	end
 
 Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A

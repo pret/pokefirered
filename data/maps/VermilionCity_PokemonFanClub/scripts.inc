@@ -6,7 +6,7 @@ VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	faceplayer
 	goto_if_set FLAG_GOT_BIKE_VOUCHER, EventScript_16B4A7
 	msgbox gUnknown_819457E, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16B4B1
 	msgbox gUnknown_8194860
 	release
@@ -110,9 +110,9 @@ VermilionCity_PokemonFanClub_EventScript_16B5B1:: @ 816B5B1
 	end
 
 VermilionCity_PokemonFanClub_EventScript_16B5C4:: @ 816B5C4
-	msgbox gUnknown_8194910, 3
+	msgbox gUnknown_8194910, MSGBOX_SIGN
 	end
 
 VermilionCity_PokemonFanClub_EventScript_16B5CD:: @ 816B5CD
-	msgbox gUnknown_819493D, 3
+	msgbox gUnknown_819493D, MSGBOX_SIGN
 	end

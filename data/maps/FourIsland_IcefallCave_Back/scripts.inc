@@ -188,5 +188,5 @@ Movement_163F23:: @ 8163F23
 	step_end
 
 FourIsland_IcefallCave_Back_EventScript_163F25:: @ 8163F25
-	msgbox gUnknown_817B457, 2
+	msgbox gUnknown_817B457, MSGBOX_NPC
 	end

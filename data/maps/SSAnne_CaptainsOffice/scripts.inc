@@ -38,9 +38,9 @@ EventScript_160BB5:: @ 8160BB5
 	end
 
 SSAnne_CaptainsOffice_EventScript_160BC9:: @ 8160BC9
-	msgbox gUnknown_81738E6, 3
+	msgbox gUnknown_81738E6, MSGBOX_SIGN
 	end
 
 SSAnne_CaptainsOffice_EventScript_160BD2:: @ 8160BD2
-	msgbox gUnknown_8173903, 3
+	msgbox gUnknown_8173903, MSGBOX_SIGN
 	end

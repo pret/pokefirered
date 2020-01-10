@@ -5,9 +5,9 @@ LavenderTown_House2_EventScript_16B266:: @ 816B266
 	lock
 	faceplayer
 	msgbox gUnknown_8193A4B, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16B287
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16B2AA
 	end
 
@@ -15,9 +15,9 @@ EventScript_16B287:: @ 816B287
 	msgbox gUnknown_8193AA6
 	special Special_ChooseMonFromParty
 	waitstate
-	compare VAR_0x8004, 6
+	compare VAR_0x8004, PARTY_SIZE
 	goto_if_lt EventScript_16B2B4
-	compare VAR_0x8004, 6
+	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge EventScript_16B2AA
 	end
 
@@ -39,9 +39,9 @@ EventScript_16B2B4:: @ 816B2B4
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16B311
 	msgbox gUnknown_8193AD2, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16B31B
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16B2AA
 	end
 

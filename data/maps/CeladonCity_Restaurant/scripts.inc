@@ -2,11 +2,11 @@ CeladonCity_Restaurant_MapScripts:: @ 816D1EA
 	.byte 0
 
 CeladonCity_Restaurant_EventScript_16D1EB:: @ 816D1EB
-	msgbox gUnknown_81978E6, 2
+	msgbox gUnknown_81978E6, MSGBOX_NPC
 	end
 
 CeladonCity_Restaurant_EventScript_16D1F4:: @ 816D1F4
-	msgbox gUnknown_8197915, 2
+	msgbox gUnknown_8197915, MSGBOX_NPC
 	end
 
 CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
@@ -33,9 +33,9 @@ EventScript_16D24B:: @ 816D24B
 	end
 
 CeladonCity_Restaurant_EventScript_16D255:: @ 816D255
-	msgbox gUnknown_8197952, 2
+	msgbox gUnknown_8197952, MSGBOX_NPC
 	end
 
 CeladonCity_Restaurant_EventScript_16D25E:: @ 816D25E
-	msgbox gUnknown_819798A, 2
+	msgbox gUnknown_819798A, MSGBOX_NPC
 	end

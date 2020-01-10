@@ -15,7 +15,7 @@ PewterCity_PokemonCenter_1F_EventScript_16A76F:: @ 816A76F
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A778:: @ 816A778
-	msgbox gUnknown_81916A9, 2
+	msgbox gUnknown_81916A9, MSGBOX_NPC
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A781:: @ 816A781
@@ -31,7 +31,7 @@ PewterCity_PokemonCenter_1F_EventScript_16A781:: @ 816A781
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A798:: @ 816A798
-	msgbox gUnknown_8191701, 2
+	msgbox gUnknown_8191701, MSGBOX_NPC
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A7A1:: @ 816A7A1
@@ -41,5 +41,5 @@ PewterCity_PokemonCenter_1F_EventScript_16A7A1:: @ 816A7A1
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_16A7AC:: @ 816A7AC
-	msgbox gUnknown_8191780, 2
+	msgbox gUnknown_8191780, MSGBOX_NPC
 	end

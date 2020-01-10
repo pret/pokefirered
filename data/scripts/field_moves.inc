@@ -10,8 +10,8 @@ EventScript_InteractWithCutTreeObject:: @ 81BDF13
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_CUT
-	msgbox gUnknown_81BDF94, 5
-	compare VAR_RESULT, 0
+	msgbox gUnknown_81BDF94, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BDF91
 	msgbox gUnknown_81BDFD7
 	closemessage
@@ -39,7 +39,7 @@ Movement_1BDF85:: @ 81BDF85
 	step_end
 
 EventScript_1BDF87:: @ 81BDF87
-	msgbox gUnknown_81BDFE3, 3
+	msgbox gUnknown_81BDFE3, MSGBOX_SIGN
 	releaseall
 	end
 
@@ -72,8 +72,8 @@ EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_ROCK_SMASH
-	msgbox Text_1BE09D, 5
-	compare VAR_RESULT, 0
+	msgbox Text_1BE09D, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BE09A
 	msgbox gUnknown_81BDFD7
 	closemessage
@@ -109,7 +109,7 @@ Movement_1BE08F:: @ 81BE08F
 	step_end
 
 EventScript_1BE091:: @ 81BE091
-	msgbox gUnknown_81BE0E2, 3
+	msgbox gUnknown_81BE0E2, MSGBOX_SIGN
 	end
 
 EventScript_1BE09A:: @ 81BE09A
@@ -136,8 +136,8 @@ EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_1BE185
 	setfieldeffectarg 0, VAR_RESULT
-	msgbox gUnknown_81BE19A, 5
-	compare VAR_RESULT, 0
+	msgbox gUnknown_81BE19A, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BE197
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -154,15 +154,15 @@ EventScript_FldEffStrength:: @ 81BE16E
 
 EventScript_1BE179:: @ 81BE179
 	setflag FLAG_SYS_STRENGTH_ACTIVE
-	msgbox gUnknown_81BE1FA, 3
+	msgbox gUnknown_81BE1FA, MSGBOX_SIGN
 	end
 
 EventScript_1BE185:: @ 81BE185
-	msgbox gUnknown_81BE244, 3
+	msgbox gUnknown_81BE244, MSGBOX_SIGN
 	end
 
 EventScript_1BE18E:: @ 81BE18E
-	msgbox gUnknown_81BE284, 3
+	msgbox gUnknown_81BE284, MSGBOX_SIGN
 	end
 
 EventScript_1BE197:: @ 81BE197
@@ -198,8 +198,8 @@ gUnknown_81BE2B7:: @ 81BE2B7
 	goto_if_eq EventScript_1BE300
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
-	msgbox gUnknown_81BE33F, 5
-	compare VAR_RESULT, 0
+	msgbox gUnknown_81BE33F, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BE308
 	msgbox gUnknown_81BE378
 	dofieldeffect FLDEFF_USE_WATERFALL
@@ -233,8 +233,8 @@ EventScript_1BE38B:: @ 81BE38B
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
-	msgbox gUnknown_81BE469, 5
-	compare VAR_RESULT, 0
+	msgbox gUnknown_81BE469, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BE3D2
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
@@ -256,8 +256,8 @@ EventScript_1BE3D4:: @ 81BE3D4
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
-	msgbox gUnknown_81BE4EF, 5
-	compare VAR_RESULT, 0
+	msgbox gUnknown_81BE4EF, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1BE429
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
@@ -299,7 +299,7 @@ gUnknown_81BE52F:: @ 81BE52F
 	.string "DIVE can't be used here.$"
 
 EventScript_FailSweetScent:: @ 81BE564
-	msgbox Text_1BE56D, 3
+	msgbox Text_1BE56D, MSGBOX_SIGN
 	end
 
 Text_1BE56D:: @ 81BE56D

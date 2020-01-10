@@ -2,11 +2,11 @@ PewterCity_Mart_MapScripts:: @ 816A6CD
 	.byte 0
 
 PewterCity_Mart_EventScript_16A6CE:: @ 816A6CE
-	msgbox gUnknown_81914DE, 2
+	msgbox gUnknown_81914DE, MSGBOX_NPC
 	end
 
 PewterCity_Mart_EventScript_16A6D7:: @ 816A6D7
-	msgbox gUnknown_8191541, 2
+	msgbox gUnknown_8191541, MSGBOX_NPC
 	end
 
 PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0

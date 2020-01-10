@@ -144,5 +144,5 @@ Movement_172060:: @ 8172060
 	step_end
 
 FiveIsland_ResortGorgeous_House_EventScript_172062:: @ 8172062
-	msgbox gUnknown_81A4657, 2
+	msgbox gUnknown_81A4657, MSGBOX_NPC
 	end

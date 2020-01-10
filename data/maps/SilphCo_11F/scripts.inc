@@ -43,7 +43,7 @@ EventScript_161E75:: @ 8161E75
 	end
 
 SilphCo_11F_EventScript_161E7F:: @ 8161E7F
-	msgbox gUnknown_81770A9, 2
+	msgbox gUnknown_81770A9, MSGBOX_NPC
 	end
 
 SilphCo_11F_EventScript_161E88:: @ 8161E88
@@ -123,19 +123,19 @@ Movement_161F27:: @ 8161F27
 	step_end
 
 EventScript_161F2E:: @ 8161F2E
-	msgbox gUnknown_817732B, 3
+	msgbox gUnknown_817732B, MSGBOX_SIGN
 	end
 
 SilphCo_11F_EventScript_161F37:: @ 8161F37
-	msgbox gUnknown_817734A, 3
+	msgbox gUnknown_817734A, MSGBOX_SIGN
 	end
 
 SilphCo_11F_EventScript_161F40:: @ 8161F40
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_40, Text_1772B8, Text_1772E7
-	msgbox gUnknown_81772F9, 6
+	msgbox gUnknown_81772F9, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_11F_EventScript_161F57:: @ 8161F57
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_41, Text_17726A, Text_17728C
-	msgbox gUnknown_817729B, 6
+	msgbox gUnknown_817729B, MSGBOX_AUTOCLOSE
 	end

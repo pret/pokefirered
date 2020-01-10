@@ -37,15 +37,15 @@ Movement_163512:: @ 8163512
 
 PokemonTower_6F_EventScript_163514:: @ 8163514
 	trainerbattle_single TRAINER_CHANNELER_ANGELICA, Text_17A243, Text_17A253
-	msgbox gUnknown_817A25A, 6
+	msgbox gUnknown_817A25A, MSGBOX_AUTOCLOSE
 	end
 
 PokemonTower_6F_EventScript_16352B:: @ 816352B
 	trainerbattle_single TRAINER_CHANNELER_EMILIA, Text_17A272, Text_17A27F
-	msgbox gUnknown_817A293, 6
+	msgbox gUnknown_817A293, MSGBOX_AUTOCLOSE
 	end
 
 PokemonTower_6F_EventScript_163542:: @ 8163542
 	trainerbattle_single TRAINER_CHANNELER_JENNIFER, Text_17A2C8, Text_17A2DC
-	msgbox gUnknown_817A2E2, 6
+	msgbox gUnknown_817A2E2, MSGBOX_AUTOCLOSE
 	end

@@ -1167,25 +1167,25 @@ EventScript_169BE1:: @ 8169BE1
 
 EventScript_OakDescribesBulbasaur:: @ 8169C14
 	msgbox gUnknown_818E272, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DeclinedStarter
 	end
 
 EventScript_OakDescribesCharmander:: @ 8169C33
 	msgbox gUnknown_818E207, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DeclinedStarter
 	end
 
 EventScript_OakDescribesSquirtle:: @ 8169C52
 	msgbox gUnknown_818E194, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_ThisPokeIsRealyEnergetic
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_DeclinedStarter
 	end
 
@@ -1209,9 +1209,9 @@ EventScript_ThisPokeIsRealyEnergetic:: @ 8169C74
 	playfanfare MUS_FAN5
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_GiveNicknameToStarter
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_SkipGiveNicknameToStarter
 	end
 
@@ -1368,15 +1368,15 @@ PalletTown_ProfessorOaksLab_EventScript_169E46:: @ 8169E46
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E5F:: @ 8169E5F
-	msgbox gUnknown_818E9E5, 2
+	msgbox gUnknown_818E9E5, MSGBOX_NPC
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E68:: @ 8169E68
-	msgbox gUnknown_818EAF4, 3
+	msgbox gUnknown_818EAF4, MSGBOX_SIGN
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E71:: @ 8169E71
-	msgbox gUnknown_818EA66, 3
+	msgbox gUnknown_818EA66, MSGBOX_SIGN
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_169E7A:: @ 8169E7A

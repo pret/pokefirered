@@ -2,11 +2,11 @@ VermilionCity_Mart_MapScripts:: @ 816B653
 	.byte 0
 
 VermilionCity_Mart_EventScript_16B654:: @ 816B654
-	msgbox gUnknown_8194B65, 2
+	msgbox gUnknown_8194B65, MSGBOX_NPC
 	end
 
 VermilionCity_Mart_EventScript_16B65D:: @ 816B65D
-	msgbox gUnknown_8194A77, 2
+	msgbox gUnknown_8194A77, MSGBOX_NPC
 	end
 
 VermilionCity_Mart_EventScript_16B666:: @ 816B666

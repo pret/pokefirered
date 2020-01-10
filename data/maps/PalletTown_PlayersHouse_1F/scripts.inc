@@ -27,7 +27,7 @@ EventScript_168C41:: @ 8168C41
 EventScript_168C4A:: @ 8168C4A
 	msgbox gUnknown_818D3D1
 	closemessage
-	call EventScript_FadeOut_Heal_FadeIn
+	call EventScript_OutOfCenterPartyHeal
 	msgbox gUnknown_818D3F8
 	release
 	end

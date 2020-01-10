@@ -870,14 +870,14 @@ EventScript_1BBB1E:: @ 81BBB1E
 
 EventScript_1BBB44:: @ 81BBB44
 	msgbox gUnknown_81BCBC3
-	goto EventScript_1A77B0
+	goto EventScript_SetResultFalse
 
 EventScript_1BBB51:: @ 81BBB51
 	end
 
 EventScript_1BBB52:: @ 81BBB52
 	msgbox gUnknown_81BCC00
-	goto EventScript_1A77B0
+	goto EventScript_SetResultFalse
 
 EventScript_1BBB5F:: @ 81BBB5F
 	end

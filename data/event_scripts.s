@@ -1100,7 +1100,7 @@ Text_1A63D6:: @ 81A63D6
 	.string "ベッドが　ある‥‥\n"
 	.string "やすんでいこう$"
 
-Text_1A63E8:: @ 81A63E8
+Text_FoundTMHMContainsMove:: @ 81A63E8
 	.string "{PLAYER} found a {STR_VAR_2}!\n"
 	.string "It contains {STR_VAR_1}.$"
 
@@ -1224,32 +1224,15 @@ EventScript_1A6AC0:: @ 81A6AC0
 
 	.include "data/scripts/surf.inc"
 	.include "data/scripts/set_gym_trainers.inc"
+	.include "data/scripts/bag_full.inc"
 
-EventScript_1A6BF9:: @ 81A6BF9
-	textcolor 3
-	msgbox Text_TooBadBagFull
-	release
-	end
-
-EventScript_1A6C05:: @ 81A6C05
-	msgbox Text_TooBadBagFull
-	return
-
-EventScript_1A6C0E:: @ 81A6C0E
-	msgbox Text_1A5301
-	release
-	end
-
-EventScript_1A6C18:: @ 81A6C18
-	msgbox Text_1A5301
-	return
-
-EventScript_1A6C21:: @ 81A6C21
+@ Unused
+EventScript_GymBadgeFanfare:: @ 81A6C21
 	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
-EventScript_FadeOut_Heal_FadeIn:: @ 81A6C26
+EventScript_OutOfCenterPartyHeal:: @ 81A6C26
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
@@ -1257,7 +1240,7 @@ EventScript_FadeOut_Heal_FadeIn:: @ 81A6C26
 	fadescreen FADE_FROM_BLACK
 	return
 
-gUnknown_81A6C32:: @ 81A6C32
+EventScript_WallTownMap:: @ 81A6C32
 	lockall
 	msgbox Text_ATownMap
 	special sub_8110AB4
@@ -1558,12 +1541,12 @@ gUnknown_81A77A0:: @ 81A77A0
 EventScript_Return:: @ 81A77A9
 	return
 
-EventScript_1A77AA:: @ 81A77AA
-	setvar VAR_RESULT, 1
+EventScript_SetResultTrue:: @ 81A77AA
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_1A77B0:: @ 81A77B0
-	setvar VAR_RESULT, 0
+EventScript_SetResultFalse:: @ 81A77B0
+	setvar VAR_RESULT, FALSE
 	return
 
 Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
@@ -1792,8 +1775,8 @@ VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	msgbox Text_194234
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	msgbox Text_19430F
 	release
 	end
@@ -1807,10 +1790,10 @@ EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
 	lockall
 	textcolor 3
 	waitse
-	call EventScript_GiveItem
-	compare VAR_0x8007, 1
+	call EventScript_TryPickUpHiddenItem
+	compare VAR_0x8007, TRUE
 	goto_if_eq EventScript_DigUpItemPutInPocket
-	compare VAR_0x8007, 0
+	compare VAR_0x8007, FALSE
 	goto_if_eq EventScript_DigUpItemBagIsFull
 	end
 
@@ -1858,7 +1841,7 @@ EventScript_MomHeal:: @ 81A8DD8
 	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox Text_1A5FDF
-	call EventScript_FadeOut_Heal_FadeIn
+	call EventScript_OutOfCenterPartyHeal
 	msgbox Text_1A6046
 	fadedefaultbgm
 	releaseall

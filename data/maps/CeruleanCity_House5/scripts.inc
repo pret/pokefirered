@@ -12,8 +12,8 @@ CeruleanCity_House5_EventScript_16AE50:: @ 816AE50
 	msgbox gUnknown_8193003
 	setflag FLAG_GOT_POWDER_JAR
 	giveitem ITEM_POWDER_JAR
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	msgbox gUnknown_8193033
 	release
 	end

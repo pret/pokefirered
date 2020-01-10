@@ -1180,14 +1180,14 @@ _0806D17A:
 	beq _0806D164
 	ldr r0, _0806D1D0 @ =gSpecialVar_Facing
 	strh r6, [r0]
-	ldr r0, _0806D1D4 @ =EventScript_PickUpHiddenItem
+	ldr r0, _0806D1D4 @ =EventScript_FoundHiddenItem
 	b _0806D1E6
 	.align 2, 0
 _0806D1C4: .4byte gSpecialVar_0x8005
 _0806D1C8: .4byte gSpecialVar_0x8004
 _0806D1CC: .4byte gSpecialVar_0x8006
 _0806D1D0: .4byte gSpecialVar_Facing
-_0806D1D4: .4byte EventScript_PickUpHiddenItem
+_0806D1D4: .4byte EventScript_FoundHiddenItem
 _0806D1D8:
 	cmp r2, 0xFF
 	beq _0806D1E0
@@ -1231,10 +1231,10 @@ _0806D218:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D230
-	ldr r0, _0806D22C @ =gUnknown_81A6C32
+	ldr r0, _0806D22C @ =EventScript_WallTownMap
 	b _0806D53E
 	.align 2, 0
-_0806D22C: .4byte gUnknown_81A6C32
+_0806D22C: .4byte EventScript_WallTownMap
 _0806D230:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsBookshelf

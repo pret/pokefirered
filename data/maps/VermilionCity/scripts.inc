@@ -57,19 +57,19 @@ VermilionCity_EventScript_166941:: @ 8166941
 	end
 
 EventScript_166958:: @ 8166958
-	goto_if_unset FLAG_SYS_GOT_MYSTIC_TICKET, EventScript_1A77B0
+	goto_if_unset FLAG_SYS_GOT_MYSTIC_TICKET, EventScript_SetResultFalse
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A77B0
-	goto EventScript_1A77AA
+	goto_if_eq EventScript_SetResultFalse
+	goto EventScript_SetResultTrue
 	end
 
 EventScript_166977:: @ 8166977
-	goto_if_unset FLAG_SYS_GOT_AURORA_TICKET, EventScript_1A77B0
+	goto_if_unset FLAG_SYS_GOT_AURORA_TICKET, EventScript_SetResultFalse
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A77B0
-	goto EventScript_1A77AA
+	goto_if_eq EventScript_SetResultFalse
+	goto EventScript_SetResultTrue
 	end
 
 EventScript_166996:: @ 8166996

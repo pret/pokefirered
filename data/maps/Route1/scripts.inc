@@ -9,7 +9,7 @@ Route1_EventScript_167EFE:: @ 8167EFE
 	textcolor 3
 	checkitemspace ITEM_POTION, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A6BF9
+	goto_if_eq EventScript_BagIsFull
 	getitemname 1, ITEM_POTION
 	playfanfare MUS_FANFA1
 	message Text_ObtainedTheX

@@ -27,7 +27,7 @@ SevenIsland_SevaultCanyon_House_EventScript_172183:: @ 8172183
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
-	call EventScript_FadeOut_Heal_FadeIn
+	call EventScript_OutOfCenterPartyHeal
 	msgbox gUnknown_81A4DF5
 	setflag FLAG_TEMP_2
 	release

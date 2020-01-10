@@ -40,8 +40,8 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 	faceplayer
 	removeobject 2
 	giveitem ITEM_SILPH_SCOPE
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	release
 	end
 
@@ -64,8 +64,8 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	release
 	end
 

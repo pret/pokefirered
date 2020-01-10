@@ -149,7 +149,7 @@ EventScript_1A911E:: @ 81A911E
     case SEAGALLOP_THREE_ISLAND,   EventScript_1A91F6
     case SEAGALLOP_FOUR_ISLAND,    EventScript_1A9201
     case SEAGALLOP_MORE,           EventScript_1A917F
-    case SCR_MENU_CANCEL, EventScript_CancelSail
+    case SCR_MENU_CANCEL,          EventScript_CancelSail
     end
 
 EventScript_1A917F:: @ 81A917F
@@ -162,8 +162,8 @@ EventScript_1A917F:: @ 81A917F
     case SEAGALLOP_FIVE_ISLAND,  EventScript_1A920C
     case SEAGALLOP_SIX_ISLAND,   EventScript_1A9217
     case SEAGALLOP_SEVEN_ISLAND, EventScript_1A9222
-    case SEAGALLOP_MORE,           EventScript_1A911E
-    case SCR_MENU_CANCEL, EventScript_CancelSail
+    case SEAGALLOP_MORE,         EventScript_1A911E
+    case SCR_MENU_CANCEL,        EventScript_CancelSail
     end
 
 EventScript_SailToVermilionCity:: @ 81A91D5

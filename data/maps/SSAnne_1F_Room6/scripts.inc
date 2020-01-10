@@ -8,7 +8,7 @@ SSAnne_1F_Room6_EventScript_160DF3:: @ 8160DF3
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_160E18
 	closemessage
-	call EventScript_FadeOut_Heal_FadeIn
+	call EventScript_OutOfCenterPartyHeal
 	msgbox gUnknown_8174490
 	release
 	end

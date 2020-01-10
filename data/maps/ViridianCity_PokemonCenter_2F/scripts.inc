@@ -5,14 +5,15 @@ ViridianCity_PokemonCenter_2F_MapScripts:: @ 816A2F3
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-ViridianCity_PokemonCenter_2F_EventScript_16A308:: @ 816A308
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+ViridianCity_PokemonCenter_2F_EventScript_Colosseum:: @ 816A308
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16A30E:: @ 816A30E
-	call EventScript_1BB6AB
+ViridianCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 816A30E
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16A314:: @ 816A314
-	call EventScript_1BB7DE
+ViridianCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 816A314
+	call CableClub_EventScript_RecordCorner
 	end

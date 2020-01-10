@@ -446,18 +446,18 @@ sub_8080A4C: @ 8080A4C
 	bne _08080AB0
 	movs r0, 0x15
 	bl PlaySE
-	ldr r0, _08080AA8 @ =gUnknown_81BC4CE
+	ldr r0, _08080AA8 @ =CableClub_Text_WhenAllPlayersReadyAConfirmBCancel
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08080AAC @ =sub_8080AD0
 	b _08080ABE
 	.align 2, 0
 _08080AA4: .4byte gTasks
-_08080AA8: .4byte gUnknown_81BC4CE
+_08080AA8: .4byte CableClub_Text_WhenAllPlayersReadyAConfirmBCancel
 _08080AAC: .4byte sub_8080AD0
 _08080AB0:
 	movs r0, 0x16
 	bl PlaySE
-	ldr r0, _08080AC8 @ =gUnknown_81BC54C
+	ldr r0, _08080AC8 @ =CableClub_Text_AwaitingLinkupBCancel
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08080ACC @ =sub_8080CDC
 _08080ABE:
@@ -467,7 +467,7 @@ _08080AC0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080AC8: .4byte gUnknown_81BC54C
+_08080AC8: .4byte CableClub_Text_AwaitingLinkupBCancel
 _08080ACC: .4byte sub_8080CDC
 	thumb_func_end sub_8080A4C
 
@@ -564,7 +564,7 @@ sub_8080B20: @ 8080B20
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r0, _08080BC0 @ =gUnknown_81BC50D
+	ldr r0, _08080BC0 @ =CableClub_Text_StartLinkWithXPlayersAConfirmBCancel
 	bl ShowFieldAutoScrollMessage
 	mov r0, r9
 	subs r0, 0x8
@@ -582,7 +582,7 @@ _08080BA8:
 _08080BB4: .4byte gTasks+0x8
 _08080BB8: .4byte gMain
 _08080BBC: .4byte gStringVar1
-_08080BC0: .4byte gUnknown_81BC50D
+_08080BC0: .4byte CableClub_Text_StartLinkWithXPlayersAConfirmBCancel
 _08080BC4: .4byte sub_8080BC8
 	thumb_func_end sub_8080B20
 
@@ -622,7 +622,7 @@ sub_8080BC8: @ 8080BC8
 	cmp r0, 0
 	beq _08080C3C
 _08080C16:
-	ldr r0, _08080C30 @ =gUnknown_81BC4CE
+	ldr r0, _08080C30 @ =CableClub_Text_WhenAllPlayersReadyAConfirmBCancel
 	bl ShowFieldAutoScrollMessage
 	ldr r1, _08080C34 @ =gTasks
 	lsls r0, r5, 2
@@ -634,7 +634,7 @@ _08080C16:
 	b _08080C5C
 	.align 2, 0
 _08080C2C: .4byte gMain
-_08080C30: .4byte gUnknown_81BC4CE
+_08080C30: .4byte CableClub_Text_WhenAllPlayersReadyAConfirmBCancel
 _08080C34: .4byte gTasks
 _08080C38: .4byte sub_8080AD0
 _08080C3C:
@@ -1148,8 +1148,8 @@ _0808105A:
 _08081060: .4byte sub_8080FF0
 	thumb_func_end sub_808102C
 
-	thumb_func_start sub_8081064
-sub_8081064: @ 8081064
+	thumb_func_start TryBattleLinkup
+TryBattleLinkup: @ 8081064
 	push {r4,lr}
 	movs r3, 0x2
 	movs r2, 0x2
@@ -1202,10 +1202,10 @@ _080810B4:
 	.align 2, 0
 _080810C4: .4byte gLinkType
 _080810C8: .4byte 0x00002255
-	thumb_func_end sub_8081064
+	thumb_func_end TryBattleLinkup
 
-	thumb_func_start sub_80810CC
-sub_80810CC: @ 80810CC
+	thumb_func_start TryTradeLinkup
+TryTradeLinkup: @ 80810CC
 	push {lr}
 	ldr r1, _080810E8 @ =gLinkType
 	ldr r2, _080810EC @ =0x00001133
@@ -1223,7 +1223,7 @@ sub_80810CC: @ 80810CC
 _080810E8: .4byte gLinkType
 _080810EC: .4byte 0x00001133
 _080810F0: .4byte gBattleTypeFlags
-	thumb_func_end sub_80810CC
+	thumb_func_end TryTradeLinkup
 
 	thumb_func_start sub_80810F4
 sub_80810F4: @ 80810F4
@@ -2012,8 +2012,8 @@ _0808173C: .4byte c2_8056854
 _08081740: .4byte CB2_SetUpSaveAfterLinkBattle
 	thumb_func_end sub_8081668
 
-	thumb_func_start sub_8081744
-sub_8081744: @ 8081744
+	thumb_func_start CleanupLinkRoomState
+CleanupLinkRoomState: @ 8081744
 	push {lr}
 	ldr r0, _0808176C @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -2034,7 +2034,7 @@ _08081760:
 	bx r0
 	.align 2, 0
 _0808176C: .4byte gSpecialVar_0x8004
-	thumb_func_end sub_8081744
+	thumb_func_end CleanupLinkRoomState
 
 	thumb_func_start sub_8081770
 sub_8081770: @ 8081770
@@ -2072,13 +2072,13 @@ _080817A4:
 	beq _0808180C
 	b _08081820
 _080817AE:
-	ldr r0, _080817BC @ =gUnknown_81BC4AC
+	ldr r0, _080817BC @ =CableClub_Text_PleaseWaitBCancel
 	bl ShowFieldMessage
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _08081820
 	.align 2, 0
-_080817BC: .4byte gUnknown_81BC4AC
+_080817BC: .4byte CableClub_Text_PleaseWaitBCancel
 _080817C0:
 	bl IsFieldMessageBoxHidden
 	lsls r0, 24
@@ -2296,8 +2296,8 @@ _08081970:
 	bx r0
 	thumb_func_end sub_80818E8
 
-	thumb_func_start sub_8081978
-sub_8081978: @ 8081978
+	thumb_func_start EnterTradeSeat
+EnterTradeSeat: @ 8081978
 	push {lr}
 	ldr r0, _0808198C @ =gWirelessCommType
 	ldrb r0, [r0]
@@ -2317,7 +2317,7 @@ _0808199A:
 	bx r0
 	.align 2, 0
 _080819A0: .4byte sub_8081850
-	thumb_func_end sub_8081978
+	thumb_func_end EnterTradeSeat
 
 	thumb_func_start sub_80819A4
 sub_80819A4: @ 80819A4
@@ -2340,8 +2340,8 @@ sub_80819B8: @ 80819B8
 	bx r0
 	thumb_func_end sub_80819B8
 
-	thumb_func_start sub_80819C8
-sub_80819C8: @ 80819C8
+	thumb_func_start EnterColosseumPlayerSpot
+EnterColosseumPlayerSpot: @ 80819C8
 	push {lr}
 	ldr r1, _080819E4 @ =gLinkType
 	ldr r2, _080819E8 @ =0x00002211
@@ -2367,7 +2367,7 @@ _080819FA:
 	bx r0
 	.align 2, 0
 _08081A00: .4byte sub_8081318
-	thumb_func_end sub_80819C8
+	thumb_func_end EnterColosseumPlayerSpot
 
 	thumb_func_start sub_8081A04
 sub_8081A04: @ 8081A04
@@ -2382,8 +2382,8 @@ sub_8081A04: @ 8081A04
 _08081A18: .4byte sub_808177C
 	thumb_func_end sub_8081A04
 
-	thumb_func_start sp02A_crash_sound
-sp02A_crash_sound: @ 8081A1C
+	thumb_func_start Script_ShowLinkTrainerCard
+Script_ShowLinkTrainerCard: @ 8081A1C
 	push {lr}
 	ldr r0, _08081A2C @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
@@ -2394,7 +2394,7 @@ sp02A_crash_sound: @ 8081A1C
 	.align 2, 0
 _08081A2C: .4byte gSpecialVar_0x8006
 _08081A30: .4byte CB2_ReturnToFieldContinueScriptPlayMapMusic
-	thumb_func_end sp02A_crash_sound
+	thumb_func_end Script_ShowLinkTrainerCard
 
 	thumb_func_start sub_8081A34
 sub_8081A34: @ 8081A34

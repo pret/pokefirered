@@ -1626,3 +1626,10 @@
 	setvar VAR_0x8008, \gym
 	call EventScript_SetGymTrainers
 	.endm
+
+	@ Appears frequently at start of NPC scripts. Should be used once named/understood
+	.macro unk_questlog
+	special sub_8110AB4
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
+	.endm

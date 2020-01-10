@@ -44,7 +44,7 @@ EventScript_1653C5:: @ 81653C5
 OneIsland_KindleRoad_EmberSpa_EventScript_1653CF:: @ 81653CF
 	lockall
 	fadescreen FADE_TO_WHITE
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen FADE_FROM_WHITE
 	msgbox gUnknown_817D450
 	setvar VAR_TEMP_1, 1

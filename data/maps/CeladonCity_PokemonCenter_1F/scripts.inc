@@ -1,6 +1,6 @@
 CeladonCity_PokemonCenter_1F_MapScripts:: @ 816C5EC
 	map_script MAP_SCRIPT_ON_TRANSITION, CeladonCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CeladonCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 CeladonCity_PokemonCenter_1F_OnTransition:: @ 816C5F7

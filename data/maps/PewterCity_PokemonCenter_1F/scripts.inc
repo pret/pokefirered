@@ -1,6 +1,6 @@
 PewterCity_PokemonCenter_1F_MapScripts:: @ 816A760
 	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, PewterCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 PewterCity_PokemonCenter_1F_OnTransition:: @ 816A76B

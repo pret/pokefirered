@@ -1519,10 +1519,10 @@ _0806D488:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4A0
-	ldr r0, _0806D49C @ =gUnknown_81BBFD8
+	ldr r0, _0806D49C @ =CableClub_EventScript_81BBFD8
 	b _0806D53E
 	.align 2, 0
-_0806D49C: .4byte gUnknown_81BBFD8
+_0806D49C: .4byte CableClub_EventScript_81BBFD8
 _0806D4A0:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsQuestionnaire
@@ -1542,10 +1542,10 @@ _0806D4B8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4D0
-	ldr r0, _0806D4CC @ =gUnknown_81BB8A7
+	ldr r0, _0806D4CC @ =CableClub_EventScript_ShowBattleRecords
 	b _0806D53E
 	.align 2, 0
-_0806D4CC: .4byte gUnknown_81BB8A7
+_0806D4CC: .4byte CableClub_EventScript_ShowBattleRecords
 _0806D4D0:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsIndigoPlateauMark

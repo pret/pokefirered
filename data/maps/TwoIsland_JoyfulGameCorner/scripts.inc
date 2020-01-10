@@ -125,7 +125,7 @@ TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if_eq EventScript_1BC060
+	goto_if_eq JoyfulGameCorner_EventScript_InfoMan2
 	goto_if_set FLAG_RESCUED_LOSTELLE, EventScript_171555
 	msgbox gUnknown_81A285C
 	release
@@ -140,7 +140,7 @@ TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if_eq EventScript_1BC0CE
+	goto_if_eq JoyfulGameCorner_EventScript_MinigameAttendant
 	goto_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, EventScript_1715F5
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	goto_if_eq EventScript_17158A

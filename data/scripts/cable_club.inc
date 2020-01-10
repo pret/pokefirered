@@ -118,17 +118,17 @@ CableClub_EventScript_CloseLinkAndExitLinkRoom:: @ 81BB315
 	textcolor 1
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
-	applymovement VAR_0x8007, Movement_1BB88F
+	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB891
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
-	applymovement VAR_0x8007, Movement_1BB88B
+	applymovement VAR_0x8007, Movement_AttendantFaceDown
 	waitmovement 0
 	return
 
 CableClub_EventScript_ExitTradeCenter:: @ 81BB34F
 	lockall
-	call EventScript_1BB367
+	call CableClub_EventScript_PlayerExitTradeCenter
 	call CableClub_EventScript_CloseDirectCornerBarrier
 	special DrawWholeMapView
 	playse SE_TK_KASYA
@@ -136,7 +136,7 @@ CableClub_EventScript_ExitTradeCenter:: @ 81BB34F
 	releaseall
 	end
 
-EventScript_1BB367:: @ 81BB367
+CableClub_EventScript_PlayerExitTradeCenter:: @ 81BB367
 	special CloseLink
 	special HelpSystem_Enable
 	special sub_811390C
@@ -144,16 +144,16 @@ EventScript_1BB367:: @ 81BB367
 	textcolor 1
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB8A0
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
 	waitmovement 0
-	applymovement VAR_0x8007, Movement_1BB88F
+	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
-	call EventScript_1BB3E6
+	call CableClub_EventScript_TrainerCardDataOverwritten
 	return
 
 CableClub_EventScript_ExitUnionRoom:: @ 81BB39C
 	lockall
-	call EventScript_1BB3B4
+	call CableClub_EventScript_PlayerExitUnionRoom
 	call CableClub_EventScript_CloseUnionRoomBarrier
 	special DrawWholeMapView
 	playse SE_TK_KASYA
@@ -161,34 +161,34 @@ CableClub_EventScript_ExitUnionRoom:: @ 81BB39C
 	releaseall
 	end
 
-EventScript_1BB3B4:: @ 81BB3B4
+CableClub_EventScript_PlayerExitUnionRoom:: @ 81BB3B4
 	special HelpSystem_Enable
 	special sub_811390C
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
 	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB8A0
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerFaceAttendantRight
 	waitmovement 0
-	applymovement VAR_0x8007, Movement_1BB88F
+	applymovement VAR_0x8007, Movement_AttendantFaceLeft
 	waitmovement 0
-	call EventScript_1BB3E6
+	call CableClub_EventScript_TrainerCardDataOverwritten
 	return
 
-EventScript_1BB3E6:: @ 81BB3E6
-	message Text_1BC918
+CableClub_EventScript_TrainerCardDataOverwritten:: @ 81BB3E6
+	message CableClub_Text_TrainerCardDataOverwritten
 	waitmessage
 	playse SE_PIN
-	message Text_1BC943
+	message CableClub_Text_HopeToSeeYouAgain
 	waitmessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB891
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
-	applymovement VAR_0x8007, Movement_1BB88B
+	applymovement VAR_0x8007, Movement_AttendantFaceDown
 	waitmovement 0
 	return
 
 CableClub_EventScript_PlayerExitLinkRoom:: @ 81BB40A
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB891
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
 	waitmovement 0
 	return
 
@@ -197,413 +197,408 @@ CableClub_EventScript_Tutorial:: @ 81BB415
 	textcolor 1
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	msgbox gUnknown_81BD898
+	msgbox CableClub_Text_FirstTimeRightThisWay
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB447
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachCounter
 	waitmovement 0
 	delay 30
-	msgbox gUnknown_81BD966
+	msgbox CableClub_Text_ExplainWirelessClubFirstTime
 	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 2
 	releaseall
 	end
 
-Movement_1BB447:: @ 81BB447
+Movement_PlayerApproachCounter: @ 81BB447
 	walk_up
 	walk_up
 	step_end
 
-EventScript_1BB44A:: @ 81BB44A
-	message gUnknown_81BC311
+CableClub_EventScript_WelcomeToCableClub:: @ 81BB44A
+	message CableClub_Text_WelcomeWhichCableClubService
 	waitmessage
 	delay 15
-	goto EventScript_1BB467
+	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
-EventScript_1BB459:: @ 81BB459
-	msgbox gUnknown_81BC35E
-	goto EventScript_1BB467
+CableClub_EventScript_UnusedWelcomeToCableClub:: @ 81BB459
+	msgbox CableClub_Text_WhichService
+	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
-EventScript_1BB467:: @ 81BB467
+CableClub_EventScript_SelectCableClubRoom:: @ 81BB467
 	setvar VAR_0x8004, 0
 	multichoice 0, 0, MULTICHOICE_TRADE_CENTER_COLOSSEUM, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BB6AB
-	case 1, EventScript_1BB4A3
-	case 2, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_TradeCenter
+	case 1, CableClub_EventScript_Colosseum
+	case 2, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BB4A3:: @ 81BB4A3
+CableClub_EventScript_Colosseum:: @ 81BB4A3
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	goto EventScript_1BB4AE
-
-EventScript_1BB4AD:: @ 81BB4AD
+	goto CableClub_EventScript_SelectBattleMode
 	end
 
-EventScript_1BB4AE:: @ 81BB4AE
-	message Text_1BD338
+CableClub_EventScript_SelectBattleMode:: @ 81BB4AE
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BB50F
-	case 1, EventScript_1BB51A
-	case 2, EventScript_1BB541
-	case 3, EventScript_1BB501
-	case 4, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_SingleBattleMode
+	case 1, CableClub_EventScript_DoubleBattleMode
+	case 2, CableClub_EventScript_MultiBattleMode
+	case 3, CableClub_EventScript_BattleModeInfo
+	case 4, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BB501:: @ 81BB501
-	msgbox gUnknown_81BD390
-	goto EventScript_1BB4AE
+CableClub_EventScript_BattleModeInfo:: @ 81BB501
+	msgbox CableClub_Text_ExplainBattleModes
+	goto CableClub_EventScript_SelectBattleMode
 	end
 
-EventScript_1BB50F:: @ 81BB50F
-	setvar VAR_0x8004, 1
-	goto EventScript_1BB54C
+CableClub_EventScript_SingleBattleMode:: @ 81BB50F
+	setvar VAR_0x8004, USING_SINGLE_BATTLE
+	goto CableClub_EventScript_TryEnterColosseum
 	end
 
-EventScript_1BB51A:: @ 81BB51A
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_1BB533
-	setvar VAR_0x8004, 2
-	goto EventScript_1BB54C
+CableClub_EventScript_DoubleBattleMode:: @ 81BB51A
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne CableClub_EventScript_NeedTwoMonsForDoubleBattle
+	setvar VAR_0x8004, USING_DOUBLE_BATTLE
+	goto CableClub_EventScript_TryEnterColosseum
 	end
 
-EventScript_1BB533:: @ 81BB533
-	msgbox gUnknown_81BC409
-	goto EventScript_1BB4AE
+CableClub_EventScript_NeedTwoMonsForDoubleBattle:: @ 81BB533
+	msgbox CableClub_Text_NeedTwoMonsForDoubleBattle
+	goto CableClub_EventScript_SelectBattleMode
 	end
 
-EventScript_1BB541:: @ 81BB541
-	setvar VAR_0x8004, 5
-	goto EventScript_1BB54C
+CableClub_EventScript_MultiBattleMode:: @ 81BB541
+	setvar VAR_0x8004, USING_MULTI_BATTLE
+	goto CableClub_EventScript_TryEnterColosseum
 	end
 
-EventScript_1BB54C:: @ 81BB54C
+CableClub_EventScript_TryEnterColosseum:: @ 81BB54C
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
-	message gUnknown_81BC4AC
+	goto_if_eq CableClub_EventScript_AbortLink
+	message CableClub_Text_PleaseWaitBCancel
 	waitmessage
 	special HelpSystem_Disable
 	textcolor 3
-	special sub_8081064
+	special TryBattleLinkup
 	waitstate
 	call EventScript_1A6675
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BB5B3
+	goto_if_eq CableClub_EventScript_EnterColosseum
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1BB80F
+	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
 	compare VAR_RESULT, 3
-	goto_if_eq EventScript_1BB81F
+	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
 	compare VAR_RESULT, 4
-	goto_if_eq EventScript_1BB63C
+	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BB82F
+	goto_if_eq CableClub_EventScript_AbortLink
 	compare VAR_RESULT, 6
-	goto_if_eq EventScript_1BB7FF
+	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	end
 
-EventScript_1BB5B3:: @ 81BB5B3
-	special sp000_heal_pokemon
+CableClub_EventScript_EnterColosseum:: @ 81BB5B3
+	special HealPlayerParty
 	special SavePlayerParty
 	special LoadPlayerBag
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
-	messageautoscroll Text_1BC590
+	messageautoscroll CableClub_Text_PleaseEnter
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	delay 60
-	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB898
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB89C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, MAP_UNKNOWN_MAP_00_00
+	hideobject OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
-	compare VAR_0x8004, 5
-	goto_if_eq EventScript_1BB62C
+	compare VAR_0x8004, USING_MULTI_BATTLE
+	goto_if_eq CableClub_EventScript_WarpTo4PColosseum
 	special SetCableClubWarp
-	warp MAP_UNKNOWN_MAP_00_00, 255, 6, 8
+	warp MAP_BATTLE_COLOSSEUM_2P, 255, 6, 8
 	special DoCableClubWarp
 	waitstate
 	end
 
-EventScript_1BB621:: @ 81BB621
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB894
+@ Unused
+CableClub_EventScript_PlayerApproachLinkRoomRight:: @ 81BB621
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomRight
 	waitmovement 0
 	return
 
-EventScript_1BB62C:: @ 81BB62C
+CableClub_EventScript_WarpTo4PColosseum:: @ 81BB62C
 	special SetCableClubWarp
-	warp MAP_UNKNOWN_MAP_00_03, 255, 5, 8
+	warp MAP_BATTLE_COLOSSEUM_4P, 255, 5, 8
 	special DoCableClubWarp
 	waitstate
 	end
 
-EventScript_1BB63C:: @ 81BB63C
+CableClub_EventScript_AbortLinkIncorrectNumberOfBattlers:: @ 81BB63C
 	switch VAR_0x8004
-	case 1, EventScript_1BB68A
-	case 2, EventScript_1BB679
-	case 5, EventScript_1BB668
-	goto EventScript_1BB857
-
-EventScript_1BB667:: @ 81BB667
+	case USING_SINGLE_BATTLE, CableClub_EventScript_AbortLinkWrongNumberForSingleBattle
+	case USING_DOUBLE_BATTLE, CableClub_EventScript_AbortLinkWrongNumberForDoubleBattle
+	case USING_MULTI_BATTLE, CableClub_EventScript_AbortLinkNeedFourPlayers
+	goto CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
 	end
 
-EventScript_1BB668:: @ 81BB668
+CableClub_EventScript_AbortLinkNeedFourPlayers:: @ 81BB668
 	special CloseLink
-	msgbox gUnknown_81BC736
-	goto EventScript_1BB69B
-
-EventScript_1BB678:: @ 81BB678
+	msgbox CableClub_Text_NeedFourPlayers
+	goto CableClub_EventScript_ConfirmNumberAndRestart
 	end
 
-EventScript_1BB679:: @ 81BB679
+CableClub_EventScript_AbortLinkWrongNumberForDoubleBattle:: @ 81BB679
 	special CloseLink
-	msgbox gUnknown_81BC700
-	goto EventScript_1BB69B
-
-EventScript_1BB689:: @ 81BB689
+	msgbox CableClub_Text_CantDoubleBattleWithXPlayers
+	goto CableClub_EventScript_ConfirmNumberAndRestart
 	end
 
-EventScript_1BB68A:: @ 81BB68A
+CableClub_EventScript_AbortLinkWrongNumberForSingleBattle:: @ 81BB68A
 	special CloseLink
-	msgbox gUnknown_81BC6CA
-	goto EventScript_1BB69B
-
-EventScript_1BB69A:: @ 81BB69A
+	msgbox CableClub_Text_CantSingleBattleWithXPlayers
+	goto CableClub_EventScript_ConfirmNumberAndRestart
 	end
 
-EventScript_1BB69B:: @ 81BB69B
-	special CloseLink
+CableClub_EventScript_ConfirmNumberAndRestart:: @ 81BB69B
+	special CloseLink  @ Redundant
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC76B
+	msgbox CableClub_Text_PleaseConfirmNumberAndRestart
 	release
 	end
 
-EventScript_1BB6AB:: @ 81BB6AB
+CableClub_EventScript_TradeCenter:: @ 81BB6AB
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call EventScript_1BB79C
+	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
+	goto_if_eq CableClub_EventScript_AbortLink
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
-	message gUnknown_81BC4AC
+	goto_if_eq CableClub_EventScript_AbortLink
+	message CableClub_Text_PleaseWaitBCancel
 	waitmessage
 	special HelpSystem_Disable
 	textcolor 3
-	special sub_80810CC
+	special TryTradeLinkup
 	waitstate
 	call EventScript_1A6675
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BB73D
+	goto_if_eq CableClub_EventScript_EnterTradeCenter
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1BB80F
+	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
 	compare VAR_RESULT, 3
-	goto_if_eq EventScript_1BB81F
+	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
 	compare VAR_RESULT, 4
-	goto_if_eq EventScript_1BB857
+	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BB82F
+	goto_if_eq CableClub_EventScript_AbortLink
 	compare VAR_RESULT, 6
-	goto_if_eq EventScript_1BB7FF
+	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	compare VAR_RESULT, 7
-	goto_if_eq EventScript_1BB7DF
+	goto_if_eq CableClub_EventScript_AbortLinkPlayerNotReady
 	compare VAR_RESULT, 9
-	goto_if_eq EventScript_1BB7EF
+	goto_if_eq CableClub_EventScript_AbortLinkOtherTrainerNotReady
 	end
 
-EventScript_1BB73D:: @ 81BB73D
-	setvar VAR_0x8004, 3
+CableClub_EventScript_EnterTradeCenter:: @ 81BB73D
+	setvar VAR_0x8004, USING_TRADE_CENTER
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
-	messageautoscroll Text_1BC590
+	messageautoscroll CableClub_Text_PleaseEnter
 	waitmessage
 	call CableClub_EventScript_OpenDirectCornerBarrier
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	delay 60
-	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB898
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB89C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, MAP_UNKNOWN_MAP_00_00
+	hideobject OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
 	special SetCableClubWarp
-	setwarp MAP_UNKNOWN_MAP_00_01, 255, 5, 8
+	setwarp MAP_TRADE_CENTER, 255, 5, 8
 	special DoCableClubWarp
 	waitstate
 	end
 
-EventScript_1BB79C:: @ 81BB79C
+CableClub_EventScript_CheckPartyTradeRequirements:: @ 81BB79C
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 2
-	goto_if_lt EventScript_1BB7C2
+	goto_if_lt CableClub_EventScript_NeedTwoMonsToTrade
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BB7D0
-	setvar VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
+	goto_if_eq CableClub_EventScript_CantTradeEnigmaBerry
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_1BB7C2:: @ 81BB7C2
-	msgbox gUnknown_81BC442
-	setvar VAR_RESULT, 0
+CableClub_EventScript_NeedTwoMonsToTrade:: @ 81BB7C2
+	msgbox CableClub_Text_NeedTwoMonsToTrade
+	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_1BB7D0:: @ 81BB7D0
-	msgbox gUnknown_81BC47C
-	setvar VAR_RESULT, 0
+CableClub_EventScript_CantTradeEnigmaBerry:: @ 81BB7D0
+	msgbox CableClub_Text_CantTradeEnigmaBerry
+	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_1BB7DE:: @ 81BB7DE
+@ Record Corner is nopped in FRLG
+CableClub_EventScript_RecordCorner:: @ 81BB7DE
 	end
 
-EventScript_1BB7DF:: @ 81BB7DF
+CableClub_EventScript_AbortLinkPlayerNotReady:: @ 81BB7DF
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC95C
+	msgbox CableClub_Text_NotSetUpForFarAwayRegion
 	release
 	end
 
-EventScript_1BB7EF:: @ 81BB7EF
+CableClub_EventScript_AbortLinkOtherTrainerNotReady:: @ 81BB7EF
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC9C0
+	msgbox CableClub_Text_OtherTrainerNotReady
 	release
 	end
 
-EventScript_1BB7FF:: @ 81BB7FF
+CableClub_EventScript_AbortLinkConnectionError:: @ 81BB7FF
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC615
+	msgbox CableClub_Text_LinkErrorPleaseReset
 	release
 	end
 
-EventScript_1BB80F:: @ 81BB80F
+CableClub_EventScript_AbortLinkSomeoneNotReady:: @ 81BB80F
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC5C0
+	msgbox CableClub_Text_SomeoneIsNotReadyToLink
 	release
 	end
 
-EventScript_1BB81F:: @ 81BB81F
+CableClub_EventScript_AbortLinkDifferentSelections:: @ 81BB81F
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC64E
+	msgbox CableClub_Text_PlayersMadeDifferentSelections
 	release
 	end
 
-EventScript_1BB82F:: @ 81BB82F
+CableClub_EventScript_AbortLink:: @ 81BB82F
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC68A
+	msgbox CableClub_Text_PleaseVisitAgain
 	release
 	end
 
-EventScript_1BB83F:: @ 81BB83F
+CableClub_EventScript_AbortMinigame:: @ 81BB83F
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BCFD1
+	msgbox CableClub_Text_ComeAgain
 	release
 	end
 
-EventScript_1BB84F:: @ 81BB84F
+@ Unused
+CableClub_EventScript_CableClubWarp:: @ 81BB84F
 	special SetCableClubWarp
 	special DoCableClubWarp
 	waitstate
 	end
 
-EventScript_1BB857:: @ 81BB857
+CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants:: @ 81BB857
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC6A1
+	msgbox CableClub_Text_IncorrectNumberOfParticipants
 	release
 	end
 
-EventScript_1BB867:: @ 81BB867
+CableClub_EventScript_AbortLinkPlayerHasBadEgg:: @ 81BB867
 	special CloseLink
 	special HelpSystem_Enable
-	msgbox gUnknown_81BC9E0
+	msgbox CableClub_Text_YouHaveAMonThatCantBeTaken
 	release
 	end
 
-EventScript_1BB877:: @ 81BB877
+CableClub_EventScript_WirelessClubAdjustements:: @ 81BB877
 	msgbox Text_WirelessClubUndergoingAdjustments
 	release
 	end
 
-EventScript_1BB881:: @ 81BB881
+CableClub_EventScript_NotReadyYet:: @ 81BB881
 	msgbox Text_AppearsToBeUndergoingAdjustments
 	releaseall
 	end
 
-Movement_1BB88B:: @ 81BB88B
+Movement_AttendantFaceDown:: @ 81BB88B
 	face_down
 	step_end
 
-Movement_1BB88D:: @ 81BB88D
+@ Unused
+Movement_AttendantFaceRight:: @ 81BB88D
 	face_right
 	step_end
 
-Movement_1BB88F:: @ 81BB88F
+Movement_AttendantFaceLeft:: @ 81BB88F
 	face_left
 	step_end
 
-Movement_1BB891:: @ 81BB891
+Movement_PlayerExitLinkRoom:: @ 81BB891
 	walk_down
 	walk_down
 	step_end
 
-Movement_1BB894:: @ 81BB894
+Movement_PlayerApproachLinkRoomRight:: @ 81BB894
 	walk_right
 	walk_up
 	walk_up
 	step_end
 
-Movement_1BB898:: @ 81BB898
+Movement_PlayerApproachLinkRoomLeft:: @ 81BB898
 	walk_left
 	walk_up
 	walk_up
 	step_end
 
-Movement_1BB89C:: @ 81BB89C
+Movement_PlayerEnterLinkRoom:: @ 81BB89C
 	walk_up
 	step_end
 
-Movement_1BB89E:: @ 81BB89E
+@ Unused
+Movement_PlayerFaceAttendantLeft:: @ 81BB89E
 	face_left
 	step_end
 
-Movement_1BB8A0:: @ 81BB8A0
+Movement_PlayerFaceAttendantRight:: @ 81BB8A0
 	face_right
 	step_end
 
-Movement_1BB8A2:: @ 81BB8A2
+Movement_PlayerEnterMinigameRoom:: @ 81BB8A2
 	walk_left
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-gUnknown_81BB8A7:: @ 81BB8A7
+CableClub_EventScript_ShowBattleRecords:: @ 81BB8A7
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
@@ -615,551 +610,521 @@ gUnknown_81BB8A7:: @ 81BB8A7
 	releaseall
 	end
 
-gUnknown_81BB8C3:: @ 81BB8C3
-UnknownMap_00_00_EventScript_1BB8C3:: @ 81BB8C3
+BattleColosseum2P_EventScript_PlayerSpot0:: @ 81BB8C3
 	setvar VAR_0x8005, 0
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-gUnknown_81BB8CF:: @ 81BB8CF
-UnknownMap_00_00_EventScript_1BB8CF:: @ 81BB8CF
+BattleColosseum2P_EventScript_PlayerSpot1:: @ 81BB8CF
 	setvar VAR_0x8005, 1
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-gUnknown_81BB8DB:: @ 81BB8DB
-UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
+BattleColosseum4P_EventScript_PlayerSpot0:: @ 81BB8DB
 	fadescreen FADE_TO_BLACK
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB94F
+	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-gUnknown_81BB8F8:: @ 81BB8F8
-UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
+BattleColosseum4P_EventScript_PlayerSpot1:: @ 81BB8F8
 	fadescreen FADE_TO_BLACK
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB94F
+	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-gUnknown_81BB915:: @ 81BB915
-UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
+BattleColosseum4P_EventScript_PlayerSpot2:: @ 81BB915
 	fadescreen FADE_TO_BLACK
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB94F
+	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-gUnknown_81BB932:: @ 81BB932
-UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
+BattleColosseum4P_EventScript_PlayerSpot3:: @ 81BB932
 	fadescreen FADE_TO_BLACK
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB94F
+	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	textcolor 3
-	special sub_80819C8
+	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-EventScript_1BB94F:: @ 81BB94F
+BattleColosseum4P_EventScript_CancelSpotTrigger:: @ 81BB94F
 	end
 
 gUnknown_81BB950:: @ 81BB950
-UnknownMap_00_01_EventScript_1BB950:: @ 81BB950
+TradeCenter_EventScript_Chair0:: @ 81BB950
 	setvar VAR_0x8005, 0
 	textcolor 3
-	special sub_8081978
+	special EnterTradeSeat
 	waitstate
 	end
 
-gUnknown_81BB95C:: @ 81BB95C
-UnknownMap_00_01_EventScript_1BB95C:: @ 81BB95C
+TradeCenter_EventScript_Chair1:: @ 81BB95C
 	setvar VAR_0x8005, 1
 	textcolor 3
-	special sub_8081978
+	special EnterTradeSeat
 	waitstate
 	end
 
-EventScript_1BB968:: @ 81BB968
+@ Unused
+TradeCenter_EventScript_Chair2:: @ 81BB968
 	setvar VAR_0x8005, 2
 	textcolor 3
-	special sub_8081978
+	special EnterTradeSeat
 	waitstate
 	end
 
-EventScript_1BB974:: @ 81BB974
+@ Unused
+TradeCenter_EventScript_Chair3:: @ 81BB974
 	setvar VAR_0x8005, 3
 	textcolor 3
-	special sub_8081978
+	special EnterTradeSeat
 	waitstate
 	end
 
-gUnknown_81BB980:: @ 81BB980
-UnknownMap_00_02_EventScript_1BB980:: @ 81BB980
+@ Nop in FRLG
+RecordCenter_EventScript_Spot:: @ 81BB980
 	end
 
-gUnknown_81BB981:: @ 81BB981
+CableClub_EventScript_ReadTrainerCard:: @ 81BB981
 	textcolor 3
 	msgbox Text_LookedAtPlayersTrainerCard
 	fadescreen FADE_TO_BLACK
-	special sp02A_crash_sound
+	special Script_ShowLinkTrainerCard
 	waitstate
 	end
 
-gUnknown_81BB992:: @ 81BB992
+CableClub_EventScript_ReadTrainerCardColored:: @ 81BB992
 	textcolor 3
 	msgbox Text_LookedAtPlayersTrainerCardColored
 	fadescreen FADE_TO_BLACK
-	special sp02A_crash_sound
+	special Script_ShowLinkTrainerCard
 	waitstate
 	end
 
-gUnknown_81BB9A3:: @ 81BB9A3
+CableClub_EventScript_TooBusyToNotice:: @ 81BB9A3
 	textcolor 3
 	msgbox Text_TrainerTooBusyToNotice
 	closemessage
 	end
 
-UnknownMap_00_00_EventScript_1BB9AF:: @ 81BB9AF
+BattleColosseum2P_EventScript_Attendant:: @ 81BB9AF
 	textcolor 3
-	special sub_8069740
+	special Script_FacePlayer
 	msgbox Text_TakeSeatStartBattle
-	special sub_8069768
+	special Script_ClearHeldMovement
 	closemessage
 	end
 
-UnknownMap_00_01_EventScript_1BB9C1:: @ 81BB9C1
+TradeCenter_EventScript_Attendant:: @ 81BB9C1
 	textcolor 3
-	special sub_8069740
+	special Script_FacePlayer
 	msgbox Text_TakeSeatStartTrade
-	special sub_8069768
+	special Script_ClearHeldMovement
 	closemessage
 	end
 
-UnknownMap_00_02_EventScript_1BB9D3:: @ 81BB9D3
+@ Nop in FRLG
+RecordCenter_EventScript_Attendant:: @ 81BB9D3
 	end
 
-gUnknown_81BB9D4:: @ 81BB9D4
+TradeCenter_ConfirmLeaveRoom:: @ 81BB9D4
 	textcolor 3
 	msgbox Text_TerminateLinkIfYouLeaveRoom, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_1BB9F0
+	goto_if_eq TradeCenter_TerminateLink
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
 
-EventScript_1BB9F0:: @ 81BB9F0
+TradeCenter_TerminateLink:: @ 81BB9F0
 	textcolor 3
-	messageautoscroll Text_1BC7E2
+	messageautoscroll Text_TerminateLinkConfirmation
 	waitmessage
 	special sub_8081770
 	end
 
-gUnknown_81BB9FC:: @ 81BB9FC
-	special sub_8081744
-	special sub_807E704
+CableClub_EventScript_DoLinkRoomExit:: @ 81BB9FC
+	special CleanupLinkRoomState
+	special ReturnFromLinkRoom
 	waitstate
 	end
 
-EventScript_1BBA04:: @ 81BBA04
+CableClub_EventScript_UnionRoomAttendant:: @ 81BBA04
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, Special_BadEggInParty
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BB867
+	compare VAR_RESULT, TRUE
+	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1BBB60
-	message Text_1BD65B
+	goto_if_eq CableClub_EventScript_UnionRoomAdapterNotConnected
+	message CableClub_Text_WelcomeUnionRoomEnter
 	waitmessage
-	goto EventScript_1BBA51
-
-EventScript_1BBA50:: @ 81BBA50
+	goto CableClub_EventScript_AskEnterUnionRoom
 	end
 
-EventScript_1BBA51:: @ 81BBA51
+CableClub_EventScript_AskEnterUnionRoom:: @ 81BBA51
 	multichoice 18, 6, MULTICHOICE_YES_NO_INFO, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBA94
-	case 1, EventScript_1BB82F
-	case 2, EventScript_1BBA88
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_EnterUnionRoom
+	case 1, CableClub_EventScript_AbortLink
+	case 2, CableClub_EventScript_UnionRoomInfo
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBA88:: @ 81BBA88
-	message Text_1BD706
+CableClub_EventScript_UnionRoomInfo:: @ 81BBA88
+	message CableClub_Text_UnionRoomInfo
 	waitmessage
-	goto EventScript_1BBA51
-
-EventScript_1BBA93:: @ 81BBA93
+	goto CableClub_EventScript_AskEnterUnionRoom
 	end
 
-EventScript_1BBA94:: @ 81BBA94
-	call EventScript_1BBB1E
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
+CableClub_EventScript_EnterUnionRoom:: @ 81BBA94
+	call CableClub_EventScript_CheckPartyUnionRoomRequirements
+	compare VAR_RESULT, FALSE
+	goto_if_eq CableClub_EventScript_AbortLink
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
-	msgbox gUnknown_81BD86A
+	goto_if_eq CableClub_EventScript_AbortLink
+	msgbox CableClub_Text_EnjoyUnionRoom
 	closemessage
-	special sp000_heal_pokemon
-	setvar VAR_0x8004, 6
+	special HealPlayerParty
+	setvar VAR_0x8004, USING_UNION_ROOM
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
 	special HelpSystem_Disable
 	call CableClub_EventScript_OpenUnionRoomBarrier
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	delay 60
-	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB898
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 5, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB89C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, MAP_UNKNOWN_MAP_00_00
+	hideobject OBJ_EVENT_ID_PLAYER, 0
 	closedoor 5, 1
 	waitdooranim
-	special sub_811B15C
+	special Script_ResetUnionRoomTrade
 	special SetCableClubWarp
-	warpteleport2 MAP_UNKNOWN_MAP_00_04, 255, 7, 11
+	warpteleport2 MAP_UNION_ROOM, 255, 7, 11
 	waitstate
 	special UnionRoomSpecial
 	waitstate
 	end
 
-EventScript_1BBB1E:: @ 81BBB1E
+CableClub_EventScript_CheckPartyUnionRoomRequirements:: @ 81BBB1E
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 2
-	goto_if_lt EventScript_1BBB44
+	goto_if_lt CableClub_EventScript_NeedTwoMonsForUnionRoom
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBB52
-	setvar VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
+	goto_if_eq CableClub_EventScript_NoEnigmaBerryInUnionRoom
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_1BBB44:: @ 81BBB44
-	msgbox gUnknown_81BCBC3
+CableClub_EventScript_NeedTwoMonsForUnionRoom:: @ 81BBB44
+	msgbox CableClub_Text_NeedTwoMonsForUnionRoom
 	goto EventScript_SetResultFalse
-
-EventScript_1BBB51:: @ 81BBB51
 	end
 
-EventScript_1BBB52:: @ 81BBB52
-	msgbox gUnknown_81BCC00
+CableClub_EventScript_NoEnigmaBerryInUnionRoom:: @ 81BBB52
+	msgbox CableClub_Text_NoEnigmaBerryInUnionRoom
 	goto EventScript_SetResultFalse
-
-EventScript_1BBB5F:: @ 81BBB5F
 	end
 
-EventScript_1BBB60:: @ 81BBB60
-	msgbox gUnknown_81BCC3A
+CableClub_EventScript_UnionRoomAdapterNotConnected:: @ 81BBB60
+	msgbox CableClub_Text_UnionRoomAdapterNotConnected
 	release
 	return
 
-EventScript_1BBB6A:: @ 81BBB6A
+CableClub_EventScript_WirelessClubAttendant:: @ 81BBB6A
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
-	msgbox gUnknown_81BDB85, MSGBOX_YESNO
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
+	msgbox CableClub_Text_AskAboutLinking, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1BBB92
-	msgbox gUnknown_81BDBF8
+	goto_if_eq CableClub_EventScript_DontAskAboutLinking
+	msgbox CableClub_Text_ExplainWirelessClub
 	release
 	return
 
-EventScript_1BBB92:: @ 81BBB92
-	msgbox gUnknown_81BDEDF
+CableClub_EventScript_DontAskAboutLinking:: @ 81BBB92
+	msgbox CableClub_Text_HopeYouEnjoyWirelessSystem
 	release
 	return
 
-EventScript_1BBB9C:: @ 81BBB9C
+CableClub_EventScript_DirectCornerAttendant:: @ 81BBB9C
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
 	specialvar VAR_RESULT, Special_BadEggInParty
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BB867
+	compare VAR_RESULT, TRUE
+	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1BB44A
-	message Text_1BD28D
+	goto_if_eq CableClub_EventScript_WelcomeToCableClub
+	message CableClub_Text_WelcomeWhichDirectCornerRoom
 	waitmessage
 	delay 15
-	goto EventScript_1BBBE7
-
-EventScript_1BBBE6:: @ 81BBBE6
+	goto CableClub_EventScript_DirectCornerSelectService
 	end
 
-EventScript_1BBBE7:: @ 81BBBE7
-	goto_if_unset FLAG_GOT_POWDER_JAR, EventScript_1BBC32
+CableClub_EventScript_DirectCornerSelectService:: @ 81BBBE7
+	goto_if_unset FLAG_GOT_POWDER_JAR, CableClub_EventScript_DirectCornerNoBerry
 	multichoice 0, 0, MULTICHOICE_TRADE_COLOSSEUM_CRUSH, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBC69
-	case 1, EventScript_1BBC97
-	case 2, EventScript_1BBD35
-	case 3, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_WirelessTrade
+	case 1, CableClub_EventScript_WirelessBattleSelect
+	case 2, CableClub_EventScript_WirelessBerryCrush
+	case 3, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBC32:: @ 81BBC32
+CableClub_EventScript_DirectCornerNoBerry:: @ 81BBC32
 	multichoice 0, 0, MULTICHOICE_TRADE_COLOSSEUM_2, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBC69
-	case 1, EventScript_1BBC97
-	case 2, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_WirelessTrade
+	case 1, CableClub_EventScript_WirelessBattleSelect
+	case 2, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBC69:: @ 81BBC69
-	msgbox gUnknown_81BD317, MSGBOX_YESNO
+CableClub_EventScript_WirelessTrade:: @ 81BBC69
+	msgbox CableClub_Text_TradePokemon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1BB82F
-	call EventScript_1BB79C
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
-	setvar VAR_0x8004, 3
-	goto EventScript_1BBD6F
-
-EventScript_1BBC96:: @ 81BBC96
+	goto_if_eq CableClub_EventScript_AbortLink
+	call CableClub_EventScript_CheckPartyTradeRequirements
+	compare VAR_RESULT, FALSE
+	goto_if_eq CableClub_EventScript_AbortLink
+	setvar VAR_0x8004, LINK_GROUP_TRADE
+	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-EventScript_1BBC97:: @ 81BBC97
-	message Text_1BD338
+CableClub_EventScript_WirelessBattleSelect:: @ 81BBC97
+	message CableClub_Text_PlayWhichBattleMode
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBCEA
-	case 1, EventScript_1BBCF5
-	case 2, EventScript_1BBD1C
-	case 3, EventScript_1BBD27
-	case 4, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_WirelessSingleBattle
+	case 1, CableClub_EventScript_WirelessDoubleBattle
+	case 2, CableClub_EventScript_WirelessMultiBattle
+	case 3, CableClub_EventScript_WirelessBattleInfo
+	case 4, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBCEA:: @ 81BBCEA
-	setvar VAR_0x8004, 0
-	goto EventScript_1BBD6F
-
-EventScript_1BBCF4:: @ 81BBCF4
+CableClub_EventScript_WirelessSingleBattle:: @ 81BBCEA
+	setvar VAR_0x8004, LINK_GROUP_SINGLE_BATTLE
+	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-EventScript_1BBCF5:: @ 81BBCF5
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_1BBD0E
-	setvar VAR_0x8004, 1
-	goto EventScript_1BBD6F
-
-EventScript_1BBD0D:: @ 81BBD0D
+CableClub_EventScript_WirelessDoubleBattle:: @ 81BBCF5
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle
+	setvar VAR_0x8004, LINK_GROUP_DOUBLE_BATTLE
+	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-EventScript_1BBD0E:: @ 81BBD0E
-	msgbox gUnknown_81BC409
-	goto EventScript_1BBC97
-
-EventScript_1BBD1B:: @ 81BBD1B
+CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle:: @ 81BBD0E
+	msgbox CableClub_Text_NeedTwoMonsForDoubleBattle
+	goto CableClub_EventScript_WirelessBattleSelect
 	end
 
-EventScript_1BBD1C:: @ 81BBD1C
-	setvar VAR_0x8004, 2
-	goto EventScript_1BBD6F
-
-EventScript_1BBD26:: @ 81BBD26
+CableClub_EventScript_WirelessMultiBattle:: @ 81BBD1C
+	setvar VAR_0x8004, LINK_GROUP_MULTI_BATTLE
+	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-EventScript_1BBD27:: @ 81BBD27
-	msgbox gUnknown_81BD390
-	goto EventScript_1BBC97
-
-EventScript_1BBD34:: @ 81BBD34
+CableClub_EventScript_WirelessBattleInfo:: @ 81BBD27
+	msgbox CableClub_Text_ExplainBattleModes
+	goto CableClub_EventScript_WirelessBattleSelect
 	end
 
-EventScript_1BBD35:: @ 81BBD35
-	msgbox gUnknown_81BD362, MSGBOX_YESNO
+CableClub_EventScript_WirelessBerryCrush:: @ 81BBD35
+	msgbox CableClub_Text_UseBerryCrush, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1BB82F
+	goto_if_eq CableClub_EventScript_AbortLink
 	special CheckHasAtLeastOneBerry
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BBD61
-	setvar VAR_0x8004, 5
-	goto EventScript_1BBD6F
-
-EventScript_1BBD60:: @ 81BBD60
+	compare VAR_RESULT, FALSE
+	goto_if_eq CableClub_EventScript_NeedBerryForBerryCrush
+	setvar VAR_0x8004, LINK_GROUP_BERRY_CRUSH
+	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
 
-EventScript_1BBD61:: @ 81BBD61
-	msgbox gUnknown_81BCB81
-	goto EventScript_1BBBE7
-
-EventScript_1BBD6E:: @ 81BBD6E
+CableClub_EventScript_NeedBerryForBerryCrush:: @ 81BBD61
+	msgbox CableClub_Text_NeedBerryForBerryCrush
+	goto CableClub_EventScript_DirectCornerSelectService
 	end
 
-EventScript_1BBD6F:: @ 81BBD6F
+CableClub_EventScript_SaveAndChooseLinkLeader:: @ 81BBD6F
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB82F
+	goto_if_eq CableClub_EventScript_AbortLink
 	switch VAR_0x8004
-	case 3, EventScript_1BBDBC
-	case 0, EventScript_1BBDBC
-	case 1, EventScript_1BBDBC
-	case 2, EventScript_1BBE50
-	case 5, EventScript_1BBEE4
+	case LINK_GROUP_TRADE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_SINGLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_DOUBLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
+	case LINK_GROUP_MULTI_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom4
+	case LINK_GROUP_BERRY_CRUSH, CableClub_EventScript_ChooseLinkLeader
 	end
 
-EventScript_1BBDBC:: @ 81BBDBC
+CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 81BBDBC
 	textcolor 3
-	message Text_1BD51B
+	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
 	call EventScript_1A6675
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBE28
-	case 1, EventScript_1BBE00
-	case 2, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_TryJoinGroup2Players
+	case 1, CableClub_EventScript_TryLeadGroup2Players
+	case 2, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBE00:: @ 81BBE00
-	call EventScript_1BBF78
+CableClub_EventScript_TryLeadGroup2Players:: @ 81BBE00
+	call CableClub_EventScript_TryBecomeLinkLeader
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBDBC
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom2
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBE00
+	goto_if_eq CableClub_EventScript_TryLeadGroup2Players
 	release
 	return
 
-EventScript_1BBE28:: @ 81BBE28
-	call EventScript_1BBF80
+CableClub_EventScript_TryJoinGroup2Players:: @ 81BBE28
+	call CableClub_EventScript_TryJoinLinkGroup
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBDBC
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom2
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBE28
+	goto_if_eq CableClub_EventScript_TryJoinGroup2Players
 	release
 	return
 
-EventScript_1BBE50:: @ 81BBE50
+CableClub_EventScript_ChooseLinkLeaderFrom4:: @ 81BBE50
 	textcolor 3
-	message Text_1BD582
+	message CableClub_Text_ChooseGroupLeaderOfFour
 	waitmessage
 	call EventScript_1A6675
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBEBC
-	case 1, EventScript_1BBE94
-	case 2, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_TryJoinGroup4Players
+	case 1, CableClub_EventScript_TryLeadGroup4Players
+	case 2, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBE94:: @ 81BBE94
-	call EventScript_1BBF78
+CableClub_EventScript_TryLeadGroup4Players:: @ 81BBE94
+	call CableClub_EventScript_TryBecomeLinkLeader
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBE50
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom4
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBE94
+	goto_if_eq CableClub_EventScript_TryLeadGroup4Players
 	release
 	return
 
-EventScript_1BBEBC:: @ 81BBEBC
-	call EventScript_1BBF80
+CableClub_EventScript_TryJoinGroup4Players:: @ 81BBEBC
+	call CableClub_EventScript_TryJoinLinkGroup
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBE50
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderFrom4
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBEBC
+	goto_if_eq CableClub_EventScript_TryJoinGroup4Players
 	release
 	return
 
-EventScript_1BBEE4:: @ 81BBEE4
+CableClub_EventScript_ChooseLinkLeader:: @ 81BBEE4
 	textcolor 3
-	message Text_1BD5F1
+	message CableClub_Text_ChooseGroupLeader
 	waitmessage
 	call EventScript_1A6675
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BBF50
-	case 1, EventScript_1BBF28
-	case 2, EventScript_1BB82F
-	case SCR_MENU_CANCEL, EventScript_1BB82F
+	case 0, CableClub_EventScript_TryJoinGroupXPlayers
+	case 1, CableClub_EventScript_TryLeadGroupXPlayers
+	case 2, CableClub_EventScript_AbortLink
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortLink
 	end
 
-EventScript_1BBF28:: @ 81BBF28
-	call EventScript_1BBF78
+CableClub_EventScript_TryLeadGroupXPlayers:: @ 81BBF28
+	call CableClub_EventScript_TryBecomeLinkLeader
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBEE4
+	goto_if_eq CableClub_EventScript_ChooseLinkLeader
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBF28
+	goto_if_eq CableClub_EventScript_TryLeadGroupXPlayers
 	release
 	return
 
-EventScript_1BBF50:: @ 81BBF50
-	call EventScript_1BBF80
+CableClub_EventScript_TryJoinGroupXPlayers:: @ 81BBF50
+	call CableClub_EventScript_TryJoinLinkGroup
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BBF88
+	goto_if_eq CableClub_EventScript_EnterWirelessLinkRoom
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BBEE4
+	goto_if_eq CableClub_EventScript_ChooseLinkLeader
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BBF50
+	goto_if_eq CableClub_EventScript_TryJoinGroupXPlayers
 	release
 	return
 
-EventScript_1BBF78:: @ 81BBF78
+CableClub_EventScript_TryBecomeLinkLeader:: @ 81BBF78
 	special HelpSystem_Disable
-	special sub_8115A24
+	special TryBecomeLinkLeader
 	waitstate
 	return
 
-EventScript_1BBF80:: @ 81BBF80
+CableClub_EventScript_TryJoinLinkGroup:: @ 81BBF80
 	special HelpSystem_Disable
-	special BerryBlenderLinkJoinGroup
+	special TryJoinLinkGroup
 	waitstate
 	return
 
-EventScript_1BBF88:: @ 81BBF88
-	messageautoscroll Text_1BC59E
+CableClub_EventScript_EnterWirelessLinkRoom:: @ 81BBF88
+	messageautoscroll CableClub_Text_DirectYouToYourRoom
 	waitmessage
 	delay 60
 	closemessage
@@ -1168,42 +1133,42 @@ EventScript_1BBF88:: @ 81BBF88
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	delay 60
-	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB898
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerApproachLinkRoomLeft
 	waitmovement 0
 	opendoor 9, 1
 	waitdooranim
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB89C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, MAP_UNKNOWN_MAP_00_00
+	hideobject OBJ_EVENT_ID_PLAYER, 0
 	closedoor 9, 1
 	waitdooranim
 	release
 	waitstate
 	end
 
-gUnknown_81BBFD8:: @ 81BBFD8
+CableClub_EventScript_81BBFD8:: @ 81BBFD8
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	lockall
-	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB881
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_NotReadyYet
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1BC016
+	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	special HelpSystem_Disable
 	fadescreen FADE_TO_BLACK
 	special sub_814F1D4
 	waitstate
-	msgbox gUnknown_81BCA43
+	msgbox CableClub_Text_ParticipantsStepUpToCounter
 	special HelpSystem_Enable
 	releaseall
 	end
 
-EventScript_1BC016:: @ 81BC016
-	msgbox gUnknown_81BCA13
+CableClub_EventScript_AdapterNotConnected:: @ 81BC016
+	msgbox CableClub_Text_AdapterNotConnected
 	releaseall
 	end
 
@@ -1231,161 +1196,139 @@ CableClub_EventScript_CloseGameCornerBarrier:: @ 81BC052
 	setmetatile 5, 3, 759, 1
 	return
 
-CeladonCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FiveIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FourIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-FuchsiaCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-LavenderTown_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-OneIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-PewterCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-Route10_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-Route4_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SaffronCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SevenIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-SixIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-ThreeIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-TwoIsland_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-VermilionCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-ViridianCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
-	special sub_811999C
+CableClub_OnResume:: @ 81BC05C
+	special InitUnionRoom
 	end
 
-EventScript_1BC060:: @ 81BC060
+JoyfulGameCorner_EventScript_InfoMan2:: @ 81BC060
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	message Text_1BCCFF
+	message Text_DescribeWhichGame
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BC0B0
-	case 1, EventScript_1BC0BA
-	case 2, EventScript_1BC0C4
-	case SCR_MENU_CANCEL, EventScript_1BC0C4
+	case 0, CableClub_EventScript_PokemonJumpInfo
+	case 1, CableClub_EventScript_DodrioBerryPickingInfo
+	case 2, CableClub_EventScript_MinigameInfoExit
+	case SCR_MENU_CANCEL, CableClub_EventScript_MinigameInfoExit
 	end
 
-EventScript_1BC0B0:: @ 81BC0B0
-	msgbox gUnknown_81BCD4D
+CableClub_EventScript_PokemonJumpInfo:: @ 81BC0B0
+	msgbox Text_PokemonJumpInfo
 	release
 	end
 
-EventScript_1BC0BA:: @ 81BC0BA
-	msgbox gUnknown_81BCE73
+CableClub_EventScript_DodrioBerryPickingInfo:: @ 81BC0BA
+	msgbox Text_DodrioBerryPickingInfo
 	release
 	end
 
-EventScript_1BC0C4:: @ 81BC0C4
-	msgbox gUnknown_81BCF2E
+CableClub_EventScript_MinigameInfoExit:: @ 81BC0C4
+	msgbox Text_TalkToManToPlay
 	release
 	end
 
-EventScript_1BC0CE:: @ 81BC0CE
+JoyfulGameCorner_EventScript_MinigameAttendant:: @ 81BC0CE
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	message Text_1BCF69
+	message Text_WelcomeCanYouWait
 	waitmessage
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1BC29C
+	goto_if_eq CableClub_EventScript_AdapterNotConnectedMinigame
 	delay 60
 	special HelpSystem_Disable
-	message Text_1BD02D
+	message Text_PlayWhichGame
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_POKEJUMP_DODRIO, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BC13A
-	case 1, EventScript_1BC184
-	case 2, EventScript_1BB83F
-	case SCR_MENU_CANCEL, EventScript_1BB83F
+	case 0, CableClub_EventScript_PlayPokemonJump
+	case 1, CableClub_EventScript_PlayDodrioBerryPicking
+	case 2, CableClub_EventScript_AbortMinigame
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortMinigame
 	end
 
-EventScript_1BC13A:: @ 81BC13A
+CableClub_EventScript_PlayPokemonJump:: @ 81BC13A
 	setvar VAR_0x8005, 0
-	special sub_8149A18
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_NoEligiblePkmn
-	msgbox gUnknown_81BD059
+	special IsPokemonJumpSpeciesInParty
+	compare VAR_RESULT, FALSE
+	goto_if_eq CableClub_EventScript_NoEligiblePkmn
+	msgbox Text_EnterWhichPokemon
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
 	waitstate
-	compare VAR_0x8004, 6
-	goto_if_ge EventScript_1BB83F
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge CableClub_EventScript_AbortMinigame
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB83F
-	setvar VAR_0x8004, 4
-	goto EventScript_1BC1CE
-
-EventScript_1BC183:: @ 81BC183
+	goto_if_eq CableClub_EventScript_AbortMinigame
+	setvar VAR_0x8004, LINK_GROUP_POKEMON_JUMP
+	goto CableClub_EventScript_ChooseLinkLeaderMinigame
 	end
 
-EventScript_1BC184:: @ 81BC184
+CableClub_EventScript_PlayDodrioBerryPicking:: @ 81BC184
 	setvar VAR_0x8005, 1
-	special sub_81537C0
+	special IsDodrioInParty
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_NoEligiblePkmn
-	msgbox gUnknown_81BD059
+	goto_if_eq CableClub_EventScript_NoEligiblePkmn
+	msgbox Text_EnterWhichPokemon
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
 	waitstate
-	compare VAR_0x8004, 6
-	goto_if_ge EventScript_1BB83F
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge CableClub_EventScript_AbortMinigame
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1BB83F
-	setvar VAR_0x8004, 6
-	goto EventScript_1BC1CE
-
-EventScript_1BC1CD:: @ 81BC1CD
+	goto_if_eq CableClub_EventScript_AbortMinigame
+	setvar VAR_0x8004, LINK_GROUP_BERRY_PICKING
+	goto CableClub_EventScript_ChooseLinkLeaderMinigame
 	end
 
-EventScript_1BC1CE:: @ 81BC1CE
+CableClub_EventScript_ChooseLinkLeaderMinigame:: @ 81BC1CE
 	textcolor 3
-	message Text_1BD5F1
+	message CableClub_Text_ChooseGroupLeader
 	waitmessage
 	call EventScript_1A6675
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_1BC23A
-	case 1, EventScript_1BC212
-	case 2, EventScript_1BB83F
-	case SCR_MENU_CANCEL, EventScript_1BB83F
+	case 0, CableClub_EventScript_TryJoinMinigameLinkGroup
+	case 1, CableClub_EventScript_TryBecomeMinigameLinkLeader
+	case 2, CableClub_EventScript_AbortMinigame
+	case SCR_MENU_CANCEL, CableClub_EventScript_AbortMinigame
 	end
 
-EventScript_1BC212:: @ 81BC212
-	call EventScript_1BBF78
+CableClub_EventScript_TryBecomeMinigameLinkLeader:: @ 81BC212
+	call CableClub_EventScript_TryBecomeLinkLeader
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BC262
+	goto_if_eq CableClub_EventScript_EnterMinigame
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BC1CE
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderMinigame
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BC212
+	goto_if_eq CableClub_EventScript_TryBecomeMinigameLinkLeader
 	release
 	return
 
-EventScript_1BC23A:: @ 81BC23A
-	call EventScript_1BBF80
+CableClub_EventScript_TryJoinMinigameLinkGroup:: @ 81BC23A
+	call CableClub_EventScript_TryJoinLinkGroup
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1BC262
+	goto_if_eq CableClub_EventScript_EnterMinigame
 	compare VAR_RESULT, 5
-	goto_if_eq EventScript_1BC1CE
+	goto_if_eq CableClub_EventScript_ChooseLinkLeaderMinigame
 	compare VAR_RESULT, 8
-	goto_if_eq EventScript_1BC23A
+	goto_if_eq CableClub_EventScript_TryJoinMinigameLinkGroup
 	release
 	return
 
-EventScript_1BC262:: @ 81BC262
-	messageautoscroll Text_1BD080
+CableClub_EventScript_EnterMinigame:: @ 81BC262
+	messageautoscroll Text_AllGoodToGo
 	waitmessage
 	delay 120
 	closemessage
@@ -1394,156 +1337,156 @@ EventScript_1BC262:: @ 81BC262
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	delay 60
-	applymovement VAR_LAST_TALKED, Movement_1BB88F
+	applymovement VAR_LAST_TALKED, Movement_AttendantFaceLeft
 	waitmovement 0
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB8A2
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobject OBJ_EVENT_ID_PLAYER, MAP_UNKNOWN_MAP_00_00
+	hideobject OBJ_EVENT_ID_PLAYER, 0
 	release
 	waitstate
 	end
 
-EventScript_1BC29C:: @ 81BC29C
-	msgbox gUnknown_81BCFE8
+CableClub_EventScript_AdapterNotConnectedMinigame:: @ 81BC29C
+	msgbox Text_AdapterNotConnectedMinigame
 	release
 	end
 
-EventScript_NoEligiblePkmn:: @ 81BC2A6
-	msgbox gUnknown_81BD0CF, MSGBOX_YESNO
+CableClub_EventScript_NoEligiblePkmn:: @ 81BC2A6
+	msgbox EventScript_ExplainPokemonJumpRequirements, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1BB83F
+	goto_if_eq CableClub_EventScript_AbortMinigame
 	compare VAR_0x8005, 0
-	call_if_eq EventScript_1BC2D5
+	call_if_eq CableClub_EventScript_ExplainPokemonJumpRequirements
 	compare VAR_0x8005, 1
-	call_if_eq EventScript_1BC2DE
-	goto EventScript_1BB83F
-
-EventScript_1BC2D4:: @ 81BC2D4
+	call_if_eq CableClub_EventScript_ExplainDodrioBerryPickingRequirements
+	goto CableClub_EventScript_AbortMinigame
 	end
 
-EventScript_1BC2D5:: @ 81BC2D5
-	msgbox gUnknown_81BD14B
+CableClub_EventScript_ExplainPokemonJumpRequirements:: @ 81BC2D5
+	msgbox Text_ShortJumpingPokemonAllowed
 	return
 
-EventScript_1BC2DE:: @ 81BC2DE
-	msgbox gUnknown_81BD213
+CableClub_EventScript_ExplainDodrioBerryPickingRequirements:: @ 81BC2DE
+	msgbox Text_OnlyDodrioAllowed
 	return
 
-TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
+TwoIsland_JoyfulGameCorner_EventScript_ShowPokemonJumpRecords:: @ 81BC2E7
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	lockall
-	special sub_814B504
+	special ShowPokemonJumpRecords
 	waitstate
 	releaseall
 	end
 
-TwoIsland_JoyfulGameCorner_EventScript_1BC2FC:: @ 81BC2FC
+TwoIsland_JoyfulGameCorner_EventScript_ShowDodrioBerryPickingRecords:: @ 81BC2FC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	lockall
-	special sub_8153810
+	special ShowDodrioBerryPickingRecords
 	waitstate
 	releaseall
 	end
 
-gUnknown_81BC311:: @ 81BC311
+CableClub_Text_WelcomeWhichCableClubService:: @ 81BC311
 	.string "Welcome to the POKéMON CABLE\n"
 	.string "CLUB.\p"
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
-gUnknown_81BC35E:: @ 81BC35E
+CableClub_Text_WhichService:: @ 81BC35E
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
-Text_1BC388:: @ 81BC388
+CableClub_Text_TradeMonsUsingLinkCable:: @ 81BC388
 	.string "Trade POKéMON with another player\n"
 	.string "using a GBA Game Link cable.$"
 
-Text_1BC3C7:: @ 81BC3C7
+CableClub_Text_BattleUsingLinkCable:: @ 81BC3C7
 	.string "You may battle another TRAINER\n"
 	.string "using a GBA Game Link cable.$"
 
-Text_1BC403:: @ 81BC403
+@ Unused, translated in Emerald
+CableClub_Text_CloseThisMenu:: @ 81BC403
 	.string "おわります$"
 
-gUnknown_81BC409:: @ 81BC409
+CableClub_Text_NeedTwoMonsForDoubleBattle:: @ 81BC409
 	.string "For a DOUBLE BATTLE, you must\n"
 	.string "have at least two POKéMON.$"
 
-gUnknown_81BC442:: @ 81BC442
+CableClub_Text_NeedTwoMonsToTrade:: @ 81BC442
 	.string "For trading, you must have at\n"
 	.string "least two POKéMON with you.$"
 
-gUnknown_81BC47C:: @ 81BC47C
+CableClub_Text_CantTradeEnigmaBerry:: @ 81BC47C
 	.string "A POKéMON holding the {STR_VAR_1}\n"
 	.string "BERRY can't be traded.$"
 
-gUnknown_81BC4AC:: @ 81BC4AC
+CableClub_Text_PleaseWaitBCancel:: @ 81BC4AC
 	.string "Please wait.\n"
 	.string "… … B Button: Cancel$"
 
-gUnknown_81BC4CE:: @ 81BC4CE
+CableClub_Text_WhenAllPlayersReadyAConfirmBCancel:: @ 81BC4CE
 	.string "When all players are ready…\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-gUnknown_81BC50D:: @ 81BC50D
+CableClub_Text_StartLinkWithXPlayersAConfirmBCancel:: @ 81BC50D
 	.string "Start link with {STR_VAR_1} players.\n"
 	.string "A Button: Confirm\l"
 	.string "B Button: Cancel$"
 
-gUnknown_81BC54C:: @ 81BC54C
+CableClub_Text_AwaitingLinkupBCancel:: @ 81BC54C
 	.string "Awaiting linkup…\n"
 	.string "… … B Button: Cancel$"
 
-Text_1BC572:: @ 81BC572
+@ Unused, translated in Emerald
+CableClub_Text_OkayToSaveProgress:: @ 81BC572
 	.string "はじめる　まえに　レポートを\n"
 	.string "かきますが　よろしいですか？$"
 
-Text_1BC590:: @ 81BC590
+CableClub_Text_PleaseEnter:: @ 81BC590
 	.string "Please enter.$"
 
-Text_1BC59E:: @ 81BC59E
+CableClub_Text_DirectYouToYourRoom:: @ 81BC59E
 	.string "I'll direct you to your room now.$"
 
-gUnknown_81BC5C0:: @ 81BC5C0
+CableClub_Text_SomeoneIsNotReadyToLink:: @ 81BC5C0
 	.string "Someone is not ready to link.\p"
 	.string "Please come back after everyone\n"
 	.string "has made preparations.$"
 
-gUnknown_81BC615:: @ 81BC615
+CableClub_Text_LinkErrorPleaseReset:: @ 81BC615
 	.string "Sorry, we have a link error…\n"
 	.string "Please reset and try again.$"
 
-gUnknown_81BC64E:: @ 81BC64E
+CableClub_Text_PlayersMadeDifferentSelections:: @ 81BC64E
 	.string "The link partners appear to have\n"
 	.string "made different selections.$"
 
-gUnknown_81BC68A:: @ 81BC68A
+CableClub_Text_PleaseVisitAgain:: @ 81BC68A
 	.string "Please do visit again.$"
 
-gUnknown_81BC6A1:: @ 81BC6A1
+CableClub_Text_IncorrectNumberOfParticipants:: @ 81BC6A1
 	.string "The number of participants is\n"
 	.string "incorrect.$"
 
-gUnknown_81BC6CA:: @ 81BC6CA
+CableClub_Text_CantSingleBattleWithXPlayers:: @ 81BC6CA
 	.string "The SINGLE BATTLE Mode can't be\n"
 	.string "played by {STR_VAR_1} players.$"
 
-gUnknown_81BC700:: @ 81BC700
+CableClub_Text_CantDoubleBattleWithXPlayers:: @ 81BC700
 	.string "The DOUBLE BATTLE Mode can't be\n"
 	.string "played by {STR_VAR_1} players.$"
 
-gUnknown_81BC736:: @ 81BC736
+CableClub_Text_NeedFourPlayers:: @ 81BC736
 	.string "There must be four players to play\n"
 	.string "this Battle Mode.$"
 
-gUnknown_81BC76B:: @ 81BC76B
+CableClub_Text_PleaseConfirmNumberAndRestart:: @ 81BC76B
 	.string "Please confirm the number of\n"
 	.string "players and start again.$"
 
@@ -1551,7 +1494,7 @@ Text_TerminateLinkIfYouLeaveRoom:: @ 81BC7A1
 	.string "The link will be terminated if you\n"
 	.string "leave the room. Is that okay?$"
 
-Text_1BC7E2:: @ 81BC7E2
+Text_TerminateLinkConfirmation:: @ 81BC7E2
 	.string "Terminating link…\n"
 	.string "You will be escorted out of\l"
 	.string "the room. Please wait.$"
@@ -1577,88 +1520,95 @@ Text_TakeSeatStartTrade:: @ 81BC8DA
 	.string "Please take your seat and start\n"
 	.string "your trade.$"
 
-Text_1BC906:: @ 81BC906
+@ Unused, leftover from RS
+RecordCorner_Text_ThanksForComing:: @ 81BC906
 	.string "ごりよう　ありがとう　ございました$"
 
-Text_1BC918:: @ 81BC918
+CableClub_Text_TrainerCardDataOverwritten:: @ 81BC918
 	.string "The TRAINER CARD data will\n"
 	.string "be overwritten.$"
 
-Text_1BC943:: @ 81BC943
+CableClub_Text_HopeToSeeYouAgain:: @ 81BC943
 	.string "I hope to see you again!$"
 
-gUnknown_81BC95C:: @ 81BC95C
+CableClub_Text_NotSetUpForFarAwayRegion:: @ 81BC95C
 	.string "I'm awfully sorry.\p"
 	.string "We're not set up to conduct trades\n"
 	.string "with TRAINERS far away in another\l"
 	.string "region yet…$"
 
-gUnknown_81BC9C0:: @ 81BC9C0
+CableClub_Text_OtherTrainerNotReady:: @ 81BC9C0
 	.string "The other TRAINER is not ready.$"
 
-gUnknown_81BC9E0:: @ 81BC9E0
+CableClub_Text_YouHaveAMonThatCantBeTaken:: @ 81BC9E0
 	.string "You have at least one POKéMON\n"
 	.string "that can't be taken.$"
 
-gUnknown_81BCA13:: @ 81BCA13
+CableClub_Text_AdapterNotConnected:: @ 81BCA13
 	.string "The Wireless Adapter is not\n"
 	.string "connected properly.$"
 
-gUnknown_81BCA43:: @ 81BCA43
+CableClub_Text_ParticipantsStepUpToCounter:: @ 81BCA43
 	.string "Participants are asked to step up\n"
 	.string "to the reception counter.$"
 
-Text_1BCA7F:: @ 81BCA7F
+@ Unused, translated in Emerald
+CableClub_Text_Hello:: @ 81BCA7F
 	.string "こんにちは！$"
 
-Text_1BCA86:: @ 81BCA86
+@ Unused, translated in Emerald
+CableClub_Text_PleaseWait:: @ 81BCA86
 	.string "しょうしょう　おまちください$"
 
-Text_1BCA95:: @ 81BCA95
+CableClub_Text_YouMayTradeHere:: @ 81BCA95
 	.string "You may trade your POKéMON here\n"
 	.string "with another TRAINER.$"
 
-Text_1BCACB:: @ 81BCACB
+CableClub_Text_YouMayBattleHere:: @ 81BCACB
 	.string "You may battle with your friends\n"
 	.string "here.$"
 
-Text_1BCAF2:: @ 81BCAF2
+CableClub_Text_CanMakeBerryPowder:: @ 81BCAF2
 	.string "Two to five TRAINERS can make\n"
 	.string "BERRY POWDER together.$"
 
-Text_1BCB27:: @ 81BCB27
+@ Unused, Record Mix nopped
+CableClub_Text_CanMixRecords:: @ 81BCB27
 	.string "ワイヤレス　クラブでの\n"
 	.string "あそびかたを　せつめいします$"
 
-Text_1BCB42:: @ 81BCB42
+CableClub_Text_CancelSelectedItem:: @ 81BCB42
 	.string "Cancels the selected MENU item.$"
 
-Text_1BCB62:: @ 81BCB62
+@ Unused, translated in Emerald
+CableClub_Text_WhichBattleMode:: @ 81BCB62
 	.string "どちらの　しょうぶに　しますか？$"
 
-Text_1BCB73:: @ 81BCB73
+@ Unused, translated in Emerald
+CableClub_Text_ReturnsToPreviousStep:: @ 81BCB73
 	.string "ひとつ　まえに　もどります$"
 
-gUnknown_81BCB81:: @ 81BCB81
+CableClub_Text_NeedBerryForBerryCrush:: @ 81BCB81
 	.string "To use the BERRY CRUSH service,\n"
 	.string "you must have at least one BERRY.$"
 
-gUnknown_81BCBC3:: @ 81BCBC3
+CableClub_Text_NeedTwoMonsForUnionRoom:: @ 81BCBC3
 	.string "To enter the UNION ROOM, you must\n"
 	.string "have at least two POKéMON.$"
 
-gUnknown_81BCC00:: @ 81BCC00
+CableClub_Text_NoEnigmaBerryInUnionRoom:: @ 81BCC00
 	.string "No POKéMON holding the {STR_VAR_1}\n"
 	.string "BERRY may enter the UNION ROOM.$"
 
-gUnknown_81BCC3A:: @ 81BCC3A
+CableClub_Text_UnionRoomAdapterNotConnected:: @ 81BCC3A
 	.string "This is the POKéMON WIRELESS CLUB\n"
 	.string "UNION ROOM.\p"
 	.string "Unfortunately, your Wireless\n"
 	.string "Adapter is not connected properly.\p"
 	.string "Please do come again.$"
 
-Text_1BCCBE:: @ 81BCCBE
+@ Unused, translated in Emerald
+CableClub_Text_OhExcuseMe:: @ 81BCCBE
 	.string "あ‥‥\n"
 	.string "おきゃくさま！$"
 
@@ -1667,12 +1617,12 @@ Text_PlayerIsPlayingRightNowGoForIt:: @ 81BCCCA
 	.string "right now.\l"
 	.string "Go for it!$"
 
-Text_1BCCFF:: @ 81BCCFF
+Text_DescribeWhichGame:: @ 81BCCFF
 	.string "I can explain game rules to you,\n"
 	.string "if you'd like.\p"
 	.string "Which game should I describe?$"
 
-gUnknown_81BCD4D:: @ 81BCD4D
+Text_PokemonJumpInfo:: @ 81BCD4D
 	.string "“POKéMON JUMP”\p"
 	.string "Make your POKéMON skip the\n"
 	.string "VINE WHIP rope with the A Button.\p"
@@ -1685,7 +1635,7 @@ gUnknown_81BCD4D:: @ 81BCD4D
 	.string "Good things happen if everyone\n"
 	.string "jumps in time.$"
 
-gUnknown_81BCE73:: @ 81BCE73
+Text_DodrioBerryPickingInfo:: @ 81BCE73
 	.string "“DODRIO BERRY-PICKING”\p"
 	.string "Command DODRIO's three heads to\n"
 	.string "catch falling BERRIES.\p"
@@ -1694,47 +1644,48 @@ gUnknown_81BCE73:: @ 81BCE73
 	.string "To play this game, you must have\n"
 	.string "a DODRIO.$"
 
-gUnknown_81BCF2E:: @ 81BCF2E
+Text_TalkToManToPlay:: @ 81BCF2E
 	.string "If you want to play a game,\n"
 	.string "please tell the man beside me.$"
 
-Text_1BCF69:: @ 81BCF69
+Text_WelcomeCanYouWait:: @ 81BCF69
 	.string "Hi, welcome!\n"
 	.string "You can play games over the\l"
 	.string "Wireless Communication System.\p"
 	.string "Can you wait just a little bit?$"
 
-gUnknown_81BCFD1:: @ 81BCFD1
+CableClub_Text_ComeAgain:: @ 81BCFD1
 	.string "All right, come again!$"
 
-gUnknown_81BCFE8:: @ 81BCFE8
+Text_AdapterNotConnectedMinigame:: @ 81BCFE8
 	.string "The Wireless Adapter isn't\n"
 	.string "connected.\p"
 	.string "Come back when it's hooked up!$"
 
-Text_1BD02D:: @ 81BD02D
+Text_PlayWhichGame:: @ 81BD02D
 	.string "All right, which game did you want\n"
 	.string "to play?$"
 
-gUnknown_81BD059:: @ 81BD059
+Text_EnterWhichPokemon:: @ 81BD059
 	.string "Which POKéMON would you like to\n"
 	.string "enter?$"
 
-Text_1BD080:: @ 81BD080
+Text_AllGoodToGo:: @ 81BD080
 	.string "Okay, you're all good to go.\n"
 	.string "Don't let the others beat you!$"
 
-Text_1BD0BC:: @ 81BD0BC
+@ Unused, translated in Emerald
+Text_LeavingDoComeAgain:: @ 81BD0BC
 	.string "きょうは　けえるのか？\n"
 	.string "またこいよ！$"
 
-gUnknown_81BD0CF:: @ 81BD0CF
+EventScript_ExplainPokemonJumpRequirements:: @ 81BD0CF
 	.string "It doesn't look like you have any\n"
 	.string "POKéMON that you can enter…\p"
 	.string "Would you like me to explain what\n"
 	.string "kinds of POKéMON can enter?$"
 
-gUnknown_81BD14B:: @ 81BD14B
+Text_ShortJumpingPokemonAllowed:: @ 81BD14B
 	.string "“POKéMON JUMP” is open to POKéMON\n"
 	.string "around 28 inches or less.\p"
 	.string "What you can't enter are those\n"
@@ -1743,17 +1694,18 @@ gUnknown_81BD14B:: @ 81BD14B
 	.string "swim, burrow, or fly.\p"
 	.string "That's all you need to know.$"
 
-gUnknown_81BD213:: @ 81BD213
+Text_OnlyDodrioAllowed:: @ 81BD213
 	.string "“DODRIO BERRY-PICKING”…\n"
 	.string "Well, the name says it all.\p"
 	.string "You have to have a DODRIO to play\n"
 	.string "this game.$"
 
-Text_1BD274:: @ 81BD274
+@ Unused, translated in Emerald
+Text_RetryFromStartPlease:: @ 81BD274
 	.string "もういちど　はじめから\n"
 	.string "やりなおして　みて　くれ$"
 
-Text_1BD28D:: @ 81BD28D
+CableClub_Text_WelcomeWhichDirectCornerRoom:: @ 81BD28D
 	.string "Welcome to the POKéMON WIRELESS\n"
 	.string "CLUB DIRECT CORNER.\p"
 	.string "You may interact directly with\n"
@@ -1761,18 +1713,18 @@ Text_1BD28D:: @ 81BD28D
 	.string "Which room would you like to\n"
 	.string "enter?$"
 
-gUnknown_81BD317:: @ 81BD317
+CableClub_Text_TradePokemon:: @ 81BD317
 	.string "Would you like to trade POKéMON?$"
 
-Text_1BD338:: @ 81BD338
+CableClub_Text_PlayWhichBattleMode:: @ 81BD338
 	.string "Which Battle Mode would you like\n"
 	.string "to play?$"
 
-gUnknown_81BD362:: @ 81BD362
+CableClub_Text_UseBerryCrush:: @ 81BD362
 	.string "Would you like to use the\n"
 	.string "BERRY CRUSH System?$"
 
-gUnknown_81BD390:: @ 81BD390
+CableClub_Text_ExplainBattleModes:: @ 81BD390
 	.string "There are three Battle Modes.\p"
 	.string "SINGLE BATTLE is for two TRAINERS\n"
 	.string "with one or more POKéMON each.\p"
@@ -1787,25 +1739,25 @@ gUnknown_81BD390:: @ 81BD390
 	.string "Each TRAINER can have one POKéMON\n"
 	.string "in battle at a time.$"
 
-Text_1BD51B:: @ 81BD51B
+CableClub_Text_ChooseGroupLeaderOfTwo:: @ 81BD51B
 	.string "Please decide which of you two\n"
 	.string "will become the LEADER.\p"
 	.string "The other player must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-Text_1BD582:: @ 81BD582
+CableClub_Text_ChooseGroupLeaderOfFour:: @ 81BD582
 	.string "Please decide which of you four\n"
 	.string "will become the GROUP LEADER.\p"
 	.string "The other players must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-Text_1BD5F1:: @ 81BD5F1
+CableClub_Text_ChooseGroupLeader:: @ 81BD5F1
 	.string "Please decide which of you will\n"
 	.string "become the GROUP LEADER.\p"
 	.string "The other players must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-Text_1BD65B:: @ 81BD65B
+CableClub_Text_WelcomeUnionRoomEnter:: @ 81BD65B
 	.string "Welcome to the POKéMON WIRELESS\n"
 	.string "CLUB UNION ROOM.\p"
 	.string "You may interact directly with\n"
@@ -1813,7 +1765,7 @@ Text_1BD65B:: @ 81BD65B
 	.string "whom you may not even know.\p"
 	.string "Would you like to enter the ROOM?$"
 
-Text_1BD706:: @ 81BD706
+CableClub_Text_UnionRoomInfo:: @ 81BD706
 	.string "The TRAINERS in the UNION ROOM\n"
 	.string "will be those players around you\l"
 	.string "who have also entered the ROOM.\p"
@@ -1827,11 +1779,11 @@ Text_1BD706:: @ 81BD706
 	.string "trade.\p"
 	.string "Would you like to enter the ROOM?$"
 
-gUnknown_81BD86A:: @ 81BD86A
+CableClub_Text_EnjoyUnionRoom:: @ 81BD86A
 	.string "I hope you enjoy your time in\n"
 	.string "the UNION ROOM.$"
 
-gUnknown_81BD898:: @ 81BD898
+CableClub_Text_FirstTimeRightThisWay:: @ 81BD898
 	.string "Hello!\n"
 	.string "My name is TEALA.\p"
 	.string "This must be your first time\n"
@@ -1842,7 +1794,7 @@ gUnknown_81BD898:: @ 81BD898
 	.string "floor of our POKéMON CENTER.\p"
 	.string "Right this way, please.$"
 
-gUnknown_81BD966:: @ 81BD966
+CableClub_Text_ExplainWirelessClubFirstTime:: @ 81BD966
 	.string "On the top floor, there are two\n"
 	.string "rooms.\p"
 	.string "First, the room on the left.\n"
@@ -1864,14 +1816,14 @@ gUnknown_81BD966:: @ 81BD966
 	.string "I hope you enjoy the Wireless \n"
 	.string "Communication System.$"
 
-gUnknown_81BDB85:: @ 81BDB85
+CableClub_Text_AskAboutLinking:: @ 81BDB85
 	.string "Hello, {PLAYER}!\p"
 	.string "It's me, TEALA, the POKéMON\n"
 	.string "CENTER 2F attendant.\p"
 	.string "Is there something you needed to\n"
 	.string "ask me about linking?$"
 
-gUnknown_81BDBF8:: @ 81BDBF8
+CableClub_Text_ExplainWirelessClub:: @ 81BDBF8
 	.string "Let me explain how the POKéMON\n"
 	.string "WIRELESS CLUB works.\p"
 	.string "On this, the top floor, there are\n"
@@ -1900,6 +1852,6 @@ gUnknown_81BDBF8:: @ 81BDBF8
 	.string "I hope you enjoy the Wireless \n"
 	.string "Communication System.$"
 
-gUnknown_81BDEDF:: @ 81BDEDF
+CableClub_Text_HopeYouEnjoyWirelessSystem:: @ 81BDEDF
 	.string "I hope you enjoy the Wireless\n"
 	.string "Communication System.$"

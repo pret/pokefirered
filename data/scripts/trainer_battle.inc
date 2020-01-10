@@ -27,8 +27,8 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
 	compare VAR_RESULT, 0
 	goto_if_ne EventScript_1A4F20
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_1A4F19
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement
@@ -79,8 +79,8 @@ EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1A4FB0
-	special CheckForAlivePartyMons
-	compare VAR_RESULT, 0
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
 	goto_if_ne EventScript_1A4FB1
 	special PlayTrainerEncounterMusic
 	special SetUpTrainerMovement

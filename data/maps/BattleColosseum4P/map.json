@@ -1,7 +1,7 @@
 {
-  "id": "MAP_UNKNOWN_MAP_00_02",
-  "name": "UnknownMap_00_02",
-  "layout": "LAYOUT_UNKNOWN_MAP_00_02",
+  "id": "MAP_BATTLE_COLOSSEUM_4P",
+  "name": "BattleColosseum4P",
+  "layout": "LAYOUT_BATTLE_COLOSSEUM_4P",
   "music": "MUS_POKECEN",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
@@ -10,48 +10,34 @@
   "unknown_18": 0,
   "unknown_19": 0,
   "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "battle_scene": "BATTLE_SCENE_8",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "OBJECT_EVENT_GFX_UNION_ROOM_RECEPTIONIST",
-      "x": 10,
-      "y": 5,
-      "elevation": 0,
-      "movement_type": "8",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnknownMap_00_02_EventScript_1BB9D3",
-      "flag": "0"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
+      "x": 5,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_NONE",
+      "dest_warp_id": 127
+    },
+    {
       "x": 8,
-      "y": 9,
-      "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
-    },
-    {
-      "x": 9,
-      "y": 9,
-      "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
-    },
-    {
-      "x": 11,
-      "y": 9,
-      "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
-    },
-    {
-      "x": 10,
-      "y": 9,
+      "y": 8,
       "elevation": 3,
       "dest_map": "MAP_NONE",
       "dest_warp_id": 127
@@ -60,39 +46,39 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 6,
+      "x": 3,
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "UnknownMap_00_02_EventScript_1BB980"
+      "script": "BattleColosseum4P_EventScript_PlayerSpot0"
     },
     {
       "type": "trigger",
-      "x": 6,
+      "x": 3,
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "UnknownMap_00_02_EventScript_1BB980"
+      "script": "BattleColosseum4P_EventScript_PlayerSpot2"
     },
     {
       "type": "trigger",
-      "x": 13,
+      "x": 10,
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "UnknownMap_00_02_EventScript_1BB980"
+      "script": "BattleColosseum4P_EventScript_PlayerSpot1"
     },
     {
       "type": "trigger",
-      "x": 13,
+      "x": 10,
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "UnknownMap_00_02_EventScript_1BB980"
+      "script": "BattleColosseum4P_EventScript_PlayerSpot3"
     }
   ],
   "bg_events": []

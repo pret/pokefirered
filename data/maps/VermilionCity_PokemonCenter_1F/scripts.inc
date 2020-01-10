@@ -1,6 +1,6 @@
 VermilionCity_PokemonCenter_1F_MapScripts:: @ 816B424
 	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, VermilionCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 VermilionCity_PokemonCenter_1F_OnTransition:: @ 816B42F

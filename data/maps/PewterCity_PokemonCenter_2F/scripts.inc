@@ -5,14 +5,15 @@ PewterCity_PokemonCenter_2F_MapScripts:: @ 816A7B5
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-PewterCity_PokemonCenter_2F_EventScript_16A7CA:: @ 816A7CA
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+PewterCity_PokemonCenter_2F_EventScript_Colosseum:: @ 816A7CA
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16A7D0:: @ 816A7D0
-	call EventScript_1BB6AB
+PewterCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 816A7D0
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16A7D6:: @ 816A7D6
-	call EventScript_1BB7DE
+PewterCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 816A7D6
+	call CableClub_EventScript_RecordCorner
 	end

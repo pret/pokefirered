@@ -1,6 +1,6 @@
 LavenderTown_PokemonCenter_1F_MapScripts:: @ 816B0EF
 	map_script MAP_SCRIPT_ON_TRANSITION, LavenderTown_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, LavenderTown_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 LavenderTown_PokemonCenter_1F_OnTransition:: @ 816B0FA

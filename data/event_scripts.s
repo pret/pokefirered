@@ -5,6 +5,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
+#include "constants/pokemon.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -23,6 +24,7 @@
 #include "constants/map_scripts.h"
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
+#include "constants/union_room.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -72,11 +74,11 @@ gStdScripts:: @ 8160450
 	.4byte Std_ReceivedItem
 gStdScriptsEnd::
 
-	.include "data/maps/UnknownMap_00_00/scripts.inc"
-	.include "data/maps/UnknownMap_00_01/scripts.inc"
-	.include "data/maps/UnknownMap_00_02/scripts.inc"
-	.include "data/maps/UnknownMap_00_03/scripts.inc"
-	.include "data/maps/UnknownMap_00_04/scripts.inc"
+	.include "data/maps/BattleColosseum2P/scripts.inc"
+	.include "data/maps/TradeCenter/scripts.inc"
+	.include "data/maps/RecordCenter/scripts.inc"
+	.include "data/maps/BattleColosseum4P/scripts.inc"
+	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/ViridianForest/scripts.inc"
 	.include "data/maps/MtMoon_1F/scripts.inc"
 	.include "data/maps/MtMoon_B1F/scripts.inc"
@@ -1236,7 +1238,7 @@ EventScript_OutOfCenterPartyHeal:: @ 81A6C26
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1699,73 +1701,16 @@ gUnknown_81A8CED:: @ 81A8CED
 	releaseall
 	end
 
-CeruleanCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FiveIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-OneIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-PewterCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SevenIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-VermilionCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-FourIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SixIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-ThreeIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-TwoIsland_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route10_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-Route4_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-SaffronCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-CeladonCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-LavenderTown_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-ViridianCity_PokemonCenter_2F_EventScript_1A8CF6:: @ 81A8CF6
-	call EventScript_1BBA04
+Common_EventScript_UnionRoomAttendant:: @ 81A8CF6
+	call CableClub_EventScript_UnionRoomAttendant
 	end
 
-CeruleanCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FiveIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-OneIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-PewterCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SevenIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-VermilionCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-FourIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SixIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-ThreeIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-TwoIsland_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route10_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-Route4_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-SaffronCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-CeladonCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-LavenderTown_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-ViridianCity_PokemonCenter_2F_EventScript_1A8CFC:: @ 81A8CFC
-	call EventScript_1BBB6A
+Common_EventScript_WirelessClubAttendant:: @ 81A8CFC
+	call CableClub_EventScript_WirelessClubAttendant
 	end
 
-CeruleanCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-CinnabarIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FiveIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FuchsiaCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-OneIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-PewterCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SevenIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-VermilionCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-FourIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SixIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-ThreeIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-TwoIsland_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route10_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-Route4_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-SaffronCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-IndigoPlateau_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-CeladonCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-LavenderTown_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
-	call EventScript_1BBB9C
+Common_EventScript_DirectCornerAttendant:: @ 81A8D02
+	call CableClub_EventScript_DirectCornerAttendant
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08

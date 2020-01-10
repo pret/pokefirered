@@ -5,14 +5,15 @@ SaffronCity_PokemonCenter_2F_MapScripts:: @ 816F037
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-SaffronCity_PokemonCenter_2F_EventScript_16F04C:: @ 816F04C
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+SaffronCity_PokemonCenter_2F_EventScript_Colosseum:: @ 816F04C
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16F052:: @ 816F052
-	call EventScript_1BB6AB
+SaffronCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 816F052
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16F058:: @ 816F058
-	call EventScript_1BB7DE
+SaffronCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 816F058
+	call CableClub_EventScript_RecordCorner
 	end

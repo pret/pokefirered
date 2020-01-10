@@ -5,14 +5,15 @@ LavenderTown_PokemonCenter_2F_MapScripts:: @ 816B122
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-LavenderTown_PokemonCenter_2F_EventScript_16B137:: @ 816B137
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+LavenderTown_PokemonCenter_2F_EventScript_Colosseum:: @ 816B137
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16B13D:: @ 816B13D
-	call EventScript_1BB6AB
+LavenderTown_PokemonCenter_2F_EventScript_TradeCenter:: @ 816B13D
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16B143:: @ 816B143
-	call EventScript_1BB7DE
+LavenderTown_PokemonCenter_2F_EventScript_RecordCorner:: @ 816B143
+	call CableClub_EventScript_RecordCorner
 	end

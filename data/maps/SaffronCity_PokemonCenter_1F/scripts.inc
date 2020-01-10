@@ -1,6 +1,6 @@
 SaffronCity_PokemonCenter_1F_MapScripts:: @ 816EFEC
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, SaffronCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 SaffronCity_PokemonCenter_1F_OnTransition:: @ 816EFF7

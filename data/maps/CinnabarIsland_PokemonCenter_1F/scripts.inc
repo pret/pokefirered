@@ -1,6 +1,6 @@
 CinnabarIsland_PokemonCenter_1F_MapScripts:: @ 816E8D7
 	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_PokemonCenter_1F_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, CinnabarIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_OnTransition:: @ 816E8E2

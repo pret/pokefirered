@@ -5,14 +5,15 @@ CeruleanCity_PokemonCenter_2F_MapScripts:: @ 816AA79
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-CeruleanCity_PokemonCenter_2F_EventScript_16AA8E:: @ 816AA8E
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+CeruleanCity_PokemonCenter_2F_EventScript_Colosseum:: @ 816AA8E
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16AA94:: @ 816AA94
-	call EventScript_1BB6AB
+CeruleanCity_PokemonCenter_2F_EventScript_TradeCenter:: @ 816AA94
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16AA9A:: @ 816AA9A
-	call EventScript_1BB7DE
+CeruleanCity_PokemonCenter_2F_EventScript_RecordCorner:: @ 816AA9A
+	call CableClub_EventScript_RecordCorner
 	end

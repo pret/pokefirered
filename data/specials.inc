@@ -8,11 +8,11 @@
 .set __special__, 0
 	.align 2
 gSpecials:: @ 815FD60
-	def_special sp000_heal_pokemon
+	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
-	def_special sub_807E704
-	def_special sub_8081744
+	def_special ReturnFromLinkRoom
+	def_special CleanupLinkRoomState
 	def_special sub_8081770
 	def_special nullsub_75
 	def_special nullsub_75
@@ -36,12 +36,12 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special sub_8081064
-	def_special sub_80810CC
+	def_special TryBattleLinkup
+	def_special TryTradeLinkup
 	def_special sub_80810F4
 	def_special CloseLink
-	def_special sub_80819C8
-	def_special sub_8081978
+	def_special EnterColosseumPlayerSpot
+	def_special EnterTradeSeat
 	def_special sub_80819B8
 	def_special sub_808130C
 	def_special nullsub_75
@@ -49,8 +49,8 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
-	def_special sub_80A0334
-	def_special sp02A_crash_sound
+	def_special ChooseHalfPartyForBattle
+	def_special Script_ShowLinkTrainerCard
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -69,7 +69,7 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_GetTrainerEyeRematchFlag
 	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
-	def_special CheckForAlivePartyMons
+	def_special HasEnoughMonsForDoubleBattle
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -303,8 +303,8 @@ gSpecials:: @ 815FD60
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special ScrSpecial_AreLeadMonEVsMaxedOut
-	def_special sub_8069740
-	def_special sub_8069768
+	def_special Script_FacePlayer
+	def_special Script_ClearHeldMovement
 	def_special InitRoamer
 	def_special nullsub_75
 	def_special Special_PlayerHasGrassPokemonInParty
@@ -371,8 +371,8 @@ gSpecials:: @ 815FD60
 	def_special Special_StickerLadyGetBragFlags
 	def_special sub_80CC524
 	def_special IsWirelessAdapterConnected
-	def_special sub_8115A24
-	def_special BerryBlenderLinkJoinGroup
+	def_special TryBecomeLinkLeader
+	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
 	def_special sub_814F1D4
 	def_special EnableNationalPokedex
@@ -394,7 +394,7 @@ gSpecials:: @ 815FD60
 	def_special HelpSystem_RestoreSomeVariable
 	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
-	def_special sub_811999C
+	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_811390C
 	def_special Special_GetMartClerkObjectId
@@ -410,10 +410,10 @@ gSpecials:: @ 815FD60
 	def_special SetBattledTrainerFlag
 	def_special sub_812B35C
 	def_special Special_SSAnneDepartureCutscene
-	def_special sub_8149A18
+	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled
 	def_special sub_815D9E8
-	def_special sub_814B504
+	def_special ShowPokemonJumpRecords
 	def_special Special_ItemIsTM_GetMoveName
 	def_special Special_DaisyMassageServices
 	def_special HelpSystem_Disable
@@ -430,7 +430,7 @@ gSpecials:: @ 815FD60
 	def_special Special_CapeBrinkGetMoveToTeachLeadPokemon
 	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits
-	def_special sub_8153810
+	def_special ShowDodrioBerryPickingRecords
 	def_special Special_DrawSeagallopDestinationMenu
 	def_special Special_GetSelectedSeagallopDestination
 	def_special sub_8147500
@@ -443,10 +443,10 @@ gSpecials:: @ 815FD60
 	def_special HasAllMons
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle
-	def_special sub_811B15C
+	def_special Script_ResetUnionRoomTrade
 	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
 	def_special sub_809C4A8
-	def_special sub_81537C0
+	def_special IsDodrioInParty
 	def_special sub_809C5FC
 	def_special Special_InitElevatorFloorSelectMenuPos
 	def_special Special_ComputeLoreleiDollCollection

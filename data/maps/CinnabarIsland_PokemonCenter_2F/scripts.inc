@@ -5,14 +5,15 @@ CinnabarIsland_PokemonCenter_2F_MapScripts:: @ 816E9E8
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-CinnabarIsland_PokemonCenter_2F_EventScript_16E9FD:: @ 816E9FD
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+CinnabarIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 816E9FD
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16EA03:: @ 816EA03
-	call EventScript_1BB6AB
+CinnabarIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 816EA03
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16EA09:: @ 816EA09
-	call EventScript_1BB7DE
+CinnabarIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 816EA09
+	call CableClub_EventScript_RecordCorner
 	end

@@ -5,14 +5,15 @@ SevenIsland_PokemonCenter_2F_MapScripts:: @ 8170BBC
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-SevenIsland_PokemonCenter_2F_EventScript_170BD1:: @ 8170BD1
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+SevenIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 8170BD1
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_170BD7:: @ 8170BD7
-	call EventScript_1BB6AB
+SevenIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 8170BD7
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_170BDD:: @ 8170BDD
-	call EventScript_1BB7DE
+SevenIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 8170BDD
+	call CableClub_EventScript_RecordCorner
 	end

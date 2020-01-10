@@ -487,7 +487,7 @@ Movement_1694BE:: @ 81694BE
 	step_end
 
 EventScript_1694C2:: @ 81694C2
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox gUnknown_818DE38
 	closemessage
 	playbgm MUS_RIVAL2, 0

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sp000_heal_pokemon
-sp000_heal_pokemon: @ 80A0058
+	thumb_func_start HealPlayerParty
+HealPlayerParty: @ 80A0058
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -100,7 +100,7 @@ _080A0104:
 	.align 2, 0
 _080A0114: .4byte gPlayerPartyCount
 _080A0118: .4byte gPlayerParty
-	thumb_func_end sp000_heal_pokemon
+	thumb_func_end HealPlayerParty
 
 	thumb_func_start ScriptGiveMon
 ScriptGiveMon: @ 80A011C
@@ -204,8 +204,8 @@ ScriptGiveEgg: @ 80A01AC
 	bx r1
 	thumb_func_end ScriptGiveEgg
 
-	thumb_func_start CheckForAlivePartyMons
-CheckForAlivePartyMons: @ 80A01F4
+	thumb_func_start HasEnoughMonsForDoubleBattle
+HasEnoughMonsForDoubleBattle: @ 80A01F4
 	push {lr}
 	bl GetMonsStateToDoubles
 	lsls r0, 24
@@ -228,7 +228,7 @@ _080A0214:
 	bx r0
 	.align 2, 0
 _080A0218: .4byte gSpecialVar_Result
-	thumb_func_end CheckForAlivePartyMons
+	thumb_func_end HasEnoughMonsForDoubleBattle
 
 	thumb_func_start CheckPartyMonHasHeldItem
 CheckPartyMonHasHeldItem: @ 80A021C
@@ -378,8 +378,8 @@ _080A032C: .4byte gPlayerPartyCount
 _080A0330: .4byte gPlayerParty
 	thumb_func_end ScriptSetMonMoveSlot
 
-	thumb_func_start sub_80A0334
-sub_80A0334: @ 80A0334
+	thumb_func_start ChooseHalfPartyForBattle
+ChooseHalfPartyForBattle: @ 80A0334
 	push {lr}
 	ldr r1, _080A0348 @ =gMain
 	ldr r0, _080A034C @ =sub_80A0350
@@ -391,7 +391,7 @@ sub_80A0334: @ 80A0334
 	.align 2, 0
 _080A0348: .4byte gMain
 _080A034C: .4byte sub_80A0350
-	thumb_func_end sub_80A0334
+	thumb_func_end ChooseHalfPartyForBattle
 
 	thumb_func_start sub_80A0350
 sub_80A0350: @ 80A0350

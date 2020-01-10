@@ -598,22 +598,22 @@ const u8 *const gStdStringPtrs[] = {
 };
 
 static const u8 *const sDescriptionPtrs_CableClub_TradeBattleCancel[] = {
-    Text_1BC388,
-    Text_1BC3C7,
-    Text_1BCB42
+    CableClub_Text_TradeMonsUsingLinkCable,
+    CableClub_Text_BattleUsingLinkCable,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[] = {
-    Text_1BCA95,
-    Text_1BCACB,
-    Text_1BCAF2,
-    Text_1BCB42
+    CableClub_Text_YouMayTradeHere,
+    CableClub_Text_YouMayBattleHere,
+    CableClub_Text_CanMakeBerryPowder,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCancel[] = {
-    Text_1BCA95,
-    Text_1BCACB,
-    Text_1BCB42
+    CableClub_Text_YouMayTradeHere,
+    CableClub_Text_YouMayBattleHere,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const union AnimCmd sMuseumFossilAnim0[] = {

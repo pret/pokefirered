@@ -241,7 +241,7 @@ EventScript_1C52D7:
 	end
 
 EventScript_1C52E0:: @ 81C52E0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 11
 	special sub_815D9E8
 	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7

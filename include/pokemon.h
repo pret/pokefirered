@@ -104,10 +104,6 @@
 #define MON_GIVEN_TO_PC         0x1
 #define MON_CANT_GIVE           0x2
 
-#define PLAYER_HAS_TWO_USABLE_MONS              0x0
-#define PLAYER_HAS_ONE_MON                      0x1
-#define PLAYER_HAS_ONE_USABLE_MON               0x2
-
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF

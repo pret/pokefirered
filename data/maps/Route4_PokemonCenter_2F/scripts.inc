@@ -5,14 +5,15 @@ Route4_PokemonCenter_2F_MapScripts:: @ 816F8D8
 	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-Route4_PokemonCenter_2F_EventScript_16F8ED:: @ 816F8ED
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+Route4_PokemonCenter_2F_EventScript_Colosseum:: @ 816F8ED
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16F8F3:: @ 816F8F3
-	call EventScript_1BB6AB
+Route4_PokemonCenter_2F_EventScript_TradeCenter:: @ 816F8F3
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16F8F9:: @ 816F8F9
-	call EventScript_1BB7DE
+Route4_PokemonCenter_2F_EventScript_RecordCorner:: @ 816F8F9
+	call CableClub_EventScript_RecordCorner
 	end

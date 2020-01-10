@@ -27,7 +27,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 81A65CE
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
 	applymovement VAR_LAST_TALKED, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom:: @ 81A65EC

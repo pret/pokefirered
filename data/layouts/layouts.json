@@ -433,52 +433,52 @@
       "blockdata_filepath": "data/layouts/UnusedLayout_82D88C8/map.bin"
     },
     {
-      "id": "LAYOUT_UNKNOWN_MAP_00_00",
-      "name": "UnknownMap_00_00_Layout",
+      "id": "LAYOUT_BATTLE_COLOSSEUM_2P",
+      "name": "BattleColosseum2P_Layout",
       "width": 14,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C44",
-      "border_filepath": "data/layouts/UnknownMap_00_00/border.bin",
-      "blockdata_filepath": "data/layouts/UnknownMap_00_00/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum2P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum2P/map.bin"
     },
     {
-      "id": "LAYOUT_UNKNOWN_MAP_00_01",
-      "name": "UnknownMap_00_01_Layout",
+      "id": "LAYOUT_TRADE_CENTER",
+      "name": "TradeCenter_Layout",
       "width": 12,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C44",
-      "border_filepath": "data/layouts/UnknownMap_00_01/border.bin",
-      "blockdata_filepath": "data/layouts/UnknownMap_00_01/map.bin"
+      "border_filepath": "data/layouts/TradeCenter/border.bin",
+      "blockdata_filepath": "data/layouts/TradeCenter/map.bin"
     },
     {
-      "id": "LAYOUT_UNKNOWN_MAP_00_02",
-      "name": "UnknownMap_00_02_Layout",
+      "id": "LAYOUT_RECORD_CENTER",
+      "name": "RecordCenter_Layout",
       "width": 20,
       "height": 10,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C44",
-      "border_filepath": "data/layouts/UnknownMap_00_02/border.bin",
-      "blockdata_filepath": "data/layouts/UnknownMap_00_02/map.bin"
+      "border_filepath": "data/layouts/RecordCenter/border.bin",
+      "blockdata_filepath": "data/layouts/RecordCenter/map.bin"
     },
     {
-      "id": "LAYOUT_UNKNOWN_MAP_00_03",
-      "name": "UnknownMap_00_03_Layout",
+      "id": "LAYOUT_BATTLE_COLOSSEUM_4P",
+      "name": "BattleColosseum4P_Layout",
       "width": 14,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C44",
-      "border_filepath": "data/layouts/UnknownMap_00_03/border.bin",
-      "blockdata_filepath": "data/layouts/UnknownMap_00_03/map.bin"
+      "border_filepath": "data/layouts/BattleColosseum4P/border.bin",
+      "blockdata_filepath": "data/layouts/BattleColosseum4P/map.bin"
     },
     {
       "id": "LAYOUT_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE",
@@ -2936,16 +2936,16 @@
       "blockdata_filepath": "data/layouts/UnusedLayout_8338738/map.bin"
     },
     {
-      "id": "LAYOUT_UNKNOWN_MAP_00_04",
-      "name": "UnknownMap_00_04_Layout",
+      "id": "LAYOUT_UNION_ROOM",
+      "name": "UnionRoom_Layout",
       "width": 15,
       "height": 12,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D50DC",
-      "border_filepath": "data/layouts/UnknownMap_00_04/border.bin",
-      "blockdata_filepath": "data/layouts/UnknownMap_00_04/map.bin"
+      "border_filepath": "data/layouts/UnionRoom/border.bin",
+      "blockdata_filepath": "data/layouts/UnionRoom/map.bin"
     },
     {
       "id": "LAYOUT_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB",

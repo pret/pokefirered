@@ -2,11 +2,11 @@
 #define GUARD_CONSTANTS_MAP_GROUPS_H
 
 // Map Group 0
-#define MAP_UNKNOWN_MAP_00_00 (0 | (0 << 8))
-#define MAP_UNKNOWN_MAP_00_01 (1 | (0 << 8))
-#define MAP_UNKNOWN_MAP_00_02 (2 | (0 << 8))
-#define MAP_UNKNOWN_MAP_00_03 (3 | (0 << 8))
-#define MAP_UNKNOWN_MAP_00_04 (4 | (0 << 8))
+#define MAP_BATTLE_COLOSSEUM_2P (0 | (0 << 8))
+#define MAP_TRADE_CENTER        (1 | (0 << 8))
+#define MAP_RECORD_CENTER       (2 | (0 << 8))
+#define MAP_BATTLE_COLOSSEUM_4P (3 | (0 << 8))
+#define MAP_UNION_ROOM          (4 | (0 << 8))
 
 // Map Group 1
 #define MAP_VIRIDIAN_FOREST                      (0 | (1 << 8))

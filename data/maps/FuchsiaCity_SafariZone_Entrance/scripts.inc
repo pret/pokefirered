@@ -154,10 +154,10 @@ EventScript_16D457:: @ 816D457
 EventScript_16D462:: @ 816D462
 	getpartysize
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	specialvar VAR_RESULT, Special_IsThereRoomInAnyBoxForMorePokemon
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1A77A9
+	goto_if_eq EventScript_Return
 	msgbox gUnknown_81BFEAC
 	goto EventScript_16D49A
 	end

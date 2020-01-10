@@ -10,7 +10,7 @@ PowerPlant_OnResume:: @ 816376F
 EventScript_163779:: @ 8163779
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 

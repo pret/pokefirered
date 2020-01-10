@@ -13,7 +13,7 @@ SeafoamIslands_B4F_OnResume:: @ 8163048
 EventScript_163052:: @ 8163052
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 

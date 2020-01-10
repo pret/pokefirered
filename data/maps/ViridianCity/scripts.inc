@@ -31,12 +31,12 @@ EventScript_165920:: @ 8165920
 	return
 
 EventScript_165931:: @ 8165931
-	goto_if_unset FLAG_BADGE02_GET, EventScript_1A77A9
-	goto_if_unset FLAG_BADGE03_GET, EventScript_1A77A9
-	goto_if_unset FLAG_BADGE04_GET, EventScript_1A77A9
-	goto_if_unset FLAG_BADGE05_GET, EventScript_1A77A9
-	goto_if_unset FLAG_BADGE06_GET, EventScript_1A77A9
-	goto_if_unset FLAG_BADGE07_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE02_GET, EventScript_Return
+	goto_if_unset FLAG_BADGE03_GET, EventScript_Return
+	goto_if_unset FLAG_BADGE04_GET, EventScript_Return
+	goto_if_unset FLAG_BADGE05_GET, EventScript_Return
+	goto_if_unset FLAG_BADGE06_GET, EventScript_Return
+	goto_if_unset FLAG_BADGE07_GET, EventScript_Return
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	return
 

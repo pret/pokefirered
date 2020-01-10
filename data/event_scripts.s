@@ -1555,7 +1555,7 @@ gUnknown_81A77A0:: @ 81A77A0
 	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
 	end
 
-EventScript_1A77A9:: @ 81A77A9
+EventScript_Return:: @ 81A77A9
 	return
 
 EventScript_1A77AA:: @ 81A77AA
@@ -1941,7 +1941,7 @@ EventScript_1A8EC0:: @ 81A8EC0
 	.include "data/scripts/static_pokemon.inc"
 
 EventScript_1A925E:: @ 81A925E
-	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_1A77A9
+	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_Return
 	setweather 11
 	doweather
 	return

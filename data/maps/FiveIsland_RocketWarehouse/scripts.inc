@@ -139,7 +139,7 @@ EventScript_1640A2:: @ 81640A2
 
 EventScript_16412E:: @ 816412E
 	compare VAR_0x8004, 27
-	goto_if_eq EventScript_1A77A9
+	goto_if_eq EventScript_Return
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return

@@ -13,9 +13,9 @@ PalletTown_OnTransition:: @ 8165465
 	end
 
 EventScript_165488:: @ 8165488
-	goto_if_unset FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN, EventScript_1A77A9
+	goto_if_unset FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN, EventScript_Return
 	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
-	goto_if_ge EventScript_1A77A9
+	goto_if_ge EventScript_Return
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	return
 

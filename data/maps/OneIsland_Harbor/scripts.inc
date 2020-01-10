@@ -35,7 +35,7 @@ Movement_1713B9:: @ 81713B9
 OneIsland_Harbor_EventScript_1713BD:: @ 81713BD
 	lock
 	faceplayer
-	message Text_181726
+	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_ONE_ISLAND
 	goto EventScript_1A8EC5

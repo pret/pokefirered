@@ -10,7 +10,7 @@ MtEmber_Summit_OnResume:: @ 8163B07
 EventScript_163B11:: @ 8163B11
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 

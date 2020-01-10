@@ -435,7 +435,7 @@ gSpecials:: @ 815FD60
 	def_special Special_GetSelectedSeagallopDestination
 	def_special sub_8147500
 	def_special GetPlayerFacingDirection
-	def_special Special_DeoxysSound
+	def_special DoDeoxysRockInteraction
 	def_special Special_SetDeoxysTriangleObjectPal
 	def_special sub_8147594
 	def_special Special_BadEggInParty

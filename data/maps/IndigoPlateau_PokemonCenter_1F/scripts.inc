@@ -11,7 +11,7 @@ IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 	end
 
 EventScript_16EA79:: @ 816EA79
-	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_1A77A9
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_Return
 	setobjectxyperm 4, 4, 2
 	return
 

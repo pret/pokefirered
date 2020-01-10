@@ -4,34 +4,34 @@ NavelRock_Summit_MapScripts:: @ 8164F9F
 	.byte 0
 
 NavelRock_Summit_OnTransition:: @ 8164FAA
-	call_if_set FLAG_FOUGHT_HO_OH, EventScript_164FBD
-	call_if_unset FLAG_FOUGHT_HO_OH, EventScript_164FC6
+	call_if_set FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_HideHoOh
+	call_if_unset FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_TryShowHoOh
 	end
 
-EventScript_164FBD:: @ 8164FBD
+NavelRock_Summit_EventScript_HideHoOh:: @ 8164FBD
 	setvar VAR_TEMP_1, 1
 	setflag FLAG_HIDE_HO_OH
 	return
 
-EventScript_164FC6:: @ 8164FC6
+NavelRock_Summit_EventScript_TryShowHoOh:: @ 8164FC6
 	setvar VAR_TEMP_1, 1
-	goto_if_set FLAG_HO_OH_FLEW_AWAY, EventScript_1A77A9
+	goto_if_set FLAG_HO_OH_FLEW_AWAY, EventScript_Return
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
 
 NavelRock_Summit_OnResume:: @ 8164FDD
-	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_164FE7
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, NavelRock_Summit_EventScript_TryRemoveHoOh
 	end
 
-EventScript_164FE7:: @ 8164FE7
+NavelRock_Summit_EventScript_TryRemoveHoOh:: @ 8164FE7
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	removeobject 1
 	return
 
-NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
+NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
@@ -39,11 +39,11 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
+	setvar VAR_0x8004, 3  @ Num loops
+	setvar VAR_0x8005, 35 @ Delay
 	special Special_LoopWingFlapSound
-	applymovement 1, Movement_1650E0
-	applymovement OBJ_EVENT_ID_CAMERA, Movement_1650CD
+	applymovement 1, Movement_HoOhAppear
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	setweather 0
@@ -53,16 +53,16 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	delay 30
 	waitmoncry
 	delay 60
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 35
+	setvar VAR_0x8004, 3  @ Num loops
+	setvar VAR_0x8005, 35 @ Delay
 	special Special_LoopWingFlapSound
-	applymovement OBJ_EVENT_ID_CAMERA, Movement_1650D1
-	applymovement 1, Movement_1650D7
+	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanDown
+	applymovement 1, Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject
 	setvar VAR_0x8004, SPECIES_HO_OH
-	setvar VAR_0x8005, 70
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8005, 70  @ Level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special Special_StartLegendaryBattle
@@ -71,33 +71,33 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq EventScript_1650B4
+	goto_if_eq NavelRock_Summit_EventScript_DefeatedHoOh
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq EventScript_1650C2
+	goto_if_eq NavelRock_Summit_EventScript_RanFromHoOh
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq EventScript_1650C2
+	goto_if_eq NavelRock_Summit_EventScript_RanFromHoOh
 	setflag FLAG_FOUGHT_HO_OH
 	releaseall
 	end
 
-EventScript_1650B4:: @ 81650B4
+NavelRock_Summit_EventScript_DefeatedHoOh:: @ 81650B4
 	setflag FLAG_HO_OH_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_MonFlewAway
 	end
 
-EventScript_1650C2:: @ 81650C2
+NavelRock_Summit_EventScript_RanFromHoOh:: @ 81650C2
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto EventScript_MonFlewAway
 	end
 
-Movement_1650CD:: @ 81650CD
+Movement_CameraPanUp: @ 81650CD
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-Movement_1650D1:: @ 81650D1
+Movement_CameraPanDown: @ 81650D1
 	delay_16
 	delay_16
 	walk_down
@@ -105,7 +105,7 @@ Movement_1650D1:: @ 81650D1
 	walk_down
 	step_end
 
-Movement_1650D7:: @ 81650D7
+Movement_HoOhApproach: @ 81650D7
 	walk_down
 	walk_down
 	walk_down
@@ -116,7 +116,7 @@ Movement_1650D7:: @ 81650D7
 	delay_16
 	step_end
 
-Movement_1650E0:: @ 81650E0
+Movement_HoOhAppear: @ 81650E0
 	delay_16
 	delay_16
 	walk_in_place_down

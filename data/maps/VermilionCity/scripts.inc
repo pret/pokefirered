@@ -110,8 +110,8 @@ EventScript_1669FD:: @ 81669FD
 	switch VAR_RESULT
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B0B
-	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case 2, EventScript_CancelSail
+	case 127, EventScript_CancelSail
 	end
 
 EventScript_166A53:: @ 8166A53
@@ -127,8 +127,8 @@ EventScript_166A5F:: @ 8166A5F
 	switch VAR_RESULT
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B23
-	case 2, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case 2, EventScript_CancelSail
+	case 127, EventScript_CancelSail
 	end
 
 EventScript_166AA5:: @ 8166AA5
@@ -146,8 +146,8 @@ EventScript_166AB1:: @ 8166AB1
 	case 0, EventScript_1A911E
 	case 1, EventScript_166B0B
 	case 2, EventScript_166B23
-	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case 3, EventScript_CancelSail
+	case 127, EventScript_CancelSail
 	end
 
 EventScript_166B0B:: @ 8166B0B
@@ -173,8 +173,8 @@ EventScript_166B3B:: @ 8166B3B
 	case 0, EventScript_1A8FEE
 	case 1, EventScript_1A8FF9
 	case 2, EventScript_1A9004
-	case 3, EventScript_1A90F6
-	case 127, EventScript_1A90F6
+	case 3, EventScript_CancelSail
+	case 127, EventScript_CancelSail
 	end
 
 EventScript_166B88:: @ 8166B88

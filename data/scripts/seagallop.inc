@@ -7,8 +7,8 @@ EventScript_1A8EC5:: @ 81A8EC5
     switch VAR_RESULT
     case 0, EventScript_1A8FF9
     case 1, EventScript_1A9004
-    case 2, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 2, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A8F12:: @ 81A8F12
@@ -17,8 +17,8 @@ EventScript_1A8F12:: @ 81A8F12
     case 0, EventScript_1A8FE3
     case 1, EventScript_1A8FF9
     case 2, EventScript_1A9004
-    case 3, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 3, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A8F54:: @ 81A8F54
@@ -30,8 +30,8 @@ EventScript_1A8F54:: @ 81A8F54
     switch VAR_RESULT
     case 0, EventScript_1A8FEE
     case 1, EventScript_1A9004
-    case 2, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 2, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A8FA1:: @ 81A8FA1
@@ -40,8 +40,8 @@ EventScript_1A8FA1:: @ 81A8FA1
     case 0, EventScript_1A8FE3
     case 1, EventScript_1A8FEE
     case 2, EventScript_1A9004
-    case 3, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 3, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A8FE3:: @ 81A8FE3
@@ -73,8 +73,8 @@ EventScript_1A900F:: @ 81A900F
     switch VAR_RESULT
     case 0, EventScript_1A8FEE
     case 1, EventScript_1A8FF9
-    case 2, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 2, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A905C:: @ 81A905C
@@ -83,8 +83,8 @@ EventScript_1A905C:: @ 81A905C
     case 0, EventScript_1A8FE3
     case 1, EventScript_1A8FEE
     case 2, EventScript_1A8FF9
-    case 3, EventScript_1A90F6
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case 3, EventScript_CancelSail
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A909E:: @ 81A909E
@@ -118,7 +118,7 @@ EventScript_1A90DA:: @ 81A90DA
     waitstate
     end
 
-EventScript_1A90F6:: @ 81A90F6
+EventScript_CancelSail:: @ 81A90F6
     specialvar VAR_RESULT, sub_8147594
     compare VAR_RESULT, 1
     goto_if_eq EventScript_1A9108
@@ -143,13 +143,13 @@ EventScript_1A911E:: @ 81A911E
     waitstate
     specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
     switch VAR_0x8006
-    case SEAGALLOP_VERMILION_CITY, EventScript_1A91D5
+    case SEAGALLOP_VERMILION_CITY, EventScript_SailToVermilionCity
     case SEAGALLOP_ONE_ISLAND,     EventScript_1A91E0
     case SEAGALLOP_TWO_ISLAND,     EventScript_1A91EB
     case SEAGALLOP_THREE_ISLAND,   EventScript_1A91F6
     case SEAGALLOP_FOUR_ISLAND,    EventScript_1A9201
     case SEAGALLOP_MORE,           EventScript_1A917F
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
 EventScript_1A917F:: @ 81A917F
@@ -163,10 +163,10 @@ EventScript_1A917F:: @ 81A917F
     case SEAGALLOP_SIX_ISLAND,   EventScript_1A9217
     case SEAGALLOP_SEVEN_ISLAND, EventScript_1A9222
     case SEAGALLOP_MORE,           EventScript_1A911E
-    case SCR_MENU_CANCEL, EventScript_1A90F6
+    case SCR_MENU_CANCEL, EventScript_CancelSail
     end
 
-EventScript_1A91D5:: @ 81A91D5
+EventScript_SailToVermilionCity:: @ 81A91D5
     setvar VAR_0x8006, SEAGALLOP_VERMILION_CITY
     goto EventScript_1A909E
     end

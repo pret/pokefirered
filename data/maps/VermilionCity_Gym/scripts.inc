@@ -39,7 +39,7 @@ VermilionCity_Gym_OnTransition:: @ 816B772
 	end
 
 EventScript_16B778:: @ 816B778
-	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, EventScript_1A77A9
+	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, EventScript_Return
 	special Special_SetVermilionTrashCans
 	copyvar VAR_TEMP_0, VAR_0x8004
 	copyvar VAR_TEMP_1, VAR_0x8005

@@ -4,7 +4,7 @@ FiveIsland_Harbor_MapScripts:: @ 8171D42
 FiveIsland_Harbor_EventScript_171D43:: @ 8171D43
 	lock
 	faceplayer
-	message Text_181726
+	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_FIVE_ISLAND
 	goto EventScript_1A900F

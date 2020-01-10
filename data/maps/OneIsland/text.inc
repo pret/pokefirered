@@ -19,7 +19,7 @@ gUnknown_818161B:: @ 818161B
     .string "…Why am I telling you this now?\n"
     .string "Let's just go see CELIO!$"
 
-Text_181726:: @ 8181726
+Text_WhereDoYouWantToSail:: @ 8181726
     .string "Ahoy, there!\n"
     .string "Where do you want to sail?$"
 

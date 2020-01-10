@@ -10,7 +10,7 @@ CeruleanCave_B1F_OnResume:: @ 81624C9
 EventScript_1624D3:: @ 81624D3
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_ne EventScript_1A77A9
+	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 

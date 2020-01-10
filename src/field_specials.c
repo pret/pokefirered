@@ -80,7 +80,7 @@ static void ChangeBoxPokemonNickname_CB(void);
 static void ChangePokemonNickname_CB(void);
 static void Task_RunPokemonLeagueLightingEffect(u8 taskId);
 static void Task_CancelPokemonLeagueLightingEffect(u8 taskId);
-static void task_deoxys_sound(u8 taskId);
+static void Task_DoDeoxysRockInteraction(u8 taskId);
 static void MoveDeoxysObject(u8 num);
 static void Task_WaitDeoxysFieldEffect(u8 taskId);
 static void Task_WingFlapSound(u8 taskId);
@@ -2309,12 +2309,12 @@ static const u8 sDeoxysStepCaps[] = {
     3
 };
 
-void Special_DeoxysSound(void)
+void DoDeoxysRockInteraction(void)
 {
-    CreateTask(task_deoxys_sound, 8);
+    CreateTask(Task_DoDeoxysRockInteraction, 8);
 }
 
-static void task_deoxys_sound(u8 taskId)
+static void Task_DoDeoxysRockInteraction(u8 taskId)
 {
     u16 r5;
     u16 r6;

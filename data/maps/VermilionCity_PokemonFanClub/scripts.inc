@@ -20,7 +20,7 @@ EventScript_16B4A7:: @ 816B4A7
 EventScript_16B4B1:: @ 816B4B1
 	msgbox gUnknown_8194628
 	checkitemspace ITEM_BIKE_VOUCHER, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16B4F2
 	setflag FLAG_GOT_BIKE_VOUCHER
 	giveitem_msg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, MUS_FAN5

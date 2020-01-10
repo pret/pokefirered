@@ -41,7 +41,7 @@ FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
 	goto_if_set FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR, EventScript_168B0B
 	msgbox gUnknown_818B095
 	checkitem ITEM_LEMONADE, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_168A86
 	releaseall
 	end

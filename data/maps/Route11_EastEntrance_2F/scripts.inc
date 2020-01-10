@@ -70,7 +70,7 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	goto_if_lt EventScript_1A7ABD
 	msgbox gUnknown_819EAE4
 	checkitemspace ITEM_ITEMFINDER, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A7AC7
 	giveitem_msg gUnknown_819EB37, ITEM_ITEMFINDER
 	setflag FLAG_GOT_ITEMFINDER

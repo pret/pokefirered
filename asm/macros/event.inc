@@ -1534,6 +1534,26 @@
 	vgoto_if FALSE, \dest
 	.endm
 
+	.macro goto_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if TRUE, \dest
+	.endm
+
+	.macro goto_if_undefeated trainer:req, dest:req
+	checktrainerflag \trainer
+	goto_if FALSE, \dest
+	.endm
+
+	.macro call_if_defeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if TRUE, \dest
+	.endm
+
+	.macro call_if_undefeated trainer:req, dest:req
+	checktrainerflag \trainer
+	call_if FALSE, \dest
+	.endm
+
 	.macro switch var:req
 	copyvar VAR_0x8000, \var
 	.endm

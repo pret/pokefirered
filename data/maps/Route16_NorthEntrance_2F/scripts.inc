@@ -33,7 +33,7 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	goto_if_lt EventScript_1A7ABD
 	msgbox gUnknown_819FC15
 	checkitemspace ITEM_AMULET_COIN, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A7AC7
 	giveitem_msg gUnknown_819FC68, ITEM_AMULET_COIN
 	setflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE

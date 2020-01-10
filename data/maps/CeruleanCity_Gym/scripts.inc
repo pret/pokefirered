@@ -21,7 +21,7 @@ EventScript_16AAD3:: @ 816AAD3
 EventScript_16AAF9:: @ 816AAF9
 	msgbox gUnknown_81922F7
 	checkitemspace ITEM_TM03, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16AB3A
 	giveitem_msg gUnknown_81923F1, ITEM_TM03
 	setflag FLAG_GOT_TM03_FROM_MISTY

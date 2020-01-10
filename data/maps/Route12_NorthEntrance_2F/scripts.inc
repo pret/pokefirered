@@ -14,12 +14,12 @@ Route12_NorthEntrance_2F_EventScript_16FE8A:: @ 816FE8A
 	faceplayer
 	goto_if_set FLAG_GOT_TM27, EventScript_16FF01
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_16FEE5
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_16FEEE
 	checkitemspace ITEM_TM27, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16FEF7
 	giveitem_msg gUnknown_819EE9F, ITEM_TM27
 	msgbox gUnknown_819EEC6

@@ -20,7 +20,7 @@ EventScript_16D83F:: @ 816D83F
 EventScript_16D849:: @ 816D849
 	msgbox gUnknown_8199207
 	checkitemspace ITEM_GOOD_ROD, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16D88A
 	giveitem_msg gUnknown_819925E, ITEM_GOOD_ROD
 	msgbox gUnknown_8199296

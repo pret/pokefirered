@@ -22,6 +22,7 @@
 #include "constants/battle_setup.h"
 #include "constants/map_scripts.h"
 #include "constants/cable_club.h"
+#include "constants/field_weather.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1213,9 +1214,9 @@ EventScript_1A6551:: @ 81A6551
 	.include "data/scripts/pc.inc"
 
 EventScript_1A6AC0:: @ 81A6AC0
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80FEE44
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	return
 
 	.include "data/scripts/surf.inc"
@@ -1246,11 +1247,11 @@ EventScript_1A6C21:: @ 81A6C21
 	return
 
 EventScript_FadeOut_Heal_FadeIn:: @ 81A6C26
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special sp000_heal_pokemon
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	return
 
 gUnknown_81A6C32:: @ 81A6C32
@@ -1259,7 +1260,7 @@ gUnknown_81A6C32:: @ 81A6C32
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special Special_TownMap
 	waitstate
 	releaseall
@@ -1305,7 +1306,7 @@ EventScript_1A74D1:: @ 81A74D1
 	return
 
 EventScript_1A74EB:: @ 81A74EB
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate
 	return
@@ -1841,7 +1842,7 @@ EventScript_1A8C27:: @ 81A8C27
 	return
 
 EventScript_1A8C33:: @ 81A8C33
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChangeBoxPokemonNickname
 	waitstate
 	lock
@@ -2078,9 +2079,9 @@ EventScript_PoisonWhiteOut:: @ 81A8DFD
 
 EventScript_1A8E11:: @ 81A8E11
 	checkmoney 1, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A8E2E
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_1A8E3C
 	end
 
@@ -2098,7 +2099,7 @@ EventScript_1A8E3C:: @ 81A8E3C
 EventScript_1A8E4D:: @ 81A8E4D
 	special sub_807F0B0
 	waitstate
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sp0C8_whiteout_maybe
 	waitstate
 	end
@@ -2181,7 +2182,7 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1B2926
 	checkmoney 50, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1B292B
 	playse SE_SHOP
 	takemoney 50, 0

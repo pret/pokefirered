@@ -402,9 +402,9 @@ EventScript_1C4D4F:: @ 81C4D4F
 
 EventScript_1C4D59:: @ 81C4D59
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_1C4D72
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_1C4D7B
 	release
 	end
@@ -477,11 +477,11 @@ TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
 	goto_if_eq EventScript_1C4F1C
 	msgbox Text_1A4814
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	goto EventScript_1C4EDA
 
 EventScript_1C4E8F:: @ 81C4E8F
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	goto EventScript_1C4EAB
 	end
 

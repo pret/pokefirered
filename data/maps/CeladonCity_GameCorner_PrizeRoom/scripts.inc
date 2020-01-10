@@ -328,7 +328,7 @@ EventScript_16CF3F:: @ 816CF3F
 	compare VAR_RESULT, VAR_TEMP_2
 	goto_if_lt EventScript_16CDA5
 	checkitemspace VAR_TEMP_1, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16CF79
 	takecoins VAR_TEMP_2
 	updatecoinsbox 0, 5

@@ -76,7 +76,7 @@ EventScript_16A3D1:: @ 816A3D1
 
 EventScript_16A402:: @ 816A402
 	checkmoney 50, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16A476
 	closemessage
 	compare VAR_TEMP_1, 0
@@ -155,7 +155,7 @@ PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	goto_if_set FLAG_GOT_OLD_AMBER, EventScript_16A4FF
 	msgbox gUnknown_8190717
 	checkitemspace ITEM_OLD_AMBER, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16A4F5
 	setflag FLAG_GOT_OLD_AMBER
 	removeobject 4

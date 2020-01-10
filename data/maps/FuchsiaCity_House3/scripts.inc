@@ -23,9 +23,9 @@ EventScript_16D8B0:: @ 816D8B0
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16D92A
 	msgbox gUnknown_8199445
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special SelectMove
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	compare VAR_0x8005, 4
 	goto_if_eq EventScript_16D8B0
 	special ScrSpecial_GetPokemonNicknameAndMoveName

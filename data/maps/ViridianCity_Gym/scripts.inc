@@ -7,9 +7,9 @@ ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	goto_if_unset FLAG_GOT_TM26_FROM_GIOVANNI, EventScript_169F2F
 	msgbox gUnknown_818F4A2
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 8
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 
@@ -26,7 +26,7 @@ EventScript_169F04:: @ 8169F04
 EventScript_169F2F:: @ 8169F2F
 	msgbox gUnknown_818F586
 	checkitemspace ITEM_TM26, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_169F70
 	giveitem_msg gUnknown_818F675, ITEM_TM26
 	setflag FLAG_GOT_TM26_FROM_GIOVANNI

@@ -1,14 +1,14 @@
 EventScript_1A922D:: @ 81A922D
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     removeobject VAR_LAST_TALKED
-    fadescreen 0
+    fadescreen FADE_FROM_BLACK
     release
     end
 
 EventScript_1A9236:: @ 81A9236
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     removeobject VAR_LAST_TALKED
-    fadescreen 0
+    fadescreen FADE_FROM_BLACK
     getspeciesname 0, VAR_0x8004
     msgbox Text_1A63C4
     release

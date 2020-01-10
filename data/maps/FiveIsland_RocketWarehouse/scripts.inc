@@ -8,8 +8,7 @@ FiveIsland_RocketWarehouse_OnTransition:: @ 8163F39
 	end
 
 FiveIsland_RocketWarehouse_OnLoad:: @ 8163F3D
-	checktrainerflag TRAINER_TEAM_ROCKET_ADMIN
-	call_if_eq EventScript_163F47
+	call_if_defeated TRAINER_TEAM_ROCKET_ADMIN, EventScript_163F47
 	end
 
 EventScript_163F47:: @ 8163F47
@@ -80,13 +79,13 @@ EventScript_16402F:: @ 816402F
 	call_if_le EventScript_164065
 	msgbox gUnknown_817BA64
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 1
 	removeobject 2
 	removeobject 4
 	removeobject 3
 	setflag FLAG_HIDE_FIVE_ISLAND_ROCKETS
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	setflag FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE
 	release

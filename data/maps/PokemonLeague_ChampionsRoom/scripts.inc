@@ -16,24 +16,18 @@ PokemonLeague_ChampionsRoom_OnResume:: @ 8162AF2
 	end
 
 EventScript_162B1E:: @ 8162B1E
-	checktrainerflag TRAINER_CHAMPION_FIRST_SQUIRTLE
-	goto_if_eq EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_REMATCH_SQUIRTLE
-	goto_if_eq EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_FIRST_SQUIRTLE, EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_REMATCH_SQUIRTLE, EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
-	checktrainerflag TRAINER_CHAMPION_FIRST_BULBASAUR
-	goto_if_eq EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_REMATCH_BULBASAUR
-	goto_if_eq EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_FIRST_BULBASAUR, EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_REMATCH_BULBASAUR, EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
-	checktrainerflag TRAINER_CHAMPION_FIRST_CHARMANDER
-	goto_if_eq EventScript_162B57
-	checktrainerflag TRAINER_CHAMPION_REMATCH_CHARMANDER
-	goto_if_eq EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_FIRST_CHARMANDER, EventScript_162B57
+	goto_if_defeated TRAINER_CHAMPION_REMATCH_CHARMANDER, EventScript_162B57
 	return
 
 EventScript_162B57:: @ 8162B57

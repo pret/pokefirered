@@ -19,10 +19,10 @@ TwoIsland_House_EventScript_171619:: @ 8171619
 
 EventScript_17164F:: @ 817164F
 	checkitem ITEM_BIG_MUSHROOM, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_1717A8
 	checkitem ITEM_TINY_MUSHROOM, 2
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_1717AC
 	goto_if_set FLAG_TEMP_2, EventScript_171687
 	goto_if_set FLAG_TEMP_3, EventScript_171696

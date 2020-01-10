@@ -1,5 +1,6 @@
 @ These are event scripts. They should not be moved to C.
 
+#include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -42,8 +43,8 @@ MysteryEventScript_SurfPichu:: @ 8488EB5
 
 SurfPichu_GiveIfPossible: @ 8488EC4
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
-	compare VAR_EVENT_PICHU_SLOT, 6
-	vgoto_if TRUE, SurfPichu_FullParty
+	compare VAR_EVENT_PICHU_SLOT, PARTY_SIZE
+	vgoto_if_eq SurfPichu_FullParty
 	setflag FLAG_MYSTERY_EVENT_DONE
 	vcall SurfPichu_GiveEgg
 	lock
@@ -70,15 +71,15 @@ SurfPichu_GiveEgg: @ 8488EF6
 	setmonobedient VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, 0xff
 	compare VAR_EVENT_PICHU_SLOT, 1
-	vgoto_if TRUE, SurfPichu_Slot1
+	vgoto_if_eq SurfPichu_Slot1
 	compare VAR_EVENT_PICHU_SLOT, 2
-	vgoto_if TRUE, SurfPichu_Slot2
+	vgoto_if_eq SurfPichu_Slot2
 	compare VAR_EVENT_PICHU_SLOT, 3
-	vgoto_if TRUE, SurfPichu_Slot3
+	vgoto_if_eq SurfPichu_Slot3
 	compare VAR_EVENT_PICHU_SLOT, 4
-	vgoto_if TRUE, SurfPichu_Slot4
+	vgoto_if_eq SurfPichu_Slot4
 	compare VAR_EVENT_PICHU_SLOT, 5
-	vgoto_if TRUE, SurfPichu_Slot5
+	vgoto_if_eq SurfPichu_Slot5
 	return
 
 SurfPichu_Slot1: @ 8488F38
@@ -118,7 +119,7 @@ MysteryEventScript_VisitingTrainer:: @ 848903A
 	setvaddress MysteryEventScript_VisitingTrainer
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
-	vgoto_if TRUE, MysteryEventScript_VisitingTrainerArrived
+	vgoto_if_eq MysteryEventScript_VisitingTrainerArrived
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftVisitingTrainer
@@ -170,7 +171,7 @@ MysteryEventScript_BattleCard:: @ 84892B9
 	setorcopyvar VAR_RESULT, 2
 	specialvar VAR_0x8008, Special_BattleCardAction
 	compare VAR_0x8008, 3
-	vgoto_if FALSE, MysteryEventScript_BattleCardInfo
+	vgoto_if_ne MysteryEventScript_BattleCardInfo
 	lock
 	faceplayer
 	vmessage sText_MysteryGiftBattleCountCard_2
@@ -218,14 +219,14 @@ MysteryEventScript_AuroraTicket:: @ 84894B9
 	vgoto_if_set FLAG_GOT_AURORA_TICKET, AuroraTicket_Obtained
 	vgoto_if_set FLAG_FOUGHT_DEOXYS, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, 1
-	vgoto_if TRUE, AuroraTicket_Obtained
+	compare VAR_RESULT, TRUE
+	vgoto_if_eq AuroraTicket_Obtained
 	vmessage sText_AuroraTicket1
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET, 1
-	compare VAR_RESULT, 0
-	vgoto_if TRUE, AuroraTicket_NoBagSpace
+	compare VAR_RESULT, FALSE
+	vgoto_if_eq AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
 	setflag FLAG_SYS_GOT_AURORA_TICKET
 	setflag FLAG_GOT_AURORA_TICKET
@@ -279,14 +280,14 @@ MysteryEventScript_MysticTicket:: @ 8489689
 	vgoto_if_set FLAG_FOUGHT_LUGIA, MysticTicket_Obtained
 	vgoto_if_set FLAG_FOUGHT_HO_OH, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
-	compare VAR_RESULT, 1
-	vgoto_if TRUE, MysticTicket_Obtained
+	compare VAR_RESULT, TRUE
+	vgoto_if_eq MysticTicket_Obtained
 	vmessage sText_MysticTicket2
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET, 1
-	compare VAR_RESULT, 0
-	vgoto_if TRUE, MysticTicket_NoBagSpace
+	compare VAR_RESULT, FALSE
+	vgoto_if_eq MysticTicket_NoBagSpace
 	giveitem ITEM_MYSTIC_TICKET
 	setflag FLAG_SYS_GOT_MYSTIC_TICKET
 	setflag FLAG_GOT_MYSTIC_TICKET
@@ -336,7 +337,7 @@ MysteryEventScript_AlteringCave:: @ 8489862
 	setvaddress MysteryEventScript_AlteringCave
 	addvar VAR_ALTERING_CAVE_WILD_SET, 1
 	compare VAR_ALTERING_CAVE_WILD_SET, 10
-	vgoto_if FALSE, MysteryEventScript_AlteringCave_
+	vgoto_if_ne MysteryEventScript_AlteringCave_
 	setvar VAR_ALTERING_CAVE_WILD_SET, 0
 MysteryEventScript_AlteringCave_: @ 848987C
 	lock

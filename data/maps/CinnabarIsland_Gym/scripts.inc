@@ -67,7 +67,7 @@ EventScript_16DA06:: @ 816DA06
 EventScript_16DA34:: @ 816DA34
 	msgbox gUnknown_819969E
 	checkitemspace ITEM_TM38, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16DA75
 	giveitem_msg gUnknown_81996FF, ITEM_TM38
 	setflag FLAG_GOT_TM38_FROM_BLAINE
@@ -251,8 +251,7 @@ EventScript_16DC68:: @ 816DC68
 
 EventScript_16DC6A:: @ 816DC6A
 	call EventScript_16DC34
-	checktrainerflag TRAINER_BURGLAR_QUINN
-	goto_if_lt EventScript_16DC7A
+	goto_if_undefeated TRAINER_BURGLAR_QUINN, EventScript_16DC7A
 	releaseall
 	end
 
@@ -328,8 +327,7 @@ EventScript_16DD31:: @ 816DD31
 
 EventScript_16DD41:: @ 816DD41
 	call EventScript_16DC34
-	checktrainerflag TRAINER_SUPER_NERD_AVERY
-	goto_if_lt EventScript_16DD51
+	goto_if_undefeated TRAINER_SUPER_NERD_AVERY, EventScript_16DD51
 	releaseall
 	end
 
@@ -414,8 +412,7 @@ EventScript_16DE0F:: @ 816DE0F
 
 EventScript_16DE1F:: @ 816DE1F
 	call EventScript_16DC34
-	checktrainerflag TRAINER_BURGLAR_RAMON
-	goto_if_lt EventScript_16DE2F
+	goto_if_undefeated TRAINER_BURGLAR_RAMON, EventScript_16DE2F
 	releaseall
 	end
 
@@ -491,8 +488,7 @@ EventScript_16DEE6:: @ 816DEE6
 
 EventScript_16DEF6:: @ 816DEF6
 	call EventScript_16DC34
-	checktrainerflag TRAINER_SUPER_NERD_DEREK
-	goto_if_lt EventScript_16DF06
+	goto_if_undefeated TRAINER_SUPER_NERD_DEREK, EventScript_16DF06
 	releaseall
 	end
 
@@ -568,8 +564,7 @@ EventScript_16DFBD:: @ 816DFBD
 
 EventScript_16DFCD:: @ 816DFCD
 	call EventScript_16DC34
-	checktrainerflag TRAINER_BURGLAR_DUSTY
-	goto_if_lt EventScript_16DFDD
+	goto_if_undefeated TRAINER_BURGLAR_DUSTY, EventScript_16DFDD
 	releaseall
 	end
 
@@ -645,8 +640,7 @@ EventScript_16E094:: @ 816E094
 
 EventScript_16E0A4:: @ 816E0A4
 	call EventScript_16DC34
-	checktrainerflag TRAINER_SUPER_NERD_ZAC
-	goto_if_lt EventScript_16E0B4
+	goto_if_undefeated TRAINER_SUPER_NERD_ZAC, EventScript_16E0B4
 	releaseall
 	end
 

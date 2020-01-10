@@ -33,7 +33,7 @@ Route15_WestEntrance_2F_EventScript_1700B9:: @ 81700B9
 	goto_if_lt EventScript_1A7ABD
 	msgbox gUnknown_819F6AA
 	checkitemspace ITEM_EXP_SHARE, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A7AC7
 	giveitem_msg gUnknown_819F6FD, ITEM_EXP_SHARE
 	setflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE

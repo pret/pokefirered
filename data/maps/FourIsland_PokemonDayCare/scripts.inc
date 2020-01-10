@@ -26,7 +26,7 @@ EventScript_171993:: @ 8171993
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_171A1A
 	msgbox gUnknown_81BF839
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
 	compare VAR_0x8004, 6

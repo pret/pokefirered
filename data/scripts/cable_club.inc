@@ -608,7 +608,7 @@ gUnknown_81BB8A7:: @ 81BB8A7
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 0
 	special Special_BattleRecords
 	waitstate
@@ -633,7 +633,7 @@ UnknownMap_00_00_EventScript_1BB8CF:: @ 81BB8CF
 
 gUnknown_81BB8DB:: @ 81BB8DB
 UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
@@ -646,7 +646,7 @@ UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
 
 gUnknown_81BB8F8:: @ 81BB8F8
 UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
@@ -659,7 +659,7 @@ UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
 
 gUnknown_81BB915:: @ 81BB915
 UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
@@ -672,7 +672,7 @@ UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
 
 gUnknown_81BB932:: @ 81BB932
 UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
@@ -723,7 +723,7 @@ UnknownMap_00_02_EventScript_1BB980:: @ 81BB980
 gUnknown_81BB981:: @ 81BB981
 	textcolor 3
 	msgbox Text_LookedAtPlayersTrainerCard
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sp02A_crash_sound
 	waitstate
 	end
@@ -731,7 +731,7 @@ gUnknown_81BB981:: @ 81BB981
 gUnknown_81BB992:: @ 81BB992
 	textcolor 3
 	msgbox Text_LookedAtPlayersTrainerCardColored
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sp02A_crash_sound
 	waitstate
 	end
@@ -796,7 +796,7 @@ EventScript_1BBA04:: @ 81BBA04
 	goto_if_eq EventScript_1BB867
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1BBB60
 	message Text_1BD65B
 	waitmessage
@@ -915,7 +915,7 @@ EventScript_1BBB9C:: @ 81BBB9C
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_1BB867
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1BB44A
 	message Text_1BD28D
 	waitmessage
@@ -1191,10 +1191,10 @@ gUnknown_81BBFD8:: @ 81BBFD8
 	lockall
 	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB881
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1BC016
 	special HelpSystem_Disable
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	special sub_814F1D4
 	waitstate
 	msgbox gUnknown_81BCA43
@@ -1295,7 +1295,7 @@ EventScript_1BC0CE:: @ 81BC0CE
 	message Text_1BCF69
 	waitmessage
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1BC29C
 	delay 60
 	special HelpSystem_Disable

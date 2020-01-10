@@ -14,7 +14,7 @@ Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 
 EventScript_16FF34:: @ 816FF34
 	checkitemspace ITEM_SUPER_ROD, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16FF75
 	additem ITEM_SUPER_ROD
 	msgbox gUnknown_819F05B

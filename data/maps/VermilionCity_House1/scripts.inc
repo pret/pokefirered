@@ -19,7 +19,7 @@ EventScript_16B3CF:: @ 816B3CF
 
 EventScript_16B3D9:: @ 816B3D9
 	checkitemspace ITEM_OLD_ROD, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16B41A
 	additem ITEM_OLD_ROD
 	msgbox gUnknown_8193F2A

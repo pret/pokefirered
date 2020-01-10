@@ -25,12 +25,12 @@ SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	lock
 	faceplayer
 	checkitem ITEM_POKE_DOLL, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_1C4CF6
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_16EBB7
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_16EBC0
 	release
 	end

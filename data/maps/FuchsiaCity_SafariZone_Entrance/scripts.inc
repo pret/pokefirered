@@ -111,7 +111,7 @@ EventScript_16D391:: @ 816D391
 EventScript_16D3CA:: @ 816D3CA
 	call EventScript_16D462
 	checkmoney 500, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16D48C
 	takemoney 500, 0
 	updatemoneybox 0, 0, 0

@@ -15,7 +15,7 @@ SSAnne_1F_Room6_EventScript_160DF3:: @ 8160DF3
 
 EventScript_160E18:: @ 8160E18
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq EventScript_160E2E
 	msgbox gUnknown_8174515
 	release

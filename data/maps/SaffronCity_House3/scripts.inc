@@ -7,7 +7,7 @@ SaffronCity_House3_EventScript_16F05F:: @ 816F05F
 	goto_if_set FLAG_GOT_TM29_FROM_MR_PSYCHIC, EventScript_16F0B5
 	msgbox gUnknown_819C142
 	checkitemspace ITEM_TM29, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16F0AB
 	giveitem_msg gUnknown_819C16C, ITEM_TM29
 	msgbox gUnknown_819C18F

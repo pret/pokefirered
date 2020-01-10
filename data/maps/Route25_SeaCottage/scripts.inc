@@ -23,9 +23,9 @@ Route25_SeaCottage_EventScript_17054B:: @ 817054B
 	goto_if_set FLAG_GOT_SS_TICKET, EventScript_170640
 	goto_if_set FLAG_HELPED_BILL_IN_SEA_COTTAGE, EventScript_17064A
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq EventScript_170580
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq EventScript_17058E
 	end
 
@@ -67,9 +67,9 @@ EventScript_17059C:: @ 817059C
 
 EventScript_170600:: @ 8170600
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_170618
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_170621
 	return
 
@@ -99,12 +99,12 @@ EventScript_170640:: @ 8170640
 EventScript_17064A:: @ 817064A
 	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_1706AC
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_1706B5
 	checkitemspace ITEM_SS_TICKET, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1706BE
 	giveitem_msg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
 	setflag FLAG_GOT_SS_TICKET_DUP

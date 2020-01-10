@@ -165,7 +165,7 @@ EventScript_17158A:: @ 817158A
 
 EventScript_1715C4:: @ 81715C4
 	checkitemspace ITEM_MOON_STONE, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1715FF
 	additem ITEM_MOON_STONE
 	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER

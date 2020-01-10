@@ -43,7 +43,7 @@ Route10_PokemonCenter_1F_EventScript_16FC65:: @ 816FC65
 	goto_if_lt EventScript_1A7ABD
 	msgbox gUnknown_819E733
 	checkitemspace ITEM_EVERSTONE, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A7AC7
 	giveitem_msg gUnknown_819E786, ITEM_EVERSTONE
 	setflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE

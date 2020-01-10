@@ -25,8 +25,7 @@ EventScript_163975:: @ 8163975
 
 MtEmber_Exterior_EventScript_16397F:: @ 816397F
 	lock
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_43
-	goto_if_eq EventScript_16399E
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, EventScript_16399E
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if_eq EventScript_1639A8
 	msgbox gUnknown_817A82A
@@ -45,26 +44,24 @@ EventScript_1639A8:: @ 81639A8
 	msgbox gUnknown_817AA06
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_43, Text_17AA34
 	msgbox gUnknown_817AA3F
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_44
-	goto_if_eq EventScript_1639DB
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, EventScript_1639DB
 	release
 	end
 
 EventScript_1639DB:: @ 81639DB
 	msgbox gUnknown_817AAD7
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
 	removeobject 3
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 
 MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
 	lock
 	faceplayer
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_44
-	goto_if_eq EventScript_163A1B
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, EventScript_163A1B
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
 	goto_if_eq EventScript_163A25
 	msgbox gUnknown_817A88C
@@ -84,8 +81,7 @@ EventScript_163A25:: @ 8163A25
 	msgbox gUnknown_817AA56
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_44, Text_17AA8A
 	msgbox gUnknown_817AA99
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_43
-	goto_if_eq EventScript_1639DB
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, EventScript_1639DB
 	release
 	end
 

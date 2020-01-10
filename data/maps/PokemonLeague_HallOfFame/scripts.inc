@@ -36,7 +36,7 @@ EventScript_162D70:: @ 8162D70
 	setvar VAR_TEMP_1, 1
 	call EventScript_1A651A
 	setrespawn SPAWN_PALLET_TOWN
-	fadescreenspeed 1, 24
+	fadescreenspeed FADE_TO_BLACK, 24
 	special Special_HallOfFame
 	waitstate
 	releaseall

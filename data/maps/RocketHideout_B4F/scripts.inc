@@ -4,10 +4,8 @@ RocketHideout_B4F_MapScripts:: @ 81612E8
 
 RocketHideout_B4F_OnLoad:: @ 81612EE
 	setvar VAR_TEMP_1, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if_eq EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if_eq EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
 	compare VAR_TEMP_1, 2
 	call_if_ne EventScript_16146A
 	end
@@ -26,14 +24,14 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	waitbuttonpress
 	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, Text_175318
 	msgbox gUnknown_817532D
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	closemessage
 	removeobject 1
 	addobject 2
 	clearflag FLAG_HIDE_SILPH_SCOPE
 	setflag FLAG_HIDE_CELADON_ROCKETS
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 
@@ -78,10 +76,8 @@ RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
 
 EventScript_1613E9:: @ 81613E9
 	setvar VAR_TEMP_1, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if_eq EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if_eq EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
 	compare VAR_TEMP_1, 2
 	call_if_eq EventScript_1614A1
 	compare VAR_TEMP_1, 2
@@ -96,10 +92,8 @@ RocketHideout_B4F_EventScript_161418:: @ 8161418
 
 EventScript_161433:: @ 8161433
 	setvar VAR_TEMP_1, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if_eq EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if_eq EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
 	compare VAR_TEMP_1, 2
 	call_if_eq EventScript_1614A1
 	compare VAR_TEMP_1, 2

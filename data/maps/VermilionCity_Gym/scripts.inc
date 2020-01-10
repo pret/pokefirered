@@ -227,7 +227,7 @@ EventScript_16B9AB:: @ 816B9AB
 EventScript_16B9AF:: @ 816B9AF
 	msgbox gUnknown_8194CFA
 	checkitemspace ITEM_TM34, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16B9F0
 	giveitem_msg gUnknown_8194D87, ITEM_TM34
 	setflag FLAG_GOT_TM34_FROM_SURGE

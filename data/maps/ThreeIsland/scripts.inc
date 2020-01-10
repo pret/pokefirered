@@ -47,7 +47,7 @@ EventScript_16781A:: @ 816781A
 	waitmovement 0
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_167865
 	msgreceiveditem gUnknown_81827BE, ITEM_FULL_RESTORE
 	additem ITEM_FULL_RESTORE
@@ -270,7 +270,7 @@ EventScript_167A59:: @ 8167A59
 	trainerbattle_no_intro TRAINER_CUE_BALL_PAXTON, Text_1826B7
 	msgbox gUnknown_818271D
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 3
 	removeobject 5
 	removeobject 7
@@ -278,7 +278,7 @@ EventScript_167A59:: @ 8167A59
 	removeobject 6
 	removeobject 8
 	removeobject 14
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_THREE_ISLAND, 4
 	releaseall
 	end

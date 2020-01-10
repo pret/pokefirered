@@ -15,7 +15,7 @@ CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
 	goto_if_set FLAG_GOT_COIN_CASE, EventScript_16D24B
 	msgbox gUnknown_81979C1
 	checkitemspace ITEM_COIN_CASE, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16D241
 	giveitem_msg gUnknown_8197A38, ITEM_COIN_CASE
 	setflag FLAG_GOT_COIN_CASE

@@ -11,12 +11,12 @@ SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	faceplayer
 	goto_if_set FLAG_GOT_MASTER_BALL_FROM_SILPH, EventScript_161E75
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_161E59
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_161E6B
 	giveitem_msg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
 	msgbox gUnknown_8176FEB
@@ -77,11 +77,11 @@ EventScript_161EA0:: @ 8161EA0
 	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI_2, Text_1771AB
 	msgbox gUnknown_81771C2
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 3
 	removeobject 4
 	removeobject 6
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
 	setflag FLAG_HIDE_SAFFRON_ROCKETS
 	clearflag FLAG_HIDE_SAFFRON_CIVILIANS

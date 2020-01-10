@@ -7,7 +7,7 @@ Route16_House_EventScript_17014F:: @ 817014F
 	goto_if_set FLAG_GOT_HM02, EventScript_1701A5
 	msgbox gUnknown_819F851
 	checkitemspace ITEM_HM02, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_17019B
 	giveitem_msg gUnknown_819F8C0, ITEM_HM02
 	msgbox gUnknown_819F8E0

@@ -22,7 +22,7 @@ EventScript_16EE0A:: @ 816EE0A
 EventScript_16EE3D:: @ 816EE3D
 	msgbox gUnknown_819B6FA
 	checkitemspace ITEM_TM04, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16EE7E
 	giveitem_msg gUnknown_819B7D3, ITEM_TM04
 	setflag FLAG_GOT_TM04_FROM_SABRINA

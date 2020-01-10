@@ -221,7 +221,7 @@ Movement_164AD6:: @ 8164AD6
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
 	special Special_BattleRecords
 	waitstate

@@ -65,11 +65,11 @@ EventScript_168DB9:: @ 8168DB9
 	goto_if_eq EventScript_168E32
 	msgbox gUnknown_818D8CC
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	special Special_DaisyMassageServices
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	msgbox gUnknown_818D8FE
 	release
@@ -142,7 +142,7 @@ EventScript_168EF6:: @ 8168EF6
 	msgbox gUnknown_818D60A
 	closemessage
 	checkitemspace ITEM_TOWN_MAP, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_168F4F
 	applymovement 1, Movement_WalkInPlaceFastestRight
 	waitmovement 0

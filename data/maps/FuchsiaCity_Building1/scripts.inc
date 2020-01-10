@@ -23,9 +23,9 @@ EventScript_16D780:: @ 816D780
 	msgbox gUnknown_8198EAA
 	call EventScript_1A6675
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_16D7D6
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_16D7DF
 	giveitem_msg gUnknown_8199068, ITEM_HM04
 	setflag FLAG_GOT_HM04

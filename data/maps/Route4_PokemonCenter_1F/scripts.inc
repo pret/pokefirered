@@ -24,9 +24,9 @@ Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	goto_if_set FLAG_BOUGHT_MAGIKARP, EventScript_16F8A2
 	showmoneybox 0, 0, 0
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	goto_if_eq EventScript_16F786
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	goto_if_eq EventScript_16F794
 	end
 
@@ -44,7 +44,7 @@ EventScript_16F7A2:: @ 816F7A2
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F888
 	checkmoney 500, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16F895
 	textcolor 3
 	setvar VAR_TEMP_1, 129
@@ -63,7 +63,7 @@ EventScript_16F7F6:: @ 816F7F6
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F861
 	call EventScript_1A8C27
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChangePokemonNickname
 	waitstate
@@ -75,7 +75,7 @@ EventScript_16F822:: @ 816F822
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F84B
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChangeBoxPokemonNickname
 	waitstate

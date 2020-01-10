@@ -170,8 +170,7 @@ Movement_1665FB:: @ 81665FB
 CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_5
-	goto_if_eq EventScript_16662E
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_5, EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm MUS_ROCKET, 0
@@ -184,14 +183,14 @@ CeruleanCity_EventScript_166603:: @ 8166603
 EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_166677
 	giveitem_msg gUnknown_817EEBF, ITEM_TM28
 	msgbox gUnknown_817EEED
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 2
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
 	end

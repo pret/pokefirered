@@ -17,7 +17,7 @@ Route2_EastBuilding_EventScript_16F67F:: @ 816F67F
 	goto_if_lt EventScript_1A7ABD
 	msgbox gUnknown_819D74E
 	checkitemspace ITEM_HM05, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1A7AC7
 	giveitem_msg gUnknown_819D7A1, ITEM_HM05
 	setflag FLAG_GOT_HM05

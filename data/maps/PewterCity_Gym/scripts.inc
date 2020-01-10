@@ -23,7 +23,7 @@ EventScript_16A5C5:: @ 816A5C5
 EventScript_16A5F3:: @ 816A5F3
 	msgbox gUnknown_8190FC1
 	checkitemspace ITEM_TM39, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16A634
 	giveitem_msg gUnknown_8190FDB, ITEM_TM39
 	setflag FLAG_GOT_TM39_FROM_BROCK

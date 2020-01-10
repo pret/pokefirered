@@ -985,7 +985,7 @@ EventScript_1699FB:: @ 81699FB
 	goto_if_set FLAG_OAK_SKIP_22_RIVAL_CHECK, EventScript_169A6E
 	goto_if_set FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL, EventScript_169A78
 	checkitem ITEM_POKE_BALL, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_169A34
 	goto EventScript_169A6E
 	end

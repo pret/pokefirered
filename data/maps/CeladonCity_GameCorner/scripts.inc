@@ -50,7 +50,7 @@ EventScript_16C706:: @ 816C706
 	compare VAR_TEMP_1, 9500
 	goto_if_ge EventScript_16C79E
 	checkmoney 10000, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C7AC
 	givecoins 500
 	takemoney 10000, 0
@@ -62,7 +62,7 @@ EventScript_16C734:: @ 816C734
 	compare VAR_TEMP_1, 9950
 	goto_if_ge EventScript_16C79E
 	checkmoney 1000, 0
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C7AC
 	givecoins 50
 	takemoney 1000, 0

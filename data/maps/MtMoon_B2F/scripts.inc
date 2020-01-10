@@ -23,8 +23,7 @@ MtMoon_B2F_EventScript_1606C2:: @ 81606C2
 	lock
 	faceplayer
 	goto_if_set FLAG_GOT_FOSSIL_FROM_MT_MOON, EventScript_160707
-	checktrainerflag TRAINER_SUPER_NERD_MIGUEL
-	goto_if_eq EventScript_160711
+	goto_if_defeated TRAINER_SUPER_NERD_MIGUEL, EventScript_160711
 	call EventScript_1606DD
 	release
 	end

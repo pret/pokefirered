@@ -6,9 +6,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
 	faceplayer
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, EventScript_168C4A
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_168C38
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_168C41
 	closemessage
 	applymovement 1, Movement_FaceOriginalDirection
@@ -42,9 +42,9 @@ PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
 
 EventScript_168C78:: @ 8168C78
 	checkplayergender
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, MALE
 	call_if_eq EventScript_168C91
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, FEMALE
 	call_if_eq EventScript_168C9A
 	releaseall
 	end

@@ -6,7 +6,7 @@ IndigoPlateau_PokemonCenter_1F_MapScripts:: @ 816EA5A
 IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_16EA79
 	end
 
@@ -19,7 +19,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
 	lock
 	faceplayer
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16EAA6
 	msgbox gUnknown_819A8D8
 	release

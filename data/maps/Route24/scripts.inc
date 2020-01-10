@@ -8,7 +8,7 @@ Route24_EventScript_168620:: @ 8168620
 	goto_if_eq EventScript_168656
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16864C
 	call EventScript_1686B9
 	release

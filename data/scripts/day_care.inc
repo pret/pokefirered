@@ -20,7 +20,7 @@ EventScript_1BF3DD:: @ 81BF3DD
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_1BF452
 	msgbox Text_19DDBE
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChooseSendDaycareMon
 	waitstate

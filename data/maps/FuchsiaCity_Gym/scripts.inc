@@ -21,7 +21,7 @@ EventScript_16D580:: @ 816D580
 EventScript_16D5A6:: @ 816D5A6
 	msgbox gUnknown_819850E
 	checkitemspace ITEM_TM06, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16D5E7
 	giveitem_msg gUnknown_819858F, ITEM_TM06
 	setflag FLAG_GOT_TM06_FROM_KOGA

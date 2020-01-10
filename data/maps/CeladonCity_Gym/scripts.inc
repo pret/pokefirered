@@ -22,7 +22,7 @@ EventScript_16D0A0:: @ 816D0A0
 EventScript_16D0C6:: @ 816D0C6
 	msgbox gUnknown_8197327
 	checkitemspace ITEM_TM19, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16D107
 	giveitem_msg gUnknown_81973BA, ITEM_TM19
 	setflag FLAG_GOT_TM19_FROM_ERIKA

@@ -113,7 +113,7 @@ EventScript_1A90DA:: @ 81A90DA
     compare VAR_RESULT, 2
     goto_if_eq EventScript_1A7AE0
     special sub_8112364
-    fadescreen 1
+    fadescreen FADE_TO_BLACK
     special ScrSpecial_SeagallopFerry
     waitstate
     end

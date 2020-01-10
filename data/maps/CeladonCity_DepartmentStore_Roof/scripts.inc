@@ -17,13 +17,13 @@ CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
 EventScript_16BCF6:: @ 816BCF6
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_FRESH_WATER, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_16BD2C
 	checkitem ITEM_SODA_POP, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_16BD32
 	checkitem ITEM_LEMONADE, 1
-	compare VAR_RESULT, 1
+	compare VAR_RESULT, TRUE
 	call_if_eq EventScript_16BD38
 	return
 
@@ -147,7 +147,7 @@ EventScript_16BF7C:: @ 816BF7C
 	getitemname 1, VAR_0x8009
 	removeitem VAR_0x8008, 1
 	checkitemspace VAR_0x8009, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C002
 	additem VAR_0x8009
 	textcolor 3
@@ -258,10 +258,10 @@ EventScript_16C0C4:: @ 816C0C4
 	return
 
 EventScript_16C0CB:: @ 816C0CB
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C131
 	checkitemspace VAR_TEMP_0, 1
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C13F
 	compare VAR_TEMP_1, 0
 	call_if_eq EventScript_16C0B6

@@ -178,7 +178,7 @@ SECTIONS {
         src/mon_markings.o(.text);
         src/mail.o(.text);
         src/menu_helpers.o(.text);
-        asm/script_pokemon_util_80BF8FC.o(.text);
+        src/party_menu_specials.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
         src/image_processing_effects.o(.text);

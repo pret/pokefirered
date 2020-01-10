@@ -16,19 +16,19 @@ EventScript_16D8B0:: @ 816D8B0
 	waitstate
 	compare_var_to_value VAR_0x8004, 6
 	goto_if ge, EventScript_16D941
-	special IsSelectedMonEgg
+	special Special_IsSelectedMonEgg
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16D937
-	special ScrSpecial_CountPokemonMoves
+	special Special_GetNumMovesSelectedMonHas
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16D92A
 	msgbox gUnknown_8199445
 	fadescreen 1
-	special SelectMove
+	special Special_SelectMove
 	fadescreen 0
 	compare_var_to_value VAR_0x8005, 4
 	goto_if eq, EventScript_16D8B0
-	special ScrSpecial_GetPokemonNicknameAndMoveName
+	special Special_BufferMoveDeleterNicknameAndMove
 	msgbox gUnknown_8199485, MSGBOX_YESNO
 	compare_var_to_value VAR_RESULT, 1
 	goto_if eq, EventScript_16D919
@@ -36,7 +36,7 @@ EventScript_16D8B0:: @ 816D8B0
 	end
 
 EventScript_16D919:: @ 816D919
-	special DeleteMonMove
+	special Special_MoveDeleterForgetMove
 	playfanfare MUS_ME_WASURE
 	waitfanfare
 	msgbox gUnknown_81994B1
@@ -44,7 +44,7 @@ EventScript_16D919:: @ 816D919
 	end
 
 EventScript_16D92A:: @ 816D92A
-	special ScrSpecial_GetPokemonNicknameAndMoveName
+	special Special_BufferMoveDeleterNicknameAndMove
 	msgbox gUnknown_8199465
 	release
 	end

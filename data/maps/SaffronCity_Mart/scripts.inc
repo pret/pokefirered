@@ -18,7 +18,7 @@ SaffronCity_Mart_EventScript_16EFB5:: @ 816EFB5
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EFDC
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

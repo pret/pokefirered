@@ -83,12 +83,12 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 EventScript_1650B4:: @ 81650B4
 	setflag FLAG_HO_OH_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_HO_OH
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 EventScript_1650C2:: @ 81650C2
 	setvar VAR_0x8004, SPECIES_HO_OH
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 Movement_1650CD:: @ 81650CD

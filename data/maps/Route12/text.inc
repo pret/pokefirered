@@ -2,7 +2,7 @@ gUnknown_8185317:: @ 8185317
     .string "A POKéMON is sprawled out in\n"
     .string "a deep and comfortable slumber.$"
 
-Text_185354:: @ 8185354
+Text_SnorlaxWokeUp:: @ 8185354
     .string "SNORLAX woke up!\p"
     .string "It attacked in a grumpy rage!$"
 
@@ -14,7 +14,7 @@ gUnknown_8185383:: @ 8185383
 gUnknown_81853CC:: @ 81853CC
     .string "Want to use the POKé FLUTE?$"
 
-Text_1853E8:: @ 81853E8
+Text_PlayedPokeFlute:: @ 81853E8
     .string "{PLAYER} played the POKé FLUTE.$"
 
 Text_185402:: @ 8185402

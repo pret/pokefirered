@@ -18,7 +18,7 @@ PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A708
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

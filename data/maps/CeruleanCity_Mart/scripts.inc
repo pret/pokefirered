@@ -18,7 +18,7 @@ CeruleanCity_Mart_EventScript_16ACB0:: @ 816ACB0
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16ACD8
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

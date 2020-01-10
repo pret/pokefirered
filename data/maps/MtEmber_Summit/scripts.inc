@@ -55,10 +55,10 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 
 EventScript_163B96:: @ 8163B96
 	setflag FLAG_FOUGHT_MOLTRES
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 	end
 
 EventScript_163B9F:: @ 8163B9F
 	setvar VAR_0x8004, SPECIES_MOLTRES
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end

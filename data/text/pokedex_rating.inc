@@ -1,9 +1,9 @@
-gUnknown_81A6C51:: @ 81A6C51
+Text_HowIsPokedexComingAlong:: @ 81A6C51
 	.string "OAK: Good to see you!\n"
 	.string "How is your POKéDEX coming along?\p"
 	.string "Here, let me take a look.$"
 
-Text_1A6CA3:: @ 81A6CA3
+Text_YouveSeenXAndOwnedYMons:: @ 81A6CA3
 	.string "The amount of progress you've made\n"
 	.string "on your POKéDEX is:\p"
 	.string "{STR_VAR_1} POKéMON seen and\n"
@@ -86,16 +86,16 @@ gUnknown_81A7175:: @ 81A7175
 	.string "Your POKéDEX is entirely complete!\n"
 	.string "Congratulations!!$"
 
-Text_1A71AA:: @ 81A71AA
+Text_AndNationalDexSeenXOwnedY:: @ 81A71AA
 	.string "And your NATIONAL POKéDEX is:\p"
 	.string "{STR_VAR_1} POKéMON seen and\n"
 	.string "{STR_VAR_2} POKéMON owned.$"
 
-Text_1A71EE:: @ 81A71EE
+Text_LookForwardToFilledNationalDex:: @ 81A71EE
 	.string "I'll be looking forward to seeing\n"
 	.string "you fill the NATIONAL POKéDEX!$"
 
-Text_1A722F:: @ 81A722F
+Text_YouveCompletedDex:: @ 81A722F
 	.string "Finally…\p"
 	.string "You've finally completed the\n"
 	.string "POKéDEX!\p"
@@ -113,7 +113,7 @@ gUnknown_81A72AD:: @ 81A72AD
 	.string "Sincerely, thank you!\l"
 	.string "You've made my dream a reality!$"
 
-Text_1A72F2:: @ 81A72F2
+Text_LoveSeeingYourPokedex:: @ 81A72F2
 	.string "OAK: Ah, welcome!\p"
 	.string "Tell me, how is your POKéDEX\n"
 	.string "coming along?\p"

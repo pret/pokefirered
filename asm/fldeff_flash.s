@@ -76,13 +76,13 @@ sub_80C9BB0: @ 80C9BB0
 	bl PlaySE
 	ldr r0, _080C9BC8 @ =0x00000806
 	bl FlagSet
-	ldr r0, _080C9BCC @ =EventScript_81BFB5F
+	ldr r0, _080C9BCC @ =EventScript_FldEffFlash
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9BC8: .4byte 0x00000806
-_080C9BCC: .4byte EventScript_81BFB5F
+_080C9BCC: .4byte EventScript_FldEffFlash
 	thumb_func_end sub_80C9BB0
 
 	thumb_func_start sub_80C9BD0

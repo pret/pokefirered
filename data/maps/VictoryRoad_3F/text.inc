@@ -1,7 +1,7 @@
 Text_1749F3:: @ 81749F3
     .string "ギヤーオ！$"
 
-Text_1749F9:: @ 81749F9
+Text_DoubleEdgeTeach:: @ 81749F9
     .string "You should be proud of yourself,\n"
     .string "having battled your way through\l"
     .string "VICTORY ROAD so courageously.\p"
@@ -10,15 +10,15 @@ Text_1749F9:: @ 81749F9
     .string "Would you like me to teach that\n"
     .string "technique?$"
 
-Text_174ABC:: @ 8174ABC
+Text_DoubleEdgeDeclined:: @ 8174ABC
     .string "I'll teach you the technique\n"
     .string "anytime.$"
 
-Text_174AE2:: @ 8174AE2
+Text_DoubleEdgeWhichMon:: @ 8174AE2
     .string "Which POKéMON should I teach\n"
     .string "DOUBLE-EDGE?$"
 
-Text_174B0C:: @ 8174B0C
+Text_DoubleEdgeTaught:: @ 8174B0C
     .string "Keep that drive going for the\n"
     .string "POKéMON LEAGUE!\p"
     .string "Take a run at them and knock 'em\n"

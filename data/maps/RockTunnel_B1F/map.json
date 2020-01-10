@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RockTunnel_B1F_EventScript_1C487E",
+      "script": "RockTunnel_B1F_EventScript_RockSlideTutor",
       "flag": "0"
     },
     {

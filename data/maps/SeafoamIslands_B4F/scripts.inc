@@ -185,14 +185,14 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 
 EventScript_16320F:: @ 816320F
 	setflag FLAG_FOUGHT_ARTICUNO
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 
 EventScript_163217:: @ 8163217
 	end
 
 EventScript_163218:: @ 8163218
 	setvar VAR_0x8004, SPECIES_ARTICUNO
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 
 EventScript_163222:: @ 8163222
 	end

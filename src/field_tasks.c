@@ -268,7 +268,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
         if (MetatileBehavior_ReturnFalse_13(behavior))
         {
             if (GetPlayerSpeed() != 4)
-                VarSet(VAR_0x4030, 0);
+                VarSet(VAR_ICE_STEP_COUNT, 0);
 
             if (data[4] == 0)
             {

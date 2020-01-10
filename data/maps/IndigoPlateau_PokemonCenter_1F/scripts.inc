@@ -49,7 +49,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EAF4
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

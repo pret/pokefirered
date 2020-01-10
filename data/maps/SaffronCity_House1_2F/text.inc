@@ -18,7 +18,7 @@ gUnknown_819ACF1:: @ 819ACF1
     .string "COPYCAT: Hmm? Quit mimicking?\l"
     .string "But that's my favorite hobby!$"
 
-Text_19AD85:: @ 819AD85
+Text_MimicTeach:: @ 819AD85
     .string "Oh wow!\n"
     .string "A POKé DOLL!\p"
     .string "For me?\n"
@@ -26,14 +26,14 @@ Text_19AD85:: @ 819AD85
     .string "You know what?\n"
     .string "I can teach the move MIMIC.$"
 
-Text_19ADD8:: @ 819ADD8
+Text_MimicDeclined:: @ 819ADD8
     .string "Don't you like MIMIC?$"
 
-Text_19ADEE:: @ 819ADEE
+Text_MimicWhichMon:: @ 819ADEE
     .string "I really love MIMIC!\n"
     .string "Who's going to learn it?$"
 
-Text_19AE1C:: @ 819AE1C
+Text_MimicTaughtMale:: @ 819AE1C
     .string "{PLAYER}: Hi!\n"
     .string "Thanks for earlier!\p"
     .string "{PLAYER}: Pardon?\p"
@@ -42,7 +42,7 @@ Text_19AE1C:: @ 819AE1C
     .string "COPYCAT: You bet!\n"
     .string "It's a scream!$"
 
-Text_19AE90:: @ 819AE90
+Text_MimicTaughtFemale:: @ 819AE90
     .string "{PLAYER}: Hi!\n"
     .string "Thanks for what you did for us.\p"
     .string "{PLAYER}: Pardon?\p"

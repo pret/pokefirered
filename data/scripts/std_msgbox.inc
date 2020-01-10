@@ -30,34 +30,34 @@ Std_MsgboxYesNo:: @ 81A4E5C
 Std_ReceivedItem:: @ 81A4E66
 	textcolor 3
 	compare VAR_0x8002, MUS_FANFA1
-	call_if_eq EventScript_1A4EA2
+	call_if_eq EventScript_ReceivedItemFanfare1
 	compare VAR_0x8002, MUS_FAN5
-	call_if_eq EventScript_1A4EA6
+	call_if_eq EventScript_ReceivedItemFanfare2
 	message 0x0
 	waitmessage
 	waitfanfare
 	compare VAR_0x8002, MUS_FANFA1
-	call_if_eq EventScript_1A4EAA
+	call_if_eq EventScript_ReceivedItemWaitFanfare
 	putitemaway VAR_0x8000, VAR_0x8001
 	call EventScript_1A6675
 	return
 
-EventScript_1A4EA2:: @ 81A4EA2
+EventScript_ReceivedItemFanfare1:: @ 81A4EA2
 	playfanfare MUS_FANFA1
 	return
 
-EventScript_1A4EA6:: @ 81A4EA6
+EventScript_ReceivedItemFanfare2:: @ 81A4EA6
 	playfanfare MUS_FAN5
 	return
 
-EventScript_1A4EAA:: @ 81A4EAA
+EventScript_ReceivedItemWaitFanfare:: @ 81A4EAA
 	delay 50
 	return
 
 EventScript_UnusedReturn:: @ 81A4EAE
 	return
 
-EventScript_1A4EAF:: @ 81A4EAF
+EventScript_AskSaveGame:: @ 81A4EAF
 	special Field_AskSaveTheGame
 	waitstate
 	return

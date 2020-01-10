@@ -78,10 +78,10 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 EventScript_1651D9:: @ 81651D9
 	setflag FLAG_LUGIA_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_LUGIA
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 EventScript_1651E7:: @ 81651E7
 	setvar VAR_0x8004, SPECIES_LUGIA
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end

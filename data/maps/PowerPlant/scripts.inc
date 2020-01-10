@@ -66,12 +66,12 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 
 EventScript_16381B:: @ 816381B
 	setflag FLAG_FOUGHT_ZAPDOS
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 	end
 
 EventScript_163824:: @ 8163824
 	setvar VAR_0x8004, SPECIES_ZAPDOS
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 PowerPlant_EventScript_16382F:: @ 816382F
@@ -102,7 +102,7 @@ PowerPlant_EventScript_16382F:: @ 816382F
 
 EventScript_163884:: @ 8163884
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 	end
 
 PowerPlant_EventScript_16388D:: @ 816388D
@@ -133,5 +133,5 @@ PowerPlant_EventScript_16388D:: @ 816388D
 
 EventScript_1638E2:: @ 81638E2
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 	end

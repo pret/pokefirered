@@ -101,7 +101,7 @@ EventScript_170987:: @ 8170987
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_170A11
 	special LoadPlayerParty
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_170A11
 	special SavePlayerParty

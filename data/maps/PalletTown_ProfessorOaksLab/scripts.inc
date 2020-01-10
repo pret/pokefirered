@@ -841,7 +841,7 @@ EventScript_1698D6:: @ 81698D6
 	end
 
 EventScript_169903:: @ 8169903
-	call EventScript_1A737B
+	call ProfOak_EventScript_RatePokedexInPerson
 	goto_if_set FLAG_OAK_SAW_DEX_COMPLETION, EventScript_169913
 	release
 	end
@@ -963,7 +963,7 @@ Movement_1699C5:
 	step_end
 
 EventScript_1699CE:: @ 81699CE
-	call EventScript_1A737B
+	call ProfOak_EventScript_RatePokedexInPerson
 	closemessage
 	compare VAR_0x8009, 60
 	goto_if_lt EventScript_1699F9

@@ -10,7 +10,7 @@ SixIsland_Mart_EventScript_171E66:: @ 8171E66
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_171E8C
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

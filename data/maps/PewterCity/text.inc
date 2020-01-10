@@ -1,4 +1,4 @@
-Text_17E316:: @ 817E316
+Text_DreamEaterTeach:: @ 817E316
     .string "Yawn!\n"
     .string "I must have dozed off in the sun.\p"
     .string "I had this weird dream about\n"
@@ -9,14 +9,14 @@ Text_17E316:: @ 817E316
     .string "Let me teach it to a POKéMON so\n"
     .string "I can forget about it!$"
 
-Text_17E3E9:: @ 817E3E9
+Text_DreamEaterDeclined:: @ 817E3E9
     .string "…Snore…$"
 
-Text_17E3F1:: @ 817E3F1
+Text_DreamEaterWhichMon:: @ 817E3F1
     .string "Which POKéMON wants to learn\n"
     .string "DREAM EATER?$"
 
-Text_17E41B:: @ 817E41B
+Text_DreamEaterTaught:: @ 817E41B
     .string "…ZZZ…\n"
     .string "I…can't eat…anymore…$"
 

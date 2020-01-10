@@ -52,7 +52,7 @@
 #define VAR_FRIENDSHIP_STEP_COUNT           0x4021
 
 // Maybe unused?
-#define VAR_ICE_STEP_COUNT                  0x4022
+#define VAR_0x4022                          0x4022
 
 // Step counter. Caps at 1500. If you enter a map with
 // renewable hidden items and this counter is capped,
@@ -89,7 +89,7 @@
 
 #define VAR_0x402F                         0x402F
 
-#define VAR_0x4030                         0x4030
+#define VAR_ICE_STEP_COUNT                 0x4030
 #define VAR_STARTER_MON                    0x4031
 #define VAR_0x4032                         0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033

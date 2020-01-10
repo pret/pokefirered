@@ -8,17 +8,17 @@ EventScript_UseSurf:: @ 81A6AC8
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	lockall
-	msgbox Text_1A556E, MSGBOX_YESNO
+	msgbox Text_WantToSurf, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_UseSurfRelease
-	msgbox Text_1A55A5
+	msgbox Text_UsedSurf
 	dofieldeffect FLDEFF_USE_SURF
 EventScript_UseSurfRelease:@ 81A6B0B
 	releaseall
 EventScript_UseSurfEnd: @ 81A6B0C
 	end
 
-gUnknown_81A6B0D:: @ 81A6B0D
+EventScript_CurrentTooFast:: @ 81A6B0D
 	lockall
 	msgbox Text_CurrentTooFast
 	releaseall

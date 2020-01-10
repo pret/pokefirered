@@ -83,7 +83,7 @@ gUnknown_8180300:: @ 8180300
     .string "But it was boiling hot!\n"
     .string "Gotta cool it to drink it.$"
 
-Text_180388:: @ 8180388
+Text_SoftboiledTeach:: @ 8180388
     .string "Hello, there!\p"
     .string "I've seen you about, but I never\n"
     .string "had a chance to chat.\p"
@@ -92,16 +92,16 @@ Text_180388:: @ 8180388
     .string "I'd like to celebrate by teaching\n"
     .string "you the move SOFTBOILED.$"
 
-Text_18043F:: @ 818043F
+Text_SoftboiledDeclined:: @ 818043F
     .string "I'll always be keeping an eye out\n"
     .string "for you.\p"
     .string "I hope we can chat again.$"
 
-Text_180484:: @ 8180484
+Text_SoftboiledWhichMon:: @ 8180484
     .string "So, who's the POKéMON that gets\n"
     .string "the chance to learn SOFTBOILED?$"
 
-Text_1804C4:: @ 81804C4
+Text_SoftboiledTaught:: @ 81804C4
     .string "I wish you the best of luck!$"
 
 gUnknown_81804E1:: @ 81804E1

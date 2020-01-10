@@ -132,7 +132,7 @@ SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_1649B8
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

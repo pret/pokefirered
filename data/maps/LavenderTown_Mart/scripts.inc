@@ -22,7 +22,7 @@ LavenderTown_Mart_EventScript_16B36B:: @ 816B36B
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16B390
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

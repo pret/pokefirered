@@ -1,581 +1,582 @@
-VictoryRoad_2F_EventScript_1C47AE:: @ 81C47AE
+VictoryRoad_2F_EventScript_DoubleEdgeTutor:: @ 81C47AE
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_DOUBLE_EDGE, EventScript_1C480C
-	msgbox Text_1749F9, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_DOUBLE_EDGE, EventScript_DoubleEdgeTaught
+	msgbox Text_DoubleEdgeTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4802
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4802
-	msgbox Text_174AE2
+	goto_if_eq EventScript_DoubleEdgeDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_DoubleEdgeDeclined
+	msgbox Text_DoubleEdgeWhichMon
 	setvar VAR_0x8005, MOVETUTOR_DOUBLE_EDGE
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4802
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_DoubleEdgeDeclined
 	setflag FLAG_TUTOR_DOUBLE_EDGE
-	goto EventScript_1C480C
+	goto EventScript_DoubleEdgeTaught
 	end
 
-EventScript_1C4802:: @ 81C4802
-	msgbox Text_174ABC
+EventScript_DoubleEdgeDeclined:: @ 81C4802
+	msgbox Text_DoubleEdgeDeclined
 	release
 	end
 
-EventScript_1C480C:: @ 81C480C
-	msgbox Text_174B0C
+EventScript_DoubleEdgeTaught:: @ 81C480C
+	msgbox Text_DoubleEdgeTaught
 	release
 	end
 
-EventScript_1C4816:: @ 81C4816
+EventScript_ThunderWaveTutor:: @ 81C4816
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_THUNDER_WAVE, EventScript_1C4874
-	msgbox Text_175711, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_THUNDER_WAVE, EventScript_ThunderWaveTaught
+	msgbox Text_ThunderWaveTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C486A
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C486A
-	msgbox Text_1757C1
+	goto_if_eq EventScript_ThunderWaveDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_ThunderWaveDeclined
+	msgbox Text_ThunderWaveWhichMon
 	setvar VAR_0x8005, MOVETUTOR_THUNDER_WAVE
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C486A
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_ThunderWaveDeclined
 	setflag FLAG_TUTOR_THUNDER_WAVE
-	goto EventScript_1C4874
+	goto EventScript_ThunderWaveTaught
 	end
 
-EventScript_1C486A:: @ 81C486A
-	msgbox Text_17579D
+EventScript_ThunderWaveDeclined:: @ 81C486A
+	msgbox Text_ThunderWaveDeclined
 	release
 	end
 
-EventScript_1C4874:: @ 81C4874
-	msgbox Text_1757EC
+EventScript_ThunderWaveTaught:: @ 81C4874
+	msgbox Text_ThunderWaveTaught
 	release
 	end
 
-RockTunnel_B1F_EventScript_1C487E:: @ 81C487E
+RockTunnel_B1F_EventScript_RockSlideTutor:: @ 81C487E
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_ROCK_SLIDE, EventScript_1C48DC
-	msgbox Text_1799E0, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_ROCK_SLIDE, EventScript_RockSlideTaught
+	msgbox Text_RockSlideTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C48D2
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C48D2
-	msgbox Text_179AE1
+	goto_if_eq EventScript_RockSlideDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_RockSlideDeclined
+	msgbox Text_RockSlideWhichMon
 	setvar VAR_0x8005, MOVETUTOR_ROCK_SLIDE
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C48D2
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_RockSlideDeclined
 	setflag FLAG_TUTOR_ROCK_SLIDE
-	goto EventScript_1C48DC
+	goto EventScript_RockSlideTaught
 	end
 
-EventScript_1C48D2:: @ 81C48D2
-	msgbox Text_179AC0
+EventScript_RockSlideDeclined:: @ 81C48D2
+	msgbox Text_RockSlideDeclined
 	release
 	end
 
-EventScript_1C48DC:: @ 81C48DC
-	msgbox Text_179B0A
+EventScript_RockSlideTaught:: @ 81C48DC
+	msgbox Text_RockSlideTaught
 	release
 	end
 
-MtEmber_Exterior_EventScript_1C48E6:: @ 81C48E6
+MtEmber_Exterior_EventScript_ExplosionTutor:: @ 81C48E6
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_EXPLOSION, EventScript_1C4944
-	msgbox Text_17A642, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_EXPLOSION, EventScript_ExplosionTaught
+	msgbox Text_ExplosionTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C493A
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C493A
-	msgbox Text_17A717
+	goto_if_eq EventScript_ExplosionDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_ExplosionDeclined
+	msgbox Text_ExplosionWhichMon
 	setvar VAR_0x8005, MOVETUTOR_EXPLOSION
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C493A
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_ExplosionDeclined
 	setflag FLAG_TUTOR_EXPLOSION
-	goto EventScript_1C4944
+	goto EventScript_ExplosionTaught
 	end
 
-EventScript_1C493A:: @ 81C493A
-	msgbox Text_17A6ED
+EventScript_ExplosionDeclined:: @ 81C493A
+	msgbox Text_ExplosionDeclined
 	release
 	end
 
-EventScript_1C4944:: @ 81C4944
-	msgbox Text_17A756
+EventScript_ExplosionTaught:: @ 81C4944
+	msgbox Text_ExplosionTaught
 	release
 	end
 
-Route4_EventScript_1C494E:: @ 81C494E
+Route4_EventScript_MegaPunchTutor:: @ 81C494E
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_META_PUNCH, EventScript_1C49AC
-	msgbox Text_1839D5, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_MEGA_PUNCH, EventScript_MegaPunchTaught
+	msgbox Text_MegaPunchTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C49A2
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C49A2
-	msgbox Text_183ABF
+	goto_if_eq EventScript_MegaPunchDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_MegaPunchDeclined
+	msgbox Text_MegaPunchWhichMon
 	setvar VAR_0x8005, MOVETUTOR_MEGA_PUNCH
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C49A2
-	setflag FLAG_TUTOR_META_PUNCH
-	goto EventScript_1C49AC
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_MegaPunchDeclined
+	setflag FLAG_TUTOR_MEGA_PUNCH
+	goto EventScript_MegaPunchTaught
 	end
 
-EventScript_1C49A2:: @ 81C49A2
-	msgbox Text_183A83
+EventScript_MegaPunchDeclined:: @ 81C49A2
+	msgbox Text_MegaPunchDeclined
 	release
 	end
 
-EventScript_1C49AC:: @ 81C49AC
-	msgbox Text_183AE2
+EventScript_MegaPunchTaught:: @ 81C49AC
+	msgbox Text_MegaPunchTaught
 	release
 	end
 
-Route4_EventScript_1C49B6:: @ 81C49B6
+Route4_EventScript_MegaKickTutor:: @ 81C49B6
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_MEGA_KICK, EventScript_1C4A14
-	msgbox Text_183B74, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_MEGA_KICK, EventScript_MegaKickTaught
+	msgbox Text_MegaKickTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4A0A
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4A0A
-	msgbox Text_183C68
+	goto_if_eq EventScript_MegaKickDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_MegaKickDeclined
+	msgbox Text_MegaKickWhichMon
 	setvar VAR_0x8005, MOVETUTOR_MEGA_KICK
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4A0A
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_MegaKickDeclined
 	setflag FLAG_TUTOR_MEGA_KICK
-	goto EventScript_1C4A14
+	goto EventScript_MegaKickTaught
 	end
 
-EventScript_1C4A0A:: @ 81C4A0A
-	msgbox Text_183C25
+EventScript_MegaKickDeclined:: @ 81C4A0A
+	msgbox Text_MegaKickDeclined
 	release
 	end
 
-EventScript_1C4A14:: @ 81C4A14
-	msgbox Text_183C94
+EventScript_MegaKickTaught:: @ 81C4A14
+	msgbox Text_MegaKickTaught
 	release
 	end
 
-EventScript_1C4A1E:: @ 81C4A1E
+EventScript_DreamEaterTutor:: @ 81C4A1E
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_1C4A7C
-	msgbox Text_17E316, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_DreamEaterTaught
+	msgbox Text_DreamEaterTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4A72
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4A72
-	msgbox Text_17E3F1
+	goto_if_eq EventScript_DreamEaterDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_DreamEaterDeclined
+	msgbox Text_DreamEaterWhichMon
 	setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4A72
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_DreamEaterDeclined
 	setflag FLAG_TUTOR_DREAM_EATER
-	goto EventScript_1C4A7C
+	goto EventScript_DreamEaterTaught
 	end
 
-EventScript_1C4A72:: @ 81C4A72
-	msgbox Text_17E3E9
+EventScript_DreamEaterDeclined:: @ 81C4A72
+	msgbox Text_DreamEaterDeclined
 	release
 	end
 
-EventScript_1C4A7C:: @ 81C4A7C
-	msgbox Text_17E41B
+EventScript_DreamEaterTaught:: @ 81C4A7C
+	msgbox Text_DreamEaterTaught
 	release
 	end
 
-EventScript_1C4A86:: @ 81C4A86
+EventScript_SoftboiledTutor:: @ 81C4A86
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_SOFT_BOILED, EventScript_1C4AE4
-	msgbox Text_180388, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_SOFT_BOILED, EventScript_SoftboiledTaught
+	msgbox Text_SoftboiledTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4ADA
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4ADA
-	msgbox Text_180484
+	goto_if_eq EventScript_SoftboiledDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_SoftboiledDeclined
+	msgbox Text_SoftboiledWhichMon
 	setvar VAR_0x8005, MOVETUTOR_SOFT_BOILED
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4ADA
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_SoftboiledDeclined
 	setflag FLAG_TUTOR_SOFT_BOILED
-	goto EventScript_1C4AE4
+	goto EventScript_SoftboiledTaught
 	end
 
-EventScript_1C4ADA:: @ 81C4ADA
-	msgbox Text_18043F
+EventScript_SoftboiledDeclined:: @ 81C4ADA
+	msgbox Text_SoftboiledDeclined
 	release
 	end
 
-EventScript_1C4AE4:: @ 81C4AE4
-	msgbox Text_1804C4
+EventScript_SoftboiledTaught:: @ 81C4AE4
+	msgbox Text_SoftboiledTaught
 	release
 	end
 
-FuchsiaCity_EventScript_1C4AEE:: @ 81C4AEE
+FuchsiaCity_EventScript_SubstituteTutor:: @ 81C4AEE
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_SUBSTITUTE, EventScript_1C4B4C
-	msgbox Text_180948, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_SUBSTITUTE, EventScript_SubstituteTaught
+	msgbox Text_SubstituteTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4B42
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4B42
-	msgbox Text_180A57
+	goto_if_eq EventScript_SubstituteDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_SubstituteDeclined
+	msgbox Text_SubstituteWhichMon
 	setvar VAR_0x8005, MOVETUTOR_SUBSTITUTE
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4B42
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_SubstituteDeclined
 	setflag FLAG_TUTOR_SUBSTITUTE
-	goto EventScript_1C4B4C
+	goto EventScript_SubstituteTaught
 	end
 
-EventScript_1C4B42:: @ 81C4B42
-	msgbox Text_180A32
+EventScript_SubstituteDeclined:: @ 81C4B42
+	msgbox Text_SubstituteDeclined
 	release
 	end
 
-EventScript_1C4B4C:: @ 81C4B4C
-	msgbox Text_180A80
+EventScript_SubstituteTaught:: @ 81C4B4C
+	msgbox Text_SubstituteTaught
 	release
 	end
 
-SevenIsland_EventScript_1C4B56:: @ 81C4B56
+SevenIsland_EventScript_SwordsDanceTutor:: @ 81C4B56
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_SWORDS_DANCE, EventScript_1C4BB4
-	msgbox Text_182F01, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_SWORDS_DANCE, EventScript_SwordsDanceTaught
+	msgbox Text_SwordsDanceTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4BAA
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4BAA
-	msgbox Text_182FD9
+	goto_if_eq EventScript_SwordsDanceDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_SwordsDanceDeclined
+	msgbox Text_SwordsDanceWhichMon
 	setvar VAR_0x8005, MOVETUTOR_SWORDS_DANCE
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4BAA
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_SwordsDanceDeclined
 	setflag FLAG_TUTOR_SWORDS_DANCE
-	goto EventScript_1C4BB4
+	goto EventScript_SwordsDanceTaught
 	end
 
-EventScript_1C4BAA:: @ 81C4BAA
-	msgbox Text_182FC1
+EventScript_SwordsDanceDeclined:: @ 81C4BAA
+	msgbox Text_SwordsDanceDeclined
 	release
 	end
 
-EventScript_1C4BB4:: @ 81C4BB4
-	msgbox Text_18300D
+EventScript_SwordsDanceTaught:: @ 81C4BB4
+	msgbox Text_SwordsDanceTaught
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_1C4BBE:: @ 81C4BBE
+PewterCity_Museum_1F_EventScript_SeismicTossTutor:: @ 81C4BBE
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_SEISMIC_TOSS, EventScript_1C4C1C
-	msgbox Text_1909A3, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_SEISMIC_TOSS, EventScript_SeismicTossTaught
+	msgbox Text_SeismicTossTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4C12
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4C12
-	msgbox Text_190AD5
+	goto_if_eq EventScript_SeismicTossDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_SeismicTossDeclined
+	msgbox Text_SeismicTossWhichMon
 	setvar VAR_0x8005, MOVETUTOR_SEISMIC_TOSS
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4C12
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_SeismicTossDeclined
 	setflag FLAG_TUTOR_SEISMIC_TOSS
-	goto EventScript_1C4C1C
+	goto EventScript_SeismicTossTaught
 	end
 
-EventScript_1C4C12:: @ 81C4C12
-	msgbox Text_190AA9
+EventScript_SeismicTossDeclined:: @ 81C4C12
+	msgbox Text_SeismicTossDeclined
 	release
 	end
 
-EventScript_1C4C1C:: @ 81C4C1C
-	msgbox Text_190B00
+EventScript_SeismicTossTaught:: @ 81C4C1C
+	msgbox Text_SeismicTossTaught
 	release
 	end
 
-EventScript_1C4C26:: @ 81C4C26
+EventScript_CounterTutor:: @ 81C4C26
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_COUNTER, EventScript_1C4C84
-	msgbox Text_195928, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_COUNTER, EventScript_CounterTaught
+	msgbox Text_CounterTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4C7A
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4C7A
-	msgbox Text_195A08
+	goto_if_eq EventScript_CounterDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_CounterDeclined
+	msgbox Text_CounterWhichMon
 	setvar VAR_0x8005, MOVETUTOR_COUNTER
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4C7A
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_CounterDeclined
 	setflag FLAG_TUTOR_COUNTER
-	goto EventScript_1C4C84
+	goto EventScript_CounterTaught
 	end
 
-EventScript_1C4C7A:: @ 81C4C7A
-	msgbox Text_1959CC
+EventScript_CounterDeclined:: @ 81C4C7A
+	msgbox Text_CounterDeclined
 	release
 	end
 
-EventScript_1C4C84:: @ 81C4C84
-	msgbox Text_195A31
+EventScript_CounterTaught:: @ 81C4C84
+	msgbox Text_CounterTaught
 	release
 	end
 
-EventScript_1C4C8E:: @ 81C4C8E
+EventScript_MetronomeTutor:: @ 81C4C8E
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_METRONOME, EventScript_1C4CEC
-	msgbox Text_19A137, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_METRONOME, EventScript_MetronomeTaught
+	msgbox Text_MetronomeTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4CE2
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4CE2
-	msgbox Text_19A1EA
+	goto_if_eq EventScript_MetronomeDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_MetronomeDeclined
+	msgbox Text_MetronomeWhichMon
 	setvar VAR_0x8005, MOVETUTOR_METRONOME
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4CE2
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_MetronomeDeclined
 	setflag FLAG_TUTOR_METRONOME
-	goto EventScript_1C4CEC
+	goto EventScript_MetronomeTaught
 	end
 
-EventScript_1C4CE2:: @ 81C4CE2
-	msgbox Text_19A1CB
+EventScript_MetronomeDeclined:: @ 81C4CE2
+	msgbox Text_MetronomeDeclined
 	release
 	end
 
-EventScript_1C4CEC:: @ 81C4CEC
-	msgbox Text_19A20E
+EventScript_MetronomeTaught:: @ 81C4CEC
+	msgbox Text_MetronomeTaught
 	release
 	end
 
-EventScript_1C4CF6:: @ 81C4CF6
-	goto_if_set FLAG_TUTOR_MIMIC, EventScript_1C4D59
-	msgbox Text_19AD85, MSGBOX_YESNO
+EventScript_MimicTutor:: @ 81C4CF6
+	goto_if_set FLAG_TUTOR_MIMIC, EventScript_MimicTaught
+	msgbox Text_MimicTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4D4F
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4D4F
-	msgbox Text_19ADEE
+	goto_if_eq EventScript_MimicDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_MimicDeclined
+	msgbox Text_MimicWhichMon
 	setvar VAR_0x8005, MOVETUTOR_MIMIC
-	call EventScript_1C4F30
+	call EventScript_ChooseMoveTutorMon
 	lock
 	faceplayer
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4D4F
+	goto_if_eq EventScript_MimicDeclined
 	removeitem ITEM_POKE_DOLL, 1
 	setflag FLAG_TUTOR_MIMIC
-	goto EventScript_1C4D59
+	goto EventScript_MimicTaught
 	end
 
-EventScript_1C4D4F:: @ 81C4D4F
-	msgbox Text_19ADD8
+EventScript_MimicDeclined:: @ 81C4D4F
+	msgbox Text_MimicDeclined
 	release
 	end
 
-EventScript_1C4D59:: @ 81C4D59
+EventScript_MimicTaught:: @ 81C4D59
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq EventScript_1C4D72
+	call_if_eq EventScript_MimicTaughtMale
 	compare VAR_RESULT, FEMALE
-	call_if_eq EventScript_1C4D7B
+	call_if_eq EventScript_MimicTaughtFemale
 	release
 	end
 
-EventScript_1C4D72:: @ 81C4D72
-	msgbox Text_19AE1C
+EventScript_MimicTaughtMale:: @ 81C4D72
+	msgbox Text_MimicTaughtMale
 	return
 
-EventScript_1C4D7B:: @ 81C4D7B
-	msgbox Text_19AE90
+EventScript_MimicTaughtFemale:: @ 81C4D7B
+	msgbox Text_MimicTaughtFemale
 	return
 
-FourIsland_House1_EventScript_1C4D84:: @ 81C4D84
+FourIsland_House1_EventScript_BodySlamTutor:: @ 81C4D84
 	lock
 	faceplayer
-	goto_if_set FLAG_TUTOR_BODY_SLAM, EventScript_1C4DE2
-	msgbox Text_1A3505, MSGBOX_YESNO
+	goto_if_set FLAG_TUTOR_BODY_SLAM, EventScript_BodySlamTaught
+	msgbox Text_BodySlamTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4DD8
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4DD8
-	msgbox Text_1A35DA
+	goto_if_eq EventScript_BodySlamDeclined
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_BodySlamDeclined
+	msgbox Text_BodySlamWhichMon
 	setvar VAR_0x8005, MOVETUTOR_BODY_SLAM
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4DD8
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BodySlamDeclined
 	setflag FLAG_TUTOR_BODY_SLAM
-	goto EventScript_1C4DE2
+	goto EventScript_BodySlamTaught
 	end
 
-EventScript_1C4DD8:: @ 81C4DD8
-	msgbox Text_1A35C7
+EventScript_BodySlamDeclined:: @ 81C4DD8
+	msgbox Text_BodySlamDeclined
 	release
 	end
 
-EventScript_1C4DE2:: @ 81C4DE2
-	msgbox Text_1A3609
+EventScript_BodySlamTaught:: @ 81C4DE2
+	msgbox Text_BodySlamTaught
 	release
 	end
 
-TwoIsland_CapeBrink_House_EventScript_1C4DEC:: @ 81C4DEC
+TwoIsland_CapeBrink_House_EventScript_StarterTutor:: @ 81C4DEC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	goto_if_set FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK, EventScript_1C4EA1
-	goto_if_set FLAG_TEMP_2, EventScript_1C4E97
+	goto_if_set FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK, CapeBrinkTutor_EventScript_TaughtAllMoves
+	goto_if_set FLAG_TEMP_2, CapeBrinkTutor_EventScript_MoveJustTaught
 	getfirstpartymonname 0
-	msgbox Text_1A46C6
+	msgbox Text_UltimateMoveThatMon
 	specialvar VAR_RESULT, Special_CapeBrinkGetMoveToTeachLeadPokemon
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4F26
+	compare VAR_RESULT, FALSE
+	goto_if_eq CapeBrinkTutor_EventScript_NoLeadStarter
 	copyvar VAR_0x8009, VAR_0x8005
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq EventScript_1C4EF0
+	call_if_eq CapeBrinkTutor_EventScript_JumpInPlaceDown
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq EventScript_1C4EFB
+	call_if_eq CapeBrinkTutor_EventScript_JumpInPlaceUp
 	compare VAR_FACING, DIR_EAST
-	call_if_eq EventScript_1C4F06
+	call_if_eq CapeBrinkTutor_EventScript_JumpInPlaceLeft
 	compare VAR_FACING, DIR_WEST
-	call_if_eq EventScript_1C4F11
-	msgbox Text_1A4751, MSGBOX_YESNO
+	call_if_eq CapeBrinkTutor_EventScript_JumpInPlaceRight
+	msgbox Text_AllowMeToTeachMonUltimateMove, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1C4F1C
-	call EventScript_1C4F37
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4F1C
-	msgbox Text_1A4814
+	goto_if_eq CapeBrinkTutor_EventScript_DeclineMove
+	call EventScript_CanOnlyBeLearnedOnce
+	compare VAR_RESULT, NO
+	goto_if_eq CapeBrinkTutor_EventScript_DeclineMove
+	msgbox Text_LetMeConferUltimateMove
 	closemessage
 	fadescreen FADE_TO_BLACK
-	goto EventScript_1C4EDA
+	goto CapeBrinkTutor_EventScript_ChooseMon
 
-EventScript_1C4E8F:: @ 81C4E8F
+@ Unused
+CapeBrinkTutor_EventScript_FadeTaughtMove:: @ 81C4E8F
 	fadescreen FADE_FROM_BLACK
-	goto EventScript_1C4EAB
+	goto CapeBrinkTutor_EventScript_TaughtMove
 	end
 
-EventScript_1C4E97:: @ 81C4E97
-	msgbox Text_1A48B3
+CapeBrinkTutor_EventScript_MoveJustTaught:: @ 81C4E97
+	msgbox Text_MakeBestUseOfMove
 	release
 	end
 
-EventScript_1C4EA1:: @ 81C4EA1
-	msgbox Text_1A4972
+CapeBrinkTutor_EventScript_TaughtAllMoves:: @ 81C4EA1
+	msgbox Text_FeelRejuvenated
 	release
 	end
 
-EventScript_1C4EAB:: @ 81C4EAB
+CapeBrinkTutor_EventScript_TaughtMove:: @ 81C4EAB
 	copyvar VAR_0x8005, VAR_0x8009
 	specialvar VAR_RESULT, Special_HasLearnedAllMovesFromCapeBrinkTutor
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1C4ECD
-	msgbox Text_1A4865
+	compare VAR_RESULT, TRUE
+	goto_if_eq CapeBrinkTutor_EventScript_LearnedAllMoves
+	msgbox Text_TaughtMove
 	setflag FLAG_TEMP_2
 	release
 	end
 
-EventScript_1C4ECD:: @ 81C4ECD
-	msgbox Text_1A48F3
+CapeBrinkTutor_EventScript_LearnedAllMoves:: @ 81C4ECD
+	msgbox Text_PassedOnEverythingIKnow
 	setflag FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK
 	release
 	end
 
-EventScript_1C4EDA:: @ 81C4EDA
-	call EventScript_1C4F30
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C4F1C
-	goto EventScript_1C4EAB
+CapeBrinkTutor_EventScript_ChooseMon:: @ 81C4EDA
+	call EventScript_ChooseMoveTutorMon
+	compare VAR_RESULT, FALSE
+	goto_if_eq CapeBrinkTutor_EventScript_DeclineMove
+	goto CapeBrinkTutor_EventScript_TaughtMove
 	end
 
-EventScript_1C4EF0:: @ 81C4EF0
-	applymovement 1, Movement_1C4F4C
+CapeBrinkTutor_EventScript_JumpInPlaceDown:: @ 81C4EF0
+	applymovement 1, Movement_JumpInPlaceDown
 	waitmovement 0
 	return
 
-EventScript_1C4EFB:: @ 81C4EFB
-	applymovement 1, Movement_1C4F4E
+CapeBrinkTutor_EventScript_JumpInPlaceUp:: @ 81C4EFB
+	applymovement 1, Movement_JumpInPlaceUp
 	waitmovement 0
 	return
 
-EventScript_1C4F06:: @ 81C4F06
-	applymovement 1, Movement_1C4F50
+CapeBrinkTutor_EventScript_JumpInPlaceLeft:: @ 81C4F06
+	applymovement 1, Movement_JumpInPlaceLeft
 	waitmovement 0
 	return
 
-EventScript_1C4F11:: @ 81C4F11
-	applymovement 1, Movement_1C4F52
+CapeBrinkTutor_EventScript_JumpInPlaceRight:: @ 81C4F11
+	applymovement 1, Movement_JumpInPlaceRight
 	waitmovement 0
 	return
 
-EventScript_1C4F1C:: @ 81C4F1C
-	msgbox Text_1A47E5
+CapeBrinkTutor_EventScript_DeclineMove:: @ 81C4F1C
+	msgbox Text_YouRejectIt
 	release
 	end
 
-EventScript_1C4F26:: @ 81C4F26
-	msgbox Text_1A4737
+CapeBrinkTutor_EventScript_NoLeadStarter:: @ 81C4F26
+	msgbox Text_JustMistaken
 	release
 	end
 
-EventScript_1C4F30:: @ 81C4F30
+EventScript_ChooseMoveTutorMon:: @ 81C4F30
 	special ChooseMonForMoveTutor
 	waitstate
 	lock
 	faceplayer
 	return
 
-EventScript_1C4F37:: @ 81C4F37
+EventScript_CanOnlyBeLearnedOnce:: @ 81C4F37
 	textcolor 3
 	special sub_80699BC
 	signmsg
-	msgbox Text_1A644F, MSGBOX_YESNO
+	msgbox Text_MoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
 	normalmsg
 	call EventScript_1A6675
 	return
 
-Movement_1C4F4C:: @ 81C4F4C
+Movement_JumpInPlaceDown: @ 81C4F4C
 	jump_in_place_down
 	step_end
 
-Movement_1C4F4E:: @ 81C4F4E
+Movement_JumpInPlaceUp: @ 81C4F4E
 	jump_in_place_up
 	step_end
 
-Movement_1C4F50:: @ 81C4F50
+Movement_JumpInPlaceLeft: @ 81C4F50
 	jump_in_place_left
 	step_end
 
-Movement_1C4F52:: @ 81C4F52
+Movement_JumpInPlaceRight: @ 81C4F52
 	jump_in_place_right
 	step_end

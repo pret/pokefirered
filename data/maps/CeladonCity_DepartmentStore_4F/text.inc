@@ -1,4 +1,4 @@
-Text_195928:: @ 8195928
+Text_CounterTeach:: @ 8195928
     .string "Oh, hi!\n"
     .string "I finally finished POKéMON.\p"
     .string "Not done yet? How about I teach\n"
@@ -8,15 +8,15 @@ Text_195928:: @ 8195928
     .string "Not like the one I'm leaning on,\n"
     .string "mind you!$"
 
-Text_1959CC:: @ 81959CC
+Text_CounterDeclined:: @ 81959CC
     .string "You're not interested? Come see\n"
     .string "me if you change your mind.$"
 
-Text_195A08:: @ 8195A08
+Text_CounterWhichMon:: @ 8195A08
     .string "Which POKéMON should I teach\n"
     .string "COUNTER to?$"
 
-Text_195A31:: @ 8195A31
+Text_CounterTaught:: @ 8195A31
     .string "Are you using that COUNTER move\n"
     .string "I taught your POKéMON?$"
 

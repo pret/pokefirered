@@ -189,13 +189,13 @@ sub_80979D0: @ 80979D0
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
-	ldr r0, _080979EC @ =gUnknown_81BDF6B
+	ldr r0, _080979EC @ =EventScript_FldEffCut
 	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080979E8: .4byte gFieldEffectArguments
-_080979EC: .4byte gUnknown_81BDF6B
+_080979EC: .4byte EventScript_FldEffCut
 	thumb_func_end sub_80979D0
 
 	thumb_func_start sub_80979F0

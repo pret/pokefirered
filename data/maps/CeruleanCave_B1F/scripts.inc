@@ -55,14 +55,14 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 
 EventScript_162558:: @ 8162558
 	setflag FLAG_FOUGHT_MEWTWO
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 
 EventScript_162560:: @ 8162560
 	end
 
 EventScript_162561:: @ 8162561
 	setvar VAR_0x8004, SPECIES_MEWTWO
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 
 EventScript_16256B:: @ 816256B
 	end

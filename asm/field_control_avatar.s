@@ -1620,10 +1620,10 @@ sub_806D548: @ 806D548
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D570
-	ldr r0, _0806D56C @ =gUnknown_81A6B0D
+	ldr r0, _0806D56C @ =EventScript_CurrentTooFast
 	b _0806D5E2
 	.align 2, 0
-_0806D56C: .4byte gUnknown_81A6B0D
+_0806D56C: .4byte EventScript_CurrentTooFast
 _0806D570:
 	ldr r0, _0806D59C @ =0x00000824
 	bl FlagGet
@@ -1664,11 +1664,11 @@ _0806D5A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5D8
-	ldr r0, _0806D5D4 @ =gUnknown_81BE2B7
+	ldr r0, _0806D5D4 @ =EventScript_InteractWithWaterfall
 	b _0806D5E2
 	.align 2, 0
 _0806D5D0: .4byte 0x00000826
-_0806D5D4: .4byte gUnknown_81BE2B7
+_0806D5D4: .4byte EventScript_InteractWithWaterfall
 _0806D5D8:
 	ldr r0, _0806D5DC @ =EventScript_81BE2FF
 	b _0806D5E2

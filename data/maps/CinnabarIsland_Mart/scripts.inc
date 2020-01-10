@@ -18,7 +18,7 @@ CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EA48
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

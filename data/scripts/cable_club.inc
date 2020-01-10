@@ -22,7 +22,7 @@ CableClub_EventScript_MysteryGiftMan:: @ 81BB1D2
 
 @ Unused
 EventScript_1BB1E4:: @ 81BB1E4
-	msgbox Text_1A6393, MSGBOX_NPC
+	msgbox Text_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end
 
 CableClub_OnWarp:: @ 81BB1ED
@@ -283,7 +283,7 @@ EventScript_1BB541:: @ 81BB541
 	end
 
 EventScript_1BB54C:: @ 81BB54C
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
 	message gUnknown_81BC4AC
@@ -397,7 +397,7 @@ EventScript_1BB6AB:: @ 81BB6AB
 	call EventScript_1BB79C
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
 	message gUnknown_81BC4AC
@@ -826,7 +826,7 @@ EventScript_1BBA94:: @ 81BBA94
 	call EventScript_1BBB1E
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
 	msgbox gUnknown_81BD86A
@@ -1030,7 +1030,7 @@ EventScript_1BBD6E:: @ 81BBD6E
 	end
 
 EventScript_1BBD6F:: @ 81BBD6F
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB82F
 	switch VAR_0x8004
@@ -1320,7 +1320,7 @@ EventScript_1BC13A:: @ 81BC13A
 	waitstate
 	compare VAR_0x8004, 6
 	goto_if_ge EventScript_1BB83F
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB83F
 	setvar VAR_0x8004, 4
@@ -1340,7 +1340,7 @@ EventScript_1BC184:: @ 81BC184
 	waitstate
 	compare VAR_0x8004, 6
 	goto_if_ge EventScript_1BB83F
-	call EventScript_1A4EAF
+	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
 	goto_if_eq EventScript_1BB83F
 	setvar VAR_0x8004, 6

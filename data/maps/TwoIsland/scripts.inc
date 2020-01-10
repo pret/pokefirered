@@ -118,7 +118,7 @@ EventScript_1676A6:: @ 81676A6
 
 EventScript_1676D3:: @ 81676D3
 	pokemart Items_1676E4
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -132,7 +132,7 @@ Items_1676E4:: @ 81676E4
 
 EventScript_1676EC:: @ 81676EC
 	pokemart Items_1676FC
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -148,7 +148,7 @@ Items_1676FC:: @ 81676FC
 
 EventScript_167708:: @ 8167708
 	pokemart Items_167718
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -166,7 +166,7 @@ Items_167718:: @ 8167718
 
 EventScript_167728:: @ 8167728
 	pokemart Items_167738
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

@@ -60,7 +60,7 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A298
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

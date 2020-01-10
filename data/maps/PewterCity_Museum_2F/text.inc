@@ -1,4 +1,4 @@
-Text_1909A3:: @ 81909A3
+Text_SeismicTossTeach:: @ 81909A3
     .string "The secrets of space…\n"
     .string "The mysteries of earth…\p"
     .string "There are so many things about\n"
@@ -9,15 +9,15 @@ Text_1909A3:: @ 81909A3
     .string "Well, how about SEISMIC TOSS?\n"
     .string "Should I teach that to a POKéMON?$"
 
-Text_190AA9:: @ 8190AA9
+Text_SeismicTossDeclined:: @ 8190AA9
     .string "Is that so?\n"
     .string "I'm sure you'll be back for it.$"
 
-Text_190AD5:: @ 8190AD5
+Text_SeismicTossWhichMon:: @ 8190AD5
     .string "Which POKéMON wants to learn\n"
     .string "SEISMIC TOSS?$"
 
-Text_190B00:: @ 8190B00
+Text_SeismicTossTaught:: @ 8190B00
     .string "I hope you won't toss in the towel.\n"
     .string "Keep it up.$"
 

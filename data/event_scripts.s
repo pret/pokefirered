@@ -825,14 +825,16 @@ Text_1A5160:: @ 81A5160
 	.string "Welcome to the POKéMON CABLE CLUB\n"
 	.string "TIME CAPSULE.$"
 
-gUnknown_81A5190:: @ 81A5190
+Text_PleaseComeAgain:: @ 81A5190
 	.string "Please come again!$"
 
-Text_1A51A3:: @ 81A51A3
+@ Unused
+Text_HavingDiscountSaleToday:: @ 81A51A3
 	.string "Welcome!\p"
 	.string "We're having a discount sale today!$"
 
-Text_1A51D0:: @ 81A51D0
+@ Unused
+Text_PlayerWhatCanIDoForYou:: @ 81A51D0
 	.string "{PLAYER}{KUN}, welcome!\p"
 	.string "What can I do for you?$"
 
@@ -841,10 +843,10 @@ Text_1A51D0:: @ 81A51D0
 Text_1A5351:: @ 81A5351
 	.string "じゅんびちゅうです！$"
 
-Text_1A535C:: @ 81A535C
+Text_WantWhichFloor:: @ 81A535C
 	.string "Which floor do you want?$"
 
-Text_1A5375:: @ 81A5375
+Text_BagItemCanBeRegistered:: @ 81A5375
 	.string "An item in the BAG can be\n"
 	.string "registered to SELECT for easy use.$"
 
@@ -1091,7 +1093,7 @@ Text_1A61E5:: @ 81A61E5
 
 	.include "data/text/poke_mart.inc"
 
-Text_1A63C4:: @ 81A63C4
+Text_MonFlewAway:: @ 81A63C4
 	.string "The {STR_VAR_1} flew away!$"
 
 Text_1A63D6:: @ 81A63D6
@@ -1113,7 +1115,7 @@ Text_1A641B:: @ 81A641B
 Text_1A6448:: @ 81A6448
 	.string "Gyaoo!$"
 
-Text_1A644F:: @ 81A644F
+Text_MoveCanOnlyBeLearnedOnce:: @ 81A644F
 	.string "This move can be learned only\n"
 	.string "once. Is that okay?$"
 
@@ -1172,29 +1174,29 @@ EventScript_ResetAllMapFlags:: @ 81A6481
 
 EventScript_1A651A:: @ 81A651A
 	clearflag FLAG_HIDE_POSTGAME_GOSSIPERS
-	call EventScript_1A6551
+	call EventScript_ResetEliteFour
 	special sub_81130A8
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_1A653B
-	call EventScript_1A6541
+	call EventScript_ResetLegendaries
 	return
 
 EventScript_1A653B:: @ 81A653B
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 2
 	return
 
-EventScript_1A6541:: @ 81A6541
+EventScript_ResetLegendaries:: @ 81A6541
 	clearflag FLAG_LUGIA_FLEW_AWAY
 	clearflag FLAG_HO_OH_FLEW_AWAY
 	clearflag FLAG_DEOXYS_FLEW_AWAY
 	return
 
 gUnknown_81A654B:: @ 81A654B
-	call EventScript_1A6551
+	call EventScript_ResetEliteFour
 	end
 
-EventScript_1A6551:: @ 81A6551
+EventScript_ResetEliteFour:: @ 81A6551
 	clearflag FLAG_DEFEATED_LORELEI
 	clearflag FLAG_DEFEATED_BRUNO
 	clearflag FLAG_DEFEATED_AGATHA
@@ -1213,6 +1215,7 @@ EventScript_1A6551:: @ 81A6551
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
+@ DoEasyChatScreen?
 EventScript_1A6AC0:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
 	special sub_80FEE44
@@ -1527,12 +1530,12 @@ EventScript_1A774D:: @ 81A774D
 	waitmovement 0
 	applymovement VAR_0x8008, Movement_Delay48
 	waitmovement 0
-	msgbox Text_1A62D3
+	msgbox Text_YouKnowThoseWords
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
 	textcolor 3
 	special sub_80699BC
 	signmsg
-	msgbox Text_1A6359
+	msgbox Text_YouCanAccessMysteryGift
 	normalmsg
 	releaseall
 	end
@@ -1544,12 +1547,12 @@ EventScript_1A778A:: @ 81A778A
 EventScript_1A778C:: @ 81A778C
 	applymovement VAR_0x8008, Movement_FaceDown
 	waitmovement 0
-	msgbox Text_1A6265
+	msgbox Text_QuestionnaireThankYou
 	releaseall
 	end
 
 gUnknown_81A77A0:: @ 81A77A0
-	msgbox Text_1A5375, MSGBOX_SIGN
+	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
 	end
 
 EventScript_1A77A9:: @ 81A77A9
@@ -1608,213 +1611,7 @@ EventScript_1A7AE0:: @ 81A7AE0
 	release
 	end
 
-EventScript_1A7AE2:: @ 81A7AE2
-	msgbox Text_177460, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1A7B70
-	msgbox Text_17747B
-	goto_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, EventScript_1A7B3B
-	setflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	switch VAR_0x8004
-	case 0, EventScript_1A7B7A
-	case 1, EventScript_1A7D3E
-	case 2, EventScript_1A7E72
-	case 3, EventScript_1A7F4C
-	end
-
-EventScript_1A7B3B:: @ 81A7B3B
-	clearflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	switch VAR_0x8004
-	case 0, EventScript_1A7C5C
-	case 1, EventScript_1A7DD8
-	case 2, EventScript_1A7EDF
-	case 3, EventScript_1A8025
-	end
-
-EventScript_1A7B70:: @ 81A7B70
-	msgbox Text_177489
-	releaseall
-	end
-
-EventScript_1A7B7A:: @ 81A7B7A
-	setmetatile 22, 10, 645, 0
-	setmetatile 23, 10, 644, 0
-	setmetatile 24, 10, 644, 0
-	setmetatile 22, 11, 645, 0
-	setmetatile 23, 11, 644, 0
-	setmetatile 24, 11, 644, 0
-	setmetatile 27, 25, 645, 0
-	setmetatile 28, 25, 644, 0
-	setmetatile 29, 25, 644, 0
-	setmetatile 27, 26, 645, 0
-	setmetatile 28, 26, 644, 0
-	setmetatile 29, 26, 644, 0
-	setmetatile 32, 25, 645, 0
-	setmetatile 33, 25, 644, 0
-	setmetatile 34, 25, 644, 0
-	setmetatile 32, 26, 645, 0
-	setmetatile 33, 26, 644, 0
-	setmetatile 34, 26, 644, 0
-	setmetatile 31, 18, 760, 1
-	setmetatile 32, 18, 761, 1
-	setmetatile 33, 18, 762, 1
-	setmetatile 31, 19, 768, 1
-	setmetatile 32, 19, 769, 1
-	setmetatile 33, 19, 770, 1
-	setmetatile 5, 4, 845, 0
-	return
-
-EventScript_1A7C5C:: @ 81A7C5C
-	setmetatile 22, 10, 760, 1
-	setmetatile 23, 10, 761, 1
-	setmetatile 24, 10, 762, 1
-	setmetatile 22, 11, 768, 1
-	setmetatile 23, 11, 769, 1
-	setmetatile 24, 11, 770, 1
-	setmetatile 27, 25, 760, 1
-	setmetatile 28, 25, 761, 1
-	setmetatile 29, 25, 762, 1
-	setmetatile 27, 26, 768, 1
-	setmetatile 28, 26, 769, 1
-	setmetatile 29, 26, 770, 1
-	setmetatile 32, 25, 760, 1
-	setmetatile 33, 25, 761, 1
-	setmetatile 34, 25, 762, 1
-	setmetatile 32, 26, 768, 1
-	setmetatile 33, 26, 769, 1
-	setmetatile 34, 26, 770, 1
-	setmetatile 31, 18, 645, 0
-	setmetatile 32, 18, 644, 0
-	setmetatile 33, 18, 644, 0
-	setmetatile 31, 19, 645, 0
-	setmetatile 32, 19, 644, 0
-	setmetatile 33, 19, 644, 0
-	setmetatile 5, 4, 788, 0
-	return
-
-EventScript_1A7D3E:: @ 81A7D3E
-	setmetatile 24, 14, 645, 0
-	setmetatile 25, 14, 644, 0
-	setmetatile 26, 14, 644, 0
-	setmetatile 24, 15, 645, 0
-	setmetatile 25, 15, 644, 0
-	setmetatile 26, 15, 644, 0
-	setmetatile 10, 28, 677, 1
-	setmetatile 10, 29, 685, 1
-	setmetatile 10, 30, 645, 0
-	setmetatile 10, 31, 644, 0
-	setmetatile 10, 32, 693, 0
-	setmetatile 12, 4, 848, 1
-	setmetatile 12, 5, 856, 1
-	setmetatile 12, 6, 864, 1
-	setmetatile 12, 7, 872, 1
-	setmetatile 12, 8, 880, 1
-	setmetatile 2, 15, 845, 0
-	return
-
-EventScript_1A7DD8:: @ 81A7DD8
-	setmetatile 24, 14, 760, 1
-	setmetatile 25, 14, 761, 1
-	setmetatile 26, 14, 762, 1
-	setmetatile 24, 15, 768, 1
-	setmetatile 25, 15, 769, 1
-	setmetatile 26, 15, 770, 1
-	setmetatile 10, 28, 848, 1
-	setmetatile 10, 29, 856, 1
-	setmetatile 10, 30, 864, 1
-	setmetatile 10, 31, 872, 1
-	setmetatile 10, 32, 880, 1
-	setmetatile 12, 4, 677, 1
-	setmetatile 12, 5, 685, 1
-	setmetatile 12, 6, 645, 0
-	setmetatile 12, 7, 644, 0
-	setmetatile 12, 8, 693, 0
-	setmetatile 2, 15, 788, 0
-	return
-
-EventScript_1A7E72:: @ 81A7E72
-	setmetatile 17, 11, 645, 0
-	setmetatile 18, 11, 644, 0
-	setmetatile 19, 11, 644, 0
-	setmetatile 17, 12, 645, 0
-	setmetatile 18, 12, 644, 0
-	setmetatile 19, 12, 644, 0
-	setmetatile 21, 4, 848, 1
-	setmetatile 21, 5, 856, 1
-	setmetatile 21, 6, 864, 1
-	setmetatile 21, 7, 872, 1
-	setmetatile 21, 8, 880, 1
-	setmetatile 12, 4, 845, 0
-	return
-
-EventScript_1A7EDF:: @ 81A7EDF
-	setmetatile 17, 11, 760, 1
-	setmetatile 18, 11, 761, 1
-	setmetatile 19, 11, 762, 1
-	setmetatile 17, 12, 768, 1
-	setmetatile 18, 12, 769, 1
-	setmetatile 19, 12, 770, 1
-	setmetatile 21, 4, 677, 1
-	setmetatile 21, 5, 685, 1
-	setmetatile 21, 6, 645, 0
-	setmetatile 21, 7, 644, 0
-	setmetatile 21, 8, 693, 0
-	setmetatile 12, 4, 788, 0
-	return
-
-EventScript_1A7F4C:: @ 81A7F4C
-	setmetatile 33, 20, 760, 1
-	setmetatile 34, 20, 761, 1
-	setmetatile 35, 20, 762, 1
-	setmetatile 33, 21, 852, 1
-	setmetatile 34, 21, 853, 1
-	setmetatile 35, 21, 854, 1
-	setmetatile 16, 26, 848, 1
-	setmetatile 16, 27, 856, 1
-	setmetatile 16, 28, 866, 1
-	setmetatile 16, 29, 874, 1
-	setmetatile 16, 30, 882, 1
-	setmetatile 12, 8, 677, 1
-	setmetatile 12, 9, 685, 1
-	setmetatile 12, 10, 647, 0
-	setmetatile 12, 11, 646, 0
-	setmetatile 12, 12, 688, 0
-	setmetatile 20, 22, 647, 0
-	setmetatile 21, 22, 646, 0
-	setmetatile 22, 22, 646, 0
-	setmetatile 20, 23, 647, 0
-	setmetatile 21, 23, 646, 0
-	setmetatile 22, 23, 646, 0
-	setmetatile 24, 28, 847, 0
-	setmetatile 27, 4, 847, 0
-	return
-
-EventScript_1A8025:: @ 81A8025
-	setmetatile 33, 20, 647, 0
-	setmetatile 34, 20, 646, 0
-	setmetatile 35, 20, 646, 0
-	setmetatile 33, 21, 647, 0
-	setmetatile 34, 21, 646, 0
-	setmetatile 35, 21, 646, 0
-	setmetatile 16, 26, 677, 1
-	setmetatile 16, 27, 685, 1
-	setmetatile 16, 28, 647, 0
-	setmetatile 16, 29, 646, 0
-	setmetatile 16, 30, 688, 0
-	setmetatile 12, 8, 848, 1
-	setmetatile 12, 9, 856, 1
-	setmetatile 12, 10, 866, 1
-	setmetatile 12, 11, 874, 1
-	setmetatile 12, 12, 882, 1
-	setmetatile 20, 22, 760, 1
-	setmetatile 21, 22, 761, 1
-	setmetatile 22, 22, 762, 1
-	setmetatile 20, 23, 852, 1
-	setmetatile 21, 23, 853, 1
-	setmetatile 22, 23, 854, 1
-	setmetatile 24, 28, 790, 0
-	setmetatile 27, 4, 790, 0
-	return
+	.include "data/scripts/pokemon_mansion.inc"
 
 EventScript_1A80FE:: @ 81A80FE
 	lockall
@@ -2041,7 +1838,7 @@ EventScript_AfterWhiteOutHeal:: @ 81A8D97
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
 	call_if_unset FLAG_DEFEATED_BROCK, EventScript_1A8DC6
 	call_if_set FLAG_DEFEATED_BROCK, EventScript_1A8DCF
-	applymovement VAR_LAST_TALKED, Movement_1A666C
+	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	fadedefaultbgm
 	releaseall

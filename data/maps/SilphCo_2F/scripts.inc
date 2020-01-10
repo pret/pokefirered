@@ -7,8 +7,8 @@ SilphCo_2F_OnLoad:: @ 8161647
 	call_if_unset FLAG_SILPH_2F_DOOR_2, EventScript_Close2FDoor2
 	end
 
-SilphCo_2F_EventScript_16165A:: @ 816165A
-	goto EventScript_1C4816
+SilphCo_2F_EventScript_ThunderWaveTutor:: @ 816165A
+	goto EventScript_ThunderWaveTutor
 
 EventScript_16165F:: @ 816165F
 	end

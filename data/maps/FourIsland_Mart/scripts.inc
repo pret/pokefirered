@@ -10,7 +10,7 @@ FourIsland_Mart_EventScript_171CAE:: @ 8171CAE
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_171CD4
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

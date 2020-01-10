@@ -192,8 +192,8 @@ EventScript_165ADB:: @ 8165ADB
 	release
 	end
 
-ViridianCity_EventScript_165AF0:: @ 8165AF0
-	goto EventScript_1C4A1E
+ViridianCity_EventScript_DreamEaterTutor:: @ 8165AF0
+	goto EventScript_DreamEaterTutor
 	end
 
 ViridianCity_EventScript_165AF6:: @ 8165AF6

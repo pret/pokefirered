@@ -10,7 +10,7 @@ SevenIsland_Mart_EventScript_170B31:: @ 8170B31
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_170B58
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

@@ -213,7 +213,7 @@ static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, bool8 isVar)
     }
     else
     {
-        if (idx < VAR_0x4030 - VARS_START)
+        if (idx < VAR_ICE_STEP_COUNT - VARS_START)
             return FALSE;
         if (idx >= VAR_MAP_SCENE_PALLET_TOWN_OAK - VARS_START && idx < VAR_PORTHOLE - VARS_START)
             return FALSE;

@@ -105,12 +105,12 @@ EventScript_1652C0:: @ 81652C0
 EventScript_16533A:: @ 816533A
 	setflag FLAG_DEOXYS_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_DEOXYS
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 EventScript_165348:: @ 8165348
 	setvar VAR_0x8004, SPECIES_DEOXYS
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
 Movement_165353:: @ 8165353

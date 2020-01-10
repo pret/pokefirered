@@ -24,8 +24,8 @@ CeladonCity_EventScript_166CB6:: @ 8166CB6
 	msgbox gUnknown_817FFC5, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166CBF:: @ 8166CBF
-	goto EventScript_1C4A86
+CeladonCity_EventScript_SoftboiledTutor:: @ 8166CBF
+	goto EventScript_SoftboiledTutor
 	end
 
 CeladonCity_EventScript_166CC5:: @ 8166CC5

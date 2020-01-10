@@ -10,7 +10,7 @@ ThreeIsland_Mart_EventScript_17188D:: @ 817188D
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_1718B4
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

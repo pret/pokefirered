@@ -12,7 +12,7 @@ gText_SavingDontTurnOffThePower:: @ 81C5625
 gText_PlayerSavedTheGame:: @ 81C5647
 	.string "{PLAYER} saved the game.$"
 
-gUnknown_81C565A::
+gText_SaveFailed::
 	.string "セーブに　しっぱい　しました‥$"
 
 gText_DifferentGameFile:: @ 81C566A

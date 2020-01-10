@@ -22,7 +22,7 @@ CeladonCity_DepartmentStore_4F_EventScript_16BC0A:: @ 816BC0A
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16BC30
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

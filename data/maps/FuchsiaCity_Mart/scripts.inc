@@ -18,7 +18,7 @@ FuchsiaCity_Mart_EventScript_16D4F3:: @ 816D4F3
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16D518
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

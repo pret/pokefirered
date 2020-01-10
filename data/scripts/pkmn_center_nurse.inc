@@ -45,7 +45,7 @@ EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom:: @ 81A65EC
 EventScript_PkmnCenterNurse_ReturnPkmn:: @ 81A661D
 	message Text_RestoredPkmnToFullHealth
 	waitmessage
-	applymovement VAR_LAST_TALKED, Movement_1A666C
+	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	msgbox Text_WeHopeToSeeYouAgain
 	return
@@ -56,7 +56,7 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom:: @ 81A6636
 	setflag FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER
 	message Text_PlayerIsPlayingRightNowGoForIt
 	waitmessage
-	applymovement VAR_LAST_TALKED, Movement_1A666C
+	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	msgbox Text_WeHopeToSeeYouAgain
 	return
@@ -65,7 +65,7 @@ EventScript_PkmnCenterNurse_Goodbye:: @ 81A6663
 	msgbox Text_WeHopeToSeeYouAgain
 	return
 
-Movement_1A666C:: @ 81A666C
+Movement_Bow:: @ 81A666C
 	nurse_joy_bow
 	delay_4
 	step_end

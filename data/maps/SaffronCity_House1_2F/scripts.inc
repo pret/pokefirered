@@ -26,7 +26,7 @@ SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	faceplayer
 	checkitem ITEM_POKE_DOLL, 1
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1C4CF6
+	goto_if_eq EventScript_MimicTutor
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq EventScript_16EBB7

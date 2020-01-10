@@ -9,7 +9,7 @@ SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
-	message Text_1A535C
+	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 6
 	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos

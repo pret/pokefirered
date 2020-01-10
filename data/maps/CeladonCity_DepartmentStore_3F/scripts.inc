@@ -1,8 +1,8 @@
 CeladonCity_DepartmentStore_3F_MapScripts:: @ 816BB84
 	.byte 0
 
-CeladonCity_DepartmentStore_3F_EventScript_16BB85:: @ 816BB85
-	goto EventScript_1C4C26
+CeladonCity_DepartmentStore_3F_EventScript_CounterTutor:: @ 816BB85
+	goto EventScript_CounterTutor
 	end
 
 CeladonCity_DepartmentStore_3F_EventScript_16BB8B:: @ 816BB8B

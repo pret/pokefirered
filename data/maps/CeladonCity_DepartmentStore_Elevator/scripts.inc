@@ -7,7 +7,7 @@ CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
-	message Text_1A535C
+	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 3
 	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos

@@ -21,7 +21,7 @@ Route12_EventScript_168014:: @ 8168014
 	msgbox gUnknown_81853CC, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16808D
-	call EventScript_1A924B
+	call EventScript_AwakenSnorlax
 	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
 	waitse
 	playmoncry SPECIES_SNORLAX, 2

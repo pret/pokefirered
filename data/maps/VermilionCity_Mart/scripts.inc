@@ -18,7 +18,7 @@ VermilionCity_Mart_EventScript_16B666:: @ 816B666
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16B68C
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

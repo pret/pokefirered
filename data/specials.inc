@@ -8,7 +8,7 @@
 .set __special__, 0
 	.align 2
 gSpecials:: @ 815FD60
-	def_special sp000_heal_pokemon
+	def_special HealPlayerParty
 	def_special SetCableClubWarp
 	def_special DoCableClubWarp
 	def_special sub_807E704
@@ -49,7 +49,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
-	def_special sub_80A0334
+	def_special ChooseHalfPartyForBattle
 	def_special sp02A_crash_sound
 	def_special nullsub_75
 	def_special nullsub_75
@@ -69,7 +69,7 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_GetTrainerEyeRematchFlag
 	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
-	def_special CheckForAlivePartyMons
+	def_special HasEnoughMonsForDoubleBattle
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

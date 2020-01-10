@@ -145,7 +145,7 @@ SECTIONS {
         src/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
-        asm/script_pokemon_util_80A0058.o(.text);
+        src/script_pokemon_util_80A0058.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         asm/pc_screen_effect.o(.text);

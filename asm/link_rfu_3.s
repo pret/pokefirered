@@ -3272,7 +3272,7 @@ sub_81173C0: @ 81173C0
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl SavePlayerParty
 	bl LoadPlayerBag
 	ldr r5, _0811742C @ =gLinkPlayers
@@ -3660,7 +3660,7 @@ _081177A0:
 	ldr r0, _081177C4 @ =gBlockSendBuffer
 	movs r1, 0x1
 	bl sub_8117594
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl SavePlayerParty
 	bl LoadPlayerBag
 	movs r0, 0x1
@@ -3673,7 +3673,7 @@ _081177A0:
 _081177C4: .4byte gBlockSendBuffer
 _081177C8:
 	bl CleanupOverworldWindowsAndTilemaps
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl SavePlayerParty
 	bl LoadPlayerBag
 	ldr r0, _081177EC @ =gBlockSendBuffer
@@ -3689,7 +3689,7 @@ _081177C8:
 _081177EC: .4byte gBlockSendBuffer
 _081177F0:
 	bl CleanupOverworldWindowsAndTilemaps
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl SavePlayerParty
 	bl LoadPlayerBag
 	ldr r0, _08117814 @ =gBlockSendBuffer

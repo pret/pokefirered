@@ -901,7 +901,7 @@ static void CB2_EndTrainerBattle(void)
             gSpecialVar_Result = 1;
             if (gUnknown_20386CC & 1)
             {
-                sp000_heal_pokemon();
+                HealPlayerParty();
             }
             else
             {

@@ -19,7 +19,7 @@ sub_8054BC8: @ 8054BC8
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl RemoveMoney
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	bl sub_8054DD8
 	bl sub_80554BC
 	bl WarpIntoMap

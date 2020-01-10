@@ -29,7 +29,7 @@ EventScript_170A97:: @ 8170A97
 	compare_var_to_value VAR_RESULT, 2
 	call_if eq, EventScript_170B17
 	closemessage
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	applymovement 255, Movement_170B28
 	waitmovement 0
 	special LoadPlayerParty

@@ -150,5 +150,7 @@ void sub_8055738(u8 loc);
 
 void sub_8056078(void *, void *);
 void sub_805546C(u8 a0);
+bool32 sub_80582E0(void);
+bool32 sub_8058274(void);
 
 #endif //GUARD_OVERWORLD_H

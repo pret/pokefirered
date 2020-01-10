@@ -5,11 +5,11 @@ Route24_EventScript_168620:: @ 8168620
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_ROUTE24, 1
-	goto_if eq, EventScript_168656
+	goto_if_eq EventScript_168656
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16864C
+	goto_if_eq EventScript_16864C
 	call EventScript_1686B9
 	release
 	end
@@ -39,28 +39,27 @@ Route24_EventScript_16866C:: @ 816866C
 EventScript_168678:: @ 8168678
 	textcolor 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_1686FD
+	call_if_eq EventScript_1686FD
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_168708
+	call_if_eq EventScript_168708
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_8188C3C
 	checkitemspace ITEM_NUGGET, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_168713
+	goto_if_eq EventScript_168713
 	call EventScript_1686B9
 	releaseall
 	end
 
 EventScript_1686B9:: @ 81686B9
-	additem ITEM_NUGGET, 1
-	giveitemfanfaremsg gUnknown_8188C93, ITEM_NUGGET
+	giveitem_msg gUnknown_8188C93, ITEM_NUGGET
 	message Text_188CDB
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
 	setvar VAR_LAST_TALKED, 1
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_6, 0, Text_188DDC
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_6, Text_188DDC
 	msgbox gUnknown_8188DF1
 	setvar VAR_MAP_SCENE_ROUTE24, 1
 	return
@@ -81,7 +80,7 @@ EventScript_168713:: @ 8168713
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_168743
 	waitmovement 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_168733
+	call_if_eq EventScript_168733
 	release
 	end
 

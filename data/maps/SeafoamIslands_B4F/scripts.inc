@@ -7,34 +7,28 @@ SeafoamIslands_B4F_MapScripts:: @ 816302E
 	.byte 0
 
 SeafoamIslands_B4F_OnResume:: @ 8163048
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_163052
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_163052
 	end
 
 EventScript_163052:: @ 8163052
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 SeafoamIslands_B4F_OnTransition:: @ 8163066
-	checkflag FLAG_FOUGHT_ARTICUNO
-	call_if FALSE, EventScript_1630AD
-	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
-	call_if FALSE, EventScript_163082
-	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
-	call_if TRUE, EventScript_1630A9
+	call_if_unset FLAG_FOUGHT_ARTICUNO, EventScript_1630AD
+	call_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, EventScript_163082
+	call_if_set FLAG_STOPPED_SEAFOAM_B4F_CURRENT, EventScript_1630A9
 	end
 
 EventScript_163082:: @ 8163082
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if FALSE, EventScript_163169
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if FALSE, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, EventScript_163169
 	compare VAR_TEMP_2, 2
-	call_if eq, EventScript_1630A5
+	call_if_eq EventScript_1630A5
 	return
 
 EventScript_1630A5:: @ 81630A5
@@ -51,12 +45,10 @@ EventScript_1630AD:: @ 81630AD
 
 SeafoamIslands_B4F_OnLoad:: @ 81630B1
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if FALSE, EventScript_163169
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if FALSE, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, EventScript_163169
 	compare VAR_TEMP_2, 2
-	goto_if eq, EventScript_1630D4
+	goto_if_eq EventScript_1630D4
 	end
 
 EventScript_1630D4:: @ 81630D4
@@ -95,17 +87,15 @@ Movement_16311D:: @ 816311D
 EventScript_163121:: @ 8163121
 	lockall
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_1
-	call_if FALSE, EventScript_163169
-	checkflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
-	call_if FALSE, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_1, EventScript_163169
+	call_if_unset FLAG_HIDE_SEAFOAM_B4F_BOULDER_2, EventScript_163169
 	compare VAR_TEMP_2, 2
-	goto_if eq, EventScript_163185
+	goto_if_eq EventScript_163185
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare VAR_0x8008, 9
-	call_if lt, EventScript_16316F
+	call_if_lt EventScript_16316F
 	compare VAR_0x8008, 9
-	call_if ge, EventScript_16317A
+	call_if_ge EventScript_16317A
 	special sub_805D1A8
 	setvar VAR_TEMP_1, 0
 	releaseall
@@ -165,7 +155,7 @@ Movement_1631AA:: @ 81631AA
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -184,11 +174,11 @@ SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_16320F
+	goto_if_eq EventScript_16320F
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_163218
+	goto_if_eq EventScript_163218
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_163218
+	goto_if_eq EventScript_163218
 	setflag FLAG_FOUGHT_ARTICUNO
 	release
 	end

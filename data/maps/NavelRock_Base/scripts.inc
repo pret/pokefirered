@@ -4,10 +4,8 @@ NavelRock_Base_MapScripts:: @ 81650E7
 	.byte 0
 
 NavelRock_Base_OnTransition:: @ 81650F2
-	checkflag FLAG_FOUGHT_LUGIA
-	call_if TRUE, EventScript_165105
-	checkflag FLAG_FOUGHT_LUGIA
-	call_if FALSE, EventScript_165109
+	call_if_set FLAG_FOUGHT_LUGIA, EventScript_165105
+	call_if_unset FLAG_FOUGHT_LUGIA, EventScript_165109
 	end
 
 EventScript_165105:: @ 8165105
@@ -15,27 +13,25 @@ EventScript_165105:: @ 8165105
 	return
 
 EventScript_165109:: @ 8165109
-	checkflag FLAG_LUGIA_FLEW_AWAY
-	goto_if TRUE, EventScript_1A77A9
+	goto_if_set FLAG_LUGIA_FLEW_AWAY, EventScript_1A77A9
 	clearflag FLAG_HIDE_LUGIA
 	return
 
 NavelRock_Base_OnResume:: @ 8165116
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_165120
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_165120
 	end
 
 EventScript_165120:: @ 8165120
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject 1
 	return
 
 NavelRock_Base_EventScript_165134:: @ 8165134
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -70,11 +66,11 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_1651D9
+	goto_if_eq EventScript_1651D9
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_1651E7
+	goto_if_eq EventScript_1651E7
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_1651E7
+	goto_if_eq EventScript_1651E7
 	setflag FLAG_FOUGHT_LUGIA
 	release
 	end

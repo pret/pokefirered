@@ -4,10 +4,8 @@ NavelRock_Summit_MapScripts:: @ 8164F9F
 	.byte 0
 
 NavelRock_Summit_OnTransition:: @ 8164FAA
-	checkflag FLAG_FOUGHT_HO_OH
-	call_if TRUE, EventScript_164FBD
-	checkflag FLAG_FOUGHT_HO_OH
-	call_if FALSE, EventScript_164FC6
+	call_if_set FLAG_FOUGHT_HO_OH, EventScript_164FBD
+	call_if_unset FLAG_FOUGHT_HO_OH, EventScript_164FC6
 	end
 
 EventScript_164FBD:: @ 8164FBD
@@ -17,28 +15,26 @@ EventScript_164FBD:: @ 8164FBD
 
 EventScript_164FC6:: @ 8164FC6
 	setvar VAR_TEMP_1, 1
-	checkflag FLAG_HO_OH_FLEW_AWAY
-	goto_if TRUE, EventScript_1A77A9
+	goto_if_set FLAG_HO_OH_FLEW_AWAY, EventScript_1A77A9
 	setvar VAR_TEMP_1, 0
 	clearflag FLAG_HIDE_HO_OH
 	return
 
 NavelRock_Summit_OnResume:: @ 8164FDD
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_164FE7
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_164FE7
 	end
 
 EventScript_164FE7:: @ 8164FE7
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject 1
 	return
 
 NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lockall
 	setvar VAR_TEMP_1, 1
@@ -75,11 +71,11 @@ NavelRock_Summit_EventScript_164FFB:: @ 8164FFB
 	setvar VAR_LAST_TALKED, 1
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_1650B4
+	goto_if_eq EventScript_1650B4
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_1650C2
+	goto_if_eq EventScript_1650C2
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_1650C2
+	goto_if_eq EventScript_1650C2
 	setflag FLAG_FOUGHT_HO_OH
 	releaseall
 	end

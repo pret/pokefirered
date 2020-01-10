@@ -2,9 +2,8 @@ PewterCity_PokemonCenter_1F_EventScript_1BEE16:: @ 81BEE16
 	lock
 	faceplayer
 	compare VAR_TEMP_1, 1
-	goto_if eq, EventScript_1BEE3A
-	checkflag FLAG_SYS_SET_TRAINER_CARD_PROFILE
-	goto_if TRUE, EventScript_1BEECD
+	goto_if_eq EventScript_1BEE3A
+	goto_if_set FLAG_SYS_SET_TRAINER_CARD_PROFILE, EventScript_1BEECD
 	msgbox Text_1BEF88
 	goto EventScript_1BEE44
 	end
@@ -104,11 +103,11 @@ EventScript_1BEF5A:: @ 81BEF5A
 	lock
 	faceplayer
 	compare VAR_0x8004, 0
-	goto_if eq, EventScript_1BEF3F
+	goto_if_eq EventScript_1BEF3F
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BEE9E
+	goto_if_eq EventScript_1BEE9E
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BEEA8
+	goto_if_eq EventScript_1BEEA8
 	end
 
 Text_1BEF88:: @ 81BEF88

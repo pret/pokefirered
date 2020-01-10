@@ -3,11 +3,9 @@ RocketHideout_Elevator_MapScripts:: @ 81614D8
 
 RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	lockall
-	checkflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
-	goto_if FALSE, EventScript_16161B
+	goto_if_unset FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT, EventScript_16161B
 	setvar VAR_0x8004, 2
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
@@ -54,7 +52,7 @@ EventScript_161591:: @ 8161591
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B1F, 255, 24, 25
 	compare VAR_ELEVATOR_FLOOR, 3
-	goto_if eq, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 3
 	goto EventScript_161609
@@ -66,7 +64,7 @@ EventScript_1615B9:: @ 81615B9
 	setvar VAR_0x8006, 2
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B2F, 255, 28, 16
 	compare VAR_ELEVATOR_FLOOR, 2
-	goto_if eq, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 2
 	goto EventScript_161609
@@ -78,7 +76,7 @@ EventScript_1615E1:: @ 81615E1
 	setvar VAR_0x8006, 0
 	setdynamicwarp MAP_ROCKET_HIDEOUT_B4F, 255, 20, 23
 	compare VAR_ELEVATOR_FLOOR, 0
-	goto_if eq, EventScript_161609
+	goto_if_eq EventScript_161609
 	call EventScript_16160E
 	setvar VAR_ELEVATOR_FLOOR, 0
 	goto EventScript_161609

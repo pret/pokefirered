@@ -12,7 +12,7 @@ PewterCity_Mart_EventScript_16A6D7:: @ 816A6D7
 PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_MayIHelpYou

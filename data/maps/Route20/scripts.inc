@@ -3,10 +3,8 @@ Route20_MapScripts:: @ 816823B
 	.byte 0
 
 Route20_OnTransition:: @ 8168241
-	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
-	call_if FALSE, EventScript_168254
-	checkflag FLAG_STOPPED_SEAFOAM_B4F_CURRENT
-	call_if FALSE, EventScript_16826D
+	call_if_unset FLAG_STOPPED_SEAFOAM_B3F_CURRENT, EventScript_168254
+	call_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, EventScript_16826D
 	end
 
 EventScript_168254:: @ 8168254

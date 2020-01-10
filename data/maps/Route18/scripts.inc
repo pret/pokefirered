@@ -5,7 +5,7 @@ Route18_MapScripts:: @ 81681F6
 
 Route18_OnTransition:: @ 8168201
 	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if eq, EventScript_16820D
+	call_if_eq EventScript_16820D
 	end
 
 EventScript_16820D:: @ 816820D

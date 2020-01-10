@@ -5,8 +5,7 @@ Route16_MapScripts:: @ 81680E5
 	.byte 0
 
 Route16_OnResume:: @ 81680F5
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_1680FF
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_1680FF
 	end
 
 EventScript_1680FF:: @ 81680FF
@@ -15,7 +14,7 @@ EventScript_1680FF:: @ 81680FF
 
 Route16_OnTransition:: @ 8168103
 	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if eq, EventScript_16810F
+	call_if_eq EventScript_16810F
 	end
 
 EventScript_16810F:: @ 816810F
@@ -33,15 +32,14 @@ EventScript_16811D:: @ 816811D
 Route16_EventScript_168121:: @ 8168121
 	lock
 	faceplayer
-	checkflag FLAG_GOT_POKE_FLUTE
-	goto_if FALSE, EventScript_1681A3
+	goto_if_unset FLAG_GOT_POKE_FLUTE, EventScript_1681A3
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	msgbox gUnknown_81853CC, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_168197
+	goto_if_eq EventScript_168197
 	call EventScript_1A924B
 	setwildbattle SPECIES_SNORLAX, 30, ITEM_NONE
 	waitse
@@ -54,11 +52,11 @@ Route16_EventScript_168121:: @ 8168121
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_168199
+	goto_if_eq EventScript_168199
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_168199
+	goto_if_eq EventScript_168199
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_168199
+	goto_if_eq EventScript_168199
 	release
 	end
 

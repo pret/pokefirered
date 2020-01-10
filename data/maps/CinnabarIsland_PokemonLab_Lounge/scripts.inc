@@ -10,17 +10,16 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	faceplayer
 	setvar VAR_0x8008, 6
 	call EventScript_1A8CAD
-	checkflag FLAG_DID_ESPHERE_TRADE
-	goto_if TRUE, EventScript_16E334
+	goto_if_set FLAG_DID_ESPHERE_TRADE, EventScript_16E334
 	msgbox gUnknown_81A59FE, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16E31C
+	goto_if_eq EventScript_16E31C
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_16E31C
+	goto_if_ge EventScript_16E31C
 	call EventScript_1A8CC9
 	compare VAR_RESULT, VAR_0x8009
-	goto_if ne, EventScript_16E326
+	goto_if_ne EventScript_16E326
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A5A9D
 	setflag FLAG_DID_ESPHERE_TRADE
@@ -50,21 +49,20 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
-	checkflag FLAG_DID_TANGENY_TRADE
-	goto_if TRUE, EventScript_16E3D4
+	goto_if_set FLAG_DID_TANGENY_TRADE, EventScript_16E3D4
 	msgbox gUnknown_81A5AD6, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16E3BC
+	goto_if_eq EventScript_16E3BC
 	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_16E3BC
+	goto_if_ge EventScript_16E3BC
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	compare VAR_RESULT, VAR_0x8009
-	goto_if ne, EventScript_16E3C6
+	goto_if_ne EventScript_16E3C6
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon

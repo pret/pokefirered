@@ -4,8 +4,7 @@ ViridianCity_Mart_MapScripts:: @ 816A1D3
 	.byte 0
 
 ViridianCity_Mart_OnLoad:: @ 816A1DE
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_16A1E8
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_16A1E8
 	end
 
 EventScript_16A1E8:: @ 816A1E8
@@ -29,8 +28,7 @@ EventScript_16A205:: @ 816A205
 	waitmovement 0
 	msgbox gUnknown_819023A
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	additem ITEM_OAKS_PARCEL, 1
-	giveitemfanfaremsg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, MUS_FAN5
+	giveitem_msg gUnknown_8190289, ITEM_OAKS_PARCEL, 1, MUS_FAN5
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
 	releaseall
 	end
@@ -55,10 +53,10 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	goto_if eq, EventScript_16A2A4
+	goto_if_eq EventScript_16A2A4
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A298

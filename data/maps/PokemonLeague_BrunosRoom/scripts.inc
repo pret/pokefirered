@@ -11,10 +11,9 @@ PokemonLeague_BrunosRoom_OnResume:: @ 816269A
 	end
 
 PokemonLeague_BrunosRoom_OnLoad:: @ 81626A5
-	checkflag FLAG_DEFEATED_BRUNO
-	call_if TRUE, EventScript_1626C0
+	call_if_set FLAG_DEFEATED_BRUNO, EventScript_1626C0
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 2
-	call_if eq, EventScript_1626BA
+	call_if_eq EventScript_1626BA
 	end
 
 EventScript_1626BA:: @ 81626BA
@@ -48,20 +47,15 @@ PokemonLeague_BrunosRoom_EventScript_1626EC:: @ 81626EC
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_DEFEATED_BRUNO
-	goto_if TRUE, EventScript_162779
+	goto_if_set FLAG_DEFEATED_BRUNO, EventScript_162779
 	famechecker FAMECHECKER_BRUNO, 0
 	famechecker FAMECHECKER_BRUNO, 1
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if FALSE, EventScript_162751
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if TRUE, EventScript_16275A
+	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162751
+	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_16275A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162763
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_16276E
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162763
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_16276E
 	clearflag FLAG_TEMP_5
 	goto EventScript_1627B0
 
@@ -77,24 +71,24 @@ EventScript_16275A:: @ 816275A
 	return
 
 EventScript_162763:: @ 8162763
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_BRUNO, 0, Text_178409
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_BRUNO, Text_178409
 	return
 
 EventScript_16276E:: @ 816276E
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_BRUNO_2, 0, Text_178409
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_BRUNO_2, Text_178409
 	return
 
 EventScript_162779:: @ 8162779
 	msgbox gUnknown_8178420
 	closemessage
 	compare VAR_FACING, DIR_NORTH
-	call_if eq, EventScript_1627FA
+	call_if_eq EventScript_1627FA
 	compare VAR_FACING, DIR_SOUTH
-	call_if eq, EventScript_1627EF
+	call_if_eq EventScript_1627EF
 	compare VAR_FACING, DIR_WEST
-	call_if eq, EventScript_162805
+	call_if_eq EventScript_162805
 	compare VAR_FACING, DIR_EAST
-	call_if eq, EventScript_162805
+	call_if_eq EventScript_162805
 	release
 	end
 
@@ -104,13 +98,13 @@ EventScript_1627B0:: @ 81627B0
 	msgbox gUnknown_8178420
 	closemessage
 	compare VAR_FACING, DIR_NORTH
-	call_if eq, EventScript_1627FA
+	call_if_eq EventScript_1627FA
 	compare VAR_FACING, DIR_SOUTH
-	call_if eq, EventScript_1627EF
+	call_if_eq EventScript_1627EF
 	compare VAR_FACING, DIR_WEST
-	call_if eq, EventScript_162805
+	call_if_eq EventScript_162805
 	compare VAR_FACING, DIR_EAST
-	call_if eq, EventScript_162805
+	call_if_eq EventScript_162805
 	release
 	end
 

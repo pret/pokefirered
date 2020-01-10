@@ -12,11 +12,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB7F:: @ 816CB7F
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	lock
 	faceplayer
-	checkflag FLAG_GOT_COIN_CASE
-	goto_if FALSE, EventScript_16CD99
+	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CBB2
@@ -110,10 +109,10 @@ EventScript_16CC65:: @ 816CC65
 	getspeciesname 0, VAR_TEMP_1
 	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CC10
+	goto_if_eq EventScript_16CC10
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
-	goto_if lt, EventScript_16CDA5
+	goto_if_lt EventScript_16CDA5
 	textcolor 3
 	switch VAR_TEMP_1
 	case SPECIES_ABRA, EventScript_16CCD4
@@ -126,10 +125,10 @@ EventScript_16CC65:: @ 816CC65
 
 EventScript_16CCD4:: @ 816CCD4
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 9, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 9, ITEM_NONE
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 7, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 7, ITEM_NONE
 	.endif
 	.endif
 	goto EventScript_16CD52
@@ -137,10 +136,10 @@ EventScript_16CCD4:: @ 816CCD4
 
 EventScript_16CCE9:: @ 816CCE9
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 8, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 8, ITEM_NONE
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 12, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 12, ITEM_NONE
 	.endif
 	.endif
 	goto EventScript_16CD52
@@ -148,43 +147,43 @@ EventScript_16CCE9:: @ 816CCE9
 
 EventScript_16CCFE:: @ 816CCFE
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 18, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 18, ITEM_NONE
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 24, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 24, ITEM_NONE
 	.endif
 	.endif
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD13:: @ 816CD13
-	givemon VAR_TEMP_1, 25, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 25, ITEM_NONE
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD28:: @ 816CD28
 	.ifdef FIRERED
-	givemon VAR_TEMP_1, 26, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 26, ITEM_NONE
 	.else
 	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 18, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 18, ITEM_NONE
 	.endif
 	.endif
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD3D:: @ 816CD3D
-	givemon VAR_TEMP_1, 18, ITEM_NONE, 0, 0, 0
+	givemon VAR_TEMP_1, 18, ITEM_NONE
 	goto EventScript_16CD52
 	end
 
 EventScript_16CD52:: @ 816CD52
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CDB3
+	goto_if_eq EventScript_16CDB3
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16CDE0
+	goto_if_eq EventScript_16CDE0
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_16CD74
+	goto_if_eq EventScript_16CD74
 	end
 
 EventScript_16CD74:: @ 816CD74
@@ -195,7 +194,7 @@ EventScript_16CD74:: @ 816CD74
 	end
 
 EventScript_16CD83:: @ 816CD83
-	countpokemon
+	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	call EventScript_1A74EB
@@ -223,7 +222,7 @@ EventScript_16CDB3:: @ 816CDB3
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16CD83
+	goto_if_eq EventScript_16CD83
 	goto EventScript_16CC10
 	end
 
@@ -237,7 +236,7 @@ EventScript_16CDE0:: @ 816CDE0
 	waitfanfare
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CE12
+	goto_if_eq EventScript_16CE12
 	call EventScript_1A8C33
 	goto EventScript_16CE12
 	end
@@ -250,11 +249,10 @@ EventScript_16CE12:: @ 816CE12
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	lock
 	faceplayer
-	checkflag FLAG_GOT_COIN_CASE
-	goto_if FALSE, EventScript_16CD99
+	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CE47
@@ -312,7 +310,7 @@ EventScript_16CEF5:: @ 816CEF5
 EventScript_16CF09:: @ 816CF09
 	msgbox gUnknown_81970B2, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CC10
+	goto_if_eq EventScript_16CC10
 	goto EventScript_16CF3F
 	end
 
@@ -320,7 +318,7 @@ EventScript_16CF22:: @ 816CF22
 	getitemname 0, VAR_TEMP_1
 	msgbox gUnknown_819709D, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CC10
+	goto_if_eq EventScript_16CC10
 	goto EventScript_16CF3F
 	end
 
@@ -328,10 +326,10 @@ EventScript_16CF3F:: @ 816CF3F
 	getitemname 0, VAR_TEMP_1
 	checkcoins VAR_RESULT
 	compare VAR_RESULT, VAR_TEMP_2
-	goto_if lt, EventScript_16CDA5
+	goto_if_lt EventScript_16CDA5
 	checkitemspace VAR_TEMP_1, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16CF79
+	goto_if_eq EventScript_16CF79
 	takecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	giveitem VAR_TEMP_1
@@ -348,11 +346,10 @@ EventScript_16CF79:: @ 816CF79
 CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	lock
 	faceplayer
-	checkflag FLAG_GOT_COIN_CASE
-	goto_if FALSE, EventScript_16CD99
+	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CFB2

@@ -68,7 +68,7 @@ gStdScripts:: @ 8160450
 	.4byte Std_MsgboxAutoclose
 	.4byte Std_ObtainDecoration
 	.4byte Std_PutItemAway
-	.4byte gStdScript_ItemMessageAndFanfare
+	.4byte Std_ReceivedItem
 gStdScriptsEnd::
 
 	.include "data/maps/UnknownMap_00_00/scripts.inc"
@@ -1175,7 +1175,7 @@ EventScript_1A651A:: @ 81A651A
 	special sub_81130A8
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, 0
-	call_if eq, EventScript_1A653B
+	call_if_eq EventScript_1A653B
 	call EventScript_1A6541
 	return
 
@@ -1258,7 +1258,7 @@ gUnknown_81A6C32:: @ 81A6C32
 	msgbox Text_ATownMap
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	fadescreen 1
 	special Special_TownMap
 	waitstate
@@ -1503,7 +1503,7 @@ gUnknown_81A7702:: @ 81A7702
 	textcolor 3
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1A778A
+	goto_if_eq EventScript_1A778A
 	setvar VAR_0x8004, 14
 	call EventScript_1A6AC0
 	lock
@@ -1511,11 +1511,11 @@ gUnknown_81A7702:: @ 81A7702
 	specialvar VAR_0x8008, Special_GetMartClerkObjectId
 	textcolor 0
 	compare VAR_0x8004, 0
-	goto_if eq, EventScript_1A774D
+	goto_if_eq EventScript_1A774D
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A778A
+	goto_if_eq EventScript_1A778A
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A778C
+	goto_if_eq EventScript_1A778C
 	end
 
 EventScript_1A774D:: @ 81A774D
@@ -1610,10 +1610,9 @@ EventScript_1A7AE0:: @ 81A7AE0
 EventScript_1A7AE2:: @ 81A7AE2
 	msgbox Text_177460, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1A7B70
+	goto_if_eq EventScript_1A7B70
 	msgbox Text_17747B
-	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	goto_if TRUE, EventScript_1A7B3B
+	goto_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, EventScript_1A7B3B
 	setflag FLAG_POKEMON_MANSION_SWITCH_STATE
 	switch VAR_0x8004
 	case 0, EventScript_1A7B7A
@@ -1836,7 +1835,7 @@ EventScript_1A80FE:: @ 81A80FE
 	.include "data/scripts/silphco_doors.inc"
 
 EventScript_1A8C27:: @ 81A8C27
-	countpokemon
+	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	return
@@ -1852,16 +1851,14 @@ EventScript_1A8C33:: @ 81A8C33
 EventScript_1A8C3C:: @ 81A8C3C
 	bufferboxname 0, VAR_0x4037
 	getspeciesname 1, VAR_TEMP_1
-	checkflag FLAG_SYS_NOT_SOMEONES_PC
-	call_if FALSE, EventScript_1A8C57
-	checkflag FLAG_SYS_NOT_SOMEONES_PC
-	call_if TRUE, EventScript_1A8C82
+	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C57
+	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C82
 	return
 
 EventScript_1A8C57:: @ 81A8C57
 	specialvar VAR_RESULT, sub_80CC7B4
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A8C70
+	goto_if_eq EventScript_1A8C70
 	msgbox Text_1A5CF1
 	return
 
@@ -1874,7 +1871,7 @@ EventScript_1A8C70:: @ 81A8C70
 EventScript_1A8C82:: @ 81A8C82
 	specialvar VAR_RESULT, sub_80CC7B4
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A8C9B
+	goto_if_eq EventScript_1A8C9B
 	msgbox Text_1A5D31
 	return
 
@@ -1993,13 +1990,12 @@ ViridianCity_PokemonCenter_2F_EventScript_1A8D02:: @ 81A8D02
 VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
 	lock
 	faceplayer
-	checkflag FLAG_GOT_VS_SEEKER
-	goto_if TRUE, EventScript_1A8D3F
+	goto_if_set FLAG_GOT_VS_SEEKER, EventScript_1A8D3F
 	msgbox Text_194234
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A6BF9
+	goto_if_eq EventScript_1A6BF9
 	msgbox Text_19430F
 	release
 	end
@@ -2015,9 +2011,9 @@ EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
 	waitse
 	call EventScript_GiveItem
 	compare VAR_0x8007, 1
-	goto_if eq, EventScript_DigUpItemPutInPocket
+	goto_if_eq EventScript_DigUpItemPutInPocket
 	compare VAR_0x8007, 0
-	goto_if eq, EventScript_DigUpItemBagIsFull
+	goto_if_eq EventScript_DigUpItemBagIsFull
 	end
 
 EventScript_DigUpItemPutInPocket::
@@ -2042,10 +2038,8 @@ EventScript_AfterWhiteOutHeal:: @ 81A8D97
 	textcolor 1
 	msgbox Text_1A5E89
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	checkflag FLAG_DEFEATED_BROCK
-	call_if FALSE, EventScript_1A8DC6
-	checkflag FLAG_DEFEATED_BROCK
-	call_if TRUE, EventScript_1A8DCF
+	call_if_unset FLAG_DEFEATED_BROCK, EventScript_1A8DC6
+	call_if_set FLAG_DEFEATED_BROCK, EventScript_1A8DCF
 	applymovement VAR_LAST_TALKED, Movement_1A666C
 	waitmovement 0
 	fadedefaultbgm
@@ -2078,16 +2072,16 @@ EventScript_PoisonWhiteOut:: @ 81A8DFD
 	special ExecuteWhiteOut
 	waitstate
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A8E11
+	goto_if_eq EventScript_1A8E11
 	releaseall
 	end
 
 EventScript_1A8E11:: @ 81A8E11
 	checkmoney 1, 0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A8E2E
+	goto_if_eq EventScript_1A8E2E
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A8E3C
+	goto_if_eq EventScript_1A8E3C
 	end
 
 EventScript_1A8E2E:: @ 81A8E2E
@@ -2149,8 +2143,7 @@ EventScript_1A8EC0:: @ 81A8EC0
 	.include "data/scripts/static_pokemon.inc"
 
 EventScript_1A925E:: @ 81A925E
-	checkflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
-	goto_if TRUE, EventScript_1A77A9
+	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_1A77A9
 	setweather 11
 	doweather
 	return
@@ -2186,10 +2179,10 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_81B1D7D, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1B2926
+	goto_if_eq EventScript_1B2926
 	checkmoney 50, 0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1B292B
+	goto_if_eq EventScript_1B292B
 	playse SE_SHOP
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0
@@ -2258,10 +2251,8 @@ EventScript_1B292B:: @ 81B292B
 FourIsland_House2_EventScript_1B2938:: @ 81B2938
 	lock
 	specialvar VAR_0x8008, Special_StickerLadyGetBragFlags
-	checkflag FLAG_MET_STICKER_LADY
-	goto_if FALSE, EventScript_1B2951
-	checkflag FLAG_MET_STICKER_LADY
-	goto_if TRUE, EventScript_1B2994
+	goto_if_unset FLAG_MET_STICKER_LADY, EventScript_1B2951
+	goto_if_set FLAG_MET_STICKER_LADY, EventScript_1B2994
 	end
 
 EventScript_1B2951:: @ 81B2951
@@ -2275,7 +2266,7 @@ EventScript_1B2951:: @ 81B2951
 	applymovement 1, Movement_Delay48
 	waitmovement 0
 	compare VAR_0x8008, 0
-	goto_if eq, EventScript_1B2B8E
+	goto_if_eq EventScript_1B2B8E
 	message gUnknown_81B1EF8
 	waitmessage
 	goto EventScript_1B29D0
@@ -2288,10 +2279,10 @@ EventScript_1B2994:: @ 81B2994
 	waitmovement 0
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	compare VAR_0x8008, 0
-	goto_if eq, EventScript_1B29C6
+	goto_if_eq EventScript_1B29C6
 	message gUnknown_81B2025
 	waitmessage
 	goto EventScript_1B29D0
@@ -2383,18 +2374,18 @@ EventScript_1B2B8E:: @ 81B2B8E
 
 EventScript_1B2B98:: @ 81B2B98
 	compare VAR_0x8004, 39
-	goto_if le, EventScript_1B2BC5
+	goto_if_le EventScript_1B2BC5
 	compare VAR_0x8004, 99
-	goto_if le, EventScript_1B2BE3
+	goto_if_le EventScript_1B2BE3
 	compare VAR_0x8004, 199
-	goto_if le, EventScript_1B2C01
+	goto_if_le EventScript_1B2C01
 	compare VAR_0x8004, 200
-	goto_if ge, EventScript_1B2C1F
+	goto_if_ge EventScript_1B2C1F
 	end
 
 EventScript_1B2BC5:: @ 81B2BC5
 	compare VAR_HOF_BRAG_STATE, 1
-	goto_if eq, EventScript_1B2C3D
+	goto_if_eq EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 1
 	msgbox gUnknown_81B206E
 	goto EventScript_1B2C51
@@ -2404,7 +2395,7 @@ EventScript_1B2BE2:: @ 81B2BE2
 
 EventScript_1B2BE3:: @ 81B2BE3
 	compare VAR_HOF_BRAG_STATE, 2
-	goto_if eq, EventScript_1B2C3D
+	goto_if_eq EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 2
 	msgbox gUnknown_81B20CF
 	goto EventScript_1B2C51
@@ -2414,7 +2405,7 @@ EventScript_1B2C00:: @ 81B2C00
 
 EventScript_1B2C01:: @ 81B2C01
 	compare VAR_HOF_BRAG_STATE, 3
-	goto_if eq, EventScript_1B2C3D
+	goto_if_eq EventScript_1B2C3D
 	setvar VAR_HOF_BRAG_STATE, 3
 	msgbox gUnknown_81B2133
 	goto EventScript_1B2C51
@@ -2424,7 +2415,7 @@ EventScript_1B2C1E:: @ 81B2C1E
 
 EventScript_1B2C1F:: @ 81B2C1F
 	compare VAR_HOF_BRAG_STATE, 4
-	goto_if eq, EventScript_1B2C47
+	goto_if_eq EventScript_1B2C47
 	setvar VAR_HOF_BRAG_STATE, 4
 	msgbox gUnknown_81B21C4
 	goto EventScript_1B2C51
@@ -2454,18 +2445,18 @@ EventScript_1B2C51:: @ 81B2C51
 
 EventScript_1B2C62:: @ 81B2C62
 	compare VAR_0x8005, 99
-	goto_if le, EventScript_1B2C8F
+	goto_if_le EventScript_1B2C8F
 	compare VAR_0x8005, 199
-	goto_if le, EventScript_1B2CAD
+	goto_if_le EventScript_1B2CAD
 	compare VAR_0x8005, 299
-	goto_if le, EventScript_1B2CCB
+	goto_if_le EventScript_1B2CCB
 	compare VAR_0x8005, 300
-	goto_if ge, EventScript_1B2CE9
+	goto_if_ge EventScript_1B2CE9
 	end
 
 EventScript_1B2C8F:: @ 81B2C8F
 	compare VAR_EGG_BRAG_STATE, 1
-	goto_if eq, EventScript_1B2D07
+	goto_if_eq EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 1
 	msgbox gUnknown_81B2308
 	goto EventScript_1B2D1B
@@ -2475,7 +2466,7 @@ EventScript_1B2CAC:: @ 81B2CAC
 
 EventScript_1B2CAD:: @ 81B2CAD
 	compare VAR_EGG_BRAG_STATE, 2
-	goto_if eq, EventScript_1B2D07
+	goto_if_eq EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 2
 	msgbox gUnknown_81B2372
 	goto EventScript_1B2D1B
@@ -2485,7 +2476,7 @@ EventScript_1B2CCA:: @ 81B2CCA
 
 EventScript_1B2CCB:: @ 81B2CCB
 	compare VAR_EGG_BRAG_STATE, 3
-	goto_if eq, EventScript_1B2D07
+	goto_if_eq EventScript_1B2D07
 	setvar VAR_EGG_BRAG_STATE, 3
 	msgbox gUnknown_81B23E0
 	goto EventScript_1B2D1B
@@ -2495,7 +2486,7 @@ EventScript_1B2CE8:: @ 81B2CE8
 
 EventScript_1B2CE9:: @ 81B2CE9
 	compare VAR_EGG_BRAG_STATE, 4
-	goto_if eq, EventScript_1B2D11
+	goto_if_eq EventScript_1B2D11
 	setvar VAR_EGG_BRAG_STATE, 4
 	msgbox gUnknown_81B2448
 	goto EventScript_1B2D1B
@@ -2525,18 +2516,18 @@ EventScript_1B2D1B:: @ 81B2D1B
 
 EventScript_1B2D2C:: @ 81B2D2C
 	compare VAR_0x8006, 19
-	goto_if le, EventScript_1B2D59
+	goto_if_le EventScript_1B2D59
 	compare VAR_0x8006, 49
-	goto_if le, EventScript_1B2D77
+	goto_if_le EventScript_1B2D77
 	compare VAR_0x8006, 99
-	goto_if le, EventScript_1B2D95
+	goto_if_le EventScript_1B2D95
 	compare VAR_0x8006, 100
-	goto_if ge, EventScript_1B2DB3
+	goto_if_ge EventScript_1B2DB3
 	end
 
 EventScript_1B2D59:: @ 81B2D59
 	compare VAR_LINK_WIN_BRAG_STATE, 1
-	goto_if eq, EventScript_1B2DD1
+	goto_if_eq EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 1
 	msgbox gUnknown_81B25A7
 	goto EventScript_1B2DE5
@@ -2546,7 +2537,7 @@ EventScript_1B2D76:: @ 81B2D76
 
 EventScript_1B2D77:: @ 81B2D77
 	compare VAR_LINK_WIN_BRAG_STATE, 2
-	goto_if eq, EventScript_1B2DD1
+	goto_if_eq EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 2
 	msgbox gUnknown_81B2609
 	goto EventScript_1B2DE5
@@ -2556,7 +2547,7 @@ EventScript_1B2D94:: @ 81B2D94
 
 EventScript_1B2D95:: @ 81B2D95
 	compare VAR_LINK_WIN_BRAG_STATE, 3
-	goto_if eq, EventScript_1B2DD1
+	goto_if_eq EventScript_1B2DD1
 	setvar VAR_LINK_WIN_BRAG_STATE, 3
 	msgbox gUnknown_81B267B
 	goto EventScript_1B2DE5
@@ -2566,7 +2557,7 @@ EventScript_1B2DB2:: @ 81B2DB2
 
 EventScript_1B2DB3:: @ 81B2DB3
 	compare VAR_LINK_WIN_BRAG_STATE, 4
-	goto_if eq, EventScript_1B2DDB
+	goto_if_eq EventScript_1B2DDB
 	setvar VAR_LINK_WIN_BRAG_STATE, 4
 	msgbox gUnknown_81B26F6
 	goto EventScript_1B2DE5
@@ -2626,7 +2617,7 @@ EventScript_SafariRetire:: @ 81BFBAA
 	lockall
 	msgbox Text_1BFBE9, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if eq, EventScript_1BFBC0
+	goto_if_eq EventScript_1BFBC0
 	releaseall
 	end
 

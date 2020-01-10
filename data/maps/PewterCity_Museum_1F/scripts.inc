@@ -5,11 +5,11 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 	lock
 	faceplayer
 	compare VAR_FACING, DIR_WEST
-	goto_if eq, EventScript_16A348
+	goto_if_eq EventScript_16A348
 	compare VAR_FACING, DIR_SOUTH
-	goto_if eq, EventScript_16A348
+	goto_if_eq EventScript_16A348
 	compare VAR_FACING, DIR_NORTH
-	goto_if eq, EventScript_16A348
+	goto_if_eq EventScript_16A348
 	msgbox gUnknown_8190539
 	release
 	end
@@ -17,9 +17,9 @@ PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
 EventScript_16A348:: @ 816A348
 	msgbox gUnknown_8190550, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16A367
+	goto_if_eq EventScript_16A367
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16A37B
+	goto_if_eq EventScript_16A37B
 	end
 
 EventScript_16A367:: @ 816A367
@@ -65,7 +65,7 @@ EventScript_16A3D1:: @ 816A3D1
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_81904B5, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16A402
+	goto_if_eq EventScript_16A402
 	msgbox gUnknown_81904F9
 	closemessage
 	hidemoneybox 0, 0
@@ -77,14 +77,14 @@ EventScript_16A3D1:: @ 816A3D1
 EventScript_16A402:: @ 816A402
 	checkmoney 50, 0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16A476
+	goto_if_eq EventScript_16A476
 	closemessage
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_16A455
+	call_if_eq EventScript_16A455
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_16A460
+	call_if_eq EventScript_16A460
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_16A46B
+	call_if_eq EventScript_16A46B
 	playse SE_SHOP
 	takemoney 50, 0
 	updatemoneybox 0, 0, 0
@@ -152,16 +152,14 @@ PewterCity_Museum_1F_EventScript_16A4A5:: @ 816A4A5
 PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
 	lock
 	faceplayer
-	checkflag FLAG_GOT_OLD_AMBER
-	goto_if TRUE, EventScript_16A4FF
+	goto_if_set FLAG_GOT_OLD_AMBER, EventScript_16A4FF
 	msgbox gUnknown_8190717
 	checkitemspace ITEM_OLD_AMBER, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16A4F5
+	goto_if_eq EventScript_16A4F5
 	setflag FLAG_GOT_OLD_AMBER
 	removeobject 4
-	additem ITEM_OLD_AMBER, 1
-	giveitemfanfaremsg gUnknown_8190866, ITEM_OLD_AMBER, 1, MUS_FAN5
+	giveitem_msg gUnknown_8190866, ITEM_OLD_AMBER, 1, MUS_FAN5
 	release
 	end
 

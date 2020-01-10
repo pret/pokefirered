@@ -6,8 +6,7 @@ SevenIsland_TrainerTower_Elevator_MapScripts:: @ 8164AF8
 SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	lockall
 	setvar VAR_0x8004, 6
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
 	message Text_1A535C
@@ -41,7 +40,7 @@ EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
 	compare VAR_ELEVATOR_FLOOR, 3
-	goto_if eq, EventScript_164BD3
+	goto_if_eq EventScript_164BD3
 	call EventScript_164BD8
 	setvar VAR_ELEVATOR_FLOOR, 3
 	special Special_CloseElevatorCurrentFloorWindow

@@ -39,7 +39,7 @@ EventScript_16D312:: @ 816D312
 	textcolor 0
 	msgbox gUnknown_8197E1A, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16D345
+	goto_if_eq EventScript_16D345
 	msgbox gUnknown_8197E48
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_16D362
@@ -103,7 +103,7 @@ EventScript_16D391:: @ 816D391
 	showmoneybox 0, 0, 0
 	msgbox gUnknown_8197C87, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16D3CA
+	goto_if_eq EventScript_16D3CA
 	msgbox gUnknown_8197DE9
 	goto EventScript_16D49A
 	end
@@ -112,7 +112,7 @@ EventScript_16D3CA:: @ 816D3CA
 	call EventScript_16D462
 	checkmoney 500, 0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16D48C
+	goto_if_eq EventScript_16D48C
 	takemoney 500, 0
 	updatemoneybox 0, 0, 0
 	msgbox gUnknown_8197D07
@@ -125,11 +125,11 @@ EventScript_16D3CA:: @ 816D3CA
 	closemessage
 	hidemoneybox 0, 0
 	compare VAR_TEMP_2, 0
-	call_if eq, EventScript_16D44C
+	call_if_eq EventScript_16D44C
 	compare VAR_TEMP_2, 1
-	call_if eq, EventScript_16D441
+	call_if_eq EventScript_16D441
 	compare VAR_TEMP_2, 2
-	call_if eq, EventScript_16D457
+	call_if_eq EventScript_16D457
 	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
@@ -152,12 +152,12 @@ EventScript_16D457:: @ 816D457
 	return
 
 EventScript_16D462:: @ 816D462
-	countpokemon
-	compare VAR_RESULT, 6
-	goto_if ne, EventScript_1A77A9
+	getpartysize
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne EventScript_1A77A9
 	specialvar VAR_RESULT, Special_IsThereRoomInAnyBoxForMorePokemon
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	msgbox gUnknown_81BFEAC
 	goto EventScript_16D49A
 	end
@@ -201,7 +201,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7
 	faceplayer
 	msgbox gUnknown_8197EB0, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16D4D6
+	goto_if_eq EventScript_16D4D6
 	msgbox gUnknown_819809E
 	release
 	end

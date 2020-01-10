@@ -1,8 +1,8 @@
 EventScript_1A8EC5:: @ 81A8EC5
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-    goto_if ge, EventScript_1A911E
+    goto_if_ge EventScript_1A911E
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
-    goto_if ge, EventScript_1A8F12
+    goto_if_ge EventScript_1A8F12
     multichoice 19, 6, MULTICHOICE_ISLAND_23, FALSE
     switch VAR_RESULT
     case 0, EventScript_1A8FF9
@@ -23,9 +23,9 @@ EventScript_1A8F12:: @ 81A8F12
 
 EventScript_1A8F54:: @ 81A8F54
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-    goto_if ge, EventScript_1A911E
+    goto_if_ge EventScript_1A911E
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
-    goto_if ge, EventScript_1A8FA1
+    goto_if_ge EventScript_1A8FA1
     multichoice 19, 6, MULTICHOICE_ISLAND_13, FALSE
     switch VAR_RESULT
     case 0, EventScript_1A8FEE
@@ -66,9 +66,9 @@ EventScript_1A9004:: @ 81A9004
 
 EventScript_1A900F:: @ 81A900F
     compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-    goto_if ge, EventScript_1A911E
+    goto_if_ge EventScript_1A911E
     compare VAR_MAP_SCENE_CINNABAR_ISLAND, 4
-    goto_if ge, EventScript_1A905C
+    goto_if_ge EventScript_1A905C
     multichoice 19, 6, MULTICHOICE_ISLAND_12, FALSE
     switch VAR_RESULT
     case 0, EventScript_1A8FEE
@@ -91,9 +91,9 @@ EventScript_1A909E:: @ 81A909E
     specialvar VAR_RESULT, sub_8147500
     getnumberstring 0, VAR_RESULT
     compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
-    goto_if eq, EventScript_1A90BE
+    goto_if_eq EventScript_1A90BE
     compare VAR_0x8004, SEAGALLOP_VERMILION_CITY
-    goto_if ne, EventScript_1A90CC
+    goto_if_ne EventScript_1A90CC
     end
 
 EventScript_1A90BE:: @ 81A90BE
@@ -111,7 +111,7 @@ EventScript_1A90DA:: @ 81A90DA
     delay 20
     special sub_8110AB4
     compare VAR_RESULT, 2
-    goto_if eq, EventScript_1A7AE0
+    goto_if_eq EventScript_1A7AE0
     special sub_8112364
     fadescreen 1
     special ScrSpecial_SeagallopFerry
@@ -121,7 +121,7 @@ EventScript_1A90DA:: @ 81A90DA
 EventScript_1A90F6:: @ 81A90F6
     specialvar VAR_RESULT, sub_8147594
     compare VAR_RESULT, 1
-    goto_if eq, EventScript_1A9108
+    goto_if_eq EventScript_1A9108
     release
     end
 

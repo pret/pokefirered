@@ -19,7 +19,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	msgbox gUnknown_817AE8E
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	waitse
 	playmoncry SPECIES_HYPNO, 2
 	waitmoncry
@@ -31,7 +31,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	msgbox gUnknown_817AEE1
 	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, 0
-	call_if eq, EventScript_163D19
+	call_if_eq EventScript_163D19
 	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_817AF3B
 	closemessage

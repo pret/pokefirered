@@ -27,8 +27,7 @@ EventScript_16F9F4:: @ 816F9F4
 	textcolor 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	checkflag FLAG_GOT_TEA
-	goto_if TRUE, EventScript_16FA1E
+	goto_if_set FLAG_GOT_TEA, EventScript_16FA1E
 	msgbox gUnknown_819E181
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_16FA8A
@@ -45,11 +44,11 @@ EventScript_16FA29:: @ 816FA29
 	msgbox gUnknown_819E1D1
 	closemessage
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_16FA62
+	call_if_eq EventScript_16FA62
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_16FA6D
+	call_if_eq EventScript_16FA6D
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_16FA78
+	call_if_eq EventScript_16FA78
 	msgbox gUnknown_819E1F7
 	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall

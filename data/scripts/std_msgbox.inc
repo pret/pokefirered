@@ -27,17 +27,17 @@ Std_MsgboxYesNo:: @ 81A4E5C
 	yesnobox 20, 8
 	return
 
-gStdScript_ItemMessageAndFanfare:: @ 81A4E66
+Std_ReceivedItem:: @ 81A4E66
 	textcolor 3
 	compare VAR_0x8002, MUS_FANFA1
-	call_if eq, EventScript_1A4EA2
+	call_if_eq EventScript_1A4EA2
 	compare VAR_0x8002, MUS_FAN5
-	call_if eq, EventScript_1A4EA6
+	call_if_eq EventScript_1A4EA6
 	message 0x0
 	waitmessage
 	waitfanfare
 	compare VAR_0x8002, MUS_FANFA1
-	call_if eq, EventScript_1A4EAA
+	call_if_eq EventScript_1A4EAA
 	putitemaway VAR_0x8000, VAR_0x8001
 	call EventScript_1A6675
 	return

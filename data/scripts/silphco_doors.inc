@@ -350,8 +350,7 @@ SilphCo_2F_EventScript_Door1:: @ 81A891B
     lockall
     setvar VAR_TEMP_1, 1
     setvar VAR_0x8004, 634
-    checkflag FLAG_SILPH_2F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_2F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -359,8 +358,7 @@ SilphCo_2F_EventScript_Door2:: @ 81A8935
     lockall
     setvar VAR_TEMP_1, 2
     setvar VAR_0x8004, 635
-    checkflag FLAG_SILPH_2F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_2F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -368,8 +366,7 @@ SilphCo_3F_EventScript_Door1:: @ 81A894F
     lockall
     setvar VAR_TEMP_1, 3
     setvar VAR_0x8004, 636
-    checkflag FLAG_SILPH_3F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_3F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -377,8 +374,7 @@ SilphCo_3F_EventScript_Door2:: @ 81A8969
     lockall
     setvar VAR_TEMP_1, 4
     setvar VAR_0x8004, 637
-    checkflag FLAG_SILPH_3F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_3F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -386,8 +382,7 @@ SilphCo_4F_EventScript_Door1:: @ 81A8983
     lockall
     setvar VAR_TEMP_1, 5
     setvar VAR_0x8004, 638
-    checkflag FLAG_SILPH_4F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_4F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -395,8 +390,7 @@ SilphCo_4F_EventScript_Door2:: @ 81A899D
     lockall
     setvar VAR_TEMP_1, 6
     setvar VAR_0x8004, 639
-    checkflag FLAG_SILPH_4F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_4F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -404,8 +398,7 @@ SilphCo_5F_EventScript_Door1:: @ 81A89B7
     lockall
     setvar VAR_TEMP_1, 7
     setvar VAR_0x8004, 640
-    checkflag FLAG_SILPH_5F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_5F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -413,8 +406,7 @@ SilphCo_5F_EventScript_Door2:: @ 81A89D1
     lockall
     setvar VAR_TEMP_1, 8
     setvar VAR_0x8004, 641
-    checkflag FLAG_SILPH_5F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_5F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -422,8 +414,7 @@ SilphCo_5F_EventScript_Door3:: @ 81A89EB
     lockall
     setvar VAR_TEMP_1, 9
     setvar VAR_0x8004, 642
-    checkflag FLAG_SILPH_5F_DOOR_3
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_5F_DOOR_3, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -431,8 +422,7 @@ SilphCo_6F_EventScript_Door:: @ 81A8A05
     lockall
     setvar VAR_TEMP_1, 10
     setvar VAR_0x8004, 643
-    checkflag FLAG_SILPH_6F_DOOR
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_6F_DOOR, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -440,8 +430,7 @@ SilphCo_7F_EventScript_Door1:: @ 81A8A1F
     lockall
     setvar VAR_TEMP_1, 11
     setvar VAR_0x8004, 644
-    checkflag FLAG_SILPH_7F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_7F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -449,8 +438,7 @@ SilphCo_7F_EventScript_Door2:: @ 81A8A39
     lockall
     setvar VAR_TEMP_1, 12
     setvar VAR_0x8004, 645
-    checkflag FLAG_SILPH_7F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_7F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -458,8 +446,7 @@ SilphCo_7F_EventScript_Door3:: @ 81A8A53
     lockall
     setvar VAR_TEMP_1, 13
     setvar VAR_0x8004, 646
-    checkflag FLAG_SILPH_7F_DOOR_3
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_7F_DOOR_3, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -467,8 +454,7 @@ SilphCo_8F_EventScript_Door:: @ 81A8A6D
     lockall
     setvar VAR_TEMP_1, 14
     setvar VAR_0x8004, 647
-    checkflag FLAG_SILPH_8F_DOOR
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_8F_DOOR, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -476,8 +462,7 @@ SilphCo_9F_EventScript_Door1:: @ 81A8A87
     lockall
     setvar VAR_TEMP_1, 15
     setvar VAR_0x8004, 648
-    checkflag FLAG_SILPH_9F_DOOR_1
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_9F_DOOR_1, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -485,8 +470,7 @@ SilphCo_9F_EventScript_Door2:: @ 81A8AA1
     lockall
     setvar VAR_TEMP_1, 16
     setvar VAR_0x8004, 649
-    checkflag FLAG_SILPH_9F_DOOR_2
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_9F_DOOR_2, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -494,8 +478,7 @@ SilphCo_9F_EventScript_Door3:: @ 81A8ABB
     lockall
     setvar VAR_TEMP_1, 17
     setvar VAR_0x8004, 650
-    checkflag FLAG_SILPH_9F_DOOR_3
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_9F_DOOR_3, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -503,8 +486,7 @@ SilphCo_9F_EventScript_Door4:: @ 81A8AD5
     lockall
     setvar VAR_TEMP_1, 18
     setvar VAR_0x8004, 651
-    checkflag FLAG_SILPH_9F_DOOR_4
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_9F_DOOR_4, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -512,8 +494,7 @@ SilphCo_10F_EventScript_Door:: @ 81A8AEF
     lockall
     setvar VAR_TEMP_1, 19
     setvar VAR_0x8004, 652
-    checkflag FLAG_SILPH_10F_DOOR
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_10F_DOOR, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
@@ -521,14 +502,12 @@ SilphCo_11F_EventScript_Door:: @ 81A8B09
     lockall
     setvar VAR_TEMP_1, 20
     setvar VAR_0x8004, 653
-    checkflag FLAG_SILPH_11F_DOOR
-    goto_if TRUE, EventScript_DoorUnlocked
+    goto_if_set FLAG_SILPH_11F_DOOR, EventScript_DoorUnlocked
     goto EventScript_TryUnlockDoor
     end
 
 EventScript_TryUnlockDoor:: @ 81A8B23
-    checkflag FLAG_HIDE_SILPH_CO_5F_CARD_KEY
-    goto_if TRUE, EventScript_OpenDoor
+    goto_if_set FLAG_HIDE_SILPH_CO_5F_CARD_KEY, EventScript_OpenDoor
     goto EventScript_NeedCardKey
     end
 
@@ -537,45 +516,45 @@ EventScript_OpenDoor:: @ 81A8B32
     msgbox Text_CardKeyOpenedDoor
     waitfanfare
     compare VAR_TEMP_1, 1
-    call_if eq, EventScript_Open2FDoor1
+    call_if_eq EventScript_Open2FDoor1
     compare VAR_TEMP_1, 2
-    call_if eq, EventScript_Open2FDoor2
+    call_if_eq EventScript_Open2FDoor2
     compare VAR_TEMP_1, 3
-    call_if eq, EventScript_Open3FDoor1
+    call_if_eq EventScript_Open3FDoor1
     compare VAR_TEMP_1, 4
-    call_if eq, EventScript_Open3FDoor2
+    call_if_eq EventScript_Open3FDoor2
     compare VAR_TEMP_1, 5
-    call_if eq, EventScript_Open4FDoor1
+    call_if_eq EventScript_Open4FDoor1
     compare VAR_TEMP_1, 6
-    call_if eq, EventScript_Open4FDoor2
+    call_if_eq EventScript_Open4FDoor2
     compare VAR_TEMP_1, 7
-    call_if eq, EventScript_Open5FDoor1
+    call_if_eq EventScript_Open5FDoor1
     compare VAR_TEMP_1, 8
-    call_if eq, EventScript_Open5FDoor2
+    call_if_eq EventScript_Open5FDoor2
     compare VAR_TEMP_1, 9
-    call_if eq, EventScript_Open5FDoor3
+    call_if_eq EventScript_Open5FDoor3
     compare VAR_TEMP_1, 10
-    call_if eq, EventScript_Open6FDoor
+    call_if_eq EventScript_Open6FDoor
     compare VAR_TEMP_1, 11
-    call_if eq, EventScript_Open7FDoor1
+    call_if_eq EventScript_Open7FDoor1
     compare VAR_TEMP_1, 12
-    call_if eq, EventScript_Open7FDoor2
+    call_if_eq EventScript_Open7FDoor2
     compare VAR_TEMP_1, 13
-    call_if eq, EventScript_Open7FDoor3
+    call_if_eq EventScript_Open7FDoor3
     compare VAR_TEMP_1, 14
-    call_if eq, EventScript_Open8FDoor
+    call_if_eq EventScript_Open8FDoor
     compare VAR_TEMP_1, 15
-    call_if eq, EventScript_Open9FDoor1
+    call_if_eq EventScript_Open9FDoor1
     compare VAR_TEMP_1, 16
-    call_if eq, EventScript_Open9FDoor2
+    call_if_eq EventScript_Open9FDoor2
     compare VAR_TEMP_1, 17
-    call_if eq, EventScript_Open9FDoor3
+    call_if_eq EventScript_Open9FDoor3
     compare VAR_TEMP_1, 18
-    call_if eq, EventScript_Open9FDoor4
+    call_if_eq EventScript_Open9FDoor4
     compare VAR_TEMP_1, 19
-    call_if eq, EventScript_Open10FDoor
+    call_if_eq EventScript_Open10FDoor
     compare VAR_TEMP_1, 20
-    call_if eq, EventScript_Open11FDoor
+    call_if_eq EventScript_Open11FDoor
     waitse
     playse SE_KI_GASYAN
     special DrawWholeMapView

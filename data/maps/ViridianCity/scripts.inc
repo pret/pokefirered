@@ -5,13 +5,13 @@ ViridianCity_MapScripts:: @ 81658D3
 ViridianCity_OnTransition:: @ 81658D9
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_CITY
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	call_if eq, EventScript_165920
+	call_if_eq EventScript_165920
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	call_if eq, EventScript_16590F
+	call_if_eq EventScript_16590F
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	call_if ge, EventScript_165909
+	call_if_ge EventScript_165909
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0
-	call_if eq, EventScript_165931
+	call_if_eq EventScript_165931
 	end
 
 EventScript_165909:: @ 8165909
@@ -31,18 +31,12 @@ EventScript_165920:: @ 8165920
 	return
 
 EventScript_165931:: @ 8165931
-	checkflag FLAG_BADGE02_GET
-	goto_if FALSE, EventScript_1A77A9
-	checkflag FLAG_BADGE03_GET
-	goto_if FALSE, EventScript_1A77A9
-	checkflag FLAG_BADGE04_GET
-	goto_if FALSE, EventScript_1A77A9
-	checkflag FLAG_BADGE05_GET
-	goto_if FALSE, EventScript_1A77A9
-	checkflag FLAG_BADGE06_GET
-	goto_if FALSE, EventScript_1A77A9
-	checkflag FLAG_BADGE07_GET
-	goto_if FALSE, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE02_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE03_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE04_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE05_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE06_GET, EventScript_1A77A9
+	goto_if_unset FLAG_BADGE07_GET, EventScript_1A77A9
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
 	return
 
@@ -91,7 +85,7 @@ ViridianCity_EventScript_1659CA:: @ 81659CA
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1
-	goto_if eq, EventScript_1659EC
+	goto_if_eq EventScript_1659EC
 	msgbox gUnknown_817DB39
 	closemessage
 	applymovement 3, Movement_FaceOriginalDirection
@@ -107,20 +101,19 @@ EventScript_1659EC:: @ 81659EC
 ViridianCity_EventScript_1659F6:: @ 81659F6
 	lock
 	faceplayer
-	checkflag FLAG_BADGE01_GET
-	goto_if TRUE, EventScript_165A23
+	goto_if_set FLAG_BADGE01_GET, EventScript_165A23
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	goto_if ge, EventScript_165A4A
+	goto_if_ge EventScript_165A4A
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	goto_if eq, EventScript_165A54
+	goto_if_eq EventScript_165A54
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	goto_if eq, EventScript_165A84
+	goto_if_eq EventScript_165A84
 	end
 
 EventScript_165A23:: @ 8165A23
 	msgbox gUnknown_817E046, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_165A40
+	goto_if_eq EventScript_165A40
 	msgbox gUnknown_817E0EA
 	release
 	end
@@ -149,7 +142,7 @@ EventScript_165A65:: @ 8165A65
 	msgbox gUnknown_817DE9B
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle
 	waitstate
@@ -167,9 +160,9 @@ ViridianCity_EventScript_165A8F:: @ 8165A8F
 	faceplayer
 	msgbox gUnknown_817DB98, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_165AB0
+	goto_if_eq EventScript_165AB0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_165ABA
+	goto_if_eq EventScript_165ABA
 	end
 
 EventScript_165AB0:: @ 8165AB0
@@ -186,7 +179,7 @@ ViridianCity_EventScript_165AC4:: @ 8165AC4
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0
-	goto_if eq, EventScript_165ADB
+	goto_if_eq EventScript_165ADB
 	msgbox gUnknown_817DC99
 	release
 	end
@@ -244,7 +237,7 @@ EventScript_165B4C:: @ 8165B4C
 	closemessage
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle
 	waitstate

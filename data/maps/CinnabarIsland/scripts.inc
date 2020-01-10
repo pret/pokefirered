@@ -7,11 +7,11 @@ CinnabarIsland_OnTransition:: @ 8166EE1
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
 	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	call_if eq, EventScript_166F24
+	call_if_eq EventScript_166F24
 	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 3
-	call_if eq, EventScript_166F52
+	call_if_eq EventScript_166F52
 	compare VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
-	call_if eq, EventScript_166F0B
+	call_if_eq EventScript_166F0B
 	end
 
 EventScript_166F0B:: @ 8166F0B
@@ -25,7 +25,7 @@ EventScript_166F0B:: @ 8166F0B
 EventScript_166F24:: @ 8166F24
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 18
-	goto_if ge, EventScript_166F4A
+	goto_if_ge EventScript_166F4A
 	setflag FLAG_TEMP_2
 	setobjectxyperm 3, 18, 12
 	setobjectmovementtype 3, 7
@@ -42,8 +42,7 @@ EventScript_166F52:: @ 8166F52
 	return
 
 EventScript_166F5E:: @ 8166F5E
-	checkflag FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY
-	goto_if TRUE, EventScript_166F68
+	goto_if_set FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY, EventScript_166F68
 	return
 
 EventScript_166F68:: @ 8166F68
@@ -93,25 +92,21 @@ Movement_166FC6:: @ 8166FC6
 EventScript_166FCD:: @ 8166FCD
 	lockall
 	textcolor 0
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167032
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_16703D
+	call_if_unset FLAG_TEMP_2, EventScript_167032
+	call_if_set FLAG_TEMP_2, EventScript_16703D
 	playse SE_PIN
 	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
 	applymovement 3, Movement_Delay48
 	waitmovement 0
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167048
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167053
+	call_if_unset FLAG_TEMP_2, EventScript_167048
+	call_if_set FLAG_TEMP_2, EventScript_167053
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_167068
+	goto_if_eq EventScript_167068
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_167078
+	goto_if_eq EventScript_167078
 	end
 
 EventScript_167032:: @ 8167032
@@ -146,10 +141,8 @@ EventScript_167068:: @ 8167068
 EventScript_167078:: @ 8167078
 	msgbox gUnknown_8180DF8
 	closemessage
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1670A0
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_1670B3
+	call_if_unset FLAG_TEMP_2, EventScript_1670A0
+	call_if_set FLAG_TEMP_2, EventScript_1670B3
 	removeobject 3
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	clearflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
@@ -201,19 +194,14 @@ Movement_1670E2:: @ 81670E2
 	step_end
 
 EventScript_1670E6:: @ 81670E6
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167142
+	call_if_set FLAG_TEMP_2, EventScript_167142
 	addobject 4
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167154
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167166
+	call_if_unset FLAG_TEMP_2, EventScript_167154
+	call_if_set FLAG_TEMP_2, EventScript_167166
 	msgbox gUnknown_8180EAD
 	closemessage
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167171
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167183
+	call_if_unset FLAG_TEMP_2, EventScript_167171
+	call_if_set FLAG_TEMP_2, EventScript_167183
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	removeobject 3
 	delay 40

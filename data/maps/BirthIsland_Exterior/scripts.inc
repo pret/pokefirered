@@ -13,10 +13,8 @@ BirthIsland_Exterior_OnTransition:: @ 8165217
 	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_DEOXYS_N
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
 	setvar VAR_DEOXYS_INTERACTION_NUM, 0
-	checkflag FLAG_FOUGHT_DEOXYS
-	call_if TRUE, EventScript_16523C
-	checkflag FLAG_FOUGHT_DEOXYS
-	call_if FALSE, EventScript_165243
+	call_if_set FLAG_FOUGHT_DEOXYS, EventScript_16523C
+	call_if_unset FLAG_FOUGHT_DEOXYS, EventScript_165243
 	end
 
 EventScript_16523C:: @ 816523C
@@ -25,21 +23,19 @@ EventScript_16523C:: @ 816523C
 	return
 
 EventScript_165243:: @ 8165243
-	checkflag FLAG_DEOXYS_FLEW_AWAY
-	goto_if TRUE, EventScript_1A77A9
+	goto_if_set FLAG_DEOXYS_FLEW_AWAY, EventScript_1A77A9
 	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	clearflag FLAG_SYS_DEOXYS_AWAKENED
 	return
 
 BirthIsland_Exterior_OnResume:: @ 8165253
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_16525D
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_16525D
 	end
 
 EventScript_16525D:: @ 816525D
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject 2
 	return
 
@@ -48,7 +44,7 @@ BirthIsland_Exterior_EventScript_165271:: @ 8165271
 	faceplayer
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	special Special_DeoxysSound
 	waitstate
@@ -97,11 +93,11 @@ EventScript_1652C0:: @ 81652C0
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_16533A
+	goto_if_eq EventScript_16533A
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_165348
+	goto_if_eq EventScript_165348
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_165348
+	goto_if_eq EventScript_165348
 	setflag FLAG_FOUGHT_DEOXYS
 	release
 	end

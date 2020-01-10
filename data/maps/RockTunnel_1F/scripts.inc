@@ -11,36 +11,36 @@ RockTunnel_1F_EventScript_162DE0:: @ 8162DE0
 	end
 
 RockTunnel_1F_EventScript_162DE9:: @ 8162DE9
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_LENNY, 0, Text_179366, Text_179388
+	trainerbattle_single TRAINER_HIKER_LENNY, Text_179366, Text_179388
 	msgbox gUnknown_8179396, 6
 	end
 
 RockTunnel_1F_EventScript_162E00:: @ 8162E00
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_OLIVER, 0, Text_1793F1, Text_17940E
+	trainerbattle_single TRAINER_HIKER_OLIVER, Text_1793F1, Text_17940E
 	msgbox gUnknown_817943A, 6
 	end
 
 RockTunnel_1F_EventScript_162E17:: @ 8162E17
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_HIKER_LUCAS, 0, Text_17947B, Text_1794AC
+	trainerbattle_single TRAINER_HIKER_LUCAS, Text_17947B, Text_1794AC
 	msgbox gUnknown_81794B4, 6
 	end
 
 RockTunnel_1F_EventScript_162E2E:: @ 8162E2E
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_POKEMANIAC_ASHTON, 0, Text_1794D4, Text_1794EE
+	trainerbattle_single TRAINER_POKEMANIAC_ASHTON, Text_1794D4, Text_1794EE
 	msgbox gUnknown_81794F9, 6
 	end
 
 RockTunnel_1F_EventScript_162E45:: @ 8162E45
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_LEAH, 0, Text_17951C, Text_179547
+	trainerbattle_single TRAINER_PICNICKER_LEAH, Text_17951C, Text_179547
 	msgbox gUnknown_8179558, 6
 	end
 
 RockTunnel_1F_EventScript_162E5C:: @ 8162E5C
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_ARIANA, 0, Text_1795E5, Text_179604
+	trainerbattle_single TRAINER_PICNICKER_ARIANA, Text_1795E5, Text_179604
 	msgbox gUnknown_8179613, 6
 	end
 
 RockTunnel_1F_EventScript_162E73:: @ 8162E73
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_PICNICKER_DANA, 0, Text_179577, Text_1795A1
+	trainerbattle_single TRAINER_PICNICKER_DANA, Text_179577, Text_1795A1
 	msgbox gUnknown_81795B5, 6
 	end

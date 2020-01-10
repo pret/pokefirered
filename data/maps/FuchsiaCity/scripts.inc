@@ -4,10 +4,8 @@ FuchsiaCity_MapScripts:: @ 8166D75
 
 FuchsiaCity_OnTransition:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
-	checkflag FLAG_GOT_DOME_FOSSIL
-	call_if TRUE, EventScript_166D91
-	checkflag FLAG_GOT_DOME_FOSSIL
-	call_if FALSE, EventScript_166D97
+	call_if_set FLAG_GOT_DOME_FOSSIL, EventScript_166D91
+	call_if_unset FLAG_GOT_DOME_FOSSIL, EventScript_166D97
 	end
 
 EventScript_166D91:: @ 8166D91
@@ -121,8 +119,7 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
-	checkflag FLAG_GOT_DOME_FOSSIL
-	goto_if TRUE, EventScript_166EBE
+	goto_if_set FLAG_GOT_DOME_FOSSIL, EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special Special_SetSeenMon
 	drawmonpic SPECIES_KABUTO, 10, 3

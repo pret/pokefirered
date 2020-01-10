@@ -5,7 +5,7 @@ CableClub_OnTransition:: @ 81BB1B4
 CableClub_EventScript_HideOrShowMysteryGiftMan:: @ 81BB1BA
 	specialvar VAR_RESULT, ValidateReceivedWonderCard
 	compare VAR_RESULT, FALSE
-	goto_if eq, EventScript_HideMysteryGiftMan
+	goto_if_eq EventScript_HideMysteryGiftMan
 	clearflag FLAG_HIDE_MG_DELIVERYMEN
 	return
 
@@ -16,7 +16,7 @@ EventScript_HideMysteryGiftMan:: @ 81BB1CE
 CableClub_EventScript_MysteryGiftMan:: @ 81BB1D2
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	execram
 
@@ -37,26 +37,26 @@ CableClub_OnWarp:: @ 81BB1ED
 
 EventScript_CheckTurnAttendant:: @ 81BB227
 	compare VAR_0x8007, 0
-	goto_if eq, EventScript_CheckTurnAttendantEnd
+	goto_if_eq EventScript_CheckTurnAttendantEnd
 	turnobject VAR_0x8007, DIR_WEST
 EventScript_CheckTurnAttendantEnd:
 	end
 
 CableClub_OnLoad:: @ 81BB237
 	compare VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE
-	goto_if eq, EventScript_OnLoadFromColosseum
+	goto_if_eq EventScript_OnLoadFromColosseum
 	compare VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE
-	goto_if eq, EventScript_OnLoadFromColosseum
+	goto_if_eq EventScript_OnLoadFromColosseum
 	compare VAR_CABLE_CLUB_STATE, USING_MULTI_BATTLE
-	goto_if eq, EventScript_OnLoadFromColosseum
+	goto_if_eq EventScript_OnLoadFromColosseum
 	compare VAR_CABLE_CLUB_STATE, USING_TRADE_CENTER
-	goto_if eq, EventScript_OnLoadFromTradeCenter
+	goto_if_eq EventScript_OnLoadFromTradeCenter
 	compare VAR_CABLE_CLUB_STATE, USING_UNION_ROOM
-	goto_if eq, EventScript_OnLoadFromUnionRoom
+	goto_if_eq EventScript_OnLoadFromUnionRoom
 	compare VAR_CABLE_CLUB_STATE, USING_BERRY_CRUSH
-	goto_if eq, EventScript_OnLoadFromBerryCrush
+	goto_if_eq EventScript_OnLoadFromBerryCrush
 	compare VAR_CABLE_CLUB_STATE, USING_MINIGAME
-	goto_if eq, EventScript_OnLoadFromGameCorner
+	goto_if_eq EventScript_OnLoadFromGameCorner
 	end
 
 EventScript_OnLoadFromColosseum:: @ 81BB285
@@ -117,7 +117,7 @@ CableClub_EventScript_CloseLinkAndExitLinkRoom:: @ 81BB315
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
-	goto_if eq, CableClub_EventScript_PlayerExitLinkRoom
+	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement VAR_0x8007, Movement_1BB88F
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB891
@@ -143,7 +143,7 @@ EventScript_1BB367:: @ 81BB367
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
-	goto_if eq, CableClub_EventScript_PlayerExitLinkRoom
+	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB8A0
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_1BB88F
@@ -167,7 +167,7 @@ EventScript_1BB3B4:: @ 81BB3B4
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
-	goto_if eq, CableClub_EventScript_PlayerExitLinkRoom
+	goto_if_eq CableClub_EventScript_PlayerExitLinkRoom
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_1BB8A0
 	waitmovement 0
 	applymovement VAR_0x8007, Movement_1BB88F
@@ -267,7 +267,7 @@ EventScript_1BB50F:: @ 81BB50F
 EventScript_1BB51A:: @ 81BB51A
 	special CheckForAlivePartyMons
 	compare VAR_RESULT, 0
-	goto_if ne, EventScript_1BB533
+	goto_if_ne EventScript_1BB533
 	setvar VAR_0x8004, 2
 	goto EventScript_1BB54C
 	end
@@ -285,7 +285,7 @@ EventScript_1BB541:: @ 81BB541
 EventScript_1BB54C:: @ 81BB54C
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	message gUnknown_81BC4AC
 	waitmessage
 	special HelpSystem_Disable
@@ -294,17 +294,17 @@ EventScript_1BB54C:: @ 81BB54C
 	waitstate
 	call EventScript_1A6675
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BB5B3
+	goto_if_eq EventScript_1BB5B3
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1BB80F
+	goto_if_eq EventScript_1BB80F
 	compare VAR_RESULT, 3
-	goto_if eq, EventScript_1BB81F
+	goto_if_eq EventScript_1BB81F
 	compare VAR_RESULT, 4
-	goto_if eq, EventScript_1BB63C
+	goto_if_eq EventScript_1BB63C
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	compare VAR_RESULT, 6
-	goto_if eq, EventScript_1BB7FF
+	goto_if_eq EventScript_1BB7FF
 	end
 
 EventScript_1BB5B3:: @ 81BB5B3
@@ -332,7 +332,7 @@ EventScript_1BB5B3:: @ 81BB5B3
 	waitdooranim
 	release
 	compare VAR_0x8004, 5
-	goto_if eq, EventScript_1BB62C
+	goto_if_eq EventScript_1BB62C
 	special SetCableClubWarp
 	warp MAP_UNKNOWN_MAP_00_00, 255, 6, 8
 	special DoCableClubWarp
@@ -396,10 +396,10 @@ EventScript_1BB6AB:: @ 81BB6AB
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	call EventScript_1BB79C
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	message gUnknown_81BC4AC
 	waitmessage
 	special HelpSystem_Disable
@@ -408,21 +408,21 @@ EventScript_1BB6AB:: @ 81BB6AB
 	waitstate
 	call EventScript_1A6675
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BB73D
+	goto_if_eq EventScript_1BB73D
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1BB80F
+	goto_if_eq EventScript_1BB80F
 	compare VAR_RESULT, 3
-	goto_if eq, EventScript_1BB81F
+	goto_if_eq EventScript_1BB81F
 	compare VAR_RESULT, 4
-	goto_if eq, EventScript_1BB857
+	goto_if_eq EventScript_1BB857
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	compare VAR_RESULT, 6
-	goto_if eq, EventScript_1BB7FF
+	goto_if_eq EventScript_1BB7FF
 	compare VAR_RESULT, 7
-	goto_if eq, EventScript_1BB7DF
+	goto_if_eq EventScript_1BB7DF
 	compare VAR_RESULT, 9
-	goto_if eq, EventScript_1BB7EF
+	goto_if_eq EventScript_1BB7EF
 	end
 
 EventScript_1BB73D:: @ 81BB73D
@@ -456,10 +456,10 @@ EventScript_1BB73D:: @ 81BB73D
 EventScript_1BB79C:: @ 81BB79C
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 2
-	goto_if lt, EventScript_1BB7C2
+	goto_if_lt EventScript_1BB7C2
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BB7D0
+	goto_if_eq EventScript_1BB7D0
 	setvar VAR_RESULT, 1
 	return
 
@@ -606,7 +606,7 @@ Movement_1BB8A2:: @ 81BB8A2
 gUnknown_81BB8A7:: @ 81BB8A7
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	fadescreen 1
 	setvar VAR_0x8004, 0
@@ -637,7 +637,7 @@ UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB94F
+	goto_if_eq EventScript_1BB94F
 	setvar VAR_0x8005, 0
 	textcolor 3
 	special sub_80819C8
@@ -650,7 +650,7 @@ UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB94F
+	goto_if_eq EventScript_1BB94F
 	setvar VAR_0x8005, 1
 	textcolor 3
 	special sub_80819C8
@@ -663,7 +663,7 @@ UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB94F
+	goto_if_eq EventScript_1BB94F
 	setvar VAR_0x8005, 2
 	textcolor 3
 	special sub_80819C8
@@ -676,7 +676,7 @@ UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
 	special sub_80A0334
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB94F
+	goto_if_eq EventScript_1BB94F
 	setvar VAR_0x8005, 3
 	textcolor 3
 	special sub_80819C8
@@ -765,7 +765,7 @@ gUnknown_81BB9D4:: @ 81BB9D4
 	textcolor 3
 	msgbox Text_TerminateLinkIfYouLeaveRoom, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if eq, EventScript_1BB9F0
+	goto_if_eq EventScript_1BB9F0
 	erasebox 0, 0, 29, 19
 	releaseall
 	end
@@ -786,19 +786,18 @@ gUnknown_81BB9FC:: @ 81BB9FC
 EventScript_1BBA04:: @ 81BBA04
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_1BB877
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
 	specialvar VAR_RESULT, Special_BadEggInParty
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BB867
+	goto_if_eq EventScript_1BB867
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BBB60
+	goto_if_eq EventScript_1BBB60
 	message Text_1BD65B
 	waitmessage
 	goto EventScript_1BBA51
@@ -826,10 +825,10 @@ EventScript_1BBA93:: @ 81BBA93
 EventScript_1BBA94:: @ 81BBA94
 	call EventScript_1BBB1E
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	msgbox gUnknown_81BD86A
 	closemessage
 	special sp000_heal_pokemon
@@ -862,10 +861,10 @@ EventScript_1BBA94:: @ 81BBA94
 EventScript_1BBB1E:: @ 81BBB1E
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 2
-	goto_if lt, EventScript_1BBB44
+	goto_if_lt EventScript_1BBB44
 	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBB52
+	goto_if_eq EventScript_1BBB52
 	setvar VAR_RESULT, 1
 	return
 
@@ -891,11 +890,10 @@ EventScript_1BBB60:: @ 81BBB60
 EventScript_1BBB6A:: @ 81BBB6A
 	lock
 	faceplayer
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_1BB877
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
 	msgbox gUnknown_81BDB85, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1BBB92
+	goto_if_eq EventScript_1BBB92
 	msgbox gUnknown_81BDBF8
 	release
 	return
@@ -908,18 +906,17 @@ EventScript_1BBB92:: @ 81BBB92
 EventScript_1BBB9C:: @ 81BBB9C
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_1BB877
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB877
 	specialvar VAR_RESULT, Special_BadEggInParty
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BB867
+	goto_if_eq EventScript_1BB867
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB44A
+	goto_if_eq EventScript_1BB44A
 	message Text_1BD28D
 	waitmessage
 	delay 15
@@ -929,8 +926,7 @@ EventScript_1BBBE6:: @ 81BBBE6
 	end
 
 EventScript_1BBBE7:: @ 81BBBE7
-	checkflag FLAG_GOT_POWDER_JAR
-	goto_if FALSE, EventScript_1BBC32
+	goto_if_unset FLAG_GOT_POWDER_JAR, EventScript_1BBC32
 	multichoice 0, 0, MULTICHOICE_TRADE_COLOSSEUM_CRUSH, FALSE
 	switch VAR_RESULT
 	case 0, EventScript_1BBC69
@@ -952,10 +948,10 @@ EventScript_1BBC32:: @ 81BBC32
 EventScript_1BBC69:: @ 81BBC69
 	msgbox gUnknown_81BD317, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	call EventScript_1BB79C
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	setvar VAR_0x8004, 3
 	goto EventScript_1BBD6F
 
@@ -985,7 +981,7 @@ EventScript_1BBCF4:: @ 81BBCF4
 EventScript_1BBCF5:: @ 81BBCF5
 	special CheckForAlivePartyMons
 	compare VAR_RESULT, 0
-	goto_if ne, EventScript_1BBD0E
+	goto_if_ne EventScript_1BBD0E
 	setvar VAR_0x8004, 1
 	goto EventScript_1BBD6F
 
@@ -1016,10 +1012,10 @@ EventScript_1BBD34:: @ 81BBD34
 EventScript_1BBD35:: @ 81BBD35
 	msgbox gUnknown_81BD362, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	special CheckHasAtLeastOneBerry
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BBD61
+	goto_if_eq EventScript_1BBD61
 	setvar VAR_0x8004, 5
 	goto EventScript_1BBD6F
 
@@ -1036,7 +1032,7 @@ EventScript_1BBD6E:: @ 81BBD6E
 EventScript_1BBD6F:: @ 81BBD6F
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB82F
+	goto_if_eq EventScript_1BB82F
 	switch VAR_0x8004
 	case 3, EventScript_1BBDBC
 	case 0, EventScript_1BBDBC
@@ -1061,22 +1057,22 @@ EventScript_1BBDBC:: @ 81BBDBC
 EventScript_1BBE00:: @ 81BBE00
 	call EventScript_1BBF78
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBDBC
+	goto_if_eq EventScript_1BBDBC
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBE00
+	goto_if_eq EventScript_1BBE00
 	release
 	return
 
 EventScript_1BBE28:: @ 81BBE28
 	call EventScript_1BBF80
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBDBC
+	goto_if_eq EventScript_1BBDBC
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBE28
+	goto_if_eq EventScript_1BBE28
 	release
 	return
 
@@ -1096,22 +1092,22 @@ EventScript_1BBE50:: @ 81BBE50
 EventScript_1BBE94:: @ 81BBE94
 	call EventScript_1BBF78
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBE50
+	goto_if_eq EventScript_1BBE50
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBE94
+	goto_if_eq EventScript_1BBE94
 	release
 	return
 
 EventScript_1BBEBC:: @ 81BBEBC
 	call EventScript_1BBF80
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBE50
+	goto_if_eq EventScript_1BBE50
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBEBC
+	goto_if_eq EventScript_1BBEBC
 	release
 	return
 
@@ -1131,22 +1127,22 @@ EventScript_1BBEE4:: @ 81BBEE4
 EventScript_1BBF28:: @ 81BBF28
 	call EventScript_1BBF78
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBEE4
+	goto_if_eq EventScript_1BBEE4
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBF28
+	goto_if_eq EventScript_1BBF28
 	release
 	return
 
 EventScript_1BBF50:: @ 81BBF50
 	call EventScript_1BBF80
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BBF88
+	goto_if_eq EventScript_1BBF88
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BBEE4
+	goto_if_eq EventScript_1BBEE4
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BBF50
+	goto_if_eq EventScript_1BBF50
 	release
 	return
 
@@ -1191,13 +1187,12 @@ EventScript_1BBF88:: @ 81BBF88
 gUnknown_81BBFD8:: @ 81BBFD8
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_1BB881
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1BB881
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BC016
+	goto_if_eq EventScript_1BC016
 	special HelpSystem_Disable
 	fadescreen 1
 	special sub_814F1D4
@@ -1261,7 +1256,7 @@ ViridianCity_PokemonCenter_1F_MapScript2_1BC05C:: @ 81BC05C
 EventScript_1BC060:: @ 81BC060
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -1293,7 +1288,7 @@ EventScript_1BC0C4:: @ 81BC0C4
 EventScript_1BC0CE:: @ 81BC0CE
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -1301,7 +1296,7 @@ EventScript_1BC0CE:: @ 81BC0CE
 	waitmessage
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BC29C
+	goto_if_eq EventScript_1BC29C
 	delay 60
 	special HelpSystem_Disable
 	message Text_1BD02D
@@ -1318,16 +1313,16 @@ EventScript_1BC13A:: @ 81BC13A
 	setvar VAR_0x8005, 0
 	special sub_8149A18
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_NoEligiblePkmn
+	goto_if_eq EventScript_NoEligiblePkmn
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 0
 	special ChooseMonForWirelessMinigame
 	waitstate
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_1BB83F
+	goto_if_ge EventScript_1BB83F
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB83F
+	goto_if_eq EventScript_1BB83F
 	setvar VAR_0x8004, 4
 	goto EventScript_1BC1CE
 
@@ -1338,16 +1333,16 @@ EventScript_1BC184:: @ 81BC184
 	setvar VAR_0x8005, 1
 	special sub_81537C0
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_NoEligiblePkmn
+	goto_if_eq EventScript_NoEligiblePkmn
 	msgbox gUnknown_81BD059
 	setvar VAR_0x8005, 1
 	special ChooseMonForWirelessMinigame
 	waitstate
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_1BB83F
+	goto_if_ge EventScript_1BB83F
 	call EventScript_1A4EAF
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BB83F
+	goto_if_eq EventScript_1BB83F
 	setvar VAR_0x8004, 6
 	goto EventScript_1BC1CE
 
@@ -1370,22 +1365,22 @@ EventScript_1BC1CE:: @ 81BC1CE
 EventScript_1BC212:: @ 81BC212
 	call EventScript_1BBF78
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BC262
+	goto_if_eq EventScript_1BC262
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BC1CE
+	goto_if_eq EventScript_1BC1CE
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BC212
+	goto_if_eq EventScript_1BC212
 	release
 	return
 
 EventScript_1BC23A:: @ 81BC23A
 	call EventScript_1BBF80
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BC262
+	goto_if_eq EventScript_1BC262
 	compare VAR_RESULT, 5
-	goto_if eq, EventScript_1BC1CE
+	goto_if_eq EventScript_1BC1CE
 	compare VAR_RESULT, 8
-	goto_if eq, EventScript_1BC23A
+	goto_if_eq EventScript_1BC23A
 	release
 	return
 
@@ -1417,11 +1412,11 @@ EventScript_1BC29C:: @ 81BC29C
 EventScript_NoEligiblePkmn:: @ 81BC2A6
 	msgbox gUnknown_81BD0CF, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_1BB83F
+	goto_if_eq EventScript_1BB83F
 	compare VAR_0x8005, 0
-	call_if eq, EventScript_1BC2D5
+	call_if_eq EventScript_1BC2D5
 	compare VAR_0x8005, 1
-	call_if eq, EventScript_1BC2DE
+	call_if_eq EventScript_1BC2DE
 	goto EventScript_1BB83F
 
 EventScript_1BC2D4:: @ 81BC2D4
@@ -1438,7 +1433,7 @@ EventScript_1BC2DE:: @ 81BC2DE
 TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	special sub_814B504
 	waitstate
@@ -1448,7 +1443,7 @@ TwoIsland_JoyfulGameCorner_EventScript_1BC2E7:: @ 81BC2E7
 TwoIsland_JoyfulGameCorner_EventScript_1BC2FC:: @ 81BC2FC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	special sub_8153810
 	waitstate

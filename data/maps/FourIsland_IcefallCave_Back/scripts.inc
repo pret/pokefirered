@@ -4,7 +4,7 @@ FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
 
 FourIsland_IcefallCave_Back_OnTransition:: @ 8163D88
 	compare VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
-	call_if eq, EventScript_163D94
+	call_if_eq EventScript_163D94
 	end
 
 EventScript_163D94:: @ 8163D94
@@ -46,7 +46,7 @@ FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
 	textcolor 0
 	msgbox gUnknown_817B20B
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_45, 0, Text_17B251
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_45, Text_17B251
 	applymovement 3, Movement_163F1B
 	waitmovement 0
 	textcolor 1

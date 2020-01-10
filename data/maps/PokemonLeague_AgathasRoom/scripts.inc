@@ -11,10 +11,9 @@ PokemonLeague_AgathasRoom_OnResume:: @ 8162825
 	end
 
 PokemonLeague_AgathasRoom_OnLoad:: @ 8162830
-	checkflag FLAG_DEFEATED_AGATHA
-	call_if TRUE, EventScript_16284B
+	call_if_set FLAG_DEFEATED_AGATHA, EventScript_16284B
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 3
-	call_if eq, EventScript_162845
+	call_if_eq EventScript_162845
 	end
 
 EventScript_162845:: @ 8162845
@@ -48,21 +47,16 @@ PokemonLeague_AgathasRoom_EventScript_162877:: @ 8162877
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_DEFEATED_AGATHA
-	goto_if TRUE, EventScript_162911
+	goto_if_set FLAG_DEFEATED_AGATHA, EventScript_162911
 	famechecker FAMECHECKER_AGATHA, 0
 	famechecker FAMECHECKER_AGATHA, 4
 	famechecker FAMECHECKER_OAK, 4
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if FALSE, EventScript_1628E9
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if TRUE, EventScript_1628F2
+	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_1628E9
+	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_1628F2
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_1628FB
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_162906
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_1628FB
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162906
 	clearflag FLAG_TEMP_5
 	goto EventScript_16291B
 
@@ -78,11 +72,11 @@ EventScript_1628F2:: @ 81628F2
 	return
 
 EventScript_1628FB:: @ 81628FB
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_AGATHA, 0, Text_1786D7
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_AGATHA, Text_1786D7
 	return
 
 EventScript_162906:: @ 8162906
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_AGATHA_2, 0, Text_1786D7
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_AGATHA_2, Text_1786D7
 	return
 
 EventScript_162911:: @ 8162911

@@ -1,7 +1,7 @@
 EventScript_PkmnCenterNurse:: @ 81A6578
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	message Text_WelcomeWantToHealPkmn
 	waitmessage
 	multichoice 19, 8, MULTICHOICE_YES_NO, FALSE | (TRUE << 1)
@@ -33,13 +33,13 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 81A65CE
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom:: @ 81A65EC
 	specialvar VAR_RESULT, Special_PlayerIsNotInTrainerTowerLobby
 	compare VAR_RESULT, FALSE
-	goto_if eq, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
 	specialvar VAR_RESULT, BufferUnionRoomPlayerName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	goto_if eq, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
 	compare VAR_0x8008, 1
-	goto_if eq, EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom
+	goto_if_eq EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom
 	end
 
 EventScript_PkmnCenterNurse_ReturnPkmn:: @ 81A661D
@@ -51,8 +51,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn:: @ 81A661D
 	return
 
 EventScript_PkmnCenterNurse_PlayerWaitingInUionRoom:: @ 81A6636
-	checkflag FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER
-	goto_if TRUE, EventScript_PkmnCenterNurse_ReturnPkmn
+	goto_if_set FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER, EventScript_PkmnCenterNurse_ReturnPkmn
 	msgbox Text_RestoredPkmnToFullHealth
 	setflag FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER
 	message Text_PlayerIsPlayingRightNowGoForIt

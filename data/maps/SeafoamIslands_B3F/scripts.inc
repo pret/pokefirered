@@ -4,20 +4,16 @@ SeafoamIslands_B3F_MapScripts:: @ 8162F4F
 	.byte 0
 
 SeafoamIslands_B3F_OnTransition:: @ 8162F5A
-	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
-	call_if FALSE, EventScript_162F6D
-	checkflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
-	call_if TRUE, EventScript_162F94
+	call_if_unset FLAG_STOPPED_SEAFOAM_B3F_CURRENT, EventScript_162F6D
+	call_if_set FLAG_STOPPED_SEAFOAM_B3F_CURRENT, EventScript_162F94
 	end
 
 EventScript_162F6D:: @ 8162F6D
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_1
-	call_if FALSE, EventScript_162FF0
-	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
-	call_if FALSE, EventScript_162FF0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, EventScript_162FF0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, EventScript_162FF0
 	compare VAR_TEMP_2, 2
-	call_if eq, EventScript_162F90
+	call_if_eq EventScript_162F90
 	return
 
 EventScript_162F90:: @ 8162F90
@@ -35,17 +31,15 @@ SeafoamIslands_B3F_OnFrame:: @ 8162F98
 EventScript_162FA2:: @ 8162FA2
 	lockall
 	setvar VAR_TEMP_2, 0
-	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_1
-	call_if FALSE, EventScript_162FF0
-	checkflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
-	call_if FALSE, EventScript_162FF0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, EventScript_162FF0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, EventScript_162FF0
 	compare VAR_TEMP_2, 2
-	goto_if eq, EventScript_16300C
+	goto_if_eq EventScript_16300C
 	getplayerxy VAR_0x8008, VAR_0x8009
 	compare VAR_0x8008, 24
-	call_if lt, EventScript_162FF6
+	call_if_lt EventScript_162FF6
 	compare VAR_0x8008, 24
-	call_if ge, EventScript_163001
+	call_if_ge EventScript_163001
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
 	warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21
 	waitstate

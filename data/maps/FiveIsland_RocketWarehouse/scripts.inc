@@ -9,7 +9,7 @@ FiveIsland_RocketWarehouse_OnTransition:: @ 8163F39
 
 FiveIsland_RocketWarehouse_OnLoad:: @ 8163F3D
 	checktrainerflag TRAINER_TEAM_ROCKET_ADMIN
-	call_if eq, EventScript_163F47
+	call_if_eq EventScript_163F47
 	end
 
 EventScript_163F47:: @ 8163F47
@@ -19,8 +19,7 @@ EventScript_163F47:: @ 8163F47
 
 FiveIsland_RocketWarehouse_EventScript_163F5A:: @ 8163F5A
 	lockall
-	checkflag FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE
-	goto_if TRUE, EventScript_163F6E
+	goto_if_set FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE, EventScript_163F6E
 	msgbox gUnknown_817B4E3
 	releaseall
 	end
@@ -43,9 +42,8 @@ FiveIsland_RocketWarehouse_EventScript_163F81:: @ 8163F81
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163F93:: @ 8163F93
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_SCIENTIST_GIDEON, 0, Text_17BBAF, Text_17BC55, EventScript_163FCD
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	goto_if TRUE, EventScript_163FB7
+	trainerbattle_single TRAINER_SCIENTIST_GIDEON, Text_17BBAF, Text_17BC55, EventScript_163FCD
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_163FB7
 	msgbox gUnknown_817BCA3, 6
 	end
 
@@ -62,24 +60,24 @@ EventScript_163FCD:: @ 8163FCD
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FE6:: @ 8163FE6
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_47, 0, Text_17B54D, Text_17B585
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_47, Text_17B54D, Text_17B585
 	msgbox gUnknown_817B5A6, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_163FFD:: @ 8163FFD
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_48, 0, Text_17B677, Text_17B6D9
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_48, Text_17B677, Text_17B6D9
 	msgbox gUnknown_817B6EF, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164014:: @ 8164014
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_ADMIN_2, 0, Text_17B8DA, Text_17B9FB, EventScript_16402F
+	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN_2, Text_17B8DA, Text_17B9FB, EventScript_16402F
 	msgbox gUnknown_817BA64, 6
 	end
 
 EventScript_16402F:: @ 816402F
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 24
-	call_if le, EventScript_164065
+	call_if_le EventScript_164065
 	msgbox gUnknown_817BA64
 	closemessage
 	fadescreen 1
@@ -100,12 +98,12 @@ EventScript_164065:: @ 8164065
 	return
 
 FiveIsland_RocketWarehouse_EventScript_164070:: @ 8164070
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_42, 0, Text_17B5D6, Text_17B62F
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_42, Text_17B5D6, Text_17B62F
 	msgbox gUnknown_817B642, 6
 	end
 
 FiveIsland_RocketWarehouse_EventScript_164087:: @ 8164087
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_ADMIN, 0, Text_17B72D, Text_17B79C, EventScript_1640A2
+	trainerbattle_single TRAINER_TEAM_ROCKET_ADMIN, Text_17B72D, Text_17B79C, EventScript_1640A2
 	msgbox gUnknown_817B7FA, 6
 	end
 
@@ -113,36 +111,36 @@ EventScript_1640A2:: @ 81640A2
 	getplayerxy VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, GetPlayerFacingDirection
 	compare VAR_RESULT, DIR_NORTH
-	call_if eq, EventScript_16412E
+	call_if_eq EventScript_16412E
 	msgbox gUnknown_817B7AE
 	closemessage
 	compare VAR_0x8004, 24
-	call_if le, EventScript_164144
+	call_if_le EventScript_164144
 	compare VAR_0x8004, 25
-	call_if eq, EventScript_16414F
+	call_if_eq EventScript_16414F
 	compare VAR_0x8004, 26
-	call_if eq, EventScript_16415A
+	call_if_eq EventScript_16415A
 	compare VAR_0x8004, 27
-	call_if eq, EventScript_16415A
+	call_if_eq EventScript_16415A
 	playse SE_PIN
 	call EventScript_163F47
 	special DrawWholeMapView
 	waitse
 	compare VAR_0x8004, 24
-	call_if le, EventScript_164165
+	call_if_le EventScript_164165
 	compare VAR_0x8004, 25
-	call_if eq, EventScript_164165
+	call_if_eq EventScript_164165
 	compare VAR_0x8004, 26
-	call_if eq, EventScript_164165
+	call_if_eq EventScript_164165
 	compare VAR_0x8004, 27
-	call_if eq, EventScript_164170
+	call_if_eq EventScript_164170
 	msgbox gUnknown_817B7FA
 	release
 	end
 
 EventScript_16412E:: @ 816412E
 	compare VAR_0x8004, 27
-	goto_if eq, EventScript_1A77A9
+	goto_if_eq EventScript_1A77A9
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return

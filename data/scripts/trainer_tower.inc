@@ -51,7 +51,7 @@ EventScript_1C4FC5:: @ 81C4FC5
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1C4FFE
+	goto_if_eq EventScript_1C4FFE
 	setobjectxyperm 2, 10, 12
 	setobjectmovementtype 2, 9
 	setobjectxyperm 5, 10, 13
@@ -96,14 +96,14 @@ EventScript_1C5050:: @ 81C5050
 	setvar VAR_0x8004, 5
 	special sub_815D9E8
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1C5072
+	goto_if_eq EventScript_1C5072
 	setvar VAR_TEMP_E, 1
 	setvar VAR_TEMP_F, 1
 EventScript_1C5072:
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1C5086
+	goto_if_eq EventScript_1C5086
 	end
 
 EventScript_1C5086:: @ 81C5086
@@ -145,7 +145,7 @@ EventScript_1C510D:: @ 81C510D
 	setvar VAR_0x8005, 2
 	addvar VAR_TEMP_3, 1
 	compare VAR_TEMP_3, 1
-	goto_if eq, EventScript_1C5146
+	goto_if_eq EventScript_1C5146
 	setvar VAR_TEMP_3, 0
 EventScript_1C5146:
 	copyvar VAR_0x8006, VAR_TEMP_3
@@ -378,7 +378,7 @@ SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
 	compare VAR_RESULT, 0
-	goto_if ne, EventScript_1C5528
+	goto_if_ne EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
 	applymovement 2, Movement_ExclamationMark
@@ -398,7 +398,7 @@ SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
 	setvar VAR_0x8004, 16
 	special sub_815D9E8
 	compare VAR_RESULT, 0
-	goto_if ne, EventScript_1C5528
+	goto_if_ne EventScript_1C5528
 	setvar VAR_0x8004, 19
 	special sub_815D9E8
 	applymovement 5, Movement_ExclamationMark

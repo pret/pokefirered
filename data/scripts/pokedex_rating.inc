@@ -1,12 +1,10 @@
 EventScript_1A737B:: @ 81A737B
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
-	checkflag FLAG_OAK_SAW_DEX_COMPLETION
-	call_if TRUE, EventScript_1A73A4
-	checkflag FLAG_OAK_SAW_DEX_COMPLETION
-	call_if FALSE, EventScript_1A73AD
+	call_if_set FLAG_OAK_SAW_DEX_COMPLETION, EventScript_1A73A4
+	call_if_unset FLAG_OAK_SAW_DEX_COMPLETION, EventScript_1A73AD
 	call EventScript_1A73E0
 	return
 
@@ -23,9 +21,9 @@ EventScript_1A73B6:: @ 81A73B6
 	special Special_GetProfOaksRatingMessage
 	waitmessage
 	compare VAR_RESULT, 0
-	call_if eq, EventScript_1A73D8
+	call_if_eq EventScript_1A73D8
 	compare VAR_RESULT, 1
-	call_if eq, EventScript_1A73DC
+	call_if_eq EventScript_1A73DC
 	waitfanfare
 	waitbuttonpress
 	return
@@ -50,11 +48,10 @@ EventScript_1A73E0:: @ 81A73E0
 	getnumberstring 0, VAR_0x8008
 	getnumberstring 1, VAR_0x8009
 	msgbox Text_1A6CA3
-	checkflag FLAG_OAKS_RATING_IS_VIA_PC
-	call_if FALSE, EventScript_1A746D
+	call_if_unset FLAG_OAKS_RATING_IS_VIA_PC, EventScript_1A746D
 	call EventScript_1A73B6
 	compare VAR_0x800A, 0
-	goto_if eq, EventScript_1A748F
+	goto_if_eq EventScript_1A748F
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
@@ -64,9 +61,9 @@ EventScript_1A73E0:: @ 81A73E0
 	msgbox Text_1A71AA
 	specialvar VAR_RESULT, HasAllMons
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A7470
+	goto_if_eq EventScript_1A7470
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1A747E
+	goto_if_eq EventScript_1A747E
 	end
 
 EventScript_1A746D:: @ 81A746D

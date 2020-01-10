@@ -1,16 +1,16 @@
 EventScript_UseSurf:: @ 81A6AC8
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_UseSurfEnd
+	goto_if_eq EventScript_UseSurfEnd
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_UseSurfEnd
+	goto_if_eq EventScript_UseSurfEnd
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	lockall
 	msgbox Text_1A556E, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_UseSurfRelease
+	goto_if_eq EventScript_UseSurfRelease
 	msgbox Text_1A55A5
 	dofieldeffect FLDEFF_USE_SURF
 EventScript_UseSurfRelease:@ 81A6B0B

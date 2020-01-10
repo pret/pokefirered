@@ -7,13 +7,13 @@ PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	msgbox gUnknown_817A2F8
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
 	special ScrSpecial_StartMarowakBattle
 	waitstate
 	special sub_8112364
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1634F5
+	goto_if_eq EventScript_1634F5
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_163512
 	waitmovement 0
 	releaseall
@@ -36,16 +36,16 @@ Movement_163512:: @ 8163512
 	step_end
 
 PokemonTower_6F_EventScript_163514:: @ 8163514
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_ANGELICA, 0, Text_17A243, Text_17A253
+	trainerbattle_single TRAINER_CHANNELER_ANGELICA, Text_17A243, Text_17A253
 	msgbox gUnknown_817A25A, 6
 	end
 
 PokemonTower_6F_EventScript_16352B:: @ 816352B
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_EMILIA, 0, Text_17A272, Text_17A27F
+	trainerbattle_single TRAINER_CHANNELER_EMILIA, Text_17A272, Text_17A27F
 	msgbox gUnknown_817A293, 6
 	end
 
 PokemonTower_6F_EventScript_163542:: @ 8163542
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_CHANNELER_JENNIFER, 0, Text_17A2C8, Text_17A2DC
+	trainerbattle_single TRAINER_CHANNELER_JENNIFER, Text_17A2C8, Text_17A2DC
 	msgbox gUnknown_817A2E2, 6
 	end

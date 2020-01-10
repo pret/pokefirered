@@ -12,9 +12,8 @@ PokemonLeague_LancesRoom_OnResume:: @ 8162942
 
 PokemonLeague_LancesRoom_OnLoad:: @ 816294D
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
-	call_if eq, EventScript_162962
-	checkflag FLAG_DEFEATED_LANCE
-	call_if TRUE, EventScript_162968
+	call_if_eq EventScript_162962
+	call_if_set FLAG_DEFEATED_LANCE, EventScript_162968
 	end
 
 EventScript_162962:: @ 8162962
@@ -102,20 +101,15 @@ PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_DEFEATED_LANCE
-	goto_if TRUE, EventScript_162AA1
+	goto_if_set FLAG_DEFEATED_LANCE, EventScript_162AA1
 	famechecker FAMECHECKER_LANCE, 0
 	famechecker FAMECHECKER_LANCE, 1
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if FALSE, EventScript_162A79
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if TRUE, EventScript_162A82
+	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162A79
+	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_162A82
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162A8B
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_162A96
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A8B
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A96
 	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB
 
@@ -131,11 +125,11 @@ EventScript_162A82:: @ 8162A82
 	return
 
 EventScript_162A8B:: @ 8162A8B
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LANCE, 0, Text_178A15
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE, Text_178A15
 	return
 
 EventScript_162A96:: @ 8162A96
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LANCE_2, 0, Text_178A15
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE_2, Text_178A15
 	return
 
 EventScript_162AA1:: @ 8162AA1

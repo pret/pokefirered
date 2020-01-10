@@ -4,8 +4,7 @@ SevenIsland_SevaultCanyon_TanobyKey_MapScripts:: @ 8164DCC
 
 SevenIsland_SevaultCanyon_TanobyKey_OnTransition:: @ 8164DD2
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY
-	checkflag FLAG_SYS_UNLOCKED_TANOBY_RUINS
-	call_if TRUE, EventScript_164E07
+	call_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_164E07
 	setvar VAR_TEMP_1, 0
 	setvar VAR_TEMP_2, 0
 	setvar VAR_TEMP_3, 0
@@ -29,77 +28,77 @@ EventScript_164E07:: @ 8164E07
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E39:: @ 8164E39
 	lockall
 	compare VAR_TEMP_1, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_1, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E5C:: @ 8164E5C
 	lockall
 	compare VAR_TEMP_2, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_2, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164E7F:: @ 8164E7F
 	lockall
 	compare VAR_TEMP_3, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_3, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EA2:: @ 8164EA2
 	lockall
 	compare VAR_TEMP_4, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_4, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EC5:: @ 8164EC5
 	lockall
 	compare VAR_TEMP_5, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_5, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164EE8:: @ 8164EE8
 	lockall
 	compare VAR_TEMP_6, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_6, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_164F0B:: @ 8164F0B
 	lockall
 	compare VAR_TEMP_7, 100
-	goto_if eq, EventScript_164F8A
+	goto_if_eq EventScript_164F8A
 	call EventScript_164F2E
 	setvar VAR_TEMP_7, 100
 	compare VAR_TEMP_8, 7
-	goto_if eq, EventScript_164F8C
+	goto_if_eq EventScript_164F8C
 	releaseall
 	end
 

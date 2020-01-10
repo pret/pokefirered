@@ -26,7 +26,7 @@ SaffronCity_PokemonCenter_1F_EventScript_16F016:: @ 816F016
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if eq, EventScript_16F02D
+	goto_if_eq EventScript_16F02D
 	msgbox gUnknown_819C0B4
 	release
 	end

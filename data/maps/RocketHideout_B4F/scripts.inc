@@ -5,11 +5,11 @@ RocketHideout_B4F_MapScripts:: @ 81612E8
 RocketHideout_B4F_OnLoad:: @ 81612EE
 	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	compare VAR_TEMP_1, 2
-	call_if ne, EventScript_16146A
+	call_if_ne EventScript_16146A
 	end
 
 EventScript_161311:: @ 8161311
@@ -24,7 +24,7 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BOSS_GIOVANNI, 0, Text_175318
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, Text_175318
 	msgbox gUnknown_817532D
 	fadescreen 1
 	closemessage
@@ -43,12 +43,12 @@ RocketHideout_B4F_EventScript_161363:: @ 8161363
 	removeobject 2
 	giveitem ITEM_SILPH_SCOPE
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A6BF9
+	goto_if_eq EventScript_1A6BF9
 	release
 	end
 
 RocketHideout_B4F_EventScript_161381:: @ 8161381
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_18, 0, Text_175488, Text_1754B9, EventScript_16139D
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_18, Text_175488, Text_1754B9, EventScript_16139D
 	msgbox gUnknown_81754BD
 	release
 	end
@@ -67,43 +67,43 @@ RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A6BF9
+	goto_if_eq EventScript_1A6BF9
 	release
 	end
 
 RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_16, 0, Text_1753D0, Text_1753FE, EventScript_1613E9
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, Text_1753D0, Text_1753FE, EventScript_1613E9
 	msgbox gUnknown_817540C, 6
 	end
 
 EventScript_1613E9:: @ 81613E9
 	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_1614A1
+	call_if_eq EventScript_1614A1
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_161462
+	call_if_eq EventScript_161462
 	release
 	end
 
 RocketHideout_B4F_EventScript_161418:: @ 8161418
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_17, 0, Text_175437, Text_175463, EventScript_161433
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, Text_175437, Text_175463, EventScript_161433
 	msgbox gUnknown_817546A, 6
 	end
 
 EventScript_161433:: @ 8161433
 	setvar VAR_TEMP_1, 0
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
+	call_if_eq EventScript_161311
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_1614A1
+	call_if_eq EventScript_1614A1
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_161462
+	call_if_eq EventScript_161462
 	release
 	end
 

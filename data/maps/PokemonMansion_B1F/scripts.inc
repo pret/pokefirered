@@ -3,8 +3,7 @@ PokemonMansion_B1F_MapScripts:: @ 81622FC
 	.byte 0
 
 PokemonMansion_B1F_OnLoad:: @ 8162302
-	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	call_if TRUE, EventScript_1A7F4C
+	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, EventScript_1A7F4C
 	end
 
 PokemonMansion_B1F_EventScript_16230C:: @ 816230C
@@ -22,11 +21,11 @@ PokemonMansion_B1F_EventScript_162320:: @ 8162320
 	end
 
 PokemonMansion_B1F_EventScript_162329:: @ 8162329
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BURGLAR_LEWIS, 0, Text_1776C0, Text_1776D7
+	trainerbattle_single TRAINER_BURGLAR_LEWIS, Text_1776C0, Text_1776D7
 	msgbox gUnknown_81776DE, 6
 	end
 
 PokemonMansion_B1F_EventScript_162340:: @ 8162340
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_IVAN, 0, Text_177720, Text_177757
+	trainerbattle_single TRAINER_SCIENTIST_IVAN, Text_177720, Text_177757
 	msgbox gUnknown_817776A, 6
 	end

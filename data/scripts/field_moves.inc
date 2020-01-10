@@ -1,19 +1,18 @@
 EventScript_InteractWithCutTreeObject:: @ 81BDF13
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
-	checkflag FLAG_BADGE02_GET
-	goto_if FALSE, EventScript_1BDF87
+	goto_if_unset FLAG_BADGE02_GET, EventScript_1BDF87
 	checkpartymove MOVE_CUT
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BDF87
+	goto_if_eq EventScript_1BDF87
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_CUT
 	msgbox gUnknown_81BDF94, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BDF91
+	goto_if_eq EventScript_1BDF91
 	msgbox gUnknown_81BDFD7
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
@@ -64,19 +63,18 @@ gUnknown_81BDFE3:: @ 81BDFE3
 EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
-	checkflag FLAG_BADGE06_GET
-	goto_if FALSE, EventScript_1BE091
+	goto_if_unset FLAG_BADGE06_GET, EventScript_1BE091
 	checkpartymove MOVE_ROCK_SMASH
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BE091
+	goto_if_eq EventScript_1BE091
 	setfieldeffectarg 0, VAR_RESULT
 	getpartymonname 0, VAR_RESULT
 	getmovename 1, MOVE_ROCK_SMASH
 	msgbox Text_1BE09D, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE09A
+	goto_if_eq EventScript_1BE09A
 	msgbox gUnknown_81BDFD7
 	closemessage
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
@@ -97,7 +95,7 @@ EventScript_1BE06F:: @ 81BE06F
 	removeobject VAR_LAST_TALKED
 	special ScrSpecial_RockSmashWildEncounter
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE08D
+	goto_if_eq EventScript_1BE08D
 	waitstate
 	releaseall
 	end
@@ -130,19 +128,17 @@ gUnknown_81BE0E2:: @ 81BE0E2
 EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
-	checkflag FLAG_BADGE04_GET
-	goto_if FALSE, EventScript_1BE185
-	checkflag FLAG_SYS_STRENGTH_ACTIVE
-	goto_if TRUE, EventScript_1BE18E
+	goto_if_unset FLAG_BADGE04_GET, EventScript_1BE185
+	goto_if_set FLAG_SYS_STRENGTH_ACTIVE, EventScript_1BE18E
 	checkpartymove MOVE_STRENGTH
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BE185
+	goto_if_eq EventScript_1BE185
 	setfieldeffectarg 0, VAR_RESULT
 	msgbox gUnknown_81BE19A, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE197
+	goto_if_eq EventScript_1BE197
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
@@ -195,16 +191,16 @@ gUnknown_81BE284:: @ 81BE284
 gUnknown_81BE2B7:: @ 81BE2B7
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BE300
+	goto_if_eq EventScript_1BE300
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	msgbox gUnknown_81BE33F, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE308
+	goto_if_eq EventScript_1BE308
 	msgbox gUnknown_81BE378
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_1BE308
@@ -233,13 +229,13 @@ EventScript_1BE38B:: @ 81BE38B
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BE3CA
+	goto_if_eq EventScript_1BE3CA
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
 	msgbox gUnknown_81BE469, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE3D2
+	goto_if_eq EventScript_1BE3D2
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_1BE3D2
@@ -256,13 +252,13 @@ EventScript_1BE3D4:: @ 81BE3D4
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BE412
+	goto_if_eq EventScript_1BE412
 	getpartymonname 0, VAR_RESULT
 	setfieldeffectarg 0, VAR_RESULT
 	setfieldeffectarg 1, 1
 	msgbox gUnknown_81BE4EF, 5
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BE429
+	goto_if_eq EventScript_1BE429
 	msgbox gUnknown_81BE49B
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_1BE429

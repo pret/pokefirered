@@ -4,8 +4,7 @@ Route18_EastEntrance_1F_MapScripts:: @ 8170378
 
 Route18_EastEntrance_1F_OnTransition:: @ 817037E
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
-	checkflag FLAG_GOT_BICYCLE
-	call_if TRUE, EventScript_17038B
+	call_if_set FLAG_GOT_BICYCLE, EventScript_17038B
 	end
 
 EventScript_17038B:: @ 817038B
@@ -54,13 +53,13 @@ EventScript_1703D6:: @ 81703D6
 	waitmovement 0
 	delay 20
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_17042F
+	call_if_eq EventScript_17042F
 	compare VAR_0x8008, 2
-	call_if eq, EventScript_17043A
+	call_if_eq EventScript_17043A
 	compare VAR_0x8008, 3
-	call_if eq, EventScript_170445
+	call_if_eq EventScript_170445
 	compare VAR_0x8008, 4
-	call_if eq, EventScript_170450
+	call_if_eq EventScript_170450
 	msgbox gUnknown_819FD0C
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_170469

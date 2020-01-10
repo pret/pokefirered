@@ -4,10 +4,9 @@ ThreeIsland_MapScripts:: @ 81677AD
 
 ThreeIsland_OnTransition:: @ 81677B3
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND
-	checkflag FLAG_RESCUED_LOSTELLE
-	call_if TRUE, EventScript_1677CB
+	call_if_set FLAG_RESCUED_LOSTELLE, EventScript_1677CB
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	call_if eq, EventScript_1677CF
+	call_if_eq EventScript_1677CF
 	end
 
 EventScript_1677CB:: @ 81677CB
@@ -28,10 +27,9 @@ ThreeIsland_EventScript_1677D8:: @ 81677D8
 
 ThreeIsland_EventScript_1677E5:: @ 81677E5
 	lock
-	checkflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
-	goto_if TRUE, EventScript_167806
+	goto_if_set FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER, EventScript_167806
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if eq, EventScript_16781A
+	goto_if_eq EventScript_16781A
 	setvar VAR_TEMP_1, 0
 	call EventScript_16786F
 	release
@@ -50,9 +48,9 @@ EventScript_16781A:: @ 816781A
 	msgbox gUnknown_818275A
 	checkitemspace ITEM_FULL_RESTORE, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_167865
-	giveitemfanfaremsg gUnknown_81827BE, ITEM_FULL_RESTORE
-	additem ITEM_FULL_RESTORE, 1
+	goto_if_eq EventScript_167865
+	msgreceiveditem gUnknown_81827BE, ITEM_FULL_RESTORE
+	additem ITEM_FULL_RESTORE
 	setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
 	msgbox gUnknown_81827F1
 	release
@@ -65,36 +63,36 @@ EventScript_167865:: @ 8167865
 
 EventScript_16786F:: @ 816786F
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_167947
+	call_if_eq EventScript_167947
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_167947
+	call_if_eq EventScript_167947
 	applymovement 1, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81820C0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_167952
+	call_if_eq EventScript_167952
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_167952
+	call_if_eq EventScript_167952
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_16795D
+	call_if_eq EventScript_16795D
 	applymovement 5, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_8182125
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_167931
+	call_if_eq EventScript_167931
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_167931
+	call_if_eq EventScript_167931
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_167973
+	call_if_eq EventScript_167973
 	applymovement 2, Movement_167A1B
 	waitmovement 0
 	msgbox gUnknown_81821A9
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_167952
+	call_if_eq EventScript_167952
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_167952
+	call_if_eq EventScript_167952
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_16795D
+	call_if_eq EventScript_16795D
 	applymovement 4, Movement_167A19
 	waitmovement 0
 	msgbox gUnknown_81821DC
@@ -123,21 +121,21 @@ EventScript_167952:: @ 8167952
 EventScript_16795D:: @ 816795D
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 9
-	goto_if ge, EventScript_167931
+	goto_if_ge EventScript_167931
 	goto EventScript_167952
 	end
 
 EventScript_167973:: @ 8167973
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 9
-	goto_if ge, EventScript_167947
+	goto_if_ge EventScript_167947
 	goto EventScript_167931
 	end
 
 ThreeIsland_EventScript_167989:: @ 8167989
 	lock
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if eq, EventScript_1679A1
+	goto_if_eq EventScript_1679A1
 	setvar VAR_TEMP_1, 1
 	call EventScript_16786F
 	release
@@ -224,10 +222,10 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81823ED, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_167C35
+	goto_if_eq EventScript_167C35
 	msgbox gUnknown_818247D
 	setvar VAR_LAST_TALKED, 5
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON, 0, Text_1824B7
+	trainerbattle_no_intro TRAINER_BIKER_GOON, Text_1824B7
 	applymovement 5, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_81824CF
@@ -237,7 +235,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_81824EF
 	setvar VAR_LAST_TALKED, 7
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON_2, 0, Text_182521
+	trainerbattle_no_intro TRAINER_BIKER_GOON_2, Text_182521
 	applymovement 7, Movement_167C5C
 	waitmovement 0
 	msgbox gUnknown_8182536
@@ -247,7 +245,7 @@ EventScript_167A59:: @ 8167A59
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182582
 	setvar VAR_LAST_TALKED, 4
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BIKER_GOON_3, 0, Text_1825D4
+	trainerbattle_no_intro TRAINER_BIKER_GOON_3, Text_1825D4
 	applymovement 4, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	applymovement 6, Movement_WalkInPlaceFastestDown
@@ -257,19 +255,19 @@ EventScript_167A59:: @ 8167A59
 	closemessage
 	delay 45
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_167BC6
+	call_if_eq EventScript_167BC6
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_167BD8
+	call_if_eq EventScript_167BD8
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_167BEA
+	call_if_eq EventScript_167BEA
 	compare VAR_TEMP_1, 3
-	call_if eq, EventScript_167C03
+	call_if_eq EventScript_167C03
 	compare VAR_TEMP_1, 4
-	call_if eq, EventScript_167C1C
+	call_if_eq EventScript_167C1C
 	playbgm MUS_SHOUNEN, 0
 	msgbox gUnknown_8182623
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CUE_BALL_PAXTON, 0, Text_1826B7
+	trainerbattle_no_intro TRAINER_CUE_BALL_PAXTON, Text_1826B7
 	msgbox gUnknown_818271D
 	closemessage
 	fadescreen 1

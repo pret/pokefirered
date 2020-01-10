@@ -23,11 +23,11 @@ EventScript_170A97:: @ 8170A97
 	special StartSpecialBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if eq, EventScript_170AFE
+	call_if_eq EventScript_170AFE
 	compare VAR_RESULT, 1
-	call_if eq, EventScript_170B0C
+	call_if_eq EventScript_170B0C
 	compare VAR_RESULT, 2
-	call_if eq, EventScript_170B17
+	call_if_eq EventScript_170B17
 	closemessage
 	special sp000_heal_pokemon
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B28

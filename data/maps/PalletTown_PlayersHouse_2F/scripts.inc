@@ -5,7 +5,7 @@ PalletTown_PlayersHouse_2F_MapScripts:: @ 8168CA3
 
 PalletTown_PlayersHouse_2F_OnTransition:: @ 8168CAE
 	compare VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 0
-	call_if eq, EventScript_168CBA
+	call_if_eq EventScript_168CBA
 	end
 
 EventScript_168CBA:: @ 8168CBA
@@ -33,7 +33,7 @@ gUnknown_8168CE4:: @ 8168CE4
 PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
 	setvar VAR_0x8004, 32
 	special Special_SetSomeVariable

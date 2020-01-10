@@ -18,7 +18,7 @@ CeladonCity_Condominiums_3F_EventScript_16C3F6:: @ 816C3F6
 	faceplayer
 	specialvar VAR_RESULT, HasAllKantoMons
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16C412
+	goto_if_eq EventScript_16C412
 	msgbox gUnknown_8196356
 	release
 	end
@@ -33,7 +33,7 @@ EventScript_16C418:: @ 816C418
 	delay 60
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special Special_ShowDiploma
 	waitstate
 	release

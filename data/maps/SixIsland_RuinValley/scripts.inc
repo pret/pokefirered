@@ -3,8 +3,7 @@ SixIsland_RuinValley_MapScripts:: @ 8168B53
 	.byte 0
 
 SixIsland_RuinValley_OnLoad:: @ 8168B59
-	checkflag FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE
-	call_if TRUE, EventScript_168B63
+	call_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, EventScript_168B63
 	end
 
 EventScript_168B63:: @ 8168B63
@@ -24,11 +23,10 @@ SixIsland_RuinValley_EventScript_168B6D:: @ 8168B6D
 
 SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	lockall
-	checkflag FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE
-	goto_if TRUE, EventScript_168BC1
+	goto_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, EventScript_168BC1
 	msgbox gUnknown_818BDC0, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_168BCB
+	goto_if_eq EventScript_168BCB
 	msgbox gUnknown_818BE11
 	braillemessage gUnknown_81A929B
 	waitbuttonpress

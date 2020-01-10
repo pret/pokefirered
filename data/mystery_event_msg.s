@@ -37,8 +37,7 @@ sText_MysteryGiftStampCard: @ 8488E55
 
 MysteryEventScript_SurfPichu:: @ 8488EB5
 	setvaddress MysteryEventScript_SurfPichu
-	checkflag FLAG_MYSTERY_EVENT_DONE
-	vgoto_if FALSE, SurfPichu_GiveIfPossible
+	vgoto_if_unset FLAG_MYSTERY_EVENT_DONE, SurfPichu_GiveIfPossible
 	gotoram
 
 SurfPichu_GiveIfPossible: @ 8488EC4
@@ -167,8 +166,7 @@ sText_MysteryGiftVisitingTrainer_2: @ 84891B0
 
 MysteryEventScript_BattleCard:: @ 84892B9
 	setvaddress MysteryEventScript_BattleCard
-	checkflag FLAG_MYSTERY_EVENT_DONE
-	vgoto_if TRUE, MysteryEventScript_BattleCardInfo
+	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
 	specialvar VAR_0x8008, Special_BattleCardAction
 	compare VAR_0x8008, 3
@@ -217,10 +215,8 @@ MysteryEventScript_AuroraTicket:: @ 84894B9
 	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
-	checkflag FLAG_GOT_AURORA_TICKET
-	vgoto_if TRUE, AuroraTicket_Obtained
-	checkflag FLAG_FOUGHT_DEOXYS
-	vgoto_if TRUE, AuroraTicket_Obtained
+	vgoto_if_set FLAG_GOT_AURORA_TICKET, AuroraTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_DEOXYS, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 1
 	vgoto_if TRUE, AuroraTicket_Obtained
@@ -279,12 +275,9 @@ MysteryEventScript_MysticTicket:: @ 8489689
 	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
-	checkflag FLAG_GOT_MYSTIC_TICKET
-	vgoto_if TRUE, MysticTicket_Obtained
-	checkflag FLAG_FOUGHT_LUGIA
-	vgoto_if TRUE, MysticTicket_Obtained
-	checkflag FLAG_FOUGHT_HO_OH
-	vgoto_if TRUE, MysticTicket_Obtained
+	vgoto_if_set FLAG_GOT_MYSTIC_TICKET, MysticTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_LUGIA, MysticTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_HO_OH, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 1
 	vgoto_if TRUE, MysticTicket_Obtained

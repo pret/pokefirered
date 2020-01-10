@@ -3,16 +3,13 @@ FiveIsland_Meadow_MapScripts:: @ 8168932
 	.byte 0
 
 FiveIsland_Meadow_OnLoad:: @ 8168938
-	checkflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
-	call_if TRUE, EventScript_168983
+	call_if_set FLAG_UNLOCKED_ROCKET_WAREHOUSE, EventScript_168983
 	end
 
 FiveIsland_Meadow_EventScript_168942:: @ 8168942
 	lockall
-	checkflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
-	goto_if TRUE, EventScript_168979
-	checkflag FLAG_LEARNED_YES_NAH_CHANSEY
-	goto_if TRUE, EventScript_16895F
+	goto_if_set FLAG_UNLOCKED_ROCKET_WAREHOUSE, EventScript_168979
+	goto_if_set FLAG_LEARNED_YES_NAH_CHANSEY, EventScript_16895F
 	msgbox gUnknown_818AB8E
 	releaseall
 	end
@@ -39,16 +36,16 @@ EventScript_168983:: @ 8168983
 	return
 
 FiveIsland_Meadow_EventScript_16898D:: @ 816898D
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_49, 0, Text_18AC88, Text_18ACB3
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_49, Text_18AC88, Text_18ACB3
 	msgbox gUnknown_818ACC5, 6
 	end
 
 FiveIsland_Meadow_EventScript_1689A4:: @ 81689A4
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_50, 0, Text_18ACF0, Text_18AD39
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_50, Text_18ACF0, Text_18AD39
 	msgbox gUnknown_818AD59, 6
 	end
 
 FiveIsland_Meadow_EventScript_1689BB:: @ 81689BB
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_51, 0, Text_18ADC6, Text_18ADFB
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_51, Text_18ADC6, Text_18ADFB
 	msgbox gUnknown_818AE16, 6
 	end

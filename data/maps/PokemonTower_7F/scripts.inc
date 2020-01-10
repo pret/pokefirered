@@ -16,7 +16,7 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 	end
 
 PokemonTower_7F_EventScript_163586:: @ 8163586
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_19, 0, Text_17A380, Text_17A3A4, EventScript_1635A1
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_19, Text_17A380, Text_17A3A4, EventScript_1635A1
 	msgbox gUnknown_817A3AF, 6
 	end
 
@@ -25,11 +25,11 @@ EventScript_1635A1:: @ 81635A1
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 10
-	goto_if eq, EventScript_1635E0
+	goto_if_eq EventScript_1635E0
 	compare VAR_0x8004, 11
-	goto_if eq, EventScript_1635F0
+	goto_if_eq EventScript_1635F0
 	compare VAR_0x8004, 9
-	goto_if eq, EventScript_163600
+	goto_if_eq EventScript_163600
 	applymovement 2, Movement_16362C
 	waitmovement 0
 	goto EventScript_163616
@@ -103,7 +103,7 @@ Movement_163633:: @ 8163633
 	step_end
 
 PokemonTower_7F_EventScript_16363D:: @ 816363D
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_20, 0, Text_17A3CD, Text_17A466, EventScript_163658
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_20, Text_17A3CD, Text_17A466, EventScript_163658
 	msgbox gUnknown_817A477, 6
 	end
 
@@ -113,9 +113,9 @@ EventScript_163658:: @ 8163658
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 12
-	goto_if eq, EventScript_163699
+	goto_if_eq EventScript_163699
 	compare VAR_0x8004, 13
-	goto_if eq, EventScript_1636A9
+	goto_if_eq EventScript_1636A9
 	applymovement 3, Movement_1636C6
 	waitmovement 0
 	goto EventScript_1636B9
@@ -169,7 +169,7 @@ Movement_1636CD:: @ 81636CD
 	step_end
 
 PokemonTower_7F_EventScript_1636D6:: @ 81636D6
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_21, 0, Text_17A4CF, Text_17A4EE, EventScript_1636F1
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_21, Text_17A4CF, Text_17A4EE, EventScript_1636F1
 	msgbox gUnknown_817A506, 6
 	end
 
@@ -178,9 +178,9 @@ EventScript_1636F1:: @ 81636F1
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 10
-	goto_if eq, EventScript_163725
+	goto_if_eq EventScript_163725
 	compare VAR_0x8004, 9
-	goto_if eq, EventScript_163735
+	goto_if_eq EventScript_163735
 	applymovement 4, Movement_163754
 	waitmovement 0
 	goto EventScript_163745

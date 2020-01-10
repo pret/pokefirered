@@ -4,20 +4,18 @@ MtEmber_Summit_MapScripts:: @ 8163AFC
 	.byte 0
 
 MtEmber_Summit_OnResume:: @ 8163B07
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_163B11
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_163B11
 	end
 
 EventScript_163B11:: @ 8163B11
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 MtEmber_Summit_OnTransition:: @ 8163B25
-	checkflag FLAG_FOUGHT_MOLTRES
-	call_if FALSE, EventScript_163B2F
+	call_if_unset FLAG_FOUGHT_MOLTRES, EventScript_163B2F
 	end
 
 EventScript_163B2F:: @ 8163B2F
@@ -27,7 +25,7 @@ EventScript_163B2F:: @ 8163B2F
 MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -46,11 +44,11 @@ MtEmber_Summit_EventScript_163B33:: @ 8163B33
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_163B96
+	goto_if_eq EventScript_163B96
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_163B9F
+	goto_if_eq EventScript_163B9F
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_163B9F
+	goto_if_eq EventScript_163B9F
 	setflag FLAG_FOUGHT_MOLTRES
 	release
 	end

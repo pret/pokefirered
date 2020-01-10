@@ -12,10 +12,9 @@ PokemonLeague_LoreleisRoom_OnResume:: @ 8162586
 	end
 
 PokemonLeague_LoreleisRoom_OnLoad:: @ 8162591
-	checkflag FLAG_DEFEATED_LORELEI
-	call_if TRUE, EventScript_1625AC
+	call_if_set FLAG_DEFEATED_LORELEI, EventScript_1625AC
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 1
-	call_if eq, EventScript_1625A6
+	call_if_eq EventScript_1625A6
 	end
 
 EventScript_1625A6:: @ 81625A6
@@ -53,20 +52,15 @@ PokemonLeague_LoreleisRoom_EventScript_1625DC:: @ 81625DC
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_DEFEATED_LORELEI
-	goto_if TRUE, EventScript_162669
+	goto_if_set FLAG_DEFEATED_LORELEI, EventScript_162669
 	famechecker FAMECHECKER_LORELEI, 0
 	famechecker FAMECHECKER_LORELEI, 1
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162641
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_16264A
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162641
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_16264A
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162653
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_16265E
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162653
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_16265E
 	clearflag FLAG_TEMP_5
 	goto EventScript_162673
 
@@ -82,11 +76,11 @@ EventScript_16264A:: @ 816264A
 	return
 
 EventScript_162653:: @ 8162653
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LORELEI, 0, Text_178191
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI, Text_178191
 	return
 
 EventScript_16265E:: @ 816265E
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LORELEI_2, 0, Text_178191
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LORELEI_2, Text_178191
 	return
 
 EventScript_162669:: @ 8162669

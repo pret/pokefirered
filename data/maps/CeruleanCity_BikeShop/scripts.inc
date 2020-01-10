@@ -4,10 +4,8 @@ CeruleanCity_BikeShop_MapScripts:: @ 816ABBC
 CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
 	lock
 	faceplayer
-	checkflag FLAG_GOT_BICYCLE
-	goto_if TRUE, EventScript_16AC58
-	checkflag FLAG_GOT_BIKE_VOUCHER
-	goto_if TRUE, EventScript_16AC22
+	goto_if_set FLAG_GOT_BICYCLE, EventScript_16AC58
+	goto_if_set FLAG_GOT_BIKE_VOUCHER, EventScript_16AC22
 	showmoneybox 0, 0, 0
 	message Text_192755
 	waitmessage
@@ -31,9 +29,9 @@ EventScript_16AC15:: @ 816AC15
 
 EventScript_16AC22:: @ 816AC22
 	msgbox gUnknown_81927B2
-	giveitemfanfaremsg gUnknown_81927E1, ITEM_BICYCLE, 1, MUS_FAN5
+	msgreceiveditem gUnknown_81927E1, ITEM_BICYCLE, 1, MUS_FAN5
 	setflag FLAG_GOT_BICYCLE
-	additem ITEM_BICYCLE, 1
+	additem ITEM_BICYCLE
 	removeitem ITEM_BIKE_VOUCHER, 1
 	msgbox gUnknown_819280E
 	release
@@ -56,8 +54,7 @@ CeruleanCity_BikeShop_EventScript_16AC6C:: @ 816AC6C
 CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
 	lock
 	faceplayer
-	checkflag FLAG_GOT_BICYCLE
-	goto_if TRUE, EventScript_16AC8A
+	goto_if_set FLAG_GOT_BICYCLE, EventScript_16AC8A
 	msgbox gUnknown_8192937
 	release
 	end

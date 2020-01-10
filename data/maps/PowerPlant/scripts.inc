@@ -4,25 +4,21 @@ PowerPlant_MapScripts:: @ 8163764
 	.byte 0
 
 PowerPlant_OnResume:: @ 816376F
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_163779
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_163779
 	end
 
 EventScript_163779:: @ 8163779
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	goto_if_ne EventScript_1A77A9
 	removeobject VAR_LAST_TALKED
 	return
 
 PowerPlant_OnTransition:: @ 816378D
 	setworldmapflag FLAG_WORLD_MAP_POWER_PLANT
-	checkflag FLAG_FOUGHT_ZAPDOS
-	call_if FALSE, EventScript_1637AC
-	checkflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
-	call_if FALSE, EventScript_1637B0
-	checkflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
-	call_if FALSE, EventScript_1637B4
+	call_if_unset FLAG_FOUGHT_ZAPDOS, EventScript_1637AC
+	call_if_unset FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1, EventScript_1637B0
+	call_if_unset FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2, EventScript_1637B4
 	end
 
 EventScript_1637AC:: @ 81637AC
@@ -40,7 +36,7 @@ EventScript_1637B4:: @ 81637B4
 PowerPlant_EventScript_1637B8:: @ 81637B8
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -59,11 +55,11 @@ PowerPlant_EventScript_1637B8:: @ 81637B8
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_16381B
+	goto_if_eq EventScript_16381B
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_163824
+	goto_if_eq EventScript_163824
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_163824
+	goto_if_eq EventScript_163824
 	setflag FLAG_FOUGHT_ZAPDOS
 	release
 	end
@@ -81,7 +77,7 @@ EventScript_163824:: @ 8163824
 PowerPlant_EventScript_16382F:: @ 816382F
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE
@@ -95,11 +91,11 @@ PowerPlant_EventScript_16382F:: @ 816382F
 	special sub_8112364
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_163884
+	goto_if_eq EventScript_163884
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_163884
+	goto_if_eq EventScript_163884
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_163884
+	goto_if_eq EventScript_163884
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
 	release
 	end
@@ -112,7 +108,7 @@ EventScript_163884:: @ 8163884
 PowerPlant_EventScript_16388D:: @ 816388D
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE
@@ -126,11 +122,11 @@ PowerPlant_EventScript_16388D:: @ 816388D
 	special sub_8112364
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_1638E2
+	goto_if_eq EventScript_1638E2
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	release
 	end

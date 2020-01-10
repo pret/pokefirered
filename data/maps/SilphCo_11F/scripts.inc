@@ -3,25 +3,22 @@ SilphCo_11F_MapScripts:: @ 8161DEE
 	.byte 0
 
 SilphCo_11F_OnLoad:: @ 8161DF4
-	checkflag FLAG_SILPH_11F_DOOR
-	call_if FALSE, EventScript_Close11FDoor
+	call_if_unset FLAG_SILPH_11F_DOOR, EventScript_Close11FDoor
 	end
 
 SilphCo_11F_EventScript_161DFE:: @ 8161DFE
 	lock
 	faceplayer
-	checkflag FLAG_GOT_MASTER_BALL_FROM_SILPH
-	goto_if TRUE, EventScript_161E75
+	goto_if_set FLAG_GOT_MASTER_BALL_FROM_SILPH, EventScript_161E75
 	checkplayergender
 	compare VAR_RESULT, 0
-	call_if eq, EventScript_161E59
+	call_if_eq EventScript_161E59
 	compare VAR_RESULT, 1
-	call_if eq, EventScript_161E62
+	call_if_eq EventScript_161E62
 	checkitemspace ITEM_MASTER_BALL, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_161E6B
-	additem ITEM_MASTER_BALL, 1
-	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
+	goto_if_eq EventScript_161E6B
+	giveitem_msg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
 	msgbox gUnknown_8176FEB
 	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release
@@ -73,11 +70,11 @@ EventScript_161EA0:: @ 8161EA0
 	msgbox gUnknown_8177108
 	closemessage
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_161F00
+	call_if_eq EventScript_161F00
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_161F12
+	call_if_eq EventScript_161F12
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BOSS_GIOVANNI_2, 0, Text_1771AB
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI_2, Text_1771AB
 	msgbox gUnknown_81771C2
 	closemessage
 	fadescreen 1
@@ -134,11 +131,11 @@ SilphCo_11F_EventScript_161F37:: @ 8161F37
 	end
 
 SilphCo_11F_EventScript_161F40:: @ 8161F40
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_40, 0, Text_1772B8, Text_1772E7
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_40, Text_1772B8, Text_1772E7
 	msgbox gUnknown_81772F9, 6
 	end
 
 SilphCo_11F_EventScript_161F57:: @ 8161F57
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_41, 0, Text_17726A, Text_17728C
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_41, Text_17726A, Text_17728C
 	msgbox gUnknown_817729B, 6
 	end

@@ -4,25 +4,25 @@ CeruleanCity_House4_MapScripts:: @ 816ACEE
 CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	specialvar VAR_0x8004, Special_GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8004, 0
-	goto_if eq, EventScript_CeruleanCity_House4_NoNews
+	goto_if_eq EventScript_CeruleanCity_House4_NoNews
 	compare VAR_0x8004, 1
-	goto_if eq, EventScript_CeruleanCity_House4_News1
+	goto_if_eq EventScript_CeruleanCity_House4_News1
 	compare VAR_0x8004, 2
-	goto_if eq, EventScript_CeruleanCity_House4_News2
+	goto_if_eq EventScript_CeruleanCity_House4_News2
 	compare VAR_0x8004, 3
-	goto_if eq, EventScript_CeruleanCity_House4_NewsNotSpread
+	goto_if_eq EventScript_CeruleanCity_House4_NewsNotSpread
 	compare VAR_0x8004, 4
-	goto_if eq, EventScript_CeruleanCity_House4_NewsSpread1
+	goto_if_eq EventScript_CeruleanCity_House4_NewsSpread1
 	compare VAR_0x8004, 5
-	goto_if eq, EventScript_CeruleanCity_House4_NewsSpread2
+	goto_if_eq EventScript_CeruleanCity_House4_NewsSpread2
 	compare VAR_0x8004, 6
-	goto_if eq, EventScript_CeruleanCity_House4_NewsDone
+	goto_if_eq EventScript_CeruleanCity_House4_NewsDone
 	end
 
 EventScript_CeruleanCity_House4_NoNews:: @ 816AD59
@@ -35,7 +35,7 @@ EventScript_CeruleanCity_House4_News1:: @ 816AD63
 	msgbox gUnknown_8192B43
 	giveitem VAR_0x8008
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -44,7 +44,7 @@ EventScript_CeruleanCity_House4_News2:: @ 816AD89
 	msgbox gUnknown_8192C07
 	giveitem VAR_0x8008, 4
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -60,7 +60,7 @@ EventScript_CeruleanCity_House4_NewsSpread1:: @ 816ADC3
 	msgbox gUnknown_8192D4B
 	giveitem VAR_0x8008
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 
@@ -69,7 +69,7 @@ EventScript_CeruleanCity_House4_NewsSpread2:: @ 816ADE9
 	msgbox gUnknown_8192DE3
 	giveitem VAR_0x8008, 4
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16AE45
+	goto_if_eq EventScript_16AE45
 	release
 	end
 

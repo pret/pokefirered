@@ -7,12 +7,11 @@ IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, 1
-	call_if eq, EventScript_16EA79
+	call_if_eq EventScript_16EA79
 	end
 
 EventScript_16EA79:: @ 816EA79
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	goto_if TRUE, EventScript_1A77A9
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_1A77A9
 	setobjectxyperm 4, 4, 2
 	return
 
@@ -21,14 +20,13 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
 	faceplayer
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16EAA6
+	goto_if_eq EventScript_16EAA6
 	msgbox gUnknown_819A8D8
 	release
 	end
 
 EventScript_16EAA6:: @ 816EAA6
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	goto_if TRUE, EventScript_16EAB9
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_16EAB9
 	msgbox gUnknown_819A943
 	release
 	end
@@ -45,7 +43,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EAC3:: @ 816EAC3
 IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	message Text_MayIHelpYou

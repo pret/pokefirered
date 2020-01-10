@@ -1,16 +1,16 @@
 Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BF46E
+	goto_if_eq EventScript_1BF46E
 	msgbox Text_19DD66, 5
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BF3DD
+	goto_if_eq EventScript_1BF3DD
 	msgbox Text_19DDB2
 	goto EventScript_1BF541
 	end
@@ -18,7 +18,7 @@ Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
 EventScript_1BF3DD:: @ 81BF3DD
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BF452
+	goto_if_eq EventScript_1BF452
 	msgbox Text_19DDBE
 	fadescreen 1
 	hidemoneybox 0, 0
@@ -26,10 +26,10 @@ EventScript_1BF3DD:: @ 81BF3DD
 	waitstate
 	showmoneybox 0, 0, 0
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_1BF444
+	goto_if_ge EventScript_1BF444
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1BF460
+	goto_if_eq EventScript_1BF460
 	specialvar VAR_0x8005, GetSelectedMonNickAndSpecies
 	msgbox Text_19DDF9
 	waitse
@@ -60,13 +60,13 @@ EventScript_1BF46E:: @ 81BF46E
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetNumLevelsGainedForRoute5DaycareMon
 	compare VAR_RESULT, 0
-	call_if ne, EventScript_1BF4AA
+	call_if_ne EventScript_1BF4AA
 	compare VAR_RESULT, 0
-	call_if eq, EventScript_1BF4B3
+	call_if_eq EventScript_1BF4B3
 	special GetCostToWithdrawRoute5DaycareMon
 	msgbox Text_19DE80, 5
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BF4BC
+	goto_if_eq EventScript_1BF4BC
 	goto EventScript_1BF444
 	end
 
@@ -81,10 +81,10 @@ EventScript_1BF4B3:: @ 81BF4B3
 EventScript_1BF4BC:: @ 81BF4BC
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if eq, EventScript_1BF533
+	goto_if_eq EventScript_1BF533
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1BF4EA
+	goto_if_eq EventScript_1BF4EA
 	msgbox Text_19E001
 	goto EventScript_1BF541
 	end
@@ -95,7 +95,7 @@ EventScript_1BF4EA:: @ 81BF4EA
 	special SubtractMoneyFromVar0x8005
 	updatemoneybox 0, 0, 0
 	copyvar VAR_0x8008, VAR_RESULT
-	countpokemon
+	getpartysize
 	subvar VAR_RESULT, 1
 	getpartymonname 0, VAR_RESULT
 	copyvar VAR_RESULT, VAR_0x8008

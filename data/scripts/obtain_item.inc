@@ -20,9 +20,9 @@ EventScript_1A6697:: @ 81A6697
 	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6749
+	call_if_eq EventScript_1A6749
 	compare VAR_0x8007, 0
-	call_if eq, EventScript_1A675E
+	call_if_eq EventScript_1A675E
 	return
 
 EventScript_1A66BC:: @ 81A66BC
@@ -37,31 +37,31 @@ EventScript_1A66BC:: @ 81A66BC
 EventScript_1A66F9:: @ 81A66F9
 	getstdstring 2, 24
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6764
+	call_if_eq EventScript_1A6764
 	return
 
 EventScript_1A6709:: @ 81A6709
 	getstdstring 2, 25
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6764
+	call_if_eq EventScript_1A6764
 	return
 
 EventScript_1A6719:: @ 81A6719
 	getstdstring 2, 26
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6764
+	call_if_eq EventScript_1A6764
 	return
 
 EventScript_1A6729:: @ 81A6729
 	getstdstring 2, 27
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6768
+	call_if_eq EventScript_1A6768
 	return
 
 EventScript_1A6739:: @ 81A6739
 	getstdstring 2, 28
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6764
+	call_if_eq EventScript_1A6764
 	return
 
 EventScript_1A6749:: @ 81A6749
@@ -93,9 +93,9 @@ Std_ObtainDecoration:: @ 81A676C
 EventScript_1A677A:: @ 81A677A
 	getdecorname 1, VAR_0x8000
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A6795
+	call_if_eq EventScript_1A6795
 	compare VAR_0x8007, 0
-	call_if eq, EventScript_1A67AD
+	call_if_eq EventScript_1A67AD
 	return
 
 EventScript_1A6795:: @ 81A6795
@@ -123,9 +123,9 @@ Std_FindItem:: @ 81A67B3
 	checkitemtype VAR_0x8000
 	call EventScript_1A66BC
 	compare VAR_0x8007, 1
-	call_if eq, EventScript_1A67EE
+	call_if_eq EventScript_1A67EE
 	compare VAR_0x8007, 0
-	call_if eq, EventScript_1A682D
+	call_if_eq EventScript_1A682D
 	release
 	return
 
@@ -135,9 +135,9 @@ EventScript_1A67EE:: @ 81A67EE
 	specialvar VAR_RESULT, Special_ItemIsTM_GetMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_1A6821
+	call_if_eq EventScript_1A6821
 	compare VAR_0x8008, 0
-	call_if eq, EventScript_1A6827
+	call_if_eq EventScript_1A6827
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway
@@ -162,12 +162,12 @@ EventScript_PickUpHiddenItem:: @ 81A6843
 	textcolor 3
 	waitse
 	compare VAR_0x8005, 0
-	goto_if eq, EventScript_PickUpHiddenCoins
+	goto_if_eq EventScript_PickUpHiddenCoins
 	call EventScript_GiveItem
 	compare VAR_0x8007, 1
-	goto_if eq, EventScript_ItemInPocketMessage
+	goto_if_eq EventScript_ItemInPocketMessage
 	compare VAR_0x8007, 0
-	goto_if eq, EventScript_BagIsFullMessage
+	goto_if_eq EventScript_BagIsFullMessage
 	end
 
 EventScript_GiveItem::
@@ -180,9 +180,9 @@ EventScript_GiveItem::
 
 EventScript_ItemInPocketMessage::
 	compare VAR_0x8006, 1
-	call_if eq, EventScript_FoundSingleItemMessage
+	call_if_eq EventScript_FoundSingleItemMessage
 	compare VAR_0x8006, 1
-	call_if ne, EventScript_FoundMultipleItemsMessage
+	call_if_ne EventScript_FoundMultipleItemsMessage
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway
@@ -212,12 +212,11 @@ EventScript_BagIsFullMessage::
 	end
 
 EventScript_PickUpHiddenCoins::
-	checkflag FLAG_GOT_COIN_CASE
-	goto_if FALSE, EventScript_HiddenCoinsButNoCoinCase
+	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_HiddenCoinsButNoCoinCase
 	checkcoins VAR_RESULT
 	specialvar VAR_RESULT, Special_CheckAddCoins
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_HiddenCoinsButTheCoinCaseIsFull
+	goto_if_eq EventScript_HiddenCoinsButTheCoinCaseIsFull
 	givecoins VAR_0x8006
 	getstdstring 1, 0x17
 	call EventScript_1A6764

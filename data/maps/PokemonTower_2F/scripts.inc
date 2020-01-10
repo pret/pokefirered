@@ -21,9 +21,9 @@ EventScript_1632A7:: @ 81632A7
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_163339
+	call_if_eq EventScript_163339
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_16334B
+	call_if_eq EventScript_16334B
 	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
 	applymovement 1, Movement_Delay48
@@ -31,18 +31,18 @@ EventScript_1632A7:: @ 81632A7
 	msgbox gUnknown_8179CFF
 	setvar VAR_LAST_TALKED, 1
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_16335D
+	call_if_eq EventScript_16335D
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_163368
+	call_if_eq EventScript_163368
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_163373
+	call_if_eq EventScript_163373
 	msgbox gUnknown_8179DD4
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_16337E
+	call_if_eq EventScript_16337E
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_163389
+	call_if_eq EventScript_163389
 	playse SE_KAIDAN
 	delay 25
 	fadedefaultbgm
@@ -64,15 +64,15 @@ EventScript_16334B:: @ 816334B
 	return
 
 EventScript_16335D:: @ 816335D
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE, 0, Text_179D73
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE, Text_179D73
 	return
 
 EventScript_163368:: @ 8163368
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_POKENON_TOWER_BULBASAUR, 0, Text_179D73
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_BULBASAUR, Text_179D73
 	return
 
 EventScript_163373:: @ 8163373
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_POKENON_TOWER_CHARMANDER, 0, Text_179D73
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_CHARMANDER, Text_179D73
 	return
 
 EventScript_16337E:: @ 816337E

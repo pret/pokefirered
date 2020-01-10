@@ -14,17 +14,16 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	faceplayer
 	setvar VAR_0x8008, 5
 	call EventScript_1A8CAD
-	checkflag FLAG_DID_MARC_TRADE
-	goto_if TRUE, EventScript_1704F0
+	goto_if_set FLAG_DID_MARC_TRADE, EventScript_1704F0
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1704D8
+	goto_if_eq EventScript_1704D8
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_1704D8
+	goto_if_ge EventScript_1704D8
 	call EventScript_1A8CC9
 	compare VAR_RESULT, VAR_0x8009
-	goto_if ne, EventScript_1704E2
+	goto_if_ne EventScript_1704E2
 	call EventScript_1A8CD9
 	msgbox gUnknown_81A59DA
 	setflag FLAG_DID_MARC_TRADE

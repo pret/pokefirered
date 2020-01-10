@@ -4,8 +4,7 @@ SaffronCity_MapScripts:: @ 816735F
 
 SaffronCity_OnTransition:: @ 8167365
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
-	checkflag FLAG_RESCUED_MR_FUJI
-	call_if FALSE, EventScript_167372
+	call_if_unset FLAG_RESCUED_MR_FUJI, EventScript_167372
 	end
 
 EventScript_167372:: @ 8167372
@@ -42,8 +41,7 @@ SaffronCity_EventScript_1673B0:: @ 81673B0
 
 SaffronCity_EventScript_1673B9:: @ 81673B9
 	lock
-	checkflag FLAG_RESCUED_MR_FUJI
-	goto_if TRUE, EventScript_1673D7
+	goto_if_set FLAG_RESCUED_MR_FUJI, EventScript_1673D7
 	applymovement 6, Movement_FacePlayer
 	waitmovement 0
 	msgbox gUnknown_81812CA

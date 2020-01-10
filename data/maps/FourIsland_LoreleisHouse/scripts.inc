@@ -9,10 +9,8 @@ FourIsland_LoreleisHouse_OnTransition:: @ 8171C54
 FourIsland_LoreleisHouse_EventScript_171C58:: @ 8171C58
 	lock
 	faceplayer
-	checkflag FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE
-	goto_if TRUE, EventScript_171C83
-	checkflag FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE
-	goto_if TRUE, EventScript_171C76
+	goto_if_set FLAG_TALKED_TO_LORELEI_AFTER_WAREHOUSE, EventScript_171C83
+	goto_if_set FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE, EventScript_171C76
 	msgbox gUnknown_81A3826
 	release
 	end

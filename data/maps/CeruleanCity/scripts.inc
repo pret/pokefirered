@@ -4,8 +4,7 @@ CeruleanCity_MapScripts:: @ 8166471
 
 CeruleanCity_OnTransition:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
-	checkflag FLAG_GOT_SS_TICKET
-	call_if FALSE, EventScript_166484
+	call_if_unset FLAG_GOT_SS_TICKET, EventScript_166484
 	end
 
 EventScript_166484:: @ 8166484
@@ -44,21 +43,21 @@ EventScript_1664CC:: @ 81664CC
 	msgbox gUnknown_817EAD7
 	setvar VAR_LAST_TALKED, 8
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_166582
+	call_if_eq EventScript_166582
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_16658D
+	call_if_eq EventScript_16658D
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_166598
+	call_if_eq EventScript_166598
 	famechecker FAMECHECKER_BILL, 0
 	msgbox gUnknown_817EB95
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_1665A3
+	call_if_eq EventScript_1665A3
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_1665A3
+	call_if_eq EventScript_1665A3
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_1665B5
+	call_if_eq EventScript_1665B5
 	msgbox gUnknown_817ECD4
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
 	setflag FLAG_GOT_FAME_CHECKER
@@ -73,15 +72,15 @@ EventScript_1664CC:: @ 81664CC
 	end
 
 EventScript_166582:: @ 8166582
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_SQUIRTLE, 0, Text_17EB71
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_SQUIRTLE, Text_17EB71
 	return
 
 EventScript_16658D:: @ 816658D
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_BULBASAUR, 0, Text_17EB71
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_BULBASAUR, Text_17EB71
 	return
 
 EventScript_166598:: @ 8166598
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_CERULEAN_CHARMANDER, 0, Text_17EB71
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_CHARMANDER, Text_17EB71
 	return
 
 EventScript_1665A3:: @ 81665A3
@@ -172,12 +171,12 @@ CeruleanCity_EventScript_166603:: @ 8166603
 	lock
 	faceplayer
 	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_5
-	goto_if eq, EventScript_16662E
+	goto_if_eq EventScript_16662E
 	message Text_17EE0E
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, Text_17EE70
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
@@ -186,9 +185,8 @@ EventScript_16662E:: @ 816662E
 	msgbox gUnknown_817EE9C
 	checkitemspace ITEM_TM28, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_166677
-	additem ITEM_TM28, 1
-	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
+	goto_if_eq EventScript_166677
+	giveitem_msg gUnknown_817EEBF, ITEM_TM28
 	msgbox gUnknown_817EEED
 	closemessage
 	fadescreen 1
@@ -228,7 +226,7 @@ EventScript_1666C3:: @ 81666C3
 	textcolor 0
 	msgbox Text_17EE0E
 	setvar VAR_LAST_TALKED, 2
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_TEAM_ROCKET_GRUNT_5, 0, Text_17EE70
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, Text_17EE70
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto EventScript_16662E
 	end
@@ -246,8 +244,7 @@ CeruleanCity_EventScript_1666E7:: @ 81666E7
 CeruleanCity_EventScript_1666FE:: @ 81666FE
 	lock
 	faceplayer
-	checkflag FLAG_GOT_SS_TICKET
-	goto_if TRUE, EventScript_166713
+	goto_if_set FLAG_GOT_SS_TICKET, EventScript_166713
 	msgbox gUnknown_817F01D
 	release
 	end
@@ -284,11 +281,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	call_if eq, EventScript_1667B0
+	call_if_eq EventScript_1667B0
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_1667B6
+	call_if_eq EventScript_1667B6
 	compare VAR_0x8008, 2
-	call_if eq, EventScript_1667BC
+	call_if_eq EventScript_1667BC
 	waitmessage
 	delay 40
 	playse SE_PIN
@@ -296,11 +293,11 @@ CeruleanCity_EventScript_16674F:: @ 816674F
 	waitmovement 0
 	delay 30
 	compare VAR_0x8008, 0
-	call_if eq, EventScript_1667C2
+	call_if_eq EventScript_1667C2
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_1667CB
+	call_if_eq EventScript_1667CB
 	compare VAR_0x8008, 2
-	call_if eq, EventScript_1667D4
+	call_if_eq EventScript_1667D4
 	release
 	end
 
@@ -333,13 +330,13 @@ CeruleanCity_EventScript_1667DD:: @ 81667DD
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	call_if eq, EventScript_166814
+	call_if_eq EventScript_166814
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_16681D
+	call_if_eq EventScript_16681D
 	compare VAR_0x8008, 2
-	call_if eq, EventScript_166826
+	call_if_eq EventScript_166826
 	compare VAR_0x8008, 3
-	call_if eq, EventScript_16682F
+	call_if_eq EventScript_16682F
 	release
 	end
 

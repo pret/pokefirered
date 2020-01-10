@@ -31,7 +31,7 @@ EventScript_1A77F9:: @ 81A77F9
 
 EventScript_1A7803:: @ 81A7803
 	compare VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
-	goto_if ge, EventScript_1A77EC
+	goto_if_ge EventScript_1A77EC
 	switch VAR_TEMP_1
 	case 1, EventScript_1A78D5
 	case 2, EventScript_1A78E4
@@ -45,7 +45,7 @@ EventScript_1A7803:: @ 81A7803
 
 EventScript_1A786C:: @ 81A786C
 	compare VAR_MAP_SCENE_ROUTE23, VAR_TEMP_1
-	goto_if ge, EventScript_1A77F9
+	goto_if_ge EventScript_1A77F9
 	switch VAR_TEMP_1
 	case 1, EventScript_1A78D5
 	case 2, EventScript_1A78E4
@@ -58,50 +58,42 @@ EventScript_1A786C:: @ 81A786C
 	end
 
 EventScript_1A78D5:: @ 81A78D5
-	checkflag FLAG_BADGE01_GET
-	goto_if TRUE, EventScript_1A794D
+	goto_if_set FLAG_BADGE01_GET, EventScript_1A794D
 	goto EventScript_1A77C9
 	end
 
 EventScript_1A78E4:: @ 81A78E4
-	checkflag FLAG_BADGE02_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE02_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A78F3:: @ 81A78F3
-	checkflag FLAG_BADGE03_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE03_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A7902:: @ 81A7902
-	checkflag FLAG_BADGE04_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE04_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A7911:: @ 81A7911
-	checkflag FLAG_BADGE05_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE05_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A7920:: @ 81A7920
-	checkflag FLAG_BADGE06_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE06_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A792F:: @ 81A792F
-	checkflag FLAG_BADGE07_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE07_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
 EventScript_1A793E:: @ 81A793E
-	checkflag FLAG_BADGE08_GET
-	goto_if TRUE, EventScript_1A795F
+	goto_if_set FLAG_BADGE08_GET, EventScript_1A795F
 	goto EventScript_1A77DE
 	end
 
@@ -137,50 +129,42 @@ EventScript_1A796E:: @ 81A796E
 	end
 
 EventScript_1A79D8:: @ 81A79D8
-	checkflag FLAG_BADGE01_GET
-	goto_if TRUE, EventScript_1A7A96
+	goto_if_set FLAG_BADGE01_GET, EventScript_1A7A96
 	goto EventScript_1A7A50
 	end
 
 EventScript_1A79E7:: @ 81A79E7
-	checkflag FLAG_BADGE02_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE02_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A79F6:: @ 81A79F6
-	checkflag FLAG_BADGE03_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE03_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A7A05:: @ 81A7A05
-	checkflag FLAG_BADGE04_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE04_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A7A14:: @ 81A7A14
-	checkflag FLAG_BADGE05_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE05_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A7A23:: @ 81A7A23
-	checkflag FLAG_BADGE06_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE06_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A7A32:: @ 81A7A32
-	checkflag FLAG_BADGE07_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE07_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 
 EventScript_1A7A41:: @ 81A7A41
-	checkflag FLAG_BADGE08_GET
-	goto_if TRUE, EventScript_1A7AA8
+	goto_if_set FLAG_BADGE08_GET, EventScript_1A7AA8
 	goto EventScript_1A7A77
 	end
 

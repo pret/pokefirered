@@ -4,17 +4,14 @@ SilphCo_7F_MapScripts:: @ 8161984
 	.byte 0
 
 SilphCo_7F_OnLoad:: @ 816198F
-	checkflag FLAG_SILPH_7F_DOOR_1
-	call_if FALSE, EventScript_Close7FDoor1
-	checkflag FLAG_SILPH_7F_DOOR_2
-	call_if FALSE, EventScript_Close7FDoor2
-	checkflag FLAG_SILPH_7F_DOOR_3
-	call_if FALSE, EventScript_Close7FDoor3
+	call_if_unset FLAG_SILPH_7F_DOOR_1, EventScript_Close7FDoor1
+	call_if_unset FLAG_SILPH_7F_DOOR_2, EventScript_Close7FDoor2
+	call_if_unset FLAG_SILPH_7F_DOOR_3, EventScript_Close7FDoor3
 	end
 
 SilphCo_7F_OnTransition:: @ 81619AB
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	call_if ge, EventScript_1619B7
+	call_if_ge EventScript_1619B7
 	end
 
 EventScript_1619B7:: @ 81619B7
@@ -47,24 +44,24 @@ EventScript_1619D4:: @ 81619D4
 	waitmovement 0
 	msgbox gUnknown_8176710
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_161A73
+	call_if_eq EventScript_161A73
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_161A7F
+	call_if_eq EventScript_161A7F
 	msgbox gUnknown_8176727
 	setvar VAR_LAST_TALKED, 1
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_161A80
+	call_if_eq EventScript_161A80
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_161A8B
+	call_if_eq EventScript_161A8B
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_161A96
+	call_if_eq EventScript_161A96
 	msgbox gUnknown_8176827
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_161AA1
+	call_if_eq EventScript_161AA1
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_161AAC
+	call_if_eq EventScript_161AAC
 	playse SE_TK_WARPIN
 	fadedefaultbgm
 	removeobject 1
@@ -83,15 +80,15 @@ EventScript_161A7F:: @ 8161A7F
 	return
 
 EventScript_161A80:: @ 8161A80
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SILPH_SQUIRTLE, 0, Text_1767D0
+	trainerbattle_no_intro TRAINER_RIVAL_SILPH_SQUIRTLE, Text_1767D0
 	return
 
 EventScript_161A8B:: @ 8161A8B
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SILPH_BULBASAUR, 0, Text_1767D0
+	trainerbattle_no_intro TRAINER_RIVAL_SILPH_BULBASAUR, Text_1767D0
 	return
 
 EventScript_161A96:: @ 8161A96
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SILPH_CHARMANDER, 0, Text_1767D0
+	trainerbattle_no_intro TRAINER_RIVAL_SILPH_CHARMANDER, Text_1767D0
 	return
 
 EventScript_161AA1:: @ 8161AA1
@@ -130,17 +127,16 @@ Movement_161ABF:: @ 8161ABF
 SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	lock
 	faceplayer
-	checkflag FLAG_GOT_LAPRAS_FROM_SILPH
-	goto_if TRUE, EventScript_161B8D
+	goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, EventScript_161B8D
 	msgbox gUnknown_8176266
 	setvar VAR_TEMP_1, SPECIES_LAPRAS
-	givemon SPECIES_LAPRAS, 25, ITEM_NONE, 0, 0, 0
+	givemon SPECIES_LAPRAS, 25, ITEM_NONE
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_161B12
+	goto_if_eq EventScript_161B12
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_161B45
+	goto_if_eq EventScript_161B45
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A927C
+	goto_if_eq EventScript_1A927C
 	release
 	end
 
@@ -153,7 +149,7 @@ EventScript_161B12:: @ 8161B12
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_161B7E
+	goto_if_eq EventScript_161B7E
 	call EventScript_1A8C27
 	call EventScript_1A74EB
 	goto EventScript_161B7E
@@ -170,7 +166,7 @@ EventScript_161B45:: @ 8161B45
 	getspeciesname 0, SPECIES_LAPRAS
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_161B73
+	goto_if_eq EventScript_161B73
 	call EventScript_1A8C33
 	goto EventScript_161B73
 
@@ -200,7 +196,7 @@ SilphCo_7F_EventScript_161B97:: @ 8161B97
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if ge, EventScript_161BAE
+	goto_if_ge EventScript_161BAE
 	msgbox gUnknown_8176444
 	release
 	end
@@ -214,7 +210,7 @@ SilphCo_7F_EventScript_161BB8:: @ 8161BB8
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if ge, EventScript_161BCF
+	goto_if_ge EventScript_161BCF
 	msgbox gUnknown_81764C2
 	release
 	end
@@ -228,7 +224,7 @@ SilphCo_7F_EventScript_161BD9:: @ 8161BD9
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if ge, EventScript_161BF0
+	goto_if_ge EventScript_161BF0
 	msgbox gUnknown_8176532
 	release
 	end
@@ -243,21 +239,21 @@ SilphCo_7F_EventScript_161BFA:: @ 8161BFA
 	end
 
 SilphCo_7F_EventScript_161C03:: @ 8161C03
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_JOSHUA, 0, Text_1765E2, Text_17660C
+	trainerbattle_single TRAINER_SCIENTIST_JOSHUA, Text_1765E2, Text_17660C
 	msgbox gUnknown_8176616, 6
 	end
 
 SilphCo_7F_EventScript_161C1A:: @ 8161C1A
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_33, 0, Text_176643, Text_176669
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_33, Text_176643, Text_176669
 	msgbox gUnknown_8176681, 6
 	end
 
 SilphCo_7F_EventScript_161C31:: @ 8161C31
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_34, 0, Text_1766B3, Text_1766D7
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_34, Text_1766B3, Text_1766D7
 	msgbox gUnknown_81766E5, 6
 	end
 
 SilphCo_7F_EventScript_161C48:: @ 8161C48
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_35, 0, Text_176586, Text_1765A5
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_35, Text_176586, Text_1765A5
 	msgbox gUnknown_81765B1, 6
 	end

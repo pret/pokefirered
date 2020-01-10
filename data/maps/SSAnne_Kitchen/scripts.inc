@@ -20,11 +20,11 @@ SSAnne_Kitchen_EventScript_160ACE:: @ 8160ACE
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, 0
-	call_if eq, EventScript_160B03
+	call_if_eq EventScript_160B03
 	compare VAR_0x8008, 1
-	call_if eq, EventScript_160B0C
+	call_if_eq EventScript_160B0C
 	compare VAR_0x8008, 2
-	call_if eq, EventScript_160B15
+	call_if_eq EventScript_160B15
 	release
 	end
 

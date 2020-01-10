@@ -6,7 +6,7 @@ SSAnne_1F_Room4_EventScript_160C44:: @ 8160C44
 	faceplayer
 	checkplayergender
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_160C5C
+	goto_if_eq EventScript_160C5C
 	msgbox gUnknown_8173BA4
 	release
 	end

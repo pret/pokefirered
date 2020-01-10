@@ -6,17 +6,16 @@ VermilionCity_House2_EventScript_16B5D7:: @ 816B5D7
 	faceplayer
 	setvar VAR_0x8008, 3
 	call EventScript_1A8CAD
-	checkflag FLAG_DID_CH_DING_TRADE
-	goto_if TRUE, EventScript_16B649
+	goto_if_set FLAG_DID_CH_DING_TRADE, EventScript_16B649
 	msgbox gUnknown_81949CB, MSGBOX_YESNO
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16B631
+	goto_if_eq EventScript_16B631
 	call EventScript_1A8CBD
 	compare VAR_0x8004, 6
-	goto_if ge, EventScript_16B631
+	goto_if_ge EventScript_16B631
 	call EventScript_1A8CC9
 	compare VAR_RESULT, VAR_0x8009
-	goto_if ne, EventScript_16B63B
+	goto_if_ne EventScript_16B63B
 	call EventScript_1A8CD9
 	msgbox gUnknown_8194A44
 	setflag FLAG_DID_CH_DING_TRADE

@@ -8,32 +8,32 @@ PokemonLeague_ChampionsRoom_OnResume:: @ 8162AF2
 	setvar VAR_0x8004, 4
 	call EventScript_1A75D5
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_162B1E
+	call_if_eq EventScript_162B1E
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_162B31
+	call_if_eq EventScript_162B31
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_162B44
+	call_if_eq EventScript_162B44
 	end
 
 EventScript_162B1E:: @ 8162B1E
 	checktrainerflag TRAINER_CHAMPION_FIRST_SQUIRTLE
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_REMATCH_SQUIRTLE
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B31:: @ 8162B31
 	checktrainerflag TRAINER_CHAMPION_FIRST_BULBASAUR
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_REMATCH_BULBASAUR
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B44:: @ 8162B44
 	checktrainerflag TRAINER_CHAMPION_FIRST_CHARMANDER
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	checktrainerflag TRAINER_CHAMPION_REMATCH_CHARMANDER
-	goto_if eq, EventScript_162B57
+	goto_if_eq EventScript_162B57
 	return
 
 EventScript_162B57:: @ 8162B57
@@ -59,20 +59,16 @@ EventScript_162B76:: @ 8162B76
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_162D07
 	waitmovement 0
 	delay 20
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if FALSE, EventScript_162CB3
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if TRUE, EventScript_162CBC
+	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162CB3
+	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_162CBC
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_162C68
+	goto_if_eq EventScript_162C68
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162C6F
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_162C91
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162C6F
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162C91
 	setflag FLAG_TEMP_4
 	clearflag FLAG_TEMP_5
 	setflag FLAG_DEFEATED_CHAMP
@@ -117,20 +113,20 @@ EventScript_162C68:: @ 8162C68
 
 EventScript_162C6F:: @ 8162C6F
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_162CC5
+	call_if_eq EventScript_162CC5
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_162CD0
+	call_if_eq EventScript_162CD0
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_162CDB
+	call_if_eq EventScript_162CDB
 	return
 
 EventScript_162C91:: @ 8162C91
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_162CE6
+	call_if_eq EventScript_162CE6
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_162CF1
+	call_if_eq EventScript_162CF1
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_162CFC
+	call_if_eq EventScript_162CFC
 	return
 
 EventScript_162CB3:: @ 8162CB3
@@ -142,27 +138,27 @@ EventScript_162CBC:: @ 8162CBC
 	return
 
 EventScript_162CC5:: @ 8162CC5
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_FIRST_SQUIRTLE, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_FIRST_SQUIRTLE, Text_178E3F
 	return
 
 EventScript_162CD0:: @ 8162CD0
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_FIRST_BULBASAUR, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_FIRST_BULBASAUR, Text_178E3F
 	return
 
 EventScript_162CDB:: @ 8162CDB
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_FIRST_CHARMANDER, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_FIRST_CHARMANDER, Text_178E3F
 	return
 
 EventScript_162CE6:: @ 8162CE6
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_REMATCH_SQUIRTLE, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_REMATCH_SQUIRTLE, Text_178E3F
 	return
 
 EventScript_162CF1:: @ 8162CF1
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_REMATCH_BULBASAUR, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_REMATCH_BULBASAUR, Text_178E3F
 	return
 
 EventScript_162CFC:: @ 8162CFC
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_CHAMPION_REMATCH_CHARMANDER, 0, Text_178E3F
+	trainerbattle_no_intro TRAINER_CHAMPION_REMATCH_CHARMANDER, Text_178E3F
 	return
 
 Movement_162D07:: @ 8162D07

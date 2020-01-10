@@ -22,8 +22,7 @@ Movement_166903:: @ 8166903
 
 VermilionCity_OnTransition:: @ 8166906
 	setworldmapflag FLAG_WORLD_MAP_VERMILION_CITY
-	checkflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
-	call_if TRUE, EventScript_166913
+	call_if_set FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION, EventScript_166913
 	end
 
 EventScript_166913:: @ 8166913
@@ -38,7 +37,7 @@ VermilionCity_EventScript_166920:: @ 8166920
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if eq, EventScript_166937
+	goto_if_eq EventScript_166937
 	msgbox gUnknown_817F776
 	release
 	end
@@ -52,35 +51,33 @@ VermilionCity_EventScript_166941:: @ 8166941
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if eq, EventScript_166996
+	goto_if_eq EventScript_166996
 	msgbox gUnknown_817FA22
 	release
 	end
 
 EventScript_166958:: @ 8166958
-	checkflag FLAG_SYS_GOT_MYSTIC_TICKET
-	goto_if FALSE, EventScript_1A77B0
+	goto_if_unset FLAG_SYS_GOT_MYSTIC_TICKET, EventScript_1A77B0
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A77B0
+	goto_if_eq EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
 EventScript_166977:: @ 8166977
-	checkflag FLAG_SYS_GOT_AURORA_TICKET
-	goto_if FALSE, EventScript_1A77B0
+	goto_if_unset FLAG_SYS_GOT_AURORA_TICKET, EventScript_1A77B0
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_1A77B0
+	goto_if_eq EventScript_1A77B0
 	goto EventScript_1A77AA
 	end
 
 EventScript_166996:: @ 8166996
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if ge, EventScript_1669BB
+	goto_if_ge EventScript_1669BB
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if ge, EventScript_166B3B
+	goto_if_ge EventScript_166B3B
 	msgbox gUnknown_817FB10
 	release
 	end
@@ -88,14 +85,14 @@ EventScript_166996:: @ 8166996
 EventScript_1669BB:: @ 81669BB
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	call EventScript_166958
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_1669FD
+	goto_if_eq EventScript_1669FD
 	call EventScript_166977
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_166A5F
+	goto_if_eq EventScript_166A5F
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	message Text_17FBB8
 	waitmessage
@@ -105,9 +102,8 @@ EventScript_1669BB:: @ 81669BB
 EventScript_1669FD:: @ 81669FD
 	call EventScript_166977
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_166AB1
-	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
-	call_if FALSE, EventScript_166A53
+	goto_if_eq EventScript_166AB1
+	call_if_unset FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN, EventScript_166A53
 	message Text_17FCC1
 	waitmessage
 	multichoice 17, 6, MULTICHOICE_SEVII_NAVEL, FALSE
@@ -124,8 +120,7 @@ EventScript_166A53:: @ 8166A53
 	return
 
 EventScript_166A5F:: @ 8166A5F
-	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
-	call_if FALSE, EventScript_166AA5
+	call_if_unset FLAG_SHOWED_AURORATICKET_TO_CAPTAIN, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 6, MULTICHOICE_SEVII_BIRTH, FALSE
@@ -142,10 +137,8 @@ EventScript_166AA5:: @ 8166AA5
 	return
 
 EventScript_166AB1:: @ 8166AB1
-	checkflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
-	call_if FALSE, EventScript_166A53
-	checkflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
-	call_if FALSE, EventScript_166AA5
+	call_if_unset FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN, EventScript_166A53
+	call_if_unset FLAG_SHOWED_AURORATICKET_TO_CAPTAIN, EventScript_166AA5
 	message Text_17FCC1
 	waitmessage
 	multichoice 13, 5, MULTICHOICE_SEVII_NAVEL_BIRTH, FALSE
@@ -210,10 +203,9 @@ EventScript_166BA0:: @ 8166BA0
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	compare VAR_MAP_SCENE_VERMILION_CITY, 3
-	goto_if eq, EventScript_166BED
+	goto_if_eq EventScript_166BED
 	msgbox gUnknown_817FA3C
-	checkflag FLAG_GOT_SS_TICKET
-	goto_if FALSE, EventScript_166BDE
+	goto_if_unset FLAG_GOT_SS_TICKET, EventScript_166BDE
 	msgbox gUnknown_817FA77
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1
 	releaseall
@@ -228,9 +220,9 @@ EventScript_166BDE:: @ 8166BDE
 EventScript_166BED:: @ 8166BED
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5
-	goto_if ge, EventScript_1669BB
+	goto_if_ge EventScript_1669BB
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1
-	goto_if ge, EventScript_166B3B
+	goto_if_ge EventScript_166B3B
 	msgbox gUnknown_817FB10
 	closemessage
 	goto EventScript_1A9108

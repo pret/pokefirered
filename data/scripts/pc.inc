@@ -1,10 +1,9 @@
 EventScript_PC:: @ 81A6955
 	special sub_8110AB4
 	compare VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	goto_if_eq EventScript_1A7AE0
 	lockall
-	checkflag FLAG_SYS_PC_STORAGE_DISABLED
-	goto_if TRUE, EventScript_PCDisabled
+	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
 	setvar VAR_0x8004, 27
 	special Special_SetSomeVariable
 	setvar VAR_0x8004, 0
@@ -47,10 +46,8 @@ EventScript_AccessPlayersPC:: @ 81A69F0
 
 EventScript_AccessPokemonStorage:: @ 81A6A05
 	playse SE_PC_LOGIN
-	checkflag FLAG_SYS_NOT_SOMEONES_PC
-	call_if FALSE, EventScript_1A6A34
-	checkflag FLAG_SYS_NOT_SOMEONES_PC
-	call_if TRUE, EventScript_1A6A3D
+	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A6A34
+	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A6A3D
 	msgbox Text_OpenedPkmnStorage
 	special ShowPokemonStorageSystem
 	waitstate
@@ -76,8 +73,7 @@ EventScript_1A6A46:: @ 81A6A46
 	end
 
 EventScript_1A6A56:: @ 81A6A56
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if FALSE, EventScript_1A6A46
+	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_1A6A46
 	playse SE_PC_LOGIN
 	setvar VAR_0x8004, 31
 	special HelpSystem_BackupSomeVariable
@@ -89,13 +85,12 @@ EventScript_1A6A56:: @ 81A6A56
 	end
 
 EventScript_AccessProfOaksPC:: @ 81A6A7A
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if FALSE, EventScript_1A6A46
+	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_1A6A46
 	playse SE_PC_LOGIN
 	msgbox Text_AccessedProfOaksPC
 	msgbox Text_HavePokedexRated, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if eq, EventScript_ExitOaksPC
+	goto_if_eq EventScript_ExitOaksPC
 	setflag FLAG_OAKS_RATING_IS_VIA_PC
 	call EventScript_1A73E0
 	clearflag FLAG_OAKS_RATING_IS_VIA_PC

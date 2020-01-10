@@ -15,9 +15,9 @@ SSAnne_Exterior_160859:: @ 8160859
 	lockall
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8005, 6
-	call_if le, EventScript_1608A1
+	call_if_le EventScript_1608A1
 	compare VAR_0x8005, 7
-	call_if ge, EventScript_1608AC
+	call_if_ge EventScript_1608AC
 	fadenewbgm MUS_NAMINORI
 	delay 50
 	special Special_SSAnneDepartureCutscene

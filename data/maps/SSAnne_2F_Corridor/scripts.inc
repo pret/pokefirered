@@ -36,29 +36,29 @@ EventScript_160903:: @ 8160903
 	waitmovement 0
 	delay 20
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_1609AD
+	call_if_eq EventScript_1609AD
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_1609B8
+	call_if_eq EventScript_1609B8
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_1609CA
+	call_if_eq EventScript_1609CA
 	msgbox gUnknown_8173035
 	setvar VAR_LAST_TALKED, 1
 	compare VAR_STARTER_MON, 2
-	call_if eq, EventScript_1609DC
+	call_if_eq EventScript_1609DC
 	compare VAR_STARTER_MON, 1
-	call_if eq, EventScript_1609E7
+	call_if_eq EventScript_1609E7
 	compare VAR_STARTER_MON, 0
-	call_if eq, EventScript_1609F2
+	call_if_eq EventScript_1609F2
 	msgbox gUnknown_8173164
 	closemessage
 	delay 10
 	playbgm MUS_RIVAL2, 0
 	compare VAR_TEMP_1, 0
-	call_if eq, EventScript_1609FD
+	call_if_eq EventScript_1609FD
 	compare VAR_TEMP_1, 1
-	call_if eq, EventScript_160A08
+	call_if_eq EventScript_160A08
 	compare VAR_TEMP_1, 2
-	call_if eq, EventScript_160A13
+	call_if_eq EventScript_160A13
 	fadedefaultbgm
 	removeobject 1
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
@@ -83,15 +83,15 @@ EventScript_1609CA:: @ 81609CA
 	return
 
 EventScript_1609DC:: @ 81609DC
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SS_ANNE_SQUIRTLE, 0, Text_173110
+	trainerbattle_no_intro TRAINER_RIVAL_SS_ANNE_SQUIRTLE, Text_173110
 	return
 
 EventScript_1609E7:: @ 81609E7
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SS_ANNE_BULBASAUR, 0, Text_173110
+	trainerbattle_no_intro TRAINER_RIVAL_SS_ANNE_BULBASAUR, Text_173110
 	return
 
 EventScript_1609F2:: @ 81609F2
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_RIVAL_SS_ANNE_CHARMANDER, 0, Text_173110
+	trainerbattle_no_intro TRAINER_RIVAL_SS_ANNE_CHARMANDER, Text_173110
 	return
 
 EventScript_1609FD:: @ 81609FD

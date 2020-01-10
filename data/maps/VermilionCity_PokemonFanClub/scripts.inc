@@ -4,11 +4,10 @@ VermilionCity_PokemonFanClub_MapScripts:: @ 816B47E
 VermilionCity_PokemonFanClub_EventScript_16B47F:: @ 816B47F
 	lock
 	faceplayer
-	checkflag FLAG_GOT_BIKE_VOUCHER
-	goto_if TRUE, EventScript_16B4A7
+	goto_if_set FLAG_GOT_BIKE_VOUCHER, EventScript_16B4A7
 	msgbox gUnknown_819457E, MSGBOX_YESNO
 	compare VAR_RESULT, 1
-	goto_if eq, EventScript_16B4B1
+	goto_if_eq EventScript_16B4B1
 	msgbox gUnknown_8194860
 	release
 	end
@@ -22,10 +21,9 @@ EventScript_16B4B1:: @ 816B4B1
 	msgbox gUnknown_8194628
 	checkitemspace ITEM_BIKE_VOUCHER, 1
 	compare VAR_RESULT, 0
-	goto_if eq, EventScript_16B4F2
+	goto_if_eq EventScript_16B4F2
 	setflag FLAG_GOT_BIKE_VOUCHER
-	additem ITEM_BIKE_VOUCHER, 1
-	giveitemfanfaremsg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, MUS_FAN5
+	giveitem_msg gUnknown_819474E, ITEM_BIKE_VOUCHER, 1, MUS_FAN5
 	msgbox gUnknown_819477C
 	release
 	end
@@ -38,8 +36,7 @@ EventScript_16B4F2:: @ 816B4F2
 VermilionCity_PokemonFanClub_EventScript_16B4FC:: @ 816B4FC
 	lock
 	faceplayer
-	checkflag FLAG_SYS_GAME_CLEAR
-	goto_if TRUE, EventScript_16B511
+	goto_if_set FLAG_SYS_GAME_CLEAR, EventScript_16B511
 	msgbox gUnknown_81948E6
 	release
 	end
@@ -53,8 +50,7 @@ EventScript_16B511:: @ 816B511
 VermilionCity_PokemonFanClub_EventScript_16B528:: @ 816B528
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_3
-	goto_if TRUE, EventScript_16B54B
+	goto_if_set FLAG_TEMP_3, EventScript_16B54B
 	msgbox gUnknown_81944CC
 	closemessage
 	applymovement 5, Movement_FaceOriginalDirection
@@ -75,8 +71,7 @@ EventScript_16B54B:: @ 816B54B
 VermilionCity_PokemonFanClub_EventScript_16B563:: @ 816B563
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	goto_if TRUE, EventScript_16B586
+	goto_if_set FLAG_TEMP_2, EventScript_16B586
 	msgbox gUnknown_819446F
 	closemessage
 	applymovement 6, Movement_FaceOriginalDirection

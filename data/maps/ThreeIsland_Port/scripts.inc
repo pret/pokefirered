@@ -11,9 +11,9 @@ ThreeIsland_Port_EventScript_168796:: @ 8168796
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
-	goto_if ge, EventScript_1687B8
+	goto_if_ge EventScript_1687B8
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if ge, EventScript_1687C2
+	goto_if_ge EventScript_1687C2
 	msgbox gUnknown_818A307
 	release
 	end

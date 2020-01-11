@@ -266,7 +266,7 @@ gUnknown_8463E57:: @ 8463E57
 	.string "QUIRKY$"
 
 	.align 2
-gNatureNames:: @ 8463E60 dataptr
+gNatureNamePointers:: @ 8463E60 dataptr
 	.4byte gUnknown_8463DBC
 	.4byte gUnknown_8463DC2
 	.4byte gUnknown_8463DC9

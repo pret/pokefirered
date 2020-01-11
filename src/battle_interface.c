@@ -6,6 +6,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "window.h"
 
 void SpriteCB_HealthBoxOther(struct Sprite * sprite);
 void SpriteCB_HealthBar(struct Sprite * sprite);
@@ -603,3 +604,227 @@ void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     TextIntoHealthboxObject(objVram, windowTileData, 3);
     RemoveWindowOnHealthbox(windowId);
 }
+
+const u8 gUnknown_826052C[20] = __("{COLOR 01}{HIGHLIGHT 02}");
+
+void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
+{
+    u32 windowId, spriteTileNum;
+    u8 *windowTileData;
+    u8 *strptr;
+    register void *objVram;
+
+    if (GetBattlerSide(gSprites[healthboxSpriteId].hMain_Battler) == B_SIDE_PLAYER && !IsDoubleBattle())
+    {
+        u8 text[8];
+        if (maxOrCurrent != HP_CURRENT) // singles, max
+        {
+            ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, &windowId);
+            spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;
+            TextIntoHealthboxObject( (void*)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0xA40, windowTileData, 2);
+            RemoveWindowOnHealthbox(windowId);
+        }
+        else // singles, current
+        {
+            strptr = ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            *strptr++ = CHAR_SLASH;
+            *strptr++ = EOS;
+            windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 4, 5, &windowId);
+            spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;
+            TextIntoHealthboxObject((void *)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0x2E0, windowTileData, 1);
+            TextIntoHealthboxObject((void *)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0xA00, windowTileData + 0x20, 2);
+            RemoveWindowOnHealthbox(windowId);
+        }
+    }
+    else
+    {
+        u8 battler;
+
+        u8 text[20]; memcpy(text, gUnknown_826052C, sizeof(gUnknown_826052C));
+        battler = gSprites[healthboxSpriteId].hMain_Battler;
+        if (IsDoubleBattle() == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        {
+            UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, value, maxOrCurrent);
+        }
+        else
+        {
+            u32 var;
+            u8 i;
+
+            if (GetBattlerSide(gSprites[healthboxSpriteId].data[6]) == B_SIDE_PLAYER)
+            {
+                if (maxOrCurrent == HP_CURRENT)
+                    var = 29;
+                else
+                    var = 89;
+            }
+            else
+            {
+                if (maxOrCurrent == HP_CURRENT)
+                    var = 20;
+                else
+                    var = 48;
+            }
+
+            ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+
+            for (i = 0; i < 3; i++)
+            {
+                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[i * 64 + 32],
+                          (void*)((OBJ_VRAM0) + TILE_SIZE_4BPP * (gSprites[healthboxSpriteId].oam.tileNum + var + i)),
+                          0x20);
+            }
+        }
+    }
+}
+
+const u8 gUnknown_8260540[] = _("/");
+
+void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
+{
+    u32 windowId, spriteTileNum;
+    u8 *windowTileData;
+    void *objVram;
+
+    u8 battlerId;
+
+    u8 text[20] = __("{COLOR 01}{HIGHLIGHT 00}");
+    battlerId = gSprites[healthboxSpriteId].hMain_Battler;
+
+    if (gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars) // don't print text if only bars are visible
+    {
+        u8 var = 4;
+        u8 r7;
+        u8 *txtPtr;
+        u8 i;
+
+        if (maxOrCurrent == HP_CURRENT)
+            var = 0;
+
+        r7 = gSprites[healthboxSpriteId].data[5];
+        txtPtr = ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        if (!maxOrCurrent)
+            StringCopy(txtPtr, gUnknown_8260540);
+        RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+
+        for (i = var; i < var + 3; i++)
+        {
+            if (i < 3)
+            {
+                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
+                          (void*)((OBJ_VRAM0) + 32 * (1 + gSprites[r7].oam.tileNum + i)),
+                          0x20);
+            }
+            else
+            {
+                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
+                          (void*)((OBJ_VRAM0 + 0x20) + 32 * (i + gSprites[r7].oam.tileNum)),
+                          0x20);
+            }
+        }
+
+        if (maxOrCurrent == HP_CURRENT)
+        {
+            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[224],
+                      (void*)((OBJ_VRAM0) + ((gSprites[r7].oam.tileNum + 4) * TILE_SIZE_4BPP)),
+                      0x20);
+            CpuFill32(0, (void*)((OBJ_VRAM0) + (gSprites[r7].oam.tileNum * TILE_SIZE_4BPP)), 0x20);
+        }
+        else
+        {
+            if (GetBattlerSide(battlerId) == B_SIDE_PLAYER) // Impossible to reach part, because the battlerId is from the opponent's side.
+            {
+                CpuCopy32(GetHealthboxElementGfxPtr(116),
+                          (void*)(OBJ_VRAM0) + ((gSprites[healthboxSpriteId].oam.tileNum + 52) * TILE_SIZE_4BPP),
+                          0x20);
+            }
+        }
+    }
+}
+
+// Prints mon's nature, catch and flee rate. Probably used to test pokeblock-related features.
+void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
+{
+    u8 text[20];
+    s32 j, spriteTileNum;
+    u8 *barFontGfx;
+    u8 i, var, nature, healthBarSpriteId;
+
+    memcpy(text, gUnknown_826052C, sizeof(gUnknown_826052C));
+    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
+    var = 5;
+    nature = GetNature(mon);
+    StringCopy(text + 6, gNatureNamePointers[nature]);
+    RenderTextFont9(barFontGfx, 0, text, 0, 0, 0, 0, 0);
+
+    for (j = 6, i = 0; i < var; i++, j++)
+    {
+        u8 elementId;
+
+        if ((text[j] >= 55 && text[j] <= 74) || (text[j] >= 135 && text[j] <= 154))
+            elementId = 44;
+        else if ((text[j] >= 75 && text[j] <= 79) || (text[j] >= 155 && text[j] <= 159))
+            elementId = 45;
+        else
+            elementId = 43;
+
+        CpuCopy32(GetHealthboxElementGfxPtr(elementId), barFontGfx + (i * 64), 0x20);
+    }
+
+    for (j = 1; j < var + 1; j++)
+    {
+        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
+        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (spriteTileNum), 0x20);
+        barFontGfx += 0x20;
+
+        spriteTileNum = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
+        CpuCopy32(barFontGfx, (void*)(OBJ_VRAM0) + (spriteTileNum), 0x20);
+        barFontGfx += 0x20;
+    }
+
+    healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
+    ConvertIntToDecimalStringN(text + 6, gBattleStruct->safariCatchFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(text + 9, gBattleStruct->safariEscapeFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    text[5] = CHAR_SPACE;
+    text[8] = CHAR_SLASH;
+    RenderTextFont9(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+
+    j = healthBarSpriteId; // Needed to match for some reason.
+    for (j = 0; j < 5; j++)
+    {
+        if (j <= 1)
+        {
+            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
+                      (void*)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * TILE_SIZE_4BPP,
+                      32);
+        }
+        else
+        {
+            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
+                      (void*)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * TILE_SIZE_4BPP,
+                      32);
+        }
+    }
+}
+
+const u8 gUnknown_8260556[] = _("{HIGHLIGHT 02}");
+
+const u16 gUnknown_826055A[] = {
+    RGB(24, 12, 24),
+    RGB(23, 23, 3),
+    RGB(20, 20, 17),
+    RGB(17, 22, 28),
+    RGB(28, 14, 10)
+};
+
+const struct WindowTemplate gUnknown_8260564 = {
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 0,
+    .width = 8,
+    .height = 2,
+    .paletteNum = 0,
+    .baseBlock = 0x000
+};

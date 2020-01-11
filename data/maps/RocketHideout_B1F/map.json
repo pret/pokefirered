@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B1F_EventScript_1BE6C6",
+      "script": "RocketHideout_B1F_EventScript_ItemEscapeRope",
       "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B1F_EventScript_1BE6D3",
+      "script": "RocketHideout_B1F_EventScript_ItemHyperPotion",
       "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION"
     }
   ],

@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BEA6E",
+      "script": "CeruleanCave_2F_EventScript_ItemPPUp",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BEA7B",
+      "script": "CeruleanCave_2F_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_ULTRA_BALL"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_2F_EventScript_1BEA61",
+      "script": "CeruleanCave_2F_EventScript_ItemFullRestore",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_2F_FULL_RESTORE"
     },
     {

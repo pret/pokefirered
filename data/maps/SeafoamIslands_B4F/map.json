@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B4F_EventScript_1BEC1B",
+      "script": "SeafoamIslands_B4F_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B4F_ULTRA_BALL"
     }
   ],

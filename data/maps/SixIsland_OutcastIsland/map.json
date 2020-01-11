@@ -107,7 +107,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_OutcastIsland_EventScript_1BEC90",
+      "script": "SixIsland_OutcastIsland_EventScript_ItemPPUp",
       "flag": "FLAG_HIDE_SIX_ISLAND_OUTCAST_ISLAND_PP_UP"
     }
   ],

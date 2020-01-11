@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_1BEC28",
+      "script": "FourIsland_EventScript_ItemStarPiece",
       "flag": "FLAG_HIDE_FOUR_ISLAND_STAR_PIECE"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_1BEC35",
+      "script": "FourIsland_EventScript_ItemStardust",
       "flag": "FLAG_HIDE_FOUR_ISLAND_STARDUST"
     },
     {

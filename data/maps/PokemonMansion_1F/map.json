@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BE95D",
+      "script": "PokemonMansion_1F_EventScript_ItemCarbos",
       "flag": "FLAG_HIDE_POKEMON_MANSION_1F_CARBOS"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BE96A",
+      "script": "PokemonMansion_1F_EventScript_ItemEscapeRope",
       "flag": "FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BEB65",
+      "script": "PokemonMansion_1F_EventScript_ItemProtein",
       "flag": "FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN"
     },
     {

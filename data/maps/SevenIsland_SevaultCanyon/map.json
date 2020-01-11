@@ -242,7 +242,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SevaultCanyon_EventScript_1BECDE",
+      "script": "SevenIsland_SevaultCanyon_EventScript_ItemKingsRock",
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_KINGS_ROCK"
     },
     {
@@ -255,7 +255,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SevaultCanyon_EventScript_1BECEB",
+      "script": "SevenIsland_SevaultCanyon_EventScript_ItemMaxElixir",
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_MAX_ELIXIR"
     },
     {
@@ -268,7 +268,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SevaultCanyon_EventScript_1BECF8",
+      "script": "SevenIsland_SevaultCanyon_EventScript_ItemNugget",
       "flag": "FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_NUGGET"
     },
     {

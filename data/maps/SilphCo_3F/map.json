@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_3F_EventScript_1BE866",
+      "script": "SilphCo_3F_EventScript_ItemHyperPotion",
       "flag": "FLAG_HIDE_SILPH_CO_3F_HYPER_POTION"
     }
   ],

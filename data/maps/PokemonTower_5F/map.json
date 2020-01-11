@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BE789",
+      "script": "PokemonTower_5F_EventScript_ItemNugget",
       "flag": "FLAG_HIDE_POKEMON_TOWER_5F_NUGGET"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BEBB3",
+      "script": "PokemonTower_5F_EventScript_ItemCleanseTag",
       "flag": "FLAG_HIDE_POKEMON_TOWER_5F_CLEANSE_TAG"
     }
   ],

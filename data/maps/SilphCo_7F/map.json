@@ -140,7 +140,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_1BE8DB",
+      "script": "SilphCo_7F_EventScript_ItemCalcium",
       "flag": "FLAG_HIDE_SILPH_CO_7F_CALCIUM"
     },
     {
@@ -153,7 +153,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_1BE8E8",
+      "script": "SilphCo_7F_EventScript_ItemTM08",
       "flag": "FLAG_HIDE_SILPH_CO_7F_TM08"
     }
   ],

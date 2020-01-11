@@ -244,7 +244,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_Exterior_EventScript_1BED2C",
+      "script": "MtEmber_Exterior_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_ULTRA_BALL"
     },
     {
@@ -257,7 +257,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_Exterior_EventScript_1BED39",
+      "script": "MtEmber_Exterior_EventScript_ItemFireStone",
       "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_FIRE_STONE"
     },
     {
@@ -270,7 +270,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_Exterior_EventScript_1BED46",
+      "script": "MtEmber_Exterior_EventScript_ItemDireHit",
       "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_DIRE_HIT"
     }
   ],

@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route4_EventScript_1BE637",
+      "script": "Route4_EventScript_ItemTM05",
       "flag": "FLAG_HIDE_ROUTE4_TM05"
     },
     {

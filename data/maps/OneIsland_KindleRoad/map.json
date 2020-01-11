@@ -367,7 +367,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC42",
+      "script": "OneIsland_KindleRoad_EventScript_ItemEther",
       "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_ETHER"
     },
     {
@@ -380,7 +380,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC4F",
+      "script": "OneIsland_KindleRoad_EventScript_ItemMaxRepel",
       "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_MAX_REPEL"
     },
     {
@@ -393,7 +393,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC5C",
+      "script": "OneIsland_KindleRoad_EventScript_ItemCarbos",
       "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_CARBOS"
     }
   ],

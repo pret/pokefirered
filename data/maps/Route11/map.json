@@ -164,7 +164,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route11_EventScript_1BEAF0",
+      "script": "Route11_EventScript_ItemXDefend",
       "flag": "FLAG_HIDE_ROUTE11_X_DEFEND"
     },
     {
@@ -177,7 +177,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route11_EventScript_1BEB99",
+      "script": "Route11_EventScript_ItemGreatBall",
       "flag": "FLAG_HIDE_ROUTE11_GREAT_BALL"
     },
     {
@@ -190,7 +190,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route11_EventScript_1BEBA6",
+      "script": "Route11_EventScript_ItemAwakening",
       "flag": "FLAG_HIDE_ROUTE11_AWAKENING"
     }
   ],

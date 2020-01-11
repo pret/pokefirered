@@ -35,7 +35,7 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	release
 	end
 
-RocketHideout_B4F_EventScript_161363:: @ 8161363
+RocketHideout_B4F_EventScript_SilphScope:: @ 8161363
 	lock
 	faceplayer
 	removeobject 2
@@ -58,7 +58,7 @@ EventScript_16139D:: @ 816139D
 	release
 	end
 
-RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
+RocketHideout_B4F_EventScript_LiftKey:: @ 81613AD
 	lock
 	faceplayer
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT

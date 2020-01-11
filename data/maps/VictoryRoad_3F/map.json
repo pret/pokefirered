@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_3F_EventScript_1BEA20",
+      "script": "VictoryRoad_3F_EventScript_ItemMaxRevive",
       "flag": "FLAG_HIDE_VICTORY_ROAD_3F_MAX_REVIVE"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VictoryRoad_3F_EventScript_1BEA2D",
+      "script": "VictoryRoad_3F_EventScript_ItemTM50",
       "flag": "FLAG_HIDE_VICTORY_ROAD_3F_TM50"
     },
     {

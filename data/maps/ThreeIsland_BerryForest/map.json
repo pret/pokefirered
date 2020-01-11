@@ -166,7 +166,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BED05",
+      "script": "ThreeIsland_BerryForest_EventScript_ItemMaxEther",
       "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ETHER"
     },
     {
@@ -179,7 +179,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BED12",
+      "script": "ThreeIsland_BerryForest_EventScript_ItemFullHeal",
       "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL"
     },
     {
@@ -192,7 +192,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_1BED1F",
+      "script": "ThreeIsland_BerryForest_EventScript_ItemMaxElixir",
       "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ELIXIR"
     }
   ],

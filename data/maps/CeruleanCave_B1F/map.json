@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_B1F_EventScript_1BEA95",
+      "script": "CeruleanCave_B1F_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_B1F_ULTRA_BALL"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCave_B1F_EventScript_1BEA88",
+      "script": "CeruleanCave_B1F_EventScript_ItemMaxRevive",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_B1F_MAX_REVIVE"
     },
     {

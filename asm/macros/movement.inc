@@ -10,10 +10,10 @@
 	create_movement face_up
 	create_movement face_left
 	create_movement face_right
-	create_movement face_down_2 @ TODO: distinction between this and above set
-	create_movement face_up_2
-	create_movement face_left_2
-	create_movement face_right_2
+	create_movement face_down_fast
+	create_movement face_up_fast
+	create_movement face_left_fast
+	create_movement face_right_fast
 	create_movement walk_slowest_down
 	create_movement walk_slowest_up
 	create_movement walk_slowest_left
@@ -55,10 +55,10 @@
 	create_movement walk_in_place_fastest_up
 	create_movement walk_in_place_fastest_left
 	create_movement walk_in_place_fastest_right
-	create_movement ride_water_current_down
-	create_movement ride_water_current_up
-	create_movement ride_water_current_left
-	create_movement ride_water_current_right
+	create_movement face_down_slow
+	create_movement face_up_slow
+	create_movement face_left_slow
+	create_movement face_right_slow
 	create_movement walk_fastest_down
 	create_movement walk_fastest_up
 	create_movement walk_fastest_left
@@ -71,15 +71,15 @@
 	create_movement player_run_up
 	create_movement player_run_left
 	create_movement player_run_right
-	create_movement step_41
-	create_movement step_42
-	create_movement step_43
-	create_movement step_44
+	create_movement player_run_down_slow
+	create_movement player_run_up_slow
+	create_movement player_run_left_slow
+	create_movement player_run_right_slow
 	create_movement step_45
-	create_movement step_46
-	create_movement step_47
-	create_movement step_48
-	create_movement step_49
+	create_movement jump_down_run
+	create_movement jump_up_run
+	create_movement jump_left_run
+	create_movement jump_right_run
 	create_movement face_player
 	create_movement face_away_player
 	create_movement lock_facing_direction
@@ -98,8 +98,8 @@
 	create_movement jump_in_place_right_left
 	create_movement face_original_direction
 	create_movement nurse_joy_bow
-	create_movement step_5c
-	create_movement step_5d
+	create_movement enable_jump_landing_ground_effect
+	create_movement disable_jump_landing_ground_effect
 	create_movement disable_anim
 	create_movement restore_anim
 	create_movement set_invisible
@@ -108,7 +108,7 @@
 	create_movement emote_question_mark
 	create_movement emote_x
 	create_movement emote_double_exclamation_mark
-	create_movement step_66
+	create_movement emote_smile
 	create_movement step_67
 	create_movement rock_smash_break
 	create_movement cut_tree

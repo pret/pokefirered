@@ -1,22 +1,27 @@
 #include "global.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
+#include "decompress.h"
 #include "graphics.h"
 #include "pokemon_summary_screen.h"
+#include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
 #include "window.h"
+#include "constants/songs.h"
 
 void SpriteCB_HealthBoxOther(struct Sprite * sprite);
 void SpriteCB_HealthBar(struct Sprite * sprite);
+const u8 *GetHealthboxElementGfxPtr(u8 which);
+void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
+void SpriteCB_StatusSummaryBallsOnSwitchout(struct Sprite * sprite);
+void UpdateStatusIconInHealthbox(u8 spriteId);
 void SpriteCB_StatusSummaryBar(struct Sprite * sprite);
 void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite * sprite);
-const u8 *GetHealthboxElementGfxPtr(u8 which);
 u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId);
 void RemoveWindowOnHealthbox(u32 windowId);
 void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
-void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 
 const struct OamData gOamData_8260270 = {
     .shape = SPRITE_SHAPE(64x32),
@@ -173,29 +178,32 @@ const struct Subsprite gUnknown_82603E4[] = {
     { 64, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x000c, 1 }
 };
 
-const struct SubspriteTable gUnknown_82603FC =
-{NELEMS(gUnknown_82603D4), gUnknown_82603D4};
+const struct SubspriteTable sStatusSummaryBar_SubspriteTable[] =
+{
+    {NELEMS(gUnknown_82603D4), gUnknown_82603D4}
+};
+
 const struct SubspriteTable gUnknown_8260404 =
 {NELEMS(gUnknown_82603E4), gUnknown_82603E4};
 
 const u16 gUnknown_26040C[] = INCBIN_U16("graphics/battle_interface/unk_826404C.4bpp");
 
-const struct CompressedSpriteSheet gUnknown_826046C[] = {
+const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheets[] = {
     {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55052},
     {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55053}
 };
 
-const struct SpritePalette gUnknown_826047C[] = {
+const struct SpritePalette sStatusSummaryBarSpritePals[] = {
     {gBattleInterface_BallStatusBarPal, 55056},
     {gBattleInterface_BallStatusBarPal, 55057}
 };
 
-const struct SpritePalette gUnknown_826048C[] = {
+const struct SpritePalette sStatusSummaryBallsSpritePals[] = {
     {gBattleInterface_BallDisplayPal, 55058},
     {gBattleInterface_BallDisplayPal, 55059}
 };
 
-const struct SpriteSheet gUnknown_826049C[] = {
+const struct SpriteSheet sStatusSummaryBallsSpriteSheets[] = {
     {gUnknown_8D12404, 0x0080, 55060},
     {gUnknown_8D12404, 0x0080, 55061}
 };
@@ -212,7 +220,7 @@ const struct OamData gUnknown_82604B4 = {
     .priority = 1
 };
 
-const struct SpriteTemplate gUnknown_82604BC[] = {
+const struct SpriteTemplate sStatusSummaryBarSpriteTemplates[] = {
     {
         .tileTag = 55052,
         .paletteTag = 55056,
@@ -230,7 +238,7 @@ const struct SpriteTemplate gUnknown_82604BC[] = {
     }
 };
 
-const struct SpriteTemplate gUnknown_82604EC[] = {
+const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[] = {
     {
         .tileTag = 55060,
         .paletteTag = 55058,
@@ -805,6 +813,74 @@ void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
             CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
                       (void*)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * TILE_SIZE_4BPP,
                       32);
+        }
+    }
+}
+
+void SwapHpBarsWithHpText(void)
+{
+    s32 i;
+    u8 healthBarSpriteId;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
+            && GetBattlerSide(i) != B_SIDE_OPPONENT
+            && (IsDoubleBattle() || GetBattlerSide(i) != B_SIDE_PLAYER))
+        {
+            bool8 noBars;
+
+            gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars ^= 1;
+            noBars = gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars;
+            if (GetBattlerSide(i) == B_SIDE_PLAYER)
+            {
+                if (!IsDoubleBattle())
+                    continue;
+                if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                    continue;
+
+                if (noBars == TRUE) // bars to text
+                {
+                    healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].hMain_HealthBarSpriteId;
+
+                    CpuFill32(0, (void*)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * TILE_SIZE_4BPP), 0x100);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                }
+                else // text to bars
+                {
+                    UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gPlayerParty[gBattlerPartyIndexes[i]], HEALTHBOX_HEALTH_BAR);
+                    CpuCopy32(GetHealthboxElementGfxPtr(117), (void*)(OBJ_VRAM0 + 0x680 + gSprites[gHealthboxSpriteIds[i]].oam.tileNum * TILE_SIZE_4BPP), 32);
+                }
+            }
+            else
+            {
+                if (noBars == TRUE) // bars to text
+                {
+                    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                    {
+                        // Most likely a debug function.
+                        PrintSafariMonInfo(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
+                    }
+                    else
+                    {
+                        healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].hMain_HealthBarSpriteId;
+
+                        CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * 32), 0x100);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                    }
+                }
+                else // text to bars
+                {
+                    UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
+                    UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], HEALTHBOX_HEALTH_BAR);
+                    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+                        UpdateHealthboxAttribute(gHealthboxSpriteIds[i], &gEnemyParty[gBattlerPartyIndexes[i]], HEALTHBOX_NICK);
+                }
+            }
+            gSprites[gHealthboxSpriteIds[i]].hMain_Data7 ^= 1;
         }
     }
 }

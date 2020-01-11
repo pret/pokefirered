@@ -5,340 +5,6 @@
 
 	.text
 
-	thumb_func_start SwapHpBarsWithHpText
-SwapHpBarsWithHpText: @ 8048A4C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	movs r0, 0
-	mov r9, r0
-	ldr r0, _08048B78 @ =gBattlersCount
-	ldrb r0, [r0]
-	cmp r9, r0
-	blt _08048A66
-	b _08048CF2
-_08048A66:
-	ldr r1, _08048B7C @ =gSprites
-	mov r10, r1
-	ldr r2, _08048B80 @ =gBattlerPartyIndexes
-	mov r8, r2
-_08048A6E:
-	ldr r0, _08048B84 @ =gHealthboxSpriteIds
-	mov r1, r9
-	adds r6, r1, r0
-	ldrb r1, [r6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	mov r1, r10
-	adds r1, 0x1C
-	adds r0, r1
-	ldr r1, [r0]
-	ldr r0, _08048B88 @ =SpriteCallbackDummy
-	cmp r1, r0
-	beq _08048A8C
-	b _08048CE0
-_08048A8C:
-	mov r2, r9
-	lsls r0, r2, 24
-	lsrs r7, r0, 24
-	adds r0, r7, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08048AA2
-	b _08048CE0
-_08048AA2:
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048ABA
-	adds r0, r7, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048ABA
-	b _08048CE0
-_08048ABA:
-	ldr r5, _08048B8C @ =gBattleSpritesDataPtr
-	ldr r0, [r5]
-	ldr r3, [r0]
-	mov r0, r9
-	lsls r4, r0, 2
-	adds r3, r4, r3
-	ldr r0, [r3]
-	lsls r0, 27
-	lsrs r0, 31
-	movs r2, 0x1
-	eors r2, r0
-	lsls r2, 4
-	mov r12, r2
-	ldrb r0, [r3]
-	movs r2, 0x11
-	negs r2, r2
-	adds r1, r2, 0
-	ands r0, r1
-	mov r1, r12
-	orrs r0, r1
-	strb r0, [r3]
-	ldr r0, [r5]
-	ldr r0, [r0]
-	adds r4, r0
-	ldr r0, [r4]
-	lsls r0, 27
-	lsrs r4, r0, 31
-	adds r0, r7, 0
-	bl GetBattlerSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048BE8
-	bl IsDoubleBattle
-	lsls r0, 24
-	cmp r0, 0
-	bne _08048B08
-	b _08048CE0
-_08048B08:
-	ldr r0, _08048B90 @ =gBattleTypeFlags
-	ldr r2, [r0]
-	movs r0, 0x80
-	ands r2, r0
-	cmp r2, 0
-	beq _08048B16
-	b _08048CE0
-_08048B16:
-	cmp r4, 0x1
-	bne _08048BA0
-	ldrb r1, [r6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r10
-	ldrh r0, [r0, 0x38]
-	lsls r0, 24
-	lsrs r1, r0, 24
-	str r2, [sp]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r10
-	ldrh r1, [r0, 0x4]
-	lsls r1, 22
-	lsrs r1, 17
-	ldr r2, _08048B94 @ =0x06010000
-	adds r1, r2
-	mov r0, sp
-	ldr r2, _08048B98 @ =0x05000040
-	bl CpuSet
-	ldrb r4, [r6]
-	mov r1, r8
-	ldrh r0, [r1]
-	movs r2, 0x64
-	muls r0, r2
-	ldr r1, _08048B9C @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0x39
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 16
-	asrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0
-	bl UpdateHpTextInHealthboxInDoubles
-	ldrb r4, [r6]
-	mov r2, r8
-	ldrh r0, [r2]
-	movs r1, 0x64
-	muls r0, r1
-	ldr r2, _08048B9C @ =gPlayerParty
-	b _08048C6E
-	.align 2, 0
-_08048B78: .4byte gBattlersCount
-_08048B7C: .4byte gSprites
-_08048B80: .4byte gBattlerPartyIndexes
-_08048B84: .4byte gHealthboxSpriteIds
-_08048B88: .4byte SpriteCallbackDummy
-_08048B8C: .4byte gBattleSpritesDataPtr
-_08048B90: .4byte gBattleTypeFlags
-_08048B94: .4byte 0x06010000
-_08048B98: .4byte 0x05000040
-_08048B9C: .4byte gPlayerParty
-_08048BA0:
-	ldrb r0, [r6]
-	bl UpdateStatusIconInHealthbox
-	ldrb r0, [r6]
-	mov r2, r8
-	ldrh r1, [r2]
-	movs r2, 0x64
-	muls r1, r2
-	ldr r2, _08048BDC @ =gPlayerParty
-	adds r1, r2
-	movs r2, 0x5
-	bl UpdateHealthboxAttribute
-	movs r0, 0x75
-	bl GetHealthboxElementGfxPtr
-	ldrb r2, [r6]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	add r1, r10
-	ldrh r1, [r1, 0x4]
-	lsls r1, 22
-	lsrs r1, 17
-	ldr r2, _08048BE0 @ =0x06010680
-	adds r1, r2
-	ldr r2, _08048BE4 @ =0x04000008
-	bl CpuSet
-	b _08048CCA
-	.align 2, 0
-_08048BDC: .4byte gPlayerParty
-_08048BE0: .4byte 0x06010680
-_08048BE4: .4byte 0x04000008
-_08048BE8:
-	cmp r4, 0x1
-	bne _08048C94
-	ldr r0, _08048C0C @ =gBattleTypeFlags
-	ldr r2, [r0]
-	movs r0, 0x80
-	ands r2, r0
-	cmp r2, 0
-	beq _08048C14
-	ldrb r0, [r6]
-	mov r2, r8
-	ldrh r1, [r2]
-	movs r2, 0x64
-	muls r1, r2
-	ldr r2, _08048C10 @ =gEnemyParty
-	adds r1, r2
-	bl PrintSafariMonInfo
-	b _08048CCA
-	.align 2, 0
-_08048C0C: .4byte gBattleTypeFlags
-_08048C10: .4byte gEnemyParty
-_08048C14:
-	ldrb r1, [r6]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r10
-	ldrh r0, [r0, 0x38]
-	lsls r0, 24
-	lsrs r1, r0, 24
-	str r2, [sp]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r10
-	ldrh r1, [r0, 0x4]
-	lsls r1, 22
-	lsrs r1, 17
-	ldr r0, _08048C88 @ =0x06010000
-	adds r1, r0
-	mov r0, sp
-	ldr r2, _08048C8C @ =0x05000040
-	bl CpuSet
-	ldrb r4, [r6]
-	mov r1, r8
-	ldrh r0, [r1]
-	movs r2, 0x64
-	muls r0, r2
-	ldr r1, _08048C90 @ =gEnemyParty
-	adds r0, r1
-	movs r1, 0x39
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 16
-	asrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0
-	bl UpdateHpTextInHealthboxInDoubles
-	ldrb r4, [r6]
-	mov r2, r8
-	ldrh r0, [r2]
-	movs r1, 0x64
-	muls r0, r1
-	ldr r2, _08048C90 @ =gEnemyParty
-_08048C6E:
-	adds r0, r2
-	movs r1, 0x3A
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 16
-	asrs r1, 16
-	adds r0, r4, 0
-	movs r2, 0x1
-	bl UpdateHpTextInHealthboxInDoubles
-	b _08048CCA
-	.align 2, 0
-_08048C88: .4byte 0x06010000
-_08048C8C: .4byte 0x05000040
-_08048C90: .4byte gEnemyParty
-_08048C94:
-	ldrb r0, [r6]
-	bl UpdateStatusIconInHealthbox
-	ldrb r0, [r6]
-	mov r2, r8
-	ldrh r1, [r2]
-	movs r5, 0x64
-	muls r1, r5
-	ldr r4, _08048D04 @ =gEnemyParty
-	adds r1, r4
-	movs r2, 0x5
-	bl UpdateHealthboxAttribute
-	ldr r0, _08048D08 @ =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08048CCA
-	ldrb r0, [r6]
-	mov r2, r8
-	ldrh r1, [r2]
-	muls r1, r5
-	adds r1, r4
-	movs r2, 0x4
-	bl UpdateHealthboxAttribute
-_08048CCA:
-	ldr r0, _08048D0C @ =gHealthboxSpriteIds
-	add r0, r9
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	add r0, r10
-	ldrh r1, [r0, 0x3C]
-	movs r2, 0x1
-	eors r1, r2
-	strh r1, [r0, 0x3C]
-_08048CE0:
-	movs r0, 0x2
-	add r8, r0
-	movs r1, 0x1
-	add r9, r1
-	ldr r0, _08048D10 @ =gBattlersCount
-	ldrb r0, [r0]
-	cmp r9, r0
-	bge _08048CF2
-	b _08048A6E
-_08048CF2:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08048D04: .4byte gEnemyParty
-_08048D08: .4byte gBattleTypeFlags
-_08048D0C: .4byte gHealthboxSpriteIds
-_08048D10: .4byte gBattlersCount
-	thumb_func_end SwapHpBarsWithHpText
-
 	thumb_func_start CreatePartyStatusSummarySprites
 CreatePartyStatusSummarySprites: @ 8048D14
 	push {r4-r7,lr}
@@ -412,7 +78,7 @@ _08048D94:
 	movs r6, 0
 	str r6, [sp, 0x14]
 	lsls r4, r7, 3
-	ldr r0, _08048E44 @ =gUnknown_826046C
+	ldr r0, _08048E44 @ =sStatusSummaryBarSpriteSheets
 	mov r10, r0
 	lsls r3, r7, 1
 	mov r9, r3
@@ -442,19 +108,19 @@ _08048DC4:
 	mov r6, r10
 	adds r0, r4, r6
 	bl LoadCompressedSpriteSheetUsingHeap
-	ldr r0, _08048E4C @ =gUnknown_826049C
+	ldr r0, _08048E4C @ =sStatusSummaryBallsSpriteSheets
 	adds r0, r4, r0
 	bl LoadSpriteSheet
-	ldr r0, _08048E50 @ =gUnknown_826047C
+	ldr r0, _08048E50 @ =sStatusSummaryBarSpritePals
 	adds r0, r4, r0
 	bl LoadSpritePalette
-	ldr r0, _08048E54 @ =gUnknown_826048C
+	ldr r0, _08048E54 @ =sStatusSummaryBallsSpritePals
 	adds r0, r4, r0
 	bl LoadSpritePalette
 	mov r1, r9
 	adds r0, r1, r7
 	lsls r0, 3
-	ldr r1, _08048E58 @ =gUnknown_82604BC
+	ldr r1, _08048E58 @ =sStatusSummaryBarSpriteTemplates
 	adds r0, r1
 	ldr r2, [sp, 0x20]
 	asrs r1, r2, 16
@@ -471,7 +137,7 @@ _08048DC4:
 	lsls r0, 2
 	ldr r1, _08048E5C @ =gSprites
 	adds r4, r0, r1
-	ldr r1, _08048E60 @ =gUnknown_82603FC
+	ldr r1, _08048E60 @ =sStatusSummaryBar_SubspriteTable
 	adds r0, r4, 0
 	bl SetSubspriteTables
 	mov r0, r8
@@ -492,14 +158,14 @@ _08048DC4:
 	b _08048E6A
 	.align 2, 0
 _08048E40: .4byte 0x0000ff9c
-_08048E44: .4byte gUnknown_826046C
+_08048E44: .4byte sStatusSummaryBarSpriteSheets
 _08048E48: .4byte 0x0000ffff
-_08048E4C: .4byte gUnknown_826049C
-_08048E50: .4byte gUnknown_826047C
-_08048E54: .4byte gUnknown_826048C
-_08048E58: .4byte gUnknown_82604BC
+_08048E4C: .4byte sStatusSummaryBallsSpriteSheets
+_08048E50: .4byte sStatusSummaryBarSpritePals
+_08048E54: .4byte sStatusSummaryBallsSpritePals
+_08048E58: .4byte sStatusSummaryBarSpriteTemplates
 _08048E5C: .4byte gSprites
-_08048E60: .4byte gUnknown_82603FC
+_08048E60: .4byte sStatusSummaryBar_SubspriteTable
 _08048E64:
 	ldrh r0, [r4, 0x20]
 	adds r0, 0x60
@@ -517,7 +183,7 @@ _08048E6A:
 	mov r9, r3
 	mov r8, r6
 _08048E80:
-	ldr r0, _08048F18 @ =gUnknown_82604EC
+	ldr r0, _08048F18 @ =sStatusSummaryBallsSpriteTemplates
 	ldr r5, [sp, 0x24]
 	ldr r1, _08048F1C @ =0xfffc0000
 	adds r2, r5, r1
@@ -593,7 +259,7 @@ _08048ECE:
 	b _08048F66
 	.align 2, 0
 _08048F14: .4byte gSprites
-_08048F18: .4byte gUnknown_82604EC
+_08048F18: .4byte sStatusSummaryBallsSpriteTemplates
 _08048F1C: .4byte 0xfffc0000
 _08048F20: .4byte gSprites + 0x1C
 _08048F24: .4byte SpriteCB_StatusSummaryBallsOnSwitchout

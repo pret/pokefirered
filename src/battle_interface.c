@@ -8,20 +8,244 @@
 #include "text.h"
 
 void SpriteCB_HealthBoxOther(struct Sprite * sprite);
+void SpriteCB_HealthBar(struct Sprite * sprite);
+void SpriteCB_StatusSummaryBar(struct Sprite * sprite);
+void SpriteCB_StatusSummaryBallsOnBattleStart(struct Sprite * sprite);
 const u8 *GetHealthboxElementGfxPtr(u8 which);
 u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId);
 void RemoveWindowOnHealthbox(u32 windowId);
 void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth);
 void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
 
-extern const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[];
-extern const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[];
-extern const struct SpriteTemplate sHealthboxSafariSpriteTemplate;
-extern const struct SpriteTemplate gUnknown_82602F8[];
-extern const struct SubspriteTable gUnknown_82603C4[];
-extern const u8 gUnknown_826051C[16];
-extern const u8 gUnknown_826052C[20];
-extern const u8 gUnknown_8260542[20];
+const struct OamData gOamData_8260270 = {
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
+    .priority = 1
+};
+
+const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[] = {
+    {
+        .tileTag = 55039,
+        .paletteTag = 55039,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    }, {
+        .tileTag = 55040,
+        .paletteTag = 55039,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    }
+};
+
+const struct SpriteTemplate sHealthboxOpponentSpriteTemplates[] = {
+    {
+        .tileTag = 55041,
+        .paletteTag = 55039,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    }, {
+        .tileTag = 55042,
+        .paletteTag = 55039,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy
+    }
+};
+
+const struct SpriteTemplate sHealthboxSafariSpriteTemplate =
+{
+    .tileTag = 55051,
+    .paletteTag = 55039,
+    .oam = &gOamData_8260270,
+    .anims = gDummySpriteAnimTable,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_82602F0 = {
+    .shape = SPRITE_SHAPE(32x8),
+    .size = SPRITE_SIZE(32x8),
+    .priority = 1
+};
+
+const struct SpriteTemplate gUnknown_82602F8[] = {
+    {
+        .tileTag = 55044,
+        .paletteTag = 55044,
+        .oam = &gUnknown_82602F0,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    }, {
+        .tileTag = 55045,
+        .paletteTag = 55044,
+        .oam = &gUnknown_82602F0,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    }, {
+        .tileTag = 55046,
+        .paletteTag = 55044,
+        .oam = &gUnknown_82602F0,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    }, {
+        .tileTag = 55047,
+        .paletteTag = 55044,
+        .oam = &gUnknown_82602F0,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_HealthBar
+    }
+};
+
+const struct Subsprite gUnknown_8260358[] = {
+    { 240, 0, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 0x0000, 1 },
+    { 48, 0, SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), 0x0020, 1 },
+    { 240, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0030, 1 },
+    { 16, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0034, 1 },
+    { 48, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0038, 1 }
+};
+
+const struct Subsprite gUnknown_826036C[] = {
+    { 240, 0, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 0x0040, 1 },
+    { 48, 0, SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), 0x0060, 1 },
+    { 240, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0070, 1 },
+    { 16, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0074, 1 },
+    { 48, 32, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0078, 1 }
+};
+
+const struct Subsprite gUnknown_8260380[] = {
+    { 240, 0, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 0x0000, 1 },
+    { 48, 0, SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), 0x0020, 1 }
+};
+
+const struct Subsprite gUnknown_8260388[] = {
+    { 240, 0, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), 0x0000, 1 },
+    { 48, 0, SPRITE_SHAPE(32x32), SPRITE_SIZE(32x32), 0x0020, 1 }
+};
+
+const struct Subsprite gUnknown_8260390[] = {
+    { 240, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0000, 1 },
+    { 16, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0004, 1 }
+};
+
+const struct Subsprite gUnknown_8260398[] = {
+    { 240, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0000, 1 },
+    { 16, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0004, 1 },
+    { 224, 0, SPRITE_SHAPE(8x8), SPRITE_SIZE(8x8), 0x0008, 1 }
+};
+
+const struct SubspriteTable gUnknown_82603A4[] = {
+    {NELEMS(gUnknown_8260358), gUnknown_8260358},
+    {NELEMS(gUnknown_8260380), gUnknown_8260380},
+    {NELEMS(gUnknown_826036C), gUnknown_826036C},
+    {NELEMS(gUnknown_8260388), gUnknown_8260388}
+};
+
+const struct SubspriteTable gUnknown_82603C4[] = {
+    {NELEMS(gUnknown_8260390), gUnknown_8260390},
+    {NELEMS(gUnknown_8260398), gUnknown_8260398}
+};
+
+const struct Subsprite gUnknown_82603D4[] = {
+    { 160, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0000, 1 },
+    { 192, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0004, 1 },
+    { 224, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0008, 1 },
+    { 0, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x000c, 1 }
+};
+
+const struct Subsprite gUnknown_82603E4[] = {
+    { 160, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0000, 1 },
+    { 192, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0004, 1 },
+    { 224, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0008, 1 },
+    { 0, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0008, 1 },
+    { 32, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x0008, 1 },
+    { 64, 0, SPRITE_SHAPE(32x8), SPRITE_SIZE(32x8), 0x000c, 1 }
+};
+
+const struct SubspriteTable gUnknown_82603FC =
+{NELEMS(gUnknown_82603D4), gUnknown_82603D4};
+const struct SubspriteTable gUnknown_8260404 =
+{NELEMS(gUnknown_82603E4), gUnknown_82603E4};
+
+const u16 gUnknown_26040C[] = INCBIN_U16("graphics/battle_interface/unk_826404C.4bpp");
+
+const struct CompressedSpriteSheet gUnknown_826046C[] = {
+    {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55052},
+    {gFile_graphics_battle_interface_ball_status_bar_sheet, 0x0200, 55053}
+};
+
+const struct SpritePalette gUnknown_826047C[] = {
+    {gBattleInterface_BallStatusBarPal, 55056},
+    {gBattleInterface_BallStatusBarPal, 55057}
+};
+
+const struct SpritePalette gUnknown_826048C[] = {
+    {gBattleInterface_BallDisplayPal, 55058},
+    {gBattleInterface_BallDisplayPal, 55059}
+};
+
+const struct SpriteSheet gUnknown_826049C[] = {
+    {gUnknown_8D12404, 0x0080, 55060},
+    {gUnknown_8D12404, 0x0080, 55061}
+};
+
+const struct OamData gUnknown_82604AC = {
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32),
+    .priority = 1
+};
+
+const struct OamData gUnknown_82604B4 = {
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1
+};
+
+const struct SpriteTemplate gUnknown_82604BC[] = {
+    {
+        .tileTag = 55052,
+        .paletteTag = 55056,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_StatusSummaryBar
+    }, {
+        .tileTag = 55053,
+        .paletteTag = 55057,
+        .oam = &gOamData_8260270,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_StatusSummaryBar
+    }
+};
+
+const struct SpriteTemplate gUnknown_82604EC[] = {
+    {
+        .tileTag = 55060,
+        .paletteTag = 55058,
+        .oam = &gUnknown_82604B4,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_StatusSummaryBallsOnBattleStart
+    }, {
+        .tileTag = 55061,
+        .paletteTag = 55059,
+        .oam = &gUnknown_82604B4,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCB_StatusSummaryBallsOnBattleStart
+    }
+};
 
 void sub_8047B0C(s16 number, u16 *dest, bool8 unk)
 {
@@ -346,11 +570,9 @@ void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 {
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
-    u8 text[16];
+    u8 text[16] = _("{LV_2}");
     u32 xPos, var1;
     void *objVram;
-
-    memcpy(text, gUnknown_826051C, 16);
 
     xPos = (u32) ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
     // Alright, that part was unmatchable. It's basically doing:

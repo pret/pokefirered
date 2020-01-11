@@ -4855,6 +4855,10 @@ extern const u16 gEmeraldTrainerCard_Pal[];
 extern const u32 gEmeraldTrainerCard_Gfx[];
 
 // battle_interface
+extern const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[];
 extern const u8 gHealthboxElementsGfxTable[][32];
+extern const u16 gBattleInterface_BallStatusBarPal[];
+extern const u16 gBattleInterface_BallDisplayPal[];
+extern const u16 gUnknown_8D12404[];
 
 #endif //GUARD_GRAPHICS_H

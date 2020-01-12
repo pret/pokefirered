@@ -1,20 +1,19 @@
 PokemonLeague_LancesRoom_MapScripts:: @ 816292D
-	map_script 5, PokemonLeague_LancesRoom_MapScript1_162942
-	map_script 1, PokemonLeague_LancesRoom_MapScript2_16294D
-	map_script 4, PokemonLeague_LancesRoom_MapScript3_16296E
-	map_script 2, PokemonLeague_LancesRoom_MapScript4_16297D
+	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LancesRoom_OnResume
+	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LancesRoom_OnLoad
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_LancesRoom_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PokemonLeague_LancesRoom_OnFrame
 	.byte 0
 
-PokemonLeague_LancesRoom_MapScript1_162942:: @ 8162942
+PokemonLeague_LancesRoom_OnResume:: @ 8162942
 	setvar VAR_0x8004, 3
 	call EventScript_1A75D5
 	end
 
-PokemonLeague_LancesRoom_MapScript2_16294D:: @ 816294D
-	compare_var_to_value VAR_MAP_SCENE_POKEMON_LEAGUE, 4
-	call_if eq, EventScript_162962
-	checkflag FLAG_DEFEATED_LANCE
-	call_if TRUE, EventScript_162968
+PokemonLeague_LancesRoom_OnLoad:: @ 816294D
+	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
+	call_if_eq EventScript_162962
+	call_if_set FLAG_DEFEATED_LANCE, EventScript_162968
 	end
 
 EventScript_162962:: @ 8162962
@@ -25,21 +24,21 @@ EventScript_162968:: @ 8162968
 	call EventScript_1A7589
 	return
 
-PokemonLeague_LancesRoom_MapScript3_16296E:: @ 816296E
-	map_script_2 VAR_0x4001, 0, EventScript_162978
+PokemonLeague_LancesRoom_OnWarp:: @ 816296E
+	map_script_2 VAR_TEMP_1, 0, EventScript_162978
 	.2byte 0
 
 EventScript_162978:: @ 8162978
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-PokemonLeague_LancesRoom_MapScript4_16297D:: @ 816297D
+PokemonLeague_LancesRoom_OnFrame:: @ 816297D
 	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, EventScript_162987
 	.2byte 0
 
 EventScript_162987:: @ 8162987
 	lockall
-	applymovement 255, Movement_1629F1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1629F1
 	waitmovement 0
 	setflag FLAG_TEMP_2
 	call EventScript_1629A8
@@ -62,60 +61,55 @@ EventScript_1629A8:: @ 81629A8
 	return
 
 Movement_1629F1:: @ 81629F1
-	step_11
-	step_11
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_DEFEATED_LANCE
-	goto_if TRUE, EventScript_162AA1
+	goto_if_set FLAG_DEFEATED_LANCE, EventScript_162AA1
 	famechecker FAMECHECKER_LANCE, 0
 	famechecker FAMECHECKER_LANCE, 1
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if FALSE, EventScript_162A79
-	checkflag FLAG_SYS_GAME_CLEAR
-	call_if TRUE, EventScript_162A82
+	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162A79
+	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_162A82
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if FALSE, EventScript_162A8B
-	checkflag FLAG_SYS_CAN_LINK_WITH_RS
-	call_if TRUE, EventScript_162A96
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A8B
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A96
 	clearflag FLAG_TEMP_5
 	goto EventScript_162AAB
 
@@ -131,11 +125,11 @@ EventScript_162A82:: @ 8162A82
 	return
 
 EventScript_162A8B:: @ 8162A8B
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LANCE, 0, Text_178A15
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE, Text_178A15
 	return
 
 EventScript_162A96:: @ 8162A96
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_ELITE_FOUR_LANCE_2, 0, Text_178A15
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE_2, Text_178A15
 	return
 
 EventScript_162AA1:: @ 8162AA1
@@ -164,11 +158,11 @@ EventScript_162AD1:: @ 8162AD1
 	return
 
 Movement_162ADC:: @ 8162ADC
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_162ADF:: @ 8162ADF
-	step_13
-	step_2f
+	walk_right
+	walk_in_place_fastest_left
 	step_end

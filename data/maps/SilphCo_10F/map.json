@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_10F_EventScript_1BE8F5",
+      "script": "SilphCo_10F_EventScript_ItemCarbos",
       "flag": "FLAG_HIDE_SILPH_CO_10F_CARBOS"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_10F_EventScript_1BE902",
+      "script": "SilphCo_10F_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_SILPH_CO_10F_ULTRA_BALL"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_10F_EventScript_1BE90F",
+      "script": "SilphCo_10F_EventScript_ItemRareCandy",
       "flag": "FLAG_HIDE_SILPH_CO_10F_RARE_CANDY"
     }
   ],
@@ -143,28 +143,28 @@
       "x": 12,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_10F_EventScript_1A8AEF"
+      "script": "SilphCo_10F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_10F_EventScript_1A8AEF"
+      "script": "SilphCo_10F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_10F_EventScript_1A8AEF"
+      "script": "SilphCo_10F_EventScript_Door"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_10F_EventScript_1A8AEF"
+      "script": "SilphCo_10F_EventScript_Door"
     },
     {
       "type": "hidden_item",

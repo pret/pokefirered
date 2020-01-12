@@ -1,13 +1,12 @@
 TwoIsland_JoyfulGameCorner_MapScripts:: @ 81713D0
-	map_script 3, TwoIsland_JoyfulGameCorner_MapScript1_1713E5
-	map_script 4, TwoIsland_JoyfulGameCorner_MapScript2_171404
-	map_script 2, TwoIsland_JoyfulGameCorner_MapScript3_17141B
-	map_script 1, TwoIsland_JoyfulGameCorner_MapScript4_1BB237
+	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_JoyfulGameCorner_OnTransition
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, TwoIsland_JoyfulGameCorner_OnWarp
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, TwoIsland_JoyfulGameCorner_OnFrame
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
 	.byte 0
 
-TwoIsland_JoyfulGameCorner_MapScript1_1713E5:: @ 81713E5
-	checkflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
-	call_if TRUE, EventScript_1713EF
+TwoIsland_JoyfulGameCorner_OnTransition:: @ 81713E5
+	call_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, EventScript_1713EF
 	end
 
 EventScript_1713EF:: @ 81713EF
@@ -17,19 +16,19 @@ EventScript_1713EF:: @ 81713EF
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
 	return
 
-TwoIsland_JoyfulGameCorner_MapScript2_171404:: @ 8171404
+TwoIsland_JoyfulGameCorner_OnWarp:: @ 8171404
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171416
-	map_script_2 VAR_0x406F, 8, EventScript_1BB227
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, EventScript_CheckTurnAttendant
 	.2byte 0
 
 EventScript_171416:: @ 8171416
-	turnobject 255, 2
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-TwoIsland_JoyfulGameCorner_MapScript3_17141B:: @ 817141B
+TwoIsland_JoyfulGameCorner_OnFrame:: @ 817141B
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 0, EventScript_17145F
 	map_script_2 VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2, EventScript_171435
-	map_script_2 VAR_0x406F, 8, EventScript_1BB2FD
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_MINIGAME, CableClub_EventScript_ExitMinigameRoom
 	.2byte 0
 
 EventScript_171435:: @ 8171435
@@ -40,7 +39,7 @@ EventScript_171435:: @ 8171435
 	special Special_BufferBigGuyOrBigGirlString
 	msgbox gUnknown_81A2931
 	closemessage
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
 	releaseall
@@ -53,34 +52,34 @@ EventScript_17145F:: @ 817145F
 	waitmovement 0
 	msgbox gUnknown_81A2408
 	closemessage
-	applymovement 1, Movement_1A75ED
+	applymovement 1, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	applymovement 1, Movement_171527
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_81A2465
 	closemessage
 	playse SE_DOOR
 	waitse
-	applymovement 255, Movement_17152C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_17152C
 	waitmovement 0
 	playbgm MUS_SHOUNEN, 0
 	addobject 2
 	applymovement 2, Movement_17152F
 	waitmovement 0
 	msgbox gUnknown_81A259A
-	applymovement 2, Movement_1A75EB
+	applymovement 2, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox gUnknown_81A2658
 	msgbox gUnknown_81A26D5
 	closemessage
-	applymovement 2, Movement_1A75ED
+	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_KAIDAN
 	removeobject 2
@@ -94,41 +93,40 @@ EventScript_17145F:: @ 817145F
 	end
 
 Movement_171520:: @ 8171520
-	step_12
-	step_13
-	step_13
-	step_1b
-	step_2e
-	step_1c
+	walk_left
+	walk_right
+	walk_right
+	delay_8
+	walk_in_place_fastest_up
+	delay_16
 	step_end
 
 Movement_171527:: @ 8171527
-	step_10
-	step_10
-	step_10
-	step_2f
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 Movement_17152C:: @ 817152C
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_17152F:: @ 817152F
-	step_2f
-	step_1b
-	step_30
-	step_1b
-	step_2e
+	walk_in_place_fastest_left
+	delay_8
+	walk_in_place_fastest_right
+	delay_8
+	walk_in_place_fastest_up
 	step_end
 
 TwoIsland_JoyfulGameCorner_EventScript_171535:: @ 8171535
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if eq, EventScript_1BC060
-	checkflag FLAG_RESCUED_LOSTELLE
-	goto_if TRUE, EventScript_171555
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
+	goto_if_eq JoyfulGameCorner_EventScript_InfoMan2
+	goto_if_set FLAG_RESCUED_LOSTELLE, EventScript_171555
 	msgbox gUnknown_81A285C
 	release
 	end
@@ -141,19 +139,17 @@ EventScript_171555:: @ 8171555
 TwoIsland_JoyfulGameCorner_EventScript_17155F:: @ 817155F
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
-	goto_if eq, EventScript_1BC0CE
-	checkflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
-	goto_if TRUE, EventScript_1715F5
-	compare_var_to_value VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
-	goto_if eq, EventScript_17158A
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 4
+	goto_if_eq JoyfulGameCorner_EventScript_MinigameAttendant
+	goto_if_set FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER, EventScript_1715F5
+	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 3
+	goto_if_eq EventScript_17158A
 	msgbox gUnknown_81A2743
 	release
 	end
 
 EventScript_17158A:: @ 817158A
-	checkflag FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE
-	goto_if TRUE, EventScript_1715C4
+	goto_if_set FLAG_NO_ROOM_FOR_JOYFUL_GAME_CORNER_MOON_STONE, EventScript_1715C4
 	msgbox gUnknown_81A296A
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 2
 	textcolor 3
@@ -169,11 +165,11 @@ EventScript_17158A:: @ 817158A
 
 EventScript_1715C4:: @ 81715C4
 	checkitemspace ITEM_MOON_STONE, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_1715FF
-	additem ITEM_MOON_STONE, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_1715FF
+	additem ITEM_MOON_STONE
 	setflag FLAG_GOT_MOON_STONE_FROM_JOYFUL_GAME_CORNER
-	giveitemfanfaremsg gUnknown_81A2A9A, ITEM_MOON_STONE
+	msgreceiveditem gUnknown_81A2A9A, ITEM_MOON_STONE
 	release
 	end
 

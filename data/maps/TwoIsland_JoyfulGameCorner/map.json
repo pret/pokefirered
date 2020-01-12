@@ -82,14 +82,14 @@
       "x": 1,
       "y": 1,
       "elevation": 0,
-      "script": "TwoIsland_JoyfulGameCorner_EventScript_1BC2E7"
+      "script": "TwoIsland_JoyfulGameCorner_EventScript_ShowPokemonJumpRecords"
     },
     {
       "type": "bg_event_type_0",
       "x": 0,
       "y": 1,
       "elevation": 0,
-      "script": "TwoIsland_JoyfulGameCorner_EventScript_1BC2FC"
+      "script": "TwoIsland_JoyfulGameCorner_EventScript_ShowDodrioBerryPickingRecords"
     }
   ]
 }

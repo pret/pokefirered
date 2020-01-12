@@ -4244,8 +4244,8 @@ IsSpeciesAllowedInPokemonJump: @ 8149A00
 	bx r1
 	thumb_func_end IsSpeciesAllowedInPokemonJump
 
-	thumb_func_start sub_8149A18
-sub_8149A18: @ 8149A18
+	thumb_func_start IsPokemonJumpSpeciesInParty
+IsPokemonJumpSpeciesInParty: @ 8149A18
 	push {r4,r5,lr}
 	movs r5, 0
 _08149A1C:
@@ -4286,7 +4286,7 @@ _08149A5E:
 	bx r0
 	.align 2, 0
 _08149A68: .4byte gSpecialVar_Result
-	thumb_func_end sub_8149A18
+	thumb_func_end IsPokemonJumpSpeciesInParty
 
 	thumb_func_start sub_8149A6C
 sub_8149A6C: @ 8149A6C
@@ -7808,8 +7808,8 @@ _0814B4FC:
 _0814B500: .4byte 0x0000270e
 	thumb_func_end sub_814B4E8
 
-	thumb_func_start sub_814B504
-sub_814B504: @ 814B504
+	thumb_func_start ShowPokemonJumpRecords
+ShowPokemonJumpRecords: @ 814B504
 	push {r4,lr}
 	ldr r4, _0814B520 @ =sub_814B524
 	adds r0, r4, 0
@@ -7823,7 +7823,7 @@ sub_814B504: @ 814B504
 	bx r0
 	.align 2, 0
 _0814B520: .4byte sub_814B524
-	thumb_func_end sub_814B504
+	thumb_func_end ShowPokemonJumpRecords
 
 	thumb_func_start sub_814B524
 sub_814B524: @ 814B524

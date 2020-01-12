@@ -1,27 +1,27 @@
 SevenIsland_TrainerTower_Lobby_MapScripts:: @ 8164839
-	map_script 5, SevenIsland_TrainerTower_Lobby_MapScript1_164853
-	map_script 7, SevenIsland_TrainerTower_Lobby_MapScript2_164887
-	map_script 3, SevenIsland_TrainerTower_Lobby_MapScript3_1648AD
-	map_script 1, SevenIsland_TrainerTower_Lobby_MapScript4_164897
-	map_script 2, SevenIsland_TrainerTower_Lobby_MapScript5_1648B6
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_Lobby_OnResume
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, SevenIsland_TrainerTower_Lobby_OnReturnToField
+	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_TrainerTower_Lobby_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, SevenIsland_TrainerTower_Lobby_OnLoad
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_Lobby_OnFrame
 	.byte 0
 
-SevenIsland_TrainerTower_Lobby_MapScript1_164853:: @ 8164853
-	setvar VAR_0x4002, 0
+SevenIsland_TrainerTower_Lobby_OnResume:: @ 8164853
+	setvar VAR_TEMP_2, 0
 	setvar VAR_0x8004, 10
 	special sub_815D9E8
 	setvar VAR_0x8004, 18
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_164886
-	setvar VAR_0x4000, 0
-	setobjectxy 255, 9, 7
-	applymovement 255, Movement_164AD4
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_164886
+	setvar VAR_TEMP_0, 0
+	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 
 EventScript_164886:: @ 8164886
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
+SevenIsland_TrainerTower_Lobby_OnReturnToField:: @ 8164887
 	addobject 1
 	addobject 2
 	addobject 3
@@ -29,44 +29,44 @@ SevenIsland_TrainerTower_Lobby_MapScript2_164887:: @ 8164887
 	addobject 5
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript4_164897:: @ 8164897
-	compare_var_to_value VAR_0x400D, 17
-	call_if eq, EventScript_1648A3
+SevenIsland_TrainerTower_Lobby_OnLoad:: @ 8164897
+	compare VAR_TEMP_D, 17
+	call_if_eq EventScript_1648A3
 	end
 
 EventScript_1648A3:: @ 81648A3
 	setmetatile 17, 10, 647, 0
 	return
 
-SevenIsland_TrainerTower_Lobby_MapScript3_1648AD:: @ 81648AD
+SevenIsland_TrainerTower_Lobby_OnTransition:: @ 81648AD
 	setworldmapflag FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY
-	getplayerxy VAR_0x400D, VAR_RESULT
+	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end
 
-SevenIsland_TrainerTower_Lobby_MapScript5_1648B6:: @ 81648B6
-	map_script_2 VAR_0x4000, 0, EventScript_1648ED
-	map_script_2 VAR_0x400D, 0x11, EventScript_1648C8
+SevenIsland_TrainerTower_Lobby_OnFrame:: @ 81648B6
+	map_script_2 VAR_TEMP_0, 0, EventScript_1648ED
+	map_script_2 VAR_TEMP_D, 0x11, EventScript_1648C8
 	.2byte 0
 
 EventScript_1648C8:: @ 81648C8
 	lockall
-	applymovement 255, Movement_1648EA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1648EA
 	waitmovement 0
 	setmetatile 17, 10, 692, 1
 	special DrawWholeMapView
 	playse SE_TK_KASYA
 	waitse
-	setvar VAR_0x400D, 0
+	setvar VAR_TEMP_D, 0
 	releaseall
 	end
 
 Movement_1648EA:: @ 81648EA
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1648ED:: @ 81648ED
-	setvar VAR_0x4000, 1
+	setvar VAR_TEMP_0, 1
 	setvar VAR_0x8004, 12
 	special sub_815D9E8
 	switch VAR_RESULT
@@ -77,7 +77,7 @@ EventScript_1648ED:: @ 81648ED
 EventScript_164920:: @ 8164920
 	lock
 	faceplayer
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C937
 	goto EventScript_16494B
@@ -85,13 +85,13 @@ EventScript_164920:: @ 8164920
 EventScript_164938:: @ 8164938
 	lock
 	faceplayer
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C9C0
 
 EventScript_16494B:: @ 816494B
 	closemessage
-	applymovement 255, Movement_164AD6
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD6
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	release
@@ -102,7 +102,7 @@ EventScript_16495C:: @ 816495C
 SevenIsland_TrainerTower_Lobby_EventScript_16495D:: @ 816495D
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
@@ -111,8 +111,8 @@ SevenIsland_TrainerTower_Lobby_EventScript_164966:: @ 8164966
 	faceplayer
 	setvar VAR_0x8004, 20
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_164988
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_164988
 	msgbox gUnknown_817C9A2
 	goto EventScript_164990
 
@@ -125,14 +125,14 @@ EventScript_164990:: @ 8164990
 
 SevenIsland_TrainerTower_Lobby_EventScript_164992:: @ 8164992
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_1649B8
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -153,13 +153,13 @@ Items_1649B8:: @ 81649B8
 
 SevenIsland_TrainerTower_Lobby_EventScript_1649CE:: @ 81649CE
 	lockall
-	applymovement 255, Movement_164AD4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD4
 	textcolor 1
 	msgbox gUnknown_817C794
 	setvar VAR_0x8004, 17
 	special sub_815D9E8
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_164A00
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_164A00
 	msgbox gUnknown_817C7D9
 	goto EventScript_164A08
 
@@ -206,22 +206,22 @@ EventScript_164AA0:: @ 8164AA0
 EventScript_164ABF:: @ 8164ABF
 	msgbox gUnknown_817C91D
 	closemessage
-	applymovement 255, Movement_164AD6
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164AD6
 	waitmovement 0
 	releaseall
 	end
 
 Movement_164AD4:: @ 8164AD4
-	step_03
+	face_right
 	step_end
 
 Movement_164AD6:: @ 8164AD6
-	step_10
+	walk_down
 	step_end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	lockall
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
 	special Special_BattleRecords
 	waitstate
@@ -229,9 +229,9 @@ SevenIsland_TrainerTower_Lobby_EventScript_164AD8:: @ 8164AD8
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AE6:: @ 8164AE6
-	msgbox gUnknown_817CE38, 2
+	msgbox gUnknown_817CE38, MSGBOX_NPC
 	end
 
 SevenIsland_TrainerTower_Lobby_EventScript_164AEF:: @ 8164AEF
-	msgbox gUnknown_817CE9F, 2
+	msgbox gUnknown_817CE9F, MSGBOX_NPC
 	end

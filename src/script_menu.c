@@ -579,7 +579,7 @@ const u8 *const gStdStringPtrs[] = {
     gText_Items,
     gText_KeyItems,
     gText_PokeBalls,
-    gText_TmsgUnknown_8417B2CHms,
+    gText_TMsAndHMs,
     gText_Berries,
     gText_Boulderbadge,
     gText_Cascadebadge,
@@ -598,22 +598,22 @@ const u8 *const gStdStringPtrs[] = {
 };
 
 static const u8 *const sDescriptionPtrs_CableClub_TradeBattleCancel[] = {
-    Text_1BC388,
-    Text_1BC3C7,
-    Text_1BCB42
+    CableClub_Text_TradeMonsUsingLinkCable,
+    CableClub_Text_BattleUsingLinkCable,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCrushCancel[] = {
-    Text_1BCA95,
-    Text_1BCACB,
-    Text_1BCAF2,
-    Text_1BCB42
+    CableClub_Text_YouMayTradeHere,
+    CableClub_Text_YouMayBattleHere,
+    CableClub_Text_CanMakeBerryPowder,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const u8 *const sDescriptionPtrs_WirelessCenter_TradeBattleCancel[] = {
-    Text_1BCA95,
-    Text_1BCACB,
-    Text_1BCB42
+    CableClub_Text_YouMayTradeHere,
+    CableClub_Text_YouMayBattleHere,
+    CableClub_Text_CancelSelectedItem
 };
 
 static const union AnimCmd sMuseumFossilAnim0[] = {
@@ -1007,7 +1007,7 @@ static void CreatePCMenuWindow(void)
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     sub_80F7768(0, TRUE);
-    AddTextPrinterParameterized2(0, 2, gUnknown_81A508A, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 2, Text_AccessWhichPC, 0, NULL, 2, 1, 3);
 }
 
 static void Task_ScriptShowMonPic(u8 taskId)

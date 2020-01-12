@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BE789",
+      "script": "PokemonTower_5F_EventScript_ItemNugget",
       "flag": "FLAG_HIDE_POKEMON_TOWER_5F_NUGGET"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BEBB3",
+      "script": "PokemonTower_5F_EventScript_ItemCleanseTag",
       "flag": "FLAG_HIDE_POKEMON_TOWER_5F_CLEANSE_TAG"
     }
   ],
@@ -127,7 +127,7 @@
       "x": 10,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -136,7 +136,7 @@
       "x": 11,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -145,7 +145,7 @@
       "x": 12,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -154,7 +154,7 @@
       "x": 10,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -163,7 +163,7 @@
       "x": 9,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -172,7 +172,7 @@
       "x": 12,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -181,7 +181,7 @@
       "x": 10,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -190,7 +190,7 @@
       "x": 11,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -199,7 +199,7 @@
       "x": 12,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
       "script": "PokemonTower_5F_EventScript_16343C"
     },
@@ -208,7 +208,7 @@
       "x": 9,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -217,7 +217,7 @@
       "x": 9,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -226,7 +226,7 @@
       "x": 10,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -235,7 +235,7 @@
       "x": 11,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -244,7 +244,7 @@
       "x": 12,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -253,7 +253,7 @@
       "x": 13,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -262,7 +262,7 @@
       "x": 13,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     },
@@ -271,7 +271,7 @@
       "x": 13,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
       "script": "PokemonTower_5F_EventScript_163453"
     }

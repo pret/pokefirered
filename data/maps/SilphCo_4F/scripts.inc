@@ -1,19 +1,17 @@
 SilphCo_4F_MapScripts:: @ 8161736
-	map_script 1, SilphCo_4F_MapScript1_16173C
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_4F_OnLoad
 	.byte 0
 
-SilphCo_4F_MapScript1_16173C:: @ 816173C
-	checkflag FLAG_SILPH_4F_DOOR_1
-	call_if FALSE, EventScript_1A8213
-	checkflag FLAG_SILPH_4F_DOOR_2
-	call_if FALSE, EventScript_1A8241
+SilphCo_4F_OnLoad:: @ 816173C
+	call_if_unset FLAG_SILPH_4F_DOOR_1, EventScript_Close4FDoor1
+	call_if_unset FLAG_SILPH_4F_DOOR_2, EventScript_Close4FDoor2
 	end
 
 SilphCo_4F_EventScript_16174F:: @ 816174F
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if ge, EventScript_161766
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge EventScript_161766
 	msgbox gUnknown_81759F5
 	release
 	end
@@ -24,20 +22,20 @@ EventScript_161766:: @ 8161766
 	end
 
 SilphCo_4F_EventScript_161770:: @ 8161770
-	msgbox gUnknown_8175B57, 3
+	msgbox gUnknown_8175B57, MSGBOX_SIGN
 	end
 
 SilphCo_4F_EventScript_161779:: @ 8161779
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_RODNEY, 0, Text_175A90, Text_175AB0
-	msgbox gUnknown_8175AC8, 6
+	trainerbattle_single TRAINER_SCIENTIST_RODNEY, Text_175A90, Text_175AB0
+	msgbox gUnknown_8175AC8, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_4F_EventScript_161790:: @ 8161790
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_26, 0, Text_175A2F, Text_175A5B
-	msgbox gUnknown_8175A62, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_26, Text_175A2F, Text_175A5B
+	msgbox gUnknown_8175A62, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_4F_EventScript_1617A7:: @ 81617A7
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_27, 0, Text_175B19, Text_175B2B
-	msgbox gUnknown_8175B38, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_27, Text_175B19, Text_175B2B
+	msgbox gUnknown_8175B38, MSGBOX_AUTOCLOSE
 	end

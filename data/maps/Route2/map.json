@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route2_EventScript_1BE58E",
+      "script": "Route2_EventScript_ItemEther",
       "flag": "FLAG_HIDE_ROUTE2_ETHER"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route2_EventScript_1BE59B",
+      "script": "Route2_EventScript_ItemParalyzeHeal",
       "flag": "FLAG_HIDE_ROUTE2_PARALYZE_HEAL"
     },
     {

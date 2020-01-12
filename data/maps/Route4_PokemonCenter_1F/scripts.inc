@@ -1,15 +1,15 @@
 Route4_PokemonCenter_1F_MapScripts:: @ 816F739
-	map_script 3, Route4_PokemonCenter_1F_MapScript1_16F744
-	map_script 5, Route4_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, Route4_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-Route4_PokemonCenter_1F_MapScript1_16F744:: @ 816F744
+Route4_PokemonCenter_1F_OnTransition:: @ 816F744
 	setworldmapflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
 	setrespawn SPAWN_ROUTE4
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F74B:: @ 816F74B
-	msgbox gUnknown_819D9D4, 2
+	msgbox gUnknown_819D9D4, MSGBOX_NPC
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
@@ -21,14 +21,13 @@ Route4_PokemonCenter_1F_EventScript_16F754:: @ 816F754
 Route4_PokemonCenter_1F_EventScript_16F75F:: @ 816F75F
 	lock
 	faceplayer
-	checkflag FLAG_BOUGHT_MAGIKARP
-	goto_if TRUE, EventScript_16F8A2
+	goto_if_set FLAG_BOUGHT_MAGIKARP, EventScript_16F8A2
 	showmoneybox 0, 0, 0
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F786
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_16F794
+	compare VAR_RESULT, MALE
+	goto_if_eq EventScript_16F786
+	compare VAR_RESULT, FEMALE
+	goto_if_eq EventScript_16F794
 	end
 
 EventScript_16F786:: @ 816F786
@@ -42,29 +41,29 @@ EventScript_16F794:: @ 816F794
 	end
 
 EventScript_16F7A2:: @ 816F7A2
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F888
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16F888
 	checkmoney 500, 0
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F895
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_16F895
 	textcolor 3
-	setvar VAR_0x4001, 129
-	givemon SPECIES_MAGIKARP, 5, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F7F6
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_16F822
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_16F8AC
+	setvar VAR_TEMP_1, 129
+	givemon SPECIES_MAGIKARP, 5, ITEM_NONE
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_16F7F6
+	compare VAR_RESULT, 1
+	goto_if_eq EventScript_16F822
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_16F8AC
 	end
 
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F861
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16F861
 	call EventScript_1A8C27
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChangePokemonNickname
 	waitstate
@@ -74,9 +73,9 @@ EventScript_16F7F6:: @ 816F7F6
 EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
 	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16F84B
-	fadescreen 1
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16F84B
+	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChangeBoxPokemonNickname
 	waitstate
@@ -142,12 +141,12 @@ EventScript_16F8AC:: @ 816F8AC
 Route4_PokemonCenter_1F_EventScript_16F8BB:: @ 816F8BB
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8C4:: @ 816F8C4
-	msgbox gUnknown_819DCDB, 2
+	msgbox gUnknown_819DCDB, MSGBOX_NPC
 	end
 
 Route4_PokemonCenter_1F_EventScript_16F8CD:: @ 816F8CD

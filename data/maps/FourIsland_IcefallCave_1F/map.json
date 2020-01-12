@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_IcefallCave_1F_EventScript_1BED53",
+      "script": "FourIsland_IcefallCave_1F_EventScript_ItemUltraBall",
       "flag": "FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_ULTRA_BALL"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_IcefallCave_1F_EventScript_1BED60",
+      "script": "FourIsland_IcefallCave_1F_EventScript_ItemHM07",
       "flag": "FLAG_HIDE_FOUR_ISLAND_ICEFALL_CAVE_1F_HM07"
     }
   ],

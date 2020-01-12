@@ -547,25 +547,25 @@ static const VsSeekerData sVsSeekerData[] = {
 };
 
 static const u8 gUnknown_8453F5C[] = {
-    step_1c,
-    step_1c,
-    step_1c,
+    delay_16,
+    delay_16,
+    delay_16,
     step_end
 };
 
 static const u8 gUnknown_8453F60[] = {
-    step_62,
+    emote_exclamation_mark,
     step_end
 };
 
 static const u8 sMovementScript_TrainerNoRematch[] = {
-    step_64,
+    emote_x,
     step_end
 };
 
-static const u8 gUnknown_8453F64[] = {
-    step_2d,
-    step_65,
+static const u8 sMovementScript_TrainerRematch[] = {
+    walk_in_place_fastest_down,
+    emote_double_exclamation_mark,
     step_end
 };
 
@@ -909,7 +909,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     {
                         gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
                         npc_coords_shift_still(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
-                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F64);
+                        StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
                         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
                         sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
                         sVsSeeker->numRematchableTrainers++;

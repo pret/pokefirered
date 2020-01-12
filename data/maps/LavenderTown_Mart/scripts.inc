@@ -2,27 +2,27 @@ LavenderTown_Mart_MapScripts:: @ 816B34F
 	.byte 0
 
 LavenderTown_Mart_EventScript_16B350:: @ 816B350
-	msgbox gUnknown_8193CE5, 2
+	msgbox gUnknown_8193CE5, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B359:: @ 816B359
-	msgbox gUnknown_8193DB6, 2
+	msgbox gUnknown_8193DB6, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B362:: @ 816B362
-	msgbox gUnknown_8193DF1, 2
+	msgbox gUnknown_8193DF1, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_16B36B:: @ 816B36B
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16B390
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

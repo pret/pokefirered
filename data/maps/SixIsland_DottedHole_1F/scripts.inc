@@ -1,8 +1,8 @@
 SixIsland_DottedHole_1F_MapScripts:: @ 8164182
-	map_script 3, SixIsland_DottedHole_1F_MapScript1_164188
+	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_DottedHole_1F_OnTransition
 	.byte 0
 
-SixIsland_DottedHole_1F_MapScript1_164188:: @ 8164188
+SixIsland_DottedHole_1F_OnTransition:: @ 8164188
 	setworldmapflag FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F
 	end
 

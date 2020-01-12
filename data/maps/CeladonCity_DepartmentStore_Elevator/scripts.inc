@@ -4,11 +4,10 @@ CeladonCity_DepartmentStore_Elevator_MapScripts:: @ 816C152
 CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	lockall
 	setvar VAR_0x8004, 3
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
-	message Text_1A535C
+	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 3
 	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
@@ -61,8 +60,8 @@ EventScript_16C1F3:: @ 816C1F3
 EventScript_16C246:: @ 816C246
 	setvar VAR_0x8006, 4
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_1F, 255, 6, 1
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 4
-	goto_if eq, EventScript_16C30E
+	compare VAR_ELEVATOR_FLOOR, 4
+	goto_if_eq EventScript_16C30E
 	call EventScript_16C313
 	setvar VAR_ELEVATOR_FLOOR, 4
 	goto EventScript_16C30E
@@ -71,8 +70,8 @@ EventScript_16C246:: @ 816C246
 EventScript_16C26E:: @ 816C26E
 	setvar VAR_0x8006, 5
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_2F, 255, 6, 1
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 5
-	goto_if eq, EventScript_16C30E
+	compare VAR_ELEVATOR_FLOOR, 5
+	goto_if_eq EventScript_16C30E
 	call EventScript_16C313
 	setvar VAR_ELEVATOR_FLOOR, 5
 	goto EventScript_16C30E
@@ -81,8 +80,8 @@ EventScript_16C26E:: @ 816C26E
 EventScript_16C296:: @ 816C296
 	setvar VAR_0x8006, 6
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_3F, 255, 6, 1
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 6
-	goto_if eq, EventScript_16C30E
+	compare VAR_ELEVATOR_FLOOR, 6
+	goto_if_eq EventScript_16C30E
 	call EventScript_16C313
 	setvar VAR_ELEVATOR_FLOOR, 6
 	goto EventScript_16C30E
@@ -91,8 +90,8 @@ EventScript_16C296:: @ 816C296
 EventScript_16C2BE:: @ 816C2BE
 	setvar VAR_0x8006, 7
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_4F, 255, 6, 1
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 7
-	goto_if eq, EventScript_16C30E
+	compare VAR_ELEVATOR_FLOOR, 7
+	goto_if_eq EventScript_16C30E
 	call EventScript_16C313
 	setvar VAR_ELEVATOR_FLOOR, 7
 	goto EventScript_16C30E
@@ -101,8 +100,8 @@ EventScript_16C2BE:: @ 816C2BE
 EventScript_16C2E6:: @ 816C2E6
 	setvar VAR_0x8006, 8
 	setdynamicwarp MAP_CELADON_CITY_DEPARTMENT_STORE_5F, 255, 6, 1
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 8
-	goto_if eq, EventScript_16C30E
+	compare VAR_ELEVATOR_FLOOR, 8
+	goto_if_eq EventScript_16C30E
 	call EventScript_16C313
 	setvar VAR_ELEVATOR_FLOOR, 8
 	goto EventScript_16C30E

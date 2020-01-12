@@ -1,26 +1,22 @@
 SilphCo_9F_MapScripts:: @ 8161CDE
-	map_script 1, SilphCo_9F_MapScript1_161CE4
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_9F_OnLoad
 	.byte 0
 
-SilphCo_9F_MapScript1_161CE4:: @ 8161CE4
-	checkflag FLAG_SILPH_9F_DOOR_1
-	call_if FALSE, EventScript_1A840C
-	checkflag FLAG_SILPH_9F_DOOR_2
-	call_if FALSE, EventScript_1A8443
-	checkflag FLAG_SILPH_9F_DOOR_3
-	call_if FALSE, EventScript_1A847A
-	checkflag FLAG_SILPH_9F_DOOR_4
-	call_if FALSE, EventScript_1A84A8
+SilphCo_9F_OnLoad:: @ 8161CE4
+	call_if_unset FLAG_SILPH_9F_DOOR_1, EventScript_Close9FDoor1
+	call_if_unset FLAG_SILPH_9F_DOOR_2, EventScript_Close9FDoor2
+	call_if_unset FLAG_SILPH_9F_DOOR_3, EventScript_Close9FDoor3
+	call_if_unset FLAG_SILPH_9F_DOOR_4, EventScript_Close9FDoor4
 	end
 
 SilphCo_9F_EventScript_161D09:: @ 8161D09
 	lock
 	faceplayer
-	compare_var_to_value VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if ge, EventScript_161D2E
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge EventScript_161D2E
 	msgbox gUnknown_8176B54
 	closemessage
-	call EventScript_FadeOut_Heal_FadeIn
+	call EventScript_OutOfCenterPartyHeal
 	msgbox gUnknown_8176B81
 	release
 	end
@@ -31,20 +27,20 @@ EventScript_161D2E:: @ 8161D2E
 	end
 
 SilphCo_9F_EventScript_161D38:: @ 8161D38
-	msgbox gUnknown_8176CD4, 3
+	msgbox gUnknown_8176CD4, MSGBOX_SIGN
 	end
 
 SilphCo_9F_EventScript_161D41:: @ 8161D41
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_ED, 0, Text_176BFB, Text_176C2B
-	msgbox gUnknown_8176C3C, 6
+	trainerbattle_single TRAINER_SCIENTIST_ED, Text_176BFB, Text_176C2B
+	msgbox gUnknown_8176C3C, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_9F_EventScript_161D58:: @ 8161D58
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_37, 0, Text_176BA3, Text_176BC8
-	msgbox gUnknown_8176BD0, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_37, Text_176BA3, Text_176BC8
+	msgbox gUnknown_8176BD0, MSGBOX_AUTOCLOSE
 	end
 
 SilphCo_9F_EventScript_161D6F:: @ 8161D6F
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TEAM_ROCKET_GRUNT_38, 0, Text_176C7A, Text_176CA0
-	msgbox gUnknown_8176CB8, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_38, Text_176C7A, Text_176CA0
+	msgbox gUnknown_8176CB8, MSGBOX_AUTOCLOSE
 	end

@@ -3,7 +3,6 @@
 
 	.set NULL, 0
 
-	.set POKEMON_NAME_LENGTH, 11
 	.set MOVE_NAME_LENGTH,    13
 
 	.set SPRITE_SIZE_8x8,   (OAM_SIZE_0 >> 28) | (OAM_SQUARE >> 14)
@@ -23,14 +22,6 @@
 
 	.set OBJ_IMAGE_ANIM_H_FLIP, 1 << 6
 	.set OBJ_IMAGE_ANIM_V_FLIP, 1 << 7
-
-	.equiv DIR_SOUTH, 1
-	.equiv DIR_NORTH, 2
-	.equiv DIR_WEST,  3
-	.equiv DIR_EAST,  4
-
-	.equiv MALE, 0
-	.equiv FEMALE, 1
 
 	.ifdef ENGLISH
 	.equiv GAME_LANGUAGE, 2

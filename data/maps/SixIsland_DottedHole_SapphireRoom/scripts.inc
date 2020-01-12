@@ -16,58 +16,58 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	applymovement 2, Movement_16440F
 	waitmovement 0
 	playse SE_W070
-	compare_var_to_value VAR_FACING, 2
-	call_if eq, EventScript_16430F
-	compare_var_to_value VAR_FACING, 1
-	call_if eq, EventScript_16430F
-	compare_var_to_value VAR_FACING, 4
-	call_if eq, EventScript_16431A
-	compare_var_to_value VAR_FACING, 3
-	call_if eq, EventScript_16431A
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq EventScript_16430F
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq EventScript_16430F
+	compare VAR_FACING, DIR_EAST
+	call_if_eq EventScript_16431A
+	compare VAR_FACING, DIR_WEST
+	call_if_eq EventScript_16431A
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, 0
 	setvar VAR_0x8006, 12
 	setvar VAR_0x8007, 3
 	special Special_ShakeScreen
 	delay 60
-	compare_var_to_value VAR_FACING, 2
-	call_if eq, EventScript_164325
-	compare_var_to_value VAR_FACING, 1
-	call_if eq, EventScript_164330
-	compare_var_to_value VAR_FACING, 4
-	call_if eq, EventScript_16433B
-	compare_var_to_value VAR_FACING, 3
-	call_if eq, EventScript_164346
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq EventScript_164325
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq EventScript_164330
+	compare VAR_FACING, DIR_EAST
+	call_if_eq EventScript_16433B
+	compare VAR_FACING, DIR_WEST
+	call_if_eq EventScript_164346
 	textcolor 0
 	msgbox gUnknown_817BD97
 	closemessage
-	compare_var_to_value VAR_FACING, 2
-	call_if eq, EventScript_164351
-	compare_var_to_value VAR_FACING, 1
-	call_if eq, EventScript_164366
-	compare_var_to_value VAR_FACING, 4
-	call_if eq, EventScript_16437B
-	compare_var_to_value VAR_FACING, 3
-	call_if eq, EventScript_164390
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq EventScript_164351
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq EventScript_164366
+	compare VAR_FACING, DIR_EAST
+	call_if_eq EventScript_16437B
+	compare VAR_FACING, DIR_WEST
+	call_if_eq EventScript_164390
 	removeobject 1
-	compare_var_to_value VAR_FACING, 2
-	call_if eq, EventScript_1642F9
-	compare_var_to_value VAR_FACING, 1
-	call_if eq, EventScript_1642F9
-	compare_var_to_value VAR_FACING, 4
-	call_if eq, EventScript_164304
-	compare_var_to_value VAR_FACING, 3
-	call_if eq, EventScript_164304
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq EventScript_1642F9
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq EventScript_1642F9
+	compare VAR_FACING, DIR_EAST
+	call_if_eq EventScript_164304
+	compare VAR_FACING, DIR_WEST
+	call_if_eq EventScript_164304
 	msgbox gUnknown_817BDD4
 	closemessage
-	compare_var_to_value VAR_FACING, 2
-	call_if eq, EventScript_1643A5
-	compare_var_to_value VAR_FACING, 1
-	call_if eq, EventScript_1643B7
-	compare_var_to_value VAR_FACING, 4
-	call_if eq, EventScript_1643C9
-	compare_var_to_value VAR_FACING, 3
-	call_if eq, EventScript_1643DB
+	compare VAR_FACING, DIR_NORTH
+	call_if_eq EventScript_1643A5
+	compare VAR_FACING, DIR_SOUTH
+	call_if_eq EventScript_1643B7
+	compare VAR_FACING, DIR_EAST
+	call_if_eq EventScript_1643C9
+	compare VAR_FACING, DIR_WEST
+	call_if_eq EventScript_1643DB
 	playse SE_KAIDAN
 	delay 35
 	removeobject 2
@@ -76,22 +76,22 @@ SixIsland_DottedHole_SapphireRoom_EventScript_1641B5:: @ 81641B5
 	end
 
 EventScript_1642F9:: @ 81642F9
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_164304:: @ 8164304
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_16430F:: @ 816430F
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_16431A:: @ 816431A
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
@@ -118,121 +118,121 @@ EventScript_164346:: @ 8164346
 EventScript_164351:: @ 8164351
 	applymovement 2, Movement_1643F5
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_164366:: @ 8164366
 	applymovement 2, Movement_1643F5
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 EventScript_16437B:: @ 816437B
 	applymovement 2, Movement_1643F7
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
 EventScript_164390:: @ 8164390
 	applymovement 2, Movement_1643F7
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
 EventScript_1643A5:: @ 81643A5
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_1643F9
 	waitmovement 0
 	return
 
 EventScript_1643B7:: @ 81643B7
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164401
 	waitmovement 0
 	return
 
 EventScript_1643C9:: @ 81643C9
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164409
 	waitmovement 0
 	return
 
 EventScript_1643DB:: @ 81643DB
-	applymovement 255, Movement_16441C
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_16441C
 	applymovement 2, Movement_164409
 	waitmovement 0
 	return
 
 Movement_1643ED:: @ 81643ED
-	step_11
-	step_11
-	step_30
+	walk_up
+	walk_up
+	walk_in_place_fastest_right
 	step_end
 
 Movement_1643F1:: @ 81643F1
-	step_13
-	step_13
-	step_2e
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1643F5:: @ 81643F5
-	step_13
+	walk_right
 	step_end
 
 Movement_1643F7:: @ 81643F7
-	step_11
+	walk_up
 	step_end
 
 Movement_1643F9:: @ 81643F9
-	step_1e
-	step_20
-	step_20
-	step_20
-	step_1d
-	step_20
-	step_20
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 Movement_164401:: @ 8164401
-	step_1d
-	step_20
-	step_20
-	step_20
-	step_1e
-	step_20
-	step_20
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
 	step_end
 
 Movement_164409:: @ 8164409
-	step_20
-	step_20
-	step_20
-	step_20
-	step_1e
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
 	step_end
 
 Movement_16440F:: @ 816440F
-	step_00
-	step_5e
-	step_39
-	step_39
-	step_39
-	step_39
-	step_39
-	step_39
-	step_39
-	step_39
-	step_39
-	step_5f
+	face_down
+	disable_anim
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	slide_down
+	restore_anim
 	step_end
 
 Movement_16441C:: @ 816441C
-	step_1c
-	step_30
+	delay_16
+	walk_in_place_fastest_right
 	step_end
 
 SixIsland_DottedHole_SapphireRoom_EventScript_16441F:: @ 816441F

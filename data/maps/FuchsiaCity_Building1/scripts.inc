@@ -4,15 +4,13 @@ FuchsiaCity_Building1_MapScripts:: @ 816D74B
 FuchsiaCity_Building1_EventScript_16D74C:: @ 816D74C
 	lock
 	faceplayer
-	checkflag FLAG_GOT_HM04
-	goto_if TRUE, EventScript_16D7FA
-	checkflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
-	goto_if TRUE, EventScript_16D780
+	goto_if_set FLAG_GOT_HM04, EventScript_16D7FA
+	goto_if_set FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH, EventScript_16D780
 	msgbox gUnknown_8198DF9, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	call_if eq, EventScript_16D7E8
-	compare_var_to_value VAR_RESULT, 0
-	call_if eq, EventScript_16D7F1
+	compare VAR_RESULT, YES
+	call_if_eq EventScript_16D7E8
+	compare VAR_RESULT, NO
+	call_if_eq EventScript_16D7F1
 	release
 	end
 
@@ -25,12 +23,11 @@ EventScript_16D780:: @ 816D780
 	msgbox gUnknown_8198EAA
 	call EventScript_1A6675
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
-	call_if eq, EventScript_16D7D6
-	compare_var_to_value VAR_RESULT, 1
-	call_if eq, EventScript_16D7DF
-	additem ITEM_HM04, 1
-	giveitemfanfaremsg gUnknown_8199068, ITEM_HM04
+	compare VAR_RESULT, MALE
+	call_if_eq EventScript_16D7D6
+	compare VAR_RESULT, FEMALE
+	call_if_eq EventScript_16D7DF
+	giveitem_msg gUnknown_8199068, ITEM_HM04
 	setflag FLAG_GOT_HM04
 	removeitem ITEM_GOLD_TEETH, 1
 	release
@@ -58,9 +55,9 @@ EventScript_16D7FA:: @ 816D7FA
 	end
 
 FuchsiaCity_Building1_EventScript_16D804:: @ 816D804
-	msgbox gUnknown_819913C, 3
+	msgbox gUnknown_819913C, MSGBOX_SIGN
 	end
 
 FuchsiaCity_Building1_EventScript_16D80D:: @ 816D80D
-	msgbox gUnknown_8199167, 3
+	msgbox gUnknown_8199167, MSGBOX_SIGN
 	end

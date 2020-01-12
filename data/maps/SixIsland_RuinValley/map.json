@@ -211,7 +211,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BECC4",
+      "script": "SixIsland_RuinValley_EventScript_ItemHPUp",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP"
     },
     {
@@ -224,7 +224,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BECB7",
+      "script": "SixIsland_RuinValley_EventScript_ItemFullRestore",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE"
     },
     {
@@ -237,7 +237,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_1BECD1",
+      "script": "SixIsland_RuinValley_EventScript_ItemSunStone",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE"
     }
   ],

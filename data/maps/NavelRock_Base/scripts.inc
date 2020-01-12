@@ -1,58 +1,54 @@
 NavelRock_Base_MapScripts:: @ 81650E7
-	map_script 3, NavelRock_Base_MapScript1_1650F2
-	map_script 5, NavelRock_Base_MapScript2_165116
+	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Base_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, NavelRock_Base_OnResume
 	.byte 0
 
-NavelRock_Base_MapScript1_1650F2:: @ 81650F2
-	checkflag FLAG_FOUGHT_LUGIA
-	call_if TRUE, EventScript_165105
-	checkflag FLAG_FOUGHT_LUGIA
-	call_if FALSE, EventScript_165109
+NavelRock_Base_OnTransition:: @ 81650F2
+	call_if_set FLAG_FOUGHT_LUGIA, NavelRock_Base_EventScript_HideLugia
+	call_if_unset FLAG_FOUGHT_LUGIA, NavelRock_Base_EventScript_TryShowLugia
 	end
 
-EventScript_165105:: @ 8165105
+NavelRock_Base_EventScript_HideLugia:: @ 8165105
 	setflag FLAG_HIDE_LUGIA
 	return
 
-EventScript_165109:: @ 8165109
-	checkflag FLAG_LUGIA_FLEW_AWAY
-	goto_if TRUE, EventScript_1A77A9
+NavelRock_Base_EventScript_TryShowLugia:: @ 8165109
+	goto_if_set FLAG_LUGIA_FLEW_AWAY, EventScript_Return
 	clearflag FLAG_HIDE_LUGIA
 	return
 
-NavelRock_Base_MapScript2_165116:: @ 8165116
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_165120
+NavelRock_Base_OnResume:: @ 8165116
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, NavelRock_Base_EventScript_TryRemoveLugia
 	end
 
-EventScript_165120:: @ 8165120
+NavelRock_Base_EventScript_TryRemoveLugia:: @ 8165120
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne EventScript_Return
 	removeobject 1
 	return
 
-NavelRock_Base_EventScript_165134:: @ 8165134
+NavelRock_Base_EventScript_Lugia:: @ 8165134
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	waitse
 	delay 20
 	playse SE_T_AME_E
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 4
-	setvar VAR_0x8007, 2
+	setvar VAR_0x8004, 0  @ Vertical pan
+	setvar VAR_0x8005, 3  @ Horizontal pan
+	setvar VAR_0x8006, 4  @ Num shakes
+	setvar VAR_0x8007, 2  @ Shake delay
 	special Special_ShakeScreen
 	delay 30
 	playse SE_T_AME_E
-	setvar VAR_0x8004, 0
-	setvar VAR_0x8005, 3
-	setvar VAR_0x8006, 4
-	setvar VAR_0x8007, 2
+	setvar VAR_0x8004, 0  @ Vertical pan
+	setvar VAR_0x8005, 3  @ Horizontal pan
+	setvar VAR_0x8006, 4  @ Num shakes
+	setvar VAR_0x8007, 2  @ Shake delay
 	special Special_ShakeScreen
 	delay 30
 	delay 50
@@ -61,31 +57,31 @@ NavelRock_Base_EventScript_165134:: @ 8165134
 	waitmoncry
 	delay 20
 	setvar VAR_0x8004, SPECIES_LUGIA
-	setvar VAR_0x8005, 70
-	setvar VAR_0x8006, 0
+	setvar VAR_0x8005, 70  @ Level
+	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special Special_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_1651D9
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_1651E7
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_1651E7
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq NavelRock_Base_EventScript_DefeatedLugia
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq NavelRock_Base_EventScript_RanFromLugia
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq NavelRock_Base_EventScript_RanFromLugia
 	setflag FLAG_FOUGHT_LUGIA
 	release
 	end
 
-EventScript_1651D9:: @ 81651D9
+NavelRock_Base_EventScript_DefeatedLugia:: @ 81651D9
 	setflag FLAG_LUGIA_FLEW_AWAY
 	setvar VAR_0x8004, SPECIES_LUGIA
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end
 
-EventScript_1651E7:: @ 81651E7
+NavelRock_Base_EventScript_RanFromLugia:: @ 81651E7
 	setvar VAR_0x8004, SPECIES_LUGIA
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 	end

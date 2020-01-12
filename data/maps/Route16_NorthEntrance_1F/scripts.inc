@@ -1,19 +1,18 @@
 Route16_NorthEntrance_1F_MapScripts:: @ 81701C2
-	map_script 3, Route16_NorthEntrance_1F_MapScript1_1701C8
+	map_script MAP_SCRIPT_ON_TRANSITION, Route16_NorthEntrance_1F_OnTransition
 	.byte 0
 
-Route16_NorthEntrance_1F_MapScript1_1701C8:: @ 81701C8
+Route16_NorthEntrance_1F_OnTransition:: @ 81701C8
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
-	checkflag FLAG_GOT_BICYCLE
-	call_if TRUE, EventScript_1701D5
+	call_if_set FLAG_GOT_BICYCLE, EventScript_1701D5
 	end
 
 EventScript_1701D5:: @ 81701D5
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 Route16_NorthEntrance_1F_EventScript_1701DB:: @ 81701DB
-	msgbox gUnknown_819F98B, 2
+	msgbox gUnknown_819F98B, MSGBOX_NPC
 	end
 
 Route16_NorthEntrance_1F_EventScript_1701E4:: @ 81701E4
@@ -50,70 +49,70 @@ EventScript_170220:: @ 8170220
 	textcolor 0
 	msgbox gUnknown_819F9CC
 	closemessage
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	compare_var_to_value VAR_0x8008, 1
-	call_if eq, EventScript_170279
-	compare_var_to_value VAR_0x8008, 2
-	call_if eq, EventScript_170284
-	compare_var_to_value VAR_0x8008, 3
-	call_if eq, EventScript_17028F
-	compare_var_to_value VAR_0x8008, 4
-	call_if eq, EventScript_17029A
+	compare VAR_0x8008, 1
+	call_if_eq EventScript_170279
+	compare VAR_0x8008, 2
+	call_if_eq EventScript_170284
+	compare VAR_0x8008, 3
+	call_if_eq EventScript_17028F
+	compare VAR_0x8008, 4
+	call_if_eq EventScript_17029A
 	msgbox gUnknown_819F95F
 	closemessage
-	applymovement 255, Movement_1702B3
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1702B3
 	waitmovement 0
 	releaseall
 	end
 
 EventScript_170279:: @ 8170279
-	applymovement 255, Movement_1702A5
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1702A5
 	waitmovement 0
 	return
 
 EventScript_170284:: @ 8170284
-	applymovement 255, Movement_1702A7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1702A7
 	waitmovement 0
 	return
 
 EventScript_17028F:: @ 817028F
-	applymovement 255, Movement_1702AA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1702AA
 	waitmovement 0
 	return
 
 EventScript_17029A:: @ 817029A
-	applymovement 255, Movement_1702AE
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1702AE
 	waitmovement 0
 	return
 
 Movement_1702A5:: @ 81702A5
-	step_11
+	walk_up
 	step_end
 
 Movement_1702A7:: @ 81702A7
-	step_11
-	step_11
+	walk_up
+	walk_up
 	step_end
 
 Movement_1702AA:: @ 81702AA
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1702AE:: @ 81702AE
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1702B3:: @ 81702B3
-	step_13
+	walk_right
 	step_end
 
 Route16_NorthEntrance_1F_EventScript_1702B5:: @ 81702B5
-	msgbox gUnknown_819F9E8, 2
+	msgbox gUnknown_819F9E8, MSGBOX_NPC
 	end

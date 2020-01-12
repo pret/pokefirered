@@ -3,9 +3,8 @@ FuchsiaCity_Gym_MapScripts:: @ 816D54D
 
 FuchsiaCity_Gym_EventScript_16D54E:: @ 816D54E
 	famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC, TRAINER_LEADER_KOGA, 0, Text_19832E, Text_198444, EventScript_16D580
-	checkflag FLAG_GOT_TM06_FROM_KOGA
-	goto_if FALSE, EventScript_16D5A6
+	trainerbattle_single TRAINER_LEADER_KOGA, Text_19832E, Text_198444, EventScript_16D580, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM06_FROM_KOGA, EventScript_16D5A6
 	msgbox gUnknown_8198481
 	release
 	end
@@ -22,10 +21,9 @@ EventScript_16D580:: @ 816D580
 EventScript_16D5A6:: @ 816D5A6
 	msgbox gUnknown_819850E
 	checkitemspace ITEM_TM06, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16D5E7
-	additem ITEM_TM06, 1
-	giveitemfanfaremsg gUnknown_819858F, ITEM_TM06
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_16D5E7
+	giveitem_msg gUnknown_819858F, ITEM_TM06
 	setflag FLAG_GOT_TM06_FROM_KOGA
 	msgbox gUnknown_81985AB
 	release
@@ -37,41 +35,40 @@ EventScript_16D5E7:: @ 816D5E7
 	end
 
 FuchsiaCity_Gym_EventScript_16D5F1:: @ 816D5F1
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TAMER_PHIL, 0, Text_198866, Text_1988B6
-	msgbox gUnknown_81988CB, 6
+	trainerbattle_single TRAINER_TAMER_PHIL, Text_198866, Text_1988B6
+	msgbox gUnknown_81988CB, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D608:: @ 816D608
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_TAMER_EDGAR, 0, Text_19891F, Text_19897F
-	msgbox gUnknown_8198985, 6
+	trainerbattle_single TRAINER_TAMER_EDGAR, Text_19891F, Text_19897F
+	msgbox gUnknown_8198985, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D61F:: @ 816D61F
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_KIRK, 0, Text_19871E, Text_198779
+	trainerbattle_single TRAINER_JUGGLER_KIRK, Text_19871E, Text_198779
 	famechecker FAMECHECKER_KOGA, 2
-	msgbox gUnknown_8198787, 6
+	msgbox gUnknown_8198787, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D643:: @ 816D643
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_SHAWN, 0, Text_1989A1, Text_1989EA
-	msgbox gUnknown_8198A10, 6
+	trainerbattle_single TRAINER_JUGGLER_SHAWN, Text_1989A1, Text_1989EA
+	msgbox gUnknown_8198A10, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D65A:: @ 816D65A
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_KAYDEN, 0, Text_198629, Text_1986B4
-	msgbox gUnknown_81986C9, 6
+	trainerbattle_single TRAINER_JUGGLER_KAYDEN, Text_198629, Text_1986B4
+	msgbox gUnknown_81986C9, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D671:: @ 816D671
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_JUGGLER_NATE, 0, Text_1987E8, Text_198812
-	msgbox gUnknown_8198825, 6
+	trainerbattle_single TRAINER_JUGGLER_NATE, Text_1987E8, Text_198812
+	msgbox gUnknown_8198825, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_16D688:: @ 816D688
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_KOGA
-	goto_if TRUE, EventScript_16D69D
+	goto_if_set FLAG_DEFEATED_KOGA, EventScript_16D69D
 	msgbox gUnknown_8198A5E
 	release
 	end
@@ -83,8 +80,7 @@ EventScript_16D69D:: @ 816D69D
 
 FuchsiaCity_Gym_EventScript_16D6A7:: @ 816D6A7
 	lockall
-	checkflag FLAG_BADGE05_GET
-	goto_if TRUE, EventScript_16D6BB
+	goto_if_set FLAG_BADGE05_GET, EventScript_16D6BB
 	msgbox gUnknown_8198B4B
 	releaseall
 	end

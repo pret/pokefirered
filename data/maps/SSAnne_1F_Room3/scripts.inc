@@ -2,11 +2,11 @@ SSAnne_1F_Room3_MapScripts:: @ 8160C1D
 	.byte 0
 
 SSAnne_1F_Room3_EventScript_160C1E:: @ 8160C1E
-	msgbox gUnknown_8173B21, 2
+	msgbox gUnknown_8173B21, MSGBOX_NPC
 	end
 
 SSAnne_1F_Room3_EventScript_160C27:: @ 8160C27
-	msgbox gUnknown_8173AFA, 2
+	msgbox gUnknown_8173AFA, MSGBOX_NPC
 	end
 
 SSAnne_1F_Room3_EventScript_160C30:: @ 8160C30

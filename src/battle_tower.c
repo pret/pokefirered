@@ -190,33 +190,33 @@ void ScrSpecial_BattleTowerMapScript2(void)
         case 0:
             ResetBattleTowerStreak(levelType);
             if (count == 0)
-                VarSet(VAR_0x4000, 5);
+                VarSet(VAR_TEMP_0, 5);
             break;
         case 1:
             ResetBattleTowerStreak(levelType);
-            VarSet(VAR_0x4000, BTSPECIAL_RESULT_SAVE_SCUM);
+            VarSet(VAR_TEMP_0, BTSPECIAL_RESULT_SAVE_SCUM);
             count++;
             break;
         case 3:
             break;
         case 4:
-            VarSet(VAR_0x4000, BTSPECIAL_RESULT_WON7);
+            VarSet(VAR_TEMP_0, BTSPECIAL_RESULT_WON7);
             count++;
             break;
         case 5:
-            VarSet(VAR_0x4000, BTSPECIAL_RESULT_LOST);
+            VarSet(VAR_TEMP_0, BTSPECIAL_RESULT_LOST);
             count++;
             break;
         case 6:
             break;
         case 2:
-            VarSet(VAR_0x4000, BTSPECIAL_RESULT_QUICKSAVE);
+            VarSet(VAR_TEMP_0, BTSPECIAL_RESULT_QUICKSAVE);
             count++;
             break;
         }
     }
     if (gSaveBlock2Ptr->battleTower.var_4AE[0] == 3 && gSaveBlock2Ptr->battleTower.var_4AE[1] == 3)
-        VarSet(VAR_0x4000, BTSPECIAL_RESULT_INACTIVE);
+        VarSet(VAR_TEMP_0, BTSPECIAL_RESULT_INACTIVE);
     ValidateBattleTowerRecordChecksums();
 }
 
@@ -1150,7 +1150,7 @@ void SaveBattleTowerProgress(void)
     if (gSpecialVar_0x8004 != 3)
         gSaveBlock2Ptr->battleTower.var_4AE[battleTowerLevelType] = gSpecialVar_0x8004;
 
-    VarSet(VAR_0x4000, BTSPECIAL_TEST);
+    VarSet(VAR_TEMP_0, BTSPECIAL_TEST);
     gSaveBlock2Ptr->battleTower.unk_554 = 1;
     TrySavingData(SAVE_EREADER);
 }

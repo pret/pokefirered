@@ -130,7 +130,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_WaterPath_EventScript_1BEC9D",
+      "script": "SixIsland_WaterPath_EventScript_ItemElixir",
       "flag": "FLAG_HIDE_SIX_ISLAND_WATER_PATH_ELIXIR"
     },
     {
@@ -143,7 +143,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_WaterPath_EventScript_1BECAA",
+      "script": "SixIsland_WaterPath_EventScript_ItemDragonScale",
       "flag": "FLAG_HIDE_SIX_ISLAND_WATER_PATH_DRAGON_SCALE"
     }
   ],

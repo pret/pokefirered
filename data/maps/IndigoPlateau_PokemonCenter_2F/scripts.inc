@@ -1,18 +1,19 @@
 IndigoPlateau_PokemonCenter_2F_MapScripts:: @ 816EB0F
-	map_script 2, IndigoPlateau_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, IndigoPlateau_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, IndigoPlateau_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, IndigoPlateau_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-IndigoPlateau_PokemonCenter_2F_EventScript_16EB24:: @ 816EB24
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+IndigoPlateau_PokemonCenter_2F_EventScript_Colosseum:: @ 816EB24
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16EB2A:: @ 816EB2A
-	call EventScript_1BB6AB
+IndigoPlateau_PokemonCenter_2F_EventScript_TradeCenter:: @ 816EB2A
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16EB30:: @ 816EB30
-	call EventScript_1BB7DE
+IndigoPlateau_PokemonCenter_2F_EventScript_RecordCorner:: @ 816EB30
+	call CableClub_EventScript_RecordCorner
 	end

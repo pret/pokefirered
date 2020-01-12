@@ -2,27 +2,27 @@ CeladonCity_DepartmentStore_2F_MapScripts:: @ 816BAF4
 	.byte 0
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAF5:: @ 816BAF5
-	msgbox gUnknown_81955C7, 2
+	msgbox gUnknown_81955C7, MSGBOX_NPC
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BAFE:: @ 816BAFE
-	msgbox gUnknown_819560F, 2
+	msgbox gUnknown_819560F, MSGBOX_NPC
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB07:: @ 816BB07
-	msgbox gUnknown_8195638, 3
+	msgbox gUnknown_8195638, MSGBOX_SIGN
 	end
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16BB38
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -43,14 +43,14 @@ Items_16BB38:: @ 816BB38
 
 CeladonCity_DepartmentStore_2F_EventScript_16BB4E:: @ 816BB4E
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16BB74
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

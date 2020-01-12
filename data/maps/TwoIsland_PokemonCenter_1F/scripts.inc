@@ -1,23 +1,23 @@
 TwoIsland_PokemonCenter_1F_MapScripts:: @ 81717B4
-	map_script 3, TwoIsland_PokemonCenter_1F_MapScript1_1717BF
-	map_script 5, TwoIsland_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-TwoIsland_PokemonCenter_1F_MapScript1_1717BF:: @ 81717BF
+TwoIsland_PokemonCenter_1F_OnTransition:: @ 81717BF
 	setrespawn SPAWN_TWO_ISLAND
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717C3:: @ 81717C3
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717CC:: @ 81717CC
-	msgbox gUnknown_81A2E59, 2
+	msgbox gUnknown_81A2E59, MSGBOX_NPC
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_1717D5:: @ 81717D5
-	msgbox gUnknown_81A2EBE, 2
+	msgbox gUnknown_81A2EBE, MSGBOX_NPC
 	end

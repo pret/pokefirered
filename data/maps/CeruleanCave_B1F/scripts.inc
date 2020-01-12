@@ -1,23 +1,21 @@
 CeruleanCave_B1F_MapScripts:: @ 81624BE
-	map_script 5, CeruleanCave_B1F_MapScript1_1624C9
-	map_script 3, CeruleanCave_B1F_MapScript2_1624E7
+	map_script MAP_SCRIPT_ON_RESUME, CeruleanCave_B1F_OnResume
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCave_B1F_OnTransition
 	.byte 0
 
-CeruleanCave_B1F_MapScript1_1624C9:: @ 81624C9
-	checkflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	call_if TRUE, EventScript_1624D3
+CeruleanCave_B1F_OnResume:: @ 81624C9
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_1624D3
 	end
 
 EventScript_1624D3:: @ 81624D3
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if ne, EventScript_1A77A9
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
 	return
 
-CeruleanCave_B1F_MapScript2_1624E7:: @ 81624E7
-	checkflag FLAG_FOUGHT_MEWTWO
-	call_if FALSE, EventScript_1624F1
+CeruleanCave_B1F_OnTransition:: @ 81624E7
+	call_if_unset FLAG_FOUGHT_MEWTWO, EventScript_1624F1
 	end
 
 EventScript_1624F1:: @ 81624F1
@@ -26,8 +24,8 @@ EventScript_1624F1:: @ 81624F1
 
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
@@ -45,26 +43,26 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
-	compare_var_to_value VAR_RESULT, B_OUTCOME_WON
-	goto_if eq, EventScript_162558
-	compare_var_to_value VAR_RESULT, B_OUTCOME_RAN
-	goto_if eq, EventScript_162561
-	compare_var_to_value VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if eq, EventScript_162561
+	compare VAR_RESULT, B_OUTCOME_WON
+	goto_if_eq EventScript_162558
+	compare VAR_RESULT, B_OUTCOME_RAN
+	goto_if_eq EventScript_162561
+	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
+	goto_if_eq EventScript_162561
 	setflag FLAG_FOUGHT_MEWTWO
 	release
 	end
 
 EventScript_162558:: @ 8162558
 	setflag FLAG_FOUGHT_MEWTWO
-	goto EventScript_1A922D
+	goto EventScript_RemoveStaticMon
 
 EventScript_162560:: @ 8162560
 	end
 
 EventScript_162561:: @ 8162561
 	setvar VAR_0x8004, SPECIES_MEWTWO
-	goto EventScript_1A9236
+	goto EventScript_MonFlewAway
 
 EventScript_16256B:: @ 816256B
 	end

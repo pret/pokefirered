@@ -2,23 +2,23 @@ PewterCity_Mart_MapScripts:: @ 816A6CD
 	.byte 0
 
 PewterCity_Mart_EventScript_16A6CE:: @ 816A6CE
-	msgbox gUnknown_81914DE, 2
+	msgbox gUnknown_81914DE, MSGBOX_NPC
 	end
 
 PewterCity_Mart_EventScript_16A6D7:: @ 816A6D7
-	msgbox gUnknown_8191541, 2
+	msgbox gUnknown_8191541, MSGBOX_NPC
 	end
 
 PewterCity_Mart_EventScript_16A6E0:: @ 816A6E0
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A708
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

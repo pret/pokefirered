@@ -39,7 +39,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_165AF0",
+      "script": "ViridianCity_EventScript_DreamEaterTutor",
       "flag": "0"
     },
     {
@@ -143,7 +143,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_1BEB8C",
+      "script": "ViridianCity_EventScript_ItemPotion",
       "flag": "FLAG_HIDE_VIRIDIAN_CITY_POTION"
     }
   ],

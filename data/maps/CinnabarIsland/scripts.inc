@@ -1,17 +1,17 @@
 CinnabarIsland_MapScripts:: @ 8166ED6
-	map_script 3, CinnabarIsland_MapScript1_166EE1
-	map_script 2, CinnabarIsland_MapScript2_166F6E
+	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CinnabarIsland_OnFrame
 	.byte 0
 
-CinnabarIsland_MapScript1_166EE1:: @ 8166EE1
+CinnabarIsland_OnTransition:: @ 8166EE1
 	setworldmapflag FLAG_WORLD_MAP_CINNABAR_ISLAND
 	call EventScript_166F5E
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	call_if eq, EventScript_166F24
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND, 3
-	call_if eq, EventScript_166F52
-	compare_var_to_value VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
-	call_if eq, EventScript_166F0B
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 1
+	call_if_eq EventScript_166F24
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND, 3
+	call_if_eq EventScript_166F52
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
+	call_if_eq EventScript_166F0B
 	end
 
 EventScript_166F0B:: @ 8166F0B
@@ -24,8 +24,8 @@ EventScript_166F0B:: @ 8166F0B
 
 EventScript_166F24:: @ 8166F24
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 18
-	goto_if ge, EventScript_166F4A
+	compare VAR_0x8004, 18
+	goto_if_ge EventScript_166F4A
 	setflag FLAG_TEMP_2
 	setobjectxyperm 3, 18, 12
 	setobjectmovementtype 3, 7
@@ -42,15 +42,14 @@ EventScript_166F52:: @ 8166F52
 	return
 
 EventScript_166F5E:: @ 8166F5E
-	checkflag FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY
-	goto_if TRUE, EventScript_166F68
+	goto_if_set FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY, EventScript_166F68
 	return
 
 EventScript_166F68:: @ 8166F68
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
-CinnabarIsland_MapScript2_166F6E:: @ 8166F6E
+CinnabarIsland_OnFrame:: @ 8166F6E
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1, EventScript_166F88
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 1, EventScript_166FCD
 	map_script_2 VAR_MAP_SCENE_CINNABAR_ISLAND, 3, EventScript_166FA0
@@ -82,45 +81,41 @@ EventScript_166FA0:: @ 8166FA0
 	end
 
 Movement_166FC6:: @ 8166FC6
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 EventScript_166FCD:: @ 8166FCD
 	lockall
 	textcolor 0
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167032
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_16703D
+	call_if_unset FLAG_TEMP_2, EventScript_167032
+	call_if_set FLAG_TEMP_2, EventScript_16703D
 	playse SE_PIN
-	applymovement 3, Movement_1A75DB
+	applymovement 3, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement 3, Movement_Delay48
 	waitmovement 0
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167048
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167053
+	call_if_unset FLAG_TEMP_2, EventScript_167048
+	call_if_set FLAG_TEMP_2, EventScript_167053
 	msgbox gUnknown_8180C90
 	msgbox gUnknown_8180CAA, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_167068
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_167078
+	compare VAR_RESULT, YES
+	goto_if_eq EventScript_167068
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_167078
 	end
 
 EventScript_167032:: @ 8167032
-	applymovement 3, Movement_1A75E9
+	applymovement 3, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
 EventScript_16703D:: @ 816703D
-	applymovement 3, Movement_1A75E7
+	applymovement 3, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
@@ -132,7 +127,7 @@ EventScript_167048:: @ 8167048
 EventScript_167053:: @ 8167053
 	applymovement 3, Movement_1671A6
 	waitmovement 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	return
 
@@ -146,10 +141,8 @@ EventScript_167068:: @ 8167068
 EventScript_167078:: @ 8167078
 	msgbox gUnknown_8180DF8
 	closemessage
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1670A0
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_1670B3
+	call_if_unset FLAG_TEMP_2, EventScript_1670A0
+	call_if_set FLAG_TEMP_2, EventScript_1670B3
 	removeobject 3
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	clearflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
@@ -162,17 +155,17 @@ EventScript_1670A0:: @ 81670A0
 	return
 
 Movement_1670AB:: @ 81670AB
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 EventScript_1670B3:: @ 81670B3
-	applymovement 255, Movement_1670DB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1670DB
 	applymovement 3, Movement_1670DE
 	waitmovement 0
 	opendoor 14, 11
@@ -184,36 +177,31 @@ EventScript_1670B3:: @ 81670B3
 	return
 
 Movement_1670DB:: @ 81670DB
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
 Movement_1670DE:: @ 81670DE
-	step_1c
-	step_12
-	step_2e
+	delay_16
+	walk_left
+	walk_in_place_fastest_up
 	step_end
 
 Movement_1670E2:: @ 81670E2
-	step_11
-	step_1a
-	step_60
+	walk_up
+	delay_4
+	set_invisible
 	step_end
 
 EventScript_1670E6:: @ 81670E6
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167142
+	call_if_set FLAG_TEMP_2, EventScript_167142
 	addobject 4
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167154
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167166
+	call_if_unset FLAG_TEMP_2, EventScript_167154
+	call_if_set FLAG_TEMP_2, EventScript_167166
 	msgbox gUnknown_8180EAD
 	closemessage
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_167171
-	checkflag FLAG_TEMP_2
-	call_if TRUE, EventScript_167183
+	call_if_unset FLAG_TEMP_2, EventScript_167171
+	call_if_set FLAG_TEMP_2, EventScript_167183
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 2
 	removeobject 3
 	delay 40
@@ -226,7 +214,7 @@ EventScript_1670E6:: @ 81670E6
 
 EventScript_167142:: @ 8167142
 	applymovement 3, Movement_1671AF
-	applymovement 255, Movement_1671AF
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671AF
 	waitmovement 0
 	return
 
@@ -243,101 +231,101 @@ EventScript_167166:: @ 8167166
 
 EventScript_167171:: @ 8167171
 	applymovement 3, Movement_16719D
-	applymovement 255, Movement_1671BA
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671BA
 	waitmovement 0
 	return
 
 EventScript_167183:: @ 8167183
 	applymovement 3, Movement_1671B6
-	applymovement 255, Movement_1671C4
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671C4
 	waitmovement 0
 	return
 
 Movement_167195:: @ 8167195
-	step_1c
-	step_1c
-	step_1f
-	step_1f
-	step_12
-	step_left
-	step_left
+	delay_16
+	delay_16
+	walk_fast_left
+	walk_fast_left
+	walk_left
+	walk_slowest_left
+	walk_slowest_left
 	step_end
 
 Movement_16719D:: @ 816719D
-	step_13
-	step_10
-	step_10
-	step_13
-	step_1a
-	step_60
+	walk_right
+	walk_down
+	walk_down
+	walk_right
+	delay_4
+	set_invisible
 	step_end
 
 Movement_1671A4:: @ 81671A4
-	step_11
+	walk_up
 	step_end
 
 Movement_1671A6:: @ 81671A6
-	step_12
-	step_12
-	step_12
+	walk_left
+	walk_left
+	walk_left
 	step_end
 
 Movement_1671AA:: @ 81671AA
-	step_1c
-	step_1c
-	step_1b
-	step_30
+	delay_16
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
 Movement_1671AF:: @ 81671AF
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
-	step_13
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 Movement_1671B6:: @ 81671B6
-	step_13
-	step_1a
-	step_60
+	walk_right
+	delay_4
+	set_invisible
 	step_end
 
 Movement_1671BA:: @ 81671BA
-	step_10
-	step_13
-	step_10
-	step_10
-	step_30
-	step_1a
-	step_13
-	step_1a
-	step_60
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
+	delay_4
+	walk_right
+	delay_4
+	set_invisible
 	step_end
 
 Movement_1671C4:: @ 81671C4
-	step_13
-	step_1a
-	step_13
-	step_1a
-	step_60
+	walk_right
+	delay_4
+	walk_right
+	delay_4
+	set_invisible
 	step_end
 
 CinnabarIsland_EventScript_1671CA:: @ 81671CA
 	lockall
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
 	msgbox gUnknown_8180B20
 	closemessage
-	applymovement 255, Movement_1671ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1671ED
 	waitmovement 0
 	releaseall
 	end
 
 Movement_1671ED:: @ 81671ED
-	step_10
+	walk_down
 	step_end
 
 CinnabarIsland_EventScript_1671EF:: @ 81671EF
@@ -349,15 +337,15 @@ CinnabarIsland_EventScript_1671EF:: @ 81671EF
 	end
 
 CinnabarIsland_EventScript_167208:: @ 8167208
-	msgbox gUnknown_8180BA0, 2
+	msgbox gUnknown_8180BA0, MSGBOX_NPC
 	end
 
 CinnabarIsland_EventScript_167211:: @ 8167211
-	msgbox gUnknown_8180C0D, 3
+	msgbox gUnknown_8180C0D, MSGBOX_SIGN
 	end
 
 CinnabarIsland_EventScript_16721A:: @ 816721A
-	msgbox gUnknown_8180C3E, 3
+	msgbox gUnknown_8180C3E, MSGBOX_SIGN
 	end
 
 CinnabarIsland_EventScript_167223:: @ 8167223

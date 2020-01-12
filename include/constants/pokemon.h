@@ -87,4 +87,8 @@
 #define MON_ALREADY_KNOWS_MOVE 0xFFFE
 #define MON_HAS_MAX_MOVES      0xFFFF
 
+#define PLAYER_HAS_TWO_USABLE_MONS              0x0
+#define PLAYER_HAS_ONE_MON                      0x1
+#define PLAYER_HAS_ONE_USABLE_MON               0x2
+
 #endif // GUARD_CONSTANTS_POKEMON_H

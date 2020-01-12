@@ -79,7 +79,7 @@ gUnknown_81808FA:: @ 81808FA
 Text_180945:: @ 8180945
     .string "……$"
 
-Text_180948:: @ 8180948
+Text_SubstituteTeach:: @ 8180948
     .string "Aww, I wish I was a KANGASKHAN\n"
     .string "baby.\p"
     .string "I'd love to be a substitute for the\n"
@@ -91,15 +91,15 @@ Text_180948:: @ 8180948
     .string "Want me to teach SUBSTITUTE to\n"
     .string "one of your POKéMON?$"
 
-Text_180A32:: @ 8180A32
+Text_SubstituteDeclined:: @ 8180A32
     .string "Oh, really?\n"
     .string "SUBSTITUTE seems so fun…$"
 
-Text_180A57:: @ 8180A57
+Text_SubstituteWhichMon:: @ 8180A57
     .string "Which POKéMON wants to learn\n"
     .string "SUBSTITUTE?$"
 
-Text_180A80:: @ 8180A80
+Text_SubstituteTaught:: @ 8180A80
     .string "Boy, what I'd give to crawl inside\n"
     .string "a KANGASKHAN belly pouch…$"
 

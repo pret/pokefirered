@@ -2,11 +2,11 @@ ViridianCity_House1_MapScripts:: @ 8169E9A
 	.byte 0
 
 ViridianCity_House1_EventScript_169E9B:: @ 8169E9B
-	msgbox gUnknown_818F292, 2
+	msgbox gUnknown_818F292, MSGBOX_NPC
 	end
 
 ViridianCity_House1_EventScript_169EA4:: @ 8169EA4
-	msgbox gUnknown_818F30F, 2
+	msgbox gUnknown_818F30F, MSGBOX_NPC
 	end
 
 ViridianCity_House1_EventScript_169EAD:: @ 8169EAD
@@ -20,5 +20,5 @@ ViridianCity_House1_EventScript_169EAD:: @ 8169EAD
 	end
 
 ViridianCity_House1_EventScript_169EC0:: @ 8169EC0
-	msgbox gUnknown_818F33D, 3
+	msgbox gUnknown_818F33D, MSGBOX_SIGN
 	end

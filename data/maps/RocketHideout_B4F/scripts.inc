@@ -1,19 +1,17 @@
 RocketHideout_B4F_MapScripts:: @ 81612E8
-	map_script 1, RocketHideout_B4F_MapScript1_1612EE
+	map_script MAP_SCRIPT_ON_LOAD, RocketHideout_B4F_OnLoad
 	.byte 0
 
-RocketHideout_B4F_MapScript1_1612EE:: @ 81612EE
-	setvar VAR_0x4001, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
-	call_if ne, EventScript_16146A
+RocketHideout_B4F_OnLoad:: @ 81612EE
+	setvar VAR_TEMP_1, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
+	compare VAR_TEMP_1, 2
+	call_if_ne EventScript_16146A
 	end
 
 EventScript_161311:: @ 8161311
-	addvar VAR_0x4001, 1
+	addvar VAR_TEMP_1, 1
 	return
 
 RocketHideout_B4F_EventScript_161317:: @ 8161317
@@ -24,31 +22,31 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_BOSS_GIOVANNI, 0, Text_175318
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, Text_175318
 	msgbox gUnknown_817532D
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	closemessage
 	removeobject 1
 	addobject 2
 	clearflag FLAG_HIDE_SILPH_SCOPE
 	setflag FLAG_HIDE_CELADON_ROCKETS
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	fadescreen 0
+	fadescreen FADE_FROM_BLACK
 	release
 	end
 
-RocketHideout_B4F_EventScript_161363:: @ 8161363
+RocketHideout_B4F_EventScript_SilphScope:: @ 8161363
 	lock
 	faceplayer
 	removeobject 2
 	giveitem ITEM_SILPH_SCOPE
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	release
 	end
 
 RocketHideout_B4F_EventScript_161381:: @ 8161381
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_18, 0, Text_175488, Text_1754B9, EventScript_16139D
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_18, Text_175488, Text_1754B9, EventScript_16139D
 	msgbox gUnknown_81754BD
 	release
 	end
@@ -60,50 +58,46 @@ EventScript_16139D:: @ 816139D
 	release
 	end
 
-RocketHideout_B4F_EventScript_1613AD:: @ 81613AD
+RocketHideout_B4F_EventScript_LiftKey:: @ 81613AD
 	lock
 	faceplayer
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
 	removeobject 4
 	giveitem ITEM_LIFT_KEY
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_1A6BF9
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
 	release
 	end
 
 RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_16, 0, Text_1753D0, Text_1753FE, EventScript_1613E9
-	msgbox gUnknown_817540C, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, Text_1753D0, Text_1753FE, EventScript_1613E9
+	msgbox gUnknown_817540C, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_1613E9:: @ 81613E9
-	setvar VAR_0x4001, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
-	call_if eq, EventScript_1614A1
-	compare_var_to_value VAR_0x4001, 2
-	call_if eq, EventScript_161462
+	setvar VAR_TEMP_1, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
+	compare VAR_TEMP_1, 2
+	call_if_eq EventScript_1614A1
+	compare VAR_TEMP_1, 2
+	call_if_eq EventScript_161462
 	release
 	end
 
 RocketHideout_B4F_EventScript_161418:: @ 8161418
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_17, 0, Text_175437, Text_175463, EventScript_161433
-	msgbox gUnknown_817546A, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, Text_175437, Text_175463, EventScript_161433
+	msgbox gUnknown_817546A, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_161433:: @ 8161433
-	setvar VAR_0x4001, 0
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_16
-	call_if eq, EventScript_161311
-	checktrainerflag TRAINER_TEAM_ROCKET_GRUNT_17
-	call_if eq, EventScript_161311
-	compare_var_to_value VAR_0x4001, 2
-	call_if eq, EventScript_1614A1
-	compare_var_to_value VAR_0x4001, 2
-	call_if eq, EventScript_161462
+	setvar VAR_TEMP_1, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
+	compare VAR_TEMP_1, 2
+	call_if_eq EventScript_1614A1
+	compare VAR_TEMP_1, 2
+	call_if_eq EventScript_161462
 	release
 	end
 

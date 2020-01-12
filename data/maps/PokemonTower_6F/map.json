@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_6F_EventScript_1BE796",
+      "script": "PokemonTower_6F_EventScript_ItemRareCandy",
       "flag": "FLAG_HIDE_POKEMON_TOWER_6F_RARE_CANDY"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_6F_EventScript_1BE7A3",
+      "script": "PokemonTower_6F_EventScript_ItemXAccuracy",
       "flag": "FLAG_HIDE_POKEMON_TOWER_6F_X_ACCURACY"
     }
   ],

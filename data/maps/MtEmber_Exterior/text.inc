@@ -1,4 +1,4 @@
-Text_17A642:: @ 817A642
+Text_ExplosionTeach:: @ 817A642
     .string "Can you imagine?\n"
     .string "If this volcano were to erupt?\p"
     .string "The explosion would be the end of\n"
@@ -6,16 +6,16 @@ Text_17A642:: @ 817A642
     .string "While we're terrified, would you\n"
     .string "like me to teach EXPLOSION?$"
 
-Text_17A6ED:: @ 817A6ED
+Text_ExplosionDeclined:: @ 817A6ED
     .string "Yeah, you're right.\n"
     .string "It is too terrifying.$"
 
-Text_17A717:: @ 817A717
+Text_ExplosionWhichMon:: @ 817A717
     .string "You're terribly brave!\p"
     .string "Which POKéMON should I teach\n"
     .string "EXPLOSION?$"
 
-Text_17A756:: @ 817A756
+Text_ExplosionTaught:: @ 817A756
     .string "Using EXPLOSION while on this\n"
     .string "volcano…\p"
     .string "What a terrifying thrill!$"

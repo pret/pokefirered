@@ -2,23 +2,23 @@ CinnabarIsland_Mart_MapScripts:: @ 816EA0F
 	.byte 0
 
 CinnabarIsland_Mart_EventScript_16EA10:: @ 816EA10
-	msgbox gUnknown_819A7A0, 2
+	msgbox gUnknown_819A7A0, MSGBOX_NPC
 	end
 
 CinnabarIsland_Mart_EventScript_16EA19:: @ 816EA19
-	msgbox gUnknown_819A7F1, 2
+	msgbox gUnknown_819A7F1, MSGBOX_NPC
 	end
 
 CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16EA48
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 

@@ -19,19 +19,19 @@ SaffronCity_House1_2F_EventScript_16EB70:: @ 816EB70
 
 SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	special sub_8112364
 	lock
 	faceplayer
 	checkitem ITEM_POKE_DOLL, 1
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_1C4CF6
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_MimicTutor
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
-	call_if eq, EventScript_16EBB7
-	compare_var_to_value VAR_RESULT, 1
-	call_if eq, EventScript_16EBC0
+	compare VAR_RESULT, MALE
+	call_if_eq EventScript_16EBB7
+	compare VAR_RESULT, FEMALE
+	call_if_eq EventScript_16EBC0
 	release
 	end
 
@@ -44,9 +44,9 @@ EventScript_16EBC0:: @ 816EBC0
 	return
 
 SaffronCity_House1_2F_EventScript_16EBC9:: @ 816EBC9
-	msgbox gUnknown_819B0D0, 3
+	msgbox gUnknown_819B0D0, MSGBOX_SIGN
 	end
 
 SaffronCity_House1_2F_EventScript_16EBD2:: @ 816EBD2
-	msgbox gUnknown_819B0A0, 3
+	msgbox gUnknown_819B0A0, MSGBOX_SIGN
 	end

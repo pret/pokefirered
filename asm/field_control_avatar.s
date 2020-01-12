@@ -801,7 +801,7 @@ _0806CEB8:
 	ldr r0, _0806CED8 @ =gUnknown_8168CE4
 	cmp r4, r0
 	beq _0806CECA
-	ldr r0, _0806CEDC @ =gUnknown_81A6955
+	ldr r0, _0806CEDC @ =EventScript_PC
 	cmp r4, r0
 	beq _0806CECA
 	movs r0, 0x5
@@ -816,7 +816,7 @@ _0806CED2:
 	bx r1
 	.align 2, 0
 _0806CED8: .4byte gUnknown_8168CE4
-_0806CEDC: .4byte gUnknown_81A6955
+_0806CEDC: .4byte EventScript_PC
 	thumb_func_end sub_806CEA0
 
 	thumb_func_start TryGetScriptOnPressingA
@@ -1180,14 +1180,14 @@ _0806D17A:
 	beq _0806D164
 	ldr r0, _0806D1D0 @ =gSpecialVar_Facing
 	strh r6, [r0]
-	ldr r0, _0806D1D4 @ =EventScript_PickUpHiddenItem
+	ldr r0, _0806D1D4 @ =EventScript_FoundHiddenItem
 	b _0806D1E6
 	.align 2, 0
 _0806D1C4: .4byte gSpecialVar_0x8005
 _0806D1C8: .4byte gSpecialVar_0x8004
 _0806D1CC: .4byte gSpecialVar_0x8006
 _0806D1D0: .4byte gSpecialVar_Facing
-_0806D1D4: .4byte EventScript_PickUpHiddenItem
+_0806D1D4: .4byte EventScript_FoundHiddenItem
 _0806D1D8:
 	cmp r2, 0xFF
 	beq _0806D1E0
@@ -1219,11 +1219,11 @@ sub_806D1F0: @ 806D1F0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D218
-	ldr r0, _0806D214 @ =gUnknown_81A6955
+	ldr r0, _0806D214 @ =EventScript_PC
 	b _0806D53E
 	.align 2, 0
 _0806D210: .4byte gSpecialVar_Facing
-_0806D214: .4byte gUnknown_81A6955
+_0806D214: .4byte EventScript_PC
 _0806D218:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsRegionMap
@@ -1231,10 +1231,10 @@ _0806D218:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D230
-	ldr r0, _0806D22C @ =gUnknown_81A6C32
+	ldr r0, _0806D22C @ =EventScript_WallTownMap
 	b _0806D53E
 	.align 2, 0
-_0806D22C: .4byte gUnknown_81A6C32
+_0806D22C: .4byte EventScript_WallTownMap
 _0806D230:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsBookshelf
@@ -1519,10 +1519,10 @@ _0806D488:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4A0
-	ldr r0, _0806D49C @ =gUnknown_81BBFD8
+	ldr r0, _0806D49C @ =CableClub_EventScript_81BBFD8
 	b _0806D53E
 	.align 2, 0
-_0806D49C: .4byte gUnknown_81BBFD8
+_0806D49C: .4byte CableClub_EventScript_81BBFD8
 _0806D4A0:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsQuestionnaire
@@ -1542,10 +1542,10 @@ _0806D4B8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4D0
-	ldr r0, _0806D4CC @ =gUnknown_81BB8A7
+	ldr r0, _0806D4CC @ =CableClub_EventScript_ShowBattleRecords
 	b _0806D53E
 	.align 2, 0
-_0806D4CC: .4byte gUnknown_81BB8A7
+_0806D4CC: .4byte CableClub_EventScript_ShowBattleRecords
 _0806D4D0:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsIndigoPlateauMark
@@ -1620,10 +1620,10 @@ sub_806D548: @ 806D548
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D570
-	ldr r0, _0806D56C @ =gUnknown_81A6B0D
+	ldr r0, _0806D56C @ =EventScript_CurrentTooFast
 	b _0806D5E2
 	.align 2, 0
-_0806D56C: .4byte gUnknown_81A6B0D
+_0806D56C: .4byte EventScript_CurrentTooFast
 _0806D570:
 	ldr r0, _0806D59C @ =0x00000824
 	bl FlagGet
@@ -1641,11 +1641,11 @@ _0806D570:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5A4
-	ldr r0, _0806D5A0 @ =EventScript_1A6AC8
+	ldr r0, _0806D5A0 @ =EventScript_UseSurf
 	b _0806D5E2
 	.align 2, 0
 _0806D59C: .4byte 0x00000824
-_0806D5A0: .4byte EventScript_1A6AC8
+_0806D5A0: .4byte EventScript_UseSurf
 _0806D5A4:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsWaterfall
@@ -1664,11 +1664,11 @@ _0806D5A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5D8
-	ldr r0, _0806D5D4 @ =gUnknown_81BE2B7
+	ldr r0, _0806D5D4 @ =EventScript_InteractWithWaterfall
 	b _0806D5E2
 	.align 2, 0
 _0806D5D0: .4byte 0x00000826
-_0806D5D4: .4byte gUnknown_81BE2B7
+_0806D5D4: .4byte EventScript_InteractWithWaterfall
 _0806D5D8:
 	ldr r0, _0806D5DC @ =EventScript_81BE2FF
 	b _0806D5E2

@@ -1,13 +1,11 @@
 FuchsiaCity_MapScripts:: @ 8166D75
-	map_script 3, FuchsiaCity_MapScript1_166D7B
+	map_script MAP_SCRIPT_ON_TRANSITION, FuchsiaCity_OnTransition
 	.byte 0
 
-FuchsiaCity_MapScript1_166D7B:: @ 8166D7B
+FuchsiaCity_OnTransition:: @ 8166D7B
 	setworldmapflag FLAG_WORLD_MAP_FUCHSIA_CITY
-	checkflag FLAG_GOT_DOME_FOSSIL
-	call_if TRUE, EventScript_166D91
-	checkflag FLAG_GOT_DOME_FOSSIL
-	call_if FALSE, EventScript_166D97
+	call_if_set FLAG_GOT_DOME_FOSSIL, EventScript_166D91
+	call_if_unset FLAG_GOT_DOME_FOSSIL, EventScript_166D97
 	end
 
 EventScript_166D91:: @ 8166D91
@@ -19,19 +17,19 @@ EventScript_166D97:: @ 8166D97
 	return
 
 FuchsiaCity_EventScript_166D9D:: @ 8166D9D
-	msgbox gUnknown_818056E, 2
+	msgbox gUnknown_818056E, MSGBOX_NPC
 	end
 
 FuchsiaCity_EventScript_166DA6:: @ 8166DA6
-	msgbox gUnknown_81805C6, 2
+	msgbox gUnknown_81805C6, MSGBOX_NPC
 	end
 
 FuchsiaCity_EventScript_166DAF:: @ 8166DAF
-	msgbox gUnknown_818062C, 2
+	msgbox gUnknown_818062C, MSGBOX_NPC
 	end
 
 FuchsiaCity_EventScript_166DB8:: @ 8166DB8
-	msgbox gUnknown_818065A, 2
+	msgbox gUnknown_818065A, MSGBOX_NPC
 	end
 
 FuchsiaCity_EventScript_166DC1:: @ 8166DC1
@@ -43,23 +41,23 @@ FuchsiaCity_EventScript_166DC1:: @ 8166DC1
 	end
 
 FuchsiaCity_EventScript_166DDA:: @ 8166DDA
-	msgbox gUnknown_81806AB, 3
+	msgbox gUnknown_81806AB, MSGBOX_SIGN
 	end
 
 FuchsiaCity_EventScript_166DE3:: @ 8166DE3
-	msgbox gUnknown_81806D3, 3
+	msgbox gUnknown_81806D3, MSGBOX_SIGN
 	end
 
 FuchsiaCity_EventScript_166DEC:: @ 8166DEC
-	msgbox gUnknown_81806F0, 3
+	msgbox gUnknown_81806F0, MSGBOX_SIGN
 	end
 
 FuchsiaCity_EventScript_166DF5:: @ 8166DF5
-	msgbox gUnknown_818070D, 3
+	msgbox gUnknown_818070D, MSGBOX_SIGN
 	end
 
 EventScript_166DFE:: @ 8166DFE
-	msgbox gUnknown_8180727, 3
+	msgbox gUnknown_8180727, MSGBOX_SIGN
 	end
 
 FuchsiaCity_EventScript_166E07:: @ 8166E07
@@ -121,8 +119,7 @@ FuchsiaCity_EventScript_166E83:: @ 8166E83
 
 FuchsiaCity_EventScript_166E9C:: @ 8166E9C
 	lockall
-	checkflag FLAG_GOT_DOME_FOSSIL
-	goto_if TRUE, EventScript_166EBE
+	goto_if_set FLAG_GOT_DOME_FOSSIL, EventScript_166EBE
 	setvar VAR_0x8004, SPECIES_KABUTO
 	special Special_SetSeenMon
 	drawmonpic SPECIES_KABUTO, 10, 3

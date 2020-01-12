@@ -1,15 +1,15 @@
 ThreeIsland_DunsparceTunnel_MapScripts:: @ 8164D26
-	map_script 3, ThreeIsland_DunsparceTunnel_MapScript1_164D2C
+	map_script MAP_SCRIPT_ON_TRANSITION, ThreeIsland_DunsparceTunnel_OnTransition
 	.byte 0
 
-ThreeIsland_DunsparceTunnel_MapScript1_164D2C:: @ 8164D2C
+ThreeIsland_DunsparceTunnel_OnTransition:: @ 8164D2C
 	setworldmapflag FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 1
-	call_if eq, EventScript_164D50
-	compare_var_to_value VAR_0x8008, 0
-	call_if eq, EventScript_164D54
+	compare VAR_0x8008, TRUE
+	call_if_eq EventScript_164D50
+	compare VAR_0x8008, FALSE
+	call_if_eq EventScript_164D54
 	end
 
 EventScript_164D50:: @ 8164D50
@@ -24,14 +24,13 @@ EventScript_164D54:: @ 8164D54
 ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 	lock
 	faceplayer
-	checkflag FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL
-	goto_if TRUE, EventScript_164DC2
+	goto_if_set FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL, EventScript_164DC2
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare_var_to_value VAR_RESULT, 1
-	goto_if eq, EventScript_164D90
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_164D90
 	msgbox gUnknown_817D13B
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -39,8 +38,8 @@ ThreeIsland_DunsparceTunnel_EventScript_164D60:: @ 8164D60
 EventScript_164D90:: @ 8164D90
 	msgbox gUnknown_817D1C9
 	giveitem ITEM_NUGGET
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_164DB8
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_164DB8
 	setflag FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL
 	goto EventScript_164DC2
 	end

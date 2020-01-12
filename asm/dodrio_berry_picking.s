@@ -6306,8 +6306,8 @@ sub_81537AC: @ 81537AC
 _081537BC: .4byte gUnknown_203F3E0
 	thumb_func_end sub_81537AC
 
-	thumb_func_start sub_81537C0
-sub_81537C0: @ 81537C0
+	thumb_func_start IsDodrioInParty
+IsDodrioInParty: @ 81537C0
 	push {r4-r6,lr}
 	movs r5, 0
 	ldr r6, _081537F0 @ =gSpecialVar_Result
@@ -6346,10 +6346,10 @@ _08153804:
 	bx r0
 	.align 2, 0
 _0815380C: .4byte gSpecialVar_Result
-	thumb_func_end sub_81537C0
+	thumb_func_end IsDodrioInParty
 
-	thumb_func_start sub_8153810
-sub_8153810: @ 8153810
+	thumb_func_start ShowDodrioBerryPickingRecords
+ShowDodrioBerryPickingRecords: @ 8153810
 	push {r4,lr}
 	ldr r4, _0815382C @ =sub_8153830
 	adds r0, r4, 0
@@ -6363,7 +6363,7 @@ sub_8153810: @ 8153810
 	bx r0
 	.align 2, 0
 _0815382C: .4byte sub_8153830
-	thumb_func_end sub_8153810
+	thumb_func_end ShowDodrioBerryPickingRecords
 
 	thumb_func_start sub_8153830
 sub_8153830: @ 8153830

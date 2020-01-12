@@ -1,10 +1,9 @@
 PokemonMansion_2F_MapScripts:: @ 8162254
-	map_script 1, PokemonMansion_2F_MapScript1_16225A
+	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_2F_OnLoad
 	.byte 0
 
-PokemonMansion_2F_MapScript1_16225A:: @ 816225A
-	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	call_if TRUE, EventScript_1A7D3E
+PokemonMansion_2F_OnLoad:: @ 816225A
+	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, EventScript_1A7D3E
 	end
 
 PokemonMansion_2F_EventScript_162264:: @ 8162264
@@ -18,14 +17,14 @@ PokemonMansion_2F_EventScript_162264:: @ 8162264
 	end
 
 PokemonMansion_2F_EventScript_162278:: @ 8162278
-	msgbox gUnknown_817751F, 3
+	msgbox gUnknown_817751F, MSGBOX_SIGN
 	end
 
 PokemonMansion_2F_EventScript_162281:: @ 8162281
-	msgbox gUnknown_8177574, 3
+	msgbox gUnknown_8177574, MSGBOX_SIGN
 	end
 
 PokemonMansion_2F_EventScript_16228A:: @ 816228A
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_BURGLAR_ARNIE, 0, Text_177498, Text_1774CB
-	msgbox gUnknown_81774E3, 6
+	trainerbattle_single TRAINER_BURGLAR_ARNIE, Text_177498, Text_1774CB
+	msgbox gUnknown_81774E3, MSGBOX_AUTOCLOSE
 	end

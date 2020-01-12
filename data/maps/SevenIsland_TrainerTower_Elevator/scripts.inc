@@ -1,16 +1,15 @@
 SevenIsland_TrainerTower_Elevator_MapScripts:: @ 8164AF8
-	map_script 5, SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54
-	map_script 2, SevenIsland_TrainerTower_Elevator_MapScript2_1C5046
+	map_script MAP_SCRIPT_ON_RESUME, SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_TrainerTower_Elevator_MapScript2_1C5046
 	.byte 0
 
 SevenIsland_TrainerTower_Elevator_EventScript_164B03:: @ 8164B03
 	lockall
 	setvar VAR_0x8004, 6
-	checkflag FLAG_TEMP_2
-	call_if FALSE, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
-	message Text_1A535C
+	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 6
 	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
@@ -40,13 +39,13 @@ EventScript_164B5E:: @ 8164B5E
 EventScript_164B90:: @ 8164B90
 	setvar VAR_0x8006, 3
 	setdynamicwarp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
-	compare_var_to_value VAR_ELEVATOR_FLOOR, 3
-	goto_if eq, EventScript_164BD3
+	compare VAR_ELEVATOR_FLOOR, 3
+	goto_if_eq EventScript_164BD3
 	call EventScript_164BD8
 	setvar VAR_ELEVATOR_FLOOR, 3
 	special Special_CloseElevatorCurrentFloorWindow
 	delay 25
-	applymovement 255, Movement_164BE5
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_164BE5
 	waitmovement 0
 	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 17, 8
 	waitstate
@@ -72,10 +71,10 @@ EventScript_164BD8:: @ 8164BD8
 	return
 
 Movement_164BE5:: @ 8164BE5
-	step_2d
-	step_1c
-	step_10
-	step_13
-	step_13
-	step_10
+	walk_in_place_fastest_down
+	delay_16
+	walk_down
+	walk_right
+	walk_right
+	walk_down
 	step_end

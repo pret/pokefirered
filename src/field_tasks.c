@@ -213,7 +213,7 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
                 PlaySE(SE_RU_GASYAN);
                 MapGridSetMetatileIdAt(x, y, 0x35b);
                 CurrentMapDrawMetatileAt(x, y);
-                VarSet(VAR_0x4001, 1);
+                VarSet(VAR_TEMP_1, 1);
                 data[1] = 1;
             }
             break;
@@ -268,7 +268,7 @@ static void CrackedFloorPerStepCallback(u8 taskId)
         if (MetatileBehavior_ReturnFalse_13(behavior))
         {
             if (GetPlayerSpeed() != 4)
-                VarSet(VAR_0x4030, 0);
+                VarSet(VAR_ICE_STEP_COUNT, 0);
 
             if (data[4] == 0)
             {

@@ -6,22 +6,22 @@
 #define VARS_START 0x4000
 
 // Temporary variables. Reset on map load.
-#define VAR_0x4000                          0x4000
-#define VAR_0x4001                          0x4001
-#define VAR_0x4002                          0x4002
-#define VAR_0x4003                          0x4003
-#define VAR_0x4004                          0x4004
-#define VAR_0x4005                          0x4005
-#define VAR_0x4006                          0x4006
-#define VAR_0x4007                          0x4007
-#define VAR_0x4008                          0x4008
-#define VAR_0x4009                          0x4009
-#define VAR_0x400A                          0x400A
-#define VAR_0x400B                          0x400B
-#define VAR_0x400C                          0x400C
-#define VAR_0x400D                          0x400D
-#define VAR_0x400E                          0x400E
-#define VAR_0x400F                          0x400F
+#define VAR_TEMP_0                          0x4000
+#define VAR_TEMP_1                          0x4001
+#define VAR_TEMP_2                          0x4002
+#define VAR_TEMP_3                          0x4003
+#define VAR_TEMP_4                          0x4004
+#define VAR_TEMP_5                          0x4005
+#define VAR_TEMP_6                          0x4006
+#define VAR_TEMP_7                          0x4007
+#define VAR_TEMP_8                          0x4008
+#define VAR_TEMP_9                          0x4009
+#define VAR_TEMP_A                          0x400A
+#define VAR_TEMP_B                          0x400B
+#define VAR_TEMP_C                          0x400C
+#define VAR_TEMP_D                          0x400D
+#define VAR_TEMP_E                          0x400E
+#define VAR_TEMP_F                          0x400F
 
 // Object event graphics IDs which can be changed by
 // script commands.
@@ -52,7 +52,7 @@
 #define VAR_FRIENDSHIP_STEP_COUNT           0x4021
 
 // Maybe unused?
-#define VAR_ICE_STEP_COUNT                  0x4022
+#define VAR_0x4022                          0x4022
 
 // Step counter. Caps at 1500. If you enter a map with
 // renewable hidden items and this counter is capped,
@@ -89,7 +89,7 @@
 
 #define VAR_0x402F                         0x402F
 
-#define VAR_0x4030                         0x4030
+#define VAR_ICE_STEP_COUNT                 0x4030
 #define VAR_STARTER_MON                    0x4031
 #define VAR_0x4032                         0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
@@ -155,7 +155,7 @@
 #define VAR_MAP_SCENE_PEWTER_CITY                                              0x406C
 #define VAR_0x406D                                                             0x406D
 #define VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE                        0x406E
-#define VAR_0x406F                                                             0x406F
+#define VAR_CABLE_CLUB_STATE                                                    0x406F
 #define VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY                                    0x4070
 #define VAR_MAP_SCENE_CINNABAR_ISLAND                                          0x4071
 #define VAR_0x4072                                                             0x4072
@@ -303,7 +303,10 @@
 #define VAR_0x40FE                 0x40FE
 #define VAR_0x40FF                 0x40FF
 
-#define SPECIAL_VARS_START 0x8000
+#define VARS_END                   0x40FF
+
+#define SPECIAL_VARS_START         0x8000
+
 #define VAR_0x8000                 0x8000
 #define VAR_0x8001                 0x8001
 #define VAR_0x8002                 0x8002
@@ -325,5 +328,7 @@
 #define VAR_MON_BOX_ID             0x8012
 #define VAR_MON_BOX_POS            0x8013
 #define VAR_TEXT_COLOR             0x8014
+
+#define SPECIAL_VARS_END           0x8014
 
 #endif // GUARD_CONSTANTS_VARS_H

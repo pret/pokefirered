@@ -140,7 +140,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_1BE8DB",
+      "script": "SilphCo_7F_EventScript_ItemCalcium",
       "flag": "FLAG_HIDE_SILPH_CO_7F_CALCIUM"
     },
     {
@@ -153,7 +153,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_1BE8E8",
+      "script": "SilphCo_7F_EventScript_ItemTM08",
       "flag": "FLAG_HIDE_SILPH_CO_7F_TM08"
     }
   ],
@@ -227,84 +227,84 @@
       "x": 11,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A1F"
+      "script": "SilphCo_7F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 24,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 24,
       "y": 8,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A39"
+      "script": "SilphCo_7F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_1A8A53"
+      "script": "SilphCo_7F_EventScript_Door3"
     },
     {
       "type": "hidden_item",

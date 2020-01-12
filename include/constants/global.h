@@ -7,24 +7,19 @@
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-enum
-{
-    VERSION_SAPPHIRE = 1,
-    VERSION_RUBY = 2,
-    VERSION_EMERALD = 3,
-    VERSION_FIRE_RED = 4,
-    VERSION_LEAF_GREEN = 5,
-};
+#define VERSION_SAPPHIRE    1
+#define VERSION_RUBY        2
+#define VERSION_EMERALD     3
+#define VERSION_FIRE_RED    4
+#define VERSION_LEAF_GREEN  5
 
-enum LanguageId {
-    LANGUAGE_JAPANESE = 1,
-    LANGUAGE_ENGLISH = 2,
-    LANGUAGE_FRENCH = 3,
-    LANGUAGE_ITALIAN = 4,
-    LANGUAGE_GERMAN = 5,
+#define LANGUAGE_JAPANESE   1
+#define LANGUAGE_ENGLISH    2
+#define LANGUAGE_FRENCH     3
+#define LANGUAGE_ITALIAN    4
+#define LANGUAGE_GERMAN     5
     // 6 goes unused but the theory is it was meant to be Korean
-	LANGUAGE_SPANISH = 7,
-};
+#define LANGUAGE_SPANISH    7
 
 #ifdef ENGLISH
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -37,49 +32,38 @@ enum LanguageId {
 #define BAG_TMHM_COUNT      58
 #define BAG_BERRIES_COUNT   43
 
-enum
-{
-    MALE,
-    FEMALE
-};
+#define MALE   0
+#define FEMALE 1
 
-enum
-{
-    OPTIONS_BUTTON_MODE_HELP,
-    OPTIONS_BUTTON_MODE_LR,
-    OPTIONS_BUTTON_MODE_L_EQUALS_A
-};
+#define OPTIONS_BUTTON_MODE_HELP         0
+#define OPTIONS_BUTTON_MODE_LR           1
+#define OPTIONS_BUTTON_MODE_L_EQUALS_A   2
 
-enum
-{
-    OPTIONS_TEXT_SPEED_SLOW,
-    OPTIONS_TEXT_SPEED_MID,
-    OPTIONS_TEXT_SPEED_FAST
-};
+#define OPTIONS_TEXT_SPEED_SLOW  0
+#define OPTIONS_TEXT_SPEED_MID   1
+#define OPTIONS_TEXT_SPEED_FAST  2
 
-enum
-{
-    OPTIONS_SOUND_MONO,
-    OPTIONS_SOUND_STEREO
-};
+#define OPTIONS_SOUND_MONO    0
+#define OPTIONS_SOUND_STEREO  1
 
-enum
-{
-    OPTIONS_BATTLE_STYLE_SHIFT,
-    OPTIONS_BATTLE_STYLE_SET
-};
+#define OPTIONS_BATTLE_STYLE_SHIFT  0
+#define OPTIONS_BATTLE_STYLE_SET    1
 
-enum
-{
-    POCKET_ITEMS = 1,
-    POCKET_KEY_ITEMS,
-    POCKET_POKE_BALLS,
-    POCKET_TM_CASE,
-    POCKET_BERRY_POUCH,
-};
+#define POCKET_ITEMS        1
+#define POCKET_KEY_ITEMS    2
+#define POCKET_POKE_BALLS   3
+#define POCKET_TM_CASE      4
+#define POCKET_BERRY_POUCH  5
 
 #define NUM_BAG_POCKETS 5
 
-#define MULTI_PARTY_SIZE PARTY_SIZE / 2
+#define PARTY_SIZE 6
+#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
+
+#define DIR_NONE        0
+#define DIR_SOUTH       1
+#define DIR_NORTH       2
+#define DIR_WEST        3
+#define DIR_EAST        4
 
 #endif //GUARD_CONSTANTS_GLOBAL_H

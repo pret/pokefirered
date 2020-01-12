@@ -44,7 +44,7 @@ gUnknown_81756E2:: @ 81756E2
     .string "SILPH CO. will be associated with\n"
     .string "TEAM ROCKET!$"
 
-Text_175711:: @ 8175711
+Text_ThunderWaveTeach:: @ 8175711
     .string "Eeek!\n"
     .string "No! Stop! Help!\p"
     .string "Oh, you're not with TEAM ROCKET.\n"
@@ -52,15 +52,15 @@ Text_175711:: @ 8175711
     .string "Will you forgive me if I teach\n"
     .string "you the THUNDER WAVE technique?$"
 
-Text_17579D:: @ 817579D
+Text_ThunderWaveDeclined:: @ 817579D
     .string "Oh…\n"
     .string "But THUNDER WAVE is convenient…$"
 
-Text_1757C1:: @ 81757C1
+Text_ThunderWaveWhichMon:: @ 81757C1
     .string "Which POKéMON should I teach\n"
     .string "THUNDER WAVE?$"
 
-Text_1757EC:: @ 81757EC
+Text_ThunderWaveTaught:: @ 81757EC
     .string "THUNDER WAVE causes paralysis in\n"
     .string "the target POKéMON.\p"
     .string "A paralyzed POKéMON may be unable\n"

@@ -6453,7 +6453,7 @@ _08057E80:
 	bl sub_8057954
 	cmp r0, 0x1
 	bne _08057E96
-	ldr r0, _08057EA0 @ =gUnknown_81BB9FC
+	ldr r0, _08057EA0 @ =CableClub_EventScript_DoLinkRoomExit
 	bl ScriptContext1_SetupScript
 	ldr r0, _08057EA4 @ =sub_8057E6C
 	bl c1_link_related_func_set
@@ -6463,7 +6463,7 @@ _08057E96:
 	bx r1
 	.align 2, 0
 _08057E9C: .4byte gUnknown_3000E80
-_08057EA0: .4byte gUnknown_81BB9FC
+_08057EA0: .4byte CableClub_EventScript_DoLinkRoomExit
 _08057EA4: .4byte sub_8057E6C
 	thumb_func_end sub_8057E70
 
@@ -6798,7 +6798,7 @@ _08058074:
 	cmp r0, 0x80
 	beq _080580FC
 _080580E0:
-	ldr r0, _080580F8 @ =gUnknown_81BB9A3
+	ldr r0, _080580F8 @ =CableClub_EventScript_TooBusyToNotice
 	b _08058122
 	.align 2, 0
 _080580E4: .4byte gDirectionToVectors
@@ -6806,21 +6806,21 @@ _080580E8: .4byte 0xffff0000
 _080580EC: .4byte 0x0000ffff
 _080580F0: .4byte 0xffffff00
 _080580F4: .4byte gUnknown_3000E80
-_080580F8: .4byte gUnknown_81BB9A3
+_080580F8: .4byte CableClub_EventScript_TooBusyToNotice
 _080580FC:
 	adds r0, r2, 0
 	bl sub_8081A34
 	cmp r0, 0
 	bne _08058110
-	ldr r0, _0805810C @ =gUnknown_81BB981
+	ldr r0, _0805810C @ =CableClub_EventScript_ReadTrainerCard
 	b _08058122
 	.align 2, 0
-_0805810C: .4byte gUnknown_81BB981
+_0805810C: .4byte CableClub_EventScript_ReadTrainerCard
 _08058110:
-	ldr r0, _08058114 @ =gUnknown_81BB992
+	ldr r0, _08058114 @ =CableClub_EventScript_ReadTrainerCardColored
 	b _08058122
 	.align 2, 0
-_08058114: .4byte gUnknown_81BB992
+_08058114: .4byte CableClub_EventScript_ReadTrainerCardColored
 _08058118:
 	ldrb r1, [r4, 0xC]
 	ldrb r2, [r4, 0x3]
@@ -6837,62 +6837,62 @@ _08058122:
 sub_805812C: @ 805812C
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _08058178 @ =gUnknown_81BB8DB
+	ldr r0, _08058178 @ =BattleColosseum4P_EventScript_PlayerSpot0
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _0805817C @ =gUnknown_81BB8F8
+	ldr r0, _0805817C @ =BattleColosseum4P_EventScript_PlayerSpot1
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058180 @ =gUnknown_81BB915
+	ldr r0, _08058180 @ =BattleColosseum4P_EventScript_PlayerSpot2
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _08058184 @ =gUnknown_81BB932
+	ldr r0, _08058184 @ =BattleColosseum4P_EventScript_PlayerSpot3
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058188 @ =gUnknown_81BB980
+	ldr r0, _08058188 @ =RecordCenter_EventScript_Spot
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _0805818C @ =gUnknown_81BB980
+	ldr r0, _0805818C @ =RecordCenter_EventScript_Spot
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058190 @ =gUnknown_81BB980
+	ldr r0, _08058190 @ =RecordCenter_EventScript_Spot
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _08058194 @ =gUnknown_81BB980
+	ldr r0, _08058194 @ =RecordCenter_EventScript_Spot
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058198 @ =gUnknown_81BB8C3
+	ldr r0, _08058198 @ =BattleColosseum2P_EventScript_PlayerSpot0
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _0805819C @ =gUnknown_81BB8CF
+	ldr r0, _0805819C @ =BattleColosseum2P_EventScript_PlayerSpot1
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _080581A0 @ =gUnknown_81BB950
+	ldr r0, _080581A0 @ =TradeCenter_EventScript_Chair0
 	cmp r1, r0
 	bne _080581A4
 _08058172:
 	movs r0, 0xA
 	b _080581B6
 	.align 2, 0
-_08058178: .4byte gUnknown_81BB8DB
-_0805817C: .4byte gUnknown_81BB8F8
-_08058180: .4byte gUnknown_81BB915
-_08058184: .4byte gUnknown_81BB932
-_08058188: .4byte gUnknown_81BB980
-_0805818C: .4byte gUnknown_81BB980
-_08058190: .4byte gUnknown_81BB980
-_08058194: .4byte gUnknown_81BB980
-_08058198: .4byte gUnknown_81BB8C3
-_0805819C: .4byte gUnknown_81BB8CF
-_080581A0: .4byte gUnknown_81BB950
+_08058178: .4byte BattleColosseum4P_EventScript_PlayerSpot0
+_0805817C: .4byte BattleColosseum4P_EventScript_PlayerSpot1
+_08058180: .4byte BattleColosseum4P_EventScript_PlayerSpot2
+_08058184: .4byte BattleColosseum4P_EventScript_PlayerSpot3
+_08058188: .4byte RecordCenter_EventScript_Spot
+_0805818C: .4byte RecordCenter_EventScript_Spot
+_08058190: .4byte RecordCenter_EventScript_Spot
+_08058194: .4byte RecordCenter_EventScript_Spot
+_08058198: .4byte BattleColosseum2P_EventScript_PlayerSpot0
+_0805819C: .4byte BattleColosseum2P_EventScript_PlayerSpot1
+_080581A0: .4byte TradeCenter_EventScript_Chair0
 _080581A4:
-	ldr r0, _080581B0 @ =gUnknown_81BB95C
+	ldr r0, _080581B0 @ =TradeCenter_EventScript_Chair1
 	cmp r1, r0
 	beq _080581B4
 	movs r0, 0
 	b _080581B6
 	.align 2, 0
-_080581B0: .4byte gUnknown_81BB95C
+_080581B0: .4byte TradeCenter_EventScript_Chair1
 _080581B4:
 	movs r0, 0x9
 _080581B6:
@@ -6938,13 +6938,13 @@ sub_80581F8: @ 80581F8
 	push {lr}
 	movs r0, 0x6
 	bl PlaySE
-	ldr r0, _08058210 @ =gUnknown_81BB9D4
+	ldr r0, _08058210 @ =TradeCenter_ConfirmLeaveRoom
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058210: .4byte gUnknown_81BB9D4
+_08058210: .4byte TradeCenter_ConfirmLeaveRoom
 	thumb_func_end sub_80581F8
 
 	thumb_func_start sub_8058214
@@ -6964,13 +6964,13 @@ sub_8058214: @ 8058214
 	thumb_func_start sub_8058230
 sub_8058230: @ 8058230
 	push {lr}
-	ldr r0, _08058240 @ =EventScript_1BB9F0
+	ldr r0, _08058240 @ =TradeCenter_TerminateLink
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058240: .4byte EventScript_1BB9F0
+_08058240: .4byte TradeCenter_TerminateLink
 	thumb_func_end sub_8058230
 
 	thumb_func_start sub_8058244

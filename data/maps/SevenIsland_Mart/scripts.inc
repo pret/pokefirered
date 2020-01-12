@@ -3,14 +3,14 @@ SevenIsland_Mart_MapScripts:: @ 8170B30
 
 SevenIsland_Mart_EventScript_170B31:: @ 8170B31
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_1A7AE0
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_1A7AE0
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_170B58
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -30,13 +30,13 @@ Items_170B58:: @ 8170B58
 	end
 
 SevenIsland_Mart_EventScript_170B6E:: @ 8170B6E
-	msgbox gUnknown_81A0A4F, 2
+	msgbox gUnknown_81A0A4F, MSGBOX_NPC
 	end
 
 SevenIsland_Mart_EventScript_170B77:: @ 8170B77
-	msgbox gUnknown_81A0ACC, 2
+	msgbox gUnknown_81A0ACC, MSGBOX_NPC
 	end
 
 SevenIsland_Mart_EventScript_170B80:: @ 8170B80
-	msgbox gUnknown_81A0B09, 2
+	msgbox gUnknown_81A0B09, MSGBOX_NPC
 	end

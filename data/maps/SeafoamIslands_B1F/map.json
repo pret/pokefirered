@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B1F_EventScript_1BEBF4",
+      "script": "SeafoamIslands_B1F_EventScript_ItemWaterStone",
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B1F_WATER_STONE"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B1F_EventScript_1BEC01",
+      "script": "SeafoamIslands_B1F_EventScript_ItemRevive",
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B1F_REVIVE"
     }
   ],

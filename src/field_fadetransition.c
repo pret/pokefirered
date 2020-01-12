@@ -677,7 +677,7 @@ static void sub_807E678(u8 taskId)
     }
 }
 
-void sub_807E704(void)
+void ReturnFromLinkRoom(void)
 {
     CreateTask(sub_807E678, 10);
 }

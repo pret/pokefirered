@@ -1557,7 +1557,7 @@ gText_KeyItems:: @ 0x8417B17
 gText_PokeBalls:: @ 0x8417B21
 	.string "POKé BALLS$"
 
-gText_TmsgUnknown_8417B2CHms:: @ 0x8417B2C
+gText_TMsAndHMs:: @ 0x8417B2C
 	.string "TMs & HMs$"
 
 gText_Berries:: @ 0x8417B36

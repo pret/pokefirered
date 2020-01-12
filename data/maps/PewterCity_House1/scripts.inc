@@ -2,7 +2,7 @@ PewterCity_House1_MapScripts:: @ 816A71C
 	.byte 0
 
 PewterCity_House1_EventScript_16A71D:: @ 816A71D
-	msgbox gUnknown_81915DB, 2
+	msgbox gUnknown_81915DB, MSGBOX_NPC
 	end
 
 PewterCity_House1_EventScript_16A726:: @ 816A726
@@ -16,7 +16,7 @@ PewterCity_House1_EventScript_16A736:: @ 816A736
 	lock
 	faceplayer
 	call EventScript_16A749
-	applymovement 3, Movement_1A75E5
+	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -210,8 +210,8 @@ _08115A1C: .4byte gStringVar4
 _08115A20: .4byte gUnknown_8457234
 	thumb_func_end sub_811599C
 
-	thumb_func_start sub_8115A24
-sub_8115A24: @ 8115A24
+	thumb_func_start TryBecomeLinkLeader
+TryBecomeLinkLeader: @ 8115A24
 	push {lr}
 	ldr r0, _08115A54 @ =sub_8115A68
 	movs r1, 0
@@ -240,7 +240,7 @@ _08115A58: .4byte gUnknown_203B05C
 _08115A5C: .4byte gTasks+0x8
 _08115A60: .4byte gUnknown_3002024
 _08115A64: .4byte gSpecialVar_Result
-	thumb_func_end sub_8115A24
+	thumb_func_end TryBecomeLinkLeader
 
 	thumb_func_start sub_8115A68
 sub_8115A68: @ 8115A68
@@ -1747,8 +1747,8 @@ _081166E4:
 	bx r1
 	thumb_func_end sub_81165E8
 
-	thumb_func_start BerryBlenderLinkJoinGroup
-BerryBlenderLinkJoinGroup: @ 81166F4
+	thumb_func_start TryJoinLinkGroup
+TryJoinLinkGroup: @ 81166F4
 	push {lr}
 	ldr r0, _08116724 @ =sub_8116738
 	movs r1, 0
@@ -1777,7 +1777,7 @@ _08116728: .4byte gUnknown_203B05C
 _0811672C: .4byte gTasks+0x8
 _08116730: .4byte gUnknown_3002028
 _08116734: .4byte gSpecialVar_Result
-	thumb_func_end BerryBlenderLinkJoinGroup
+	thumb_func_end TryJoinLinkGroup
 
 	thumb_func_start sub_8116738
 sub_8116738: @ 8116738
@@ -7556,8 +7556,8 @@ _08119996:
 	bx r1
 	thumb_func_end sub_8119944
 
-	thumb_func_start sub_811999C
-sub_811999C: @ 811999C
+	thumb_func_start InitUnionRoom
+InitUnionRoom: @ 811999C
 	push {r4-r6,lr}
 	ldr r5, _081199E8 @ =gUnknown_203B04C
 	movs r0, 0x1
@@ -7600,7 +7600,7 @@ _081199EC: .4byte gUnknown_203ADFA
 _081199F0: .4byte sub_81199FC
 _081199F4: .4byte gUnknown_203B05C
 _081199F8: .4byte gUnknown_300202C
-	thumb_func_end sub_811999C
+	thumb_func_end InitUnionRoom
 
 	thumb_func_start sub_81199FC
 sub_81199FC: @ 81199FC
@@ -7763,8 +7763,8 @@ _08119B5C:
 _08119B64: .4byte gUnknown_203B05C
 	thumb_func_end sub_81199FC
 
-	thumb_func_start sp182_move_string
-sp182_move_string: @ 8119B68
+	thumb_func_start BufferUnionRoomPlayerName
+BufferUnionRoomPlayerName: @ 8119B68
 	push {r4,lr}
 	ldr r4, _08119B78 @ =gUnknown_203B04C
 	ldrb r0, [r4]
@@ -7787,7 +7787,7 @@ _08119B8A:
 	bx r1
 	.align 2, 0
 _08119B90: .4byte gStringVar1
-	thumb_func_end sp182_move_string
+	thumb_func_end BufferUnionRoomPlayerName
 
 	thumb_func_start sub_8119B94
 sub_8119B94: @ 8119B94
@@ -10685,8 +10685,8 @@ sub_811B148: @ 811B148
 	bx lr
 	thumb_func_end sub_811B148
 
-	thumb_func_start sub_811B15C
-sub_811B15C: @ 811B15C
+	thumb_func_start Script_ResetUnionRoomTrade
+Script_ResetUnionRoomTrade: @ 811B15C
 	push {lr}
 	ldr r0, _0811B168 @ =gUnknown_203B06C
 	bl sub_811B148
@@ -10694,7 +10694,7 @@ sub_811B15C: @ 811B15C
 	bx r0
 	.align 2, 0
 _0811B168: .4byte gUnknown_203B06C
-	thumb_func_end sub_811B15C
+	thumb_func_end Script_ResetUnionRoomTrade
 
 	thumb_func_start sub_811B16C
 sub_811B16C: @ 811B16C

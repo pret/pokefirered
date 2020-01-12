@@ -1,18 +1,17 @@
 FiveIsland_LostCave_Room10_MapScripts:: @ 8164C2D
-	map_script 5, FiveIsland_LostCave_Room10_MapScript1_164C38
-	map_script 2, FiveIsland_LostCave_Room10_MapScript2_164C48
+	map_script MAP_SCRIPT_ON_RESUME, FiveIsland_LostCave_Room10_OnResume
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_LostCave_Room10_OnFrame
 	.byte 0
 
-FiveIsland_LostCave_Room10_MapScript1_164C38:: @ 8164C38
-	checktrainerflag TRAINER_LADY_SELPHY
-	call_if eq, EventScript_164C42
+FiveIsland_LostCave_Room10_OnResume:: @ 8164C38
+	call_if_defeated TRAINER_LADY_SELPHY, EventScript_164C42
 	end
 
 EventScript_164C42:: @ 8164C42
 	setvar VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10, 1
 	return
 
-FiveIsland_LostCave_Room10_MapScript2_164C48:: @ 8164C48
+FiveIsland_LostCave_Room10_OnFrame:: @ 8164C48
 	map_script_2 VAR_MAP_SCENE_FIVE_ISLAND_LOST_CAVE_ROOM10, 0, EventScript_164C52
 	.2byte 0
 
@@ -26,9 +25,9 @@ EventScript_164C52:: @ 8164C52
 	waitmovement 0
 	msgbox gUnknown_817D062
 	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if eq, EventScript_164CB6
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, TRAINER_LADY_SELPHY, 0, Text_17D086
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_164CB6
+	trainerbattle_no_intro TRAINER_LADY_SELPHY, Text_17D086
 	msgbox gUnknown_817D0B2
 	closemessage
 	call EventScript_164CA5
@@ -51,16 +50,16 @@ EventScript_164CB6:: @ 8164CB6
 	end
 
 Movement_164CC0:: @ 8164CC0
-	step_12
-	step_1c
-	step_13
-	step_1c
-	step_2e
-	step_1c
-	step_2d
+	walk_left
+	delay_16
+	walk_right
+	delay_16
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
 Movement_164CC8:: @ 8164CC8
-	step_10
-	step_10
+	walk_down
+	walk_down
 	step_end

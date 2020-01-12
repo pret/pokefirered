@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_4F_EventScript_1BE873",
+      "script": "SilphCo_4F_EventScript_ItemMaxRevive",
       "flag": "FLAG_HIDE_SILPH_CO_4F_MAX_REVIVE"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_4F_EventScript_1BE880",
+      "script": "SilphCo_4F_EventScript_ItemEscapeRope",
       "flag": "FLAG_HIDE_SILPH_CO_4F_ESCAPE_ROPE"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_4F_EventScript_1BE88D",
+      "script": "SilphCo_4F_EventScript_ItemFullHeal",
       "flag": "FLAG_HIDE_SILPH_CO_4F_FULL_HEAL"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_4F_EventScript_1BEE09",
+      "script": "SilphCo_4F_EventScript_ItemTM41",
       "flag": "FLAG_HIDE_SILPH_CO_4F_TM41"
     }
   ],
@@ -176,56 +176,56 @@
       "x": 3,
       "y": 16,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A8983"
+      "script": "SilphCo_4F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 16,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A8983"
+      "script": "SilphCo_4F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 17,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A8983"
+      "script": "SilphCo_4F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 17,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A8983"
+      "script": "SilphCo_4F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A899D"
+      "script": "SilphCo_4F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 14,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A899D"
+      "script": "SilphCo_4F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 14,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A899D"
+      "script": "SilphCo_4F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_4F_EventScript_1A899D"
+      "script": "SilphCo_4F_EventScript_Door2"
     },
     {
       "type": "hidden_item",

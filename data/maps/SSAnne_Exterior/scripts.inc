@@ -1,29 +1,29 @@
 SSAnne_Exterior_MapScripts:: @ 8160840
-	map_script 3, SSAnne_Exterior_MapScript1_16084B
-	map_script 2, SSAnne_Exterior_MapScript2_16084F
+	map_script MAP_SCRIPT_ON_TRANSITION, SSAnne_Exterior_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSAnne_Exterior_OnFrame
 	.byte 0
 
-SSAnne_Exterior_MapScript1_16084B:: @ 816084B
+SSAnne_Exterior_OnTransition:: @ 816084B
 	setworldmapflag FLAG_WORLD_MAP_SSANNE_EXTERIOR
 	end
 
-SSAnne_Exterior_MapScript2_16084F:: @ 816084F
+SSAnne_Exterior_OnFrame:: @ 816084F
 	map_script_2 VAR_MAP_SCENE_VERMILION_CITY, 1, SSAnne_Exterior_160859
 	.2byte 0
 
 SSAnne_Exterior_160859:: @ 8160859
 	lockall
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8005, 6
-	call_if le, EventScript_1608A1
-	compare_var_to_value VAR_0x8005, 7
-	call_if ge, EventScript_1608AC
+	compare VAR_0x8005, 6
+	call_if_le EventScript_1608A1
+	compare VAR_0x8005, 7
+	call_if_ge EventScript_1608AC
 	fadenewbgm MUS_NAMINORI
 	delay 50
 	special Special_SSAnneDepartureCutscene
 	waitstate
 	removeobject 1
-	applymovement 255, Movement_1608B7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1608B7
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 2
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
@@ -33,35 +33,35 @@ SSAnne_Exterior_160859:: @ 8160859
 	end
 
 EventScript_1608A1:: @ 81608A1
-	applymovement 255, Movement_1608C1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_1608C1
 	waitmovement 0
 	return
 
 EventScript_1608AC:: @ 81608AC
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	return
 
 Movement_1608B7:: @ 81608B7
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 Movement_1608C1:: @ 81608C1
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end

@@ -104,12 +104,12 @@ void sub_80696F0(void)
     UnfreezeObjectEvents();
 }
 
-void sub_8069740(void)
+void Script_FacePlayer(void)
 {
     ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent], gSpecialVar_Facing);
 }
 
-void sub_8069768(void)
+void Script_ClearHeldMovement(void)
 {
     ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[gSelectedObjectEvent]);
 }

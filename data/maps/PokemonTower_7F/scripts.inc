@@ -16,20 +16,20 @@ PokemonTower_7F_EventScript_16355A:: @ 816355A
 	end
 
 PokemonTower_7F_EventScript_163586:: @ 8163586
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_19, 0, Text_17A380, Text_17A3A4, EventScript_1635A1
-	msgbox gUnknown_817A3AF, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_19, Text_17A380, Text_17A3A4, EventScript_1635A1
+	msgbox gUnknown_817A3AF, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_1635A1:: @ 81635A1
 	msgbox gUnknown_817A3AF
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 10
-	goto_if eq, EventScript_1635E0
-	compare_var_to_value VAR_0x8004, 11
-	goto_if eq, EventScript_1635F0
-	compare_var_to_value VAR_0x8004, 9
-	goto_if eq, EventScript_163600
+	compare VAR_0x8004, 10
+	goto_if_eq EventScript_1635E0
+	compare VAR_0x8004, 11
+	goto_if_eq EventScript_1635F0
+	compare VAR_0x8004, 9
+	goto_if_eq EventScript_163600
 	applymovement 2, Movement_16362C
 	waitmovement 0
 	goto EventScript_163616
@@ -61,50 +61,50 @@ EventScript_163616:: @ 8163616
 	end
 
 Movement_16361B:: @ 816361B
-	step_10
-	step_13
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_163624:: @ 8163624
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_16362C:: @ 816362C
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_163633:: @ 8163633
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
-	step_10
-	step_2f
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
 PokemonTower_7F_EventScript_16363D:: @ 816363D
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_20, 0, Text_17A3CD, Text_17A466, EventScript_163658
-	msgbox gUnknown_817A477, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_20, Text_17A3CD, Text_17A466, EventScript_163658
+	msgbox gUnknown_817A477, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_163658:: @ 8163658
@@ -112,10 +112,10 @@ EventScript_163658:: @ 8163658
 	msgbox gUnknown_817A477
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 12
-	goto_if eq, EventScript_163699
-	compare_var_to_value VAR_0x8004, 13
-	goto_if eq, EventScript_1636A9
+	compare VAR_0x8004, 12
+	goto_if_eq EventScript_163699
+	compare VAR_0x8004, 13
+	goto_if_eq EventScript_1636A9
 	applymovement 3, Movement_1636C6
 	waitmovement 0
 	goto EventScript_1636B9
@@ -139,48 +139,48 @@ EventScript_1636B9:: @ 81636B9
 	end
 
 Movement_1636BE:: @ 81636BE
-	step_10
-	step_10
-	step_10
-	step_12
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1636C6:: @ 81636C6
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_1636CD:: @ 81636CD
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 PokemonTower_7F_EventScript_1636D6:: @ 81636D6
-	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_TEAM_ROCKET_GRUNT_21, 0, Text_17A4CF, Text_17A4EE, EventScript_1636F1
-	msgbox gUnknown_817A506, 6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_21, Text_17A4CF, Text_17A4EE, EventScript_1636F1
+	msgbox gUnknown_817A506, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_1636F1:: @ 81636F1
 	msgbox gUnknown_817A506
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
-	compare_var_to_value VAR_0x8004, 10
-	goto_if eq, EventScript_163725
-	compare_var_to_value VAR_0x8004, 9
-	goto_if eq, EventScript_163735
+	compare VAR_0x8004, 10
+	goto_if_eq EventScript_163725
+	compare VAR_0x8004, 9
+	goto_if_eq EventScript_163735
 	applymovement 4, Movement_163754
 	waitmovement 0
 	goto EventScript_163745
@@ -208,31 +208,31 @@ EventScript_16374A:: @ 816374A
 	end
 
 Movement_16374C:: @ 816374C
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_13
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_down
 	step_end
 
 Movement_163754:: @ 8163754
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
 Movement_16375B:: @ 816375B
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end

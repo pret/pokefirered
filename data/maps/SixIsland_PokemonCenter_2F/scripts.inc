@@ -1,18 +1,19 @@
 SixIsland_PokemonCenter_2F_MapScripts:: @ 8171E20
-	map_script 2, SixIsland_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, SixIsland_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, SixIsland_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, SixIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-SixIsland_PokemonCenter_2F_EventScript_171E35:: @ 8171E35
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+SixIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 8171E35
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_171E3B:: @ 8171E3B
-	call EventScript_1BB6AB
+SixIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 8171E3B
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_171E41:: @ 8171E41
-	call EventScript_1BB7DE
+SixIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 8171E41
+	call CableClub_EventScript_RecordCorner
 	end

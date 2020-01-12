@@ -6,7 +6,7 @@ ViridianCity_House2_EventScript_16A07D:: @ 816A07D
 	faceplayer
 	msgbox gUnknown_818FC00
 	closemessage
-	applymovement 2, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	release
 	end
@@ -16,7 +16,7 @@ ViridianCity_House2_EventScript_16A094:: @ 816A094
 	faceplayer
 	msgbox gUnknown_818FC2B
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -25,18 +25,18 @@ ViridianCity_House2_EventScript_16A0AB:: @ 816A0AB
 	lockall
 	msgbox gUnknown_818FC65
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16A11B
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FD23
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16A11B
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FDA8
 	msgbox gUnknown_818FF19, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if eq, EventScript_16A11B
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_16A11B
 	msgbox gUnknown_818FE5C
-	applymovement 2, Movement_1A75E9
+	applymovement 2, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	textcolor 1
 	msgbox gUnknown_818FF28

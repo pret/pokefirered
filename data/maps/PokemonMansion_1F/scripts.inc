@@ -1,14 +1,13 @@
 PokemonMansion_1F_MapScripts:: @ 81621F9
-	map_script 1, PokemonMansion_1F_MapScript1_162204
-	map_script 3, PokemonMansion_1F_MapScript2_16220E
+	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_1F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonMansion_1F_OnTransition
 	.byte 0
 
-PokemonMansion_1F_MapScript1_162204:: @ 8162204
-	checkflag FLAG_POKEMON_MANSION_SWITCH_STATE
-	call_if TRUE, EventScript_1A7B7A
+PokemonMansion_1F_OnLoad:: @ 8162204
+	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, EventScript_1A7B7A
 	end
 
-PokemonMansion_1F_MapScript2_16220E:: @ 816220E
+PokemonMansion_1F_OnTransition:: @ 816220E
 	setworldmapflag FLAG_WORLD_MAP_POKEMON_MANSION_1F
 	end
 
@@ -23,11 +22,11 @@ PokemonMansion_1F_EventScript_162212:: @ 8162212
 	end
 
 PokemonMansion_1F_EventScript_162226:: @ 8162226
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_SCIENTIST_TED, 0, Text_177364, Text_177391
-	msgbox gUnknown_8177397, 6
+	trainerbattle_single TRAINER_SCIENTIST_TED, Text_177364, Text_177391
+	msgbox gUnknown_8177397, MSGBOX_AUTOCLOSE
 	end
 
 PokemonMansion_1F_EventScript_16223D:: @ 816223D
-	trainerbattle TRAINER_BATTLE_SINGLE, TRAINER_YOUNGSTER_JOHNSON, 0, Text_1773C6, Text_1773FD
-	msgbox gUnknown_8177418, 6
+	trainerbattle_single TRAINER_YOUNGSTER_JOHNSON, Text_1773C6, Text_1773FD
+	msgbox gUnknown_8177418, MSGBOX_AUTOCLOSE
 	end

@@ -637,7 +637,6 @@ void sub_810C444(void)
     }
 }
 
-#ifdef NONMATCHING
 bool8 sub_810C4EC(void)
 {
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
@@ -648,18 +647,18 @@ bool8 sub_810C4EC(void)
 
     if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
-        u16 x;
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
+        u8 x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
+        u32 r4 = 0xFF;
+
         if (x < 100)
         {
             x++;
-            gSaveBlock1Ptr->trainerRematchStepCounter = ((u16)(x << 8)) | (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF);
+        #ifndef NONMATCHING // fool the compiler that r4 has been changed
+            asm("":"=r"(r4));
+        #endif
+            gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);
         }
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
+        x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & r4;
         if (x == 100)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
@@ -671,80 +670,6 @@ bool8 sub_810C4EC(void)
 
     return FALSE;
 }
-#else
-NAKED
-bool8 sub_810C4EC(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmovs r0, 0xB5\n"
-                "\tlsls r0, 1\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl CheckBagHasItem\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0810C516\n"
-                "\tldr r0, _0810C568 @ =gSaveBlock1Ptr\n"
-                "\tldr r0, [r0]\n"
-                "\tmovs r2, 0xC7\n"
-                "\tlsls r2, 3\n"
-                "\tadds r1, r0, r2\n"
-                "\tldrh r2, [r1]\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0x63\n"
-                "\tbhi _0810C516\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "_0810C516:\n"
-                "\tldr r7, _0810C56C @ =0x00000801\n"
-                "\tadds r0, r7, 0\n"
-                "\tbl FlagGet\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0810C570\n"
-                "\tldr r6, _0810C568 @ =gSaveBlock1Ptr\n"
-                "\tldr r0, [r6]\n"
-                "\tmovs r5, 0xC7\n"
-                "\tlsls r5, 3\n"
-                "\tadds r3, r0, r5\n"
-                "\tldrh r2, [r3]\n"
-                "\tlsrs r1, r2, 8\n"
-                "\tmovs r4, 0xFF\n"
-                "\tcmp r1, 0x63\n"
-                "\tbhi _0810C548\n"
-                "\tadds r1, 0x1\n"
-                "\tlsls r1, 24\n"
-                "\tmovs r0, 0xFF\n"
-                "\tands r0, r2\n"
-                "\tlsrs r1, 16\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r3]\n"
-                "_0810C548:\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldrh r0, [r0]\n"
-                "\tlsrs r0, 8\n"
-                "\tands r0, r4\n"
-                "\tcmp r0, 0x64\n"
-                "\tbne _0810C570\n"
-                "\tadds r0, r7, 0\n"
-                "\tbl FlagClear\n"
-                "\tbl sub_810C640\n"
-                "\tbl sub_810D0D0\n"
-                "\tmovs r0, 0x1\n"
-                "\tb _0810C572\n"
-                "\t.align 2, 0\n"
-                "_0810C568: .4byte gSaveBlock1Ptr\n"
-                "_0810C56C: .4byte 0x00000801\n"
-                "_0810C570:\n"
-                "\tmovs r0, 0\n"
-                "_0810C572:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
 
 void sub_810C578(void)
 {

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "event_data.h"
 #include "credits.h"
 #include "overworld.h"
@@ -14,7 +14,7 @@ bool8 Special_HallOfFame(void)
     bool8 *r7;
     int i;
     bool8 gaveAtLeastOneRibbon;
-    sp000_heal_pokemon();
+    HealPlayerParty();
     if (FlagGet(FLAG_SYS_GAME_CLEAR) == TRUE)
     {
         gHasHallOfFameRecords = TRUE;

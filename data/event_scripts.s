@@ -871,7 +871,7 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F20
-	special CheckForAlivePartyMons
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4F19
 	special PlayTrainerEncounterMusic
@@ -923,7 +923,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerEyeRematchFlag
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1A4FB0
-	special CheckForAlivePartyMons
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1A4FB1
 	special PlayTrainerEncounterMusic
@@ -1617,7 +1617,7 @@ EventScript_1A65CE:: @ 81A65CE
 	waitfieldeffect 25
 	applymovement VAR_LAST_TALKED, Movement_1A75ED
 	waitmovement 0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	return
 
 EventScript_1A65EC:: @ 81A65EC
@@ -2161,7 +2161,7 @@ EventScript_FadeOut_Heal_FadeIn:: @ 81A6C26
 	fadescreen 1
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen 0
 	return
 
@@ -8644,7 +8644,7 @@ EventScript_1BB519:: @ 81BB519
 	end
 
 EventScript_1BB51A:: @ 81BB51A
-	special CheckForAlivePartyMons
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1BB533
 	setvar VAR_0x8004, 2
@@ -8693,7 +8693,7 @@ EventScript_1BB54C:: @ 81BB54C
 	end
 
 EventScript_1BB5B3:: @ 81BB5B3
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	special SavePlayerParty
 	special LoadPlayerBag
 	copyvar VAR_0x406F, VAR_0x8004
@@ -9019,7 +9019,7 @@ UnknownMap_00_00_EventScript_1BB8CF:: @ 81BB8CF
 gUnknown_81BB8DB:: @ 81BB8DB
 UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
 	fadescreen 1
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
@@ -9032,7 +9032,7 @@ UnknownMap_00_03_EventScript_1BB8DB:: @ 81BB8DB
 gUnknown_81BB8F8:: @ 81BB8F8
 UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
 	fadescreen 1
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
@@ -9045,7 +9045,7 @@ UnknownMap_00_03_EventScript_1BB8F8:: @ 81BB8F8
 gUnknown_81BB915:: @ 81BB915
 UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
 	fadescreen 1
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
@@ -9058,7 +9058,7 @@ UnknownMap_00_03_EventScript_1BB915:: @ 81BB915
 gUnknown_81BB932:: @ 81BB932
 UnknownMap_00_03_EventScript_1BB932:: @ 81BB932
 	fadescreen 1
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	compare_var_to_value VAR_RESULT, 0
 	goto_if eq, EventScript_1BB94F
@@ -9217,7 +9217,7 @@ EventScript_1BBA94:: @ 81BBA94
 	goto_if eq, EventScript_1BB82F
 	msgbox gUnknown_81BD86A
 	closemessage
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 6
 	copyvar VAR_0x406F, VAR_0x8004
 	special HelpSystem_Disable
@@ -9368,7 +9368,7 @@ EventScript_1BBCF4:: @ 81BBCF4
 	end
 
 EventScript_1BBCF5:: @ 81BBCF5
-	special CheckForAlivePartyMons
+	special HasEnoughMonsForDoubleBattle
 	compare_var_to_value VAR_RESULT, 0
 	goto_if ne, EventScript_1BBD0E
 	setvar VAR_0x8004, 1
@@ -14241,7 +14241,7 @@ EventScript_1C52D7:
 	end
 
 EventScript_1C52E0:: @ 81C52E0
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	setvar VAR_0x8004, 11
 	special sub_815D9E8
 	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7

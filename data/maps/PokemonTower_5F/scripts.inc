@@ -8,7 +8,7 @@ PokemonTower_5F_EventScript_163433:: @ 8163433
 PokemonTower_5F_EventScript_16343C:: @ 816343C
 	lockall
 	fadescreen 3
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	fadescreen 2
 	msgbox gUnknown_817A1FA
 	setvar VAR_0x4001, 1

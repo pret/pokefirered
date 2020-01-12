@@ -196,7 +196,7 @@ EventScript_164A53:: @ 8164A53
 EventScript_164AA0:: @ 8164AA0
 	copyvar VAR_0x8005, VAR_RESULT
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 1
-	special sp000_heal_pokemon
+	special HealPlayerParty
 	msgbox gUnknown_817C8BF
 	setvar VAR_0x8004, 6
 	special sub_815D9E8

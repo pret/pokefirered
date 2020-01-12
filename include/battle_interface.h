@@ -79,8 +79,8 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 s32 sub_8074AA0(u8 bank, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
-void sub_80496C0(u8 spriteId, struct Pokemon *mon);
-void sub_804981C(u8 spriteId, u8);
+void UpdateNickInHealthbox(u8 spriteId, struct Pokemon *mon);
+void TryAddPokeballIconToHealthbox(u8 spriteId, u8);
 s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 
 #endif // GUARD_BATTLE_INTERFACE_H

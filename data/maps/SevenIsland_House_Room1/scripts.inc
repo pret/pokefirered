@@ -128,7 +128,7 @@ EventScript_170A11:: @ 8170A11
 EventScript_170A1E:: @ 8170A1E
 	msgbox gUnknown_81A06AB
 	fadescreen 1
-	special sub_80A0334
+	special ChooseHalfPartyForBattle
 	waitstate
 	return
 

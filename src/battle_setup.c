@@ -9,7 +9,7 @@
 #include "safari_zone.h"
 #include "quest_log.h"
 #include "script.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "strings.h"
 #include "string_util.h"
 #include "event_data.h"
@@ -901,7 +901,7 @@ static void CB2_EndTrainerBattle(void)
             gSpecialVar_Result = 1;
             if (gUnknown_20386CC & 1)
             {
-                sp000_heal_pokemon();
+                HealPlayerParty();
             }
             else
             {

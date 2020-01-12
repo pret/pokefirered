@@ -27,7 +27,7 @@
 #include "data.h"
 #include "field_specials.h"
 #include "constants/items.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "pokemon_storage_system.h"
 #include "party_menu.h"
 #include "money.h"

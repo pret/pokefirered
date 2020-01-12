@@ -9,7 +9,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokedex.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "constants/items.h"
 #include "constants/species.h"
 
@@ -63,8 +63,8 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
 
     switch(sentToPc)
     {
-    case 0:
-    case 1:
+    case MON_GIVEN_TO_PARTY:
+    case MON_GIVEN_TO_PC:
         GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
         GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
         break;

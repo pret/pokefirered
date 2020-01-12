@@ -1,5 +1,5 @@
 #include "global.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "event_data.h"
 #include "credits.h"
 #include "overworld.h"

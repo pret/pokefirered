@@ -675,7 +675,6 @@ BattleColosseum4P_EventScript_PlayerSpot3:: @ 81BB932
 BattleColosseum4P_EventScript_CancelSpotTrigger:: @ 81BB94F
 	end
 
-gUnknown_81BB950:: @ 81BB950
 TradeCenter_EventScript_Chair0:: @ 81BB950
 	setvar VAR_0x8005, 0
 	textcolor 3

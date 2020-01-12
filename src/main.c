@@ -1,4 +1,9 @@
 #include "global.h"
+#include "bg.h"
+#include "gpu_regs.h"
+#include "link.h"
+#include "link_rfu.h"
+#include "load_save.h"
 #include "main.h"
 #include "m4a.h"
 #include "random.h"
@@ -6,48 +11,20 @@
 #include "gba/flash_internal.h"
 #include "battle.h"
 #include "help_system.h"
+#include "sound.h"
+#include "new_menu_helpers.h"
+#include "malloc.h"
+#include "overworld.h"
+#include "sprite.h"
+#include "play_time.h"
+#include "pokemon.h"
+#include "intro.h"
+#include "battle_controllers.h"
+#include "scanline_effect.h"
+#include "save_failed_screen.h"
+#include "battle.h"
 
-extern u16 GetGpuReg(u8);
-extern void SetGpuReg(u8, u16);
-extern void RFUVSync(void);
-extern void LinkVSync(void);
-extern void sub_80FCF34(void);
-extern void LinkVSync(void);
-extern void InitGpuRegManager(void);
-extern void InitRFU(void);
-extern void CheckForFlashMemory(void);
-extern void InitMapMusic(void);
-extern void ResetBgs(void);
-extern void SetDefaultFontsPointer(void);
-extern void InitHeap(void *heapStart, u32 heapSize); // malloc.h
-extern void rfu_REQ_stopMode(void);
-extern void rfu_waitREQComplete(void);
-extern bool32 sub_80582E0(void);
-extern bool32 sub_8058274(void);
-extern void ClearSpriteCopyRequests(void);
-extern void PlayTimeCounter_Update(void);
-extern void MapMusicMain(void);
-extern void EnableInterrupts(u16);
-extern void sub_800DD28(void);
-extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-extern void ScanlineEffect_Stop(void);
-extern void sub_80F50F4(void);
-extern bool32 sub_80F5118(void);
-
-extern struct SoundInfo gSoundInfo;
-extern u32 gFlashMemoryPresent;
 extern u32 intr_main[];
-extern u8 gHeap[];
-extern struct SaveBlock1 gSaveBlock1;
-extern struct SaveBlock2 gSaveBlock2;
-extern struct PokemonStorage gPokemonStorage;
-extern u32 gBattleTypeFlags;
-extern u8 gUnknown_03002748;
-extern u32 *gUnknown_0203CF5C;
-
-void Timer3Intr(void);
-bool8 HandleLinkConnection(void);
-void c2_copyright_1(void);
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);

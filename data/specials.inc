@@ -227,11 +227,11 @@ gSpecials:: @ 815FD60
 	def_special Special_GetElevatorFloor
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special SelectMoveTutorMon
-	def_special SelectMove
-	def_special DeleteMonMove
-	def_special ScrSpecial_GetPokemonNicknameAndMoveName
-	def_special ScrSpecial_CountPokemonMoves
+	def_special Special_SelectMoveTutorMon
+	def_special Special_SelectMove
+	def_special Special_MoveDeleterForgetMove
+	def_special Special_BufferMoveDeleterNicknameAndMove
+	def_special Special_GetNumMovesSelectedMonHas
 	def_special DisplayMoveTutorMenu
 	def_special nullsub_75
 	def_special nullsub_75
@@ -336,7 +336,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special Special_GetSpeciesOfPartySlot_x8004
-	def_special IsSelectedMonEgg
+	def_special Special_IsSelectedMonEgg
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special LoadPlayerBag

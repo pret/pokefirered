@@ -148,7 +148,7 @@ SECTIONS {
         src/script_pokemon_util_80A0058.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
-        asm/pc_screen_effect.o(.text);
+        src/pc_screen_effect.o(.text);
         src/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
         src/field_special_scene.o(.text);
@@ -178,7 +178,7 @@ SECTIONS {
         src/mon_markings.o(.text);
         src/mail.o(.text);
         src/menu_helpers.o(.text);
-        asm/script_pokemon_util_80BF8FC.o(.text);
+        src/party_menu_specials.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
         src/image_processing_effects.o(.text);
@@ -320,7 +320,7 @@ SECTIONS {
         src/librfu_stwi.o(.text);
         asm/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
-        src/librfu_s32id.o(.text);
+        src/librfu_sio32id.o(.text);
         src/isagbprn.o(.text);
         asm/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
@@ -941,7 +941,7 @@ SECTIONS {
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
         src/librfu_rfu.o(.rodata);
-        src/librfu_s32id.o(.rodata);
+        src/librfu_sio32id.o(.rodata);
         src/isagbprn.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);

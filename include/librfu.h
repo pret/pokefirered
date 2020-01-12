@@ -490,7 +490,7 @@ struct RfuStatic
     u32 totalPacketSize;
 };
 
-struct RfuS32Id
+struct RfuSIO32Id
 {
     u8 unk0;
     u8 unk1;
@@ -517,7 +517,7 @@ extern struct RfuStatic *gRfuStatic;
 extern struct RfuFixed *gRfuFixed;
 extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
-extern struct RfuS32Id gRfuS32Id;
+extern struct RfuSIO32Id gRfuSIO32Id;
 
 // librfu_s32id
 s32 AgbRFU_checkID(u8);

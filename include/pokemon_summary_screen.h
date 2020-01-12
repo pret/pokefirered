@@ -34,5 +34,6 @@ enum PokemonSummaryScreenPage
 
 s32 GetLastViewedMonIndex(void);
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
+void sub_8138B38(u8);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

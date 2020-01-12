@@ -39,7 +39,7 @@ struct TestingBar
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
     // These are indexes into the tables, which are filled with 8x8 square pixel data.
-        HEALTHBOX_GFX_0, //hp bar [black section]
+    HEALTHBOX_GFX_0, //hp bar [black section]
     HEALTHBOX_GFX_1, //hp bar "H"
     HEALTHBOX_GFX_2, //hp bar "P"
     HEALTHBOX_GFX_HP_BAR_GREEN, //hp bar [0 pixels]
@@ -526,13 +526,13 @@ u8 CreateBattlerHealthboxSprites(u8 a)
 
     if (!IsDoubleBattle())
     {
-        if (GetBattlerSide(a) == 0)
+        if (GetBattlerSide(a) == B_SIDE_PLAYER)
         {
             healthboxLeftSpriteId = CreateSprite(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
             healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[0], 240, 160, 1);
 
-            gSprites[healthboxLeftSpriteId].oam.shape = 0;
-            gSprites[healthboxRightSpriteId].oam.shape = 0;
+            gSprites[healthboxLeftSpriteId].oam.shape = SPRITE_SHAPE(64x64);
+            gSprites[healthboxRightSpriteId].oam.shape = SPRITE_SHAPE(64x64);
             gSprites[healthboxRightSpriteId].oam.tileNum += 64;
         }
         else
@@ -550,7 +550,7 @@ u8 CreateBattlerHealthboxSprites(u8 a)
     }
     else
     {
-        if (GetBattlerSide(a) == 0)
+        if (GetBattlerSide(a) == B_SIDE_PLAYER)
         {
             healthboxLeftSpriteId = CreateSprite(&sHealthboxPlayerSpriteTemplates[GetBattlerPosition(a) / 2], 240, 160, 1);
             healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxPlayerSpriteTemplates[GetBattlerPosition(a) / 2], 240, 160, 1);
@@ -576,7 +576,7 @@ u8 CreateBattlerHealthboxSprites(u8 a)
     healthbarSpriteId = CreateSpriteAtEnd(&gUnknown_82602F8[gBattlerPositions[a]], 140, 60, 0);
     sprite = &gSprites[healthbarSpriteId];
     SetSubspriteTables(sprite, &gUnknown_82603C4[GetBattlerSide(a)]);
-    sprite->subspriteMode = 2;
+    sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     sprite->oam.priority = 1;
     CpuCopy32(GetHealthboxElementGfxPtr(HEALTHBOX_GFX_1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
 
@@ -596,8 +596,8 @@ u8 CreateSafariPlayerHealthboxSprites(void)
     u8 healthboxLeftSpriteId = CreateSprite(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
     u8 healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxSafariSpriteTemplate, 240, 160, 1);
 
-    gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
-    gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
+    gSprites[healthboxLeftSpriteId].oam.shape = SPRITE_SHAPE(64x64);
+    gSprites[healthboxRightSpriteId].oam.shape = SPRITE_SHAPE(64x64);
     gSprites[healthboxRightSpriteId].oam.tileNum += 0x40;
     gSprites[healthboxLeftSpriteId].oam.affineParam = healthboxRightSpriteId;
     gSprites[healthboxRightSpriteId].hBar_HealthBoxSpriteId = healthboxLeftSpriteId;
@@ -774,14 +774,12 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     RemoveWindowOnHealthbox(windowId);
 }
 
-static const u8 gUnknown_826052C[20] = __("{COLOR 01}{HIGHLIGHT 02}");
-
 void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
 {
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
     u8 *strptr;
-    register void *objVram;
+    void *objVram;
 
     if (GetBattlerSide(gSprites[healthboxSpriteId].hMain_Battler) == B_SIDE_PLAYER && !IsDoubleBattle())
     {
@@ -810,7 +808,7 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
     {
         u8 battler;
 
-        u8 text[20]; memcpy(text, gUnknown_826052C, sizeof(gUnknown_826052C));
+        u8 text[20] = __("{COLOR 01}{HIGHLIGHT 02}");
         battler = gSprites[healthboxSpriteId].hMain_Battler;
         if (IsDoubleBattle() == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
         {
@@ -916,12 +914,11 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
 // Prints mon's nature, catch and flee rate. Probably used to test pokeblock-related features.
 static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 {
-    u8 text[20];
+    u8 text[20] = __("{COLOR 01}{HIGHLIGHT 02}");
     s32 j, spriteTileNum;
     u8 *barFontGfx;
     u8 i, var, nature, healthBarSpriteId;
 
-    memcpy(text, gUnknown_826052C, sizeof(gUnknown_826052C));
     barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
     var = 5;
     nature = GetNature(mon);

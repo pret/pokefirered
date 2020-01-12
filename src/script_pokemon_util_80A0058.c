@@ -77,7 +77,7 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
 u8 ScriptGiveEgg(u16 species)
 {
     struct Pokemon *mon = AllocZeroed(sizeof(struct Pokemon));
-    u8 isEgg;
+    bool8 isEgg;
     bool8 sentToPc;
 
     CreateEgg(mon, species, TRUE);
@@ -208,7 +208,7 @@ void ReducePlayerPartyToThree(void)
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
 
-    // overwrite the first 4 with the order copied to.
+    // overwrite the first 3 with the order copied to.
     for (i = 0; i < 3; i++)
         gPlayerParty[i] = party[i];
 

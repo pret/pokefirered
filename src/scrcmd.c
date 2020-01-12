@@ -34,7 +34,6 @@
 #include "coins.h"
 #include "battle_setup.h"
 #include "shop.h"
-#include "script_pokemon_80F8.h"
 #include "slot_machine.h"
 #include "field_effect.h"
 #include "fieldmap.h"

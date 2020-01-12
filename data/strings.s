@@ -2524,161 +2524,142 @@ gUnknown_8418E77:: @ 8418E77
 gUnknown_8418E8A:: @ 8418E8A
 	.string "$"
 
-gUnknown_8418E8B:: @ 8418E8B
+gText_RegionMap_Space:: @ 8418E8B
 	.string " $"
 
-gUnknown_8418E8D:: @ 8418E8D
+gText_RegionMap_AButtonGuide:: @ 8418E8D
 	.string "{A_BUTTON}GUIDE$"
 
-gUnknown_8418E95:: @ 8418E95
+gText_RegionMap_AButtonCancel:: @ 8418E95
 	.string "{A_BUTTON}CANCEL$"
 
-gUnknown_8418E9E:: @ 8418E9E
+gText_RegionMap_AButtonCancel2:: @ 8418E9E
 	.string "{A_BUTTON}CANCEL$"
 
-gUnknown_8418EA7:: @ 8418EA7
+gText_RegionMap_AButtonSwitch:: @ 8418EA7
 	.string "{A_BUTTON}SWITCH$"
 
-gUnknown_8418EB0:: @ 8418EB0
+gText_RegionMap_AButtonOK:: @ 8418EB0
 	.string "{A_BUTTON}OK$"
 
-gUnknown_8418EB5:: @ 8418EB5
+gText_RegionMap_DPadMove:: @ 8418EB5
 	.string "{DPAD_ANY}MOVE$"
 
-gUnknown_8418EBC:: @ 8418EBC
+gText_RegionMap_UpDownPick:: @ 8418EBC
 	.string "{DPAD_UPDOWN}PICK$"
 
-gUnknown_8418EC3:: @ 8418EC3
+gText_RegionMap_NoData:: @ 8418EC3
 	.string "No data$"
 
-gUnknown_8418ECB:: @ 8418ECB
-	@ Viridian Forest
+gText_RegionMap_AreaDesc_ViridianForest::
 	.string "A deep and sprawling forest that\n"
 	.string "extends around VIRIDIAN CITY.\n"
 	.string "A natural maze, many people\n"
 	.string "become lost inside.$"
 
-gUnknown_8418F3A:: @ 8418F3A
-	@ Mt. Moon
+gText_RegionMap_AreaDesc_MtMoon::
 	.string "A mystical mountain that is known\n"
 	.string "for its frequent meteor falls.\n"
 	.string "The shards of stars that fall\n"
 	.string "here are known as MOON STONES.$"
 
-gUnknown_8418FB8:: @ 8418FB8
-	@ Diglett's Cave
+gText_RegionMap_AreaDesc_DiglettsCave::
 	.string "A seemingly plain tunnel that was\n"
 	.string "dug by wild DIGLETT.\n"
 	.string "It is famous for connecting\n"
 	.string "ROUTES 2 and 11.$"
 
-gUnknown_841901C:: @ 841901C
-	@ Victory Road
+gText_RegionMap_AreaDesc_VictoryRoad::
 	.string "A tunnel situated on ROUTE 23.\n"
 	.string "It earned its name because it\n"
 	.string "must be traveled by all TRAINERS\n"
 	.string "aiming for the top.$"
 
-gUnknown_841908E:: @ 841908E
-	@ Pokémon Mansion
+gText_RegionMap_AreaDesc_PokemonMansion::
 	.string "A decrepit, burned-down mansion\n"
 	.string "on CINNABAR ISLAND.\n"
 	.string "It got its name because a famous\n"
 	.string "POKéMON researcher lived there.$"
 
-gUnknown_8419103:: @ 8419103
-	@ Safari Zone
+gText_RegionMap_AreaDesc_SafariZone::
 	.string "An amusement park outside FUCHSIA\n"
 	.string "CITY where many rare POKéMON can\n"
 	.string "be observed in the wild.\n"
 	.string "Catch them in a popular game!$"
 
-gUnknown_841917D:: @ 841917D
-	@ Rock Tunnel
+gText_RegionMap_AreaDesc_RockTunnel::
 	.string "A naturally formed underground\n"
 	.string "tunnel. Because it has not been\n"
 	.string "developed, it is inky dark inside.\n"
 	.string "A light is needed to get through.$"
 
-gUnknown_8419201:: @ 8419201
-	@ Seafoam Islands
+gText_RegionMap_AreaDesc_SeafoamIslands::
 	.string "A pair of islands that is situated\n"
 	.string "on ROUTE 20.\n"
 	.string "The two islands are shaped the\n"
 	.string "same, as if they were twins.$"
 
-gUnknown_841926D:: @ 841926D
-	@ Pokémon Tower
+gText_RegionMap_AreaDesc_PokemonTower::
 	.string "A tower that houses the graves of\n"
 	.string "countless POKéMON.\n"
 	.string "Many people visit it daily to pay\n"
 	.string "their respects to the fallen.$"
 
-gUnknown_84192E2:: @ 84192E2
-	@ Cerulean Cave
+gText_RegionMap_AreaDesc_CeruleanCave::
 	.string "A mysterious cave that is filled\n"
 	.string "with terribly tough POKéMON.\n"
 	.string "It is so dangerous, the POKéMON\n"
 	.string "LEAGUE is in charge of it.$"
 
-gUnknown_841935B:: @ 841935B
-	@ Power Plant
+gText_RegionMap_AreaDesc_PowerPlant::
 	.string "A power plant that was abandoned\n"
 	.string "years ago, though some of the\n"
 	.string "machines still work. It is infested\n"
 	.string "with electric POKéMON.$"
 
-gUnknown_84193D5:: @ 84193D5
-	@ Mt. Ember
+gText_RegionMap_AreaDesc_MtEmber::
 	.string "Supposedly an inactive volcano.\n"
 	.string "However, there are persistent\n"
 	.string "reports that the peak blazes\n"
 	.string "with fire at night.$"
 
-gUnknown_8419444:: @ 8419444
-	@ Berry Forest
+gText_RegionMap_AreaDesc_BerryForest::
 	.string "A forest on a small islet off the\n"
 	.string "coast of THREE ISLAND. BERRIES\n"
 	.string "grow wildly in profusion, quickly\n"
 	.string "replenishing those that fall off.$"
 
-gUnknown_84194C9:: @ 84194C9
-	@ Icefall Cave
+gText_RegionMap_AreaDesc_IcefallCave::
 	.string "A cave which is covered by water\n"
 	.string "and ice on FOUR ISLAND.\n"
 	.string "It seems like the end of the cave\n"
 	.string "is connected to the ocean.$"
 
-gUnknown_841953F:: @ 841953F
-	@ Lost Cave
+gText_RegionMap_AreaDesc_LostCave::
 	.string "A bewildering cave off the coast\n"
 	.string "of RESORT GORGEOUS.\n"
 	.string "Some curious thrill seekers have\n"
 	.string "never emerged from it.$"
 
-gUnknown_84195AC:: @ 84195AC
-	@ Tanoby Ruins
+gText_RegionMap_AreaDesc_TanobyRuins::
 	.string "An ancient ruin that is rumored to\n"
 	.string "be home to a peculiar POKéMON.\n"
 	.string "However, so far, the POKéMON\n"
 	.string "remains an unconfirmed rumor.$"
 
-gUnknown_8419629:: @ 8419629
-	@ Altering Cave
+gText_RegionMap_AreaDesc_AlteringCave::
 	.string "This island has been known by this\n"
 	.string "name since the distant past.\n"
 	.string "No one today knows where it got\n"
 	.string "this name, however.$"
 
-gUnknown_841969D:: @ 841969D
-	@ Pattern Bush
+gText_RegionMap_AreaDesc_PatternBush::
 	.string "A lush and bush-like area. \n"
 	.string "In it are patterns where no grass\n"
 	.string "grows. Some study it in the belief\n"
 	.string "that a secret is concealed.$"
 
-gUnknown_841971A:: @ 841971A
-	@ Dotted Hole
+gText_RegionMap_AreaDesc_DottedHole::
 	.string "A mysterious, just-discovered\n"
 	.string "ruin from an ancient time.\n"
 	.string "It got its name from the six dots\n"

@@ -105,7 +105,7 @@
     }                                                     \
 }
 
-#define DmaClearLarge(dmaNum, dest, size, block, bit) \
+#define DmaClearLarge(dmaNum, dest, size, block, bit)     \
 {                                                         \
     u32 _size = size;                                     \
     while (1)                                             \
@@ -169,5 +169,15 @@
 
 #define DmaFill16Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 16)
 #define DmaFill32Defvars(dmaNum, value, dest, size) DmaFillDefvars(dmaNum, value, dest, size, 32)
+
+#define IntrEnable(flags)                                       \
+{                                                               \
+    u16 imeTemp;                                                \
+                                                                \
+    imeTemp = REG_IME;                                          \
+    REG_IME = 0;                                                \
+    REG_IE |= flags;                                            \
+    REG_IME = imeTemp;                                          \
+}
 
 #endif // GUARD_GBA_MACRO_H

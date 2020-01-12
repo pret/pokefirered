@@ -9,7 +9,7 @@
 #include "safari_zone.h"
 #include "quest_log.h"
 #include "script.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "strings.h"
 #include "string_util.h"
 #include "event_data.h"

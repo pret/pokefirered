@@ -1,4 +1,6 @@
 	.include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
+	.include "constants/version.inc"
 
 	.syntax unified
 
@@ -8,8 +10,8 @@
 
 	.arm
 
-Start: @ 8000000
-	b Init
+_start: @ 8000000
+	b start_vector
 
 	.include "asm/rom_header.inc"
 
@@ -32,33 +34,33 @@ GPIOPortReadEnable: @ 80000C8
 
 @ 80000D0
 
-@ TODO: figure out what this data is
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
+	.4byte 0xFFFFFFFF
 
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
-	.4byte 0xFFFFFFFF
+@ 8000100
+	.global CartIdent
+CartIdent:
+	.4byte GAME_VERSION
+	.4byte GAME_LANGUAGE
+.game_name:
 	.ifdef FIRERED
-	.4byte          4
-	.4byte          2
 	.ascii "pokemon red version"
-	.space 13
 	.else
 	.ifdef LEAFGREEN
-	.4byte          5
-	.4byte          2
 	.ascii "pokemon green version"
-	.space 11
 	.endif
 	.endif
+	.space .game_name+0x20-.
 	.4byte  gMonFrontPicTable
 	.4byte  gMonBackPicTable
 	.4byte  gMonPaletteTable
@@ -118,32 +120,32 @@ GPIOPortReadEnable: @ 80000C8
 
 	.arm
 	.align 2, 0
-	.global Init
-Init:
+	.global start_vector
+start_vector:
 	mov r0, PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
 	mov r0, PSR_SYS_MODE
 	msr cpsr_cf, r0
-	ldr sp, sp_sys
+	ldr sp, sp_usr
 	ldr r1, =INTR_VECTOR
-	adr r0, IntrMain
+	adr r0, intr_main
 	str r0, [r1]
 	ldr r1, =AgbMain
 	mov lr, pc
 	bx r1
-	b Init
+	b start_vector
 
 	.align 2, 0
-sp_sys: .word IWRAM_END - 0x1C0
+sp_usr: .word IWRAM_END - 0x1C0
 sp_irq: .word IWRAM_END - 0x60
 
 	.pool
 
 	.arm
 	.align 2, 0
-	.global IntrMain
-IntrMain:
+	.global intr_main
+intr_main:
 	mov r3, REG_BASE
 	add r3, r3, 0x200
 	ldr r2, [r3, OFFSET_REG_IE - 0x200]
@@ -155,56 +157,57 @@ IntrMain:
 	and r1, r2, r2, lsr 16
 	mov r12, 0
 	ands r0, r1, INTR_FLAG_VCOUNT
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	mov r0, 0x1
 	strh r0, [r3, OFFSET_REG_IME - 0x200]
 	ands r0, r1, INTR_FLAG_SERIAL
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER3
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_HBLANK
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_VBLANK
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER0
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER1
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER2
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA0
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA1
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA2
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA3
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_KEYPAD
-	bne IntrMain_FoundIntr
+	bne jump_intr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_GAMEPAK
 	strbne r0, [r3, OFFSET_REG_SOUNDCNT_X - 0x200]
-	bne . @ spin
-IntrMain_FoundIntr:
+loop:
+	bne loop @ spin
+jump_intr:
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 	bic r2, r2, r0
-	ldr r0, =gRfuState
+	ldr r0, =gSTWIStatus
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
-	mov r1, 0x8
+	mov r1, INTR_FLAG_TIMER0
 	mov r0, r1, lsl r0
 	orr r0, r0, INTR_FLAG_GAMEPAK
 	orr r1, r0, INTR_FLAG_SERIAL | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_HBLANK
@@ -218,9 +221,9 @@ IntrMain_FoundIntr:
 	add r1, r1, r12
 	ldr r0, [r1]
 	stmdb sp!, {lr}
-	adr lr, IntrMain_RetAddr
+	adr lr, intr_return
 	bx r0
-IntrMain_RetAddr:
+intr_return:
 	ldmia sp!, {lr}
 	mrs r3, cpsr
 	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK

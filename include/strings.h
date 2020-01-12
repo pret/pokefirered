@@ -1003,4 +1003,34 @@ extern const u8 gText_UnionRoomTradesBattles[];
 extern const u8 gText_LinkBattles[];
 extern const u8 gText_LinkCableBattles[];
 
+// region_map
+extern const u8 gText_RegionMap_DPadMove[];
+extern const u8 gText_RegionMap_Space[];
+extern const u8 gText_RegionMap_AButtonGuide[];
+extern const u8 gText_RegionMap_AButtonCancel[];
+extern const u8 gText_RegionMap_AButtonCancel2[];
+extern const u8 gText_RegionMap_AButtonSwitch[];
+extern const u8 gText_RegionMap_AButtonOK[];
+extern const u8 gText_RegionMap_UpDownPick[];
+extern const u8 gText_RegionMap_NoData[];
+extern const u8 gText_RegionMap_AreaDesc_ViridianForest[];
+extern const u8 gText_RegionMap_AreaDesc_MtMoon[];
+extern const u8 gText_RegionMap_AreaDesc_DiglettsCave[];
+extern const u8 gText_RegionMap_AreaDesc_VictoryRoad[];
+extern const u8 gText_RegionMap_AreaDesc_PokemonMansion[];
+extern const u8 gText_RegionMap_AreaDesc_SafariZone[];
+extern const u8 gText_RegionMap_AreaDesc_RockTunnel[];
+extern const u8 gText_RegionMap_AreaDesc_SeafoamIslands[];
+extern const u8 gText_RegionMap_AreaDesc_PokemonTower[];
+extern const u8 gText_RegionMap_AreaDesc_CeruleanCave[];
+extern const u8 gText_RegionMap_AreaDesc_PowerPlant[];
+extern const u8 gText_RegionMap_AreaDesc_MtEmber[];
+extern const u8 gText_RegionMap_AreaDesc_BerryForest[];
+extern const u8 gText_RegionMap_AreaDesc_IcefallCave[];
+extern const u8 gText_RegionMap_AreaDesc_LostCave[];
+extern const u8 gText_RegionMap_AreaDesc_TanobyRuins[];
+extern const u8 gText_RegionMap_AreaDesc_AlteringCave[];
+extern const u8 gText_RegionMap_AreaDesc_PatternBush[];
+extern const u8 gText_RegionMap_AreaDesc_DottedHole[];
+
 #endif //GUARD_STRINGS_H

@@ -1,5 +1,3 @@
-ENTRY(Start)
-
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
@@ -81,7 +79,7 @@ SECTIONS {
         src/util.o(.text);
         src/blend_palette.o(.text);
         src/daycare.o(.text);
-        asm/battle_interface.o(.text);
+        src/battle_interface.o(.text);
         asm/smokescreen.o(.text);
         src/pokeball.o(.text);
         src/load_save.o(.text);
@@ -147,10 +145,10 @@ SECTIONS {
         src/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
-        asm/script_pokemon_util_80A0058.o(.text);
+        src/script_pokemon_util.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
-        asm/pc_screen_effect.o(.text);
+        src/pc_screen_effect.o(.text);
         src/fldeff_poison.o(.text);
         src/fldeff_berrytree.o(.text);
         src/field_special_scene.o(.text);
@@ -180,9 +178,10 @@ SECTIONS {
         src/mon_markings.o(.text);
         src/mail.o(.text);
         src/menu_helpers.o(.text);
-        asm/script_pokemon_util_80BF8FC.o(.text);
+        src/party_menu_specials.o(.text);
         src/heal_location.o(.text);
-        asm/region_map.o(.text);
+        src/region_map.o(.text);
+        src/image_processing_effects.o(.text);
         src/battle_ai_script_commands.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
@@ -318,9 +317,10 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/agb_flash_le.o(.text);
-        asm/librfu_stwi.o(.text);
+        src/librfu_stwi.o(.text);
         asm/librfu_intr.o(.text);
-        asm/librfu.o(.text);
+        src/librfu_rfu.o(.text);
+        src/librfu_sio32id.o(.text);
         src/isagbprn.o(.text);
         asm/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
@@ -405,7 +405,7 @@ SECTIONS {
         src/util.o(.rodata);
         src/daycare.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
-        data/battle_interface.o(.rodata);
+        src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
         src/trade.o(.rodata);
         src/trade_scene.o(.rodata);
@@ -479,7 +479,8 @@ SECTIONS {
         src/mon_markings.o(.rodata);
         src/mail.o(.rodata);
         src/heal_location.o(.rodata);
-        data/region_map.o(.rodata);
+        src/region_map.o(.rodata);
+        src/image_processing_effects.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
         data/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);
@@ -939,7 +940,8 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
-        data/librfu_rodata.o(.rodata);
+        src/librfu_rfu.o(.rodata);
+        src/librfu_sio32id.o(.rodata);
         src/isagbprn.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);

@@ -17,7 +17,7 @@ u32 gGameVersion;
 
 EWRAM_DATA u8 gSharedMem[0x8000] = {};
 
-void IntrMain(void);
+void intr_main(void);
 void ReadKeys(void);
 void dummy_intr_0(void);
 void dummy_intr_1(void);
@@ -62,7 +62,7 @@ void AgbMain(void)
 {
     RegisterRamReset(0x1E);
     DmaCopy32(3, gIntrFuncPointers, gIntrTable, sizeof gIntrFuncPointers);
-    DmaCopy32(3, IntrMain, gIntrVector, sizeof(gIntrVector));
+    DmaCopy32(3, intr_main, gIntrVector, sizeof(gIntrVector));
     INTR_VECTOR = gIntrVector;
     REG_IE = INTR_FLAG_VBLANK;
     if (*RomHeaderMagic == 0x96 && *(u32 *)RomHeaderGameCode == *(u32 *)gBerryFixGameCode)

@@ -61,37 +61,8 @@ gUnknown_3005078: @ 3005078
 	
 	@ what is this?
 	.space 0x20
-
-gUnknown_3005330: @ 3005330
-	.space 0x4
-
-gUnknown_3005334: @ 3005334
-	.space 0x4
-
-gUnknown_3005338: @ 3005338
-	.space 0x4
-
-gUnknown_300533C: @ 300533C
-	.space 0x4
-
-gUnknown_3005340: @ 3005340
-	.space 0x4
-
-gUnknown_3005344: @ 3005344
-	.space 0x4
-
-gUnknown_3005348: @ 3005348
-	.space 0x4
-
-gUnknown_300534C: @ 300534C
-	.space 0x4
-
-gUnknown_3005350: @ 3005350
-	.space 0x4
-
-gUnknown_3005354: @ 3005354
-	.space 0xC
-
+	.align 2
+	.include "image_processing_effects.o"
 	.align 2
 	.include "field_specials.o"
 	.align 2
@@ -188,24 +159,9 @@ gUnknown_3005E94: @ 3005E94
 	.include "berry_fix_program.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
-
-gRfuState: @ 3007438
-	.space 0x8
-
-gUnknown_3007440: @ 3007440
-	.space 0x10
-
-gUnknown_3007450: @ 3007450
-	.space 0x10
-
-gUnknown_3007460: @ 3007460
-	.space 0x4
-
-gUnknown_3007464: @ 3007464
-	.space 0x4
-
-gUnknown_3007468: @ 3007468
-	.space 0x8
-
-gUnknown_3007470: @ 3007470
-	.space 0xC
+	.align 2
+	.include "librfu_stwi.o"
+	.align 4
+	.include "librfu_rfu.o"
+	.align 4
+	.include "librfu_sio32id.o"

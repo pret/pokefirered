@@ -2765,10 +2765,10 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
 
 int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, struct UnkLinkRfuStruct_02022B14Substruct a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
-    u8 r9 = a0.unk_01_0;
-    u8 r4 = a0.unk_00_7;
-    u8 r10 = a1.unk_01_0;
-    u8 r0 = a1.unk_00_7;
+    u8 r9 = a0.hasNationalDex;
+    u8 r4 = a0.isChampion;
+    u8 r10 = a1.hasNationalDex;
+    u8 r0 = a1.isChampion;
     u8 r1 = a1.unk_01_2;
     u8 r2;
 
@@ -2845,7 +2845,7 @@ int GetUnionRoomTradeMessageId(struct UnkLinkRfuStruct_02022B14Substruct a0, str
 
 int CanRegisterMonForTradingBoard(struct UnkLinkRfuStruct_02022B14Substruct a0, u16 species, u16 a2, u8 a3)
 {
-    u8 canTradeEggAndNational = a0.unk_01_0;
+    u8 canTradeEggAndNational = a0.hasNationalDex;
 
     if (IsDeoxysOrMewUntradable(a2, a3))
     {

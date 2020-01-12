@@ -637,7 +637,6 @@ void sub_810C444(void)
     }
 }
 
-#ifdef NONMATCHING
 bool8 sub_810C4EC(void)
 {
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
@@ -648,18 +647,18 @@ bool8 sub_810C4EC(void)
 
     if (FlagGet(FLAG_SYS_VS_SEEKER_CHARGING) == TRUE)
     {
-        u16 x;
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
+        u8 x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
+        u32 r4 = 0xFF;
+
         if (x < 100)
         {
             x++;
-            gSaveBlock1Ptr->trainerRematchStepCounter = ((u16)(x << 8)) | (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF);
+        #ifndef NONMATCHING // fool the compiler that r4 has been changed
+            asm("":"=r"(r4));
+        #endif
+            gSaveBlock1Ptr->trainerRematchStepCounter = (gSaveBlock1Ptr->trainerRematchStepCounter & 0xFF) | (x << 8);
         }
-        do {
-            x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & 0xFF;
-        } while (0);
+        x = (gSaveBlock1Ptr->trainerRematchStepCounter >> 8) & r4;
         if (x == 100)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
@@ -671,80 +670,6 @@ bool8 sub_810C4EC(void)
 
     return FALSE;
 }
-#else
-NAKED
-bool8 sub_810C4EC(void)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmovs r0, 0xB5\n"
-                "\tlsls r0, 1\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl CheckBagHasItem\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0810C516\n"
-                "\tldr r0, _0810C568 @ =gSaveBlock1Ptr\n"
-                "\tldr r0, [r0]\n"
-                "\tmovs r2, 0xC7\n"
-                "\tlsls r2, 3\n"
-                "\tadds r1, r0, r2\n"
-                "\tldrh r2, [r1]\n"
-                "\tldrb r0, [r1]\n"
-                "\tcmp r0, 0x63\n"
-                "\tbhi _0810C516\n"
-                "\tadds r0, r2, 0x1\n"
-                "\tstrh r0, [r1]\n"
-                "_0810C516:\n"
-                "\tldr r7, _0810C56C @ =0x00000801\n"
-                "\tadds r0, r7, 0\n"
-                "\tbl FlagGet\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0810C570\n"
-                "\tldr r6, _0810C568 @ =gSaveBlock1Ptr\n"
-                "\tldr r0, [r6]\n"
-                "\tmovs r5, 0xC7\n"
-                "\tlsls r5, 3\n"
-                "\tadds r3, r0, r5\n"
-                "\tldrh r2, [r3]\n"
-                "\tlsrs r1, r2, 8\n"
-                "\tmovs r4, 0xFF\n"
-                "\tcmp r1, 0x63\n"
-                "\tbhi _0810C548\n"
-                "\tadds r1, 0x1\n"
-                "\tlsls r1, 24\n"
-                "\tmovs r0, 0xFF\n"
-                "\tands r0, r2\n"
-                "\tlsrs r1, 16\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r3]\n"
-                "_0810C548:\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldrh r0, [r0]\n"
-                "\tlsrs r0, 8\n"
-                "\tands r0, r4\n"
-                "\tcmp r0, 0x64\n"
-                "\tbne _0810C570\n"
-                "\tadds r0, r7, 0\n"
-                "\tbl FlagClear\n"
-                "\tbl sub_810C640\n"
-                "\tbl sub_810D0D0\n"
-                "\tmovs r0, 0x1\n"
-                "\tb _0810C572\n"
-                "\t.align 2, 0\n"
-                "_0810C568: .4byte gSaveBlock1Ptr\n"
-                "_0810C56C: .4byte 0x00000801\n"
-                "_0810C570:\n"
-                "\tmovs r0, 0\n"
-                "_0810C572:\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
 
 void sub_810C578(void)
 {
@@ -920,13 +845,17 @@ u8 CanUseVsSeeker(void)
     }
 }
 
-// Nonmatching due to register roulette
-#ifdef NONMATCHING
 static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 {
     u16 r8 = 0;
     u8 sp0 = 0;
     s32 vsSeekerIdx;
+    u8 *r2;
+#ifndef NONMATCHING
+    register u32 r3 asm("r3");
+    register s32 r0_ asm("r0");
+    asm("":::"r10", "r8", "r6", "r4");
+#endif
 
     for (vsSeekerIdx = 0; sVsSeeker->trainerInfo[vsSeekerIdx].localId != 0xFF; vsSeekerIdx++)
     {
@@ -936,6 +865,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
             if (!HasTrainerBeenFought(r8))
             {
                 StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], gUnknown_8453F60);
+                sVsSeeker->trainerInfo[vsSeekerIdx].trainerIdx += 0;
                 sVsSeeker->trainerHasNotYetBeenFought = 1;
             }
             else
@@ -944,7 +874,15 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                 if (r7 == 0)
                 {
                     StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+                #ifdef NONMATCHING
                     sVsSeeker->trainerDoesNotWantRematch = 1;
+                #else
+                    r2 = (u8 *)sVsSeeker;
+                    r3 = 0x431;
+                    asm("":::"r1");
+                    r2 = &r2[r3];
+                    *(r2) |= 2;
+                #endif
                 }
                 else
                 {
@@ -957,7 +895,15 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     if (rval < 30)
                     {
                         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerNoRematch);
+                    #ifdef NONMATCHING
                         sVsSeeker->trainerDoesNotWantRematch = 1;
+                    #else
+                        r2 = (u8 *)sVsSeeker;
+                        r0_ = 0x431;
+                        asm("":::"r1");
+                        r2 = &r2[r0_];
+                        *(r2) |= 2;
+                    #endif
                     }
                     else
                     {
@@ -985,242 +931,6 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
         return 1;
     return 0;
 }
-#else
-NAKED
-static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x8\n"
-                "\tstr r0, [sp, 0x4]\n"
-                "\tmovs r0, 0\n"
-                "\tmov r8, r0\n"
-                "\tmov r0, sp\n"
-                "\tmov r1, r8\n"
-                "\tstrb r1, [r0]\n"
-                "\tmovs r2, 0\n"
-                "\tmov r9, r2\n"
-                "\tldr r4, _0810CA14 @ =sVsSeeker\n"
-                "\tldr r0, [r4]\n"
-                "\tldrb r0, [r0, 0x6]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbne _0810C9D0\n"
-                "\tb _0810CB2C\n"
-                "_0810C9D0:\n"
-                "\tadds r6, r4, 0\n"
-                "\tmovs r3, 0x86\n"
-                "\tlsls r3, 3\n"
-                "\tmov r10, r3\n"
-                "\tmovs r5, 0\n"
-                "_0810C9DA:\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tbl IsTrainerVisibleOnScreen\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x1\n"
-                "\tbeq _0810C9EC\n"
-                "\tb _0810CB18\n"
-                "_0810C9EC:\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, r5\n"
-                "\tldrh r0, [r0, 0x4]\n"
-                "\tmov r8, r0\n"
-                "\tbl HasTrainerBeenFought\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0810CA20\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldr r1, _0810CA18 @ =gUnknown_8453F60\n"
-                "\tbl StartTrainerObjectMovementScript\n"
-                "\tldr r2, [r6]\n"
-                "\tldr r0, _0810CA1C @ =0x00000431\n"
-                "\tadds r2, r0\n"
-                "\tldrb r0, [r2]\n"
-                "\tmovs r1, 0x1\n"
-                "\tb _0810CB14\n"
-                "\t.align 2, 0\n"
-                "_0810CA14: .4byte sVsSeeker\n"
-                "_0810CA18: .4byte gUnknown_8453F60\n"
-                "_0810CA1C: .4byte 0x00000431\n"
-                "_0810CA20:\n"
-                "\tldr r0, [sp, 0x4]\n"
-                "\tmov r1, r8\n"
-                "\tmov r2, sp\n"
-                "\tbl GetNextAvailableRematchTrainer\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r7, r0, 24\n"
-                "\tcmp r7, 0\n"
-                "\tbne _0810CA50\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldr r1, _0810CA48 @ =sMovementScript_TrainerNoRematch\n"
-                "\tbl StartTrainerObjectMovementScript\n"
-                "\tldr r2, [r6]\n"
-                "\tldr r3, _0810CA4C @ =0x00000431\n"
-                "\tadds r2, r3\n"
-                "\tldrb r0, [r2]\n"
-                "\tmovs r1, 0x2\n"
-                "\tb _0810CB14\n"
-                "\t.align 2, 0\n"
-                "_0810CA48: .4byte sMovementScript_TrainerNoRematch\n"
-                "_0810CA4C: .4byte 0x00000431\n"
-                "_0810CA50:\n"
-                "\tbl Random\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r0, 16\n"
-                "\tmovs r1, 0x64\n"
-                "\tbl __umodsi3\n"
-                "\tlsls r0, 16\n"
-                "\tlsrs r4, r0, 16\n"
-                "\tmov r0, r9\n"
-                "\tmov r1, r8\n"
-                "\tbl GetCurVsSeekerResponse\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tcmp r0, 0x2\n"
-                "\tbne _0810CA76\n"
-                "\tmovs r4, 0x64\n"
-                "\tb _0810CA7C\n"
-                "_0810CA76:\n"
-                "\tcmp r0, 0x1\n"
-                "\tbne _0810CA7C\n"
-                "\tmovs r4, 0\n"
-                "_0810CA7C:\n"
-                "\tcmp r4, 0x1D\n"
-                "\tbhi _0810CAA0\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldr r1, _0810CA98 @ =sMovementScript_TrainerNoRematch\n"
-                "\tbl StartTrainerObjectMovementScript\n"
-                "\tldr r2, [r6]\n"
-                "\tldr r0, _0810CA9C @ =0x00000431\n"
-                "\tadds r2, r0\n"
-                "\tldrb r0, [r2]\n"
-                "\tmovs r1, 0x2\n"
-                "\tb _0810CB14\n"
-                "\t.align 2, 0\n"
-                "_0810CA98: .4byte sMovementScript_TrainerNoRematch\n"
-                "_0810CA9C: .4byte 0x00000431\n"
-                "_0810CAA0:\n"
-                "\tldr r0, _0810CB54 @ =gSaveBlock1Ptr\n"
-                "\tldr r1, [r0]\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldr r2, _0810CB58 @ =0x0000063a\n"
-                "\tadds r1, r2\n"
-                "\tldrb r0, [r0, 0x6]\n"
-                "\tadds r1, r0\n"
-                "\tstrb r7, [r1]\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldrb r1, [r0, 0x7]\n"
-                "\tlsls r0, r1, 3\n"
-                "\tadds r0, r1\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _0810CB5C @ =gObjectEvents\n"
-                "\tadds r0, r1\n"
-                "\tbl npc_coords_shift_still\n"
-                "\tldr r0, [r6]\n"
-                "\tadds r0, r5\n"
-                "\tldr r1, _0810CB60 @ =sMovementScript_TrainerRematch\n"
-                "\tbl StartTrainerObjectMovementScript\n"
-                "\tldr r2, [r6]\n"
-                "\tmov r3, r10\n"
-                "\tadds r0, r2, r3\n"
-                "\tldrb r1, [r0]\n"
-                "\tlsls r1, 1\n"
-                "\tmovs r3, 0x80\n"
-                "\tlsls r3, 3\n"
-                "\tadds r0, r2, r3\n"
-                "\tadds r0, r1\n"
-                "\tmov r1, r8\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r2, r5\n"
-                "\tldrb r0, [r2, 0xC]\n"
-                "\tbl GetRunningBehaviorFromGraphicsId\n"
-                "\tldr r1, [r6]\n"
-                "\tmov r3, r10\n"
-                "\tadds r2, r1, r3\n"
-                "\tmovs r3, 0x84\n"
-                "\tlsls r3, 3\n"
-                "\tadds r1, r3\n"
-                "\tldrb r2, [r2]\n"
-                "\tadds r1, r2\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r1, [r6]\n"
-                "\tadd r1, r10\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrb r0, [r1]\n"
-                "\tldr r2, [r6]\n"
-                "\tldr r0, _0810CB64 @ =0x00000431\n"
-                "\tadds r2, r0\n"
-                "\tldrb r0, [r2]\n"
-                "\tmovs r1, 0x4\n"
-                "_0810CB14:\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r2]\n"
-                "_0810CB18:\n"
-                "\tadds r5, 0x10\n"
-                "\tmovs r1, 0x1\n"
-                "\tadd r9, r1\n"
-                "\tldr r4, _0810CB68 @ =sVsSeeker\n"
-                "\tldr r0, [r4]\n"
-                "\tadds r0, r5\n"
-                "\tldrb r0, [r0, 0x6]\n"
-                "\tcmp r0, 0xFF\n"
-                "\tbeq _0810CB2C\n"
-                "\tb _0810C9DA\n"
-                "_0810CB2C:\n"
-                "\tldr r2, _0810CB68 @ =sVsSeeker\n"
-                "\tldr r0, [r2]\n"
-                "\tldr r3, _0810CB64 @ =0x00000431\n"
-                "\tadds r0, r3\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r0, 0x4\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _0810CB70\n"
-                "\tmovs r0, 0x15\n"
-                "\tbl PlaySE\n"
-                "\tldr r0, _0810CB6C @ =0x00000801\n"
-                "\tbl FlagSet\n"
-                "\tbl sub_810C640\n"
-                "\tmovs r0, 0x2\n"
-                "\tb _0810CB7E\n"
-                "\t.align 2, 0\n"
-                "_0810CB54: .4byte gSaveBlock1Ptr\n"
-                "_0810CB58: .4byte 0x0000063a\n"
-                "_0810CB5C: .4byte gObjectEvents\n"
-                "_0810CB60: .4byte sMovementScript_TrainerRematch\n"
-                "_0810CB64: .4byte 0x00000431\n"
-                "_0810CB68: .4byte sVsSeeker\n"
-                "_0810CB6C: .4byte 0x00000801\n"
-                "_0810CB70:\n"
-                "\tmovs r0, 0x1\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _0810CB7C\n"
-                "\tmovs r0, 0\n"
-                "\tb _0810CB7E\n"
-                "_0810CB7C:\n"
-                "\tmovs r0, 0x1\n"
-                "_0810CB7E:\n"
-                "\tadd sp, 0x8\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r1}\n"
-                "\tbx r1");
-}
-#endif
 
 void sub_810CB90(void)
 {

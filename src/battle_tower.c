@@ -18,7 +18,7 @@
 #include "new_game.h"
 #include "save.h"
 #include "item.h"
-#include "script_pokemon_util_80A0058.h"
+#include "script_pokemon_util.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/moves.h"

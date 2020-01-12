@@ -1254,7 +1254,7 @@ const u8 *const gUnknown_83FE7F4[] = {
     sText_Speed
 };
 
-const u8 gUnknown_83FE80C[] = _("{HIGHLIGHT 2}SAFARI BALLS"); //
+const u8 gText_SafariBalls[] = _("{HIGHLIGHT 2}SAFARI BALLS"); //
 const u8 gText_HighlightRed_Left[] = _("{HIGHLIGHT 2}Left: ");
 const u8 gText_HighlightRed[] = _("{HIGHLIGHT 2}");
 const u8 gText_Sleep[] = _("sleep");

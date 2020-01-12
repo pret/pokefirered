@@ -259,5 +259,7 @@ void sub_80FA42C(void);
 void sub_800B284(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
 bool8 sub_800A474(u8 a0);
+void LinkVSync(void);
+bool8 HandleLinkConnection(void);
 
 #endif // GUARD_LINK_H

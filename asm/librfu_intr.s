@@ -19,7 +19,7 @@ IntrSIO32: @ 81DFC50
 	cmp r0, 0
 	ldmdbeq r11, {r11,sp,lr}
 	bxeq lr
-	bl sub_81E05AC
+	bl Callback_Dummy_ID
 	ldmdb r11, {r11,sp,lr}
 	bx lr
 _081DFC8C:
@@ -205,7 +205,7 @@ _081DFEFC:
 	beq _081DFF3C
 	ldrh r1, [r0, 0x12]
 	ldrb r0, [r0, 0x6]
-	bl sub_81E05A4
+	bl Callback_Dummy_M
 	b _081DFF3C
 	.align 2, 0
 _081DFF28: .4byte gSTWIStatus
@@ -424,7 +424,7 @@ _081E01D0:
 	beq _081E0348
 	mov r0, 0x1EC
 	add r0, r0, 0x2
-	bl sub_81E05A8
+	bl Callback_Dummy_S
 	b _081E0348
 _081E0244:
 	mov r3, 0x120
@@ -446,7 +446,7 @@ _081E0244:
 	ldrb r0, [r0, 0x6]
 	mov r1, r2
 	orr r0, r0, r3, lsl 8
-	bl sub_81E05A8
+	bl Callback_Dummy_S
 	b _081E0348
 _081E0298:
 	mov r3, 0x208
@@ -681,17 +681,17 @@ STWI_init_slave: @ 81E0518
 _081E05A0: .4byte gSTWIStatus
 	arm_func_end STWI_init_slave
 
-	arm_func_start sub_81E05A4
-sub_81E05A4: @ 81E05A4
+	arm_func_start Callback_Dummy_M
+Callback_Dummy_M: @ 81E05A4
 	bx r2
-	arm_func_end sub_81E05A4
+	arm_func_end Callback_Dummy_M
 
-	arm_func_start sub_81E05A8
-sub_81E05A8: @ 81E05A8
+	arm_func_start Callback_Dummy_S
+Callback_Dummy_S: @ 81E05A8
 	bx r1
-	arm_func_end sub_81E05A8
+	arm_func_end Callback_Dummy_S
 
-	arm_func_start sub_81E05AC
-sub_81E05AC: @ 81E05AC
+	arm_func_start Callback_Dummy_ID
+Callback_Dummy_ID: @ 81E05AC
 	bx r0
-	arm_func_end sub_81E05AC
+	arm_func_end Callback_Dummy_ID

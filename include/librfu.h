@@ -616,7 +616,7 @@ u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot);
 
     // Functions for sending/receiving data to RFU
         // Data transmission
-void rfu_REQ_sendData(u8 clockChangeFlag);
+void rfu_REQ_sendData(bool8 clockChangeFlag);
         // Used only by parent device. Resend previous sent data (packet)
 void rfu_REQ_PARENT_resumeRetransmitAndChange(void);
         // Read receive data

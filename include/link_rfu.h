@@ -55,11 +55,11 @@ struct UnkRfuStruct_1
     /* 0x020 */ const u16 *unk_20;
     /* 0x024 */ u8 unk_24;
     /* 0x026 */ u16 unk_26;
-    /* 0x028 */ u16 unk_28[4];
+    /* 0x028 */ u16 unk_28[RFU_CHILD_MAX];
     /* 0x030 */ u8 unk_30;
     // aligned
     /* 0x032 */ u16 unk_32;
-    /* 0x034 */ u16 unk_34[4];
+    /* 0x034 */ u16 unk_34[RFU_CHILD_MAX];
     /* 0x03c */ const struct UnkLinkRfuStruct_02022B2C *unk_3c;
     /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);

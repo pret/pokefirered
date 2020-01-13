@@ -1533,7 +1533,7 @@ void rfu_UNI_clearRecvNewDataFlag(u8 slotStatusIndex)
         gRfuSlotStatusUNI[slotStatusIndex]->recv.newDataFlag = 0;
 }
 
-void rfu_REQ_sendData(u8 clockChangeFlag)
+void rfu_REQ_sendData(bool8 clockChangeFlag)
 {
     if (gRfuLinkStatus->parentChild != MODE_NEUTRAL)
     {

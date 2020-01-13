@@ -905,7 +905,7 @@ _080F8D2A:
 	bl rfu_UNI_clearRecvNewDataFlag
 _080F8D84:
 	movs r0, 0x1
-	bl rfu_REQ_sendData_wrapper
+	bl LinkRfu_REQ_SendData_HandleParentRelationship
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1410,7 +1410,7 @@ sub_80F911C: @ 80F911C
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
 	movs r0, 0
-	bl rfu_REQ_sendData_wrapper
+	bl LinkRfu_REQ_SendData_HandleParentRelationship
 	b _080F91F6
 	.align 2, 0
 _080F9138: .4byte gUnknown_3005450
@@ -1484,7 +1484,7 @@ _080F91CC:
 	ldrb r0, [r0]
 	bl rfu_UNI_readySendData
 	movs r0, 0x1
-	bl rfu_REQ_sendData_wrapper
+	bl LinkRfu_REQ_SendData_HandleParentRelationship
 	b _080F91F0
 	.align 2, 0
 _080F91E4: .4byte gUnknown_3005450
@@ -5249,7 +5249,7 @@ rfu_REQ_recvData_then_sendData: @ 80FAE74
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
 	movs r0, 0
-	bl rfu_REQ_sendData_wrapper
+	bl LinkRfu_REQ_SendData_HandleParentRelationship
 _080FAE8C:
 	pop {r0}
 	bx r0

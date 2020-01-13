@@ -29,7 +29,7 @@
       "x": 65528,
       "y": 12,
       "elevation": 10,
-      "movement_type": "0",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": 6,

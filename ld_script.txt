@@ -226,7 +226,7 @@ SECTIONS {
         src/save_menu_util.o(.text);
         src/map_preview_screen.o(.text);
         asm/link_rfu_2.o(.text);
-        asm/link_rfu.o(.text);
+        src/link_rfu.o(.text);
         asm/easy_chat_2.o(.text);
         src/pokedex_screen.o(.text);
         asm/pokedex_screen.o(.text);

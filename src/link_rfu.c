@@ -59,7 +59,7 @@ s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16))
     {
         return 4;
     }
-    CpuFill16(0, &gUnknown_3005E10, offsetof(struct UnkRfuStruct_1, filler_48));
+    CpuFill16(0, &gUnknown_3005E10, sizeof(struct UnkRfuStruct_1));
     gUnknown_3005E10.unk_06 = -1;
     gUnknown_3005E10.unk_40 = func1;
     gUnknown_3005E10.unk_44 = func2;

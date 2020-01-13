@@ -63,7 +63,6 @@ struct UnkRfuStruct_1
     /* 0x03c */ const struct UnkLinkRfuStruct_02022B2C *unk_3c;
     /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);
-    /* 0x048 */ u8 filler_48[8];
 };
 
 void AddTextPrinterToWindow1(const u8 *str);

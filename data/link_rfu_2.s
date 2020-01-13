@@ -13,7 +13,7 @@ gUnknown_843EBB4:: @ 843EBB4
 	.align 1
 	.2byte 0x0002
 	.4byte gUnknown_3005440
-	.4byte gUnknown_3005E00
+	.4byte Rfu+2480
 	.byte 0x01, 0x00
 	.2byte 0x0258, 0x012c
 	.align 2

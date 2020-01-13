@@ -78,7 +78,7 @@ sub_814B754: @ 814B754
 _0814B772:
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, _0814B78C @ =gUnknown_3005450
+	ldr r0, _0814B78C @ =Rfu
 	mov r1, r8
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
@@ -86,7 +86,7 @@ _0814B772:
 	.align 2, 0
 _0814B784: .4byte gReceivedRemoteLinkPlayers
 _0814B788: .4byte gWirelessCommType
-_0814B78C: .4byte gUnknown_3005450
+_0814B78C: .4byte Rfu
 _0814B790:
 	bl GetLinkPlayerCount
 	lsls r0, 24
@@ -103,13 +103,13 @@ _0814B790:
 _0814B7AC:
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, _0814B7BC @ =gUnknown_3005450
+	ldr r0, _0814B7BC @ =Rfu
 	movs r1, 0
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
 	b _0814B7DC
 	.align 2, 0
-_0814B7BC: .4byte gUnknown_3005450
+_0814B7BC: .4byte Rfu
 _0814B7C0:
 	ldr r6, _0814B7E8 @ =gUnknown_203F3DC
 	ldr r0, _0814B7EC @ =0x000041c0
@@ -120,7 +120,7 @@ _0814B7C0:
 	bne _0814B7F4
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, _0814B7F0 @ =gUnknown_3005450
+	ldr r0, _0814B7F0 @ =Rfu
 	strh r5, [r0, 0x10]
 	strh r5, [r0, 0x12]
 _0814B7DC:
@@ -132,7 +132,7 @@ _0814B7DC:
 	.align 2, 0
 _0814B7E8: .4byte gUnknown_203F3DC
 _0814B7EC: .4byte 0x000041c0
-_0814B7F0: .4byte gUnknown_3005450
+_0814B7F0: .4byte Rfu
 _0814B7F4:
 	str r4, [r5]
 	movs r4, 0

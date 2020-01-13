@@ -1537,7 +1537,7 @@ void rfu_REQ_sendData(bool8 clockChangeFlag)
 {
     if (gRfuLinkStatus->parentChild != MODE_NEUTRAL)
     {
-        if (gRfuLinkStatus->parentChild == 1
+        if (gRfuLinkStatus->parentChild == MODE_PARENT
          && !(gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag | gRfuLinkStatus->sendSlotUNIFlag))
         {
             if (gRfuStatic->commExistFlag)

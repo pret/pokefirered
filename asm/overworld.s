@@ -7124,7 +7124,7 @@ _08058350: .4byte gWirelessCommType
 _08058354: .4byte gLink
 _08058358: .4byte 0x00000339
 _0805835C:
-	ldr r0, _08058368 @ =gUnknown_3005450
+	ldr r0, _08058368 @ =Rfu
 	ldr r1, _0805836C @ =0x000008d2
 	adds r0, r1
 	ldrb r0, [r0]
@@ -7132,7 +7132,7 @@ _08058364:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058368: .4byte gUnknown_3005450
+_08058368: .4byte Rfu
 _0805836C: .4byte 0x000008d2
 	thumb_func_end sub_805833C
 

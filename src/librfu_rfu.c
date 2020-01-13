@@ -1555,7 +1555,7 @@ void rfu_REQ_sendData(bool8 clockChangeFlag)
                 gRfuFixed->LLFBuffer[0] = 1;
                 gRfuFixed->LLFBuffer[4] = 0xFF;
                 STWI_set_Callback_M(rfu_CB_sendData3);
-                if (clockChangeFlag == 0)
+                if (!clockChangeFlag)
                     STWI_send_DataTxREQ(gRfuFixed->LLFBuffer, 1);
                 else
                     STWI_send_DataTxAndChangeREQ(gRfuFixed->LLFBuffer, 1);
@@ -1569,7 +1569,7 @@ void rfu_REQ_sendData(bool8 clockChangeFlag)
             if (gRfuLinkStatus->LLFReadyFlag)
             {
                 STWI_set_Callback_M(rfu_CB_sendData);
-                if (clockChangeFlag != 0)
+                if (clockChangeFlag)
                 {
                     STWI_send_DataTxAndChangeREQ(gRfuFixed->LLFBuffer, gRfuStatic->totalPacketSize + 4);
                     return;
@@ -1577,7 +1577,7 @@ void rfu_REQ_sendData(bool8 clockChangeFlag)
                 STWI_send_DataTxREQ(gRfuFixed->LLFBuffer, gRfuStatic->totalPacketSize + 4);
             }
         }
-        if (clockChangeFlag != 0)
+        if (clockChangeFlag)
         {
             if (gRfuLinkStatus->parentChild == MODE_PARENT)
             {

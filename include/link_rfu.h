@@ -64,8 +64,6 @@ struct UnkRfuStruct_1
     /* 0x040 */ void (*unk_40)(u8, u8);
     /* 0x044 */ void (*unk_44)(u16);
     /* 0x048 */ u8 filler_48[8];
-    /* 0x050 */ u32 unk_50[0x399];
-    /* 0xeb4 */ u8 filler_e64[12];
 };
 
 void AddTextPrinterToWindow1(const u8 *str);

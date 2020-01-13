@@ -123,12 +123,8 @@ gUnknown_3005DE6: @ 3005DE6
 gUnknown_3005E00: @ 3005E00
 	.space 0x10
 
-gUnknown_3005E10: @ 3005E10
-	.space 0x10
-
-gUnknown_3005E20: @ 3005E20
-	.space 0x40
-
+	.align 4
+	.include "link_rfu.o"
 	.align 4
 	.include "list_menu.o"
 	.align 2

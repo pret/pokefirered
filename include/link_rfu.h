@@ -104,6 +104,7 @@ void var_800D_set_xB(void);
 struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void);
 void sub_80FCF34(void);
 void InitRFU(void);
+void sub_80FEB14(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

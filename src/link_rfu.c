@@ -4,21 +4,20 @@
 
 struct UnkRfuStruct_1 gUnknown_3005E10;
 
-void sub_80FD4E4(void);
-void sub_80FDC28(u32 a0);
-void sub_80FDC98(u16 reqCommandId, u16 reqResult);
-void sub_80FE394(u16 reqCommandId);
-void sub_80FE418(void);
-void sub_80FE63C(void);
-void sub_80FE6F0(void);
-void sub_80FE74C(void);
-u8 sub_80FE778(void);
-void sub_80FE7F0(u8 a0, u8 a1);
-void sub_80FE818(u8 bmDisconnectSlot);
-void sub_80FE83C(u8 a0);
-void sub_80FE918(void);
-void sub_80FEAF4(void);
-void sub_80FEB14(void);
+static void sub_80FD4E4(void);
+static void sub_80FDC28(u32 a0);
+static void sub_80FDC98(u16 reqCommandId, u16 reqResult);
+static void sub_80FE394(u16 reqCommandId);
+static void sub_80FE418(void);
+static void sub_80FE63C(void);
+static void sub_80FE6F0(void);
+static void sub_80FE74C(void);
+static u8 sub_80FE778(void);
+static void sub_80FE7F0(u8 a0, u8 a1);
+static void sub_80FE818(u8 bmDisconnectSlot);
+static void sub_80FE83C(u8 a0);
+static void sub_80FE918(void);
+static void sub_80FEAF4(void);
 
 u32 sub_80FD3A4(void)
 {
@@ -68,7 +67,7 @@ s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16))
     return 0;
 }
 
-void sub_80FD484(void)
+static void sub_80FD484(void)
 {
     CpuFill16(0, &gUnknown_3005E10, offsetof(struct UnkRfuStruct_1, unk_40));
     gUnknown_3005E10.unk_06 = -1;
@@ -89,7 +88,7 @@ void sub_80FD4B0(const struct UnkLinkRfuStruct_02022B2C *unk0)
     }
 }
 
-void sub_80FD4E4(void)
+static void sub_80FD4E4(void)
 {
     u8 i;
 
@@ -220,7 +219,7 @@ u8 sub_80FD610(u16 parentId, u16 unk_1a)
     return 0;
 }
 
-void sub_80FD6F4(u8 lossSlot)
+static void sub_80FD6F4(u8 lossSlot)
 {
     u8 i;
 
@@ -326,7 +325,7 @@ void sub_80FD760(bool8 a0)
     }
 }
 
-bool8 sub_80FD850(u16 reqCommandId)
+static bool8 sub_80FD850(u16 reqCommandId)
 {
     bool8 retVal;
     u8 i;
@@ -540,7 +539,7 @@ void sub_80FDA30(u32 a0)
     }
 }
 
-void sub_80FDC28(u32 a0)
+static void sub_80FDC28(u32 a0)
 {
     if (gUnknown_3005E10.unk_07 == 5)
     {
@@ -580,7 +579,7 @@ void sub_80FDC28(u32 a0)
     }
 }
 
-void sub_80FDC98(u16 r8, u16 r6)
+static void sub_80FDC98(u16 r8, u16 r6)
 {
     u8 sp0;
     register u8 *stwiRecvBuffer asm("r0");
@@ -944,7 +943,7 @@ void sub_80FDC98(u16 r8, u16 r6)
     }
 }
 
-void sub_80FE394(u16 reqCommandId)
+static void sub_80FE394(u16 reqCommandId)
 {
     u8 r7;
     u8 ackFlag;
@@ -983,7 +982,7 @@ void sub_80FE394(u16 reqCommandId)
     gUnknown_3005E10.unk_0e = r7;
 }
 
-void sub_80FE418(void)
+static void sub_80FE418(void)
 {
     u8 flags;
     u8 sp0;
@@ -1101,7 +1100,7 @@ void sub_80FE418(void)
     }
 }
 
-void sub_80FE63C(void)
+static void sub_80FE63C(void)
 {
     u16 imeBak = REG_IME;
     REG_IME = 0;
@@ -1133,7 +1132,7 @@ void sub_80FE63C(void)
     }
 }
 
-void sub_80FE6F0(void)
+static void sub_80FE6F0(void)
 {
     if (gUnknown_3005E10.unk_04 == 15 && gRfuSlotStatusNI[gUnknown_3005E10.unk_10]->send.state == 0x26)
     {
@@ -1145,7 +1144,7 @@ void sub_80FE6F0(void)
     }
 }
 
-void sub_80FE74C(void)
+static void sub_80FE74C(void)
 {
     if (gUnknown_3005E10.unk_06 == 0 && gUnknown_3005E10.unk_0a == 1)
     {
@@ -1157,7 +1156,7 @@ void sub_80FE74C(void)
     }
 }
 
-u8 sub_80FE778(void)
+static u8 sub_80FE778(void)
 {
     u8 i;
     const u16 *ptr;
@@ -1176,7 +1175,7 @@ u8 sub_80FE778(void)
     return flags;
 }
 
-void sub_80FE7F0(u8 a0, u8 a1)
+static void sub_80FE7F0(u8 a0, u8 a1)
 {
     if (gUnknown_3005E10.unk_40 != NULL)
     {
@@ -1185,7 +1184,7 @@ void sub_80FE7F0(u8 a0, u8 a1)
     gUnknown_3005E10.unk_14 = gUnknown_3005E10.unk_16 = 0;
 }
 
-void sub_80FE818(u8 a0)
+static void sub_80FE818(u8 a0)
 {
     u8 unk_0e_bak = gUnknown_3005E10.unk_0e;
     gUnknown_3005E10.unk_0e = 1;
@@ -1194,7 +1193,7 @@ void sub_80FE818(u8 a0)
     gUnknown_3005E10.unk_0e = unk_0e_bak;
 }
 
-void sub_80FE83C(u8 a0)
+static void sub_80FE83C(u8 a0)
 {
     u8 i;
 
@@ -1231,7 +1230,7 @@ void sub_80FE83C(u8 a0)
     }
 }
 
-void sub_80FE918(void)
+static void sub_80FE918(void)
 {
     u8 i;
     u8 j;
@@ -1279,7 +1278,7 @@ void sub_80FEA10(void (*func)(u16))
     rfu_setMSCCallback(sub_80FE394);
 }
 
-void sub_80FEA28(void (*func)(u8, u8))
+static void sub_80FEA28(void (*func)(u8, u8))
 {
     gUnknown_3005E10.unk_40 = func;
 }
@@ -1299,7 +1298,7 @@ u8 sub_80FEA34(u8 a0, u16 a1)
     return 0;
 }
 
-u8 sub_80FEA78(u16 a0)
+static u8 sub_80FEA78(u16 a0)
 {
     if (gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag)
     {
@@ -1311,7 +1310,7 @@ u8 sub_80FEA78(u16 a0)
     return 0;
 }
 
-u8 sub_80FEAB4(u8 a0)
+static u8 sub_80FEAB4(u8 a0)
 {
     if (gUnknown_3005E10.unk_04 == 9 || gUnknown_3005E10.unk_04 == 10 || gUnknown_3005E10.unk_04 == 11)
     {
@@ -1330,7 +1329,7 @@ u8 sub_80FEAB4(u8 a0)
     return 0;
 }
 
-void sub_80FEAF4(void)
+static void sub_80FEAF4(void)
 {
     if (gUnknown_3005E10.unk_02)
     {

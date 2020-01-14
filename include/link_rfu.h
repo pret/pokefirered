@@ -24,6 +24,20 @@ struct UnkLinkRfuStruct_02022B2C
     u16 unk_14;
 };
 
+struct UnkLinkRfuStruct_02022B44
+{
+    u8 fill_00[6];
+    u16 unk_06;
+    u8 fill_08[6];
+    vu8 unk_0e;
+    u8 unk_0f;
+    u8 fill_10[0x54];
+    u16 unk_64;
+    u8 fill_66[0x1d];
+    u8 unk_83;
+    u8 fill_84[0x58];
+};
+
 struct UnkRfuStruct_1
 {
     /* 0x000 */ u8 unk_00;
@@ -65,6 +79,26 @@ struct UnkRfuStruct_1
     /* 0x044 */ void (*unk_44)(u16);
 };
 
+struct UnkRfuStruct_2_Sub_124
+{
+    /* 0x000 */ u8 unk_00[20][70];
+    /* 0x578 */ vu8 unk_8c0;
+    /* 0x579 */ vu8 unk_8c1;
+    /* 0x57a */ vu8 unk_8c2;
+    /* 0x57b */ vu8 unk_8c3;
+};
+
+struct UnkRfuStruct_2_Sub_9e8
+{
+    /* 0x000 */ u8 unk_00[40][14];
+    /* 0x230 */ vu8 unk_230;
+    /* 0x231 */ vu8 unk_231;
+    /* 0x232 */ vu8 unk_232;
+    /* 0x233 */ vu8 unk_233;
+};
+
+extern struct UnkRfuStruct_1 gUnknown_3005E10;
+
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
 void sub_80FA190(void);
@@ -105,6 +139,20 @@ struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void);
 void sub_80FCF34(void);
 void InitRFU(void);
 void sub_80FEB14(void);
+
+void sub_80FC478(struct UnkRfuStruct_2_Sub_124 *ptr);
+void sub_80FC4D4(struct UnkRfuStruct_2_Sub_9e8 *ptr);
+
+void sub_80FD4B0(const struct UnkLinkRfuStruct_02022B2C *unk0);
+u8 sub_80FD538(u8 r5, u16 r7, u16 r8, const u16 *r6);
+void sub_80FD760(bool8 a0);
+void sub_80FEA10(void (*func)(u16));
+void sub_80FB9E4(u8 a0, u16 a1);
+u8 sub_80FB9F4(void);
+void LinkRfu_REQ_SendData_HandleParentRelationship(bool8 clockChangeFlag);
+void sub_80FC588(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
+void sub_80FD52C(void);
+u8 sub_80FD610(u16 parentId, u16 unk_1a);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

@@ -225,6 +225,7 @@ SECTIONS {
         asm/box_party_pokemon_dropdown.o(.text);
         src/save_menu_util.o(.text);
         src/map_preview_screen.o(.text);
+        src/link_rfu_2.o(.text);
         asm/link_rfu_2.o(.text);
         asm/link_rfu_4.o(.text);
         src/link_rfu.o(.text);
@@ -510,6 +511,7 @@ SECTIONS {
         src/new_menu_helpers.o(.rodata);
         data/box_party_pokemon_dropdown.o(.rodata);
         src/map_preview_screen.o(.rodata);
+        src/link_rfu_2.o(.rodata);
         data/link_rfu_2.o(.rodata);
         data/link_rfu_4.o(.rodata);
         data/link_rfu.o(.rodata);

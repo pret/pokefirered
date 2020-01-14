@@ -7,18 +7,6 @@
 	.align 2
 
 	.align 2
-gUnknown_843ED94:: @ 843ED94
-	abspath "rfu.c"
-
-	.align 2
-gUnknown_843EDC4:: @ 843EDC4
-	.asciz "Rfu.RfuFunc == NULL"
-
-	.align 2
-gUnknown_843EDD8:: @ 843EDD8
-	.asciz "size<=252"
-
-	.align 2
 gUnknown_843EDE4:: @ 843EDE4
 	.asciz "PokemonSioInfo"
 

@@ -97,6 +97,14 @@ struct UnkRfuStruct_2_Sub_9e8
     /* 0x233 */ vu8 unk_233;
 };
 
+struct UnkRfuStruct_2_Sub_c1c
+{
+    /* 0x00 */ u8 unk_00[2][14];
+    /* 0x1c */ vu8 unk_1c;
+    /* 0x1d */ vu8 unk_1d;
+    /* 0x1e */ vu8 unk_1e;
+};
+
 extern struct UnkRfuStruct_1 gUnknown_3005E10;
 
 void AddTextPrinterToWindow1(const u8 *str);
@@ -120,7 +128,7 @@ void Rfu_set_zero(void);
 u8 GetRfuPlayerCount(void);
 void sub_80F9828(void);
 u8 rfu_get_multiplayer_id(void);
-bool8 Rfu_InitBlockSend(const void * src, u16 size);
+bool32 Rfu_InitBlockSend(const u8 * src, size_t size);
 bool8 sub_80FA0F8(u8 a0);
 u8 Rfu_GetBlockReceivedStatus(void);
 void Rfu_SetBlockReceivedFlag(u8 who);
@@ -139,6 +147,7 @@ struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void);
 void sub_80FCF34(void);
 void InitRFU(void);
 void sub_80FEB14(void);
+bool32 sub_80FBA00(void);
 
 void sub_80FC478(struct UnkRfuStruct_2_Sub_124 *ptr);
 void sub_80FC4D4(struct UnkRfuStruct_2_Sub_9e8 *ptr);
@@ -153,6 +162,11 @@ void LinkRfu_REQ_SendData_HandleParentRelationship(bool8 clockChangeFlag);
 void sub_80FC588(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
 void sub_80FD52C(void);
 u8 sub_80FD610(u16 parentId, u16 unk_1a);
+bool8 sub_80FC79C(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+bool8 sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
+bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
+bool8 sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

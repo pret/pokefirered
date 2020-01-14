@@ -188,6 +188,7 @@ extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
 
 extern u8 gShouldAdvanceLinkState;
+extern u16 gLinkPartnersHeldKeys[6];
 
 void Task_DestroySelf(u8);
 void OpenLink(void);

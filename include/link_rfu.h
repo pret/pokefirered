@@ -109,7 +109,7 @@ extern struct UnkRfuStruct_1 gUnknown_3005E10;
 
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
-void sub_80FA190(void);
+void LinkRfu_FatalError(void);
 void MG_DrawCheckerboardPattern(void);
 void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
 bool8 IsLinkRfuTaskFinished(void);
@@ -167,6 +167,13 @@ bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 bool8 sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
 bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
 bool8 sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
+u8 sub_80FEA34(u8 a0, u16 a1);
+void sub_80FDA30(u32 a0);
+void sub_80FCB54(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r3);
+void rfu_syncVBlank_(void);
+s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
+void sub_80FEB3C(void);
+void sub_80FAFE0(u8 a0);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

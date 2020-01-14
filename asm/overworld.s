@@ -5722,7 +5722,7 @@ sub_8057910: @ 8057910
 	lsrs r0, 24
 	cmp r0, 0x3C
 	bls _0805792E
-	bl sub_80FA190
+	bl LinkRfu_FatalError
 _0805792E:
 	pop {r0}
 	bx r0

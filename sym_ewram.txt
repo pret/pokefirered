@@ -330,14 +330,10 @@ gUnknown_203ABE8: @ 203ABE8
 
 	.align 2
 	.include "src/map_preview_screen.o"
+	.align 2
+	.include "src/link_rfu_2.o"
 
 	.align 2
-gUnknown_203ABF0: @ 203ABF0
-	.space 0x18
-
-gUnknown_203AC08: @ 203AC08
-	.space 0xDC
-
 gUnknown_203ACE4: @ 203ACE4
 	.space 0x4
 

@@ -75,17 +75,8 @@ gUnknown_3005078: @ 3005078
 gUnknown_3005430: @ 3005430
 	.space 0x10
 
-gUnknown_3005440: @ 3005440
-	.space 0x10
-
-@ This name is necessary to match assert statements in link_rfu_2
-Rfu: @ 3005450
-	.space 0x9AC
-
 	.align 4
-gUnknown_3005E00: @ 3005E00
-	.space 0x10
-
+	.include "link_rfu_2.o"
 	.align 4
 	.include "link_rfu.o"
 	.align 4

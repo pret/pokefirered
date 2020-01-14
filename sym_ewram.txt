@@ -17,7 +17,6 @@
 	.include "src/link.o"
 	.space 8
 
-	@ .include "src/link_rfu.o"
 	.align 2
 	.include "src/battle_controllers.o"
 	.align 2

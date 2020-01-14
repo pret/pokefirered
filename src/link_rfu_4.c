@@ -928,3 +928,21 @@ void RecordMixTrainerNames(void)
         Free(newRecords);
     }
 }
+
+bool32 sub_80FD338(u16 id, u8 *name)
+{
+    s32 i;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (StringCompareN(gSaveBlock1Ptr->trainerNameRecords[i].trainerName, name, 7) == 0 && gSaveBlock1Ptr->trainerNameRecords[i].trainerId == id)
+        {
+            return TRUE;
+        }
+        if (NameIsEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
+        {
+            return FALSE;
+        }
+    }
+    return FALSE;
+}

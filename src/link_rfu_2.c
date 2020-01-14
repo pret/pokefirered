@@ -24,7 +24,6 @@ struct UnkRfuStruct_8010A14{
 static EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_203ABF0 = {};
 static EWRAM_DATA struct UnkLinkRfuStruct_02022B44 gUnknown_203AC08 = {};
 
-static u8 gUnknown_3001188;
 static struct RfuAPIBuffer gRfuAPIBuffer;
 static u8 gUnknown_3001FF8[14];
 static u16 gUnknown_3002008[7];
@@ -276,7 +275,7 @@ static void sub_80F887C(s32 r2, s32 r5)
     s32 r6 = 0;
     if (r5 == -1)
     {
-        for (i = 0; i < 4; r2 >>= 1, i++)
+        for (i = 0; i < RFU_CHILD_MAX; r2 >>= 1, i++)
         {
             if (r2 & 1)
             {
@@ -287,7 +286,7 @@ static void sub_80F887C(s32 r2, s32 r5)
     }
     else
     {
-        for (i = 0; i < 4; r1 >>= 1, i++)
+        for (i = 0; i < RFU_CHILD_MAX; r1 >>= 1, i++)
         {
             if (!(r1 & 1))
             {
@@ -296,13 +295,13 @@ static void sub_80F887C(s32 r2, s32 r5)
         }
         for (r4 = 4; r4 != 0; r4--)
         {
-            for (i = 0; i < 4 && Rfu.unk_cde[i] != r4; i++);
+            for (i = 0; i < RFU_CHILD_MAX && Rfu.unk_cde[i] != r4; i++);
             if (i == 4)
             {
                 r6 = r4;
             }
         }
-        for (r5 &= ~r2, i = 0; i < 4; r5 >>= 1, i++)
+        for (r5 &= ~r2, i = 0; i < RFU_CHILD_MAX; r5 >>= 1, i++)
         {
             if (r5 & 1)
             {
@@ -351,8 +350,8 @@ static void sub_80F893C(u8 taskId)
     {
         u8 r5 = 1 << Rfu.unk_c3e;
         rfu_clearSlot(12, Rfu.unk_c3e);
-        rfu_setRecvBuffer(16, Rfu.unk_c3e, Rfu.unk_c3f, 70);
-        rfu_UNI_setSendData(r5, Rfu.unk_4c, 14);
+        rfu_setRecvBuffer(16, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
+        rfu_UNI_setSendData(r5, Rfu.unk_4c, sizeof(Rfu.unk_4c));
         gTasks[taskId].data[1] = 8;
         DestroyTask(taskId);
         if (gUnknown_203AC08.unk_0f == 0)
@@ -370,11 +369,11 @@ static void sub_80F8AA4(void)
 {
     u8 i;
     u8 r5 = gUnknown_3005E10.unk_00;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (r5 & 1)
         {
-            rfu_setRecvBuffer(16, i, Rfu.unk_14[i], 14);
+            rfu_setRecvBuffer(16, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
             rfu_clearSlot(3, i);
         }
         r5 >>= 1;
@@ -384,7 +383,7 @@ static void sub_80F8AA4(void)
 static void sub_80F8AEC(void)
 {
     u8 r5 = gUnknown_3005E10.unk_00;
-    rfu_UNI_setSendData(r5, Rfu.unk_c87, 70);
+    rfu_UNI_setSendData(r5, Rfu.unk_c87, sizeof(Rfu.unk_c87));
     Rfu.unk_cda = sub_80F886C(r5);
     Rfu.unk_ce2 = r5;
     sub_80F887C(r5, -1);
@@ -416,7 +415,7 @@ static void sub_80F8B34(u8 taskId)
     case 18:
         break;
     case 13:
-        if (rfu_UNI_setSendData(1 << Rfu.unk_c3e, Rfu.unk_4c, 14) == 0)
+        if (rfu_UNI_setSendData(1 << Rfu.unk_c3e, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
         {
             Rfu.unk_0c = 0;
             DestroyTask(taskId);
@@ -521,7 +520,7 @@ void sub_80F8DC0(void)
             sub_80F85F8();
         }
     }
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NELEMS(gUnknown_843ED88); i++)
     {
         if (FuncIsActiveTask(gUnknown_843ED88[i]) == TRUE)
         {
@@ -597,7 +596,7 @@ static void sub_80F8FAC(u8 a0)
 {
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (a0 & 1)
         {
@@ -751,7 +750,7 @@ static bool32 sub_80F9204(void)
             Rfu.unk_cdc = 0;
             gUnknown_203AC08.unk_06++;
             flags = gUnknown_3005E10.unk_00;
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < RFU_CHILD_MAX; i++)
             {
                 if (flags & 1)
                 {
@@ -787,18 +786,18 @@ static bool32 sub_80F9204(void)
             {
                 gUnknown_203AC08.unk_0e = 0;
                 rfu_clearSlot(3, Rfu.unk_cda);
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
                     if ((Rfu.unk_ce5 >> i) & 1)
                     {
-                        rfu_setRecvBuffer(0x10, i, Rfu.unk_14[i], 14);
+                        rfu_setRecvBuffer(0x10, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
                     }
                 }
                 sub_80F887C(Rfu.unk_ce2, Rfu.unk_ce2 | Rfu.unk_ce5);
                 Rfu.unk_ce9 = Rfu.unk_ce5;
                 Rfu.unk_ce2 |= Rfu.unk_ce5;
                 Rfu.unk_ce5 = 0;
-                rfu_UNI_setSendData(Rfu.unk_ce2, Rfu.unk_c87, 70);
+                rfu_UNI_setSendData(Rfu.unk_ce2, Rfu.unk_c87, sizeof(Rfu.unk_c87));
                 Rfu.unk_cda = sub_80F886C(Rfu.unk_ce2);
                 CreateTask(sub_80FAA94, 0);
             }
@@ -930,7 +929,7 @@ static u8 sub_80F9770(const u8 *a0)
 
     if (Rfu.unk_0c == 1)
         return FALSE;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         Rfu.unk_cde[i] = a0[i];
     }
@@ -939,7 +938,7 @@ static u8 sub_80F9770(const u8 *a0)
 
 static void rfu_func_080F97B8(void)
 {
-    // static u8 gUnknown_3001188;
+     static u8 gUnknown_3001188;
     if (gReceivedRemoteLinkPlayers
         && gHeldKeyCodeToSend != LINK_KEY_CODE_NULL
         && gLinkTransferringData != TRUE)
@@ -1149,7 +1148,7 @@ static void sub_80F9D04(u16 command)
         Rfu.playerCount = gUnknown_843EC41[tmp] + 1;
         gSendCmd[1] = Rfu.playerCount;
         buff = (u8 *)(gSendCmd + 2);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
             buff[i] = Rfu.unk_cde[i];
         break;
     case 0x6600:
@@ -1450,7 +1449,7 @@ bool32 sub_80FA44C(u32 a0)
 
 u8 sub_80FA484(bool32 a0)
 {
-    if (a0 == FALSE)
+    if (!a0)
         return sub_80FEA34(0, 0);
     sub_80FEA34(1, 0x258);
     return 0;
@@ -1462,7 +1461,7 @@ void sub_80FA4A8(void)
     sub_80FD760(FALSE);
 }
 
-u8 rfu_get_multiplayer_id(void)
+u8 LinkRfu_GetMultiplayerId(void)
 {
     if (Rfu.unk_0c == 1)
         return 0;
@@ -1476,12 +1475,12 @@ u8 GetRfuPlayerCount(void)
 
 bool8 IsLinkRfuTaskFinished(void)
 {
-    return Rfu.RfuFunc ? FALSE : TRUE;
+    return Rfu.RfuFunc != NULL ? FALSE : TRUE;
 }
 
 static void CallRfuFunc(void)
 {
-    if (Rfu.RfuFunc)
+    if (Rfu.RfuFunc != NULL)
         Rfu.RfuFunc();
 }
 
@@ -1518,7 +1517,7 @@ bool32 sub_80FA5D4(void)
 {
     u8 flags = 0;
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (Rfu.unk_cd5[i] == 11)
         {
@@ -1531,7 +1530,7 @@ bool32 sub_80FA5D4(void)
         rfu_REQ_disconnect(flags);
         rfu_waitREQComplete();
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (Rfu.unk_cd5[i] == 10 || Rfu.unk_cd5[i] == 11)
             return TRUE;
@@ -1579,7 +1578,7 @@ static void sub_80FA738(void)
     s32 i;
 
     sub_80FA528();
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if (gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_SUCCESS || gRfuSlotStatusNI[i]->send.state == SLOT_STATE_SEND_FAILED)
         {
@@ -1683,7 +1682,7 @@ static void sub_80FA834(u8 taskId)
         sub_80FEA34(1, 0x258);
         if (Rfu.unk_ce6)
         {
-            for (i = 0; i < 4; i++)
+            for (i = 0; i < RFU_CHILD_MAX; i++)
             {
                 if ((Rfu.unk_ce6 >> i) & 1)
                 {
@@ -1700,7 +1699,7 @@ static void sub_80FA9D0(u16 a0)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if ((a0 >> i) & 1)
             Rfu.unk_cde[i] = 0;
@@ -1711,7 +1710,7 @@ static void sub_80FA9FC(const struct UnkRfuStruct_8010A14 *a0)
 {
     s32 i;
     Rfu.playerCount = a0->unk_0f;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
         Rfu.unk_cde[i] = a0->unk_10[i];
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
@@ -1769,7 +1768,7 @@ static void sub_80FAA94(u8 taskId)
         r5 = (struct UnkRfuStruct_8010A14 *)gBlockSendBuffer;
         memcpy(r5->unk_00, "PokemonSioInfo", sizeof("PokemonSioInfo"));
         r5->unk_0f = Rfu.playerCount;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
             r5->unk_10[i] = Rfu.unk_cde[i];
         memcpy(r5->unk_14, gLinkPlayers, sizeof gLinkPlayers);
         gTasks[taskId].data[0]++;
@@ -1777,7 +1776,7 @@ static void sub_80FAA94(u8 taskId)
     case 4:
         r5 = (struct UnkRfuStruct_8010A14 *)gBlockSendBuffer;
         r5->unk_0f = Rfu.playerCount;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
             r5->unk_10[i] = Rfu.unk_cde[i];
         memcpy(r5->unk_14, gLinkPlayers, sizeof gLinkPlayers);
         if (SendBlock(0, gBlockSendBuffer, 0xa0))
@@ -1791,7 +1790,7 @@ static void sub_80FAA94(u8 taskId)
             Rfu.unk_ce8 = 0;
             if (Rfu.unk_ce6)
             {
-                for (i = 0; i < 4; i++)
+                for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
                     if ((Rfu.unk_ce6 >> i) & 1)
                     {
@@ -1958,7 +1957,7 @@ void sub_80FB030(u32 a0)
         r5 = 0;
         r7 = 0;
         r8 = Rfu.unk_ce2 ^ Rfu.unk_ce3;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if ((r8 >> i) & 1)
             {
@@ -2020,7 +2019,7 @@ static void sub_80FB184(u8 a0, u8 unused1)
         break;
     case 0x11:
         sub_80FB564(gUnknown_3005E10.unk_14);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if ((gUnknown_3005E10.unk_14 >> i) & 1)
             {
@@ -2165,7 +2164,7 @@ static void sub_80FB564(s32 a0)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if ((a0 >> i) & 1)
         {
@@ -2180,7 +2179,7 @@ static u8 sub_80FB5A0(s32 a0)
     u8 ret = 0;
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if ((a0 >> i) & 1)
         {
@@ -2370,7 +2369,7 @@ bool8 Rfu_IsMaster(void)
 
 void RFUVSync(void)
 {
-    rfu_syncVBlank_();
+    LinkRfu_syncVBlank_();
 }
 
 void sub_80FBA44(void)
@@ -2400,7 +2399,7 @@ static void sub_80FBA78(void)
         sub_800B1F4();
         OpenLink();
         SeedRng(gMain.vblankCounter2);
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
             gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
 
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_1D_MAP);
@@ -2480,7 +2479,7 @@ static u8 sub_80FBC70(const u8 *a0, u16 a1)
     u8 i;
     u8 ret = 0xFF;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         u16 trainerId = ReadU16(((struct GFtgtGname *)gRfuLinkStatus->partner[i].gname)->unk_00.playerTrainerId);
         if (sub_80FA44C(gRfuLinkStatus->partner[i].serialNo)
@@ -2520,7 +2519,7 @@ void sub_80FBD6C(u32 a0)
         s32 i;
         u8 var = 0;
 
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if (Rfu.unk_cde[i] == a0 && (Rfu.unk_ce2 >> i) & 1)
                 var |= 1 << i;
@@ -2716,7 +2715,7 @@ bool32 sub_80FC1CC(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         if ((gUnknown_3005E10.unk_00 >> i) & 1 && Rfu.unk_cd1[i] == 0)
             return FALSE;
@@ -2755,7 +2754,7 @@ static void sub_80FC228(void)
     nullsub_88(gRfuLinkStatus->linkLossSlotFlag, 0x17, 1, 1);
     if (Rfu.unk_0c == 1)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             if ((gRfuLinkStatus->getNameFlag >> i) & 1)
             {
@@ -2764,7 +2763,7 @@ static void sub_80FC228(void)
                 nullsub_87(gRfuLinkStatus->partner[i].uname, 0x16, i + 3);
             }
         }
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             for (j = 0; j < 14; j++)
             {
@@ -2775,7 +2774,7 @@ static void sub_80FC228(void)
     }
     else if (gRfuLinkStatus->connSlotFlag != 0 && gRfuLinkStatus->getNameFlag != 0)
     {
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < RFU_CHILD_MAX; i++)
         {
             nullsub_88(0, 1, i + 3, 4);
             nullsub_87(gUnknown_843EE47, 6, i + 3);
@@ -2796,7 +2795,7 @@ static void sub_80FC228(void)
                 nullsub_87(gRfuLinkStatus->partner[i].uname, 0x16, i + 3);
             }
         }
-        for (; i < 4; i++)
+        for (; i < RFU_CHILD_MAX; i++)
         {
             nullsub_88(0, 1, i + 3, 4);
             nullsub_87(gUnknown_843EE47, 6, i + 3);

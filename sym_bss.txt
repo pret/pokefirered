@@ -72,11 +72,9 @@ gUnknown_3000FE8: @ 3000FE8
 	.include "src/easy_chat.o"
 	.align 2
 	.include "src/link_rfu_2.o"
-
 	.align 2
-gUnknown_3002018: @ 3002018
-	.space 0x4
-
+	.include "src/link_rfu_4.o"
+	.align 2
 	.include "src/quest_log.o"
 
 	.align 2

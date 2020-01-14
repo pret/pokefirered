@@ -145,6 +145,15 @@ struct UnkRfuStruct_2_Sub_c1c
     /* 0x1e */ vu8 unk_1e;
 };
 
+struct UnkRfuStruct_Sub_Unused
+{
+    /* 0x000 */ u8 unk_00[2][256];
+    /* 0x200 */ vu8 unk_200;
+    /* 0x201 */ vu8 unk_201;
+    /* 0x202 */ vu8 unk_202;
+    /* 0x203 */ vu8 unk_203;
+};
+
 struct UnkRfuStruct_2
 {
     /* 0x000 */ void (*RfuFunc)(void);
@@ -157,7 +166,7 @@ struct UnkRfuStruct_2
     /* 0x00f */ u8 unk_0f;
     /* 0x010 */ u16 unk_10;
     /* 0x012 */ u16 unk_12;
-    /* 0x014 */ u8 unk_14[4][14];
+    /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 unk_5a;
     /* 0x05b */ u8 unk_5b;
@@ -193,14 +202,14 @@ struct UnkRfuStruct_2
     /* 0x986 */ u8 unk_cce; // childId
     /* 0x987 */ u8 unk_ccf;
     /* 0x988 */ vu8 unk_cd0;
-    /* 0x989 */ u8 unk_cd1[4];
-    /* 0x98d */ u8 unk_cd5[4];
+    /* 0x989 */ u8 unk_cd1[RFU_CHILD_MAX];
+    /* 0x98d */ u8 unk_cd5[RFU_CHILD_MAX];
     /* 0x991 */ u8 unk_cd9;
     /* 0x992 */ u8 unk_cda;
     /* 0x993 */ vu8 unk_cdb;
     /* 0x994 */ vu8 unk_cdc;
     /* 0x995 */ u8 unk_cdd;
-    /* 0x996 */ u8 unk_cde[4];
+    /* 0x996 */ u8 unk_cde[RFU_CHILD_MAX];
     /* 0x99a */ u8 unk_ce2;
     /* 0x99b */ u8 unk_ce3;
     /* 0x99c */ u8 unk_ce4;
@@ -209,8 +218,8 @@ struct UnkRfuStruct_2
     /* 0x99f */ u8 unk_ce7;
     /* 0x9a0 */ u8 unk_ce8;
     /* 0x9a1 */ u8 unk_ce9;
-    /* 0x9a2 */ u8 unk_cea[4];
-    /* 0x9a6 */ u8 unk_cee[4];
+    /* 0x9a2 */ u8 unk_cea[RFU_CHILD_MAX];
+    /* 0x9a6 */ u8 unk_cee[RFU_CHILD_MAX];
 }; // size: 0x9AC
 
 extern struct UnkRfuStruct_1 gUnknown_3005E10;
@@ -235,7 +244,7 @@ bool32 IsSendingKeysToRfu(void);
 void Rfu_set_zero(void);
 u8 GetRfuPlayerCount(void);
 void sub_80F9828(void);
-u8 rfu_get_multiplayer_id(void);
+u8 LinkRfu_GetMultiplayerId(void);
 bool32 Rfu_InitBlockSend(const u8 * src, size_t size);
 bool8 sub_80FA0F8(u8 a0);
 u8 Rfu_GetBlockReceivedStatus(void);
@@ -272,13 +281,13 @@ void sub_80FD52C(void);
 u8 sub_80FD610(u16 parentId, u16 unk_1a);
 bool8 sub_80FC79C(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
 bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
-bool8 sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
+void sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
 bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
-bool8 sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
+void sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 u8 sub_80FEA34(u8 a0, u16 a1);
 void sub_80FDA30(u32 a0);
 void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
-void rfu_syncVBlank_(void);
+void LinkRfu_syncVBlank_(void);
 s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
 void sub_80FEB3C(void);
 void sub_80FAFE0(u8 a0);

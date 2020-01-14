@@ -417,7 +417,7 @@ static bool8 sub_80FD850(u16 reqCommandId)
     return retVal;
 }
 
-void rfu_syncVBlank_(void)
+void LinkRfu_syncVBlank_(void)
 {
     if (rfu_syncVBlank())
     {

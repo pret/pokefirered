@@ -75,12 +75,12 @@ Route25_EventScript_1ACE4F:: @ 81ACE4F
 	release
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_1ACE68:: @ 81ACE68
+CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty:: @ 81ACE68
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 5
 	textcolor 3
-	msgbox gUnknown_81B14E8
+	msgbox PokemonJournal_Text_SpecialFeatureMisty
 	release
 	end
 

@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_House2_EventScript_16A976",
+      "script": "CeruleanCity_House2_EventScript_Hiker",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_House2_EventScript_16A995",
+      "script": "CeruleanCity_House2_EventScript_Lass",
       "flag": "0"
     }
   ],
@@ -77,7 +77,7 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CeruleanCity_House2_EventScript_16A99E"
+      "script": "CeruleanCity_House2_EventScript_WallHole"
     }
   ]
 }

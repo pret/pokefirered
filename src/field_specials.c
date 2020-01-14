@@ -45,13 +45,14 @@
 #include "constants/maps.h"
 #include "constants/region_map.h"
 #include "constants/moves.h"
+#include "constants/menu.h"
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
 static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
-static EWRAM_DATA u8 sUnknownBoxId = 0;
+static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
 struct ListMenuTemplate sFieldSpecialsListMenuTemplate;
@@ -1143,7 +1144,7 @@ void Special_ListMenu(void)
         task = &gTasks[taskId];
         switch (gSpecialVar_0x8004)
         {
-        case 0:
+        case LISTMENU_BADGES:
             task->data[0] = 4;
             task->data[1] = 9;
             task->data[2] = 1;
@@ -1153,7 +1154,7 @@ void Special_ListMenu(void)
             task->data[6] = 1;
             task->data[15] = taskId;
             break;
-        case 1:
+        case LISTMENU_SILPHCO_FLOORS:
             task->data[0] = 7;
             task->data[1] = 12;
             task->data[2] = 1;
@@ -1165,7 +1166,7 @@ void Special_ListMenu(void)
             task->data[7] = sElevatorScroll;
             task->data[8] = sElevatorCursorPos;
             break;
-        case 2:
+        case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
             task->data[0] = 4;
             task->data[1] = 4;
             task->data[2] = 1;
@@ -1175,7 +1176,7 @@ void Special_ListMenu(void)
             task->data[6] = 0;
             task->data[15] = taskId;
             break;
-        case 3:
+        case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
             task->data[0] = 4;
             task->data[1] = 6;
             task->data[2] = 1;
@@ -1185,7 +1186,7 @@ void Special_ListMenu(void)
             task->data[6] = 0;
             task->data[15] = taskId;
             break;
-        case 4:
+        case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
             task->data[0] = 4;
             task->data[1] = 4;
             task->data[2] = 1;
@@ -1195,7 +1196,7 @@ void Special_ListMenu(void)
             task->data[6] = 1;
             task->data[15] = taskId;
             break;
-        case 5:
+        case LISTMENU_BERRY_POWDER:
             task->data[0] = 7;
             task->data[1] = 12;
             task->data[2] = 16;
@@ -1205,7 +1206,7 @@ void Special_ListMenu(void)
             task->data[6] = 0;
             task->data[15] = taskId;
             break;
-        case 6:
+        case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
             task->data[0] = 3;
             task->data[1] = 3;
             task->data[2] = 1;
@@ -1226,6 +1227,7 @@ void Special_ListMenu(void)
 }
 
 static const u8 *const sListMenuLabels[][12] = {
+    [LISTMENU_BADGES] = 
     {
         gText_BoulderBadge,
         gText_CascadeBadge,
@@ -1236,7 +1238,9 @@ static const u8 *const sListMenuLabels[][12] = {
         gText_VolcanoBadge,
         gText_EarthBadge,
         gOtherText_Exit,
-    }, {
+    }, 
+    [LISTMENU_SILPHCO_FLOORS] = 
+    {
         gText_11F,
         gText_10F,
         gText_9F,
@@ -1249,24 +1253,32 @@ static const u8 *const sListMenuLabels[][12] = {
         gText_2F,
         gText_1F,
         gOtherText_Exit,
-    }, {
+    }, 
+    [LISTMENU_ROCKET_HIDEOUT_FLOORS] = // Unncessary, MULTICHOICE_ROCKET_HIDEOUT_ELEVATOR is used instead
+    {
         gText_B1F,
         gText_B2F,
         gText_B4F,
         gOtherText_Exit,
-    }, {
+    }, 
+    [LISTMENU_DEPT_STORE_FLOORS] = // Unncessary, MULTICHOICE_DEPT_STORE_ELEVATOR is used instead
+    {
         gText_5F,
         gText_4F,
         gText_3F,
         gText_2F,
         gText_1F,
         gOtherText_Exit,
-    }, {
+    }, 
+    [LISTMENU_WIRELESS_LECTURE_HEADERS] = // Unnecessary, MULTICHOICE_LINKED_DIRECT_UNION is used instead
+    {
         gText_LinkedGamePlay,
         gText_DirectCorner,
         gText_UnionRoom,
         gOtherText_Quit,
-    }, {
+    }, 
+    [LISTMENU_BERRY_POWDER] = 
+    {
         gText_Energypowder_50,
         gText_EnergyRoot_80,
         gText_HealPowder_50,
@@ -1279,7 +1291,9 @@ static const u8 *const sListMenuLabels[][12] = {
         gText_HpUp_1000,
         gText_PpUp_3000,
         gOtherText_Exit,
-    }, {
+    }, 
+    [LISTMENU_TRAINER_TOWER_FLOORS] = // Unnecessary, MULTICHOICE_ROOFTOP_B1F is used instead
+    {
         gText_Rooftop,
         gText_B1F,
         gOtherText_Exit,
@@ -1295,7 +1309,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     struct Task * task = &gTasks[taskId];
     u8 windowId;
     ScriptContext2_Enable();
-    if (gSpecialVar_0x8004 == 1)
+    if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
         sListMenuLastScrollPosition = sElevatorScroll;
     else
         sListMenuLastScrollPosition = 0;
@@ -1920,31 +1934,31 @@ u16 Special_BattleCardAction(void)
     }
 }
 
-void set_unknown_box_id(u8 boxId)
+void SetPCBoxToSendMon(u8 boxId)
 {
-    sUnknownBoxId = boxId;
+    sPCBoxToSendMon = boxId;
 }
 
-u16 get_unknown_box_id(void)
+u16 GetPCBoxToSendMon(void)
 {
-    return sUnknownBoxId;
+    return sPCBoxToSendMon;
 }
 
-bool8 sub_80CC7B4(void)
+bool8 ShouldShowBoxWasFullMessage(void)
 {
     if (FlagGet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON))
         return FALSE;
-    if (StorageGetCurrentBox() == VarGet(VAR_0x4037))
+    if (StorageGetCurrentBox() == VarGet(VAR_PC_BOX_TO_SEND_MON))
         return FALSE;
     FlagSet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
     return TRUE;
 }
 
-bool8 sub_80CC7F8(void)
+bool8 IsDestinationBoxFull(void)
 {
     s32 i;
     s32 j;
-    set_unknown_box_id(VarGet(VAR_0x4037));
+    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
     i = StorageGetCurrentBox();
     do
     {
@@ -1952,10 +1966,10 @@ bool8 sub_80CC7F8(void)
         {
             if (GetBoxMonData(GetBoxedMonPtr(i, j), MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
-                if (get_unknown_box_id() != i)
+                if (GetPCBoxToSendMon() != i)
                     FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
-                VarSet(VAR_0x4037, i);
-                return sub_80CC7B4();
+                VarSet(VAR_PC_BOX_TO_SEND_MON, i);
+                return ShouldShowBoxWasFullMessage();
             }
         }
         i++;

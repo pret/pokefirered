@@ -18,24 +18,24 @@ gUnknown_81A59DA:: @ 81A59DA
 gUnknown_81A59E7:: @ 81A59E7
 	.string "Isn't my old {STR_VAR_2} great?$"
 
-gUnknown_81A59FE:: @ 81A59FE
+Trade_Text_DoYouHaveMonWouldYouTradeForMon:: @ 81A59FE
 	.string "Hello, there! Do you happen to\n"
 	.string "have a {STR_VAR_1}?\p"
 	.string "Would you agree to a trade for\n"
 	.string "my {STR_VAR_2}?$"
 
-gUnknown_81A5A4E:: @ 81A5A4E
+Trade_Text_WellIfYouDontWantTo:: @ 81A5A4E
 	.string "Well, if you don't want to…$"
 
-gUnknown_81A5A6A:: @ 81A5A6A
+Trade_Text_ThisIsntMon:: @ 81A5A6A
 	.string "Hmmm?\n"
 	.string "This isn't a {STR_VAR_1}.\p"
 	.string "Think of me if you get one.$"
 
-gUnknown_81A5A9D:: @ 81A5A9D
+Trade_Text_Thanks:: @ 81A5A9D
 	.string "Thanks!$"
 
-gUnknown_81A5AA5:: @ 81A5AA5
+Trade_Text_HasTradedMonGrownStronger:: @ 81A5AA5
 	.string "The {STR_VAR_2} that I traded you,\n"
 	.string "has it grown stronger?$"
 

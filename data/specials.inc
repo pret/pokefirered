@@ -365,7 +365,7 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_GetStarter
 	def_special Special_SetSeenMon
 	def_special sub_810C444
-	def_special sub_80CC7B4
+	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
 	def_special Special_UpdateTrainerCardPhotoIcons
 	def_special Special_StickerLadyGetBragFlags
@@ -402,7 +402,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8110AB4
 	def_special sub_8112364
 	def_special Special_GetMENewsJisanItemAndState
-	def_special get_unknown_box_id
+	def_special GetPCBoxToSendMon
 	def_special Special_OpenMuseumFossilPic
 	def_special Special_CloseMuseumFossilPic
 	def_special ChooseMonForMoveTutor
@@ -420,13 +420,13 @@ gSpecials:: @ 815FD60
 	def_special HelpSystem_Enable
 	def_special sub_810B82C
 	def_special CheckHasAtLeastOneBerry
-	def_special sub_815F094
-	def_special sub_815F114
-	def_special sub_815EEB0
-	def_special sub_815EF5C
-	def_special sub_815F070
+	def_special DisplayBerryPowderVendorMenu
+	def_special RemoveBerryPowderVendorMenu
+	def_special Special_HasEnoughBerryPowder
+	def_special Special_TakeBerryPowder
+	def_special PrintPlayerBerryPowderAmount
 	def_special Special_PokemonLeagueLightingEffect
-	def_special sub_814EA7C
+	def_special ShowBerryCrushRankings
 	def_special Special_CapeBrinkGetMoveToTeachLeadPokemon
 	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
 	def_special Special_Credits

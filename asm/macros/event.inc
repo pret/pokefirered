@@ -461,7 +461,7 @@
 	.endm
 
 	@ Removes quantity of item index from the player's Bag.
-	.macro removeitem index:req, quantity:req
+	.macro removeitem index:req, quantity=1
 	.byte 0x45
 	.2byte \index
 	.2byte \quantity

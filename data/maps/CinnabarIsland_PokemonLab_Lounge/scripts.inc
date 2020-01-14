@@ -8,44 +8,44 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E2B9:: @ 816E2B9
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E2C2:: @ 816E2C2
 	lock
 	faceplayer
-	setvar VAR_0x8008, 6
-	call EventScript_1A8CAD
+	setvar VAR_0x8008, INGAME_TRADE_ELECTRODE
+	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_ESPHERE_TRADE, EventScript_16E334
-	msgbox gUnknown_81A59FE, MSGBOX_YESNO
+	msgbox Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E31C
-	call EventScript_1A8CBD
-	compare VAR_0x8004, 6
+	call EventScript_ChooseMonForInGameTrade
+	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge EventScript_16E31C
-	call EventScript_1A8CC9
+	call EventScript_GetInGameTradeSpecies
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne EventScript_16E326
-	call EventScript_1A8CD9
-	msgbox gUnknown_81A5A9D
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_Thanks
 	setflag FLAG_DID_ESPHERE_TRADE
 	release
 	end
 
 EventScript_16E31C:: @ 816E31C
-	msgbox gUnknown_81A5A4E
+	msgbox Trade_Text_WellIfYouDontWantTo
 	release
 	end
 
 EventScript_16E326:: @ 816E326
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A5A6A
+	msgbox Trade_Text_ThisIsntMon
 	release
 	end
 
 EventScript_16E334:: @ 816E334
-	msgbox gUnknown_81A5AA5
+	msgbox Trade_Text_HasTradedMonGrownStronger
 	release
 	end
 
 CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	lock
 	faceplayer
-	setvar VAR_0x8008, 7
+	setvar VAR_0x8008, INGAME_TRADE_TANGELA
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
@@ -56,7 +56,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_16E33E:: @ 816E33E
 	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
-	compare VAR_0x8004, 6
+	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge EventScript_16E3BC
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, GetTradeSpecies

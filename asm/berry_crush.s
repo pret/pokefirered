@@ -432,7 +432,7 @@ _0814BA3C:
 	ldr r1, [r4]
 	ldr r0, [r1, 0x68]
 	str r0, [r1, 0x1C]
-	bl sub_815EEE0
+	bl GiveBerryPowder
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814BA5A

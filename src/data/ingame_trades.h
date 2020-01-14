@@ -1,4 +1,5 @@
 static const struct InGameTrade sInGameTrades[] = {
+    [INGAME_TRADE_MR_MIME] = 
     {
         .nickname = _("MIMIEN"),
         .species = SPECIES_MR_MIME,
@@ -13,7 +14,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_ABRA
-    }, {
+    }, 
+    [INGAME_TRADE_JYNX] = 
+    {
         .nickname = _("ZYNX"),
         .species = SPECIES_JYNX,
         .ivs = {18, 17, 18, 22, 25, 21},
@@ -27,7 +30,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_POLIWHIRL
-    }, {
+    }, 
+    [INGAME_TRADE_NIDORAN] = 
+    {
 #if defined(FIRERED)
         .nickname = _("MS. NIDO"),
         .species = SPECIES_NIDORAN_F,
@@ -57,7 +62,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_NIDORAN_F
 #endif
-    }, {
+    }, 
+    [INGAME_TRADE_FARFETCHD] = 
+    {
         .nickname = _("CH'DING"),
         .species = SPECIES_FARFETCHD,
         .ivs = {20, 25, 21, 24, 15, 20},
@@ -71,7 +78,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SPEAROW
-    }, {
+    }, 
+    [INGAME_TRADE_NIDORINOA] = 
+    {
 #if defined(FIRERED)
         .nickname = _("NINA"),
         .species = SPECIES_NIDORINA,
@@ -101,7 +110,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_NIDORINA
 #endif
-    }, {
+    }, 
+    [INGAME_TRADE_LICKITUNG] = 
+    {
         .nickname = _("MARC"),
         .species = SPECIES_LICKITUNG,
         .ivs = {24, 19, 21, 15, 23, 21},
@@ -119,7 +130,9 @@ static const struct InGameTrade sInGameTrades[] = {
 #elif defined(LEAFGREEN)
         .requestedSpecies = SPECIES_SLOWBRO
 #endif
-    }, {
+    }, 
+    [INGAME_TRADE_ELECTRODE] = 
+    {
         .nickname = _("ESPHERE"),
         .species = SPECIES_ELECTRODE,
         .ivs = {19, 16, 18, 25, 25, 19},
@@ -133,7 +146,9 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_RAICHU
-    }, {
+    }, 
+    [INGAME_TRADE_TANGELA] = 
+    {
         .nickname = _("TANGENY"),
         .species = SPECIES_TANGELA,
         .ivs = {22, 17, 25, 16, 23, 20},
@@ -148,6 +163,7 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_VENONAT
     },
+    [INGAME_TRADE_SEEL] = 
     {
         .nickname = _("SEELOR"),
         .species = SPECIES_SEEL,

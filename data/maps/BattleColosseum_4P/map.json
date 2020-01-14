@@ -1,6 +1,6 @@
 {
   "id": "MAP_BATTLE_COLOSSEUM_4P",
-  "name": "BattleColosseum4P",
+  "name": "BattleColosseum_4P",
   "layout": "LAYOUT_BATTLE_COLOSSEUM_4P",
   "music": "MUS_POKECEN",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
@@ -51,7 +51,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "BattleColosseum4P_EventScript_PlayerSpot0"
+      "script": "BattleColosseum_4P_EventScript_PlayerSpot0"
     },
     {
       "type": "trigger",
@@ -60,7 +60,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "BattleColosseum4P_EventScript_PlayerSpot2"
+      "script": "BattleColosseum_4P_EventScript_PlayerSpot2"
     },
     {
       "type": "trigger",
@@ -69,7 +69,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "BattleColosseum4P_EventScript_PlayerSpot1"
+      "script": "BattleColosseum_4P_EventScript_PlayerSpot1"
     },
     {
       "type": "trigger",
@@ -78,7 +78,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": 0,
-      "script": "BattleColosseum4P_EventScript_PlayerSpot3"
+      "script": "BattleColosseum_4P_EventScript_PlayerSpot3"
     }
   ],
   "bg_events": []

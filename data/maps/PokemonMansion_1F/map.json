@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "PokemonMansion_1F_EventScript_162226",
+      "script": "PokemonMansion_1F_EventScript_Ted",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "PokemonMansion_1F_EventScript_16223D",
+      "script": "PokemonMansion_1F_EventScript_Johnson",
       "flag": "0"
     }
   ],
@@ -158,7 +158,7 @@
       "x": 5,
       "y": 5,
       "elevation": 0,
-      "script": "PokemonMansion_1F_EventScript_162212"
+      "script": "PokemonMansion_1F_EventScript_Statue"
     },
     {
       "type": "hidden_item",

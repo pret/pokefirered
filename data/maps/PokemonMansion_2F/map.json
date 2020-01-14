@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "PokemonMansion_2F_EventScript_16228A",
+      "script": "PokemonMansion_2F_EventScript_Arnie",
       "flag": "0"
     },
     {
@@ -110,21 +110,21 @@
       "x": 2,
       "y": 16,
       "elevation": 0,
-      "script": "PokemonMansion_2F_EventScript_162264"
+      "script": "PokemonMansion_2F_EventScript_Statue"
     },
     {
       "type": "bg_event_type_0",
       "x": 6,
       "y": 31,
       "elevation": 0,
-      "script": "PokemonMansion_2F_EventScript_162281"
+      "script": "PokemonMansion_2F_EventScript_DiaryJuly10th"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 4,
       "elevation": 0,
-      "script": "PokemonMansion_2F_EventScript_162278"
+      "script": "PokemonMansion_2F_EventScript_DiaryJuly5th"
     }
   ]
 }

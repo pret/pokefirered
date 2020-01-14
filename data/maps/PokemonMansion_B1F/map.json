@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "PokemonMansion_B1F_EventScript_162329",
+      "script": "PokemonMansion_B1F_EventScript_Lewis",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 6,
-      "script": "PokemonMansion_B1F_EventScript_162340",
+      "script": "PokemonMansion_B1F_EventScript_Ivan",
       "flag": "0"
     },
     {
@@ -108,21 +108,21 @@
       "x": 21,
       "y": 27,
       "elevation": 0,
-      "script": "PokemonMansion_B1F_EventScript_162320"
+      "script": "PokemonMansion_B1F_EventScript_DiarySep1st"
     },
     {
       "type": "bg_event_type_1",
       "x": 24,
       "y": 29,
       "elevation": 0,
-      "script": "PokemonMansion_B1F_EventScript_16230C"
+      "script": "PokemonMansion_B1F_EventScript_Statue"
     },
     {
       "type": "bg_event_type_1",
       "x": 27,
       "y": 5,
       "elevation": 0,
-      "script": "PokemonMansion_B1F_EventScript_16230C"
+      "script": "PokemonMansion_B1F_EventScript_Statue"
     },
     {
       "type": "hidden_item",

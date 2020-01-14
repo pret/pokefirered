@@ -223,6 +223,8 @@ struct UnkRfuStruct_2
 }; // size: 0x9AC
 
 extern struct UnkRfuStruct_1 gUnknown_3005E10;
+extern struct GFtgtGname gUnknown_3005440;
+extern u8 gUnknown_3005E00[];
 
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
@@ -291,6 +293,8 @@ void LinkRfu_syncVBlank_(void);
 s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
 void sub_80FEB3C(void);
 void sub_80FAFE0(u8 a0);
+bool32 sub_80FA44C(u32 a0);
+bool8 sub_80FC1B0(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

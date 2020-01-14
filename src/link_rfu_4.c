@@ -1,7 +1,15 @@
 #include "global.h"
+#include "decompress.h"
+#include "event_data.h"
+#include "link.h"
 #include "link_rfu.h"
+#include "malloc.h"
 #include "random.h"
+#include "string_util.h"
 #include "text.h"
+#include "constants/flags.h"
+
+EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 
 const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
 
@@ -594,3 +602,329 @@ u8 sub_80FCADC(u8 maxFlags)
                 "\tbx r1");
 }
 #endif
+
+void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
+{
+    s32 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        data->unk_00.playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+    }
+    for (i = 0; i < RFU_CHILD_MAX; i++)
+    {
+        data->unk_04[i] = r3;
+        r3 >>= 8;
+    }
+    data->playerGender = gSaveBlock2Ptr->playerGender;
+    data->unk_0a_0 = r9;
+    data->unk_0a_7 = r2;
+    data->unk_00.unk_00_0 = GAME_LANGUAGE;
+    data->unk_00.unk_01_2 = GAME_VERSION;
+    data->unk_00.unk_00_4 = 0;
+    data->unk_00.unk_00_5 = 0;
+    data->unk_00.unk_00_6 = 0;
+    data->unk_00.isChampion = FlagGet(FLAG_SYS_CAN_LINK_WITH_RS);
+    data->unk_00.hasNationalDex = IsNationalPokedexEnabled();
+    data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
+}
+
+bool8 sub_80FCC3C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+{
+    bool8 retVal;
+
+    if (gUnknown_3005E10.unk_06 == 1)
+    {
+        retVal = TRUE;
+        if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
+        {
+            memcpy(buff1, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+        }
+        else
+        {
+            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
+            memset(buff2, 0, RFU_USER_NAME_LENGTH);
+        }
+    }
+    else
+    {
+        retVal = FALSE;
+        if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo))
+        {
+            memcpy(buff1, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+        }
+        else
+        {
+            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
+            memset(buff2, 0, RFU_USER_NAME_LENGTH);
+        }
+    }
+    return retVal;
+}
+
+bool8 sub_80FCCF4(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+{
+    bool8 retVal = FALSE;
+    if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
+    {
+        memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+        memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+        retVal = TRUE;
+    }
+    else
+    {
+        memset(buff1, 0, RFU_GAME_NAME_LENGTH);
+        memset(buff2, 0, RFU_USER_NAME_LENGTH);
+    }
+    return retVal;
+}
+
+void sub_80FCD50(struct GFtgtGname *buff1, u8 *buff2)
+{
+    memcpy(buff1, &gUnknown_3005440, RFU_GAME_NAME_LENGTH);
+    memcpy(buff2, gUnknown_3005E00, RFU_USER_NAME_LENGTH);
+}
+
+void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
+{
+    u8 sprId;
+
+    if (x == 0 && y == 0)
+    {
+        x = 0xE7;
+        y = 0x08;
+    }
+    if (gRfuLinkStatus->parentChild == MODE_PARENT)
+    {
+        sprId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
+        gSprites[sprId].data[7] = 0x1234;
+        gSprites[sprId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[sprId].invisible = TRUE;
+        gWirelessStatusIndicatorSpriteId = sprId;
+    }
+    else
+    {
+        gWirelessStatusIndicatorSpriteId = CreateSprite(&sWirelessStatusIndicatorSpriteTemplate, x, y, 0);
+        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0x1234;
+        gSprites[gWirelessStatusIndicatorSpriteId].data[6] = GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag);
+        gSprites[gWirelessStatusIndicatorSpriteId].invisible = TRUE;
+    }
+}
+
+void DestroyWirelessStatusIndicatorSprite(void)
+{
+    if (gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
+    {
+        gSprites[gWirelessStatusIndicatorSpriteId].data[7] = 0;
+        DestroySprite(&gSprites[gWirelessStatusIndicatorSpriteId]);
+        gMain.oamBuffer[125] = gDummyOamData;
+        CpuCopy16(&gDummyOamData, (struct OamData *)OAM + 125, sizeof(struct OamData));
+    }
+}
+
+void LoadWirelessStatusIndicatorSpriteGfx(void)
+{
+    if (GetSpriteTileStartByTag(sWirelessStatusIndicatorSpriteSheet.tag) == 0xFFFF)
+    {
+        LoadCompressedSpriteSheet(&sWirelessStatusIndicatorSpriteSheet);
+    }
+    LoadSpritePalette(&sWirelessStatusIndicatorSpritePalette);
+    gWirelessStatusIndicatorSpriteId = 0xFF;
+}
+
+u8 sub_80FCEE4(void)
+{
+    u8 i;
+    u8 flags = gRfuLinkStatus->connSlotFlag;
+    for (i = 0; i < RFU_CHILD_MAX; i++)
+    {
+        if (flags & 1)
+        {
+            return gRfuLinkStatus->strength[i];
+        }
+        flags >>= 1;
+    }
+    return 0;
+}
+
+void sub_80FCF1C(struct Sprite *sprite, s32 signalStrengthAnimNum)
+{
+    if (sprite->data[2] != signalStrengthAnimNum)
+    {
+        sprite->data[2] = signalStrengthAnimNum;
+        sprite->data[3] = 0;
+        sprite->data[4] = 0;
+    }
+}
+
+void sub_80FCF34(void)
+{
+    if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
+    {
+        struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
+        u8 signalStrength = 255;
+        u8 i = 0;
+        if (gRfuLinkStatus->parentChild == MODE_PARENT)
+        {
+            for (i = 0; i < GetLinkPlayerCount() - 1; i++)
+            {
+                if (signalStrength >= sub_80FCADC(i + 1))
+                {
+                    signalStrength = sub_80FCADC(i + 1);
+                }
+            }
+        }
+        else
+        {
+            signalStrength = sub_80FCEE4();
+        }
+        if (sub_80FC1B0() == TRUE)
+        {
+            sprite->data[0] = 4;
+        }
+        else if (signalStrength < 25)
+        {
+            sprite->data[0] = 3;
+        }
+        else if (signalStrength >= 25 && signalStrength < 127)
+        {
+            sprite->data[0] = 2;
+        }
+        else if (signalStrength >= 127 && signalStrength < 229)
+        {
+            sprite->data[0] = 1;
+        }
+        else if (signalStrength >= 229)
+        {
+            sprite->data[0] = 0;
+        }
+        if (sprite->data[0] != sprite->data[1])
+        {
+            sub_80FCF1C(sprite, sprite->data[0]);
+            sprite->data[1] = sprite->data[0];
+        }
+        if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])
+        {
+            sprite->data[4]++;
+            sprite->data[3] = 0;
+            if (sprite->anims[sprite->data[2]][sprite->data[4]].type == -2)
+            {
+                sprite->data[4] = 0;
+            }
+        }
+        else
+        {
+            sprite->data[3]++;
+        }
+        gMain.oamBuffer[125] = sWirelessStatusIndicatorOamData;
+        gMain.oamBuffer[125].x = sprite->pos1.x + sprite->centerToCornerVecX;
+        gMain.oamBuffer[125].y = sprite->pos1.y + sprite->centerToCornerVecY;
+        gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
+        gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
+        CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
+        if (sub_80FB9F4() == 1)
+        {
+            DestroyWirelessStatusIndicatorSprite();
+        }
+    }
+}
+
+void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
+{
+    int i;
+    dest->trainerId = trainerId;
+    for (i = 0; i < 7; i++)
+    {
+        if (name[i] == EOS)
+            break;
+        dest->trainerName[i] = name[i];
+    }
+    dest->trainerName[i] = EOS;
+}
+
+void ZeroName(u8 *name)
+{
+    s32 i;
+
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+    {
+        *name++ = 0;
+    }
+}
+
+bool32 NameIsEmpty(const u8 *name)
+{
+    s32 i;
+
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+    {
+        if (*name++ != 0)
+        {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+// Save the currently connected players into the trainer records, shifting all previous records down.
+void RecordMixTrainerNames(void)
+{
+    if (gWirelessCommType != 0)
+    {
+        s32 i;
+        s32 j;
+        s32 nextSpace;
+        s32 connectedTrainerRecordIndices[5];
+        struct TrainerNameRecord *newRecords = AllocZeroed(20 * sizeof(struct TrainerNameRecord));
+
+        // Check if we already have a record saved for connected trainers.
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            connectedTrainerRecordIndices[i] = -1;
+            for (j = 0; j < 20; j++)
+            {
+                if ((u16)gLinkPlayers[i].trainerId ==  gSaveBlock1Ptr->trainerNameRecords[j].trainerId && StringCompare(gLinkPlayers[i].name, gSaveBlock1Ptr->trainerNameRecords[j].trainerName) == 0)
+                {
+                    connectedTrainerRecordIndices[i] = j;
+                }
+            }
+        }
+
+        // Save the connected trainers first, at the top of the list.
+        nextSpace = 0;
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            if (i != GetMultiplayerId() && gLinkPlayers[i].language != LANGUAGE_JAPANESE)
+            {
+                CopyTrainerRecord(&newRecords[nextSpace], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
+
+                // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
+                if (connectedTrainerRecordIndices[i] >= 0)
+                {
+                    ZeroName(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndices[i]].trainerName);
+                }
+                nextSpace++;
+            }
+        }
+
+        // Copy all non-empty records to the new list, in the order they appear on the old list. If the list is full,
+        // the last (oldest) records will be dropped.
+        for (i = 0; i < 20; i++)
+        {
+            if (!NameIsEmpty(gSaveBlock1Ptr->trainerNameRecords[i].trainerName))
+            {
+                CopyTrainerRecord(&newRecords[nextSpace], gSaveBlock1Ptr->trainerNameRecords[i].trainerId, gSaveBlock1Ptr->trainerNameRecords[i].trainerName);
+                if (++nextSpace >= 20)
+                {
+                    break;
+                }
+            }
+        }
+
+        // Finalize the new list, and clean up.
+        memcpy(gSaveBlock1Ptr->trainerNameRecords, newRecords, 20 * sizeof(struct TrainerNameRecord));
+        Free(newRecords);
+    }
+}

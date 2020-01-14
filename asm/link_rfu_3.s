@@ -3544,7 +3544,7 @@ _081175E4:
 	.4byte _0811761C
 	.4byte _0811761C
 _0811761C:
-	bl sub_80FD1A0
+	bl RecordMixTrainerNames
 _08117620:
 	ldr r0, _08117638 @ =gUnknown_203B058
 	ldrb r0, [r0]

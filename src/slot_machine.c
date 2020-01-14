@@ -768,7 +768,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         else if (JOY_NEW(DPAD_DOWN))
         {
             sSlotMachineState->bet++;
-            TakeCoins(1);
+            RemoveCoins(1);
             PlaySE(SE_REGI);
             sub_8141148(8, 0);
             sub_8141148(2, 1);
@@ -780,7 +780,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
             if (GetCoins() >= toAdd)
             {
                 sSlotMachineState->bet = 3;
-                TakeCoins(toAdd);
+                RemoveCoins(toAdd);
             }
             else
             {
@@ -927,7 +927,7 @@ static void MainTask_ConfirmExitGame(u8 taskId)
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 0:
-            GiveCoins(sSlotMachineState->bet);
+            AddCoins(sSlotMachineState->bet);
             sub_8141148(8, 0);
             data[0] = 3;
             break;
@@ -1008,7 +1008,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
         {
             if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
             {
-                GiveCoins(sSlotMachineState->payout);
+                AddCoins(sSlotMachineState->payout);
                 sSlotMachineState->payout = 0;
             }
             else
@@ -1020,7 +1020,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
                         PlaySE(SE_PIN);
                     if (sSlotMachineState->payout != 0)
                     {
-                        GiveCoins(1);
+                        AddCoins(1);
                         sSlotMachineState->payout--;
                     }
                     data[1] = 8;

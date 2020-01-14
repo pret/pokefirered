@@ -213,7 +213,7 @@ EventScript_16CDA5:: @ 816CDA5
 	end
 
 EventScript_16CDB3:: @ 816CDB3
-	takecoins VAR_TEMP_2
+	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
@@ -227,7 +227,7 @@ EventScript_16CDB3:: @ 816CDB3
 	end
 
 EventScript_16CDE0:: @ 816CDE0
-	takecoins VAR_TEMP_2
+	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
@@ -330,7 +330,7 @@ EventScript_16CF3F:: @ 816CF3F
 	checkitemspace VAR_TEMP_1, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16CF79
-	takecoins VAR_TEMP_2
+	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	giveitem VAR_TEMP_1
 	goto EventScript_16CC10

@@ -1910,7 +1910,7 @@ CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_1B292B
 	playse SE_SHOP
-	takemoney 50, 0
+	removemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
 	message gUnknown_81B1E24

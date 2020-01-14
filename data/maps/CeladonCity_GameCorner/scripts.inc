@@ -52,8 +52,8 @@ EventScript_16C706:: @ 816C706
 	checkmoney 10000, 0
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C7AC
-	givecoins 500
-	takemoney 10000, 0
+	addcoins 500
+	removemoney 10000, 0
 	goto EventScript_16C762
 	end
 
@@ -64,8 +64,8 @@ EventScript_16C734:: @ 816C734
 	checkmoney 1000, 0
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16C7AC
-	givecoins 50
-	takemoney 1000, 0
+	addcoins 50
+	removemoney 1000, 0
 	goto EventScript_16C762
 	end
 
@@ -133,7 +133,7 @@ CeladonCity_GameCorner_EventScript_16C7E7:: @ 816C7E7
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9990
 	goto_if_ge EventScript_16C82B
-	givecoins 10
+	addcoins 10
 	textcolor 3
 	msgbox gUnknown_8196B0D
 	playse SE_SHOP
@@ -194,7 +194,7 @@ CeladonCity_GameCorner_EventScript_16C89E:: @ 816C89E
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9980
 	goto_if_ge EventScript_16C8E2
-	givecoins 20
+	addcoins 20
 	textcolor 3
 	msgbox gUnknown_8196D47
 	playse SE_SHOP
@@ -222,7 +222,7 @@ CeladonCity_GameCorner_EventScript_16C8FE:: @ 816C8FE
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, 9980
 	goto_if_ge EventScript_16C942
-	givecoins 20
+	addcoins 20
 	textcolor 3
 	msgbox gUnknown_8196DF8
 	playse SE_SHOP

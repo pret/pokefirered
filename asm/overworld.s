@@ -6837,16 +6837,16 @@ _08058122:
 sub_805812C: @ 805812C
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, _08058178 @ =BattleColosseum4P_EventScript_PlayerSpot0
+	ldr r0, _08058178 @ =BattleColosseum_4P_EventScript_PlayerSpot0
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _0805817C @ =BattleColosseum4P_EventScript_PlayerSpot1
+	ldr r0, _0805817C @ =BattleColosseum_4P_EventScript_PlayerSpot1
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058180 @ =BattleColosseum4P_EventScript_PlayerSpot2
+	ldr r0, _08058180 @ =BattleColosseum_4P_EventScript_PlayerSpot2
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _08058184 @ =BattleColosseum4P_EventScript_PlayerSpot3
+	ldr r0, _08058184 @ =BattleColosseum_4P_EventScript_PlayerSpot3
 	cmp r1, r0
 	beq _080581B4
 	ldr r0, _08058188 @ =RecordCenter_EventScript_Spot
@@ -6861,10 +6861,10 @@ sub_805812C: @ 805812C
 	ldr r0, _08058194 @ =RecordCenter_EventScript_Spot
 	cmp r1, r0
 	beq _080581B4
-	ldr r0, _08058198 @ =BattleColosseum2P_EventScript_PlayerSpot0
+	ldr r0, _08058198 @ =BattleColosseum_2P_EventScript_PlayerSpot0
 	cmp r1, r0
 	beq _08058172
-	ldr r0, _0805819C @ =BattleColosseum2P_EventScript_PlayerSpot1
+	ldr r0, _0805819C @ =BattleColosseum_2P_EventScript_PlayerSpot1
 	cmp r1, r0
 	beq _080581B4
 	ldr r0, _080581A0 @ =TradeCenter_EventScript_Chair0
@@ -6874,16 +6874,16 @@ _08058172:
 	movs r0, 0xA
 	b _080581B6
 	.align 2, 0
-_08058178: .4byte BattleColosseum4P_EventScript_PlayerSpot0
-_0805817C: .4byte BattleColosseum4P_EventScript_PlayerSpot1
-_08058180: .4byte BattleColosseum4P_EventScript_PlayerSpot2
-_08058184: .4byte BattleColosseum4P_EventScript_PlayerSpot3
+_08058178: .4byte BattleColosseum_4P_EventScript_PlayerSpot0
+_0805817C: .4byte BattleColosseum_4P_EventScript_PlayerSpot1
+_08058180: .4byte BattleColosseum_4P_EventScript_PlayerSpot2
+_08058184: .4byte BattleColosseum_4P_EventScript_PlayerSpot3
 _08058188: .4byte RecordCenter_EventScript_Spot
 _0805818C: .4byte RecordCenter_EventScript_Spot
 _08058190: .4byte RecordCenter_EventScript_Spot
 _08058194: .4byte RecordCenter_EventScript_Spot
-_08058198: .4byte BattleColosseum2P_EventScript_PlayerSpot0
-_0805819C: .4byte BattleColosseum2P_EventScript_PlayerSpot1
+_08058198: .4byte BattleColosseum_2P_EventScript_PlayerSpot0
+_0805819C: .4byte BattleColosseum_2P_EventScript_PlayerSpot1
 _080581A0: .4byte TradeCenter_EventScript_Chair0
 _080581A4:
 	ldr r0, _080581B0 @ =TradeCenter_EventScript_Chair1

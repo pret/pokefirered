@@ -74,10 +74,10 @@ gStdScripts:: @ 8160450
 	.4byte Std_ReceivedItem
 gStdScriptsEnd::
 
-	.include "data/maps/BattleColosseum2P/scripts.inc"
+	.include "data/maps/BattleColosseum_2P/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"
 	.include "data/maps/RecordCenter/scripts.inc"
-	.include "data/maps/BattleColosseum4P/scripts.inc"
+	.include "data/maps/BattleColosseum_4P/scripts.inc"
 	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/ViridianForest/scripts.inc"
 	.include "data/maps/MtMoon_1F/scripts.inc"

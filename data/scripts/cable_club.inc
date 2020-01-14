@@ -610,69 +610,69 @@ CableClub_EventScript_ShowBattleRecords:: @ 81BB8A7
 	releaseall
 	end
 
-BattleColosseum2P_EventScript_PlayerSpot0:: @ 81BB8C3
+BattleColosseum_2P_EventScript_PlayerSpot0:: @ 81BB8C3
 	setvar VAR_0x8005, 0
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum2P_EventScript_PlayerSpot1:: @ 81BB8CF
+BattleColosseum_2P_EventScript_PlayerSpot1:: @ 81BB8CF
 	setvar VAR_0x8005, 1
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum4P_EventScript_PlayerSpot0:: @ 81BB8DB
+BattleColosseum_4P_EventScript_PlayerSpot0:: @ 81BB8DB
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
+	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 0
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum4P_EventScript_PlayerSpot1:: @ 81BB8F8
+BattleColosseum_4P_EventScript_PlayerSpot1:: @ 81BB8F8
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
+	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 1
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum4P_EventScript_PlayerSpot2:: @ 81BB915
+BattleColosseum_4P_EventScript_PlayerSpot2:: @ 81BB915
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
+	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 2
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum4P_EventScript_PlayerSpot3:: @ 81BB932
+BattleColosseum_4P_EventScript_PlayerSpot3:: @ 81BB932
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	compare VAR_RESULT, 0
-	goto_if_eq BattleColosseum4P_EventScript_CancelSpotTrigger
+	goto_if_eq BattleColosseum_4P_EventScript_CancelSpotTrigger
 	setvar VAR_0x8005, 3
 	textcolor 3
 	special EnterColosseumPlayerSpot
 	waitstate
 	end
 
-BattleColosseum4P_EventScript_CancelSpotTrigger:: @ 81BB94F
+BattleColosseum_4P_EventScript_CancelSpotTrigger:: @ 81BB94F
 	end
 
 TradeCenter_EventScript_Chair0:: @ 81BB950
@@ -731,7 +731,7 @@ CableClub_EventScript_TooBusyToNotice:: @ 81BB9A3
 	closemessage
 	end
 
-BattleColosseum2P_EventScript_Attendant:: @ 81BB9AF
+BattleColosseum_2P_EventScript_Attendant:: @ 81BB9AF
 	textcolor 3
 	special Script_FacePlayer
 	msgbox Text_TakeSeatStartBattle

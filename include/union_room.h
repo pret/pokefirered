@@ -6,7 +6,7 @@
 
 struct UnkStruct_Shared
 {
-    struct UnkLinkRfuStruct_02022B14 field_0;
+    struct GFtgtGname field_0;
     u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH];
 };
 
@@ -149,7 +149,7 @@ struct TradeUnkStruct
     u32 personality;
 };
 
-extern struct UnkLinkRfuStruct_02022B14Substruct gUnknown_203B064;
+extern struct GFtgtGnameSub gUnknown_203B064;
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 

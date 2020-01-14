@@ -275,34 +275,6 @@
 // Status data for UNI-type communication (refer to gRfuSlotStatusUNI[x]->send.state)
 #define SLOT_STATE_SEND_UNI             (SLOT_BUSY_FLAG | SLOT_SEND_FLAG | LCOM_UNI)        // Transmitting
 
-// TODO: move the 2 structs to some other header as they're declared by GF
-struct UnkLinkRfuStruct_02022B14Substruct
-{
-    u16 unk_00_0:4;
-    u16 unk_00_4:1;
-    u16 unk_00_5:1;
-    u16 unk_00_6:1;
-    u16 isChampion:1;
-    u16 hasNationalDex:1;
-    u16 gameClear:1;
-    u16 unk_01_2:4;
-    u16 unk_01_6:2;
-    u8 playerTrainerId[2];
-};
-
-struct __attribute__((packed, aligned(2))) UnkLinkRfuStruct_02022B14
-{
-    struct UnkLinkRfuStruct_02022B14Substruct unk_00;
-    u8 unk_04[4];
-    u16 species:10;
-    u16 type:6;
-    u8 unk_0a_0:7;
-    u8 unk_0a_7:1;
-    u8 playerGender:1;
-    u8 level:7;
-    u8 unk_0c;
-};
-
 // the following structs are not documented in SDK
 struct RfuPacket8
 {

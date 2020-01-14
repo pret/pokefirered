@@ -58,10 +58,7 @@ struct UnkRfuStruct_2
     /* 0x0fe */ u16 unk_fe;
     /* 0x100 */ u16 unk_100;
     /* 0x102 */ u8 unk_102;
-    /* 0x103 */ u8 filler_103[0x10A - 0x103];
-    /* 0x10A */ struct UnkLinkRfuStruct_02022B14 unk_10A;
-    /* 0x11B */ u8 filler_;
-    /* 0x11C */ u8 playerName[PLAYER_NAME_LENGTH];
+    /* 0x104 */ struct RfuTgtData unk_104;
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
     /* 0x6a0 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
     /* 0x8d4 */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
@@ -112,7 +109,7 @@ static struct RfuAPIBuffer gRfuAPIBuffer;
 static u8 gUnknown_3001FF8[14];
 static u16 gUnknown_3002008[7];
 
-struct UnkLinkRfuStruct_02022B14 gUnknown_3005440;
+struct GFtgtGname gUnknown_3005440;
 struct UnkRfuStruct_2 Rfu;
 u8 gUnknown_3005E00[PLAYER_NAME_LENGTH];
 
@@ -1033,7 +1030,7 @@ static void rfu_func_080F97B8(void)
     }
 }
 
-struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void)
+struct GFtgtGname *sub_80F9800(void)
 {
     return &gUnknown_3005440;
 }
@@ -1994,7 +1991,7 @@ static void sub_80FAF1C(void)
 
 void sub_80FAF34(void)
 {
-    memset(&gUnknown_3005440, 0, 0xD);
+    memset(&gUnknown_3005440, 0, RFU_GAME_NAME_LENGTH);
     sub_80FCB54(&gUnknown_3005440, 0, 0, 0);
 }
 
@@ -2107,7 +2104,7 @@ static void sub_80FB184(u8 a0, u8 unused1)
         {
             if ((gUnknown_3005E10.unk_14 >> i) & 1)
             {
-                struct UnkLinkRfuStruct_02022B14 *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
+                struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
                 if (structPtr->unk_0a_0 == sub_80F9800()->unk_0a_0)
                 {
                     Rfu.unk_cd1[i] = 0;
@@ -2267,7 +2264,7 @@ static u8 sub_80FB5A0(s32 a0)
     {
         if ((a0 >> i) & 1)
         {
-            struct UnkLinkRfuStruct_02022B14 *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
+            struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
             if (structPtr->unk_0a_0 == 0x45)
                 ret |= (1 << i);
         }
@@ -2565,7 +2562,7 @@ static u8 sub_80FBC70(const u8 *a0, u16 a1)
 
     for (i = 0; i < 4; i++)
     {
-        u16 trainerId = ReadU16(((struct UnkLinkRfuStruct_02022B14 *)gRfuLinkStatus->partner[i].gname)->unk_00.playerTrainerId);
+        u16 trainerId = ReadU16(((struct GFtgtGname *)gRfuLinkStatus->partner[i].gname)->unk_00.playerTrainerId);
         if (sub_80FA44C(gRfuLinkStatus->partner[i].serialNo)
             && !StringCompare(a0, gRfuLinkStatus->partner[i].uname)
             && a1 == trainerId)
@@ -2697,7 +2694,7 @@ void sub_80FBF54(const u8 *src, u16 trainerId)
     data[8] = trainerId;
 }
 
-static bool32 sub_80FBF98(s16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
+static bool32 sub_80FBF98(s16 a1, struct GFtgtGname *structPtr)
 {
     if (sub_80F9800()->unk_0a_0 == 0x45)
     {
@@ -2710,7 +2707,7 @@ static bool32 sub_80FBF98(s16 a1, struct UnkLinkRfuStruct_02022B14 *structPtr)
     }
     else if (a1 == 0x44)
     {
-        struct UnkLinkRfuStruct_02022B14 *structPtr2 = &Rfu.unk_10A;
+        struct GFtgtGname *structPtr2 = (struct GFtgtGname *)&Rfu.unk_104.gname;
         if (structPtr2->species == SPECIES_EGG)
         {
             if (structPtr->species == structPtr2->species)
@@ -2742,11 +2739,11 @@ static void sub_80FC028(u8 taskId)
 
     if (Rfu.unk_ccd != 0 && gUnknown_3005E10.unk_06 == 0)
     {
-        u16 trainerId = ReadU16(Rfu.unk_10A.unk_00.playerTrainerId);
-        u8 id = sub_80FBC70(Rfu.playerName, trainerId);
+        u16 trainerId = ReadU16(((struct GFtgtGname *)&Rfu.unk_104.gname)->unk_00.playerTrainerId);
+        u8 id = sub_80FBC70(Rfu.unk_104.uname, trainerId);
         if (id != 0xFF)
         {
-            if (!sub_80FBF98(gTasks[taskId].data[1], (struct UnkLinkRfuStruct_02022B14 *)&gRfuLinkStatus->partner[id].gname))
+            if (!sub_80FBF98(gTasks[taskId].data[1], (struct GFtgtGname *)&gRfuLinkStatus->partner[id].gname))
             {
                 if (gRfuLinkStatus->partner[id].slot != 0xFF && !sub_80FD610(gRfuLinkStatus->partner[id].id, 0x5A))
                 {
@@ -2763,14 +2760,14 @@ static void sub_80FC028(u8 taskId)
     }
 }
 
-void sub_80FC114(const u8 *name, struct UnkLinkRfuStruct_02022B14 *structPtr, u8 a2)
+void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2)
 {
     u8 taskId, taskId2;
 
     Rfu.unk_ccf = 0;
     Rfu.unk_f1 = 0;
-    StringCopy(Rfu.playerName, name);
-    memcpy(&Rfu.unk_10A, structPtr, 0xD);
+    StringCopy(Rfu.unk_104.uname, name);
+    memcpy(Rfu.unk_104.gname, structPtr, RFU_GAME_NAME_LENGTH);
     sub_80FEB3C();
     taskId = CreateTask(sub_80FC028, 2);
     gTasks[taskId].data[1] = a2;

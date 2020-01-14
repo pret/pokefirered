@@ -4,6 +4,34 @@
 #include "global.h"
 #include "librfu.h"
 
+// RfuTgtData.gname is read as these structs.
+struct GFtgtGnameSub
+{
+    u16 unk_00_0:4;
+    u16 unk_00_4:1;
+    u16 unk_00_5:1;
+    u16 unk_00_6:1;
+    u16 isChampion:1;
+    u16 hasNationalDex:1;
+    u16 gameClear:1;
+    u16 unk_01_2:4;
+    u16 unk_01_6:2;
+    u8 playerTrainerId[2];
+};
+
+struct __attribute__((packed, aligned(2))) GFtgtGname
+{
+    struct GFtgtGnameSub unk_00;
+    u8 unk_04[4];
+    u16 species:10;
+    u16 type:6;
+    u8 unk_0a_0:7;
+    u8 unk_0a_7:1;
+    u8 playerGender:1;
+    u8 level:7;
+    u8 unk_0c;
+};
+
 struct Padded_U8
 {
     u8 value;
@@ -16,7 +44,7 @@ struct UnkLinkRfuStruct_02022B2C
     u16 unk_02;
     u8 unk_04;
     u16 unk_06;
-    struct UnkLinkRfuStruct_02022B14 *unk_08;
+    struct GFtgtGname *unk_08;
     u8 *unk_0c;
     u8 unk_10;
     u8 unk_11;
@@ -143,7 +171,7 @@ void sub_80F8DC0(void);
 void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
 void var_800D_set_xB(void);
-struct UnkLinkRfuStruct_02022B14 *sub_80F9800(void);
+struct GFtgtGname *sub_80F9800(void);
 void sub_80FCF34(void);
 void InitRFU(void);
 void sub_80FEB14(void);
@@ -169,7 +197,7 @@ bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
 bool8 sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 u8 sub_80FEA34(u8 a0, u16 a1);
 void sub_80FDA30(u32 a0);
-void sub_80FCB54(struct UnkLinkRfuStruct_02022B14 *data, u8 r9, bool32 r2, s32 r3);
+void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
 void rfu_syncVBlank_(void);
 s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
 void sub_80FEB3C(void);

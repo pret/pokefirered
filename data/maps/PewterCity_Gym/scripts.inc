@@ -1,15 +1,15 @@
 PewterCity_Gym_MapScripts:: @ 816A592
 	.byte 0
 
-PewterCity_Gym_EventScript_16A593:: @ 816A593
+PewterCity_Gym_EventScript_Brock:: @ 816A593
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle_single TRAINER_LEADER_BROCK, Text_190CD4, Text_190E4F, EventScript_16A5C5, NO_MUSIC
-	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, EventScript_16A5F3
-	msgbox gUnknown_819110F
+	trainerbattle_single TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, PewterCity_Gym_EventScript_GiveTM39
+	msgbox PewterCity_Gym_Text_BrockPostBattle
 	release
 	end
 
-EventScript_16A5C5:: @ 816A5C5
+PewterCity_Gym_EventScript_DefeatedBrock:: @ 816A5C5
 	famechecker FAMECHECKER_BROCK, 1
 	setflag FLAG_DEFEATED_BROCK
 	setflag FLAG_BADGE01_GET
@@ -17,69 +17,69 @@ EventScript_16A5C5:: @ 816A5C5
 	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
 	set_gym_trainers 1
-	goto EventScript_16A5F3
+	goto PewterCity_Gym_EventScript_GiveTM39
 	end
 
-EventScript_16A5F3:: @ 816A5F3
-	msgbox gUnknown_8190FC1
+PewterCity_Gym_EventScript_GiveTM39:: @ 816A5F3
+	msgbox PewterCity_Gym_Text_TakeThisWithYou
 	checkitemspace ITEM_TM39, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_16A634
-	giveitem_msg gUnknown_8190FDB, ITEM_TM39
+	goto_if_eq PewterCity_Gym_EventScript_NoRoomForTM39
+	giveitem_msg PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39
 	setflag FLAG_GOT_TM39_FROM_BROCK
-	msgbox gUnknown_8190FF8
+	msgbox PewterCity_Gym_Text_ExplainTM39
 	release
 	end
 
-EventScript_16A634:: @ 816A634
-	msgbox gUnknown_81911CE
+PewterCity_Gym_EventScript_NoRoomForTM39:: @ 816A634
+	msgbox PewterCity_Gym_Text_DontHaveRoomForThis
 	release
 	end
 
-PewterCity_Gym_EventScript_16A63E:: @ 816A63E
-	trainerbattle_single TRAINER_CAMPER_LIAM, Text_1911EC, Text_191237
-	msgbox gUnknown_819126B, MSGBOX_AUTOCLOSE
+PewterCity_Gym_EventScript_Liam:: @ 816A63E
+	trainerbattle_single TRAINER_CAMPER_LIAM, PewterCity_Gym_Text_LiamIntro, PewterCity_Gym_Text_LiamDefeat
+	msgbox PewterCity_Gym_Text_LiamPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PewterCity_Gym_EventScript_16A655:: @ 816A655
+PewterCity_Gym_EventScript_GymGuy:: @ 816A655
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_BROCK, EventScript_16A67F
-	msgbox gUnknown_8191298, MSGBOX_YESNO
+	goto_if_set FLAG_DEFEATED_BROCK, PewterCity_Gym_EventScript_GymGuyPostVictory
+	msgbox PewterCity_Gym_Text_LetMeTakeYouToTheTop, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_16A689
+	goto_if_eq PewterCity_Gym_EventScript_GymGuyTakeMeToTop
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16A697
+	goto_if_eq PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop
 	end
 
-EventScript_16A67F:: @ 816A67F
-	msgbox gUnknown_819143C
+PewterCity_Gym_EventScript_GymGuyPostVictory:: @ 816A67F
+	msgbox PewterCity_Gym_Text_YoureChampMaterial
 	release
 	end
 
-EventScript_16A689:: @ 816A689
-	msgbox gUnknown_819133C
-	goto EventScript_16A6A5
+PewterCity_Gym_EventScript_GymGuyTakeMeToTop:: @ 816A689
+	msgbox PewterCity_Gym_Text_LetsGetHappening
+	goto PewterCity_Gym_EventScript_GymGuyAdvice
 	end
 
-EventScript_16A697:: @ 816A697
-	msgbox gUnknown_8191412
-	goto EventScript_16A6A5
+PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop:: @ 816A697
+	msgbox PewterCity_Gym_Text_ItsFreeLetsGetHappening
+	goto PewterCity_Gym_EventScript_GymGuyAdvice
 	end
 
-EventScript_16A6A5:: @ 816A6A5
-	msgbox gUnknown_819135C
+PewterCity_Gym_EventScript_GymGuyAdvice:: @ 816A6A5
+	msgbox PewterCity_Gym_Text_TryDifferentPartyOrders
 	release
 	end
 
-PewterCity_Gym_EventScript_16A6AF:: @ 816A6AF
+PewterCity_Gym_EventScript_GymStatue:: @ 816A6AF
 	lockall
-	goto_if_set FLAG_BADGE01_GET, EventScript_16A6C3
-	msgbox gUnknown_819146E
+	goto_if_set FLAG_BADGE01_GET, PewterCity_Gym_EventScript_GymStatuePostVictory
+	msgbox PewterCity_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16A6C3:: @ 816A6C3
-	msgbox gUnknown_81914A4
+PewterCity_Gym_EventScript_GymStatuePostVictory:: @ 816A6C3
+	msgbox PewterCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end

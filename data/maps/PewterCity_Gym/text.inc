@@ -1,4 +1,4 @@
-Text_190CD4:: @ 8190CD4
+PewterCity_Gym_Text_BrockIntro:: @ 8190CD4
     .string "So, you're here. I'm BROCK.\n"
     .string "I'm PEWTER's GYM LEADER.\p"
     .string "My rock-hard willpower is evident\n"
@@ -14,7 +14,7 @@ Text_190CD4:: @ 8190CD4
     .string "Fine, then!\n"
     .string "Show me your best!{PLAY_BGM}{MUS_EXEYE}$"
 
-Text_190E4F:: @ 8190E4F
+PewterCity_Gym_Text_BrockDefeat:: @ 8190E4F
     .string "I took you for granted, and so\n"
     .string "I lost.\p"
     .string "As proof of your victory, I confer\n"
@@ -29,15 +29,15 @@ Text_190E4F:: @ 8190E4F
     .string "Of course, a POKéMON must know the\n"
     .string "move FLASH to use it.$"
 
-gUnknown_8190FC1:: @ 8190FC1
+PewterCity_Gym_Text_TakeThisWithYou:: @ 8190FC1
     .string "Wait!\n"
     .string "Take this with you.$"
 
-gUnknown_8190FDB:: @ 8190FDB
+PewterCity_Gym_Text_ReceivedTM39FromBrock:: @ 8190FDB
     .string "{PLAYER} received TM39\n"
     .string "from BROCK.$"
 
-gUnknown_8190FF8:: @ 8190FF8
+PewterCity_Gym_Text_ExplainTM39:: @ 8190FF8
     .string "A TM, Technical Machine, contains a\n"
     .string "technique for POKéMON.\p"
     .string "Using a TM teaches the move it\n"
@@ -50,7 +50,7 @@ gUnknown_8190FF8:: @ 8190FF8
     .string "It hurls boulders at the foe and\n"
     .string "lowers its SPEED.$"
 
-gUnknown_819110F:: @ 819110F
+PewterCity_Gym_Text_BrockPostBattle:: @ 819110F
     .string "There are all kinds of TRAINERS in\n"
     .string "this huge world of ours.\p"
     .string "You appear to be very gifted as a\n"
@@ -59,24 +59,24 @@ gUnknown_819110F:: @ 819110F
     .string "Go to the GYM in CERULEAN and test\n"
     .string "your abilities.$"
 
-gUnknown_81911CE:: @ 81911CE
+PewterCity_Gym_Text_DontHaveRoomForThis:: @ 81911CE
     .string "You don't have room for this.$"
 
-Text_1911EC:: @ 81911EC
+PewterCity_Gym_Text_LiamIntro:: @ 81911EC
     .string "Stop right there, kid!\p"
     .string "You're ten thousand light-years \n"
     .string "from facing BROCK!$"
 
-Text_191237:: @ 8191237
+PewterCity_Gym_Text_LiamDefeat:: @ 8191237
     .string "Darn!\p"
     .string "Light-years isn't time…\n"
     .string "It measures distance!$"
 
-gUnknown_819126B:: @ 819126B
+PewterCity_Gym_Text_LiamPostBattle:: @ 819126B
     .string "You're pretty hot.\n"
     .string "…But not as hot as BROCK!$"
 
-gUnknown_8191298:: @ 8191298
+PewterCity_Gym_Text_LetMeTakeYouToTheTop:: @ 8191298
     .string "Hiya!\n"
     .string "Do you want to dream big?\p"
     .string "Do you dare to dream of becoming\n"
@@ -85,11 +85,11 @@ gUnknown_8191298:: @ 8191298
     .string "you on how to win.\p"
     .string "Let me take you to the top!$"
 
-gUnknown_819133C:: @ 819133C
+PewterCity_Gym_Text_LetsGetHappening:: @ 819133C
     .string "All right!\n"
     .string "Let's get happening!$"
 
-gUnknown_819135C:: @ 819135C
+PewterCity_Gym_Text_TryDifferentPartyOrders:: @ 819135C
     .string "The first POKéMON out in a match is\n"
     .string "at the left of the POKéMON LIST.\p"
     .string "By changing the order of POKéMON,\n"
@@ -97,21 +97,21 @@ gUnknown_819135C:: @ 819135C
     .string "Try different orders to suit your\n"
     .string "opponent's party.$"
 
-gUnknown_8191412:: @ 8191412
+PewterCity_Gym_Text_ItsFreeLetsGetHappening:: @ 8191412
     .string "It's a free service!\n"
     .string "Let's get happening!$"
 
-gUnknown_819143C:: @ 819143C
+PewterCity_Gym_Text_YoureChampMaterial:: @ 819143C
     .string "Just as I thought!\n"
     .string "You're POKéMON champ material!$"
 
-gUnknown_819146E:: @ 819146E
+PewterCity_Gym_Text_GymStatue:: @ 819146E
     .string "PEWTER POKéMON GYM\n"
     .string "LEADER: BROCK\p"
     .string "WINNING TRAINERS:\n"
     .string "{RIVAL}$"
 
-gUnknown_81914A4:: @ 81914A4
+PewterCity_Gym_Text_GymStatuePlayerWon:: @ 81914A4
     .string "PEWTER POKéMON GYM\n"
     .string "LEADER: BROCK\p"
     .string "WINNING TRAINERS:\n"

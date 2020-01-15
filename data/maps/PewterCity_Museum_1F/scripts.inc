@@ -86,7 +86,7 @@ EventScript_16A402:: @ 816A402
 	compare VAR_TEMP_1, 2
 	call_if_eq EventScript_16A46B
 	playse SE_SHOP
-	takemoney 50, 0
+	removemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
 	msgbox gUnknown_8190505

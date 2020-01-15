@@ -488,7 +488,7 @@
 	.endm
 
 	@ Adds a quantity amount of item index to the player's PC. Both arguments can be variables.
-	.macro givepcitem index:req, quantity:req
+	.macro addpcitem index:req, quantity:req
 	.byte 0x49
 	.2byte \index
 	.2byte \quantity
@@ -1018,14 +1018,14 @@
 	.endm
 
 	@ If check is 0x00, this command adds value to the player's money.
-	.macro givemoney value:req, check:req
+	.macro addmoney value:req, check:req
 	.byte 0x90
 	.4byte \value
 	.byte \check
 	.endm
 
 	@ If check is 0x00, this command subtracts value from the player's money.
-	.macro takemoney value:req, check:req
+	.macro removemoney value:req, check:req
 	.byte 0x91
 	.4byte \value
 	.byte \check
@@ -1246,12 +1246,12 @@
 	.2byte \out
 	.endm
 
-	.macro givecoins count:req
+	.macro addcoins count:req
 	.byte 0xb4
 	.2byte \count
 	.endm
 
-	.macro takecoins word:req
+	.macro removecoins word:req
 	.byte 0xb5
 	.2byte \word
 	.endm
@@ -1539,7 +1539,7 @@
 	goto_if TRUE, \dest
 	.endm
 
-	.macro goto_if_undefeated trainer:req, dest:req
+	.macro goto_if_not_defeated trainer:req, dest:req
 	checktrainerflag \trainer
 	goto_if FALSE, \dest
 	.endm
@@ -1549,7 +1549,7 @@
 	call_if TRUE, \dest
 	.endm
 
-	.macro call_if_undefeated trainer:req, dest:req
+	.macro call_if_not_defeated trainer:req, dest:req
 	checktrainerflag \trainer
 	call_if FALSE, \dest
 	.endm

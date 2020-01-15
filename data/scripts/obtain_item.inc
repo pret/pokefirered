@@ -217,7 +217,7 @@ EventScript_TryPickUpHiddenCoins::
 	specialvar VAR_RESULT, Special_CheckAddCoins
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_HiddenCoinsButCaseIsFull
-	givecoins VAR_0x8006
+	addcoins VAR_0x8006
 	getstdstring 1, 0x17
 	call EventScript_PlayFanfareObtainedItem
 	call EventScript_FoundCoins

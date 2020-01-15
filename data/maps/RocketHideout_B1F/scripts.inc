@@ -4,7 +4,7 @@ RocketHideout_B1F_MapScripts:: @ 8161195
 	.byte 0
 
 RocketHideout_B1F_OnLoad:: @ 81611A0
-	call_if_undefeated TRAINER_TEAM_ROCKET_GRUNT_12 EventScript_161233
+	call_if_not_defeated TRAINER_TEAM_ROCKET_GRUNT_12 EventScript_161233
 	end
 
 RocketHideout_B1F_OnTransition:: @ 81611AA

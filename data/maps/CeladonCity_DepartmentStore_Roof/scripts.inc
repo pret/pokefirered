@@ -246,15 +246,15 @@ EventScript_16C0A5:: @ 816C0A5
 	end
 
 EventScript_16C0B6:: @ 816C0B6
-	takemoney 200, 0
+	removemoney 200, 0
 	return
 
 EventScript_16C0BD:: @ 816C0BD
-	takemoney 300, 0
+	removemoney 300, 0
 	return
 
 EventScript_16C0C4:: @ 816C0C4
-	takemoney 350, 0
+	removemoney 350, 0
 	return
 
 EventScript_16C0CB:: @ 816C0CB

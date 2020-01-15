@@ -105,7 +105,7 @@ EventScript_16F86A:: @ 816F86A
 	end
 
 EventScript_16F86F:: @ 816F86F
-	takemoney 500, 0
+	removemoney 500, 0
 	updatemoneybox 0, 0, 0
 	playfanfare MUS_FANFA1
 	message Text_19DBD3

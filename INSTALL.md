@@ -21,12 +21,11 @@ In the case of Cygwin, [include](https://cygwin.com/cygwin-ug-net/setup-net.html
 To set up the repository:
 
 	git clone https://github.com/pret/pokefirered
-	git clone https://github.com/luckytyphlosion/agbcc -b new_layout_with_libs
+	git clone https://github.com/pret/agbcc
 
 	cd ./agbcc
-	make
-	make install prefix=../pokefirered
-	make install-sdk prefix=../pokefirered
+	sh build.sh
+	sh install.sh ../pokefirered
 
 	cd ../pokefirered
 
@@ -56,3 +55,15 @@ To confirm these match the respective official ROM images, prefix `compare_` to 
     make -j$(nproc) compare_leafgreen
 
 **Note:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.
+
+###Note for Mac users
+
+The BSD make that comes with Mac XCode can be buggy, so obtain GNU make and sed using [Homebrew](https://brew.sh):
+
+    brew install make gnu-sed
+
+When compiling agbcc, substitute the `build.sh` line for
+
+    gsed 's/^make/gmake/g' build.sh | sh
+
+Finally, use `gmake` instead of `make` to compile the ROM(s).

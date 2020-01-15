@@ -10503,7 +10503,9 @@ _08139BA0:
 	movs r0, 0x2
 	b _08139C16
 	.align 2, 0
-_08139BD8: .double 0.8
+@ _08139BD8: .double 0.8
+_08139BD8: .4byte 0x3fe99999
+_08139BDC: .4byte 0x9999999a
 _08139BE0: .4byte gUnknown_203B170
 _08139BE4:
 	ldr r3, _08139C04+4 @ =0x33333333
@@ -10521,7 +10523,9 @@ _08139BE4:
 	movs r0, 0x1
 	b _08139C16
 	.align 2, 0
-_08139C04: .double 0.6
+@ _08139C04: .double 0.6
+_08139C04: .4byte 0x3fe33333
+_08139C08: .4byte 0x33333333
 _08139C0C: .4byte gUnknown_203B170
 _08139C10:
 	ldr r0, _08139C38 @ =gUnknown_203B170

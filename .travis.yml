@@ -11,8 +11,8 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry git clone https://github.com/luckytyphlosion/agbcc.git -b new_layout_with_libs
-  - cd agbcc && make && make install prefix=$TRAVIS_BUILD_DIR
+  - travis_retry git clone https://github.com/pret/agbcc.git
+  - cd agbcc && sh build.sh && sh install.sh $TRAVIS_BUILD_DIR
   - popd
 matrix:
   include:

@@ -64,7 +64,7 @@ To confirm these match the respective official ROM images, prefix `compare_` to 
 
 **Note:** If the build command is not recognized on Linux, including the Linux environment used within Windows, run `nproc` and replace `$(nproc)` with the returned value (e.g.: `make -j4`). Because `nproc` is not available on macOS, the alternative is `sysctl -n hw.ncpu`.
 
-###Note for Mac users
+### Note for Mac users
 
 The BSD make that comes with Mac XCode can be buggy, so obtain GNU make and sed using [Homebrew](https://brew.sh):
 

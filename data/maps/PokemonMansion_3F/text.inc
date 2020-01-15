@@ -5,8 +5,8 @@ PokemonMansion_Text_PressSecretSwitchJP:: @ 81775B4
 PokemonMansion_Text_LetsTryIt:: @ 81775CD
     .string "おしてみよう！　‥ポチッとな$"
 
-PokemonMansion_1F_Text_1775DC:: @ 81775DC
-    .string "ÈÒçè ÀÊúòŒ$"
+PokemonMansion_Text_GaveUpOnPressingSwitch:: @ 81775DC
+    .string "おすのは　あきらめた$"
 
 PokemonMansion_1F_Text_SimonIntro:: @ 81775E7
     .string "This place is, like, huge!$"

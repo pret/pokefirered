@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_1666E7",
+      "script": "CeruleanCity_EventScript_Policeman",
       "flag": "0"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_166603",
+      "script": "CeruleanCity_EventScript_Grunt",
       "flag": "FLAG_HIDE_CERULEAN_ROCKET"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 3,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_1666FE",
+      "script": "CeruleanCity_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -83,7 +83,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_16671D",
+      "script": "CeruleanCity_EventScript_BaldingMan",
       "flag": "0"
     },
     {
@@ -96,7 +96,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_1667DD",
+      "script": "CeruleanCity_EventScript_Slowbro",
       "flag": "0"
     },
     {
@@ -109,7 +109,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_16674F",
+      "script": "CeruleanCity_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -122,7 +122,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_166726",
+      "script": "CeruleanCity_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -174,7 +174,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_166738",
+      "script": "CeruleanCity_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -187,7 +187,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_EventScript_16672F",
+      "script": "CeruleanCity_EventScript_CeruleanCaveGuard",
       "flag": "FLAG_HIDE_CERULEAN_CAVE_GUARD"
     }
   ],
@@ -299,7 +299,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
-      "script": "CeruleanCity_EventScript_16649A"
+      "script": "CeruleanCity_EventScript_RivalTriggerLeft"
     },
     {
       "type": "trigger",
@@ -308,7 +308,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
-      "script": "CeruleanCity_EventScript_1664A6"
+      "script": "CeruleanCity_EventScript_RivalTriggerMid"
     },
     {
       "type": "trigger",
@@ -317,7 +317,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_CERULEAN_CITY_RIVAL",
       "var_value": 0,
-      "script": "CeruleanCity_EventScript_1664B9"
+      "script": "CeruleanCity_EventScript_RivalTriggerRight"
     },
     {
       "type": "trigger",
@@ -326,7 +326,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_CERULEAN_CITY_ROCKET",
       "var_value": 0,
-      "script": "CeruleanCity_EventScript_166683"
+      "script": "CeruleanCity_EventScript_GruntTriggerTop"
     },
     {
       "type": "trigger",
@@ -335,7 +335,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_CERULEAN_CITY_ROCKET",
       "var_value": 0,
-      "script": "CeruleanCity_EventScript_1666A3"
+      "script": "CeruleanCity_EventScript_GruntTriggerBottom"
     }
   ],
   "bg_events": [
@@ -344,28 +344,28 @@
       "x": 20,
       "y": 25,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_166838"
+      "script": "CeruleanCity_EventScript_CitySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 27,
       "y": 21,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_166853"
+      "script": "CeruleanCity_EventScript_GymSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 28,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_16684A"
+      "script": "CeruleanCity_EventScript_BikeShopSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 19,
       "y": 32,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_166841"
+      "script": "CeruleanCity_EventScript_TrainerTips"
     },
     {
       "type": "hidden_item",
@@ -382,21 +382,21 @@
       "x": 11,
       "y": 25,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 27,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 26,
       "elevation": 0,
-      "script": "CeruleanCity_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     }
   ]
 }

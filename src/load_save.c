@@ -289,7 +289,7 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
 
     sub_8054F38(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);
-    sub_815EE6C(encryptionKey);
+    ApplyNewEncryptionKeyToBerryPowder(encryptionKey);
     ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);
     ApplyNewEncryptionKeyToHword(&gSaveBlock1Ptr->coins, encryptionKey);
 }

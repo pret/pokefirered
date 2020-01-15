@@ -2526,8 +2526,8 @@ _0814EA6C:
 	bx r0
 	thumb_func_end sub_814E830
 
-	thumb_func_start sub_814EA7C
-sub_814EA7C: @ 814EA7C
+	thumb_func_start ShowBerryCrushRankings
+ShowBerryCrushRankings: @ 814EA7C
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r0, _0814EAC4 @ =sub_814E830
@@ -2566,7 +2566,7 @@ _0814EAC4: .4byte sub_814E830
 _0814EAC8: .4byte gTasks
 _0814EACC: .4byte gSaveBlock2Ptr
 _0814EAD0: .4byte 0x00000af6
-	thumb_func_end sub_814EA7C
+	thumb_func_end ShowBerryCrushRankings
 
 	thumb_func_start sub_814EAD4
 sub_814EAD4: @ 814EAD4

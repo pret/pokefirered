@@ -1380,7 +1380,7 @@ PokemonJournal_Text_SpecialFeatureBrock:: @ 81B146A
 	.string "BROCK rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
-gUnknown_81B14E8:: @ 81B14E8
+PokemonJournal_Text_SpecialFeatureMisty:: @ 81B14E8
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: CERULEAN GYM\n"
 	.string "LEADER MISTY!\p"

@@ -20,19 +20,19 @@ Route11_EastEntrance_2F_EventScript_16FD53:: @ 816FD53
 Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	lock
 	faceplayer
-	setvar VAR_0x8008, 4
-	call EventScript_1A8CAD
+	setvar VAR_0x8008, INGAME_TRADE_NIDORINOA
+	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_NINA_TRADE, EventScript_16FDCE
 	msgbox gUnknown_81A597B, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16FDB6
-	call EventScript_1A8CBD
-	compare VAR_0x8004, 6
+	call EventScript_ChooseMonForInGameTrade
+	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge EventScript_16FDB6
-	call EventScript_1A8CC9
+	call EventScript_GetInGameTradeSpecies
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne EventScript_16FDC0
-	call EventScript_1A8CD9
+	call EventScript_DoInGameTrade
 	msgbox gUnknown_81A59DA
 	setflag FLAG_DID_NINA_TRADE
 	release

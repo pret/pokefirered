@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16ABBD",
+      "script": "CeruleanCity_BikeShop_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC75",
+      "script": "CeruleanCity_BikeShop_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC6C",
+      "script": "CeruleanCity_BikeShop_EventScript_Woman",
       "flag": "0"
     }
   ],
@@ -83,56 +83,56 @@
       "x": 4,
       "y": 3,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 4,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 5,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 3,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 1,
       "y": 4,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 5,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 7,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 8,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     }
   ]
 }

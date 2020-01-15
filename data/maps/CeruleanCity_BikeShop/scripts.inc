@@ -1,70 +1,71 @@
 CeruleanCity_BikeShop_MapScripts:: @ 816ABBC
 	.byte 0
 
-CeruleanCity_BikeShop_EventScript_16ABBD:: @ 816ABBD
+CeruleanCity_BikeShop_EventScript_Clerk:: @ 816ABBD
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_BICYCLE, EventScript_16AC58
-	goto_if_set FLAG_GOT_BIKE_VOUCHER, EventScript_16AC22
+	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
+	goto_if_set FLAG_GOT_BIKE_VOUCHER, CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher
 	showmoneybox 0, 0, 0
-	message Text_192755
+	message CeruleanCity_BikeShop_Text_WelcomeToBikeShop
 	waitmessage
 	multichoice 11, 0, MULTICHOICE_BIKE_SHOP, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16AC07
-	case 1, EventScript_16AC15
-	case 127, EventScript_16AC15
+	case 0, CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle
+	case 1, CeruleanCity_BikeShop_EventScript_ClerkGoodbye
+	case 127, CeruleanCity_BikeShop_EventScript_ClerkGoodbye
 	end
 
-EventScript_16AC07:: @ 816AC07
-	msgbox gUnknown_8192796
-	goto EventScript_16AC15
+@ The Bicycle price / players money is never actually checked
+CeruleanCity_BikeShop_EventScript_TryPurchaseBicycle:: @ 816AC07
+	msgbox CeruleanCity_BikeShop_Text_SorryYouCantAffordIt
+	goto CeruleanCity_BikeShop_EventScript_ClerkGoodbye
 	end
 
-EventScript_16AC15:: @ 816AC15
-	msgbox gUnknown_819280E
+CeruleanCity_BikeShop_EventScript_ClerkGoodbye:: @ 816AC15
+	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
 	hidemoneybox 0, 0
 	release
 	end
 
-EventScript_16AC22:: @ 816AC22
-	msgbox gUnknown_81927B2
-	msgreceiveditem gUnknown_81927E1, ITEM_BICYCLE, 1, MUS_FAN5
+CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher:: @ 816AC22
+	msgbox CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo
+	msgreceiveditem CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle, ITEM_BICYCLE, 1, MUS_FAN5
 	setflag FLAG_GOT_BICYCLE
 	additem ITEM_BICYCLE
-	removeitem ITEM_BIKE_VOUCHER, 1
-	msgbox gUnknown_819280E
+	removeitem ITEM_BIKE_VOUCHER
+	msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
 	release
 	end
 
-EventScript_16AC58:: @ 816AC58
-	msgbox gUnknown_8192833
+CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle:: @ 816AC58
+	msgbox CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle
 	release
 	end
 
-EventScript_16AC62:: @ 816AC62
-	msgbox gUnknown_81928A8
+@ Unused
+CeruleanCity_BikeShop_EventScript_NoRoomForBicycle:: @ 816AC62
+	msgbox CeruleanCity_BikeShop_Text_MakeRoomForBicycle
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_16AC6C:: @ 816AC6C
-	msgbox gUnknown_81928CF, MSGBOX_NPC
+CeruleanCity_BikeShop_EventScript_Woman:: @ 816AC6C
+	msgbox CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe, MSGBOX_NPC
 	end
 
-CeruleanCity_BikeShop_EventScript_16AC75:: @ 816AC75
+CeruleanCity_BikeShop_EventScript_Youngster:: @ 816AC75
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_BICYCLE, EventScript_16AC8A
-	msgbox gUnknown_8192937
+	goto_if_set FLAG_GOT_BICYCLE, CeruleanCity_BikeShop_EventScript_YoungsterHaveBike
+	msgbox CeruleanCity_BikeShop_Text_BikesCoolButExpensive
 	release
 	end
 
-EventScript_16AC8A:: @ 816AC8A
-	msgbox gUnknown_8192968
+CeruleanCity_BikeShop_EventScript_YoungsterHaveBike:: @ 816AC8A
+	msgbox CeruleanCity_BikeShop_Text_WowYourBikeIsCool
 	release
 	end
 
-CeruleanCity_BikeShop_EventScript_16AC94:: @ 816AC94
-CeruleanCity_EventScript_16AC94:: @ 816AC94
-	msgbox gUnknown_81929AD, MSGBOX_SIGN
+CeruleanCity_BikeShop_EventScript_Bicycle:: @ 816AC94
+	msgbox CeruleanCity_BikeShop_Text_ShinyNewBicycle, MSGBOX_SIGN
 	end

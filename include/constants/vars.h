@@ -97,7 +97,7 @@
 #define VAR_0x4034                         0x4034
 #define VAR_RESORT_GOREGEOUS_STEP_COUNTER  0x4035
 #define VAR_RESORT_GORGEOUS_REQUESTED_MON  0x4036
-#define VAR_0x4037                         0x4037
+#define VAR_PC_BOX_TO_SEND_MON             0x4037
 #define VAR_0x4038                         0x4038
 #define VAR_0x4039                         0x4039
 #define VAR_ELEVATOR_FLOOR                 0x403A

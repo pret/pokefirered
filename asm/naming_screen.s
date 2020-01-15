@@ -887,7 +887,7 @@ pokemon_transfer_to_pc_with_message: @ 809E0B4
 	push {r4,r5,lr}
 	sub sp, 0x10
 	movs r5, 0
-	bl sub_80CC7F8
+	bl IsDestinationBoxFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809E104
@@ -932,7 +932,7 @@ _0809E104:
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r4, _0809E1C0 @ =gStringVar3
-	bl get_unknown_box_id
+	bl GetPCBoxToSendMon
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBoxNamePtr

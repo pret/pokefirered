@@ -9,32 +9,34 @@
 #include "text.h"
 #include "text_window.h"
 
-EWRAM_DATA u8 gUnknown_203F464 = 0;
+#define MAX_BERRY_POWDER 99999
 
-u32 DecryptBerryPowder(u32 * a0)
+static EWRAM_DATA u8 sBerryPowderVendorWindowId = 0;
+
+u32 DecryptBerryPowder(u32 *powder)
 {
-    return *a0 ^ gSaveBlock2Ptr->encryptionKey;
+    return *powder ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void SetBerryPowder(u32 * a0, u32 a1)
+void SetBerryPowder(u32 *powder, u32 amount)
 {
-    *a0 = gSaveBlock2Ptr->encryptionKey ^ a1;
+    *powder = amount ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void sub_815EE6C(u32 a0)
+void ApplyNewEncryptionKeyToBerryPowder(u32 encryptionKey)
 {
-    ApplyNewEncryptionKeyToWord(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, a0);
+    ApplyNewEncryptionKeyToWord(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, encryptionKey);
 }
 
-bool8 sub_815EE88(u32 a0)
+static bool8 HasEnoughBerryPowder(u32 cost)
 {
-    if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < a0)
+    if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < cost)
         return FALSE;
     else
         return TRUE;
 }
 
-bool8 sub_815EEB0(void)
+bool8 Special_HasEnoughBerryPowder(void)
 {
     if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < gSpecialVar_0x8004)
         return FALSE;
@@ -42,44 +44,44 @@ bool8 sub_815EEB0(void)
         return TRUE;
 }
 
-bool8 sub_815EEE0(u32 a0)
+bool8 GiveBerryPowder(u32 amountToAdd)
 {
-    u32 * ptr = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
-    u32 amount = DecryptBerryPowder(ptr) + a0;
-    if (amount > 99999)
+    u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
+    u32 amount = DecryptBerryPowder(powder) + amountToAdd;
+    if (amount > MAX_BERRY_POWDER)
     {
-        SetBerryPowder(ptr, 99999);
+        SetBerryPowder(powder, MAX_BERRY_POWDER);
         return FALSE;
     }
     else
     {
-        SetBerryPowder(ptr, amount);
+        SetBerryPowder(powder, amount);
         return TRUE;
     }
 }
 
-bool8 sub_815EF20(u32 a0)
+static bool8 TakeBerryPowder(u32 cost)
 {
-    u32 * ptr = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
-    if (!sub_815EE88(a0))
+    u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
+    if (!HasEnoughBerryPowder(cost))
         return FALSE;
     else
     {
-        u32 amount = DecryptBerryPowder(ptr);
-        SetBerryPowder(ptr, amount - a0);
+        u32 amount = DecryptBerryPowder(powder);
+        SetBerryPowder(powder, amount - cost);
         return TRUE;
     }
 }
 
-bool8 sub_815EF5C(void)
+bool8 Special_TakeBerryPowder(void)
 {
-    u32 * ptr = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
-    if (!sub_815EE88(gSpecialVar_0x8004))
+    u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
+    if (!HasEnoughBerryPowder(gSpecialVar_0x8004))
         return FALSE;
     else
     {
-        u32 amount = DecryptBerryPowder(ptr);
-        SetBerryPowder(ptr, amount - gSpecialVar_0x8004);
+        u32 amount = DecryptBerryPowder(powder);
+        SetBerryPowder(powder, amount - gSpecialVar_0x8004);
         return TRUE;
     }
 }
@@ -89,42 +91,42 @@ u32 GetBerryPowder(void)
     return DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount);
 }
 
-void sub_815EFBC(u8 windowId, u32 powder, u8 x, u8 y, u8 speed)
+static void PrintBerryPowderAmount(u8 windowId, u32 amount, u8 x, u8 y, u8 speed)
 {
-    ConvertIntToDecimalStringN(gStringVar1, powder, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_RIGHT_ALIGN, 5);
     AddTextPrinterParameterized(windowId, 0, gStringVar1, x, y, speed, NULL);
 }
 
-void sub_815F014(u8 windowId, u16 baseBlock, u8 palette, u32 powder)
+static void DrawPlayerPowderAmount(u8 windowId, u16 baseBlock, u8 palette, u32 amount)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, baseBlock, palette);
     AddTextPrinterParameterized(windowId, 0, gOtherText_Powder, 0, 0, -1, NULL);
-    sub_815EFBC(windowId, powder, 39, 12, 0);
+    PrintBerryPowderAmount(windowId, amount, 39, 12, 0);
 }
 
-void sub_815F070(void)
+void PrintPlayerBerryPowderAmount(void)
 {
-    sub_815EFBC(gUnknown_203F464, GetBerryPowder(), 39, 12, 0);
+    PrintBerryPowderAmount(sBerryPowderVendorWindowId, GetBerryPowder(), 39, 12, 0);
 }
 
-void sub_815F094(void)
+void DisplayBerryPowderVendorMenu(void)
 {
     struct WindowTemplate template;
 
     if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
     {
         template = SetWindowTemplateFields(0, 1, 1, 8, 3, 15, 32);
-        gUnknown_203F464 = AddWindow(&template);
-        FillWindowPixelBuffer(gUnknown_203F464, 0);
-        PutWindowTilemap(gUnknown_203F464);
-        TextWindow_SetStdFrame0_WithPal(gUnknown_203F464, 0x21D, 0xD0);
-        sub_815F014(gUnknown_203F464, 0x21D, 0xD, GetBerryPowder());
+        sBerryPowderVendorWindowId = AddWindow(&template);
+        FillWindowPixelBuffer(sBerryPowderVendorWindowId, 0);
+        PutWindowTilemap(sBerryPowderVendorWindowId);
+        TextWindow_SetStdFrame0_WithPal(sBerryPowderVendorWindowId, 0x21D, 0xD0);
+        DrawPlayerPowderAmount(sBerryPowderVendorWindowId, 0x21D, 0xD, GetBerryPowder());
     }
 }
 
-void sub_815F114(void)
+void RemoveBerryPowderVendorMenu(void)
 {
-    ClearWindowTilemap(gUnknown_203F464);
-    ClearStdWindowAndFrameToTransparent(gUnknown_203F464, 1);
-    RemoveWindow(gUnknown_203F464);
+    ClearWindowTilemap(sBerryPowderVendorWindowId);
+    ClearStdWindowAndFrameToTransparent(sBerryPowderVendorWindowId, 1);
+    RemoveWindow(sBerryPowderVendorWindowId);
 }

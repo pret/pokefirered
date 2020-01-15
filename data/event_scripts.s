@@ -25,6 +25,7 @@
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
 #include "constants/union_room.h"
+#include "constants/trade.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1632,45 +1633,45 @@ EventScript_1A8C33:: @ 81A8C33
 	return
 
 EventScript_1A8C3C:: @ 81A8C3C
-	bufferboxname 0, VAR_0x4037
+	bufferboxname 0, VAR_PC_BOX_TO_SEND_MON
 	getspeciesname 1, VAR_TEMP_1
 	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C57
 	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C82
 	return
 
 EventScript_1A8C57:: @ 81A8C57
-	specialvar VAR_RESULT, sub_80CC7B4
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_1A8C70
 	msgbox Text_1A5CF1
 	return
 
 EventScript_1A8C70:: @ 81A8C70
-	specialvar VAR_RESULT, get_unknown_box_id
+	specialvar VAR_RESULT, GetPCBoxToSendMon
 	bufferboxname 2, VAR_RESULT
 	msgbox Text_1A5D6E
 	return
 
 EventScript_1A8C82:: @ 81A8C82
-	specialvar VAR_RESULT, sub_80CC7B4
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_1A8C9B
 	msgbox Text_1A5D31
 	return
 
 EventScript_1A8C9B:: @ 81A8C9B
-	specialvar VAR_RESULT, get_unknown_box_id
+	specialvar VAR_RESULT, GetPCBoxToSendMon
 	bufferboxname 2, VAR_RESULT
 	msgbox Text_1A5DB1
 	return
 
-EventScript_1A8CAD:: @ 81A8CAD
+EventScript_GetInGameTradeSpeciesInfo:: @ 81A8CAD
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
 	return
 
-EventScript_1A8CBD:: @ 81A8CBD
+EventScript_ChooseMonForInGameTrade:: @ 81A8CBD
 	special Special_ChooseMonFromParty
 	waitstate
 	lock
@@ -1678,13 +1679,13 @@ EventScript_1A8CBD:: @ 81A8CBD
 	copyvar VAR_0x800A, VAR_0x8004
 	return
 
-EventScript_1A8CC9:: @ 81A8CC9
+EventScript_GetInGameTradeSpecies:: @ 81A8CC9
 	copyvar VAR_0x8005, VAR_0x800A
 	specialvar VAR_RESULT, GetTradeSpecies
 	copyvar VAR_0x800B, VAR_RESULT
 	return
 
-EventScript_1A8CD9:: @ 81A8CD9
+EventScript_DoInGameTrade:: @ 81A8CD9
 	copyvar VAR_0x8004, VAR_0x8008
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon

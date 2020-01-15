@@ -3,6 +3,7 @@
 
 u32 GetBerryPowder(void);
 void SetBerryPowder(u32 *powder, u32 amount);
-void sub_815EE6C(u32 newKey);
+void ApplyNewEncryptionKeyToBerryPowder(u32 newKey);
+bool8 GiveBerryPowder(u32 amountToAdd);
 
 #endif //GUARD_BERRY_POWDER_H

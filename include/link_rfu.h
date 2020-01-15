@@ -39,13 +39,13 @@ struct Padded_U8
 
 struct UnkLinkRfuStruct_02022B2C
 {
-    u8 unk_00;
-    u8 unk_01;
-    u16 unk_02;
-    u8 unk_04;
-    u16 unk_06;
-    struct GFtgtGname *unk_08;
-    u8 *unk_0c;
+    u8 maxMFrame;
+    u8 mcTimer;
+    u16 availSlotFlag;
+    u8 mbootFlag;
+    u16 serialNo;
+    struct GFtgtGname *gname;
+    u8 *uname;
     u8 unk_10;
     u8 unk_11;
     u16 unk_12;
@@ -223,8 +223,8 @@ struct UnkRfuStruct_2
 }; // size: 0x9AC
 
 extern struct UnkRfuStruct_1 gUnknown_3005E10;
-extern struct GFtgtGname gUnknown_3005440;
-extern u8 gUnknown_3005E00[];
+extern struct GFtgtGname gHostRFUtgtGnameBuffer;
+extern u8 gHostRFUtgtUnameBuffer[];
 
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
@@ -263,7 +263,7 @@ void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
 void var_800D_set_xB(void);
 struct GFtgtGname *sub_80F9800(void);
-void sub_80FCF34(void);
+void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
 void sub_80FEB14(void);
 bool32 sub_80FBA00(void);
@@ -288,7 +288,7 @@ bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
 void sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 u8 sub_80FEA34(u8 a0, u16 a1);
 void sub_80FDA30(u32 a0);
-void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
 void LinkRfu_syncVBlank_(void);
 s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
 void sub_80FEB3C(void);

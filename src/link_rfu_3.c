@@ -502,7 +502,7 @@ static void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 }
 
 #ifdef NONMATCHING
-static u8 sub_80FCADC(u8 maxFlags)
+static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     u8 flagCount = 0;
     u8 flags = gRfuLinkStatus->connSlotFlag;
@@ -533,7 +533,7 @@ static u8 sub_80FCADC(u8 maxFlags)
 }
 #else
 NAKED
-static u8 sub_80FCADC(u8 maxFlags)
+static u8 GetConnectedChildStrength(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tlsls r0, 24\n"
@@ -603,7 +603,7 @@ static u8 sub_80FCADC(u8 maxFlags)
 }
 #endif
 
-void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
 {
     s32 i;
 
@@ -629,7 +629,7 @@ void sub_80FCB54(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
     data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
-bool8 sub_80FCC3C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal;
 
@@ -638,13 +638,13 @@ bool8 sub_80FCC3C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
         retVal = TRUE;
         if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
-            memcpy(buff1, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-            memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+            memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         }
         else
         {
-            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
-            memset(buff2, 0, RFU_USER_NAME_LENGTH);
+            memset(gname, 0, RFU_GAME_NAME_LENGTH);
+            memset(uname, 0, RFU_USER_NAME_LENGTH);
         }
     }
     else
@@ -652,39 +652,39 @@ bool8 sub_80FCC3C(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
         retVal = FALSE;
         if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo))
         {
-            memcpy(buff1, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-            memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+            memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+            memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         }
         else
         {
-            memset(buff1, 0, RFU_GAME_NAME_LENGTH);
-            memset(buff2, 0, RFU_USER_NAME_LENGTH);
+            memset(gname, 0, RFU_GAME_NAME_LENGTH);
+            memset(uname, 0, RFU_USER_NAME_LENGTH);
         }
     }
     return retVal;
 }
 
-bool8 sub_80FCCF4(struct GFtgtGname *buff1, u8 *buff2, u8 idx)
+bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)
     {
-        memcpy(buff1, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
-        memcpy(buff2, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
+        memcpy(gname, gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
+        memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
         retVal = TRUE;
     }
     else
     {
-        memset(buff1, 0, RFU_GAME_NAME_LENGTH);
-        memset(buff2, 0, RFU_USER_NAME_LENGTH);
+        memset(gname, 0, RFU_GAME_NAME_LENGTH);
+        memset(uname, 0, RFU_USER_NAME_LENGTH);
     }
     return retVal;
 }
 
-void sub_80FCD50(struct GFtgtGname *buff1, u8 *buff2)
+void sub_80FCD50(struct GFtgtGname *gname, u8 *uname)
 {
-    memcpy(buff1, &gUnknown_3005440, RFU_GAME_NAME_LENGTH);
-    memcpy(buff2, gUnknown_3005E00, RFU_USER_NAME_LENGTH);
+    memcpy(gname, &gHostRFUtgtGnameBuffer, RFU_GAME_NAME_LENGTH);
+    memcpy(uname, gHostRFUtgtUnameBuffer, RFU_USER_NAME_LENGTH);
 }
 
 void CreateWirelessStatusIndicatorSprite(u8 x, u8 y)
@@ -734,7 +734,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
     gWirelessStatusIndicatorSpriteId = 0xFF;
 }
 
-static u8 sub_80FCEE4(void)
+static u8 GetParentSignalStrength(void)
 {
     u8 i;
     u8 flags = gRfuLinkStatus->connSlotFlag;
@@ -749,7 +749,7 @@ static u8 sub_80FCEE4(void)
     return 0;
 }
 
-static void sub_80FCF1C(struct Sprite *sprite, s32 signalStrengthAnimNum)
+static void SetAndRestartWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 signalStrengthAnimNum)
 {
     if (sprite->data[2] != signalStrengthAnimNum)
     {
@@ -759,50 +759,50 @@ static void sub_80FCF1C(struct Sprite *sprite, s32 signalStrengthAnimNum)
     }
 }
 
-void sub_80FCF34(void)
+void UpdateWirelessStatusIndicatorSprite(void)
 {
     if (gWirelessStatusIndicatorSpriteId != 0xFF && gSprites[gWirelessStatusIndicatorSpriteId].data[7] == 0x1234)
     {
         struct Sprite *sprite = &gSprites[gWirelessStatusIndicatorSpriteId];
-        u8 signalStrength = 255;
+        u8 signalStrength = RFU_LINK_ICON_LEVEL4_MAX;
         u8 i = 0;
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
             for (i = 0; i < GetLinkPlayerCount() - 1; i++)
             {
-                if (signalStrength >= sub_80FCADC(i + 1))
+                if (signalStrength >= GetConnectedChildStrength(i + 1))
                 {
-                    signalStrength = sub_80FCADC(i + 1);
+                    signalStrength = GetConnectedChildStrength(i + 1);
                 }
             }
         }
         else
         {
-            signalStrength = sub_80FCEE4();
+            signalStrength = GetParentSignalStrength();
         }
         if (sub_80FC1B0() == TRUE)
         {
             sprite->data[0] = 4;
         }
-        else if (signalStrength < 25)
+        else if (signalStrength <= RFU_LINK_ICON_LEVEL1_MAX)
         {
             sprite->data[0] = 3;
         }
-        else if (signalStrength >= 25 && signalStrength < 127)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL2_MIN && signalStrength <= RFU_LINK_ICON_LEVEL2_MAX)
         {
             sprite->data[0] = 2;
         }
-        else if (signalStrength >= 127 && signalStrength < 229)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL3_MIN && signalStrength <= RFU_LINK_ICON_LEVEL3_MAX)
         {
             sprite->data[0] = 1;
         }
-        else if (signalStrength >= 229)
+        else if (signalStrength >= RFU_LINK_ICON_LEVEL4_MIN)
         {
             sprite->data[0] = 0;
         }
         if (sprite->data[0] != sprite->data[1])
         {
-            sub_80FCF1C(sprite, sprite->data[0]);
+            SetAndRestartWirelessStatusIndicatorAnim(sprite, sprite->data[0]);
             sprite->data[1] = sprite->data[0];
         }
         if (sprite->anims[sprite->data[2]][sprite->data[4]].frame.duration < sprite->data[3])

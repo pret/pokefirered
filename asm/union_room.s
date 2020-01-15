@@ -5318,7 +5318,7 @@ _08118604:
 	thumb_func_start UnionRoomSpecial
 UnionRoomSpecial: @ 811860C
 	push {r4,lr}
-	bl sub_80FAF34
+	bl ClearAndInitHostRFUtgtGname
 	ldr r0, _08118648 @ =sub_81186E0
 	movs r1, 0xA
 	bl CreateTask

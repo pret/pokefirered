@@ -9,13 +9,13 @@
 #include "text.h"
 #include "constants/flags.h"
 
-EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
+static EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 
-const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
+static const u16 gWirelessLinkIconPalette[] = INCBIN_U16("graphics/interface/wireless_link_icon.gbapal");
 
-const u32 gWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
+static const u32 gWirelessLinkIconPic[] = INCBIN_U32("graphics/interface/wireless_link_icon.4bpp.lz");
 
-const u8 sWireless_ASCIItoRSETable[] = {
+static const u8 sWireless_ASCIItoRSETable[] = {
     0xff, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x37,
     0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f,
     0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47,
@@ -50,7 +50,7 @@ const u8 sWireless_ASCIItoRSETable[] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-const u8 sWireless_RSEtoASCIITable[] = {
+static const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c,
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
     0x95, 0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c,
@@ -85,7 +85,7 @@ const u8 sWireless_RSEtoASCIITable[] = {
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x00
 };
 
-const struct OamData sWirelessStatusIndicatorOamData =
+static const struct OamData sWirelessStatusIndicatorOamData =
     {
         .y = 0,
         .affineMode = ST_OAM_AFFINE_OFF,
@@ -99,7 +99,7 @@ const struct OamData sWirelessStatusIndicatorOamData =
         .paletteNum = 0,
     };
 
-const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     // 3 bars
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
@@ -110,7 +110,7 @@ const union AnimCmd sWirelessStatusIndicatorAnim0[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     // 2 bars
     ANIMCMD_FRAME( 4,  5),
     ANIMCMD_FRAME( 8,  5),
@@ -119,28 +119,28 @@ const union AnimCmd sWirelessStatusIndicatorAnim1[] = {
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim2[] = {
     // 1 bar
     ANIMCMD_FRAME(4, 5),
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim3[] = {
     // searching
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_FRAME(20, 10),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
+static const union AnimCmd sWirelessStatusIndicatorAnim4[] = {
     // error
     ANIMCMD_FRAME(24, 10),
     ANIMCMD_FRAME( 4, 10),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
+static const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
     sWirelessStatusIndicatorAnim0,
     sWirelessStatusIndicatorAnim1,
     sWirelessStatusIndicatorAnim2,
@@ -148,15 +148,15 @@ const union AnimCmd *const sWirelessStatusIndicatorAnims[] = {
     sWirelessStatusIndicatorAnim4
 };
 
-const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
+static const struct CompressedSpriteSheet sWirelessStatusIndicatorSpriteSheet = {
     gWirelessLinkIconPic, 0x0380, 0xD431
 };
 
-const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
+static const struct SpritePalette sWirelessStatusIndicatorSpritePalette = {
     gWirelessLinkIconPalette, 0xD432
 };
 
-const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
+static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
     0xD431,
     0xD432,
     &sWirelessStatusIndicatorOamData,
@@ -202,7 +202,7 @@ void sub_80FC4D4(struct UnkRfuStruct_2_Sub_9e8 *ptr)
     ptr->unk_233 = 0;
 }
 
-void sub_80FC530(struct UnkRfuStruct_Sub_Unused *ptr)
+static void sub_80FC530(struct UnkRfuStruct_Sub_Unused *ptr)
 {
     s32 i;
     s32 j;
@@ -395,7 +395,7 @@ bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2)
     return TRUE;
 }
 
-void sub_80FC8D8(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+static void sub_80FC8D8(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 {
     s32 i;
 
@@ -415,7 +415,7 @@ void sub_80FC8D8(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
     }
 }
 
-bool8 sub_80FC944(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
+static bool8 sub_80FC944(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
 {
     s32 i;
 
@@ -433,7 +433,7 @@ bool8 sub_80FC944(struct UnkRfuStruct_Sub_Unused *q1, u8 *q2)
     return TRUE;
 }
 
-void sub_80FC9B8(u8 *q1, u8 mode)
+static void sub_80FC9B8(u8 *q1, u8 mode)
 {
     s32 i;
     u8 rval;
@@ -479,7 +479,7 @@ void sub_80FC9B8(u8 *q1, u8 mode)
     }
 }
 
-void PkmnStrToASCII(u8 *q1, const u8 *q2)
+static void PkmnStrToASCII(u8 *q1, const u8 *q2)
 {
     s32 i;
 
@@ -490,7 +490,7 @@ void PkmnStrToASCII(u8 *q1, const u8 *q2)
     q1[i] = 0;
 }
 
-void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
+static void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 {
     s32 i;
 
@@ -502,7 +502,7 @@ void ASCIIToPkmnStr(u8 *q1, const u8 *q2)
 }
 
 #ifdef NONMATCHING
-u8 sub_80FCADC(u8 maxFlags)
+static u8 sub_80FCADC(u8 maxFlags)
 {
     u8 flagCount = 0;
     u8 flags = gRfuLinkStatus->connSlotFlag;
@@ -533,7 +533,7 @@ u8 sub_80FCADC(u8 maxFlags)
 }
 #else
 NAKED
-u8 sub_80FCADC(u8 maxFlags)
+static u8 sub_80FCADC(u8 maxFlags)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tlsls r0, 24\n"
@@ -734,7 +734,7 @@ void LoadWirelessStatusIndicatorSpriteGfx(void)
     gWirelessStatusIndicatorSpriteId = 0xFF;
 }
 
-u8 sub_80FCEE4(void)
+static u8 sub_80FCEE4(void)
 {
     u8 i;
     u8 flags = gRfuLinkStatus->connSlotFlag;
@@ -749,7 +749,7 @@ u8 sub_80FCEE4(void)
     return 0;
 }
 
-void sub_80FCF1C(struct Sprite *sprite, s32 signalStrengthAnimNum)
+static void sub_80FCF1C(struct Sprite *sprite, s32 signalStrengthAnimNum)
 {
     if (sprite->data[2] != signalStrengthAnimNum)
     {
@@ -831,7 +831,7 @@ void sub_80FCF34(void)
     }
 }
 
-void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
+static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *name)
 {
     int i;
     dest->trainerId = trainerId;
@@ -844,7 +844,7 @@ void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, const u8 *
     dest->trainerName[i] = EOS;
 }
 
-void ZeroName(u8 *name)
+static void ZeroName(u8 *name)
 {
     s32 i;
 
@@ -854,7 +854,7 @@ void ZeroName(u8 *name)
     }
 }
 
-bool32 NameIsEmpty(const u8 *name)
+static bool32 NameIsEmpty(const u8 *name)
 {
     s32 i;
 

@@ -1012,7 +1012,7 @@ void HelpSystem_Disable(void)
 
 void HelpSystem_Enable(void)
 {
-    if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
+    if (gQuestLogState != 2 && gQuestLogState != 3)
     {
         gHelpSystemEnabled = TRUE;
         sub_812B4B8();

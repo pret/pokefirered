@@ -1127,11 +1127,11 @@ static void RecordQuestLogItemPurchase(void)
 
     v = gShopMenuHistory[0].unkA;
     if (v != 0)
-        sub_8113550(v + 0x24, (const u16 *)&gShopMenuHistory[0]);
+        SetQuestLogEvent(v + QL_EVENT_USED_POKEMART, (const u16 *)&gShopMenuHistory[0]);
     
     v = gShopMenuHistory[1].unkA;
     if (v != 0)
-        sub_8113550(v + 0x24, (const u16 *)&gShopMenuHistory[1]);
+        SetQuestLogEvent(v + QL_EVENT_USED_POKEMART, (const u16 *)&gShopMenuHistory[1]);
 }
 
 void CreatePokemartMenu(const u16 *itemsForSale)

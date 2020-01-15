@@ -34,9 +34,7 @@ EventScript_1637B4:: @ 81637B4
 	return
 
 PowerPlant_EventScript_1637B8:: @ 81637B8
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer
@@ -75,9 +73,7 @@ EventScript_163824:: @ 8163824
 	end
 
 PowerPlant_EventScript_16382F:: @ 816382F
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE
@@ -106,9 +102,7 @@ EventScript_163884:: @ 8163884
 	end
 
 PowerPlant_EventScript_16388D:: @ 816388D
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	setwildbattle SPECIES_ELECTRODE, 34, ITEM_NONE

@@ -601,17 +601,17 @@ struct QuestLogObjectEvent
 struct QuestLog
 {
     /*0x0000*/ u8 unk_000;
-    /*0x0001*/ s8 unk_001;
-    /*0x0002*/ s8 unk_002;
-    /*0x0003*/ s8 unk_003;
-    /*0x0004*/ s16 unk_004;
-    /*0x0006*/ s16 unk_006;
+    /*0x0001*/ u8 mapGroup;
+    /*0x0002*/ u8 mapNum;
+    /*0x0003*/ u8 warpId;
+    /*0x0004*/ s16 x;
+    /*0x0006*/ s16 y;
     /*0x0008*/ struct QuestLogObjectEvent unk_008[OBJECT_EVENTS_COUNT];
 
     // These arrays hold the game state for
     // playing back the quest log
-    /*0x0148*/ u8 flags[0x120];
-    /*0x02c8*/ u16 vars[0x100];
+    /*0x0148*/ u8 flags[FLAGS_COUNT];
+    /*0x02c8*/ u16 vars[VARS_COUNT];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
     /*0x0568*/ u16 unk_568[128];
     /*0x0668*/ u16 end[0];
@@ -746,7 +746,7 @@ struct SaveBlock1
     /*0x0EE0*/ u8 flags[FLAGS_COUNT];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x1300*/ struct QuestLog questLog[4];
+    /*0x1300*/ struct QuestLog questLog[QUEST_LOG_SCENE_COUNT];
     /*0x2CA0*/ u16 easyChatProfile[6];
     /*0x2CAC*/ u16 easyChatBattleStart[6];
     /*0x2CB8*/ u16 easyChatBattleWon[6];

@@ -31,9 +31,7 @@ PalletTown_PlayersHouse_2F_EventScript_168CDB:: @ 8168CDB
 
 gUnknown_8168CE4:: @ 8168CE4
 PalletTown_PlayersHouse_2F_EventScript_168CE4:: @ 8168CE4
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	setvar VAR_0x8004, 32
 	special Special_SetSomeVariable

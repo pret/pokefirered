@@ -4,9 +4,7 @@ SixIsland_WaterPath_House1_MapScripts:: @ 817206C
 SixIsland_WaterPath_House1_EventScript_17206D:: @ 817206D
 	lock
 	faceplayer
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_HERACROSS
 	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies

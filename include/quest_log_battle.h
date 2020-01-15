@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void sub_812BFDC(void);
-void sub_812C224(void);
+void TrySetQuestLogBattleEvent(void);
+void TrySetQuestLogLinkBattleEvent(void);
 
 #endif // GUARD_QUEST_LOG_BATTLE_H

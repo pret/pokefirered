@@ -18,9 +18,7 @@ SaffronCity_House1_2F_EventScript_16EB70:: @ 816EB70
 	end
 
 SaffronCity_House1_2F_EventScript_16EB7B:: @ 816EB7B
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

@@ -58,9 +58,7 @@ EventScript_167606:: @ 8167606
 	return
 
 TwoIsland_EventScript_16760F:: @ 816760F
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND, 4

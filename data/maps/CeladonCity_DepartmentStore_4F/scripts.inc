@@ -14,9 +14,7 @@ CeladonCity_DepartmentStore_4F_EventScript_16BC01:: @ 816BC01
 	end
 
 CeladonCity_DepartmentStore_4F_EventScript_16BC0A:: @ 816BC0A
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

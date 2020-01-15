@@ -2,9 +2,7 @@ FourIsland_PokemonDayCare_MapScripts:: @ 817193F
 	.byte 0
 
 FourIsland_PokemonDayCare_EventScript_171940:: @ 8171940
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	specialvar VAR_RESULT, GetDaycareState

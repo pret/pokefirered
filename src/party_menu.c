@@ -75,6 +75,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
+#include "constants/quest_log.h"
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -248,7 +249,7 @@ static void UpdatePartySelectionDoubleLayout(s8 *slotPtr, s8 movementDir);
 static s8 GetNewSlotDoubleLayout(s8 slotId, s8 movementDir);
 static void Task_PrintAndWaitForText(u8 taskId);
 static void PartyMenuPrintText(const u8 *text);
-static void sub_8124B60(struct Pokemon *mon, u16 item, u16 item2);
+static void SetSwappedHeldItemQuestLogEvent(struct Pokemon *mon, u16 item, u16 item2);
 static bool16 IsMonAllowedInPokemonJump(struct Pokemon *mon);
 static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *mon);
 static void Task_CancelParticipationYesNo(u8 taskId);
@@ -285,7 +286,6 @@ static void Task_UpdateHeldItemSprite(u8 taskId);
 static void Task_HandleSwitchItemsYesNoInput(u8 taskId);
 static void Task_SwitchItemsYesNo(u8 taskId);
 static void Task_WriteMailToGiveMonAfterText(u8 taskId);
-static void CB2_ReturnToPartyMenuFromWritingMail(void);
 static void CB2_ReturnToPartyMenuFromWritingMail(void);
 static void Task_DisplayGaveMailFromPartyMessage(u8 taskId);
 static void CB2_ReadHeldMail(void);
@@ -382,8 +382,8 @@ static void sub_8120FB0(void);
 static void sub_8122084(u8 windowId, const u8 *str);
 static u8 sub_81220D4(void);
 static void sub_8122110(u8 windowId);
-static void sub_812358C(void);
-static void sub_8124BB0(struct Pokemon *mon, u8 fieldMove);
+static void SetSwitchedPartyOrderQuestLogEvent(void);
+static void SetUsedFieldMoveQuestLogEvent(struct Pokemon *mon, u8 fieldMove);
 static void sub_8124DE0(void);
 static void sub_8124E48(void);
 static void sub_812580C(u8 taskId);
@@ -1603,14 +1603,14 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
     }
 }
 
-static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keepOpen, u8 a4)
+static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keepOpen, bool8 fromBagMenu)
 {
-    if (!a4)
-        ItemUse_SetQuestLogEvent(5, mon, item, 0xFFFF);
+    if (!fromBagMenu) // Used Give option from party menu
+        ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM, mon, item, 0xFFFF);
     else if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
-        ItemUse_SetQuestLogEvent(7, mon, item, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM_PC, mon, item, 0xFFFF);
     else
-        ItemUse_SetQuestLogEvent(6, mon, item, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM_BAG, mon, item, 0xFFFF);
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_PkmnWasGivenItem);
@@ -1620,7 +1620,7 @@ static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keep
 
 static void DisplayTookHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keepOpen)
 {
-    ItemUse_SetQuestLogEvent(8, mon, item, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_TOOK_HELD_ITEM, mon, item, 0xFFFF);
     GetMonNickname(mon, gStringVar1);
     CopyItemName(item, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_ReceivedItemFromPkmn);
@@ -1639,7 +1639,7 @@ static void DisplayAlreadyHoldingItemSwitchMessage(struct Pokemon *mon, u16 item
 
 static void DisplaySwitchedHeldItemMessage(u16 item, u16 item2, bool8 keepOpen)
 {
-    sub_8124B60(&gPlayerParty[gPartyMenu.slotId], item2, item);
+    SetSwappedHeldItemQuestLogEvent(&gPlayerParty[gPartyMenu.slotId], item2, item);
     CopyItemName(item, gStringVar1);
     CopyItemName(item2, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_SwitchedPkmnItem);
@@ -3180,7 +3180,7 @@ static void SwitchSelectedMons(u8 taskId)
     else
     {
         // Initialize switching party mons slide animation
-        sub_812358C();
+        SetSwitchedPartyOrderQuestLogEvent();
         windowIds[0] = sPartyMenuBoxes[gPartyMenu.slotId].windowId;
         tSlot1Left = GetWindowAttribute(windowIds[0], WINDOW_TILEMAP_LEFT);
         tSlot1Top = GetWindowAttribute(windowIds[0], WINDOW_TILEMAP_TOP);
@@ -3383,13 +3383,13 @@ static void SwitchPartyMon(void)
     SwitchMenuBoxSprites(&menuBoxes[0]->statusSpriteId, &menuBoxes[1]->statusSpriteId);
 }
 
-static void sub_812358C(void)
+static void SetSwitchedPartyOrderQuestLogEvent(void)
 {
     u16 *buffer = Alloc(2 * sizeof(u16));
 
     buffer[0] = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
     buffer[1] = GetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_SPECIES2);
-    sub_8113550(3, buffer);
+    SetQuestLogEvent(QL_EVENT_SWITCHED_PARTY_ORDER, buffer);
     Free(buffer);
 }
 
@@ -3490,7 +3490,7 @@ static void Task_GiveHoldItem(u8 taskId)
     if (!gPaletteFade.active)
     {
         item = gSpecialVar_ItemId;
-        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, 0);
+        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, FALSE);
         GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
         RemoveBagItem(item, 1);
         gTasks[taskId].func = Task_UpdateHeldItemSprite;
@@ -3598,7 +3598,7 @@ static void Task_DisplayGaveMailFromPartyMessage(u8 taskId)
     if (!gPaletteFade.active)
     {
         if (sPartyMenuItemId == ITEM_NONE)
-            DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, FALSE, 0);
+            DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, FALSE, FALSE);
         else
             DisplaySwitchedHeldItemMessage(gSpecialVar_ItemId, sPartyMenuItemId, FALSE);
         gTasks[taskId].func = Task_UpdateHeldItemSprite;
@@ -3986,7 +3986,7 @@ static void CursorCB_FieldMove(u8 taskId)
                 break;
             default:
                 gPartyMenu.exitCallback = CB2_ReturnToField;
-                sub_8124BB0(&gPlayerParty[GetCursorSelectionMonId()], fieldMove);
+                SetUsedFieldMoveQuestLogEvent(&gPlayerParty[GetCursorSelectionMonId()], fieldMove);
                 Task_ClosePartyMenu(taskId);
                 break;
             }
@@ -4032,7 +4032,7 @@ static void Task_HandleFieldMoveExitAreaYesNoInput(u8 taskId)
     {
     case 0:
         gPartyMenu.exitCallback = CB2_ReturnToField;
-        sub_8124BB0(&gPlayerParty[GetCursorSelectionMonId()], sPartyMenuInternal->data[0]);
+        SetUsedFieldMoveQuestLogEvent(&gPlayerParty[GetCursorSelectionMonId()], sPartyMenuInternal->data[0]);
         Task_ClosePartyMenu(taskId);
         break;
     case MENU_B_PRESSED:
@@ -4159,7 +4159,7 @@ static bool8 SetUpFieldMove_Waterfall(void)
     return FALSE;
 }
 
-static void sub_8124B60(struct Pokemon *mon, u16 item, u16 item2)
+static void SetSwappedHeldItemQuestLogEvent(struct Pokemon *mon, u16 item, u16 item2)
 {
     u16 *ptr = Alloc(4 * sizeof(u16));
 
@@ -4167,9 +4167,9 @@ static void sub_8124B60(struct Pokemon *mon, u16 item, u16 item2)
     ptr[0] = item;
     ptr[1] = item2;
     if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
-        sub_8113550(10, ptr);
+        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, ptr);
     else
-        sub_8113550(9, ptr);
+        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM, ptr);
     Free(ptr);
 }
 
@@ -4180,7 +4180,7 @@ struct FieldMoveWarpParams
     u8 regionMapSectionId;
 };
 
-static void sub_8124BB0(struct Pokemon *mon, u8 fieldMove)
+static void SetUsedFieldMoveQuestLogEvent(struct Pokemon *mon, u8 fieldMove)
 {
     struct FieldMoveWarpParams *ptr = Alloc(sizeof(*ptr));
 
@@ -4197,11 +4197,11 @@ static void sub_8124BB0(struct Pokemon *mon, u8 fieldMove)
     default:
         ptr->regionMapSectionId = 0xFF;
     }
-    sub_8113550(36, (u16 *)ptr);
+    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (u16 *)ptr);
     Free(ptr);
 }
 
-void sub_8124C1C(const u8 *healLocCtrlData)
+void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData)
 {
     const struct MapHeader *mapHeader;
     struct FieldMoveWarpParams *ptr2;
@@ -4220,7 +4220,7 @@ void sub_8124C1C(const u8 *healLocCtrlData)
     ptr2->species = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_SPECIES2);
     ptr2->fieldMove = FIELD_MOVE_FLY;
     ptr2->regionMapSectionId = mapHeader->regionMapSectionId;
-    sub_8113550(36, (u16 *)ptr2);
+    SetQuestLogEvent(QL_EVENT_USED_FIELD_MOVE, (u16 *)ptr2);
     Free(ptr2);
 }
 
@@ -4345,7 +4345,7 @@ static void sub_8124EFC(void)
         RemoveMonPPBonus(mon, moveIdx);
         SetMonMoveSlot(mon, ItemIdToBattleMoveId(gSpecialVar_ItemId), moveIdx);
         AdjustFriendship(mon, 4);
-        ItemUse_SetQuestLogEvent(4, mon, gSpecialVar_ItemId, move);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, move);
         if (gSpecialVar_ItemId <= ITEM_TM50)
             RemoveBagItem(gSpecialVar_ItemId, 1);
         SetMainCallback2(gPartyMenu.exitCallback);
@@ -4498,7 +4498,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
     }
     else
     {
-        ItemUse_SetQuestLogEvent(4, mon, item, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
         sub_8124DC0(taskId);
         gItemUseCB = ItemUseCB_MedicineStep;
     }
@@ -4703,7 +4703,7 @@ static void sub_8125898(u8 taskId, UNUSED TaskFunc func)
 
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, (u8)gPartyMenu.data1);
     gPartyMenuUseExitCallback = TRUE;
-    ItemUse_SetQuestLogEvent(4, mon, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlaySE(SE_KAIFUKU);
     RemoveBagItem(gSpecialVar_ItemId, 1);
     move = GetMonData(mon, gPartyMenu.data1 + MON_DATA_MOVE1);
@@ -4734,7 +4734,7 @@ static void TryUsePPItem(u8 taskId)
     {
         gPartyMenuUseExitCallback = TRUE;
         mon = &gPlayerParty[ptr->slotId];
-        ItemUse_SetQuestLogEvent(4, mon, item, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
         PlaySE(SE_KAIFUKU);
         RemoveBagItem(item, 1);
         move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
@@ -4821,7 +4821,7 @@ void ItemUseCB_TMHM(u8 taskId, UNUSED TaskFunc func)
     }
     if (GiveMoveToMon(mon, move[0]) != MON_HAS_MAX_MOVES)
     {
-        ItemUse_SetQuestLogEvent(4, mon, item, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
         sub_8124DC0(taskId);
         gItemUseCB = ItemUseCB_LearnedMove;
     }
@@ -4962,7 +4962,7 @@ static void sub_8125F5C(u8 taskId)
     u8 moveIdx = GetMoveSlotToReplace();
     u16 move = GetMonData(mon, moveIdx + MON_DATA_MOVE1);
 
-    ItemUse_SetQuestLogEvent(4, mon, gSpecialVar_ItemId, move);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, move);
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move]);
     RemoveMonPPBonus(mon, moveIdx);
@@ -5090,7 +5090,7 @@ static void ItemUseCB_RareCandyStep(u8 taskId, UNUSED TaskFunc func)
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
     BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
-    ItemUse_SetQuestLogEvent(4, mon, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(0);
     UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
     RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -5305,7 +5305,7 @@ static void Task_SacredAshLoop(u8 taskId)
             {
                 gPartyMenuUseExitCallback = TRUE;
                 if (gPartyMenu.menuType != PARTY_MENU_TYPE_IN_BATTLE)
-                    ItemUse_SetQuestLogEvent(4, sSacredAshQuestLogMonBackup, gSpecialVar_ItemId, 0xFFFF);
+                    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, sSacredAshQuestLogMonBackup, gSpecialVar_ItemId, 0xFFFF);
                 RemoveBagItem(gSpecialVar_ItemId, 1);
             }
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
@@ -5354,7 +5354,7 @@ static void sub_8126BD4(void)
 {
     gCB2_AfterEvolution = gPartyMenu.exitCallback;
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
-    ItemUse_SetQuestLogEvent(4, &gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, &gPlayerParty[gPartyMenu.slotId], gSpecialVar_ItemId, 0xFFFF);
     RemoveBagItem(gSpecialVar_ItemId, 1);
 }
 
@@ -5531,7 +5531,7 @@ static void GiveItemToSelectedMon(u8 taskId)
     if (!gPaletteFade.active)
     {
         item = gPartyMenu.bagItem;
-        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, 1);
+        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, TRUE);
         GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
         RemoveItemToGiveFromBag(item);
         gTasks[taskId].func = Task_UpdateHeldItemSpriteAndClosePartyMenu;
@@ -5586,7 +5586,7 @@ static void Task_DisplayGaveMailFromBagMessage(u8 taskId)
         if (sPartyMenuItemId != ITEM_NONE)
             DisplaySwitchedHeldItemMessage(gPartyMenu.bagItem, sPartyMenuItemId, FALSE);
         else
-            DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], gPartyMenu.bagItem, FALSE, 1);
+            DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], gPartyMenu.bagItem, FALSE, TRUE);
         gTasks[taskId].func = Task_UpdateHeldItemSpriteAndClosePartyMenu;
     }
 }

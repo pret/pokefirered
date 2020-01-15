@@ -109,9 +109,7 @@ EventScript_1A90CC:: @ 81A90CC
 EventScript_1A90DA:: @ 81A90DA
     closemessage
     delay 20
-    special sub_8110AB4
-    compare VAR_RESULT, 2
-    goto_if_eq EventScript_1A7AE0
+    goto_if_questlog EventScript_ReleaseEnd
     special sub_8112364
     fadescreen FADE_TO_BLACK
     special ScrSpecial_SeagallopFerry

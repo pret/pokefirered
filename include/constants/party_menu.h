@@ -31,6 +31,20 @@
 #define TUTOR_MOVE_BLAST_BURN      16
 #define TUTOR_MOVE_HYDRO_CANNON    17
 
+#define FIELD_MOVE_FLASH        0
+#define FIELD_MOVE_CUT          1
+#define FIELD_MOVE_FLY          2
+#define FIELD_MOVE_STRENGTH     3
+#define FIELD_MOVE_SURF         4
+#define FIELD_MOVE_ROCK_SMASH   5
+#define FIELD_MOVE_WATERFALL    6
+#define FIELD_MOVE_TELEPORT     7
+#define FIELD_MOVE_DIG          8
+#define FIELD_MOVE_MILK_DRINK   9
+#define FIELD_MOVE_SOFT_BOILED  10
+#define FIELD_MOVE_SWEET_SCENT  11
+#define FIELD_MOVE_END          12
+
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1
 #define PARTY_LAYOUT_MULTI           2
@@ -58,7 +72,7 @@
 #define PARTY_ACTION_USE_ITEM           3
 #define PARTY_ACTION_ABILITY_PREVENTS   4
 #define PARTY_ACTION_GIVE_ITEM          5  
-#define PARTY_ACTION_GIVE_PC_ITEM       6 // TODO: rename this one if necessary. Used for quest log. 
+#define PARTY_ACTION_GIVE_PC_ITEM       6
 #define PARTY_ACTION_GIVE_MAILBOX_MAIL  7
 #define PARTY_ACTION_SWITCH             8
 #define PARTY_ACTION_SWITCHING          9

@@ -54,9 +54,7 @@ ViridianCity_Mart_EventScript_16A268:: @ 816A268
 	faceplayer
 	compare VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	goto_if_eq EventScript_16A2A4
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_16A298

@@ -32,6 +32,8 @@
 #define BAG_TMHM_COUNT      58
 #define BAG_BERRIES_COUNT   43
 
+#define QUEST_LOG_SCENE_COUNT 4
+
 #define MALE   0
 #define FEMALE 1
 

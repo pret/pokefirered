@@ -19,9 +19,7 @@ CeladonCity_GameCorner_EventScript_16C684:: @ 816C684
 	end
 
 CeladonCity_GameCorner_EventScript_16C68D:: @ 816C68D
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0

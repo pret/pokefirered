@@ -10,9 +10,7 @@ CinnabarIsland_Mart_EventScript_16EA19:: @ 816EA19
 	end
 
 CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

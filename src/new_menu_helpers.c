@@ -459,7 +459,7 @@ void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonP
 
 void LoadStdWindowFrameGfx(void)
 {
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
     {
         gTextFlags.autoScroll = 1;
         TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);
@@ -497,7 +497,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
         sub_8111134();
 }
 
@@ -529,7 +529,7 @@ static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u
 
 static void WindowFunc_DrawDialogueFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    if (!IsMsgSignPost() || gUnknown_203ADFA == 2)
+    if (!IsMsgSignPost() || gQuestLogState == 2)
     {
         FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 0, tilemapLeft - 2, tilemapTop - 1, 1, 1, DLG_WINDOW_PALETTE_NUM);
         FillBgTilemapBufferRect(bg, DLG_WINDOW_BASE_TILE_NUM + 1, tilemapLeft - 1, tilemapTop - 1, 1, 1, DLG_WINDOW_PALETTE_NUM);
@@ -613,7 +613,7 @@ void SetStdWindowBorderStyle(u8 windowId, bool8 copyToVram)
 
 void sub_80F7768(u8 windowId, bool8 copyToVram)
 {
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
     {
         gTextFlags.autoScroll = 1;
         TextWindow_LoadTilesStdFrame1(0, DLG_WINDOW_BASE_TILE_NUM);

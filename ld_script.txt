@@ -277,10 +277,10 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
-        src/quest_log_8150454.o(.text);
+        src/quest_log_player.o(.text);
         asm/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
-        src/quest_log_815A008.o(.text);
+        src/quest_log_objects.o(.text);
         src/dodrio_berry_picking_2.o(.text);
         asm/dodrio_berry_picking_2.o(.text);
         src/teachy_tv.o(.text);
@@ -559,7 +559,7 @@ SECTIONS {
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
-        src/quest_log_8150454.o(.rodata);
+        src/quest_log_player.o(.rodata);
         data/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);

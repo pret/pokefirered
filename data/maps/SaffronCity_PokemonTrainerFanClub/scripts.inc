@@ -78,38 +78,38 @@ SaffronCity_PokemonTrainerFanClub_OnTransition:: @ 816F144
 	end
 
 EventScript_16F15B:: @ 816F15B
-	special UpdateMovedSaffronFanClubMembers
-	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	special Special_TryLoseFansFromPlayTime
+	setvar VAR_0x8004, FANCLUB_MEMBER1
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F207
-	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER2
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F213
-	setvar VAR_0x8004, 2
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER3
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F21F
-	setvar VAR_0x8004, 3
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER4
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F22B
-	setvar VAR_0x8004, 4
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER5
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F237
-	setvar VAR_0x8004, 5
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER6
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F243
-	setvar VAR_0x8004, 6
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER7
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F24F
-	setvar VAR_0x8004, 7
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 0
+	setvar VAR_0x8004, FANCLUB_MEMBER8
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_16F25B
 	end
 
@@ -164,22 +164,22 @@ EventScript_16F267:: @ 816F267
 SaffronCity_PokemonTrainerFanClub_EventScript_16F281:: @ 816F281
 	lock
 	faceplayer
-	setvar VAR_0x8004, 0
-	special BufferStreakTrainerText
+	setvar VAR_0x8004, FANCLUB_MEMBER1
+	special Special_BufferFanClubTrainerName
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if_eq EventScript_16F2EE
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F2C0
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F2E4
 	msgbox gUnknown_819C420
 	release
 	end
 
 EventScript_16F2C0:: @ 816F2C0
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F2DA
 	msgbox gUnknown_819C390
@@ -204,22 +204,22 @@ EventScript_16F2EE:: @ 816F2EE
 SaffronCity_PokemonTrainerFanClub_EventScript_16F2F8:: @ 816F2F8
 	lock
 	faceplayer
-	setvar VAR_0x8004, 3
-	special BufferStreakTrainerText
+	setvar VAR_0x8004, FANCLUB_MEMBER4
+	special Special_BufferFanClubTrainerName
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if_eq EventScript_16F365
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F337
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F35B
 	msgbox gUnknown_819CBD3
 	release
 	end
 
 EventScript_16F337:: @ 816F337
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F351
 	msgbox gUnknown_819CB32
@@ -244,22 +244,22 @@ EventScript_16F365:: @ 816F365
 SaffronCity_PokemonTrainerFanClub_EventScript_16F36F:: @ 816F36F
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	special BufferStreakTrainerText
+	setvar VAR_0x8004, FANCLUB_MEMBER2
+	special Special_BufferFanClubTrainerName
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if_eq EventScript_16F3DC
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F3AE
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F3D2
 	msgbox gUnknown_819C6BA
 	release
 	end
 
 EventScript_16F3AE:: @ 816F3AE
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F3C8
 	msgbox gUnknown_819C5A9
@@ -284,22 +284,22 @@ EventScript_16F3DC:: @ 816F3DC
 SaffronCity_PokemonTrainerFanClub_EventScript_16F3E6:: @ 816F3E6
 	lock
 	faceplayer
-	setvar VAR_0x8004, 2
-	special BufferStreakTrainerText
+	setvar VAR_0x8004, FANCLUB_MEMBER3
+	special Special_BufferFanClubTrainerName
 	compare VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0
 	goto_if_eq EventScript_16F453
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F425
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F449
 	msgbox gUnknown_819C986
 	release
 	end
 
 EventScript_16F425:: @ 816F425
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F43F
 	msgbox gUnknown_819C81E
@@ -324,20 +324,20 @@ EventScript_16F453:: @ 816F453
 SaffronCity_PokemonTrainerFanClub_EventScript_16F45D:: @ 816F45D
 	lock
 	faceplayer
-	setvar VAR_0x8004, 5
-	special BufferStreakTrainerText
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	setvar VAR_0x8004, FANCLUB_MEMBER6
+	special Special_BufferFanClubTrainerName
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F491
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F4B5
 	msgbox gUnknown_819D01F
 	release
 	end
 
 EventScript_16F491:: @ 816F491
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F4AB
 	msgbox gUnknown_819CEDF
@@ -357,20 +357,20 @@ EventScript_16F4B5:: @ 816F4B5
 SaffronCity_PokemonTrainerFanClub_EventScript_16F4BF:: @ 816F4BF
 	lock
 	faceplayer
-	setvar VAR_0x8004, 4
-	special BufferStreakTrainerText
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	setvar VAR_0x8004, FANCLUB_MEMBER5
+	special Special_BufferFanClubTrainerName
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F4F3
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F517
 	msgbox gUnknown_819CDDA
 	release
 	end
 
 EventScript_16F4F3:: @ 816F4F3
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F50D
 	msgbox gUnknown_819CCF3
@@ -390,20 +390,20 @@ EventScript_16F517:: @ 816F517
 SaffronCity_PokemonTrainerFanClub_EventScript_16F521:: @ 816F521
 	lock
 	faceplayer
-	setvar VAR_0x8004, 6
-	special BufferStreakTrainerText
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	setvar VAR_0x8004, FANCLUB_MEMBER7
+	special Special_BufferFanClubTrainerName
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F555
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F579
 	msgbox gUnknown_819D1AE
 	release
 	end
 
 EventScript_16F555:: @ 816F555
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F56F
 	msgbox gUnknown_819D0E3
@@ -423,20 +423,20 @@ EventScript_16F579:: @ 816F579
 SaffronCity_PokemonTrainerFanClub_EventScript_16F583:: @ 816F583
 	lock
 	faceplayer
-	setvar VAR_0x8004, 7
-	special BufferStreakTrainerText
-	specialvar VAR_RESULT, ShouldMoveSaffronFanClubMember
-	compare VAR_RESULT, 1
+	setvar VAR_0x8004, FANCLUB_MEMBER8
+	special Special_BufferFanClubTrainerName
+	specialvar VAR_RESULT, Special_IsFanClubMemberFanOfPlayer
+	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_16F5B7
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
-	compare VAR_RESULT, 7
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
+	compare VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1)
 	goto_if_eq EventScript_16F5DB
 	msgbox gUnknown_819D3D2
 	release
 	end
 
 EventScript_16F5B7:: @ 816F5B7
-	specialvar VAR_RESULT, GetNumMovedSaffronFanClubMembers
+	specialvar VAR_RESULT, Special_GetNumFansOfPlayerInTrainerFanClub
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16F5D1
 	msgbox gUnknown_819D2B4

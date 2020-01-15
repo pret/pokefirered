@@ -1,7 +1,5 @@
 Route5_PokemonDayCare_EventScript_1BF398:: @ 81BF398
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	showmoneybox 0, 0, 0

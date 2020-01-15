@@ -2,9 +2,7 @@ CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
 	.byte 0
 
 CeladonCity_DepartmentStore_Roof_EventScript_16BCCD:: @ 816BCCD
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

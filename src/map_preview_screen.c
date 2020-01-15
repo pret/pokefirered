@@ -366,7 +366,7 @@ bool8 sub_80F8110(u8 mapsec, u8 forceFirstTime)
 
 bool8 sub_80F8154(u8 mapsec, u8 forceFirstTime)
 {
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
     {
         return FALSE;
     }

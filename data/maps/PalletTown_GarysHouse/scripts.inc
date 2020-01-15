@@ -44,9 +44,7 @@ EventScript_168DAF:: @ 8168DAF
 	end
 
 EventScript_168DB9:: @ 8168DB9
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	goto_if_lt EventScript_168E46

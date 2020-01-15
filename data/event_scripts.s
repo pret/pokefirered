@@ -27,6 +27,7 @@
 #include "constants/field_weather.h"
 #include "constants/union_room.h"
 #include "constants/trade.h"
+#include "constants/quest_log.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1179,7 +1180,7 @@ EventScript_ResetAllMapFlags:: @ 81A6481
 EventScript_1A651A:: @ 81A651A
 	clearflag FLAG_HIDE_POSTGAME_GOSSIPERS
 	call EventScript_ResetEliteFour
-	special sub_81130A8
+	special Special_UpdateTrainerFanClubGameClear
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_1A653B
@@ -1247,9 +1248,7 @@ EventScript_OutOfCenterPartyHeal:: @ 81A6C26
 EventScript_WallTownMap:: @ 81A6C32
 	lockall
 	msgbox Text_ATownMap
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	fadescreen FADE_TO_BLACK
 	special Special_TownMap
 	waitstate
@@ -1594,7 +1593,7 @@ gUnknown_81A7ADB:: @ 81A7ADB
 	release
 	end
 
-EventScript_1A7AE0:: @ 81A7AE0
+EventScript_ReleaseEnd:: @ 81A7AE0
 	release
 	end
 
@@ -2005,9 +2004,7 @@ EventScript_1B2993:: @ 81B2993
 EventScript_1B2994:: @ 81B2994
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	compare VAR_0x8008, 0
 	goto_if_eq EventScript_1B29C6

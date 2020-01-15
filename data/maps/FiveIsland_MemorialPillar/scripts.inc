@@ -32,9 +32,7 @@ EventScript_168A22:: @ 8168A22
 	end
 
 FiveIsland_MemorialPillar_EventScript_168A48:: @ 8168A48
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lockall
 	goto_if_set FLAG_GOT_TM42_AT_MEMORIAL_PILLAR, EventScript_168B0B

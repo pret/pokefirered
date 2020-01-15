@@ -174,9 +174,7 @@ CeruleanCity_House5_EventScript_NotEnoughBerryPowder:: @ 816B0CC
 
 CeruleanCity_House5_EventScript_BerryCrushRankings:: @ 816B0DA
 	lockall
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special ShowBerryCrushRankings
 	waitstate
 	releaseall

@@ -70,9 +70,7 @@ Movement_167D52:: @ 8167D52
 	step_end
 
 FourIsland_EventScript_167D55:: @ 8167D55
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

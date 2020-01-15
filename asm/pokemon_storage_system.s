@@ -8649,7 +8649,7 @@ _0808FF62:
 	strb r6, [r1, 0x5]
 _0808FF64:
 	adds r0, r2, 0
-	bl sub_8113550
+	bl SetQuestLogEvent
 _0808FF6A:
 	pop {r4-r7}
 	pop {r0}

@@ -98,8 +98,8 @@
 #define VAR_RESORT_GOREGEOUS_STEP_COUNTER  0x4035
 #define VAR_RESORT_GORGEOUS_REQUESTED_MON  0x4036
 #define VAR_PC_BOX_TO_SEND_MON             0x4037
-#define VAR_0x4038                         0x4038
-#define VAR_0x4039                         0x4039
+#define VAR_FANCLUB_FAN_COUNTER            0x4038
+#define VAR_FANCLUB_LOSE_FAN_TIMER         0x4039
 #define VAR_ELEVATOR_FLOOR                 0x403A
 #define VAR_RESORT_GORGEOUS_REWARD         0x403B
 #define VAR_0x403C                         0x403C

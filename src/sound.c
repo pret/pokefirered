@@ -2,6 +2,7 @@
 #include "gba/m4a_internal.h"
 #include "sound.h"
 #include "battle.h"
+#include "quest_log.h"
 #include "m4a.h"
 #include "main.h"
 #include "pokemon.h"
@@ -16,7 +17,6 @@ struct Fanfare
 
 // TODO: what are these
 extern u8 gDisableMapMusicChangeOnMapLoad;
-extern u8 gUnknown_203ADFA;
 extern u8 gUnknown_203F174;
 
 // ewram
@@ -193,7 +193,7 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
     u16 songNum;
 
-    if(gUnknown_203ADFA == 2)
+    if(gQuestLogState == 2)
     {
         sFanfareCounter = 0xFF;
     }
@@ -362,7 +362,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
 
 void PlayCry7(u16 species, u8 mode) // exclusive to FR/LG
 {
-    if((u8)(gUnknown_203ADFA - 2) >= 2)
+    if((u8)(gQuestLogState - 2) >= 2)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 85);
         PlayCryInternal(species, 0, CRY_VOLUME, 10, mode);
@@ -571,7 +571,7 @@ void PlayBGM(u16 songNum)
 
 void PlaySE(u16 songNum)
 {
-    if(gDisableMapMusicChangeOnMapLoad == 0 && gUnknown_203ADFA != 2)
+    if(gDisableMapMusicChangeOnMapLoad == 0 && gQuestLogState != 2)
         m4aSongNumStart(songNum);
 }
 

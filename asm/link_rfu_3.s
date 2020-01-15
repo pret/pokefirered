@@ -7565,7 +7565,7 @@ InitUnionRoom: @ 811999C
 	adds r6, r0, 0
 	movs r0, 0xFF
 	strb r0, [r5]
-	ldr r0, _081199EC @ =gUnknown_203ADFA
+	ldr r0, _081199EC @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -7596,7 +7596,7 @@ _081199E0:
 	bx r0
 	.align 2, 0
 _081199E8: .4byte gUnknown_203B04C
-_081199EC: .4byte gUnknown_203ADFA
+_081199EC: .4byte gQuestLogState
 _081199F0: .4byte sub_81199FC
 _081199F4: .4byte gUnknown_203B05C
 _081199F8: .4byte gUnknown_300202C

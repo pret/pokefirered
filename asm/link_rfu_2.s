@@ -935,7 +935,7 @@ _080F8DBC: .4byte 0x00000993
 	thumb_func_start sub_80F8DC0
 sub_80F8DC0: @ 80F8DC0
 	push {r4-r6,lr}
-	ldr r0, _080F8DE0 @ =gUnknown_203ADFA
+	ldr r0, _080F8DE0 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -950,7 +950,7 @@ sub_80F8DC0: @ 80F8DC0
 	ldr r0, _080F8DE8 @ =sub_80F8738
 	b _080F8DF2
 	.align 2, 0
-_080F8DE0: .4byte gUnknown_203ADFA
+_080F8DE0: .4byte gQuestLogState
 _080F8DE4: .4byte gUnknown_3005450
 _080F8DE8: .4byte sub_80F8738
 _080F8DEC:
@@ -1021,7 +1021,7 @@ _080F8E70: .4byte gUnknown_843ED88
 	thumb_func_start sub_80F8E74
 sub_80F8E74: @ 80F8E74
 	push {lr}
-	ldr r0, _080F8E98 @ =gUnknown_203ADFA
+	ldr r0, _080F8E98 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -1038,7 +1038,7 @@ _080F8E92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F8E98: .4byte gUnknown_203ADFA
+_080F8E98: .4byte gQuestLogState
 _080F8E9C: .4byte sub_80F8738
 _080F8EA0: .4byte gUnknown_3005450
 	thumb_func_end sub_80F8E74
@@ -1106,7 +1106,7 @@ _080F8F0A:
 	thumb_func_start sub_80F8F10
 sub_80F8F10: @ 80F8F10
 	push {lr}
-	ldr r0, _080F8F34 @ =gUnknown_203ADFA
+	ldr r0, _080F8F34 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -1123,7 +1123,7 @@ _080F8F2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F8F34: .4byte gUnknown_203ADFA
+_080F8F34: .4byte gQuestLogState
 _080F8F38: .4byte sub_80F893C
 _080F8F3C: .4byte gUnknown_3005450
 	thumb_func_end sub_80F8F10
@@ -7040,7 +7040,7 @@ _080FBBFC: .4byte sub_80F8D20
 	thumb_func_start sub_80FBC00
 sub_80FBC00: @ 80FBC00
 	push {r4-r7,lr}
-	ldr r0, _080FBC4C @ =gUnknown_203ADFA
+	ldr r0, _080FBC4C @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -7076,7 +7076,7 @@ _080FBC46:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FBC4C: .4byte gUnknown_203ADFA
+_080FBC4C: .4byte gQuestLogState
 _080FBC50: .4byte gUnknown_3005450
 _080FBC54: .4byte sub_80FB5EC
 _080FBC58: .4byte gUnknown_203ABF0

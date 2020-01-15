@@ -2,9 +2,7 @@ CeruleanCity_House4_MapScripts:: @ 816ACEE
 	.byte 0
 
 CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	specialvar VAR_0x8004, Special_GetMENewsJisanItemAndState

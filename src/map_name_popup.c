@@ -21,7 +21,7 @@ static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 void CreateMapNamePopupIfNotAlreadyRunning(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
-    if (FlagGet(FLAG_SPECIAL_FLAG_0x4000) != TRUE && !(gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3))
+    if (FlagGet(FLAG_SPECIAL_FLAG_0x4000) != TRUE && !(gQuestLogState == 2 || gQuestLogState == 3))
     {
         taskId = FindTaskIdByFunc(Task_MapNamePopup);
         if (taskId == 0xFF)

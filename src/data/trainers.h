@@ -1,3 +1,5 @@
+// TODO: Use NELEMS/ARRAY_COUNT in .partySize, name trainer parties
+
 const struct Trainer gTrainers[] = {
     [TRAINER_NONE] = {
         .partyFlags = 0,

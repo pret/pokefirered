@@ -978,9 +978,7 @@ EventScript_1699F9:: @ 81699F9
 	end
 
 EventScript_1699FB:: @ 81699FB
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	goto_if_set FLAG_OAK_SKIP_22_RIVAL_CHECK, EventScript_169A6E
 	goto_if_set FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL, EventScript_169A78

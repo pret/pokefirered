@@ -17,9 +17,7 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	applymovement 1, Movement_163D22
 	waitmovement 0
 	msgbox gUnknown_817AE8E
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	waitse
 	playmoncry SPECIES_HYPNO, 2
 	waitmoncry

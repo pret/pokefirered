@@ -101,7 +101,7 @@ void ResetMenuAndMonGlobals(void)
     sub_81089BC();
     ResetTMCaseCursorPos();
     BerryPouch_CursorResetToTop();
-    sub_811089C();
+    ResetQuestLog();
     SeedWildEncounterRng(Random());
     ResetSpecialVars();
 }
@@ -142,7 +142,7 @@ void NewGameInitData(void)
     NewGameInitPCItems();
     sub_809C794();
     InitEasyChatPhrases();
-    sub_8113044();
+    ResetTrainerFanClub();
     copy_strings_to_sav1();
     ResetMiniGamesResults();
     sub_8143D24();

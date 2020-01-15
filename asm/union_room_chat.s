@@ -165,7 +165,7 @@ _08128554:
 	bl SetMainCallback2
 	movs r0, 0x11
 	movs r1, 0
-	bl sub_8113550
+	bl SetQuestLogEvent
 	ldr r0, _081285A8 @ =sub_81285E8
 	movs r1, 0x8
 	bl CreateTask

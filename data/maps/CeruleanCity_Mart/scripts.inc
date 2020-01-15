@@ -10,9 +10,7 @@ CeruleanCity_Mart_EventScript_Woman:: @ 816ACA7
 	end
 
 CeruleanCity_Mart_EventScript_Clerk:: @ 816ACB0
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

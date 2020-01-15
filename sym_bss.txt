@@ -70,22 +70,11 @@ gUnknown_3000FE8: @ 3000FE8
 
 	.align 2
 	.include "src/easy_chat.o"
-
-gUnknown_3001188: @ 3001188
-	.space 0x8
-
-gRfuAPIBuffer: @ 3001190
-	.space 0xE68
-
-gUnknown_3001FF8: @ 3001FF8
-	.space 0x10
-
-gUnknown_3002008: @ 3002008
-	.space 0x10
-
-gUnknown_3002018: @ 3002018
-	.space 0x4
-
+	.align 2
+	.include "src/link_rfu_2.o"
+	.align 2
+	.include "src/link_rfu_3.o"
+	.align 2
 	.include "src/quest_log.o"
 
 	.align 2

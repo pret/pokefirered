@@ -75,60 +75,10 @@ gUnknown_3005078: @ 3005078
 gUnknown_3005430: @ 3005430
 	.space 0x10
 
-gUnknown_3005440: @ 3005440
-	.space 0x10
-
-gUnknown_3005450: @ 3005450
-	.space 0x14
-
-gUnknown_3005464: @ 3005464
-	.space 0x58
-
-gUnknown_30054BC: @ 30054BC
-	.space 0x2
-
-gUnknown_30054BE: @ 30054BE
-	.space 0x76
-
-gUnknown_3005534: @ 3005534
-	.space 0xE
-
-gUnknown_3005542: @ 3005542
-	.space 0x18
-
-gUnknown_300555A: @ 300555A
-	.space 0x1A
-
-gUnknown_3005574: @ 3005574
-	.space 0x57C
-
-gUnknown_3005AF0: @ 3005AF0
-	.space 0x29F
-
-gUnknown_3005D8F: @ 3005D8F
-	.space 0x47
-
-gUnknown_3005DD6: @ 3005DD6
-	.space 0x3
-
-gUnknown_3005DD9: @ 3005DD9
-	.space 0x4
-
-gUnknown_3005DDD: @ 3005DDD
-	.space 0x9
-
-gUnknown_3005DE6: @ 3005DE6
-	.space 0x1A
-
-gUnknown_3005E00: @ 3005E00
-	.space 0x10
-
-gUnknown_3005E10: @ 3005E10
-	.space 0x10
-
-gUnknown_3005E20: @ 3005E20
-	.space 0x40
-
+	.align 4
+	.include "link_rfu_2.o"
+	.align 4
+	.include "link_rfu.o"
 	.align 4
 	.include "list_menu.o"
 	.align 2

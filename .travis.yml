@@ -1,6 +1,10 @@
 language: generic
 dist: bionic
 sudo: false
+env:
+  global:
+    - DEVKITPRO=$HOME
+    - DEVKITARM=$DEVKITPRO/devkitARM
 addons:
   apt:
     packages:
@@ -11,8 +15,10 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry git clone https://github.com/luckytyphlosion/agbcc.git -b new_layout_with_libs
-  - cd agbcc && make && make install prefix=$TRAVIS_BUILD_DIR
+  - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r50/devkitARM_r50-linux.tar.xz
+  - tar xJf devkitARM*.tar.xz
+  - travis_retry git clone https://github.com/pret/agbcc.git
+  - cd agbcc && sh build.sh && sh install.sh $TRAVIS_BUILD_DIR
   - popd
 matrix:
   include:

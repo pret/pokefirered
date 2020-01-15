@@ -1,9 +1,8 @@
+include $(DEVKITARM)/base_tools
 COMPARE ?= 0
 
-AS := ../tools/binutils/bin/arm-none-eabi-as
 CPP := $(CC) -E
-LD := ../tools/binutils/bin/arm-none-eabi-ld
-OBJCOPY := ../tools/binutils/bin/arm-none-eabi-objcopy
+LD := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
@@ -160,7 +159,7 @@ $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
 $(ELF): ld_script.txt $(OBJS)
-	cd $(OBJ_DIR) && ../$(LD) $(LDFLAGS) -T ../ld_script.txt -o ../$@
+	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../ld_script.txt -o ../$@
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@

@@ -4,6 +4,29 @@
 #include "global.h"
 #include "main.h"
 
+#define LINK_KEY_CODE_NULL 0x00
+#define LINK_KEY_CODE_EMPTY 0x11
+#define LINK_KEY_CODE_DPAD_DOWN 0x12
+#define LINK_KEY_CODE_DPAD_UP 0x13
+#define LINK_KEY_CODE_DPAD_LEFT 0x14
+#define LINK_KEY_CODE_DPAD_RIGHT 0x15
+#define LINK_KEY_CODE_UNK_2 0x16
+#define LINK_KEY_CODE_EXIT_ROOM 0x17
+#define LINK_KEY_CODE_START_BUTTON 0x18
+#define LINK_KEY_CODE_A_BUTTON 0x19
+#define LINK_KEY_CODE_UNK_4 0x1A // I'd guess this is the B button?
+
+// These two are a hack to stop user input until link stuff can be
+// resolved.
+#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
+#define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
+#define LINK_KEY_CODE_UNK_7 0x1D
+#define LINK_KEY_CODE_UNK_8 0x1E
+
+#define MOVEMENT_MODE_FREE 0
+#define MOVEMENT_MODE_FROZEN 1
+#define MOVEMENT_MODE_SCRIPTED 2
+
 struct UnkPlayerStruct
 {
     u8 player_field_0;
@@ -152,5 +175,7 @@ void sub_8056078(void *, void *);
 void sub_805546C(u8 a0);
 bool32 sub_80582E0(void);
 bool32 sub_8058274(void);
+
+extern u16 gHeldKeyCodeToSend;
 
 #endif //GUARD_OVERWORLD_H

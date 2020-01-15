@@ -712,6 +712,12 @@ struct TrainerRematchState
     u8 rematches[100];
 };
 
+struct TrainerNameRecord
+{
+    u32 trainerId;
+    u8 trainerName[PLAYER_NAME_LENGTH];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -766,7 +772,8 @@ struct SaveBlock1
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x204];
+    /*0x3A94*/ u8 filler3A94[0x114];
+    /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;
     /*0x3D24*/ u8 filler3D24[0x10];
     /*0x3D34*/ u32 unkArrayIdx;

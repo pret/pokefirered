@@ -65,6 +65,19 @@
 #define LINKCMD_SEND_HELD_KEYS_2   0xCAFE
 #define LINKCMD_0xCCCC             0xCCCC
 
+#define LINKTYPE_0x1111              0x1111  // trade
+#define LINKTYPE_0x1122              0x1122  // trade
+#define LINKTYPE_0x1133              0x1133  // trade
+#define LINKTYPE_0x1144              0x1144  // trade
+#define LINKTYPE_BATTLE              0x2211
+#define LINKTYPE_0x2222              0x2222  // unused battle?
+#define LINKTYPE_SINGLE_BATTLE       0x2233
+#define LINKTYPE_DOUBLE_BATTLE       0x2244
+#define LINKTYPE_MULTI_BATTLE        0x2255
+#define LINKTYPE_BATTLE_TOWER_50     0x2266
+#define LINKTYPE_BATTLE_TOWER_OPEN   0x2277
+#define LINKTYPE_BATTLE_TOWER        0x2288
+
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
 
@@ -188,6 +201,7 @@ extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
 
 extern u8 gShouldAdvanceLinkState;
+extern u16 gLinkPartnersHeldKeys[6];
 
 void Task_DestroySelf(u8);
 void OpenLink(void);
@@ -261,5 +275,8 @@ bool8 IsWirelessAdapterConnected(void);
 bool8 sub_800A474(u8 a0);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
+void sub_800B0B4(void);
+void sub_800B110(u32 who);
+void sub_800ACBC(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 
 #endif // GUARD_LINK_H

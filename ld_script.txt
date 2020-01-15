@@ -242,6 +242,7 @@ SECTIONS {
         src/menu.o(.text);
         src/quest_log.o(.text);
         asm/union_room.o(.text);
+        asm/union_room_player_avatar.o(.text);
         asm/pokemon_special_anim.o(.text);
         src/party_menu.o(.text);
         asm/union_room_chat.o(.text);

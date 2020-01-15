@@ -15,6 +15,14 @@ Make sure that the `build-essential`, `git`, and `libpng-dev` packages are insta
 
 In the case of Cygwin, [include](https://cygwin.com/cygwin-ug-net/setup-net.html#setup-packages) the `make`, `git`, `gcc-core`, `gcc-g++`, and `libpng-devel` packages.
 
+Install the **devkitARM** toolchain of [devkitPro](https://devkitpro.org/wiki/Getting_Started) and add its environment variables. For Windows versions without the Linux subsystem, the devkitPro [graphical installer](https://github.com/devkitPro/installer/releases) includes a preconfigured MSYS2 environment, thus the steps below are not required.
+
+    sudo (dkp-)pacman -S gba-dev
+	export DEVKITPRO=/opt/devkitpro
+	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+	export DEVKITARM=$DEVKITPRO/devkitARM
+	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
+
 
 ## Installation
 

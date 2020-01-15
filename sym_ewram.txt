@@ -332,7 +332,7 @@ gUnknown_203ABE8: @ 203ABE8
 	.align 2
 	.include "src/link_rfu_2.o"
 	.align 2
-	.include "src/link_rfu_4.o"
+	.include "src/link_rfu_3.o"
 	.align 2
 
 gUnknown_203ACE8: @ 203ACE8

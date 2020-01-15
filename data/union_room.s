@@ -1549,6 +1549,8 @@ gUnknown_8459580:: @ 8459580
 gUnknown_8459588:: @ 8459588
 	.string "Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}$"
 
+	@ why is this data here of all places?
+
 	.align 2
 gUnknown_84595B0::
 	.string "Canceled reading the Card.$"

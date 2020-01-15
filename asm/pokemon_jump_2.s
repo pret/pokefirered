@@ -3930,7 +3930,7 @@ _081497FA:
 sub_8149804: @ 8149804
 	push {lr}
 	movs r2, 0
-	ldr r1, _08149828 @ =gUnknown_3005450
+	ldr r1, _08149828 @ =Rfu
 	ldr r3, _0814982C @ =0x0000069e
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -3947,7 +3947,7 @@ _08149820:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08149828: .4byte gUnknown_3005450
+_08149828: .4byte Rfu
 _0814982C: .4byte 0x0000069e
 _08149830: .4byte 0x000008d2
 	thumb_func_end sub_8149804

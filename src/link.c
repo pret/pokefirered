@@ -984,7 +984,7 @@ u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == 1)
     {
-        return rfu_get_multiplayer_id();
+        return LinkRfu_GetMultiplayerId();
     }
     return SIO_MULTI_CNT->id;
 }

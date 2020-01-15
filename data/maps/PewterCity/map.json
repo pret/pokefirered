@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_166075",
+      "script": "PewterCity_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_16607E",
+      "script": "PewterCity_EventScript_MuseumGuide",
       "flag": "FLAG_HIDE_PEWTER_MUSEUM_GUIDE"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_16622B",
+      "script": "PewterCity_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_166244",
+      "script": "PewterCity_EventScript_BugCatcher",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_165B9D",
+      "script": "PewterCity_EventScript_GymGuide",
       "flag": "FLAG_HIDE_PEWTER_CITY_GYM_GUIDE"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_EventScript_1662A9",
+      "script": "PewterCity_EventScript_RunningShoesAide",
       "flag": "FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY"
     }
   ],
@@ -175,7 +175,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
-      "script": "PewterCity_EventScript_165D8E"
+      "script": "PewterCity_EventScript_GymGuideTriggerTop"
     },
     {
       "type": "trigger",
@@ -184,7 +184,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
-      "script": "PewterCity_EventScript_165D9A"
+      "script": "PewterCity_EventScript_GymGuideTriggerMid"
     },
     {
       "type": "trigger",
@@ -193,7 +193,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
-      "script": "PewterCity_EventScript_165DA6"
+      "script": "PewterCity_EventScript_GymGuideTriggerBottom"
     },
     {
       "type": "trigger",
@@ -202,7 +202,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 0,
-      "script": "PewterCity_EventScript_165DB2"
+      "script": "PewterCity_EventScript_GymGuideTriggerRight"
     },
     {
       "type": "trigger",
@@ -211,7 +211,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
-      "script": "PewterCity_EventScript_1662B7"
+      "script": "PewterCity_EventScript_RunningShoesAideTriggerTop"
     },
     {
       "type": "trigger",
@@ -220,7 +220,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
-      "script": "PewterCity_EventScript_1662C4"
+      "script": "PewterCity_EventScript_RunningShoesAideTriggerMid"
     },
     {
       "type": "trigger",
@@ -229,7 +229,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": 1,
-      "script": "PewterCity_EventScript_1662D1"
+      "script": "PewterCity_EventScript_RunningShoesAideTriggerBottom"
     }
   ],
   "bg_events": [
@@ -238,35 +238,35 @@
       "x": 19,
       "y": 7,
       "elevation": 0,
-      "script": "PewterCity_EventScript_16627F"
+      "script": "PewterCity_EventScript_MuseumSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 39,
       "y": 19,
       "elevation": 0,
-      "script": "PewterCity_EventScript_166276"
+      "script": "PewterCity_EventScript_PoliceNotice"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 16,
       "elevation": 0,
-      "script": "PewterCity_EventScript_166288"
+      "script": "PewterCity_EventScript_GymSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 20,
       "y": 30,
       "elevation": 0,
-      "script": "PewterCity_EventScript_16626D"
+      "script": "PewterCity_EventScript_TrainerTips"
     },
     {
       "type": "bg_event_type_0",
       "x": 31,
       "y": 25,
       "elevation": 0,
-      "script": "PewterCity_EventScript_1662A0"
+      "script": "PewterCity_EventScript_CitySign"
     },
     {
       "type": "hidden_item",

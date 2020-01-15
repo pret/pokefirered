@@ -51,11 +51,11 @@ MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_1ACE1C:: @ 81ACE1C
+PewterCity_Museum_1F_EventScript_PokemonJournalBrock:: @ 81ACE1C
 	lockall
 	famechecker FAMECHECKER_BROCK, 5
 	textcolor 3
-	msgbox gUnknown_81B146A
+	msgbox PokemonJournal_Text_SpecialFeatureBrock
 	releaseall
 	end
 

@@ -1,6 +1,6 @@
 .equ GAVE_PROFILE,  VAR_TEMP_1
 
-MysteryEventClub_EventScript_Man:: @ 81BEE16
+MysteryEventClub_EventScript_Woman:: @ 81BEE16
 	lock
 	faceplayer
 	compare GAVE_PROFILE, TRUE

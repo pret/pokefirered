@@ -1373,7 +1373,7 @@ gFameCheckerFlavorTextOriginObjectName_Giovanni4:: @ 81B145F
 gFameCheckerFlavorTextOriginObjectName_Giovanni5:: @ 81B1463
 	.string "GIDEON$"
 
-gUnknown_81B146A:: @ 81B146A
+PokemonJournal_Text_SpecialFeatureBrock:: @ 81B146A
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: PEWTER GYM\n"
 	.string "LEADER BROCK!\p"

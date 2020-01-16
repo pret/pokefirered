@@ -1,66 +1,66 @@
 PokemonTower_7F_MapScripts:: @ 8163559
 	.byte 0
 
-PokemonTower_7F_EventScript_16355A:: @ 816355A
+PokemonTower_7F_EventScript_MrFuji:: @ 816355A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setflag FLAG_HIDE_TOWER_FUJI
 	clearflag FLAG_HIDE_POKEHOUSE_FUJI
 	setflag FLAG_RESCUED_MR_FUJI
-	msgbox gUnknown_817A529
+	msgbox PokemonTower_7F_Text_MrFujiThankYouFollowMe
 	closemessage
 	warp MAP_LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE, 255, 4, 7
 	waitstate
 	release
 	end
 
-PokemonTower_7F_EventScript_163586:: @ 8163586
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_19, Text_17A380, Text_17A3A4, EventScript_1635A1
-	msgbox gUnknown_817A3AF, MSGBOX_AUTOCLOSE
+PokemonTower_7F_EventScript_Grunt1:: @ 8163586
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_19, PokemonTower_7F_Text_Grunt1Intro, PokemonTower_7F_Text_Grunt1Defeat, PokemonTower_7F_EventScript_DefeatedGrunt1
+	msgbox PokemonTower_7F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1635A1:: @ 81635A1
-	msgbox gUnknown_817A3AF
+PokemonTower_7F_EventScript_DefeatedGrunt1:: @ 81635A1
+	msgbox PokemonTower_7F_Text_Grunt1PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 10
-	goto_if_eq EventScript_1635E0
+	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitMid
 	compare VAR_0x8004, 11
-	goto_if_eq EventScript_1635F0
+	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitRight
 	compare VAR_0x8004, 9
-	goto_if_eq EventScript_163600
-	applymovement 2, Movement_16362C
+	goto_if_eq PokemonTower_7F_EventScript_Grunt1ExitLeft
+	applymovement 2, PokemonTower_7F_Movement_Grunt1Exit
 	waitmovement 0
-	goto EventScript_163616
+	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
-EventScript_1635E0:: @ 81635E0
-	applymovement 2, Movement_16361B
+PokemonTower_7F_EventScript_Grunt1ExitMid:: @ 81635E0
+	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitMid
 	waitmovement 0
-	goto EventScript_163616
+	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
-EventScript_1635F0:: @ 81635F0
-	applymovement 2, Movement_163624
+PokemonTower_7F_EventScript_Grunt1ExitRight:: @ 81635F0
+	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitRight
 	waitmovement 0
-	goto EventScript_163616
+	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
-EventScript_163600:: @ 8163600
-	applymovement 2, Movement_163633
+PokemonTower_7F_EventScript_Grunt1ExitLeft:: @ 8163600
+	applymovement 2, PokemonTower_7F_Movement_Grunt1ExitLeft
 	waitmovement 0
 	playse SE_KAIDAN
 	delay 25
-	goto EventScript_163616
+	goto PokemonTower_7F_EventScript_RemoveGrunt1
 	end
 
-EventScript_163616:: @ 8163616
+PokemonTower_7F_EventScript_RemoveGrunt1:: @ 8163616
 	removeobject 2
 	release
 	end
 
-Movement_16361B:: @ 816361B
+PokemonTower_7F_Movement_Grunt1ExitMid:: @ 816361B
 	walk_down
 	walk_right
 	walk_down
@@ -71,7 +71,7 @@ Movement_16361B:: @ 816361B
 	walk_down
 	step_end
 
-Movement_163624:: @ 8163624
+PokemonTower_7F_Movement_Grunt1ExitRight:: @ 8163624
 	walk_down
 	walk_down
 	walk_down
@@ -81,7 +81,7 @@ Movement_163624:: @ 8163624
 	walk_down
 	step_end
 
-Movement_16362C:: @ 816362C
+PokemonTower_7F_Movement_Grunt1Exit:: @ 816362C
 	walk_down
 	walk_down
 	walk_down
@@ -90,7 +90,7 @@ Movement_16362C:: @ 816362C
 	walk_down
 	step_end
 
-Movement_163633:: @ 8163633
+PokemonTower_7F_Movement_Grunt1ExitLeft:: @ 8163633
 	walk_right
 	walk_down
 	walk_down
@@ -102,43 +102,43 @@ Movement_163633:: @ 8163633
 	walk_in_place_fastest_left
 	step_end
 
-PokemonTower_7F_EventScript_16363D:: @ 816363D
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_20, Text_17A3CD, Text_17A466, EventScript_163658
-	msgbox gUnknown_817A477, MSGBOX_AUTOCLOSE
+PokemonTower_7F_EventScript_Grunt2:: @ 816363D
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_20, PokemonTower_7F_Text_Grunt2Intro, PokemonTower_7F_Text_Grunt2Defeat, PokemonTower_7F_EventScript_DefeatedGrunt2
+	msgbox PokemonTower_7F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_163658:: @ 8163658
+PokemonTower_7F_EventScript_DefeatedGrunt2:: @ 8163658
 	famechecker FAMECHECKER_MRFUJI, 1
-	msgbox gUnknown_817A477
+	msgbox PokemonTower_7F_Text_Grunt2PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 12
-	goto_if_eq EventScript_163699
+	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitLeft
 	compare VAR_0x8004, 13
-	goto_if_eq EventScript_1636A9
-	applymovement 3, Movement_1636C6
+	goto_if_eq PokemonTower_7F_EventScript_Grunt2ExitRight
+	applymovement 3, PokemonTower_7F_Movement_Grunt2Exit
 	waitmovement 0
-	goto EventScript_1636B9
+	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
-EventScript_163699:: @ 8163699
-	applymovement 3, Movement_1636BE
+PokemonTower_7F_EventScript_Grunt2ExitLeft:: @ 8163699
+	applymovement 3, PokemonTower_7F_Movement_Grunt2ExitLeft
 	waitmovement 0
-	goto EventScript_1636B9
+	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
-EventScript_1636A9:: @ 81636A9
-	applymovement 3, Movement_1636CD
+PokemonTower_7F_EventScript_Grunt2ExitRight:: @ 81636A9
+	applymovement 3, PokemonTower_7F_Movement_Grunt2ExitRight
 	waitmovement 0
-	goto EventScript_1636B9
+	goto PokemonTower_7F_EventScript_RemoveGrunt2
 	end
 
-EventScript_1636B9:: @ 81636B9
+PokemonTower_7F_EventScript_RemoveGrunt2:: @ 81636B9
 	removeobject 3
 	release
 	end
 
-Movement_1636BE:: @ 81636BE
+PokemonTower_7F_Movement_Grunt2ExitLeft:: @ 81636BE
 	walk_down
 	walk_down
 	walk_down
@@ -148,7 +148,7 @@ Movement_1636BE:: @ 81636BE
 	walk_down
 	step_end
 
-Movement_1636C6:: @ 81636C6
+PokemonTower_7F_Movement_Grunt2Exit:: @ 81636C6
 	walk_down
 	walk_down
 	walk_down
@@ -157,7 +157,7 @@ Movement_1636C6:: @ 81636C6
 	walk_down
 	step_end
 
-Movement_1636CD:: @ 81636CD
+PokemonTower_7F_Movement_Grunt2ExitRight:: @ 81636CD
 	walk_left
 	walk_down
 	walk_down
@@ -168,46 +168,46 @@ Movement_1636CD:: @ 81636CD
 	walk_down
 	step_end
 
-PokemonTower_7F_EventScript_1636D6:: @ 81636D6
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_21, Text_17A4CF, Text_17A4EE, EventScript_1636F1
-	msgbox gUnknown_817A506, MSGBOX_AUTOCLOSE
+PokemonTower_7F_EventScript_Grunt3:: @ 81636D6
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_21, PokemonTower_7F_Text_Grunt3Intro, PokemonTower_7F_Text_Grunt3Defeat, PokemonTower_7F_EventScript_DefeatedGrunt3
+	msgbox PokemonTower_7F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1636F1:: @ 81636F1
-	msgbox gUnknown_817A506
+PokemonTower_7F_EventScript_DefeatedGrunt3:: @ 81636F1
+	msgbox PokemonTower_7F_Text_Grunt3PostBattle
 	closemessage
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 10
-	goto_if_eq EventScript_163725
+	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitRight
 	compare VAR_0x8004, 9
-	goto_if_eq EventScript_163735
-	applymovement 4, Movement_163754
+	goto_if_eq PokemonTower_7F_EventScript_Grunt3ExitLeft
+	applymovement 4, PokemonTower_7F_Movement_Grunt3Exit
 	waitmovement 0
-	goto EventScript_163745
+	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
-EventScript_163725:: @ 8163725
-	applymovement 4, Movement_16374C
+PokemonTower_7F_EventScript_Grunt3ExitRight:: @ 8163725
+	applymovement 4, PokemonTower_7F_Movement_Grunt3ExitRight
 	waitmovement 0
-	goto EventScript_163745
+	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
-EventScript_163735:: @ 8163735
-	applymovement 4, Movement_16375B
+PokemonTower_7F_EventScript_Grunt3ExitLeft:: @ 8163735
+	applymovement 4, PokemonTower_7F_Movement_Grunt3ExitLeft
 	waitmovement 0
-	goto EventScript_163745
+	goto PokemonTower_7F_EventScript_RemoveGrunt3
 	end
 
-EventScript_163745:: @ 8163745
+PokemonTower_7F_EventScript_RemoveGrunt3:: @ 8163745
 	removeobject 4
 	release
 	end
 
-EventScript_16374A:: @ 816374A
+PokemonTower_7F_EventScript_Unused:: @ 816374A
 	release
 	end
 
-Movement_16374C:: @ 816374C
+PokemonTower_7F_Movement_Grunt3ExitRight:: @ 816374C
 	walk_down
 	walk_down
 	walk_down
@@ -217,7 +217,7 @@ Movement_16374C:: @ 816374C
 	walk_down
 	step_end
 
-Movement_163754:: @ 8163754
+PokemonTower_7F_Movement_Grunt3Exit:: @ 8163754
 	walk_down
 	walk_down
 	walk_down
@@ -226,7 +226,7 @@ Movement_163754:: @ 8163754
 	walk_down
 	step_end
 
-Movement_16375B:: @ 816375B
+PokemonTower_7F_Movement_Grunt3ExitLeft:: @ 816375B
 	walk_right
 	walk_down
 	walk_down

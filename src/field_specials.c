@@ -523,9 +523,10 @@ u16 Special_GetSpeciesOfPartySlot_x8004(void)
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
 }
 
-bool8 Special_BufferMonOTNameAndCompareToPlayerName(void)
+bool8 Special_IsMonOTNameNotPlayers(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+    
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
         return FALSE;
     else
@@ -1632,13 +1633,13 @@ static void ChangePokemonNickname_CB(void)
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
-void TV_CopyNicknameToStringVar1AndEnsureTerminated(void)
+void Special_GetMonNickname(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
-void TV_CheckMonOTIDEqualsPlayerID(void)
+void Special_IsMonOTIDNotPlayers(void)
 {
     if (GetPlayerTrainerId() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))
         gSpecialVar_Result = FALSE;

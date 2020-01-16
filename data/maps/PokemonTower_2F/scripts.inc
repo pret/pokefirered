@@ -1,48 +1,48 @@
 PokemonTower_2F_MapScripts:: @ 8163285
 	.byte 0
 
-PokemonTower_2F_EventScript_163286:: @ 8163286
-	msgbox gUnknown_8179EAE, MSGBOX_NPC
+PokemonTower_2F_EventScript_Channeler:: @ 8163286
+	msgbox PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts, MSGBOX_NPC
 	end
 
-PokemonTower_2F_EventScript_16328F:: @ 816328F
+PokemonTower_2F_EventScript_RivalTriggerRight:: @ 816328F
 	lockall
 	setvar VAR_TEMP_1, 0
-	goto EventScript_1632A7
+	goto PokemonTower_2F_EventScript_Rival
 	end
 
-PokemonTower_2F_EventScript_16329B:: @ 816329B
+PokemonTower_2F_EventScript_RivalTriggerDown:: @ 816329B
 	lockall
 	setvar VAR_TEMP_1, 1
-	goto EventScript_1632A7
+	goto PokemonTower_2F_EventScript_Rival
 	end
 
-EventScript_1632A7:: @ 81632A7
+PokemonTower_2F_EventScript_Rival:: @ 81632A7
 	textcolor 0
 	playbgm MUS_RIVAL1, 0
 	compare VAR_TEMP_1, 0
-	call_if_eq EventScript_163339
+	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerRight
 	compare VAR_TEMP_1, 1
-	call_if_eq EventScript_16334B
+	call_if_eq PokemonTower_2F_EventScript_RivalFacePlayerDown
 	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
 	applymovement 1, Movement_Delay48
 	waitmovement 0
-	msgbox gUnknown_8179CFF
+	msgbox PokemonTower_2F_Text_RivalIntro
 	setvar VAR_LAST_TALKED, 1
 	compare VAR_STARTER_MON, 2
-	call_if_eq EventScript_16335D
+	call_if_eq PokemonTower_2F_EventScript_RivalSquirtle
 	compare VAR_STARTER_MON, 1
-	call_if_eq EventScript_163368
+	call_if_eq PokemonTower_2F_EventScript_RivalBulbasaur
 	compare VAR_STARTER_MON, 0
-	call_if_eq EventScript_163373
-	msgbox gUnknown_8179DD4
+	call_if_eq PokemonTower_2F_EventScript_RivalCharmander
+	msgbox PokemonTower_2F_Text_RivalPostBattle
 	closemessage
 	playbgm MUS_RIVAL2, 0
 	compare VAR_TEMP_1, 0
-	call_if_eq EventScript_16337E
+	call_if_eq PokemonTower_2F_EventScript_RivalExitRight
 	compare VAR_TEMP_1, 1
-	call_if_eq EventScript_163389
+	call_if_eq PokemonTower_2F_EventScript_RivalExitDown
 	playse SE_KAIDAN
 	delay 25
 	fadedefaultbgm
@@ -51,41 +51,41 @@ EventScript_1632A7:: @ 81632A7
 	releaseall
 	end
 
-EventScript_163339:: @ 8163339
+PokemonTower_2F_EventScript_RivalFacePlayerRight:: @ 8163339
 	applymovement 1, Movement_WalkInPlaceFastestRight
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-EventScript_16334B:: @ 816334B
+PokemonTower_2F_EventScript_RivalFacePlayerDown:: @ 816334B
 	applymovement 1, Movement_WalkInPlaceFastestDown
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	return
 
-EventScript_16335D:: @ 816335D
-	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE, Text_179D73
+PokemonTower_2F_EventScript_RivalSquirtle:: @ 816335D
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_SQUIRTLE, PokemonTower_2F_Text_RivalDefeat
 	return
 
-EventScript_163368:: @ 8163368
-	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_BULBASAUR, Text_179D73
+PokemonTower_2F_EventScript_RivalBulbasaur:: @ 8163368
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_BULBASAUR, PokemonTower_2F_Text_RivalDefeat
 	return
 
-EventScript_163373:: @ 8163373
-	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_CHARMANDER, Text_179D73
+PokemonTower_2F_EventScript_RivalCharmander:: @ 8163373
+	trainerbattle_no_intro TRAINER_RIVAL_POKENON_TOWER_CHARMANDER, PokemonTower_2F_Text_RivalDefeat
 	return
 
-EventScript_16337E:: @ 816337E
-	applymovement 1, Movement_163394
+PokemonTower_2F_EventScript_RivalExitRight:: @ 816337E
+	applymovement 1, PokemonTower_2F_Movement_RivalExitRight
 	waitmovement 0
 	return
 
-EventScript_163389:: @ 8163389
-	applymovement 1, Movement_16339D
+PokemonTower_2F_EventScript_RivalExitDown:: @ 8163389
+	applymovement 1, PokemonTower_2F_Movement_RivalExitDown
 	waitmovement 0
 	return
 
-Movement_163394:: @ 8163394
+PokemonTower_2F_Movement_RivalExitRight:: @ 8163394
 	walk_down
 	walk_right
 	walk_right
@@ -96,7 +96,7 @@ Movement_163394:: @ 8163394
 	walk_in_place_fastest_right
 	step_end
 
-Movement_16339D:: @ 816339D
+PokemonTower_2F_Movement_RivalExitDown:: @ 816339D
 	walk_right
 	walk_right
 	walk_down

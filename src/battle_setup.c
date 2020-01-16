@@ -276,7 +276,7 @@ static void DoGhostBattle(void)
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_GHOST;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, gUnknown_841D148);
+    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -321,7 +321,7 @@ void ScrSpecial_StartMarowakBattle(void)
         gBattleTypeFlags = BATTLE_TYPE_GHOST;
     }
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, gUnknown_841D148);
+    SetMonData(&gEnemyParty[0], MON_DATA_NICKNAME, gText_Ghost);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -444,10 +444,11 @@ static void CB2_EndMarowakBattle(void)
     }
     else
     {
+        // If result is TRUE player didnt defeat Marowak, force player back from stairs
         if (gBattleOutcome == B_OUTCOME_WON)
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = FALSE;
         else
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }

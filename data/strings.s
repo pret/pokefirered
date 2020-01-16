@@ -3535,7 +3535,7 @@ gUnknown_841D13C:: @ 841D13C
 	.string "{STR_VAR_1} PLAYERS$"
 
 	.align 2
-gUnknown_841D148:: @ 841D148
+gText_Ghost:: @ 841D148
 	.string "GHOST$"
 
 gUnknown_841D14E:: @ 841D14E

@@ -195,7 +195,7 @@ EventScript_16CD83:: @ 816CD83
 	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
-	call EventScript_1A74EB
+	call EventScript_ChangePokemonNickname
 	goto EventScript_16CC10
 	end
 

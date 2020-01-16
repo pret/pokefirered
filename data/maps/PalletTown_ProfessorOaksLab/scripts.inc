@@ -1215,7 +1215,7 @@ EventScript_ThisPokeIsRealyEnergetic:: @ 8169C74
 
 EventScript_GiveNicknameToStarter:: @ 8169CCC
 	setvar VAR_0x8004, 0
-	call EventScript_1A74EB
+	call EventScript_ChangePokemonNickname
 	goto EventScript_SkipGiveNicknameToStarter
 	end
 

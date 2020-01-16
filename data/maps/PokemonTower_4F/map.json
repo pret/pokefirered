@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "PokemonTower_4F_EventScript_163404",
+      "script": "PokemonTower_4F_EventScript_Laurel",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "PokemonTower_4F_EventScript_16341B",
+      "script": "PokemonTower_4F_EventScript_Jody",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "PokemonTower_4F_EventScript_1633ED",
+      "script": "PokemonTower_4F_EventScript_Paula",
       "flag": "0"
     },
     {

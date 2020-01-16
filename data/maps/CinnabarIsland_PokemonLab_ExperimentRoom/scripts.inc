@@ -260,7 +260,7 @@ EventScript_16E827:: @ 816E827
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16E895
 	call EventScript_1A8C27
-	call EventScript_1A74EB
+	call EventScript_ChangePokemonNickname
 	goto EventScript_16E895
 	end
 

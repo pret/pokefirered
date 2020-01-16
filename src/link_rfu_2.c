@@ -221,7 +221,7 @@ void sub_80F86F4(void)
     if (!rfu_initializeAPI(&gRfuAPIBuffer, sizeof gRfuAPIBuffer, gIntrTable + 1, TRUE))
     {
         gLinkType = 0;
-        sub_80FB128(0);
+        sub_80FB128(FALSE);
         sub_80F85F8();
         rfu_setTimerInterrupt(3, gIntrTable + 2);
     }

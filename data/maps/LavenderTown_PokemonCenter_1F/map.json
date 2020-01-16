@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_PokemonCenter_1F_EventScript_16B0FE",
+      "script": "LavenderTown_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_PokemonCenter_1F_EventScript_16B107",
+      "script": "LavenderTown_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_PokemonCenter_1F_EventScript_16B110",
+      "script": "LavenderTown_PokemonCenter_1F_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_PokemonCenter_1F_EventScript_16B119",
+      "script": "LavenderTown_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_PokemonCenter_1F_EventScript_1AD0A0",
+      "script": "LavenderTown_PokemonCenter_1F_EventScript_BaldingMan",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],

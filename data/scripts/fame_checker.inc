@@ -252,11 +252,11 @@ IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
 	release
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_1AD0A0:: @ 81AD0A0
+LavenderTown_PokemonCenter_1F_EventScript_BaldingMan:: @ 81AD0A0
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 3
-	msgbox Text_19358E
+	msgbox LavenderTown_PokemonCenter_1F_Text_HearMrFujiNotFromAroundHere
 	release
 	end
 

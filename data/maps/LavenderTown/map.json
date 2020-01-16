@@ -39,7 +39,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_EventScript_16687D",
+      "script": "LavenderTown_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -52,7 +52,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_EventScript_1668A6",
+      "script": "LavenderTown_EventScript_WorkerM",
       "flag": "0"
     },
     {
@@ -65,7 +65,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "LavenderTown_EventScript_1668AF",
+      "script": "LavenderTown_EventScript_Boy",
       "flag": "0"
     }
   ],
@@ -120,28 +120,28 @@
       "x": 12,
       "y": 4,
       "elevation": 0,
-      "script": "LavenderTown_EventScript_1668C1"
+      "script": "LavenderTown_EventScript_SilphScopeNotice"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 11,
       "elevation": 0,
-      "script": "LavenderTown_EventScript_1668B8"
+      "script": "LavenderTown_EventScript_TownSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 21,
       "y": 7,
       "elevation": 0,
-      "script": "LavenderTown_EventScript_1668D3"
+      "script": "LavenderTown_EventScript_PokemonTowerSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 11,
       "elevation": 0,
-      "script": "LavenderTown_EventScript_1668CA"
+      "script": "LavenderTown_EventScript_VolunteerHouseSign"
     }
   ]
 }

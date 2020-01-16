@@ -1,72 +1,72 @@
 LavenderTown_House2_MapScripts:: @ 816B265
 	.byte 0
 
-LavenderTown_House2_EventScript_16B266:: @ 816B266
+LavenderTown_House2_EventScript_NameRater:: @ 816B266
 	lock
 	faceplayer
-	msgbox gUnknown_8193A4B, MSGBOX_YESNO
+	msgbox LavenderTown_House2_Text_WantMeToRateNicknames, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_16B287
+	goto_if_eq LavenderTown_House2_EventScript_ChooseMon
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16B2AA
+	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-EventScript_16B287:: @ 816B287
-	msgbox gUnknown_8193AA6
+LavenderTown_House2_EventScript_ChooseMon:: @ 816B287
+	msgbox LavenderTown_House2_Text_CritiqueWhichMonsNickname
 	special Special_ChooseMonFromParty
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_lt EventScript_16B2B4
+	goto_if_lt LavenderTown_House2_EventScript_CheckCanRateMon
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_16B2AA
+	goto_if_ge LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-EventScript_16B2AA:: @ 816B2AA
-	msgbox gUnknown_8193BD4
+LavenderTown_House2_EventScript_DontRateNickname:: @ 816B2AA
+	msgbox LavenderTown_House2_Text_ISeeComeVisitAgain
 	release
 	end
 
-EventScript_16B2B4:: @ 816B2B4
+LavenderTown_House2_EventScript_CheckCanRateMon:: @ 816B2B4
 	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq EventScript_16B307
-	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	special TV_CheckMonOTIDEqualsPlayerID
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_16B311
-	specialvar VAR_RESULT, Special_BufferMonOTNameAndCompareToPlayerName
-	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_16B311
-	msgbox gUnknown_8193AD2, MSGBOX_YESNO
+	goto_if_eq LavenderTown_House2_EventScript_CantNicknameEgg
+	special Special_GetMonNickname
+	special Special_IsMonOTIDNotPlayers
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
+	specialvar VAR_RESULT, Special_IsMonOTNameNotPlayers
+	special Special_GetMonNickname
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
+	msgbox LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_16B31B
+	goto_if_eq LavenderTown_House2_EventScript_ChooseNewNickname
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16B2AA
+	goto_if_eq LavenderTown_House2_EventScript_DontRateNickname
 	end
 
-EventScript_16B307:: @ 816B307
-	msgbox gUnknown_8193CC4
+LavenderTown_House2_EventScript_CantNicknameEgg:: @ 816B307
+	msgbox LavenderTown_House2_Text_ThatIsMerelyAnEgg
 	release
 	end
 
-EventScript_16B311:: @ 816B311
-	msgbox gUnknown_8193C82
+LavenderTown_House2_EventScript_CantNicknameTradeMon:: @ 816B311
+	msgbox LavenderTown_House2_Text_TrulyImpeccableName
 	release
 	end
 
-EventScript_16B31B:: @ 816B31B
-	msgbox gUnknown_8193B36
-	call EventScript_1A74EB
+LavenderTown_House2_EventScript_ChooseNewNickname:: @ 816B31B
+	msgbox LavenderTown_House2_Text_WhatShallNewNicknameBe
+	call EventScript_ChangePokemonNickname
 	specialvar VAR_RESULT, NameRaterWasNicknameChanged
-	special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_16B345
-	msgbox gUnknown_8193BF0
+	special Special_GetMonNickname
+	compare VAR_RESULT, TRUE
+	goto_if_eq LavenderTown_House2_EventScript_ChoseNewNickname
+	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName
 	release
 	end
 
-EventScript_16B345:: @ 816B345
-	msgbox gUnknown_8193B66
+LavenderTown_House2_EventScript_ChoseNewNickname:: @ 816B345
+	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsName
 	release
 	end

@@ -132,8 +132,8 @@ gSpecials:: @ 815FD60
 	def_special GetMagikarpSizeRecordInfo
 	def_special CompareMagikarpSize
 	def_special NameRaterWasNicknameChanged
-	def_special TV_CopyNicknameToStringVar1AndEnsureTerminated
-	def_special TV_CheckMonOTIDEqualsPlayerID
+	def_special Special_GetMonNickname
+	def_special Special_IsMonOTIDNotPlayers
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special BufferRandomHobbyOrLifestyleString
@@ -344,7 +344,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special HasAllKantoMons
-	def_special Special_BufferMonOTNameAndCompareToPlayerName
+	def_special Special_IsMonOTNameNotPlayers
 	def_special nullsub_75
 	def_special Dummy_TryEnableBravoTrainerBattleTower
 	def_special GetNameOfEnigmaBerryInPlayerParty

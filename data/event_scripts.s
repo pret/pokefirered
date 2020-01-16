@@ -1294,7 +1294,7 @@ EventScript_1A74D1:: @ 81A74D1
 	setvar VAR_TEMP_5, 1
 	return
 
-EventScript_1A74EB:: @ 81A74EB
+EventScript_ChangePokemonNickname:: @ 81A74EB
 	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate

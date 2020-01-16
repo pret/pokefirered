@@ -68,7 +68,7 @@ EventScript_168DB9:: @ 8168DB9
 	waitfanfare
 	special Special_DaisyMassageServices
 	fadescreen FADE_FROM_BLACK
-	special TV_CopyNicknameToStringVar1AndEnsureTerminated
+	special Special_GetMonNickname
 	msgbox gUnknown_818D8FE
 	release
 	end

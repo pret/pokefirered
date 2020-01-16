@@ -22,7 +22,7 @@ static void sub_80FEAF4(void);
 u32 sub_80FD3A4(void)
 {
     u32 id = rfu_REQBN_softReset_and_checkID();
-    if (id == 0x8001)
+    if (id == RFU_ID)
         gUnknown_3005E10.unk_08 = 1;
     if (gUnknown_3005E10.unk_04 != 0x17 && gUnknown_3005E10.unk_04 != 0x01)
     {
@@ -123,7 +123,7 @@ u8 sub_80FD538(u8 r5, u16 r7, u16 r8, const u16 *r6)
         sub_80FE7F0(0xf3, 0x01);
         return 1;
     }
-    if (!rfu_getMasterSlave())
+    if (rfu_getMasterSlave() == AGB_CLK_SLAVE)
     {
         gUnknown_3005E10.unk_14 = 2;
         sub_80FE7F0(0xf3, 0x01);
@@ -181,7 +181,7 @@ u8 sub_80FD610(u16 parentId, u16 unk_1a)
         sub_80FE7F0(0xF3, 0x01);
         return 1;
     }
-    if (!rfu_getMasterSlave())
+    if (rfu_getMasterSlave() == AGB_CLK_SLAVE)
     {
         gUnknown_3005E10.unk_14 = 2;
         sub_80FE7F0(0xF3, 0x01);
@@ -449,12 +449,12 @@ void sub_80FDA30(u32 a0)
                 switch (gUnknown_3005E10.unk_04)
                 {
                 case 23:
-                    r2 = sub_80FD3A4() == 0x8001 ? 0x44 : 0xFF;
+                    r2 = sub_80FD3A4() == RFU_ID ? 0x44 : 0xFF;
                     gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
                     sub_80FE7F0(r2, 0);
                     break;
                 case 1:
-                    if (sub_80FD3A4() == 0x8001)
+                    if (sub_80FD3A4() == RFU_ID)
                     {
                         gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
                         gUnknown_3005E10.unk_05 = 3;
@@ -469,10 +469,10 @@ void sub_80FDA30(u32 a0)
                     rfu_REQ_reset();
                     break;
                 case 3:
-                    rfu_REQ_configSystem(gUnknown_3005E10.unk_3c->unk_02, gUnknown_3005E10.unk_3c->unk_00, gUnknown_3005E10.unk_3c->unk_01);
+                    rfu_REQ_configSystem(gUnknown_3005E10.unk_3c->availSlotFlag, gUnknown_3005E10.unk_3c->maxMFrame, gUnknown_3005E10.unk_3c->mcTimer);
                     break;
                 case 4:
-                    rfu_REQ_configGameData(gUnknown_3005E10.unk_3c->unk_04, gUnknown_3005E10.unk_3c->unk_06, (const u8 *)gUnknown_3005E10.unk_3c->unk_08, gUnknown_3005E10.unk_3c->unk_0c);
+                    rfu_REQ_configGameData(gUnknown_3005E10.unk_3c->mbootFlag, gUnknown_3005E10.unk_3c->serialNo, (const u8 *)gUnknown_3005E10.unk_3c->gname, gUnknown_3005E10.unk_3c->uname);
                     break;
                 case 5:
                     rfu_REQ_startSearchChild();
@@ -579,7 +579,7 @@ static void sub_80FDC28(u32 a0)
     }
 }
 
-static void sub_80FDC98(u16 r8, u16 r6)
+static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
 {
     u8 sp0;
     register u8 *stwiRecvBuffer asm("r0");
@@ -589,44 +589,44 @@ static void sub_80FDC98(u16 r8, u16 r6)
     if (gUnknown_3005E10.unk_0e != 0)
     {
         gUnknown_3005E10.unk_0e = 0;
-        switch (r8)
+        switch (reqCommandId)
         {
-        case 16:
-            if (r6 == 0)
+        case ID_RESET_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
                 gUnknown_3005E10.unk_05 = 4;
             }
             break;
-        case 23:
-            if (r6 == 0)
+        case ID_SYSTEM_CONFIG_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
                 gUnknown_3005E10.unk_05 = 0;
             }
             break;
-        case 22:
-            if (r6 == 0)
+        case ID_GAME_CONFIG_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
                 sub_80FE7F0(0x00, 0x00);
             }
             break;
-        case 25:
-            if (r6 == 0)
+        case ID_SC_START_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 6;
             }
             break;
-        case 26:
+        case ID_SC_POLL_REQ:
             if (gUnknown_3005E10.unk_1a && --gUnknown_3005E10.unk_1a == 0)
             {
                 gUnknown_3005E10.unk_04 = 7;
                 gUnknown_3005E10.unk_05 = 8;
             }
             break;
-        case 27:
-            if (r6 == 0)
+        case ID_SC_END_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
                 gUnknown_3005E10.unk_05 = 0;
@@ -636,8 +636,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 }
             }
             break;
-        case 28:
-            if (r6 == 0)
+        case ID_SP_START_REQ:
+            if (reqResult == 0)
             {
                 if (gUnknown_3005E10.unk_0b == 1 && gUnknown_3005E10.unk_1a > 1)
                 {
@@ -646,8 +646,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 10;
             }
             break;
-        case 29:
-            if (r6 == 0)
+        case ID_SP_POLL_REQ:
+            if (reqResult == 0)
             {
                 sp0 = sub_80FE778();
                 gUnknown_3005E10.unk_14 = sp0;
@@ -669,8 +669,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_05 = 0;
             }
             break;
-        case 30:
-            if (r6 == 0)
+        case ID_SP_END_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
                 if (gUnknown_3005E10.unk_07 == 0)
@@ -687,14 +687,14 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 }
             }
             break;
-        case 31:
-            if (r6 == 0)
+        case ID_CP_START_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 13;
             }
             break;
-        case 32:
-            if (r6 == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10) && !sp0)
+        case ID_CP_POLL_REQ:
+            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10) && !sp0)
             {
                 gUnknown_3005E10.unk_04 = 14;
             }
@@ -703,8 +703,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_04 = 14;
             }
             break;
-        case 33:
-            if (r6 == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10))
+        case ID_CP_END_REQ:
+            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10))
             {
                 if (!sp0)
                 {
@@ -728,8 +728,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_1e = 0;
             }
             break;
-        case 50:
-            if (r6 == 0)
+        case ID_CPR_START_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_14 = gRfuLinkStatus->linkLossSlotFlag;
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 17;
@@ -742,8 +742,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 }
             }
             break;
-        case 51:
-            if (r6 == 0 && !rfu_CHILD_getConnectRecoveryStatus(&sp0) && sp0 < 2)
+        case ID_CPR_POLL_REQ:
+            if (reqResult == 0 && !rfu_CHILD_getConnectRecoveryStatus(&sp0) && sp0 < 2)
             {
                 gUnknown_3005E10.unk_04 = 18;
             }
@@ -752,8 +752,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_04 = 18;
             }
             break;
-        case 52:
-            if (r6 == 0 && !rfu_CHILD_getConnectRecoveryStatus(&sp0))
+        case ID_CPR_END_REQ:
+            if (reqResult == 0 && !rfu_CHILD_getConnectRecoveryStatus(&sp0))
             {
                 if (!sp0)
                 {
@@ -774,8 +774,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 gUnknown_3005E10.unk_1e = 0;
             }
             break;
-        case 39:
-            if (r6 == 0)
+        case ID_MS_CHANGE_REQ:
+            if (reqResult == 0)
             {
                 if (gUnknown_3005E10.unk_05 == 22)
                 {
@@ -791,7 +791,7 @@ static void sub_80FDC98(u16 r8, u16 r6)
                     sub_80FE7F0(0x41, 0x00);
                     gUnknown_3005E10.unk_24 |= 1 << gUnknown_3005E10.unk_10;
                     gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = gUnknown_3005E10.unk_26;
-                    rfu_clearSlot(4, gUnknown_3005E10.unk_10);
+                    rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
                     tmp = &sp0;
                     *tmp = rfu_NI_CHILD_setSendGameName(gUnknown_3005E10.unk_10, 0x0e);
                     if (*tmp)
@@ -805,8 +805,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
                 }
             }
             break;
-        case 61:
-            if (r6 == 0)
+        case ID_STOP_MODE_REQ:
+            if (reqResult == 0)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
                 sub_80FE7F0(0x42, 0x00);
@@ -815,7 +815,7 @@ static void sub_80FDC98(u16 r8, u16 r6)
         }
         gUnknown_3005E10.unk_0e = 1;
     }
-    else if (r6 == 3 && gUnknown_3005E10.unk_0f && (r8 == 0x24 || r8 == 0x26 || r8 == 0x27))
+    else if (reqResult == 3 && gUnknown_3005E10.unk_0f && (reqCommandId == ID_DATA_TX_REQ || reqCommandId == ID_DATA_RX_REQ || reqCommandId == ID_MS_CHANGE_REQ))
     {
         rfu_REQ_RFUStatus();
         rfu_waitREQComplete();
@@ -826,13 +826,13 @@ static void sub_80FDC98(u16 r8, u16 r6)
             stwiRecvBuffer[4] = gRfuLinkStatus->connSlotFlag;
             stwiRecvBuffer[5] = 1;
             sub_80FD850(0x29);
-            r6 = 0;
+            reqResult = 0;
         }
     }
-    switch (r8)
+    switch (reqCommandId)
     {
-    case 48:
-        if (r6 == 0)
+    case ID_DISCONNECT_REQ:
+        if (reqResult == 0)
         {
             stwiRecvBuffer = rfu_getSTWIRecvBuffer()->rxPacketAlloc.rfuPacket8.data;
             gUnknown_3005E10.unk_14 = stwiRecvBuffer[8];
@@ -891,32 +891,32 @@ static void sub_80FDC98(u16 r8, u16 r6)
             }
         }
         break;
-    case 38:
+    case ID_DATA_RX_REQ:
         sub_80FE6F0();
         if (gRfuLinkStatus->parentChild != MODE_NEUTRAL)
         {
             sub_80FE7F0(0x50, 0x00);
         }
         break;
-    case 16:
-    case 61:
-        if (r6 == 0)
+    case ID_RESET_REQ:
+    case ID_STOP_MODE_REQ:
+        if (reqResult == 0)
         {
             gUnknown_3005E10.unk_0d = 0;
             gUnknown_3005E10.unk_01 = 0;
             gUnknown_3005E10.unk_00 = 0;;
             gUnknown_3005E10.unk_06 = -1;
             sub_80FEAF4();
-            if (r8 == 61)
+            if (reqCommandId == 61)
             {
                 sub_80FD484();
             }
         }
         break;
     }
-    if (r6 != 0)
+    if (reqResult != 0)
     {
-        if (r8 == 28 && r6 != 0 && gUnknown_3005E10.unk_07 == 4)
+        if (reqCommandId == ID_SP_START_REQ && reqResult != 0 && gUnknown_3005E10.unk_07 == 4)
         {
             gRfuLinkStatus->parentChild = MODE_PARENT;
             gRfuLinkStatus->connSlotFlag = 0xF;
@@ -926,8 +926,8 @@ static void sub_80FDC98(u16 r8, u16 r6)
         }
         else
         {
-            gUnknown_3005E10.unk_14 = r8;
-            gUnknown_3005E10.unk_16 = r6;
+            gUnknown_3005E10.unk_14 = reqCommandId;
+            gUnknown_3005E10.unk_16 = reqResult;
             if (gUnknown_3005E10.unk_0e)
             {
                 gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
@@ -936,7 +936,7 @@ static void sub_80FDC98(u16 r8, u16 r6)
             sub_80FEAF4();
         }
     }
-    if (r8 == 0xFF)
+    if (reqCommandId == ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ)
     {
         sub_80FE7F0(0xf2, 0x00);
         sub_80FEAF4();
@@ -1042,7 +1042,7 @@ static void sub_80FE418(void)
                 {
                     gUnknown_3005E10.unk_24 &= ~r4;
                     gUnknown_3005E10.unk_28[i] = 0;
-                    rfu_clearSlot(0x08, i);
+                    rfu_clearSlot(TYPE_NI_RECV, i);
                 }
                 if (r5 & 0x04)
                 {
@@ -1110,7 +1110,7 @@ static void sub_80FE63C(void)
         {
             sub_80FEB14();
             gUnknown_3005E10.unk_04 = 24;
-            rfu_clearSlot(4, gUnknown_3005E10.unk_10);
+            rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
             gUnknown_3005E10.unk_24 &= ~(1 << gUnknown_3005E10.unk_10);
             gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = 0;
         }
@@ -1137,7 +1137,7 @@ static void sub_80FE6F0(void)
     if (gUnknown_3005E10.unk_04 == 15 && gRfuSlotStatusNI[gUnknown_3005E10.unk_10]->send.state == SLOT_STATE_SEND_SUCCESS)
     {
         gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-        rfu_clearSlot(4, gUnknown_3005E10.unk_10);
+        rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
         gUnknown_3005E10.unk_24 &= ~(1 << gUnknown_3005E10.unk_10);
         gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = 0;
         sub_80FE7F0(0x24, 0x00);
@@ -1203,7 +1203,7 @@ static void sub_80FE83C(u8 a0)
         {
             if (gRfuSlotStatusNI[i]->send.state & SLOT_BUSY_FLAG && gRfuSlotStatusNI[i]->send.bmSlot & a0)
             {
-                rfu_changeSendTarget(0x20, i, gRfuSlotStatusNI[i]->send.bmSlot & ~a0);
+                rfu_changeSendTarget(TYPE_NI, i, gRfuSlotStatusNI[i]->send.bmSlot & ~a0);
             }
         }
     }
@@ -1253,7 +1253,7 @@ static void sub_80FE918(void)
                         }
                         if (flags)
                         {
-                            rfu_changeSendTarget(0x20, i, flags ^ gRfuSlotStatusNI[i]->send.bmSlot);
+                            rfu_changeSendTarget(TYPE_NI, i, flags ^ gRfuSlotStatusNI[i]->send.bmSlot);
                         }
                     }
                 }

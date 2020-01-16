@@ -1,3 +1,3 @@
-gUnknown_3005440
+gHostRFUtgtGnameBuffer
 Rfu
-gUnknown_3005E00
+gHostRFUtgtUnameBuffer

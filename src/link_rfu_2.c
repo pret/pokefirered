@@ -21,16 +21,16 @@ struct UnkRfuStruct_8010A14{
     u8 fill_a0[0x5c];
 };
 
-static EWRAM_DATA struct UnkLinkRfuStruct_02022B2C gUnknown_203ABF0 = {};
+static EWRAM_DATA struct UnkLinkRfuStruct_02022B2C sRfuReqConfig = {};
 static EWRAM_DATA struct UnkLinkRfuStruct_02022B44 gUnknown_203AC08 = {};
 
 static struct RfuAPIBuffer gRfuAPIBuffer;
 static u8 gUnknown_3001FF8[14];
 static u16 gUnknown_3002008[7];
 
-struct GFtgtGname gUnknown_3005440;
+struct GFtgtGname gHostRFUtgtGnameBuffer;
 struct UnkRfuStruct_2 Rfu;
-u8 gUnknown_3005E00[PLAYER_NAME_LENGTH];
+u8 gHostRFUtgtUnameBuffer[PLAYER_NAME_LENGTH];
 
 static void sub_80F8AA4(void);
 static void sub_80F8AEC(void);
@@ -61,22 +61,25 @@ static void sub_80FC028(u8 taskId);
 static void sub_80FC208(void);
 static void nullsub_89(u8 taskId);
 
-static const struct UnkLinkRfuStruct_02022B2C gUnknown_843EBB4 = {
-    .unk_00 = 0x04,
-    .unk_01 = 0x20,
-    .unk_02 = 0x0000,
-    .unk_04 = 0x00,
-    .unk_06 = 0x0002,
-    .unk_08 = &gUnknown_3005440,
-    .unk_0c = gUnknown_3005E00,
+static const struct UnkLinkRfuStruct_02022B2C sRfuReqConfigTemplate = {
+    .maxMFrame = 4,
+    .mcTimer = 32,
+    .availSlotFlag = 0,
+    .mbootFlag = 0,
+    .serialNo = 0x0002,
+    .gname = &gHostRFUtgtGnameBuffer,
+    .uname = gHostRFUtgtUnameBuffer,
     .unk_10 = 0x01,
     .unk_11 = 0x00,
     .unk_12 = 0x0258,
     .unk_14 = 0x012c
 };
 
-static const u8 gUnknown_843EBCC[] = {
-    0, 3, 2, 1, 0
+static const u8 sAvailSlots[] = {
+    [1] = AVAIL_SLOT1,
+    [2] = AVAIL_SLOT2,
+    [3] = AVAIL_SLOT3,
+    [4] = AVAIL_SLOT4
 };
 
 static const u32 gUnknown_843EBD4[] = {
@@ -218,7 +221,7 @@ void sub_80F86F4(void)
     if (!rfu_initializeAPI(&gRfuAPIBuffer, sizeof gRfuAPIBuffer, gIntrTable + 1, TRUE))
     {
         gLinkType = 0;
-        sub_80FB128(0);
+        sub_80FB128(FALSE);
         sub_80F85F8();
         rfu_setTimerInterrupt(3, gIntrTable + 2);
     }
@@ -230,7 +233,7 @@ static void sub_80F8738(u8 taskId)
     switch (Rfu.unk_04)
     {
     case 0:
-        sub_80FD4B0(&gUnknown_203ABF0);
+        sub_80FD4B0(&sRfuReqConfig);
         Rfu.unk_04 = 1;
         gTasks[taskId].data[1] = 1;
         break;
@@ -316,7 +319,7 @@ static void sub_80F893C(u8 taskId)
     switch (Rfu.unk_04)
     {
     case 0:
-        sub_80FD4B0(&gUnknown_843EBB4);
+        sub_80FD4B0(&sRfuReqConfigTemplate);
         Rfu.unk_04 = 1;
         gTasks[taskId].data[1] = 1;
         break;
@@ -349,8 +352,8 @@ static void sub_80F893C(u8 taskId)
     case 12:
     {
         u8 r5 = 1 << Rfu.unk_c3e;
-        rfu_clearSlot(12, Rfu.unk_c3e);
-        rfu_setRecvBuffer(16, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
+        rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.unk_c3e);
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
         rfu_UNI_setSendData(r5, Rfu.unk_4c, sizeof(Rfu.unk_4c));
         gTasks[taskId].data[1] = 8;
         DestroyTask(taskId);
@@ -373,8 +376,8 @@ static void sub_80F8AA4(void)
     {
         if (r5 & 1)
         {
-            rfu_setRecvBuffer(16, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
-            rfu_clearSlot(3, i);
+            rfu_setRecvBuffer(TYPE_UNI, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
+            rfu_clearSlot(TYPE_UNI_SEND | TYPE_UNI_RECV, i);
         }
         r5 >>= 1;
     }
@@ -401,7 +404,7 @@ static void sub_80F8B34(u8 taskId)
     switch (Rfu.unk_04)
     {
     case 0:
-        sub_80FD4B0(&gUnknown_203ABF0);
+        sub_80FD4B0(&sRfuReqConfig);
         Rfu.unk_04 = 1;
         gTasks[taskId].data[1] = 1;
         break;
@@ -785,12 +788,12 @@ static bool32 sub_80F9204(void)
             if (Rfu.unk_ce5 && !Rfu.unk_cd9)
             {
                 gUnknown_203AC08.unk_0e = 0;
-                rfu_clearSlot(3, Rfu.unk_cda);
+                rfu_clearSlot(TYPE_UNI_SEND | TYPE_UNI_RECV, Rfu.unk_cda);
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
                     if ((Rfu.unk_ce5 >> i) & 1)
                     {
-                        rfu_setRecvBuffer(0x10, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
+                        rfu_setRecvBuffer(TYPE_UNI, i, Rfu.unk_14[i], sizeof(Rfu.unk_14[i]));
                     }
                 }
                 sub_80F887C(Rfu.unk_ce2, Rfu.unk_ce2 | Rfu.unk_ce5);
@@ -951,7 +954,7 @@ static void rfu_func_080F97B8(void)
 
 struct GFtgtGname *sub_80F9800(void)
 {
-    return &gUnknown_3005440;
+    return &gHostRFUtgtGnameBuffer;
 }
 
 bool32 IsSendingKeysToRfu(void)
@@ -1498,7 +1501,7 @@ static bool8 sub_80FA528(void)
                 {
                     Rfu.unk_cd1[i] = 9;
                     Rfu.unk_cd5[i] = 10;
-                    rfu_clearSlot(8, i);
+                    rfu_clearSlot(TYPE_NI_RECV, i);
                     rfu_NI_setSendData(1 << i, 8, Rfu.unk_cd1 + i, 1);
                     retval = TRUE;
                 }
@@ -1506,7 +1509,7 @@ static bool8 sub_80FA528(void)
             }
             else if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_FAILED)
             {
-                rfu_clearSlot(8, i);
+                rfu_clearSlot(TYPE_NI_RECV, i);
             }
         }
     }
@@ -1552,14 +1555,14 @@ void sub_80FA670(u8 a0, u16 a1, const u8 *a2)
 {
     u8 r4 = sub_80FBC70(a2, a1);
     Rfu.unk_cd1[r4] = a0;
-    rfu_clearSlot(4, r4);
+    rfu_clearSlot(TYPE_NI_SEND, r4);
     rfu_NI_setSendData(1 << r4, 8, Rfu.unk_cd1 + r4, 1);
 }
 
 void sub_80FA6BC(void)
 {
     Rfu.unk_c85 = 8;
-    rfu_clearSlot(4, Rfu.unk_c3e);
+    rfu_clearSlot(TYPE_NI_SEND, Rfu.unk_c3e);
     rfu_NI_setSendData(1 << Rfu.unk_c3e, 8, &Rfu.unk_c85, 1);
 }
 
@@ -1584,7 +1587,7 @@ static void sub_80FA738(void)
         {
             if (Rfu.unk_cd5[i] == 10)
                 Rfu.unk_cd5[i] = 11;
-            rfu_clearSlot(4, i);
+            rfu_clearSlot(TYPE_NI_SEND, i);
         }
     }
 }
@@ -1595,17 +1598,17 @@ static s32 sub_80FA788(void)
     if (Rfu.unk_c85 == 8)
     {
         if (gRfuSlotStatusNI[Rfu.unk_c3e]->send.state == SLOT_STATE_SEND_SUCCESS || gRfuSlotStatusNI[Rfu.unk_c3e]->send.state == SLOT_STATE_SEND_FAILED)
-            rfu_clearSlot(4, Rfu.unk_c3e);
+            rfu_clearSlot(TYPE_NI_SEND, Rfu.unk_c3e);
     }
     if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_SUCCESS || gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
     {
-        rfu_clearSlot(8, Rfu.unk_c3e);
+        rfu_clearSlot(TYPE_NI_RECV, Rfu.unk_c3e);
         sub_80FB9E4(Rfu.unk_c86, 0);
         retval = Rfu.unk_c86;
     }
     else if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_FAILED)
     {
-        rfu_clearSlot(8, Rfu.unk_c3e);
+        rfu_clearSlot(TYPE_NI_RECV, Rfu.unk_c3e);
         retval = 6;
     }
     return retval;
@@ -1905,44 +1908,44 @@ bool32 sub_80FAEF0(void)
 
 static void sub_80FAF1C(void)
 {
-    StringCopy(gUnknown_3005E00, gSaveBlock2Ptr->playerName);
+    StringCopy(gHostRFUtgtUnameBuffer, gSaveBlock2Ptr->playerName);
 }
 
-void sub_80FAF34(void)
+void ClearAndInitHostRFUtgtGname(void)
 {
-    memset(&gUnknown_3005440, 0, RFU_GAME_NAME_LENGTH);
-    sub_80FCB54(&gUnknown_3005440, 0, 0, 0);
+    memset(&gHostRFUtgtGnameBuffer, 0, RFU_GAME_NAME_LENGTH);
+    InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, 0, 0, 0);
 }
 
 void sub_80FAF58(u8 a0, u32 a1, u32 a2)
 {
-    sub_80FCB54(&gUnknown_3005440, a0, a2, a1);
+    InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, a0, a2, a1);
 }
 
 void sub_80FAF74(bool32 a0, bool32 a1)
 {
-    gUnknown_3005440.unk_00.unk_00_4 = a0;
-    gUnknown_3005440.unk_00.unk_00_5 = a1;
+    gHostRFUtgtGnameBuffer.unk_00.unk_00_4 = a0;
+    gHostRFUtgtGnameBuffer.unk_00.unk_00_5 = a1;
 }
 
 void sub_80FAFA0(u32 type, u32 species, u32 level)
 {
-    gUnknown_3005440.type = type;
-    gUnknown_3005440.species = species;
-    gUnknown_3005440.level = level;
+    gHostRFUtgtGnameBuffer.type = type;
+    gHostRFUtgtGnameBuffer.species = species;
+    gHostRFUtgtGnameBuffer.level = level;
 }
 
 void sub_80FAFE0(u8 a0)
 {
-    gUnknown_3005440.unk_0a_7 = a0;
-    rfu_REQ_configGameData(0, 2, (void *)&gUnknown_3005440, gUnknown_3005E00);
+    gHostRFUtgtGnameBuffer.unk_0a_7 = a0;
+    rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
 }
 
 void sub_80FB008(u8 a0, u32 a1, u32 a2)
 {
     if (a0)
         sub_80FAF58(a0, a1, a2);
-    rfu_REQ_configGameData(0, 2, (void *)&gUnknown_3005440, gUnknown_3005E00);
+    rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
 }
 
 void sub_80FB030(u32 a0)
@@ -2028,7 +2031,7 @@ static void sub_80FB184(u8 a0, u8 unused1)
                 {
                     Rfu.unk_cd1[i] = 0;
                     Rfu.unk_cd5[i] = 0;
-                    rfu_setRecvBuffer(0x20, i, Rfu.unk_cd5 + i, 1);
+                    rfu_setRecvBuffer(TYPE_NI, i, Rfu.unk_cd5 + i, 1);
                 }
                 else
                 {
@@ -2115,8 +2118,8 @@ static void sub_80FB37C(u8 a0, u8 unused1)
         Rfu.unk_04 = 11;
         Rfu.unk_c85 = 0;
         Rfu.unk_c86 = 0;
-        rfu_setRecvBuffer(0x20, Rfu.unk_c3e, &Rfu.unk_c86, 1);
-        rfu_setRecvBuffer(0x10, Rfu.unk_c3e, Rfu.unk_c3f, 70);
+        rfu_setRecvBuffer(TYPE_NI, Rfu.unk_c3e, &Rfu.unk_c86, 1);
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, 70);
         break;
     case 0x25:
         sub_80FB9E4(2, 0x25);
@@ -2272,7 +2275,7 @@ static void sub_80FB5EC(u8 a0, u8 unused1)
     case 0x24:
         Rfu.unk_04 = 0xD;
         sub_80FB9E4(3, 0);
-        rfu_setRecvBuffer(0x10, Rfu.unk_c3e, Rfu.unk_c3f, 70);
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
         break;
     case 0x25:
         sub_80FB9E4(2, a0);
@@ -2442,8 +2445,8 @@ void sub_80FBB8C(u32 a0)
     Rfu.unk_0c = 1;
     sub_80FAF1C();
     sub_80FD430(sub_80FB184, NULL);
-    gUnknown_203ABF0 = gUnknown_843EBB4;
-    gUnknown_203ABF0.unk_02 = gUnknown_843EBCC[a0 - 1];
+    sRfuReqConfig = sRfuReqConfigTemplate;
+    sRfuReqConfig.availSlotFlag = sAvailSlots[a0 - 1];
     sub_80F8E74();
 }
 
@@ -2462,9 +2465,9 @@ void sub_80FBC00(void)
     Rfu.unk_0c = 2;
     sub_80FAF1C();
     sub_80FD430(sub_80FB5EC, NULL);
-    gUnknown_203ABF0 = gUnknown_843EBB4;
-    gUnknown_203ABF0.unk_11 = 0;
-    gUnknown_203ABF0.unk_12 = 0x258;
+    sRfuReqConfig = sRfuReqConfigTemplate;
+    sRfuReqConfig.unk_11 = 0;
+    sRfuReqConfig.unk_12 = 0x258;
     Rfu.unk_67 = CreateTask(sub_80F8B34, 1);
 }
 
@@ -2500,7 +2503,7 @@ static void sub_80FBCF8(u32 a0)
     rfu_REQ_disconnect(a0);
     rfu_waitREQComplete();
     Rfu.unk_ce2 &= ~(a0);
-    rfu_clearSlot(1, Rfu.unk_cda);
+    rfu_clearSlot(TYPE_UNI_SEND, Rfu.unk_cda);
     rfu_UNI_setSendData(Rfu.unk_ce2, Rfu.unk_c87, 70);
     Rfu.unk_cda = sub_80F886C(Rfu.unk_ce2);
 }

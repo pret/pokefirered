@@ -268,14 +268,10 @@ gUnknown_203998C: @ 203998C
 	.include "src/menu_helpers.o"
 	.align 2
 	.include "src/region_map.o"
-
 	.align 2
-gAIScriptPtr: @ 2039A00
-	.space 0x4
-
-gPlayerFacingPosition: @ 2039A04
-	.space 0x8
-
+	.include "src/battle_ai_script_commands.o"
+	.align 2
+	.include "src/fldeff_rocksmash.o"
 	.align 2
 	.include "src/field_specials.o"
 	.align 2

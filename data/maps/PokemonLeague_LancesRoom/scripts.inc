@@ -139,7 +139,7 @@ EventScript_162AA1:: @ 8162AA1
 
 EventScript_162AAB:: @ 8162AAB
 	setvar VAR_0x8004, 0
-	special sub_8113530
+	special Special_TryGainNewFanFromCounter
 	setflag FLAG_DEFEATED_LANCE
 	call EventScript_1A7563
 	msgbox gUnknown_8178A52

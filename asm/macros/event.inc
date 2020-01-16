@@ -1627,9 +1627,9 @@
 	call EventScript_SetGymTrainers
 	.endm
 
-	@ Appears frequently at start of NPC scripts. Should be used once named/understood
-	.macro unk_questlog
-	special sub_8110AB4
+	@ Jumps to dest if the Quest Log is currently showing playback scenes (dest is usually a release/end)
+	.macro goto_if_questlog dest:req
+	special Special_GetQuestLogState
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_eq \dest
 	.endm

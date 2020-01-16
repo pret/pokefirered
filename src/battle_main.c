@@ -1826,7 +1826,7 @@ static void sub_8011BB0(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(gMain.savedCallback);
-            sub_812C224();
+            TrySetQuestLogLinkBattleEvent();
             FreeMonSpritesGfx();
             FreeBattleSpritesData();
             FreeBattleResources();
@@ -3782,7 +3782,7 @@ static void HandleEndTurn_FinishBattle(void)
                 }
             }
         }
-        sub_812BFDC();
+        TrySetQuestLogBattleEvent();
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             sub_810CB90();
         BeginFastPaletteFade(3);

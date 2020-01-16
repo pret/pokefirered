@@ -1,7 +1,5 @@
 EventScript_InteractWithCutTreeObject:: @ 81BDF13
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE02_GET, EventScript_CantCutTree
 	checkpartymove MOVE_CUT
@@ -61,9 +59,7 @@ Text_TreeCanBeCutDown:: @ 81BDFE3
 	.string "down!$"
 
 EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE06_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
@@ -126,9 +122,7 @@ Text_MonMaySmashRock:: @ 81BE0E2
 	.string "may be able to smash it.$"
 
 EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantMoveBoulder
 	goto_if_set FLAG_SYS_STRENGTH_ACTIVE, EventScript_AlreadyUsedStrength
@@ -189,9 +183,7 @@ Text_StrengthMadeMovingBouldersPossible:: @ 81BE284
 	.string "boulders around.$"
 
 EventScript_InteractWithWaterfall:: @ 81BE2B7
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE

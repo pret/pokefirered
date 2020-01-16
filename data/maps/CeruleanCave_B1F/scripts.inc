@@ -23,9 +23,7 @@ EventScript_1624F1:: @ 81624F1
 	return
 
 CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

@@ -57,7 +57,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 
     if (!ScriptContext2_IsEnabled())
     {
-        if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
+        if (gQuestLogState != 2 && gQuestLogState != 3)
         {
             sub_8056078(&data[1], &data[2]);
         }

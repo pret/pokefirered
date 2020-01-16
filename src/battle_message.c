@@ -2027,7 +2027,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_RIVAL
                      || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_RIVAL_2
                      || gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION_2)
-                        toCpy = GetExpandedPlaceholder(6);
+                        toCpy = GetExpandedPlaceholder(PLACEHOLDER_ID_RIVAL);
                     else
                         toCpy = gTrainers[gTrainerBattleOpponent_A].trainerName;
                 }

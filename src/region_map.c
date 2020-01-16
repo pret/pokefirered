@@ -4389,7 +4389,7 @@ static void sub_80C527C(u16 mapsec)
     if (sMapsecToSpawn[idx][2])
     {
         sub_805546C(sMapsecToSpawn[idx][2]);
-        sub_8124C1C(sMapsecToSpawn[idx]);
+        SetUsedFlyQuestLogEvent(sMapsecToSpawn[idx]);
     }
     else
     {

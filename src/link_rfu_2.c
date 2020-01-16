@@ -495,7 +495,7 @@ void sub_80F8DC0(void)
 {
     u8 i;
 
-    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+    if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
 
     sub_80FD52C();
@@ -534,7 +534,7 @@ void sub_80F8DC0(void)
 
 static void sub_80F8E74(void)
 {
-    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+    if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
     Rfu.unk_67 = CreateTask(sub_80F8738, 1);
 }
@@ -560,7 +560,7 @@ static bool32 sub_80F8ECC(void)
 
 static void sub_80F8F10(void)
 {
-    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+    if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
     Rfu.unk_67 = CreateTask(sub_80F893C, 1);
 }
@@ -2460,7 +2460,7 @@ void sub_80FBBD8(void)
 
 void sub_80FBC00(void)
 {
-    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+    if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
     Rfu.unk_0c = 2;
     sub_80FAF1C();

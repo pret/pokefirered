@@ -343,7 +343,7 @@ void FieldUseFunc_CoinCase(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, GetCoins(), STR_CONV_MODE_LEFT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gUnknown_8416537);
-    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
         DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
     else
@@ -354,7 +354,7 @@ void FieldUseFunc_PowderJar(u8 taskId)
 {
     ConvertIntToDecimalStringN(gStringVar1, GetBerryPowder(), STR_CONV_MODE_LEFT_ALIGN, 5);
     StringExpandPlaceholders(gStringVar4, gUnknown_8416644);
-    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
         DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
     else
@@ -374,7 +374,7 @@ void FieldUseFunc_PokeFlute(u8 taskId)
 
     if (wokeSomeoneUp)
     {
-        ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
         if (gTasks[taskId].data[3] == 0)
             DisplayItemMessageInBag(taskId, 2, gUnknown_8416690, sub_80A1648);
         else
@@ -523,7 +523,7 @@ static void InitBerryPouchFromBattle(void)
 
 void FieldUseFunc_TeachyTv(u8 taskId)
 {
-    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
     {
         ItemMenu_SetExitCallback(InitTeachyTvFromBag);
@@ -569,7 +569,7 @@ static void sub_80A19E8(u8 taskId)
 {
     if (!IsSEPlaying())
     {
-        ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         sub_80A1A44();
         DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
@@ -587,7 +587,7 @@ static void sub_80A1A44(void)
 
 void FieldUseFunc_BlackFlute(u8 taskId)
 {
-    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gSpecialVar_ItemId == ITEM_WHITE_FLUTE)
     {
         FlagSet(FLAG_SYS_WHITE_FLUTE_ACTIVE);
@@ -629,7 +629,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, gMapHeader.regionMapSectionId);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, gMapHeader.regionMapSectionId);
         sItemUseOnFieldCB = sub_80A1C08;
         sub_80A103C(taskId);
     }
@@ -685,7 +685,7 @@ static void sub_80A1CC0(u8 taskId)
 
 void FieldUseFunc_FameChecker(u8 taskId)
 {
-    ItemUse_SetQuestLogEvent(4, NULL, gSpecialVar_ItemId, 0xFFFF);
+    ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
     {
         ItemMenu_SetExitCallback(sub_80A1D58);
@@ -832,7 +832,7 @@ void BattleUseFunc_PokeDoll(u8 taskId)
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
     {
         sub_80A1A44();
-        ItemUse_SetQuestLogEvent(4, 0, gSpecialVar_ItemId, 0xFFFF);
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, 0, gSpecialVar_ItemId, 0xFFFF);
         DisplayItemMessageInBag(taskId, 2, gStringVar4, ItemMenu_StartFadeToExitCallback);
     }
     else
@@ -935,6 +935,6 @@ void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon * pokemon, u16 itemId, 
         questLog->species = GetMonData(pokemon, MON_DATA_SPECIES2);
     else
         questLog->species = 0xFFFF;
-    sub_8113550(eventId, (void *)questLog);
+    SetQuestLogEvent(eventId, (void *)questLog);
     Free(questLog);
 }

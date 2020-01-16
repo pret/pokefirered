@@ -23,9 +23,7 @@ EventScript_163B2F:: @ 8163B2F
 	return
 
 MtEmber_Summit_EventScript_163B33:: @ 8163B33
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

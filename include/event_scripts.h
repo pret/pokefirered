@@ -375,8 +375,9 @@ extern const u8 SecretBase_RedCave1_Text_2751E1[];
 extern const u8 SecretBase_RedCave1_Text_2754F6[];
 extern const u8 SecretBase_RedCave1_Text_2758CC[];
 
-extern const u8 gUnknown_84178D0[];
-extern const u8 gUnknown_84178DA[];
+extern const u8 gText_LtSurge[];
+extern const u8 gText_Koga[];
+extern const u8 gText_PokemonCenter[];
 // vs_seeker
 extern const u8 gUnknown_81C137C[];
 extern const u8 gUnknown_81C13D6[];
@@ -1177,7 +1178,7 @@ extern const u8 gText_PlayerSavedTheGame[];
 extern const u8 gText_DifferentGameFile[];
 
 // script_menu
-extern const u8 EventScript_1A7AE0[];
+extern const u8 EventScript_ReleaseEnd[];
 extern const u8 CableClub_Text_TradeMonsUsingLinkCable[];
 extern const u8 CableClub_Text_BattleUsingLinkCable[];
 extern const u8 CableClub_Text_CancelSelectedItem[];

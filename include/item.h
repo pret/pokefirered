@@ -62,7 +62,7 @@ u8 ItemId_GetSecondaryId(u16 itemId);
 u16 itemid_get_market_price(u16 itemId);
 void ClearBag(void);
 void ClearPCItemSlots(void);
-void sub_809A824(u16 itemId);
+void TrySetObtainedItemQuestLogEvent(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
 void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);

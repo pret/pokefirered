@@ -100,7 +100,7 @@ _0806C914:
 	orrs r0, r1
 	strb r0, [r5]
 _0806C940:
-	ldr r0, _0806CA18 @ =gUnknown_203ADFA
+	ldr r0, _0806CA18 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -158,7 +158,7 @@ _0806C996:
 	orrs r0, r1
 	strb r0, [r5, 0x1]
 _0806C9AC:
-	ldr r0, _0806CA18 @ =gUnknown_203ADFA
+	ldr r0, _0806CA18 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -198,7 +198,7 @@ _0806C9E6:
 	orrs r0, r1
 	strb r0, [r5]
 _0806C9F6:
-	ldr r0, _0806CA18 @ =gUnknown_203ADFA
+	ldr r0, _0806CA18 @ =gQuestLogState
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -214,7 +214,7 @@ _0806C9F6:
 	b _0806CA3E
 	.align 2, 0
 _0806CA14: .4byte gPlayerAvatar
-_0806CA18: .4byte gUnknown_203ADFA
+_0806CA18: .4byte gQuestLogState
 _0806CA1C:
 	movs r0, 0x80
 	ands r0, r1
@@ -1787,7 +1787,7 @@ sub_806D698: @ 806D698
 	bl InUnionRoom
 	cmp r0, 0x1
 	beq _0806D72C
-	ldr r0, _0806D6E0 @ =gUnknown_203ADFA
+	ldr r0, _0806D6E0 @ =gQuestLogState
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0806D72C
@@ -1813,7 +1813,7 @@ sub_806D698: @ 806D698
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D6E0: .4byte gUnknown_203ADFA
+_0806D6E0: .4byte gQuestLogState
 _0806D6E4: .4byte gPlayerAvatar
 _0806D6E8: .4byte gUnknown_81A8CED
 _0806D6EC:

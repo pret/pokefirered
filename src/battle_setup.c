@@ -997,8 +997,8 @@ void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
-    if (gUnknown_203ADFA != 2
-     && gUnknown_203ADFA != 3
+    if (gQuestLogState != 2
+     && gQuestLogState != 3
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
     {

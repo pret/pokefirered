@@ -7,7 +7,7 @@
 #include "link.h"
 #include "link_rfu.h"
 
-void sub_815A008(struct QuestLog * questLog)
+void SetQuestLogObjectEventsData(struct QuestLog * questLog)
 {
     u32 i;
 
@@ -134,7 +134,7 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
 
 void sub_815A540(void)
 {
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
     {
         s16 x, y;
 

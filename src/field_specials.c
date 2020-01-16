@@ -1766,9 +1766,9 @@ u8 Special_GetMartClerkObjectId(void)
     return 1;
 }
 
-void sub_80CC524(void)
+void SetUsedPkmnCenterQuestLogEvent(void)
 {
-    sub_8113550(11, NULL);
+    SetQuestLogEvent(QL_EVENT_USED_PKMN_CENTER, NULL);
 }
 
 static const struct {
@@ -1868,7 +1868,7 @@ void sub_80CC59C(void)
                     sp0.unk1 = r5;
                 else
                     sp0.unk1 = r5 + 1;
-                sub_8113550(35, (void *)&sp0);
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
                 FlagClear(FLAG_0x808);
                 return;
             }
@@ -1882,7 +1882,7 @@ void sub_80CC59C(void)
                     sp0.unk1 = r5;
                 else
                     sp0.unk1 = r5 + 1;
-                sub_8113550(35, (void *)&sp0);
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
                 FlagClear(FLAG_0x808);
                 return;
             }
@@ -1903,7 +1903,7 @@ void sub_80CC59C(void)
                 if (x != 67 || y != 15)
                     sp0.unk1++;
             }
-            sub_8113550(35, (void *)&sp0);
+            SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
             FlagClear(FLAG_0x808);
             if (r5 == 35)
             {
@@ -2447,7 +2447,7 @@ void Special_BrailleCursorToggle(void)
     // 8005 = y
     // 8006 = action (0 = create, 1 = delete)
     u16 x;
-    if (gUnknown_203ADFA != 2)
+    if (gQuestLogState != 2)
     {
         x = gSpecialVar_0x8004 + 27;
         if (gSpecialVar_0x8006 == 0)

@@ -1,7 +1,5 @@
 EventScript_PC:: @ 81A6955
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
 	setvar VAR_0x8004, 27

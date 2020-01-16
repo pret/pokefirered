@@ -1356,10 +1356,10 @@ gText_Withdraw::
 gText_ReturnToPC:: @ 84178BE
 	.string "Return to the PC.$"
 
-gUnknown_84178D0:: @ 84178D0
+gText_LtSurge:: @ 84178D0
 	.string "LT. SURGE$"
 
-gUnknown_84178DA:: @ 84178DA
+gText_Koga:: @ 84178DA
 	.string "KOGA$"
 
 gUnknown_84178DF:: @ 0x84178DF
@@ -2435,7 +2435,7 @@ gUnknown_8418BF3:: @ 0x8418BF3
 gUnknown_8418C12:: @ 0x8418C12
 	.string "ポケモン リ-グ$"
 
-gUnknown_8418C1B:: @ 8418C1B
+gText_PokemonCenter:: @ 8418C1B
 	.string "POKéMON CENTER$"
 
 gUnknown_8418C2A:: @ 8418C2A

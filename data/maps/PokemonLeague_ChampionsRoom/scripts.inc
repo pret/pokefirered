@@ -55,9 +55,7 @@ EventScript_162B76:: @ 8162B76
 	delay 20
 	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162CB3
 	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_162CBC
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_162C68
+	goto_if_questlog EventScript_162C68
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
 	savebgm MUS_WIN_GYM

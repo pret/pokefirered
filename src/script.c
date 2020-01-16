@@ -1,11 +1,11 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
+#include "quest_log.h"
 
 #define RAM_SCRIPT_MAGIC 51
 #define SCRIPT_STACK_SIZE 20
 
-extern u8 gUnknown_203ADFA;
 
 extern void sub_80CBDE8(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
@@ -435,7 +435,7 @@ bool8 mapheader_run_first_tag2_script_list_match(void)
 {
     u8 *ptr;
 
-    if(gUnknown_203ADFA == 3)
+    if(gQuestLogState == 3)
         return 0;
 
     ptr = mapheader_get_first_match_from_tagged_ptr_list(2);

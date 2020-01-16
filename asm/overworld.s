@@ -3360,7 +3360,7 @@ sub_8056534: @ 8056534
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08056554
-	ldr r0, _08056564 @ =gUnknown_203ADFA
+	ldr r0, _08056564 @ =gQuestLogState
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _08056568
@@ -3370,7 +3370,7 @@ _08056554:
 	.align 2, 0
 _0805655C: .4byte gMain
 _08056560: .4byte sub_80565B4
-_08056564: .4byte gUnknown_203ADFA
+_08056564: .4byte gQuestLogState
 _08056568:
 	ldrh r0, [r4, 0x2E]
 	ldrh r1, [r4, 0x2C]
@@ -4145,7 +4145,7 @@ _08056BFA:
 _08056BFE:
 	bl mli4_mapscripts_and_other
 	bl sub_8057114
-	ldr r0, _08056C1C @ =gUnknown_203ADFA
+	ldr r0, _08056C1C @ =gQuestLogState
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _08056C16
@@ -4155,7 +4155,7 @@ _08056C16:
 	bl sub_812B35C
 	b _08056CCA
 	.align 2, 0
-_08056C1C: .4byte gUnknown_203ADFA
+_08056C1C: .4byte gQuestLogState
 _08056C20:
 	bl InitCurrentFlashLevelScanlineEffect
 	bl sub_8056F1C

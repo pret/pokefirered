@@ -153,9 +153,7 @@ Movement_1631AA:: @ 81631AA
 	step_end
 
 SeafoamIslands_B4F_EventScript_1631AC:: @ 81631AC
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

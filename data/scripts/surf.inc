@@ -1,7 +1,5 @@
 EventScript_UseSurf:: @ 81A6AC8
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_UseSurfEnd
+	goto_if_questlog EventScript_UseSurfEnd
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_UseSurfEnd

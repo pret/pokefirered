@@ -1,6 +1,4 @@
 #include "global.h"
-#include "constants/species.h"
-#include "constants/items.h"
 #include "data.h"
 #include "malloc.h"
 #include "main.h"
@@ -34,22 +32,33 @@
 #include "pokemon_storage_system.h"
 #include "save.h"
 #include "link.h"
-#include "quest_log_815A008.h"
-#include "quest_log_8150454.h"
+#include "quest_log_objects.h"
+#include "quest_log_player.h"
 #include "quest_log.h"
 #include "new_menu_helpers.h"
 #include "strings.h"
+#include "constants/event_objects.h"
+#include "constants/maps.h"
+#include "constants/party_menu.h"
+#include "constants/quest_log.h"
+#include "constants/trainer_classes.h"
+#include "constants/species.h"
+#include "constants/items.h"
 
 u8 gUnknown_3005E88;
 
-struct Var4038Struct
+struct TrainerFanClub
 {
-    u8 unk_0_0:7;
-    u8 unk_0_7:1;
-    u8 unk_1;
+    u8 timer:7;
+    u8 gotInitialFans:1;
+    u8 fanFlags;
 };
 
-#define VAR_0x4038_STRUCT ((struct Var4038Struct *)GetVarPointer(VAR_0x4038))
+#define TRAINER_FAN_CLUB ((struct TrainerFanClub *)GetVarPointer(VAR_FANCLUB_FAN_COUNTER))
+
+#define GET_TRAINER_FAN_CLUB_FLAG(flag) (fanClub->fanFlags >> (flag) & 1)
+#define SET_TRAINER_FAN_CLUB_FLAG(flag) (fanClub->fanFlags |= 1 << (flag))
+#define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(fanClub->fanFlags ^= 1 << (flag))
 
 struct UnkStruct_203AE94
 {
@@ -93,9 +102,9 @@ struct UnkStruct_203AE98 * gUnknown_3005E94;
 static struct UnkStruct_300201C * sFlagOrVarRecords;
 static u16 sNumFlagsOrVars;
 
-static EWRAM_DATA u8 gUnknown_203ADF8 = 0;
+static EWRAM_DATA u8 sCurrentSceneNum = 0;
 static EWRAM_DATA u8 sNumScenes = 0;
-EWRAM_DATA u8 gUnknown_203ADFA = 0;
+EWRAM_DATA u8 gQuestLogState = 0;
 static EWRAM_DATA u16 gUnknown_203ADFC = 0;
 static EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
 static EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
@@ -116,7 +125,7 @@ static EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
 static EWRAM_DATA u8 gUnknown_203B048 = 0;
 static EWRAM_DATA u8 gUnknown_203B049 = 0;
 static EWRAM_DATA u8 gUnknown_203B04A = 0;
-static EWRAM_DATA u8 gUnknown_203B04B = 0;
+static EWRAM_DATA bool8 gUnknown_203B04B = 0;
 
 static void sub_8110A00(void);
 static void sub_8110A3C(void);
@@ -137,47 +146,47 @@ static void sub_8111688(void);
 static void sub_811175C(u8, struct UnkStruct_203AE98 *);
 static void sub_81118F4(s8);
 static void QuestLog_AdvancePlayhead(void);
-static void QuestLog_EndPlayback(void);
+static void QuestLog_StartFinalScene(void);
 static void Task_RunPlaybackCB(u8);
 static void sub_8111AD8(void);
 static void sub_8111B80(void);
 static u8 sub_8111BD4(void);
-static void sub_8111D10(void);
+static void DrawQuestLogSceneDescription(void);
 static void sub_8111D90(u8);
-static void sub_8111E20(void);
+static void QuestLog_CloseTextWindow(void);
 static void QuestLog_SkipToEndOfPlayback(s8);
 static void QuestLog_WaitFadeAndCancelPlayback(void);
 static bool8 sub_8111F60(void);
 static void sub_8111F8C(u8);
-static void sub_8111FCC(u8);
-static void sub_8112044(u8);
-static void sub_81120AC(u8);
+static void Task_QuestLogScene_SavedGame(u8);
+static void Task_WaitAtEndOfQuestLog(u8);
+static void Task_EndQuestLog(u8);
 static bool8 sub_81121D8(u8);
 static void sub_811229C(void);
 static void sub_8112888(u8);
 static void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
 static bool8 sub_8112CEC(void);
 static bool8 sub_8112D1C(void);
-static void sub_8113078(struct Var4038Struct *);
-static void sub_81130BC(struct Var4038Struct *);
-static u8 sub_8113194(struct Var4038Struct *);
-static u16 sub_81132A0(struct Var4038Struct *);
-static void sub_81132E0(struct Var4038Struct *);
-static bool16 sub_811337C(struct Var4038Struct *);
-static void sub_8113390(struct Var4038Struct *);
-static void sub_8113414(struct LinkBattleRecords *, u8, u8);
-static void sub_81134CC(struct Var4038Struct *);
-static bool8 sub_8113508(struct Var4038Struct * );
-static void sub_8113524(struct Var4038Struct *);
-static bool8 sub_81136D4(void);
+static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *);
+static void UpdateTrainerFanClubGameClear(struct TrainerFanClub *);
+static u8 PlayerGainRandomTrainerFan(struct TrainerFanClub *);
+static u16 GetNumFansOfPlayerInTrainerFanClub(struct TrainerFanClub *);
+static void TryLoseFansFromPlayTime(struct TrainerFanClub *);
+static bool16 IsFanClubMemberFanOfPlayer(struct TrainerFanClub *);
+static void SetInitialFansOfPlayer(struct TrainerFanClub *);
+static void BufferFanClubTrainerName(struct LinkBattleRecords *, u8, u8);
+static void UpdateTrainerFansAfterLinkBattle(struct TrainerFanClub *);
+static bool8 DidPlayerGetFirstFans(struct TrainerFanClub * );
+static void SetPlayerGotFirstFans(struct TrainerFanClub *);
+static bool8 InQuestLogDisabledLocation(void);
 static bool8 sub_8113778(u16, const u16 *);
 static bool8 sub_81137E4(u16, const u16 *);
 static u16 *sub_8113828(u16, const u16 *);
-static bool8 sub_81138A0(u16, const u16 *);
-static bool8 sub_8113954(u16, const u16 *);
+static bool8 TrySetLinkQuestLogEvent(u16, const u16 *);
+static bool8 TrySetTrainerBattleQuestLogEvent(u16, const u16 *);
 static void sub_8113A1C(u16);
 static void sub_811381C(void);
-static bool8 sub_8113A44(u16, const u16 *);
+static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16, const u16 *);
 static u16 *QuestLog_SkipCommand(u16 *, u16 **);
 static void sub_8113ABC(const u16 *);
 static bool8 sub_8113AE8(const u16 *);
@@ -193,213 +202,212 @@ static u16 *sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
 static u16 *sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
 static u16 *sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
 static u16 *sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
-static u16 *sub_8113F14(u16 *, const u16 *);
-static const u16 *sub_8113F3C(const u16 *);
-static u16 *sub_8113F80(u16 *, const u16 *);
-static const u16 *sub_8113FBC(const u16 *);
-static u16 *sub_8114174(u16 *, const u16 *);
-static const u16 *sub_8114188(const u16 *);
-static u16 *sub_81141D0(u16 *, const u16 *);
-static const u16 *sub_81141E4(const u16 *);
-static u16 *sub_811422C(u16 *, const u16 *);
-static const u16 *sub_8114240(const u16 *);
-static u16 *sub_8114288(u16 *, const u16 *);
-static const u16 *sub_811429C(const u16 *);
-static u16 *sub_8114310(u16 *, const u16 *);
-static const u16 *sub_8114324(const u16 *);
-static u16 *sub_8114380(u16 *, const u16 *);
-static const u16 *sub_8114394(const u16 *);
-static u16 *sub_81143F0(u16 *, const u16 *);
-static const u16 *sub_811443C(const u16 *);
-static u16 *sub_811445C(u16 *, const u16 *);
-static const u16 *sub_811448C(const u16 *);
-static u16 *sub_81144EC(u16 *, const u16 *);
-static const u16 *sub_8114518(const u16 *);
-static u16 *sub_8114578(u16 *, const u16 *);
-static const u16 *sub_81145A4(const u16 *);
-static u16 *sub_8114604(u16 *, const u16 *);
-static const u16 *sub_811464C(const u16 *);
-static u16 *sub_8114710(u16 *, const u16 *);
-static const u16 *sub_8114724(const u16 *);
-static u16 *sub_8114744(u16 *, const u16 *);
-static const u16 *sub_8114758(const u16 *);
-static u16 *sub_8114778(u16 *, const u16 *);
-static const u16 *sub_81147A8(const u16 *);
-static u16 *sub_8114808(u16 *, const u16 *);
-static const u16 *sub_8114834(const u16 *);
-static u16 *sub_811488C(u16 *, const u16 *);
-static const u16 *sub_81148BC(const u16 *);
-static u16 *sub_8114918(u16 *, const u16 *);
-static const u16 *sub_8114944(const u16 *);
-static u16 *sub_8114990(u16 *, const u16 *);
-static const u16 *sub_81149D0(const u16 *);
-static u16 *sub_8114A1C(u16 *, const u16 *);
-static const u16 *sub_8114A4C(const u16 *);
-static u16 *sub_8114AA0(u16 *, const u16 *);
-static const u16 *sub_8114AC8(const u16 *);
-static u16 *sub_8114B0C(u16 *, const u16 *);
-static const u16 *sub_8114B34(const u16 *);
-static u16 *sub_8114B78(u16 *, const u16 *);
-static const u16 *sub_8114BA0(const u16 *);
-static u16 *sub_8114BE4(u16 *, const u16 *);
-static const u16 *sub_8114C0C(const u16 *);
-static u16 *sub_8114C68(u16 *, const u16 *);
-static const u16 *sub_8114C8C(const u16 *);
-static u16 *sub_8114CC0(u16 *, const u16 *);
-static const u16 *sub_8114CE4(const u16 *);
-static u16 *sub_8114D4C(u16 *, const u16 *);
-static const u16 *sub_8114D68(const u16 *);
-static u16 *sub_8114DE8(u16 *, const u16 *);
-static const u16 *sub_8114E68(const u16 *);
-static bool8 sub_8114FBC(u16);
-static u16 *sub_8114FF0(u16 *, const u16 *);
-static const u16 *sub_811500C(const u16 *);
-static u16 *sub_8115078(u16 *, const u16 *);
-static const u16 *sub_81150CC(const u16 *);
-static u16 *sub_81151C0(u16 *, const u16 *);
-static const u16 *sub_81151DC(const u16 *);
-static u16 *sub_8115280(u16 *, const u16 *);
-static const u16 *sub_81152BC(const u16 *);
+static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *, const u16 *);
+static u16 *BufferQuestLogData_UsedItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_GaveHeldItemFromPartyMenu(u16 *, const u16 *);
+static u16 *BufferQuestLogData_GaveHeldItemFromBagMenu(u16 *, const u16 *);
+static u16 *BufferQuestLogData_GaveHeldItemFromPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_TookHeldItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwappedHeldItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwappedHeldItemFromPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkTraded(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkBattledSingle(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkBattledDouble(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkBattledMulti(u16 *, const u16 *);
+static u16 *BufferQuestLogData_UsedUnionRoom(u16 *, const u16 *);
+static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *, const u16 *);
+static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwitchedMonsBetweenBoxes(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwitchedMonsWithinBox(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwitchedPartyMonForPCMon(u16 *, const u16 *);
+static u16 *BufferQuestLogData_MovedMonBetweenBoxes(u16 *, const u16 *);
+static u16 *BufferQuestLogData_MovedMonWithinBox(u16 *, const u16 *);
+static u16 *BufferQuestLogData_WithdrewMonFromPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DepositedMonInPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SwitchedMultipleMons(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DepositedItemInPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_WithdrewItemFromPC(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DefeatedWildMon(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DefeatedChampion(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DefeatedTrainer(u16 *, const u16 *);
+static u16 *BufferQuestLogData_DepartedLocation(u16 *, const u16 *);
+static u16 *BufferQuestLogData_UsedFieldMove(u16 *, const u16 *);
+static u16 *BufferQuestLogData_BoughtItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_SoldItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_ObtainedItem(u16 *, const u16 *);
+static u16 *BufferQuestLogData_ArrivedInLocation(u16 *, const u16 *);
+static const u16 *BufferQuestLogText_SwitchedPartyOrder(const u16 *);
+static const u16 *BufferQuestLogText_UsedItem(const u16 *);
+static const u16 *BufferQuestLogText_GaveHeldItemFromPartyMenu(const u16 *);
+static const u16 *BufferQuestLogText_GaveHeldItemFromBagMenu(const u16 *);
+static const u16 *BufferQuestLogText_GaveHeldItemFromPC(const u16 *);
+static const u16 *BufferQuestLogText_TookHeldItem(const u16 *);
+static const u16 *BufferQuestLogText_SwappedHeldItem(const u16 *);
+static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *);
+static const u16 *BufferQuestLogText_UsedPkmnCenter(const u16 *);
+static const u16 *BufferQuestLogText_LinkTraded(const u16 *);
+static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *);
+static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *);
+static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *);
+static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *);
+static const u16 *BufferQuestLogText_UsedUnionRoomChat(const u16 *);
+static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *);
+static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *);
+static const u16 *BufferQuestLogText_SwitchedMonsBetweenBoxes(const u16 *);
+static const u16 *BufferQuestLogText_SwitchedMonsWithinBox(const u16 *);
+static const u16 *BufferQuestLogText_SwitchedPartyMonForPCMon(const u16 *);
+static const u16 *BufferQuestLogText_MovedMonBetweenBoxes(const u16 *);
+static const u16 *BufferQuestLogText_MovedMonWithinBox(const u16 *);
+static const u16 *BufferQuestLogText_WithdrewMonFromPC(const u16 *);
+static const u16 *BufferQuestLogText_DepositedMonInPC(const u16 *);
+static const u16 *BufferQuestLogText_SwitchedMultipleMons(const u16 *);
+static const u16 *BufferQuestLogText_DepositedItemInPC(const u16 *);
+static const u16 *BufferQuestLogText_WithdrewItemFromPC(const u16 *);
+static const u16 *BufferQuestLogText_DefeatedGymLeader(const u16 *);
+static const u16 *BufferQuestLogText_DefeatedWildMon(const u16 *);
+static const u16 *BufferQuestLogText_DefeatedEliteFourMember(const u16 *);
+static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *);
+static const u16 *BufferQuestLogText_DefeatedTrainer(const u16 *);
+static const u16 *BufferQuestLogText_DepartedLocation(const u16 *);
+static const u16 *BufferQuestLogText_UsedFieldMove(const u16 *);
+static const u16 *BufferQuestLogText_BoughtItem(const u16 *);
+static const u16 *BufferQuestLogText_SoldItem(const u16 *);
+static const u16 *BufferQuestLogText_ObtainedItem(const u16 *);
+static const u16 *BufferQuestLogText_ArrivedInLocation(const u16 *);
+static bool8 IsSpeciesFromSpecialEncounter(u16);
 static bool8 sub_81153A8(u16, const u16 *);
 static bool8 sub_81153E4(u16, const u16 *);
-static u16 *sub_8115410(u16 *, const u16 *);
-static const u16 *sub_8115460(const u16 *);
-static u16 *sub_81154DC(u16 *, const u16 *);
-static const u16 *sub_8115518(const u16 *);
-static u16 *sub_81155A4(u16 *, const u16 *);
-static const u16 *sub_81155E0(const u16 *);
-static u16 *sub_81156D8(u16 *, const u16 *);
-static const u16 *sub_8115700(const u16 *);
-static u16 *sub_81157DC(u16 *, const u16 *);
-static const u16 *sub_8115800(const u16 *);
-void sub_8115834(u8 *);
+static void BufferLinkPartnersName(u8 *);
 
-extern const u8 gUnknown_841A155[];
-extern const u8 gUnknown_841A16F[];
-extern const u8 gUnknown_841A193[];
-extern const u8 gUnknown_841A1CD[];
-extern const u8 gUnknown_841A1E7[];
-extern const u8 gUnknown_841A210[];
-extern const u8 gUnknown_841A220[];
-extern const u8 gUnknown_841A255[];
-extern const u8 gUnknown_841A277[];
-extern const u8 gUnknown_841A2B0[];
-extern const u8 gUnknown_841A2E1[];
-extern const u8 gUnknown_841A312[];
-extern const u8 gUnknown_841A349[];
-extern const u8 gUnknown_841A391[];
-extern const u8 gUnknown_841A3DA[];
-extern const u8 gUnknown_841A3FF[];
-extern const u8 gUnknown_841A422[];
-extern const u8 gUnknown_841A477[];
-extern const u8 gUnknown_841A4C6[];
-extern const u8 gUnknown_841A502[];
-extern const u8 gUnknown_841A506[];
-extern const u8 gUnknown_841A50B[];
-extern const u8 gUnknown_841A53A[];
-extern const u8 gUnknown_841A566[];
-extern const u8 gUnknown_841A59C[];
-extern const u8 gUnknown_841A5D9[];
-extern const u8 gUnknown_841A5FA[];
-extern const u8 gUnknown_841A60A[];
-extern const u8 gUnknown_841A632[];
-extern const u8 gUnknown_841A64F[];
-extern const u8 gUnknown_841A66E[];
-extern const u8 gUnknown_841A694[];
-extern const u8 gUnknown_841A6A5[];
-extern const u8 gUnknown_841A6E1[];
-extern const u8 gUnknown_841A732[];
-extern const u8 gUnknown_841A74E[];
-extern const u8 gUnknown_841A756[];
-extern const u8 gUnknown_841A762[];
-extern const u8 gUnknown_841A76A[];
-extern const u8 gUnknown_841A7B0[];
-extern const u8 gUnknown_841A7DD[];
-extern const u8 gUnknown_841A810[];
-extern const u8 gUnknown_841A858[];
-extern const u8 gUnknown_841A896[];
-extern const u8 gUnknown_841A8D4[];
-extern const u8 gUnknown_841A8DD[];
-extern const u8 gUnknown_841A8E0[];
-extern const u8 gUnknown_841A90C[];
-extern const u8 gUnknown_841A938[];
-extern const u8 gUnknown_841A965[];
-extern const u8 gUnknown_841A9A9[];
-extern const u8 gUnknown_841A9D4[];
-extern const u8 gUnknown_841AA01[];
-extern const u8 gUnknown_841AA2B[];
-extern const u8 gUnknown_841AA76[];
-extern const u8 gUnknown_841AAAA[];
-extern const u8 gUnknown_841AAEC[];
-extern const u8 gUnknown_841AB29[];
-extern const u8 gUnknown_841AB74[];
-extern const u8 gUnknown_841AB8E[];
-extern const u8 gUnknown_841ABAB[];
-extern const u8 gUnknown_841ABCD[];
-extern const u8 gUnknown_841ABF9[];
-extern const u8 gUnknown_841AC2A[];
-extern const u8 gUnknown_841AC51[];
-extern const u8 gUnknown_841AC93[];
-extern const u8 gUnknown_841ACBC[];
-extern const u8 gUnknown_841ACF9[];
-extern const u8 gUnknown_841AD1D[];
-extern const u8 gUnknown_841AD3C[];
-extern const u8 gUnknown_841AD69[];
-extern const u8 gUnknown_841AD9E[];
-extern const u8 gUnknown_841ADC8[];
-extern const u8 gUnknown_841ADFF[];
-extern const u8 gUnknown_841AE1E[];
-extern const u8 gUnknown_841AE48[];
-extern const u8 gUnknown_841AE8F[];
-extern const u8 gUnknown_841AEA7[];
-extern const u8 gUnknown_841AEDC[];
-extern const u8 gUnknown_841AF0C[];
-extern const u8 gUnknown_841AF3E[];
-extern const u8 gUnknown_841AF6D[];
-extern const u8 gUnknown_841AF98[];
-extern const u8 gUnknown_841AF9F[];
-extern const u8 gUnknown_841AFA6[];
-extern const u8 gUnknown_841AFD1[];
-extern const u8 gUnknown_841AFD6[];
-extern const u8 gUnknown_841B005[];
-extern const u8 gUnknown_841B03F[];
-extern const u8 gUnknown_841B064[];
-extern const u8 gUnknown_841B073[];
-extern const u8 gQuestLogString_Home[];
-extern const u8 gQuestLogString_OakResearchLab[];
-extern const u8 gQuestLogString_Gym[];
-extern const u8 gQuestLogString_PokemonLeagueGate[];
-extern const u8 gQuestLogString_ViridianForest[];
-extern const u8 gQuestLogString_PewterMuseumOfScience[];
-extern const u8 gQuestLogString_MtMoon[];
-extern const u8 gQuestLogString_BikeShop[];
-extern const u8 gQuestLogString_BillSHouse[];
-extern const u8 gQuestLogString_DayCare[];
-extern const u8 gQuestLogString_UndergroundPath[];
-extern const u8 gQuestLogString_PokemonFanClub[];
-extern const u8 gQuestLogString_SSAnne[];
-extern const u8 gQuestLogString_DiglettSCave[];
-extern const u8 gQuestLogString_RockTunnel[];
-extern const u8 gQuestLogString_PowerPlant[];
-extern const u8 gQuestLogString_PokemonTower[];
-extern const u8 gQuestLogString_VolunteerHouse[];
-extern const u8 gQuestLogString_NameRaterSHouse[];
-extern const u8 gQuestLogString_CeladonDeptStore[];
-extern const u8 gQuestLogString_CeladonMansion[];
-extern const u8 gQuestLogString_RocketGameCorner[];
-extern const u8 gQuestLogString_Restaurant[];
-extern const u8 gQuestLogString_RocketHideout[];
-extern const u8 gQuestLogString_SafariZone[];
-extern const u8 gQuestLogString_WardenSHome[];
-extern const u8 gQuestLogString_FightingDojo[];
-extern const u8 gQuestLogString_SilphCo[];
-extern const u8 gQuestLogString_SeafoamIslands[];
-extern const u8 gQuestLogString_PokemonMansion[];
-extern const u8 gQuestLogString_PokemonResearchLab[];
-extern const u8 gQuestLogString_VictoryRoad[];
-extern const u8 gQuestLogString_PokemonLeague[];
-extern const u8 gQuestLogString_CeruleanCave[];
-extern const u8 gUnknown_8418C1B[];
+extern const u8 QuestLog_Text_PreviouslyOnYourQuest[];
+extern const u8 QuestLog_Text_SwitchMon1WithMon2[];
+extern const u8 QuestLog_Text_SwappedHeldItemsOnMon[];
+extern const u8 QuestLog_Text_TookHeldItemFromMon[];
+extern const u8 QuestLog_Text_UsedItemOnMonAtThisLocation[];
+extern const u8 QuestLog_Text_UsedTheItem[];
+extern const u8 QuestLog_Text_UsedTheKeyItem[];
+extern const u8 QuestLog_Text_MonLearnedMoveFromTM[];
+extern const u8 QuestLog_Text_MonReplacedMoveWithTM[];
+extern const u8 QuestLog_Text_MonsWereFullyRestoredAtCenter[];
+extern const u8 QuestLog_Text_PlayerBattledChampionRival[];
+extern const u8 QuestLog_Text_PlayerSentOutMon1RivalSentOutMon2[];
+extern const u8 QuestLog_Text_WonTheMatchAsAResult[];
+extern const u8 QuestLog_Text_StoredItemInPC[];
+extern const u8 QuestLog_Text_WithdrewItemFromPC[];
+extern const u8 QuestLog_Text_TradedMon1ForPersonsMon2[];
+extern const u8 QuestLog_Text_SingleBattleWithPersonResultedInOutcome[];
+extern const u8 QuestLog_Text_DoubleBattleWithPersonResultedInOutcome[];
+extern const u8 QuestLog_Text_MultiBattleWithPeopleResultedInOutcome[];
+extern const u8 QuestLog_Text_Win[];
+extern const u8 QuestLog_Text_Loss[];
+extern const u8 QuestLog_Text_MingledInUnionRoom[];
+extern const u8 QuestLog_Text_DepartedPlaceInTownForNextDestination[];
+extern const u8 QuestLog_Text_SwitchedMonsBetweenBoxes[];
+extern const u8 QuestLog_Text_MovedMonToNewBox[];
+extern const u8 QuestLog_Text_SwitchedMonsWithinBox[];
+extern const u8 QuestLog_Text_MovedMonWithinBox[];
+extern const u8 QuestLog_Text_SwitchedPartyMonForPCMon[];
+extern const u8 QuestLog_Text_WithdrewMonFromPC[];
+extern const u8 QuestLog_Text_DepositedMonInPC[];
+extern const u8 QuestLog_Text_SwitchedMultipleMons[];
+extern const u8 QuestLog_Text_ADifferentSpot[];
+extern const u8 QuestLog_Text_GaveMonHeldItemFromPC[];
+extern const u8 QuestLog_Text_SwappedHeldItemFromPC[];
+extern const u8 QuestLog_Text_ChattedWithManyTrainers[];
+extern const u8 QuestLog_Text_Handily[];
+extern const u8 QuestLog_Text_Tenaciously[];
+extern const u8 QuestLog_Text_Somehow[];
+extern const u8 QuestLog_Text_TradedMon1ForTrainersMon2[];
+extern const u8 QuestLog_Text_BattledTrainerEndedInOutcome[];
+extern const u8 QuestLog_Text_BoughtItem[];
+extern const u8 QuestLog_Text_BoughtItemsIncludingItem[];
+extern const u8 QuestLog_Text_SoldNumOfItem[];
+extern const u8 QuestLog_Text_SoldItemsIncludingItem[];
+extern const u8 QuestLog_Text_JustOne[];
+extern const u8 QuestLog_Text_Num[];
+extern const u8 QuestLog_Text_UsedSoftboiled[];
+extern const u8 QuestLog_Text_UsedMilkDrink[];
+extern const u8 QuestLog_Text_MonLearnedMoveFromHM[];
+extern const u8 QuestLog_Text_MonReplacedMoveWithHM[];
+extern const u8 QuestLog_Text_DefeatedWildMon[];
+extern const u8 QuestLog_Text_DefeatedWildMons[];
+extern const u8 QuestLog_Text_CaughtWildMon[];
+extern const u8 QuestLog_Text_CaughtWildMons[];
+extern const u8 QuestLog_Text_DefeatedWildMonAndCaughtWildMon[];
+extern const u8 QuestLog_Text_DefeatedWildMonAndCaughtWildMons[];
+extern const u8 QuestLog_Text_DefeatedWildMonsAndCaughtWildMon[];
+extern const u8 QuestLog_Text_DefeatedWildMonsAndCaughtWildMons[];
+extern const u8 QuestLog_Text_GaveMonHeldItem[];
+extern const u8 QuestLog_Text_GaveMonHeldItem2[];
+extern const u8 QuestLog_Text_UsedCut[];
+extern const u8 QuestLog_Text_UsedFly[];
+extern const u8 QuestLog_Text_UsedSurf[];
+extern const u8 QuestLog_Text_UsedStrength[];
+extern const u8 QuestLog_Text_UsedFlash[];
+extern const u8 QuestLog_Text_UsedRockSmash[];
+extern const u8 QuestLog_Text_UsedWaterfall[];
+extern const u8 QuestLog_Text_UsedDive[];
+extern const u8 QuestLog_Text_UsedDigInLocation[];
+extern const u8 QuestLog_Text_UsedSweetScent[];
+extern const u8 QuestLog_Text_UsedTeleportToLocation[];
+extern const u8 QuestLog_Text_LeftTownsLocationForNextDestination[];
+extern const u8 QuestLog_Text_PlayedGamesAtGameCorner[];
+extern const u8 QuestLog_Text_RestedAtHome[];
+extern const u8 QuestLog_Text_LeftOaksLab[];
+extern const u8 QuestLog_Text_GymWasFullOfToughTrainers[];
+extern const u8 QuestLog_Text_DepartedGym[];
+extern const u8 QuestLog_Text_HadGreatTimeInSafariZone[];
+extern const u8 QuestLog_Text_ManagedToGetOutOfLocation[];
+extern const u8 QuestLog_Text_TookOnGymLeadersMonWithMonAndWon[];
+extern const u8 QuestLog_Text_TookOnEliteFoursMonWithMonAndWon[];
+extern const u8 QuestLog_Text_TookOnTrainersMonWithMonAndWon[];
+extern const u8 QuestLog_Text_Coolly[];
+extern const u8 QuestLog_Text_Barely[];
+extern const u8 QuestLog_Text_UsedEscapeRope[];
+extern const u8 QuestLog_Text_Draw[];
+extern const u8 QuestLog_Text_DepartedTheLocationForNextDestination[];
+extern const u8 QuestLog_Text_DepartedFromLocationToNextDestination[];
+extern const u8 QuestLog_Text_ObtainedItemInLocation[];
+extern const u8 QuestLog_Text_ArrivedInLocation[];
+extern const u8 QuestLog_Text_SavedGameAtLocation[];
+extern const u8 QuestLog_Text_Home[];
+extern const u8 QuestLog_Text_OakResearchLab[];
+extern const u8 QuestLog_Text_Gym[];
+extern const u8 QuestLog_Text_PokemonLeagueGate[];
+extern const u8 QuestLog_Text_ViridianForest[];
+extern const u8 QuestLog_Text_PewterMuseumOfScience[];
+extern const u8 QuestLog_Text_MtMoon[];
+extern const u8 QuestLog_Text_BikeShop[];
+extern const u8 QuestLog_Text_BillsHouse[];
+extern const u8 QuestLog_Text_DayCare[];
+extern const u8 QuestLog_Text_UndergroundPath[];
+extern const u8 QuestLog_Text_PokemonFanClub[];
+extern const u8 QuestLog_Text_SSAnne[];
+extern const u8 QuestLog_Text_DiglettsCave[];
+extern const u8 QuestLog_Text_RockTunnel[];
+extern const u8 QuestLog_Text_PowerPlant[];
+extern const u8 QuestLog_Text_PokemonTower[];
+extern const u8 QuestLog_Text_VolunteerHouse[];
+extern const u8 QuestLog_Text_NameRatersHouse[];
+extern const u8 QuestLog_Text_CeladonDeptStore[];
+extern const u8 QuestLog_Text_CeladonMansion[];
+extern const u8 QuestLog_Text_RocketGameCorner[];
+extern const u8 QuestLog_Text_Restaurant[];
+extern const u8 QuestLog_Text_RocketHideout[];
+extern const u8 QuestLog_Text_SafariZone[];
+extern const u8 QuestLog_Text_WardensHome[];
+extern const u8 QuestLog_Text_FightingDojo[];
+extern const u8 QuestLog_Text_SilphCo[];
+extern const u8 QuestLog_Text_SeafoamIslands[];
+extern const u8 QuestLog_Text_PokemonMansion[];
+extern const u8 QuestLog_Text_PokemonResearchLab[];
+extern const u8 QuestLog_Text_VictoryRoad[];
+extern const u8 QuestLog_Text_PokemonLeague[];
+extern const u8 QuestLog_Text_CeruleanCave[];
 
 
 static const struct WindowTemplate gUnknown_845661C[3] = {
@@ -408,36 +416,36 @@ static const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0, 14, 30, 6, 15, 0x14c }
 };
 
-static const u8 gUnknown_8456634[3] = {15, 1, 12};
+static const u8 sTextColors[3] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_3};
 
 static const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
 
-static const u8 gUnknown_8456698[] = {17, 10, 3};
+static const u8 sQuestLogTextLineYCoords[] = {17, 10, 3};
 
 void sub_8110840(void * oldPointer)
 {
     ptrdiff_t offset = (void *)gSaveBlock1Ptr - oldPointer;
     if (gUnknown_203AE04)
         gUnknown_203AE04 = (void *)gUnknown_203AE04 + offset;
-    if (gUnknown_203ADFA != 0)
+    if (gQuestLogState != 0)
     {
         if (gUnknown_203AE08)
             gUnknown_203AE08 = (void *)gUnknown_203AE08 + offset;
-        if (gUnknown_203ADFA == 2)
+        if (gQuestLogState == 2)
         {
             int r3;
-            for (r3 = 0; r3 < 0x20; r3++)
+            for (r3 = 0; r3 < (int)NELEMS(gUnknown_203AE0C); r3++)
                 if (gUnknown_203AE0C[r3])
                     gUnknown_203AE0C[r3] = (void *)gUnknown_203AE0C[r3] + offset;
         }
     }
 }
 
-void sub_811089C(void)
+void ResetQuestLog(void)
 {
     memset(gSaveBlock1Ptr->questLog, 0, sizeof(gSaveBlock1Ptr->questLog));
-    gUnknown_203ADF8 = 0;
-    gUnknown_203ADFA = 0;
+    sCurrentSceneNum = 0;
+    gQuestLogState = 0;
     sQuestLogCB = NULL;
     gUnknown_203AE08 = NULL;
     gUnknown_203AE04 = NULL;
@@ -462,11 +470,11 @@ void RunQuestLogCB(void)
         sQuestLogCB();
 }
 
-bool8 sub_8110944(const void * a0, size_t a1)
+bool8 sub_8110944(const void * a0, size_t cmdSize)
 {
-    void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
-    void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
-    r0 -= a1;
+    void * r2 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
+    void * r0 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
+    r0 -= cmdSize;
     if ((const void *)a0 < r2 || (const void *)a0 > r0)
         return FALSE;
     return TRUE;
@@ -474,18 +482,18 @@ bool8 sub_8110944(const void * a0, size_t a1)
 
 bool8 sub_8110988(u16 *a0, size_t a1)
 {
-    void * r2 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
-    void * r0 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].end;
+    void * r2 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
+    void * r0 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
     r0 -= a1;
     if ((void *)a0 < r2 || (void *)a0 > r0)
         return FALSE;
     return TRUE;
 }
 
-void sub_81109CC(u8 a0)
+static void SetQuestLogState(u8 state)
 {
-    gUnknown_203ADFA = a0;
-    if (a0 == 1)
+    gQuestLogState = state;
+    if (state == 1)
         sQuestLogCB = sub_8110A00;
     else
         sQuestLogCB = sub_8110A3C;
@@ -497,7 +505,7 @@ static void sub_8110A00(void)
     {
         gUnknown_3005E88 = 0;
         sub_8110E3C();
-        gUnknown_203ADFA = 0;
+        gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
 }
@@ -520,56 +528,56 @@ static void sub_8110A3C(void)
     }
 }
 
-void sub_8110AB4(void)
+void Special_GetQuestLogState(void)
 {
-    gSpecialVar_Result = gUnknown_203ADFA;
+    gSpecialVar_Result = gQuestLogState;
 }
 
 u8 sub_8110AC8(void)
 {
-    return gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000;
+    return gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000;
 }
 
-void sub_8110AEC(u16 a0)
+void sub_8110AEC(u16 eventId)
 {
-    if (gUnknown_203ADF8 > 3)
-        gUnknown_203ADF8 = 0;
+    if (sCurrentSceneNum >= QUEST_LOG_SCENE_COUNT)
+        sCurrentSceneNum = 0;
 
-    sub_81108F0(gUnknown_203ADF8);
+    sub_81108F0(sCurrentSceneNum);
     sub_8113B88();
-    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_568;
-    if ((a0 >= 12 && a0 < 20) || a0 == 35)
-        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 2;
+    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
+    if (IS_LINK_QL_EVENT(eventId) || eventId == QL_EVENT_DEPARTED)
+        gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 = 2;
     else
-        gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 = 1;
+        gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 = 1;
     QuestLog_GetSaneMonCounts();
-    sub_8110BB0(gUnknown_203ADF8);
-    sub_8110BE8(gUnknown_203ADF8);
+    sub_8110BB0(sCurrentSceneNum);
+    sub_8110BE8(sCurrentSceneNum);
     sub_8110D94();
     sub_8110E20();
-    sub_8110D48(gUnknown_203ADF8);
+    sub_8110D48(sCurrentSceneNum);
     gUnknown_203ADFC = 0;
     sub_8112940(2, gUnknown_203AE98, 0x100);
     sub_8110E68(gUnknown_203AE98);
-    sub_81109CC(1);
+    SetQuestLogState(1);
 }
 
-static void sub_8110BB0(u8 a0)
+static void sub_8110BB0(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
-    questLog->unk_001 = gSaveBlock1Ptr->location.mapGroup;
-    questLog->unk_002 = gSaveBlock1Ptr->location.mapNum;
-    questLog->unk_003 = gSaveBlock1Ptr->location.warpId;
-    questLog->unk_004 = gSaveBlock1Ptr->pos.x;
-    questLog->unk_006 = gSaveBlock1Ptr->pos.y;
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
+    questLog->mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    questLog->mapNum = gSaveBlock1Ptr->location.mapNum;
+    questLog->warpId = gSaveBlock1Ptr->location.warpId;
+    questLog->x = gSaveBlock1Ptr->pos.x;
+    questLog->y = gSaveBlock1Ptr->pos.y;
 }
 
-static void sub_8110BE8(u8 a0)
+static void sub_8110BE8(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
 
-    sub_815A008(questLog);
+    SetQuestLogObjectEventsData(questLog);
 
     for (i = 0; i < NELEMS(gSaveBlock1Ptr->objectEventTemplates); i++)
     {
@@ -598,9 +606,9 @@ static void sub_8110BE8(u8 a0)
     }
 }
 
-static void sub_8110D48(u8 a0)
+static void sub_8110D48(u8 sceneNum)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[a0];
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
 
     CpuCopy16(gSaveBlock1Ptr->flags, questLog->flags, FLAGS_COUNT * sizeof(u8));
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
@@ -633,8 +641,8 @@ static void sub_8110E20(void)
 static void sub_8110E3C(void)
 {
     sub_8113BF4(gUnknown_203AE08);
-    if (++gUnknown_203ADF8 > 3)
-        gUnknown_203ADF8 = 0;
+    if (++sCurrentSceneNum >= QUEST_LOG_SCENE_COUNT)
+        sCurrentSceneNum = 0;
 }
 
 static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
@@ -677,7 +685,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId)
 
     sub_811381C();
     sNumScenes = 0;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < QUEST_LOG_SCENE_COUNT; i++)
     {
         if (gSaveBlock1Ptr->questLog[i].unk_000)
             sNumScenes++;
@@ -701,7 +709,7 @@ static void sub_8110F90(u8 unused)
     gSaveBlock1Ptr->location.mapGroup = 3;
     gSaveBlock1Ptr->location.mapNum = 19;
     gSaveBlock1Ptr->location.warpId = -1;
-    gUnknown_203ADF8 = 0;
+    sCurrentSceneNum = 0;
     gDisableMapMusicChangeOnMapLoad = 1;
     DisableWildEncounters(TRUE);
     sub_8111368();
@@ -709,16 +717,16 @@ static void sub_8110F90(u8 unused)
 
 void sub_8110FCC(void)
 {
-    sub_811175C(gUnknown_203ADF8, gUnknown_203AE98);
+    sub_811175C(sCurrentSceneNum, gUnknown_203AE98);
     sub_8113B88();
     sub_8112940(1, gUnknown_203AE98, 0x100);
-    sub_8111150(gUnknown_203ADF8);
+    sub_8111150(sCurrentSceneNum);
 }
 
 bool8 sub_8111000(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
-    sub_81109CC(2);
+    SetQuestLogState(2);
     sub_807DF64();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
@@ -728,14 +736,14 @@ bool8 sub_8111000(void)
 bool8 sub_8111038(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
-    sub_81109CC(2);
+    SetQuestLogState(2);
     sub_807DF7C();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
     return 1;
 }
 
-void sub_8111070(u8 a0)
+void DrawPreviouslyOnQuestHeader(u8 sceneNum)
 {
     u8 i;
 
@@ -745,16 +753,16 @@ void sub_8111070(u8 a0)
         FillWindowPixelRect(gUnknown_203ADFE[i], 15, 0, 0, gUnknown_845661C[i].width * 8, gUnknown_845661C[i].height * 8);
     }
 
-    // _("Previously on your quest…$")
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A155);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_PreviouslyOnYourQuest);
 
-    if (a0)
+    // Scene numbers count from 4 to 0, 0 being where the player saved
+    if (sceneNum != 0)
     {
-        ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sceneNum, STR_CONV_MODE_LEFT_ALIGN, 1);
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
     PutWindowTilemap(gUnknown_203ADFE[0]);
     PutWindowTilemap(gUnknown_203ADFE[1]);
     CopyWindowToVram(gUnknown_203ADFE[0], 2);
@@ -768,9 +776,9 @@ void sub_8111134(void)
     CopyWindowToVram(gUnknown_203ADFE[1], 1);
 }
 
-static void sub_8111150(u8 a0)
+static void sub_8111150(u8 sceneNum)
 {
-    struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[a0];
+    struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
     
     for (i = 0; i < 64; i++)
@@ -790,44 +798,44 @@ static void sub_8111150(u8 a0)
     sub_815A1F8(questLog, gSaveBlock1Ptr->objectEventTemplates);
 }
 
-void sub_8111274(u8 a0, u8 a1)
+void sub_8111274(u8 sceneNum, bool8 a1)
 {
     struct WarpData sp0;
     
     if (!a1)
     {
-        gSaveBlock1Ptr->location.mapGroup = gSaveBlock1Ptr->questLog[a0].unk_001;
-        gSaveBlock1Ptr->location.mapNum = gSaveBlock1Ptr->questLog[a0].unk_002;
-        gSaveBlock1Ptr->location.warpId = gSaveBlock1Ptr->questLog[a0].unk_003;
-        gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->questLog[a0].unk_004;
-        gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->questLog[a0].unk_006;
+        gSaveBlock1Ptr->location.mapGroup = gSaveBlock1Ptr->questLog[sceneNum].mapGroup;
+        gSaveBlock1Ptr->location.mapNum = gSaveBlock1Ptr->questLog[sceneNum].mapNum;
+        gSaveBlock1Ptr->location.warpId = gSaveBlock1Ptr->questLog[sceneNum].warpId;
+        gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->questLog[sceneNum].x;
+        gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->questLog[sceneNum].y;
     }
     else
     {
-        sp0.mapGroup = gSaveBlock1Ptr->questLog[a0].unk_001;
-        sp0.mapNum = gSaveBlock1Ptr->questLog[a0].unk_002;
-        sp0.warpId = gSaveBlock1Ptr->questLog[a0].unk_003;
-        sp0.x = gSaveBlock1Ptr->questLog[a0].unk_004;
-        sp0.y = gSaveBlock1Ptr->questLog[a0].unk_006;
+        sp0.mapGroup = gSaveBlock1Ptr->questLog[sceneNum].mapGroup;
+        sp0.mapNum = gSaveBlock1Ptr->questLog[sceneNum].mapNum;
+        sp0.warpId = gSaveBlock1Ptr->questLog[sceneNum].warpId;
+        sp0.x = gSaveBlock1Ptr->questLog[sceneNum].x;
+        sp0.y = gSaveBlock1Ptr->questLog[sceneNum].y;
         sub_8055D5C(&sp0);
     }
 }
 
 static void sub_8111368(void)
 {
-    gUnknown_203ADFA = 2;
+    gQuestLogState = 2;
     ResetSpecialVars();
     ClearBag();
     ClearPCItemSlots();
     if (sub_8110AC8() == 1)
     {
-        sub_8111274(gUnknown_203ADF8, 0);
+        sub_8111274(sCurrentSceneNum, FALSE);
         gFieldCallback2 = sub_8111038;
         SetMainCallback2(sub_80572A8);
     }
     else
     {
-        sub_8111274(gUnknown_203ADF8, 1);
+        sub_8111274(sCurrentSceneNum, TRUE);
         WarpIntoMap();
         gFieldCallback2 = sub_8111000;
         SetMainCallback2(sub_805726C);
@@ -836,7 +844,7 @@ static void sub_8111368(void)
 
 void sub_81113E4(void)
 {
-    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[gUnknown_203ADF8];
+    struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sCurrentSceneNum];
 
     CpuCopy16(questLog->flags, gSaveBlock1Ptr->flags, FLAGS_COUNT * sizeof(u8));
     CpuCopy16(questLog->vars, gSaveBlock1Ptr->vars, VARS_COUNT * sizeof(u16));
@@ -992,7 +1000,7 @@ void sub_8111708(void)
     }
 }
 
-static void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
+static void sub_811175C(u8 sceneNum, struct UnkStruct_203AE98 * a1)
 {
     u16 i;
     u16 *r4;
@@ -1000,30 +1008,30 @@ static void sub_811175C(u8 a0, struct UnkStruct_203AE98 * a1)
     u16 r9 = 0;
 
     memset(a1, 0, 32 * sizeof(struct UnkStruct_203AE98));
-    for (i = 0; i < 32; i++)
+    for (i = 0; i < NELEMS(gUnknown_203AE0C); i++)
     {
         gUnknown_203AE0C[i] = NULL;
     }
 
-    r4 = gSaveBlock1Ptr->questLog[a0].unk_568;
+    r4 = gSaveBlock1Ptr->questLog[sceneNum].unk_568;
     for (i = 0; i < 32; i++)
     {
         switch (r4[0] & 0xFFF)
         {
-        case 0:
+        case QL_EVENT_0:
             r4 = sub_8113D08(r4, &a1[r6]);
             r6++;
             break;
-        case 1:
-        case 2:
+        case QL_EVENT_1:
+        case QL_EVENT_2:
             r4 = sub_8113D94(r4, &a1[r6]);
             r6++;
             break;
-        case 39:
+        case QL_EVENT_39:
             r4 = sub_8113C20(r4, &a1[r6]);
             r6++;
             break;
-        case 41:
+        case QL_EVENT_41:
             r4 = sub_8113C8C(r4, &a1[r6]);
             r6++;
             break;
@@ -1050,7 +1058,7 @@ static void QuestLog_AdvancePlayhead(void)
     if (!gPaletteFade.active)
     {
         ScriptContext2_Enable();
-        if (++gUnknown_203ADF8 < 4 && gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000)
+        if (++sCurrentSceneNum < QUEST_LOG_SCENE_COUNT && gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000)
         {
             sNumScenes--;
             sub_8111368();
@@ -1058,12 +1066,12 @@ static void QuestLog_AdvancePlayhead(void)
         else
         {
             gUnknown_3005E88 = 0;
-            QuestLog_EndPlayback();
+            QuestLog_StartFinalScene();
         }
     }
 }
 
-static void QuestLog_EndPlayback(void)
+static void QuestLog_StartFinalScene(void)
 {
     ResetSpecialVars();
     Save_ResetSaveCounters();
@@ -1071,7 +1079,7 @@ static void QuestLog_EndPlayback(void)
     SetMainCallback2(sub_8057430);
     gFieldCallback2 = sub_8111F60;
     FreeAllWindowBuffers();
-    gUnknown_203ADFA = 3;
+    gQuestLogState = 3;
     sQuestLogCB = NULL;
 }
 
@@ -1084,7 +1092,7 @@ bool8 QuestLog_SchedulePlaybackCB(void (*callback)(void))
 {
     u8 taskId;
 
-    switch (gUnknown_203ADFA)
+    switch (gQuestLogState)
     {
         case 1:
             sub_8112364();
@@ -1144,12 +1152,12 @@ static void sub_8111AD8(void)
     {
         if (++gUnknown_203AE94.unk_3 > 15)
         {
-            sub_8111E20();
+            QuestLog_CloseTextWindow();
             gUnknown_203AE94.unk_0_4 = 0;
             gUnknown_203AE94.unk_3 = 0;
         }
     }
-    if (gUnknown_203AE94.unk_1 < 32)
+    if (gUnknown_203AE94.unk_1 < NELEMS(gUnknown_203AE0C))
     {
         if (sub_8113B44(gUnknown_203AE0C[gUnknown_203AE94.unk_1]) == 1)
             sub_8111B80();
@@ -1170,7 +1178,7 @@ static void sub_8111B80(void)
             gUnknown_203AE94.unk_1++;
         if (gUnknown_203AE94.unk_1 > 32)
             return;
-        sub_8111D10();
+        DrawQuestLogSceneDescription();
     }
     sub_8112888(1);
 }
@@ -1197,7 +1205,7 @@ static u8 sub_8111BD4(void)
 
 bool8 sub_8111C2C(void)
 {
-    if (gUnknown_203ADFA != 2)
+    if (gQuestLogState != 2)
         return FALSE;
     if (gUnknown_3005E88 == 0 || gUnknown_203AE94.unk_0_0 == 1 || gUnknown_203AE94.unk_0_0 == 2)
         return TRUE;
@@ -1232,24 +1240,24 @@ bool8 sub_8111CD0(void)
 
 void sub_8111CF0(void)
 {
-    if (gUnknown_203ADFA == 2)
-        sub_8111070(sNumScenes);
+    if (gQuestLogState == 2)
+        DrawPreviouslyOnQuestHeader(sNumScenes);
 }
 
-static void sub_8111D10(void)
+static void DrawQuestLogSceneDescription(void)
 {
     u16 i;
-    u8 count = 0;
+    u8 numLines = 0;
 
     for (i = 0; i < 0x100 && gStringVar4[i] != EOS; i++)
     {
         if (gStringVar4[i] == CHAR_NEWLINE)
-            count++;
+            numLines++;
     }
 
     PutWindowTilemap(gUnknown_203ADFE[2]);
     sub_8111D90(gUnknown_203ADFE[2]);
-    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, gUnknown_8456698[count], 1, 0, gUnknown_8456634, 0, gStringVar4);
+    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, sQuestLogTextLineYCoords[numLines], 1, 0, sTextColors, 0, gStringVar4);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1290,7 +1298,7 @@ static void sub_8111D90(u8 a0)
     }
 }
 
-static void sub_8111E20(void)
+static void QuestLog_CloseTextWindow(void)
 {
     ClearWindowTilemap(gUnknown_203ADFE[2]);
     FillWindowPixelRect(gUnknown_203ADFE[2], 15, 0, 0, 0xf0, 0x30);
@@ -1310,20 +1318,20 @@ static void QuestLog_WaitFadeAndCancelPlayback(void)
     if (!gPaletteFade.active)
     {
         ScriptContext2_Enable();
-        for (gUnknown_203ADF8 = gUnknown_203ADF8; gUnknown_203ADF8 < 4; gUnknown_203ADF8++)
+        for (sCurrentSceneNum = sCurrentSceneNum; sCurrentSceneNum < QUEST_LOG_SCENE_COUNT; sCurrentSceneNum++)
         {
-            if (gSaveBlock1Ptr->questLog[gUnknown_203ADF8].unk_000 == 0)
+            if (gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 == 0)
                 break;
-            sub_811175C(gUnknown_203ADF8, gUnknown_203AE98);
+            sub_811175C(sCurrentSceneNum, gUnknown_203AE98);
         }
         gUnknown_3005E88 = 0;
-        QuestLog_EndPlayback();
+        QuestLog_StartFinalScene();
     }
 }
 
 void sub_8111F14(void)
 {
-    if (gUnknown_203ADFA == 3)
+    if (gQuestLogState == 3)
         gUnknown_203AE90 = AllocZeroed(0x200 * sizeof(u16));
 }
 
@@ -1335,7 +1343,7 @@ void sub_8111F38(u16 a0, u16 a1)
 static bool8 sub_8111F60(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
-    sub_8111070(0);
+    DrawPreviouslyOnQuestHeader(0);
     sub_807DF7C();
     CreateTask(sub_8111F8C, 0xFF);
     return TRUE;
@@ -1351,11 +1359,11 @@ static void sub_8111F8C(u8 taskId)
         sub_805C270();
         sub_805C780();
         ScriptContext2_Enable();
-        task->func = sub_8111FCC;
+        task->func = Task_QuestLogScene_SavedGame;
     }
 }
 
-static void sub_8111FCC(u8 taskId)
+static void Task_QuestLogScene_SavedGame(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1364,45 +1372,52 @@ static void sub_8111FCC(u8 taskId)
         if (gUnknown_203AE94.unk_0_6 != 1)
         {
             GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
-            StringExpandPlaceholders(gStringVar4, gUnknown_841B073);
-            sub_8111D10();
+            StringExpandPlaceholders(gStringVar4, QuestLog_Text_SavedGameAtLocation);
+            DrawQuestLogSceneDescription();
         }
         task->data[0] = 0;
         task->data[1] = 0;
-        task->func = sub_8112044;
+        task->func = Task_WaitAtEndOfQuestLog;
         FreezeObjectEvents();
         ScriptContext2_Enable();
     }
 }
 
-static void sub_8112044(u8 taskId)
+#define tTimer data[0]
+
+static void Task_WaitAtEndOfQuestLog(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON) || task->data[0] >= 0x7f || gUnknown_203AE94.unk_0_6 == 1)
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON) || task->tTimer >= 127 || gUnknown_203AE94.unk_0_6 == 1)
     {
-        sub_8111E20();
-        task->data[0] = 0;
-        task->func = sub_81120AC;
-        gUnknown_203ADFA = 0;
+        QuestLog_CloseTextWindow();
+        task->tTimer = 0;
+        task->func = Task_EndQuestLog;
+        gQuestLogState = 0;
     }
     else
-        task->data[0]++;
+        task->tTimer++;
 }
 
-static void sub_81120AC(u8 taskId)
+#undef tTimer
+
+#define tState data[0]
+#define tTimer data[1]
+
+static void Task_EndQuestLog(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u8 i;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
         gDisableMapMusicChangeOnMapLoad = 0;
         Overworld_PlaySpecialMapMusic();
         sub_811229C();
         FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);
-        data[0]++;
+        tState++;
         break;
     case 1:
         if (sub_81121D8(taskId))
@@ -1413,15 +1428,15 @@ static void sub_81120AC(u8 taskId)
                 CopyWindowToVram(gUnknown_203ADFE[i], 1);
                 RemoveWindow(gUnknown_203ADFE[i]);
             }
-            data[1] = 0;
-            data[0]++;
+            tTimer = 0;
+            tState++;
         }
         break;
     case 2:
-        if (data[1] < 32)
-            data[1]++;
+        if (tTimer < 32)
+            tTimer++;
         else
-            data[0]++;
+            tState++;
         break;
     default:
         if (gUnknown_203AE94.unk_0_6 == 1)
@@ -1439,6 +1454,9 @@ static void sub_81120AC(u8 taskId)
         break;
     }
 }
+
+#undef tState
+#undef tTimer
 
 static bool8 sub_81121D8(u8 taskId)
 {
@@ -1472,11 +1490,11 @@ static void sub_811229C(void)
 
 void sub_811231C(void)
 {
-    if (gUnknown_203ADFA == 1)
+    if (gQuestLogState == 1)
     {
         sub_8110E68(gUnknown_203AE98);
         sub_8110E3C();
-        gUnknown_203ADFA = 0;
+        gQuestLogState = 0;
         sQuestLogCB = NULL;
         gUnknown_203AE04 = NULL;
         gUnknown_203AE08 = NULL;
@@ -1486,13 +1504,13 @@ void sub_811231C(void)
 
 void sub_8112364(void)
 {
-    if (gUnknown_3005E88 && gUnknown_203ADFA == 1)
+    if (gUnknown_3005E88 && gQuestLogState == 1)
     {
         sub_8110E68(gUnknown_203AE98);
         sub_8113A1C(1);
         sub_8110E3C();
         gUnknown_3005E88 = 0;
-        gUnknown_203ADFA = 0;
+        gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
     gUnknown_203AE04 = NULL;
@@ -1501,29 +1519,29 @@ void sub_8112364(void)
 
 void sub_81123BC(void)
 {
-    struct QuestLog * buffer = AllocZeroed(4 * sizeof(struct QuestLog));
+    struct QuestLog * buffer = AllocZeroed(QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
     u8 i;
-    u8 r4 = gUnknown_203ADF8;
+    u8 sceneNum = sCurrentSceneNum;
     u8 count = 0;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < QUEST_LOG_SCENE_COUNT; i++)
     {
-        if (r4 > 3)
-            r4 = 0;
-        if (gSaveBlock1Ptr->questLog[r4].unk_000)
+        if (sceneNum >= QUEST_LOG_SCENE_COUNT)
+            sceneNum = 0;
+        if (gSaveBlock1Ptr->questLog[sceneNum].unk_000)
         {
-            buffer[count] = gSaveBlock1Ptr->questLog[r4];
+            buffer[count] = gSaveBlock1Ptr->questLog[sceneNum];
             count++;
         }
-        r4++;
+        sceneNum++;
     }
-    gUnknown_203ADF8 = count % 4;
-    CpuCopy16(buffer, gSaveBlock1Ptr->questLog, 4 * sizeof(struct QuestLog));
+    sCurrentSceneNum = count % QUEST_LOG_SCENE_COUNT;
+    CpuCopy16(buffer, gSaveBlock1Ptr->questLog, QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
     Free(buffer);
 }
 
 void sub_8112450(void)
 {
-    if (MenuHelpers_LinkSomething() != 1)
+    if (MenuHelpers_LinkSomething() != TRUE)
     {
         sub_8112364();
         sub_81123BC();
@@ -1533,26 +1551,26 @@ void sub_8112450(void)
 void sub_811246C(struct Sprite *sprite)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
-    if (objectEvent->localId == 0xFF)
+    if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
     {
-        if (gUnknown_203AF9A[0][0] != 0xFF)
+        if (gUnknown_203AF9A[0][0] != OBJ_EVENT_ID_PLAYER)
         {
             ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[0][0]);
-            gUnknown_203AF9A[0][0] = 0xFF;
+            gUnknown_203AF9A[0][0] = OBJ_EVENT_ID_PLAYER;
         }
-        if (gUnknown_203AF9A[0][1] != 0xFF)
+        if (gUnknown_203AF9A[0][1] != OBJ_EVENT_ID_PLAYER)
         {
             sub_8150454();
-            gUnknown_203AF9A[0][1] = 0xFF;
+            gUnknown_203AF9A[0][1] = OBJ_EVENT_ID_PLAYER;
         }
         sub_8063E28(objectEvent, sprite);
     }
     else
     {
-        if (gUnknown_203AF9A[objectEvent->localId][0] != 0xFF)
+        if (gUnknown_203AF9A[objectEvent->localId][0] != OBJ_EVENT_ID_PLAYER)
         {
             ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[objectEvent->localId][0]);
-            gUnknown_203AF9A[objectEvent->localId][0] = 0xFF;
+            gUnknown_203AF9A[objectEvent->localId][0] = OBJ_EVENT_ID_PLAYER;
         }
         sub_8063E28(objectEvent, sprite);
     }
@@ -1745,18 +1763,18 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
         gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
         switch (GetPlayerFacingDirection())
         {
-        case 0:
-        case 1:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
+        case DIR_NONE:
+        case DIR_SOUTH:
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_SOUTH - 1;
             break;
-        case 4:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = 3;
+        case DIR_EAST:
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_EAST - 1;
             break;
-        case 2:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = 1;
+        case DIR_NORTH:
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_NORTH - 1;
             break;
-        case 3:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = 2;
+        case DIR_WEST:
+            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_WEST - 1;
             break;
         }
         gUnknown_203B01C = 0;
@@ -1935,6 +1953,10 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
     }
 }
 
+
+// Probable file boundary, help_message.c below, quest_log.c above
+
+
 const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
 
 static const struct WindowTemplate sHelpMessageWindowTemplate = {
@@ -2101,60 +2123,62 @@ void sub_8112F18(u8 windowId)
 }
 #endif
 
-void sub_8112FD0(void)
+static void sub_8112FD0(void)
 {
     sub_8112F18(sHelpMessageWindowId);
 }
 
-static const u8 gUnknown_8456930[3] = {
-    0, 10, 2
-};
+static const u8 sHelpMessageTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_DARK_GREY};
 
-void sub_8112FE4(const u8 *a0)
+static void PrintHelpMessageText(const u8 *text)
 {
-    AddTextPrinterParameterized4(sHelpMessageWindowId, 0x02, 2, 5, 1, 1, gUnknown_8456930, -1, a0);
+    AddTextPrinterParameterized4(sHelpMessageWindowId, 2, 2, 5, 1, 1, sHelpMessageTextColors, -1, text);
 }
 
 void PrintTextOnHelpMessageWindow(const u8 *text, u8 mode)
 {
     sub_8112FD0();
-    sub_8112FE4(text);
+    PrintHelpMessageText(text);
     if (mode)
         CopyWindowToVram(sHelpMessageWindowId, mode);
 }
 
-void sub_8113044(void)
+
+// Probable file boundary, trainer_fan_club.c below, help_message.c above
+
+
+void ResetTrainerFanClub(void)
 {
-    VarSet(VAR_0x4038, 0);
-    VarSet(VAR_0x4039, 0);
+    VarSet(VAR_FANCLUB_FAN_COUNTER, 0);
+    VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, 0);
 }
 
-void sub_8113064(void)
+void Special_TryLoseFansFromPlayTimeAfterLinkBattle(void)
 {
-    sub_8113078(VAR_0x4038_STRUCT);
+    TryLoseFansFromPlayTimeAfterLinkBattle(TRAINER_FAN_CLUB);
 }
 
-static void sub_8113078(struct Var4038Struct * varPtr)
+static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *fanClub)
 {
-    if (sub_8113508(varPtr))
+    if (DidPlayerGetFirstFans(fanClub))
     {
-        sub_81132E0(varPtr);
-        VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+        TryLoseFansFromPlayTime(fanClub);
+        VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, gSaveBlock2Ptr->playTimeHours);
     }
 }
 
-void sub_81130A8(void)
+void Special_UpdateTrainerFanClubGameClear(void)
 {
-    sub_81130BC(VAR_0x4038_STRUCT);
+    UpdateTrainerFanClubGameClear(TRAINER_FAN_CLUB);
 }
 
-static void sub_81130BC(struct Var4038Struct * varPtr)
+static void UpdateTrainerFanClubGameClear(struct TrainerFanClub *fanClub)
 {
-    if (!varPtr->unk_0_7)
+    if (!fanClub->gotInitialFans)
     {
-        sub_8113524(varPtr);
-        sub_8113390(varPtr);
-        VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+        SetPlayerGotFirstFans(fanClub);
+        SetInitialFansOfPlayer(fanClub);
+        VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, gSaveBlock2Ptr->playTimeHours);
         FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT);
         FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER);
         FlagClear(FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN);
@@ -2163,199 +2187,221 @@ static void sub_81130BC(struct Var4038Struct * varPtr)
     }
 }
 
-ALIGNED(4) const u8 gUnknown_8456934[] = {2, 1, 2, 1};
+ALIGNED(4) const u8 sCounterIncrements[] = {2, 1, 2, 1};
 
-u8 sub_8113114(struct Var4038Struct * a0, u8 a1)
+static u8 TryGainNewFanFromCounter(struct TrainerFanClub *fanClub, u8 a1)
 {
     if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
-        if (a0->unk_0_0 + gUnknown_8456934[a1] >= 20)
+        if (fanClub->timer + sCounterIncrements[a1] >= 20)
         {
-            if (sub_81132A0(a0) < 3)
+            if (GetNumFansOfPlayerInTrainerFanClub(fanClub) < 3)
             {
-                sub_8113194(a0);
-                a0->unk_0_0 = 0;
+                PlayerGainRandomTrainerFan(fanClub);
+                fanClub->timer = 0;
             }
             else
-                a0->unk_0_0 = 20;
+                fanClub->timer = 20;
         }
         else
-            a0->unk_0_0 += gUnknown_8456934[a1];
+            fanClub->timer += sCounterIncrements[a1];
     }
 
-    return a0->unk_0_0;
+    return fanClub->timer;
 }
 
-static const u8 gUnknown_8456938[] = {
-    1, 3, 5, 0, 7, 6, 4, 2
-};
 
-static u8 sub_8113194(struct Var4038Struct * a0)
+static u8 PlayerGainRandomTrainerFan(struct TrainerFanClub *fanClub)
 {
-    u8 i;
-    u8 retval = 0;
-
-    for (i = 0; i < 8; i++)
+    static const u8 sFanClubMemberIds[] = 
     {
-        if (!((a0->unk_1 >> gUnknown_8456938[i]) & 1))
+        FANCLUB_MEMBER2, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER6, 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER8, 
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER3
+    };
+
+    u8 i;
+    u8 idx = 0;
+
+    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
+    {
+        if (!(GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i])))
         {
-            retval = i;
+            idx = i;
             if (Random() % 2)
             {
-                a0->unk_1 |= 1 << gUnknown_8456938[i];
-                return gUnknown_8456938[i];
+                SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]);
+                return sFanClubMemberIds[i];
             }
         }
     }
-    a0->unk_1 |= 1 << gUnknown_8456938[retval];
-    return gUnknown_8456938[retval];
+
+    SET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+    return sFanClubMemberIds[idx];
 }
 
-static const u8 gUnknown_8456940[] = {
-    5, 6, 3, 7, 4, 1, 0, 2
-};
-
-u8 sub_81131FC(struct Var4038Struct * a0)
+static u8 PlayerLoseRandomTrainerFan(struct TrainerFanClub *fanClub)
 {
-    u8 i;
-    u8 retval = 0;
+    static const u8 sFanClubMemberIds[] = 
+    {
+        FANCLUB_MEMBER6, 
+        FANCLUB_MEMBER7, 
+        FANCLUB_MEMBER4, 
+        FANCLUB_MEMBER8, 
+        FANCLUB_MEMBER5, 
+        FANCLUB_MEMBER2, 
+        FANCLUB_MEMBER1, 
+        FANCLUB_MEMBER3
+    };
 
-    if (sub_81132A0(a0) == 1)
+    u8 i;
+    u8 idx = 0;
+
+    if (GetNumFansOfPlayerInTrainerFanClub(fanClub) == 1)
         return 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
     {
-        if ((a0->unk_1 >> gUnknown_8456940[i]) & 1)
+        if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]))
         {
-            retval = i;
+            idx = i;
             if (Random() % 2)
             {
-                a0->unk_1 ^= 1 << gUnknown_8456940[i];
-                return gUnknown_8456940[i];
+                FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[i]);
+                return sFanClubMemberIds[i];
             }
         }
     }
-    if ((a0->unk_1 >> gUnknown_8456940[retval]) & 1)
-        a0->unk_1 ^= 1 << gUnknown_8456940[retval];
-    return gUnknown_8456940[retval];
+
+    if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]))
+        FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
+
+    return sFanClubMemberIds[idx];
 }
 
-u16 GetNumMovedSaffronFanClubMembers(void)
+u16 Special_GetNumFansOfPlayerInTrainerFanClub(void)
 {
-    return sub_81132A0(VAR_0x4038_STRUCT);
+    return GetNumFansOfPlayerInTrainerFanClub(TRAINER_FAN_CLUB);
 }
 
-static u16 sub_81132A0(struct Var4038Struct * a0)
+static u16 GetNumFansOfPlayerInTrainerFanClub(struct TrainerFanClub *fanClub)
 {
     u8 count = 0;
     u8 i;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < NUM_TRAINER_FAN_CLUB_MEMBERS; i++)
     {
-        if ((a0->unk_1 >> i) & 1)
+        if (GET_TRAINER_FAN_CLUB_FLAG(i))
             count++;
     }
 
     return count;
 }
 
-void UpdateMovedSaffronFanClubMembers(void)
+void Special_TryLoseFansFromPlayTime(void)
 {
-    sub_81132E0(VAR_0x4038_STRUCT);
+    TryLoseFansFromPlayTime(TRAINER_FAN_CLUB);
 }
 
-static void sub_81132E0(struct Var4038Struct * a0)
+static void TryLoseFansFromPlayTime(struct TrainerFanClub *fanClub)
 {
     u8 i = 0;
-    u16 var_4039;
+    u16 timer;
 
     if (gSaveBlock2Ptr->playTimeHours < 999)
     {
         while (1)
         {
-            if (sub_81132A0(a0) < 5)
+            if (GetNumFansOfPlayerInTrainerFanClub(fanClub) < 5)
             {
-                VarSet(VAR_0x4039, gSaveBlock2Ptr->playTimeHours);
+                VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, gSaveBlock2Ptr->playTimeHours);
                 break;
             }
-            if (i == 8)
+            if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
                 break;
-            var_4039 = VarGet(VAR_0x4039);
-            if (gSaveBlock2Ptr->playTimeHours - var_4039 < 12)
+
+            timer = VarGet(VAR_FANCLUB_LOSE_FAN_TIMER);
+            if (gSaveBlock2Ptr->playTimeHours - timer < 12)
                 break;
-            sub_81131FC(a0);
-            var_4039 = VarGet(VAR_0x4039);
-            VarSet(VAR_0x4039, var_4039 + 12);
+
+            PlayerLoseRandomTrainerFan(fanClub);
+            timer = VarGet(VAR_FANCLUB_LOSE_FAN_TIMER);
+            VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, timer + 12);
             i++;
         }
     }
 }
 
-bool16 ShouldMoveSaffronFanClubMember(void)
+bool16 Special_IsFanClubMemberFanOfPlayer(void)
 {
-    return sub_811337C(VAR_0x4038_STRUCT);
+    return IsFanClubMemberFanOfPlayer(TRAINER_FAN_CLUB);
 }
 
-static bool16 sub_811337C(struct Var4038Struct * a0)
+static bool16 IsFanClubMemberFanOfPlayer(struct TrainerFanClub *fanClub)
 {
-    return (a0->unk_1 >> gSpecialVar_0x8004) & 1;
+    return GET_TRAINER_FAN_CLUB_FLAG(gSpecialVar_0x8004);
 }
 
-static void sub_8113390(struct Var4038Struct * a0)
+static void SetInitialFansOfPlayer(struct TrainerFanClub *fanClub)
 {
-    a0->unk_1 |= 1;
-    a0->unk_1 |= 2;
-    a0->unk_1 |= 4;
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER1);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER2);
+    SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER3);
 }
 
-void BufferStreakTrainerText(void)
+void Special_BufferFanClubTrainerName(void)
 {
-    u8 r3 = 0;
-    u8 r2 = 0;
+    u8 whichLinkTrainer = 0;
+    u8 whichNPCTrainer = 0;
 
     switch (gSpecialVar_0x8004)
     {
-    case 0:
-        r2 = 0;
-        r3 = 0;
+    case FANCLUB_MEMBER1:
+        whichNPCTrainer = 0;
+        whichLinkTrainer = 0;
         break;
-    case 1:
-    case 2:
-    case 3:
-    case 7:
+    case FANCLUB_MEMBER2:
+    case FANCLUB_MEMBER3:
+    case FANCLUB_MEMBER4:
+    case FANCLUB_MEMBER8:
         break;
-    case 4:
-        r2 = 1;
-        r3 = 0;
+    case FANCLUB_MEMBER5:
+        whichNPCTrainer = 1;
+        whichLinkTrainer = 0;
         break;
-    case 5:
-        r2 = 0;
-        r3 = 1;
+    case FANCLUB_MEMBER6:
+        whichNPCTrainer = 0;
+        whichLinkTrainer = 1;
         break;
-    case 6:
-        r2 = 2;
-        r3 = 1;
+    case FANCLUB_MEMBER7:
+        whichNPCTrainer = 2;
+        whichLinkTrainer = 1;
         break;
     }
-    sub_8113414(&gSaveBlock2Ptr->linkBattleRecords, r3, r2);
+    BufferFanClubTrainerName(&gSaveBlock2Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
 }
 
-static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
+static void BufferFanClubTrainerName(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
     u8 *str;
-    const u8 *src = a0->entries[a1].name;
-    if (src[0] == EOS)
+    const u8 *linkTrainerName = linkRecords->entries[whichLinkTrainer].name;
+    if (linkTrainerName[0] == EOS)
     {
-        switch (a2)
+        switch (whichNPCTrainer)
         {
         case 0:
             StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
             break;
         case 1:
-            StringCopy(gStringVar1, gUnknown_84178D0); // LT. SURGE
+            StringCopy(gStringVar1, gText_LtSurge);
             break;
         case 2:
-            StringCopy(gStringVar1, gUnknown_84178DA); // KOGA
+            StringCopy(gStringVar1, gText_Koga);
             break;
         default:
             StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
@@ -2365,8 +2411,8 @@ static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
     else
     {
         str = gStringVar1;
-        StringCopyN(str, src, 7);
-        str[7] = EOS;
+        StringCopyN(str, linkTrainerName, PLAYER_NAME_LENGTH - 1);
+        str[PLAYER_NAME_LENGTH - 1] = EOS;
         if (   str[0] == EXT_CTRL_CODE_BEGIN
             && str[1] == EXT_CTRL_CODE_JPN)
         {
@@ -2380,109 +2426,113 @@ static void sub_8113414(struct LinkBattleRecords * a0, u8 a1, u8 a2)
     }
 }
 
-void sub_81134B8(void)
+void Special_UpdateTrainerFansAfterLinkBattle(void)
 {
-    sub_81134CC(VAR_0x4038_STRUCT);
+    UpdateTrainerFansAfterLinkBattle(TRAINER_FAN_CLUB);
 }
 
-static void sub_81134CC(struct Var4038Struct * a0)
+static void UpdateTrainerFansAfterLinkBattle(struct TrainerFanClub *fanClub)
 {
     if (VarGet(VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) == 2)
     {
-        sub_8113078(a0);
+        TryLoseFansFromPlayTimeAfterLinkBattle(fanClub);
         if (gBattleOutcome == B_OUTCOME_WON)
-            sub_8113194(a0);
+            PlayerGainRandomTrainerFan(fanClub);
         else
-            sub_81131FC(a0);
+            PlayerLoseRandomTrainerFan(fanClub);
     }
 }
 
-static bool8 sub_8113508(struct Var4038Struct * a0)
+static bool8 DidPlayerGetFirstFans(struct TrainerFanClub *fanClub)
 {
-    return a0->unk_0_7;
+    return fanClub->gotInitialFans;
 }
 
-void sub_8113510(void)
+void Special_SetPlayerGotFirstFans(void)
 {
-    sub_8113524(VAR_0x4038_STRUCT);
+    SetPlayerGotFirstFans(TRAINER_FAN_CLUB);
 }
 
-static void sub_8113524(struct Var4038Struct * a0)
+static void SetPlayerGotFirstFans(struct TrainerFanClub *fanClub)
 {
-    a0->unk_0_7 = TRUE;
+    fanClub->gotInitialFans = TRUE;
 }
 
-u8 sub_8113530(void)
+u8 Special_TryGainNewFanFromCounter(void)
 {
-    return sub_8113114(VAR_0x4038_STRUCT, gSpecialVar_0x8004);
+    return TryGainNewFanFromCounter(TRAINER_FAN_CLUB, gSpecialVar_0x8004);
 }
+
+
+// Probable file boundary, quest_log_events.c below, trainer_fan_club.c above
+
 
 static u16 *(*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
-    NULL,
-    NULL,
-    NULL,
-    sub_8113F14,
-    sub_8113F80,
-    sub_8114174,
-    sub_81141D0,
-    sub_811422C,
-    sub_8114288,
-    sub_8114310,
-    sub_8114380,
-    sub_81143F0,
-    sub_811445C,
-    sub_81144EC,
-    sub_8114578,
-    sub_8114604,
-    sub_8114710,
-    sub_8114744,
-    sub_8114778,
-    sub_8114808,
-    sub_811488C,
-    sub_8114918,
-    sub_8114990,
-    sub_8114A1C,
-    sub_8114AA0,
-    sub_8114B0C,
-    sub_8114B78,
-    sub_8114BE4,
-    sub_8114C68,
-    sub_8114CC0,
-    sub_8114D4C,
-    sub_8114DE8,
-    sub_8114FF0,
-    sub_8115078,
-    sub_81151C0,
-    sub_8115280,
-    sub_8115410,
-    sub_81154DC,
-    sub_81155A4,
-    NULL,
-    sub_81156D8,
-    NULL,
-    sub_81157DC
+    [QL_EVENT_0]                             = NULL,
+    [QL_EVENT_1]                             = NULL,
+    [QL_EVENT_2]                             = NULL,
+    [QL_EVENT_SWITCHED_PARTY_ORDER]          = BufferQuestLogData_SwitchedPartyOrder,
+    [QL_EVENT_USED_ITEM]                     = BufferQuestLogData_UsedItem,
+    [QL_EVENT_GAVE_HELD_ITEM]                = BufferQuestLogData_GaveHeldItemFromPartyMenu,
+    [QL_EVENT_GAVE_HELD_ITEM_BAG]            = BufferQuestLogData_GaveHeldItemFromBagMenu,
+    [QL_EVENT_GAVE_HELD_ITEM_PC]             = BufferQuestLogData_GaveHeldItemFromPC,
+    [QL_EVENT_TOOK_HELD_ITEM]                = BufferQuestLogData_TookHeldItem,
+    [QL_EVENT_SWAPPED_HELD_ITEM]             = BufferQuestLogData_SwappedHeldItem,
+    [QL_EVENT_SWAPPED_HELD_ITEM_PC]          = BufferQuestLogData_SwappedHeldItemFromPC,
+    [QL_EVENT_USED_PKMN_CENTER]              = BufferQuestLogData_UsedPkmnCenter,
+    [QL_EVENT_LINK_TRADED]                   = BufferQuestLogData_LinkTraded,
+    [QL_EVENT_LINK_BATTLED_SINGLE]           = BufferQuestLogData_LinkBattledSingle,
+    [QL_EVENT_LINK_BATTLED_DOUBLE]           = BufferQuestLogData_LinkBattledDouble,
+    [QL_EVENT_LINK_BATTLED_MULTI]            = BufferQuestLogData_LinkBattledMulti,
+    [QL_EVENT_USED_UNION_ROOM]               = BufferQuestLogData_UsedUnionRoom,
+    [QL_EVENT_USED_UNION_ROOM_CHAT]          = BufferQuestLogData_UsedUnionRoomChat,
+    [QL_EVENT_LINK_TRADED_UNION]             = BufferQuestLogData_LinkTradedUnionRoom,
+    [QL_EVENT_LINK_BATTLED_UNION]            = BufferQuestLogData_LinkBattledUnionRoom,
+    [QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES]   = BufferQuestLogData_SwitchedMonsBetweenBoxes,
+    [QL_EVENT_SWITCHED_MONS_WITHIN_BOX]      = BufferQuestLogData_SwitchedMonsWithinBox,
+    [QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON] = BufferQuestLogData_SwitchedPartyMonForPCMon,
+    [QL_EVENT_MOVED_MON_BETWEEN_BOXES]       = BufferQuestLogData_MovedMonBetweenBoxes,
+    [QL_EVENT_MOVED_MON_WITHIN_BOX]          = BufferQuestLogData_MovedMonWithinBox,
+    [QL_EVENT_WITHDREW_MON_PC]               = BufferQuestLogData_WithdrewMonFromPC,
+    [QL_EVENT_DEPOSITED_MON_PC]              = BufferQuestLogData_DepositedMonInPC,
+    [QL_EVENT_SWITCHED_MULTIPLE_MONS]        = BufferQuestLogData_SwitchedMultipleMons,
+    [QL_EVENT_DEPOSITED_ITEM_PC]             = BufferQuestLogData_DepositedItemInPC,
+    [QL_EVENT_WITHDREW_ITEM_PC]              = BufferQuestLogData_WithdrewItemFromPC,
+    [QL_EVENT_DEFEATED_GYM_LEADER]           = BufferQuestLogData_DefeatedGymLeader,
+    [QL_EVENT_DEFEATED_WILD_MON]             = BufferQuestLogData_DefeatedWildMon,
+    [QL_EVENT_DEFEATED_E4_MEMBER]            = BufferQuestLogData_DefeatedEliteFourMember,
+    [QL_EVENT_DEFEATED_CHAMPION]             = BufferQuestLogData_DefeatedChampion,
+    [QL_EVENT_DEFEATED_TRAINER]              = BufferQuestLogData_DefeatedTrainer,
+    [QL_EVENT_DEPARTED]                      = BufferQuestLogData_DepartedLocation,
+    [QL_EVENT_USED_FIELD_MOVE]               = BufferQuestLogData_UsedFieldMove,
+    [QL_EVENT_BOUGHT_ITEM]                   = BufferQuestLogData_BoughtItem,
+    [QL_EVENT_SOLD_ITEM]                     = BufferQuestLogData_SoldItem,
+    [QL_EVENT_39]                            = NULL,
+    [QL_EVENT_OBTAINED_ITEM]                 = BufferQuestLogData_ObtainedItem,
+    [QL_EVENT_41]                            = NULL,
+    [QL_EVENT_ARRIVED]                       = BufferQuestLogData_ArrivedInLocation
 };
 
-void sub_8113550(u16 a0, const u16 *a1)
+void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 {
     u16 *r1;
 
-    if (a0 == 35 && gUnknown_203B048 == 2)
+    if (eventId == QL_EVENT_DEPARTED && gUnknown_203B048 == 2)
     {
         sub_811381C();
         return;
     }
     sub_811381C();
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
         return;
 
-    if (a0 < 3 || a0 > 42)
+    if (!IS_VALID_QL_EVENT(eventId))
         return;
 
-    if (sub_81136D4() == TRUE)
+    if (InQuestLogDisabledLocation() == TRUE)
         return;
 
-    if (sub_81138A0(a0, a1) == TRUE)
+    if (TrySetLinkQuestLogEvent(eventId, eventData) == TRUE)
         return;
 
     if (MenuHelpers_LinkSomething() == TRUE)
@@ -2491,54 +2541,54 @@ void sub_8113550(u16 a0, const u16 *a1)
     if (InUnionRoom() == TRUE)
         return;
 
-    if (sub_8113954(a0, a1) == TRUE)
+    if (TrySetTrainerBattleQuestLogEvent(eventId, eventData) == TRUE)
         return;
 
-    if (sub_8113A44(a0, a1) == TRUE)
+    if (IsQuestLogEventWithSpecialEncounterSpecies(eventId, eventData) == TRUE)
         return;
 
-    if (sub_81153E4(a0, a1) == FALSE)
+    if (sub_81153E4(eventId, eventData) == FALSE)
         return;
 
     if (gUnknown_3005E88 == 0)
     {
-        if (sub_8113778(a0, a1) == TRUE)
+        if (sub_8113778(eventId, eventData) == TRUE)
             return;
 
-        if (a0 != 31 || gUnknown_203AE04 == NULL)
+        if (eventId != QL_EVENT_DEFEATED_WILD_MON || gUnknown_203AE04 == NULL)
         {
-            if (sub_81153A8(a0, a1) == FALSE)
+            if (sub_81153A8(eventId, eventData) == FALSE)
                 return;
-            sub_8110AEC(a0);
+            sub_8110AEC(eventId);
         }
     }
-    else if (a0 == 40)
+    else if (eventId == QL_EVENT_OBTAINED_ITEM)
         return;
 
-    sub_8113B94(a0);
-    if (a0 == 31)
+    sub_8113B94(eventId);
+    if (eventId == QL_EVENT_DEFEATED_WILD_MON)
     {
         if (gUnknown_203AE04 == NULL)
         {
             gUnknown_203AE04 = gUnknown_203AE08;
-            r1 = sQuestLogStorageCBs[a0](gUnknown_203AE04, a1);
+            r1 = sQuestLogStorageCBs[eventId](gUnknown_203AE04, eventData);
         }
         else
         {
-            sQuestLogStorageCBs[a0](gUnknown_203AE04, a1);
+            sQuestLogStorageCBs[eventId](gUnknown_203AE04, eventData);
             return;
         }
     }
     else
     {
         gUnknown_203AE04 = NULL;
-        r1 = sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
+        r1 = sQuestLogStorageCBs[eventId](gUnknown_203AE08, eventData);
     }
 
     if (r1 == NULL)
     {
         sub_811231C();
-        r1 = sub_8113828(a0, a1);
+        r1 = sub_8113828(eventId, eventData);
         if (r1 == NULL)
             return;
     }
@@ -2549,18 +2599,38 @@ void sub_8113550(u16 a0, const u16 *a1)
     sub_811231C();
 }
 
-static bool8 sub_81136D4(void)
+static bool8 InQuestLogDisabledLocation(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == 2 && (gSaveBlock1Ptr->location.mapNum == 1 || gSaveBlock1Ptr->location.mapNum == 2 || gSaveBlock1Ptr->location.mapNum == 3 || gSaveBlock1Ptr->location.mapNum == 4 || gSaveBlock1Ptr->location.mapNum == 5 || gSaveBlock1Ptr->location.mapNum == 6 || gSaveBlock1Ptr->location.mapNum == 7 || gSaveBlock1Ptr->location.mapNum == 8 || gSaveBlock1Ptr->location.mapNum == 9 || gSaveBlock1Ptr->location.mapNum == 10 || gSaveBlock1Ptr->location.mapNum == 11))
+    // In Trainer Tower
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F)
+        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
-    if (gSaveBlock1Ptr->location.mapGroup == 14 && gSaveBlock1Ptr->location.mapNum == 9)
+    // In pokemon trainer fan club
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB))
         return TRUE;
 
-    if (gSaveBlock1Ptr->location.mapGroup == 31 && (gSaveBlock1Ptr->location.mapNum == 0 || gSaveBlock1Ptr->location.mapNum == 1))
+    // In E-Reader house
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_HOUSE_ROOM1) &&
+        (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM1) 
+      || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM2)))
         return TRUE;
 
-    if ((gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 46) || (gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 58) || (gSaveBlock1Ptr->location.mapGroup == 2 && gSaveBlock1Ptr->location.mapNum == 11) || (gSaveBlock1Ptr->location.mapGroup == 10 && gSaveBlock1Ptr->location.mapNum == 6))
+    // In elevator
+    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 
     return FALSE;
@@ -2568,47 +2638,56 @@ static bool8 sub_81136D4(void)
 
 bool8 sub_8113748(void)
 {
-    if (sub_81136D4() != TRUE)
+    if (InQuestLogDisabledLocation() != TRUE)
         return FALSE;
 
-    if (gUnknown_203ADFA == 2)
+    if (gQuestLogState == 2)
         return TRUE;
 
-    if (gUnknown_203ADFA == 1)
+    if (gQuestLogState == 1)
         sub_8112364();
 
     return FALSE;
 }
 
-static bool8 sub_8113778(u16 a0, const u16 *a1)
+static bool8 sub_8113778(u16 eventId, const u16 *eventData)
 {
-    if (a0 == 36 || a0 == 11)
+    if (eventId == QL_EVENT_USED_FIELD_MOVE || eventId == QL_EVENT_USED_PKMN_CENTER)
         return TRUE;
 
     if (!FlagGet(FLAG_SYS_GAME_CLEAR))
     {
-        if (a0 == 3 || a0 == 31 || sub_81137E4(a0, a1) == TRUE)
+        if (eventId == QL_EVENT_SWITCHED_PARTY_ORDER || eventId == QL_EVENT_DEFEATED_WILD_MON || sub_81137E4(eventId, eventData) == TRUE)
             return TRUE;
     }
 
     if (!FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
-        if (a0 == 4 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8 || a0 == 9 || a0 == 10 || a0 == 22 || a0 == 25 || a0 == 26)
+        if (eventId == QL_EVENT_USED_ITEM 
+         || eventId == QL_EVENT_GAVE_HELD_ITEM 
+         || eventId == QL_EVENT_GAVE_HELD_ITEM_BAG 
+         || eventId == QL_EVENT_GAVE_HELD_ITEM_PC 
+         || eventId == QL_EVENT_TOOK_HELD_ITEM 
+         || eventId == QL_EVENT_SWAPPED_HELD_ITEM 
+         || eventId == QL_EVENT_SWAPPED_HELD_ITEM_PC 
+         || eventId == QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON 
+         || eventId == QL_EVENT_WITHDREW_MON_PC 
+         || eventId == QL_EVENT_DEPOSITED_MON_PC)
             return TRUE;
     }
 
     return FALSE;
 }
 
-static bool8 sub_81137E4(u16 a0, const u16 *a1)
+static bool8 sub_81137E4(u16 eventId, const u16 *eventData)
 {
-    if (a0 == 34)
+    if (eventId == QL_EVENT_DEFEATED_TRAINER)
     {
-        u8 trainerClass = gTrainers[*a1].trainerClass;
-        if (   trainerClass == 0x51
-            || trainerClass == 0x59
-            || trainerClass == 0x5A
-            || trainerClass == 0x53)
+        u8 trainerClass = gTrainers[*eventData].trainerClass;
+        if (   trainerClass == CLASS_RIVAL
+            || trainerClass == CLASS_RIVAL_2
+            || trainerClass == CLASS_CHAMPION_2
+            || trainerClass == CLASS_BOSS)
             return FALSE;
         return TRUE;
     }
@@ -2620,39 +2699,39 @@ static void sub_811381C(void)
     gUnknown_203B048 = 0;
 }
 
-static u16 *sub_8113828(u16 a0, const u16 *a1)
+static u16 *sub_8113828(u16 eventId, const u16 *eventData)
 {
-    if (sub_8113778(a0, a1) == TRUE)
+    if (sub_8113778(eventId, eventData) == TRUE)
         return NULL;
 
-    if (sub_81153A8(a0, a1) == FALSE)
+    if (sub_81153A8(eventId, eventData) == FALSE)
         return NULL;
 
-    sub_8110AEC(a0);
-    sub_8113B94(a0);
+    sub_8110AEC(eventId);
+    sub_8113B94(eventId);
 
-    if (a0 == 31)
+    if (eventId == QL_EVENT_DEFEATED_WILD_MON)
         gUnknown_203AE04 = gUnknown_203AE08;
     else
         gUnknown_203AE04 = NULL;
 
-    return sQuestLogStorageCBs[a0](gUnknown_203AE08, a1);
+    return sQuestLogStorageCBs[eventId](gUnknown_203AE08, eventData);
 }
 
-static bool8 sub_81138A0(u16 a0, const u16 *a1)
+static bool8 TrySetLinkQuestLogEvent(u16 eventId, const u16 *eventData)
 {
-    if (a0 < 12 || a0 > 19)
+    if (!IS_LINK_QL_EVENT(eventId))
         return FALSE;
 
     sub_81138F8();
-    gUnknown_203B024.unk_00 = a0;
+    gUnknown_203B024.unk_00 = eventId;
 
-    if (a0 < 16 || a0 > 17)
+    if (eventId != QL_EVENT_USED_UNION_ROOM && eventId != QL_EVENT_USED_UNION_ROOM_CHAT)
     {
-        if (a0 == 12 || a0 == 18)
-            memcpy(gUnknown_203B024.unk_04, a1, 12);
+        if (eventId == QL_EVENT_LINK_TRADED || eventId == QL_EVENT_LINK_TRADED_UNION)
+            memcpy(gUnknown_203B024.unk_04, eventData, 12);
         else
-            memcpy(gUnknown_203B024.unk_04, a1, 24);
+            memcpy(gUnknown_203B024.unk_04, eventData, 24);
     }
     return TRUE;
 }
@@ -2664,7 +2743,7 @@ void sub_81138F8(void)
 
 void sub_811390C(void)
 {
-    if (gUnknown_203B024.unk_00 != 0)
+    if (gUnknown_203B024.unk_00 != QL_EVENT_0)
     {
         u16 *resp;
         gUnknown_203B04A = 0;
@@ -2675,22 +2754,26 @@ void sub_811390C(void)
     }
 }
 
-static bool8 sub_8113954(u16 a0, const u16 *a1)
+static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
 {
-    if (a0 != 34 && a0 != 30 && a0 != 32 && a0 != 33)
+    if (eventId != QL_EVENT_DEFEATED_TRAINER 
+     && eventId != QL_EVENT_DEFEATED_GYM_LEADER 
+     && eventId != QL_EVENT_DEFEATED_E4_MEMBER 
+     && eventId != QL_EVENT_DEFEATED_CHAMPION)
         return FALSE;
+
     sub_81138F8();
-    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(a0, a1) != TRUE)
+    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
     {
-        gUnknown_203B024.unk_00 = a0;
-        memcpy(gUnknown_203B024.unk_04, a1, 8);
+        gUnknown_203B024.unk_00 = eventId;
+        memcpy(gUnknown_203B024.unk_04, eventData, 8);
     }
     return TRUE;
 }
 
 void sub_81139BC(void)
 {
-    if (gUnknown_203B024.unk_00 != 0)
+    if (gUnknown_203B024.unk_00 != QL_EVENT_0)
     {
         u16 *resp;
         if (gUnknown_3005E88 == 0)
@@ -2713,128 +2796,131 @@ static void sub_8113A1C(u16 a0)
     sQuestLogIdx++;
 }
 
-static bool8 sub_8113A44(u16 a0, const u16 *a1)
+static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16 eventId, const u16 *eventData)
 {
-    if (a0 != 31)
+    if (eventId != QL_EVENT_DEFEATED_WILD_MON)
         return FALSE;
 
-    if (sub_8114FBC(a1[0]) == TRUE)
+    if (IsSpeciesFromSpecialEncounter(eventData[0]) == TRUE)
         return TRUE;
 
-    if (sub_8114FBC(a1[1]) == TRUE)
+    if (IsSpeciesFromSpecialEncounter(eventData[1]) == TRUE)
         return TRUE;
 
     return FALSE;
 }
 
-static const u16 *(*const sQuestLogScriptParsingCBs[])(const u16 *) = {
-    NULL,
-    NULL,
-    NULL,
-    sub_8113F3C,
-    sub_8113FBC,
-    sub_8114188,
-    sub_81141E4,
-    sub_8114240,
-    sub_811429C,
-    sub_8114324,
-    sub_8114394,
-    sub_811443C,
-    sub_811448C,
-    sub_8114518,
-    sub_81145A4,
-    sub_811464C,
-    sub_8114724,
-    sub_8114758,
-    sub_81147A8,
-    sub_8114834,
-    sub_81148BC,
-    sub_8114944,
-    sub_81149D0,
-    sub_8114A4C,
-    sub_8114AC8,
-    sub_8114B34,
-    sub_8114BA0,
-    sub_8114C0C,
-    sub_8114C8C,
-    sub_8114CE4,
-    sub_8114D68,
-    sub_8114E68,
-    sub_811500C,
-    sub_81150CC,
-    sub_81151DC,
-    sub_81152BC,
-    sub_8115460,
-    sub_8115518,
-    sub_81155E0,
-    NULL,
-    sub_8115700,
-    NULL,
-    sub_8115800
+static const u16 *(*const sQuestLogEventTextBufferCBs[])(const u16 *) = {
+    [QL_EVENT_0]                             = NULL,
+    [QL_EVENT_1]                             = NULL,
+    [QL_EVENT_2]                             = NULL,
+    [QL_EVENT_SWITCHED_PARTY_ORDER]          = BufferQuestLogText_SwitchedPartyOrder,
+    [QL_EVENT_USED_ITEM]                     = BufferQuestLogText_UsedItem,
+    [QL_EVENT_GAVE_HELD_ITEM]                = BufferQuestLogText_GaveHeldItemFromPartyMenu,
+    [QL_EVENT_GAVE_HELD_ITEM_BAG]            = BufferQuestLogText_GaveHeldItemFromBagMenu,
+    [QL_EVENT_GAVE_HELD_ITEM_PC]             = BufferQuestLogText_GaveHeldItemFromPC,
+    [QL_EVENT_TOOK_HELD_ITEM]                = BufferQuestLogText_TookHeldItem,
+    [QL_EVENT_SWAPPED_HELD_ITEM]             = BufferQuestLogText_SwappedHeldItem,
+    [QL_EVENT_SWAPPED_HELD_ITEM_PC]          = BufferQuestLogText_SwappedHeldItemFromPC,
+    [QL_EVENT_USED_PKMN_CENTER]              = BufferQuestLogText_UsedPkmnCenter,
+    [QL_EVENT_LINK_TRADED]                   = BufferQuestLogText_LinkTraded,
+    [QL_EVENT_LINK_BATTLED_SINGLE]           = BufferQuestLogText_LinkBattledSingle,
+    [QL_EVENT_LINK_BATTLED_DOUBLE]           = BufferQuestLogText_LinkBattledDouble,
+    [QL_EVENT_LINK_BATTLED_MULTI]            = BufferQuestLogText_LinkBattledMulti,
+    [QL_EVENT_USED_UNION_ROOM]               = BufferQuestLogText_UsedUnionRoom,
+    [QL_EVENT_USED_UNION_ROOM_CHAT]          = BufferQuestLogText_UsedUnionRoomChat,
+    [QL_EVENT_LINK_TRADED_UNION]             = BufferQuestLogText_LinkTradedUnionRoom,
+    [QL_EVENT_LINK_BATTLED_UNION]            = BufferQuestLogText_LinkBattledUnionRoom,
+    [QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES]   = BufferQuestLogText_SwitchedMonsBetweenBoxes,
+    [QL_EVENT_SWITCHED_MONS_WITHIN_BOX]      = BufferQuestLogText_SwitchedMonsWithinBox,
+    [QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON] = BufferQuestLogText_SwitchedPartyMonForPCMon,
+    [QL_EVENT_MOVED_MON_BETWEEN_BOXES]       = BufferQuestLogText_MovedMonBetweenBoxes,
+    [QL_EVENT_MOVED_MON_WITHIN_BOX]          = BufferQuestLogText_MovedMonWithinBox,
+    [QL_EVENT_WITHDREW_MON_PC]               = BufferQuestLogText_WithdrewMonFromPC,
+    [QL_EVENT_DEPOSITED_MON_PC]              = BufferQuestLogText_DepositedMonInPC,
+    [QL_EVENT_SWITCHED_MULTIPLE_MONS]        = BufferQuestLogText_SwitchedMultipleMons,
+    [QL_EVENT_DEPOSITED_ITEM_PC]             = BufferQuestLogText_DepositedItemInPC,
+    [QL_EVENT_WITHDREW_ITEM_PC]              = BufferQuestLogText_WithdrewItemFromPC,
+    [QL_EVENT_DEFEATED_GYM_LEADER]           = BufferQuestLogText_DefeatedGymLeader,
+    [QL_EVENT_DEFEATED_WILD_MON]             = BufferQuestLogText_DefeatedWildMon,
+    [QL_EVENT_DEFEATED_E4_MEMBER]            = BufferQuestLogText_DefeatedEliteFourMember,
+    [QL_EVENT_DEFEATED_CHAMPION]             = BufferQuestLogText_DefeatedChampion,
+    [QL_EVENT_DEFEATED_TRAINER]              = BufferQuestLogText_DefeatedTrainer,
+    [QL_EVENT_DEPARTED]                      = BufferQuestLogText_DepartedLocation,
+    [QL_EVENT_USED_FIELD_MOVE]               = BufferQuestLogText_UsedFieldMove,
+    [QL_EVENT_BOUGHT_ITEM]                   = BufferQuestLogText_BoughtItem,
+    [QL_EVENT_SOLD_ITEM]                     = BufferQuestLogText_SoldItem,
+    [QL_EVENT_39]                            = NULL,
+    [QL_EVENT_OBTAINED_ITEM]                 = BufferQuestLogText_ObtainedItem,
+    [QL_EVENT_41]                            = NULL,
+    [QL_EVENT_ARRIVED]                       = BufferQuestLogText_ArrivedInLocation
 };
 
 static const u8 sQuestLogEventCmdSizes[] = {
-    0x08,
-    0x08,
-    0x08,
-    0x08,
-    0x0a,
-    0x08,
-    0x08,
-    0x08,
-    0x08,
-    0x0a,
-    0x0a,
-    0x04,
-    0x10,
-    0x0c,
-    0x0c,
-    0x1a,
-    0x04,
-    0x04,
-    0x10,
-    0x0c,
-    0x0a,
-    0x0a,
-    0x0a,
-    0x08,
-    0x08,
-    0x08,
-    0x08,
-    0x06,
-    0x06,
-    0x06,
-    0x0c,
-    0x0c,
-    0x0c,
-    0x0a,
-    0x0c,
-    0x06,
-    0x08,
-    0x0e,
-    0x0e,
-    0x02,
-    0x08,
-    0x04,
-    0x06
+    [QL_EVENT_0] = 0x08,
+    [QL_EVENT_1] = 0x08,
+    [QL_EVENT_2] = 0x08,
+    [QL_EVENT_SWITCHED_PARTY_ORDER] = 0x08,
+    [QL_EVENT_USED_ITEM] = 0x0a,
+    [QL_EVENT_GAVE_HELD_ITEM] = 0x08,
+    [QL_EVENT_GAVE_HELD_ITEM_BAG] = 0x08,
+    [QL_EVENT_GAVE_HELD_ITEM_PC] = 0x08,
+    [QL_EVENT_TOOK_HELD_ITEM] = 0x08,
+    [QL_EVENT_SWAPPED_HELD_ITEM] = 0x0a,
+    [QL_EVENT_SWAPPED_HELD_ITEM_PC] = 0x0a,
+    [QL_EVENT_USED_PKMN_CENTER] = 0x04,
+    [QL_EVENT_LINK_TRADED] = 0x10,
+    [QL_EVENT_LINK_BATTLED_SINGLE] = 0x0c,
+    [QL_EVENT_LINK_BATTLED_DOUBLE] = 0x0c,
+    [QL_EVENT_LINK_BATTLED_MULTI] = 0x1a,
+    [QL_EVENT_USED_UNION_ROOM] = 0x04,
+    [QL_EVENT_USED_UNION_ROOM_CHAT] = 0x04,
+    [QL_EVENT_LINK_TRADED_UNION] = 0x10,
+    [QL_EVENT_LINK_BATTLED_UNION] = 0x0c,
+    [QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES] = 0x0a,
+    [QL_EVENT_SWITCHED_MONS_WITHIN_BOX] = 0x0a,
+    [QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON] = 0x0a,
+    [QL_EVENT_MOVED_MON_BETWEEN_BOXES] = 0x08,
+    [QL_EVENT_MOVED_MON_WITHIN_BOX] = 0x08,
+    [QL_EVENT_WITHDREW_MON_PC] = 0x08,
+    [QL_EVENT_DEPOSITED_MON_PC] = 0x08,
+    [QL_EVENT_SWITCHED_MULTIPLE_MONS] = 0x06,
+    [QL_EVENT_DEPOSITED_ITEM_PC] = 0x06,
+    [QL_EVENT_WITHDREW_ITEM_PC] = 0x06,
+    [QL_EVENT_DEFEATED_GYM_LEADER] = 0x0c,
+    [QL_EVENT_DEFEATED_WILD_MON] = 0x0c,
+    [QL_EVENT_DEFEATED_E4_MEMBER] = 0x0c,
+    [QL_EVENT_DEFEATED_CHAMPION] = 0x0a,
+    [QL_EVENT_DEFEATED_TRAINER] = 0x0c,
+    [QL_EVENT_DEPARTED] = 0x06,
+    [QL_EVENT_USED_FIELD_MOVE] = 0x08,
+    [QL_EVENT_BOUGHT_ITEM] = 0x0e,
+    [QL_EVENT_SOLD_ITEM] = 0x0e,
+    [QL_EVENT_39] = 0x02,
+    [QL_EVENT_OBTAINED_ITEM] = 0x08,
+    [QL_EVENT_41] = 0x04,
+    [QL_EVENT_ARRIVED] = 0x06
 };
 
 static u16 *QuestLog_SkipCommand(u16 *curPtr, u16 **prevPtr_p)
 {
-    u16 idx = curPtr[0] & 0xfff;
+    u16 eventId = curPtr[0] & 0xfff;
     u16 cnt = curPtr[0] >> 12;
-    if (idx == 33)
+
+    if (eventId == QL_EVENT_DEFEATED_CHAMPION)
         cnt = 0;
-    if (idx < 3 || idx > 42)
+
+    if (!IS_VALID_QL_EVENT(eventId))
         return NULL;
+
     *prevPtr_p = curPtr;
-    return sQuestLogEventCmdSizes[idx] + (sQuestLogEventCmdSizes[idx] - 4) * cnt + (void *)curPtr;
+    return sQuestLogEventCmdSizes[eventId] + (sQuestLogEventCmdSizes[eventId] - 4) * cnt + (void *)curPtr;
 }
 
 static void sub_8113ABC(const u16 *a0)
 {
     const u8 *r2 = (const u8 *)(a0 + 2);
-    if ((a0[0] & 0xFFF) != 35)
+    if ((a0[0] & 0xFFF) != QL_EVENT_DEPARTED)
         gUnknown_203B04A = 0;
     else
         gUnknown_203B04A = r2[1] + 1;
@@ -2851,7 +2937,7 @@ static bool8 sub_8113AE8(const u16 *a0)
     if (r0 == NULL || r0[1] > sQuestLogIdx)
         return FALSE;
 
-    sQuestLogScriptParsingCBs[a0[0] & 0xFFF](a0);
+    sQuestLogEventTextBufferCBs[a0[0] & 0xFFF](a0);
     gUnknown_203B044.unk_0 = a0[0];
     gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
@@ -2864,7 +2950,7 @@ static bool8 sub_8113B44(const u16 *a0)
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
 
-    sQuestLogScriptParsingCBs[gUnknown_203B044.unk_0](a0);
+    sQuestLogEventTextBufferCBs[gUnknown_203B044.unk_0](a0);
     gUnknown_203B044.unk_2++;
     if (gUnknown_203B044.unk_2 > gUnknown_203B044.unk_1)
         sub_8113B88();
@@ -2876,11 +2962,11 @@ static void sub_8113B88(void)
     gUnknown_203B044 = (struct UnkStruct_203B044){};
 }
 
-static void sub_8113B94(u16 a0)
+static void sub_8113B94(u16 eventId)
 {
-    if (gUnknown_203B044.unk_0 != (u8)a0 || gUnknown_203B044.unk_2 != sQuestLogIdx)
+    if (gUnknown_203B044.unk_0 != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogIdx)
     {
-        gUnknown_203B044.unk_0 = a0;
+        gUnknown_203B044.unk_0 = eventId;
         gUnknown_203B044.unk_1 = 0;
         gUnknown_203B044.unk_2 = sQuestLogIdx;
     }
@@ -2892,20 +2978,20 @@ static void sub_8113BD8(void)
 {
     gUnknown_203B049 = 0;
     gUnknown_203B04A = 0;
-    gUnknown_203B04B = 0;
+    gUnknown_203B04B = FALSE;
 }
 
 static u16 *sub_8113BF4(u16 *a0)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[39]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
-    a0[0] = 39;
+    a0[0] = QL_EVENT_39;
     return a0 + 1;
 }
 
 static u16 *sub_8113C20(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[39]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
     a1->unk_6 = 0xFF;
     a1->unk_4 = 0;
@@ -2918,16 +3004,16 @@ static u16 *sub_8113C20(u16 *a0, struct UnkStruct_203AE98 * a1)
 
 static u16 *sub_8113C5C(u16 *a0, u16 a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[41]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
-    a0[0] = 41;
+    a0[0] = QL_EVENT_41;
     a0[1] = a1;
     return a0 + 2;
 }
 
 static u16 *sub_8113C8C(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[41]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
     a1->unk_6 = 0xFE;
     a1->unk_4 = a0[1];
@@ -2942,7 +3028,7 @@ static u16 *sub_8113CC8(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[0]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
     a0[0] = 0;
     a0[1] = a1->unk_4;
@@ -2957,7 +3043,7 @@ static u16 *sub_8113D08(u16 *a0, struct UnkStruct_203AE98 * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[0]))
+    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
     a1->unk_6 = 2;
     a1->unk_4 = a0[1];
@@ -2973,7 +3059,7 @@ static u16 *sub_8113D48(u16 *a0, struct UnkStruct_203AE98 * a1)
     u16 *r4 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(r4, sQuestLogEventCmdSizes[2]))
+    if (!sub_8110988(r4, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (a1->unk_6 == 0)
         r4[0] = 2;
@@ -2992,7 +3078,7 @@ static u16 *sub_8113D94(u16 *a0, struct UnkStruct_203AE98 * a1)
     u16 *r5 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(r5, sQuestLogEventCmdSizes[2]))
+    if (!sub_8110988(r5, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (r5[0] == 2)
         a1->unk_6 = 0;
@@ -3006,33 +3092,33 @@ static u16 *sub_8113D94(u16 *a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-u16 *sub_8113DE0(u16 a0, u16 *a1)
+u16 *sub_8113DE0(u16 eventId, u16 *a1)
 {
-    u8 r6;
+    u8 cmdSize;
     u16 *r5;
     u8 r4;
     u8 r1;
 
     if (gUnknown_203B044.unk_1 == 0)
-        r6 = sQuestLogEventCmdSizes[a0];
+        cmdSize = sQuestLogEventCmdSizes[eventId];
     else
-        r6 = sQuestLogEventCmdSizes[a0] - 4;
-    if (!sub_8110944(a1, r6))
+        cmdSize = sQuestLogEventCmdSizes[eventId] - 4;
+    if (!sub_8110944(a1, cmdSize))
         return NULL;
 
     r5 = (void *)a1;
 
     if (gUnknown_203B044.unk_1 != 0)
-        r5 = (void *)r5 - (gUnknown_203B044.unk_1 * r6 + 4);
+        r5 = (void *)r5 - (gUnknown_203B044.unk_1 * cmdSize + 4);
 
     if (gUnknown_203B044.unk_1 == 5)
     {
         for (r4 = 0; r4 < 4; r4++)
         {
             memcpy(
-                (void *)r5 + (r4 * r6 + 4),
-                (void *)r5 + ((r4 + 1) * r6 + 4),
-                r6
+                (void *)r5 + (r4 * cmdSize + 4),
+                (void *)r5 + ((r4 + 1) * cmdSize + 4),
+                cmdSize
             );
         }
         r1 = 4;
@@ -3040,76 +3126,76 @@ u16 *sub_8113DE0(u16 a0, u16 *a1)
     else
         r1 = gUnknown_203B044.unk_1;
 
-    r5[0] = a0 + (r1 << 12);
+    r5[0] = eventId + (r1 << 12);
     r5[1] = sQuestLogIdx;
-    r5 = (void *)r5 + (r1 * r6 + 4);
+    r5 = (void *)r5 + (r1 * cmdSize + 4);
     return r5;
 }
 
-static const u16 *sub_8113E88(u16 a0, const u16 *a1)
+static const u16 *sub_8113E88(u16 eventId, const u16 *eventData)
 {
-    a1 = (const void *)a1 + (gUnknown_203B044.unk_2 * (sQuestLogEventCmdSizes[a0] - 4) + 4);
-    return a1;
+    eventData = (const void *)eventData + (gUnknown_203B044.unk_2 * (sQuestLogEventCmdSizes[eventId] - 4) + 4);
+    return eventData;
 }
 
-void QuestLog_AutoGetSpeciesName(u16 a0, u8 *a1, u8 a2)
+static void QuestLog_GetSpeciesName(u16 species, u8 *dest, u8 stringVarId)
 {
-    if (a1 != NULL)
+    if (dest != NULL)
     {
-        if (a0 != SPECIES_EGG)
-            GetSpeciesName(a1, a0);
+        if (species != SPECIES_EGG)
+            GetSpeciesName(dest, species);
         else
-            StringCopy(a1, gText_EggNickname);
+            StringCopy(dest, gText_EggNickname);
     }
     else
     {
-        if (a0 != SPECIES_EGG)
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(a2, gSpeciesNames[a0]);
+        if (species != SPECIES_EGG)
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gSpeciesNames[species]);
         else
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(a2, gText_EggNickname);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gText_EggNickname);
     }
 }
 
-static u16 *sub_8113F14(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *a0, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(3, a0);
+    u16 *r2 = sub_8113DE0(QL_EVENT_SWITCHED_PARTY_ORDER, a0);
     if (r2 == NULL)
         return NULL;
     
-    r2[0] = a1[0];
-    r2[1] = a1[1];
+    r2[0] = eventData[0];
+    r2[1] = eventData[1];
     return r2 + 2;
 }
 
-static const u16 *sub_8113F3C(const u16 *a0)
+static const u16 *BufferQuestLogText_SwitchedPartyOrder(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(3, a0);
-    QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
-    QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A16F);
+    const u16 *r4 = sub_8113E88(QL_EVENT_SWITCHED_PARTY_ORDER, eventData);
+    QuestLog_GetSpeciesName(r4[0], gStringVar1, 0);
+    QuestLog_GetSpeciesName(r4[1], gStringVar2, 0);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchMon1WithMon2);
     r4 += 2;
     return r4;
 }
 
-static u16 *sub_8113F80(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_UsedItem(u16 *a0, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(4, a0);
+    u16 *r2 = sub_8113DE0(QL_EVENT_USED_ITEM, a0);
     if (r2 == NULL)
         return NULL;
 
-    r2[0] = a1[0];
-    r2[1] = a1[2];
-    r2[2] = a1[3];
+    r2[0] = eventData[0];
+    r2[1] = eventData[2];
+    r2[2] = eventData[3];
 
-    if (a1[0] == ITEM_ESCAPE_ROPE)
+    if (eventData[0] == ITEM_ESCAPE_ROPE)
         gUnknown_203B048 = 2;
 
     return r2 + 3;
 }
 
-static const u16 *sub_8113FBC(const u16 *a0)
+static const u16 *BufferQuestLogText_UsedItem(const u16 *eventData)
 {
-    const u16 *r5 = sub_8113E88(4, a0);
+    const u16 *r5 = sub_8113E88(QL_EVENT_USED_ITEM, eventData);
 
     switch (ItemId_GetPocket(r5[0]))
     {
@@ -3120,631 +3206,630 @@ static const u16 *sub_8113FBC(const u16 *a0)
         if (r5[0] == ITEM_ESCAPE_ROPE)
         {
             GetMapNameGeneric(gStringVar2, (u8)r5[2]);
-            StringExpandPlaceholders(gStringVar4, gUnknown_841AFA6);
+            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedEscapeRope);
         }
         else if (r5[1] != 0xFFFF)
         {
-            QuestLog_AutoGetSpeciesName(r5[1], gStringVar2, 0);
-            StringExpandPlaceholders(gStringVar4, gUnknown_841A1E7);
+            QuestLog_GetSpeciesName(r5[1], gStringVar2, 0);
+            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedItemOnMonAtThisLocation);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, gUnknown_841A210);
+            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedTheItem);
         }
         break;
     case POCKET_KEY_ITEMS:
         StringCopy(gStringVar1, ItemId_GetName(r5[0]));
-        StringExpandPlaceholders(gStringVar4, gUnknown_841A220);
+        StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedTheKeyItem);
         break;
     case POCKET_TM_CASE:
-        QuestLog_AutoGetSpeciesName(r5[1], gStringVar1, 0);
+        QuestLog_GetSpeciesName(r5[1], gStringVar1, 0);
         StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(r5[0])]);
         if (r5[2] != 0xFFFF)
         {
             StringCopy(gStringVar3, gMoveNames[r5[2]]);
             if (r5[0] > ITEM_TM50)
-                StringExpandPlaceholders(gStringVar4, gUnknown_841A965);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonReplacedMoveWithHM);
             else
-                StringExpandPlaceholders(gStringVar4, gUnknown_841A277);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonReplacedMoveWithTM);
         }
         else
         {
             if (r5[0] > ITEM_TM50)
-                StringExpandPlaceholders(gStringVar4, gUnknown_841A938);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonLearnedMoveFromHM);
             else
-                StringExpandPlaceholders(gStringVar4, gUnknown_841A255);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonLearnedMoveFromTM);
         }
         break;
     }
     return r5 + 3;
 }
 
-u16 *sub_811414C(u16 a0, u16 *a1, const u16 *a2)
+u16 *BufferQuestLogData_GiveTakeHeldItem(u16 eventId, u16 *a1, const u16 *eventData)
 {
-    u16 *r1 = sub_8113DE0(a0, a1);
+    u16 *r1 = sub_8113DE0(eventId, a1);
     if (r1 == NULL)
         return NULL;
 
-    r1[0] = a2[0];
-    r1[1] = a2[2];
+    r1[0] = eventData[0];
+    r1[1] = eventData[2];
     return r1 + 2;
 }
 
-static u16 *sub_8114174(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_GaveHeldItemFromPartyMenu(u16 *a0, const u16 *eventData)
 {
-    return sub_811414C(5, a0, a1);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM, a0, eventData);
 }
 
-static const u16 *sub_8114188(const u16 *a0)
+static const u16 *BufferQuestLogText_GaveHeldItemFromPartyMenu(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(5, a0);
-    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_GAVE_HELD_ITEM, eventData);
+    QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841AB74);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItem);
     r4 += 2;
     return r4;
 }
 
-static u16 *sub_81141D0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_GaveHeldItemFromBagMenu(u16 *a0, const u16 *eventData)
 {
-    return sub_811414C(6, a0, a1);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_BAG, a0, eventData);
 }
 
-static const u16 *sub_81141E4(const u16 *a0)
+static const u16 *BufferQuestLogText_GaveHeldItemFromBagMenu(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(6, a0);
-
-    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_GAVE_HELD_ITEM_BAG, eventData);
+    QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841AB8E);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItem2);
     r4 += 2;
     return r4;
 }
 
-static u16 *sub_811422C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_GaveHeldItemFromPC(u16 *a0, const u16 *eventData)
 {
-    return sub_811414C(7, a0, a1);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_GAVE_HELD_ITEM_PC, a0, eventData);
 }
 
-static const u16 *sub_8114240(const u16 *a0)
+static const u16 *BufferQuestLogText_GaveHeldItemFromPC(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(7, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_GAVE_HELD_ITEM_PC, eventData);
 
-    QuestLog_AutoGetSpeciesName(r4[1], gStringVar2, 0);
+    QuestLog_GetSpeciesName(r4[1], gStringVar2, 0);
     StringCopy(gStringVar1, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A6A5);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItemFromPC);
     r4 += 2;
     return r4;
 }
 
-static u16 *sub_8114288(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_TookHeldItem(u16 *a0, const u16 *eventData)
 {
-    return sub_811414C(8, a0, a1);
+    return BufferQuestLogData_GiveTakeHeldItem(QL_EVENT_TOOK_HELD_ITEM, a0, eventData);
 }
 
-static const u16 *sub_811429C(const u16 *a0)
+static const u16 *BufferQuestLogText_TookHeldItem(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(8, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_TOOK_HELD_ITEM, eventData);
 
-    QuestLog_AutoGetSpeciesName(r4[1], gStringVar1, 0);
+    QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A1CD);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TookHeldItemFromMon);
     r4 += 2;
     return r4;
 }
 
-u16 *sub_81142E4(u16 a0, u16 *a1, const u16 *a2)
+u16 *BufferQuestLogData_SwappedHeldItem_(u16 eventId, u16 *a1, const u16 *eventData)
 {
-    u16 *r1 = sub_8113DE0(a0, a1);
+    u16 *r1 = sub_8113DE0(eventId, a1);
     if (r1 == NULL)
         return NULL;
 
-    r1[0] = a2[0];
-    r1[1] = a2[1];
-    r1[2] = a2[2];
+    r1[0] = eventData[0];
+    r1[1] = eventData[1];
+    r1[2] = eventData[2];
     return r1 + 3;
 }
 
-static u16 *sub_8114310(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwappedHeldItem(u16 *a0, const u16 *eventData)
 {
-    return sub_81142E4(9, a0, a1);
+    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM, a0, eventData);
 }
 
-static const u16 *sub_8114324(const u16 *a0)
+static const u16 *BufferQuestLogText_SwappedHeldItem(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(9, a0);
-    QuestLog_AutoGetSpeciesName(r4[2], gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringCopy(gStringVar3, ItemId_GetName(r4[1]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A193);
+    const u16 *r4 = sub_8113E88(QL_EVENT_SWAPPED_HELD_ITEM, eventData);
+    QuestLog_GetSpeciesName(r4[2], gStringVar1, 0);
+    StringCopy(gStringVar2, ItemId_GetName(r4[0])); // Item taken
+    StringCopy(gStringVar3, ItemId_GetName(r4[1])); // Item given
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwappedHeldItemsOnMon);
     r4 += 3;
     return r4;
 }
 
-static u16 *sub_8114380(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwappedHeldItemFromPC(u16 *a0, const u16 *eventData)
 {
-    return sub_81142E4(10, a0, a1);
+    return BufferQuestLogData_SwappedHeldItem_(QL_EVENT_SWAPPED_HELD_ITEM_PC, a0, eventData);
 }
 
-static const u16 *sub_8114394(const u16 *a0)
+static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(10, a0);
-    QuestLog_AutoGetSpeciesName(r4[2], gStringVar2, 0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_SWAPPED_HELD_ITEM_PC, eventData);
+    QuestLog_GetSpeciesName(r4[2], gStringVar2, 0);
     StringCopy(gStringVar3, ItemId_GetName(r4[0]));
     StringCopy(gStringVar1, ItemId_GetName(r4[1]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A6E1);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwappedHeldItemFromPC);
     r4 += 3;
     return r4;
 }
 
-static u16 *sub_81143F0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *a0, const u16 *eventData)
 {
     u16 *r4 = a0;
-    if (gUnknown_203B044.unk_0 == 11 && gUnknown_203B044.unk_1 != 0)
+    if (gUnknown_203B044.unk_0 == QL_EVENT_USED_PKMN_CENTER && gUnknown_203B044.unk_1 != 0)
         return r4;
 
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[11]))
+    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
         return NULL;
 
-    r4[0] = 11;
+    r4[0] = QL_EVENT_USED_PKMN_CENTER;
     r4[1] = sQuestLogIdx;
     return r4 + 2;
 }
 
-static const u16 *sub_811443C(const u16 *a0)
+static const u16 *BufferQuestLogText_UsedPkmnCenter(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A2B0);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonsWereFullyRestoredAtCenter);
     a0 += 2;
     return a0;
 }
 
-static u16 *sub_811445C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkTraded(u16 *a0, const u16 *eventData)
 {
     u16 *r4 = a0 + 4;
 
-    a0[0] = 12;
+    a0[0] = QL_EVENT_LINK_TRADED;
     a0[1] = sQuestLogIdx;
-    a0[2] = a1[0];
-    a0[3] = a1[1];
-    a1 += 2;
-    memcpy(r4, a1, 7);
+    a0[2] = eventData[0];
+    a0[3] = eventData[1];
+    eventData += 2;
+    memcpy(r4, eventData, 7);
     r4 += 4;
     return r4;
 }
 
-static const u16 *sub_811448C(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkTraded(const u16 *a0)
 {
     const u16 *r6 = a0 + 4;
 
-    memset(gStringVar1, EOS, 8);
-    memcpy(gStringVar1, r6, 7);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH - 1);
 
-    sub_8115834(gStringVar1);
-    QuestLog_AutoGetSpeciesName(a0[3], gStringVar2, 0);
-    QuestLog_AutoGetSpeciesName(a0[2], gStringVar3, 0);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A3FF);
+    BufferLinkPartnersName(gStringVar1);
+    QuestLog_GetSpeciesName(a0[3], gStringVar2, 0); // Mon received
+    QuestLog_GetSpeciesName(a0[2], gStringVar3, 0); // Mon sent
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TradedMon1ForPersonsMon2);
     r6 += 4;
     return r6;
 }
 
-static const u8 *const gUnknown_8456ACC[] = {
-    gUnknown_841A74E,
-    gUnknown_841A756,
-    gUnknown_841A762
+static const u8 *const sDefeatedOpponentFlavorTexts[] = {
+    QuestLog_Text_Handily,
+    QuestLog_Text_Tenaciously,
+    QuestLog_Text_Somehow
 };
 
-static const u8 *const gUnknown_8456AD8[] = {
-    gUnknown_841AF98,
-    gUnknown_841A762,
-    gUnknown_841AF9F
+static const u8 *const sDefeatedChampionFlavorTexts[] = {
+    QuestLog_Text_Coolly,
+    QuestLog_Text_Somehow,
+    QuestLog_Text_Barely
 };
 
-static const u8 *const gUnknown_8456AE4[] = {
-    gUnknown_841A502,
-    gUnknown_841A506,
-    gUnknown_841AFD1
+static const u8 *const sBattleOutcomeTexts[] = {
+    QuestLog_Text_Win,
+    QuestLog_Text_Loss,
+    QuestLog_Text_Draw
 };
 
-static u16 *sub_81144EC(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkBattledSingle(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 13;
+    a0[0] = QL_EVENT_LINK_BATTLED_SINGLE;
     a0[1] = sQuestLogIdx;
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
     a0 += 6;
     return a0;
 }
 
-static const u16 *sub_8114518(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, 8);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
-    sub_8115834(gStringVar1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_8456AE4[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A422);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SingleBattleWithPersonResultedInOutcome);
     a0 += 6;
     return a0;
 }
 
-static u16 *sub_8114578(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkBattledDouble(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 14;
+    a0[0] = QL_EVENT_LINK_BATTLED_DOUBLE;
     a0[1] = sQuestLogIdx;
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
     a0 += 6;
     return a0;
 }
 
-static const u16 *sub_81145A4(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, 8);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
-    sub_8115834(gStringVar1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_8456AE4[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A477);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DoubleBattleWithPersonResultedInOutcome);
     a0 += 6;
     return a0;
 }
 
-static u16 *sub_8114604(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkBattledMulti(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 15;
+    a0[0] = QL_EVENT_LINK_BATTLED_MULTI;
     a0[1] = sQuestLogIdx;
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 0);
-    memcpy((u8 *)a0 +  5, (const u8 *)a1 +  1, 7);
-    memcpy((u8 *)a0 + 12, (const u8 *)a1 +  8, 7);
-    memcpy((u8 *)a0 + 19, (const u8 *)a1 + 15, 7);
+    *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
+    memcpy((u8 *)a0 +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 + 19, (const u8 *)eventData + 15, PLAYER_NAME_LENGTH - 1);
     a0 += 13;
     return a0;
 }
 
-static const u16 *sub_811464C(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, 8);
-    memset(gStringVar2, EOS, 8);
-    memset(gStringVar3, EOS, 8);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memset(gStringVar2, EOS, PLAYER_NAME_LENGTH);
+    memset(gStringVar3, EOS, PLAYER_NAME_LENGTH);
     StringCopy7(gStringVar1, (const u8 *)a0 +  5);
     StringCopy7(gStringVar2, (const u8 *)a0 + 12);
     StringCopy7(gStringVar3, (const u8 *)a0 + 19);
-    sub_8115834(gStringVar1);
-    sub_8115834(gStringVar2);
-    sub_8115834(gStringVar3);
+    BufferLinkPartnersName(gStringVar1);
+    BufferLinkPartnersName(gStringVar2);
+    BufferLinkPartnersName(gStringVar3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gStringVar3);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gUnknown_8456AE4[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A4C6);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1); // partner
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2); // opponent 1
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gStringVar3); // opponent 2
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MultiBattleWithPeopleResultedInOutcome);
     a0 += 13;
     return a0;
 }
 
-static u16 *sub_8114710(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_UsedUnionRoom(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 16;
+    a0[0] = QL_EVENT_USED_UNION_ROOM;
     a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
-static const u16 *sub_8114724(const u16 *a0)
+static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A50B);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_MingledInUnionRoom);
     a0 += 2;
     return a0;
 }
 
-static u16 *sub_8114744(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 17;
+    a0[0] = QL_EVENT_USED_UNION_ROOM_CHAT;
     a0[1] = sQuestLogIdx;
     return a0 + 2;
 }
 
-static const u16 *sub_8114758(const u16 *a0)
+static const u16 *BufferQuestLogText_UsedUnionRoomChat(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A732);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ChattedWithManyTrainers);
     a0 += 2;
     return a0;
 }
 
-static u16 *sub_8114778(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *a0, const u16 *eventData)
 {
     u8 *r4 = (u8 *)(a0 + 4);
-    a0[0] = 18;
+    a0[0] = QL_EVENT_LINK_TRADED_UNION;
     a0[1] = sQuestLogIdx;
-    a0[2] = a1[0];
-    a0[3] = a1[1];
-    memcpy(r4, a1 + 2, 7);
+    a0[2] = eventData[0];
+    a0[3] = eventData[1];
+    memcpy(r4, eventData + 2, PLAYER_NAME_LENGTH - 1);
     r4 += 8;
     return (u16 *)r4;
 }
 
-static const u16 *sub_81147A8(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *a0)
 {
     const u8 *r6 = (const u8 *)(a0 + 4);
-    memset(gStringVar1, EOS, 8);
-    memcpy(gStringVar1, r6, 7);
-    sub_8115834(gStringVar1);
-    QuestLog_AutoGetSpeciesName(a0[3], gStringVar2, 0);
-    QuestLog_AutoGetSpeciesName(a0[2], gStringVar3, 0);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A76A);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH - 1);
+    BufferLinkPartnersName(gStringVar1);
+    QuestLog_GetSpeciesName(a0[3], gStringVar2, 0);
+    QuestLog_GetSpeciesName(a0[2], gStringVar3, 0);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TradedMon1ForTrainersMon2);
     r6 += 8;
     return (const u16 *)r6;
 }
 
-static u16 *sub_8114808(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *a0, const u16 *eventData)
 {
-    a0[0] = 19;
+    a0[0] = QL_EVENT_LINK_BATTLED_UNION;
     a0[1] = sQuestLogIdx;
-    *(u8 *)&a0[2] = *(const u8 *)&a1[0];
-    memcpy((u8 *)a0 + 5, (const u8 *)a1 + 1, 7);
+    *(u8 *)&a0[2] = *(const u8 *)&eventData[0];
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
     a0 += 6;
     return a0;
 }
 
-static const u16 *sub_8114834(const u16 *a0)
+static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *a0)
 {
-    memset(gStringVar1, EOS, 8);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, 7);
-    sub_8115834(gStringVar1);
-    StringCopy(gStringVar2, gUnknown_8456AE4[*(const u8 *)&a0[2]]);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A7B0);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    BufferLinkPartnersName(gStringVar1);
+    StringCopy(gStringVar2, sBattleOutcomeTexts[*(const u8 *)&a0[2]]);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_BattledTrainerEndedInOutcome);
     a0 += 6;
     return a0;
 }
 
-static u16 *sub_811488C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwitchedMonsBetweenBoxes(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(20, a0);
+    a0 = sub_8113DE0(QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
-    a0[1] = a1[1];
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 4);
-    *((u8 *)a0 + 5) = *((const u8 *)a1 + 5);
+    a0[0] = eventData[0];
+    a0[1] = eventData[1];
+    *((u8 *)a0 + 4) = *((const u8 *)eventData + 4);
+    *((u8 *)a0 + 5) = *((const u8 *)eventData + 5);
     return a0 + 3;
 }
 
-static const u16 *sub_81148BC(const u16 *a0)
+static const u16 *BufferQuestLogText_SwitchedMonsBetweenBoxes(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(20, a0);
-    boxIdxs = (const u8 *)a0 + 4;
+    eventData = sub_8113E88(QL_EVENT_SWITCHED_MONS_BETWEEN_BOXES, eventData);
+    boxIdxs = (const u8 *)eventData + 4;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, GetBoxNamePtr(boxIdxs[1]));
-    QuestLog_AutoGetSpeciesName(a0[1], NULL, 3);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A566);
-    return a0 + 3;
+    QuestLog_GetSpeciesName(eventData[1], NULL, 3);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMonsBetweenBoxes);
+    return eventData + 3;
 }
 
-static u16 *sub_8114918(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwitchedMonsWithinBox(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(21, a0);
+    a0 = sub_8113DE0(QL_EVENT_SWITCHED_MONS_WITHIN_BOX, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
-    a0[1] = a1[1];
-    *((u8 *)a0 + 4) = *((const u8 *)a1 + 4);
+    a0[0] = eventData[0];
+    a0[1] = eventData[1];
+    *((u8 *)a0 + 4) = *((const u8 *)eventData + 4);
     return a0 + 3;
 }
 
-static const u16 *sub_8114944(const u16 *a0)
+static const u16 *BufferQuestLogText_SwitchedMonsWithinBox(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(21, a0);
-    boxIdxs = (const u8 *)a0 + 4;
+    eventData = sub_8113E88(QL_EVENT_SWITCHED_MONS_WITHIN_BOX, eventData);
+    boxIdxs = (const u8 *)eventData + 4;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
-    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A5D9);
-    return a0 + 3;
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
+    QuestLog_GetSpeciesName(eventData[1], NULL, 2);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMonsWithinBox);
+    return eventData + 3;
 }
 
-static u16 *sub_8114990(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwitchedPartyMonForPCMon(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
     u16 *ret;
-    r2 = sub_8113DE0(22, a0);
+    r2 = sub_8113DE0(QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON, a0);
     if (r2 == NULL)
         return NULL;
     ret = r2 + 2;
-    if (*((const u8 *)a1 + 4) == TOTAL_BOXES_COUNT)
+    if (*((const u8 *)eventData + 4) == TOTAL_BOXES_COUNT)
     {
-        r2[0] = a1[1];
-        r2[1] = a1[0];
-        *((u8 *)r2 + 4) = *((const u8 *)a1 + 5);
+        r2[0] = eventData[1];
+        r2[1] = eventData[0];
+        *((u8 *)r2 + 4) = *((const u8 *)eventData + 5);
     }
     else
     {
-        r2[0] = a1[0];
-        r2[1] = a1[1];
-        *((u8 *)r2 + 4) = *((const u8 *)a1 + 4);
+        r2[0] = eventData[0];
+        r2[1] = eventData[1];
+        *((u8 *)r2 + 4) = *((const u8 *)eventData + 4);
     }
     return ret + 1;
 }
 
-static const u16 *sub_81149D0(const u16 *a0)
+static const u16 *BufferQuestLogText_SwitchedPartyMonForPCMon(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(22, a0);
-    boxIdxs = (const u8 *)a0 + 4;
+    eventData = sub_8113E88(QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON, eventData);
+    boxIdxs = (const u8 *)eventData + 4;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
-    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A60A);
-    return a0 + 3;
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
+    QuestLog_GetSpeciesName(eventData[1], NULL, 2);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedPartyMonForPCMon);
+    return eventData + 3;
 }
 
-static u16 *sub_8114A1C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_MovedMonBetweenBoxes(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
     u16 *ret;
-    r2 = sub_8113DE0(23, a0);
+    r2 = sub_8113DE0(QL_EVENT_MOVED_MON_BETWEEN_BOXES, a0);
     if (r2 == NULL)
         return NULL;
-    r2[0] = a1[0];
+    r2[0] = eventData[0];
     ret = r2 + 1;
-    *((u8 *)ret + 0) = *((const u8 *)a1 + 4);
-    *((u8 *)ret + 1) = *((const u8 *)a1 + 5);
+    *((u8 *)ret + 0) = *((const u8 *)eventData + 4);
+    *((u8 *)ret + 1) = *((const u8 *)eventData + 5);
     return ret + 1;
 }
 
-static const u16 *sub_8114A4C(const u16 *a0)
+static const u16 *BufferQuestLogText_MovedMonBetweenBoxes(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(23, a0);
-    boxIdxs = (const u8 *)a0 + 2;
+    eventData = sub_8113E88(QL_EVENT_MOVED_MON_BETWEEN_BOXES, eventData);
+    boxIdxs = (const u8 *)eventData + 2;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, GetBoxNamePtr(boxIdxs[1]));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A59C);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MovedMonToNewBox);
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *sub_8114AA0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_MovedMonWithinBox(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(24, a0);
+    r2 = sub_8113DE0(QL_EVENT_MOVED_MON_WITHIN_BOX, a0);
     if (r2 == NULL)
         return NULL;
-    r2[0] = a1[0];
-    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    r2[0] = eventData[0];
+    *((u8 *)r2 + 2) = *((const u8 *)eventData + 4);
     return r2 + 2;
 }
 
-static const u16 *sub_8114AC8(const u16 *a0)
+static const u16 *BufferQuestLogText_MovedMonWithinBox(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(24, a0);
-    boxIdxs = (const u8 *)a0 + 2;
+    eventData = sub_8113E88(QL_EVENT_MOVED_MON_WITHIN_BOX, eventData);
+    boxIdxs = (const u8 *)eventData + 2;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A5FA);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MovedMonWithinBox);
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *sub_8114B0C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_WithdrewMonFromPC(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(25, a0);
+    r2 = sub_8113DE0(QL_EVENT_WITHDREW_MON_PC, a0);
     if (r2 == NULL)
         return NULL;
-    r2[0] = a1[0];
-    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    r2[0] = eventData[0];
+    *((u8 *)r2 + 2) = *((const u8 *)eventData + 4);
     return r2 + 2;
 }
 
-static const u16 *sub_8114B34(const u16 *a0)
+static const u16 *BufferQuestLogText_WithdrewMonFromPC(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(25, a0);
-    boxIdxs = (const u8 *)a0 + 2;
+    eventData = sub_8113E88(QL_EVENT_WITHDREW_MON_PC, eventData);
+    boxIdxs = (const u8 *)eventData + 2;
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A632);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_WithdrewMonFromPC);
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *sub_8114B78(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DepositedMonInPC(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(26, a0);
+    r2 = sub_8113DE0(QL_EVENT_DEPOSITED_MON_PC, a0);
     if (r2 == NULL)
         return NULL;
-    r2[0] = a1[0];
-    *((u8 *)r2 + 2) = *((const u8 *)a1 + 4);
+    r2[0] = eventData[0];
+    *((u8 *)r2 + 2) = *((const u8 *)eventData + 4);
     return r2 + 2;
 }
 
-static const u16 *sub_8114BA0(const u16 *a0)
+static const u16 *BufferQuestLogText_DepositedMonInPC(const u16 *eventData)
 {
     const u8 *boxIdxs;
-    a0 = sub_8113E88(26, a0);
-    boxIdxs = (const u8 *)a0 + 2;
+    eventData = sub_8113E88(QL_EVENT_DEPOSITED_MON_PC, eventData);
+    boxIdxs = (const u8 *)eventData + 2;
     DynamicPlaceholderTextUtil_Reset();
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 0);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 0);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetBoxNamePtr(boxIdxs[0]));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A64F);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DepositedMonInPC);
     return (const u16 *)boxIdxs + 1;
 }
 
-static u16 *sub_8114BE4(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SwitchedMultipleMons(u16 *a0, const u16 *eventData)
 {
     u16 *r2;
-    r2 = sub_8113DE0(27, a0);
+    r2 = sub_8113DE0(QL_EVENT_SWITCHED_MULTIPLE_MONS, a0);
     if (r2 == NULL)
         return NULL;
-    *((u8 *)r2 + 0) = *((const u8 *)a1 + 4);
-    *((u8 *)r2 + 1) = *((const u8 *)a1 + 5);
+    *((u8 *)r2 + 0) = *((const u8 *)eventData + 4);
+    *((u8 *)r2 + 1) = *((const u8 *)eventData + 5);
     return r2 + 1;
 }
 
-static const u16 *sub_8114C0C(const u16 *a0)
+static const u16 *BufferQuestLogText_SwitchedMultipleMons(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(27, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_SWITCHED_MULTIPLE_MONS, eventData);
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(*((const u8 *)r4 + 0)));
     if (*((const u8 *)r4 + 0) == *((const u8 *)r4 + 1))
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gUnknown_841A694);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, QuestLog_Text_ADifferentSpot);
     else
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetBoxNamePtr(*((const u8 *)r4 + 1)));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A66E);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMultipleMons);
     return r4 + 1;
 }
 
-static u16 *sub_8114C68(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DepositedItemInPC(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(28, a0);
+    a0 = sub_8113DE0(QL_EVENT_DEPOSITED_ITEM_PC, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
+    a0[0] = eventData[0];
     return a0 + 1;
 }
 
-static const u16 *sub_8114C8C(const u16 *a0)
+static const u16 *BufferQuestLogText_DepositedItemInPC(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(28, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_DEPOSITED_ITEM_PC, eventData);
     CopyItemName(r4[0], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A391);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_StoredItemInPC);
     return r4 + 1;
 }
 
-static u16 *sub_8114CC0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_WithdrewItemFromPC(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(29, a0);
+    a0 = sub_8113DE0(QL_EVENT_WITHDREW_ITEM_PC, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
+    a0[0] = eventData[0];
     return a0 + 1;
 }
 
-static const u16 *sub_8114CE4(const u16 *a0)
+static const u16 *BufferQuestLogText_WithdrewItemFromPC(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(29, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_WITHDREW_ITEM_PC, eventData);
     CopyItemName(r4[0], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841A3DA);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_WithdrewItemFromPC);
     return r4 + 1;
 }
 
-u16 *sub_8114D18(u16 a0, u16 *a1, const u16 *a2)
+u16 *BufferQuestLogData_DefeatedTrainer_(u16 eventId, u16 *a1, const u16 *a2)
 {
-    a1 = sub_8113DE0(a0, a1);
+    a1 = sub_8113DE0(eventId, a1);
     if (a1 == NULL)
         return NULL;
     a1[0] = a2[1];
@@ -3755,149 +3840,153 @@ u16 *sub_8114D18(u16 a0, u16 *a1, const u16 *a2)
     return a1 + 4;
 }
 
-static u16 *sub_8114D4C(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
-    return sub_8114D18(30, a0, a1);
+    gUnknown_203B048 = 1;
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_GYM_LEADER, a0, eventData);
 }
 
-static const u16 *sub_8114D68(const u16 *a0)
+static const u16 *BufferQuestLogText_DefeatedGymLeader(const u16 *eventData)
 {
     const u8 *r6;
-    a0 = sub_8113E88(30, a0);
-    r6 = (const u8 *)a0 + 6;
+    eventData = sub_8113E88(QL_EVENT_DEFEATED_GYM_LEADER, eventData);
+    r6 = (const u8 *)eventData + 6;
     DynamicPlaceholderTextUtil_Reset();
     GetMapNameGeneric(gStringVar1, r6[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gTrainers[a0[2]].trainerName);
-    QuestLog_AutoGetSpeciesName(a0[0], 0, 2);
-    QuestLog_AutoGetSpeciesName(a0[1], 0, 3);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gUnknown_8456ACC[r6[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AF0C);
-    return a0 + 4;
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gTrainers[eventData[2]].trainerName);
+    QuestLog_GetSpeciesName(eventData[0], 0, 2);
+    QuestLog_GetSpeciesName(eventData[1], 0, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sDefeatedOpponentFlavorTexts[r6[1]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnGymLeadersMonWithMonAndWon);
+    return eventData + 4;
 }
 
-static u16 *sub_8114DE8(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DefeatedWildMon(u16 *a0, const u16 *eventData)
 {
     u16 *r4 = a0;
     u8 *r5 = (u8 *)a0 + 8;
-    if (!sub_8110944(r4, sQuestLogEventCmdSizes[31]))
+    if (!sub_8110944(r4, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
         return NULL;
     if (r5[0] == 0 && r5[1] == 0)
     {
-        r4[0] = 31;
+        r4[0] = QL_EVENT_DEFEATED_WILD_MON;
         r4[1] = sQuestLogIdx;
     }
-    if (a1[0])
-        r4[2] = a1[0];
-    if (a1[1])
-        r4[3] = a1[1];
-    if (a1[0] && r5[0] != 0xFF)
+    if (eventData[0])
+        r4[2] = eventData[0];
+    if (eventData[1])
+        r4[3] = eventData[1];
+    if (eventData[0] && r5[0] != 0xFF)
         r5[0]++;
-    if (a1[1] && r5[1] != 0xFF)
+    if (eventData[1] && r5[1] != 0xFF)
         r5[1]++;
-    r5[2] = *((const u8 *)a1 + 4);
+    r5[2] = *((const u8 *)eventData + 4);
     return (u16 *)(r5 + 4);
 }
 
-static const u16 *sub_8114E68(const u16 *a0)
+static const u16 *BufferQuestLogText_DefeatedWildMon(const u16 *a0)
 {
-    const u8 *r6;
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[31]))
+    const u8 *data;
+    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_WILD_MON]))
         return NULL;
 
-    r6 = (const u8 *)a0 + 8;
+    data = (const u8 *)a0 + 8;
     DynamicPlaceholderTextUtil_Reset();
-    GetMapNameGeneric(gStringVar1, r6[2]);
+    GetMapNameGeneric(gStringVar1, data[2]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    QuestLog_AutoGetSpeciesName(a0[2], NULL, 1);
-    ConvertIntToDecimalStringN(gStringVar2, r6[0], STR_CONV_MODE_LEFT_ALIGN, 3);
+    QuestLog_GetSpeciesName(a0[2], NULL, 1);
+    ConvertIntToDecimalStringN(gStringVar2, data[0], STR_CONV_MODE_LEFT_ALIGN, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-    QuestLog_AutoGetSpeciesName(a0[3], NULL, 3);
-    ConvertIntToDecimalStringN(gStringVar3, r6[1], STR_CONV_MODE_LEFT_ALIGN, 3);
+    QuestLog_GetSpeciesName(a0[3], NULL, 3);
+    ConvertIntToDecimalStringN(gStringVar3, data[1], STR_CONV_MODE_LEFT_ALIGN, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gStringVar3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gSaveBlock2Ptr->playerName);
-    if (r6[0] == 0)
+    if (data[0] == 0)
     {
-        if (r6[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AA01);
+        if (data[1] == 1)
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_CaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AA2B);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_CaughtWildMons);
     }
-    else if (r6[1] == 0)
+    else if (data[1] == 0)
     {
-        if (r6[0] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A9A9);
+        if (data[0] == 1)
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A9D4);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMons);
     }
-    else if (r6[0] == 1)
+    else if (data[0] == 1)
     {
-        if (r6[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AA76);
+        if (data[1] == 1)
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonAndCaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AAAA);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonAndCaughtWildMons);
     }
     else
     {
-        if (r6[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AAEC);
+        if (data[1] == 1)
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonsAndCaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AB29);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonsAndCaughtWildMons);
     }
-    return (const u16 *)(r6 + 4);
+    return (const u16 *)(data + 4);
 }
 
-static bool8 sub_8114FBC(u16 a0)
+static bool8 IsSpeciesFromSpecialEncounter(u16 species)
 {
-    switch (a0)
+    switch (species)
     {
-    case 0x96:
-    case 0x8F ... 0x92:
-    case 0xF9 ... 0xFA:
-    case 0x19A:
+    case SPECIES_SNORLAX:
+    case SPECIES_ARTICUNO:
+    case SPECIES_ZAPDOS:
+    case SPECIES_MOLTRES:
+    case SPECIES_MEWTWO:
+    case SPECIES_LUGIA:
+    case SPECIES_HO_OH:
+    case SPECIES_DEOXYS:
         return TRUE;
     }
     return FALSE;
 }
 
-static u16 *sub_8114FF0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
-    return sub_8114D18(32, a0, a1);
+    gUnknown_203B048 = 1;
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_E4_MEMBER, a0, eventData);
 }
 
-static const u16 *sub_811500C(const u16 *a0)
+static const u16 *BufferQuestLogText_DefeatedEliteFourMember(const u16 *eventData)
 {
     const u8 *r5;
-    a0 = sub_8113E88(32, a0);
-    r5 = (const u8 *)a0 + 6;
+    eventData = sub_8113E88(QL_EVENT_DEFEATED_E4_MEMBER, eventData);
+    r5 = (const u8 *)eventData + 6;
     DynamicPlaceholderTextUtil_Reset();
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gTrainers[a0[2]].trainerName);
-    QuestLog_AutoGetSpeciesName(a0[0], NULL, 1);
-    QuestLog_AutoGetSpeciesName(a0[1], NULL, 2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gUnknown_8456ACC[r5[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AF3E);
-    return a0 + 4;
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gTrainers[eventData[2]].trainerName);
+    QuestLog_GetSpeciesName(eventData[0], NULL, 1);
+    QuestLog_GetSpeciesName(eventData[1], NULL, 2);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, sDefeatedOpponentFlavorTexts[r5[1]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnEliteFoursMonWithMonAndWon);
+    return eventData + 4;
 }
 
-static u16 *sub_8115078(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DefeatedChampion(u16 *a0, const u16 *eventData)
 {
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[33]))
+    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
     a0[0] = 0x2021;
     a0[1] = sQuestLogIdx;
-    a0[2] = a1[1];
-    a0[3] = a1[2];
-    *((u8 *)a0 + 8) = *((const u8 *)a1 + 6);
-    gUnknown_203B048 = TRUE;
+    a0[2] = eventData[1];
+    a0[3] = eventData[2];
+    *((u8 *)a0 + 8) = *((const u8 *)eventData + 6);
+    gUnknown_203B048 = 1;
     return a0 + 5;
 }
 
-static const u16 *sub_81150CC(const u16 *a0)
+static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
 {
     const u8 *r5;
-    if (!sub_8110944(a0, sQuestLogEventCmdSizes[33]))
+    if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
 
     r5 = (const u8 *)a0 + 8;
@@ -3908,170 +3997,173 @@ static const u16 *sub_81150CC(const u16 *a0)
     case 0:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gSaveBlock1Ptr->rivalName);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A2E1);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_PlayerBattledChampionRival);
         break;
     case 1:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock1Ptr->rivalName);
-        QuestLog_AutoGetSpeciesName(a0[2], NULL, 1);
+        QuestLog_GetSpeciesName(a0[2], NULL, 1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gSaveBlock2Ptr->playerName);
-        QuestLog_AutoGetSpeciesName(a0[3], NULL, 3);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A312);
+        QuestLog_GetSpeciesName(a0[3], NULL, 3);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_PlayerSentOutMon1RivalSentOutMon2);
         break;
     case 2:
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gUnknown_8456AD8[r5[0]]);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A349);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sDefeatedChampionFlavorTexts[r5[0]]);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_WonTheMatchAsAResult);
         break;
     }
     return (const u16 *)(r5 + 2);
 }
 
-static u16 *sub_81151C0(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DefeatedTrainer(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
-    return sub_8114D18(34, a0, a1);
+    gUnknown_203B048 = 1;
+    return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_TRAINER, a0, eventData);
 }
 
-static const u16 *sub_81151DC(const u16 *a0)
+static const u16 *BufferQuestLogText_DefeatedTrainer(const u16 *eventData)
 {
-    const u16 *r5 = sub_8113E88(34, a0);
+    const u16 *r5 = sub_8113E88(QL_EVENT_DEFEATED_TRAINER, eventData);
     const u8 *r6 = (const u8 *)r5 + 6;
     DynamicPlaceholderTextUtil_Reset();
     GetMapNameGeneric(gStringVar1, r6[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    if (
-            gTrainers[r5[2]].trainerClass == 0x51
-         || gTrainers[r5[2]].trainerClass == 0x59
-         || gTrainers[r5[2]].trainerClass == 0x5A
-    )
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetExpandedPlaceholder(6));
+
+    if (gTrainers[r5[2]].trainerClass == CLASS_RIVAL
+     || gTrainers[r5[2]].trainerClass == CLASS_RIVAL_2
+     || gTrainers[r5[2]].trainerClass == CLASS_CHAMPION_2)
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetExpandedPlaceholder(PLACEHOLDER_ID_RIVAL));
     else
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gTrainers[r5[2]].trainerName);
-    QuestLog_AutoGetSpeciesName(r5[0], NULL, 2);
-    QuestLog_AutoGetSpeciesName(r5[1], NULL, 3);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gUnknown_8456ACC[r6[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841AF6D);
+
+    QuestLog_GetSpeciesName(r5[0], NULL, 2);
+    QuestLog_GetSpeciesName(r5[1], NULL, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sDefeatedOpponentFlavorTexts[r6[1]]);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnTrainersMonWithMonAndWon);
     return (const u16 *)(r6 + 2);
 }
 
-static const u8 *const gUnknown_8456AF0[] = {
-    gQuestLogString_Home,
-    gQuestLogString_OakResearchLab,
-    gQuestLogString_Gym,
-    gQuestLogString_PokemonLeagueGate,
-    gQuestLogString_PokemonLeagueGate,
-    gQuestLogString_ViridianForest,
-    gQuestLogString_ViridianForest,
-    gQuestLogString_PewterMuseumOfScience,
-    gQuestLogString_Gym,
-    gQuestLogString_MtMoon,
-    gQuestLogString_MtMoon,
-    gQuestLogString_Gym,
-    gQuestLogString_BikeShop,
-    gQuestLogString_BillSHouse,
-    gQuestLogString_DayCare,
-    gQuestLogString_UndergroundPath,
-    gQuestLogString_UndergroundPath,
-    gQuestLogString_PokemonFanClub,
-    gQuestLogString_Gym,
-    gQuestLogString_SSAnne,
-    gQuestLogString_DiglettSCave,
-    gQuestLogString_DiglettSCave,
-    gQuestLogString_RockTunnel,
-    gQuestLogString_RockTunnel,
-    gQuestLogString_PowerPlant,
-    gQuestLogString_PokemonTower,
-    gQuestLogString_VolunteerHouse,
-    gQuestLogString_NameRaterSHouse,
-    gQuestLogString_UndergroundPath,
-    gQuestLogString_UndergroundPath,
-    gQuestLogString_CeladonDeptStore,
-    gQuestLogString_CeladonMansion,
-    gQuestLogString_RocketGameCorner,
-    gQuestLogString_Gym,
-    gQuestLogString_Restaurant,
-    gQuestLogString_RocketHideout,
-    gQuestLogString_SafariZone,
-    gQuestLogString_Gym,
-    gQuestLogString_WardenSHome,
-    gQuestLogString_FightingDojo,
-    gQuestLogString_Gym,
-    gQuestLogString_SilphCo,
-    gQuestLogString_SeafoamIslands,
-    gQuestLogString_SeafoamIslands,
-    gQuestLogString_PokemonMansion,
-    gQuestLogString_Gym,
-    gQuestLogString_PokemonResearchLab,
-    gQuestLogString_VictoryRoad,
-    gQuestLogString_VictoryRoad,
-    gQuestLogString_PokemonLeague,
-    gQuestLogString_CeruleanCave
+static const u8 *const sLocationNameTexts[] = 
+{
+    [QL_LOCATION_HOME]               = QuestLog_Text_Home,
+    [QL_LOCATION_OAKS_LAB]           = QuestLog_Text_OakResearchLab,
+    [QL_LOCATION_VIRIDIAN_GYM]       = QuestLog_Text_Gym,
+    [QL_LOCATION_LEAGUE_GATE_1]      = QuestLog_Text_PokemonLeagueGate,
+    [QL_LOCATION_LEAGUE_GATE_2]      = QuestLog_Text_PokemonLeagueGate,
+    [QL_LOCATION_VIRIDIAN_FOREST_1]  = QuestLog_Text_ViridianForest,
+    [QL_LOCATION_VIRIDIAN_FOREST_2]  = QuestLog_Text_ViridianForest,
+    [QL_LOCATION_PEWTER_MUSEUM]      = QuestLog_Text_PewterMuseumOfScience,
+    [QL_LOCATION_PEWTER_GYM]         = QuestLog_Text_Gym,
+    [QL_LOCATION_MT_MOON_1]          = QuestLog_Text_MtMoon,
+    [QL_LOCATION_MT_MOON_2]          = QuestLog_Text_MtMoon,
+    [QL_LOCATION_CERULEAN_GYM]       = QuestLog_Text_Gym,
+    [QL_LOCATION_BIKE_SHOP]          = QuestLog_Text_BikeShop,
+    [QL_LOCATION_BILLS_HOUSE]        = QuestLog_Text_BillsHouse,
+    [QL_LOCATION_DAY_CARE]           = QuestLog_Text_DayCare,
+    [QL_LOCATION_UNDERGROUND_PATH_1] = QuestLog_Text_UndergroundPath,
+    [QL_LOCATION_UNDERGROUND_PATH_2] = QuestLog_Text_UndergroundPath,
+    [QL_LOCATION_PKMN_FAN_CLUB]      = QuestLog_Text_PokemonFanClub,
+    [QL_LOCATION_VERMILION_GYM]      = QuestLog_Text_Gym,
+    [QL_LOCATION_SS_ANNE]            = QuestLog_Text_SSAnne,
+    [QL_LOCATION_DIGLETTS_CAVE_1]    = QuestLog_Text_DiglettsCave,
+    [QL_LOCATION_DIGLETTS_CAVE_2]    = QuestLog_Text_DiglettsCave,
+    [QL_LOCATION_ROCK_TUNNEL_1]      = QuestLog_Text_RockTunnel,
+    [QL_LOCATION_ROCK_TUNNEL_2]      = QuestLog_Text_RockTunnel,
+    [QL_LOCATION_POWER_PLANT]        = QuestLog_Text_PowerPlant,
+    [QL_LOCATION_PKMN_TOWER]         = QuestLog_Text_PokemonTower,
+    [QL_LOCATION_VOLUNTEER_HOUSE]    = QuestLog_Text_VolunteerHouse,
+    [QL_LOCATION_NAME_RATERS_HOUSE]  = QuestLog_Text_NameRatersHouse,
+    [QL_LOCATION_UNDERGROUND_PATH_3] = QuestLog_Text_UndergroundPath,
+    [QL_LOCATION_UNDERGROUND_PATH_4] = QuestLog_Text_UndergroundPath,
+    [QL_LOCATION_CELADON_DEPT_STORE] = QuestLog_Text_CeladonDeptStore,
+    [QL_LOCATION_CELADON_MANSION]    = QuestLog_Text_CeladonMansion,
+    [QL_LOCATION_GAME_CORNER]        = QuestLog_Text_RocketGameCorner,
+    [QL_LOCATION_CELADON_GYM]        = QuestLog_Text_Gym,
+    [QL_LOCATION_CELADON_RESTAURANT] = QuestLog_Text_Restaurant,
+    [QL_LOCATION_ROCKET_HIDEOUT]     = QuestLog_Text_RocketHideout,
+    [QL_LOCATION_SAFARI_ZONE]        = QuestLog_Text_SafariZone,
+    [QL_LOCATION_FUCHSIA_GYM]        = QuestLog_Text_Gym,
+    [QL_LOCATION_WARDENS_HOME]       = QuestLog_Text_WardensHome,
+    [QL_LOCATION_FIGHTING_DOJO]      = QuestLog_Text_FightingDojo,
+    [QL_LOCATION_SAFFRON_GYM]        = QuestLog_Text_Gym,
+    [QL_LOCATION_SILPH_CO]           = QuestLog_Text_SilphCo,
+    [QL_LOCATION_SEAFOAM_ISLANDS_1]  = QuestLog_Text_SeafoamIslands,
+    [QL_LOCATION_SEAFOAM_ISLANDS_2]  = QuestLog_Text_SeafoamIslands,
+    [QL_LOCATION_PKMN_MANSION]       = QuestLog_Text_PokemonMansion,
+    [QL_LOCATION_CINNABAR_GYM]       = QuestLog_Text_Gym,
+    [QL_LOCATION_CINNABAR_LAB]       = QuestLog_Text_PokemonResearchLab,
+    [QL_LOCATION_VICTORY_ROAD_1]     = QuestLog_Text_VictoryRoad,
+    [QL_LOCATION_VICTORY_ROAD_2]     = QuestLog_Text_VictoryRoad,
+    [QL_LOCATION_PKMN_LEAGUE]        = QuestLog_Text_PokemonLeague,
+    [QL_LOCATION_CERULEAN_CAVE]      = QuestLog_Text_CeruleanCave
 };
 
-static const u8 *const gUnknown_8456BBC[] = {
-    gUnknown_841A53A,
-    gUnknown_841AD9E,
-    gUnknown_841ADC8,
-    gUnknown_841ADFF,
-    gUnknown_841AE1E,
-    gUnknown_841AE48,
-    gUnknown_841AEA7,
-    gUnknown_841AEDC,
-    gUnknown_841AFD6,
-    gUnknown_841B005
+static const u8 *const sDepartedLocationTexts[] = 
+{
+    [QL_DEPARTED_TOWN_BUILDING]   = QuestLog_Text_DepartedPlaceInTownForNextDestination,
+    [QL_DEPARTED_MUSEUM]          = QuestLog_Text_LeftTownsLocationForNextDestination,
+    [QL_DEPARTED_GAME_CORNER]     = QuestLog_Text_PlayedGamesAtGameCorner,
+    [QL_DEPARTED_HOME]            = QuestLog_Text_RestedAtHome,
+    [QL_DEPARTED_OAKS_LAB]        = QuestLog_Text_LeftOaksLab,
+    [QL_DEPARTED_GYM]             = QuestLog_Text_GymWasFullOfToughTrainers,
+    [QL_DEPARTED_SAFARI_ZONE]     = QuestLog_Text_HadGreatTimeInSafariZone,
+    [QL_DEPARTED_CAVE]            = QuestLog_Text_ManagedToGetOutOfLocation,
+    [QL_DEPARTED_MISC_BUILDING_1] = QuestLog_Text_DepartedTheLocationForNextDestination,
+    [QL_DEPARTED_MISC_BUILDING_2] = QuestLog_Text_DepartedFromLocationToNextDestination
 };
 
-static const u8 gUnknown_8456BE4[] = {
-    0x03,
-    0x04,
-    0x05,
-    0x08,
-    0x08,
-    0x07,
-    0x07,
-    0x01,
-    0x05,
-    0x07,
-    0x07,
-    0x05,
-    0x00,
-    0x00,
-    0x00,
-    0x08,
-    0x08,
-    0x00,
-    0x05,
-    0x08,
-    0x07,
-    0x07,
-    0x07,
-    0x07,
-    0x08,
-    0x08,
-    0x00,
-    0x00,
-    0x08,
-    0x08,
-    0x00,
-    0x00,
-    0x02,
-    0x05,
-    0x00,
-    0x08,
-    0x06,
-    0x05,
-    0x00,
-    0x00,
-    0x05,
-    0x09,
-    0x07,
-    0x07,
-    0x09,
-    0x05,
-    0x00,
-    0x07,
-    0x07,
-    0x08,
-    0x07
+static const u8 sLocationToDepartedTextId[] = 
+{
+    [QL_LOCATION_HOME]               = QL_DEPARTED_HOME,
+    [QL_LOCATION_OAKS_LAB]           = QL_DEPARTED_OAKS_LAB,
+    [QL_LOCATION_VIRIDIAN_GYM]       = QL_DEPARTED_GYM,
+    [QL_LOCATION_LEAGUE_GATE_1]      = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_LEAGUE_GATE_2]      = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_VIRIDIAN_FOREST_1]  = QL_DEPARTED_CAVE,
+    [QL_LOCATION_VIRIDIAN_FOREST_2]  = QL_DEPARTED_CAVE,
+    [QL_LOCATION_PEWTER_MUSEUM]      = QL_DEPARTED_MUSEUM,
+    [QL_LOCATION_PEWTER_GYM]         = QL_DEPARTED_GYM,
+    [QL_LOCATION_MT_MOON_1]          = QL_DEPARTED_CAVE,
+    [QL_LOCATION_MT_MOON_2]          = QL_DEPARTED_CAVE,
+    [QL_LOCATION_CERULEAN_GYM]       = QL_DEPARTED_GYM,
+    [QL_LOCATION_BIKE_SHOP]          = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_BILLS_HOUSE]        = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_DAY_CARE]           = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_UNDERGROUND_PATH_1] = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_UNDERGROUND_PATH_2] = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_PKMN_FAN_CLUB]      = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_VERMILION_GYM]      = QL_DEPARTED_GYM,
+    [QL_LOCATION_SS_ANNE]            = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_DIGLETTS_CAVE_1]    = QL_DEPARTED_CAVE,
+    [QL_LOCATION_DIGLETTS_CAVE_2]    = QL_DEPARTED_CAVE,
+    [QL_LOCATION_ROCK_TUNNEL_1]      = QL_DEPARTED_CAVE,
+    [QL_LOCATION_ROCK_TUNNEL_2]      = QL_DEPARTED_CAVE,
+    [QL_LOCATION_POWER_PLANT]        = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_PKMN_TOWER]         = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_VOLUNTEER_HOUSE]    = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_NAME_RATERS_HOUSE]  = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_UNDERGROUND_PATH_3] = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_UNDERGROUND_PATH_4] = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_CELADON_DEPT_STORE] = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_CELADON_MANSION]    = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_GAME_CORNER]        = QL_DEPARTED_GAME_CORNER,
+    [QL_LOCATION_CELADON_GYM]        = QL_DEPARTED_GYM,
+    [QL_LOCATION_CELADON_RESTAURANT] = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_ROCKET_HIDEOUT]     = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_SAFARI_ZONE]        = QL_DEPARTED_SAFARI_ZONE,
+    [QL_LOCATION_FUCHSIA_GYM]        = QL_DEPARTED_GYM,
+    [QL_LOCATION_WARDENS_HOME]       = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_FIGHTING_DOJO]      = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_SAFFRON_GYM]        = QL_DEPARTED_GYM,
+    [QL_LOCATION_SILPH_CO]           = QL_DEPARTED_MISC_BUILDING_2,
+    [QL_LOCATION_SEAFOAM_ISLANDS_1]  = QL_DEPARTED_CAVE,
+    [QL_LOCATION_SEAFOAM_ISLANDS_2]  = QL_DEPARTED_CAVE,
+    [QL_LOCATION_PKMN_MANSION]       = QL_DEPARTED_MISC_BUILDING_2,
+    [QL_LOCATION_CINNABAR_GYM]       = QL_DEPARTED_GYM,
+    [QL_LOCATION_CINNABAR_LAB]       = QL_DEPARTED_TOWN_BUILDING,
+    [QL_LOCATION_VICTORY_ROAD_1]     = QL_DEPARTED_CAVE,
+    [QL_LOCATION_VICTORY_ROAD_2]     = QL_DEPARTED_CAVE,
+    [QL_LOCATION_PKMN_LEAGUE]        = QL_DEPARTED_MISC_BUILDING_1,
+    [QL_LOCATION_CERULEAN_CAVE]      = QL_DEPARTED_CAVE
 };
 
 static const u8 gUnknown_8456C17[] = {
@@ -4085,57 +4177,58 @@ static const u8 gUnknown_8456C17[] = {
     0x59
 };
 
-static const u8 *const gUnknown_8456C20[] = {
-    gUnknown_841AC51,
-    gUnknown_841ABAB,
-    gUnknown_841ABCD,
-    gUnknown_841AC2A,
-    gUnknown_841ABF9,
-    gUnknown_841AC93,
-    gUnknown_841ACBC,
-    gUnknown_841AD69,
-    gUnknown_841AD1D,
-    gUnknown_841A90C,
-    gUnknown_841A8E0,
-    gUnknown_841AD3C
+static const u8 *const sUsedFieldMoveTexts[] = 
+{
+    [FIELD_MOVE_FLASH]       = QuestLog_Text_UsedFlash,
+    [FIELD_MOVE_CUT]         = QuestLog_Text_UsedCut,
+    [FIELD_MOVE_FLY]         = QuestLog_Text_UsedFly,
+    [FIELD_MOVE_STRENGTH]    = QuestLog_Text_UsedStrength,
+    [FIELD_MOVE_SURF]        = QuestLog_Text_UsedSurf,
+    [FIELD_MOVE_ROCK_SMASH]  = QuestLog_Text_UsedRockSmash,
+    [FIELD_MOVE_WATERFALL]   = QuestLog_Text_UsedWaterfall,
+    [FIELD_MOVE_TELEPORT]    = QuestLog_Text_UsedTeleportToLocation,
+    [FIELD_MOVE_DIG]         = QuestLog_Text_UsedDigInLocation,
+    [FIELD_MOVE_MILK_DRINK]  = QuestLog_Text_UsedMilkDrink,
+    [FIELD_MOVE_SOFT_BOILED] = QuestLog_Text_UsedSoftboiled,
+    [FIELD_MOVE_SWEET_SCENT] = QuestLog_Text_UsedSweetScent
 };
 
-static u16 *sub_8115280(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_DepartedLocation(u16 *a0, const u16 *eventData)
 {
-    u16 *r2 = sub_8113DE0(35, a0);
+    u16 *r2 = sub_8113DE0(QL_EVENT_DEPARTED, a0);
     if (r2 == NULL)
         return NULL;
-    *((u8 *)r2 + 0) = *((const u8 *)a1 + 0);
-    if ((*((u8 *)r2 + 1) = *((const u8 *)a1 + 1)) == 0x24)
-        gUnknown_203B048 = TRUE;
+    *((u8 *)r2 + 0) = *((const u8 *)eventData + 0);
+    if ((*((u8 *)r2 + 1) = *((const u8 *)eventData + 1)) == 0x24)
+        gUnknown_203B048 = 1;
     return r2 + 1;
 }
 
-static const u16 *sub_81152BC(const u16 *a0)
+static const u16 *BufferQuestLogText_DepartedLocation(const u16 *eventData)
 {
-    u8 r4, r6;
-    const u16 *r5 = sub_8113E88(35, a0);
+    u8 r4, locationId;
+    const u16 *r5 = sub_8113E88(QL_EVENT_DEPARTED, eventData);
     const u8 *r5_2 = (const u8 *)r5 + 0;
-    r6 = r5_2[1];
+    locationId = r5_2[1];
     GetMapNameGeneric(gStringVar1, r5_2[0]);
-    StringCopy(gStringVar2, gUnknown_8456AF0[r6]);
-    if (gUnknown_8456BE4[r6] == 5)
+    StringCopy(gStringVar2, sLocationNameTexts[locationId]);
+    if (sLocationToDepartedTextId[locationId] == QL_DEPARTED_GYM)
     {
         for (r4 = 0; r4 < ARRAY_COUNT(gUnknown_8456C17); r4++)
         {
             if (r5_2[0] != gUnknown_8456C17[r4])
                 continue;
             if (FlagGet(FLAG_BADGE01_GET + r4) == TRUE)
-                StringExpandPlaceholders(gStringVar4, gUnknown_841AE8F);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_DepartedGym);
             else
-                StringExpandPlaceholders(gStringVar4, gUnknown_841AE48);
+                StringExpandPlaceholders(gStringVar4, QuestLog_Text_GymWasFullOfToughTrainers);
             break;
         }
         if (r4 == 8)
-            StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r6]]);
+            StringExpandPlaceholders(gStringVar4, sDepartedLocationTexts[sLocationToDepartedTextId[locationId]]);
     }
     else
-        StringExpandPlaceholders(gStringVar4, gUnknown_8456BBC[gUnknown_8456BE4[r6]]);
+        StringExpandPlaceholders(gStringVar4, sDepartedLocationTexts[sLocationToDepartedTextId[locationId]]);
 
     return (const u16 *)(r5_2 + 2);
 }
@@ -4145,81 +4238,86 @@ void sub_811539C(void)
     gUnknown_203B04B = TRUE;
 }
 
-static bool8 sub_81153A8(u16 a0, const u16 *a1)
+static bool8 sub_81153A8(u16 eventId, const u16 *eventData)
 {
-    if (a0 != 35)
+    if (eventId != QL_EVENT_DEPARTED)
     {
         gUnknown_203B04A = 0;
         return TRUE;
     }
-    if (gUnknown_203B04A == *((u8 *)a1 + 1) + 1)
+    if (gUnknown_203B04A == *((u8 *)eventData + 1) + 1)
         return FALSE;
-    gUnknown_203B04A = *((u8 *)a1 + 1) + 1;
+    gUnknown_203B04A = *((u8 *)eventData + 1) + 1;
     return TRUE;
 }
 
-static bool8 sub_81153E4(u16 a0, const u16 *a1)
+static bool8 sub_81153E4(u16 eventId, const u16 *eventData)
 {
-    if (a0 != 35)
+    if (eventId != QL_EVENT_DEPARTED)
         return TRUE;
-    if (*((u8 *)a1 + 1) == 32 && gUnknown_203B04B == 0)
+
+    if (*((u8 *)eventData + 1) == 32 && !gUnknown_203B04B)
         return FALSE;
-    gUnknown_203B04B = 0;
+
+    gUnknown_203B04B = FALSE;
     return TRUE;
 }
 
-static u16 *sub_8115410(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_UsedFieldMove(u16 *a0, const u16 *eventData)
 {
     u8 *r3;
-    a0 = sub_8113DE0(36, a0);
+    a0 = sub_8113DE0(QL_EVENT_USED_FIELD_MOVE, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
+    a0[0] = eventData[0];
     r3 = (u8 *)a0 + 2;
-    r3[0] = *((const u8 *)a1 + 2);
-    r3[1] = *((const u8 *)a1 + 3);
-    if (r3[0] == 7 || r3[0] == 8)
+    r3[0] = *((const u8 *)eventData + 2);
+    r3[1] = *((const u8 *)eventData + 3);
+    if (r3[0] == FIELD_MOVE_TELEPORT || r3[0] == FIELD_MOVE_DIG)
         gUnknown_203B048 = 2;
     else
         gUnknown_203B048 = 1;
     return (u16 *)(r3 + 2);
 }
 
-static const u16 *sub_8115460(const u16 *a0)
+static const u16 *BufferQuestLogText_UsedFieldMove(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(36, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_USED_FIELD_MOVE, eventData);
     const u8 *r5 = (const u8 *)r4 + 2;
-    QuestLog_AutoGetSpeciesName(r4[0], gStringVar1, 0);
+    QuestLog_GetSpeciesName(r4[0], gStringVar1, 0);
     if (r5[1] != 0xFF)
         GetMapNameGeneric(gStringVar2, r5[1]);
-    if (r5[0] == 7)
+
+    // If used Teleport, get name of destination
+    if (r5[0] == FIELD_MOVE_TELEPORT)
     {
         if (r5[1] == 0x58)
-            StringCopy(gStringVar3, gQuestLogString_Home);
+            StringCopy(gStringVar3, QuestLog_Text_Home);
         else
-            StringCopy(gStringVar3, gUnknown_8418C1B);
+            StringCopy(gStringVar3, gText_PokemonCenter);
     }
-    StringExpandPlaceholders(gStringVar4, gUnknown_8456C20[r5[0]]);
+
+    StringExpandPlaceholders(gStringVar4, sUsedFieldMoveTexts[r5[0]]);
     return (const u16 *)(r5 + 2);
 }
 
-static u16 *sub_81154DC(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_BoughtItem(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(37, a0);
+    a0 = sub_8113DE0(QL_EVENT_BOUGHT_ITEM, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[2];
-    a0[1] = a1[3];
-    a0[2] = *((const u32 *)a1) >> 16;
-    a0[3] = *((const u32 *)a1);
-    *((u8 *)a0 + 8) = *((const u8 *)a1 + 8);
+    a0[0] = eventData[2];
+    a0[1] = eventData[3];
+    a0[2] = *((const u32 *)eventData) >> 16;
+    a0[3] = *((const u32 *)eventData);
+    *((u8 *)a0 + 8) = *((const u8 *)eventData + 8);
     *((u8 *)a0 + 9) = 1;
     return a0 + 5;
 }
 
-static const u16 *sub_8115518(const u16 *a0)
+static const u16 *BufferQuestLogText_BoughtItem(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(37, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_BOUGHT_ITEM, eventData);
     const u8 *r7 = (const u8 *)r4 + 8;
     u32 r6 = (r4[2] << 16) + r4[3];
     DynamicPlaceholderTextUtil_Reset();
@@ -4227,32 +4325,33 @@ static const u16 *sub_8115518(const u16 *a0)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r4[0]));
     if (r4[1] < 2)
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A7DD);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_BoughtItem);
     else
     {
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A810);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_BoughtItemsIncludingItem);
     }
     return (const u16 *)(r7 + 2);
 }
 
-static u16 *sub_81155A4(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_SoldItem(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(38, a0);
+    a0 = sub_8113DE0(QL_EVENT_SOLD_ITEM, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[2];
-    a0[1] = a1[3];
-    a0[2] = *((const u32 *)a1) >> 16;
-    a0[3] = *((const u32 *)a1);
-    *((u8 *)a0 + 8) = *((const u8 *)a1 + 8);
-    *((u8 *)a0 + 9) = *((const u8 *)a1 + 9);
+    a0[0] = eventData[2];
+    a0[1] = eventData[3];
+    a0[2] = *((const u32 *)eventData) >> 16;
+    a0[3] = *((const u32 *)eventData);
+    *((u8 *)a0 + 8) = *((const u8 *)eventData + 8);
+    *((u8 *)a0 + 9) = *((const u8 *)eventData + 9);
     return a0 + 5;
 }
 
-static const u16 *sub_81155E0(const u16 *a0) {
-    const u16 *r5 = sub_8113E88(38, a0);
+static const u16 *BufferQuestLogText_SoldItem(const u16 *eventData)
+{
+    const u16 *r5 = sub_8113E88(QL_EVENT_SOLD_ITEM, eventData);
     const u8 *r7 = (const u8 *) r5 + 8;
     u32 r6 = (r5[2] << 16) + r5[3];
     DynamicPlaceholderTextUtil_Reset();
@@ -4262,15 +4361,15 @@ static const u16 *sub_81155E0(const u16 *a0) {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, ItemId_GetName(r5[0]));
         if (r5[1] == 1)
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gUnknown_841A8D4);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, QuestLog_Text_JustOne);
         else
         {
             ConvertIntToDecimalStringN(gStringVar2, r5[1], STR_CONV_MODE_LEFT_ALIGN, 3);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gStringVar2);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar3, gUnknown_841A8DD);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar3, QuestLog_Text_Num);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gStringVar3);
         }
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A858);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SoldNumOfItem);
     }
     else
     {
@@ -4278,61 +4377,64 @@ static const u16 *sub_81155E0(const u16 *a0) {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r5[0]));
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gUnknown_841A896);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SoldItemsIncludingItem);
     }
     return (const u16 *)(r7 + 2);
 }
 
-static u16 *sub_81156D8(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_ObtainedItem(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(40, a0);
+    a0 = sub_8113DE0(QL_EVENT_OBTAINED_ITEM, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
-    *((u8 *)a0 + 2) = *((const u8 *)a1 + 2);
+    a0[0] = eventData[0];
+    *((u8 *)a0 + 2) = *((const u8 *)eventData + 2);
     return a0 + 2;
 }
 
-static const u16 *sub_8115700(const u16 *a0)
+static const u16 *BufferQuestLogText_ObtainedItem(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(40, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_OBTAINED_ITEM, eventData);
     const u8 *r5 = (const u8 *)r4 + 2;
     GetMapNameGeneric(gStringVar1, r5[0]);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, gUnknown_841B03F);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ObtainedItemInLocation);
     return (const u16 *)(r5 + 2);
 }
 
-static const u16 gUnknown_8456C50[] = {
-        0x0891,
-        0x0892,
-        0x0893,
-        0x0894,
-        0x0895,
-        0x0896,
-        0x0897,
-        0x0898,
-        0x0899,
-        0x089a,
-        0x089b,
-        0x089c,
-        0x089d,
-        0x089e,
-        0x089f,
-        0x08a0,
-        0x08a1
+static const u16 sQuestLogWorldMapFlags[] = 
+{
+    FLAG_WORLD_MAP_VIRIDIAN_CITY,
+    FLAG_WORLD_MAP_PEWTER_CITY,
+    FLAG_WORLD_MAP_CERULEAN_CITY,
+    FLAG_WORLD_MAP_LAVENDER_TOWN,
+    FLAG_WORLD_MAP_VERMILION_CITY,
+    FLAG_WORLD_MAP_CELADON_CITY,
+    FLAG_WORLD_MAP_FUCHSIA_CITY,
+    FLAG_WORLD_MAP_CINNABAR_ISLAND,
+    FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR,
+    FLAG_WORLD_MAP_SAFFRON_CITY,
+    FLAG_WORLD_MAP_ONE_ISLAND,
+    FLAG_WORLD_MAP_TWO_ISLAND,
+    FLAG_WORLD_MAP_THREE_ISLAND,
+    FLAG_WORLD_MAP_FOUR_ISLAND,
+    FLAG_WORLD_MAP_FIVE_ISLAND,
+    FLAG_WORLD_MAP_SEVEN_ISLAND,
+    FLAG_WORLD_MAP_SIX_ISLAND
 };
 
-void sub_8115748(u16 a0)
+void sub_8115748(u16 worldMapFlag)
 {
     s32 i;
-    if (gUnknown_203ADFA == 2 || gUnknown_203ADFA == 3)
+
+    if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
-    for (i = 0; i < 17; i++)
+
+    for (i = 0; i < (int)NELEMS(sQuestLogWorldMapFlags); i++)
     {
-        if (a0 == gUnknown_8456C50[i])
+        if (worldMapFlag == sQuestLogWorldMapFlags[i])
         {
-            if (!FlagGet(a0))
+            if (!FlagGet(worldMapFlag))
             {
                 gUnknown_203B049 = TRUE;
                 break;
@@ -4350,47 +4452,47 @@ void sub_8115748(u16 a0)
 void sub_8115798(void)
 {
     u16 sp0;
-    if (gUnknown_203ADFA != 2 && gUnknown_203ADFA != 3)
+    if (gQuestLogState != 2 && gQuestLogState != 3)
     {
         if (gUnknown_203B049)
         {
             sp0 = gMapHeader.regionMapSectionId;
-            sub_8113550(42, &sp0);
+            SetQuestLogEvent(QL_EVENT_ARRIVED, &sp0);
             gUnknown_203B049 = FALSE;
         }
     }
 }
 
-static u16 *sub_81157DC(u16 *a0, const u16 *a1)
+static u16 *BufferQuestLogData_ArrivedInLocation(u16 *a0, const u16 *eventData)
 {
-    a0 = sub_8113DE0(42, a0);
+    a0 = sub_8113DE0(QL_EVENT_ARRIVED, a0);
     if (a0 == NULL)
         return NULL;
-    a0[0] = a1[0];
+    a0[0] = eventData[0];
     return a0 + 1;
 }
 
-static const u16 *sub_8115800(const u16 *a0)
+static const u16 *BufferQuestLogText_ArrivedInLocation(const u16 *eventData)
 {
-    const u16 *r4 = sub_8113E88(42, a0);
+    const u16 *r4 = sub_8113E88(QL_EVENT_ARRIVED, eventData);
     GetMapNameGeneric(gStringVar1, (u8)r4[0]);
-    StringExpandPlaceholders(gStringVar4, gUnknown_841B064);
+    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ArrivedInLocation);
     return r4 + 1;
 }
 
-void sub_8115834(u8 *a0)
+static void BufferLinkPartnersName(u8 *dest)
 {
     s32 i;
-    if (*a0++ == EXT_CTRL_CODE_BEGIN && *a0++ == EXT_CTRL_CODE_JPN)
+    if (*dest++ == EXT_CTRL_CODE_BEGIN && *dest++ == EXT_CTRL_CODE_JPN)
     {
         for (i = 0; i < 5; i++)
         {
-            if (*a0 == EXT_CTRL_CODE_BEGIN)
+            if (*dest == EXT_CTRL_CODE_BEGIN)
                 break;
-            a0++;
+            dest++;
         }
-        *a0++ = EXT_CTRL_CODE_BEGIN;
-        *a0++ = EXT_CTRL_CODE_ENG;
-        *a0++ = EOS;
+        *dest++ = EXT_CTRL_CODE_BEGIN;
+        *dest++ = EXT_CTRL_CODE_ENG;
+        *dest++ = EOS;
     }
 }

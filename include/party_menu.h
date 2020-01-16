@@ -49,7 +49,7 @@ void CB2_SelectBagItemToGive(void);
 void CB2_GiveHoldItem(void);
 bool8 FieldCallback_PrepareFadeInFromMenu(void);
 void CB2_ReturnToPartyMenuFromFlyMap(void);
-void sub_8124C1C(const u8 *healLocCtrlData);
+void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData);
 void CB2_ShowPartyMenuForItemUse(void);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func);
 void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func);

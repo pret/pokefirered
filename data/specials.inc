@@ -171,14 +171,14 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special ShouldMoveSaffronFanClubMember
-	def_special GetNumMovedSaffronFanClubMembers
-	def_special BufferStreakTrainerText
-	def_special sub_8113064
-	def_special UpdateMovedSaffronFanClubMembers
-	def_special sub_8113510
-	def_special sub_81130A8
-	def_special sub_8113530
+	def_special Special_IsFanClubMemberFanOfPlayer
+	def_special Special_GetNumFansOfPlayerInTrainerFanClub
+	def_special Special_BufferFanClubTrainerName
+	def_special Special_TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special Special_TryLoseFansFromPlayTime
+	def_special Special_SetPlayerGotFirstFans
+	def_special Special_UpdateTrainerFanClubGameClear
+	def_special Special_TryGainNewFanFromCounter
 	def_special ScrSpecial_RockSmashWildEncounter
 	def_special nullsub_75
 	def_special nullsub_75
@@ -369,7 +369,7 @@ gSpecials:: @ 815FD60
 	def_special ChangeBoxPokemonNickname
 	def_special Special_UpdateTrainerCardPhotoIcons
 	def_special Special_StickerLadyGetBragFlags
-	def_special sub_80CC524
+	def_special SetUsedPkmnCenterQuestLogEvent
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
@@ -399,7 +399,7 @@ gSpecials:: @ 815FD60
 	def_special sub_811390C
 	def_special Special_GetMartClerkObjectId
 	def_special Special_BattleCardAction
-	def_special sub_8110AB4
+	def_special Special_GetQuestLogState
 	def_special sub_8112364
 	def_special Special_GetMENewsJisanItemAndState
 	def_special GetPCBoxToSendMon

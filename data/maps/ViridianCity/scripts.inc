@@ -140,9 +140,7 @@ EventScript_165A5B:: @ 8165A5B
 
 EventScript_165A65:: @ 8165A65
 	msgbox gUnknown_817DE9B
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle
 	waitstate
@@ -235,9 +233,7 @@ ViridianCity_EventScript_165B2E:: @ 8165B2E
 EventScript_165B4C:: @ 8165B4C
 	msgbox gUnknown_817DD4E
 	closemessage
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	special ScrSpecial_StartOldManTutorialBattle
 	waitstate

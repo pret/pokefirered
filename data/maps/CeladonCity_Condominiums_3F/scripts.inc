@@ -31,9 +31,7 @@ EventScript_16C418:: @ 816C418
 	message Text_1963CD
 	waitmessage
 	delay 60
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special Special_ShowDiploma
 	waitstate
 	release

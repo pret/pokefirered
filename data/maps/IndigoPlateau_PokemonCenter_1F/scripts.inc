@@ -41,9 +41,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_16EAC3:: @ 816EAC3
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou

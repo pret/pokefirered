@@ -136,9 +136,7 @@ VermilionCity_Gym_EventScript_16B837:: @ 816B837
 	end
 
 EventScript_16B843:: @ 816B843
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	copyvar VAR_0x8004, VAR_TEMP_0
 	copyvar VAR_0x8005, VAR_TEMP_1

@@ -2,9 +2,7 @@ FiveIsland_ResortGorgeous_House_MapScripts:: @ 8171EBD
 	.byte 0
 
 FiveIsland_ResortGorgeous_House_EventScript_171EBE:: @ 8171EBE
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer

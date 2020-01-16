@@ -32,9 +32,7 @@ NavelRock_Summit_EventScript_TryRemoveHoOh:: @ 8164FE7
 	return
 
 NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lockall
 	setvar VAR_TEMP_1, 1

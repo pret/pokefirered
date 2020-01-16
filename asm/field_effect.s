@@ -7227,7 +7227,7 @@ _08086BA4: .4byte sub_8086990
 	thumb_func_start sub_8086BA8
 sub_8086BA8: @ 8086BA8
 	push {lr}
-	ldr r0, _08086BC8 @ =gUnknown_203ADFA
+	ldr r0, _08086BC8 @ =gQuestLogState
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08086BBA
@@ -7242,7 +7242,7 @@ _08086BBA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08086BC8: .4byte gUnknown_203ADFA
+_08086BC8: .4byte gQuestLogState
 _08086BCC: .4byte sub_8086BD0
 	thumb_func_end sub_8086BA8
 

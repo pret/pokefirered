@@ -5,9 +5,7 @@ PokemonTower_6F_EventScript_1634B8:: @ 81634B8
 	lockall
 	textcolor 2
 	msgbox gUnknown_817A2F8
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
 	special ScrSpecial_StartMarowakBattle
 	waitstate

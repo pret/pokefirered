@@ -1176,7 +1176,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
 {
     u8 taskId;
     s16 *data;
-    ScriptContext1_SetupScript(EventScript_1A7AE0);
+    ScriptContext1_SetupScript(EventScript_ReleaseEnd);
     taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
     if (taskId != 0xFF)
     {

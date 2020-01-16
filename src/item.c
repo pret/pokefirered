@@ -564,13 +564,15 @@ u16 BagGetQuantityByItemId(u16 itemId)
     return 0;
 }
 
-void sub_809A824(u16 itemId)
+void TrySetObtainedItemQuestLogEvent(u16 itemId)
 {
     struct QuestLogStruct_809A824
     {
         u16 itemId;
         u8 mapSectionId;
     } * ptr;
+
+    // Only some key items trigger this event
     if
     (
         itemId == ITEM_OAKS_PARCEL
@@ -600,7 +602,7 @@ void sub_809A824(u16 itemId)
             ptr = malloc(sizeof(*ptr));
             ptr->itemId = itemId;
             ptr->mapSectionId = gMapHeader.regionMapSectionId;
-            sub_8113550(40, (void *)ptr);
+            SetQuestLogEvent(QL_EVENT_OBTAINED_ITEM, (void *)ptr);
             free(ptr);
         }
     }

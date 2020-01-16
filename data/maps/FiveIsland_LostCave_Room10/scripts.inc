@@ -24,9 +24,7 @@ EventScript_164C52:: @ 8164C52
 	applymovement 1, Movement_164CC8
 	waitmovement 0
 	msgbox gUnknown_817D062
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_164CB6
+	goto_if_questlog EventScript_164CB6
 	trainerbattle_no_intro TRAINER_LADY_SELPHY, Text_17D086
 	msgbox gUnknown_817D0B2
 	closemessage

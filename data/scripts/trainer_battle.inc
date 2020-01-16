@@ -48,9 +48,7 @@ EventScript_DoTrainerBattle:: @ 81A4F21
 	applymovement VAR_LAST_TALKED, Movement_1A4FC5
 	waitmovement 0
 	special PlayTrainerEncounterMusic
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A501A
+	goto_if_questlog EventScript_1A501A
 	battlebegin
 	ontrainerbattleend
 
@@ -64,9 +62,7 @@ EventScript_TryDoRematchBattle:: @ 81A4F3E
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A4FB8
+	goto_if_questlog EventScript_1A4FB8
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
@@ -87,9 +83,7 @@ EventScript_TryDoDoubleRematchBattle:: @ 81A4F73
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A4FB8
+	goto_if_questlog EventScript_1A4FB8
 	special ScrSpecial_StartTrainerEyeRematch
 	waitstate
 	releaseall
@@ -122,9 +116,7 @@ EventScript_1A4FC7:: @ 81A4FC7
 	special ScrSpecial_ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A501A
+	goto_if_questlog EventScript_1A501A
 	battlebegin
 	specialvar VAR_RESULT, ScrSpecial_GetTrainerBattleMode
 	compare VAR_RESULT, 0

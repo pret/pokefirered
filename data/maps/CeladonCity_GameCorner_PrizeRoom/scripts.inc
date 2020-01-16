@@ -13,9 +13,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CB88:: @ 816CB88
 	lock
 	faceplayer
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CBB2
@@ -250,9 +248,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CE1D:: @ 816CE1D
 	lock
 	faceplayer
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CE47
@@ -347,9 +343,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_16CF88:: @ 816CF88
 	lock
 	faceplayer
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_16CD99
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	showcoinsbox 0, 0
 	msgbox gUnknown_8197057
 	goto EventScript_16CFB2

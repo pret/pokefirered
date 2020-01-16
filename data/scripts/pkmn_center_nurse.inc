@@ -1,7 +1,5 @@
 EventScript_PkmnCenterNurse:: @ 81A6578
-	special sub_8110AB4
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	message Text_WelcomeWantToHealPkmn
 	waitmessage
 	multichoice 19, 8, MULTICHOICE_YES_NO, FALSE | (TRUE << 1)
@@ -16,7 +14,7 @@ EventScript_PkmnCenterNurse_HealPkmn:: @ 81A65B8
 	message Text_TakeYourPkmnForFewSeconds
 	waitmessage
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	special sub_80CC524
+	special SetUsedPkmnCenterQuestLogEvent
 	goto EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom
 	end
 

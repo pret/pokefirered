@@ -1926,7 +1926,7 @@ sub_8081668: @ 8081668
 	bl sub_8055DB8
 	bl LoadPlayerParty
 	bl SavePlayerBag
-	bl sub_81134B8
+	bl Special_UpdateTrainerFansAfterLinkBattle
 	ldr r0, _080816B8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x5

@@ -99,15 +99,15 @@ Text_186EC7:: @ 8186EC7
     .string "They're great for startling people.\n"
     .string "And, they bite, too.$"
 
-gUnknown_8186F3D:: @ 8186F3D
+Route16_Text_MonSprawledOutInSlumber:: @ 8186F3D
     .string "A POKéMON is sprawled out in\n"
     .string "a deep and comfortable slumber.$"
 
-gUnknown_8186F7A:: @ 8186F7A
+Route16_Text_CyclingRoadSign:: @ 8186F7A
     .string "Enjoy the slope!\n"
     .string "CYCLING ROAD$"
 
-gUnknown_8186F98:: @ 8186F98
+Route16_Text_RouteSign:: @ 8186F98
     .string "ROUTE 16\n"
     .string "CELADON CITY - FUCHSIA CITY$"
 

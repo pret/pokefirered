@@ -36,182 +36,182 @@
       "x": 3,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638EC"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleABC"
     },
     {
       "type": "bg_event_type_1",
       "x": 4,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638EC"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleABC"
     },
     {
       "type": "bg_event_type_1",
       "x": 5,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638EC"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleABC"
     },
     {
       "type": "bg_event_type_1",
       "x": 4,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638F5"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleGHI"
     },
     {
       "type": "bg_event_type_1",
       "x": 3,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638F5"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleGHI"
     },
     {
       "type": "bg_event_type_1",
       "x": 5,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638F5"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleGHI"
     },
     {
       "type": "bg_event_type_1",
       "x": 3,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638FE"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleMNO"
     },
     {
       "type": "bg_event_type_1",
       "x": 4,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638FE"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleMNO"
     },
     {
       "type": "bg_event_type_1",
       "x": 5,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_1638FE"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleMNO"
     },
     {
       "type": "bg_event_type_1",
       "x": 3,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163907"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleTUV"
     },
     {
       "type": "bg_event_type_1",
       "x": 4,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163907"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleTUV"
     },
     {
       "type": "bg_event_type_1",
       "x": 5,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163907"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleTUV"
     },
     {
       "type": "bg_event_type_1",
       "x": 7,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163910"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleDEF"
     },
     {
       "type": "bg_event_type_1",
       "x": 8,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163910"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleDEF"
     },
     {
       "type": "bg_event_type_1",
       "x": 9,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163910"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleDEF"
     },
     {
       "type": "bg_event_type_1",
       "x": 7,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163919"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleJKL"
     },
     {
       "type": "bg_event_type_1",
       "x": 8,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163919"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleJKL"
     },
     {
       "type": "bg_event_type_1",
       "x": 9,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163919"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleJKL"
     },
     {
       "type": "bg_event_type_1",
       "x": 7,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163922"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BraillePQRS"
     },
     {
       "type": "bg_event_type_1",
       "x": 11,
       "y": 7,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163934"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BraillePeriod"
     },
     {
       "type": "bg_event_type_1",
       "x": 11,
       "y": 9,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_16393D"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleComma"
     },
     {
       "type": "bg_event_type_1",
       "x": 8,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163922"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BraillePQRS"
     },
     {
       "type": "bg_event_type_1",
       "x": 9,
       "y": 11,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_163922"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BraillePQRS"
     },
     {
       "type": "bg_event_type_1",
       "x": 7,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_16392B"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleWXYZ"
     },
     {
       "type": "bg_event_type_1",
       "x": 9,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_16392B"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleWXYZ"
     },
     {
       "type": "bg_event_type_1",
       "x": 8,
       "y": 13,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B4F_EventScript_16392B"
+      "script": "MtEmber_RubyPath_B4F_EventScript_BrailleWXYZ"
     }
   ]
 }

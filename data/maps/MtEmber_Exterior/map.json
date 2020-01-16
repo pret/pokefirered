@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_Exterior_EventScript_16397F",
+      "script": "MtEmber_Exterior_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_ROCKETS"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_Exterior_EventScript_1639F0",
+      "script": "MtEmber_Exterior_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MT_EMBER_EXTERIOR_ROCKETS"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 3,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "MtEmber_Exterior_EventScript_163AE2",
+      "script": "MtEmber_Exterior_EventScript_Jocelyn",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "MtEmber_Exterior_EventScript_163AB4",
+      "script": "MtEmber_Exterior_EventScript_Logan",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "MtEmber_Exterior_EventScript_163ACB",
+      "script": "MtEmber_Exterior_EventScript_Beth",
       "flag": "0"
     },
     {
@@ -326,7 +326,7 @@
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
       "var_value": 1,
-      "script": "MtEmber_Exterior_EventScript_163A4E"
+      "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     },
     {
       "type": "trigger",
@@ -335,7 +335,7 @@
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
       "var_value": 1,
-      "script": "MtEmber_Exterior_EventScript_163A4E"
+      "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     },
     {
       "type": "trigger",
@@ -344,7 +344,7 @@
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
       "var_value": 1,
-      "script": "MtEmber_Exterior_EventScript_163A4E"
+      "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     }
   ],
   "bg_events": [

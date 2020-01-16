@@ -4,10 +4,10 @@ CeruleanCave_B1F_MapScripts:: @ 81624BE
 	.byte 0
 
 CeruleanCave_B1F_OnResume:: @ 81624C9
-	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, EventScript_1624D3
+	call_if_set FLAG_SYS_SPECIAL_WILD_BATTLE, CeruleanCave_B1F_EventScript_TryRemoveMewtwo
 	end
 
-EventScript_1624D3:: @ 81624D3
+CeruleanCave_B1F_EventScript_TryRemoveMewtwo:: @ 81624D3
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
@@ -15,21 +15,21 @@ EventScript_1624D3:: @ 81624D3
 	return
 
 CeruleanCave_B1F_OnTransition:: @ 81624E7
-	call_if_unset FLAG_FOUGHT_MEWTWO, EventScript_1624F1
+	call_if_unset FLAG_FOUGHT_MEWTWO, CeruleanCave_B1F_EventScript_ShowMewtwo
 	end
 
-EventScript_1624F1:: @ 81624F1
+CeruleanCave_B1F_EventScript_ShowMewtwo:: @ 81624F1
 	clearflag FLAG_HIDE_MEWTWO
 	return
 
-CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
+CeruleanCave_B1F_EventScript_Mewtwo:: @ 81624F5
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_MEWTWO, 2
-	message Text_177F9F
+	message CeruleanCave_B1F_Text_Mew
 	waitmessage
 	waitmoncry
 	delay 20
@@ -42,25 +42,21 @@ CeruleanCave_B1F_EventScript_1624F5:: @ 81624F5
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, Special_GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
-	goto_if_eq EventScript_162558
+	goto_if_eq CeruleanCave_B1F_EventScript_DefeatedMewtwo
 	compare VAR_RESULT, B_OUTCOME_RAN
-	goto_if_eq EventScript_162561
+	goto_if_eq CeruleanCave_B1F_EventScript_RanFromMewtwo
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
-	goto_if_eq EventScript_162561
+	goto_if_eq CeruleanCave_B1F_EventScript_RanFromMewtwo
 	setflag FLAG_FOUGHT_MEWTWO
 	release
 	end
 
-EventScript_162558:: @ 8162558
+CeruleanCave_B1F_EventScript_DefeatedMewtwo:: @ 8162558
 	setflag FLAG_FOUGHT_MEWTWO
 	goto EventScript_RemoveStaticMon
-
-EventScript_162560:: @ 8162560
 	end
 
-EventScript_162561:: @ 8162561
+CeruleanCave_B1F_EventScript_RanFromMewtwo:: @ 8162561
 	setvar VAR_0x8004, SPECIES_MEWTWO
 	goto EventScript_MonFlewAway
-
-EventScript_16256B:: @ 816256B
 	end

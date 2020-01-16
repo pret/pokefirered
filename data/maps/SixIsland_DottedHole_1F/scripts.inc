@@ -8,28 +8,28 @@ SixIsland_DottedHole_1F_OnTransition:: @ 8164188
 
 SixIsland_DottedHole_B1F_EventScript_16418C:: @ 816418C
 	lockall
-	braillemessage gUnknown_81A9288
+	braillemessage Braille_Text_Up
 	waitbuttonpress
 	releaseall
 	end
 
 SixIsland_DottedHole_B4F_EventScript_164195:: @ 8164195
 	lockall
-	braillemessage gUnknown_81A928B
+	braillemessage Braille_Text_Down
 	waitbuttonpress
 	releaseall
 	end
 
 SixIsland_DottedHole_B3F_EventScript_16419E:: @ 816419E
 	lockall
-	braillemessage gUnknown_81A9290
+	braillemessage Braille_Text_Right
 	waitbuttonpress
 	releaseall
 	end
 
 SixIsland_DottedHole_B2F_EventScript_1641A7:: @ 81641A7
 	lockall
-	braillemessage gUnknown_81A9296
+	braillemessage Braille_Text_Left
 	waitbuttonpress
 	releaseall
 	end

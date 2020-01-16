@@ -6059,7 +6059,7 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
     {
         GetMonData(mon, MON_DATA_NICKNAME, buffer);
         StringGetEnd10(buffer);
-        if (!StringCompare(buffer, gUnknown_841D148))
+        if (!StringCompare(buffer, gText_Ghost))
             return TRUE;
     }
     return FALSE;

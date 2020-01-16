@@ -716,7 +716,7 @@ u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 currChar |= *textPrinter->printerTemplate.currentChar << 8;
                 textPrinter->printerTemplate.currentChar++;
-                if ((u8)(gQuestLogState - 2u) > 1)
+                if (gQuestLogState != 2 && gQuestLogState != 3)
                     PlayBGM(currChar);
                 return 2;
             case 16:

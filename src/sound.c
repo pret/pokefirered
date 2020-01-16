@@ -362,7 +362,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
 
 void PlayCry7(u16 species, u8 mode) // exclusive to FR/LG
 {
-    if((u8)(gQuestLogState - 2) >= 2)
+    if (gQuestLogState != 2 && gQuestLogState != 3)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 85);
         PlayCryInternal(species, 0, CRY_VOLUME, 10, mode);

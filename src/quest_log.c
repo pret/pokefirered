@@ -125,7 +125,7 @@ static EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
 static EWRAM_DATA u8 gUnknown_203B048 = 0;
 static EWRAM_DATA u8 gUnknown_203B049 = 0;
 static EWRAM_DATA u8 gUnknown_203B04A = 0;
-static EWRAM_DATA u8 gUnknown_203B04B = 0;
+static EWRAM_DATA bool8 gUnknown_203B04B = 0;
 
 static void sub_8110A00(void);
 static void sub_8110A3C(void);
@@ -2978,7 +2978,7 @@ static void sub_8113BD8(void)
 {
     gUnknown_203B049 = 0;
     gUnknown_203B04A = 0;
-    gUnknown_203B04B = 0;
+    gUnknown_203B04B = FALSE;
 }
 
 static u16 *sub_8113BF4(u16 *a0)
@@ -3842,7 +3842,7 @@ u16 *BufferQuestLogData_DefeatedTrainer_(u16 eventId, u16 *a1, const u16 *a2)
 
 static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
+    gUnknown_203B048 = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_GYM_LEADER, a0, eventData);
 }
 
@@ -3952,7 +3952,7 @@ static bool8 IsSpeciesFromSpecialEncounter(u16 species)
 
 static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
+    gUnknown_203B048 = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_E4_MEMBER, a0, eventData);
 }
 
@@ -3979,7 +3979,7 @@ static u16 *BufferQuestLogData_DefeatedChampion(u16 *a0, const u16 *eventData)
     a0[2] = eventData[1];
     a0[3] = eventData[2];
     *((u8 *)a0 + 8) = *((const u8 *)eventData + 6);
-    gUnknown_203B048 = TRUE;
+    gUnknown_203B048 = 1;
     return a0 + 5;
 }
 
@@ -4016,7 +4016,7 @@ static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
 
 static u16 *BufferQuestLogData_DefeatedTrainer(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = TRUE;
+    gUnknown_203B048 = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_TRAINER, a0, eventData);
 }
 
@@ -4200,7 +4200,7 @@ static u16 *BufferQuestLogData_DepartedLocation(u16 *a0, const u16 *eventData)
         return NULL;
     *((u8 *)r2 + 0) = *((const u8 *)eventData + 0);
     if ((*((u8 *)r2 + 1) = *((const u8 *)eventData + 1)) == 0x24)
-        gUnknown_203B048 = TRUE;
+        gUnknown_203B048 = 1;
     return r2 + 1;
 }
 
@@ -4255,9 +4255,11 @@ static bool8 sub_81153E4(u16 eventId, const u16 *eventData)
 {
     if (eventId != QL_EVENT_DEPARTED)
         return TRUE;
-    if (*((u8 *)eventData + 1) == 32 && gUnknown_203B04B == 0)
+
+    if (*((u8 *)eventData + 1) == 32 && !gUnknown_203B04B)
         return FALSE;
-    gUnknown_203B04B = 0;
+
+    gUnknown_203B04B = FALSE;
     return TRUE;
 }
 

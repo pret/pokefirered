@@ -321,12 +321,7 @@ gUnknown_203AB54: @ 203AB54
 
 	.include "src/new_menu_helpers.o"
 	.align 2
-gUnknown_203ABE4: @ 203ABE4
-	.space 0x4
-
-gUnknown_203ABE8: @ 203ABE8
-	.space 0x4
-
+	.include "src/box_party_pokemon_dropdown.o"
 	.align 2
 	.include "src/map_preview_screen.o"
 	.align 2

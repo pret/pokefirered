@@ -136,7 +136,7 @@ SilphCo_7F_EventScript_161AC8:: @ 8161AC8
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_161B45
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
+	goto_if_eq EventScript_NoMoreRoomForPokemon
 	release
 	end
 
@@ -147,7 +147,7 @@ EventScript_161B12:: @ 8161B12
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B7E
 	call EventScript_1A8C27
@@ -164,7 +164,7 @@ EventScript_161B45:: @ 8161B45
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_LAPRAS
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B73
 	call EventScript_1A8C33

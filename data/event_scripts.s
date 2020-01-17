@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
@@ -922,7 +923,7 @@ Text_1A5690:: @ 81A5690
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gUnknown_81A56A7:: @ 81A56A7
+Text_GiveNicknameToThisMon:: @ 81A56A7
 	.string "Do you want to give a nickname to\n"
 	.string "this {STR_VAR_1}?$"
 
@@ -1037,7 +1038,7 @@ Text_1A5E05:: @ 81A5E05
 	.string "パソコンの　ボックス“{STR_VAR_1}”　に\l"
 	.string "{STR_VAR_2}を　てんそうした！$"
 
-gUnknown_81A5E31:: @ 81A5E31
+Text_NoMoreRoomForPokemon:: @ 81A5E31
 	.string "There's no more room for POKéMON!\p"
 	.string "The POKéMON BOXES are full and\n"
 	.string "can't accept any more!$"
@@ -1883,9 +1884,9 @@ EventScript_BrailleCursorWaitButton:: @ 81A926C
 	special Special_BrailleCursorToggle
 	return
 
-EventScript_1A927C:: @ 81A927C
+EventScript_NoMoreRoomForPokemon:: @ 81A927C
 	textcolor 3
-	msgbox gUnknown_81A5E31
+	msgbox Text_NoMoreRoomForPokemon
 	release
 	end
 

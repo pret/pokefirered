@@ -3,57 +3,57 @@ CinnabarIsland_Gym_MapScripts:: @ 816D94B
 	.byte 0
 
 CinnabarIsland_Gym_OnLoad:: @ 816D951
-	goto_if_set FLAG_DEFEATED_BLAINE, EventScript_16D991
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_1, EventScript_16D9B0
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_2, EventScript_16D9B6
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_3, EventScript_16D9BC
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_4, EventScript_16D9C2
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_5, EventScript_16D9C8
-	call_if_set FLAG_CINNABAR_GYM_QUIZ_6, EventScript_16D9CE
+	goto_if_set FLAG_DEFEATED_BLAINE, CinnabarIsland_Gym_OnLoadOpenAllDoors
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_1, CinnabarIsland_Gym_OnLoadOpenDoor1
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_2, CinnabarIsland_Gym_OnLoadOpenDoor2
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_3, CinnabarIsland_Gym_OnLoadOpenDoor3
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_4, CinnabarIsland_Gym_OnLoadOpenDoor4
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_5, CinnabarIsland_Gym_OnLoadOpenDoor5
+	call_if_set FLAG_CINNABAR_GYM_QUIZ_6, CinnabarIsland_Gym_OnLoadOpenDoor6
 	end
 
-EventScript_16D991:: @ 816D991
-	call EventScript_16E117
-	call EventScript_16E157
-	call EventScript_16E197
-	call EventScript_16E1D7
-	call EventScript_16E1F3
-	call EventScript_16E233
+CinnabarIsland_Gym_OnLoadOpenAllDoors:: @ 816D991
+	call CinnabarIsland_Gym_EventScript_OpenDoor1
+	call CinnabarIsland_Gym_EventScript_OpenDoor2
+	call CinnabarIsland_Gym_EventScript_OpenDoor3
+	call CinnabarIsland_Gym_EventScript_OpenDoor4
+	call CinnabarIsland_Gym_EventScript_OpenDoor5
+	call CinnabarIsland_Gym_EventScript_OpenDoor6
 	end
 
-EventScript_16D9B0:: @ 816D9B0
-	call EventScript_16E117
+CinnabarIsland_Gym_OnLoadOpenDoor1:: @ 816D9B0
+	call CinnabarIsland_Gym_EventScript_OpenDoor1
 	return
 
-EventScript_16D9B6:: @ 816D9B6
-	call EventScript_16E157
+CinnabarIsland_Gym_OnLoadOpenDoor2:: @ 816D9B6
+	call CinnabarIsland_Gym_EventScript_OpenDoor2
 	return
 
-EventScript_16D9BC:: @ 816D9BC
-	call EventScript_16E197
+CinnabarIsland_Gym_OnLoadOpenDoor3:: @ 816D9BC
+	call CinnabarIsland_Gym_EventScript_OpenDoor3
 	return
 
-EventScript_16D9C2:: @ 816D9C2
-	call EventScript_16E1D7
+CinnabarIsland_Gym_OnLoadOpenDoor4:: @ 816D9C2
+	call CinnabarIsland_Gym_EventScript_OpenDoor4
 	return
 
-EventScript_16D9C8:: @ 816D9C8
-	call EventScript_16E1F3
+CinnabarIsland_Gym_OnLoadOpenDoor5:: @ 816D9C8
+	call CinnabarIsland_Gym_EventScript_OpenDoor5
 	return
 
-EventScript_16D9CE:: @ 816D9CE
-	call EventScript_16E233
+CinnabarIsland_Gym_OnLoadOpenDoor6:: @ 816D9CE
+	call CinnabarIsland_Gym_EventScript_OpenDoor6
 	return
 
-CinnabarIsland_Gym_EventScript_16D9D4:: @ 816D9D4
+CinnabarIsland_Gym_EventScript_Blaine:: @ 816D9D4
 	famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle_single TRAINER_LEADER_BLAINE, Text_199543, Text_1995FA, EventScript_16DA06, NO_MUSIC
-	goto_if_unset FLAG_GOT_TM38_FROM_BLAINE, EventScript_16DA34
-	msgbox gUnknown_819971D
+	trainerbattle_single TRAINER_LEADER_BLAINE, CinnabarIsland_Gym_Text_BlaineIntro, CinnabarIsland_Gym_Text_BlaineDefeat, CinnabarIsland_Gym_EventScript_DefeatedBlaine, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM38_FROM_BLAINE, CinnabarIsland_Gym_EventScript_GiveTM38
+	msgbox CinnabarIsland_Gym_Text_BlainePostBattle
 	release
 	end
 
-EventScript_16DA06:: @ 816DA06
+CinnabarIsland_Gym_EventScript_DefeatedBlaine:: @ 816DA06
 	famechecker FAMECHECKER_BLAINE, 1
 	setflag FLAG_DEFEATED_BLAINE
 	setflag FLAG_BADGE07_GET
@@ -61,36 +61,36 @@ EventScript_16DA06:: @ 816DA06
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
 	set_gym_trainers 7
-	goto EventScript_16DA34
+	goto CinnabarIsland_Gym_EventScript_GiveTM38
 	end
 
-EventScript_16DA34:: @ 816DA34
-	msgbox gUnknown_819969E
+CinnabarIsland_Gym_EventScript_GiveTM38:: @ 816DA34
+	msgbox CinnabarIsland_Gym_Text_ExplainVolcanoBadge
 	checkitemspace ITEM_TM38, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_16DA75
-	giveitem_msg gUnknown_81996FF, ITEM_TM38
+	goto_if_eq CinnabarIsland_Gym_EventScript_NoRoomForTM38
+	giveitem_msg CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine, ITEM_TM38
 	setflag FLAG_GOT_TM38_FROM_BLAINE
-	msgbox gUnknown_8199652
+	msgbox CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove
 	release
 	end
 
-EventScript_16DA75:: @ 816DA75
-	msgbox gUnknown_8199789
+CinnabarIsland_Gym_EventScript_NoRoomForTM38:: @ 816DA75
+	msgbox CinnabarIsland_Gym_Text_MakeSpaceForThis
 	release
 	end
 
-CinnabarIsland_Gym_EventScript_16DA7F:: @ 816DA7F
-	trainerbattle_single TRAINER_SUPER_NERD_ERIK, Text_1997A5, Text_1997D6
-	msgbox gUnknown_81997EA, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Erik:: @ 816DA7F
+	trainerbattle_single TRAINER_SUPER_NERD_ERIK, CinnabarIsland_Gym_Text_ErikIntro, CinnabarIsland_Gym_Text_ErikDefeat
+	msgbox CinnabarIsland_Gym_Text_ErikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CinnabarIsland_Gym_EventScript_16DA96:: @ 816DA96
-	trainerbattle_single TRAINER_SUPER_NERD_AVERY, Text_1998BD, Text_1998ED, EventScript_16DAB1
-	msgbox gUnknown_8199911, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Avery:: @ 816DA96
+	trainerbattle_single TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryIntro, CinnabarIsland_Gym_Text_AveryDefeat, CinnabarIsland_Gym_EventScript_DefeatedAvery
+	msgbox CinnabarIsland_Gym_Text_AveryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_16DAB1:: @ 816DAB1
+CinnabarIsland_Gym_EventScript_DefeatedAvery:: @ 816DAB1
 	call_if_unset FLAG_CINNABAR_GYM_QUIZ_2, EventScript_16DABC
 	release
 	end
@@ -99,13 +99,13 @@ EventScript_16DABC:: @ 816DABC
 	call EventScript_16DD31
 	return
 
-CinnabarIsland_Gym_EventScript_16DAC2:: @ 816DAC2
-	trainerbattle_single TRAINER_SUPER_NERD_DEREK, Text_1999B7, Text_1999DB, EventScript_16DAEA
+CinnabarIsland_Gym_EventScript_Derek:: @ 816DAC2
+	trainerbattle_single TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekIntro, CinnabarIsland_Gym_Text_DerekDefeat, CinnabarIsland_Gym_EventScript_DefeatedDerek
 	famechecker FAMECHECKER_BLAINE, 2
-	msgbox gUnknown_81999DF, MSGBOX_AUTOCLOSE
+	msgbox CinnabarIsland_Gym_Text_DerekPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_16DAEA:: @ 816DAEA
+CinnabarIsland_Gym_EventScript_DefeatedDerek:: @ 816DAEA
 	call_if_unset FLAG_CINNABAR_GYM_QUIZ_4, EventScript_16DAF5
 	release
 	end
@@ -114,9 +114,9 @@ EventScript_16DAF5:: @ 816DAF5
 	call EventScript_16DEE6
 	return
 
-CinnabarIsland_Gym_EventScript_16DAFB:: @ 816DAFB
-	trainerbattle_single TRAINER_SUPER_NERD_ZAC, Text_199AFC, Text_199B16, EventScript_16DB16
-	msgbox gUnknown_8199B27, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Zac:: @ 816DAFB
+	trainerbattle_single TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacIntro, CinnabarIsland_Gym_Text_ZacDefeat, EventScript_16DB16
+	msgbox CinnabarIsland_Gym_Text_ZacPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB16:: @ 816DB16
@@ -125,29 +125,29 @@ EventScript_16DB16:: @ 816DB16
 	end
 
 EventScript_16DB21:: @ 816DB21
-	call EventScript_16E094
+	call CinnabarIsland_Gym_EventScript_Quiz6Complete
 	return
 
-CinnabarIsland_Gym_EventScript_16DB27:: @ 816DB27
-	trainerbattle_single TRAINER_BURGLAR_QUINN, Text_19983F, Text_199870, EventScript_16DB42
-	msgbox gUnknown_819987D, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Quinn:: @ 816DB27
+	trainerbattle_single TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnIntro, CinnabarIsland_Gym_Text_QuinnDefeat, CinnabarIsland_Gym_EventScript_DefeatedQuinn
+	msgbox CinnabarIsland_Gym_Text_QuinnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_16DB42:: @ 816DB42
+CinnabarIsland_Gym_EventScript_DefeatedQuinn:: @ 816DB42
 	call_if_unset FLAG_CINNABAR_GYM_QUIZ_1, EventScript_16DB4D
 	release
 	end
 
 EventScript_16DB4D:: @ 816DB4D
-	call EventScript_16DC58
+	call CinnabarIsland_Gym_EventScript_Quiz1Complete
 	return
 
-CinnabarIsland_Gym_EventScript_16DB53:: @ 816DB53
-	trainerbattle_single TRAINER_BURGLAR_RAMON, Text_199948, Text_199973, EventScript_16DB6E
-	msgbox gUnknown_8199986, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Ramon:: @ 816DB53
+	trainerbattle_single TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonIntro, CinnabarIsland_Gym_Text_RamonDefeat, CinnabarIsland_Gym_EventScript_DefeatedRamon
+	msgbox CinnabarIsland_Gym_Text_RamonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_16DB6E:: @ 816DB6E
+CinnabarIsland_Gym_EventScript_DefeatedRamon:: @ 816DB6E
 	call_if_unset FLAG_CINNABAR_GYM_QUIZ_3, EventScript_16DB79
 	release
 	end
@@ -156,9 +156,9 @@ EventScript_16DB79:: @ 816DB79
 	call EventScript_16DE0F
 	return
 
-CinnabarIsland_Gym_EventScript_16DB7F:: @ 816DB7F
-	trainerbattle_single TRAINER_BURGLAR_DUSTY, Text_199A7F, Text_199AB9, EventScript_16DB9A
-	msgbox gUnknown_8199AC9, MSGBOX_AUTOCLOSE
+CinnabarIsland_Gym_EventScript_Dusty:: @ 816DB7F
+	trainerbattle_single TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyIntro, CinnabarIsland_Gym_Text_DustyDefeat, EventScript_16DB9A
+	msgbox CinnabarIsland_Gym_Text_DustyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 EventScript_16DB9A:: @ 816DB9A
@@ -170,101 +170,101 @@ EventScript_16DBA5:: @ 816DBA5
 	call EventScript_16DFBD
 	return
 
-CinnabarIsland_Gym_EventScript_16DBAB:: @ 816DBAB
+CinnabarIsland_Gym_EventScript_GymGuy:: @ 816DBAB
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_BLAINE, EventScript_16DBC0
-	msgbox gUnknown_8199B81
+	goto_if_set FLAG_DEFEATED_BLAINE, CinnabarIsland_Gym_EventScript_GymGuyPostVictory
+	msgbox CinnabarIsland_Gym_Text_GymGuyAdvice
 	release
 	end
 
-EventScript_16DBC0:: @ 816DBC0
-	msgbox gUnknown_8199C0C
+CinnabarIsland_Gym_EventScript_GymGuyPostVictory:: @ 816DBC0
+	msgbox CinnabarIsland_Gym_Text_GymGuyPostVictory
 	release
 	end
 
-CinnabarIsland_Gym_EventScript_16DBCA:: @ 816DBCA
+CinnabarIsland_Gym_EventScript_GymStatue:: @ 816DBCA
 	lockall
-	goto_if_set FLAG_BADGE07_GET, EventScript_16DBDE
-	msgbox gUnknown_8199C29
+	goto_if_set FLAG_BADGE07_GET, CinnabarIsland_Gym_EventScript_GymStatuePostVictory
+	msgbox CinnabarIsland_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16DBDE:: @ 816DBDE
-	msgbox gUnknown_8199C62
+CinnabarIsland_Gym_EventScript_GymStatuePostVictory:: @ 816DBDE
+	msgbox CinnabarIsland_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end
 
-CinnabarIsland_Gym_EventScript_16DBE8:: @ 816DBE8
+CinnabarIsland_Gym_EventScript_Quz1Left:: @ 816DBE8
 	lockall
 	setvar VAR_TEMP_1, 0
-	goto EventScript_16DC00
+	goto CinnabarIsland_Gym_EventScript_Quiz1
 	end
 
-CinnabarIsland_Gym_EventScript_16DBF4:: @ 816DBF4
+CinnabarIsland_Gym_EventScript_Quz1Right:: @ 816DBF4
 	lockall
 	setvar VAR_TEMP_1, 1
-	goto EventScript_16DC00
+	goto CinnabarIsland_Gym_EventScript_Quiz1
 	end
 
-EventScript_16DC00:: @ 816DC00
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199D5A, MSGBOX_YESNO
+CinnabarIsland_Gym_EventScript_Quiz1:: @ 816DC00
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion1, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_16DC43
+	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz1Correct
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16DC6A
+	goto_if_eq CinnabarIsland_Gym_EventScript_Quiz1Incorrect
 	end
 
-EventScript_16DC27:: @ 816DC27
+CinnabarIsland_Gym_EventScript_CorrectAnswer:: @ 816DC27
 	playfanfare MUS_FANFA1
 	waitfanfare
-	msgbox gUnknown_8199E4F
+	msgbox CinnabarIsland_Gym_Text_CorrectGoOnThrough
 	return
 
-EventScript_16DC34:: @ 816DC34
+CinnabarIsland_Gym_EventScript_IncorrectAnswer:: @ 816DC34
 	waitse
 	playse SE_BOO
 	waitse
-	msgbox gUnknown_8199E79
+	msgbox CinnabarIsland_Gym_Text_SorryBadCall
 	closemessage
 	return
 
-EventScript_16DC43:: @ 816DC43
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_1, EventScript_16DC68
-	call EventScript_16DC58
+CinnabarIsland_Gym_EventScript_Quiz1Correct:: @ 816DC43
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_1, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
+	call CinnabarIsland_Gym_EventScript_Quiz1Complete
 	releaseall
 	end
 
-EventScript_16DC58:: @ 816DC58
+CinnabarIsland_Gym_EventScript_Quiz1Complete:: @ 816DC58
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E117
+	call CinnabarIsland_Gym_EventScript_OpenDoor1
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_1
 	return
 
-EventScript_16DC68:: @ 816DC68
+CinnabarIsland_Gym_EventScript_DoorAlreadyOpen:: @ 816DC68
 	releaseall
 	end
 
-EventScript_16DC6A:: @ 816DC6A
-	call EventScript_16DC34
-	goto_if_not_defeated TRAINER_BURGLAR_QUINN, EventScript_16DC7A
+CinnabarIsland_Gym_EventScript_Quiz1Incorrect:: @ 816DC6A
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
+	goto_if_not_defeated TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_EventScript_BattleQuinn
 	releaseall
 	end
 
-EventScript_16DC7A:: @ 816DC7A
+CinnabarIsland_Gym_EventScript_BattleQuinn:: @ 816DC7A
 	compare VAR_TEMP_1, 0
 	call_if_eq EventScript_16DCB4
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16DCC6
 	textcolor 0
-	msgbox gUnknown_819983F
-	trainerbattle_no_intro TRAINER_BURGLAR_QUINN, Text_199870
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_1, EventScript_16DC68
-	call EventScript_16DC58
+	msgbox CinnabarIsland_Gym_Text_QuinnIntro
+	trainerbattle_no_intro TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_1, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
+	call CinnabarIsland_Gym_EventScript_Quiz1Complete
 	releaseall
 	end
 
@@ -302,8 +302,8 @@ CinnabarIsland_Gym_EventScript_16DCE9:: @ 816DCE9
 	end
 
 EventScript_16DCF5:: @ 816DCF5
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199D79, MSGBOX_YESNO
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion2, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DD41
 	compare VAR_RESULT, NO
@@ -311,8 +311,8 @@ EventScript_16DCF5:: @ 816DCF5
 	end
 
 EventScript_16DD1C:: @ 816DD1C
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_2, EventScript_16DC68
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_2, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DD31
 	releaseall
 	end
@@ -320,13 +320,13 @@ EventScript_16DD1C:: @ 816DD1C
 EventScript_16DD31:: @ 816DD31
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E157
+	call CinnabarIsland_Gym_EventScript_OpenDoor2
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_2
 	return
 
 EventScript_16DD41:: @ 816DD41
-	call EventScript_16DC34
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
 	goto_if_not_defeated TRAINER_SUPER_NERD_AVERY, EventScript_16DD51
 	releaseall
 	end
@@ -337,9 +337,9 @@ EventScript_16DD51:: @ 816DD51
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16DD9D
 	textcolor 0
-	msgbox gUnknown_81998BD
-	trainerbattle_no_intro TRAINER_SUPER_NERD_AVERY, Text_1998ED
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_2, EventScript_16DC68
+	msgbox CinnabarIsland_Gym_Text_AveryIntro
+	trainerbattle_no_intro TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_2, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DD31
 	releaseall
 	end
@@ -387,8 +387,8 @@ CinnabarIsland_Gym_EventScript_16DDC7:: @ 816DDC7
 	end
 
 EventScript_16DDD3:: @ 816DDD3
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199DA9, MSGBOX_YESNO
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion3, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DE1F
 	compare VAR_RESULT, NO
@@ -396,8 +396,8 @@ EventScript_16DDD3:: @ 816DDD3
 	end
 
 EventScript_16DDFA:: @ 816DDFA
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_3, EventScript_16DC68
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_3, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -405,13 +405,13 @@ EventScript_16DDFA:: @ 816DDFA
 EventScript_16DE0F:: @ 816DE0F
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E197
+	call CinnabarIsland_Gym_EventScript_OpenDoor3
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_3
 	return
 
 EventScript_16DE1F:: @ 816DE1F
-	call EventScript_16DC34
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
 	goto_if_not_defeated TRAINER_BURGLAR_RAMON, EventScript_16DE2F
 	releaseall
 	end
@@ -422,9 +422,9 @@ EventScript_16DE2F:: @ 816DE2F
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16DE7B
 	textcolor 0
-	msgbox gUnknown_8199948
-	trainerbattle_no_intro TRAINER_BURGLAR_RAMON, Text_199973
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_3, EventScript_16DC68
+	msgbox CinnabarIsland_Gym_Text_RamonIntro
+	trainerbattle_no_intro TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_3, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DE0F
 	releaseall
 	end
@@ -463,8 +463,8 @@ CinnabarIsland_Gym_EventScript_16DE9E:: @ 816DE9E
 	end
 
 EventScript_16DEAA:: @ 816DEAA
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199DC6, MSGBOX_YESNO
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion4, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DEF6
 	compare VAR_RESULT, NO
@@ -472,8 +472,8 @@ EventScript_16DEAA:: @ 816DEAA
 	end
 
 EventScript_16DED1:: @ 816DED1
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_4, EventScript_16DC68
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_4, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -481,13 +481,13 @@ EventScript_16DED1:: @ 816DED1
 EventScript_16DEE6:: @ 816DEE6
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E1D7
+	call CinnabarIsland_Gym_EventScript_OpenDoor4
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_4
 	return
 
 EventScript_16DEF6:: @ 816DEF6
-	call EventScript_16DC34
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
 	goto_if_not_defeated TRAINER_SUPER_NERD_DEREK, EventScript_16DF06
 	releaseall
 	end
@@ -498,9 +498,9 @@ EventScript_16DF06:: @ 816DF06
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16DF52
 	textcolor 0
-	msgbox gUnknown_81999B7
-	trainerbattle_no_intro TRAINER_SUPER_NERD_DEREK, Text_1999DB
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_4, EventScript_16DC68
+	msgbox CinnabarIsland_Gym_Text_DerekIntro
+	trainerbattle_no_intro TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_4, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DEE6
 	releaseall
 	end
@@ -539,8 +539,8 @@ CinnabarIsland_Gym_EventScript_16DF75:: @ 816DF75
 	end
 
 EventScript_16DF81:: @ 816DF81
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199E00, MSGBOX_YESNO
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion5, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16DFA8
 	compare VAR_RESULT, NO
@@ -548,8 +548,8 @@ EventScript_16DF81:: @ 816DF81
 	end
 
 EventScript_16DFA8:: @ 816DFA8
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_5, EventScript_16DC68
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_5, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -557,13 +557,13 @@ EventScript_16DFA8:: @ 816DFA8
 EventScript_16DFBD:: @ 816DFBD
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E1F3
+	call CinnabarIsland_Gym_EventScript_OpenDoor5
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_5
 	return
 
 EventScript_16DFCD:: @ 816DFCD
-	call EventScript_16DC34
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
 	goto_if_not_defeated TRAINER_BURGLAR_DUSTY, EventScript_16DFDD
 	releaseall
 	end
@@ -574,9 +574,9 @@ EventScript_16DFDD:: @ 816DFDD
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16E029
 	textcolor 0
-	msgbox gUnknown_8199A7F
-	trainerbattle_no_intro TRAINER_BURGLAR_DUSTY, Text_199AB9
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_5, EventScript_16DC68
+	msgbox CinnabarIsland_Gym_Text_DustyIntro
+	trainerbattle_no_intro TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_5, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
 	call EventScript_16DFBD
 	releaseall
 	end
@@ -615,8 +615,8 @@ CinnabarIsland_Gym_EventScript_16E04C:: @ 816E04C
 	end
 
 EventScript_16E058:: @ 816E058
-	msgbox gUnknown_8199C9F
-	msgbox gUnknown_8199E36, MSGBOX_YESNO
+	msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+	msgbox CinnabarIsland_Gym_Text_QuizQuestion6, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16E0A4
 	compare VAR_RESULT, NO
@@ -624,22 +624,22 @@ EventScript_16E058:: @ 816E058
 	end
 
 EventScript_16E07F:: @ 816E07F
-	call EventScript_16DC27
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_6, EventScript_16DC68
-	call EventScript_16E094
+	call CinnabarIsland_Gym_EventScript_CorrectAnswer
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_6, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
+	call CinnabarIsland_Gym_EventScript_Quiz6Complete
 	releaseall
 	end
 
-EventScript_16E094:: @ 816E094
+CinnabarIsland_Gym_EventScript_Quiz6Complete:: @ 816E094
 	playse SE_KI_GASYAN
 	waitse
-	call EventScript_16E233
+	call CinnabarIsland_Gym_EventScript_OpenDoor6
 	special DrawWholeMapView
 	setflag FLAG_CINNABAR_GYM_QUIZ_6
 	return
 
 EventScript_16E0A4:: @ 816E0A4
-	call EventScript_16DC34
+	call CinnabarIsland_Gym_EventScript_IncorrectAnswer
 	goto_if_not_defeated TRAINER_SUPER_NERD_ZAC, EventScript_16E0B4
 	releaseall
 	end
@@ -650,10 +650,10 @@ EventScript_16E0B4:: @ 816E0B4
 	compare VAR_TEMP_1, 1
 	call_if_eq EventScript_16E100
 	textcolor 0
-	msgbox gUnknown_8199AFC
-	trainerbattle_no_intro TRAINER_SUPER_NERD_ZAC, Text_199B16
-	goto_if_set FLAG_CINNABAR_GYM_QUIZ_6, EventScript_16DC68
-	call EventScript_16E094
+	msgbox CinnabarIsland_Gym_Text_ZacIntro
+	trainerbattle_no_intro TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacDefeat
+	goto_if_set FLAG_CINNABAR_GYM_QUIZ_6, CinnabarIsland_Gym_EventScript_DoorAlreadyOpen
+	call CinnabarIsland_Gym_EventScript_Quiz6Complete
 	releaseall
 	end
 
@@ -678,7 +678,7 @@ Movement_16E115:: @ 816E115
 	walk_left
 	step_end
 
-EventScript_16E117:: @ 816E117
+CinnabarIsland_Gym_EventScript_OpenDoor1:: @ 816E117
 	setmetatile 26, 8, 711, 0
 	setmetatile 27, 8, 710, 0
 	setmetatile 26, 9, 719, 0
@@ -688,7 +688,7 @@ EventScript_16E117:: @ 816E117
 	setmetatile 28, 10, 642, 0
 	return
 
-EventScript_16E157:: @ 816E157
+CinnabarIsland_Gym_EventScript_OpenDoor2:: @ 816E157
 	setmetatile 17, 8, 711, 0
 	setmetatile 18, 8, 710, 0
 	setmetatile 17, 9, 719, 0
@@ -698,7 +698,7 @@ EventScript_16E157:: @ 816E157
 	setmetatile 19, 10, 642, 0
 	return
 
-EventScript_16E197:: @ 816E197
+CinnabarIsland_Gym_EventScript_OpenDoor3:: @ 816E197
 	setmetatile 17, 15, 711, 0
 	setmetatile 18, 15, 710, 0
 	setmetatile 17, 16, 719, 0
@@ -708,13 +708,13 @@ EventScript_16E197:: @ 816E197
 	setmetatile 19, 17, 642, 0
 	return
 
-EventScript_16E1D7:: @ 816E1D7
+CinnabarIsland_Gym_EventScript_OpenDoor4:: @ 816E1D7
 	setmetatile 11, 21, 721, 1
 	setmetatile 11, 22, 649, 0
 	setmetatile 11, 23, 641, 0
 	return
 
-EventScript_16E1F3:: @ 816E1F3
+CinnabarIsland_Gym_EventScript_OpenDoor5:: @ 816E1F3
 	setmetatile 5, 16, 711, 0
 	setmetatile 6, 16, 710, 0
 	setmetatile 5, 17, 719, 0
@@ -724,7 +724,7 @@ EventScript_16E1F3:: @ 816E1F3
 	setmetatile 7, 18, 642, 0
 	return
 
-EventScript_16E233:: @ 816E233
+CinnabarIsland_Gym_EventScript_OpenDoor6:: @ 816E233
 	setmetatile 5, 8, 711, 0
 	setmetatile 6, 8, 710, 0
 	setmetatile 5, 9, 719, 0

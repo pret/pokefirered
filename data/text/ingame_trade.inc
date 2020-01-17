@@ -39,22 +39,22 @@ Trade_Text_HasTradedMonGrownStronger:: @ 81A5AA5
 	.string "The {STR_VAR_2} that I traded you,\n"
 	.string "has it grown stronger?$"
 
-gUnknown_81A5AD6:: @ 81A5AD6
+Trade_Text_DoYouHaveMonWantToTradeForMon:: @ 81A5AD6
 	.string "Hi!\n"
 	.string "Do you have a {STR_VAR_1}?\p"
 	.string "Want to trade it for my\n"
 	.string "{STR_VAR_2}?$"
 
-gUnknown_81A5B08:: @ 81A5B08
+Trade_Text_ThatsTooBad:: @ 81A5B08
 	.string "That's too bad.$"
 
-gUnknown_81A5B18:: @ 81A5B18
+Trade_Text_ThisIsNoMon:: @ 81A5B18
 	.string "…This is no {STR_VAR_1}.\p"
 	.string "If you get one, trade it with me.$"
 
-gUnknown_81A5B4A:: @ 81A5B4A
+Trade_Text_ThanksYoureAPal:: @ 81A5B4A
 	.string "Thanks, you're a pal!$"
 
-gUnknown_81A5B60:: @ 81A5B60
+Trade_Text_HowIsMyOldMon:: @ 81A5B60
 	.string "How is my old {STR_VAR_2}?\n"
 	.string "My {STR_VAR_1} is doing great!$"

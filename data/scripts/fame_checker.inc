@@ -127,11 +127,11 @@ SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
 	release
 	end
 
-CinnabarIsland_Gym_EventScript_1ACF07:: @ 81ACF07
+CinnabarIsland_Gym_EventScript_BlaineFujiPhoto:: @ 81ACF07
 	lockall
 	famechecker FAMECHECKER_BLAINE, 4
 	famechecker FAMECHECKER_MRFUJI, 4
-	msgbox Text_199E8A
+	msgbox CinnabarIsland_Gym_Text_PhotoOfBlaineAndFuji
 	releaseall
 	end
 
@@ -260,12 +260,12 @@ LavenderTown_PokemonCenter_1F_EventScript_BaldingMan:: @ 81AD0A0
 	release
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9:: @ 81AD0B9
+CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji:: @ 81AD0B9
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MRFUJI, 5
 	textcolor 3
-	msgbox gUnknown_81B1BD1
+	msgbox PokemonJournal_Text_SpecialFeatureMrFuji
 	release
 	end
 

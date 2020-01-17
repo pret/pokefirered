@@ -59,7 +59,7 @@ EventScript_16F7A2:: @ 816F7A2
 
 EventScript_16F7F6:: @ 816F7F6
 	call EventScript_16F86F
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F861
 	call EventScript_1A8C27
@@ -72,7 +72,7 @@ EventScript_16F7F6:: @ 816F7F6
 
 EventScript_16F822:: @ 816F822
 	call EventScript_16F86F
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F84B
 	fadescreen FADE_TO_BLACK

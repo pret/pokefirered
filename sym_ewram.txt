@@ -16,7 +16,6 @@
 	.align 2
 	.include "src/link.o"
 	.space 8
-
 	.align 2
 	.include "src/battle_controllers.o"
 	.align 2
@@ -144,6 +143,7 @@ gUnknown_20386A4: @ 20386A4
 gUnknown_20386A8: @ 20386A8
 	.space 0x4
 
+	.align 2
 	.include "src/battle_setup.o"
 	.align 2
 	.include "src/wild_encounter.o"
@@ -154,7 +154,6 @@ gFieldEffectArguments: @ 20386E0
 
 	.align 2
 	.include "src/scanline_effect.o"
-
 	.align 2
 	.include "src/option_menu.o"
 	.align 2
@@ -268,14 +267,10 @@ gUnknown_203998C: @ 203998C
 	.include "src/menu_helpers.o"
 	.align 2
 	.include "src/region_map.o"
-
 	.align 2
-gAIScriptPtr: @ 2039A00
-	.space 0x4
-
-gPlayerFacingPosition: @ 2039A04
-	.space 0x8
-
+	.include "src/battle_ai_script_commands.o"
+	.align 2
+	.include "src/fldeff_rocksmash.o"
 	.align 2
 	.include "src/field_specials.o"
 	.align 2
@@ -310,15 +305,13 @@ gPlayerFacingPosition: @ 2039A04
 	.include "src/diploma.o"
 
 	.align 2
-gUnknown_203AB4C: @ 203AB4C
-	.space 0x4
+	.include "src/save_failed_screen.o"
 
-gUnknown_203AB50: @ 203AB50
-	.space 0x4
-
+	.align 2
 gUnknown_203AB54: @ 203AB54
 	.space 0x4
 
+	.align 2
 	.include "src/new_menu_helpers.o"
 	.align 2
 	.include "src/box_party_pokemon_dropdown.o"
@@ -460,6 +453,7 @@ gUnknown_203B0E8: @ 203B0E8
 	.include "src/oak_speech.o"
 	.align 2
 	.include "src/tm_case.o"
+	.align 2
 	.include "src/menu_indicators.o"
 
 gUnknown_203B140: @ 203B140
@@ -506,13 +500,8 @@ gUnknown_203B170: @ 203B170
 	.include "src/berry_pouch.o"
 	.align 2
 	.include "src/slot_machine.o"
-
-sLocationHistory: @ 203F3A8
-	.space 0x6
-
-sRoamerLocation: @ 203F3AE
-	.space 0x2
-
+	.align 2
+	.include "src/roamer.o"
 	.align 2
 	.include "src/mystery_gift_menu.o"
 	.align 2

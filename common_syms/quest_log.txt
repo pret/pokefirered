@@ -1,1 +1,4 @@
 gUnknown_3005E88
+sNumQuestLogs
+gUnknown_3005E90
+gUnknown_3005E94

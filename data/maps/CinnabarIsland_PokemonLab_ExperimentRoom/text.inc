@@ -28,7 +28,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe:: @ 819A282
     .string "You!\n"
     .string "Have you a fossil for me?$"
 
-CinnabarIsland_PokemonLab_ExperimentRoom_Text_819A314:: @ 819A314
+CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad:: @ 819A314
     .string "No!\n"
     .string "Is too bad!$"
 

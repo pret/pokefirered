@@ -1,21 +1,21 @@
-gUnknown_81A597B:: @ 81A597B
+Trade_Text_LookingForMonWannaTradeForMon:: @ 81A597B
 	.string "I'm looking for the POKéMON\n"
 	.string "{STR_VAR_1}!\p"
 	.string "Wanna trade one for my\n"
 	.string "{STR_VAR_2}?$"
 
-gUnknown_81A59B6:: @ 81A59B6
+Trade_Text_AwwOhWell:: @ 81A59B6
 	.string "Awww!\n"
 	.string "Oh, well…$"
 
-gUnknown_81A59C6:: @ 81A59C6
+Trade_Text_WhatThatsNoMon:: @ 81A59C6
 	.string "What?\n"
 	.string "That's no {STR_VAR_1}!$"
 
-gUnknown_81A59DA:: @ 81A59DA
+Trade_Text_HeyThanks:: @ 81A59DA
 	.string "Hey, thanks!$"
 
-gUnknown_81A59E7:: @ 81A59E7
+Trade_Text_IsntMyOldMonGreat:: @ 81A59E7
 	.string "Isn't my old {STR_VAR_2} great?$"
 
 Trade_Text_DoYouHaveMonWouldYouTradeForMon:: @ 81A59FE

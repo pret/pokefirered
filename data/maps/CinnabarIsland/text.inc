@@ -25,11 +25,11 @@ CinnabarIsland_Text_GymSign:: @ 8180C4A
     .string "LEADER: BLAINE\l"
     .string "The Hotheaded Quiz Master!$"
 
-CinnabarIsland_Text_8180C90:: @ 8180C90
+CinnabarIsland_Text_HeyIfItIsntPlayer:: @ 8180C90
     .string "Huh?\n"
     .string "Hey, if it isn't {PLAYER}!$"
 
-CinnabarIsland_Text_8180CAA:: @ 8180CAA
+CinnabarIsland_Text_ComeWithMeToOneIsland:: @ 8180CAA
     .string "Look, it's me, BILL.\n"
     .string "Long time no see!\p"
     .string "I hope you're still using my\n"
@@ -43,11 +43,11 @@ CinnabarIsland_Text_8180CAA:: @ 8180CAA
     .string "How about it?\n"
     .string "Do you feel like coming with me?$"
 
-CinnabarIsland_Text_8180DDD:: @ 8180DDD
+CinnabarIsland_Text_AllRightLetsGo:: @ 8180DDD
     .string "All right, then.\n"
     .string "Let's go!$"
 
-CinnabarIsland_Text_8180DF8:: @ 8180DF8
+CinnabarIsland_Text_IllBeWaitingInPokeCenter:: @ 8180DF8
     .string "What, are you too busy?\p"
     .string "Well, all right.\n"
     .string "The boat hasn't arrived yet anyway.\p"
@@ -56,13 +56,13 @@ CinnabarIsland_Text_8180DF8:: @ 8180DF8
     .string "Come see me when you're done with\n"
     .string "your business here.$"
 
-CinnabarIsland_Text_8180EAD:: @ 8180EAD
+CinnabarIsland_Text_MyPalsBoatArrived:: @ 8180EAD
     .string "Looks like my pal's boat arrived,\n"
     .string "too.\p"
     .string "He sent it specially here to\n"
     .string "CINNABAR to pick me up.$"
 
-CinnabarIsland_Text_8180F09:: @ 8180F09
+CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain:: @ 8180F09
     .string "Hey, wasn't that a long cruise?\p"
     .string "My buddy CELIO seemed to enjoy\n"
     .string "your company.\p"

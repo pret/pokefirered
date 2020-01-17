@@ -10,35 +10,35 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett:: @ 816E401
 	faceplayer
 	setvar VAR_0x8008, INGAME_TRADE_SEEL
 	call EventScript_GetInGameTradeSpeciesInfo
-	goto_if_set FLAG_DID_SEELOR_TRADE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E473
-	msgbox gUnknown_81A597B, MSGBOX_YESNO
+	goto_if_set FLAG_DID_SEELOR_TRADE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E45B
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
 	call EventScript_ChooseMonForInGameTrade
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E45B
+	goto_if_ge CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
 	call EventScript_GetInGameTradeSpecies
 	compare VAR_RESULT, VAR_0x8009
-	goto_if_ne CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E465
+	goto_if_ne CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon
 	call EventScript_DoInGameTrade
-	msgbox gUnknown_81A59DA
+	msgbox Trade_Text_HeyThanks
 	setflag FLAG_DID_SEELOR_TRADE
 	release
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E45B:: @ 816E45B
-	msgbox gUnknown_81A59B6
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade:: @ 816E45B
+	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E465:: @ 816E465
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon:: @ 816E465
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A59C6
+	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E473:: @ 816E473
-	msgbox gUnknown_81A59E7
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded:: @ 816E473
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end
 
@@ -89,7 +89,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse:: @ 816E534
 	return
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil:: @ 816E53A
-	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_819A314
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad
 	release
 	end
 
@@ -220,9 +220,9 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte:: @ 816E758
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	setflag FLAG_REVIVED_HELIX
 	compare VAR_RESULT, 0
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
 	compare VAR_RESULT, 1
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto:: @ 816E79D
@@ -234,9 +234,9 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto:: @ 816E79D
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	setflag FLAG_REVIVED_DOME
 	compare VAR_RESULT, 0
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
 	compare VAR_RESULT, 1
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl:: @ 816E7E2
@@ -248,12 +248,12 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl:: @ 816E7E2
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	setflag FLAG_REVIVED_AMBER
 	compare VAR_RESULT, 0
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
 	compare VAR_RESULT, 1
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827:: @ 816E827
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty:: @ 816E827
 	textcolor 3
 	playfanfare MUS_FANFA1
 	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
@@ -262,13 +262,13 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827:: @ 816E827
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
 	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
-	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B:: @ 816E85B
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC:: @ 816E85B
 	textcolor 3
 	playfanfare MUS_FANFA1
 	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
@@ -277,17 +277,17 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B:: @ 816E85B
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
 	call EventScript_NameReceivedBoxMon
-	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A:: @ 816E88A
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC:: @ 816E88A
 	call EventScript_TransferredToPC
-	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895:: @ 816E895
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon:: @ 816E895
 	release
 	end
 

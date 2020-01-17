@@ -189,70 +189,70 @@
       "x": 15,
       "y": 2,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DCDD"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz2Left"
     },
     {
       "type": "bg_event_type_1",
       "x": 16,
       "y": 2,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DCE9"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz2Right"
     },
     {
       "type": "bg_event_type_1",
       "x": 13,
       "y": 10,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DDBB"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz3Left"
     },
     {
       "type": "bg_event_type_1",
       "x": 14,
       "y": 10,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DDC7"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz3Right"
     },
     {
       "type": "bg_event_type_1",
       "x": 13,
       "y": 17,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DE92"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz4Left"
     },
     {
       "type": "bg_event_type_1",
       "x": 14,
       "y": 17,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DE9E"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz4Right"
     },
     {
       "type": "bg_event_type_1",
       "x": 1,
       "y": 18,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DF69"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz5Left"
     },
     {
       "type": "bg_event_type_1",
       "x": 2,
       "y": 18,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16DF75"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz5Right"
     },
     {
       "type": "bg_event_type_1",
       "x": 1,
       "y": 10,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16E040"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz6Left"
     },
     {
       "type": "bg_event_type_1",
       "x": 2,
       "y": 10,
       "elevation": 0,
-      "script": "CinnabarIsland_Gym_EventScript_16E04C"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz6Right"
     },
     {
       "type": "bg_event_type_1",

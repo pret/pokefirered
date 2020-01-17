@@ -23,7 +23,7 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	setvar VAR_0x8008, INGAME_TRADE_NIDORINOA
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_NINA_TRADE, EventScript_16FDCE
-	msgbox gUnknown_81A597B, MSGBOX_YESNO
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16FDB6
 	call EventScript_ChooseMonForInGameTrade
@@ -33,24 +33,24 @@ Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne EventScript_16FDC0
 	call EventScript_DoInGameTrade
-	msgbox gUnknown_81A59DA
+	msgbox Trade_Text_HeyThanks
 	setflag FLAG_DID_NINA_TRADE
 	release
 	end
 
 EventScript_16FDB6:: @ 816FDB6
-	msgbox gUnknown_81A59B6
+	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
 EventScript_16FDC0:: @ 816FDC0
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A59C6
+	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
 EventScript_16FDCE:: @ 816FDCE
-	msgbox gUnknown_81A59E7
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end
 

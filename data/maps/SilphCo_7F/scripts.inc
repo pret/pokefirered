@@ -150,7 +150,7 @@ EventScript_161B12:: @ 8161B12
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B7E
-	call EventScript_1A8C27
+	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto EventScript_161B7E
 
@@ -167,14 +167,14 @@ EventScript_161B45:: @ 8161B45
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_161B73
-	call EventScript_1A8C33
+	call EventScript_NameReceivedBoxMon
 	goto EventScript_161B73
 
 EventScript_161B72:: @ 8161B72
 	end
 
 EventScript_161B73:: @ 8161B73
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_161B7E
 
 EventScript_161B7D:: @ 8161B7D

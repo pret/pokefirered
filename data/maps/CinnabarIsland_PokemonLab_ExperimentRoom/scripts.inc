@@ -263,7 +263,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E827:: @ 816E827
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
-	call EventScript_1A8C27
+	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
 	end
@@ -278,12 +278,12 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E85B:: @ 816E85B
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A
-	call EventScript_1A8C33
+	call EventScript_NameReceivedBoxMon
 	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A
 	end
 
 CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E88A:: @ 816E88A
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E895
 	end
 

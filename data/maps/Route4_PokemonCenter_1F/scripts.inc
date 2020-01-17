@@ -62,7 +62,7 @@ EventScript_16F7F6:: @ 816F7F6
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16F861
-	call EventScript_1A8C27
+	call EventScript_GetGiftMonPartySlot
 	fadescreen FADE_TO_BLACK
 	hidemoneybox 0, 0
 	special ChangePokemonNickname
@@ -85,12 +85,12 @@ EventScript_16F822:: @ 816F822
 	end
 
 EventScript_16F84B:: @ 816F84B
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_16F861
 	end
 
 EventScript_16F856:: @ 816F856
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_16F86A
 	end
 

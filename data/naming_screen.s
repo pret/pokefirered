@@ -16,10 +16,10 @@ gUnknown_83E1980:: @ 83E1980
 	.incbin "graphics/interface/naming_screen_83E1980.4bpp"
 
 gUnknown_83E2280:: @ 83E2280
-	.4byte Text_1A5CF1
-	.4byte Text_1A5D31
-	.4byte Text_1A5D6E
-	.4byte Text_1A5DB1
+	.4byte Text_MonSentToBoxInSomeonesPC
+	.4byte Text_MonSentToBoxInBillsPC
+	.4byte Text_MonSentToBoxSomeonesBoxFull
+	.4byte Text_MonSentToBoxBillsBoxFull
 
 gUnknown_83E2290:: @ 83E2290
 	.4byte 0x000001e0

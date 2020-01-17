@@ -215,7 +215,7 @@ EventScript_16CDB3:: @ 816CDB3
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
-	message Text_1A5DF1
+	message Text_PlayerObtainedTheMon
 	waitmessage
 	waitfanfare
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
@@ -229,18 +229,18 @@ EventScript_16CDE0:: @ 816CDE0
 	updatecoinsbox 0, 5
 	getspeciesname 0, VAR_TEMP_1
 	playfanfare MUS_FANFA1
-	message Text_1A5DF1
+	message Text_PlayerObtainedTheMon
 	waitmessage
 	waitfanfare
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16CE12
-	call EventScript_1A8C33
+	call EventScript_NameReceivedBoxMon
 	goto EventScript_16CE12
 	end
 
 EventScript_16CE12:: @ 816CE12
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_16CC10
 	end
 

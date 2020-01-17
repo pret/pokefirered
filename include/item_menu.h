@@ -14,8 +14,8 @@ struct BagStruct
     u8 location;
     u8 pocket;
     u16 unk6;
-    u8 cursorPosition[6];
-    u8 scrollPosition[6];
+    u16 itemsAbove[3];
+    u16 cursorPos[3];
 };
 
 extern struct BagStruct gUnknown_203ACFC;

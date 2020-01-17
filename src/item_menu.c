@@ -1,17 +1,18 @@
 #include "global.h"
+#include "gflib.h"
 #include "bag.h"
 #include "battle_controllers.h"
-#include "bg.h"
+#include "decompress.h"
+#include "graphics.h"
 #include "help_system.h"
+#include "item.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
-#include "malloc.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
-#include "palette.h"
 #include "scanline_effect.h"
-#include "text.h"
+#include "strings.h"
 #include "constants/items.h"
 
 struct BagMenuAlloc
@@ -24,7 +25,8 @@ struct BagMenuAlloc
     u16 field_06;
     u8 field_08;
     u8 field_09;
-    u8 filler_0A[6];
+    u8 field_0A[3];
+    u8 field_0D[3];
     u8 field_10[4];
 };
 
@@ -32,7 +34,7 @@ EWRAM_DATA struct BagStruct gUnknown_203ACFC = {};
 EWRAM_DATA struct BagMenuAlloc * gUnknown_203AD10 = NULL;
 EWRAM_DATA void * gUnknown_203AD14 = NULL;
 EWRAM_DATA struct ListMenuItem * gUnknown_203AD18 = NULL;
-EWRAM_DATA u8 (*gUnknown_203AD1C)[20] = NULL;
+EWRAM_DATA u8 (*gUnknown_203AD1C)[19] = NULL;
 
 void sub_8107F10(void);
 bool8 sub_8107F3C(void);
@@ -43,7 +45,10 @@ bool8 sub_81081D0(void);
 bool8 sub_8108240(void);
 u8 sub_8108388(u8 location);
 bool8 sub_81083F4(void);
-void sub_810842C(u8 a0);
+void sub_810842C(u8 pocket);
+void sub_81085A4(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+void sub_8108654(u8 windowId, s32 itemId, u8 y);
+void sub_8108560(u8 *dest, u16 itemId);
 void sub_81087EC(void);
 void sub_8108888(void);
 void sub_81088D8(void);
@@ -52,6 +57,17 @@ void sub_8108A84(void);
 void sub_8108B04(void);
 void sub_8108C10(void);
 void sub_8108E54(void);
+void sub_8108F0C(u8 taskId);
+bool8 sub_810ADAC(void);
+void sub_810AF9C(u8 taskId);
+void sub_810B1D4(u8 taskId);
+void sub_810B378(u8 taskId);
+void sub_810B4BC(u8 taskId);
+void sub_810B5D4(u8 taskId);
+
+extern const struct BgTemplate gUnknown_8452CF4[2];
+extern const u8 gUnknown_8452F60[];
+extern const u8 gUnknown_8452F66[];
 
 void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
 {
@@ -84,7 +100,7 @@ void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
             gUnknown_203AD10->field_10[i] = 0;
         }
         if (a1 == 0 || a1 == 1 || a1 == 2)
-            gUnknown_203ACFC.unk6 = a1;
+            gUnknown_203ACFC.pocket = a1;
         gTextFlags.autoScroll = FALSE;
         gSpecialVar_ItemId = ITEM_NONE;
         SetMainCallback2(sub_8107F10);
@@ -204,7 +220,7 @@ bool8 sub_8107F3C(void)
         gMain.state++;
         break;
     case 12:
-        sub_810842C(gUnknown_203ACFC.unk6);
+        sub_810842C(gUnknown_203ACFC.pocket);
         gMain.state++;
         break;
     case 13:
@@ -216,13 +232,13 @@ bool8 sub_8107F3C(void)
         break;
     case 14:
         taskId = sub_8108388(gUnknown_203ACFC.location);
-        gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.unk6], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.unk6]);
+        gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
         gTasks[taskId].data[3] = 0;
         gTasks[taskId].data[8] = 0;
         gMain.state++;
         break;
     case 15:
-        sub_80984FC(gUnknown_203ACFC.unk6);
+        sub_80984FC(gUnknown_203ACFC.pocket);
         gMain.state++;
         break;
     case 16:
@@ -278,4 +294,146 @@ void sub_81081AC(void)
     gUnknown_203AD14 = NULL;
     gUnknown_203AD18 = NULL;
     gUnknown_203AD1C = NULL;
+}
+
+bool8 sub_81081D0(void)
+{
+    void **buff;
+    ResetAllBgsCoordinatesAndBgCntRegs();
+    buff = &gUnknown_203AD14;
+    *buff = Alloc(0x800);
+    if (*buff == NULL)
+        return FALSE;
+    memset(*buff, 0, 0x800);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, gUnknown_8452CF4, NELEMS(gUnknown_8452CF4));
+    SetBgTilemapBuffer(1, *buff);
+    ScheduleBgCopyTilemapToVram(1);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
+    ShowBg(0);
+    ShowBg(1);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    return TRUE;
+}
+
+bool8 sub_8108240(void)
+{
+    switch (gUnknown_203AD10->field_10[0])
+    {
+    case 0:
+        ResetTempTileDataBuffers();
+        DecompressAndCopyTileDataToVram(1, gUnknown_8E830CC, 0, 0, 0);
+        gUnknown_203AD10->field_10[0]++;
+        break;
+    case 1:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            if (gUnknown_203ACFC.location != 3)
+                LZDecompressWram(gUnknown_8E832C0, gUnknown_203AD14);
+            else
+                LZDecompressWram(gUnknown_8E83444, gUnknown_203AD14);
+            gUnknown_203AD10->field_10[0]++;
+        }
+        break;
+    case 2:
+        LoadCompressedPalette(gUnknown_8E835B4, 0x00, 0x60);
+        if (!sub_810ADAC() && gSaveBlock2Ptr->playerGender != MALE)
+            LoadCompressedPalette(gUnknown_8E83604, 0x00, 0x20);
+        gUnknown_203AD10->field_10[0]++;
+        break;
+    case 3:
+        if (sub_810ADAC() == TRUE || gSaveBlock2Ptr->playerGender == MALE)
+            LoadCompressedSpriteSheet(&gUnknown_83D41E4);
+        else
+            LoadCompressedSpriteSheet(&gUnknown_83D41EC);
+        gUnknown_203AD10->field_10[0]++;
+        break;
+    case 4:
+        LoadCompressedSpritePalette(&gUnknown_83D41F4);
+        gUnknown_203AD10->field_10[0]++;
+        break;
+    case 5:
+        LoadCompressedSpriteSheet(&gBagSwapSpriteSheet);
+        gUnknown_203AD10->field_10[0]++;
+        break;
+    default:
+        LoadCompressedSpritePalette(&gBagSwapSpritePalette);
+        gUnknown_203AD10->field_10[0] = 0;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+u8 sub_8108388(u8 location)
+{
+    switch (location)
+    {
+    case 6:
+        return CreateTask(sub_810AF9C, 0);
+    case 9:
+        return CreateTask(sub_810B1D4, 0);
+    case 10:
+        return CreateTask(sub_810B5D4, 0);
+    case 7:
+        return CreateTask(sub_810B4BC, 0);
+    case 8:
+        return CreateTask(sub_810B378, 0);
+    default:
+        return CreateTask(sub_8108F0C, 0);
+    }
+}
+
+bool8 sub_81083F4(void)
+{
+    gUnknown_203AD18 = Alloc(43 * sizeof(struct ListMenuItem));
+    if (gUnknown_203AD18 == NULL)
+        return FALSE;
+    gUnknown_203AD1C = Alloc(43 * 19);
+    if (gUnknown_203AD1C == NULL)
+        return FALSE;
+    return TRUE;
+}
+
+void sub_810842C(u8 pocket)
+{
+    u16 i;
+    struct BagPocket * bagPocket = &gBagPockets[pocket];
+    for (i = 0; i < gUnknown_203AD10->field_0A[pocket]; i++)
+    {
+        sub_8108560(gUnknown_203AD1C[i], bagPocket->itemSlots[i].itemId);
+        gUnknown_203AD18[i].label = gUnknown_203AD1C[i];
+        gUnknown_203AD18[i].index = i;
+    }
+    StringCopy(gUnknown_203AD1C[i], gUnknown_8452F60);
+    StringAppend(gUnknown_203AD1C[i], gFameCheckerText_Cancel);
+    gUnknown_203AD18[i].label = gUnknown_203AD1C[i];
+    gUnknown_203AD18[i].index = i;
+    gMultiuseListMenuTemplate.items = gUnknown_203AD18;
+    gMultiuseListMenuTemplate.totalItems = gUnknown_203AD10->field_0A[pocket] + 1;
+    gMultiuseListMenuTemplate.windowId = 0;
+    gMultiuseListMenuTemplate.header_X = 0;
+    gMultiuseListMenuTemplate.item_X = 9;
+    gMultiuseListMenuTemplate.cursor_X = 1;
+    gMultiuseListMenuTemplate.lettersSpacing = 0;
+    gMultiuseListMenuTemplate.itemVerticalPadding = 2;
+    gMultiuseListMenuTemplate.upText_Y = 2;
+    gMultiuseListMenuTemplate.maxShowed = gUnknown_203AD10->field_0D[pocket];
+    gMultiuseListMenuTemplate.fontId = 2;
+    gMultiuseListMenuTemplate.cursorPal = 2;
+    gMultiuseListMenuTemplate.fillValue = 0;
+    gMultiuseListMenuTemplate.cursorShadowPal = 3;
+    gMultiuseListMenuTemplate.moveCursorFunc = sub_81085A4;
+    gMultiuseListMenuTemplate.itemPrintFunc = sub_8108654;
+    gMultiuseListMenuTemplate.cursorKind = 0;
+    gMultiuseListMenuTemplate.scrollMultiple = 0;
+}
+
+void sub_8108560(u8 *dest, u16 itemId)
+{
+    if (itemId == ITEM_TM_CASE || itemId == ITEM_BERRY_POUCH)
+        StringCopy(dest, gUnknown_8452F66);
+    else
+        StringCopy(dest, gUnknown_8452F60);
+    StringAppend(dest, ItemId_GetName(itemId));
 }

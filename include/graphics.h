@@ -1,7 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
@@ -4860,5 +4856,12 @@ extern const u8 gHealthboxElementsGfxTable[][32];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u16 gUnknown_8D12404[];
+
+// item_menu
+extern const u32 gUnknown_8E830CC[];
+extern const u32 gUnknown_8E832C0[];
+extern const u32 gUnknown_8E83444[];
+extern const u32 gUnknown_8E835B4[];
+extern const u32 gUnknown_8E83604[];
 
 #endif //GUARD_GRAPHICS_H

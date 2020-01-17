@@ -12,8 +12,8 @@ struct BagStruct
 {
     void (*bagCallback)(void);
     u8 location;
-    u8 pocket;
-    u16 unk6;
+    u8 unk5;
+    u16 pocket;
     u16 itemsAbove[3];
     u16 cursorPos[3];
 };

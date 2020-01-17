@@ -2465,14 +2465,14 @@ gUnknown_8418C62:: @ 0x8418C62
 gUnknown_8418C6F:: @ 0x8418C6F
 	.string "もう これいじょう たべない みたい‥$"
 
-gUnknown_8418C83:: @ 8418C83
+gText_SaveFailedScreen_CheckingBackupMemory:: @ 8418C83
 	.string "Save failed.\n"
 	.string "Checking the backup memory‥\n"
 	.string "Please wait.\n"
 	.string "“Time required:\n"
 	.string "about 1 minute”$"
 
-gUnknown_8418CD9:: @ 8418CD9
+gText_SaveFailedScreen_BackupMemoryDamaged:: @ 8418CD9
 	.string "The backup memory is damaged or\n"
 	.string "the game's battery has run dry.\n"
 	.string "The game can be played, but its\n"
@@ -2493,7 +2493,7 @@ gUnknown_8418DC9:: @ 0x8418DC9
 	.string "{COLOR RED}“このまま ぼうけんをつづけることは できません\n"
 	.string "タイトルに もどります”$"
 
-gUnknown_8418E09:: @ 8418E09
+gText_SaveFailedScreen_SaveCompleted:: @ 8418E09
 	.string "Save completed.\n"
 	.string "“Please press the A Button.”$"
 

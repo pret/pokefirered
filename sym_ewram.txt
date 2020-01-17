@@ -306,15 +306,13 @@ gUnknown_203998C: @ 203998C
 	.include "src/diploma.o"
 
 	.align 2
-gUnknown_203AB4C: @ 203AB4C
-	.space 0x4
+	.include "src/save_failed_screen.o"
 
-gUnknown_203AB50: @ 203AB50
-	.space 0x4
-
+	.align 2
 gUnknown_203AB54: @ 203AB54
 	.space 0x4
 
+	.align 2
 	.include "src/new_menu_helpers.o"
 	.align 2
 	.include "src/box_party_pokemon_dropdown.o"

@@ -1,65 +1,70 @@
 #include "global.h"
 #include "decompress.h"
 #include "dma3.h"
+#include "gba/flash_internal.h"
 #include "gpu_regs.h"
 #include "help_system.h"
 #include "m4a.h"
 #include "save.h"
 #include "save_failed_screen.h"
 #include "strings.h"
+#include "text.h"
 
-bool32 gUnknown_3005430;
-EWRAM_DATA u16 gUnknown_203AB4C = SAVE_NORMAL;
-EWRAM_DATA u8 gUnknown_203AB50 = 0;
+bool32 sIsInSaveFailedScreen;
 
-void sub_80F52EC(void);
-void sub_80F53CC(void);
-void sub_80F53E8(void);
-void sub_80F5404(const u8 *a0);
-bool32 sub_80F5458(void);
+static EWRAM_DATA u16 sSaveType = SAVE_NORMAL;
+static EWRAM_DATA u16 unused_203AB4E = 0;
+static EWRAM_DATA u8 sSaveFailedScreenState = 0;
 
-extern const u16 gUnknown_841EE44[];
+static void BlankPalettes(void);
+static void UpdateMapBufferWithText(void);
+static void ClearMapBuffer(void);
+static void PrintTextOnSaveFailedScreen(const u8 *a0);
+static bool32 TryWipeDamagedSectors(void);
+static bool32 WipeDamagedSectors(u32 damagedSectors);
 
-void sub_80F50F4(void)
+static const u16 sSaveFailedScreenPals[] = INCBIN_U16("graphics/interface/save_failed_screen.gbapal");
+
+void SetNotInSaveFailedScreen(void)
 {
-    gUnknown_3005430 = FALSE;
+    sIsInSaveFailedScreen = FALSE;
 }
 
 void DoSaveFailedScreen(u8 saveType)
 {
-    gUnknown_203AB4C = saveType;
-    gUnknown_3005430 = TRUE;
+    sSaveType = saveType;
+    sIsInSaveFailedScreen = TRUE;
 }
 
-bool32 sub_80F5118(void)
+bool32 RunSaveFailedScreen(void)
 {
-    switch (gUnknown_203AB50)
+    switch (sSaveFailedScreenState)
     {
     case 0:
-        if (!gUnknown_3005430)
+        if (!sIsInSaveFailedScreen)
             return FALSE;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
         SaveCallbacks();
-        gUnknown_203AB50 = 1;
+        sSaveFailedScreenState = 1;
         break;
     case 1:
         SaveMapTiles();
         SaveMapGPURegs();
         SaveMapTextColors();
-        sub_80F52EC();
+        BlankPalettes();
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
-        gUnknown_203AB50 = 2;
+        sSaveFailedScreenState = 2;
         break;
     case 2:
         RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
-        RequestDma3Copy(gUnknown_841EE44, (void *)PLTT, 0x20, 0);
-        gUnknown_203AB50 = 3;
+        RequestDma3Copy(sSaveFailedScreenPals, (void *)PLTT, 0x20, 0);
+        sSaveFailedScreenState = 3;
         break;
     case 3:
-        sub_80F53E8();
-        sub_80F5404(gUnknown_8418C83);
-        sub_80F53CC();
-        gUnknown_203AB50 = 4;
+        ClearMapBuffer();
+        PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_CheckingBackupMemory);
+        UpdateMapBufferWithText();
+        sSaveFailedScreenState = 4;
         break;
     case 4:
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -67,44 +72,44 @@ bool32 sub_80F5118(void)
         SetGpuReg(REG_OFFSET_BG0VOFS, 0);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(31));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON);
-        gUnknown_203AB50 = 5;
+        sSaveFailedScreenState = 5;
         break;
     case 5:
-        if (sub_80F5458() == TRUE)
+        if (TryWipeDamagedSectors() == TRUE)
         {
             gSaveSucceeded = SAVE_STATUS_OK;
-            sub_80F5404(gUnknown_8418E09);
+            PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_SaveCompleted);
         }
         else
         {
             gSaveSucceeded = SAVE_STATUS_ERROR;
-            sub_80F5404(gUnknown_8418CD9);
+            PrintTextOnSaveFailedScreen(gText_SaveFailedScreen_BackupMemoryDamaged);
         }
-        gUnknown_203AB50 = 6;
+        sSaveFailedScreenState = 6;
         break;
     case 6:
         if (JOY_NEW(A_BUTTON))
-            gUnknown_203AB50 = 7;
+            sSaveFailedScreenState = 7;
         break;
     case 7:
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         RestoreMapTiles();
-        sub_80F52EC();
-        gUnknown_203AB50 = 8;
+        BlankPalettes();
+        sSaveFailedScreenState = 8;
         break;
     case 8:
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
         RestoreMapTextColors();
         RestoreGPURegs();
         RestoreCallbacks();
-        gUnknown_3005430 = FALSE;
-        gUnknown_203AB50 = 0;
+        sIsInSaveFailedScreen = FALSE;
+        sSaveFailedScreenState = 0;
         break;
     }
     return TRUE;
 }
 
-void sub_80F52EC(void)
+static void BlankPalettes(void)
 {
     int i;
     for (i = 0; i < BG_PLTT_SIZE; i += sizeof(u16))
@@ -114,12 +119,113 @@ void sub_80F52EC(void)
     }
 }
 
-void sub_80F5318(void)
+static void RequestDmaCopyFromScreenBuffer(void)
 {
     RequestDma3Copy(gDecompressionBuffer + 0x3800, (void *)BG_SCREEN_ADDR(31), 0x500, 0);
 }
 
-void sub_80F5334(void)
+static void RequestDmaCopyFromCharBuffer(void)
 {
     RequestDma3Copy(gDecompressionBuffer + 0x020, (void *)BG_CHAR_ADDR(3) + 0x20, 0x2300, 0);
+}
+
+static void FillBgMapBufferRect(u16 baseBlock, u8 left, u8 top, u8 width, u8 height, u16 blockOffset)
+{
+    u16 i, j;
+
+    for (i = top; i < top + height; i++)
+    {
+        for (j = left; j < left + width; j++)
+        {
+            *((u16 *)(gDecompressionBuffer + 0x3800 + 64 * i + 2 * j)) = baseBlock;
+            baseBlock += blockOffset;
+        }
+    }
+    RequestDmaCopyFromScreenBuffer();
+}
+
+static void UpdateMapBufferWithText(void)
+{
+    FillBgMapBufferRect(0x001, 1, 5, 28, 10, 0x001);
+}
+
+static void ClearMapBuffer(void)
+{
+    FillBgMapBufferRect(0x000, 0, 0, 30, 20, 0x000);
+}
+
+static void PrintTextOnSaveFailedScreen(const u8 *str)
+{
+    GenerateFontHalfRowLookupTable(TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+    CpuFill16(PIXEL_FILL(1) | (PIXEL_FILL(1) << 8), gDecompressionBuffer + 0x20, 0x2300);
+    HelpSystemRenderText(2, gDecompressionBuffer + 0x20, str, 2, 2, 28, 10);
+    RequestDmaCopyFromCharBuffer();
+}
+
+static bool32 TryWipeDamagedSectors(void)
+{
+    int i = 0;
+    for (i = 0; gDamagedSaveSectors != 0 && i < 3; i++)
+    {
+        if (WipeDamagedSectors(gDamagedSaveSectors))
+            return FALSE;
+        HandleSavingData(sSaveType);
+    }
+    if (gDamagedSaveSectors != 0)
+        return FALSE;
+    return TRUE;
+}
+
+static bool16 VerifySectorWipe(u32 sector)
+{
+    u16 sector0 = sector;
+    u16 i;
+    u32 *saveDataBuffer = (void *)&gSaveDataBuffer;
+    ReadFlash(sector0, 0, saveDataBuffer, 0x1000);
+    for (i = 0; i < 0x1000 / 4; i++, saveDataBuffer++)
+    {
+        if (*saveDataBuffer != 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static bool32 WipeSector(u32 sector)
+{
+    bool32 result;
+    u16 i, j;
+
+    i = 0;
+    while (i < 130)
+    {
+        for (j = 0; j < 0x1000; j++)
+        {
+            ProgramFlashByte(sector, j, 0);
+        }
+        result = VerifySectorWipe(sector);
+        i++;
+        if (!result)
+            break;
+    }
+
+    return result;
+}
+
+static bool32 WipeDamagedSectors(u32 damagedSectors)
+{
+    int i;
+    for (i = 0; i < 32; i++)
+    {
+        if (damagedSectors & (1 << i))
+        {
+            if (!WipeSector(i))
+            {
+                damagedSectors &= ~(1 << i);
+            }
+        }
+    }
+    if (damagedSectors == 0)
+        return FALSE;
+    else
+        return TRUE;
 }

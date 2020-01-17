@@ -71,10 +71,8 @@ gUnknown_3005078: @ 3005078
 	.include "save.o"
 	.align 2
 	.include "battle_anim_special.o"
-
-gUnknown_3005430: @ 3005430
-	.space 0x10
-
+	.align 2
+	.include "save_failed_screen.o"
 	.align 4
 	.include "link_rfu_2.o"
 	.align 4

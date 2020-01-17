@@ -5,6 +5,3 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-
-gUnknown_841EE44:: @ 841EE44
-	.incbin "graphics/interface/save_failed_screen.gbapal"

@@ -1034,8 +1034,8 @@ extern const u8 gText_RegionMap_AreaDesc_PatternBush[];
 extern const u8 gText_RegionMap_AreaDesc_DottedHole[];
 
 // save_failed_screen
-extern const u8 gUnknown_8418C83[];
-extern const u8 gUnknown_8418CD9[];
-extern const u8 gUnknown_8418E09[];
+extern const u8 gText_SaveFailedScreen_CheckingBackupMemory[];
+extern const u8 gText_SaveFailedScreen_BackupMemoryDamaged[];
+extern const u8 gText_SaveFailedScreen_SaveCompleted[];
 
 #endif //GUARD_STRINGS_H

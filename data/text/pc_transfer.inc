@@ -26,7 +26,9 @@ Text_PlayerObtainedTheMon:: @ 81A5DF1
     .string "{PLAYER} obtained\n"
     .string "the {STR_VAR_1}!$"
 
-Text_1A5E05:: @ 81A5E05
+@ Unused. Translated below
+@ You cannot carry any more Pokemon, so {STR_VAR_2} was sent to PC Box {STR_VAR_1}!
+Text_MonSentToBoxInPC:: @ 81A5E05
     .string "ポケモンを　もちきれないので\n"
     .string "パソコンの　ボックス“{STR_VAR_1}”　に\l"
     .string "{STR_VAR_2}を　てんそうした！$"

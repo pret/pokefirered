@@ -182,7 +182,7 @@ static bool16 VerifySectorWipe(u32 sector)
     u16 i;
     u32 *saveDataBuffer = (void *)&gSaveDataBuffer;
     ReadFlash(sector0, 0, saveDataBuffer, 0x1000);
-    for (i = 0; i < 0x1000 / 4; i++, saveDataBuffer++)
+    for (i = 0; i < 0x1000 / sizeof(u32); i++, saveDataBuffer++)
     {
         if (*saveDataBuffer != 0)
             return TRUE;

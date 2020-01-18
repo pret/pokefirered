@@ -34,7 +34,7 @@ void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);
 void sub_8108CB4(void);
 void ItemMenu_SetExitCallback(void (*)(void));
-void DisplayItemMessageInBag(u8 taskId, u8 bgId, const u8 * string, TaskFunc followUpFunc);
+void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc);
 void sub_810A1F8(u8 taskId);
 void sub_8107ECC(void);
 void sub_810AF74(void);

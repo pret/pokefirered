@@ -22,7 +22,7 @@
 
 struct BagMenuAlloc
 {
-    MainCallback field_00;
+    MainCallback exitCB;
     u8 field_04;
     u8 field_05_0:4;
     u8 itemMenuIcon:2;
@@ -68,12 +68,26 @@ void sub_8108CFC(u8 taskId);
 void sub_8108C10(void);
 void sub_8108E54(void);
 void sub_8108F0C(u8 taskId);
+void sub_81090DC(u8 taskId);
+void sub_8109140(u8 a0);
+u8 sub_8109168(u8 taskId, u8 pocketId);
+void sub_81091D0(u8 taskId, s16 itemIndex, u8 a2);
+void sub_81093B8(u8 taskId, s16 itemIndex);
+void sub_8109BB8(u8 taskId);
 void Task_ItemMenuAction_Use(u8 taskId);
 void Task_ItemMenuAction_Toss(u8 taskId);
 void Task_ItemMenuAction_ToggleSelect(u8 taskId);
 void Task_ItemMenuAction_Give(u8 taskId);
 void Task_ItemMenuAction_Cancel(u8 taskId);
+void sub_8109DB0(u8 taskId);
+void sub_8109EA8(u8 taskId);
 void sub_810A324(u8 taskId);
+void sub_810A370(u8 taskId);
+void sub_810A468(u8 taskId);
+void sub_810A568(u8 taskId);
+void sub_810A720(u8 taskId);
+void sub_810A940(u8 taskId);
+void sub_810AB40(u8 taskId);
 bool8 sub_810ADAC(void);
 void sub_810AF9C(u8 taskId);
 void sub_810B1D4(u8 taskId);
@@ -137,6 +151,7 @@ const struct MenuAction gUnknown_8452EB8[] = {
     [ITEMMENUACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
+extern const TaskFunc gUnknown_8452F34[];
 extern const u8 gUnknown_8452F60[];
 extern const u8 gUnknown_8452F66[];
 extern const struct ScrollArrowsTemplate gUnknown_8452F6C;
@@ -156,7 +171,7 @@ void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
             gUnknown_203ACFC.location = location;
         if (a2 != NULL)
             gUnknown_203ACFC.bagCallback = a2;
-        gUnknown_203AD10->field_00 = NULL;
+        gUnknown_203AD10->exitCB = NULL;
         gUnknown_203AD10->field_04 = 0xFF;
         gUnknown_203AD10->itemMenuIcon = 0;
         gUnknown_203AD10->field_05_6 = 0;
@@ -739,8 +754,8 @@ void sub_8108B8C(u8 taskId)
     if (!gPaletteFade.active && FuncIsActiveTask(sub_8108CFC) != TRUE)
     {
         DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
-        if (gUnknown_203AD10->field_00 != NULL)
-            SetMainCallback2(gUnknown_203AD10->field_00);
+        if (gUnknown_203AD10->exitCB != NULL)
+            SetMainCallback2(gUnknown_203AD10->exitCB);
         else
             SetMainCallback2(gUnknown_203ACFC.bagCallback);
         sub_8108978();
@@ -825,4 +840,121 @@ void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_)
         }
         itemSlots[to] = firstSlot;
     }
+}
+
+void sub_8108DC8(u8 pocketId)
+{
+    u16 i;
+    struct BagPocket * pocket = &gBagPockets[pocketId];
+    BagPocketCompaction(pocket->itemSlots, pocket->capacity);
+    gUnknown_203AD10->nItems[pocketId] = 0;
+    for (i = 0; i < pocket->capacity; i++)
+    {
+        if (pocket->itemSlots[i].itemId == ITEM_NONE)
+            break;
+        gUnknown_203AD10->nItems[pocketId]++;
+    }
+    if (gUnknown_203AD10->nItems[pocketId] + 1 > 6)
+        gUnknown_203AD10->maxShowed[pocketId] = 6;
+    else
+        gUnknown_203AD10->maxShowed[pocketId] = gUnknown_203AD10->nItems[pocketId] + 1;
+}
+
+void sub_8108E54(void)
+{
+    u8 i;
+    for (i = 0; i < 3; i++)
+        sub_8108DC8(i);
+}
+
+void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc)
+{
+    s16 *data = gTasks[taskId].data;
+    data[10] = sub_810BA70(5);
+    FillWindowPixelBuffer(data[10], PIXEL_FILL(1));
+    DisplayMessageAndContinueTask(taskId, data[10], 0x06D, 0x0D, fontId, GetTextSpeedSetting(), string, followUpFunc);
+    ScheduleBgCopyTilemapToVram(0);
+}
+
+void ItemMenu_SetExitCallback(MainCallback cb)
+{
+    gUnknown_203AD10->exitCB = cb;
+}
+
+u8 sub_8108EEC(u8 a0)
+{
+    return gUnknown_203ACFC.cursorPos[a0] + gUnknown_203ACFC.itemsAbove[a0];
+}
+
+void sub_8108F0C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 cursorPos;
+    u16 itemsAbove;
+    s32 input;
+
+    if (gPaletteFade.active)
+        return;
+    if (FuncIsActiveTask(sub_8108CFC) == TRUE)
+        return;
+    if ((u8)sub_80BF72C() == TRUE)
+        return;
+    switch (sub_8109168(taskId, gUnknown_203ACFC.pocket))
+    {
+    case 1:
+        sub_81091D0(taskId, -1, 0);
+        return;
+    case 2:
+        sub_81091D0(taskId,  1, 0);
+        return;
+    default:
+        if (JOY_NEW(SELECT_BUTTON) && gUnknown_203ACFC.location == 0)
+        {
+            ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
+            if (cursorPos + itemsAbove != gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket])
+            {
+                PlaySE(SE_SELECT);
+                sub_81093B8(taskId, cursorPos + itemsAbove);
+                return;
+            }
+        }
+        break;
+    }
+    input = ListMenu_ProcessInput(data[0]);
+    ListMenuGetScrollAndRow(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    switch (input)
+    {
+    case -1:
+        return;
+    case -2:
+        PlaySE(SE_SELECT);
+        gSpecialVar_ItemId = ITEM_NONE;
+        sub_8108CB4();
+        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        if (input == gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket])
+        {
+            gSpecialVar_ItemId = ITEM_NONE;
+            sub_8108CB4();
+            gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+        }
+        else
+        {
+            sub_8108978();
+            bag_menu_print_cursor_(data[0], 2);
+            data[1] = input;
+            data[2] = BagGetQuantityByPocketPosition(gUnknown_203ACFC.pocket + 1, input);
+            gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, input);
+            gTasks[taskId].func = sub_81090DC;
+        }
+        break;
+    }
+}
+
+void sub_81090DC(u8 taskId)
+{
+    sub_8109140(1);
+    gUnknown_8452F34[gUnknown_203ACFC.location](taskId);
 }

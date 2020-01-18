@@ -14,6 +14,7 @@
 #include "scanline_effect.h"
 #include "strings.h"
 #include "constants/items.h"
+#include "constants/songs.h"
 
 struct BagMenuAlloc
 {
@@ -46,10 +47,12 @@ bool8 sub_8108240(void);
 u8 sub_8108388(u8 location);
 bool8 sub_81083F4(void);
 void sub_810842C(u8 pocket);
+void sub_8108560(u8 *dest, u16 itemId);
 void sub_81085A4(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 void sub_8108654(u8 windowId, s32 itemId, u8 y);
-void sub_8108560(u8 *dest, u16 itemId);
+void bag_menu_print_cursor(u8 y, u8 colorIdx);
 void sub_81087EC(void);
+void sub_8108818(s32 itemIndex);
 void sub_8108888(void);
 void sub_81088D8(void);
 void sub_8108A68(void);
@@ -68,6 +71,7 @@ void sub_810B5D4(u8 taskId);
 extern const struct BgTemplate gUnknown_8452CF4[2];
 extern const u8 gUnknown_8452F60[];
 extern const u8 gUnknown_8452F66[];
+extern const u8 gUnknown_8452F7C[];
 
 void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
 {
@@ -436,4 +440,69 @@ void sub_8108560(u8 *dest, u16 itemId)
     else
         StringCopy(dest, gUnknown_8452F60);
     StringAppend(dest, ItemId_GetName(itemId));
+}
+
+void sub_81085A4(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+{
+    if (onInit != TRUE)
+    {
+        PlaySE(SE_BAG1);
+        sub_8098580();
+    }
+    if (gUnknown_203AD10->field_04 == 0xFF)
+    {
+        DestroyItemMenuIcon(gUnknown_203AD10->field_05_4 ^ 1);
+        if (gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] != itemIndex)
+            CreateItemMenuIcon(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex), gUnknown_203AD10->field_05_4);
+        else
+            CreateItemMenuIcon(ITEM_N_A, gUnknown_203AD10->field_05_4);
+        gUnknown_203AD10->field_05_4 ^= 1;
+        if (gUnknown_203AD10->field_05_6 == 0)
+            sub_8108818(itemIndex);
+    }
+}
+
+void sub_8108654(u8 windowId, s32 itemId, u8 y)
+{
+    u16 bagItemId;
+    u16 bagItemQuantity;
+    if (gUnknown_203AD10->field_04 != 0xFF)
+    {
+        if (gUnknown_203AD10->field_04 == (u8)itemId)
+            bag_menu_print_cursor(y, 2);
+        else
+            bag_menu_print_cursor(y, 0xFF);
+    }
+    if (itemId != -2 && gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] != itemId)
+    {
+        bagItemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemId);
+        bagItemQuantity = BagGetQuantityByPocketPosition(gUnknown_203ACFC.pocket + 1, itemId);
+        if (gUnknown_203ACFC.pocket != POCKET_KEY_ITEMS - 1 && !itemid_is_unique(bagItemId))
+        {
+            ConvertIntToDecimalStringN(gStringVar1, bagItemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+            sub_810B8F0(windowId, 0, gStringVar4, 0x6e, y, 0, 0, 0xFF, 1);
+        }
+        else if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == bagItemId)
+        {
+            BlitBitmapToWindow(windowId, gUnknown_8452F7C, 0x70, y, 0x18, 0x10);
+        }
+    }
+}
+
+void bag_menu_print_cursor_(u8 taskId, u8 colorIdx)
+{
+    bag_menu_print_cursor(ListMenuGetYCoordForPrintingArrowCursor(taskId), colorIdx);
+}
+
+void bag_menu_print_cursor(u8 y, u8 colorIdx)
+{
+    if (colorIdx == 0xFF)
+    {
+        FillWindowPixelRect(0, PIXEL_FILL(0), 1, y, GetMenuCursorDimensionByFont(2, 0), GetMenuCursorDimensionByFont(2, 1));
+    }
+    else
+    {
+        sub_810B8F0(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+    }
 }

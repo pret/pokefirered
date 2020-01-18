@@ -6,61 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_8452CF4:: @ 8452CF4
-	.4byte 0x000001f0
-	@ {
-	@ 	.bg = 0,
-	@ 	.charBaseIndex = 0,
-	@ 	.mapBaseIndex = 31,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 0,
-	@ 	.baseTile = 0x0000
-	@ }
-	.4byte 0x000011ed
-	@ {
-	@ 	.bg = 1,
-	@ 	.charBaseIndex = 3,
-	@ 	.mapBaseIndex = 30,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 1,
-	@ 	.baseTile = 0x0000
-	@ }
-
-gUnknown_8452CFC:: @ 8452CFC
-	.4byte gUnknown_84162CD
-	.4byte gUnknown_84162DE
-	.4byte gUnknown_84162D3
-
-gUnknown_8452D08:: @ 8452D08
-	.incbin "graphics/item_menu/bagmap_0.bin"
-	.incbin "graphics/item_menu/bagmap_1.bin"
-	.incbin "graphics/item_menu/bagmap_2.bin"
-	.incbin "graphics/item_menu/bagmap_3.bin"
-	.incbin "graphics/item_menu/bagmap_4.bin"
-	.incbin "graphics/item_menu/bagmap_5.bin"
-	.incbin "graphics/item_menu/bagmap_6.bin"
-	.incbin "graphics/item_menu/bagmap_7.bin"
-	.incbin "graphics/item_menu/bagmap_8.bin"
-	.incbin "graphics/item_menu/bagmap_9.bin"
-	.incbin "graphics/item_menu/bagmap_A.bin"
-	.incbin "graphics/item_menu/bagmap_B.bin"
-
-gUnknown_8452EB8:: @ 8452EB8
-	.4byte gOtherText_Use, sub_8109C50
-	.4byte gOtherText_Toss, sub_8109CC0
-	.4byte gUnknown_84161A9, sub_810A000
-	.4byte gOtherText_Give, sub_810A0A8
-	.4byte gFameCheckerText_Cancel, sub_810A2DC
-	.4byte gOtherText_Use, sub_810A324
-	.4byte gUnknown_84161E9, sub_8109C50
-	.4byte gUnknown_84161F4, sub_8109C50
-	.4byte gUnknown_84161F4, sub_810A324
-	.4byte gUnknown_84161BC, sub_8109C50
-	.4byte gUnknown_84161F9, sub_810A000
-	.4byte gString_Dummy, NULL
-
 gUnknown_8452F18:: @ 8452F18
 	.byte 0x00, 0x03, 0x01, 0x04
 	.byte 0x00, 0x02, 0x04, 0x0b

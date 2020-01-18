@@ -1039,6 +1039,14 @@ extern const u8 gText_SaveFailedScreen_BackupMemoryDamaged[];
 extern const u8 gText_SaveFailedScreen_SaveCompleted[];
 
 // item_menu
+extern const u8 gUnknown_84161A9[];
+extern const u8 gUnknown_84161BC[];
+extern const u8 gUnknown_84161E9[];
+extern const u8 gUnknown_84161F4[];
+extern const u8 gUnknown_84161F9[];
+extern const u8 gUnknown_84162CD[];
+extern const u8 gUnknown_84162D3[];
+extern const u8 gUnknown_84162DE[];
 extern const u8 gUnknown_84162F5[];
 
 #endif //GUARD_STRINGS_H

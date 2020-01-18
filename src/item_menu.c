@@ -9,6 +9,7 @@
 #include "item_menu.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
+#include "menu.h"
 #include "menu_indicators.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -17,19 +18,21 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
+#define FREE_IF_SET(ptr) ({ if (ptr) Free(ptr); })
+
 struct BagMenuAlloc
 {
     u32 field_00;
     u8 field_04;
     u8 field_05_0:4;
-    u8 field_05_4:2;
+    u8 itemMenuIcon:2;
     u8 field_05_6:2;
-    u16 field_06;
-    u8 field_08;
-    u8 field_09;
-    u8 field_0A[3];
-    u8 field_0D[3];
-    u8 field_10[4];
+    u16 contextMenuSelectedItem;
+    u8 pocketScrollArrowsTask;
+    u8 pocketSwitchArrowsTask;
+    u8 nItems[3];
+    u8 maxShowed[3];
+    u8 data[4];
 };
 
 EWRAM_DATA struct BagStruct gUnknown_203ACFC = {};
@@ -60,9 +63,16 @@ void sub_810899C(void);
 void sub_8108A68(void);
 void sub_8108A84(void);
 void sub_8108B04(void);
+void sub_8108B8C(u8 taskId);
 void sub_8108C10(void);
 void sub_8108E54(void);
 void sub_8108F0C(u8 taskId);
+void sub_8109C50(u8 taskId);
+void sub_8109CC0(u8 taskId);
+void sub_810A000(u8 taskId);
+void sub_810A0A8(u8 taskId);
+void sub_810A2DC(u8 taskId);
+void sub_810A324(u8 taskId);
 bool8 sub_810ADAC(void);
 void sub_810AF9C(u8 taskId);
 void sub_810B1D4(u8 taskId);
@@ -70,8 +80,62 @@ void sub_810B378(u8 taskId);
 void sub_810B4BC(u8 taskId);
 void sub_810B5D4(u8 taskId);
 
-extern const struct BgTemplate gUnknown_8452CF4[2];
-extern const u8 *const gUnknown_8452CFC[];
+const struct BgTemplate gUnknown_8452CF4[2] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }
+};
+
+const u8 *const gUnknown_8452CFC[] = {
+    gUnknown_84162CD,
+    gUnknown_84162DE,
+    gUnknown_84162D3
+};
+
+const u16 gUnknown_8452D08[][18] = {
+    INCBIN_U16("graphics/item_menu/bagmap_0.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_1.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_2.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_3.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_4.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_5.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_6.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_7.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_8.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_9.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_A.bin"),
+    INCBIN_U16("graphics/item_menu/bagmap_B.bin")
+};
+
+const struct MenuAction gUnknown_8452EB8[] = {
+    {gOtherText_Use, {.void_u8 = sub_8109C50}},
+    {gOtherText_Toss, {.void_u8 = sub_8109CC0}},
+    {gUnknown_84161A9, {.void_u8 = sub_810A000}},
+    {gOtherText_Give, {.void_u8 = sub_810A0A8}},
+    {gFameCheckerText_Cancel, {.void_u8 = sub_810A2DC}},
+    {gOtherText_Use, {.void_u8 = sub_810A324}},
+    {gUnknown_84161E9, {.void_u8 = sub_8109C50}},
+    {gUnknown_84161F4, {.void_u8 = sub_8109C50}},
+    {gUnknown_84161F4, {.void_u8 = sub_810A324}},
+    {gUnknown_84161BC, {.void_u8 = sub_8109C50}},
+    {gUnknown_84161F9, {.void_u8 = sub_810A000}},
+    {gString_Dummy, {.void_u8 = NULL}}
+};
+
 extern const u8 gUnknown_8452F60[];
 extern const u8 gUnknown_8452F66[];
 extern const struct ScrollArrowsTemplate gUnknown_8452F6C;
@@ -93,10 +157,10 @@ void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
             gUnknown_203ACFC.bagCallback = a2;
         gUnknown_203AD10->field_00 = 0;
         gUnknown_203AD10->field_04 = 0xFF;
-        gUnknown_203AD10->field_05_4 = 0;
+        gUnknown_203AD10->itemMenuIcon = 0;
         gUnknown_203AD10->field_05_6 = 0;
-        gUnknown_203AD10->field_08 = 0xFF;
-        gUnknown_203AD10->field_09 = 0xFF;
+        gUnknown_203AD10->pocketScrollArrowsTask = 0xFF;
+        gUnknown_203AD10->pocketSwitchArrowsTask = 0xFF;
         if (location == 3)
             gUnknown_203AD10->field_05_0 = 1;
         else if (location == 6)
@@ -105,7 +169,7 @@ void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
             gUnknown_203AD10->field_05_0 = 0;
         for (i = 0; i < 4; i++)
         {
-            gUnknown_203AD10->field_10[i] = 0;
+            gUnknown_203AD10->data[i] = 0;
         }
         if (a1 == 0 || a1 == 1 || a1 == 2)
             gUnknown_203ACFC.pocket = a1;
@@ -196,7 +260,7 @@ bool8 sub_8107F3C(void)
     case 7:
         if (sub_81081D0())
         {
-            gUnknown_203AD10->field_10[0] = 0;
+            gUnknown_203AD10->data[0] = 0;
             gMain.state++;
         }
         else
@@ -326,12 +390,12 @@ bool8 sub_81081D0(void)
 
 bool8 sub_8108240(void)
 {
-    switch (gUnknown_203AD10->field_10[0])
+    switch (gUnknown_203AD10->data[0])
     {
     case 0:
         ResetTempTileDataBuffers();
         DecompressAndCopyTileDataToVram(1, gUnknown_8E830CC, 0, 0, 0);
-        gUnknown_203AD10->field_10[0]++;
+        gUnknown_203AD10->data[0]++;
         break;
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
@@ -340,33 +404,33 @@ bool8 sub_8108240(void)
                 LZDecompressWram(gUnknown_8E832C0, gUnknown_203AD14);
             else
                 LZDecompressWram(gUnknown_8E83444, gUnknown_203AD14);
-            gUnknown_203AD10->field_10[0]++;
+            gUnknown_203AD10->data[0]++;
         }
         break;
     case 2:
         LoadCompressedPalette(gUnknown_8E835B4, 0x00, 0x60);
         if (!sub_810ADAC() && gSaveBlock2Ptr->playerGender != MALE)
             LoadCompressedPalette(gUnknown_8E83604, 0x00, 0x20);
-        gUnknown_203AD10->field_10[0]++;
+        gUnknown_203AD10->data[0]++;
         break;
     case 3:
         if (sub_810ADAC() == TRUE || gSaveBlock2Ptr->playerGender == MALE)
             LoadCompressedSpriteSheet(&gUnknown_83D41E4);
         else
             LoadCompressedSpriteSheet(&gUnknown_83D41EC);
-        gUnknown_203AD10->field_10[0]++;
+        gUnknown_203AD10->data[0]++;
         break;
     case 4:
         LoadCompressedSpritePalette(&gUnknown_83D41F4);
-        gUnknown_203AD10->field_10[0]++;
+        gUnknown_203AD10->data[0]++;
         break;
     case 5:
         LoadCompressedSpriteSheet(&gBagSwapSpriteSheet);
-        gUnknown_203AD10->field_10[0]++;
+        gUnknown_203AD10->data[0]++;
         break;
     default:
         LoadCompressedSpritePalette(&gBagSwapSpritePalette);
-        gUnknown_203AD10->field_10[0] = 0;
+        gUnknown_203AD10->data[0] = 0;
         return TRUE;
     }
 
@@ -407,7 +471,7 @@ void sub_810842C(u8 pocket)
 {
     u16 i;
     struct BagPocket * bagPocket = &gBagPockets[pocket];
-    for (i = 0; i < gUnknown_203AD10->field_0A[pocket]; i++)
+    for (i = 0; i < gUnknown_203AD10->nItems[pocket]; i++)
     {
         sub_8108560(gUnknown_203AD1C[i], bagPocket->itemSlots[i].itemId);
         gUnknown_203AD18[i].label = gUnknown_203AD1C[i];
@@ -418,7 +482,7 @@ void sub_810842C(u8 pocket)
     gUnknown_203AD18[i].label = gUnknown_203AD1C[i];
     gUnknown_203AD18[i].index = i;
     gMultiuseListMenuTemplate.items = gUnknown_203AD18;
-    gMultiuseListMenuTemplate.totalItems = gUnknown_203AD10->field_0A[pocket] + 1;
+    gMultiuseListMenuTemplate.totalItems = gUnknown_203AD10->nItems[pocket] + 1;
     gMultiuseListMenuTemplate.windowId = 0;
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = 9;
@@ -426,7 +490,7 @@ void sub_810842C(u8 pocket)
     gMultiuseListMenuTemplate.lettersSpacing = 0;
     gMultiuseListMenuTemplate.itemVerticalPadding = 2;
     gMultiuseListMenuTemplate.upText_Y = 2;
-    gMultiuseListMenuTemplate.maxShowed = gUnknown_203AD10->field_0D[pocket];
+    gMultiuseListMenuTemplate.maxShowed = gUnknown_203AD10->maxShowed[pocket];
     gMultiuseListMenuTemplate.fontId = 2;
     gMultiuseListMenuTemplate.cursorPal = 2;
     gMultiuseListMenuTemplate.fillValue = 0;
@@ -455,12 +519,12 @@ void sub_81085A4(s32 itemIndex, bool8 onInit, struct ListMenu *list)
     }
     if (gUnknown_203AD10->field_04 == 0xFF)
     {
-        DestroyItemMenuIcon(gUnknown_203AD10->field_05_4 ^ 1);
-        if (gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] != itemIndex)
-            CreateItemMenuIcon(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex), gUnknown_203AD10->field_05_4);
+        DestroyItemMenuIcon(gUnknown_203AD10->itemMenuIcon ^ 1);
+        if (gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket] != itemIndex)
+            CreateItemMenuIcon(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex), gUnknown_203AD10->itemMenuIcon);
         else
-            CreateItemMenuIcon(ITEM_N_A, gUnknown_203AD10->field_05_4);
-        gUnknown_203AD10->field_05_4 ^= 1;
+            CreateItemMenuIcon(ITEM_N_A, gUnknown_203AD10->itemMenuIcon);
+        gUnknown_203AD10->itemMenuIcon ^= 1;
         if (gUnknown_203AD10->field_05_6 == 0)
             sub_8108818(itemIndex);
     }
@@ -477,7 +541,7 @@ void sub_8108654(u8 windowId, s32 itemId, u8 y)
         else
             bag_menu_print_cursor(y, 0xFF);
     }
-    if (itemId != -2 && gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] != itemId)
+    if (itemId != -2 && gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket] != itemId)
     {
         bagItemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemId);
         bagItemQuantity = BagGetQuantityByPocketPosition(gUnknown_203ACFC.pocket + 1, itemId);
@@ -520,7 +584,7 @@ void sub_81087EC(void)
 void sub_8108818(s32 itemIndex)
 {
     const u8 *description;
-    if (itemIndex != gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket])
+    if (itemIndex != gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket])
         description = ItemId_GetDescription(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex));
     else
         description = gUnknown_84162F5;
@@ -530,12 +594,12 @@ void sub_8108818(s32 itemIndex)
 
 void sub_8108888(void)
 {
-    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
-        2,
+    gUnknown_203AD10->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
+        SCROLL_ARROW_UP,
         160,
         8,
         104,
-        gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] - gUnknown_203AD10->field_0D[gUnknown_203ACFC.pocket] + 1,
+        gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket] - gUnknown_203AD10->maxShowed[gUnknown_203ACFC.pocket] + 1,
         110,
         110,
         &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket]
@@ -546,55 +610,124 @@ void sub_81088D8(void)
 {
     if (gUnknown_203AD10->field_05_0 != 1)
     {
-        gUnknown_203AD10->field_09 = AddScrollIndicatorArrowPair(&gUnknown_8452F6C, &gUnknown_203ACFC.pocket);
+        gUnknown_203AD10->pocketSwitchArrowsTask = AddScrollIndicatorArrowPair(&gUnknown_8452F6C, &gUnknown_203ACFC.pocket);
     }
 }
 
 void sub_8108908(void)
 {
-    gUnknown_203AD10->field_06 = 1;
-    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
-        2,
+    gUnknown_203AD10->contextMenuSelectedItem = 1;
+    gUnknown_203AD10->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
+        SCROLL_ARROW_UP,
         152,
         72,
         104,
         2,
         110,
         110,
-        &gUnknown_203AD10->field_06
+        &gUnknown_203AD10->contextMenuSelectedItem
     );
 }
 
 void sub_8108940(void)
 {
-    gUnknown_203AD10->field_06 = 1;
-    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
-        2,
+    gUnknown_203AD10->contextMenuSelectedItem = 1;
+    gUnknown_203AD10->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
+        SCROLL_ARROW_UP,
         212,
         120,
         152,
         2,
         110,
         110,
-        &gUnknown_203AD10->field_06
+        &gUnknown_203AD10->contextMenuSelectedItem
     );
 }
 
 void sub_8108978(void)
 {
-    if (gUnknown_203AD10->field_08 != 0xFF)
+    if (gUnknown_203AD10->pocketScrollArrowsTask != 0xFF)
     {
-        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->field_08);
-        gUnknown_203AD10->field_08 = 0xFF;
+        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->pocketScrollArrowsTask);
+        gUnknown_203AD10->pocketScrollArrowsTask = 0xFF;
     }
     sub_810899C();
 }
 
 void sub_810899C(void)
 {
-    if (gUnknown_203AD10->field_09 != 0xFF)
+    if (gUnknown_203AD10->pocketSwitchArrowsTask != 0xFF)
     {
-        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->field_09);
-        gUnknown_203AD10->field_09 = 0xFF;
+        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->pocketSwitchArrowsTask);
+        gUnknown_203AD10->pocketSwitchArrowsTask = 0xFF;
     }
+}
+
+void sub_81089BC(void)
+{
+    u8 i;
+    gUnknown_203ACFC.pocket = POCKET_ITEMS - 1;
+    gUnknown_203ACFC.unk5 = 0;
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_203ACFC.itemsAbove[i] = 0;
+        gUnknown_203ACFC.cursorPos[i] = 0;
+    }
+}
+
+void sub_81089F4(u8 pocketId)
+{
+    if (gUnknown_203ACFC.cursorPos[pocketId] != 0 && gUnknown_203ACFC.cursorPos[pocketId] + gUnknown_203AD10->maxShowed[pocketId] > gUnknown_203AD10->nItems[pocketId] + 1)
+    {
+        gUnknown_203ACFC.cursorPos[pocketId] = (gUnknown_203AD10->nItems[pocketId] + 1) - gUnknown_203AD10->maxShowed[pocketId];
+    }
+    if (gUnknown_203ACFC.cursorPos[pocketId] + gUnknown_203ACFC.itemsAbove[pocketId] >= gUnknown_203AD10->nItems[pocketId] + 1)
+    {
+        if (gUnknown_203AD10->nItems[pocketId] + 1 < 2)
+            gUnknown_203ACFC.itemsAbove[pocketId] = 0;
+        else
+            gUnknown_203ACFC.itemsAbove[pocketId] = gUnknown_203AD10->nItems[pocketId];
+    }
+}
+
+void sub_8108A68(void)
+{
+    u8 i;
+    for (i = 0; i < 3; i++)
+    {
+        sub_81089F4(i);
+    }
+}
+
+void sub_8108A84(void)
+{
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < 3; i++)
+    {
+        if (gUnknown_203ACFC.itemsAbove[i] > 3)
+        {
+            for (j = 0; j <= gUnknown_203ACFC.itemsAbove[i] - 3; gUnknown_203ACFC.itemsAbove[i]--, gUnknown_203ACFC.cursorPos[i]++, j++)
+            {
+                if (gUnknown_203ACFC.cursorPos[i] + gUnknown_203AD10->maxShowed[i] == gUnknown_203AD10->nItems[i] + 1)
+                    break;
+            }
+        }
+    }
+}
+
+void sub_8108B04(void)
+{
+    FREE_IF_SET(gUnknown_203AD10);
+    FREE_IF_SET(gUnknown_203AD14);
+    FREE_IF_SET(gUnknown_203AD18);
+    FREE_IF_SET(gUnknown_203AD1C);
+    FreeAllWindowBuffers();
+}
+
+void ItemMenu_StartFadeToExitCallback(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = sub_8108B8C;
 }

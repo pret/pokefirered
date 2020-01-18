@@ -336,16 +336,7 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/list_menu.o"
 	.align 2
 gUnknown_203ACFC: @ 203ACFC
-	.space 0x6
-
-gUnknown_203AD02: @ 203AD02
-	.space 0x2
-
-gUnknown_203AD04: @ 203AD04
-	.space 0x6
-
-gUnknown_203AD0A: @ 203AD0A
-	.space 0x6
+	.space 0x14
 
 gUnknown_203AD10: @ 203AD10
 	.space 0x4

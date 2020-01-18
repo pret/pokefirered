@@ -5,251 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81087EC
-sub_81087EC: @ 81087EC
-	push {lr}
-	movs r0, 0x2
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	ldr r2, _08108810 @ =gUnknown_8452CFC
-	ldr r0, _08108814 @ =gUnknown_203ACFC
-	ldrh r1, [r0, 0x6]
-	lsls r0, r1, 2
-	adds r0, r2
-	ldr r0, [r0]
-	lsls r1, 24
-	lsrs r1, 24
-	bl sub_810B958
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108810: .4byte gUnknown_8452CFC
-_08108814: .4byte gUnknown_203ACFC
-	thumb_func_end sub_81087EC
-
-	thumb_func_start sub_8108818
-sub_8108818: @ 8108818
-	push {r4,lr}
-	sub sp, 0x14
-	adds r2, r0, 0
-	ldr r0, _0810884C @ =gUnknown_203AD10
-	ldr r0, [r0]
-	ldr r1, _08108850 @ =gUnknown_203ACFC
-	ldrh r1, [r1, 0x6]
-	adds r0, 0xA
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r2, r0
-	beq _08108854
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r2, 16
-	lsrs r1, 16
-	bl BagGetItemIdByPocketPosition
-	lsls r0, 16
-	lsrs r0, 16
-	bl ItemId_GetDescription
-	adds r4, r0, 0
-	b _08108856
-	.align 2, 0
-_0810884C: .4byte gUnknown_203AD10
-_08108850: .4byte gUnknown_203ACFC
-_08108854:
-	ldr r4, _08108884 @ =gUnknown_84162F5
-_08108856:
-	movs r0, 0x1
-	movs r1, 0
-	bl FillWindowPixelBuffer
-	movs r0, 0x3
-	str r0, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	str r0, [sp, 0x10]
-	movs r0, 0x1
-	movs r1, 0x2
-	adds r2, r4, 0
-	movs r3, 0
-	bl sub_810B8F0
-	add sp, 0x14
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108884: .4byte gUnknown_84162F5
-	thumb_func_end sub_8108818
-
-	thumb_func_start sub_8108888
-sub_8108888: @ 8108888
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _081088D0 @ =gUnknown_203AD10
-	ldr r1, [r4]
-	ldr r2, _081088D4 @ =gUnknown_203ACFC
-	ldrh r3, [r2, 0x6]
-	adds r0, r1, 0
-	adds r0, 0xA
-	adds r0, r3
-	ldrb r0, [r0]
-	adds r1, 0xD
-	adds r1, r3
-	ldrb r1, [r1]
-	subs r0, r1
-	adds r0, 0x1
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	ldrh r0, [r2, 0x6]
-	lsls r0, 1
-	adds r2, 0xE
-	adds r0, r2
-	str r0, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0xA0
-	movs r2, 0x8
-	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x8]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081088D0: .4byte gUnknown_203AD10
-_081088D4: .4byte gUnknown_203ACFC
-	thumb_func_end sub_8108888
-
-	thumb_func_start sub_81088D8
-sub_81088D8: @ 81088D8
-	push {r4,lr}
-	ldr r4, _081088FC @ =gUnknown_203AD10
-	ldr r0, [r4]
-	ldrb r1, [r0, 0x5]
-	movs r0, 0xF
-	ands r0, r1
-	cmp r0, 0x1
-	beq _081088F4
-	ldr r0, _08108900 @ =gUnknown_8452F6C
-	ldr r1, _08108904 @ =gUnknown_203AD02
-	bl AddScrollIndicatorArrowPair
-	ldr r1, [r4]
-	strb r0, [r1, 0x9]
-_081088F4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081088FC: .4byte gUnknown_203AD10
-_08108900: .4byte gUnknown_8452F6C
-_08108904: .4byte gUnknown_203AD02
-	thumb_func_end sub_81088D8
-
-	thumb_func_start sub_8108908
-sub_8108908: @ 8108908
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _0810893C @ =gUnknown_203AD10
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x6]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	adds r1, 0x6
-	str r1, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0x98
-	movs r2, 0x48
-	movs r3, 0x68
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x8]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810893C: .4byte gUnknown_203AD10
-	thumb_func_end sub_8108908
-
-	thumb_func_start sub_8108940
-sub_8108940: @ 8108940
-	push {r4,lr}
-	sub sp, 0x10
-	ldr r4, _08108974 @ =gUnknown_203AD10
-	ldr r1, [r4]
-	movs r0, 0x1
-	strh r0, [r1, 0x6]
-	movs r0, 0x2
-	str r0, [sp]
-	movs r0, 0x6E
-	str r0, [sp, 0x4]
-	str r0, [sp, 0x8]
-	adds r1, 0x6
-	str r1, [sp, 0xC]
-	movs r0, 0x2
-	movs r1, 0xD4
-	movs r2, 0x78
-	movs r3, 0x98
-	bl AddScrollIndicatorArrowPairParameterized
-	ldr r1, [r4]
-	strb r0, [r1, 0x8]
-	add sp, 0x10
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108974: .4byte gUnknown_203AD10
-	thumb_func_end sub_8108940
-
-	thumb_func_start sub_8108978
-sub_8108978: @ 8108978
-	push {r4,lr}
-	ldr r4, _08108998 @ =gUnknown_203AD10
-	ldr r1, [r4]
-	ldrb r0, [r1, 0x8]
-	cmp r0, 0xFF
-	beq _0810898E
-	bl RemoveScrollIndicatorArrowPair
-	ldr r1, [r4]
-	movs r0, 0xFF
-	strb r0, [r1, 0x8]
-_0810898E:
-	bl sub_810899C
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108998: .4byte gUnknown_203AD10
-	thumb_func_end sub_8108978
-
-	thumb_func_start sub_810899C
-sub_810899C: @ 810899C
-	push {r4,lr}
-	ldr r4, _081089B8 @ =gUnknown_203AD10
-	ldr r1, [r4]
-	ldrb r0, [r1, 0x9]
-	cmp r0, 0xFF
-	beq _081089B2
-	bl RemoveScrollIndicatorArrowPair
-	ldr r1, [r4]
-	movs r0, 0xFF
-	strb r0, [r1, 0x9]
-_081089B2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081089B8: .4byte gUnknown_203AD10
-	thumb_func_end sub_810899C
-
 	thumb_func_start sub_81089BC
 sub_81089BC: @ 81089BC
 	push {r4,r5,lr}
@@ -368,7 +123,7 @@ sub_8108A84: @ 8108A84
 	mov r7, r8
 	push {r7}
 	movs r6, 0
-	ldr r0, _08108AF8 @ =gUnknown_203AD04
+	ldr r0, _08108AF8 @ =gUnknown_203ACFC+8
 	mov r8, r0
 _08108A90:
 	lsls r2, r6, 1
@@ -382,7 +137,7 @@ _08108A90:
 	subs r0, 0x3
 	cmp r5, r0
 	bgt _08108AE6
-	ldr r0, _08108AFC @ =gUnknown_203AD0A
+	ldr r0, _08108AFC @ =gUnknown_203ACFC+14
 	ldr r3, _08108B00 @ =gUnknown_203AD10
 	mov r12, r3
 	adds r4, r2, r0
@@ -426,8 +181,8 @@ _08108AE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08108AF8: .4byte gUnknown_203AD04
-_08108AFC: .4byte gUnknown_203AD0A
+_08108AF8: .4byte gUnknown_203ACFC+8
+_08108AFC: .4byte gUnknown_203ACFC+14
 _08108B00: .4byte gUnknown_203AD10
 	thumb_func_end sub_8108A84
 

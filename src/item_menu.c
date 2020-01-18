@@ -9,6 +9,7 @@
 #include "item_menu.h"
 #include "item_menu_icons.h"
 #include "list_menu.h"
+#include "menu_indicators.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "scanline_effect.h"
@@ -55,6 +56,7 @@ void sub_81087EC(void);
 void sub_8108818(s32 itemIndex);
 void sub_8108888(void);
 void sub_81088D8(void);
+void sub_810899C(void);
 void sub_8108A68(void);
 void sub_8108A84(void);
 void sub_8108B04(void);
@@ -69,8 +71,10 @@ void sub_810B4BC(u8 taskId);
 void sub_810B5D4(u8 taskId);
 
 extern const struct BgTemplate gUnknown_8452CF4[2];
+extern const u8 *const gUnknown_8452CFC[];
 extern const u8 gUnknown_8452F60[];
 extern const u8 gUnknown_8452F66[];
+extern const struct ScrollArrowsTemplate gUnknown_8452F6C;
 extern const u8 gUnknown_8452F7C[];
 
 void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
@@ -504,5 +508,93 @@ void bag_menu_print_cursor(u8 y, u8 colorIdx)
     else
     {
         sub_810B8F0(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+    }
+}
+
+void sub_81087EC(void)
+{
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    sub_810B958(gUnknown_8452CFC[gUnknown_203ACFC.pocket], gUnknown_203ACFC.pocket);
+}
+
+void sub_8108818(s32 itemIndex)
+{
+    const u8 *description;
+    if (itemIndex != gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket])
+        description = ItemId_GetDescription(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex));
+    else
+        description = gUnknown_84162F5;
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    sub_810B8F0(1, 2, description, 0, 3, 2, 0, 0, 0);
+}
+
+void sub_8108888(void)
+{
+    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
+        2,
+        160,
+        8,
+        104,
+        gUnknown_203AD10->field_0A[gUnknown_203ACFC.pocket] - gUnknown_203AD10->field_0D[gUnknown_203ACFC.pocket] + 1,
+        110,
+        110,
+        &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket]
+    );
+}
+
+void sub_81088D8(void)
+{
+    if (gUnknown_203AD10->field_05_0 != 1)
+    {
+        gUnknown_203AD10->field_09 = AddScrollIndicatorArrowPair(&gUnknown_8452F6C, &gUnknown_203ACFC.pocket);
+    }
+}
+
+void sub_8108908(void)
+{
+    gUnknown_203AD10->field_06 = 1;
+    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
+        2,
+        152,
+        72,
+        104,
+        2,
+        110,
+        110,
+        &gUnknown_203AD10->field_06
+    );
+}
+
+void sub_8108940(void)
+{
+    gUnknown_203AD10->field_06 = 1;
+    gUnknown_203AD10->field_08 = AddScrollIndicatorArrowPairParameterized(
+        2,
+        212,
+        120,
+        152,
+        2,
+        110,
+        110,
+        &gUnknown_203AD10->field_06
+    );
+}
+
+void sub_8108978(void)
+{
+    if (gUnknown_203AD10->field_08 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->field_08);
+        gUnknown_203AD10->field_08 = 0xFF;
+    }
+    sub_810899C();
+}
+
+void sub_810899C(void)
+{
+    if (gUnknown_203AD10->field_09 != 0xFF)
+    {
+        RemoveScrollIndicatorArrowPair(gUnknown_203AD10->field_09);
+        gUnknown_203AD10->field_09 = 0xFF;
     }
 }

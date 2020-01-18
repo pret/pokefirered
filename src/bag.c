@@ -232,7 +232,7 @@ void sub_810B8F0(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSp
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, gUnknown_84530B8[colorIdx], speed, str);
 }
 
-void sub_810B958(const u8 * str)
+void sub_810B958(const u8 * str, u8 unused)
 {
     u32 x = 0x48 - GetStringWidth(1, str, 0);
     AddTextPrinterParameterized3(2, 1, x / 2, 1, gUnknown_84530B8[0], 0, str);

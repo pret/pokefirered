@@ -5,295 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8108B8C
-sub_8108B8C: @ 8108B8C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, _08108BE0 @ =gTasks+0x8
-	adds r4, r0, r1
-	ldr r0, _08108BE4 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08108C08
-	ldr r0, _08108BE8 @ =sub_8108CFC
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08108C08
-	ldrb r0, [r4]
-	ldr r4, _08108BEC @ =gUnknown_203ACFC
-	ldrh r2, [r4, 0x6]
-	lsls r2, 1
-	adds r1, r4, 0
-	adds r1, 0xE
-	adds r1, r2, r1
-	adds r3, r4, 0
-	adds r3, 0x8
-	adds r2, r3
-	bl DestroyListMenuTask
-	ldr r0, _08108BF0 @ =gUnknown_203AD10
-	ldr r0, [r0]
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _08108BF4
-	bl SetMainCallback2
-	b _08108BFA
-	.align 2, 0
-_08108BE0: .4byte gTasks+0x8
-_08108BE4: .4byte gPaletteFade
-_08108BE8: .4byte sub_8108CFC
-_08108BEC: .4byte gUnknown_203ACFC
-_08108BF0: .4byte gUnknown_203AD10
-_08108BF4:
-	ldr r0, [r4]
-	bl SetMainCallback2
-_08108BFA:
-	bl sub_8108978
-	bl sub_8108B04
-	adds r0, r5, 0
-	bl DestroyTask
-_08108C08:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8108B8C
-
-	thumb_func_start sub_8108C10
-sub_8108C10: @ 8108C10
-	push {r4,r5,lr}
-	sub sp, 0x8
-	movs r5, 0
-	add r0, sp, 0x4
-	strh r5, [r0]
-	movs r1, 0
-	movs r2, 0x2
-	bl LoadPalette
-	movs r0, 0x48
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x4A
-	movs r1, 0x3F
-	bl SetGpuReg
-	movs r4, 0x1
-	negs r4, r4
-	adds r0, r4, 0
-	movs r1, 0x10
-	movs r2, 0
-	bl BlendPalettes
-	str r5, [sp]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r4, _08108C68 @ =gUnknown_203ACFC
-	ldrb r0, [r4, 0x5]
-	cmp r0, 0x1
-	bne _08108C6C
-	movs r0, 0x40
-	movs r1, 0xF0
-	bl SetGpuReg
-	movs r0, 0x44
-	movs r1, 0
-	bl SetGpuReg
-	b _08108C9E
-	.align 2, 0
-_08108C68: .4byte gUnknown_203ACFC
-_08108C6C:
-	movs r0, 0x40
-	movs r1, 0xF0
-	bl SetGpuReg
-	movs r0, 0x44
-	movs r1, 0xA0
-	bl SetGpuReg
-	ldr r0, _08108CA8 @ =sub_8108CFC
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08108CAC @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r0, 0xC0
-	strh r0, [r1, 0x8]
-	ldr r0, _08108CB0 @ =0x0000fff0
-	strh r0, [r1, 0xA]
-	movs r0, 0x1
-	strb r0, [r4, 0x5]
-_08108C9E:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108CA8: .4byte sub_8108CFC
-_08108CAC: .4byte gTasks
-_08108CB0: .4byte 0x0000fff0
-	thumb_func_end sub_8108C10
-
-	thumb_func_start sub_8108CB4
-sub_8108CB4: @ 8108CB4
-	push {lr}
-	ldr r0, _08108CE0 @ =sub_8108CFC
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08108CE4 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r2, 0
-	ldr r0, _08108CE8 @ =0x0000fff0
-	strh r0, [r1, 0x8]
-	movs r0, 0x10
-	strh r0, [r1, 0xA]
-	ldr r0, _08108CEC @ =gUnknown_203ACFC
-	strb r2, [r0, 0x5]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108CE0: .4byte sub_8108CFC
-_08108CE4: .4byte gTasks
-_08108CE8: .4byte 0x0000fff0
-_08108CEC: .4byte gUnknown_203ACFC
-	thumb_func_end sub_8108CB4
-
-	thumb_func_start CB2_SetUpReshowBattleScreenAfterMenu
-CB2_SetUpReshowBattleScreenAfterMenu: @ 8108CF0
-	ldr r1, _08108CF8 @ =gUnknown_203ACFC
-	movs r0, 0
-	strb r0, [r1, 0x5]
-	bx lr
-	.align 2, 0
-_08108CF8: .4byte gUnknown_203ACFC
-	thumb_func_end CB2_SetUpReshowBattleScreenAfterMenu
-
-	thumb_func_start sub_8108CFC
-sub_8108CFC: @ 8108CFC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	ldr r1, _08108D28 @ =gTasks+0x8
-	adds r4, r0, r1
-	ldrh r0, [r4, 0x2]
-	ldrh r1, [r4]
-	adds r0, r1
-	strh r0, [r4]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xA0
-	ble _08108D2C
-	movs r0, 0x44
-	movs r1, 0xA0
-	bl SetGpuReg
-	b _08108D34
-	.align 2, 0
-_08108D28: .4byte gTasks+0x8
-_08108D2C:
-	ldrh r1, [r4]
-	movs r0, 0x44
-	bl SetGpuReg
-_08108D34:
-	movs r2, 0x2
-	ldrsh r1, [r4, r2]
-	cmp r1, 0x10
-	bne _08108D44
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	cmp r0, 0xA0
-	beq _08108D54
-_08108D44:
-	movs r0, 0x10
-	negs r0, r0
-	cmp r1, r0
-	bne _08108D5A
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _08108D5A
-_08108D54:
-	adds r0, r5, 0
-	bl DestroyTask
-_08108D5A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8108CFC
-
-	thumb_func_start ItemMenu_MoveItemSlotToNewPositionInArray
-ItemMenu_MoveItemSlotToNewPositionInArray: @ 8108D60
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r3, r2, 0
-	cmp r1, r3
-	beq _08108DC0
-	lsls r0, r1, 2
-	adds r0, r4
-	ldr r6, [r0]
-	cmp r3, r1
-	bls _08108D98
-	subs r3, 0x1
-	lsls r1, 16
-	lsls r0, r3, 16
-	asrs r2, r0, 16
-	cmp r1, r0
-	bge _08108DBA
-	adds r5, r2, 0
-_08108D82:
-	asrs r2, r1, 16
-	lsls r0, r2, 2
-	adds r0, r4
-	ldr r1, [r0, 0x4]
-	str r1, [r0]
-	adds r2, 0x1
-	lsls r1, r2, 16
-	asrs r0, r1, 16
-	cmp r0, r5
-	blt _08108D82
-	b _08108DBA
-_08108D98:
-	lsls r1, 16
-	lsls r0, r3, 16
-	asrs r2, r0, 16
-	cmp r1, r0
-	ble _08108DBA
-	adds r5, r2, 0
-_08108DA4:
-	asrs r2, r1, 16
-	lsls r1, r2, 2
-	adds r1, r4
-	subs r0, r1, 0x4
-	ldr r0, [r0]
-	str r0, [r1]
-	subs r2, 0x1
-	lsls r1, r2, 16
-	asrs r0, r1, 16
-	cmp r0, r5
-	bgt _08108DA4
-_08108DBA:
-	lsls r0, r3, 2
-	adds r0, r4
-	str r6, [r0]
-_08108DC0:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end ItemMenu_MoveItemSlotToNewPositionInArray
-
 	thumb_func_start sub_8108DC8
 sub_8108DC8: @ 8108DC8
 	push {r4,r5,lr}
@@ -1306,7 +1017,7 @@ _081095E8:
 	ldr r0, [r0]
 	adds r1, r2, 0
 	adds r2, r5, 0
-	bl ItemMenu_MoveItemSlotToNewPositionInArray
+	bl MoveItemSlotInList
 	ldrb r0, [r6]
 	ldrh r2, [r4, 0x6]
 	lsls r2, 1
@@ -1641,7 +1352,7 @@ _081098AC:
 _081098B6:
 	ldr r2, _081098D4 @ =gSpecialVar_ItemId
 	ldrh r1, [r2]
-	ldr r0, _081098D8 @ =0x0000016d
+	ldr r0, _081098D8 @ =0x0000016d @ ITEM_BERRY_POUCH
 	cmp r1, r0
 	bne _081098E8
 	ldr r1, _081098DC @ =gUnknown_203AD20
@@ -2068,8 +1779,8 @@ _08109C48: .4byte gUnknown_8452EB8
 _08109C4C: .4byte gUnknown_203AD24
 	thumb_func_end sub_8109BE4
 
-	thumb_func_start sub_8109C50
-sub_8109C50: @ 8109C50
+	thumb_func_start Task_ItemMenuAction_Use
+Task_ItemMenuAction_Use: @ 8109C50
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2116,10 +1827,10 @@ _08109CB4:
 	bx r0
 	.align 2, 0
 _08109CBC: .4byte gSpecialVar_ItemId
-	thumb_func_end sub_8109C50
+	thumb_func_end Task_ItemMenuAction_Use
 
-	thumb_func_start sub_8109CC0
-sub_8109CC0: @ 8109CC0
+	thumb_func_start Task_ItemMenuAction_Toss
+Task_ItemMenuAction_Toss: @ 8109CC0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2171,7 +1882,7 @@ _08109D2A:
 	.align 2, 0
 _08109D30: .4byte gText_TossOutHowManyStrVar1s
 _08109D34: .4byte sub_8109DEC
-	thumb_func_end sub_8109CC0
+	thumb_func_end Task_ItemMenuAction_Toss
 
 	thumb_func_start sub_8109D38
 sub_8109D38: @ 8109D38
@@ -2489,8 +2200,8 @@ _08109FF8: .4byte gUnknown_203ACFC
 _08109FFC: .4byte gMultiuseListMenuTemplate
 	thumb_func_end sub_8109F44
 
-	thumb_func_start sub_810A000
-sub_810A000: @ 810A000
+	thumb_func_start Task_ItemMenuAction_ToggleSelect
+Task_ItemMenuAction_ToggleSelect: @ 810A000
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2557,7 +2268,7 @@ _0810A052:
 	movs r1, 0x1
 	bl CopyWindowToVram
 	mov r0, r8
-	bl sub_810A2DC
+	bl Task_ItemMenuAction_Cancel
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2566,10 +2277,10 @@ _0810A052:
 	.align 2, 0
 _0810A0A0: .4byte gUnknown_203ACFC
 _0810A0A4: .4byte gMultiuseListMenuTemplate
-	thumb_func_end sub_810A000
+	thumb_func_end Task_ItemMenuAction_ToggleSelect
 
-	thumb_func_start sub_810A0A8
-sub_810A0A8: @ 810A0A8
+	thumb_func_start Task_ItemMenuAction_Give
+Task_ItemMenuAction_Give: @ 810A0A8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2655,7 +2366,7 @@ _0810A166:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810A0A8
+	thumb_func_end Task_ItemMenuAction_Give
 
 	thumb_func_start sub_810A170
 sub_810A170: @ 810A170
@@ -2831,8 +2542,8 @@ sub_810A288: @ 810A288
 _0810A2D8: .4byte gTasks+0x8
 	thumb_func_end sub_810A288
 
-	thumb_func_start sub_810A2DC
-sub_810A2DC: @ 810A2DC
+	thumb_func_start Task_ItemMenuAction_Cancel
+Task_ItemMenuAction_Cancel: @ 810A2DC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2862,7 +2573,7 @@ sub_810A2DC: @ 810A2DC
 	bx r0
 	.align 2, 0
 _0810A320: .4byte gTasks
-	thumb_func_end sub_810A2DC
+	thumb_func_end Task_ItemMenuAction_Cancel
 
 	thumb_func_start sub_810A324
 sub_810A324: @ 810A324

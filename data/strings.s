@@ -411,7 +411,7 @@ gOtherText_Use::
 gOtherText_Toss::
 	.string "TOSS$"
 
-gUnknown_84161A9::
+gOtherText_Register::
 	.string "REGISTER$"
 
 gOtherText_Give::
@@ -420,7 +420,7 @@ gOtherText_Give::
 gUnknown_84161B7::
 	.string "けってい$"
 
-gUnknown_84161BC::
+gOtherText_Walk::
 	.string "WALK$"
 
 gFameCheckerText_Cancel:: @ 84161C1
@@ -447,16 +447,16 @@ gText_Take::
 gText_Store::
 	.string "STORE$"
 
-gUnknown_84161E9::
+gOtherText_Check::
 	.string "CHECK$"
 
 gUnknown_84161EF:: @ 84161EF
 	.string "NONE$"
 
-gUnknown_84161F4::
+gOtherText_Open::
 	.string "OPEN$"
 
-gUnknown_84161F9::
+gOtherText_Deselect::
 	.string "DESELECT$"
 
 gUnknown_8416202:: @ 8416202
@@ -555,13 +555,13 @@ gUnknown_84162BD:: @ 84162BD
 gText_Coins:: @ 84162C4
 	.string "{STR_VAR_1} COINS$"
 
-gUnknown_84162CD:: @ 0x84162CD
+gText_Items2:: @ 0x84162CD
 	.string "ITEMS$"
 
-gUnknown_84162D3:: @ 0x84162D3
+gText_PokeBalls2:: @ 0x84162D3
 	.string "POKé BALLS$"
 
-gUnknown_84162DE:: @ 0x84162DE
+gText_KeyItems2:: @ 0x84162DE
 	.string "KEY ITEMS$"
 
 gText_DepositItem:: @ 84162E8

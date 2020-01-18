@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "task.h"
+#include "constants/item_menu.h"
 
 // Exported type declarations
 
@@ -29,7 +30,7 @@ void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void sub_81089BC(void);
 void sub_810B108(u8);
 void CB2_BagMenuFromStartMenu(void);
-void ItemMenu_MoveItemSlotToNewPositionInArray(struct ItemSlot * slots, int pos1, int pos2);
+void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);
 void sub_8108CB4(void);
 void ItemMenu_SetExitCallback(void (*)(void));

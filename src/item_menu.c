@@ -22,7 +22,7 @@
 
 struct BagMenuAlloc
 {
-    u32 field_00;
+    MainCallback field_00;
     u8 field_04;
     u8 field_05_0:4;
     u8 itemMenuIcon:2;
@@ -64,14 +64,15 @@ void sub_8108A68(void);
 void sub_8108A84(void);
 void sub_8108B04(void);
 void sub_8108B8C(u8 taskId);
+void sub_8108CFC(u8 taskId);
 void sub_8108C10(void);
 void sub_8108E54(void);
 void sub_8108F0C(u8 taskId);
-void sub_8109C50(u8 taskId);
-void sub_8109CC0(u8 taskId);
-void sub_810A000(u8 taskId);
-void sub_810A0A8(u8 taskId);
-void sub_810A2DC(u8 taskId);
+void Task_ItemMenuAction_Use(u8 taskId);
+void Task_ItemMenuAction_Toss(u8 taskId);
+void Task_ItemMenuAction_ToggleSelect(u8 taskId);
+void Task_ItemMenuAction_Give(u8 taskId);
+void Task_ItemMenuAction_Cancel(u8 taskId);
 void sub_810A324(u8 taskId);
 bool8 sub_810ADAC(void);
 void sub_810AF9C(u8 taskId);
@@ -100,40 +101,40 @@ const struct BgTemplate gUnknown_8452CF4[2] = {
     }
 };
 
-const u8 *const gUnknown_8452CFC[] = {
-    gUnknown_84162CD,
-    gUnknown_84162DE,
-    gUnknown_84162D3
+const u8 *const sPocketNames[] = {
+    gText_Items2,
+    gText_KeyItems2,
+    gText_PokeBalls2
 };
 
 const u16 gUnknown_8452D08[][18] = {
-    INCBIN_U16("graphics/item_menu/bagmap_0.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_1.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_2.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_3.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_4.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_5.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_6.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_7.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_8.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_9.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_A.bin"),
-    INCBIN_U16("graphics/item_menu/bagmap_B.bin")
+    [ITEMMENUACTION_USE] = INCBIN_U16("graphics/item_menu/bagmap_0.bin"),
+    [ITEMMENUACTION_TOSS] = INCBIN_U16("graphics/item_menu/bagmap_1.bin"),
+    [ITEMMENUACTION_REGISTER] = INCBIN_U16("graphics/item_menu/bagmap_2.bin"),
+    [ITEMMENUACTION_GIVE] = INCBIN_U16("graphics/item_menu/bagmap_3.bin"),
+    [ITEMMENUACTION_CANCEL] = INCBIN_U16("graphics/item_menu/bagmap_4.bin"),
+    [ITEMMENUACTION_BATTLE_USE] = INCBIN_U16("graphics/item_menu/bagmap_5.bin"),
+    [ITEMMENUACTION_CHECK] = INCBIN_U16("graphics/item_menu/bagmap_6.bin"),
+    [ITEMMENUACTION_OPEN] = INCBIN_U16("graphics/item_menu/bagmap_7.bin"),
+    [ITEMMENUACTION_OPEN_BERRIES] = INCBIN_U16("graphics/item_menu/bagmap_8.bin"),
+    [ITEMMENUACTION_WALK] = INCBIN_U16("graphics/item_menu/bagmap_9.bin"),
+    [ITEMMENUACTION_DESELECT] = INCBIN_U16("graphics/item_menu/bagmap_A.bin"),
+    [ITEMMENUACTION_DUMMY] = INCBIN_U16("graphics/item_menu/bagmap_B.bin")
 };
 
 const struct MenuAction gUnknown_8452EB8[] = {
-    {gOtherText_Use, {.void_u8 = sub_8109C50}},
-    {gOtherText_Toss, {.void_u8 = sub_8109CC0}},
-    {gUnknown_84161A9, {.void_u8 = sub_810A000}},
-    {gOtherText_Give, {.void_u8 = sub_810A0A8}},
-    {gFameCheckerText_Cancel, {.void_u8 = sub_810A2DC}},
-    {gOtherText_Use, {.void_u8 = sub_810A324}},
-    {gUnknown_84161E9, {.void_u8 = sub_8109C50}},
-    {gUnknown_84161F4, {.void_u8 = sub_8109C50}},
-    {gUnknown_84161F4, {.void_u8 = sub_810A324}},
-    {gUnknown_84161BC, {.void_u8 = sub_8109C50}},
-    {gUnknown_84161F9, {.void_u8 = sub_810A000}},
-    {gString_Dummy, {.void_u8 = NULL}}
+    [ITEMMENUACTION_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ITEMMENUACTION_TOSS] = {gOtherText_Toss, {.void_u8 = Task_ItemMenuAction_Toss}},
+    [ITEMMENUACTION_REGISTER] = {gOtherText_Register, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
+    [ITEMMENUACTION_GIVE] = {gOtherText_Give, {.void_u8 = Task_ItemMenuAction_Give}},
+    [ITEMMENUACTION_CANCEL] = {gFameCheckerText_Cancel, {.void_u8 = Task_ItemMenuAction_Cancel}},
+    [ITEMMENUACTION_BATTLE_USE] = {gOtherText_Use, {.void_u8 = sub_810A324}},
+    [ITEMMENUACTION_CHECK] = {gOtherText_Check, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ITEMMENUACTION_OPEN] = {gOtherText_Open, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ITEMMENUACTION_OPEN_BERRIES] = {gOtherText_Open, {.void_u8 = sub_810A324}},
+    [ITEMMENUACTION_WALK] = {gOtherText_Walk, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ITEMMENUACTION_DESELECT] = {gOtherText_Deselect, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
+    [ITEMMENUACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
 extern const u8 gUnknown_8452F60[];
@@ -155,7 +156,7 @@ void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
             gUnknown_203ACFC.location = location;
         if (a2 != NULL)
             gUnknown_203ACFC.bagCallback = a2;
-        gUnknown_203AD10->field_00 = 0;
+        gUnknown_203AD10->field_00 = NULL;
         gUnknown_203AD10->field_04 = 0xFF;
         gUnknown_203AD10->itemMenuIcon = 0;
         gUnknown_203AD10->field_05_6 = 0;
@@ -578,7 +579,7 @@ void bag_menu_print_cursor(u8 y, u8 colorIdx)
 void sub_81087EC(void)
 {
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    sub_810B958(gUnknown_8452CFC[gUnknown_203ACFC.pocket], gUnknown_203ACFC.pocket);
+    sub_810B958(sPocketNames[gUnknown_203ACFC.pocket], gUnknown_203ACFC.pocket);
 }
 
 void sub_8108818(s32 itemIndex)
@@ -730,4 +731,98 @@ void ItemMenu_StartFadeToExitCallback(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = sub_8108B8C;
+}
+
+void sub_8108B8C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active && FuncIsActiveTask(sub_8108CFC) != TRUE)
+    {
+        DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        if (gUnknown_203AD10->field_00 != NULL)
+            SetMainCallback2(gUnknown_203AD10->field_00);
+        else
+            SetMainCallback2(gUnknown_203ACFC.bagCallback);
+        sub_8108978();
+        sub_8108B04();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8108C10(void)
+{
+    u16 paldata = RGB_BLACK;
+    u8 taskId;
+
+    LoadPalette(&paldata, 0x00, 0x02);
+    SetGpuReg(REG_OFFSET_WININ, 0);
+    SetGpuReg(REG_OFFSET_WINOUT, 0x3F);
+    BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    if (gUnknown_203ACFC.unk5 == 1)
+    {
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 0));
+    }
+    else
+    {
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+        taskId = CreateTask(sub_8108CFC, 0);
+        gTasks[taskId].data[0] = 192;
+        gTasks[taskId].data[1] = -16;
+        gUnknown_203ACFC.unk5 = 1;
+    }
+}
+
+void sub_8108CB4(void)
+{
+
+    u8 taskId = CreateTask(sub_8108CFC, 0);
+    gTasks[taskId].data[0] = -16;
+    gTasks[taskId].data[1] =  16;
+    gUnknown_203ACFC.unk5 = 0;
+}
+
+void CB2_SetUpReshowBattleScreenAfterMenu(void)
+{
+    gUnknown_203ACFC.unk5 = 0;
+}
+
+void sub_8108CFC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[0] += data[1];
+    if (data[0] > 160)
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 160));
+    else
+        SetGpuReg(REG_OFFSET_WIN0V, data[0]);
+    if ((data[1] == 16 && data[0] == 160) || (data[1] == -16 && data[0] == 0))
+        DestroyTask(taskId);
+}
+
+void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_)
+{
+    // dumb assignments needed to match
+    struct ItemSlot *itemSlots = itemSlots_;
+    u32 to = to_;
+
+    if (from != to)
+    {
+        s16 i, count;
+        struct ItemSlot firstSlot = itemSlots[from];
+
+        if (to > from)
+        {
+            to--;
+            for (i = from, count = to; i < count; i++)
+                itemSlots[i] = itemSlots[i + 1];
+        }
+        else
+        {
+            for (i = from, count = to; i > count; i--)
+                itemSlots[i] = itemSlots[i - 1];
+        }
+        itemSlots[to] = firstSlot;
+    }
 }

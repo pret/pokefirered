@@ -814,7 +814,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
         ItemPc_MoveItemModeCancel(taskId, pos);
     else
     {
-        ItemMenu_MoveItemSlotToNewPositionInArray(gSaveBlock1Ptr->pcItems, data[1], pos);
+        MoveItemSlotInList(gSaveBlock1Ptr->pcItems, data[1], pos);
         DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (data[1] < pos)
             sListMenuState.row--;

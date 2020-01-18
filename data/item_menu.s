@@ -1,6 +1,7 @@
 #include "constants/region_map.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
+#include "constants/item_menu.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata

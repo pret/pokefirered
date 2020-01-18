@@ -69,10 +69,15 @@ void sub_8108C10(void);
 void sub_8108E54(void);
 void sub_8108F0C(u8 taskId);
 void sub_81090DC(u8 taskId);
-void sub_8109140(u8 a0);
+void sub_8109140(u32 a0);
 u8 sub_8109168(u8 taskId, u8 pocketId);
-void sub_81091D0(u8 taskId, s16 itemIndex, u8 a2);
+void sub_81091D0(u8 taskId, s16 direction, bool16 a2);
+void sub_8109298(u8 taskId);
 void sub_81093B8(u8 taskId, s16 itemIndex);
+void sub_81094B0(u8 taskId);
+void sub_81095AC(u8 taskId, u32 itemIndex);
+void sub_810967C(u8 taskId, u32 itemIndex);
+void sub_8109854(u8 a0);
 void sub_8109BB8(u8 taskId);
 void Task_ItemMenuAction_Use(u8 taskId);
 void Task_ItemMenuAction_Toss(u8 taskId);
@@ -902,10 +907,10 @@ void sub_8108F0C(u8 taskId)
     switch (sub_8109168(taskId, gUnknown_203ACFC.pocket))
     {
     case 1:
-        sub_81091D0(taskId, -1, 0);
+        sub_81091D0(taskId, -1, FALSE);
         return;
     case 2:
-        sub_81091D0(taskId,  1, 0);
+        sub_81091D0(taskId,  1, FALSE);
         return;
     default:
         if (JOY_NEW(SELECT_BUTTON) && gUnknown_203ACFC.location == 0)
@@ -957,4 +962,201 @@ void sub_81090DC(u8 taskId)
 {
     sub_8109140(1);
     gUnknown_8452F34[gUnknown_203ACFC.location](taskId);
+}
+
+void sub_810910C(u8 taskId)
+{
+    sub_8109140(0);
+    sub_8108888();
+    sub_81088D8();
+    gTasks[taskId].func = sub_8108F0C;
+}
+
+void sub_8109140(u32 a0)
+{
+    SetBgTilemapPalette(1, 0, 14, 30, 6, a0 + 1);
+    ScheduleBgCopyTilemapToVram(1);
+}
+
+u8 sub_8109168(u8 taskId, u8 pocketId)
+{
+    u8 lrState;
+    if (gUnknown_203AD10->field_05_0 != 0)
+        return 0;
+    lrState = GetLRKeysState();
+    if (JOY_NEW(DPAD_LEFT) || lrState == 1)
+    {
+        if (pocketId == POCKET_ITEMS - 1)
+            return 0;
+        PlaySE(SE_BAG2);
+        return 1;
+    }
+    if (JOY_NEW(DPAD_RIGHT) || lrState == 2)
+    {
+        if (pocketId >= POCKET_POKE_BALLS - 1)
+            return 0;
+        PlaySE(SE_BAG2);
+        return 2;
+    }
+    return 0;
+}
+
+void sub_81091D0(u8 taskId, s16 direction, bool16 a2)
+{
+    s16 *data = gTasks[taskId].data;
+    data[13] = 0;
+    data[12] = 0;
+    data[11] = direction;
+    if (!a2)
+    {
+        ClearWindowTilemap(0);
+        ClearWindowTilemap(1);
+        ClearWindowTilemap(2);
+        DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        ScheduleBgCopyTilemapToVram(0);
+        DestroyItemMenuIcon(gUnknown_203AD10->itemMenuIcon ^ 1);
+        sub_8108978();
+    }
+    FillBgTilemapBufferRect_Palette0(1, 0x02D, 11, 1, 18, 12);
+    ScheduleBgCopyTilemapToVram(1);
+    sub_8098528(gUnknown_203ACFC.pocket + direction);
+    SetTaskFuncWithFollowupFunc(taskId, sub_8109298, gTasks[taskId].func);
+}
+
+void sub_8109298(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!MenuHelpers_LinkSomething() && !sub_810ADAC())
+    {
+        switch (sub_8109168(taskId, gUnknown_203ACFC.pocket + data[11]))
+        {
+        case 1:
+            gUnknown_203ACFC.pocket += data[11];
+            SwitchTaskToFollowupFunc(taskId);
+            sub_81091D0(taskId, -1, TRUE);
+            return;
+        case 2:
+            gUnknown_203ACFC.pocket += data[11];
+            SwitchTaskToFollowupFunc(taskId);
+            sub_81091D0(taskId,  1, TRUE);
+            return;
+        }
+    }
+    switch (data[13])
+    {
+    case 0:
+        if (data[12] != 0x7FFF)
+        {
+            data[12]++;
+            sub_8109854(data[12]);
+            if (data[12] == 12)
+                data[12] = 0x7FFF;
+        }
+        if (data[12] == 0x7FFF)
+            data[13]++;
+        break;
+    case 1:
+        gUnknown_203ACFC.pocket += data[11];
+        sub_81087EC();
+        sub_810842C(gUnknown_203ACFC.pocket);
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        PutWindowTilemap(1);
+        PutWindowTilemap(2);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_8108888();
+        sub_81088D8();
+        SwitchTaskToFollowupFunc(taskId);
+        break;
+    }
+}
+
+void sub_81093B8(u8 taskId, s16 itemIndex)
+{
+    u16 itemsAbove;
+    u16 cursorPos;
+    s16 *data = gTasks[taskId].data;
+    ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
+    ListMenuSetUnkIndicatorsStructField(data[0], 0x10, 1);
+    data[1] = itemIndex;
+    gUnknown_203AD10->field_04 = itemIndex;
+    StringCopy(gStringVar1, ItemId_GetName(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1])));
+    StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    sub_810B8F0(1, 2, gStringVar4, 0, 3, 2, 0, 0, 0);
+    sub_80986A8(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    sub_8098660(0);
+    sub_810899C();
+    bag_menu_print_cursor_(data[0], 2);
+    gTasks[taskId].func = sub_81094B0;
+}
+
+void sub_81094B0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s32 input;
+    u16 itemsAbove;
+    u16 cursorPos;
+    if ((u8)sub_80BF72C() == TRUE)
+        return;
+    input = ListMenu_ProcessInput(data[0]);
+    ListMenuGetScrollAndRow(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    sub_80986A8(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_203AD10->field_04 = 0xFF;
+        ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
+        sub_81095AC(taskId, cursorPos + itemsAbove);
+        return;
+    }
+    switch (input)
+    {
+    case -1:
+        return;
+    case -2:
+        PlaySE(SE_SELECT);
+        gUnknown_203AD10->field_04 = 0xFF;
+        ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
+        sub_810967C(taskId, cursorPos + itemsAbove);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        gUnknown_203AD10->field_04 = 0xFF;
+        sub_81095AC(taskId, input);
+        break;
+    }
+}
+
+void sub_81095AC(u8 taskId, u32 itemIndex)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[1] == itemIndex || data[1] == itemIndex - 1)
+    {
+        sub_810967C(taskId, itemIndex);
+    }
+    else
+    {
+        MoveItemSlotInList(gBagPockets[gUnknown_203ACFC.pocket].itemSlots, data[1], itemIndex);
+        DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        if (data[1] < itemIndex)
+            gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]--;
+        sub_810842C(gUnknown_203ACFC.pocket);
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        sub_8098660(1);
+        sub_81088D8();
+        gTasks[taskId].func = sub_8108F0C;
+    }
+}
+
+void sub_810967C(u8 taskId, u32 itemIndex)
+{
+    s16 *data = gTasks[taskId].data;
+    DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    if (data[1] < itemIndex)
+        gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]--;
+    sub_810842C(gUnknown_203ACFC.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    sub_8098660(1);
+    sub_81088D8();
+    gTasks[taskId].func = sub_8108F0C;
 }

@@ -3,12 +3,15 @@
 #include "bag.h"
 #include "battle_controllers.h"
 #include "decompress.h"
+#include "field_player_avatar.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"
+#include "link.h"
 #include "list_menu.h"
+#include "mail_data.h"
 #include "menu.h"
 #include "menu_indicators.h"
 #include "new_menu_helpers.h"
@@ -40,6 +43,9 @@ EWRAM_DATA struct BagMenuAlloc * gUnknown_203AD10 = NULL;
 EWRAM_DATA void * gUnknown_203AD14 = NULL;
 EWRAM_DATA struct ListMenuItem * gUnknown_203AD18 = NULL;
 EWRAM_DATA u8 (*gUnknown_203AD1C)[19] = NULL;
+EWRAM_DATA u8 gUnknown_203AD20[4] = {};
+EWRAM_DATA const u8 *gUnknown_203AD24 = NULL;
+EWRAM_DATA u8 gUnknown_203AD28 = 0;
 
 void sub_8107F10(void);
 bool8 sub_8107F3C(void);
@@ -156,6 +162,12 @@ const struct MenuAction gUnknown_8452EB8[] = {
     [ITEMMENUACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
+extern const u8 gUnknown_8452F18[][4];
+extern const u8 gUnknown_8452F24[];
+extern const u8 gUnknown_8452F28[][2];
+extern const u8 gUnknown_8452F2E[];
+extern const u8 gUnknown_8452F30[];
+extern const u8 gUnknown_8452F32[];
 extern const TaskFunc gUnknown_8452F34[];
 extern const u8 gUnknown_8452F60[];
 extern const u8 gUnknown_8452F66[];
@@ -1159,4 +1171,133 @@ void sub_810967C(u8 taskId, u32 itemIndex)
     sub_8098660(1);
     sub_81088D8();
     gTasks[taskId].func = sub_8108F0C;
+}
+
+void sub_810971C(u16 cursorPos, const u8 *str)
+{
+    u8 r4;
+    u8 r5 = sub_810B9DC(6, 2);
+    CopyItemName(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, cursorPos), gStringVar1);
+    StringExpandPlaceholders(gStringVar4, str);
+    sub_810B8F0(r5, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    r4 = sub_810B9DC(0, 0);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_810B8F0(r4, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+    sub_8108940();
+}
+
+void sub_81097E4(s16 value, u8 ndigits)
+{
+    u8 r6 = sub_810BAD8(0);
+    FillWindowPixelBuffer(r6, PIXEL_FILL(1));
+    ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, ndigits);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_810B8F0(r6, 0, gStringVar4, 4, 10, 1, 0, 0, 1);
+}
+
+void sub_8109854(u8 a0)
+{
+    CopyToBgTilemapBufferRect(1, gUnknown_8452D08[12 - a0], 11, 13 - a0, 18, 1);
+    ScheduleBgCopyTilemapToVram(1);
+}
+
+void sub_8109890(void)
+{
+    u8 r6;
+    u8 r4;
+    switch (gUnknown_203ACFC.location)
+    {
+    case 5:
+    case 7:
+        if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
+        {
+            gUnknown_203AD20[0] = ITEMMENUACTION_OPEN_BERRIES;
+            gUnknown_203AD20[1] = ITEMMENUACTION_CANCEL;
+            gUnknown_203AD24 = gUnknown_203AD20;
+            gUnknown_203AD28 = 2;
+        }
+        else if (ItemId_GetBattleUsage(gSpecialVar_ItemId))
+        {
+            gUnknown_203AD24 = gUnknown_8452F30;
+            gUnknown_203AD28 = 2;
+        }
+        else
+        {
+            gUnknown_203AD24 = gUnknown_8452F32;
+            gUnknown_203AD28 = 1;
+        }
+        break;
+    case 6:
+    case 8:
+        gUnknown_203AD24 = gUnknown_8452F30;
+        gUnknown_203AD28 = 2;
+        break;
+    default:
+        if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+        {
+            if (gSpecialVar_ItemId == ITEM_TM_CASE || gSpecialVar_ItemId == ITEM_BERRY_POUCH)
+            {
+                gUnknown_203AD24 = gUnknown_8452F2E;
+                gUnknown_203AD28 = 2;
+            }
+            else
+            {
+                if (gUnknown_203ACFC.pocket == POCKET_KEY_ITEMS - 1)
+                    gUnknown_203AD28 = 1;
+                else
+                    gUnknown_203AD28 = 2;
+                gUnknown_203AD24 = gUnknown_8452F28[gUnknown_203ACFC.pocket];
+            }
+        }
+        else
+        {
+            switch (gUnknown_203ACFC.pocket)
+            {
+            case POCKET_ITEMS - 1:
+                gUnknown_203AD28 = 4;
+                if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
+                    gUnknown_203AD24 = gUnknown_8452F24;
+                else
+                    gUnknown_203AD24 = gUnknown_8452F18[gUnknown_203ACFC.pocket];
+                break;
+            case POCKET_KEY_ITEMS - 1:
+                gUnknown_203AD24 = gUnknown_203AD20;
+                gUnknown_203AD28 = 3;
+                gUnknown_203AD20[2] = ITEMMENUACTION_CANCEL;
+                if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
+                    gUnknown_203AD20[1] = ITEMMENUACTION_DESELECT;
+                else
+                    gUnknown_203AD20[1] = ITEMMENUACTION_REGISTER;
+                if (gSpecialVar_ItemId == ITEM_TM_CASE || gSpecialVar_ItemId == ITEM_BERRY_POUCH)
+                    gUnknown_203AD20[0] = ITEMMENUACTION_OPEN;
+                else if (gSpecialVar_ItemId == ITEM_BICYCLE && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE))
+                    gUnknown_203AD20[0] = ITEMMENUACTION_WALK;
+                else
+                    gUnknown_203AD20[0] = ITEMMENUACTION_USE;
+                break;
+            case POCKET_POKE_BALLS - 1:
+                gUnknown_203AD24 = gUnknown_8452F18[gUnknown_203ACFC.pocket];
+                gUnknown_203AD28 = 3;
+                break;
+            }
+        }
+    }
+    r6 = sub_810B9DC(10, gUnknown_203AD28 - 1);
+    AddItemMenuActionTextPrinters(
+        r6,
+        2,
+        GetMenuCursorDimensionByFont(2, 0),
+        2,
+        GetFontAttribute(2, FONTATTR_LETTER_SPACING),
+        GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2,
+        gUnknown_203AD28,
+        gUnknown_8452EB8,
+        gUnknown_203AD24
+    );
+    Menu_InitCursor(r6, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, gUnknown_203AD28, 0);
+    r4 = sub_810B9DC(6, 0);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    sub_810B8F0(r4, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
 }

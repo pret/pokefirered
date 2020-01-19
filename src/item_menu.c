@@ -15,6 +15,7 @@
 #include "item_use.h"
 #include "link.h"
 #include "list_menu.h"
+#include "load_save.h"
 #include "mail_data.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -28,6 +29,7 @@
 #include "script.h"
 #include "shop.h"
 #include "strings.h"
+#include "teachy_tv.h"
 #include "tm_case.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -149,6 +151,8 @@ void sub_810AB88(u8 taskId);
 void sub_810AC40(u8 taskId);
 bool8 sub_810ADAC(void);
 void sub_810AF9C(u8 taskId);
+void sub_810B070(u8 taskId);
+void sub_810B0AC(u8 taskId);
 void sub_810B1D4(u8 taskId);
 void sub_810B378(u8 taskId);
 void sub_810B4BC(u8 taskId);
@@ -2092,4 +2096,297 @@ void InitTutorialBag(void)
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
     GoToBagMenu(6, 0, SetCB2ToReshowScreenAfterMenu2);
+}
+
+void sub_810AF9C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        switch (data[8])
+        {
+        case 102:
+        case 204:
+            PlaySE(SE_BAG2);
+            sub_81091D0(taskId, 1, FALSE);
+            break;
+        case 306:
+            PlaySE(SE_SELECT);
+            bag_menu_print_cursor_(data[0], 2);
+            sub_8109140(1);
+            gSpecialVar_ItemId = ITEM_POKE_BALL;
+            sub_8109890(taskId);
+            break;
+        case 408:
+            PlaySE(SE_SELECT);
+            sub_810BA3C(10);
+            sub_810BA3C(6);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            CopyWindowToVram(0, 1);
+            DestroyListMenuTask(data[0], NULL, NULL);
+            RestorePlayerBag();
+            sub_8108CB4();
+            gTasks[taskId].func = sub_810B070;
+            return;
+        }
+        data[8]++;
+    }
+}
+
+void sub_810B070(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = sub_810B0AC;
+}
+
+void sub_810B0AC(u8 taskId)
+{
+    if (!gPaletteFade.active && FuncIsActiveTask(sub_8108CFC) != TRUE)
+    {
+        if (gUnknown_203AD10->exitCB != NULL)
+            SetMainCallback2(gUnknown_203AD10->exitCB);
+        else
+            SetMainCallback2(gUnknown_203ACFC.bagCallback);
+        sub_8108978();
+        sub_8108B04();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_810B108(u8 a0)
+{
+    MainCallback cb2;
+    u8 location;
+    BackUpPlayerBag();
+    AddBagItem(ITEM_POTION, 1);
+    AddBagItem(ITEM_ANTIDOTE, 1);
+    AddBagItem(ITEM_TEACHY_TV, 1);
+    AddBagItem(ITEM_TM_CASE, 1);
+    AddBagItem(ITEM_POKE_BALL, 5);
+    AddBagItem(ITEM_GREAT_BALL, 1);
+    AddBagItem(ITEM_NEST_BALL, 1);
+    switch (a0)
+    {
+    default:
+        cb2 = CB2_ReturnToTeachyTV;
+        location = a0;
+        break;
+    case 7:
+        cb2 = SetCB2ToReshowScreenAfterMenu2;
+        location = 7;
+        break;
+    case 8:
+        cb2 = SetCB2ToReshowScreenAfterMenu2;
+        location = 8;
+        break;
+    }
+    GoToBagMenu(location, POCKET_ITEMS - 1, cb2);
+}
+
+bool8 sub_810B180(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        RestorePlayerBag();
+        SetTeachyTvControllerModeToResume();
+        gUnknown_203AD10->exitCB = CB2_ReturnToTeachyTV;
+        gTasks[taskId].func = sub_810B070;
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_810B1D4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active && sub_810B180(taskId) != TRUE)
+    {
+        switch (data[8])
+        {
+        case 102:
+            PlaySE(SE_BAG2);
+            sub_81091D0(taskId, 1, FALSE);
+            break;
+        case 204:
+            PlaySE(SE_SELECT);
+            bag_menu_print_cursor_(data[0], 2);
+            sub_8109140(1);
+            gSpecialVar_ItemId = ITEM_TEACHY_TV;
+            sub_8109890(taskId);
+            break;
+        case 306:
+            PlaySE(SE_SELECT);
+            Menu_MoveCursorNoWrapAround(1);
+            break;
+        case 408:
+            PlaySE(SE_SELECT);
+            gSaveBlock1Ptr->registeredItem = gSpecialVar_ItemId;
+            sub_810BA3C(10);
+            sub_810BA3C(6);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+            sub_810842C(gUnknown_203ACFC.pocket);
+            data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+            sub_8109140(0);
+            bag_menu_print_cursor_(data[0], 1);
+            CopyWindowToVram(0, 1);
+            break;
+        case 510:
+        case 612:
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_DOWN;
+            ListMenu_ProcessInput(data[0]);
+            break;
+        case 714:
+            PlaySE(SE_SELECT);
+            DestroyListMenuTask(data[0], NULL, NULL);
+            RestorePlayerBag();
+            sub_8108CB4();
+            gTasks[taskId].func = sub_810B070;
+            return;
+        }
+        data[8]++;
+    }
+}
+
+void sub_810B378(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        if (sub_810B180(taskId) == TRUE)
+        {
+            FreeRestoreBattleData();
+            LoadPlayerParty();
+            return;
+        }
+        switch (data[8])
+        {
+        case 102:
+        case 204:
+            PlaySE(SE_BAG2);
+            sub_81091D0(taskId, 1, FALSE);
+            break;
+        case 306:
+        case 408:
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_DOWN;
+            ListMenu_ProcessInput(data[0]);
+            break;
+        case 510:
+        case 612:
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_UP;
+            ListMenu_ProcessInput(data[0]);
+            break;
+        case 714:
+            PlaySE(SE_SELECT);
+            bag_menu_print_cursor_(data[0], 2);
+            sub_8109140(1);
+            gSpecialVar_ItemId = ITEM_POKE_BALL;
+            sub_8109890(taskId);
+            break;
+        case 816:
+            PlaySE(SE_SELECT);
+            sub_810BA3C(10);
+            sub_810BA3C(6);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            CopyWindowToVram(0, 1);
+            DestroyListMenuTask(data[0], NULL, NULL);
+            RestorePlayerBag();
+            sub_8108CB4();
+            gTasks[taskId].func = sub_810B070;
+            return;
+        }
+        data[8]++;
+    }
+}
+
+void sub_810B4BC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active)
+    {
+        if (sub_810B180(taskId) == TRUE)
+        {
+            FreeRestoreBattleData();
+            LoadPlayerParty();
+            return;
+        }
+        switch (data[8])
+        {
+        case 102:
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_DOWN;
+            ListMenu_ProcessInput(data[0]);
+            break;
+        case 204:
+            PlaySE(SE_SELECT);
+            bag_menu_print_cursor_(data[0], 2);
+            sub_8109140(1);
+            gSpecialVar_ItemId = ITEM_ANTIDOTE;
+            sub_8109890(taskId);
+            break;
+        case 306:
+            PlaySE(SE_SELECT);
+            sub_810BA3C(10);
+            sub_810BA3C(6);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            CopyWindowToVram(0, 1);
+            DestroyListMenuTask(data[0], NULL, NULL);
+            RestorePlayerBag();
+            gItemUseCB = ItemUseCB_MedicineStep;
+            ItemMenu_SetExitCallback(ChooseMonForInBattleItem);
+            gTasks[taskId].func = sub_810B070;
+            return;
+        }
+        data[8]++;
+    }
+}
+
+void sub_810B5D4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active && sub_810B180(taskId) != TRUE)
+    {
+        switch (data[8])
+        {
+        case 102:
+            PlaySE(SE_BAG2);
+            sub_81091D0(taskId, 1, 0);
+            break;
+        case 204:
+            gMain.newKeys = 0;
+            gMain.newAndRepeatedKeys = DPAD_DOWN;
+            ListMenu_ProcessInput(data[0]);
+            break;
+        case 306:
+            PlaySE(SE_SELECT);
+            bag_menu_print_cursor_(data[0], 2);
+            sub_8109140(1);
+            gSpecialVar_ItemId = ITEM_TM_CASE;
+            sub_8109890(taskId);
+            break;
+        case 408:
+            PlaySE(SE_SELECT);
+            sub_810BA3C(10);
+            sub_810BA3C(6);
+            PutWindowTilemap(0);
+            PutWindowTilemap(1);
+            CopyWindowToVram(0, 1);
+            DestroyListMenuTask(data[0], NULL, NULL);
+            RestorePlayerBag();
+            gUnknown_203AD10->exitCB = PokeDude_InitTMCase;
+            gTasks[taskId].func = sub_810B070;
+            return;
+        }
+        data[8]++;
+    }
 }

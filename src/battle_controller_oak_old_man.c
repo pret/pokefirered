@@ -381,7 +381,7 @@ static void OpenBagAndChooseItem(void)
         if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
             sub_8107ECC();
         else
-            sub_810AF74();
+            InitTutorialBag();
     }
 }
 

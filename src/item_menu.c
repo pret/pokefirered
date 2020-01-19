@@ -4,15 +4,19 @@
 #include "battle_controllers.h"
 #include "berry_pouch.h"
 #include "decompress.h"
+#include "event_scripts.h"
+#include "event_object_80688E4.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"
+#include "item_use.h"
 #include "link.h"
 #include "list_menu.h"
 #include "mail_data.h"
+#include "map_name_popup.h"
 #include "menu.h"
 #include "menu_indicators.h"
 #include "money.h"
@@ -21,6 +25,8 @@
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "scanline_effect.h"
+#include "script.h"
+#include "shop.h"
 #include "strings.h"
 #include "tm_case.h"
 #include "constants/items.h"
@@ -43,6 +49,17 @@ struct BagMenuAlloc
     u8 data[4];
 };
 
+struct BagSlots
+{
+    struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    u16 itemsAbove[3];
+    u16 cursorPos[3];
+    u16 registeredItem;
+    u16 pocket;
+};
+
 EWRAM_DATA struct BagStruct gUnknown_203ACFC = {};
 EWRAM_DATA struct BagMenuAlloc * gUnknown_203AD10 = NULL;
 EWRAM_DATA void * gUnknown_203AD14 = NULL;
@@ -51,6 +68,7 @@ EWRAM_DATA u8 (*gUnknown_203AD1C)[19] = NULL;
 EWRAM_DATA u8 gUnknown_203AD20[4] = {};
 EWRAM_DATA const u8 *gUnknown_203AD24 = NULL;
 EWRAM_DATA u8 gUnknown_203AD28 = 0;
+EWRAM_DATA struct BagSlots * gUnknown_203AD2C = NULL;
 
 void sub_8107F10(void);
 bool8 sub_8107F3C(void);
@@ -124,7 +142,11 @@ void sub_810A770(u8 taskId);
 void sub_810A834(s32 price);
 void sub_810A85C(u8 taskId);
 void sub_810A940(u8 taskId);
+void sub_810A9D4(u8 taskId);
+void sub_810AAF4(u8 taskId);
 void sub_810AB40(u8 taskId);
+void sub_810AB88(u8 taskId);
+void sub_810AC40(u8 taskId);
 bool8 sub_810ADAC(void);
 void sub_810AF9C(u8 taskId);
 void sub_810B1D4(u8 taskId);
@@ -1854,4 +1876,220 @@ void sub_810A770(u8 taskId)
 void sub_810A834(s32 amount)
 {
     PrintMoneyAmount(sub_810BAD8(0), 56, 10, amount, 0);
+}
+
+void sub_810A85C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    {
+        sub_81097E4(data[8], 2);
+        sub_810A834(itemid_get_market_price(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1])) / 2 * data[8]);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810BA3C(0);
+        PutWindowTilemap(0);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_8108978();
+        sub_810A690(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810BA3C(0);
+        sub_810BA3C(2);
+        sub_810BA9C(5);
+        PutWindowTilemap(2);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_8108978();
+        bag_menu_print_cursor_(data[0], 1);
+        sub_810910C(taskId);
+    }
+}
+
+void sub_810A940(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    PutWindowTilemap(0);
+    ScheduleBgCopyTilemapToVram(0);
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
+    DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A9D4);
+}
+
+void sub_810A9D4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    PlaySE(SE_SHOP);
+    RemoveBagItem(gSpecialVar_ItemId, data[8]);
+    AddMoney(&gSaveBlock1Ptr->money, itemid_get_market_price(gSpecialVar_ItemId) / 2 * data[8]);
+    RecordItemPurchase(gSpecialVar_ItemId, data[8], 2);
+    DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    sub_8108DC8(gUnknown_203ACFC.pocket);
+    sub_81089F4(gUnknown_203ACFC.pocket);
+    gUnknown_203AD10->field_05_6 = 1;
+    sub_810842C(gUnknown_203ACFC.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    bag_menu_print_cursor_(data[0], 2);
+    sub_810BB74(sub_810BAD8(2));
+    PrintMoneyAmountInMoneyBox(sub_810BAD8(2), GetMoney(&gSaveBlock1Ptr->money), 0);
+    gTasks[taskId].func = sub_810AAF4;
+}
+
+void sub_810AAF4(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810BA3C(2);
+        PutWindowTilemap(2);
+        gUnknown_203AD10->field_05_6 = 0;
+        sub_810A1F8(taskId);
+    }
+}
+
+void sub_810AB40(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[8] = 1;
+    if (data[2] == 1)
+    {
+        sub_810AC40(taskId);
+    }
+    else
+    {
+        sub_810971C(data[1], gText_DepositHowManyStrVars1);
+        gTasks[taskId].func = sub_810AB88;
+    }
+}
+
+void sub_810AB88(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    {
+        sub_81097E4(data[8], 3);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ClearWindowTilemap(sub_810BAD8(6));
+        sub_810BA3C(6);
+        sub_810BA3C(0);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_8108978();
+        sub_810AC40(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810BA3C(6);
+        sub_810BA3C(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        bag_menu_print_cursor_(data[0], 1);
+        sub_8108978();
+        sub_810910C(taskId);
+    }
+}
+
+void sub_810AC40(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (AddPCItem(gSpecialVar_ItemId, data[8]) == TRUE)
+    {
+        ItemUse_SetQuestLogEvent(28, 0, gSpecialVar_ItemId, 0xFFFF);
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringExpandPlaceholders(gStringVar4, gText_DepositedStrVar2StrVar1s);
+        sub_810B8F0(sub_810B9DC(6, 3), 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+        gTasks[taskId].func = sub_8109F44;
+    }
+    else
+    {
+        DisplayItemMessageInBag(taskId, 2, gText_NoRoomToStoreItems, sub_810A1D0);
+    }
+}
+
+bool8 UseRegisteredKeyItemOnField(void)
+{
+    u8 taskId;
+    if (InUnionRoom() == TRUE)
+        return FALSE;
+    DismissMapNamePopup();
+    ChangeBgY(0, 0, 0);
+    if (gSaveBlock1Ptr->registeredItem != ITEM_NONE)
+    {
+        if (CheckBagHasItem(gSaveBlock1Ptr->registeredItem, 1) == TRUE)
+        {
+            ScriptContext2_Enable();
+            FreezeObjectEvents();
+            sub_805C270();
+            sub_805C780();
+            gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
+            taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
+            gTasks[taskId].data[3] = 1;
+            return TRUE;
+        }
+        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    }
+    ScriptContext1_SetupScript(gUnknown_81A77A0);
+    return TRUE;
+}
+
+bool8 sub_810ADAC(void)
+{
+    if (gUnknown_203ACFC.location == 6 || gUnknown_203ACFC.location == 8 || gUnknown_203ACFC.location == 7 || gUnknown_203ACFC.location == 9 || gUnknown_203ACFC.location == 10)
+        return TRUE;
+    return FALSE;
+}
+
+void BackUpPlayerBag(void)
+{
+    u32 i;
+    gUnknown_203AD2C = AllocZeroed(sizeof(struct BagSlots));
+    memcpy(gUnknown_203AD2C->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, BAG_ITEMS_COUNT * sizeof(struct ItemSlot));
+    memcpy(gUnknown_203AD2C->bagPocket_KeyItems, gSaveBlock1Ptr->bagPocket_KeyItems, BAG_KEYITEMS_COUNT * sizeof(struct ItemSlot));
+    memcpy(gUnknown_203AD2C->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT * sizeof(struct ItemSlot));
+    gUnknown_203AD2C->registeredItem = gSaveBlock1Ptr->registeredItem;
+    gUnknown_203AD2C->pocket = gUnknown_203ACFC.pocket;
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_203AD2C->itemsAbove[i] = gUnknown_203ACFC.itemsAbove[i];
+        gUnknown_203AD2C->cursorPos[i] = gUnknown_203ACFC.cursorPos[i];
+    }
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, BAG_ITEMS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_KeyItems, BAG_KEYITEMS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT);
+    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    sub_81089BC();
+}
+
+void RestorePlayerBag(void)
+{
+    u32 i;
+    memcpy(gSaveBlock1Ptr->bagPocket_Items, gUnknown_203AD2C->bagPocket_Items, BAG_ITEMS_COUNT * sizeof(struct ItemSlot));
+    memcpy(gSaveBlock1Ptr->bagPocket_KeyItems, gUnknown_203AD2C->bagPocket_KeyItems, BAG_KEYITEMS_COUNT * sizeof(struct ItemSlot));
+    memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, gUnknown_203AD2C->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT * sizeof(struct ItemSlot));
+    gSaveBlock1Ptr->registeredItem = gUnknown_203AD2C->registeredItem;
+    gUnknown_203ACFC.pocket = gUnknown_203AD2C->pocket;
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_203ACFC.itemsAbove[i] = gUnknown_203AD2C->itemsAbove[i];
+        gUnknown_203ACFC.cursorPos[i] = gUnknown_203AD2C->cursorPos[i];
+    }
+    Free(gUnknown_203AD2C);
+}
+
+void InitTutorialBag(void)
+{
+    BackUpPlayerBag();
+    AddBagItem(ITEM_POTION, 1);
+    AddBagItem(ITEM_POKE_BALL, 1);
+    GoToBagMenu(6, 0, SetCB2ToReshowScreenAfterMenu2);
 }

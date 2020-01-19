@@ -596,15 +596,15 @@ gText_TheStrVar1CantBeHeldHere:: @ 8416374
 	.string "The {STR_VAR_1} can't be held\n"
 	.string "here.$"
 
-gUnknown_841638F:: @ 841638F
+gText_DepositHowManyStrVars1:: @ 841638F
 	.string "Deposit how many\n"
 	.string "{STR_VAR_1}(s)?$"
 
-gUnknown_84163A7:: @ 84163A7
+gText_DepositedStrVar2StrVar1s:: @ 84163A7
 	.string "Deposited {STR_VAR_2}\n"
 	.string "{STR_VAR_1}(s).$"
 
-gUnknown_84163BB:: @ 84163BB
+gText_NoRoomToStoreItems:: @ 84163BB
 	.string "There's no room to\n"
 	.string "store items.$"
 

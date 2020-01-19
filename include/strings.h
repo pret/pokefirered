@@ -1049,5 +1049,8 @@ extern const u8 gText_PokeBalls2[];
 extern const u8 gText_KeyItems2[];
 extern const u8 gText_CloseBag[];
 extern const u8 gText_CantWriteMailHere[];
+extern const u8 gText_DepositHowManyStrVars1[];
+extern const u8 gText_DepositedStrVar2StrVar1s[];
+extern const u8 gText_NoRoomToStoreItems[];
 
 #endif //GUARD_STRINGS_H

@@ -1195,4 +1195,6 @@ extern const u8 Text_1A5D31[];
 extern const u8 Text_1A5D6E[];
 extern const u8 Text_1A5DB1[];
 
+extern const u8 gUnknown_81A77A0[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

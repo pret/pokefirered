@@ -977,7 +977,7 @@ static void Task_SelectTMAction_FromSellMenu(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
-        TMCase_PrintMessageWithFollowupTask(taskId, sub_80BF8E4(), gStringVar4, Subtask_CloseContextMenuAndReturnToMain);
+        TMCase_PrintMessageWithFollowupTask(taskId, GetDialogBoxFontId(), gStringVar4, Subtask_CloseContextMenuAndReturnToMain);
     }
     else
     {
@@ -993,7 +993,7 @@ static void Task_SelectTMAction_FromSellMenu(u8 taskId)
                 data[2] = 99;
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
-            TMCase_PrintMessageWithFollowupTask(taskId, sub_80BF8E4(), gStringVar4, Task_InitQuantitySelectUI);
+            TMCase_PrintMessageWithFollowupTask(taskId, GetDialogBoxFontId(), gStringVar4, Task_InitQuantitySelectUI);
         }
     }
 }
@@ -1004,7 +1004,7 @@ static void Task_AskConfirmSaleWithAmount(u8 taskId)
 
     ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
-    TMCase_PrintMessageWithFollowupTask(taskId, sub_80BF8E4(), gStringVar4, Task_PlaceYesNoBox);
+    TMCase_PrintMessageWithFollowupTask(taskId, GetDialogBoxFontId(), gStringVar4, Task_PlaceYesNoBox);
 }
 
 static void Task_PlaceYesNoBox(u8 taskId)

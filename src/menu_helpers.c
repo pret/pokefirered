@@ -242,7 +242,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
     return FALSE;
 }
 
-u8 sub_80BF8E4(void)
+u8 GetDialogBoxFontId(void)
 {
     if (!ContextNpcGetTextColor())
         return 4;

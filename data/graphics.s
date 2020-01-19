@@ -14004,11 +14004,11 @@ gUnknown_8E83444:: @ 8E83444
 	.incbin "graphics/item_menu/bag_tilemap2.bin.lz" @ PC deposit items
 
     .align 2
-gUnknown_8E835B4:: @ 8E835B4
+gBagBgPalette:: @ 8E835B4
 	.incbin "graphics/item_menu/bag_pal1.gbapal.lz" @ palette 1 (Boy + misc Pal)
 
     .align 2
-gUnknown_8E83604:: @ 8E83604
+gBagBgPalette_FemaleOverride:: @ 8E83604
 	.incbin "graphics/item_menu/bag_pal2.gbapal.lz" @ palette 2 (Girl)
 
 gUnknown_8E8362C:: @ 8E8362C

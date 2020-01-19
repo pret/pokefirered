@@ -1038,6 +1038,9 @@ extern const u8 gText_SaveFailedScreen_CheckingBackupMemory[];
 extern const u8 gText_SaveFailedScreen_BackupMemoryDamaged[];
 extern const u8 gText_SaveFailedScreen_SaveCompleted[];
 
+// bag
+extern const u8 gText_DepositItem[];
+
 // item_menu
 extern const u8 gOtherText_Register[];
 extern const u8 gOtherText_Walk[];

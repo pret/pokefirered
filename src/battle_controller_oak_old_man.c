@@ -379,9 +379,9 @@ static void OpenBagAndChooseItem(void)
         nullsub_44();
         FreeAllWindowBuffers();
         if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-            sub_8107ECC();
+            CB2_BagMenuFromBattle();
         else
-            InitTutorialBag();
+            InitOldManBag();
     }
 }
 

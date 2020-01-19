@@ -4861,7 +4861,7 @@ extern const u16 gUnknown_8D12404[];
 extern const u32 gUnknown_8E830CC[];
 extern const u32 gUnknown_8E832C0[];
 extern const u32 gUnknown_8E83444[];
-extern const u32 gUnknown_8E835B4[];
-extern const u32 gUnknown_8E83604[];
+extern const u32 gBagBgPalette[];
+extern const u32 gBagBgPalette_FemaleOverride[];
 
 #endif //GUARD_GRAPHICS_H

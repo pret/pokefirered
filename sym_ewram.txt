@@ -335,36 +335,7 @@ gUnknown_203ACF0: @ 203ACF0
 	.align 2
 	.include "src/list_menu.o"
 	.align 2
-gUnknown_203ACFC: @ 203ACFC
-	.space 0x14
-
-gUnknown_203AD10: @ 203AD10
-	.space 0x4
-
-gUnknown_203AD14: @ 203AD14
-	.space 0x4
-
-gUnknown_203AD18: @ 203AD18
-	.space 0x4
-
-gUnknown_203AD1C: @ 203AD1C
-	.space 0x4
-
-gUnknown_203AD20: @ 203AD20
-	.space 0x4
-
-gUnknown_203AD24: @ 203AD24
-	.space 0x4
-
-gUnknown_203AD28: @ 203AD28
-	.space 0x4
-
-gUnknown_203AD2C: @ 203AD2C
-	.space 0x4
-
-gSpecialVar_ItemId: @ 203AD30
-	.space 0x4
-
+	.include "src/item_menu.o"
 	.align 2
 	.include "src/bag.o"
 	.align 2

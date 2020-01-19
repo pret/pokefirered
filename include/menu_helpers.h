@@ -20,7 +20,7 @@ bool8 sub_80BF748(void);
 bool8 MenuHelpers_LinkSomething(void);
 void SetVBlankHBlankCallbacksToNull(void);
 void ResetAllBgsCoordinatesAndBgCntRegs(void);
-u8 sub_80BF8E4(void);
+u8 GetDialogBoxFontId(void);
 bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1);
 void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc);
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo);

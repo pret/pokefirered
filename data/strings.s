@@ -411,7 +411,7 @@ gOtherText_Use::
 gOtherText_Toss::
 	.string "TOSS$"
 
-gUnknown_84161A9::
+gOtherText_Register::
 	.string "REGISTER$"
 
 gOtherText_Give::
@@ -420,7 +420,7 @@ gOtherText_Give::
 gUnknown_84161B7::
 	.string "けってい$"
 
-gUnknown_84161BC::
+gOtherText_Walk::
 	.string "WALK$"
 
 gFameCheckerText_Cancel:: @ 84161C1
@@ -447,16 +447,16 @@ gText_Take::
 gText_Store::
 	.string "STORE$"
 
-gUnknown_84161E9::
+gOtherText_Check::
 	.string "CHECK$"
 
 gUnknown_84161EF:: @ 84161EF
 	.string "NONE$"
 
-gUnknown_84161F4::
+gOtherText_Open::
 	.string "OPEN$"
 
-gUnknown_84161F9::
+gOtherText_Deselect::
 	.string "DESELECT$"
 
 gUnknown_8416202:: @ 8416202
@@ -555,19 +555,19 @@ gUnknown_84162BD:: @ 84162BD
 gText_Coins:: @ 84162C4
 	.string "{STR_VAR_1} COINS$"
 
-gUnknown_84162CD:: @ 0x84162CD
+gText_Items2:: @ 0x84162CD
 	.string "ITEMS$"
 
-gUnknown_84162D3:: @ 0x84162D3
+gText_PokeBalls2:: @ 0x84162D3
 	.string "POKé BALLS$"
 
-gUnknown_84162DE:: @ 0x84162DE
+gText_KeyItems2:: @ 0x84162DE
 	.string "KEY ITEMS$"
 
 gText_DepositItem:: @ 84162E8
 	.string "DEPOSIT ITEM$"
 
-gUnknown_84162F5:: @ 84162F5
+gText_CloseBag:: @ 84162F5
 	.string "CLOSE BAG$"
 
 gOtherText_StrVar1:: @ 84162FF
@@ -577,7 +577,7 @@ gText_IsSelected:: @ 8416301
 	.string " is\n"
 	.string "selected.$"
 
-gUnknown_841630F:: @ 841630F
+gText_CantWriteMailHere:: @ 841630F
 	.string "You can't write\n"
 	.string "MAIL here.$"
 
@@ -596,15 +596,15 @@ gText_TheStrVar1CantBeHeldHere:: @ 8416374
 	.string "The {STR_VAR_1} can't be held\n"
 	.string "here.$"
 
-gUnknown_841638F:: @ 841638F
+gText_DepositHowManyStrVars1:: @ 841638F
 	.string "Deposit how many\n"
 	.string "{STR_VAR_1}(s)?$"
 
-gUnknown_84163A7:: @ 84163A7
+gText_DepositedStrVar2StrVar1s:: @ 84163A7
 	.string "Deposited {STR_VAR_2}\n"
 	.string "{STR_VAR_1}(s).$"
 
-gUnknown_84163BB:: @ 84163BB
+gText_NoRoomToStoreItems:: @ 84163BB
 	.string "There's no room to\n"
 	.string "store items.$"
 

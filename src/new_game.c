@@ -98,7 +98,7 @@ void ResetMenuAndMonGlobals(void)
     gDifferentSaveFile = FALSE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-    sub_81089BC();
+    ResetBagCursorPositions();
     ResetTMCaseCursorPos();
     BerryPouch_CursorResetToTop();
     ResetQuestLog();

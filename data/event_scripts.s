@@ -1537,7 +1537,7 @@ EventScript_1A778C:: @ 81A778C
 	releaseall
 	end
 
-gUnknown_81A77A0:: @ 81A77A0
+EventScript_BagItemCanBeRegistered:: @ 81A77A0
 	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
 	end
 

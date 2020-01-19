@@ -60,12 +60,12 @@ const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
     gTrainerBackPic_Leaf + 0x2000, 0x0800,
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_PokeDude[] =
+const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[] =
 {
-    gTrainerBackPic_PokeDude, 0x0800,
-    gTrainerBackPic_PokeDude + 0x0800, 0x0800,
-    gTrainerBackPic_PokeDude + 0x1000, 0x0800,
-    gTrainerBackPic_PokeDude + 0x1800, 0x0800,
+    gTrainerBackPic_Pokedude, 0x0800,
+    gTrainerBackPic_Pokedude + 0x0800, 0x0800,
+    gTrainerBackPic_Pokedude + 0x1000, 0x0800,
+    gTrainerBackPic_Pokedude + 0x1800, 0x0800,
 };
 
 const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =

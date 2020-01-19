@@ -11,9 +11,9 @@
 
 struct BagStruct
 {
-    void (*bagCallback)(void);
+    MainCallback bagCallback;
     u8 location;
-    u8 bagOpen;
+    bool8 bagOpen;
     u16 pocket;
     u16 itemsAbove[3];
     u16 cursorPos[3];
@@ -28,7 +28,7 @@ void sub_81AAC50(void);
 void sub_81AAC70(void);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void ResetBagCursorPositions(void);
-void InitPokeDudeBag(u8);
+void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
 void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);

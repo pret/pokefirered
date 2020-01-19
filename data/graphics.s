@@ -13476,7 +13476,7 @@ gTrainerBackPic_Leaf:: @ 8E6C6BC
 	.incbin "graphics/trainers/back_pics/leaf_back_pic.4bpp"
 
 	.align 2
-gTrainerBackPic_PokeDude:: @ 8E6EEBC
+gTrainerBackPic_Pokedude:: @ 8E6EEBC
 	.incbin "graphics/trainers/back_pics/pokedude_back_pic.4bpp"
 
 	.align 2
@@ -13500,7 +13500,7 @@ gTrainerPalette_LeafBackPic:: @ 8E76EE4
 	.incbin "graphics/trainers/palettes/red_back_pic.gbapal.lz"
 
 	.align 2
-gTrainerPalette_PokeDudeBackPic:: @ 8E76F0C
+gTrainerPalette_PokedudeBackPic:: @ 8E76F0C
 	.incbin "graphics/trainers/palettes/pokedude_back_pic.gbapal.lz"
 
 	.align 2

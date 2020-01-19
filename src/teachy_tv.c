@@ -795,7 +795,7 @@ static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
         if (spriteAddr->pos2.x == 0x78)
         {
             StartSpriteAnim(&gSprites[data[1]], 0);
-            TeachyTvInitTextPrinter(gTeachyTvText_PokeDudeSaysHello);
+            TeachyTvInitTextPrinter(gTeachyTvText_PokedudeSaysHello);
             data[2] = 0;
             ++data[3];
         }
@@ -1093,9 +1093,9 @@ static void TTVcmd_TaskBattleOrFadeByOptionChosen(u8 taskId)
 static void TeachyTvSetupBagItemsByOptionChosen(void)
 {
     if (sStaticResources.whichScript == TTVSCR_TMS)
-        InitPokeDudeBag(ITEMMENULOCATION_TTVSCR_TMS);
+        InitPokedudeBag(ITEMMENULOCATION_TTVSCR_TMS);
     else
-        InitPokeDudeBag(ITEMMENULOCATION_TTVSCR_REGISTER);
+        InitPokedudeBag(ITEMMENULOCATION_TTVSCR_REGISTER);
 }
 
 static void TeachyTvPostBattleFadeControl(u8 taskId)

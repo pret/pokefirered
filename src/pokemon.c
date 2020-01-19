@@ -1547,7 +1547,7 @@ const struct SpriteTemplate gUnknown_825DF50[] =
         .paletteTag = 0,
         .oam = &gOamData_824F018,
         .anims = NULL, 
-        .images = gTrainerBackPicTable_PokeDude,
+        .images = gTrainerBackPicTable_Pokedude,
         .affineAnims = gSpriteAffineAnimTable_82348C8,
         .callback = sub_80120C4,
     },

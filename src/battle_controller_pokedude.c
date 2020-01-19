@@ -742,7 +742,7 @@ static void OpenBagAndChooseItem(void)
             callbackId = ITEMMENULOCATION_TTVSCR_CATCHING;
             break;
         }
-        InitPokeDudeBag(callbackId);
+        InitPokedudeBag(callbackId);
     }
 }
 

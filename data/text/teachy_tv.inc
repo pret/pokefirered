@@ -19,7 +19,7 @@ gTeachyTvString_RegisterItem:: @ 841B81B
 gTeachyTvString_Cancel:: @ 841B836
 	.string "CANCEL$"
 
-gTeachyTvText_PokeDudeSaysHello:: @ 841B83D
+gTeachyTvText_PokedudeSaysHello:: @ 841B83D
 	.string "Hey, all you TRAINERS out there!\n"
 	.string "HELLO, TRAINERS!\p"
 	.string "……… ……… ………\p"
@@ -164,7 +164,7 @@ gTeachyTvText_TMsScript1:: @ 841C459
 	.string "You can check them out in detail,\n"
 	.string "too.$"
 
-gPokeDudeText_TMTypes:: @ 841C587
+gPokedudeText_TMTypes:: @ 841C587
 	.string "POKé DUDE: NORMAL, WATER, GRASS…\n"
 	.string "TMs also come in types.\p"
 	.string "Check the type and teach it to\n"
@@ -175,7 +175,7 @@ gPokeDudeText_TMTypes:: @ 841C587
 	.string "GRASS-type POKéMON can learn.\p"
 	.string "There's one other thing!$"
 
-gPokeDudeText_ReadTMDescription:: @ 841C693
+gPokedudeText_ReadTMDescription:: @ 841C693
 	.string "Don't just look at the type, read\n"
 	.string "the description, too.\p"
 	.string "It will contain hints about what\n"

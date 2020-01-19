@@ -463,7 +463,7 @@ const u8 *const gPokeblockWasTooXStringTable[] = {
 
 static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME} used\n{B_LAST_ITEM}!");
 static const u8 sText_OldManUsedItem[] = _("The old man used\n{B_LAST_ITEM}!");
-static const u8 sText_PokeDudeUsedItem[] = _("The POKé DUDE used\n{B_LAST_ITEM}!");
+static const u8 sText_PokedudeUsedItem[] = _("The POKé DUDE used\n{B_LAST_ITEM}!");
 static const u8 sText_Trainer1UsedItem[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!");
 static const u8 sText_TrainerBlockedBall[] = _("The TRAINER blocked the BALL!");
 static const u8 sText_DontBeAThief[] = _("Don't be a thief!");
@@ -876,7 +876,7 @@ const u8 *const gBattleStringsTable[] = {
     Text_1A5D31,
     Text_1A5D6E,
     Text_1A5DB1,
-    sText_PokeDudeUsedItem,
+    sText_PokedudeUsedItem,
     gUnknown_83FDA4D,
     gUnknown_83FDA7A,
     gUnknown_83FDA8C,

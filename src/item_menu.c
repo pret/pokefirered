@@ -152,8 +152,8 @@ static void Task_SelectQuantityToDeposit(u8 taskId);
 static void Task_TryDoItemDeposit(u8 taskId);
 static bool8 BagIsTutorial(void);
 static void Task_Bag_OldManTutorial(u8 taskId);
-static void Task_PokeDude_FadeFromBag(u8 taskId);
-static void Task_PokeDude_WaitFadeAndExitBag(u8 taskId);
+static void Task_Pokedude_FadeFromBag(u8 taskId);
+static void Task_Pokedude_WaitFadeAndExitBag(u8 taskId);
 static void Task_Bag_TeachyTvRegister(u8 taskId);
 static void Task_Bag_TeachyTvCatching(u8 taskId);
 static void Task_Bag_TeachyTvStatus(u8 taskId);
@@ -276,7 +276,7 @@ static const TaskFunc sItemContextTaskFuncs[] = {
     [ITEMMENULOCATION_ITEMPC] = Task_ItemContext_Deposit,
     [ITEMMENULOCATION_PCBOX]  = Task_ItemContext_PcBoxGive,
     [ITEMMENULOCATION_BATTLE] = Task_ItemContext_FieldOrBattle,
-    [ITEMMENULOCATION_OLDMAN] = NULL
+    [ITEMMENULOCATION_OLD_MAN] = NULL
 };
 
 static const struct YesNoFuncTable sYesNoMenu_Toss = {
@@ -331,7 +331,7 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback bagCallback)
         sBagMenuDisplay->pocketSwitchArrowsTask = 0xFF;
         if (location == ITEMMENULOCATION_ITEMPC)
             sBagMenuDisplay->pocketSwitchMode = 1;
-        else if (location == ITEMMENULOCATION_OLDMAN)
+        else if (location == ITEMMENULOCATION_OLD_MAN)
             sBagMenuDisplay->pocketSwitchMode = 2;
         else
             sBagMenuDisplay->pocketSwitchMode = 0;
@@ -609,7 +609,7 @@ static u8 CreateBagInputHandlerTask(u8 location)
 {
     switch (location)
     {
-    case ITEMMENULOCATION_OLDMAN:
+    case ITEMMENULOCATION_OLD_MAN:
         return CreateTask(Task_Bag_OldManTutorial, 0);
     case ITEMMENULOCATION_TTVSCR_REGISTER:
         return CreateTask(Task_Bag_TeachyTvRegister, 0);
@@ -626,10 +626,11 @@ static u8 CreateBagInputHandlerTask(u8 location)
 
 static bool8 TryAllocListMenuBuffers(void)
 {
-    sListMenuItems = Alloc(43 * sizeof(struct ListMenuItem));
+    // The items pocket has the highest capacity, + 1 for CANCEL
+    sListMenuItems = Alloc((BAG_ITEMS_COUNT + 1) * sizeof(struct ListMenuItem));
     if (sListMenuItems == NULL)
         return FALSE;
-    sListMenuItemStrings = Alloc(43 * 19);
+    sListMenuItemStrings = Alloc((BAG_ITEMS_COUNT + 1) * sizeof(*sListMenuItemStrings));
     if (sListMenuItemStrings == NULL)
         return FALSE;
     return TRUE;
@@ -835,7 +836,7 @@ void ResetBagCursorPositions(void)
 {
     u8 i;
     gBagMenuState.pocket = POCKET_ITEMS - 1;
-    gBagMenuState.bagOpen = 0;
+    gBagMenuState.bagOpen = FALSE;
     for (i = 0; i < 3; i++)
     {
         gBagMenuState.itemsAbove[i] = 0;
@@ -923,10 +924,10 @@ static void ShowBagOrBeginWin0OpenTask(void)
 
     LoadPalette(&paldata, 0x00, 0x02);
     SetGpuReg(REG_OFFSET_WININ, 0);
-    SetGpuReg(REG_OFFSET_WINOUT, 0x3F);
+    SetGpuReg(REG_OFFSET_WINOUT, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-    if (gBagMenuState.bagOpen == 1)
+    if (gBagMenuState.bagOpen == TRUE)
     {
         SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
         SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 0));
@@ -938,7 +939,7 @@ static void ShowBagOrBeginWin0OpenTask(void)
         taskId = CreateTask(Task_AnimateWin0v, 0);
         gTasks[taskId].data[0] = 192;
         gTasks[taskId].data[1] = -16;
-        gBagMenuState.bagOpen = 1;
+        gBagMenuState.bagOpen = TRUE;
     }
 }
 
@@ -948,12 +949,12 @@ void Bag_BeginCloseWin0Animation(void)
     u8 taskId = CreateTask(Task_AnimateWin0v, 0);
     gTasks[taskId].data[0] = -16;
     gTasks[taskId].data[1] =  16;
-    gBagMenuState.bagOpen = 0;
+    gBagMenuState.bagOpen = FALSE;
 }
 
 void CB2_SetUpReshowBattleScreenAfterMenu(void)
 {
-    gBagMenuState.bagOpen = 0;
+    gBagMenuState.bagOpen = FALSE;
 }
 
 static void Task_AnimateWin0v(u8 taskId)
@@ -1363,7 +1364,7 @@ static void OpenContextMenu(u8 taskId)
             sContextMenuNumItems = 1;
         }
         break;
-    case ITEMMENULOCATION_OLDMAN:
+    case ITEMMENULOCATION_OLD_MAN:
     case ITEMMENULOCATION_TTVSCR_CATCHING:
         sContextMenuItemsPtr = sContextMenuItems_BattleUse;
         sContextMenuNumItems = 2;
@@ -2050,7 +2051,7 @@ bool8 UseRegisteredKeyItemOnField(void)
 static bool8 BagIsTutorial(void)
 {
     if (
-        gBagMenuState.location == ITEMMENULOCATION_OLDMAN 
+        gBagMenuState.location == ITEMMENULOCATION_OLD_MAN 
      || gBagMenuState.location == ITEMMENULOCATION_TTVSCR_CATCHING 
      || gBagMenuState.location == ITEMMENULOCATION_TTVSCR_STATUS 
      || gBagMenuState.location == ITEMMENULOCATION_TTVSCR_REGISTER 
@@ -2102,7 +2103,7 @@ void InitOldManBag(void)
     BackUpPlayerBag();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_OLDMAN, OPEN_BAG_ITEMS, SetCB2ToReshowScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_OLD_MAN, OPEN_BAG_ITEMS, SetCB2ToReshowScreenAfterMenu2);
 }
 
 static void Task_Bag_OldManTutorial(u8 taskId)
@@ -2134,20 +2135,20 @@ static void Task_Bag_OldManTutorial(u8 taskId)
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             Bag_BeginCloseWin0Animation();
-            gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+            gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
         data[8]++;
     }
 }
 
-static void Task_PokeDude_FadeFromBag(u8 taskId)
+static void Task_Pokedude_FadeFromBag(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB_BLACK);
-    gTasks[taskId].func = Task_PokeDude_WaitFadeAndExitBag;
+    gTasks[taskId].func = Task_Pokedude_WaitFadeAndExitBag;
 }
 
-static void Task_PokeDude_WaitFadeAndExitBag(u8 taskId)
+static void Task_Pokedude_WaitFadeAndExitBag(u8 taskId)
 {
     if (!gPaletteFade.active && FuncIsActiveTask(Task_AnimateWin0v) != TRUE)
     {
@@ -2161,7 +2162,7 @@ static void Task_PokeDude_WaitFadeAndExitBag(u8 taskId)
     }
 }
 
-void InitPokeDudeBag(u8 a0)
+void InitPokedudeBag(u8 a0)
 {
     MainCallback cb2;
     u8 location;
@@ -2198,7 +2199,7 @@ static bool8 Task_BButtonInterruptTeachyTv(u8 taskId)
         RestorePlayerBag();
         SetTeachyTvControllerModeToResume();
         sBagMenuDisplay->exitCB = CB2_ReturnToTeachyTV;
-        gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+        gTasks[taskId].func = Task_Pokedude_FadeFromBag;
         return TRUE;
     }
     else
@@ -2254,7 +2255,7 @@ static void Task_Bag_TeachyTvRegister(u8 taskId)
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             Bag_BeginCloseWin0Animation();
-            gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+            gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
         data[8]++;
@@ -2308,7 +2309,7 @@ static void Task_Bag_TeachyTvCatching(u8 taskId)
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
             Bag_BeginCloseWin0Animation();
-            gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+            gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
         data[8]++;
@@ -2351,7 +2352,7 @@ static void Task_Bag_TeachyTvStatus(u8 taskId)
             RestorePlayerBag();
             gItemUseCB = ItemUseCB_MedicineStep;
             ItemMenu_SetExitCallback(ChooseMonForInBattleItem);
-            gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+            gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
         data[8]++;
@@ -2390,8 +2391,8 @@ static void Task_Bag_TeachyTvTMs(u8 taskId)
             CopyWindowToVram(0, 1);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
-            sBagMenuDisplay->exitCB = PokeDude_InitTMCase;
-            gTasks[taskId].func = Task_PokeDude_FadeFromBag;
+            sBagMenuDisplay->exitCB = Pokedude_InitTMCase;
+            gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;
         }
         data[8]++;

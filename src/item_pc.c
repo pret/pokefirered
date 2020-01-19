@@ -781,7 +781,7 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, 2, gStringVar4, 0, 3, 2, 3, 0, 0);
     ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(0);
+    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
     gTasks[taskId].func = Task_ItemPcMoveItemModeRun;
 }
@@ -820,7 +820,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-        ItemMenuIcons_ToggleInsertIndicatorBarVisibility(1);
+        ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
         gTasks[taskId].func = Task_ItemPcMain;
     }
 }
@@ -834,7 +834,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(1);
+    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
     gTasks[taskId].func = Task_ItemPcMain;
 }
 

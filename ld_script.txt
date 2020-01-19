@@ -217,7 +217,7 @@ SECTIONS {
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/diploma.o(.text);
-        asm/save_failed_screen.o(.text);
+        src/save_failed_screen.o(.text);
         asm/clear_save_data_screen.o(.text);
         src/evolution_graphics.o(.text);
         src/fldeff_teleport.o(.text);
@@ -232,7 +232,7 @@ SECTIONS {
         src/pokedex_screen.o(.text);
         asm/pokedex_screen.o(.text);
         src/list_menu.o(.text);
-        asm/item_menu.o(.text);
+        src/item_menu.o(.text);
         src/save_location.o(.text);
         src/bag.o(.text);
         src/trainer_pokemon_sprites.o(.text);
@@ -505,7 +505,7 @@ SECTIONS {
         src/credits.o(.rodata);
         src/diploma.o(.rodata);
         data/strings.o(.rodata);
-        data/save_failed_screen.o(.rodata);
+        src/save_failed_screen.o(.rodata);
         data/clear_save_data_screen.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/new_menu_helpers.o(.rodata);
@@ -517,7 +517,7 @@ SECTIONS {
         src/pokedex_screen.o(.rodata);
         data/pokedex_screen.o(.rodata);
         src/list_menu.o(.rodata);
-        data/item_menu.o(.rodata);
+        src/item_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);

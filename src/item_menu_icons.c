@@ -5,14 +5,14 @@
 #include "malloc.h"
 #include "constants/items.h"
 
-static EWRAM_DATA u8 gUnknown_2039878[12] = {0};
-EWRAM_DATA void * gUnknown_2039884 = NULL;
-static EWRAM_DATA void * gUnknown_2039888 = NULL;
+static EWRAM_DATA u8 sItemMenuIconSpriteIds[12] = {0};
+static EWRAM_DATA void * sItemIconTilesBuffer = NULL;
+static EWRAM_DATA void * sItemIconTilesBufferPadded = NULL;
 
 static void sub_8098560(struct Sprite * sprite);
 static void sub_80985BC(struct Sprite * sprite);
 
-static const struct OamData gUnknown_83D416C = {
+static const struct OamData sOamData_BagOrSatchel = {
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = ST_OAM_SQUARE,
     .size = 3,
@@ -20,36 +20,36 @@ static const struct OamData gUnknown_83D416C = {
     .paletteNum = 0
 };
 
-static const union AnimCmd gUnknown_83D4174[] = {
+static const union AnimCmd sAnim_BagOrSatchel_OpenItemPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0x40, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83D4180[] = {
+static const union AnimCmd sAnim_BagOrSatchel_OpenKeyItemPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0x80, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_83D418C[] = {
+static const union AnimCmd sAnim_BagOrSatchel_OpenPokeBallsPocket[] = {
     ANIMCMD_FRAME(   0, 5),
     ANIMCMD_FRAME(0xc0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83D4198[] = {
-    gUnknown_83D4180,
-    gUnknown_83D418C,
-    gUnknown_83D4174
+static const union AnimCmd *const sAnimTable_BagOrSatchel[] = {
+    sAnim_BagOrSatchel_OpenKeyItemPocket,
+    sAnim_BagOrSatchel_OpenPokeBallsPocket,
+    sAnim_BagOrSatchel_OpenItemPocket
 };
 
-static const union AffineAnimCmd gUnknown_83D41A4[] = {
+static const union AffineAnimCmd sAffineAnim_Idle[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd gUnknown_83D41B4[] = {
+static const union AffineAnimCmd sAffineAnim_Wobble[] = {
     AFFINEANIMCMD_FRAME(0, 0, -2, 2),
     AFFINEANIMCMD_FRAME(0, 0,  2, 4),
     AFFINEANIMCMD_FRAME(0, 0, -2, 4),
@@ -57,35 +57,35 @@ static const union AffineAnimCmd gUnknown_83D41B4[] = {
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gUnknown_83D41DC[] = {
-    gUnknown_83D41A4,
-    gUnknown_83D41B4
+static const union AffineAnimCmd *const sAffineAnimTable_BagOrSatchel[] = {
+    sAffineAnim_Idle,
+    sAffineAnim_Wobble
 };
 
-const struct CompressedSpriteSheet gUnknown_83D41E4 = {
+const struct CompressedSpriteSheet gSpriteSheet_Backpack = {
     gUnknown_8E8362C,
     0x2000,
     100
 };
 
-const struct CompressedSpriteSheet gUnknown_83D41EC = {
+const struct CompressedSpriteSheet gSpriteSheet_Satchel = {
     gUnknown_8E83DBC,
     0x2000,
     100
 };
 
-const struct CompressedSpritePalette gUnknown_83D41F4 = {
+const struct CompressedSpritePalette gSpritePalette_BagOrSatchel = {
     gUnknown_8E84560,
     100
 };
 
-static const struct SpriteTemplate gUnknown_83D41FC = {
+static const struct SpriteTemplate sSpriteTemplate_BagOrSatchel = {
     100,
     100,
-    &gUnknown_83D416C,
-    gUnknown_83D4198,
+    &sOamData_BagOrSatchel,
+    sAnimTable_BagOrSatchel,
     NULL,
-    gUnknown_83D41DC,
+    sAffineAnimTable_BagOrSatchel,
     SpriteCallbackDummy
 };
 
@@ -139,7 +139,7 @@ static const struct SpriteTemplate gUnknown_83D4250 = {
     SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_83D4268 = {
+static const struct OamData sOamData_ItemIcon = {
     .affineMode = ST_OAM_AFFINE_OFF,
     .shape = ST_OAM_SQUARE,
     .size = 2,
@@ -147,26 +147,26 @@ static const struct OamData gUnknown_83D4268 = {
     .paletteNum = 2
 };
 
-static const union AnimCmd gUnknown_83D4270[] = {
+static const union AnimCmd sAnim_ItemIcon_0[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_83D4278[] = {
-    gUnknown_83D4270
+static const union AnimCmd *const sAnimTable_ItemIcon[] = {
+    sAnim_ItemIcon_0
 };
 
-static const struct SpriteTemplate gUnknown_83D427C = {
+static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
     102,
     102,
-    &gUnknown_83D4268,
-    gUnknown_83D4278,
+    &sOamData_ItemIcon,
+    sAnimTable_ItemIcon,
     NULL,
     gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
 };
 
-static const void *const gUnknown_83D4294[][2] = {
+static const void *const sItemIconGfxPtrs[][2] = {
     {gFile_graphics_items_icons_question_mark_sheet, gFile_graphics_items_icon_palettes_question_mark_palette},
     {gFile_graphics_items_icons_master_ball_sheet, gFile_graphics_items_icon_palettes_master_ball_palette},
     {gFile_graphics_items_icons_ultra_ball_sheet, gFile_graphics_items_icon_palettes_ultra_ball_palette},
@@ -549,19 +549,19 @@ void ResetItemMenuIconState(void)
 {
     u16 i;
 
-    for (i = 0; i < NELEMS(gUnknown_2039878); i++)
-        gUnknown_2039878[i] = 0xFF;
+    for (i = 0; i < NELEMS(sItemMenuIconSpriteIds); i++)
+        sItemMenuIconSpriteIds[i] = 0xFF;
 }
 
-void sub_80984FC(u8 animNum)
+void CreateBagOrSatchelSprite(u8 animNum)
 {
-    gUnknown_2039878[0] = CreateSprite(&gUnknown_83D41FC, 40, 68, 0);
+    sItemMenuIconSpriteIds[0] = CreateSprite(&sSpriteTemplate_BagOrSatchel, 40, 68, 0);
     sub_8098528(animNum);
 }
 
 void sub_8098528(u8 animNum)
 {
-    struct Sprite * sprite = &gSprites[gUnknown_2039878[0]];
+    struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     sprite->pos2.y = -5;
     sprite->callback = sub_8098560;
     StartSpriteAnim(sprite, animNum);
@@ -577,7 +577,7 @@ static void sub_8098560(struct Sprite * sprite)
 
 void sub_8098580(void)
 {
-    struct Sprite * sprite = &gSprites[gUnknown_2039878[0]];
+    struct Sprite * sprite = &gSprites[sItemMenuIconSpriteIds[0]];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, 1);
@@ -594,40 +594,44 @@ static void sub_80985BC(struct Sprite * sprite)
     }
 }
 
-void sub_80985E4(void)
+void ItemMenuIcons_CreateInsertIndicatorBarHidden(void)
 {
     u8 i;
-    u8 * ptr = &gUnknown_2039878[1];
+    u8 * ptr = &sItemMenuIconSpriteIds[1];
 
     for (i = 0; i < 9; i++)
     {
         ptr[i] = CreateSprite(&gUnknown_83D4250, i * 16 + 0x60, 7, 0);
-        if (i != 0)
+        switch (i)
         {
-            if (i == 8)
-                StartSpriteAnim(&gSprites[ptr[i]], 2);
-            else
-                StartSpriteAnim(&gSprites[ptr[i]], 1);
+        case 0:
+            break;
+        case 8:
+            StartSpriteAnim(&gSprites[ptr[i]], 2);
+            break;
+        default:
+            StartSpriteAnim(&gSprites[ptr[i]], 1);
+            break;
         }
         gSprites[ptr[i]].invisible = TRUE;
     }
 }
 
-void sub_8098660(u8 flag)
+void ItemMenuIcons_ToggleInsertIndicatorBarVisibility(bool8 invisible)
 {
     u8 i;
-    u8 * ptr = &gUnknown_2039878[1];
+    u8 * ptr = &sItemMenuIconSpriteIds[1];
 
     for (i = 0; i < 9; i++)
     {
-        gSprites[ptr[i]].invisible = flag;
+        gSprites[ptr[i]].invisible = invisible;
     }
 }
 
-void sub_80986A8(s16 x, u16 y)
+void ItemMenuIcons_MoveInsertIndicatorBar(s16 x, u16 y)
 {
     u8 i;
-    u8 * ptr = &gUnknown_2039878[1];
+    u8 * ptr = &sItemMenuIconSpriteIds[1];
 
     for (i = 0; i < 9; i++)
     {
@@ -636,15 +640,15 @@ void sub_80986A8(s16 x, u16 y)
     }
 }
 
-static bool8 sub_80986EC(void)
+static bool8 TryAllocItemIconTilesBuffers(void)
 {
     void ** ptr1, ** ptr2;
 
-    ptr1 = &gUnknown_2039884;
+    ptr1 = &sItemIconTilesBuffer;
     *ptr1 = Alloc(0x120);
     if (*ptr1 == NULL)
         return FALSE;
-    ptr2 = &gUnknown_2039888;
+    ptr2 = &sItemIconTilesBufferPadded;
     *ptr2 = AllocZeroed(0x200);
     if (*ptr2 == NULL)
     {
@@ -671,27 +675,27 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
     struct CompressedSpritePalette spritePalette;
     u8 spriteId;
 
-    if (!sub_80986EC())
+    if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(sub_8098974(itemId, 0), gUnknown_2039884);
-    CopyItemIconPicTo4x4Buffer(gUnknown_2039884, gUnknown_2039888);
-    spriteSheet.data = gUnknown_2039888;
+    LZDecompressWram(GetItemIconGfxPtr(itemId, 0), sItemIconTilesBuffer);
+    CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
+    spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = sub_8098974(itemId, 1);
+    spritePalette.data = GetItemIconGfxPtr(itemId, 1);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
-    CpuCopy16(&gUnknown_83D427C, &template, sizeof(struct SpriteTemplate));
+    CpuCopy16(&sSpriteTemplate_ItemIcon, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;
     template.paletteTag = paletteTag;
     spriteId = CreateSprite(&template, 0, 0, 0);
 
-    Free(gUnknown_2039884);
-    Free(gUnknown_2039888);
+    Free(sItemIconTilesBuffer);
+    Free(sItemIconTilesBufferPadded);
     return spriteId;
 }
 
@@ -702,17 +706,17 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     struct CompressedSpritePalette spritePalette;
     u8 spriteId;
 
-    if (!sub_80986EC())
+    if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(sub_8098974(itemId, 0), gUnknown_2039884);
-    CopyItemIconPicTo4x4Buffer(gUnknown_2039884, gUnknown_2039888);
-    spriteSheet.data = gUnknown_2039888;
+    LZDecompressWram(GetItemIconGfxPtr(itemId, 0), sItemIconTilesBuffer);
+    CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
+    spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = sub_8098974(itemId, 1);
+    spritePalette.data = GetItemIconGfxPtr(itemId, 1);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
@@ -721,14 +725,14 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     template.paletteTag = paletteTag;
     spriteId = CreateSprite(&template, 0, 0, 0);
 
-    Free(gUnknown_2039884);
-    Free(gUnknown_2039888);
+    Free(sItemIconTilesBuffer);
+    Free(sItemIconTilesBufferPadded);
     return spriteId;
 }
 
 void CreateItemMenuIcon(u16 itemId, u8 idx)
 {
-    u8 * ptr = &gUnknown_2039878[10];
+    u8 * ptr = &sItemMenuIconSpriteIds[10];
     u8 spriteId;
 
     if (ptr[idx] == 0xFF)
@@ -747,7 +751,7 @@ void CreateItemMenuIcon(u16 itemId, u8 idx)
 
 void DestroyItemMenuIcon(u8 idx)
 {
-    u8 * ptr = &gUnknown_2039878[10];
+    u8 * ptr = &sItemMenuIconSpriteIds[10];
 
     if (ptr[idx] != 0xFF)
     {
@@ -756,16 +760,16 @@ void DestroyItemMenuIcon(u8 idx)
     }
 }
 
-const void * sub_8098974(u16 itemId, u8 attrId)
+const void * GetItemIconGfxPtr(u16 itemId, u8 attrId)
 {
     if (itemId > ITEM_N_A)
         itemId = ITEM_NONE;
-    return gUnknown_83D4294[itemId][attrId];
+    return sItemIconGfxPtrs[itemId][attrId];
 }
 
 void sub_80989A0(u16 itemId, u8 idx)
 {
-    u8 * ptr = &gUnknown_2039878[10];
+    u8 * ptr = &sItemMenuIconSpriteIds[10];
     u8 spriteId;
 
     if (ptr[idx] == 0xFF)

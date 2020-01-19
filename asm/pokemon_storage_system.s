@@ -22001,7 +22001,7 @@ GetItemIconPic: @ 8096674
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8098974
+	bl GetItemIconGfxPtr
 	pop {r1}
 	bx r1
 	thumb_func_end GetItemIconPic
@@ -22012,7 +22012,7 @@ GetItemIconPalette: @ 8096684
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8098974
+	bl GetItemIconGfxPtr
 	pop {r1}
 	bx r1
 	thumb_func_end GetItemIconPalette

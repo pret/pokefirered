@@ -348,7 +348,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 14:
-        sub_80985E4();
+        ItemMenuIcons_CreateInsertIndicatorBarHidden();
         gMain.state++;
         break;
     case 15:
@@ -780,8 +780,8 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, 2, gStringVar4, 0, 3, 2, 3, 0, 0);
-    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    sub_8098660(0);
+    ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
     gTasks[taskId].func = Task_ItemPcMoveItemModeRun;
 }
@@ -792,7 +792,7 @@ static void Task_ItemPcMoveItemModeRun(u8 taskId)
 
     ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
-    sub_80986A8(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    ItemMenuIcons_MoveInsertIndicatorBar(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -814,13 +814,13 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
         ItemPc_MoveItemModeCancel(taskId, pos);
     else
     {
-        ItemMenu_MoveItemSlotToNewPositionInArray(gSaveBlock1Ptr->pcItems, data[1], pos);
+        MoveItemSlotInList(gSaveBlock1Ptr->pcItems, data[1], pos);
         DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (data[1] < pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-        sub_8098660(1);
+        ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
         gTasks[taskId].func = Task_ItemPcMain;
     }
 }
@@ -834,7 +834,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-    sub_8098660(1);
+    ItemMenuIcons_ToggleInsertIndicatorBarVisibility(TRUE);
     gTasks[taskId].func = Task_ItemPcMain;
 }
 

@@ -1,7 +1,3 @@
-//
-// Created by scott on 10/21/2017.
-//
-
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
 
@@ -2656,7 +2652,7 @@ extern const u32 gTrainerPalette_RSBrendan1[];
 extern const u32 gTrainerPalette_RSMay1[];
 extern const u32 gTrainerPalette_LeafBackPic[];
 extern const u32 gTrainerPalette_RedBackPic[];
-extern const u32 gTrainerPalette_PokeDudeBackPic[];
+extern const u32 gTrainerPalette_PokedudeBackPic[];
 extern const u32 gTrainerPalette_OldManBackPic[];
 extern const u32 gTrainerPalette_PokemonBreederM[];
 extern const u32 gTrainerPalette_RSPokemonBreederF[];
@@ -4358,7 +4354,7 @@ extern const u8 gBerryPouchBg1Tilemap[];
 
 extern const u8 gTrainerBackPic_Red[];
 extern const u8 gTrainerBackPic_Leaf[];
-extern const u8 gTrainerBackPic_PokeDude[];
+extern const u8 gTrainerBackPic_Pokedude[];
 extern const u8 gTrainerBackPic_OldMan[];
 extern const u8 gTrainerBackPic_RSBrendan[];
 extern const u8 gTrainerBackPic_RSMay[];
@@ -4860,5 +4856,12 @@ extern const u8 gHealthboxElementsGfxTable[][32];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
 extern const u16 gUnknown_8D12404[];
+
+// item_menu
+extern const u32 gUnknown_8E830CC[];
+extern const u32 gUnknown_8E832C0[];
+extern const u32 gUnknown_8E83444[];
+extern const u32 gBagBgPalette[];
+extern const u32 gBagBgPalette_FemaleOverride[];
 
 #endif //GUARD_GRAPHICS_H

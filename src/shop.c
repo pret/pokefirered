@@ -307,7 +307,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
 
 static void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(2, POCKET_POKE_BALLS, CB2_ReturnToField);
+    GoToBagMenu(ITEMMENULOCATION_SHOP, OPEN_BAG_LAST, CB2_ReturnToField);
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
 }
 

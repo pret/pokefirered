@@ -115,7 +115,7 @@ void AgbMain()
     gSoftResetDisabled = FALSE;
     gHelpSystemEnabled = FALSE;
 
-    sub_80F50F4();
+    SetNotInSaveFailedScreen();
 
     AGBPrintInit();
 
@@ -186,7 +186,7 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-    if (!sub_80F5118() && !RunHelpSystemCallback())
+    if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
     {
         if (gMain.callback1)
             gMain.callback1();

@@ -112,8 +112,8 @@ extern const u8 gText_OhNoICantBuyThat[];
 extern const u8 gText_HowManyWouldYouLikeToSell[];
 extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
 extern const u8 gText_TurnedOverItemsWorthYen[];
-extern const u8 gPokeDudeText_TMTypes[];
-extern const u8 gPokeDudeText_ReadTMDescription[];
+extern const u8 gPokedudeText_TMTypes[];
+extern const u8 gPokedudeText_ReadTMDescription[];
 extern const u8 gFameCheckerText_Cancel[];
 extern const u8 gFameCheckerText_ListMenuCursor[];
 extern const u8 gFameCheckerText_FameCheckerWillBeClosed[];
@@ -134,7 +134,7 @@ extern const u8 gTeachyTvString_CatchPkmn[];
 extern const u8 gTeachyTvString_AboutTMs[];
 extern const u8 gTeachyTvString_RegisterItem[];
 extern const u8 gTeachyTvString_Cancel[];
-extern const u8 gTeachyTvText_PokeDudeSaysHello[];
+extern const u8 gTeachyTvText_PokedudeSaysHello[];
 extern const u8 gTeachyTvText_BattleScript1[];
 extern const u8 gTeachyTvText_StatusScript1[];
 extern const u8 gTeachyTvText_MatchupsScript1[];
@@ -1032,5 +1032,28 @@ extern const u8 gText_RegionMap_AreaDesc_TanobyRuins[];
 extern const u8 gText_RegionMap_AreaDesc_AlteringCave[];
 extern const u8 gText_RegionMap_AreaDesc_PatternBush[];
 extern const u8 gText_RegionMap_AreaDesc_DottedHole[];
+
+// save_failed_screen
+extern const u8 gText_SaveFailedScreen_CheckingBackupMemory[];
+extern const u8 gText_SaveFailedScreen_BackupMemoryDamaged[];
+extern const u8 gText_SaveFailedScreen_SaveCompleted[];
+
+// bag
+extern const u8 gText_DepositItem[];
+
+// item_menu
+extern const u8 gOtherText_Register[];
+extern const u8 gOtherText_Walk[];
+extern const u8 gOtherText_Check[];
+extern const u8 gOtherText_Open[];
+extern const u8 gOtherText_Deselect[];
+extern const u8 gText_Items2[];
+extern const u8 gText_PokeBalls2[];
+extern const u8 gText_KeyItems2[];
+extern const u8 gText_CloseBag[];
+extern const u8 gText_CantWriteMailHere[];
+extern const u8 gText_DepositHowManyStrVars1[];
+extern const u8 gText_DepositedStrVar2StrVar1s[];
+extern const u8 gText_NoRoomToStoreItems[];
 
 #endif //GUARD_STRINGS_H

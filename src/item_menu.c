@@ -15,6 +15,7 @@
 #include "mail_data.h"
 #include "menu.h"
 #include "menu_indicators.h"
+#include "money.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -113,7 +114,15 @@ void sub_810A52C(void);
 void sub_810A540(void);
 void sub_810A554(void);
 void sub_810A568(u8 taskId);
+void sub_810A654(void);
+void sub_810A668(void);
+void sub_810A67C(void);
+void sub_810A690(u8 taskId);
+void sub_810A70C(u8 taskId);
 void sub_810A720(u8 taskId);
+void sub_810A770(u8 taskId);
+void sub_810A834(s32 price);
+void sub_810A85C(u8 taskId);
 void sub_810A940(u8 taskId);
 void sub_810AB40(u8 taskId);
 bool8 sub_810ADAC(void);
@@ -1748,4 +1757,101 @@ void sub_810A540(void)
 void sub_810A554(void)
 {
     GoToBagMenu(4, 3, sub_808CE60);
+}
+
+void sub_810A568(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (gSpecialVar_ItemId == ITEM_TM_CASE)
+    {
+        ItemMenu_SetExitCallback(sub_810A654);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
+    {
+        ItemMenu_SetExitCallback(sub_810A668);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (itemid_get_market_price(gSpecialVar_ItemId) == 0)
+    {
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
+        DisplayItemMessageInBag(taskId, sub_80BF8E4(), gStringVar4, sub_810A1F8);
+    }
+    else
+    {
+        data[8] = 1;
+        if (data[2] == 1)
+        {
+            sub_810BB40();
+            sub_810A690(taskId);
+        }
+        else
+        {
+            if (data[2] > 99)
+                data[2] = 99;
+            CopyItemName(gSpecialVar_ItemId, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
+            DisplayItemMessageInBag(taskId, sub_80BF8E4(), gStringVar4, sub_810A770);
+        }
+    }
+}
+
+void sub_810A654(void)
+{
+    InitTMCase(2, sub_810A67C, FALSE);
+}
+
+void sub_810A668(void)
+{
+    InitBerryPouch(2, sub_810A67C, FALSE);
+}
+
+void sub_810A67C(void)
+{
+    GoToBagMenu(2, 3, CB2_ReturnToField);
+}
+
+void sub_810A690(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    ConvertIntToDecimalStringN(gStringVar3, itemid_get_market_price(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
+    DisplayItemMessageInBag(taskId, sub_80BF8E4(), gStringVar4, sub_810A70C);
+}
+
+void sub_810A70C(u8 taskId)
+{
+    sub_810BB14(taskId, &gUnknown_8452F58);
+}
+
+void sub_810A720(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_810BA3C(2);
+    sub_810BA9C(5);
+    PutWindowTilemap(2);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    bag_menu_print_cursor_(data[0], 1);
+    sub_810910C(taskId);
+}
+
+void sub_810A770(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 r4 = sub_810B9DC(0, 1);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    sub_810B8F0(r4, 0, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
+    sub_810A834(itemid_get_market_price(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1])) / 2 * data[8]);
+    sub_810BB40();
+    sub_8108908();
+    gTasks[taskId].func = sub_810A85C;
+}
+
+void sub_810A834(s32 amount)
+{
+    PrintMoneyAmount(sub_810BAD8(0), 56, 10, amount, 0);
 }

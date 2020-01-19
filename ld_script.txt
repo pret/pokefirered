@@ -519,7 +519,6 @@ SECTIONS {
         data/pokedex_screen.o(.rodata);
         src/list_menu.o(.rodata);
         src/item_menu.o(.rodata);
-        data/item_menu.o(.rodata);
         src/save_location.o(.rodata);
         src/bag.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);

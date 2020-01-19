@@ -1047,6 +1047,7 @@ extern const u8 gOtherText_Deselect[];
 extern const u8 gText_Items2[];
 extern const u8 gText_PokeBalls2[];
 extern const u8 gText_KeyItems2[];
-extern const u8 gUnknown_84162F5[];
+extern const u8 gText_CloseBag[];
+extern const u8 gText_CantWriteMailHere[];
 
 #endif //GUARD_STRINGS_H

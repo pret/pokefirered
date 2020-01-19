@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "bag.h"
 #include "battle_controllers.h"
+#include "berry_pouch.h"
 #include "decompress.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
@@ -16,8 +17,11 @@
 #include "menu_indicators.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "party_menu.h"
+#include "pokemon_storage_system.h"
 #include "scanline_effect.h"
 #include "strings.h"
+#include "tm_case.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 
@@ -85,16 +89,29 @@ void sub_81095AC(u8 taskId, u32 itemIndex);
 void sub_810967C(u8 taskId, u32 itemIndex);
 void sub_8109854(u8 a0);
 void sub_8109BB8(u8 taskId);
+void sub_8109BE4(u8 taskId);
 void Task_ItemMenuAction_Use(u8 taskId);
 void Task_ItemMenuAction_Toss(u8 taskId);
+void sub_8109D38(u8 taskId);
+void sub_8109DB0(u8 taskId);
+void sub_8109DEC(u8 taskId);
+void sub_8109EA8(u8 taskId);
+void sub_8109F44(u8 taskId);
 void Task_ItemMenuAction_ToggleSelect(u8 taskId);
 void Task_ItemMenuAction_Give(u8 taskId);
+void sub_810A170(u8 taskId);
 void Task_ItemMenuAction_Cancel(u8 taskId);
-void sub_8109DB0(u8 taskId);
-void sub_8109EA8(u8 taskId);
+void sub_810A18C(u8 taskId);
+void sub_810A1D0(u8 taskId);
 void sub_810A324(u8 taskId);
 void sub_810A370(u8 taskId);
+void sub_810A434(void);
+void sub_810A448(void);
+void sub_810A45C(void);
 void sub_810A468(u8 taskId);
+void sub_810A52C(void);
+void sub_810A540(void);
+void sub_810A554(void);
 void sub_810A568(u8 taskId);
 void sub_810A720(u8 taskId);
 void sub_810A940(u8 taskId);
@@ -162,17 +179,99 @@ const struct MenuAction gUnknown_8452EB8[] = {
     [ITEMMENUACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
-extern const u8 gUnknown_8452F18[][4];
-extern const u8 gUnknown_8452F24[];
-extern const u8 gUnknown_8452F28[][2];
-extern const u8 gUnknown_8452F2E[];
-extern const u8 gUnknown_8452F30[];
-extern const u8 gUnknown_8452F32[];
-extern const TaskFunc gUnknown_8452F34[];
-extern const u8 gUnknown_8452F60[];
-extern const u8 gUnknown_8452F66[];
-extern const struct ScrollArrowsTemplate gUnknown_8452F6C;
-extern const u8 gUnknown_8452F7C[];
+const u8 gUnknown_8452F18[][4] = {
+    {
+        ITEMMENUACTION_USE,
+        ITEMMENUACTION_GIVE,
+        ITEMMENUACTION_TOSS,
+        ITEMMENUACTION_CANCEL
+    }, {
+        ITEMMENUACTION_USE,
+        ITEMMENUACTION_REGISTER,
+        ITEMMENUACTION_CANCEL,
+        ITEMMENUACTION_DUMMY
+    }, {
+        ITEMMENUACTION_GIVE,
+        ITEMMENUACTION_TOSS,
+        ITEMMENUACTION_CANCEL,
+        ITEMMENUACTION_DUMMY
+    }
+};
+
+const u8 gUnknown_8452F24[] = {
+    ITEMMENUACTION_CHECK,
+    ITEMMENUACTION_GIVE,
+    ITEMMENUACTION_TOSS,
+    ITEMMENUACTION_CANCEL
+};
+
+const u8 gUnknown_8452F28[][2] = {
+    {
+        ITEMMENUACTION_GIVE,
+        ITEMMENUACTION_CANCEL
+    }, {
+        ITEMMENUACTION_CANCEL,
+        ITEMMENUACTION_DUMMY
+    }, {
+        ITEMMENUACTION_GIVE,
+        ITEMMENUACTION_CANCEL
+    }
+};
+
+const u8 gUnknown_8452F2E[] = {
+    ITEMMENUACTION_OPEN,
+    ITEMMENUACTION_CANCEL
+};
+
+const u8 gUnknown_8452F30[] = {
+    ITEMMENUACTION_BATTLE_USE,
+    ITEMMENUACTION_CANCEL
+};
+
+const u8 gUnknown_8452F32[] = {
+    ITEMMENUACTION_CANCEL,
+    ITEMMENUACTION_DUMMY
+};
+
+const TaskFunc gUnknown_8452F34[] = {
+    sub_8109BB8,
+    sub_810A370,
+    sub_810A568,
+    sub_810AB40,
+    sub_810A468,
+    sub_8109BB8,
+    NULL
+};
+
+const struct YesNoFuncTable gUnknown_8452F50 = {
+    sub_8109EA8,
+    sub_8109DB0
+};
+
+const struct YesNoFuncTable gUnknown_8452F58 = {
+    sub_810A940,
+    sub_810A720
+};
+
+const u8 gUnknown_8452F60[] = _("{COLOR_HIGHLIGHT_SHADOW RED TRANSPARENT GREEN}");
+
+const u8 gUnknown_8452F66[] = _("{COLOR_HIGHLIGHT_SHADOW LIGHT_GRAY TRANSPARENT BLACK}");
+
+const struct ScrollArrowsTemplate gUnknown_8452F6C = {
+    .firstArrowType = SCROLL_ARROW_LEFT,
+    .firstX = 8,
+    .firstY = 72,
+    .secondArrowType = SCROLL_ARROW_RIGHT,
+    .secondX = 72,
+    .secondY = 72,
+    .fullyUpThreshold = 0,
+    .fullyDownThreshold = 2,
+    .tileTag = 111,
+    .palTag = 111,
+    .palNum = 0,
+};
+
+const u8 gUnknown_8452F7C[] = INCBIN_U8("graphics/interface/select_button.4bpp");
 
 void GoToBagMenu(u8 location, u8 a1, MainCallback a2)
 {
@@ -620,7 +719,7 @@ void sub_8108818(s32 itemIndex)
     if (itemIndex != gUnknown_203AD10->nItems[gUnknown_203ACFC.pocket])
         description = ItemId_GetDescription(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, itemIndex));
     else
-        description = gUnknown_84162F5;
+        description = gText_CloseBag;
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     sub_810B8F0(1, 2, description, 0, 3, 2, 0, 0, 0);
 }
@@ -941,9 +1040,9 @@ void sub_8108F0C(u8 taskId)
     ListMenuGetScrollAndRow(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
     switch (input)
     {
-    case -1:
+    case LIST_NOTHING_CHOSEN:
         return;
-    case -2:
+    case LIST_CANCEL:
         PlaySE(SE_SELECT);
         gSpecialVar_ItemId = ITEM_NONE;
         sub_8108CB4();
@@ -1123,9 +1222,9 @@ void sub_81094B0(u8 taskId)
     }
     switch (input)
     {
-    case -1:
+    case LIST_NOTHING_CHOSEN:
         return;
-    case -2:
+    case LIST_CANCEL:
         PlaySE(SE_SELECT);
         gUnknown_203AD10->field_04 = 0xFF;
         ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
@@ -1202,7 +1301,7 @@ void sub_8109854(u8 a0)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-void sub_8109890(void)
+void sub_8109890(u8 taskId)
 {
     u8 r6;
     u8 r4;
@@ -1300,4 +1399,353 @@ void sub_8109890(void)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
     sub_810B8F0(r4, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+}
+
+void sub_8109BB8(u8 taskId)
+{
+    sub_8109890(taskId);
+    gTasks[taskId].func = sub_8109BE4;
+}
+
+void sub_8109BE4(u8 taskId)
+{
+    s8 input;
+    if ((u8)sub_80BF72C() != TRUE)
+    {
+        input = Menu_ProcessInputNoWrapAround();
+        switch (input)
+        {
+        case -1:
+            PlaySE(SE_SELECT);
+            gUnknown_8452EB8[ITEMMENUACTION_CANCEL].func.void_u8(taskId);
+            break;
+        case -2:
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            gUnknown_8452EB8[gUnknown_203AD24[input]].func.void_u8(taskId);
+            break;
+        }
+    }
+}
+
+void Task_ItemMenuAction_Use(u8 taskId)
+{
+    if (ItemId_GetFieldFunc(gSpecialVar_ItemId) != NULL)
+    {
+        sub_810BA3C(10);
+        sub_810BA3C(6);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == 1)
+            sub_810A170(taskId);
+        else
+            ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
+    }
+}
+
+void Task_ItemMenuAction_Toss(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    ClearWindowTilemap(sub_810BAD8(10));
+    ClearWindowTilemap(sub_810BAD8(6));
+    sub_810BA3C(10);
+    sub_810BA3C(6);
+    PutWindowTilemap(0);
+    data[8] = 1;
+    if (data[2] == 1)
+    {
+        sub_8109D38(taskId);
+    }
+    else
+    {
+        sub_810971C(data[1], gText_TossOutHowManyStrVar1s);
+        gTasks[taskId].func = sub_8109DEC;
+    }
+}
+
+void sub_8109D38(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
+    sub_810B8F0(sub_810B9DC(6, 1), 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    sub_810BAE8(taskId, &gUnknown_8452F50);
+}
+
+void sub_8109DB0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_810BA3C(6);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    bag_menu_print_cursor_(data[0], 1);
+    sub_810910C(taskId);
+}
+
+void sub_8109DEC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    {
+        sub_81097E4(data[8], 3);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        ClearWindowTilemap(sub_810BAD8(6));
+        sub_810BA3C(6);
+        sub_810BA3C(0);
+        ScheduleBgCopyTilemapToVram(0);
+        sub_8108978();
+        sub_8109D38(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810BA3C(6);
+        sub_810BA3C(0);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        bag_menu_print_cursor_(data[0], 1);
+        sub_8108978();
+        sub_810910C(taskId);
+    }
+}
+
+void sub_8109EA8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_810BA3C(6);
+    CopyItemName(BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1]), gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
+    sub_810B8F0(sub_810B9DC(6, 3), 2, gStringVar4, 0, 2, 1, 0, 0, 1);
+    gTasks[taskId].func = sub_8109F44;
+}
+
+void sub_8109F44(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        RemoveBagItem(gSpecialVar_ItemId, data[8]);
+        sub_810BA3C(6);
+        DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        sub_8108DC8(gUnknown_203ACFC.pocket);
+        sub_81089F4(gUnknown_203ACFC.pocket);
+        sub_810842C(gUnknown_203ACFC.pocket);
+        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+        PutWindowTilemap(1);
+        ScheduleBgCopyTilemapToVram(0);
+        bag_menu_print_cursor_(data[0], 1);
+        sub_810910C(taskId);
+    }
+}
+
+void Task_ItemMenuAction_ToggleSelect(u8 taskId)
+{
+    u16 itemId;
+    s16 *data = gTasks[taskId].data;
+    itemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1]);
+    if (gSaveBlock1Ptr->registeredItem == itemId)
+        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    else
+        gSaveBlock1Ptr->registeredItem = itemId;
+
+    DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    sub_810842C(gUnknown_203ACFC.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    CopyWindowToVram(0, 1);
+    Task_ItemMenuAction_Cancel(taskId);
+}
+
+void Task_ItemMenuAction_Give(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 itemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1]);
+    sub_810BA3C(10);
+    sub_810BA3C(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    CopyWindowToVram(0, 1);
+    if (!CanWriteMailHere(itemId))
+        DisplayItemMessageInBag(taskId, 2, gText_CantWriteMailHere, sub_810A1D0);
+    else if (!itemid_is_unique(itemId))
+    {
+        if (CalculatePlayerPartyCount() == 0)
+        {
+            sub_810A170(taskId);
+        }
+        else
+        {
+            gUnknown_203AD10->exitCB = CB2_ChooseMonToGiveItem;
+            gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+        }
+    }
+    else
+        sub_810A18C(taskId);
+}
+
+void sub_810A170(u8 taskId)
+{
+    DisplayItemMessageInBag(taskId, 2, gText_ThereIsNoPokemon, sub_810A1D0);
+}
+
+void sub_810A18C(u8 taskId)
+{
+    CopyItemName(gSpecialVar_ItemId, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
+    DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1D0);
+}
+
+void sub_810A1D0(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sub_810A1F8(taskId);
+    }
+}
+
+void sub_810A1F8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    sub_810BA9C(5);
+    DestroyListMenuTask(data[0], &gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], &gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    sub_8108DC8(gUnknown_203ACFC.pocket);
+    sub_81089F4(gUnknown_203ACFC.pocket);
+    sub_810842C(gUnknown_203ACFC.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gUnknown_203ACFC.cursorPos[gUnknown_203ACFC.pocket], gUnknown_203ACFC.itemsAbove[gUnknown_203ACFC.pocket]);
+    ScheduleBgCopyTilemapToVram(0);
+    bag_menu_print_cursor_(data[0], 1);
+    sub_810910C(taskId);
+}
+
+void sub_810A288(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 itemsAbove;
+    u16 cursorPos;
+    ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
+    sub_8108818(cursorPos + itemsAbove);
+    PutWindowTilemap(0);
+    ScheduleBgCopyTilemapToVram(0);
+    bag_menu_print_cursor_(data[0], 1);
+    sub_810910C(taskId);
+}
+
+void Task_ItemMenuAction_Cancel(u8 taskId)
+{
+    sub_810BA3C(10);
+    sub_810BA3C(6);
+    PutWindowTilemap(0);
+    PutWindowTilemap(1);
+    ScheduleBgCopyTilemapToVram(0);
+    bag_menu_print_cursor_(gTasks[taskId].data[0], 1);
+    sub_810910C(taskId);
+}
+
+void sub_810A324(u8 taskId)
+{
+    if (ItemId_GetBattleFunc(gSpecialVar_ItemId) != NULL)
+    {
+        sub_810BA3C(10);
+        sub_810BA3C(6);
+        PutWindowTilemap(0);
+        PutWindowTilemap(1);
+        CopyWindowToVram(0, 1);
+        ItemId_GetBattleFunc(gSpecialVar_ItemId)(taskId);
+    }
+}
+
+void sub_810A370(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 itemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1]);
+    if (!CanWriteMailHere(itemId))
+    {
+        DisplayItemMessageInBag(taskId, 2, gText_CantWriteMailHere, sub_810A1D0);
+    }
+    else if (itemId == ITEM_TM_CASE)
+    {
+        ItemMenu_SetExitCallback(sub_810A434);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (itemId == ITEM_BERRY_POUCH)
+    {
+        ItemMenu_SetExitCallback(sub_810A448);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (gUnknown_203ACFC.pocket != POCKET_KEY_ITEMS - 1 && !itemid_is_unique(itemId))
+    {
+        sub_8108CB4();
+        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+    }
+    else
+    {
+        sub_810A18C(taskId);
+    }
+}
+
+void sub_810A434(void)
+{
+    InitTMCase(1, sub_810A45C, FALSE);
+}
+
+void sub_810A448(void)
+{
+    InitBerryPouch(1, sub_810A45C, FALSE);
+}
+
+void sub_810A45C(void)
+{
+    CB2_SelectBagItemToGive();
+}
+
+void sub_810A468(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 itemId = BagGetItemIdByPocketPosition(gUnknown_203ACFC.pocket + 1, data[1]);
+    if (ItemIsMail(itemId) == TRUE)
+    {
+        DisplayItemMessageInBag(taskId, 2, gText_CantWriteMailHere, sub_810A1D0);
+    }
+    else if (itemId == ITEM_TM_CASE)
+    {
+        ItemMenu_SetExitCallback(sub_810A52C);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (itemId == ITEM_BERRY_POUCH)
+    {
+        ItemMenu_SetExitCallback(sub_810A540);
+        ItemMenu_StartFadeToExitCallback(taskId);
+    }
+    else if (gUnknown_203ACFC.pocket != POCKET_KEY_ITEMS - 1 && !itemid_is_unique(itemId))
+    {
+        sub_8108CB4();
+        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+    }
+    else
+    {
+        sub_810A18C(taskId);
+    }
+}
+
+void sub_810A52C(void)
+{
+    InitTMCase(3, sub_810A554, FALSE);
+}
+
+void sub_810A540(void)
+{
+    InitBerryPouch(3, sub_810A554, FALSE);
+}
+
+void sub_810A554(void)
+{
+    GoToBagMenu(4, 3, sub_808CE60);
 }

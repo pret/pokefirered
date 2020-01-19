@@ -567,7 +567,7 @@ gText_KeyItems2:: @ 0x84162DE
 gText_DepositItem:: @ 84162E8
 	.string "DEPOSIT ITEM$"
 
-gUnknown_84162F5:: @ 84162F5
+gText_CloseBag:: @ 84162F5
 	.string "CLOSE BAG$"
 
 gOtherText_StrVar1:: @ 84162FF
@@ -577,7 +577,7 @@ gText_IsSelected:: @ 8416301
 	.string " is\n"
 	.string "selected.$"
 
-gUnknown_841630F:: @ 841630F
+gText_CantWriteMailHere:: @ 841630F
 	.string "You can't write\n"
 	.string "MAIL here.$"
 

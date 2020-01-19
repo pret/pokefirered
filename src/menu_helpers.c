@@ -107,7 +107,7 @@ bool8 itemid_link_can_give_berry(u16 itemId)
         return FALSE;
 }
 
-bool8 itemid_80BF6D8_mail_related(u16 itemId)
+bool8 CanWriteMailHere(u16 itemId)
 {
     if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
         return TRUE;

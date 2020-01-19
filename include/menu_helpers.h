@@ -27,7 +27,7 @@ void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *templa
 u8 GetLRKeysState(void);
 u8 GetLRKeysPressedAndHeld(void);
 bool8 itemid_link_can_give_berry(u16 itemId);
-bool8 itemid_80BF6D8_mail_related(u16 itemId);
+bool8 CanWriteMailHere(u16 itemId);
 void ResetVramOamAndBgCntRegs(void);
 
 #endif //GUARD_MENU_HELPERS_H

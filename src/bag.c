@@ -21,7 +21,7 @@ static const u8 sTextColors[][3] = {
     {0, 8, 9}
 };
 
-const struct WindowTemplate sDefaultBagWindowsStd[] = {
+static const struct WindowTemplate sDefaultBagWindowsStd[] = {
     {
         .bg = 0,
         .tilemapLeft = 0x0b,
@@ -49,7 +49,7 @@ const struct WindowTemplate sDefaultBagWindowsStd[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
+static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
     {
         .bg = 0,
         .tilemapLeft = 0x0b,
@@ -77,7 +77,7 @@ const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct WindowTemplate sWindowTemplates[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 24,

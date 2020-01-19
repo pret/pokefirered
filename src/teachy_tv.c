@@ -1093,9 +1093,9 @@ static void TTVcmd_TaskBattleOrFadeByOptionChosen(u8 taskId)
 static void TeachyTvSetupBagItemsByOptionChosen(void)
 {
     if (sStaticResources.whichScript == TTVSCR_TMS)
-        InitPokeDudeBag(10);
+        InitPokeDudeBag(ITEMMENULOCATION_TTVSCR_TMS);
     else
-        InitPokeDudeBag(9);
+        InitPokeDudeBag(ITEMMENULOCATION_TTVSCR_REGISTER);
 }
 
 static void TeachyTvPostBattleFadeControl(u8 taskId)

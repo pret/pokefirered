@@ -20,17 +20,23 @@ EWRAM_DATA u8 gUnknown_203B058 = 0;
 EWRAM_DATA u8 gUnknown_203B059 = 0;
 
 IWRAM_DATA struct UnkStruct_Leader *gUnknown_3002024;
+IWRAM_DATA struct UnkStruct_Group *gUnknown_3002028;
 
 void sub_8115A68(u8 taskId);
 void sub_81161E4(struct UnkStruct_Leader * leader);
 bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
 u8 sub_8116524(struct UnkStruct_Main0 * a0);
 u8 sub_81165E8(struct UnkStruct_Main0 * a0);
+void sub_8116738(u8 taskId);
+u32 sub_8116D10(struct UnkStruct_Group * group, s32 id);
+void sub_8116D60(struct UnkStruct_Group * group, s32 id);
+u8 sub_8116FE4(void);
 void sub_8117990(void);
 u16 sub_8118658(const u8 *data);
 u8 sub_811A054(struct UnkStruct_Main4 *arg0, u32 arg1);
 bool8 sub_811A0F8(u8 *textState, const u8 *str);
 s8 sub_811A14C(u8 *dest, bool32 arg1);
+void sub_811A41C(void);
 void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count);
 void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count);
@@ -44,7 +50,11 @@ extern const u32 gUnknown_8456CD8[];
 extern const struct WindowTemplate gUnknown_8456CFC;
 extern const struct WindowTemplate gUnknown_8456D04;
 extern const struct ListMenuTemplate gUnknown_8456D34;
+extern const struct WindowTemplate gUnknown_8456D4C;
+extern const struct WindowTemplate gUnknown_8456D54;
+extern const struct ListMenuTemplate gUnknown_8456DDC;
 extern const struct UnkStruct_Shared gUnknown_8457034;
+extern const u8 gUnknown_84570C8[];
 extern const u8 gUnknown_84571B4[];
 extern const u8 gUnknown_8457234[];
 extern const u8 gUnknown_8457264[];
@@ -56,12 +66,18 @@ extern const u8 gUnknown_84574EC[];
 extern const u8 gUnknown_8457514[];
 extern const u8 gUnknown_8457530[];
 extern const u8 gUnknown_8457554[];
+extern const u8 *const gUnknown_8457608[];
 extern const u8 gUnknown_8457610[];
 extern const u8 *const gUnknown_845767C[];
 extern const u8 gUnknown_84576AC[];
 extern const u8 gUnknown_84576C4[];
+extern const u8 gUnknown_8457700[];
+extern const u8 gUnknown_845771C[];
+extern const u8 *const gUnknown_8457754[];
 extern const u8 gUnknown_8457E28[];
 extern const u8 gUnknown_8457E44[];
+extern const u8 gUnknown_8458FC8[];
+extern const u8 *const gUnknown_84591B8[];
 extern const u8 gUnknown_8459238[];
 extern const u8 gUnknown_8459250[];
 
@@ -643,4 +659,261 @@ u8 sub_81165E8(struct UnkStruct_Main0 *arg0)
     }
 
     return ret;
+}
+
+void TryJoinLinkGroup(void)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_8116738, 0);
+    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_3002028 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    gSpecialVar_Result = 0;
+}
+
+void sub_8116738(u8 taskId)
+{
+    s32 id;
+    struct UnkStruct_Group *data = gUnknown_203B05C.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_80FAF58(gUnknown_84570C8[gSpecialVar_0x8004], 0, 0);
+        gUnknown_203B058 = gUnknown_84570C8[gSpecialVar_0x8004];
+        sub_800B1F4();
+        OpenLink();
+        sub_80FBBD8();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        if (sub_811A0F8(&data->textState, gUnknown_84591B8[gSpecialVar_0x8004]))
+            data->state = 2;
+        break;
+    case 2:
+        sub_811A650(data->field_4, 4);
+        sub_811A5E4(data->field_0->arr, 16);
+        data->field_11 = sub_811A054(data->field_4, gSpecialVar_0x8004);
+        data->field_C = AddWindow(&gUnknown_8456CD0);
+        data->listWindowId = AddWindow(&gUnknown_8456D4C);
+        data->field_D = AddWindow(&gUnknown_8456D54);
+
+        FillWindowPixelBuffer(data->field_C, PIXEL_FILL(2));
+        sub_811A444(data->field_C, 0, gUnknown_8458FC8, 8, 2, 4);
+        PutWindowTilemap(data->field_C);
+        CopyWindowToVram(data->field_C, 2);
+
+        DrawStdWindowFrame(data->listWindowId, FALSE);
+        gMultiuseListMenuTemplate = gUnknown_8456DDC;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+        DrawStdWindowFrame(data->field_D, FALSE);
+        PutWindowTilemap(data->field_D);
+        sub_8115924(data->field_D);
+        CopyWindowToVram(data->field_D, 2);
+
+        CopyBgTilemapBufferToVram(0);
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8116FE4();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+            RedrawListMenu(data->listTaskId);
+            break;
+        case 0:
+            id = ListMenu_ProcessInput(data->listTaskId);
+            if (gMain.newKeys & A_BUTTON && id != -1)
+            {
+                // this unused variable along with the assignment is needed to match
+                u32 unusedVar;
+                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
+                {
+                    u32 var = sub_8116D10(data, id);
+                    if (var == 0)
+                    {
+                        sub_8116D60(data, id);
+                        data->state = 5;
+                        PlaySE(SE_PN_ON);
+                    }
+                    else
+                    {
+                        StringCopy(gStringVar4, gUnknown_8457608[var - 1]);
+                        data->state = 18;
+                        PlaySE(SE_PN_ON);
+                    }
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                data->state = 10;
+            }
+            break;
+        default:
+            RedrawListMenu(data->listTaskId);
+            break;
+        }
+        break;
+    case 5:
+        sub_811631C(gStringVar4, gUnknown_203B058);
+        if (sub_811A0F8(&data->textState, gStringVar4))
+        {
+            sub_8018404(gStringVar1, data->field_0->arr[data->field_F]);
+            data->state = 6;
+        }
+        break;
+    case 6:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_203B058 = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            sub_80FB9E4(0, 0);
+            switch (gUnknown_203B058)
+            {
+            case 1 ... 5:
+            case 9 ... 11:
+            case 13 ... 14:
+            case 21 ... 22:
+                data->state = 20;
+                break;
+            }
+        }
+
+        switch (sub_80FB9F4())
+        {
+        case 1:
+            data->state = 12;
+            break;
+        case 2:
+        case 6:
+        case 9:
+            data->state = 14;
+            break;
+        case 5:
+            sub_81163B0(gStringVar4, gUnknown_203B058);
+            if (sub_811A0F8(&data->textState, gStringVar4))
+            {
+                sub_80FB9E4(7, 0);
+                StringCopy(gStringVar1, gUnknown_8456C74[gUnknown_203B058]);
+                StringExpandPlaceholders(gStringVar4, gUnknown_8457700);
+            }
+            break;
+        case 7:
+            if (data->field_15 > 0xF0)
+            {
+                if (sub_811A0F8(&data->textState, gStringVar4))
+                {
+                    sub_80FB9E4(12, 0);
+                    data->field_15 = 0;
+                }
+            }
+            else
+            {
+                data->field_15++;
+            }
+            break;
+        }
+
+        if (!sub_80FB9F4() && gMain.newKeys & B_BUTTON)
+            data->state = 7;
+        break;
+    case 7:
+        if (sub_811A0F8(&data->textState, gUnknown_845771C))
+            data->state = 8;
+        break;
+    case 8:
+        switch (sub_811A14C(&data->textState, sub_80FB9F4()))
+        {
+        case 0:
+            sub_80FA6BC();
+            data->state = 9;
+            RedrawListMenu(data->listTaskId);
+            break;
+        case 1:
+        case -1:
+            data->state = 5;
+            RedrawListMenu(data->listTaskId);
+            break;
+        case -3:
+            data->state = 6;
+            RedrawListMenu(data->listTaskId);
+            break;
+        }
+        break;
+    case 9:
+        if (sub_80FB9F4())
+            data->state = 6;
+        break;
+    case 10:
+    case 12:
+    case 14:
+    case 18:
+    case 20:
+        ClearWindowTilemap(data->field_D);
+        ClearStdWindowAndFrame(data->field_D, FALSE);
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        ClearWindowTilemap(data->field_C);
+        ClearStdWindowAndFrame(data->listWindowId, FALSE);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->field_D);
+        RemoveWindow(data->listWindowId);
+        RemoveWindow(data->field_C);
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 13:
+        DestroyWirelessStatusIndicatorSprite();
+        if (sub_811A0F8(&data->textState, gUnknown_8457754[sub_80FB9F4()]))
+        {
+            gSpecialVar_Result = 6;
+            data->state = 23;
+        }
+        break;
+    case 11:
+        DestroyWirelessStatusIndicatorSprite();
+        gSpecialVar_Result = 5;
+        data->state = 23;
+        break;
+    case 15:
+        DestroyWirelessStatusIndicatorSprite();
+        if (sub_811A0F8(&data->textState, gUnknown_8457754[sub_80FB9F4()]))
+        {
+            gSpecialVar_Result = 8;
+            data->state = 23;
+        }
+        break;
+    case 19:
+        if (sub_811A0F8(&data->textState, gStringVar4))
+        {
+            gSpecialVar_Result = 8;
+            data->state = 23;
+        }
+        break;
+    case 23:
+        DestroyTask(taskId);
+        sub_811A41C();
+        sub_80F8DC0();
+        break;
+    case 21:
+        sub_8117990();
+        DestroyTask(taskId);
+        break;
+    }
 }

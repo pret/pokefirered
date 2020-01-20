@@ -8,6 +8,12 @@
 #include "script.h"
 #include "task.h"
 #include "union_room.h"
+#include "constants/songs.h"
+
+#define sub_8018404(dest, arg1) ({                                       \
+    StringCopy7(dest, (arg1).unk.playerName);                                   \
+    ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
+})
 
 EWRAM_DATA union UnkUnion_Main gUnknown_203B05C = {};
 EWRAM_DATA u8 gUnknown_203B058 = 0;
@@ -18,6 +24,7 @@ IWRAM_DATA struct UnkStruct_Leader *gUnknown_3002024;
 void sub_8115A68(u8 taskId);
 void sub_81161E4(struct UnkStruct_Leader * leader);
 bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
+u8 sub_8116524(struct UnkStruct_Main0 * a0);
 u8 sub_81165E8(struct UnkStruct_Main0 * a0);
 void sub_8117990(void);
 u16 sub_8118658(const u8 *data);
@@ -27,6 +34,9 @@ s8 sub_811A14C(u8 *dest, bool32 arg1);
 void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count);
 void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count);
+u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1);
+u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2);
+void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id);
 
 extern const u8 *const gUnknown_8456C74[];
 extern const struct WindowTemplate gUnknown_8456CD0;
@@ -34,6 +44,7 @@ extern const u32 gUnknown_8456CD8[];
 extern const struct WindowTemplate gUnknown_8456CFC;
 extern const struct WindowTemplate gUnknown_8456D04;
 extern const struct ListMenuTemplate gUnknown_8456D34;
+extern const struct UnkStruct_Shared gUnknown_8457034;
 extern const u8 gUnknown_84571B4[];
 extern const u8 gUnknown_8457234[];
 extern const u8 gUnknown_8457264[];
@@ -278,8 +289,7 @@ void sub_8115A68(u8 taskId)
                     }
                     else
                     {
-                        StringCopy7(gStringVar1, data->field_0->arr[data->field_13 - 1].unk.playerName);
-                        ConvertInternationalString(gStringVar1, data->field_0->arr[data->field_13 - 1].unk.field_0.unk_00.unk_00_0);
+                        sub_8018404(gStringVar1, data->field_0->arr[data->field_13 - 1]);
                         StringExpandPlaceholders(gStringVar4, gUnknown_8457554);
                         data->state = 13;
                     }
@@ -508,4 +518,129 @@ void sub_81163B0(u8 *dst, u8 caseId)
         StringExpandPlaceholders(dst, gUnknown_84576C4);
         break;
     }
+}
+
+bool8 sub_8116444(struct UnkStruct_Leader *data, u32 arg1, u32 arg2)
+{
+    switch (sub_8116524(data->field_0))
+    {
+    case 1:
+        PlaySE(SE_PC_LOGIN);
+        RedrawListMenu(data->listTaskId);
+        sub_8018404(gStringVar2, data->field_0->arr[data->field_13]);
+        sub_8116244(gStringVar4, gUnknown_203B058);
+        data->state = arg1;
+        break;
+    case 2:
+        sub_80FB9E4(0, 0);
+        RedrawListMenu(data->listTaskId);
+        data->state = arg2;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void sub_81164C8(u8 arg0, s32 id, u8 arg2)
+{
+    struct UnkStruct_Leader *data = gUnknown_203B05C.leader;
+    u8 var = 0;
+
+    switch (data->field_0->arr[id].field_1A_0)
+    {
+    case 1:
+        if (data->field_0->arr[id].field_1B != 0)
+            var = 2;
+        break;
+    case 2:
+        var = 1;
+        break;
+    }
+
+    sub_811A910(arg0, 0, arg2, &data->field_0->arr[id], var, id);
+}
+
+u8 sub_8116524(struct UnkStruct_Main0 *arg0)
+{
+    struct UnkStruct_Leader *data = gUnknown_203B05C.leader;
+    u8 ret = 0;
+    u8 i;
+    s32 id;
+
+    for (i = 1; i < 5; i++)
+    {
+        u16 var = data->field_0->arr[i].field_1A_0;
+        if (var == 1)
+        {
+            id = sub_811A748(&data->field_0->arr[i], data->field_4->arr);
+            if (id != 0xFF)
+            {
+                data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
+                data->field_0->arr[i].field_18 = var;
+            }
+            else
+            {
+                data->field_0->arr[i].field_1A_0 = 2;
+                ret = 2;
+            }
+        }
+    }
+
+    for (id = 0; id < 4; id++)
+        sub_811A798(data->field_0->arr, &data->field_4->arr[id], 5);
+
+    if (ret != 2)
+    {
+        for (id = 0; id < 5; id++)
+        {
+            if (data->field_0->arr[id].field_1B != 0)
+                ret = 1;
+        }
+    }
+
+    return ret;
+}
+
+u8 sub_81165E8(struct UnkStruct_Main0 *arg0)
+{
+    struct UnkStruct_Leader *data = gUnknown_203B05C.leader;
+    u8 copiedCount;
+    s32 i;
+    u8 ret;
+
+    for (i = 0; i < 5; i++)
+        data->field_8->arr[i] = data->field_0->arr[i];
+
+    copiedCount = 0;
+    for (i = 0; i < 5; i++)
+    {
+        if (data->field_8->arr[i].field_1A_0 == 1)
+        {
+            data->field_0->arr[copiedCount] = data->field_8->arr[i];
+            copiedCount++;
+        }
+    }
+
+    ret = copiedCount;
+    for (; copiedCount < 5; copiedCount++)
+    {
+        data->field_0->arr[copiedCount].unk = gUnknown_8457034;
+        data->field_0->arr[copiedCount].field_18 = 0;
+        data->field_0->arr[copiedCount].field_1A_0 = 0;
+        data->field_0->arr[copiedCount].field_1A_1 = 0;
+        data->field_0->arr[copiedCount].field_1B = 0;
+    }
+
+    for (i = 0; i < 5; i++)
+    {
+        if (data->field_0->arr[i].field_1A_0 != 1)
+            continue;
+        if (data->field_0->arr[i].field_1B != 0x40)
+            continue;
+
+        ret = i;
+        break;
+    }
+
+    return ret;
 }

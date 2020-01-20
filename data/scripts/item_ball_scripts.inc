@@ -398,7 +398,7 @@ CeruleanCave_B1F_EventScript_ItemUltraBall:: @ 81BEA95
 	finditem ITEM_ULTRA_BALL
 	end
 
-FuchsiaCity_Building1_EventScript_ItemRareCandy:: @ 81BEAA2
+FuchsiaCity_WardensHouse_EventScript_ItemRareCandy:: @ 81BEAA2
 	finditem ITEM_RARE_CANDY
 	end
 

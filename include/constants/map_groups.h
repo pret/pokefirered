@@ -342,12 +342,12 @@
 // Map Group 11
 #define MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE (0 | (11 << 8))
 #define MAP_FUCHSIA_CITY_MART                 (1 | (11 << 8))
-#define MAP_FUCHSIA_CITY_ZOO_BUILDING         (2 | (11 << 8))
+#define MAP_FUCHSIA_CITY_SAFARI_ZONE_OFFICE   (2 | (11 << 8))
 #define MAP_FUCHSIA_CITY_GYM                  (3 | (11 << 8))
 #define MAP_FUCHSIA_CITY_HOUSE1               (4 | (11 << 8))
 #define MAP_FUCHSIA_CITY_POKEMON_CENTER_1F    (5 | (11 << 8))
 #define MAP_FUCHSIA_CITY_POKEMON_CENTER_2F    (6 | (11 << 8))
-#define MAP_FUCHSIA_CITY_BUILDING1            (7 | (11 << 8))
+#define MAP_FUCHSIA_CITY_WARDENS_HOUSE        (7 | (11 << 8))
 #define MAP_FUCHSIA_CITY_HOUSE2               (8 | (11 << 8))
 #define MAP_FUCHSIA_CITY_HOUSE3               (9 | (11 << 8))
 

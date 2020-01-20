@@ -395,12 +395,12 @@ gStdScriptsEnd::
 	.include "data/maps/CeladonCity_Hotel/scripts.inc"
 	.include "data/maps/FuchsiaCity_SafariZone_Entrance/scripts.inc"
 	.include "data/maps/FuchsiaCity_Mart/scripts.inc"
-	.include "data/maps/FuchsiaCity_ZooBuilding/scripts.inc"
+	.include "data/maps/FuchsiaCity_SafariZone_Office/scripts.inc"
 	.include "data/maps/FuchsiaCity_Gym/scripts.inc"
 	.include "data/maps/FuchsiaCity_House1/scripts.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/FuchsiaCity_Building1/scripts.inc"
+	.include "data/maps/FuchsiaCity_WardensHouse/scripts.inc"
 	.include "data/maps/FuchsiaCity_House2/scripts.inc"
 	.include "data/maps/FuchsiaCity_House3/scripts.inc"
 	.include "data/maps/CinnabarIsland_Gym/scripts.inc"
@@ -710,11 +710,11 @@ gStdScriptsEnd::
 	.include "data/maps/CeladonCity_Hotel/text.inc"
 	.include "data/maps/FuchsiaCity_SafariZone_Entrance/text.inc"
 	.include "data/maps/FuchsiaCity_Mart/text.inc"
-	.include "data/maps/FuchsiaCity_ZooBuilding/text.inc"
+	.include "data/maps/FuchsiaCity_SafariZone_Office/text.inc"
 	.include "data/maps/FuchsiaCity_Gym/text.inc"
 	.include "data/maps/FuchsiaCity_House1/text.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_1F/text.inc"
-	.include "data/maps/FuchsiaCity_Building1/text.inc"
+	.include "data/maps/FuchsiaCity_WardensHouse/text.inc"
 	.include "data/maps/FuchsiaCity_House2/text.inc"
 	.include "data/maps/FuchsiaCity_House3/text.inc"
 	.include "data/maps/CinnabarIsland_Gym/text.inc"
@@ -2325,54 +2325,54 @@ EventScript_1B2DF6:: @ 81B2DF6
 
 @@ Block below consists of at least safari_zone.inc and flavor_text.inc. JP text making it hard to define boundaries
 
-EventScript_SafariWarpOut:: @ 81BFB87
+SafariZone_EventScript_OutOfBallsMidBattle:: @ 81BFB87
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3
 	special ExitSafariMode
 	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
 	end
 
-EventScript_1BFB98:: @ 81BFB98
+SafariZone_EventScript_Exit:: @ 81BFB98
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1
 	special ExitSafariMode
 	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
 	waitstate
 	end
 
-EventScript_SafariRetire:: @ 81BFBAA
+SafariZone_EventScript_RetirePrompt:: @ 81BFBAA
 	lockall
-	msgbox Text_1BFBE9, MSGBOX_YESNO
+	msgbox SafariZone_Text_WouldYouLikeToExit, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_1BFBC0
+	goto_if_eq SafariZone_EventScript_Retire
 	releaseall
 	end
 
-EventScript_1BFBC0:: @ 81BFBC0
-	goto EventScript_1BFB98
+SafariZone_EventScript_Retire:: @ 81BFBC0
+	goto SafariZone_EventScript_Exit
 
-EventScript_SafariTimesUp:: @ 81BFBC5
+SafariZone_EventScript_TimesUp:: @ 81BFBC5
 	lockall
 	playse SE_PINPON
-	msgbox gUnknown_81BFC1B
-	goto EventScript_1BFB98
+	msgbox SafariZone_Text_TimesUp
+	goto SafariZone_EventScript_Exit
 	end
 
-EventScript_SafariOutOfBalls:: @ 81BFBD7
+SafariZone_EventScript_OutOfBalls:: @ 81BFBD7
 	lockall
 	playse SE_PINPON
-	msgbox gUnknown_81BFC53
-	goto EventScript_1BFB98
+	msgbox SafariZone_Text_OutOfBalls
+	goto SafariZone_EventScript_Exit
 	end
 
-Text_1BFBE9:: @ 81BFBE9
+SafariZone_Text_WouldYouLikeToExit:: @ 81BFBE9
 	.string "Would you like to exit the SAFARI\n"
 	.string "ZONE right now?$"
 
-gUnknown_81BFC1B:: @ 81BFC1B
+SafariZone_Text_TimesUp:: @ 81BFC1B
 	.string "PA: Ding-dong!\p"
 	.string "Time's up!\p"
 	.string "PA: Your SAFARI GAME is over!$"
 
-gUnknown_81BFC53:: @ 81BFC53
+SafariZone_Text_OutOfBalls:: @ 81BFC53
 	.string "PA: Ding-dong!\p"
 	.string "You are out of SAFARI BALLS!\p"
 	.string "PA: Your SAFARI GAME is over!$"
@@ -2433,7 +2433,7 @@ Text_1BFE70:: @ 81BFE70
 	.string "ぞんぶんに　おたのしみ　ください！\n"
 	.string "では　いってらっしゃい！$"
 
-gUnknown_81BFEAC:: @ 81BFEAC
+SafariZone_Text_ExcuseMeYourPCBoxIsFull:: @ 81BFEAC
 	.string "Excuse me!\n"
 	.string "Your PC BOX is full.$"
 
@@ -2597,7 +2597,7 @@ Text_1C049D:: @ 81C049D
 	.string "ミナモへ　かえるか？$"
 
 Text_1C04BB:: @ 81C04BB
-	.string "ùÏ! ÉÇñÑ ÒñÉ!$"
+	.string "よし！　かえると　するか！$"
 
 Text_1C04C9:: @ 81C04C9
 	.string "そうかい\n"

@@ -59,6 +59,8 @@
 
 #define NUM_BAG_POCKETS 5
 
+#define MAX_MON_MOVES 4
+
 #define PARTY_SIZE 6
 #define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
 

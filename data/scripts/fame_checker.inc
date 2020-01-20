@@ -110,11 +110,11 @@ FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga:: @ 81ACEB8
 	release
 	end
 
-SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
+SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 5
-	msgbox Text_177C47
+	msgbox SafariZone_West_Text_KogaPatrolsSafariEverySoOften
 	release
 	end
 

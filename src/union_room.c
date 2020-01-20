@@ -37,13 +37,22 @@ extern const struct ListMenuTemplate gUnknown_8456D34;
 extern const u8 gUnknown_84571B4[];
 extern const u8 gUnknown_8457234[];
 extern const u8 gUnknown_8457264[];
+extern const u8 *const gUnknown_845742C[][5];
 extern const u8 gUnknown_845747C[];
+extern const u8 gUnknown_84574A0[];
+extern const u8 gUnknown_84574C4[];
+extern const u8 gUnknown_84574EC[];
 extern const u8 gUnknown_8457514[];
 extern const u8 gUnknown_8457530[];
 extern const u8 gUnknown_8457554[];
 extern const u8 gUnknown_8457610[];
 extern const u8 *const gUnknown_845767C[];
-extern const u8 *const gUnknown_845742C[][5];
+extern const u8 gUnknown_84576AC[];
+extern const u8 gUnknown_84576C4[];
+extern const u8 gUnknown_8457E28[];
+extern const u8 gUnknown_8457E44[];
+extern const u8 gUnknown_8459238[];
+extern const u8 gUnknown_8459250[];
 
 void sub_811586C(u8 windowId, u8 arg1, u8 stringId)
 {
@@ -402,6 +411,101 @@ void sub_8115A68(u8 taskId)
                 DestroyTask(taskId);
             }
         }
+        break;
+    }
+}
+
+void sub_81161E4(struct UnkStruct_Leader *data)
+{
+    ClearWindowTilemap(data->field_11);
+    ClearStdWindowAndFrame(data->field_11, FALSE);
+    DestroyListMenuTask(data->listTaskId, 0, 0);
+    ClearWindowTilemap(data->field_10);
+    ClearStdWindowAndFrame(data->listWindowId, FALSE);
+    CopyBgTilemapBufferToVram(0);
+    RemoveWindow(data->field_11);
+    RemoveWindow(data->listWindowId);
+    RemoveWindow(data->field_10);
+    DestroyTask(data->field_17);
+
+    Free(data->field_8);
+    Free(data->field_0);
+    Free(data->field_4);
+}
+
+void sub_8116244(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+        StringExpandPlaceholders(dst, gUnknown_84574A0);
+        break;
+    case 21:
+    case 22:
+        StringExpandPlaceholders(dst, gUnknown_84574C4);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+        StringExpandPlaceholders(dst, gUnknown_84574EC);
+        break;
+    }
+}
+
+void sub_81162E0(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 65:
+    case 68:
+        StringExpandPlaceholders(dst, gUnknown_8457E28);
+        break;
+    case 69:
+    case 72:
+        StringExpandPlaceholders(dst, gUnknown_8457E44);
+        break;
+    }
+}
+
+void sub_811631C(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+    case 21:
+    case 22:
+        StringExpandPlaceholders(dst, gUnknown_8459238);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+        StringExpandPlaceholders(dst, gUnknown_8459250);
+        break;
+    }
+}
+
+void sub_81163B0(u8 *dst, u8 caseId)
+{
+    switch (caseId)
+    {
+    case 1:
+    case 2:
+    case 4:
+    case 21:
+    case 22:
+        StringExpandPlaceholders(dst, gUnknown_84576AC);
+        break;
+    case 3:
+    case 9:
+    case 10:
+    case 11:
+        StringExpandPlaceholders(dst, gUnknown_84576C4);
         break;
     }
 }

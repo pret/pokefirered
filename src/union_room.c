@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "berry_crush.h"
 #include "cable_club.h"
+#include "decompress.h"
 #include "dodrio_berry_picking.h"
 #include "event_data.h"
 #include "field_control_avatar.h"
@@ -11,6 +12,7 @@
 #include "link_rfu.h"
 #include "list_menu.h"
 #include "load_save.h"
+#include "menu.h"
 #include "mevent.h"
 #include "mystery_gift_menu.h"
 #include "new_menu_helpers.h"
@@ -37,8 +39,9 @@ EWRAM_DATA u8 gUnknown_203B058 = 0;
 EWRAM_DATA u8 gUnknown_203B059 = 0;
 EWRAM_DATA struct UnionRoomTrade gUnknown_203B06C = {};
 
-IWRAM_DATA struct UnkStruct_Leader *gUnknown_3002024;
-IWRAM_DATA struct UnkStruct_Group *gUnknown_3002028;
+IWRAM_DATA struct UnkStruct_Leader * gUnknown_3002024;
+IWRAM_DATA struct UnkStruct_Group * gUnknown_3002028;
+IWRAM_DATA struct UnkStruct_URoom * gUnknown_300202C;
 
 void sub_8115A68(u8 taskId);
 void sub_81161E4(struct UnkStruct_Leader * leader);
@@ -53,8 +56,13 @@ u8 sub_8116FE4(void);
 void sub_8117990(void);
 void sub_81179A4(void);
 void sub_8117A0C(u8 taskId);
-u16 sub_8118658(const u8 *data);
+void sub_8117F20(u8 taskId);
+void sub_81182DC(u8 taskId);
+void sub_81186E0(u8 taskId);
+u16 ReadAsU16(const u8 *data);
+bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1);
 u8 sub_811A054(struct UnkStruct_Main4 *arg0, u32 arg1);
+u8 sub_811A084(struct UnkStruct_Main4 *arg0, u32 arg1);
 bool8 sub_811A0F8(u8 *textState, const u8 *str);
 s8 sub_811A14C(u8 *dest, bool32 arg1);
 void sub_811A41C(void);
@@ -83,6 +91,7 @@ extern const u8 *const gUnknown_8457094[13];
 extern const u8 gUnknown_84570C8[];
 extern const u8 gUnknown_84571B4[];
 extern const u8 gUnknown_84571B8[];
+extern const u8 gUnknown_84571E0[];
 extern const u8 gUnknown_8457234[];
 extern const u8 gUnknown_8457264[];
 extern const u8 *const gUnknown_845742C[][5];
@@ -101,18 +110,30 @@ extern const u8 gUnknown_84576C4[];
 extern const u8 gUnknown_8457700[];
 extern const u8 gUnknown_845771C[];
 extern const u8 *const gUnknown_8457754[];
+extern const u8 gUnknown_845777C[];
+extern const u8 gUnknown_84577BC[];
 extern const u8 gUnknown_84577F8[];
+extern const u8 *const gUnknown_8457838[];
 extern const u8 gUnknown_8457E28[];
 extern const u8 gUnknown_8457E44[];
 extern const u8 gUnknown_8458FC8[];
+extern const u8 gUnknown_8458FE4[];
+extern const u8 gUnknown_84591DC[];
 extern const u8 *const gUnknown_84591B8[];
 extern const u8 gUnknown_8459238[];
 extern const u8 gUnknown_8459250[];
+extern const u8 gUnknown_845928C[];
+extern const u8 *const gUnknown_845933C[];
 
 // These are functions in Emmerald but inlined in FireRed
 
 #define sub_8018404(dest, arg1) ({                                       \
     StringCopy7(dest, (arg1).unk.playerName);                                   \
+    ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
+})
+
+#define sub_8018404_2(dest, arg1) ({                                       \
+    StringCopy(dest, (arg1).unk.playerName);                                   \
     ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
 })
 
@@ -150,7 +171,7 @@ void sub_8115924(u8 windowId)
 
     sub_811A444(windowId, 2, gSaveBlock2Ptr->playerName, 0, 2, 0);
     StringCopy(text2, gUnknown_84571B4);
-    ConvertIntToDecimalStringN(text, sub_8118658(gSaveBlock2Ptr->playerTrainerId), STR_CONV_MODE_LEADING_ZEROS, 5);
+    ConvertIntToDecimalStringN(text, ReadAsU16(gSaveBlock2Ptr->playerTrainerId), STR_CONV_MODE_LEADING_ZEROS, 5);
     StringAppend(text2, text);
     sub_811A444(windowId, 0, text2, 0, 0x10, 0);
 }
@@ -255,7 +276,7 @@ void sub_8115A68(u8 taskId)
         break;
     case 6:
         sub_8116444(data, 7, 10);
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             if (data->field_13 == 1)
                 data->state = 23;
@@ -268,7 +289,7 @@ void sub_8115A68(u8 taskId)
             && data->field_13 > (gUnknown_203B059 >> 4) - 1
             && (gUnknown_203B059 & 0xF) != 0
             && sub_80FC1CC()
-            && gMain.newKeys & START_BUTTON)
+            && JOY_NEW(START_BUTTON))
         {
             data->state = 15;
             sub_80F8F5C();
@@ -308,19 +329,19 @@ void sub_8115A68(u8 taskId)
         }
         break;
     case 11:
-        switch (sub_811A14C(&data->textState, sub_80FA634(sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
+        switch (sub_811A14C(&data->textState, sub_80FA634(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName)))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_19 = 5;
-            sub_80FA670(5, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_80FA670(6, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 12;
             break;
         case -3:
@@ -329,7 +350,7 @@ void sub_8115A68(u8 taskId)
         }
         break;
     case 12:
-        val = sub_80FA6FC(sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -360,7 +381,7 @@ void sub_8115A68(u8 taskId)
             }
             else
             {
-                sub_80FBD4C(data->field_0->arr[data->field_13].unk.playerName, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
+                sub_80FBD4C(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_81165E8(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -773,7 +794,7 @@ void sub_8116738(u8 taskId)
             break;
         case 0:
             id = ListMenu_ProcessInput(data->listTaskId);
-            if (gMain.newKeys & A_BUTTON && id != -1)
+            if (JOY_NEW(A_BUTTON) && id != -1)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
@@ -800,7 +821,7 @@ void sub_8116738(u8 taskId)
                     PlaySE(SE_WALL_HIT);
                 }
             }
-            else if (gMain.newKeys & B_BUTTON)
+            else if (JOY_NEW(B_BUTTON))
             {
                 data->state = 10;
             }
@@ -869,7 +890,7 @@ void sub_8116738(u8 taskId)
             break;
         }
 
-        if (!sub_80FB9F4() && gMain.newKeys & B_BUTTON)
+        if (!sub_80FB9F4() && JOY_NEW(B_BUTTON))
             data->state = 7;
         break;
     case 7:
@@ -985,7 +1006,7 @@ void sub_8116D60(struct UnkStruct_Group *data, s32 id)
     RedrawListMenu(data->listTaskId);
     sub_8018404(gStringVar1, data->field_0->arr[data->field_F]);
     sub_80FB008(gUnknown_84570C8[gSpecialVar_0x8004], 0, 1);
-    sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, sub_8118658(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
+    sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
 }
 
 u8 sub_8116DE0(void)
@@ -1536,7 +1557,7 @@ void sub_8117A0C(u8 taskId)
         break;
     case 4:
         sub_8116444(data, 5, 6);
-        if (gMain.newKeys & B_BUTTON)
+        if (JOY_NEW(B_BUTTON))
         {
             data->state = 13;
             DestroyWirelessStatusIndicatorSprite();
@@ -1562,19 +1583,19 @@ void sub_8117A0C(u8 taskId)
             data->field_0->arr[data->field_13].field_1B = 0;
             RedrawListMenu(data->listTaskId);
             data->field_19 = 5;
-            sub_80FA670(5, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_80FA670(6, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
             data->state = 8;
             break;
         }
         break;
     case 8:
-        val = sub_80FA6FC(sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
+        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId), data->field_0->arr[data->field_13].unk.playerName);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -1589,7 +1610,7 @@ void sub_8117A0C(u8 taskId)
             }
             else
             {
-                sub_80FBD4C(data->field_0->arr[data->field_13].unk.playerName, sub_8118658(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
+                sub_80FBD4C(data->field_0->arr[data->field_13].unk.playerName, ReadAsU16(data->field_0->arr[data->field_13].unk.field_0.unk_00.playerTrainerId));
                 data->field_0->arr[data->field_13].field_1A_0 = 0;
                 sub_81165E8(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -1673,4 +1694,406 @@ void sub_8117A0C(u8 taskId)
             DestroyTask(taskId);
         break;
     }
+}
+
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_8117F20, 0);
+    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_3002028 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_12 = arg0 - 21;
+    gSpecialVar_Result = 0;
+}
+
+void sub_8117F20(u8 taskId)
+{
+    s32 id;
+    struct WindowTemplate winTemplate1, winTemplate2;
+    struct UnkStruct_Group *data = gUnknown_203B05C.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_80FAF58(data->field_12 + 21, 0, 0);
+        sub_800B1F4();
+        OpenLink();
+        sub_80FBBD8();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        AddTextPrinterToWindow1(gUnknown_8458FE4);
+        data->state = 2;
+        break;
+    case 2:
+        sub_811A650(data->field_4, 4);
+        sub_811A5E4(data->field_0->arr, 16);
+        data->field_11 = sub_811A054(data->field_4, data->field_12 + 7);
+
+        winTemplate1 = gUnknown_8456D4C;
+        winTemplate1.baseBlock = GetMysteryGiftBaseBlock();
+        data->listWindowId = AddWindow(&winTemplate1);
+
+        data->field_D = AddWindow(&gUnknown_8456D54);
+
+        MG_DrawTextBorder(data->listWindowId);
+        gMultiuseListMenuTemplate = gUnknown_8456DDC;
+        gMultiuseListMenuTemplate.windowId = data->listWindowId;
+        data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+        MG_DrawTextBorder(data->field_D);
+        FillWindowPixelBuffer(data->field_D, PIXEL_FILL(1));
+        PutWindowTilemap(data->field_D);
+        sub_8115924(data->field_D);
+        CopyWindowToVram(data->field_D, 2);
+
+        CopyBgTilemapBufferToVram(0);
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8116FE4();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+        default:
+            RedrawListMenu(data->listTaskId);
+            break;
+        case 0:
+            id = ListMenu_ProcessInput(data->listTaskId);
+            if (JOY_NEW(A_BUTTON) && id != -1)
+            {
+                // this unused variable along with the assignment is needed to match
+                u32 unusedVar;
+                unusedVar  = data->field_0->arr[id].unk.field_0.unk_0a_0;
+
+                if (data->field_0->arr[id].field_1A_0 == 1 && !data->field_0->arr[id].unk.field_0.unk_0a_7)
+                {
+                    data->field_F = id;
+                    LoadWirelessStatusIndicatorSpriteGfx();
+                    CreateWirelessStatusIndicatorSprite(0, 0);
+                    RedrawListMenu(data->listTaskId);
+                    sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+                    sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
+                    PlaySE(SE_PN_ON);
+                    data->state = 4;
+                }
+                else
+                {
+                    PlaySE(SE_WALL_HIT);
+                }
+            }
+            else if (JOY_NEW(B_BUTTON))
+            {
+                data->state = 6;
+            }
+            break;
+        }
+        break;
+    case 4:
+        AddTextPrinterToWindow1(gUnknown_8459238);
+        sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+        data->state = 5;
+        break;
+    case 5:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_203B058 = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            data->state = 10;
+        }
+
+        switch (sub_80FB9F4())
+        {
+        case 1:
+        case 2:
+        case 6:
+            data->state = 8;
+            break;
+        case 5:
+            AddTextPrinterToWindow1(gUnknown_84576AC);
+            sub_80FB9E4(0, 0);
+            break;
+        }
+        break;
+    case 6:
+    case 8:
+    case 10:
+        DestroyListMenuTask(data->listTaskId, 0, 0);
+        CopyBgTilemapBufferToVram(0);
+        RemoveWindow(data->field_D);
+        RemoveWindow(data->listWindowId);
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 9:
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_8457838[sub_80FB9F4()]))
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            DestroyTask(taskId);
+            sub_80F8DC0();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 7:
+        DestroyWirelessStatusIndicatorSprite();
+        AddTextPrinterToWindow1(gUnknown_84571B8);
+        DestroyTask(taskId);
+        sub_80F8DC0();
+        gSpecialVar_Result = 5;
+        break;
+    case 11:
+        data->state++;
+        sub_800AB9C();
+        break;
+    case 12:
+        if (IsLinkTaskFinished())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
+{
+    u8 taskId;
+    struct UnkStruct_Group *dataPtr;
+
+    taskId = CreateTask(sub_81182DC, 0);
+    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
+    gUnknown_3002028 = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_12 = arg0 - 21;
+    gSpecialVar_Result = 0;
+}
+
+void sub_81182DC(u8 taskId)
+{
+    s32 id;
+    struct WindowTemplate winTemplate;
+    struct UnkStruct_Group *data = gUnknown_203B05C.group;
+
+    switch (data->state)
+    {
+    case 0:
+        sub_80FAF58(0, 0, 0);
+        sub_800B1F4();
+        OpenLink();
+        sub_80FBBD8();
+        data->field_4 = AllocZeroed(0x70);
+        data->field_0 = AllocZeroed(0x200);
+        data->state = 1;
+        break;
+    case 1:
+        AddTextPrinterToWindow1(gUnknown_84591DC);
+        data->state = 2;
+        break;
+    case 2:
+        sub_811A650(data->field_4, 4);
+        sub_811A5E4(data->field_0->arr, 16);
+        data->field_11 = sub_811A084(data->field_4, data->field_12 + 7);
+
+        if (data->field_13 != 0)
+        {
+            winTemplate = gUnknown_8456D4C;
+            winTemplate.baseBlock = GetMysteryGiftBaseBlock();
+            data->listWindowId = AddWindow(&winTemplate);
+
+            MG_DrawTextBorder(data->listWindowId);
+            gMultiuseListMenuTemplate = gUnknown_8456DDC;
+            gMultiuseListMenuTemplate.windowId = data->listWindowId;
+            data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
+
+            CopyBgTilemapBufferToVram(0);
+        }
+
+        data->field_F = 0;
+        data->state = 3;
+        break;
+    case 3:
+        id = sub_8116FE4();
+        switch (id)
+        {
+        case 1:
+            PlaySE(SE_PC_LOGIN);
+        default:
+            if (data->field_13 != 0)
+                RedrawListMenu(data->listTaskId);
+            break;
+        case 0:
+            if (data->field_13 != 0)
+                id = ListMenu_ProcessInput(data->listTaskId);
+            if (data->field_14 > 120)
+            {
+                if (data->field_0->arr[0].field_1A_0 == 1 && !data->field_0->arr[0].unk.field_0.unk_0a_7)
+                {
+                    if (sub_8119FB0(&data->field_0->arr[0].unk.field_0, data->field_12 + 7))
+                    {
+                        data->field_F = 0;
+                        data->field_14 = 0;
+                        LoadWirelessStatusIndicatorSpriteGfx();
+                        CreateWirelessStatusIndicatorSprite(0, 0);
+                        sub_80FBF54(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.field_0.unk_00.playerTrainerId));
+                        PlaySE(SE_PN_ON);
+                        data->state = 4;
+                    }
+                    else
+                    {
+                        PlaySE(SE_BOO);
+                        data->state = 10;
+                    }
+                }
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                data->state = 6;
+                data->field_14 = 0;
+            }
+            data->field_14++;
+            break;
+        }
+        break;
+    case 4:
+        AddTextPrinterToWindow1(gUnknown_845928C);
+        sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+        data->state = 5;
+        break;
+    case 5:
+        if (gReceivedRemoteLinkPlayers != 0)
+        {
+            gUnknown_203B058 = data->field_0->arr[data->field_F].unk.field_0.unk_0a_0;
+            data->state = 12;
+        }
+
+        switch (sub_80FB9F4())
+        {
+        case 1:
+        case 2:
+        case 6:
+            data->state = 8;
+            break;
+        case 5:
+            AddTextPrinterToWindow1(gUnknown_845777C);
+            sub_80FB9E4(0, 0);
+            break;
+        }
+        break;
+    case 6:
+    case 8:
+    case 10:
+    case 12:
+        if (data->field_13 != 0)
+        {
+            DestroyListMenuTask(data->listTaskId, 0, 0);
+            CopyBgTilemapBufferToVram(0);
+            RemoveWindow(data->listWindowId);
+        }
+        DestroyTask(data->field_11);
+        Free(data->field_0);
+        Free(data->field_4);
+        data->state++;
+        break;
+    case 9:
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_84577BC))
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            DestroyTask(taskId);
+            sub_80F8DC0();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 7:
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_84571E0))
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            DestroyTask(taskId);
+            sub_80F8DC0();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 11:
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_845933C[data->field_12]))
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            DestroyTask(taskId);
+            sub_80F8DC0();
+            gSpecialVar_Result = 5;
+        }
+        break;
+    case 13:
+        data->state++;
+        sub_800AB9C();
+        break;
+    case 14:
+        if (IsLinkTaskFinished())
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+void UnionRoomSpecial(void)
+{
+    struct UnkStruct_URoom *dataPtr;
+
+    ClearAndInitHostRFUtgtGname();
+    CreateTask(sub_81186E0, 10);
+
+    // dumb line needed to match
+    gUnknown_203B05C.uRoom = gUnknown_203B05C.uRoom;
+
+    dataPtr = AllocZeroed(sizeof(*gUnknown_203B05C.uRoom));
+    gUnknown_203B05C.uRoom = dataPtr;
+    gUnknown_300202C = dataPtr;
+
+    dataPtr->state = 0;
+    dataPtr->textState = 0;
+    dataPtr->field_10 = 0;
+    dataPtr->field_12 = 0;
+
+    gSpecialVar_Result = 0;
+    sub_8107D38(0xD0, 1);
+}
+
+u16 ReadAsU16(const u8 *ptr)
+{
+    return (ptr[1] << 8) | (ptr[0]);
+}
+
+void sub_8118664(u32 nextState, const u8 *src)
+{
+    struct UnkStruct_URoom *data = gUnknown_203B05C.uRoom;
+
+    data->state = 8;
+    data->stateAfterPrint = nextState;
+    if (src != gStringVar4)
+        StringExpandPlaceholders(gStringVar4, src);
+}
+
+void sub_811868C(const u8 *src)
+{
+    struct UnkStruct_URoom *data = gUnknown_203B05C.uRoom;
+
+    data->state = 26;
+    if (src != gStringVar4)
+        StringExpandPlaceholders(gStringVar4, src);
+}
+
+void sub_81186B0(struct UnkStruct_URoom *data)
+{
+    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, sizeof(*data->field_0));
+}
+
+void sub_81186C8(struct UnkStruct_URoom *data)
+{
+    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], sizeof(*data->field_0));
 }

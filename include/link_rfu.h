@@ -233,8 +233,8 @@ void MG_DrawCheckerboardPattern(void);
 void task_add_05_task_del_08FA224_when_no_RfuFunc(void);
 bool8 IsLinkRfuTaskFinished(void);
 void DestroyWirelessStatusIndicatorSprite(void);
-void MEvent_CreateTask_CardOrNewsWithFriend(u8);
-void MEvent_CreateTask_CardOrNewsOverWireless(u8);
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
 void MEvent_CreateTask_Leader(u32 arg0);
 void sub_80F9E2C(void * data);
 u8 sub_8116DE0(void);
@@ -315,6 +315,7 @@ void RecordMixTrainerNames(void);
 void sub_80F8CFC();
 void sub_80F8D14();
 void sub_80FAF74(bool32 a0, bool32 a1);
+void ClearAndInitHostRFUtgtGname(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

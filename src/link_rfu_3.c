@@ -681,7 +681,7 @@ bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx)
     return retVal;
 }
 
-void sub_80FCD50(struct GFtgtGname *gname, u8 *uname)
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname)
 {
     memcpy(gname, &gHostRFUtgtGnameBuffer, RFU_GAME_NAME_LENGTH);
     memcpy(uname, gHostRFUtgtUnameBuffer, RFU_USER_NAME_LENGTH);

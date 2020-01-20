@@ -295,6 +295,18 @@ void sub_80FEB3C(void);
 void sub_80FAFE0(u8 a0);
 bool32 sub_80FA44C(u32 a0);
 bool8 sub_80FC1B0(void);
+bool8 sub_80F8F40(void);
+void sub_80F8F5C(void);
+bool32 sub_80FA5D4(void);
+bool32 sub_80FC1CC(void);
+bool32 sub_80F8F7C(bool32 a0);
+bool32 sub_80FA634(u16 a0, const u8 *a1);
+void sub_80FA670(u8 a0, u16 a1, const u8 *a2);
+u32 sub_80FA6FC(u16 a0, const u8 *a1);
+void sub_80FAF58(u8 a0, u32 a1, u32 a2);
+void sub_80FBB8C(u32 a0);
+void sub_80FBD4C(const u8 *ptr, u16 a1);
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

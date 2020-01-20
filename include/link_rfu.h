@@ -235,7 +235,7 @@ bool8 IsLinkRfuTaskFinished(void);
 void DestroyWirelessStatusIndicatorSprite(void);
 void MEvent_CreateTask_CardOrNewsWithFriend(u8);
 void MEvent_CreateTask_CardOrNewsOverWireless(u8);
-void MEvent_CreateTask_Leader(u8);
+void MEvent_CreateTask_Leader(u32 arg0);
 void sub_80F9E2C(void * data);
 u8 sub_8116DE0(void);
 void sub_80FBB4C(void);
@@ -309,6 +309,12 @@ void sub_80FBD4C(const u8 *ptr, u16 a1);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname);
 void sub_80FBBD8(void);
 void sub_80FA6BC(void);
+void sub_80FBF54(const u8 *src, u16 trainerId);
+void sub_80FB008(u8 a0, u32 a1, u32 a2);
+void RecordMixTrainerNames(void);
+void sub_80F8CFC();
+void sub_80F8D14();
+void sub_80FAF74(bool32 a0, bool32 a1);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

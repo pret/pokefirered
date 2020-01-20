@@ -652,7 +652,7 @@ void BlankMEventBuffer2(void)
     gSaveBlock1Ptr->mysteryEventBuffers.buffer_310.crc = 0;
 }
 
-u16 sub_81440E8(void)
+u16 GetWonderCardFlagID(void)
 {
     if (ValidateReceivedWonderCard())
         return gSaveBlock1Ptr->mysteryEventBuffers.mecard.data.unk_00;
@@ -674,7 +674,7 @@ bool32 sub_8144124(u16 a0)
 
 bool32 CheckReceivedGiftFromWonderCard(void)
 {
-    u16 value = sub_81440E8();
+    u16 value = GetWonderCardFlagID();
     if (!sub_8144124(value))
         return FALSE;
     if (FlagGet(gUnknown_8466F00[value - 1000]) == TRUE)

@@ -373,7 +373,7 @@ gUnionRoomOfferedSpecies: @ 203B068
 gUnionRoomRequestedMonType: @ 203B06A
 	.space 0x2
 
-gUnknown_203B06C: @ 203B06C
+sUnionRoomTrade: @ 203B06C
 	.space 0x18
 
 gUnknown_203B084: @ 203B084

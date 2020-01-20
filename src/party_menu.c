@@ -5818,7 +5818,7 @@ static void Task_ContinueChoosingHalfParty(u8 taskId)
     }
 }
 
-void sub_81277F4(u8 menuType, MainCallback callback)
+void ChooseMonForTradingBoard(u8 menuType, MainCallback callback)
 {
     InitPartyMenu(menuType,
                   PARTY_LAYOUT_SINGLE,

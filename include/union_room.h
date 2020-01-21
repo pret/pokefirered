@@ -118,7 +118,7 @@ struct UnkStruct_URoom
     /* 0x049 */ u8 field_49;
     /* 0x04A */ u8 field_4A;
     /* 0x04C */ u16 field_4C[6];
-    /* 0x058 */ u8 field_58[0x84 - 0x58];
+    /* 0x058 */ u8 field_58[4][11];
     /* 0x084 */ u16 field_98;
     /* 0x086 */ u16 field_9A[3];
     /* 0x08C */ struct UnkStruct_8019BA8 field_A0[8];

@@ -352,7 +352,7 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/quest_log.o"
 
 	.align 2
-gUnknown_203B04C: @ 203B04C
+sUnionRoomPlayerName: @ 203B04C
 	.space 0xC
 
 gUnknown_203B058: @ 203B058

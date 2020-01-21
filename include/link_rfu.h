@@ -323,6 +323,8 @@ void sub_80FBC00(void);
 void sub_80FBD6C(u32 a0);
 void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 sub_80FD338(u16 id, u8 *name);
+bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx);
+bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

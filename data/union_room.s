@@ -6,70 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_8456C74:: @ 8456C74
-	.word gUnknown_84571AC
-	.word gUnknown_8459394
-	.word gUnknown_84593A4
-	.word gUnknown_84593B4
-	.word gUnknown_84593C4
-	.word gUnknown_84593D4
-	.word gUnknown_84593E4
-	.word gUnknown_84593F4
-	.word gUnknown_84593DC
-	.word gUnknown_8459400
-	.word gUnknown_8459410
-	.word gUnknown_845941C
-	.word gUnknown_845942C
-	.word gUnknown_8459434
-	.word gUnknown_8459440
-	.word gUnknown_84571AC
-	.word gUnknown_84571AC
-	.word gUnknown_84571AC
-	.word gUnknown_84571AC
-	.word gUnknown_84571AC
-	.word gUnknown_84571AC
-	.word gUnknown_84593E4
-	.word gUnknown_84593F4
-
-gUnknown_8456CD0:: @ 8456CD0
-	.byte 0x00, 0x00, 0x00, 0x1E, 0x02, 0x0F @ window template
-	.2byte 0x0008
-
-	@ pal table?
-gUnknown_8456CD8:: @ 8456CD8
-	.2byte 0x0201, 0x0000
-	.2byte 0x0202, 0x0000
-	.2byte 0x0403, 0x0000
-	.2byte 0x0204, 0x0000
-	.2byte 0x2509, 0x0000
-	.2byte 0x250A, 0x0000
-	.2byte 0x350B, 0x0000
-	.2byte 0x350D, 0x0000
-	.2byte 0x350E, 0x0000
-
-gUnknown_8456CFC:: @ 8456CFC
-	.byte 0x00, 0x01, 0x03, 0x0D, 0x0A, 0x0F @ window template
-	.2byte 0x0044
-
-gUnknown_8456D04:: @ 8456D04
-	.byte 0x00, 0x10, 0x03, 0x07, 0x04, 0x0F @ window template
-	.2byte 0x00C6
-	
-gUnknown_8456D0C:: @ 8456D0C
-	.word gUnknown_84571AC, 0
-	.word gUnknown_84571AC, 1
-	.word gUnknown_84571AC, 2
-	.word gUnknown_84571AC, 3
-	.word gUnknown_84571AC, 4
-
-gUnknown_8456D34:: @ 8456D34
-	.word gUnknown_8456D0C 
-	.word NULL
-	.word sub_81164C8
-	.2byte 0x0005
-	.2byte 0x0005
-	.byte 0x00, 0x00, 0x01, 0x00, 0x20, 0x31, 0x10, 0x42
-
 gUnknown_8456D4C:: @ 8456D4C
 	.byte 0x00, 0x01, 0x03, 0x11, 0x0A, 0x0F @ window template
 	.2byte 0x0044
@@ -233,7 +169,7 @@ gUnknown_8457034:: @ 8457034
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 	.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-	
+
 	@ starts at gUnknown_082F0474 in pokeemerald, union link groups
 gUnknown_845704C:: @ 845704C
 	.byte 0x01, 0xFF, 0x00, 0x00
@@ -1393,7 +1329,7 @@ gUnknown_8459250:: @ 8459250
 gUnknown_845928C:: @ 845928C
 	.string "Awaiting a response from the\n"
 	.string "WIRELESS COMMUNICATION SYSTEM.$"
-	
+
 	.align 2
 	.string "ほかの さんかしゃが そろうまで\n"
 	.string "しょうしょう おまちください$"

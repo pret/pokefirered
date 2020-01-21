@@ -44,19 +44,24 @@
 #include "constants/field_weather.h"
 #include "constants/species.h"
 
-EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
-EWRAM_DATA union UnkUnion_Main gUnknown_203B05C = {};
-EWRAM_DATA u8 gUnknown_203B058 = 0;
-EWRAM_DATA u8 gUnknown_203B059 = 0;
-EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
+static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
+static EWRAM_DATA u8 gUnknown_203B058 = 0;
+static EWRAM_DATA u8 gUnknown_203B059 = 0;
+static EWRAM_DATA union UnkUnion_Main sUnionRoomMain = {};
+static EWRAM_DATA u32 sUnref_203B060 = 0;
+EWRAM_DATA struct GFtgtGnameSub gUnknown_203B064 = {};
+EWRAM_DATA u16 gUnionRoomOfferedSpecies = SPECIES_NONE;
+EWRAM_DATA u8 gUnionRoomRequestedMonType = TYPE_NORMAL;
+static EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
 
-IWRAM_DATA struct UnkStruct_Leader * gUnknown_3002024;
-IWRAM_DATA struct UnkStruct_Group * gUnknown_3002028;
-IWRAM_DATA struct UnkStruct_URoom * gUnknown_300202C;
+static struct UnkStruct_Leader * sLeader;
+static struct UnkStruct_Group * sGroup;
+static struct UnkStruct_URoom * sURoom;
 
 void sub_8115A68(u8 taskId);
 void sub_81161E4(struct UnkStruct_Leader * leader);
 bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
+void sub_81164C8(u8 arg0, s32 id, u8 arg2);
 u8 sub_8116524(struct UnkStruct_Main0 * a0);
 u8 sub_81165E8(struct UnkStruct_Main0 * a0);
 void sub_8116738(u8 taskId);
@@ -120,12 +125,123 @@ void sub_811B31C(u8 *dest, struct UnkStruct_URoom * uRoom, bool8 gender);
 u8 sub_811B754(struct UnkStruct_8019BA8 * ptr);
 void sub_811BA78(void);
 
-extern const u8 *const gUnknown_8456C74[];
-extern const struct WindowTemplate gUnknown_8456CD0;
-extern const u32 gUnknown_8456CD8[];
-extern const struct WindowTemplate gUnknown_8456CFC;
-extern const struct WindowTemplate gUnknown_8456D04;
-extern const struct ListMenuTemplate gUnknown_8456D34;
+extern const u8 gUnknown_84571AC[];
+extern const u8 gUnknown_8459394[];
+extern const u8 gUnknown_84593A4[];
+extern const u8 gUnknown_84593B4[];
+extern const u8 gUnknown_84593C4[];
+extern const u8 gUnknown_84593D4[];
+extern const u8 gUnknown_84593E4[];
+extern const u8 gUnknown_84593F4[];
+extern const u8 gUnknown_84593DC[];
+extern const u8 gUnknown_8459400[];
+extern const u8 gUnknown_8459410[];
+extern const u8 gUnknown_845941C[];
+extern const u8 gUnknown_845942C[];
+extern const u8 gUnknown_8459434[];
+extern const u8 gUnknown_8459440[];
+
+static const u8 *const gUnknown_8456C74[] = {
+    gUnknown_84571AC,
+    gUnknown_8459394,
+    gUnknown_84593A4,
+    gUnknown_84593B4,
+    gUnknown_84593C4,
+    gUnknown_84593D4,
+    gUnknown_84593E4,
+    gUnknown_84593F4,
+    gUnknown_84593DC,
+    gUnknown_8459400,
+    gUnknown_8459410,
+    gUnknown_845941C,
+    gUnknown_845942C,
+    gUnknown_8459434,
+    gUnknown_8459440,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84593E4,
+    gUnknown_84593F4
+};
+
+static const struct WindowTemplate gUnknown_8456CD0 = {
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 0,
+    .width = 30,
+    .height = 2,
+    .paletteNum = 0xF,
+    .baseBlock = 0x008
+};
+
+#define _8456CD8(a, b) ((a) | ((b) << 8))
+
+static const u32 gUnknown_8456CD8[] = {
+    _8456CD8( 1,  2),
+    _8456CD8( 2,  2),
+    _8456CD8( 3,  4),
+    _8456CD8( 4,  2),
+    _8456CD8( 9, 37),
+    _8456CD8(10, 37),
+    _8456CD8(11, 53),
+    _8456CD8(13, 53),
+    _8456CD8(14, 53)
+};
+
+#undef _8456CD8
+
+static const struct WindowTemplate gUnknown_8456CFC = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 3,
+    .width = 13,
+    .height = 10,
+    .paletteNum = 15,
+    .baseBlock = 0x044
+};
+
+static const struct WindowTemplate gUnknown_8456D04 = {
+    .bg = 0,
+    .tilemapLeft = 16,
+    .tilemapTop = 3,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x0C6
+};
+
+const struct ListMenuItem gUnknown_8456D0C[] = {
+    {gUnknown_84571AC, 0},
+    {gUnknown_84571AC, 1},
+    {gUnknown_84571AC, 2},
+    {gUnknown_84571AC, 3},
+    {gUnknown_84571AC, 4}
+};
+
+static const struct ListMenuTemplate gUnknown_8456D34 = {
+    .items = gUnknown_8456D0C,
+    .moveCursorFunc = NULL,
+    .itemPrintFunc = sub_81164C8,
+    .totalItems = 5,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 1,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 2,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 1
+};
+
 extern const struct WindowTemplate gUnknown_8456D4C;
 extern const struct WindowTemplate gUnknown_8456D54;
 extern const struct ListMenuTemplate gUnknown_8456DDC;
@@ -303,8 +419,8 @@ void TryBecomeLinkLeader(void)
     struct UnkStruct_Leader * dataPtr;
 
     taskId = CreateTask(sub_8115A68, 0);
-    gUnknown_203B05C.leader = dataPtr = (void*)(gTasks[taskId].data);
-    gUnknown_3002024 = dataPtr;
+    sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
+    sLeader = dataPtr;
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -314,7 +430,7 @@ void TryBecomeLinkLeader(void)
 void sub_8115A68(u8 taskId)
 {
     u32 id, val;
-    struct UnkStruct_Leader * data = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader * data = sUnionRoomMain.leader;
 
     switch (data->state)
     {
@@ -728,7 +844,7 @@ bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
 
 void sub_81164C8(u8 arg0, s32 id, u8 arg2)
 {
-    struct UnkStruct_Leader * data = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 var = 0;
 
     switch (data->field_0->arr[id].field_1A_0)
@@ -747,7 +863,7 @@ void sub_81164C8(u8 arg0, s32 id, u8 arg2)
 
 u8 sub_8116524(struct UnkStruct_Main0 * arg0)
 {
-    struct UnkStruct_Leader * data = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 ret = 0;
     u8 i;
     s32 id;
@@ -788,7 +904,7 @@ u8 sub_8116524(struct UnkStruct_Main0 * arg0)
 
 u8 sub_81165E8(struct UnkStruct_Main0 * arg0)
 {
-    struct UnkStruct_Leader * data = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 copiedCount;
     s32 i;
     u8 ret;
@@ -836,8 +952,8 @@ void TryJoinLinkGroup(void)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(sub_8116738, 0);
-    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
-    gUnknown_3002028 = dataPtr;
+    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sGroup = dataPtr;
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -847,7 +963,7 @@ void TryJoinLinkGroup(void)
 void sub_8116738(u8 taskId)
 {
     s32 id;
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
 
     switch (data->state)
     {
@@ -1123,19 +1239,19 @@ u8 sub_8116DE0(void)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(sub_8116E1C, 0);
-    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
 
-    gUnknown_3002028 = dataPtr;
+    sGroup = dataPtr;
 
     return taskId;
 }
 
 void sub_8116E1C(u8 taskId)
 {
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
 
     switch (data->state)
     {
@@ -1213,7 +1329,7 @@ u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
 
 void sub_8116F94(u8 arg0, s32 id, u8 arg2)
 {
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
     u8 var = sub_8116F5C(data, id);
 
     sub_811A81C(arg0, 8, arg2, &data->field_0->arr[id], var, id);
@@ -1221,7 +1337,7 @@ void sub_8116F94(u8 arg0, s32 id, u8 arg2)
 
 u8 sub_8116FE4(void)
 {
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
     u8 ret = 0;
     u8 i;
     s32 id;
@@ -1603,7 +1719,7 @@ void MEvent_CreateTask_Leader(u32 arg0)
     struct UnkStruct_Leader * dataPtr;
 
     taskId = CreateTask(sub_8117A0C, 0);
-    gUnknown_203B05C.leader = dataPtr = (void*)(gTasks[taskId].data);
+    sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -1613,7 +1729,7 @@ void MEvent_CreateTask_Leader(u32 arg0)
 
 void sub_8117A0C(u8 taskId)
 {
-    struct UnkStruct_Leader * data = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     struct WindowTemplate winTemplate;
     s32 val;
 
@@ -1810,8 +1926,8 @@ void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(sub_8117F20, 0);
-    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
-    gUnknown_3002028 = dataPtr;
+    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sGroup = dataPtr;
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -1823,7 +1939,7 @@ void sub_8117F20(u8 taskId)
 {
     s32 id;
     struct WindowTemplate winTemplate1, winTemplate2;
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
 
     switch (data->state)
     {
@@ -1976,8 +2092,8 @@ void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
     struct UnkStruct_Group * dataPtr;
 
     taskId = CreateTask(sub_81182DC, 0);
-    gUnknown_203B05C.group = dataPtr = (void*)(gTasks[taskId].data);
-    gUnknown_3002028 = dataPtr;
+    sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
+    sGroup = dataPtr;
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -1989,7 +2105,7 @@ void sub_81182DC(u8 taskId)
 {
     s32 id;
     struct WindowTemplate winTemplate;
-    struct UnkStruct_Group * data = gUnknown_203B05C.group;
+    struct UnkStruct_Group * data = sUnionRoomMain.group;
 
     switch (data->state)
     {
@@ -2157,11 +2273,11 @@ void UnionRoomSpecial(void)
     CreateTask(sub_81186E0, 10);
 
     // dumb line needed to match
-    gUnknown_203B05C.uRoom = gUnknown_203B05C.uRoom;
+    sUnionRoomMain.uRoom = sUnionRoomMain.uRoom;
 
-    dataPtr = AllocZeroed(sizeof(*gUnknown_203B05C.uRoom));
-    gUnknown_203B05C.uRoom = dataPtr;
-    gUnknown_300202C = dataPtr;
+    dataPtr = AllocZeroed(sizeof(*sUnionRoomMain.uRoom));
+    sUnionRoomMain.uRoom = dataPtr;
+    sURoom = dataPtr;
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
@@ -2179,7 +2295,7 @@ u16 ReadAsU16(const u8 *ptr)
 
 void sub_8118664(u32 nextState, const u8 *src)
 {
-    struct UnkStruct_URoom * data = gUnknown_203B05C.uRoom;
+    struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
 
     data->state = 8;
     data->stateAfterPrint = nextState;
@@ -2189,7 +2305,7 @@ void sub_8118664(u32 nextState, const u8 *src)
 
 void sub_811868C(const u8 *src)
 {
-    struct UnkStruct_URoom * data = gUnknown_203B05C.uRoom;
+    struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
 
     data->state = 26;
     if (src != gStringVar4)
@@ -2211,7 +2327,7 @@ void sub_81186E0(u8 taskId)
     u32 id = 0;
     s32 var5 = 0;
     s32 playerGender = 0;
-    struct UnkStruct_URoom * data = gUnknown_203B05C.uRoom;
+    struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
     s16 *taskData = gTasks[taskId].data;
 
     switch (data->state)
@@ -2756,7 +2872,7 @@ void sub_81186E0(u8 taskId)
         {
             sub_811BA78();
             DestroyTask(taskId);
-            Free(gUnknown_203B05C.uRoom);
+            Free(sUnionRoomMain.uRoom);
             sub_81179A4();
         }
         break;
@@ -3009,9 +3125,9 @@ void InitUnionRoom(void)
     if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
     CreateTask(sub_81199FC, 0);
-    gUnknown_203B05C.uRoom = gUnknown_203B05C.uRoom; // Needed to match.
-    gUnknown_203B05C.uRoom = ptr = AllocZeroed(sizeof(struct UnkStruct_URoom));
-    gUnknown_300202C = gUnknown_203B05C.uRoom;
+    sUnionRoomMain.uRoom = sUnionRoomMain.uRoom; // Needed to match.
+    sUnionRoomMain.uRoom = ptr = AllocZeroed(sizeof(struct UnkStruct_URoom));
+    sURoom = sUnionRoomMain.uRoom;
     ptr->state = 0;
     ptr->textState = 0;
     ptr->field_10 = 0;
@@ -3023,7 +3139,7 @@ void sub_81199FC(u8 taskId)
 {
     s32 i;
     u8 text[32];
-    struct UnkStruct_URoom * structPtr = gUnknown_203B05C.uRoom;
+    struct UnkStruct_URoom * structPtr = sUnionRoomMain.uRoom;
 
     switch (structPtr->state)
     {
@@ -3081,7 +3197,7 @@ void sub_81199FC(u8 taskId)
         Free(structPtr->field_C);
         Free(structPtr->field_4);
         DestroyTask(structPtr->field_20);
-        Free(gUnknown_203B05C.uRoom);
+        Free(sUnionRoomMain.uRoom);
         sub_80F8DC0();
         DestroyTask(taskId);
         break;
@@ -3106,7 +3222,7 @@ u8 sub_8119B94(void)
 {
     s32 i;
     u8 j;
-    struct UnkStruct_URoom * structPtr = gUnknown_203B05C.uRoom;
+    struct UnkStruct_URoom * structPtr = sUnionRoomMain.uRoom;
     s32 r7 = 0;
 
     for (i = 0; i < 4; i++)
@@ -3864,7 +3980,7 @@ void sub_811ABE4(u8 arg0, u8 arg1, struct GFtgtGname * arg2, const u8 * str, u8 
 
 void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
 {
-    struct UnkStruct_Leader *leader = gUnknown_203B05C.leader;
+    struct UnkStruct_Leader *leader = sUnionRoomMain.leader;
     struct GFtgtGname *rfu;
     s32 i, j;
     u8 sp4[8];

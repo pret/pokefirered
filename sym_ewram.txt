@@ -350,32 +350,10 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/menu.o"
 	.align 2
 	.include "src/quest_log.o"
+	.align 2
+	.include "src/union_room.o"
 
 	.align 2
-sUnionRoomPlayerName: @ 203B04C
-	.space 0xC
-
-gUnknown_203B058: @ 203B058
-	.space 0x1
-
-gUnknown_203B059: @ 203B059
-	.space 0x3
-
-gUnknown_203B05C: @ 203B05C
-	.space 0x8
-
-gUnknown_203B064: @ 203B064
-	.space 0x4
-
-gUnionRoomOfferedSpecies: @ 203B068
-	.space 0x2
-
-gUnionRoomRequestedMonType: @ 203B06A
-	.space 0x2
-
-sUnionRoomTrade: @ 203B06C
-	.space 0x18
-
 gUnknown_203B084: @ 203B084
 	.space 0x4
 

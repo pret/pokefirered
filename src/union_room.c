@@ -31,6 +31,7 @@
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "start_menu.h"
+#include "strings.h"
 #include "task.h"
 #include "trade.h"
 #include "trade_scene.h"
@@ -61,13 +62,14 @@ static struct UnkStruct_URoom * sURoom;
 void sub_8115A68(u8 taskId);
 void sub_81161E4(struct UnkStruct_Leader * leader);
 bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
-void sub_81164C8(u8 arg0, s32 id, u8 arg2);
+void sub_81164C8(u8 windowId, s32 itemId, u8 y);
 u8 sub_8116524(struct UnkStruct_Main0 * a0);
 u8 sub_81165E8(struct UnkStruct_Main0 * a0);
 void sub_8116738(u8 taskId);
 u32 sub_8116D10(struct UnkStruct_Group * group, s32 id);
 void sub_8116D60(struct UnkStruct_Group * group, s32 id);
 void sub_8116E1C(u8 taskId);
+void sub_8116F94(u8 windowId, s32 itemId, u8 y);
 u8 sub_8116FE4(void);
 void sub_8117990(void);
 void sub_81179A4(void);
@@ -99,12 +101,14 @@ bool8 sub_811A694(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared 
 bool32 sub_811A6DC(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1);
 u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
 u8 sub_811A798(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1, u8 arg2);
-void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
+void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
 void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
 bool32 sub_811A9B8(void);
 u32 sub_811A9FC(s32 a0);
 u32 sub_811AA24(struct UnkStruct_x20 * unkX20);
 s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender);
+void nullsub_92(u8 windowId, s32 itemId, u8 y);
+void sub_811ACA4(u8 windowId, s32 itemId, u8 y);
 s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1);
 s32 sub_811ADC4(s32 a0, struct UnkStruct_Main0 * a1);
 s32 sub_811ADD0(u32 type, u32 species);
@@ -125,233 +129,16 @@ void sub_811B31C(u8 *dest, struct UnkStruct_URoom * uRoom, bool8 gender);
 u8 sub_811B754(struct UnkStruct_8019BA8 * ptr);
 void sub_811BA78(void);
 
-extern const u8 gUnknown_84571AC[];
-extern const u8 gUnknown_8459394[];
-extern const u8 gUnknown_84593A4[];
-extern const u8 gUnknown_84593B4[];
-extern const u8 gUnknown_84593C4[];
-extern const u8 gUnknown_84593D4[];
-extern const u8 gUnknown_84593E4[];
-extern const u8 gUnknown_84593F4[];
-extern const u8 gUnknown_84593DC[];
-extern const u8 gUnknown_8459400[];
-extern const u8 gUnknown_8459410[];
-extern const u8 gUnknown_845941C[];
-extern const u8 gUnknown_845942C[];
-extern const u8 gUnknown_8459434[];
-extern const u8 gUnknown_8459440[];
-
-static const u8 *const gUnknown_8456C74[] = {
-    gUnknown_84571AC,
-    gUnknown_8459394,
-    gUnknown_84593A4,
-    gUnknown_84593B4,
-    gUnknown_84593C4,
-    gUnknown_84593D4,
-    gUnknown_84593E4,
-    gUnknown_84593F4,
-    gUnknown_84593DC,
-    gUnknown_8459400,
-    gUnknown_8459410,
-    gUnknown_845941C,
-    gUnknown_845942C,
-    gUnknown_8459434,
-    gUnknown_8459440,
-    gUnknown_84571AC,
-    gUnknown_84571AC,
-    gUnknown_84571AC,
-    gUnknown_84571AC,
-    gUnknown_84571AC,
-    gUnknown_84571AC,
-    gUnknown_84593E4,
-    gUnknown_84593F4
-};
-
-static const struct WindowTemplate gUnknown_8456CD0 = {
-    .bg = 0,
-    .tilemapLeft = 0,
-    .tilemapTop = 0,
-    .width = 30,
-    .height = 2,
-    .paletteNum = 0xF,
-    .baseBlock = 0x008
-};
-
-#define _8456CD8(a, b) ((a) | ((b) << 8))
-
-static const u32 gUnknown_8456CD8[] = {
-    _8456CD8( 1,  2),
-    _8456CD8( 2,  2),
-    _8456CD8( 3,  4),
-    _8456CD8( 4,  2),
-    _8456CD8( 9, 37),
-    _8456CD8(10, 37),
-    _8456CD8(11, 53),
-    _8456CD8(13, 53),
-    _8456CD8(14, 53)
-};
-
-#undef _8456CD8
-
-static const struct WindowTemplate gUnknown_8456CFC = {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 3,
-    .width = 13,
-    .height = 10,
-    .paletteNum = 15,
-    .baseBlock = 0x044
-};
-
-static const struct WindowTemplate gUnknown_8456D04 = {
-    .bg = 0,
-    .tilemapLeft = 16,
-    .tilemapTop = 3,
-    .width = 7,
-    .height = 4,
-    .paletteNum = 15,
-    .baseBlock = 0x0C6
-};
-
-const struct ListMenuItem gUnknown_8456D0C[] = {
-    {gUnknown_84571AC, 0},
-    {gUnknown_84571AC, 1},
-    {gUnknown_84571AC, 2},
-    {gUnknown_84571AC, 3},
-    {gUnknown_84571AC, 4}
-};
-
-static const struct ListMenuTemplate gUnknown_8456D34 = {
-    .items = gUnknown_8456D0C,
-    .moveCursorFunc = NULL,
-    .itemPrintFunc = sub_81164C8,
-    .totalItems = 5,
-    .maxShowed = 5,
-    .windowId = 0,
-    .header_X = 0,
-    .item_X = 1,
-    .cursor_X = 0,
-    .upText_Y = 0,
-    .cursorPal = 2,
-    .fillValue = 1,
-    .cursorShadowPal = 3,
-    .lettersSpacing = 0,
-    .itemVerticalPadding = 2,
-    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
-    .fontId = 2,
-    .cursorKind = 1
-};
-
-extern const struct WindowTemplate gUnknown_8456D4C;
-extern const struct WindowTemplate gUnknown_8456D54;
-extern const struct ListMenuTemplate gUnknown_8456DDC;
-extern const struct WindowTemplate gUnknown_8456DF4;
-extern const struct ListMenuTemplate gUnknown_8456E1C;
-extern const struct WindowTemplate gUnknown_8456E34;
-extern const struct ListMenuTemplate gUnknown_8456E54;
-extern const struct WindowTemplate gUnknown_8456E6C;
-extern const struct ListMenuTemplate gUnknown_8456F04;
-extern const struct WindowTemplate gUnknown_8456F1C;
-extern const struct WindowTemplate gUnknown_8456F24;
-extern const struct ListMenuTemplate gUnknown_8456F7C;
-extern const struct UnkStruct_Shared gUnknown_8457034;
-extern const u8 *const gUnknown_8457094[13];
-extern const u8 gUnknown_84570C8[];
-extern const u8 gUnknown_84571B0[];
-extern const u8 gUnknown_84571B4[];
-extern const u8 gUnknown_84571B8[];
-extern const u8 gUnknown_84571E0[];
-extern const u8 gUnknown_8457234[];
-extern const u8 gUnknown_8457264[];
-extern const u8 *const gUnknown_845742C[][5];
-extern const u8 gUnknown_845747C[];
-extern const u8 gUnknown_84574A0[];
-extern const u8 gUnknown_84574C4[];
-extern const u8 gUnknown_84574EC[];
-extern const u8 gUnknown_8457514[];
-extern const u8 gUnknown_8457530[];
-extern const u8 gUnknown_8457554[];
-extern const u8 *const gUnknown_8457608[];
-extern const u8 gUnknown_8457610[];
-extern const u8 *const gUnknown_845767C[];
-extern const u8 gUnknown_84576AC[];
-extern const u8 gUnknown_84576C4[];
-extern const u8 gUnknown_8457700[];
-extern const u8 gUnknown_845771C[];
-extern const u8 *const gUnknown_8457754[];
-extern const u8 gUnknown_845777C[];
-extern const u8 gUnknown_84577BC[];
-extern const u8 gUnknown_84577F8[];
-extern const u8 *const gUnknown_8457838[];
-extern const u8 gUnknown_84578BC[];
-extern const u8 *const gUnknown_8457A34[];
-extern const u8 *const gUnknown_8457B04[][2];
-extern const u8 *const gUnknown_8457BCC[];
-extern const u8 *const gUnknown_8457C20[];
-extern const u8 gUnknown_8457C48[];
-extern const u8 gUnknown_8457CA4[];
-extern const u8 gUnknown_8457CF8[];
-extern const u8 gUnknown_8457D44[];
-extern const u8 gUnknown_8457DB8[];
-extern const u8 gUnknown_8457E0C[];
-extern const u8 gUnknown_8457E28[];
-extern const u8 gUnknown_8457E44[];
-extern const u8 gUnknown_8457E60[];
-extern const u8 *const gUnknown_8457F80[][2];
-extern const u8 gUnknown_8457F90[];
-extern const u8 *const gUnknown_84580F4[][4];
-extern const u8 *const gUnknown_8458230[][2][3];
-extern const u8 *const gUnknown_8458314[];
-extern const u8 *const gUnknown_84583B4[];
-extern const u8 *const gUnknown_845842C[];
-extern const u8 gUnknown_8458434[];
-extern const u8 gUnknown_845847C[];
-extern const u8 gUnknown_84584C0[];
-extern const u8 *const gUnknown_8458548[];
-extern const u8 *const gUnknown_84585E8[];
-extern const u8 *const gUnknown_8458758[2][4];
-extern const u8 *const gUnknown_84588BC[2][4];
-extern const u8 *const gUnknown_84589AC[2][2];
-extern const u8 *const gUnknown_8458A78[2][4];
-extern const u8 gUnknown_8458A98[];
-extern const u8 gUnknown_8458AB8[];
-extern const u8 gUnknown_8458B44[];
-extern const u8 gUnknown_8458CD4[];
-extern const u8 gUnknown_8458D1C[];
-extern const u8 gUnknown_8458D54[];
-extern const u8 gUnknown_8458D78[];
-extern const u8 gUnknown_8458D9C[];
-extern const u8 gUnknown_8458DBC[];
-extern const u8 gUnknown_8458DE8[];
-extern const u8 gUnknown_8458E10[];
-extern const u8 gUnknown_8458E70[];
-extern const u8 gUnknown_8458ED0[];
-extern const u8 gUnknown_8458F04[];
-extern const u8 gUnknown_8458F9C[];
-extern const u8 gUnknown_8458FBC[];
-extern const u8 gUnknown_8458FC8[];
-extern const u8 gUnknown_8458FE4[];
-extern const u8 gUnknown_84591DC[];
-extern const u8 *const gUnknown_84591B8[];
-extern const u8 gUnknown_8459238[];
-extern const u8 gUnknown_8459250[];
-extern const u8 gUnknown_845928C[];
-extern const u8 *const gUnknown_845933C[];
-extern const u8 gUnknown_8459378[];
-extern const u8 *const gUnknown_84594B0[];
-extern const u8 gUnknown_84594C4[];
-extern const u8 gUnknown_8459504[];
-extern const u8 *const gUnknown_8459580[];
-extern const u8 gUnknown_8459588[];
+#include "data/union_room.h"
 
 // These are functions in Emmerald but inlined in FireRed
 
-#define sub_8018404(dest, arg1) ({                                       \
+#define IntlConvPartnerUname7(dest, arg1) ({                                       \
     StringCopy7(dest, (arg1).unk.playerName);                                   \
     ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
 })
 
-#define sub_8018404_2(dest, arg1) ({                                       \
+#define IntlConvPartnerUname(dest, arg1) ({                                       \
     StringCopy(dest, (arg1).unk.playerName);                                   \
     ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
 })
@@ -590,7 +377,7 @@ void sub_8115A68(u8 taskId)
                     }
                     else
                     {
-                        sub_8018404(gStringVar1, data->field_0->arr[data->field_13 - 1]);
+                        IntlConvPartnerUname7(gStringVar1, data->field_0->arr[data->field_13 - 1]);
                         StringExpandPlaceholders(gStringVar4, gUnknown_8457554);
                         data->state = 13;
                     }
@@ -828,7 +615,7 @@ bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
     case 1:
         PlaySE(SE_PC_LOGIN);
         RedrawListMenu(data->listTaskId);
-        sub_8018404(gStringVar2, data->field_0->arr[data->field_13]);
+        IntlConvPartnerUname7(gStringVar2, data->field_0->arr[data->field_13]);
         sub_8116244(gStringVar4, gUnknown_203B058);
         data->state = arg1;
         break;
@@ -842,15 +629,15 @@ bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
     return FALSE;
 }
 
-void sub_81164C8(u8 arg0, s32 id, u8 arg2)
+void sub_81164C8(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 var = 0;
 
-    switch (data->field_0->arr[id].field_1A_0)
+    switch (data->field_0->arr[itemId].field_1A_0)
     {
     case 1:
-        if (data->field_0->arr[id].field_1B != 0)
+        if (data->field_0->arr[itemId].field_1B != 0)
             var = 2;
         break;
     case 2:
@@ -858,7 +645,7 @@ void sub_81164C8(u8 arg0, s32 id, u8 arg2)
         break;
     }
 
-    sub_811A910(arg0, 0, arg2, &data->field_0->arr[id], var, id);
+    sub_811A910(windowId, 0, y, &data->field_0->arr[itemId], var, itemId);
 }
 
 u8 sub_8116524(struct UnkStruct_Main0 * arg0)
@@ -1059,7 +846,7 @@ void sub_8116738(u8 taskId)
         sub_811631C(gStringVar4, gUnknown_203B058);
         if (PrintOnTextbox(&data->textState, gStringVar4))
         {
-            sub_8018404(gStringVar1, data->field_0->arr[data->field_F]);
+            IntlConvPartnerUname7(gStringVar1, data->field_0->arr[data->field_F]);
             data->state = 6;
         }
         break;
@@ -1228,7 +1015,7 @@ void sub_8116D60(struct UnkStruct_Group * data, s32 id)
     LoadWirelessStatusIndicatorSpriteGfx();
     CreateWirelessStatusIndicatorSprite(0, 0);
     RedrawListMenu(data->listTaskId);
-    sub_8018404(gStringVar1, data->field_0->arr[data->field_F]);
+    IntlConvPartnerUname7(gStringVar1, data->field_0->arr[data->field_F]);
     sub_80FB008(gUnknown_84570C8[gSpecialVar_0x8004], 0, 1);
     sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
 }
@@ -1327,12 +1114,12 @@ u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
     return 0;
 }
 
-void sub_8116F94(u8 arg0, s32 id, u8 arg2)
+void sub_8116F94(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Group * data = sUnionRoomMain.group;
-    u8 var = sub_8116F5C(data, id);
+    u8 var = sub_8116F5C(data, itemId);
 
-    sub_811A81C(arg0, 8, arg2, &data->field_0->arr[id], var, id);
+    sub_811A81C(windowId, 8, y, &data->field_0->arr[itemId], var, itemId);
 }
 
 u8 sub_8116FE4(void)
@@ -1827,7 +1614,7 @@ void sub_8117A0C(u8 taskId)
                 data->field_0->arr[data->field_13].field_1B = 0;
                 RedrawListMenu(data->listTaskId);
                 data->field_13++;
-                sub_8018404(gStringVar1, data->field_0->arr[data->field_13 - 1]);
+                IntlConvPartnerUname7(gStringVar1, data->field_0->arr[data->field_13 - 1]);
                 StringExpandPlaceholders(gStringVar4, gUnknown_8457554);
                 data->state = 9;
                 sub_80F8F5C();
@@ -2005,7 +1792,7 @@ void sub_8117F20(u8 taskId)
                     LoadWirelessStatusIndicatorSpriteGfx();
                     CreateWirelessStatusIndicatorSprite(0, 0);
                     RedrawListMenu(data->listTaskId);
-                    sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+                    IntlConvPartnerUname(gStringVar1, data->field_0->arr[data->field_F]);
                     sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.field_0.unk_00.playerTrainerId));
                     PlaySE(SE_PN_ON);
                     data->state = 4;
@@ -2024,7 +1811,7 @@ void sub_8117F20(u8 taskId)
         break;
     case 4:
         AddTextPrinterToWindow1(gUnknown_8459238);
-        sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+        IntlConvPartnerUname(gStringVar1, data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
     case 5:
@@ -2189,7 +1976,7 @@ void sub_81182DC(u8 taskId)
         break;
     case 4:
         AddTextPrinterToWindow1(gUnknown_845928C);
-        sub_8018404_2(gStringVar1, data->field_0->arr[data->field_F]);
+        IntlConvPartnerUname(gStringVar1, data->field_0->arr[data->field_F]);
         data->state = 5;
         break;
     case 5:
@@ -3005,17 +2792,17 @@ void sub_81186E0(u8 taskId)
                 switch (sub_811ADD0(data->field_0->arr[var5].unk.field_0.type, data->field_0->arr[var5].unk.field_0.species))
                 {
                 case 0:
-                    sub_8018404_2(gStringVar1, data->field_0->arr[var5]);
+                    IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
                     sub_8118664(49, gUnknown_8458E70);
                     taskData[1] = var5;
                     break;
                 case 1:
-                    sub_8018404_2(gStringVar1, data->field_0->arr[var5]);
+                    IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
                     sub_8118664(46, gUnknown_8458ED0);
                     break;
                 case 2:
-                    sub_8018404_2(gStringVar1, data->field_0->arr[var5]);
+                    IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
                     StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.field_0.type]);
                     sub_8118664(46, gUnknown_8458F04);
                     break;
@@ -3053,7 +2840,7 @@ void sub_81186E0(u8 taskId)
     case 51:
         gUnknown_203B058 = 0x44;
         sub_80FC114(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.field_0, 0x44);
-        sub_8018404_2(gStringVar1, data->field_0->arr[taskData[1]]);
+        IntlConvPartnerUname(gStringVar1, data->field_0->arr[taskData[1]]);
         sub_811A0B4(gUnknown_8457A34[2]);
         data->state = 25;
         break;
@@ -3177,7 +2964,7 @@ void sub_81199FC(u8 taskId)
                 {
                     if (structPtr->field_0->arr[i].field_1A_0 == 1)
                     {
-                        sub_8018404_2(text, structPtr->field_0->arr[i]);
+                        IntlConvPartnerUname(text, structPtr->field_0->arr[i]);
                         if (sub_80FD338(ReadAsU16(structPtr->field_0->arr[i].unk.field_0.unk_00.playerTrainerId), text))
                         {
                             StringCopy(sUnionRoomPlayerName, text);
@@ -3832,7 +3619,7 @@ void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4,
     r2 = arg3->unk.field_0.unk_0a_0;
     if (arg3->field_1A_0 == 1 && !(r2 & 0x40))
     {
-        sub_8018404_2(sp10, *arg3);
+        IntlConvPartnerUname(sp10, *arg3);
         sub_811A444(arg0, 2, sp10, arg1, arg2, arg4);
         ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gUnknown_84571B4);
@@ -3842,20 +3629,20 @@ void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4,
     }
 }
 
-void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
 {
     u8 sp0[6];
     u8 sp10[30];
 
     if (arg3->field_1A_0 == 1)
     {
-        sub_8018404_2(sp10, *arg3);
-        sub_811A444(arg0, 2, sp10, arg1, arg2, arg4);
+        IntlConvPartnerUname(sp10, *arg3);
+        sub_811A444(windowId, 2, sp10, x, y, arg4);
         ConvertIntToDecimalStringN(sp0, arg3->unk.field_0.unk_00.playerTrainerId[0] | (arg3->unk.field_0.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gUnknown_84571B4);
         StringAppend(gStringVar4, sp0);
-        arg1 += 71;
-        sub_811A444(arg0, 0, gStringVar4, arg1, arg2, arg4);
+        x += 71;
+        sub_811A444(windowId, 0, gStringVar4, x, y, arg4);
     }
 }
 
@@ -3898,7 +3685,7 @@ u32 sub_811A9FC(s32 arg0)
 u32 sub_811AA24(struct UnkStruct_x20 *arg0)
 {
     u8 sp0[30];
-    sub_8018404_2(sp0, *arg0);
+    IntlConvPartnerUname(sp0, *arg0);
     return sub_80FD338(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
 }
 
@@ -3910,7 +3697,7 @@ s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
 
     if (!r5->unk.field_0.unk_0a_7 && arg1 == 0)
     {
-        sub_8018404_2(gStringVar1, *r5);
+        IntlConvPartnerUname(gStringVar1, *r5);
         r2 = sub_80FD338(ReadAsU16(r5->unk.field_0.unk_00.playerTrainerId), gStringVar1);
         if (r5->unk.field_0.unk_0a_0 == 0x45)
         {
@@ -3925,7 +3712,7 @@ s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
     }
     else
     {
-        sub_8018404_2(gStringVar1, *r5);
+        IntlConvPartnerUname(gStringVar1, *r5);
         if (arg1 != 0)
         {
             playerGender = (r5->unk.field_0.unk_00.playerTrainerId[arg1 + 1] >> 3) & 1;
@@ -3957,24 +3744,24 @@ void nullsub_92(u8 windowId, s32 itemId, u8 y)
 
 }
 
-void sub_811ABE4(u8 arg0, u8 arg1, struct GFtgtGname * arg2, const u8 * str, u8 arg4)
+void sub_811ABE4(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 * uname, u8 colorIdx)
 {
-    u8 sp8[4];
-    u16 r8 = arg2->species;
-    u8 r7 = arg2->type;
-    u8 r9 = arg2->level;
+    u8 level_t[4];
+    u16 species = gname->species;
+    u8 type = gname->type;
+    u8 level = gname->level;
 
-    sub_811A444(arg0, 2, str, 8, arg1, arg4);
-    if (r8 == SPECIES_EGG)
+    sub_811A444(windowId, 2, uname, 8, y, colorIdx);
+    if (species == SPECIES_EGG)
     {
-        sub_811A444(arg0, 2, gUnknown_8458FBC, 0x44, arg1, arg4);
+        sub_811A444(windowId, 2, gUnknown_8458FBC, 0x44, y, colorIdx);
     }
     else
     {
-        BlitMoveInfoIcon(arg0, r7 + 1, 0x44, arg1);
-        sub_811A444(arg0, 2, gSpeciesNames[r8], 0x76, arg1, arg4);
-        ConvertIntToDecimalStringN(sp8, r9, STR_CONV_MODE_LEFT_ALIGN, 3);
-        sub_811A444(arg0, 2, sp8, GetStringRightAlignXOffset(2, sp8, 218), arg1, arg4);
+        BlitMoveInfoIcon(windowId, type + 1, 0x44, y);
+        sub_811A444(windowId, 2, gSpeciesNames[species], 0x76, y, colorIdx);
+        ConvertIntToDecimalStringN(level_t, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+        sub_811A444(windowId, 2, level_t, GetStringRightAlignXOffset(2, level_t, 218), y, colorIdx);
     }
 }
 
@@ -3983,7 +3770,7 @@ void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
     struct UnkStruct_Leader *leader = sUnionRoomMain.leader;
     struct GFtgtGname *rfu;
     s32 i, j;
-    u8 sp4[8];
+    u8 uname[8];
 
     if (itemId == -3 && y == gUnknown_8456F7C.upText_Y)
     {
@@ -4004,8 +3791,8 @@ void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
             }
             if (j == itemId + 1)
             {
-                sub_8018404_2(sp4, leader->field_0->arr[i]);
-                sub_811ABE4(windowId, y, &leader->field_0->arr[i].unk.field_0, sp4, 6);
+                IntlConvPartnerUname(uname, leader->field_0->arr[i]);
+                sub_811ABE4(windowId, y, &leader->field_0->arr[i].unk.field_0, uname, 6);
                 break;
             }
         }

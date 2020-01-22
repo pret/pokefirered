@@ -35,31 +35,31 @@ EventScript_BufferPocketNameTryFanfare:: @ 81A66BC
 	end
 
 EventScript_BufferItemsPocket:: @ 81A66F9
-	getstdstring 2, 24
+	getstdstring 2, STDSTRING_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferKeyItemsPocket:: @ 81A6709
-	getstdstring 2, 25
+	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferPokeBallsPocket:: @ 81A6719
-	getstdstring 2, 26
+	getstdstring 2, STDSTRING_POKEBALLS_POCKET
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferTMCase:: @ 81A6729
-	getstdstring 2, 27
+	getstdstring 2, STDSTRING_TM_CASE
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedTMHM
 	return
 
 EventScript_BufferBerryPouch:: @ 81A6739
-	getstdstring 2, 28
+	getstdstring 2, STDSTRING_BERRY_POUCH
 	compare VAR_0x8007, TRUE
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return
@@ -218,7 +218,7 @@ EventScript_TryPickUpHiddenCoins::
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_HiddenCoinsButCaseIsFull
 	addcoins VAR_0x8006
-	getstdstring 1, 0x17
+	getstdstring 1, STDSTRING_COINS
 	call EventScript_PlayFanfareObtainedItem
 	call EventScript_FoundCoins
 	waitfanfare
@@ -230,7 +230,7 @@ EventScript_TryPickUpHiddenCoins::
 
 EventScript_HiddenCoinsButCaseIsFull::
 	getnumberstring 0, VAR_0x8006
-	getstdstring 1, 0x17
+	getstdstring 1, STDSTRING_COINS
 	msgbox Text_FoundXCoins
 	msgbox Text_CoinCaseIsFull
 	setvar VAR_RESULT, 0
@@ -239,7 +239,7 @@ EventScript_HiddenCoinsButCaseIsFull::
 
 EventScript_NoCaseForHiddenCoins::
 	getnumberstring 0, VAR_0x8006
-	getstdstring 1, 0x17
+	getstdstring 1, STDSTRING_COINS
 	msgbox Text_FoundXCoins
 	msgbox Text_NothingToPutThemIn
 	setvar VAR_RESULT, 0

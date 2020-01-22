@@ -4,14 +4,14 @@ UnionRoom_MapScripts:: @ 816047C
 	.byte 0
 
 UnionRoom_OnResume:: @ 8160487
-	setflag FLAG_HIDE_UNION_ROOM_1
-	setflag FLAG_HIDE_UNION_ROOM_2
-	setflag FLAG_HIDE_UNION_ROOM_3
-	setflag FLAG_HIDE_UNION_ROOM_4
-	setflag FLAG_HIDE_UNION_ROOM_5
-	setflag FLAG_HIDE_UNION_ROOM_6
-	setflag FLAG_HIDE_UNION_ROOM_7
-	setflag FLAG_HIDE_UNION_ROOM_8
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_1
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_2
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_3
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_4
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_5
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_6
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_7
+	setflag FLAG_HIDE_UNION_ROOM_PLAYER_8
 	removeobject 9
 	removeobject 8
 	removeobject 7
@@ -26,7 +26,7 @@ UnionRoom_OnResume:: @ 8160487
 UnionRoom_OnTransition:: @ 81604BB
 	end
 
-UnionRoom_EventScript_1604BC:: @ 81604BC
+UnionRoom_EventScript_Player1:: @ 81604BC
 	lock
 	faceplayer
 	setvar VAR_RESULT, 1
@@ -34,7 +34,7 @@ UnionRoom_EventScript_1604BC:: @ 81604BC
 	release
 	end
 
-UnionRoom_EventScript_1604C6:: @ 81604C6
+UnionRoom_EventScript_Player2:: @ 81604C6
 	lock
 	faceplayer
 	setvar VAR_RESULT, 2
@@ -42,7 +42,7 @@ UnionRoom_EventScript_1604C6:: @ 81604C6
 	release
 	end
 
-UnionRoom_EventScript_1604D0:: @ 81604D0
+UnionRoom_EventScript_Player3:: @ 81604D0
 	lock
 	faceplayer
 	setvar VAR_RESULT, 3
@@ -50,7 +50,7 @@ UnionRoom_EventScript_1604D0:: @ 81604D0
 	release
 	end
 
-UnionRoom_EventScript_1604DA:: @ 81604DA
+UnionRoom_EventScript_Player4:: @ 81604DA
 	lock
 	faceplayer
 	setvar VAR_RESULT, 4
@@ -58,7 +58,7 @@ UnionRoom_EventScript_1604DA:: @ 81604DA
 	release
 	end
 
-UnionRoom_EventScript_1604E4:: @ 81604E4
+UnionRoom_EventScript_Player5:: @ 81604E4
 	lock
 	faceplayer
 	setvar VAR_RESULT, 5
@@ -66,7 +66,7 @@ UnionRoom_EventScript_1604E4:: @ 81604E4
 	release
 	end
 
-UnionRoom_EventScript_1604EE:: @ 81604EE
+UnionRoom_EventScript_Player6:: @ 81604EE
 	lock
 	faceplayer
 	setvar VAR_RESULT, 6
@@ -74,7 +74,7 @@ UnionRoom_EventScript_1604EE:: @ 81604EE
 	release
 	end
 
-UnionRoom_EventScript_1604F8:: @ 81604F8
+UnionRoom_EventScript_Player7:: @ 81604F8
 	lock
 	faceplayer
 	setvar VAR_RESULT, 7
@@ -82,7 +82,7 @@ UnionRoom_EventScript_1604F8:: @ 81604F8
 	release
 	end
 
-UnionRoom_EventScript_160502:: @ 8160502
+UnionRoom_EventScript_Player8:: @ 8160502
 	lock
 	faceplayer
 	setvar VAR_RESULT, 8
@@ -90,7 +90,7 @@ UnionRoom_EventScript_160502:: @ 8160502
 	release
 	end
 
-UnionRoom_EventScript_16050C:: @ 816050C
+UnionRoom_EventScript_Attendant:: @ 816050C
 	lock
 	faceplayer
 	setvar VAR_RESULT, 9
@@ -98,7 +98,7 @@ UnionRoom_EventScript_16050C:: @ 816050C
 	release
 	end
 
-UnionRoom_EventScript_160516:: @ 8160516
+UnionRoom_EventScript_Unused:: @ 8160516
 	lockall
 	setvar VAR_RESULT, 10
 	waitstate

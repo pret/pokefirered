@@ -978,7 +978,7 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
     if (sTrainerBattleEndScript != NULL)
         return sTrainerBattleEndScript;
     else
-        return EventScript_1C555B;
+        return Test_EventScript_Sign;
 }
 
 const u8 *BattleSetup_GetTrainerPostBattleScript(void)
@@ -986,7 +986,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
     if (sTrainerABattleScriptRetAddr != NULL)
         return sTrainerABattleScriptRetAddr;
     else
-        return EventScript_1C555B;
+        return Test_EventScript_Sign;
 }
 
 void ScrSpecial_ShowTrainerNonBattlingSpeech(void)

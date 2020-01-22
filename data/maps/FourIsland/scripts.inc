@@ -69,66 +69,66 @@ Movement_167D52:: @ 8167D52
 	walk_in_place_fastest_right
 	step_end
 
-FourIsland_EventScript_167D55:: @ 8167D55
+FourIsland_EventScript_DaycareMan:: @ 8167D55
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_167D9B
-	compare VAR_RESULT, 2
-	goto_if_eq EventScript_167E0C
-	compare VAR_RESULT, 3
-	goto_if_eq EventScript_167E19
-	msgbox gUnknown_81BF555
+	compare VAR_RESULT, DAYCARE_EGG_WAITING
+	goto_if_eq FourIsland_EventScript_DaycareEggWaiting
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_EventScript_CheckOnOneMon
+	compare VAR_RESULT, DAYCARE_TWO_MONS
+	goto_if_eq FourIsland_EventScript_CheckOnTwoMons
+	msgbox DayCare_Text_ImDaycareManSpeakToMyWife
 	release
 	end
 
-EventScript_167D9B:: @ 8167D9B
-	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
+FourIsland_EventScript_DaycareEggWaiting:: @ 8167D9B
+	msgbox DayCare_Text_DoYouWantEgg, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_167DD1
-	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
+	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	msgbox DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_167DD1
-	msgbox gUnknown_81BF6CF
+	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	msgbox DayCare_Text_IllKeepIt
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
 	end
 
-EventScript_167DD1:: @ 8167DD1
+FourIsland_EventScript_DaycareAcceptEgg:: @ 8167DD1
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare VAR_RESULT, 6
-	goto_if_ne EventScript_167DEB
-	msgbox gUnknown_81BF6F0
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne FourIsland_EventScript_DaycareReceivedEgg
+	msgbox DayCare_Text_YouHaveNoRoomForIt
 	release
 	end
 
-EventScript_167DEB:: @ 8167DEB
+FourIsland_EventScript_DaycareReceivedEgg:: @ 8167DEB
 	textcolor 3
-	message Text_1BF72A
+	message DayCare_Text_ReceivedEgg
 	call EventScript_1A6675
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	msgbox gUnknown_81BF755
+	msgbox DayCare_Text_TakeGoodCareOfIt
 	special GiveEggFromDaycare
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
 	end
 
-EventScript_167E0C:: @ 8167E0C
+FourIsland_EventScript_CheckOnOneMon:: @ 8167E0C
 	special GetDaycareMonNicknames
-	msgbox gUnknown_81BF69A
+	msgbox DayCare_Text_YourMonIsDoingFine
 	release
 	end
 
-EventScript_167E19:: @ 8167E19
+FourIsland_EventScript_CheckOnTwoMons:: @ 8167E19
 	special GetDaycareMonNicknames
-	msgbox gUnknown_81BF789
+	msgbox DayCare_Text_YourMonsAreDoingFine
 	special SetDaycareCompatibilityString
 	special Special_ShowStringVar4AsFieldMessage
 	waitmessage

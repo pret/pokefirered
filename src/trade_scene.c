@@ -2443,7 +2443,7 @@ static void CreateInGameTradePokemonInternal(u8 playerSlot, u8 inGameTradeIdx)
     const struct InGameTrade * inGameTrade = &sInGameTrades[inGameTradeIdx];
     u8 level = GetMonData(&gPlayerParty[playerSlot], MON_DATA_LEVEL);
     struct MailStruct mail;
-    u8 metLocation = MAPSEC_IN_GAME_TRADE;
+    u8 metLocation = METLOC_IN_GAME_TRADE;
     struct Pokemon * tradeMon = &gEnemyParty[0];
     u8 mailNum;
     CreateMon(tradeMon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, TRUE, inGameTrade->otId);

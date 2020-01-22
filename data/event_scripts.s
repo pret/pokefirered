@@ -28,6 +28,7 @@
 #include "constants/union_room.h"
 #include "constants/trade.h"
 #include "constants/quest_log.h"
+#include "constants/daycare.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -739,6 +740,7 @@ gStdScriptsEnd::
 	.include "data/maps/Route2_EastBuilding/text.inc"
 	.include "data/maps/Route2_ViridianForest_NorthEntrance/text.inc"
 	.include "data/maps/Route4_PokemonCenter_1F/text.inc"
+	.include "data/maps/Route5_PokemonDayCare/text.inc"
 	.include "data/maps/Route5_SouthEntrance/text.inc"
 	.include "data/maps/Route6_NorthEntrance/text.inc"
 	.include "data/maps/Route7_EastEntrance/text.inc"
@@ -1847,23 +1849,23 @@ EventScript_1A8E6F:: @ 81A8E6F
 	end
 
 EventScript_1A8EAC:: @ 81A8EAC
-	getstdstring 2, 24
+	getstdstring 2, STDSTRING_ITEMS_POCKET
 	return
 
 EventScript_1A8EB1:: @ 81A8EB1
-	getstdstring 2, 25
+	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
 	return
 
 EventScript_1A8EB6:: @ 81A8EB6
-	getstdstring 2, 26
+	getstdstring 2, STDSTRING_POKEBALLS_POCKET
 	return
 
 EventScript_1A8EBB:: @ 81A8EBB
-	getstdstring 2, 27
+	getstdstring 2, STDSTRING_TM_CASE
 	return
 
 EventScript_1A8EC0:: @ 81A8EC0
-	getstdstring 2, 28
+	getstdstring 2, STDSTRING_BERRY_POUCH
 	return
 
 	.include "data/scripts/seagallop.inc"
@@ -2320,6 +2322,7 @@ EventScript_1B2DF6:: @ 81B2DF6
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/mystery_event_club.inc"
 	.include "data/scripts/day_care.inc"
+	.include "data/text/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/repel.inc"
 

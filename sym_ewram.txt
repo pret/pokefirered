@@ -354,11 +354,10 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/union_room.o"
 	.align 2
 	.include "src/rfu_union_tool.o"
+	.align 2
+	.include "src/union_room_battle.o"
 
 	.align 2
-gUnknown_203B08C: @ 203B08C
-	.space 0x4
-
 gUnknown_203B090: @ 203B090
 	.space 0x4
 

@@ -153,4 +153,6 @@ extern struct GFtgtGnameSub gUnknown_203B064;
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 
+void sub_81173C0(u16 battleFlags);
+
 #endif //GUARD_UNION_ROOM_H

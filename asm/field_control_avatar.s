@@ -1100,11 +1100,11 @@ sub_806D0E4: @ 806D0E4
 	ldr r0, [r5, 0x8]
 	cmp r0, 0
 	bne _0806D120
-	ldr r0, _0806D11C @ =EventScript_1C555B
+	ldr r0, _0806D11C @ =Test_EventScript_Sign
 	b _0806D1E6
 	.align 2, 0
 _0806D118: .4byte gMapHeader
-_0806D11C: .4byte EventScript_1C555B
+_0806D11C: .4byte Test_EventScript_Sign
 _0806D120:
 	adds r0, r7, 0
 	adds r1, r6, 0
@@ -1834,11 +1834,11 @@ _0806D704:
 	beq _0806D720
 	movs r0, 0xD
 	bl IncrementGameStat
-	ldr r0, _0806D71C @ =EventScript_81BF546
+	ldr r0, _0806D71C @ =EventScript_EggHatch
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D71C: .4byte EventScript_81BF546
+_0806D71C: .4byte EventScript_EggHatch
 _0806D720:
 	bl SafariZoneTakeStep
 	lsls r0, 24
@@ -2150,13 +2150,13 @@ _0806D950:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
 	bne _0806D958
-	ldr r0, _0806D960 @ =EventScript_1C555B
+	ldr r0, _0806D960 @ =Test_EventScript_Sign
 _0806D958:
 	pop {r4}
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806D960: .4byte EventScript_1C555B
+_0806D960: .4byte Test_EventScript_Sign
 	thumb_func_end sub_806D928
 
 	thumb_func_start mapheader_run_first_tag2_script_list_match_conditionally

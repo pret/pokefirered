@@ -320,7 +320,7 @@ EventScript_1C5410:
 	message Text_ObtainedTheX
 	waitfanfare
 	waitmessage
-	getstdstring 2, 24
+	getstdstring 2, STDSTRING_ITEMS_POCKET
 	msgbox Text_PutItemAway
 	call EventScript_1A6675
 	goto EventScript_1C544F

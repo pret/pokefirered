@@ -194,7 +194,7 @@ gSpecials:: @ 815FD60
 	def_special RejectEggFromDayCare
 	def_special GiveEggFromDaycare
 	def_special SetDaycareCompatibilityString
-	def_special GetSelectedMonNickAndSpecies
+	def_special GetSelectedMonNicknameAndSpecies
 	def_special StoreSelectedPokemonInDaycare
 	def_special ChooseSendDaycareMon
 	def_special ShowDaycareLevelMenu

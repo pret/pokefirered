@@ -47,7 +47,7 @@ bool8 SafariZoneTakeStep(void)
     gSafariZoneStepCounter--;
     if (gSafariZoneStepCounter == 0)
     {
-        ScriptContext1_SetupScript(EventScript_SafariTimesUp);
+        ScriptContext1_SetupScript(SafariZone_EventScript_TimesUp);
         return TRUE;
     }
     return FALSE;
@@ -55,7 +55,7 @@ bool8 SafariZoneTakeStep(void)
 
 void SafariZoneRetirePrompt(void)
 {
-    ScriptContext1_SetupScript(EventScript_SafariRetire);
+    ScriptContext1_SetupScript(SafariZone_EventScript_RetirePrompt);
 }
 
 void CB2_EndSafariBattle(void)
@@ -66,14 +66,14 @@ void CB2_EndSafariBattle(void)
     }
     else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
     {
-        ScriptContext2_RunNewScript(EventScript_SafariWarpOut);
+        ScriptContext2_RunNewScript(SafariZone_EventScript_OutOfBallsMidBattle);
         WarpIntoMap();
         gFieldCallback = sub_807E3EC;
         SetMainCallback2(CB2_LoadMap);
     }
     else if (gBattleOutcome == B_OUTCOME_CAUGHT)
     {
-        ScriptContext1_SetupScript(EventScript_SafariOutOfBalls);
+        ScriptContext1_SetupScript(SafariZone_EventScript_OutOfBalls);
         ScriptContext1_Stop();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }

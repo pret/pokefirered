@@ -1,116 +1,116 @@
-gUnknown_81A9288:: @ 81A9288
+Braille_Text_Up:: @ 81A9288
 	.braille "UP$"
 
-gUnknown_81A928B:: @ 81A928B
+Braille_Text_Down:: @ 81A928B
 	.braille "DOWN$"
 
-gUnknown_81A9290:: @ 81A9290
+Braille_Text_Right:: @ 81A9290
 	.braille "RIGHT$"
 
-gUnknown_81A9296:: @ 81A9296
+Braille_Text_Left:: @ 81A9296
 	.braille "LEFT$"
 
-gUnknown_81A929B:: @ 81A929B
+Braille_Text_Cut:: @ 81A929B
 	.braille "CUT$"
 
-gUnknown_81A929F:: @ 81A929F
+Braille_Text_ABC:: @ 81A929F
 	.braille "ABC$"
 
-gUnknown_81A92A3:: @ 81A92A3
+Braille_Text_GHI:: @ 81A92A3
 	.braille "GHI$"
 
-gUnknown_81A92A7:: @ 81A92A7
+Braille_Text_MNO:: @ 81A92A7
 	.braille "MNO$"
 
-gUnknown_81A92AB:: @ 81A92AB
+Braille_Text_TUV:: @ 81A92AB
 	.braille "TUV$"
 
-gUnknown_81A92AF:: @ 81A92AF
+Braille_Text_DEF:: @ 81A92AF
 	.braille "DEF$"
 
-gUnknown_81A92B3:: @ 81A92B3
+Braille_Text_JKL:: @ 81A92B3
 	.braille "JKL$"
 
-gUnknown_81A92B7:: @ 81A92B7
+Braille_Text_PQRS:: @ 81A92B7
 	.braille "PQRS$"
 
-gUnknown_81A92BC:: @ 81A92BC
+Braille_Text_WXYZ:: @ 81A92BC
 	.braille "WXYZ$"
 
-gUnknown_81A92C1:: @ 81A92C1
+Braille_Text_Period:: @ 81A92C1
 	.braille ".$"
 
-gUnknown_81A92C3:: @ 81A92C3
+Braille_Text_Comma:: @ 81A92C3
 	.braille ",$"
 
-gUnknown_81A92C5:: @ 81A92C5
+Braille_Text_Everything:: @ 81A92C5
 	.braille "EVERYTHING$"
 
-gUnknown_81A92D0:: @ 81A92D0
+Braille_Text_HasMeaning1:: @ 81A92D0
 	.braille "HAS MEANING$"
 
-gUnknown_81A92DC:: @ 81A92DC
+Braille_Text_Existence:: @ 81A92DC
 	.braille "EXISTENCE$"
 
-gUnknown_81A92E6:: @ 81A92E6
+Braille_Text_HasMeaning2:: @ 81A92E6
 	.braille "HAS MEANING$"
 
-gUnknown_81A92F2:: @ 81A92F2
+Braille_Text_BeingAlive:: @ 81A92F2
 	.braille "BEING ALIVE$"
 
-gUnknown_81A92FE:: @ 81A92FE
+Braille_Text_HasMeaning3:: @ 81A92FE
 	.braille "HAS MEANING$"
 
-gUnknown_81A930A:: @ 81A930A
+Braille_Text_HaveDreams:: @ 81A930A
 	.braille "HAVE DREAMS$"
 
-gUnknown_81A9316:: @ 81A9316
+Braille_Text_UsePower:: @ 81A9316
 	.braille "USE POWER.$"
 
-gUnknown_81A9321:: @ 81A9321
+Braille_Text_LetTheTwo:: @ 81A9321
 	.braille "LET THE TWO$"
 
-gUnknown_81A932D:: @ 81A932D
+Braille_Text_Glittering:: @ 81A932D
 	.braille "GLITTERING$"
 
-gUnknown_81A9338:: @ 81A9338
+Braille_Text_Stones:: @ 81A9338
 	.braille "STONES$"
 
-gUnknown_81A933F:: @ 81A933F
+Braille_Text_OneInRed:: @ 81A933F
 	.braille "ONE IN RED$"
 
-gUnknown_81A934A:: @ 81A934A
+Braille_Text_OneInBlue:: @ 81A934A
 	.braille "ONE IN BLUE$"
 
-gUnknown_81A9356:: @ 81A9356
+Braille_Text_ConnectThe:: @ 81A9356
 	.braille "CONNECT THE$"
 
-gUnknown_81A9362:: @ 81A9362
+Braille_Text_Past:: @ 81A9362
 	.braille "PAST.$"
 
-gUnknown_81A9368:: @ 81A9368
+Braille_Text_TwoFriends:: @ 81A9368
 	.braille "TWO FRIENDS$"
 
-gUnknown_81A9374:: @ 81A9374
+Braille_Text_Sharing:: @ 81A9374
 	.braille "SHARING$"
 
-gUnknown_81A937C:: @ 81A937C
+Braille_Text_PowerOpen:: @ 81A937C
 	.braille "POWER OPEN$"
 
-gUnknown_81A9387:: @ 81A9387
+Braille_Text_AWindowTo:: @ 81A9387
 	.braille "A WINDOW TO$"
 
-gUnknown_81A9393:: @ 81A9393
+Braille_Text_ANewWorld:: @ 81A9393
 	.braille "A NEW WORLD$"
 
-gUnknown_81A939F:: @ 81A939F
+Braille_Text_ThatGlows:: @ 81A939F
 	.braille "THAT GLOWS.$"
 
-gUnknown_81A93AB:: @ 81A93AB
+Braille_Text_TheNext:: @ 81A93AB
 	.braille "THE NEXT$"
 
-gUnknown_81A93B4:: @ 81A93B4
+Braille_Text_WorldWaits:: @ 81A93B4
 	.braille "WORLD WAITS$"
 
-gUnknown_81A93C0:: @ 81A93C0
+Braille_Text_ForYou:: @ 81A93C0
 	.braille "FOR YOU.$"

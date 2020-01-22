@@ -91,7 +91,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route12_EventScript_168014",
+      "script": "Route12_EventScript_Snorlax",
       "flag": "FLAG_HIDE_ROUTE_12_SNORLAX"
     },
     {
@@ -249,14 +249,14 @@
       "x": 17,
       "y": 13,
       "elevation": 0,
-      "script": "Route12_EventScript_1680A3"
+      "script": "Route12_EventScript_RouteSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 69,
       "elevation": 0,
-      "script": "Route12_EventScript_1680AC"
+      "script": "Route12_EventScript_FishingSign"
     },
     {
       "type": "hidden_item",

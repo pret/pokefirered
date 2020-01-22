@@ -78,4 +78,35 @@
 #define LISTMENU_BERRY_POWDER              5
 #define LISTMENU_TRAINER_TOWER_FLOORS      6
 
+// Std String Ids
+#define STDSTRING_COOL              0
+#define STDSTRING_BEAUTY            1
+#define STDSTRING_CUTE              2
+#define STDSTRING_SMART             3
+#define STDSTRING_TOUGH             4
+#define STDSTRING_COOL2             5
+#define STDSTRING_BEAUTY2           6
+#define STDSTRING_CUTE2             7
+#define STDSTRING_SMART2            8
+#define STDSTRING_TOUGH2            9
+#define STDSTRING_ITEMS             10
+#define STDSTRING_KEY_ITEMS         11
+#define STDSTRING_POKEBALLS         12
+#define STDSTRING_TMHMS             13
+#define STDSTRING_BERRIES           14
+#define STDSTRING_BOULDER_BADGE     15
+#define STDSTRING_CASCADE_BADGE     16
+#define STDSTRING_THUNDER_BADGE     17
+#define STDSTRING_RAINBOW_BADGE     18
+#define STDSTRING_SOUL_BADGE        19
+#define STDSTRING_MARSH_BADGE       20
+#define STDSTRING_VOLCANO_BADGE     21
+#define STDSTRING_EARTH_BADGE       22
+#define STDSTRING_COINS             23
+#define STDSTRING_ITEMS_POCKET      24
+#define STDSTRING_KEY_ITEMS_POCKET  25
+#define STDSTRING_POKEBALLS_POCKET  26
+#define STDSTRING_TM_CASE           27
+#define STDSTRING_BERRY_POUCH       28
+
 #endif //GUARD_CONSTANTS_MENU_H

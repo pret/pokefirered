@@ -1,24 +1,24 @@
-gUnknown_8198DF9:: @ 8198DF9
+FuchsiaCity_WardensHouse_Text_HifFuffHefifoo:: @ 8198DF9
     .string "WARDEN: Hif fuff hefifoo!\p"
     .string "Ha lof ha feef ee hafahi ho.\n"
     .string "Heff hee fwee!$"
 
-gUnknown_8198E3F:: @ 8198E3F
+FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo:: @ 8198E3F
     .string "Ah howhee ho hoo!\n"
     .string "Eef ee hafahi ho!$"
 
-gUnknown_8198E63:: @ 8198E63
+FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo:: @ 8198E63
     .string "Ha?\n"
     .string "He ohay heh ha hoo ee haheh!$"
 
-Text_198E84:: @ 8198E84
+FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden:: @ 8198E84
     .string "{PLAYER} gave the GOLD TEETH\n"
     .string "to the WARDEN.$"
 
-gUnknown_8198EAA:: @ 8198EAA
+FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth:: @ 8198EAA
     .string "The WARDEN popped in his teeth!$"
 
-gUnknown_8198ECA:: @ 8198ECA
+FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething:: @ 8198ECA
     .string "WARDEN: Thanks, son!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
@@ -28,7 +28,7 @@ gUnknown_8198ECA:: @ 8198ECA
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
-gUnknown_8198F96:: @ 8198F96
+FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething:: @ 8198F96
     .string "WARDEN: Thank you, lassie!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
@@ -38,11 +38,11 @@ gUnknown_8198F96:: @ 8198F96
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
-gUnknown_8199068:: @ 8199068
+FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden:: @ 8199068
     .string "{PLAYER} received HM04\n"
     .string "from the WARDEN.$"
 
-gUnknown_819908A:: @ 819908A
+FuchsiaCity_WardensHouse_Text_ExplainStrength:: @ 819908A
     .string "WARDEN: Inside HM04 you'll find\n"
     .string "STRENGTH.\p"
     .string "It lets POKéMON move boulders when\n"
@@ -50,15 +50,16 @@ gUnknown_819908A:: @ 819908A
     .string "Oh yes, did you find the SECRET\n"
     .string "HOUSE in the SAFARI ZONE?$"
 
-Text_19912B:: @ 819912B
+@ Unused
+FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff:: @ 819912B
     .string "なんや　にもつ\n"
     .string "いっぱいやんけ！$"
 
-gUnknown_819913C:: @ 819913C
+FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay:: @ 819913C
     .string "POKéMON photos and fossils are on\n"
     .string "display.$"
 
-gUnknown_8199167:: @ 8199167
+FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay:: @ 8199167
     .string "Old POKéMON merchandise is on\n"
     .string "display.$"
 

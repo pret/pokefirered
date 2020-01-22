@@ -2,7 +2,7 @@
 #define GUARD_UNION_ROOM_H
 
 #include "global.h"
-#include "librfu.h"
+#include "link_rfu.h"
 
 struct UnkStruct_Shared
 {

@@ -5,133 +5,8 @@
 
 	.text
 
-	thumb_func_start is_walking_or_running
-is_walking_or_running: @ 811B504
-	push {lr}
-	ldr r0, _0811B518 @ =gPlayerAvatar
-	ldrb r0, [r0, 0x3]
-	cmp r0, 0x2
-	beq _0811B512
-	cmp r0, 0
-	bne _0811B51C
-_0811B512:
-	movs r0, 0x1
-	b _0811B51E
-	.align 2, 0
-_0811B518: .4byte gPlayerAvatar
-_0811B51C:
-	movs r0, 0
-_0811B51E:
-	pop {r1}
-	bx r1
-	thumb_func_end is_walking_or_running
-
-	thumb_func_start sub_811B524
-sub_811B524: @ 811B524
-	ldr r3, _0811B538 @ =gUnknown_84570D8
-	movs r2, 0x7
-	ands r2, r1
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 1
-	adds r2, r1
-	adds r2, r3
-	ldrb r0, [r2]
-	bx lr
-	.align 2, 0
-_0811B538: .4byte gUnknown_84570D8
-	thumb_func_end sub_811B524
-
-	thumb_func_start sub_811B53C
-sub_811B53C: @ 811B53C
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r4, _0811B584 @ =gUnknown_84570EC
-	mov r8, r4
-	lsls r0, 2
-	adds r4, r0, r4
-	movs r6, 0
-	ldrsh r5, [r4, r6]
-	ldr r6, _0811B588 @ =gUnknown_845710C
-	lsls r1, 1
-	adds r4, r1, r6
-	ldrb r4, [r4]
-	lsls r4, 24
-	asrs r4, 24
-	adds r5, r4
-	adds r5, 0x7
-	str r5, [r2]
-	movs r2, 0x2
-	add r8, r2
-	add r0, r8
-	movs r4, 0
-	ldrsh r0, [r0, r4]
-	adds r6, 0x1
-	adds r1, r6
-	ldrb r1, [r1]
-	lsls r1, 24
-	asrs r1, 24
-	adds r0, r1
-	adds r0, 0x7
-	str r0, [r3]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0811B584: .4byte gUnknown_84570EC
-_0811B588: .4byte gUnknown_845710C
-	thumb_func_end sub_811B53C
-
-	thumb_func_start sub_811B58C
-sub_811B58C: @ 811B58C
-	push {r4-r7,lr}
-	mov r12, r3
-	ldr r7, _0811B5CC @ =gUnknown_84570EC
-	lsls r5, r0, 2
-	adds r0, r5, r7
-	movs r4, 0
-	ldrsh r3, [r0, r4]
-	ldr r6, _0811B5D0 @ =gUnknown_845710C
-	lsls r4, r1, 1
-	adds r0, r4, r6
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	adds r3, r0
-	adds r3, 0x7
-	cmp r3, r2
-	bne _0811B5D4
-	adds r0, r7, 0x2
-	adds r0, r5, r0
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	adds r0, r6, 0x1
-	adds r0, r4, r0
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	adds r1, r0
-	adds r1, 0x7
-	cmp r1, r12
-	bne _0811B5D4
-	movs r0, 0x1
-	b _0811B5D6
-	.align 2, 0
-_0811B5CC: .4byte gUnknown_84570EC
-_0811B5D0: .4byte gUnknown_845710C
-_0811B5D4:
-	movs r0, 0
-_0811B5D6:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_811B58C
-
-	thumb_func_start sub_811B5DC
-sub_811B5DC: @ 811B5DC
+	thumb_func_start IsUnionRoomPlayerHidden
+IsUnionRoomPlayerHidden: @ 811B5DC
 	push {lr}
 	adds r0, 0x63
 	lsls r0, 16
@@ -141,7 +16,7 @@ sub_811B5DC: @ 811B5DC
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811B5DC
+	thumb_func_end IsUnionRoomPlayerHidden
 
 	thumb_func_start sub_811B5F0
 sub_811B5F0: @ 811B5F0
@@ -757,7 +632,7 @@ sub_811BA78: @ 811BA78
 	movs r4, 0
 _0811BA7C:
 	adds r0, r4, 0
-	bl sub_811B5DC
+	bl IsUnionRoomPlayerHidden
 	cmp r0, 0
 	bne _0811BA92
 	adds r0, r4, 0

@@ -1,6 +1,8 @@
 #ifndef GUARD_UNION_ROOM_PLAYER_AVATAR_H
 #define GUARD_UNION_ROOM_PLAYER_AVATAR_H
 
+#include "union_room.h"
+
 void sub_811C1C8(void);
 void sub_811BAAC(u8 *spriteIds, s32 arg1);
 void sub_811BB40(u8 *spriteIds);

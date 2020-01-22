@@ -38,7 +38,7 @@
 #include "trainer_card.h"
 #include "union_room.h"
 #include "union_room_chat.h"
-#include "union_room_player_avatar.h"
+#include "rfu_union_tool.h"
 #include "union_room_message.h"
 #include "constants/songs.h"
 #include "constants/maps.h"

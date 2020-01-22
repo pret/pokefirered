@@ -242,7 +242,7 @@ SECTIONS {
         src/menu.o(.text);
         src/quest_log.o(.text);
         src/union_room.o(.text);
-        asm/union_room_player_avatar.o(.text);
+        asm/rfu_union_tool.o(.text);
         asm/pokemon_special_anim.o(.text);
         src/party_menu.o(.text);
         asm/union_room_chat.o(.text);
@@ -528,7 +528,7 @@ SECTIONS {
         src/menu.o(.rodata);
         src/quest_log.o(.rodata);
         src/union_room.o(.rodata);
-        data/union_room_player_avatar.o(.rodata);
+        data/rfu_union_tool.o(.rodata);
         data/union_room_message.o(.rodata);
         data/pokemon_special_anim.o(.rodata);
         src/party_menu.o(.rodata);

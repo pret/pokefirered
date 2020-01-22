@@ -338,7 +338,7 @@ sub_811B754: @ 811B754
 	ldr r0, _0811B798 @ =gUnknown_203B088
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _0811B79C @ =gUnknown_203B084
+	ldr r0, _0811B79C @ =UnionObjWork
 	str r4, [r0]
 	cmp r4, 0
 	bne _0811B774
@@ -369,7 +369,7 @@ _0811B77A:
 	bx r1
 	.align 2, 0
 _0811B798: .4byte gUnknown_203B088
-_0811B79C: .4byte gUnknown_203B084
+_0811B79C: .4byte UnionObjWork
 _0811B7A0: .4byte gUnknown_8457138
 _0811B7A4: .4byte gUnknown_8457178
 	thumb_func_end sub_811B754
@@ -518,7 +518,7 @@ sub_811B8BC: @ 811B8BC
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	adds r6, r2, 0
-	ldr r1, _0811B8F4 @ =gUnknown_203B084
+	ldr r1, _0811B8F4 @ =UnionObjWork
 	lsls r0, 2
 	ldr r1, [r1]
 	adds r4, r1, r0
@@ -542,7 +542,7 @@ _0811B8DA:
 	movs r0, 0
 	b _0811B906
 	.align 2, 0
-_0811B8F4: .4byte gUnknown_203B084
+_0811B8F4: .4byte UnionObjWork
 _0811B8F8: .4byte gUnknown_8457138
 _0811B8FC: .4byte 0x00000231
 _0811B900: .4byte gUnknown_8457178
@@ -557,7 +557,7 @@ _0811B906:
 	thumb_func_start sub_811B90C
 sub_811B90C: @ 811B90C
 	push {r4,lr}
-	ldr r1, _0811B934 @ =gUnknown_203B084
+	ldr r1, _0811B934 @ =UnionObjWork
 	lsls r0, 2
 	ldr r1, [r1]
 	adds r4, r1, r0
@@ -577,7 +577,7 @@ _0811B926:
 	movs r0, 0
 	b _0811B946
 	.align 2, 0
-_0811B934: .4byte gUnknown_203B084
+_0811B934: .4byte UnionObjWork
 _0811B938: .4byte gUnknown_8457138
 _0811B93C: .4byte 0x00000241
 _0811B940: .4byte gUnknown_8457178
@@ -669,7 +669,7 @@ _0811B9CE:
 	thumb_func_start sub_811B9D8
 sub_811B9D8: @ 811B9D8
 	push {r4,r5,lr}
-	ldr r5, _0811BA08 @ =gUnknown_203B084
+	ldr r5, _0811BA08 @ =UnionObjWork
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0811B9EE
@@ -693,7 +693,7 @@ _0811B9F0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811BA08: .4byte gUnknown_203B084
+_0811BA08: .4byte UnionObjWork
 _0811BA0C: .4byte gUnknown_8457138
 _0811BA10: .4byte 0x00000283
 _0811BA14: .4byte gUnknown_8457178
@@ -768,7 +768,7 @@ _0811BA92:
 	adds r4, 0x1
 	cmp r4, 0x7
 	ble _0811BA7C
-	ldr r1, _0811BAA8 @ =gUnknown_203B084
+	ldr r1, _0811BAA8 @ =UnionObjWork
 	movs r0, 0
 	str r0, [r1]
 	bl sub_811BA5C
@@ -776,7 +776,7 @@ _0811BA92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811BAA8: .4byte gUnknown_203B084
+_0811BAA8: .4byte UnionObjWork
 	thumb_func_end sub_811BA78
 
 	thumb_func_start sub_811BAAC

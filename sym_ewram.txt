@@ -354,7 +354,7 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/union_room.o"
 
 	.align 2
-gUnknown_203B084: @ 203B084
+UnionObjWork: @ 203B084
 	.space 0x4
 
 gUnknown_203B088: @ 203B088

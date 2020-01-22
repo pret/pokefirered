@@ -288,7 +288,7 @@ bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
 void sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 u8 sub_80FEA34(u8 a0, u16 a1);
 void sub_80FDA30(u32 a0);
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3);
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3);
 void LinkRfu_syncVBlank_(void);
 s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16));
 void sub_80FEB3C(void);
@@ -322,7 +322,7 @@ bool32 sub_80FBB0C(void);
 void sub_80FBC00(void);
 void sub_80FBD6C(u32 a0);
 void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
-bool32 sub_80FD338(u16 id, u8 *name);
+bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
 bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx);
 

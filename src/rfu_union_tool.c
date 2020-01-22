@@ -586,11 +586,11 @@ static void UpdateUnionRoomPlayerSprites(struct UnkStruct_URoom *r0)
     {
         if (r4[i].field_1A_0 == 1)
         {
-            sub_811BDA8(i, &r4[i].unk.field_0);
+            sub_811BDA8(i, &r4[i].unk.gname);
         }
         else if (r4[i].field_1A_0 == 2)
         {
-            sub_811BE6C(i, &r4[i].unk.field_0);
+            sub_811BE6C(i, &r4[i].unk.gname);
         }
     }
 }
@@ -659,5 +659,5 @@ static void sub_811C008(s32 arg0, s32 arg1, u8 arg2)
 
 void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
 {
-    return sub_811C008(arg0, arg1, sub_811BBA0(arg0, arg1, &arg2->arr[arg1].unk.field_0));
+    return sub_811C008(arg0, arg1, sub_811BBA0(arg0, arg1, &arg2->arr[arg1].unk.gname));
 }

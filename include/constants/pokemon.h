@@ -91,4 +91,8 @@
 #define PLAYER_HAS_ONE_MON                      0x1
 #define PLAYER_HAS_ONE_USABLE_MON               0x2
 
+#define MON_MALE       0x00
+#define MON_FEMALE     0xFE
+#define MON_GENDERLESS 0xFF
+
 #endif // GUARD_CONSTANTS_POKEMON_H

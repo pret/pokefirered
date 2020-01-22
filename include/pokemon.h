@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "sprite.h"
+#include "constants/pokemon.h"
 
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
@@ -104,10 +105,6 @@
 #define MON_GIVEN_TO_PC         0x1
 #define MON_CANT_GIVE           0x2
 
-#define MON_MALE       0x00
-#define MON_FEMALE     0xFE
-#define MON_GENDERLESS 0xFF
-
 #define FRIENDSHIP_EVENT_GROW_LEVEL           0x0
 #define FRIENDSHIP_EVENT_VITAMIN              0x1
 #define FRIENDSHIP_EVENT_BATTLE_ITEM          0x2
@@ -145,25 +142,6 @@
 #define UNOWN_FORM_COUNT 28
 #define MAX_MON_LEVEL 100
 
-enum
-{
-    EGG_GROUP_NONE,
-    EGG_GROUP_MONSTER,
-    EGG_GROUP_WATER_1,
-    EGG_GROUP_BUG,
-    EGG_GROUP_FLYING,
-    EGG_GROUP_FIELD,
-    EGG_GROUP_FAIRY,
-    EGG_GROUP_GRASS,
-    EGG_GROUP_HUMAN_LIKE,
-    EGG_GROUP_WATER_3,
-    EGG_GROUP_MINERAL,
-    EGG_GROUP_AMORPHOUS,
-    EGG_GROUP_WATER_2,
-    EGG_GROUP_DITTO,
-    EGG_GROUP_DRAGON,
-    EGG_GROUP_UNDISCOVERED
-};
 
 struct PokemonSubstruct0
 {
@@ -367,16 +345,6 @@ enum
     STAT_STAGE_SPDEF,    // 5
     STAT_STAGE_ACC,      // 6
     STAT_STAGE_EVASION,  // 7
-};
-
-enum
-{
-    STAT_HP,     // 0
-    STAT_ATK,    // 1
-    STAT_DEF,    // 2
-    STAT_SPD,    // 3
-    STAT_SPATK,  // 4
-    STAT_SPDEF,  // 5
 };
 
 struct BaseStats

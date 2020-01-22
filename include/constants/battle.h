@@ -61,8 +61,8 @@
 #define BATTLE_TYPE_REGI             0x4000
 #define BATTLE_TYPE_GHOST            0x8000
 #define BATTLE_TYPE_POKEDUDE         0x10000
-#define BATTLE_TYPE_PALACE           0x20000
-#define BATTLE_TYPE_ARENA            0x40000
+#define BATTLE_TYPE_PALACE           0x20000 // TODO: Update name
+#define BATTLE_TYPE_ARENA            0x40000 // TOOD: Update name
 #define BATTLE_TYPE_TRAINER_TOWER    0x80000
 #define BATTLE_TYPE_PIKE             0x100000
 #define BATTLE_TYPE_PYRAMID          0x200000

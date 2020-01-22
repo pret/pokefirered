@@ -352,14 +352,10 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/quest_log.o"
 	.align 2
 	.include "src/union_room.o"
+	.align 2
+	.include "src/rfu_union_tool.o"
 
 	.align 2
-UnionObjWork: @ 203B084
-	.space 0x4
-
-gUnknown_203B088: @ 203B088
-	.space 0x4
-
 gUnknown_203B08C: @ 203B08C
 	.space 0x4
 

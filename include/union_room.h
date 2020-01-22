@@ -85,7 +85,7 @@ struct UnkStruct_Group
     u8 field_15;
 };
 
-struct UnkStruct_8019BA8
+struct UnionObj
 {
     u8 field_0;
     u8 field_1;
@@ -121,7 +121,7 @@ struct UnkStruct_URoom
     /* 0x058 */ u8 field_58[4][11];
     /* 0x084 */ u16 field_98;
     /* 0x086 */ u16 field_9A[3];
-    /* 0x08C */ struct UnkStruct_8019BA8 field_A0[8];
+    /* 0x08C */ struct UnionObj field_A0[8];
     /* 0x0AC */ u8 field_C0[12][15];
     /* 0x160 */ u8 field_174[48];
     /* 0x190 */ u8 field_1A4[200];

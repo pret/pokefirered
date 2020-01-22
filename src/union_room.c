@@ -3510,7 +3510,7 @@ static void sub_8119D34(u8 taskId)
 {
     s32 i, j;
     struct UnkStruct_Shared sp0;
-    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     bool8 r4;
 
     for (i = 0; i < 4; i++)
@@ -3557,7 +3557,7 @@ static u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, 
 static void sub_8119EB8(u8 taskId)
 {
     s32 i, j;
-    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
 
     for (i = 0; i < 4; i++)
     {
@@ -3577,7 +3577,7 @@ static void sub_8119EB8(u8 taskId)
     }
 }
 
-static bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1)
+static bool32 sub_8119FB0(struct GFtgtGname * arg0, s16 arg1)
 {
     if (arg1 == 7)
     {
@@ -3610,7 +3610,7 @@ static bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1)
 static void sub_8119FD8(u8 taskId)
 {
     s32 i;
-    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
 
     for (i = 0; i < 4; i++)
     {
@@ -3625,7 +3625,7 @@ static void sub_8119FD8(u8 taskId)
 static u8 sub_811A054(struct UnkStruct_Main4 * a0, u32 a1)
 {
     u8 taskId = CreateTask(sub_8119EB8, 0);
-    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     ptr[0] = a0;
     gTasks[taskId].data[2] = a1;
     return taskId;
@@ -3634,7 +3634,7 @@ static u8 sub_811A054(struct UnkStruct_Main4 * a0, u32 a1)
 static u8 sub_811A084(struct UnkStruct_Main4 * a0, u32 a1)
 {
     u8 taskId = CreateTask(sub_8119FD8, 0);
-    struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
+    struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     ptr[0] = a0;
     gTasks[taskId].data[2] = a1;
     return taskId;
@@ -3732,7 +3732,7 @@ static void sub_811A1FC(u8 windowId)
     RemoveWindow(windowId);
 }
 
-static s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate)
+static s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate)
 {
     s32 r1, r8;
 
@@ -3771,7 +3771,7 @@ static s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate
     return -1;
 }
 
-static s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
+static s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate, struct UnkStruct_Main0 * arg6)
 {
     s32 input;
     s32 r4;
@@ -3908,7 +3908,7 @@ static void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 co
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 }
 
-static void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count)
+static void sub_811A5E4(struct UnkStruct_x20 * arg0, u8 count)
 {
     s32 i;
 
@@ -3922,7 +3922,7 @@ static void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count)
     }
 }
 
-static void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count)
+static void sub_811A650(struct UnkStruct_Main4 * arg0, u8 count)
 {
     s32 i;
 
@@ -3933,7 +3933,7 @@ static void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count)
     }
 }
 
-static bool8 sub_811A694(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1)
+static bool8 sub_811A694(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1)
 {
     s32 i;
 
@@ -3956,7 +3956,7 @@ static bool8 sub_811A694(struct UnkStruct_Shared* arg0, const struct UnkStruct_S
     return FALSE;
 }
 
-static bool32 sub_811A6DC(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
+static bool32 sub_811A6DC(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1)
 {
     s32 i;
 
@@ -3991,7 +3991,7 @@ static bool32 sub_811A6DC(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared
     return FALSE;
 }
 
-static u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
+static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1)
 {
     u8 result = 0xFF;
     s32 i;
@@ -4008,7 +4008,7 @@ static u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
     return result;
 }
 
-static u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
+static u8 sub_811A798(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1, u8 arg2)
 {
     s32 i;
 
@@ -4031,7 +4031,7 @@ static u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8
     return 0xFF;
 }
 
-static void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+static void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id)
 {
     u8 r2;
     u8 sp0[6];
@@ -4054,7 +4054,7 @@ static void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u
     }
 }
 
-static void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+static void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8 arg4, u8 id)
 {
     u8 sp0[6];
     u8 sp10[30];
@@ -4107,14 +4107,14 @@ static u32 sub_811A9FC(s32 arg0)
     }
 }
 
-static u32 sub_811AA24(struct UnkStruct_x20 *arg0)
+static u32 sub_811AA24(struct UnkStruct_x20 * arg0)
 {
     u8 sp0[30];
     IntlConvPartnerUname(sp0, *arg0);
     return sub_80FD338(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
 }
 
-static s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender)
+static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender)
 {
     bool32 r2;
 
@@ -4192,8 +4192,8 @@ static void sub_811ABE4(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 *
 
 static void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
 {
-    struct UnkStruct_Leader *leader = sUnionRoomMain.leader;
-    struct GFtgtGname *rfu;
+    struct UnkStruct_Leader * leader = sUnionRoomMain.leader;
+    struct GFtgtGname * rfu;
     s32 i, j;
     u8 uname[8];
 
@@ -4244,7 +4244,7 @@ static s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1)
     return -1;
 }
 
-static s32 sub_811ADC4(s32 arg1, struct UnkStruct_Main0 *arg0)
+static s32 sub_811ADC4(s32 arg1, struct UnkStruct_Main0 * arg0)
 {
     return arg0->arr[arg1].unk.field_0.playerGender;
 }
@@ -4317,7 +4317,7 @@ static void sub_811AECC(u8 *dst, u8 arg1)
     }
 }
 
-static s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
+static s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom * arg3)
 {
     s32 result = 0;
     u16 species = SPECIES_NONE;
@@ -4373,7 +4373,7 @@ static s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *a
     return result;
 }
 
-static bool32 sub_811B0A4(struct UnkStruct_URoom *arg0)
+static bool32 sub_811B0A4(struct UnkStruct_URoom * arg0)
 {
     if (gRecvCmds[0][1] != 0)
     {
@@ -4418,7 +4418,7 @@ static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
         return FALSE;
 }
 
-static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0)
+static void ResetUnionRoomTrade(struct UnionRoomTrade * arg0)
 {
     arg0->field_0 = 0;
     arg0->type = 0;
@@ -4435,7 +4435,7 @@ void Script_ResetUnionRoomTrade(void)
     ResetUnionRoomTrade(&sUnionRoomTrade);
 }
 
-static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade * trade)
 {
     trade->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     trade->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
@@ -4446,14 +4446,14 @@ static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trad
         return FALSE;
 }
 
-static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *trade)
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade * trade)
 {
     trade->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     trade->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
     trade->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
 }
 
-static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayerId)
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade * trade, u8 multiplayerId)
 {
     u16 response = 0;
     u16 species;
@@ -4521,7 +4521,7 @@ static u8 sub_811B2A8(s32 linkPlayer)
     return retval;
 }
 
-static u8 sub_811B2D8(struct UnkStruct_URoom *arg0)
+static u8 sub_811B2D8(struct UnkStruct_URoom * arg0)
 {
     u8 retVal = 0x80;
     u8 i;
@@ -4539,9 +4539,9 @@ static u8 sub_811B2D8(struct UnkStruct_URoom *arg0)
     return retVal;
 }
 
-static void sub_811B31C(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
+static void sub_811B31C(u8 *unused, struct UnkStruct_URoom * arg1, bool8 arg2)
 {
-    struct TrainerCard *trainerCard = &gTrainerCards[GetMultiplayerId() ^ 1];
+    struct TrainerCard * trainerCard = &gTrainerCards[GetMultiplayerId() ^ 1];
     s32 i;
     s32 n;
 

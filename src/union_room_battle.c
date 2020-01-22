@@ -51,7 +51,7 @@ static void sub_811C04C(void)
     {
         gEnemyParty[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1];
     }
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         ZeroMonData(&gPlayerParty[i]);
     }
@@ -121,8 +121,8 @@ void sub_811C1C8(void)
         }
         DeactivateAllTextPrinters();
         ClearWindowTilemap(0);
-        FillWindowPixelBuffer(0, 0x00);
-        FillWindowPixelBuffer(0, 0x11);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
         TextWindow_SetStdFrame0_WithPal(0, 1, 0xD0);
         Menu_LoadStdPal();
@@ -136,7 +136,7 @@ void sub_811C1C8(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         gMain.state++;
         break;
@@ -161,7 +161,7 @@ void sub_811C1C8(void)
         {
             if (gBlockRecvBuffer[0][0] == 0x51 && gBlockRecvBuffer[1][0] == 0x51)
             {
-                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gMain.state = 50;
             }
             else

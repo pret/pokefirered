@@ -2538,7 +2538,7 @@ static void sub_81186E0(u8 taskId)
 {
     u32 id = 0;
     s32 var5 = 0;
-    s32 playerGender = 0;
+    s32 playerGender = MALE;
     struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
     s16 *taskData = gTasks[taskId].data;
 

@@ -122,9 +122,9 @@ struct UnkStruct_URoom
     /* 0x084 */ u16 field_98;
     /* 0x086 */ u16 field_9A[3];
     /* 0x08C */ struct UnkStruct_8019BA8 field_A0[8];
-    /* 0x08C */ u8 field_C0[12][15];
-    /* 0x08C */ u8 field_174[48];
-    /* 0x08C */ u8 field_1A4[200];
+    /* 0x0AC */ u8 field_C0[12][15];
+    /* 0x160 */ u8 field_174[48];
+    /* 0x190 */ u8 field_1A4[200];
 };
 
 union UnkUnion_Main

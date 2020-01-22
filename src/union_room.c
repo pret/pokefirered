@@ -60,77 +60,501 @@ static struct UnkStruct_Leader * sLeader;
 static struct UnkStruct_Group * sGroup;
 static struct UnkStruct_URoom * sURoom;
 
-void sub_8115A68(u8 taskId);
-void sub_81161E4(struct UnkStruct_Leader * leader);
-bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
-void sub_81164C8(u8 windowId, s32 itemId, u8 y);
-u8 sub_8116524(struct UnkStruct_Main0 * a0);
-u8 sub_81165E8(struct UnkStruct_Main0 * a0);
-void sub_8116738(u8 taskId);
-u32 sub_8116D10(struct UnkStruct_Group * group, s32 id);
-void sub_8116D60(struct UnkStruct_Group * group, s32 id);
-void sub_8116E1C(u8 taskId);
-void sub_8116F94(u8 windowId, s32 itemId, u8 y);
-u8 sub_8116FE4(void);
-void sub_8117990(void);
-void sub_81179A4(void);
-void sub_8117A0C(u8 taskId);
-void sub_8117F20(u8 taskId);
-void sub_81182DC(u8 taskId);
-void sub_81186E0(u8 taskId);
-u16 ReadAsU16(const u8 *data);
-void sub_8119904(struct UnkStruct_URoom * uRoom);
-bool32 sub_8119944(struct UnkStruct_URoom * uRoom);
-void sub_81199FC(u8 taskId);
-u8 sub_8119B94(void);
-u8 sub_8119E84(struct UnkStruct_Main4 * arg0, struct UnkStruct_Main4 * arg1, u32 arg2);
-bool32 sub_8119FB0(struct GFtgtGname * arg0, s16 arg1);
-u8 sub_811A054(struct UnkStruct_Main4 * arg0, u32 arg1);
-u8 sub_811A084(struct UnkStruct_Main4 * arg0, u32 arg1);
-bool32 sub_811A0B4(const u8 * str);
-bool32 sub_811A0E0(void);
-bool8 PrintOnTextbox(u8 *textState, const u8 *str);
-s8 sub_811A14C(u8 *dest, bool32 arg1);
-s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate);
-s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate, struct UnkStruct_Main0 * arg6);
-void sub_811A3F8(void);
-void sub_811A41C(void);
-void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
-void sub_811A5E4(struct UnkStruct_x20 * arg0, u8 count);
-void sub_811A650(struct UnkStruct_Main4 * arg0, u8 count);
-bool8 sub_811A694(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1);
-bool32 sub_811A6DC(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1);
-u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
-u8 sub_811A798(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1, u8 arg2);
-void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
-void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
-bool32 sub_811A9B8(void);
-u32 sub_811A9FC(s32 a0);
-u32 sub_811AA24(struct UnkStruct_x20 * unkX20);
-s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender);
-void nullsub_92(u8 windowId, s32 itemId, u8 y);
-void sub_811ACA4(u8 windowId, s32 itemId, u8 y);
-s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1);
-s32 sub_811ADC4(s32 a0, struct UnkStruct_Main0 * a1);
-s32 sub_811ADD0(u32 type, u32 species);
-void sub_811AE68(u8 *dst, s32 arg1, u32 playerGender);
-void sub_811AECC(u8 *dst, u8 arg1);
-s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom * arg3);
-bool32 sub_811B0A4(struct UnkStruct_URoom * arg0);
-bool32 HasAtLeastTwoMonsOfLevel30OrLower(void);
-void ResetUnionRoomTrade(struct UnionRoomTrade * trade);
-bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade * trade);
-void RegisterTradeMon(u32 monId, struct UnionRoomTrade * trade);
-u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade * trade, u8 mpId);
-void sub_811B258(bool32 a0);
-void sub_811B298(void);
-u8 sub_811B2A8(s32 a0);
-u8 sub_811B2D8(struct UnkStruct_URoom * arg0);
-void sub_811B31C(u8 *dest, struct UnkStruct_URoom * uRoom, bool8 gender);
-u8 sub_811B754(struct UnkStruct_8019BA8 * ptr);
-void sub_811BA78(void);
+static void sub_8115A68(u8 taskId);
+static void sub_81161E4(struct UnkStruct_Leader * leader);
+static bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 a1, u32 a2);
+static void sub_81164C8(u8 windowId, s32 itemId, u8 y);
+static u8 sub_8116524(struct UnkStruct_Main0 * a0);
+static u8 sub_81165E8(struct UnkStruct_Main0 * a0);
+static void sub_8116738(u8 taskId);
+static u32 sub_8116D10(struct UnkStruct_Group * group, s32 id);
+static void sub_8116D60(struct UnkStruct_Group * group, s32 id);
+static void sub_8116E1C(u8 taskId);
+static void sub_8116F94(u8 windowId, s32 itemId, u8 y);
+static u8 sub_8116FE4(void);
+static void sub_8117990(void);
+static void sub_81179A4(void);
+static void sub_8117A0C(u8 taskId);
+static void sub_8117F20(u8 taskId);
+static void sub_81182DC(u8 taskId);
+static void sub_81186E0(u8 taskId);
+static u16 ReadAsU16(const u8 *data);
+static void sub_8119904(struct UnkStruct_URoom * uRoom);
+static bool32 sub_8119944(struct UnkStruct_URoom * uRoom);
+static void sub_81199FC(u8 taskId);
+static u8 sub_8119B94(void);
+static u8 sub_8119E84(struct UnkStruct_Main4 * arg0, struct UnkStruct_Main4 * arg1, u32 arg2);
+static bool32 sub_8119FB0(struct GFtgtGname * arg0, s16 arg1);
+static u8 sub_811A054(struct UnkStruct_Main4 * arg0, u32 arg1);
+static u8 sub_811A084(struct UnkStruct_Main4 * arg0, u32 arg1);
+static bool32 sub_811A0B4(const u8 * str);
+static bool32 sub_811A0E0(void);
+static bool8 PrintOnTextbox(u8 *textState, const u8 *str);
+static s8 sub_811A14C(u8 *dest, bool32 arg1);
+static s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate);
+static s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate, struct UnkStruct_Main0 * arg6);
+static void sub_811A3F8(void);
+static void sub_811A41C(void);
+static void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
+static void sub_811A5E4(struct UnkStruct_x20 * arg0, u8 count);
+static void sub_811A650(struct UnkStruct_Main4 * arg0, u8 count);
+static bool8 sub_811A694(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1);
+static bool32 sub_811A6DC(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1);
+static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
+static u8 sub_811A798(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1, u8 arg2);
+static void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
+static void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
+static bool32 sub_811A9B8(void);
+static u32 sub_811A9FC(s32 a0);
+static u32 sub_811AA24(struct UnkStruct_x20 * unkX20);
+static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender);
+static void nullsub_92(u8 windowId, s32 itemId, u8 y);
+static void sub_811ACA4(u8 windowId, s32 itemId, u8 y);
+static s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1);
+static s32 sub_811ADC4(s32 a0, struct UnkStruct_Main0 * a1);
+static s32 sub_811ADD0(u32 type, u32 species);
+static void sub_811AE68(u8 *dst, s32 arg1, u32 playerGender);
+static void sub_811AECC(u8 *dst, u8 arg1);
+static s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom * arg3);
+static bool32 sub_811B0A4(struct UnkStruct_URoom * arg0);
+static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void);
+static void ResetUnionRoomTrade(struct UnionRoomTrade * trade);
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade * trade);
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade * trade);
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade * trade, u8 mpId);
+static void sub_811B258(bool32 a0);
+static void sub_811B298(void);
+static u8 sub_811B2A8(s32 a0);
+static u8 sub_811B2D8(struct UnkStruct_URoom * arg0);
+static void sub_811B31C(u8 *dest, struct UnkStruct_URoom * uRoom, bool8 gender);
 
-#include "data/union_room.h"
+#define _8456CD8(a, b) ((a) | ((b) << 8))
+
+static const u8 *const gUnknown_8456C74[] = {
+    gUnknown_84571AC,
+    gUnknown_8459394,
+    gUnknown_84593A4,
+    gUnknown_84593B4,
+    gUnknown_84593C4,
+    gUnknown_84593D4,
+    gUnknown_84593E4,
+    gUnknown_84593F4,
+    gUnknown_84593DC,
+    gUnknown_8459400,
+    gUnknown_8459410,
+    gUnknown_845941C,
+    gUnknown_845942C,
+    gUnknown_8459434,
+    gUnknown_8459440,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84571AC,
+    gUnknown_84593E4,
+    gUnknown_84593F4
+};
+
+static const struct WindowTemplate gUnknown_8456CD0 = {
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 0,
+    .width = 30,
+    .height = 2,
+    .paletteNum = 0xF,
+    .baseBlock = 0x008
+};
+
+static const u32 gUnknown_8456CD8[] = {
+    _8456CD8( 1,  2),
+    _8456CD8( 2,  2),
+    _8456CD8( 3,  4),
+    _8456CD8( 4,  2),
+    _8456CD8( 9, 37),
+    _8456CD8(10, 37),
+    _8456CD8(11, 53),
+    _8456CD8(13, 53),
+    _8456CD8(14, 53)
+};
+
+static const struct WindowTemplate gUnknown_8456CFC = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 3,
+    .width = 13,
+    .height = 10,
+    .paletteNum = 15,
+    .baseBlock = 0x044
+};
+
+static const struct WindowTemplate gUnknown_8456D04 = {
+    .bg = 0,
+    .tilemapLeft = 16,
+    .tilemapTop = 3,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x0C6
+};
+
+const struct ListMenuItem gUnknown_8456D0C[] = {
+    {gUnknown_84571AC, 0},
+    {gUnknown_84571AC, 1},
+    {gUnknown_84571AC, 2},
+    {gUnknown_84571AC, 3},
+    {gUnknown_84571AC, 4}
+};
+
+static const struct ListMenuTemplate gUnknown_8456D34 = {
+    .items = gUnknown_8456D0C,
+    .moveCursorFunc = NULL,
+    .itemPrintFunc = sub_81164C8,
+    .totalItems = 5,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 1,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 2,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 1
+};
+
+static const struct WindowTemplate gUnknown_8456D4C = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 3,
+    .width = 17,
+    .height = 10,
+    .paletteNum = 15,
+    .baseBlock = 0x044
+};
+
+static const struct WindowTemplate gUnknown_8456D54 = {
+    .bg = 0,
+    .tilemapLeft = 20,
+    .tilemapTop = 3,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x0EE
+};
+
+static const struct ListMenuItem gUnknown_8456D5C[] = {
+    {gUnknown_84571AC,  0},
+    {gUnknown_84571AC,  1},
+    {gUnknown_84571AC,  2},
+    {gUnknown_84571AC,  3},
+    {gUnknown_84571AC,  4},
+    {gUnknown_84571AC,  5},
+    {gUnknown_84571AC,  6},
+    {gUnknown_84571AC,  7},
+    {gUnknown_84571AC,  8},
+    {gUnknown_84571AC,  9},
+    {gUnknown_84571AC, 10},
+    {gUnknown_84571AC, 11},
+    {gUnknown_84571AC, 12},
+    {gUnknown_84571AC, 13},
+    {gUnknown_84571AC, 14},
+    {gUnknown_84571AC, 15}
+};
+
+static const struct ListMenuTemplate gUnknown_8456DDC = {
+    .items = gUnknown_8456D5C,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = sub_8116F94,
+    .totalItems = 16,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 2,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct WindowTemplate gUnknown_8456DF4 = {
+    .bg = 0,
+    .tilemapLeft = 20,
+    .tilemapTop = 6,
+    .width = 8,
+    .height = 7,
+    .paletteNum = 15,
+    .baseBlock = 0x001
+};
+
+static const struct ListMenuItem gUnknown_8456DFC[] = {
+    {gUnknown_8459354,  _8456CD8( 8, 2)},
+    {gUnknown_8459344,  _8456CD8(65, 2)},
+    {gUnknown_845934C,  _8456CD8(69, 2)},
+    {gUnknown_8459360,  _8456CD8(64, 0)}
+};
+
+static const struct ListMenuTemplate gUnknown_8456E1C = {
+    .items = gUnknown_8456DFC,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 4,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct WindowTemplate gUnknown_8456E34 = {
+    .bg = 0,
+    .tilemapLeft = 18,
+    .tilemapTop = 8,
+    .width = 11,
+    .height = 5,
+    .paletteNum = 15,
+    .baseBlock = 0x001
+};
+
+static const struct ListMenuItem gUnknown_8456E3C[] = {
+    {gText_Register,   1},
+    {gUnknown_8459370, 2},
+    {gUnknown_8459360, 3}
+};
+
+static const struct ListMenuTemplate gUnknown_8456E54 = {
+    .items = gUnknown_8456E3C,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = 3,
+    .maxShowed = 3,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct WindowTemplate gUnknown_8456E6C = {
+    .bg = 0,
+    .tilemapLeft = 20,
+    .tilemapTop = 2,
+    .width = 9,
+    .height = 11,
+    .paletteNum = 15,
+    .baseBlock = 0x001
+};
+
+static const struct ListMenuItem gUnknown_8456E74[] = {
+    {gTypeNames[TYPE_NORMAL],     TYPE_NORMAL},
+    {gTypeNames[TYPE_FIRE],         TYPE_FIRE},
+    {gTypeNames[TYPE_WATER],       TYPE_WATER},
+    {gTypeNames[TYPE_ELECTRIC], TYPE_ELECTRIC},
+    {gTypeNames[TYPE_GRASS],       TYPE_GRASS},
+    {gTypeNames[TYPE_ICE],           TYPE_ICE},
+    {gTypeNames[TYPE_GROUND],     TYPE_GROUND},
+    {gTypeNames[TYPE_ROCK],         TYPE_ROCK},
+    {gTypeNames[TYPE_FLYING],     TYPE_FLYING},
+    {gTypeNames[TYPE_PSYCHIC],   TYPE_PSYCHIC},
+    {gTypeNames[TYPE_FIGHTING], TYPE_FIGHTING},
+    {gTypeNames[TYPE_POISON],     TYPE_POISON},
+    {gTypeNames[TYPE_BUG],           TYPE_BUG},
+    {gTypeNames[TYPE_GHOST],       TYPE_GHOST},
+    {gTypeNames[TYPE_DRAGON],     TYPE_DRAGON},
+    {gTypeNames[TYPE_STEEL],       TYPE_STEEL},
+    {gTypeNames[TYPE_DARK],         TYPE_DARK},
+    {gUnknown_8459360,           NUMBER_OF_MON_TYPES}
+};
+
+static const struct ListMenuTemplate gUnknown_8456F04 = {
+    .items = gUnknown_8456E74,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = NUMBER_OF_MON_TYPES,
+    .maxShowed = 6,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 2,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct WindowTemplate gUnknown_8456F1C = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 28,
+    .height = 2,
+    .paletteNum = 13,
+    .baseBlock = 0x001
+};
+
+static const struct WindowTemplate gUnknown_8456F24 = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 5,
+    .width = 28,
+    .height = 10,
+    .paletteNum = 13,
+    .baseBlock = 0x039
+};
+
+static const struct ListMenuItem gUnknown_8456F2C[] = {
+    {gUnknown_84571AC, -3},
+    {gUnknown_84571AC, 0},
+    {gUnknown_84571AC, 1},
+    {gUnknown_84571AC, 2},
+    {gUnknown_84571AC, 3},
+    {gUnknown_84571AC, 4},
+    {gUnknown_84571AC, 5},
+    {gUnknown_84571AC, 6},
+    {gUnknown_84571AC, 7},
+    {gUnknown_8459368, 8}
+};
+
+static const struct ListMenuTemplate gUnknown_8456F7C = {
+    .items = gUnknown_8456F2C,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = sub_811ACA4,
+    .totalItems = 10,
+    .maxShowed = 5,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 12,
+    .cursor_X = 0,
+    .upText_Y = 2,
+    .cursorPal = 14,
+    .fillValue = 15,
+    .cursorShadowPal = 13,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 1,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct WindowTemplate gUnknown_8456F94 = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 5,
+    .width = 28,
+    .height = 10,
+    .paletteNum = 13,
+    .baseBlock = 0x039
+};
+
+static const struct ListMenuItem gUnknown_8456F9C[] = {
+    {gUnknown_84571AC,  0},
+    {gUnknown_84571AC,  1},
+    {gUnknown_84571AC,  2},
+    {gUnknown_84571AC,  3},
+    {gUnknown_84571AC,  4},
+    {gUnknown_84571AC,  5},
+    {gUnknown_84571AC,  6},
+    {gUnknown_84571AC,  7},
+    {gUnknown_84571AC,  8},
+    {gUnknown_84571AC,  9},
+    {gUnknown_84571AC, 10},
+    {gUnknown_84571AC, 11},
+    {gUnknown_84571AC, 12},
+    {gUnknown_84571AC, 13},
+    {gUnknown_84571AC, 14},
+    {gUnknown_84571AC, 15}
+};
+
+static const struct ListMenuTemplate gUnknown_845701C = {
+    .items = gUnknown_8456F9C,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = nullsub_92,
+    .totalItems = 16,
+    .maxShowed = 4,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 1,
+    .upText_Y = 0,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 1,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = 2,
+    .cursorKind = 0
+};
+
+static const struct UnkStruct_Shared gUnknown_8457034 = {};
+
+// starts at gUnknown_082F0474 in pokeemerald, union link groups
+
+ALIGNED(4) static const u8 gUnknown_845704C[] = {0x01, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457050[] = {0x02, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457054[] = {0x03, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457058[] = {0x04, 0xFF};
+ALIGNED(4) static const u8 gUnknown_845705C[] = {0x09, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457060[] = {0x0A, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457064[] = {0x0B, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457068[] = {0x15, 0xFF};
+ALIGNED(4) static const u8 gUnknown_845706C[] = {0x16, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457070[] = {0x40, 0x41, 0x44, 0x45, 0x48, 0x51, 0x52, 0x53, 0x54, 0xFF};
+ALIGNED(4) static const u8 gUnknown_845707C[] = {0x0C, 0xFF};
+ALIGNED(4) static const u8 gUnknown_8457080[] = {0x01, 0x02, 0x03, 0x04, 0x09, 0x0A, 0x0B, 0x15, 0x16, 0x0D, 0xFF};
+ALIGNED(4) static const u8 gUnknown_845708C[] = {0x01, 0x02, 0x03, 0x04, 0x0A, 0xFF};
+
+static const u8 *const gUnknown_8457094[] = {
+    gUnknown_845704C,
+    gUnknown_8457050,
+    gUnknown_8457054,
+    gUnknown_8457058,
+    gUnknown_845705C,
+    gUnknown_8457060,
+    gUnknown_8457064,
+    gUnknown_8457068,
+    gUnknown_845706C,
+    gUnknown_8457070,
+    gUnknown_845707C,
+    gUnknown_8457080,
+    gUnknown_845708C
+};
+
+static const u8 gUnknown_84570C8[] = {0x01, 0x02, 0x03, 0x04, 0x09, 0x0A, 0x0B, 0x15, 0x16, 0xF7, 0x00, 0xAF, 0xF7, 0x01, 0xFF, 0x00};
+
+#undef _8456CD8
 
 // These are functions in Emerald but inlined in FireRed
 
@@ -154,7 +578,7 @@ void sub_811BA78(void);
     _maxWidth - strWidth;                                          \
 })
 
-void sub_811586C(u8 windowId, u8 arg1, u8 stringId)
+static void sub_811586C(u8 windowId, u8 arg1, u8 stringId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     switch (arg1 << 8)
@@ -176,7 +600,7 @@ void sub_811586C(u8 windowId, u8 arg1, u8 stringId)
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8115924(u8 windowId)
+static void sub_8115924(u8 windowId)
 {
     u8 text[12];
     u8 text2[12];
@@ -188,7 +612,7 @@ void sub_8115924(u8 windowId)
     sub_811A444(windowId, 0, text2, 0, 0x10, 0);
 }
 
-void sub_811599C(u8 *dst, u8 caseId)
+static void sub_811599C(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
@@ -215,7 +639,7 @@ void TryBecomeLinkLeader(void)
     gSpecialVar_Result = 0;
 }
 
-void sub_8115A68(u8 taskId)
+static void sub_8115A68(u8 taskId)
 {
     u32 id, val;
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
@@ -514,7 +938,7 @@ void sub_8115A68(u8 taskId)
     }
 }
 
-void sub_81161E4(struct UnkStruct_Leader * data)
+static void sub_81161E4(struct UnkStruct_Leader * data)
 {
     ClearWindowTilemap(data->field_11);
     ClearStdWindowAndFrame(data->field_11, FALSE);
@@ -532,7 +956,7 @@ void sub_81161E4(struct UnkStruct_Leader * data)
     Free(data->field_4);
 }
 
-void sub_8116244(u8 *dst, u8 caseId)
+static void sub_8116244(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
@@ -554,7 +978,7 @@ void sub_8116244(u8 *dst, u8 caseId)
     }
 }
 
-void sub_81162E0(u8 *dst, u8 caseId)
+static void sub_81162E0(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
@@ -569,7 +993,7 @@ void sub_81162E0(u8 *dst, u8 caseId)
     }
 }
 
-void sub_811631C(u8 *dst, u8 caseId)
+static void sub_811631C(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
@@ -589,7 +1013,7 @@ void sub_811631C(u8 *dst, u8 caseId)
     }
 }
 
-void sub_81163B0(u8 *dst, u8 caseId)
+static void sub_81163B0(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
@@ -609,7 +1033,7 @@ void sub_81163B0(u8 *dst, u8 caseId)
     }
 }
 
-bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
+static bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
 {
     switch (sub_8116524(data->field_0))
     {
@@ -630,7 +1054,7 @@ bool8 sub_8116444(struct UnkStruct_Leader * data, u32 arg1, u32 arg2)
     return FALSE;
 }
 
-void sub_81164C8(u8 windowId, s32 itemId, u8 y)
+static void sub_81164C8(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 var = 0;
@@ -649,7 +1073,7 @@ void sub_81164C8(u8 windowId, s32 itemId, u8 y)
     sub_811A910(windowId, 0, y, &data->field_0->arr[itemId], var, itemId);
 }
 
-u8 sub_8116524(struct UnkStruct_Main0 * arg0)
+static u8 sub_8116524(struct UnkStruct_Main0 * arg0)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 ret = 0;
@@ -690,7 +1114,7 @@ u8 sub_8116524(struct UnkStruct_Main0 * arg0)
     return ret;
 }
 
-u8 sub_81165E8(struct UnkStruct_Main0 * arg0)
+static u8 sub_81165E8(struct UnkStruct_Main0 * arg0)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     u8 copiedCount;
@@ -748,7 +1172,7 @@ void TryJoinLinkGroup(void)
     gSpecialVar_Result = 0;
 }
 
-void sub_8116738(u8 taskId)
+static void sub_8116738(u8 taskId)
 {
     s32 id;
     struct UnkStruct_Group * data = sUnionRoomMain.group;
@@ -991,7 +1415,7 @@ void sub_8116738(u8 taskId)
     }
 }
 
-u32 sub_8116D10(struct UnkStruct_Group * arg0, s32 id)
+static u32 sub_8116D10(struct UnkStruct_Group * arg0, s32 id)
 {
     struct UnkStruct_x20 * structPtr = &arg0->field_0->arr[id];
 
@@ -1010,7 +1434,7 @@ u32 sub_8116D10(struct UnkStruct_Group * arg0, s32 id)
     return 2;
 }
 
-void sub_8116D60(struct UnkStruct_Group * data, s32 id)
+static void sub_8116D60(struct UnkStruct_Group * data, s32 id)
 {
     data->field_F = id;
     LoadWirelessStatusIndicatorSpriteGfx();
@@ -1037,7 +1461,7 @@ u8 sub_8116DE0(void)
     return taskId;
 }
 
-void sub_8116E1C(u8 taskId)
+static void sub_8116E1C(u8 taskId)
 {
     struct UnkStruct_Group * data = sUnionRoomMain.group;
 
@@ -1080,7 +1504,7 @@ void sub_8116E1C(u8 taskId)
     }
 }
 
-bool32 sub_8116F28(u32 arg0, u32 id)
+static bool32 sub_8116F28(u32 arg0, u32 id)
 {
     if (id == 0xFF)
         return TRUE;
@@ -1100,7 +1524,7 @@ bool32 sub_8116F28(u32 arg0, u32 id)
     return FALSE;
 }
 
-u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
+static u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
 {
     if (data->field_0->arr[id].field_1A_0 == 1)
     {
@@ -1115,7 +1539,7 @@ u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
     return 0;
 }
 
-void sub_8116F94(u8 windowId, s32 itemId, u8 y)
+static void sub_8116F94(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Group * data = sUnionRoomMain.group;
     u8 var = sub_8116F5C(data, itemId);
@@ -1123,7 +1547,7 @@ void sub_8116F94(u8 windowId, s32 itemId, u8 y)
     sub_811A81C(windowId, 8, y, &data->field_0->arr[itemId], var, itemId);
 }
 
-u8 sub_8116FE4(void)
+static u8 sub_8116FE4(void)
 {
     struct UnkStruct_Group * data = sUnionRoomMain.group;
     u8 ret = 0;
@@ -1188,7 +1612,7 @@ u8 sub_8116FE4(void)
     return ret;
 }
 
-void sub_8117100(u8 taskId)
+static void sub_8117100(u8 taskId)
 {
     CB2_ReturnFromLinkTrade();
     DestroyTask(taskId);
@@ -1201,7 +1625,7 @@ u8 sub_8117118(void)
     return taskId;
 }
 
-void sub_8117130(u8 taskId)
+static void sub_8117130(u8 taskId)
 {
     u32 monId = GetPartyPositionOfRegisteredMon(&sUnionRoomTrade, GetMultiplayerId());
 
@@ -1241,7 +1665,7 @@ void sub_8117130(u8 taskId)
     }
 }
 
-void sub_8117280(u8 taskId)
+static void sub_8117280(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -1279,7 +1703,7 @@ void sub_8117280(u8 taskId)
     }
 }
 
-void sub_8117354(void)
+static void sub_8117354(void)
 {
     switch (gMain.state)
     {
@@ -1312,7 +1736,7 @@ void sub_81173C0(u16 battleFlags)
     PlayBattleBGM();
 }
 
-void sub_8117440(u16 linkService, u16 x, u16 y)
+static void sub_8117440(u16 linkService, u16 x, u16 y)
 {
     VarSet(VAR_CABLE_CLUB_STATE, linkService);
     SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
@@ -1320,7 +1744,7 @@ void sub_8117440(u16 linkService, u16 x, u16 y)
     WarpIntoMap();
 }
 
-void sub_81174B4(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
+static void sub_81174B4(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
 {
     gSpecialVar_0x8004 = linkService;
     VarSet(VAR_CABLE_CLUB_STATE, linkService);
@@ -1331,7 +1755,7 @@ void sub_81174B4(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 linkService)
     WarpIntoMap();
 }
 
-void sub_8117534(void)
+static void sub_8117534(void)
 {
     switch (gMain.state)
     {
@@ -1351,7 +1775,7 @@ void sub_8117534(void)
     BuildOamBuffer();
 }
 
-void sub_8117594(void *arg0, bool32 arg1)
+static void sub_8117594(void *arg0, bool32 arg1)
 {
     TrainerCard_GenerateCardForLinkPlayer((struct TrainerCard * )arg0);
     if (arg1)
@@ -1360,7 +1784,7 @@ void sub_8117594(void *arg0, bool32 arg1)
         *((u16 *)(arg0 + sizeof(struct TrainerCard))) = 0;
 }
 
-void sub_81175BC(u8 taskId)
+static void sub_81175BC(u8 taskId)
 {
     sub_81446C4();
     switch (gUnknown_203B058)
@@ -1454,7 +1878,7 @@ void sub_81175BC(u8 taskId)
     ScriptContext2_Disable();
 }
 
-void sub_8117900(u8 taskId)
+static void sub_8117900(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *sendBuff = (u16*)(gBlockSendBuffer);
@@ -1490,12 +1914,12 @@ void sub_8117900(u8 taskId)
     }
 }
 
-void sub_8117990(void)
+static void sub_8117990(void)
 {
     CreateTask(sub_8117900, 0);
 }
 
-void sub_81179A4(void)
+static void sub_81179A4(void)
 {
     u8 taskId = CreateTask(sub_81175BC, 0);
     gTasks[taskId].data[0] = 0;
@@ -1515,7 +1939,7 @@ void MEvent_CreateTask_Leader(u32 arg0)
     gSpecialVar_Result = 0;
 }
 
-void sub_8117A0C(u8 taskId)
+static void sub_8117A0C(u8 taskId)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     struct WindowTemplate winTemplate;
@@ -1723,7 +2147,7 @@ void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
     gSpecialVar_Result = 0;
 }
 
-void sub_8117F20(u8 taskId)
+static void sub_8117F20(u8 taskId)
 {
     s32 id;
     struct WindowTemplate winTemplate1, winTemplate2;
@@ -1889,7 +2313,7 @@ void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
     gSpecialVar_Result = 0;
 }
 
-void sub_81182DC(u8 taskId)
+static void sub_81182DC(u8 taskId)
 {
     s32 id;
     struct WindowTemplate winTemplate;
@@ -2076,12 +2500,12 @@ void UnionRoomSpecial(void)
     sub_8107D38(0xD0, 1);
 }
 
-u16 ReadAsU16(const u8 *ptr)
+static u16 ReadAsU16(const u8 *ptr)
 {
     return (ptr[1] << 8) | (ptr[0]);
 }
 
-void sub_8118664(u32 nextState, const u8 *src)
+static void sub_8118664(u32 nextState, const u8 *src)
 {
     struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
 
@@ -2091,7 +2515,7 @@ void sub_8118664(u32 nextState, const u8 *src)
         StringExpandPlaceholders(gStringVar4, src);
 }
 
-void sub_811868C(const u8 *src)
+static void sub_811868C(const u8 *src)
 {
     struct UnkStruct_URoom * data = sUnionRoomMain.uRoom;
 
@@ -2100,17 +2524,17 @@ void sub_811868C(const u8 *src)
         StringExpandPlaceholders(gStringVar4, src);
 }
 
-void sub_81186B0(struct UnkStruct_URoom * data)
+static void sub_81186B0(struct UnkStruct_URoom * data)
 {
     memcpy(&gDecompressionBuffer[0x3F00], data->field_0, sizeof(*data->field_0));
 }
 
-void sub_81186C8(struct UnkStruct_URoom * data)
+static void sub_81186C8(struct UnkStruct_URoom * data)
 {
     memcpy(data->field_0, &gDecompressionBuffer[0x3F00], sizeof(*data->field_0));
 }
 
-void sub_81186E0(u8 taskId)
+static void sub_81186E0(u8 taskId)
 {
     u32 id = 0;
     s32 var5 = 0;
@@ -2866,7 +3290,7 @@ void var_800D_set_xB(void)
         gSpecialVar_Result = 11;
 }
 
-void sub_8119904(struct UnkStruct_URoom * arg0)
+static void sub_8119904(struct UnkStruct_URoom * arg0)
 {
     if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == 0x2F00)
     {
@@ -2879,7 +3303,7 @@ void sub_8119904(struct UnkStruct_URoom * arg0)
     }
 }
 
-bool32 sub_8119944(struct UnkStruct_URoom * arg0)
+static bool32 sub_8119944(struct UnkStruct_URoom * arg0)
 {
     if (arg0->field_9A[0] != 0)
     {
@@ -2923,7 +3347,7 @@ void InitUnionRoom(void)
     sUnionRoomPlayerName[0] = EOS;
 }
 
-void sub_81199FC(u8 taskId)
+static void sub_81199FC(u8 taskId)
 {
     s32 i;
     u8 text[32];
@@ -3006,7 +3430,7 @@ bool16 BufferUnionRoomPlayerName(void)
     }
 }
 
-u8 sub_8119B94(void)
+static u8 sub_8119B94(void)
 {
     s32 i;
     u8 j;
@@ -3082,7 +3506,7 @@ u8 sub_8119B94(void)
     return r7;
 }
 
-void sub_8119D34(u8 taskId)
+static void sub_8119D34(u8 taskId)
 {
     s32 i, j;
     struct UnkStruct_Shared sp0;
@@ -3120,7 +3544,7 @@ void sub_8119D34(u8 taskId)
     }
 }
 
-u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
+static u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
 {
     u8 taskId = CreateTask(sub_8119D34, 0);
     struct UnkStruct_Main4 ** data = (void *)gTasks[taskId].data;
@@ -3130,7 +3554,7 @@ u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
     return taskId;
 }
 
-void sub_8119EB8(u8 taskId)
+static void sub_8119EB8(u8 taskId)
 {
     s32 i, j;
     struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
@@ -3153,7 +3577,7 @@ void sub_8119EB8(u8 taskId)
     }
 }
 
-bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1)
+static bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1)
 {
     if (arg1 == 7)
     {
@@ -3183,7 +3607,7 @@ bool32 sub_8119FB0(struct GFtgtGname *arg0, s16 arg1)
     }
 }
 
-void sub_8119FD8(u8 taskId)
+static void sub_8119FD8(u8 taskId)
 {
     s32 i;
     struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
@@ -3198,7 +3622,7 @@ void sub_8119FD8(u8 taskId)
     }
 }
 
-u8 sub_811A054(struct UnkStruct_Main4 * a0, u32 a1)
+static u8 sub_811A054(struct UnkStruct_Main4 * a0, u32 a1)
 {
     u8 taskId = CreateTask(sub_8119EB8, 0);
     struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
@@ -3207,7 +3631,7 @@ u8 sub_811A054(struct UnkStruct_Main4 * a0, u32 a1)
     return taskId;
 }
 
-u8 sub_811A084(struct UnkStruct_Main4 * a0, u32 a1)
+static u8 sub_811A084(struct UnkStruct_Main4 * a0, u32 a1)
 {
     u8 taskId = CreateTask(sub_8119FD8, 0);
     struct UnkStruct_Main4 **ptr = (void*) gTasks[taskId].data;
@@ -3216,7 +3640,7 @@ u8 sub_811A084(struct UnkStruct_Main4 * a0, u32 a1)
     return taskId;
 }
 
-bool32 sub_811A0B4(const u8 *src)
+static bool32 sub_811A0B4(const u8 *src)
 {
     LoadStdWindowFrameGfx();
     DrawDialogueFrame(0, 1);
@@ -3225,7 +3649,7 @@ bool32 sub_811A0B4(const u8 *src)
     return FALSE;
 }
 
-bool32 sub_811A0E0(void)
+static bool32 sub_811A0E0(void)
 {
     if (!RunTextPrinters_CheckPrinter0Active())
     {
@@ -3237,7 +3661,7 @@ bool32 sub_811A0E0(void)
     }
 }
 
-bool8 PrintOnTextbox(u8 *textState, const u8 *str)
+static bool8 PrintOnTextbox(u8 *textState, const u8 *str)
 {
     switch (*textState)
     {
@@ -3259,7 +3683,7 @@ bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     return FALSE;
 }
 
-s8 sub_811A14C(u8 *arg0, bool32 arg1)
+static s8 sub_811A14C(u8 *arg0, bool32 arg1)
 {
     s8 r1;
 
@@ -3291,7 +3715,7 @@ s8 sub_811A14C(u8 *arg0, bool32 arg1)
     return -2;
 }
 
-u8 sub_811A1AC(const struct WindowTemplate * template)
+static u8 sub_811A1AC(const struct WindowTemplate * template)
 {
     u8 windowId = AddWindow(template);
     DrawStdWindowFrame(windowId, FALSE);
@@ -3302,13 +3726,13 @@ u8 sub_811A1AC(const struct WindowTemplate * template)
     return windowId;
 }
 
-void sub_811A1FC(u8 windowId)
+static void sub_811A1FC(u8 windowId)
 {
     ClearStdWindowAndFrame(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
-s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate)
+static s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate)
 {
     s32 r1, r8;
 
@@ -3347,7 +3771,7 @@ s32 sub_811A218(u8 *arg0, u8 *arg1, u8 *arg2, const struct WindowTemplate *winTe
     return -1;
 }
 
-s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
+static s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTemplate *winTemplate, const struct ListMenuTemplate *menuTemplate, struct UnkStruct_Main0 *arg6)
 {
     s32 input;
     s32 r4;
@@ -3401,20 +3825,20 @@ s32 sub_811A2EC(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, const struct WindowTempl
     return -1;
 }
 
-void sub_811A3F8(void)
+static void sub_811A3F8(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
     CopyBgTilemapBufferToVram(0);
 }
 
-void sub_811A41C(void)
+static void sub_811A41C(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 0);
     CopyBgTilemapBufferToVram(0);
     EnableBothScriptContexts();
 }
 
-void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
+static void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
 {
     struct TextPrinterTemplate printerTemplate;
 
@@ -3484,7 +3908,7 @@ void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx)
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 }
 
-void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count)
+static void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count)
 {
     s32 i;
 
@@ -3498,7 +3922,7 @@ void sub_811A5E4(struct UnkStruct_x20 *arg0, u8 count)
     }
 }
 
-void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count)
+static void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count)
 {
     s32 i;
 
@@ -3509,7 +3933,7 @@ void sub_811A650(struct UnkStruct_Main4 *arg0, u8 count)
     }
 }
 
-bool8 sub_811A694(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1)
+static bool8 sub_811A694(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* arg1)
 {
     s32 i;
 
@@ -3532,7 +3956,7 @@ bool8 sub_811A694(struct UnkStruct_Shared* arg0, const struct UnkStruct_Shared* 
     return FALSE;
 }
 
-bool32 sub_811A6DC(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
+static bool32 sub_811A6DC(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
 {
     s32 i;
 
@@ -3567,7 +3991,7 @@ bool32 sub_811A6DC(struct UnkStruct_Shared *arg0, struct UnkStruct_Shared *arg1)
     return FALSE;
 }
 
-u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
+static u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
 {
     u8 result = 0xFF;
     s32 i;
@@ -3584,7 +4008,7 @@ u32 sub_811A748(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1)
     return result;
 }
 
-u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
+static u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
 {
     s32 i;
 
@@ -3607,7 +4031,7 @@ u8 sub_811A798(struct UnkStruct_x20 *arg0, struct UnkStruct_x1C *arg1, u8 arg2)
     return 0xFF;
 }
 
-void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+static void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
 {
     u8 r2;
     u8 sp0[6];
@@ -3630,7 +4054,7 @@ void sub_811A81C(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 *arg3, u8 arg4,
     }
 }
 
-void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
+static void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 *arg3, u8 arg4, u8 id)
 {
     u8 sp0[6];
     u8 sp10[30];
@@ -3647,7 +4071,7 @@ void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 *arg3, u8 arg4, u
     }
 }
 
-bool32 sub_811A9B8(void)
+static bool32 sub_811A9B8(void)
 {
     s16 x, y;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
@@ -3667,7 +4091,7 @@ bool32 sub_811A9B8(void)
     return FALSE;
 }
 
-u32 sub_811A9FC(s32 arg0)
+static u32 sub_811A9FC(s32 arg0)
 {
     switch (arg0)
     {
@@ -3683,14 +4107,14 @@ u32 sub_811A9FC(s32 arg0)
     }
 }
 
-u32 sub_811AA24(struct UnkStruct_x20 *arg0)
+static u32 sub_811AA24(struct UnkStruct_x20 *arg0)
 {
     u8 sp0[30];
     IntlConvPartnerUname(sp0, *arg0);
     return sub_80FD338(ReadAsU16(arg0->unk.field_0.unk_00.playerTrainerId), sp0);
 }
 
-s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender)
+static s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender)
 {
     bool32 r2;
 
@@ -3740,12 +4164,12 @@ s32 sub_811AA5C(struct UnkStruct_Main0 *arg0, u8 arg1, u8 arg2, u32 playerGender
     }
 }
 
-void nullsub_92(u8 windowId, s32 itemId, u8 y)
+static void nullsub_92(u8 windowId, s32 itemId, u8 y)
 {
 
 }
 
-void sub_811ABE4(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 * uname, u8 colorIdx)
+static void sub_811ABE4(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 * uname, u8 colorIdx)
 {
     u8 level_t[4];
     u16 species = gname->species;
@@ -3766,7 +4190,7 @@ void sub_811ABE4(u8 windowId, u8 y, struct GFtgtGname * gname, const u8 * uname,
     }
 }
 
-void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
+static void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
 {
     struct UnkStruct_Leader *leader = sUnionRoomMain.leader;
     struct GFtgtGname *rfu;
@@ -3800,7 +4224,7 @@ void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
     }
 }
 
-s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1)
+static s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1)
 {
     s32 i;
     s32 j = 0;
@@ -3820,12 +4244,12 @@ s32 sub_811AD7C(struct UnkStruct_x20 * arg, s32 arg1)
     return -1;
 }
 
-s32 sub_811ADC4(s32 arg1, struct UnkStruct_Main0 *arg0)
+static s32 sub_811ADC4(s32 arg1, struct UnkStruct_Main0 *arg0)
 {
     return arg0->arr[arg1].unk.field_0.playerGender;
 }
 
-s32 sub_811ADD0(u32 type, u32 species)
+static s32 sub_811ADD0(u32 type, u32 species)
 {
     s32 i;
 
@@ -3855,7 +4279,7 @@ s32 sub_811ADD0(u32 type, u32 species)
     }
 }
 
-void sub_811AE68(u8 *dst, s32 arg1, u32 playerGender)
+static void sub_811AE68(u8 *dst, s32 arg1, u32 playerGender)
 {
     switch (arg1)
     {
@@ -3874,7 +4298,7 @@ void sub_811AE68(u8 *dst, s32 arg1, u32 playerGender)
     }
 }
 
-void sub_811AECC(u8 *dst, u8 arg1)
+static void sub_811AECC(u8 *dst, u8 arg1)
 {
     u8 mpId = GetMultiplayerId();
     u8 gender = gLinkPlayers[mpId ^ 1].gender;
@@ -3893,7 +4317,7 @@ void sub_811AECC(u8 *dst, u8 arg1)
     }
 }
 
-s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
+static s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
 {
     s32 result = 0;
     u16 species = SPECIES_NONE;
@@ -3949,7 +4373,7 @@ s32 sub_811AF6C(u8 *dst, u32 gender, u16 *arg2, struct UnkStruct_URoom *arg3)
     return result;
 }
 
-bool32 sub_811B0A4(struct UnkStruct_URoom *arg0)
+static bool32 sub_811B0A4(struct UnkStruct_URoom *arg0)
 {
     if (gRecvCmds[0][1] != 0)
     {
@@ -3974,7 +4398,7 @@ bool32 InUnionRoom(void)
            ? TRUE : FALSE;
 }
 
-bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
+static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
 {
     s32 i;
     s32 count = 0;
@@ -3994,7 +4418,7 @@ bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
         return FALSE;
 }
 
-void ResetUnionRoomTrade(struct UnionRoomTrade *arg0)
+static void ResetUnionRoomTrade(struct UnionRoomTrade *arg0)
 {
     arg0->field_0 = 0;
     arg0->type = 0;
@@ -4011,7 +4435,7 @@ void Script_ResetUnionRoomTrade(void)
     ResetUnionRoomTrade(&sUnionRoomTrade);
 }
 
-bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
+static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
 {
     trade->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     trade->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
@@ -4022,14 +4446,14 @@ bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
         return FALSE;
 }
 
-void RegisterTradeMon(u32 monId, struct UnionRoomTrade *trade)
+static void RegisterTradeMon(u32 monId, struct UnionRoomTrade *trade)
 {
     trade->species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     trade->level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
     trade->personality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
 }
 
-u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayerId)
+static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayerId)
 {
     u16 response = 0;
     u16 species;
@@ -4070,7 +4494,7 @@ u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *trade, u8 multiplayer
     return response;
 }
 
-void sub_811B258(bool32 arg0)
+static void sub_811B258(bool32 arg0)
 {
     sub_811A3F8();
     ScriptContext2_Disable();
@@ -4083,13 +4507,13 @@ void sub_811B258(bool32 arg0)
     }
 }
 
-void sub_811B298(void)
+static void sub_811B298(void)
 {
     ScriptContext2_Enable();
     ScriptFreezeObjectEvents();
 }
 
-u8 sub_811B2A8(s32 linkPlayer)
+static u8 sub_811B2A8(s32 linkPlayer)
 {
     u8 retval = 0x80;
     retval |= gLinkPlayers[linkPlayer].gender << 3;
@@ -4097,7 +4521,7 @@ u8 sub_811B2A8(s32 linkPlayer)
     return retval;
 }
 
-u8 sub_811B2D8(struct UnkStruct_URoom *arg0)
+static u8 sub_811B2D8(struct UnkStruct_URoom *arg0)
 {
     u8 retVal = 0x80;
     u8 i;
@@ -4115,7 +4539,7 @@ u8 sub_811B2D8(struct UnkStruct_URoom *arg0)
     return retVal;
 }
 
-void sub_811B31C(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
+static void sub_811B31C(u8 *unused, struct UnkStruct_URoom *arg1, bool8 arg2)
 {
     struct TrainerCard *trainerCard = &gTrainerCards[GetMultiplayerId() ^ 1];
     s32 i;

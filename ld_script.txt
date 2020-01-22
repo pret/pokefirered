@@ -528,7 +528,8 @@ SECTIONS {
         src/menu.o(.rodata);
         src/quest_log.o(.rodata);
         src/union_room.o(.rodata);
-        data/union_room.o(.rodata);
+        data/union_room_player_avatar.o(.rodata);
+        data/union_room_message.o(.rodata);
         data/pokemon_special_anim.o(.rodata);
         src/party_menu.o(.rodata);
         data/union_room_chat.o(.rodata);

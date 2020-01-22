@@ -4,75 +4,8 @@
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
-	.align 2
-
-	@ starts at gUnknown_082F0474 in pokeemerald, union link groups
-
-gUnknown_84570D8:: @ 84570D8
-	.byte 0x29, 0x36, 0x27, 0x12, 0x13, 0x14, 0x19, 0x1A, 0x00, 0x00, 0x2A, 0x3A, 0x28, 0x16, 0x17, 0x18, 0x1C, 0x1D, 0x00, 0x00
-
-gUnknown_84570EC:: @ 84570EC
-	.2byte 0x0004
-	.2byte 0x0006
-	.2byte 0x000D
-	.2byte 0x0008
-	.2byte 0x000A
-	.2byte 0x0006
-	.2byte 0x0001
-	.2byte 0x0008
-	.2byte 0x000D
-	.2byte 0x0004
-	.2byte 0x0007
-	.2byte 0x0004
-	.2byte 0x0001
-	.2byte 0x0004
-	.2byte 0x0007
-	.2byte 0x0008
-
-gUnknown_845710C:: @ 845710C
-	.byte 0x00, 0x00, 0x01, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x01
-
-gUnknown_8457116:: @ 8457116
-	.byte 0x00, 0x02, 0x01, 0x04, 0x03
-
-gUnknown_845711B:: @ 845711B
-	.byte 0x01, 0x03, 0x01, 0x04, 0x02
-
-gUnknown_8457120:: @ 8457120
-	.byte 0x09, 0x08, 0x07, 0x02, 0x06, 0x05, 0x04, 0x03, 0x63, 0x00, 0x64, 0x00, 0x65, 0x00, 0x66, 0x00, 0x67, 0x00, 0x68, 0x00, 0x69, 0x00, 0x6A, 0x00
 
 	.align 2
-gUnknown_8457138:: @ 8457138
-	abspath "rfu_union_tool.c"
-
-	.align 2
-gUnknown_8457174:: @ 8457174
-	.asciz "0"
-
-	.align 2
-gUnknown_8457178:: @ 8457178
-	.asciz "UnionObjWork != NULL"
-
-gUnknown_845718D:: @ 845718D
-	.byte 0xA4, 0xFE
-
-gUnknown_845718F:: @ 845718F
-	.byte 0xA5, 0xFE, 0x00, 0x00, 0x00
-
-gUnknown_8457194:: @ 8457194
-	.2byte 0x01FC, 0x0000 @ BgTemplate
-
-gUnknown_8457198:: @ 8457198
-	.byte 0x00, 0x02, 0x0F, 0x1A, 0x04, 0x0E @ window template
-	.2byte 0x0014
-
-	@ ???
-	.byte -1, 0, 0, 0
-	.byte 0, 0, 0, 0
-
-gUnknown_84571A8:: @ 84571A8
-	.byte 0x01, 0x02, 0x03, 0x00
-
 gUnknown_84571AC:: @ 84571AC
 	.string "$"
 
@@ -261,7 +194,7 @@ gUnknown_8457554:: @ 8457554
 	.string "An “OK” was sent\nto {STR_VAR_1}.$"
 
 	.align 2
-gUnknown_845756C:: @ 845756C	
+gUnknown_845756C:: @ 845756C
 	.string "The other TRAINER doesn't appear\nto be available now…\p$"
 
 	.align 2
@@ -315,7 +248,7 @@ gUnknown_845771C:: @ 845771C
 	.string "Quit being a member?$"
 
 	.align 2
-gUnknown_8457734:: @ 8457734	
+gUnknown_8457734:: @ 8457734
 	.string "You stopped being a member.\p$"
 
 	.align 2

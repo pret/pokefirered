@@ -39,6 +39,7 @@
 #include "union_room.h"
 #include "union_room_chat.h"
 #include "union_room_player_avatar.h"
+#include "union_room_message.h"
 #include "constants/songs.h"
 #include "constants/maps.h"
 #include "constants/cable_club.h"
@@ -131,20 +132,20 @@ void sub_811BA78(void);
 
 #include "data/union_room.h"
 
-// These are functions in Emmerald but inlined in FireRed
+// These are functions in Emerald but inlined in FireRed
 
-#define IntlConvPartnerUname7(dest, arg1) ({                                       \
-    StringCopy7(dest, (arg1).unk.playerName);                                   \
+#define IntlConvPartnerUname7(dest, arg1) ({                              \
+    StringCopy7(dest, (arg1).unk.playerName);                             \
     ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
 })
 
-#define IntlConvPartnerUname(dest, arg1) ({                                       \
-    StringCopy(dest, (arg1).unk.playerName);                                   \
+#define IntlConvPartnerUname(dest, arg1) ({                               \
+    StringCopy(dest, (arg1).unk.playerName);                              \
     ConvertInternationalString(dest, (arg1).unk.field_0.unk_00.unk_00_0); \
 })
 
 #define CopyTrainerCardData(dest, src, _version) ({ \
-    (dest) = *((struct TrainerCard * )(src));        \
+    (dest) = *((struct TrainerCard * )(src));       \
     (dest).version = _version;                      \
 })
 

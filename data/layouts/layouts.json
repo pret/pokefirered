@@ -3128,28 +3128,28 @@
       "blockdata_filepath": "data/layouts/FourIsland_PokemonDayCare/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_833B6EC",
-      "name": "UnusedLayout_833B6EC_Layout",
+      "id": "LAYOUT_SEAFOAM_ISLANDS_B3F_CURRENT_STOPPED",
+      "name": "SeafoamIslands_B3F_CurrentStopped_Layout",
       "width": 38,
       "height": 24,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4E24",
-      "border_filepath": "data/layouts/UnusedLayout_833B6EC/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_833B6EC/map.bin"
+      "border_filepath": "data/layouts/SeafoamIslands_B3F_CurrentStopped/border.bin",
+      "blockdata_filepath": "data/layouts/SeafoamIslands_B3F_CurrentStopped/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_833BE30",
-      "name": "UnusedLayout_833BE30_Layout",
+      "id": "LAYOUT_SEAFOAM_ISLANDS_B4F_CURRENT_STOPPED",
+      "name": "SeafoamIslands_B4F_CurrentStopped_Layout",
       "width": 38,
       "height": 24,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4E24",
-      "border_filepath": "data/layouts/UnusedLayout_833BE30/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_833BE30/map.bin"
+      "border_filepath": "data/layouts/SeafoamIslands_B4F_CurrentStopped/border.bin",
+      "blockdata_filepath": "data/layouts/SeafoamIslands_B4F_CurrentStopped/map.bin"
     },
     {
       "id": "LAYOUT_MT_EMBER_EXTERIOR",

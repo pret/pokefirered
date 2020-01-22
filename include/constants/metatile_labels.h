@@ -1,6 +1,9 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+// General
+#define METATILE_General_CalmWater  0x12B
+
 // Pokemon Mansion
 #define METATILE_PokemonMansion_Floor                                    0x284
 #define METATILE_PokemonMansion_Floor_ShadeFull                          0x285
@@ -33,5 +36,8 @@
 #define METATILE_PokemonMansion_Statue_RedEyes                           0x34D
 #define METATILE_PokemonMansion_Statue_RedEyes_Shade                     0x34E
 #define METATILE_PokemonMansion_Statue_RedEyes_Basement                  0x34F
+
+// gTileset_82D504C. Below metatile probably needs generic name
+#define METATILE_MtEmber_CaveEntrance  0x346
 
 #endif // GUARD_METATILE_LABELS_H

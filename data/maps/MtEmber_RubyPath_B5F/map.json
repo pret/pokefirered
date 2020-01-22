@@ -23,7 +23,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtEmber_RubyPath_B5F_EventScript_163C49",
+      "script": "MtEmber_RubyPath_B5F_EventScript_Ruby",
       "flag": "FLAG_HIDE_RUBY"
     }
   ],
@@ -43,7 +43,7 @@
       "x": 7,
       "y": 2,
       "elevation": 0,
-      "script": "MtEmber_RubyPath_B5F_EventScript_163BAB"
+      "script": "MtEmber_RubyPath_B5F_EventScript_BrailleMessage"
     }
   ]
 }

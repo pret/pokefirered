@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
@@ -1119,7 +1120,8 @@ Text_1A641B:: @ 81A641B
 	.string "All right!\n"
 	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"
 
-Text_1A6448:: @ 81A6448
+@ Call for legendary bird trio
+Text_Gyaoo:: @ 81A6448
 	.string "Gyaoo!$"
 
 Text_MoveCanOnlyBeLearnedOnce:: @ 81A644F

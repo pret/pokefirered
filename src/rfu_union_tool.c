@@ -524,3 +524,98 @@ void sub_811BDA8(u32 r5, struct GFtgtGname * r4)
         AGB_ASSERT_EX(0, ABSPATH("rfu_union_tool.c"), 979)
     }
 }
+
+void sub_811BE6C(u32 r5, struct GFtgtGname * unused)
+{
+    s32 i;
+    sub_811B90C(r5);
+    for (i = 0; i < 5; i++)
+    {
+        sub_811BC68(r5, i);
+    }
+}
+
+void sub_811BE8C(struct UnkStruct_URoom *r0)
+{
+    s32 i;
+    struct UnkStruct_x20 * r4;
+    gUnknown_203B088 = 0;
+    for (i = 0, r4 = r0->field_0->arr; i < 8; i++)
+    {
+        if (r4[i].field_1A_0 == 1)
+        {
+            sub_811BDA8(i, &r4[i].unk.field_0);
+        }
+        else if (r4[i].field_1A_0 == 2)
+        {
+            sub_811BE6C(i, &r4[i].unk.field_0);
+        }
+    }
+}
+
+void sub_811BECC(struct UnkStruct_URoom *unused)
+{
+    gUnknown_203B088 = 300;
+}
+
+void sub_811BEDC(struct UnkStruct_URoom *r2)
+{
+    if (++gUnknown_203B088 > 300)
+    {
+        sub_811BE8C(r2);
+    }
+}
+
+bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
+{
+    s16 x, y;
+    s32 i, j;
+    struct UnkStruct_x20 * r4;
+    if (!is_walking_or_running())
+    {
+        return FALSE;
+    }
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    for (i = 0, r4 = arg0->arr; i < 8; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            s32 r3 = 5 * i + j;
+            if (x != gUnknown_84570EC[i][0] + gUnknown_845710C[j][0] + 7)
+            {
+                continue;
+            }
+            if (y != gUnknown_84570EC[i][1] + gUnknown_845710C[j][1] + 7)
+            {
+                continue;
+            }
+            if (sub_806916C(r3 - 0x38) != 0)
+            {
+                continue;
+            }
+            if (sub_8069294(r3 - 0x38) != 0)
+            {
+                continue;
+            }
+            if (r4[i].field_1A_0 != 1)
+            {
+                continue;
+            }
+            sub_811C008(j, i, gUnknown_8457116[GetPlayerFacingDirection()]);
+            *arg1 = j;
+            *arg2 = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void sub_811C008(s32 arg0, s32 arg1, u8 arg2)
+{
+    sub_8069058(5 * arg1 - 0x38 + arg0, arg2);
+}
+
+void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
+{
+    return sub_811C008(arg0, arg1, sub_811BBA0(arg0, arg1, &arg2->arr[arg1].unk.field_0));
+}

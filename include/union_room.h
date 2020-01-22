@@ -87,10 +87,10 @@ struct UnkStruct_Group
 
 struct UnionObj
 {
-    u8 field_0;
-    u8 field_1;
-    s8 field_2;
-    u8 field_3;
+    u8 state;
+    u8 gfxId;
+    s8 animState;
+    u8 schedAnim;
 };
 
 struct UnkStruct_URoom
@@ -121,17 +121,17 @@ struct UnkStruct_URoom
     /* 0x058 */ u8 field_58[4][11];
     /* 0x084 */ u16 field_98;
     /* 0x086 */ u16 field_9A[3];
-    /* 0x08C */ struct UnionObj field_A0[8];
-    /* 0x0AC */ u8 field_C0[12][15];
+    /* 0x08C */ struct UnionObj unionObjs[8];
+    /* 0x0AC */ u8 trainerCardStrbufs[12][15];
     /* 0x160 */ u8 field_174[48];
     /* 0x190 */ u8 field_1A4[200];
 };
 
 union UnkUnion_Main
 {
-    struct UnkStruct_Leader *leader;
-    struct UnkStruct_Group *group;
-    struct UnkStruct_URoom *uRoom;
+    struct UnkStruct_Leader * leader;
+    struct UnkStruct_Group * group;
+    struct UnkStruct_URoom * uRoom;
 };
 
 struct UnionRoomTrade

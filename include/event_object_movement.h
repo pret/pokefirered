@@ -47,7 +47,7 @@ void ObjectEventClearAnimIfSpecialAnimActive(struct ObjectEvent *);
 void SpawnObjectEventsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoObjectEvent(u16, SpriteCallback, s16, s16, u8);
-u8 TrySpawnObjectEvent(u8, u8, u8);
+u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
 u8 SpawnSpecialObjectEventParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);

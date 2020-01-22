@@ -27,6 +27,7 @@ gUnknown_84571E0:: @ 84571E0
 	.string "SYSTEM search has been canceled.$"
 
 	.align 2
+gUnref_845721C:: @ 845721C
 	.string "ともだちからの れんらくを\n" @ something about waiting for a friend to connect?
 	.string "まっています$"
 
@@ -167,43 +168,56 @@ gUnknown_845747C:: @ 845747C
 
 	.align 2
 unref_text_union_room_2::
-	.string "ため\nさんかしゃ ぼしゅうちゅう です！$"
+	.string "ため\n"
+	.string "さんかしゃ ぼしゅうちゅう です！$"
 
 	.align 2
 gUnknown_84574A0:: @ 84574A0
-	.string "{STR_VAR_2} contacted you for\n{STR_VAR_1}. Accept?$"
+	.string "{STR_VAR_2} contacted you for\n"
+	.string "{STR_VAR_1}. Accept?$"
 
 	.align 2
 gUnknown_84574C4:: @ 84574C4
-	.string "{STR_VAR_2} contacted you.\nWill you share {STR_VAR_1}?$"
+	.string "{STR_VAR_2} contacted you.\n"
+	.string "Will you share {STR_VAR_1}?$"
 
 	.align 2
 gUnknown_84574EC:: @ 84574EC
-	.string "{STR_VAR_2} contacted you.\nAdd to the members?$"
+	.string "{STR_VAR_2} contacted you.\n"
+	.string "Add to the members?$"
 
 	.align 2
 gUnknown_8457514:: @ 8457514
-	.string "{STR_VAR_1}!\nAre these members OK?$"
+	.string "{STR_VAR_1}!\n"
+	.string "Are these members OK?$"
 
 	.align 2
 gUnknown_8457530:: @ 8457530
-	.string "Cancel {STR_VAR_1} MODE\nwith these members?$"
+	.string "Cancel {STR_VAR_1} MODE\n"
+	.string "with these members?$"
 
 	.align 2
 gUnknown_8457554:: @ 8457554
-	.string "An “OK” was sent\nto {STR_VAR_1}.$"
+	.string "An “OK” was sent\n"
+	.string "to {STR_VAR_1}.$"
 
 	.align 2
 gUnknown_845756C:: @ 845756C
-	.string "The other TRAINER doesn't appear\nto be available now…\p$"
+	.string "The other TRAINER doesn't appear\n"
+	.string "to be available now…\p"
+	.string "$"
 
 	.align 2
 gUnknown_84575A4:: @ 84575A4
-	.string "You can't transmit with a TRAINER\nwho is too far away.\p$"
+	.string "You can't transmit with a TRAINER\n"
+	.string "who is too far away.\p"
+	.string "$"
 
 	.align 2
 gUnknown_84575DC:: @ 84575DC
-	.string "The other TRAINER(S) is/are not\nready yet.\p$"
+	.string "The other TRAINER(S) is/are not\n"
+	.string "ready yet.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457608:: @ 8457608
@@ -212,11 +226,14 @@ gUnknown_8457608:: @ 8457608
 
 	.align 2
 gUnknown_8457610:: @ 8457610
-	.string "The {STR_VAR_1} MODE with\nthese members will be canceled.{PAUSE 90}$"
+	.string "The {STR_VAR_1} MODE with\n"
+	.string "these members will be canceled.{PAUSE 90}$"
 
 	.align 2
 gUnknown_8457644:: @ 8457644
-	.string "There is a member who can no\nlonger remain available.\p$"
+	.string "There is a member who can no\n"
+	.string "longer remain available.\p"
+	.string "$"
 
 	.align 2
 gUnknown_845767C:: @ 845767C
@@ -225,7 +242,9 @@ gUnknown_845767C:: @ 845767C
 
 	.align 2
 gUnknown_8457684:: @ 8457684
-	.string "The other TRAINER appears\nunavailable…\p$"
+	.string "The other TRAINER appears\n"
+	.string "unavailable…\p"
+	.string "$"
 
 	.align 2
 gUnknown_84576AC:: @ 84576AC
@@ -233,15 +252,18 @@ gUnknown_84576AC:: @ 84576AC
 
 	.align 2
 gUnknown_84576C4:: @ 84576C4
-	.string "{STR_VAR_1} OK'd your registration as\na member.$"
+	.string "{STR_VAR_1} OK'd your registration as\n"
+	.string "a member.$"
 
 	.align 2
 gUnknown_84576EC:: @ 84576EC
-	.string "{STR_VAR_1} replied, “No…”\p$"
+	.string "{STR_VAR_1} replied, “No…”\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457700:: @ 8457700
-	.string "{STR_VAR_1}!\nAwaiting other members!$"
+	.string "{STR_VAR_1}!\n"
+	.string "Awaiting other members!$"
 
 	.align 2
 gUnknown_845771C:: @ 845771C
@@ -249,7 +271,8 @@ gUnknown_845771C:: @ 845771C
 
 	.align 2
 gUnknown_8457734:: @ 8457734
-	.string "You stopped being a member.\p$"
+	.string "You stopped being a member.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457754:: @ 8457754
@@ -266,15 +289,18 @@ gUnknown_8457754:: @ 8457754
 
 	.align 2
 gUnknown_845777C:: @ 845777C
-	.string "The WIRELESS COMMUNICATION\nSYSTEM link has been established.$"
+	.string "The WIRELESS COMMUNICATION\n"
+	.string "SYSTEM link has been established.$"
 
 	.align 2
 gUnknown_84577BC:: @ 84577BC
-	.string "The WIRELESS COMMUNICATION\nSYSTEM link has been dropped…$"
+	.string "The WIRELESS COMMUNICATION\n"
+	.string "SYSTEM link has been dropped…$"
 
 	.align 2
 gUnknown_84577F8:: @ 84577F8
-	.string "The link with your friend has been\ndropped…$"
+	.string "The link with your friend has been\n"
+	.string "dropped…$"
 
 	.align 2
 gUnknown_8457824:: @ 8457824
@@ -295,11 +321,13 @@ gUnknown_8457838:: @ 8457838
 
 	.align 2
 gUnknown_8457860:: @ 8457860
-	.string "Do you want the {STR_VAR_2}\nMODE?$"
+	.string "Do you want the {STR_VAR_2}\n"
+	.string "MODE?$"
 
 	.align 2
 gUnknown_845787C:: @ 845787C
-	.string "Do you want the {STR_VAR_2}\nMODE?$"
+	.string "Do you want the {STR_VAR_2}\n"
+	.string "MODE?$"
 
 	.align 2
 gUnknown_8457898:: @ 8457898
@@ -313,19 +341,23 @@ gUnknown_84578A0:: @ 84578A0
 
 	.align 2
 gUnknown_84578BC:: @ 84578BC
-	.string "Awaiting {STR_VAR_1}'s response about\nthe trade…$"
+	.string "Awaiting {STR_VAR_1}'s response about\n"
+	.string "the trade…$"
 
 	.align 2
 gUnknown_84578E4:: @ 84578E4
-	.string "Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+	.string "Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n"
+	.string "{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
 
 	.align 2
 gUnknown_8457950:: @ 8457950
-	.string "Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+	.string "Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n"
+	.string "{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
 
 	.align 2
 gUnknown_84579BC:: @ 84579BC
-	.string "Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
+	.string "Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n"
+	.string "{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.$"
 
 	.align 2
 gUnknown_8457A34:: @ 8457A34
@@ -335,19 +367,23 @@ gUnknown_8457A34:: @ 8457A34
 
 	.align 2
 gUnknown_8457A40:: @ 8457A40
-	.string "Hiya! Is there something that you\nwanted to do?$"
+	.string "Hiya! Is there something that you\n"
+	.string "wanted to do?$"
 
 	.align 2
 gUnknown_8457A70:: @ 8457A70
-	.string "Hello!\nWould you like to do something?$"
+	.string "Hello!\n"
+	.string "Would you like to do something?$"
 
 	.align 2
 gUnknown_8457A98:: @ 8457A98
-	.string "{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?$"
+	.string "{STR_VAR_1}: Hiya, we meet again!\n"
+	.string "What are you up for this time?$"
 
 	.align 2
 gUnknown_8457AD0:: @ 8457AD0
-	.string "{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?$"
+	.string "{STR_VAR_1}: Oh! {PLAYER}, hello!\n"
+	.string "Would you like to do something?$"
 
 	.align 2
 gUnknown_8457B04:: @ 8457B04
@@ -366,7 +402,8 @@ gUnknown_8457B2C:: @ 8457B2C
 
 	.align 2
 gUnknown_8457B4C:: @ 8457B4C
-	.string "{STR_VAR_1}: What would you like to\ndo now?$"
+	.string "{STR_VAR_1}: What would you like to\n"
+	.string "do now?$"
 
 	.align 2
 gUnknown_8457B70:: @ 8457B70
@@ -394,11 +431,13 @@ gUnknown_8457BCC:: @ 8457BCC
 
 	.align 2
 gUnknown_8457BD4:: @ 8457BD4
-	.string "Awaiting a response from\nthe other TRAINER…$"
+	.string "Awaiting a response from\n"
+	.string "the other TRAINER…$"
 
 	.align 2
 gUnknown_8457C00:: @ 8457C00
-	.string "Awaiting a response from\n{STR_VAR_1}…$"
+	.string "Awaiting a response from\n"
+	.string "{STR_VAR_1}…$"
 
 	.align 2
 gUnknown_8457C20:: @ 8457C20
@@ -448,18 +487,22 @@ gUnknown_8457DB8:: @ 8457DB8
 
 	.align 2
 gUnknown_8457E0C:: @ 8457E0C
-	.string "The chat has been dropped.\p$"
+	.string "The chat has been dropped.\p"
+	.string "$"
 
 gUnknown_8457E28:: @ 8457E28
-	.string "You declined the offer.\p$"
+	.string "You declined the offer.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457E44:: @ 8457E44
-	.string "You declined the offer.\p$"
+	.string "You declined the offer.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457E60:: @ 8457E60
-	.string "The chat was ended.\p$"
+	.string "The chat was ended.\p"
+	.string "$"
 	.align 2
 
 gUnknown_8457E78::
@@ -499,7 +542,8 @@ gUnknown_8457F80:: @ 8457F80
 
 gUnknown_8457F90:: @ 8457F90
 	.string "……\n"
-	.string "The TRAINER appears to be busy…\p$"
+	.string "The TRAINER appears to be busy…\p"
+	.string "$"
 
 	.align 2
 gUnknown_8457FB4::
@@ -596,12 +640,14 @@ gUnknown_8458230:: @ 8458230
 gUnknown_8458260::
 	.string "Sorry! My POKéMON don't seem to\n"
 	.string "be feeling too well right now.\l"
-	.string "Let me battle you another time.\p$"
+	.string "Let me battle you another time.\p"
+	.string "$"
 
 gUnknown_84582C0::
 	.string "I'm terribly sorry, but my POKéMON\n"
 	.string "aren't feeling well…\p"
-	.string "Let's battle another time.\p$"
+	.string "Let's battle another time.\p"
+	.string "$"
 
 gUnknown_8458314:: @ 8458314
 	.4byte gUnknown_8458260
@@ -611,13 +657,15 @@ gUnknown_8458314:: @ 8458314
 gUnknown_845831C::
 	.string "Huh? My TRAINER CARD…\n"
 	.string "Where'd it go now?\l"
-	.string "Sorry! I'll show you another time!\p$"
+	.string "Sorry! I'll show you another time!\p"
+	.string "$"
 
 	.align 2
 gUnknown_845836C::
 	.string "Oh? Now where did I put my\n"
 	.string "TRAINER CARD?…\l"
-	.string "Sorry! I'll show you later!\p$"
+	.string "Sorry! I'll show you later!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84583B4:: @ 84583B4
@@ -627,11 +675,13 @@ gUnknown_84583B4:: @ 84583B4
 	.align 2
 gUnknown_84583BC::
 	.string "If you want to do something with\n"
-	.string "me, just give me a shout!\p$"
+	.string "me, just give me a shout!\p"
+	.string "$"
 	.align 2
 gUnknown_84583F8::
 	.string "If you want to do something with\n"
-	.string "me, don't be shy.\p$"
+	.string "me, don't be shy.\p"
+	.string "$"
 
 	.align 2
 gUnknown_845842C:: @ 845842C
@@ -641,27 +691,32 @@ gUnknown_845842C:: @ 845842C
 gUnknown_8458434:: @ 8458434
 	.string "Whoops! Sorry, but I have to do\n"
 	.string "something else.\l"
-	.string "Another time, okay?\p$"
+	.string "Another time, okay?\p"
+	.string "$"
 
 	.align 2
 gUnknown_845847C:: @ 845847C
 	.string "If you want to battle, you need\n"
 	.string "two POKéMON that are below\l"
-	.string "Lv. 30.\p$"
+	.string "Lv. 30.\p"
+	.string "$"
 
 gUnknown_84584C0:: @ 84584C0
 	.string "For a battle, you need two\n"
-	.string "POKéMON that are below Lv. 30.\p$"
+	.string "POKéMON that are below Lv. 30.\p"
+	.string "$"
 
 	.align 2
 gUnknown_84584FC::
 	.string "Oh, all right.\n"
-	.string "Come see me anytime, okay?\p$"
+	.string "Come see me anytime, okay?\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458528::
 	.string "Oh…\n"
-	.string "Please come by anytime.\p$"
+	.string "Please come by anytime.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458548:: @ 8458548
@@ -672,13 +727,15 @@ gUnknown_8458548:: @ 8458548
 gUnknown_8458550::
 	.string "Oh, sorry!\n"
 	.string "I just can't right this instant.\l"
-	.string "Let's chat another time.\p$"
+	.string "Let's chat another time.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458598::
 	.string "Oh, I'm sorry.\n"
 	.string "I have too much to do right now.\l"
-	.string "Let's chat some other time.\p$"
+	.string "Let's chat some other time.\p"
+	.string "$"
 
 	.align 2
 gUnknown_84585E8:: @ 84585E8
@@ -688,42 +745,50 @@ gUnknown_84585E8:: @ 84585E8
 	.align 2
 gUnknown_84585F0::
 	.string "Whoa!\n"
-	.string "I can tell you're pretty tough!\p$"
+	.string "I can tell you're pretty tough!\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458618::
 	.string "You used that move?\n"
-	.string "That's good strategy!\p$"
+	.string "That's good strategy!\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458644::
 	.string "Way to go!\n"
-	.string "That was an eye-opener!\p$"
+	.string "That was an eye-opener!\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458668::
 	.string "Oh! How could you use that\n"
-	.string "POKéMON in that situation?\p$"
+	.string "POKéMON in that situation?\p"
+	.string "$"
 
 	.align 2
 gUnknown_84586A0::
 	.string "That POKéMON…\n"
-	.string "It's been raised really well!\p$"
+	.string "It's been raised really well!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84586D0::
 	.string "That's it!\n"
-	.string "This is the right move now!\p$"
+	.string "This is the right move now!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84586F8::
 	.string "That's awesome!\n"
-	.string "You can battle that way?\p$"
+	.string "You can battle that way?\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458724::
 	.string "You have exquisite timing for\n"
-	.string "switching POKéMON!\p$"
+	.string "switching POKéMON!\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458758:: @ 8458758
@@ -739,42 +804,50 @@ gUnknown_8458758:: @ 8458758
 	.align 2
 gUnknown_8458778::
 	.string "Oh, I see!\n"
-	.string "This is educational!\p$"
+	.string "This is educational!\p"
+	.string "$"
 
 	.align 2
 gUnknown_845879C::
 	.string "Don't say anything funny anymore!\n"
-	.string "I'm sore from laughing!\p$"
+	.string "I'm sore from laughing!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84587D8::
 	.string "Oh?\n"
-	.string "Something like that happened.\p$"
+	.string "Something like that happened.\p"
+	.string "$"
 
 	.align 2
 gUnknown_84587FC::
 	.string "Hmhm… What?\n"
-	.string "So is this what you're saying?\p$"
+	.string "So is this what you're saying?\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458828::
 	.string "Is that right?\n"
-	.string "I didn't know that.\p$"
+	.string "I didn't know that.\p"
+	.string "$"
 
 	.align 2
 gUnknown_845884C::
 	.string "Ahaha!\n"
-	.string "What is that about?\p$"
+	.string "What is that about?\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458868::
 	.string "Yes, that's exactly it!\n"
-	.string "That's what I meant.\p$"
+	.string "That's what I meant.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458898::
 	.string "In other words…\n"
-	.string "Yes! That's right!\p$"
+	.string "Yes! That's right!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84588BC:: @ 84588BC
@@ -790,21 +863,25 @@ gUnknown_84588BC:: @ 84588BC
 	.align 2
 gUnknown_84588DC::
 	.string "I'm just showing my TRAINER CARD\n"
-	.string "as my way of greeting.\p$"
+	.string "as my way of greeting.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458918::
-	.string "I hope I get to know you better!\p$"
+	.string "I hope I get to know you better!\p"
+	.string "$"
 
 	.align 2
 gUnknown_845893C::
 	.string "We're showing each other our\n"
-	.string "TRAINER CARDS to get acquainted.\p$"
+	.string "TRAINER CARDS to get acquainted.\p"
+	.string "$"
 
 	.align 2
 gUnknown_845897C::
 	.string "Glad to meet you.\n"
-	.string "Please don't be a stranger!\p$"
+	.string "Please don't be a stranger!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84589AC:: @ 84589AC
@@ -816,21 +893,25 @@ gUnknown_84589AC:: @ 84589AC
 	.align 2
 gUnknown_84589BC::
 	.string "Yeahah!\n"
-	.string "I really wanted this POKéMON!\p$"
+	.string "I really wanted this POKéMON!\p"
+	.string "$"
 
 	.align 2
 gUnknown_84589E4::
 	.string "Finally, a trade got me that\n"
-	.string "POKéMON I'd wanted a long time.\p$"
+	.string "POKéMON I'd wanted a long time.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458A24::
-	.string "I'm trading POKéMON right now.\p$"
+	.string "I'm trading POKéMON right now.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458A44::
 	.string "I finally got that POKéMON I\n"
-	.string "wanted in a trade!\p$"
+	.string "wanted in a trade!\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458A78:: @ 8458A78
@@ -845,7 +926,8 @@ gUnknown_8458A78:: @ 8458A78
 
 gUnknown_8458A98:: @ 8458A98
 	.string "{STR_VAR_1} checked the\n"
-	.string "TRADING BOARD.\p$"
+	.string "TRADING BOARD.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458AB8:: @ 8458AB8
@@ -873,33 +955,40 @@ gUnknown_8458B44:: @ 8458B44
 	.string "こうかんけいじばん の とうろくが\n"
 	.string "かんりょう しました\p"
 	.string "ごりよう ありがとう\n"
-	.string "ございました！\p$"
+	.string "ございました！\p"
+	.string "$"
 
 	.align 2
 	.string "けいじばんに だれも ポケモンを\n"
-	.string "とうろく していません\p\n$"
+	.string "とうろく していません\p"
+	.string "\n$"
 
 	.align 2
 gUnknown_8458CD4:: @ 8458CD4
 	.string "Please choose the type of POKéMON\n"
-	.string "that you would like in the trade.\n$"
+	.string "that you would like in the trade.\n"
+	.string "$"
 
 	.align 2
 gUnknown_8458D1C:: @ 8458D1C
 	.string "Which of your party POKéMON will\n"
-	.string "you offer in trade?\p$"
+	.string "you offer in trade?\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458D54:: @ 8458D54
-	.string "Registration has been canceled.\p$"
+	.string "Registration has been canceled.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458D78:: @ 8458D78
-	.string "Registration has been completed.\p$"
+	.string "Registration has been completed.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458D9C:: @ 8458D9C
-	.string "The trade has been canceled.\p$"
+	.string "The trade has been canceled.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458DBC:: @ 8458DBC
@@ -913,7 +1002,8 @@ gUnknown_8458DE8:: @ 8458DE8
 
 	.align 2
 gUnknown_8458E10:: @ 8458E10
-	.string "The registration has been canceled.\p$"
+	.string "The registration has been canceled.\p"
+	.string "$"
 
 	.align 2
 	.string "こうかんを きぼうしているひとを\n"
@@ -934,27 +1024,32 @@ gUnknown_8458E70:: @ 8458E70
 
 	.align 2
 	.string "あなたが こうかんにだす\n"
-	.string "ポケモンが とうろくされていません\p$"
+	.string "ポケモンが とうろくされていません\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458ED0:: @ 8458ED0
 	.string "You don't have a {STR_VAR_2}-type\n"
-	.string "POKéMON that {STR_VAR_1} wants.\p$"
+	.string "POKéMON that {STR_VAR_1} wants.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458F04:: @ 8458F04
 	.string "You don't have an EGG that\n"
-	.string "{STR_VAR_1} wants.\p$"
+	.string "{STR_VAR_1} wants.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458F2C:: @ 8458F2C
 	.string "{STR_VAR_1} can't make a trade for\n"
-	.string "your POKéMON right now.\p$"
+	.string "your POKéMON right now.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458F60:: @ 8458F60
 	.string "You can't make a trade for\n"
-	.string "{STR_VAR_1}'s POKéMON right now.\p$"
+	.string "{STR_VAR_1}'s POKéMON right now.\p"
+	.string "$"
 
 	.align 2
 gUnknown_8458F94:: @ 8458F94
@@ -962,7 +1057,8 @@ gUnknown_8458F94:: @ 8458F94
 	.word gUnknown_8458F60
 
 gUnknown_8458F9C:: @ 8458F9C
-	.string "Your trade offer was rejected.\p$"
+	.string "Your trade offer was rejected.\p"
+	.string "$"
 
 gUnknown_8458FBC:: @ 8458FBC
 	.string "EGG TRADE$"
@@ -1039,7 +1135,8 @@ gUnknown_84591DC:: @ 84591DC
 
 	.align 2
 	.string "ダブルバトルでは 2ひき いじょうの\n"
-	.string "ポケモンが ひつようです\p$"
+	.string "ポケモンが ひつようです\p"
+	.string "$"
 
 	.align 2
 gUnknown_8459238:: @ 8459238
@@ -1187,11 +1284,20 @@ gUnknown_84594B0:: @ 84594B0
 
 	.align 2
 gUnknown_84594C4:: @ 84594C4
-	.string "This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p$"
+	.string "This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\n"
+	.string "TRAINER CARD…\l"
+	.string "{SPECIAL_F7 0x02}\p"
+	.string "POKéDEX: {SPECIAL_F7 0x03}\n"
+	.string "TIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p"
+	.string "$"
 
 	.align 2
 gUnknown_8459504:: @ 8459504
-	.string "BATTLES: {SPECIAL_F7 0x00} WINS  {SPECIAL_F7 0x02} LOSSES\nTRADES:  {SPECIAL_F7 0x03} TIMES\p“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p$"
+	.string "BATTLES: {SPECIAL_F7 0x00} WINS  {SPECIAL_F7 0x02} LOSSES\n"
+	.string "TRADES:  {SPECIAL_F7 0x03} TIMES\p"
+	.string "“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n"
+	.string "{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p"
+	.string "$"
 
 	.align 2
 gUnknown_8459544:: @ 8459544
@@ -1208,9 +1314,8 @@ gUnknown_8459580:: @ 8459580
 
 	.align 2
 gUnknown_8459588:: @ 8459588
-	.string "Finished checking {SPECIAL_F7 0x01}'s\nTRAINER CARD.{PAUSE 60}$"
-
-	@ why is this data here of all places?
+	.string "Finished checking {SPECIAL_F7 0x01}'s\n"
+	.string "TRAINER CARD.{PAUSE 60}$"
 
 	.align 2
 gUnknown_84595B0::

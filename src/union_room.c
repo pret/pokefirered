@@ -649,7 +649,7 @@ static void sub_8115A68(u8 taskId)
     case 0:
         gUnknown_203B058 = gUnknown_8456CD8[gSpecialVar_0x8004];
         gUnknown_203B059 = gUnknown_8456CD8[gSpecialVar_0x8004] >> 8;
-        sub_80FAF58(gUnknown_203B058, 0, 0);
+        SetHostRFUtgtGname(gUnknown_203B058, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBB8C(gUnknown_203B059 & 0xF);
@@ -1180,7 +1180,7 @@ static void sub_8116738(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_80FAF58(gUnknown_84570C8[gSpecialVar_0x8004], 0, 0);
+        SetHostRFUtgtGname(gUnknown_84570C8[gSpecialVar_0x8004], 0, 0);
         gUnknown_203B058 = gUnknown_84570C8[gSpecialVar_0x8004];
         sub_800B1F4();
         OpenLink();
@@ -1468,7 +1468,7 @@ static void sub_8116E1C(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_80FAF58(0, 0, 0);
+        SetHostRFUtgtGname(0, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
@@ -1850,7 +1850,7 @@ static void sub_81175BC(u8 taskId)
         else
         {
             sub_80F8D14();
-            sub_80FAF58(69, 0, 1);
+            SetHostRFUtgtGname(69, 0, 1);
         }
         sub_8128420();
         break;
@@ -1950,7 +1950,7 @@ static void sub_8117A0C(u8 taskId)
     case 0:
         gUnknown_203B058 = data->field_18;
         gUnknown_203B059 = 2;
-        sub_80FAF58(data->field_18, 0, 0);
+        SetHostRFUtgtGname(data->field_18, 0, 0);
         sub_80FAF74(FALSE, FALSE);
         sub_800B1F4();
         OpenLink();
@@ -2156,7 +2156,7 @@ static void sub_8117F20(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_80FAF58(data->field_12 + 21, 0, 0);
+        SetHostRFUtgtGname(data->field_12 + 21, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
@@ -2322,7 +2322,7 @@ static void sub_81182DC(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sub_80FAF58(0, 0, 0);
+        SetHostRFUtgtGname(0, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
@@ -2552,7 +2552,7 @@ static void sub_81186E0(u8 taskId)
         sub_811A5E4(data->field_0->arr, 8);
         gUnknown_203B058 = 0x40;
         data->field_20 = sub_8119E84(data->field_C, data->field_4, 9);
-        sub_811B754(data->field_A0);
+        ZeroUnionObjWork(data->unionObjs);
         sub_811BB68();
         data->state = 1;
         break;
@@ -2562,7 +2562,7 @@ static void sub_81186E0(u8 taskId)
             data->state = 2;
         break;
     case 2:
-        sub_80FAF58(0x40, 0, 0);
+        SetHostRFUtgtGname(0x40, 0, 0);
         sub_80FAFA0(sUnionRoomTrade.type, sUnionRoomTrade.playerSpecies, sUnionRoomTrade.playerLevel);
         sub_800B1F4();
         OpenLink();
@@ -3359,7 +3359,7 @@ static void sub_81199FC(u8 taskId)
         structPtr->state = 1;
         break;
     case 1:
-        sub_80FAF58(0xC, 0, 0);
+        SetHostRFUtgtGname(0xC, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBC00();
@@ -4547,21 +4547,21 @@ static void sub_811B31C(u8 *unused, struct UnkStruct_URoom * arg1, bool8 arg2)
 
     DynamicPlaceholderTextUtil_Reset();
 
-    StringCopy(arg1->field_C0[0], gTrainerClassNames[sub_80447F0()]);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+    StringCopy(arg1->trainerCardStrbufs[0], gTrainerClassNames[sub_80447F0()]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->trainerCardStrbufs[0]);
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
 
     StringCopy(arg1->field_174, gUnknown_84594B0[trainerCard->stars]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_174);
 
-    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->trainerCardStrbufs[2]);
 
-    ConvertIntToDecimalStringN(arg1->field_C0[3], trainerCard->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(arg1->field_C0[4], trainerCard->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, arg1->field_C0[3]);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, arg1->field_C0[4]);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[3], trainerCard->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[4], trainerCard->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, arg1->trainerCardStrbufs[3]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, arg1->trainerCardStrbufs[4]);
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_84594C4);
     StringCopy(gStringVar4, arg1->field_1A4);
@@ -4571,24 +4571,24 @@ static void sub_811B31C(u8 *unused, struct UnkStruct_URoom * arg1, bool8 arg2)
     {
         n = 9999;
     }
-    ConvertIntToDecimalStringN(arg1->field_C0[0], n, STR_CONV_MODE_LEFT_ALIGN, 4);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->field_C0[0]);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[0], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, arg1->trainerCardStrbufs[0]);
 
     n = trainerCard->linkBattleLosses;
     if (n > 9999)
     {
         n = 9999;
     }
-    ConvertIntToDecimalStringN(arg1->field_C0[1], n, STR_CONV_MODE_LEFT_ALIGN, 4);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->field_C0[1]);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[1], n, STR_CONV_MODE_LEFT_ALIGN, 4);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, arg1->trainerCardStrbufs[1]);
 
-    ConvertIntToDecimalStringN(arg1->field_C0[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->field_C0[2]);
+    ConvertIntToDecimalStringN(arg1->trainerCardStrbufs[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, arg1->trainerCardStrbufs[2]);
 
     for (i = 0; i < 4; i++)
     {
-        CopyEasyChatWord(arg1->field_C0[i + 3], trainerCard->var_28[i]);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->field_C0[i + 3]);
+        CopyEasyChatWord(arg1->trainerCardStrbufs[i + 3], trainerCard->var_28[i]);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, arg1->trainerCardStrbufs[i + 3]);
     }
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(arg1->field_1A4, gUnknown_8459504);

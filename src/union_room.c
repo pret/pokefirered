@@ -97,7 +97,7 @@ static void sub_811A3F8(void);
 static void sub_811A41C(void);
 static void sub_811A444(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 static void sub_811A5E4(struct UnkStruct_x20 * arg0, u8 count);
-static void sub_811A650(struct UnkStruct_Main4 * arg0, u8 count);
+static void sub_811A650(struct UnkStruct_x1C * arg0, u8 count);
 static bool8 sub_811A694(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1);
 static bool32 sub_811A6DC(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1);
 static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
@@ -656,10 +656,10 @@ static void sub_8115A68(u8 taskId)
         data->state = 3;
         break;
     case 3:
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0xA0);
-        data->field_8 = AllocZeroed(0xA0);
-        sub_811A650(data->field_4, 4);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 5);
         LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].unk.gname, data->field_0->arr[0].unk.playerName);
         data->field_0->arr[0].field_18 = 0;
@@ -1185,8 +1185,8 @@ static void sub_8116738(u8 taskId)
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0x200);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
         break;
     case 1:
@@ -1194,7 +1194,7 @@ static void sub_8116738(u8 taskId)
             data->state = 2;
         break;
     case 2:
-        sub_811A650(data->field_4, 4);
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 16);
         data->field_11 = sub_811A054(data->field_4, gSpecialVar_0x8004);
         data->field_C = AddWindow(&gUnknown_8456CD0);
@@ -1473,12 +1473,12 @@ static void sub_8116E1C(u8 taskId)
         OpenLink();
         sub_80FBBD8();
         sub_80FB128(TRUE);
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0x200);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 2;
         break;
     case 2:
-        sub_811A650(data->field_4, 4);
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 16);
         data->field_11 = sub_811A054(data->field_4, 0xFF);
         data->field_F = 0;
@@ -1779,7 +1779,7 @@ static void sub_8117594(void *arg0, bool32 arg1)
 {
     TrainerCard_GenerateCardForLinkPlayer((struct TrainerCard * )arg0);
     if (arg1)
-        *((u16 *)(arg0 + sizeof(struct TrainerCard))) = GetWonderCardFlagID();
+        *((u16 *)(arg0 + sizeof(struct TrainerCard))) = GetWonderCardFlagId();
     else
         *((u16 *)(arg0 + sizeof(struct TrainerCard))) = 0;
 }
@@ -1958,10 +1958,10 @@ static void sub_8117A0C(u8 taskId)
         data->state = 1;
         break;
     case 1:
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0xA0);
-        data->field_8 = AllocZeroed(0xA0);
-        sub_811A650(data->field_4, 4);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 5);
         LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].unk.gname, data->field_0->arr[0].unk.playerName);
         data->field_0->arr[0].field_18 = 0;
@@ -2160,8 +2160,8 @@ static void sub_8117F20(u8 taskId)
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0x200);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
         break;
     case 1:
@@ -2169,7 +2169,7 @@ static void sub_8117F20(u8 taskId)
         data->state = 2;
         break;
     case 2:
-        sub_811A650(data->field_4, 4);
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 16);
         data->field_11 = sub_811A054(data->field_4, data->field_12 + 7);
 
@@ -2326,8 +2326,8 @@ static void sub_81182DC(u8 taskId)
         sub_800B1F4();
         OpenLink();
         sub_80FBBD8();
-        data->field_4 = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0x200);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
         break;
     case 1:
@@ -2335,7 +2335,7 @@ static void sub_81182DC(u8 taskId)
         data->state = 2;
         break;
     case 2:
-        sub_811A650(data->field_4, 4);
+        sub_811A650(data->field_4->arr, 4);
         sub_811A5E4(data->field_0->arr, 16);
         data->field_11 = sub_811A084(data->field_4, data->field_12 + 7);
 
@@ -2545,10 +2545,10 @@ static void sub_81186E0(u8 taskId)
     switch (data->state)
     {
     case 0:
-        data->field_4 = AllocZeroed(0x70);
-        data->field_C = AllocZeroed(0x70);
-        data->field_0 = AllocZeroed(0x100);
-        data->field_8 = AllocZeroed(0x20);
+        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_C = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(8 * sizeof(struct UnkStruct_x20));
+        data->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
         sub_811A5E4(data->field_0->arr, 8);
         gUnknown_203B058 = 0x40;
         data->field_20 = sub_8119E84(data->field_C, data->field_4, 9);
@@ -2568,8 +2568,8 @@ static void sub_81186E0(u8 taskId)
         OpenLink();
         sub_80FBC00();
         sub_811A5E4(&data->field_8->arr[0], 1);
-        sub_811A650(data->field_4, 4);
-        sub_811A650(data->field_C, 4);
+        sub_811A650(data->field_4->arr, 4);
+        sub_811A650(data->field_C->arr, 4);
         gSpecialVar_Result = 0;
         data->state = 3;
         break;
@@ -3367,13 +3367,13 @@ static void sub_81199FC(u8 taskId)
         structPtr->state = 2;
         break;
     case 2:
-        structPtr->field_4 = AllocZeroed(0x70);
-        sub_811A650(structPtr->field_4, 4);
-        structPtr->field_C = AllocZeroed(0x70);
-        sub_811A650(structPtr->field_C, 4);
-        structPtr->field_0 = AllocZeroed(0x100);
+        structPtr->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        sub_811A650(structPtr->field_4->arr, 4);
+        structPtr->field_C = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
+        sub_811A650(structPtr->field_C->arr, 4);
+        structPtr->field_0 = AllocZeroed(8 * sizeof(struct UnkStruct_x20));
         sub_811A5E4(structPtr->field_0->arr, 8);
-        structPtr->field_8 = AllocZeroed(0x20);
+        structPtr->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
         sub_811A5E4(&structPtr->field_8->arr[0], 1);
         structPtr->field_20 = sub_8119E84(structPtr->field_C, structPtr->field_4, 10);
         structPtr->state = 3;
@@ -3922,14 +3922,14 @@ static void sub_811A5E4(struct UnkStruct_x20 * arg0, u8 count)
     }
 }
 
-static void sub_811A650(struct UnkStruct_Main4 * arg0, u8 count)
+static void sub_811A650(struct UnkStruct_x1C * arg0, u8 count)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        arg0->arr[i].unk0 = gUnknown_8457034;
-        arg0->arr[i].unk18 = 0;
+        arg0[i].unk0 = gUnknown_8457034;
+        arg0[i].unk18 = 0;
     }
 }
 

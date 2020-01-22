@@ -72,6 +72,6 @@ void sub_8144714(u32 a0, u32 a1);
 u16 *GetMEventProfileECWordsMaybe(void);
 void sub_81446C4(void);
 bool32 sub_81446D0(u16 a0);
-u16 GetWonderCardFlagID(void);
+u16 GetWonderCardFlagId(void);
 
 #endif //GUARD_MEVENT_H

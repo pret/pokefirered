@@ -1,3 +1,8 @@
+#ifndef GUARD_UNION_ROOM_MESSAGE_H
+#define GUARD_UNION_ROOM_MESSAGE_H
+
+#include "global.h"
+
 extern const u8 gUnknown_84571AC[];
 extern const u8 gUnknown_84571B0[];
 extern const u8 gUnknown_84571B4[];
@@ -105,3 +110,5 @@ extern const u8 gUnknown_84594C4[];
 extern const u8 gUnknown_8459504[];
 extern const u8 *const gUnknown_8459580[];
 extern const u8 gUnknown_8459588[];
+
+#endif //GUARD_UNION_ROOM_MESSAGE_H

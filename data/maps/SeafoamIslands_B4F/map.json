@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SeafoamIslands_B4F_EventScript_1631AC",
+      "script": "SeafoamIslands_B4F_EventScript_Articuno",
       "flag": "FLAG_HIDE_ARTICUNO"
     },
     {
@@ -104,7 +104,7 @@
       "elevation": 1,
       "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
-      "script": "SeafoamIslands_B4F_EventScript_16319D"
+      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
     },
     {
       "type": "trigger",
@@ -113,7 +113,7 @@
       "elevation": 1,
       "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
-      "script": "SeafoamIslands_B4F_EventScript_16319D"
+      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
     },
     {
       "type": "trigger",
@@ -122,7 +122,7 @@
       "elevation": 1,
       "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
       "var_value": 0,
-      "script": "SeafoamIslands_B4F_EventScript_16319D"
+      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
     }
   ],
   "bg_events": [
@@ -141,14 +141,14 @@
       "x": 30,
       "y": 2,
       "elevation": 0,
-      "script": "SeafoamIslands_B4F_EventScript_16322C"
+      "script": "SeafoamIslands_B4F_EventScript_FastCurrentSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 14,
       "y": 18,
       "elevation": 0,
-      "script": "SeafoamIslands_B4F_EventScript_163223"
+      "script": "SeafoamIslands_B4F_EventScript_BoulderHintSign"
     }
   ]
 }

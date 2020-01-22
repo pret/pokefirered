@@ -1404,7 +1404,7 @@ gUnknown_81B161B:: @ 81B161B
 	.string "CELADON GYM, you can often\l"
 	.string "see ERIKA snoozing.$"
 
-gUnknown_81B16A8:: @ 81B16A8
+PokemonJournal_Text_SpecialFeatureKoga:: @ 81B16A8
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: FUCHSIA GYM\n"
 	.string "LEADER KOGA!\p"

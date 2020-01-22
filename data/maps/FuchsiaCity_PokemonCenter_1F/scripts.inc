@@ -7,21 +7,21 @@ FuchsiaCity_PokemonCenter_1F_OnTransition:: @ 816D6FC
 	setrespawn SPAWN_FUCHSIA_CITY
 	end
 
-FuchsiaCity_PokemonCenter_1F_EventScript_16D700:: @ 816D700
+FuchsiaCity_PokemonCenter_1F_EventScript_Nurse:: @ 816D700
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-FuchsiaCity_PokemonCenter_1F_EventScript_16D709:: @ 816D709
-	msgbox gUnknown_8198CB7, MSGBOX_NPC
+FuchsiaCity_PokemonCenter_1F_EventScript_Man:: @ 816D709
+	msgbox FuchsiaCity_PokemonCenter_1F_Text_CantBecomeGoodTrainerWithOneMon, MSGBOX_NPC
 	end
 
-FuchsiaCity_PokemonCenter_1F_EventScript_16D712:: @ 816D712
-	msgbox gUnknown_8198D2E, MSGBOX_NPC
+FuchsiaCity_PokemonCenter_1F_EventScript_CooltrainerF:: @ 816D712
+	msgbox FuchsiaCity_PokemonCenter_1F_Text_PokemonLeagueWestOfViridian, MSGBOX_NPC
 	end
 
-FuchsiaCity_PokemonCenter_1F_EventScript_16D71B:: @ 816D71B
-	msgbox gUnknown_8198D9B, MSGBOX_NPC
+FuchsiaCity_PokemonCenter_1F_EventScript_Youngster:: @ 816D71B
+	msgbox FuchsiaCity_PokemonCenter_1F_Text_VisitSafariZoneForPokedex, MSGBOX_NPC
 	end

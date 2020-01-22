@@ -19,11 +19,11 @@ Text_RockSlideTaught:: @ 8179B0A
     .string "It might be scary to use it in this\n"
     .string "tunnel…$"
 
-gUnknown_8179B36:: @ 8179B36
+SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow:: @ 8179B36
     .string "Hint: Boulders might change the\n"
     .string "flow of water.$"
 
-gUnknown_8179B65:: @ 8179B65
+SeafoamIslands_B4F_Text_DangerFastCurrent:: @ 8179B65
     .string "DANGER\n"
     .string "Fast current!$"
 

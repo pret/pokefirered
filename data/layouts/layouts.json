@@ -2168,16 +2168,16 @@
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_Roof/map.bin"
     },
     {
-      "id": "LAYOUT_SAFARI_ZONE_BUILDING",
-      "name": "SafariZone_Building_Layout",
+      "id": "LAYOUT_SAFARI_ZONE_REST_HOUSE",
+      "name": "SafariZone_RestHouse_Layout",
       "width": 13,
       "height": 11,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4F14",
-      "border_filepath": "data/layouts/SafariZone_Building/border.bin",
-      "blockdata_filepath": "data/layouts/SafariZone_Building/map.bin"
+      "border_filepath": "data/layouts/SafariZone_RestHouse/border.bin",
+      "blockdata_filepath": "data/layouts/SafariZone_RestHouse/map.bin"
     },
     {
       "id": "LAYOUT_SAFARI_ZONE_SECRET_HOUSE",
@@ -2192,28 +2192,28 @@
       "blockdata_filepath": "data/layouts/SafariZone_SecretHouse/map.bin"
     },
     {
-      "id": "LAYOUT_FUCHSIA_CITY_ZOO_BUILDING",
-      "name": "FuchsiaCity_ZooBuilding_Layout",
+      "id": "LAYOUT_FUCHSIA_CITY_SAFARI_ZONE_OFFICE",
+      "name": "FuchsiaCity_SafariZone_Office_Layout",
       "width": 20,
       "height": 11,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4F14",
-      "border_filepath": "data/layouts/FuchsiaCity_ZooBuilding/border.bin",
-      "blockdata_filepath": "data/layouts/FuchsiaCity_ZooBuilding/map.bin"
+      "border_filepath": "data/layouts/FuchsiaCity_SafariZone_Office/border.bin",
+      "blockdata_filepath": "data/layouts/FuchsiaCity_SafariZone_Office/map.bin"
     },
     {
-      "id": "LAYOUT_FUCHSIA_CITY_BUILDING1",
-      "name": "FuchsiaCity_Building1_Layout",
+      "id": "LAYOUT_FUCHSIA_CITY_WARDENS_HOUSE",
+      "name": "FuchsiaCity_WardensHouse_Layout",
       "width": 13,
       "height": 11,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C2C",
-      "border_filepath": "data/layouts/FuchsiaCity_Building1/border.bin",
-      "blockdata_filepath": "data/layouts/FuchsiaCity_Building1/map.bin"
+      "border_filepath": "data/layouts/FuchsiaCity_WardensHouse/border.bin",
+      "blockdata_filepath": "data/layouts/FuchsiaCity_WardensHouse/map.bin"
     },
     {
       "id": "LAYOUT_FUCHSIA_CITY_HOUSE2",
@@ -3128,28 +3128,28 @@
       "blockdata_filepath": "data/layouts/FourIsland_PokemonDayCare/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_833B6EC",
-      "name": "UnusedLayout_833B6EC_Layout",
+      "id": "LAYOUT_SEAFOAM_ISLANDS_B3F_CURRENT_STOPPED",
+      "name": "SeafoamIslands_B3F_CurrentStopped_Layout",
       "width": 38,
       "height": 24,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4E24",
-      "border_filepath": "data/layouts/UnusedLayout_833B6EC/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_833B6EC/map.bin"
+      "border_filepath": "data/layouts/SeafoamIslands_B3F_CurrentStopped/border.bin",
+      "blockdata_filepath": "data/layouts/SeafoamIslands_B3F_CurrentStopped/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_833BE30",
-      "name": "UnusedLayout_833BE30_Layout",
+      "id": "LAYOUT_SEAFOAM_ISLANDS_B4F_CURRENT_STOPPED",
+      "name": "SeafoamIslands_B4F_CurrentStopped_Layout",
       "width": 38,
       "height": 24,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4E24",
-      "border_filepath": "data/layouts/UnusedLayout_833BE30/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_833BE30/map.bin"
+      "border_filepath": "data/layouts/SeafoamIslands_B4F_CurrentStopped/border.bin",
+      "blockdata_filepath": "data/layouts/SeafoamIslands_B4F_CurrentStopped/map.bin"
     },
     {
       "id": "LAYOUT_MT_EMBER_EXTERIOR",

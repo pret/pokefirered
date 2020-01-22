@@ -1,4 +1,4 @@
-gUnknown_8177DC1:: @ 8177DC1
+SafariZone_SecretHouse_Text_CongratsYouveWon:: @ 8177DC1
     .string "Ah! Finally!\p"
     .string "You're the first person to reach\n"
     .string "the SECRET HOUSE!\p"
@@ -9,11 +9,11 @@ gUnknown_8177DC1:: @ 8177DC1
     .string "Congratulations!\n"
     .string "You have won!$"
 
-gUnknown_8177E92:: @ 8177E92
+SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant:: @ 8177E92
     .string "{PLAYER} received HM03\n"
     .string "from the attendant!$"
 
-gUnknown_8177EB7:: @ 8177EB7
+SafariZone_SecretHouse_Text_ExplainSurf:: @ 8177EB7
     .string "HM03 is SURF.\p"
     .string "POKéMON will be able to ferry you\n"
     .string "across water using it.\p"
@@ -22,7 +22,7 @@ gUnknown_8177EB7:: @ 8177EB7
     .string "You're super lucky for winning this\n"
     .string "fabulous prize!$"
 
-gUnknown_8177F72:: @ 8177F72
+SafariZone_SecretHouse_Text_DontHaveRoomForPrize:: @ 8177F72
     .string "You don't have room for this\n"
     .string "fabulous prize!$"
 

@@ -1148,10 +1148,10 @@ extern const u8 EventScript_FldEffStrength[];
 extern const u8 EventScript_FailSweetScent[];
 extern const u8 EventScript_FldEffRockSmash[];
 
-extern const u8 EventScript_SafariTimesUp[];
-extern const u8 EventScript_SafariRetire[];
-extern const u8 EventScript_SafariWarpOut[];
-extern const u8 EventScript_SafariOutOfBalls[];
+extern const u8 SafariZone_EventScript_TimesUp[];
+extern const u8 SafariZone_EventScript_RetirePrompt[];
+extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
+extern const u8 SafariZone_EventScript_OutOfBalls[];
 
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 

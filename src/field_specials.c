@@ -1816,7 +1816,7 @@ static const struct {
     {MAP_GROUP(ROCKET_HIDEOUT_B1F),                    MAP_NUM(ROCKET_HIDEOUT_B1F),                    MAP_GROUP(CELADON_CITY_GAME_CORNER),              MAP_NUM(CELADON_CITY_GAME_CORNER)},
     {MAP_GROUP(SAFARI_ZONE_CENTER),                    MAP_NUM(SAFARI_ZONE_CENTER),                    MAP_GROUP(FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE),     MAP_NUM(FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE)},
     {MAP_GROUP(FUCHSIA_CITY_GYM),                      MAP_NUM(FUCHSIA_CITY_GYM),                      MAP_GROUP(FUCHSIA_CITY),                          MAP_NUM(FUCHSIA_CITY)},
-    {MAP_GROUP(FUCHSIA_CITY_BUILDING1),                MAP_NUM(FUCHSIA_CITY_BUILDING1),                MAP_GROUP(FUCHSIA_CITY),                          MAP_NUM(FUCHSIA_CITY)},
+    {MAP_GROUP(FUCHSIA_CITY_WARDENS_HOUSE),            MAP_NUM(FUCHSIA_CITY_WARDENS_HOUSE),            MAP_GROUP(FUCHSIA_CITY),                          MAP_NUM(FUCHSIA_CITY)},
     {MAP_GROUP(SAFFRON_CITY_DOJO),                     MAP_NUM(SAFFRON_CITY_DOJO),                     MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},
     {MAP_GROUP(SAFFRON_CITY_GYM),                      MAP_NUM(SAFFRON_CITY_GYM),                      MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},
     {MAP_GROUP(SILPH_CO_1F),                           MAP_NUM(SILPH_CO_1F),                           MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},

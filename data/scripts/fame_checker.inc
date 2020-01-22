@@ -101,20 +101,20 @@ CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
 	release
 	end
 
-FuchsiaCity_Building1_EventScript_1ACEB8:: @ 81ACEB8
+FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga:: @ 81ACEB8
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 4
 	textcolor 3
-	msgbox gUnknown_81B16A8
+	msgbox PokemonJournal_Text_SpecialFeatureKoga
 	release
 	end
 
-SafariZone_Building3_EventScript_1ACED3:: @ 81ACED3
+SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	lock
 	faceplayer
 	famechecker FAMECHECKER_KOGA, 5
-	msgbox Text_177C47
+	msgbox SafariZone_West_Text_KogaPatrolsSafariEverySoOften
 	release
 	end
 

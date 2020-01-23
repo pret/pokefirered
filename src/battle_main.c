@@ -2559,9 +2559,9 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
             {
                 if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
                 {
-                    if (gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY))
+                    if (gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_GHOST_UNVEILED))
                     {
-                        if ((gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY)) != BATTLE_TYPE_GHOST)
+                        if (!IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))
                             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
                     }
                     else if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
@@ -2674,7 +2674,7 @@ static void BattleIntroPrintWildMonAttacked(void)
     {
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
         PrepareStringBattle(STRINGID_INTROMSG, 0);
-        if ((gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST)) == (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST))
+        if (IS_BATTLE_TYPE_GHOST_WITH_SCOPE(gBattleTypeFlags))
         {
             gBattleScripting.battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             BattleScriptExecute(BattleScript_SilphScopeUnveiled);
@@ -4183,7 +4183,7 @@ bool8 TryRunFromBattle(u8 battler)
         gProtectStructs[battler].fleeFlag = 2;
         ++effect;
     }
-    else if ((gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST)) == BATTLE_TYPE_GHOST)
+    else if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))
     {
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             ++effect;

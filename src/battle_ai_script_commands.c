@@ -343,12 +343,12 @@ void BattleAI_SetupAIData(void)
     }
     else if (!(gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER)) && (gTrainerBattleOpponent_A != SECRET_BASE_OPPONENT))
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        if (gBattleTypeFlags & BATTLE_TYPE_WILD_SCRIPTED)
         {
             AI_THINKING_STRUCT->aiFlags = AI_SCRIPT_CHECK_BAD_MOVE;
             return;
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY_FRLG)
         {
             AI_THINKING_STRUCT->aiFlags = (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY);
             return;

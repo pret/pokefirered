@@ -2526,12 +2526,12 @@ static void sub_811868C(const u8 *src)
 
 static void sub_81186B0(struct UnkStruct_URoom * data)
 {
-    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, sizeof(*data->field_0));
+    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, 8 * sizeof(struct UnkStruct_x20));
 }
 
 static void sub_81186C8(struct UnkStruct_URoom * data)
 {
-    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], sizeof(*data->field_0));
+    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 8 * sizeof(struct UnkStruct_x20));
 }
 
 static void sub_81186E0(u8 taskId)

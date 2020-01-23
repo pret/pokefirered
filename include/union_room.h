@@ -28,26 +28,27 @@ struct UnkStruct_x20
     u8 field_1F;
 };
 
+// These arrays are dynamically allocated but must be
+// represented as structs to match.
+// Don't ask me why.
+
+// FIXME: Find a way around this.
+
 struct UnkStruct_Main0
 {
-    struct UnkStruct_x20 arr[8];
+    struct UnkStruct_x20 arr[0];
 };
 
 struct UnkStruct_Main4
 {
-    struct UnkStruct_x1C arr[5];
-};
-
-struct UnkStruct_Main8
-{
-    struct UnkStruct_x20 arr[5];
+    struct UnkStruct_x1C arr[0];
 };
 
 struct UnkStruct_Leader
 {
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
-    struct UnkStruct_Main8 *field_8;
+    struct UnkStruct_Main0 * field_0;
+    struct UnkStruct_Main4 * field_4;
+    struct UnkStruct_Main0 * field_8;
     u8 state;
     u8 textState;
     u8 field_E;
@@ -67,8 +68,8 @@ struct UnkStruct_Leader
 
 struct UnkStruct_Group
 {
-    struct UnkStruct_Main0 *field_0;
-    struct UnkStruct_Main4 *field_4;
+    struct UnkStruct_Main0 * field_0;
+    struct UnkStruct_Main4 * field_4;
     u8 state;
     u8 textState;
     u8 field_A;
@@ -95,10 +96,10 @@ struct UnionObj
 
 struct UnkStruct_URoom
 {
-    /* 0x000 */ struct UnkStruct_Main0 *field_0;
-    /* 0x004 */ struct UnkStruct_Main4 *field_4;
-    /* 0x008 */ struct UnkStruct_Main0 *field_8;
-    /* 0x00C */ struct UnkStruct_Main4 *field_C;
+    /* 0x000 */ struct UnkStruct_Main0 * field_0;
+    /* 0x004 */ struct UnkStruct_Main4 * field_4;
+    /* 0x008 */ struct UnkStruct_Main0 * field_8;
+    /* 0x00C */ struct UnkStruct_Main4 * field_C;
     /* 0x010 */ u16 field_10;
     /* 0x012 */ u16 field_12;
     /* 0x014 */ u8 state;

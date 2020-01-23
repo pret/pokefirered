@@ -170,16 +170,6 @@
 #define STAT_ACC 6 // only in battles
 #define STAT_EVASION 7 // only in battles
 
-// TODO: Why do we need these as separate defines?
-#define STAT_STAGE_HP      0
-#define STAT_STAGE_ATK     1
-#define STAT_STAGE_DEF     2
-#define STAT_STAGE_SPEED   3
-#define STAT_STAGE_SPATK   4
-#define STAT_STAGE_SPDEF   5
-#define STAT_STAGE_ACC     6
-#define STAT_STAGE_EVASION 7
-
 #define NUM_STATS 6
 #define NUM_BATTLE_STATS 8
 

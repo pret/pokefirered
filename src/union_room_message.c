@@ -10,6 +10,7 @@ ALIGNED(4) const u8 gUnknown_84571E0[] = _("The WIRELESS COMMUNICATION\nSYSTEM s
 ALIGNED(4) const u8 gUnref_845721C[] = _("ともだちからの れんらくを\nまっています");
 ALIGNED(4) const u8 gUnknown_8457234[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
 ALIGNED(4) const u8 gUnknown_8457264[] = _("{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.");
+
 ALIGNED(4) const u8 gJPText_SingleBattle[] = _("シングルバトルを かいさいする");
 ALIGNED(4) const u8 gJPText_DoubleBattle[] = _("ダブルバトルを かいさいする");
 ALIGNED(4) const u8 gJPText_MultiBattle[] = _("マルチバトルを かいさいする");
@@ -82,6 +83,7 @@ ALIGNED(4) const u8 gUnknown_84574EC[] = _("{STR_VAR_2} contacted you.\nAdd to t
 ALIGNED(4) const u8 gUnknown_8457514[] = _("{STR_VAR_1}!\nAre these members OK?");
 ALIGNED(4) const u8 gUnknown_8457530[] = _("Cancel {STR_VAR_1} MODE\nwith these members?");
 ALIGNED(4) const u8 gUnknown_8457554[] = _("An “OK” was sent\nto {STR_VAR_1}.");
+
 ALIGNED(4) const u8 gUnknown_845756C[] = _("The other TRAINER doesn't appear\nto be available now…\p");
 ALIGNED(4) const u8 gUnknown_84575A4[] = _("You can't transmit with a TRAINER\nwho is too far away.\p");
 ALIGNED(4) const u8 gUnknown_84575DC[] = _("The other TRAINER(S) is/are not\nready yet.\p");

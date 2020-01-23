@@ -6,18 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_845A880:: @ 845A880
-	.4byte sub_8128640
-	.4byte sub_81286C4
-	.4byte sub_81287B4
-	.4byte sub_81288D4
-	.4byte sub_8128DA4
-	.4byte sub_8128E78
-	.4byte sub_8128AA0
-	.4byte sub_8128C04
-	.4byte sub_8128CA8
-	.4byte sub_8128FB8
-
 gUnknown_845A8A8:: @ 845A8A8
 	.byte 0x09, 0x09, 0x09, 0x09
 

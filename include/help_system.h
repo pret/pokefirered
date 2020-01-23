@@ -92,5 +92,6 @@ bool8 MoveCursor(u8 by, u8 dirn);
 void HelpSystem_BackupSomeVariable(void);
 void HelpSystem_RestoreSomeVariable(void);
 void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height);
+void sub_812B4AC(void);
 
 #endif //GUARD_HELP_SYSTEM_H

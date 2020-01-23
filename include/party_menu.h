@@ -68,7 +68,7 @@ void CB2_ChooseMonToGiveItem(void);
 void ChooseMonToGiveMailFromMailbox(void);
 void InitChooseHalfPartyForBattle(u8 a1);
 void ClearSelectedPartyOrder(void);
-void sub_81277F4(u8 menuType, MainCallback callback);
+void ChooseMonForTradingBoard(u8 menuType, MainCallback callback);
 void ChooseMonForMoveTutor(void);
 void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInTutorialBattle(u8 partyAction);

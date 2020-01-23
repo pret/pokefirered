@@ -458,7 +458,7 @@ void FieldUseFunc_TmCase(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitTMCaseFromField;
     }
 }
@@ -489,7 +489,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitBerryPouchFromField;
     }
 }
@@ -532,7 +532,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitTeachyTvFromField;
     }
 }
@@ -662,7 +662,7 @@ void FieldUseFunc_TownMap(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = sub_80A1CC0;
     }
 }
@@ -694,7 +694,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = sub_80A1D68;
     }
 }

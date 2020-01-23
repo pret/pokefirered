@@ -603,7 +603,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
 }
 #endif
 
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3)
 {
     s32 i;
 
@@ -617,7 +617,7 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 r9, bool32 r2, s32 r3)
         r3 >>= 8;
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
-    data->unk_0a_0 = r9;
+    data->unk_0a_0 = activity;
     data->unk_0a_7 = r2;
     data->unk_00.unk_00_0 = GAME_LANGUAGE;
     data->unk_00.unk_01_2 = GAME_VERSION;
@@ -681,7 +681,7 @@ bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx)
     return retVal;
 }
 
-void sub_80FCD50(struct GFtgtGname *gname, u8 *uname)
+void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname)
 {
     memcpy(gname, &gHostRFUtgtGnameBuffer, RFU_GAME_NAME_LENGTH);
     memcpy(uname, gHostRFUtgtUnameBuffer, RFU_USER_NAME_LENGTH);
@@ -929,7 +929,7 @@ void RecordMixTrainerNames(void)
     }
 }
 
-bool32 sub_80FD338(u16 id, u8 *name)
+bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
     s32 i;
 

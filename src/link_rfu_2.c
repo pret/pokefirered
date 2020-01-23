@@ -1917,7 +1917,7 @@ void ClearAndInitHostRFUtgtGname(void)
     InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, 0, 0, 0);
 }
 
-void sub_80FAF58(u8 a0, u32 a1, u32 a2)
+void SetHostRFUtgtGname(u8 a0, u32 a1, u32 a2)
 {
     InitHostRFUtgtGname(&gHostRFUtgtGnameBuffer, a0, a2, a1);
 }
@@ -1944,7 +1944,7 @@ void sub_80FAFE0(u8 a0)
 void sub_80FB008(u8 a0, u32 a1, u32 a2)
 {
     if (a0)
-        sub_80FAF58(a0, a1, a2);
+        SetHostRFUtgtGname(a0, a1, a2);
     rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
 }
 

@@ -56,12 +56,12 @@ void pal_fill_for_maplights(void)
     {
     case 0:
         palette_bg_faded_fill_black();
-        fade_screen(0, 0);
+        FadeScreen(0, 0);
         palette_bg_faded_fill_black();
         break;
     case 1:
         palette_bg_faded_fill_white();
-        fade_screen(2, 0);
+        FadeScreen(2, 0);
         palette_bg_faded_fill_white();
         break;
     }
@@ -73,12 +73,12 @@ static void sub_807DBAC(void)
     {
     case 0:
         palette_bg_faded_fill_black();
-        fade_screen(0, 3);
+        FadeScreen(0, 3);
         palette_bg_faded_fill_black();
         break;
     case 1:
         palette_bg_faded_fill_white();
-        fade_screen(2, 3);
+        FadeScreen(2, 3);
         palette_bg_faded_fill_white();
         break;
     }
@@ -87,7 +87,7 @@ static void sub_807DBAC(void)
 void sub_807DC00(void)
 {
     palette_bg_faded_fill_black();
-    fade_screen(0, 0);
+    FadeScreen(0, 0);
     palette_bg_faded_fill_black();
 }
 
@@ -95,16 +95,16 @@ void sub_807DC18(void)
 {
     const struct MapHeader *header = warp1_get_mapheader();
     if (header->regionMapSectionId != gMapHeader.regionMapSectionId && sub_80F8110(header->regionMapSectionId, FALSE))
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
     else
     {
         switch (sub_80C9D7C(GetCurrentMapType(), header->mapType))
         {
         case 0:
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             break;
         case 1:
-            fade_screen(3, 0);
+            FadeScreen(3, 0);
             break;
         }
     }
@@ -115,10 +115,10 @@ static void sub_807DC70(void)
     switch (sub_80C9D7C(GetCurrentMapType(), warp1_get_mapheader()->mapType))
     {
     case 0:
-        fade_screen(1, 3);
+        FadeScreen(1, 3);
         break;
     case 1:
-        fade_screen(3, 3);
+        FadeScreen(3, 3);
         break;
     }
 }
@@ -654,7 +654,7 @@ static void sub_807E678(u8 taskId)
     {
     case 0:
         ClearLinkCallback_2();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         sub_8055F88();
         PlaySE(SE_KAIDAN);
         data[0]++;

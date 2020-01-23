@@ -4598,14 +4598,14 @@ gText_WhichMoveShouldBeForgotten:: @ 841E50C
 gUnknown_841E52D:: @ 0x841E52D
 	.string "----------$"
 
-gUnknown_841E538:: @ 841E538
+gText_CommStandbyAwaitingOtherPlayer:: @ 841E538
 	.string "Communication standby‥\n"
 	.string "Awaiting another player to choose.$"
 
-gUnknown_841E572:: @ 841E572
+gText_BattleWasRefused:: @ 841E572
 	.string "The battle was refused.{PAUSE 0x3C}$"
 
-gUnknown_841E58D:: @ 841E58D
+gText_RefusedBattle:: @ 841E58D
 	.string "Refused the battle.{PAUSE 0x3C}$"
 
 gFameCheckerText_MainScreenUI:: @ 841E5A4

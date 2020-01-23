@@ -364,7 +364,7 @@ void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
 {
-    u32 r8 = unk20->unk.field_0.unk_0a_0;
+    u32 r8 = unk20->unk.gname.unk_0a_0;
     s32 i, j, k;
 
     for (i = 0; i < NELEMS(gUnknown_846FAC0); i++)
@@ -376,7 +376,7 @@ u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
                 k = 0;
                 for (j = 0; j < 4; j++)
                 {
-                    if (unk20->unk.field_0.unk_04[j] != 0) k++;
+                    if (unk20->unk.gname.unk_04[j] != 0) k++;
                 }
                 k++;
                 arg1[gUnknown_846FAC0[i][1]] += k;

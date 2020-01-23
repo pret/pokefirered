@@ -1427,8 +1427,8 @@ SpawnSpecialObjectEventParameterized: @ 805E830
 _0805E894: .4byte 0xfff90000
 	thumb_func_end SpawnSpecialObjectEventParameterized
 
-	thumb_func_start show_sprite
-show_sprite: @ 805E898
+	thumb_func_start TrySpawnObjectEvent
+TrySpawnObjectEvent: @ 805E898
 	push {r4-r7,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1468,7 +1468,7 @@ _0805E8E0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end show_sprite
+	thumb_func_end TrySpawnObjectEvent
 
 	thumb_func_start sub_805E8E8
 sub_805E8E8: @ 805E8E8
@@ -13157,7 +13157,7 @@ _08063CC8:
 	bl ObjectEventClearAnimIfSpecialAnimActive
 _08063CCE:
 	adds r0, r4, 0
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeObjectEvent
 	movs r3, 0
 	strb r5, [r4, 0x1C]
 	ldrb r0, [r4]

@@ -1,9 +1,9 @@
-gUnknown_819A7A0:: @ 819A7A0
+CinnabarIsland_Mart_Text_DontTheyHaveXAttack:: @ 819A7A0
     .string "Don't they have X ATTACK?\p"
     .string "I like it because it raises the\n"
     .string "ATTACK stat in battle.$"
 
-gUnknown_819A7F1:: @ 819A7F1
+CinnabarIsland_Mart_Text_ExtraItemsNeverHurt:: @ 819A7F1
     .string "It never hurts to have extra items.\n"
     .string "You never know what might happen.$"
 

@@ -1190,10 +1190,10 @@ extern const u8 EventScript_PC[];
 extern const u8 EventScript_RepelWoreOff[];
 
 // battle_message
-extern const u8 Text_1A5CF1[];
-extern const u8 Text_1A5D31[];
-extern const u8 Text_1A5D6E[];
-extern const u8 Text_1A5DB1[];
+extern const u8 Text_MonSentToBoxInSomeonesPC[];
+extern const u8 Text_MonSentToBoxInBillsPC[];
+extern const u8 Text_MonSentToBoxSomeonesBoxFull[];
+extern const u8 Text_MonSentToBoxBillsBoxFull[];
 
 extern const u8 EventScript_BagItemCanBeRegistered[];
 

@@ -925,7 +925,7 @@ Text_1A5690:: @ 81A5690
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gUnknown_81A56A7:: @ 81A56A7
+Text_GiveNicknameToThisMon:: @ 81A56A7
 	.string "Do you want to give a nickname to\n"
 	.string "this {STR_VAR_1}?$"
 
@@ -1007,43 +1007,7 @@ Text_1A5CD3:: @ 81A5CD3
 Text_TheDoorIsOpen:: @ 81A5CDF
 	.string "The door is open…$"
 
-Text_1A5CF1:: @ 81A5CF1
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "Someone's PC.\p"
-	.string "It was placed in \n"
-	.string "BOX “{STR_VAR_1}.”$"
-
-Text_1A5D31:: @ 81A5D31
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BILL'S PC.\p"
-	.string "It was placed in \n"
-	.string "BOX “{STR_VAR_1}.”$"
-
-Text_1A5D6E:: @ 81A5D6E
-	.string "BOX “{STR_VAR_3}” on\n"
-	.string "Someone's PC was full.\p"
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX “{STR_VAR_1}.”$"
-
-Text_1A5DB1:: @ 81A5DB1
-	.string "BOX “{STR_VAR_3}” on\n"
-	.string "BILL'S PC was full.\p"
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX “{STR_VAR_1}.”$"
-
-Text_1A5DF1:: @ 81A5DF1
-	.string "{PLAYER} obtained\n"
-	.string "the {STR_VAR_1}!$"
-
-Text_1A5E05:: @ 81A5E05
-	.string "ポケモンを　もちきれないので\n"
-	.string "パソコンの　ボックス“{STR_VAR_1}”　に\l"
-	.string "{STR_VAR_2}を　てんそうした！$"
-
-gUnknown_81A5E31:: @ 81A5E31
-	.string "There's no more room for POKéMON!\p"
-	.string "The POKéMON BOXES are full and\n"
-	.string "can't accept any more!$"
+	.include "data/text/pc_transfer.inc"
 
 Text_1A5E89:: @ 81A5E89
 	.string "First, you should restore your\n"
@@ -1510,53 +1474,7 @@ EventScript_1A80FE:: @ 81A80FE
 	end
 
 	.include "data/scripts/silphco_doors.inc"
-
-EventScript_1A8C27:: @ 81A8C27
-	getpartysize
-	subvar VAR_RESULT, 1
-	copyvar VAR_0x8004, VAR_RESULT
-	return
-
-EventScript_1A8C33:: @ 81A8C33
-	fadescreen FADE_TO_BLACK
-	special ChangeBoxPokemonNickname
-	waitstate
-	lock
-	faceplayer
-	return
-
-EventScript_1A8C3C:: @ 81A8C3C
-	bufferboxname 0, VAR_PC_BOX_TO_SEND_MON
-	getspeciesname 1, VAR_TEMP_1
-	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C57
-	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_1A8C82
-	return
-
-EventScript_1A8C57:: @ 81A8C57
-	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A8C70
-	msgbox Text_1A5CF1
-	return
-
-EventScript_1A8C70:: @ 81A8C70
-	specialvar VAR_RESULT, GetPCBoxToSendMon
-	bufferboxname 2, VAR_RESULT
-	msgbox Text_1A5D6E
-	return
-
-EventScript_1A8C82:: @ 81A8C82
-	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A8C9B
-	msgbox Text_1A5D31
-	return
-
-EventScript_1A8C9B:: @ 81A8C9B
-	specialvar VAR_RESULT, GetPCBoxToSendMon
-	bufferboxname 2, VAR_RESULT
-	msgbox Text_1A5DB1
-	return
+	.include "data/scripts/pc_transfer.inc"
 
 EventScript_GetInGameTradeSpeciesInfo:: @ 81A8CAD
 	copyvar VAR_0x8004, VAR_0x8008
@@ -1776,9 +1694,9 @@ EventScript_BrailleCursorWaitButton:: @ 81A926C
 	special Special_BrailleCursorToggle
 	return
 
-EventScript_1A927C:: @ 81A927C
+EventScript_NoMoreRoomForPokemon:: @ 81A927C
 	textcolor 3
-	msgbox gUnknown_81A5E31
+	msgbox Text_NoMoreRoomForPokemon
 	release
 	end
 

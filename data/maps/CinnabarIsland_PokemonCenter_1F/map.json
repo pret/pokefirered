@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E8F8",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_CooltrainerF",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E8EF",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E901",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_1AD0B9",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_16E90A",
+      "script": "CinnabarIsland_PokemonCenter_1F_EventScript_Bill",
       "flag": "FLAG_HIDE_CINNABAR_POKECENTER_BILL"
     }
   ],

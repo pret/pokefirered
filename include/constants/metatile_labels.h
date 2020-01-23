@@ -37,7 +37,18 @@
 #define METATILE_PokemonMansion_Statue_RedEyes_Shade                     0x34E
 #define METATILE_PokemonMansion_Statue_RedEyes_Basement                  0x34F
 
+// Cinnabar Gym
+#define METATILE_CinnabarGym_Floor                  0x281
+#define METATILE_CinnabarGym_Floor_ShadeDiagonal    0x282
+#define METATILE_CinnabarGym_Floor_ShadeFull        0x289
+#define METATILE_CinnabarGym_Floor_WallRightCorner  0x2C6
+#define METATILE_CinnabarGym_Floor_WallLeftCorner   0x2C7
+#define METATILE_CinnabarGym_Floor_WallRightEdge    0x2CE
+#define METATILE_CinnabarGym_Floor_WallLeftEdge     0x2CF
+#define METATILE_CinnabarGym_Wall_RetractedBarrier  0x2D1
+
 // gTileset_82D504C. Below metatile probably needs generic name
 #define METATILE_MtEmber_CaveEntrance  0x346
+
 
 #endif // GUARD_METATILE_LABELS_H

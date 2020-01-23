@@ -142,7 +142,7 @@
       "x": 43,
       "y": 8,
       "elevation": 0,
-      "dest_map": "MAP_SAFARI_ZONE_BUILDING3",
+      "dest_map": "MAP_SAFARI_ZONE_NORTH_REST_HOUSE",
       "dest_warp_id": 1
     }
   ],
@@ -153,35 +153,35 @@
       "x": 13,
       "y": 27,
       "elevation": 0,
-      "script": "SafariZone_North_EventScript_1623A2"
+      "script": "SafariZone_North_EventScript_TrainerTips1"
     },
     {
       "type": "bg_event_type_0",
       "x": 23,
       "y": 31,
       "elevation": 0,
-      "script": "SafariZone_North_EventScript_1623AB"
+      "script": "SafariZone_North_EventScript_AreaSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 29,
       "y": 32,
       "elevation": 0,
-      "script": "SafariZone_North_EventScript_1623B4"
+      "script": "SafariZone_North_EventScript_TrainerTips2"
     },
     {
       "type": "bg_event_type_0",
       "x": 34,
       "y": 28,
       "elevation": 0,
-      "script": "SafariZone_North_EventScript_1623BD"
+      "script": "SafariZone_North_EventScript_TrainerTips3"
     },
     {
       "type": "bg_event_type_0",
       "x": 44,
       "y": 9,
       "elevation": 0,
-      "script": "SafariZone_North_EventScript_162399"
+      "script": "SafariZone_North_EventScript_RestHouseSign"
     }
   ]
 }

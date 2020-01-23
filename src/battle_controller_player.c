@@ -1330,7 +1330,7 @@ static void OpenBagAndChooseItem(void)
         gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChoseItem;
         nullsub_44();
         FreeAllWindowBuffers();
-        sub_8107ECC();
+        CB2_BagMenuFromBattle();
     }
 }
 

@@ -107,7 +107,7 @@ bool8 itemid_link_can_give_berry(u16 itemId)
         return FALSE;
 }
 
-bool8 itemid_80BF6D8_mail_related(u16 itemId)
+bool8 CanWriteMailHere(u16 itemId)
 {
     if (IsUpdateLinkStateCBActive() != TRUE && InUnionRoom() != TRUE)
         return TRUE;
@@ -242,7 +242,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
     return FALSE;
 }
 
-u8 sub_80BF8E4(void)
+u8 GetDialogBoxFontId(void)
 {
     if (!ContextNpcGetTextColor())
         return 4;

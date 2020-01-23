@@ -482,7 +482,7 @@ _0809777C:
 	lsls r0, 2
 	ldr r1, _080977A8 @ =gObjectEvents
 	adds r0, r1
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeObjectEvent
 _08097792:
 	adds r0, r5, 0x1
 	lsls r0, 24

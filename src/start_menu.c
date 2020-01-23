@@ -446,7 +446,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
     }
 }
 
@@ -554,7 +554,7 @@ static bool8 StartMenuLinkPlayerCallback(void)
     {
         PlayRainStoppingSoundEffect();
         CleanupOverworldWindowsAndTilemaps();
-        ShowTrainerCardInLink(gUnknown_300502C, CB2_ReturnToFieldWithOpenMenu);
+        ShowTrainerCardInLink(gLocalLinkPlayerId, CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;

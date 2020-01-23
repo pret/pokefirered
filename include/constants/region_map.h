@@ -206,6 +206,8 @@
 #define MAPSEC_SPECIAL_AREA                 0xC4
 #define MAPSEC_NONE                         0xC5
 
-#define MAPSEC_IN_GAME_TRADE                0xFE
+#define METLOC_SPECIAL_EGG                  0xFD
+#define METLOC_IN_GAME_TRADE                0xFE
+#define METLOC_FATEFUL_ENCOUNTER            0xFF
 
 #endif //GUARD_CONSTANTS_REGION_MAP_H

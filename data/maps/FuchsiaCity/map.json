@@ -39,7 +39,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_EventScript_166DAF",
+      "script": "FuchsiaCity_EventScript_Erik",
       "flag": "0"
     },
     {
@@ -78,7 +78,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_EventScript_166DB8",
+      "script": "FuchsiaCity_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -104,7 +104,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_EventScript_166D9D",
+      "script": "FuchsiaCity_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -130,7 +130,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_EventScript_166DA6",
+      "script": "FuchsiaCity_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -234,7 +234,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FuchsiaCity_EventScript_166DC1",
+      "script": "FuchsiaCity_EventScript_Lass",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
@@ -250,7 +250,7 @@
       "x": 33,
       "y": 31,
       "elevation": 0,
-      "dest_map": "MAP_FUCHSIA_CITY_BUILDING1",
+      "dest_map": "MAP_FUCHSIA_CITY_WARDENS_HOUSE",
       "dest_warp_id": 1
     },
     {
@@ -264,7 +264,7 @@
       "x": 28,
       "y": 16,
       "elevation": 0,
-      "dest_map": "MAP_FUCHSIA_CITY_ZOO_BUILDING",
+      "dest_map": "MAP_FUCHSIA_CITY_SAFARI_ZONE_OFFICE",
       "dest_warp_id": 1
     },
     {
@@ -324,77 +324,77 @@
       "x": 31,
       "y": 18,
       "elevation": 3,
-      "script": "FuchsiaCity_EventScript_166DDA"
+      "script": "FuchsiaCity_EventScript_CitySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 18,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166DE3"
+      "script": "FuchsiaCity_EventScript_SafariZoneSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 32,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166E07"
+      "script": "FuchsiaCity_EventScript_GymSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 31,
       "y": 31,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166DF5"
+      "script": "FuchsiaCity_EventScript_WardensHomeSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 35,
       "y": 10,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166E38"
+      "script": "FuchsiaCity_EventScript_VoltorbSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 38,
       "y": 16,
       "elevation": 3,
-      "script": "FuchsiaCity_EventScript_166E6A"
+      "script": "FuchsiaCity_EventScript_SlowpokeSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 41,
       "y": 10,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166E1F"
+      "script": "FuchsiaCity_EventScript_ChanseySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 17,
       "y": 10,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166E51"
+      "script": "FuchsiaCity_EventScript_KangaskhanSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 10,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166E9C"
+      "script": "FuchsiaCity_EventScript_FossilMonSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 17,
       "y": 18,
       "elevation": 3,
-      "script": "FuchsiaCity_EventScript_166E83"
+      "script": "FuchsiaCity_EventScript_LaprasSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 7,
       "elevation": 0,
-      "script": "FuchsiaCity_EventScript_166DEC"
+      "script": "FuchsiaCity_EventScript_SafariGameSign"
     },
     {
       "type": "hidden_item",

@@ -23,7 +23,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_16050C",
+      "script": "UnionRoom_EventScript_Attendant",
       "flag": "0"
     },
     {
@@ -36,8 +36,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604DA",
-      "flag": "FLAG_HIDE_UNION_ROOM_4"
+      "script": "UnionRoom_EventScript_Player4",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_4"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_7",
@@ -49,8 +49,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_160502",
-      "flag": "FLAG_HIDE_UNION_ROOM_8"
+      "script": "UnionRoom_EventScript_Player8",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_8"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_6",
@@ -62,8 +62,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604F8",
-      "flag": "FLAG_HIDE_UNION_ROOM_7"
+      "script": "UnionRoom_EventScript_Player7",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_7"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_5",
@@ -75,8 +75,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604EE",
-      "flag": "FLAG_HIDE_UNION_ROOM_6"
+      "script": "UnionRoom_EventScript_Player6",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_6"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_4",
@@ -88,8 +88,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604E4",
-      "flag": "FLAG_HIDE_UNION_ROOM_5"
+      "script": "UnionRoom_EventScript_Player5",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_5"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_2",
@@ -101,8 +101,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604D0",
-      "flag": "FLAG_HIDE_UNION_ROOM_3"
+      "script": "UnionRoom_EventScript_Player3",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_3"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_1",
@@ -114,8 +114,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604C6",
-      "flag": "FLAG_HIDE_UNION_ROOM_2"
+      "script": "UnionRoom_EventScript_Player2",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_2"
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_VAR_0",
@@ -127,8 +127,8 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "UnionRoom_EventScript_1604BC",
-      "flag": "FLAG_HIDE_UNION_ROOM_1"
+      "script": "UnionRoom_EventScript_Player1",
+      "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_1"
     }
   ],
   "warp_events": [

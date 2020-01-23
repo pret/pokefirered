@@ -86,7 +86,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static void BattleMainCB1(void);
-static void CB2_QuitPokeDudeBattle(void);
+static void CB2_QuitPokedudeBattle(void);
 static void sub_80111FC(struct Sprite *sprite);
 static void sub_8011B94(void);
 static void sub_8011BB0(void);
@@ -1438,7 +1438,7 @@ void BattleMainCB2(void)
         gSpecialVar_Result = gBattleOutcome = B_OUTCOME_DREW;
         ResetPaletteFadeControl();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-        SetMainCallback2(CB2_QuitPokeDudeBattle);
+        SetMainCallback2(CB2_QuitPokedudeBattle);
     }
 }
 
@@ -1454,7 +1454,7 @@ void FreeRestoreBattleData(void)
     FreeBattleResources();
 }
 
-static void CB2_QuitPokeDudeBattle(void)
+static void CB2_QuitPokedudeBattle(void)
 {
     UpdatePaletteFade();
     if (!gPaletteFade.active)

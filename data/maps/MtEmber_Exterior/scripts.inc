@@ -6,50 +6,50 @@ MtEmber_Exterior_MapScripts:: @ 8163946
 MtEmber_Exterior_OnTransition:: @ 8163951
 	setworldmapflag FLAG_WORLD_MAP_MT_EMBER_EXTERIOR
 	compare VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
-	call_if_eq EventScript_163960
+	call_if_eq MtEmber_Exterior_EventScript_RocketsFaceDown
 	end
 
-EventScript_163960:: @ 8163960
-	setobjectmovementtype 2, 8
-	setobjectmovementtype 3, 8
+MtEmber_Exterior_EventScript_RocketsFaceDown:: @ 8163960
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_DOWN
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 MtEmber_Exterior_OnLoad:: @ 8163969
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	call_if_ge EventScript_163975
+	call_if_ge MtEmber_Exterior_EventScript_OpenCave
 	end
 
-EventScript_163975:: @ 8163975
-	setmetatile 42, 39, 838, 0
+MtEmber_Exterior_EventScript_OpenCave:: @ 8163975
+	setmetatile 42, 39, METATILE_MtEmber_CaveEntrance, 0
 	return
 
-MtEmber_Exterior_EventScript_16397F:: @ 816397F
+MtEmber_Exterior_EventScript_Grunt1:: @ 816397F
 	lock
-	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, EventScript_16399E
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_Grunt1Defeated
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq EventScript_1639A8
-	msgbox gUnknown_817A82A
+	goto_if_eq MtEmber_Exterior_EventScript_BattleGrunt1
+	msgbox MtEmber_Exterior_Text_WellTryDiggingHere
 	release
 	end
 
-EventScript_16399E:: @ 816399E
-	msgbox gUnknown_817AA3F
+MtEmber_Exterior_EventScript_Grunt1Defeated:: @ 816399E
+	msgbox MtEmber_Exterior_Text_Grunt1PostBattle
 	release
 	end
 
-EventScript_1639A8:: @ 81639A8
+MtEmber_Exterior_EventScript_BattleGrunt1:: @ 81639A8
 	applymovement 2, Movement_FacePlayer
 	waitmovement 0
 	playbgm MUS_ROCKET, 0
-	msgbox gUnknown_817AA06
-	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_43, Text_17AA34
-	msgbox gUnknown_817AA3F
-	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, EventScript_1639DB
+	msgbox MtEmber_Exterior_Text_Grunt1Intro
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_Text_Grunt1Defeat
+	msgbox MtEmber_Exterior_Text_Grunt1PostBattle
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedBothGrunts
 	release
 	end
 
-EventScript_1639DB:: @ 81639DB
-	msgbox gUnknown_817AAD7
+MtEmber_Exterior_EventScript_DefeatedBothGrunts:: @ 81639DB
+	msgbox MtEmber_Exterior_Text_WellRegroupDontStepInsideThere
 	closemessage
 	fadescreen FADE_TO_BLACK
 	removeobject 2
@@ -58,44 +58,44 @@ EventScript_1639DB:: @ 81639DB
 	release
 	end
 
-MtEmber_Exterior_EventScript_1639F0:: @ 81639F0
+MtEmber_Exterior_EventScript_Grunt2:: @ 81639F0
 	lock
 	faceplayer
-	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, EventScript_163A1B
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedGrunt2
 	compare VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 4
-	goto_if_eq EventScript_163A25
-	msgbox gUnknown_817A88C
+	goto_if_eq MtEmber_Exterior_EventScript_BattleGrunt2
+	msgbox MtEmber_Exterior_Text_YoureInTheWayGetLost
 	closemessage
 	applymovement 3, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-EventScript_163A1B:: @ 8163A1B
-	msgbox gUnknown_817AA99
+MtEmber_Exterior_EventScript_DefeatedGrunt2:: @ 8163A1B
+	msgbox MtEmber_Exterior_Text_Grunt2PostBattle
 	release
 	end
 
-EventScript_163A25:: @ 8163A25
+MtEmber_Exterior_EventScript_BattleGrunt2:: @ 8163A25
 	playbgm MUS_ROCKET, 0
-	msgbox gUnknown_817AA56
-	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_44, Text_17AA8A
-	msgbox gUnknown_817AA99
-	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, EventScript_1639DB
+	msgbox MtEmber_Exterior_Text_Grunt2Intro
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_Text_Grunt2Defeat
+	msgbox MtEmber_Exterior_Text_Grunt2PostBattle
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_DefeatedBothGrunts
 	release
 	end
 
-MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
+MtEmber_Exterior_EventScript_RocketPasswordScene:: @ 8163A4E
 	lockall
 	textcolor 0
-	msgbox gUnknown_817A8B4
-	message Text_17A8EE
+	msgbox MtEmber_Exterior_Text_PunchedThroughAtLast
+	message MtEmber_Exterior_Text_WhatsPasswordAgain
 	waitmessage
 	playse SE_PIN
 	applymovement 3, Movement_QuestionMark
 	waitmovement 0
 	waitbuttonpress
-	msgbox gUnknown_817A970
+	msgbox MtEmber_Exterior_Text_FirstPasswordGoldeen
 	applymovement 2, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playse SE_PIN
@@ -105,23 +105,23 @@ MtEmber_Exterior_EventScript_163A4E:: @ 8163A4E
 	waitmovement 0
 	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	call EventScript_163960
-	msgbox gUnknown_817A9E1
+	call MtEmber_Exterior_EventScript_RocketsFaceDown
+	msgbox MtEmber_Exterior_Text_SnoopsBeenListeningIn
 	setvar VAR_MAP_SCENE_MT_EMBER_EXTERIOR, 2
 	releaseall
 	end
 
-MtEmber_Exterior_EventScript_163AB4:: @ 8163AB4
-	trainerbattle_single TRAINER_PKMN_RANGER_LOGAN, Text_17AB73, Text_17ABAA
-	msgbox gUnknown_817ABD8, MSGBOX_AUTOCLOSE
+MtEmber_Exterior_EventScript_Logan:: @ 8163AB4
+	trainerbattle_single TRAINER_PKMN_RANGER_LOGAN, MtEmber_Exterior_Text_LoganIntro, MtEmber_Exterior_Text_LoganDefeat
+	msgbox MtEmber_Exterior_Text_LoganPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtEmber_Exterior_EventScript_163ACB:: @ 8163ACB
-	trainerbattle_single TRAINER_PKMN_RANGER_BETH, Text_17AC55, Text_17AC82
-	msgbox gUnknown_817ACA2, MSGBOX_AUTOCLOSE
+MtEmber_Exterior_EventScript_Beth:: @ 8163ACB
+	trainerbattle_single TRAINER_PKMN_RANGER_BETH, MtEmber_Exterior_Text_BethIntro, MtEmber_Exterior_Text_BethDefeat
+	msgbox MtEmber_Exterior_Text_BethPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtEmber_Exterior_EventScript_163AE2:: @ 8163AE2
-	trainerbattle_single TRAINER_CRUSH_GIRL_JOCELYN, Text_17AD06, Text_17AD6B
-	msgbox gUnknown_817AD89, MSGBOX_AUTOCLOSE
+MtEmber_Exterior_EventScript_Jocelyn:: @ 8163AE2
+	trainerbattle_single TRAINER_CRUSH_GIRL_JOCELYN, MtEmber_Exterior_Text_JocelynIntro, MtEmber_Exterior_Text_JocelynDefeat
+	msgbox MtEmber_Exterior_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
 	end

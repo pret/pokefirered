@@ -294,20 +294,20 @@ static void Task_ShopMenu(u8 taskId)
 static void Task_HandleShopMenuBuy(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_InitBuyMenu);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_GoToSellMenu);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;    
 }
 
 static void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(2, POCKET_POKE_BALLS, CB2_ReturnToField);
+    GoToBagMenu(ITEMMENULOCATION_SHOP, OPEN_BAG_LAST, CB2_ReturnToField);
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
 }
 

@@ -1633,3 +1633,10 @@
 	compare VAR_RESULT, 2
 	goto_if_eq \dest
 	.endm
+
+	.macro braillemessage_wait text:req
+	setvar VAR_0x8006, 0
+	braillemessage \text
+	getbraillestringwidth \text
+	call EventScript_BrailleCursorWaitButton
+	.endm

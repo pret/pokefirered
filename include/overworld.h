@@ -62,7 +62,8 @@ extern struct WarpData gUnknown_2031DB4;
 extern struct WarpData gUnknown_2031DBC;
 
 extern u8 gUnknown_2031DE0;
-extern u8 gUnknown_300502C;
+extern u8 gFieldLinkPlayerCount;
+extern u8 gLocalLinkPlayerId;
 
 void IncrementGameStat(u8 index);
 

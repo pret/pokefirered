@@ -1619,7 +1619,7 @@ _0808C594: .4byte gUnknown_8418690
 _0808C598:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _0808C69C
@@ -22001,7 +22001,7 @@ GetItemIconPic: @ 8096674
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl sub_8098974
+	bl GetItemIconGfxPtr
 	pop {r1}
 	bx r1
 	thumb_func_end GetItemIconPic
@@ -22012,7 +22012,7 @@ GetItemIconPalette: @ 8096684
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8098974
+	bl GetItemIconGfxPtr
 	pop {r1}
 	bx r1
 	thumb_func_end GetItemIconPalette

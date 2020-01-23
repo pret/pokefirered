@@ -3451,7 +3451,7 @@ static void CursorCB_Give(u8 taskId)
 
 void CB2_SelectBagItemToGive(void)
 {
-    GoToBagMenu(1, 3, CB2_GiveHoldItem);
+    GoToBagMenu(ITEMMENULOCATION_PARTY, OPEN_BAG_LAST, CB2_GiveHoldItem);
 }
 
 void CB2_GiveHoldItem(void)
@@ -4283,12 +4283,12 @@ void CB2_ShowPartyMenuForItemUse(void)
 
 static void CB2_ReturnToBagMenu(void)
 {
-    GoToBagMenu(11, 3, NULL);
+    GoToBagMenu(ITEMMENULOCATION_LAST, OPEN_BAG_LAST, NULL);
 }
 
 static void CB2_ReturnToTMCaseMenu(void)
 {
-    InitTMCase(5, NULL, 0xFF);
+    InitTMCase(TMCASE_NA, NULL, 0xFF);
 }
 
 static void CB2_ReturnToBerryPouchMenu(void)
@@ -5818,7 +5818,7 @@ static void Task_ContinueChoosingHalfParty(u8 taskId)
     }
 }
 
-void sub_81277F4(u8 menuType, MainCallback callback)
+void ChooseMonForTradingBoard(u8 menuType, MainCallback callback)
 {
     InitPartyMenu(menuType,
                   PARTY_LAYOUT_SINGLE,
@@ -5904,7 +5904,7 @@ void OpenPartyMenuInBattle(void)
 
 void ChooseMonForInBattleItem(void)
 {
-    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_REUSABLE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, sub_8120FCC, sub_8107ECC);
+    InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE, GetPartyLayoutFromBattleType(), PARTY_ACTION_REUSABLE_ITEM, FALSE, PARTY_MSG_USE_ON_WHICH_MON, sub_8120FCC, CB2_BagMenuFromBattle);
     nullsub_44();
     UpdatePartyToBattleOrder();
 }
@@ -5919,7 +5919,7 @@ void sub_81279E0(void)
                       FALSE,
                       PARTY_MSG_NONE,
                       sub_8120C3C,
-                      sub_8107ECC);
+                      CB2_BagMenuFromBattle);
         sub_80EB2F4(8);
     }
     else
@@ -5929,7 +5929,7 @@ void sub_81279E0(void)
         if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
             callback = CB2_ReturnToBerryPouchMenu;
         else
-            callback = sub_8107ECC;
+            callback = CB2_BagMenuFromBattle;
         InitPartyMenu(PARTY_MENU_TYPE_IN_BATTLE,
                       GetPartyLayoutFromBattleType(),
                       PARTY_ACTION_USE_ITEM,

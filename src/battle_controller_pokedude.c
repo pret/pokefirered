@@ -23,6 +23,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "reshow_battle_screen.h"
+#include "teachy_tv.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -733,15 +734,15 @@ static void OpenBagAndChooseItem(void)
         FreeAllWindowBuffers();
         switch (gSpecialVar_0x8004)
         {
-        case 1:
+        case TTVSCR_STATUS:
         default:
-            callbackId = 7;
+            callbackId = ITEMMENULOCATION_TTVSCR_STATUS;
             break;
-        case 3:
-            callbackId = 8;
+        case TTVSCR_CATCHING:
+            callbackId = ITEMMENULOCATION_TTVSCR_CATCHING;
             break;
         }
-        sub_810B108(callbackId);
+        InitPokedudeBag(callbackId);
     }
 }
 

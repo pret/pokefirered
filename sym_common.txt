@@ -38,10 +38,10 @@ gFieldCallback2: @ 3005024
 gHeldKeyCodeToSend: @ 3005028
 	.space 0x4
 
-gUnknown_300502C: @ 300502C
+gLocalLinkPlayerId: @ 300502C
 	.space 0x4
 
-gUnknown_3005030: @ 3005030
+gFieldLinkPlayerCount: @ 3005030
 	.space 0x10
 
 	.align 2

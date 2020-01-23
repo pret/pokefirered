@@ -773,10 +773,10 @@ _08080D44:
 _08080D50: .4byte sub_8080F78
 _08080D54:
 	bl GetLinkPlayerCount_2
-	ldr r4, _08080D7C @ =gUnknown_3005030
+	ldr r4, _08080D7C @ =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
-	ldr r1, _08080D80 @ =gUnknown_300502C
+	ldr r1, _08080D80 @ =gLocalLinkPlayerId
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800A900
@@ -790,8 +790,8 @@ _08080D74:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080D7C: .4byte gUnknown_3005030
-_08080D80: .4byte gUnknown_300502C
+_08080D7C: .4byte gFieldLinkPlayerCount
+_08080D80: .4byte gLocalLinkPlayerId
 _08080D84: .4byte gBlockSendBuffer
 _08080D88: .4byte sub_8080E6C
 	thumb_func_end sub_8080CDC
@@ -876,10 +876,10 @@ _08080E18: .4byte gTasks
 _08080E1C: .4byte sub_8080F78
 _08080E20:
 	bl GetLinkPlayerCount_2
-	ldr r4, _08080E58 @ =gUnknown_3005030
+	ldr r4, _08080E58 @ =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
-	ldr r1, _08080E5C @ =gUnknown_300502C
+	ldr r1, _08080E5C @ =gLocalLinkPlayerId
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl sub_800A900
@@ -899,8 +899,8 @@ _08080E50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08080E58: .4byte gUnknown_3005030
-_08080E5C: .4byte gUnknown_300502C
+_08080E58: .4byte gFieldLinkPlayerCount
+_08080E5C: .4byte gLocalLinkPlayerId
 _08080E60: .4byte gBlockSendBuffer
 _08080E64: .4byte gTasks
 _08080E68: .4byte sub_8080E6C
@@ -1536,7 +1536,7 @@ _08081344:
 _0808135C:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r1, _08081374 @ =gLinkType
 	ldr r2, _08081378 @ =0x00002211
 	adds r0, r2, 0
@@ -1693,7 +1693,7 @@ _08081480:
 _080814A0:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	ldr r0, _080814BC @ =gLinkType
 	ldr r2, _080814C0 @ =0x00002211
 	adds r1, r2, 0
@@ -1931,7 +1931,7 @@ sub_8081668: @ 8081668
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _0808170A
-	ldr r0, _080816BC @ =gUnknown_300502C
+	ldr r0, _080816BC @ =gLocalLinkPlayerId
 	ldrb r0, [r0]
 	movs r5, 0x1
 	eors r0, r5
@@ -1951,7 +1951,7 @@ sub_8081668: @ 8081668
 _080816B0: .4byte gBattleTypeFlags
 _080816B4: .4byte 0x0000ffdf
 _080816B8: .4byte gSpecialVar_0x8004
-_080816BC: .4byte gUnknown_300502C
+_080816BC: .4byte gLocalLinkPlayerId
 _080816C0: .4byte gWirelessCommType
 _080816C4: .4byte gBattleOutcome
 _080816C8:
@@ -2179,7 +2179,7 @@ _08081882:
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl ClearLinkCallback_2
 	b _080818B8
 _08081894:
@@ -2255,7 +2255,7 @@ _0808191A:
 	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	bl Rfu_set_zero
 	b _08081950
 _0808192C:

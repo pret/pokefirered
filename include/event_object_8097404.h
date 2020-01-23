@@ -14,7 +14,7 @@ extern void *gUnknown_020375B8;
 
 // Exported ROM declarations
 void sub_8097AC8(struct Sprite *);
-void npc_sync_anim_pause_bits(struct ObjectEvent *);
+void UnfreezeObjectEvent(struct ObjectEvent *);
 void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
 u8 sub_8097F78(struct ObjectEvent *);
 bool8 obj_npc_ministep(struct Sprite *sprite);

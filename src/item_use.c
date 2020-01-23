@@ -154,7 +154,7 @@ static void sub_80A0FBC(u8 taskId)
     {
         ItemMenu_SetExitCallback(gUnknown_83E2954[itemType]);
         if (itemType == 1)
-            sub_8108CB4();
+            Bag_BeginCloseWin0Animation();
         ItemMenu_StartFadeToExitCallback(taskId);
     }
 }
@@ -188,7 +188,7 @@ static void sub_80A10C4(u8 taskId, bool8 a1, u8 a2, const u8 * str)
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (a1 == FALSE)
-        DisplayItemMessageInBag(taskId, a2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, a2, gStringVar4, Task_ReturnToBagFromContextMenu);
     else
         DisplayItemMessageOnField(taskId, a2, gStringVar4, sub_80A112C);
 }
@@ -345,7 +345,7 @@ void FieldUseFunc_CoinCase(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gUnknown_8416537);
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
-        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, Task_ReturnToBagFromContextMenu);
     else
         DisplayItemMessageOnField(taskId, 2, gStringVar4, sub_80A112C);
 }
@@ -356,7 +356,7 @@ void FieldUseFunc_PowderJar(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gUnknown_8416644);
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
     if (gTasks[taskId].data[3] == 0)
-        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, Task_ReturnToBagFromContextMenu);
     else
         DisplayItemMessageOnField(taskId, 2, gStringVar4, sub_80A112C);
 }
@@ -384,7 +384,7 @@ void FieldUseFunc_PokeFlute(u8 taskId)
     {
         // Now that's a catchy tune!
         if (gTasks[taskId].data[3] == 0)
-            DisplayItemMessageInBag(taskId, 2, gUnknown_841665C, sub_810A1F8);
+            DisplayItemMessageInBag(taskId, 2, gUnknown_841665C, Task_ReturnToBagFromContextMenu);
         else
             DisplayItemMessageOnField(taskId, 2, gUnknown_841665C, sub_80A112C);
     }
@@ -401,7 +401,7 @@ static void sub_80A1674(u8 taskId)
     if (WaitFanfare(FALSE))
     {
         if (gTasks[taskId].data[3] == 0)
-            DisplayItemMessageInBag(taskId, 2, gUnknown_84166A7, sub_810A1F8);
+            DisplayItemMessageInBag(taskId, 2, gUnknown_84166A7, Task_ReturnToBagFromContextMenu);
         else
             DisplayItemMessageOnField(taskId, 2, gUnknown_84166A7, sub_80A112C);
     }
@@ -458,7 +458,7 @@ void FieldUseFunc_TmCase(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitTMCaseFromField;
     }
 }
@@ -489,7 +489,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitBerryPouchFromField;
     }
 }
@@ -518,7 +518,7 @@ void BattleUseFunc_BerryPouch(u8 taskId)
 
 static void InitBerryPouchFromBattle(void)
 {
-    InitBerryPouch(BERRYPOUCH_FROMBATTLE, sub_8107ECC, 0);
+    InitBerryPouch(BERRYPOUCH_FROMBATTLE, CB2_BagMenuFromBattle, 0);
 }
 
 void FieldUseFunc_TeachyTv(u8 taskId)
@@ -532,7 +532,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_InitTeachyTvFromField;
     }
 }
@@ -562,7 +562,7 @@ void FieldUseFunc_SuperRepel(u8 taskId)
     }
     else
         // An earlier repel is still in effect
-        DisplayItemMessageInBag(taskId, 2, gUnknown_841659E, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gUnknown_841659E, Task_ReturnToBagFromContextMenu);
 }
 
 static void sub_80A19E8(u8 taskId)
@@ -572,15 +572,15 @@ static void sub_80A19E8(u8 taskId)
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         sub_80A1A44();
-        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, Task_ReturnToBagFromContextMenu);
     }
 }
 
 static void sub_80A1A44(void)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
-    sub_8108DC8(ItemId_GetPocket(gSpecialVar_ItemId));
-    sub_81089F4(ItemId_GetPocket(gSpecialVar_ItemId));
+    Pocket_CalculateNItemsAndMaxShowed(ItemId_GetPocket(gSpecialVar_ItemId));
+    PocketCalculateInitialCursorPosAndItemsAbove(ItemId_GetPocket(gSpecialVar_ItemId));
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gUnknown_841658C);
 }
@@ -613,7 +613,7 @@ static void sub_80A1B48(u8 taskId)
     if (++gTasks[taskId].data[8] > 7)
     {
         PlaySE(SE_BIDORO);
-        DisplayItemMessageInBag(taskId, 2, gStringVar4, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gStringVar4, Task_ReturnToBagFromContextMenu);
     }
 }
 
@@ -662,7 +662,7 @@ void FieldUseFunc_TownMap(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = sub_80A1CC0;
     }
 }
@@ -694,7 +694,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = sub_80A1D68;
     }
 }
@@ -745,18 +745,18 @@ void BattleUseFunc_PokeBallEtc(u8 taskId)
     if (!IsPlayerPartyAndPokemonStorageFull())
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        sub_8108CB4();
+        Bag_BeginCloseWin0Animation();
         ItemMenu_StartFadeToExitCallback(taskId);
     }
     else
     {
-        DisplayItemMessageInBag(taskId, 2, gUnknown_8416631, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gUnknown_8416631, Task_ReturnToBagFromContextMenu);
     }
 }
 
 void BattleUseFunc_PokeFlute(u8 taskId)
 {
-    sub_8108CB4();
+    Bag_BeginCloseWin0Animation();
     ItemMenu_StartFadeToExitCallback(taskId);
 }
 
@@ -764,7 +764,7 @@ void BattleUseFunc_GuardSpec(u8 taskId)
 {
     if (ExecuteTableBasedItemEffect(&gPlayerParty[gBattlerPartyIndexes[gBattlerInMenuId]], gSpecialVar_ItemId, gBattlerPartyIndexes[gBattlerInMenuId], 0))
     {
-        DisplayItemMessageInBag(taskId, 2, gText_WontHaveEffect, sub_810A1F8);
+        DisplayItemMessageInBag(taskId, 2, gText_WontHaveEffect, Task_ReturnToBagFromContextMenu);
     }
     else
     {
@@ -790,7 +790,7 @@ static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
-        sub_8108CB4();
+        Bag_BeginCloseWin0Animation();
         ItemMenu_StartFadeToExitCallback(taskId);
     }
 }

@@ -1148,10 +1148,10 @@ extern const u8 EventScript_FldEffStrength[];
 extern const u8 EventScript_FailSweetScent[];
 extern const u8 EventScript_FldEffRockSmash[];
 
-extern const u8 EventScript_SafariTimesUp[];
-extern const u8 EventScript_SafariRetire[];
-extern const u8 EventScript_SafariWarpOut[];
-extern const u8 EventScript_SafariOutOfBalls[];
+extern const u8 SafariZone_EventScript_TimesUp[];
+extern const u8 SafariZone_EventScript_RetirePrompt[];
+extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
+extern const u8 SafariZone_EventScript_OutOfBalls[];
 
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 
@@ -1162,7 +1162,7 @@ extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 gUnknown_81A4EB4[];
-extern const u8 EventScript_1C555B[];
+extern const u8 Test_EventScript_Sign[];
 
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -1194,5 +1194,7 @@ extern const u8 Text_1A5CF1[];
 extern const u8 Text_1A5D31[];
 extern const u8 Text_1A5D6E[];
 extern const u8 Text_1A5DB1[];
+
+extern const u8 EventScript_BagItemCanBeRegistered[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

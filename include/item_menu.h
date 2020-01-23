@@ -3,6 +3,7 @@
 
 #include "global.h"
 #include "task.h"
+#include "constants/item_menu.h"
 
 // Exported type declarations
 
@@ -10,15 +11,15 @@
 
 struct BagStruct
 {
-    void (*bagCallback)(void);
+    MainCallback bagCallback;
     u8 location;
-    u8 pocket;
-    u16 unk6;
-    u8 cursorPosition[6];
-    u8 scrollPosition[6];
+    bool8 bagOpen;
+    u16 pocket;
+    u16 itemsAbove[3];
+    u16 cursorPos[3];
 };
 
-extern struct BagStruct gUnknown_203ACFC;
+extern struct BagStruct gBagMenuState;
 
 extern u16 gSpecialVar_ItemId;
 
@@ -26,19 +27,19 @@ extern u16 gSpecialVar_ItemId;
 void sub_81AAC50(void);
 void sub_81AAC70(void);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
-void sub_81089BC(void);
-void sub_810B108(u8);
+void ResetBagCursorPositions(void);
+void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
-void ItemMenu_MoveItemSlotToNewPositionInArray(struct ItemSlot * slots, int pos1, int pos2);
+void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void ItemMenu_StartFadeToExitCallback(u8 taskId);
-void sub_8108CB4(void);
+void Bag_BeginCloseWin0Animation(void);
 void ItemMenu_SetExitCallback(void (*)(void));
-void DisplayItemMessageInBag(u8 taskId, u8 bgId, const u8 * string, TaskFunc followUpFunc);
-void sub_810A1F8(u8 taskId);
-void sub_8107ECC(void);
-void sub_810AF74(void);
-void sub_8108DC8(u8 pocketId);
-void sub_81089F4(u8 pocketId);
+void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc);
+void Task_ReturnToBagFromContextMenu(u8 taskId);
+void CB2_BagMenuFromBattle(void);
+void InitOldManBag(void);
+void Pocket_CalculateNItemsAndMaxShowed(u8 pocketId);
+void PocketCalculateInitialCursorPosAndItemsAbove(u8 pocketId);
 void GoToBagMenu(u8 menuType, u8 pocket, MainCallback callback);
 
 #endif //GUARD_ITEM_MENU_H

@@ -11,5 +11,6 @@ void sub_8098630(void);
 bool8 sub_8098734(void);
 void sub_80696C0(void);
 bool8 walkrun_is_standing_still(void);
+void sub_80696F0(void);
 
 #endif // GUARD_EVENT_OBJECT_LOCK_H

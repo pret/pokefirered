@@ -141,7 +141,7 @@
       "x": 19,
       "y": 18,
       "elevation": 0,
-      "dest_map": "MAP_SAFARI_ZONE_BUILDING4",
+      "dest_map": "MAP_SAFARI_ZONE_WEST_REST_HOUSE",
       "dest_warp_id": 1
     }
   ],
@@ -152,28 +152,28 @@
       "x": 27,
       "y": 9,
       "elevation": 0,
-      "script": "SafariZone_West_EventScript_1623D0"
+      "script": "SafariZone_West_EventScript_LostTeethNotice"
     },
     {
       "type": "bg_event_type_0",
       "x": 36,
       "y": 10,
       "elevation": 0,
-      "script": "SafariZone_West_EventScript_1623D9"
+      "script": "SafariZone_West_EventScript_TrainerTips"
     },
     {
       "type": "bg_event_type_0",
       "x": 35,
       "y": 26,
       "elevation": 0,
-      "script": "SafariZone_West_EventScript_1623E2"
+      "script": "SafariZone_West_EventScript_AreaSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 19,
       "elevation": 0,
-      "script": "SafariZone_West_EventScript_1623C7"
+      "script": "SafariZone_West_EventScript_RestHouseSign"
     },
     {
       "type": "hidden_item",

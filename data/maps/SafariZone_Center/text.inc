@@ -1,11 +1,11 @@
-gUnknown_81777F2:: @ 81777F2
+SafariZone_Center_Text_RestHouse:: @ 81777F2
     .string "REST HOUSE$"
 
-gUnknown_81777FD:: @ 81777FD
+SafariZone_Center_Text_PressStartToCheckTime:: @ 81777FD
     .string "TRAINER TIPS\p"
     .string "Press START to check\n"
     .string "remaining time.$"
 
-gUnknown_817782F:: @ 817782F
+SafariZone_Center_Text_CenterArea:: @ 817782F
     .string "CENTER AREA$"
 

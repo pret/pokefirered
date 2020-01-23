@@ -36,6 +36,7 @@
 
 #define MALE   0
 #define FEMALE 1
+#define GENDER_COUNT 2
 
 #define OPTIONS_BUTTON_MODE_HELP         0
 #define OPTIONS_BUTTON_MODE_LR           1
@@ -58,6 +59,8 @@
 #define POCKET_BERRY_POUCH  5
 
 #define NUM_BAG_POCKETS 5
+
+#define MAX_MON_MOVES 4
 
 #define PARTY_SIZE 6
 #define MULTI_PARTY_SIZE (PARTY_SIZE / 2)

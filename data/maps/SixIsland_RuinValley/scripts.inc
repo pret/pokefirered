@@ -28,7 +28,7 @@ SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_168BCB
 	msgbox gUnknown_818BE11
-	braillemessage gUnknown_81A929B
+	braillemessage Braille_Text_Cut
 	waitbuttonpress
 	releaseall
 	end

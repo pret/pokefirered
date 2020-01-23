@@ -86,6 +86,7 @@ struct mevent_server_cmd
 #define SRV_SEND_NEWS           {.instr = 14}
 #define SRV_BUFFER_SEND         {.instr = 15}
 #define SRV_SEND(x, y)          {.instr = 18, .flag = x, .parameter = (void *)y}
+#define SRV_SENDSTR(x, y)       {.instr = 20, .flag = x, .parameter = (void *)y}
 #define SRV_BUFFER_CARD         {.instr = 26}
 #define SRV_BUFFER_NEWS         {.instr = 27}
 #define SRV_RAM_SCRIPT_IF_VALID {.instr = 28}

@@ -4757,7 +4757,7 @@ _0805713C: .4byte gPlayerAvatar
 	thumb_func_start sub_8057140
 sub_8057140: @ 8057140
 	push {lr}
-	ldr r0, _08057158 @ =gUnknown_300502C
+	ldr r0, _08057158 @ =gLocalLinkPlayerId
 	ldrb r0, [r0]
 	bl sub_8058504
 	lsls r0, 24
@@ -4766,13 +4766,13 @@ sub_8057140: @ 8057140
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057158: .4byte gUnknown_300502C
+_08057158: .4byte gLocalLinkPlayerId
 	thumb_func_end sub_8057140
 
 	thumb_func_start sub_805715C
 sub_805715C: @ 805715C
 	push {lr}
-	ldr r0, _08057174 @ =gUnknown_300502C
+	ldr r0, _08057174 @ =gLocalLinkPlayerId
 	ldrb r0, [r0]
 	bl sub_8058504
 	lsls r0, 24
@@ -4781,7 +4781,7 @@ sub_805715C: @ 805715C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057174: .4byte gUnknown_300502C
+_08057174: .4byte gLocalLinkPlayerId
 	thumb_func_end sub_805715C
 
 	thumb_func_start sub_8057178
@@ -4794,7 +4794,7 @@ sub_8057178: @ 8057178
 	adds r1, r4, 0
 	bl GetCameraFocusCoords
 	mov r2, sp
-	ldr r0, _080571A4 @ =gUnknown_300502C
+	ldr r0, _080571A4 @ =gLocalLinkPlayerId
 	ldrb r1, [r0]
 	ldrh r0, [r2]
 	adds r0, r1
@@ -4807,7 +4807,7 @@ sub_8057178: @ 8057178
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080571A4: .4byte gUnknown_300502C
+_080571A4: .4byte gLocalLinkPlayerId
 	thumb_func_end sub_8057178
 
 	thumb_func_start sub_80571A8
@@ -4823,13 +4823,13 @@ sub_80571A8: @ 80571A8
 	bl GetCameraFocusCoords
 	mov r3, sp
 	mov r2, sp
-	ldr r0, _08057224 @ =gUnknown_300502C
+	ldr r0, _08057224 @ =gLocalLinkPlayerId
 	ldrb r1, [r0]
 	ldrh r0, [r2]
 	subs r0, r1
 	strh r0, [r3]
 	movs r6, 0
-	ldr r0, _08057228 @ =gUnknown_3005030
+	ldr r0, _08057228 @ =gFieldLinkPlayerCount
 	mov r8, r4
 	ldrb r0, [r0]
 	cmp r6, r0
@@ -4859,7 +4859,7 @@ _080571D8:
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r0, _08057228 @ =gUnknown_3005030
+	ldr r0, _08057228 @ =gFieldLinkPlayerCount
 	ldrb r0, [r0]
 	cmp r6, r0
 	bcc _080571D8
@@ -4872,8 +4872,8 @@ _08057212:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057224: .4byte gUnknown_300502C
-_08057228: .4byte gUnknown_3005030
+_08057224: .4byte gLocalLinkPlayerId
+_08057228: .4byte gFieldLinkPlayerCount
 _0805722C: .4byte gLinkPlayers
 	thumb_func_end sub_80571A8
 
@@ -4881,7 +4881,7 @@ _0805722C: .4byte gLinkPlayers
 sub_8057230: @ 8057230
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r0, _08057264 @ =gUnknown_3005030
+	ldr r0, _08057264 @ =gFieldLinkPlayerCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0805725E
@@ -4898,7 +4898,7 @@ _0805723E:
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, _08057264 @ =gUnknown_3005030
+	ldr r0, _08057264 @ =gFieldLinkPlayerCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _0805723E
@@ -4907,7 +4907,7 @@ _0805725E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057264: .4byte gUnknown_3005030
+_08057264: .4byte gFieldLinkPlayerCount
 _08057268: .4byte gLinkPlayers
 	thumb_func_end sub_8057230
 
@@ -5647,7 +5647,7 @@ c1_link_related: @ 8057884
 	cmp r0, 0
 	bne _080578C0
 _0805789E:
-	ldr r0, _080578CC @ =gUnknown_300502C
+	ldr r0, _080578CC @ =gLocalLinkPlayerId
 	ldrb r4, [r0]
 	ldr r0, _080578D0 @ =gLinkPartnersHeldKeys
 	adds r1, r4, 0
@@ -5666,7 +5666,7 @@ _080578C0:
 	bx r0
 	.align 2, 0
 _080578C8: .4byte gWirelessCommType
-_080578CC: .4byte gUnknown_300502C
+_080578CC: .4byte gLocalLinkPlayerId
 _080578D0: .4byte gLinkPartnersHeldKeys
 _080578D4: .4byte gUnknown_3000E84
 	thumb_func_end c1_link_related
@@ -5753,7 +5753,7 @@ sub_8057954: @ 8057954
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, _08057974 @ =gUnknown_3005030
+	ldr r0, _08057974 @ =gFieldLinkPlayerCount
 	ldrb r2, [r0]
 	movs r1, 0
 	cmp r1, r2
@@ -5767,7 +5767,7 @@ _08057966:
 	movs r0, 0
 	b _08057984
 	.align 2, 0
-_08057974: .4byte gUnknown_3005030
+_08057974: .4byte gFieldLinkPlayerCount
 _08057978: .4byte gUnknown_3000E80
 _0805797C:
 	adds r1, 0x1
@@ -5786,7 +5786,7 @@ sub_805798C: @ 805798C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, _080579AC @ =gUnknown_3005030
+	ldr r0, _080579AC @ =gFieldLinkPlayerCount
 	ldrb r2, [r0]
 	movs r1, 0
 	cmp r1, r2
@@ -5800,7 +5800,7 @@ _0805799E:
 	movs r0, 0x1
 	b _080579BC
 	.align 2, 0
-_080579AC: .4byte gUnknown_3005030
+_080579AC: .4byte gFieldLinkPlayerCount
 _080579B0: .4byte gUnknown_3000E80
 _080579B4:
 	adds r1, 0x1
@@ -6499,7 +6499,7 @@ sub_8057EC0: @ 8057EC0
 	cmp r2, r1
 	bne _08057EE6
 	ldr r1, _08057F08 @ =gUnknown_3000E80
-	ldr r0, _08057F0C @ =gUnknown_300502C
+	ldr r0, _08057F0C @ =gLocalLinkPlayerId
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -6511,7 +6511,7 @@ _08057EE6:
 	cmp r1, r0
 	bne _08057F14
 	ldr r1, _08057F08 @ =gUnknown_3000E80
-	ldr r0, _08057F0C @ =gUnknown_300502C
+	ldr r0, _08057F0C @ =gLocalLinkPlayerId
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -6524,7 +6524,7 @@ _08057EFC:
 _08057F00: .4byte gUnknown_3000E84
 _08057F04: .4byte sub_8057E1C
 _08057F08: .4byte gUnknown_3000E80
-_08057F0C: .4byte gUnknown_300502C
+_08057F0C: .4byte gLocalLinkPlayerId
 _08057F10: .4byte sub_8057E10
 _08057F14:
 	movs r0, 0x82

@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
@@ -28,6 +29,7 @@
 #include "constants/union_room.h"
 #include "constants/trade.h"
 #include "constants/quest_log.h"
+#include "constants/daycare.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -149,10 +151,10 @@ gStdScriptsEnd::
 	.include "data/maps/SafariZone_East/scripts.inc"
 	.include "data/maps/SafariZone_North/scripts.inc"
 	.include "data/maps/SafariZone_West/scripts.inc"
-	.include "data/maps/SafariZone_Building1/scripts.inc"
-	.include "data/maps/SafariZone_Building2/scripts.inc"
-	.include "data/maps/SafariZone_Building3/scripts.inc"
-	.include "data/maps/SafariZone_Building4/scripts.inc"
+	.include "data/maps/SafariZone_Center_RestHouse/scripts.inc"
+	.include "data/maps/SafariZone_East_RestHouse/scripts.inc"
+	.include "data/maps/SafariZone_North_RestHouse/scripts.inc"
+	.include "data/maps/SafariZone_West_RestHouse/scripts.inc"
 	.include "data/maps/SafariZone_SecretHouse/scripts.inc"
 	.include "data/maps/CeruleanCave_1F/scripts.inc"
 	.include "data/maps/CeruleanCave_2F/scripts.inc"
@@ -395,12 +397,12 @@ gStdScriptsEnd::
 	.include "data/maps/CeladonCity_Hotel/scripts.inc"
 	.include "data/maps/FuchsiaCity_SafariZone_Entrance/scripts.inc"
 	.include "data/maps/FuchsiaCity_Mart/scripts.inc"
-	.include "data/maps/FuchsiaCity_ZooBuilding/scripts.inc"
+	.include "data/maps/FuchsiaCity_SafariZone_Office/scripts.inc"
 	.include "data/maps/FuchsiaCity_Gym/scripts.inc"
 	.include "data/maps/FuchsiaCity_House1/scripts.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/FuchsiaCity_Building1/scripts.inc"
+	.include "data/maps/FuchsiaCity_WardensHouse/scripts.inc"
 	.include "data/maps/FuchsiaCity_House2/scripts.inc"
 	.include "data/maps/FuchsiaCity_House3/scripts.inc"
 	.include "data/maps/CinnabarIsland_Gym/scripts.inc"
@@ -562,10 +564,10 @@ gStdScriptsEnd::
 	.include "data/maps/SafariZone_East/text.inc"
 	.include "data/maps/SafariZone_North/text.inc"
 	.include "data/maps/SafariZone_West/text.inc"
-	.include "data/maps/SafariZone_Building1/text.inc"
-	.include "data/maps/SafariZone_Building2/text.inc"
-	.include "data/maps/SafariZone_Building3/text.inc"
-	.include "data/maps/SafariZone_Building4/text.inc"
+	.include "data/maps/SafariZone_Center_RestHouse/text.inc"
+	.include "data/maps/SafariZone_East_RestHouse/text.inc"
+	.include "data/maps/SafariZone_North_RestHouse/text.inc"
+	.include "data/maps/SafariZone_West_RestHouse/text.inc"
 	.include "data/maps/SafariZone_SecretHouse/text.inc"
 	.include "data/maps/CeruleanCave_B1F/text.inc"
 	.include "data/maps/PokemonLeague_LoreleisRoom/text.inc"
@@ -710,11 +712,11 @@ gStdScriptsEnd::
 	.include "data/maps/CeladonCity_Hotel/text.inc"
 	.include "data/maps/FuchsiaCity_SafariZone_Entrance/text.inc"
 	.include "data/maps/FuchsiaCity_Mart/text.inc"
-	.include "data/maps/FuchsiaCity_ZooBuilding/text.inc"
+	.include "data/maps/FuchsiaCity_SafariZone_Office/text.inc"
 	.include "data/maps/FuchsiaCity_Gym/text.inc"
 	.include "data/maps/FuchsiaCity_House1/text.inc"
 	.include "data/maps/FuchsiaCity_PokemonCenter_1F/text.inc"
-	.include "data/maps/FuchsiaCity_Building1/text.inc"
+	.include "data/maps/FuchsiaCity_WardensHouse/text.inc"
 	.include "data/maps/FuchsiaCity_House2/text.inc"
 	.include "data/maps/FuchsiaCity_House3/text.inc"
 	.include "data/maps/CinnabarIsland_Gym/text.inc"
@@ -739,6 +741,7 @@ gStdScriptsEnd::
 	.include "data/maps/Route2_EastBuilding/text.inc"
 	.include "data/maps/Route2_ViridianForest_NorthEntrance/text.inc"
 	.include "data/maps/Route4_PokemonCenter_1F/text.inc"
+	.include "data/maps/Route5_PokemonDayCare/text.inc"
 	.include "data/maps/Route5_SouthEntrance/text.inc"
 	.include "data/maps/Route6_NorthEntrance/text.inc"
 	.include "data/maps/Route7_EastEntrance/text.inc"
@@ -1117,7 +1120,8 @@ Text_1A641B:: @ 81A641B
 	.string "All right!\n"
 	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"
 
-Text_1A6448:: @ 81A6448
+@ Call for legendary bird trio
+Text_Gyaoo:: @ 81A6448
 	.string "Gyaoo!$"
 
 Text_MoveCanOnlyBeLearnedOnce:: @ 81A644F
@@ -1375,118 +1379,7 @@ EventScript_1A75D5:: @ 81A75D5
 	return
 
 	.include "data/scripts/movement.inc"	
-
-gUnknown_81A7606:: @ 81A7606
-	msgbox gUnknown_81C0DB0, MSGBOX_SIGN
-	end
-
-gUnknown_81A760F:: @ 81A760F
-	msgbox gUnknown_81C0DFD, MSGBOX_SIGN
-	end
-
-gUnknown_81A7618:: @ 81A7618
-	msgbox gUnknown_81C0F99, MSGBOX_SIGN
-	end
-
-gUnknown_81A7621:: @ 81A7621
-	msgbox gUnknown_81C12A7, MSGBOX_SIGN
-	end
-
-gUnknown_81A762A:: @ 81A762A
-	msgbox gUnknown_81C10C1, MSGBOX_SIGN
-	end
-
-gUnknown_81A7633:: @ 81A7633
-	msgbox gUnknown_81C1273, MSGBOX_SIGN
-	end
-
-gUnknown_81A763C:: @ 81A763C
-	msgbox gUnknown_81C0FD8, MSGBOX_SIGN
-	end
-
-gUnknown_81A7645:: @ 81A7645
-	msgbox gUnknown_81C12D6, MSGBOX_SIGN
-	end
-
-gUnknown_81A764E:: @ 81A764E
-	msgbox gUnknown_81C1300, MSGBOX_SIGN
-	end
-
-gUnknown_81A7657:: @ 81A7657
-	msgbox Text_DishesPlatesNeatlyLinedUp, MSGBOX_SIGN
-	end
-
-gUnknown_81A7660:: @ 81A7660
-	msgbox gUnknown_81C0E40, MSGBOX_SIGN
-	end
-
-gUnknown_81A7669:: @ 81A7669
-	msgbox gUnknown_81C0E73, MSGBOX_SIGN
-	end
-
-gUnknown_81A7672:: @ 81A7672
-	msgbox gUnknown_81C0EAC, MSGBOX_SIGN
-	end
-
-gUnknown_81A767B:: @ 81A767B
-	msgbox gUnknown_81C101B, MSGBOX_SIGN
-	end
-
-gUnknown_81A7684:: @ 81A7684
-	msgbox gUnknown_81C1060, MSGBOX_SIGN
-	end
-
-gUnknown_81A768D:: @ 81A768D
-	msgbox gUnknown_81C109C, MSGBOX_SIGN
-	end
-
-gUnknown_81A7696:: @ 81A7696
-	msgbox gUnknown_81C10FC, MSGBOX_SIGN
-	end
-
-gUnknown_81A769F:: @ 81A769F
-	msgbox gUnknown_81C1134, MSGBOX_SIGN
-	end
-
-gUnknown_81A76A8:: @ 81A76A8
-	msgbox gUnknown_81C116E, MSGBOX_SIGN
-	end
-
-gUnknown_81A76B1:: @ 81A76B1
-	msgbox gUnknown_81C1194, MSGBOX_SIGN
-	end
-
-gUnknown_81A76BA:: @ 81A76BA
-	msgbox gUnknown_81C11BA, MSGBOX_SIGN
-	end
-
-gUnknown_81A76C3:: @ 81A76C3
-	msgbox gUnknown_81C11DC, MSGBOX_SIGN
-	end
-
-gUnknown_81A76CC:: @ 81A76CC
-	msgbox gUnknown_81C1217, MSGBOX_SIGN
-	end
-
-gUnknown_81A76D5:: @ 81A76D5
-	msgbox gUnknown_81C124B, MSGBOX_SIGN
-	end
-
-gUnknown_81A76DE:: @ 81A76DE
-	msgbox gUnknown_81C0ECB, MSGBOX_SIGN
-	end
-
-gUnknown_81A76E7:: @ 81A76E7
-	msgbox gUnknown_81C0EF7, MSGBOX_SIGN
-	end
-
-gUnknown_81A76F0:: @ 81A76F0
-	msgbox gUnknown_81C0F19, MSGBOX_SIGN
-	end
-
-gUnknown_81A76F9:: @ 81A76F9
-	msgbox gUnknown_81C0F59, MSGBOX_SIGN
-	end
+	.include "data/scripts/flavor_text.inc"
 
 gUnknown_81A7702:: @ 81A7702
 	lockall
@@ -1537,7 +1430,7 @@ EventScript_1A778C:: @ 81A778C
 	releaseall
 	end
 
-gUnknown_81A77A0:: @ 81A77A0
+EventScript_BagItemCanBeRegistered:: @ 81A77A0
 	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
 	end
 
@@ -1847,23 +1740,23 @@ EventScript_1A8E6F:: @ 81A8E6F
 	end
 
 EventScript_1A8EAC:: @ 81A8EAC
-	getstdstring 2, 24
+	getstdstring 2, STDSTRING_ITEMS_POCKET
 	return
 
 EventScript_1A8EB1:: @ 81A8EB1
-	getstdstring 2, 25
+	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
 	return
 
 EventScript_1A8EB6:: @ 81A8EB6
-	getstdstring 2, 26
+	getstdstring 2, STDSTRING_POKEBALLS_POCKET
 	return
 
 EventScript_1A8EBB:: @ 81A8EBB
-	getstdstring 2, 27
+	getstdstring 2, STDSTRING_TM_CASE
 	return
 
 EventScript_1A8EC0:: @ 81A8EC0
-	getstdstring 2, 28
+	getstdstring 2, STDSTRING_BERRY_POUCH
 	return
 
 	.include "data/scripts/seagallop.inc"
@@ -2320,643 +2213,15 @@ EventScript_1B2DF6:: @ 81B2DF6
 	.include "data/scripts/item_ball_scripts.inc"
 	.include "data/scripts/mystery_event_club.inc"
 	.include "data/scripts/day_care.inc"
+	.include "data/text/day_care.inc"
 	.include "data/scripts/flash.inc"
 	.include "data/scripts/repel.inc"
-
-@@ Block below consists of at least safari_zone.inc and flavor_text.inc. JP text making it hard to define boundaries
-
-EventScript_SafariWarpOut:: @ 81BFB87
-	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3
-	special ExitSafariMode
-	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
-	end
-
-EventScript_1BFB98:: @ 81BFB98
-	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1
-	special ExitSafariMode
-	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 255, 4, 1
-	waitstate
-	end
-
-EventScript_SafariRetire:: @ 81BFBAA
-	lockall
-	msgbox Text_1BFBE9, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq EventScript_1BFBC0
-	releaseall
-	end
-
-EventScript_1BFBC0:: @ 81BFBC0
-	goto EventScript_1BFB98
-
-EventScript_SafariTimesUp:: @ 81BFBC5
-	lockall
-	playse SE_PINPON
-	msgbox gUnknown_81BFC1B
-	goto EventScript_1BFB98
-	end
-
-EventScript_SafariOutOfBalls:: @ 81BFBD7
-	lockall
-	playse SE_PINPON
-	msgbox gUnknown_81BFC53
-	goto EventScript_1BFB98
-	end
-
-Text_1BFBE9:: @ 81BFBE9
-	.string "Would you like to exit the SAFARI\n"
-	.string "ZONE right now?$"
-
-gUnknown_81BFC1B:: @ 81BFC1B
-	.string "PA: Ding-dong!\p"
-	.string "Time's up!\p"
-	.string "PA: Your SAFARI GAME is over!$"
-
-gUnknown_81BFC53:: @ 81BFC53
-	.string "PA: Ding-dong!\p"
-	.string "You are out of SAFARI BALLS!\p"
-	.string "PA: Your SAFARI GAME is over!$"
-
-Text_1BFC9D:: @ 81BFC9D
-	.string "サファリゾーンへ　ようこそ！\p"
-	.string "ここでは　ホウエンでは　なかなか\n"
-	.string "みることの　できない　ポケモンを\p"
-	.string "しぜんの　すがたの　まま\n"
-	.string "めに　することが　できます\p"
-	.string "また　ポケモントレーナーの\n"
-	.string "ようぼうに　おこたえ　して\p"
-	.string "ポケモンを\n"
-	.string "つかまえる　ことも　できます！\p"
-	.string "サファリゾーンを　たのしんで　いってね！$"
-
-Text_1BFD30:: @ 81BFD30
-	.string "サファリゾーンへ　ようこそ！\n"
-	.string "サファリゾーンは　はじめて　ですか？$"
-
-Text_1BFD52:: @ 81BFD52
-	.string "サファリゾーンを　たのしんで　いってね！$"
-
-Text_1BFD67:: @ 81BFD67
-	.string "サファリゾーンでは\n"
-	.string "30この　サファリボールを　つかって\l"
-	.string "ポケモンを　つかまえる　ことが　できます\p"
-	.string "サファリボールを　つかいきるか\n"
-	.string "500ぽ　あるくと\p"
-	.string "ゲームは　しゅうりょう　です\p"
-	.string "サファリゾーンを　たのしんで　いってね！$"
-
-Text_1BFDD7:: @ 81BFDD7
-	.string "サファリゾーンへ　ようこそ！\p"
-	.string "500えんで　ポケモン　つかまえほうだい！\n"
-	.string "サファリゲームに　さんか　しますか？$"
-
-Text_1BFE0F:: @ 81BFE0F
-	.string "そうですか\n"
-	.string "こんど　ぜひ　さんか　してください！$"
-
-Text_1BFE28:: @ 81BFE28
-	.string "おかねが　たりませんよ！$"
-
-Text_1BFE35:: @ 81BFE35
-	.string "それでは　500えん　いただきます$"
-
-Text_1BFE47:: @ 81BFE47
-	.string "では　サファリボールを　どうぞ！$"
-
-Text_1BFE58:: @ 81BFE58
-	.string "{PLAYER}は　サファリボールを\n"
-	.string "30こ　うけとった！$"
-
-Text_1BFE70:: @ 81BFE70
-	.string "じかんに　なりましたら\n"
-	.string "こちらから　おしらせ　しますので\p"
-	.string "ぞんぶんに　おたのしみ　ください！\n"
-	.string "では　いってらっしゃい！$"
-
-gUnknown_81BFEAC:: @ 81BFEAC
-	.string "Excuse me!\n"
-	.string "Your PC BOX is full.$"
-
-Text_1BFECC:: @ 81BFECC
-	.string "あ！　おきゃくさん\n"
-	.string "ポロックケースを　おもちで　ないですね？\p"
-	.string "サファリゾーンは　ポロックを　つかうと\n"
-	.string "より　おたのしみ　いただけますので\p"
-	.string "ぜひ　ポロックケースを\n"
-	.string "おもちに　なって　おこし　ください！$"
-
-Text_1BFF30:: @ 81BFF30
-	.string "まだ　じかんが　のこっていますが\n"
-	.string "サファリゾーンを　やめますか？$"
-
-Text_1BFF51:: @ 81BFF51
-	.string "では　ひきつづき　おたのしみ　ください！$"
-
-Text_1BFF66:: @ 81BFF66
-	.string "わかりました\p"
-	.string "それでは　のこりの　サファリボールを\n"
-	.string "おあずかり　します\p"
-	.string "おつかれさまでした\n"
-	.string "また　ごりよう　ください$"
-
-Text_1BFFA1:: @ 81BFFA1
-	.string "それでは　いってらっしゃい！\l"
-	.string "なにか　ありましたら\n"
-	.string "わたしに　こえを　かけて　くださいね$"
-
-Text_1BFFCE:: @ 81BFFCE
-	.string "しってた？\p"
-	.string "あの　しかくい　はこに　ポロックを　おくと\n"
-	.string "ポケモンが　あつまって　くるんだよ！$"
-
-Text_1BFFFD:: @ 81BFFFD
-	.string "この　さきに　いきたい　けど\n"
-	.string "じてんしゃ　もって　くるの　わすれた‥‥\p"
-	.string "おくに　めずらしい　ポケモンが\n"
-	.string "いそうな　きが　するのに！$"
-
-Text_1C003F:: @ 81C003F
-	.string "ポケモンに　ポロックを　なげても\n"
-	.string "しらんぷり　される　ときが　あるのよ\p"
-	.string "ポケモンにも　すききらいが　あるのかしら？$"
-
-Text_1C0079:: @ 81C0079
-	.string "ぜぇ‥‥　ぜぇ‥‥\n"
-	.string "やっと　ここまで　きたけど‥‥\p"
-	.string "つかれちゃって　ポケモン　つかまえる\n"
-	.string "げんきも　のこって　ないよ‥‥$"
-
-Text_1C00B6:: @ 81C00B6
-	.string "ホウエンに　いない　みずポケモンを\n"
-	.string "さがしに　きたんだけど‥‥\p"
-	.string "みずうみは　どこにあるのか\n"
-	.string "きみ　しってるかい？$"
-
-Text_1C00EF:: @ 81C00EF
-	.string "ここで　めずらしい　ポケモンを\n"
-	.string "たくさん　つかまえて\l"
-	.string "ともだちと　こうかん　するんだ！$"
-
-Text_1C011B:: @ 81C011B
-	.string "ポロックおきばに　おいた　ポロックが\n"
-	.string "いつのまにか　なくなっていた‥‥\p"
-	.string "しらない　うちに\n"
-	.string "ポケモンが　たべちゃったのかな？$"
-
-Text_1C0159:: @ 81C0159
-	.string "サファリゾーンの　おとくな　じょうほう！\p"
-	.string "であった　ポケモンに\n"
-	.string "ポロックを　なげると　にげにくく　なります！$"
-
-Text_1C0190:: @ 81C0190
-	.string "あるき　つかれたら　ちょっと　ひといき！\n"
-	.string "‘みんなの　きゅうけいじょ'$"
-
-Text_1C01B4:: @ 81C01B4
-	.string "おれ　ポロック　もってないけど\n"
-	.string "ポケモン　たくさん　つかまえたよ\p"
-	.string "ちかづいて　ボールを　なげる　だけで\n"
-	.string "けっこう　つかまえられる　もんだよ！$"
-
-Text_1C01FB:: @ 81C01FB
-	.string "ポロックを　つかうと　いつもより\n"
-	.string "ちょっぴり　にげにくく　なるみたい\p"
-	.string "だから　にげにくい　ポケモンに　つかっても\n"
-	.string "あんまり　いみが　ないかもね$"
-
-Text_1C0243:: @ 81C0243
-	.string "ポロックおきばに　ポロック　おいて\n"
-	.string "ポケモンを　つかまえると\p"
-	.string "おなじ　ような　せいかくの　ポケモンが\n"
-	.string "あつまる　きが　するなあ$"
-
-Text_1C0283:: @ 81C0283
-	.string "わしは　おおきな　{STR_VAR_1}に\n"
-	.string "とても　きょうみが　ある！\p"
-	.string "ん？　きみ　{STR_VAR_1}　もってるの？\n"
-	.string "ちょ　ちょ　ちょっと···\l"
-	.string "おじさんに　みせて　おくれ！$"
-
-Text_1C02CB:: @ 81C02CB
-	.string "おお！　こいつは　でかい！\n"
-	.string "とても　すばらしい　{STR_VAR_1}だ！\p"
-	.string "みせて　くれて　ありがとう\n"
-	.string "おれいに　これを　もって　いきなさい$"
-
-Text_1C0309:: @ 81C0309
-	.string "{PLAYER}は\n"
-	.string "{STR_VAR_2}を　もらった！$"
-
-Text_1C0317:: @ 81C0317
-	.string "ありゃ？\n"
-	.string "きみ　もちもの　いっぱいだね$"
-
-Text_1C032B:: @ 81C032B
-	.string "ううむ　わしは　これより　おおきい\n"
-	.string "{STR_VAR_1}を　みたこと　あるな···$"
-
-Text_1C034D:: @ 81C034D
-	.string "おお　こいつは　なかなか···って\n"
-	.string "これ　{STR_VAR_1}じゃ　ないよ！$"
-
-Text_1C036C:: @ 81C036C
-	.string "おおきい　{STR_VAR_1}　もってないの？\l"
-	.string "それは　ざんねん···\n"
-	.string "こんど　おおきい　{STR_VAR_1}　みせてね$"
-
-Text_1C0399:: @ 81C0399
-	.string "しじょう　さいだいの　{STR_VAR_1}！\n"
-	.string "{STR_VAR_2}の　{STR_VAR_3}cmのやつ！$"
-
-Text_1C03B5:: @ 81C03B5
-	.string "パパ“{PLAYER}！　よく　きたな！\n"
-	.string "{PLAYER}あての　てがみが　とどけられたぞ$"
-
-Text_1C03D7:: @ 81C03D7
-	.string "パパ“わたしも　みたことのない\n"
-	.string "ふねの　チケット　だな‥‥\l"
-	.string "ミナモに　いってみると　いいだろう$"
-
-Text_1C0407:: @ 81C0407
-	.string "カイナいき　れんらくせん‥‥\p"
-	.string "あら？\n"
-	.string "その　チケットは‥‥！$"
-
-Text_1C0426:: @ 81C0426
-	.string "ヘンテコな　チケットを\n"
-	.string "もってきたのは　おまえさんか？\p"
-	.string "おまえが　いこうと　しているのは\n"
-	.string "みなみの　はての　ちっぽけな　しま‥‥\p"
-	.string "そこでは　なにが　おこるのか\n"
-	.string "だれも　わからねえ‥‥\l"
-	.string "ううむ　ふなのりの　ちが　さわぐぜ！\p"
-	.string "さあ　のりな！$"
-
-Text_1C049D:: @ 81C049D
-	.string "なにもねえ　ちんけな　しま　だな‥‥\n"
-	.string "ミナモへ　かえるか？$"
-
-Text_1C04BB:: @ 81C04BB
-	.string "ùÏ! ÉÇñÑ ÒñÉ!$"
-
-Text_1C04C9:: @ 81C04C9
-	.string "そうかい\n"
-	.string "まあ　すきにするが　いいさ$"
-
-Text_1C04DC:: @ 81C04DC
-	.string "すべての　ゆめは　もうひとつの　げんじつ\n"
-	.string "それを　わすれるべからず‥‥$"
-
-Text_1C0500:: @ 81C0500
-	.string "きおく　かすみし　ものは\n"
-	.string "こころに　きざみつける　ことを　のぞむ‥‥$"
-
-Text_1C0523:: @ 81C0523
-	.string "パパ“やあ　{PLAYER}！\p"
-	.string "めずらしい　きのみを　てに　いれたから\n"
-	.string "プレゼント　するよ！$"
-
-Text_1C054C:: @ 81C054C
-	.string "ふかふかの　つちに　はえている　きのみは\n"
-	.string "じゆうに　とっても　よいのじゃが‥\p"
-	.string "1つだけ　きのみを　おなじ　ばしょに　うめる\n"
-	.string "それが　れいぎと　いうものじゃ\p"
-	.string "ほれ　これを　わけてやろう$"
-
-Text_1C05A8:: @ 81C05A8
-	.string "あんた　みたところ　トレーナーじゃろ？\p"
-	.string "トレーナーは　よく　きのみを　ポケモンに\n"
-	.string "もたせとるわい\p"
-	.string "ふやすも　つかうも　あんた　しだいじゃ$"
-
-Text_1C05ED:: @ 81C05ED
-	.string "いつも　みずを　あげてたら\n"
-	.string "たくさん　はなが　さいたんだ\p"
-	.string "そしたら　きのみも　たくさん　できた！\p"
-	.string "はい！\n"
-	.string "これ　あげる$"
-
-Text_1C0629:: @ 81C0629
-	.string "がんばって　あかいポロック　つくるんだ！\n"
-	.string "{STR_VAR_1}も　がんばってね！$"
-
-Text_1C064A:: @ 81C064A
-	.string "きょうは　なにいろの　きのみを\n"
-	.string "さがそっかなー$"
-
-Text_1C0662:: @ 81C0662
-	.string "ポケモンコンテストの　ゆうしょうを　めざして\n"
-	.string "きのみを　あつめているんだ\p"
-	.string "よかったら　きみにも　わけて　あげるよ！$"
-
-Text_1C069C:: @ 81C069C
-	.string "きみも　がんばれ！$"
-
-Text_1C06A6:: @ 81C06A6
-	.string "きょうは　どの　きのみを　うめるか‥\n"
-	.string "そして　なにいろの　ポロックを　つくるか‥\p"
-	.string "なやむのも　また　たのしいよ$"
-
-Text_1C06DE:: @ 81C06DE
-	.string "ケースを　ふると　でてくる　ポロック‥\p"
-	.string "そして　それを　キャッチして\n"
-	.string "たべてくれる　ポケモン‥\p"
-	.string "これって　あい　だよね？$"
-
-Text_1C071B:: @ 81C071B
-	.string "うん　うん！\n"
-	.string "やっぱ　わかるひとには　わかるよね\p"
-	.string "これ　あげる$"
-
-Text_1C073B:: @ 81C073B
-	.string "そっか‥‥\n"
-	.string "でも　ちがうと　かんじることも　たいせつだね\p"
-	.string "これ　あげる$"
-
-Text_1C075F:: @ 81C075F
-	.string "その　きのみは　めずらしいもの　らしいから\n"
-	.string "たいせつに　そだててね！$"
-
-Text_1C0782:: @ 81C0782
-	.string "また　きのみめいじんに　もらって　こようっと$"
-
-Text_1C0799:: @ 81C0799
-	.string "やっぱり\p"
-	.string "わたしに　スーツが　にあうように\n"
-	.string "うみには　しおかぜが　にあうな\l"
-	.string "そして　きみには　きのみが　にあいそうだ‥‥\p"
-	.string "なんでだろうね？$"
-
-Text_1C07DF:: @ 81C07DF
-	.string "やっぱり　それは‥‥‥‥\p"
-	.string "きみが　トレーナーだからだ！$"
-
-Text_1C07FB:: @ 81C07FB
-	.string "やっぱり\p"
-	.string "わたしに　シンプルさが　にあうように\n"
-	.string "ポケモンには　ポロックが　にあうな$"
-
-Text_1C0825:: @ 81C0825
-	.string "わしは　きのみめいじんと　よばれておる\p"
-	.string "わしは　せかいじゅうを　うつくしい　はなで\n"
-	.string "うめつくそうと　きのみを　そだてて\l"
-	.string "そして　くばり　まくって　おるのじゃ\p"
-	.string "きみにも　きのみを　わけて　あげよう！$"
-
-Text_1C0888:: @ 81C0888
-	.string "ほれ　えんりょ　せずに　もう　ひとつ！$"
-
-Text_1C089C:: @ 81C089C
-	.string "カナズミの　ちかくにある　サン·トウカという\n"
-	.string "フラワーショップも　よろしくの\p"
-	.string "せかいに　はなを　さかせましょう！$"
-
-Text_1C08D5:: @ 81C08D5
-	.string "きょうは　もう　おしまいじゃ\n"
-	.string "また　おいで\p"
-	.string "せかいに　はなを　さかせましょう！$"
-
-Text_1C08FD:: @ 81C08FD
-	.string "じいさんの　きのみの　そだてかたは\n"
-	.string "そりゃあ　せかいいちじゃ\p"
-	.string "わしも　はなが　たかいわい\p"
-	.string "ところで　あんた\n"
-	.string "いい　ことばを　きいたことが　ないかい？$"
-
-Text_1C0948:: @ 81C0948
-	.string "おお！　とても　よい　ことばじゃ！\n"
-	.string "かんどう　したわい\p"
-	.string "ほれ　これを　もっていきなされ$"
-
-Text_1C0974:: @ 81C0974
-	.string "おお！　なかなか　よい　ことばじゃ\n"
-	.string "あんたも　たいしたもんじゃ\p"
-	.string "ほれ　これを　もっていきなされ$"
-
-Text_1C09A4:: @ 81C09A4
-	.string "まごたち　4にんも　じいさんを　しのぐ\n"
-	.string "おおものに　なるじゃろうて\p"
-	.string "じんせい　たのしいことが　つきんのう！$"
-
-Text_1C09DA:: @ 81C09DA
-	.string "ほう‥‥$"
-
-Text_1C09DF:: @ 81C09DF
-	.string "こんにちは！\p"
-	.string "はなを　せかいに　ひろめる\n"
-	.string "フラワーショップ　サン·トウカです！$"
-
-Text_1C0A07:: @ 81C0A07
-	.string "{PLAYER}{KUN}　きのみの　こと　しりたい？$"
-
-Text_1C0A1A:: @ 81C0A1A
-	.string "あなたの　なまえは‥‥\p"
-	.string "{PLAYER}{KUN}ね！\n"
-	.string "とっても　いい　なまえだね！\l"
-	.string "{PLAYER}{KUN}　きのみのこと　しりたい？$"
-
-Text_1C0A4E:: @ 81C0A4E
-	.string "きのみはね　くろい　ふかふかの　つちの\n"
-	.string "ところで　たまに　とれるの\l"
-	.string "でね‥‥\p"
-	.string "とったら　その1つを　また　うめるの！\p"
-	.string "そうすると　その　きのみ　から\n"
-	.string "めがでて　みきが　できて　はながさいて\l"
-	.string "また　きのみ　が　できるの\p"
-	.string "そうやって　はなを　ふやして\n"
-	.string "せかいじゅうを　はなに　するのが\l"
-	.string "わたしの　ゆめ　なんだ！\p"
-	.string "だから　{PLAYER}{KUN}も　きのみを　うめて\n"
-	.string "せかいに　はなを　ふやしてね！$"
-
-Text_1C0B0B:: @ 81C0B0B
-	.string "おはなって　とっても　しあわせな　きぶんに\n"
-	.string "してくれるよね$"
-
-Text_1C0B29:: @ 81C0B29
-	.string "こんにちは！\p"
-	.string "おはなは　せわを　すれば　するほど\n"
-	.string "たくさん　きれいに　さいて　くれるの\p"
-	.string "あなたも　せわを　したく　なった　でしょ？\n"
-	.string "これ　あげるわ$"
-
-Text_1C0B73:: @ 81C0B73
-	.string "きのみが　そだつ　たびに\n"
-	.string "じょうろで　みずを　あげてね！\p"
-	.string "あとね\p"
-	.string "きのみは　ずっと　ずっと　ほうっておくと\n"
-	.string "じめんに　おちてしまうの\l"
-	.string "でもね　そこから　また　めがでて　くるの！\p"
-	.string "すごいよね！\n"
-	.string "いきものの　ちからを　かんじるよね$"
-
-Text_1C0BE5:: @ 81C0BE5
-	.string "おねーちゃんたちを　みならって\n"
-	.string "がんばって　おはなを　そだててるの\p"
-	.string "はい！　これあげる！$"
-
-Text_1C0C12:: @ 81C0C12
-	.string "きのみは　うめて　おおきく　したり\n"
-	.string "ポケモンに　もたせたり　できるの\p"
-	.string "でも　さいきん　きのみを　いくつか　まぜると\n"
-	.string "ポケモンの　おかしになる　きかいが\l"
-	.string "ある　らしいんだ\p"
-	.string "あたしも　おかし　ほしー$"
-
-Text_1C0C74:: @ 81C0C74
-	.string "{STR_VAR_1}　なまえ　なんていうの？\p"
-	.string "‥‥‥　‥‥‥　‥‥‥\n"
-	.string "へー　いいねー\p"
-	.string "わたしは　キリ　っていう　なまえなの\p"
-	.string "パパと　ママが　すくすくと　そだって\n"
-	.string "こころの　あたたかい　おんなのこに　なって\l"
-	.string "ほしいっていう　ねがいを　こめたんだって！\p"
-	.string "{STR_VAR_1}にも　これ　あげる$"
-
-Text_1C0CF5:: @ 81C0CF5
-	.string "あと　{STR_VAR_1}には　キリの　だいすきな\n"
-	.string "この　きのみも　あげちゃう！$"
-
-Text_1C0D16:: @ 81C0D16
-	.string "{STR_VAR_1}の　なまえには\n"
-	.string "どんな　ねがいが　こめられてるの？$"
-
-Text_1C0D32:: @ 81C0D32
-	.string "はる　なつ　あき　ふゆ\n"
-	.string "はるに　うまれると　はるが　すきで\l"
-	.string "なつに　うまれると　なつが　すきなのかな？$"
-
-Text_1C0D66:: @ 81C0D66
-	.string "じゃあ　キリは　あきに　うまれたから\n"
-	.string "あきが　だいすき！\p"
-	.string "{STR_VAR_1}は　いつが　すき？$"
-
-Text_1C0D8F:: @ 81C0D8F
-	.string "そっか‥\n"
-	.string "かんけいないのか‥\p"
-	.string "しりたいことって　たくさんあるなー$"
-
-gUnknown_81C0DB0:: @ 81C0DB0
-	.string "It's crammed full of POKéMON\n"
-	.string "books.$"
-
-Text_1C0DD4:: @ 81C0DD4
-	.string "ほんだなに　ならんでいるのは\n"
-	.string "ポケモンの　ほん　ばかりだ$"
-
-Text_ATownMap:: @ 81C0DF1
-	.string "A TOWN MAP.$"
-
-gUnknown_81C0DFD:: @ 81C0DFD
-	.string "Wow!\n"
-	.string "Tons of POKéMON stuff!$"
-
-Text_DishesPlatesNeatlyLinedUp:: @ 81C0E19
-	.string "Dishes and plates are neatly\n"
-	.string "lined up.$"
-
-gUnknown_81C0E40:: @ 81C0E40
-	.string "It smells delicious!\n"
-	.string "Somebody's been cooking here.$"
-
-gUnknown_81C0E73:: @ 81C0E73
-	.string "It's a nicely made dresser.\n"
-	.string "It will hold a lot of stuff.$"
-
-gUnknown_81C0EAC:: @ 81C0EAC
-	.string "There's a pile of snacks here.$"
-
-gUnknown_81C0ECB:: @ 81C0ECB
-	.string "All your item needs fulfilled!\n"
-	.string "POKéMON MART$"
-
-gUnknown_81C0EF7:: @ 81C0EF7
-	.string "Heal Your POKéMON!\n"
-	.string "POKéMON CENTER$"
-
-gUnknown_81C0F19:: @ 81C0F19
-	.string "INDIGO PLATEAU\p"
-	.string "The ultimate goal of TRAINERS!\n"
-	.string "POKéMON LEAGUE HQ$"
-
-gUnknown_81C0F59:: @ 81C0F59
-	.string "INDIGO PLATEAU\p"
-	.string "The highest POKéMON authority!\n"
-	.string "POKéMON LEAGUE HQ$"
-
-gUnknown_81C0F99:: @ 81C0F99
-	.string "It should be packed with all kinds\n"
-	.string "of delicious things to eat.$"
-
-gUnknown_81C0FD8:: @ 81C0FD8
-	.string "It's a blueprint of some sort.\n"
-	.string "It's filled with diagrams and text.$"
-
-gUnknown_81C101B:: @ 81C101B
-	.string "It's a pretty picture of a POKéMON.\n"
-	.string "It looks like it's feeling good.$"
-
-gUnknown_81C1060:: @ 81C1060
-	.string "What could this machine be?\n"
-	.string "Better not mess around with it!$"
-
-gUnknown_81C109C:: @ 81C109C
-	.string "It's a telephone.\n"
-	.string "Better not use it.$"
-
-gUnknown_81C10C1:: @ 81C10C1
-	.string "It's all complicated words and\n"
-	.string "numbers that make no sense…$"
-
-gUnknown_81C10FC:: @ 81C10FC
-	.string "It's an advertising poster about\n"
-	.string "all kinds of products.$"
-
-gUnknown_81C1134:: @ 81C1134
-	.string "Oh, that smells tasty!\n"
-	.string "It might get the stomach growling!$"
-
-gUnknown_81C116E:: @ 81C116E
-	.string "Inside this…\n"
-	.string "……\p"
-	.string "There's nothing here!$"
-
-gUnknown_81C1194:: @ 81C1194
-	.string "It's a cup with a POKéMON mark\n"
-	.string "on it.$"
-
-gUnknown_81C11BA:: @ 81C11BA
-	.string "The window is very well polished.$"
-
-gUnknown_81C11DC:: @ 81C11DC
-	.string "Outside the window…\p"
-	.string "The sky looks fantastically\n"
-	.string "beautiful.$"
-
-gUnknown_81C1217:: @ 81C1217
-	.string "Lights in different colors are\n"
-	.string "flashing on and off.$"
-
-gUnknown_81C124B:: @ 81C124B
-	.string "All sorts of tools are lined up\n"
-	.string "neatly.$"
-
-gUnknown_81C1273:: @ 81C1273
-	.string "It's a machine of some sort.\n"
-	.string "It sure is impressive.$"
-
-gUnknown_81C12A7:: @ 81C12A7
-	.string "It's the latest video game!\n"
-	.string "It sure looks fun!$"
-
-gUnknown_81C12D6:: @ 81C12D6
-	.string "There are obvious signs of burglary\n"
-	.string "here…$"
-
-gUnknown_81C1300:: @ 81C1300
-	.string "There's a POKéMON on TV!\n"
-	.string "It looks like it's having fun.$"
-
+	.include "data/scripts/safari_zone.inc"
+	.include "data/text/safari_zone.inc"
+	.include "data/text/competitive_brothers.inc"
+	.include "data/text/eon_ticket.inc"
+	.include "data/text/berries.inc"
+	.include "data/text/flavor_text.inc"
 	.include "data/scripts/hole.inc"
 	.include "data/text/trainers.inc"
 	.include "data/scripts/move_tutors.inc"

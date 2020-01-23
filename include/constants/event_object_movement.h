@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H
 #define GUARD_CONSTANTS_EVENT_OBJECT_MOVEMENT_H
 
+// FIXME: Different in FRLG
 #define MOVEMENT_TYPE_NONE                             0x0
 #define MOVEMENT_TYPE_LOOK_AROUND                      0x1
 #define MOVEMENT_TYPE_WANDER_AROUND                    0x2
@@ -239,8 +240,10 @@
 #define MOVEMENT_ACTION_STOP_LEVITATE                   0x99
 #define MOVEMENT_ACTION_DESTROY_EXTRA_TASK_IF_AT_TOP    0x9A
 #define MOVEMENT_ACTION_FIGURE_8                        0x9B
-#define MOVEMENT_ACTION_FLY_UP                          0x9C
-#define MOVEMENT_ACTION_FLY_DOWN                        0x9D
+
+// These two are verified correct in FRLG
+#define MOVEMENT_ACTION_FLY_UP                          0xA4
+#define MOVEMENT_ACTION_FLY_DOWN                        0xA5
 
 #define MOVEMENT_ACTION_STEP_END 0xFE
 

@@ -2,6 +2,7 @@
 #define GUARD_CEREADER_TOOL_H
 
 #include "global.h"
+#include "constants/trainer_tower.h"
 
 struct TrainerTowerTrainer
 {
@@ -21,13 +22,13 @@ struct TrainerTowerFloor
     /* 0x001 */ u8 floorIdx;
     /* 0x002 */ u8 challengeType;
     /* 0x003 */ u8 prize;
-    /* 0x004 */ struct TrainerTowerTrainer trainers[3];
+    /* 0x004 */ struct TrainerTowerTrainer trainers[MAX_TRAINERS_PER_FLOOR];
     /* 0x3DC */ u32 checksum;
 };
 
 struct EReaderTrainerHillSetSubstruct
 {
-    u8 count;
+    u8 numFloors;
     u8 id;
     u16 dummy;
     u32 checksum;
@@ -35,11 +36,11 @@ struct EReaderTrainerHillSetSubstruct
 
 struct EReaderTrainerHillSet
 {
-    u8 count;
+    u8 numFloors;
     u8 id;
     u16 dummy;
     u32 checksum;
-    struct TrainerTowerFloor floors[8];
+    struct TrainerTowerFloor floors[MAX_TRAINER_TOWER_FLOORS];
 };
 
 bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata);

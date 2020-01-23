@@ -529,9 +529,9 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
     },
 };
 
-bool32 sub_815D834(void)
+bool32 ReadTrainerHillAndValidate(void)
 {
-    // Stubbed out?
+    // Stubbed out. Populated in Emerald
     return FALSE;
 }
 

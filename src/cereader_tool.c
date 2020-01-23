@@ -6,14 +6,14 @@
 
 u8 sub_815D654(void)
 {
-    return (gSaveBlock1Ptr->unkArray[0].unk9 + 1) % 256;
+    return (gSaveBlock1Ptr->trainerTower[0].unk9 + 1) % 256;
 }
 
 static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerFloor * floor)
 {
-    if (floor->floorIdx < 1 || floor->floorIdx > 8)
+    if (floor->floorIdx < 1 || floor->floorIdx > MAX_TRAINER_TOWER_FLOORS)
         return FALSE;
-    if (floor->challengeType > 2)
+    if (floor->challengeType > CHALLENGE_TYPE_KNOCKOUT)
         return FALSE;
     if (CalcByteArraySum((const u8 *)floor, offsetof(typeof(*floor), checksum)) != floor->checksum)
         return FALSE;
@@ -22,16 +22,16 @@ static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerFloor * floor)
 
 bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata)
 {
-    u32 count = ttdata->count;
+    u32 numFloors = ttdata->numFloors;
     s32 i;
-    if (count < 1 || count > 8)
+    if (numFloors < 1 || numFloors > MAX_TRAINER_TOWER_FLOORS)
         return FALSE;
-    for (i = 0; i < count; i++)
+    for (i = 0; i < numFloors; i++)
     {
         if (!ValidateTrainerTowerTrainer(&ttdata->floors[i]))
             return FALSE;
     }
-    if (CalcByteArraySum((const u8 *)ttdata->floors, count * sizeof(ttdata->floors[0])) != ttdata->checksum)
+    if (CalcByteArraySum((const u8 *)ttdata->floors, numFloors * sizeof(ttdata->floors[0])) != ttdata->checksum)
         return FALSE;
     return TRUE;
 }

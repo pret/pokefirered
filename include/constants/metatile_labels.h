@@ -40,4 +40,8 @@
 // gTileset_82D504C. Below metatile probably needs generic name
 #define METATILE_MtEmber_CaveEntrance  0x346
 
+// Trainer Tower
+#define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287
+#define METATILE_TrainerTower_CounterBarrier         0x2B4
+
 #endif // GUARD_METATILE_LABELS_H

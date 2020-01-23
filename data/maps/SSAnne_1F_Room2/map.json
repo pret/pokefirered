@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SSAnne_1F_Room2_EventScript_160BEF",
+      "script": "SSAnne_1F_Room2_EventScript_Ann",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_1F_Room2_EventScript_160C06",
+      "script": "SSAnne_1F_Room2_EventScript_Tyler",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SSAnne_1F_Room2_EventScript_160BE6",
+      "script": "SSAnne_1F_Room2_EventScript_Woman",
       "flag": "0"
     },
     {

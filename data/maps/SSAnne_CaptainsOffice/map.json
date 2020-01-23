@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_CaptainsOffice_EventScript_160B3A",
+      "script": "SSAnne_CaptainsOffice_EventScript_Captain",
       "flag": "0"
     }
   ],
@@ -43,21 +43,21 @@
       "x": 2,
       "y": 4,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice_EventScript_160BD2"
+      "script": "SSAnne_CaptainsOffice_EventScript_Book"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 3,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice_EventScript_160BC9"
+      "script": "SSAnne_CaptainsOffice_EventScript_TrashCan"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 3,
       "elevation": 0,
-      "script": "SSAnne_CaptainsOffice_EventScript_160BD2"
+      "script": "SSAnne_CaptainsOffice_EventScript_Book"
     }
   ]
 }

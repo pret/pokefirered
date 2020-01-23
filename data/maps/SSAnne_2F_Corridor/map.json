@@ -36,7 +36,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_2F_Corridor_EventScript_160A54",
+      "script": "SSAnne_2F_Corridor_EventScript_Sailor",
       "flag": "0"
     }
   ],
@@ -113,7 +113,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
       "var_value": 0,
-      "script": "SSAnne_2F_Corridor_EventScript_1608DF"
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerLeft"
     },
     {
       "type": "trigger",
@@ -122,7 +122,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
       "var_value": 0,
-      "script": "SSAnne_2F_Corridor_EventScript_1608EB"
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerMid"
     },
     {
       "type": "trigger",
@@ -131,7 +131,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
       "var_value": 0,
-      "script": "SSAnne_2F_Corridor_EventScript_1608F7"
+      "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerRight"
     }
   ],
   "bg_events": []

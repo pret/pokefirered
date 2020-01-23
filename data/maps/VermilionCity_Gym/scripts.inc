@@ -1,6 +1,6 @@
 .equ FOUND_FIRST_SWITCH, FLAG_TEMP_1
 .equ SWITCH1_ID,         VAR_0x8004
-.equ SWITCH2_ID,		 VAR_0x8005
+.equ SWITCH2_ID,         VAR_0x8005
 .equ TRASH_CAN_ID,       VAR_0x8008
 
 VermilionCity_Gym_MapScripts:: @ 816B69E

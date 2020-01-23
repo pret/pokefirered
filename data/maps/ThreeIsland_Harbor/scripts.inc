@@ -7,5 +7,5 @@ ThreeIsland_Harbor_EventScript_171EAA:: @ 8171EAA
 	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_THREE_ISLAND
-	goto EventScript_1A900F
+	goto EventScript_ChooseDestFromIsland
 	end

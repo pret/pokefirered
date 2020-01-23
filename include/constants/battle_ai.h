@@ -23,7 +23,7 @@
 #define AI_EFFECTIVENESS_x0     0
 
 // ai weather
-#define AI_WEATHER_SUNNY     0
+#define AI_WEATHER_SUN       0
 #define AI_WEATHER_RAIN      1
 #define AI_WEATHER_SANDSTORM 2
 #define AI_WEATHER_HAIL      3
@@ -35,8 +35,8 @@
 
 // script's table id to bit
 #define AI_SCRIPT_CHECK_BAD_MOVE (1 << 0)
-#define AI_SCRIPT_TRY_TO_FAINT (1 << 1)
-#define AI_SCRIPT_CHECK_VIABILITY (1 << 2)
+#define AI_SCRIPT_CHECK_VIABILITY (1 << 1)
+#define AI_SCRIPT_TRY_TO_FAINT (1 << 2)
 #define AI_SCRIPT_SETUP_FIRST_TURN (1 << 3)
 #define AI_SCRIPT_RISKY (1 << 4)
 #define AI_SCRIPT_PREFER_STRONGEST_MOVE (1 << 5)

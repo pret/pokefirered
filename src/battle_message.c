@@ -1516,7 +1516,7 @@ void BufferStringBattle(u16 stringId)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_GHOST)
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+                if (gBattleTypeFlags & BATTLE_TYPE_GHOST_UNVEILED)
                     stringPtr = gUnknown_83FD30D;
                 else
                     stringPtr = gUnknown_83FD2D9;

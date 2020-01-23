@@ -301,7 +301,7 @@ void BattleSetup_StartScriptedWildBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_PALACE;
+    gBattleTypeFlags = BATTLE_TYPE_WILD_SCRIPTED;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -313,7 +313,7 @@ void ScrSpecial_StartMarowakBattle(void)
     gMain.savedCallback = CB2_EndMarowakBattle;
     if (CheckBagHasItem(ITEM_SILPH_SCOPE, 1))
     {
-        gBattleTypeFlags = BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY;
+        gBattleTypeFlags = BATTLE_TYPE_GHOST | BATTLE_TYPE_GHOST_UNVEILED;
         CreateMonWithGenderNatureLetter(gEnemyParty, SPECIES_MAROWAK, 30, 31, MON_FEMALE, NATURE_SERIOUS, 0);
     }
     else
@@ -342,7 +342,7 @@ void Special_StartLegendaryBattle(void)
     
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_ARENA;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_LEGENDARY_FRLG;
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)
     {

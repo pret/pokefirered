@@ -7352,7 +7352,7 @@ static void atk95_setsandstorm(void)
 
 static void atk96_weatherdamage(void)
 {
-    if (((gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_GHOST)) == BATTLE_TYPE_GHOST)
+    if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
      && (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT))
     {
         gBattleMoveDamage = 0;

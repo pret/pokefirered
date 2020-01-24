@@ -37,8 +37,8 @@
 	.endm
 
 	@ TRUE if the trainers on this floor were already beaten, FALSE otherwise
-	.macro ttower_isfloorbeaten
-	setvar VAR_0x8004, TRAINER_TOWER_FUNC_GET_FLOOR_BEATEN
+	.macro ttower_isfloorcleared
+	setvar VAR_0x8004, TRAINER_TOWER_FUNC_GET_FLOOR_CLEARED
 	special CallTrainerTowerFunc
 	.endm
 

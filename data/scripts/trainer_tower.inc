@@ -48,7 +48,7 @@ TrainerTower_EventScript_SetObjectsDoubles:: @ 81C4FC5
 	setflag HIDE_TRAINER_SINGLES
 	setflag HIDE_TRAINER_KNOCKOUT
 	setvar DISABLE_SINGLES_TRIGGER, TRUE
-	ttower_isfloorbeaten
+	ttower_isfloorcleared
 	compare VAR_RESULT, TRUE
 	goto_if_eq TrainerTower_EventScript_SetObjectsDoublesAlreadyBeaten
 	setobjectxyperm       LOCALID_TRAINER_DOUBLES1, 10, 12
@@ -84,7 +84,7 @@ TrainerTower_OnFrame:: @ 81C5046
 
 TrainerTower_EventScript_EnterFloor:: @ 81C5050
 	setvar VAR_TEMP_2, 1
-	ttower_isfloorbeaten
+	ttower_isfloorcleared
 	compare VAR_RESULT, FALSE
 	goto_if_eq TrainerTower_EventScript_EndEnterFloor
 	setvar DISABLE_SINGLES_TRIGGER, TRUE

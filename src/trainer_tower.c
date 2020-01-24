@@ -90,7 +90,7 @@ static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass);
 static void DoTrainerTowerBattle(void);
 static void TrainerTowerGetChallengeType(void);
 static void TrainerTowerAddFloorCleared(void);
-static void GetFloorAlreadyBeaten(void);
+static void GetFloorAlreadyCleared(void);
 static void StartTrainerTowerChallenge(void);
 static void GetOwnerState(void);
 static void GiveChallengePrize(void);
@@ -338,7 +338,7 @@ static void (*const sTrainerTowerFunctions[])(void) = {
     [TRAINER_TOWER_FUNC_DO_BATTLE]              = DoTrainerTowerBattle,
     [TRAINER_TOWER_FUNC_GET_CHALLENGE_TYPE]     = TrainerTowerGetChallengeType,
     [TRAINER_TOWER_FUNC_CLEARED_FLOOR]          = TrainerTowerAddFloorCleared,
-    [TRAINER_TOWER_FUNC_GET_FLOOR_BEATEN]       = GetFloorAlreadyBeaten,
+    [TRAINER_TOWER_FUNC_GET_FLOOR_CLEARED]      = GetFloorAlreadyCleared,
     [TRAINER_TOWER_FUNC_START_CHALLENGE]        = StartTrainerTowerChallenge,
     [TRAINER_TOWER_FUNC_GET_OWNER_STATE]        = GetOwnerState,
     [TRAINER_TOWER_FUNC_GIVE_PRIZE]             = GiveChallengePrize,
@@ -765,7 +765,7 @@ static void TrainerTowerAddFloorCleared(void)
 }
 
 // So the player can safely go back through defeated floors to use the Poke Center (or exit challenge)
-static void GetFloorAlreadyBeaten(void)
+static void GetFloorAlreadyCleared(void)
 {
     u16 mapLayoutId = gMapHeader.mapLayoutId;
     if (mapLayoutId - LAYOUT_TRAINER_TOWER_1F == TRAINER_TOWER.floorsCleared 

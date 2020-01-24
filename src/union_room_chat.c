@@ -11,6 +11,7 @@
 #include "save.h"
 #include "scanline_effect.h"
 #include "task.h"
+#include "data_8479668.h"
 #include "constants/songs.h"
 
 enum
@@ -76,12 +77,15 @@ bool32 sub_8129408(void);
 void sub_8129424(void);
 void sub_8129454(void);
 void sub_8129470(void);
+u8 *sub_81294C8(void);
+u8 *sub_81294EC(void);
 void sub_8129560(u8 *ptr);
 void sub_8129568(u8 *ptr);
 void sub_8129590(u8 *ptr);
 void sub_81295C0(u8 *ptr);
 void sub_81295EC(u8 *ptr);
 void sub_8129614(u8 *ptr);
+u8 *sub_8129758(void);
 void sub_81298F8(u8 taskId);
 void sub_8129B14(void);
 bool32 sub_8129B78(void);
@@ -102,6 +106,88 @@ static void (*const gUnknown_845A880[])(void) = {
     sub_8128C04,
     sub_8128CA8,
     sub_8128FB8
+};
+
+static const u8 sKeyboardPageMaxRow[] =
+{
+    [UNION_ROOM_KB_PAGE_UPPER] = 9,
+    [UNION_ROOM_KB_PAGE_LOWER] = 9,
+    [UNION_ROOM_KB_PAGE_EMOJI] = 9,
+    9
+};
+
+const u8 gUnknown_845A8AC[] = {
+    CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
+    0x1D, 0x1E, CHAR_SPACE, 0x20, 0x21, 0x22, 0x23, 0x24,
+    0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
+    CHAR_SPACE, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, CHAR_SPACE,
+    0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
+    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x35, 0x36, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x53, 0x54, 0x55, 0x56, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, 0x6F, 0x5B, 0x5C, 0x5D, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    0x03, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x5A,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x84, 0x85, 0x86, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
+    0xA0, CHAR_0, CHAR_1, CHAR_2, CHAR_3, CHAR_4, CHAR_5, CHAR_6,
+    CHAR_7, CHAR_8, CHAR_9, CHAR_EXCL_MARK, CHAR_QUESTION_MARK, CHAR_PERIOD, CHAR_HYPHEN, 0xAF,
+    CHAR_ELLIPSIS, CHAR_DBL_QUOT_LEFT, CHAR_DBL_QUOT_RIGHT, CHAR_SGL_QUOT_LEFT, CHAR_SGL_QUOT_RIGHT, CHAR_MALE, CHAR_FEMALE, CHAR_CURRENCY,
+    CHAR_COMMA, CHAR_MULT_SIGN, CHAR_SLASH, CHAR_a, CHAR_b, CHAR_c, CHAR_d, CHAR_e,
+    CHAR_f, CHAR_g, CHAR_h, CHAR_i, CHAR_j, CHAR_k, CHAR_l, CHAR_m,
+    CHAR_n, CHAR_o, CHAR_p, CHAR_q, CHAR_r, CHAR_s, CHAR_t, CHAR_u,
+    CHAR_v, CHAR_w, CHAR_x, CHAR_y, CHAR_z, CHAR_A, CHAR_B, CHAR_C,
+    CHAR_D, CHAR_E, CHAR_F, CHAR_G, CHAR_H, CHAR_I, CHAR_J, CHAR_K,
+    CHAR_L, CHAR_M, CHAR_N, CHAR_O, CHAR_P, CHAR_Q, CHAR_R, CHAR_S,
+    CHAR_T, CHAR_U, CHAR_V, CHAR_W, CHAR_X, CHAR_Y, CHAR_Z, 0xEF,
+    CHAR_COLON, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, CHAR_SPACE,
+    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
+};
+
+const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = {
+    [UNION_ROOM_KB_PAGE_UPPER] = {
+        gText_UnionRoomChatKeyboard_ABCDE,
+        gText_UnionRoomChatKeyboard_FGHIJ,
+        gText_UnionRoomChatKeyboard_KLMNO,
+        gText_UnionRoomChatKeyboard_PQRST,
+        gText_UnionRoomChatKeyboard_UVWXY,
+        gText_UnionRoomChatKeyboard_Z,
+        gText_UnionRoomChatKeyboard_01234Upper,
+        gText_UnionRoomChatKeyboard_56789Upper,
+        gText_UnionRoomChatKeyboard_PunctuationUpper,
+        gText_UnionRoomChatKeyboard_SymbolsUpper
+    },
+    [UNION_ROOM_KB_PAGE_LOWER] = {
+        gText_UnionRoomChatKeyboard_abcde,
+        gText_UnionRoomChatKeyboard_fghij,
+        gText_UnionRoomChatKeyboard_klmno,
+        gText_UnionRoomChatKeyboard_pqrst,
+        gText_UnionRoomChatKeyboard_uvwxy,
+        gText_UnionRoomChatKeyboard_z,
+        gText_UnionRoomChatKeyboard_01234Lower,
+        gText_UnionRoomChatKeyboard_56789Lower,
+        gText_UnionRoomChatKeyboard_PunctuationLower,
+        gText_UnionRoomChatKeyboard_SymbolsLower
+    },
+    [UNION_ROOM_KB_PAGE_EMOJI] = {
+        gText_UnionRoomChatKeyboard_Emoji1,
+        gText_UnionRoomChatKeyboard_Emoji2,
+        gText_UnionRoomChatKeyboard_Emoji3,
+        gText_UnionRoomChatKeyboard_Emoji4,
+        gText_UnionRoomChatKeyboard_Emoji5,
+        gText_UnionRoomChatKeyboard_Emoji6,
+        gText_UnionRoomChatKeyboard_Emoji7,
+        gText_UnionRoomChatKeyboard_Emoji8,
+        gText_UnionRoomChatKeyboard_Emoji9,
+        gText_UnionRoomChatKeyboard_Emoji10
+    }
 };
 
 void sub_8128420(void)
@@ -800,4 +886,229 @@ void sub_8128FB8(void)
         }
         break;
     }
+}
+
+void sub_8129218(u16 arg0)
+{
+    gUnknown_203B0E0->unk4 = arg0;
+    gUnknown_203B0E0->unk6 = 0;
+}
+
+bool32 sub_8129228(void)
+{
+    if (!(gMain.newAndRepeatedKeys & DPAD_UP))
+    {
+        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        {
+            if (gUnknown_203B0E0->currentRow < sKeyboardPageMaxRow[gUnknown_203B0E0->currentPage])
+                gUnknown_203B0E0->currentRow++;
+            else
+                gUnknown_203B0E0->currentRow = 0;
+
+            return TRUE;
+        }
+
+        if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+        {
+            if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+            {
+                if (gUnknown_203B0E0->unk11)
+                    gUnknown_203B0E0->unk11--;
+                else
+                    gUnknown_203B0E0->unk11 = 4;
+            }
+            else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+            {
+                if (gUnknown_203B0E0->unk11 > 3)
+                    gUnknown_203B0E0->unk11 = 0;
+                else
+                    gUnknown_203B0E0->unk11++;
+            }
+            else
+            {
+                return FALSE;
+            }
+
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+    else
+    {
+        if (gUnknown_203B0E0->currentRow)
+            gUnknown_203B0E0->currentRow--;
+        else
+            gUnknown_203B0E0->currentRow = sKeyboardPageMaxRow[gUnknown_203B0E0->currentPage];
+
+        return TRUE;
+    }
+}
+
+void sub_81292D8(void)
+{
+    int i;
+    const u8 *charsStr;
+    int strLength;
+    u8 *str;
+    u8 buffer[21];
+
+    if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+    {
+        charsStr = sUnionRoomKeyboardText[gUnknown_203B0E0->currentPage][gUnknown_203B0E0->currentRow];
+        for (i = 0; i < gUnknown_203B0E0->unk11; i++)
+        {
+            if (*charsStr == CHAR_EXTRA_EMOJI)
+                charsStr++;
+            charsStr++;
+        }
+
+        strLength = 1;
+    }
+    else
+    {
+        u8 *tempStr = StringCopy(buffer, gUnknown_203B0E0->unkB9[gUnknown_203B0E0->currentRow]);
+        tempStr[0] = CHAR_SPACE;
+        tempStr[1] = EOS;
+        charsStr = buffer;
+        strLength = StringLength_Multibyte(buffer);
+    }
+
+    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15;
+    if (!charsStr)
+        return;
+
+    str = sub_81294C8();
+    while (--strLength != -1 && gUnknown_203B0E0->unk15 < 15)
+    {
+        if (*charsStr == CHAR_EXTRA_EMOJI)
+        {
+            *str = *charsStr;
+            charsStr++;
+            str++;
+        }
+
+        *str = *charsStr;
+        charsStr++;
+        str++;
+
+        gUnknown_203B0E0->unk15++;
+    }
+
+    *str = EOS;
+}
+
+void sub_81293AC(void)
+{
+    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15;
+    if (gUnknown_203B0E0->unk15)
+    {
+        u8 *str = sub_81294EC();
+        *str = EOS;
+        gUnknown_203B0E0->unk15--;
+    }
+}
+
+void sub_81293D8(void)
+{
+    u8 *str;
+    u8 character;
+
+    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15 - 1;
+    str = sub_81294EC();
+    if (*str != CHAR_EXTRA_EMOJI)
+    {
+        character = gUnknown_845A8AC[*str];
+        if (character)
+            *str = character;
+    }
+}
+
+bool32 sub_8129408(void)
+{
+    if (gUnknown_203B0E0->unk15)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_8129424(void)
+{
+    u8 *src = sub_8129758();
+    StringCopy(gUnknown_203B0E0->unkB9[gUnknown_203B0E0->currentRow], src);
+    gUnknown_203B0E0->unk18 = 1;
+}
+
+void sub_8129454(void)
+{
+    gUnknown_203B0E0->unk1A[0] = EOS;
+    gUnknown_203B0E0->unk14 = 15;
+    gUnknown_203B0E0->unk15 = 0;
+}
+
+void sub_8129470(void)
+{
+    int i;
+    for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
+        StringCopy(gSaveBlock1Ptr->unk3AD4[i], gUnknown_203B0E0->unkB9[i]);
+}
+
+u8 *sub_81294B0(int arg0)
+{
+    return gUnknown_203B0E0->unkB9[arg0];
+}
+
+// GetEndOfUnk1A
+u8 *sub_81294C8(void)
+{
+    u8 *str = gUnknown_203B0E0->unk1A;
+    while (*str != EOS)
+        str++;
+
+    return str;
+}
+
+// GetPtrToLastCharOfUnk1A
+u8 *sub_81294EC(void)
+{
+    u8 *str = gUnknown_203B0E0->unk1A;
+    u8 *str2 = str;
+    while (*str != EOS)
+    {
+        str2 = str;
+        if (*str == CHAR_EXTRA_EMOJI)
+            str++;
+        str++;
+    }
+
+    return str2;
+}
+
+u16 sub_812951C(void)
+{
+    u8 *str;
+    u32 i, numChars, strLength;
+
+    strLength = StringLength_Multibyte(gUnknown_203B0E0->unk1A);
+    str = gUnknown_203B0E0->unk1A;
+    numChars = 0;
+    if (strLength > 10)
+    {
+        strLength -= 10;
+        for (i = 0; i < strLength; i++)
+        {
+            if (*str == CHAR_EXTRA_EMOJI)
+                str++;
+
+            str++;
+            numChars++;
+        }
+    }
+
+    return numChars;
+}
+
+void sub_8129560(u8 *arg0)
+{
+    arg0[0] = CHAR_SPACE;
 }

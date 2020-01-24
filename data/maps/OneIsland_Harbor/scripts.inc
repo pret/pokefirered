@@ -38,5 +38,5 @@ OneIsland_Harbor_EventScript_1713BD:: @ 81713BD
 	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_ONE_ISLAND
-	goto EventScript_1A8EC5
+	goto EventScript_ChooseDestFromOneIsland
 	end

@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_16B433",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_16B43C",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_Man",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_16B445",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_Hiker",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_16B44E",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_1A8D08",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_1ACE83",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge",
       "flag": "FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonCenter_1F_EventScript_1ACE83",
+      "script": "VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge",
       "flag": "FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL"
     }
   ],

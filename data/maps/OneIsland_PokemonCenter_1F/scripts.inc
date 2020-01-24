@@ -503,7 +503,7 @@ EventScript_1711DA:: @ 81711DA
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 3
 	setvar VAR_0x8004, SEAGALLOP_ONE_ISLAND
 	setvar VAR_0x8006, SEAGALLOP_CINNABAR_ISLAND
-	goto EventScript_1A90DA
+	goto EventScript_SetSail
 	end
 
 EventScript_1712E4:: @ 81712E4

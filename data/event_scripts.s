@@ -689,6 +689,7 @@ gStdScriptsEnd::
 	.include "data/maps/VermilionCity_House1/text.inc"
 	.include "data/maps/VermilionCity_PokemonCenter_1F/text.inc"
 	.include "data/maps/VermilionCity_PokemonFanClub/text.inc"
+	.include "data/maps/VermilionCity_House2/text.inc"
 	.include "data/maps/VermilionCity_Mart/text.inc"
 	.include "data/maps/VermilionCity_Gym/text.inc"
 	.include "data/maps/VermilionCity_House3/text.inc"
@@ -1076,13 +1077,7 @@ Text_FoundTMHMContainsMove:: @ 81A63E8
 	.string "{PLAYER} found a {STR_VAR_2}!\n"
 	.string "It contains {STR_VAR_1}.$"
 
-Text_1A6407:: @ 81A6407
-	.string "おつかれさん！\n"
-	.string "どこに　いきたいんだ？$"
-
-Text_1A641B:: @ 81A641B
-	.string "All right!\n"
-	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"
+	.include "data/text/seagallop.inc"
 
 @ Call for legendary bird trio
 Text_Gyaoo:: @ 81A6448
@@ -1525,21 +1520,21 @@ Common_EventScript_DirectCornerAttendant:: @ 81A8D02
 	call CableClub_EventScript_DirectCornerAttendant
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
+VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman:: @ 81A8D08
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_VS_SEEKER, EventScript_1A8D3F
-	msgbox Text_194234
+	goto_if_set FLAG_GOT_VS_SEEKER, VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker
+	msgbox VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
-	msgbox Text_19430F
+	msgbox VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches
 	release
 	end
 
-EventScript_1A8D3F:: @ 81A8D3F
-	msgbox Text_194381
+VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker:: @ 81A8D3F
+	msgbox VermilionCity_PokemonCenter_1F_Text_ExplainVSSeeker
 	release
 	end
 

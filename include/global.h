@@ -697,12 +697,12 @@ struct TrainerTower
     u32 bestTime;
     u8 floorsCleared;
     u8 unk9;
-    u8 receivedPrize:1;
-    u8 checkedFinalTime:1;
-    u8 spokeToOwner:1;
-    u8 hasLost:1;
-    u8 unkA_4:1;
-    u8 validated:1;
+    bool8 receivedPrize:1;
+    bool8 checkedFinalTime:1;
+    bool8 spokeToOwner:1;
+    bool8 hasLost:1;
+    bool8 unkA_4:1;
+    bool8 validated:1;
 };
 
 struct TrainerRematchState

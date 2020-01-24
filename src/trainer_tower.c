@@ -492,7 +492,7 @@ void InitTrainerTowerBattleStruct(void)
 
 void FreeTrainerTowerBattleStruct(void)
 {
-    FREE_AND_SET_NULL(sTrainerTowerOpponent)
+    FREE_AND_SET_NULL(sTrainerTowerOpponent);
 }
 
 void GetTrainerTowerOpponentWinText(u8 *dest, u8 opponentIdx)
@@ -551,7 +551,7 @@ static void SetUpTrainerTowerDataStruct(void) // fakematching
 
 static void FreeTrainerTowerDataStruct(void)
 {
-    FREE_AND_SET_NULL(sTrainerTowerState)
+    FREE_AND_SET_NULL(sTrainerTowerState);
 }
 
 static void InitTrainerTowerFloor(void)

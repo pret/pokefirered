@@ -7,32 +7,32 @@ CinnabarIsland_PokemonCenter_1F_OnTransition:: @ 816E8E2
 	setrespawn SPAWN_CINNABAR_ISLAND
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_16E8E6:: @ 816E8E6
+CinnabarIsland_PokemonCenter_1F_EventScript_Nurse:: @ 816E8E6
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_16E8EF:: @ 816E8EF
-	msgbox gUnknown_819A5BE, MSGBOX_NPC
+CinnabarIsland_PokemonCenter_1F_EventScript_Gentleman:: @ 816E8EF
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom, MSGBOX_NPC
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_16E8F8:: @ 816E8F8
-	msgbox gUnknown_819A4F8, MSGBOX_NPC
+CinnabarIsland_PokemonCenter_1F_EventScript_CooltrainerF:: @ 816E8F8
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_CinnabarGymLocked, MSGBOX_NPC
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_16E901:: @ 816E901
-	msgbox gUnknown_819A6B1, MSGBOX_NPC
+CinnabarIsland_PokemonCenter_1F_EventScript_Youngster:: @ 816E901
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves, MSGBOX_NPC
 	end
 
-CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
+CinnabarIsland_PokemonCenter_1F_EventScript_Bill:: @ 816E90A
 	lock
 	faceplayer
-	msgbox gUnknown_819A725, MSGBOX_YESNO
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16E9A5
-	msgbox gUnknown_819A785
+	goto_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_LetsGo
 	closemessage
 	playbgm MUS_ANNAI, 1
 	savebgm MUS_ANNAI
@@ -40,11 +40,11 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	delay 20
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq EventScript_16E96F
+	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth
 	compare VAR_FACING, DIR_EAST
-	call_if_eq EventScript_16E981
+	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast
 	compare VAR_FACING, DIR_WEST
-	call_if_eq EventScript_16E993
+	call_if_eq CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest
 	removeobject 7
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
@@ -53,30 +53,30 @@ CinnabarIsland_PokemonCenter_1F_EventScript_16E90A:: @ 816E90A
 	release
 	end
 
-EventScript_16E96F:: @ 816E96F
-	applymovement 7, Movement_16E9AF
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9B9
+CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth:: @ 816E96F
+	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth
 	waitmovement 0
 	return
 
-EventScript_16E981:: @ 816E981
-	applymovement 7, Movement_16E9C3
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9CF
+CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast:: @ 816E981
+	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast
 	waitmovement 0
 	return
 
-EventScript_16E993:: @ 816E993
-	applymovement 7, Movement_16E9AF
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_16E9DE
+CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest:: @ 816E993
+	applymovement 7, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest
 	waitmovement 0
 	return
 
-EventScript_16E9A5:: @ 816E9A5
-	msgbox gUnknown_819A766
+CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail:: @ 816E9A5
+	msgbox CinnabarIsland_PokemonCenter_1F_Text_OhNotDoneYet
 	release
 	end
 
-Movement_16E9AF:: @ 816E9AF
+CinnabarIsland_PokemonCenter_1F_Movement_BillExit:: @ 816E9AF
 	walk_left
 	walk_left
 	walk_left
@@ -88,7 +88,7 @@ Movement_16E9AF:: @ 816E9AF
 	set_invisible
 	step_end
 
-Movement_16E9B9:: @ 816E9B9
+CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth:: @ 816E9B9
 	walk_down
 	walk_left
 	walk_left
@@ -100,7 +100,7 @@ Movement_16E9B9:: @ 816E9B9
 	walk_down
 	step_end
 
-Movement_16E9C3:: @ 816E9C3
+CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast:: @ 816E9C3
 	walk_up
 	walk_left
 	walk_left
@@ -114,7 +114,7 @@ Movement_16E9C3:: @ 816E9C3
 	set_invisible
 	step_end
 
-Movement_16E9CF:: @ 816E9CF
+CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast:: @ 816E9CF
 	delay_16
 	delay_16
 	delay_16
@@ -131,7 +131,7 @@ Movement_16E9CF:: @ 816E9CF
 	set_invisible
 	step_end
 
-Movement_16E9DE:: @ 816E9DE
+CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest:: @ 816E9DE
 	walk_left
 	walk_left
 	walk_left

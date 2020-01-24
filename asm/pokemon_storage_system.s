@@ -1619,7 +1619,7 @@ _0808C594: .4byte gUnknown_8418690
 _0808C598:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _0808C69C

@@ -154,8 +154,8 @@ _080689EC: .4byte gObjectEvents
 _080689F0: .4byte gPlayerAvatar
 	thumb_func_end FreezeObjectEventsExceptOne
 
-	thumb_func_start npc_sync_anim_pause_bits
-npc_sync_anim_pause_bits: @ 80689F4
+	thumb_func_start UnfreezeObjectEvent
+UnfreezeObjectEvent: @ 80689F4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r2, [r5]
@@ -207,7 +207,7 @@ _08068A4C:
 	.align 2, 0
 _08068A54: .4byte 0x00000101
 _08068A58: .4byte gSprites
-	thumb_func_end npc_sync_anim_pause_bits
+	thumb_func_end UnfreezeObjectEvent
 
 	thumb_func_start UnfreezeObjectEvents
 UnfreezeObjectEvents: @ 8068A5C
@@ -224,7 +224,7 @@ _08068A62:
 	cmp r0, 0
 	beq _08068A78
 	adds r0, r1, 0
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeObjectEvent
 _08068A78:
 	adds r0, r4, 0x1
 	lsls r0, 24

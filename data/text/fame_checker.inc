@@ -1477,7 +1477,7 @@ gUnknown_81B1B3D:: @ 81B1B3D
 	.string "Grand Champion is DAISY OAK of\l"
 	.string "PALLET TOWN!$"
 
-gUnknown_81B1BD1:: @ 81B1BD1
+PokemonJournal_Text_SpecialFeatureMrFuji:: @ 81B1BD1
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "MR. FUJI of POKéMON HOUSE!\p"

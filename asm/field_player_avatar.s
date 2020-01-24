@@ -2445,8 +2445,8 @@ _0805C560: .4byte gObjectEvents
 _0805C564: .4byte gPlayerAvatar
 	thumb_func_end PlayerGetDestCoords
 
-	thumb_func_start plaer_get_pos_including_state_based_drift
-plaer_get_pos_including_state_based_drift: @ 805C568
+	thumb_func_start player_get_pos_including_state_based_drift
+player_get_pos_including_state_based_drift: @ 805C568
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -2580,7 +2580,7 @@ _0805C6BC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end plaer_get_pos_including_state_based_drift
+	thumb_func_end player_get_pos_including_state_based_drift
 
 	thumb_func_start GetPlayerFacingDirection
 GetPlayerFacingDirection: @ 805C6C4

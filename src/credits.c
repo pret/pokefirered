@@ -920,7 +920,7 @@ static s32 RollCredits(void)
             case CREDITSSCRCMD_MON:
                 sCreditsMgr->mainseqno = CREDITSSCENE_MON_DESTROY_ASSETS;
                 sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                fade_screen(1, 0);
+                FadeScreen(1, 0);
                 break;
             case CREDITSSCRCMD_THEENDGFX:
                 sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_DESTROY_ASSETS;
@@ -1342,7 +1342,7 @@ static s32 RollCredits(void)
                 "\tstrb r0, [r2, 0x9]\n"
                 "\tmovs r0, 0x1\n"
                 "\tmovs r1, 0\n"
-                "\tbl fade_screen\n"
+                "\tbl FadeScreen\n"
                 "\tb _080F3E94\n"
                 "\t.align 2, 0\n"
                 "_080F3E50: .4byte sCreditsMgr\n"

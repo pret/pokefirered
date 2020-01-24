@@ -331,7 +331,7 @@ static void Task_DepositItem_WaitFadeAndGoToBag(u8 taskId)
 static void Task_PlayerPcDepositItem(u8 taskId)
 {
     gTasks[taskId].func = Task_DepositItem_WaitFadeAndGoToBag;
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void Task_ReturnToItemStorageSubmenu(u8 taskId)
@@ -394,7 +394,7 @@ static void Task_WithdrawItemBeginFade(u8 taskId)
 {
     gTasks[taskId].func = Task_WithdrawItem_WaitFadeAndGoToItemStorage;
     ItemPc_SetInitializedFlag(0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void Task_PlayerPcCancel(u8 taskId)
@@ -556,7 +556,7 @@ static void Task_MailSubmenuHandleInput(u8 taskId)
 
 static void Task_PlayerPcReadMail(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].func = Task_WaitFadeAndReadSelectedMail;
 }
 
@@ -663,7 +663,7 @@ static void Task_PlayerPcGiveMailToMon(u8 taskId)
     }
     else
     {
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].func = Task_WaitFadeAndGoToPartyMenu;
     }
 }

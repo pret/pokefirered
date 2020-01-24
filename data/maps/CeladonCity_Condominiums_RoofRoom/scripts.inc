@@ -15,7 +15,7 @@ CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16C4DA
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
+	goto_if_eq EventScript_NoMoreRoomForPokemon
 	release
 	end
 
@@ -26,10 +26,10 @@ EventScript_16C4A6:: @ 816C4A6
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C514
-	call EventScript_1A8C27
+	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto EventScript_16C514
 	end
@@ -41,15 +41,15 @@ EventScript_16C4DA:: @ 816C4DA
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16C509
-	call EventScript_1A8C33
+	call EventScript_NameReceivedBoxMon
 	goto EventScript_16C509
 	end
 
 EventScript_16C509:: @ 816C509
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_16C514
 	end
 

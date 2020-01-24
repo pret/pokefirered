@@ -1056,4 +1056,9 @@ extern const u8 gText_DepositHowManyStrVars1[];
 extern const u8 gText_DepositedStrVar2StrVar1s[];
 extern const u8 gText_NoRoomToStoreItems[];
 
+// union_room_battle
+extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
+extern const u8 gText_RefusedBattle[];
+extern const u8 gText_BattleWasRefused[];
+
 #endif //GUARD_STRINGS_H

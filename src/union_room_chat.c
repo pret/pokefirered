@@ -4,8 +4,11 @@
 #include "link.h"
 #include "link_rfu.h"
 #include "list_menu.h"
+#include "load_save.h"
 #include "menu.h"
+#include "overworld.h"
 #include "quest_log.h"
+#include "save.h"
 #include "scanline_effect.h"
 #include "task.h"
 #include "constants/songs.h"
@@ -58,25 +61,35 @@ void sub_8128640(void);
 void sub_81286C4(void);
 void sub_81287B4(void);
 void sub_81288D4(void);
-void sub_8128DA4(void);
-void sub_8128E78(void);
 void sub_8128AA0(void);
 void sub_8128C04(void);
 void sub_8128CA8(void);
+void sub_8128DA4(void);
+void sub_8128E78(void);
 void sub_8128FB8(void);
 void sub_8129218(u16 a0);
 bool32 sub_8129228(void);
 void sub_81292D8(void);
 void sub_81293AC(void);
 void sub_81293D8(void);
+bool32 sub_8129408(void);
+void sub_8129424(void);
+void sub_8129454(void);
+void sub_8129470(void);
 void sub_8129560(u8 *ptr);
 void sub_8129568(u8 *ptr);
+void sub_8129590(u8 *ptr);
+void sub_81295C0(u8 *ptr);
+void sub_81295EC(u8 *ptr);
+void sub_8129614(u8 *ptr);
 void sub_81298F8(u8 taskId);
 void sub_8129B14(void);
 bool32 sub_8129B78(void);
+void sub_8129B88(void);
 void sub_8129BFC(void);
 void sub_8129C34(u16 a0, u8 a1);
 u8 sub_8129C8C(u8 a0);
+s8 sub_812A568(void);
 
 static void (*const gUnknown_845A880[])(void) = {
     sub_8128640,
@@ -316,7 +329,7 @@ void sub_81287B4(void)
                 var0 = 0;
             break;
         case MENU_NOTHING_CHOSEN:
-            if (gMain.newKeys & SELECT_BUTTON)
+            if (JOY_NEW(SELECT_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 Menu_MoveCursor(1);
@@ -347,6 +360,444 @@ void sub_81287B4(void)
     case 4:
         if (!sub_8129C8C(0) && !sub_8129C8C(1))
             sub_8129218(1);
+        break;
+    }
+}
+
+void sub_81288D4(void)
+{
+    s8 input;
+
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        sub_8129C34(6, 0);
+        gUnknown_203B0E0->unk6 = 1;
+        break;
+    case 1:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6 = 2;
+        break;
+    case 2:
+        input = sub_812A568();
+        switch (input)
+        {
+        case -1:
+        case 1:
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 3;
+            break;
+        case 0:
+            if (gUnknown_203B0E0->unk13 == 0)
+            {
+                sub_8129614(gUnknown_203B0E0->unk190);
+                sub_8129C34(7, 0);
+                gUnknown_203B0E0->unk6 = 9;
+            }
+            else
+            {
+                sub_81295C0(gUnknown_203B0E0->unk190);
+                gUnknown_203B0E0->unk6 = 4;
+            }
+            break;
+        }
+        break;
+    case 3:
+        if (!sub_8129C8C(0))
+            sub_8129218(1);
+        break;
+    case 9:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(20, 0);
+            gUnknown_203B0E0->unk6 = 10;
+        }
+        break;
+    case 10:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6 = 8;
+        break;
+    case 8:
+        input = sub_812A568();
+        switch (input)
+        {
+        case -1:
+        case 1:
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 3;
+            break;
+        case 0:
+            sub_80FA4A8();
+            sub_8129614(gUnknown_203B0E0->unk190);
+            gUnknown_203B0E0->unk6 = 4;
+            break;
+        }
+        break;
+    case 4:
+        if (IsLinkTaskFinished() && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
+        {
+            if (!gUnknown_203B0E0->unk13)
+                gUnknown_203B0E0->unk6 = 6;
+            else
+                gUnknown_203B0E0->unk6 = 5;
+        }
+        break;
+    case 5:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            sub_8129218(9);
+        }
+        break;
+    }
+}
+
+void sub_8128AA0(void)
+{
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (!FuncIsActiveTask(sub_81298F8))
+        {
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 1:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(18, 0);
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 2:
+        if (!sub_8129C8C(0))
+        {
+            sub_81295EC(gUnknown_203B0E0->unk190);
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 3:
+        if (IsLinkTaskFinished() && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 4:
+        if ((GetBlockReceivedStatus() & 1) && !sub_80FBA1C())
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 5:
+        if (IsLinkTaskFinished() && !sub_80FBA1C())
+        {
+            sub_800AAC0();
+            gUnknown_203B0E0->unkA = 0;
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 6:
+        if (gUnknown_203B0E0->unkA < 150)
+            gUnknown_203B0E0->unkA++;
+
+        if (!gReceivedRemoteLinkPlayers)
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 7:
+        if (gUnknown_203B0E0->unkA >= 150)
+            sub_8129218(9);
+        else
+            gUnknown_203B0E0->unkA++;
+        break;
+    }
+}
+
+void sub_8128C04(void)
+{
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (!FuncIsActiveTask(sub_81298F8))
+        {
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 1:
+        if (!sub_8129C8C(0) && IsLinkTaskFinished() && !sub_80FBA1C())
+        {
+            sub_800AAC0();
+            gUnknown_203B0E0->unkA = 0;
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 2:
+        if (gUnknown_203B0E0->unkA < 150)
+            gUnknown_203B0E0->unkA++;
+
+        if (!gReceivedRemoteLinkPlayers)
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 3:
+        if (gUnknown_203B0E0->unkA >= 150)
+            sub_8129218(9);
+        else
+            gUnknown_203B0E0->unkA++;
+        break;
+    }
+}
+
+void sub_8128CA8(void)
+{
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (!FuncIsActiveTask(sub_81298F8))
+        {
+            if (gUnknown_203B0E0->unk13)
+                sub_8129C34(7, 0);
+
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 1:
+        if (!sub_8129C8C(0))
+        {
+            if (gUnknown_203B0E0->unk13)
+                sub_8129C34(19, 0);
+
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 2:
+        if (sub_8129C8C(0) != TRUE && IsLinkTaskFinished() && !sub_80FBA1C())
+        {
+            sub_800AAC0();
+            gUnknown_203B0E0->unkA = 0;
+            gUnknown_203B0E0->unk6++;
+        }
+        break;
+    case 3:
+        if (gUnknown_203B0E0->unkA < 150)
+            gUnknown_203B0E0->unkA++;
+
+        if (!gReceivedRemoteLinkPlayers)
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 4:
+        if (gUnknown_203B0E0->unkA >= 150)
+            sub_8129218(9);
+        else
+            gUnknown_203B0E0->unkA++;
+        break;
+    }
+}
+
+void sub_8128DA4(void)
+{
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            sub_8129218(1);
+            break;
+        }
+
+        sub_8129590(gUnknown_203B0E0->unk190);
+        gUnknown_203B0E0->unk6++;
+        // fall through
+    case 1:
+        if (IsLinkTaskFinished() == TRUE && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 2:
+        sub_8129454();
+        sub_8129C34(8, 0);
+        gUnknown_203B0E0->unk6++;
+        break;
+    case 3:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6++;
+        break;
+    case 4:
+        if (IsLinkTaskFinished())
+            sub_8129218(1);
+        break;
+    }
+}
+
+void sub_8128E78(void)
+{
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (sub_8129408())
+        {
+            sub_8129C34(9, 0);
+            gUnknown_203B0E0->unk6 = 2;
+        }
+        else
+        {
+            sub_8129C34(13, 0);
+            gUnknown_203B0E0->unk6 = 5;
+        }
+        break;
+    case 1:
+        if (JOY_NEW(A_BUTTON))
+        {
+            sub_8129424();
+            sub_8129C34(11, 0);
+            gUnknown_203B0E0->unk6 = 3;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            sub_8129C34(10, 0);
+            gUnknown_203B0E0->unk6 = 4;
+        }
+        else if (sub_8129228())
+        {
+            sub_8129C34(1, 0);
+            gUnknown_203B0E0->unk6 = 2;
+        }
+        break;
+    case 2:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6 = 1;
+        break;
+    case 3:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(10, 0);
+            gUnknown_203B0E0->unk6 = 4;
+        }
+        break;
+    case 4:
+        if (!sub_8129C8C(0))
+            sub_8129218(1);
+        break;
+    case 5:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6 = 6;
+        break;
+    case 6:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 4;
+        }
+        break;
+    }
+}
+
+void sub_8128FB8(void)
+{
+    s8 input;
+
+    switch (gUnknown_203B0E0->unk6)
+    {
+    case 0:
+        if (!gUnknown_203B0E0->unk18)
+        {
+            gUnknown_203B0E0->unk6 = 12;
+        }
+        else
+        {
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 1;
+        }
+        break;
+    case 1:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(14, 0);
+            gUnknown_203B0E0->unk6 = 2;
+        }
+        break;
+    case 2:
+        input = sub_812A568();
+        switch (input)
+        {
+        case -1:
+        case 1:
+            gUnknown_203B0E0->unk6 = 12;
+            break;
+        case 0:
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 3;
+            break;
+        }
+        break;
+    case 3:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(15, 0);
+            gUnknown_203B0E0->unk6 = 4;
+        }
+        break;
+    case 4:
+        if (!sub_8129C8C(0))
+            gUnknown_203B0E0->unk6 = 5;
+        break;
+    case 5:
+        input = sub_812A568();
+        switch (input)
+        {
+        case -1:
+        case 1:
+            gUnknown_203B0E0->unk6 = 12;
+            break;
+        case 0:
+            sub_8129C34(7, 0);
+            gUnknown_203B0E0->unk6 = 6;
+            break;
+        }
+        break;
+    case 6:
+        if (!sub_8129C8C(0))
+        {
+            sub_8129C34(16, 0);
+            sub_8129470();
+            gUnknown_203B0E0->unk6 = 7;
+        }
+        break;
+    case 7:
+        if (!sub_8129C8C(0))
+        {
+            SetContinueGameWarpStatusToDynamicWarp();
+            TrySavingData(SAVE_NORMAL);
+            gUnknown_203B0E0->unk6 = 8;
+        }
+        break;
+    case 8:
+        sub_8129C34(17, 0);
+        gUnknown_203B0E0->unk6 = 9;
+        break;
+    case 9:
+        if (!sub_8129C8C(0))
+        {
+            PlaySE(SE_SAVE);
+            ClearContinueGameWarpStatus2();
+            gUnknown_203B0E0->unk6 = 10;
+        }
+        break;
+    case 10:
+        gUnknown_203B0E0->unk19 = 0;
+        gUnknown_203B0E0->unk6 = 11;
+        break;
+    case 11:
+        gUnknown_203B0E0->unk19++;
+        if (gUnknown_203B0E0->unk19 > 120)
+            gUnknown_203B0E0->unk6 = 12;
+        break;
+    case 12:
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        gUnknown_203B0E0->unk6 = 13;
+        break;
+    case 13:
+        if (!gPaletteFade.active)
+        {
+            sub_812B4B8();
+            sub_8129B88();
+            sub_81284BC();
+            SetMainCallback2(CB2_ReturnToField);
+        }
         break;
     }
 }

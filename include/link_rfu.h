@@ -326,6 +326,7 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
 bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool32 sub_80FBA1C(void);
+void sub_80FA4A8(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

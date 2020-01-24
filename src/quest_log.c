@@ -1049,7 +1049,7 @@ static void sub_811175C(u8 sceneNum, struct UnkStruct_203AE98 * a1)
 
 static void sub_81118F4(s8 a0)
 {
-    fade_screen(1, a0);
+    FadeScreen(1, a0);
     sQuestLogCB = QuestLog_AdvancePlayhead;
 }
 
@@ -1309,7 +1309,7 @@ static void QuestLog_CloseTextWindow(void)
 
 static void QuestLog_SkipToEndOfPlayback(s8 a0)
 {
-    fade_screen(1, a0);
+    FadeScreen(1, a0);
     sQuestLogCB = QuestLog_WaitFadeAndCancelPlayback;
 }
 

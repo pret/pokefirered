@@ -873,10 +873,10 @@ const u8 *const gBattleStringsTable[] = {
     gUnknown_83FDDEB,
     gUnknown_83FB484,
     gUnknown_83FB4BE,
-    Text_1A5CF1,
-    Text_1A5D31,
-    Text_1A5D6E,
-    Text_1A5DB1,
+    Text_MonSentToBoxInSomeonesPC,
+    Text_MonSentToBoxInBillsPC,
+    Text_MonSentToBoxSomeonesBoxFull,
+    Text_MonSentToBoxBillsBoxFull,
     sText_PokedudeUsedItem,
     gUnknown_83FDA4D,
     gUnknown_83FDA7A,
@@ -1517,7 +1517,7 @@ void BufferStringBattle(u16 stringId)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_GHOST)
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+                if (gBattleTypeFlags & BATTLE_TYPE_GHOST_UNVEILED)
                     stringPtr = gUnknown_83FD30D;
                 else
                     stringPtr = gUnknown_83FD2D9;

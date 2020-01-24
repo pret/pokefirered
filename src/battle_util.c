@@ -1382,7 +1382,7 @@ u8 AtkCanceller_UnableToUseMove(void)
             ++gBattleStruct->atkCancellerTracker;
             break;
         case CANCELLER_GHOST: // GHOST in pokemon tower
-            if ((gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY)) == BATTLE_TYPE_GHOST)
+            if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))
             {
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
                     gBattlescriptCurrInstr = BattleScript_TooScaredToMove;
@@ -1616,7 +1616,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
         if (!moveArg)
             moveArg = gCurrentMove;
         GET_MOVE_TYPE(moveArg, moveType);
-        if ((gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_LEGENDARY)) == BATTLE_TYPE_GHOST
+        if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
          && (gLastUsedAbility == ABILITY_INTIMIDATE || gLastUsedAbility == ABILITY_TRACE))
             return effect;
         switch (caseID)

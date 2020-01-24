@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_16E28B",
+      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_Scientist",
       "flag": "0"
     }
   ],
@@ -78,28 +78,28 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_16E294"
+      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_DrFujiPhoto"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 5,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_16E29D"
+      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_MeetingRoomSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 18,
       "y": 5,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_16E2A6"
+      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_RAndDRoomSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 24,
       "y": 5,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_16E2AF"
+      "script": "CinnabarIsland_PokemonLab_Entrance_EventScript_TestingRoomSign"
     }
   ]
 }

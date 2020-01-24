@@ -1206,7 +1206,7 @@ EventScript_ThisPokeIsRealyEnergetic:: @ 8169C74
 	waitmessage
 	playfanfare MUS_FAN5
 	waitfanfare
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_GiveNicknameToStarter
 	compare VAR_RESULT, NO

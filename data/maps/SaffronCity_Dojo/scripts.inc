@@ -64,7 +64,7 @@ EventScript_16EC82:: @ 816EC82
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_16ECEC
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
+	goto_if_eq EventScript_NoMoreRoomForPokemon
 	release
 	end
 
@@ -76,10 +76,10 @@ EventScript_16ECB5:: @ 816ECB5
 	waitmessage
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16ED29
-	call EventScript_1A8C27
+	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
 	goto EventScript_16ED29
 	end
@@ -92,15 +92,15 @@ EventScript_16ECEC:: @ 816ECEC
 	waitmessage
 	waitfanfare
 	setflag FLAG_GOT_HITMON_FROM_DOJO
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16ED1E
-	call EventScript_1A8C33
+	call EventScript_NameReceivedBoxMon
 	goto EventScript_16ED1E
 	end
 
 EventScript_16ED1E:: @ 816ED1E
-	call EventScript_1A8C3C
+	call EventScript_TransferredToPC
 	goto EventScript_16ED29
 	end
 

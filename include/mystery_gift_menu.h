@@ -7,5 +7,8 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void);
 void PrintMysteryGiftOrEReaderTopMenu(bool8, bool32);
 void c2_mystery_gift(void);
 void c2_mystery_gift_e_reader_run(void);
+s8 mevent_message_print_and_prompt_yes_no(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, const u8 * str);
+void MG_DrawTextBorder(u8 windowId);
+u16 GetMysteryGiftBaseBlock(void);
 
 #endif //GUARD_MYSTERY_GIFT_MENU_H

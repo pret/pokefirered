@@ -15,7 +15,7 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	setvar VAR_0x8008, INGAME_TRADE_LICKITUNG
 	call EventScript_GetInGameTradeSpeciesInfo
 	goto_if_set FLAG_DID_MARC_TRADE, EventScript_1704F0
-	msgbox gUnknown_81A597B, MSGBOX_YESNO
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1704D8
 	call EventScript_ChooseMonForInGameTrade
@@ -25,23 +25,23 @@ Route18_EastEntrance_2F_EventScript_17047E:: @ 817047E
 	compare VAR_RESULT, VAR_0x8009
 	goto_if_ne EventScript_1704E2
 	call EventScript_DoInGameTrade
-	msgbox gUnknown_81A59DA
+	msgbox Trade_Text_HeyThanks
 	setflag FLAG_DID_MARC_TRADE
 	release
 	end
 
 EventScript_1704D8:: @ 81704D8
-	msgbox gUnknown_81A59B6
+	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
 EventScript_1704E2:: @ 81704E2
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A59C6
+	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
 EventScript_1704F0:: @ 81704F0
-	msgbox gUnknown_81A59E7
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end

@@ -1273,7 +1273,7 @@ static u8 GetRematchableTrainerLocalId(void)
 
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo * trainerInfo, const u8 * script)
 {
-    npc_sync_anim_pause_bits(&gObjectEvents[trainerInfo->objectEventId]);
+    UnfreezeObjectEvent(&gObjectEvents[trainerInfo->objectEventId]);
     ScriptMovement_StartObjectMovementScript(trainerInfo->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, script);
 }
 

@@ -4,6 +4,10 @@
 // General
 #define METATILE_General_CalmWater  0x12B
 
+// PokeMart
+#define METATILE_Shop_CounterMid_Top     0x2BF
+#define METATILE_Shop_CounterMid_Bottom  0x2C0     
+
 // Pokemon Mansion
 #define METATILE_PokemonMansion_Floor                                    0x284
 #define METATILE_PokemonMansion_Floor_ShadeFull                          0x285

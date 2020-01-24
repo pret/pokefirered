@@ -36,7 +36,8 @@ Text_18DDEA:: @ 818DDEA
     .string "Unbelievable!\l"
     .string "I picked the wrong POKéMON!$"
 
-Text_18DE1A:: @ 818DE1A
+@ Also used for early Route 22 battle
+Text_RivalVictory:: @ 818DE1A
     .string "{RIVAL}: Yeah!\n"
     .string "Am I great or what?$"
 

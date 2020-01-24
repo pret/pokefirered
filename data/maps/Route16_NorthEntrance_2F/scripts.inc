@@ -24,17 +24,17 @@ Route16_NorthEntrance_2F_EventScript_1702E3:: @ 81702E3
 	goto_if_set FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE, EventScript_170365
 	msgbox gUnknown_819FB0E, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1A7AD1
+	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_17036F
 	compare VAR_0x8006, 40
-	goto_if_lt EventScript_1A7ABD
+	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox gUnknown_819FC15
 	checkitemspace ITEM_AMULET_COIN, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A7AC7
+	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg gUnknown_819FC68, ITEM_AMULET_COIN
 	setflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE
 	msgbox gUnknown_819FC93

@@ -248,7 +248,7 @@ SECTIONS {
         src/party_menu.o(.text);
         src/union_room_chat.o(.text);
         src/union_room_chat_display.o(.text);
-        asm/union_room_chat.o(.text);
+        src/union_room_chat_objects.o(.text);
         src/help_system_812B1E0.o(.text);
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
@@ -538,7 +538,7 @@ SECTIONS {
         src/party_menu.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/union_room_chat_display.o(.rodata);
-        data/union_room_chat.o(.rodata);
+        src/union_room_chat_objects.o(.rodata);
         src/help_system_812B1E0.o(.rodata);
         src/fame_checker.o(.rodata);
         src/menu2.o(.rodata);

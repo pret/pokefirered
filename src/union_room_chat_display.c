@@ -11,46 +11,46 @@
 #include "union_room_chat_display.h"
 #include "union_room_chat_objects.h"
 
-struct UnionRoomChat2_Unk0
+struct UnionRoomChat2Subtask
 {
-    bool32 (*unk0)(u8 *);
-    u8 unk4;
-    u8 unk5;
+    bool32 (*callback)(u8 *);
+    u8 active;
+    u8 state;
 };
 
 struct UnionRoomChat2
 {
-    struct UnionRoomChat2_Unk0 unk0[3];
+    struct UnionRoomChat2Subtask subtasks[3];
     u16 unk18;
     u16 unk1A;
     u16 unk1C;
-    u16 unk1E;
-    s16 unk20;
-    u8 unk22[0x106];
-    u8 unk128[BG_SCREEN_SIZE];
-    u8 unk928[BG_SCREEN_SIZE];
-    u8 unk1128[BG_SCREEN_SIZE];
-    u8 unk1928[BG_SCREEN_SIZE];
+    u16 messageWindowId;
+    s16 bg1hofs;
+    u8 expandedPlaceholdersBuffer[0x106];
+    u8 bg0Buffer[BG_SCREEN_SIZE];
+    u8 bg1Buffer[BG_SCREEN_SIZE];
+    u8 bg3Buffer[BG_SCREEN_SIZE];
+    u8 bg2Buffer[BG_SCREEN_SIZE];
     u8 unk2128[0x20];
     u8 unk2148[0x20];
 };
 
 struct Unk845AABC
 {
-    u16 unk0;
-    bool32 (*unk4)(u8 *);
+    u16 idx;
+    bool32 (*callback)(u8 *);
 };
 
 struct Unk845AB64
 {
-    const u8 *unk0;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA;
+    const u8 *text;
+    bool8 boxType;
+    u8 x;
+    u8 y;
+    u8 letterSpacing;
+    u8 lineSpacing;
+    bool8 expandPlaceholders;
+    bool8 widerBox;
 };
 
 EWRAM_DATA struct UnionRoomChat2 * gUnknown_203B0E4 = NULL;
@@ -208,17 +208,106 @@ const struct Unk845AABC gUnknown_845AABC[] = {
 };
 
 const struct Unk845AB64 gUnknown_845AB64[] = {
-    {gText_QuitChatting, 1, 0, 0, 1, 2, 0, 0},
-    {gText_RegisterTextWhere, 1, 0, 0, 1, 2, 0, 0},
-    {gText_RegisterTextHere, 1, 0, 0, 1, 2, 0, 0},
-    {gText_InputText, 1, 0, 0, 1, 2, 0, 0},
-    {gText_ExitingTheChat, 2, 0, 0, 1, 2, 0, 0},
-    {gText_LeaderHasLeftEndingChat, 2, 0, 0, 0, 2, 1, 0},
-    {gText_RegisteredTextChanged_OKtoSave, 2, 0, 0, 1, 2, 0, 1},
-    {gText_RegisteredTextChanged_AlreadySavedFile, 2, 0, 0, 1, 2, 0, 1},
-    {gText_RegisteredTextChanged_SavingDontTurnOff, 2, 0, 0, 1, 2, 0, 1},
-    {gText_RegisteredTextChanged_SavedTheGame, 2, 0, 0, 1, 2, 1, 1},
-    {gText_IfLeaderLeavesChatWillEnd, 2, 0, 0, 1, 2, 0, 1}
+    {
+        .text = gText_QuitChatting,
+        .boxType = 1,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_RegisterTextWhere,
+        .boxType = 1,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_RegisterTextHere,
+        .boxType = 1,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_InputText,
+        .boxType = 1,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_ExitingTheChat,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_LeaderHasLeftEndingChat,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 0,
+        .lineSpacing = 2, 
+        .expandPlaceholders = TRUE,
+        .widerBox = FALSE
+    }, {
+        .text = gText_RegisteredTextChanged_OKtoSave,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = TRUE
+    }, {
+        .text = gText_RegisteredTextChanged_AlreadySavedFile,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = TRUE
+    }, {
+        .text = gText_RegisteredTextChanged_SavingDontTurnOff,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = TRUE
+    }, {
+        .text = gText_RegisteredTextChanged_SavedTheGame,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = TRUE,
+        .widerBox = TRUE
+    }, {
+        .text = gText_IfLeaderLeavesChatWillEnd,
+        .boxType = 2,
+        .x = 0,
+        .y = 0,
+        .letterSpacing = 1,
+        .lineSpacing = 2, 
+        .expandPlaceholders = FALSE,
+        .widerBox = TRUE
+    }
 };
 
 const u8 gText_Ellipsis[] = _("…");
@@ -270,7 +359,7 @@ void sub_8129B88(void)
 void sub_8129BB8(struct UnionRoomChat2 *arg0)
 {
     arg0->unk18 = 0xFF;
-    arg0->unk1E = 0xFF;
+    arg0->messageWindowId = 0xFF;
     arg0->unk1A = 0;
 }
 
@@ -283,9 +372,9 @@ void sub_8129BC4(void)
 
     for (i = 0; i < 3; i++)
     {
-        gUnknown_203B0E4->unk0[i].unk0 = sub_812A420;
-        gUnknown_203B0E4->unk0[i].unk4 = 0;
-        gUnknown_203B0E4->unk0[i].unk5 = 0;
+        gUnknown_203B0E4->subtasks[i].callback = sub_812A420;
+        gUnknown_203B0E4->subtasks[i].active = FALSE;
+        gUnknown_203B0E4->subtasks[i].state = 0;
     }
 }
 
@@ -298,8 +387,8 @@ void sub_8129BFC(void)
 
     for (i = 0; i < 3; i++)
     {
-        if (gUnknown_203B0E4->unk0[i].unk4)
-            gUnknown_203B0E4->unk0[i].unk4 = gUnknown_203B0E4->unk0[i].unk0(&gUnknown_203B0E4->unk0[i].unk5);
+        if (gUnknown_203B0E4->subtasks[i].active)
+            gUnknown_203B0E4->subtasks[i].active = gUnknown_203B0E4->subtasks[i].callback(&gUnknown_203B0E4->subtasks[i].state);
     }
 }
 
@@ -307,14 +396,14 @@ void sub_8129C34(u16 arg0, u8 arg1)
 {
     int i;
 
-    gUnknown_203B0E4->unk0[arg1].unk0 = sub_812A420;
+    gUnknown_203B0E4->subtasks[arg1].callback = sub_812A420;
     for (i = 0; i < NELEMS(gUnknown_845AABC); i++)
     {
-        if (gUnknown_845AABC[i].unk0 == arg0)
+        if (gUnknown_845AABC[i].idx == arg0)
         {
-            gUnknown_203B0E4->unk0[arg1].unk0 = gUnknown_845AABC[i].unk4;
-            gUnknown_203B0E4->unk0[arg1].unk4 = 1;
-            gUnknown_203B0E4->unk0[arg1].unk5 = 0;
+            gUnknown_203B0E4->subtasks[arg1].callback = gUnknown_845AABC[i].callback;
+            gUnknown_203B0E4->subtasks[arg1].active = TRUE;
+            gUnknown_203B0E4->subtasks[arg1].state = 0;
             break;
         }
     }
@@ -322,7 +411,7 @@ void sub_8129C34(u16 arg0, u8 arg1)
 
 bool8 sub_8129C8C(u8 arg0)
 {
-    return gUnknown_203B0E4->unk0[arg0].unk4;
+    return gUnknown_203B0E4->subtasks[arg0].active;
 }
 
 bool32 sub_8129CA0(u8 *state)
@@ -445,7 +534,7 @@ bool32 sub_8129E28(u8 *state)
     case 0:
         sub_812A578(0, 0);
         sub_812A424(23, 11, 1);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -524,7 +613,7 @@ bool32 sub_8129F24(u8 *state)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             sub_812A578(1, 16);
-            CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+            CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         }
         else
         {
@@ -565,7 +654,7 @@ bool32 sub_8129FCC(u8 *state)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             sub_812A6F4();
-            CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+            CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         }
         else
         {
@@ -688,7 +777,7 @@ bool32 sub_812A1B8(u8 *state)
     {
     case 0:
         sub_812A578(3, 16);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -704,7 +793,7 @@ bool32 sub_812A1FC(u8 *state)
     {
     case 0:
         sub_812A578(4, 0);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -725,7 +814,7 @@ bool32 sub_812A240(u8 *state)
         str = sub_8129814();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
         sub_812A578(5, 0);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -742,7 +831,7 @@ bool32 sub_812A294(u8 *state)
     case 0:
         sub_812A578(6, 0);
         sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -759,7 +848,7 @@ bool32 sub_812A2E4(u8 *state)
     case 0:
         sub_812A578(7, 0);
         sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -775,7 +864,7 @@ bool32 sub_812A334(u8 *state)
     {
     case 0:
         sub_812A578(8, 0);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -793,7 +882,7 @@ bool32 sub_812A378(u8 *state)
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         sub_812A578(9, 0);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -810,7 +899,7 @@ bool32 sub_812A3D0(u8 *state)
     case 0:
         sub_812A578(10, 0);
         sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->unk1E, 3);
+        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -882,43 +971,43 @@ void sub_812A578(int arg0, u16 arg1)
     template.height = 4;
     template.paletteNum = 14;
     template.baseBlock = 0x06A;
-    if (gUnknown_845AB64[arg0].unkA)
+    if (gUnknown_845AB64[arg0].widerBox)
     {
         template.tilemapLeft -= 7;
         template.width += 7;
     }
 
-    gUnknown_203B0E4->unk1E = AddWindow(&template);
-    windowId = gUnknown_203B0E4->unk1E;
-    if (gUnknown_203B0E4->unk1E == 0xFF)
+    gUnknown_203B0E4->messageWindowId = AddWindow(&template);
+    windowId = gUnknown_203B0E4->messageWindowId;
+    if (gUnknown_203B0E4->messageWindowId == 0xFF)
         return;
 
-    if (gUnknown_845AB64[arg0].unk9)
+    if (gUnknown_845AB64[arg0].expandPlaceholders)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_203B0E4->unk22, gUnknown_845AB64[arg0].unk0);
-        str = gUnknown_203B0E4->unk22;
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_203B0E4->expandedPlaceholdersBuffer, gUnknown_845AB64[arg0].text);
+        str = gUnknown_203B0E4->expandedPlaceholdersBuffer;
     }
     else
     {
-        str = gUnknown_845AB64[arg0].unk0;
+        str = gUnknown_845AB64[arg0].text;
     }
 
     ChangeBgY(0, arg1 * 256, 0);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
-    if (gUnknown_845AB64[arg0].unk4 == 1)
+    if (gUnknown_845AB64[arg0].boxType == 1)
     {
         DrawTextBorderInner(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
             2,
             str,
-            gUnknown_845AB64[arg0].unk5 + 8,
-            gUnknown_845AB64[arg0].unk6 + 8,
+            gUnknown_845AB64[arg0].x + 8,
+            gUnknown_845AB64[arg0].y + 8,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_845AB64[arg0].unk7,
-            gUnknown_845AB64[arg0].unk8);
+            gUnknown_845AB64[arg0].letterSpacing,
+            gUnknown_845AB64[arg0].lineSpacing);
     }
     else
     {
@@ -927,23 +1016,23 @@ void sub_812A578(int arg0, u16 arg1)
             windowId,
             2,
             str,
-            gUnknown_845AB64[arg0].unk5,
-            gUnknown_845AB64[arg0].unk6,
+            gUnknown_845AB64[arg0].x,
+            gUnknown_845AB64[arg0].y,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_845AB64[arg0].unk7,
-            gUnknown_845AB64[arg0].unk8);
+            gUnknown_845AB64[arg0].letterSpacing,
+            gUnknown_845AB64[arg0].lineSpacing);
     }
 
-    gUnknown_203B0E4->unk1E = windowId;
+    gUnknown_203B0E4->messageWindowId = windowId;
 }
 
 void sub_812A6F4(void)
 {
-    if (gUnknown_203B0E4->unk1E != 0xFF)
+    if (gUnknown_203B0E4->messageWindowId != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(gUnknown_203B0E4->unk1E, FALSE);
-        ClearWindowTilemap(gUnknown_203B0E4->unk1E);
+        ClearStdWindowAndFrameToTransparent(gUnknown_203B0E4->messageWindowId, FALSE);
+        ClearWindowTilemap(gUnknown_203B0E4->messageWindowId);
     }
 
     ChangeBgY(0, 0, 0);
@@ -951,10 +1040,10 @@ void sub_812A6F4(void)
 
 void sub_812A728(void)
 {
-    if (gUnknown_203B0E4->unk1E != 0xFF)
+    if (gUnknown_203B0E4->messageWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_203B0E4->unk1E);
-        gUnknown_203B0E4->unk1E = 0xFF;
+        RemoveWindow(gUnknown_203B0E4->messageWindowId);
+        gUnknown_203B0E4->messageWindowId = 0xFF;
     }
 }
 
@@ -1045,39 +1134,39 @@ void sub_812A804(void)
 
 bool32 sub_812A980(void)
 {
-    if (gUnknown_203B0E4->unk20 < 56)
+    if (gUnknown_203B0E4->bg1hofs < 56)
     {
-        gUnknown_203B0E4->unk20 += 12;
-        if (gUnknown_203B0E4->unk20 >= 56)
-            gUnknown_203B0E4->unk20 = 56;
+        gUnknown_203B0E4->bg1hofs += 12;
+        if (gUnknown_203B0E4->bg1hofs >= 56)
+            gUnknown_203B0E4->bg1hofs = 56;
 
-        if (gUnknown_203B0E4->unk20 < 56)
+        if (gUnknown_203B0E4->bg1hofs < 56)
         {
-            sub_812ADA0(gUnknown_203B0E4->unk20);
+            sub_812ADA0(gUnknown_203B0E4->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_812ADF8(gUnknown_203B0E4->unk20);
+    sub_812ADF8(gUnknown_203B0E4->bg1hofs);
     return FALSE;
 }
 
 bool32 sub_812A9C8(void)
 {
-    if (gUnknown_203B0E4->unk20 > 0)
+    if (gUnknown_203B0E4->bg1hofs > 0)
     {
-        gUnknown_203B0E4->unk20 -= 12;
-        if (gUnknown_203B0E4->unk20 <= 0)
-            gUnknown_203B0E4->unk20 = 0;
+        gUnknown_203B0E4->bg1hofs -= 12;
+        if (gUnknown_203B0E4->bg1hofs <= 0)
+            gUnknown_203B0E4->bg1hofs = 0;
 
-        if (gUnknown_203B0E4->unk20 > 0)
+        if (gUnknown_203B0E4->bg1hofs > 0)
         {
-            sub_812ADA0(gUnknown_203B0E4->unk20);
+            sub_812ADA0(gUnknown_203B0E4->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_812ADF8(gUnknown_203B0E4->unk20);
+    sub_812ADF8(gUnknown_203B0E4->bg1hofs);
     return FALSE;
 }
 
@@ -1133,10 +1222,10 @@ void sub_812AAD4(void)
 
 void sub_812AB8C(void)
 {
-    SetBgTilemapBuffer(0, gUnknown_203B0E4->unk128);
-    SetBgTilemapBuffer(1, gUnknown_203B0E4->unk928);
-    SetBgTilemapBuffer(3, gUnknown_203B0E4->unk1128);
-    SetBgTilemapBuffer(2, gUnknown_203B0E4->unk1928);
+    SetBgTilemapBuffer(0, gUnknown_203B0E4->bg0Buffer);
+    SetBgTilemapBuffer(1, gUnknown_203B0E4->bg1Buffer);
+    SetBgTilemapBuffer(3, gUnknown_203B0E4->bg3Buffer);
+    SetBgTilemapBuffer(2, gUnknown_203B0E4->bg2Buffer);
 }
 
 void sub_812ABD8(void)
@@ -1208,7 +1297,7 @@ void sub_812AD50(void)
     params.dmaDest = &REG_BG1HOFS;
     params.initState = 1;
     params.unused9 = 0;
-    gUnknown_203B0E4->unk20 = 0;
+    gUnknown_203B0E4->bg1hofs = 0;
     CpuFastFill(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
     ScanlineEffect_SetParams(params);
 }

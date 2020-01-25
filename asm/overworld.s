@@ -2247,7 +2247,7 @@ _08055CEC: .4byte gSaveBlock1Ptr
 _08055CF0:
 	ldr r0, _08055D00 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, _08055D04 @ =gUnknown_83C68E0
+	ldr r1, _08055D04 @ =gMaxFlashLevel
 	ldr r1, [r1]
 _08055CF8:
 	adds r0, 0x30
@@ -2257,7 +2257,7 @@ _08055CFA:
 	bx r0
 	.align 2, 0
 _08055D00: .4byte gSaveBlock1Ptr
-_08055D04: .4byte gUnknown_83C68E0
+_08055D04: .4byte gMaxFlashLevel
 	thumb_func_end sub_8055CB8
 
 	thumb_func_start Overworld_SetFlashLevel
@@ -2266,7 +2266,7 @@ Overworld_SetFlashLevel: @ 8055D08
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _08055D18
-	ldr r0, _08055D28 @ =gUnknown_83C68E0
+	ldr r0, _08055D28 @ =gMaxFlashLevel
 	ldr r0, [r0]
 	cmp r1, r0
 	ble _08055D1A
@@ -2280,7 +2280,7 @@ _08055D1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055D28: .4byte gUnknown_83C68E0
+_08055D28: .4byte gMaxFlashLevel
 _08055D2C: .4byte gSaveBlock1Ptr
 	thumb_func_end Overworld_SetFlashLevel
 

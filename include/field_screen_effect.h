@@ -10,5 +10,6 @@ void sub_807E3EC(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
 void sub_807DC00(void);
+void sub_807F5F0(void);
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

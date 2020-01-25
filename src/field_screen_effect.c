@@ -5,10 +5,33 @@
 #include "scanline_effect.h"
 #include "script.h"
 #include "task.h"
+#include "window.h"
+#include "strings.h"
+#include "string_util.h"
+#include "menu.h"
+#include "heal_location.h"
+#include "new_menu_helpers.h"
+#include "event_object_movement.h"
+#include "field_fadetransition.h"
+#include "event_scripts.h"
 
 static const u16 sFlashLevelPixelRadii[] = {
-    0x00c8, 0x0048, 0x0038, 0x0028, 0x0018, 0x0000
+    0x00c8, 0x0048, 0x0038, 0x0028, 0x0018
 };
+
+const s32 gMaxFlashLevel = NELEMS(sFlashLevelPixelRadii) - 1;
+
+static const struct WindowTemplate gUnknown_83C68E4 = {
+    .bg = 0,
+    .tilemapLeft = 0,
+    .tilemapTop = 5,
+    .width = 30,
+    .height = 11,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+
+static const u8 gUnknown_83C68EC[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
 
 static void Task_EnableScriptAfterMusicFade(u8 taskId);
 static void Task_BarnDoorWipeChild(u8 taskId);
@@ -336,3 +359,103 @@ static void Task_BarnDoorWipeChild(u8 taskId)
 #undef DIR_WIPE_IN
 #undef DIR_WIPE_OUT
 #undef tChildOffset
+
+static bool8 sub_807F3A4(u8 taskId, const u8 *text, u8 x, u8 y)
+{
+    u8 windowId = gTasks[taskId].data[1];
+
+    switch (gTasks[taskId].data[2])
+    {
+    case 0:
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        StringExpandPlaceholders(gStringVar4, text);
+        AddTextPrinterParameterized4(windowId, 2, x, y, 1, 0, gUnknown_83C68EC, 1, gStringVar4);
+        gTextFlags.canABSpeedUpPrint = FALSE;
+        gTasks[taskId].data[2] = 1;
+        break;
+    case 1:
+        RunTextPrinters();
+        if (!IsTextPrinterActive(windowId))
+        {
+            gTasks[taskId].data[2] = 0;
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
+static void sub_807F45C(u8 taskId)
+{
+    u8 windowId;
+    const struct HealLocation *loc;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        windowId = AddWindow(&gUnknown_83C68E4);
+        gTasks[taskId].data[1] = windowId;
+        Menu_LoadStdPalAt(0xF0);
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        PutWindowTilemap(windowId);
+        CopyWindowToVram(windowId, 3);
+        loc = GetHealLocationPointer(1);
+        if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
+         && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
+         && gSaveBlock1Ptr->lastHealLocation.warpId == -1
+         && gSaveBlock1Ptr->lastHealLocation.x == loc->x
+         && gSaveBlock1Ptr->lastHealLocation.y == loc->y)
+            gTasks[taskId].data[0] = 4;
+        else
+            gTasks[taskId].data[0] = 1;
+        break;
+    case 1:
+        if (sub_807F3A4(taskId, gUnknown_841B554, 2, 8))
+        {
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
+            ++gTasks[taskId].data[0];
+        }
+        break;
+    case 4:
+        if (sub_807F3A4(taskId, gUnknown_841B5B6, 2, 8))
+        {
+            ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
+            ++gTasks[taskId].data[0];
+        }
+        break;
+    case 2:
+    case 5:
+        windowId = gTasks[taskId].data[1];
+        ClearWindowTilemap(windowId);
+        CopyWindowToVram(windowId, 1);
+        RemoveWindow(windowId);
+        palette_bg_faded_fill_black();
+        sub_807DC00();
+        ++gTasks[taskId].data[0];
+        break;
+    case 3:
+        if (sub_807E418() == TRUE)
+        {
+            DestroyTask(taskId);
+            ScriptContext1_SetupScript(EventScript_AfterWhiteOutHeal);
+        }
+        break;
+    case 6:
+        if (sub_807E418() == TRUE)
+        {
+            DestroyTask(taskId);
+            ScriptContext1_SetupScript(EventScript_MomHeal);
+        }
+        break;
+    }
+}
+
+void sub_807F5F0(void)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    palette_bg_faded_fill_black();
+    taskId = CreateTask(sub_807F45C, 10);
+    gTasks[taskId].data[0] = 0;
+}

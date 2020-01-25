@@ -14,18 +14,18 @@ struct UnionRoomChat3
     u16 unk14;
 };
 
-EWRAM_DATA struct UnionRoomChat3 *gUnknown_203B0E8 = NULL;
+static EWRAM_DATA struct UnionRoomChat3 *gUnknown_203B0E8 = NULL;
 
-void sub_812B09C(struct Sprite * sprite);
-void sub_812B0D4(struct Sprite * sprite);
+static void sub_812B09C(struct Sprite * sprite);
+static void sub_812B0D4(struct Sprite * sprite);
 
-const u16 gUnknown_845AC14[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
-const u32 gUnknown_845AC34[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");
-const u32 gUnknown_845AEB8[] = INCBIN_U32("graphics/union_room_chat/unk_845AEB8.4bpp.lz");
-const u32 gUnknown_845AED8[] = INCBIN_U32("graphics/union_room_chat/unk_845AED8.4bpp.lz");
-const u32 gUnknown_845AF04[] = INCBIN_U32("graphics/union_room_chat/unk_845AF04.4bpp.lz");
+static const u16 gUnknown_845AC14[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
+static const u32 gUnknown_845AC34[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");
+static const u32 gUnknown_845AEB8[] = INCBIN_U32("graphics/union_room_chat/unk_845AEB8.4bpp.lz");
+static const u32 gUnknown_845AED8[] = INCBIN_U32("graphics/union_room_chat/unk_845AED8.4bpp.lz");
+static const u32 gUnknown_845AF04[] = INCBIN_U32("graphics/union_room_chat/unk_845AF04.4bpp.lz");
 
-const struct CompressedSpriteSheet gUnknown_845AF58[] = {
+static const struct CompressedSpriteSheet gUnknown_845AF58[] = {
     {gUnknown_845AC34, 0x1000, 0},
     {gUnknown_845AED8, 0x0040, 1},
     {gUnknown_845AEB8, 0x0040, 2},
@@ -33,44 +33,44 @@ const struct CompressedSpriteSheet gUnknown_845AF58[] = {
     {gUnknown_8EA1A50, 0x0400, 4}
 };
 
-const struct SpritePalette gUnknown_845AF80 = {
+static const struct SpritePalette gUnknown_845AF80 = {
     gUnknown_845AC14, 0
 };
 
-const struct OamData gOamData_845AF88 = {
+static const struct OamData gOamData_845AF88 = {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
-const union AnimCmd gAnimCmd_845AF90[] = {
+static const union AnimCmd gAnimCmd_845AF90[] = {
     ANIMCMD_FRAME(0x00, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845AF98[] = {
+static const union AnimCmd gAnimCmd_845AF98[] = {
     ANIMCMD_FRAME(0x20, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845AFA0[] = {
+static const union AnimCmd gAnimCmd_845AFA0[] = {
     ANIMCMD_FRAME(0x40, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845AFA8[] = {
+static const union AnimCmd gAnimCmd_845AFA8[] = {
     ANIMCMD_FRAME(0x60, 30),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_845AFB0[] = {
+static const union AnimCmd *const gSpriteAnimTable_845AFB0[] = {
     gAnimCmd_845AF90,
     gAnimCmd_845AF98,
     gAnimCmd_845AFA0,
     gAnimCmd_845AFA8
 };
 
-const struct SpriteTemplate gUnknown_845AFC0 = {
+static const struct SpriteTemplate gUnknown_845AFC0 = {
     .tileTag = 0,
     .paletteTag = 0,
     .oam = &gOamData_845AF88,
@@ -79,13 +79,13 @@ const struct SpriteTemplate gUnknown_845AFC0 = {
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gOamData_845AFD8 = {
+static const struct OamData gOamData_845AFD8 = {
     .shape = SPRITE_SHAPE(8x16),
     .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
-const struct SpriteTemplate gUnknown_845AFE0 = {
+static const struct SpriteTemplate gUnknown_845AFE0 = {
     .tileTag = 2,
     .paletteTag = 0,
     .oam = &gOamData_845AFD8,
@@ -94,7 +94,7 @@ const struct SpriteTemplate gUnknown_845AFE0 = {
     .callback = sub_812B09C
 };
 
-const struct SpriteTemplate gUnknown_845AFF8 = {
+static const struct SpriteTemplate gUnknown_845AFF8 = {
     .tileTag = 1,
     .paletteTag = 0,
     .oam = &gOamData_845AFD8,
@@ -103,46 +103,46 @@ const struct SpriteTemplate gUnknown_845AFF8 = {
     .callback = sub_812B0D4
 };
 
-const struct OamData gOamData_845B010 = {
+static const struct OamData gOamData_845B010 = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-const struct OamData gOamData_845B018 = {
+static const struct OamData gOamData_845B018 = {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
-const union AnimCmd gAnimCmd_845B020[] = {
+static const union AnimCmd gAnimCmd_845B020[] = {
     ANIMCMD_FRAME(0x00, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845B028[] = {
+static const union AnimCmd gAnimCmd_845B028[] = {
     ANIMCMD_FRAME(0x08, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845B030[] = {
+static const union AnimCmd gAnimCmd_845B030[] = {
     ANIMCMD_FRAME(0x10, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd gAnimCmd_845B038[] = {
+static const union AnimCmd gAnimCmd_845B038[] = {
     ANIMCMD_FRAME(0x18, 2),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_845B040[] = {
+static const union AnimCmd *const gSpriteAnimTable_845B040[] = {
     gAnimCmd_845B020,
     gAnimCmd_845B028,
     gAnimCmd_845B030,
     gAnimCmd_845B038
 };
 
-const struct SpriteTemplate gUnknown_845B050 = {
+static const struct SpriteTemplate gUnknown_845B050 = {
     .tileTag = 3,
     .paletteTag = 0,
     .oam = &gOamData_845B010,
@@ -151,7 +151,7 @@ const struct SpriteTemplate gUnknown_845B050 = {
     .callback = SpriteCallbackDummy
 };
 
-const struct SpriteTemplate gUnknown_845B068 = {
+static const struct SpriteTemplate gUnknown_845B068 = {
     .tileTag = 4,
     .paletteTag = 0,
     .oam = &gOamData_845B018,
@@ -253,7 +253,7 @@ void sub_812B048(void)
     gUnknown_203B0E8->unk4 = &gSprites[spriteId];
 }
 
-void sub_812B09C(struct Sprite *sprite)
+static void sub_812B09C(struct Sprite *sprite)
 {
     int var0 = sub_81297DC();
     if (var0 == 15)
@@ -267,7 +267,7 @@ void sub_812B09C(struct Sprite *sprite)
     }
 }
 
-void sub_812B0D4(struct Sprite *sprite)
+static void sub_812B0D4(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 4)
     {

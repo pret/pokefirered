@@ -53,65 +53,65 @@ struct Unk845AB64
     bool8 widerBox;
 };
 
-EWRAM_DATA struct UnionRoomChat2 * gUnknown_203B0E4 = NULL;
+static EWRAM_DATA struct UnionRoomChat2 * gUnknown_203B0E4 = NULL;
 
-void sub_8129BB8(struct UnionRoomChat2 * ptr);
-void sub_8129BC4(void);
-bool32 sub_8129CA0(u8 *state);
-bool32 sub_8129D40(u8 *state);
-bool32 sub_8129D78(u8 *state);
-bool32 sub_8129DB0(u8 *state);
-bool32 sub_8129E1C(u8 *state);
-bool32 sub_8129E28(u8 *state);
-bool32 sub_8129E74(u8 *state);
-bool32 sub_8129EB8(u8 *state);
-bool32 sub_8129F24(u8 *state);
-bool32 sub_8129FCC(u8 *state);
-bool32 sub_812A074(u8 *state);
-bool32 sub_812A0B0(u8 *state);
-bool32 sub_812A18C(u8 *state);
-bool32 sub_812A1B8(u8 *state);
-bool32 sub_812A1FC(u8 *state);
-bool32 sub_812A240(u8 *state);
-bool32 sub_812A294(u8 *state);
-bool32 sub_812A2E4(u8 *state);
-bool32 sub_812A334(u8 *state);
-bool32 sub_812A378(u8 *state);
-bool32 sub_812A3D0(u8 *state);
-bool32 sub_812A420(u8 *state);
-void sub_812A424(u8 a0, u8 a1, u8 a2);
-void sub_812A51C(void);
-void sub_812A544(void);
-void sub_812A578(int a0, u16 a1);
-void sub_812A6F4(void);
-void sub_812A728(void);
-void sub_812A74C(u16 a0, u16 a1, u8 a2);
-void sub_812A778(u16 a0, u8 *a1, u8 a2, u8 a3, u8 a4);
-void sub_812A804(void);
-bool32 sub_812A980(void);
-bool32 sub_812A9C8(void);
-void sub_812AA10(void);
-void sub_812AA64(void);
-void sub_812AA78(u16 a0, u8 *a1, u8 a2);
-void sub_812AAD4(void);
-void sub_812AB8C(void);
-void sub_812ABD8(void);
-void sub_812AC08(void);
-void sub_812AC58(void);
-void sub_812AC9C(void);
-void sub_812ACC0(void);
-void sub_812ACEC(void);
-void sub_812AD04(void);
-void sub_812AD20(void);
-void sub_812AD50(void);
-void sub_812ADA0(s16 a0);
-void sub_812ADF8(s16 a0);
+static void sub_8129BB8(struct UnionRoomChat2 * ptr);
+static void sub_8129BC4(void);
+static bool32 sub_8129CA0(u8 *state);
+static bool32 sub_8129D40(u8 *state);
+static bool32 sub_8129D78(u8 *state);
+static bool32 sub_8129DB0(u8 *state);
+static bool32 sub_8129E1C(u8 *state);
+static bool32 sub_8129E28(u8 *state);
+static bool32 sub_8129E74(u8 *state);
+static bool32 sub_8129EB8(u8 *state);
+static bool32 sub_8129F24(u8 *state);
+static bool32 sub_8129FCC(u8 *state);
+static bool32 sub_812A074(u8 *state);
+static bool32 sub_812A0B0(u8 *state);
+static bool32 sub_812A18C(u8 *state);
+static bool32 sub_812A1B8(u8 *state);
+static bool32 sub_812A1FC(u8 *state);
+static bool32 sub_812A240(u8 *state);
+static bool32 sub_812A294(u8 *state);
+static bool32 sub_812A2E4(u8 *state);
+static bool32 sub_812A334(u8 *state);
+static bool32 sub_812A378(u8 *state);
+static bool32 sub_812A3D0(u8 *state);
+static bool32 sub_812A420(u8 *state);
+static void sub_812A424(u8 a0, u8 a1, u8 a2);
+static void sub_812A51C(void);
+static void sub_812A544(void);
+static void sub_812A578(int a0, u16 a1);
+static void sub_812A6F4(void);
+static void sub_812A728(void);
+static void sub_812A74C(u16 a0, u16 a1, u8 a2);
+static void sub_812A778(u16 a0, u8 *a1, u8 a2, u8 a3, u8 a4);
+static void sub_812A804(void);
+static bool32 sub_812A980(void);
+static bool32 sub_812A9C8(void);
+static void sub_812AA10(void);
+static void sub_812AA64(void);
+static void sub_812AA78(u16 a0, u8 *a1, u8 a2);
+static void sub_812AAD4(void);
+static void sub_812AB8C(void);
+static void sub_812ABD8(void);
+static void sub_812AC08(void);
+static void sub_812AC58(void);
+static void sub_812AC9C(void);
+static void sub_812ACC0(void);
+static void sub_812ACEC(void);
+static void sub_812AD04(void);
+static void sub_812AD20(void);
+static void sub_812AD50(void);
+static void sub_812ADA0(s16 a0);
+static void sub_812ADF8(s16 a0);
 
-const u16 gUnknown_845AA24[] = INCBIN_U16("graphics/union_room_chat/unk_845AA24.gbapal");
-const u16 gUnknown_845AA44[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
-const u16 gUnknown_845AA64[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
+static const u16 gUnknown_845AA24[] = INCBIN_U16("graphics/union_room_chat/unk_845AA24.gbapal");
+static const u16 gUnknown_845AA44[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
+static const u16 gUnknown_845AA64[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
 
-const struct BgTemplate gUnknown_845AA84[] = {
+static const struct BgTemplate gUnknown_845AA84[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -147,7 +147,7 @@ const struct BgTemplate gUnknown_845AA84[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_845AA94[] = {
+static const struct WindowTemplate gUnknown_845AA94[] = {
     {
         .bg = 3,
         .tilemapLeft = 8,
@@ -183,7 +183,7 @@ const struct WindowTemplate gUnknown_845AA94[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct Unk845AABC gUnknown_845AABC[] = {
+static const struct Unk845AABC gUnknown_845AABC[] = {
     { 0, sub_8129CA0},
     { 3, sub_8129D40},
     { 4, sub_8129D78},
@@ -207,7 +207,7 @@ const struct Unk845AABC gUnknown_845AABC[] = {
     {20, sub_812A3D0}
 };
 
-const struct Unk845AB64 gUnknown_845AB64[] = {
+static const struct Unk845AB64 gUnknown_845AB64[] = {
     {
         .text = gText_QuitChatting,
         .boxType = 1,
@@ -310,9 +310,9 @@ const struct Unk845AB64 gUnknown_845AB64[] = {
     }
 };
 
-const u8 gText_Ellipsis[] = _("…");
+static const u8 gText_Ellipsis[] = _("…");
 
-const struct MenuAction gUnknown_845ABEC[] = {
+static const struct MenuAction gUnknown_845ABEC[] = {
     {gText_Upper},
     {gText_Lower},
     {gText_Symbols},
@@ -356,7 +356,7 @@ void sub_8129B88(void)
     gScanlineEffect.state = 3;
 }
 
-void sub_8129BB8(struct UnionRoomChat2 *arg0)
+static void sub_8129BB8(struct UnionRoomChat2 *arg0)
 {
     arg0->unk18 = 0xFF;
     arg0->messageWindowId = 0xFF;
@@ -367,7 +367,7 @@ void sub_8129BC4(void)
 {
     int i;
 
-    if (!gUnknown_203B0E4)
+    if (gUnknown_203B0E4 == NULL)
         return;
 
     for (i = 0; i < 3; i++)
@@ -414,7 +414,7 @@ bool8 sub_8129C8C(u8 arg0)
     return gUnknown_203B0E4->subtasks[arg0].active;
 }
 
-bool32 sub_8129CA0(u8 *state)
+static bool32 sub_8129CA0(u8 *state)
 {
     if (FreeTempTileDataBuffersIfPossible() == TRUE)
         return TRUE;
@@ -459,7 +459,7 @@ bool32 sub_8129CA0(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129D40(u8 *state)
+static bool32 sub_8129D40(u8 *state)
 {
     switch (*state)
     {
@@ -475,7 +475,7 @@ bool32 sub_8129D40(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129D78(u8 *state)
+static bool32 sub_8129D78(u8 *state)
 {
     switch (*state)
     {
@@ -491,7 +491,7 @@ bool32 sub_8129D78(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129DB0(u8 *state)
+static bool32 sub_8129DB0(u8 *state)
 {
     switch (*state)
     {
@@ -521,13 +521,13 @@ bool32 sub_8129DB0(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129E1C(u8 *state)
+static bool32 sub_8129E1C(u8 *state)
 {
     sub_812AF1C();
     return FALSE;
 }
 
-bool32 sub_8129E28(u8 *state)
+static bool32 sub_8129E28(u8 *state)
 {
     switch (*state)
     {
@@ -544,7 +544,7 @@ bool32 sub_8129E28(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129E74(u8 *state)
+static bool32 sub_8129E74(u8 *state)
 {
     switch (*state)
     {
@@ -566,7 +566,7 @@ bool32 sub_8129E74(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129EB8(u8 *state)
+static bool32 sub_8129EB8(u8 *state)
 {
     u32 var0, var1;
     u8 *str;
@@ -593,7 +593,7 @@ bool32 sub_8129EB8(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129F24(u8 *state)
+static bool32 sub_8129F24(u8 *state)
 {
     u16 var0;
     u8 *str;
@@ -634,7 +634,7 @@ bool32 sub_8129F24(u8 *state)
     return TRUE;
 }
 
-bool32 sub_8129FCC(u8 *state)
+static bool32 sub_8129FCC(u8 *state)
 {
     u16 var0;
     u8 *str;
@@ -680,7 +680,7 @@ bool32 sub_8129FCC(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A074(u8 *state)
+static bool32 sub_812A074(u8 *state)
 {
     switch (*state)
     {
@@ -699,7 +699,7 @@ bool32 sub_812A074(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A0B0(u8 *state)
+static bool32 sub_812A0B0(u8 *state)
 {
     u16 var0;
     u8 *str;
@@ -756,7 +756,7 @@ bool32 sub_812A0B0(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A18C(u8 *state)
+static bool32 sub_812A18C(u8 *state)
 {
     switch (*state)
     {
@@ -771,7 +771,7 @@ bool32 sub_812A18C(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A1B8(u8 *state)
+static bool32 sub_812A1B8(u8 *state)
 {
     switch (*state)
     {
@@ -787,7 +787,7 @@ bool32 sub_812A1B8(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A1FC(u8 *state)
+static bool32 sub_812A1FC(u8 *state)
 {
     switch (*state)
     {
@@ -803,7 +803,7 @@ bool32 sub_812A1FC(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A240(u8 *state)
+static bool32 sub_812A240(u8 *state)
 {
     u8 *str;
 
@@ -824,7 +824,7 @@ bool32 sub_812A240(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A294(u8 *state)
+static bool32 sub_812A294(u8 *state)
 {
     switch (*state)
     {
@@ -841,7 +841,7 @@ bool32 sub_812A294(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A2E4(u8 *state)
+static bool32 sub_812A2E4(u8 *state)
 {
     switch (*state)
     {
@@ -858,7 +858,7 @@ bool32 sub_812A2E4(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A334(u8 *state)
+static bool32 sub_812A334(u8 *state)
 {
     switch (*state)
     {
@@ -874,7 +874,7 @@ bool32 sub_812A334(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A378(u8 *state)
+static bool32 sub_812A378(u8 *state)
 {
     switch (*state)
     {
@@ -892,7 +892,7 @@ bool32 sub_812A378(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A3D0(u8 *state)
+static bool32 sub_812A3D0(u8 *state)
 {
     switch (*state)
     {
@@ -909,12 +909,12 @@ bool32 sub_812A3D0(u8 *state)
     return TRUE;
 }
 
-bool32 sub_812A420(u8 *arg0)
+static bool32 sub_812A420(u8 *arg0)
 {
     return FALSE;
 }
 
-void sub_812A424(u8 left, u8 top, u8 initialCursorPos)
+static void sub_812A424(u8 left, u8 top, u8 initialCursorPos)
 {
     struct WindowTemplate template;
     template.bg = 0;
@@ -936,7 +936,7 @@ void sub_812A424(u8 left, u8 top, u8 initialCursorPos)
     }
 }
 
-void sub_812A51C(void)
+static void sub_812A51C(void)
 {
     if (gUnknown_203B0E4->unk18 != 0xFF)
     {
@@ -945,7 +945,7 @@ void sub_812A51C(void)
     }
 }
 
-void sub_812A544(void)
+static void sub_812A544(void)
 {
     if (gUnknown_203B0E4->unk18 != 0xFF)
     {
@@ -959,7 +959,7 @@ s8 sub_812A568(void)
     return Menu_ProcessInput();
 }
 
-void sub_812A578(int arg0, u16 arg1)
+static void sub_812A578(int arg0, u16 arg1)
 {
     const u8 *str;
     int windowId;
@@ -1027,7 +1027,7 @@ void sub_812A578(int arg0, u16 arg1)
     gUnknown_203B0E4->messageWindowId = windowId;
 }
 
-void sub_812A6F4(void)
+static void sub_812A6F4(void)
 {
     if (gUnknown_203B0E4->messageWindowId != 0xFF)
     {
@@ -1038,7 +1038,7 @@ void sub_812A6F4(void)
     ChangeBgY(0, 0, 0);
 }
 
-void sub_812A728(void)
+static void sub_812A728(void)
 {
     if (gUnknown_203B0E4->messageWindowId != 0xFF)
     {
@@ -1047,12 +1047,12 @@ void sub_812A728(void)
     }
 }
 
-void sub_812A74C(u16 x, u16 width, u8 fillValue)
+static void sub_812A74C(u16 x, u16 width, u8 fillValue)
 {
     FillWindowPixelRect(1, fillValue, x * 8, 1, width * 8, 14);
 }
 
-void sub_812A778(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
+static void sub_812A778(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
 {
     u8 *str2;
     u8 sp[38];
@@ -1070,7 +1070,7 @@ void sub_812A778(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
     AddTextPrinterParameterized3(1, 2, x * 8, 1, sp, TEXT_SPEED_FF, str2);
 }
 
-void sub_812A804(void)
+static void sub_812A804(void)
 {
     u8 page;
     int i;
@@ -1132,7 +1132,7 @@ void sub_812A804(void)
     }
 }
 
-bool32 sub_812A980(void)
+static bool32 sub_812A980(void)
 {
     if (gUnknown_203B0E4->bg1hofs < 56)
     {
@@ -1151,7 +1151,7 @@ bool32 sub_812A980(void)
     return FALSE;
 }
 
-bool32 sub_812A9C8(void)
+static bool32 sub_812A9C8(void)
 {
     if (gUnknown_203B0E4->bg1hofs > 0)
     {
@@ -1170,7 +1170,7 @@ bool32 sub_812A9C8(void)
     return FALSE;
 }
 
-void sub_812AA10(void)
+static void sub_812AA10(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
@@ -1179,13 +1179,13 @@ void sub_812AA10(void)
     PutWindowTilemap(3);
 }
 
-void sub_812AA64(void)
+static void sub_812AA64(void)
 {
     ClearStdWindowAndFrameToTransparent(3, FALSE);
     ClearWindowTilemap(3);
 }
 
-void sub_812AA78(u16 row, u8 *str, u8 arg2)
+static void sub_812AA78(u16 row, u8 *str, u8 arg2)
 {
     u8 color[3];
     color[0] = 1;
@@ -1195,7 +1195,7 @@ void sub_812AA78(u16 row, u8 *str, u8 arg2)
     AddTextPrinterParameterized3(0, 2, 0, row * 15, color, TEXT_SPEED_FF, str);
 }
 
-void sub_812AAD4(void)
+static void sub_812AAD4(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -1220,7 +1220,7 @@ void sub_812AAD4(void)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
 }
 
-void sub_812AB8C(void)
+static void sub_812AB8C(void)
 {
     SetBgTilemapBuffer(0, gUnknown_203B0E4->bg0Buffer);
     SetBgTilemapBuffer(1, gUnknown_203B0E4->bg1Buffer);
@@ -1228,14 +1228,14 @@ void sub_812AB8C(void)
     SetBgTilemapBuffer(2, gUnknown_203B0E4->bg2Buffer);
 }
 
-void sub_812ABD8(void)
+static void sub_812ABD8(void)
 {
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
 }
 
-void sub_812AC08(void)
+static void sub_812AC08(void)
 {
     LoadPalette(gUnknown_8EAA9F0, 0x70, 0x20);
     LoadPalette(gUnknown_845AA24, 0xC0, 0x20);
@@ -1244,7 +1244,7 @@ void sub_812AC08(void)
     CopyBgTilemapBufferToVram(1);
 }
 
-void sub_812AC58(void)
+static void sub_812AC58(void)
 {
     u8 *ptr;
 
@@ -1254,13 +1254,13 @@ void sub_812AC58(void)
     CopyBgTilemapBufferToVram(2);
 }
 
-void sub_812AC9C(void)
+static void sub_812AC9C(void)
 {
     LoadPalette(gUnknown_845AA44, 0x80, 0x20);
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
-void sub_812ACC0(void)
+static void sub_812ACC0(void)
 {
     LoadPalette(gUnknown_845AA64, 0xF0, 0x20);
     PutWindowTilemap(0);
@@ -1268,21 +1268,21 @@ void sub_812ACC0(void)
     CopyWindowToVram(0, 3);
 }
 
-void sub_812ACEC(void)
+static void sub_812ACEC(void)
 {
     PutWindowTilemap(2);
     sub_812A804();
     CopyWindowToVram(2, 3);
 }
 
-void sub_812AD04(void)
+static void sub_812AD04(void)
 {
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
 
-void sub_812AD20(void)
+static void sub_812AD20(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     TextWindow_SetUserSelectedFrame(3, 1, 0xD0);
@@ -1290,7 +1290,7 @@ void sub_812AD20(void)
     LoadPalette(gTMCaseMainWindowPalette, 0xE0,  0x20);
 }
 
-void sub_812AD50(void)
+static void sub_812AD50(void)
 {
     struct ScanlineEffectParams params;
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
@@ -1302,13 +1302,13 @@ void sub_812AD50(void)
     ScanlineEffect_SetParams(params);
 }
 
-void sub_812ADA0(s16 arg0)
+static void sub_812ADA0(s16 arg0)
 {
     CpuFill16(arg0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
     CpuFill16(0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
 }
 
-void sub_812ADF8(s16 arg0)
+static void sub_812ADF8(s16 arg0)
 {
     CpuFill16(arg0, gScanlineEffectRegBuffers[0],         0x120);
     CpuFill16(0,    gScanlineEffectRegBuffers[0] +  0x90, 0x20);

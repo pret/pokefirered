@@ -47,42 +47,41 @@ struct UnionRoomChat
     u8 unk190[0x28];
 };
 
-EWRAM_DATA struct UnionRoomChat * gUnknown_203B0E0 = NULL;
+static EWRAM_DATA struct UnionRoomChat * gUnknown_203B0E0 = NULL;
 
-void sub_812845C(struct UnionRoomChat * unionRoomChat);
-void c2_081284E0(void);
-void sub_81285B4(void);
-void sub_81285CC(void);
-void sub_81285E8(u8 taskId);
-void sub_8128640(void);
-void sub_81286C4(void);
-void sub_81287B4(void);
-void sub_81288D4(void);
-void sub_8128AA0(void);
-void sub_8128C04(void);
-void sub_8128CA8(void);
-void sub_8128DA4(void);
-void sub_8128E78(void);
-void sub_8128FB8(void);
-void sub_8129218(u16 a0);
-bool32 sub_8129228(void);
-void sub_81292D8(void);
-void sub_81293AC(void);
-void sub_81293D8(void);
-bool32 sub_8129408(void);
-void sub_8129424(void);
-void sub_8129454(void);
-void sub_8129470(void);
-u8 *sub_81294C8(void);
-u8 *sub_81294EC(void);
-void sub_8129560(u8 *ptr);
-void sub_8129568(u8 *ptr);
-void sub_8129590(u8 *ptr);
-void sub_81295C0(u8 *ptr);
-void sub_81295EC(u8 *ptr);
-void sub_8129614(u8 *ptr);
-u8 *sub_8129758(void);
-void sub_81298F8(u8 taskId);
+static void sub_812845C(struct UnionRoomChat * unionRoomChat);
+static void c2_081284E0(void);
+static void sub_81285B4(void);
+static void sub_81285CC(void);
+static void sub_81285E8(u8 taskId);
+static void sub_8128640(void);
+static void sub_81286C4(void);
+static void sub_81287B4(void);
+static void sub_81288D4(void);
+static void sub_8128AA0(void);
+static void sub_8128C04(void);
+static void sub_8128CA8(void);
+static void sub_8128DA4(void);
+static void sub_8128E78(void);
+static void sub_8128FB8(void);
+static void sub_8129218(u16 a0);
+static bool32 sub_8129228(void);
+static void sub_81292D8(void);
+static void sub_81293AC(void);
+static void sub_81293D8(void);
+static bool32 sub_8129408(void);
+static void sub_8129424(void);
+static void sub_8129454(void);
+static void sub_8129470(void);
+static u8 *sub_81294C8(void);
+static u8 *sub_81294EC(void);
+static void sub_8129560(u8 *ptr);
+static void sub_8129568(u8 *ptr);
+static void sub_8129590(u8 *ptr);
+static void sub_81295C0(u8 *ptr);
+static void sub_81295EC(u8 *ptr);
+static void sub_8129614(u8 *ptr);
+static void sub_81298F8(u8 taskId);
 
 static void (*const gUnknown_845A880[])(void) = {
     sub_8128640,
@@ -105,7 +104,7 @@ static const u8 sKeyboardPageMaxRow[] =
     9
 };
 
-const u8 gUnknown_845A8AC[] = {
+static const u8 gUnknown_845A8AC[] = {
     CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
     0x1D, 0x1E, CHAR_SPACE, 0x20, 0x21, 0x22, 0x23, 0x24,
     0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
@@ -189,7 +188,7 @@ void sub_8128420(void)
     SetMainCallback2(c2_081284E0);
 }
 
-void sub_812845C(struct UnionRoomChat * unionRoomChat)
+static void sub_812845C(struct UnionRoomChat * unionRoomChat)
 {
     int i;
 
@@ -211,14 +210,14 @@ void sub_812845C(struct UnionRoomChat * unionRoomChat)
         StringCopy(unionRoomChat->unkB9[i], gSaveBlock1Ptr->unk3AD4[i]);
 }
 
-void sub_81284BC(void)
+static void sub_81284BC(void)
 {
     DestroyTask(gUnknown_203B0E0->unkE);
     DestroyTask(gUnknown_203B0E0->unkF);
     Free(gUnknown_203B0E0);
 }
 
-void c2_081284E0(void)
+static void c2_081284E0(void)
 {
     switch (gMain.state)
     {
@@ -254,7 +253,7 @@ void c2_081284E0(void)
     }
 }
 
-void sub_81285B4(void)
+static void sub_81285B4(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -262,7 +261,7 @@ void sub_81285B4(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_81285CC(void)
+static void sub_81285CC(void)
 {
     RunTasks();
     sub_8129BFC();
@@ -271,7 +270,7 @@ void sub_81285CC(void)
     UpdatePaletteFade();
 }
 
-void sub_81285E8(u8 taskId)
+static void sub_81285E8(u8 taskId)
 {
     switch (gUnknown_203B0E0->unk17)
     {
@@ -292,7 +291,7 @@ void sub_81285E8(u8 taskId)
     gUnknown_845A880[gUnknown_203B0E0->unk4]();
 }
 
-void sub_8128640(void)
+static void sub_8128640(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -314,7 +313,7 @@ void sub_8128640(void)
     }
 }
 
-void sub_81286C4(void)
+static void sub_81286C4(void)
 {
     bool8 var0, var1;
 
@@ -378,7 +377,7 @@ void sub_81286C4(void)
     }
 }
 
-void sub_81287B4(void)
+static void sub_81287B4(void)
 {
     s16 input;
     int var0;
@@ -439,7 +438,7 @@ void sub_81287B4(void)
     }
 }
 
-void sub_81288D4(void)
+static void sub_81288D4(void)
 {
     s8 input;
 
@@ -526,7 +525,7 @@ void sub_81288D4(void)
     }
 }
 
-void sub_8128AA0(void)
+static void sub_8128AA0(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -583,7 +582,7 @@ void sub_8128AA0(void)
     }
 }
 
-void sub_8128C04(void)
+static void sub_8128C04(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -618,7 +617,7 @@ void sub_8128C04(void)
     }
 }
 
-void sub_8128CA8(void)
+static void sub_8128CA8(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -664,7 +663,7 @@ void sub_8128CA8(void)
     }
 }
 
-void sub_8128DA4(void)
+static void sub_8128DA4(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -698,7 +697,7 @@ void sub_8128DA4(void)
     }
 }
 
-void sub_8128E78(void)
+static void sub_8128E78(void)
 {
     switch (gUnknown_203B0E0->unk6)
     {
@@ -761,7 +760,7 @@ void sub_8128E78(void)
     }
 }
 
-void sub_8128FB8(void)
+static void sub_8128FB8(void)
 {
     s8 input;
 
@@ -877,13 +876,13 @@ void sub_8128FB8(void)
     }
 }
 
-void sub_8129218(u16 arg0)
+static void sub_8129218(u16 arg0)
 {
     gUnknown_203B0E0->unk4 = arg0;
     gUnknown_203B0E0->unk6 = 0;
 }
 
-bool32 sub_8129228(void)
+static bool32 sub_8129228(void)
 {
     if (!(gMain.newAndRepeatedKeys & DPAD_UP))
     {
@@ -934,7 +933,7 @@ bool32 sub_8129228(void)
     }
 }
 
-void sub_81292D8(void)
+static void sub_81292D8(void)
 {
     int i;
     const u8 *charsStr;
@@ -987,7 +986,7 @@ void sub_81292D8(void)
     *str = EOS;
 }
 
-void sub_81293AC(void)
+static void sub_81293AC(void)
 {
     gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15;
     if (gUnknown_203B0E0->unk15)
@@ -998,7 +997,7 @@ void sub_81293AC(void)
     }
 }
 
-void sub_81293D8(void)
+static void sub_81293D8(void)
 {
     u8 *str;
     u8 character;
@@ -1013,7 +1012,7 @@ void sub_81293D8(void)
     }
 }
 
-bool32 sub_8129408(void)
+static bool32 sub_8129408(void)
 {
     if (gUnknown_203B0E0->unk15)
         return TRUE;
@@ -1021,21 +1020,21 @@ bool32 sub_8129408(void)
         return FALSE;
 }
 
-void sub_8129424(void)
+static void sub_8129424(void)
 {
     u8 *src = sub_8129758();
     StringCopy(gUnknown_203B0E0->unkB9[gUnknown_203B0E0->currentRow], src);
     gUnknown_203B0E0->unk18 = 1;
 }
 
-void sub_8129454(void)
+static void sub_8129454(void)
 {
     gUnknown_203B0E0->unk1A[0] = EOS;
     gUnknown_203B0E0->unk14 = 15;
     gUnknown_203B0E0->unk15 = 0;
 }
 
-void sub_8129470(void)
+static void sub_8129470(void)
 {
     int i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
@@ -1048,7 +1047,7 @@ u8 *sub_81294B0(int arg0)
 }
 
 // GetEndOfUnk1A
-u8 *sub_81294C8(void)
+static u8 *sub_81294C8(void)
 {
     u8 *str = gUnknown_203B0E0->unk1A;
     while (*str != EOS)
@@ -1058,7 +1057,7 @@ u8 *sub_81294C8(void)
 }
 
 // GetPtrToLastCharOfUnk1A
-u8 *sub_81294EC(void)
+static u8 *sub_81294EC(void)
 {
     u8 *str = gUnknown_203B0E0->unk1A;
     u8 *str2 = str;
@@ -1073,7 +1072,7 @@ u8 *sub_81294EC(void)
     return str2;
 }
 
-u16 sub_812951C(void)
+static u16 sub_812951C(void)
 {
     u8 *str;
     u32 i, numChars, strLength;
@@ -1097,26 +1096,26 @@ u16 sub_812951C(void)
     return numChars;
 }
 
-void sub_8129560(u8 *arg0)
+static void sub_8129560(u8 *arg0)
 {
     arg0[0] = 0;
 }
 
-void sub_8129568(u8 *arg0)
+static void sub_8129568(u8 *arg0)
 {
     arg0[0] = 2;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
 }
 
-void sub_8129590(u8 *arg0)
+static void sub_8129590(u8 *arg0)
 {
     arg0[0] = 1;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     StringCopy(&arg0[1 + (PLAYER_NAME_LENGTH + 1)], gUnknown_203B0E0->unk1A);
 }
 
-void sub_81295C0(u8 *arg0)
+static void sub_81295C0(u8 *arg0)
 {
     arg0[0] = 3;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
@@ -1124,21 +1123,21 @@ void sub_81295C0(u8 *arg0)
     sub_80FB9D0();
 }
 
-void sub_81295EC(u8 *arg0)
+static void sub_81295EC(u8 *arg0)
 {
     arg0[0] = 4;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
 }
 
-void sub_8129614(u8 *arg0)
+static void sub_8129614(u8 *arg0)
 {
     arg0[0] = 5;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
     arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
 }
 
-bool32 sub_812963C(u8 *arg0, u8 *arg1)
+static bool32 sub_812963C(u8 *arg0, u8 *arg1)
 {
     u8 *tempStr;
     u8 var0 = *arg1;
@@ -1297,7 +1296,7 @@ void copy_strings_to_sav1(void)
     StringCopy(gSaveBlock1Ptr->unk3AD4[9], gText_ByeBye);
 }
 
-void sub_81298F8(u8 taskId)
+static void sub_81298F8(u8 taskId)
 {
     u8 *buffer;
     s16 *data = gTasks[taskId].data;

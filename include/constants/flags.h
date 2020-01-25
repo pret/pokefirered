@@ -1046,7 +1046,7 @@
 #define HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE                            23
 #define HIDDEN_ITEM_SILPH_CO_5F_ELIXIR                                 24
 #define HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION                             25
-#define HIDDEN_ITEM_SAFFRON_CITY_HOUSE1_2F_NUGGET                      26
+#define HIDDEN_ITEM_SAFFRON_CITY_COPYCATS_HOUSE_2F_NUGGET              26
 #define HIDDEN_ITEM_POWER_PLANT_MAX_ELIXIR                             27
 #define HIDDEN_ITEM_POWER_PLANT_THUNDER_STONE                          28
 #define HIDDEN_ITEM_SEAFOAM_ISLANDS_B3F_NUGGET                         29

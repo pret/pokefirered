@@ -118,12 +118,12 @@ SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	release
 	end
 
-SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
+SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina:: @ 81ACEEC
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 4
 	textcolor 3
-	msgbox gUnknown_81B1753
+	msgbox PokemonJournal_Text_SpecialFeatureSabrina
 	release
 	end
 
@@ -160,12 +160,12 @@ FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
+SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 2
 	textcolor 3
-	msgbox gUnknown_81B1913
+	msgbox PokemonJournal_Text_SpecialFeatureBruno
 	release
 	end
 
@@ -215,15 +215,15 @@ EventScript_1AD021:: @ 81AD021
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 
-SaffronCity_EventScript_1AD03A:: @ 81AD03A
+SaffronCity_EventScript_BattleGirl:: @ 81AD03A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 2
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 

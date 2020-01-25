@@ -58,3 +58,11 @@ Route5_PokemonDayCare_Text_YouveGotNoRoomForIt:: @ 819DFC2
 
 Route5_PokemonDayCare_Text_DontHaveEnoughMoney:: @ 819E001
 	.string "You don't have enough money.$"
+
+Text_19E01E:: @ 819E01E
+    .string "きみの\n"
+    .string "みてみるかね？$"
+
+Text_19E02A:: @ 819E02A
+    .string "わるいけど　ひでんのわざを　もった\n"
+    .string "ポケモンは　あずかれないなぁ$"

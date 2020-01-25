@@ -45,7 +45,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_16737A",
+      "script": "SaffronCity_EventScript_RocketGrunt1",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -58,7 +58,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_167383",
+      "script": "SaffronCity_EventScript_RocketGrunt2",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -71,7 +71,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_16738C",
+      "script": "SaffronCity_EventScript_RocketGrunt3",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -84,7 +84,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_167395",
+      "script": "SaffronCity_EventScript_RocketGrunt4",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -97,7 +97,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_16739E",
+      "script": "SaffronCity_EventScript_RocketGrunt5",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -110,7 +110,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673B9",
+      "script": "SaffronCity_EventScript_DoorGuardGrunt",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -123,7 +123,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673B0",
+      "script": "SaffronCity_EventScript_RocketGrunt7",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -136,7 +136,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673A7",
+      "script": "SaffronCity_EventScript_RocketGrunt6",
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
@@ -149,7 +149,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673EC",
+      "script": "SaffronCity_EventScript_Youngster",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -162,7 +162,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673E3",
+      "script": "SaffronCity_EventScript_WorkerM",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -175,7 +175,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_16741A",
+      "script": "SaffronCity_EventScript_Man",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -188,7 +188,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673FE",
+      "script": "SaffronCity_EventScript_Boy",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -201,7 +201,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_167407",
+      "script": "SaffronCity_EventScript_Pidgeot",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -214,7 +214,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1673F5",
+      "script": "SaffronCity_EventScript_Lass",
       "flag": "FLAG_HIDE_SAFFRON_CIVILIANS"
     },
     {
@@ -227,7 +227,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_EventScript_1AD03A",
+      "script": "SaffronCity_EventScript_BattleGirl",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
@@ -243,7 +243,7 @@
       "x": 22,
       "y": 14,
       "elevation": 0,
-      "dest_map": "MAP_SAFFRON_CITY_HOUSE1_1F",
+      "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F",
       "dest_warp_id": 1
     },
     {
@@ -264,7 +264,7 @@
       "x": 27,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_SAFFRON_CITY_HOUSE2",
+      "dest_map": "MAP_SAFFRON_CITY_HOUSE",
       "dest_warp_id": 1
     },
     {
@@ -285,7 +285,7 @@
       "x": 43,
       "y": 38,
       "elevation": 0,
-      "dest_map": "MAP_SAFFRON_CITY_HOUSE3",
+      "dest_map": "MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE",
       "dest_warp_id": 1
     },
     {
@@ -345,63 +345,63 @@
       "x": 29,
       "y": 14,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_167423"
+      "script": "SaffronCity_EventScript_CitySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 42,
       "y": 14,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_16742C"
+      "script": "SaffronCity_EventScript_DojoSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 25,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_167471"
+      "script": "SaffronCity_EventScript_SilphProductSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 18,
       "y": 30,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_167456"
+      "script": "SaffronCity_EventScript_TrainerTips2"
     },
     {
       "type": "bg_event_type_0",
       "x": 29,
       "y": 31,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_16745F"
+      "script": "SaffronCity_EventScript_SilphCoSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 54,
       "y": 25,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_16744D"
+      "script": "SaffronCity_EventScript_TrainerTips1"
     },
     {
       "type": "bg_event_type_0",
       "x": 50,
       "y": 14,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_167435"
+      "script": "SaffronCity_EventScript_GymSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 40,
       "y": 38,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_167468"
+      "script": "SaffronCity_EventScript_MrPsychicsHouseSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 49,
       "y": 22,
       "elevation": 0,
-      "script": "SaffronCity_EventScript_16747A"
+      "script": "SaffronCity_EventScript_TrainerFanClubSign"
     }
   ]
 }

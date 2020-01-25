@@ -1,6 +1,6 @@
 {
-  "id": "MAP_SAFFRON_CITY_HOUSE3",
-  "name": "SaffronCity_House3",
+  "id": "MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE",
+  "name": "SaffronCity_MrPsychicsHouse",
   "layout": "LAYOUT_HOUSE5",
   "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House3_EventScript_16F05F",
+      "script": "SaffronCity_MrPsychicsHouse_EventScript_MrPsychic",
       "flag": "0"
     }
   ],

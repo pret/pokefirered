@@ -1,27 +1,27 @@
 VermilionCity_Mart_MapScripts:: @ 816B653
 	.byte 0
 
-VermilionCity_Mart_EventScript_16B654:: @ 816B654
-	msgbox gUnknown_8194B65, MSGBOX_NPC
+VermilionCity_Mart_EventScript_CooltrainerF:: @ 816B654
+	msgbox VermilionCity_Mart_Text_MonsGoodOrBadDependingOnTrainer, MSGBOX_NPC
 	end
 
-VermilionCity_Mart_EventScript_16B65D:: @ 816B65D
-	msgbox gUnknown_8194A77, MSGBOX_NPC
+VermilionCity_Mart_EventScript_BaldingMan:: @ 816B65D
+	msgbox VermilionCity_Mart_Text_TeamRocketAreWickedPeople, MSGBOX_NPC
 	end
 
-VermilionCity_Mart_EventScript_16B666:: @ 816B666
+VermilionCity_Mart_EventScript_Clerk:: @ 816B666
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16B68C
+	pokemart VermilionCity_Mart_Items
 	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16B68C:: @ 816B68C
+VermilionCity_Mart_Items:: @ 816B68C
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE

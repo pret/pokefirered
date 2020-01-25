@@ -84,11 +84,11 @@ CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty:: @ 81ACE68
 	release
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
+VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	lockall
 	famechecker FAMECHECKER_LTSURGE, 5
 	textcolor 3
-	msgbox gUnknown_81B1558
+	msgbox PokemonJournal_Text_SpecialFeatureLtSurge
 	releaseall
 	end
 

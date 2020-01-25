@@ -16374,13 +16374,13 @@ gFameCheckerBg3Tilemap:: @ 8EA0700
 gFameCheckerBg2Tilemap:: @ 8EA0F00
 	.incbin "data/graphics/fame_checker_tilemap2.bin"
 
-gUnknown_8EA1700:: @ 8EA1700
+gLinkMiscMenu_Pal:: @ 8EA1700
 	.incbin "graphics/interface/union_room_chat.gbapal"
 
-gUnknown_8EA1720:: @ 8EA1720
+gLinkMiscMenu_Gfx:: @ 8EA1720
 	.incbin "graphics/interface/union_room_chat.4bpp.lz"
 
-gUnknown_8EA1958:: @ 8EA1958
+gLinkMiscMenu_Tilemap:: @ 8EA1958
 	.incbin "graphics/interface/union_room_chat.bin.lz"
 
 gUnknown_8EA1A50:: @ 8EA1A50

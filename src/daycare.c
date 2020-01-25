@@ -1,44 +1,34 @@
 #include "global.h"
-#include "pokemon.h"
+#include "gflib.h"
 #include "battle.h"
 #include "daycare.h"
-#include "string_util.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "mail_data.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
 #include "random.h"
-#include "main.h"
 #include "constants/moves.h"
-#include "text.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "script.h"
 #include "strings.h"
-#include "task.h"
-#include "window.h"
 #include "party_menu.h"
 #include "list_menu.h"
 #include "overworld.h"
 #include "pokedex.h"
 #include "decompress.h"
-#include "palette.h"
-#include "sound.h"
 #include "constants/songs.h"
 #include "text_window.h"
 #include "trig.h"
-#include "malloc.h"
-#include "gpu_regs.h"
-#include "bg.h"
 #include "m4a.h"
 #include "graphics.h"
 #include "scanline_effect.h"
 #include "naming_screen.h"
 #include "help_system.h"
 #include "field_fadetransition.h"
+#include "trade.h"
 #include "constants/daycare.h"
-#include "constants/pokemon.h"
 #include "constants/region_map.h"
 
 // Combination of RSE's Day-Care (re-used on Four Island), FRLG's Day-Care, and egg_hatch.c
@@ -59,20 +49,6 @@ struct EggHatchData
     u16 species;
     u8 textColor[3];
 };
-
-extern const u8 gText_MaleSymbol4[];
-extern const u8 gText_FemaleSymbol4[];
-extern const u8 gText_GenderlessSymbol[];
-extern const u8 gText_Lv[];
-extern const u8 gDaycareText_GetAlongVeryWell[];
-extern const u8 gDaycareText_GetAlong[];
-extern const u8 gDaycareText_DontLikeOther[];
-extern const u8 gDaycareText_PlayOther[];
-extern const u8 gExpandedPlaceholder_Empty[];
-
-extern const u32 gUnknown_826601C[]; // tilemap gameboy circle
-extern const u8 gText_HatchedFromEgg[];
-extern const u8 gText_NickHatchPrompt[];
 
 // this file's functions
 static void ClearDaycareMonMail(struct DayCareMail *mail);

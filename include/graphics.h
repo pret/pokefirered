@@ -4864,4 +4864,12 @@ extern const u32 gUnknown_8E83444[];
 extern const u32 gBagBgPalette[];
 extern const u32 gBagBgPalette_FemaleOverride[];
 
+// union_room_chat_display
+extern const u16 gUnknown_8EAA9F0[];
+extern const u32 gUnknown_8EAAA10[];
+extern const u32 gUnknown_8EAAA6C[];
+extern const u16 gLinkMiscMenu_Pal[];
+extern const u32 gLinkMiscMenu_Gfx[];
+extern const u32 gLinkMiscMenu_Tilemap[];
+
 #endif //GUARD_GRAPHICS_H

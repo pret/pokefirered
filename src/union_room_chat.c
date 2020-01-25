@@ -13,17 +13,10 @@
 #include "scanline_effect.h"
 #include "strings.h"
 #include "task.h"
+#include "union_room_chat.h"
 #include "union_room_chat_display.h"
 #include "data_8479668.h"
 #include "constants/songs.h"
-
-enum
-{
-    UNION_ROOM_KB_PAGE_UPPER,
-    UNION_ROOM_KB_PAGE_LOWER,
-    UNION_ROOM_KB_PAGE_EMOJI,
-    UNION_ROOM_KB_PAGE_COUNT
-};
 
 struct UnionRoomChat
 {
@@ -147,7 +140,7 @@ const u8 gUnknown_845A8AC[] = {
     CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
 };
 
-const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = {
+const u8 *const gUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = {
     [UNION_ROOM_KB_PAGE_UPPER] = {
         gText_UnionRoomChatKeyboard_ABCDE,
         gText_UnionRoomChatKeyboard_FGHIJ,
@@ -951,7 +944,7 @@ void sub_81292D8(void)
 
     if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
     {
-        charsStr = sUnionRoomKeyboardText[gUnknown_203B0E0->currentPage][gUnknown_203B0E0->currentRow];
+        charsStr = gUnionRoomKeyboardText[gUnknown_203B0E0->currentPage][gUnknown_203B0E0->currentRow];
         for (i = 0; i < gUnknown_203B0E0->unk11; i++)
         {
             if (*charsStr == CHAR_EXTRA_EMOJI)
@@ -1265,7 +1258,7 @@ u8 *sub_81297C4(void)
     return gUnknown_203B0E0->unk39;
 }
 
-u8 sub_81297D0(void)
+u16 sub_81297D0(void)
 {
     return gUnknown_203B0E0->unk16;
 }

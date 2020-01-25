@@ -1,24 +1,24 @@
 SSAnne_Deck_MapScripts:: @ 8160A68
 	.byte 0
 
-SSAnne_Deck_EventScript_160A69:: @ 8160A69
-	msgbox gUnknown_817326F, MSGBOX_NPC
+SSAnne_Deck_EventScript_Youngster:: @ 8160A69
+	msgbox SSAnne_Deck_Text_ShipDepartingSoon, MSGBOX_NPC
 	end
 
-SSAnne_Deck_EventScript_160A72:: @ 8160A72
-	msgbox gUnknown_81732C6, MSGBOX_NPC
+SSAnne_Deck_EventScript_BaldingMan:: @ 8160A72
+	msgbox SSAnne_Deck_Text_FeelSeasick, MSGBOX_NPC
 	end
 
-SSAnne_Deck_EventScript_160A7B:: @ 8160A7B
-	msgbox gUnknown_81732A2, MSGBOX_NPC
+SSAnne_Deck_EventScript_Sailor:: @ 8160A7B
+	msgbox SSAnne_Deck_Text_ScrubbingDecksHardWork, MSGBOX_NPC
 	end
 
-SSAnne_Deck_EventScript_160A84:: @ 8160A84
-	trainerbattle_single TRAINER_SAILOR_EDMOND, Text_173308, Text_17332B
-	msgbox gUnknown_817333E, MSGBOX_AUTOCLOSE
+SSAnne_Deck_EventScript_Edmond:: @ 8160A84
+	trainerbattle_single TRAINER_SAILOR_EDMOND, SSAnne_Deck_Text_EdmondIntro, SSAnne_Deck_Text_EdmondDefeat
+	msgbox SSAnne_Deck_Text_EdmondPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SSAnne_Deck_EventScript_160A9B:: @ 8160A9B
-	trainerbattle_single TRAINER_SAILOR_TREVOR, Text_173382, Text_1733A0
-	msgbox gUnknown_81733B5, MSGBOX_AUTOCLOSE
+SSAnne_Deck_EventScript_Trevor:: @ 8160A9B
+	trainerbattle_single TRAINER_SAILOR_TREVOR, SSAnne_Deck_Text_TrevorIntro, SSAnne_Deck_Text_TrevorDefeat
+	msgbox SSAnne_Deck_Text_TrevorPostBattle, MSGBOX_AUTOCLOSE
 	end

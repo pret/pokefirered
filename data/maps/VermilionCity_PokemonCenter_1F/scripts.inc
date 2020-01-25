@@ -7,21 +7,21 @@ VermilionCity_PokemonCenter_1F_OnTransition:: @ 816B42F
 	setrespawn SPAWN_VERMILION_CITY
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_16B433:: @ 816B433
+VermilionCity_PokemonCenter_1F_EventScript_Nurse:: @ 816B433
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_16B43C:: @ 816B43C
-	msgbox gUnknown_8194145, MSGBOX_NPC
+VermilionCity_PokemonCenter_1F_EventScript_Man:: @ 816B43C
+	msgbox VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking, MSGBOX_NPC
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_16B445:: @ 816B445
-	msgbox gUnknown_81940AF, MSGBOX_NPC
+VermilionCity_PokemonCenter_1F_EventScript_Hiker:: @ 816B445
+	msgbox VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild, MSGBOX_NPC
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_16B44E:: @ 816B44E
-	msgbox gUnknown_8194180, MSGBOX_NPC
+VermilionCity_PokemonCenter_1F_EventScript_Youngster:: @ 816B44E
+	msgbox VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes, MSGBOX_NPC
 	end

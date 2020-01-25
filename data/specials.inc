@@ -387,7 +387,7 @@ gSpecials:: @ 815FD60
 	def_special IsThereMonInRoute5Daycare
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
-	def_special ScrSpecial_SeagallopFerry
+	def_special DoSeagallopFerryScene
 	def_special Special_PlayerPartyContainsSpecies
 	def_special Special_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
@@ -433,11 +433,11 @@ gSpecials:: @ 815FD60
 	def_special ShowDodrioBerryPickingRecords
 	def_special Special_DrawSeagallopDestinationMenu
 	def_special Special_GetSelectedSeagallopDestination
-	def_special sub_8147500
+	def_special GetSeagallopNumber
 	def_special GetPlayerFacingDirection
 	def_special DoDeoxysRockInteraction
 	def_special Special_SetDeoxysTriangleObjectPal
-	def_special sub_8147594
+	def_special IsPlayerLeftOfVermilionSailor
 	def_special Special_BadEggInParty
 	def_special sub_815D834
 	def_special HasAllMons

@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SSAnne_B1F_Room1_EventScript_160D48",
+      "script": "SSAnne_B1F_Room1_EventScript_Barny",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SSAnne_B1F_Room1_EventScript_160D5F",
+      "script": "SSAnne_B1F_Room1_EventScript_Phillip",
       "flag": "0"
     }
   ],

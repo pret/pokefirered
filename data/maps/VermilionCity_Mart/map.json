@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_Mart_EventScript_16B666",
+      "script": "VermilionCity_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_Mart_EventScript_16B654",
+      "script": "VermilionCity_Mart_EventScript_CooltrainerF",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_Mart_EventScript_16B65D",
+      "script": "VermilionCity_Mart_EventScript_BaldingMan",
       "flag": "0"
     }
   ],

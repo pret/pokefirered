@@ -8,6 +8,37 @@
 #define METATILE_Shop_CounterMid_Top     0x2BF
 #define METATILE_Shop_CounterMid_Bottom  0x2C0     
 
+// Vermilion Gym
+#define METATILE_VermilionGym_Floor                             0x281
+#define METATILE_VermilionGym_Beam_MidTop                       0x285
+#define METATILE_VermilionGym_Beam_MidBottom                    0x28D
+#define METATILE_VermilionGym_Beam_Node_TopLeft_Off             0x293
+#define METATILE_VermilionGym_Beam_Node_TopLeft_Edge_Off        0x294
+#define METATILE_VermilionGym_Beam_Node_TopRight_Edge_Off       0x295
+#define METATILE_VermilionGym_Beam_Node_TopRight_Off            0x296
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_Off          0x29B
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_Off     0x29C
+#define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_Off    0x29D
+#define METATILE_VermilionGym_Beam_Node_BottomRight_Off         0x29E
+#define METATILE_VermilionGym_Beam_Node_TopLeft_On              0x2A9
+#define METATILE_VermilionGym_Beam_Node_TopLeft_Edge_On         0x2AA
+#define METATILE_VermilionGym_Beam_Node_TopRight_Edge_On        0x2AB
+#define METATILE_VermilionGym_Beam_Node_TopRight_On             0x2AC
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_On           0x2B1
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_On      0x2B2
+#define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_On     0x2B3
+#define METATILE_VermilionGym_Beam_Node_BottomRight_On          0x2B4
+#define METATILE_VermilionGym_Beam_Node_TopLeft_HalfOn          0x2BB
+#define METATILE_VermilionGym_Beam_Node_TopLeft_Edge_HalfOn     0x2BC
+#define METATILE_VermilionGym_Beam_MidTop_HalfOn                0x2BD
+#define METATILE_VermilionGym_Beam_Node_TopRight_Edge_HalfOn    0x2BE
+#define METATILE_VermilionGym_Beam_Node_TopRight_HalfOn         0x2BF
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_HalfOn       0x2C3
+#define METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_HalfOn  0x2C4
+#define METATILE_VermilionGym_Beam_MidBottom_HalfOn             0x2C5
+#define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn 0x2C6
+#define METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn      0x2C7
+
 // Pokemon Mansion
 #define METATILE_PokemonMansion_Floor                                    0x284
 #define METATILE_PokemonMansion_Floor_ShadeFull                          0x285

@@ -1387,7 +1387,7 @@ PokemonJournal_Text_SpecialFeatureMisty:: @ 81B14E8
 	.string "MISTY is said to worship LORELEI\n"
 	.string "of the ELITE FOUR.$"
 
-gUnknown_81B1558:: @ 81B1558
+PokemonJournal_Text_SpecialFeatureLtSurge:: @ 81B1558
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: VERMILION GYM\n"
 	.string "LEADER LT. SURGE!\p"

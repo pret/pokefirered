@@ -1,7 +1,3 @@
-@ Odd, doesnt seem to be corresponding text in RB. Unclear what this was meant for
-Text_BuddhistAltar:: @ 8197B6F
-    .string "ぶつだん　だ‥$"
-
 CeladonCity_Hotel_Text_ThisHotelIsForPeople:: @ 8197B77
     .string "POKéMON?\n"
     .string "No, this is a hotel for people.\p"

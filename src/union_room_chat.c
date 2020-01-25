@@ -13,6 +13,7 @@
 #include "scanline_effect.h"
 #include "strings.h"
 #include "task.h"
+#include "union_room_chat_display.h"
 #include "data_8479668.h"
 #include "constants/songs.h"
 
@@ -89,13 +90,6 @@ void sub_81295EC(u8 *ptr);
 void sub_8129614(u8 *ptr);
 u8 *sub_8129758(void);
 void sub_81298F8(u8 taskId);
-void sub_8129B14(void);
-bool32 sub_8129B78(void);
-void sub_8129B88(void);
-void sub_8129BFC(void);
-void sub_8129C34(u16 a0, u8 a1);
-u8 sub_8129C8C(u8 a0);
-s8 sub_812A568(void);
 
 static void (*const gUnknown_845A880[])(void) = {
     sub_8128640,

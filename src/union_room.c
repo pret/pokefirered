@@ -3385,7 +3385,7 @@ static void sub_81199FC(u8 taskId)
         case 2:
             if (sUnionRoomPlayerName[0] == EOS)
             {
-                for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+                for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
                 {
                     if (structPtr->field_0->arr[i].field_1A_0 == 1)
                     {

@@ -182,13 +182,13 @@ struct BerryCrush
     u32 unk;
 };
 
-#define PLAYER_NAME_LENGTH  8
+#define PLAYER_NAME_LENGTH   7
 
 #define LINK_B_RECORDS_COUNT 5
 
 struct LinkBattleRecord
 {
-    u8 name[PLAYER_NAME_LENGTH];
+    u8 name[PLAYER_NAME_LENGTH + 1];
     u16 trainerId;
     u16 wins;
     u16 losses;
@@ -261,7 +261,7 @@ struct BattleTowerData // Leftover from R/S
 
 struct SaveBlock2
 {
-    /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH];
+    /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x008*/ u8 playerGender; // MALE, FEMALE
     /*0x009*/ u8 specialSaveWarpFlags;
     /*0x00A*/ u8 playerTrainerId[4];
@@ -312,7 +312,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[7]; // TODO: Change PLAYER_NAME_LENGTH to 7
+    /*0x1A9E*/ u8 trainerName[7]; // TODO: Change PLAYER_NAME_LENGTH + 1 to 7
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -404,7 +404,7 @@ struct UnkMauvilleOldManStruct
     u8 unk_2D95;
     /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
     /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
+    /*0x2DAE*/ u8 playerName[PLAYER_NAME_LENGTH + 1 + 1];
     /*0x2DB6*/ u8 filler_2DB6[0x3];
     /*0x2DB9*/ u8 playerTrainerId[4];
     u8 unk_2DBD;
@@ -715,7 +715,7 @@ struct TrainerRematchState
 struct TrainerNameRecord
 {
     u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH];
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
 #define UNION_ROOM_KB_ROW_COUNT 10
@@ -772,7 +772,7 @@ struct SaveBlock1
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[16];
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
-    /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
+    /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
     /*0x3A94*/ u8 filler3A94[0x40];
     /*0x3AD4*/ u8 unk3AD4[UNION_ROOM_KB_ROW_COUNT][21];

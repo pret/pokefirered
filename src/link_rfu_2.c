@@ -30,7 +30,7 @@ static u16 gUnknown_3002008[7];
 
 struct GFtgtGname gHostRFUtgtGnameBuffer;
 struct UnkRfuStruct_2 Rfu;
-u8 gHostRFUtgtUnameBuffer[PLAYER_NAME_LENGTH];
+u8 gHostRFUtgtUnameBuffer[PLAYER_NAME_LENGTH + 1];
 
 static void sub_80F8AA4(void);
 static void sub_80F8AEC(void);

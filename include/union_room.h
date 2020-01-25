@@ -7,7 +7,7 @@
 struct UnkStruct_Shared
 {
     struct GFtgtGname gname;
-    u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH];
+    u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct UnkStruct_x1C

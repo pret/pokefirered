@@ -92,12 +92,12 @@ VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	releaseall
 	end
 
-CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
+CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika:: @ 81ACE9D
 	lock
 	faceplayer
 	famechecker FAMECHECKER_ERIKA, 5
 	textcolor 3
-	msgbox gUnknown_81B161B
+	msgbox PokemonJournal_Text_SpecialFeatureErika
 	release
 	end
 
@@ -227,11 +227,11 @@ SaffronCity_EventScript_1AD03A:: @ 81AD03A
 	release
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
+CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 3
-	msgbox Text_19566B
+	msgbox CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes
 	release
 	end
 

@@ -1,34 +1,34 @@
 CeladonCity_Condominiums_3F_MapScripts:: @ 816C3DA
 	.byte 0
 
-CeladonCity_Condominiums_3F_EventScript_16C3DB:: @ 816C3DB
-	msgbox gUnknown_81962BF, MSGBOX_NPC
+CeladonCity_Condominiums_3F_EventScript_Programmer:: @ 816C3DB
+	msgbox CeladonCity_Condominiums_3F_Text_ImTheProgrammer, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C3E4:: @ 816C3E4
-	msgbox gUnknown_81962D7, MSGBOX_NPC
+CeladonCity_Condominiums_3F_EventScript_GraphicArtist:: @ 816C3E4
+	msgbox CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C3ED:: @ 816C3ED
-	msgbox gUnknown_81962FB, MSGBOX_NPC
+CeladonCity_Condominiums_3F_EventScript_Writer:: @ 816C3ED
+	msgbox CeladonCity_Condominiums_3F_Text_IWroteTheStory, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C3F6:: @ 816C3F6
+CeladonCity_Condominiums_3F_EventScript_Designer:: @ 816C3F6
 	lock
 	faceplayer
 	specialvar VAR_RESULT, HasAllKantoMons
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_16C412
-	msgbox gUnknown_8196356
+	compare VAR_RESULT, TRUE
+	goto_if_eq CeladonCity_Condominiums_3F_EventScript_CompletedPokedex
+	msgbox CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex
 	release
 	end
 
-EventScript_16C412:: @ 816C412
-	goto EventScript_16C418
+CeladonCity_Condominiums_3F_EventScript_CompletedPokedex:: @ 816C412
+	goto CeladonCity_Condominiums_3F_EventScript_ShowDiploma
 	end
 
-EventScript_16C418:: @ 816C418
-	message Text_1963CD
+CeladonCity_Condominiums_3F_EventScript_ShowDiploma:: @ 816C418
+	message CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations
 	waitmessage
 	delay 60
 	goto_if_questlog EventScript_ReleaseEnd
@@ -37,18 +37,18 @@ EventScript_16C418:: @ 816C418
 	release
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C435:: @ 816C435
-	msgbox gUnknown_81964A8, MSGBOX_SIGN
+CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign:: @ 816C435
+	msgbox CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C43E:: @ 816C43E
-	msgbox gUnknown_819640C, MSGBOX_SIGN
+CeladonCity_Condominiums_3F_EventScript_Computer1:: @ 816C43E
+	msgbox CeladonCity_Condominiums_3F_Text_ItsTheGameProgram, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C447:: @ 816C447
-	msgbox gUnknown_819644B, MSGBOX_SIGN
+CeladonCity_Condominiums_3F_EventScript_Computer2:: @ 816C447
+	msgbox CeladonCity_Condominiums_3F_Text_SomeonesPlayingGame, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_3F_EventScript_16C450:: @ 816C450
-	msgbox gUnknown_8196478, MSGBOX_SIGN
+CeladonCity_Condominiums_3F_EventScript_Computer3:: @ 816C450
+	msgbox CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding, MSGBOX_SIGN
 	end

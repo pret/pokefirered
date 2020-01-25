@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D111",
+      "script": "CeladonCity_Gym_EventScript_Kay",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D163",
+      "script": "CeladonCity_Gym_EventScript_Bridget",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D14C",
+      "script": "CeladonCity_Gym_EventScript_Tina",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "CeladonCity_Gym_EventScript_16D17A",
+      "script": "CeladonCity_Gym_EventScript_Tamia",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D19E",
+      "script": "CeladonCity_Gym_EventScript_Lori",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D128",
+      "script": "CeladonCity_Gym_EventScript_Lisa",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Gym_EventScript_16D061",
+      "script": "CeladonCity_Gym_EventScript_Erika",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D1B5",
+      "script": "CeladonCity_Gym_EventScript_Mary",
       "flag": "0"
     },
     {
@@ -187,14 +187,14 @@
       "x": 4,
       "y": 16,
       "elevation": 0,
-      "script": "CeladonCity_Gym_EventScript_16D1CC"
+      "script": "CeladonCity_Gym_EventScript_GymStatue"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 16,
       "elevation": 0,
-      "script": "CeladonCity_Gym_EventScript_16D1CC"
+      "script": "CeladonCity_Gym_EventScript_GymStatue"
     }
   ]
 }

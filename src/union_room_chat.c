@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "dynamic_placeholder_text_util.h"
 #include "help_system.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -10,6 +11,7 @@
 #include "quest_log.h"
 #include "save.h"
 #include "scanline_effect.h"
+#include "strings.h"
 #include "task.h"
 #include "data_8479668.h"
 #include "constants/songs.h"
@@ -1110,5 +1112,310 @@ u16 sub_812951C(void)
 
 void sub_8129560(u8 *arg0)
 {
-    arg0[0] = CHAR_SPACE;
+    arg0[0] = 0;
+}
+
+void sub_8129568(u8 *arg0)
+{
+    arg0[0] = 2;
+    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+}
+
+void sub_8129590(u8 *arg0)
+{
+    arg0[0] = 1;
+    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
+    StringCopy(&arg0[1 + (PLAYER_NAME_LENGTH + 1)], gUnknown_203B0E0->unk1A);
+}
+
+void sub_81295C0(u8 *arg0)
+{
+    arg0[0] = 3;
+    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+    sub_80FB9D0();
+}
+
+void sub_81295EC(u8 *arg0)
+{
+    arg0[0] = 4;
+    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+}
+
+void sub_8129614(u8 *arg0)
+{
+    arg0[0] = 5;
+    StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+}
+
+bool32 sub_812963C(u8 *arg0, u8 *arg1)
+{
+    u8 *tempStr;
+    u8 var0 = *arg1;
+    u8 *str = arg1 + 1;
+    arg1 = str;
+    arg1 += 8;
+
+    switch (var0)
+    {
+    case 2:
+        if (gUnknown_203B0E0->unk13 != str[8])
+        {
+            DynamicPlaceholderTextUtil_Reset();
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700JoinedChat);
+            return TRUE;
+        }
+        break;
+    case 1:
+        tempStr = StringCopy(arg0, str);
+        *(tempStr++) = EXT_CTRL_CODE_BEGIN;
+        *(tempStr++) = EXT_CTRL_CODE_CLEAR_TO;
+        *(tempStr++) = 42;
+        *(tempStr++) = CHAR_COLON;
+        StringCopy(tempStr, arg1);
+        return TRUE;
+    case 5:
+        StringCopy(gUnknown_203B0E0->unk79, str);
+        // fall through
+    case 3:
+        if (gUnknown_203B0E0->unk13 != *arg1)
+        {
+            DynamicPlaceholderTextUtil_Reset();
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700LeftChat);
+            return TRUE;
+        }
+        break;
+    }
+
+    return FALSE;
+}
+
+u8 GetCurrentKeyboardPage(void)
+{
+    return gUnknown_203B0E0->currentPage;
+}
+
+void sub_8129700(u8 *arg0, u8 *arg1)
+{
+    *arg0 = gUnknown_203B0E0->unk11;
+    *arg1 = gUnknown_203B0E0->currentRow;
+}
+
+u8 *sub_8129714(void)
+{
+    return gUnknown_203B0E0->unk1A;
+}
+
+int sub_8129720(void)
+{
+    u8 *str = sub_8129714();
+    return StringLength_Multibyte(str);
+}
+
+void sub_8129730(u32 *arg0, u32 *arg1)
+{
+    int diff = gUnknown_203B0E0->unk15 - gUnknown_203B0E0->unk14;
+    if (diff < 0)
+    {
+        diff *= -1;
+        *arg0 = gUnknown_203B0E0->unk15;
+    }
+    else
+    {
+        *arg0 = gUnknown_203B0E0->unk14;
+    }
+
+    *arg1 = diff;
+}
+
+u8 *sub_8129758(void)
+{
+    int i;
+    u16 numChars = sub_812951C();
+    u8 *str = gUnknown_203B0E0->unk1A;
+    for (i = 0; i < numChars; i++)
+    {
+        if (*str == CHAR_EXTRA_EMOJI)
+            str++;
+
+        str++;
+    }
+
+    return str;
+}
+
+u16 sub_8129788(void)
+{
+    u16 count;
+    u32 i;
+    u16 numChars = sub_812951C();
+    u8 *str = gUnknown_203B0E0->unk1A;
+    for (count = 0, i = 0; i < numChars; count++, i++)
+    {
+        if (*str == CHAR_EXTRA_EMOJI)
+            str++;
+
+        str++;
+    }
+
+    return count;
+}
+
+u8 *sub_81297C4(void)
+{
+    return gUnknown_203B0E0->unk39;
+}
+
+u8 sub_81297D0(void)
+{
+    return gUnknown_203B0E0->unk16;
+}
+
+int sub_81297DC(void)
+{
+    return gUnknown_203B0E0->unk15;
+}
+
+int sub_81297E8(void)
+{
+    u8 *str = sub_81294EC();
+    u32 character = *str;
+    if (character > 0xFF || gUnknown_845A8AC[character] == character || gUnknown_845A8AC[character] == 0)
+        return 3;
+    else
+        return 0;
+}
+
+u8 *sub_8129814(void)
+{
+    return gUnknown_203B0E0->unk79;
+}
+
+void copy_strings_to_sav1(void)
+{
+    StringCopy(gSaveBlock1Ptr->unk3AD4[0], gText_Hello);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[1], gText_Pokemon2);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[2], gText_Trade);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[3], gText_Battle);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[4], gText_Lets);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[5], gText_Ok);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[6], gText_Sorry);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[7], gText_YaySmileEmoji);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[8], gText_ThankYou);
+    StringCopy(gSaveBlock1Ptr->unk3AD4[9], gText_ByeBye);
+}
+
+void sub_81298F8(u8 taskId)
+{
+    u8 *buffer;
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            DestroyTask(taskId);
+            return;
+        }
+
+        data[0] = 1;
+        // fall through
+    case 1:
+        data[4] = GetLinkPlayerCount();
+        if (gUnknown_203B0E0->unkD != data[4])
+        {
+            data[0] = 2;
+            gUnknown_203B0E0->unkD = data[4];
+            return;
+        }
+
+        data[3] = GetBlockReceivedStatus();
+        if (!data[3] && sub_80FBA1C())
+            return;
+
+        data[1] = 0;
+        data[0] = 3;
+        // fall through
+    case 3:
+        for (; data[1] < 5 && ((data[3] >> data[1]) & 1) == 0; data[1]++)
+            ;
+
+        if (data[1] == 5)
+        {
+            data[0] = 1;
+            return;
+        }
+
+        data[2] = data[1];
+        ResetBlockReceivedFlag(data[2]);
+        buffer = (u8 *)gBlockRecvBuffer[data[1]];
+        switch (buffer[0])
+        {
+        default:
+        case 1: data[5] = 3; break;
+        case 2: data[5] = 3; break;
+        case 3: data[5] = 4; break;
+        case 4: data[5] = 5; break;
+        case 5: data[5] = 6; break;
+        }
+
+        if (sub_812963C(gUnknown_203B0E0->unk39, (u8 *)gBlockRecvBuffer[data[1]]))
+        {
+            gUnknown_203B0E0->unk16 = data[1];
+            sub_8129C34(12, 2);
+            data[0] = 7;
+        }
+        else
+        {
+            data[0] = data[5];
+        }
+
+        data[1]++;
+        break;
+    case 7:
+        if (!sub_8129C8C(2))
+            data[0] = data[5];
+        break;
+    case 4:
+        if (!gUnknown_203B0E0->unk13 && data[2])
+        {
+            if (GetLinkPlayerCount() == 2)
+            {
+                sub_80FA4A8();
+                gUnknown_203B0E0->unk17 = 1;
+                DestroyTask(taskId);
+                return;
+            }
+
+            sub_80FBD6C(data[2]);
+        }
+
+        data[0] = 3;
+        break;
+    case 5:
+        if (gUnknown_203B0E0->unk13)
+            gUnknown_203B0E0->unk17 = 2;
+
+        DestroyTask(taskId);
+        break;
+    case 6:
+        gUnknown_203B0E0->unk17 = 3;
+        DestroyTask(taskId);
+        break;
+    case 2:
+        if (!sub_80FBA1C())
+        {
+            if (!gUnknown_203B0E0->unk13)
+                sub_80FB030(gUnknown_203B0E0->unkD);
+
+            data[0] = 1;
+        }
+        break;
+    }
 }

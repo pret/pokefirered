@@ -3123,10 +3123,10 @@ gUnknown_841B38A:: @ 0x841B38A
 gUnknown_841B39E:: @ 0x841B39E
 	.string "Input text.$"
 
-gUnknown_841B3AA:: @ 841B3AA
+gText_F700JoinedChat:: @ 841B3AA
 	.string "{DYNAMIC 0x00} joined the chat!$"
 
-gUnknown_841B3BE:: @ 841B3BE
+gText_F700LeftChat:: @ 841B3BE
 	.string "{DYNAMIC 0x00} left the chat.$"
 
 gUnknown_841B3D0:: @ 0x841B3D0
@@ -3161,34 +3161,34 @@ gUnknown_841B4D9:: @ 0x841B4D9
 	.string "If the LEADER leaves, the chat\n"
 	.string "will end. Is that okay?$"
 
-gUnknown_841B510:: @ 841B510
+gText_Hello:: @ 841B510
 	.string "HELLO$"
 
-gUnknown_841B516:: @ 841B516
+gText_Pokemon2:: @ 841B516
 	.string "POKéMON$"
 
-gUnknown_841B51E:: @ 841B51E
+gText_Trade:: @ 841B51E
 	.string "TRADE$"
 
-gUnknown_841B524:: @ 841B524
+gText_Battle:: @ 841B524
 	.string "BATTLE$"
 
-gUnknown_841B52B:: @ 841B52B
+gText_Lets:: @ 841B52B
 	.string "LET'S$"
 
-gUnknown_841B531:: @ 841B531
+gText_Ok:: @ 841B531
 	.string "OK!$"
 
-gUnknown_841B535:: @ 841B535
+gText_Sorry:: @ 841B535
 	.string "SORRY$"
 
-gUnknown_841B53B:: @ 841B53B
+gText_YaySmileEmoji:: @ 841B53B
 	.string "YAY{EXTRA 0xF9}$"
 
-gUnknown_841B541:: @ 841B541
+gText_ThankYou:: @ 841B541
 	.string "THANK YOU$"
 
-gUnknown_841B54B:: @ 841B54B
+gText_ByeBye:: @ 841B54B
 	.string "BYE-BYE!$"
 
 gUnknown_841B554:: @ 841B554

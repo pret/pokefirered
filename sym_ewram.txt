@@ -369,17 +369,12 @@ gUnknown_203B098: @ 203B098
 
 	.align 2
 	.include "src/party_menu.o"
-
 	.align 2
-gUnknown_203B0E0: @ 203B0E0
-	.space 0x4
-
-gUnknown_203B0E4: @ 203B0E4
-	.space 0x4
-
-gUnknown_203B0E8: @ 203B0E8
-	.space 0x4
-
+	.include "src/union_room_chat.o"
+	.align 2
+	.include "src/union_room_chat_display.o"
+	.align 2
+	.include "src/union_room_chat_objects.o"
 	.align 2
 	.include "src/help_system_812B1E0.o"
 	.align 2

@@ -1852,7 +1852,7 @@ static void sub_81175BC(u8 taskId)
             sub_80F8D14();
             SetHostRFUtgtGname(69, 0, 1);
         }
-        sub_8128420();
+        EnterUnionRoomChat();
         break;
     case 8:
     case 72:
@@ -3385,7 +3385,7 @@ static void sub_81199FC(u8 taskId)
         case 2:
             if (sUnionRoomPlayerName[0] == EOS)
             {
-                for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+                for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
                 {
                     if (structPtr->field_0->arr[i].field_1A_0 == 1)
                     {

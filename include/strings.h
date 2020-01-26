@@ -40,7 +40,6 @@ extern const u8 gText_Second[];
 extern const u8 gText_Third[];
 extern const u8 gText_NoDecorations[];
 extern const u8 gText_NoDecorationsInUse[];
-extern const u8 gText_Exit[];
 extern const u8 gText_Cancel[];
 extern const u8 gText_Color161Shadow161[];
 extern const u8 gText_GoBackPrevMenu[];
@@ -288,7 +287,6 @@ extern const u8 gText_ThreePkmnAreNeeded[];
 extern const u8 gText_TwoPokemonAreNeeded[];
 extern const u8 gText_PokemonCantBeSame[];
 extern const u8 gText_NoIdenticalHoldItems[];
-extern const u8 gString_Dummy[];
 extern const u8 gText_DoWhatWithPokemon[];
 extern const u8 gText_RestoreWhichMove[];
 extern const u8 gText_BoostPp[];
@@ -327,13 +325,9 @@ extern const u8 gText_SendOut[];
 extern const u8 gText_Enter[];
 extern const u8 gText_NoEntry[];
 extern const u8 gText_Store[];
-extern const u8 gText_Register[];
 extern const u8 gText_Trade4[];
 extern const u8 gText_NotPkmnOtherTrainerWants[];
 extern const u8 gText_ThatIsntAnEgg[];
-extern const u8 gText_PkmnCantBeTradedNow[];
-extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
-extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainerCantAcceptPkmn[];
 extern const u8 gText_CantTradeWithTrainer[];
 extern const u8 gUnknown_84176CF[];
@@ -346,7 +340,6 @@ extern const u8 gText_PkmnCantParticipate[];
 extern const u8 gText_CancelParticipation[];
 extern const u8 gUnknown_8417494[];
 extern const u8 gMenuText_Confirm[];
-extern const u8 gText_Lv[];
 extern const u8 gText_MaleSymbol[];
 extern const u8 gText_FemaleSymbol[];
 extern const u8 gText_Slash[];
@@ -984,6 +977,16 @@ extern const u8 gUnknown_8415F6C[];
 extern const u8 gUnknown_8415FFF[];
 extern const u8 gUnknown_8416002[];
 
+// daycare
+extern const u8 gText_Lv[];
+extern const u8 gDaycareText_GetAlongVeryWell[];
+extern const u8 gDaycareText_GetAlong[];
+extern const u8 gDaycareText_DontLikeOther[];
+extern const u8 gDaycareText_PlayOther[];
+extern const u8 gExpandedPlaceholder_Empty[];
+extern const u8 gText_HatchedFromEgg[];
+extern const u8 gText_NickHatchPrompt[];
+
 // trainer card
 extern const u8 gText_WaitingTrainerFinishReading[];
 extern const u8 gText_TrainerCardName[];
@@ -1060,5 +1063,37 @@ extern const u8 gText_NoRoomToStoreItems[];
 extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
 extern const u8 gText_RefusedBattle[];
 extern const u8 gText_BattleWasRefused[];
+
+// union_room_chat
+extern const u8 gText_F700JoinedChat[];
+extern const u8 gText_F700LeftChat[];
+extern const u8 gText_Hello[];
+extern const u8 gText_Pokemon2[];
+extern const u8 gText_Trade[];
+extern const u8 gText_Battle[];
+extern const u8 gText_Lets[];
+extern const u8 gText_Ok[];
+extern const u8 gText_Sorry[];
+extern const u8 gText_YaySmileEmoji[];
+extern const u8 gText_ThankYou[];
+extern const u8 gText_ByeBye[];
+
+// union_room_chat_display
+extern const u8 gText_QuitChatting[];
+extern const u8 gText_RegisterTextWhere[];
+extern const u8 gText_RegisterTextHere[];
+extern const u8 gText_InputText[];
+extern const u8 gText_ExitingTheChat[];
+extern const u8 gText_LeaderHasLeftEndingChat[];
+extern const u8 gText_RegisteredTextChanged_OKtoSave[];
+extern const u8 gText_RegisteredTextChanged_AlreadySavedFile[];
+extern const u8 gText_RegisteredTextChanged_SavingDontTurnOff[];
+extern const u8 gText_RegisteredTextChanged_SavedTheGame[];
+extern const u8 gText_IfLeaderLeavesChatWillEnd[];
+extern const u8 gText_Upper[];
+extern const u8 gText_Lower[];
+extern const u8 gText_Symbols[];
+extern const u8 gText_Register2[];
+extern const u8 gText_Exit[];
 
 #endif //GUARD_STRINGS_H

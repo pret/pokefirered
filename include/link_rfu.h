@@ -216,7 +216,7 @@ struct UnkRfuStruct_2
     /* 0x99d */ u8 unk_ce5;
     /* 0x99e */ u8 unk_ce6;
     /* 0x99f */ u8 unk_ce7;
-    /* 0x9a0 */ u8 unk_ce8;
+    /* 0x9a0 */ bool8 unk_ce8;
     /* 0x9a1 */ u8 unk_ce9;
     /* 0x9a2 */ u8 unk_cea[RFU_CHILD_MAX];
     /* 0x9a6 */ u8 unk_cee[RFU_CHILD_MAX];
@@ -325,6 +325,10 @@ void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
 bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx);
+bool32 GetRfuUnkCE8(void);
+void sub_80FA4A8(void);
+void sub_80FB9D0(void);
+void sub_80FB030(u32 a0);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

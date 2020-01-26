@@ -848,7 +848,7 @@ static void ZeroName(u8 *name)
 {
     s32 i;
 
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
         *name++ = 0;
     }
@@ -858,7 +858,7 @@ static bool32 NameIsEmpty(const u8 *name)
 {
     s32 i;
 
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
         if (*name++ != 0)
         {

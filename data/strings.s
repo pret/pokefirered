@@ -3093,40 +3093,40 @@ gUnknown_841B32E:: @ 841B32E
 	.string "{DYNAMIC 0x00} learned\n"
 	.string "{DYNAMIC 0x01}!$"
 
-gUnknown_841B33D:: @ 0x841B33D
+gText_Upper:: @ 0x841B33D
 	.string "UPPER$"
 
-gUnknown_841B343:: @ 0x841B343
+gText_Lower:: @ 0x841B343
 	.string "lower$"
 
-gUnknown_841B349:: @ 0x841B349
+gText_Others:: @ 0x841B349
 	.string "OTHERS$"
 
-gUnknown_841B350:: @ 0x841B350
+gText_Symbols:: @ 0x841B350
 	.string "SYMBOLS$"
 
-gUnknown_841B358:: @ 0x841B358
+gText_Register2:: @ 0x841B358
 	.string "REGISTER$"
 
-gUnknown_841B361:: @ 0x841B361
+gText_Exit:: @ 0x841B361
 	.string "EXIT$"
 
-gUnknown_841B366:: @ 0x841B366
+gText_QuitChatting:: @ 0x841B366
 	.string "Quit chatting?$"
 
-gUnknown_841B375:: @ 0x841B375
+gText_RegisterTextWhere:: @ 0x841B375
 	.string "Register text where?$"
 
-gUnknown_841B38A:: @ 0x841B38A
+gText_RegisterTextHere:: @ 0x841B38A
 	.string "Register text here?$"
 
-gUnknown_841B39E:: @ 0x841B39E
+gText_InputText:: @ 0x841B39E
 	.string "Input text.$"
 
-gUnknown_841B3AA:: @ 841B3AA
+gText_F700JoinedChat:: @ 841B3AA
 	.string "{DYNAMIC 0x00} joined the chat!$"
 
-gUnknown_841B3BE:: @ 841B3BE
+gText_F700LeftChat:: @ 841B3BE
 	.string "{DYNAMIC 0x00} left the chat.$"
 
 gUnknown_841B3D0:: @ 0x841B3D0
@@ -3135,60 +3135,60 @@ gUnknown_841B3D0:: @ 0x841B3D0
 gUnknown_841B3DA:: @ 0x841B3DA
 	.string "{DYNAMIC 0x00}の{DYNAMIC 0x01}ひきめは いません$"
 
-gUnknown_841B3E9:: @ 0x841B3E9
+gText_ExitingTheChat:: @ 0x841B3E9
 	.string "Exiting the chat‥$"
 
-gUnknown_841B3FB:: @ 0x841B3FB
+gText_LeaderHasLeftEndingChat:: @ 0x841B3FB
 	.string "The LEADER, {DYNAMIC 0x00}, has\n"
 	.string "left, ending the chat.$"
 
-gUnknown_841B426:: @ 0x841B426
+gText_RegisteredTextChanged_OKtoSave:: @ 0x841B426
 	.string "The registered text has been changed.\n"
 	.string "Is it okay to save the game?$"
 
-gUnknown_841B469:: @ 0x841B469
+gText_RegisteredTextChanged_AlreadySavedFile:: @ 0x841B469
 	.string "There is already a saved file.\n"
 	.string "Is it okay to overwrite it?$"
 
-gUnknown_841B4A4:: @ 0x841B4A4
+gText_RegisteredTextChanged_SavingDontTurnOff:: @ 0x841B4A4
 	.string "SAVING‥\n"
 	.string "DON'T TURN OFF THE POWER.$"
 
-gUnknown_841B4C6:: @ 0x841B4C6
+gText_RegisteredTextChanged_SavedTheGame:: @ 0x841B4C6
 	.string "{DYNAMIC 0x00} saved the game.$"
 
-gUnknown_841B4D9:: @ 0x841B4D9
+gText_IfLeaderLeavesChatWillEnd:: @ 0x841B4D9
 	.string "If the LEADER leaves, the chat\n"
 	.string "will end. Is that okay?$"
 
-gUnknown_841B510:: @ 841B510
+gText_Hello:: @ 841B510
 	.string "HELLO$"
 
-gUnknown_841B516:: @ 841B516
+gText_Pokemon2:: @ 841B516
 	.string "POKéMON$"
 
-gUnknown_841B51E:: @ 841B51E
+gText_Trade:: @ 841B51E
 	.string "TRADE$"
 
-gUnknown_841B524:: @ 841B524
+gText_Battle:: @ 841B524
 	.string "BATTLE$"
 
-gUnknown_841B52B:: @ 841B52B
+gText_Lets:: @ 841B52B
 	.string "LET'S$"
 
-gUnknown_841B531:: @ 841B531
+gText_Ok:: @ 841B531
 	.string "OK!$"
 
-gUnknown_841B535:: @ 841B535
+gText_Sorry:: @ 841B535
 	.string "SORRY$"
 
-gUnknown_841B53B:: @ 841B53B
+gText_YaySmileEmoji:: @ 841B53B
 	.string "YAY{EXTRA 0xF9}$"
 
-gUnknown_841B541:: @ 841B541
+gText_ThankYou:: @ 841B541
 	.string "THANK YOU$"
 
-gUnknown_841B54B:: @ 841B54B
+gText_ByeBye:: @ 841B54B
 	.string "BYE-BYE!$"
 
 gUnknown_841B554:: @ 841B554

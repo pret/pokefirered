@@ -26,6 +26,7 @@ void TextWindow_SetUserSelectedFrame(u8 windowId, u16 tileStart, u8 palette);
 void LoadUserWindowBorderGfx(u8 windowId, u16 tileStart, u8 palette);
 void sub_814FDA0(u8 windowId, u16 tileStart, u8 palette);
 void DrawTextBorderOuter(u8 windowId, u16 tileStart, u8 palette);
+void DrawTextBorderInner(u8 windowId, u16 tileNum, u8 palNum);
 void TextWindow_LoadTilesStdFrame1(u8 windowId, u16 destOffset);
 void sub_814FE6C(u8 windowId, u16 destOffset, u8 palIdx);
 void sub_814FEEC(u8 windowId, u16 destOffset, u8 palIdx);

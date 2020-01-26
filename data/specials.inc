@@ -439,7 +439,7 @@ gSpecials:: @ 815FD60
 	def_special Special_SetDeoxysTriangleObjectPal
 	def_special sub_8147594
 	def_special Special_BadEggInParty
-	def_special ReadTrainerHillAndValidate
+	def_special ReadTrainerTowerAndValidate
 	def_special HasAllMons
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle

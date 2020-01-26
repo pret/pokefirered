@@ -86,3 +86,9 @@ bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata)
     Free(buffer);
     return success;
 }
+
+bool32 ReadTrainerTowerAndValidate(void)
+{
+    // Stubbed out. Populated in Emerald
+    return FALSE;
+}

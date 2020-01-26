@@ -20,7 +20,6 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
-#include "renewable_hidden_items.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "constants/items.h"
@@ -523,7 +522,7 @@ static void SetUpTrainerTowerDataStruct(void) // fakematching
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
     sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - 42;
-    if (ReadTrainerHillAndValidate() == TRUE)
+    if (ReadTrainerTowerAndValidate() == TRUE)
         CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
     else
     {
@@ -781,7 +780,7 @@ static void StartTrainerTowerChallenge(void)
     if (gSaveBlock1Ptr->towerChallengeId >= NUM_TOWER_CHALLENGE_TYPES)
         gSaveBlock1Ptr->towerChallengeId = 0;
     ValidateOrResetCurTrainerTowerRecord();
-    if (!ReadTrainerHillAndValidate())
+    if (!ReadTrainerTowerAndValidate())
         TRAINER_TOWER.validated = TRUE;
     else
         TRAINER_TOWER.validated = FALSE;

@@ -47,5 +47,6 @@ bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata);
 bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata);
 bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata);
 u8 sub_815D654(void);
+bool32 ReadTrainerTowerAndValidate(void);
 
 #endif //GUARD_CEREADER_TOOL_H

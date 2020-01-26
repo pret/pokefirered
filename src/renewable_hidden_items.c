@@ -529,12 +529,6 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
     },
 };
 
-bool32 ReadTrainerHillAndValidate(void)
-{
-    // Stubbed out. Populated in Emerald
-    return FALSE;
-}
-
 void SetAllRenewableItemFlags(void)
 {
     u8 i, j;

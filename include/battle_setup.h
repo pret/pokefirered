@@ -19,7 +19,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetUpTrainerMovement(void);
 u8 ScrSpecial_GetTrainerBattleMode(void);
-u16 sub_80803D8(void);
+u16 GetRivalBattleFlags(void);
 u16 ScrSpecial_HasTrainerBeenFought(void);
 void SetBattledTrainerFlag(void);
 bool8 HasTrainerBeenFought(u16 trainerId);

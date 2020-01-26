@@ -4,6 +4,10 @@
 // General
 #define METATILE_General_CalmWater  0x12B
 
+// PokeMart
+#define METATILE_Shop_CounterMid_Top     0x2BF
+#define METATILE_Shop_CounterMid_Bottom  0x2C0     
+
 // Vermilion Gym
 #define METATILE_VermilionGym_Floor                             0x281
 #define METATILE_VermilionGym_Beam_MidTop                       0x285

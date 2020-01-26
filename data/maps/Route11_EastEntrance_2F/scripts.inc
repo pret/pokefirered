@@ -61,17 +61,17 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	goto_if_set FLAG_GOT_ITEMFINDER, EventScript_16FE5A
 	msgbox gUnknown_819E9E5, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1A7AD1
+	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_16FE64
 	compare VAR_0x8006, 30
-	goto_if_lt EventScript_1A7ABD
+	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox gUnknown_819EAE4
 	checkitemspace ITEM_ITEMFINDER, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A7AC7
+	goto_if_eq Aide_EventScript_NoRoomForItem
 	giveitem_msg gUnknown_819EB37, ITEM_ITEMFINDER
 	setflag FLAG_GOT_ITEMFINDER
 	msgbox gUnknown_819EB59

@@ -637,6 +637,8 @@ gStdScriptsEnd::
 	.include "data/maps/Route18/text.inc"
 	.include "data/maps/Route19/text.inc"
 	.include "data/maps/Route20/text.inc"
+	.include "data/maps/Route21_North/text.inc"
+	.include "data/maps/Route21_South/text.inc"
 	.include "data/maps/Route22/text.inc"
 	.include "data/maps/Route23/text.inc"
 	.include "data/maps/Route24/text.inc"
@@ -941,23 +943,7 @@ Text_DugUpItemFromGround:: @ 81A5700
 	.string "from deep in the ground.$"
 
 	.include "data/text/route23.inc"
-
-Text_1A58A7:: @ 81A58A7
-	.string "Let's see…\n"
-	.string "Uh-oh! You have caught only\l"
-	.string "{STR_VAR_3} kinds of POKéMON!\p"
-	.string "You need {STR_VAR_1} kinds\n"
-	.string "if you want the {STR_VAR_2}.$"
-
-Text_1A5909:: @ 81A5909
-	.string "…Oh. I see.\p"
-	.string "When you get {STR_VAR_1} kinds of POKéMON,\n"
-	.string "come back for the {STR_VAR_2}.$"
-
-Text_1A594D:: @ 81A594D
-	.string "Oh! I see you don't have any\n"
-	.string "room for the {STR_VAR_2}.$"
-
+	.include "data/text/aide.inc"
 	.include "data/text/ingame_trade.inc"
 
 Text_CardKeyOpenedDoor:: @ 81A5B88
@@ -1425,20 +1411,7 @@ EventScript_1A7AB9:: @ 81A7AB9
 	special Special_GetElevatorFloor
 	return
 
-EventScript_1A7ABD:: @ 81A7ABD
-	msgbox Text_1A58A7
-	release
-	end
-
-EventScript_1A7AC7:: @ 81A7AC7
-	msgbox Text_1A594D
-	release
-	end
-
-EventScript_1A7AD1:: @ 81A7AD1
-	msgbox Text_1A5909
-	release
-	end
+	.include "data/scripts/aide.inc"
 
 gUnknown_81A7ADB:: @ 81A7ADB
 	special sub_80CADC4

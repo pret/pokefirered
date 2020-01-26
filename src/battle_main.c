@@ -50,6 +50,7 @@
 #include "cable_club.h"
 #include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
+#include "constants/battle_setup.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -3716,12 +3717,12 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && ScrSpecial_GetTrainerBattleMode() == 9)
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
         {
-            if (sub_80803D8() & 1)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+            if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
             else
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 2; // Do white out text
             gBattlerAttacker = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         }
         else

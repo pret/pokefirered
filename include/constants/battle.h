@@ -81,6 +81,9 @@
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
 
+#define RIVAL_BATTLE_HEAL_AFTER  1
+#define RIVAL_BATTLE_TUTORIAL    3
+
 // Battle Outcome defines
 #define B_OUTCOME_WON                  0x1
 #define B_OUTCOME_LOST                 0x2

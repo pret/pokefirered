@@ -4,7 +4,6 @@
 #include "help_system.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "list_menu.h"
 #include "load_save.h"
 #include "menu.h"
 #include "overworld.h"
@@ -911,53 +910,53 @@ static void GoToRoutine(u16 routineNo)
 
 static bool32 TypeChatMessage_HandleDPad(void)
 {
-    if (!(gMain.newAndRepeatedKeys & DPAD_UP))
+    do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPT(DPAD_UP))
+        {
+            if (sWork->currentRow)
+                sWork->currentRow--;
+            else
+                sWork->currentRow = sKeyboardPageMaxRow[sWork->currentPage];
+
+            break;
+        }
+        if (JOY_REPT(DPAD_DOWN))
         {
             if (sWork->currentRow < sKeyboardPageMaxRow[sWork->currentPage])
+            {
                 sWork->currentRow++;
+            }
             else
+            {
                 sWork->currentRow = 0;
+            }
 
-            return TRUE;
+            break;
         }
-
         if (sWork->currentPage != UNION_ROOM_KB_PAGE_COUNT)
         {
-            if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+            if (JOY_REPT(DPAD_LEFT))
             {
                 if (sWork->currentCol)
                     sWork->currentCol--;
                 else
                     sWork->currentCol = 4;
+                break;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+            if (JOY_REPT(DPAD_RIGHT))
             {
-                if (sWork->currentCol > 3)
-                    sWork->currentCol = 0;
-                else
+                if (sWork->currentCol < 4)
                     sWork->currentCol++;
+                else
+                    sWork->currentCol = 0;
+                break;
             }
-            else
-            {
-                return FALSE;
-            }
-
-            return TRUE;
         }
 
         return FALSE;
-    }
-    else
-    {
-        if (sWork->currentRow)
-            sWork->currentRow--;
-        else
-            sWork->currentRow = sKeyboardPageMaxRow[sWork->currentPage];
-
-        return TRUE;
-    }
+    } while (0);
+    return TRUE;
 }
 
 static void AppendCharacterToChatMessageBuffer(void)

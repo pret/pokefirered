@@ -162,13 +162,13 @@ static const struct SpriteTemplate sSpriteTemplate_UnionRoomChatIcons = {
 
 bool32 UnionRoomChat_TryAllocSpriteWork(void)
 {
-    u32 i;
-    for (i = 0; i < 5; i++)
+    int i;
+    for (i = 0; i < NELEMS(sSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
 
     LoadSpritePalette(&sSpritePalette);
-    sWork = Alloc(0x18);
-    if (!sWork)
+    sWork = Alloc(sizeof(struct UnionRoomChat3));
+    if (sWork == NULL)
         return FALSE;
 
     return TRUE;
@@ -176,7 +176,7 @@ bool32 UnionRoomChat_TryAllocSpriteWork(void)
 
 void UnionRoomChat_FreeSpriteWork(void)
 {
-    if (sWork)
+    if (sWork != NULL)
         Free(sWork);
 }
 

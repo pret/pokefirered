@@ -405,7 +405,7 @@ static void ChatEntryRoutine_HandleInput(void)
 static void ChatEntryRoutine_Switch(void)
 {
     s16 input;
-    int shouldSwitchPages;
+    bool32 shouldSwitchPages;
 
     switch (sWork->routineState)
     {
@@ -423,9 +423,9 @@ static void ChatEntryRoutine_Switch(void)
         {
         default:
             UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_HIDEKBSWAPMENU, 0);
-            shouldSwitchPages = 1;
+            shouldSwitchPages = TRUE;
             if (sWork->currentPage == input || input > UNION_ROOM_KB_PAGE_COUNT)
-                shouldSwitchPages = 0;
+                shouldSwitchPages = FALSE;
             break;
         case MENU_NOTHING_CHOSEN:
             if (JOY_NEW(SELECT_BUTTON))

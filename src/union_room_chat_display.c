@@ -600,7 +600,7 @@ static bool32 DisplaySubtask_UpdateMessageBuffer(u8 *state)
         UnionRoomChat_GetBufferSelectionRegion(&start, &length);
         FillWin1Rect(start, length, PIXEL_FILL(0));
         str = UnionRoomChat_GetMessageEntryBuffer();
-        PrintOnWin1Parameterized(0, str, 3, 1, 2);
+        PrintOnWin1Parameterized(0, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
         CopyWindowToVram(1, 2);
         break;
     case 1:
@@ -629,7 +629,7 @@ static bool32 DisplaySubtask_PrintRegisterWhere(u8 *state)
         str = UnionRoomChat_GetEndOfMessageEntryBuffer();
         length = StringLength_Multibyte(str);
         FillWin1Rect(var0, length, PIXEL_FILL(6));
-        PrintOnWin1Parameterized(var0, str, 0, 4, 5);
+        PrintOnWin1Parameterized(var0, str, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED);
         CopyWindowToVram(1, 2);
         break;
     case 1:
@@ -670,7 +670,7 @@ static bool32 DisplaySubtask_CancelRegister(u8 *state)
         str = UnionRoomChat_GetEndOfMessageEntryBuffer();
         length = StringLength_Multibyte(str);
         FillWin1Rect(x, length, PIXEL_FILL(0));
-        PrintOnWin1Parameterized(x, str, 3, 1, 2);
+        PrintOnWin1Parameterized(x, str, TEXT_COLOR_LIGHT_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY);
         CopyWindowToVram(1, 2);
         break;
     case 1:
@@ -1080,7 +1080,7 @@ static void PrintOnWin1Parameterized(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 
     u8 color[3];
     u8 strbuf[35];
 
-    if (bgColor != 0)
+    if (bgColor != TEXT_COLOR_TRANSPARENT)
         FillWin1Rect(x, UnionRoomChat_GetMessageEntryCursorPosition() - x, bgColor);
 
     color[0] = bgColor;
@@ -1105,9 +1105,9 @@ static void PrintCurrentKeyboardPage(void)
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
-    color[0] = 0;
-    color[1] = 14;
-    color[2] = 13;
+    color[0] = TEXT_COLOR_TRANSPARENT;
+    color[1] = TEXT_DYNAMIC_COLOR_5;
+    color[2] = TEXT_DYNAMIC_COLOR_4;
     if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
         str[0] = EXT_CTRL_CODE_BEGIN;
@@ -1207,9 +1207,10 @@ static void ClearWin3(void)
 }
 
 static void PrintTextOnWin0Colorized(u16 row, u8 *str, u8 colorIdx)
+// colorIdx: 0 = grey, 1 = red, 2 = green, 3 = blue
 {
     u8 color[3];
-    color[0] = 1;
+    color[0] = TEXT_COLOR_WHITE;
     color[1] = colorIdx * 2 + 2;
     color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);

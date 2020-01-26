@@ -5769,7 +5769,7 @@ s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 
 bool8 IsTradedMon(struct Pokemon *mon)
 {
-    u8 otName[7 + 1]; // change PLAYER_NAME_LENGTH + 1 to 7
+    u8 otName[PLAYER_NAME_LENGTH];
     u32 otId;
     GetMonData(mon, MON_DATA_OT_NAME, otName);
     otId = GetMonData(mon, MON_DATA_OT_ID, 0);

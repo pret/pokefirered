@@ -1718,7 +1718,7 @@ sub_8055864: @ 8055864
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
 	bl TryRegenerateRenewableHiddenItems
-	bl not_trainer_hill_battle_pyramid
+	bl not_trainer_tower_battle_pyramid
 	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
@@ -1798,7 +1798,7 @@ _08055974:
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
-	bl not_trainer_hill_battle_pyramid
+	bl not_trainer_tower_battle_pyramid
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1823,7 +1823,7 @@ sub_80559A8: @ 80559A8
 	bl sub_8110920
 	bl sub_8111708
 	bl set_current_map_header_from_sav1
-	bl not_trainer_hill_battle_pyramid
+	bl not_trainer_tower_battle_pyramid
 	pop {r0}
 	bx r0
 	.align 2, 0

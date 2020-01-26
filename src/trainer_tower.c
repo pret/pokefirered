@@ -38,7 +38,7 @@
 struct UnkStruct_203F458
 {
     /* 0x0000 */ u8 floorIdx;
-    /* 0x0004 */ struct EReaderTrainerHillSet unk_0004;
+    /* 0x0004 */ struct EReaderTrainerTowerSet unk_0004;
 };
 
 struct TrainerTowerOpponent
@@ -435,7 +435,7 @@ static const u8 sKnockoutChallengeMonIdxs[][3] = {
     {0x01, 0x04, 0x05}
 };
 
-extern const struct EReaderTrainerHillSetSubstruct gUnknown_84827AC;
+extern const struct EReaderTrainerTowerSetSubstruct gUnknown_84827AC;
 extern const struct TrainerTowerFloor *const gUnknown_84827B4[][MAX_TRAINER_TOWER_FLOORS];
 
 void CallTrainerTowerFunc(void)
@@ -527,8 +527,8 @@ static void SetUpTrainerTowerDataStruct(void) // fakematching
     else
     {
         struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
-        const struct EReaderTrainerHillSetSubstruct * r1 = &gUnknown_84827AC;
-        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerHillSetSubstruct));
+        const struct EReaderTrainerTowerSetSubstruct * r1 = &gUnknown_84827AC;
+        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
         r7 = gUnknown_84827B4[challengeType];
         for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
         {

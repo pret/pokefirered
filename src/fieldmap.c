@@ -63,7 +63,7 @@ const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * conn
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
 
-void not_trainer_hill_battle_pyramid(void)
+void not_trainer_tower_battle_pyramid(void)
 {
     sub_8058A00(&gMapHeader);
     mapheader_run_script_with_tag_x1();

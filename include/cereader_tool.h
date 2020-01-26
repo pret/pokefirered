@@ -26,7 +26,7 @@ struct TrainerTowerFloor
     /* 0x3DC */ u32 checksum;
 };
 
-struct EReaderTrainerHillSetSubstruct
+struct EReaderTrainerTowerSetSubstruct
 {
     u8 numFloors;
     u8 id;
@@ -34,7 +34,7 @@ struct EReaderTrainerHillSetSubstruct
     u32 checksum;
 };
 
-struct EReaderTrainerHillSet
+struct EReaderTrainerTowerSet
 {
     u8 numFloors;
     u8 id;
@@ -43,9 +43,9 @@ struct EReaderTrainerHillSet
     struct TrainerTowerFloor floors[MAX_TRAINER_TOWER_FLOORS];
 };
 
-bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata);
-bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata);
-bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata);
+bool32 ValidateTrainerTowerData(struct EReaderTrainerTowerSet * ttdata);
+bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata);
+bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerTowerSet * ttdata);
 u8 sub_815D654(void);
 bool32 ReadTrainerTowerAndValidate(void);
 

@@ -78,6 +78,17 @@
 #define METATILE_CinnabarGym_Floor_WallLeftEdge     0x2CF
 #define METATILE_CinnabarGym_Wall_RetractedBarrier  0x2D1
 
+// Pokemon League
+#define METATILE_PokemonLeague_Door_Top_Open             0x28E
+#define METATILE_PokemonLeague_Door_Mid_Open             0x296
+#define METATILE_PokemonLeague_Entry_TopLeft_Closed      0x29D
+#define METATILE_PokemonLeague_Entry_TopMid_Closed       0x29E
+#define METATILE_PokemonLeague_Entry_TopRight_Closed     0x29F
+#define METATILE_PokemonLeague_Entry_BottomLeft_Closed   0x2A5
+#define METATILE_PokemonLeague_Entry_BottomMid_Closed    0x2A6
+#define METATILE_PokemonLeague_Entry_BottomRight_Closed  0x2A7
+#define METATILE_PokemonLeague_Floor_ShadeFull_Lance     0x311
+
 // gTileset_82D504C. Below metatile probably needs generic name
 #define METATILE_MtEmber_CaveEntrance  0x346
 

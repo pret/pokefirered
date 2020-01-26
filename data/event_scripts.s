@@ -980,7 +980,7 @@ Text_HavePokedexRated:: @ 81A5C03
 Text_ClosedLinkToProfOaksPC:: @ 81A5C2E
 	.string "Closed link to PROF. OAK's PC.$"
 
-Text_1A5C4D:: @ 81A5C4D
+Text_VoiceRangOutDontRunAway:: @ 81A5C4D
 	.string "Someone's voice rang out,\n"
 	.string "“Don't run away!”$"
 
@@ -1272,71 +1272,7 @@ EventScript_1A74F2:: @ 81A74F2
 	removeitem VAR_0x8004, 1
 	return
 
-EventScript_1A7506:: @ 81A7506
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
-	waitmovement 0
-	playse SE_DOOR
-	call EventScript_1A7538
-	special DrawWholeMapView
-	setflag FLAG_TEMP_4
-	return
-
-EventScript_1A751F:: @ 81A751F
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkUp5
-	waitmovement 0
-	setflag FLAG_TEMP_2
-	playse SE_KI_GASYAN
-	call EventScript_1A759C
-	special DrawWholeMapView
-	return
-
-EventScript_1A7538:: @ 81A7538
-	setmetatile 6, 1, 654, 1
-	setmetatile 6, 2, 662, 0
-	return
-
-EventScript_1A754B:: @ 81A754B
-	lockall
-	textcolor 0
-	msgbox Text_1A5C4D
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75D3
-	waitmovement 0
-	releaseall
-	end
-
-EventScript_1A7563:: @ 81A7563
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
-	waitmovement 0
-	playse SE_DOOR
-	setmetatile 6, 4, 654, 1
-	setmetatile 6, 5, 662, 0
-	special DrawWholeMapView
-	setflag FLAG_TEMP_4
-	return
-
-EventScript_1A7589:: @ 81A7589
-	setmetatile 6, 4, 654, 1
-	setmetatile 6, 5, 662, 0
-	return
-
-EventScript_1A759C:: @ 81A759C
-	setmetatile 5, 11, 669, 1
-	setmetatile 6, 11, 670, 1
-	setmetatile 7, 11, 671, 1
-	setmetatile 5, 12, 677, 1
-	setmetatile 6, 12, 678, 1
-	setmetatile 7, 12, 679, 1
-	return
-
-Movement_1A75D3:: @ 81A75D3
-	walk_up
-	step_end
-
-EventScript_1A75D5:: @ 81A75D5
-	special Special_PokemonLeagueLightingEffect
-	return
-
+	.include "data/scripts/pokemon_league.inc"
 	.include "data/scripts/movement.inc"	
 	.include "data/scripts/flavor_text.inc"
 

@@ -1453,7 +1453,7 @@ gUnknown_81B19A8:: @ 81B19A8
 	.string "OAK were rivals who vied for\l"
 	.string "supremacy as TRAINERS.$"
 
-gUnknown_81B1A31:: @ 81B1A31
+PokemonJournal_Text_SpecialFeatureLance:: @ 81B1A31
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LANCE!\p"

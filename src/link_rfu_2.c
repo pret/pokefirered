@@ -448,7 +448,7 @@ static void sub_80F8B34(u8 taskId)
         gTasks[taskId].data[1] = 8;
         Rfu.unk_0c = 1;
         CreateTask(sub_80FA834, 5);
-        Rfu.unk_ce8 = 1;
+        Rfu.unk_ce8 = TRUE;
         DestroyTask(taskId);
         break;
     }
@@ -1337,7 +1337,7 @@ static void sub_80FA1C4(void)
 
 static void sub_80FA224(void)
 {
-    if (gSendCmd[0] == 0 && Rfu.unk_ce8 == 0)
+    if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
         sub_80F9D04(0x5f00);
         Rfu.RfuFunc = sub_80FA1C4;
@@ -1620,7 +1620,7 @@ static void sub_80FA834(u8 taskId)
 
     if (Rfu.unk_f1 == 1 || Rfu.unk_f1 == 2)
     {
-        Rfu.unk_ce8 = 0;
+        Rfu.unk_ce8 = FALSE;
         DestroyTask(taskId);
     }
     switch (gTasks[taskId].data[0])
@@ -1681,7 +1681,7 @@ static void sub_80FA834(u8 taskId)
     case 6:
         DestroyTask(taskId);
         gReceivedRemoteLinkPlayers = 1;
-        Rfu.unk_ce8 = 0;
+        Rfu.unk_ce8 = FALSE;
         sub_80FEA34(1, 0x258);
         if (Rfu.unk_ce6)
         {
@@ -1740,7 +1740,7 @@ static void sub_80FAA94(u8 taskId)
     u8 r4 = Rfu.unk_cde[gUnknown_843EC38[Rfu.unk_ce9]];
     if (Rfu.unk_f1 == 1 || Rfu.unk_f1 == 2)
     {
-        Rfu.unk_ce8 = 0;
+        Rfu.unk_ce8 = FALSE;
         DestroyTask(taskId);
     }
     switch (gTasks[taskId].data[0])
@@ -1790,7 +1790,7 @@ static void sub_80FAA94(u8 taskId)
         {
             CpuFill16(0, gBlockRecvBuffer, sizeof(struct UnkRfuStruct_8010A14));
             ResetBlockReceivedFlag(0);
-            Rfu.unk_ce8 = 0;
+            Rfu.unk_ce8 = FALSE;
             if (Rfu.unk_ce6)
             {
                 for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -1799,7 +1799,7 @@ static void sub_80FAA94(u8 taskId)
                     {
                         Rfu.unk_ce5 = 1 << i;
                         Rfu.unk_ce6 ^= (1 << i);
-                        Rfu.unk_ce8 = 1;
+                        Rfu.unk_ce8 = TRUE;
                         break;
                     }
                 }
@@ -1948,7 +1948,7 @@ void sub_80FB008(u8 a0, u32 a1, u32 a2)
     rfu_REQ_configGameData(0, 2, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
 }
 
-void sub_80FB030(u32 a0)
+void sub_80FB030(u32 linkPlayerCount)
 {
     s32 i;
     u32 r5;
@@ -1964,9 +1964,10 @@ void sub_80FB030(u32 a0)
         {
             if ((r8 >> i) & 1)
             {
-                r7 |= ((0x80 | ((gLinkPlayers[Rfu.unk_cde[i]].gender & 1) << 3) | (gLinkPlayers[Rfu.unk_cde[i]].trainerId & 7)) << (r5 << 3));
+                r7 |= ((
+                    0x80 | ((gLinkPlayers[Rfu.unk_cde[i]].gender & 1) << 3) | (gLinkPlayers[Rfu.unk_cde[i]].trainerId & 7)) << (r5 << 3));
                 r5++;
-                if (r5 == a0 - 1)
+                if (r5 == linkPlayerCount - 1)
                     break;
             }
         }
@@ -2214,11 +2215,11 @@ static void sub_80FB5EC(u8 a0, u8 unused1)
             if (idx != 0)
             {
                 r1 = 1 << sub_80F886C(idx);
-                if (Rfu.unk_ce6 == 0 && Rfu.unk_ce8 == 0)
+                if (Rfu.unk_ce6 == 0 && !Rfu.unk_ce8)
                 {
                     Rfu.unk_ce5 = r1;
                     Rfu.unk_ce6 |= (r1 ^ idx);
-                    Rfu.unk_ce8 = 1;
+                    Rfu.unk_ce8 = TRUE;
                 }
                 else
                 {
@@ -2360,7 +2361,7 @@ bool32 sub_80FBA00(void)
         return FALSE;
 }
 
-bool32 sub_80FBA1C(void)
+bool32 GetRfuUnkCE8(void)
 {
     return Rfu.unk_ce8;
 }
@@ -2534,7 +2535,7 @@ void sub_80FBD6C(u32 a0)
 
 static void sub_80FBDB8(u8 taskId)
 {
-    if (gSendCmd[0] == 0 && Rfu.unk_ce8 == 0)
+    if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
         sub_80F9D04(0xED00);
         gSendCmd[1] = gTasks[taskId].data[0];

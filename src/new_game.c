@@ -143,7 +143,7 @@ void NewGameInitData(void)
     sub_809C794();
     InitEasyChatPhrases();
     ResetTrainerFanClub();
-    copy_strings_to_sav1();
+    UnionRoomChat_InitializeRegisteredTexts();
     ResetMiniGamesResults();
     sub_8143D24();
     SetAllRenewableItemFlags();

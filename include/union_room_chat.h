@@ -11,20 +11,20 @@ enum
 
 extern const u8 *const gUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT];
 
-void sub_8128420(void);
-u8 *sub_81294B0(int arg0);
-void sub_8129700(u8 *arg0, u8 *arg1);
-u8 *sub_8129714(void);
-int sub_8129720(void);
-void sub_8129730(u32 *a0, u32 *a1);
-u8 *sub_8129758(void);
-u16 sub_8129788(void);
-u8 *sub_81297C4(void);
-u16 sub_81297D0(void);
-int sub_81297DC(void);
-int sub_81297E8(void);
-u8 *sub_8129814(void);
-void copy_strings_to_sav1(void);
+void EnterUnionRoomChat(void);
+u8 *UnionRoomChat_GetWorkRegisteredText(int arg0);
+void UnionRoomChat_GetCursorColAndRow(u8 *colp, u8 *rowp);
+u8 *UnionRoomChat_GetMessageEntryBuffer(void);
+int UnionRoomChat_LenMessageEntryBuffer(void);
+void UnionRoomChat_GetBufferSelectionRegion(u32 *startp, u32 *diffp);
+u8 *UnionRoomChat_GetEndOfMessageEntryBuffer(void);
+u16 UnionRoomChat_GetNumCharsInMessageEntryBuffer(void);
+u8 *UnionRoomChat_GetLastReceivedMessage(void);
+u16 UnionRoomChat_GetReceivedPlayerIndex(void);
+int UnionRoomChat_GetMessageEntryCursorPosition(void);
+int UnionRoomChat_GetWhetherShouldShowCaseToggleIcon(void);
+u8 *UnionRoomChat_GetNameOfPlayerWhoDisbandedChat(void);
+void UnionRoomChat_InitializeRegisteredTexts(void);
 u8 GetCurrentKeyboardPage(void);
 
 #endif // GUARD_UNION_ROOM_CHAT_H

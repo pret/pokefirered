@@ -16383,7 +16383,7 @@ gLinkMiscMenu_Gfx:: @ 8EA1720
 gLinkMiscMenu_Tilemap:: @ 8EA1958
 	.incbin "graphics/interface/union_room_chat.bin.lz"
 
-gUnknown_8EA1A50:: @ 8EA1A50
+gUnionRoomChatIcons:: @ 8EA1A50
 	.incbin "graphics/interface/union_room_chat_icons.4bpp.lz"
 
 	.align 2
@@ -16508,13 +16508,13 @@ gTilesetPalettes_8EA9D88:: @ 8EA9D88
 gTilesetTiles_8EA9F88:: @ 8EA9F88
 	.incbin "data/tilesets/secondary/82D4E6C/tiles.4bpp.lz"
 
-gUnknown_8EAA9F0:: @ 8EAA9F0
+gUnionRoomChatPanelBgPal_7:: @ 8EAA9F0
 	.incbin "graphics/interface/union_room_chat_panel.gbapal"
 
-gUnknown_8EAAA10:: @ 8EAAA10
+gUnionRoomChatPanelBgTiles:: @ 8EAAA10
 	.incbin "graphics/interface/union_room_chat_panel.4bpp.lz"
 
-gUnknown_8EAAA6C:: @ 8EAAA6C
+gUnionRoomChatPanelBgMap:: @ 8EAAA6C
 	.incbin "graphics/interface/union_room_chat_panel.bin.lz"
 
 gCreditsMonBackdropPals:: @ 8EAAB18

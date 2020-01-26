@@ -18,82 +18,107 @@
 #include "data_8479668.h"
 #include "constants/songs.h"
 
+#define MESSAGE_BUFFER_NCHAR 15
+
+#define CHAT_MESSAGE_0 0
+#define CHAT_MESSAGE_CHAT 1
+#define CHAT_MESSAGE_JOIN 2
+#define CHAT_MESSAGE_LEAVE 3
+#define CHAT_MESSAGE_DROP 4
+#define CHAT_MESSAGE_DISBAND 5
+
+#define CHATENTRYROUTINE_JOIN 0
+#define CHATNETRYROUTINE_HANDLE_INPUT 1
+#define CHATENTRYROUTINE_SWITCH 2
+#define CHATENTRYROUTINE_ASKQUITCHATTING 3
+#define CHATENTRYROUTINE_SEND 4
+#define CHATENTRYROUTINE_REGISTER 5
+#define CHATENTRYROUTINE_EXITCHAT 6
+#define CHATENTRYROUTINE_DROP 7
+#define CHATENTRYROUTINE_DISBANDED 8
+#define CHATENTRYROUTINE_SAVEANDEXIT 9
+
+#define CHATEXIT_NONE 0
+#define CHATEXIT_LEADER_LAST 1
+#define CHATEXIT_DROPPED 2
+#define CHATEXIT_DISBANDED 3
+
 struct UnionRoomChat
 {
     u8 filler0[0x4];
-    u16 unk4;
-    u16 unk6;
+    u16 routineNo;
+    u16 routineState;
     u8 filler8[0x2];
-    u16 unkA;
+    u16 exitDelayTimer;
     u8 fillerC[0x1];
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
+    u8 linkPlayerCount;
+    u8 handleInputTask;
+    u8 receiveMessagesTask;
     u8 currentPage;
-    u8 unk11;
+    u8 currentCol;
     u8 currentRow;
-    u8 unk13;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A[0x1F];
-    u8 unk39[0x40];
-    u8 unk79[0x40];
-    u8 unkB9[UNION_ROOM_KB_ROW_COUNT][21];
+    u8 multiplayerId;
+    u8 lastBufferCursorPos;
+    u8 bufferCursorPos;
+    u8 receivedPlayerIndex;
+    u8 exitType;
+    bool8 changedRegisteredTexts;
+    u8 afterSaveTimer;
+    u8 messageEntryBuffer[2 * MESSAGE_BUFFER_NCHAR + 1];
+    u8 receivedMessage[0x40];
+    u8 hostName[0x40];
+    u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     u8 filler18B[0x5];
-    u8 unk190[0x28];
+    u8 sendMessageBuffer[0x28];
 };
 
-static EWRAM_DATA struct UnionRoomChat * gUnknown_203B0E0 = NULL;
+static EWRAM_DATA struct UnionRoomChat * sWork = NULL;
 
-static void sub_812845C(struct UnionRoomChat * unionRoomChat);
-static void c2_081284E0(void);
-static void sub_81285B4(void);
-static void sub_81285CC(void);
-static void sub_81285E8(u8 taskId);
-static void sub_8128640(void);
-static void sub_81286C4(void);
-static void sub_81287B4(void);
-static void sub_81288D4(void);
-static void sub_8128AA0(void);
-static void sub_8128C04(void);
-static void sub_8128CA8(void);
-static void sub_8128DA4(void);
-static void sub_8128E78(void);
-static void sub_8128FB8(void);
-static void sub_8129218(u16 a0);
-static bool32 sub_8129228(void);
-static void sub_81292D8(void);
-static void sub_81293AC(void);
-static void sub_81293D8(void);
-static bool32 sub_8129408(void);
-static void sub_8129424(void);
-static void sub_8129454(void);
-static void sub_8129470(void);
-static u8 *sub_81294C8(void);
-static u8 *sub_81294EC(void);
-static void sub_8129560(u8 *ptr);
-static void sub_8129568(u8 *ptr);
-static void sub_8129590(u8 *ptr);
-static void sub_81295C0(u8 *ptr);
-static void sub_81295EC(u8 *ptr);
-static void sub_8129614(u8 *ptr);
-static void sub_81298F8(u8 taskId);
+static void InitChatWork(struct UnionRoomChat * unionRoomChat);
+static void CB2_LoadInterface(void);
+static void VBlankCB_UnionRoomChatMain(void);
+static void CB2_UnionRoomChatMain(void);
+static void Task_HandlePlayerInput(u8 taskId);
+static void ChatEntryRoutine_Join(void);
+static void ChatEntryRoutine_HandleInput(void);
+static void ChatEntryRoutine_Switch(void);
+static void ChatEntryRoutine_AskQuitChatting(void);
+static void ChatEntryRoutine_ExitChat(void);
+static void ChatEntryRoutine_Drop(void);
+static void ChatEntryRoutine_Disbanded(void);
+static void ChatEntryRoutine_SendMessage(void);
+static void ChatEntryRoutine_Register(void);
+static void ChatEntryRoutine_SaveAndExit(void);
+static void GoToRoutine(u16 routineNo);
+static bool32 TypeChatMessage_HandleDPad(void);
+static void AppendCharacterToChatMessageBuffer(void);
+static void DeleteLastCharacterOfChatMessageBuffer(void);
+static void ToggleCaseOfLastCharacterInChatMessageBuffer(void);
+static bool32 ChatMsgHasAtLeastOneCharcter(void);
+static void RegisterTextAtRow(void);
+static void ResetMessageEntryBuffer(void);
+static void SaveRegisteredTextsToSB1(void);
+static u8 *GetEndOfUnk1A(void);
+static u8 *GetPtrToLastCharOfUnk1A(void);
+static void PrepareSendBuffer_Null(u8 *ptr);
+static void PrepareSendBuffer_Join(u8 *ptr);
+static void PrepareSendBuffer_Chat(u8 *ptr);
+static void PrepareSendBuffer_Leave(u8 *ptr);
+static void PrepareSendBuffer_Drop(u8 *ptr);
+static void PrepareSendBuffer_Disband(u8 *ptr);
+static void Task_ReceiveChatMessage(u8 taskId);
 
-static void (*const gUnknown_845A880[])(void) = {
-    sub_8128640,
-    sub_81286C4,
-    sub_81287B4,
-    sub_81288D4,
-    sub_8128DA4,
-    sub_8128E78,
-    sub_8128AA0,
-    sub_8128C04,
-    sub_8128CA8,
-    sub_8128FB8
+static void (*const sChatEntryRoutines[])(void) = {
+    [CHATENTRYROUTINE_JOIN] = ChatEntryRoutine_Join,
+    [CHATNETRYROUTINE_HANDLE_INPUT] = ChatEntryRoutine_HandleInput,
+    [CHATENTRYROUTINE_SWITCH] = ChatEntryRoutine_Switch,
+    [CHATENTRYROUTINE_ASKQUITCHATTING] = ChatEntryRoutine_AskQuitChatting,
+    [CHATENTRYROUTINE_SEND] = ChatEntryRoutine_SendMessage,
+    [CHATENTRYROUTINE_REGISTER] = ChatEntryRoutine_Register,
+    [CHATENTRYROUTINE_EXITCHAT] = ChatEntryRoutine_ExitChat,
+    [CHATENTRYROUTINE_DROP] = ChatEntryRoutine_Drop,
+    [CHATENTRYROUTINE_DISBANDED] = ChatEntryRoutine_Disbanded,
+    [CHATENTRYROUTINE_SAVEANDEXIT] = ChatEntryRoutine_SaveAndExit
 };
 
 static const u8 sKeyboardPageMaxRow[] =
@@ -104,39 +129,39 @@ static const u8 sKeyboardPageMaxRow[] =
     9
 };
 
-static const u8 gUnknown_845A8AC[] = {
-    CHAR_SPACE, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
-    0x1D, 0x1E, CHAR_SPACE, 0x20, 0x21, 0x22, 0x23, 0x24,
+static const u8 sCaseToggleTable[] = {
+    0x00, 0x16, 0x17, 0x68, 0x19, 0x1A, 0x1B, 0x1C,
+    0x1D, 0x1E, 0x00, 0x20, 0x21, 0x22, 0x23, 0x24,
     0x25, 0x26, 0x27, 0x28, 0x29, 0x15, 0x01, 0x02,
-    CHAR_SPACE, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, CHAR_SPACE,
+    0x00, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x00,
     0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12,
-    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x35, 0x36, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x53, 0x54, 0x55, 0x56, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, 0x6F, 0x5B, 0x5C, 0x5D, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    0x03, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x5A,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, 0x84, 0x85, 0x86, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE,
-    0xA0, CHAR_0, CHAR_1, CHAR_2, CHAR_3, CHAR_4, CHAR_5, CHAR_6,
-    CHAR_7, CHAR_8, CHAR_9, CHAR_EXCL_MARK, CHAR_QUESTION_MARK, CHAR_PERIOD, CHAR_HYPHEN, 0xAF,
-    CHAR_ELLIPSIS, CHAR_DBL_QUOT_LEFT, CHAR_DBL_QUOT_RIGHT, CHAR_SGL_QUOT_LEFT, CHAR_SGL_QUOT_RIGHT, CHAR_MALE, CHAR_FEMALE, CHAR_CURRENCY,
-    CHAR_COMMA, CHAR_MULT_SIGN, CHAR_SLASH, CHAR_a, CHAR_b, CHAR_c, CHAR_d, CHAR_e,
-    CHAR_f, CHAR_g, CHAR_h, CHAR_i, CHAR_j, CHAR_k, CHAR_l, CHAR_m,
-    CHAR_n, CHAR_o, CHAR_p, CHAR_q, CHAR_r, CHAR_s, CHAR_t, CHAR_u,
-    CHAR_v, CHAR_w, CHAR_x, CHAR_y, CHAR_z, CHAR_A, CHAR_B, CHAR_C,
-    CHAR_D, CHAR_E, CHAR_F, CHAR_G, CHAR_H, CHAR_I, CHAR_J, CHAR_K,
-    CHAR_L, CHAR_M, CHAR_N, CHAR_O, CHAR_P, CHAR_Q, CHAR_R, CHAR_S,
-    CHAR_T, CHAR_U, CHAR_V, CHAR_W, CHAR_X, CHAR_Y, CHAR_Z, 0xEF,
-    CHAR_COLON, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, CHAR_SPACE,
-    CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE, CHAR_SPACE
+    0x13, 0x14, 0x2A, 0x2B, 0x2C, 0x2D, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x35, 0x36, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x53, 0x54, 0x55, 0x56, 0x00,
+    0x00, 0x00, 0x6F, 0x5B, 0x5C, 0x5D, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x5A,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x84, 0x85, 0x86, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7,
+    0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF,
+    0xB0, 0xB1, 0xB2, 0xB3, 0xB4, 0xB5, 0xB6, 0xB7,
+    0xB8, 0xB9, 0xBA, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9,
+    0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF, 0xE0, 0xE1,
+    0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9,
+    0xEA, 0xEB, 0xEC, 0xED, 0xEE, 0xBB, 0xBC, 0xBD,
+    0xBE, 0xBF, 0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5,
+    0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD,
+    0xCE, 0xCF, 0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xEF,
+    0xF0, 0xF4, 0xF5, 0xF6, 0xF1, 0xF2, 0xF3, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
 const u8 *const gUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_ROW_COUNT] = {
@@ -178,46 +203,46 @@ const u8 *const gUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT][UNION_ROOM_KB_R
     }
 };
 
-void sub_8128420(void)
+void EnterUnionRoomChat(void)
 {
-    gUnknown_203B0E0 = Alloc(sizeof(struct UnionRoomChat));
-    sub_812845C(gUnknown_203B0E0);
+    sWork = Alloc(sizeof(struct UnionRoomChat));
+    InitChatWork(sWork);
     gKeyRepeatStartDelay = 20;
     sub_812B4AC();
     SetVBlankCallback(NULL);
-    SetMainCallback2(c2_081284E0);
+    SetMainCallback2(CB2_LoadInterface);
 }
 
-static void sub_812845C(struct UnionRoomChat * unionRoomChat)
+static void InitChatWork(struct UnionRoomChat * unionRoomChat)
 {
     int i;
 
-    unionRoomChat->unk4 = 0;
-    unionRoomChat->unk6 = 0;
-    unionRoomChat->currentPage = 0;
-    unionRoomChat->unk11 = 0;
+    unionRoomChat->routineNo = CHATENTRYROUTINE_JOIN;
+    unionRoomChat->routineState = 0;
+    unionRoomChat->currentPage = UNION_ROOM_KB_PAGE_UPPER;
+    unionRoomChat->currentCol = 0;
     unionRoomChat->currentRow = 0;
-    unionRoomChat->unk14 = 0;
-    unionRoomChat->unk15 = 0;
-    unionRoomChat->unk16 = 0;
-    unionRoomChat->unk1A[0] = EOS;
-    unionRoomChat->unkD = GetLinkPlayerCount();
-    unionRoomChat->unk13 = GetMultiplayerId();
-    unionRoomChat->unk17 = 0;
-    unionRoomChat->unk18 = 0;
-    sub_8129560(unionRoomChat->unk190);
+    unionRoomChat->lastBufferCursorPos = 0;
+    unionRoomChat->bufferCursorPos = 0;
+    unionRoomChat->receivedPlayerIndex = 0;
+    unionRoomChat->messageEntryBuffer[0] = EOS;
+    unionRoomChat->linkPlayerCount = GetLinkPlayerCount();
+    unionRoomChat->multiplayerId = GetMultiplayerId();
+    unionRoomChat->exitType = 0;
+    unionRoomChat->changedRegisteredTexts = FALSE;
+    PrepareSendBuffer_Null(unionRoomChat->sendMessageBuffer);
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(unionRoomChat->unkB9[i], gSaveBlock1Ptr->unk3AD4[i]);
+        StringCopy(unionRoomChat->registeredTexts[i], gSaveBlock1Ptr->registeredTexts[i]);
 }
 
-static void sub_81284BC(void)
+static void FreeChatWork(void)
 {
-    DestroyTask(gUnknown_203B0E0->unkE);
-    DestroyTask(gUnknown_203B0E0->unkF);
-    Free(gUnknown_203B0E0);
+    DestroyTask(sWork->handleInputTask);
+    DestroyTask(sWork->receiveMessagesTask);
+    Free(sWork);
 }
 
-static void c2_081284E0(void)
+static void CB2_LoadInterface(void)
 {
     switch (gMain.state)
     {
@@ -225,16 +250,16 @@ static void c2_081284E0(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        sub_8129B14();
+        UnionRoomChat_TryAllocGraphicsWork();
         gMain.state++;
         break;
     case 1:
-        sub_8129BFC();
-        if (!sub_8129B78())
+        UnionRoomChat_RunDisplaySubtasks();
+        if (!UnionRoomChat_RunDisplaySubtask0())
         {
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
-            SetVBlankCallback(sub_81285B4);
+            SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
         break;
@@ -242,10 +267,10 @@ static void c2_081284E0(void)
         UpdatePaletteFade();
         if (!gPaletteFade.active)
         {
-            SetMainCallback2(sub_81285CC);
+            SetMainCallback2(CB2_UnionRoomChatMain);
             SetQuestLogEvent(QL_EVENT_USED_UNION_ROOM_CHAT, NULL);
-            gUnknown_203B0E0->unkE = CreateTask(sub_81285E8, 8);
-            gUnknown_203B0E0->unkF = CreateTask(sub_81298F8, 7);
+            sWork->handleInputTask = CreateTask(Task_HandlePlayerInput, 8);
+            sWork->receiveMessagesTask = CreateTask(Task_ReceiveChatMessage, 7);
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(232, 150);
         }
@@ -253,7 +278,7 @@ static void c2_081284E0(void)
     }
 }
 
-static void sub_81285B4(void)
+static void VBlankCB_UnionRoomChatMain(void)
 {
     TransferPlttBuffer();
     LoadOam();
@@ -261,146 +286,146 @@ static void sub_81285B4(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void sub_81285CC(void)
+static void CB2_UnionRoomChatMain(void)
 {
     RunTasks();
-    sub_8129BFC();
+    UnionRoomChat_RunDisplaySubtasks();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
 }
 
-static void sub_81285E8(u8 taskId)
+static void Task_HandlePlayerInput(u8 taskId)
 {
-    switch (gUnknown_203B0E0->unk17)
+    switch (sWork->exitType)
     {
-    case 1:
-        sub_8129218(6);
-        gUnknown_203B0E0->unk17 = 0;
+    case CHATEXIT_LEADER_LAST:
+        GoToRoutine(CHATENTRYROUTINE_EXITCHAT);
+        sWork->exitType = CHATEXIT_NONE;
         break;
-    case 2:
-        sub_8129218(7);
-        gUnknown_203B0E0->unk17 = 0;
+    case CHATEXIT_DROPPED:
+        GoToRoutine(CHATENTRYROUTINE_DROP);
+        sWork->exitType = CHATEXIT_NONE;
         break;
-    case 3:
-        sub_8129218(8);
-        gUnknown_203B0E0->unk17 = 0;
+    case CHATEXIT_DISBANDED:
+        GoToRoutine(CHATENTRYROUTINE_DISBANDED);
+        sWork->exitType = CHATEXIT_NONE;
         break;
     }
 
-    gUnknown_845A880[gUnknown_203B0E0->unk4]();
+    sChatEntryRoutines[sWork->routineNo]();
 }
 
-static void sub_8128640(void)
+static void ChatEntryRoutine_Join(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        sub_8129568(gUnknown_203B0E0->unk190);
-        gUnknown_203B0E0->unk6++;
+        PrepareSendBuffer_Join(sWork->sendMessageBuffer);
+        sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !sub_80FBA1C())
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            if (SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
-                gUnknown_203B0E0->unk6++;
+            if (SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+                sWork->routineState++;
         }
         break;
     case 2:
         if (IsLinkTaskFinished())
-            sub_8129218(1);
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_81286C4(void)
+static void ChatEntryRoutine_HandleInput(void)
 {
     bool8 var0, var1;
 
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
         if (JOY_NEW(START_BUTTON))
         {
-            if (gUnknown_203B0E0->unk15)
-                sub_8129218(4);
+            if (sWork->bufferCursorPos)
+                GoToRoutine(CHATENTRYROUTINE_SEND);
         }
         else if (JOY_NEW(SELECT_BUTTON))
         {
-            sub_8129218(2);
+            GoToRoutine(CHATENTRYROUTINE_SWITCH);
         }
         else if (JOY_REPT(B_BUTTON))
         {
-            if (gUnknown_203B0E0->unk15)
+            if (sWork->bufferCursorPos)
             {
-                sub_81293AC();
-                sub_8129C34(8, 0);
-                gUnknown_203B0E0->unk6 = 1;
+                DeleteLastCharacterOfChatMessageBuffer();
+                UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTMSG, 0);
+                sWork->routineState = 1;
             }
             else
             {
-                sub_8129218(3);
+                GoToRoutine(CHATENTRYROUTINE_ASKQUITCHATTING);
             }
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            sub_81292D8();
-            sub_8129C34(8, 0);
-            sub_8129C34(2, 1);
-            gUnknown_203B0E0->unk6 = 1;
+            AppendCharacterToChatMessageBuffer();
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTMSG, 0);
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_CURSORBLINK, 1);
+            sWork->routineState = 1;
         }
         else if (JOY_NEW(R_BUTTON))
         {
-            if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+            if (sWork->currentPage != UNION_ROOM_KB_PAGE_COUNT)
             {
-                sub_81293D8();
-                sub_8129C34(8, 0);
-                gUnknown_203B0E0->unk6 = 1;
+                ToggleCaseOfLastCharacterInChatMessageBuffer();
+                UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTMSG, 0);
+                sWork->routineState = 1;
             }
             else
             {
-                sub_8129218(5);
+                GoToRoutine(CHATENTRYROUTINE_REGISTER);
             }
         }
-        else if (sub_8129228())
+        else if (TypeChatMessage_HandleDPad())
         {
-            sub_8129C34(1, 0);
-            gUnknown_203B0E0->unk6 = 1;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_MOVEKBCURSOR, 0);
+            sWork->routineState = 1;
         }
         break;
     case 1:
-        var0 = sub_8129C8C(0);
-        var1 = sub_8129C8C(1);
+        var0 = RunDisplaySubtask(0);
+        var1 = RunDisplaySubtask(1);
         if (!var0 && !var1)
-            gUnknown_203B0E0->unk6 = 0;
+            sWork->routineState = 0;
         break;
     }
 }
 
-static void sub_81287B4(void)
+static void ChatEntryRoutine_Switch(void)
 {
     s16 input;
-    int var0;
+    int shouldSwitchPages;
 
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        sub_8129C34(3, 0);
-        gUnknown_203B0E0->unk6++;
+        UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_SHOWKBSWAPMENU, 0);
+        sWork->routineState++;
         break;
     case 1:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6++;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState++;
         break;
     case 2:
         input = Menu_ProcessInput();
         switch (input)
         {
         default:
-            sub_8129C34(4, 0);
-            var0 = 1;
-            if (gUnknown_203B0E0->currentPage == input || input > UNION_ROOM_KB_PAGE_COUNT)
-                var0 = 0;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_HIDEKBSWAPMENU, 0);
+            shouldSwitchPages = 1;
+            if (sWork->currentPage == input || input > UNION_ROOM_KB_PAGE_COUNT)
+                shouldSwitchPages = 0;
             break;
         case MENU_NOTHING_CHOSEN:
             if (JOY_NEW(SELECT_BUTTON))
@@ -410,507 +435,509 @@ static void sub_81287B4(void)
             }
             return;
         case MENU_B_PRESSED:
-            sub_8129C34(4, 0);
-            gUnknown_203B0E0->unk6 = 3;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_HIDEKBSWAPMENU, 0);
+            sWork->routineState = 3;
             return;
         }
 
-        if (!var0)
+        if (!shouldSwitchPages)
         {
-            gUnknown_203B0E0->unk6 = 3;
+            sWork->routineState = 3;
             return;
         }
 
-        gUnknown_203B0E0->unk11 = 0;
-        gUnknown_203B0E0->currentRow = 0;
-        sub_8129C34(5, 1);
-        gUnknown_203B0E0->currentPage = input;
-        gUnknown_203B0E0->unk6 = 4;
+        sWork->currentCol = 0;
+        sWork->currentRow = 0;
+        UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_SWITCHPAGES, 1);
+        sWork->currentPage = input;
+        sWork->routineState = 4;
         break;
     case 3:
-        if (!sub_8129C8C(0))
-            sub_8129218(1);
+        // Wait Return To Prev Page
+        if (!RunDisplaySubtask(0))
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     case 4:
-        if (!sub_8129C8C(0) && !sub_8129C8C(1))
-            sub_8129218(1);
+        // Wait Page Switch
+        if (!RunDisplaySubtask(0) && !RunDisplaySubtask(1))
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_81288D4(void)
+static void ChatEntryRoutine_AskQuitChatting(void)
 {
     s8 input;
 
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        sub_8129C34(6, 0);
-        gUnknown_203B0E0->unk6 = 1;
+        UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_SHOWQUITCHATTINGDIALOG, 0);
+        sWork->routineState = 1;
         break;
     case 1:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6 = 2;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState = 2;
         break;
     case 2:
-        input = sub_812A568();
+        input = UnionRoomChat_ProcessInput();
         switch (input)
         {
         case -1:
         case 1:
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 3;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 3;
             break;
         case 0:
-            if (gUnknown_203B0E0->unk13 == 0)
+            if (sWork->multiplayerId == 0)
             {
-                sub_8129614(gUnknown_203B0E0->unk190);
-                sub_8129C34(7, 0);
-                gUnknown_203B0E0->unk6 = 9;
+                PrepareSendBuffer_Disband(sWork->sendMessageBuffer);
+                UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+                sWork->routineState = 9;
             }
             else
             {
-                sub_81295C0(gUnknown_203B0E0->unk190);
-                gUnknown_203B0E0->unk6 = 4;
+                PrepareSendBuffer_Leave(sWork->sendMessageBuffer);
+                sWork->routineState = 4;
             }
             break;
         }
         break;
     case 3:
-        if (!sub_8129C8C(0))
-            sub_8129218(1);
+        if (!RunDisplaySubtask(0))
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     case 9:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(20, 0);
-            gUnknown_203B0E0->unk6 = 10;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_SHOWCONFIRMLEADERLEAVEDIALOG, 0);
+            sWork->routineState = 10;
         }
         break;
     case 10:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6 = 8;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState = 8;
         break;
     case 8:
-        input = sub_812A568();
+        input = UnionRoomChat_ProcessInput();
         switch (input)
         {
         case -1:
         case 1:
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 3;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 3;
             break;
         case 0:
             sub_80FA4A8();
-            sub_8129614(gUnknown_203B0E0->unk190);
-            gUnknown_203B0E0->unk6 = 4;
+            PrepareSendBuffer_Disband(sWork->sendMessageBuffer);
+            sWork->routineState = 4;
             break;
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
         {
-            if (!gUnknown_203B0E0->unk13)
-                gUnknown_203B0E0->unk6 = 6;
+            if (sWork->multiplayerId == 0)
+                sWork->routineState = 6;
             else
-                gUnknown_203B0E0->unk6 = 5;
+                sWork->routineState = 5;
         }
         break;
     case 5:
-        if (!gReceivedRemoteLinkPlayers)
+        if (gReceivedRemoteLinkPlayers == 0)
         {
-            sub_8129218(9);
+            GoToRoutine(CHATENTRYROUTINE_SAVEANDEXIT);
         }
         break;
     }
 }
 
-static void sub_8128AA0(void)
+static void ChatEntryRoutine_ExitChat(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_81298F8))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6++;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState++;
         }
         break;
     case 1:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(18, 0);
-            gUnknown_203B0E0->unk6++;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTEXITINGCHAT, 0);
+            sWork->routineState++;
         }
         break;
     case 2:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_81295EC(gUnknown_203B0E0->unk190);
-            gUnknown_203B0E0->unk6++;
+            PrepareSendBuffer_Drop(sWork->sendMessageBuffer);
+            sWork->routineState++;
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
-            gUnknown_203B0E0->unk6++;
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+            sWork->routineState++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !sub_80FBA1C())
-            gUnknown_203B0E0->unk6++;
+        if ((GetBlockReceivedStatus() & 1) && !GetRfuUnkCE8())
+            sWork->routineState++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !sub_80FBA1C())
+        if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AAC0();
-            gUnknown_203B0E0->unkA = 0;
-            gUnknown_203B0E0->unk6++;
+            sWork->exitDelayTimer = 0;
+            sWork->routineState++;
         }
         break;
     case 6:
-        if (gUnknown_203B0E0->unkA < 150)
-            gUnknown_203B0E0->unkA++;
+        if (sWork->exitDelayTimer < 150)
+            sWork->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_203B0E0->unk6++;
+            sWork->routineState++;
         break;
     case 7:
-        if (gUnknown_203B0E0->unkA >= 150)
-            sub_8129218(9);
+        if (sWork->exitDelayTimer >= 150)
+            GoToRoutine(CHATENTRYROUTINE_SAVEANDEXIT);
         else
-            gUnknown_203B0E0->unkA++;
+            sWork->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_8128C04(void)
+static void ChatEntryRoutine_Drop(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_81298F8))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6++;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState++;
         }
         break;
     case 1:
-        if (!sub_8129C8C(0) && IsLinkTaskFinished() && !sub_80FBA1C())
+        if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AAC0();
-            gUnknown_203B0E0->unkA = 0;
-            gUnknown_203B0E0->unk6++;
+            sWork->exitDelayTimer = 0;
+            sWork->routineState++;
         }
         break;
     case 2:
-        if (gUnknown_203B0E0->unkA < 150)
-            gUnknown_203B0E0->unkA++;
+        if (sWork->exitDelayTimer < 150)
+            sWork->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_203B0E0->unk6++;
+            sWork->routineState++;
         break;
     case 3:
-        if (gUnknown_203B0E0->unkA >= 150)
-            sub_8129218(9);
+        if (sWork->exitDelayTimer >= 150)
+            GoToRoutine(CHATENTRYROUTINE_SAVEANDEXIT);
         else
-            gUnknown_203B0E0->unkA++;
+            sWork->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_8128CA8(void)
+static void ChatEntryRoutine_Disbanded(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        if (!FuncIsActiveTask(sub_81298F8))
+        if (!FuncIsActiveTask(Task_ReceiveChatMessage))
         {
-            if (gUnknown_203B0E0->unk13)
-                sub_8129C34(7, 0);
+            if (sWork->multiplayerId)
+                UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
 
-            gUnknown_203B0E0->unk6++;
+            sWork->routineState++;
         }
         break;
     case 1:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            if (gUnknown_203B0E0->unk13)
-                sub_8129C34(19, 0);
+            if (sWork->multiplayerId != 0)
+                UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTLEADERLEFT, 0);
 
-            gUnknown_203B0E0->unk6++;
+            sWork->routineState++;
         }
         break;
     case 2:
-        if (sub_8129C8C(0) != TRUE && IsLinkTaskFinished() && !sub_80FBA1C())
+        if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
             sub_800AAC0();
-            gUnknown_203B0E0->unkA = 0;
-            gUnknown_203B0E0->unk6++;
+            sWork->exitDelayTimer = 0;
+            sWork->routineState++;
         }
         break;
     case 3:
-        if (gUnknown_203B0E0->unkA < 150)
-            gUnknown_203B0E0->unkA++;
+        if (sWork->exitDelayTimer < 150)
+            sWork->exitDelayTimer++;
 
         if (!gReceivedRemoteLinkPlayers)
-            gUnknown_203B0E0->unk6++;
+            sWork->routineState++;
         break;
     case 4:
-        if (gUnknown_203B0E0->unkA >= 150)
-            sub_8129218(9);
+        if (sWork->exitDelayTimer >= 150)
+            GoToRoutine(CHATENTRYROUTINE_SAVEANDEXIT);
         else
-            gUnknown_203B0E0->unkA++;
+            sWork->exitDelayTimer++;
         break;
     }
 }
 
-static void sub_8128DA4(void)
+static void ChatEntryRoutine_SendMessage(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
         if (!gReceivedRemoteLinkPlayers)
         {
-            sub_8129218(1);
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
             break;
         }
 
-        sub_8129590(gUnknown_203B0E0->unk190);
-        gUnknown_203B0E0->unk6++;
+        PrepareSendBuffer_Chat(sWork->sendMessageBuffer);
+        sWork->routineState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !sub_80FBA1C() && SendBlock(0, gUnknown_203B0E0->unk190, sizeof(gUnknown_203B0E0->unk190)))
-            gUnknown_203B0E0->unk6++;
+        if (IsLinkTaskFinished() == TRUE && !GetRfuUnkCE8() && SendBlock(0, sWork->sendMessageBuffer, sizeof(sWork->sendMessageBuffer)))
+            sWork->routineState++;
         break;
     case 2:
-        sub_8129454();
-        sub_8129C34(8, 0);
-        gUnknown_203B0E0->unk6++;
+        ResetMessageEntryBuffer();
+        UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTMSG, 0);
+        sWork->routineState++;
         break;
     case 3:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6++;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState++;
         break;
     case 4:
         if (IsLinkTaskFinished())
-            sub_8129218(1);
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     }
 }
 
-static void sub_8128E78(void)
+static void ChatEntryRoutine_Register(void)
 {
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        if (sub_8129408())
+        if (ChatMsgHasAtLeastOneCharcter())
         {
-            sub_8129C34(9, 0);
-            gUnknown_203B0E0->unk6 = 2;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTREGISTERWHERE, 0);
+            sWork->routineState = 2;
         }
         else
         {
-            sub_8129C34(13, 0);
-            gUnknown_203B0E0->unk6 = 5;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTINPUTTEXT, 0);
+            sWork->routineState = 5;
         }
         break;
     case 1:
         if (JOY_NEW(A_BUTTON))
         {
-            sub_8129424();
-            sub_8129C34(11, 0);
-            gUnknown_203B0E0->unk6 = 3;
+            RegisterTextAtRow();
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_RETURNTOKB, 0);
+            sWork->routineState = 3;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            sub_8129C34(10, 0);
-            gUnknown_203B0E0->unk6 = 4;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_CANCELREGISTER, 0);
+            sWork->routineState = 4;
         }
-        else if (sub_8129228())
+        else if (TypeChatMessage_HandleDPad())
         {
-            sub_8129C34(1, 0);
-            gUnknown_203B0E0->unk6 = 2;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_MOVEKBCURSOR, 0);
+            sWork->routineState = 2;
         }
         break;
     case 2:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6 = 1;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState = 1;
         break;
     case 3:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(10, 0);
-            gUnknown_203B0E0->unk6 = 4;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_CANCELREGISTER, 0);
+            sWork->routineState = 4;
         }
         break;
     case 4:
-        if (!sub_8129C8C(0))
-            sub_8129218(1);
+        if (!RunDisplaySubtask(0))
+            GoToRoutine(CHATNETRYROUTINE_HANDLE_INPUT);
         break;
     case 5:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6 = 6;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState = 6;
         break;
     case 6:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 4;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 4;
         }
         break;
     }
 }
 
-static void sub_8128FB8(void)
+static void ChatEntryRoutine_SaveAndExit(void)
 {
     s8 input;
 
-    switch (gUnknown_203B0E0->unk6)
+    switch (sWork->routineState)
     {
     case 0:
-        if (!gUnknown_203B0E0->unk18)
+        if (!sWork->changedRegisteredTexts)
         {
-            gUnknown_203B0E0->unk6 = 12;
+            sWork->routineState = 12;
         }
         else
         {
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 1;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 1;
         }
         break;
     case 1:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(14, 0);
-            gUnknown_203B0E0->unk6 = 2;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_ASKSAVE, 0);
+            sWork->routineState = 2;
         }
         break;
     case 2:
-        input = sub_812A568();
+        input = UnionRoomChat_ProcessInput();
         switch (input)
         {
         case -1:
         case 1:
-            gUnknown_203B0E0->unk6 = 12;
+            sWork->routineState = 12;
             break;
         case 0:
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 3;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 3;
             break;
         }
         break;
     case 3:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(15, 0);
-            gUnknown_203B0E0->unk6 = 4;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_ASKOVERWRITESAVE, 0);
+            sWork->routineState = 4;
         }
         break;
     case 4:
-        if (!sub_8129C8C(0))
-            gUnknown_203B0E0->unk6 = 5;
+        if (!RunDisplaySubtask(0))
+            sWork->routineState = 5;
         break;
     case 5:
-        input = sub_812A568();
+        input = UnionRoomChat_ProcessInput();
         switch (input)
         {
         case -1:
         case 1:
-            gUnknown_203B0E0->unk6 = 12;
+            sWork->routineState = 12;
             break;
         case 0:
-            sub_8129C34(7, 0);
-            gUnknown_203B0E0->unk6 = 6;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
+            sWork->routineState = 6;
             break;
         }
         break;
     case 6:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
-            sub_8129C34(16, 0);
-            sub_8129470();
-            gUnknown_203B0E0->unk6 = 7;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTSAVING, 0);
+            SaveRegisteredTextsToSB1();
+            sWork->routineState = 7;
         }
         break;
     case 7:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
             SetContinueGameWarpStatusToDynamicWarp();
             TrySavingData(SAVE_NORMAL);
-            gUnknown_203B0E0->unk6 = 8;
+            sWork->routineState = 8;
         }
         break;
     case 8:
-        sub_8129C34(17, 0);
-        gUnknown_203B0E0->unk6 = 9;
+        UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_PRINTSAVEDTHEGAME, 0);
+        sWork->routineState = 9;
         break;
     case 9:
-        if (!sub_8129C8C(0))
+        if (!RunDisplaySubtask(0))
         {
             PlaySE(SE_SAVE);
             ClearContinueGameWarpStatus2();
-            gUnknown_203B0E0->unk6 = 10;
+            sWork->routineState = 10;
         }
         break;
     case 10:
-        gUnknown_203B0E0->unk19 = 0;
-        gUnknown_203B0E0->unk6 = 11;
+        sWork->afterSaveTimer = 0;
+        sWork->routineState = 11;
         break;
     case 11:
-        gUnknown_203B0E0->unk19++;
-        if (gUnknown_203B0E0->unk19 > 120)
-            gUnknown_203B0E0->unk6 = 12;
+        sWork->afterSaveTimer++;
+        if (sWork->afterSaveTimer > 120)
+            sWork->routineState = 12;
         break;
     case 12:
         BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
-        gUnknown_203B0E0->unk6 = 13;
+        sWork->routineState = 13;
         break;
     case 13:
         if (!gPaletteFade.active)
         {
             sub_812B4B8();
-            sub_8129B88();
-            sub_81284BC();
+            UnionRoomChat_FreeGraphicsWork();
+            FreeChatWork();
             SetMainCallback2(CB2_ReturnToField);
         }
         break;
     }
 }
 
-static void sub_8129218(u16 arg0)
+static void GoToRoutine(u16 routineNo)
 {
-    gUnknown_203B0E0->unk4 = arg0;
-    gUnknown_203B0E0->unk6 = 0;
+    sWork->routineNo = routineNo;
+    sWork->routineState = 0;
 }
 
-static bool32 sub_8129228(void)
+static bool32 TypeChatMessage_HandleDPad(void)
 {
     if (!(gMain.newAndRepeatedKeys & DPAD_UP))
     {
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
-            if (gUnknown_203B0E0->currentRow < sKeyboardPageMaxRow[gUnknown_203B0E0->currentPage])
-                gUnknown_203B0E0->currentRow++;
+            if (sWork->currentRow < sKeyboardPageMaxRow[sWork->currentPage])
+                sWork->currentRow++;
             else
-                gUnknown_203B0E0->currentRow = 0;
+                sWork->currentRow = 0;
 
             return TRUE;
         }
 
-        if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+        if (sWork->currentPage != UNION_ROOM_KB_PAGE_COUNT)
         {
             if (gMain.newAndRepeatedKeys & DPAD_LEFT)
             {
-                if (gUnknown_203B0E0->unk11)
-                    gUnknown_203B0E0->unk11--;
+                if (sWork->currentCol)
+                    sWork->currentCol--;
                 else
-                    gUnknown_203B0E0->unk11 = 4;
+                    sWork->currentCol = 4;
             }
             else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
             {
-                if (gUnknown_203B0E0->unk11 > 3)
-                    gUnknown_203B0E0->unk11 = 0;
+                if (sWork->currentCol > 3)
+                    sWork->currentCol = 0;
                 else
-                    gUnknown_203B0E0->unk11++;
+                    sWork->currentCol++;
             }
             else
             {
@@ -924,16 +951,16 @@ static bool32 sub_8129228(void)
     }
     else
     {
-        if (gUnknown_203B0E0->currentRow)
-            gUnknown_203B0E0->currentRow--;
+        if (sWork->currentRow)
+            sWork->currentRow--;
         else
-            gUnknown_203B0E0->currentRow = sKeyboardPageMaxRow[gUnknown_203B0E0->currentPage];
+            sWork->currentRow = sKeyboardPageMaxRow[sWork->currentPage];
 
         return TRUE;
     }
 }
 
-static void sub_81292D8(void)
+static void AppendCharacterToChatMessageBuffer(void)
 {
     int i;
     const u8 *charsStr;
@@ -941,10 +968,10 @@ static void sub_81292D8(void)
     u8 *str;
     u8 buffer[21];
 
-    if (gUnknown_203B0E0->currentPage != UNION_ROOM_KB_PAGE_COUNT)
+    if (sWork->currentPage != UNION_ROOM_KB_PAGE_COUNT)
     {
-        charsStr = gUnionRoomKeyboardText[gUnknown_203B0E0->currentPage][gUnknown_203B0E0->currentRow];
-        for (i = 0; i < gUnknown_203B0E0->unk11; i++)
+        charsStr = gUnionRoomKeyboardText[sWork->currentPage][sWork->currentRow];
+        for (i = 0; i < sWork->currentCol; i++)
         {
             if (*charsStr == CHAR_EXTRA_EMOJI)
                 charsStr++;
@@ -955,19 +982,19 @@ static void sub_81292D8(void)
     }
     else
     {
-        u8 *tempStr = StringCopy(buffer, gUnknown_203B0E0->unkB9[gUnknown_203B0E0->currentRow]);
+        u8 *tempStr = StringCopy(buffer, sWork->registeredTexts[sWork->currentRow]);
         tempStr[0] = CHAR_SPACE;
         tempStr[1] = EOS;
         charsStr = buffer;
         strLength = StringLength_Multibyte(buffer);
     }
 
-    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15;
+    sWork->lastBufferCursorPos = sWork->bufferCursorPos;
     if (!charsStr)
         return;
 
-    str = sub_81294C8();
-    while (--strLength != -1 && gUnknown_203B0E0->unk15 < 15)
+    str = GetEndOfUnk1A();
+    while (--strLength != -1 && sWork->bufferCursorPos < MESSAGE_BUFFER_NCHAR)
     {
         if (*charsStr == CHAR_EXTRA_EMOJI)
         {
@@ -980,86 +1007,84 @@ static void sub_81292D8(void)
         charsStr++;
         str++;
 
-        gUnknown_203B0E0->unk15++;
+        sWork->bufferCursorPos++;
     }
 
     *str = EOS;
 }
 
-static void sub_81293AC(void)
+static void DeleteLastCharacterOfChatMessageBuffer(void)
 {
-    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15;
-    if (gUnknown_203B0E0->unk15)
+    sWork->lastBufferCursorPos = sWork->bufferCursorPos;
+    if (sWork->bufferCursorPos)
     {
-        u8 *str = sub_81294EC();
+        u8 *str = GetPtrToLastCharOfUnk1A();
         *str = EOS;
-        gUnknown_203B0E0->unk15--;
+        sWork->bufferCursorPos--;
     }
 }
 
-static void sub_81293D8(void)
+static void ToggleCaseOfLastCharacterInChatMessageBuffer(void)
 {
     u8 *str;
     u8 character;
 
-    gUnknown_203B0E0->unk14 = gUnknown_203B0E0->unk15 - 1;
-    str = sub_81294EC();
+    sWork->lastBufferCursorPos = sWork->bufferCursorPos - 1;
+    str = GetPtrToLastCharOfUnk1A();
     if (*str != CHAR_EXTRA_EMOJI)
     {
-        character = gUnknown_845A8AC[*str];
+        character = sCaseToggleTable[*str];
         if (character)
             *str = character;
     }
 }
 
-static bool32 sub_8129408(void)
+static bool32 ChatMsgHasAtLeastOneCharcter(void)
 {
-    if (gUnknown_203B0E0->unk15)
+    if (sWork->bufferCursorPos)
         return TRUE;
     else
         return FALSE;
 }
 
-static void sub_8129424(void)
+static void RegisterTextAtRow(void)
 {
-    u8 *src = sub_8129758();
-    StringCopy(gUnknown_203B0E0->unkB9[gUnknown_203B0E0->currentRow], src);
-    gUnknown_203B0E0->unk18 = 1;
+    u8 *src = UnionRoomChat_GetEndOfMessageEntryBuffer();
+    StringCopy(sWork->registeredTexts[sWork->currentRow], src);
+    sWork->changedRegisteredTexts = TRUE;
 }
 
-static void sub_8129454(void)
+static void ResetMessageEntryBuffer(void)
 {
-    gUnknown_203B0E0->unk1A[0] = EOS;
-    gUnknown_203B0E0->unk14 = 15;
-    gUnknown_203B0E0->unk15 = 0;
+    sWork->messageEntryBuffer[0] = EOS;
+    sWork->lastBufferCursorPos = MESSAGE_BUFFER_NCHAR;
+    sWork->bufferCursorPos = 0;
 }
 
-static void sub_8129470(void)
+static void SaveRegisteredTextsToSB1(void)
 {
     int i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
-        StringCopy(gSaveBlock1Ptr->unk3AD4[i], gUnknown_203B0E0->unkB9[i]);
+        StringCopy(gSaveBlock1Ptr->registeredTexts[i], sWork->registeredTexts[i]);
 }
 
-u8 *sub_81294B0(int arg0)
+u8 *UnionRoomChat_GetWorkRegisteredText(int arg0)
 {
-    return gUnknown_203B0E0->unkB9[arg0];
+    return sWork->registeredTexts[arg0];
 }
 
-// GetEndOfUnk1A
-static u8 *sub_81294C8(void)
+static u8 *GetEndOfUnk1A(void)
 {
-    u8 *str = gUnknown_203B0E0->unk1A;
+    u8 *str = sWork->messageEntryBuffer;
     while (*str != EOS)
         str++;
 
     return str;
 }
 
-// GetPtrToLastCharOfUnk1A
-static u8 *sub_81294EC(void)
+static u8 *GetPtrToLastCharOfUnk1A(void)
 {
-    u8 *str = gUnknown_203B0E0->unk1A;
+    u8 *str = sWork->messageEntryBuffer;
     u8 *str2 = str;
     while (*str != EOS)
     {
@@ -1072,13 +1097,13 @@ static u8 *sub_81294EC(void)
     return str2;
 }
 
-static u16 sub_812951C(void)
+static u16 GetNumCharsInMessageEntryBuffer(void)
 {
     u8 *str;
     u32 i, numChars, strLength;
 
-    strLength = StringLength_Multibyte(gUnknown_203B0E0->unk1A);
-    str = gUnknown_203B0E0->unk1A;
+    strLength = StringLength_Multibyte(sWork->messageEntryBuffer);
+    str = sWork->messageEntryBuffer;
     numChars = 0;
     if (strLength > 10)
     {
@@ -1096,83 +1121,83 @@ static u16 sub_812951C(void)
     return numChars;
 }
 
-static void sub_8129560(u8 *arg0)
+static void PrepareSendBuffer_Null(u8 *arg0)
 {
-    arg0[0] = 0;
+    arg0[0] = CHAT_MESSAGE_0;
 }
 
-static void sub_8129568(u8 *arg0)
+static void PrepareSendBuffer_Join(u8 *arg0)
 {
-    arg0[0] = 2;
+    arg0[0] = CHAT_MESSAGE_JOIN;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = sWork->multiplayerId;
 }
 
-static void sub_8129590(u8 *arg0)
+static void PrepareSendBuffer_Chat(u8 *arg0)
 {
-    arg0[0] = 1;
+    arg0[0] = CHAT_MESSAGE_CHAT;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    StringCopy(&arg0[1 + (PLAYER_NAME_LENGTH + 1)], gUnknown_203B0E0->unk1A);
+    StringCopy(&arg0[1 + (PLAYER_NAME_LENGTH + 1)], sWork->messageEntryBuffer);
 }
 
-static void sub_81295C0(u8 *arg0)
+static void PrepareSendBuffer_Leave(u8 *arg0)
 {
-    arg0[0] = 3;
+    arg0[0] = CHAT_MESSAGE_LEAVE;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = sWork->multiplayerId;
     sub_80FB9D0();
 }
 
-static void sub_81295EC(u8 *arg0)
+static void PrepareSendBuffer_Drop(u8 *arg0)
 {
-    arg0[0] = 4;
+    arg0[0] = CHAT_MESSAGE_DROP;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = sWork->multiplayerId;
 }
 
-static void sub_8129614(u8 *arg0)
+static void PrepareSendBuffer_Disband(u8 *arg0)
 {
-    arg0[0] = 5;
+    arg0[0] = CHAT_MESSAGE_DISBAND;
     StringCopy(&arg0[1], gSaveBlock2Ptr->playerName);
-    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = gUnknown_203B0E0->unk13;
+    arg0[1 + (PLAYER_NAME_LENGTH + 1)] = sWork->multiplayerId;
 }
 
-static bool32 sub_812963C(u8 *arg0, u8 *arg1)
+static bool32 ProcessReceivedChatMessage(u8 *dest, u8 *recvMessage)
 {
     u8 *tempStr;
-    u8 var0 = *arg1;
-    u8 *str = arg1 + 1;
-    arg1 = str;
-    arg1 += 8;
+    u8 cmd = *recvMessage;
+    u8 *name = recvMessage + 1;
+    recvMessage = name;
+    recvMessage += PLAYER_NAME_LENGTH + 1;
 
-    switch (var0)
+    switch (cmd)
     {
-    case 2:
-        if (gUnknown_203B0E0->unk13 != str[8])
+    case CHAT_MESSAGE_JOIN:
+        if (sWork->multiplayerId != name[PLAYER_NAME_LENGTH + 1])
         {
             DynamicPlaceholderTextUtil_Reset();
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700JoinedChat);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dest, gText_F700JoinedChat);
             return TRUE;
         }
         break;
-    case 1:
-        tempStr = StringCopy(arg0, str);
+    case CHAT_MESSAGE_CHAT:
+        tempStr = StringCopy(dest, name);
         *(tempStr++) = EXT_CTRL_CODE_BEGIN;
         *(tempStr++) = EXT_CTRL_CODE_CLEAR_TO;
         *(tempStr++) = 42;
         *(tempStr++) = CHAR_COLON;
-        StringCopy(tempStr, arg1);
+        StringCopy(tempStr, recvMessage);
         return TRUE;
-    case 5:
-        StringCopy(gUnknown_203B0E0->unk79, str);
+    case CHAT_MESSAGE_DISBAND:
+        StringCopy(sWork->hostName, name);
         // fall through
-    case 3:
-        if (gUnknown_203B0E0->unk13 != *arg1)
+    case CHAT_MESSAGE_LEAVE:
+        if (sWork->multiplayerId != *recvMessage)
         {
             DynamicPlaceholderTextUtil_Reset();
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(arg0, gText_F700LeftChat);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(dest, gText_F700LeftChat);
             return TRUE;
         }
         break;
@@ -1183,47 +1208,47 @@ static bool32 sub_812963C(u8 *arg0, u8 *arg1)
 
 u8 GetCurrentKeyboardPage(void)
 {
-    return gUnknown_203B0E0->currentPage;
+    return sWork->currentPage;
 }
 
-void sub_8129700(u8 *arg0, u8 *arg1)
+void UnionRoomChat_GetCursorColAndRow(u8 *colp, u8 *rowp)
 {
-    *arg0 = gUnknown_203B0E0->unk11;
-    *arg1 = gUnknown_203B0E0->currentRow;
+    *colp = sWork->currentCol;
+    *rowp = sWork->currentRow;
 }
 
-u8 *sub_8129714(void)
+u8 *UnionRoomChat_GetMessageEntryBuffer(void)
 {
-    return gUnknown_203B0E0->unk1A;
+    return sWork->messageEntryBuffer;
 }
 
-int sub_8129720(void)
+int UnionRoomChat_LenMessageEntryBuffer(void)
 {
-    u8 *str = sub_8129714();
+    u8 *str = UnionRoomChat_GetMessageEntryBuffer();
     return StringLength_Multibyte(str);
 }
 
-void sub_8129730(u32 *arg0, u32 *arg1)
+void UnionRoomChat_GetBufferSelectionRegion(u32 *startp, u32 *diffp)
 {
-    int diff = gUnknown_203B0E0->unk15 - gUnknown_203B0E0->unk14;
+    int diff = sWork->bufferCursorPos - sWork->lastBufferCursorPos;
     if (diff < 0)
     {
         diff *= -1;
-        *arg0 = gUnknown_203B0E0->unk15;
+        *startp = sWork->bufferCursorPos;
     }
     else
     {
-        *arg0 = gUnknown_203B0E0->unk14;
+        *startp = sWork->lastBufferCursorPos;
     }
 
-    *arg1 = diff;
+    *diffp = diff;
 }
 
-u8 *sub_8129758(void)
+u8 *UnionRoomChat_GetEndOfMessageEntryBuffer(void)
 {
     int i;
-    u16 numChars = sub_812951C();
-    u8 *str = gUnknown_203B0E0->unk1A;
+    u16 numChars = GetNumCharsInMessageEntryBuffer();
+    u8 *str = sWork->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
         if (*str == CHAR_EXTRA_EMOJI)
@@ -1235,12 +1260,13 @@ u8 *sub_8129758(void)
     return str;
 }
 
-u16 sub_8129788(void)
+// Useless overhead
+u16 UnionRoomChat_GetNumCharsInMessageEntryBuffer(void)
 {
     u16 count;
     u32 i;
-    u16 numChars = sub_812951C();
-    u8 *str = gUnknown_203B0E0->unk1A;
+    u16 numChars = GetNumCharsInMessageEntryBuffer();
+    u8 *str = sWork->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
         if (*str == CHAR_EXTRA_EMOJI)
@@ -1252,56 +1278,64 @@ u16 sub_8129788(void)
     return count;
 }
 
-u8 *sub_81297C4(void)
+u8 *UnionRoomChat_GetLastReceivedMessage(void)
 {
-    return gUnknown_203B0E0->unk39;
+    return sWork->receivedMessage;
 }
 
-u16 sub_81297D0(void)
+u16 UnionRoomChat_GetReceivedPlayerIndex(void)
 {
-    return gUnknown_203B0E0->unk16;
+    return sWork->receivedPlayerIndex;
 }
 
-int sub_81297DC(void)
+int UnionRoomChat_GetMessageEntryCursorPosition(void)
 {
-    return gUnknown_203B0E0->unk15;
+    return sWork->bufferCursorPos;
 }
 
-int sub_81297E8(void)
+// This probably does more in the Japanese titles.
+int UnionRoomChat_GetWhetherShouldShowCaseToggleIcon(void)
 {
-    u8 *str = sub_81294EC();
+    u8 *str = GetPtrToLastCharOfUnk1A();
     u32 character = *str;
-    if (character > 0xFF || gUnknown_845A8AC[character] == character || gUnknown_845A8AC[character] == 0)
+    if (character > 0xFF || sCaseToggleTable[character] == character || sCaseToggleTable[character] == 0)
         return 3;
     else
         return 0;
 }
 
-u8 *sub_8129814(void)
+u8 *UnionRoomChat_GetNameOfPlayerWhoDisbandedChat(void)
 {
-    return gUnknown_203B0E0->unk79;
+    return sWork->hostName;
 }
 
-void copy_strings_to_sav1(void)
+void UnionRoomChat_InitializeRegisteredTexts(void)
 {
-    StringCopy(gSaveBlock1Ptr->unk3AD4[0], gText_Hello);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[1], gText_Pokemon2);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[2], gText_Trade);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[3], gText_Battle);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[4], gText_Lets);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[5], gText_Ok);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[6], gText_Sorry);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[7], gText_YaySmileEmoji);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[8], gText_ThankYou);
-    StringCopy(gSaveBlock1Ptr->unk3AD4[9], gText_ByeBye);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[0], gText_Hello);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[1], gText_Pokemon2);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[2], gText_Trade);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[3], gText_Battle);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[4], gText_Lets);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[5], gText_Ok);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[6], gText_Sorry);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[7], gText_YaySmileEmoji);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[8], gText_ThankYou);
+    StringCopy(gSaveBlock1Ptr->registeredTexts[9], gText_ByeBye);
 }
 
-static void sub_81298F8(u8 taskId)
+#define tState               data[0]
+#define tI                   data[1]
+#define tCurrLinkPlayer      data[2]
+#define tBlockReceivedStatus data[3]
+#define tLinkPlayerCount     data[4]
+#define tNextState           data[5]
+
+static void Task_ReceiveChatMessage(u8 taskId)
 {
     u8 *buffer;
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
         if (!gReceivedRemoteLinkPlayers)
@@ -1310,98 +1344,110 @@ static void sub_81298F8(u8 taskId)
             return;
         }
 
-        data[0] = 1;
+        tState = 1;
         // fall through
     case 1:
-        data[4] = GetLinkPlayerCount();
-        if (gUnknown_203B0E0->unkD != data[4])
+        tLinkPlayerCount = GetLinkPlayerCount();
+        if (sWork->linkPlayerCount != tLinkPlayerCount)
         {
-            data[0] = 2;
-            gUnknown_203B0E0->unkD = data[4];
+            tState = 2;
+            sWork->linkPlayerCount = tLinkPlayerCount;
             return;
         }
 
-        data[3] = GetBlockReceivedStatus();
-        if (!data[3] && sub_80FBA1C())
+        tBlockReceivedStatus = GetBlockReceivedStatus();
+        if (!tBlockReceivedStatus && GetRfuUnkCE8())
             return;
 
-        data[1] = 0;
-        data[0] = 3;
+        tI = 0;
+        tState = 3;
         // fall through
     case 3:
-        for (; data[1] < 5 && ((data[3] >> data[1]) & 1) == 0; data[1]++)
+        // Idle listen
+        for (; tI < 5 && ((tBlockReceivedStatus >> tI) & 1) == 0; tI++)
             ;
 
-        if (data[1] == 5)
+        if (tI == 5)
         {
-            data[0] = 1;
+            tState = 1;
             return;
         }
 
-        data[2] = data[1];
-        ResetBlockReceivedFlag(data[2]);
-        buffer = (u8 *)gBlockRecvBuffer[data[1]];
+        tCurrLinkPlayer = tI;
+        ResetBlockReceivedFlag(tCurrLinkPlayer);
+        buffer = (u8 *)gBlockRecvBuffer[tI];
         switch (buffer[0])
         {
         default:
-        case 1: data[5] = 3; break;
-        case 2: data[5] = 3; break;
-        case 3: data[5] = 4; break;
-        case 4: data[5] = 5; break;
-        case 5: data[5] = 6; break;
+        case CHAT_MESSAGE_CHAT: tNextState = 3; break;
+        case CHAT_MESSAGE_JOIN: tNextState = 3; break;
+        case CHAT_MESSAGE_LEAVE: tNextState = 4; break;
+        case CHAT_MESSAGE_DROP: tNextState = 5; break;
+        case CHAT_MESSAGE_DISBAND: tNextState = 6; break;
         }
 
-        if (sub_812963C(gUnknown_203B0E0->unk39, (u8 *)gBlockRecvBuffer[data[1]]))
+        if (ProcessReceivedChatMessage(sWork->receivedMessage, (u8 *)gBlockRecvBuffer[tI]))
         {
-            gUnknown_203B0E0->unk16 = data[1];
-            sub_8129C34(12, 2);
-            data[0] = 7;
+            sWork->receivedPlayerIndex = tI;
+            UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_SCROLLCHAT, 2);
+            tState = 7;
         }
         else
         {
-            data[0] = data[5];
+            tState = tNextState;
         }
 
-        data[1]++;
+        tI++;
         break;
     case 7:
-        if (!sub_8129C8C(2))
-            data[0] = data[5];
+        if (!RunDisplaySubtask(2))
+            tState = tNextState;
         break;
     case 4:
-        if (!gUnknown_203B0E0->unk13 && data[2])
+        // Someone is leaving
+        if (sWork->multiplayerId == 0 && tCurrLinkPlayer != 0)
         {
+            // You're the leader, and the person who left is not you
             if (GetLinkPlayerCount() == 2)
             {
                 sub_80FA4A8();
-                gUnknown_203B0E0->unk17 = 1;
+                sWork->exitType = CHATEXIT_LEADER_LAST;
                 DestroyTask(taskId);
                 return;
             }
 
-            sub_80FBD6C(data[2]);
+            sub_80FBD6C(tCurrLinkPlayer);
         }
 
-        data[0] = 3;
+        tState = 3;
         break;
     case 5:
-        if (gUnknown_203B0E0->unk13)
-            gUnknown_203B0E0->unk17 = 2;
+        // Person left
+        if (sWork->multiplayerId != 0)
+            sWork->exitType = CHATEXIT_DROPPED;
 
         DestroyTask(taskId);
         break;
     case 6:
-        gUnknown_203B0E0->unk17 = 3;
+        // The leader disbanded the chat
+        sWork->exitType = CHATEXIT_DISBANDED;
         DestroyTask(taskId);
         break;
     case 2:
-        if (!sub_80FBA1C())
+        if (!GetRfuUnkCE8())
         {
-            if (!gUnknown_203B0E0->unk13)
-                sub_80FB030(gUnknown_203B0E0->unkD);
+            if (sWork->multiplayerId == 0)
+                sub_80FB030(sWork->linkPlayerCount);
 
-            data[0] = 1;
+            tState = 1;
         }
         break;
     }
 }
+
+#undef tNextState
+#undef tLinkPlayerCount
+#undef tBlockReceivedStatus
+#undef tCurrLinkPlayer
+#undef tI
+#undef tState

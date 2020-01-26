@@ -6,238 +6,238 @@
 
 struct UnionRoomChat3
 {
-    struct Sprite *unk0;
-    struct Sprite *unk4;
-    struct Sprite *unk8;
-    struct Sprite *unkC;
-    struct Sprite *unk10;
-    u16 unk14;
+    struct Sprite *selectorCursorSprite;
+    struct Sprite *characterSelectCursorSprite;
+    struct Sprite *textEntryCursorSprite;
+    struct Sprite *rButtonSprite;
+    struct Sprite *chatIconsSprite;
+    u16 cursorBlinkTimer;
 };
 
-static EWRAM_DATA struct UnionRoomChat3 *gUnknown_203B0E8 = NULL;
+static EWRAM_DATA struct UnionRoomChat3 *sWork = NULL;
 
-static void sub_812B09C(struct Sprite * sprite);
-static void sub_812B0D4(struct Sprite * sprite);
+static void SpriteCB_TextEntryCursor(struct Sprite * sprite);
+static void SpriteCB_CharacterSelectCursor(struct Sprite * sprite);
 
-static const u16 gUnknown_845AC14[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
-static const u32 gUnknown_845AC34[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");
-static const u32 gUnknown_845AEB8[] = INCBIN_U32("graphics/union_room_chat/unk_845AEB8.4bpp.lz");
-static const u32 gUnknown_845AED8[] = INCBIN_U32("graphics/union_room_chat/unk_845AED8.4bpp.lz");
-static const u32 gUnknown_845AF04[] = INCBIN_U32("graphics/union_room_chat/unk_845AF04.4bpp.lz");
+static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/unk_845AC14.gbapal");
+static const u32 sSelectorCursorGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AC34.4bpp.lz");
+static const u32 sHorizontalBarGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AEB8.4bpp.lz");
+static const u32 sMenuCursorGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AED8.4bpp.lz");
+static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/unk_845AF04.4bpp.lz");
 
-static const struct CompressedSpriteSheet gUnknown_845AF58[] = {
-    {gUnknown_845AC34, 0x1000, 0},
-    {gUnknown_845AED8, 0x0040, 1},
-    {gUnknown_845AEB8, 0x0040, 2},
-    {gUnknown_845AF04, 0x0080, 3},
-    {gUnknown_8EA1A50, 0x0400, 4}
+static const struct CompressedSpriteSheet sSpriteSheets[] = {
+    {sSelectorCursorGfxTiles, 0x1000, 0},
+    {sMenuCursorGfxTiles, 0x0040, 1},
+    {sHorizontalBarGfxTiles, 0x0040, 2},
+    {sRButtonGfxTiles, 0x0080, 3},
+    {gUnionRoomChatIcons, 0x0400, 4}
 };
 
-static const struct SpritePalette gUnknown_845AF80 = {
-    gUnknown_845AC14, 0
+static const struct SpritePalette sSpritePalette = {
+    sUnionRoomChatInterfacePal, 0
 };
 
-static const struct OamData gOamData_845AF88 = {
+static const struct OamData sOamData_64x32_1 = {
     .shape = SPRITE_SHAPE(64x32),
     .size = SPRITE_SIZE(64x32),
     .priority = 1
 };
 
-static const union AnimCmd gAnimCmd_845AF90[] = {
+static const union AnimCmd sAnim_CursorSmallOpen[] = {
     ANIMCMD_FRAME(0x00, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845AF98[] = {
+static const union AnimCmd sAnim_CursorSmallClosed[] = {
     ANIMCMD_FRAME(0x20, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845AFA0[] = {
+static const union AnimCmd sAnim_CursorLargeOpen[] = {
     ANIMCMD_FRAME(0x40, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845AFA8[] = {
+static const union AnimCmd sAnim_CursorLargeClosed[] = {
     ANIMCMD_FRAME(0x60, 30),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_845AFB0[] = {
-    gAnimCmd_845AF90,
-    gAnimCmd_845AF98,
-    gAnimCmd_845AFA0,
-    gAnimCmd_845AFA8
+static const union AnimCmd *const sSpriteAnims_SelectorCursor[] = {
+    sAnim_CursorSmallOpen,
+    sAnim_CursorSmallClosed,
+    sAnim_CursorLargeOpen,
+    sAnim_CursorLargeClosed
 };
 
-static const struct SpriteTemplate gUnknown_845AFC0 = {
+static const struct SpriteTemplate sSpriteTemplate_SelectorCursor = {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &gOamData_845AF88,
-    .anims = gSpriteAnimTable_845AFB0,
+    .oam = &sOamData_64x32_1,
+    .anims = sSpriteAnims_SelectorCursor,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gOamData_845AFD8 = {
+static const struct OamData sOamData_8x16_2 = {
     .shape = SPRITE_SHAPE(8x16),
     .size = SPRITE_SIZE(8x16),
     .priority = 2
 };
 
-static const struct SpriteTemplate gUnknown_845AFE0 = {
+static const struct SpriteTemplate sSpriteTemplate_TextEntryCursor = {
     .tileTag = 2,
     .paletteTag = 0,
-    .oam = &gOamData_845AFD8,
+    .oam = &sOamData_8x16_2,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_812B09C
+    .callback = SpriteCB_TextEntryCursor
 };
 
-static const struct SpriteTemplate gUnknown_845AFF8 = {
+static const struct SpriteTemplate sSpriteTemplate_CharacterSelectCursor = {
     .tileTag = 1,
     .paletteTag = 0,
-    .oam = &gOamData_845AFD8,
+    .oam = &sOamData_8x16_2,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_812B0D4
+    .callback = SpriteCB_CharacterSelectCursor
 };
 
-static const struct OamData gOamData_845B010 = {
+static const struct OamData sOamData_16x16_2 = {
     .shape = SPRITE_SHAPE(16x16),
     .size = SPRITE_SIZE(16x16),
     .priority = 2
 };
 
-static const struct OamData gOamData_845B018 = {
+static const struct OamData sOamData_32x16_2 = {
     .shape = SPRITE_SHAPE(32x16),
     .size = SPRITE_SIZE(32x16),
     .priority = 2
 };
 
-static const union AnimCmd gAnimCmd_845B020[] = {
+static const union AnimCmd sAnim_UnionRoomChatIcons_ToggleCase[] = {
     ANIMCMD_FRAME(0x00, 2),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845B028[] = {
+static const union AnimCmd sAnim_UnionRoomChatIcons_Dummy1[] = {
     ANIMCMD_FRAME(0x08, 2),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845B030[] = {
+static const union AnimCmd sAnim_UnionRoomChatIcons_Dummy2[] = {
     ANIMCMD_FRAME(0x10, 2),
     ANIMCMD_END
 };
 
-static const union AnimCmd gAnimCmd_845B038[] = {
+static const union AnimCmd sAnim_UnionRoomChatIcons_Register[] = {
     ANIMCMD_FRAME(0x18, 2),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gSpriteAnimTable_845B040[] = {
-    gAnimCmd_845B020,
-    gAnimCmd_845B028,
-    gAnimCmd_845B030,
-    gAnimCmd_845B038
+static const union AnimCmd *const sSpriteAnimTable_UnionRoomChatIcons[] = {
+    sAnim_UnionRoomChatIcons_ToggleCase,
+    sAnim_UnionRoomChatIcons_Dummy1,
+    sAnim_UnionRoomChatIcons_Dummy2,
+    sAnim_UnionRoomChatIcons_Register
 };
 
-static const struct SpriteTemplate gUnknown_845B050 = {
+static const struct SpriteTemplate sSpriteTemplate_RButton = {
     .tileTag = 3,
     .paletteTag = 0,
-    .oam = &gOamData_845B010,
+    .oam = &sOamData_16x16_2,
     .anims = gDummySpriteAnimTable,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct SpriteTemplate gUnknown_845B068 = {
+static const struct SpriteTemplate sSpriteTemplate_UnionRoomChatIcons = {
     .tileTag = 4,
     .paletteTag = 0,
-    .oam = &gOamData_845B018,
-    .anims = gSpriteAnimTable_845B040,
+    .oam = &sOamData_32x16_2,
+    .anims = sSpriteAnimTable_UnionRoomChatIcons,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-bool32 sub_812AE70(void)
+bool32 UnionRoomChat_TryAllocSpriteWork(void)
 {
     u32 i;
     for (i = 0; i < 5; i++)
-        LoadCompressedSpriteSheet(&gUnknown_845AF58[i]);
+        LoadCompressedSpriteSheet(&sSpriteSheets[i]);
 
-    LoadSpritePalette(&gUnknown_845AF80);
-    gUnknown_203B0E8 = Alloc(0x18);
-    if (!gUnknown_203B0E8)
+    LoadSpritePalette(&sSpritePalette);
+    sWork = Alloc(0x18);
+    if (!sWork)
         return FALSE;
 
     return TRUE;
 }
 
-void sub_812AEB0(void)
+void UnionRoomChat_FreeSpriteWork(void)
 {
-    if (gUnknown_203B0E8)
-        Free(gUnknown_203B0E8);
+    if (sWork)
+        Free(sWork);
 }
 
-void sub_812AEC8(void)
+void UnionRoomChat_CreateSelectorCursorObj(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_845AFC0, 10, 24, 0);
-    gUnknown_203B0E8->unk0 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_SelectorCursor, 10, 24, 0);
+    sWork->selectorCursorSprite = &gSprites[spriteId];
 }
 
-void sub_812AEFC(bool32 invisible)
+void UnionRoomChat_ToggleSelectorCursorObjVisibility(bool32 invisible)
 {
-    gUnknown_203B0E8->unk0->invisible = invisible;
+    sWork->selectorCursorSprite->invisible = invisible;
 }
 
-void sub_812AF1C(void)
+void UnionRoomChat_MoveSelectorCursorObj(void)
 {
     u8 x, y;
     u8 page = GetCurrentKeyboardPage();
-    sub_8129700(&x, &y);
+    UnionRoomChat_GetCursorColAndRow(&x, &y);
     if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
-        StartSpriteAnim(gUnknown_203B0E8->unk0, 0);
-        gUnknown_203B0E8->unk0->pos1.x = x * 8 + 10;
-        gUnknown_203B0E8->unk0->pos1.y = y * 12 + 24;
+        StartSpriteAnim(sWork->selectorCursorSprite, 0);
+        sWork->selectorCursorSprite->pos1.x = x * 8 + 10;
+        sWork->selectorCursorSprite->pos1.y = y * 12 + 24;
     }
     else
     {
-        StartSpriteAnim(gUnknown_203B0E8->unk0, 2);
-        gUnknown_203B0E8->unk0->pos1.x = 24;
-        gUnknown_203B0E8->unk0->pos1.y = y * 12 + 24;
+        StartSpriteAnim(sWork->selectorCursorSprite, 2);
+        sWork->selectorCursorSprite->pos1.x = 24;
+        sWork->selectorCursorSprite->pos1.y = y * 12 + 24;
     }
 }
 
-void sub_812AF8C(int arg0)
+void UnionRoomChat_UpdateObjPalCycle(int arg0)
 {
-    const u16 *palette = &gUnknown_845AC14[arg0 * 2 + 1];
+    const u16 *palette = &sUnionRoomChatInterfacePal[arg0 * 2 + 1];
     u8 index = IndexOfSpritePaletteTag(0);
     LoadPalette(palette, index * 16 + 0x101, 4);
 }
 
-void sub_812AFC0(void)
+void UnionRoomChat_SetSelectorCursorClosedImage(void)
 {
     if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
-        StartSpriteAnim(gUnknown_203B0E8->unk0, 1);
+        StartSpriteAnim(sWork->selectorCursorSprite, 1);
     else
-        StartSpriteAnim(gUnknown_203B0E8->unk0, 3);
+        StartSpriteAnim(sWork->selectorCursorSprite, 3);
 
-    gUnknown_203B0E8->unk14 = 0;
+    sWork->cursorBlinkTimer = 0;
 }
 
-bool32 sub_812AFFC(void)
+bool32 UnionRoomChat_AnimateSelectorCursorReopen(void)
 {
-    if (gUnknown_203B0E8->unk14 > 3)
+    if (sWork->cursorBlinkTimer > 3)
         return FALSE;
 
-    if (++gUnknown_203B0E8->unk14 > 3)
+    if (++sWork->cursorBlinkTimer > 3)
     {
         if (GetCurrentKeyboardPage() != UNION_ROOM_KB_PAGE_COUNT)
-            StartSpriteAnim(gUnknown_203B0E8->unk0, 0);
+            StartSpriteAnim(sWork->selectorCursorSprite, 0);
         else
-            StartSpriteAnim(gUnknown_203B0E8->unk0, 2);
+            StartSpriteAnim(sWork->selectorCursorSprite, 2);
 
         return FALSE;
     }
@@ -245,17 +245,17 @@ bool32 sub_812AFFC(void)
     return TRUE;
 }
 
-void sub_812B048(void)
+void UnionRoomChat_SpawnTextEntryPointerSprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_845AFE0, 76, 152, 2);
-    gUnknown_203B0E8->unk8 = &gSprites[spriteId];
-    spriteId = CreateSprite(&gUnknown_845AFF8, 64, 152, 1);
-    gUnknown_203B0E8->unk4 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_TextEntryCursor, 76, 152, 2);
+    sWork->textEntryCursorSprite = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpriteTemplate_CharacterSelectCursor, 64, 152, 1);
+    sWork->characterSelectCursorSprite = &gSprites[spriteId];
 }
 
-static void sub_812B09C(struct Sprite *sprite)
+static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
 {
-    int var0 = sub_81297DC();
+    int var0 = UnionRoomChat_GetMessageEntryCursorPosition();
     if (var0 == 15)
     {
         sprite->invisible = TRUE;
@@ -267,7 +267,7 @@ static void sub_812B09C(struct Sprite *sprite)
     }
 }
 
-static void sub_812B0D4(struct Sprite *sprite)
+static void SpriteCB_CharacterSelectCursor(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 4)
     {
@@ -277,40 +277,42 @@ static void sub_812B0D4(struct Sprite *sprite)
     }
 }
 
-void sub_812B100(void)
+void CreatePageSwitchUISprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_845B050, 8, 152, 3);
-    gUnknown_203B0E8->unkC = &gSprites[spriteId];
-    spriteId = CreateSprite(&gUnknown_845B068, 32, 152, 4);
-    gUnknown_203B0E8->unk10 = &gSprites[spriteId];
-    gUnknown_203B0E8->unk10->invisible = 1;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RButton, 8, 152, 3);
+    sWork->rButtonSprite = &gSprites[spriteId];
+    spriteId = CreateSprite(&sSpriteTemplate_UnionRoomChatIcons, 32, 152, 4);
+    sWork->chatIconsSprite = &gSprites[spriteId];
+    sWork->chatIconsSprite->invisible = TRUE;
 }
 
-void sub_812B160(void)
+void UpdateVisibleUnionRoomChatIcon(void)
 {
     if (GetCurrentKeyboardPage() == UNION_ROOM_KB_PAGE_COUNT)
     {
-        if (sub_8129720() != 0)
+        if (UnionRoomChat_LenMessageEntryBuffer() != 0)
         {
-            gUnknown_203B0E8->unk10->invisible = 0;
-            StartSpriteAnim(gUnknown_203B0E8->unk10, 3);
+            // REGISTER
+            sWork->chatIconsSprite->invisible = FALSE;
+            StartSpriteAnim(sWork->chatIconsSprite, 3);
         }
         else
         {
-            gUnknown_203B0E8->unk10->invisible = 1;
+            sWork->chatIconsSprite->invisible = TRUE;
         }
     }
     else
     {
-        int anim = sub_81297E8();
+        int anim = UnionRoomChat_GetWhetherShouldShowCaseToggleIcon();
         if (anim == 3)
         {
-            gUnknown_203B0E8->unk10->invisible = 1;
+            sWork->chatIconsSprite->invisible = TRUE;
         }
         else
         {
-            gUnknown_203B0E8->unk10->invisible = 0;
-            StartSpriteAnim(gUnknown_203B0E8->unk10, anim);
+            // A <--> a
+            sWork->chatIconsSprite->invisible = FALSE;
+            StartSpriteAnim(sWork->chatIconsSprite, anim);
         }
     }
 }

@@ -1,16 +1,16 @@
 #ifndef GUARD_UNION_ROOM_CHAT_OBJECTS_H
 #define GUARD_UNION_ROOM_CHAT_OBJECTS_H
 
-bool32 sub_812AE70(void);
-void sub_812AEB0(void);
-void sub_812AEC8(void);
-void sub_812AEFC(bool32 invisible);
-void sub_812AF1C(void);
-void sub_812AF8C(u32 idx);
-void sub_812AFC0(void);
-bool32 sub_812AFFC(void);
-void sub_812B048(void);
-void sub_812B100(void);
-void sub_812B160(void);
+bool32 UnionRoomChat_TryAllocSpriteWork(void);
+void UnionRoomChat_FreeSpriteWork(void);
+void UnionRoomChat_CreateSelectorCursorObj(void);
+void UnionRoomChat_ToggleSelectorCursorObjVisibility(bool32 invisible);
+void UnionRoomChat_MoveSelectorCursorObj(void);
+void UnionRoomChat_UpdateObjPalCycle(u32 idx);
+void UnionRoomChat_SetSelectorCursorClosedImage(void);
+bool32 UnionRoomChat_AnimateSelectorCursorReopen(void);
+void UnionRoomChat_SpawnTextEntryPointerSprites(void);
+void CreatePageSwitchUISprites(void);
+void UpdateVisibleUnionRoomChatIcon(void);
 
 #endif //GUARD_UNION_ROOM_CHAT_OBJECTS_H

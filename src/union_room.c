@@ -1852,7 +1852,7 @@ static void sub_81175BC(u8 taskId)
             sub_80F8D14();
             SetHostRFUtgtGname(69, 0, 1);
         }
-        sub_8128420();
+        EnterUnionRoomChat();
         break;
     case 8:
     case 72:

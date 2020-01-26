@@ -11,6 +11,18 @@
 #include "union_room_chat_display.h"
 #include "union_room_chat_objects.h"
 
+#define STDMESSAGE_QUIT_CHATTING 0
+#define STDMESSAGE_REGISTER_WHERE 1
+#define STDMESSAGE_REGISTER_HERE 2
+#define STDMESSAGE_INPUT_TEXT 3
+#define STDMESSAGE_EXITING_CHAT 4
+#define STDMESSAGE_LEADER_LEFT 5
+#define STDMESSAGE_ASK_SAVE 6
+#define STDMESSAGE_ASK_OVERWRITE 7
+#define STDMESSAGE_SAVING_NO_OFF 8
+#define STDMESSAGE_SAVED_THE_GAME 9
+#define STDMESSAGE_WARN_LEADER_LEAVE 10
+
 struct UnionRoomChat2Subtask
 {
     bool32 (*callback)(u8 *);
@@ -21,9 +33,9 @@ struct UnionRoomChat2Subtask
 struct UnionRoomChat2
 {
     struct UnionRoomChat2Subtask subtasks[3];
-    u16 unk18;
-    u16 unk1A;
-    u16 unk1C;
+    u16 yesNoMenuWinId;
+    u16 curLine;
+    u16 scrollCount;
     u16 messageWindowId;
     s16 bg1hofs;
     u8 expandedPlaceholdersBuffer[0x106];
@@ -35,13 +47,13 @@ struct UnionRoomChat2
     u8 unk2148[0x20];
 };
 
-struct Unk845AABC
+struct SubtaskInfo
 {
     u16 idx;
     bool32 (*callback)(u8 *);
 };
 
-struct Unk845AB64
+struct MessageWindowInfo
 {
     const u8 *text;
     bool8 boxType;
@@ -53,63 +65,63 @@ struct Unk845AB64
     bool8 widerBox;
 };
 
-static EWRAM_DATA struct UnionRoomChat2 * gUnknown_203B0E4 = NULL;
+static EWRAM_DATA struct UnionRoomChat2 * sWork = NULL;
 
-static void sub_8129BB8(struct UnionRoomChat2 * ptr);
-static void sub_8129BC4(void);
-static bool32 sub_8129CA0(u8 *state);
-static bool32 sub_8129D40(u8 *state);
-static bool32 sub_8129D78(u8 *state);
-static bool32 sub_8129DB0(u8 *state);
-static bool32 sub_8129E1C(u8 *state);
-static bool32 sub_8129E28(u8 *state);
-static bool32 sub_8129E74(u8 *state);
-static bool32 sub_8129EB8(u8 *state);
-static bool32 sub_8129F24(u8 *state);
-static bool32 sub_8129FCC(u8 *state);
-static bool32 sub_812A074(u8 *state);
-static bool32 sub_812A0B0(u8 *state);
-static bool32 sub_812A18C(u8 *state);
-static bool32 sub_812A1B8(u8 *state);
-static bool32 sub_812A1FC(u8 *state);
-static bool32 sub_812A240(u8 *state);
-static bool32 sub_812A294(u8 *state);
-static bool32 sub_812A2E4(u8 *state);
-static bool32 sub_812A334(u8 *state);
-static bool32 sub_812A378(u8 *state);
-static bool32 sub_812A3D0(u8 *state);
-static bool32 sub_812A420(u8 *state);
-static void sub_812A424(u8 a0, u8 a1, u8 a2);
-static void sub_812A51C(void);
-static void sub_812A544(void);
-static void sub_812A578(int a0, u16 a1);
-static void sub_812A6F4(void);
-static void sub_812A728(void);
-static void sub_812A74C(u16 a0, u16 a1, u8 a2);
-static void sub_812A778(u16 a0, u8 *a1, u8 a2, u8 a3, u8 a4);
-static void sub_812A804(void);
-static bool32 sub_812A980(void);
-static bool32 sub_812A9C8(void);
-static void sub_812AA10(void);
-static void sub_812AA64(void);
-static void sub_812AA78(u16 a0, u8 *a1, u8 a2);
-static void sub_812AAD4(void);
-static void sub_812AB8C(void);
-static void sub_812ABD8(void);
-static void sub_812AC08(void);
-static void sub_812AC58(void);
-static void sub_812AC9C(void);
-static void sub_812ACC0(void);
-static void sub_812ACEC(void);
-static void sub_812AD04(void);
-static void sub_812AD20(void);
+static void InitWork(struct UnionRoomChat2 * ptr);
+static void UnionRoomChat_ResetDisplaySubtasks(void);
+static bool32 DisplaySubtask_LoadGfx(u8 *state);
+static bool32 DisplaySubtask_PrintWin3(u8 *state);
+static bool32 DisplaySubtask_HideWin3(u8 *state);
+static bool32 DisplaySubtask_SwitchPages(u8 *state);
+static bool32 DisplaySubtask_MoveSelectorCursorObj(u8 *state);
+static bool32 DisplaySubtask_ShowQuitChattingDialog(u8 *state);
+static bool32 DisplaySubtask_HideQuitChattingDialog(u8 *state);
+static bool32 DisplaySubtask_UpdateMessageBuffer(u8 *state);
+static bool32 DisplaySubtask_PrintRegisterWhere(u8 *state);
+static bool32 DisplaySubtask_CancelRegister(u8 *state);
+static bool32 DisplaySubtask_ReturnToKeyboard(u8 *state);
+static bool32 DisplaySubtask_ScrollChat(u8 *state);
+static bool32 DisplaySubtask_AnimateSelectorCursorBlink(u8 *state);
+static bool32 DisplaySubtask_PrintInputText(u8 *state);
+static bool32 DisplaySubtask_PrintExitingChat(u8 *state);
+static bool32 DisplaySubtask_PrintLeaderLeft(u8 *state);
+static bool32 DisplaySubtask_AskSave(u8 *state);
+static bool32 DisplaySubtask_AskOverwriteSave(u8 *state);
+static bool32 DisplaySubtask_PrintSavingDontTurnOffPower(u8 *state);
+static bool32 DisplaySubtask_PrintSavedTheGame(u8 *state);
+static bool32 DisplaySubtask_ShowConfirmLeaderLeaveDialog(u8 *state);
+static bool32 DisplaySubtaskDummy(u8 *state);
+static void PlaceYesNoMenuAt(u8 a0, u8 a1, u8 a2);
+static void HideYesNoMenuWindow(void);
+static void DestroyYesNoMenuWindow(void);
+static void PlaceStdMessageWindow(int id, u16 bg0vofs);
+static void HideStdMessageWindow(void);
+static void DestroyStdMessageWindow(void);
+static void FillWin1Rect(u16 x, u16 width, u8 fillValue);
+static void PrintOnWin1Parameterized(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shadowColor);
+static void PrintCurrentKeyboardPage(void);
+static bool32 AnimateMoveBg1Right(void);
+static bool32 AnimateMoveBg1Left(void);
+static void PrintKeyboardSwapTextsOnWin3(void);
+static void ClearWin3(void);
+static void PrintTextOnWin0Colorized(u16 row, u8 *str, u8 colorIdx);
+static void ResetGpuBgState(void);
+static void SetBgTilemapWorkBuffers(void);
+static void ClearBg0(void);
+static void LoadUnionRoomChatPanelGfx(void);
+static void LoadLinkMiscMenuGfx(void);
+static void LoadBg1Pal8(void);
+static void LoadWin0(void);
+static void LoadWin2(void);
+static void LoadWin1(void);
+static void LoadWin3(void);
 static void sub_812AD50(void);
-static void sub_812ADA0(s16 a0);
-static void sub_812ADF8(s16 a0);
+static void FillScanlineEffectWithValue1col(s16 a0);
+static void FillScanlineEffectWithValue2col(s16 a0);
 
-static const u16 gUnknown_845AA24[] = INCBIN_U16("graphics/union_room_chat/unk_845AA24.gbapal");
-static const u16 gUnknown_845AA44[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
-static const u16 gUnknown_845AA64[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
+static const u16 sUnionRoomChatPanelBgPal_C[] = INCBIN_U16("graphics/union_room_chat/unk_845AA24.gbapal");
+static const u16 sBg1Pal8[] = INCBIN_U16("graphics/union_room_chat/unk_845AA44.gbapal");
+static const u16 sWin0PalF[] = INCBIN_U16("graphics/union_room_chat/unk_845AA64.gbapal");
 
 static const struct BgTemplate gUnknown_845AA84[] = {
     {
@@ -183,32 +195,33 @@ static const struct WindowTemplate gUnknown_845AA94[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const struct Unk845AABC gUnknown_845AABC[] = {
-    { 0, sub_8129CA0},
-    { 3, sub_8129D40},
-    { 4, sub_8129D78},
-    { 5, sub_8129DB0},
-    { 1, sub_8129E1C},
-    { 6, sub_8129E28},
-    { 7, sub_8129E74},
-    { 8, sub_8129EB8},
-    { 9, sub_8129F24},
-    {10, sub_8129FCC},
-    {11, sub_812A074},
-    {12, sub_812A0B0},
-    { 2, sub_812A18C},
-    {13, sub_812A1B8},
-    {18, sub_812A1FC},
-    {19, sub_812A240},
-    {14, sub_812A294},
-    {15, sub_812A2E4},
-    {16, sub_812A334},
-    {17, sub_812A378},
-    {20, sub_812A3D0}
+static const struct SubtaskInfo sSubtaskInfo[] = {
+    {CHATDISPLAYROUTINE_LOADGFX, DisplaySubtask_LoadGfx},
+    {CHATDISPLAYROUTINE_SHOWKBSWAPMENU, DisplaySubtask_PrintWin3},
+    {CHATDISPLAYROUTINE_HIDEKBSWAPMENU, DisplaySubtask_HideWin3},
+    {CHATDISPLAYROUTINE_SWITCHPAGES, DisplaySubtask_SwitchPages},
+    {CHATDISPLAYROUTINE_MOVEKBCURSOR, DisplaySubtask_MoveSelectorCursorObj},
+    {CHATDISPLAYROUTINE_SHOWQUITCHATTINGDIALOG, DisplaySubtask_ShowQuitChattingDialog},
+    {CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, DisplaySubtask_HideQuitChattingDialog},
+    {CHATDISPLAYROUTINE_PRINTMSG, DisplaySubtask_UpdateMessageBuffer},
+    {CHATDISPLAYROUTINE_PRINTREGISTERWHERE, DisplaySubtask_PrintRegisterWhere},
+    {CHATDISPLAYROUTINE_CANCELREGISTER, DisplaySubtask_CancelRegister},
+    {CHATDISPLAYROUTINE_RETURNTOKB, DisplaySubtask_ReturnToKeyboard},
+    {CHATDISPLAYROUTINE_SCROLLCHAT, DisplaySubtask_ScrollChat},
+    {CHATDISPLAYROUTINE_CURSORBLINK, DisplaySubtask_AnimateSelectorCursorBlink},
+    {CHATDISPLAYROUTINE_PRINTINPUTTEXT, DisplaySubtask_PrintInputText},
+    {CHATDISPLAYROUTINE_PRINTEXITINGCHAT, DisplaySubtask_PrintExitingChat},
+    {CHATDISPLAYROUTINE_PRINTLEADERLEFT, DisplaySubtask_PrintLeaderLeft},
+    {CHATDISPLAYROUTINE_ASKSAVE, DisplaySubtask_AskSave},
+    {CHATDISPLAYROUTINE_ASKOVERWRITESAVE, DisplaySubtask_AskOverwriteSave},
+    {CHATDISPLAYROUTINE_PRINTSAVING, DisplaySubtask_PrintSavingDontTurnOffPower},
+    {CHATDISPLAYROUTINE_PRINTSAVEDTHEGAME, DisplaySubtask_PrintSavedTheGame},
+    {CHATDISPLAYROUTINE_SHOWCONFIRMLEADERLEAVEDIALOG, DisplaySubtask_ShowConfirmLeaderLeaveDialog}
 };
 
-static const struct Unk845AB64 gUnknown_845AB64[] = {
-    {
+static const struct MessageWindowInfo sMessageWindowInfo[] = {
+
+    [STDMESSAGE_QUIT_CHATTING] = {
         .text = gText_QuitChatting,
         .boxType = 1,
         .x = 0,
@@ -217,7 +230,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_REGISTER_WHERE] = {
         .text = gText_RegisterTextWhere,
         .boxType = 1,
         .x = 0,
@@ -226,7 +240,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_REGISTER_HERE] = {
         .text = gText_RegisterTextHere,
         .boxType = 1,
         .x = 0,
@@ -235,7 +250,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_INPUT_TEXT] = {
         .text = gText_InputText,
         .boxType = 1,
         .x = 0,
@@ -244,7 +260,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_EXITING_CHAT] = {
         .text = gText_ExitingTheChat,
         .boxType = 2,
         .x = 0,
@@ -253,7 +270,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_LEADER_LEFT] = {
         .text = gText_LeaderHasLeftEndingChat,
         .boxType = 2,
         .x = 0,
@@ -262,7 +280,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = TRUE,
         .widerBox = FALSE
-    }, {
+    },
+    [STDMESSAGE_ASK_SAVE] = {
         .text = gText_RegisteredTextChanged_OKtoSave,
         .boxType = 2,
         .x = 0,
@@ -271,7 +290,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = TRUE
-    }, {
+    },
+    [STDMESSAGE_ASK_OVERWRITE] = {
         .text = gText_RegisteredTextChanged_AlreadySavedFile,
         .boxType = 2,
         .x = 0,
@@ -280,7 +300,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = TRUE
-    }, {
+    },
+    [STDMESSAGE_SAVING_NO_OFF] = {
         .text = gText_RegisteredTextChanged_SavingDontTurnOff,
         .boxType = 2,
         .x = 0,
@@ -289,7 +310,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = FALSE,
         .widerBox = TRUE
-    }, {
+    },
+    [STDMESSAGE_SAVED_THE_GAME] = {
         .text = gText_RegisteredTextChanged_SavedTheGame,
         .boxType = 2,
         .x = 0,
@@ -298,7 +320,8 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
         .lineSpacing = 2, 
         .expandPlaceholders = TRUE,
         .widerBox = TRUE
-    }, {
+    },
+    [STDMESSAGE_WARN_LEADER_LEAVE] = {
         .text = gText_IfLeaderLeavesChatWillEnd,
         .boxType = 2,
         .x = 0,
@@ -312,7 +335,7 @@ static const struct Unk845AB64 gUnknown_845AB64[] = {
 
 static const u8 gText_Ellipsis[] = _("…");
 
-static const struct MenuAction gUnknown_845ABEC[] = {
+static const struct MenuAction sKeyboardSwapTexts[] = {
     {gText_Upper},
     {gText_Lower},
     {gText_Symbols},
@@ -320,19 +343,19 @@ static const struct MenuAction gUnknown_845ABEC[] = {
     {gText_Exit}
 };
 
-bool8 sub_8129B14(void)
+bool8 UnionRoomChat_TryAllocGraphicsWork(void)
 {
-    gUnknown_203B0E4 = Alloc(sizeof(*gUnknown_203B0E4));
-    if (gUnknown_203B0E4 && sub_812AE70())
+    sWork = Alloc(sizeof(*sWork));
+    if (sWork && UnionRoomChat_TryAllocSpriteWork())
     {
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, gUnknown_845AA84, NELEMS(gUnknown_845AA84));
         InitWindows(gUnknown_845AA94);
         ResetTempTileDataBuffers();
         sub_812AD50();
-        sub_8129BB8(gUnknown_203B0E4);
-        sub_8129BC4();
-        sub_8129C34(0, 0);
+        InitWork(sWork);
+        UnionRoomChat_ResetDisplaySubtasks();
+        UnionRoomChat_StartDisplaySubtask(0, 0);
         return TRUE;
     }
     else
@@ -341,80 +364,80 @@ bool8 sub_8129B14(void)
     }
 }
 
-bool32 sub_8129B78(void)
+bool32 UnionRoomChat_RunDisplaySubtask0(void)
 {
-    return sub_8129C8C(0);
+    return RunDisplaySubtask(0);
 }
 
-void sub_8129B88(void)
+void UnionRoomChat_FreeGraphicsWork(void)
 {
-    sub_812AEB0();
-    if (gUnknown_203B0E4)
-    FREE_AND_SET_NULL(gUnknown_203B0E4);
+    UnionRoomChat_FreeSpriteWork();
+    if (sWork != NULL)
+        FREE_AND_SET_NULL(sWork);
 
     FreeAllWindowBuffers();
     gScanlineEffect.state = 3;
 }
 
-static void sub_8129BB8(struct UnionRoomChat2 *arg0)
+static void InitWork(struct UnionRoomChat2 *arg0)
 {
-    arg0->unk18 = 0xFF;
+    arg0->yesNoMenuWinId = 0xFF;
     arg0->messageWindowId = 0xFF;
-    arg0->unk1A = 0;
+    arg0->curLine = 0;
 }
 
-void sub_8129BC4(void)
+void UnionRoomChat_ResetDisplaySubtasks(void)
 {
     int i;
 
-    if (gUnknown_203B0E4 == NULL)
+    if (sWork == NULL)
         return;
 
     for (i = 0; i < 3; i++)
     {
-        gUnknown_203B0E4->subtasks[i].callback = sub_812A420;
-        gUnknown_203B0E4->subtasks[i].active = FALSE;
-        gUnknown_203B0E4->subtasks[i].state = 0;
+        sWork->subtasks[i].callback = DisplaySubtaskDummy;
+        sWork->subtasks[i].active = FALSE;
+        sWork->subtasks[i].state = 0;
     }
 }
 
-void sub_8129BFC(void)
+void UnionRoomChat_RunDisplaySubtasks(void)
 {
     int i;
 
-    if (gUnknown_203B0E4 == NULL)
+    if (sWork == NULL)
         return;
 
     for (i = 0; i < 3; i++)
     {
-        if (gUnknown_203B0E4->subtasks[i].active)
-            gUnknown_203B0E4->subtasks[i].active = gUnknown_203B0E4->subtasks[i].callback(&gUnknown_203B0E4->subtasks[i].state);
+        if (sWork->subtasks[i].active)
+            sWork->subtasks[i].active = sWork->subtasks[i].callback(&sWork->subtasks[i].state);
     }
 }
 
-void sub_8129C34(u16 arg0, u8 arg1)
+void UnionRoomChat_StartDisplaySubtask(u16 arg0, u8 arg1)
 {
     int i;
 
-    gUnknown_203B0E4->subtasks[arg1].callback = sub_812A420;
-    for (i = 0; i < NELEMS(gUnknown_845AABC); i++)
+    sWork->subtasks[arg1].callback = DisplaySubtaskDummy;
+    for (i = 0; i < NELEMS(sSubtaskInfo); i++)
     {
-        if (gUnknown_845AABC[i].idx == arg0)
+        if (sSubtaskInfo[i].idx == arg0)
         {
-            gUnknown_203B0E4->subtasks[arg1].callback = gUnknown_845AABC[i].callback;
-            gUnknown_203B0E4->subtasks[arg1].active = TRUE;
-            gUnknown_203B0E4->subtasks[arg1].state = 0;
+            sWork->subtasks[arg1].callback = sSubtaskInfo[i].callback;
+            sWork->subtasks[arg1].active = TRUE;
+            sWork->subtasks[arg1].state = 0;
             break;
         }
     }
 }
 
-bool8 sub_8129C8C(u8 arg0)
+bool8 RunDisplaySubtask(u8 arg0)
 {
-    return gUnknown_203B0E4->subtasks[arg0].active;
+    return sWork->subtasks[arg0].active;
 }
 
-static bool32 sub_8129CA0(u8 *state)
+static bool32 DisplaySubtask_LoadGfx(u8 *state)
 {
     if (FreeTempTileDataBuffersIfPossible() == TRUE)
         return TRUE;
@@ -422,33 +445,33 @@ static bool32 sub_8129CA0(u8 *state)
     switch (*state)
     {
     case 0:
-        sub_812AAD4();
-        sub_812AB8C();
+        ResetGpuBgState();
+        SetBgTilemapWorkBuffers();
         break;
     case 1:
-        sub_812ABD8();
+        ClearBg0();
         break;
     case 2:
-        sub_812AC08();
+        LoadUnionRoomChatPanelGfx();
         break;
     case 3:
-        sub_812AC58();
+        LoadLinkMiscMenuGfx();
         break;
     case 4:
-        sub_812AC9C();
+        LoadBg1Pal8();
         break;
     case 5:
-        sub_812ACC0();
-        sub_812ACEC();
-        sub_812AD20();
-        sub_812AD04();
+        LoadWin0();
+        LoadWin2();
+        LoadWin3();
+        LoadWin1();
         break;
     case 6:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_812AEC8();
-            sub_812B048();
-            sub_812B100();
+            UnionRoomChat_CreateSelectorCursorObj();
+            UnionRoomChat_SpawnTextEntryPointerSprites();
+            CreatePageSwitchUISprites();
         }
         break;
     default:
@@ -459,12 +482,12 @@ static bool32 sub_8129CA0(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129D40(u8 *state)
+static bool32 DisplaySubtask_PrintWin3(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812AA10();
+        PrintKeyboardSwapTextsOnWin3();
         CopyWindowToVram(3, 3);
         break;
     case 1:
@@ -475,12 +498,12 @@ static bool32 sub_8129D40(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129D78(u8 *state)
+static bool32 DisplaySubtask_HideWin3(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812AA64();
+        ClearWin3();
         CopyWindowToVram(3, 3);
         break;
     case 1:
@@ -491,16 +514,16 @@ static bool32 sub_8129D78(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129DB0(u8 *state)
+static bool32 DisplaySubtask_SwitchPages(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812AEFC(TRUE);
-        if (sub_812A980())
+        UnionRoomChat_ToggleSelectorCursorObjVisibility(TRUE);
+        if (AnimateMoveBg1Right())
             return TRUE;
 
-        sub_812A804();
+        PrintCurrentKeyboardPage();
         CopyWindowToVram(2, 2);
         break;
     case 1:
@@ -508,12 +531,12 @@ static bool32 sub_8129DB0(u8 *state)
             return TRUE;
         break;
     case 2:
-        if (sub_812A9C8())
+        if (AnimateMoveBg1Left())
             return TRUE;
 
-        sub_812AF1C();
-        sub_812AEFC(FALSE);
-        sub_812B160();
+        UnionRoomChat_MoveSelectorCursorObj();
+        UnionRoomChat_ToggleSelectorCursorObjVisibility(FALSE);
+        UpdateVisibleUnionRoomChatIcon();
         return FALSE;
     }
 
@@ -521,20 +544,20 @@ static bool32 sub_8129DB0(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129E1C(u8 *state)
+static bool32 DisplaySubtask_MoveSelectorCursorObj(u8 *state)
 {
-    sub_812AF1C();
+    UnionRoomChat_MoveSelectorCursorObj();
     return FALSE;
 }
 
-static bool32 sub_8129E28(u8 *state)
+static bool32 DisplaySubtask_ShowQuitChattingDialog(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(0, 0);
-        sub_812A424(23, 11, 1);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_QUIT_CHATTING, 0);
+        PlaceYesNoMenuAt(23, 11, 1);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -544,21 +567,21 @@ static bool32 sub_8129E28(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129E74(u8 *state)
+static bool32 DisplaySubtask_HideQuitChattingDialog(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A6F4();
-        sub_812A51C();
+        HideStdMessageWindow();
+        HideYesNoMenuWindow();
         CopyBgTilemapBufferToVram(0);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        sub_812A728();
-        sub_812A544();
+        DestroyStdMessageWindow();
+        DestroyYesNoMenuWindow();
         return FALSE;
     }
 
@@ -566,24 +589,24 @@ static bool32 sub_8129E74(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129EB8(u8 *state)
+static bool32 DisplaySubtask_UpdateMessageBuffer(u8 *state)
 {
-    u32 var0, var1;
+    u32 start, length;
     u8 *str;
 
     switch (*state)
     {
     case 0:
-        sub_8129730(&var0, &var1);
-        sub_812A74C(var0, var1, 0);
-        str = sub_8129714();
-        sub_812A778(0, str, 3, 1, 2);
+        UnionRoomChat_GetBufferSelectionRegion(&start, &length);
+        FillWin1Rect(start, length, PIXEL_FILL(0));
+        str = UnionRoomChat_GetMessageEntryBuffer();
+        PrintOnWin1Parameterized(0, str, 3, 1, 2);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_812B160();
+            UpdateVisibleUnionRoomChatIcon();
             return FALSE;
         }
         return TRUE;
@@ -593,7 +616,7 @@ static bool32 sub_8129EB8(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129F24(u8 *state)
+static bool32 DisplaySubtask_PrintRegisterWhere(u8 *state)
 {
     u16 var0;
     u8 *str;
@@ -602,18 +625,18 @@ static bool32 sub_8129F24(u8 *state)
     switch (*state)
     {
     case 0:
-        var0 = sub_8129788();
-        str = sub_8129758();
+        var0 = UnionRoomChat_GetNumCharsInMessageEntryBuffer();
+        str = UnionRoomChat_GetEndOfMessageEntryBuffer();
         length = StringLength_Multibyte(str);
-        sub_812A74C(var0, length, PIXEL_FILL(6));
-        sub_812A778(var0, str, 0, 4, 5);
+        FillWin1Rect(var0, length, PIXEL_FILL(6));
+        PrintOnWin1Parameterized(var0, str, 0, 4, 5);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_812A578(1, 16);
-            CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+            PlaceStdMessageWindow(STDMESSAGE_REGISTER_WHERE, 16);
+            CopyWindowToVram(sWork->messageWindowId, 3);
         }
         else
         {
@@ -622,7 +645,7 @@ static bool32 sub_8129F24(u8 *state)
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
-            sub_812AF8C(1);
+            UnionRoomChat_UpdateObjPalCycle(1);
         else
             return TRUE;
         break;
@@ -634,27 +657,27 @@ static bool32 sub_8129F24(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_8129FCC(u8 *state)
+static bool32 DisplaySubtask_CancelRegister(u8 *state)
 {
-    u16 var0;
+    u16 x;
     u8 *str;
     u16 length;
 
     switch (*state)
     {
     case 0:
-        var0 = sub_8129788();
-        str = sub_8129758();
+        x = UnionRoomChat_GetNumCharsInMessageEntryBuffer();
+        str = UnionRoomChat_GetEndOfMessageEntryBuffer();
         length = StringLength_Multibyte(str);
-        sub_812A74C(var0, length, PIXEL_FILL(0));
-        sub_812A778(var0, str, 3, 1, 2);
+        FillWin1Rect(x, length, PIXEL_FILL(0));
+        PrintOnWin1Parameterized(x, str, 3, 1, 2);
         CopyWindowToVram(1, 2);
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_812A6F4();
-            CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+            HideStdMessageWindow();
+            CopyWindowToVram(sWork->messageWindowId, 3);
         }
         else
         {
@@ -664,8 +687,8 @@ static bool32 sub_8129FCC(u8 *state)
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_812AF8C(0);
-            sub_812A728();
+            UnionRoomChat_UpdateObjPalCycle(0);
+            DestroyStdMessageWindow();
         }
         else
         {
@@ -680,12 +703,12 @@ static bool32 sub_8129FCC(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A074(u8 *state)
+static bool32 DisplaySubtask_ReturnToKeyboard(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A804();
+        PrintCurrentKeyboardPage();
         CopyWindowToVram(2, 2);
         (*state)++;
         break;
@@ -699,48 +722,48 @@ static bool32 sub_812A074(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A0B0(u8 *state)
+static bool32 DisplaySubtask_ScrollChat(u8 *state)
 {
-    u16 var0;
+    u16 row;
     u8 *str;
-    u8 var1;
+    u8 colorIdx;
 
     switch (*state)
     {
     case 0:
-        var0 = gUnknown_203B0E4->unk1A;
-        str = sub_81297C4();
-        var1 = sub_81297D0();
-        sub_812AA78(var0, str, var1);
+        row = sWork->curLine;
+        str = UnionRoomChat_GetLastReceivedMessage();
+        colorIdx = UnionRoomChat_GetReceivedPlayerIndex();
+        PrintTextOnWin0Colorized(row, str, colorIdx);
         CopyWindowToVram(0, 2);
         break;
     case 1:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        if (gUnknown_203B0E4->unk1A < 9)
+        if (sWork->curLine < 9)
         {
-            gUnknown_203B0E4->unk1A++;
+            sWork->curLine++;
             *state = 4;
             return FALSE;
         }
         else
         {
-            gUnknown_203B0E4->unk1C = 0;
+            sWork->scrollCount = 0;
             (*state)++;
         }
         // fall through
     case 2:
         ScrollWindow(0, 0, 5, PIXEL_FILL(1));
         CopyWindowToVram(0, 2);
-        gUnknown_203B0E4->unk1C++;
+        sWork->scrollCount++;
         (*state)++;
         // fall through
     case 3:
         if (IsDma3ManagerBusyWithBgCopy())
             return TRUE;
 
-        if (gUnknown_203B0E4->unk1C < 3)
+        if (sWork->scrollCount < 3)
         {
             (*state)--;
             return TRUE;
@@ -756,44 +779,28 @@ static bool32 sub_812A0B0(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A18C(u8 *state)
+static bool32 DisplaySubtask_AnimateSelectorCursorBlink(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812AFC0();
+        UnionRoomChat_SetSelectorCursorClosedImage();
         (*state)++;
         break;
     case 1:
-        return sub_812AFFC();
+        return UnionRoomChat_AnimateSelectorCursorReopen();
     }
 
     return TRUE;
 }
 
-static bool32 sub_812A1B8(u8 *state)
+static bool32 DisplaySubtask_PrintInputText(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(3, 16);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
-        (*state)++;
-        break;
-    case 1:
-        return IsDma3ManagerBusyWithBgCopy();
-    }
-
-    return TRUE;
-}
-
-static bool32 sub_812A1FC(u8 *state)
-{
-    switch (*state)
-    {
-    case 0:
-        sub_812A578(4, 0);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_INPUT_TEXT, 16);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -803,7 +810,23 @@ static bool32 sub_812A1FC(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A240(u8 *state)
+static bool32 DisplaySubtask_PrintExitingChat(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        PlaceStdMessageWindow(STDMESSAGE_EXITING_CHAT, 0);
+        CopyWindowToVram(sWork->messageWindowId, 3);
+        (*state)++;
+        break;
+    case 1:
+        return IsDma3ManagerBusyWithBgCopy();
+    }
+
+    return TRUE;
+}
+
+static bool32 DisplaySubtask_PrintLeaderLeft(u8 *state)
 {
     u8 *str;
 
@@ -811,10 +834,10 @@ static bool32 sub_812A240(u8 *state)
     {
     case 0:
         DynamicPlaceholderTextUtil_Reset();
-        str = sub_8129814();
+        str = UnionRoomChat_GetNameOfPlayerWhoDisbandedChat();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, str);
-        sub_812A578(5, 0);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_LEADER_LEFT, 0);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -824,14 +847,14 @@ static bool32 sub_812A240(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A294(u8 *state)
+static bool32 DisplaySubtask_AskSave(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(6, 0);
-        sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_ASK_SAVE, 0);
+        PlaceYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -841,14 +864,14 @@ static bool32 sub_812A294(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A2E4(u8 *state)
+static bool32 DisplaySubtask_AskOverwriteSave(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(7, 0);
-        sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_ASK_OVERWRITE, 0);
+        PlaceYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -858,13 +881,13 @@ static bool32 sub_812A2E4(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A334(u8 *state)
+static bool32 DisplaySubtask_PrintSavingDontTurnOffPower(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(8, 0);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_SAVING_NO_OFF, 0);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -874,15 +897,15 @@ static bool32 sub_812A334(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A378(u8 *state)
+static bool32 DisplaySubtask_PrintSavedTheGame(u8 *state)
 {
     switch (*state)
     {
     case 0:
         DynamicPlaceholderTextUtil_Reset();
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
-        sub_812A578(9, 0);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_SAVED_THE_GAME, 0);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -892,14 +915,14 @@ static bool32 sub_812A378(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A3D0(u8 *state)
+static bool32 DisplaySubtask_ShowConfirmLeaderLeaveDialog(u8 *state)
 {
     switch (*state)
     {
     case 0:
-        sub_812A578(10, 0);
-        sub_812A424(23, 10, 1);
-        CopyWindowToVram(gUnknown_203B0E4->messageWindowId, 3);
+        PlaceStdMessageWindow(STDMESSAGE_WARN_LEADER_LEAVE, 0);
+        PlaceYesNoMenuAt(23, 10, 1);
+        CopyWindowToVram(sWork->messageWindowId, 3);
         (*state)++;
         break;
     case 1:
@@ -909,12 +932,12 @@ static bool32 sub_812A3D0(u8 *state)
     return TRUE;
 }
 
-static bool32 sub_812A420(u8 *arg0)
+static bool32 DisplaySubtaskDummy(u8 *arg0)
 {
     return FALSE;
 }
 
-static void sub_812A424(u8 left, u8 top, u8 initialCursorPos)
+static void PlaceYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 {
     struct WindowTemplate template;
     template.bg = 0;
@@ -923,43 +946,43 @@ static void sub_812A424(u8 left, u8 top, u8 initialCursorPos)
     template.width = 6;
     template.height = 4;
     template.paletteNum = 14;
-    template.baseBlock = 0x52;
-    gUnknown_203B0E4->unk18 = AddWindow(&template);
-    if (gUnknown_203B0E4->unk18 != 0xFF)
+    template.baseBlock = 0x052;
+    sWork->yesNoMenuWinId = AddWindow(&template);
+    if (sWork->yesNoMenuWinId != 0xFF)
     {
-        FillWindowPixelBuffer(gUnknown_203B0E4->unk18, PIXEL_FILL(1));
-        PutWindowTilemap(gUnknown_203B0E4->unk18);
-        AddTextPrinterParameterized(gUnknown_203B0E4->unk18, 2, gText_Yes, 8, 2, TEXT_SPEED_FF, NULL);
-        AddTextPrinterParameterized(gUnknown_203B0E4->unk18, 2, gText_No, 8, 16, TEXT_SPEED_FF, NULL);
-        DrawTextBorderOuter(gUnknown_203B0E4->unk18, 1, 13);
-        Menu_InitCursor(gUnknown_203B0E4->unk18, 2, 0, 2, 14, 2, initialCursorPos);
+        FillWindowPixelBuffer(sWork->yesNoMenuWinId, PIXEL_FILL(1));
+        PutWindowTilemap(sWork->yesNoMenuWinId);
+        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_Yes, 8, 2, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sWork->yesNoMenuWinId, 2, gText_No, 8, 16, TEXT_SPEED_FF, NULL);
+        DrawTextBorderOuter(sWork->yesNoMenuWinId, 1, 13);
+        Menu_InitCursor(sWork->yesNoMenuWinId, 2, 0, 2, 14, 2, initialCursorPos);
     }
 }
 
-static void sub_812A51C(void)
+static void HideYesNoMenuWindow(void)
 {
-    if (gUnknown_203B0E4->unk18 != 0xFF)
+    if (sWork->yesNoMenuWinId != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(gUnknown_203B0E4->unk18, FALSE);
-        ClearWindowTilemap(gUnknown_203B0E4->unk18);
+        ClearStdWindowAndFrameToTransparent(sWork->yesNoMenuWinId, FALSE);
+        ClearWindowTilemap(sWork->yesNoMenuWinId);
     }
 }
 
-static void sub_812A544(void)
+static void DestroyYesNoMenuWindow(void)
 {
-    if (gUnknown_203B0E4->unk18 != 0xFF)
+    if (sWork->yesNoMenuWinId != 0xFF)
     {
-        RemoveWindow(gUnknown_203B0E4->unk18);
-        gUnknown_203B0E4->unk18 = 0xFF;
+        RemoveWindow(sWork->yesNoMenuWinId);
+        sWork->yesNoMenuWinId = 0xFF;
     }
 }
 
-s8 sub_812A568(void)
+s8 UnionRoomChat_ProcessInput(void)
 {
     return Menu_ProcessInput();
 }
 
-static void sub_812A578(int arg0, u16 arg1)
+static void PlaceStdMessageWindow(int id, u16 bg0vofs)
 {
     const u8 *str;
     int windowId;
@@ -971,43 +994,43 @@ static void sub_812A578(int arg0, u16 arg1)
     template.height = 4;
     template.paletteNum = 14;
     template.baseBlock = 0x06A;
-    if (gUnknown_845AB64[arg0].widerBox)
+    if (sMessageWindowInfo[id].widerBox)
     {
         template.tilemapLeft -= 7;
         template.width += 7;
     }
 
-    gUnknown_203B0E4->messageWindowId = AddWindow(&template);
-    windowId = gUnknown_203B0E4->messageWindowId;
-    if (gUnknown_203B0E4->messageWindowId == 0xFF)
+    sWork->messageWindowId = AddWindow(&template);
+    windowId = sWork->messageWindowId;
+    if (sWork->messageWindowId == 0xFF)
         return;
 
-    if (gUnknown_845AB64[arg0].expandPlaceholders)
+    if (sMessageWindowInfo[id].expandPlaceholders)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gUnknown_203B0E4->expandedPlaceholdersBuffer, gUnknown_845AB64[arg0].text);
-        str = gUnknown_203B0E4->expandedPlaceholdersBuffer;
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(sWork->expandedPlaceholdersBuffer, sMessageWindowInfo[id].text);
+        str = sWork->expandedPlaceholdersBuffer;
     }
     else
     {
-        str = gUnknown_845AB64[arg0].text;
+        str = sMessageWindowInfo[id].text;
     }
 
-    ChangeBgY(0, arg1 * 256, 0);
+    ChangeBgY(0, bg0vofs * 256, 0);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
-    if (gUnknown_845AB64[arg0].boxType == 1)
+    if (sMessageWindowInfo[id].boxType == 1)
     {
         DrawTextBorderInner(windowId, 0xA, 2);
         AddTextPrinterParameterized5(
             windowId,
             2,
             str,
-            gUnknown_845AB64[arg0].x + 8,
-            gUnknown_845AB64[arg0].y + 8,
+            sMessageWindowInfo[id].x + 8,
+            sMessageWindowInfo[id].y + 8,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_845AB64[arg0].letterSpacing,
-            gUnknown_845AB64[arg0].lineSpacing);
+            sMessageWindowInfo[id].letterSpacing,
+            sMessageWindowInfo[id].lineSpacing);
     }
     else
     {
@@ -1016,94 +1039,92 @@ static void sub_812A578(int arg0, u16 arg1)
             windowId,
             2,
             str,
-            gUnknown_845AB64[arg0].x,
-            gUnknown_845AB64[arg0].y,
+            sMessageWindowInfo[id].x,
+            sMessageWindowInfo[id].y,
             TEXT_SPEED_FF,
             NULL,
-            gUnknown_845AB64[arg0].letterSpacing,
-            gUnknown_845AB64[arg0].lineSpacing);
+            sMessageWindowInfo[id].letterSpacing,
+            sMessageWindowInfo[id].lineSpacing);
     }
 
-    gUnknown_203B0E4->messageWindowId = windowId;
+    sWork->messageWindowId = windowId;
 }
 
-static void sub_812A6F4(void)
+static void HideStdMessageWindow(void)
 {
-    if (gUnknown_203B0E4->messageWindowId != 0xFF)
+    if (sWork->messageWindowId != 0xFF)
     {
-        ClearStdWindowAndFrameToTransparent(gUnknown_203B0E4->messageWindowId, FALSE);
-        ClearWindowTilemap(gUnknown_203B0E4->messageWindowId);
+        ClearStdWindowAndFrameToTransparent(sWork->messageWindowId, FALSE);
+        ClearWindowTilemap(sWork->messageWindowId);
     }
 
     ChangeBgY(0, 0, 0);
 }
 
-static void sub_812A728(void)
+static void DestroyStdMessageWindow(void)
 {
-    if (gUnknown_203B0E4->messageWindowId != 0xFF)
+    if (sWork->messageWindowId != 0xFF)
     {
-        RemoveWindow(gUnknown_203B0E4->messageWindowId);
-        gUnknown_203B0E4->messageWindowId = 0xFF;
+        RemoveWindow(sWork->messageWindowId);
+        sWork->messageWindowId = 0xFF;
     }
 }
 
-static void sub_812A74C(u16 x, u16 width, u8 fillValue)
+static void FillWin1Rect(u16 x, u16 width, u8 fillValue)
 {
     FillWindowPixelRect(1, fillValue, x * 8, 1, width * 8, 14);
 }
 
-static void sub_812A778(u16 x, u8 *str, u8 fillValue, u8 arg3, u8 arg4)
+static void PrintOnWin1Parameterized(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shadowColor)
 {
-    u8 *str2;
-    u8 sp[38];
-    if (fillValue)
-        sub_812A74C(x, sub_81297DC() - x, fillValue);
+    u8 color[3];
+    u8 strbuf[35];
 
-    sp[0] = fillValue;
-    sp[1] = arg3;
-    sp[2] = arg4;
-    str2 = &sp[4];
-    str2[0] = EXT_CTRL_CODE_BEGIN;
-    str2[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
-    str2[2] = 8;
-    StringCopy(&str2[3], str);
-    AddTextPrinterParameterized3(1, 2, x * 8, 1, sp, TEXT_SPEED_FF, str2);
+    if (bgColor != 0)
+        FillWin1Rect(x, UnionRoomChat_GetMessageEntryCursorPosition() - x, bgColor);
+
+    color[0] = bgColor;
+    color[1] = fgColor;
+    color[2] = shadowColor;
+    strbuf[0] = EXT_CTRL_CODE_BEGIN;
+    strbuf[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
+    strbuf[2] = 8;
+    StringCopy(&strbuf[3], str);
+    AddTextPrinterParameterized3(1, 2, x * 8, 1, color, TEXT_SPEED_FF, strbuf);
 }
 
-static void sub_812A804(void)
+static void PrintCurrentKeyboardPage(void)
 {
     u8 page;
     int i;
-    int var1;
     u16 left;
     u16 top;
-    u8 sp[52];
-    u8 *str;
+    u8 color[3];
+    u8 str[45];
     u8 *str2;
 
     FillWindowPixelBuffer(2, PIXEL_FILL(15));
     page = GetCurrentKeyboardPage();
-    sp[0] = 0;
-    sp[1] = 14;
-    sp[2] = 13;
+    color[0] = 0;
+    color[1] = 14;
+    color[2] = 13;
     if (page != UNION_ROOM_KB_PAGE_COUNT)
     {
-        str = &sp[4];
         str[0] = EXT_CTRL_CODE_BEGIN;
         str[1] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
-        var1 = 8;
-        str[2] = var1;
-        left = var1;
+        str[2] = 8;
+
         if (page == UNION_ROOM_KB_PAGE_EMOJI)
             left = 6;
-
+        else
+            left = 8;
         for (i = 0, top = 0; i < UNION_ROOM_KB_ROW_COUNT; i++, top += 12)
         {
             if (!gUnionRoomKeyboardText[page][i])
                 return;
 
-            StringCopy(&sp[7], gUnionRoomKeyboardText[page][i]);
-            AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
+            StringCopy(&str[3], gUnionRoomKeyboardText[page][i]);
+            AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
         }
     }
     else
@@ -1111,10 +1132,10 @@ static void sub_812A804(void)
         left = 4;
         for (i = 0, top = 0; i < 10; i++, top += 12)
         {
-            str2 = sub_81294B0(i);
+            str2 = UnionRoomChat_GetWorkRegisteredText(i);
             if (GetStringWidth(0, str2, 0) <= 40)
             {
-                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, str2);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str2);
             }
             else
             {
@@ -1122,80 +1143,80 @@ static void sub_812A804(void)
                 do
                 {
                     length--;
-                    StringCopyN_Multibyte(&sp[4], str2, length);
-                } while (GetStringWidth(0, &sp[4], 0) > 35);
+                    StringCopyN_Multibyte(str, str2, length);
+                } while (GetStringWidth(0, str, 0) > 35);
 
-                AddTextPrinterParameterized3(2, 0, left, top, sp, TEXT_SPEED_FF, &sp[4]);
-                AddTextPrinterParameterized3(2, 0, left + 35, top, sp, TEXT_SPEED_FF, gText_Ellipsis);
+                AddTextPrinterParameterized3(2, 0, left, top, color, TEXT_SPEED_FF, str);
+                AddTextPrinterParameterized3(2, 0, left + 35, top, color, TEXT_SPEED_FF, gText_Ellipsis);
             }
         }
     }
 }
 
-static bool32 sub_812A980(void)
+static bool32 AnimateMoveBg1Right(void)
 {
-    if (gUnknown_203B0E4->bg1hofs < 56)
+    if (sWork->bg1hofs < 56)
     {
-        gUnknown_203B0E4->bg1hofs += 12;
-        if (gUnknown_203B0E4->bg1hofs >= 56)
-            gUnknown_203B0E4->bg1hofs = 56;
+        sWork->bg1hofs += 12;
+        if (sWork->bg1hofs >= 56)
+            sWork->bg1hofs = 56;
 
-        if (gUnknown_203B0E4->bg1hofs < 56)
+        if (sWork->bg1hofs < 56)
         {
-            sub_812ADA0(gUnknown_203B0E4->bg1hofs);
+            FillScanlineEffectWithValue1col(sWork->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_812ADF8(gUnknown_203B0E4->bg1hofs);
+    FillScanlineEffectWithValue2col(sWork->bg1hofs);
     return FALSE;
 }
 
-static bool32 sub_812A9C8(void)
+static bool32 AnimateMoveBg1Left(void)
 {
-    if (gUnknown_203B0E4->bg1hofs > 0)
+    if (sWork->bg1hofs > 0)
     {
-        gUnknown_203B0E4->bg1hofs -= 12;
-        if (gUnknown_203B0E4->bg1hofs <= 0)
-            gUnknown_203B0E4->bg1hofs = 0;
+        sWork->bg1hofs -= 12;
+        if (sWork->bg1hofs <= 0)
+            sWork->bg1hofs = 0;
 
-        if (gUnknown_203B0E4->bg1hofs > 0)
+        if (sWork->bg1hofs > 0)
         {
-            sub_812ADA0(gUnknown_203B0E4->bg1hofs);
+            FillScanlineEffectWithValue1col(sWork->bg1hofs);
             return TRUE;
         }
     }
 
-    sub_812ADF8(gUnknown_203B0E4->bg1hofs);
+    FillScanlineEffectWithValue2col(sWork->bg1hofs);
     return FALSE;
 }
 
-static void sub_812AA10(void)
+static void PrintKeyboardSwapTextsOnWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    UnionRoomAndTradeMenuPrintOptions(3, 2, 14, 5, gUnknown_845ABEC);
+    UnionRoomAndTradeMenuPrintOptions(3, 2, 14, 5, sKeyboardSwapTexts);
     Menu_InitCursor(3, 2, 0, 0, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 
-static void sub_812AA64(void)
+static void ClearWin3(void)
 {
     ClearStdWindowAndFrameToTransparent(3, FALSE);
     ClearWindowTilemap(3);
 }
 
-static void sub_812AA78(u16 row, u8 *str, u8 arg2)
+static void PrintTextOnWin0Colorized(u16 row, u8 *str, u8 colorIdx)
 {
     u8 color[3];
     color[0] = 1;
-    color[1] = arg2 * 2 + 2;
-    color[2] = arg2 * 2 + 3;
+    color[1] = colorIdx * 2 + 2;
+    color[2] = colorIdx * 2 + 3;
     FillWindowPixelRect(0, PIXEL_FILL(1), 0, row * 15, 168, 15);
     AddTextPrinterParameterized3(0, 2, 0, row * 15, color, TEXT_SPEED_FF, str);
 }
 
-static void sub_812AAD4(void)
+static void ResetGpuBgState(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
@@ -1220,31 +1241,31 @@ static void sub_812AAD4(void)
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
 }
 
-static void sub_812AB8C(void)
+static void SetBgTilemapWorkBuffers(void)
 {
-    SetBgTilemapBuffer(0, gUnknown_203B0E4->bg0Buffer);
-    SetBgTilemapBuffer(1, gUnknown_203B0E4->bg1Buffer);
-    SetBgTilemapBuffer(3, gUnknown_203B0E4->bg3Buffer);
-    SetBgTilemapBuffer(2, gUnknown_203B0E4->bg2Buffer);
+    SetBgTilemapBuffer(0, sWork->bg0Buffer);
+    SetBgTilemapBuffer(1, sWork->bg1Buffer);
+    SetBgTilemapBuffer(3, sWork->bg3Buffer);
+    SetBgTilemapBuffer(2, sWork->bg2Buffer);
 }
 
-static void sub_812ABD8(void)
+static void ClearBg0(void)
 {
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
 }
 
-static void sub_812AC08(void)
+static void LoadUnionRoomChatPanelGfx(void)
 {
-    LoadPalette(gUnknown_8EAA9F0, 0x70, 0x20);
-    LoadPalette(gUnknown_845AA24, 0xC0, 0x20);
-    DecompressAndCopyTileDataToVram(1, gUnknown_8EAAA10, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnknown_8EAAA6C, 0, 0);
+    LoadPalette(gUnionRoomChatPanelBgPal_7, 0x70, 0x20);
+    LoadPalette(sUnionRoomChatPanelBgPal_C, 0xC0, 0x20);
+    DecompressAndCopyTileDataToVram(1, gUnionRoomChatPanelBgTiles, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, gUnionRoomChatPanelBgMap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
-static void sub_812AC58(void)
+static void LoadLinkMiscMenuGfx(void)
 {
     u8 *ptr;
 
@@ -1254,35 +1275,35 @@ static void sub_812AC58(void)
     CopyBgTilemapBufferToVram(2);
 }
 
-static void sub_812AC9C(void)
+static void LoadBg1Pal8(void)
 {
-    LoadPalette(gUnknown_845AA44, 0x80, 0x20);
+    LoadPalette(sBg1Pal8, 0x80, 0x20);
     RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
 }
 
-static void sub_812ACC0(void)
+static void LoadWin0(void)
 {
-    LoadPalette(gUnknown_845AA64, 0xF0, 0x20);
+    LoadPalette(sWin0PalF, 0xF0, 0x20);
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     CopyWindowToVram(0, 3);
 }
 
-static void sub_812ACEC(void)
+static void LoadWin2(void)
 {
     PutWindowTilemap(2);
-    sub_812A804();
+    PrintCurrentKeyboardPage();
     CopyWindowToVram(2, 3);
 }
 
-static void sub_812AD04(void)
+static void LoadWin1(void)
 {
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
 
-static void sub_812AD20(void)
+static void LoadWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     TextWindow_SetUserSelectedFrame(3, 1, 0xD0);
@@ -1297,18 +1318,18 @@ static void sub_812AD50(void)
     params.dmaDest = &REG_BG1HOFS;
     params.initState = 1;
     params.unused9 = 0;
-    gUnknown_203B0E4->bg1hofs = 0;
+    sWork->bg1hofs = 0;
     CpuFastFill(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
     ScanlineEffect_SetParams(params);
 }
 
-static void sub_812ADA0(s16 arg0)
+static void FillScanlineEffectWithValue1col(s16 arg0)
 {
     CpuFill16(arg0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], 0x120);
     CpuFill16(0, gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer] + 0x90, 0x20);
 }
 
-static void sub_812ADF8(s16 arg0)
+static void FillScanlineEffectWithValue2col(s16 arg0)
 {
     CpuFill16(arg0, gScanlineEffectRegBuffers[0],         0x120);
     CpuFill16(0,    gScanlineEffectRegBuffers[0] +  0x90, 0x20);

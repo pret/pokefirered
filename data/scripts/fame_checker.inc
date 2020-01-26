@@ -43,11 +43,11 @@ Route4_EventScript_1ACDEA:: @ 81ACDEA
 	release
 	end
 
-MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
+MtMoon_1F_EventScript_BaldingMan:: @ 81ACE03
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 4
-	msgbox Text_172B00
+	msgbox MtMoon_1F_Text_BrockHelpsExcavateFossils
 	release
 	end
 

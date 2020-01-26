@@ -120,7 +120,6 @@ SECTIONS {
         asm/field_weather_effects.o(.text);
         src/field_fadetransition.o(.text);
         src/field_screen_effect.o(.text);
-        asm/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/trainer_see.o(.text);
@@ -438,7 +437,6 @@ SECTIONS {
         src/title_screen.o(.rodata);
         data/field_weather.o(.rodata);
         src/field_screen_effect.o(.rodata);
-        data/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
         data/cable_club.o(.rodata);
         data/trainer_see.o(.rodata);

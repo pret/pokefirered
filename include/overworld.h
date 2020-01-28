@@ -147,7 +147,7 @@ void Overworld_ResetStateAfterTeleport(void);
 void Overworld_FadeOutMapMusic(void);
 void CB2_LoadMap(void);
 bool8 BGMusicStopped(void);
-bool8 is_light_level_8_or_9(u8 mapType);
+bool8 IsMapTypeIndoors(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);

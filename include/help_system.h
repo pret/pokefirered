@@ -17,16 +17,16 @@ struct HelpSystemListMenu_sub
 struct HelpSystemListMenu
 {
     struct HelpSystemListMenu_sub sub;
-    u8 field_0C;
-    u8 field_0D;
-    u8 field_0E;
+    u8 itemsAbove;
+    u8 cursorPos;
+    u8 state;
     u8 filler_10[0xC];
 };
 
 extern struct HelpSystemListMenu gHelpSystemListMenu;
 extern struct ListMenuItem gHelpSystemListMenuItems[];
 extern bool8 gHelpSystemEnabled;
-extern u8 gUnknown_203F175;
+extern bool8 gHelpSystemToggleWithRButtonDisabled;
 
 // help_system_812B1E0
 void HelpSystem_SetSomeVariable(u8);
@@ -35,19 +35,19 @@ bool8 sub_812B40C(void);
 bool8 sub_812B45C(void);
 void HelpSystem_Disable(void);
 void HelpSystem_Enable(void);
-void sub_812B4B8(void);
-bool8 sub_812BB9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BC54(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BC80(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BCA8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BCD0(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BD2C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BD64(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+void HelpSystem_EnableToggleWithRButton(void);
+bool8 RunHelpMenuSubroutine(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpSystemSubroutine_PrintWelcomeMessage(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpSystemSubroutine_WelcomeWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpSystemSubroutine_WelcomeEndGotoMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpSystemSubroutine_MenuInputHandlerMain(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpMenuSubroutine_InitSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpMenuSubroutine_ReturnFromSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpMenuSubroutine_SubmenuInputHandler(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
 void sub_812BDEC(void);
-bool8 sub_812BE10(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BEEC(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+bool8 HelpMenuSubroutine_HelpItemPrint(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpMenuSubroutine_ReturnFromHelpItem(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
+bool8 HelpMenuSubroutine_HelpItemWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer);
 bool8 sub_812BF88(void);
 
 // help_system
@@ -92,6 +92,6 @@ bool8 MoveCursor(u8 by, u8 dirn);
 void HelpSystem_BackupSomeVariable(void);
 void HelpSystem_RestoreSomeVariable(void);
 void HelpSystemRenderText(u8 font, u8 * dest, const u8 * src, u8 x, u8 y, u8 width, u8 height);
-void sub_812B4AC(void);
+void HelpSystem_DisableToggleWithRButton(void);
 
 #endif //GUARD_HELP_SYSTEM_H

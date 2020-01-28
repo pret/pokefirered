@@ -207,7 +207,7 @@ void EnterUnionRoomChat(void)
     sWork = Alloc(sizeof(struct UnionRoomChat));
     InitChatWork(sWork);
     gKeyRepeatStartDelay = 20;
-    sub_812B4AC();
+    HelpSystem_DisableToggleWithRButton();
     SetVBlankCallback(NULL);
     SetMainCallback2(CB2_LoadInterface);
 }
@@ -893,7 +893,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
     case 13:
         if (!gPaletteFade.active)
         {
-            sub_812B4B8();
+            HelpSystem_EnableToggleWithRButton();
             UnionRoomChat_FreeGraphicsWork();
             FreeChatWork();
             SetMainCallback2(CB2_ReturnToField);

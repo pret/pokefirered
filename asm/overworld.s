@@ -2597,7 +2597,7 @@ GetMapMusicFadeoutSpeed: @ 8055F68
 	push {lr}
 	bl warp1_get_mapheader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_8_or_9
+	bl IsMapTypeIndoors
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2981,8 +2981,8 @@ _08056218:
 	bx r1
 	thumb_func_end Overworld_MapTypeAllowsTeleportAndFly
 
-	thumb_func_start is_light_level_8_or_9
-is_light_level_8_or_9: @ 805621C
+	thumb_func_start IsMapTypeIndoors
+IsMapTypeIndoors: @ 805621C
 	push {lr}
 	lsls r0, 24
 	movs r1, 0xF8
@@ -2998,10 +2998,10 @@ _08056230:
 _08056232:
 	pop {r1}
 	bx r1
-	thumb_func_end is_light_level_8_or_9
+	thumb_func_end IsMapTypeIndoors
 
-	thumb_func_start sav1_saved_warp2_map_get_name
-sav1_saved_warp2_map_get_name: @ 8056238
+	thumb_func_start GetSavedWarpRegionMapSectionId
+GetSavedWarpRegionMapSectionId: @ 8056238
 	push {lr}
 	ldr r0, _0805625C @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -3020,7 +3020,7 @@ sav1_saved_warp2_map_get_name: @ 8056238
 	bx r1
 	.align 2, 0
 _0805625C: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_saved_warp2_map_get_name
+	thumb_func_end GetSavedWarpRegionMapSectionId
 
 	thumb_func_start GetCurrentRegionMapSectionId
 GetCurrentRegionMapSectionId: @ 8056260
@@ -3044,8 +3044,8 @@ GetCurrentRegionMapSectionId: @ 8056260
 _08056284: .4byte gSaveBlock1Ptr
 	thumb_func_end GetCurrentRegionMapSectionId
 
-	thumb_func_start sav1_map_get_battletype
-sav1_map_get_battletype: @ 8056288
+	thumb_func_start GetCurrentMapBattleScene
+GetCurrentMapBattleScene: @ 8056288
 	push {lr}
 	ldr r0, _080562AC @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -3064,10 +3064,10 @@ sav1_map_get_battletype: @ 8056288
 	bx r1
 	.align 2, 0
 _080562AC: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_map_get_battletype
+	thumb_func_end GetCurrentMapBattleScene
 
-	thumb_func_start sub_80562B0
-sub_80562B0: @ 80562B0
+	thumb_func_start InitOverworldBgs
+InitOverworldBgs: @ 80562B0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3130,7 +3130,7 @@ _08056344: .4byte gUnknown_826D320
 _08056348: .4byte gUnknown_3005018
 _0805634C: .4byte gUnknown_3005014
 _08056350: .4byte gUnknown_300501C
-	thumb_func_end sub_80562B0
+	thumb_func_end InitOverworldBgs
 
 	thumb_func_start sub_8056354
 sub_8056354: @ 8056354
@@ -3641,7 +3641,7 @@ _080567A8: .4byte c2_80567AC
 c2_80567AC: @ 80567AC
 	push {lr}
 	ldr r0, _080567D0 @ =gMain + 0x438
-	bl sub_8056A5C
+	bl map_loading_iteration_3
 	cmp r0, 0
 	beq _080567CC
 	bl SetFieldVBlankCallback
@@ -3962,8 +3962,8 @@ _08056A52:
 _08056A58: .4byte gFlashEffectParams
 	thumb_func_end InitCurrentFlashLevelScanlineEffect
 
-	thumb_func_start sub_8056A5C
-sub_8056A5C: @ 8056A5C
+	thumb_func_start map_loading_iteration_3
+map_loading_iteration_3: @ 8056A5C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4]
@@ -3995,7 +3995,7 @@ _08056A78:
 	.4byte _08056B58
 	.4byte _08056B6A
 _08056AB0:
-	bl sub_80562B0
+	bl InitOverworldBgs
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
 	b _08056B62
@@ -4084,7 +4084,7 @@ _08056B70:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8056A5C
+	thumb_func_end map_loading_iteration_3
 
 	thumb_func_start sub_8056B78
 sub_8056B78: @ 8056B78
@@ -4121,7 +4121,7 @@ _08056B94:
 	.4byte _08056CC0
 	.4byte _08056BFA
 _08056BD0:
-	bl sub_80562B0
+	bl InitOverworldBgs
 	bl sub_80569BC
 	adds r0, r5, 0
 	bl sub_8055920
@@ -4266,7 +4266,7 @@ _08056CF0:
 	.4byte _08056D26
 	.4byte _08056D38
 _08056D04:
-	bl sub_80562B0
+	bl InitOverworldBgs
 	bl sub_8111F14
 	movs r0, 0
 	bl sub_8057024
@@ -4331,7 +4331,7 @@ _08056D60:
 	.4byte _08056E34
 	.4byte _08056E46
 _08056D98:
-	bl sub_80562B0
+	bl InitOverworldBgs
 	bl sub_80569BC
 	b _08056E3E
 _08056DA2:
@@ -5019,7 +5019,7 @@ _08057330:
 	.4byte _08057404
 	.4byte _0805740A
 _0805735C:
-	bl sub_80562B0
+	bl InitOverworldBgs
 	bl sub_80569BC
 	bl sub_8111F14
 	bl sub_81113E4

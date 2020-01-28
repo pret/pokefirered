@@ -1,14 +1,14 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
-// General
+// gTileset_General
 #define METATILE_General_CalmWater  0x12B
 
-// PokeMart
-#define METATILE_Shop_CounterMid_Top     0x2BF
-#define METATILE_Shop_CounterMid_Bottom  0x2C0     
+// gTileset_Mart
+#define METATILE_Mart_CounterMid_Top     0x2BF
+#define METATILE_Mart_CounterMid_Bottom  0x2C0     
 
-// Vermilion Gym
+// gTileset_VermilionGym
 #define METATILE_VermilionGym_Floor                             0x281
 #define METATILE_VermilionGym_Beam_MidTop                       0x285
 #define METATILE_VermilionGym_Beam_MidBottom                    0x28D
@@ -39,7 +39,7 @@
 #define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn 0x2C6
 #define METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn      0x2C7
 
-// Pokemon Mansion
+// gTileset_PokemonMansion
 #define METATILE_PokemonMansion_Floor                                    0x284
 #define METATILE_PokemonMansion_Floor_ShadeFull                          0x285
 #define METATILE_PokemonMansion_BasementFloor                            0x286
@@ -72,7 +72,7 @@
 #define METATILE_PokemonMansion_Statue_RedEyes_Shade                     0x34E
 #define METATILE_PokemonMansion_Statue_RedEyes_Basement                  0x34F
 
-// Cinnabar Gym
+// gTileset_CinnabarGym
 #define METATILE_CinnabarGym_Floor                  0x281
 #define METATILE_CinnabarGym_Floor_ShadeDiagonal    0x282
 #define METATILE_CinnabarGym_Floor_ShadeFull        0x289
@@ -82,7 +82,7 @@
 #define METATILE_CinnabarGym_Floor_WallLeftEdge     0x2CF
 #define METATILE_CinnabarGym_Wall_RetractedBarrier  0x2D1
 
-// gTileset_82D504C. Below metatile probably needs generic name
+// gTileset_MtEmber
 #define METATILE_MtEmber_CaveEntrance  0x346
 
 

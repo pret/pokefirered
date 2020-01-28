@@ -85,5 +85,10 @@
 // gTileset_82D504C. Below metatile probably needs generic name
 #define METATILE_MtEmber_CaveEntrance  0x346
 
+// gTileset_82D4BFC
+#define METATILE_Cave_Floor_Ledge_Top    0x2D1
+#define METATILE_Cave_Floor_Ledge_Bottom 0x2E1
+#define METATILE_Cave_RockBarrier_Top    0x307
+#define METATILE_Cave_RockBarrier_Bottom 0x317
 
 #endif // GUARD_METATILE_LABELS_H

@@ -5,7 +5,7 @@
   "music": "MUS_NANADUNGEON",
   "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
-  "weather": "WEATHER_CLOUDY",
+  "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_4",
   "unknown_18": 0,
   "unknown_19": 6,

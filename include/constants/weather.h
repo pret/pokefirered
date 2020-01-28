@@ -12,7 +12,7 @@
 #define WEATHER_SANDSTORM          8   // unused
 #define WEATHER_FOG_DIAGONAL       9   // unused
 #define WEATHER_UNDERWATER         10  // unused
-#define WEATHER_CLOUDY             11
+#define WEATHER_SHADE              11
 #define WEATHER_DROUGHT            12  // unused and broken in overworld
 #define WEATHER_DOWNPOUR           13  // unused
 #define WEATHER_UNDERWATER_BUBBLES 14  // unused

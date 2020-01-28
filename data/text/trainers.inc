@@ -989,18 +989,18 @@ Text_1C4699:: @ 81C4699
 	.string "NYA: I won't drag down my mentor\n"
 	.string "LEX! We're going to win!$"
 
-Text_1C46D3:: @ 81C46D3
+SevenIsland_TanobyRuins_Text_BrandonRematchIntro:: @ 81C46D3
 	.string "Have you discovered anything about\n"
 	.string "this stone chamber?$"
 
-Text_1C470A:: @ 81C470A
+SevenIsland_TanobyRuins_Text_BenjaminRematchIntro:: @ 81C470A
 	.string "A mystic POKéMON is said to sleep\n"
 	.string "inside here.$"
 
-Text_1C4739:: @ 81C4739
+SevenIsland_TanobyRuins_Text_EdnaRematchIntro:: @ 81C4739
 	.string "My teacher is showing me how to\n"
 	.string "paint some more.$"
 
-Text_1C476A:: @ 81C476A
+SevenIsland_TanobyRuins_Text_CliffordRematchIntro:: @ 81C476A
 	.string "Today, in addition to our lesson,\n"
 	.string "we came to see the chamber again.$"

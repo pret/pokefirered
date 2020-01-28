@@ -25,7 +25,9 @@
 #include "constants/battle_setup.h"
 #include "constants/map_scripts.h"
 #include "constants/cable_club.h"
+#include "constants/field_tasks.h"
 #include "constants/field_weather.h"
+#include "constants/weather.h"
 #include "constants/union_room.h"
 #include "constants/trade.h"
 #include "constants/quest_log.h"
@@ -658,6 +660,7 @@ gStdScriptsEnd::
 	.include "data/maps/SevenIsland_TrainerTower/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_Entrance/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon/text.inc"
+	.include "data/maps/SevenIsland_TanobyRuins/text.inc"
 	.include "data/maps/PalletTown_PlayersHouse_1F/text.inc"
 	.include "data/maps/PalletTown_PlayersHouse_2F/text.inc"
 	.include "data/maps/PalletTown_GarysHouse/text.inc"
@@ -1648,9 +1651,9 @@ EventScript_1A8EC0:: @ 81A8EC0
 	.include "data/scripts/seagallop.inc"
 	.include "data/scripts/static_pokemon.inc"
 
-EventScript_1A925E:: @ 81A925E
+EventScript_TryDarkenRuins:: @ 81A925E
 	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_Return
-	setweather 11
+	setweather WEATHER_SHADE
 	doweather
 	return
 

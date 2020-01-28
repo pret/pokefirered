@@ -3620,16 +3620,16 @@
       "blockdata_filepath": "data/layouts/ThreeIsland_DunsparceTunnel/map.bin"
     },
     {
-      "id": "LAYOUT_THREE_ISLAND_DUNSPARCE_TUNNEL_2",
-      "name": "UnusedLayout_83453C0_Layout",
+      "id": "LAYOUT_THREE_ISLAND_DUNSPARCE_TUNNEL_DUG_OUT",
+      "name": "ThreeIsland_DunsparceTunnel_DugOut_Layout",
       "width": 30,
       "height": 7,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4A94",
       "secondary_tileset": "gTileset_82D4BFC",
-      "border_filepath": "data/layouts/UnusedLayout_83453C0/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_83453C0/map.bin"
+      "border_filepath": "data/layouts/ThreeIsland_DunsparceTunnel_DugOut/border.bin",
+      "blockdata_filepath": "data/layouts/ThreeIsland_DunsparceTunnel_DugOut/map.bin"
     },
     {
       "id": "LAYOUT_FIVE_ISLAND_LOST_CAVE_ENTRANCE",

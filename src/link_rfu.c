@@ -2,189 +2,187 @@
 #include "librfu.h"
 #include "link_rfu.h"
 
-struct UnkRfuStruct_1 gUnknown_3005E10;
+LINK_MANAGER lman;
 
-static void sub_80FD4E4(void);
-static void sub_80FDC28(u32 a0);
-static void sub_80FDC98(u16 reqCommandId, u16 reqResult);
-static void sub_80FE394(u16 reqCommandId);
-static void sub_80FE418(void);
-static void sub_80FE63C(void);
-static void sub_80FE6F0(void);
-static void sub_80FE74C(void);
-static u8 sub_80FE778(void);
-static void sub_80FE7F0(u8 a0, u8 a1);
-static void sub_80FE818(u8 bmDisconnectSlot);
-static void sub_80FE83C(u8 a0);
-static void sub_80FE918(void);
-static void sub_80FEAF4(void);
+static void rfu_LMAN_clearVariables(void);
+static void rfu_LMAN_settingPCSWITCH(u32 a0);
+static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult);
+static void rfu_LMAN_MSC_callback(u16 reqCommandId);
+static void rfu_LMAN_PARENT_checkRecvChildName(void);
+static void rfu_LMAN_CHILD_checkSendChildName(void);
+static void rfu_LMAN_CHILD_checkSendChildName2(void);
+static void rfu_LMAN_CHILD_linkRecoveryProcess(void);
+static u8 rfu_LMAN_CHILD_checkEnableParentCandidate(void);
+static void rfu_LMAN_occureCallback(u8 a0, u8 a1);
+static void rfu_LMAN_disconnect(u8 bmDisconnectSlot);
+static void rfu_LMAN_reflectCommunicationStatus(u8 a0);
+static void rfu_LMAN_checkNICommunicateStatus(void);
+static void rfu_LMAN_managerChangeAgbClockMaster(void);
 
-u32 sub_80FD3A4(void)
+u32 rfu_LMAN_REQBN_softReset_and_checkID(void)
 {
     u32 id = rfu_REQBN_softReset_and_checkID();
     if (id == RFU_ID)
-        gUnknown_3005E10.unk_08 = 1;
-    if (gUnknown_3005E10.unk_04 != 0x17 && gUnknown_3005E10.unk_04 != 0x01)
+        lman.RFU_powerOn_flag = 1;
+    if (lman.state != 0x17 && lman.state != 0x01)
     {
-        gUnknown_3005E10.unk_05 = 0;
-        gUnknown_3005E10.unk_04 = 0;
+        lman.state = lman.next_state = 0;
     }
-    gUnknown_3005E10.unk_07 = 0;
-    gUnknown_3005E10.unk_0d = 0;
-    gUnknown_3005E10.unk_01 = 0;
-    gUnknown_3005E10.unk_00 = 0;
-    gUnknown_3005E10.unk_06 = -1;
-    sub_80FEAF4();
+    lman.pcswitch_flag = 0;
+    lman.reserveDisconnectSlot_flag = 0;
+    lman.acceptCount = 0;
+    lman.acceptSlot_flag = 0;
+    lman.parent_child = MODE_NEUTRAL;
+    rfu_LMAN_managerChangeAgbClockMaster();
     return id;
 }
 
-void LinkRfu_REQ_SendData_HandleParentRelationship(u8 clockChangeFlag)
+void rfu_LMAN_REQ_sendData(u8 clockChangeFlag)
 {
     if (gRfuLinkStatus->parentChild == MODE_CHILD)
     {
-        if (gUnknown_3005E10.unk_02 == TRUE)
+        if (lman.childClockSlave_flag == TRUE)
             clockChangeFlag = TRUE;
         else
             clockChangeFlag = FALSE;
     }
     else
-        gUnknown_3005E10.unk_03 = 0;
+        lman.parentAck_flag = 0;
     rfu_REQ_sendData(clockChangeFlag);
 }
 
-s32 sub_80FD430(void (*func1)(u8, u8), void (*func2)(u16))
+u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u16))
 {
-    if (func1 == NULL)
+    if (LMAN_callback_p == NULL)
     {
-        return 4;
+        return LMAN_ERROR_ILLEGAL_PARAMETER;
     }
-    CpuFill16(0, &gUnknown_3005E10, sizeof(struct UnkRfuStruct_1));
-    gUnknown_3005E10.unk_06 = -1;
-    gUnknown_3005E10.unk_40 = func1;
-    gUnknown_3005E10.unk_44 = func2;
-    rfu_setMSCCallback(sub_80FE394);
-    rfu_setREQCallback(sub_80FDC98);
+    CpuFill16(0, &lman, sizeof(struct linkManagerTag));
+    lman.parent_child = MODE_NEUTRAL;
+    lman.LMAN_callback = LMAN_callback_p;
+    lman.MSC_callback = MSC_callback_p;
+    rfu_setMSCCallback(rfu_LMAN_MSC_callback);
+    rfu_setREQCallback(rfu_LMAN_REQ_callback);
     return 0;
 }
 
-static void sub_80FD484(void)
+static void rfu_LMAN_endManager(void)
 {
-    CpuFill16(0, &gUnknown_3005E10, offsetof(struct UnkRfuStruct_1, unk_40));
-    gUnknown_3005E10.unk_06 = -1;
+    CpuFill16(0, &lman, sizeof(struct linkManagerTag) - 8);
+    lman.parent_child = MODE_NEUTRAL;
 }
 
-void sub_80FD4B0(const struct UnkLinkRfuStruct_02022B2C *unk0)
+void rfu_LMAN_initializeRFU(INIT_PARAM *init_parameters)
 {
-    sub_80FD4E4();
-    gUnknown_3005E10.unk_04 = 1;
-    gUnknown_3005E10.unk_05 = 2;
-    gUnknown_3005E10.unk_3c = unk0;
-    gUnknown_3005E10.unk_09 = unk0->unk_11;
-    gUnknown_3005E10.unk_32 = unk0->unk_12;
-    gUnknown_3005E10.unk_18 = unk0->unk_14;
-    if (unk0->unk_10)
+    rfu_LMAN_clearVariables();
+    lman.state = 1;
+    lman.next_state = 2;
+    lman.init_param = init_parameters;
+    lman.linkRecovery_enable = init_parameters->linkRecovery_enable;
+    lman.linkRecoveryTimer.count_max = init_parameters->linkRecovery_period;
+    lman.NI_failCounter_limit = init_parameters->NI_failCounter_limit;
+    if (init_parameters->fastSearchParent_flag)
     {
-        gUnknown_3005E10.unk_0b = 1;
+        lman.fastSearchParent_flag = 1;
     }
 }
 
-static void sub_80FD4E4(void)
+static void rfu_LMAN_clearVariables(void)
 {
     u8 i;
 
-    gUnknown_3005E10.unk_05 = 0;
-    gUnknown_3005E10.unk_04 = 0;
-    gUnknown_3005E10.unk_06 = -1;
-    gUnknown_3005E10.unk_07 = 0;
-    gUnknown_3005E10.unk_10 = 0;
-    gUnknown_3005E10.unk_0c = 0;
-    gUnknown_3005E10.unk_24 = 0;
-    gUnknown_3005E10.unk_30 = 0;
+    lman.state = lman.next_state = 0;
+    lman.parent_child = MODE_NEUTRAL;
+    lman.pcswitch_flag = 0;
+    lman.child_slot = 0;
+    lman.connectSlot_flag_old = 0;
+    lman.nameAcceptTimer.active = 0;
+    lman.linkRecoveryTimer.active = 0;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        gUnknown_3005E10.unk_28[i] = 0;
-        gUnknown_3005E10.unk_34[i] = 0;
+        lman.nameAcceptTimer.count[i] = 0;
+        lman.linkRecoveryTimer.count[i] = 0;
     }
 }
 
-void sub_80FD52C(void)
+void rfu_LMAN_powerDownRFU(void)
 {
-    gUnknown_3005E10.unk_04 = 0x15;
+    lman.state = LMAN_STATE_STOP_MODE;
 }
 
-u8 sub_80FD538(u8 r5, u16 r7, u16 r8, const u16 *r6)
+u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list)
 {
     u8 i;
-    const u16 *buffer;
+    u16 *serial_list;
 
-    if (gUnknown_3005E10.unk_04 != 0 && (gUnknown_3005E10.unk_04 != 0x08 || r5 != 1))
+    if (lman.state != 0 && (lman.state != LMAN_STATE_WAIT_RECV_CHILD_NAME || parent_child != 1))
     {
-        gUnknown_3005E10.unk_14 = 1;
-        sub_80FE7F0(0xf3, 0x01);
+        lman.param[0] = 1;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 1;
     }
     if (rfu_getMasterSlave() == AGB_CLK_SLAVE)
     {
-        gUnknown_3005E10.unk_14 = 2;
-        sub_80FE7F0(0xf3, 0x01);
+        lman.param[0] = 2;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 2;
     }
-    for (i = 0, buffer = r6; i < 16; i++)
+    for (i = 0, serial_list = acceptable_serialNo_list; i < 16; i++)
     {
-        if (*buffer++ == 0xFFFF)
+        if (*serial_list++ == 0xFFFF)
         {
             break;
         }
     }
     if (i == 16)
     {
-        gUnknown_3005E10.unk_14 = 4;
-        sub_80FE7F0(0xf3, 0x01);
+        lman.param[0] = 4;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 4;
     }
-    if (r5 > 1)
+    if (parent_child > 1)
     {
-        gUnknown_3005E10.unk_07 = 1;
-        r5 = 1;
-        r7 = 0;
+        lman.pcswitch_flag = 1;
+        parent_child = 1;
+        connect_period = 0;
     }
     else
     {
-        gUnknown_3005E10.unk_07 = 0;
+        lman.pcswitch_flag = 0;
     }
-    if (r5 != 0)
+    if (parent_child != 0)
     {
-        gUnknown_3005E10.unk_04 = 5;
+        lman.state = 5;
     }
     else
     {
-        gUnknown_3005E10.unk_04 = 9;
-        if (gUnknown_3005E10.unk_0b)
+        lman.state = 9;
+        if (lman.fastSearchParent_flag)
         {
-            gUnknown_3005E10.unk_0b = 2;
+            lman.fastSearchParent_flag = 2;
         }
     }
-    gUnknown_3005E10.unk_06 = r5;
-    gUnknown_3005E10.unk_1a = r7;
-    gUnknown_3005E10.unk_26 = r8;
-    gUnknown_3005E10.unk_20 = r6;
+    lman.parent_child = parent_child;
+    lman.connect_period = connect_period;
+    lman.nameAcceptTimer.count_max = name_accept_period;
+    lman.acceptable_serialNo_list = acceptable_serialNo_list;
     return 0;
 }
 
-u8 sub_80FD610(u16 parentId, u16 unk_1a)
+u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 connect_period)
 {
     u8 i;
 
-    if (gUnknown_3005E10.unk_04 != 0 && (gUnknown_3005E10.unk_04 < 9 || gUnknown_3005E10.unk_04 > 11))
+    if (lman.state != 0 && (lman.state < 9 || lman.state > 11))
     {
-        gUnknown_3005E10.unk_14 = 1;
-        sub_80FE7F0(0xF3, 0x01);
+        lman.param[0] = 1;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 1;
     }
     if (rfu_getMasterSlave() == AGB_CLK_SLAVE)
     {
-        gUnknown_3005E10.unk_14 = 2;
-        sub_80FE7F0(0xF3, 0x01);
+        lman.param[0] = 2;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 2;
     }
     for (i = 0; i < gRfuLinkStatus->findParentCount; i++)
@@ -196,546 +194,550 @@ u8 sub_80FD610(u16 parentId, u16 unk_1a)
     }
     if (gRfuLinkStatus->findParentCount == 0 || i == gRfuLinkStatus->findParentCount)
     {
-        gUnknown_3005E10.unk_14 = 3;
-        sub_80FE7F0(0xF3, 0x01);
+        lman.param[0] = 3;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 3;
     }
-    if (gUnknown_3005E10.unk_04 == 0 || gUnknown_3005E10.unk_04 == 9)
+    if (lman.state == 0 || lman.state == 9)
     {
-        gUnknown_3005E10.unk_04 = 12;
-        gUnknown_3005E10.unk_05 = 13;
+        lman.state = 12;
+        lman.next_state = 13;
     }
     else
     {
-        gUnknown_3005E10.unk_04 = 11;
-        gUnknown_3005E10.unk_05 = 12;
+        lman.state = 11;
+        lman.next_state = 12;
     }
-    gUnknown_3005E10.unk_1e = parentId;
-    gUnknown_3005E10.unk_1a = unk_1a;
-    if (gUnknown_3005E10.unk_07 != 0)
+    lman.work = parentId;
+    lman.connect_period = connect_period;
+    if (lman.pcswitch_flag != 0)
     {
-        gUnknown_3005E10.unk_07 = 7;
+        lman.pcswitch_flag = 7;
     }
     return 0;
 }
 
-static void sub_80FD6F4(u8 lossSlot)
+static void rfu_LMAN_PARENT_stopWaitLinkRecoveryAndDisconnect(u8 bm_targetSlot)
 {
     u8 i;
 
-    if (lossSlot & gUnknown_3005E10.unk_30)
+    if ((bm_targetSlot & lman.linkRecoveryTimer.active)==0)
+        return;
+    lman.linkRecoveryTimer.active &= ~bm_targetSlot;
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        gUnknown_3005E10.unk_30 &= ~lossSlot;
-        for (i = 0; i < RFU_CHILD_MAX; i++)
+        if ((bm_targetSlot >> i) & 1)
         {
-            if ((lossSlot >> i) & 1)
-            {
-                gUnknown_3005E10.unk_34[i] = 0;
-            }
+            lman.linkRecoveryTimer.count[i] = 0;
         }
-        i = gRfuLinkStatus->linkLossSlotFlag & lossSlot;
-        if (i)
-        {
-            sub_80FE818(i);
-        }
-        gUnknown_3005E10.unk_14 = i;
-        sub_80FE7F0(0x33, i);
+    }
+    i = gRfuLinkStatus->linkLossSlotFlag & bm_targetSlot;
+    if (i)
+    {
+        rfu_LMAN_disconnect(i);
+    }
+    lman.param[0] = i;
+    rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, i);
+}
+
+void rfu_LMAN_stopManager(bool8 forced_stop_and_RFU_reset_flag)
+{
+    u8 msg = 0;
+    lman.pcswitch_flag = 0;
+    if (forced_stop_and_RFU_reset_flag)
+    {
+        rfu_LMAN_clearVariables();
+        lman.state = 23;
+        return;
+    }
+    switch (lman.state)
+    {
+    case 5:
+        lman.state = 8;
+        lman.next_state = 0;
+        msg = LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED;
+        break;
+    case 6:
+        lman.state = 7;
+        lman.next_state = 8;
+        break;
+    case 7:
+        lman.state = 7;
+        lman.next_state = 8;
+        break;
+    case 8:
+        break;
+    case 9:
+        lman.state = lman.next_state = 0;
+        msg = LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED;
+        break;
+    case 10:
+        lman.state = 11;
+        lman.next_state = 0;
+        break;
+    case 11:
+        lman.state = 11;
+        lman.next_state = 0;
+        break;
+    case 12:
+        lman.state = lman.next_state = 0;
+        msg = LMAN_MSG_CONNECT_PARENT_FAILED;
+        break;
+    case 13:
+        lman.state = 14;
+        break;
+    case 14:
+        lman.state = 14;
+        break;
+    case 15:
+        break;
+    case 16:
+        lman.state = lman.state_bak[0];
+        lman.next_state = lman.state_bak[1];
+        rfu_LMAN_disconnect(gRfuLinkStatus->linkLossSlotFlag);
+        lman.param[0] = gRfuLinkStatus->linkLossSlotFlag;
+        rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, 0x01);
+        return;
+    case 17:
+        lman.state = 18;
+        break;
+    case 18:
+        lman.state = 18;
+        break;
+    default:
+        lman.state = lman.next_state = 0;
+        msg = LMAN_MSG_MANAGER_STOPPED;
+        break;
+    }
+    if (lman.state == 0)
+    {
+        rfu_LMAN_occureCallback(msg, 0);
     }
 }
 
-void sub_80FD760(bool8 a0)
+static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
 {
-    u8 r2;
-
-    r2 = 0;
-    gUnknown_3005E10.unk_07 = 0;
-    if (a0)
-    {
-        sub_80FD4E4();
-        gUnknown_3005E10.unk_04 = 23;
-    }
-    else
-    {
-        switch (gUnknown_3005E10.unk_04)
-        {
-        case 5:
-            gUnknown_3005E10.unk_04 = 8;
-            gUnknown_3005E10.unk_05 = 0;
-            r2 = 0x13;
-            break;
-        case 6:
-            gUnknown_3005E10.unk_04 = 7;
-            gUnknown_3005E10.unk_05 = 8;
-            break;
-        case 7:
-            gUnknown_3005E10.unk_04 = 7;
-            gUnknown_3005E10.unk_05 = 8;
-            break;
-        case 8:
-            break;
-        case 9:
-            gUnknown_3005E10.unk_05 = 0;
-            gUnknown_3005E10.unk_04 = 0;
-            r2 = 0x21;
-            break;
-        case 10:
-            gUnknown_3005E10.unk_04 = 11;
-            gUnknown_3005E10.unk_05 = 0;
-            break;
-        case 11:
-            gUnknown_3005E10.unk_04 = 11;
-            gUnknown_3005E10.unk_05 = 0;
-            break;
-        case 12:
-            gUnknown_3005E10.unk_05 = 0;
-            gUnknown_3005E10.unk_04 = 0;
-            r2 = 0x23;
-            break;
-        case 13:
-            gUnknown_3005E10.unk_04 = 14;
-            break;
-        case 14:
-            gUnknown_3005E10.unk_04 = 14;
-            break;
-        case 15:
-            break;
-        case 16:
-            gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_11;
-            gUnknown_3005E10.unk_05 = gUnknown_3005E10.unk_12;
-            sub_80FE818(gRfuLinkStatus->linkLossSlotFlag);
-            gUnknown_3005E10.unk_14 = gRfuLinkStatus->linkLossSlotFlag;
-            sub_80FE7F0(0x33, 0x01);
-            return;
-        case 17:
-            gUnknown_3005E10.unk_04 = 18;
-            break;
-        case 18:
-            gUnknown_3005E10.unk_04 = 18;
-            break;
-        default:
-            gUnknown_3005E10.unk_05 = 0;
-            gUnknown_3005E10.unk_04 = 0;
-            r2 = 0x43;
-            break;
-        }
-        if (gUnknown_3005E10.unk_04 == 0)
-        {
-            sub_80FE7F0(r2, 0);
-        }
-    }
-}
-
-static bool8 sub_80FD850(u16 reqCommandId)
-{
-    bool8 retVal;
     u8 i;
-    u8 bmLinkLossSlot;
-    u8 linkLossReason;
-    u8 parentBmLinkRecoverySlot;
-    u8 flags;
+    u8 bm_linkLossSlot;
+    u8 reason;
+    u8 bm_linkRecoverySlot;
+    u8 bm_disconnectSlot;
 
-    retVal = FALSE;
-    rfu_REQBN_watchLink(reqCommandId, &bmLinkLossSlot, &linkLossReason, &parentBmLinkRecoverySlot);
-    if (bmLinkLossSlot)
+    bool8 disconnect_occure_flag = FALSE;
+    rfu_REQBN_watchLink(REQ_commandID, &bm_linkLossSlot, &reason, &bm_linkRecoverySlot);
+    if (bm_linkLossSlot)
     {
-        gUnknown_3005E10.unk_14 = bmLinkLossSlot;
-        gUnknown_3005E10.unk_16 = linkLossReason;
-        if (gUnknown_3005E10.unk_09)
+        lman.param[0] = bm_linkLossSlot;
+        lman.param[1] = reason;
+        if (lman.linkRecovery_enable)
         {
-            gUnknown_3005E10.unk_0a = 1;
-            if (gUnknown_3005E10.unk_06 == 0 && linkLossReason == REASON_DISCONNECTED)
+            lman.linkRecovery_start_flag = 1;
+            if (lman.parent_child == 0 && reason == REASON_DISCONNECTED)
             {
-                gUnknown_3005E10.unk_0a = 4;
+                lman.linkRecovery_start_flag = 4;
             }
-            if (gUnknown_3005E10.unk_0a == 1)
+            if (lman.linkRecovery_start_flag == 1)
             {
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
-                    if ((bmLinkLossSlot >> i) & 1)
+                    if ((bm_linkLossSlot >> i) & 1)
                     {
-                        gUnknown_3005E10.unk_30 |= (1 << i);
-                        gUnknown_3005E10.unk_34[i] = gUnknown_3005E10.unk_32;
+                        lman.linkRecoveryTimer.active |= (1 << i);
+                        lman.linkRecoveryTimer.count[i] = lman.linkRecoveryTimer.count_max;
                     }
                 }
-                sub_80FE7F0(0x31, 0x01);
+                rfu_LMAN_occureCallback(0x31, 0x01);
             }
             else
             {
-                gUnknown_3005E10.unk_0a = 0;
-                sub_80FE818(bmLinkLossSlot);
-                retVal = TRUE;
-                sub_80FE7F0(0x33, 0x01);
+                lman.linkRecovery_start_flag = 0;
+                rfu_LMAN_disconnect(bm_linkLossSlot);
+                disconnect_occure_flag = TRUE;
+                rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, 0x01);
             }
         }
         else
         {
-            sub_80FE818(bmLinkLossSlot);
-            retVal = TRUE;
-            sub_80FE7F0(0x30, 0x02);
+            rfu_LMAN_disconnect(bm_linkLossSlot);
+            disconnect_occure_flag = TRUE;
+            rfu_LMAN_occureCallback(0x30, 0x02);
         }
-        sub_80FEAF4();
+        rfu_LMAN_managerChangeAgbClockMaster();
     }
     if (gRfuLinkStatus->parentChild == MODE_PARENT)
     {
-        if (parentBmLinkRecoverySlot)
+        if (bm_linkRecoverySlot)
         {
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if ((gUnknown_3005E10.unk_30 >> i) & 1 && (parentBmLinkRecoverySlot >> i) & 1)
+                if ((lman.linkRecoveryTimer.active >> i) & 1 && (bm_linkRecoverySlot >> i) & 1)
                 {
-                    gUnknown_3005E10.unk_34[i] = 0;
+                    lman.linkRecoveryTimer.count[i] = 0;
                 }
             }
-            gUnknown_3005E10.unk_30 &= ~parentBmLinkRecoverySlot;
-            gUnknown_3005E10.unk_14 = parentBmLinkRecoverySlot;
-            sub_80FE7F0(0x32, 0x01);
+            lman.linkRecoveryTimer.active &= ~bm_linkRecoverySlot;
+            lman.param[0] = bm_linkRecoverySlot;
+            rfu_LMAN_occureCallback(0x32, 0x01);
         }
-        if (gUnknown_3005E10.unk_30)
+        if (lman.linkRecoveryTimer.active)
         {
-            flags = 0;
+            bm_disconnectSlot = 0;
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if ((gUnknown_3005E10.unk_30 >> i) & 1 && gUnknown_3005E10.unk_34[i] && --gUnknown_3005E10.unk_34[i] == 0)
+                if ((lman.linkRecoveryTimer.active >> i) & 1 && lman.linkRecoveryTimer.count[i] && --lman.linkRecoveryTimer.count[i] == 0)
                 {
-                    gUnknown_3005E10.unk_30 &= ~(1 << i);
-                    flags |= (1 << i);
+                    lman.linkRecoveryTimer.active &= ~(1 << i);
+                    bm_disconnectSlot |= (1 << i);
                 }
             }
-            if (flags)
+            if (bm_disconnectSlot)
             {
-                sub_80FE818(flags);
-                retVal = TRUE;
-                gUnknown_3005E10.unk_14 = flags;
-                sub_80FE7F0(0x33, 0x01);
+                rfu_LMAN_disconnect(bm_disconnectSlot);
+                disconnect_occure_flag = TRUE;
+                lman.param[0] = bm_disconnectSlot;
+                rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, 0x01);
             }
         }
-        if (!gUnknown_3005E10.unk_30)
+        if (!lman.linkRecoveryTimer.active)
         {
-            gUnknown_3005E10.unk_0a = 0;
+            lman.linkRecovery_start_flag = 0;
         }
     }
-    return retVal;
+    return disconnect_occure_flag;
 }
 
-void LinkRfu_syncVBlank_(void)
+void rfu_LMAN_syncVBlank(void)
 {
     if (rfu_syncVBlank())
     {
-        sub_80FE7F0(0xF1, 0x00);
-        sub_80FEAF4();
+        rfu_LMAN_occureCallback(0xF1, 0x00);
+        rfu_LMAN_managerChangeAgbClockMaster();
     }
 }
 
-void sub_80FDA30(u32 a0)
+void rfu_LMAN_manager_entity(u32 rand)
 {
-    u8 r2;
+    u8 msg;
 
-    if (gUnknown_3005E10.unk_40 == NULL && gUnknown_3005E10.unk_04 != 0)
+    if (lman.LMAN_callback == NULL && lman.state != 0)
     {
-        gUnknown_3005E10.unk_04 = 0;
+        lman.state = 0;
+        return;
     }
-    else
+    if (lman.pcswitch_flag)
     {
-        if (gUnknown_3005E10.unk_07 != 0)
+        rfu_LMAN_settingPCSWITCH(rand);
+    }
+    while (1)
+    {
+        if (lman.state != 0)
         {
-            sub_80FDC28(a0);
-        }
-        do
-        {
-            if (gUnknown_3005E10.unk_04 != 0)
+            rfu_waitREQComplete();
+            lman.active = 1;
+            switch (lman.state)
             {
-                rfu_waitREQComplete();
-                gUnknown_3005E10.unk_0e = 1;
-                switch (gUnknown_3005E10.unk_04)
+            case 23:
+                if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
                 {
-                case 23:
-                    r2 = sub_80FD3A4() == RFU_ID ? 0x44 : 0xFF;
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                    sub_80FE7F0(r2, 0);
-                    break;
-                case 1:
-                    if (sub_80FD3A4() == RFU_ID)
-                    {
-                        gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                        gUnknown_3005E10.unk_05 = 3;
-                    }
-                    else
-                    {
-                        gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                        sub_80FE7F0(0xFF, 0);
-                    }
-                    break;
-                case 2:
-                    rfu_REQ_reset();
-                    break;
-                case 3:
-                    rfu_REQ_configSystem(gUnknown_3005E10.unk_3c->availSlotFlag, gUnknown_3005E10.unk_3c->maxMFrame, gUnknown_3005E10.unk_3c->mcTimer);
-                    break;
-                case 4:
-                    rfu_REQ_configGameData(gUnknown_3005E10.unk_3c->mbootFlag, gUnknown_3005E10.unk_3c->serialNo, (const u8 *)gUnknown_3005E10.unk_3c->gname, gUnknown_3005E10.unk_3c->uname);
-                    break;
-                case 5:
-                    rfu_REQ_startSearchChild();
-                    break;
-                case 6:
-                    rfu_REQ_pollSearchChild();
-                    break;
-                case 7:
-                    rfu_REQ_endSearchChild();
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    rfu_REQ_startSearchParent();
-                    break;
-                case 10:
-                    rfu_REQ_pollSearchParent();
-                    break;
-                case 11:
-                    rfu_REQ_endSearchParent();
-                    break;
-                case 12:
-                    rfu_REQ_startConnectParent(gUnknown_3005E10.unk_1e);
-                    break;
-                case 13:
-                    rfu_REQ_pollConnectParent();
-                    break;
-                case 14:
-                    rfu_REQ_endConnectParent();
-                    break;
-                case 15:
-                    break;
-                case 16:
-                    rfu_REQ_CHILD_startConnectRecovery(gRfuLinkStatus->linkLossSlotFlag);
-                    break;
-                case 17:
-                    rfu_REQ_CHILD_pollConnectRecovery();
-                    break;
-                case 18:
-                    rfu_REQ_CHILD_endConnectRecovery();
-                    break;
-                case 19:
-                    rfu_REQ_changeMasterSlave();
-                    break;
-                case 20:
-                    break;
-                case 21:
-                    rfu_REQ_stopMode();
-                    break;
-                case 22:
-                    break;
+                    msg=LMAN_MSG_MANAGER_FORCED_STOPPED_AND_RFU_RESET;
                 }
-                rfu_waitREQComplete();
-                gUnknown_3005E10.unk_0e = 0;
+                else
+                {
+                    msg=LMAN_MSG_RFU_FATAL_ERROR;
+                }
+                lman.state = lman.next_state = 0;
+                rfu_LMAN_occureCallback(msg, 0);
+                break;
+            case 1:
+                if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
+                {
+                    lman.state = lman.next_state;
+                    lman.next_state = 3;
+                }
+                else
+                {
+                    lman.state = lman.next_state = 0;
+                    rfu_LMAN_occureCallback(LMAN_MSG_RFU_FATAL_ERROR, 0);
+                }
+                break;
+            case 2:
+                rfu_REQ_reset();
+                break;
+            case 3:
+                rfu_REQ_configSystem(lman.init_param->availSlot_flag, lman.init_param->maxMFrame, lman.init_param->MC_TimerCount);
+                break;
+            case 4:
+                rfu_REQ_configGameData(lman.init_param->mboot_flag, lman.init_param->serialNo, (const u8 *)lman.init_param->gameName, lman.init_param->userName);
+                break;
+            case 5:
+                rfu_REQ_startSearchChild();
+                break;
+            case 6:
+                rfu_REQ_pollSearchChild();
+                break;
+            case 7:
+                rfu_REQ_endSearchChild();
+                break;
+            case 8:
+                break;
+            case 9:
+                rfu_REQ_startSearchParent();
+                break;
+            case 10:
+                rfu_REQ_pollSearchParent();
+                break;
+            case 11:
+                rfu_REQ_endSearchParent();
+                break;
+            case 12:
+                rfu_REQ_startConnectParent(lman.work);
+                break;
+            case 13:
+                rfu_REQ_pollConnectParent();
+                break;
+            case 14:
+                rfu_REQ_endConnectParent();
+                break;
+            case 15:
+                break;
+            case 16:
+                rfu_REQ_CHILD_startConnectRecovery(gRfuLinkStatus->linkLossSlotFlag);
+                break;
+            case 17:
+                rfu_REQ_CHILD_pollConnectRecovery();
+                break;
+            case 18:
+                rfu_REQ_CHILD_endConnectRecovery();
+                break;
+            case 19:
+                rfu_REQ_changeMasterSlave();
+                break;
+            case 20:
+                break;
+            case 21:
+                rfu_REQ_stopMode();
+                break;
+            case 22:
+                break;
+            default:
+                break;
             }
-        } while (gUnknown_3005E10.unk_04 == 18 || gUnknown_3005E10.unk_04 == 19);
-        if (gRfuLinkStatus->parentChild != MODE_PARENT || !sub_80FD850(0))
-        {
-            sub_80FE418();
-            sub_80FE63C();
-            sub_80FE74C();
-            sub_80FE918();
+            rfu_waitREQComplete();
+            lman.active = 0;
         }
+        if (lman.state == LMAN_STATE_END_LINK_RECOVERY || lman.state == LMAN_STATE_MS_CHANGE)
+            ;
+        else
+            break;
     }
+    if (gRfuLinkStatus->parentChild == MODE_PARENT)
+    {
+        if (rfu_LMAN_linkWatcher(0))
+            return;
+    }
+    rfu_LMAN_PARENT_checkRecvChildName();
+    rfu_LMAN_CHILD_checkSendChildName();
+    rfu_LMAN_CHILD_linkRecoveryProcess();
+    rfu_LMAN_checkNICommunicateStatus();
 }
 
-static void sub_80FDC28(u32 a0)
+static void rfu_LMAN_settingPCSWITCH(u32 rand)
 {
-    if (gUnknown_3005E10.unk_07 == 5)
+    if (lman.pcswitch_flag == 5)
     {
-        gUnknown_3005E10.unk_06 = 1;
-        gUnknown_3005E10.unk_04 = 5;
-        gUnknown_3005E10.unk_1a = gUnknown_3005E10.unk_1c;
-        if (gUnknown_3005E10.unk_1a)
+        lman.parent_child = MODE_PARENT;
+        lman.state = 5;
+        lman.connect_period = lman.pcswitch_period_bak;
+        if (lman.connect_period)
         {
-            gUnknown_3005E10.unk_07 = 6;
+            lman.pcswitch_flag = 6;
         }
         else
         {
-            gUnknown_3005E10.unk_07 = 1;
+            lman.pcswitch_flag = 1;
         }
     }
-    if (gUnknown_3005E10.unk_07 == 1)
+    if (lman.pcswitch_flag == 1)
     {
-        gUnknown_3005E10.unk_06 = 1;
-        gUnknown_3005E10.unk_04 = 5;
-        gUnknown_3005E10.unk_1a = a0 % 140;
-        gUnknown_3005E10.unk_1c = 140 - gUnknown_3005E10.unk_1a;
-        if (gUnknown_3005E10.unk_1a)
+        lman.parent_child = MODE_PARENT;
+        lman.state = 5;
+        lman.connect_period = rand % 140;
+        lman.pcswitch_period_bak = 140 - lman.connect_period;
+        if (lman.connect_period)
         {
-            gUnknown_3005E10.unk_07 = 2;
+            lman.pcswitch_flag = 2;
         }
         else
         {
-            gUnknown_3005E10.unk_07 = 3;
+            lman.pcswitch_flag = 3;
         }
     }
-    if (gUnknown_3005E10.unk_07 == 3)
+    if (lman.pcswitch_flag == 3)
     {
-        gUnknown_3005E10.unk_06 = 0;
-        gUnknown_3005E10.unk_1a = 40;
-        gUnknown_3005E10.unk_07 = 4;
-        gUnknown_3005E10.unk_04 = 9;
+        lman.parent_child = MODE_CHILD;
+        lman.connect_period = 40;
+        lman.pcswitch_flag = 4;
+        lman.state = 9;
     }
 }
 
-static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
+static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
 {
     u8 sp0;
     register u8 *stwiRecvBuffer asm("r0");
     u8 *tmp;
     u8 i;
 
-    if (gUnknown_3005E10.unk_0e != 0)
+    if (lman.active != 0)
     {
-        gUnknown_3005E10.unk_0e = 0;
+        lman.active = 0;
         switch (reqCommandId)
         {
         case ID_RESET_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                gUnknown_3005E10.unk_05 = 4;
+                lman.state = lman.next_state;
+                lman.next_state = 4;
             }
             break;
         case ID_SYSTEM_CONFIG_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                gUnknown_3005E10.unk_05 = 0;
+                lman.state = lman.next_state;
+                lman.next_state = 0;
             }
             break;
         case ID_GAME_CONFIG_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                sub_80FE7F0(0x00, 0x00);
+                lman.state = lman.next_state = 0;
+                rfu_LMAN_occureCallback(0x00, 0x00);
             }
             break;
         case ID_SC_START_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 6;
+                lman.state = lman.next_state = 6;
             }
             break;
         case ID_SC_POLL_REQ:
-            if (gUnknown_3005E10.unk_1a && --gUnknown_3005E10.unk_1a == 0)
+            if (lman.connect_period && --lman.connect_period == 0)
             {
-                gUnknown_3005E10.unk_04 = 7;
-                gUnknown_3005E10.unk_05 = 8;
+                lman.state = 7;
+                lman.next_state = 8;
             }
             break;
         case ID_SC_END_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                gUnknown_3005E10.unk_05 = 0;
-                if (gUnknown_3005E10.unk_07 == 0)
+                lman.state = lman.next_state;
+                lman.next_state = 0;
+                if (lman.pcswitch_flag == 0)
                 {
-                    sub_80FE7F0(0x13, 0x00);
+                    rfu_LMAN_occureCallback(0x13, 0x00);
                 }
             }
             break;
         case ID_SP_START_REQ:
             if (reqResult == 0)
             {
-                if (gUnknown_3005E10.unk_0b == 1 && gUnknown_3005E10.unk_1a > 1)
+                if (lman.fastSearchParent_flag == 1 && lman.connect_period > 1)
                 {
-                    gUnknown_3005E10.unk_1a--;
+                    lman.connect_period--;
                 }
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 10;
+                lman.state = lman.next_state = 10;
             }
             break;
         case ID_SP_POLL_REQ:
             if (reqResult == 0)
             {
-                sp0 = sub_80FE778();
-                gUnknown_3005E10.unk_14 = sp0;
+                sp0 = rfu_LMAN_CHILD_checkEnableParentCandidate();
+                lman.param[0] = sp0;
                 if (sp0)
                 {
-                    sub_80FE7F0(0x20, 0x01);
+                    rfu_LMAN_occureCallback(0x20, 0x01);
                 }
-                if (gUnknown_3005E10.unk_0b && gUnknown_3005E10.unk_1a != 1 && gRfuLinkStatus->findParentCount == RFU_CHILD_MAX)
+                if (lman.fastSearchParent_flag && lman.connect_period != 1 && gRfuLinkStatus->findParentCount == RFU_CHILD_MAX)
                 {
                     rfu_REQ_endSearchParent();
                     rfu_waitREQComplete();
-                    gUnknown_3005E10.unk_04 = 9;
-                    gUnknown_3005E10.unk_0b = 1;
+                    lman.state = 9;
+                    lman.fastSearchParent_flag = 1;
                 }
             }
-            if (gUnknown_3005E10.unk_1a && --gUnknown_3005E10.unk_1a == 0)
+            if (lman.connect_period && --lman.connect_period == 0)
             {
-                gUnknown_3005E10.unk_04 = 11;
-                gUnknown_3005E10.unk_05 = 0;
+                lman.state = 11;
+                lman.next_state = 0;
             }
             break;
         case ID_SP_END_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                if (gUnknown_3005E10.unk_07 == 0)
+                lman.state = lman.next_state;
+                if (lman.pcswitch_flag == 0)
                 {
-                    if (gUnknown_3005E10.unk_04 == 0)
+                    if (lman.state == 0)
                     {
-                        sub_80FE7F0(0x21, 0x00);
+                        rfu_LMAN_occureCallback(0x21, 0x00);
                     }
                 }
-                else if (gUnknown_3005E10.unk_07 != 7)
+                else if (lman.pcswitch_flag != 7)
                 {
-                    gUnknown_3005E10.unk_04 = 5;
-                    gUnknown_3005E10.unk_07 = 5;
+                    lman.state = 5;
+                    lman.pcswitch_flag = 5;
                 }
             }
             break;
         case ID_CP_START_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 13;
+                lman.state = lman.next_state = 13;
             }
             break;
         case ID_CP_POLL_REQ:
-            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10) && !sp0)
+            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &lman.child_slot) && !sp0)
             {
-                gUnknown_3005E10.unk_04 = 14;
+                lman.state = 14;
             }
-            if (gUnknown_3005E10.unk_1a && --gUnknown_3005E10.unk_1a == 0)
+            if (lman.connect_period && --lman.connect_period == 0)
             {
-                gUnknown_3005E10.unk_04 = 14;
+                lman.state = 14;
             }
             break;
         case ID_CP_END_REQ:
-            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &gUnknown_3005E10.unk_10))
+            if (reqResult == 0 && !rfu_getConnectParentStatus(&sp0, &lman.child_slot))
             {
                 if (!sp0)
                 {
-                    gUnknown_3005E10.unk_04 = 19;
-                    gUnknown_3005E10.unk_05 = 15;
-                    gUnknown_3005E10.unk_1e = 0x22;
-                    gUnknown_3005E10.unk_14 = gUnknown_3005E10.unk_10;
+                    lman.state = 19;
+                    lman.next_state = 15;
+                    lman.work = 0x22;
+                    lman.param[0] = lman.child_slot;
                 }
                 else
                 {
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                    gUnknown_3005E10.unk_1e = 0x23;
-                    gUnknown_3005E10.unk_14 = sp0;
-                    if (gUnknown_3005E10.unk_07)
+                    lman.state = lman.next_state = 0;
+                    lman.work = 0x23;
+                    lman.param[0] = sp0;
+                    if (lman.pcswitch_flag)
                     {
-                        gUnknown_3005E10.unk_07 = 3;
-                        gUnknown_3005E10.unk_04 = 9;
+                        lman.pcswitch_flag = 3;
+                        lman.state = 9;
                     }
                 }
-                sub_80FE7F0(gUnknown_3005E10.unk_1e, 0x01);
-                gUnknown_3005E10.unk_1e = 0;
+                rfu_LMAN_occureCallback(lman.work, 0x01);
+                lman.work = 0;
             }
             break;
         case ID_CPR_START_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_14 = gRfuLinkStatus->linkLossSlotFlag;
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 17;
-                for (gUnknown_3005E10.unk_10 = 0; gUnknown_3005E10.unk_10 < RFU_CHILD_MAX; gUnknown_3005E10.unk_10++)
+                lman.param[0] = gRfuLinkStatus->linkLossSlotFlag;
+                lman.state = lman.next_state = 17;
+                for (lman.child_slot = 0; lman.child_slot < RFU_CHILD_MAX; lman.child_slot++)
                 {
-                    if ((gRfuLinkStatus->linkLossSlotFlag >> gUnknown_3005E10.unk_10) & 1)
+                    if ((gRfuLinkStatus->linkLossSlotFlag >> lman.child_slot) & 1)
                     {
                         break;
                     }
@@ -745,11 +747,11 @@ static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
         case ID_CPR_POLL_REQ:
             if (reqResult == 0 && !rfu_CHILD_getConnectRecoveryStatus(&sp0) && sp0 < 2)
             {
-                gUnknown_3005E10.unk_04 = 18;
+                lman.state = 18;
             }
-            if (gUnknown_3005E10.unk_34[gUnknown_3005E10.unk_10] && --gUnknown_3005E10.unk_34[gUnknown_3005E10.unk_10] == 0)
+            if (lman.linkRecoveryTimer.count[lman.child_slot] && --lman.linkRecoveryTimer.count[lman.child_slot] == 0)
             {
-                gUnknown_3005E10.unk_04 = 18;
+                lman.state = 18;
             }
             break;
         case ID_CPR_END_REQ:
@@ -757,50 +759,50 @@ static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
             {
                 if (!sp0)
                 {
-                    gUnknown_3005E10.unk_04 = 19;
-                    gUnknown_3005E10.unk_05 = 22;
-                    gUnknown_3005E10.unk_1e = 0x32;
+                    lman.state = 19;
+                    lman.next_state = 22;
+                    lman.work = 0x32;
                 }
                 else
                 {
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                    sub_80FE818(gRfuLinkStatus->linkLossSlotFlag);
-                    gUnknown_3005E10.unk_1e = 0x33;
+                    lman.state = lman.next_state = 0;
+                    rfu_LMAN_disconnect(gRfuLinkStatus->linkLossSlotFlag);
+                    lman.work = 0x33;
                 }
-                gUnknown_3005E10.unk_34[gUnknown_3005E10.unk_10] = 0;
-                gUnknown_3005E10.unk_30 = 0;
-                gUnknown_3005E10.unk_0a = 0;
-                sub_80FE7F0(gUnknown_3005E10.unk_1e, 0x01);
-                gUnknown_3005E10.unk_1e = 0;
+                lman.linkRecoveryTimer.count[lman.child_slot] = 0;
+                lman.linkRecoveryTimer.active = 0;
+                lman.linkRecovery_start_flag = 0;
+                rfu_LMAN_occureCallback(lman.work, 0x01);
+                lman.work = 0;
             }
             break;
         case ID_MS_CHANGE_REQ:
             if (reqResult == 0)
             {
-                if (gUnknown_3005E10.unk_05 == 22)
+                if (lman.next_state == 22)
                 {
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_11;
-                    gUnknown_3005E10.unk_05 = gUnknown_3005E10.unk_12;
-                    gUnknown_3005E10.unk_02 = 1;
-                    sub_80FE7F0(0x41, 0x00);
+                    lman.state = lman.state_bak[0];
+                    lman.next_state = lman.state_bak[1];
+                    lman.childClockSlave_flag = 1;
+                    rfu_LMAN_occureCallback(0x41, 0x00);
                 }
-                else if (gUnknown_3005E10.unk_05 == 15)
+                else if (lman.next_state == 15)
                 {
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05;
-                    gUnknown_3005E10.unk_02 = 1;
-                    sub_80FE7F0(0x41, 0x00);
-                    gUnknown_3005E10.unk_24 |= 1 << gUnknown_3005E10.unk_10;
-                    gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = gUnknown_3005E10.unk_26;
-                    rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
+                    lman.state = lman.next_state;
+                    lman.childClockSlave_flag = 1;
+                    rfu_LMAN_occureCallback(0x41, 0x00);
+                    lman.nameAcceptTimer.active |= 1 << lman.child_slot;
+                    lman.nameAcceptTimer.count[lman.child_slot] = lman.nameAcceptTimer.count_max;
+                    rfu_clearSlot(TYPE_NI_SEND, lman.child_slot);
                     tmp = &sp0;
-                    *tmp = rfu_NI_CHILD_setSendGameName(gUnknown_3005E10.unk_10, 0x0e);
+                    *tmp = rfu_NI_CHILD_setSendGameName(lman.child_slot, 0x0e);
                     if (*tmp)
                     {
-                        gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                        sub_80FEAF4();
-                        sub_80FE818(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
-                        gUnknown_3005E10.unk_14 = sp0;
-                        sub_80FE7F0(0x25, 0x01);
+                        lman.state = lman.next_state = 0;
+                        rfu_LMAN_managerChangeAgbClockMaster();
+                        rfu_LMAN_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
+                        lman.param[0] = sp0;
+                        rfu_LMAN_occureCallback(0x25, 0x01);
                     }
                 }
             }
@@ -808,14 +810,14 @@ static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
         case ID_STOP_MODE_REQ:
             if (reqResult == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                sub_80FE7F0(0x42, 0x00);
+                lman.state = lman.next_state = 0;
+                rfu_LMAN_occureCallback(0x42, 0x00);
             }
             break;
         }
-        gUnknown_3005E10.unk_0e = 1;
+        lman.active = 1;
     }
-    else if (reqResult == 3 && gUnknown_3005E10.unk_0f && (reqCommandId == ID_DATA_TX_REQ || reqCommandId == ID_DATA_RX_REQ || reqCommandId == ID_MS_CHANGE_REQ))
+    else if (reqResult == 3 && lman.msc_exe_flag && (reqCommandId == ID_DATA_TX_REQ || reqCommandId == ID_DATA_RX_REQ || reqCommandId == ID_MS_CHANGE_REQ))
     {
         rfu_REQ_RFUStatus();
         rfu_waitREQComplete();
@@ -825,7 +827,7 @@ static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
             stwiRecvBuffer = rfu_getSTWIRecvBuffer()->rxPacketAlloc.rfuPacket8.data;
             stwiRecvBuffer[4] = gRfuLinkStatus->connSlotFlag;
             stwiRecvBuffer[5] = 1;
-            sub_80FD850(0x29);
+            rfu_LMAN_linkWatcher(0x29);
             reqResult = 0;
         }
     }
@@ -835,130 +837,130 @@ static void sub_80FDC98(u16 reqCommandId, u16 reqResult)
         if (reqResult == 0)
         {
             stwiRecvBuffer = rfu_getSTWIRecvBuffer()->rxPacketAlloc.rfuPacket8.data;
-            gUnknown_3005E10.unk_14 = stwiRecvBuffer[8];
-            sub_80FE83C(gUnknown_3005E10.unk_14);
-            if (gUnknown_3005E10.unk_30)
+            lman.param[0] = stwiRecvBuffer[8];
+            rfu_LMAN_reflectCommunicationStatus(lman.param[0]);
+            if (lman.linkRecoveryTimer.active)
             {
-                gUnknown_3005E10.unk_30 &= ~gUnknown_3005E10.unk_14;
+                lman.linkRecoveryTimer.active &= ~lman.param[0];
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
-                    if ((gUnknown_3005E10.unk_14 >> i) & 1)
+                    if ((lman.param[0] >> i) & 1)
                     {
-                        gUnknown_3005E10.unk_34[i] = 0;
+                        lman.linkRecoveryTimer.count[i] = 0;
                     }
                 }
-                if (gUnknown_3005E10.unk_06 == 0)
+                if (lman.parent_child == 0)
                 {
-                    gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
+                    lman.state = lman.next_state = 0;
                 }
             }
-            sp0 = gUnknown_3005E10.unk_00 & gUnknown_3005E10.unk_14;
+            sp0 = lman.acceptSlot_flag & lman.param[0];
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if ((sp0 >> i) & 1 && gUnknown_3005E10.unk_01)
+                if ((sp0 >> i) & 1 && lman.acceptCount)
                 {
-                    gUnknown_3005E10.unk_01--;
+                    lman.acceptCount--;
                 }
             }
-            gUnknown_3005E10.unk_00 &= ~gUnknown_3005E10.unk_14;
-            if (gUnknown_3005E10.unk_07)
+            lman.acceptSlot_flag &= ~lman.param[0];
+            if (lman.pcswitch_flag)
             {
                 if (gRfuLinkStatus->parentChild == MODE_NEUTRAL)
                 {
-                    if (gUnknown_3005E10.unk_07 == 8)
+                    if (lman.pcswitch_flag == 8)
                     {
-                        gUnknown_3005E10.unk_1a = gUnknown_3005E10.unk_1c;
-                        gUnknown_3005E10.unk_07 = 6;
-                        gUnknown_3005E10.unk_04 = 6;
+                        lman.connect_period = lman.pcswitch_period_bak;
+                        lman.pcswitch_flag = 6;
+                        lman.state = 6;
                     }
-                    else if (gUnknown_3005E10.unk_04 != 6 && gUnknown_3005E10.unk_04 != 7)
+                    else if (lman.state != 6 && lman.state != 7)
                     {
-                        gUnknown_3005E10.unk_07 = 1;
-                        gUnknown_3005E10.unk_04 = 5;
+                        lman.pcswitch_flag = 1;
+                        lman.state = 5;
                     }
                 }
             }
             if (gRfuLinkStatus->parentChild == MODE_NEUTRAL)
             {
-                if (gUnknown_3005E10.unk_04 == 0)
+                if (lman.state == 0)
                 {
-                    gUnknown_3005E10.unk_06 = -1;
+                    lman.parent_child = MODE_NEUTRAL;
                 }
             }
-            if (gUnknown_3005E10.unk_0e == 0)
+            if (lman.active == 0)
             {
-                sub_80FE7F0(0x40, 0x01);
+                rfu_LMAN_occureCallback(0x40, 0x01);
             }
         }
         break;
     case ID_DATA_RX_REQ:
-        sub_80FE6F0();
+        rfu_LMAN_CHILD_checkSendChildName2();
         if (gRfuLinkStatus->parentChild != MODE_NEUTRAL)
         {
-            sub_80FE7F0(0x50, 0x00);
+            rfu_LMAN_occureCallback(0x50, 0x00);
         }
         break;
     case ID_RESET_REQ:
     case ID_STOP_MODE_REQ:
         if (reqResult == 0)
         {
-            gUnknown_3005E10.unk_0d = 0;
-            gUnknown_3005E10.unk_01 = 0;
-            gUnknown_3005E10.unk_00 = 0;;
-            gUnknown_3005E10.unk_06 = -1;
-            sub_80FEAF4();
+            lman.reserveDisconnectSlot_flag = 0;
+            lman.acceptCount = 0;
+            lman.acceptSlot_flag = 0;;
+            lman.parent_child = MODE_NEUTRAL;
+            rfu_LMAN_managerChangeAgbClockMaster();
             if (reqCommandId == 61)
             {
-                sub_80FD484();
+                rfu_LMAN_endManager();
             }
         }
         break;
     }
     if (reqResult != 0)
     {
-        if (reqCommandId == ID_SP_START_REQ && reqResult != 0 && gUnknown_3005E10.unk_07 == 4)
+        if (reqCommandId == ID_SP_START_REQ && reqResult != 0 && lman.pcswitch_flag == 4)
         {
             gRfuLinkStatus->parentChild = MODE_PARENT;
             gRfuLinkStatus->connSlotFlag = 0xF;
-            sub_80FE818(15);
+            rfu_LMAN_disconnect(15);
             rfu_waitREQComplete();
             return;
         }
         else
         {
-            gUnknown_3005E10.unk_14 = reqCommandId;
-            gUnknown_3005E10.unk_16 = reqResult;
-            if (gUnknown_3005E10.unk_0e)
+            lman.param[0] = reqCommandId;
+            lman.param[1] = reqResult;
+            if (lman.active)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
+                lman.state = lman.next_state = 0;
             }
-            sub_80FE7F0(0xf0, 0x02);
-            sub_80FEAF4();
+            rfu_LMAN_occureCallback(0xf0, 0x02);
+            rfu_LMAN_managerChangeAgbClockMaster();
         }
     }
     if (reqCommandId == ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ)
     {
-        sub_80FE7F0(0xf2, 0x00);
-        sub_80FEAF4();
+        rfu_LMAN_occureCallback(0xf2, 0x00);
+        rfu_LMAN_managerChangeAgbClockMaster();
     }
 }
 
-static void sub_80FE394(u16 reqCommandId)
+static void rfu_LMAN_MSC_callback(u16 reqCommandId)
 {
     u8 r7;
     u8 ackFlag;
 
-    r7 = gUnknown_3005E10.unk_0e;
-    gUnknown_3005E10.unk_0e = 0;
-    gUnknown_3005E10.unk_0f = 1;
+    r7 = lman.active;
+    lman.active = 0;
+    lman.msc_exe_flag = 1;
     if (gRfuLinkStatus->parentChild == MODE_CHILD)
     {
-        sub_80FD850(reqCommandId);
-        if (gUnknown_3005E10.unk_02 != 1)
+        rfu_LMAN_linkWatcher(reqCommandId);
+        if (lman.childClockSlave_flag != 1)
         {
-            sub_80FEAF4();
-            gUnknown_3005E10.unk_0f = 0;
-            gUnknown_3005E10.unk_0e = r7;
+            rfu_LMAN_managerChangeAgbClockMaster();
+            lman.msc_exe_flag = 0;
+            lman.active = r7;
             return;
         }
     }
@@ -966,23 +968,23 @@ static void sub_80FE394(u16 reqCommandId)
     {
         if (!rfu_UNI_PARENT_getDRAC_ACK(&ackFlag))
         {
-            gUnknown_3005E10.unk_03 |= ackFlag;
+            lman.parentAck_flag |= ackFlag;
         }
     }
-    if (gUnknown_3005E10.unk_44 != NULL)
+    if (lman.MSC_callback != NULL)
     {
-        gUnknown_3005E10.unk_44(reqCommandId);
+        lman.MSC_callback(reqCommandId);
         rfu_waitREQComplete();
-        if (gUnknown_3005E10.unk_02 == 2)
+        if (lman.childClockSlave_flag == 2)
         {
-            sub_80FEAF4();
+            rfu_LMAN_managerChangeAgbClockMaster();
         }
     }
-    gUnknown_3005E10.unk_0f = 0;
-    gUnknown_3005E10.unk_0e = r7;
+    lman.msc_exe_flag = 0;
+    lman.active = r7;
 }
 
-static void sub_80FE418(void)
+static void rfu_LMAN_PARENT_checkRecvChildName(void)
 {
     u8 flags;
     u8 sp0;
@@ -991,14 +993,14 @@ static void sub_80FE418(void)
     u8 r4;
     const u16 *ptr;
 
-    if (gUnknown_3005E10.unk_04 == 5 || gUnknown_3005E10.unk_04 == 6 || gUnknown_3005E10.unk_04 == 7 || gUnknown_3005E10.unk_04 == 8)
+    if (lman.state == 5 || lman.state == 6 || lman.state == 7 || lman.state == 8)
     {
-        flags = ((gRfuLinkStatus->connSlotFlag ^ gUnknown_3005E10.unk_0c) & gRfuLinkStatus->connSlotFlag) & ~gRfuLinkStatus->getNameFlag;
-        gUnknown_3005E10.unk_0c = gRfuLinkStatus->connSlotFlag;
+        flags = ((gRfuLinkStatus->connSlotFlag ^ lman.connectSlot_flag_old) & gRfuLinkStatus->connSlotFlag) & ~gRfuLinkStatus->getNameFlag;
+        lman.connectSlot_flag_old = gRfuLinkStatus->connSlotFlag;
         if (flags)
         {
-            gUnknown_3005E10.unk_14 = flags;
-            sub_80FE7F0(0x10, 0x01);
+            lman.param[0] = flags;
+            rfu_LMAN_occureCallback(0x10, 0x01);
         }
         sp0 = 0x00;
         for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -1007,22 +1009,22 @@ static void sub_80FE418(void)
             r5 = 0x00;
             if (flags & r4)
             {
-                gUnknown_3005E10.unk_28[i] = gUnknown_3005E10.unk_26;
-                gUnknown_3005E10.unk_24 |= r4;
+                lman.nameAcceptTimer.count[i] = lman.nameAcceptTimer.count_max;
+                lman.nameAcceptTimer.active |= r4;
             }
-            else if (gUnknown_3005E10.unk_24 & r4)
+            else if (lman.nameAcceptTimer.active & r4)
             {
                 if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS)
                 {
                     if (gRfuSlotStatusNI[i]->recv.dataType == 1) // Game identification information
                     {
                         r5 = 0x02;
-                        for (ptr = gUnknown_3005E10.unk_20; *ptr != 0xFFFF; ptr++)
+                        for (ptr = lman.acceptable_serialNo_list; *ptr != 0xFFFF; ptr++)
                         {
                             if (gRfuLinkStatus->partner[i].serialNo == *ptr)
                             {
-                                gUnknown_3005E10.unk_00 |= r4;
-                                gUnknown_3005E10.unk_01++;
+                                lman.acceptSlot_flag |= r4;
+                                lman.acceptCount++;
                                 sp0 |= r4;
                                 r5 |= 0x01;
                                 break;
@@ -1034,139 +1036,139 @@ static void sub_80FE418(void)
                         }
                     }
                 }
-                else if (--gUnknown_3005E10.unk_28[i] == 0)
+                else if (--lman.nameAcceptTimer.count[i] == 0)
                 {
                     r5 = 0x06;
                 }
                 if (r5 & 0x02)
                 {
-                    gUnknown_3005E10.unk_24 &= ~r4;
-                    gUnknown_3005E10.unk_28[i] = 0;
+                    lman.nameAcceptTimer.active &= ~r4;
+                    lman.nameAcceptTimer.count[i] = 0;
                     rfu_clearSlot(TYPE_NI_RECV, i);
                 }
                 if (r5 & 0x04)
                 {
-                    gUnknown_3005E10.unk_0d |= r4;
+                    lman.reserveDisconnectSlot_flag |= r4;
                 }
             }
         }
         if (sp0)
         {
-            gUnknown_3005E10.unk_14 = sp0;
-            sub_80FE7F0(0x11, 0x01);
+            lman.param[0] = sp0;
+            rfu_LMAN_occureCallback(0x11, 0x01);
         }
-        if (gUnknown_3005E10.unk_0d)
+        if (lman.reserveDisconnectSlot_flag)
         {
             r5 = 0x01;
-            if (gRfuLinkStatus->sendSlotUNIFlag && ((gUnknown_3005E10.unk_03 & gUnknown_3005E10.unk_00) != gUnknown_3005E10.unk_00))
+            if (gRfuLinkStatus->sendSlotUNIFlag && ((lman.parentAck_flag & lman.acceptSlot_flag) != lman.acceptSlot_flag))
             {
                 r5 = 0x00;
             }
             if (r5)
             {
-                sub_80FE818(gUnknown_3005E10.unk_0d);
-                gUnknown_3005E10.unk_14 = gUnknown_3005E10.unk_0d;
-                gUnknown_3005E10.unk_0d = 0;
-                sub_80FE7F0(0x12, 0x01);
+                rfu_LMAN_disconnect(lman.reserveDisconnectSlot_flag);
+                lman.param[0] = lman.reserveDisconnectSlot_flag;
+                lman.reserveDisconnectSlot_flag = 0;
+                rfu_LMAN_occureCallback(0x12, 0x01);
             }
         }
-        if (gUnknown_3005E10.unk_24 == 0 && gUnknown_3005E10.unk_04 == 8)
+        if (lman.nameAcceptTimer.active == 0 && lman.state == 8)
         {
-            if (gUnknown_3005E10.unk_07 == 0)
+            if (lman.pcswitch_flag == 0)
             {
-                gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-                sub_80FE7F0(0x14, 0x00);
+                lman.state = lman.next_state = 0;
+                rfu_LMAN_occureCallback(0x14, 0x00);
             }
             else
             {
-                if (gUnknown_3005E10.unk_07 == 2)
+                if (lman.pcswitch_flag == 2)
                 {
-                    gUnknown_3005E10.unk_07 = 3;
-                    gUnknown_3005E10.unk_04 = 9;
+                    lman.pcswitch_flag = 3;
+                    lman.state = 9;
                 }
                 else
                 {
-                    gUnknown_3005E10.unk_07 = 1;
-                    gUnknown_3005E10.unk_04 = 5;
+                    lman.pcswitch_flag = 1;
+                    lman.state = 5;
                 }
-                if (gUnknown_3005E10.unk_00)
+                if (lman.acceptSlot_flag)
                 {
-                    gUnknown_3005E10.unk_1a = 0;
-                    gUnknown_3005E10.unk_07 = 8;
-                    gUnknown_3005E10.unk_04 = 5;
+                    lman.connect_period = 0;
+                    lman.pcswitch_flag = 8;
+                    lman.state = 5;
                 }
             }
         }
     }
 }
 
-static void sub_80FE63C(void)
+static void rfu_LMAN_CHILD_checkSendChildName(void)
 {
     u16 imeBak = REG_IME;
     REG_IME = 0;
-    if (gUnknown_3005E10.unk_04 == 15)
+    if (lman.state == 15)
     {
-        if (--gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] == 0 || gRfuSlotStatusNI[gUnknown_3005E10.unk_10]->send.state == SLOT_STATE_SEND_FAILED)
+        if (--lman.nameAcceptTimer.count[lman.child_slot] == 0 || gRfuSlotStatusNI[lman.child_slot]->send.state == SLOT_STATE_SEND_FAILED)
         {
-            sub_80FEB14();
-            gUnknown_3005E10.unk_04 = 24;
-            rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
-            gUnknown_3005E10.unk_24 &= ~(1 << gUnknown_3005E10.unk_10);
-            gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = 0;
+            rfu_LMAN_requestChangeAgbClockMaster();
+            lman.state = 24;
+            rfu_clearSlot(TYPE_NI_SEND, lman.child_slot);
+            lman.nameAcceptTimer.active &= ~(1 << lman.child_slot);
+            lman.nameAcceptTimer.count[lman.child_slot] = 0;
         }
     }
     REG_IME = imeBak;
-    if (gUnknown_3005E10.unk_04 == 24)
+    if (lman.state == 24)
     {
-        if (gUnknown_3005E10.unk_02 == 1)
+        if (lman.childClockSlave_flag == 1)
         {
-            sub_80FEB14();
+            rfu_LMAN_requestChangeAgbClockMaster();
         }
-        if (gUnknown_3005E10.unk_02 == 0)
+        if (lman.childClockSlave_flag == 0)
         {
-            gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-            sub_80FE818(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
-            gUnknown_3005E10.unk_14 = 0;
-            sub_80FE7F0(0x25, 0x01);
+            lman.state = lman.next_state = 0;
+            rfu_LMAN_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
+            lman.param[0] = 0;
+            rfu_LMAN_occureCallback(0x25, 0x01);
         }
     }
 }
 
-static void sub_80FE6F0(void)
+static void rfu_LMAN_CHILD_checkSendChildName2(void)
 {
-    if (gUnknown_3005E10.unk_04 == 15 && gRfuSlotStatusNI[gUnknown_3005E10.unk_10]->send.state == SLOT_STATE_SEND_SUCCESS)
+    if (lman.state == 15 && gRfuSlotStatusNI[lman.child_slot]->send.state == SLOT_STATE_SEND_SUCCESS)
     {
-        gUnknown_3005E10.unk_04 = gUnknown_3005E10.unk_05 = 0;
-        rfu_clearSlot(TYPE_NI_SEND, gUnknown_3005E10.unk_10);
-        gUnknown_3005E10.unk_24 &= ~(1 << gUnknown_3005E10.unk_10);
-        gUnknown_3005E10.unk_28[gUnknown_3005E10.unk_10] = 0;
-        sub_80FE7F0(0x24, 0x00);
+        lman.state = lman.next_state = 0;
+        rfu_clearSlot(TYPE_NI_SEND, lman.child_slot);
+        lman.nameAcceptTimer.active &= ~(1 << lman.child_slot);
+        lman.nameAcceptTimer.count[lman.child_slot] = 0;
+        rfu_LMAN_occureCallback(0x24, 0x00);
     }
 }
 
-static void sub_80FE74C(void)
+static void rfu_LMAN_CHILD_linkRecoveryProcess(void)
 {
-    if (gUnknown_3005E10.unk_06 == 0 && gUnknown_3005E10.unk_0a == 1)
+    if (lman.parent_child == 0 && lman.linkRecovery_start_flag == 1)
     {
-        gUnknown_3005E10.unk_11 = gUnknown_3005E10.unk_04;
-        gUnknown_3005E10.unk_12 = gUnknown_3005E10.unk_05;
-        gUnknown_3005E10.unk_04 = 16;
-        gUnknown_3005E10.unk_05 = 17;
-        gUnknown_3005E10.unk_0a = 2;
+        lman.state_bak[0] = lman.state;
+        lman.state_bak[1] = lman.next_state;
+        lman.state = 16;
+        lman.next_state = 17;
+        lman.linkRecovery_start_flag = 2;
     }
 }
 
-static u8 sub_80FE778(void)
+static u8 rfu_LMAN_CHILD_checkEnableParentCandidate(void)
 {
     u8 i;
-    const u16 *ptr;
+    u16 *serialNo;
     u8 flags = 0x00;
 
     for (i = 0; i < gRfuLinkStatus->findParentCount; i++)
     {
-        for (ptr = gUnknown_3005E10.unk_20; *ptr != 0xFFFF; ptr++)
+        for (serialNo = lman.acceptable_serialNo_list; *serialNo != 0xFFFF; serialNo++)
         {
-            if (gRfuLinkStatus->partner[i].serialNo == *ptr)
+            if (gRfuLinkStatus->partner[i].serialNo == *serialNo)
             {
                 flags |= (1 << i);
             }
@@ -1175,25 +1177,25 @@ static u8 sub_80FE778(void)
     return flags;
 }
 
-static void sub_80FE7F0(u8 a0, u8 a1)
+static void rfu_LMAN_occureCallback(u8 a0, u8 a1)
 {
-    if (gUnknown_3005E10.unk_40 != NULL)
+    if (lman.LMAN_callback != NULL)
     {
-        gUnknown_3005E10.unk_40(a0, a1);
+        lman.LMAN_callback(a0, a1);
     }
-    gUnknown_3005E10.unk_14 = gUnknown_3005E10.unk_16 = 0;
+    lman.param[0] = lman.param[1] = 0;
 }
 
-static void sub_80FE818(u8 a0)
+static void rfu_LMAN_disconnect(u8 a0)
 {
-    u8 unk_0e_bak = gUnknown_3005E10.unk_0e;
-    gUnknown_3005E10.unk_0e = 1;
+    u8 unk_0e_bak = lman.active;
+    lman.active = 1;
     rfu_REQ_disconnect(a0);
     rfu_waitREQComplete();
-    gUnknown_3005E10.unk_0e = unk_0e_bak;
+    lman.active = unk_0e_bak;
 }
 
-static void sub_80FE83C(u8 a0)
+static void rfu_LMAN_reflectCommunicationStatus(u8 a0)
 {
     u8 i;
 
@@ -1230,13 +1232,13 @@ static void sub_80FE83C(u8 a0)
     }
 }
 
-static void sub_80FE918(void)
+static void rfu_LMAN_checkNICommunicateStatus(void)
 {
     u8 i;
     u8 j;
     u8 flags;
 
-    if (gUnknown_3005E10.unk_18)
+    if (lman.NI_failCounter_limit)
     {
         if (gRfuLinkStatus->sendSlotNIFlag)
         {
@@ -1247,7 +1249,7 @@ static void sub_80FE918(void)
                     flags = 0;
                     for (j = 0; j < RFU_CHILD_MAX; j++)
                     {
-                        if ((gRfuSlotStatusNI[i]->send.bmSlot >> j) & 1 && gRfuSlotStatusNI[j]->send.failCounter > gUnknown_3005E10.unk_18)
+                        if ((gRfuSlotStatusNI[i]->send.bmSlot >> j) & 1 && gRfuSlotStatusNI[j]->send.failCounter > lman.NI_failCounter_limit)
                         {
                             flags |= (1 << j);
                         }
@@ -1263,7 +1265,7 @@ static void sub_80FE918(void)
         {
             for (i = 0; i < RFU_CHILD_MAX; i++)
             {
-                if (gRfuSlotStatusNI[i]->recv.state & SLOT_BUSY_FLAG && gRfuSlotStatusNI[i]->recv.failCounter > gUnknown_3005E10.unk_18)
+                if (gRfuSlotStatusNI[i]->recv.state & SLOT_BUSY_FLAG && gRfuSlotStatusNI[i]->recv.failCounter > lman.NI_failCounter_limit)
                 {
                     rfu_NI_stopReceivingData(i);
                 }
@@ -1272,109 +1274,109 @@ static void sub_80FE918(void)
     }
 }
 
-void sub_80FEA10(void (*func)(u16))
+void rfu_LMAN_setMSCCallback(void (*func)(u16))
 {
-    gUnknown_3005E10.unk_44 = func;
-    rfu_setMSCCallback(sub_80FE394);
+    lman.MSC_callback = func;
+    rfu_setMSCCallback(rfu_LMAN_MSC_callback);
 }
 
-static void sub_80FEA28(void (*func)(u8, u8))
+static void rfu_LMAN_setLMANCallback(void (*func)(u8, u8))
 {
-    gUnknown_3005E10.unk_40 = func;
+    lman.LMAN_callback = func;
 }
 
-u8 sub_80FEA34(u8 a0, u16 a1)
+u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period)
 {
     u16 imeBak;
-    if (gUnknown_3005E10.unk_09 && a0 == 0 && gUnknown_3005E10.unk_30)
+    if (lman.linkRecovery_enable && enable_flag == 0 && lman.linkRecoveryTimer.active)
     {
         return 5;
     }
     imeBak = REG_IME;
     REG_IME = 0;
-    gUnknown_3005E10.unk_09 = a0;
-    gUnknown_3005E10.unk_32 = a1;
+    lman.linkRecovery_enable = enable_flag;
+    lman.linkRecoveryTimer.count_max = recovery_period;
     REG_IME = imeBak;
     return 0;
 }
 
-static u8 sub_80FEA78(u16 a0)
+static u8 rfu_LMAN_setNIFailCounterLimit(u16 NI_failCounter_limit)
 {
     if (gRfuLinkStatus->sendSlotNIFlag | gRfuLinkStatus->recvSlotNIFlag)
     {
-        gUnknown_3005E10.unk_14 = 6;
-        sub_80FE7F0(0xf3, 0x01);
+        lman.param[0] = 6;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 6;
     }
-    gUnknown_3005E10.unk_18 = a0;
+    lman.NI_failCounter_limit = NI_failCounter_limit;
     return 0;
 }
 
-static u8 sub_80FEAB4(u8 a0)
+static u8 rfu_LMAN_setFastSearchParent(u8 enable_flag)
 {
-    if (gUnknown_3005E10.unk_04 == 9 || gUnknown_3005E10.unk_04 == 10 || gUnknown_3005E10.unk_04 == 11)
+    if (lman.state == 9 || lman.state == 10 || lman.state == 11)
     {
-        gUnknown_3005E10.unk_14 = 7;
-        sub_80FE7F0(0xf3, 0x01);
+        lman.param[0] = 7;
+        rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 0x01);
         return 7;
     }
-    if (a0)
+    if (enable_flag)
     {
-        gUnknown_3005E10.unk_0b = 1;
+        lman.fastSearchParent_flag = 1;
     }
     else
     {
-        gUnknown_3005E10.unk_0b = 0;
+        lman.fastSearchParent_flag = 0;
     }
     return 0;
 }
 
-static void sub_80FEAF4(void)
+static void rfu_LMAN_managerChangeAgbClockMaster(void)
 {
-    if (gUnknown_3005E10.unk_02)
+    if (lman.childClockSlave_flag)
     {
-        gUnknown_3005E10.unk_02 = 0;
-        sub_80FE7F0(0x45, 0x00);
+        lman.childClockSlave_flag = 0;
+        rfu_LMAN_occureCallback(0x45, 0x00);
     }
 }
 
-void sub_80FEB14(void)
+void rfu_LMAN_requestChangeAgbClockMaster(void)
 {
-    if (gUnknown_3005E10.unk_02 == 0)
+    if (lman.childClockSlave_flag == 0)
     {
-        sub_80FE7F0(0x45, 0x00);
+        rfu_LMAN_occureCallback(0x45, 0x00);
     }
-    else if (gUnknown_3005E10.unk_02 == 1)
+    else if (lman.childClockSlave_flag == 1)
     {
-        gUnknown_3005E10.unk_02 = 2;
+        lman.childClockSlave_flag = 2;
     }
 }
 
-void sub_80FEB3C(void)
+void rfu_LMAN_forceChangeSP(void)
 {
-    if (gUnknown_3005E10.unk_07)
+    if (lman.pcswitch_flag)
     {
-        switch (gUnknown_3005E10.unk_04)
+        switch (lman.state)
         {
         case 5:
-            gUnknown_3005E10.unk_07 = 3;
-            gUnknown_3005E10.unk_04 = 9;
+            lman.pcswitch_flag = 3;
+            lman.state = 9;
             break;
         case 6:
-            gUnknown_3005E10.unk_07 = 2;
-            gUnknown_3005E10.unk_1a = 1;
+            lman.pcswitch_flag = 2;
+            lman.connect_period = 1;
             break;
         case 7:
         case 8:
-            gUnknown_3005E10.unk_07 = 2;
+            lman.pcswitch_flag = 2;
             break;
         case 9:
         case 10:
-            gUnknown_3005E10.unk_1a = 40;
+            lman.connect_period = 40;
             break;
         case 11:
-            gUnknown_3005E10.unk_1a = 40;
-            gUnknown_3005E10.unk_04 = 10;
+            lman.connect_period = 40;
+            lman.state = 10;
             break;
         }
     }

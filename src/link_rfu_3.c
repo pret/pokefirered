@@ -633,7 +633,7 @@ bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal;
 
-    if (gUnknown_3005E10.unk_06 == 1)
+    if (lman.parent_child == MODE_PARENT)
     {
         retVal = TRUE;
         if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))

@@ -235,7 +235,7 @@ bool8 IsWirelessAdapterConnected(void)
     sub_800B1F4();
     sub_80F86F4();
     sub_80FB128(TRUE);
-    if (sub_80FD3A4() == RFU_ID)
+    if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
     {
         rfu_REQ_stopMode();
         rfu_waitREQComplete();

@@ -1448,7 +1448,7 @@ static void CheckErrorStatus(void)
     }
 }
 
-void sub_800ACBC(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06)
 {
     sLinkErrorBuffer.status = status;
     sLinkErrorBuffer.lastSendQueueCount = lastSendQueueCount;
@@ -1670,8 +1670,8 @@ bool8 HandleLinkConnection(void)
     }
     else
     {
-        r4 = sub_80FAE94();
-        r5 = sub_80FAEF0();
+        r4 = LinkRfuMain1();
+        r5 = LinkRfuMain2();
         if (sub_8058318() == TRUE)
         {
             if (r4 == TRUE || IsRfuRecvQueueEmpty() || r5)

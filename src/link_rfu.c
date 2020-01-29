@@ -825,7 +825,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
             stwiRecvBuffer = rfu_getSTWIRecvBuffer() + 4;
             *stwiRecvBuffer++ = gRfuLinkStatus->connSlotFlag;
             *stwiRecvBuffer = REASON_LINK_LOSS;
-            rfu_LMAN_linkWatcher(0x29);
+            rfu_LMAN_linkWatcher(ID_DISCONNECTED_AND_CHANGE_REQ);
             reqResult = 0;
         }
     }
@@ -906,7 +906,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
             lman.acceptSlot_flag = 0;;
             lman.parent_child = MODE_NEUTRAL;
             rfu_LMAN_managerChangeAgbClockMaster();
-            if (reqCommandId == 61)
+            if (reqCommandId == ID_STOP_MODE_REQ)
             {
                 rfu_LMAN_endManager();
             }

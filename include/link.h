@@ -277,7 +277,7 @@ void LinkVSync(void);
 bool8 HandleLinkConnection(void);
 void sub_800B0B4(void);
 void sub_800B110(u32 who);
-void sub_800ACBC(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 u8 sub_800A8D4(void);
 
 #endif // GUARD_LINK_H

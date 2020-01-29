@@ -259,18 +259,17 @@ struct UnkRfuStruct_Sub_Unused
     /* 0x203 */ vu8 unk_203;
 };
 
-struct UnkRfuStruct_2
+typedef struct UnkRfuStruct_2
 {
     /* 0x000 */ void (*RfuFunc)(void);
     /* 0x004 */ u16 unk_04;
     /* 0x006 */ u8 filler_06[4];
-    /* 0x00a */ u16 unk_0a;
+    /* 0x00a */ u16 linkman_msg;
     /* 0x00c */ u8 unk_0c; // parentChildMode?
     /* 0x00d */ u8 playerCount;
     /* 0x00e */ u8 unk_0e;
     /* 0x00f */ u8 unk_0f;
-    /* 0x010 */ u16 unk_10;
-    /* 0x012 */ u16 unk_12;
+    /* 0x010 */ u16 linkman_param[2];
     /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
     /* 0x05a */ u8 unk_5a;
@@ -286,7 +285,7 @@ struct UnkRfuStruct_2
     /* 0x0e9 */ u8 unk_e9[5];
     /* 0x0ee */ vu8 unk_ee;
     /* 0x0ef */ u8 unk_ef;
-    /* 0x0f0 */ u8 unk_f0;
+    /* 0x0f0 */ u8 linkLossRecoveryState;
     /* 0x0f1 */ u8 unk_f1;
     /* 0x0f2 */ u16 unk_f2[6];
     /* 0x0fe */ u16 unk_fe;
@@ -302,7 +301,7 @@ struct UnkRfuStruct_2
     /* 0x8f7 */ u8 unk_c3f[70];
     /* 0x93d */ u8 unk_c85;
     /* 0x93e */ u8 unk_c86;
-    /* 0x93f */ u8 unk_c87[5][7][2];
+    /* 0x93f */ u8 recvCmds[5][7][2];
     /* 0x985 */ u8 unk_ccd;
     /* 0x986 */ u8 unk_cce; // childId
     /* 0x987 */ u8 unk_ccf;
@@ -315,8 +314,8 @@ struct UnkRfuStruct_2
     /* 0x994 */ vu8 unk_cdc;
     /* 0x995 */ u8 unk_cdd;
     /* 0x996 */ u8 unk_cde[RFU_CHILD_MAX];
-    /* 0x99a */ u8 unk_ce2;
-    /* 0x99b */ u8 unk_ce3;
+    /* 0x99a */ u8 bm_PartnerFlags;
+    /* 0x99b */ u8 bm_DisconnectSlot;
     /* 0x99c */ u8 unk_ce4;
     /* 0x99d */ u8 unk_ce5;
     /* 0x99e */ u8 unk_ce6;
@@ -325,12 +324,29 @@ struct UnkRfuStruct_2
     /* 0x9a1 */ u8 unk_ce9;
     /* 0x9a2 */ u8 unk_cea[RFU_CHILD_MAX];
     /* 0x9a6 */ u8 unk_cee[RFU_CHILD_MAX];
-}; // size: 0x9AC
+} GF_RFU_MANAGER; // size: 0x9AC
 
 extern struct linkManagerTag lman;
 extern struct GFtgtGname gHostRFUtgtGnameBuffer;
 extern u8 gHostRFUtgtUnameBuffer[];
 
+// Official signatures
+u32 rfu_LMAN_REQBN_softReset_and_checkID(void);
+void rfu_LMAN_requestChangeAgbClockMaster(void);
+void rfu_LMAN_initializeRFU(INIT_PARAM *init_params);
+u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list);
+void rfu_LMAN_stopManager(bool8 forced_stop_and_RFU_reset_flag);
+void rfu_LMAN_setMSCCallback(void (*MSC_callback_p)(u16));
+void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag);
+void rfu_LMAN_powerDownRFU(void);
+u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 connect_period);
+u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period);
+void rfu_LMAN_manager_entity(u32 rand);
+void rfu_LMAN_syncVBlank(void);
+u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u16));
+void rfu_LMAN_forceChangeSP(void);
+
+// GameFreak signatures
 void AddTextPrinterToWindow1(const u8 *str);
 bool32 MG_PrintTextOnWindow1AndWaitButton(u8 * cmdPtr, const u8 * src);
 void LinkRfu_FatalError(void);
@@ -346,11 +362,10 @@ u8 sub_8116DE0(void);
 void sub_80FBB4C(void);
 void sub_80F86F4(void);
 void sub_80FB128(bool32 a0);
-u32 rfu_LMAN_REQBN_softReset_and_checkID(void);
 bool32 IsSendingKeysToRfu(void);
 void Rfu_set_zero(void);
 u8 GetRfuPlayerCount(void);
-void sub_80F9828(void);
+void StartSendingKeysToRfu(void);
 u8 LinkRfu_GetMultiplayerId(void);
 bool32 Rfu_InitBlockSend(const u8 * src, size_t size);
 bool8 sub_80FA0F8(u8 a0);
@@ -367,36 +382,23 @@ void sub_80F8DC0(void);
 void sub_80FBB20(void);
 bool8 sub_80FA484(bool32 a0);
 void var_800D_set_xB(void);
-struct GFtgtGname *sub_80F9800(void);
+struct GFtgtGname *GetHostRFUtgtGname(void);
 void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
-void rfu_LMAN_requestChangeAgbClockMaster(void);
 bool32 sub_80FBA00(void);
 
 void sub_80FC478(struct UnkRfuStruct_2_Sub_124 *ptr);
 void sub_80FC4D4(struct UnkRfuStruct_2_Sub_9e8 *ptr);
 
-void rfu_LMAN_initializeRFU(INIT_PARAM *init_params);
-u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_accept_period, u16 *acceptable_serialNo_list);
-void rfu_LMAN_stopManager(bool8 a0);
-void rfu_LMAN_setMSCCallback(void (*func)(u16));
-void sub_80FB9E4(u8 a0, u16 a1);
+void sub_80FB9E4(u8 a0, u16 msg);
 u8 sub_80FB9F4(void);
-void rfu_LMAN_REQ_sendData(bool8 clockChangeFlag);
 void sub_80FC588(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
-void rfu_LMAN_powerDownRFU(void);
-u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 unk_1a);
 bool8 sub_80FC79C(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
 bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 void sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
 bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
 void sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
-u8 rfu_LMAN_setLinkRecovery(u8 a0, u16 a1);
-void rfu_LMAN_manager_entity(u32 a0);
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3);
-void rfu_LMAN_syncVBlank(void);
-u8 rfu_LMAN_initializeManager(void (*func1)(u8, u8), void (*func2)(u16));
-void rfu_LMAN_forceChangeSP(void);
 void sub_80FAFE0(u8 a0);
 bool32 sub_80FA44C(u32 a0);
 bool8 sub_80FC1B0(void);

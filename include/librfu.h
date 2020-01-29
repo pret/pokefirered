@@ -473,16 +473,6 @@ struct RfuSIO32Id
     u16 unkA;
 };
 
-struct RfuAPIBuffer
-{
-    struct RfuLinkStatus linkStatus;
-    struct RfuStatic static_;
-    struct RfuFixed fixed;
-    struct RfuSlotStatusNI NI[RFU_CHILD_MAX];
-    struct RfuSlotStatusUNI UNI[RFU_CHILD_MAX];
-    struct RfuIntrStruct intr;
-};
-
 extern struct STWIStatus *gSTWIStatus;
 extern struct RfuLinkStatus *gRfuLinkStatus;
 extern struct RfuStatic *gRfuStatic;
@@ -499,7 +489,7 @@ s32 AgbRFU_checkID(u8);
 // librfu_rfu
 // API Initialization and Initial Settings
     // API Initialization
-u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
+u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam);
     // Set Timer Interrupt
 void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p);
     // Resident Function called from within a V-Blank Interrupt
@@ -600,7 +590,7 @@ u16 rfu_MBOOT_CHILD_inheritanceLinkStatus(void);
 
 // For Debug
     // Obtain address of the SWTI-layer receive buffer
-struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void);
+u8 *rfu_getSTWIRecvBuffer(void);
     // Obtain RFU state
 void rfu_REQ_RFUStatus(void);
 u16 rfu_getRFUStatus(u8 *rfuState);

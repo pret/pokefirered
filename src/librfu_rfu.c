@@ -91,7 +91,7 @@ static const char lib_ver[] = "RFU_V1024";
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
-u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
+u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
 {
     u16 i;
     u16 *dst;
@@ -109,21 +109,21 @@ u16 rfu_initializeAPI(struct RfuAPIBuffer *APIBuffer, u16 buffByteSize, IntrFunc
         // An assert/debug print may have existed before, ie
         // printf("%s %u < %u", "somefile.c:12345", buffByteSize, num)
         // to push this into r3?
-        r3 = sizeof(struct RfuAPIBuffer);
+        r3 = RFU_API_BUFF_SIZE_RAM - 0x28;
         if (buffByteSize < r3)
             return ERR_RFU_API_BUFF_SIZE;
     }
     if (!copyInterruptToRam)
     {
-        r3 = 0x504; // same issue as above
+        r3 = RFU_API_BUFF_SIZE_ROM - 0x28; // same issue as above
         if (buffByteSize < r3)
             return ERR_RFU_API_BUFF_SIZE;
     }
-    gRfuLinkStatus = &APIBuffer->linkStatus;
-    gRfuStatic = &APIBuffer->static_;
-    gRfuFixed = &APIBuffer->fixed;
-    gRfuSlotStatusNI[0] = &APIBuffer->NI[0];
-    gRfuSlotStatusUNI[0] = &APIBuffer->UNI[0];
+    gRfuLinkStatus = (void *)APIBuffer + 0;
+    gRfuStatic = (void *)APIBuffer + 0xb4;
+    gRfuFixed = (void *)APIBuffer + 0xdc;
+    gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc;
+    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c;
     for (i = 1; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
@@ -180,20 +180,20 @@ void rfu_REQ_PARENT_resumeRetransmitAndChange(void)
 
 u16 rfu_UNI_PARENT_getDRAC_ACK(u8 *ackFlag)
 {
-    struct RfuIntrStruct *buf;
+    u8 *buf;
 
     *ackFlag = 0;
     if (gRfuLinkStatus->parentChild != MODE_PARENT)
         return ERR_MODE_NOT_PARENT;
     buf = rfu_getSTWIRecvBuffer();
-    switch (buf->rxPacketAlloc.rfuPacket8.data[0])
+    switch (*buf)
     {
     case 40:
     case 54:
-        if (buf->rxPacketAlloc.rfuPacket8.data[1] == 0)
+        if (buf[1] == 0)
             *ackFlag = gRfuLinkStatus->connSlotFlag;
         else
-            *ackFlag = buf->rxPacketAlloc.rfuPacket8.data[4];
+            *ackFlag = buf[4];
         return 0;
     default:
         return ERR_REQ_CMD_ID;
@@ -205,9 +205,9 @@ void rfu_setTimerInterrupt(u8 timerNo, IntrFunc *timerIntrTable_p)
     STWI_init_timer(timerIntrTable_p, timerNo);
 }
 
-struct RfuIntrStruct *rfu_getSTWIRecvBuffer(void)
+u8 *rfu_getSTWIRecvBuffer(void)
 {
-    return gRfuFixed->STWIBuffer;
+    return (u8 *)gRfuFixed->STWIBuffer;
 }
 
 void rfu_setMSCCallback(void (*callback)(u16 reqCommandId))
@@ -2035,6 +2035,7 @@ static void rfu_STC_NI_receive_Sender(u8 r0, u8 r10, const struct RfuLocalStruct
                 }
             }
         _081E30AE:
+            ;
         }
         else if (r12->state == SLOT_STATE_SEND_LAST)
         {

@@ -3089,20 +3089,20 @@ static void sub_81186E0(u8 taskId)
         }
         break;
     case 42:
-        if (sub_80F9800()->species == SPECIES_NONE)
+        if (GetHostRFUtgtGname()->species == SPECIES_NONE)
         {
             data->state = 43;
         }
         else
         {
-            if (sub_80F9800()->species == SPECIES_EGG)
+            if (GetHostRFUtgtGname()->species == SPECIES_EGG)
             {
                 StringCopy(gStringVar4, gUnknown_8458DE8);
             }
             else
             {
-                StringCopy(gStringVar1, gSpeciesNames[sub_80F9800()->species]);
-                ConvertIntToDecimalStringN(gStringVar2, sub_80F9800()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(gStringVar1, gSpeciesNames[GetHostRFUtgtGname()->species]);
+                ConvertIntToDecimalStringN(gStringVar2, GetHostRFUtgtGname()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
                 StringExpandPlaceholders(gStringVar4, gUnknown_8458DBC);
             }
             sub_8118664(44, gStringVar4);
@@ -4199,7 +4199,7 @@ static void sub_811ACA4(u8 windowId, s32 itemId, u8 y)
 
     if (itemId == -3 && y == gUnknown_8456F7C.upText_Y)
     {
-        rfu = sub_80F9800();
+        rfu = GetHostRFUtgtGname();
         if (rfu->species != SPECIES_NONE)
         {
             sub_811ABE4(windowId, y, rfu, gSaveBlock2Ptr->playerName, 5);

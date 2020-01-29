@@ -721,7 +721,7 @@ void sub_8009FE8(void)
 {
     if (gWirelessCommType)
     {
-        sub_80F9828();
+        StartSendingKeysToRfu();
     }
     gLinkCallback = sub_800A040;
 }

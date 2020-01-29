@@ -2367,8 +2367,8 @@ u8 sub_80FB9F4(void)
 
 bool32 sub_80FBA00(void)
 {
-    u32 var = sub_80FB9F4() - 1;
-    if (var < 2)
+    u32 var = sub_80FB9F4();
+    if (var == 1 || var == 2)
         return TRUE;
     else
         return FALSE;

@@ -198,7 +198,6 @@ typedef struct linkManagerTag
     /* 0x00f */ u8 msc_exe_flag;
     /* 0x010 */ u8 child_slot;
     /* 0x011 */ u8 state_bak[2];
-    // aligned
     /* 0x014 */ u16 param[2];
     /* 0x018 */ u16 NI_failCounter_limit;
     /* 0x01a */ u16 connect_period;
@@ -215,48 +214,48 @@ typedef struct linkManagerTag
 struct UnkRfuStruct_2_Sub_6c
 {
     /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 unk_02;
-    /* 0x04 */ const u8 *unk_04;
+    /* 0x02 */ u16 count;
+    /* 0x04 */ const u8 *payload;
     /* 0x08 */ u32 unk_08;
     /* 0x0c */ u32 unk_0c;
     /* 0x10 */ u8 unk_10;
-    /* 0x11 */ u8 unk_11;
+    /* 0x11 */ u8 owner;
     /* 0x12 */ u8 unk_12;
 };
 
 struct UnkRfuStruct_2_Sub_124
 {
-    /* 0x000 */ u8 unk_00[20][70];
-    /* 0x578 */ vu8 unk_8c0;
-    /* 0x579 */ vu8 unk_8c1;
-    /* 0x57a */ vu8 unk_8c2;
-    /* 0x57b */ vu8 unk_8c3;
+    /* 0x000 */ u8 slots[20][70];
+    /* 0x578 */ vu8 recv_slot;
+    /* 0x579 */ vu8 send_slot;
+    /* 0x57a */ vu8 count;
+    /* 0x57b */ vu8 full;
 };
 
 struct UnkRfuStruct_2_Sub_9e8
 {
-    /* 0x000 */ u8 unk_00[40][14];
-    /* 0x230 */ vu8 unk_230;
-    /* 0x231 */ vu8 unk_231;
-    /* 0x232 */ vu8 unk_232;
-    /* 0x233 */ vu8 unk_233;
+    /* 0x000 */ u8 slots[40][14];
+    /* 0x230 */ vu8 recv_slot;
+    /* 0x231 */ vu8 send_slot;
+    /* 0x232 */ vu8 count;
+    /* 0x233 */ vu8 full;
 };
 
 struct UnkRfuStruct_2_Sub_c1c
 {
-    /* 0x00 */ u8 unk_00[2][14];
-    /* 0x1c */ vu8 unk_1c;
-    /* 0x1d */ vu8 unk_1d;
-    /* 0x1e */ vu8 unk_1e;
+    /* 0x00 */ u8 slots[2][14];
+    /* 0x1c */ vu8 recv_slot;
+    /* 0x1d */ vu8 send_slot;
+    /* 0x1e */ vu8 count;
 };
 
 struct UnkRfuStruct_Sub_Unused
 {
-    /* 0x000 */ u8 unk_00[2][256];
-    /* 0x200 */ vu8 unk_200;
-    /* 0x201 */ vu8 unk_201;
-    /* 0x202 */ vu8 unk_202;
-    /* 0x203 */ vu8 unk_203;
+    /* 0x000 */ u8 slots[2][256];
+    /* 0x200 */ vu8 recv_slot;
+    /* 0x201 */ vu8 send_slot;
+    /* 0x202 */ vu8 count;
+    /* 0x203 */ vu8 full;
 };
 
 typedef struct UnkRfuStruct_2
@@ -297,7 +296,7 @@ typedef struct UnkRfuStruct_2
     /* 0x8d4 */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
     /* 0x8f4 */ vu8 unk_c3c;
     /* 0x8f5 */ u8 unk_c3d;
-    /* 0x8f6 */ vu8 unk_c3e;
+    /* 0x8f6 */ vu8 child_slot;
     /* 0x8f7 */ u8 unk_c3f[70];
     /* 0x93d */ u8 unk_c85;
     /* 0x93e */ u8 unk_c86;
@@ -387,17 +386,17 @@ void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
 bool32 sub_80FBA00(void);
 
-void sub_80FC478(struct UnkRfuStruct_2_Sub_124 *ptr);
-void sub_80FC4D4(struct UnkRfuStruct_2_Sub_9e8 *ptr);
+void RFU_queue_20_70_reset(struct UnkRfuStruct_2_Sub_124 *ptr);
+void RFU_queue_40_14_reset(struct UnkRfuStruct_2_Sub_9e8 *ptr);
 
 void sub_80FB9E4(u8 a0, u16 msg);
 u8 sub_80FB9F4(void);
-void sub_80FC588(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
-bool8 sub_80FC79C(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
-bool8 sub_80FC888(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
-void sub_80FC828(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
-bool8 sub_80FC6E8(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
-void sub_80FC63C(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
+void RFU_queue_20_70_recv(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
+bool8 RFU_queue_40_14_send(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+bool8 RFU_queue_2_14_send(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
+void RFU_queue_2_14_recv(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
+bool8 RFU_queue_20_70_send(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
+void RFU_queue_40_14_recv(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3);
 void sub_80FAFE0(u8 a0);
 bool32 RfuSerialNumberIsValid(u32 a0);

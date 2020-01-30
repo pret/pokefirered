@@ -109,13 +109,13 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
         // An assert/debug print may have existed before, ie
         // printf("%s %u < %u", "somefile.c:12345", buffByteSize, num)
         // to push this into r3?
-        r3 = RFU_API_BUFF_SIZE_RAM - 0x28;
+        r3 = RFU_API_BUFF_SIZE_RAM;
         if (buffByteSize < r3)
             return ERR_RFU_API_BUFF_SIZE;
     }
     if (!copyInterruptToRam)
     {
-        r3 = RFU_API_BUFF_SIZE_ROM - 0x28; // same issue as above
+        r3 = RFU_API_BUFF_SIZE_ROM; // same issue as above
         if (buffByteSize < r3)
             return ERR_RFU_API_BUFF_SIZE;
     }

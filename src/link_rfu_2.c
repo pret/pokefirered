@@ -24,7 +24,7 @@ struct UnkRfuStruct_8010A14{
 static EWRAM_DATA struct InitializeParametersTag sRfuReqConfig = {};
 static EWRAM_DATA struct UnkLinkRfuStruct_02022B44 gUnknown_203AC08 = {};
 
-static u32 gf_rfu_REQ_api[(RFU_API_BUFF_SIZE_RAM - 0x28) / 4];
+static u32 gf_rfu_REQ_api[RFU_API_BUFF_SIZE_RAM / 4];
 static u8 gUnknown_3001FF8[14];
 static u16 gUnknown_3002008[7];
 
@@ -38,7 +38,7 @@ static void sub_80F8D20(u16 a0);
 static void sub_80F8DA8(u16 a0);
 static void sub_80F906C(void);
 static void sub_80F9868(u8 unused);
-static void sub_80F9CB4(struct UnkRfuStruct_2_Sub_6c *data);
+static void ResetSendDataManager(struct UnkRfuStruct_2_Sub_6c *data);
 static void sub_80F9D04(u16 command);
 static void rfufunc_80F9F44(void);
 static void sub_80F9FA8(void);
@@ -195,11 +195,11 @@ void sub_80F85F8(void)
     }
     for (i = 0; i < 5; i++)
     {
-        sub_80F9CB4(Rfu.unk_80 + i);
+        ResetSendDataManager(Rfu.unk_80 + i);
     }
-    sub_80F9CB4(&Rfu.unk_6c);
-    sub_80FC478(&Rfu.unk_124);
-    sub_80FC4D4(&Rfu.unk_9e8);
+    ResetSendDataManager(&Rfu.unk_6c);
+    RFU_queue_20_70_reset(&Rfu.unk_124);
+    RFU_queue_40_14_reset(&Rfu.unk_9e8);
     CpuFill16(0, gSendCmd, sizeof gSendCmd);
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
     CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers);
@@ -220,7 +220,7 @@ void InitRFU(void)
 
 void sub_80F86F4(void)
 {
-    if (!rfu_initializeAPI(gf_rfu_REQ_api, RFU_API_BUFF_SIZE_RAM - 0x28, gIntrTable + 1, TRUE))
+    if (!rfu_initializeAPI(gf_rfu_REQ_api, RFU_API_BUFF_SIZE_RAM, gIntrTable + 1, TRUE))
     {
         gLinkType = 0;
         sub_80FB128(FALSE);
@@ -353,9 +353,9 @@ static void sub_80F893C(u8 taskId)
         break;
     case 12:
     {
-        u8 r5 = 1 << Rfu.unk_c3e;
-        rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.unk_c3e);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
+        u8 r5 = 1 << Rfu.child_slot;
+        rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.child_slot);
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.child_slot, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
         rfu_UNI_setSendData(r5, Rfu.unk_4c, sizeof(Rfu.unk_4c));
         gTasks[taskId].data[1] = 8;
         DestroyTask(taskId);
@@ -420,7 +420,7 @@ static void sub_80F8B34(u8 taskId)
     case 18:
         break;
     case 13:
-        if (rfu_UNI_setSendData(1 << Rfu.unk_c3e, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
+        if (rfu_UNI_setSendData(1 << Rfu.child_slot, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
         {
             Rfu.unk_0c = 0;
             DestroyTask(taskId);
@@ -476,14 +476,14 @@ static void sub_80F8D20(u16 unused)
     }
     rfu_REQ_recvData();
     rfu_waitREQComplete();
-    if (gRfuSlotStatusUNI[Rfu.unk_c3e]->recv.newDataFlag)
+    if (gRfuSlotStatusUNI[Rfu.child_slot]->recv.newDataFlag)
     {
         Rfu.unk_cd0++;
-        sub_80FC588(&Rfu.unk_124, Rfu.unk_c3f);
+        RFU_queue_20_70_recv(&Rfu.unk_124, Rfu.unk_c3f);
         gUnknown_203AC08.unk_06++;
         sub_80F906C();
-        rfu_UNI_readySendData(Rfu.unk_c3e);
-        rfu_UNI_clearRecvNewDataFlag(Rfu.unk_c3e);
+        rfu_UNI_readySendData(Rfu.child_slot);
+        rfu_UNI_clearRecvNewDataFlag(Rfu.child_slot);
     }
     rfu_LMAN_REQ_sendData(TRUE);
 }
@@ -645,8 +645,8 @@ static void sub_80F906C(void)
 {
     if (Rfu.unk_c3c)
     {
-        u8 r2 = sub_80FC888(&Rfu.unk_c1c, Rfu.unk_4c);
-        if (Rfu.unk_c1c.unk_1e == 0)
+        u8 r2 = RFU_queue_2_14_send(&Rfu.unk_c1c, Rfu.unk_4c);
+        if (Rfu.unk_c1c.count == 0)
         {
             Rfu.unk_c3c = 0;
         }
@@ -657,8 +657,8 @@ static void sub_80F906C(void)
     }
     if (Rfu.unk_c3c == 0)
     {
-        sub_80FC79C(&Rfu.unk_9e8, Rfu.unk_4c);
-        sub_80FC828(&Rfu.unk_c1c, Rfu.unk_4c);
+        RFU_queue_40_14_send(&Rfu.unk_9e8, Rfu.unk_4c);
+        RFU_queue_2_14_recv(&Rfu.unk_c1c, Rfu.unk_4c);
     }
 }
 
@@ -847,7 +847,7 @@ static bool32 sub_80F9514(void)
     u8 sp48[2 * (CMD_LENGTH - 1)];
     u8 switchval;
 
-    sub_80FC6E8(&Rfu.unk_124, sp00);
+    RFU_queue_20_70_send(&Rfu.unk_124, sp00);
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         for (j = 0; j < CMD_LENGTH - 1; j++)
@@ -879,7 +879,7 @@ static bool32 sub_80F9514(void)
         Rfu.unk_cd0--;
         CallRfuFunc();
         sub_80F94BC(gSendCmd, sp48);
-        sub_80FC63C(&Rfu.unk_9e8, sp48);
+        RFU_queue_40_14_recv(&Rfu.unk_9e8, sp48);
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i] = 0;
     }
@@ -890,8 +890,8 @@ static void sub_80F965C(u8 unused, u32 flags)
 {
     s32 i, j;
 
-    const u8 *r10 = Rfu.unk_6c.unk_04;
-    for (i = 0; i < Rfu.unk_6c.unk_02; i++)
+    const u8 *r10 = Rfu.unk_6c.payload;
+    for (i = 0; i < Rfu.unk_6c.count; i++)
     {
         if (!(flags & 1))
         {
@@ -907,7 +907,7 @@ static void sub_80F965C(u8 unused, u32 flags)
 
                 j++;j--; // Needed to match;
             }
-            sub_80FC63C(&Rfu.unk_9e8, gUnknown_3001FF8);
+            RFU_queue_40_14_recv(&Rfu.unk_9e8, gUnknown_3001FF8);
             Rfu.unk_6c.unk_0c |= (1 << i);
         }
         flags >>= 1;
@@ -938,7 +938,7 @@ static u8 sub_80F9770(const u8 *a0)
     {
         Rfu.unk_cde[i] = a0[i];
     }
-    return a0[Rfu.unk_c3e];
+    return a0[Rfu.child_slot];
 }
 
 static void RfuFunc_SendKeysToRfu(void)
@@ -999,8 +999,8 @@ static void sub_80F9868(u8 unused)
             if (Rfu.unk_80[i].unk_12 == 0)
             {
                 Rfu.unk_80[i].unk_00 = 0;
-                Rfu.unk_80[i].unk_02 = gRecvCmds[i][1];
-                Rfu.unk_80[i].unk_11 = gRecvCmds[i][2];
+                Rfu.unk_80[i].count = gRecvCmds[i][1];
+                Rfu.unk_80[i].owner = gRecvCmds[i][2];
                 Rfu.unk_80[i].unk_08 = 0;
                 Rfu.unk_80[i].unk_12 = 1;
                 Rfu.unk_5c[i] = 0;
@@ -1013,7 +1013,7 @@ static void sub_80F9868(u8 unused)
                 Rfu.unk_80[i].unk_08 |= (1 << Rfu.unk_80[i].unk_00);
                 for (j = 0; j < 6; j++)
                     gBlockRecvBuffer[i][Rfu.unk_80[i].unk_00 * 6 + j] = gRecvCmds[i][j + 1];
-                if (Rfu.unk_80[i].unk_08 == gUnknown_843EBD4[Rfu.unk_80[i].unk_02])
+                if (Rfu.unk_80[i].unk_08 == gUnknown_843EBD4[Rfu.unk_80[i].count])
                 {
                     Rfu.unk_80[i].unk_12 = 2;
                     Rfu_SetBlockReceivedFlag(i);
@@ -1104,14 +1104,14 @@ static bool8 sub_80F9C78(void)
     return TRUE;
 }
 
-static void sub_80F9CB4(struct UnkRfuStruct_2_Sub_6c *data)
+static void ResetSendDataManager(struct UnkRfuStruct_2_Sub_6c *data)
 {
     data->unk_00 = 0;
-    data->unk_02 = 0;
-    data->unk_04 = NULL;
+    data->count = 0;
+    data->payload = NULL;
     data->unk_08 = 0;
     data->unk_10 = 0;
-    data->unk_11 = 0;
+    data->owner = 0;
     data->unk_12 = 0;
 }
 
@@ -1140,8 +1140,8 @@ static void sub_80F9D04(u16 command)
     switch (command)
     {
     case 0x8800:
-        gSendCmd[1] = Rfu.unk_6c.unk_02;
-        gSendCmd[2] = Rfu.unk_6c.unk_11 + 0x80;
+        gSendCmd[1] = Rfu.unk_6c.count;
+        gSendCmd[2] = Rfu.unk_6c.owner + 0x80;
         break;
     case 0xa100:
         if (sub_80F9C50())
@@ -1174,11 +1174,11 @@ static void sub_80F9D04(u16 command)
     }
 }
 
-void sub_80F9E2C(void *a0)
+void sub_80F9E2C(void * data)
 {
     if (gSendCmd[0] == 0 && !sub_80FBA00())
     {
-        memcpy(Rfu.unk_f2, a0, sizeof(Rfu.unk_f2));
+        memcpy(Rfu.unk_f2, data, sizeof(Rfu.unk_f2));
         sub_80F9D04(0x2f00);
     }
 }
@@ -1197,17 +1197,17 @@ bool32 Rfu_InitBlockSend(const u8 *src, size_t size)
         return FALSE;
     }
     r4 = (size % 12) != 0;
-    Rfu.unk_6c.unk_11 = GetMultiplayerId();
+    Rfu.unk_6c.owner = GetMultiplayerId();
     Rfu.unk_6c.unk_10 = 1;
-    Rfu.unk_6c.unk_02 = (size / 12) + r4;
+    Rfu.unk_6c.count = (size / 12) + r4;
     Rfu.unk_6c.unk_00 = 0;
     if (size > 0x100)
-        Rfu.unk_6c.unk_04 = src;
+        Rfu.unk_6c.payload = src;
     else
     {
         if (src != gBlockSendBuffer)
             memcpy(gBlockSendBuffer, src, size);
-        Rfu.unk_6c.unk_04 = gBlockSendBuffer;
+        Rfu.unk_6c.payload = gBlockSendBuffer;
     }
     sub_80F9D04(0x8800);
     Rfu.RfuFunc = rfufunc_80F9F44;
@@ -1235,12 +1235,12 @@ static void rfufunc_80F9F44(void)
 static void sub_80F9FA8(void)
 {
     s32 i;
-    const u8 *src = Rfu.unk_6c.unk_04;
+    const u8 *src = Rfu.unk_6c.payload;
     gSendCmd[0] = 0x8900 | Rfu.unk_6c.unk_00;
     for (i = 0; i < 7; i++)
         gSendCmd[i + 1] = (src[(i << 1) + Rfu.unk_6c.unk_00 * 12 + 1] << 8) | src[(i << 1) + Rfu.unk_6c.unk_00 * 12 + 0];
     Rfu.unk_6c.unk_00++;
-    if (Rfu.unk_6c.unk_02 <= Rfu.unk_6c.unk_00)
+    if (Rfu.unk_6c.count <= Rfu.unk_6c.unk_00)
     {
         Rfu.unk_6c.unk_10 = 0;
         Rfu.RfuFunc = rfufunc_80FA020;
@@ -1249,17 +1249,17 @@ static void sub_80F9FA8(void)
 
 static void rfufunc_80FA020(void)
 {
-    const u8 *src = Rfu.unk_6c.unk_04;
+    const u8 *src = Rfu.unk_6c.payload;
     u8 mpId = GetMultiplayerId();
     s32 i;
     if (Rfu.unk_0c == 0)
     {
-        gSendCmd[0] = (~0x76ff) | (Rfu.unk_6c.unk_02 - 1);
+        gSendCmd[0] = (~0x76ff) | (Rfu.unk_6c.count - 1);
         for (i = 0; i < 7; i++)
-            gSendCmd[i + 1] = (src[(i << 1) + (Rfu.unk_6c.unk_02 - 1) * 12 + 1] << 8) | src[(i << 1) + (Rfu.unk_6c.unk_02 - 1) * 12 + 0];
-        if ((u8)gRecvCmds[mpId][0] == Rfu.unk_6c.unk_02 - 1)
+            gSendCmd[i + 1] = (src[(i << 1) + (Rfu.unk_6c.count - 1) * 12 + 1] << 8) | src[(i << 1) + (Rfu.unk_6c.count - 1) * 12 + 0];
+        if ((u8)gRecvCmds[mpId][0] == Rfu.unk_6c.count - 1)
         {
-            if (Rfu.unk_80[mpId].unk_08 != gUnknown_843EBD4[Rfu.unk_80[mpId].unk_02])
+            if (Rfu.unk_80[mpId].unk_08 != gUnknown_843EBD4[Rfu.unk_80[mpId].count])
             {
                 sub_80F965C(mpId, Rfu.unk_80[mpId].unk_08);
                 gUnknown_203AC08.unk_64++;
@@ -1369,7 +1369,7 @@ static void sub_80FA2B0(void)
 
     if (GetMultiplayerId() != 0)
     {
-        if (Rfu.unk_124.unk_8c2 == 0 && Rfu.unk_fe > 0x3c)
+        if (Rfu.unk_124.count == 0 && Rfu.unk_fe > 0x3c)
         {
             sub_80F9D04(0x6600);
             Rfu.unk_fe = 0;
@@ -1393,7 +1393,7 @@ static void sub_80FA2B0(void)
 
 static void sub_80FA350(void)
 {
-    if (Rfu.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+    if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
     {
         sub_80F9D04(0x6600);
         Rfu.RfuFunc = sub_80FA2B0;
@@ -1407,7 +1407,7 @@ static void sub_80FA388(void)
 
     if (GetMultiplayerId() != 0)
     {
-        if (Rfu.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+        if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
         {
             sub_80F9D04(0x6600);
             Rfu.RfuFunc = sub_80FA2B0;
@@ -1423,7 +1423,7 @@ static void sub_80FA388(void)
         }
         if (i == playerCount)
         {
-            if (Rfu.unk_124.unk_8c2 == 0 && gSendCmd[0] == 0)
+            if (Rfu.unk_124.count == 0 && gSendCmd[0] == 0)
             {
                 sub_80F9D04(0x6600);
                 Rfu.RfuFunc = sub_80FA350;
@@ -1509,7 +1509,7 @@ static bool8 sub_80FA528(void)
                 }
 
             }
-            else if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_FAILED)
+            else if (gRfuSlotStatusNI[Rfu.child_slot]->recv.state == SLOT_STATE_RECV_FAILED)
             {
                 rfu_clearSlot(TYPE_NI_RECV, i);
             }
@@ -1564,8 +1564,8 @@ void sub_80FA670(u8 a0, u16 a1, const u8 *a2)
 void sub_80FA6BC(void)
 {
     Rfu.unk_c85 = 8;
-    rfu_clearSlot(TYPE_NI_SEND, Rfu.unk_c3e);
-    rfu_NI_setSendData(1 << Rfu.unk_c3e, 8, &Rfu.unk_c85, 1);
+    rfu_clearSlot(TYPE_NI_SEND, Rfu.child_slot);
+    rfu_NI_setSendData(1 << Rfu.child_slot, 8, &Rfu.unk_c85, 1);
 }
 
 u32 sub_80FA6FC(u16 trainerId, const u8 *trainerName)
@@ -1599,18 +1599,18 @@ static s32 sub_80FA788(void)
     s32 retval = 0;
     if (Rfu.unk_c85 == 8)
     {
-        if (gRfuSlotStatusNI[Rfu.unk_c3e]->send.state == SLOT_STATE_SEND_SUCCESS || gRfuSlotStatusNI[Rfu.unk_c3e]->send.state == SLOT_STATE_SEND_FAILED)
-            rfu_clearSlot(TYPE_NI_SEND, Rfu.unk_c3e);
+        if (gRfuSlotStatusNI[Rfu.child_slot]->send.state == SLOT_STATE_SEND_SUCCESS || gRfuSlotStatusNI[Rfu.child_slot]->send.state == SLOT_STATE_SEND_FAILED)
+            rfu_clearSlot(TYPE_NI_SEND, Rfu.child_slot);
     }
-    if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_SUCCESS || gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
+    if (gRfuSlotStatusNI[Rfu.child_slot]->recv.state == SLOT_STATE_RECV_SUCCESS || gRfuSlotStatusNI[Rfu.child_slot]->recv.state == SLOT_STATE_RECV_SUCCESS_AND_SENDSIDE_UNKNOWN)
     {
-        rfu_clearSlot(TYPE_NI_RECV, Rfu.unk_c3e);
+        rfu_clearSlot(TYPE_NI_RECV, Rfu.child_slot);
         sub_80FB9E4(Rfu.unk_c86, 0);
         retval = Rfu.unk_c86;
     }
-    else if (gRfuSlotStatusNI[Rfu.unk_c3e]->recv.state == SLOT_STATE_RECV_FAILED)
+    else if (gRfuSlotStatusNI[Rfu.child_slot]->recv.state == SLOT_STATE_RECV_FAILED)
     {
-        rfu_clearSlot(TYPE_NI_RECV, Rfu.unk_c3e);
+        rfu_clearSlot(TYPE_NI_RECV, Rfu.child_slot);
         retval = 6;
     }
     return retval;
@@ -1850,11 +1850,11 @@ static void RfuCheckErrorStatus(void)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
-        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.unk_8c2, Rfu.unk_9e8.unk_232, sub_80FB9F4() == 2);
+        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.count, Rfu.unk_9e8.count, sub_80FB9F4() == 2);
         Rfu.errorState = 2;
         CloseLink();
     }
-    else if (Rfu.unk_9e8.unk_233 == 1 || Rfu.unk_124.unk_8c3 == 1)
+    else if (Rfu.unk_9e8.full == 1 || Rfu.unk_124.full == 1)
     {
         if (lman.childClockSlave_flag)
             rfu_LMAN_requestChangeAgbClockMaster();
@@ -2116,7 +2116,7 @@ static void sub_80FB37C(u8 msg, u8 param_count)
     case LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_CONNECT_PARENT_SUCCESSED:
-        Rfu.unk_c3e = lman.param[0];
+        Rfu.child_slot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
         sub_80FB9E4(2, msg);
@@ -2125,8 +2125,8 @@ static void sub_80FB37C(u8 msg, u8 param_count)
         Rfu.unk_04 = 11;
         Rfu.unk_c85 = 0;
         Rfu.unk_c86 = 0;
-        rfu_setRecvBuffer(TYPE_NI, Rfu.unk_c3e, &Rfu.unk_c86, 1);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, 70);
+        rfu_setRecvBuffer(TYPE_NI, Rfu.child_slot, &Rfu.unk_c86, 1);
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.child_slot, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
         break;
     case LMAN_MSG_CHILD_NAME_SEND_FAILED_AND_DISCONNECTED:
         sub_80FB9E4(2, msg);
@@ -2269,7 +2269,7 @@ static void sub_80FB5EC(u8 msg, u8 param_count)
     case LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_CONNECT_PARENT_SUCCESSED:
-        Rfu.unk_c3e = lman.param[0];
+        Rfu.child_slot = lman.param[0];
         break;
     case LMAN_MSG_CONNECT_PARENT_FAILED:
         Rfu.unk_04 = 0x12;
@@ -2286,7 +2286,7 @@ static void sub_80FB5EC(u8 msg, u8 param_count)
     case LMAN_MSG_CHILD_NAME_SEND_COMPLETED:
         Rfu.unk_04 = 0xD;
         sub_80FB9E4(3, 0);
-        rfu_setRecvBuffer(TYPE_UNI, Rfu.unk_c3e, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
+        rfu_setRecvBuffer(TYPE_UNI, Rfu.child_slot, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
         break;
     case LMAN_MSG_CHILD_NAME_SEND_FAILED_AND_DISCONNECTED:
         sub_80FB9E4(2, msg);
@@ -2806,9 +2806,9 @@ static void sub_80FC228(void)
             nullsub_87(gUnknown_843EE47, 6, i + 3);
             nullsub_87(gUnknown_843EE57, 0x16, i + 3);
         }
-        nullsub_88(gRfuLinkStatus->partner[Rfu.unk_c3e].serialNo, 1, 3, 4);
-        nullsub_87(gRfuLinkStatus->partner[Rfu.unk_c3e].gname, 6, 3);
-        nullsub_87(gRfuLinkStatus->partner[Rfu.unk_c3e].uname, 0x16, 3);
+        nullsub_88(gRfuLinkStatus->partner[Rfu.child_slot].serialNo, 1, 3, 4);
+        nullsub_87(gRfuLinkStatus->partner[Rfu.child_slot].gname, 6, 3);
+        nullsub_87(gRfuLinkStatus->partner[Rfu.child_slot].uname, 0x16, 3);
     }
     else
     {
@@ -2846,12 +2846,12 @@ static const char gUnknown_843EEA8[][8] = {
 
 static u32 sub_80FC44C(void)
 {
-    return Rfu.unk_9e8.unk_232;
+    return Rfu.unk_9e8.count;
 }
 
 u32 GetRfuRecvQueueLength(void)
 {
-    return Rfu.unk_124.unk_8c2;
+    return Rfu.unk_124.count;
 }
 
 static void nullsub_89(u8 taskId)

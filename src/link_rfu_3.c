@@ -617,7 +617,7 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3
         r3 >>= 8;
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
-    data->unk_0a_0 = activity;
+    data->activity = activity;
     data->unk_0a_7 = r2;
     data->unk_00.unk_00_0 = GAME_LANGUAGE;
     data->unk_00.unk_01_2 = GAME_VERSION;
@@ -629,6 +629,13 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3
     data->unk_00.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
 
+/*
+ * ==========================================================
+ * Returns 1 if parent, 0 if child or neutral.
+ * If partner serial number is valid, copies gname and uname.
+ * Otherwise, blanks these.
+ * ==========================================================
+ */
 bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal;
@@ -636,7 +643,7 @@ bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
     if (lman.parent_child == MODE_PARENT)
     {
         retVal = TRUE;
-        if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo) && ((gRfuLinkStatus->getNameFlag >> idx) & 1))
         {
             memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
             memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
@@ -650,7 +657,7 @@ bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
     else
     {
         retVal = FALSE;
-        if (sub_80FA44C(gRfuLinkStatus->partner[idx].serialNo))
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[idx].serialNo))
         {
             memcpy(gname, &gRfuLinkStatus->partner[idx].gname, RFU_GAME_NAME_LENGTH);
             memcpy(uname, gRfuLinkStatus->partner[idx].uname, RFU_USER_NAME_LENGTH);
@@ -664,6 +671,12 @@ bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
     return retVal;
 }
 
+/*
+ * ==========================================================
+ * Specific check for serial number 0x7F7D,
+ * which comes from ???
+ * ==========================================================
+ */
 bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal = FALSE;

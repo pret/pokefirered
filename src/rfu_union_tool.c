@@ -473,7 +473,7 @@ static u8 sub_811BBA0(u32 r1, u32 unused, struct GFtgtGname * r2)
     {
         return gUnknown_845711B[r1];
     }
-    else if (r2->unk_0a_0 == 0x45)
+    else if (r2->activity == 0x45)
     {
         return 1;
     }
@@ -542,7 +542,7 @@ static void sub_811BCA0(u32 r7, struct GFtgtGname * r8)
 static void sub_811BDA8(u32 r5, struct GFtgtGname * r4)
 {
     u32 i;
-    switch (r4->unk_0a_0)
+    switch (r4->activity)
     {
     case 0x40:
     case 0x54:
@@ -584,11 +584,11 @@ static void UpdateUnionRoomPlayerSprites(struct UnkStruct_URoom *r0)
     sUnionObjRefreshTimer = 0;
     for (i = 0, r4 = r0->field_0->arr; i < 8; i++)
     {
-        if (r4[i].field_1A_0 == 1)
+        if (r4[i].tradeStatus == 1)
         {
             sub_811BDA8(i, &r4[i].unk.gname);
         }
-        else if (r4[i].field_1A_0 == 2)
+        else if (r4[i].tradeStatus == 2)
         {
             sub_811BE6C(i, &r4[i].unk.gname);
         }
@@ -639,7 +639,7 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
             {
                 continue;
             }
-            if (r4[i].field_1A_0 != 1)
+            if (r4[i].tradeStatus != 1)
             {
                 continue;
             }

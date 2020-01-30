@@ -54,7 +54,7 @@ static void sub_80FACF0(u8 taskId);
 static void GetLinkmanErrorParams(u32 msg);
 static void sub_80FB564(s32 a0);
 static void sub_80FBB74(void);
-static u8 sub_80FBC70(const u8 *a0, u16 a1);
+static u8 GetPartnerIndexByNameAndTrainerID(const u8 *trainerName, u16 trainerId);
 static void sub_80FBCF8(u32 bmDisconnectSlot);
 static void sub_80FBE20(u32 a0, u32 a1);
 static void sub_80FC028(u8 taskId);
@@ -138,8 +138,10 @@ static const struct {
     { gBlockSendBuffer,  40 }
 };
 
-static const u16 gUnknown_843EC8C[] = {
-    0x0002, 0x7f7d, 0xFFFF
+static const u16 sAcceptedSerialNos[] = {
+    0x0002, // Pokemon FR/LG/EM
+    0x7f7d,
+    0xFFFF
 };
 
 static const char sUnref_843EC92[][15] = {
@@ -240,7 +242,7 @@ static void sub_80F8738(u8 taskId)
     case 1:
         break;
     case 2:
-        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)gUnknown_843EC8C);
+        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)sAcceptedSerialNos);
         Rfu.unk_04 = 3;
         gTasks[taskId].data[1] = 6;
         break;
@@ -326,7 +328,7 @@ static void sub_80F893C(u8 taskId)
     case 1:
         break;
     case 6:
-        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)gUnknown_843EC8C);
+        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)sAcceptedSerialNos);
         Rfu.unk_04 = 7;
         gTasks[taskId].data[1] = 7;
         break;
@@ -395,7 +397,7 @@ static void sub_80F8AEC(void)
 
 static void sub_80F8B34(u8 taskId)
 {
-    if (GetHostRFUtgtGname()->unk_0a_0 == 0x54 && sub_80FB9F4() == 4)
+    if (GetHostRFUtgtGname()->activity == 0x54 && sub_80FB9F4() == 4)
     {
         rfu_REQ_disconnect(lman.acceptSlot_flag);
         rfu_waitREQComplete();
@@ -411,7 +413,7 @@ static void sub_80F8B34(u8 taskId)
     case 1:
         break;
     case 17:
-        rfu_LMAN_establishConnection(2, 0, 240, (u16*)gUnknown_843EC8C);
+        rfu_LMAN_establishConnection(2, 0, 240, (u16*)sAcceptedSerialNos);
         rfu_LMAN_setMSCCallback(sub_80F8D20);
         Rfu.unk_04 = 18;
         break;
@@ -456,7 +458,7 @@ static void sub_80F8B34(u8 taskId)
 
 void sub_80F8CFC(void)
 {
-    rfu_LMAN_establishConnection(1, 0, 240, (u16*)gUnknown_843EC8C);
+    rfu_LMAN_establishConnection(1, 0, 240, (u16*)sAcceptedSerialNos);
 }
 
 void sub_80F8D14(void)
@@ -1015,7 +1017,7 @@ static void sub_80F9868(u8 unused)
                 {
                     Rfu.unk_80[i].unk_12 = 2;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRFUtgtGname()->unk_0a_0 == 0x45 && gReceivedRemoteLinkPlayers != 0 && Rfu.unk_0c == 0)
+                    if (GetHostRFUtgtGname()->activity == 0x45 && gReceivedRemoteLinkPlayers != 0 && Rfu.unk_0c == 0)
                         sub_80FAA58(gBlockRecvBuffer);
                 }
             }
@@ -1439,12 +1441,12 @@ void sub_80FA42C(void)
     }
 }
 
-bool32 sub_80FA44C(u32 a0)
+bool32 RfuSerialNumberIsValid(u32 serialNo)
 {
     s32 i;
-    for (i = 0; gUnknown_843EC8C[i] != a0; i++)
+    for (i = 0; sAcceptedSerialNos[i] != serialNo; i++)
     {
-        if (gUnknown_843EC8C[i] == 0xFFFF)
+        if (sAcceptedSerialNos[i] == 0xFFFF)
             return FALSE;
     }
     return TRUE;
@@ -1541,9 +1543,9 @@ bool32 sub_80FA5D4(void)
     return FALSE;
 }
 
-bool32 sub_80FA634(u16 a0, const u8 *a1)
+bool32 sub_80FA634(u16 trainerId, const u8 *trainerName)
 {
-    u8 r1 = sub_80FBC70(a1, a0);
+    u8 r1 = GetPartnerIndexByNameAndTrainerID(trainerName, trainerId);
     if (r1 == 0xFF)
         return TRUE;
     if (Rfu.unk_cd1[r1] == 9)
@@ -1553,7 +1555,7 @@ bool32 sub_80FA634(u16 a0, const u8 *a1)
 
 void sub_80FA670(u8 a0, u16 a1, const u8 *a2)
 {
-    u8 r4 = sub_80FBC70(a2, a1);
+    u8 r4 = GetPartnerIndexByNameAndTrainerID(a2, a1);
     Rfu.unk_cd1[r4] = a0;
     rfu_clearSlot(TYPE_NI_SEND, r4);
     rfu_NI_setSendData(1 << r4, 8, Rfu.unk_cd1 + r4, 1);
@@ -1566,9 +1568,9 @@ void sub_80FA6BC(void)
     rfu_NI_setSendData(1 << Rfu.unk_c3e, 8, &Rfu.unk_c85, 1);
 }
 
-u32 sub_80FA6FC(u16 a0, const u8 *a1)
+u32 sub_80FA6FC(u16 trainerId, const u8 *trainerName)
 {
-    u8 r0 = sub_80FBC70(a1, a0);
+    u8 r0 = GetPartnerIndexByNameAndTrainerID(trainerName, trainerId);
     if (r0 == 0xFF)
         return 2;
     if (gRfuSlotStatusNI[r0]->send.state == 0)
@@ -1955,7 +1957,7 @@ void sub_80FB030(u32 linkPlayerCount)
     u32 r7;
     s32 r8;
 
-    if (GetHostRFUtgtGname()->unk_0a_0 == 0x45)
+    if (GetHostRFUtgtGname()->activity == 0x45)
     {
         r5 = 0;
         r7 = 0;
@@ -2028,7 +2030,7 @@ static void sub_80FB184(u8 msg, u8 param_count)
             if ((lman.param[0] >> i) & 1)
             {
                 struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
-                if (structPtr->unk_0a_0 == GetHostRFUtgtGname()->unk_0a_0)
+                if (structPtr->activity == GetHostRFUtgtGname()->activity)
                 {
                     Rfu.unk_cd1[i] = 0;
                     Rfu.unk_cd5[i] = 0;
@@ -2196,7 +2198,7 @@ static u8 sub_80FB5A0(s32 a0)
         if ((a0 >> i) & 1)
         {
             struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
-            if (structPtr->unk_0a_0 == 0x45)
+            if (structPtr->activity == 0x45)
                 ret |= (1 << i);
         }
     }
@@ -2217,7 +2219,7 @@ static void sub_80FB5EC(u8 msg, u8 param_count)
         sub_80FB9E4(4, 0);
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
-        if (GetHostRFUtgtGname()->unk_0a_0 == 0x45 && Rfu.unk_cd9 == 0)
+        if (GetHostRFUtgtGname()->activity == 0x45 && Rfu.unk_cd9 == 0)
         {
             u8 idx = sub_80FB5A0(lman.param[0]);
             if (idx != 0)
@@ -2240,7 +2242,7 @@ static void sub_80FB5EC(u8 msg, u8 param_count)
                 Rfu.unk_ce4 = 2;
             }
         }
-        else if (GetHostRFUtgtGname()->unk_0a_0 == 0x54)
+        else if (GetHostRFUtgtGname()->activity == 0x54)
         {
             rfu_REQ_disconnect(lman.acceptSlot_flag);
             rfu_waitREQComplete();
@@ -2252,7 +2254,7 @@ static void sub_80FB5EC(u8 msg, u8 param_count)
     case LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_END_WAIT_CHILD_NAME:
-        if (GetHostRFUtgtGname()->unk_0a_0 != 0x45 && lman.acceptCount > 1)
+        if (GetHostRFUtgtGname()->activity != 0x45 && lman.acceptCount > 1)
         {
             r1 = 1 << sub_80F886C(lman.param[0]);
             rfu_REQ_disconnect(lman.acceptSlot_flag ^ r1);
@@ -2491,17 +2493,24 @@ static u16 ReadU16(const void *ptr)
     return (ptr_[1] << 8) | (ptr_[0]);
 }
 
-static u8 sub_80FBC70(const u8 *a0, u16 a1)
+/*
+ * ================================================================
+ * Looks up the player by uname and pid. Returns the index in
+ * gRfuLinkStatus->partner of the first match with a valid slot ID.
+ * Returns 0xFF if not found.
+ * ================================================================
+ */
+static u8 GetPartnerIndexByNameAndTrainerID(const u8 *trainerName, u16 trainerId)
 {
     u8 i;
     u8 ret = 0xFF;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        u16 trainerId = ReadU16(((struct GFtgtGname *)gRfuLinkStatus->partner[i].gname)->unk_00.playerTrainerId);
-        if (sub_80FA44C(gRfuLinkStatus->partner[i].serialNo)
-            && !StringCompare(a0, gRfuLinkStatus->partner[i].uname)
-            && a1 == trainerId)
+        u16 partnerTrainerId = ReadU16(((struct GFtgtGname *)gRfuLinkStatus->partner[i].gname)->unk_00.playerTrainerId);
+        if (RfuSerialNumberIsValid(gRfuLinkStatus->partner[i].serialNo)
+            && !StringCompare(trainerName, gRfuLinkStatus->partner[i].uname)
+            && trainerId == partnerTrainerId)
         {
             ret = i;
             if (gRfuLinkStatus->partner[i].slot != 0xFF)
@@ -2522,9 +2531,9 @@ static void sub_80FBCF8(u32 bmDisconnectSlot)
     Rfu.unk_cda = sub_80F886C(Rfu.bm_PartnerFlags);
 }
 
-void sub_80FBD4C(const u8 *ptr, u16 a1)
+void sub_80FBD4C(const u8 *trainerName, u16 trainerId)
 {
-    u8 var = sub_80FBC70(ptr, a1);
+    u8 var = GetPartnerIndexByNameAndTrainerID(trainerName, trainerId);
     if (var != 0xFF)
         sub_80FBCF8(1 << var);
 }
@@ -2581,7 +2590,7 @@ static void sub_80FBE80(u8 taskId)
 
     if (sub_80F8EA4())
     {
-        u8 id = sub_80FBC70((u8*)data, ReadU16(&data[8]));
+        u8 id = GetPartnerIndexByNameAndTrainerID((u8*)data, ReadU16(&data[8]));
         if (id != 0xFF)
         {
             if (gRfuLinkStatus->partner[id].slot != 0xFF)
@@ -2590,7 +2599,7 @@ static void sub_80FBE80(u8 taskId)
                 if (sub_80F8ECC())
                     DestroyTask(taskId);
             }
-            else if (GetHostRFUtgtGname()->unk_0a_0 == 0x15 || GetHostRFUtgtGname()->unk_0a_0 == 0x16)
+            else if (GetHostRFUtgtGname()->activity == 0x15 || GetHostRFUtgtGname()->activity == 0x16)
             {
                 data[15]++;
             }
@@ -2632,12 +2641,12 @@ void sub_80FBF54(const u8 *src, u16 trainerId)
 
 static bool32 sub_80FBF98(s16 a1, struct GFtgtGname *structPtr)
 {
-    if (GetHostRFUtgtGname()->unk_0a_0 == 0x45)
+    if (GetHostRFUtgtGname()->activity == 0x45)
     {
-        if (structPtr->unk_0a_0 != 0x45)
+        if (structPtr->activity != 0x45)
             return TRUE;
     }
-    else if (structPtr->unk_0a_0 != 0x40)
+    else if (structPtr->activity != 0x40)
     {
         return TRUE;
     }
@@ -2676,7 +2685,7 @@ static void sub_80FC028(u8 taskId)
     if (Rfu.unk_ccd != 0 && lman.parent_child == 0)
     {
         u16 trainerId = ReadU16(((struct GFtgtGname *)&Rfu.unk_104.gname)->unk_00.playerTrainerId);
-        u8 id = sub_80FBC70(Rfu.unk_104.uname, trainerId);
+        u8 id = GetPartnerIndexByNameAndTrainerID(Rfu.unk_104.uname, trainerId);
         if (id != 0xFF)
         {
             if (!sub_80FBF98(gTasks[taskId].data[1], (struct GFtgtGname *)&gRfuLinkStatus->partner[id].gname))

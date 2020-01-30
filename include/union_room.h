@@ -4,6 +4,11 @@
 #include "global.h"
 #include "link_rfu.h"
 
+// Return value of IsRequestedTypeAndSpeciesInPlayerParty
+#define UR_TRADE_MATCH  0
+#define UR_TRADE_NOTYPE 1
+#define UR_TRADE_NOEGG  2
+
 struct UnkStruct_Shared
 {
     struct GFtgtGname gname;
@@ -20,7 +25,7 @@ struct UnkStruct_x20
 {
     struct UnkStruct_Shared unk;
     u16 field_18;
-    u8 field_1A_0:2;
+    u8 tradeStatus:2;
     u8 field_1A_1:1;
     u8 field_1B;
     u8 field_1D;
@@ -56,7 +61,7 @@ struct UnkStruct_Leader
     u8 field_10;
     u8 field_11;
     u8 listTaskId;
-    u8 field_13;
+    u8 playerCount;
     u8 field_14;
     u8 field_15;
     u8 field_16;

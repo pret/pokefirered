@@ -364,12 +364,12 @@ void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
 {
-    u32 r8 = unk20->unk.gname.unk_0a_0;
+    u32 r8 = unk20->unk.gname.activity;
     s32 i, j, k;
 
     for (i = 0; i < NELEMS(gUnknown_846FAC0); i++)
     {
-        if (r8 == gUnknown_846FAC0[i][0] && unk20->field_1A_0 == 1)
+        if (r8 == gUnknown_846FAC0[i][0] && unk20->tradeStatus == 1)
         {
             if (gUnknown_846FAC0[i][2] == 0)
             {

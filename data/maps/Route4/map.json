@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route4_EventScript_167F8C",
+      "script": "Route4_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route4_EventScript_1A95B9",
+      "script": "Route4_EventScript_Crissy",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route4_EventScript_1ACDEA",
+      "script": "Route4_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -146,14 +146,14 @@
       "x": 18,
       "y": 7,
       "elevation": 0,
-      "script": "Route4_EventScript_167F95"
+      "script": "Route4_EventScript_MtMoonSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 34,
       "y": 7,
       "elevation": 0,
-      "script": "Route4_EventScript_167F9E"
+      "script": "Route4_EventScript_RouteSign"
     },
     {
       "type": "hidden_item",

@@ -35,11 +35,11 @@ FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
 	releaseall
 	end
 
-Route4_EventScript_1ACDEA:: @ 81ACDEA
+Route4_EventScript_Boy:: @ 81ACDEA
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 3
-	msgbox Text_183D26
+	msgbox Route4_Text_PeopleLikeAndRespectBrock
 	release
 	end
 

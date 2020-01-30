@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9B0D",
+      "script": "Route11_EventScript_Eddie",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9C81",
+      "script": "Route11_EventScript_Hugo",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9B4B",
+      "script": "Route11_EventScript_Dillon",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9BC7",
+      "script": "Route11_EventScript_Dave",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9CBF",
+      "script": "Route11_EventScript_Jasper",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9D3B",
+      "script": "Route11_EventScript_Darian",
       "flag": "0"
     },
     {
@@ -112,7 +112,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9C05",
+      "script": "Route11_EventScript_Braxton",
       "flag": "0"
     },
     {
@@ -125,7 +125,7 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9B89",
+      "script": "Route11_EventScript_Yasu",
       "flag": "0"
     },
     {
@@ -138,7 +138,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9CFD",
+      "script": "Route11_EventScript_Dirk",
       "flag": "0"
     },
     {
@@ -151,7 +151,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 6,
-      "script": "Route11_EventScript_1A9C43",
+      "script": "Route11_EventScript_Bernie",
       "flag": "0"
     },
     {
@@ -224,7 +224,7 @@
       "x": 3,
       "y": 7,
       "elevation": 3,
-      "script": "Route11_EventScript_167FF7"
+      "script": "Route11_EventScript_DiglettsCaveSign"
     },
     {
       "type": "hidden_item",

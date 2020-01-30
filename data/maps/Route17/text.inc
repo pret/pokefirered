@@ -1,37 +1,3 @@
-Text_186FBD:: @ 8186FBD
-    .string "JED: Our love knows no bounds.\n"
-    .string "We're in love and we show it!$"
-
-Text_186FFA:: @ 8186FFA
-    .string "JED: Oh, no!\n"
-    .string "My love has seen me as a loser!$"
-
-Text_187027:: @ 8187027
-    .string "JED: Listen, LEA.\n"
-    .string "You need to focus less on me.$"
-
-Text_187057:: @ 8187057
-    .string "JED: You have just one POKéMON?\n"
-    .string "Is there no love in your heart?$"
-
-Text_187097:: @ 8187097
-    .string "LEA: Sometimes, the intensity of\n"
-    .string "our love scares me.$"
-
-Text_1870CC:: @ 81870CC
-    .string "LEA: Ohh! But JED looks cool\n"
-    .string "even in a loss!$"
-
-Text_1870F9:: @ 81870F9
-    .string "LEA: Ehehe, I'm sorry.\n"
-    .string "JED is so cool.$"
-
-Text_187120:: @ 8187120
-    .string "LEA: Oh, you don't have two\n"
-    .string "POKéMON with you?\p"
-    .string "Doesn't it feel lonely for you or\n"
-    .string "your POKéMON?$"
-
 Text_18717E:: @ 818717E
     .string "There's no getting rich quick in\n"
     .string "battling kids.$"

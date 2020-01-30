@@ -117,3 +117,38 @@ gUnknown_8187C06:: @ 8187C06
     .string "SEA ROUTE 19\n"
     .string "FUCHSIA CITY - SEAFOAM ISLANDS$"
 
+Text_187C32:: @ 8187C32
+    .string "LIA: I'm looking after my brother.\n"
+    .string "He just became a TRAINER.$"
+
+Text_187C6F:: @ 8187C6F
+    .string "LIA: That's no way to treat my\n"
+    .string "little brother!$"
+
+Text_187C9E:: @ 8187C9E
+    .string "LIA: Do you have a younger\n"
+    .string "brother?\p"
+    .string "I hope you're teaching him all\n"
+    .string "sorts of things.$"
+
+Text_187CF2:: @ 8187CF2
+    .string "LIA: I want to battle together\n"
+    .string "with my little brother.\p"
+    .string "Don't you have two POKéMON?$"
+
+Text_187D45:: @ 8187D45
+    .string "LUC: My big sis taught me how\n"
+    .string "to swim and train POKéMON.$"
+
+Text_187D7E:: @ 8187D7E
+    .string "LUC: Oh, wow!\n"
+    .string "Someone tougher than my big sis!$"
+
+Text_187DAD:: @ 8187DAD
+    .string "LUC: My big sis is strong and nice.\n"
+    .string "I think she's awesome!$"
+
+Text_187DE8:: @ 8187DE8
+    .string "LUC: I don't want to if I can't\n"
+    .string "battle you with my big sis.\p"
+    .string "Don't you have two POKéMON?$"

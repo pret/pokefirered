@@ -1,34 +1,3 @@
-Text_1863B7:: @ 81863B7
-    .string "KIRI: JAN, let's try really,\n"
-    .string "really hard together.$"
-
-Text_1863EA:: @ 81863EA
-    .string "KIRI: Whimper…\n"
-    .string "We lost, didn't we?$"
-
-Text_18640D:: @ 818640D
-    .string "KIRI: Did we lose because of me?$"
-
-Text_18642E:: @ 818642E
-    .string "KIRI: We can battle if you have\n"
-    .string "two POKéMON.$"
-
-Text_18645B:: @ 818645B
-    .string "JAN: KIRI, here we go!\n"
-    .string "We have to try hard!$"
-
-Text_186487:: @ 8186487
-    .string "JAN: Eeeeh!\n"
-    .string "No fair!$"
-
-Text_18649C:: @ 818649C
-    .string "JAN: KIRI, don't cry!\n"
-    .string "We'll just try harder next time.$"
-
-Text_1864D3:: @ 81864D3
-    .string "JAN: You want to battle?\n"
-    .string "You don't have enough POKéMON.$"
-
 Text_18650B:: @ 818650B
     .string "I just got some POKéMON in trades.\n"
     .string "Can I try them out on you?$"
@@ -151,3 +120,35 @@ gUnknown_8186A77:: @ 8186A77
     .string "ROUTE 15\n"
     .string "West to FUCHSIA CITY$"
 
+Text_186A95:: @ 8186A95
+    .string "MYA: You're perfect.\n"
+    .string "Help me train my little brother?$"
+
+Text_186ACB:: @ 8186ACB
+    .string "MYA: RON, you have to focus!\n"
+    .string "Concentrate on what you're doing!$"
+
+Text_186B0A:: @ 8186B0A
+    .string "MYA: Okay, we'll turn it up.\n"
+    .string "I'll add to our training menu!$"
+
+Text_186B46:: @ 8186B46
+    .string "MYA: Do you want to challenge us?\n"
+    .string "You'll need two POKéMON, though.$"
+
+Text_186B89:: @ 8186B89
+    .string "RON: My sister gets scary when we\n"
+    .string "lose.$"
+
+Text_186BB1:: @ 8186BB1
+    .string "RON: Oh, no, no…\n"
+    .string "Sis, I'm sorry!$"
+
+Text_186BD2:: @ 8186BD2
+    .string "RON: Oh, bleah…\n"
+    .string "I wish I had a nice sister…$"
+
+Text_186BFE:: @ 8186BFE
+    .string "RON: Did you want to battle with\n"
+    .string "my sister and me?\p"
+    .string "You need two POKéMON, then.$"

@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route10_EventScript_1A9FE5",
+      "script": "Route10_EventScript_Carol",
       "flag": "0"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route10_EventScript_1AA09F",
+      "script": "Route10_EventScript_Clark",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route10_EventScript_1AA061",
+      "script": "Route10_EventScript_Herman",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route10_EventScript_1AA0DD",
+      "script": "Route10_EventScript_Trent",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route10_EventScript_1AA023",
+      "script": "Route10_EventScript_Mark",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route10_EventScript_1A9FA7",
+      "script": "Route10_EventScript_Heidi",
       "flag": "0"
     },
     {
@@ -199,21 +199,21 @@
       "x": 15,
       "y": 59,
       "elevation": 0,
-      "script": "Route10_EventScript_167FE4"
+      "script": "Route10_EventScript_SouthRockTunnelSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 6,
       "y": 42,
       "elevation": 0,
-      "script": "Route10_EventScript_167FED"
+      "script": "Route10_EventScript_PowerPlantSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 21,
       "elevation": 0,
-      "script": "Route10_EventScript_167FDB"
+      "script": "Route10_EventScript_NorthRockTunnelSign"
     },
     {
       "type": "hidden_item",

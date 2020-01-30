@@ -1,36 +1,3 @@
-Text_186A95:: @ 8186A95
-    .string "MYA: You're perfect.\n"
-    .string "Help me train my little brother?$"
-
-Text_186ACB:: @ 8186ACB
-    .string "MYA: RON, you have to focus!\n"
-    .string "Concentrate on what you're doing!$"
-
-Text_186B0A:: @ 8186B0A
-    .string "MYA: Okay, we'll turn it up.\n"
-    .string "I'll add to our training menu!$"
-
-Text_186B46:: @ 8186B46
-    .string "MYA: Do you want to challenge us?\n"
-    .string "You'll need two POKéMON, though.$"
-
-Text_186B89:: @ 8186B89
-    .string "RON: My sister gets scary when we\n"
-    .string "lose.$"
-
-Text_186BB1:: @ 8186BB1
-    .string "RON: Oh, no, no…\n"
-    .string "Sis, I'm sorry!$"
-
-Text_186BD2:: @ 8186BD2
-    .string "RON: Oh, bleah…\n"
-    .string "I wish I had a nice sister…$"
-
-Text_186BFE:: @ 8186BFE
-    .string "RON: Did you want to battle with\n"
-    .string "my sister and me?\p"
-    .string "You need two POKéMON, then.$"
-
 Text_186C4D:: @ 8186C4D
     .string "What do you want?$"
 
@@ -111,3 +78,36 @@ Route16_Text_RouteSign:: @ 8186F98
     .string "ROUTE 16\n"
     .string "CELADON CITY - FUCHSIA CITY$"
 
+Text_186FBD:: @ 8186FBD
+    .string "JED: Our love knows no bounds.\n"
+    .string "We're in love and we show it!$"
+
+Text_186FFA:: @ 8186FFA
+    .string "JED: Oh, no!\n"
+    .string "My love has seen me as a loser!$"
+
+Text_187027:: @ 8187027
+    .string "JED: Listen, LEA.\n"
+    .string "You need to focus less on me.$"
+
+Text_187057:: @ 8187057
+    .string "JED: You have just one POKéMON?\n"
+    .string "Is there no love in your heart?$"
+
+Text_187097:: @ 8187097
+    .string "LEA: Sometimes, the intensity of\n"
+    .string "our love scares me.$"
+
+Text_1870CC:: @ 81870CC
+    .string "LEA: Ohh! But JED looks cool\n"
+    .string "even in a loss!$"
+
+Text_1870F9:: @ 81870F9
+    .string "LEA: Ehehe, I'm sorry.\n"
+    .string "JED is so cool.$"
+
+Text_187120:: @ 8187120
+    .string "LEA: Oh, you don't have two\n"
+    .string "POKéMON with you?\p"
+    .string "Doesn't it feel lonely for you or\n"
+    .string "your POKéMON?$"

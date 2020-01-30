@@ -165,205 +165,205 @@ Text_1C1BBE:: @ 81C1BBE
 Text_1C1BDC:: @ 81C1BDC
 	.string "Go win, my super BUG POKéMON!$"
 
-Text_1C1BFA:: @ 81C1BFA
+Route10_Text_MarkRematchIntro:: @ 81C1BFA
 	.string "Wow, you came here again?\n"
 	.string "Maybe you're a POKéMANIAC, too?\l"
 	.string "Want to see my collection?$"
 
-Text_1C1C4F:: @ 81C1C4F
+Route10_Text_ClarkRematchIntro:: @ 81C1C4F
 	.string "Ha-hahah-ah-ha!\n"
 	.string "I can't stop sneezing!$"
 
-Text_1C1C76:: @ 81C1C76
+Route10_Text_HermanRematchIntro:: @ 81C1C76
 	.string "Hi, kid!\n"
 	.string "Did I show you my POKéMON?$"
 
-Text_1C1C9A:: @ 81C1C9A
+Route10_Text_HeidiRematchIntro:: @ 81C1C9A
 	.string "I went out to a POKéMON GYM again.\p"
 	.string "…But I lost as usual.$"
 
-Text_1C1CD3:: @ 81C1CD3
+Route10_Text_TrentRematchIntro:: @ 81C1CD3
 	.string "Ah!\n"
 	.string "This mountain air is delicious!\l"
 	.string "It's so good, I can't leave!$"
 
-Text_1C1D14:: @ 81C1D14
+Route10_Text_CarolRematchIntro:: @ 81C1D14
 	.string "My head is starting to spin.\n"
 	.string "I've been hiking for too long…$"
 
-Text_1C1D50:: @ 81C1D50
+Route11_Text_HugoRematchIntro:: @ 81C1D50
 	.string "Win, lose, or draw!\n"
 	.string "Now for our rematch!$"
 
-Text_1C1D79:: @ 81C1D79
+Route11_Text_JasperRematchIntro:: @ 81C1D79
 	.string "Competing is the ultimate thrill.\n"
 	.string "I still can't get enough!$"
 
-Text_1C1DB5:: @ 81C1DB5
+Route11_Text_EddieRematchIntro:: @ 81C1DB5
 	.string "You know, right?\n"
 	.string "Let's go, but don't cheat!$"
 
-Text_1C1DE1:: @ 81C1DE1
+Route11_Text_BraxtonRematchIntro:: @ 81C1DE1
 	.string "Hi, there!\p"
 	.string "But be careful!\n"
 	.string "I'm still laying down some cables!$"
 
-Text_1C1E1F:: @ 81C1E1F
+Route11_Text_DillonRematchIntro:: @ 81C1E1F
 	.string "I became a TRAINER a while ago.\n"
 	.string "But, I think I can win.$"
 
-Text_1C1E57:: @ 81C1E57
+Route11_Text_DirkRematchIntro:: @ 81C1E57
 	.string "Fwahaha!\n"
 	.string "I have never lost!\p"
 	.string "…And if I did, I've forgotten all\n"
 	.string "about it!$"
 
-Text_1C1E9F:: @ 81C1E9F
+Route11_Text_DarianRematchIntro:: @ 81C1E9F
 	.string "I have never won before…\p"
 	.string "Perhaps I am destined to remain\n"
 	.string "that way…$"
 
-Text_1C1EE2:: @ 81C1EE2
+Route11_Text_YasuRematchIntro:: @ 81C1EE2
 	.string "I'm the best in my class.\n"
 	.string "I train every morning and night!$"
 
-Text_1C1F1D:: @ 81C1F1D
+Route11_Text_BernieRematchIntro:: @ 81C1F1D
 	.string "Keep your eyes out for live wires!$"
 
-Text_1C1F40:: @ 81C1F40
+Route11_Text_DaveRematchIntro:: @ 81C1F40
 	.string "I raised my POKéMON carefully.\n"
 	.string "They should be ready by now.\l"
 	.string "This time, they should win, too.$"
 
-Text_1C1F9D:: @ 81C1F9D
+Route12_Text_NedRematchIntro:: @ 81C1F9D
 	.string "Yeah!\n"
 	.string "I got a bite, here!\l"
 	.string "Th-this might be the real thing!$"
 
-Text_1C1FD8:: @ 81C1FD8
+Route12_Text_ChipRematchIntro:: @ 81C1FD8
 	.string "You're finally here.\n"
 	.string "Fishing is a waiting game.$"
 
-Text_1C2008:: @ 81C2008
+Route12_Text_JustinRematchIntro:: @ 81C2008
 	.string "Still can't find a MOON STONE…\n"
 	.string "Have you found one?$"
 
-Text_1C203B:: @ 81C203B
+Route12_Text_LucaRematchIntro:: @ 81C203B
 	.string "Electricity has always been my\n"
 	.string "specialty.\p"
 	.string "I don't know a thing about POKéMON\n"
 	.string "of the sea, though.$"
 
-Text_1C209C:: @ 81C209C
+Route12_Text_HankRematchIntro:: @ 81C209C
 	.string "The FISHING FOOL vs. POKéMON KID!\n"
 	.string "Another round, fight!$"
 
-Text_1C20D4:: @ 81C20D4
+Route12_Text_ElliotRematchIntro:: @ 81C20D4
 	.string "I love fishing, don't get me wrong.\n"
 	.string "But, I wish I had more work…\l"
 	.string "…It's hard to give up fishing!$"
 
-Text_1C2134:: @ 81C2134
+Route12_Text_AndrewRematchIntro:: @ 81C2134
 	.string "What's catching?\p"
 	.string "You'll never know unless you beat\n"
 	.string "me!$"
 
-Text_1C216B:: @ 81C216B
+Route12_Text_JesRematchIntro:: @ 81C216B
 	.string "JES: I'll win here today and\n"
 	.string "propose to my GIA.$"
 
-Text_1C219B:: @ 81C219B
+Route12_Text_GiaRematchIntro:: @ 81C219B
 	.string "GIA: Hey, JES…\n"
 	.string "I've been waiting a long time now.\p"
 	.string "If we win today, I'll marry you!$"
 
-Text_1C21EE:: @ 81C21EE
+Route13_Text_SebastianRematchIntro:: @ 81C21EE
 	.string "My bird POKéMON remember you!$"
 
-Text_1C220C:: @ 81C220C
+Route13_Text_SusieRematchIntro:: @ 81C220C
 	.string "I want to be the best TRAINER \n"
 	.string "while I'm a kid!$"
 
-Text_1C223C:: @ 81C223C
+Route13_Text_ValerieRematchIntro:: @ 81C223C
 	.string "Wow!\n"
 	.string "You got more cool BADGES!$"
 
-Text_1C225B:: @ 81C225B
+Route13_Text_GwenRematchIntro:: @ 81C225B
 	.string "My cutely grown POKéMON wish to\n"
 	.string "become reacquainted with you.$"
 
-Text_1C2299:: @ 81C2299
+Route13_Text_AlmaRematchIntro:: @ 81C2299
 	.string "I cleaned out my savings and\n"
 	.string "bought more CARBOS.$"
 
-Text_1C22CA:: @ 81C22CA
+Route13_Text_PerryRematchIntro:: @ 81C22CA
 	.string "I'm not going to lose this time.\n"
 	.string "The wind's blowing my way!$"
 
-Text_1C2306:: @ 81C2306
+Route13_Text_LolaRematchIntro:: @ 81C2306
 	.string "Oh, you're back?\p"
 	.string "Sure, I'll play again with you,\n"
 	.string "sweetie.$"
 
-Text_1C2340:: @ 81C2340
+Route13_Text_SheilaRematchIntro:: @ 81C2340
 	.string "Can't you forget that you battled\n"
 	.string "with me?$"
 
-Text_1C236B:: @ 81C236B
+Route13_Text_JaredRematchIntro:: @ 81C236B
 	.string "What're you starin' at?$"
 
-Text_1C2383:: @ 81C2383
+Route13_Text_RobertRematchIntro:: @ 81C2383
 	.string "I always go with bird POKéMON.\n"
 	.string "I've dedicated myself to them.$"
 
-Text_1C23C1:: @ 81C23C1
+Route14_Text_CarterRematchIntro:: @ 81C23C1
 	.string "I used TMs to teach good moves\n"
 	.string "to my POKéMON.$"
 
-Text_1C23EF:: @ 81C23EF
+Route14_Text_MitchRematchIntro:: @ 81C23EF
 	.string "My bird POKéMON should be ready\n"
 	.string "for battle this time.$"
 
-Text_1C2425:: @ 81C2425
+Route14_Text_BeckRematchIntro:: @ 81C2425
 	.string "Are you using TMs on POKéMON?\n"
 	.string "Just holding them is useless.$"
 
-Text_1C2461:: @ 81C2461
+Route14_Text_MarlonRematchIntro:: @ 81C2461
 	.string "Have you taught your bird POKéMON\n"
 	.string "how to FLY?\p"
 	.string "You'll be able to soar with it into\n"
 	.string "the sky! Give it a try.$"
 
-Text_1C24CB:: @ 81C24CB
+Route14_Text_DonaldRematchIntro:: @ 81C24CB
 	.string "The legend of the winged mirages…\n"
 	.string "You've heard it, right?$"
 
-Text_1C2505:: @ 81C2505
+Route14_Text_BennyRematchIntro:: @ 81C2505
 	.string "I'm really not into it, but okay.\n"
 	.string "Let's go!$"
 
-Text_1C2531:: @ 81C2531
+Route14_Text_LukasRematchIntro:: @ 81C2531
 	.string "Hey!\n"
 	.string "I remember you!\p"
 	.string "C'mon, c'mon.\n"
 	.string "Let's go, let's go, let's go!$"
 
-Text_1C2572:: @ 81C2572
+Route14_Text_IsaacRematchIntro:: @ 81C2572
 	.string "You're here again, huh?\n"
 	.string "Shut up and battle.$"
 
-Text_1C259E:: @ 81C259E
+Route14_Text_GeraldRematchIntro:: @ 81C259E
 	.string "We've been riding here because of\n"
 	.string "the wide-open spaces.$"
 
-Text_1C25D6:: @ 81C25D6
+Route14_Text_MalikRematchIntro:: @ 81C25D6
 	.string "POKéMON battle, right?\n"
 	.string "Cool! Rumble!$"
 
-Text_1C25FB:: @ 81C25FB
+Route14_Text_KiriRematchIntro:: @ 81C25FB
 	.string "KIRI: JAN, I hope we win today.$"
 
-Text_1C261B:: @ 81C261B
+Route14_Text_JanRematchIntro:: @ 81C261B
 	.string "JAN: KIRI, here we go!\n"
 	.string "Let's win for sure this time!$"
 

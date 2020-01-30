@@ -1,110 +1,110 @@
 Route12_FishingHouse_MapScripts:: @ 816FF0B
 	.byte 0
 
-Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
+Route12_FishingHouse_EventScript_FishingGuruBrother:: @ 816FF0C
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_SUPER_ROD, EventScript_16FF7F
-	msgbox gUnknown_819EFE0, MSGBOX_YESNO
+	goto_if_set FLAG_GOT_SUPER_ROD, Route12_FishingHouse_EventScript_CheckMagikarpRecord
+	msgbox Route12_FishingHouse_Text_DoYouLikeToFish, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_16FF34
-	msgbox gUnknown_819F1FA
+	goto_if_eq Route12_FishingHouse_EventScript_GiveSuperRod
+	msgbox Route12_FishingHouse_Text_OhThatsDisappointing
 	release
 	end
 
-EventScript_16FF34:: @ 816FF34
+Route12_FishingHouse_EventScript_GiveSuperRod:: @ 816FF34
 	checkitemspace ITEM_SUPER_ROD, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_16FF75
+	goto_if_eq Route12_FishingHouse_EventScript_NoRoomForSuperRod
 	additem ITEM_SUPER_ROD
-	msgbox gUnknown_819F05B
-	msgreceiveditem gUnknown_819F0B2, ITEM_SUPER_ROD
+	msgbox Route12_FishingHouse_Text_TakeThisAndFish
+	msgreceiveditem Route12_FishingHouse_Text_ReceivedSuperRod, ITEM_SUPER_ROD
 	setflag FLAG_GOT_SUPER_ROD
-	msgbox gUnknown_819F0EB
+	msgbox Route12_FishingHouse_Text_IfYouCatchBigMagikarpShowMe
 	release
 	end
 
-EventScript_16FF75:: @ 816FF75
-	msgbox gUnknown_819F494
+Route12_FishingHouse_EventScript_NoRoomForSuperRod:: @ 816FF75
+	msgbox Route12_FishingHouse_Text_NoRoomForGift
 	release
 	end
 
-EventScript_16FF7F:: @ 816FF7F
+Route12_FishingHouse_EventScript_CheckMagikarpRecord:: @ 816FF7F
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_MAGIKARP
 	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_16FFF5
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route12_FishingHouse_EventScript_NoMagikarpInParty
 	special GetMagikarpSizeRecordInfo
-	msgbox gUnknown_819F2DB
+	msgbox Route12_FishingHouse_Text_OhMagikarpAllowMeToSee
 	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
-	compare VAR_RESULT, 6
-	goto_if_ge EventScript_16FFFF
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ge Route12_FishingHouse_EventScript_CancelShowMon
 	special CompareMagikarpSize
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_170001
+	goto_if_eq Route12_FishingHouse_EventScript_NotMagikarp
 	compare VAR_RESULT, 2
-	goto_if_eq EventScript_17000B
+	goto_if_eq Route12_FishingHouse_EventScript_NotRecordMagikarp
 	compare VAR_RESULT, 3
-	goto_if_eq EventScript_170031
+	goto_if_eq Route12_FishingHouse_EventScript_NewRecordMagikarp
 	compare VAR_RESULT, 4
-	goto_if_eq EventScript_17001E
+	goto_if_eq Route12_FishingHouse_EventScript_TieRecordMagikarp
 	release
 	end
 
-EventScript_16FFF5:: @ 816FFF5
-	msgbox gUnknown_819F217
+Route12_FishingHouse_EventScript_NoMagikarpInParty:: @ 816FFF5
+	msgbox Route12_FishingHouse_Text_TryFishingBringMeMagikarp
 	release
 	end
 
-EventScript_16FFFF:: @ 816FFFF
+Route12_FishingHouse_EventScript_CancelShowMon:: @ 816FFFF
 	release
 	end
 
-EventScript_170001:: @ 8170001
-	msgbox gUnknown_819F468
+Route12_FishingHouse_EventScript_NotMagikarp:: @ 8170001
+	msgbox Route12_FishingHouse_Text_DoesntLookLikeMagikarp
 	release
 	end
 
-EventScript_17000B:: @ 817000B
-	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_170031
-	msgbox gUnknown_819F40A
+Route12_FishingHouse_EventScript_NotRecordMagikarp:: @ 817000B
+	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_NewRecordMagikarp
+	msgbox Route12_FishingHouse_Text_HmmXInchesDoesntMeasureUp
 	release
 	end
 
-EventScript_17001E:: @ 817001E
-	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_170031
-	msgbox gUnknown_819F3CB
+Route12_FishingHouse_EventScript_TieRecordMagikarp:: @ 817001E
+	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_NewRecordMagikarp
+	msgbox Route12_FishingHouse_Text_HuhXInchesSameSizeAsLast
 	release
 	end
 
-EventScript_170031:: @ 8170031
+Route12_FishingHouse_EventScript_NewRecordMagikarp:: @ 8170031
 	setflag FLAG_GOT_RECORD_SETTING_MAGIKARP
-	msgbox gUnknown_819F31B
+	msgbox Route12_FishingHouse_Text_WhoaXInchesTakeThis
 	giveitem ITEM_NET_BALL
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_17005D
-	msgbox gUnknown_819F395
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route12_FishingHouse_EventScript_NoRoomForNetBall
+	msgbox Route12_FishingHouse_Text_LookForwardToGreaterRecords
 	release
 	end
 
-EventScript_17005D:: @ 817005D
-	msgbox gUnknown_819F494
+Route12_FishingHouse_EventScript_NoRoomForNetBall:: @ 817005D
+	msgbox Route12_FishingHouse_Text_NoRoomForGift
 	release
 	end
 
-Route12_FishingHouse_EventScript_170067:: @ 8170067
+Route12_FishingHouse_EventScript_MagikarpRecordSign:: @ 8170067
 	lockall
-	goto_if_set FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_17007B
-	msgbox gUnknown_819F50C
+	goto_if_set FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet
+	msgbox Route12_FishingHouse_Text_BlankChartOfSomeSort
 	releaseall
 	end
 
-EventScript_17007B:: @ 817007B
+Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet:: @ 817007B
 	special GetMagikarpSizeRecordInfo
-	msgbox gUnknown_819F4CF
+	msgbox Route12_FishingHouse_Text_MostGiganticMagikarpXInches
 	releaseall
 	end

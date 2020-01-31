@@ -35,7 +35,7 @@ static void sio32intr_clock_master(void)
     STWI_set_timer_in_RAM(80);
     regSIODATA32 = REG_SIODATA32;
 
-    if (gSTWIStatus->state == 0)
+    if (gSTWIStatus->state == 0) // master send req
     {
         if (regSIODATA32 == 0x80000000)
         {
@@ -46,7 +46,7 @@ static void sio32intr_clock_master(void)
             }
             else
             {
-                gSTWIStatus->state = 1;
+                gSTWIStatus->state = 1; // master wait ack
                 REG_SIODATA32 = 0x80000000;
             }
         }
@@ -57,7 +57,7 @@ static void sio32intr_clock_master(void)
             return;
         }
     }
-    else if (gSTWIStatus->state == 1)
+    else if (gSTWIStatus->state == 1) // master wait ack
     {
         if ((regSIODATA32 & 0xFFFF0000) == 0x99660000)
         {
@@ -68,12 +68,12 @@ static void sio32intr_clock_master(void)
             gSTWIStatus->ackLength = ackLen = regSIODATA32 >> 8;
             if ((ackLen = gSTWIStatus->ackLength) >= gSTWIStatus->ackNext)
             {
-                gSTWIStatus->state = 2;
+                gSTWIStatus->state = 2; // master receive ack
                 REG_SIODATA32 = 0x80000000;
             }
             else
             {
-                gSTWIStatus->state = 3;
+                gSTWIStatus->state = 3; // master done ack
             }
         }
         else
@@ -83,12 +83,12 @@ static void sio32intr_clock_master(void)
             return;
         }
     }
-    else if (gSTWIStatus->state == 2)
+    else if (gSTWIStatus->state == 2) // master receive ack
     {
         ((u32*)gSTWIStatus->rxPacket)[gSTWIStatus->ackNext] = regSIODATA32;
         gSTWIStatus->ackNext++;
         if (gSTWIStatus->ackLength < gSTWIStatus->ackNext)
-            gSTWIStatus->state = 3;
+            gSTWIStatus->state = 3; // master done ack
         else
             REG_SIODATA32 = 0x80000000;
     }
@@ -103,7 +103,7 @@ static void sio32intr_clock_master(void)
 
     STWI_stop_timer_in_RAM();
 
-    if (gSTWIStatus->state == 3)
+    if (gSTWIStatus->state == 3) // master done ack
     {
         if (
             gSTWIStatus->ackActiveCommand == (0x80 | ID_MS_CHANGE_REQ)
@@ -113,25 +113,24 @@ static void sio32intr_clock_master(void)
         )
         {
 
-            gSTWIStatus->msMode = 0;
+            gSTWIStatus->msMode = AGB_CLK_SLAVE;
             REG_SIODATA32 = 0x80000000;
             REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS;
             REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_ENABLE;
-            gSTWIStatus->state = 5;
+            gSTWIStatus->state = 5; // slave receive req init
         }
         else
         {
-
             if (gSTWIStatus->ackActiveCommand == 0xEE)
             {
                 REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
-                gSTWIStatus->state = 4;
+                gSTWIStatus->state = 4; // error
                 gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
             }
             else
             {
                 REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
-                gSTWIStatus->state = 4;
+                gSTWIStatus->state = 4; // error
             }
         }
         gSTWIStatus->unk_2c = 0;
@@ -157,7 +156,7 @@ static void sio32intr_clock_slave(void)
         return;
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_MULTI_SD;
     regSIODATA32 = REG_SIODATA32;
-    if (gSTWIStatus->state == 5)
+    if (gSTWIStatus->state == 5) // slave receive req init
     {
         ((u32*)gSTWIStatus->rxPacket)[0] = regSIODATA32;
         gSTWIStatus->reqNext = 1;
@@ -191,17 +190,17 @@ static void sio32intr_clock_slave(void)
                         ((u32*)gSTWIStatus->txPacket)[1] = 2;
                     }
                     gSTWIStatus->ackLength = 1;
-                    gSTWIStatus->error = 3;
+                    gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
                 }
                 REG_SIODATA32 = ((u32*)gSTWIStatus->txPacket)[0];
                 gSTWIStatus->ackNext = 1;
-                gSTWIStatus->state = 7;
+                gSTWIStatus->state = 7; // slave send ack
             }
             else
             {
                 REG_SIODATA32 = 0x80000000;
                 gSTWIStatus->reqNext = 1;
-                gSTWIStatus->state = 6;
+                gSTWIStatus->state = 6; // slave receive req
             }
         }
         else
@@ -211,7 +210,7 @@ static void sio32intr_clock_slave(void)
             return;
         }
     }
-    else if (gSTWIStatus->state == 6)
+    else if (gSTWIStatus->state == 6) // slave receive req
     {
         ((u32*)gSTWIStatus->rxPacket)[gSTWIStatus->reqNext] = regSIODATA32;
         gSTWIStatus->reqNext++;
@@ -239,24 +238,24 @@ static void sio32intr_clock_slave(void)
                     ((u32*)gSTWIStatus->txPacket)[1] = 2;
                 }
                 gSTWIStatus->ackLength = 1;
-                gSTWIStatus->error = 3;
+                gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
             }
             REG_SIODATA32 = ((u32*)gSTWIStatus->txPacket)[0];
             gSTWIStatus->ackNext = 1;
-            gSTWIStatus->state = 7;
+            gSTWIStatus->state = 7; // slave send ack
         }
         else
         {
             REG_SIODATA32 = 0x80000000;
         }
     }
-    else if (gSTWIStatus->state == 7)
+    else if (gSTWIStatus->state == 7) // slave send ack
     {
         if (regSIODATA32 == 0x80000000)
         {
             if (gSTWIStatus->ackLength < gSTWIStatus->ackNext)
             {
-                gSTWIStatus->state = 8;
+                gSTWIStatus->state = 8; // slave done ack
             }
             else
             {
@@ -273,11 +272,11 @@ static void sio32intr_clock_slave(void)
     }
     if (handshake_wait(1) == 1)
         return;
-    if (gSTWIStatus->state == 8)
+    if (gSTWIStatus->state == 8) // slave done ack
     {
         REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS;
         STWI_stop_timer_in_RAM();
-        if (gSTWIStatus->error == 3)
+        if (gSTWIStatus->error == ERR_REQ_CMD_ACK_REJECTION)
         {
             STWI_init_slave();
             if (gSTWIStatus->callbackS != NULL)
@@ -291,7 +290,7 @@ static void sio32intr_clock_slave(void)
             REG_SIOCNT = 0;
             REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
             gSTWIStatus->msMode = AGB_CLK_MASTER;
-            gSTWIStatus->state = 0;
+            gSTWIStatus->state = 0; // master send req
             if (gSTWIStatus->callbackS != NULL)
             {
                 Callback_Dummy_S((gSTWIStatus->reqLength << 8) | (gSTWIStatus->reqActiveCommand), gSTWIStatus->callbackS);
@@ -339,19 +338,19 @@ static void STWI_set_timer_in_RAM(u8 count)
     switch (count)
     {
     case 50:
-        *regTMCNTL = -0x335;
+        *regTMCNTL = 0xFCCB;
         gSTWIStatus->timerState = 1;
         break;
     case 80:
-        *regTMCNTL = -0x520;
+        *regTMCNTL = 0xFAE0;
         gSTWIStatus->timerState = 2;
         break;
     case 100:
-        *regTMCNTL = -0x66a;
+        *regTMCNTL = 0xF996;
         gSTWIStatus->timerState = 3;
         break;
     case 130:
-        *regTMCNTL = -0x853;
+        *regTMCNTL = 0xF7AD;
         gSTWIStatus->timerState = 4;
         break;
     }
@@ -369,8 +368,8 @@ static void STWI_stop_timer_in_RAM(void)
 
 static void STWI_init_slave(void)
 {
-    gSTWIStatus->state = 5;
-    gSTWIStatus->msMode = 0;
+    gSTWIStatus->state = 5; // slave receive req init
+    gSTWIStatus->msMode = AGB_CLK_SLAVE;
     gSTWIStatus->reqLength = 0;
     gSTWIStatus->reqNext = 0;
     gSTWIStatus->reqActiveCommand = 0;

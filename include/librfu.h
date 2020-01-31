@@ -4,11 +4,8 @@
 #include "global.h"
 #include "main.h"
 
-/* TODOs: 
- * - split files
+/* TODOs:
  * - documentation
- * - decompile librfu_intr.s once arm support is back again
- (for internal structs not documented in SDK)
  * - check if any field needs to be volatile
  * - check if field names make sense
  */

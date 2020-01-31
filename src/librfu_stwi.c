@@ -28,8 +28,8 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     }
     gSTWIStatus->rxPacket = &interruptStruct->rxPacketAlloc;
     gSTWIStatus->txPacket = &interruptStruct->txPacketAlloc;
-    gSTWIStatus->msMode = 1;
-    gSTWIStatus->state = 0;
+    gSTWIStatus->msMode = AGB_CLK_MASTER;
+    gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqLength = 0;
     gSTWIStatus->reqNext = 0;
     gSTWIStatus->ackLength = 0;
@@ -71,7 +71,7 @@ void AgbRFU_SoftReset(void)
     *timerH = 3;
     REG_RCNT = 0x80A0;
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
-    gSTWIStatus->state = 0;
+    gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqLength = 0;
     gSTWIStatus->reqNext = 0;
     gSTWIStatus->reqActiveCommand = 0;
@@ -81,7 +81,7 @@ void AgbRFU_SoftReset(void)
     gSTWIStatus->timerState = 0;
     gSTWIStatus->timerActive = 0;
     gSTWIStatus->error = 0;
-    gSTWIStatus->msMode = 1;
+    gSTWIStatus->msMode = AGB_CLK_MASTER;
     gSTWIStatus->recoveryCount = 0;
     gSTWIStatus->unk_2c = 0;
 }
@@ -571,7 +571,7 @@ static u16 STWI_init(u8 request)
     {
         gSTWIStatus->unk_2c = TRUE;
         gSTWIStatus->reqActiveCommand = request;
-        gSTWIStatus->state = 0;
+        gSTWIStatus->state = 0; // master send req
         gSTWIStatus->reqLength = 0;
         gSTWIStatus->reqNext = 0;
         gSTWIStatus->ackLength = 0;
@@ -595,7 +595,7 @@ static s32 STWI_start_Command(void)
     // but the cast here is required to avoid register issue
     *(u32 *)gSTWIStatus->txPacket->rfuPacket8.data = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
     REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;
-    gSTWIStatus->state = 0;
+    gSTWIStatus->state = 0; // master send req
     gSTWIStatus->reqNext = 1;
     imeTemp = REG_IME;
     REG_IME = 0;
@@ -628,7 +628,7 @@ static s32 STWI_restart_Command(void)
             gSTWIStatus->unk_2c = 0;
             if (gSTWIStatus->callbackM != NULL)
                 gSTWIStatus->callbackM(gSTWIStatus->reqActiveCommand, gSTWIStatus->error);
-            gSTWIStatus->state = 4; // TODO: what's 4
+            gSTWIStatus->state = 4; // error
         }
     }
     return 0;
@@ -636,7 +636,7 @@ static s32 STWI_restart_Command(void)
 
 static s32 STWI_reset_ClockCounter(void)
 {
-    gSTWIStatus->state = 5; // TODO: what is 5
+    gSTWIStatus->state = 5; // slave receive req init
     gSTWIStatus->reqLength = 0;
     gSTWIStatus->reqNext = 0;
     REG_SIODATA32 = (1 << 31);

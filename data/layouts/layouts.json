@@ -9,7 +9,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/PalletTown_PlayersHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/PalletTown_PlayersHouse_1F/map.bin"
     },
@@ -21,7 +21,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/PalletTown_PlayersHouse_2F/border.bin",
       "blockdata_filepath": "data/layouts/PalletTown_PlayersHouse_2F/map.bin"
     },
@@ -33,7 +33,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/PalletTown_GarysHouse/border.bin",
       "blockdata_filepath": "data/layouts/PalletTown_GarysHouse/map.bin"
     },
@@ -45,7 +45,7 @@
       "border_width": 0,
       "border_height": 0,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/LittlerootTown_MaysHouse_2F/border.bin",
       "blockdata_filepath": "data/layouts/LittlerootTown_MaysHouse_2F/map.bin"
     },
@@ -69,7 +69,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/House1/border.bin",
       "blockdata_filepath": "data/layouts/House1/map.bin"
     },
@@ -81,7 +81,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/House2/border.bin",
       "blockdata_filepath": "data/layouts/House2/map.bin"
     },
@@ -129,7 +129,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/House3/border.bin",
       "blockdata_filepath": "data/layouts/House3/map.bin"
     },
@@ -153,7 +153,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/House4/border.bin",
       "blockdata_filepath": "data/layouts/House4/map.bin"
     },
@@ -249,7 +249,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/House5/border.bin",
       "blockdata_filepath": "data/layouts/House5/map.bin"
     },
@@ -859,16 +859,16 @@
       "blockdata_filepath": "data/layouts/IndigoPlateau_Exterior/map.bin"
     },
     {
-      "id": "LAYOUT_SAFFRON_CITY_CLASSIC",
-      "name": "SaffronCity_Classic_Layout",
+      "id": "LAYOUT_SAFFRON_CITY_CONNECTION",
+      "name": "SaffronCity_Connection_Layout",
       "width": 48,
       "height": 40,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_SaffronCity",
-      "border_filepath": "data/layouts/SaffronCity_Classic/border.bin",
-      "blockdata_filepath": "data/layouts/SaffronCity_Classic/map.bin"
+      "border_filepath": "data/layouts/SaffronCity_Connection/border.bin",
+      "blockdata_filepath": "data/layouts/SaffronCity_Connection/map.bin"
     },
     {
       "id": "LAYOUT_ROUTE1",
@@ -1874,7 +1874,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/UndergroundPath_Entrance/border.bin",
       "blockdata_filepath": "data/layouts/UndergroundPath_Entrance/map.bin"
     },
@@ -1911,7 +1911,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Route12_NorthEntrance_1F/border.bin",
       "blockdata_filepath": "data/layouts/Route12_NorthEntrance_1F/map.bin"
     },
@@ -1995,7 +1995,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/CeruleanCity_House1/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanCity_House1/map.bin"
     },
@@ -2295,7 +2295,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/SaffronCity_NorthSouthEntrance/border.bin",
       "blockdata_filepath": "data/layouts/SaffronCity_NorthSouthEntrance/map.bin"
     },
@@ -2307,7 +2307,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/SaffronCity_EastWestEntrance/border.bin",
       "blockdata_filepath": "data/layouts/SaffronCity_EastWestEntrance/map.bin"
     },
@@ -2439,7 +2439,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Entrance_2F/border.bin",
       "blockdata_filepath": "data/layouts/Entrance_2F/map.bin"
     },
@@ -2451,7 +2451,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Route2_Entrance/border.bin",
       "blockdata_filepath": "data/layouts/Route2_Entrance/map.bin"
     },
@@ -2463,7 +2463,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Route22_NorthEntrance/border.bin",
       "blockdata_filepath": "data/layouts/Route22_NorthEntrance/map.bin"
     },
@@ -2475,7 +2475,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Route16_NorthEntrance_1F/border.bin",
       "blockdata_filepath": "data/layouts/Route16_NorthEntrance_1F/map.bin"
     },
@@ -2487,7 +2487,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/Entrance_1F/border.bin",
       "blockdata_filepath": "data/layouts/Entrance_1F/map.bin"
     },
@@ -2511,7 +2511,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/SaffronCity_House1_1F/border.bin",
       "blockdata_filepath": "data/layouts/SaffronCity_House1_1F/map.bin"
     },
@@ -2523,7 +2523,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building1",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/SaffronCity_House1_2F/border.bin",
       "blockdata_filepath": "data/layouts/SaffronCity_House1_2F/map.bin"
     },
@@ -2967,7 +2967,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/SevenIsland_House_Room1_DoorOpen/border.bin",
       "blockdata_filepath": "data/layouts/SevenIsland_House_Room1_DoorOpen/map.bin"
     },
@@ -2979,7 +2979,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/SevenIsland_House_Room2/border.bin",
       "blockdata_filepath": "data/layouts/SevenIsland_House_Room2/map.bin"
     },
@@ -3111,7 +3111,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/ViridianCity_House1/border.bin",
       "blockdata_filepath": "data/layouts/ViridianCity_House1/map.bin"
     },
@@ -3495,7 +3495,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Building2",
+      "secondary_tileset": "gTileset_GenericBuilding2",
       "border_filepath": "data/layouts/CeruleanCity_House5/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanCity_House5/map.bin"
     },

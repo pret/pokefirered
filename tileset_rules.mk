@@ -36,7 +36,7 @@ $(TILESETGFXDIR)/secondary/viridian_forest/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/seafoam_islands/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 318
 
-$(TILESETGFXDIR)/secondary/building2/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/generic_building2/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 152
 
 $(TILESETGFXDIR)/secondary/underground_path/tiles.4bpp: %.4bpp: %.png
@@ -120,7 +120,7 @@ $(TILESETGFXDIR)/secondary/saffron_city/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/dummy1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2
 
-$(TILESETGFXDIR)/secondary/building1/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/generic_building1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
 $(TILESETGFXDIR)/secondary/hoenn_building/tiles.4bpp: %.4bpp: %.png

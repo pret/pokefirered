@@ -896,27 +896,27 @@ gTilesetPalettes_CeruleanCave:: @ 828E3A4
 	.incbin "data/tilesets/secondary/cerulean_cave/palettes/15.gbapal"
 
 	.align 2
-gTilesetTiles_Building2:: @ 828E5A4
-	.incbin "data/tilesets/secondary/building2/tiles.4bpp.lz"
+gTilesetTiles_GenericBuilding2:: @ 828E5A4
+	.incbin "data/tilesets/secondary/generic_building2/tiles.4bpp.lz"
 
 	.align 2
-gTilesetPalettes_Building2:: @ 828EC70
-	.incbin "data/tilesets/secondary/building2/palettes/0.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/1.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/2.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/3.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/4.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/5.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/6.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/7.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/8.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/9.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/10.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/11.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/12.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/13.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/14.gbapal"
-	.incbin "data/tilesets/secondary/building2/palettes/15.gbapal"
+gTilesetPalettes_GenericBuilding2:: @ 828EC70
+	.incbin "data/tilesets/secondary/generic_building2/palettes/0.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/1.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/2.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/3.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/4.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/5.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/6.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/7.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/8.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/9.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/12.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/13.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/14.gbapal"
+	.incbin "data/tilesets/secondary/generic_building2/palettes/15.gbapal"
 
 	.align 2
 gTilesetTiles_PowerPlant:: @ 828EE70

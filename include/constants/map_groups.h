@@ -207,7 +207,7 @@
 #define MAP_CINNABAR_ISLAND                      (8 | (3 << 8))
 #define MAP_INDIGO_PLATEAU_EXTERIOR              (9 | (3 << 8))
 #define MAP_SAFFRON_CITY                         (10 | (3 << 8))
-#define MAP_SAFFRON_CITY_CLASSIC                 (11 | (3 << 8))
+#define MAP_SAFFRON_CITY_CONNECTION              (11 | (3 << 8))
 #define MAP_ONE_ISLAND                           (12 | (3 << 8))
 #define MAP_TWO_ISLAND                           (13 | (3 << 8))
 #define MAP_THREE_ISLAND                         (14 | (3 << 8))

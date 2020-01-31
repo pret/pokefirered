@@ -278,7 +278,7 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland/scripts.inc"
 	.include "data/maps/IndigoPlateau_Exterior/scripts.inc"
 	.include "data/maps/SaffronCity/scripts.inc"
-	.include "data/maps/SaffronCity_Classic/scripts.inc"
+	.include "data/maps/SaffronCity_Connection/scripts.inc"
 	.include "data/maps/OneIsland/scripts.inc"
 	.include "data/maps/TwoIsland/scripts.inc"
 	.include "data/maps/ThreeIsland/scripts.inc"

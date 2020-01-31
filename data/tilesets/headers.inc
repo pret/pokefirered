@@ -220,15 +220,15 @@ gTileset_BikeShop::
 	.4byte gMetatileAttributes_BikeShop
 
 	.align 2
-gTileset_Building1::
+gTileset_GenericBuilding1::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_Building1
-	.4byte gTilesetPalettes_Building1
-	.4byte gMetatiles_Building1
+	.4byte gTilesetTiles_GenericBuilding1
+	.4byte gTilesetPalettes_GenericBuilding1
+	.4byte gMetatiles_GenericBuilding1
 	.4byte 0x0
-	.4byte gMetatileAttributes_Building1
+	.4byte gMetatileAttributes_GenericBuilding1
 
 	.align 2
 gTileset_Lab::
@@ -462,15 +462,15 @@ gTileset_DepartmentStore::
 	.4byte gMetatileAttributes_DepartmentStore
 
 	.align 2
-gTileset_Building2::
+gTileset_GenericBuilding2::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_Building2
-	.4byte gTilesetPalettes_Building2
-	.4byte gMetatiles_Building2
+	.4byte gTilesetTiles_GenericBuilding2
+	.4byte gTilesetPalettes_GenericBuilding2
+	.4byte gMetatiles_GenericBuilding2
 	.4byte 0x0
-	.4byte gMetatileAttributes_Building2
+	.4byte gMetatileAttributes_GenericBuilding2
 
 	.align 2
 gTileset_PowerPlant::

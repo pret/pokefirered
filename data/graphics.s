@@ -16463,27 +16463,27 @@ gBerryFixWindow_Tilemap:: @ 8EA9588
 	.incbin "graphics/berry_fix/window.bin.lz"
 
 	.align 2
-gTilesetPalettes_Building1:: @ 8EA97F4
-	.incbin "data/tilesets/secondary/building1/palettes/0.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/1.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/2.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/3.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/4.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/5.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/6.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/7.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/8.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/9.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/10.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/11.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/12.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/13.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/14.gbapal"
-	.incbin "data/tilesets/secondary/building1/palettes/15.gbapal"
+gTilesetPalettes_GenericBuilding1:: @ 8EA97F4
+	.incbin "data/tilesets/secondary/generic_building1/palettes/0.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/1.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/2.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/3.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/4.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/5.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/6.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/7.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/8.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/9.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/12.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/13.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/14.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/15.gbapal"
 
 	.align 2
-gTilesetTiles_Building1:: @ 8EA99F4
-	.incbin "data/tilesets/secondary/building1/tiles.4bpp.lz"
+gTilesetTiles_GenericBuilding1:: @ 8EA99F4
+	.incbin "data/tilesets/secondary/generic_building1/tiles.4bpp.lz"
 
 	.align 2
 gTilesetPalettes_DepartmentStore:: @ 8EA9D88

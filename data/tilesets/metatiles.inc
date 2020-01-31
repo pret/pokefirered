@@ -207,12 +207,12 @@ gMetatileAttributes_PokemonCenter:: @ 82B4A50
 	.incbin "data/tilesets/secondary/pokemon_center/metatile_attributes.bin"
 
 	.align 1
-gMetatiles_Building1:: @ 82B4E4C
-	.incbin "data/tilesets/secondary/building1/metatiles.bin"
+gMetatiles_GenericBuilding1:: @ 82B4E4C
+	.incbin "data/tilesets/secondary/generic_building1/metatiles.bin"
 
 	.align 1
-gMetatileAttributes_Building1:: @ 82B4FCC
-	.incbin "data/tilesets/secondary/building1/metatile_attributes.bin"
+gMetatileAttributes_GenericBuilding1:: @ 82B4FCC
+	.incbin "data/tilesets/secondary/generic_building1/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_Cave:: @ 82B502C
@@ -319,12 +319,12 @@ gMetatileAttributes_DepartmentStore:: @ 82BEB3C
 	.incbin "data/tilesets/secondary/department_store/metatile_attributes.bin"
 
 	.align 1
-gMetatiles_Building2:: @ 82BEF14
-	.incbin "data/tilesets/secondary/building2/metatiles.bin"
+gMetatiles_GenericBuilding2:: @ 82BEF14
+	.incbin "data/tilesets/secondary/generic_building2/metatiles.bin"
 
 	.align 1
-gMetatileAttributes_Building2:: @ 82BFA94
-	.incbin "data/tilesets/secondary/building2/metatile_attributes.bin"
+gMetatileAttributes_GenericBuilding2:: @ 82BFA94
+	.incbin "data/tilesets/secondary/generic_building2/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_PowerPlant:: @ 82BFD74

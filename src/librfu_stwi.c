@@ -195,7 +195,7 @@ void STWI_send_ConfigStatusREQ(void)
     }
 }
 
-void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data)
+void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
 {
     u8 *packetBytes;
     s32 i;
@@ -206,26 +206,26 @@ void STWI_send_GameConfigREQ(const u8 *unk1, const u8 *data)
         // TODO: what is unk1
         packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
         packetBytes += sizeof(u32);
-        *(u16 *)packetBytes = *(u16 *)unk1;
+        *(u16 *)packetBytes = *(u16 *)serial_gname;
         packetBytes += sizeof(u16);
-        unk1 += sizeof(u16);
+        serial_gname += sizeof(u16);
         for (i = 0; i < 14; ++i)
         {
-            *packetBytes = *unk1;
+            *packetBytes = *serial_gname;
             ++packetBytes;
-            ++unk1;
+            ++serial_gname;
         }
         for (i = 0; i < 8; ++i)
         {
-            *packetBytes = *data;
+            *packetBytes = *uname;
             ++packetBytes;
-            ++data;
+            ++uname;
         }
         STWI_start_Command();
     }
 }
 
-void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
+void STWI_send_SystemConfigREQ(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
 {
     if (!STWI_init(ID_SYSTEM_CONFIG_REQ))
     {
@@ -234,9 +234,9 @@ void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
         gSTWIStatus->reqLength = 1;
         packetBytes = gSTWIStatus->txPacket->rfuPacket8.data;
         packetBytes += sizeof(u32);
-        *packetBytes++ = unk3;
-        *packetBytes++ = unk2;
-        *(u16*)packetBytes = unk1;
+        *packetBytes++ = mcTimer;
+        *packetBytes++ = maxMFrame;
+        *(u16*)packetBytes = availSlotFlag;
         STWI_start_Command();
     }
 }

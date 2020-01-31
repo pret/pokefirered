@@ -384,18 +384,18 @@ void rfu_REQ_configSystem(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
 
 void rfu_REQ_configGameData(u8 mbootFlag, u16 serialNo, const u8 *gname, const u8 *uname)
 {
-    u8 sp[16];
+    u8 packet[16];
     u8 i;
     u8 r3;
     const u8 *gnameBackup = gname;
     const u8 *unameBackup;
 
-    sp[0] = serialNo;
-    sp[1] = serialNo >> 8;
+    packet[0] = serialNo;
+    packet[1] = serialNo >> 8;
     if (mbootFlag != 0)
-        sp[1] = (serialNo >> 8) | 0x80;
+        packet[1] = (serialNo >> 8) | 0x80;
     for (i = 2; i < 15; ++i)
-        sp[i] = *gname++;
+        packet[i] = *gname++;
     r3 = 0;
     unameBackup = uname;
     for (i = 0; i < 8; ++i)
@@ -403,11 +403,11 @@ void rfu_REQ_configGameData(u8 mbootFlag, u16 serialNo, const u8 *gname, const u
         r3 += *unameBackup++;
         r3 += *gnameBackup++;
     }
-    sp[15] = ~r3;
+    packet[15] = ~r3;
     if (mbootFlag != 0)
-        sp[14] = 0;
+        packet[14] = 0;
     STWI_set_Callback_M(rfu_CB_configGameData);
-    STWI_send_GameConfigREQ(sp, uname);
+    STWI_send_GameConfigREQ(packet, uname);
 }
 
 static void rfu_CB_configGameData(u8 ip, u16 r7)

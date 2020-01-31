@@ -71,6 +71,7 @@
 #define ID_CPR_POLL_REQ                             0x0033
 #define ID_CPR_END_REQ                              0x0034
 #define ID_UNK35_REQ                                0x0035    // not defined in SDK header
+#define ID_UNK36_REQ                                0x0036    // not defined in SDK header
 #define ID_RESUME_RETRANSMIT_AND_CHANGE_REQ         0x0037
 #define ID_STOP_MODE_REQ                            0x003d
 #define ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ   0x00ff    // When the AGB is the clock slave, the RFU generates an informational notice, and an automatically started DMA, such as HDMA, is generated at the instant the AGB is being returned as the clock master. This ID is notified by a REQ callback when the exchange of this information (REQ command) fails.

@@ -96,7 +96,7 @@ static void sio32intr_clock_master(void)
     if (handshake_wait(1) == 1)
         return;
 
-    REG_SIOCNT = 0x500B;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS | SIO_MULTI_SD;
 
     if (handshake_wait(0) == 1)
         return;
@@ -115,22 +115,22 @@ static void sio32intr_clock_master(void)
 
             gSTWIStatus->msMode = 0;
             REG_SIODATA32 = 0x80000000;
-            REG_SIOCNT = 0x5002;
-            REG_SIOCNT = 0x5082;
+            REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS;
+            REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_ENABLE;
             gSTWIStatus->state = 5;
         }
         else
         {
 
-            if (gSTWIStatus->ackActiveCommand == 238)
+            if (gSTWIStatus->ackActiveCommand == 0xEE)
             {
-                REG_SIOCNT = 0x5003;
+                REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
                 gSTWIStatus->state = 4;
                 gSTWIStatus->error = ERR_REQ_CMD_ACK_REJECTION;
             }
             else
             {
-                REG_SIOCNT = 0x5003;
+                REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
                 gSTWIStatus->state = 4;
             }
         }
@@ -140,8 +140,8 @@ static void sio32intr_clock_master(void)
     }
     else
     {
-        REG_SIOCNT = 0x5003;
-        REG_SIOCNT = 0x5083;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS | SIO_ENABLE;
     }
 }
 
@@ -155,7 +155,7 @@ static void sio32intr_clock_slave(void)
     STWI_set_timer_in_RAM(100);
     if (handshake_wait(0) == 1)
         return;
-    REG_SIOCNT = 0x500A;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_MULTI_SD;
     regSIODATA32 = REG_SIODATA32;
     if (gSTWIStatus->state == 5)
     {
@@ -169,10 +169,10 @@ static void sio32intr_clock_slave(void)
             if (gSTWIStatus->reqLength == 0)
             {
                 if (
-                    gSTWIStatus->reqActiveCommand == 0x0027
-                 || gSTWIStatus->reqActiveCommand == 0x0028
-                 || gSTWIStatus->reqActiveCommand == 0x0029
-                 || gSTWIStatus->reqActiveCommand == 0x0036
+                    gSTWIStatus->reqActiveCommand == ID_MS_CHANGE_REQ
+                 || gSTWIStatus->reqActiveCommand == ID_DATA_READY_AND_CHANGE_REQ
+                 || gSTWIStatus->reqActiveCommand == ID_DISCONNECTED_AND_CHANGE_REQ
+                 || gSTWIStatus->reqActiveCommand == ID_UNK36_REQ
                 )
                 {
                     gSTWIStatus->ackActiveCommand = gSTWIStatus->reqActiveCommand + 0x80;
@@ -218,9 +218,9 @@ static void sio32intr_clock_slave(void)
         if (gSTWIStatus->reqLength < gSTWIStatus->reqNext)
         {
             if (
-                gSTWIStatus->reqActiveCommand == 0x0028
-             || gSTWIStatus->reqActiveCommand == 0x0029
-             || gSTWIStatus->reqActiveCommand == 0x0036
+                gSTWIStatus->reqActiveCommand == ID_DATA_READY_AND_CHANGE_REQ
+             || gSTWIStatus->reqActiveCommand == ID_DISCONNECTED_AND_CHANGE_REQ
+             || gSTWIStatus->reqActiveCommand == ID_UNK36_REQ
             )
             {
                 gSTWIStatus->ackActiveCommand = gSTWIStatus->reqActiveCommand + 0x80;
@@ -275,7 +275,7 @@ static void sio32intr_clock_slave(void)
         return;
     if (gSTWIStatus->state == 8)
     {
-        REG_SIOCNT = 0x5002;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS;
         STWI_stop_timer_in_RAM();
         if (gSTWIStatus->error == 3)
         {
@@ -289,7 +289,7 @@ static void sio32intr_clock_slave(void)
         {
             REG_SIODATA32 = 0;
             REG_SIOCNT = 0;
-            REG_SIOCNT = 0x5003;
+            REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
             gSTWIStatus->msMode = AGB_CLK_MASTER;
             gSTWIStatus->state = 0;
             if (gSTWIStatus->callbackS != NULL)
@@ -301,9 +301,9 @@ static void sio32intr_clock_slave(void)
     else
     {
         REG_IME = 0;
-        if (REG_TM0CNT_H & 0x80)
+        if (REG_TM0CNT_H & TIMER_ENABLE)
         {
-            if (!(REG_TM0CNT_H & 0x03))
+            if ((REG_TM0CNT_H & 0x03) == TIMER_1CLK)
             {
                 while (REG_TM0CNT_L > 0xFF9B);
             }
@@ -312,8 +312,8 @@ static void sio32intr_clock_slave(void)
                 while (REG_TM0CNT_L > 0xFFFE);
             }
         }
-        REG_SIOCNT = 0x5002;
-        REG_SIOCNT = 0x5082;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_ENABLE;
         REG_IME = 1;
     }
 }
@@ -327,7 +327,7 @@ static u16 handshake_wait(u16 slot)
             gSTWIStatus->timerActive = 0;
             return 1;
         }
-    } while ((REG_SIOCNT & 4) != (slot << 2));
+    } while ((REG_SIOCNT & SIO_MULTI_SI) != (slot << SIO_MULTI_SI_SHIFT));
     return 0;
 }
 
@@ -381,7 +381,7 @@ static void STWI_init_slave(void)
     gSTWIStatus->timerActive = 0;
     gSTWIStatus->error = 0;
     gSTWIStatus->recoveryCount = 0;
-    REG_SIOCNT = 0x5082;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_57600_BPS | SIO_ENABLE;
 }
 
 NAKED

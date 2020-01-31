@@ -131,7 +131,7 @@ void STWI_set_Callback_S(void (*callbackS)(u16))
 
 void STWI_set_Callback_ID(void (*func)(void)) // name in SDK, but is actually setting a function pointer
 {
-    gSTWIStatus->unk_20 = func;
+    gSTWIStatus->callbackID = func;
 }
 
 u16 STWI_poll_CommandEnd(void)

@@ -315,7 +315,7 @@ struct STWIStatus
     u8 unk_17;
     void (*callbackM)();
     void (*callbackS)(u16);
-    void (*unk_20)(void);
+    void (*callbackID)(void);
     union RfuPacket *txPacket;
     union RfuPacket *rxPacket;
     vu8 unk_2c;

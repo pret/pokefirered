@@ -1144,11 +1144,11 @@ bool8 rfu_getMasterSlave(void)
 
     if (masterSlave == AGB_CLK_MASTER)
     {
-        if (gSTWIStatus->unk_2c)
+        if (gSTWIStatus->sending)
         {
-            if (gSTWIStatus->reqActiveCommand == 39
-             || gSTWIStatus->reqActiveCommand == 37
-             || gSTWIStatus->reqActiveCommand == 55)
+            if (gSTWIStatus->reqActiveCommand == ID_MS_CHANGE_REQ
+             || gSTWIStatus->reqActiveCommand == ID_DATA_TX_AND_CHANGE_REQ
+             || gSTWIStatus->reqActiveCommand == ID_RESUME_RETRANSMIT_AND_CHANGE_REQ)
                 masterSlave = AGB_CLK_SLAVE;
         }
     }

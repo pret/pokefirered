@@ -133,7 +133,7 @@ static void sio32intr_clock_master(void)
                 gSTWIStatus->state = 4; // error
             }
         }
-        gSTWIStatus->unk_2c = 0;
+        gSTWIStatus->sending = 0;
         if (gSTWIStatus->callbackM != NULL)
             Callback_Dummy_M(gSTWIStatus->reqActiveCommand, gSTWIStatus->error, gSTWIStatus->callbackM);
     }

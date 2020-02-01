@@ -451,9 +451,9 @@ struct RfuStatic
     u8 nullFrameCount;
     u8 emberCount;
     u8 SCStartFlag;
-    u8 linkEmergencyFlag[4];
-    u8 lsFixedCount[4];
-    u16 cidBak[4];
+    u8 linkEmergencyFlag[RFU_CHILD_MAX];
+    u8 lsFixedCount[RFU_CHILD_MAX];
+    u16 cidBak[RFU_CHILD_MAX];
     u16 linkEmergencyLimit;
     u16 reqResult;
     u16 tryPid;

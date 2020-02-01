@@ -461,27 +461,15 @@ struct RfuStatic
     u32 totalPacketSize;
 };
 
-struct RfuSIO32Id
-{
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-    u16 unk4;
-    u16 unk6;
-    u16 unk8; // unused
-    u16 unkA;
-};
-
 extern struct STWIStatus *gSTWIStatus;
 extern struct RfuLinkStatus *gRfuLinkStatus;
 extern struct RfuStatic *gRfuStatic;
 extern struct RfuFixed *gRfuFixed;
 extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
-extern struct RfuSIO32Id gRfuSIO32Id;
 
 // librfu_s32id
-s32 AgbRFU_checkID(u8);
+s32 AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation. 
 

@@ -914,7 +914,7 @@ static bool32 TypeChatMessage_HandleDPad(void)
     {
         if (JOY_REPT(DPAD_UP))
         {
-            if (sWork->currentRow)
+            if (sWork->currentRow > 0)
                 sWork->currentRow--;
             else
                 sWork->currentRow = sKeyboardPageMaxRow[sWork->currentPage];
@@ -938,7 +938,7 @@ static bool32 TypeChatMessage_HandleDPad(void)
         {
             if (JOY_REPT(DPAD_LEFT))
             {
-                if (sWork->currentCol)
+                if (sWork->currentCol > 0)
                     sWork->currentCol--;
                 else
                     sWork->currentCol = 4;

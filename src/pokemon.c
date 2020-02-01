@@ -90,7 +90,20 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
 #include "data/battle_moves.h"
 
-static const u8 sUnreferencedData[] = { 0x34, 0x00, 0x10, 0x00, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00 };
+// Used in an unreferenced function in RS.
+// Unreferenced here and in Emerald.
+struct CombinedMove
+{
+    u16 move1;
+    u16 move2;
+    u16 newMove;
+};
+
+static const struct CombinedMove sCombinedMoves[2] =
+{
+    {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
+    {0xFFFF, 0xFFFF, 0xFFFF}
+};
 
 static const u16 sSpeciesToHoennPokedexNum[] = // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
 {

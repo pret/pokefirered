@@ -454,7 +454,7 @@ struct RfuStatic
     u8 linkEmergencyFlag[4];
     u8 lsFixedCount[4];
     u16 cidBak[4];
-    u16 unk_1a;
+    u16 linkEmergencyLimit;
     u16 reqResult;
     u16 tryPid;
     u16 watchdogTimer;

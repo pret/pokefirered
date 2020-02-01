@@ -409,14 +409,14 @@ void rfu_REQ_configSystem(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
     STWI_send_SystemConfigREQ((availSlotFlag & AVAIL_SLOT1) | 0x3C, maxMFrame, mcTimer);
     if (mcTimer == 0)
     {
-        gRfuStatic->unk_1a = 1;
+        gRfuStatic->linkEmergencyLimit = 1;
     }
     else
     {
         u16 IMEBackup = REG_IME;
 
         REG_IME = 0;
-        gRfuStatic->unk_1a = Div(600, mcTimer);
+        gRfuStatic->linkEmergencyLimit = Div(600, mcTimer);
         REG_IME = IMEBackup;
     }
 }
@@ -917,7 +917,7 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
                         if (gRfuStatic->linkEmergencyFlag[i] > 3)
                         {
                             *bmLinkLossSlot |= newLinkLossFlag;
-                            *linkLossReason = reasonMaybe; // why not directly use REASON_LINK_LOSS?
+                            *linkLossReason = REASON_LINK_LOSS;
                         }
                     }
                     else
@@ -928,17 +928,17 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
                             if (gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[7] == 0)
                             {
                                 *bmLinkLossSlot |= newLinkLossFlag;
-                                *linkLossReason = reasonMaybe; // why not directly use REASON_LINK_LOSS?
+                                *linkLossReason = REASON_LINK_LOSS;
                             }
                             else
                             {
-                                if (++gRfuStatic->linkEmergencyFlag[i] > gRfuStatic->unk_1a)
+                                if (++gRfuStatic->linkEmergencyFlag[i] > gRfuStatic->linkEmergencyLimit)
                                 {
                                     gRfuStatic->linkEmergencyFlag[i] = 0;
                                     STWI_send_DisconnectREQ(gRfuLinkStatus->connSlotFlag);
                                     STWI_poll_CommandEnd();
                                     *bmLinkLossSlot |= newLinkLossFlag;
-                                    *linkLossReason = reasonMaybe; // why not directly use REASON_LINK_LOSS?
+                                    *linkLossReason = REASON_LINK_LOSS;
                                 }
                             }
                         }
@@ -946,7 +946,7 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
                 }
                 else
                 {
-                    gRfuStatic->linkEmergencyFlag[i] = reqResult; // why not directly use 0?
+                    gRfuStatic->linkEmergencyFlag[i] = 0;
                 }
             }
             if (gRfuLinkStatus->parentChild == MODE_PARENT && gRfuLinkStatus->strength[i] != 0)

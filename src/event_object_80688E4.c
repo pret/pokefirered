@@ -10,11 +10,11 @@ static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
 
 bool8 FreezeObjectEvent(struct ObjectEvent * objectEvent)
 {
-    if (objectEvent->mapobj_bit_6 || objectEvent->mapobj_bit_8)
+    if (objectEvent->heldMovementActive || objectEvent->frozen)
         return TRUE;
-    objectEvent->mapobj_bit_8 = TRUE;
-    objectEvent->mapobj_bit_23 = gSprites[objectEvent->spriteId].animPaused;
-    objectEvent->mapobj_bit_24 = gSprites[objectEvent->spriteId].affineAnimPaused;
+    objectEvent->frozen = TRUE;
+    objectEvent->spriteAnimPausedBackup = gSprites[objectEvent->spriteId].animPaused;
+    objectEvent->spriteAffineAnimPausedBackup = gSprites[objectEvent->spriteId].affineAnimPaused;
     gSprites[objectEvent->spriteId].animPaused = TRUE;
     gSprites[objectEvent->spriteId].affineAnimPaused = TRUE;
     return FALSE;
@@ -42,11 +42,11 @@ void FreezeObjectEventsExceptOne(u8 noFreeze)
 
 void UnfreezeObjectEvent(struct ObjectEvent * objectEvent)
 {
-    if (objectEvent->active && objectEvent->mapobj_bit_8)
+    if (objectEvent->active && objectEvent->frozen)
     {
-        objectEvent->mapobj_bit_8 = FALSE;
-        gSprites[objectEvent->spriteId].animPaused = objectEvent->mapobj_bit_23;
-        gSprites[objectEvent->spriteId].affineAnimPaused = objectEvent->mapobj_bit_24;
+        objectEvent->frozen = FALSE;
+        gSprites[objectEvent->spriteId].animPaused = objectEvent->spriteAnimPausedBackup;
+        gSprites[objectEvent->spriteId].affineAnimPaused = objectEvent->spriteAffineAnimPausedBackup;
     }
 }
 

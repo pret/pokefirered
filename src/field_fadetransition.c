@@ -850,7 +850,7 @@ static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
     (*a4)++;
     playerSpr->pos2.x = *a2 >> 5;
     playerSpr->pos2.y = *a3 >> 5;
-    if (playerObj->mapobj_bit_7)
+    if (playerObj->heldMovementFinished)
     {
         ObjectEventForceSetSpecialAnim(playerObj, GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
     }

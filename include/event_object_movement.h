@@ -97,7 +97,7 @@ u8 sub_8063F84(u8 direction);
 u8 GetTrainerFacingDirectionMovementType(u8 direction);
 void CameraObjectSetFollowedObjectId(u8 spriteId);
 void UnfreezeObjectEvents(void);
-void sub_8069058(u8, u8);
+void TurnEventObject(u8, u8);
 
 // Exported data declarations
 
@@ -105,5 +105,6 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
 extern const struct OamData gObjectEventBaseOam_32x32;
+extern const struct UCoords16 gUnknown_83A64C8[];
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

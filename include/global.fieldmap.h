@@ -190,7 +190,7 @@ struct ObjectEvent
              u32 mapobj_bit_19:1;
              u32 mapobj_bit_20:1;
              u32 mapobj_bit_21:1;
-             u32 mapobj_bit_22:1;
+             u32 hasShadow:1;
              u32 mapobj_bit_23:1;
     /*0x03*/ u32 mapobj_bit_24:1;
              u32 mapobj_bit_25:1;

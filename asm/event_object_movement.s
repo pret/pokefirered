@@ -1645,7 +1645,7 @@ sprite_new: @ 805E9F8
 	adds r0, r5, 0
 	bl GetObjectEventGraphicsInfo
 	adds r4, r0, 0
-	ldr r1, _0805EB38 @ =sub_8068FA8
+	ldr r1, _0805EB38 @ =UpdateEventObjectSpriteSubpriorityAndVisibility
 	add r3, sp, 0x1C
 	adds r0, r5, 0
 	mov r2, sp
@@ -1769,7 +1769,7 @@ _0805EB24:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805EB38: .4byte sub_8068FA8
+_0805EB38: .4byte UpdateEventObjectSpriteSubpriorityAndVisibility
 _0805EB3C: .4byte 0x0000ffff
 _0805EB40: .4byte gSprites
 	thumb_func_end sprite_new
@@ -18285,7 +18285,7 @@ sub_8066108: @ 8066108
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E9C
+	bl SpriteAnimEnded
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806611C
@@ -19637,7 +19637,7 @@ sub_8066A54: @ 8066A54
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E9C
+	bl SpriteAnimEnded
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066A70
@@ -19707,7 +19707,7 @@ sub_8066AD0: @ 8066AD0
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_8068E9C
+	bl SpriteAnimEnded
 	lsls r0, 24
 	cmp r0, 0
 	beq _08066AEC

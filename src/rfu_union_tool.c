@@ -654,7 +654,7 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
 
 static void sub_811C008(s32 arg0, s32 arg1, u8 arg2)
 {
-    sub_8069058(5 * arg1 - 0x38 + arg0, arg2);
+    TurnEventObject(5 * arg1 - 0x38 + arg0, arg2);
 }
 
 void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)

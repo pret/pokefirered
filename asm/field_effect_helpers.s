@@ -951,7 +951,7 @@ _080DB4C0:
 _080DB4CE:
 	adds r0, r5, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
@@ -1294,7 +1294,7 @@ _080DB750:
 _080DB770:
 	adds r0, r5, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
@@ -1564,7 +1564,7 @@ _080DB94E:
 	lsls r1, 29
 	lsrs r1, 31
 	adds r0, r4, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 _080DB98E:
 	add sp, 0x4
 	pop {r3}
@@ -1781,7 +1781,7 @@ sub_80DBB18: @ 80DBB18
 _080DBB2E:
 	adds r0, r1, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DBB18
@@ -1810,7 +1810,7 @@ sub_80DBB3C: @ 80DBB3C
 	lsls r1, 29
 	lsrs r1, 31
 	adds r0, r4, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x38
@@ -1966,7 +1966,7 @@ _080DBC66:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 _080DBCA6:
 	add sp, 0x4
 	pop {r4}
@@ -2233,7 +2233,7 @@ _080DBE98:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	ldr r1, [r5, 0x10]
 	ldr r0, [r4, 0x34]
 	cmp r1, r0
@@ -2461,7 +2461,7 @@ _080DC03C:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 _080DC080:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2889,7 +2889,7 @@ sub_80DC3A8: @ 80DC3A8
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
@@ -3627,7 +3627,7 @@ _080DC8F6:
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 _080DC926:
 	add sp, 0x4
 	pop {r4-r6}
@@ -3706,7 +3706,7 @@ sub_80DC99C: @ 80DC99C
 	strh r1, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	ldrh r1, [r4, 0x3E]
 	ldr r0, _080DC9D8 @ =0x00001004
 	ands r0, r1
@@ -4163,7 +4163,7 @@ sub_80DCCE0: @ 80DCCE0
 _080DCCFE:
 	adds r0, r4, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 	ldrh r0, [r4, 0x2E]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4195,7 +4195,7 @@ sub_80DCD1C: @ 80DCD1C
 _080DCD3A:
 	adds r0, r2, 0
 	movs r1, 0
-	bl UpdateEventObjectSpriteVisibility
+	bl UpdateObjectEventSpriteVisibility
 _080DCD42:
 	pop {r0}
 	bx r0

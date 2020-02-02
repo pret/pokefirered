@@ -1193,7 +1193,7 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
     u8 v1 = ScriptReadByte(ctx);
     u8 direction = ScriptReadByte(ctx);
 
-    TurnEventObject(v1, direction);
+    TurnObjectEvent(v1, direction);
     return FALSE;
 }
 

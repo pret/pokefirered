@@ -1645,7 +1645,7 @@ sprite_new: @ 805E9F8
 	adds r0, r5, 0
 	bl GetObjectEventGraphicsInfo
 	adds r4, r0, 0
-	ldr r1, _0805EB38 @ =UpdateEventObjectSpriteSubpriorityAndVisibility
+	ldr r1, _0805EB38 @ =UpdateObjectEventSpriteSubpriorityAndVisibility
 	add r3, sp, 0x1C
 	adds r0, r5, 0
 	mov r2, sp
@@ -1769,7 +1769,7 @@ _0805EB24:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805EB38: .4byte UpdateEventObjectSpriteSubpriorityAndVisibility
+_0805EB38: .4byte UpdateObjectEventSpriteSubpriorityAndVisibility
 _0805EB3C: .4byte 0x0000ffff
 _0805EB40: .4byte gSprites
 	thumb_func_end sprite_new

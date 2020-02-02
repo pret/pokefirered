@@ -97,7 +97,7 @@ u8 sub_8063F84(u8 direction);
 u8 GetTrainerFacingDirectionMovementType(u8 direction);
 void CameraObjectSetFollowedObjectId(u8 spriteId);
 void UnfreezeObjectEvents(void);
-void TurnEventObject(u8, u8);
+void TurnObjectEvent(u8, u8);
 
 // Exported data declarations
 

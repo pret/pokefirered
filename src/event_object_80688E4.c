@@ -4,7 +4,9 @@
 #include "field_effect.h"
 #include "field_ground_effect.h"
 
-void sub_8069248(struct Sprite * sprite);
+// This is part of evobjmv.c (see assert statement in DoObjectUnionRoomWarpYDisplacement).
+
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
 
 bool8 FreezeObjectEvent(struct ObjectEvent * objectEvent)
 {
@@ -58,31 +60,39 @@ void UnfreezeObjectEvents(void)
     }
 }
 
-void little_step(struct Sprite * sprite, u8 direction)
+#define tObjectEventId data[0]
+#define tZCoord        data[1]
+#define tInvisible     data[2]
+
+#define tDirection data[3]
+#define tSpeed     data[4]
+#define tStepNo    data[5]
+
+static void little_step(struct Sprite * sprite, u8 direction)
 {
     sprite->pos1.x += gUnknown_83A64C8[direction].x;
     sprite->pos1.y += gUnknown_83A64C8[direction].y;
 }
 
-void double_little_steps(struct Sprite * sprite, u8 direction)
+static void double_little_steps(struct Sprite * sprite, u8 direction)
 {
     sprite->pos1.x += 2 * gUnknown_83A64C8[direction].x;
     sprite->pos1.y += 2 * gUnknown_83A64C8[direction].y;
 }
 
-void triple_little_steps(struct Sprite * sprite, u8 direction)
+static void triple_little_steps(struct Sprite * sprite, u8 direction)
 {
     sprite->pos1.x += 2 * gUnknown_83A64C8[direction].x + gUnknown_83A64C8[direction].x;
     sprite->pos1.y += 2 * gUnknown_83A64C8[direction].y + gUnknown_83A64C8[direction].y;
 }
 
-void quad_little_steps(struct Sprite * sprite, u8 direction)
+static void quad_little_steps(struct Sprite * sprite, u8 direction)
 {
     sprite->pos1.x += 4 * gUnknown_83A64C8[direction].x;
     sprite->pos1.y += 4 * gUnknown_83A64C8[direction].y;
 }
 
-void oct_little_steps(struct Sprite * sprite, u8 direction)
+static void oct_little_steps(struct Sprite * sprite, u8 direction)
 {
     sprite->pos1.x += 8 * gUnknown_83A64C8[direction].x;
     sprite->pos1.y += 8 * gUnknown_83A64C8[direction].y;
@@ -90,15 +100,14 @@ void oct_little_steps(struct Sprite * sprite, u8 direction)
 
 void oamt_npc_ministep_reset(struct Sprite * sprite, u8 direction, u8 speed)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = speed;
-    sprite->data[5] = 0;
+    sprite->tDirection = direction;
+    sprite->tSpeed = speed;
+    sprite->tStepNo = 0;
 }
-
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 direction);
 
-static const SpriteStepFunc gUnknown_83A710C[] = {
+static const SpriteStepFunc sSpeed0[] = {
     little_step,
     little_step,
     little_step,
@@ -117,7 +126,7 @@ static const SpriteStepFunc gUnknown_83A710C[] = {
     little_step
 };
 
-static const SpriteStepFunc gUnknown_83A714C[] = {
+static const SpriteStepFunc sSpeed1[] = {
     double_little_steps,
     double_little_steps,
     double_little_steps,
@@ -128,7 +137,7 @@ static const SpriteStepFunc gUnknown_83A714C[] = {
     double_little_steps
 };
 
-static const SpriteStepFunc gUnknown_83A716C[] = {
+static const SpriteStepFunc sSpeed2[] = {
     double_little_steps,
     triple_little_steps,
     triple_little_steps,
@@ -137,63 +146,75 @@ static const SpriteStepFunc gUnknown_83A716C[] = {
     triple_little_steps
 };
 
-static const SpriteStepFunc gUnknown_83A7184[] = {
+static const SpriteStepFunc sSpeed3[] = {
     quad_little_steps,
     quad_little_steps,
     quad_little_steps,
     quad_little_steps
 };
 
-static const SpriteStepFunc gUnknown_83A7194[] = {
+static const SpriteStepFunc sSpeed4[] = {
     oct_little_steps,
     oct_little_steps
 };
 
-static const SpriteStepFunc *const gUnknown_83A719C[] = {
-    gUnknown_83A710C,
-    gUnknown_83A714C,
-    gUnknown_83A716C,
-    gUnknown_83A7184,
-    gUnknown_83A7194
+static const SpriteStepFunc *const sSpriteStepFuncsBySpeed[] = {
+    sSpeed0,
+    sSpeed1,
+    sSpeed2,
+    sSpeed3,
+    sSpeed4
 };
 
-static const s16 gUnknown_83A71B0[] = {
-    16, 8, 6, 4, 2
+static const s16 sSpriteStepCountsBySpeed[] = {
+    NELEMS(sSpeed0),
+    NELEMS(sSpeed1),
+    NELEMS(sSpeed2),
+    NELEMS(sSpeed3),
+    NELEMS(sSpeed4)
 };
 
 bool8 obj_npc_ministep(struct Sprite *sprite)
 {
-    if (sprite->data[5] >= gUnknown_83A71B0[sprite->data[4]])
+    if (sprite->tStepNo >= sSpriteStepCountsBySpeed[sprite->tSpeed])
         return FALSE;
 
-    gUnknown_83A719C[sprite->data[4]][sprite->data[5]](sprite, sprite->data[3]);
+    sSpriteStepFuncsBySpeed[sprite->tSpeed][sprite->tStepNo](sprite, sprite->tDirection);
 
-    sprite->data[5]++;
+    sprite->tStepNo++;
 
-    if (sprite->data[5] < gUnknown_83A71B0[sprite->data[4]])
+    if (sprite->tStepNo < sSpriteStepCountsBySpeed[sprite->tSpeed])
         return FALSE;
 
     return TRUE;
 }
 
+#undef tStepNo
+#undef tSpeed
+#undef tDirection
+
+#define tDirection data[3]
+#define tDelay     data[4]
+#define tStepNo    data[5]
+
 void sub_8068BBC(struct Sprite *sprite, u8 direction)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = 0;
-    sprite->data[5] = 0;
+    sprite->tDirection = direction;
+    sprite->tDelay = 0;
+    sprite->tStepNo = 0;
 }
 
 bool8 sub_8068BCC(struct Sprite *sprite)
 {
-    if (!(sprite->data[4] & 1))
+    if (!(sprite->tDelay & 1))
     {
-        little_step(sprite, sprite->data[3]);
-        sprite->data[5]++;
+        little_step(sprite, sprite->tDirection);
+        sprite->tStepNo++;
     }
 
-    sprite->data[4]++;
+    sprite->tDelay++;
 
-    if (sprite->data[5] > 15)
+    if (sprite->tStepNo > 15)
         return TRUE;
     else
         return FALSE;
@@ -201,22 +222,22 @@ bool8 sub_8068BCC(struct Sprite *sprite)
 
 void sub_8068C08(struct Sprite *sprite, u8 direction)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = 0;
-    sprite->data[5] = 0;
+    sprite->tDirection = direction;
+    sprite->tDelay = 0;
+    sprite->tStepNo = 0;
 }
 
 bool8 sub_8068C18(struct Sprite *sprite)
 {
-    if (++sprite->data[4] < 3)
+    if (++sprite->tDelay < 3)
     {
-        little_step(sprite, sprite->data[3]);
-        sprite->data[5]++;
+        little_step(sprite, sprite->tDirection);
+        sprite->tStepNo++;
     }
     else
-        sprite->data[4] = 0;
+        sprite->tDelay = 0;
 
-    if (sprite->data[5] > 15)
+    if (sprite->tStepNo > 15)
         return TRUE;
     else
         return FALSE;
@@ -224,21 +245,21 @@ bool8 sub_8068C18(struct Sprite *sprite)
 
 void sub_8068C58(struct Sprite *sprite, u8 direction)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = 0;
-    sprite->data[5] = 0;
+    sprite->tDirection = direction;
+    sprite->tDelay = 0;
+    sprite->tStepNo = 0;
 }
 
 bool8 sub_8068C68(struct Sprite *sprite)
 {
-    if (++sprite->data[4] > 9)
+    if (++sprite->tDelay > 9)
     {
-        sprite->data[4] = 0;
-        little_step(sprite, sprite->data[3]);
-        sprite->data[5]++;
+        sprite->tDelay = 0;
+        little_step(sprite, sprite->tDirection);
+        sprite->tStepNo++;
     }
 
-    if (sprite->data[5] > 15)
+    if (sprite->tStepNo > 15)
         return TRUE;
     else
         return FALSE;
@@ -246,125 +267,143 @@ bool8 sub_8068C68(struct Sprite *sprite)
 
 void sub_8068CA4(struct Sprite *sprite, u8 direction)
 {
-    sprite->data[3] = direction;
-    sprite->data[4] = 0;
-    sprite->data[5] = 0;
+    sprite->tDirection = direction;
+    sprite->tDelay = 0;
+    sprite->tStepNo = 0;
 }
 
 bool8 sub_8068CB4(struct Sprite *sprite)
 {
-    if ((++sprite->data[4]) & 1)
+    if ((++sprite->tDelay) & 1)
     {
-        little_step(sprite, sprite->data[3]);
-        sprite->data[5]++;
+        little_step(sprite, sprite->tDirection);
+        sprite->tStepNo++;
     }
     else
     {
-        double_little_steps(sprite, sprite->data[3]);
-        sprite->data[5] += 2;
+        double_little_steps(sprite, sprite->tDirection);
+        sprite->tStepNo += 2;
     }
 
-    if (sprite->data[5] > 15)
+    if (sprite->tStepNo > 15)
         return TRUE;
     else
         return FALSE;
 }
 
-static const s8 gUnknown_83A71BA[] = {
+#undef tStepNo
+#undef tDelay
+#undef tDirection
+
+#define tDirection  data[3]
+#define tJumpSpeed  data[4]
+#define tJumpHeight data[5]
+#define tStepNo     data[6]
+
+static const s8 sJumpHeight12[] = {
     -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
 };
 
-static const s8 gUnknown_83A71CA[] = {
+static const s8 sJumpHeight6[] = {
     0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
 };
 
-static const s8 gUnknown_83A71DA[] = {
+static const s8 sJumpHeight10[] = {
     -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
 };
 
-static const s8 *const gUnknown_83A71EC[] = {
-    gUnknown_83A71BA,
-    gUnknown_83A71CA,
-    gUnknown_83A71DA
+static const s8 *const sYDisplacementPtrs[] = {
+    sJumpHeight12,
+    sJumpHeight6,
+    sJumpHeight10
 };
 
-s16 sub_8068D00(s16 a1, u8 a2)
+static s16 GetJumpYDisplacement(s16 stepno, u8 jumpno)
 {
-    return gUnknown_83A71EC[a2][a1];
+    return sYDisplacementPtrs[jumpno][stepno];
 }
 
-void sub_8068D1C(struct Sprite *sprite, u8 a2, u8 a3, u8 a4)
+void sub_8068D1C(struct Sprite *sprite, u8 direction, u8 speed, u8 height)
 {
-    sprite->data[3] = a2;
-    sprite->data[4] = a3;
-    sprite->data[5] = a4;
-    sprite->data[6] = 0;
+    sprite->tDirection = direction;
+    sprite->tJumpSpeed = speed;
+    sprite->tJumpHeight = height;
+    sprite->tStepNo = 0;
 }
 
 u8 sub_8068D3C(struct Sprite *sprite)
 {
-    s16 v5[3] = {0x10, 0x10, 0x20};
-    u8 v6[3] = {0, 0, 1};
-    u8 v2 = 0;
+    s16 duration[3] = {0x10, 0x10, 0x20};
+    u8 shifts[3] = {0, 0, 1};
+    u8 jumpPhase = 0;
 
-    if (sprite->data[4])
-        little_step(sprite, sprite->data[3]);
+    if (sprite->tJumpSpeed != 0)
+        little_step(sprite, sprite->tDirection);
 
-    sprite->pos2.y = sub_8068D00(sprite->data[6] >> v6[sprite->data[4]], sprite->data[5]);
+    sprite->pos2.y = GetJumpYDisplacement(sprite->tStepNo >> shifts[sprite->tJumpSpeed], sprite->tJumpHeight);
 
-    sprite->data[6]++;
+    sprite->tStepNo++;
 
-    if (sprite->data[6] == (v5[sprite->data[4]] >> 1))
-        v2 = 1;
+    if (sprite->tStepNo == (duration[sprite->tJumpSpeed] >> 1))
+        jumpPhase = 1;
 
-    if (sprite->data[6] >= v5[sprite->data[4]])
+    if (sprite->tStepNo >= duration[sprite->tJumpSpeed])
     {
         sprite->pos2.y = 0;
-        v2 = -1;
+        jumpPhase = -1;
     }
 
-    return v2;
+    return jumpPhase;
 }
 
 u8 sub_8068DC4(struct Sprite *sprite)
 {
-    s16 v5[3] = {0x20, 0x20, 0x40};
-    u8 v6[3] = {1, 1, 2};
-    u8 v2 = 0;
+    s16 duration[3] = {0x20, 0x20, 0x40};
+    u8 shifts[3] = {1, 1, 2};
+    u8 jumpPhase = 0;
 
-    if (sprite->data[4] && !(sprite->data[6] & 1))
-        little_step(sprite, sprite->data[3]);
+    if (sprite->tJumpSpeed != 0 && !(sprite->tStepNo & 1))
+        little_step(sprite, sprite->tDirection);
 
-    sprite->pos2.y = sub_8068D00(sprite->data[6] >> v6[sprite->data[4]], sprite->data[5]);
+    sprite->pos2.y = GetJumpYDisplacement(sprite->tStepNo >> shifts[sprite->tJumpSpeed], sprite->tJumpHeight);
 
-    sprite->data[6]++;
+    sprite->tStepNo++;
 
-    if (sprite->data[6] == (v5[sprite->data[4]] >> 1))
-        v2 = 1;
+    if (sprite->tStepNo == (duration[sprite->tJumpSpeed] >> 1))
+        jumpPhase = 1;
 
-    if (sprite->data[6] >= v5[sprite->data[4]])
+    if (sprite->tStepNo >= duration[sprite->tJumpSpeed])
     {
         sprite->pos2.y = 0;
-        v2 = -1;
+        jumpPhase = -1;
     }
 
-    return v2;
+    return jumpPhase;
 }
+
+#undef tStepNo
+#undef tJumpHeight
+#undef tJumpSpeed
+#undef tDirection
+
+#define tDelay data[3]
 
 void SetObjectEventStepTimer(struct Sprite *sprite, s16 delay)
 {
-    sprite->data[3] = delay;
+    sprite->tDelay = delay;
 }
 
 bool8 RunObjectEventStepTimer(struct Sprite *sprite)
 {
-    sprite->data[3]--;
+    sprite->tDelay--;
 
-    if (sprite->data[3] == 0)
+    if (sprite->tDelay == 0)
         return TRUE;
     else
         return FALSE;
 }
+
+#undef tDelay
 
 void obj_anim_image_set_and_seek(struct Sprite *sprite, u8 animNum, u8 animCmdIndex)
 {
@@ -381,7 +420,7 @@ bool8 SpriteAnimEnded(struct Sprite *sprite)
         return FALSE;
 }
 
-void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible)
+void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible)
 {
     u16 x, y;
     s16 x2, y2;
@@ -408,11 +447,11 @@ void UpdateEventObjectSpriteVisibility(struct Sprite *sprite, bool8 invisible)
         sprite->invisible = TRUE;
 }
 
-void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *sprite)
+void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *sprite)
 {
-    sub_8069248(sprite);
-    SetObjectSubpriorityByZCoord(sprite->data[1], sprite, 1);
-    UpdateEventObjectSpriteVisibility(sprite, sprite->data[2]);
+    DoObjectUnionRoomWarpYDisplacement(sprite);
+    SetObjectSubpriorityByZCoord(sprite->tZCoord, sprite, 1);
+    UpdateObjectEventSpriteVisibility(sprite, sprite->tInvisible);
 }
 
 void sub_8068FD0(void)
@@ -421,20 +460,23 @@ void sub_8068FD0(void)
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if (sprite->inUse && sprite->callback == UpdateEventObjectSpriteSubpriorityAndVisibility)
+        if (sprite->inUse && sprite->callback == UpdateObjectEventSpriteSubpriorityAndVisibility)
         {
             DestroySprite(sprite);
         }
     }
 }
 
-s32 sub_806900C(u8 objectEventId)
+#define tUnionRoomWarpAnimNo    data[3]
+#define tUnionRoomWarpAnimState data[4]
+
+static int GetObjectEventSpriteId(u8 objectEventId)
 {
-    s32 i;
+    int i;
     for (i = 0; i < MAX_SPRITES; i++)
     {
         struct Sprite *sprite = &gSprites[i];
-        if (sprite->inUse && sprite->callback == UpdateEventObjectSpriteSubpriorityAndVisibility && (u8)sprite->data[0] == objectEventId)
+        if (sprite->inUse && sprite->callback == UpdateObjectEventSpriteSubpriorityAndVisibility && (u8)sprite->tObjectEventId == objectEventId)
         {
             return i;
         }
@@ -442,10 +484,10 @@ s32 sub_806900C(u8 objectEventId)
     return MAX_SPRITES;
 }
 
-void TurnEventObject(u8 objectEventId, u8 direction)
+void TurnObjectEvent(u8 objectEventId, u8 direction)
 {
     u8 animNum;
-    u8 spriteId = sub_806900C(objectEventId);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
@@ -453,10 +495,10 @@ void TurnEventObject(u8 objectEventId, u8 direction)
     }
 }
 
-void sub_8069094(u8 objectEventId, u8 direction)
+void RfuUnionObjectSetFacingDirection(u8 objectEventId, u8 direction)
 {
     u8 animNum;
-    s32 spriteId = sub_806900C(objectEventId);
+    int spriteId = GetObjectEventSpriteId(objectEventId);
     u16 baseBlock;
     if (spriteId != MAX_SPRITES)
     {
@@ -471,111 +513,119 @@ void sub_8069094(u8 objectEventId, u8 direction)
         {
             sprite->subspriteTables = NULL;
             sprite->subspriteTableNum = 0;
-            sprite->subspriteMode = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
         }
         else
         {
             SetSubspriteTables(sprite, info->subspriteTables);
-            sprite->subspriteMode = 2;
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         }
         StartSpriteAnim(sprite, 0);
     }
 }
 
-void sub_8069124(u8 objectEventId, bool32 arg1)
+void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 arg1)
 {
-    u8 spriteId = sub_806900C(objectEventId);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId != MAX_SPRITES)
     {
         if (arg1)
-            gSprites[spriteId].data[2] = TRUE;
+            gSprites[spriteId].tInvisible = TRUE;
         else
-            gSprites[spriteId].data[2] = FALSE;
+            gSprites[spriteId].tInvisible = FALSE;
     }
 }
 
-bool32 sub_806916C(u8 objectEventId)
+bool32 RfuUnionObjectIsInvisible(u8 objectEventId)
 {
-    u8 spriteId = sub_806900C(objectEventId);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId == MAX_SPRITES)
         return FALSE;
-    return gSprites[spriteId].data[2] == TRUE;
+    return gSprites[spriteId].tInvisible == TRUE;
 }
 
-void sub_80691A4(u8 objectEventId, u8 direction)
+void RfuUnionObjectStartWarp(u8 objectEventId, u8 direction)
 {
-    u8 spriteId = sub_806900C(objectEventId);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].data[3] = direction;
-        gSprites[spriteId].data[4] = 0;
+        gSprites[spriteId].tUnionRoomWarpAnimNo = direction;
+        gSprites[spriteId].tUnionRoomWarpAnimState = 0;
     }
 }
 
-void sub_80691D4(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementUpwards(struct Sprite * sprite)
 {
-    switch (sprite->data[4])
+    switch (sprite->tUnionRoomWarpAnimState)
     {
     case 0:
         sprite->pos2.y = 0;
-        sprite->data[4]++;
+        sprite->tUnionRoomWarpAnimState++;
         // fallthrough
     case 1:
         if ((sprite->pos2.y -= 8) == -160)
         {
             sprite->pos2.y = 0;
-            sprite->data[2] = 1;
-            sprite->data[3] = 0;
-            sprite->data[4] = 0;
+            sprite->tInvisible = 1;
+            sprite->tUnionRoomWarpAnimNo = 0;
+            sprite->tUnionRoomWarpAnimState = 0;
         }
+        break;
     }
 }
 
-void sub_8069210(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacementDownwards(struct Sprite * sprite)
 {
-    switch (sprite->data[4])
+    switch (sprite->tUnionRoomWarpAnimState)
     {
     case 0:
         sprite->pos2.y = -160;
-        sprite->data[4]++;
+        sprite->tUnionRoomWarpAnimState++;
         // fallthrough
     case 1:
         if ((sprite->pos2.y += 8) == 0)
         {
-            sprite->data[3] = 0;
-            sprite->data[4] = 0;
+            sprite->tUnionRoomWarpAnimNo = 0;
+            sprite->tUnionRoomWarpAnimState = 0;
         }
+        break;
     }
 }
 
-void sub_8069248(struct Sprite * sprite)
+static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite)
 {
-    switch (sprite->data[3])
+    switch (sprite->tUnionRoomWarpAnimNo)
     {
     case 0:
         break;
     case 1:
-        sub_8069210(sprite);
+        DoObjectUnionRoomWarpYDisplacementDownwards(sprite);
         break;
     case 2:
-        sub_80691D4(sprite);
+        DoObjectUnionRoomWarpYDisplacementUpwards(sprite);
         break;
     default:
-        sprite->data[3] = 0;
+        sprite->tUnionRoomWarpAnimNo = 0;
         AGB_ASSERT_EX(0, ABSPATH("evobjmv.c"), 13331);
     }
 }
 
-bool32 sub_8069294(u8 objectEventId)
+bool32 RfuUnionObjectIsWarping(u8 objectEventId)
 {
-    u8 spriteId = sub_806900C(objectEventId);
+    u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId == MAX_SPRITES)
         return FALSE;
-    if (gSprites[spriteId].data[3])
+    if (gSprites[spriteId].tUnionRoomWarpAnimNo)
         return TRUE;
     else
         return FALSE;
 }
+
+#undef tUnionRoomWarpAnimState
+#undef tUnionRoomWarpAnimNo
+#undef tInvisible
+#undef tZCoord
+#undef tObjectEventId
 
 u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct ObjectEvent * objectEvent)
 {
@@ -587,7 +637,7 @@ void DoShadowFieldEffect(struct ObjectEvent *objectEvent)
 {
     if (!objectEvent->hasShadow)
     {
-        objectEvent->hasShadow = 1;
+        objectEvent->hasShadow = TRUE;
         oe_exec_and_other_stuff(FLDEFF_SHADOW, objectEvent);
     }
 }

@@ -17,7 +17,7 @@ static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
 
 static u8 StartUnionObjAnimTask(void);
 static u32 sub_811BBC8(u32 playerIdx, u32 arg1);
-static void sub_811C008(s32 arg0, s32 arg1, u8 arg2);
+static void UnionPartnerObjectSetFacing(s32 arg0, s32 arg1, u8 arg2);
 
 static const u8 sUnionObjectEventGfxIds[][10] = {
     [MALE]   = {
@@ -70,11 +70,11 @@ static const u8 sOppositeFacingDirection[] = {
 };
 
 static const u8 gUnknown_845711B[] = {
-    1,
-    3,
-    1,
-    4, 
-    2
+    DIR_SOUTH,
+    DIR_WEST,
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_NORTH
 };
 
 static const u8 sUnionRoomLocalIds[] = {
@@ -467,19 +467,19 @@ void sub_811BB68(void)
     }
 }
 
-static u8 sub_811BBA0(u32 r1, u32 unused, struct GFtgtGname * r2)
+static u8 UnionPartnerObjectGetFacing(u32 r1, u32 unused, struct GFtgtGname * gname)
 {
     if (r1 != 0)
     {
         return gUnknown_845711B[r1];
     }
-    else if (r2->activity == 0x45)
+    else if (gname->activity == 0x45)
     {
-        return 1;
+        return DIR_SOUTH;
     }
     else
     {
-        return 4;
+        return DIR_EAST;
     }
 }
 
@@ -488,7 +488,7 @@ static u32 sub_811BBC8(u32 a0, u32 a1)
     return sub_806916C(5 * a0 + a1 - 0x38);
 }
 
-static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * r9)
+static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * gname)
 {
     s32 x, y;
     s32 r7 = 5 * r5 + r6;
@@ -498,7 +498,7 @@ static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * r9)
         sub_80691A4(r7 - 0x38, 1);
     }
     sub_8069094(r7 - 0x38, r8);
-    sub_811C008(r6, r5, sub_811BBA0(r6, r5, r9));
+    UnionPartnerObjectSetFacing(r6, r5, UnionPartnerObjectGetFacing(r6, r5, gname));
     GetUnionRoomPlayerFacingCoords(r5, r6, &x, &y);
     sub_8059024(x, y, 1);
 }
@@ -567,7 +567,7 @@ static void sub_811BDA8(u32 r5, struct GFtgtGname * r4)
     }
 }
 
-static void sub_811BE6C(u32 r5, struct GFtgtGname * unused)
+static void sub_811BE6C(u32 r5, struct GFtgtGname * gname)
 {
     s32 i;
     sub_811B90C(r5);
@@ -643,7 +643,7 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
             {
                 continue;
             }
-            sub_811C008(j, i, sOppositeFacingDirection[GetPlayerFacingDirection()]);
+            UnionPartnerObjectSetFacing(j, i, sOppositeFacingDirection[GetPlayerFacingDirection()]);
             *arg1 = j;
             *arg2 = i;
             return TRUE;
@@ -652,12 +652,12 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
     return FALSE;
 }
 
-static void sub_811C008(s32 arg0, s32 arg1, u8 arg2)
+static void UnionPartnerObjectSetFacing(s32 arg0, s32 arg1, u8 arg2)
 {
     sub_8069058(5 * arg1 - 0x38 + arg0, arg2);
 }
 
 void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)
 {
-    return sub_811C008(arg0, arg1, sub_811BBA0(arg0, arg1, &arg2->arr[arg1].unk.gname));
+    return UnionPartnerObjectSetFacing(arg0, arg1, UnionPartnerObjectGetFacing(arg0, arg1, &arg2->arr[arg1].unk.gname));
 }

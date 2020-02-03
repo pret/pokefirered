@@ -591,22 +591,22 @@ union QuestLogMovement
 struct QuestLogObjectEvent
 {
     /*0x00*/ u8 active:1;
-    /*0x00*/ u8 mapobj_bit_3:1;
-    /*0x00*/ u8 mapobj_bit_4:1;
-    /*0x00*/ u8 mapobj_bit_5:1;
-    /*0x00*/ u8 mapobj_bit_8:1;
-    /*0x00*/ u8 mapobj_bit_9:1;
-    /*0x00*/ u8 mapobj_bit_10:1;
-    /*0x00*/ u8 mapobj_bit_11:1;
-    /*0x01*/ u8 mapobj_bit_12:1;
-    /*0x01*/ u8 mapobj_bit_13:1;
-    /*0x01*/ u8 mapobj_bit_14:1;
-    /*0x01*/ u8 mapobj_bit_15:1;
-    /*0x01*/ u8 mapobj_bit_16:1;
-    /*0x01*/ u8 mapobj_bit_23:1;
-    /*0x01*/ u8 mapobj_bit_24:1;
-    /*0x01*/ u8 mapobj_bit_25:1;
-    /*0x02*/ u8 mapobj_bit_26:1;
+    /*0x00*/ u8 triggerGroundEffectsOnStop:1;
+    /*0x00*/ u8 disableCoveringGroundEffects:1;
+    /*0x00*/ u8 landingJump:1;
+    /*0x00*/ u8 frozen:1;
+    /*0x00*/ u8 facingDirectionLocked:1;
+    /*0x00*/ u8 disableAnim:1;
+    /*0x00*/ u8 enableAnim:1;
+    /*0x01*/ u8 inanimate:1;
+    /*0x01*/ u8 invisible:1;
+    /*0x01*/ u8 offScreen:1;
+    /*0x01*/ u8 trackedByCamera:1;
+    /*0x01*/ u8 isPlayer:1;
+    /*0x01*/ u8 spriteAnimPausedBackup:1;
+    /*0x01*/ u8 spriteAffineAnimPausedBackup:1;
+    /*0x01*/ u8 disableJumpLandingGroundEffect:1;
+    /*0x02*/ u8 fixedPriority:1;
     /*0x02*/ u8 mapobj_unk_18:4;
     /*0x02*/ u8 unused_02_5:3;
     /*0x03*/ u8 mapobj_unk_0B_0:4;

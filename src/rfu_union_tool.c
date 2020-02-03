@@ -70,11 +70,11 @@ static const u8 sOppositeFacingDirection[] = {
 };
 
 static const u8 gUnknown_845711B[] = {
-    DIR_SOUTH,
-    DIR_WEST,
-    DIR_SOUTH,
-    DIR_EAST,
-    DIR_NORTH
+    [DIR_NONE]  = DIR_SOUTH,
+    [DIR_SOUTH] = DIR_WEST,
+    [DIR_NORTH] = DIR_SOUTH,
+    [DIR_WEST]  = DIR_EAST,
+    [DIR_EAST]  = DIR_NORTH
 };
 
 static const u8 sUnionRoomLocalIds[] = {
@@ -441,7 +441,7 @@ void sub_811BAAC(u8 * sp8, s32 r9)
     {
         s32 r5 = 5 * r9 + r7;
         sp8[r5] = sprite_new(OBJECT_EVENT_GFX_MAN, r5 - 0x38, sUnionPartnerCoords[r9][0] + sFacingDirectionOffsets[r7][0], sUnionPartnerCoords[r9][1] + sFacingDirectionOffsets[r7][1], 3, 1);
-        sub_8069124(r5 - 0x38, TRUE);
+        RfuUnionObjectToggleInvisibility(r5 - 0x38, TRUE);
     }
 }
 
@@ -485,7 +485,7 @@ static u8 UnionPartnerObjectGetFacing(u32 r1, u32 unused, struct GFtgtGname * gn
 
 static u32 sub_811BBC8(u32 a0, u32 a1)
 {
-    return sub_806916C(5 * a0 + a1 - 0x38);
+    return RfuUnionObjectIsInvisible(5 * a0 + a1 - 0x38);
 }
 
 static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * gname)
@@ -494,10 +494,10 @@ static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * gname)
     s32 r7 = 5 * r5 + r6;
     if (sub_811BBC8(r5, r6) == 1)
     {
-        sub_8069124(r7 - 0x38, FALSE);
-        sub_80691A4(r7 - 0x38, 1);
+        RfuUnionObjectToggleInvisibility(r7 - 0x38, FALSE);
+        RfuUnionObjectStartWarp(r7 - 0x38, 1);
     }
-    sub_8069094(r7 - 0x38, r8);
+    RfuUnionObjectSetFacingDirection(r7 - 0x38, r8);
     UnionPartnerObjectSetFacing(r6, r5, UnionPartnerObjectGetFacing(r6, r5, gname));
     GetUnionRoomPlayerFacingCoords(r5, r6, &x, &y);
     sub_8059024(x, y, 1);
@@ -506,7 +506,7 @@ static void sub_811BBE0(u32 r5, u32 r6, u8 r8, struct GFtgtGname * gname)
 static void sub_811BC68(u32 a0, u32 a1)
 {
     s32 x, y;
-    sub_80691A4(5 * a0 + a1 - 0x38, 2);
+    RfuUnionObjectStartWarp(5 * a0 + a1 - 0x38, 2);
     GetUnionRoomPlayerFacingCoords(a0, a1, &x, &y);
     sub_8059024(x, y, 0);
 }
@@ -518,7 +518,7 @@ static void sub_811BCA0(u32 r7, struct GFtgtGname * r8)
 
     PlayerGetDestCoords(&x, &y);
     player_get_pos_including_state_based_drift(&x2, &y2);
-    if (sub_806916C(5 * r7 - 0x38) == 1)
+    if (RfuUnionObjectIsInvisible(5 * r7 - 0x38) == 1)
     {
         if (sub_811B58C(r7, 0, x, y) == TRUE || sub_811B58C(r7, 0, x2, y2) == TRUE)
         {
@@ -631,11 +631,11 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
             {
                 continue;
             }
-            if (sub_806916C(r3 - 0x38) != 0)
+            if (RfuUnionObjectIsInvisible(r3 - 0x38) != 0)
             {
                 continue;
             }
-            if (sub_8069294(r3 - 0x38) != 0)
+            if (RfuUnionObjectIsWarping(r3 - 0x38) != 0)
             {
                 continue;
             }
@@ -654,7 +654,7 @@ bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3)
 
 static void UnionPartnerObjectSetFacing(s32 arg0, s32 arg1, u8 arg2)
 {
-    sub_8069058(5 * arg1 - 0x38 + arg0, arg2);
+    TurnObjectEvent(5 * arg1 - 0x38 + arg0, arg2);
 }
 
 void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2)

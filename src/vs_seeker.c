@@ -598,7 +598,7 @@ static void sub_810C3B8(u8 taskId)
         {
             if (sub_810CF04(i) == TRUE)
             {
-                if (gObjectEvents[i].mapobj_bit_1)
+                if (gObjectEvents[i].singleMovementActive)
                     return;
                 FreezeObjectEvent(&gObjectEvents[i]);
             }

@@ -7979,7 +7979,7 @@ _08058978:
 _0805898A:
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8068EB4
+	bl UpdateObjectEventSpriteVisibility
 	ldrb r0, [r6]
 	lsls r0, 29
 	cmp r0, 0

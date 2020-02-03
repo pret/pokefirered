@@ -1,8 +1,9 @@
 #include "global.h"
 #include "union_room_message.h"
 #include "mevent_server.h"
+#include "constants/union_room.h"
 
-ALIGNED(4) const u8 gUnknown_84571AC[] = _("");
+ALIGNED(4) const u8 gUnionRoomActivity_Blank[] = _("");
 ALIGNED(4) const u8 gUnknown_84571B0[] = _(":");
 ALIGNED(4) const u8 gUnknown_84571B4[] = _("{EXTRA 7}");
 ALIGNED(4) const u8 gUnknown_84571B8[] = _("Please start over from the beginning.");
@@ -150,6 +151,7 @@ const u8 *const gUnknown_8457898[] = {
 
 ALIGNED(4) const u8 gUnknown_84578A0[] = _("はなしかけています…\nしょうしょう おまちください");
 ALIGNED(4) const u8 gUnknown_84578BC[] = _("Awaiting {STR_VAR_1}'s response about\nthe trade…");
+
 ALIGNED(4) const u8 gUnknown_84578E4[] = _("Communicating{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
 ALIGNED(4) const u8 gUnknown_8457950[] = _("Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
 ALIGNED(4) const u8 gUnknown_84579BC[] = _("Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
@@ -237,6 +239,7 @@ const u8 *const gUnknown_8457F80[][2] = {
 };
 
 ALIGNED(4) const u8 gUnknown_8457F90[] = _("……\nThe TRAINER appears to be busy…\p");
+
 ALIGNED(4) const u8 gUnknown_8457FB4[] = _("A battle, huh?\nAll right, just give me some time.");
 ALIGNED(4) const u8 gUnknown_8457FE8[] = _("You want to chat, huh?\nSure, just wait a little.");
 ALIGNED(4) const u8 gUnknown_845801C[] = _("Sure thing! As my “Greetings,”\nhere's my TRAINER CARD.");
@@ -244,7 +247,7 @@ ALIGNED(4) const u8 gUnknown_8458054[] = _("A battle? Of course, but I need\ntim
 ALIGNED(4) const u8 gUnknown_8458088[] = _("Did you want to chat?\nOkay, but please wait a moment.");
 ALIGNED(4) const u8 gUnknown_84580C0[] = _("As my introduction, I'll show you\nmy TRAINER CARD.");
 
-const u8 *const gUnknown_84580F4[][4] = {
+const u8 *const gResponseToURoomActivityInviteStringPtrs[][4] = {
     {
         gUnknown_8457FB4,
         gUnknown_8457FE8,
@@ -442,6 +445,7 @@ ALIGNED(4) const u8 gUnknown_8458F9C[] = _("Your trade offer was rejected.\p");
 ALIGNED(4) const u8 gUnknown_8458FBC[] = _("EGG TRADE");
 ALIGNED(4) const u8 gUnknown_8458FC8[] = _("{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL");
 ALIGNED(4) const u8 gUnknown_8458FE4[] = _("Please choose a TRAINER.");
+
 ALIGNED(4) const u8 gUnknown_8459000[] = _("Please choose a TRAINER for\na SINGLE BATTLE.");
 ALIGNED(4) const u8 gUnknown_8459030[] = _("Please choose a TRAINER for\na DOUBLE BATTLE.");
 ALIGNED(4) const u8 gUnknown_8459060[] = _("Please choose the LEADER\nfor a MULTI BATTLE.");
@@ -453,15 +457,15 @@ ALIGNED(4) const u8 gUnknown_8459160[] = _("BERRY CRUSH!\nPlease choose the LEAD
 ALIGNED(4) const u8 gUnknown_8459188[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
 
 const u8 *const gUnknown_84591B8[] = {
-    gUnknown_8459000,
-    gUnknown_8459030,
-    gUnknown_8459060,
-    gUnknown_8459090,
-    gUnknown_845912C,
-    gUnknown_8459160,
-    gUnknown_8459188,
-    gUnknown_84590BC,
-    gUnknown_84590F4
+    [LINK_GROUP_SINGLE_BATTLE] = gUnknown_8459000,
+    [LINK_GROUP_DOUBLE_BATTLE] = gUnknown_8459030,
+    [LINK_GROUP_MULTI_BATTLE]  = gUnknown_8459060,
+    [LINK_GROUP_TRADE]         = gUnknown_8459090,
+    [LINK_GROUP_POKEMON_JUMP]  = gUnknown_845912C,
+    [LINK_GROUP_BERRY_CRUSH]   = gUnknown_8459160,
+    [LINK_GROUP_BERRY_PICKING] = gUnknown_8459188,
+    [LINK_GROUP_WONDER_CARD]   = gUnknown_84590BC,
+    [LINK_GROUP_WONDER_NEWS]   = gUnknown_84590F4
 };
 
 ALIGNED(4) const u8 gUnknown_84591DC[] = _("Searching for a WIRELESS\nCOMMUNICATION SYSTEM. Wait...");
@@ -470,6 +474,7 @@ ALIGNED(4) const u8 gUnknown_8459238[] = _("Awaiting {STR_VAR_1}'s response…")
 ALIGNED(4) const u8 gUnknown_8459250[] = _("{STR_VAR_1} has been asked to register\nyou as a member. Please wait.");
 ALIGNED(4) const u8 gUnknown_845928C[] = _("Awaiting a response from the\nWIRELESS COMMUNICATION SYSTEM.");
 ALIGNED(4) const u8 gUnref_PlsWaitLittleWHile[] = _("ほかの さんかしゃが そろうまで\nしょうしょう おまちください");
+
 ALIGNED(4) const u8 gUnknown_84592E8[] = _("No CARDS appear to be shared \nright now.");
 ALIGNED(4) const u8 gUnknown_8459314[] = _("No NEWS appears to be shared\nright now.");
 
@@ -482,23 +487,26 @@ ALIGNED(4) const u8 gUnknown_8459344[] = _("BATTLE");
 ALIGNED(4) const u8 gUnknown_845934C[] = _("CHAT");
 ALIGNED(4) const u8 gUnknown_8459354[] = _("GREETINGS");
 ALIGNED(4) const u8 gUnknown_8459360[] = _("EXIT");
+
 ALIGNED(4) const u8 gUnknown_8459368[] = _("EXIT");
 ALIGNED(4) const u8 gUnknown_8459370[] = _("INFO");
 ALIGNED(4) const u8 gUnknown_8459378[] = _("NAME{CLEAR_TO 0x3C}WANTED{CLEAR_TO 0x6E}OFFER{CLEAR_TO 0xC6}LV.");
-ALIGNED(4) const u8 gUnknown_8459394[] = _("SINGLE BATTLE");
-ALIGNED(4) const u8 gUnknown_84593A4[] = _("DOUBLE BATTLE");
-ALIGNED(4) const u8 gUnknown_84593B4[] = _("MULTI BATTLE");
-ALIGNED(4) const u8 gUnknown_84593C4[] = _("POKéMON TRADES");
-ALIGNED(4) const u8 gUnknown_84593D4[] = _("CHAT");
-ALIGNED(4) const u8 gUnknown_84593DC[] = _("CARDS");
-ALIGNED(4) const u8 gUnknown_84593E4[] = _("WONDER CARDS");
-ALIGNED(4) const u8 gUnknown_84593F4[] = _("WONDER NEWS");
-ALIGNED(4) const u8 gUnknown_8459400[] = _("POKéMON JUMP");
-ALIGNED(4) const u8 gUnknown_8459410[] = _("BERRY CRUSH");
-ALIGNED(4) const u8 gUnknown_845941C[] = _("BERRY-PICKING");
-ALIGNED(4) const u8 gUnknown_845942C[] = _("SEARCH");
-ALIGNED(4) const u8 gUnknown_8459434[] = _("ぐるぐるこうかん");
-ALIGNED(4) const u8 gUnknown_8459440[] = _("アイテムトレード");
+
+ALIGNED(4) const u8 gUnionRoomActivity_SingleBattle[] = _("SINGLE BATTLE");
+ALIGNED(4) const u8 gUnionRoomActivity_DoubleBattle[] = _("DOUBLE BATTLE");
+ALIGNED(4) const u8 gUnionRoomActivity_MultiBattle[] = _("MULTI BATTLE");
+ALIGNED(4) const u8 gUnionRoomActivity_PokemonTrades[] = _("POKéMON TRADES");
+ALIGNED(4) const u8 gUnionRoomActivity_Chat[] = _("CHAT");
+ALIGNED(4) const u8 gUnionRoomActivity_Cards[] = _("CARDS");
+ALIGNED(4) const u8 gUnionRoomActivity_WonderCards[] = _("WONDER CARDS");
+ALIGNED(4) const u8 gunionRoomActivity_WonderNews[] = _("WONDER NEWS");
+ALIGNED(4) const u8 gUnionRoomActivity_PokemonJump[] = _("POKéMON JUMP");
+ALIGNED(4) const u8 gUnionRoomActivity_BerryCrush[] = _("BERRY CRUSH");
+ALIGNED(4) const u8 gUnionRoomActivity_BerryPicking[] = _("BERRY-PICKING");
+ALIGNED(4) const u8 gUnionRoomActivity_Search[] = _("SEARCH");
+ALIGNED(4) const u8 gUnionRoomActivity_SpinTradeJP[] = _("ぐるぐるこうかん");
+ALIGNED(4) const u8 gUnionRoomActivity_ItemTradeJP[] = _("アイテムトレード");
+
 ALIGNED(4) const u8 gUnknown_845944C[] = _("It's a NORMAL CARD.");
 ALIGNED(4) const u8 gUnknown_8459460[] = _("It's a BRONZE CARD!");
 ALIGNED(4) const u8 gUnknown_8459474[] = _("It's a COPPER CARD!");

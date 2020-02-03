@@ -25,7 +25,7 @@ struct UnkStruct_x20
 {
     struct UnkStruct_Shared unk;
     u16 field_18;
-    u8 tradeStatus:2;
+    u8 groupScheduledAnim:2;
     u8 field_1A_1:1;
     u8 field_1B;
     u8 field_1D;
@@ -114,19 +114,21 @@ struct UnkStruct_URoom
     /* 0x018 */ u8 field_18;
     /* 0x019 */ u8 field_19;
     /* 0x01A */ u8 field_1A;
-    /* 0x01B */ u8 field_1B;
-    /* 0x01C */ u8 field_1C;
-    /* 0x01D */ u8 field_1D;
-    /* 0x01E */ u8 field_1E;
+    /* 0x01B */ u8 topListMenuWindowId;
+    /* 0x01C */ u8 topListMenuListMenuId;
+    /* 0x01D */ u8 tradeBoardSelectWindowId;
+    /* 0x01E */ u8 tradeBoardDetailsWindowId;
     /* 0x01F */ u8 field_1F;
     /* 0x020 */ u8 field_20;
     /* 0x021 */ u8 spriteIds[40];
     /* 0x049 */ u8 field_49;
-    /* 0x04A */ u8 field_4A;
-    /* 0x04C */ u16 field_4C[6];
-    /* 0x058 */ u8 field_58[4][11];
-    /* 0x084 */ u16 field_98;
-    /* 0x086 */ u16 field_9A[3];
+    /* 0x04A */ u8 tradeBoardListMenuId;
+
+        // For communication with potential link partners
+    /* 0x04C */ u16 playerSendBuffer[6];
+    /* 0x058 */ u8 activityRequestStrbufs[4][11];
+    /* 0x084 */ u16 partnerYesNoResponse;
+    /* 0x086 */ u16 recvActivityRequest[3];  // activity[, species, level]
     /* 0x08C */ struct UnionObj unionObjs[8];
     /* 0x0AC */ u8 trainerCardStrbufs[12][15];
     /* 0x160 */ u8 field_174[48];

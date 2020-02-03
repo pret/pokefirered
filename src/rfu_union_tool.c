@@ -10,6 +10,7 @@
 #include "task.h"
 #include "constants/flags.h"
 #include "constants/event_object_movement.h"
+#include "constants/union_room.h"
 #include "constants/object_events.h"
 
 static EWRAM_DATA struct UnionObj * UnionObjWork = NULL;
@@ -311,7 +312,7 @@ static bool32 SpawnGroupLeader(u32 playerIdx, u32 gender, u32 idMod256)
 {
     struct UnionObj * ptr = &UnionObjWork[playerIdx];
     AGB_ASSERT_EX(UnionObjWork != NULL, ABSPATH("rfu_union_tool.c"), 561)
-    ptr->schedAnim = 1;
+    ptr->schedAnim = UNION_ROOM_SPAWN_IN;
     ptr->gfxId = GetUnionRoomPlayerGraphicsId(gender, idMod256);
     if (ptr->state == 0)
     {
@@ -327,7 +328,7 @@ static bool32 DespawnGroupLeader(u32 playerIdx)
 {
     struct UnionObj * ptr = &UnionObjWork[playerIdx];
     AGB_ASSERT_EX(UnionObjWork != NULL, ABSPATH("rfu_union_tool.c"), 577)
-    ptr->schedAnim = 2;
+    ptr->schedAnim = UNION_ROOM_SPAWN_OUT;
     if (ptr->state == 1)
     {
         return TRUE;
@@ -343,7 +344,7 @@ static void AnimateUnionObj(u32 playerIdx, struct UnionObj * ptr)
     switch (ptr->state)
     {
     case 0:
-        if (ptr->schedAnim == 1)
+        if (ptr->schedAnim == UNION_ROOM_SPAWN_IN)
         {
             ptr->state = 2;
             ptr->animState = 0;
@@ -367,7 +368,7 @@ static void AnimateUnionObj(u32 playerIdx, struct UnionObj * ptr)
         }
         break;
     case 1:
-        if (ptr->schedAnim == 2)
+        if (ptr->schedAnim == UNION_ROOM_SPAWN_OUT)
         {
             ptr->state = 3;
             ptr->animState = 0;
@@ -384,7 +385,7 @@ static void AnimateUnionObj(u32 playerIdx, struct UnionObj * ptr)
         }
         break;
     }
-    ptr->schedAnim = 0;
+    ptr->schedAnim = UNION_ROOM_SPAWN_NONE;
 }
 
 static void Task_AnimateUnionObjs(u8 taskId)
@@ -496,7 +497,7 @@ static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFt
     if (RfuUnionGroupMemberIsInvisible(groupNo, memberNo) == TRUE)
     {
         RfuUnionObjectToggleInvisibility(objId - 0x38, FALSE);
-        RfuUnionObjectStartWarp(objId - 0x38, 1);
+        RfuUnionObjectStartWarp(objId - 0x38, UNION_ROOM_SPAWN_IN);
     }
     RfuUnionObjectSetFacingDirection(objId - 0x38, direction);
     UnionPartnerObjectSetFacing(memberNo, groupNo, UnionPartnerObjectGetFacing(memberNo, groupNo, gname));
@@ -507,7 +508,7 @@ static void SpawnGroupMember(u32 groupNo, u32 memberNo, u8 direction, struct GFt
 static void DespawnGroupMember(u32 group, u32 member)
 {
     s32 x, y;
-    RfuUnionObjectStartWarp(5 * group + member - 0x38, 2);
+    RfuUnionObjectStartWarp(5 * group + member - 0x38, UNION_ROOM_SPAWN_OUT);
     GetUnionRoomPlayerFacingCoords(group, member, &x, &y);
     MapGridSetMetatileImpassabilityAt(x, y, FALSE);
 }
@@ -529,13 +530,13 @@ static void AssembleGroup(u32 group, struct GFtgtGname * gname)
     }
     for (i = 1; i < 5; i++)
     {
-        if (gname->unk_04[i - 1] == 0)
+        if (gname->child_sprite_gender[i - 1] == 0)
         {
             DespawnGroupMember(group, i);
         }
         else if (IsUnionRoomPlayerFacingTileAt(group, i, x, y) == FALSE && IsUnionRoomPlayerFacingTileAt(group, i, x2, y2) == FALSE)
         {
-            SpawnGroupMember(group, i, GetUnionRoomPlayerGraphicsId((gname->unk_04[i - 1] >> 3) & 1, gname->unk_04[i - 1] & 7), gname);
+            SpawnGroupMember(group, i, GetUnionRoomPlayerGraphicsId((gname->child_sprite_gender[i - 1] >> 3) & 1, gname->child_sprite_gender[i - 1] & 7), gname);
         }
     }
 }
@@ -585,11 +586,11 @@ static void UpdateUnionRoomPlayerSprites(struct UnkStruct_URoom * groups)
     sUnionObjRefreshTimer = 0;
     for (i = 0, x20_p = groups->field_0->arr; i < 8; i++)
     {
-        if (x20_p[i].tradeStatus == 1)
+        if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             SpawnGroupLeaderAndMembers(i, &x20_p[i].unk.gname);
         }
-        else if (x20_p[i].tradeStatus == 2)
+        else if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_OUT)
         {
             DespawnGroupLeaderAndMembers(i, &x20_p[i].unk.gname);
         }
@@ -640,7 +641,7 @@ bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *mai
             {
                 continue;
             }
-            if (x20_p[i].tradeStatus != 1)
+            if (x20_p[i].groupScheduledAnim != UNION_ROOM_SPAWN_IN)
             {
                 continue;
             }

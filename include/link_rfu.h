@@ -117,8 +117,10 @@ struct GFtgtGnameSub
 struct __attribute__((packed, aligned(2))) GFtgtGname
 {
     struct GFtgtGnameSub unk_00;
-    u8 unk_04[RFU_CHILD_MAX]; // u8 sprite_idx:3;
-                              // u8 gender:1;
+    u8 child_sprite_gender[RFU_CHILD_MAX]; // u8 sprite_idx:3;
+                                           // u8 gender:1;
+                                           // u8 unk_4:3
+                                           // u8 active:1
     u16 species:10;
     u16 type:6;
     u8 activity:7;
@@ -385,13 +387,13 @@ void var_800D_set_xB(void);
 struct GFtgtGname *GetHostRFUtgtGname(void);
 void UpdateWirelessStatusIndicatorSprite(void);
 void InitRFU(void);
-bool32 sub_80FBA00(void);
+bool32 RfuIsErrorStatus1or2(void);
 
 void RFU_queue_20_70_reset(struct UnkRfuStruct_2_Sub_124 *ptr);
 void RFU_queue_40_14_reset(struct UnkRfuStruct_2_Sub_9e8 *ptr);
 
-void sub_80FB9E4(u8 a0, u16 msg);
-u8 sub_80FB9F4(void);
+void RfuSetErrorStatus(u8 a0, u16 msg);
+u8 RfuGetErrorStatus(void);
 void RFU_queue_20_70_recv(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
 bool8 RFU_queue_40_14_send(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
 bool8 RFU_queue_2_14_send(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
@@ -410,14 +412,14 @@ bool32 sub_80F8F7C(bool32 a0);
 bool32 sub_80FA634(u16 trainerId, const u8 *trainerName);
 void sub_80FA670(u8 a0, u16 a1, const u8 *a2);
 u32 sub_80FA6FC(u16 a0, const u8 *a1);
-void SetHostRFUtgtGname(u8 a0, u32 a1, u32 a2);
+void SetHostRFUtgtGname(u8 activity, u32 child_sprite_genders, u32 a2);
 void sub_80FBB8C(u32 a0);
 void sub_80FBD4C(const u8 *trainerName, u16 trainerId);
 void LinkRfu3_SetGnameUnameFromStaticBuffers(struct GFtgtGname *gname, u8 *uname);
 void sub_80FBBD8(void);
 void sub_80FA6BC(void);
 void sub_80FBF54(const u8 *src, u16 trainerId);
-void sub_80FB008(u8 a0, u32 a1, u32 a2);
+void sub_80FB008(u8 activity, u32 child_sprite_genders, u32 a2);
 void RecordMixTrainerNames(void);
 void sub_80F8CFC();
 void sub_80F8D14();

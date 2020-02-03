@@ -18,6 +18,7 @@
 #include "link_rfu.h"
 #include "union_room.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 struct WirelessCommunicationStatusScreenStruct
 {
@@ -364,19 +365,19 @@ void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
 
 u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
 {
-    u32 r8 = unk20->unk.gname.activity;
+    u32 activity = unk20->unk.gname.activity;
     s32 i, j, k;
 
     for (i = 0; i < NELEMS(gUnknown_846FAC0); i++)
     {
-        if (r8 == gUnknown_846FAC0[i][0] && unk20->tradeStatus == 1)
+        if (activity == gUnknown_846FAC0[i][0] && unk20->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (gUnknown_846FAC0[i][2] == 0)
             {
                 k = 0;
                 for (j = 0; j < 4; j++)
                 {
-                    if (unk20->unk.gname.unk_04[j] != 0) k++;
+                    if (unk20->unk.gname.child_sprite_gender[j] != 0) k++;
                 }
                 k++;
                 arg1[gUnknown_846FAC0[i][1]] += k;
@@ -388,7 +389,7 @@ u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
         }
     }
 
-    return r8;
+    return activity;
 }
 
 bool32 sub_814F7BC(const u32 * ptr0, const u32 * ptr1)

@@ -603,7 +603,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
 }
 #endif
 
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 child_sprite_genders)
 {
     s32 i;
 
@@ -613,8 +613,8 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 r3
     }
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        data->unk_04[i] = r3;
-        r3 >>= 8;
+        data->child_sprite_gender[i] = child_sprite_genders;
+        child_sprite_genders >>= 8;
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->activity = activity;
@@ -837,7 +837,7 @@ void UpdateWirelessStatusIndicatorSprite(void)
         gMain.oamBuffer[125].paletteNum = sprite->oam.paletteNum;
         gMain.oamBuffer[125].tileNum = sprite->data[6] + sprite->anims[sprite->data[2]][sprite->data[4]].frame.imageValue;
         CpuCopy16(gMain.oamBuffer + 125, (struct OamData *)OAM + 125, sizeof(struct OamData));
-        if (sub_80FB9F4() == 1)
+        if (RfuGetErrorStatus() == 1)
         {
             DestroyWirelessStatusIndicatorSprite();
         }

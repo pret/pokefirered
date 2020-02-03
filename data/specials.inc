@@ -103,7 +103,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081128
 	def_special Field_AskSaveTheGame
 	def_special nullsub_56
-	def_special sub_80FEE44
+	def_special ShowEasyChatScreen
 	def_special Special_BufferEasyChatMessage
 	def_special nullsub_75
 	def_special nullsub_75

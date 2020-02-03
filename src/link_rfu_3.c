@@ -619,10 +619,10 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 ch
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->activity = activity;
     data->unk_0a_7 = r2;
-    data->unk_00.unk_00_0 = GAME_LANGUAGE;
-    data->unk_00.unk_01_2 = GAME_VERSION;
-    data->unk_00.unk_00_4 = 0;
-    data->unk_00.unk_00_5 = 0;
+    data->unk_00.language = GAME_LANGUAGE;
+    data->unk_00.version = GAME_VERSION;
+    data->unk_00.hasNews = FALSE;
+    data->unk_00.hasCard = FALSE;
     data->unk_00.unk_00_6 = 0;
     data->unk_00.isChampion = FlagGet(FLAG_SYS_CAN_LINK_WITH_RS);
     data->unk_00.hasNationalDex = IsNationalPokedexEnabled();
@@ -636,7 +636,7 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 ch
  * Otherwise, blanks these.
  * ==========================================================
  */
-bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx)
+bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal;
 

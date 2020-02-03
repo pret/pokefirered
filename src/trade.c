@@ -2746,7 +2746,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
     u8 r4 = a0.isChampion;
     u8 r10 = a1.hasNationalDex;
     u8 r0 = a1.isChampion;
-    u8 r1 = a1.unk_01_2;
+    u8 r1 = a1.version;
     u8 r2;
 
     if (r1 == VERSION_FIRE_RED || r1 == VERSION_LEAF_GREEN)

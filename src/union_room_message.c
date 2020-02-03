@@ -125,6 +125,7 @@ const u8 *const gUnknown_8457754[] = {
 
 ALIGNED(4) const u8 gUnknown_845777C[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been established.");
 ALIGNED(4) const u8 gUnknown_84577BC[] = _("The WIRELESS COMMUNICATION\nSYSTEM link has been dropped…");
+
 ALIGNED(4) const u8 gUnknown_84577F8[] = _("The link with your friend has been\ndropped…");
 ALIGNED(4) const u8 gUnknown_8457824[] = _("{STR_VAR_1} replied, “No…”");
 
@@ -156,7 +157,7 @@ ALIGNED(4) const u8 gUnknown_84578E4[] = _("Communicating{PAUSE 15}.{PAUSE 15}.{
 ALIGNED(4) const u8 gUnknown_8457950[] = _("Communicating with {STR_VAR_1}{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
 ALIGNED(4) const u8 gUnknown_84579BC[] = _("Please wait a while{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.\n{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.{PAUSE 15}.");
 
-const u8 *const gUnknown_8457A34[] = {
+const u8 *const gURText_PleaseWaitMsgs[] = {
     gUnknown_84578E4,
     gUnknown_8457950,
     gUnknown_84579BC
@@ -167,7 +168,7 @@ ALIGNED(4) const u8 gUnknown_8457A70[] = _("Hello!\nWould you like to do somethi
 ALIGNED(4) const u8 gUnknown_8457A98[] = _("{STR_VAR_1}: Hiya, we meet again!\nWhat are you up for this time?");
 ALIGNED(4) const u8 gUnknown_8457AD0[] = _("{STR_VAR_1}: Oh! {PLAYER}, hello!\nWould you like to do something?");
 
-const u8 *const gUnknown_8457B04[][2] = {
+const u8 *const gURText_FriendPromptsForActivity[][2] = {
     {
         gUnknown_8457A40,
         gUnknown_8457A70
@@ -418,7 +419,8 @@ ALIGNED(4) const u8 gUnknown_8458AB8[] = _("Welcome to the TRADING BOARD.\pYou m
 ALIGNED(4) const u8 gUnknown_8458B44[] = _("This TRADING BOARD is used for\noffering a POKéMON for a trade.\pAll you need to do is register a\nPOKéMON for a trade.\pAnother TRAINER may offer a party\nPOKéMON in return for the trade.\pWe hope you will register POKéMON\nand trade them with many, many\lother TRAINERS.\pWould you like to register one of\nyour POKéMON?");
 ALIGNED(4) const u8 gUnref_ThankYouForComing_JP[] = _("こうかんけいじばん の とうろくが\nかんりょう しました\pごりよう ありがとう\nございました！\p");
 ALIGNED(4) const u8 gUnref_NoOneRegisteredMon[] = _("けいじばんに だれも ポケモンを\nとうろく していません\p\n");
-ALIGNED(4) const u8 gUnknown_8458CD4[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
+
+ALIGNED(4) const u8 gURText_PleaseChooseTypeOfMon[] = _("Please choose the type of POKéMON\nthat you would like in the trade.\n");
 ALIGNED(4) const u8 gUnknown_8458D1C[] = _("Which of your party POKéMON will\nyou offer in trade?\p");
 ALIGNED(4) const u8 gUnknown_8458D54[] = _("Registration has been canceled.\p");
 ALIGNED(4) const u8 gUnknown_8458D78[] = _("Registration has been completed.\p");
@@ -442,7 +444,7 @@ const u8 *const gUnknown_8458F94[] = {
 };
 
 ALIGNED(4) const u8 gUnknown_8458F9C[] = _("Your trade offer was rejected.\p");
-ALIGNED(4) const u8 gUnknown_8458FBC[] = _("EGG TRADE");
+ALIGNED(4) const u8 gText_EggTrade[] = _("EGG TRADE");
 ALIGNED(4) const u8 gUnknown_8458FC8[] = _("{DPAD_UPDOWN}CHOOSE  {A_BUTTON}JOIN  {B_BUTTON}CANCEL");
 ALIGNED(4) const u8 gUnknown_8458FE4[] = _("Please choose a TRAINER.");
 

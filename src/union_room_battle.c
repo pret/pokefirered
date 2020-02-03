@@ -13,15 +13,16 @@
 #include "text_window.h"
 #include "union_room.h"
 #include "window.h"
+#include "constants/union_room.h"
 
-struct UnkStruct_203B08C
+struct UnionRoomBattleWork
 {
-    s16 a0;
+    s16 textState;
 };
 
-static EWRAM_DATA struct UnkStruct_203B08C * gUnknown_203B08C = NULL;
+static EWRAM_DATA struct UnionRoomBattleWork * sWork = NULL;
 
-static const struct BgTemplate gUnknown_8457194[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 3,
@@ -29,7 +30,7 @@ static const struct BgTemplate gUnknown_8457194[] = {
     }
 };
 
-static const struct WindowTemplate gUnknown_8457198[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -43,7 +44,7 @@ static const struct WindowTemplate gUnknown_8457198[] = {
 
 static const u8 gUnknown_84571A8[] = {1, 2, 3};
 
-static void sub_811C04C(void)
+static void SetUpPartiesAndStartBattle(void)
 {
     s32 i;
     sub_81173C0(BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER);
@@ -65,7 +66,7 @@ static void sub_811C04C(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
-static void sub_811C0E0(u8 windowId, const u8 * str, u8 x, u8 y, s32 speed)
+static void UnionRoomBattle_CreateTextPrinter(u8 windowId, const u8 * str, u8 x, u8 y, s32 speed)
 {
     s32 letterSpacing = 1;
     s32 lineSpacing = 1;
@@ -73,13 +74,13 @@ static void sub_811C0E0(u8 windowId, const u8 * str, u8 x, u8 y, s32 speed)
     AddTextPrinterParameterized4(windowId, 3, x, y, letterSpacing, lineSpacing, gUnknown_84571A8, speed, str);
 }
 
-static bool32 sub_811C150(s16 * state, const u8 * str, s32 speed)
+static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s32 speed)
 {
     switch (*state)
     {
     case 0:
         DrawTextBorderOuter(0, 0x001, 0xD);
-        sub_811C0E0(0, str, 0, 2, speed);
+        UnionRoomBattle_CreateTextPrinter(0, str, 0, 2, speed);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         (*state)++;
@@ -95,7 +96,7 @@ static bool32 sub_811C150(s16 * state, const u8 * str, s32 speed)
     return FALSE;
 }
 
-static void sub_811C1B4(void)
+static void VBlankCB_UnionRoomBattle(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -108,14 +109,14 @@ void CB2_UnionRoomBattle(void)
     {
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
-        gUnknown_203B08C = AllocZeroed(sizeof(struct UnkStruct_203B08C));
+        sWork = AllocZeroed(sizeof(struct UnionRoomBattleWork));
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetTasks();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_8457194, 1);
+        InitBgsFromTemplates(0, sBgTemplates, 1);
         ResetTempTileDataBuffers();
-        if (!InitWindows(gUnknown_8457198))
+        if (!InitWindows(sWindowTemplates))
         {
             return;
         }
@@ -126,11 +127,11 @@ void CB2_UnionRoomBattle(void)
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 0xF);
         TextWindow_SetStdFrame0_WithPal(0, 1, 0xD0);
         Menu_LoadStdPal();
-        SetVBlankCallback(sub_811C1B4);
+        SetVBlankCallback(VBlankCB_UnionRoomBattle);
         gMain.state++;
         break;
     case 1:
-        if (sub_811C150(&gUnknown_203B08C->a0, gText_CommStandbyAwaitingOtherPlayer, 0))
+        if (UnionRoomBattle_PrintTextOnWindow0(&sWork->textState, gText_CommStandbyAwaitingOtherPlayer, 0))
         {
             gMain.state++;
         }
@@ -146,11 +147,11 @@ void CB2_UnionRoomBattle(void)
             memset(gBlockSendBuffer, 0, 0x20);
             if (gSelectedOrderFromParty[0] == -gSelectedOrderFromParty[1])
             {
-                gBlockSendBuffer[0] = 0x52;
+                gBlockSendBuffer[0] = UROOM_ACTIVITY_DECLINE | 0x40;
             }
             else
             {
-                gBlockSendBuffer[0] = 0x51;
+                gBlockSendBuffer[0] = UROOM_ACTIVITY_ACCEPT | 0x40;
             }
             SendBlock(0, gBlockSendBuffer, 0x20);
             gMain.state++;
@@ -159,7 +160,7 @@ void CB2_UnionRoomBattle(void)
     case 4:
         if (GetBlockReceivedStatus() == 3)
         {
-            if (gBlockRecvBuffer[0][0] == 0x51 && gBlockRecvBuffer[1][0] == 0x51)
+            if (gBlockRecvBuffer[0][0] == (UROOM_ACTIVITY_ACCEPT | 0x40) && gBlockRecvBuffer[1][0] == (UROOM_ACTIVITY_ACCEPT | 0x40))
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gMain.state = 50;
@@ -167,7 +168,7 @@ void CB2_UnionRoomBattle(void)
             else
             {
                 sub_800AAC0();
-                if (gBlockRecvBuffer[GetMultiplayerId()][0] == 0x52)
+                if (gBlockRecvBuffer[GetMultiplayerId()][0] == (UROOM_ACTIVITY_DECLINE | 0x40))
                 {
                     gMain.state = 6;
                 }
@@ -189,7 +190,7 @@ void CB2_UnionRoomBattle(void)
     case 51:
         if (IsLinkTaskFinished())
         {
-            SetMainCallback2(sub_811C04C);
+            SetMainCallback2(SetUpPartiesAndStartBattle);
         }
         break;
     case 6:
@@ -199,7 +200,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 7:
-        if (sub_811C150(&gUnknown_203B08C->a0, gText_RefusedBattle, 1))
+        if (UnionRoomBattle_PrintTextOnWindow0(&sWork->textState, gText_RefusedBattle, 1))
         {
             SetMainCallback2(CB2_ReturnToField);
         }
@@ -211,7 +212,7 @@ void CB2_UnionRoomBattle(void)
         }
         break;
     case 9:
-        if (sub_811C150(&gUnknown_203B08C->a0, gText_BattleWasRefused, 1))
+        if (UnionRoomBattle_PrintTextOnWindow0(&sWork->textState, gText_BattleWasRefused, 1))
         {
             SetMainCallback2(CB2_ReturnToField);
         }

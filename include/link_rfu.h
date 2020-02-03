@@ -102,14 +102,14 @@
 // RfuTgtData.gname is read as these structs.
 struct GFtgtGnameSub
 {
-    u16 unk_00_0:4;
-    u16 unk_00_4:1;
-    u16 unk_00_5:1;
+    u16 language:4;
+    u16 hasNews:1;
+    u16 hasCard:1;
     u16 unk_00_6:1;
     u16 isChampion:1;
     u16 hasNationalDex:1;
     u16 gameClear:1;
-    u16 unk_01_2:4;
+    u16 version:4;
     u16 unk_01_6:2;
     u8 playerTrainerId[2];
 };
@@ -214,16 +214,28 @@ typedef struct linkManagerTag
     /* 0x044 */ void (*MSC_callback)(u16);
 } LINK_MANAGER;
 
-struct UnkRfuStruct_2_Sub_6c
+#define RFU_COMMAND_0x8800 0x8800
+#define RFU_COMMAND_0x8900 0x8900
+#define RFU_COMMAND_0xa100 0xa100
+#define RFU_COMMAND_0x7700 0x7700
+#define RFU_COMMAND_0x7800 0x7800
+#define RFU_COMMAND_0x6600 0x6600
+#define RFU_COMMAND_0x5f00 0x5f00
+#define RFU_COMMAND_0x2f00 0x2f00
+#define RFU_COMMAND_0xbe00 0xbe00
+#define RFU_COMMAND_0xee00 0xee00
+#define RFU_COMMAND_0xed00 0xed00
+
+struct RfuBlockSend
 {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ u16 count;
+    /* 0x00 */ u16 next;
+    /* 0x02 */ u16 count; // max 21
     /* 0x04 */ const u8 *payload;
-    /* 0x08 */ u32 unk_08;
-    /* 0x0c */ u32 unk_0c;
-    /* 0x10 */ u8 unk_10;
+    /* 0x08 */ u32 receivedFlags;
+    /* 0x0c */ u32 failedFlags;
+    /* 0x10 */ u8 sending;
     /* 0x11 */ u8 owner;
-    /* 0x12 */ u8 unk_12;
+    /* 0x12 */ u8 receiving;
 };
 
 struct UnkRfuStruct_2_Sub_124
@@ -264,7 +276,7 @@ struct UnkRfuStruct_Sub_Unused
 typedef struct UnkRfuStruct_2
 {
     /* 0x000 */ void (*RfuFunc)(void);
-    /* 0x004 */ u16 unk_04;
+    /* 0x004 */ u16 state;
     /* 0x006 */ u8 filler_06[4];
     /* 0x00a */ u16 linkman_msg;
     /* 0x00c */ u8 unk_0c; // parentChildMode?
@@ -281,8 +293,8 @@ typedef struct UnkRfuStruct_2
     /* 0x066 */ u8 unk_66;
     /* 0x067 */ u8 unk_67;
     /* 0x068 */ u8 filler_68[4];
-    /* 0x06c */ struct UnkRfuStruct_2_Sub_6c unk_6c;
-    /* 0x080 */ struct UnkRfuStruct_2_Sub_6c unk_80[5];
+    /* 0x06c */ struct RfuBlockSend cmd_8800_sendbuf;
+    /* 0x080 */ struct RfuBlockSend cmd_8800_recvbuf[5];
     /* 0x0e4 */ u8 unk_e4[5];
     /* 0x0e9 */ u8 unk_e9[5];
     /* 0x0ee */ vu8 errorState;
@@ -304,7 +316,7 @@ typedef struct UnkRfuStruct_2
     /* 0x93d */ u8 unk_c85;
     /* 0x93e */ u8 unk_c86;
     /* 0x93f */ u8 recvCmds[5][7][2];
-    /* 0x985 */ u8 unk_ccd;
+    /* 0x985 */ u8 parentId;
     /* 0x986 */ u8 unk_cce; // childId
     /* 0x987 */ u8 unk_ccf;
     /* 0x988 */ vu8 unk_cd0;
@@ -423,16 +435,16 @@ void sub_80FB008(u8 activity, u32 child_sprite_genders, u32 a2);
 void RecordMixTrainerNames(void);
 void sub_80F8CFC();
 void sub_80F8D14();
-void sub_80FAF74(bool32 a0, bool32 a1);
+void SetGnameBufferWonderFlags(bool32 hasNews, bool32 hasCard);
 void ClearAndInitHostRFUtgtGname(void);
 void sub_80F8FA0(void);
-void sub_80FAFA0(u32 type, u32 species, u32 level);
+void RfuUpdatePlayerGnameStateAndSend(u32 type, u32 species, u32 level);
 bool32 sub_80FBB0C(void);
 void sub_80FBC00(void);
 void sub_80FBD6C(u32 a0);
 void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 a2);
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name);
-bool8 sub_80FCC3C(struct GFtgtGname *gname, u8 *uname, u8 idx);
+bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx);
 bool32 GetRfuUnkCE8(void);
 void sub_80FA4A8(void);

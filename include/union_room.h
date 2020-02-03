@@ -160,7 +160,7 @@ struct UnionRoomTrade
     u32 personality;
 };
 
-extern struct GFtgtGnameSub gUnknown_203B064;
+extern struct GFtgtGnameSub gPartnerTgtGnameSub;
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 

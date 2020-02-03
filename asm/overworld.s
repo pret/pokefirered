@@ -1718,7 +1718,7 @@ sub_8055864: @ 8055864
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
 	bl TryRegenerateRenewableHiddenItems
-	bl not_trainer_tower_battle_pyramid
+	bl InitMap
 	ldr r4, _0805591C @ =gMapHeader
 	ldr r0, [r4]
 	bl copy_map_tileset2_to_vram_2
@@ -1798,7 +1798,7 @@ _08055974:
 	bl UpdateLocationHistoryForRoamer
 	bl RoamerMoveToOtherLocationSet
 	bl sub_8110920
-	bl not_trainer_tower_battle_pyramid
+	bl InitMap
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1823,7 +1823,7 @@ sub_80559A8: @ 80559A8
 	bl sub_8110920
 	bl sub_8111708
 	bl set_current_map_header_from_sav1
-	bl not_trainer_tower_battle_pyramid
+	bl InitMap
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3843,7 +3843,7 @@ CB2_ContinueSavedGame: @ 8056938
 	bl sub_80550A8
 	bl UnfreezeObjectEvents
 	bl sub_8054E40
-	bl sub_80589E8
+	bl InitMapFromSavedGame
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
@@ -5128,7 +5128,7 @@ sub_8057430: @ 8057430
 	bl sub_80550A8
 	bl UnfreezeObjectEvents
 	bl sub_8054E40
-	bl sub_80589E8
+	bl InitMapFromSavedGame
 	bl PlayTimeCounter_Start
 	bl ScriptContext1_Init
 	ldr r1, _08057488 @ =gUnknown_2031DE0

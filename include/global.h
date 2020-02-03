@@ -168,13 +168,6 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u8 field_F;
 };
 
-struct PyramidBag
-{
-    u16 items_Lvl50[10];
-    u16 items_OpenLvl[10];
-    u8 quantity[10];
-};
-
 struct BerryCrush
 {
     u16 berryCrushResults[4];

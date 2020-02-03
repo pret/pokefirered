@@ -37,6 +37,7 @@
 #include "trade_scene.h"
 #include "trainer_card.h"
 #include "union_room.h"
+#include "union_room_battle.h"
 #include "union_room_chat.h"
 #include "rfu_union_tool.h"
 #include "union_room_message.h"
@@ -104,7 +105,7 @@ static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1)
 static u8 sub_811A798(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1, u8 arg2);
 static void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
 static void sub_811A910(u8 arg0, u8 arg1, u8 arg2, struct UnkStruct_x20 * arg3, u8 arg4, u8 id);
-static bool32 sub_811A9B8(void);
+static bool32 PlayerIsTalkingToUnionRoomAide(void);
 static u32 sub_811A9FC(s32 a0);
 static u32 sub_811AA24(struct UnkStruct_x20 * unkX20);
 static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender);
@@ -1802,7 +1803,7 @@ static void sub_81175BC(u8 taskId)
     case 65:
     case 81:
         CleanupOverworldWindowsAndTilemaps();
-        gMain.savedCallback = sub_811C1C8;
+        gMain.savedCallback = CB2_UnionRoomBattle;
         InitChooseHalfPartyForBattle(2);
         break;
     case 1:
@@ -2553,11 +2554,11 @@ static void sub_81186E0(u8 taskId)
         gUnknown_203B058 = 0x40;
         data->field_20 = sub_8119E84(data->field_C, data->field_4, 9);
         ZeroUnionObjWork(data->unionObjs);
-        sub_811BB68();
+        MakeGroupAssemblyAreasPassable();
         data->state = 1;
         break;
     case 1:
-        sub_811BAAC(data->spriteIds, taskData[0]);
+        CreateGroupMemberObjectsInvisible(data->spriteIds, taskData[0]);
         if (++taskData[0] == 8)
             data->state = 2;
         break;
@@ -2650,14 +2651,14 @@ static void sub_81186E0(u8 taskId)
         {
             if (JOY_NEW(A_BUTTON))
             {
-                if (sub_811BF00(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
+                if (RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(data->field_0, &taskData[0], &taskData[1], data->spriteIds))
                 {
                     PlaySE(SE_SELECT);
                     sub_811B298();
                     data->state = 24;
                     break;
                 }
-                else if (sub_811A9B8())
+                else if (PlayerIsTalkingToUnionRoomAide())
                 {
                     sub_80FB008(0x54, 0, 1);
                     PlaySE(SE_PC_LOGIN);
@@ -2673,7 +2674,7 @@ static void sub_81186E0(u8 taskId)
             case 1:
                 PlaySE(SE_TOY_C);
             case 2:
-                sub_811BECC(data);
+                ScheduleUnionRoomPlayerRefresh(data);
                 break;
             case 4:
                 data->state = 11;
@@ -2682,7 +2683,7 @@ static void sub_81186E0(u8 taskId)
                 sub_80FB008(0x53, sub_811B2D8(data), 0);
                 break;
             }
-            sub_811BEDC(data);
+            HandleUnionRoomPlayerRefresh(data);
         }
         break;
     case 23:
@@ -2750,7 +2751,7 @@ static void sub_81186E0(u8 taskId)
         if (gReceivedRemoteLinkPlayers == 0)
         {
             sub_811B258(FALSE);
-            sub_811C028(taskData[0], taskData[1], data->field_0);
+            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], data->field_0);
             data->state = 2;
         }
         break;
@@ -3072,7 +3073,7 @@ static void sub_81186E0(u8 taskId)
         Free(data->field_C);
         Free(data->field_4);
         DestroyTask(data->field_20);
-        sub_811BB40(data->spriteIds);
+        DestroyGroupMemberObjects(data->spriteIds);
         data->state = 17;
         break;
     case 17:
@@ -3082,7 +3083,7 @@ static void sub_81186E0(u8 taskId)
     case 18:
         if (!UpdatePaletteFade())
         {
-            sub_811BA78();
+            DeleteUnionObjWorkAndStopTask();
             DestroyTask(taskId);
             Free(sUnionRoomMain.uRoom);
             sub_81179A4();
@@ -3273,7 +3274,7 @@ static void sub_81186E0(u8 taskId)
         if (PrintOnTextbox(&data->textState, gStringVar4))
         {
             sub_811B258(TRUE);
-            sub_811C028(taskData[0], taskData[1], data->field_0);
+            UpdateUnionGroupMemberFacing(taskData[0], taskData[1], data->field_0);
             data->state = 4;
         }
         break;
@@ -4071,7 +4072,7 @@ static void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * arg3, u8
     }
 }
 
-static bool32 sub_811A9B8(void)
+static bool32 PlayerIsTalkingToUnionRoomAide(void)
 {
     s16 x, y;
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);

@@ -490,7 +490,7 @@ void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
     }
 }
 
-void sub_8059024(s32 x, s32 y, bool32 arg2)
+void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2)
 {
     if (x >= 0 && x < VMap.Xsize
         && y >= 0 && y < VMap.Ysize)

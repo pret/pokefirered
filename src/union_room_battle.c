@@ -102,7 +102,7 @@ static void sub_811C1B4(void)
     TransferPlttBuffer();
 }
 
-void sub_811C1C8(void)
+void CB2_UnionRoomBattle(void)
 {
     switch (gMain.state)
     {

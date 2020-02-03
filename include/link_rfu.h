@@ -117,7 +117,8 @@ struct GFtgtGnameSub
 struct __attribute__((packed, aligned(2))) GFtgtGname
 {
     struct GFtgtGnameSub unk_00;
-    u8 unk_04[4];
+    u8 unk_04[RFU_CHILD_MAX]; // u8 sprite_idx:3;
+                              // u8 gender:1;
     u16 species:10;
     u16 type:6;
     u8 activity:7;

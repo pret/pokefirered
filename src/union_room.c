@@ -611,19 +611,19 @@ ALIGNED(4) static const u8 gUnknown_845708C[] = {
 };
 
 static const u8 *const sAcceptedActivityIds[] = {
-    gUnknown_845704C,
-    gUnknown_8457050,
-    gUnknown_8457054,
-    gUnknown_8457058,
-    gUnknown_845705C,
-    gUnknown_8457060,
-    gUnknown_8457064,
-    gUnknown_8457068,
-    gUnknown_845706C,
-    gUnknown_8457070,
-    gUnknown_845707C,
-    gUnknown_8457080,
-    gUnknown_845708C
+    [LINK_GROUP_SINGLE_BATTLE] = gUnknown_845704C,
+    [LINK_GROUP_DOUBLE_BATTLE] = gUnknown_8457050,
+    [LINK_GROUP_MULTI_BATTLE]  = gUnknown_8457054,
+    [LINK_GROUP_TRADE]         = gUnknown_8457058,
+    [LINK_GROUP_POKEMON_JUMP]  = gUnknown_845705C,
+    [LINK_GROUP_BERRY_CRUSH]   = gUnknown_8457060,
+    [LINK_GROUP_BERRY_PICKING] = gUnknown_8457064,
+    [LINK_GROUP_WONDER_CARD]   = gUnknown_8457068,
+    [LINK_GROUP_WONDER_NEWS]   = gUnknown_845706C,
+    [9]                        = gUnknown_8457070,
+    [10]                       = gUnknown_845707C,
+    [11]                       = gUnknown_8457080,
+    [12]                       = gUnknown_845708C
 };
 
 static const u8 sLinkGroupToURoomActivity[] = {
@@ -2648,9 +2648,9 @@ static void Task_ResumeUnionRoom(u8 taskId)
     switch (data->state)
     {
     case 0:
-        data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
-        data->field_C = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
-        data->field_0 = AllocZeroed(8 * sizeof(struct UnkStruct_x20));
+        data->field_4 = AllocZeroed(RFU_CHILD_MAX * sizeof(struct UnkStruct_x1C));
+        data->field_C = AllocZeroed(RFU_CHILD_MAX * sizeof(struct UnkStruct_x1C));
+        data->field_0 = AllocZeroed(UROOM_MAX_GROUP_COUNT * sizeof(struct UnkStruct_x20));
         data->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x20Array(data->field_0->arr, 8);
         sPlayerCurrActivity = 0x40;
@@ -3609,14 +3609,14 @@ static u8 sub_8119B94(void)
     return r7;
 }
 
-static void sub_8119D34(u8 taskId)
+static void Task_SearchForChildOrParent(u8 taskId)
 {
     s32 i, j;
     struct UnkStruct_Shared sp0;
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     bool8 parent_child;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
         parent_child = sub_80FCC3C(&sp0.gname, sp0.playerName, i);
         if (!IsPartnerActivityAcceptable(sp0.gname.activity, gTasks[taskId].data[4]))
@@ -3637,19 +3637,19 @@ static void sub_8119D34(u8 taskId)
                 }
             }
             ptr[1]->arr[i].unk0 = sp0;
-            ptr[1]->arr[i].unk18 = AreUnkSharedObjectsDifferent(&ptr[1]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+            ptr[1]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[1]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
         }
         else
         {
             ptr[0]->arr[i].unk0 = sp0;
-            ptr[0]->arr[i].unk18 = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+            ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
         }
     }
 }
 
 static u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, u32 a2)
 {
-    u8 taskId = CreateTask(sub_8119D34, 0);
+    u8 taskId = CreateTask(Task_SearchForChildOrParent, 0);
     struct UnkStruct_Main4 ** data = (void *)gTasks[taskId].data;
     data[0] = a0;
     data[1] = a1;
@@ -3676,7 +3676,7 @@ static void sub_8119EB8(u8 taskId)
                 ptr[0]->arr[i].unk0 = sUnkStruct_Shared_Dummy;
             }
         }
-        ptr[0]->arr[i].unk18 = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
     }
 }
 
@@ -3721,7 +3721,7 @@ static void sub_8119FD8(u8 taskId)
         {
             sub_8119FB0(&ptr[0]->arr[i].unk0.gname, gTasks[taskId].data[2]);
         }
-        ptr[0]->arr[i].unk18 = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
     }
 }
 
@@ -4032,7 +4032,7 @@ static void BlankUnkStruct_x1CArray(struct UnkStruct_x1C * arg0, u8 count)
     for (i = 0; i < 4; i++)
     {
         arg0[i].unk0 = sUnkStruct_Shared_Dummy;
-        arg0[i].unk18 = FALSE;
+        arg0[i].active = FALSE;
     }
 }
 
@@ -4101,10 +4101,10 @@ static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1)
 
     for (i = 0; i < 4; i++)
     {
-        if (arg1[i].unk18 && !AreUnkSharedObjectsDifferent(&arg0->unk, &arg1[i].unk0))
+        if (arg1[i].active && !AreUnkSharedObjectsDifferent(&arg0->unk, &arg1[i].unk0))
         {
             result = i;
-            arg1[i].unk18 = FALSE;
+            arg1[i].active = FALSE;
         }
     }
 
@@ -4115,7 +4115,7 @@ static u8 Appendx1Ctox20(struct UnkStruct_x20 * x20arr, struct UnkStruct_x1C * x
 {
     s32 i;
 
-    if (x1C->unk18)
+    if (x1C->active)
     {
         for (i = 0; i < count; i++)
         {
@@ -4125,7 +4125,7 @@ static u8 Appendx1Ctox20(struct UnkStruct_x20 * x20arr, struct UnkStruct_x1C * x
                 x20arr[i].field_18 = 0;
                 x20arr[i].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
                 x20arr[i].field_1B = 0x40;
-                x1C->unk18 = FALSE;
+                x1C->active = FALSE;
                 return i;
             }
         }
@@ -4635,9 +4635,9 @@ static u8 sub_811B2D8(struct UnkStruct_URoom * arg0)
     u8 retVal = 0x80;
     u8 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (arg0->field_C->arr[i].unk18)
+        if (arg0->field_C->arr[i].active)
         {
             retVal |= arg0->field_C->arr[i].unk0.gname.playerGender << 3;
             retVal |= arg0->field_C->arr[i].unk0.gname.unk_00.playerTrainerId[0] & 7;

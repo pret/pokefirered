@@ -9,6 +9,9 @@
 #define UR_TRADE_NOTYPE 1
 #define UR_TRADE_NOEGG  2
 
+#define UROOM_MAX_GROUP_COUNT 8
+#define UROOM_MAX_PARTY_SIZE  5
+
 struct UnkStruct_Shared
 {
     struct GFtgtGname gname;
@@ -18,7 +21,7 @@ struct UnkStruct_Shared
 struct UnkStruct_x1C
 {
     struct UnkStruct_Shared unk0;
-    u8 unk18:1;
+    u8 active:1;
 };
 
 struct UnkStruct_x20

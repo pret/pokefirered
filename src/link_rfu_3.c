@@ -677,7 +677,7 @@ bool8 LinkRfu_GetNameIfCompatible(struct GFtgtGname *gname, u8 *uname, u8 idx)
  * which comes from ???
  * ==========================================================
  */
-bool8 sub_80FCCF4(struct GFtgtGname *gname, u8 *uname, u8 idx)
+bool8 LinkRfu_GetNameIfSerial7F7D(struct GFtgtGname *gname, u8 *uname, u8 idx)
 {
     bool8 retVal = FALSE;
     if (gRfuLinkStatus->partner[idx].serialNo == 0x7F7D)

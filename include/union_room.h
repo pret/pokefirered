@@ -61,14 +61,14 @@ struct UnkStruct_Leader
     u8 textState;
     u8 delayTimerAfterOk;
     u8 listWindowId;
-    u8 field_10;
-    u8 field_11;
+    u8 bButtonCancelWindowId;
+    u8 nPlayerModeWindowId;
     u8 listTaskId;
     u8 playerCount;
-    u8 field_14;
+    u8 messageWindowId;
     u8 field_15;
     u8 field_16;
-    u8 taskId_sub_8119EB8;
+    u8 listenTaskId;
     u8 activity;
     u8 field_19;
     u16 field_1A;
@@ -87,11 +87,11 @@ struct UnkStruct_Group
     u8 listTaskId;
     u8 field_F;
     u8 field_10;
-    u8 field_11;
+    u8 listenTaskId;
     u8 cardOrNews;
     u8 field_13;
     u8 field_14;
-    u8 field_15;
+    u8 delayBeforePrint;
 };
 
 struct UnionObj

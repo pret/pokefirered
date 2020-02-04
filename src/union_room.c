@@ -75,7 +75,7 @@ static void Task_ListenToWireless(u8 taskId);
 static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, s32 itemId, u8 y);
 static u8 GetNewLeaderCandidate(void);
 static void CreateTask_sub_8117900(void);
-static void CreateTask_sub_81175BC(void);
+static void CreateTask_StartActivity(void);
 static void Task_MEvent_Leader(u8 taskId);
 static void Task_CardOrNewsWithFriend(u8 taskId);
 static void Task_CardOrNewsOverWireless(u8 taskId);
@@ -87,12 +87,12 @@ static void Task_InitUnionRoom(u8 taskId);
 static u8 sub_8119B94(void);
 static u8 sub_8119E84(struct UnkStruct_Main4 * arg0, struct UnkStruct_Main4 * arg1, u32 arg2);
 static bool32 GetGnameWonderFlagByLinkGroup(struct GFtgtGname * gname, s16 arg1);
-static u8 CreateTask_sub_8119EB8(struct UnkStruct_Main4 * arg0, u32 linkGroup);
-static u8 CreateTask_sub_8119FD8(struct UnkStruct_Main4 * arg0, u32 linkGroup);
+static u8 CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(struct UnkStruct_Main4 * arg0, u32 linkGroup);
+static u8 CreateTask_Task_ListenForPartnersWithSerial7F7D(struct UnkStruct_Main4 * arg0, u32 linkGroup);
 static bool32 UR_PrintFieldMessage(const u8 * str);
 static bool32 UR_RunTextPrinters_CheckPrinter0Active(void);
 static bool8 PrintOnTextbox(u8 *textState, const u8 *str);
-static s8 sub_811A14C(u8 *state_p, bool32 no_draw);
+static s8 UnionRoomHandleYesNo(u8 *state_p, bool32 no_draw);
 static s32 ListMenuHandler_AllItemsAvailable(u8 *state_p, u8 *win_id_p, u8 *list_menu_id_p, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate);
 static s32 TradeBoardMenuHandler(u8 *state_p, u8 *win_id_p, u8 *list_menu_id_p, u8 *trade_board_win_id_p, const struct WindowTemplate * winTemplate, const struct ListMenuTemplate * menuTemplate, struct UnkStruct_Main0 * traders);
 static void sub_811A3F8(void);
@@ -100,7 +100,7 @@ static void sub_811A41C(void);
 static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 static void BlankUnkStruct_x20Array(struct UnkStruct_x20 * arg0, u8 count);
 static void BlankUnkStruct_x1CArray(struct UnkStruct_x1C * arg0, u8 count);
-static bool8 AreUnkSharedObjectsDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1);
+static bool8 AreGnameUnameDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1);
 static bool32 AreUnionRoomPlayerGnamesDifferent(struct UnionGnameUnamePair * arg0, struct UnionGnameUnamePair * arg1);
 static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
 static u8 Appendx1Ctox20(struct UnkStruct_x20 * x20arr, struct UnkStruct_x1C * x1C, u8 count);
@@ -667,7 +667,7 @@ static const u8 sUnref_84570D1[] = _("{DYNAMIC 00}·{DYNAMIC 01}");
 // arg1 is a 2-nybble code
 // Bits 0-3: Capacity
 // Bits 4-7: Min required (if 0, must have exactly Capacity players
-static void PrintNumPLayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 count)
+static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 count)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     switch (capacityCode << 8)
@@ -761,24 +761,24 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = 0;
         data->field_0->arr[0].field_1B = 0;
-        data->taskId_sub_8119EB8 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
-        data->field_10 = AddWindow(&gUnknown_8456CD0);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(data->field_4, 0xFF);
+        data->bButtonCancelWindowId = AddWindow(&gUnknown_8456CD0);
         data->listWindowId = AddWindow(&gUnknown_8456CFC);
-        data->field_11 = AddWindow(&gUnknown_8456D04);
+        data->nPlayerModeWindowId = AddWindow(&gUnknown_8456D04);
 
-        FillWindowPixelBuffer(data->field_10, PIXEL_FILL(2));
-        UR_AddTextPrinterParameterized(data->field_10, 0, gUnknown_845747C, 8, 2, UR_COLOR_WHT_DKE_LTE);
-        PutWindowTilemap(data->field_10);
-        CopyWindowToVram(data->field_10, 2);
+        FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
+        UR_AddTextPrinterParameterized(data->bButtonCancelWindowId, 0, gUnknown_845747C, 8, 2, UR_COLOR_WHT_DKE_LTE);
+        PutWindowTilemap(data->bButtonCancelWindowId);
+        CopyWindowToVram(data->bButtonCancelWindowId, 2);
 
         DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = gUnknown_8456D34;
         gMultiuseListMenuTemplate.windowId = data->listWindowId;
         data->listTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
 
-        DrawStdWindowFrame(data->field_11, FALSE);
-        PutWindowTilemap(data->field_11);
-        CopyWindowToVram(data->field_11, 2);
+        DrawStdWindowFrame(data->nPlayerModeWindowId, FALSE);
+        PutWindowTilemap(data->nPlayerModeWindowId);
+        CopyWindowToVram(data->nPlayerModeWindowId, 2);
 
         CopyBgTilemapBufferToVram(0);
         data->playerCount = 1;
@@ -798,7 +798,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             StringExpandPlaceholders_AwaitingCommFromAnother(gStringVar4, sPlayerCurrActivity);
         }
 
-        PrintNumPLayersWaitingForMsg(data->field_11, sPlayerActivityGroupSize, data->playerCount);
+        PrintNumPlayersWaitingForMsg(data->nPlayerModeWindowId, sPlayerActivityGroupSize, data->playerCount);
         data->state = 5;
         break;
     case 5:
@@ -860,7 +860,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         break;
     case 11:
-        switch (sub_811A14C(&data->textState, sub_80FA634(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname)))
+        switch (UnionRoomHandleYesNo(&data->textState, sub_80FA634(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname)))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -903,7 +903,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
                     }
 
                     sub_80F8F5C();
-                    PrintNumPLayersWaitingForMsg(data->field_11, sPlayerActivityGroupSize, data->playerCount);
+                    PrintNumPlayersWaitingForMsg(data->nPlayerModeWindowId, sPlayerActivityGroupSize, data->playerCount);
                 }
                 else
                 {
@@ -940,7 +940,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             data->state = 16;
         break;
     case 16:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             data->state = 17;
@@ -959,7 +959,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
             data->state = 20;
         break;
     case 20:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             data->state = 23;
@@ -1035,16 +1035,16 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
 
 static void sub_81161E4(struct UnkStruct_Leader * data)
 {
-    ClearWindowTilemap(data->field_11);
-    ClearStdWindowAndFrame(data->field_11, FALSE);
+    ClearWindowTilemap(data->nPlayerModeWindowId);
+    ClearStdWindowAndFrame(data->nPlayerModeWindowId, FALSE);
     DestroyListMenuTask(data->listTaskId, 0, 0);
-    ClearWindowTilemap(data->field_10);
+    ClearWindowTilemap(data->bButtonCancelWindowId);
     ClearStdWindowAndFrame(data->listWindowId, FALSE);
     CopyBgTilemapBufferToVram(0);
-    RemoveWindow(data->field_11);
+    RemoveWindow(data->nPlayerModeWindowId);
     RemoveWindow(data->listWindowId);
-    RemoveWindow(data->field_10);
-    DestroyTask(data->taskId_sub_8119EB8);
+    RemoveWindow(data->bButtonCancelWindowId);
+    DestroyTask(data->listenTaskId);
 
     Free(data->field_8);
     Free(data->field_0);
@@ -1291,7 +1291,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119EB8(data->field_4, gSpecialVar_0x8004);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(data->field_4, gSpecialVar_0x8004);
         data->field_C = AddWindow(&gUnknown_8456CD0);
         data->listWindowId = AddWindow(&gUnknown_8456D4C);
         data->field_D = AddWindow(&gUnknown_8456D54);
@@ -1414,17 +1414,17 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             }
             break;
         case 7:
-            if (data->field_15 > 0xF0)
+            if (data->delayBeforePrint > 0xF0)
             {
                 if (PrintOnTextbox(&data->textState, gStringVar4))
                 {
                     RfuSetErrorStatus(12, 0);
-                    data->field_15 = 0;
+                    data->delayBeforePrint = 0;
                 }
             }
             else
             {
-                data->field_15++;
+                data->delayBeforePrint++;
             }
             break;
         }
@@ -1437,7 +1437,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             data->state = 8;
         break;
     case 8:
-        switch (sub_811A14C(&data->textState, RfuGetErrorStatus()))
+        switch (UnionRoomHandleYesNo(&data->textState, RfuGetErrorStatus()))
         {
         case 0:
             sub_80FA6BC();
@@ -1473,7 +1473,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         RemoveWindow(data->field_D);
         RemoveWindow(data->listWindowId);
         RemoveWindow(data->field_C);
-        DestroyTask(data->field_11);
+        DestroyTask(data->listenTaskId);
         Free(data->field_0);
         Free(data->field_4);
         data->state++;
@@ -1583,7 +1583,7 @@ static void Task_ListenToWireless(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(data->field_4, 0xFF);
         data->field_F = 0;
         data->state = 3;
         break;
@@ -1594,7 +1594,7 @@ static void Task_ListenToWireless(u8 taskId)
             data->state = 10;
         break;
     case 10:
-        DestroyTask(data->field_11);
+        DestroyTask(data->listenTaskId);
         Free(data->field_0);
         Free(data->field_4);
         LinkRfu_Shutdown();
@@ -1728,7 +1728,7 @@ u8 sub_8117118(void)
     return taskId;
 }
 
-static void sub_8117130(u8 taskId)
+static void Task_StartUnionRoomTrade(u8 taskId)
 {
     u32 monId = GetPartyPositionOfRegisteredMon(&sUnionRoomTrade, GetMultiplayerId());
 
@@ -1796,7 +1796,7 @@ static void Task_ExchangeCards(u8 taskId)
             }
             else
             {
-                sub_81446C4();
+                ResetReceivedWonderCardFlag();
             }
 
             ResetBlockReceivedFlags();
@@ -1858,7 +1858,7 @@ static void SetCableClubStateAndWarpToNewMap(s8 mapGroup, s8 mapNum, s32 x, s32 
     WarpIntoMap();
 }
 
-static void sub_8117534(void)
+static void CB2_TransitionToCableClub(void)
 {
     switch (gMain.state)
     {
@@ -1887,9 +1887,9 @@ static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
         *((u16 *)(dest + sizeof(struct TrainerCard))) = 0;
 }
 
-static void Task_sub_81175BC(u8 taskId)
+static void Task_StartActivity(u8 taskId)
 {
-    sub_81446C4();
+    ResetReceivedWonderCardFlag();
     switch (sPlayerCurrActivity)
     {
     case ACTIVITY_BATTLE:
@@ -1920,7 +1920,7 @@ static void Task_sub_81175BC(u8 taskId)
         SavePlayerParty();
         LoadPlayerBag();
         SetCableClubStateAndWarpToNewMap(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_SINGLE_BATTLE);
-        SetMainCallback2(sub_8117534);
+        SetMainCallback2(CB2_TransitionToCableClub);
         break;
     case ACTIVITY_DBLBATTLE:
         CleanupOverworldWindowsAndTilemaps();
@@ -1929,7 +1929,7 @@ static void Task_sub_81175BC(u8 taskId)
         LoadPlayerBag();
         CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
         SetCableClubStateAndWarpToNewMap(MAP_GROUP(BATTLE_COLOSSEUM_2P), MAP_NUM(BATTLE_COLOSSEUM_2P), 6, 8, USING_DOUBLE_BATTLE);
-        SetMainCallback2(sub_8117534);
+        SetMainCallback2(CB2_TransitionToCableClub);
         break;
     case ACTIVITY_MLTBATTLE:
         CleanupOverworldWindowsAndTilemaps();
@@ -1938,26 +1938,26 @@ static void Task_sub_81175BC(u8 taskId)
         LoadPlayerBag();
         CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
         SetCableClubStateAndWarpToNewMap(MAP_GROUP(BATTLE_COLOSSEUM_4P), MAP_NUM(BATTLE_COLOSSEUM_4P), 5, 8, USING_MULTI_BATTLE);
-        SetMainCallback2(sub_8117534);
+        SetMainCallback2(CB2_TransitionToCableClub);
         break;
     case ACTIVITY_TRADE:
         CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
         CleanupOverworldWindowsAndTilemaps();
         SetCableClubStateAndWarpToNewMap(MAP_GROUP(TRADE_CENTER), MAP_NUM(TRADE_CENTER), 5, 8, USING_TRADE_CENTER);
-        SetMainCallback2(sub_8117534);
+        SetMainCallback2(CB2_TransitionToCableClub);
         break;
     case ACTIVITY_TRADE | IN_UNION_ROOM:
-        CreateTask(sub_8117130, 0);
+        CreateTask(Task_StartUnionRoomTrade, 0);
         break;
     case ACTIVITY_CHAT:
     case ACTIVITY_CHAT | IN_UNION_ROOM:
         if (GetMultiplayerId() == 0)
         {
-            sub_80F8CFC();
+            LinkRfu_CreateConnectionAsParent();
         }
         else
         {
-            sub_80F8D14();
+            LinkRfu_StopManagerBeforeEnteringChat();
             SetHostRFUtgtGname(ACTIVITY_CHAT | IN_UNION_ROOM, 0, 1);
         }
         EnterUnionRoomChat();
@@ -2016,7 +2016,7 @@ static void Task_sub_8117900(u8 taskId)
         if (IsLinkTaskFinished())
         {
             DestroyTask(taskId);
-            CreateTask_sub_81175BC();
+            CreateTask_StartActivity();
         }
         break;
     }
@@ -2027,9 +2027,9 @@ static void CreateTask_sub_8117900(void)
     CreateTask(Task_sub_8117900, 0);
 }
 
-static void CreateTask_sub_81175BC(void)
+static void CreateTask_StartActivity(void)
 {
-    u8 taskId = CreateTask(Task_sub_81175BC, 0);
+    u8 taskId = CreateTask(Task_StartActivity, 0);
     gTasks[taskId].data[0] = 0;
 }
 
@@ -2076,7 +2076,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = 0;
         data->field_0->arr[0].field_1B = 0;
-        data->taskId_sub_8119EB8 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(data->field_4, 0xFF);
 
         winTemplate = gUnknown_8456CFC;
         winTemplate.baseBlock = GetMysteryGiftBaseBlock();
@@ -2120,7 +2120,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (mevent_message_print_and_prompt_yes_no(&data->textState, (u16 *)&data->field_14, FALSE, gStringVar4))
+        switch (mevent_message_print_and_prompt_yes_no(&data->textState, (u16 *)&data->messageWindowId, FALSE, gStringVar4))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -2199,7 +2199,7 @@ static void Task_MEvent_Leader(u8 taskId)
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->listWindowId);
-        DestroyTask(data->taskId_sub_8119EB8);
+        DestroyTask(data->listenTaskId);
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
@@ -2228,7 +2228,7 @@ static void Task_MEvent_Leader(u8 taskId)
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->listWindowId);
-        DestroyTask(data->taskId_sub_8119EB8);
+        DestroyTask(data->listenTaskId);
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
@@ -2281,7 +2281,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119EB8(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
 
         winTemplate1 = gUnknown_8456D4C;
         winTemplate1.baseBlock = GetMysteryGiftBaseBlock();
@@ -2376,7 +2376,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->field_D);
         RemoveWindow(data->listWindowId);
-        DestroyTask(data->field_11);
+        DestroyTask(data->listenTaskId);
         Free(data->field_0);
         Free(data->field_4);
         data->state++;
@@ -2447,7 +2447,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119FD8(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
+        data->listenTaskId = CreateTask_Task_ListenForPartnersWithSerial7F7D(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
 
         if (data->field_13 != 0)
         {
@@ -2544,7 +2544,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
             CopyBgTilemapBufferToVram(0);
             RemoveWindow(data->listWindowId);
         }
-        DestroyTask(data->field_11);
+        DestroyTask(data->listenTaskId);
         Free(data->field_0);
         Free(data->field_4);
         data->state++;
@@ -2992,7 +2992,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
         }
         break;
     case 19:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             CopyBgTilemapBufferToVram(0);
@@ -3099,7 +3099,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
         UnionRoom_ScheduleFieldMessageWithFollowupState(9, gStringVar4);
         break;
     case 9:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             data->playerSendBuffer[0] = ACTIVITY_ACCEPT | IN_UNION_ROOM;
@@ -3195,7 +3195,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
             DeleteUnionObjWorkAndStopTask();
             DestroyTask(taskId);
             Free(sUnionRoomMain.uRoom);
-            CreateTask_sub_81175BC();
+            CreateTask_StartActivity();
         }
         break;
     case 42:
@@ -3282,7 +3282,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
         sub_811868C(gUnknown_8458D78);
         break;
     case 44:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             data->state = 56;
@@ -3347,7 +3347,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
         }
         break;
     case 49:
-        switch (sub_811A14C(&data->textState, FALSE))
+        switch (UnionRoomHandleYesNo(&data->textState, FALSE))
         {
         case 0:
             data->state = 50;
@@ -3549,7 +3549,7 @@ static u8 sub_8119B94(void)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (AreUnkSharedObjectsDifferent(&structPtr->field_C->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy) == TRUE)
+        if (AreGnameUnameDifferent(&structPtr->field_C->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy) == TRUE)
         {
             structPtr->field_8->arr[0].gname_uname = structPtr->field_C->arr[i].gname_uname;
             structPtr->field_8->arr[0].field_18 = 0;
@@ -3638,18 +3638,18 @@ static void Task_SearchForChildOrParent(u8 taskId)
         {
             for (j = 0; j < i; j++)
             {
-                if (!AreUnkSharedObjectsDifferent(&ptr[1]->arr[j].gname_uname, &sp0))
+                if (!AreGnameUnameDifferent(&ptr[1]->arr[j].gname_uname, &sp0))
                 {
                     sp0 = sUnionGnameUnamePair_Dummy;
                 }
             }
             ptr[1]->arr[i].gname_uname = sp0;
-            ptr[1]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[1]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
+            ptr[1]->arr[i].active = AreGnameUnameDifferent(&ptr[1]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
         }
         else
         {
             ptr[0]->arr[i].gname_uname = sp0;
-            ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
+            ptr[0]->arr[i].active = AreGnameUnameDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
         }
     }
 }
@@ -3664,7 +3664,7 @@ static u8 sub_8119E84(struct UnkStruct_Main4 * a0, struct UnkStruct_Main4 * a1, 
     return taskId;
 }
 
-static void sub_8119EB8(u8 taskId)
+static void Task_ListenForPartnersWithCompatibleSerialNos(u8 taskId)
 {
     s32 i, j;
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
@@ -3678,12 +3678,12 @@ static void sub_8119EB8(u8 taskId)
         }
         for (j = 0; j < i; j++)
         {
-            if (!AreUnkSharedObjectsDifferent(&ptr[0]->arr[j].gname_uname, &ptr[0]->arr[i].gname_uname))
+            if (!AreGnameUnameDifferent(&ptr[0]->arr[j].gname_uname, &ptr[0]->arr[i].gname_uname))
             {
                 ptr[0]->arr[i].gname_uname = sUnionGnameUnamePair_Dummy;
             }
         }
-        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
+        ptr[0]->arr[i].active = AreGnameUnameDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
     }
 }
 
@@ -3717,36 +3717,36 @@ static bool32 GetGnameWonderFlagByLinkGroup(struct GFtgtGname * gname, s16 linkG
     }
 }
 
-static void sub_8119FD8(u8 taskId)
+static void Task_ListenForPartnersWithSerial7F7D(u8 taskId)
 {
     s32 i;
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (sub_80FCCF4(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i))
+        if (LinkRfu_GetNameIfSerial7F7D(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i))
         {
             GetGnameWonderFlagByLinkGroup(&ptr[0]->arr[i].gname_uname.gname, gTasks[taskId].data[2]);
         }
-        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
+        ptr[0]->arr[i].active = AreGnameUnameDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
     }
 }
 
-static u8 CreateTask_sub_8119EB8(struct UnkStruct_Main4 * main4, u32 linkGroup)
+static u8 CreateTask_Task_ListenForPartnersWithCompatibleSerialNos(struct UnkStruct_Main4 * main4, u32 linkGroup)
 {
-    u8 taskId = CreateTask(sub_8119EB8, 0);
+    u8 taskId = CreateTask(Task_ListenForPartnersWithCompatibleSerialNos, 0);
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     ptr[0] = main4;
     gTasks[taskId].data[2] = linkGroup;
     return taskId;
 }
 
-static u8 CreateTask_sub_8119FD8(struct UnkStruct_Main4 * main4, u32 a1)
+static u8 CreateTask_Task_ListenForPartnersWithSerial7F7D(struct UnkStruct_Main4 * main4, u32 linkGroup)
 {
-    u8 taskId = CreateTask(sub_8119FD8, 0);
+    u8 taskId = CreateTask(Task_ListenForPartnersWithSerial7F7D, 0);
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     ptr[0] = main4;
-    gTasks[taskId].data[2] = a1;
+    gTasks[taskId].data[2] = linkGroup;
     return taskId;
 }
 
@@ -3793,7 +3793,7 @@ static bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     return FALSE;
 }
 
-static s8 sub_811A14C(u8 *state_p, bool32 no_draw)
+static s8 UnionRoomHandleYesNo(u8 *state_p, bool32 no_draw)
 {
     s8 r1;
 
@@ -4043,7 +4043,7 @@ static void BlankUnkStruct_x1CArray(struct UnkStruct_x1C * arg0, u8 count)
     }
 }
 
-static bool8 AreUnkSharedObjectsDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1)
+static bool8 AreGnameUnameDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1)
 {
     s32 i;
 
@@ -4108,7 +4108,7 @@ static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (arg1[i].active && !AreUnkSharedObjectsDifferent(&arg0->gname_uname, &arg1[i].gname_uname))
+        if (arg1[i].active && !AreGnameUnameDifferent(&arg0->gname_uname, &arg1[i].gname_uname))
         {
             result = i;
             arg1[i].active = FALSE;

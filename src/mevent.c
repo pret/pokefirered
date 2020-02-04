@@ -947,7 +947,7 @@ u16 MEvent_GetBattleCardCount(u32 command)
     return 0;
 }
 
-void sub_81446C4(void)
+void ResetReceivedWonderCardFlag(void)
 {
     sReceivedWonderCardIsValid = FALSE;
 }

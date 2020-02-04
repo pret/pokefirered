@@ -87,7 +87,7 @@ void InitMEventData(void);
 u16 MEvent_GetBattleCardCount(u32 command);
 void sub_8144714(u32 a0, u32 a1);
 u16 *GetMEventProfileECWordsMaybe(void);
-void sub_81446C4(void);
+void ResetReceivedWonderCardFlag(void);
 bool32 sub_81446D0(u16 a0);
 u16 GetWonderCardFlagId(void);
 

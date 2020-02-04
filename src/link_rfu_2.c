@@ -398,7 +398,7 @@ static void sub_80F8AEC(void)
 
 static void sub_80F8B34(u8 taskId)
 {
-    if (GetHostRFUtgtGname()->activity == (0x14 | 0x40) && RfuGetErrorStatus() == 4)
+    if (GetHostRFUtgtGname()->activity == (0x14 | IN_UNION_ROOM) && RfuGetErrorStatus() == 4)
     {
         rfu_REQ_disconnect(lman.acceptSlot_flag);
         rfu_waitREQComplete();
@@ -457,12 +457,12 @@ static void sub_80F8B34(u8 taskId)
     }
 }
 
-void sub_80F8CFC(void)
+void LinkRfu_CreateConnectionAsParent(void)
 {
-    rfu_LMAN_establishConnection(1, 0, 240, (u16*)sAcceptedSerialNos);
+    rfu_LMAN_establishConnection(MODE_PARENT, 0, 240, (u16*)sAcceptedSerialNos);
 }
 
-void sub_80F8D14(void)
+void LinkRfu_StopManagerBeforeEnteringChat(void)
 {
     rfu_LMAN_stopManager(FALSE);
 }
@@ -1018,7 +1018,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 {
                     Rfu.cmd_8800_recvbuf[i].receiving = 2;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40) && gReceivedRemoteLinkPlayers != 0 && Rfu.parent_child == MODE_CHILD)
+                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && gReceivedRemoteLinkPlayers != 0 && Rfu.parent_child == MODE_CHILD)
                         sub_80FAA58(gBlockRecvBuffer);
                 }
             }
@@ -1958,7 +1958,7 @@ void sub_80FB030(u32 linkPlayerCount)
     u32 child_sprite_genders;
     s32 bm_child_slots;
 
-    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40))
+    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
         numConnectedChildren = 0;
         child_sprite_genders = 0;
@@ -1976,7 +1976,7 @@ void sub_80FB030(u32 linkPlayerCount)
                     break;
             }
         }
-        sub_80FB008(ACTIVITY_CHAT | 0x40, child_sprite_genders, 0);
+        sub_80FB008(ACTIVITY_CHAT | IN_UNION_ROOM, child_sprite_genders, 0);
     }
 }
 
@@ -2201,7 +2201,7 @@ static u8 sub_80FB5A0(s32 a0)
         if ((a0 >> i) & 1)
         {
             struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
-            if (structPtr->activity == (ACTIVITY_CHAT | 0x40))
+            if (structPtr->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
                 ret |= (1 << i);
         }
     }
@@ -2222,7 +2222,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
         RfuSetErrorStatus(4, 0);
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
-        if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40) && Rfu.unk_cd9 == 0)
+        if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM) && Rfu.unk_cd9 == 0)
         {
             u8 idx = sub_80FB5A0(lman.param[0]);
             if (idx != 0)
@@ -2257,7 +2257,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
     case LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_END_WAIT_CHILD_NAME:
-        if (GetHostRFUtgtGname()->activity != (ACTIVITY_CHAT | 0x40) && lman.acceptCount > 1)
+        if (GetHostRFUtgtGname()->activity != (ACTIVITY_CHAT | IN_UNION_ROOM) && lman.acceptCount > 1)
         {
             r1 = 1 << sub_80F886C(lman.param[0]);
             rfu_REQ_disconnect(lman.acceptSlot_flag ^ r1);
@@ -2644,16 +2644,16 @@ void sub_80FBF54(const u8 *src, u16 trainerId)
 
 static bool32 ShouldRejectPartnerConnectionBasedOnActivity(s16 activity, struct GFtgtGname *partnerGname)
 {
-    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40))
+    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
-        if (partnerGname->activity != (ACTIVITY_CHAT | 0x40))
+        if (partnerGname->activity != (ACTIVITY_CHAT | IN_UNION_ROOM))
             return TRUE;
     }
-    else if (partnerGname->activity != 0x40)
+    else if (partnerGname->activity != IN_UNION_ROOM)
     {
         return TRUE;
     }
-    else if (activity == (ACTIVITY_TRADE | 0x40))
+    else if (activity == (ACTIVITY_TRADE | IN_UNION_ROOM))
     {
         struct GFtgtGname *myTradeGname = (struct GFtgtGname *)&Rfu.unk_104.gname;
         if (myTradeGname->species == SPECIES_EGG)
@@ -2720,7 +2720,7 @@ void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 activity)
     taskId = CreateTask(sub_80FC028, 2);
     gTasks[taskId].data[1] = activity;
     taskId2 = FindTaskIdByFunc(sub_80F8B34);
-    if (activity == (ACTIVITY_CHAT | 0x40))
+    if (activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
     {
         if (taskId2 != 0xFF)
             gTasks[taskId2].data[7] = 1;

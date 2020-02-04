@@ -1920,15 +1920,15 @@ u16 Special_BattleCardAction(void)
     switch (gSpecialVar_Result)
     {
     case 0:
-        return sub_81445C0(3);
+        return MEvent_GetBattleCardCount(3);
     case 1:
-        return sub_81445C0(4);
+        return MEvent_GetBattleCardCount(4);
     case 2:
-        return sub_81445C0(0);
+        return MEvent_GetBattleCardCount(0);
     case 3:
-        return sub_81445C0(1);
+        return MEvent_GetBattleCardCount(1);
     case 4:
-        return sub_81445C0(2);
+        return MEvent_GetBattleCardCount(2);
     default:
         AGB_ASSERT_EX(0, ABSPATH("scr_tool.c"), 3873);
         return 0;

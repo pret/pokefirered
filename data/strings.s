@@ -4230,51 +4230,51 @@ gJPText_MysteryGift:: @ 841DE50
 gJPText_DecideStop:: @ 841DE51
 	.string "$"
 
-gUnknown_841DE52:: @ 841DE52
+gJPText_ReceiveMysteryGiftWithEReader:: @ 841DE52
 	.string "$"
 
-gUnknown_841DE53:: @ 841DE53
+gJPText_SelectConnectFromEReaderMenu:: @ 841DE53
 	.string "$"
 
-gUnknown_841DE54:: @ 841DE54
+gJPText_SelectConnectWithGBA:: @ 841DE54
 	.string "$"
 
-gUnknown_841DE55:: @ 841DE55
+gJPText_SelectConnectAndPressA:: @ 841DE55
 	.string "カ-ドeリ-ダ-{PLUS}の ‘つうしん'を\n"
 	.string "えらんで Aボタンを おしてください$"
 
-gUnknown_841DE7C:: @ 841DE7C
+gJPText_LinkIsIncorrect:: @ 841DE7C
 	.string "$"
 
-gUnknown_841DE7D:: @ 841DE7D
+gJPText_CardReadingHasBeenHalted:: @ 841DE7D
 	.string "$"
 
-gUnknown_841DE7E:: @ 841DE7E
+gJPText_UnableConnectWithEReader:: @ 841DE7E
 	.string "カ-ドeリ-ダ-{PLUS}と\n"
 	.string "つうしん できません$"
 
-gUnknown_841DE95:: @ 841DE95
+gJPText_Connecting:: @ 841DE95
 	.string "$"
 
-gUnknown_841DE96:: @ 841DE96
+gJPText_ConnectionErrorCheckLink:: @ 841DE96
 	.string "$"
 
-gUnknown_841DE97:: @ 841DE97
+gJPText_ConnectionErrorTryAgain:: @ 841DE97
 	.string "$"
 
-gUnknown_841DE98:: @ 841DE98
+gJPText_AllowEReaderToLoadCard:: @ 841DE98
 	.string "$"
 
-gUnknown_841DE99:: @ 841DE99
+gJPText_ConnectionComplete:: @ 841DE99
 	.string "$"
 
-gUnknown_841DE9A:: @ 841DE9A
+gJPText_NewTrainerHasComeToSevii:: @ 841DE9A
 	.string "$"
 
-gUnknown_841DE9B:: @ 841DE9B
+gJPText_PleaseWaitAMoment:: @ 841DE9B
 	.string "$"
 
-gUnknown_841DE9C:: @ 841DE9C
+gJPText_WriteErrorUnableToSaveData:: @ 841DE9C
 	.string "$"
 
 gText_CommErrorCheckConnections:: @ 841DE9D

@@ -662,7 +662,7 @@ static void sub_807E678(u8 taskId)
     case 1:
         if (!sub_807E40C() && BGMusicStopped())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             data[0]++;
         }
         break;

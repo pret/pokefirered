@@ -506,7 +506,7 @@ u8 *GetRamScript(u8 objectId, u8 *script)
     }
 }
 
-bool32 sub_8069DFC(void)
+bool32 ValidateRamScript(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)

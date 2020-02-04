@@ -2686,7 +2686,7 @@ static void sub_8053E8C(void)
             }
             else
             {
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
             }
             gMain.state++;
         }

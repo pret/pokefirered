@@ -1111,4 +1111,19 @@ extern const u8 gText_PeopleBattling[];
 extern const u8 gText_PeopleInUnionRoom[];
 extern const u8 gText_PeopleCommunicating[];
 
+// mevent
+extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
+extern const u8 gJPText_SelectConnectFromEReaderMenu[];
+extern const u8 gJPText_SelectConnectWithGBA[];
+extern const u8 gJPText_LinkIsIncorrect[];
+extern const u8 gJPText_CardReadingHasBeenHalted[];
+extern const u8 gJPText_Connecting[];
+extern const u8 gJPText_ConnectionErrorCheckLink[];
+extern const u8 gJPText_ConnectionErrorTryAgain[];
+extern const u8 gJPText_AllowEReaderToLoadCard[];
+extern const u8 gJPText_ConnectionComplete[];
+extern const u8 gJPText_NewTrainerHasComeToSevii[];
+extern const u8 gJPText_PleaseWaitAMoment[];
+extern const u8 gJPText_WriteErrorUnableToSaveData[];
+
 #endif //GUARD_STRINGS_H

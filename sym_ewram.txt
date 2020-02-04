@@ -443,7 +443,9 @@ gUnknown_203B170: @ 203B170
 	.align 2
 	.include "src/mevent_server.o"
 	.align 2
-	.include "src/mevent_8145654.o"
+	.include "src/mevent_show_card.o"
+	.align 2
+	.include "src/mevent_show_news.o"
 	.align 2
 	.include "src/seagallop.o"
 

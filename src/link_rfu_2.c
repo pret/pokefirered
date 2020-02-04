@@ -1027,7 +1027,7 @@ static void RfuHandleReceiveCommand(u8 unused)
             Rfu_InitBlockSend(gUnknown_843EC64[gRecvCmds[i][1]].buffer, (u16)gUnknown_843EC64[gRecvCmds[i][1]].size);
             break;
         case RFU_COMMAND_0x5f00:
-            Rfu.unk_e4[i] = 1;
+            Rfu.cmd5f00Ack[i] = 1;
             break;
         case RFU_COMMAND_0x6600:
             if (Rfu.unk_100 == gRecvCmds[i][1])
@@ -1280,7 +1280,7 @@ bool8 sub_80FA0F8(u8 a0)
     return TRUE;
 }
 
-static void sub_80FA114(void)
+static void RfuFunc_End5F00_PowerDownRfu(void)
 {
     rfu_clearAllSlot();
     rfu_LMAN_powerDownRFU();
@@ -1289,14 +1289,14 @@ static void sub_80FA114(void)
     Rfu.RfuFunc = NULL;
 }
 
-static void sub_80FA140(void)
+static void RfuFunc_End5F00_ParentDisconnect(void)
 {
     rfu_REQ_disconnect(gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag);
     rfu_waitREQComplete();
-    sub_80FA114();
+    RfuFunc_End5F00_PowerDownRfu();
 }
 
-static void sub_80FA160(void)
+static void RfuFunc_End5F00(void)
 {
     if (Rfu.parent_child == MODE_CHILD)
     {
@@ -1304,7 +1304,7 @@ static void sub_80FA160(void)
         Rfu.unk_ce4 = 2;
     }
     else
-        Rfu.RfuFunc = sub_80FA140;
+        Rfu.RfuFunc = RfuFunc_End5F00_ParentDisconnect;
 }
 
 void LinkRfu_FatalError(void)
@@ -1314,7 +1314,7 @@ void LinkRfu_FatalError(void)
     Rfu.bm_DisconnectSlot = gRfuLinkStatus->connSlotFlag | gRfuLinkStatus->linkLossSlotFlag;
 }
 
-static void sub_80FA1C4(void)
+static void RfuFunc_WaitAck5F00(void)
 {
     s32 i;
     u8 playerCount = Rfu.playerCount;
@@ -1322,45 +1322,45 @@ static void sub_80FA1C4(void)
 
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        if (Rfu.unk_e4[i])
+        if (Rfu.cmd5f00Ack[i])
             count++;
     }
     if (count == playerCount)
     {
-        gBattleTypeFlags &= (u16)~BATTLE_TYPE_20;
+        gBattleTypeFlags &= ~(BATTLE_TYPE_20 | 0xFFFF0000);
         if (Rfu.parent_child == MODE_CHILD)
         {
             Rfu.errorState = 3;
-            sub_80FA160();
+            RfuFunc_End5F00();
         }
         else
-            Rfu.RfuFunc = sub_80FA160;
+            Rfu.RfuFunc = RfuFunc_End5F00;
     }
 }
 
-static void sub_80FA224(void)
+static void RfuFunc_BuildCommand5F00(void)
 {
     if (gSendCmd[0] == 0 && !Rfu.unk_ce8)
     {
         RfuPrepareSendBuffer(RFU_COMMAND_0x5f00);
-        Rfu.RfuFunc = sub_80FA1C4;
+        Rfu.RfuFunc = RfuFunc_WaitAck5F00;
     }
 }
 
-static void sub_80FA25C(u8 taskId)
+static void Task_WaitRfuFuncAndSetBuildCmd5F00(u8 taskId)
 {
     if (Rfu.RfuFunc == NULL)
     {
         Rfu.unk_cd9 = 1;
-        Rfu.RfuFunc = sub_80FA224;
+        Rfu.RfuFunc = RfuFunc_BuildCommand5F00;
         DestroyTask(taskId);
     }
 }
 
-void task_add_05_task_del_08FA224_when_no_RfuFunc(void)
+void Rfu_BeginBuildAndSendCommand5F(void)
 {
-    if (!FuncIsActiveTask(sub_80FA25C))
-        CreateTask(sub_80FA25C, 5);
+    if (!FuncIsActiveTask(Task_WaitRfuFuncAndSetBuildCmd5F00))
+        CreateTask(Task_WaitRfuFuncAndSetBuildCmd5F00, 5);
 }
 
 static void sub_80FA2B0(void)
@@ -1938,9 +1938,9 @@ void RfuUpdatePlayerGnameStateAndSend(u32 type, u32 species, u32 level)
     gHostRFUtgtGnameBuffer.level = level;
 }
 
-void sub_80FAFE0(u8 a0)
+void sub_80FAFE0(bool8 unk_0a_7)
 {
-    gHostRFUtgtGnameBuffer.unk_0a_7 = a0;
+    gHostRFUtgtGnameBuffer.unk_0a_7 = unk_0a_7;
     rfu_REQ_configGameData(0, 0x0002, (void *)&gHostRFUtgtGnameBuffer, gHostRFUtgtUnameBuffer);
 }
 

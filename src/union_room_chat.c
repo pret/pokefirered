@@ -587,7 +587,7 @@ static void ChatEntryRoutine_ExitChat(void)
     case 5:
         if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }
@@ -622,7 +622,7 @@ static void ChatEntryRoutine_Drop(void)
     case 1:
         if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }
@@ -668,7 +668,7 @@ static void ChatEntryRoutine_Disbanded(void)
     case 2:
         if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }

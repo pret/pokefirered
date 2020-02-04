@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81507FC
-sub_81507FC: @ 81507FC
+	thumb_func_start StartDodrioBerryPicking
+StartDodrioBerryPicking: @ 81507FC
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	lsls r0, 16
@@ -97,7 +97,7 @@ _081508D2:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81507FC
+	thumb_func_end StartDodrioBerryPicking
 
 	thumb_func_start sub_81508D8
 sub_81508D8: @ 81508D8
@@ -1611,7 +1611,7 @@ _081514A4:
 	beq _081514C0
 	b _081514D6
 _081514AA:
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	movs r0, 0x7
 	bl sub_81549D4
 	b _081514CC

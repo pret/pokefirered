@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8147AA8
-sub_8147AA8: @ 8147AA8
+	thumb_func_start StartPokemonJump
+StartPokemonJump: @ 8147AA8
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -73,7 +73,7 @@ _08147B42:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8147AA8
+	thumb_func_end StartPokemonJump
 
 	thumb_func_start sub_8147B48
 sub_8147B48: @ 8147B48
@@ -2535,7 +2535,7 @@ _08148DEA:
 	ands r0, r1
 	cmp r0, 0
 	bne _08148E20
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 _08148DFA:
 	ldr r0, _08148E0C @ =gUnknown_203F3D4
 	ldr r1, [r0]

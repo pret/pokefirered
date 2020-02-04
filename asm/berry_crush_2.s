@@ -3323,7 +3323,7 @@ _0814D488:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814D4BE
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	b _0814D4B8
 _0814D498:
 	ldr r0, _0814D4B4 @ =gReceivedRemoteLinkPlayers

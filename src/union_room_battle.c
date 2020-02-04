@@ -167,7 +167,7 @@ void CB2_UnionRoomBattle(void)
             }
             else
             {
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
                 if (gBlockRecvBuffer[GetMultiplayerId()][0] == (ACTIVITY_DECLINE | 0x40))
                 {
                     gMain.state = 6;

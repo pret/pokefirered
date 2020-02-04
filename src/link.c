@@ -82,11 +82,11 @@ u32 gFiller_3003EC0;
 u16 gLinkHeldKeys;
 u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 u32 gLinkStatus;
-bool8 gUnknown_3003F24;
+bool8 gLinkAllAcked5FFF;
 bool8 gUnknown_3003F28;
-bool8 gUnknown_3003F2C[MAX_LINK_PLAYERS];
-bool8 gUnknown_3003F30[MAX_LINK_PLAYERS];
-u16 gUnknown_3003F34;
+bool8 gLinkCommand2FFEAck[MAX_LINK_PLAYERS];
+bool8 gLinkCommand5FFFAck[MAX_LINK_PLAYERS];
+u16 gLinkCmd5FFFparam;
 u8 gSuppressLinkErrorMessage;
 bool8 gWirelessCommType;
 bool8 gSavedLinkPlayerCount;
@@ -123,8 +123,8 @@ EWRAM_DATA struct {
     u8 lastSendQueueCount;
     u8 unk_06;
 } sLinkErrorBuffer = {};
-EWRAM_DATA u16 gUnknown_202285C = 0;
-EWRAM_DATA void *gUnknown_2022860 = NULL;
+static EWRAM_DATA u16 sStartSend5FFFfailures = 0;
+static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 
 static void InitLocalLinkPlayer(void);
 static void sub_800978C(void);
@@ -142,8 +142,8 @@ static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size);
 static void LinkTest_prnthex(u32 pos, u8 a0, u8 a1, u8 a2);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
-static void sub_800AB0C(void);
-static void sub_800AB38(void);
+static void LinkCB_BuildCommand5FFF(void);
+static void LinkCB_WaitAckCommand5FFF(void);
 static void sub_800ABD4(void);
 static void sub_800AC00(void);
 static void CheckErrorStatus(void);
@@ -379,8 +379,8 @@ void OpenLink(void)
         ResetBlockSend();
         gUnknown_3000E4C = 0;
         gUnknown_3003F28 = FALSE;
-        gUnknown_3003F24 = FALSE;
-        gUnknown_3003F34 = 0;
+        gLinkAllAcked5FFF = FALSE;
+        gLinkCmd5FFFparam = 0;
         CreateTask(Task_TriggerHandshake, 2);
     }
     else
@@ -391,8 +391,8 @@ void OpenLink(void)
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         gRemoteLinkPlayersNotReceived[i] = TRUE;
-        gUnknown_3003F30[i] = FALSE;
-        gUnknown_3003F2C[i] = FALSE;
+        gLinkCommand5FFFAck[i] = FALSE;
+        gLinkCommand2FFEAck[i] = FALSE;
     }
 }
 
@@ -468,7 +468,7 @@ void LinkTestProcessKeyInput(void)
     }
     if (JOY_NEW(SELECT_BUTTON))
     {
-        sub_800AAC0();
+        Link_TryStartSend5FFF();
     }
     if (gLinkTestDebugValuesEnabled)
     {
@@ -632,10 +632,10 @@ void ProcessRecvCmds(u8 unused)
         }
             break;
         case LINKCMD_0x5FFF:
-            gUnknown_3003F30[i] = TRUE;
+            gLinkCommand5FFFAck[i] = TRUE;
             break;
         case LINKCMD_0x2FFE:
-            gUnknown_3003F2C[i] = TRUE;
+            gLinkCommand2FFEAck[i] = TRUE;
             break;
         case LINKCMD_0xAAAA:
             sub_800A3CC();
@@ -701,7 +701,7 @@ void BuildSendCmd(u16 command)
         break;
     case LINKCMD_0x5FFF:
         gSendCmd[0] = LINKCMD_0x5FFF;
-        gSendCmd[1] = gUnknown_3003F34;
+        gSendCmd[1] = gLinkCmd5FFFparam;
         break;
     case LINKCMD_0x5566:
         gSendCmd[0] = LINKCMD_0x5566;
@@ -1312,54 +1312,54 @@ u8 sub_800AA74(void)
     return gUnknown_3000E50;
 }
 
-void sub_800AA80(u16 a0)
+void Link_StartSend5FFFwithParam(u16 a0)
 {
     if (gWirelessCommType == 1)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_BeginBuildAndSendCommand5F();
     }
     else
     {
         if (gLinkCallback == NULL)
         {
-            gLinkCallback = sub_800AB0C;
-            gUnknown_3003F24 = FALSE;
-            gUnknown_3003F34 = a0;
+            gLinkCallback = LinkCB_BuildCommand5FFF;
+            gLinkAllAcked5FFF = FALSE;
+            gLinkCmd5FFFparam = a0;
         }
     }
 }
 
-void sub_800AAC0(void)
+void Link_TryStartSend5FFF(void)
 {
     if (gWirelessCommType == 1)
     {
-        task_add_05_task_del_08FA224_when_no_RfuFunc();
+        Rfu_BeginBuildAndSendCommand5F();
     }
     else
     {
         if (gLinkCallback != NULL)
         {
-            gUnknown_202285C++;
+            sStartSend5FFFfailures++;
         }
         else
         {
-            gLinkCallback = sub_800AB0C;
-            gUnknown_3003F24 = FALSE;
-            gUnknown_3003F34 = 0;
+            gLinkCallback = LinkCB_BuildCommand5FFF;
+            gLinkAllAcked5FFF = FALSE;
+            gLinkCmd5FFFparam = 0;
         }
     }
 }
 
-static void sub_800AB0C(void)
+static void LinkCB_BuildCommand5FFF(void)
 {
     if (gLastRecvQueueCount == 0)
     {
         BuildSendCmd(LINKCMD_0x5FFF);
-        gLinkCallback = sub_800AB38;
+        gLinkCallback = LinkCB_WaitAckCommand5FFF;
     }
 }
 
-static void sub_800AB38(void)
+static void LinkCB_WaitAckCommand5FFF(void)
 {
     int i;
     unsigned count;
@@ -1369,7 +1369,7 @@ static void sub_800AB38(void)
     count = 0;
     for (i = 0; i < linkPlayerCount; i++)
     {
-        if (gUnknown_3003F30[i])
+        if (gLinkCommand5FFFAck[i])
         {
             count++;
         }
@@ -1380,7 +1380,7 @@ static void sub_800AB38(void)
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
-        gUnknown_3003F24 = TRUE;
+        gLinkAllAcked5FFF = TRUE;
     }
 }
 
@@ -1396,7 +1396,7 @@ void sub_800AB9C(void)
         {
             gLinkCallback = sub_800ABD4;
         }
-        gUnknown_3003F24 = FALSE;
+        gLinkAllAcked5FFF = FALSE;
     }
 }
 
@@ -1417,7 +1417,7 @@ static void sub_800AC00(void)
     linkPlayerCount = GetLinkPlayerCount();
     for (i = 0; i < linkPlayerCount; i++)
     {
-        if (!gUnknown_3003F2C[i])
+        if (!gLinkCommand2FFEAck[i])
         {
             break;
         }
@@ -1426,7 +1426,7 @@ static void sub_800AC00(void)
     {
         for (i = 0; i < MAX_LINK_PLAYERS; i++)
         {
-            gUnknown_3003F2C[i] = FALSE;
+            gLinkCommand2FFEAck[i] = FALSE;
         }
         gLinkCallback = NULL;
     }
@@ -1482,7 +1482,7 @@ void CB2_LinkError(void)
     SetVBlankCallback(sub_800978C);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sLinkErrorBgTemplates, 2);
-    gUnknown_2022860 = tilemapBuffer = malloc(0x800);
+    sLinkErrorBgTilemapBuffer = tilemapBuffer = malloc(0x800);
     SetBgTilemapBuffer(1, tilemapBuffer);
     if (InitWindows(sLinkErrorWindowTemplates))
     {
@@ -1603,12 +1603,12 @@ static void CB2_PrintErrorMessage(void)
 
 bool8 GetSioMultiSI(void)
 {
-    return (REG_SIOCNT & 0x04) != 0;
+    return (REG_SIOCNT & SIO_MULTI_SI) != 0;
 }
 
 static bool8 IsSioMultiMaster(void)
 {
-    return (REG_SIOCNT & 0x8) && !(REG_SIOCNT & 0x04);
+    return (REG_SIOCNT & SIO_MULTI_SD) && !(REG_SIOCNT & SIO_MULTI_SI);
 }
 
 bool8 IsLinkConnectionEstablished(void)

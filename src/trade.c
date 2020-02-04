@@ -1213,7 +1213,7 @@ static void sub_804D548(void)
         }
         else
         {
-            sub_800AA80(32);
+            Link_StartSend5FFFwithParam(32);
             sTradeMenuResourcesPtr->unk_6F = 13;
         }
     }
@@ -2008,7 +2008,7 @@ static void sub_804E908(void)
         }
         else
         {
-            sub_800AA80(12);
+            Link_StartSend5FFFwithParam(12);
         }
 
         sTradeMenuResourcesPtr->unk_6F = 12;

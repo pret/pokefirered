@@ -588,11 +588,11 @@ static void UpdateUnionRoomPlayerSprites(struct UnkStruct_URoom * groups)
     {
         if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
-            SpawnGroupLeaderAndMembers(i, &x20_p[i].unk.gname);
+            SpawnGroupLeaderAndMembers(i, &x20_p[i].gname_uname.gname);
         }
         else if (x20_p[i].groupScheduledAnim == UNION_ROOM_SPAWN_OUT)
         {
-            DespawnGroupLeaderAndMembers(i, &x20_p[i].unk.gname);
+            DespawnGroupLeaderAndMembers(i, &x20_p[i].gname_uname.gname);
         }
     }
 }
@@ -661,5 +661,5 @@ static void UnionPartnerObjectSetFacing(s32 member, s32 group, u8 direction)
 
 void UpdateUnionGroupMemberFacing(u32 member, u32 group, struct UnkStruct_Main0 *main0_p)
 {
-    return UnionPartnerObjectSetFacing(member, group, UnionPartnerObjectGetFacing(member, group, &main0_p->arr[group].unk.gname));
+    return UnionPartnerObjectSetFacing(member, group, UnionPartnerObjectGetFacing(member, group, &main0_p->arr[group].gname_uname.gname));
 }

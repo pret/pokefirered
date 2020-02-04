@@ -374,7 +374,7 @@ gSpecials:: @ 815FD60
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
-	def_special sub_814F1D4
+	def_special Special_WirelessCommunicationScreen
 	def_special EnableNationalPokedex
 	def_special sub_80699E0
 	def_special sub_80699BC

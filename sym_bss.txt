@@ -86,9 +86,10 @@ gUnknown_3002030: @ 3002030
 gUnknown_3002038: @ 3002038
 	.space 0x8
 
-gUnknown_3002040: @ 3002040
-	.space 0x4
+	.align 2
+	.include "src/wireless_communication_status_screen.o"
 
+	.align 2
 gUnknown_3002044: @ 3002044
 	.space 0x4
 
@@ -100,10 +101,11 @@ gUnknown_3002044: @ 3002044
 
 	.align 3
 	.include "asm/m4a_1.o"
+	.align 3
 	.include "src/agb_flash.o"
-
-	.space 0x4 @ This isn't needed for Ruby/Sapphire or Emerald.
-
+	.align 3
 	.include "*libgcc.a:dp-bit.o"
+	.align 3
 	.include "*libgcc.a:fp-bit.o"
+	.align 3
 	.include "*libc.a:syscalls.o"

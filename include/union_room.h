@@ -12,21 +12,21 @@
 #define UROOM_MAX_GROUP_COUNT 8
 #define UROOM_MAX_PARTY_SIZE  5
 
-struct UnkStruct_Shared
+struct UnionGnameUnamePair
 {
     struct GFtgtGname gname;
-    u8 ALIGNED(4) playerName[PLAYER_NAME_LENGTH + 1];
+    u8 ALIGNED(4) uname[PLAYER_NAME_LENGTH + 1];
 };
 
 struct UnkStruct_x1C
 {
-    struct UnkStruct_Shared unk0;
+    struct UnionGnameUnamePair gname_uname;
     u8 active:1;
 };
 
 struct UnkStruct_x20
 {
-    struct UnkStruct_Shared unk;
+    struct UnionGnameUnamePair gname_uname;
     u16 field_18;
     u8 groupScheduledAnim:2;
     u8 field_1A_1:1;
@@ -59,7 +59,7 @@ struct UnkStruct_Leader
     struct UnkStruct_Main0 * field_8;
     u8 state;
     u8 textState;
-    u8 field_E;
+    u8 delayTimerAfterOk;
     u8 listWindowId;
     u8 field_10;
     u8 field_11;
@@ -68,8 +68,8 @@ struct UnkStruct_Leader
     u8 field_14;
     u8 field_15;
     u8 field_16;
-    u8 field_17;
-    u8 field_18;
+    u8 taskId_sub_8119EB8;
+    u8 activity;
     u8 field_19;
     u16 field_1A;
 };
@@ -88,7 +88,7 @@ struct UnkStruct_Group
     u8 field_F;
     u8 field_10;
     u8 field_11;
-    u8 field_12;
+    u8 cardOrNews;
     u8 field_13;
     u8 field_14;
     u8 field_15;

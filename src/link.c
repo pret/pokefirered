@@ -401,7 +401,7 @@ void CloseLink(void)
     gReceivedRemoteLinkPlayers = FALSE;
     if (gWirelessCommType)
     {
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
     }
     gLinkOpen = FALSE;
     DisableSerial();

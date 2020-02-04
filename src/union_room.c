@@ -62,7 +62,7 @@ static struct UnkStruct_Leader * sLeader;
 static struct UnkStruct_Group * sGroup;
 static struct UnkStruct_URoom * sURoom;
 
-static void sub_8115A68(u8 taskId);
+static void Task_TryBecomeLinkLeader(u8 taskId);
 static void sub_81161E4(struct UnkStruct_Leader * leader);
 static bool8 sub_8116444(struct UnkStruct_Leader * leader, u32 state1, u32 state2);
 static void sub_81164C8(u8 windowId, s32 itemId, u8 y);
@@ -71,12 +71,12 @@ static u8 UnionRoomLeaderField0CompactionAndCount(struct UnkStruct_Main0 * a0);
 static void Task_TryJoinLinkGroup(u8 taskId);
 static u32 sub_8116D10(struct UnkStruct_Group * group, s32 id);
 static void sub_8116D60(struct UnkStruct_Group * group, s32 id);
-static void sub_8116E1C(u8 taskId);
+static void Task_ListenToWireless(u8 taskId);
 static void ListMenuItemPrintFunc_UnionRoomGroups(u8 windowId, s32 itemId, u8 y);
 static u8 GetNewLeaderCandidate(void);
 static void sub_8117990(void);
 static void sub_81179A4(void);
-static void sub_8117A0C(u8 taskId);
+static void Task_MEvent_Leader(u8 taskId);
 static void Task_CardOrNewsWithFriend(u8 taskId);
 static void Task_CardOrNewsOverWireless(u8 taskId);
 static void Task_ResumeUnionRoom(u8 taskId);
@@ -100,8 +100,8 @@ static void sub_811A41C(void);
 static void UR_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 colorIdx);
 static void BlankUnkStruct_x20Array(struct UnkStruct_x20 * arg0, u8 count);
 static void BlankUnkStruct_x1CArray(struct UnkStruct_x1C * arg0, u8 count);
-static bool8 AreUnkSharedObjectsDifferent(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1);
-static bool32 AreUnionRoomPlayerGnamesDifferent(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1);
+static bool8 AreUnkSharedObjectsDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1);
+static bool32 AreUnionRoomPlayerGnamesDifferent(struct UnionGnameUnamePair * arg0, struct UnionGnameUnamePair * arg1);
 static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1);
 static u8 Appendx1Ctox20(struct UnkStruct_x20 * x20arr, struct UnkStruct_x1C * x1C, u8 count);
 static void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * group, u8 colorIdx, u8 id);
@@ -169,15 +169,15 @@ static const struct WindowTemplate gUnknown_8456CD0 = {
 };
 
 static const u32 sLinkGroupToActivityAndCapacity[] = {
-    [LINK_GROUP_SINGLE_BATTLE] = _8456CD8(UROOM_ACTIVITY_BATTLE,    2),
-    [LINK_GROUP_DOUBLE_BATTLE] = _8456CD8(UROOM_ACTIVITY_DBLBATTLE, 2),
-    [LINK_GROUP_MULTI_BATTLE]  = _8456CD8(UROOM_ACTIVITY_MLTBATTLE, 4),
-    [LINK_GROUP_TRADE]         = _8456CD8(UROOM_ACTIVITY_TRADE,     2),
-    [LINK_GROUP_POKEMON_JUMP]  = _8456CD8(UROOM_ACTIVITY_PJUMP,     5 | 0x20),
-    [LINK_GROUP_BERRY_CRUSH]   = _8456CD8(UROOM_ACTIVITY_BCRUSH,    5 | 0x20),
-    [LINK_GROUP_BERRY_PICKING] = _8456CD8(UROOM_ACTIVITY_BPICK,     5 | 0x30),
-    [LINK_GROUP_WONDER_CARD]   = _8456CD8(UROOM_ACTIVITY_SPINTRADE, 5 | 0x30),
-    [LINK_GROUP_WONDER_NEWS]   = _8456CD8(UROOM_ACTIVITY_ITEMTRADE, 5 | 0x30)
+    [LINK_GROUP_SINGLE_BATTLE] = _8456CD8(ACTIVITY_BATTLE,    2),
+    [LINK_GROUP_DOUBLE_BATTLE] = _8456CD8(ACTIVITY_DBLBATTLE, 2),
+    [LINK_GROUP_MULTI_BATTLE]  = _8456CD8(ACTIVITY_MLTBATTLE, 4),
+    [LINK_GROUP_TRADE]         = _8456CD8(ACTIVITY_TRADE,     2),
+    [LINK_GROUP_POKEMON_JUMP]  = _8456CD8(ACTIVITY_PJUMP,     5 | 0x20),
+    [LINK_GROUP_BERRY_CRUSH]   = _8456CD8(ACTIVITY_BCRUSH,    5 | 0x20),
+    [LINK_GROUP_BERRY_PICKING] = _8456CD8(ACTIVITY_BPICK,     5 | 0x30),
+    [LINK_GROUP_WONDER_CARD]   = _8456CD8(ACTIVITY_SPINTRADE, 5 | 0x30),
+    [LINK_GROUP_WONDER_NEWS]   = _8456CD8(ACTIVITY_ITEMTRADE, 5 | 0x30)
 };
 
 static const struct WindowTemplate gUnknown_8456CFC = {
@@ -300,10 +300,10 @@ static const struct WindowTemplate sWindowTemplate_InviteToActivity = {
 };
 
 static const struct ListMenuItem sListMenuItems_InviteToActivity[] = {
-    {gUnknown_8459354,  _8456CD8( UROOM_ACTIVITY_CARD, 2)},
-    {gUnknown_8459344,  _8456CD8(UROOM_ACTIVITY_BATTLE | 0x40, 2)},
-    {gUnknown_845934C,  _8456CD8(UROOM_ACTIVITY_CHAT | 0x40, 2)},
-    {gUnknown_8459360,  _8456CD8(UROOM_ACTIVITY_NONE | 0x40, 0)}
+    {gUnknown_8459354,  _8456CD8( ACTIVITY_CARD, 2)},
+    {gUnknown_8459344,  _8456CD8(ACTIVITY_BATTLE | 0x40, 2)},
+    {gUnknown_845934C,  _8456CD8(ACTIVITY_CHAT | 0x40, 2)},
+    {gUnknown_8459360,  _8456CD8(ACTIVITY_NONE | 0x40, 0)}
 };
 
 static const struct ListMenuTemplate sListMenuTemplate_InviteToActivity = {
@@ -520,93 +520,93 @@ static const struct ListMenuTemplate gUnknown_845701C = {
     .cursorKind = 0
 };
 
-static const struct UnkStruct_Shared sUnkStruct_Shared_Dummy = {};
+static const struct UnionGnameUnamePair sUnionGnameUnamePair_Dummy = {};
 
 // starts at gUnknown_082F0474 in pokeemerald, union link groups
 
 ALIGNED(4) static const u8 gUnknown_845704C[] = {
-    UROOM_ACTIVITY_BATTLE,
+    ACTIVITY_BATTLE,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457050[] = {
-    UROOM_ACTIVITY_DBLBATTLE,
+    ACTIVITY_DBLBATTLE,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457054[] = {
-    UROOM_ACTIVITY_MLTBATTLE,
+    ACTIVITY_MLTBATTLE,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457058[] = {
-    UROOM_ACTIVITY_TRADE,
+    ACTIVITY_TRADE,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_845705C[] = {
-    UROOM_ACTIVITY_PJUMP,
+    ACTIVITY_PJUMP,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457060[] = {
-    UROOM_ACTIVITY_BCRUSH,
+    ACTIVITY_BCRUSH,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457064[] = {
-    UROOM_ACTIVITY_BPICK,
+    ACTIVITY_BPICK,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457068[] = {
-    UROOM_ACTIVITY_WCARD2,
+    ACTIVITY_WCARD2,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_845706C[] = {
-    UROOM_ACTIVITY_WNEWS2,
+    ACTIVITY_WNEWS2,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457070[] = {
-    UROOM_ACTIVITY_NONE | 0x40,
-    UROOM_ACTIVITY_BATTLE | 0x40,
-    UROOM_ACTIVITY_TRADE | 0x40,
-    UROOM_ACTIVITY_CHAT | 0x40,
-    UROOM_ACTIVITY_CARD | 0x40,
-    UROOM_ACTIVITY_ACCEPT | 0x40,
-    UROOM_ACTIVITY_DECLINE | 0x40,
+    ACTIVITY_NONE | 0x40,
+    ACTIVITY_BATTLE | 0x40,
+    ACTIVITY_TRADE | 0x40,
+    ACTIVITY_CHAT | 0x40,
+    ACTIVITY_CARD | 0x40,
+    ACTIVITY_ACCEPT | 0x40,
+    ACTIVITY_DECLINE | 0x40,
     0x13 | 0x40,
     0x14 | 0x40,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_845707C[] = {
-    UROOM_ACTIVITY_SEARCH,
+    ACTIVITY_SEARCH,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_8457080[] = {
-    UROOM_ACTIVITY_BATTLE,
-    UROOM_ACTIVITY_DBLBATTLE,
-    UROOM_ACTIVITY_MLTBATTLE,
-    UROOM_ACTIVITY_TRADE,
-    UROOM_ACTIVITY_PJUMP,
-    UROOM_ACTIVITY_BCRUSH,
-    UROOM_ACTIVITY_BPICK,
-    UROOM_ACTIVITY_WCARD2,
-    UROOM_ACTIVITY_WNEWS2,
-    UROOM_ACTIVITY_SPINTRADE,
+    ACTIVITY_BATTLE,
+    ACTIVITY_DBLBATTLE,
+    ACTIVITY_MLTBATTLE,
+    ACTIVITY_TRADE,
+    ACTIVITY_PJUMP,
+    ACTIVITY_BCRUSH,
+    ACTIVITY_BPICK,
+    ACTIVITY_WCARD2,
+    ACTIVITY_WNEWS2,
+    ACTIVITY_SPINTRADE,
     0xFF
 };
 
 ALIGNED(4) static const u8 gUnknown_845708C[] = {
-    UROOM_ACTIVITY_BATTLE,
-    UROOM_ACTIVITY_DBLBATTLE,
-    UROOM_ACTIVITY_MLTBATTLE,
-    UROOM_ACTIVITY_TRADE,
-    UROOM_ACTIVITY_BCRUSH,
+    ACTIVITY_BATTLE,
+    ACTIVITY_DBLBATTLE,
+    ACTIVITY_MLTBATTLE,
+    ACTIVITY_TRADE,
+    ACTIVITY_BCRUSH,
     0xFF
 };
 
@@ -627,15 +627,15 @@ static const u8 *const sAcceptedActivityIds[] = {
 };
 
 static const u8 sLinkGroupToURoomActivity[] = {
-    [LINK_GROUP_SINGLE_BATTLE] = UROOM_ACTIVITY_BATTLE,
-    [LINK_GROUP_DOUBLE_BATTLE] = UROOM_ACTIVITY_DBLBATTLE,
-    [LINK_GROUP_MULTI_BATTLE]  = UROOM_ACTIVITY_MLTBATTLE,
-    [LINK_GROUP_TRADE]         = UROOM_ACTIVITY_TRADE,
-    [LINK_GROUP_POKEMON_JUMP]  = UROOM_ACTIVITY_PJUMP,
-    [LINK_GROUP_BERRY_CRUSH]   = UROOM_ACTIVITY_BCRUSH,
-    [LINK_GROUP_BERRY_PICKING] = UROOM_ACTIVITY_BPICK,
-    [LINK_GROUP_WONDER_CARD]   = UROOM_ACTIVITY_WCARD2,
-    [LINK_GROUP_WONDER_NEWS]   = UROOM_ACTIVITY_WNEWS2
+    [LINK_GROUP_SINGLE_BATTLE] = ACTIVITY_BATTLE,
+    [LINK_GROUP_DOUBLE_BATTLE] = ACTIVITY_DBLBATTLE,
+    [LINK_GROUP_MULTI_BATTLE]  = ACTIVITY_MLTBATTLE,
+    [LINK_GROUP_TRADE]         = ACTIVITY_TRADE,
+    [LINK_GROUP_POKEMON_JUMP]  = ACTIVITY_PJUMP,
+    [LINK_GROUP_BERRY_CRUSH]   = ACTIVITY_BCRUSH,
+    [LINK_GROUP_BERRY_PICKING] = ACTIVITY_BPICK,
+    [LINK_GROUP_WONDER_CARD]   = ACTIVITY_WCARD2,
+    [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_WNEWS2
 };
 
 static const u8 sUnref_84570D1[] = _("{DYNAMIC 00}·{DYNAMIC 01}");
@@ -645,13 +645,13 @@ static const u8 sUnref_84570D1[] = _("{DYNAMIC 00}·{DYNAMIC 01}");
 // These are functions in Emerald but inlined in FireRed
 
 #define IntlConvPartnerUname7(dest, arg1) ({                            \
-    StringCopy7(dest, (arg1).unk.playerName);                           \
-    ConvertInternationalString(dest, (arg1).unk.gname.unk_00.language); \
+    StringCopy7(dest, (arg1).gname_uname.uname);                           \
+    ConvertInternationalString(dest, (arg1).gname_uname.gname.unk_00.language); \
 })
 
 #define IntlConvPartnerUname(dest, arg1) ({                             \
-    StringCopy(dest, (arg1).unk.playerName);                            \
-    ConvertInternationalString(dest, (arg1).unk.gname.unk_00.language); \
+    StringCopy(dest, (arg1).gname_uname.uname);                            \
+    ConvertInternationalString(dest, (arg1).gname_uname.gname.unk_00.language); \
 })
 
 #define CopyTrainerCardData(dest, src, _version) ({ \
@@ -705,15 +705,15 @@ static void StringExpandPlaceholders_AwaitingCommFromAnother(u8 *dst, u8 caseId)
 {
     switch (caseId)
     {
-    case UROOM_ACTIVITY_BATTLE:
-    case UROOM_ACTIVITY_DBLBATTLE:
-    case UROOM_ACTIVITY_MLTBATTLE:
-    case UROOM_ACTIVITY_TRADE:
-    case UROOM_ACTIVITY_PJUMP:
-    case UROOM_ACTIVITY_BCRUSH:
-    case UROOM_ACTIVITY_BPICK:
-    case UROOM_ACTIVITY_WCARD2:
-    case UROOM_ACTIVITY_WNEWS2:
+    case ACTIVITY_BATTLE:
+    case ACTIVITY_DBLBATTLE:
+    case ACTIVITY_MLTBATTLE:
+    case ACTIVITY_TRADE:
+    case ACTIVITY_PJUMP:
+    case ACTIVITY_BCRUSH:
+    case ACTIVITY_BPICK:
+    case ACTIVITY_WCARD2:
+    case ACTIVITY_WNEWS2:
         // UB: argument *dst isn't used, instead it always prints to gStringVar4
         StringExpandPlaceholders(gStringVar4, gUnknown_8457234);
         break;
@@ -725,7 +725,7 @@ void TryBecomeLinkLeader(void)
     u8 taskId;
     struct UnkStruct_Leader * dataPtr;
 
-    taskId = CreateTask(sub_8115A68, 0);
+    taskId = CreateTask(Task_TryBecomeLinkLeader, 0);
     sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
     sLeader = dataPtr;
 
@@ -734,7 +734,7 @@ void TryBecomeLinkLeader(void)
     gSpecialVar_Result = 0;
 }
 
-static void sub_8115A68(u8 taskId)
+static void Task_TryBecomeLinkLeader(u8 taskId)
 {
     u32 id, val;
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
@@ -747,7 +747,7 @@ static void sub_8115A68(u8 taskId)
         SetHostRFUtgtGname(sPlayerCurrActivity, 0, 0);
         sub_800B1F4();
         OpenLink();
-        sub_80FBB8C(sPlayerActivityGroupSize & 0xF);
+        InitializeRfuLinkManager_LinkLeader(sPlayerActivityGroupSize & 0xF);
         data->state = 3;
         break;
     case 3:
@@ -756,12 +756,12 @@ static void sub_8115A68(u8 taskId)
         data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 5);
-        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].unk.gname, data->field_0->arr[0].unk.playerName);
+        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = 0;
         data->field_0->arr[0].field_1B = 0;
-        data->field_17 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
+        data->taskId_sub_8119EB8 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
         data->field_10 = AddWindow(&gUnknown_8456CD0);
         data->listWindowId = AddWindow(&gUnknown_8456CFC);
         data->field_11 = AddWindow(&gUnknown_8456D04);
@@ -860,19 +860,19 @@ static void sub_8115A68(u8 taskId)
         }
         break;
     case 11:
-        switch (sub_811A14C(&data->textState, sub_80FA634(ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName)))
+        switch (sub_811A14C(&data->textState, sub_80FA634(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname)))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(0, 0);
             data->field_19 = 5;
-            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
             data->state = 12;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
             data->state = 12;
             break;
         case -3:
@@ -881,7 +881,7 @@ static void sub_8115A68(u8 taskId)
         }
         break;
     case 12:
-        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -912,7 +912,7 @@ static void sub_8115A68(u8 taskId)
             }
             else
             {
-                sub_80FBD4C(data->field_0->arr[data->playerCount].unk.playerName, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId));
+                sub_80FBD4C(data->field_0->arr[data->playerCount].gname_uname.uname, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId));
                 data->field_0->arr[data->playerCount].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
                 UnionRoomLeaderField0CompactionAndCount(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -932,7 +932,7 @@ static void sub_8115A68(u8 taskId)
             data->state = 14;
         break;
     case 14:
-        if (++data->field_E > 120)
+        if (++data->delayTimerAfterOk > 120)
             data->state = 17;
         break;
     case 15:
@@ -1000,7 +1000,7 @@ static void sub_8115A68(u8 taskId)
     case 21:
     case 23:
         DestroyWirelessStatusIndicatorSprite();
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         sub_81161E4(data);
         data->state++;
         break;
@@ -1044,7 +1044,7 @@ static void sub_81161E4(struct UnkStruct_Leader * data)
     RemoveWindow(data->field_11);
     RemoveWindow(data->listWindowId);
     RemoveWindow(data->field_10);
-    DestroyTask(data->field_17);
+    DestroyTask(data->taskId_sub_8119EB8);
 
     Free(data->field_8);
     Free(data->field_0);
@@ -1183,7 +1183,7 @@ static u8 sub_8116524(struct UnkStruct_Main0 * arg0)
             id = sub_811A748(&data->field_0->arr[i], data->field_4->arr);
             if (id != 0xFF)
             {
-                data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
+                data->field_0->arr[i].gname_uname = data->field_4->arr[id].gname_uname;
                 data->field_0->arr[i].field_18 = 1;
             }
             else
@@ -1232,7 +1232,7 @@ static u8 UnionRoomLeaderField0CompactionAndCount(struct UnkStruct_Main0 * arg0)
     ret = copiedCount;
     for (; copiedCount < 5; copiedCount++)
     {
-        data->field_0->arr[copiedCount].unk = sUnkStruct_Shared_Dummy;
+        data->field_0->arr[copiedCount].gname_uname = sUnionGnameUnamePair_Dummy;
         data->field_0->arr[copiedCount].field_18 = 0;
         data->field_0->arr[copiedCount].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
         data->field_0->arr[copiedCount].field_1A_1 = 0;
@@ -1279,7 +1279,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         sPlayerCurrActivity = sLinkGroupToURoomActivity[gSpecialVar_0x8004];
         sub_800B1F4();
         OpenLink();
-        sub_80FBBD8();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
@@ -1329,9 +1329,9 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
-                unusedVar  = data->field_0->arr[id].unk.gname.activity;
+                unusedVar  = data->field_0->arr[id].gname_uname.gname.activity;
 
-                if (data->field_0->arr[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[id].unk.gname.unk_0a_7)
+                if (data->field_0->arr[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[id].gname_uname.gname.unk_0a_7)
                 {
                     u32 var = sub_8116D10(data, id);
                     if (var == 0)
@@ -1373,22 +1373,22 @@ static void Task_TryJoinLinkGroup(u8 taskId)
     case 6:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            sPlayerCurrActivity = data->field_0->arr[data->field_F].unk.gname.activity;
+            sPlayerCurrActivity = data->field_0->arr[data->field_F].gname_uname.gname.activity;
             RfuSetErrorStatus(0, 0);
             switch (sPlayerCurrActivity)
             {
-            case UROOM_ACTIVITY_BATTLE:
-            case UROOM_ACTIVITY_DBLBATTLE:
-            case UROOM_ACTIVITY_MLTBATTLE:
-            case UROOM_ACTIVITY_TRADE:
-            case UROOM_ACTIVITY_CHAT:
-            case UROOM_ACTIVITY_PJUMP:
-            case UROOM_ACTIVITY_BCRUSH:
-            case UROOM_ACTIVITY_BPICK:
-            case UROOM_ACTIVITY_SPINTRADE:
-            case UROOM_ACTIVITY_ITEMTRADE:
-            case UROOM_ACTIVITY_WCARD2:
-            case UROOM_ACTIVITY_WNEWS2:
+            case ACTIVITY_BATTLE:
+            case ACTIVITY_DBLBATTLE:
+            case ACTIVITY_MLTBATTLE:
+            case ACTIVITY_TRADE:
+            case ACTIVITY_CHAT:
+            case ACTIVITY_PJUMP:
+            case ACTIVITY_BCRUSH:
+            case ACTIVITY_BPICK:
+            case ACTIVITY_SPINTRADE:
+            case ACTIVITY_ITEMTRADE:
+            case ACTIVITY_WCARD2:
+            case ACTIVITY_WNEWS2:
                 data->state = 20;
                 break;
             }
@@ -1509,7 +1509,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
     case 23:
         DestroyTask(taskId);
         sub_811A41C();
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         break;
     case 21:
         sub_8117990();
@@ -1522,11 +1522,11 @@ static u32 sub_8116D10(struct UnkStruct_Group * arg0, s32 id)
 {
     struct UnkStruct_x20 * structPtr = &arg0->field_0->arr[id];
 
-    if (sPlayerCurrActivity == UROOM_ACTIVITY_TRADE && structPtr->unk.gname.unk_00.version != VERSION_FIRE_RED && structPtr->unk.gname.unk_00.version != VERSION_LEAF_GREEN)
+    if (sPlayerCurrActivity == ACTIVITY_TRADE && structPtr->gname_uname.gname.unk_00.version != VERSION_FIRE_RED && structPtr->gname_uname.gname.unk_00.version != VERSION_LEAF_GREEN)
     {
         if (!(gSaveBlock2Ptr->specialSaveWarpFlags & CHAMPION_SAVEWARP))
             return 1;
-        else if (structPtr->unk.gname.unk_00.isChampion)
+        else if (structPtr->gname_uname.gname.unk_00.isChampion)
             return 0;
     }
     else
@@ -1545,15 +1545,15 @@ static void sub_8116D60(struct UnkStruct_Group * data, s32 id)
     RedrawListMenu(data->listTaskId);
     IntlConvPartnerUname7(gStringVar1, data->field_0->arr[data->field_F]);
     sub_80FB008(sLinkGroupToURoomActivity[gSpecialVar_0x8004], 0, 1);
-    sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.gname.unk_00.playerTrainerId));
+    sub_80FBF54(data->field_0->arr[data->field_F].gname_uname.uname, ReadAsU16(data->field_0->arr[data->field_F].gname_uname.gname.unk_00.playerTrainerId));
 }
 
-u8 sub_8116DE0(void)
+u8 CreateTask_ListenToWireless(void)
 {
     u8 taskId;
     struct UnkStruct_Group * dataPtr;
 
-    taskId = CreateTask(sub_8116E1C, 0);
+    taskId = CreateTask(Task_ListenToWireless, 0);
     sUnionRoomMain.group = dataPtr = (void*)(gTasks[taskId].data);
 
     dataPtr->state = 0;
@@ -1564,7 +1564,7 @@ u8 sub_8116DE0(void)
     return taskId;
 }
 
-static void sub_8116E1C(u8 taskId)
+static void Task_ListenToWireless(u8 taskId)
 {
     struct UnkStruct_Group * data = sUnionRoomMain.group;
 
@@ -1574,7 +1574,7 @@ static void sub_8116E1C(u8 taskId)
         SetHostRFUtgtGname(0, 0, 0);
         sub_800B1F4();
         OpenLink();
-        sub_80FBBD8();
+        InitializeRfuLinkManager_JoinGroup();
         sub_80FB128(TRUE);
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
@@ -1597,11 +1597,11 @@ static void sub_8116E1C(u8 taskId)
         DestroyTask(data->field_11);
         Free(data->field_0);
         Free(data->field_4);
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         data->state++;
         break;
     case 11:
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;
     }
@@ -1631,7 +1631,7 @@ static u8 sub_8116F5C(struct UnkStruct_Group * data, u32 id)
 {
     if (data->field_0->arr[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
     {
-        if (data->field_0->arr[id].unk.gname.unk_0a_7)
+        if (data->field_0->arr[id].gname_uname.gname.unk_0a_7)
             return UR_COLOR_WHT_WHT_LTE;
         else if (data->field_0->arr[id].field_1A_1 != 0)
             return UR_COLOR_RED_WHT_LTR;
@@ -1666,9 +1666,9 @@ static u8 GetNewLeaderCandidate(void)
             {
                 if (data->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
                 {
-                    if (AreUnionRoomPlayerGnamesDifferent(&data->field_0->arr[i].unk, &data->field_4->arr[id].unk0))
+                    if (AreUnionRoomPlayerGnamesDifferent(&data->field_0->arr[i].gname_uname, &data->field_4->arr[id].gname_uname))
                     {
-                        data->field_0->arr[i].unk = data->field_4->arr[id].unk0;
+                        data->field_0->arr[i].gname_uname = data->field_4->arr[id].gname_uname;
                         data->field_0->arr[i].field_1B = 0x40;
                         ret = 1;
                     }
@@ -1953,7 +1953,7 @@ static void sub_81175BC(u8 taskId)
         else
         {
             sub_80F8D14();
-            SetHostRFUtgtGname(UROOM_ACTIVITY_CHAT | 0x40, 0, 1);
+            SetHostRFUtgtGname(ACTIVITY_CHAT | 0x40, 0, 1);
         }
         EnterUnionRoomChat();
         break;
@@ -2028,21 +2028,21 @@ static void sub_81179A4(void)
     gTasks[taskId].data[0] = 0;
 }
 
-void MEvent_CreateTask_Leader(u32 arg0)
+void MEvent_CreateTask_Leader(u32 activity)
 {
     u8 taskId;
     struct UnkStruct_Leader * dataPtr;
 
-    taskId = CreateTask(sub_8117A0C, 0);
+    taskId = CreateTask(Task_MEvent_Leader, 0);
     sUnionRoomMain.leader = dataPtr = (void*)(gTasks[taskId].data);
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
-    dataPtr->field_18 = arg0;
+    dataPtr->activity = activity;
     gSpecialVar_Result = 0;
 }
 
-static void sub_8117A0C(u8 taskId)
+static void Task_MEvent_Leader(u8 taskId)
 {
     struct UnkStruct_Leader * data = sUnionRoomMain.leader;
     struct WindowTemplate winTemplate;
@@ -2051,13 +2051,13 @@ static void sub_8117A0C(u8 taskId)
     switch (data->state)
     {
     case 0:
-        sPlayerCurrActivity = data->field_18;
+        sPlayerCurrActivity = data->activity;
         sPlayerActivityGroupSize = 2;
-        SetHostRFUtgtGname(data->field_18, 0, 0);
+        SetHostRFUtgtGname(data->activity, 0, 0);
         SetGnameBufferWonderFlags(FALSE, FALSE);
         sub_800B1F4();
         OpenLink();
-        sub_80FBB8C(2);
+        InitializeRfuLinkManager_LinkLeader(2);
         data->state = 1;
         break;
     case 1:
@@ -2066,12 +2066,12 @@ static void sub_8117A0C(u8 taskId)
         data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 5);
-        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].unk.gname, data->field_0->arr[0].unk.playerName);
+        LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
         data->field_0->arr[0].field_1A_1 = 0;
         data->field_0->arr[0].field_1B = 0;
-        data->field_17 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
+        data->taskId_sub_8119EB8 = CreateTask_sub_8119EB8(data->field_4, 0xFF);
 
         winTemplate = gUnknown_8456CFC;
         winTemplate.baseBlock = GetMysteryGiftBaseBlock();
@@ -2122,19 +2122,19 @@ static void sub_8117A0C(u8 taskId)
             data->field_0->arr[data->playerCount].field_1B = 0;
             RedrawListMenu(data->listTaskId);
             data->field_19 = 5;
-            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+            sub_80FA670(5, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
             data->state = 8;
             break;
         case 1:
         case -1:
             data->field_19 = 6;
-            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+            sub_80FA670(6, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
             data->state = 8;
             break;
         }
         break;
     case 8:
-        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].unk.playerName);
+        val = sub_80FA6FC(ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId), data->field_0->arr[data->playerCount].gname_uname.uname);
         if (val == 1)
         {
             if (data->field_19 == 5)
@@ -2149,7 +2149,7 @@ static void sub_8117A0C(u8 taskId)
             }
             else
             {
-                sub_80FBD4C(data->field_0->arr[data->playerCount].unk.playerName, ReadAsU16(data->field_0->arr[data->playerCount].unk.gname.unk_00.playerTrainerId));
+                sub_80FBD4C(data->field_0->arr[data->playerCount].gname_uname.uname, ReadAsU16(data->field_0->arr[data->playerCount].gname_uname.gname.unk_00.playerTrainerId));
                 data->field_0->arr[data->playerCount].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
                 UnionRoomLeaderField0CompactionAndCount(data->field_0);
                 RedrawListMenu(data->listTaskId);
@@ -2169,7 +2169,7 @@ static void sub_8117A0C(u8 taskId)
         data->state = 10;
         break;
     case 10:
-        if (++data->field_E > 120)
+        if (++data->delayTimerAfterOk > 120)
             data->state = 11;
         break;
     case 11:
@@ -2189,11 +2189,11 @@ static void sub_8117A0C(u8 taskId)
         break;
     case 13:
         DestroyWirelessStatusIndicatorSprite();
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->listWindowId);
-        DestroyTask(data->field_17);
+        DestroyTask(data->taskId_sub_8119EB8);
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
@@ -2221,7 +2221,7 @@ static void sub_8117A0C(u8 taskId)
         DestroyListMenuTask(data->listTaskId, 0, 0);
         CopyBgTilemapBufferToVram(0);
         RemoveWindow(data->listWindowId);
-        DestroyTask(data->field_17);
+        DestroyTask(data->taskId_sub_8119EB8);
         Free(data->field_8);
         Free(data->field_0);
         Free(data->field_4);
@@ -2235,7 +2235,7 @@ static void sub_8117A0C(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
+void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity)
 {
     u8 taskId;
     struct UnkStruct_Group * dataPtr;
@@ -2246,7 +2246,7 @@ void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0)
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
-    dataPtr->field_12 = arg0 - UROOM_ACTIVITY_WCARD2; // 0: Card; 1: News
+    dataPtr->cardOrNews = activity - ACTIVITY_WCARD2; // 0: Card; 1: News
     gSpecialVar_Result = 0;
 }
 
@@ -2259,10 +2259,10 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     switch (data->state)
     {
     case 0:
-        SetHostRFUtgtGname(data->field_12 + UROOM_ACTIVITY_WCARD2, 0, 0);
+        SetHostRFUtgtGname(data->cardOrNews + ACTIVITY_WCARD2, 0, 0);
         sub_800B1F4();
         OpenLink();
-        sub_80FBBD8();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
@@ -2274,7 +2274,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119EB8(data->field_4, data->field_12 + LINK_GROUP_WONDER_CARD);
+        data->field_11 = CreateTask_sub_8119EB8(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
 
         winTemplate1 = gUnknown_8456D4C;
         winTemplate1.baseBlock = GetMysteryGiftBaseBlock();
@@ -2312,16 +2312,16 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
             {
                 // this unused variable along with the assignment is needed to match
                 u32 unusedVar;
-                unusedVar  = data->field_0->arr[id].unk.gname.activity;
+                unusedVar  = data->field_0->arr[id].gname_uname.gname.activity;
 
-                if (data->field_0->arr[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[id].unk.gname.unk_0a_7)
+                if (data->field_0->arr[id].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[id].gname_uname.gname.unk_0a_7)
                 {
                     data->field_F = id;
                     LoadWirelessStatusIndicatorSpriteGfx();
                     CreateWirelessStatusIndicatorSprite(0, 0);
                     RedrawListMenu(data->listTaskId);
                     IntlConvPartnerUname(gStringVar1, data->field_0->arr[data->field_F]);
-                    sub_80FBF54(data->field_0->arr[data->field_F].unk.playerName, ReadAsU16(data->field_0->arr[data->field_F].unk.gname.unk_00.playerTrainerId));
+                    sub_80FBF54(data->field_0->arr[data->field_F].gname_uname.uname, ReadAsU16(data->field_0->arr[data->field_F].gname_uname.gname.unk_00.playerTrainerId));
                     PlaySE(SE_PN_ON);
                     data->state = 4;
                 }
@@ -2345,7 +2345,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     case 5:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            sPlayerCurrActivity = data->field_0->arr[data->field_F].unk.gname.activity;
+            sPlayerCurrActivity = data->field_0->arr[data->field_F].gname_uname.gname.activity;
             data->state = 10;
         }
 
@@ -2379,7 +2379,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_80F8DC0();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2387,7 +2387,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         DestroyWirelessStatusIndicatorSprite();
         AddTextPrinterToWindow1(gUnknown_84571B8);
         DestroyTask(taskId);
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         gSpecialVar_Result = 5;
         break;
     case 11:
@@ -2401,7 +2401,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
+void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity)
 {
     u8 taskId;
     struct UnkStruct_Group * dataPtr;
@@ -2412,7 +2412,7 @@ void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0)
 
     dataPtr->state = 0;
     dataPtr->textState = 0;
-    dataPtr->field_12 = arg0 - UROOM_ACTIVITY_WCARD2; // 0: Card; 1: News
+    dataPtr->cardOrNews = activity - ACTIVITY_WCARD2; // 0: Card; 1: News
     gSpecialVar_Result = 0;
 }
 
@@ -2428,7 +2428,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         SetHostRFUtgtGname(0, 0, 0);
         sub_800B1F4();
         OpenLink();
-        sub_80FBBD8();
+        InitializeRfuLinkManager_JoinGroup();
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(16 * sizeof(struct UnkStruct_x20));
         data->state = 1;
@@ -2440,7 +2440,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
     case 2:
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
         BlankUnkStruct_x20Array(data->field_0->arr, 16);
-        data->field_11 = CreateTask_sub_8119FD8(data->field_4, data->field_12 + LINK_GROUP_WONDER_CARD);
+        data->field_11 = CreateTask_sub_8119FD8(data->field_4, data->cardOrNews + LINK_GROUP_WONDER_CARD);
 
         if (data->field_13 != 0)
         {
@@ -2474,15 +2474,15 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
                 id = ListMenu_ProcessInput(data->listTaskId);
             if (data->field_14 > 120)
             {
-                if (data->field_0->arr[0].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[0].unk.gname.unk_0a_7)
+                if (data->field_0->arr[0].groupScheduledAnim == UNION_ROOM_SPAWN_IN && !data->field_0->arr[0].gname_uname.gname.unk_0a_7)
                 {
-                    if (GetGnameWonderFlagByLinkGroup(&data->field_0->arr[0].unk.gname, data->field_12 + LINK_GROUP_WONDER_CARD))
+                    if (GetGnameWonderFlagByLinkGroup(&data->field_0->arr[0].gname_uname.gname, data->cardOrNews + LINK_GROUP_WONDER_CARD))
                     {
                         data->field_F = 0;
                         data->field_14 = 0;
                         LoadWirelessStatusIndicatorSpriteGfx();
                         CreateWirelessStatusIndicatorSprite(0, 0);
-                        sub_80FBF54(data->field_0->arr[0].unk.playerName, ReadAsU16(data->field_0->arr[0].unk.gname.unk_00.playerTrainerId));
+                        sub_80FBF54(data->field_0->arr[0].gname_uname.uname, ReadAsU16(data->field_0->arr[0].gname_uname.gname.unk_00.playerTrainerId));
                         PlaySE(SE_PN_ON);
                         data->state = 4;
                     }
@@ -2510,7 +2510,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
     case 5:
         if (gReceivedRemoteLinkPlayers != 0)
         {
-            sPlayerCurrActivity = data->field_0->arr[data->field_F].unk.gname.activity;
+            sPlayerCurrActivity = data->field_0->arr[data->field_F].gname_uname.gname.activity;
             data->state = 12;
         }
 
@@ -2547,7 +2547,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_80F8DC0();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2556,16 +2556,16 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_80F8DC0();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
     case 11:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_845933C[data->field_12]))
+        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, gUnknown_845933C[data->cardOrNews]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
-            sub_80F8DC0();
+            LinkRfu_Shutdown();
             gSpecialVar_Result = 5;
         }
         break;
@@ -2711,7 +2711,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
                 else
                 {
                     sub_80FB008(0x14 | 0x40, 0, 1);
-                    sPlayerCurrActivity = UROOM_ACTIVITY_TRADE | 0x40;
+                    sPlayerCurrActivity = ACTIVITY_TRADE | 0x40;
                     RegisterTradeMon(GetCursorSelectionMonId(), &sUnionRoomTrade);
                     data->state = 51;
                 }
@@ -2805,7 +2805,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
             data->state = 26;
             break;
         case 1:
-            sub_80FC114(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.gname, sPlayerCurrActivity);
+            sub_80FC114(data->field_0->arr[taskData[1]].gname_uname.uname, &data->field_0->arr[taskData[1]].gname_uname.gname, sPlayerCurrActivity);
             data->field_12 = id; // Should be just 0, but won't match any other way.
             data->state = 25;
             break;
@@ -2843,7 +2843,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
     case 38:
         if (!FuncIsActiveTask(sub_8117280))
         {
-            if (sPlayerCurrActivity == (UROOM_ACTIVITY_TRADE | 0x40))
+            if (sPlayerCurrActivity == (ACTIVITY_TRADE | 0x40))
                 UnionRoom_ScheduleFieldMessageWithFollowupState(31, gUnknown_84578BC);
             else
                 data->state = 5;
@@ -2885,7 +2885,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
                 {
                     sPlayerCurrActivity = var5;
                     sPlayerActivityGroupSize = (u32)(var5) >> 8;
-                    if (sPlayerCurrActivity == (UROOM_ACTIVITY_BATTLE | 0x40) && !HasAtLeastTwoMonsOfLevel30OrLower())
+                    if (sPlayerCurrActivity == (ACTIVITY_BATTLE | 0x40) && !HasAtLeastTwoMonsOfLevel30OrLower())
                     {
                         UnionRoom_ScheduleFieldMessageWithFollowupState(5, gUnknown_845847C);
                     }
@@ -2918,7 +2918,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
         data->state = 36;
         break;
     case 31:
-        data->playerSendBuffer[0] = UROOM_ACTIVITY_TRADE | 0x40;
+        data->playerSendBuffer[0] = ACTIVITY_TRADE | 0x40;
         data->playerSendBuffer[1] = sUnionRoomTrade.species;
         data->playerSendBuffer[2] = sUnionRoomTrade.level;
         sub_80F9E2C(data->playerSendBuffer);
@@ -2933,9 +2933,9 @@ static void Task_ResumeUnionRoom(u8 taskId)
         else
         {
             PollPartnerYesNoResponse(data);
-            if (data->partnerYesNoResponse == (UROOM_ACTIVITY_ACCEPT | 0x40))
+            if (data->partnerYesNoResponse == (ACTIVITY_ACCEPT | 0x40))
             {
-                if (sPlayerCurrActivity == UROOM_ACTIVITY_CARD)
+                if (sPlayerCurrActivity == ACTIVITY_CARD)
                 {
                     ViewURoomPartnerTrainerCard(gStringVar4, data, FALSE);
                     data->state = 40;
@@ -2945,7 +2945,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
                     data->state = 13;
                 }
             }
-            else if (data->partnerYesNoResponse == (UROOM_ACTIVITY_DECLINE | 0x40))
+            else if (data->partnerYesNoResponse == (ACTIVITY_DECLINE | 0x40))
             {
                 data->state = 32;
                 GetURoomActivityRejectMsg(gStringVar4, sPlayerCurrActivity | 0x40, gLinkPlayers[0].gender);
@@ -2989,9 +2989,9 @@ static void Task_ResumeUnionRoom(u8 taskId)
         {
         case 0:
             CopyBgTilemapBufferToVram(0);
-            sPlayerCurrActivity = UROOM_ACTIVITY_CHAT | 0x40;
-            sub_80FB008(UROOM_ACTIVITY_CHAT | 0x40, 0, 1);
-            sub_80FC114(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.gname, sPlayerCurrActivity);
+            sPlayerCurrActivity = ACTIVITY_CHAT | 0x40;
+            sub_80FB008(ACTIVITY_CHAT | 0x40, 0, 1);
+            sub_80FC114(data->field_0->arr[taskData[1]].gname_uname.uname, &data->field_0->arr[taskData[1]].gname_uname.gname, sPlayerCurrActivity);
             data->field_12 = taskData[1];
             data->state = 20;
             taskData[3] = 0;
@@ -3095,19 +3095,19 @@ static void Task_ResumeUnionRoom(u8 taskId)
         switch (sub_811A14C(&data->textState, FALSE))
         {
         case 0:
-            data->playerSendBuffer[0] = UROOM_ACTIVITY_ACCEPT | 0x40;
-            if (sPlayerCurrActivity == (UROOM_ACTIVITY_CHAT | 0x40))
+            data->playerSendBuffer[0] = ACTIVITY_ACCEPT | 0x40;
+            if (sPlayerCurrActivity == (ACTIVITY_CHAT | 0x40))
                 sub_80FB008(sPlayerCurrActivity | 0x40, sub_811B2A8(1), 0);
             else
                 sub_80FB008(sPlayerCurrActivity | 0x40, sub_811B2A8(1), 1);
 
             data->field_8->arr[0].field_1B = 0;
             taskData[3] = 0;
-            if (sPlayerCurrActivity == (UROOM_ACTIVITY_BATTLE | 0x40))
+            if (sPlayerCurrActivity == (ACTIVITY_BATTLE | 0x40))
             {
                 if (!HasAtLeastTwoMonsOfLevel30OrLower())
                 {
-                    data->playerSendBuffer[0] = UROOM_ACTIVITY_DECLINE | 0x40;
+                    data->playerSendBuffer[0] = ACTIVITY_DECLINE | 0x40;
                     sub_80F9E2C(data->playerSendBuffer);
                     data->state = 10;
                     StringCopy(gStringVar4, gUnknown_84584C0);
@@ -3118,7 +3118,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
                     data->state = 13;
                 }
             }
-            else if (sPlayerCurrActivity == (UROOM_ACTIVITY_CARD | 0x40))
+            else if (sPlayerCurrActivity == (ACTIVITY_CARD | 0x40))
             {
                 sub_80F9E2C(data->playerSendBuffer);
                 ViewURoomPartnerTrainerCard(gStringVar4, data, 1);
@@ -3132,7 +3132,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
             break;
         case 1:
         case -1:
-            data->playerSendBuffer[0] = UROOM_ACTIVITY_DECLINE | 0x40;
+            data->playerSendBuffer[0] = ACTIVITY_DECLINE | 0x40;
             sub_80F9E2C(data->playerSendBuffer);
             data->state = 10;
             sub_81162E0(gStringVar4, sPlayerCurrActivity);
@@ -3317,7 +3317,7 @@ static void Task_ResumeUnionRoom(u8 taskId)
                 data->state = 4;
                 break;
             default:
-                switch (IsRequestedTypeAndSpeciesInPlayerParty(data->field_0->arr[var5].unk.gname.type, data->field_0->arr[var5].unk.gname.species))
+                switch (IsRequestedTypeAndSpeciesInPlayerParty(data->field_0->arr[var5].gname_uname.gname.type, data->field_0->arr[var5].gname_uname.gname.species))
                 {
                 case UR_TRADE_MATCH:
                     IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
@@ -3326,12 +3326,12 @@ static void Task_ResumeUnionRoom(u8 taskId)
                     break;
                 case UR_TRADE_NOTYPE:
                     IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
-                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.gname.type]);
+                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].gname_uname.gname.type]);
                     UnionRoom_ScheduleFieldMessageWithFollowupState(46, gUnknown_8458ED0);
                     break;
                 case UR_TRADE_NOEGG:
                     IntlConvPartnerUname(gStringVar1, data->field_0->arr[var5]);
-                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].unk.gname.type]);
+                    StringCopy(gStringVar2, gTypeNames[data->field_0->arr[var5].gname_uname.gname.type]);
                     UnionRoom_ScheduleFieldMessageWithFollowupState(46, gUnknown_8458F04);
                     break;
                 }
@@ -3356,9 +3356,9 @@ static void Task_ResumeUnionRoom(u8 taskId)
         if (PrintOnTextbox(&data->textState, gUnknown_8458D1C))
         {
             sUnionRoomTrade.field_0 = 2;
-            memcpy(&gPartnerTgtGnameSub, &data->field_0->arr[taskData[1]].unk.gname.unk_00, sizeof(gPartnerTgtGnameSub));
-            gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].unk.gname.type;
-            gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].unk.gname.species;
+            memcpy(&gPartnerTgtGnameSub, &data->field_0->arr[taskData[1]].gname_uname.gname.unk_00, sizeof(gPartnerTgtGnameSub));
+            gUnionRoomRequestedMonType = data->field_0->arr[taskData[1]].gname_uname.gname.type;
+            gUnionRoomOfferedSpecies = data->field_0->arr[taskData[1]].gname_uname.gname.species;
             gFieldCallback = sub_807DCE4;
             ChooseMonForTradingBoard(PARTY_MENU_TYPE_UNION_ROOM_TRADE, CB2_ReturnToField);
             sub_81186B0(data);
@@ -3366,8 +3366,8 @@ static void Task_ResumeUnionRoom(u8 taskId)
         }
         break;
     case 51:
-        sPlayerCurrActivity = UROOM_ACTIVITY_TRADE | 0x40;
-        sub_80FC114(data->field_0->arr[taskData[1]].unk.playerName, &data->field_0->arr[taskData[1]].unk.gname, UROOM_ACTIVITY_TRADE | 0x40);
+        sPlayerCurrActivity = ACTIVITY_TRADE | 0x40;
+        sub_80FC114(data->field_0->arr[taskData[1]].gname_uname.uname, &data->field_0->arr[taskData[1]].gname_uname.gname, ACTIVITY_TRADE | 0x40);
         IntlConvPartnerUname(gStringVar1, data->field_0->arr[taskData[1]]);
         UR_PrintFieldMessage(gURText_PleaseWaitMsgs[2]);
         data->state = 25;
@@ -3398,7 +3398,7 @@ static void ReceiveUnionRoomActivityPacket(struct UnkStruct_URoom * arg0)
     if (gRecvCmds[1][1] != 0 && (gRecvCmds[1][0] & 0xFF00) == 0x2F00)
     {
         arg0->recvActivityRequest[0] = gRecvCmds[1][1];
-        if (gRecvCmds[1][1] == (UROOM_ACTIVITY_TRADE | 0x40))
+        if (gRecvCmds[1][1] == (ACTIVITY_TRADE | 0x40))
         {
             arg0->recvActivityRequest[1] = gRecvCmds[1][2];
             arg0->recvActivityRequest[2] = gRecvCmds[1][3];
@@ -3462,11 +3462,11 @@ static void Task_InitUnionRoom(u8 taskId)
         structPtr->state = 1;
         break;
     case 1:
-        SetHostRFUtgtGname(UROOM_ACTIVITY_SEARCH, 0, 0);
+        SetHostRFUtgtGname(ACTIVITY_SEARCH, 0, 0);
         sub_800B1F4();
         OpenLink();
         sub_80FBC00();
-        sub_80FB128(1);
+        sub_80FB128(TRUE);
         structPtr->state = 2;
         break;
     case 2:
@@ -3493,7 +3493,7 @@ static void Task_InitUnionRoom(u8 taskId)
                     if (structPtr->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
                     {
                         IntlConvPartnerUname(text, structPtr->field_0->arr[i]);
-                        if (PlayerHasMetTrainerBefore(ReadAsU16(structPtr->field_0->arr[i].unk.gname.unk_00.playerTrainerId), text))
+                        if (PlayerHasMetTrainerBefore(ReadAsU16(structPtr->field_0->arr[i].gname_uname.gname.unk_00.playerTrainerId), text))
                         {
                             StringCopy(sUnionRoomPlayerName, text);
                             break;
@@ -3513,7 +3513,7 @@ static void Task_InitUnionRoom(u8 taskId)
         Free(structPtr->field_4);
         DestroyTask(structPtr->field_20);
         Free(sUnionRoomMain.uRoom);
-        sub_80F8DC0();
+        LinkRfu_Shutdown();
         DestroyTask(taskId);
         break;
     }
@@ -3542,9 +3542,9 @@ static u8 sub_8119B94(void)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (AreUnkSharedObjectsDifferent(&structPtr->field_C->arr[i].unk0, &sUnkStruct_Shared_Dummy) == TRUE)
+        if (AreUnkSharedObjectsDifferent(&structPtr->field_C->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy) == TRUE)
         {
-            structPtr->field_8->arr[0].unk = structPtr->field_C->arr[i].unk0;
+            structPtr->field_8->arr[0].gname_uname = structPtr->field_C->arr[i].gname_uname;
             structPtr->field_8->arr[0].field_18 = 0;
             structPtr->field_8->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
             structPtr->field_8->arr[0].field_1B = 1;
@@ -3560,9 +3560,9 @@ static u8 sub_8119B94(void)
             {
                 if (structPtr->field_0->arr[j].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
                 {
-                    if (AreUnionRoomPlayerGnamesDifferent(&structPtr->field_0->arr[j].unk, &structPtr->field_4->arr[i].unk0))
+                    if (AreUnionRoomPlayerGnamesDifferent(&structPtr->field_0->arr[j].gname_uname, &structPtr->field_4->arr[i].gname_uname))
                     {
-                        structPtr->field_0->arr[j].unk = structPtr->field_4->arr[i].unk0;
+                        structPtr->field_0->arr[j].gname_uname = structPtr->field_4->arr[i].gname_uname;
                         structPtr->field_0->arr[j].field_1B = 0x40;
                         r7 = 1;
                     }
@@ -3612,37 +3612,37 @@ static u8 sub_8119B94(void)
 static void Task_SearchForChildOrParent(u8 taskId)
 {
     s32 i, j;
-    struct UnkStruct_Shared sp0;
+    struct UnionGnameUnamePair sp0;
     struct UnkStruct_Main4 ** ptr = (void*) gTasks[taskId].data;
     bool8 parent_child;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        parent_child = LinkRfu_GetNameIfCompatible(&sp0.gname, sp0.playerName, i);
+        parent_child = LinkRfu_GetNameIfCompatible(&sp0.gname, sp0.uname, i);
         if (!IsPartnerActivityAcceptable(sp0.gname.activity, gTasks[taskId].data[4]))
         {
-            sp0 = sUnkStruct_Shared_Dummy;
+            sp0 = sUnionGnameUnamePair_Dummy;
         }
         if (sp0.gname.unk_00.language == LANGUAGE_JAPANESE)
         {
-            sp0 = sUnkStruct_Shared_Dummy;
+            sp0 = sUnionGnameUnamePair_Dummy;
         }
         if (!parent_child)
         {
             for (j = 0; j < i; j++)
             {
-                if (!AreUnkSharedObjectsDifferent(&ptr[1]->arr[j].unk0, &sp0))
+                if (!AreUnkSharedObjectsDifferent(&ptr[1]->arr[j].gname_uname, &sp0))
                 {
-                    sp0 = sUnkStruct_Shared_Dummy;
+                    sp0 = sUnionGnameUnamePair_Dummy;
                 }
             }
-            ptr[1]->arr[i].unk0 = sp0;
-            ptr[1]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[1]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+            ptr[1]->arr[i].gname_uname = sp0;
+            ptr[1]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[1]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
         }
         else
         {
-            ptr[0]->arr[i].unk0 = sp0;
-            ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+            ptr[0]->arr[i].gname_uname = sp0;
+            ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
         }
     }
 }
@@ -3664,19 +3664,19 @@ static void sub_8119EB8(u8 taskId)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        LinkRfu_GetNameIfCompatible(&ptr[0]->arr[i].unk0.gname, ptr[0]->arr[i].unk0.playerName, i);
-        if (!IsPartnerActivityAcceptable(ptr[0]->arr[i].unk0.gname.activity, gTasks[taskId].data[2]))
+        LinkRfu_GetNameIfCompatible(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i);
+        if (!IsPartnerActivityAcceptable(ptr[0]->arr[i].gname_uname.gname.activity, gTasks[taskId].data[2]))
         {
-            ptr[0]->arr[i].unk0 = sUnkStruct_Shared_Dummy;
+            ptr[0]->arr[i].gname_uname = sUnionGnameUnamePair_Dummy;
         }
         for (j = 0; j < i; j++)
         {
-            if (!AreUnkSharedObjectsDifferent(&ptr[0]->arr[j].unk0, &ptr[0]->arr[i].unk0))
+            if (!AreUnkSharedObjectsDifferent(&ptr[0]->arr[j].gname_uname, &ptr[0]->arr[i].gname_uname))
             {
-                ptr[0]->arr[i].unk0 = sUnkStruct_Shared_Dummy;
+                ptr[0]->arr[i].gname_uname = sUnionGnameUnamePair_Dummy;
             }
         }
-        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
     }
 }
 
@@ -3717,11 +3717,11 @@ static void sub_8119FD8(u8 taskId)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (sub_80FCCF4(&ptr[0]->arr[i].unk0.gname, ptr[0]->arr[i].unk0.playerName, i))
+        if (sub_80FCCF4(&ptr[0]->arr[i].gname_uname.gname, ptr[0]->arr[i].gname_uname.uname, i))
         {
-            GetGnameWonderFlagByLinkGroup(&ptr[0]->arr[i].unk0.gname, gTasks[taskId].data[2]);
+            GetGnameWonderFlagByLinkGroup(&ptr[0]->arr[i].gname_uname.gname, gTasks[taskId].data[2]);
         }
-        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].unk0, &sUnkStruct_Shared_Dummy);
+        ptr[0]->arr[i].active = AreUnkSharedObjectsDifferent(&ptr[0]->arr[i].gname_uname, &sUnionGnameUnamePair_Dummy);
     }
 }
 
@@ -4017,7 +4017,7 @@ static void BlankUnkStruct_x20Array(struct UnkStruct_x20 * arg0, u8 count)
 
     for (i = 0; i < count; i++)
     {
-        arg0[i].unk = sUnkStruct_Shared_Dummy;
+        arg0[i].gname_uname = sUnionGnameUnamePair_Dummy;
         arg0[i].field_18 = 0xFF;
         arg0[i].groupScheduledAnim = UNION_ROOM_SPAWN_NONE;
         arg0[i].field_1A_1 = 0;
@@ -4031,12 +4031,12 @@ static void BlankUnkStruct_x1CArray(struct UnkStruct_x1C * arg0, u8 count)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        arg0[i].unk0 = sUnkStruct_Shared_Dummy;
+        arg0[i].gname_uname = sUnionGnameUnamePair_Dummy;
         arg0[i].active = FALSE;
     }
 }
 
-static bool8 AreUnkSharedObjectsDifferent(struct UnkStruct_Shared * arg0, const struct UnkStruct_Shared * arg1)
+static bool8 AreUnkSharedObjectsDifferent(struct UnionGnameUnamePair * arg0, const struct UnionGnameUnamePair * arg1)
 {
     s32 i;
 
@@ -4050,7 +4050,7 @@ static bool8 AreUnkSharedObjectsDifferent(struct UnkStruct_Shared * arg0, const 
 
     for (i = 0; i < 8; i++)
     {
-        if (arg0->playerName[i] != arg1->playerName[i])
+        if (arg0->uname[i] != arg1->uname[i])
         {
             return TRUE;
         }
@@ -4059,7 +4059,7 @@ static bool8 AreUnkSharedObjectsDifferent(struct UnkStruct_Shared * arg0, const 
     return FALSE;
 }
 
-static bool32 AreUnionRoomPlayerGnamesDifferent(struct UnkStruct_Shared * arg0, struct UnkStruct_Shared * arg1)
+static bool32 AreUnionRoomPlayerGnamesDifferent(struct UnionGnameUnamePair * arg0, struct UnionGnameUnamePair * arg1)
 {
     s32 i;
 
@@ -4101,7 +4101,7 @@ static u32 sub_811A748(struct UnkStruct_x20 * arg0, struct UnkStruct_x1C * arg1)
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (arg1[i].active && !AreUnkSharedObjectsDifferent(&arg0->unk, &arg1[i].unk0))
+        if (arg1[i].active && !AreUnkSharedObjectsDifferent(&arg0->gname_uname, &arg1[i].gname_uname))
         {
             result = i;
             arg1[i].active = FALSE;
@@ -4121,7 +4121,7 @@ static u8 Appendx1Ctox20(struct UnkStruct_x20 * x20arr, struct UnkStruct_x1C * x
         {
             if (x20arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_NONE)
             {
-                x20arr[i].unk = x1C->unk0;
+                x20arr[i].gname_uname = x1C->gname_uname;
                 x20arr[i].field_18 = 0;
                 x20arr[i].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
                 x20arr[i].field_1B = 0x40;
@@ -4144,12 +4144,12 @@ static void sub_811A81C(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * group, u
     StringAppend(gStringVar4, gUnknown_84571B0);
     UR_AddTextPrinterParameterized(windowId, 0, gStringVar4, x, y, UR_COLOR_DKE_WHT_LTE);
     x += 18;
-    activity = group->unk.gname.activity;
+    activity = group->gname_uname.gname.activity;
     if (group->groupScheduledAnim == UNION_ROOM_SPAWN_IN && !(activity & 0x40))
     {
         IntlConvPartnerUname(uname, *group);
         UR_AddTextPrinterParameterized(windowId, 2, uname, x, y, colorIdx);
-        ConvertIntToDecimalStringN(id_str, group->unk.gname.unk_00.playerTrainerId[0] | (group->unk.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        ConvertIntToDecimalStringN(id_str, group->gname_uname.gname.unk_00.playerTrainerId[0] | (group->gname_uname.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gUnknown_84571B4);
         StringAppend(gStringVar4, id_str);
         x += 77;
@@ -4166,7 +4166,7 @@ static void sub_811A910(u8 windowId, u8 x, u8 y, struct UnkStruct_x20 * group, u
     {
         IntlConvPartnerUname(uname, *group);
         UR_AddTextPrinterParameterized(windowId, 2, uname, x, y, colorIdx);
-        ConvertIntToDecimalStringN(id_str, group->unk.gname.unk_00.playerTrainerId[0] | (group->unk.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
+        ConvertIntToDecimalStringN(id_str, group->gname_uname.gname.unk_00.playerTrainerId[0] | (group->gname_uname.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, gUnknown_84571B4);
         StringAppend(gStringVar4, id_str);
         x += 71;
@@ -4198,13 +4198,13 @@ static u32 GetResponseIdx_InviteToURoomActivity(s32 activity)
 {
     switch (activity)
     {
-    case UROOM_ACTIVITY_CHAT:
+    case ACTIVITY_CHAT:
         return 1;
-    case UROOM_ACTIVITY_TRADE:
+    case ACTIVITY_TRADE:
         return 2;
-    case UROOM_ACTIVITY_CARD:
+    case ACTIVITY_CARD:
         return 3;
-    case UROOM_ACTIVITY_MLTBATTLE:
+    case ACTIVITY_MLTBATTLE:
     default:
         return 0;
     }
@@ -4214,7 +4214,7 @@ static u32 sub_811AA24(struct UnkStruct_x20 * arg0)
 {
     u8 sp0[30];
     IntlConvPartnerUname(sp0, *arg0);
-    return PlayerHasMetTrainerBefore(ReadAsU16(arg0->unk.gname.unk_00.playerTrainerId), sp0);
+    return PlayerHasMetTrainerBefore(ReadAsU16(arg0->gname_uname.gname.unk_00.playerTrainerId), sp0);
 }
 
 static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 playerGender)
@@ -4223,11 +4223,11 @@ static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 play
 
     struct UnkStruct_x20 * r5 = &arg0->arr[arg2];
 
-    if (!r5->unk.gname.unk_0a_7 && arg1 == 0)
+    if (!r5->gname_uname.gname.unk_0a_7 && arg1 == 0)
     {
         IntlConvPartnerUname(gStringVar1, *r5);
-        r2 = PlayerHasMetTrainerBefore(ReadAsU16(r5->unk.gname.unk_00.playerTrainerId), gStringVar1);
-        if (r5->unk.gname.activity == (UROOM_ACTIVITY_CHAT | 0x40))
+        r2 = PlayerHasMetTrainerBefore(ReadAsU16(r5->gname_uname.gname.unk_00.playerTrainerId), gStringVar1);
+        if (r5->gname_uname.gname.activity == (ACTIVITY_CHAT | 0x40))
         {
             StringExpandPlaceholders(gStringVar4, gUnknown_8457F80[r2][playerGender]);
             return 2;
@@ -4243,23 +4243,23 @@ static s32 sub_811AA5C(struct UnkStruct_Main0 * arg0, u8 arg1, u8 arg2, u32 play
         IntlConvPartnerUname(gStringVar1, *r5);
         if (arg1 != 0)
         {
-            playerGender = (r5->unk.gname.unk_00.playerTrainerId[arg1 + 1] >> 3) & 1;
+            playerGender = (r5->gname_uname.gname.unk_00.playerTrainerId[arg1 + 1] >> 3) & 1;
         }
-        switch (r5->unk.gname.activity & 0x3F)
+        switch (r5->gname_uname.gname.activity & 0x3F)
         {
-        case UROOM_ACTIVITY_BATTLE:
+        case ACTIVITY_BATTLE:
             // Battling
             StringExpandPlaceholders(gStringVar4, gUnknown_8458758[playerGender][Random() % 4]);
             break;
-        case UROOM_ACTIVITY_TRADE:
+        case ACTIVITY_TRADE:
             // Trading
             StringExpandPlaceholders(gStringVar4, gUnknown_8458A78[playerGender][Random() % 2]);
             break;
-        case UROOM_ACTIVITY_CHAT:
+        case ACTIVITY_CHAT:
             // Chatting
             StringExpandPlaceholders(gStringVar4, gUnknown_84588BC[playerGender][Random() % 4]);
             break;
-        case UROOM_ACTIVITY_CARD:
+        case ACTIVITY_CARD:
             // Sharing cards
             StringExpandPlaceholders(gStringVar4, gUnknown_84589AC[playerGender][Random() % 2]);
             break;
@@ -4318,14 +4318,14 @@ static void TradeBoardListMenuItemPrintFunc(u8 windowId, s32 itemId, u8 y)
         j = 0;
         for (i = 0; i < 8; i++)
         {
-            if (leader->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && leader->field_0->arr[i].unk.gname.species != SPECIES_NONE)
+            if (leader->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && leader->field_0->arr[i].gname_uname.gname.species != SPECIES_NONE)
             {
                 j++;
             }
             if (j == itemId + 1)
             {
                 IntlConvPartnerUname(uname, leader->field_0->arr[i]);
-                TradeBoardPrintItemInfo(windowId, y, &leader->field_0->arr[i].unk.gname, uname, 6);
+                TradeBoardPrintItemInfo(windowId, y, &leader->field_0->arr[i].gname_uname.gname, uname, 6);
                 break;
             }
         }
@@ -4339,7 +4339,7 @@ static s32 GetIndexOfNthTradeBoardOffer(struct UnkStruct_x20 * arg, s32 arg1)
 
     for (i = 0; i < 8; i++)
     {
-        if (arg[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && arg[i].unk.gname.species != SPECIES_NONE)
+        if (arg[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && arg[i].gname_uname.gname.species != SPECIES_NONE)
         {
             j++;
         }
@@ -4354,7 +4354,7 @@ static s32 GetIndexOfNthTradeBoardOffer(struct UnkStruct_x20 * arg, s32 arg1)
 
 static s32 GetUnionRoomPlayerGender(s32 arg1, struct UnkStruct_Main0 * arg0)
 {
-    return arg0->arr[arg1].unk.gname.playerGender;
+    return arg0->arr[arg1].gname_uname.gname.playerGender;
 }
 
 static s32 IsRequestedTypeAndSpeciesInPlayerParty(u32 type, u32 species)
@@ -4391,16 +4391,16 @@ static void GetURoomActivityRejectMsg(u8 *dst, s32 activity, u32 playerGender)
 {
     switch (activity)
     {
-    case UROOM_ACTIVITY_BATTLE | 0x40:
+    case ACTIVITY_BATTLE | 0x40:
         StringExpandPlaceholders(dst, gUnknown_8458314[playerGender]);
         break;
-    case UROOM_ACTIVITY_CHAT | 0x40:
+    case ACTIVITY_CHAT | 0x40:
         StringExpandPlaceholders(dst, gUnknown_84585E8[playerGender]);
         break;
-    case UROOM_ACTIVITY_TRADE | 0x40:
+    case ACTIVITY_TRADE | 0x40:
         StringExpandPlaceholders(dst, gUnknown_8458F9C);
         break;
-    case UROOM_ACTIVITY_CARD | 0x40:
+    case ACTIVITY_CARD | 0x40:
         StringExpandPlaceholders(dst, gUnknown_84583B4[playerGender]);
         break;
     }
@@ -4413,13 +4413,13 @@ static void GetURoomActivityStartMsg(u8 *dst, u8 activity)
 
     switch (activity)
     {
-    case UROOM_ACTIVITY_BATTLE | 0x40:
+    case ACTIVITY_BATTLE | 0x40:
         StringCopy(dst, gUnknown_8458230[mpId][gender][0]);
         break;
-    case UROOM_ACTIVITY_TRADE | 0x40:
+    case ACTIVITY_TRADE | 0x40:
         StringCopy(dst, gUnknown_8458230[mpId][gender][2]);
         break;
-    case UROOM_ACTIVITY_CHAT | 0x40:
+    case ACTIVITY_CHAT | 0x40:
         StringCopy(dst, gUnknown_8458230[mpId][gender][1]);
         break;
     }
@@ -4433,15 +4433,15 @@ static s32 GetChatLeaderActionRequestMessage(u8 *dst, u32 gender, u16 *activity_
 
     switch (activity_p[0])
     {
-    case UROOM_ACTIVITY_BATTLE | 0x40:
+    case ACTIVITY_BATTLE | 0x40:
         StringExpandPlaceholders(dst, gUnknown_8457CA4);
         result = 1;
         break;
-    case UROOM_ACTIVITY_CHAT | 0x40:
+    case ACTIVITY_CHAT | 0x40:
         StringExpandPlaceholders(dst, gUnknown_8457CF8);
         result = 1;
         break;
-    case UROOM_ACTIVITY_TRADE | 0x40:
+    case ACTIVITY_TRADE | 0x40:
         ConvertIntToDecimalStringN(arg3->activityRequestStrbufs[0], sUnionRoomTrade.playerLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringCopy(arg3->activityRequestStrbufs[1], gSpeciesNames[sUnionRoomTrade.playerSpecies]);
         for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -4468,7 +4468,7 @@ static s32 GetChatLeaderActionRequestMessage(u8 *dst, u32 gender, u16 *activity_
         }
         result = 1;
         break;
-    case UROOM_ACTIVITY_CARD | 0x40:
+    case ACTIVITY_CARD | 0x40:
         StringExpandPlaceholders(dst, gUnknown_8457C48);
         result = 1;
         break;
@@ -4486,14 +4486,14 @@ static bool32 PollPartnerYesNoResponse(struct UnkStruct_URoom * arg0)
 {
     if (gRecvCmds[0][1] != 0)
     {
-        if (gRecvCmds[0][1] == (UROOM_ACTIVITY_ACCEPT | 0x40))
+        if (gRecvCmds[0][1] == (ACTIVITY_ACCEPT | 0x40))
         {
-            arg0->partnerYesNoResponse = UROOM_ACTIVITY_ACCEPT | 0x40;
+            arg0->partnerYesNoResponse = ACTIVITY_ACCEPT | 0x40;
             return TRUE;
         }
-        else if (gRecvCmds[0][1] == (UROOM_ACTIVITY_DECLINE | 0x40))
+        else if (gRecvCmds[0][1] == (ACTIVITY_DECLINE | 0x40))
         {
-            arg0->partnerYesNoResponse = UROOM_ACTIVITY_DECLINE | 0x40;
+            arg0->partnerYesNoResponse = ACTIVITY_DECLINE | 0x40;
             return TRUE;
         }
     }
@@ -4639,8 +4639,8 @@ static u8 sub_811B2D8(struct UnkStruct_URoom * arg0)
     {
         if (arg0->field_C->arr[i].active)
         {
-            retVal |= arg0->field_C->arr[i].unk0.gname.playerGender << 3;
-            retVal |= arg0->field_C->arr[i].unk0.gname.unk_00.playerTrainerId[0] & 7;
+            retVal |= arg0->field_C->arr[i].gname_uname.gname.playerGender << 3;
+            retVal |= arg0->field_C->arr[i].gname_uname.gname.unk_00.playerTrainerId[0] & 7;
             break;
         }
     }

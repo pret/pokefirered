@@ -25,6 +25,7 @@
 #include "help_system.h"
 #include "strings.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
@@ -1237,21 +1238,21 @@ void task00_mystery_gift(u8 taskId)
         case 0:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x15);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WCARD2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x15);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WCARD2);
             }
             break;
         case 1:
             if (data->source == 1)
             {
-                MEvent_CreateTask_CardOrNewsWithFriend(0x16);
+                MEvent_CreateTask_CardOrNewsWithFriend(ACTIVITY_WNEWS2);
             }
             else if (data->source == 0)
             {
-                MEvent_CreateTask_CardOrNewsOverWireless(0x16);
+                MEvent_CreateTask_CardOrNewsOverWireless(ACTIVITY_WNEWS2);
             }
             break;
         }
@@ -1595,10 +1596,10 @@ void task00_mystery_gift(u8 taskId)
             switch (data->IsCardOrNews)
             {
             case 0:
-                MEvent_CreateTask_Leader(21);
+                MEvent_CreateTask_Leader(ACTIVITY_WCARD2);
                 break;
             case 1:
-                MEvent_CreateTask_Leader(22);
+                MEvent_CreateTask_Leader(ACTIVITY_WNEWS2);
                 break;
             }
             data->source = 1;

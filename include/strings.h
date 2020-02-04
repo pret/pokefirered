@@ -1100,4 +1100,15 @@ extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit[];
 
+// wireless_communication_status_screen
+extern const u8 gUnknown_841E2B4[];
+extern const u8 gUnknown_841E2BF[];
+extern const u8 gUnknown_841E2C9[];
+extern const u8 gUnknown_841E2D4[];
+extern const u8 gText_WirelessCommunicationStatus[];
+extern const u8 gText_PeopleTrading[];
+extern const u8 gText_PeopleBattling[];
+extern const u8 gText_PeopleInUnionRoom[];
+extern const u8 gText_PeopleCommunicating[];
+
 #endif //GUARD_STRINGS_H

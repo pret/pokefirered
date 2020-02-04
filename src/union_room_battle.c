@@ -147,11 +147,11 @@ void CB2_UnionRoomBattle(void)
             memset(gBlockSendBuffer, 0, 0x20);
             if (gSelectedOrderFromParty[0] == -gSelectedOrderFromParty[1])
             {
-                gBlockSendBuffer[0] = UROOM_ACTIVITY_DECLINE | 0x40;
+                gBlockSendBuffer[0] = ACTIVITY_DECLINE | 0x40;
             }
             else
             {
-                gBlockSendBuffer[0] = UROOM_ACTIVITY_ACCEPT | 0x40;
+                gBlockSendBuffer[0] = ACTIVITY_ACCEPT | 0x40;
             }
             SendBlock(0, gBlockSendBuffer, 0x20);
             gMain.state++;
@@ -160,7 +160,7 @@ void CB2_UnionRoomBattle(void)
     case 4:
         if (GetBlockReceivedStatus() == 3)
         {
-            if (gBlockRecvBuffer[0][0] == (UROOM_ACTIVITY_ACCEPT | 0x40) && gBlockRecvBuffer[1][0] == (UROOM_ACTIVITY_ACCEPT | 0x40))
+            if (gBlockRecvBuffer[0][0] == (ACTIVITY_ACCEPT | 0x40) && gBlockRecvBuffer[1][0] == (ACTIVITY_ACCEPT | 0x40))
             {
                 BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
                 gMain.state = 50;
@@ -168,7 +168,7 @@ void CB2_UnionRoomBattle(void)
             else
             {
                 sub_800AAC0();
-                if (gBlockRecvBuffer[GetMultiplayerId()][0] == (UROOM_ACTIVITY_DECLINE | 0x40))
+                if (gBlockRecvBuffer[GetMultiplayerId()][0] == (ACTIVITY_DECLINE | 0x40))
                 {
                     gMain.state = 6;
                 }

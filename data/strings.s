@@ -4498,19 +4498,19 @@ gUnknown_841E243:: @ 841E243
 gUnknown_841E244:: @ 841E244
 	.string "$"
 
-gUnknown_841E245:: @ 841E245
+gText_WirelessCommunicationStatus:: @ 841E245
 	.string "Wireless Communication Status$"
 
-gUnknown_841E263:: @ 841E263
+gText_PeopleTrading:: @ 841E263
 	.string "People trading:$"
 
-gUnknown_841E273:: @ 841E273
+gText_PeopleBattling:: @ 841E273
 	.string "People battling:$"
 
-gUnknown_841E284:: @ 841E284
+gText_PeopleInUnionRoom:: @ 841E284
 	.string "People in the UNION ROOM:$"
 
-gUnknown_841E29E:: @ 841E29E
+gText_PeopleCommunicating:: @ 841E29E
 	.string "People communicating:$"
 
 gUnknown_841E2B4:: @ 841E2B4

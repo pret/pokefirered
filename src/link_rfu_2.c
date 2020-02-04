@@ -188,7 +188,7 @@ void sub_80F85F8(void)
     s32 i;
     u8 errorState_bak = Rfu.errorState;
     CpuFill16(0, &Rfu, sizeof Rfu);
-    Rfu.unk_0c = 0xFF;
+    Rfu.parent_child = MODE_NEUTRAL;
     Rfu.errorState = errorState_bak;
     if (Rfu.errorState != 4)
     {
@@ -230,7 +230,7 @@ void sub_80F86F4(void)
     }
 }
 
-static void sub_80F8738(u8 taskId)
+static void Task_LinkLeaderSearchForChildren(u8 taskId)
 {
     sub_80FA738();
     switch (Rfu.state)
@@ -243,7 +243,7 @@ static void sub_80F8738(u8 taskId)
     case 1:
         break;
     case 2:
-        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)sAcceptedSerialNos);
+        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16*)sAcceptedSerialNos);
         Rfu.state = 3;
         gTasks[taskId].data[1] = 6;
         break;
@@ -317,7 +317,7 @@ static void sub_80F887C(s32 r2, s32 r5)
     }
 }
 
-static void sub_80F893C(u8 taskId)
+static void Task_JoinGroupSearchForParent(u8 taskId)
 {
     switch (Rfu.state)
     {
@@ -329,7 +329,7 @@ static void sub_80F893C(u8 taskId)
     case 1:
         break;
     case 6:
-        rfu_LMAN_establishConnection(Rfu.unk_0c, 0, 240, (u16*)sAcceptedSerialNos);
+        rfu_LMAN_establishConnection(Rfu.parent_child, 0, 240, (u16*)sAcceptedSerialNos);
         Rfu.state = 7;
         gTasks[taskId].data[1] = 7;
         break;
@@ -393,7 +393,7 @@ static void sub_80F8AEC(void)
     Rfu.unk_cda = sub_80F886C(acceptSlot);
     Rfu.bm_PartnerFlags = acceptSlot;
     sub_80F887C(acceptSlot, -1);
-    Rfu.unk_0c = 1;
+    Rfu.parent_child = MODE_PARENT;
 }
 
 static void sub_80F8B34(u8 taskId)
@@ -423,7 +423,7 @@ static void sub_80F8B34(u8 taskId)
     case 13:
         if (rfu_UNI_setSendData(1 << Rfu.child_slot, Rfu.unk_4c, sizeof(Rfu.unk_4c)) == 0)
         {
-            Rfu.unk_0c = 0;
+            Rfu.parent_child = MODE_CHILD;
             DestroyTask(taskId);
             if (gTasks[taskId].data[7])
             {
@@ -449,7 +449,7 @@ static void sub_80F8B34(u8 taskId)
         sub_80F8AEC();
         Rfu.state = 20;
         gTasks[taskId].data[1] = 8;
-        Rfu.unk_0c = 1;
+        Rfu.parent_child = MODE_PARENT;
         CreateTask(sub_80FA834, 5);
         Rfu.unk_ce8 = TRUE;
         DestroyTask(taskId);
@@ -494,7 +494,7 @@ static void sub_80F8DA8(u16 unused)
     Rfu.unk_cdb = 1;
 }
 
-void sub_80F8DC0(void)
+void LinkRfu_Shutdown(void)
 {
     u8 i;
 
@@ -502,23 +502,23 @@ void sub_80F8DC0(void)
         return;
 
     rfu_LMAN_powerDownRFU();
-    if (Rfu.unk_0c == 1)
+    if (Rfu.parent_child == MODE_PARENT)
     {
-        if (FuncIsActiveTask(sub_80F8738) == TRUE)
+        if (FuncIsActiveTask(Task_LinkLeaderSearchForChildren) == TRUE)
         {
             DestroyTask(Rfu.unk_67);
             sub_80F85F8();
         }
     }
-    else if (Rfu.unk_0c == 0)
+    else if (Rfu.parent_child == MODE_CHILD)
     {
-        if (FuncIsActiveTask(sub_80F893C) == TRUE)
+        if (FuncIsActiveTask(Task_JoinGroupSearchForParent) == TRUE)
         {
             DestroyTask(Rfu.unk_67);
             sub_80F85F8();
         }
     }
-    else if (Rfu.unk_0c == 2)
+    else if (Rfu.parent_child == 2)
     {
         if (FuncIsActiveTask(sub_80F8B34) == TRUE)
         {
@@ -535,11 +535,11 @@ void sub_80F8DC0(void)
     }
 }
 
-static void sub_80F8E74(void)
+static void CreateTask_LinkLeaderSearchForChildren(void)
 {
     if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
-    Rfu.unk_67 = CreateTask(sub_80F8738, 1);
+    Rfu.unk_67 = CreateTask(Task_LinkLeaderSearchForChildren, 1);
 }
 
 static bool8 sub_80F8EA4(void)
@@ -561,11 +561,11 @@ static bool32 sub_80F8ECC(void)
     return FALSE;
 }
 
-static void sub_80F8F10(void)
+static void CreateTask_JoinGroupSearchForParent(void)
 {
     if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
-    Rfu.unk_67 = CreateTask(sub_80F893C, 1);
+    Rfu.unk_67 = CreateTask(Task_JoinGroupSearchForParent, 1);
 }
 
 bool8 sub_80F8F40(void)
@@ -712,7 +712,7 @@ static bool32 sub_80F911C(void)
                     }
                     if (!lman.acceptSlot_flag)
                     {
-                        sub_80F8DC0();
+                        LinkRfu_Shutdown();
                         gReceivedRemoteLinkPlayers = 0;
                         return FALSE;
                     }
@@ -917,7 +917,7 @@ static void HandleSendFailure(u8 unused, u32 flags)
 
 void Rfu_SetBlockReceivedFlag(u8 a0)
 {
-    if (Rfu.unk_0c == 1 && a0)
+    if (Rfu.parent_child == MODE_PARENT && a0)
         Rfu.unk_61[a0] = 1;
     else
         Rfu.unk_5c[a0] = 1;
@@ -933,7 +933,7 @@ static u8 sub_80F9770(const u8 *a0)
 {
     u8 i;
 
-    if (Rfu.unk_0c == 1)
+    if (Rfu.parent_child == MODE_PARENT)
         return FALSE;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -986,7 +986,7 @@ static void RfuHandleReceiveCommand(u8 unused)
         switch (gRecvCmds[i][0] & 0xff00)
         {
         case RFU_COMMAND_0x7800:
-            if (Rfu.unk_0c == 0 && gReceivedRemoteLinkPlayers != 0)
+            if (Rfu.parent_child == MODE_CHILD && gReceivedRemoteLinkPlayers != 0)
                 return;
             // fallthrough
         case RFU_COMMAND_0x7700:
@@ -1018,7 +1018,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 {
                     Rfu.cmd_8800_recvbuf[i].receiving = 2;
                     Rfu_SetBlockReceivedFlag(i);
-                    if (GetHostRFUtgtGname()->activity == (UROOM_ACTIVITY_CHAT | 0x40) && gReceivedRemoteLinkPlayers != 0 && Rfu.unk_0c == 0)
+                    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40) && gReceivedRemoteLinkPlayers != 0 && Rfu.parent_child == MODE_CHILD)
                         sub_80FAA58(gBlockRecvBuffer);
                 }
             }
@@ -1034,7 +1034,7 @@ static void RfuHandleReceiveCommand(u8 unused)
                 Rfu.unk_e9[i] = 1;
             break;
         case RFU_COMMAND_0xed00:
-            if (Rfu.unk_0c == 0)
+            if (Rfu.parent_child == MODE_CHILD)
             {
                 if (gReceivedRemoteLinkPlayers != 0)
                 {
@@ -1057,7 +1057,7 @@ static void RfuHandleReceiveCommand(u8 unused)
             }
             break;
         case RFU_COMMAND_0xee00:
-            if (Rfu.unk_0c == 1)
+            if (Rfu.parent_child == MODE_PARENT)
             {
                 Rfu.bm_DisconnectSlot |= gRecvCmds[i][1];
                 Rfu.unk_ce4 = gRecvCmds[i][2];
@@ -1068,7 +1068,7 @@ static void RfuHandleReceiveCommand(u8 unused)
             gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
             break;
         }
-        if (Rfu.unk_0c == 1 && Rfu.unk_61[i])
+        if (Rfu.parent_child == MODE_PARENT && Rfu.unk_61[i])
         {
             if (Rfu.unk_61[i] == 4)
             {
@@ -1221,7 +1221,7 @@ static void RfuFunc_HandleBlockSend(void)
     if (gSendCmd[0] == 0)
     {
         RfuPrepareSendBuffer(RFU_COMMAND_0x8800);
-        if (Rfu.unk_0c == 1)
+        if (Rfu.parent_child == MODE_PARENT)
         {
             if (++Rfu.unk_5b > 2)
                 Rfu.RfuFunc = RfuFunc_SendNextBlock;
@@ -1253,7 +1253,7 @@ static void RfuFunc_SendLastBlock(void)
     const u8 *src = Rfu.cmd_8800_sendbuf.payload;
     u8 mpId = GetMultiplayerId();
     s32 i;
-    if (Rfu.unk_0c == 0)
+    if (Rfu.parent_child == MODE_CHILD)
     {
         gSendCmd[0] = RFU_COMMAND_0x8900 | (Rfu.cmd_8800_sendbuf.count - 1);
         for (i = 0; i < 7; i++)
@@ -1298,7 +1298,7 @@ static void sub_80FA140(void)
 
 static void sub_80FA160(void)
 {
-    if (Rfu.unk_0c == 0)
+    if (Rfu.parent_child == MODE_CHILD)
     {
         rfu_LMAN_requestChangeAgbClockMaster();
         Rfu.unk_ce4 = 2;
@@ -1328,7 +1328,7 @@ static void sub_80FA1C4(void)
     if (count == playerCount)
     {
         gBattleTypeFlags &= (u16)~BATTLE_TYPE_20;
-        if (Rfu.unk_0c == 0)
+        if (Rfu.parent_child == MODE_CHILD)
         {
             Rfu.errorState = 3;
             sub_80FA160();
@@ -1469,7 +1469,7 @@ void sub_80FA4A8(void)
 
 u8 LinkRfu_GetMultiplayerId(void)
 {
-    if (Rfu.unk_0c == 1)
+    if (Rfu.parent_child == MODE_PARENT)
         return 0;
     return Rfu.unk_cce;
 }
@@ -1637,7 +1637,7 @@ static void sub_80FA834(u8 taskId)
         }
         break;
     case 1:
-        if (Rfu.unk_0c == 1)
+        if (Rfu.parent_child == MODE_PARENT)
         {
             if (gReceivedRemoteLinkPlayers)
                 RfuPrepareSendBuffer(RFU_COMMAND_0x7800);
@@ -1657,7 +1657,7 @@ static void sub_80FA834(u8 taskId)
             gTasks[taskId].data[0]++;
         break;
     case 3:
-        if (Rfu.unk_0c == 1)
+        if (Rfu.parent_child == MODE_PARENT)
         {
             if (sub_80F9C50())
             {
@@ -1881,7 +1881,7 @@ bool32 LinkRfuMain1(void)
     rfu_LMAN_manager_entity(Random());
     if (Rfu.unk_ef == 0)
     {
-        switch (Rfu.unk_0c)
+        switch (Rfu.parent_child)
         {
         case 1:
             sub_80F911C();
@@ -1902,7 +1902,7 @@ bool32 LinkRfuMain2(void)
     bool32 retval = FALSE;
     if (Rfu.unk_ef == 0)
     {
-        if (Rfu.unk_0c == 1)
+        if (Rfu.parent_child == MODE_PARENT)
             retval = sub_80F9204();
         RfuCheckErrorStatus();
     }
@@ -1958,7 +1958,7 @@ void sub_80FB030(u32 linkPlayerCount)
     u32 child_sprite_genders;
     s32 bm_child_slots;
 
-    if (GetHostRFUtgtGname()->activity == (UROOM_ACTIVITY_CHAT | 0x40))
+    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40))
     {
         numConnectedChildren = 0;
         child_sprite_genders = 0;
@@ -1976,7 +1976,7 @@ void sub_80FB030(u32 linkPlayerCount)
                     break;
             }
         }
-        sub_80FB008(UROOM_ACTIVITY_CHAT | 0x40, child_sprite_genders, 0);
+        sub_80FB008(ACTIVITY_CHAT | 0x40, child_sprite_genders, 0);
     }
 }
 
@@ -2201,7 +2201,7 @@ static u8 sub_80FB5A0(s32 a0)
         if ((a0 >> i) & 1)
         {
             struct GFtgtGname *structPtr = (void *)&gRfuLinkStatus->partner[i].gname;
-            if (structPtr->activity == (UROOM_ACTIVITY_CHAT | 0x40))
+            if (structPtr->activity == (ACTIVITY_CHAT | 0x40))
                 ret |= (1 << i);
         }
     }
@@ -2222,7 +2222,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
         RfuSetErrorStatus(4, 0);
         break;
     case LMAN_MSG_NEW_CHILD_CONNECT_ACCEPTED:
-        if (GetHostRFUtgtGname()->activity == (UROOM_ACTIVITY_CHAT | 0x40) && Rfu.unk_cd9 == 0)
+        if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40) && Rfu.unk_cd9 == 0)
         {
             u8 idx = sub_80FB5A0(lman.param[0]);
             if (idx != 0)
@@ -2257,7 +2257,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
     case LMAN_MSG_SEARCH_CHILD_PERIOD_EXPIRED:
         break;
     case LMAN_MSG_END_WAIT_CHILD_NAME:
-        if (GetHostRFUtgtGname()->activity != (UROOM_ACTIVITY_CHAT | 0x40) && lman.acceptCount > 1)
+        if (GetHostRFUtgtGname()->activity != (ACTIVITY_CHAT | 0x40) && lman.acceptCount > 1)
         {
             r1 = 1 << sub_80F886C(lman.param[0]);
             rfu_REQ_disconnect(lman.acceptSlot_flag ^ r1);
@@ -2309,7 +2309,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
     case LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED:
         if (Rfu.linkLossRecoveryState != 2)
             Rfu.linkLossRecoveryState = 4;
-        if (Rfu.unk_0c == 1)
+        if (Rfu.parent_child == MODE_PARENT)
         {
             if (gReceivedRemoteLinkPlayers == 1)
             {
@@ -2386,7 +2386,7 @@ bool32 GetRfuUnkCE8(void)
 
 bool8 Rfu_IsMaster(void)
 {
-    return Rfu.unk_0c;
+    return Rfu.parent_child;
 }
 
 void RFUVSync(void)
@@ -2459,29 +2459,29 @@ static void sub_80FBB74(void)
     UpdatePaletteFade();
 }
 
-void sub_80FBB8C(u32 a0)
+void InitializeRfuLinkManager_LinkLeader(u32 availSlots)
 {
-    Rfu.unk_0c = 1;
+    Rfu.parent_child = MODE_PARENT;
     CopyPlayerNameToUnameBuffer();
     rfu_LMAN_initializeManager(LmanCallback_Parent2, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
-    sRfuReqConfig.availSlot_flag = sAvailSlots[a0 - 1];
-    sub_80F8E74();
+    sRfuReqConfig.availSlot_flag = sAvailSlots[availSlots - 1];
+    CreateTask_LinkLeaderSearchForChildren();
 }
 
-void sub_80FBBD8(void)
+void InitializeRfuLinkManager_JoinGroup(void)
 {
-    Rfu.unk_0c = 0;
+    Rfu.parent_child = MODE_CHILD;
     CopyPlayerNameToUnameBuffer();
     rfu_LMAN_initializeManager(LmanCallback_Child, MscCallback_Child);
-    sub_80F8F10();
+    CreateTask_JoinGroupSearchForParent();
 }
 
 void sub_80FBC00(void)
 {
     if (gQuestLogState == 2 || gQuestLogState == 3)
         return;
-    Rfu.unk_0c = 2;
+    Rfu.parent_child = 2;
     CopyPlayerNameToUnameBuffer();
     rfu_LMAN_initializeManager(LmanCallback_Parent, NULL);
     sRfuReqConfig = sRfuReqConfigTemplate;
@@ -2602,7 +2602,7 @@ static void sub_80FBE80(u8 taskId)
                 if (sub_80F8ECC())
                     DestroyTask(taskId);
             }
-            else if (GetHostRFUtgtGname()->activity == UROOM_ACTIVITY_WCARD2 || GetHostRFUtgtGname()->activity == UROOM_ACTIVITY_WNEWS2)
+            else if (GetHostRFUtgtGname()->activity == ACTIVITY_WCARD2 || GetHostRFUtgtGname()->activity == ACTIVITY_WNEWS2)
             {
                 data[15]++;
             }
@@ -2644,16 +2644,16 @@ void sub_80FBF54(const u8 *src, u16 trainerId)
 
 static bool32 ShouldRejectPartnerConnectionBasedOnActivity(s16 activity, struct GFtgtGname *partnerGname)
 {
-    if (GetHostRFUtgtGname()->activity == (UROOM_ACTIVITY_CHAT | 0x40))
+    if (GetHostRFUtgtGname()->activity == (ACTIVITY_CHAT | 0x40))
     {
-        if (partnerGname->activity != (UROOM_ACTIVITY_CHAT | 0x40))
+        if (partnerGname->activity != (ACTIVITY_CHAT | 0x40))
             return TRUE;
     }
     else if (partnerGname->activity != 0x40)
     {
         return TRUE;
     }
-    else if (activity == (UROOM_ACTIVITY_TRADE | 0x40))
+    else if (activity == (ACTIVITY_TRADE | 0x40))
     {
         struct GFtgtGname *myTradeGname = (struct GFtgtGname *)&Rfu.unk_104.gname;
         if (myTradeGname->species == SPECIES_EGG)
@@ -2720,7 +2720,7 @@ void sub_80FC114(const u8 *name, struct GFtgtGname *structPtr, u8 activity)
     taskId = CreateTask(sub_80FC028, 2);
     gTasks[taskId].data[1] = activity;
     taskId2 = FindTaskIdByFunc(sub_80F8B34);
-    if (activity == (UROOM_ACTIVITY_CHAT | 0x40))
+    if (activity == (ACTIVITY_CHAT | 0x40))
     {
         if (taskId2 != 0xFF)
             gTasks[taskId2].data[7] = 1;
@@ -2781,7 +2781,7 @@ static void sub_80FC228(void)
     nullsub_88(GetBlockReceivedStatus(), 0x1C, 0x13, 2);
     nullsub_88(gRfuLinkStatus->connSlotFlag, 0x14, 1, 1);
     nullsub_88(gRfuLinkStatus->linkLossSlotFlag, 0x17, 1, 1);
-    if (Rfu.unk_0c == 1)
+    if (Rfu.parent_child == MODE_PARENT)
     {
         for (i = 0; i < RFU_CHILD_MAX; i++)
         {

@@ -952,7 +952,7 @@ void ResetReceivedWonderCardFlag(void)
     sReceivedWonderCardIsValid = FALSE;
 }
 
-bool32 sub_81446D0(u16 cardId)
+bool32 MEventHandleReceivedWonderCard(u16 cardId)
 {
     sReceivedWonderCardIsValid = FALSE;
     if (cardId == 0)
@@ -965,19 +965,19 @@ bool32 sub_81446D0(u16 cardId)
     return TRUE;
 }
 
-void sub_8144714(u32 eventId, u32 trainerId)
+void MEvent_RecordIdOfWonderCardSenderByEventType(u32 eventId, u32 trainerId)
 {
     if (sReceivedWonderCardIsValid)
     {
         switch (eventId)
         {
-            case 2:
+            case 2: // trade
                 RecordIdOfWonderCardSender(2, trainerId, gSaveBlock1Ptr->mysteryEventBuffers.unk_344[1], 5);
                 break;
-            case 0:
+            case 0: // link win
                 RecordIdOfWonderCardSender(0, trainerId, gSaveBlock1Ptr->mysteryEventBuffers.unk_344[0], 5);
                 break;
-            case 1:
+            case 1: // link loss
                 RecordIdOfWonderCardSender(1, trainerId, gSaveBlock1Ptr->mysteryEventBuffers.unk_344[0], 5);
                 break;
             default:

@@ -1955,7 +1955,7 @@ _080816BC: .4byte gLocalLinkPlayerId
 _080816C0: .4byte gWirelessCommType
 _080816C4: .4byte gBattleOutcome
 _080816C8:
-	@ sub_8144714(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+	@ MEvent_RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 	ldr r4, _080816E8 @ =gLinkPlayers
 	bl GetMultiplayerId
 	eors r0, r5
@@ -1968,12 +1968,12 @@ _080816C8:
 	adds r1, r4
 	ldr r1, [r1]
 	movs r0, 0
-	bl sub_8144714
+	bl MEvent_RecordIdOfWonderCardSenderByEventType
 	b _0808170A
 	.align 2, 0
 _080816E8: .4byte gLinkPlayers
 _080816EC:
-	@ sub_8144714(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+	@ MEvent_RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 	ldr r4, _08081718 @ =gLinkPlayers
 	bl GetMultiplayerId
 	eors r0, r5
@@ -1986,7 +1986,7 @@ _080816EC:
 	adds r1, r4
 	ldr r1, [r1]
 	movs r0, 0x1
-	bl sub_8144714
+	bl MEvent_RecordIdOfWonderCardSenderByEventType
 _0808170A:
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -2289,7 +2289,7 @@ _0808195C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081970
-	bl sub_8117118
+	bl UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade
 	adds r0, r5, 0
 	bl DestroyTask
 _08081970:

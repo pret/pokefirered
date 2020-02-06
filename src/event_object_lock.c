@@ -93,7 +93,7 @@ void sub_80696C0(void)
     UnfreezeObjectEvents();
 }
 
-void sub_80696F0(void)
+void UnionRoom_UnlockPlayerAndChatPartner(void)
 {
     u8 objectEventId;
     if (gObjectEvents[gSelectedObjectEvent].active)

@@ -5,7 +5,7 @@
 
 ALIGNED(4) const u8 gUnionRoomActivity_Blank[] = _("");
 ALIGNED(4) const u8 gUnknown_84571B0[] = _(":");
-ALIGNED(4) const u8 gUnknown_84571B4[] = _("{EXTRA 7}");
+ALIGNED(4) const u8 gUnknown_84571B4[] = _("{ID}");
 ALIGNED(4) const u8 gUnknown_84571B8[] = _("Please start over from the beginning.");
 ALIGNED(4) const u8 gUnknown_84571E0[] = _("The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.");
 ALIGNED(4) const u8 gUnref_845721C[] = _("ともだちからの れんらくを\nまっています");

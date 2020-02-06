@@ -1655,7 +1655,7 @@ _0814C77A:
 	movs r2, 0xC
 	bl memcpy
 	adds r0, r4, 0
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 _0814C7AC:
 	pop {r3}
 	mov r8, r3

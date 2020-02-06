@@ -47,7 +47,7 @@ static const u8 gUnknown_84571A8[] = {1, 2, 3};
 static void SetUpPartiesAndStartBattle(void)
 {
     s32 i;
-    sub_81173C0(BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER);
+    StartUnionRoomBattle(BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER);
     for (i = 0; i < 2; i++)
     {
         gEnemyParty[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1];

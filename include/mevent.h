@@ -85,10 +85,10 @@ bool32 WonderCard_Test_Unk_08_6(void);
 u32 MENews_GetInput(u16 input);
 void InitMEventData(void);
 u16 MEvent_GetBattleCardCount(u32 command);
-void sub_8144714(u32 a0, u32 a1);
+void MEvent_RecordIdOfWonderCardSenderByEventType(u32 eventId, u32 trainerId);
 u16 *GetMEventProfileECWordsMaybe(void);
 void ResetReceivedWonderCardFlag(void);
-bool32 sub_81446D0(u16 a0);
+bool32 MEventHandleReceivedWonderCard(u16 cardId);
 u16 GetWonderCardFlagId(void);
 
 #endif //GUARD_MEVENT_H

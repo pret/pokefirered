@@ -29,11 +29,9 @@ struct UnkStruct_x20
     struct UnionGnameUnamePair gname_uname;
     u16 field_18;
     u8 groupScheduledAnim:2;
-    u8 field_1A_1:1;
+    bool8 field_1A_1:1;
     u8 field_1B;
-    u8 field_1D;
-    u8 field_1E;
-    u8 field_1F;
+    u32 field_1C; // unused
 };
 
 // These arrays are dynamically allocated but must be
@@ -80,17 +78,17 @@ struct UnkStruct_Group
     struct UnkStruct_Main4 * field_4;
     u8 state;
     u8 textState;
-    u8 field_A;
+    u8 field_A; // unused
     u8 listWindowId;
-    u8 field_C;
-    u8 field_D;
+    u8 bButtonCancelWindowId;
+    u8 playerNameAndIdWindowId;
     u8 listTaskId;
-    u8 field_F;
+    u8 leaderId;
     u8 field_10;
     u8 listenTaskId;
     u8 cardOrNews;
-    u8 field_13;
-    u8 field_14;
+    u8 field_13; // referenced but never set
+    u8 refreshTimer;
     u8 delayBeforePrint;
 };
 
@@ -164,6 +162,6 @@ extern struct GFtgtGnameSub gPartnerTgtGnameSub;
 extern u16 gUnionRoomOfferedSpecies;
 extern u8 gUnionRoomRequestedMonType;
 
-void sub_81173C0(u16 battleFlags);
+void StartUnionRoomBattle(u16 battleFlags);
 
 #endif //GUARD_UNION_ROOM_H

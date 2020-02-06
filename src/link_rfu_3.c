@@ -603,7 +603,7 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
 }
 #endif
 
-void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 child_sprite_genders)
+void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders)
 {
     s32 i;
 
@@ -618,7 +618,7 @@ void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 r2, s32 ch
     }
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->activity = activity;
-    data->unk_0a_7 = r2;
+    data->started = started;
     data->unk_00.language = GAME_LANGUAGE;
     data->unk_00.version = GAME_VERSION;
     data->unk_00.hasNews = FALSE;

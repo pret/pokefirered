@@ -4302,7 +4302,7 @@ sub_8149A6C: @ 8149A6C
 	ldr r0, [r0, 0x8]
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -4363,7 +4363,7 @@ sub_8149AE0: @ 8149AE0
 	strb r1, [r2]
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -4425,7 +4425,7 @@ sub_8149AF8: @ 8149AF8
 	ldrh r0, [r0, 0xE]
 	strh r0, [r1, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -4520,7 +4520,7 @@ sub_8149BF4: @ 8149BF4
 	mov r0, sp
 	strb r1, [r0, 0x6]
 	strh r2, [r0, 0x8]
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r4}
 	pop {r0}

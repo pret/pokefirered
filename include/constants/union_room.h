@@ -25,6 +25,9 @@
 #define ACTIVITY_ACCEPT    17
 #define ACTIVITY_DECLINE   18
 
+#define ACTIVITY_NPCTALK   19
+#define ACTIVITY_PLYRTALK  20
+
 // Duplicate IDs?
 #define ACTIVITY_WCARD2    21
 #define ACTIVITY_WNEWS2    22

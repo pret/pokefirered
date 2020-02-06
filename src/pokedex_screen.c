@@ -562,8 +562,8 @@ void sub_8102F80(u8 taskId)
     switch (gUnknown_203ACF0->field_01)
     {
     case 0:
-        sub_8107D38(0x10, 0);
-        sub_8107D38(0x20, 1);
+        ListMenuLoadStdPalAt(0x10, 0);
+        ListMenuLoadStdPalAt(0x20, 1);
         gUnknown_203ACF0->field_48 = sub_8103518(gUnknown_203ACF0->field_42);
         gUnknown_203ACF0->field_01 = 2;
         break;
@@ -648,8 +648,8 @@ void sub_8103238(u8 taskId)
     switch (gUnknown_203ACF0->field_01)
     {
     case 0:
-        sub_8107D38(0x10, 0);
-        sub_8107D38(0x20, 1);
+        ListMenuLoadStdPalAt(0x10, 0);
+        ListMenuLoadStdPalAt(0x20, 1);
         gUnknown_203ACF0->field_48 = sub_8103518(gUnknown_203ACF0->field_42);
         gUnknown_203ACF0->field_01 = 2;
         break;

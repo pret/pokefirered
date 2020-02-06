@@ -2594,7 +2594,7 @@ static void sub_8053E8C(void)
         }
         if (gWirelessCommType)
         {
-            sub_8144714(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            MEvent_RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
         sub_80DA3AC();

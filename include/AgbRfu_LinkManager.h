@@ -11,6 +11,20 @@
 //Note: This value uses the item defined by AgbRFU_LL.h.
 #define MODE_P_C_SWITCH									2		// Start Link Manager in parent-child switching mode.
 
+// Value of lman.p_c_switch_flag
+#define PCSWITCH_1ST_SC_START                                   0x01
+#define PCSWITCH_1ST_SC                                                 0x02
+#define PCSWITCH_2ND_SP_START                                   0x03
+#define PCSWITCH_2ND_SP                                                 0x04
+#define PCSWITCH_3RD_SC_START                                   0x05
+#define PCSWITCH_3RD_SC                                                 0x06
+#define PCSWITCH_CP                                                             0x07
+#define PCSWITCH_SC_LOCK                                                0x08
+#define PCSWITCH_FORCE_SP_START                                 0x09
+
+// Period for which parent-child switching search specified
+#define PCSWITCH_ALL_PERIOD                                             180             // Entire cycle 180 frames
+#define PCSWITCH_SP_PERIOD                                               40             // Child period 40 frames
 
 // Error code returned by Link Manager API (rfu_LMAN_...return value of function)
 #define LMAN_ERROR_MANAGER_BUSY								1	// Link Manager is already running.

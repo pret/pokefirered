@@ -2,6 +2,21 @@
 #include "librfu.h"
 #include "link_rfu.h"
 
+// Constant used by rfu_LMAN_checkRecvChildName
+#define RN_ACCEPT                                                               0x01    // Child device acceptance OK flag
+#define RN_NAME_TIMER_CLEAR                                             0x02    // Name receive timer clear flag
+#define RN_DISCONNECT                                                   0x04    // Child device disconnect flag
+
+// Constant used by lman.linkRecovery_start_flag in rfu_LMAN_linkWatcher
+#define LINK_RECOVERY_OFF                                               0x00    // Link recovery OFF
+#define LINK_RECOVERY_START                                             0x01    // Link recovery start
+#define LINK_RECOVERY_EXE                                               0x02    // Link recovery running
+#define LINK_RECOVERY_IMPOSSIBLE                                0x04    // Link recovery not possible
+
+// value of lman.fastSearchParent_flag
+#define FSP_ON                                                                  0x01
+#define FSP_START                                                               0x02
+
 LINK_MANAGER lman;
 
 static void rfu_LMAN_clearVariables(void);
@@ -83,7 +98,7 @@ void rfu_LMAN_initializeRFU(INIT_PARAM *init_parameters)
     lman.NI_failCounter_limit = init_parameters->NI_failCounter_limit;
     if (init_parameters->fastSearchParent_flag)
     {
-        lman.fastSearchParent_flag = 1;
+        lman.fastSearchParent_flag = FSP_ON;
     }
 }
 
@@ -142,7 +157,7 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
     }
     if (parent_child > 1)
     {
-        lman.pcswitch_flag = 1;
+        lman.pcswitch_flag = PCSWITCH_1ST_SC_START;
         parent_child = MODE_PARENT;
         connect_period = 0;
     }
@@ -159,7 +174,7 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
         lman.state = LMAN_STATE_START_SEARCH_PARENT;
         if (lman.fastSearchParent_flag)
         {
-            lman.fastSearchParent_flag = 2;
+            lman.fastSearchParent_flag = FSP_START;
         }
     }
     lman.parent_child = parent_child;
@@ -212,7 +227,7 @@ u8 rfu_LMAN_CHILD_connectParent(u16 parentId, u16 connect_period)
     lman.connect_period = connect_period;
     if (lman.pcswitch_flag != 0)
     {
-        lman.pcswitch_flag = 7;
+        lman.pcswitch_flag = PCSWITCH_CP;
     }
     return 0;
 }
@@ -543,21 +558,21 @@ void rfu_LMAN_manager_entity(u32 rand)
 
 static void rfu_LMAN_settingPCSWITCH(u32 rand)
 {
-    if (lman.pcswitch_flag == 5)
+    if (lman.pcswitch_flag == PCSWITCH_3RD_SC_START)
     {
         lman.parent_child = MODE_PARENT;
         lman.state = LMAN_STATE_START_SEARCH_CHILD;
         lman.connect_period = lman.pcswitch_period_bak;
         if (lman.connect_period)
         {
-            lman.pcswitch_flag = 6;
+            lman.pcswitch_flag = PCSWITCH_3RD_SC;
         }
         else
         {
-            lman.pcswitch_flag = 1;
+            lman.pcswitch_flag = PCSWITCH_1ST_SC_START;
         }
     }
-    if (lman.pcswitch_flag == 1)
+    if (lman.pcswitch_flag == PCSWITCH_1ST_SC_START)
     {
         lman.parent_child = MODE_PARENT;
         lman.state = LMAN_STATE_START_SEARCH_CHILD;
@@ -565,18 +580,18 @@ static void rfu_LMAN_settingPCSWITCH(u32 rand)
         lman.pcswitch_period_bak = 140 - lman.connect_period;
         if (lman.connect_period)
         {
-            lman.pcswitch_flag = 2;
+            lman.pcswitch_flag = PCSWITCH_1ST_SC;
         }
         else
         {
-            lman.pcswitch_flag = 3;
+            lman.pcswitch_flag = PCSWITCH_2ND_SP_START;
         }
     }
-    if (lman.pcswitch_flag == 3)
+    if (lman.pcswitch_flag == PCSWITCH_2ND_SP_START)
     {
         lman.parent_child = MODE_CHILD;
-        lman.connect_period = 40;
-        lman.pcswitch_flag = 4;
+        lman.connect_period = PCSWITCH_SP_PERIOD;
+        lman.pcswitch_flag = PCSWITCH_2ND_SP;
         lman.state = LMAN_STATE_START_SEARCH_PARENT;
     }
 }
@@ -640,9 +655,12 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
         case ID_SP_START_REQ:
             if (reqResult == 0)
             {
-                if (lman.fastSearchParent_flag == 1 && lman.connect_period > 1)
+                if (lman.fastSearchParent_flag == FSP_ON)
                 {
-                    lman.connect_period--;
+                    if (lman.connect_period > 1)
+                    {
+                        lman.connect_period--;
+                    }
                 }
                 lman.state = lman.next_state = LMAN_STATE_POLL_SEARCH_PARENT;
             }
@@ -661,7 +679,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
                     rfu_REQ_endSearchParent();
                     rfu_waitREQComplete();
                     lman.state = LMAN_STATE_START_SEARCH_PARENT;
-                    lman.fastSearchParent_flag = 1;
+                    lman.fastSearchParent_flag = FSP_ON;
                 }
             }
             if (lman.connect_period && --lman.connect_period == 0)
@@ -681,10 +699,10 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
                         rfu_LMAN_occureCallback(LMAN_MSG_SEARCH_PARENT_PERIOD_EXPIRED, 0);
                     }
                 }
-                else if (lman.pcswitch_flag != 7)
+                else if (lman.pcswitch_flag != PCSWITCH_CP)
                 {
                     lman.state = LMAN_STATE_START_SEARCH_CHILD;
-                    lman.pcswitch_flag = 5;
+                    lman.pcswitch_flag = PCSWITCH_3RD_SC_START;
                 }
             }
             break;
@@ -721,7 +739,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
                     lman.param[0] = status;
                     if (lman.pcswitch_flag)
                     {
-                        lman.pcswitch_flag = 3;
+                        lman.pcswitch_flag = PCSWITCH_2ND_SP_START;
                         lman.state = LMAN_STATE_START_SEARCH_PARENT;
                     }
                 }
@@ -864,15 +882,15 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
             {
                 if (gRfuLinkStatus->parentChild == MODE_NEUTRAL)
                 {
-                    if (lman.pcswitch_flag == 8)
+                    if (lman.pcswitch_flag == PCSWITCH_SC_LOCK)
                     {
                         lman.connect_period = lman.pcswitch_period_bak;
-                        lman.pcswitch_flag = 6;
+                        lman.pcswitch_flag = PCSWITCH_3RD_SC;
                         lman.state = LMAN_STATE_POLL_SEARCH_CHILD;
                     }
                     else if (lman.state != LMAN_STATE_POLL_SEARCH_CHILD && lman.state != LMAN_STATE_END_SEARCH_CHILD)
                     {
-                        lman.pcswitch_flag = 1;
+                        lman.pcswitch_flag = PCSWITCH_1ST_SC_START;
                         lman.state = LMAN_STATE_START_SEARCH_CHILD;
                     }
                 }
@@ -915,7 +933,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
     }
     if (reqResult != 0)
     {
-        if (reqCommandId == ID_SP_START_REQ && reqResult != 0 && lman.pcswitch_flag == 4)
+        if (reqCommandId == ID_SP_START_REQ && reqResult != 0 && lman.pcswitch_flag == PCSWITCH_2ND_SP)
         {
             gRfuLinkStatus->parentChild = MODE_PARENT;
             gRfuLinkStatus->connSlotFlag = 0xF;
@@ -1015,7 +1033,7 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
                 {
                     if (gRfuSlotStatusNI[i]->recv.dataType == 1) // Game identification information
                     {
-                        flags = 0x02;
+                        flags = RN_NAME_TIMER_CLEAR;
                         for (ptr = lman.acceptable_serialNo_list; *ptr != 0xFFFF; ptr++)
                         {
                             if (gRfuLinkStatus->partner[i].serialNo == *ptr)
@@ -1023,27 +1041,27 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
                                 lman.acceptSlot_flag |= tgtSlot;
                                 lman.acceptCount++;
                                 newAcceptSlot |= tgtSlot;
-                                flags |= 0x01;
+                                flags |= RN_ACCEPT;
                                 break;
                             }
                         }
-                        if (!(flags & 0x01))
+                        if (!(flags & RN_ACCEPT))
                         {
-                            flags |= 0x04;
+                            flags |= RN_DISCONNECT;
                         }
                     }
                 }
                 else if (--lman.nameAcceptTimer.count[i] == 0)
                 {
-                    flags = 0x06;
+                    flags = RN_NAME_TIMER_CLEAR | RN_DISCONNECT;
                 }
-                if (flags & 0x02)
+                if (flags & RN_NAME_TIMER_CLEAR)
                 {
                     lman.nameAcceptTimer.active &= ~tgtSlot;
                     lman.nameAcceptTimer.count[i] = 0;
                     rfu_clearSlot(TYPE_NI_RECV, i);
                 }
-                if (flags & 0x04)
+                if (flags & RN_DISCONNECT)
                 {
                     lman.reserveDisconnectSlot_flag |= tgtSlot;
                 }
@@ -1056,10 +1074,13 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
         }
         if (lman.reserveDisconnectSlot_flag)
         {
-            flags = 0x01;
-            if (gRfuLinkStatus->sendSlotUNIFlag && ((lman.parentAck_flag & lman.acceptSlot_flag) != lman.acceptSlot_flag))
+            flags = 1;
+            if (gRfuLinkStatus->sendSlotUNIFlag)
             {
-                flags = 0x00;
+                if (((lman.parentAck_flag & lman.acceptSlot_flag) != lman.acceptSlot_flag))
+                {
+                    flags = 0;
+                }
             }
             if (flags)
             {
@@ -1078,20 +1099,20 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
             }
             else
             {
-                if (lman.pcswitch_flag == 2)
+                if (lman.pcswitch_flag == PCSWITCH_1ST_SC)
                 {
-                    lman.pcswitch_flag = 3;
+                    lman.pcswitch_flag = PCSWITCH_2ND_SP_START;
                     lman.state = LMAN_STATE_START_SEARCH_PARENT;
                 }
                 else
                 {
-                    lman.pcswitch_flag = 1;
+                    lman.pcswitch_flag = PCSWITCH_1ST_SC_START;
                     lman.state = LMAN_STATE_START_SEARCH_CHILD;
                 }
                 if (lman.acceptSlot_flag)
                 {
                     lman.connect_period = 0;
-                    lman.pcswitch_flag = 8;
+                    lman.pcswitch_flag = PCSWITCH_SC_LOCK;
                     lman.state = LMAN_STATE_START_SEARCH_CHILD;
                 }
             }
@@ -1319,7 +1340,7 @@ static u8 rfu_LMAN_setFastSearchParent(u8 enable_flag)
     }
     if (enable_flag)
     {
-        lman.fastSearchParent_flag = 1;
+        lman.fastSearchParent_flag = FSP_ON;
     }
     else
     {
@@ -1356,23 +1377,23 @@ void rfu_LMAN_forceChangeSP(void)
         switch (lman.state)
         {
         case LMAN_STATE_START_SEARCH_CHILD:
-            lman.pcswitch_flag = 3;
+            lman.pcswitch_flag = PCSWITCH_2ND_SP_START;
             lman.state = LMAN_STATE_START_SEARCH_PARENT;
             break;
         case LMAN_STATE_POLL_SEARCH_CHILD:
-            lman.pcswitch_flag = 2;
+            lman.pcswitch_flag = PCSWITCH_1ST_SC;
             lman.connect_period = 1;
             break;
         case LMAN_STATE_END_SEARCH_CHILD:
         case LMAN_STATE_WAIT_RECV_CHILD_NAME:
-            lman.pcswitch_flag = 2;
+            lman.pcswitch_flag = PCSWITCH_1ST_SC;
             break;
         case LMAN_STATE_START_SEARCH_PARENT:
         case LMAN_STATE_POLL_SEARCH_PARENT:
-            lman.connect_period = 40;
+            lman.connect_period = PCSWITCH_SP_PERIOD;
             break;
         case LMAN_STATE_END_SEARCH_PARENT:
-            lman.connect_period = 40;
+            lman.connect_period = PCSWITCH_SP_PERIOD;
             lman.state = LMAN_STATE_POLL_SEARCH_PARENT;
             break;
         }

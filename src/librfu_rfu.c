@@ -171,7 +171,14 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
     src = (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1);
     dst = gRfuFixed->fastCopyBuffer;
     // rfu_REQ_changeMasterSlave is the function next to rfu_STC_fastCopy
-    for (buffByteSizeMax = ((void *)rfu_REQ_changeMasterSlave - (void *)rfu_STC_fastCopy) / sizeof(u16), --buffByteSizeMax; buffByteSizeMax != 0xFFFF; --buffByteSizeMax)
+#if LIBRFU_VERSION < 1028
+//#if 0
+    buffByteSizeMax = ((void *)rfu_REQ_changeMasterSlave - (void *)rfu_STC_fastCopy) / sizeof(u16);
+#else
+    // register swap dst <--> buffByteSizeMax
+    buffByteSizeMax = 0x60 / sizeof(u16);
+#endif
+    while (buffByteSizeMax-- != 0)
         *dst++ = *src++;
     gRfuFixed->fastCopyPtr = (void *)gRfuFixed->fastCopyBuffer + 1;
     return 0;

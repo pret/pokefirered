@@ -44,17 +44,19 @@ struct MEventScreenMgr
 
 static EWRAM_DATA struct MEventScreenMgr * sMEventScreenData = NULL;
 
-void sub_8145A98(void);
-void sub_8145D18(u8 whichWindow);
-void sub_8146060(void);
-void sub_81461D8(void);
+static void sub_8145A98(void);
+static void sub_8145D18(u8 whichWindow);
+static void sub_8146060(void);
+static void sub_81461D8(void);
 
-const u8 gUnknown_8467068[][3] = {
+static const u8 gUnknown_8467068[][3] = {
     {0, 2, 3},
     {0, 1, 2}
 };
-const u8 ALIGNED(4) sTextYCoords[3] = {7, 4, 7};
-const struct WindowTemplate sWindowTemplates[] = {
+
+static const u8 ALIGNED(4) sTextYCoords[3] = {7, 4, 7};
+
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 1,
         .tilemapLeft = 1,
@@ -81,38 +83,39 @@ const struct WindowTemplate sWindowTemplates[] = {
         .baseBlock = 0x130}
 };
 
-const u16 gCard0Pal[] = INCBIN_U16("data/graphics/mevent/pal_46708C.gbapal");
+static const u16 gCard0Pal[] = INCBIN_U16("data/graphics/mevent/pal_46708C.gbapal");
 const u16 gCard1Pal[] = INCBIN_U16("data/graphics/mevent/pal_4670AC.gbapal");
 const u16 gCard2Pal[] = INCBIN_U16("data/graphics/mevent/pal_4670CC.gbapal");
 const u16 gCard3Pal[] = INCBIN_U16("data/graphics/mevent/pal_4670EC.gbapal");
 const u16 gCard4Pal[] = INCBIN_U16("data/graphics/mevent/pal_46710C.gbapal");
 const u16 gCard5Pal[] = INCBIN_U16("data/graphics/mevent/pal_46712C.gbapal");
-const u16 gCard6Pal[] = INCBIN_U16("data/graphics/mevent/pal_46714C.gbapal");
-const u16 gCard7Pal[] = INCBIN_U16("data/graphics/mevent/pal_46716C.gbapal");
-const u8 sCard0Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46718C.4bpp.lz");
-const u8 sCard0Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467288.bin.lz");
-const u8 sCard1Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46737C.4bpp.lz");
-const u8 sCard1Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467470.bin.lz");
-const u8 sCard2Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467558.4bpp.lz");
-const u8 sCard2Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46762C.bin.lz");
-const u8 sCard6Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467700.4bpp.lz");
-const u8 sCard6Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467934.bin.lz");
-const u8 sCard7Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467A7C.4bpp.lz");
-const u8 sCard7Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467CAC.bin.lz");
-const u16 gUnknown_8467DF4[] = INCBIN_U16("data/graphics/mevent/pal_467DF4.gbapal");
-const u16 gUnknown_8467E14[] = INCBIN_U16("data/graphics/mevent/pal_467E14.gbapal");
-const u16 gUnknown_8467E34[] = INCBIN_U16("data/graphics/mevent/pal_467E34.gbapal");
-const u16 gUnknown_8467E54[] = INCBIN_U16("data/graphics/mevent/pal_467E54.gbapal");
-const u16 gUnknown_8467E74[] = INCBIN_U16("data/graphics/mevent/pal_467E74.gbapal");
-const u16 gUnknown_8467E94[] = INCBIN_U16("data/graphics/mevent/pal_467E94.gbapal");
-const u16 gUnknown_8467EB4[] = INCBIN_U16("data/graphics/mevent/pal_467EB4.gbapal");
-const u16 gUnknown_8467ED4[] = INCBIN_U16("data/graphics/mevent/pal_467ED4.gbapal");
-const u32 gUnknown_8467EF4[] = INCBIN_U32("data/graphics/mevent/gfx_467EF4.4bpp.lz");
+static const u16 gCard6Pal[] = INCBIN_U16("data/graphics/mevent/pal_46714C.gbapal");
+static const u16 gCard7Pal[] = INCBIN_U16("data/graphics/mevent/pal_46716C.gbapal");
+static const u8 sCard0Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46718C.4bpp.lz");
+static const u8 sCard0Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467288.bin.lz");
+static const u8 sCard1Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46737C.4bpp.lz");
+static const u8 sCard1Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467470.bin.lz");
+static const u8 sCard2Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467558.4bpp.lz");
+static const u8 sCard2Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46762C.bin.lz");
+static const u8 sCard6Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467700.4bpp.lz");
+static const u8 sCard6Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467934.bin.lz");
+static const u8 sCard7Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_467A7C.4bpp.lz");
+static const u8 sCard7Map[] = INCBIN_U8("data/graphics/mevent/tilemap_467CAC.bin.lz");
+static const u16 gUnknown_8467DF4[] = INCBIN_U16("data/graphics/mevent/pal_467DF4.gbapal");
+static const u16 gUnknown_8467E14[] = INCBIN_U16("data/graphics/mevent/pal_467E14.gbapal");
+static const u16 gUnknown_8467E34[] = INCBIN_U16("data/graphics/mevent/pal_467E34.gbapal");
+static const u16 gUnknown_8467E54[] = INCBIN_U16("data/graphics/mevent/pal_467E54.gbapal");
+static const u16 gUnknown_8467E74[] = INCBIN_U16("data/graphics/mevent/pal_467E74.gbapal");
+static const u16 gUnknown_8467E94[] = INCBIN_U16("data/graphics/mevent/pal_467E94.gbapal");
+static const u16 gUnknown_8467EB4[] = INCBIN_U16("data/graphics/mevent/pal_467EB4.gbapal");
+static const u16 gUnknown_8467ED4[] = INCBIN_U16("data/graphics/mevent/pal_467ED4.gbapal");
+static const u32 gUnknown_8467EF4[] = INCBIN_U32("data/graphics/mevent/gfx_467EF4.4bpp.lz");
 
-const struct CompressedSpriteSheet sShadowSpriteSheet = {
+static const struct CompressedSpriteSheet sShadowSpriteSheet = {
     gUnknown_8467EF4, 0x100, 0x8000
 };
-const struct SpritePalette sShadowSpritePalettes[] = {
+
+static const struct SpritePalette sShadowSpritePalettes[] = {
     {gUnknown_8467DF4, 0x8000},
     {gUnknown_8467E14, 0x8000},
     {gUnknown_8467E34, 0x8000},
@@ -122,10 +125,12 @@ const struct SpritePalette sShadowSpritePalettes[] = {
     {gUnknown_8467EB4, 0x8000},
     {gUnknown_8467ED4, 0x8000}
 };
-const struct SpriteTemplate sShadowSpriteTemplate = {
+
+static const struct SpriteTemplate sShadowSpriteTemplate = {
     0x8000, 0x8000, &gOamData_AffineOff_ObjNormal_32x16, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
-const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
+
+static const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
     {1, 0, 0, 0, sCard0Gfx, sCard0Map, gCard0Pal},
     {1, 0, 0, 1, sCard1Gfx, sCard1Map, gCard1Pal},
     {1, 0, 0, 2, sCard2Gfx, sCard2Map, gCard2Pal},
@@ -172,7 +177,7 @@ s32 FadeToWonderCardMenu(void)
     switch(sMEventScreenData->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -216,7 +221,7 @@ s32 FadeToWonderCardMenu(void)
             ShowBg(2);
             gPaletteFade.bufferTransferDisabled = FALSE;
             sub_8146060();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             UpdatePaletteFade();
             break;
         default:
@@ -236,7 +241,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
     switch (sMEventScreenData->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             break;
         case 1:
             if (UpdatePaletteFade())
@@ -266,7 +271,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
             break;
         case 6:
             CopyBgTilemapBufferToVram(0);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
             break;
         default:
             if (UpdatePaletteFade())
@@ -278,7 +283,7 @@ s32 FadeOutFromWonderCard(bool32 flag)
     return 0;
 }
 
-void sub_8145A98(void)
+static void sub_8145A98(void)
 {
     u16 i = 0;
     u16 r6;
@@ -346,7 +351,7 @@ void sub_8145A98(void)
     }
 }
 
-void sub_8145D18(u8 whichWindow)
+static void sub_8145D18(u8 whichWindow)
 {
     s8 sp0C = 0;
     s32 windowId = sMEventScreenData->windowIds[whichWindow];
@@ -401,7 +406,7 @@ void sub_8145D18(u8 whichWindow)
     CopyWindowToVram(windowId, 3);
 }
 
-void sub_8146060(void)
+static void sub_8146060(void)
 {
     u8 r7 = 0;
     sMEventScreenData->monIconId = 0xFF;
@@ -428,7 +433,7 @@ void sub_8146060(void)
     }
 }
 
-void sub_81461D8(void)
+static void sub_81461D8(void)
 {
     u8 r6 = 0;
     if (sMEventScreenData->monIconId != 0xFF)

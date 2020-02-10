@@ -28,40 +28,40 @@ struct UnkStruct_203F3CC
     /*03a4*/ u8 buffer_03A4[0x1000];
 };
 
-EWRAM_DATA struct UnkStruct_203F3CC * sWork = NULL;
+static EWRAM_DATA struct UnkStruct_203F3CC * sWork = NULL;
 
-void sub_8146980(void);
-void sub_8146A30(void);
-void sub_8146B58(void);
+static void sub_8146980(void);
+static void sub_8146A30(void);
+static void sub_8146B58(void);
 
-const u8 sTextPals[][3] = {
+static const u8 sTextPals[][3] = {
     {0, 2, 3},
     {0, 1, 2}
 };
-const struct WindowTemplate gUnknown_8468040[] = {
+static const struct WindowTemplate gUnknown_8468040[] = {
     {0, 1, 0, 28,  3, 15, 0x000},
     {2, 1, 3, 28, 20, 15, 0x000}
 };
-const struct ScrollArrowsTemplate sScrollArrowsTemplate = {
+static const struct ScrollArrowsTemplate sScrollArrowsTemplate = {
     0x02, 0xe8, 0x18, 0x03, 0xe8, 0x98,
     0x0000, 0x0002, 0x1000, 0x1000, 0x0,
 };
 
-const u16 sNews1Pal[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
-const u16 sNews6Pal[] = INCBIN_U16("data/graphics/mevent/pal_468080.gbapal");
-const u16 sNews7Pal[] = INCBIN_U16("data/graphics/mevent/pal_4680A0.gbapal");
-const u8 sNews0Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4680C0.4bpp.lz");
-const u8 sNews0Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468140.bin.lz");
-const u8 sNews1Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46821C.4bpp.lz");
-const u8 sNews1Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46824C.bin.lz");
-const u8 sNews2Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46830C.4bpp.lz");
-const u8 sNews2Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46837C.bin.lz");
-const u8 sNews6Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_468448.4bpp.lz");
-const u8 sNews6Map[] = INCBIN_U8("data/graphics/mevent/tilemap_4684D8.bin.lz");
-const u8 sNews7Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4685B4.4bpp.lz");
-const u8 sNews7Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468644.bin.lz");
+static const u16 sNews1Pal[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
+static const u16 sNews6Pal[] = INCBIN_U16("data/graphics/mevent/pal_468080.gbapal");
+static const u16 sNews7Pal[] = INCBIN_U16("data/graphics/mevent/pal_4680A0.gbapal");
+static const u8 sNews0Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4680C0.4bpp.lz");
+static const u8 sNews0Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468140.bin.lz");
+static const u8 sNews1Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46821C.4bpp.lz");
+static const u8 sNews1Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46824C.bin.lz");
+static const u8 sNews2Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46830C.4bpp.lz");
+static const u8 sNews2Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46837C.bin.lz");
+static const u8 sNews6Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_468448.4bpp.lz");
+static const u8 sNews6Map[] = INCBIN_U8("data/graphics/mevent/tilemap_4684D8.bin.lz");
+static const u8 sNews7Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4685B4.4bpp.lz");
+static const u8 sNews7Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468644.bin.lz");
 
-const struct UnkStruct_8467FB8 sBgSpecs[] = {
+static const struct UnkStruct_8467FB8 sBgSpecs[] = {
     {1, 0, 0, 0, sNews0Gfx, sNews0Map, sNews1Pal},
     {1, 0, 0, 0, sNews1Gfx, sNews1Map, gCard1Pal},
     {1, 0, 0, 0, sNews2Gfx, sNews2Map, gCard2Pal},
@@ -105,7 +105,7 @@ s32 FadeToWonderNewsMenu(void)
     switch (sWork->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (UpdatePaletteFade())
@@ -114,10 +114,10 @@ s32 FadeToWonderNewsMenu(void)
         ChangeBgY(1, 0, 0);
         ChangeBgY(2, 0, 0);
         ChangeBgY(3, 0, 0);
-        SetGpuReg(REG_OFFSET_WIN0H, 0xF0);
-        SetGpuReg(REG_OFFSET_WIN0V, 0x1A98);
-        SetGpuReg(REG_OFFSET_WININ, 0x1F);
-        SetGpuReg(REG_OFFSET_WINOUT, 0x1B);
+        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 240));
+        SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(26, 152));
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         break;
     case 2:
@@ -158,7 +158,7 @@ s32 FadeToWonderNewsMenu(void)
         ShowBg(3);
         gPaletteFade.bufferTransferDisabled = FALSE;
         sWork->menuIndicatorsId = AddScrollIndicatorArrowPair(&sWork->scrollArrowsTemplate, &sWork->scrollOffset);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         UpdatePaletteFade();
         break;
     default:
@@ -179,7 +179,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
     switch (sWork->state)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         break;
     case 1:
         if (UpdatePaletteFade())
@@ -223,7 +223,7 @@ s32 FadeOutFromWonderNews(bool32 flag)
         MG_DrawCheckerboardPattern();
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         break;
     default:
         if (UpdatePaletteFade())
@@ -294,7 +294,7 @@ u32 MENews_GetInput(u16 input)
         return 3;
 }
 
-void sub_8146980(void)
+static void sub_8146980(void)
 {
     u8 i = 0;
     memcpy(sWork->title, sWork->wonderNews.unk_04, 40);
@@ -310,7 +310,7 @@ void sub_8146980(void)
     sWork->scrollArrowsTemplate.fullyDownThreshold = sWork->numMails;
 }
 
-void sub_8146A30(void)
+static void sub_8146A30(void)
 {
     u8 i = 0;
     s32 x;
@@ -330,7 +330,7 @@ void sub_8146A30(void)
     CopyWindowToVram(sWork->windowIds[1], 3);
 }
 
-void sub_8146B58(void)
+static void sub_8146B58(void)
 {
     u16 r4 = sWork->unk_01C2_1;
     r4 <<= 8;

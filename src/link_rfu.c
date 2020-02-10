@@ -115,7 +115,7 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
     u8 i;
     u16 *serial_list;
 
-    if (lman.state != LMAN_STATE_READY && (lman.state != LMAN_STATE_WAIT_RECV_CHILD_NAME || parent_child != 1))
+    if (lman.state != LMAN_STATE_READY && (lman.state != LMAN_STATE_WAIT_RECV_CHILD_NAME || parent_child != MODE_PARENT))
     {
         lman.param[0] = 1;
         rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 1);
@@ -143,14 +143,14 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
     if (parent_child > 1)
     {
         lman.pcswitch_flag = 1;
-        parent_child = 1;
+        parent_child = MODE_PARENT;
         connect_period = 0;
     }
     else
     {
         lman.pcswitch_flag = 0;
     }
-    if (parent_child != 0)
+    if (parent_child != MODE_CHILD)
     {
         lman.state = LMAN_STATE_START_SEARCH_CHILD;
     }
@@ -332,7 +332,7 @@ static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
         if (lman.linkRecovery_enable)
         {
             lman.linkRecovery_start_flag = 1;
-            if (lman.parent_child == 0 && reason == REASON_DISCONNECTED)
+            if (lman.parent_child == MODE_CHILD && reason == REASON_DISCONNECTED)
             {
                 lman.linkRecovery_start_flag = 4;
             }
@@ -846,7 +846,7 @@ static void rfu_LMAN_REQ_callback(u16 reqCommandId, u16 reqResult)
                         lman.linkRecoveryTimer.count[i] = 0;
                     }
                 }
-                if (lman.parent_child == 0)
+                if (lman.parent_child == MODE_CHILD)
                 {
                     lman.state = lman.next_state = LMAN_STATE_READY;
                 }
@@ -1145,7 +1145,7 @@ static void rfu_LMAN_CHILD_checkSendChildName2(void)
 
 static void rfu_LMAN_CHILD_linkRecoveryProcess(void)
 {
-    if (lman.parent_child == 0 && lman.linkRecovery_start_flag == 1)
+    if (lman.parent_child == MODE_CHILD && lman.linkRecovery_start_flag == 1)
     {
         lman.state_bak[0] = lman.state;
         lman.state_bak[1] = lman.next_state;

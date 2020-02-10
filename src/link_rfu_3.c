@@ -892,7 +892,7 @@ void RecordMixTrainerNames(void)
         s32 connectedTrainerRecordIndices[5];
         struct TrainerNameRecord *newRecords = AllocZeroed(20 * sizeof(struct TrainerNameRecord));
 
-        // Check if we alsendy have a record saved for connected trainers.
+        // Check if we already have a record saved for connected trainers.
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             connectedTrainerRecordIndices[i] = -1;
@@ -913,7 +913,7 @@ void RecordMixTrainerNames(void)
             {
                 CopyTrainerRecord(&newRecords[nextSpace], (u16)gLinkPlayers[i].trainerId, gLinkPlayers[i].name);
 
-                // If we alsendy had a record for this trainer, wipe it so that the next step doesn't duplicate it.
+                // If we already had a record for this trainer, wipe it so that the next step doesn't duplicate it.
                 if (connectedTrainerRecordIndices[i] >= 0)
                 {
                     ZeroName(gSaveBlock1Ptr->trainerNameRecords[connectedTrainerRecordIndices[i]].trainerName);

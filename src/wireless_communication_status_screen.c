@@ -181,7 +181,7 @@ static void CB2_InitWirelessCommunicationScreen(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     sWCSS = AllocZeroed(sizeof(*sWCSS));
     SetVBlankCallback(NULL);
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBGTemplates, NELEMS(sBGTemplates));
     SetBgTilemapBuffer(1, Alloc(0x800));
     SetBgTilemapBuffer(0, Alloc(0x800));
@@ -250,9 +250,9 @@ static void PrintHeaderTexts(void)
     s32 i;
     u32 width;
 
-    FillWindowPixelBuffer(0, 0);
-    FillWindowPixelBuffer(1, 0);
-    FillWindowPixelBuffer(2, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
     width = 0xC0 - GetStringWidth(3, sHeaderTextPtrs[0], 0);
     WCSS_AddTextPrinterParameterized(0, 3, sHeaderTextPtrs[0], width / 2, 6, 3);
     for (i = 0; i < 3; i++)
@@ -289,7 +289,7 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
     case 3:
         if (UpdateCommunicationCounts(sWCSS->counts, sWCSS->lastCounts, sWCSS->activities, sWCSS->rfuTaskId))
         {
-            FillWindowPixelBuffer(2, 0x00);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             for (i = 0; i < 4; i++)
             {
                 ConvertIntToDecimalStringN(gStringVar4, sWCSS->counts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);

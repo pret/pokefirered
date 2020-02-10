@@ -145,10 +145,10 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
             return ERR_RFU_API_BUFF_SIZE;
     }
     gRfuLinkStatus = (void *)APIBuffer + 0;
-    gRfuStatic = (void *)APIBuffer + 0xb4;
-    gRfuFixed = (void *)APIBuffer + 0xdc;
-    gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc;
-    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c;
+    gRfuStatic = (void *)APIBuffer + 0xb4; // + sizeof(*gRfuLinkStatus)
+    gRfuFixed = (void *)APIBuffer + 0xdc; // + sizeof(*gRfuStatic)
+    gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc; // + sizeof(*gRfuFixed)
+    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0])
     for (i = 1; i < RFU_CHILD_MAX; ++i)
     {
         gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
@@ -1995,7 +1995,7 @@ static void rfu_STC_UNI_receive(u8 bm_slot_id, const struct RfuLocalStruct *llsf
             if (UNI_recv->newDataFlag)
             {
                 UNI_recv->errorCode = ERR_RECV_UNK;
-                goto _081E2F0E;
+                goto force_tail_merge;
             }
         }
         else
@@ -2010,7 +2010,7 @@ static void rfu_STC_UNI_receive(u8 bm_slot_id, const struct RfuLocalStruct *llsf
         UNI_recv->newDataFlag = 1;
         UNI_recv->state = 0;
     }
-_081E2F0E:
+force_tail_merge:
     if (UNI_recv->errorCode)
         gRfuStatic->recvErrorFlag |= 16 << bm_slot_id;
 }

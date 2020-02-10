@@ -3,7 +3,7 @@
 
 #include "global.h"
 #include "librfu.h"
-#include "linkManager.h"
+#include "AgbRfu_LinkManager.h"
 
 #define RFU_COMMAND_0x8800 0x8800
 #define RFU_COMMAND_0x8900 0x8900

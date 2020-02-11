@@ -3,30 +3,30 @@
 struct LLSFStruct
 {
     u8 frameSize;
-    u8 unk01;
-    u8 unk02;
+    u8 recvFirstShift;
+    u8 connSlotFlagShift;
     u8 slotStateShift;
     u8 ackShift;
     u8 phaseShit;
     u8 nShift;
-    u8 unk07;
-    u8 unk08;
+    u8 recvFirstMask;
+    u8 connSlotFlagMask;
     u8 slotStateMask;
     u8 ackMask;
     u8 phaseMask;
     u8 nMask;
-    u16 unk0E;
+    u16 framesMask;
 };
 
 struct RfuLocalStruct
 {
-    u8 unk0;
-    u8 unk1;
+    u8 recvFirst;
+    u8 connSlotFlag;
     u8 slotState;
     u8 ack;
     u8 phase;
     u8 n;
-    u16 unk6;
+    u16 frame;
 };
 
 static void rfu_CB_defaultCallback(u8 reqCommand, u16 reqResult);
@@ -76,35 +76,35 @@ struct RfuFixed *gRfuFixed;
 static const struct LLSFStruct llsf_struct[2] = {
     [MODE_CHILD] = {
         .frameSize = 2,
-        .unk01 = 14,
-        .unk02 = 0,
+        .recvFirstShift = 14,
+        .connSlotFlagShift = 0,
         .slotStateShift = 10,
         .ackShift = 9,
         .phaseShit = 5,
         .nShift = 7,
-        .unk07 = 2,
-        .unk08 = 0,
+        .recvFirstMask = 2,
+        .connSlotFlagMask = 0,
         .slotStateMask = 15,
         .ackMask = 1,
         .phaseMask = 3,
         .nMask = 3,
-        .unk0E = 0x1f
+        .framesMask = 0x1f
     },
     [MODE_PARENT] = {
         .frameSize = 3,
-        .unk01 = 22,
-        .unk02 = 18,
+        .recvFirstShift = 22,
+        .connSlotFlagShift = 18,
         .slotStateShift = 14,
         .ackShift = 13,
         .phaseShit = 9,
         .nShift = 11,
-        .unk07 = 3,
-        .unk08 = 15,
+        .recvFirstMask = 3,
+        .connSlotFlagMask = 15,
         .slotStateMask = 15,
         .ackMask = 1,
         .phaseMask = 3,
         .nMask = 3,
-        .unk0E = 0x7f
+        .framesMask = 0x7f
     }
 };
 
@@ -1911,7 +1911,7 @@ static void rfu_STC_CHILD_analyzeRecvPacket(void)
     } while (!(frames_remaining & 0x8000));
 }
 
-static u16 rfu_STC_analyzeLLSF(u8 bm_slot_id, const u8 *src, u16 last_frame)
+static u16 rfu_STC_analyzeLLSF(u8 slot_id, const u8 *src, u16 last_frame)
 {
     struct RfuLocalStruct llsf_NI;
     const struct LLSFStruct *llsf_p;
@@ -1925,42 +1925,42 @@ static u16 rfu_STC_analyzeLLSF(u8 bm_slot_id, const u8 *src, u16 last_frame)
     frames = 0;
     for (i = 0; i < llsf_p->frameSize; ++i)
         frames |= *src++ << 8 * i;
-    llsf_NI.unk0 = (frames >> llsf_p->unk01) & llsf_p->unk07;
-    llsf_NI.unk1 = (frames >> llsf_p->unk02) & llsf_p->unk08;
+    llsf_NI.recvFirst = (frames >> llsf_p->recvFirstShift) & llsf_p->recvFirstMask;
+    llsf_NI.connSlotFlag = (frames >> llsf_p->connSlotFlagShift) & llsf_p->connSlotFlagMask;
     llsf_NI.slotState = (frames >> llsf_p->slotStateShift) & llsf_p->slotStateMask;
     llsf_NI.ack = (frames >> llsf_p->ackShift) & llsf_p->ackMask;
     llsf_NI.phase = (frames >> llsf_p->phaseShit) & llsf_p->phaseMask;
     llsf_NI.n = (frames >> llsf_p->nShift) & llsf_p->nMask;
-    llsf_NI.unk6 = (frames  & llsf_p->unk0E) & frames;
-    retVal = llsf_NI.unk6 + llsf_p->frameSize;
-    if (llsf_NI.unk0 == 0)
+    llsf_NI.frame = (frames  & llsf_p->framesMask) & frames;
+    retVal = llsf_NI.frame + llsf_p->frameSize;
+    if (llsf_NI.recvFirst == 0)
     {
         if (gRfuLinkStatus->parentChild == MODE_PARENT)
         {
-            if ((gRfuLinkStatus->connSlotFlag >> bm_slot_id) & 1)
+            if ((gRfuLinkStatus->connSlotFlag >> slot_id) & 1)
             {
                 if (llsf_NI.slotState == LCOM_UNI)
                 {
-                    rfu_STC_UNI_receive(bm_slot_id, &llsf_NI, src);
+                    rfu_STC_UNI_receive(slot_id, &llsf_NI, src);
                 }
                 else if (llsf_NI.ack == 0)
                 {
-                    rfu_STC_NI_receive_Receiver(bm_slot_id, &llsf_NI, src);
+                    rfu_STC_NI_receive_Receiver(slot_id, &llsf_NI, src);
                 }
                 else
                 {
                     for (i = 0; i < RFU_CHILD_MAX; ++i)
-                        if (((gRfuSlotStatusNI[i]->send.bmSlot >> bm_slot_id) & 1)
-                         && ((gRfuLinkStatus->sendSlotNIFlag >> bm_slot_id) & 1))
+                        if (((gRfuSlotStatusNI[i]->send.bmSlot >> slot_id) & 1)
+                         && ((gRfuLinkStatus->sendSlotNIFlag >> slot_id) & 1))
                             break;
                     if (i < RFU_CHILD_MAX)
-                        rfu_STC_NI_receive_Sender(i, bm_slot_id, &llsf_NI, src);
+                        rfu_STC_NI_receive_Sender(i, slot_id, &llsf_NI, src);
                 }
             }
         }
         else
         {
-            s32 conSlots = gRfuLinkStatus->connSlotFlag & llsf_NI.unk1;
+            s32 conSlots = gRfuLinkStatus->connSlotFlag & llsf_NI.connSlotFlag;
 
             if (conSlots)
             {
@@ -1990,7 +1990,7 @@ static void rfu_STC_UNI_receive(u8 bm_slot_id, const struct RfuLocalStruct *llsf
     struct UNIRecv *UNI_recv = &slotStatusUNI->recv;
 
     UNI_recv->errorCode = 0;
-    if (gRfuSlotStatusUNI[bm_slot_id]->recvBufferSize < llsf_NI->unk6)
+    if (gRfuSlotStatusUNI[bm_slot_id]->recvBufferSize < llsf_NI->frame)
     {
         slotStatusUNI->recv.state = SLOT_STATE_RECV_IGNORE;
         UNI_recv->errorCode = ERR_RECV_BUFF_OVER;
@@ -2011,7 +2011,7 @@ static void rfu_STC_UNI_receive(u8 bm_slot_id, const struct RfuLocalStruct *llsf
                 UNI_recv->errorCode = ERR_RECV_DATA_OVERWRITED;
         }
         UNI_recv->state = SLOT_STATE_RECEIVING;
-        size = UNI_recv->dataSize = llsf_NI->unk6;
+        size = UNI_recv->dataSize = llsf_NI->frame;
         dest = gRfuSlotStatusUNI[bm_slot_id]->recvBuffer;
         gRfuFixed->fastCopyPtr(&src, &dest, size);
         UNI_recv->newDataFlag = 1;
@@ -2138,10 +2138,10 @@ static void rfu_STC_NI_receive_Receiver(u8 bm_slot_id, const struct RfuLocalStru
     {
         if (llsf_NI->n == ((recvSlot->n[llsf_NI->phase] + 1) & 3))
         {
-            gRfuFixed->fastCopyPtr(&data_p, (u8 **)&recvSlot->now_p[llsf_NI->phase], llsf_NI->unk6);
+            gRfuFixed->fastCopyPtr(&data_p, (u8 **)&recvSlot->now_p[llsf_NI->phase], llsf_NI->frame);
             if (recvSlot->state == SLOT_STATE_RECEIVING)
                 recvSlot->now_p[llsf_NI->phase] += 3 * recvSlot->payloadSize;
-            recvSlot->remainSize -= llsf_NI->unk6;
+            recvSlot->remainSize -= llsf_NI->frame;
             recvSlot->n[llsf_NI->phase] = llsf_NI->n;
         }
     }

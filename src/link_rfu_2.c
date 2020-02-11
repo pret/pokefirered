@@ -53,7 +53,7 @@ static void sub_80FAA58(void * a0);
 static void sub_80FAA94(u8 taskId);
 static void sub_80FACF0(u8 taskId);
 static void GetLinkmanErrorParams(u32 msg);
-static void sub_80FB564(s32 a0);
+static void sub_80FB564(s32 bmConnectedFlag);
 static void sub_80FBB74(void);
 static u8 GetPartnerIndexByNameAndTrainerID(const u8 *trainerName, u16 trainerId);
 static void RfuReqDisconnectSlot(u32 bmDisconnectSlot);
@@ -354,10 +354,10 @@ static void Task_JoinGroupSearchForParent(u8 taskId)
         break;
     case 12:
     {
-        u8 r5 = 1 << Rfu.child_slot;
+        u8 bmChildSlot = 1 << Rfu.child_slot;
         rfu_clearSlot(TYPE_NI_SEND | TYPE_NI_RECV, Rfu.child_slot);
         rfu_setRecvBuffer(TYPE_UNI, Rfu.child_slot, Rfu.unk_c3f, sizeof(Rfu.unk_c3f));
-        rfu_UNI_setSendData(r5, Rfu.unk_4c, sizeof(Rfu.unk_4c));
+        rfu_UNI_setSendData(bmChildSlot, Rfu.unk_4c, sizeof(Rfu.unk_4c));
         gTasks[taskId].data[1] = 8;
         DestroyTask(taskId);
         if (gUnknown_203AC08.unk_0f == 0)
@@ -2018,7 +2018,7 @@ static void sub_80FB174(void)
 static void LmanCallback_Parent2(u8 msg, u8 param_count)
 {
     u8 i;
-    u8 r6 = 0;
+    u8 bmDisconnectFlag = 0;
     switch (msg)
     {
     case LMAN_MSG_INITIALIZE_COMPLETED:
@@ -2041,13 +2041,13 @@ static void LmanCallback_Parent2(u8 msg, u8 param_count)
                 }
                 else
                 {
-                    r6 |= (1 << i);
+                    bmDisconnectFlag |= (1 << i);
                 }
             }
         }
-        if (r6)
+        if (bmDisconnectFlag)
         {
-            rfu_REQ_disconnect(r6);
+            rfu_REQ_disconnect(bmDisconnectFlag);
             rfu_waitREQComplete();
         }
         break;
@@ -2177,13 +2177,13 @@ static void LmanCallback_Child(u8 msg, u8 param_count)
     }
 }
 
-static void sub_80FB564(s32 a0)
+static void sub_80FB564(s32 bmConnectedFlag)
 {
     s32 i;
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if ((a0 >> i) & 1)
+        if ((bmConnectedFlag >> i) & 1)
         {
             Rfu.unk_cea[i] = 0;
             Rfu.unk_cee[i] = 0xFF;

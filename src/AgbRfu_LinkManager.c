@@ -2,20 +2,17 @@
 #include "librfu.h"
 #include "link_rfu.h"
 
-// Constant used by rfu_LMAN_checkRecvChildName
-#define RN_ACCEPT                                                               0x01    // Child device acceptance OK flag
-#define RN_NAME_TIMER_CLEAR                                             0x02    // Name receive timer clear flag
-#define RN_DISCONNECT                                                   0x04    // Child device disconnect flag
+#define RN_ACCEPT           0x01
+#define RN_NAME_TIMER_CLEAR 0x02
+#define RN_DISCONNECT       0x04
 
-// Constant used by lman.linkRecovery_start_flag in rfu_LMAN_linkWatcher
-#define LINK_RECOVERY_OFF                                               0x00    // Link recovery OFF
-#define LINK_RECOVERY_START                                             0x01    // Link recovery start
-#define LINK_RECOVERY_EXE                                               0x02    // Link recovery running
-#define LINK_RECOVERY_IMPOSSIBLE                                0x04    // Link recovery not possible
+#define LINK_RECOVERY_OFF        0x00
+#define LINK_RECOVERY_START      0x01
+#define LINK_RECOVERY_EXE        0x02
+#define LINK_RECOVERY_IMPOSSIBLE 0x04
 
-// value of lman.fastSearchParent_flag
-#define FSP_ON                                                                  0x01
-#define FSP_START                                                               0x02
+#define FSP_ON    0x01
+#define FSP_START 0x02
 
 LINK_MANAGER lman;
 
@@ -346,12 +343,12 @@ static bool8 rfu_LMAN_linkWatcher(u16 REQ_commandID)
         lman.param[1] = reason;
         if (lman.linkRecovery_enable)
         {
-            lman.linkRecovery_start_flag = 1;
+            lman.linkRecovery_start_flag = LINK_RECOVERY_START;
             if (lman.parent_child == MODE_CHILD && reason == REASON_DISCONNECTED)
             {
-                lman.linkRecovery_start_flag = 4;
+                lman.linkRecovery_start_flag = LINK_RECOVERY_IMPOSSIBLE;
             }
-            if (lman.linkRecovery_start_flag == 1)
+            if (lman.linkRecovery_start_flag == LINK_RECOVERY_START)
             {
                 for (i = 0; i < RFU_CHILD_MAX; i++)
                 {
@@ -1031,7 +1028,7 @@ static void rfu_LMAN_PARENT_checkRecvChildName(void)
             {
                 if (gRfuSlotStatusNI[i]->recv.state == SLOT_STATE_RECV_SUCCESS)
                 {
-                    if (gRfuSlotStatusNI[i]->recv.dataType == 1) // Game identification information
+                    if (gRfuSlotStatusNI[i]->recv.dataType == 1)
                     {
                         flags = RN_NAME_TIMER_CLEAR;
                         for (ptr = lman.acceptable_serialNo_list; *ptr != 0xFFFF; ptr++)
@@ -1166,13 +1163,13 @@ static void rfu_LMAN_CHILD_checkSendChildName2(void)
 
 static void rfu_LMAN_CHILD_linkRecoveryProcess(void)
 {
-    if (lman.parent_child == MODE_CHILD && lman.linkRecovery_start_flag == 1)
+    if (lman.parent_child == MODE_CHILD && lman.linkRecovery_start_flag == LINK_RECOVERY_START)
     {
         lman.state_bak[0] = lman.state;
         lman.state_bak[1] = lman.next_state;
         lman.state = LMAN_STATE_START_LINK_RECOVERY;
         lman.next_state = LMAN_STATE_POLL_LINK_RECOVERY;
-        lman.linkRecovery_start_flag = 2;
+        lman.linkRecovery_start_flag = LINK_RECOVERY_EXE;
     }
 }
 

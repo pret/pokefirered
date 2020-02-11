@@ -649,7 +649,7 @@ _08150D28:
 	movs r1, 0x8
 	movs r2, 0x78
 	movs r3, 0x50
-	bl sub_815F138
+	bl StartMinigameCountdown
 	b _08150D52
 _08150D3A:
 	bl IsLinkTaskFinished
@@ -658,7 +658,7 @@ _08150D3A:
 	beq _08150D74
 	b _08150D52
 _08150D46:
-	bl sub_815F198
+	bl IsMinigameCountdownRunning
 	cmp r0, 0
 	bne _08150D74
 _08150D4E:

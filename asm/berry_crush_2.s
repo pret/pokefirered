@@ -962,10 +962,10 @@ _0814C26C:
 	adds r0, r1, 0
 	movs r2, 0x78
 	movs r3, 0x50
-	bl sub_815F138
+	bl StartMinigameCountdown
 	b _0814C2EC
 _0814C28A:
-	bl sub_815F198
+	bl IsMinigameCountdownRunning
 	cmp r0, 0
 	bne _0814C2F2
 _0814C292:

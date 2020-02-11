@@ -296,7 +296,7 @@ SECTIONS {
         src/renewable_hidden_items.o(.text);
         src/trainer_tower.o(.text);
         src/berry_powder.o(.text);
-        src/unk_815F138.o(.text);
+        src/minigame_countdown.o(.text);
         src/berry_fix_program.o(.text);
     } =0
 
@@ -581,7 +581,7 @@ SECTIONS {
         src/cereader_tool.o(.rodata);
         src/renewable_hidden_items.o(.rodata);
         src/trainer_tower.o(.rodata);
-        src/unk_815F138.o(.rodata);
+        src/minigame_countdown.o(.rodata);
         src/berry_fix_program.o(.rodata);
         data/data_8479668.o(.rodata.after_trainer_tower);
 

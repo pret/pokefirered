@@ -7702,7 +7702,7 @@ sub_814B43C: @ 814B43C
 	movs r1, 0x7
 	movs r2, 0x78
 	movs r3, 0x50
-	bl sub_815F138
+	bl StartMinigameCountdown
 	adds r0, r4, 0
 	bl sub_814B134
 	add sp, 0x4
@@ -7714,7 +7714,7 @@ sub_814B43C: @ 814B43C
 	thumb_func_start sub_814B460
 sub_814B460: @ 814B460
 	push {lr}
-	bl sub_815F198
+	bl IsMinigameCountdownRunning
 	pop {r1}
 	bx r1
 	thumb_func_end sub_814B460

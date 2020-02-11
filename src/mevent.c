@@ -9,7 +9,7 @@
 #include "decompress.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "unk_815c27c.h"
+#include "ereader_helpers.h"
 #include "util.h"
 #include "script.h"
 #include "event_data.h"
@@ -108,11 +108,11 @@ u8 SendUnknownSerialData_Run(struct MEvent_Str_1 *mgr)
 {
     u8 resp = 0;
     mgr->status = EReaderHandleTransfer(1, mgr->size, mgr->data, 0);
-    if ((mgr->status & 0x13) == 0x10)
+    if ((mgr->status & 0x13) == 0x10) // checksum OK and xfer off
         resp = 1;
-    if (mgr->status & 8)
+    if (mgr->status & 8) // cancelled by player
         resp = 2;
-    if (mgr->status & 4)
+    if (mgr->status & 4) // timed out
         resp = 3;
     gShouldAdvanceLinkState = 0;
     return resp;

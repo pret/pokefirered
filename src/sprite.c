@@ -1222,10 +1222,10 @@ u8 GetSpriteMatrixNum(struct Sprite *sprite)
     return matrixNum;
 }
 
-void obj_pos2_update_enable(struct Sprite* sprite, s16 a2, s16 a3)
+void obj_pos2_update_enable(struct Sprite* sprite, s16 xmod, s16 ymod)
 {
-    sprite->data[6] = a2;
-    sprite->data[7] = a3;
+    sprite->data[6] = xmod;
+    sprite->data[7] = ymod;
     sprite->flags_f = 1;
 }
 

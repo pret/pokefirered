@@ -1,6 +1,6 @@
 #include "global.h"
 #include "link.h"
-#include "unk_815c27c.h"
+#include "ereader_helpers.h"
 
 enum {
     EREADER_XFR_STATE_INIT,

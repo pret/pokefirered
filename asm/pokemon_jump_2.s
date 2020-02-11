@@ -4665,7 +4665,7 @@ _08149D20: .4byte sub_8149DC8
 sub_8149D24: @ 8149D24
 	push {lr}
 	bl FreeAllWindowBuffers
-	bl sub_815C9F4
+	bl DigitObjUtil_Teardown
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8149D24
@@ -6284,7 +6284,10 @@ sub_814A9C8: @ 814A9C8
 	push {r4,lr}
 	sub sp, 0x10
 	mov r1, sp
-	movs r0, 0x40
+	movs r0, 0x40 @ strConvMode = 0
+	              @ shape = SPRITE_SHAPE(8x8)
+	              @ size = SPRITE_SIZE(8x8)
+	              @ priority = 1
 	strb r0, [r1]
 	movs r0, 0x5
 	strb r0, [r1, 0x1]
@@ -6299,11 +6302,11 @@ sub_814A9C8: @ 814A9C8
 	ldr r0, _0814AA20 @ =gUnknown_846D968
 	str r0, [sp, 0xC]
 	movs r0, 0x2
-	bl sub_815C980
+	bl DigitObjUtil_Init
 	movs r0, 0
 	movs r1, 0
 	mov r2, sp
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	mov r1, sp
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
@@ -6314,7 +6317,7 @@ sub_814A9C8: @ 814A9C8
 	movs r0, 0x1
 	movs r1, 0
 	mov r2, sp
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6329,7 +6332,7 @@ sub_814AA24: @ 814AA24
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814AA24
@@ -6341,7 +6344,7 @@ sub_814AA34: @ 814AA34
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814AA34

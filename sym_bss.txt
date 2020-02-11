@@ -97,7 +97,7 @@ gUnknown_3002044: @ 3002044
 	.include "src/ereader_helpers.o"
 
 	.align 3
-	.include "src/unk_815C980.o"
+	.include "src/digit_obj_util.o"
 
 	.align 3
 	.include "asm/m4a_1.o"

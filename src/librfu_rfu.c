@@ -116,6 +116,14 @@ static const char lib_ver[] = "RFU_V1024";
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
+#define COPY(src, dst, size) do {         \
+    const u16 *_src = (const u16 *)(src); \
+    u16 *_dst = (u16 *)(dst);             \
+    u16 _size = (size);                   \
+    while (_size-- != 0)                  \
+        *_dst++ = *_src++;                \
+} while (0)
+
 u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
 {
     u16 i;
@@ -168,18 +176,21 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
         gRfuSlotStatusUNI[i]->recvBuffer = NULL;
         gRfuSlotStatusUNI[i]->recvBufferSize = 0;
     }
-    src = (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1);
-    dst = gRfuFixed->fastCopyBuffer;
     // rfu_REQ_changeMasterSlave is the function next to rfu_STC_fastCopy
 #if LIBRFU_VERSION < 1028
-//#if 0
+    src = (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1);
+    dst = gRfuFixed->fastCopyBuffer;
     buffByteSizeMax = ((void *)rfu_REQ_changeMasterSlave - (void *)rfu_STC_fastCopy) / sizeof(u16);
-#else
-    // register swap dst <--> buffByteSizeMax
-    buffByteSizeMax = 0x60 / sizeof(u16);
-#endif
     while (buffByteSizeMax-- != 0)
         *dst++ = *src++;
+#else
+    // register swap dst <--> buffByteSizeMax
+    COPY(
+        (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1),
+        gRfuFixed->fastCopyBuffer,
+        0x60 / sizeof(u16)
+        );
+#endif
     gRfuFixed->fastCopyPtr = (void *)gRfuFixed->fastCopyBuffer + 1;
     return 0;
 }
@@ -490,6 +501,13 @@ static void rfu_CB_configGameData(u8 reqCommand, u16 reqResult)
 void rfu_REQ_startSearchChild(void)
 {
     u16 result;
+#if LIBRFU_VERSION >= 1028
+    u16 i;
+    for (i = 0; i < RFU_CHILD_MAX; i++)
+    {
+        gRfuStatic->lsFixedCount[i] = 0;
+    }
+#endif
 
     STWI_set_Callback_M(rfu_CB_defaultCallback);
     STWI_send_SystemStatusREQ();
@@ -575,6 +593,11 @@ static void rfu_STC_readChildList(void)
     u8 i;
     u8 true_slots[RFU_CHILD_MAX];
     u8 bm_slot_id;
+
+#if LIBRFU_VERSION >= 1028
+//#if 1
+    // TODO: decompile this
+#endif
 
     if (numSlots != 0)
     {

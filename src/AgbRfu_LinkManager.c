@@ -252,7 +252,7 @@ static void rfu_LMAN_PARENT_stopWaitLinkRecoveryAndDisconnect(u8 bm_targetSlot)
     rfu_LMAN_occureCallback(LMAN_MSG_LINK_RECOVERY_FAILED_AND_DISCONNECTED, i);
 }
 
-void rfu_LMAN_stopManager(bool8 forced_stop_and_RFU_reset_flag)
+void rfu_LMAN_stopManager(u8 forced_stop_and_RFU_reset_flag)
 {
     u8 msg = 0;
     lman.pcswitch_flag = 0;

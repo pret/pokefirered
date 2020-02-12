@@ -251,7 +251,7 @@ static void Task_LinkLeaderSearchForChildren(u8 taskId)
     case 3:
         break;
     case 4:
-        rfu_LMAN_stopManager(FALSE);
+        rfu_LMAN_stopManager(0);
         Rfu.state = 5;
         break;
     case 5:
@@ -465,7 +465,7 @@ void LinkRfu_CreateConnectionAsParent(void)
 
 void LinkRfu_StopManagerBeforeEnteringChat(void)
 {
-    rfu_LMAN_stopManager(FALSE);
+    rfu_LMAN_stopManager(0);
 }
 
 static void MscCallback_Child(u16 unused)
@@ -1465,7 +1465,7 @@ u8 sub_80FA484(bool32 a0)
 void sub_80FA4A8(void)
 {
     Rfu.unk_cd9 = 1;
-    rfu_LMAN_stopManager(FALSE);
+    rfu_LMAN_stopManager(0);
 }
 
 u8 LinkRfu_GetMultiplayerId(void)

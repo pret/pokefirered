@@ -2740,30 +2740,30 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGnameSub partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
-    u8 r9 = a0.hasNationalDex;
-    u8 r4 = a0.isChampion;
-    u8 r10 = a1.hasNationalDex;
-    u8 r0 = a1.isChampion;
-    u8 r1 = a1.version;
-    u8 r2;
+    u8 playerHasNationalDex = playerSub.hasNationalDex;
+    u8 playerIsChampion = playerSub.isChampion;
+    u8 partnerHasNationalDex = partnerSub.hasNationalDex;
+    u8 partnerIsChampion = partnerSub.isChampion;
+    u8 partnerVersion = partnerSub.version;
+    u8 isNotFRLG;
 
-    if (r1 == VERSION_FIRE_RED || r1 == VERSION_LEAF_GREEN)
+    if (partnerVersion == VERSION_FIRE_RED || partnerVersion == VERSION_LEAF_GREEN)
     {
-        r2 = 0;
+        isNotFRLG = 0;
     }
     else
     {
-        r2 = 1;
+        isNotFRLG = 1;
     }
-    if (r2)
+    if (isNotFRLG)
     {
-        if (!r4)
+        if (!playerIsChampion)
         {
             return 8;
         }
-        else if (!r0)
+        else if (!partnerIsChampion)
         {
             return 9;
         }
@@ -2794,7 +2794,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
         return 3;
     }
 
-    if (!r9)
+    if (!playerHasNationalDex)
     {
         if (species1 == SPECIES_EGG)
         {
@@ -2812,7 +2812,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
         }
     }
 
-    if (!r10 && species1 > SPECIES_MEW)
+    if (!partnerHasNationalDex && species1 > SPECIES_MEW)
     {
         return 7;
     }
@@ -2820,11 +2820,11 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
     return 0;
 }
 
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16 species, u16 a2, u8 a3)
+int CanRegisterMonForTradingBoard(struct GFtgtGnameSub playerSub, u16 species2, u16 species, u8 obedience)
 {
-    u8 canTradeEggAndNational = a0.hasNationalDex;
+    u8 canTradeEggAndNational = playerSub.hasNationalDex;
 
-    if (IsDeoxysOrMewUntradable(a2, a3))
+    if (IsDeoxysOrMewUntradable(species, obedience))
     {
         return 1;
     }
@@ -2834,12 +2834,12 @@ int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16 species, u16 a2, 
         return 0;
     }
 
-    if (species == SPECIES_EGG)
+    if (species2 == SPECIES_EGG)
     {
         return 2;
     }
 
-    if (species > SPECIES_MEW && species != SPECIES_EGG)
+    if (species2 > SPECIES_MEW && species2 != SPECIES_EGG)
     {
         return 1;
     }

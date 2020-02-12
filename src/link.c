@@ -88,8 +88,8 @@ bool8 gLinkCommand2FFEAck[MAX_LINK_PLAYERS];
 bool8 gLinkCommand5FFFAck[MAX_LINK_PLAYERS];
 u16 gLinkCmd5FFFparam;
 u8 gSuppressLinkErrorMessage;
-bool8 gWirelessCommType;
-bool8 gSavedLinkPlayerCount;
+u8 gWirelessCommType;
+u8 gSavedLinkPlayerCount;
 u16 gSendCmd[CMD_LENGTH];
 u8 gSavedMultiplayerId;
 bool8 gReceivedRemoteLinkPlayers;
@@ -1480,7 +1480,7 @@ void CB2_LinkError(void)
         ResetLinkRfuGFLayer();
     }
     SetVBlankCallback(sub_800978C);
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sLinkErrorBgTemplates, 2);
     sLinkErrorBgTilemapBuffer = tilemapBuffer = malloc(0x800);
     SetBgTilemapBuffer(1, tilemapBuffer);

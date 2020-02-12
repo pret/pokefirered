@@ -382,7 +382,7 @@ _08150B08:
 	bl sub_8155E68
 	cmp r0, 0
 	bne _08150BFC
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _08150BDC
 _08150B16:
 	bl IsLinkTaskFinished
@@ -662,7 +662,7 @@ _08150D46:
 	cmp r0, 0
 	bne _08150D74
 _08150D4E:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 _08150D52:
 	ldr r0, _08150D60 @ =gUnknown_203F3E0
 	ldr r1, [r0]

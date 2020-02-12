@@ -338,7 +338,7 @@ _0814D8B4:
 	.4byte _0814D9A2
 	.4byte _0814D9B2
 _0814D8D4:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814D9BA
 _0814D8DA:
 	bl IsLinkTaskFinished

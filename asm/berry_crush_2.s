@@ -143,7 +143,7 @@ _0814BC30:
 	movs r0, 0x3
 	b _0814BC6A
 _0814BC44:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814BC66
 _0814BC4A:
 	bl IsLinkTaskFinished
@@ -359,7 +359,7 @@ sub_814BDBC: @ 814BDBC
 	beq _0814BDD2
 	b _0814BDFC
 _0814BDCC:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814BDFC
 _0814BDD2:
 	bl IsLinkTaskFinished
@@ -494,7 +494,7 @@ _0814BEB4:
 	bl sub_814BB4C
 	b _0814BFC6
 _0814BED4:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814BFC0
 _0814BEDA:
 	bl IsLinkTaskFinished
@@ -650,7 +650,7 @@ _0814C008:
 	adds r1, r4, r0
 	adds r0, r4, 0
 	bl sub_814DA24
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814C108
 _0814C01A:
 	bl IsLinkTaskFinished
@@ -720,7 +720,7 @@ _0814C080:
 	ldrb r0, [r2]
 	adds r0, 0x1
 	strb r0, [r2]
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814C108
 	.align 2, 0
 _0814C0AC: .4byte sub_814DB84
@@ -748,7 +748,7 @@ _0814C0D2:
 	adds r1, r4, r3
 	adds r0, r4, 0
 	bl sub_814DC24
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814C108
 _0814C0E4:
 	bl IsLinkTaskFinished
@@ -904,7 +904,7 @@ _0814C1FC:
 	movs r0, 0x1E
 	movs r1, 0
 	bl SetGpuReg
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814C23C
 _0814C21E:
 	bl IsLinkTaskFinished
@@ -969,7 +969,7 @@ _0814C28A:
 	cmp r0, 0
 	bne _0814C2F2
 _0814C292:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814C2EC
 _0814C298:
 	bl IsLinkTaskFinished
@@ -2065,7 +2065,7 @@ _0814CADA:
 	bl sub_814DE50
 	cmp r0, 0
 	beq _0814CB18
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	movs r0, 0
 	strh r0, [r4, 0x10]
 	b _0814CB12
@@ -2158,7 +2158,7 @@ _0814CB8A:
 	bl sub_814DE50
 	cmp r0, 0
 	beq _0814CC02
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	movs r0, 0
 	strh r0, [r5, 0x10]
 	movs r0, 0x12
@@ -2846,7 +2846,7 @@ _0814D0D6:
 	.align 2, 0
 _0814D0FC: .4byte 0x00008c9f
 _0814D100:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814D178
 _0814D106:
 	bl IsLinkTaskFinished
@@ -3028,7 +3028,7 @@ _0814D256:
 	beq _0814D296
 	b _0814D30C
 _0814D260:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814D30C
 _0814D266:
 	bl IsLinkTaskFinished
@@ -3316,7 +3316,7 @@ _0814D47C:
 	beq _0814D498
 	b _0814D4B8
 _0814D482:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814D4B8
 _0814D488:
 	bl IsLinkTaskFinished

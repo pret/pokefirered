@@ -45,7 +45,7 @@ _0814B716:
 	ldr r0, _0814B74C @ =0x0000012f
 	bl PlayNewMapMusic
 	ldr r0, _0814B750 @ =sub_8056534
-	bl sub_80565E0
+	bl SetMainCallback1
 _0814B73E:
 	movs r0, 0
 _0814B740:

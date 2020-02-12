@@ -152,7 +152,7 @@ u8 rfu_LMAN_establishConnection(u8 parent_child, u16 connect_period, u16 name_ac
         rfu_LMAN_occureCallback(LMAN_MSG_LMAN_API_ERROR_RETURN, 1);
         return LMAN_ERROR_ILLEGAL_PARAMETER;
     }
-    if (parent_child > 1)
+    if (parent_child > MODE_PARENT)
     {
         lman.pcswitch_flag = PCSWITCH_1ST_SC_START;
         parent_child = MODE_PARENT;

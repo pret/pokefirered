@@ -1756,7 +1756,7 @@ _08081510:
 	ldr r1, [r1]
 	str r1, [r0]
 	adds r0, r5, 0
-	bl sub_800B284
+	bl IntlConvertLinkPlayerName
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl ResetBlockReceivedFlag
@@ -1785,7 +1785,7 @@ _0808154C:
 	strh r0, [r6]
 	b _0808160A
 _08081560:
-	bl sub_800AB9C
+	bl PrepareSendLinkCmd2FFE_or_RfuCmd6600
 	movs r0, 0x6
 	strh r0, [r6]
 	b _0808160A
@@ -2276,7 +2276,7 @@ _08081940:
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
 	bl m4aMPlayAllStop
-	bl sub_800AB9C
+	bl PrepareSendLinkCmd2FFE_or_RfuCmd6600
 _08081950:
 	ldrh r0, [r4]
 	adds r0, 0x1

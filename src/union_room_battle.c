@@ -183,7 +183,7 @@ void CB2_UnionRoomBattle(void)
     case 50:
         if (!UpdatePaletteFade())
         {
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             gMain.state++;
         }
         break;

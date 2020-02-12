@@ -765,9 +765,9 @@ static void sub_804C728(void)
 
             if (gWirelessCommType)
             {
-                sub_800B1F4();
+                SetWirelessCommType1();
                 OpenLink();
-                sub_80FBB20();
+                LinkRfu_CreateIdleTask();
             }
             else
             {
@@ -810,14 +810,14 @@ static void sub_804C728(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_80FBB4C();
+            LinkRfu_DestroyIdleTask();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuResourcesPtr->unk_A8 = 0;
             if (gWirelessCommType)
             {
                 sub_80FA484(TRUE);
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             }
         }
         break;
@@ -2004,7 +2004,7 @@ static void sub_804E908(void)
     {
         if (gWirelessCommType)
         {
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         }
         else
         {
@@ -2044,7 +2044,7 @@ static void sub_804E9C0(void)
 {
     if (!sub_80FA484(FALSE))
     {
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         sTradeMenuResourcesPtr->unk_6F = 13;
     }
 }

@@ -2556,7 +2556,7 @@ static void sub_8053E8C(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -2641,7 +2641,7 @@ static void sub_8053E8C(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             gMain.state = 42;
         }
         else
@@ -2660,7 +2660,7 @@ static void sub_8053E8C(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         }
         break;
     case 6:
@@ -2682,7 +2682,7 @@ static void sub_8053E8C(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
             {
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             }
             else
             {

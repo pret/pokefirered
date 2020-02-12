@@ -156,7 +156,7 @@ u8 GetCurrentMapType(void);
 u8 get_map_light_from_warp0(void);
 const struct MapHeader *warp1_get_mapheader(void);
 void sub_8055F88(void);
-void sub_8056788(void);
+void CB2_ReturnToFieldCableClub(void);
 void ResetGameStats(void);
 
 void Overworld_CreditsMainCB(void);

@@ -206,7 +206,7 @@ static void sub_807DDF0(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         task->data[0]++;
         break;
     case 1:
@@ -227,7 +227,7 @@ static void sub_807DDF0(u8 taskId)
     }
 }
 
-void sub_807DE58(void)
+void FieldCB_ReturnToFieldWirelessLink(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
@@ -632,7 +632,7 @@ static void sub_807E5EC(u8 taskId)
         break;
     case 2:
         WarpIntoMap();
-        SetMainCallback2(sub_8056788);
+        SetMainCallback2(CB2_ReturnToFieldCableClub);
         DestroyTask(taskId);
         break;
     }

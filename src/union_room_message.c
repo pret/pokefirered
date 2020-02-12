@@ -525,6 +525,7 @@ const u8 *const gUnknown_84594B0[] = {
 
 ALIGNED(4) const u8 gUnknown_84594C4[] = _("This is {SPECIAL_F7 0x00} {SPECIAL_F7 0x01}'s\nTRAINER CARD…\l{SPECIAL_F7 0x02}\pPOKéDEX: {SPECIAL_F7 0x03}\nTIME:    {SPECIAL_F7 0x04}:{SPECIAL_F7 0x05}\p");
 ALIGNED(4) const u8 gUnknown_8459504[] = _("BATTLES: {SPECIAL_F7 0x00} WINS  {SPECIAL_F7 0x02} LOSSES\nTRADES:  {SPECIAL_F7 0x03} TIMES\p“{SPECIAL_F7 0x04} {SPECIAL_F7 0x05}\n{SPECIAL_F7 0x06} {SPECIAL_F7 0x07}”\p");
+
 ALIGNED(4) const u8 gUnknown_8459544[] = _("{SPECIAL_F7 0x01}: Glad to have met you!{PAUSE 60}");
 ALIGNED(4) const u8 gUnknown_8459564[] = _("{SPECIAL_F7 0x01}: Glad to meet you!{PAUSE 60}");
 

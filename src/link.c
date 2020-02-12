@@ -144,11 +144,11 @@ static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8 taskId);
 static void LinkCB_BuildCommand5FFF(void);
 static void LinkCB_WaitAckCommand5FFF(void);
-static void sub_800ABD4(void);
-static void sub_800AC00(void);
+static void LinkFunc_Send2FFE_1(void);
+static void LinkFunc_Send2FFE_2(void);
 static void CheckErrorStatus(void);
 static void CB2_PrintErrorMessage(void);
-static void sub_800B210(void);
+static void SetWirelessCommType0(void);
 static void DisableSerial(void);
 static void EnableSerial(void);
 static bool8 IsSioMultiMaster(void);
@@ -232,7 +232,7 @@ bool8 IsWirelessAdapterConnected(void)
     if (gQuestLogState == 2 || gQuestLogState == 3)
         return FALSE;
 
-    sub_800B1F4();
+    SetWirelessCommType1();
     sub_80F86F4();
     sub_80FB128(TRUE);
     if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
@@ -241,7 +241,7 @@ bool8 IsWirelessAdapterConnected(void)
         rfu_waitREQComplete();
         return TRUE;
     }
-    sub_800B210();
+    SetWirelessCommType0();
     CloseLink();
     RestoreSerialTimer3IntrHandlers();
     return FALSE;
@@ -613,7 +613,7 @@ void ProcessRecvCmds(u8 unused)
                         linkPlayer->name[9] = 0;
                         linkPlayer->name[8] = 0;
                     }
-                    sub_800B284(linkPlayer);
+                    IntlConvertLinkPlayerName(linkPlayer);
                     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
                         || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
                     {
@@ -1384,32 +1384,32 @@ static void LinkCB_WaitAckCommand5FFF(void)
     }
 }
 
-void sub_800AB9C(void)
+void PrepareSendLinkCmd2FFE_or_RfuCmd6600(void)
 {
     if (gWirelessCommType == 1)
     {
-        sub_80FA42C();
+        LinkRfu_SetRfuFuncToSend6600();
     }
     else
     {
         if (gLinkCallback == NULL)
         {
-            gLinkCallback = sub_800ABD4;
+            gLinkCallback = LinkFunc_Send2FFE_1;
         }
         gLinkAllAcked5FFF = FALSE;
     }
 }
 
-static void sub_800ABD4(void)
+static void LinkFunc_Send2FFE_1(void)
 {
     if (gLastRecvQueueCount == 0)
     {
         BuildSendCmd(LINKCMD_0x2FFE);
-        gLinkCallback = sub_800AC00;
+        gLinkCallback = LinkFunc_Send2FFE_2;
     }
 }
 
-static void sub_800AC00(void)
+static void LinkFunc_Send2FFE_2(void)
 {
     u8 i;
     u8 linkPlayerCount;
@@ -1477,7 +1477,7 @@ void CB2_LinkError(void)
         {
             gWirelessCommType = 3;
         }
-        sub_80F85F8();
+        ResetLinkRfuGFLayer();
     }
     SetVBlankCallback(sub_800978C);
     ResetBgsAndClearDma3BusyFlags(0);
@@ -1626,7 +1626,7 @@ bool8 HasLinkErrorOccurred(void)
     return gLinkErrorOccurred;
 }
 
-void sub_800B0B4(void)
+void PrepareLocalLinkPlayerBlock(void)
 {
     struct LinkPlayerBlock * block;
 
@@ -1638,7 +1638,7 @@ void sub_800B0B4(void)
     memcpy(gBlockSendBuffer, block, sizeof(*block));
 }
 
-void sub_800B110(u32 who)
+void LinkPlayerFromBlock(u32 who)
 {
     u8 who_ = who;
     struct LinkPlayerBlock * block;
@@ -1647,7 +1647,7 @@ void sub_800B110(u32 who)
     block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
     player = &gLinkPlayers[who_];
     *player = block->linkPlayer;
-    sub_800B284(player);
+    IntlConvertLinkPlayerName(player);
     if (strcmp(block->magic1, sASCIIGameFreakInc) != 0 || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
     {
         SetMainCallback2(CB2_LinkError);
@@ -1683,7 +1683,7 @@ bool8 HandleLinkConnection(void)
     return FALSE;
 }
 
-void sub_800B1F4(void)
+void SetWirelessCommType1(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
@@ -1691,7 +1691,7 @@ void sub_800B1F4(void)
     }
 }
 
-static void sub_800B210(void)
+static void SetWirelessCommType0(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
@@ -1699,7 +1699,7 @@ static void sub_800B210(void)
     }
 }
 
-void sub_800B22C(void)
+void SetWirelessCommType0_UnusedCopy(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
@@ -1725,7 +1725,7 @@ bool32 sub_800B270(void)
     return FALSE;
 }
 
-void sub_800B284(struct LinkPlayer * player)
+void IntlConvertLinkPlayerName(struct LinkPlayer * player)
 {
     player->name[10] = player->name[8];
     ConvertInternationalString(player->name, player->language);

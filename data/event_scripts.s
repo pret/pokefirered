@@ -1170,7 +1170,6 @@ EventScript_ResetEliteFour:: @ 81A6551
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
-@ DoEasyChatScreen?
 Common_ShowEasyChatScreen:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
 	special ShowEasyChatScreen

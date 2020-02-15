@@ -2747,15 +2747,15 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGname
     u8 partnerHasNationalDex = partnerSub.hasNationalDex;
     u8 partnerIsChampion = partnerSub.isChampion;
     u8 partnerVersion = partnerSub.version;
-    u8 isNotFRLG;
+    bool8 isNotFRLG;
 
     if (partnerVersion == VERSION_FIRE_RED || partnerVersion == VERSION_LEAF_GREEN)
     {
-        isNotFRLG = 0;
+        isNotFRLG = FALSE;
     }
     else
     {
-        isNotFRLG = 1;
+        isNotFRLG = TRUE;
     }
     if (isNotFRLG)
     {

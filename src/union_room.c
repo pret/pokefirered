@@ -752,10 +752,10 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         break;
     case 3:
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
-        data->field_0 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
-        data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        data->field_0 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
+        data->field_8 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
-        BlankUnkStruct_x20Array(data->field_0->arr, 5);
+        BlankUnkStruct_x20Array(data->field_0->arr, UROOM_MAX_PARTY_SIZE);
         LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
@@ -1187,7 +1187,7 @@ static u8 LeaderUpdateGroupMembership(struct UnkStruct_Main0 * arg0)
     u8 i;
     s32 id;
 
-    for (i = 1; i < 5; i++)
+    for (i = 1; i < UROOM_MAX_PARTY_SIZE; i++)
     {
         u16 var = data->field_0->arr[i].groupScheduledAnim;
         if (var == UNION_ROOM_SPAWN_IN)
@@ -1207,11 +1207,11 @@ static u8 LeaderUpdateGroupMembership(struct UnkStruct_Main0 * arg0)
     }
 
     for (id = 0; id < RFU_CHILD_MAX; id++)
-        Appendx1Ctox20(data->field_0->arr, &data->field_4->arr[id], 5);
+        Appendx1Ctox20(data->field_0->arr, &data->field_4->arr[id], UROOM_MAX_PARTY_SIZE);
 
     if (ret != UNION_ROOM_SPAWN_OUT)
     {
-        for (id = 0; id < 5; id++)
+        for (id = 0; id < UROOM_MAX_PARTY_SIZE; id++)
         {
             if (data->field_0->arr[id].field_1B != 0)
                 ret = UNION_ROOM_SPAWN_IN;
@@ -1228,11 +1228,11 @@ static u8 UnionRoomLeaderField0CompactionAndCount(struct UnkStruct_Main0 * arg0)
     s32 i;
     u8 ret;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < UROOM_MAX_PARTY_SIZE; i++)
         data->field_8->arr[i] = data->field_0->arr[i];
 
     copiedCount = 0;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < UROOM_MAX_PARTY_SIZE; i++)
     {
         if (data->field_8->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
@@ -1242,7 +1242,7 @@ static u8 UnionRoomLeaderField0CompactionAndCount(struct UnkStruct_Main0 * arg0)
     }
 
     ret = copiedCount;
-    for (; copiedCount < 5; copiedCount++)
+    for (; copiedCount < UROOM_MAX_PARTY_SIZE; copiedCount++)
     {
         data->field_0->arr[copiedCount].gname_uname = sUnionGnameUnamePair_Dummy;
         data->field_0->arr[copiedCount].field_18 = 0;
@@ -1251,7 +1251,7 @@ static u8 UnionRoomLeaderField0CompactionAndCount(struct UnkStruct_Main0 * arg0)
         data->field_0->arr[copiedCount].field_1B = 0;
     }
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < UROOM_MAX_PARTY_SIZE; i++)
     {
         if (data->field_0->arr[i].groupScheduledAnim != UNION_ROOM_SPAWN_IN)
             continue;
@@ -2081,10 +2081,10 @@ static void Task_MEvent_Leader(u8 taskId)
         break;
     case 1:
         data->field_4 = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
-        data->field_0 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
-        data->field_8 = AllocZeroed(5 * sizeof(struct UnkStruct_x20));
+        data->field_0 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
+        data->field_8 = AllocZeroed(UROOM_MAX_PARTY_SIZE * sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x1CArray(data->field_4->arr, 4);
-        BlankUnkStruct_x20Array(data->field_0->arr, 5);
+        BlankUnkStruct_x20Array(data->field_0->arr, UROOM_MAX_PARTY_SIZE);
         LinkRfu3_SetGnameUnameFromStaticBuffers(&data->field_0->arr[0].gname_uname.gname, data->field_0->arr[0].gname_uname.uname);
         data->field_0->arr[0].field_18 = 0;
         data->field_0->arr[0].groupScheduledAnim = UNION_ROOM_SPAWN_IN;
@@ -2650,12 +2650,12 @@ static void UnionRoom_ScheduleFieldMessageAndExit(const u8 *src)
 
 static void BackUpURoomField0ToDecompressionBuffer(struct UnkStruct_URoom * data)
 {
-    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, 8 * sizeof(struct UnkStruct_x20));
+    memcpy(&gDecompressionBuffer[0x3F00], data->field_0, UROOM_MAX_GROUP_COUNT * sizeof(struct UnkStruct_x20));
 }
 
 static void RestoreURoomField0FromDecompressionBuffer(struct UnkStruct_URoom * data)
 {
-    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], 8 * sizeof(struct UnkStruct_x20));
+    memcpy(data->field_0, &gDecompressionBuffer[0x3F00], UROOM_MAX_GROUP_COUNT * sizeof(struct UnkStruct_x20));
 }
 
 static void Task_RunUnionRoom(u8 taskId)
@@ -2673,7 +2673,7 @@ static void Task_RunUnionRoom(u8 taskId)
         data->field_C = AllocZeroed(RFU_CHILD_MAX * sizeof(struct UnkStruct_x1C));
         data->field_0 = AllocZeroed(UROOM_MAX_GROUP_COUNT * sizeof(struct UnkStruct_x20));
         data->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
-        BlankUnkStruct_x20Array(data->field_0->arr, 8);
+        BlankUnkStruct_x20Array(data->field_0->arr, UROOM_MAX_GROUP_COUNT);
         sPlayerCurrActivity = IN_UNION_ROOM;
         data->field_20 = CreateTask_SearchForChildOrParent(data->field_C, data->field_4, LINK_GROUP_UNION_ROOM_RESUME);
         ZeroUnionObjWork(data->unionObjs);
@@ -3497,8 +3497,8 @@ static void Task_InitUnionRoom(u8 taskId)
         BlankUnkStruct_x1CArray(structPtr->field_4->arr, 4);
         structPtr->field_C = AllocZeroed(4 * sizeof(struct UnkStruct_x1C));
         BlankUnkStruct_x1CArray(structPtr->field_C->arr, 4);
-        structPtr->field_0 = AllocZeroed(8 * sizeof(struct UnkStruct_x20));
-        BlankUnkStruct_x20Array(structPtr->field_0->arr, 8);
+        structPtr->field_0 = AllocZeroed(UROOM_MAX_GROUP_COUNT * sizeof(struct UnkStruct_x20));
+        BlankUnkStruct_x20Array(structPtr->field_0->arr, UROOM_MAX_GROUP_COUNT);
         structPtr->field_8 = AllocZeroed(sizeof(struct UnkStruct_x20));
         BlankUnkStruct_x20Array(&structPtr->field_8->arr[0], 1);
         structPtr->field_20 = CreateTask_SearchForChildOrParent(structPtr->field_C, structPtr->field_4, LINK_GROUP_UNION_ROOM_INIT);
@@ -3577,7 +3577,7 @@ static u8 HandlePlayerListUpdate(void)
     }
 
     // Handle changes to existing player statuses
-    for (j = 0; j < 8; j++)
+    for (j = 0; j < UROOM_MAX_GROUP_COUNT; j++)
     {
         if (structPtr->field_0->arr[j].groupScheduledAnim != UNION_ROOM_SPAWN_NONE)
         {
@@ -3635,7 +3635,7 @@ static u8 HandlePlayerListUpdate(void)
     // Update the players list
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
-        if (Appendx1Ctox20(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i], 8) != 0xFF)
+        if (Appendx1Ctox20(&structPtr->field_0->arr[0], &structPtr->field_4->arr[i], UROOM_MAX_GROUP_COUNT) != 0xFF)
             r7 = 1;
     }
 
@@ -3928,7 +3928,7 @@ static s32 TradeBoardMenuHandler(u8 *state_p, u8 *win_id_p, u8 *list_menu_id_p, 
         input = ListMenu_ProcessInput(*list_menu_id_p);
         if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
-            if (input == 8 || JOY_NEW(B_BUTTON))
+            if (input == UROOM_MAX_GROUP_COUNT || JOY_NEW(B_BUTTON))
             {
                 DestroyListMenuTask(*list_menu_id_p, NULL, NULL);
                 ClearStdWindowAndFrame(*win_id_p, TRUE);
@@ -4081,7 +4081,7 @@ static bool8 AreGnameUnameDifferent(struct UnionGnameUnamePair * left, const str
         }
     }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < RFU_USER_NAME_LENGTH; i++)
     {
         if (left->uname[i] != right->uname[i])
         {
@@ -4336,7 +4336,7 @@ static void TradeBoardListMenuItemPrintFunc(u8 windowId, s32 itemId, u8 y)
     struct UnkStruct_Leader * leader = sUnionRoomMain.leader;
     struct GFtgtGname * rfu;
     s32 i, j;
-    u8 uname[8];
+    u8 uname[RFU_USER_NAME_LENGTH];
 
     if (itemId == -3 && y == sTradeBoardListMenuTemplate.upText_Y)
     {
@@ -4349,7 +4349,7 @@ static void TradeBoardListMenuItemPrintFunc(u8 windowId, s32 itemId, u8 y)
     else
     {
         j = 0;
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < UROOM_MAX_GROUP_COUNT; i++)
         {
             if (leader->field_0->arr[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && leader->field_0->arr[i].gname_uname.gname.species != SPECIES_NONE)
             {
@@ -4370,7 +4370,7 @@ static s32 GetIndexOfNthTradeBoardOffer(struct UnkStruct_x20 * x20, s32 n)
     s32 i;
     s32 j = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < UROOM_MAX_GROUP_COUNT; i++)
     {
         if (x20[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN && x20[i].gname_uname.gname.species != SPECIES_NONE)
         {

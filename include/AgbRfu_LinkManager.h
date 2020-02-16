@@ -110,42 +110,6 @@
 #define LMAN_FORCED_STOP_AND_RFU_RESET      0x17            // Attempt to forcibly stop Link Manager using rfu_LMAN_stopLMAN(1).
 #define LMAN_STATE_WAIT_CHANGE_CLOCK_MASTER 0x18            // Attempt to return to AGB clock master after child fails in sending game name.
 
-// RfuTgtData.gname is read as these structs.
-struct GFtgtGnameSub
-{
-    u16 language:4;
-    u16 hasNews:1;
-    u16 hasCard:1;
-    u16 unk_00_6:1;
-    u16 isChampion:1;
-    u16 hasNationalDex:1;
-    u16 gameClear:1;
-    u16 version:4;
-    u16 unk_01_6:2;
-    u8 playerTrainerId[2];
-};
-
-struct __attribute__((packed, aligned(2))) GFtgtGname
-{
-    struct GFtgtGnameSub unk_00;
-    u8 child_sprite_gender[RFU_CHILD_MAX]; // u8 sprite_idx:3;
-    // u8 gender:1;
-    // u8 unk_4:3
-    // u8 active:1
-    u16 species:10;
-    u16 type:6;
-    u8 activity:7;
-    u8 started:1;
-    u8 playerGender:1;
-    u8 level:7;
-    u8 padding;
-}; // size: RFU_GNAME_SIZE
-
-struct Padded_U8
-{
-    u8 value;
-};
-
 // Parameter group used in initial setting run of the link manager (rfu_LMAN_initializeRFU)
 typedef struct InitializeParametersTag {
     // rfu_REQ_configSystem argument
@@ -177,20 +141,6 @@ typedef struct VblankTimerTag {
     u16 count_max;                            // Maximum count value (x16.7ms)
     u16 count[RFU_CHILD_MAX];                // Current count value (x 16.7 ms) for each connected slot
 }VBL_TIMER;
-
-struct UnkLinkRfuStruct_02022B44
-{
-    u8 fill_00[6];
-    u16 unk_06;
-    u8 fill_08[6];
-    vu8 unk_0e;
-    u8 unk_0f;
-    u8 fill_10[0x54];
-    u16 unk_64;
-    u8 fill_66[0x1d];
-    u8 unk_83;
-    u8 fill_84[0x58];
-};
 
 typedef struct linkManagerTag
 {

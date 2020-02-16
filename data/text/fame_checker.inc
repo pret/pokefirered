@@ -1413,7 +1413,7 @@ PokemonJournal_Text_SpecialFeatureKoga:: @ 81B16A8
 	.string "He even concocts medicine to nurse\n"
 	.string "his POKéMON to health.$"
 
-gUnknown_81B1753:: @ 81B1753
+PokemonJournal_Text_SpecialFeatureSabrina:: @ 81B1753
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: SAFFRON GYM\n"
 	.string "LEADER SABRINA!\p"
@@ -1437,7 +1437,7 @@ gUnknown_81B187F:: @ 81B187F
 	.string "and cool battling style, LORELEI\l"
 	.string "has a surprising secret!$"
 
-gUnknown_81B1913:: @ 81B1913
+PokemonJournal_Text_SpecialFeatureBruno:: @ 81B1913
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's BRUNO!\p"

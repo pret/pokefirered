@@ -406,7 +406,7 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
     }
 }
 
-void mapheader_run_script_with_tag_x1(void)
+void RunOnLoadMapScript(void)
 {
     mapheader_run_script_by_tag(1);
 }
@@ -506,7 +506,7 @@ u8 *GetRamScript(u8 objectId, u8 *script)
     }
 }
 
-bool32 sub_8069DFC(void)
+bool32 ValidateRamScript(void)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)

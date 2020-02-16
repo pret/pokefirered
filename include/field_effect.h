@@ -8,7 +8,7 @@ extern u32 gFieldEffectArguments[8];
 extern void (*gPostMenuFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 
-u8 FieldEffectStart(u8);
+u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
 void CreateTeleportFieldEffectTask(void);

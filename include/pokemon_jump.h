@@ -5,6 +5,6 @@
 
 void ResetPokeJumpResults(void);
 bool32 IsSpeciesAllowedInPokemonJump(u16 species);
-void sub_8147AA8(u16 species, MainCallback callback);
+void StartPokemonJump(u16 species, MainCallback callback);
 
 #endif // GUARD_POKEMON_JUMP_H

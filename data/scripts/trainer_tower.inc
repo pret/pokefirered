@@ -1,320 +1,297 @@
-SevenIsland_TrainerTower_1F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_2F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_3F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_4F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_5F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_6F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_7F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_8F_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_Elevator_MapScript1_1C4F54:: @ 81C4F54
-SevenIsland_TrainerTower_Roof_MapScript1_1C4F54:: @ 81C4F54
+@ Local IDs apply to all floors (not lobby or roof)
+.equ LOCALID_TRAINER_DOUBLES1, 2
+.equ LOCALID_TRAINER_SINGLES,  3
+.equ LOCALID_TRAINER_KNOCKOUT, 4
+.equ LOCALID_TRAINER_DOUBLES2, 5
+
+.equ HIDE_TRAINER_DOUBLES1, FLAG_TEMP_2
+.equ HIDE_TRAINER_SINGLES,  FLAG_TEMP_3
+.equ HIDE_TRAINER_KNOCKOUT, FLAG_TEMP_4
+.equ HIDE_TRAINER_DOUBLES2, FLAG_TEMP_5
+.equ HIDE_OWNER,            FLAG_TEMP_6
+
+.equ DISABLE_SINGLES_TRIGGER,  VAR_TEMP_E
+.equ DISABLE_DOUBLES_TRIGGER,  VAR_TEMP_F
+
+
+@@ Map scripts
+
+TrainerTower_OnResume:: @ 81C4F54
 	setvar VAR_TEMP_2, 0
-	setvar VAR_0x8004, 10
-	special sub_815D9E8
+	ttower_resumetimer
 	end
 
-SevenIsland_TrainerTower_1F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_2F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_3F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_4F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_5F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_6F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_7F_MapScript2_1C4F62:: @ 81C4F62
-SevenIsland_TrainerTower_8F_MapScript2_1C4F62:: @ 81C4F62
-	setvar VAR_0x8004, 0
-	special sub_815D9E8
+TrainerTower_OnTransition:: @ 81C4F62
+	ttower_initfloor
 	switch VAR_RESULT
-	case 0, EventScript_1C4FA7
-	case 1, EventScript_1C4FC5
-	case 2, EventScript_1C5019
-	setflag FLAG_TEMP_2
-	setflag FLAG_TEMP_3
-	setflag FLAG_TEMP_4
-	setflag FLAG_TEMP_5
-	setvar VAR_TEMP_E, 1
-	setvar VAR_TEMP_F, 1
+	case CHALLENGE_TYPE_SINGLE, TrainerTower_EventScript_SetObjectsSingles
+	case CHALLENGE_TYPE_DOUBLE, TrainerTower_EventScript_SetObjectsDoubles
+	case CHALLENGE_TYPE_KNOCKOUT, TrainerTower_EventScript_SetObjectsKnockout
+	setflag HIDE_TRAINER_DOUBLES1
+	setflag HIDE_TRAINER_SINGLES
+	setflag HIDE_TRAINER_KNOCKOUT
+	setflag HIDE_TRAINER_DOUBLES2
+	setvar DISABLE_SINGLES_TRIGGER, TRUE
+	setvar DISABLE_DOUBLES_TRIGGER, TRUE
 	end
 
-EventScript_1C4FA7:: @ 81C4FA7
-	setflag FLAG_TEMP_2
-	setflag FLAG_TEMP_4
-	setflag FLAG_TEMP_5
-	setvar VAR_TEMP_F, 1
-	setobjectxyperm 3, 15, 13
-	setobjectmovementtype 3, 9
-	goto EventScript_1C5042
+TrainerTower_EventScript_SetObjectsSingles:: @ 81C4FA7
+	setflag HIDE_TRAINER_DOUBLES1
+	setflag HIDE_TRAINER_KNOCKOUT
+	setflag HIDE_TRAINER_DOUBLES2
+	setvar DISABLE_DOUBLES_TRIGGER, TRUE
+	setobjectxyperm       LOCALID_TRAINER_SINGLES, 15, 13
+	setobjectmovementtype LOCALID_TRAINER_SINGLES, MOVEMENT_TYPE_FACE_LEFT
+	goto TrainerTower_EventScript_HideOwner
 
-EventScript_1C4FC5:: @ 81C4FC5
-	setflag FLAG_TEMP_3
-	setflag FLAG_TEMP_4
-	setvar VAR_TEMP_E, 1
-	setvar VAR_0x8004, 5
-	special sub_815D9E8
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1C4FFE
-	setobjectxyperm 2, 10, 12
-	setobjectmovementtype 2, 9
-	setobjectxyperm 5, 10, 13
-	setobjectmovementtype 5, 9
-	goto EventScript_1C5042
+TrainerTower_EventScript_SetObjectsDoubles:: @ 81C4FC5
+	setflag HIDE_TRAINER_SINGLES
+	setflag HIDE_TRAINER_KNOCKOUT
+	setvar DISABLE_SINGLES_TRIGGER, TRUE
+	ttower_isfloorcleared
+	compare VAR_RESULT, TRUE
+	goto_if_eq TrainerTower_EventScript_SetObjectsDoublesAlreadyBeaten
+	setobjectxyperm       LOCALID_TRAINER_DOUBLES1, 10, 12
+	setobjectmovementtype LOCALID_TRAINER_DOUBLES1, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm       LOCALID_TRAINER_DOUBLES2, 10, 13
+	setobjectmovementtype LOCALID_TRAINER_DOUBLES2, MOVEMENT_TYPE_FACE_LEFT
+	goto TrainerTower_EventScript_HideOwner
 
-EventScript_1C4FFE:: @ 81C4FFE
-	setobjectxyperm 2, 10, 12
-	setobjectmovementtype 2, 8
-	setobjectxyperm 5, 11, 12
-	setobjectmovementtype 5, 8
-	goto EventScript_1C5042
+TrainerTower_EventScript_SetObjectsDoublesAlreadyBeaten:: @ 81C4FFE
+	setobjectxyperm       LOCALID_TRAINER_DOUBLES1, 10, 12
+	setobjectmovementtype LOCALID_TRAINER_DOUBLES1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm       LOCALID_TRAINER_DOUBLES2, 11, 12
+	setobjectmovementtype LOCALID_TRAINER_DOUBLES2, MOVEMENT_TYPE_FACE_DOWN
+	goto TrainerTower_EventScript_HideOwner
 
-EventScript_1C5019:: @ 81C5019
-	setflag FLAG_TEMP_5
-	setvar VAR_TEMP_F, 1
-	setobjectxyperm 2, 10, 10
-	setobjectmovementtype 2, 8
-	setobjectxyperm 3, 14, 13
-	setobjectmovementtype 3, 9
-	setobjectxyperm 4, 10, 16
-	setobjectmovementtype 4, 7
-EventScript_1C5042:
-	setflag FLAG_TEMP_6
+@ Knockout challenge re-uses trainer objects
+TrainerTower_EventScript_SetObjectsKnockout:: @ 81C5019
+	setflag HIDE_TRAINER_DOUBLES2
+	setvar DISABLE_DOUBLES_TRIGGER, TRUE
+	setobjectxyperm       LOCALID_TRAINER_DOUBLES1, 10, 10
+	setobjectmovementtype LOCALID_TRAINER_DOUBLES1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm       LOCALID_TRAINER_SINGLES, 14, 13
+	setobjectmovementtype LOCALID_TRAINER_SINGLES, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm       LOCALID_TRAINER_KNOCKOUT, 10, 16
+	setobjectmovementtype LOCALID_TRAINER_KNOCKOUT, MOVEMENT_TYPE_FACE_UP
+TrainerTower_EventScript_HideOwner:
+	setflag HIDE_OWNER
 	end
 
-SevenIsland_TrainerTower_1F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_2F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_3F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_4F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_5F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_6F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_7F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_8F_MapScript3_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_Elevator_MapScript2_1C5046:: @ 81C5046
-SevenIsland_TrainerTower_Roof_MapScript2_1C5046:: @ 81C5046
-	map_script_2 VAR_TEMP_2, 0, EventScript_1C5050
+TrainerTower_OnFrame:: @ 81C5046
+	map_script_2 VAR_TEMP_2, 0, TrainerTower_EventScript_EnterFloor
 	.2byte 0
 
-EventScript_1C5050:: @ 81C5050
+TrainerTower_EventScript_EnterFloor:: @ 81C5050
 	setvar VAR_TEMP_2, 1
-	setvar VAR_0x8004, 5
-	special sub_815D9E8
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1C5072
-	setvar VAR_TEMP_E, 1
-	setvar VAR_TEMP_F, 1
-EventScript_1C5072:
-	setvar VAR_0x8004, 18
-	special sub_815D9E8
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1C5086
+	ttower_isfloorcleared
+	compare VAR_RESULT, FALSE
+	goto_if_eq TrainerTower_EventScript_EndEnterFloor
+	setvar DISABLE_SINGLES_TRIGGER, TRUE
+	setvar DISABLE_DOUBLES_TRIGGER, TRUE
+TrainerTower_EventScript_EndEnterFloor:
+	ttower_shouldexit
+	compare VAR_RESULT, TRUE
+	goto_if_eq TrainerTower_EventScript_WarpToLobby
 	end
 
-EventScript_1C5086:: @ 81C5086
-	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7
+@ Never reached
+TrainerTower_EventScript_WarpToLobby:: @ 81C5086
+	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
 	waitstate
-EventScript_1C508F::
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special sub_815D9E8
+
+
+@@ Battle scripts
+
+TrainerTower_EventScript_TriggerBattle::
+	ttower_getchallengetype
 	switch VAR_RESULT
-	case 0, EventScript_1C50C2
-	case 1, EventScript_1C510D
-	case 2, EventScript_1C515C
-EventScript_1C50C2:
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 3, Movement_ExclamationMark
+	case CHALLENGE_TYPE_SINGLE, TrainerTower_EventScript_DoSingleBattle
+	case CHALLENGE_TYPE_DOUBLE, TrainerTower_EventScript_DoDoubleBattle
+	case CHALLENGE_TYPE_KNOCKOUT, TrainerTower_EventScript_DoKnockoutBattle
+
+TrainerTower_EventScript_DoSingleBattle:
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_SINGLES, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_Delay48
+	applymovement LOCALID_TRAINER_SINGLES, Movement_Delay48
 	waitmovement 0
-	setvar VAR_TEMP_E, 1
-	applymovement 3, Movement_1C5541
+	setvar DISABLE_SINGLES_TRIGGER, TRUE
+	applymovement LOCALID_TRAINER_SINGLES, TrainerTower_Movement_SingleTrainerApproach
 	waitmovement 0
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	setvar VAR_0x8006, 0
-	special sub_815D9E8
+	ttower_getspeech TRAINER_TOWER_TEXT_INTRO, 0
 	msgbox gStringVar4
 	closemessage
-	goto EventScript_1C5219
+	goto TrainerTower_EventScript_DoBattle
 
-EventScript_1C510D:: @ 81C510D
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_TEMP_3
-	special sub_815D9E8
+TrainerTower_EventScript_DoDoubleBattle:: @ 81C510D
+	ttower_getspeech TRAINER_TOWER_TEXT_INTRO, VAR_TEMP_3
 	msgbox gStringVar4
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
+	setvar VAR_0x8004, TRAINER_TOWER_FUNC_GET_SPEECH
+	setvar VAR_0x8005, TRAINER_TOWER_TEXT_INTRO
 	addvar VAR_TEMP_3, 1
 	compare VAR_TEMP_3, 1
-	goto_if_eq EventScript_1C5146
+	goto_if_eq TrainerTower_EventScript_DoSecondTrainerIntro
 	setvar VAR_TEMP_3, 0
-EventScript_1C5146:
+TrainerTower_EventScript_DoSecondTrainerIntro:
 	copyvar VAR_0x8006, VAR_TEMP_3
-	special sub_815D9E8
+	special CallTrainerTowerFunc
 	msgbox gStringVar4
 	closemessage
-	goto EventScript_1C5219
+	goto TrainerTower_EventScript_DoBattle
 
-EventScript_1C515C:: @ 81C515C
+TrainerTower_EventScript_DoKnockoutBattle:: @ 81C515C
 	switch VAR_TEMP_1
-	case 0, EventScript_1C5182
-	case 1, EventScript_1C51AD
-	case 2, EventScript_1C51D8
-EventScript_1C5182:
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 4, Movement_ExclamationMark
-	waitmovement 0
-	applymovement 4, Movement_Delay48
-	waitmovement 0
-	applymovement 4, Movement_1C5546
-	waitmovement 0
-	goto EventScript_1C51FE
+	case 0, TrainerTower_EventScript_DoKnockoutBattle1
+	case 1, TrainerTower_EventScript_DoKnockoutBattle2
+	case 2, TrainerTower_EventScript_DoKnockoutBattle3
 
-EventScript_1C51AD:: @ 81C51AD
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 2, Movement_ExclamationMark
+TrainerTower_EventScript_DoKnockoutBattle1:
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_KNOCKOUT, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_Delay48
+	applymovement LOCALID_TRAINER_KNOCKOUT, Movement_Delay48
 	waitmovement 0
-	applymovement 2, Movement_1C5549
+	applymovement LOCALID_TRAINER_KNOCKOUT, TrainerTower_Movement_BottomKnockoutTrainerApproach
 	waitmovement 0
-	goto EventScript_1C51FE
+	goto TrainerTower_EventScript_DoKnockoutBattleIntro
 
-EventScript_1C51D8:: @ 81C51D8
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 3, Movement_ExclamationMark
+TrainerTower_EventScript_DoKnockoutBattle2:: @ 81C51AD
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_DOUBLES1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_Delay48
+	applymovement LOCALID_TRAINER_DOUBLES1, Movement_Delay48
 	waitmovement 0
-	applymovement 3, Movement_1C5542
+	applymovement LOCALID_TRAINER_DOUBLES1, TrainerTower_Movement_TopKnockoutTrainerApproach
 	waitmovement 0
-EventScript_1C51FE:
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	copyvar VAR_0x8006, VAR_TEMP_1
-	special sub_815D9E8
+	goto TrainerTower_EventScript_DoKnockoutBattleIntro
+
+TrainerTower_EventScript_DoKnockoutBattle3:: @ 81C51D8
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_SINGLES, Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_TRAINER_SINGLES, Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_TRAINER_SINGLES, TrainerTower_Movement_RightKnockoutTrainerApproach
+	waitmovement 0
+TrainerTower_EventScript_DoKnockoutBattleIntro:
+	ttower_getspeech TRAINER_TOWER_TEXT_INTRO, VAR_TEMP_1
 	msgbox gStringVar4
 	closemessage
-EventScript_1C5219:
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, 0
-	special sub_815D9E8
+TrainerTower_EventScript_DoBattle:
+	ttower_dobattle
 	waitstate
 	switch VAR_RESULT
-	case 1, EventScript_1C524D
-	case 2, EventScript_1C52E0
-	case 3, EventScript_1C52E0
-EventScript_1C524D:
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special sub_815D9E8
+	case B_OUTCOME_WON, TrainerTower_EventScript_WonBattle
+	case B_OUTCOME_LOST, TrainerTower_EventScript_WarpToLobbyLost
+	case B_OUTCOME_DREW, TrainerTower_EventScript_WarpToLobbyLost
+TrainerTower_EventScript_WonBattle:
+	ttower_getchallengetype
 	switch VAR_RESULT
-	case 0, EventScript_1C52D7
-	case 1, EventScript_1C52BA
-	case 2, EventScript_1C5280
-EventScript_1C5280:
+	case CHALLENGE_TYPE_SINGLE, TrainerTower_EventScript_SetFloorCleared
+	case CHALLENGE_TYPE_DOUBLE, TrainerTower_EventScript_MoveDoublesTrainers
+	case CHALLENGE_TYPE_KNOCKOUT, TrainerTower_EventScript_CheckNextKnockoutBattle
+
+TrainerTower_EventScript_CheckNextKnockoutBattle:
 	switch VAR_TEMP_1
-	case 0, EventScript_1C52A6
-	case 1, EventScript_1C52B0
-	case 2, EventScript_1C52D0
-EventScript_1C52A6:
-	addvar VAR_TEMP_1, 1
-	goto EventScript_1C515C
+	case 0, TrainerTower_EventScript_DoSecondKnockoutBattle
+	case 1, TrainerTower_EventScript_DoThirdKnockoutBattle
+	case 2, TrainerTower_EventScript_MoveLastKnockoutTrainer
 
-EventScript_1C52B0:: @ 81C52B0
+TrainerTower_EventScript_DoSecondKnockoutBattle:
 	addvar VAR_TEMP_1, 1
-	goto EventScript_1C515C
+	goto TrainerTower_EventScript_DoKnockoutBattle
 
-EventScript_1C52BA:: @ 81C52BA
-	applymovement 5, Movement_1C554C
+TrainerTower_EventScript_DoThirdKnockoutBattle:: @ 81C52B0
+	addvar VAR_TEMP_1, 1
+	goto TrainerTower_EventScript_DoKnockoutBattle
+
+TrainerTower_EventScript_MoveDoublesTrainers:: @ 81C52BA
+	applymovement LOCALID_TRAINER_DOUBLES2, TrainerTower_Movement_DoublesTrainer2OutOfWay
 	waitmovement 0
-	applymovement 2, Movement_1C5550
-	goto EventScript_1C52D7
+	applymovement LOCALID_TRAINER_DOUBLES1, TrainerTower_Movement_DoublesTrainer1FaceDown
+	goto TrainerTower_EventScript_SetFloorCleared
 
-EventScript_1C52D0:: @ 81C52D0
-	applymovement 3, Movement_1C554D
-EventScript_1C52D7:
-	setvar VAR_0x8004, 4
-	special sub_815D9E8
+TrainerTower_EventScript_MoveLastKnockoutTrainer:: @ 81C52D0
+	applymovement LOCALID_TRAINER_SINGLES, TrainerTower_Movement_LastKnockoutTrainerOutOfWay
+TrainerTower_EventScript_SetFloorCleared:
+	ttower_clearedfloor
 	end
 
-EventScript_1C52E0:: @ 81C52E0
+TrainerTower_EventScript_WarpToLobbyLost:: @ 81C52E0
 	special HealPlayerParty
-	setvar VAR_0x8004, 11
-	special sub_815D9E8
-	warp MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY, 255, 9, 7
+	ttower_setlost
+	warp MAP_TRAINER_TOWER_LOBBY, 255, 9, 7
 	waitstate
 
-EventScript_1C52F4:: @ 81C52F4
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special sub_815D9E8
-	switch VAR_RESULT
-	case 0, EventScript_1C5327
-	case 1, EventScript_1C5327
-	case 2, EventScript_1C5331
-EventScript_1C5327:
-	setvar VAR_0x8006, 0
-	goto EventScript_1C5391
 
-EventScript_1C5331:: @ 81C5331
+@@ Speaking to trainers after battle
+
+TrainerTower_EventScript_SpeakToDoublesTrainer1:: @ 81C52F4
+	ttower_getchallengetype
+	switch VAR_RESULT
+	case CHALLENGE_TYPE_SINGLE, TrainerTower_EventScript_DoublesTrainer1PostBattle
+	case CHALLENGE_TYPE_DOUBLE, TrainerTower_EventScript_DoublesTrainer1PostBattle
+	case CHALLENGE_TYPE_KNOCKOUT, TrainerTower_EventScript_KnockoutTrainer2PostBattle
+TrainerTower_EventScript_DoublesTrainer1PostBattle:
+	setvar VAR_0x8006, 0
+	goto TrainerTower_EventScript_DoPostBattleText
+
+TrainerTower_EventScript_KnockoutTrainer2PostBattle:: @ 81C5331
 	setvar VAR_0x8006, 1
-	goto EventScript_1C5391
+	goto TrainerTower_EventScript_DoPostBattleText
 
-EventScript_1C533B:: @ 81C533B
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special sub_815D9E8
+TrainerTower_EventScript_SpeakToSinglesTrainer:: @ 81C533B
+	ttower_getchallengetype
 	switch VAR_RESULT
-	case 0, EventScript_1C536E
-	case 1, EventScript_1C536E
-	case 2, EventScript_1C5378
-EventScript_1C536E:
+	case CHALLENGE_TYPE_SINGLE, TrainerTower_EventScript_SinglesTrainerPostBattle
+	case CHALLENGE_TYPE_DOUBLE, TrainerTower_EventScript_SinglesTrainerPostBattle
+	case CHALLENGE_TYPE_KNOCKOUT, TrainerTower_EventScript_KnockoutTrainer3PostBattle
+TrainerTower_EventScript_SinglesTrainerPostBattle:
 	setvar VAR_0x8006, 0
-	goto EventScript_1C5391
+	goto TrainerTower_EventScript_DoPostBattleText
 
-EventScript_1C5378:: @ 81C5378
+TrainerTower_EventScript_KnockoutTrainer3PostBattle:: @ 81C5378
 	setvar VAR_0x8006, 2
-	goto EventScript_1C5391
+	goto TrainerTower_EventScript_DoPostBattleText
 
-EventScript_1C5382:: @ 81C5382
+TrainerTower_EventScript_SpeakToKnockoutTrainer:: @ 81C5382
 	setvar VAR_0x8006, 0
-	goto EventScript_1C5391
+	goto TrainerTower_EventScript_DoPostBattleText
 
-EventScript_1C538C:: @ 81C538C
+TrainerTower_EventScript_SpeakToDoublesTrainer2:: @ 81C538C
 	setvar VAR_0x8006, 1
-EventScript_1C5391:
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 5
-	special sub_815D9E8
+TrainerTower_EventScript_DoPostBattleText:
+	ttower_getspeech TRAINER_TOWER_TEXT_AFTER
 	lock
 	faceplayer
 	msgbox gStringVar4
 	release
 	return
 
-EventScript_1C53AA:: @ 81C53AA
+
+@@ Speaking to owner
+
+TrainerTower_EventScript_SpeakToOwner:: @ 81C53AA
 	lock
 	faceplayer
-	setvar VAR_0x8004, 7
-	special sub_815D9E8
+	ttower_getownerstate
 	switch VAR_RESULT
-	case 0, EventScript_1C53DA
-	case 1, EventScript_1C53E2
-	case 2, EventScript_1C5492
-EventScript_1C53DA:
-	msgbox Text_17CA5A
-EventScript_1C53E2:
-	setvar VAR_0x8004, 8
-	special sub_815D9E8
+	case 0, TrainerTower_Roof_EventScript_Arrived
+	case 1, TrainerTower_Roof_EventScript_GivePrize
+	case 2, TrainerTower_Roof_EventScript_OwnerEnd
+
+TrainerTower_Roof_EventScript_Arrived:
+	msgbox TrainerTower_Roof_Text_ImOwnerBattledPerfectly
+TrainerTower_Roof_EventScript_GivePrize:
+	ttower_giveprize
 	switch VAR_RESULT
-	case 0, EventScript_1C5410
-	case 1, EventScript_1C543A
-	case 2, EventScript_1C544F
-EventScript_1C5410:
-	msgbox Text_17CB09
+	case 0, TrainerTower_Roof_EventScript_ReceivePrize
+	case 1, TrainerTower_Roof_EventScript_NoRoomForPrize
+	case 2, TrainerTower_Roof_EventScript_CheckFinalTime
+
+TrainerTower_Roof_EventScript_ReceivePrize:
+	msgbox TrainerTower_Roof_Text_ThisIsForYou
 	textcolor 3
 	playfanfare MUS_FANFA1
 	message Text_ObtainedTheX
@@ -323,128 +300,105 @@ EventScript_1C5410:
 	getstdstring 2, STDSTRING_ITEMS_POCKET
 	msgbox Text_PutItemAway
 	call EventScript_1A6675
-	goto EventScript_1C544F
+	goto TrainerTower_Roof_EventScript_CheckFinalTime
 
-EventScript_1C543A:: @ 81C543A
-	msgbox Text_17CB09
+TrainerTower_Roof_EventScript_NoRoomForPrize:: @ 81C543A
+	msgbox TrainerTower_Roof_Text_ThisIsForYou
 	msgbox Text_BagIsFull
-	goto EventScript_1C544F
+	goto TrainerTower_Roof_EventScript_CheckFinalTime
 
-EventScript_1C544F:: @ 81C544F
-	setvar VAR_0x8004, 9
-	special sub_815D9E8
+TrainerTower_Roof_EventScript_CheckFinalTime:: @ 81C544F
+	ttower_checkfinaltime
 	switch VAR_RESULT
-	case 0, EventScript_1C547D
-	case 1, EventScript_1C548A
-	case 2, EventScript_1C5492
-EventScript_1C547D:
-	msgbox Text_17CB1A
-	goto EventScript_1C5492
+	case 0, TrainerTower_Roof_EventScript_NewRecord
+	case 1, TrainerTower_Roof_EventScript_NoNewRecord
+	case 2, TrainerTower_Roof_EventScript_OwnerEnd
 
-EventScript_1C548A:: @ 81C548A
-	msgbox Text_17CBC0
-EventScript_1C5492:
-	msgbox Text_17CBF5
+TrainerTower_Roof_EventScript_NewRecord:
+	msgbox TrainerTower_Roof_Text_DoneItInRecordTime
+	goto TrainerTower_Roof_EventScript_OwnerEnd
+
+TrainerTower_Roof_EventScript_NoNewRecord:: @ 81C548A
+	msgbox TrainerTower_Roof_Text_TookSweetTimeGettingHere
+TrainerTower_Roof_EventScript_OwnerEnd:
+	msgbox TrainerTower_Roof_Text_IdLikeToSeeBetterTime
 	release
 	return
 
-EventScript_1C549C:: @ 81C549C
+TrainerTower_EventScript_ShowTime:: @ 81C549C
 	lockall
-	setvar VAR_0x8004, 13
-	special sub_815D9E8
-	msgbox Text_17CC56
+	ttower_gettime
+	msgbox TrainerTower_Text_XMinYZSec
 	releaseall
 	end
 
-SevenIsland_TrainerTower_2F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_4F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_6F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_8F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_5F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_7F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_3F_EventScript_1C54AF:: @ 81C54AF
-SevenIsland_TrainerTower_1F_EventScript_1C54AF:: @ 81C54AF
-	goto EventScript_1C508F
 
-SevenIsland_TrainerTower_2F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_4F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_6F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_8F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_5F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_7F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_3F_EventScript_1C54B4:: @ 81C54B4
-SevenIsland_TrainerTower_1F_EventScript_1C54B4:: @ 81C54B4
+@@ Battle triggers
+
+TrainerTower_EventScript_SingleBattleTrigger:: @ 81C54AF
+	goto TrainerTower_EventScript_TriggerBattle
+
+TrainerTower_EventScript_DoubleBattleTriggerTop:: @ 81C54B4
 	setvar VAR_TEMP_3, 0
-	setvar VAR_0x8004, 16
-	special sub_815D9E8
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_1C5528
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 2, Movement_ExclamationMark
+	ttower_checkdoubles
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne TrainerTower_EventScript_IneligibleForDoubleBattle
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_DOUBLES1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_Delay48
-	goto EventScript_1C551B
+	applymovement LOCALID_TRAINER_DOUBLES1, Movement_Delay48
+	goto TrainerTower_EventScript_TriggerDoubleBattle
 
-SevenIsland_TrainerTower_2F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_4F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_6F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_8F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_5F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_7F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_3F_EventScript_1C54EA:: @ 81C54EA
-SevenIsland_TrainerTower_1F_EventScript_1C54EA:: @ 81C54EA
+TrainerTower_EventScript_DoubleBattleTriggerBottom:: @ 81C54EA
 	setvar VAR_TEMP_3, 1
-	setvar VAR_0x8004, 16
-	special sub_815D9E8
-	compare VAR_RESULT, 0
-	goto_if_ne EventScript_1C5528
-	setvar VAR_0x8004, 19
-	special sub_815D9E8
-	applymovement 5, Movement_ExclamationMark
+	ttower_checkdoubles
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne TrainerTower_EventScript_IneligibleForDoubleBattle
+	ttower_encountermusic
+	applymovement LOCALID_TRAINER_DOUBLES2, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 5, Movement_Delay48
-EventScript_1C551B:
+	applymovement LOCALID_TRAINER_DOUBLES2, Movement_Delay48
+TrainerTower_EventScript_TriggerDoubleBattle:
 	waitmovement 0
-	setvar VAR_TEMP_F, 1
-	goto EventScript_1C508F
+	setvar DISABLE_DOUBLES_TRIGGER, TRUE
+	goto TrainerTower_EventScript_TriggerBattle
 
-EventScript_1C5528:: @ 81C5528
+TrainerTower_EventScript_IneligibleForDoubleBattle:: @ 81C5528
 	lockall
 	playse SE_PINPON
-	msgbox Text_17CC73
+	msgbox TrainerTower_Lobby_Text_NeedTwoMonsForDouble
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1C5544
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Movement_PushPlayerBack
 	waitmovement 0
 	releaseall
 	end
 
-Movement_1C5541:
+TrainerTower_Movement_SingleTrainerApproach:
 	walk_left
-Movement_1C5542:: @ 81C5542
+TrainerTower_Movement_RightKnockoutTrainerApproach:: @ 81C5542
 	walk_left
 	walk_left
-Movement_1C5544:
+TrainerTower_Movement_PushPlayerBack:
 	walk_left
 	step_end
 
-Movement_1C5546:: @ 81C5546
+TrainerTower_Movement_BottomKnockoutTrainerApproach:: @ 81C5546
 	walk_up
 	walk_up
 	step_end
 
-Movement_1C5549:: @ 81C5549
+TrainerTower_Movement_TopKnockoutTrainerApproach:: @ 81C5549
 	walk_down
 	walk_down
 	step_end
 
-Movement_1C554C:: @ 81C554C
+TrainerTower_Movement_DoublesTrainer2OutOfWay:: @ 81C554C
 	walk_right
-Movement_1C554D:
+TrainerTower_Movement_LastKnockoutTrainerOutOfWay:
 	walk_up
 	face_down
 	step_end
 
-Movement_1C5550:: @ 81C5550
+TrainerTower_Movement_DoublesTrainer1FaceDown:: @ 81C5550
 	face_down
 	step_end

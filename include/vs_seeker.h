@@ -3,6 +3,9 @@
 
 #include "global.h"
 
+void sub_810C604(void);
+void sub_810C640(void);
+
 void Task_VsSeeker_0(u8 taskId);
 void sub_810CB90(void);
 void sub_810CDE8(void);

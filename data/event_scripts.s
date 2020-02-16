@@ -17,6 +17,7 @@
 #include "constants/spawn_points.h"
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
+#include "constants/trainer_tower.h"
 #include "constants/object_events.h"
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
@@ -32,6 +33,7 @@
 #include "constants/trade.h"
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
+#include "constants/easy_chat.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -210,17 +212,17 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_PatternBush/scripts.inc"
 	.include "data/maps/SixIsland_AlteringCave/scripts.inc"
 	.include "data/maps/NavelRock_Exterior/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_1F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_2F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_3F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_4F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_5F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_6F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_7F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_8F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Roof/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Elevator/scripts.inc"
+	.include "data/maps/TrainerTower_1F/scripts.inc"
+	.include "data/maps/TrainerTower_2F/scripts.inc"
+	.include "data/maps/TrainerTower_3F/scripts.inc"
+	.include "data/maps/TrainerTower_4F/scripts.inc"
+	.include "data/maps/TrainerTower_5F/scripts.inc"
+	.include "data/maps/TrainerTower_6F/scripts.inc"
+	.include "data/maps/TrainerTower_7F/scripts.inc"
+	.include "data/maps/TrainerTower_8F/scripts.inc"
+	.include "data/maps/TrainerTower_Roof/scripts.inc"
+	.include "data/maps/TrainerTower_Lobby/scripts.inc"
+	.include "data/maps/TrainerTower_Elevator/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Entrance/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room2/scripts.inc"
@@ -595,7 +597,7 @@ gStdScriptsEnd::
 	.include "data/maps/FiveIsland_RocketWarehouse/text.inc"
 	.include "data/maps/SixIsland_DottedHole_SapphireRoom/text.inc"
 	.include "data/maps/SixIsland_PatternBush/text.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/text.inc"
+	.include "data/maps/TrainerTower_Lobby/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room4/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room10/text.inc"
@@ -1172,10 +1174,9 @@ EventScript_ResetEliteFour:: @ 81A6551
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
-@ DoEasyChatScreen?
-EventScript_1A6AC0:: @ 81A6AC0
+Common_ShowEasyChatScreen:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
-	special sub_80FEE44
+	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1335,8 +1336,8 @@ gUnknown_81A7702:: @ 81A7702
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A778A
-	setvar VAR_0x8004, 14
-	call EventScript_1A6AC0
+	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, Special_GetMartClerkObjectId
@@ -1410,7 +1411,7 @@ Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
 
 	.include "data/scripts/route23.inc"
 
-EventScript_1A7AB9:: @ 81A7AB9
+EventScript_GetElevatorFloor:: @ 81A7AB9
 	special Special_GetElevatorFloor
 	return
 

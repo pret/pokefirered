@@ -3187,7 +3187,7 @@ _08135FC8: .4byte gUnknown_8E9B310
 _08135FCC:
 	movs r0, 0x60
 	movs r1, 0x1
-	bl sub_8107D38
+	bl ListMenuLoadStdPalAt
 	ldr r0, _08135FE0 @ =gUnknown_84636C0
 	movs r1, 0x70
 _08135FD8:

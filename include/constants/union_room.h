@@ -1,6 +1,48 @@
 #ifndef GUARD_CONSTANTS_UNION_ROOM_H
 #define GUARD_CONSTANTS_UNION_ROOM_H
 
+#define UNION_ROOM_SPAWN_NONE 0
+#define UNION_ROOM_SPAWN_IN   1
+#define UNION_ROOM_SPAWN_OUT  2
+
+#define ACTIVITY_NONE       0
+#define ACTIVITY_BATTLE     1
+#define ACTIVITY_DBLBATTLE  2
+#define ACTIVITY_MLTBATTLE  3
+#define ACTIVITY_TRADE      4
+#define ACTIVITY_CHAT       5
+#define ACTIVITY_WCARD      6
+#define ACTIVITY_WNEWS      7
+#define ACTIVITY_CARD       8
+#define ACTIVITY_PJUMP      9
+#define ACTIVITY_BCRUSH    10
+#define ACTIVITY_BPICK     11
+#define ACTIVITY_SEARCH    12
+#define ACTIVITY_SPINTRADE 13
+#define ACTIVITY_ITEMTRADE 14
+
+// Player response
+#define ACTIVITY_ACCEPT    17
+#define ACTIVITY_DECLINE   18
+
+#define ACTIVITY_NPCTALK   19
+#define ACTIVITY_PLYRTALK  20
+
+// Duplicate IDs?
+#define ACTIVITY_WCARD2    21
+#define ACTIVITY_WNEWS2    22
+
+#define IN_UNION_ROOM   0x40
+
+// Used in UR_AddTextPrinterParameterized
+#define UR_COLOR_DKE_WHT_LTE 0
+#define UR_COLOR_RED_WHT_LTR 1
+#define UR_COLOR_GRN_WHT_LTG 2
+#define UR_COLOR_WHT_WHT_LTE 3
+#define UR_COLOR_WHT_DKE_LTE 4
+#define UR_COLOR_GRN_DN6_LTB 5
+#define UR_COLOR_DN5_DN6_LTB 6
+
 #define LINK_GROUP_SINGLE_BATTLE        0
 #define LINK_GROUP_DOUBLE_BATTLE        1
 #define LINK_GROUP_MULTI_BATTLE         2
@@ -11,5 +53,8 @@
 #define LINK_GROUP_WONDER_CARD          7
 #define LINK_GROUP_WONDER_NEWS          8
 #define NUM_LINK_GROUP_TYPES            9
+
+#define LINK_GROUP_UNION_ROOM_RESUME    9
+#define LINK_GROUP_UNION_ROOM_INIT     10
 
 #endif //GUARD_CONSTANTS_UNION_ROOM_H

@@ -339,22 +339,28 @@ gUnknown_846F458:: @ 846F458
 gUnknown_846F470:: @ 846F470
 	spr_template 5, 5, gOamData_AffineDouble_ObjNormal_32x32, gUnknown_846F404, NULL, gUnknown_846F408, SpriteCallbackDummy
 
-gUnknown_846F488:: @ 846F488 struct UnkStruct3? perhaps not
-	.byte 9, 2, 8
+gUnknown_846F488:: @ 846F488 DigitObjUtilTemplate
+	@ strConvMode, shape, size, priority
+	.byte 1 | (2 /*ST_OAM_V_RECTANGLE*/ << 2) | (0 << 4) | (0 << 6) @ 9
+	.byte 2, 8 @ ndigits, width
 	.align 2
-	.2byte 0x9c, 0x00
-	.4byte gUnknown_846F2F8 + 0x18
-	.4byte gUnknown_846F320 + 0x10
-	.byte 8, 2, 8
+	.2byte 0x9c, 0x00 @ x, y
+	.4byte gUnknown_846F2F8 + 0x18 @ spriteSheet
+	.4byte gUnknown_846F320 + 0x10 @ spritePalette
+	@ strConvMode, shape, size, priority
+	.byte 0 | (2 /*ST_OAM_V_RECTANGLE*/ << 2) | (0 << 4) | (0 << 6) @ 8
+	.byte 2, 8 @ ndigits, width
 	.align 2
-	.2byte 0xb4, 0x00
-	.4byte gUnknown_846F2F8 + 0x18
-	.4byte gUnknown_846F320 + 0x10
-	.byte 8, 2, 8
+	.2byte 0xb4, 0x00 @ x, y
+	.4byte gUnknown_846F2F8 + 0x18 @ spriteSheet
+	.4byte gUnknown_846F320 + 0x10 @ spritePalette
+	@ strConvMode, shape, size, priority
+	.byte 0 | (2 /*ST_OAM_V_RECTANGLE*/ << 2) | (0 << 4) | (0 << 6) @ 8
+	.byte 2, 8 @ ndigits, width
 	.align 2
-	.2byte 0xcc, 0x00
-	.4byte gUnknown_846F2F8 + 0x18
-	.4byte gUnknown_846F320 + 0x10
+	.2byte 0xcc, 0x00 @ x, y
+	.4byte gUnknown_846F2F8 + 0x18 @ spriteSheet
+	.4byte gUnknown_846F320 + 0x10 @ spritePalette
 
 gUnknown_846F4B8:: @ 846F4B8
 	.4byte gUnknown_841D034

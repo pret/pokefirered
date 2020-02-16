@@ -10,11 +10,11 @@ gFiller_3003EC0
 gLinkHeldKeys
 gRecvCmds
 gLinkStatus
-gUnknown_3003F24
+gLinkAllAcked5FFF
 gUnknown_3003F28
-gUnknown_3003F2C
-gUnknown_3003F30
-gUnknown_3003F34
+gLinkCommand2FFEAck
+gLinkCommand5FFFAck
+gLinkCmd5FFFparam
 gSuppressLinkErrorMessage
 gWirelessCommType
 gSavedLinkPlayerCount

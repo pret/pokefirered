@@ -4,7 +4,7 @@ CeladonCity_DepartmentStore_Elevator_MapScripts:: @ 816C152
 CeladonCity_DepartmentStore_Elevator_EventScript_16C153:: @ 816C153
 	lockall
 	setvar VAR_0x8004, 3
-	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor

@@ -1431,7 +1431,7 @@ static void sub_80EDB70(struct IntroSequenceData * this)
 {
     this->field_0018->pos1.x += this->field_0018->pos2.x;
     this->field_0018->pos1.y += this->field_0018->pos2.y;
-    sub_8007FFC(this->field_0018, 0, 0x2A);
+    obj_pos2_update_enable(this->field_0018, 0, 0x2A);
     this->field_0018->callback = SpriteCallbackDummy;
     StartSpriteAffineAnim(this->field_0018, 1);
 }
@@ -1448,7 +1448,7 @@ static void sub_80EDBAC(struct IntroSequenceData * this)
     {
         StartSpriteAffineAnim(this->field_0028[i], 1);
         this->field_0028[i]->callback = nullsub_83;
-        sub_8007FFC(this->field_0028[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
+        obj_pos2_update_enable(this->field_0028[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
     }
 }
 

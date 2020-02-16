@@ -366,15 +366,15 @@
 #define MAP_INDIGO_PLATEAU_POKEMON_CENTER_2F (1 | (13 << 8))
 
 // Map Group 14
-#define MAP_SAFFRON_CITY_HOUSE1_1F                (0 | (14 << 8))
-#define MAP_SAFFRON_CITY_HOUSE1_2F                (1 | (14 << 8))
+#define MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F        (0 | (14 << 8))
+#define MAP_SAFFRON_CITY_COPYCATS_HOUSE_2F        (1 | (14 << 8))
 #define MAP_SAFFRON_CITY_DOJO                     (2 | (14 << 8))
 #define MAP_SAFFRON_CITY_GYM                      (3 | (14 << 8))
-#define MAP_SAFFRON_CITY_HOUSE2                   (4 | (14 << 8))
+#define MAP_SAFFRON_CITY_HOUSE                    (4 | (14 << 8))
 #define MAP_SAFFRON_CITY_MART                     (5 | (14 << 8))
 #define MAP_SAFFRON_CITY_POKEMON_CENTER_1F        (6 | (14 << 8))
 #define MAP_SAFFRON_CITY_POKEMON_CENTER_2F        (7 | (14 << 8))
-#define MAP_SAFFRON_CITY_HOUSE3                   (8 | (14 << 8))
+#define MAP_SAFFRON_CITY_MR_PSYCHICS_HOUSE        (8 | (14 << 8))
 #define MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB (9 | (14 << 8))
 
 // Map Group 15

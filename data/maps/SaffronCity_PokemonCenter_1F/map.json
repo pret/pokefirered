@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_16EFFB",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_16F004",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_16F00D",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_16F016",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_1ACEEC",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina",
       "flag": "FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_PokemonCenter_1F_EventScript_1ACEEC",
+      "script": "SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina",
       "flag": "FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS"
     }
   ],

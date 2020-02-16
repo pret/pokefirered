@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route7_EastEntrance_EventScript_16FA8E",
+      "script": "Route7_EastEntrance_EventScript_Guard",
       "flag": "0"
     }
   ],
@@ -65,7 +65,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route7_EastEntrance_EventScript_16FA97"
+      "script": "Route7_EastEntrance_EventScript_GuardTriggerTop"
     },
     {
       "type": "trigger",
@@ -74,7 +74,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route7_EastEntrance_EventScript_16FAA3"
+      "script": "Route7_EastEntrance_EventScript_GuardTriggerMid"
     },
     {
       "type": "trigger",
@@ -83,7 +83,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route7_EastEntrance_EventScript_16FAAF"
+      "script": "Route7_EastEntrance_EventScript_GuardTriggerBottom"
     }
   ],
   "bg_events": []

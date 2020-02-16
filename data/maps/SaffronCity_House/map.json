@@ -1,6 +1,6 @@
 {
-  "id": "MAP_SAFFRON_CITY_HOUSE2",
-  "name": "SaffronCity_House2",
+  "id": "MAP_SAFFRON_CITY_HOUSE",
+  "name": "SaffronCity_House",
   "layout": "LAYOUT_HOUSE5",
   "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
@@ -23,7 +23,7 @@
       "movement_range_y": 4,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House2_EventScript_16EF86",
+      "script": "SaffronCity_House_EventScript_Pidgey",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House2_EventScript_16EF74",
+      "script": "SaffronCity_House_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House2_EventScript_16EF7D",
+      "script": "SaffronCity_House_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -96,7 +96,7 @@
       "x": 5,
       "y": 4,
       "elevation": 3,
-      "script": "SaffronCity_House2_EventScript_16EF99"
+      "script": "SaffronCity_House_EventScript_Letter"
     }
   ]
 }

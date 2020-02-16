@@ -1,7 +1,7 @@
 {
-  "id": "MAP_SAFFRON_CITY_HOUSE1_2F",
-  "name": "SaffronCity_House1_2F",
-  "layout": "LAYOUT_SAFFRON_CITY_HOUSE1_2F",
+  "id": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_2F",
+  "name": "SaffronCity_CopycatsHouse_2F",
+  "layout": "LAYOUT_SAFFRON_CITY_COPYCATS_HOUSE_2F",
   "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EB5D",
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Doduo",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EB70",
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Doll",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EB70",
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Doll",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EB7B",
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Copycat",
       "flag": "0"
     }
   ],
@@ -71,7 +71,7 @@
       "x": 10,
       "y": 2,
       "elevation": 3,
-      "dest_map": "MAP_SAFFRON_CITY_HOUSE1_1F",
+      "dest_map": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_1F",
       "dest_warp_id": 3
     }
   ],
@@ -82,14 +82,14 @@
       "x": 1,
       "y": 1,
       "elevation": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EBC9"
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Computer"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 5,
       "elevation": 0,
-      "script": "SaffronCity_House1_2F_EventScript_16EBD2"
+      "script": "SaffronCity_CopycatsHouse_2F_EventScript_Game"
     },
     {
       "type": "hidden_item",
@@ -97,7 +97,7 @@
       "y": 1,
       "elevation": 0,
       "item": "ITEM_NUGGET",
-      "flag": "HIDDEN_ITEM_SAFFRON_CITY_HOUSE1_2F_NUGGET",
+      "flag": "HIDDEN_ITEM_SAFFRON_CITY_COPYCATS_HOUSE_2F_NUGGET",
       "quantity": 1,
       "underfoot": false
     }

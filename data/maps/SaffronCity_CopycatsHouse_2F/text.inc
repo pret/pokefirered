@@ -1,4 +1,4 @@
-gUnknown_819AC60:: @ 819AC60
+SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyMale:: @ 819AC60
     .string "{PLAYER}: Hi!\n"
     .string "Do you like POKéMON?\p"
     .string "{PLAYER}: Uh, no, I just asked you.\p"
@@ -7,7 +7,7 @@ gUnknown_819AC60:: @ 819AC60
     .string "COPYCAT: Hmm? Quit mimicking?\n"
     .string "But, that's my favorite hobby!$"
 
-gUnknown_819ACF1:: @ 819ACF1
+SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale:: @ 819ACF1
     .string "{PLAYER}: Hi.\n"
     .string "You must like POKéMON.\p"
     .string "{PLAYER}: No, not me.\n"
@@ -51,10 +51,10 @@ Text_MimicTaughtFemale:: @ 819AE90
     .string "COPYCAT: You bet!\n"
     .string "It's a scream!$"
 
-Text_19AF1A:: @ 819AF1A
+SaffronCity_CopycatsHouse_2F_Text_TooMuchInBag:: @ 819AF1A
     .string "にもつが　いっぱいね！$"
 
-Text_19AF26:: @ 819AF26
+SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyMaleJP:: @ 819AF26
     .string "{PLAYER}“やあ！　こんにちは！\n"
     .string "きみ　ポケモン　すきかい？\p"
     .string "{PLAYER}“ぼく　じゃなくって\n"
@@ -66,7 +66,7 @@ Text_19AF26:: @ 819AF26
     .string "だって　あたし　\n"
     .string "ものまね　しゅみ　なんだ　もん！”$"
 
-Text_19AFB0:: @ 819AFB0
+SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemaleJP:: @ 819AFB0
     .string "{PLAYER}“こんにちは！\n"
     .string "ポケモン　すきなのね？\p"
     .string "{PLAYER}“わたし　じゃなくって\n"
@@ -78,23 +78,25 @@ Text_19AFB0:: @ 819AFB0
     .string "だって　あたし\n"
     .string "ものまね　しゅみ　なんだ　もん！$"
 
-gUnknown_819B030:: @ 819B030
+SaffronCity_CopycatsHouse_2F_Text_Doduo:: @ 819B030
     .string "DODUO: Giiih!\p"
     .string "PRETTY MIRROR LOOK AT ME,\n"
     .string "SEE HOW PRETTY I CAN BE?$"
 
-gUnknown_819B071:: @ 819B071
+SaffronCity_CopycatsHouse_2F_Text_RareMonOnlyDoll:: @ 819B071
     .string "This is a rare POKéMON!\n"
     .string "Huh? It's only a doll!$"
 
-gUnknown_819B0A0:: @ 819B0A0
+SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket:: @ 819B0A0
     .string "A game with MARIO wearing a bucket\n"
     .string "on his head!$"
 
-gUnknown_819B0D0:: @ 819B0D0
+SaffronCity_CopycatsHouse_2F_Text_MySecrets:: @ 819B0D0
     .string "…\p"
     .string "My Secrets!\p"
     .string "Skill: Mimicry!\n"
     .string "Hobby: Collecting dolls!\l"
     .string "Favorite POKéMON: CLEFAIRY!$"
 
+SaffronCity_CopycatsHouse_2F_Text_HuhCantSee:: @ 819B123
+    .string "？　みえないぞ‥$"

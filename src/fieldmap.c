@@ -16,7 +16,7 @@ struct ConnectionFlags
     u8 east:1;
 };
 
-void sub_8058A00(struct MapHeader *mapHeader);
+static void InitMapLayoutData(struct MapHeader *mapHeader);
 void map_copy_with_padding(u16 *map, u16 width, u16 height);
 void mapheader_copy_mapdata_of_adjacent_maps(struct MapHeader *mapHeader);
 void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader const *connectedMapHeader, s32 offset);
@@ -63,20 +63,20 @@ const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * conn
     return Overworld_GetMapHeaderByGroupAndId(connection->mapGroup, connection->mapNum);
 }
 
-void not_trainer_hill_battle_pyramid(void)
+void InitMap(void)
 {
-    sub_8058A00(&gMapHeader);
-    mapheader_run_script_with_tag_x1();
+    InitMapLayoutData(&gMapHeader);
+    RunOnLoadMapScript();
 }
 
-void sub_80589E8(void)
+void InitMapFromSavedGame(void)
 {
-    sub_8058A00(&gMapHeader);
+    InitMapLayoutData(&gMapHeader);
     LoadSavedMapView();
-    mapheader_run_script_with_tag_x1();
+    RunOnLoadMapScript();
 }
 
-void sub_8058A00(struct MapHeader * mapHeader)
+static void InitMapLayoutData(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
     CpuFastFill(0x03FF03FF, gBackupMapLayout, sizeof(gBackupMapLayout));

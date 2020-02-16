@@ -4164,7 +4164,6 @@ bool8 TryRunFromBattle(u8 battler)
 {
     bool8 effect = FALSE;
     u8 holdEffect;
-    u8 pyramidMultiplier;
     u8 speedVar;
 
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)

@@ -48,7 +48,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr);
 u8 *mapheader_get_tagged_pointer(u8 tag);
 void mapheader_run_script_by_tag(u8 tag);
 u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag);
-void mapheader_run_script_with_tag_x1(void);
+void RunOnLoadMapScript(void);
 void mapheader_run_script_with_tag_x3(void);
 void mapheader_run_script_with_tag_x5(void);
 void mapheader_run_script_with_tag_x7(void);

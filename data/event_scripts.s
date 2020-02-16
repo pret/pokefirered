@@ -17,6 +17,7 @@
 #include "constants/spawn_points.h"
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
+#include "constants/trainer_tower.h"
 #include "constants/object_events.h"
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
@@ -209,17 +210,17 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_PatternBush/scripts.inc"
 	.include "data/maps/SixIsland_AlteringCave/scripts.inc"
 	.include "data/maps/NavelRock_Exterior/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_1F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_2F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_3F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_4F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_5F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_6F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_7F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_8F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Roof/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Elevator/scripts.inc"
+	.include "data/maps/TrainerTower_1F/scripts.inc"
+	.include "data/maps/TrainerTower_2F/scripts.inc"
+	.include "data/maps/TrainerTower_3F/scripts.inc"
+	.include "data/maps/TrainerTower_4F/scripts.inc"
+	.include "data/maps/TrainerTower_5F/scripts.inc"
+	.include "data/maps/TrainerTower_6F/scripts.inc"
+	.include "data/maps/TrainerTower_7F/scripts.inc"
+	.include "data/maps/TrainerTower_8F/scripts.inc"
+	.include "data/maps/TrainerTower_Roof/scripts.inc"
+	.include "data/maps/TrainerTower_Lobby/scripts.inc"
+	.include "data/maps/TrainerTower_Elevator/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Entrance/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room2/scripts.inc"
@@ -594,7 +595,7 @@ gStdScriptsEnd::
 	.include "data/maps/FiveIsland_RocketWarehouse/text.inc"
 	.include "data/maps/SixIsland_DottedHole_SapphireRoom/text.inc"
 	.include "data/maps/SixIsland_PatternBush/text.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/text.inc"
+	.include "data/maps/TrainerTower_Lobby/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room4/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room10/text.inc"
@@ -1407,7 +1408,7 @@ Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
 
 	.include "data/scripts/route23.inc"
 
-EventScript_1A7AB9:: @ 81A7AB9
+EventScript_GetElevatorFloor:: @ 81A7AB9
 	special Special_GetElevatorFloor
 	return
 

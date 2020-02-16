@@ -412,7 +412,7 @@ gSpecials:: @ 815FD60
 	def_special Special_SSAnneDepartureCutscene
 	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled
-	def_special sub_815D9E8
+	def_special CallTrainerTowerFunc
 	def_special ShowPokemonJumpRecords
 	def_special Special_ItemIsTM_GetMoveName
 	def_special Special_DaisyMassageServices
@@ -439,7 +439,7 @@ gSpecials:: @ 815FD60
 	def_special Special_SetDeoxysTriangleObjectPal
 	def_special IsPlayerLeftOfVermilionSailor
 	def_special Special_BadEggInParty
-	def_special sub_815D834
+	def_special ReadTrainerTowerAndValidate
 	def_special HasAllMons
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle

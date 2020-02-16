@@ -168,13 +168,6 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u8 field_F;
 };
 
-struct PyramidBag
-{
-    u16 items_Lvl50[10];
-    u16 items_OpenLvl[10];
-    u8 quantity[10];
-};
-
 struct BerryCrush
 {
     u16 berryCrushResults[4];
@@ -719,19 +712,18 @@ struct MEventBuffers
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 
-struct TrainerTowerLog
+struct TrainerTower
 {
-    u32 unk0;
-    u32 unk4;
-    u8 unk8;
+    u32 timer;
+    u32 bestTime;
+    u8 floorsCleared;
     u8 unk9;
-    u8 unkA_0:1;
-    u8 unkA_1:1;
-    u8 unkA_2:1;
-    u8 unkA_3:1;
-    u8 unkA_4:1;
-    u8 unkA_5:1;
-    u8 unkA_6:2;
+    bool8 receivedPrize:1;
+    bool8 checkedFinalTime:1;
+    bool8 spokeToOwner:1;
+    bool8 hasLost:1;
+    bool8 unkA_4:1;
+    bool8 validated:1;
 };
 
 struct TrainerRematchState
@@ -807,8 +799,8 @@ struct SaveBlock1
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;
     /*0x3D24*/ u8 filler3D24[0x10];
-    /*0x3D34*/ u32 unkArrayIdx;
-    /*0x3D38*/ struct TrainerTowerLog unkArray[4];
+    /*0x3D34*/ u32 towerChallengeId;
+    /*0x3D38*/ struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
 };
 
 struct MapPosition

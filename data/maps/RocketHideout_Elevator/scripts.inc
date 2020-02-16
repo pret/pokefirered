@@ -5,7 +5,7 @@ RocketHideout_Elevator_EventScript_1614D9:: @ 81614D9
 	lockall
 	goto_if_unset FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT, EventScript_16161B
 	setvar VAR_0x8004, 2
-	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor

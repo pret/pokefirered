@@ -419,7 +419,7 @@ static void Task_EReaderComm(u8 taskId)
             }
             break;
         case 15:
-            data->initialSendResult = ValidateTrainerTowerData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
+            data->initialSendResult = ValidateTrainerTowerData((struct EReaderTrainerTowerSet *)gDecompressionBuffer);
             Link_StartSend5FFFwithParam(data->initialSendResult);
             data->state = 16;
             break;
@@ -433,7 +433,7 @@ static void Task_EReaderComm(u8 taskId)
             }
             break;
         case 17:
-            if (CEReaderTool_SaveTrainerTower((struct EReaderTrainerHillSet *)gDecompressionBuffer))
+            if (CEReaderTool_SaveTrainerTower((struct EReaderTrainerTowerSet *)gDecompressionBuffer))
             {
                 AddTextPrinterToWindow1(gJPText_ConnectionComplete);
                 ResetDelayTimer(&data->stateAdvanceDelay);

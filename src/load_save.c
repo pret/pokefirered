@@ -284,8 +284,8 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
 {
     int i;
 
-    for(i = 0; i < 4; i++)
-        ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->unkArray[i].unk4, encryptionKey);
+    for(i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
+        ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->trainerTower[i].bestTime, encryptionKey);
 
     sub_8054F38(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);

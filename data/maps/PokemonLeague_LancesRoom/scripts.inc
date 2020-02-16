@@ -7,41 +7,41 @@ PokemonLeague_LancesRoom_MapScripts:: @ 816292D
 
 PokemonLeague_LancesRoom_OnResume:: @ 8162942
 	setvar VAR_0x8004, 3
-	call EventScript_1A75D5
+	call PokemonLeague_EventScript_DoLightingEffect
 	end
 
 PokemonLeague_LancesRoom_OnLoad:: @ 816294D
 	compare VAR_MAP_SCENE_POKEMON_LEAGUE, 4
-	call_if_eq EventScript_162962
-	call_if_set FLAG_DEFEATED_LANCE, EventScript_162968
+	call_if_eq PokemonLeague_LancesRoom_EventScript_CloseEntry
+	call_if_set FLAG_DEFEATED_LANCE, PokemonLeague_LancesRoom_EventScript_SetDoorOpen
 	end
 
-EventScript_162962:: @ 8162962
-	call EventScript_1629A8
+PokemonLeague_LancesRoom_EventScript_CloseEntry:: @ 8162962
+	call PokemonLeague_LancesRoom_EventScript_SetEntryClosed
 	return
 
-EventScript_162968:: @ 8162968
-	call EventScript_1A7589
+PokemonLeague_LancesRoom_EventScript_SetDoorOpen:: @ 8162968
+	call PokemonLeague_EventScript_SetDoorOpenLance
 	return
 
 PokemonLeague_LancesRoom_OnWarp:: @ 816296E
-	map_script_2 VAR_TEMP_1, 0, EventScript_162978
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_LancesRoom_EventScript_TurnPlayerNorth
 	.2byte 0
 
-EventScript_162978:: @ 8162978
+PokemonLeague_LancesRoom_EventScript_TurnPlayerNorth:: @ 8162978
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_LancesRoom_OnFrame:: @ 816297D
-	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, EventScript_162987
+	map_script_2 VAR_MAP_SCENE_POKEMON_LEAGUE, 3, PokemonLeague_LancesRoom_EventScript_EnterRoom
 	.2byte 0
 
-EventScript_162987:: @ 8162987
+PokemonLeague_LancesRoom_EventScript_EnterRoom:: @ 8162987
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1629F1
+	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_LancesRoom_Movement_WalkThroughCorridor
 	waitmovement 0
 	setflag FLAG_TEMP_2
-	call EventScript_1629A8
+	call PokemonLeague_LancesRoom_EventScript_SetEntryClosed
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
@@ -49,18 +49,18 @@ EventScript_162987:: @ 8162987
 	releaseall
 	end
 
-EventScript_1629A8:: @ 81629A8
-	setmetatile 5, 14, 669, 1
-	setmetatile 6, 14, 670, 1
-	setmetatile 7, 14, 671, 1
-	setmetatile 5, 15, 677, 1
-	setmetatile 6, 15, 678, 1
-	setmetatile 7, 15, 679, 1
-	setmetatile 6, 16, 785, 0
-	setmetatile 7, 16, 785, 0
+PokemonLeague_LancesRoom_EventScript_SetEntryClosed:: @ 81629A8
+	setmetatile 5, 14, METATILE_PokemonLeague_Entry_TopLeft_Closed, 1
+	setmetatile 6, 14, METATILE_PokemonLeague_Entry_TopMid_Closed, 1
+	setmetatile 7, 14, METATILE_PokemonLeague_Entry_TopRight_Closed, 1
+	setmetatile 5, 15, METATILE_PokemonLeague_Entry_BottomLeft_Closed, 1
+	setmetatile 6, 15, METATILE_PokemonLeague_Entry_BottomMid_Closed, 1
+	setmetatile 7, 15, METATILE_PokemonLeague_Entry_BottomRight_Closed, 1
+	setmetatile 6, 16, METATILE_PokemonLeague_Floor_ShadeFull_Lance, 0
+	setmetatile 7, 16, METATILE_PokemonLeague_Floor_ShadeFull_Lance, 0
 	return
 
-Movement_1629F1:: @ 81629F1
+PokemonLeague_LancesRoom_Movement_WalkThroughCorridor:: @ 81629F1
 	walk_up
 	walk_up
 	walk_left
@@ -97,72 +97,70 @@ Movement_1629F1:: @ 81629F1
 	walk_up
 	step_end
 
-PokemonLeague_LancesRoom_EventScript_162A14:: @ 8162A14
+PokemonLeague_LancesRoom_EventScript_Lance:: @ 8162A14
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	goto_if_set FLAG_DEFEATED_LANCE, EventScript_162AA1
+	goto_if_set FLAG_DEFEATED_LANCE, PokemonLeague_LancesRoom_EventScript_PostBattle
 	famechecker FAMECHECKER_LANCE, 0
 	famechecker FAMECHECKER_LANCE, 1
-	call_if_unset FLAG_SYS_GAME_CLEAR, EventScript_162A79
-	call_if_set FLAG_SYS_GAME_CLEAR, EventScript_162A82
+	call_if_unset FLAG_SYS_GAME_CLEAR, PokemonLeague_LancesRoom_EventScript_Intro
+	call_if_set FLAG_SYS_GAME_CLEAR, PokemonLeague_LancesRoom_EventScript_RematchIntro
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_5
-	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A8B
-	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_162A96
+	call_if_unset FLAG_SYS_CAN_LINK_WITH_RS, PokemonLeague_LancesRoom_EventScript_Battle
+	call_if_set FLAG_SYS_CAN_LINK_WITH_RS, PokemonLeague_LancesRoom_EventScript_Rematch
 	clearflag FLAG_TEMP_5
-	goto EventScript_162AAB
-
-EventScript_162A78:: @ 8162A78
+	goto PokemonLeague_LancesRoom_EventScript_DefeatedLance
 	end
 
-EventScript_162A79:: @ 8162A79
-	msgbox gUnknown_8178764
+PokemonLeague_LancesRoom_EventScript_Intro:: @ 8162A79
+	msgbox PokemonLeague_LancesRoom_Text_Intro
 	return
 
-EventScript_162A82:: @ 8162A82
-	msgbox gUnknown_81788BD
+PokemonLeague_LancesRoom_EventScript_RematchIntro:: @ 8162A82
+	msgbox PokemonLeague_LancesRoom_Text_RematchIntro
 	return
 
-EventScript_162A8B:: @ 8162A8B
-	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE, Text_178A15
+PokemonLeague_LancesRoom_EventScript_Battle:: @ 8162A8B
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE, PokemonLeague_LancesRoom_Text_Defeat
 	return
 
-EventScript_162A96:: @ 8162A96
-	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE_2, Text_178A15
+PokemonLeague_LancesRoom_EventScript_Rematch:: @ 8162A96
+	trainerbattle_no_intro TRAINER_ELITE_FOUR_LANCE_2, PokemonLeague_LancesRoom_Text_Defeat
 	return
 
-EventScript_162AA1:: @ 8162AA1
-	msgbox gUnknown_8178A52
+PokemonLeague_LancesRoom_EventScript_PostBattle:: @ 8162AA1
+	msgbox PokemonLeague_LancesRoom_Text_PostBattle
 	release
 	end
 
-EventScript_162AAB:: @ 8162AAB
+PokemonLeague_LancesRoom_EventScript_DefeatedLance:: @ 8162AAB
 	setvar VAR_0x8004, 0
 	special Special_TryGainNewFanFromCounter
 	setflag FLAG_DEFEATED_LANCE
-	call EventScript_1A7563
-	msgbox gUnknown_8178A52
+	call PokemonLeague_EventScript_OpenDoorLance
+	msgbox PokemonLeague_LancesRoom_Text_PostBattle
 	closemessage
 	release
 	end
 
-EventScript_162AC6:: @ 8162AC6
-	applymovement 1, Movement_162ADC
+PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayLeft:: @ 8162AC6
+	applymovement 1, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft
 	waitmovement 0
 	return
 
-EventScript_162AD1:: @ 8162AD1
-	applymovement 1, Movement_162ADF
+PokemonLeague_LancesRoom_EventScript_LanceMoveOutOfWayRight:: @ 8162AD1
+	applymovement 1, PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight
 	waitmovement 0
 	return
 
-Movement_162ADC:: @ 8162ADC
+PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayLeft:: @ 8162ADC
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-Movement_162ADF:: @ 8162ADF
+PokemonLeague_LancesRoom_Movement_LanceMoveOutOfWayRight:: @ 8162ADF
 	walk_right
 	walk_in_place_fastest_left
 	step_end

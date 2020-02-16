@@ -43,11 +43,11 @@ Route4_EventScript_Boy:: @ 81ACDEA
 	release
 	end
 
-MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
+MtMoon_1F_EventScript_BaldingMan:: @ 81ACE03
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 4
-	msgbox Text_172B00
+	msgbox MtMoon_1F_Text_BrockHelpsExcavateFossils
 	release
 	end
 
@@ -92,12 +92,12 @@ VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	releaseall
 	end
 
-CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
+CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika:: @ 81ACE9D
 	lock
 	faceplayer
 	famechecker FAMECHECKER_ERIKA, 5
 	textcolor 3
-	msgbox gUnknown_81B161B
+	msgbox PokemonJournal_Text_SpecialFeatureErika
 	release
 	end
 
@@ -118,12 +118,12 @@ SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	release
 	end
 
-SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
+SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina:: @ 81ACEEC
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 4
 	textcolor 3
-	msgbox gUnknown_81B1753
+	msgbox PokemonJournal_Text_SpecialFeatureSabrina
 	release
 	end
 
@@ -160,12 +160,12 @@ FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
+SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 2
 	textcolor 3
-	msgbox gUnknown_81B1913
+	msgbox PokemonJournal_Text_SpecialFeatureBruno
 	release
 	end
 
@@ -177,12 +177,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
+IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt:: @ 81ACFAE
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 1
 	famechecker FAMECHECKER_AGATHA, 2
-	msgbox Text_19A9E7
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs
 	release
 	end
 
@@ -215,40 +215,40 @@ EventScript_1AD021:: @ 81AD021
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 
-SaffronCity_EventScript_1AD03A:: @ 81AD03A
+SaffronCity_EventScript_BattleGirl:: @ 81AD03A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 2
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
+CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 3
-	msgbox Text_19566B
+	msgbox CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
+IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81AD06C
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 4
 	textcolor 3
-	msgbox gUnknown_81B1A31
+	msgbox PokemonJournal_Text_SpecialFeatureLance
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
+IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM:: @ 81AD087
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 5
-	msgbox Text_19AB16
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway
 	release
 	end
 
@@ -269,18 +269,18 @@ CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji:: @ 81AD0B9
 	release
 	end
 
-SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
+SilphCo_5F_EventScript_Scientist:: @ 81AD0D4
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 1
-	msgbox Text_175E99
+	msgbox SilphCo_5F_Text_RocketBossLookingForStrongMons
 	release
 	end
 
-SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
+SilphCo_8F_EventScript_Scientist:: @ 81AD0ED
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 2
-	msgbox Text_176ACB
+	msgbox SilphCo_8F_Text_ToRocketBossMonsAreTools
 	release
 	end

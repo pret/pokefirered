@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_1F_EventScript_16BAD9",
+      "script": "CeladonCity_DepartmentStore_1F_EventScript_Receptionist",
       "flag": "0"
     }
   ],
@@ -92,14 +92,14 @@
       "x": 9,
       "y": 11,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_1F_EventScript_16BAE2"
+      "script": "CeladonCity_DepartmentStore_1F_EventScript_LayoutSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_1F_EventScript_16BAEB"
+      "script": "CeladonCity_DepartmentStore_1F_EventScript_FloorSign"
     }
   ]
 }

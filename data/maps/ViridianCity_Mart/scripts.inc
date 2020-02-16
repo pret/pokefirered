@@ -8,8 +8,8 @@ ViridianCity_Mart_OnLoad:: @ 816A1DE
 	end
 
 ViridianCity_Mart_EventScript_HideQuestionnaire:: @ 816A1E8
-	setmetatile 1, 3, METATILE_Shop_CounterMid_Top, 1
-	setmetatile 1, 4, METATILE_Shop_CounterMid_Bottom, 1
+	setmetatile 1, 3, METATILE_Mart_CounterMid_Top, 1
+	setmetatile 1, 4, METATILE_Mart_CounterMid_Bottom, 1
 	end
 
 ViridianCity_Mart_OnFrame:: @ 816A1FB

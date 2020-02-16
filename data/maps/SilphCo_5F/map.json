@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_5F_EventScript_161853",
+      "script": "SilphCo_5F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_5F_EventScript_16186A",
+      "script": "SilphCo_5F_EventScript_Dalton",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1617E0",
+      "script": "SilphCo_5F_EventScript_WorkerM",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SilphCo_5F_EventScript_161825",
+      "script": "SilphCo_5F_EventScript_Beau",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_5F_EventScript_16183C",
+      "script": "SilphCo_5F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1AD0D4",
+      "script": "SilphCo_5F_EventScript_Scientist",
       "flag": "0"
     }
   ],
@@ -283,21 +283,21 @@
       "x": 28,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_161813"
+      "script": "SilphCo_5F_EventScript_PokemonReport3"
     },
     {
       "type": "bg_event_type_0",
       "x": 30,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_16180A"
+      "script": "SilphCo_5F_EventScript_PokemonReport2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 15,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_161801"
+      "script": "SilphCo_5F_EventScript_PokemonReport1"
     },
     {
       "type": "hidden_item",
@@ -314,7 +314,7 @@
       "x": 29,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_16181C"
+      "script": "SilphCo_5F_EventScript_FloorSign"
     }
   ]
 }

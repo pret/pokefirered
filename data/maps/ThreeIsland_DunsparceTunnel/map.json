@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_DunsparceTunnel_EventScript_164D60",
+      "script": "ThreeIsland_DunsparceTunnel_EventScript_Prospector",
       "flag": "0"
     }
   ],

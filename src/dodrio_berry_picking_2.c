@@ -7,7 +7,7 @@ void sub_815A5BC(s32 a0)
     struct Padded_U8 data[2];
     data[0].value = 1;
     data[1].value = a0;
-    sub_80F9E2C(data);
+    RfuPrepareSend0x2f00(data);
 }
 
 u8 sub_815A5E8(s32 a0)

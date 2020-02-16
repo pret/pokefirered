@@ -1839,7 +1839,7 @@ _08106478:
 	bl FillWindowPixelBuffer
 	movs r0, 0xB0
 	movs r1, 0x1
-	bl sub_8107D38
+	bl ListMenuLoadStdPalAt
 	mov r0, r10
 	cmp r0, 0
 	beq _08106504

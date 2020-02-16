@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_2F_EventScript_16BAFE",
+      "script": "CeladonCity_DepartmentStore_2F_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_2F_EventScript_16BB10",
+      "script": "CeladonCity_DepartmentStore_2F_EventScript_ClerkItems",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_2F_EventScript_16BB4E",
+      "script": "CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_2F_EventScript_1AD053",
+      "script": "CeladonCity_DepartmentStore_2F_EventScript_Woman",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],
@@ -96,7 +96,7 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_2F_EventScript_16BB07"
+      "script": "CeladonCity_DepartmentStore_2F_EventScript_FloorSign"
     }
   ]
 }

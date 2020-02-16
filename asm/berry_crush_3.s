@@ -63,7 +63,7 @@ _0814D63A:
 	ldr r0, _0814D65C @ =gReservedSpritePaletteCount
 	strb r4, [r0]
 	movs r0, 0x3
-	bl sub_815C980
+	bl DigitObjUtil_Init
 	b _0814D878
 	.align 2, 0
 _0814D658: .4byte 0x01000200
@@ -338,7 +338,7 @@ _0814D8B4:
 	.4byte _0814D9A2
 	.4byte _0814D9B2
 _0814D8D4:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _0814D9BA
 _0814D8DA:
 	bl IsLinkTaskFinished
@@ -427,7 +427,7 @@ _0814D9A2:
 	bl DestroyWirelessStatusIndicatorSprite
 	adds r0, r5, 0
 	bl sub_814EF10
-	bl sub_815C9F4
+	bl DigitObjUtil_Teardown
 	b _0814D9BA
 _0814D9B2:
 	movs r0, 0
@@ -2578,15 +2578,15 @@ sub_814EAD4: @ 814EAD4
 	movs r0, 0x4
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	movs r0, 0x6
 	ldrsh r1, [r4, r0]
 	movs r0, 0x1
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]
 	movs r0, 0x2
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2608,13 +2608,13 @@ sub_814EB04: @ 814EB04
 	strb r0, [r1]
 	movs r0, 0x2
 	movs r1, 0x1
-	bl sub_815D1A8
+	bl DigitObjUtil_HideOrShow
 	movs r0, 0x1
 	movs r1, 0x1
-	bl sub_815D1A8
+	bl DigitObjUtil_HideOrShow
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_815D1A8
+	bl DigitObjUtil_HideOrShow
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814EB04
@@ -3060,17 +3060,17 @@ _0814EE3E:
 	movs r0, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	adds r2, r4, 0
 	adds r2, 0x10
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	adds r4, 0x20
 	movs r0, 0x2
 	movs r1, 0
 	adds r2, r4, 0
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	ldrh r0, [r6, 0x12]
 	cmp r0, 0x1
 	bne _0814EED8
@@ -3130,11 +3130,11 @@ _0814EF46:
 	cmp r4, 0x1
 	bls _0814EF46
 	movs r0, 0x2
-	bl sub_815D108
+	bl DigitObjUtil_DeletePrinter
 	movs r0, 0x1
-	bl sub_815D108
+	bl DigitObjUtil_DeletePrinter
 	movs r0, 0
-	bl sub_815D108
+	bl DigitObjUtil_DeletePrinter
 	movs r4, 0
 	movs r1, 0xC2
 	lsls r1, 1

@@ -51,7 +51,7 @@
       "x": 58,
       "y": 7,
       "elevation": 3,
-      "dest_map": "MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY",
+      "dest_map": "MAP_TRAINER_TOWER_LOBBY",
       "dest_warp_id": 1
     }
   ],

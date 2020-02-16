@@ -1,3 +1,3 @@
-gUnknown_81964C4:: @ 81964C4
+CeladonCity_Condominiums_Roof_Text_IKnowEverything:: @ 81964C4
     .string "I KNOW EVERYTHING!$"
 

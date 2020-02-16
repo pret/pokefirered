@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "RockTunnel_B1F_EventScript_162EFE",
+      "script": "RockTunnel_B1F_EventScript_Cooper",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_B1F_EventScript_162EB9",
+      "script": "RockTunnel_B1F_EventScript_Dudley",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_B1F_EventScript_162E8B",
+      "script": "RockTunnel_B1F_EventScript_Sofia",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RockTunnel_B1F_EventScript_162ED0",
+      "script": "RockTunnel_B1F_EventScript_Allen",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RockTunnel_B1F_EventScript_162EE7",
+      "script": "RockTunnel_B1F_EventScript_Eric",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_B1F_EventScript_162F15",
+      "script": "RockTunnel_B1F_EventScript_Steve",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "RockTunnel_B1F_EventScript_162EA2",
+      "script": "RockTunnel_B1F_EventScript_Martha",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RockTunnel_B1F_EventScript_162F2C",
+      "script": "RockTunnel_B1F_EventScript_Winston",
       "flag": "0"
     },
     {

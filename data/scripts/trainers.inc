@@ -2988,54 +2988,54 @@ EventScript_1ACC32:: @ 81ACC32
 	msgbox Text_18CE78, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_1ACC4D:: @ 81ACC4D
-	trainerbattle_single TRAINER_RUIN_MANIAC_BRANDON, Text_18CFFB, Text_18D02A
+SevenIsland_TanobyRuins_EventScript_Brandon:: @ 81ACC4D
+	trainerbattle_single TRAINER_RUIN_MANIAC_BRANDON, SevenIsland_TanobyRuins_Text_BrandonIntro, SevenIsland_TanobyRuins_Text_BrandonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACC74
-	msgbox Text_18D061, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchBrandon
+	msgbox SevenIsland_TanobyRuins_Text_BrandonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACC74:: @ 81ACC74
-	trainerbattle_rematch TRAINER_RUIN_MANIAC_BRANDON, Text_1C46D3, Text_18D02A
-	msgbox Text_18D061, MSGBOX_AUTOCLOSE
+SevenIsland_TanobyRuins_EventScript_RematchBrandon:: @ 81ACC74
+	trainerbattle_rematch TRAINER_RUIN_MANIAC_BRANDON, SevenIsland_TanobyRuins_Text_BrandonRematchIntro, SevenIsland_TanobyRuins_Text_BrandonDefeat
+	msgbox SevenIsland_TanobyRuins_Text_BrandonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_1ACC8B:: @ 81ACC8B
-	trainerbattle_single TRAINER_RUIN_MANIAC_BENJAMIN, Text_18D0D9, Text_18D108
+SevenIsland_TanobyRuins_EventScript_Benjamin:: @ 81ACC8B
+	trainerbattle_single TRAINER_RUIN_MANIAC_BENJAMIN, SevenIsland_TanobyRuins_Text_BenjaminIntro, SevenIsland_TanobyRuins_Text_BenjaminDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACCB2
-	msgbox Text_18D125, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchBenjamin
+	msgbox SevenIsland_TanobyRuins_Text_BenjaminPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACCB2:: @ 81ACCB2
-	trainerbattle_rematch TRAINER_RUIN_MANIAC_BENJAMIN, Text_1C470A, Text_18D108
-	msgbox Text_18D125, MSGBOX_AUTOCLOSE
+SevenIsland_TanobyRuins_EventScript_RematchBenjamin:: @ 81ACCB2
+	trainerbattle_rematch TRAINER_RUIN_MANIAC_BENJAMIN, SevenIsland_TanobyRuins_Text_BenjaminRematchIntro, SevenIsland_TanobyRuins_Text_BenjaminDefeat
+	msgbox SevenIsland_TanobyRuins_Text_BenjaminPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_1ACCC9:: @ 81ACCC9
-	trainerbattle_single TRAINER_PAINTER_EDNA, Text_18D18F, Text_18D1B5
+SevenIsland_TanobyRuins_EventScript_Edna:: @ 81ACCC9
+	trainerbattle_single TRAINER_PAINTER_EDNA, SevenIsland_TanobyRuins_Text_EdnaIntro, SevenIsland_TanobyRuins_Text_EdnaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACCF0
-	msgbox Text_18D1E3, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchEdna
+	msgbox SevenIsland_TanobyRuins_Text_EdnaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACCF0:: @ 81ACCF0
-	trainerbattle_rematch TRAINER_PAINTER_EDNA, Text_1C4739, Text_18D1B5
-	msgbox Text_18D1E3, MSGBOX_AUTOCLOSE
+SevenIsland_TanobyRuins_EventScript_RematchEdna:: @ 81ACCF0
+	trainerbattle_rematch TRAINER_PAINTER_EDNA, SevenIsland_TanobyRuins_Text_EdnaRematchIntro, SevenIsland_TanobyRuins_Text_EdnaDefeat
+	msgbox SevenIsland_TanobyRuins_Text_EdnaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_1ACD07:: @ 81ACD07
-	trainerbattle_single TRAINER_GENTLEMAN_CLIFFORD, Text_18D22F, Text_18D26D
+SevenIsland_TanobyRuins_EventScript_Clifford:: @ 81ACD07
+	trainerbattle_single TRAINER_GENTLEMAN_CLIFFORD, SevenIsland_TanobyRuins_Text_CliffordIntro, SevenIsland_TanobyRuins_Text_CliffordDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACD2E
-	msgbox Text_18D284, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchClifford
+	msgbox SevenIsland_TanobyRuins_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACD2E:: @ 81ACD2E
-	trainerbattle_rematch TRAINER_GENTLEMAN_CLIFFORD, Text_1C476A, Text_18D26D
-	msgbox Text_18D284, MSGBOX_AUTOCLOSE
+SevenIsland_TanobyRuins_EventScript_RematchClifford:: @ 81ACD2E
+	trainerbattle_rematch TRAINER_GENTLEMAN_CLIFFORD, SevenIsland_TanobyRuins_Text_CliffordRematchIntro, SevenIsland_TanobyRuins_Text_CliffordDefeat
+	msgbox SevenIsland_TanobyRuins_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end

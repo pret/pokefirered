@@ -1,4 +1,4 @@
-gUnknown_8178B6C:: @ 8178B6C
+PokemonLeague_ChampionsRoom_Text_Intro:: @ 8178B6C
     .string "{RIVAL}: Hey, {PLAYER}!\p"
     .string "I was looking forward to seeing\n"
     .string "you, {PLAYER}.\p"
@@ -16,7 +16,7 @@ gUnknown_8178B6C:: @ 8178B6C
     .string "I am the most powerful TRAINER in\n"
     .string "the world!$"
 
-gUnknown_8178CD4:: @ 8178CD4
+PokemonLeague_ChampionsRoom_Text_RematchIntro:: @ 8178CD4
     .string "{RIVAL}: Hey, {PLAYER}!\p"
     .string "You came back, {PLAYER}!\n"
     .string "Hahah, that is so great!\p"
@@ -34,7 +34,7 @@ gUnknown_8178CD4:: @ 8178CD4
     .string "I am the most powerful TRAINER in\n"
     .string "the world!$"
 
-Text_178E3F:: @ 8178E3F
+PokemonLeague_ChampionsRoom_Text_Defeat:: @ 8178E3F
     .string "NO!\n"
     .string "That can't be!\l"
     .string "You beat me at my best!\p"
@@ -43,7 +43,7 @@ Text_178E3F:: @ 8178E3F
     .string "My reign is over already?\n"
     .string "It's not fair!$"
 
-Text_178EC3:: @ 8178EC3
+PokemonLeague_ChampionsRoom_Text_Victory:: @ 8178EC3
     .string "はーはッ！\n"
     .string "かった！　かった！　かった！\p"
     .string "{PLAYER}に　まける　ような\n"
@@ -54,7 +54,7 @@ Text_178EC3:: @ 8178EC3
     .string "ほめて　つかわす！\n"
     .string "はーッ！　はーはッはッ！$"
 
-gUnknown_8178F2F:: @ 8178F2F
+PokemonLeague_ChampionsRoom_Text_PostBattle:: @ 8178F2F
     .string "Why?\n"
     .string "Why did I lose?\p"
     .string "I never made any mistakes raising\n"
@@ -63,10 +63,10 @@ gUnknown_8178F2F:: @ 8178F2F
     .string "LEAGUE CHAMPION!\p"
     .string "Although I don't like to admit it…$"
 
-gUnknown_8178FC6:: @ 8178FC6
+PokemonLeague_ChampionsRoom_Text_OakPlayer:: @ 8178FC6
     .string "OAK: {PLAYER}!$"
 
-gUnknown_8178FCF:: @ 8178FCF
+PokemonLeague_ChampionsRoom_Text_OakCongratulations:: @ 8178FCF
     .string "OAK: So, you've won!\n"
     .string "Sincerely, congratulations!\p"
     .string "You're the new POKéMON LEAGUE\n"
@@ -76,7 +76,7 @@ gUnknown_8178FCF:: @ 8178FCF
     .string "on the POKéDEX.\p"
     .string "{PLAYER}, you have come of age!$"
 
-gUnknown_817908F:: @ 817908F
+PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival:: @ 817908F
     .string "OAK: {RIVAL}…\n"
     .string "I'm disappointed in you.\p"
     .string "I came when I heard you'd beaten\n"
@@ -90,7 +90,7 @@ gUnknown_817908F:: @ 817908F
     .string "Without them, you will never\n"
     .string "become a CHAMP again!$"
 
-gUnknown_81791A3:: @ 81791A3
+PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe:: @ 81791A3
     .string "OAK: {PLAYER}.\p"
     .string "You understand that your victory\n"
     .string "was not just your own doing.\p"

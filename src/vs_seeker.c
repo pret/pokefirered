@@ -22,7 +22,6 @@
 #include "field_player_avatar.h"
 #include "event_object_80688E4.h"
 #include "event_object_8097404.h"
-#include "unk_810c3a4.h"
 #include "vs_seeker.h"
 #include "constants/movement_commands.h"
 #include "constants/object_events.h"
@@ -598,7 +597,7 @@ static void sub_810C3B8(u8 taskId)
         {
             if (sub_810CF04(i) == TRUE)
             {
-                if (gObjectEvents[i].mapobj_bit_1)
+                if (gObjectEvents[i].singleMovementActive)
                     return;
                 FreezeObjectEvent(&gObjectEvents[i]);
             }

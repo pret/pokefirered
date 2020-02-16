@@ -101,7 +101,7 @@ EventScript_GaveSpecialProfile: @ 81BEF3F
 
 EventScript_GiveProfile: @ 81BEF5A
 	setvar VAR_0x8004, 0
-	call EventScript_1A6AC0
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	compare VAR_0x8004, 0

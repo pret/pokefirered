@@ -120,3 +120,11 @@ gUnknown_818CF2B:: @ 818CF2B
     .string "SEVAULT CANYON\n"
     .string "TANOBY RUINS AHEAD$"
 
+Text_18CF4D:: @ 818CF4D
+    .string "Training by oneself is certainly\n"
+    .string "not a bad thing.\p"
+    .string "But it's also not bad to aim for\n"
+    .string "the top with a partner.\p"
+    .string "Even BRUNO…\n"
+    .string "He trained with a fellow by the\l"
+    .string "name of BRAWLY before.$"

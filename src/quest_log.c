@@ -2602,18 +2602,18 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 static bool8 InQuestLogDisabledLocation(void)
 {
     // In Trainer Tower
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F)
-        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_1F)
+        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_1F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
     // In pokemon trainer fan club
@@ -2629,7 +2629,7 @@ static bool8 InQuestLogDisabledLocation(void)
     // In elevator
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR)) 
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 

@@ -54,8 +54,8 @@ bool8 FlagGet(u16 id);
 u16 * GetVarPointer(u16 id);
 bool32 IsMysteryGiftEnabled(void);
 void ResetSpecialVars(void);
-void sub_806E2D0(void);
-void sub_806E370(void);
+void ResetMysteryEventFlags(void);
+void ResetMysteryEventVars(void);
 bool32 IsNationalPokedexEnabled(void);
 void sub_806E190(void);
 

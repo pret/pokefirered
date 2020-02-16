@@ -36,14 +36,14 @@
       "x": 0,
       "y": 2,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Elevator_EventScript_16C153"
+      "script": "CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Elevator_EventScript_16C153"
+      "script": "CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect"
     }
   ]
 }

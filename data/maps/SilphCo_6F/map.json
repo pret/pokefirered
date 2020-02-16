@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_6F_EventScript_161956",
+      "script": "SilphCo_6F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_6F_EventScript_1618D3",
+      "script": "SilphCo_6F_EventScript_WorkerM1",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_6F_EventScript_1618F4",
+      "script": "SilphCo_6F_EventScript_WorkerF1",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_6F_EventScript_161891",
+      "script": "SilphCo_6F_EventScript_WorkerM2",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_6F_EventScript_1618B2",
+      "script": "SilphCo_6F_EventScript_WorkerM3",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_6F_EventScript_161915",
+      "script": "SilphCo_6F_EventScript_WorkerF2",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_6F_EventScript_16193F",
+      "script": "SilphCo_6F_EventScript_Taylor",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -140,7 +140,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_6F_EventScript_16196D",
+      "script": "SilphCo_6F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     }
   ],
@@ -226,7 +226,7 @@
       "x": 25,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_6F_EventScript_161936"
+      "script": "SilphCo_6F_EventScript_FloorSign"
     }
   ]
 }

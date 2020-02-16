@@ -8,52 +8,52 @@ SilphCo_5F_OnLoad:: @ 81617C4
 	call_if_unset FLAG_SILPH_5F_DOOR_3, EventScript_Close5FDoor3
 	end
 
-SilphCo_5F_EventScript_1617E0:: @ 81617E0
+SilphCo_5F_EventScript_WorkerM:: @ 81617E0
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
-	goto_if_ge EventScript_1617F7
-	msgbox gUnknown_8175B70
+	goto_if_ge SilphCo_5F_EventScript_WorkerMRocketsGone
+	msgbox SilphCo_5F_Text_RocketsInUproarAboutIntruder
 	release
 	end
 
-EventScript_1617F7:: @ 81617F7
-	msgbox gUnknown_8175BB3
+SilphCo_5F_EventScript_WorkerMRocketsGone:: @ 81617F7
+	msgbox SilphCo_5F_Text_YoureOurHeroThankYou
 	release
 	end
 
-SilphCo_5F_EventScript_161801:: @ 8161801
-	msgbox gUnknown_8175D89, MSGBOX_SIGN
+SilphCo_5F_EventScript_PokemonReport1:: @ 8161801
+	msgbox SilphCo_5F_Text_PorygonFirstVRMon, MSGBOX_SIGN
 	end
 
-SilphCo_5F_EventScript_16180A:: @ 816180A
-	msgbox gUnknown_8175DE0, MSGBOX_SIGN
+SilphCo_5F_EventScript_PokemonReport2:: @ 816180A
+	msgbox SilphCo_5F_Text_Over350TechniquesConfirmed, MSGBOX_SIGN
 	end
 
-SilphCo_5F_EventScript_161813:: @ 8161813
-	msgbox gUnknown_8175E28, MSGBOX_SIGN
+SilphCo_5F_EventScript_PokemonReport3:: @ 8161813
+	msgbox SilphCo_5F_Text_SomeMonsEvolveWhenTraded, MSGBOX_SIGN
 	end
 
-SilphCo_5F_EventScript_16181C:: @ 816181C
-	msgbox gUnknown_8175E80, MSGBOX_SIGN
+SilphCo_5F_EventScript_FloorSign:: @ 816181C
+	msgbox SilphCo_5F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_5F_EventScript_161825:: @ 8161825
-	trainerbattle_single TRAINER_SCIENTIST_BEAU, Text_175C40, Text_175C6D
-	msgbox gUnknown_8175C7D, MSGBOX_AUTOCLOSE
+SilphCo_5F_EventScript_Beau:: @ 8161825
+	trainerbattle_single TRAINER_SCIENTIST_BEAU, SilphCo_5F_Text_BeauIntro, SilphCo_5F_Text_BeauDefeat
+	msgbox SilphCo_5F_Text_BeauPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_5F_EventScript_16183C:: @ 816183C
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_28, Text_175BE5, Text_175C09
-	msgbox gUnknown_8175C0F, MSGBOX_AUTOCLOSE
+SilphCo_5F_EventScript_Grunt1:: @ 816183C
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_28, SilphCo_5F_Text_Grunt1Intro, SilphCo_5F_Text_Grunt1Defeat
+	msgbox SilphCo_5F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_5F_EventScript_161853:: @ 8161853
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_29, Text_175D28, Text_175D4B
-	msgbox gUnknown_8175D59, MSGBOX_AUTOCLOSE
+SilphCo_5F_EventScript_Grunt2:: @ 8161853
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_29, SilphCo_5F_Text_Grunt2Intro, SilphCo_5F_Text_Grunt2Defeat
+	msgbox SilphCo_5F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_5F_EventScript_16186A:: @ 816186A
-	trainerbattle_single TRAINER_JUGGLER_DALTON, Text_175CBD, Text_175CEB
-	msgbox gUnknown_8175CF9, MSGBOX_AUTOCLOSE
+SilphCo_5F_EventScript_Dalton:: @ 816186A
+	trainerbattle_single TRAINER_JUGGLER_DALTON, SilphCo_5F_Text_DaltonIntro, SilphCo_5F_Text_DaltonDefeat
+	msgbox SilphCo_5F_Text_DaltonPostBattle, MSGBOX_AUTOCLOSE
 	end

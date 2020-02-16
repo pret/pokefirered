@@ -108,19 +108,17 @@ static const struct LLSFStruct llsf_struct[2] = {
     }
 };
 
-#if LIBRFU_VERSION == 1026
-static const char lib_ver[] = "RFU_V1026";
-#else
-static const char lib_ver[] = "RFU_V1024";
-#endif
+#define xstr(s) str(s)
+#define str(s) #s
+const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
 #define COPY(src, dst, iterator, size) do {         \
     const u16 *_src = (const u16 *)(src);           \
     u16 *_dst = (u16 *)(dst);                       \
-    iterator = (size);                              \
-    while (iterator-- != 0)                         \
+    (iterator) = (size);                            \
+    while ((iterator)-- != 0)                       \
         *_dst++ = *_src++;                          \
 } while (0)
 

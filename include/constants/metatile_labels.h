@@ -81,6 +81,18 @@
 #define METATILE_PokemonMansion_Statue_RedEyes_Shade                     0x34E
 #define METATILE_PokemonMansion_Statue_RedEyes_Basement                  0x34F
 
+// Rocket Hideout, Rocket Warehouse, Silph Co, elevators
+#define METATILE_Hideout_Arrow_Up               0x2A0
+#define METATILE_Hideout_Arrow_Left             0x2A1
+#define METATILE_Hideout_Arrow_Down             0x2A8
+#define METATILE_Hideout_Arrow_RIght            0x2A9   
+#define METATILE_Hideout_Barrier_TopLeft_Floor  0x2CE
+#define METATILE_Hideout_Barrier_TopRight_Floor 0x2CF
+#define METATILE_Hideout_Barrier_BottomLeft     0x2D6
+#define METATILE_Hideout_Barrier_BottomRight    0x2D7
+#define METATILE_Hideout_Floor                  0x281
+#define METATILE_Hideout_Floor_ShadeFull        0x282
+
 // Cinnabar Gym
 #define METATILE_CinnabarGym_Floor                  0x281
 #define METATILE_CinnabarGym_Floor_ShadeDiagonal    0x282

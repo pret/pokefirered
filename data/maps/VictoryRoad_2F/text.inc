@@ -1,54 +1,58 @@
-Text_1747EF:: @ 81747EF
+VictoryRoad_2F_Text_DawsonIntro:: @ 81747EF
     .string "If you can get through here,\n"
     .string "you can go meet the ELITE FOUR.$"
 
-Text_17482C:: @ 817482C
+VictoryRoad_2F_Text_DawsonDefeat:: @ 817482C
     .string "No!\n"
     .string "Unbelievable!$"
 
-gUnknown_817483E:: @ 817483E
+VictoryRoad_2F_Text_DawsonPostBattle:: @ 817483E
     .string "I can beat you when it comes to\n"
     .string "knowledge about POKéMON!$"
 
-Text_174877:: @ 8174877
+VictoryRoad_2F_Text_DaisukeIntro:: @ 8174877
     .string "This here is VICTORY ROAD.\n"
     .string "It's the final test for TRAINERS!$"
 
-Text_1748B4:: @ 81748B4
+VictoryRoad_2F_Text_DaisukeDefeat:: @ 81748B4
     .string "Atcho!$"
 
-gUnknown_81748BB:: @ 81748BB
+VictoryRoad_2F_Text_DaisukePostBattle:: @ 81748BB
     .string "If you get stuck, try moving some\n"
     .string "boulders around.$"
 
-Text_1748EE:: @ 81748EE
+VictoryRoad_2F_Text_NelsonIntro:: @ 81748EE
     .string "Ah, so you wish to challenge the\n"
     .string "ELITE FOUR?$"
 
-Text_17491B:: @ 817491B
+VictoryRoad_2F_Text_NelsonDefeat:: @ 817491B
     .string "You got me!$"
 
-gUnknown_8174927:: @ 8174927
+VictoryRoad_2F_Text_NelsonPostBattle:: @ 8174927
     .string "{RIVAL} also came through here.$"
 
-Text_174942:: @ 8174942
+VictoryRoad_2F_Text_VincentIntro:: @ 8174942
     .string "Come on!\n"
     .string "I'll whip you!$"
 
-Text_17495A:: @ 817495A
+VictoryRoad_2F_Text_VincentDefeat:: @ 817495A
     .string "I got whipped!$"
 
-gUnknown_8174969:: @ 8174969
+VictoryRoad_2F_Text_VincentPostBattle:: @ 8174969
     .string "You earned the right to be on\n"
     .string "VICTORY ROAD…$"
 
-Text_174995:: @ 8174995
+VictoryRoad_2F_Text_GregoryIntro:: @ 8174995
     .string "Is VICTORY ROAD too tough?$"
 
-Text_1749B0:: @ 81749B0
+VictoryRoad_2F_Text_GregoryDefeat:: @ 81749B0
     .string "Well done!$"
 
-gUnknown_81749BB:: @ 81749BB
+VictoryRoad_2F_Text_GregoryPostBattle:: @ 81749BB
     .string "Many TRAINERS give up their\n"
     .string "challenge here and go home.$"
+
+@ Unused, old text for Moltres
+VictoryRoad_2F_Text_Gyaoo:: @ 81749F3
+    .string "ギヤーオ！$"
 

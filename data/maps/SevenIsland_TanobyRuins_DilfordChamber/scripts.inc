@@ -3,5 +3,5 @@ SevenIsland_TanobyRuins_DilfordChamber_MapScripts:: @ 8164CF6
 	.byte 0
 
 SevenIsland_TanobyRuins_DilfordChamber_OnTransition:: @ 8164CFC
-	call EventScript_1A925E
+	call EventScript_TryDarkenRuins
 	end

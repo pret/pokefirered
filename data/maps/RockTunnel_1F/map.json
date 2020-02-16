@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RockTunnel_1F_EventScript_162E73",
+      "script": "RockTunnel_1F_EventScript_Dana",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_1F_EventScript_162E5C",
+      "script": "RockTunnel_1F_EventScript_Ariana",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "RockTunnel_1F_EventScript_162E45",
+      "script": "RockTunnel_1F_EventScript_Leah",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_1F_EventScript_162E17",
+      "script": "RockTunnel_1F_EventScript_Lucas",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_1F_EventScript_162E00",
+      "script": "RockTunnel_1F_EventScript_Oliver",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RockTunnel_1F_EventScript_162DE9",
+      "script": "RockTunnel_1F_EventScript_Lenny",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RockTunnel_1F_EventScript_162E2E",
+      "script": "RockTunnel_1F_EventScript_Ashton",
       "flag": "0"
     },
     {
@@ -195,7 +195,7 @@
       "x": 14,
       "y": 33,
       "elevation": 3,
-      "script": "RockTunnel_1F_EventScript_162DE0"
+      "script": "RockTunnel_1F_EventScript_RouteSign"
     }
   ]
 }

@@ -6,41 +6,41 @@ RockTunnel_1F_OnTransition:: @ 8162DDC
 	setworldmapflag FLAG_WORLD_MAP_ROCK_TUNNEL_1F
 	end
 
-RockTunnel_1F_EventScript_162DE0:: @ 8162DE0
-	msgbox gUnknown_817962D, MSGBOX_SIGN
+RockTunnel_1F_EventScript_RouteSign:: @ 8162DE0
+	msgbox RockTunnel_1F_Text_RouteSign, MSGBOX_SIGN
 	end
 
-RockTunnel_1F_EventScript_162DE9:: @ 8162DE9
-	trainerbattle_single TRAINER_HIKER_LENNY, Text_179366, Text_179388
-	msgbox gUnknown_8179396, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Lenny:: @ 8162DE9
+	trainerbattle_single TRAINER_HIKER_LENNY, RockTunnel_1F_Text_LennyIntro, RockTunnel_1F_Text_LennyDefeat
+	msgbox RockTunnel_1F_Text_LennyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E00:: @ 8162E00
-	trainerbattle_single TRAINER_HIKER_OLIVER, Text_1793F1, Text_17940E
-	msgbox gUnknown_817943A, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Oliver:: @ 8162E00
+	trainerbattle_single TRAINER_HIKER_OLIVER, RockTunnel_1F_Text_OliverIntro, RockTunnel_1F_Text_OliverDefeat
+	msgbox RockTunnel_1F_Text_OliverPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E17:: @ 8162E17
-	trainerbattle_single TRAINER_HIKER_LUCAS, Text_17947B, Text_1794AC
-	msgbox gUnknown_81794B4, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Lucas:: @ 8162E17
+	trainerbattle_single TRAINER_HIKER_LUCAS, RockTunnel_1F_Text_LucasIntro, RockTunnel_1F_Text_LucasDefeat
+	msgbox RockTunnel_1F_Text_LucasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E2E:: @ 8162E2E
-	trainerbattle_single TRAINER_POKEMANIAC_ASHTON, Text_1794D4, Text_1794EE
-	msgbox gUnknown_81794F9, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Ashton:: @ 8162E2E
+	trainerbattle_single TRAINER_POKEMANIAC_ASHTON, RockTunnel_1F_Text_AshtonIntro, RockTunnel_1F_Text_AshtonDefeat
+	msgbox RockTunnel_1F_Text_AshtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E45:: @ 8162E45
-	trainerbattle_single TRAINER_PICNICKER_LEAH, Text_17951C, Text_179547
-	msgbox gUnknown_8179558, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Leah:: @ 8162E45
+	trainerbattle_single TRAINER_PICNICKER_LEAH, RockTunnel_1F_Text_LeahIntro, RockTunnel_1F_Text_LeahDefeat
+	msgbox RockTunnel_1F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E5C:: @ 8162E5C
-	trainerbattle_single TRAINER_PICNICKER_ARIANA, Text_1795E5, Text_179604
-	msgbox gUnknown_8179613, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Ariana:: @ 8162E5C
+	trainerbattle_single TRAINER_PICNICKER_ARIANA, RockTunnel_1F_Text_ArianaIntro, RockTunnel_1F_Text_ArianaDefeat
+	msgbox RockTunnel_1F_Text_ArianaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_1F_EventScript_162E73:: @ 8162E73
-	trainerbattle_single TRAINER_PICNICKER_DANA, Text_179577, Text_1795A1
-	msgbox gUnknown_81795B5, MSGBOX_AUTOCLOSE
+RockTunnel_1F_EventScript_Dana:: @ 8162E73
+	trainerbattle_single TRAINER_PICNICKER_DANA, RockTunnel_1F_Text_DanaIntro, RockTunnel_1F_Text_DanaDefeat
+	msgbox RockTunnel_1F_Text_DanaPostBattle, MSGBOX_AUTOCLOSE
 	end

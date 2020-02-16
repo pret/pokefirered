@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "VictoryRoad_1F_EventScript_160F7B",
+      "script": "VictoryRoad_1F_EventScript_Rolando",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "VictoryRoad_1F_EventScript_160F64",
+      "script": "VictoryRoad_1F_EventScript_Naomi",
       "flag": "0"
     },
     {
@@ -129,7 +129,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_VICTORY_ROAD_1F",
       "var_value": 99,
-      "script": "VictoryRoad_1F_EventScript_160F33"
+      "script": "VictoryRoad_1F_EventScript_FloorSwitch"
     }
   ],
   "bg_events": [

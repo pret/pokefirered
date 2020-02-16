@@ -3,5 +3,5 @@ SevenIsland_TanobyRuins_ViapoisChamber_MapScripts:: @ 8164D1A
 	.byte 0
 
 SevenIsland_TanobyRuins_ViapoisChamber_OnTransition:: @ 8164D20
-	call EventScript_1A925E
+	call EventScript_TryDarkenRuins
 	end

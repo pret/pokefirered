@@ -117,6 +117,12 @@
 // gTileset_MtEmber
 #define METATILE_MtEmber_CaveEntrance  0x346
 
+// gTileset_Cave
+#define METATILE_Cave_Floor_Ledge_Top    0x2D1
+#define METATILE_Cave_Floor_Ledge_Bottom 0x2E1
+#define METATILE_Cave_RockBarrier_Top    0x307
+#define METATILE_Cave_RockBarrier_Bottom 0x317
+
 // gTileset_TrainerTower
 #define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287
 #define METATILE_TrainerTower_CounterBarrier         0x2B4

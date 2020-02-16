@@ -3,5 +3,5 @@ SevenIsland_TanobyRuins_LiptooChamber_MapScripts:: @ 8164CDE
 	.byte 0
 
 SevenIsland_TanobyRuins_LiptooChamber_OnTransition:: @ 8164CE4
-	call EventScript_1A925E
+	call EventScript_TryDarkenRuins
 	end

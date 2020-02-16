@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonLeague_AgathasRoom_EventScript_162877",
+      "script": "PokemonLeague_AgathasRoom_EventScript_Agatha",
       "flag": "0"
     }
   ],

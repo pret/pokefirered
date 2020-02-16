@@ -34,7 +34,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CFA",
+      "script": "CeladonCity_EventScript_RocketGrunt1",
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
@@ -47,7 +47,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CC5",
+      "script": "CeladonCity_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -60,7 +60,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CDC",
+      "script": "CeladonCity_EventScript_Poliwrath",
       "flag": "0"
     },
     {
@@ -73,7 +73,7 @@
       "movement_range_y": 4,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166C99",
+      "script": "CeladonCity_EventScript_LittleGirl",
       "flag": "0"
     },
     {
@@ -86,7 +86,7 @@
       "movement_range_y": 5,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CAD",
+      "script": "CeladonCity_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -99,7 +99,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CB6",
+      "script": "CeladonCity_EventScript_OldMan2",
       "flag": "0"
     },
     {
@@ -125,7 +125,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166D03",
+      "script": "CeladonCity_EventScript_RocketGrunt2",
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
@@ -138,7 +138,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166CA2",
+      "script": "CeladonCity_EventScript_OldMan1",
       "flag": "0"
     },
     {
@@ -177,7 +177,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166D0C",
+      "script": "CeladonCity_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -216,7 +216,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_EventScript_166D15",
+      "script": "CeladonCity_EventScript_SilphCoScientist",
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     }
   ],
@@ -320,56 +320,56 @@
       "x": 45,
       "y": 23,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D5A"
+      "script": "CeladonCity_EventScript_TrainerTips2"
     },
     {
       "type": "bg_event_type_0",
       "x": 38,
       "y": 23,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D63"
+      "script": "CeladonCity_EventScript_PrizeExchangeSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 33,
       "y": 23,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D6C"
+      "script": "CeladonCity_EventScript_GameCornerSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 18,
       "elevation": 3,
-      "script": "CeladonCity_EventScript_166D27"
+      "script": "CeladonCity_EventScript_CitySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 26,
       "y": 11,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D48"
+      "script": "CeladonCity_EventScript_MansionSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 33,
       "y": 16,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D1E"
+      "script": "CeladonCity_EventScript_TrainerTips1"
     },
     {
       "type": "bg_event_type_0",
       "x": 18,
       "y": 14,
       "elevation": 3,
-      "script": "CeladonCity_EventScript_166D51"
+      "script": "CeladonCity_EventScript_DeptStoreSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 16,
       "y": 31,
       "elevation": 0,
-      "script": "CeladonCity_EventScript_166D30"
+      "script": "CeladonCity_EventScript_GymSign"
     },
     {
       "type": "hidden_item",

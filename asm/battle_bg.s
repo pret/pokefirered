@@ -1270,7 +1270,7 @@ _0800FBF8:
 _0800FC00: .4byte gTrainers
 _0800FC04: .4byte gTrainerBattleOpponent_A
 _0800FC08:
-	bl sav1_map_get_battletype
+	bl GetCurrentMapBattleScene
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800FC20
@@ -1341,7 +1341,7 @@ _0800FC88:
 	movs r0, 0x13
 	b _0800FCAA
 _0800FC90:
-	bl sav1_map_get_battletype
+	bl GetCurrentMapBattleScene
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

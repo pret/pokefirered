@@ -16387,26 +16387,26 @@ gUnionRoomChatIcons:: @ 8EA1A50
 	.incbin "graphics/interface/union_room_chat_icons.4bpp.lz"
 
 	.align 2
-gTilesetPalettes_8EA1B68:: @ 8EA1B68
-	.incbin "data/tilesets/primary/82D4A94/palettes/0.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/1.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/2.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/3.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/4.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/5.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/6.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/7.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/8.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/9.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/10.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/11.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/12.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/13.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/14.gbapal"
-	.incbin "data/tilesets/primary/82D4A94/palettes/15.gbapal"
+gTilesetPalettes_General:: @ 8EA1B68
+	.incbin "data/tilesets/primary/general/palettes/0.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/1.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/2.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/3.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/4.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/5.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/6.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/7.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/8.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/9.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/12.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/13.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/14.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/15.gbapal"
 
-gTilesetTiles_8EA1D68:: @ 8EA1D68
-	.incbin "data/tilesets/primary/82D4A94/tiles.4bpp.lz"
+gTilesetTiles_General:: @ 8EA1D68
+	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
 
 gBerryFixGameboy_Pal:: @ 8EA463C
 	.incbin "graphics/berry_fix/gba_small.gbapal"
@@ -16463,50 +16463,50 @@ gBerryFixWindow_Tilemap:: @ 8EA9588
 	.incbin "graphics/berry_fix/window.bin.lz"
 
 	.align 2
-gTilesetPalettes_8EA97F4:: @ 8EA97F4
-	.incbin "data/tilesets/secondary/82D4C74/palettes/0.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/1.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/2.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/3.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/4.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/5.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/6.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/7.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/8.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/9.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/10.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/11.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/12.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/13.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/14.gbapal"
-	.incbin "data/tilesets/secondary/82D4C74/palettes/15.gbapal"
+gTilesetPalettes_GenericBuilding1:: @ 8EA97F4
+	.incbin "data/tilesets/secondary/generic_building1/palettes/0.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/1.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/2.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/3.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/4.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/5.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/6.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/7.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/8.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/9.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/12.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/13.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/14.gbapal"
+	.incbin "data/tilesets/secondary/generic_building1/palettes/15.gbapal"
 
 	.align 2
-gTilesetTiles_8EA99F4:: @ 8EA99F4
-	.incbin "data/tilesets/secondary/82D4C74/tiles.4bpp.lz"
+gTilesetTiles_GenericBuilding1:: @ 8EA99F4
+	.incbin "data/tilesets/secondary/generic_building1/tiles.4bpp.lz"
 
 	.align 2
-gTilesetPalettes_8EA9D88:: @ 8EA9D88
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/0.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/1.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/2.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/3.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/4.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/5.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/6.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/7.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/8.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/9.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/10.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/11.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/12.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/13.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/14.gbapal"
-	.incbin "data/tilesets/secondary/82D4E6C/palettes/15.gbapal"
+gTilesetPalettes_DepartmentStore:: @ 8EA9D88
+	.incbin "data/tilesets/secondary/department_store/palettes/0.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/1.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/2.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/3.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/4.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/5.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/6.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/7.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/8.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/9.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/12.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/13.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/14.gbapal"
+	.incbin "data/tilesets/secondary/department_store/palettes/15.gbapal"
 
 
-gTilesetTiles_8EA9F88:: @ 8EA9F88
-	.incbin "data/tilesets/secondary/82D4E6C/tiles.4bpp.lz"
+gTilesetTiles_DepartmentStore:: @ 8EA9F88
+	.incbin "data/tilesets/secondary/department_store/tiles.4bpp.lz"
 
 gUnionRoomChatPanelBgPal_7:: @ 8EAA9F0
 	.incbin "graphics/interface/union_room_chat_panel.gbapal"

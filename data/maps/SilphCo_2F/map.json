@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "SilphCo_2F_EventScript_1616AE",
+      "script": "SilphCo_2F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_2F_EventScript_161680",
+      "script": "SilphCo_2F_EventScript_Jerry",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_2F_EventScript_161697",
+      "script": "SilphCo_2F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_2F_EventScript_161669",
+      "script": "SilphCo_2F_EventScript_Connor",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -203,7 +203,7 @@
       "x": 29,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_2F_EventScript_161660"
+      "script": "SilphCo_2F_EventScript_FloorSign"
     }
   ]
 }

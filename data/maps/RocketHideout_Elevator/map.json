@@ -36,7 +36,7 @@
       "x": 0,
       "y": 2,
       "elevation": 0,
-      "script": "RocketHideout_Elevator_EventScript_1614D9"
+      "script": "RocketHideout_Elevator_EventScript_FloorSelect"
     }
   ]
 }

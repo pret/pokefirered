@@ -48,6 +48,7 @@ struct mevent_client_cmd
 #define CLI_RECVBUF    {.instr = 12, .parameter = 0}
 #define CLI_REQWORD    {.instr = 13, .parameter = 0}
 #define CLI_SNDWORD    {.instr = 14, .parameter = 0}
+#define CLI_RECVMON    {.instr = 16, .parameter = 0}
 #define CLI_RECVRAM    {.instr = 17, .parameter = 0}
 #define CLI_SENDALL    {.instr = 20, .parameter = 0}
 

@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1EB",
+      "script": "CeladonCity_Restaurant_EventScript_Chef",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1F4",
+      "script": "CeladonCity_Restaurant_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D25E",
+      "script": "CeladonCity_Restaurant_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1FD",
+      "script": "CeladonCity_Restaurant_EventScript_CoinCaseMan",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D255",
+      "script": "CeladonCity_Restaurant_EventScript_WorkerM",
       "flag": "0"
     }
   ],

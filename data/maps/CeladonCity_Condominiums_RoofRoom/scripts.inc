@@ -1,109 +1,109 @@
 CeladonCity_Condominiums_RoofRoom_MapScripts:: @ 816C463
 	.byte 0
 
-CeladonCity_Condominiums_RoofRoom_EventScript_16C464:: @ 816C464
-	msgbox gUnknown_81964D7, MSGBOX_NPC
+CeladonCity_Condominiums_RoofRoom_EventScript_BlackBelt:: @ 816C464
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_TheresNothingIDontKnow, MSGBOX_NPC
 	end
 
-CeladonCity_Condominiums_RoofRoom_EventScript_16C46D:: @ 816C46D
+CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall:: @ 816C46D
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, SPECIES_EEVEE
 	givemon SPECIES_EEVEE, 25, ITEM_NONE
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_16C4A6
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty
 	compare VAR_RESULT, 1
-	goto_if_eq EventScript_16C4DA
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveePC
 	compare VAR_RESULT, 2
 	goto_if_eq EventScript_NoMoreRoomForPokemon
 	release
 	end
 
-EventScript_16C4A6:: @ 816C4A6
+CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveeParty:: @ 816C4A6
 	removeobject 2
 	playfanfare MUS_FANFA1
-	message Text_196591
+	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16C514
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee
 	call EventScript_GetGiftMonPartySlot
 	call EventScript_ChangePokemonNickname
-	goto EventScript_16C514
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee
 	end
 
-EventScript_16C4DA:: @ 816C4DA
+CeladonCity_Condominiums_RoofRoom_EventScript_GetEeeveePC:: @ 816C4DA
 	removeobject 2
 	playfanfare MUS_FANFA1
-	message Text_196591
+	message CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee
 	waitmessage
 	waitfanfare
 	getspeciesname 0, SPECIES_EEVEE
 	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_16C509
+	goto_if_eq CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC
 	call EventScript_NameReceivedBoxMon
-	goto EventScript_16C509
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC
 	end
 
-EventScript_16C509:: @ 816C509
+CeladonCity_Condominiums_RoofRoom_EventScript_TransferEeveeToPC:: @ 816C509
 	call EventScript_TransferredToPC
-	goto EventScript_16C514
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee
 	end
 
-EventScript_16C514:: @ 816C514
+CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee:: @ 816C514
 	setflag FLAG_GOT_EEVEE
 	release
 	end
 
-CeladonCity_Condominiums_RoofRoom_EventScript_16C519:: @ 816C519
-	msgbox gUnknown_81967E3, MSGBOX_SIGN
+CeladonCity_Condominiums_RoofRoom_EventScript_TMsPamphlet:: @ 816C519
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs, MSGBOX_SIGN
 	end
 
-CeladonCity_Condominiums_RoofRoom_EventScript_16C522:: @ 816C522
+CeladonCity_Condominiums_RoofRoom_EventScript_Blackboard:: @ 816C522
 	lockall
-	msgbox gUnknown_81965C2
-	message Text_1965F4
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_WirelessAdapterLecture
+	message CeladonCity_Condominiums_RoofRoom_Text_ReadWhichHeading
 	waitmessage
 	setvar VAR_0x8004, 4
 	multichoice 0, 0, MULTICHOICE_LINKED_DIRECT_UNION, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16C5C0
-	case 1, EventScript_16C5CE
-	case 2, EventScript_16C5DC
-	case 3, EventScript_16C5EA
-	case 127, EventScript_16C5EA
+	case 0, CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub
+	case 1, CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner
+	case 2, CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom
+	case 3, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard
+	case 127, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard
 	end
 
-EventScript_16C578:: @ 816C578
-	message Text_1965F4
+CeladonCity_Condominiums_RoofRoom_EventScript_ReadAnotherHeading:: @ 816C578
+	message CeladonCity_Condominiums_RoofRoom_Text_ReadWhichHeading
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_LINKED_DIRECT_UNION, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16C5C0
-	case 1, EventScript_16C5CE
-	case 2, EventScript_16C5DC
-	case 3, EventScript_16C5EA
-	case 127, EventScript_16C5EA
+	case 0, CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub
+	case 1, CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner
+	case 2, CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom
+	case 3, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard
+	case 127, CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard
 	end
 
-EventScript_16C5C0:: @ 816C5C0
-	msgbox gUnknown_8196617
-	goto EventScript_16C578
+CeladonCity_Condominiums_RoofRoom_EventScript_WirelessClub:: @ 816C5C0
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_ExplainWirelessClub
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_ReadAnotherHeading
 	end
 
-EventScript_16C5CE:: @ 816C5CE
-	msgbox gUnknown_8196695
-	goto EventScript_16C578
+CeladonCity_Condominiums_RoofRoom_EventScript_DirectCorner:: @ 816C5CE
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_ExplainDirectCorner
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_ReadAnotherHeading
 	end
 
-EventScript_16C5DC:: @ 816C5DC
-	msgbox gUnknown_819673C
-	goto EventScript_16C578
+CeladonCity_Condominiums_RoofRoom_EventScript_UnionRoom:: @ 816C5DC
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_ExplainUnionRoom
+	goto CeladonCity_Condominiums_RoofRoom_EventScript_ReadAnotherHeading
 	end
 
-EventScript_16C5EA:: @ 816C5EA
+CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard:: @ 816C5EA
 	releaseall
 	end

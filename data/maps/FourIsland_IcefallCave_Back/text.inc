@@ -1,16 +1,16 @@
-gUnknown_817B04F:: @ 817B04F
+FourIsland_IcefallCave_Back_Text_LoreleiKeepHandsOffMons:: @ 817B04F
     .string "LORELEI: Keep your filthy hands\n"
     .string "off the POKéMON in the cave!\p"
     .string "Do as I say, or you'll have me to\n"
     .string "answer to!$"
 
-gUnknown_817B0B9:: @ 817B0B9
+FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe:: @ 817B0B9
     .string "Aww, shut it, lady, and leave\n"
     .string "us be.\p"
     .string "Don't let your glasses get all\n"
     .string "steamed up!$"
 
-gUnknown_817B109:: @ 817B109
+FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut:: @ 817B109
     .string "LORELEI: {PLAYER}?!\n"
     .string "What are you doing here?\p"
     .string "No, we can catch up later.\n"
@@ -22,15 +22,15 @@ gUnknown_817B109:: @ 817B109
     .string "Are you ready?\n"
     .string "You take that one, please!$"
 
-gUnknown_817B20B:: @ 817B20B
+FourIsland_IcefallCave_Back_Text_GruntIntro:: @ 817B20B
     .string "W-what?!\p"
     .string "Who says we can't do what we want\n"
     .string "with the POKéMON we catch?$"
 
-Text_17B251:: @ 817B251
+FourIsland_IcefallCave_Back_Text_GruntDefeat:: @ 817B251
     .string "We didn't plan on this!$"
 
-gUnknown_817B269:: @ 817B269
+FourIsland_IcefallCave_Back_Text_LoreleiWhereHaveYouTakenMons:: @ 817B269
     .string "LORELEI: Humph.\n"
     .string "So despicably weak.\p"
     .string "You!\n"
@@ -40,11 +40,11 @@ gUnknown_817B269:: @ 817B269
     .string "I'm smashing your ring once and\n"
     .string "for all!$"
 
-gUnknown_817B2EF:: @ 817B2EF
+FourIsland_IcefallCave_Back_Text_NotTellingYouThat:: @ 817B2EF
     .string "N-no way!\n"
     .string "I'm not telling you that!$"
 
-Text_17B313:: @ 817B313
+FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou:: @ 817B313
     .string "LORELEI: If you won't confess,\n"
     .string "we'll deep-freeze you.\p"
     .string "My LAPRAS is furious for what\n"
@@ -52,7 +52,7 @@ Text_17B313:: @ 817B313
     .string "Go, LAPRAS!\n"
     .string "ICE BEAM…$"
 
-gUnknown_817B399:: @ 817B399
+FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland:: @ 817B399
     .string "Wawaah! Okay!\n"
     .string "I'll talk!\p"
     .string "The POKéMON are in the ROCKET\n"
@@ -63,7 +63,7 @@ gUnknown_817B399:: @ 817B399
     .string "into the ROCKET WAREHOUSE!\p"
     .string "Heheheheh!$"
 
-gUnknown_817B457:: @ 817B457
+FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful:: @ 817B457
     .string "{PLAYER}, thank you.\n"
     .string "But this is awful…\p"
     .string "I was born and raised here on\n"

@@ -4,10 +4,9 @@
 #include "menu.h"
 #include "text_window.h"
 #include "strings.h"
+#include "constants/coins.h"
 
 EWRAM_DATA static u8 sCoinsWindowId = 0;
-
-#define MAX_COINS 9999
 
 u16 GetCoins(void)
 {

@@ -45,7 +45,7 @@ _0814B716:
 	ldr r0, _0814B74C @ =0x0000012f
 	bl PlayNewMapMusic
 	ldr r0, _0814B750 @ =sub_8056534
-	bl sub_80565E0
+	bl SetMainCallback1
 _0814B73E:
 	movs r0, 0
 _0814B740:
@@ -58,8 +58,8 @@ _0814B74C: .4byte 0x0000012f
 _0814B750: .4byte sub_8056534
 	thumb_func_end sub_814B6FC
 
-	thumb_func_start sub_814B754
-sub_814B754: @ 814B754
+	thumb_func_start StartBerryCrush
+StartBerryCrush: @ 814B754
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -183,7 +183,7 @@ _0814B84C:
 	.align 2, 0
 _0814B858: .4byte sub_814BA80
 _0814B85C: .4byte sub_814BA98
-	thumb_func_end sub_814B754
+	thumb_func_end StartBerryCrush
 
 	thumb_func_start sub_814B860
 sub_814B860: @ 814B860

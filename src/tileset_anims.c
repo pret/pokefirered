@@ -232,7 +232,7 @@ static void sub_8070120(u16 timer)
         sub_80700A4(timer >> 4);
 }
 
-void sub_8070154(void)
+void InitTilesetAnim_General(void)
 {
     sPrimaryTilesetAnimCounter = 0;
     sPrimaryTilesetAnimCounterMax = 640;
@@ -250,7 +250,7 @@ static void sub_80701AC(u16 timer)
         sub_807017C(timer / 12);
 }
 
-void sub_80701D8(void)
+void InitTilesetAnim_CeladonCity(void)
 {
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 120;
@@ -268,7 +268,7 @@ static void sub_8070224(u16 timer)
         sub_80701FC(timer / 10);
 }
 
-void sub_8070250(void)
+void InitTilesetAnim_SilphCo(void)
 {
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 160;
@@ -286,7 +286,7 @@ static void sub_807029C(u16 timer)
         sub_8070274(timer >> 4);
 }
 
-void sub_80702B4(void)
+void InitTilesetAnim_MtEmber(void)
 {
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 256;
@@ -306,7 +306,7 @@ static void sub_8070304(u16 timer)
         sub_80702DC(timer >> 1);
 }
 
-void sub_807031C(void)
+void InitTilesetAnim_VermilionGym(void)
 {
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 240;
@@ -326,7 +326,7 @@ static void sub_8070368(u16 timer)
         sub_8070340(timer >> 4);
 }
 
-void sub_8070380(void)
+void InitTilesetAnim_CeladonGym(void)
 {
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 256;

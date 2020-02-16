@@ -1330,10 +1330,10 @@ _0806D2F0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D308
-	ldr r0, _0806D304 @ =EventScript_1C549C
+	ldr r0, _0806D304 @ =TrainerTower_EventScript_ShowTime
 	b _0806D53E
 	.align 2, 0
-_0806D304: .4byte EventScript_1C549C
+_0806D304: .4byte TrainerTower_EventScript_ShowTime
 _0806D308:
 	adds r0, r4, 0
 	adds r1, r5, 0

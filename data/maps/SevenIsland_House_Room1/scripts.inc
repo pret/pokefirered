@@ -15,7 +15,7 @@ EventScript_1708AF:: @ 81708AF
 	setvar VAR_TEMP_1, 1
 	setobjectxyperm 1, 4, 2
 	setobjectmovementtype 1, 8
-	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_8338B4C
+	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
 	return
 
 EventScript_1708C3:: @ 81708C3

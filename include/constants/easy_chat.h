@@ -6,22 +6,7 @@
 #define EASY_CHAT_TYPE_BATTLE_WON              2
 #define EASY_CHAT_TYPE_BATTLE_LOST             3
 #define EASY_CHAT_TYPE_MAIL                    4
-#define EASY_CHAT_TYPE_INTERVIEW               5
-#define EASY_CHAT_TYPE_BARD_SONG               6
-#define EASY_CHAT_TYPE_FAN_CLUB                7
-#define EASY_CHAT_TYPE_UNK_8                   8
-#define EASY_CHAT_TYPE_TRENDY_PHRASE           9
-#define EASY_CHAT_TYPE_GABBY_AND_TY            10
-#define EASY_CHAT_TYPE_CONTEST_INTERVIEW       11
-#define EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW  12
-#define EASY_CHAT_TYPE_GOOD_SAYING             13
-#define EASY_CHAT_TYPE_FAN_QUESTION            14
-#define EASY_CHAT_TYPE_QUIZ_ANSWER             15
-#define EASY_CHAT_TYPE_QUIZ_QUESTION           16
-#define EASY_CHAT_TYPE_QUIZ_SET_QUESTION       17
-#define EASY_CHAT_TYPE_QUIZ_SET_ANSWER         18
-#define EASY_CHAT_TYPE_APPRENTICE              19
-#define EASY_CHAT_TYPE_QUESTIONNAIRE           20
+#define EASY_CHAT_TYPE_QUESTIONNAIRE           14
 
 #define EC_GROUP_POKEMON_2      0x0
 #define EC_GROUP_TRAINER        0x1

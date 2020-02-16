@@ -13,7 +13,7 @@
   "battle_scene": "BATTLE_SCENE_0",
   "connections": [
     {
-      "map": "MAP_SAFFRON_CITY_CLASSIC",
+      "map": "MAP_SAFFRON_CITY_CONNECTION",
       "offset": 0,
       "direction": "up"
     },

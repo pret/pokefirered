@@ -316,7 +316,7 @@ void Special_AnimatePcTurnOff()
 void SpawnCameraObject(void)
 {
     u8 objectEventId = SpawnSpecialObjectEventParameterized(OBJECT_EVENT_GFX_YOUNGSTER, 8, 127, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
-    gObjectEvents[objectEventId].mapobj_bit_13 = TRUE;
+    gObjectEvents[objectEventId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
 
@@ -876,22 +876,22 @@ void Special_GetElevatorFloor(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F))
+    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
     {
         switch (gSaveBlock1Ptr->warp2.mapNum)
         {
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF):
+        case MAP_NUM(TRAINER_TOWER_1F):
+        case MAP_NUM(TRAINER_TOWER_2F):
+        case MAP_NUM(TRAINER_TOWER_3F):
+        case MAP_NUM(TRAINER_TOWER_4F):
+        case MAP_NUM(TRAINER_TOWER_5F):
+        case MAP_NUM(TRAINER_TOWER_6F):
+        case MAP_NUM(TRAINER_TOWER_7F):
+        case MAP_NUM(TRAINER_TOWER_8F):
+        case MAP_NUM(TRAINER_TOWER_ROOF):
             floor = 15;
             break;
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY):
+        case MAP_NUM(TRAINER_TOWER_LOBBY):
             floor = 3;
             break;
         }
@@ -992,23 +992,23 @@ u16 Special_InitElevatorFloorSelectMenuPos(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F))
+    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
     {
         switch (gSaveBlock1Ptr->warp2.mapNum)
         {
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F):
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF):
+        case MAP_NUM(TRAINER_TOWER_1F):
+        case MAP_NUM(TRAINER_TOWER_2F):
+        case MAP_NUM(TRAINER_TOWER_3F):
+        case MAP_NUM(TRAINER_TOWER_4F):
+        case MAP_NUM(TRAINER_TOWER_5F):
+        case MAP_NUM(TRAINER_TOWER_6F):
+        case MAP_NUM(TRAINER_TOWER_7F):
+        case MAP_NUM(TRAINER_TOWER_8F):
+        case MAP_NUM(TRAINER_TOWER_ROOF):
             sElevatorScroll = 0;
             sElevatorCursorPos = 0;
             break;
-        case MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY):
+        case MAP_NUM(TRAINER_TOWER_LOBBY):
             sElevatorScroll = 0;
             sElevatorCursorPos = 1;
             break;
@@ -1920,15 +1920,15 @@ u16 Special_BattleCardAction(void)
     switch (gSpecialVar_Result)
     {
     case 0:
-        return sub_81445C0(3);
+        return MEvent_GetBattleCardCount(3);
     case 1:
-        return sub_81445C0(4);
+        return MEvent_GetBattleCardCount(4);
     case 2:
-        return sub_81445C0(0);
+        return MEvent_GetBattleCardCount(0);
     case 3:
-        return sub_81445C0(1);
+        return MEvent_GetBattleCardCount(1);
     case 4:
-        return sub_81445C0(2);
+        return MEvent_GetBattleCardCount(2);
     default:
         AGB_ASSERT_EX(0, ABSPATH("scr_tool.c"), 3873);
         return 0;
@@ -2436,7 +2436,7 @@ bool8 Special_BadEggInParty(void)
 
 bool8 Special_PlayerIsNotInTrainerTowerLobby(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_LOBBY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY))
         return FALSE;
     else
         return TRUE;

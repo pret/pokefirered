@@ -11,9 +11,12 @@
 #include "script.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/field_tasks.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
+
+// TODO: Metatile IDs in this file
 
 static void DummyPerStepCallback(u8 taskId);
 static void AshGrassPerStepCallback(u8 taskId);
@@ -22,14 +25,14 @@ static void CrackedFloorPerStepCallback(u8 taskId);
 
 static const TaskFunc sPerStepCallbacks[] =
 {
-    DummyPerStepCallback,
-    AshGrassPerStepCallback,
-    DummyPerStepCallback,
-    DummyPerStepCallback,
-    IcefallCaveIcePerStepCallback,
-    DummyPerStepCallback,
-    DummyPerStepCallback,
-    CrackedFloorPerStepCallback
+    [STEP_CB_DUMMY]             = DummyPerStepCallback,
+    [STEP_CB_ASH]               = AshGrassPerStepCallback,
+    [STEP_CB_FORTREE_BRIDGE]    = DummyPerStepCallback,
+    [STEP_CB_PACIFIDLOG_BRIDGE] = DummyPerStepCallback,
+    [STEP_CB_ICE]               = IcefallCaveIcePerStepCallback,
+    [STEP_CB_TRUCK]             = DummyPerStepCallback,
+    [STEP_CB_SECRET_BASE]       = DummyPerStepCallback,
+    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback
 };
 
 static const u8 sIcefallCaveIceTileCoords[][2] =

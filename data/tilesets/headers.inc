@@ -1,749 +1,749 @@
 
 	.align 2
-gTileset_82D4A94::
+gTileset_General::
 	.byte TRUE @ is compressed
 	.byte FALSE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8EA1D68
-	.4byte gTilesetPalettes_8EA1B68
-	.4byte gMetatiles_829F6C8
-	.4byte sub_8070154
-	.4byte gMetatileAttributes_82A1EC8
+	.4byte gTilesetTiles_General
+	.4byte gTilesetPalettes_General
+	.4byte gMetatiles_General
+	.4byte InitTilesetAnim_General
+	.4byte gMetatileAttributes_General
 
 	.align 2
-gTileset_82D4AAC::
+gTileset_PalletTown::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_826D37C
-	.4byte gTilesetPalettes_826D7C0
-	.4byte gMetatiles_82A28C8
+	.4byte gTilesetTiles_PalletTown
+	.4byte gTilesetPalettes_PalletTown
+	.4byte gMetatiles_PalletTown
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A2E58
+	.4byte gMetatileAttributes_PalletTown
 
 	.align 2
-gTileset_82D4AC4::
+gTileset_ViridianCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_826D9C0
-	.4byte gTilesetPalettes_826DFC0
-	.4byte gMetatiles_82A2FBC
+	.4byte gTilesetTiles_ViridianCity
+	.4byte gTilesetPalettes_ViridianCity
+	.4byte gMetatiles_ViridianCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A35AC
+	.4byte gMetatileAttributes_ViridianCity
 
 	.align 2
-gTileset_82D4ADC::
+gTileset_PewterCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_826E1C0
-	.4byte gTilesetPalettes_826EAB8
-	.4byte gMetatiles_82A3728
+	.4byte gTilesetTiles_PewterCity
+	.4byte gTilesetPalettes_PewterCity
+	.4byte gMetatiles_PewterCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A3C18
+	.4byte gMetatileAttributes_PewterCity
 
 	.align 2
-gTileset_82D4AF4::
+gTileset_CeruleanCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_826ECB8
-	.4byte gTilesetPalettes_826F4B8
-	.4byte gMetatiles_82A3D54
+	.4byte gTilesetTiles_CeruleanCity
+	.4byte gTilesetPalettes_CeruleanCity
+	.4byte gMetatiles_CeruleanCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A45B4
+	.4byte gMetatileAttributes_CeruleanCity
 
 	.align 2
-gTileset_82D4B0C::
+gTileset_LavenderTown::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_826F6B8
-	.4byte gTilesetPalettes_8270438
-	.4byte gMetatiles_82A47CC
+	.4byte gTilesetTiles_LavenderTown
+	.4byte gTilesetPalettes_LavenderTown
+	.4byte gMetatiles_LavenderTown
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A556C
+	.4byte gMetatileAttributes_LavenderTown
 
 	.align 2
-gTileset_82D4B24::
+gTileset_VermilionCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8270638
-	.4byte gTilesetPalettes_8270DA0
-	.4byte gMetatiles_82A58D4
+	.4byte gTilesetTiles_VermilionCity
+	.4byte gTilesetPalettes_VermilionCity
+	.4byte gMetatiles_VermilionCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A6354
+	.4byte gMetatileAttributes_VermilionCity
 
 	.align 2
-gTileset_82D4B3C::
+gTileset_CeladonCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8270FA0
-	.4byte gTilesetPalettes_8271C74
-	.4byte gMetatiles_82A65F4
-	.4byte sub_80701D8
-	.4byte gMetatileAttributes_82A74F4
+	.4byte gTilesetTiles_CeladonCity
+	.4byte gTilesetPalettes_CeladonCity
+	.4byte gMetatiles_CeladonCity
+	.4byte InitTilesetAnim_CeladonCity
+	.4byte gMetatileAttributes_CeladonCity
 
 	.align 2
-gTileset_82D4B54::
+gTileset_FuchsiaCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8271E74
-	.4byte gTilesetPalettes_8272A5C
-	.4byte gMetatiles_82A78B4
+	.4byte gTilesetTiles_FuchsiaCity
+	.4byte gTilesetPalettes_FuchsiaCity
+	.4byte gMetatiles_FuchsiaCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A84B4
+	.4byte gMetatileAttributes_FuchsiaCity
 
 	.align 2
-gTileset_82D4B6C::
+gTileset_CinnabarIsland::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8272C5C
-	.4byte gTilesetPalettes_8273358
-	.4byte gMetatiles_82A87B4
+	.4byte gTilesetTiles_CinnabarIsland
+	.4byte gTilesetPalettes_CinnabarIsland
+	.4byte gMetatiles_CinnabarIsland
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A8BB4
+	.4byte gMetatileAttributes_CinnabarIsland
 
 	.align 2
-gTileset_82D4B84::
+gTileset_IndigoPlateau::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8273558
-	.4byte gTilesetPalettes_82742D0
-	.4byte gMetatiles_82A8CB4
+	.4byte gTilesetTiles_IndigoPlateau
+	.4byte gTilesetPalettes_IndigoPlateau
+	.4byte gMetatiles_IndigoPlateau
 	.4byte 0x0
-	.4byte gMetatileAttributes_82A97B4
+	.4byte gMetatileAttributes_IndigoPlateau
 
 	.align 2
-gTileset_82D4B9C::
+gTileset_SaffronCity::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82744D0
-	.4byte gTilesetPalettes_8275094
-	.4byte gMetatiles_82A9A74
+	.4byte gTilesetTiles_SaffronCity
+	.4byte gTilesetPalettes_SaffronCity
+	.4byte gMetatiles_SaffronCity
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AA6F4
+	.4byte gMetatileAttributes_SaffronCity
 
 	.align 2
-gTileset_82D4BB4::
+gTileset_Building::
 	.byte TRUE @ is compressed
 	.byte FALSE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8275294
-	.4byte gTilesetPalettes_8277694
-	.4byte gMetatiles_82AD7B4
+	.4byte gTilesetTiles_Building
+	.4byte gTilesetPalettes_Building
+	.4byte gMetatiles_Building
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AFFB4
+	.4byte gMetatileAttributes_Building
 
 	.align 2
-gTileset_82D4BCC::
+gTileset_Mart::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8277894
-	.4byte gTilesetPalettes_8277A5C
-	.4byte gMetatiles_82B3524
+	.4byte gTilesetTiles_Mart
+	.4byte gTilesetPalettes_Mart
+	.4byte gMetatiles_Mart
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B3954
+	.4byte gMetatileAttributes_Mart
 
 	.align 2
-gTileset_82D4BE4::
+gTileset_PokemonCenter::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8277C5C
-	.4byte gTilesetPalettes_8278CC4
-	.4byte gMetatiles_82B3A60
+	.4byte gTilesetTiles_PokemonCenter
+	.4byte gTilesetPalettes_PokemonCenter
+	.4byte gMetatiles_PokemonCenter
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B4A50
+	.4byte gMetatileAttributes_PokemonCenter
 
 	.align 2
-gTileset_82D4BFC::
+gTileset_Cave::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8278EC4
-	.4byte gTilesetPalettes_827A1A8
-	.4byte gMetatiles_82B502C
+	.4byte gTilesetTiles_Cave
+	.4byte gTilesetPalettes_Cave
+	.4byte gMetatiles_Cave
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B5A3C
+	.4byte gMetatileAttributes_Cave
 
 	.align 2
-gTileset_82D4C14::
+gTileset_Dummy1::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_827A3A8
-	.4byte gTilesetPalettes_827A3B8
-	.4byte gMetatiles_82B09B4
+	.4byte gTilesetTiles_Dummy1
+	.4byte gTilesetPalettes_Dummy1
+	.4byte gMetatiles_Dummy1
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B09D4
+	.4byte gMetatileAttributes_Dummy1
 
 	.align 2
-gTileset_82D4C2C::
+gTileset_Museum::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_827A5B8
-	.4byte gTilesetPalettes_827AE14
-	.4byte gMetatiles_82C5738
+	.4byte gTilesetTiles_Museum
+	.4byte gTilesetPalettes_Museum
+	.4byte gMetatiles_Museum
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C5FA8
+	.4byte gMetatileAttributes_Museum
 
 	.align 2
-gTileset_82D4C44::
+gTileset_CableClub::
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_827B014
-	.4byte gTilesetPalettes_827FF14
-	.4byte gMetatiles_82C61C4
+	.4byte gTilesetTiles_CableClub
+	.4byte gTilesetPalettes_CableClub
+	.4byte gMetatiles_CableClub
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C71C4
+	.4byte gMetatileAttributes_CableClub
 
 	.align 2
-gTileset_82D4C5C::
+gTileset_BikeShop::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8280114
-	.4byte gTilesetPalettes_82804EC
-	.4byte gMetatiles_82B31DC
+	.4byte gTilesetTiles_BikeShop
+	.4byte gTilesetPalettes_BikeShop
+	.4byte gMetatiles_BikeShop
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B347C
+	.4byte gMetatileAttributes_BikeShop
 
 	.align 2
-gTileset_82D4C74::
+gTileset_GenericBuilding1::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8EA99F4
-	.4byte gTilesetPalettes_8EA97F4
-	.4byte gMetatiles_82B4E4C
+	.4byte gTilesetTiles_GenericBuilding1
+	.4byte gTilesetPalettes_GenericBuilding1
+	.4byte gMetatiles_GenericBuilding1
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B4FCC
+	.4byte gMetatileAttributes_GenericBuilding1
 
 	.align 2
-gTileset_82D4C8C::
+gTileset_Lab::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82806EC
-	.4byte gTilesetPalettes_8280D00
-	.4byte gMetatiles_82B68A0
+	.4byte gTilesetTiles_Lab
+	.4byte gTilesetPalettes_Lab
+	.4byte gMetatiles_Lab
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B7390
+	.4byte gMetatileAttributes_Lab
 
 	.align 2
-gTileset_82D4CA4::
+gTileset_FuchsiaGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8285350
-	.4byte gTilesetPalettes_82857A4
-	.4byte gMetatiles_82AC364
+	.4byte gTilesetTiles_FuchsiaGym
+	.4byte gTilesetPalettes_FuchsiaGym
+	.4byte gMetatiles_FuchsiaGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AC584
+	.4byte gMetatileAttributes_FuchsiaGym
 
 	.align 2
-gTileset_82D4CBC::
+gTileset_ViridianGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82867D4
-	.4byte gTilesetPalettes_8286BC8
-	.4byte gMetatiles_82AD124
+	.4byte gTilesetTiles_ViridianGym
+	.4byte gTilesetPalettes_ViridianGym
+	.4byte gMetatiles_ViridianGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AD664
+	.4byte gMetatileAttributes_ViridianGym
 
 	.align 2
-gTileset_82D4CD4::
+gTileset_HoennBuilding::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8280F00
-	.4byte gTilesetPalettes_82823A4
-	.4byte gMetatiles_82B09DC
+	.4byte gTilesetTiles_HoennBuilding
+	.4byte gTilesetPalettes_HoennBuilding
+	.4byte gMetatiles_HoennBuilding
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B29DC
+	.4byte gMetatileAttributes_HoennBuilding
 
 	.align 2
-gTileset_82D4CEC::
+gTileset_GameCorner::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82825A4
-	.4byte gTilesetPalettes_8282FBC
-	.4byte gMetatiles_82B5CC0
+	.4byte gTilesetTiles_GameCorner
+	.4byte gTilesetPalettes_GameCorner
+	.4byte gMetatiles_GameCorner
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B6640
+	.4byte gMetatileAttributes_GameCorner
 
 	.align 2
-gTileset_82D4D04::
+gTileset_PewterGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82831BC
-	.4byte gTilesetPalettes_82839B0
-	.4byte gMetatiles_82AAA14
+	.4byte gTilesetTiles_PewterGym
+	.4byte gTilesetPalettes_PewterGym
+	.4byte gMetatiles_PewterGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AB064
+	.4byte gMetatileAttributes_PewterGym
 
 	.align 2
-gTileset_82D4D1C::
+gTileset_CeruleanGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8283BB0
-	.4byte gTilesetPalettes_8283FF8
-	.4byte gMetatiles_82AB1F8
+	.4byte gTilesetTiles_CeruleanGym
+	.4byte gTilesetPalettes_CeruleanGym
+	.4byte gMetatiles_CeruleanGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AB738
+	.4byte gMetatileAttributes_CeruleanGym
 
 	.align 2
-gTileset_82D4D34::
+gTileset_VermilionGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82841F8
-	.4byte gTilesetPalettes_82849B8
-	.4byte gMetatiles_82AB888
-	.4byte sub_807031C
-	.4byte gMetatileAttributes_82ABD38
+	.4byte gTilesetTiles_VermilionGym
+	.4byte gTilesetPalettes_VermilionGym
+	.4byte gMetatiles_VermilionGym
+	.4byte InitTilesetAnim_VermilionGym
+	.4byte gMetatileAttributes_VermilionGym
 
 	.align 2
-gTileset_82D4D4C::
+gTileset_CeladonGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8284BB8
-	.4byte gTilesetPalettes_8285150
-	.4byte gMetatiles_82ABE64
-	.4byte sub_8070380
-	.4byte gMetatileAttributes_82AC264
+	.4byte gTilesetTiles_CeladonGym
+	.4byte gTilesetPalettes_CeladonGym
+	.4byte gMetatiles_CeladonGym
+	.4byte InitTilesetAnim_CeladonGym
+	.4byte gMetatileAttributes_CeladonGym
 
 	.align 2
-gTileset_82D4D64::
+gTileset_SaffronGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82859A4
-	.4byte gTilesetPalettes_8285D90
-	.4byte gMetatiles_82AC60C
+	.4byte gTilesetTiles_SaffronGym
+	.4byte gTilesetPalettes_SaffronGym
+	.4byte gMetatiles_SaffronGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82AC8EC
+	.4byte gMetatileAttributes_SaffronGym
 
 	.align 2
-gTileset_82D4D7C::
+gTileset_CinnabarGym::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8285F90
-	.4byte gTilesetPalettes_82865D4
-	.4byte gMetatiles_82AC9A4
+	.4byte gTilesetTiles_CinnabarGym
+	.4byte gTilesetPalettes_CinnabarGym
+	.4byte gMetatiles_CinnabarGym
 	.4byte 0x0
-	.4byte gMetatileAttributes_82ACFA4
+	.4byte gMetatileAttributes_CinnabarGym
 
 	.align 2
-gTileset_82D4D94::
+gTileset_SSAnne::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8286DC8
-	.4byte gTilesetPalettes_8287B80
-	.4byte gMetatiles_82B764C
+	.4byte gTilesetTiles_SSAnne
+	.4byte gTilesetPalettes_SSAnne
+	.4byte gMetatiles_SSAnne
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B8B4C
+	.4byte gMetatileAttributes_SSAnne
 
 	.align 2
-gTileset_82D4DAC::
+gTileset_Dummy2::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8287D80
-	.4byte gTilesetPalettes_8287D94
-	.4byte gMetatiles_82B908C
+	.4byte gTilesetTiles_Dummy2
+	.4byte gTilesetPalettes_Dummy2
+	.4byte gMetatiles_Dummy2
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B90AC
+	.4byte gMetatileAttributes_Dummy2
 
 	.align 2
-gTileset_82D4DC4::
+gTileset_ViridianForest::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8287F94
-	.4byte gTilesetPalettes_8288444
-	.4byte gMetatiles_82B90B4
+	.4byte gTilesetTiles_ViridianForest
+	.4byte gTilesetPalettes_ViridianForest
+	.4byte gMetatiles_ViridianForest
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B9364
+	.4byte gMetatileAttributes_ViridianForest
 
 	.align 2
-gTileset_82D4DDC::
+gTileset_UnusedGatehouse1::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8288644
-	.4byte gTilesetPalettes_8288C60
-	.4byte gMetatiles_82B9410
+	.4byte gTilesetTiles_UnusedGatehouse1
+	.4byte gTilesetPalettes_UnusedGatehouse1
+	.4byte gMetatiles_UnusedGatehouse1
 	.4byte 0x0
-	.4byte gMetatileAttributes_82B9B30
+	.4byte gMetatileAttributes_UnusedGatehouse1
 
 	.align 2
-gTileset_82D4DF4::
+gTileset_RockTunnel::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8288E60
-	.4byte gTilesetPalettes_8289FC8
-	.4byte gMetatiles_82B9CF8
+	.4byte gTilesetTiles_RockTunnel
+	.4byte gTilesetPalettes_RockTunnel
+	.4byte gMetatiles_RockTunnel
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BA678
+	.4byte gMetatileAttributes_RockTunnel
 
 	.align 2
-gTileset_82D4E0C::
+gTileset_DiglettsCave::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828A1C8
-	.4byte gTilesetPalettes_828B250
-	.4byte gMetatiles_82BA8D8
+	.4byte gTilesetTiles_DiglettsCave
+	.4byte gTilesetPalettes_DiglettsCave
+	.4byte gMetatiles_DiglettsCave
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BB2A8
+	.4byte gMetatileAttributes_DiglettsCave
 
 	.align 2
-gTileset_82D4E24::
+gTileset_SeafoamIslands::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828B450
-	.4byte gTilesetPalettes_828CAA0
-	.4byte gMetatiles_82BB51C
+	.4byte gTilesetTiles_SeafoamIslands
+	.4byte gTilesetPalettes_SeafoamIslands
+	.4byte gMetatiles_SeafoamIslands
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BC49C
+	.4byte gMetatileAttributes_SeafoamIslands
 
 	.align 2
-gTileset_82D4E3C::
+gTileset_UnusedGatehouse2::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828CCA0
-	.4byte gTilesetPalettes_828D2BC
-	.4byte gMetatiles_82BC87C
+	.4byte gTilesetTiles_UnusedGatehouse2
+	.4byte gTilesetPalettes_UnusedGatehouse2
+	.4byte gMetatiles_UnusedGatehouse2
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BCF9C
+	.4byte gMetatileAttributes_UnusedGatehouse2
 
 	.align 2
-gTileset_82D4E54::
+gTileset_CeruleanCave::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828D4BC
-	.4byte gTilesetPalettes_828E3A4
-	.4byte gMetatiles_82BD164
+	.4byte gTilesetTiles_CeruleanCave
+	.4byte gTilesetPalettes_CeruleanCave
+	.4byte gMetatiles_CeruleanCave
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BD9C4
+	.4byte gMetatileAttributes_CeruleanCave
 
 	.align 2
-gTileset_82D4E6C::
+gTileset_DepartmentStore::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8EA9F88
-	.4byte gTilesetPalettes_8EA9D88
-	.4byte gMetatiles_82BDBDC
+	.4byte gTilesetTiles_DepartmentStore
+	.4byte gTilesetPalettes_DepartmentStore
+	.4byte gMetatiles_DepartmentStore
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BEB3C
+	.4byte gMetatileAttributes_DepartmentStore
 
 	.align 2
-gTileset_82D4E84::
+gTileset_GenericBuilding2::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828E5A4
-	.4byte gTilesetPalettes_828EC70
-	.4byte gMetatiles_82BEF14
+	.4byte gTilesetTiles_GenericBuilding2
+	.4byte gTilesetPalettes_GenericBuilding2
+	.4byte gMetatiles_GenericBuilding2
 	.4byte 0x0
-	.4byte gMetatileAttributes_82BFA94
+	.4byte gMetatileAttributes_GenericBuilding2
 
 	.align 2
-gTileset_82D4E9C::
+gTileset_PowerPlant::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828EE70
-	.4byte gTilesetPalettes_828F378
-	.4byte gMetatiles_82BFD74
+	.4byte gTilesetTiles_PowerPlant
+	.4byte gTilesetPalettes_PowerPlant
+	.4byte gMetatiles_PowerPlant
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C0704
+	.4byte gMetatileAttributes_PowerPlant
 
 	.align 2
-gTileset_82D4EB4::
+gTileset_SeaCottage::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828F578
-	.4byte gTilesetPalettes_828F9D8
-	.4byte gMetatiles_82C0968
+	.4byte gTilesetTiles_SeaCottage
+	.4byte gTilesetPalettes_SeaCottage
+	.4byte gMetatiles_SeaCottage
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C0D18
+	.4byte gMetatileAttributes_SeaCottage
 
 	.align 2
-gTileset_82D4ECC::
+gTileset_SilphCo::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828FBD8
-	.4byte gTilesetPalettes_8290DD0
-	.4byte gMetatiles_82C0E04
-	.4byte sub_8070250
-	.4byte gMetatileAttributes_82C25A4
+	.4byte gTilesetTiles_SilphCo
+	.4byte gTilesetPalettes_SilphCo
+	.4byte gMetatiles_SilphCo
+	.4byte InitTilesetAnim_SilphCo
+	.4byte gMetatileAttributes_SilphCo
 
 	.align 2
-gTileset_82D4EE4::
+gTileset_UndergroundPath::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8290FD0
-	.4byte gTilesetPalettes_8291274
-	.4byte gMetatiles_82C2B8C
+	.4byte gTilesetTiles_UndergroundPath
+	.4byte gTilesetPalettes_UndergroundPath
+	.4byte gMetatiles_UndergroundPath
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C300C
+	.4byte gMetatileAttributes_UndergroundPath
 
 	.align 2
-gTileset_82D4EFC::
+gTileset_PokemonTower::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8291474
-	.4byte gTilesetPalettes_8291AFC
-	.4byte gMetatiles_82C312C
+	.4byte gTilesetTiles_PokemonTower
+	.4byte gTilesetPalettes_PokemonTower
+	.4byte gMetatiles_PokemonTower
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C377C
+	.4byte gMetatileAttributes_PokemonTower
 
 	.align 2
-gTileset_82D4F14::
+gTileset_SafariZoneBuilding::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8291CFC
-	.4byte gTilesetPalettes_82920F0
-	.4byte gMetatiles_82C3910
+	.4byte gTilesetTiles_SafariZoneBuilding
+	.4byte gTilesetPalettes_SafariZoneBuilding
+	.4byte gMetatiles_SafariZoneBuilding
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C4110
+	.4byte gMetatileAttributes_SafariZoneBuilding
 
 	.align 2
-gTileset_82D4F2C::
+gTileset_PokemonMansion::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82922F0
-	.4byte gTilesetPalettes_8292FF0
-	.4byte gMetatiles_82C4310
+	.4byte gTilesetTiles_PokemonMansion
+	.4byte gTilesetPalettes_PokemonMansion
+	.4byte gMetatiles_PokemonMansion
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C5330
+	.4byte gMetatileAttributes_PokemonMansion
 
 	.align 2
-gTileset_82D4F44::
+gTileset_RestaurantHotel::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82931F0
-	.4byte gTilesetPalettes_8293660
-	.4byte gMetatiles_82C75C4
+	.4byte gTilesetTiles_RestaurantHotel
+	.4byte gTilesetPalettes_RestaurantHotel
+	.4byte gMetatiles_RestaurantHotel
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C7C44
+	.4byte gMetatileAttributes_RestaurantHotel
 
 	.align 2
-gTileset_82D4F5C::
+gTileset_School::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8293860
-	.4byte gTilesetPalettes_8293B0C
-	.4byte gMetatiles_82C7DE4
+	.4byte gTilesetTiles_School
+	.4byte gTilesetPalettes_School
+	.4byte gMetatiles_School
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C80C4
+	.4byte gMetatileAttributes_School
 
 	.align 2
-gTileset_82D4F74::
+gTileset_FanClubDaycare::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8293D0C
-	.4byte gTilesetPalettes_8294144
-	.4byte gMetatiles_82C817C
+	.4byte gTilesetTiles_FanClubDaycare
+	.4byte gTilesetPalettes_FanClubDaycare
+	.4byte gMetatiles_FanClubDaycare
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C8C1C
+	.4byte gMetatileAttributes_FanClubDaycare
 
 	.align 2
-gTileset_82D4F8C::
+gTileset_Condominiums::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_828FBD8
-	.4byte gTilesetPalettes_8290DD0
-	.4byte gMetatiles_82C8EC4
+	.4byte gTilesetTiles_SilphCo
+	.4byte gTilesetPalettes_SilphCo
+	.4byte gMetatiles_Condominiums
 	.4byte 0x0
-	.4byte gMetatileAttributes_82C9C34
+	.4byte gMetatileAttributes_Condominiums
 
 	.align 2
-gTileset_82D4FA4::
+gTileset_BurgledHouse::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8294344
-	.4byte gTilesetPalettes_8294D08
-	.4byte gMetatiles_82C9F90
+	.4byte gTilesetTiles_BurgledHouse
+	.4byte gTilesetPalettes_BurgledHouse
+	.4byte gMetatiles_BurgledHouse
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CA320
+	.4byte gMetatileAttributes_BurgledHouse
 
 	.align 2
-gTileset_82D4FBC::
+gTileset_Dummy3::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8294F08
-	.4byte gTilesetPalettes_8294F18
-	.4byte gMetatiles_82CA404
+	.4byte gTilesetTiles_Dummy3
+	.4byte gTilesetPalettes_Dummy3
+	.4byte gMetatiles_Dummy3
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CA424
+	.4byte gMetatileAttributes_Dummy3
 
 	.align 2
-gTileset_82D4FD4::
+gTileset_Dummy4::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8295118
-	.4byte gTilesetPalettes_829512C
-	.4byte gMetatiles_82CA42C
+	.4byte gTilesetTiles_Dummy4
+	.4byte gTilesetPalettes_Dummy4
+	.4byte gMetatiles_Dummy4
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CA44C
+	.4byte gMetatileAttributes_Dummy4
 
 	.align 2
-gTileset_82D4FEC::
+gTileset_MtEmber::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829532C
-	.4byte gTilesetPalettes_82967D4
-	.4byte gMetatiles_82CA454
-	.4byte sub_80702B4
-	.4byte gMetatileAttributes_82CB274
+	.4byte gTilesetTiles_MtEmber
+	.4byte gTilesetPalettes_MtEmber
+	.4byte gMetatiles_MtEmber
+	.4byte InitTilesetAnim_MtEmber
+	.4byte gMetatileAttributes_MtEmber
 
 	.align 2
-gTileset_82D5004::
+gTileset_BerryForest::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82969D4
-	.4byte gTilesetPalettes_8296E90
-	.4byte gMetatiles_82CB5FC
+	.4byte gTilesetTiles_BerryForest
+	.4byte gTilesetPalettes_BerryForest
+	.4byte gMetatiles_BerryForest
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CB89C
+	.4byte gMetatileAttributes_BerryForest
 
 	.align 2
-gTileset_82D501C::
+gTileset_NavelRock::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8297090
-	.4byte gTilesetPalettes_82983BC
-	.4byte gMetatiles_82CB944
+	.4byte gTilesetTiles_NavelRock
+	.4byte gTilesetPalettes_NavelRock
+	.4byte gMetatiles_NavelRock
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CC704
+	.4byte gMetatileAttributes_NavelRock
 
 	.align 2
-gTileset_82D5034::
+gTileset_TanobyRuins::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_82985BC
-	.4byte gTilesetPalettes_8298970
-	.4byte gMetatiles_82CCA74
+	.4byte gTilesetTiles_TanobyRuins
+	.4byte gTilesetPalettes_TanobyRuins
+	.4byte gMetatiles_TanobyRuins
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CD054
+	.4byte gMetatileAttributes_TanobyRuins
 
 	.align 2
-gTileset_82D504C::
+gTileset_SeviiIslands123::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8298B70
-	.4byte gTilesetPalettes_8299AA4
-	.4byte gMetatiles_82CD1CC
+	.4byte gTilesetTiles_SeviiIslands123
+	.4byte gTilesetPalettes_SeviiIslands123
+	.4byte gMetatiles_SeviiIslands123
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CE39C
+	.4byte gMetatileAttributes_SeviiIslands123
 
 	.align 2
-gTileset_82D5064::
+gTileset_SeviiIslands45::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_8299CA4
-	.4byte gTilesetPalettes_829AB04
-	.4byte gMetatiles_82CE810
+	.4byte gTilesetTiles_SeviiIslands45
+	.4byte gTilesetPalettes_SeviiIslands45
+	.4byte gMetatiles_SeviiIslands45
 	.4byte 0x0
-	.4byte gMetatileAttributes_82CF190
+	.4byte gMetatileAttributes_SeviiIslands45
 
 	.align 2
-gTileset_82D507C::
+gTileset_SeviiIslands67::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829AD04
-	.4byte gTilesetPalettes_829BD64
-	.4byte gMetatiles_82CF3F0
+	.4byte gTilesetTiles_SeviiIslands67
+	.4byte gTilesetPalettes_SeviiIslands67
+	.4byte gMetatiles_SeviiIslands67
 	.4byte 0x0
-	.4byte gMetatileAttributes_82D02F0
+	.4byte gMetatileAttributes_SeviiIslands67
 
 	.align 2
-gTileset_82D5094::
+gTileset_TrainerTower::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829BF64
-	.4byte gTilesetPalettes_829CEE4
-	.4byte gMetatiles_82D06B0
+	.4byte gTilesetTiles_TrainerTower
+	.4byte gTilesetPalettes_TrainerTower
+	.4byte gMetatiles_TrainerTower
 	.4byte 0x0
-	.4byte gMetatileAttributes_82D18B0
+	.4byte gMetatileAttributes_TrainerTower
 
 	.align 2
-gTileset_82D50AC::
+gTileset_IslandHarbor::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829D0E4
-	.4byte gTilesetPalettes_829D894
-	.4byte gMetatiles_82D1D30
+	.4byte gTilesetTiles_IslandHarbor
+	.4byte gTilesetPalettes_IslandHarbor
+	.4byte gMetatiles_IslandHarbor
 	.4byte 0x0
-	.4byte gMetatileAttributes_82D2220
+	.4byte gMetatileAttributes_IslandHarbor
 
 	.align 2
-gTileset_82D50C4::
+gTileset_PokemonLeague::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829DA94
-	.4byte gTilesetPalettes_829EA50
-	.4byte gMetatiles_82D235C
+	.4byte gTilesetTiles_PokemonLeague
+	.4byte gTilesetPalettes_PokemonLeague
+	.4byte gMetatiles_PokemonLeague
 	.4byte 0x0
-	.4byte gMetatileAttributes_82D3B5C
+	.4byte gMetatileAttributes_PokemonLeague
 
 	.align 2
-gTileset_82D50DC::
+gTileset_HallOfFame::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary
 	.2byte 0 @ padding
-	.4byte gTilesetTiles_829EC50
-	.4byte gTilesetPalettes_829F4C8
-	.4byte gMetatiles_82D415C
+	.4byte gTilesetTiles_HallOfFame
+	.4byte gTilesetPalettes_HallOfFame
+	.4byte gMetatiles_HallOfFame
 	.4byte 0x0
-	.4byte gMetatileAttributes_82D48BC
+	.4byte gMetatileAttributes_HallOfFame
 

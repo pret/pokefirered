@@ -1,7 +1,7 @@
 {
-  "id": "MAP_SAFFRON_CITY_CLASSIC",
-  "name": "SaffronCity_Classic",
-  "layout": "LAYOUT_SAFFRON_CITY_CLASSIC",
+  "id": "MAP_SAFFRON_CITY_CONNECTION",
+  "name": "SaffronCity_Connection",
+  "layout": "LAYOUT_SAFFRON_CITY_CONNECTION",
   "music": "MUS_NIBI",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,

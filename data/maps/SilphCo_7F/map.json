@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161AC8",
+      "script": "SilphCo_7F_EventScript_LaprasGuy",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_7F_EventScript_161C1A",
+      "script": "SilphCo_7F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_7F_EventScript_161C31",
+      "script": "SilphCo_7F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_7F_EventScript_161C48",
+      "script": "SilphCo_7F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161BD9",
+      "script": "SilphCo_7F_EventScript_WorkerF",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161B97",
+      "script": "SilphCo_7F_EventScript_WorkerM1",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161BB8",
+      "script": "SilphCo_7F_EventScript_WorkerM2",
       "flag": "0"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SilphCo_7F_EventScript_161C03",
+      "script": "SilphCo_7F_EventScript_Joshua",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -209,7 +209,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_7F",
       "var_value": 0,
-      "script": "SilphCo_7F_EventScript_1619BC"
+      "script": "SilphCo_7F_EventScript_RivalTriggerTop"
     },
     {
       "type": "trigger",
@@ -218,7 +218,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_7F",
       "var_value": 0,
-      "script": "SilphCo_7F_EventScript_1619C8"
+      "script": "SilphCo_7F_EventScript_RivalTriggerBottom"
     }
   ],
   "bg_events": [
@@ -321,7 +321,7 @@
       "x": 20,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_161BFA"
+      "script": "SilphCo_7F_EventScript_FloorSign"
     }
   ]
 }

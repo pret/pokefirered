@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_11F_EventScript_161DFE",
+      "script": "SilphCo_11F_EventScript_President",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_11F_EventScript_161E7F",
+      "script": "SilphCo_11F_EventScript_Secretary",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "SilphCo_11F_EventScript_161F40",
+      "script": "SilphCo_11F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "SilphCo_11F_EventScript_161F57",
+      "script": "SilphCo_11F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     }
   ],
@@ -123,7 +123,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_11F",
       "var_value": 0,
-      "script": "SilphCo_11F_EventScript_161E88"
+      "script": "SilphCo_11F_EventScript_GiovanniTriggerLeft"
     },
     {
       "type": "trigger",
@@ -132,7 +132,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_11F",
       "var_value": 0,
-      "script": "SilphCo_11F_EventScript_161E94"
+      "script": "SilphCo_11F_EventScript_GiovanniTriggerRight"
     }
   ],
   "bg_events": [
@@ -179,7 +179,7 @@
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_11F_EventScript_161F37"
+      "script": "SilphCo_11F_EventScript_FloorSign"
     }
   ]
 }

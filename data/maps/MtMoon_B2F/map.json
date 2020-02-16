@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtMoon_B2F_EventScript_16071B",
+      "script": "MtMoon_B2F_EventScript_DomeFossil",
       "flag": "FLAG_HIDE_DOME_FOSSIL"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtMoon_B2F_EventScript_16077F",
+      "script": "MtMoon_B2F_EventScript_HelixFossil",
       "flag": "FLAG_HIDE_HELIX_FOSSIL"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "MtMoon_B2F_EventScript_1606C2",
+      "script": "MtMoon_B2F_EventScript_Miguel",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "MtMoon_B2F_EventScript_160829",
+      "script": "MtMoon_B2F_EventScript_Grunt4",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "MtMoon_B2F_EventScript_1607E4",
+      "script": "MtMoon_B2F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "MtMoon_B2F_EventScript_160812",
+      "script": "MtMoon_B2F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "MtMoon_B2F_EventScript_1607FB",
+      "script": "MtMoon_B2F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
@@ -195,7 +195,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_MT_MOON_B2F",
       "var_value": 0,
-      "script": "MtMoon_B2F_EventScript_1606B0"
+      "script": "MtMoon_B2F_EventScript_MiguelTrigger"
     }
   ],
   "bg_events": [

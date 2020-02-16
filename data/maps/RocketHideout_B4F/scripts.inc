@@ -1,33 +1,39 @@
+.equ LOCALID_GIOVANNI,    1
+.equ LOCALID_SILPH_SCOPE, 2
+.equ LOCALID_LIFT_KEY,    4
+
+.equ NUM_DOOR_GRUNTS_DEFEATED, VAR_TEMP_1
+
 RocketHideout_B4F_MapScripts:: @ 81612E8
 	map_script MAP_SCRIPT_ON_LOAD, RocketHideout_B4F_OnLoad
 	.byte 0
 
 RocketHideout_B4F_OnLoad:: @ 81612EE
-	setvar VAR_TEMP_1, 0
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
-	compare VAR_TEMP_1, 2
-	call_if_ne EventScript_16146A
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	call_if_ne RocketHideout_B4F_EventScript_SetBarrier
 	end
 
-EventScript_161311:: @ 8161311
-	addvar VAR_TEMP_1, 1
+RocketHideout_B4F_EventScript_CountGruntDefeated:: @ 8161311
+	addvar NUM_DOOR_GRUNTS_DEFEATED, 1
 	return
 
-RocketHideout_B4F_EventScript_161317:: @ 8161317
+RocketHideout_B4F_EventScript_Giovanni:: @ 8161317
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 0
-	message Text_175226
+	message RocketHideout_B4F_Text_GiovanniIntro
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, Text_175318
-	msgbox gUnknown_817532D
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI, RocketHideout_B4F_Text_GiovanniDefeat
+	msgbox RocketHideout_B4F_Text_GiovanniPostBattle
 	fadescreen FADE_TO_BLACK
 	closemessage
-	removeobject 1
-	addobject 2
+	removeobject LOCALID_GIOVANNI
+	addobject LOCALID_SILPH_SCOPE
 	clearflag FLAG_HIDE_SILPH_SCOPE
 	setflag FLAG_HIDE_CELADON_ROCKETS
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
@@ -38,22 +44,22 @@ RocketHideout_B4F_EventScript_161317:: @ 8161317
 RocketHideout_B4F_EventScript_SilphScope:: @ 8161363
 	lock
 	faceplayer
-	removeobject 2
+	removeobject LOCALID_SILPH_SCOPE
 	giveitem ITEM_SILPH_SCOPE
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
 	release
 	end
 
-RocketHideout_B4F_EventScript_161381:: @ 8161381
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_18, Text_175488, Text_1754B9, EventScript_16139D
-	msgbox gUnknown_81754BD
+RocketHideout_B4F_EventScript_Grunt1:: @ 8161381
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_18, RocketHideout_B4F_Text_Grunt1Intro, RocketHideout_B4F_Text_Grunt1Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt1
+	msgbox RocketHideout_B4F_Text_Grunt1PostBattle
 	release
 	end
 
-EventScript_16139D:: @ 816139D
-	msgbox gUnknown_81754BD
-	addobject 4
+RocketHideout_B4F_EventScript_DefeatedGrunt1:: @ 816139D
+	msgbox RocketHideout_B4F_Text_Grunt1PostBattle
+	addobject LOCALID_LIFT_KEY
 	clearflag FLAG_HIDE_LIFT_KEY
 	release
 	end
@@ -62,65 +68,65 @@ RocketHideout_B4F_EventScript_LiftKey:: @ 81613AD
 	lock
 	faceplayer
 	setflag FLAG_CAN_USE_ROCKET_HIDEOUT_LIFT
-	removeobject 4
+	removeobject LOCALID_LIFT_KEY
 	giveitem ITEM_LIFT_KEY
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
 	release
 	end
 
-RocketHideout_B4F_EventScript_1613CE:: @ 81613CE
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, Text_1753D0, Text_1753FE, EventScript_1613E9
-	msgbox gUnknown_817540C, MSGBOX_AUTOCLOSE
+RocketHideout_B4F_EventScript_Grunt2:: @ 81613CE
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_Text_Grunt2Intro, RocketHideout_B4F_Text_Grunt2Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt2
+	msgbox RocketHideout_B4F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1613E9:: @ 81613E9
-	setvar VAR_TEMP_1, 0
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
-	compare VAR_TEMP_1, 2
-	call_if_eq EventScript_1614A1
-	compare VAR_TEMP_1, 2
-	call_if_eq EventScript_161462
+RocketHideout_B4F_EventScript_DefeatedGrunt2:: @ 81613E9
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	call_if_eq RocketHideout_B4F_EventScript_RemoveBarrier
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	call_if_eq RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
 	release
 	end
 
-RocketHideout_B4F_EventScript_161418:: @ 8161418
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, Text_175437, Text_175463, EventScript_161433
-	msgbox gUnknown_817546A, MSGBOX_AUTOCLOSE
+RocketHideout_B4F_EventScript_Grunt3:: @ 8161418
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_Text_Grunt3Intro, RocketHideout_B4F_Text_Grunt3Defeat, RocketHideout_B4F_EventScript_DefeatedGrunt3
+	msgbox RocketHideout_B4F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_161433:: @ 8161433
-	setvar VAR_TEMP_1, 0
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, EventScript_161311
-	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, EventScript_161311
-	compare VAR_TEMP_1, 2
-	call_if_eq EventScript_1614A1
-	compare VAR_TEMP_1, 2
-	call_if_eq EventScript_161462
+RocketHideout_B4F_EventScript_DefeatedGrunt3:: @ 8161433
+	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
+	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	call_if_eq RocketHideout_B4F_EventScript_RemoveBarrier
+	compare NUM_DOOR_GRUNTS_DEFEATED, 2
+	call_if_eq RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval
 	release
 	end
 
-EventScript_161462:: @ 8161462
+RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval:: @ 8161462
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	return
 
-EventScript_16146A:: @ 816146A
-	setmetatile 17, 12, 718, 1
-	setmetatile 18, 12, 719, 1
-	setmetatile 17, 13, 726, 1
-	setmetatile 18, 13, 727, 1
-	setmetatile 17, 14, 642, 0
-	setmetatile 18, 14, 642, 0
+RocketHideout_B4F_EventScript_SetBarrier:: @ 816146A
+	setmetatile 17, 12, METATILE_Hideout_Barrier_TopLeft_Floor, 1
+	setmetatile 18, 12, METATILE_Hideout_Barrier_TopRight_Floor, 1
+	setmetatile 17, 13, METATILE_Hideout_Barrier_BottomLeft, 1
+	setmetatile 18, 13, METATILE_Hideout_Barrier_BottomRight, 1
+	setmetatile 17, 14, METATILE_Hideout_Floor_ShadeFull, 0
+	setmetatile 18, 14, METATILE_Hideout_Floor_ShadeFull, 0
 	return
 
-EventScript_1614A1:: @ 81614A1
-	setmetatile 17, 12, 642, 0
-	setmetatile 18, 12, 641, 0
-	setmetatile 17, 13, 642, 0
-	setmetatile 18, 13, 641, 0
-	setmetatile 17, 14, 642, 0
-	setmetatile 18, 14, 641, 0
+RocketHideout_B4F_EventScript_RemoveBarrier:: @ 81614A1
+	setmetatile 17, 12, METATILE_Hideout_Floor_ShadeFull, 0
+	setmetatile 18, 12, METATILE_Hideout_Floor, 0
+	setmetatile 17, 13, METATILE_Hideout_Floor_ShadeFull, 0
+	setmetatile 18, 13, METATILE_Hideout_Floor, 0
+	setmetatile 17, 14, METATILE_Hideout_Floor_ShadeFull, 0
+	setmetatile 18, 14, METATILE_Hideout_Floor, 0
 	return

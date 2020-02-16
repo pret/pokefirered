@@ -43,11 +43,11 @@ Route4_EventScript_1ACDEA:: @ 81ACDEA
 	release
 	end
 
-MtMoon_1F_EventScript_1ACE03:: @ 81ACE03
+MtMoon_1F_EventScript_BaldingMan:: @ 81ACE03
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 4
-	msgbox Text_172B00
+	msgbox MtMoon_1F_Text_BrockHelpsExcavateFossils
 	release
 	end
 
@@ -269,18 +269,18 @@ CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji:: @ 81AD0B9
 	release
 	end
 
-SilphCo_5F_EventScript_1AD0D4:: @ 81AD0D4
+SilphCo_5F_EventScript_Scientist:: @ 81AD0D4
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 1
-	msgbox Text_175E99
+	msgbox SilphCo_5F_Text_RocketBossLookingForStrongMons
 	release
 	end
 
-SilphCo_8F_EventScript_1AD0ED:: @ 81AD0ED
+SilphCo_8F_EventScript_Scientist:: @ 81AD0ED
 	lock
 	faceplayer
 	famechecker FAMECHECKER_GIOVANNI, 2
-	msgbox Text_176ACB
+	msgbox SilphCo_8F_Text_ToRocketBossMonsAreTools
 	release
 	end

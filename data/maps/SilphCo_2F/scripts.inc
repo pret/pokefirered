@@ -9,30 +9,28 @@ SilphCo_2F_OnLoad:: @ 8161647
 
 SilphCo_2F_EventScript_ThunderWaveTutor:: @ 816165A
 	goto EventScript_ThunderWaveTutor
-
-EventScript_16165F:: @ 816165F
 	end
 
-SilphCo_2F_EventScript_161660:: @ 8161660
-	msgbox gUnknown_8175894, MSGBOX_SIGN
+SilphCo_2F_EventScript_FloorSign:: @ 8161660
+	msgbox SilphCo_2F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_2F_EventScript_161669:: @ 8161669
-	trainerbattle_single TRAINER_SCIENTIST_CONNOR, Text_175562, Text_17557E
-	msgbox gUnknown_817559F, MSGBOX_AUTOCLOSE
+SilphCo_2F_EventScript_Connor:: @ 8161669
+	trainerbattle_single TRAINER_SCIENTIST_CONNOR, SilphCo_2F_Text_ConnorIntro, SilphCo_2F_Text_ConnorDefeat
+	msgbox SilphCo_2F_Text_ConnorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_2F_EventScript_161680:: @ 8161680
-	trainerbattle_single TRAINER_SCIENTIST_JERRY, Text_1755C6, Text_1755E5
-	msgbox gUnknown_81755F2, MSGBOX_AUTOCLOSE
+SilphCo_2F_EventScript_Jerry:: @ 8161680
+	trainerbattle_single TRAINER_SCIENTIST_JERRY, SilphCo_2F_Text_JerryIntro, SilphCo_2F_Text_JerryDefeat
+	msgbox SilphCo_2F_Text_JerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_2F_EventScript_161697:: @ 8161697
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_23, Text_17562D, Text_17564A
-	msgbox gUnknown_8175651, MSGBOX_AUTOCLOSE
+SilphCo_2F_EventScript_Grunt1:: @ 8161697
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_23, SilphCo_2F_Text_Grunt1Intro, SilphCo_2F_Text_Grunt1Defeat
+	msgbox SilphCo_2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_2F_EventScript_1616AE:: @ 81616AE
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_24, Text_1756AD, Text_1756D8
-	msgbox gUnknown_81756E2, MSGBOX_AUTOCLOSE
+SilphCo_2F_EventScript_Grunt2:: @ 81616AE
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_24, SilphCo_2F_Text_Grunt2Intro, SilphCo_2F_Text_Grunt2Defeat
+	msgbox SilphCo_2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end

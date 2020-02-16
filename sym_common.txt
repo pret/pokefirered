@@ -91,7 +91,7 @@ gUnknown_3005078: @ 3005078
 	.align 4
 	.include "link_rfu_2.o"
 	.align 4
-	.include "link_rfu.o"
+	.include "AgbRfu_LinkManager.o"
 	.align 4
 	.include "list_menu.o"
 	.align 2

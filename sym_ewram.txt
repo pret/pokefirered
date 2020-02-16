@@ -443,7 +443,9 @@ gUnknown_203B170: @ 203B170
 	.align 2
 	.include "src/mevent_server.o"
 	.align 2
-	.include "src/mevent_8145654.o"
+	.include "src/mevent_show_card.o"
+	.align 2
+	.include "src/mevent_show_news.o"
 	.align 2
 	.include "src/seagallop.o"
 
@@ -481,7 +483,7 @@ gUnknown_203F440: @ 203F440
 	.align 2
 	.include "src/teachy_tv.o"
 	.align 2
-	.include "src/unk_815C980.o"
+	.include "src/digit_obj_util.o"
 	.align 2
 	.include "src/trainer_tower.o"
 	.align 2

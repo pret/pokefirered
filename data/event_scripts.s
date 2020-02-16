@@ -30,6 +30,7 @@
 #include "constants/trade.h"
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
+#include "constants/easy_chat.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -1169,10 +1170,9 @@ EventScript_ResetEliteFour:: @ 81A6551
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
-@ DoEasyChatScreen?
-EventScript_1A6AC0:: @ 81A6AC0
+Common_ShowEasyChatScreen:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
-	special sub_80FEE44
+	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1332,8 +1332,8 @@ gUnknown_81A7702:: @ 81A7702
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A778A
-	setvar VAR_0x8004, 14
-	call EventScript_1A6AC0
+	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, Special_GetMartClerkObjectId

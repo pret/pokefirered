@@ -590,7 +590,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case 15:
-        sub_800AAC0();
+        Link_TryStartSend5FFF();
         DrawDialogueFrame(0, 1);
         AddTextPrinterParameterized(0, 2, gText_WaitingTrainerFinishReading, 0, 1, TEXT_SPEED_FF, 0);
         CopyWindowToVram(0, 3);

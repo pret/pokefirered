@@ -147,7 +147,7 @@ void Overworld_ResetStateAfterTeleport(void);
 void Overworld_FadeOutMapMusic(void);
 void CB2_LoadMap(void);
 bool8 BGMusicStopped(void);
-bool8 is_light_level_8_or_9(u8 mapType);
+bool8 IsMapTypeIndoors(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
@@ -156,7 +156,7 @@ u8 GetCurrentMapType(void);
 u8 get_map_light_from_warp0(void);
 const struct MapHeader *warp1_get_mapheader(void);
 void sub_8055F88(void);
-void sub_8056788(void);
+void CB2_ReturnToFieldCableClub(void);
 void ResetGameStats(void);
 
 void Overworld_CreditsMainCB(void);

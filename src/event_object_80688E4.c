@@ -524,12 +524,12 @@ void RfuUnionObjectSetFacingDirection(u8 objectEventId, u8 direction)
     }
 }
 
-void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 arg1)
+void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 invisible)
 {
     u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId != MAX_SPRITES)
     {
-        if (arg1)
+        if (invisible)
             gSprites[spriteId].tInvisible = TRUE;
         else
             gSprites[spriteId].tInvisible = FALSE;
@@ -544,12 +544,12 @@ bool32 RfuUnionObjectIsInvisible(u8 objectEventId)
     return gSprites[spriteId].tInvisible == TRUE;
 }
 
-void RfuUnionObjectStartWarp(u8 objectEventId, u8 direction)
+void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo)
 {
     u8 spriteId = GetObjectEventSpriteId(objectEventId);
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].tUnionRoomWarpAnimNo = direction;
+        gSprites[spriteId].tUnionRoomWarpAnimNo = animNo;
         gSprites[spriteId].tUnionRoomWarpAnimState = 0;
     }
 }

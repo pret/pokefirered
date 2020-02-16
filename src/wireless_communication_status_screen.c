@@ -13,40 +13,32 @@
 #include "dynamic_placeholder_text_util.h"
 #include "overworld.h"
 #include "sound.h"
+#include "strings.h"
 #include "menu.h"
 #include "librfu.h"
 #include "link_rfu.h"
 #include "union_room.h"
 #include "constants/songs.h"
+#include "constants/union_room.h"
 
 struct WirelessCommunicationStatusScreenStruct
 {
-    u32 field_00[4];
-    u32 field_10[4];
-    u32 field_20[16];
-    u8 field_60;
-    u8 field_61;
+    u32 counts[4];
+    u32 lastCounts[4];
+    u32 activities[16];
+    u8 taskId;
+    u8 rfuTaskId;
     u8 filler_62[0xA];
 };
 
-struct WirelessCommunicationStatusScreenStruct * gUnknown_3002040;
+static struct WirelessCommunicationStatusScreenStruct * sWCSS;
 
-extern const u8 gUnknown_841E2B4[];
-extern const u8 gUnknown_841E2BF[];
-extern const u8 gUnknown_841E2C9[];
-extern const u8 gUnknown_841E2D4[];
-extern const u8 gUnknown_841E245[];
-extern const u8 gUnknown_841E263[];
-extern const u8 gUnknown_841E273[];
-extern const u8 gUnknown_841E284[];
-extern const u8 gUnknown_841E29E[];
+static void CB2_InitWirelessCommunicationScreen(void);
+static void Task_WirelessCommunicationScreen(u8 taskId);
+static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx);
+static bool32 UpdateCommunicationCounts(u32 * counts, u32 * lastCounts, u32 * activities, u8 taskId);
 
-void sub_814F1E4(void);
-void sub_814F46C(u8 taskId);
-void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx);
-bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 taskId);
-
-const u16 gUnknown_846F4D0[][16] = {
+static const u16 sWCSS_Palettes[][16] = {
     INCBIN_U16("graphics/misc/unk_846f4d0.gbapal"),
     INCBIN_U16("graphics/misc/unk_846f4f0.gbapal"),
     INCBIN_U16("graphics/misc/unk_846f510.gbapal"),
@@ -65,10 +57,10 @@ const u16 gUnknown_846F4D0[][16] = {
     INCBIN_U16("graphics/misc/unk_846f6b0.gbapal")
 };
 
-const u32 gUnknown_846F6D0[] = INCBIN_U32("graphics/misc/unk_846f6d0.4bpp.lz");
-const u16 gUnknown_846F8E0[] = INCBIN_U16("graphics/misc/unk_846f8e0.bin");
+static const u32 sBgTilesGfx[] = INCBIN_U32("graphics/misc/unk_846f6d0.4bpp.lz");
+static const u16 sBgTilemap[] = INCBIN_U16("graphics/misc/unk_846f8e0.bin");
 
-const struct BgTemplate gUnknown_846FA74[] = {
+static const struct BgTemplate sBGTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 2,
@@ -88,7 +80,7 @@ const struct BgTemplate gUnknown_846FA74[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_846FA7C[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0x00,
         .tilemapLeft = 0x03,
@@ -116,47 +108,51 @@ const struct WindowTemplate gUnknown_846FA7C[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const u8 *const gUnknown_846FA9C[] = {
+static const u8 *const gUnknown_846FA9C[] = {
     gUnknown_841E2B4,
     gUnknown_841E2BF,
     gUnknown_841E2C9,
     gUnknown_841E2D4
 };
-const u8 *const gUnknown_846FAAC[] = {
-    gUnknown_841E245,
-    gUnknown_841E263,
-    gUnknown_841E273,
-    gUnknown_841E284,
-    gUnknown_841E29E
+
+static const u8 *const sHeaderTextPtrs[] = {
+    gText_WirelessCommunicationStatus,
+    gText_PeopleTrading,
+    gText_PeopleBattling,
+    gText_PeopleInUnionRoom,
+    gText_PeopleCommunicating
 };
 
-const u8 gUnknown_846FAC0[][3] = {
-    {0x01, 0x01, 0x02},
-    {0x02, 0x01, 0x02},
-    {0x03, 0x01, 0x04},
-    {0x04, 0x00, 0x02},
-    {0x15, 0x03, 0x02},
-    {0x16, 0x03, 0x02},
-    {0x09, 0x04, 0x00},
-    {0x0a, 0x04, 0x00},
-    {0x0b, 0x04, 0x00},
-    {0x0c, 0xff, 0x00},
-    {0x0d, 0x00, 0x00},
-    {0x0e, 0xff, 0x00},
-    {0x0f, 0x04, 0x00},
-    {0x10, 0xff, 0x00},
-    {0x40, 0x02, 0x01},
-    {0x41, 0x02, 0x02},
-    {0x44, 0x02, 0x02},
-    {0x45, 0x02, 0x00},
-    {0x48, 0x02, 0x02},
-    {0x54, 0x02, 0x01},
-    {0x53, 0x02, 0x02},
-    {0x51, 0x02, 0x01},
-    {0x52, 0x02, 0x01}
+static const u8 sCountParams[][3] = {
+    // activity,         count idx, by
+    // by=0 means count all
+    // UB: no check for count idx == -1
+    {ACTIVITY_BATTLE,            1, 2},
+    {ACTIVITY_DBLBATTLE,         1, 2},
+    {ACTIVITY_MLTBATTLE,         1, 4},
+    {ACTIVITY_TRADE,             0, 2},
+    {ACTIVITY_WCARD2,            3, 2},
+    {ACTIVITY_WNEWS2,            3, 2},
+    {ACTIVITY_PJUMP,             4, 0},
+    {ACTIVITY_BCRUSH,            4, 0},
+    {ACTIVITY_BPICK,             4, 0},
+    {ACTIVITY_SEARCH,           -1, 0},
+    {ACTIVITY_SPINTRADE,         0, 0},
+    {ACTIVITY_ITEMTRADE,        -1, 0},
+    {0x0f,                       4, 0},
+    {0x10,                      -1, 0},
+    {0x40,                       2, 1},
+    {ACTIVITY_BATTLE | 0x40,     2, 2},
+    {ACTIVITY_TRADE | 0x40,      2, 2},
+    {ACTIVITY_CHAT | 0x40,       2, 0},
+    {ACTIVITY_CARD | 0x40,       2, 2},
+    {20 | 0x40,                  2, 1},
+    {19 | 0x40,                  2, 2},
+    {ACTIVITY_ACCEPT | 0x40,     2, 1},
+    {ACTIVITY_DECLINE | 0x40,    2, 1}
 };
 
-void sub_814F19C(void)
+static void CB2_RunWirelessCommunicationScreen(void)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
     {
@@ -168,50 +164,50 @@ void sub_814F19C(void)
     }
 }
 
-void sub_814F1C0(void)
+static void VBlankCB_WirelessCommunicationScreen(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_814F1D4(void)
+void Special_WirelessCommunicationScreen(void)
 {
-    SetMainCallback2(sub_814F1E4);
+    SetMainCallback2(CB2_InitWirelessCommunicationScreen);
 }
 
-void sub_814F1E4(void)
+static void CB2_InitWirelessCommunicationScreen(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    gUnknown_3002040 = AllocZeroed(sizeof(*gUnknown_3002040));
+    sWCSS = AllocZeroed(sizeof(*sWCSS));
     SetVBlankCallback(NULL);
-    ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, gUnknown_846FA74, NELEMS(gUnknown_846FA74));
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, sBGTemplates, NELEMS(sBGTemplates));
     SetBgTilemapBuffer(1, Alloc(0x800));
     SetBgTilemapBuffer(0, Alloc(0x800));
-    DecompressAndLoadBgGfxUsingHeap(1, gUnknown_846F6D0, 0, 0, 0);
-    CopyToBgTilemapBuffer(1, gUnknown_846F8E0, 0, 0);
-    InitWindows(gUnknown_846FA7C);
+    DecompressAndLoadBgGfxUsingHeap(1, sBgTilesGfx, 0, 0, 0);
+    CopyToBgTilemapBuffer(1, sBgTilemap, 0, 0);
+    InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();
     ScanlineEffect_Stop();
     m4aSoundVSyncOn();
-    SetVBlankCallback(sub_814F1C0);
-    gUnknown_3002040->field_60 = CreateTask(sub_814F46C, 0);
-    gUnknown_3002040->field_61 = sub_8116DE0();
-    gUnknown_3002040->field_10[3] = 1;
+    SetVBlankCallback(VBlankCB_WirelessCommunicationScreen);
+    sWCSS->taskId = CreateTask(Task_WirelessCommunicationScreen, 0);
+    sWCSS->rfuTaskId = CreateTask_ListenToWireless();
+    sWCSS->lastCounts[3] = 1;
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
     ChangeBgY(1, 0, 0);
-    LoadPalette(gUnknown_846F4D0, 0, 0x20);
+    LoadPalette(sWCSS_Palettes, 0, 0x20);
     Menu_LoadStdPalAt(0xf0);
     DynamicPlaceholderTextUtil_Reset();
     FillBgTilemapBufferRect(0, 0x000, 0, 0, 32, 32, 0xF);
     CopyBgTilemapBufferToVram(1);
-    SetMainCallback2(sub_814F19C);
+    SetMainCallback2(CB2_RunWirelessCommunicationScreen);
     RunTasks();
     RunTextPrinters();
     AnimateSprites();
@@ -219,7 +215,7 @@ void sub_814F1E4(void)
     UpdatePaletteFade();
 }
 
-void sub_814F32C(void)
+static void ExitWirelessCommunicationStatusScreen(void)
 {
     s32 i;
 
@@ -228,55 +224,55 @@ void sub_814F32C(void)
     {
         Free(GetBgTilemapBuffer(i));
     }
-    Free(gUnknown_3002040);
+    Free(sWCSS);
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void sub_814F364(s16 * unk0, s16 * unk1)
+static void WCSS_CyclePalette(s16 * frameCtr_p, s16 * palIdx_p)
 {
     s32 idx;
-    (*unk0)++;
-    if (*unk0 > 5)
+    (*frameCtr_p)++;
+    if (*frameCtr_p > 5)
     {
-        (*unk1)++;
-        if (*unk1 == 14)
+        (*palIdx_p)++;
+        if (*palIdx_p == 14)
         {
-            *unk1 = 0;
+            *palIdx_p = 0;
         }
-        *unk0 = 0;
+        *frameCtr_p = 0;
     }
-    idx = *unk1 + 2;
-    LoadPalette(gUnknown_846F4D0[idx], 0, 16);
+    idx = *palIdx_p + 2;
+    LoadPalette(sWCSS_Palettes[idx], 0, 16);
 }
 
-void sub_814F3A8(void)
+static void PrintHeaderTexts(void)
 {
     s32 i;
     u32 width;
 
-    FillWindowPixelBuffer(0, 0);
-    FillWindowPixelBuffer(1, 0);
-    FillWindowPixelBuffer(2, 0);
-    width = 0xC0 - GetStringWidth(3, gUnknown_846FAAC[0], 0);
-    sub_814F65C(0, 3, gUnknown_846FAAC[0], width / 2, 6, 3);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    FillWindowPixelBuffer(2, PIXEL_FILL(0));
+    width = 0xC0 - GetStringWidth(3, sHeaderTextPtrs[0], 0);
+    WCSS_AddTextPrinterParameterized(0, 3, sHeaderTextPtrs[0], width / 2, 6, 3);
     for (i = 0; i < 3; i++)
     {
-        sub_814F65C(1, 3, gUnknown_846FAAC[i + 1], 0, 30 * i + 10, 1);
+        WCSS_AddTextPrinterParameterized(1, 3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 1);
     }
-    sub_814F65C(1, 3, gUnknown_846FAAC[i + 1], 0, 30 * i + 10, 2);
+    WCSS_AddTextPrinterParameterized(1, 3, sHeaderTextPtrs[i + 1], 0, 30 * i + 10, 2);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 2);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 2);
 }
 
-void sub_814F46C(u8 taskId)
+static void Task_WirelessCommunicationScreen(u8 taskId)
 {
     s32 i;
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        sub_814F3A8();
+        PrintHeaderTexts();
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -291,16 +287,16 @@ void sub_814F46C(u8 taskId)
             gTasks[taskId].data[0]++;
         break;
     case 3:
-        if (sub_814F7E4(gUnknown_3002040->field_00, gUnknown_3002040->field_10, gUnknown_3002040->field_20, gUnknown_3002040->field_61))
+        if (UpdateCommunicationCounts(sWCSS->counts, sWCSS->lastCounts, sWCSS->activities, sWCSS->rfuTaskId))
         {
-            FillWindowPixelBuffer(2, 0x00);
+            FillWindowPixelBuffer(2, PIXEL_FILL(0));
             for (i = 0; i < 4; i++)
             {
-                ConvertIntToDecimalStringN(gStringVar4, gUnknown_3002040->field_00[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+                ConvertIntToDecimalStringN(gStringVar4, sWCSS->counts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != 3)
-                    sub_814F65C(2, 3, gStringVar4, 4, 30 * i + 10, 1);
+                    WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 30 * i + 10, 1);
                 else
-                    sub_814F65C(2, 3, gStringVar4, 4, 100, 2);
+                    WCSS_AddTextPrinterParameterized(2, 3, gStringVar4, 4, 100, 2);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, 3);
@@ -308,10 +304,10 @@ void sub_814F46C(u8 taskId)
         if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            gTasks[gUnknown_3002040->field_61].data[15] = 0xFF;
+            gTasks[sWCSS->rfuTaskId].data[15] = 0xFF;
             gTasks[taskId].data[0]++;
         }
-        sub_814F364(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
+        WCSS_CyclePalette(&gTasks[taskId].data[7], &gTasks[taskId].data[8]);
         break;
     case 4:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
@@ -320,117 +316,117 @@ void sub_814F46C(u8 taskId)
     case 5:
         if (!gPaletteFade.active)
         {
-            SetMainCallback2(sub_814F32C);
+            SetMainCallback2(ExitWirelessCommunicationStatusScreen);
             DestroyTask(taskId);
         }
         break;
     }
 }
 
-void sub_814F65C(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
+static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 palIdx)
 {
     u8 textColor[3];
     switch (palIdx)
     {
     case 0:
-        textColor[0] = 0;
-        textColor[1] = 2;
-        textColor[2] = 3;
+        textColor[0] = TEXT_COLOR_TRANSPARENT;
+        textColor[1] = TEXT_COLOR_DARK_GREY;
+        textColor[2] = TEXT_COLOR_LIGHT_GREY;
         break;
     case 1:
-        textColor[0] = 0;
-        textColor[1] = 1;
-        textColor[2] = 3;
+        textColor[0] = TEXT_COLOR_TRANSPARENT;
+        textColor[1] = TEXT_COLOR_WHITE;
+        textColor[2] = TEXT_COLOR_LIGHT_GREY;
         break;
     case 2:
-        textColor[0] = 0;
-        textColor[1] = 4;
-        textColor[2] = 5;
+        textColor[0] = TEXT_COLOR_TRANSPARENT;
+        textColor[1] = TEXT_COLOR_RED;
+        textColor[2] = TEXT_COLOR_LIGHT_RED;
         break;
     case 3:
-        textColor[0] = 0;
-        textColor[1] = 7;
-        textColor[2] = 6;
+        textColor[0] = TEXT_COLOR_TRANSPARENT;
+        textColor[1] = TEXT_COLOR_LIGHT_GREEN;
+        textColor[2] = TEXT_COLOR_GREEN;
         break;
     case 4:
-        textColor[0] = 0;
-        textColor[1] = 1;
-        textColor[2] = 2;
+        textColor[0] = TEXT_COLOR_TRANSPARENT;
+        textColor[1] = TEXT_COLOR_WHITE;
+        textColor[2] = TEXT_COLOR_DARK_GREY;
         break;
     // default: UB
     }
     AddTextPrinterParameterized4(windowId, fontId,x, y, fontId == 0 ? 0 : 1, 0, textColor, -1, str);
 }
 
-u32 sub_814F714(struct UnkStruct_x20 * unk20, u32 * arg1)
+static u32 CountMembersInGroup(struct UnkStruct_x20 * unk20, u32 * counts)
 {
-    u32 r8 = unk20->unk.gname.unk_0a_0;
+    u32 activity = unk20->gname_uname.gname.activity;
     s32 i, j, k;
 
-    for (i = 0; i < NELEMS(gUnknown_846FAC0); i++)
+    for (i = 0; i < NELEMS(sCountParams); i++)
     {
-        if (r8 == gUnknown_846FAC0[i][0] && unk20->field_1A_0 == 1)
+        if (activity == sCountParams[i][0] && unk20->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
-            if (gUnknown_846FAC0[i][2] == 0)
+            if (sCountParams[i][2] == 0)
             {
                 k = 0;
-                for (j = 0; j < 4; j++)
+                for (j = 0; j < RFU_CHILD_MAX; j++)
                 {
-                    if (unk20->unk.gname.unk_04[j] != 0) k++;
+                    if (unk20->gname_uname.gname.child_sprite_gender[j] != 0) k++;
                 }
                 k++;
-                arg1[gUnknown_846FAC0[i][1]] += k;
+                counts[sCountParams[i][1]] += k;
             }
             else
             {
-                arg1[gUnknown_846FAC0[i][1]] += gUnknown_846FAC0[i][2];
+                counts[sCountParams[i][1]] += sCountParams[i][2];
             }
         }
     }
 
-    return r8;
+    return activity;
 }
 
-bool32 sub_814F7BC(const u32 * ptr0, const u32 * ptr1)
+static bool32 HaveCountsChanged(const u32 * newCounts, const u32 * prevCounts)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        if (ptr0[i] != ptr1[i])
+        if (newCounts[i] != prevCounts[i])
             return TRUE;
     }
 
     return FALSE;
 }
 
-bool32 sub_814F7E4(u32 * a0, u32 * a1, u32 * a2, u8 taskId)
+static bool32 UpdateCommunicationCounts(u32 * counts, u32 * lastCounts, u32 * activities, u8 taskId)
 {
-    bool32 r8 = FALSE;
-    u32 sp0[4] = {0, 0, 0, 0};
+    bool32 activitiesUpdated = FALSE;
+    u32 buffer[4] = {0, 0, 0, 0};
     struct UnkStruct_Group * group = (void *)gTasks[taskId].data;
     s32 i;
 
     for (i = 0; i < 16; i++)
     {
-        u32 r1 = sub_814F714(&group->field_0->arr[i], sp0);
-        if (r1 != a2[i])
+        u32 activity = CountMembersInGroup(&group->field_0->arr[i], buffer);
+        if (activity != activities[i])
         {
-            a2[i] = r1;
-            r8 = TRUE;
+            activities[i] = activity;
+            activitiesUpdated = TRUE;
         }
     }
 
-    if (sub_814F7BC(sp0, a1) == FALSE)
+    if (HaveCountsChanged(buffer, lastCounts) == FALSE)
     {
-        if (r8 == TRUE)
+        if (activitiesUpdated == TRUE)
             return TRUE;
         else
             return FALSE;
     }
 
-    memcpy(a0, sp0, sizeof(sp0));
-    memcpy(a1, sp0, sizeof(sp0));
-    a0[3] = a0[0] + a0[1] + a0[2];
+    memcpy(counts, buffer, sizeof(buffer));
+    memcpy(lastCounts, buffer, sizeof(buffer));
+    counts[3] = counts[0] + counts[1] + counts[2];
     return TRUE;
 }

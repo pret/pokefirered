@@ -765,9 +765,9 @@ static void sub_804C728(void)
 
             if (gWirelessCommType)
             {
-                sub_800B1F4();
+                SetWirelessCommType1();
                 OpenLink();
-                sub_80FBB20();
+                LinkRfu_CreateIdleTask();
             }
             else
             {
@@ -810,14 +810,14 @@ static void sub_804C728(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            sub_80FBB4C();
+            LinkRfu_DestroyIdleTask();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenuResourcesPtr->unk_A8 = 0;
             if (gWirelessCommType)
             {
                 sub_80FA484(TRUE);
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             }
         }
         break;
@@ -1213,7 +1213,7 @@ static void sub_804D548(void)
         }
         else
         {
-            sub_800AA80(32);
+            Link_StartSend5FFFwithParam(32);
             sTradeMenuResourcesPtr->unk_6F = 13;
         }
     }
@@ -2004,11 +2004,11 @@ static void sub_804E908(void)
     {
         if (gWirelessCommType)
         {
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         }
         else
         {
-            sub_800AA80(12);
+            Link_StartSend5FFFwithParam(12);
         }
 
         sTradeMenuResourcesPtr->unk_6F = 12;
@@ -2044,7 +2044,7 @@ static void sub_804E9C0(void)
 {
     if (!sub_80FA484(FALSE))
     {
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         sTradeMenuResourcesPtr->unk_6F = 13;
     }
 }
@@ -2740,30 +2740,30 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isObedientBitSet)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
+int GetUnionRoomTradeMessageId(struct GFtgtGnameSub playerSub, struct GFtgtGnameSub partnerSub, u16 species1, u16 species2, u8 type, u16 species3, u8 isObedientBitSet)
 {
-    u8 r9 = a0.hasNationalDex;
-    u8 r4 = a0.isChampion;
-    u8 r10 = a1.hasNationalDex;
-    u8 r0 = a1.isChampion;
-    u8 r1 = a1.unk_01_2;
-    u8 r2;
+    u8 playerHasNationalDex = playerSub.hasNationalDex;
+    u8 playerIsChampion = playerSub.isChampion;
+    u8 partnerHasNationalDex = partnerSub.hasNationalDex;
+    u8 partnerIsChampion = partnerSub.isChampion;
+    u8 partnerVersion = partnerSub.version;
+    bool8 isNotFRLG;
 
-    if (r1 == VERSION_FIRE_RED || r1 == VERSION_LEAF_GREEN)
+    if (partnerVersion == VERSION_FIRE_RED || partnerVersion == VERSION_LEAF_GREEN)
     {
-        r2 = 0;
+        isNotFRLG = FALSE;
     }
     else
     {
-        r2 = 1;
+        isNotFRLG = TRUE;
     }
-    if (r2)
+    if (isNotFRLG)
     {
-        if (!r4)
+        if (!playerIsChampion)
         {
             return 8;
         }
-        else if (!r0)
+        else if (!partnerIsChampion)
         {
             return 9;
         }
@@ -2794,7 +2794,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
         return 3;
     }
 
-    if (!r9)
+    if (!playerHasNationalDex)
     {
         if (species1 == SPECIES_EGG)
         {
@@ -2812,7 +2812,7 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
         }
     }
 
-    if (!r10 && species1 > SPECIES_MEW)
+    if (!partnerHasNationalDex && species1 > SPECIES_MEW)
     {
         return 7;
     }
@@ -2820,11 +2820,11 @@ int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1,
     return 0;
 }
 
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16 species, u16 a2, u8 a3)
+int CanRegisterMonForTradingBoard(struct GFtgtGnameSub playerSub, u16 species2, u16 species, u8 obedience)
 {
-    u8 canTradeEggAndNational = a0.hasNationalDex;
+    u8 canTradeEggAndNational = playerSub.hasNationalDex;
 
-    if (IsDeoxysOrMewUntradable(a2, a3))
+    if (IsDeoxysOrMewUntradable(species, obedience))
     {
         return 1;
     }
@@ -2834,12 +2834,12 @@ int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16 species, u16 a2, 
         return 0;
     }
 
-    if (species == SPECIES_EGG)
+    if (species2 == SPECIES_EGG)
     {
         return 2;
     }
 
-    if (species > SPECIES_MEW && species != SPECIES_EGG)
+    if (species2 > SPECIES_MEW && species2 != SPECIES_EGG)
     {
         return 1;
     }

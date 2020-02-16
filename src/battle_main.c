@@ -1152,9 +1152,9 @@ static void CB2_PreInitMultiBattle(void)
         {
             ++gBattleCommunication[MULTIUSE_STATE];
             if (gWirelessCommType)
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             else
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
         }
         break;
     case 3:

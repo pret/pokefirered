@@ -751,7 +751,7 @@ sub_8080CDC: @ 8080CDC
 	lsrs r0, 16
 	cmp r0, 0x1
 	bhi _08080D3C
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	bl HideFieldMessageBox
 	ldr r0, _08080D38 @ =sub_8080F78
 	b _08080D72
@@ -845,14 +845,14 @@ sub_8080DC0: @ 8080DC0
 	bl sub_8080D8C
 	cmp r0, 0x1
 	beq _08080DFE
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	b _08080E02
 	.align 2, 0
 _08080DE8: .4byte gSpecialVar_Result
 _08080DEC:
 	cmp r0, 0x3
 	bne _08080DF6
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	b _08080E02
 _08080DF6:
 	cmp r0, 0x7
@@ -1010,7 +1010,7 @@ _08080F48: .4byte gLinkType
 _08080F4C: .4byte 0x00004411
 _08080F50: .4byte gTasks
 _08080F54:
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	ldr r0, _08080F70 @ =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1564,7 +1564,7 @@ _0808138C:
 	ble _0808143A
 	b _080813AA
 _0808139C:
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	b _080813AA
 _080813A2:
 	ldr r0, _080813B4 @ =gReceivedRemoteLinkPlayers
@@ -1756,7 +1756,7 @@ _08081510:
 	ldr r1, [r1]
 	str r1, [r0]
 	adds r0, r5, 0
-	bl sub_800B284
+	bl IntlConvertLinkPlayerName
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl ResetBlockReceivedFlag
@@ -1785,7 +1785,7 @@ _0808154C:
 	strh r0, [r6]
 	b _0808160A
 _08081560:
-	bl sub_800AB9C
+	bl PrepareSendLinkCmd2FFE_or_RfuCmd6600
 	movs r0, 0x6
 	strh r0, [r6]
 	b _0808160A
@@ -1895,7 +1895,7 @@ sub_8081624: @ 8081624
 	.align 2, 0
 _0808163C: .4byte gMain
 _08081640:
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -1942,9 +1942,9 @@ sub_8081668: @ 8081668
 	beq _0808170A
 	ldr r0, _080816C4 @ =gBattleOutcome
 	ldrb r0, [r0]
-	cmp r0, 0x1
+	cmp r0, 0x1 @ B_OUTCOME_WON
 	beq _080816C8
-	cmp r0, 0x2
+	cmp r0, 0x2 @ B_OUTCOME_LOST
 	beq _080816EC
 	b _0808170A
 	.align 2, 0
@@ -1955,6 +1955,7 @@ _080816BC: .4byte gLocalLinkPlayerId
 _080816C0: .4byte gWirelessCommType
 _080816C4: .4byte gBattleOutcome
 _080816C8:
+	@ MEvent_RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 	ldr r4, _080816E8 @ =gLinkPlayers
 	bl GetMultiplayerId
 	eors r0, r5
@@ -1967,11 +1968,12 @@ _080816C8:
 	adds r1, r4
 	ldr r1, [r1]
 	movs r0, 0
-	bl sub_8144714
+	bl MEvent_RecordIdOfWonderCardSenderByEventType
 	b _0808170A
 	.align 2, 0
 _080816E8: .4byte gLinkPlayers
 _080816EC:
+	@ MEvent_RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 	ldr r4, _08081718 @ =gLinkPlayers
 	bl GetMultiplayerId
 	eors r0, r5
@@ -1984,7 +1986,7 @@ _080816EC:
 	adds r1, r4
 	ldr r1, [r1]
 	movs r0, 0x1
-	bl sub_8144714
+	bl MEvent_RecordIdOfWonderCardSenderByEventType
 _0808170A:
 	bl InUnionRoom
 	cmp r0, 0x1
@@ -2198,7 +2200,7 @@ _080818A8:
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
 	bl m4aMPlayAllStop
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 _080818B8:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2274,7 +2276,7 @@ _08081940:
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
 	bl m4aMPlayAllStop
-	bl sub_800AB9C
+	bl PrepareSendLinkCmd2FFE_or_RfuCmd6600
 _08081950:
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -2287,7 +2289,7 @@ _0808195C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08081970
-	bl sub_8117118
+	bl UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade
 	adds r0, r5, 0
 	bl DestroyTask
 _08081970:
@@ -2507,7 +2509,7 @@ sub_8081B08: @ 8081B08
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	ldr r1, _08081B28 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

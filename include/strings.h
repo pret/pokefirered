@@ -1100,4 +1100,30 @@ extern const u8 gText_Symbols[];
 extern const u8 gText_Register2[];
 extern const u8 gText_Exit[];
 
+// wireless_communication_status_screen
+extern const u8 gUnknown_841E2B4[];
+extern const u8 gUnknown_841E2BF[];
+extern const u8 gUnknown_841E2C9[];
+extern const u8 gUnknown_841E2D4[];
+extern const u8 gText_WirelessCommunicationStatus[];
+extern const u8 gText_PeopleTrading[];
+extern const u8 gText_PeopleBattling[];
+extern const u8 gText_PeopleInUnionRoom[];
+extern const u8 gText_PeopleCommunicating[];
+
+// mevent
+extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
+extern const u8 gJPText_SelectConnectFromEReaderMenu[];
+extern const u8 gJPText_SelectConnectWithGBA[];
+extern const u8 gJPText_LinkIsIncorrect[];
+extern const u8 gJPText_CardReadingHasBeenHalted[];
+extern const u8 gJPText_Connecting[];
+extern const u8 gJPText_ConnectionErrorCheckLink[];
+extern const u8 gJPText_ConnectionErrorTryAgain[];
+extern const u8 gJPText_AllowEReaderToLoadCard[];
+extern const u8 gJPText_ConnectionComplete[];
+extern const u8 gJPText_NewTrainerHasComeToSevii[];
+extern const u8 gJPText_PleaseWaitAMoment[];
+extern const u8 gJPText_WriteErrorUnableToSaveData[];
+
 #endif //GUARD_STRINGS_H

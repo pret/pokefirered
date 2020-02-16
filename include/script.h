@@ -62,7 +62,7 @@ u8 *GetRamScript(u8 objectId, u8 *script);
 bool32 sub_80991F8(void);
 u8 *sub_8099244(void);
 void sub_80992A0(u8 *script, u16 scriptSize);
-bool32 sub_8069DFC(void);
+bool32 ValidateRamScript(void);
 void MEventSetRamScript(u8 * script, u16 scriptSize);
 u8 * sub_8069E48(void);
 void sub_8069998(u8 var);

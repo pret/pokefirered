@@ -174,51 +174,9 @@ gText_UnionRoomChatKeyboard_Emoji9::
 gText_UnionRoomChatKeyboard_Emoji10::
 	.string "{EXTRA 210}{EXTRA 208}ょ: $"
 
-	// trainer_tower (again?)
-
 	@ 847ABAC
 .align 2
 	.include "data/trainer_tower/trainers.inc"
-
-	.align 2
-gUnknown_84827AC:: @ 84827AC
-	.byte 0x08, 0x01
-	.align 2
-	.4byte 0
-
-gUnknown_84827B4:: @ 84827B4
-	.4byte gUnknown_847F16C
-	.4byte gUnknown_847D26C
-	.4byte gUnknown_84808AC
-	.4byte gUnknown_847ABAC
-	.4byte gUnknown_847CAAC
-	.4byte gUnknown_847E9AC
-	.4byte gUnknown_847AF8C
-	.4byte gUnknown_847CE8C
-	.4byte gUnknown_847DA2C
-	.4byte gUnknown_847BF0C
-	.4byte gUnknown_847D64C
-	.4byte gUnknown_847DE0C
-	.4byte gUnknown_847B74C
-	.4byte gUnknown_847BB2C
-	.4byte gUnknown_848182C
-	.4byte gUnknown_847F92C
-	.4byte gUnknown_847C2EC
-	.4byte gUnknown_847C6CC
-	.4byte gUnknown_847E5CC
-	.4byte gUnknown_84804CC
-	.4byte gUnknown_84823CC
-	.4byte gUnknown_8481FEC
-	.4byte gUnknown_84800EC
-	.4byte gUnknown_847E1EC
-	.4byte gUnknown_847ED8C
-	.4byte gUnknown_848106C
-	.4byte gUnknown_8480C8C
-	.4byte gUnknown_847F92C
-	.4byte gUnknown_847F54C
-	.4byte gUnknown_847E1EC
-	.4byte gUnknown_847D64C
-	.4byte gUnknown_847C6CC
 
 	.include "data/text/move_descriptions.inc"
 

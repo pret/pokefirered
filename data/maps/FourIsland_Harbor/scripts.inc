@@ -7,5 +7,5 @@ FourIsland_Harbor_EventScript_171C99:: @ 8171C99
 	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_FOUR_ISLAND
-	goto EventScript_1A900F
+	goto EventScript_ChooseDestFromIsland
 	end

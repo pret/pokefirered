@@ -108,7 +108,7 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
-    u8 rivalName[PLAYER_NAME_LENGTH];
+    u8 rivalName[PLAYER_NAME_LENGTH + 1];
 
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
     gDifferentSaveFile = TRUE;
@@ -143,9 +143,9 @@ void NewGameInitData(void)
     sub_809C794();
     InitEasyChatPhrases();
     ResetTrainerFanClub();
-    copy_strings_to_sav1();
+    UnionRoomChat_InitializeRegisteredTexts();
     ResetMiniGamesResults();
-    sub_8143D24();
+    InitMEventData();
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);

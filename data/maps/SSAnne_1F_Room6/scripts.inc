@@ -1,27 +1,27 @@
 SSAnne_1F_Room6_MapScripts:: @ 8160DF2
 	.byte 0
 
-SSAnne_1F_Room6_EventScript_160DF3:: @ 8160DF3
+SSAnne_1F_Room6_EventScript_Woman:: @ 8160DF3
 	lock
 	faceplayer
-	msgbox gUnknown_817445B, MSGBOX_YESNO
+	msgbox SSAnne_1F_Room6_Text_TakeAShortRest, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_160E18
+	goto_if_eq SSAnne_1F_Room6_EventScript_DeclineHeal
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
-	msgbox gUnknown_8174490
+	msgbox SSAnne_1F_Room6_Text_GladEveryoneIsRefreshed
 	release
 	end
 
-EventScript_160E18:: @ 8160E18
+SSAnne_1F_Room6_EventScript_DeclineHeal:: @ 8160E18
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq EventScript_160E2E
-	msgbox gUnknown_8174515
+	goto_if_eq SSAnne_1F_Room6_EventScript_DeclineHealMale
+	msgbox SSAnne_1F_Room6_Text_SorryYouLookLikeMySister
 	release
 	end
 
-EventScript_160E2E:: @ 8160E2E
-	msgbox gUnknown_81744D0
+SSAnne_1F_Room6_EventScript_DeclineHealMale:: @ 8160E2E
+	msgbox SSAnne_1F_Room6_Text_SorryYouLookLikeMyBrother
 	release
 	end

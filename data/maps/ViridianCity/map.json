@@ -65,7 +65,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_1659CA",
+      "script": "ViridianCity_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -78,7 +78,7 @@
       "movement_range_y": 3,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_1659F6",
+      "script": "ViridianCity_EventScript_TutorialOldMan",
       "flag": "0"
     },
     {
@@ -91,7 +91,7 @@
       "movement_range_y": 3,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_165AC4",
+      "script": "ViridianCity_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -104,7 +104,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_165A8F",
+      "script": "ViridianCity_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -117,7 +117,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianCity_EventScript_1659C1",
+      "script": "ViridianCity_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -192,7 +192,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 0,
-      "script": "ViridianCity_EventScript_165AF6"
+      "script": "ViridianCity_EventScript_RoadBlocked"
     },
     {
       "type": "trigger",
@@ -201,7 +201,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR",
       "var_value": 0,
-      "script": "ViridianCity_EventScript_16596D"
+      "script": "ViridianCity_EventScript_GymDoorLocked"
     },
     {
       "type": "trigger",
@@ -210,7 +210,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 1,
-      "script": "ViridianCity_EventScript_165B10"
+      "script": "ViridianCity_EventScript_TutorialTriggerLeft"
     },
     {
       "type": "trigger",
@@ -219,7 +219,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN",
       "var_value": 1,
-      "script": "ViridianCity_EventScript_165B2E"
+      "script": "ViridianCity_EventScript_TutorialTriggerRight"
     }
   ],
   "bg_events": [
@@ -228,35 +228,35 @@
       "x": 23,
       "y": 1,
       "elevation": 3,
-      "script": "ViridianCity_EventScript_16599D"
+      "script": "ViridianCity_EventScript_TrainerTips1"
     },
     {
       "type": "bg_event_type_0",
       "x": 32,
       "y": 10,
       "elevation": 0,
-      "script": "ViridianCity_EventScript_1659AF"
+      "script": "ViridianCity_EventScript_GymSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 20,
       "y": 31,
       "elevation": 0,
-      "script": "ViridianCity_EventScript_1659A6"
+      "script": "ViridianCity_EventScript_TrainerTips2"
     },
     {
       "type": "bg_event_type_0",
       "x": 20,
       "y": 16,
       "elevation": 0,
-      "script": "ViridianCity_EventScript_165994"
+      "script": "ViridianCity_EventScript_CitySign"
     },
     {
       "type": "bg_event_type_0",
       "x": 36,
       "y": 10,
       "elevation": 0,
-      "script": "ViridianCity_EventScript_1659B8"
+      "script": "ViridianCity_EventScript_GymDoor"
     }
   ]
 }

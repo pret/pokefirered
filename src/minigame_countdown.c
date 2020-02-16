@@ -5,72 +5,83 @@
 #include "trig.h"
 #include "constants/songs.h"
 
-void sub_815F1AC(u8 taskId);
-bool32 sub_815F2AC(u8 spriteId);
-void sub_815F3E0(u8 spriteId1, u8 spriteId2, u8 spriteId3);
-bool32 sub_815F444(u8 spriteId);
-void sub_815F470(struct Sprite * sprite);
-void sub_815F564(u16 tilesTag, u16 palTag);
-u8 sub_815F5BC(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority);
-void sub_815F610(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 * spriteId2_p, s16 * spriteId3_p);
+static void Task_MinigameCountdown(u8 taskId);
+static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId);
+static void StartStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3);
+static bool32 IsStartGraphicAnimRunning(u8 spriteId);
+static void SpriteCB_Start(struct Sprite * sprite);
+static void Load321StartGfx(u16 tilesTag, u16 palTag);
+static u8 CreateNumberSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority);
+static void CreateStartSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 * spriteId2_p, s16 * spriteId3_p);
 
-void sub_815F138(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
+#define tState       data[0]
+#define tTilesTag    data[2]
+#define tPalTag      data[3]
+#define tX           data[4]
+#define tY           data[5]
+#define tSubpriority data[6]
+#define tSpriteId1   data[7]
+#define tSpriteId2   data[8]
+#define tSpriteId3   data[9]
+
+void StartMinigameCountdown(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
 {
-    u8 taskId = CreateTask(sub_815F1AC, 80);
-    gTasks[taskId].data[2] = tilesTag;
-    gTasks[taskId].data[3] = palTag;
-    gTasks[taskId].data[4] = x;
-    gTasks[taskId].data[5] = y;
-    gTasks[taskId].data[6] = subpriority;
+    u8 taskId = CreateTask(Task_MinigameCountdown, 80);
+    gTasks[taskId].tTilesTag = tilesTag;
+    gTasks[taskId].tPalTag = palTag;
+    gTasks[taskId].tX = x;
+    gTasks[taskId].tY = y;
+    gTasks[taskId].tSubpriority = subpriority;
 }
 
-bool8 sub_815F198(void)
+bool8 IsMinigameCountdownRunning(void)
 {
-    return FuncIsActiveTask(sub_815F1AC);
+    return FuncIsActiveTask(Task_MinigameCountdown);
 }
 
-void sub_815F1AC(u8 taskId)
+static void Task_MinigameCountdown(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        sub_815F564(data[2], data[3]);
-        data[7] = sub_815F5BC(data[2], data[3], data[4], data[5], data[6]);
-        sub_815F610(data[2], data[3], data[4], data[5], data[6], &data[8], &data[9]);
-        data[0]++;
+        Load321StartGfx(tTilesTag, tPalTag);
+        tSpriteId1 = CreateNumberSprite(tTilesTag, tPalTag, tX, tY, tSubpriority);
+        CreateStartSprite(tTilesTag, tPalTag, tX, tY, tSubpriority, &tSpriteId2, &tSpriteId3);
+        tState++;
         break;
     case 1:
-        if (!sub_815F2AC(data[7]))
+        if (!RunMinigameCountdownDigitsAnim(tSpriteId1))
         {
-            sub_815F3E0(data[7], data[8], data[9]);
-            FreeSpriteOamMatrix(&gSprites[data[7]]);
-            DestroySprite(&gSprites[data[7]]);
-            data[0]++;
+            StartStartGraphic(tSpriteId1, tSpriteId2, tSpriteId3);
+            FreeSpriteOamMatrix(&gSprites[tSpriteId1]);
+            DestroySprite(&gSprites[tSpriteId1]);
+            tState++;
         }
         break;
     case 2:
-        if (!sub_815F444(data[8]))
+        if (!IsStartGraphicAnimRunning(tSpriteId2))
         {
-            DestroySprite(&gSprites[data[8]]);
-            DestroySprite(&gSprites[data[9]]);
-            FreeSpriteTilesByTag(data[2]);
-            FreeSpritePaletteByTag(data[3]);
+            DestroySprite(&gSprites[tSpriteId2]);
+            DestroySprite(&gSprites[tSpriteId3]);
+            FreeSpriteTilesByTag(tTilesTag);
+            FreeSpritePaletteByTag(tPalTag);
             DestroyTask(taskId);
         }
         break;
     }
 }
 
-bool32 sub_815F2AC(u8 spriteId)
+static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
 {
     struct Sprite * sprite = &gSprites[spriteId];
 
     switch (sprite->data[0])
     {
     case 0:
-        sub_8007FFC(sprite, 0x800, 0x1A);
+        // some sort of affine transform; x transform disabled
+        obj_pos2_update_enable(sprite, 0x800, 0x1A);
         sprite->data[0]++;
         // fallthrough
     case 1:
@@ -134,22 +145,22 @@ bool32 sub_815F2AC(u8 spriteId)
     return TRUE;
 }
 
-void sub_815F3E0(u8 spriteId1, u8 spriteId2, u8 spriteId3)
+static void StartStartGraphic(u8 spriteId1, u8 spriteId2, u8 spriteId3)
 {
     gSprites[spriteId2].pos2.y = -40;
     gSprites[spriteId3].pos2.y = -40;
     gSprites[spriteId2].invisible = FALSE;
     gSprites[spriteId3].invisible = FALSE;
-    gSprites[spriteId2].callback = sub_815F470;
-    gSprites[spriteId3].callback = sub_815F470;
+    gSprites[spriteId2].callback = SpriteCB_Start;
+    gSprites[spriteId3].callback = SpriteCB_Start;
 }
 
-bool32 sub_815F444(u8 spriteId)
+static bool32 IsStartGraphicAnimRunning(u8 spriteId)
 {
-    return gSprites[spriteId].callback == sub_815F470;
+    return gSprites[spriteId].callback == SpriteCB_Start;
 }
 
-void sub_815F470(struct Sprite * sprite)
+static void SpriteCB_Start(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
     s32 y;
@@ -200,103 +211,103 @@ void sub_815F470(struct Sprite * sprite)
     }
 }
 
-const u16 gUnknown_847A328[] = INCBIN_U16("data/graphics/unk_847a348.gbapal");
-const u16 gUnknown_847A348[] = INCBIN_U16("data/graphics/unk_847a348.4bpp.lz");
+static const u16 sSpritePal_321Start[] = INCBIN_U16("data/graphics/unk_847a348.gbapal");
+static const u16 sSpriteSheet_321Start[] = INCBIN_U16("data/graphics/unk_847a348.4bpp.lz");
 
-void sub_815F564(u16 tilesTag, u16 palTag)
+static void Load321StartGfx(u16 tilesTag, u16 palTag)
 {
-    struct CompressedSpriteSheet spriteSheet = {(const void *)gUnknown_847A348, 0xE00};
-    struct SpritePalette spritePalette = {gUnknown_847A328};
+    struct CompressedSpriteSheet spriteSheet = {(const void *)sSpriteSheet_321Start, 0xE00};
+    struct SpritePalette spritePalette = {sSpritePal_321Start};
     spriteSheet.tag = tilesTag;
     spritePalette.tag = palTag;
     LoadCompressedSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
 }
 
-const struct OamData gOamData_847A7AC = {
+static const struct OamData sOamData_Numbers = {
     .affineMode = ST_OAM_AFFINE_DOUBLE,
-    .shape = ST_OAM_SQUARE,
-    .size = 2
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32)
 };
 
-const struct OamData gOamData_847A7B4 = {
+static const struct OamData sOamData_Start = {
     .affineMode = ST_OAM_AFFINE_OFF,
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 3
+    .shape = SPRITE_SHAPE(64x32),
+    .size = SPRITE_SIZE(64x32)
 };
 
-const union AnimCmd gUnknown_847A7BC[] = {
+static const union AnimCmd sAnim_Numbers_Three[] = {
     ANIMCMD_FRAME( 0, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_847A7C4[] = {
+static const union AnimCmd sAnim_Numbers_Two[] = {
     ANIMCMD_FRAME(16, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_847A7CC[] = {
+static const union AnimCmd sAnim_Numbers_One[] = {
     ANIMCMD_FRAME(32, 1),
 	ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_847A7D4[] = {
-    gUnknown_847A7BC,
-    gUnknown_847A7C4,
-    gUnknown_847A7CC
+static const union AnimCmd *const sAnimTable_Numbers[] = {
+    sAnim_Numbers_Three,
+    sAnim_Numbers_Two,
+    sAnim_Numbers_One
 };
 
-const union AnimCmd gUnknown_847A7E0[] = {
+static const union AnimCmd sAnim_StartLeft[] = {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_847A7E8[] = {
+static const union AnimCmd sAnim_StartRight[] = {
     ANIMCMD_FRAME(80, 1),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_847A7F0[] = {
-    gUnknown_847A7E0,
-    gUnknown_847A7E8
+static const union AnimCmd *const sAnimTable_Start[] = {
+    sAnim_StartLeft,
+    sAnim_StartRight
 };
 
-const union AffineAnimCmd gUnknown_847A7F8[] = {
+static const union AffineAnimCmd sAffineAnim_Numbers_0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_847A808[] = {
+static const union AffineAnimCmd sAffineAnim_Numbers_1[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_FRAME( 0x10, -0x10, 0, 8),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_847A820[] = {
+static const union AffineAnimCmd sAffineAnim_Numbers_2[] = {
     AFFINEANIMCMD_FRAME(-0x12,  0x12, 0, 8),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_847A830[] = {
+static const union AffineAnimCmd sAffineAnim_Numbers_3[] = {
     AFFINEANIMCMD_FRAME(  0x6,  -0x6, 0, 8),
 	AFFINEANIMCMD_FRAME( -0x4,   0x4, 0, 8),
 	AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
 	AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_847A850[] = {
-    gUnknown_847A7F8,
-    gUnknown_847A808,
-    gUnknown_847A820,
-    gUnknown_847A830
+static const union AffineAnimCmd *const sAffineAnimTable_Numbers[] = {
+    sAffineAnim_Numbers_0,
+    sAffineAnim_Numbers_1,
+    sAffineAnim_Numbers_2,
+    sAffineAnim_Numbers_3
 };
 
-u8 sub_815F5BC(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
+static u8 CreateNumberSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
 {
     struct SpriteTemplate spriteTemplate = {
-        .oam = &gOamData_847A7AC,
-        .anims = gUnknown_847A7D4,
-        .affineAnims = gUnknown_847A850,
+        .oam = &sOamData_Numbers,
+        .anims = sAnimTable_Numbers,
+        .affineAnims = sAffineAnimTable_Numbers,
         .callback = SpriteCallbackDummy
     };
     spriteTemplate.tileTag = tilesTag;
@@ -304,11 +315,11 @@ u8 sub_815F5BC(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority)
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-void sub_815F610(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 * spriteId2_p, s16 * spriteId3_p)
+static void CreateStartSprite(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 * spriteId2_p, s16 * spriteId3_p)
 {
     struct SpriteTemplate spriteTemplate = {
-        .oam = &gOamData_847A7B4,
-        .anims = gUnknown_847A7F0,
+        .oam = &sOamData_Start,
+        .anims = sAnimTable_Start,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCallbackDummy
     };

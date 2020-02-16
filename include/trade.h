@@ -8,6 +8,10 @@
 extern struct MailStruct gLinkPartnerMail[6];
 extern u8 gSelectedTradeMonPositions[2];
 
+extern const u8 gText_MaleSymbol4[];
+extern const u8 gText_FemaleSymbol4[];
+extern const u8 gText_GenderlessSymbol[];
+
 extern const u16 gUnknown_826601C[];
 void CB2_ReturnFromLinkTrade(void);
 s32 sub_804FB34(void);

@@ -407,7 +407,7 @@ sub_815A61C: @ 815A61C
 	ands r5, r7
 	orrs r5, r4
 	strb r5, [r0, 0xB]
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -637,7 +637,7 @@ sub_815AAD8: @ 815AAD8
 	orrs r1, r0
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -692,7 +692,7 @@ sub_815AB3C: @ 815AB3C
 	str r1, [sp]
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0x8
 	pop {r0}
 	bx r0

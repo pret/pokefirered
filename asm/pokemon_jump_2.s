@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8147AA8
-sub_8147AA8: @ 8147AA8
+	thumb_func_start StartPokemonJump
+StartPokemonJump: @ 8147AA8
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -73,7 +73,7 @@ _08147B42:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8147AA8
+	thumb_func_end StartPokemonJump
 
 	thumb_func_start sub_8147B48
 sub_8147B48: @ 8147B48
@@ -2535,7 +2535,7 @@ _08148DEA:
 	ands r0, r1
 	cmp r0, 0
 	bne _08148E20
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 _08148DFA:
 	ldr r0, _08148E0C @ =gUnknown_203F3D4
 	ldr r1, [r0]
@@ -4302,7 +4302,7 @@ sub_8149A6C: @ 8149A6C
 	ldr r0, [r0, 0x8]
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -4363,7 +4363,7 @@ sub_8149AE0: @ 8149AE0
 	strb r1, [r2]
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -4425,7 +4425,7 @@ sub_8149AF8: @ 8149AF8
 	ldrh r0, [r0, 0xE]
 	strh r0, [r1, 0x4]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -4520,7 +4520,7 @@ sub_8149BF4: @ 8149BF4
 	mov r0, sp
 	strb r1, [r0, 0x6]
 	strh r2, [r0, 0x8]
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -4665,7 +4665,7 @@ _08149D20: .4byte sub_8149DC8
 sub_8149D24: @ 8149D24
 	push {lr}
 	bl FreeAllWindowBuffers
-	bl sub_815C9F4
+	bl DigitObjUtil_Teardown
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8149D24
@@ -6284,7 +6284,10 @@ sub_814A9C8: @ 814A9C8
 	push {r4,lr}
 	sub sp, 0x10
 	mov r1, sp
-	movs r0, 0x40
+	movs r0, 0x40 @ strConvMode = 0
+	              @ shape = SPRITE_SHAPE(8x8)
+	              @ size = SPRITE_SIZE(8x8)
+	              @ priority = 1
 	strb r0, [r1]
 	movs r0, 0x5
 	strb r0, [r1, 0x1]
@@ -6299,11 +6302,11 @@ sub_814A9C8: @ 814A9C8
 	ldr r0, _0814AA20 @ =gUnknown_846D968
 	str r0, [sp, 0xC]
 	movs r0, 0x2
-	bl sub_815C980
+	bl DigitObjUtil_Init
 	movs r0, 0
 	movs r1, 0
 	mov r2, sp
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	mov r1, sp
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
@@ -6314,7 +6317,7 @@ sub_814A9C8: @ 814A9C8
 	movs r0, 0x1
 	movs r1, 0
 	mov r2, sp
-	bl sub_815CA40
+	bl DigitObjUtil_CreatePrinter
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
@@ -6329,7 +6332,7 @@ sub_814AA24: @ 814AA24
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814AA24
@@ -6341,7 +6344,7 @@ sub_814AA34: @ 814AA34
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x1
-	bl sub_815CD70
+	bl DigitObjUtil_PrintNumOn
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814AA34
@@ -7699,7 +7702,7 @@ sub_814B43C: @ 814B43C
 	movs r1, 0x7
 	movs r2, 0x78
 	movs r3, 0x50
-	bl sub_815F138
+	bl StartMinigameCountdown
 	adds r0, r4, 0
 	bl sub_814B134
 	add sp, 0x4
@@ -7711,7 +7714,7 @@ sub_814B43C: @ 814B43C
 	thumb_func_start sub_814B460
 sub_814B460: @ 814B460
 	push {lr}
-	bl sub_815F198
+	bl IsMinigameCountdownRunning
 	pop {r1}
 	bx r1
 	thumb_func_end sub_814B460

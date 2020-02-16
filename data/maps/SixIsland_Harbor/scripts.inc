@@ -7,5 +7,5 @@ SixIsland_Harbor_EventScript_171E48:: @ 8171E48
 	message Text_WhereDoYouWantToSail
 	waitmessage
 	setvar VAR_0x8004, SEAGALLOP_SIX_ISLAND
-	goto EventScript_1A900F
+	goto EventScript_ChooseDestFromIsland
 	end

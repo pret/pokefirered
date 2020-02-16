@@ -176,7 +176,7 @@ static const struct SpriteTemplate sWakeSpriteTemplate = {
     SpriteCB_Wake
 };
 
-void ScrSpecial_SeagallopFerry(void)
+void DoSeagallopFerryScene(void)
 {
     SetVBlankCallback(NULL);
     HelpSystem_Disable();
@@ -459,7 +459,8 @@ static bool8 GetDirectionOfTravel(void)
     return (sTravelDirectionMatrix[gSpecialVar_0x8004] >> gSpecialVar_0x8006) & 1;
 }
 
-u8 sub_8147500(void)
+// For "All aboard SEAGALLOP HI-SPEED ##" text
+u8 GetSeagallopNumber(void)
 {
     u16 originId, destId;
 
@@ -478,21 +479,34 @@ u8 sub_8147500(void)
     if (originId == SEAGALLOP_BIRTH_ISLAND || destId == SEAGALLOP_BIRTH_ISLAND)
         return 12;
 
-    if ((originId == SEAGALLOP_ONE_ISLAND || originId == SEAGALLOP_TWO_ISLAND || originId == SEAGALLOP_THREE_ISLAND) && (destId == SEAGALLOP_ONE_ISLAND || destId == SEAGALLOP_TWO_ISLAND || destId == SEAGALLOP_THREE_ISLAND))
+    if ((originId == SEAGALLOP_ONE_ISLAND 
+      || originId == SEAGALLOP_TWO_ISLAND 
+      || originId == SEAGALLOP_THREE_ISLAND) 
+      && (destId == SEAGALLOP_ONE_ISLAND 
+       || destId == SEAGALLOP_TWO_ISLAND 
+       || destId == SEAGALLOP_THREE_ISLAND))
         return 2;
 
-    if ((originId == SEAGALLOP_FOUR_ISLAND || originId == SEAGALLOP_FIVE_ISLAND) && (destId == SEAGALLOP_FOUR_ISLAND || destId == SEAGALLOP_FIVE_ISLAND))
+    if ((originId == SEAGALLOP_FOUR_ISLAND 
+      || originId == SEAGALLOP_FIVE_ISLAND) 
+      && (destId == SEAGALLOP_FOUR_ISLAND 
+       || destId == SEAGALLOP_FIVE_ISLAND))
         return 3;
 
-    if ((originId == SEAGALLOP_SIX_ISLAND || originId == SEAGALLOP_SEVEN_ISLAND) && (destId == SEAGALLOP_SIX_ISLAND || destId == SEAGALLOP_SEVEN_ISLAND))
+    if ((originId == SEAGALLOP_SIX_ISLAND 
+      || originId == SEAGALLOP_SEVEN_ISLAND) 
+      && (destId == SEAGALLOP_SIX_ISLAND 
+       || destId == SEAGALLOP_SEVEN_ISLAND))
         return 5;
 
     return 6;
 }
 
-bool8 sub_8147594(void)
+bool8 IsPlayerLeftOfVermilionSailor(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VERMILION_CITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VERMILION_CITY) && gSaveBlock1Ptr->pos.x < 24)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VERMILION_CITY) 
+       && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VERMILION_CITY) 
+       && gSaveBlock1Ptr->pos.x < 24)
         return TRUE;
 
     return FALSE;

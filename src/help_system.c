@@ -33,7 +33,7 @@ struct HelpSystemVideoState
 
 static EWRAM_DATA u8 sMapTilesBackup[BG_CHAR_SIZE] = {0};
 EWRAM_DATA u8 gUnknown_203F174 = 0;
-EWRAM_DATA u8 gUnknown_203F175 = 0;
+EWRAM_DATA bool8 gHelpSystemToggleWithRButtonDisabled = FALSE;
 static EWRAM_DATA u8 sDelayTimer = 0;
 static EWRAM_DATA u8 sInHelpSystem = 0;
 static EWRAM_DATA struct HelpSystemVideoState sVideoState = {0};
@@ -53,7 +53,7 @@ u8 RunHelpSystemCallback(void)
         sInHelpSystem = 0;
         if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
             return 0;
-        if (JOY_NEW(R_BUTTON) && gUnknown_203F175 == 1)
+        if (JOY_NEW(R_BUTTON) && gHelpSystemToggleWithRButtonDisabled == TRUE)
             return 0;
         if (JOY_NEW(L_BUTTON | R_BUTTON))
         {
@@ -93,9 +93,9 @@ u8 RunHelpSystemCallback(void)
         HelpSystem_PrintText_Row61(gString_Help);
         sub_813BD14(1);
         if (sub_812B40C() == TRUE)
-            sub_812BC54(&gHelpSystemListMenu, gHelpSystemListMenuItems);
+            HelpSystemSubroutine_PrintWelcomeMessage(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         else
-            sub_812BCA8(&gHelpSystemListMenu, gHelpSystemListMenuItems);
+            HelpSystemSubroutine_WelcomeEndGotoMenu(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         sub_813BE78(1);
         sub_813BF50(1);
         CommitTilemap();
@@ -110,7 +110,7 @@ u8 RunHelpSystemCallback(void)
         sVideoState.state = 5;
         break;
     case 5:
-        if (!sub_812BB9C(&gHelpSystemListMenu, gHelpSystemListMenuItems))
+        if (!RunHelpMenuSubroutine(&gHelpSystemListMenu, gHelpSystemListMenuItems))
         {
             PlaySE(SE_HELP_CL);
             sVideoState.state = 6;
@@ -981,9 +981,9 @@ void HelpSystem_FillPanel1(void)
 void HelpSystem_InitListMenuController(struct HelpSystemListMenu * a0, u8 a1, u8 a2)
 {
     gHelpSystemListMenu.sub = a0->sub;
-    gHelpSystemListMenu.field_0C = a1;
-    gHelpSystemListMenu.field_0D = a2;
-    gHelpSystemListMenu.field_0E = 0;
+    gHelpSystemListMenu.itemsAbove = a1;
+    gHelpSystemListMenu.cursorPos = a2;
+    gHelpSystemListMenu.state = 0;
     if (gHelpSystemListMenu.sub.totalItems < gHelpSystemListMenu.sub.maxShowed)
         gHelpSystemListMenu.sub.maxShowed = gHelpSystemListMenu.sub.totalItems;
     sub_813BDA4(0);
@@ -1007,7 +1007,7 @@ s32 HelpSystem_GetMenuInput(void)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        return gHelpSystemListMenu.sub.items[gHelpSystemListMenu.field_0C + gHelpSystemListMenu.field_0D].index;
+        return gHelpSystemListMenu.sub.items[gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos].index;
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -1051,15 +1051,15 @@ void sub_813C75C(void)
     u8 r6 = gHelpSystemListMenu.sub.totalItems - 7;
     if (gHelpSystemListMenu.sub.totalItems > 7)
     {
-        s32 r4 = gHelpSystemListMenu.field_0C + gHelpSystemListMenu.field_0D;
+        s32 r4 = gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos;
         sub_813C004(0, 0);
         if (r4 == 0)
             sub_813C004(1, 1);
-        else if (gHelpSystemListMenu.field_0C == 0 && gHelpSystemListMenu.field_0D != 0)
+        else if (gHelpSystemListMenu.itemsAbove == 0 && gHelpSystemListMenu.cursorPos != 0)
             sub_813C004(1, 1);
-        else if (gHelpSystemListMenu.field_0C == r6)
+        else if (gHelpSystemListMenu.itemsAbove == r6)
             sub_813C004(0, 1);
-        else if (gHelpSystemListMenu.field_0C != 0)
+        else if (gHelpSystemListMenu.itemsAbove != 0)
         {
             sub_813C004(0, 1);
             sub_813C004(1, 1);
@@ -1071,7 +1071,7 @@ void PrintListMenuItems(void)
 {
     u8 glyphHeight = GetFontAttribute(2, 1) + 1;
     s32 i;
-    s32 r5 = gHelpSystemListMenu.field_0C;
+    s32 r5 = gHelpSystemListMenu.itemsAbove;
 
     for (i = 0; i < gHelpSystemListMenu.sub.maxShowed; i++)
     {
@@ -1086,7 +1086,7 @@ void PlaceListMenuCursor(void)
 {
     u8 glyphHeight = GetFontAttribute(2, 1) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
-    u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.field_0D;
+    u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.cursorPos;
     HelpSystem_PrintTextAt(gFameCheckerText_ListMenuCursor, x, y);
 }
 
@@ -1107,24 +1107,24 @@ u8 TryMoveCursor1(u8 dirn)
             r4 = 0;
         else
             r4 = gHelpSystemListMenu.sub.maxShowed - (gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1)) - 1;
-        if (gHelpSystemListMenu.field_0C == 0)
+        if (gHelpSystemListMenu.itemsAbove == 0)
         {
-            if (gHelpSystemListMenu.field_0D != 0)
+            if (gHelpSystemListMenu.cursorPos != 0)
             {
-                gHelpSystemListMenu.field_0D--;
+                gHelpSystemListMenu.cursorPos--;
                 return 1;
             }
             else
                 return 0;
         }
-        if (gHelpSystemListMenu.field_0D > r4)
+        if (gHelpSystemListMenu.cursorPos > r4)
         {
-            gHelpSystemListMenu.field_0D--;
+            gHelpSystemListMenu.cursorPos--;
             return 1;
         }
         else
         {
-            gHelpSystemListMenu.field_0C--;
+            gHelpSystemListMenu.itemsAbove--;
             return 2;
         }
     }
@@ -1134,24 +1134,24 @@ u8 TryMoveCursor1(u8 dirn)
             r4 = 0;
         else
             r4 = gHelpSystemListMenu.sub.maxShowed / 2 + (gHelpSystemListMenu.sub.maxShowed & 1);
-        if (gHelpSystemListMenu.field_0C == gHelpSystemListMenu.sub.totalItems - gHelpSystemListMenu.sub.maxShowed)
+        if (gHelpSystemListMenu.itemsAbove == gHelpSystemListMenu.sub.totalItems - gHelpSystemListMenu.sub.maxShowed)
         {
-            if (gHelpSystemListMenu.field_0D < gHelpSystemListMenu.sub.maxShowed - 1)
+            if (gHelpSystemListMenu.cursorPos < gHelpSystemListMenu.sub.maxShowed - 1)
             {
-                gHelpSystemListMenu.field_0D++;
+                gHelpSystemListMenu.cursorPos++;
                 return 1;
             }
             else
                 return 0;
         }
-        else if (gHelpSystemListMenu.field_0D < r4)
+        else if (gHelpSystemListMenu.cursorPos < r4)
         {
-            gHelpSystemListMenu.field_0D++;
+            gHelpSystemListMenu.cursorPos++;
             return 1;
         }
         else
         {
-            gHelpSystemListMenu.field_0C++;
+            gHelpSystemListMenu.itemsAbove++;
             return 2;
         }
     }
@@ -1159,7 +1159,7 @@ u8 TryMoveCursor1(u8 dirn)
 
 bool8 MoveCursor(u8 by, u8 dirn)
 {
-    u8 r7 = gHelpSystemListMenu.field_0D;
+    u8 r7 = gHelpSystemListMenu.cursorPos;
     u8 flags = 0;
     s32 i;
     for (i = 0; i < by; i++)
@@ -1172,14 +1172,14 @@ bool8 MoveCursor(u8 by, u8 dirn)
         // neither changed
         return TRUE;
     case 1:
-        // changed field_0D only
+        // changed cursorPos only
         sub_813C860(r7);
         PlaceListMenuCursor();
         CommitTilemap();
         break;
     case 2:
     case 3:
-        // changed field_0C
+        // changed itemsAbove
         if (sub_812BF88() == TRUE)
         {
             HelpSystem_SetInputDelay(2);

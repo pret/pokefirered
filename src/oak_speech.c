@@ -1902,8 +1902,8 @@ static void GetDefaultName(u8 arg0, u8 namePick)
         src = sRivalNameChoices[namePick];
         dest = gSaveBlock1Ptr->rivalName;
     }
-    for (i = 0; i < PLAYER_NAME_LENGTH - 1 && src[i] != EOS; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && src[i] != EOS; i++)
         dest[i] = src[i];
-    for (; i < PLAYER_NAME_LENGTH; i++)
+    for (; i < PLAYER_NAME_LENGTH + 1; i++)
         dest[i] = EOS;
 }

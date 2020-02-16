@@ -3,10 +3,10 @@
 	.section .rodata
 	.align 2
 
-gUnknown_825098C:: @ 825098C
+gSmokescreenImpactSpriteSheet:: @ 825098C
 	obj_tiles gFile_graphics_battle_anims_sprites_smokescreen_impact_sheet, 0x0180, 55019
 
-gUnknown_8250994:: @ 8250994
+gSmokescreenImpactSpritePalette:: @ 8250994
 	obj_pal gFile_graphics_battle_anims_sprites_smokescreen_impact_palette, 55019
 
 gOamData_835099C::
@@ -42,8 +42,8 @@ gSpriteAnimTable_82509E4::
 	.4byte gAnimCmd_82509C4
 	.4byte gAnimCmd_82509D4
 
-gUnknown_82509F4:: @ 82509F4
-	spr_template 55019, 55019, gOamData_835099C, gSpriteAnimTable_82509E4, NULL, gDummySpriteAffineAnimTable, sub_804A904
+gSmokescreenImpactSpriteTemplate:: @ 82509F4
+	spr_template 55019, 55019, gOamData_835099C, gSpriteAnimTable_82509E4, NULL, gDummySpriteAffineAnimTable, SpriteCB_DestroySprite
 
 gSpriteSheet_EnemyShadow:: @ 8250A0C
 	obj_tiles gFile_graphics_battle_interface_enemy_mon_shadow_sheet, 0x0080, 55129

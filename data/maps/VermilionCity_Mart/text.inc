@@ -1,4 +1,4 @@
-gUnknown_8194A77:: @ 8194A77
+VermilionCity_Mart_Text_TeamRocketAreWickedPeople:: @ 8194A77
     .string "There are wicked people who will\n"
     .string "use POKéMON for criminal acts.\p"
     .string "TEAM ROCKET traffics in rare\n"
@@ -8,7 +8,7 @@ gUnknown_8194A77:: @ 8194A77
     .string "That's the sort of horrid people\n"
     .string "they are, TEAM ROCKET.$"
 
-gUnknown_8194B65:: @ 8194B65
+VermilionCity_Mart_Text_MonsGoodOrBadDependingOnTrainer:: @ 8194B65
     .string "I think POKéMON can be good or\n"
     .string "bad. It depends on the TRAINER.$"
 

@@ -1387,7 +1387,7 @@ PokemonJournal_Text_SpecialFeatureMisty:: @ 81B14E8
 	.string "MISTY is said to worship LORELEI\n"
 	.string "of the ELITE FOUR.$"
 
-gUnknown_81B1558:: @ 81B1558
+PokemonJournal_Text_SpecialFeatureLtSurge:: @ 81B1558
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: VERMILION GYM\n"
 	.string "LEADER LT. SURGE!\p"
@@ -1461,7 +1461,7 @@ gUnknown_81B1A31:: @ 81B1A31
 	.string "be the elder of a famous clan of\l"
 	.string "dragon masters.$"
 
-gUnknown_81B1AB9:: @ 81B1AB9
+PokemonJournal_Text_SpecialFeatureProfOak:: @ 81B1AB9
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: PROF. OAK,\n"
 	.string "the POKéMON Researcher!\p"

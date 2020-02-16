@@ -213,7 +213,7 @@ CinnabarIsland_EventScript_SailToOneIsland:: @ 81670E6
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 1
 	setvar VAR_0x8004, SEAGALLOP_CINNABAR_ISLAND
 	setvar VAR_0x8006, SEAGALLOP_ONE_ISLAND
-	goto EventScript_1A90DA
+	goto EventScript_SetSail
 	end
 
 CinnabarIsland_EventScript_ApproachShore:: @ 8167142

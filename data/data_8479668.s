@@ -75,64 +75,64 @@ gUnknown_847AA8F::
 gUnknown_847AAA8::
 	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 18}'{CLEAR 18} $"
 
-gUnknown_847AAC1::
+gText_UnionRoomChatKeyboard_ABCDE::
 	.string "ABCDE$"
 
-gUnknown_847AAC7::
+gText_UnionRoomChatKeyboard_FGHIJ::
 	.string "FGHIJ$"
 
-gUnknown_847AACD::
+gText_UnionRoomChatKeyboard_KLMNO::
 	.string "KLMNO$"
 
-gUnknown_847AAD3::
+gText_UnionRoomChatKeyboard_PQRST::
 	.string "PQRST$"
 
-gUnknown_847AAD9::
+gText_UnionRoomChatKeyboard_UVWXY::
 	.string "UVWXY$"
 
-gUnknown_847AADF::
+gText_UnionRoomChatKeyboard_Z::
 	.string "Z    $"
 
-gUnknown_847AAE5::
+gText_UnionRoomChatKeyboard_01234Upper::
 	.string "01234$"
 
-gUnknown_847AAEB::
+gText_UnionRoomChatKeyboard_56789Upper::
 	.string "56789$"
 
-gUnknown_847AAF1::
+gText_UnionRoomChatKeyboard_PunctuationUpper::
 	.string ".,!? $"
 
-gUnknown_847AAF7::
+gText_UnionRoomChatKeyboard_SymbolsUpper::
 	.string "-/&… $"
 
-gUnknown_847AAFD::
+gText_UnionRoomChatKeyboard_abcde::
 	.string "abcde$"
 
-gUnknown_847AB03::
+gText_UnionRoomChatKeyboard_fghij::
 	.string "fghij$"
 
-gUnknown_847AB09::
+gText_UnionRoomChatKeyboard_klmno::
 	.string "klmno$"
 
-gUnknown_847AB0F::
+gText_UnionRoomChatKeyboard_pqrst::
 	.string "pqrst$"
 
-gUnknown_847AB15::
+gText_UnionRoomChatKeyboard_uvwxy::
 	.string "uvwxy$"
 
-gUnknown_847AB1B::
+gText_UnionRoomChatKeyboard_z::
 	.string "z    $"
 
-gUnknown_847AB21::
+gText_UnionRoomChatKeyboard_01234Lower::
 	.string "01234$"
 
-gUnknown_847AB27::
+gText_UnionRoomChatKeyboard_56789Lower::
 	.string "56789$"
 
-gUnknown_847AB2D::
+gText_UnionRoomChatKeyboard_PunctuationLower::
 	.string ".,!? $"
 
-gUnknown_847AB33::
+gText_UnionRoomChatKeyboard_SymbolsLower::
 	.string "-/&… $"
 
 	.string "$"
@@ -144,81 +144,39 @@ gUnknown_847AB33::
 	.string "$"
 	.string "$"
 
-gUnknown_847AB41::
+gText_UnionRoomChatKeyboard_Emoji1::
 	.string "{EXTRA 245}{EXTRA 246}{EXTRA 247}{EXTRA 248}{EXTRA 254}$"
 
-gUnknown_847AB4C::
+gText_UnionRoomChatKeyboard_Emoji2::
 	.string "{EXTRA 249}{EXTRA 250}{EXTRA 252}{EXTRA 251}{EXTRA 253}$"
 
-gUnknown_847AB57::
+gText_UnionRoomChatKeyboard_Emoji3::
 	.string "{EXTRA 236}{EXTRA 237}{EXTRA 238}{EXTRA 235}{EXTRA 234}$"
 
-gUnknown_847AB62::
+gText_UnionRoomChatKeyboard_Emoji4::
 	.string "♂♀{EXTRA 212}{EXTRA 213}{EXTRA 211}$"
 
-gUnknown_847AB6B::
+gText_UnionRoomChatKeyboard_Emoji5::
 	.string "{EXTRA 216}{EXTRA 217}{EXTRA 242}{EXTRA 243}{EXTRA 244}$"
 
-gUnknown_847AB76::
+gText_UnionRoomChatKeyboard_Emoji6::
 	.string "{EXTRA 218}{EXTRA 241}{EXTRA 224}{EXTRA 226}{EXTRA 227}$"
 
-gUnknown_847AB81::
+gText_UnionRoomChatKeyboard_Emoji7::
 	.string "{EXTRA 240}{EXTRA 239}{EXTRA 225}{EXTRA 214}{EXTRA 215}$"
 
-gUnknown_847AB8C::
+gText_UnionRoomChatKeyboard_Emoji8::
 	.string "{EXTRA 228}{EXTRA 229}{EXTRA 230}{EXTRA 231}{EXTRA 232}$"
 
-gUnknown_847AB97::
+gText_UnionRoomChatKeyboard_Emoji9::
 	.string "{EXTRA 233}{EXTRA 220}{EXTRA 221}{EXTRA 222}{EXTRA 209}$"
 
-gUnknown_847ABA2::
+gText_UnionRoomChatKeyboard_Emoji10::
 	.string "{EXTRA 210}{EXTRA 208}ょ: $"
-
-	// trainer_tower (again?)
 
 	@ 847ABAC
 .align 2
 	.include "data/trainer_tower/trainers.inc"
-
-	.align 2
-gUnknown_84827AC:: @ 84827AC
-	.byte 0x08, 0x01
-	.align 2
-	.4byte 0
-
-gUnknown_84827B4:: @ 84827B4
-	.4byte gUnknown_847F16C
-	.4byte gUnknown_847D26C
-	.4byte gUnknown_84808AC
-	.4byte gUnknown_847ABAC
-	.4byte gUnknown_847CAAC
-	.4byte gUnknown_847E9AC
-	.4byte gUnknown_847AF8C
-	.4byte gUnknown_847CE8C
-	.4byte gUnknown_847DA2C
-	.4byte gUnknown_847BF0C
-	.4byte gUnknown_847D64C
-	.4byte gUnknown_847DE0C
-	.4byte gUnknown_847B74C
-	.4byte gUnknown_847BB2C
-	.4byte gUnknown_848182C
-	.4byte gUnknown_847F92C
-	.4byte gUnknown_847C2EC
-	.4byte gUnknown_847C6CC
-	.4byte gUnknown_847E5CC
-	.4byte gUnknown_84804CC
-	.4byte gUnknown_84823CC
-	.4byte gUnknown_8481FEC
-	.4byte gUnknown_84800EC
-	.4byte gUnknown_847E1EC
-	.4byte gUnknown_847ED8C
-	.4byte gUnknown_848106C
-	.4byte gUnknown_8480C8C
-	.4byte gUnknown_847F92C
-	.4byte gUnknown_847F54C
-	.4byte gUnknown_847E1EC
-	.4byte gUnknown_847D64C
-	.4byte gUnknown_847C6CC
 
 	.include "data/text/move_descriptions.inc"
 

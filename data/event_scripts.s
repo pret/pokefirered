@@ -31,6 +31,7 @@
 #include "constants/trade.h"
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
+#include "constants/easy_chat.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -638,6 +639,8 @@ gStdScriptsEnd::
 	.include "data/maps/Route18/text.inc"
 	.include "data/maps/Route19/text.inc"
 	.include "data/maps/Route20/text.inc"
+	.include "data/maps/Route21_North/text.inc"
+	.include "data/maps/Route21_South/text.inc"
 	.include "data/maps/Route22/text.inc"
 	.include "data/maps/Route23/text.inc"
 	.include "data/maps/Route24/text.inc"
@@ -690,6 +693,7 @@ gStdScriptsEnd::
 	.include "data/maps/VermilionCity_House1/text.inc"
 	.include "data/maps/VermilionCity_PokemonCenter_1F/text.inc"
 	.include "data/maps/VermilionCity_PokemonFanClub/text.inc"
+	.include "data/maps/VermilionCity_House2/text.inc"
 	.include "data/maps/VermilionCity_Mart/text.inc"
 	.include "data/maps/VermilionCity_Gym/text.inc"
 	.include "data/maps/VermilionCity_House3/text.inc"
@@ -941,23 +945,7 @@ Text_DugUpItemFromGround:: @ 81A5700
 	.string "from deep in the ground.$"
 
 	.include "data/text/route23.inc"
-
-Text_1A58A7:: @ 81A58A7
-	.string "Let's see…\n"
-	.string "Uh-oh! You have caught only\l"
-	.string "{STR_VAR_3} kinds of POKéMON!\p"
-	.string "You need {STR_VAR_1} kinds\n"
-	.string "if you want the {STR_VAR_2}.$"
-
-Text_1A5909:: @ 81A5909
-	.string "…Oh. I see.\p"
-	.string "When you get {STR_VAR_1} kinds of POKéMON,\n"
-	.string "come back for the {STR_VAR_2}.$"
-
-Text_1A594D:: @ 81A594D
-	.string "Oh! I see you don't have any\n"
-	.string "room for the {STR_VAR_2}.$"
-
+	.include "data/text/aide.inc"
 	.include "data/text/ingame_trade.inc"
 
 Text_CardKeyOpenedDoor:: @ 81A5B88
@@ -1077,13 +1065,7 @@ Text_FoundTMHMContainsMove:: @ 81A63E8
 	.string "{PLAYER} found a {STR_VAR_2}!\n"
 	.string "It contains {STR_VAR_1}.$"
 
-Text_1A6407:: @ 81A6407
-	.string "おつかれさん！\n"
-	.string "どこに　いきたいんだ？$"
-
-Text_1A641B:: @ 81A641B
-	.string "All right!\n"
-	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"
+	.include "data/text/seagallop.inc"
 
 @ Call for legendary bird trio
 Text_Gyaoo:: @ 81A6448
@@ -1189,10 +1171,9 @@ EventScript_ResetEliteFour:: @ 81A6551
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
-@ DoEasyChatScreen?
-EventScript_1A6AC0:: @ 81A6AC0
+Common_ShowEasyChatScreen:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
-	special sub_80FEE44
+	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1352,8 +1333,8 @@ gUnknown_81A7702:: @ 81A7702
 	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_1A778A
-	setvar VAR_0x8004, 14
-	call EventScript_1A6AC0
+	setvar VAR_0x8004, EASY_CHAT_TYPE_QUESTIONNAIRE
+	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
 	specialvar VAR_0x8008, Special_GetMartClerkObjectId
@@ -1431,20 +1412,7 @@ EventScript_GetElevatorFloor:: @ 81A7AB9
 	special Special_GetElevatorFloor
 	return
 
-EventScript_1A7ABD:: @ 81A7ABD
-	msgbox Text_1A58A7
-	release
-	end
-
-EventScript_1A7AC7:: @ 81A7AC7
-	msgbox Text_1A594D
-	release
-	end
-
-EventScript_1A7AD1:: @ 81A7AD1
-	msgbox Text_1A5909
-	release
-	end
+	.include "data/scripts/aide.inc"
 
 gUnknown_81A7ADB:: @ 81A7ADB
 	special sub_80CADC4
@@ -1526,21 +1494,21 @@ Common_EventScript_DirectCornerAttendant:: @ 81A8D02
 	call CableClub_EventScript_DirectCornerAttendant
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_1A8D08:: @ 81A8D08
+VermilionCity_PokemonCenter_1F_EventScript_VSSeekerWoman:: @ 81A8D08
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_VS_SEEKER, EventScript_1A8D3F
-	msgbox Text_194234
+	goto_if_set FLAG_GOT_VS_SEEKER, VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker
+	msgbox VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain
 	setflag FLAG_GOT_VS_SEEKER
 	giveitem ITEM_VS_SEEKER
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_BagIsFull
-	msgbox Text_19430F
+	msgbox VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches
 	release
 	end
 
-EventScript_1A8D3F:: @ 81A8D3F
-	msgbox Text_194381
+VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker:: @ 81A8D3F
+	msgbox VermilionCity_PokemonCenter_1F_Text_ExplainVSSeeker
 	release
 	end
 

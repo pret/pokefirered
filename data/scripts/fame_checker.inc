@@ -1,10 +1,10 @@
-ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
+ViridianCity_House2_EventScript_PokemonJournal:: @ 81ACD65
 	lock
 	faceplayer
 	famechecker FAMECHECKER_OAK, 3
 	famechecker FAMECHECKER_DAISY, 3
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -14,7 +14,7 @@ EventScript_1ACD8D:: @ 81ACD8D
 	famechecker FAMECHECKER_DAISY, 1
 	famechecker FAMECHECKER_OAK, 4
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -23,7 +23,7 @@ EventScript_1ACDB5:: @ 81ACDB5
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 4
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -84,11 +84,11 @@ CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty:: @ 81ACE68
 	release
 	end
 
-VermilionCity_PokemonCenter_1F_EventScript_1ACE83:: @ 81ACE83
+VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	lockall
 	famechecker FAMECHECKER_LTSURGE, 5
 	textcolor 3
-	msgbox gUnknown_81B1558
+	msgbox PokemonJournal_Text_SpecialFeatureLtSurge
 	releaseall
 	end
 

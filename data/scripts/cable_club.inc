@@ -1149,7 +1149,7 @@ CableClub_EventScript_81BBFD8:: @ 81BBFD8
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	special HelpSystem_Disable
 	fadescreen FADE_TO_BLACK
-	special sub_814F1D4
+	special Special_WirelessCommunicationScreen
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter
 	special HelpSystem_Enable

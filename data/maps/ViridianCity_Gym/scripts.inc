@@ -1,11 +1,11 @@
 ViridianCity_Gym_MapScripts:: @ 8169EC9
 	.byte 0
 
-ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
+ViridianCity_Gym_EventScript_Giovanni:: @ 8169ECA
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	trainerbattle_single TRAINER_LEADER_GIOVANNI, Text_18F352, Text_18F43F, EventScript_169F04, NO_MUSIC
-	goto_if_unset FLAG_GOT_TM26_FROM_GIOVANNI, EventScript_169F2F
-	msgbox gUnknown_818F4A2
+	trainerbattle_single TRAINER_LEADER_GIOVANNI, ViridianCity_Gym_Text_GiovanniIntro, ViridianCity_Gym_Text_GiovanniDefeat, ViridianCity_Gym_EventScript_DefeatedGiovanni, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM26_FROM_GIOVANNI, ViridianCity_Gym_EventScript_GiveTM26
+	msgbox ViridianCity_Gym_Text_GiovanniPostBattle
 	closemessage
 	fadescreen FADE_TO_BLACK
 	removeobject 8
@@ -13,94 +13,94 @@ ViridianCity_Gym_EventScript_169ECA:: @ 8169ECA
 	release
 	end
 
-EventScript_169F04:: @ 8169F04
+ViridianCity_Gym_EventScript_DefeatedGiovanni:: @ 8169F04
 	famechecker FAMECHECKER_GIOVANNI, 3
 	setflag FLAG_HIDE_MISC_KANTO_ROCKETS
 	setflag FLAG_DEFEATED_LEADER_GIOVANNI
 	setflag FLAG_BADGE08_GET
 	setvar VAR_MAP_SCENE_ROUTE22, 3
 	set_gym_trainers 8
-	goto EventScript_169F2F
+	goto ViridianCity_Gym_EventScript_GiveTM26
 	end
 
-EventScript_169F2F:: @ 8169F2F
-	msgbox gUnknown_818F586
+ViridianCity_Gym_EventScript_GiveTM26:: @ 8169F2F
+	msgbox ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis
 	checkitemspace ITEM_TM26, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_169F70
-	giveitem_msg gUnknown_818F675, ITEM_TM26
+	goto_if_eq ViridianCity_Gym_EventScript_NoRoomForTM26
+	giveitem_msg ViridianCity_Gym_Text_ReceivedTM26FromGiovanni, ITEM_TM26
 	setflag FLAG_GOT_TM26_FROM_GIOVANNI
-	msgbox gUnknown_818F695
+	msgbox ViridianCity_Gym_Text_ExplainTM26
 	release
 	end
 
-EventScript_169F70:: @ 8169F70
-	msgbox gUnknown_818F71B
+ViridianCity_Gym_EventScript_NoRoomForTM26:: @ 8169F70
+	msgbox ViridianCity_Gym_Text_YouDoNotHaveSpace
 	release
 	end
 
-ViridianCity_Gym_EventScript_169F7A:: @ 8169F7A
-	trainerbattle_single TRAINER_TAMER_JASON, Text_18F7F3, Text_18F824
-	msgbox gUnknown_818F840, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Jason:: @ 8169F7A
+	trainerbattle_single TRAINER_TAMER_JASON, ViridianCity_Gym_Text_JasonIntro, ViridianCity_Gym_Text_JasonDefeat
+	msgbox ViridianCity_Gym_Text_JasonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_169F91:: @ 8169F91
-	trainerbattle_single TRAINER_TAMER_COLE, Text_18F98A, Text_18F9BB
-	msgbox gUnknown_818F9CC, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Cole:: @ 8169F91
+	trainerbattle_single TRAINER_TAMER_COLE, ViridianCity_Gym_Text_ColeIntro, ViridianCity_Gym_Text_ColeDefeat
+	msgbox ViridianCity_Gym_Text_ColePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_169FA8:: @ 8169FA8
-	trainerbattle_single TRAINER_BLACK_BELT_ATSUSHI, Text_18F7AD, Text_18F7D6
-	msgbox gUnknown_818F7DD, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Atsushi:: @ 8169FA8
+	trainerbattle_single TRAINER_BLACK_BELT_ATSUSHI, ViridianCity_Gym_Text_AtsushiIntro, ViridianCity_Gym_Text_AtsushiDefeat
+	msgbox ViridianCity_Gym_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_169FBF:: @ 8169FBF
-	trainerbattle_single TRAINER_BLACK_BELT_KIYO, Text_18F86C, Text_18F899
-	msgbox gUnknown_818F8A0, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Kiyo:: @ 8169FBF
+	trainerbattle_single TRAINER_BLACK_BELT_KIYO, ViridianCity_Gym_Text_KiyoIntro, ViridianCity_Gym_Text_KiyoDefeat
+	msgbox ViridianCity_Gym_Text_KiyoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_169FD6:: @ 8169FD6
-	trainerbattle_single TRAINER_BLACK_BELT_TAKASHI, Text_18F92C, Text_18F95A
-	msgbox gUnknown_818F960, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Takashi:: @ 8169FD6
+	trainerbattle_single TRAINER_BLACK_BELT_TAKASHI, ViridianCity_Gym_Text_TakashiIntro, ViridianCity_Gym_Text_TakashiDefeat
+	msgbox ViridianCity_Gym_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_169FED:: @ 8169FED
-	trainerbattle_single TRAINER_COOLTRAINER_SAMUEL, Text_18F9E7, Text_18FA2D
-	msgbox gUnknown_818FA3B, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Samuel:: @ 8169FED
+	trainerbattle_single TRAINER_COOLTRAINER_SAMUEL, ViridianCity_Gym_Text_SamuelIntro, ViridianCity_Gym_Text_SamuelDefeat
+	msgbox ViridianCity_Gym_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_16A004:: @ 816A004
-	trainerbattle_single TRAINER_COOLTRAINER_YUJI, Text_18F73B, Text_18F769
-	msgbox gUnknown_818F77B, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Yuji:: @ 816A004
+	trainerbattle_single TRAINER_COOLTRAINER_YUJI, ViridianCity_Gym_Text_YujiIntro, ViridianCity_Gym_Text_YujiDefeat
+	msgbox ViridianCity_Gym_Text_YujiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_16A01B:: @ 816A01B
-	trainerbattle_single TRAINER_COOLTRAINER_WARREN, Text_18F8CB, Text_18F8EE
-	msgbox gUnknown_818F8FE, MSGBOX_AUTOCLOSE
+ViridianCity_Gym_EventScript_Warren:: @ 816A01B
+	trainerbattle_single TRAINER_COOLTRAINER_WARREN, ViridianCity_Gym_Text_WarrenIntro, ViridianCity_Gym_Text_WarrenDefeat
+	msgbox ViridianCity_Gym_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianCity_Gym_EventScript_16A032:: @ 816A032
+ViridianCity_Gym_EventScript_GymGuy:: @ 816A032
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_LEADER_GIOVANNI, EventScript_16A047
-	msgbox gUnknown_818FA81
+	goto_if_set FLAG_DEFEATED_LEADER_GIOVANNI, ViridianCity_Gym_EventScript_GymGuyPostVictory
+	msgbox ViridianCity_Gym_Text_GymGuyAdvice
 	release
 	end
 
-EventScript_16A047:: @ 816A047
+ViridianCity_Gym_EventScript_GymGuyPostVictory:: @ 816A047
 	famechecker FAMECHECKER_GIOVANNI, 4
-	msgbox gUnknown_818FB56
+	msgbox ViridianCity_Gym_Text_GymGuyPostVictory
 	release
 	end
 
-ViridianCity_Gym_EventScript_16A05E:: @ 816A05E
+ViridianCity_Gym_EventScript_GymStatue:: @ 816A05E
 	lockall
-	goto_if_set FLAG_BADGE08_GET, EventScript_16A072
-	msgbox gUnknown_818FB8D
+	goto_if_set FLAG_BADGE08_GET, ViridianCity_Gym_EventScript_GymStatuePostVictory
+	msgbox ViridianCity_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16A072:: @ 816A072
-	msgbox gUnknown_818FBC1
+ViridianCity_Gym_EventScript_GymStatuePostVictory:: @ 816A072
+	msgbox ViridianCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end

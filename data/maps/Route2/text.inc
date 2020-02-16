@@ -1,7 +1,7 @@
-gUnknown_818345E:: @ 818345E
+Route2_Text_RouteSign:: @ 818345E
     .string "ROUTE 2\n"
     .string "VIRIDIAN CITY - PEWTER CITY$"
 
-gUnknown_8183482:: @ 8183482
+Route2_Text_DiglettsCave:: @ 8183482
     .string "DIGLETT'S CAVE$"
 

@@ -103,7 +103,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081128
 	def_special Field_AskSaveTheGame
 	def_special nullsub_56
-	def_special sub_80FEE44
+	def_special ShowEasyChatScreen
 	def_special Special_BufferEasyChatMessage
 	def_special nullsub_75
 	def_special nullsub_75
@@ -374,7 +374,7 @@ gSpecials:: @ 815FD60
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
-	def_special sub_814F1D4
+	def_special Special_WirelessCommunicationScreen
 	def_special EnableNationalPokedex
 	def_special sub_80699E0
 	def_special sub_80699BC
@@ -387,7 +387,7 @@ gSpecials:: @ 815FD60
 	def_special IsThereMonInRoute5Daycare
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
-	def_special ScrSpecial_SeagallopFerry
+	def_special DoSeagallopFerryScene
 	def_special Special_PlayerPartyContainsSpecies
 	def_special Special_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
@@ -433,11 +433,11 @@ gSpecials:: @ 815FD60
 	def_special ShowDodrioBerryPickingRecords
 	def_special Special_DrawSeagallopDestinationMenu
 	def_special Special_GetSelectedSeagallopDestination
-	def_special sub_8147500
+	def_special GetSeagallopNumber
 	def_special GetPlayerFacingDirection
 	def_special DoDeoxysRockInteraction
 	def_special Special_SetDeoxysTriangleObjectPal
-	def_special sub_8147594
+	def_special IsPlayerLeftOfVermilionSailor
 	def_special Special_BadEggInParty
 	def_special ReadTrainerTowerAndValidate
 	def_special HasAllMons

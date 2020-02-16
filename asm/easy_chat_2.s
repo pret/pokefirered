@@ -334,8 +334,8 @@ sub_80FEE24: @ 80FEE24
 	bx r0
 	thumb_func_end sub_80FEE24
 
-	thumb_func_start sub_80FEE44
-sub_80FEE44: @ 80FEE44
+	thumb_func_start ShowEasyChatScreen
+ShowEasyChatScreen: @ 80FEE44
 	push {lr}
 	ldr r0, _080FEE58 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -431,7 +431,7 @@ _080FEF1C: .4byte gSpecialVar_0x8005
 _080FEF20: .4byte 0x00002cd0
 _080FEF24: .4byte gSpecialVar_0x8004
 _080FEF28: .4byte sub_80568C4
-	thumb_func_end sub_80FEE44
+	thumb_func_end ShowEasyChatScreen
 
 	thumb_func_start sub_80FEF2C
 sub_80FEF2C: @ 80FEF2C

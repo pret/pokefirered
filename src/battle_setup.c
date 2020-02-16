@@ -78,7 +78,7 @@ static EWRAM_DATA u8 *sTrainerVictorySpeech = NULL;
 static EWRAM_DATA u8 *sTrainerCannotBattleSpeech = NULL;
 static EWRAM_DATA u8 *sTrainerBattleEndScript = NULL;
 static EWRAM_DATA u8 *sTrainerABattleScriptRetAddr = NULL;
-static EWRAM_DATA u16 gUnknown_20386CC = 0;
+static EWRAM_DATA u16 sRivalBattleFlags = 0;
 
 static const u8 sBattleTransitionTable_Wild[][2] =
 {
@@ -148,11 +148,11 @@ static const struct TrainerBattleParameter sOrdinaryNoIntroBattleParams[] =
     {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
 
-static const struct TrainerBattleParameter sTutorialBattleParams[] =
+static const struct TrainerBattleParameter sEarlyRivalBattleParams[] =
 {
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&gUnknown_20386CC,             TRAINER_PARAM_LOAD_VAL_16BIT},
+    {&sRivalBattleFlags,            TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerAIntroSpeech,         TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
@@ -706,7 +706,7 @@ static void InitTrainerBattleVariables(void)
     sTrainerCannotBattleSpeech = NULL;
     sTrainerBattleEndScript = NULL;
     sTrainerABattleScriptRetAddr = NULL;
-    gUnknown_20386CC = 0;
+    sRivalBattleFlags = 0;
 }
 
 static inline void SetU8(void *ptr, u8 value)
@@ -808,8 +808,8 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
         return EventScript_TryDoRematchBattle;
-    case TRAINER_BATTLE_TUTORIAL:
-        TrainerBattleLoadArgs(sTutorialBattleParams, data);
+    case TRAINER_BATTLE_EARLY_RIVAL:
+        TrainerBattleLoadArgs(sEarlyRivalBattleParams, data);
         return EventScript_DoTrainerBattle;
     default:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
@@ -846,9 +846,9 @@ u8 ScrSpecial_GetTrainerBattleMode(void)
     return sTrainerBattleMode;
 }
 
-u16 sub_80803D8(void)
+u16 GetRivalBattleFlags(void)
 {
-    return gUnknown_20386CC;
+    return sRivalBattleFlags;
 }
 
 u16 ScrSpecial_HasTrainerBeenFought(void)
@@ -885,8 +885,7 @@ void ClearTrainerFlag(u16 trainerId)
 void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    if (ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_TUTORIAL
-     && sub_80803D8() & 3)
+    if (ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
     DoTrainerBattle();
@@ -895,12 +894,12 @@ void BattleSetup_StartTrainerBattle(void)
 
 static void CB2_EndTrainerBattle(void)
 {
-    if (sTrainerBattleMode == TRAINER_BATTLE_TUTORIAL)
+    if (sTrainerBattleMode == TRAINER_BATTLE_EARLY_RIVAL)
     {
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         {
-            gSpecialVar_Result = 1;
-            if (gUnknown_20386CC & 1)
+            gSpecialVar_Result = TRUE;
+            if (sRivalBattleFlags & RIVAL_BATTLE_HEAL_AFTER)
             {
                 HealPlayerParty();
             }
@@ -915,7 +914,7 @@ static void CB2_EndTrainerBattle(void)
         }
         else
         {
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = FALSE;
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
             sub_81139BC();

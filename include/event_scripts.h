@@ -1170,6 +1170,10 @@ extern const u8 EventScript_ResetAllMapFlags[];
 // player_pc
 extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
 
+// field_screen_effect
+extern const u8 EventScript_MomHeal[];
+extern const u8 EventScript_AfterWhiteOutHeal[];
+
 // start_menu
 extern const u8 gText_WouldYouLikeToSaveTheGame[];
 extern const u8 gText_AlreadySaveFile_WouldLikeToOverwrite[];

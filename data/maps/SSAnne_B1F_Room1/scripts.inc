@@ -1,12 +1,12 @@
 SSAnne_B1F_Room1_MapScripts:: @ 8160D47
 	.byte 0
 
-SSAnne_B1F_Room1_EventScript_160D48:: @ 8160D48
-	trainerbattle_single TRAINER_FISHERMAN_BARNY, Text_174177, Text_1741EF
-	msgbox gUnknown_817420E, MSGBOX_AUTOCLOSE
+SSAnne_B1F_Room1_EventScript_Barny:: @ 8160D48
+	trainerbattle_single TRAINER_FISHERMAN_BARNY, SSAnne_B1F_Room1_Text_BarnyIntro, SSAnne_B1F_Room1_Text_BarnyDefeat
+	msgbox SSAnne_B1F_Room1_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SSAnne_B1F_Room1_EventScript_160D5F:: @ 8160D5F
-	trainerbattle_single TRAINER_SAILOR_PHILLIP, Text_1740F6, Text_174123
-	msgbox gUnknown_817413A, MSGBOX_AUTOCLOSE
+SSAnne_B1F_Room1_EventScript_Phillip:: @ 8160D5F
+	trainerbattle_single TRAINER_SAILOR_PHILLIP, SSAnne_B1F_Room1_Text_PhillipIntro, SSAnne_B1F_Room1_Text_PhillipDefeat
+	msgbox SSAnne_B1F_Room1_Text_PhillipPostBattle, MSGBOX_AUTOCLOSE
 	end

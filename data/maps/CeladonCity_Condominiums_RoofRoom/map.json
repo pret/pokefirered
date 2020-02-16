@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C464",
+      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_BlackBelt",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C46D",
+      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_EeveeBall",
       "flag": "FLAG_HIDE_EEVEE_BALL"
     }
   ],
@@ -70,21 +70,21 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C522"
+      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_Blackboard"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C522"
+      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_Blackboard"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 4,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_16C519"
+      "script": "CeladonCity_Condominiums_RoofRoom_EventScript_TMsPamphlet"
     }
   ]
 }

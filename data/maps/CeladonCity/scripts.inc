@@ -6,44 +6,44 @@ CeladonCity_OnTransition:: @ 8166C95
 	setworldmapflag FLAG_WORLD_MAP_CELADON_CITY
 	end
 
-CeladonCity_EventScript_166C99:: @ 8166C99
-	msgbox gUnknown_817FEC3, MSGBOX_NPC
+CeladonCity_EventScript_LittleGirl:: @ 8166C99
+	msgbox CeladonCity_Text_GotMyKoffingInCinnabar, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166CA2:: @ 8166CA2
+CeladonCity_EventScript_OldMan1:: @ 8166CA2
 	lock
-	msgbox gUnknown_817FF1C
+	msgbox CeladonCity_Text_GymIsGreatFullOfWomen
 	release
 	end
 
-CeladonCity_EventScript_166CAD:: @ 8166CAD
-	msgbox gUnknown_817FF4A, MSGBOX_NPC
+CeladonCity_EventScript_Woman:: @ 8166CAD
+	msgbox CeladonCity_Text_GameCornerIsBadForCitysImage, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166CB6:: @ 8166CB6
-	msgbox gUnknown_817FFC5, MSGBOX_NPC
+CeladonCity_EventScript_OldMan2:: @ 8166CB6
+	msgbox CeladonCity_Text_BlewItAllAtSlots, MSGBOX_NPC
 	end
 
 CeladonCity_EventScript_SoftboiledTutor:: @ 8166CBF
 	goto EventScript_SoftboiledTutor
 	end
 
-CeladonCity_EventScript_166CC5:: @ 8166CC5
+CeladonCity_EventScript_FatMan:: @ 8166CC5
 	lock
 	faceplayer
-	msgbox gUnknown_818001B
+	msgbox CeladonCity_Text_MyTrustedPalPoliwrath
 	closemessage
 	applymovement 2, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-CeladonCity_EventScript_166CDC:: @ 8166CDC
+CeladonCity_EventScript_Poliwrath:: @ 8166CDC
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_POLIWRATH, 0
-	msgbox gUnknown_8180075
+	msgbox CeladonCity_Text_Poliwrath
 	closemessage
 	waitmoncry
 	applymovement 3, Movement_FaceOriginalDirection
@@ -51,53 +51,53 @@ CeladonCity_EventScript_166CDC:: @ 8166CDC
 	release
 	end
 
-CeladonCity_EventScript_166CFA:: @ 8166CFA
-	msgbox gUnknown_81800C2, MSGBOX_NPC
+CeladonCity_EventScript_RocketGrunt1:: @ 8166CFA
+	msgbox CeladonCity_Text_KeepOutOfTeamRocketsWay, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166D03:: @ 8166D03
-	msgbox gUnknown_818008C, MSGBOX_NPC
+CeladonCity_EventScript_RocketGrunt2:: @ 8166D03
+	msgbox CeladonCity_Text_GetLostOrIllPunchYou, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166D0C:: @ 8166D0C
-	msgbox gUnknown_8180300, MSGBOX_NPC
+CeladonCity_EventScript_Boy:: @ 8166D0C
+	msgbox CeladonCity_Text_ScaldedTongueOnTea, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166D15:: @ 8166D15
-	msgbox gUnknown_81804E1, MSGBOX_NPC
+CeladonCity_EventScript_SilphCoScientist:: @ 8166D15
+	msgbox CeladonCity_Text_SomeoneStoleSilphScope, MSGBOX_NPC
 	end
 
-CeladonCity_EventScript_166D1E:: @ 8166D1E
-	msgbox gUnknown_81800E1, MSGBOX_SIGN
+CeladonCity_EventScript_TrainerTips1:: @ 8166D1E
+	msgbox CeladonCity_Text_ExplainXAccuracyDireHit, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D27:: @ 8166D27
-	msgbox gUnknown_818017A, MSGBOX_SIGN
+CeladonCity_EventScript_CitySign:: @ 8166D27
+	msgbox CeladonCity_Text_CitySign, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D30:: @ 8166D30
+CeladonCity_EventScript_GymSign:: @ 8166D30
 	lockall
 	famechecker FAMECHECKER_ERIKA, 0
-	msgbox gUnknown_81801A2
+	msgbox CeladonCity_Text_GymSign
 	releaseall
 	end
 
-CeladonCity_EventScript_166D48:: @ 8166D48
-	msgbox gUnknown_81801E5, MSGBOX_SIGN
+CeladonCity_EventScript_MansionSign:: @ 8166D48
+	msgbox CeladonCity_Text_MansionSign, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D51:: @ 8166D51
-	msgbox gUnknown_81801F5, MSGBOX_SIGN
+CeladonCity_EventScript_DeptStoreSign:: @ 8166D51
+	msgbox CeladonCity_Text_DeptStoreSign, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D5A:: @ 8166D5A
-	msgbox gUnknown_8180224, MSGBOX_SIGN
+CeladonCity_EventScript_TrainerTips2:: @ 8166D5A
+	msgbox CeladonCity_Text_GuardSpecProtectsFromStatus, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D63:: @ 8166D63
-	msgbox gUnknown_81802A4, MSGBOX_SIGN
+CeladonCity_EventScript_PrizeExchangeSign:: @ 8166D63
+	msgbox CeladonCity_Text_PrizeExchangeSign, MSGBOX_SIGN
 	end
 
-CeladonCity_EventScript_166D6C:: @ 8166D6C
-	msgbox gUnknown_81802CF, MSGBOX_SIGN
+CeladonCity_EventScript_GameCornerSign:: @ 8166D6C
+	msgbox CeladonCity_Text_GameCornerSign, MSGBOX_SIGN
 	end

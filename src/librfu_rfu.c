@@ -108,20 +108,18 @@ static const struct LLSFStruct llsf_struct[2] = {
     }
 };
 
-#ifdef EMERALD
-static const char lib_ver[] = "RFU_V1026";
-#else
-static const char lib_ver[] = "RFU_V1024";
-#endif
+#define xstr(s) str(s)
+#define str(s) #s
+const char version_string[] = "RFU_V" xstr(LIBRFU_VERSION);
 
 static const char str_checkMbootLL[] = "RFU-MBOOT";
 
-#define COPY(src, dst, size) do {         \
-    const u16 *_src = (const u16 *)(src); \
-    u16 *_dst = (u16 *)(dst);             \
-    u16 _size = (size);                   \
-    while (_size-- != 0)                  \
-        *_dst++ = *_src++;                \
+#define COPY(src, dst, iterator, size) do {         \
+    const u16 *_src = (const u16 *)(src);           \
+    u16 *_dst = (u16 *)(dst);                       \
+    (iterator) = (size);                            \
+    while ((iterator)-- != 0)                       \
+        *_dst++ = *_src++;                          \
 } while (0)
 
 u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
@@ -177,17 +175,17 @@ u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p
         gRfuSlotStatusUNI[i]->recvBufferSize = 0;
     }
     // rfu_REQ_changeMasterSlave is the function next to rfu_STC_fastCopy
-#if LIBRFU_VERSION < 1028
+#if LIBRFU_VERSION < 1026
     src = (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1);
     dst = gRfuFixed->fastCopyBuffer;
     buffByteSizeMax = ((void *)rfu_REQ_changeMasterSlave - (void *)rfu_STC_fastCopy) / sizeof(u16);
     while (buffByteSizeMax-- != 0)
         *dst++ = *src++;
 #else
-    // register swap dst <--> buffByteSizeMax
     COPY(
-        (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1),
+        (uintptr_t)&rfu_STC_fastCopy & ~1,
         gRfuFixed->fastCopyBuffer,
+        buffByteSizeMax,
         0x60 / sizeof(u16)
         );
 #endif
@@ -501,7 +499,7 @@ static void rfu_CB_configGameData(u8 reqCommand, u16 reqResult)
 void rfu_REQ_startSearchChild(void)
 {
     u16 result;
-#if LIBRFU_VERSION >= 1028
+#if LIBRFU_VERSION >= 1026
     u16 i;
     for (i = 0; i < RFU_CHILD_MAX; i++)
     {
@@ -591,14 +589,12 @@ static void rfu_STC_readChildList(void)
     u8 numSlots = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[1];
     u8 *data_p;
     u8 i;
-    u8 true_slots[RFU_CHILD_MAX];
     u8 bm_slot_id;
-
-#if LIBRFU_VERSION >= 1028
-//#if 1
-    // TODO: decompile this
+#if LIBRFU_VERSION < 1026
+    u8 true_slots[RFU_CHILD_MAX];
 #endif
 
+#if LIBRFU_VERSION < 1026
     if (numSlots != 0)
     {
         stwiParam = gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket32.data[0];
@@ -612,6 +608,7 @@ static void rfu_STC_readChildList(void)
         }
         gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket32.data[0] = stwiParam;
     }
+#endif
     for (data_p = &gRfuFixed->STWIBuffer->rxPacketAlloc.rfuPacket8.data[4];
          numSlots != 0;
          data_p += 4)
@@ -619,6 +616,7 @@ static void rfu_STC_readChildList(void)
         bm_slot_id = data_p[2];
         if (bm_slot_id < RFU_CHILD_MAX && !((gRfuLinkStatus->connSlotFlag >> bm_slot_id) & 1) && !((gRfuLinkStatus->linkLossSlotFlag >> bm_slot_id) & 1))
         {
+        #if LIBRFU_VERSION < 1026
             if (true_slots[bm_slot_id] != 0)
                 ++gRfuStatic->lsFixedCount[bm_slot_id];
             if (gRfuStatic->lsFixedCount[bm_slot_id] >= 4)
@@ -633,6 +631,17 @@ static void rfu_STC_readChildList(void)
                 gRfuStatic->flags &= 0x7F;
                 gRfuStatic->cidBak[bm_slot_id] = gRfuLinkStatus->partner[bm_slot_id].id;
             }
+        #else
+            gRfuStatic->lsFixedCount[bm_slot_id] = 0xF0;
+            gRfuLinkStatus->strength[bm_slot_id] = 16;
+            gRfuLinkStatus->connSlotFlag |= 1 << bm_slot_id;
+            ++gRfuLinkStatus->connCount;
+            gRfuLinkStatus->partner[bm_slot_id].id = *(u16 *)data_p;
+            gRfuLinkStatus->partner[bm_slot_id].slot = bm_slot_id;
+            gRfuLinkStatus->parentChild = MODE_PARENT;
+            gRfuStatic->flags &= 0x7F;
+            gRfuStatic->cidBak[bm_slot_id] = gRfuLinkStatus->partner[bm_slot_id].id;
+        #endif
         }
         --numSlots;
     }
@@ -881,7 +890,11 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
         gRfuStatic->watchdogTimer = 360;
     if (gRfuStatic->nowWatchInterval == 0)
     {
+    #if LIBRFU_VERSION < 1026
         gRfuStatic->nowWatchInterval = gRfuLinkStatus->watchInterval;
+    #else
+        gRfuStatic->nowWatchInterval = 4;
+    #endif
         reasonMaybe = 1;
     }
     if ((u8)reqCommandId == ID_DISCONNECTED_AND_CHANGE_REQ)
@@ -934,6 +947,14 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
     }
     for (; i < RFU_CHILD_MAX; ++i)
     {
+    #if LIBRFU_VERSION >= 1026
+        if (gRfuStatic->lsFixedCount[i] != 0)
+        {
+            gRfuStatic->lsFixedCount[i] -= 4;
+            if (gRfuLinkStatus->strength[i] <= 15)
+                gRfuLinkStatus->strength[i] = 16;
+        }
+    #endif
         newLinkLossFlag = 1 << i;
         if (reqResult == 0)
         {
@@ -1041,6 +1062,9 @@ static void rfu_STC_removeLinkData(u8 bmConnectedPartnerId, u8 bmDisconnect)
     u8 bmLinkLossFlag = 1 << bmConnectedPartnerId;
     s32 bmLinkRetainedFlag;
 
+#if LIBRFU_VERSION >= 1026
+    gRfuStatic->lsFixedCount[bmConnectedPartnerId] = 0;
+#endif
     if ((gRfuLinkStatus->connSlotFlag & bmLinkLossFlag) && gRfuLinkStatus->connCount != 0)
         --gRfuLinkStatus->connCount;
     gRfuLinkStatus->connSlotFlag &= bmLinkRetainedFlag = ~bmLinkLossFlag;
@@ -1421,7 +1445,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
         slotStatus_NI->send.src = src;
         slotStatus_NI->send.ack = 0;
         slotStatus_NI->send.phase = 0;
-    #ifndef NONMATCHING // to fix bm_slot_id, r3, frameSize, sending register roulette
+    #ifndef NONMATCHING // to fix r2, r3, r4, r5 register roulette
         asm("":::"r2");
     #endif
         for (i = 0; i < WINDOW_COUNT; ++i)

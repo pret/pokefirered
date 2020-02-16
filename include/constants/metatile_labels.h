@@ -39,6 +39,15 @@
 #define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn 0x2C6
 #define METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn      0x2C7
 
+// gTileset_GameCorner
+#define METATILE_GameCorner_Floor_ShadeFull          0x292
+#define METATILE_GameCorner_Floor_StairsTop          0x29D
+#define METATILE_GameCorner_StairsTop                0x29E
+#define METATILE_GameCorner_StairsBottom             0x29F
+#define METATILE_GameCorner_PurpleWall_Floor         0x2CF
+#define METATILE_GameCorner_PurpleWall_StairsTop     0x2A6
+#define METATILE_GameCorner_PurpleWall_stairsBottom  0x2A7
+
 // gTileset_PokemonMansion
 #define METATILE_PokemonMansion_Floor                                    0x284
 #define METATILE_PokemonMansion_Floor_ShadeFull                          0x285
@@ -85,7 +94,7 @@
 // gTileset_MtEmber
 #define METATILE_MtEmber_CaveEntrance  0x346
 
-// Trainer Tower
+// gTileset_TrainerTower
 #define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287
 #define METATILE_TrainerTower_CounterBarrier         0x2B4
 

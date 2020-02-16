@@ -195,14 +195,14 @@
       "x": 14,
       "y": 12,
       "elevation": 0,
-      "script": "Route2_EventScript_167F6E"
+      "script": "Route2_EventScript_DiglettsCaveSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 73,
       "elevation": 0,
-      "script": "Route2_EventScript_167F65"
+      "script": "Route2_EventScript_RouteSign"
     }
   ]
 }

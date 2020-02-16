@@ -856,7 +856,7 @@ void sub_80DA634(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         gTasks[taskId].data[0] = 2;
         break;
     case 2:
@@ -890,7 +890,7 @@ void sub_80DA634(u8 taskId)
         break;
     case 7:
         ClearContinueGameWarpStatus2();
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         gTasks[taskId].data[0] = 8;
         break;
     case 8:
@@ -901,7 +901,7 @@ void sub_80DA634(u8 taskId)
         }
         break;
     case 9:
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         gTasks[taskId].data[0] = 10;
         break;
     case 10:

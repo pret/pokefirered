@@ -195,15 +195,16 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         mevent_client_send_word(svr, 0x13, svr->param);
         break;
     case 10:
-        sub_8143F68(svr->recvBuffer);
+        OverwriteSavedWonderCardWithReceivedCard(svr->recvBuffer);
         break;
     case 9:
-        if (!sub_8143EF4(svr->recvBuffer))
+        if (!MEvent_HaveAlreadyReceivedWonderNews(svr->recvBuffer))
         {
-            sub_8143DC8(svr->recvBuffer);
+            OverwriteSavedWonderNewsWithReceivedNews(svr->recvBuffer);
             mevent_client_send_word(svr, 0x13, 0);
         }
         else
+            // Other trainer already has news
             mevent_client_send_word(svr, 0x13, 1);
         break;
     case 15:
@@ -211,7 +212,7 @@ static u32 client_mainseq_4(struct mevent_client * svr)
         svr->flag = 0;
         break;
     case 16:
-        sub_8144254(svr->recvBuffer);
+        MEvent_ReceiveDistributionMon(svr->recvBuffer);
         break;
     case 17:
         MEventSetRamScript(svr->recvBuffer, 1000);

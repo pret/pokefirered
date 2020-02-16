@@ -831,9 +831,9 @@ void sub_802F6A8(void)
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             if (gWirelessCommType == 0)
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
             else
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             gBattlerControllerFuncs[gActiveBattler] = sub_802F610;
         }
         else

@@ -2411,8 +2411,8 @@ static void BufferFanClubTrainerName(struct LinkBattleRecords *linkRecords, u8 w
     else
     {
         str = gStringVar1;
-        StringCopyN(str, linkTrainerName, PLAYER_NAME_LENGTH - 1);
-        str[PLAYER_NAME_LENGTH - 1] = EOS;
+        StringCopyN(str, linkTrainerName, PLAYER_NAME_LENGTH);
+        str[PLAYER_NAME_LENGTH] = EOS;
         if (   str[0] == EXT_CTRL_CODE_BEGIN
             && str[1] == EXT_CTRL_CODE_JPN)
         {
@@ -2602,18 +2602,18 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 static bool8 InQuestLogDisabledLocation(void)
 {
     // In Trainer Tower
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F)
-        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_1F)
+        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_1F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
     // In pokemon trainer fan club
@@ -2629,7 +2629,7 @@ static bool8 InQuestLogDisabledLocation(void)
     // In elevator
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR)) 
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 
@@ -3401,8 +3401,8 @@ static const u16 *BufferQuestLogText_LinkTraded(const u16 *a0)
 {
     const u16 *r6 = a0 + 4;
 
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH - 1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH);
 
     BufferLinkPartnersName(gStringVar1);
     QuestLog_GetSpeciesName(a0[3], gStringVar2, 0); // Mon received
@@ -3435,7 +3435,7 @@ static u16 *BufferQuestLogData_LinkBattledSingle(u16 *a0, const u16 *eventData)
     a0[0] = QL_EVENT_LINK_BATTLED_SINGLE;
     a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
     return a0;
 }
@@ -3444,8 +3444,8 @@ static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH);
     BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
@@ -3459,7 +3459,7 @@ static u16 *BufferQuestLogData_LinkBattledDouble(u16 *a0, const u16 *eventData)
     a0[0] = QL_EVENT_LINK_BATTLED_DOUBLE;
     a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
     return a0;
 }
@@ -3468,8 +3468,8 @@ static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH);
     BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
@@ -3483,9 +3483,9 @@ static u16 *BufferQuestLogData_LinkBattledMulti(u16 *a0, const u16 *eventData)
     a0[0] = QL_EVENT_LINK_BATTLED_MULTI;
     a0[1] = sQuestLogIdx;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
-    memcpy((u8 *)a0 +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH - 1);
-    memcpy((u8 *)a0 + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH - 1);
-    memcpy((u8 *)a0 + 19, (const u8 *)eventData + 15, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH);
+    memcpy((u8 *)a0 + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH);
+    memcpy((u8 *)a0 + 19, (const u8 *)eventData + 15, PLAYER_NAME_LENGTH);
     a0 += 13;
     return a0;
 }
@@ -3494,9 +3494,9 @@ static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
 {
     DynamicPlaceholderTextUtil_Reset();
 
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memset(gStringVar2, EOS, PLAYER_NAME_LENGTH);
-    memset(gStringVar3, EOS, PLAYER_NAME_LENGTH);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memset(gStringVar2, EOS, PLAYER_NAME_LENGTH + 1);
+    memset(gStringVar3, EOS, PLAYER_NAME_LENGTH + 1);
     StringCopy7(gStringVar1, (const u8 *)a0 +  5);
     StringCopy7(gStringVar2, (const u8 *)a0 + 12);
     StringCopy7(gStringVar3, (const u8 *)a0 + 19);
@@ -3548,7 +3548,7 @@ static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *a0, const u16 *eventData
     a0[1] = sQuestLogIdx;
     a0[2] = eventData[0];
     a0[3] = eventData[1];
-    memcpy(r4, eventData + 2, PLAYER_NAME_LENGTH - 1);
+    memcpy(r4, eventData + 2, PLAYER_NAME_LENGTH);
     r4 += 8;
     return (u16 *)r4;
 }
@@ -3556,8 +3556,8 @@ static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *a0, const u16 *eventData
 static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *a0)
 {
     const u8 *r6 = (const u8 *)(a0 + 4);
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH - 1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(gStringVar1, r6, PLAYER_NAME_LENGTH);
     BufferLinkPartnersName(gStringVar1);
     QuestLog_GetSpeciesName(a0[3], gStringVar2, 0);
     QuestLog_GetSpeciesName(a0[2], gStringVar3, 0);
@@ -3571,15 +3571,15 @@ static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *a0, const u16 *eventDat
     a0[0] = QL_EVENT_LINK_BATTLED_UNION;
     a0[1] = sQuestLogIdx;
     *(u8 *)&a0[2] = *(const u8 *)&eventData[0];
-    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH - 1);
+    memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
     return a0;
 }
 
 static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *a0)
 {
-    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH);
-    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH - 1);
+    memset(gStringVar1, EOS, PLAYER_NAME_LENGTH + 1);
+    memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH);
     BufferLinkPartnersName(gStringVar1);
     StringCopy(gStringVar2, sBattleOutcomeTexts[*(const u8 *)&a0[2]]);
     StringExpandPlaceholders(gStringVar4, QuestLog_Text_BattledTrainerEndedInOutcome);

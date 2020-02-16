@@ -43,14 +43,14 @@
       "x": 4,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_Roof_EventScript_16C45A"
+      "script": "CeladonCity_Condominiums_Roof_EventScript_Sign"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_Roof_EventScript_16C45A"
+      "script": "CeladonCity_Condominiums_Roof_EventScript_Sign"
     }
   ]
 }

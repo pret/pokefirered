@@ -2,6 +2,7 @@
 #define GUARD_CEREADER_TOOL_H
 
 #include "global.h"
+#include "constants/trainer_tower.h"
 
 struct TrainerTowerTrainer
 {
@@ -21,30 +22,31 @@ struct TrainerTowerFloor
     /* 0x001 */ u8 floorIdx;
     /* 0x002 */ u8 challengeType;
     /* 0x003 */ u8 prize;
-    /* 0x004 */ struct TrainerTowerTrainer trainers[3];
+    /* 0x004 */ struct TrainerTowerTrainer trainers[MAX_TRAINERS_PER_FLOOR];
     /* 0x3DC */ u32 checksum;
 };
 
-struct EReaderTrainerHillSetSubstruct
+struct EReaderTrainerTowerSetSubstruct
 {
-    u8 count;
+    u8 numFloors;
     u8 id;
     u16 dummy;
     u32 checksum;
 };
 
-struct EReaderTrainerHillSet
+struct EReaderTrainerTowerSet
 {
-    u8 count;
+    u8 numFloors;
     u8 id;
     u16 dummy;
     u32 checksum;
-    struct TrainerTowerFloor floors[8];
+    struct TrainerTowerFloor floors[MAX_TRAINER_TOWER_FLOORS];
 };
 
-bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata);
-bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata);
-bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata);
+bool32 ValidateTrainerTowerData(struct EReaderTrainerTowerSet * ttdata);
+bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata);
+bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerTowerSet * ttdata);
 u8 sub_815D654(void);
+bool32 ReadTrainerTowerAndValidate(void);
 
 #endif //GUARD_CEREADER_TOOL_H

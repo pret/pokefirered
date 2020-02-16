@@ -315,6 +315,6 @@ void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
-void sub_8007FFC(struct Sprite* sprite, s16 a2, s16 a3);
+void obj_pos2_update_enable(struct Sprite* sprite, s16 xmod, s16 ymod);
 
 #endif //GUARD_SPRITE_H

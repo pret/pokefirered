@@ -124,13 +124,13 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
 
     if (VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 1)
     {
-        if (!gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
+        if (!gSaveBlock1Ptr->trainerTower[gSaveBlock1Ptr->towerChallengeId].spokeToOwner)
             VarSet(VAR_MAP_SCENE_TRAINER_TOWER, 0);
         gSpecialVar_LastTalked = 1;
         warp->x = 4;
         warp->y = 11;
-        warp->mapGroup = MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_LOBBY);
-        warp->mapNum = MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY);
+        warp->mapGroup = MAP_GROUP(TRAINER_TOWER_LOBBY);
+        warp->mapNum = MAP_NUM(TRAINER_TOWER_LOBBY);
         warp->warpId = 0xFF;
     }
     else
@@ -155,7 +155,7 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
             warp->x = 5;
             warp->y = 4;
         }
-        else if (sBlackoutRespawnHealCenterMapIdxs[healLocationIdx - 1][0] == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) && sBlackoutRespawnHealCenterMapIdxs[healLocationIdx - 1][1] == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY))
+        else if (sBlackoutRespawnHealCenterMapIdxs[healLocationIdx - 1][0] == MAP_GROUP(TRAINER_TOWER_LOBBY) && sBlackoutRespawnHealCenterMapIdxs[healLocationIdx - 1][1] == MAP_NUM(TRAINER_TOWER_LOBBY))
         {
             warp->x = 4;
             warp->y = 11;

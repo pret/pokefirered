@@ -621,7 +621,7 @@ _08147A5C:
 	ldrh r0, [r4, 0x18]
 	strh r0, [r1, 0x2]
 	mov r0, sp
-	bl sub_80F9E2C
+	bl RfuPrepareSend0x2f00
 	b _08147A9E
 	.align 2, 0
 _08147A88: .4byte gTasks+0x8

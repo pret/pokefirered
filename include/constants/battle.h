@@ -71,7 +71,7 @@
 #define BATTLE_TYPE_x800000          0x800000
 #define BATTLE_TYPE_RECORDED         0x1000000
 #define BATTLE_TYPE_x2000000         0x2000000
-#define BATTLE_TYPE_TRAINER_HILL     0x4000000
+#define BATTLE_TYPE_x4000000         0x4000000
 #define BATTLE_TYPE_SECRET_BASE      0x8000000
 #define BATTLE_TYPE_GROUDON          0x10000000
 #define BATTLE_TYPE_KYOGRE           0x20000000
@@ -80,6 +80,9 @@
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
+
+#define RIVAL_BATTLE_HEAL_AFTER  1
+#define RIVAL_BATTLE_TUTORIAL    3
 
 // Battle Outcome defines
 #define B_OUTCOME_WON                  0x1

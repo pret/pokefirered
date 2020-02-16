@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route2_EastBuilding_EventScript_16F67F",
+      "script": "Route2_EastBuilding_EventScript_Aide",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route2_EastBuilding_EventScript_16F714",
+      "script": "Route2_EastBuilding_EventScript_Rocker",
       "flag": "0"
     }
   ],

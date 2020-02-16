@@ -23,7 +23,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EEC3",
+      "script": "SaffronCity_Gym_EventScript_Cameron",
       "flag": "0"
     },
     {
@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EE88",
+      "script": "SaffronCity_Gym_EventScript_Johan",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EEDA",
+      "script": "SaffronCity_Gym_EventScript_Preston",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EEF1",
+      "script": "SaffronCity_Gym_EventScript_Amanda",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EF08",
+      "script": "SaffronCity_Gym_EventScript_Stacy",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EF1F",
+      "script": "SaffronCity_Gym_EventScript_Tasha",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_Gym_EventScript_16EDD8",
+      "script": "SaffronCity_Gym_EventScript_Sabrina",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SaffronCity_Gym_EventScript_16EE9F",
+      "script": "SaffronCity_Gym_EventScript_Tyron",
       "flag": "0"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SaffronCity_Gym_EventScript_16EF36",
+      "script": "SaffronCity_Gym_EventScript_GymGuy",
       "flag": "0"
     }
   ],
@@ -371,14 +371,14 @@
       "x": 12,
       "y": 20,
       "elevation": 0,
-      "script": "SaffronCity_Gym_EventScript_16EF55"
+      "script": "SaffronCity_Gym_EventScript_GymStatue"
     },
     {
       "type": "bg_event_type_0",
       "x": 16,
       "y": 20,
       "elevation": 0,
-      "script": "SaffronCity_Gym_EventScript_16EF55"
+      "script": "SaffronCity_Gym_EventScript_GymStatue"
     }
   ]
 }

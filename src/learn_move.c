@@ -309,7 +309,7 @@ static void MoveRelearnerLoadBgGfx(void)
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 30, 20, 0xF);
         SetBgTilemapBuffer(1, sMoveRelearner->bg1TilemapBuffer);
         TextWindow_SetUserSelectedFrame(0, 1, 0xE0);
-        sub_8107D38(0xD0, 1);
+        ListMenuLoadStdPalAt(0xD0, 1);
         LoadPalette(gUnknown_8E97DDC, 0x00, 0x20);
         DecompressAndLoadBgGfxUsingHeap(1, gUnknown_8E97DFC, 0, 0, 0);
         CopyToBgTilemapBuffer(1, gUnknown_8E97EC4, 0, 0);

@@ -14,8 +14,8 @@ struct HealLocation
 {
     s8 group;
     s8 map;
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
 };
 
 // Exported RAM declarations

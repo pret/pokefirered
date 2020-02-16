@@ -65,7 +65,7 @@
 #define FLDEFF_PCTURN_ON                 61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_UNK_40                    64
+#define FLDEFF_UNK_40                    64 // TODO: game corner smile icon?
 #define FLDEFF_UNK_41                    65 // TODO: related to vs_seeker
 #define FLDEFF_UNK_42                    66 // TODO: related to trainer see
 #define FLDEFF_UNK_43                    67 // TODO: related to deoxys

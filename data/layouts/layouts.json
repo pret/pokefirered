@@ -2504,28 +2504,28 @@
       "blockdata_filepath": "data/layouts/RocketHideout_Elevator/map.bin"
     },
     {
-      "id": "LAYOUT_SAFFRON_CITY_HOUSE1_1F",
-      "name": "SaffronCity_House1_1F_Layout",
+      "id": "LAYOUT_SAFFRON_CITY_COPYCATS_HOUSE_1F",
+      "name": "SaffronCity_CopycatsHouse_1F_Layout",
       "width": 13,
       "height": 10,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C74",
-      "border_filepath": "data/layouts/SaffronCity_House1_1F/border.bin",
-      "blockdata_filepath": "data/layouts/SaffronCity_House1_1F/map.bin"
+      "border_filepath": "data/layouts/SaffronCity_CopycatsHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/SaffronCity_CopycatsHouse_1F/map.bin"
     },
     {
-      "id": "LAYOUT_SAFFRON_CITY_HOUSE1_2F",
-      "name": "SaffronCity_House1_2F_Layout",
+      "id": "LAYOUT_SAFFRON_CITY_COPYCATS_HOUSE_2F",
+      "name": "SaffronCity_CopycatsHouse_2F_Layout",
       "width": 12,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4C74",
-      "border_filepath": "data/layouts/SaffronCity_House1_2F/border.bin",
-      "blockdata_filepath": "data/layouts/SaffronCity_House1_2F/map.bin"
+      "border_filepath": "data/layouts/SaffronCity_CopycatsHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/SaffronCity_CopycatsHouse_2F/map.bin"
     },
     {
       "id": "LAYOUT_SAFFRON_CITY_DOJO",
@@ -3356,136 +3356,136 @@
       "blockdata_filepath": "data/layouts/FourIsland_IcefallCave_Back/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY",
-      "name": "SevenIsland_TrainerTower_Lobby_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_LOBBY",
+      "name": "TrainerTower_Lobby_Layout",
       "width": 19,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_Lobby/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_Lobby/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_Lobby/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_Lobby/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F",
-      "name": "SevenIsland_TrainerTower_1F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_1F",
+      "name": "TrainerTower_1F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_1F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_1F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_1F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_1F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_2F",
-      "name": "SevenIsland_TrainerTower_2F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_2F",
+      "name": "TrainerTower_2F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_2F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_2F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_2F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_2F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_3F",
-      "name": "SevenIsland_TrainerTower_3F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_3F",
+      "name": "TrainerTower_3F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_3F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_3F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_3F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_3F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_4F",
-      "name": "SevenIsland_TrainerTower_4F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_4F",
+      "name": "TrainerTower_4F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_4F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_4F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_4F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_4F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_5F",
-      "name": "SevenIsland_TrainerTower_5F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_5F",
+      "name": "TrainerTower_5F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_5F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_5F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_5F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_5F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_6F",
-      "name": "SevenIsland_TrainerTower_6F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_6F",
+      "name": "TrainerTower_6F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_6F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_6F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_6F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_6F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_7F",
-      "name": "SevenIsland_TrainerTower_7F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_7F",
+      "name": "TrainerTower_7F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_7F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_7F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_7F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_7F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_8F",
-      "name": "SevenIsland_TrainerTower_8F_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_8F",
+      "name": "TrainerTower_8F_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_8F/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_8F/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_8F/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_8F/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ROOF",
-      "name": "SevenIsland_TrainerTower_Roof_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_ROOF",
+      "name": "TrainerTower_Roof_Layout",
       "width": 18,
       "height": 16,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_Roof/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_Roof/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_Roof/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_Roof/map.bin"
     },
     {
-      "id": "LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR",
-      "name": "SevenIsland_TrainerTower_Elevator_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_ELEVATOR",
+      "name": "TrainerTower_Elevator_Layout",
       "width": 5,
       "height": 7,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D4ECC",
-      "border_filepath": "data/layouts/SevenIsland_TrainerTower_Elevator/border.bin",
-      "blockdata_filepath": "data/layouts/SevenIsland_TrainerTower_Elevator/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_Elevator/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_Elevator/map.bin"
     },
     {
       "id": "LAYOUT_CERULEAN_CITY_HOUSE5",
@@ -4184,196 +4184,196 @@
       "blockdata_filepath": "data/layouts/NavelRock_Fork/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834BC2C",
-      "name": "UnusedLayout_834BC2C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_1F_DOUBLES",
+      "name": "TrainerTower_1F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834BC2C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834BC2C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_1F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_1F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834BEB4",
-      "name": "UnusedLayout_834BEB4_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_2F_DOUBLES",
+      "name": "TrainerTower_2F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834BEB4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834BEB4/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_2F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_2F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834C13C",
-      "name": "UnusedLayout_834C13C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_3F_DOUBLES",
+      "name": "TrainerTower_3F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834C13C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834C13C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_3F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_3F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834C3C4",
-      "name": "UnusedLayout_834C3C4_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_4F_DOUBLES",
+      "name": "TrainerTower_4F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834C3C4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834C3C4/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_4F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_4F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834C64C",
-      "name": "UnusedLayout_834C64C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_5F_DOUBLES",
+      "name": "TrainerTower_5F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834C64C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834C64C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_5F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_5F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834C8D4",
-      "name": "UnusedLayout_834C8D4_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_6F_DOUBLES",
+      "name": "TrainerTower_6F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834C8D4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834C8D4/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_6F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_6F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834CB5C",
-      "name": "UnusedLayout_834CB5C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_7F_DOUBLES",
+      "name": "TrainerTower_7F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834CB5C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834CB5C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_7F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_7F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834CDE4",
-      "name": "UnusedLayout_834CDE4_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_8F_DOUBLES",
+      "name": "TrainerTower_8F_Doubles_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834CDE4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834CDE4/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_8F_Doubles/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_8F_Doubles/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834D06C",
-      "name": "UnusedLayout_834D06C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_1F_KNOCKOUT",
+      "name": "TrainerTower_1F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834D06C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834D06C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_1F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_1F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834D2F4",
-      "name": "UnusedLayout_834D2F4_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_2F_KNOCKOUT",
+      "name": "TrainerTower_2F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834D2F4/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834D2F4/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_2F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_2F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834D57C",
-      "name": "UnusedLayout_834D57C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_3F_KNOCKOUT",
+      "name": "TrainerTower_3F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834D57C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834D57C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_3F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_3F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834D804",
-      "name": "UnusedLayout_834D804_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_4F_KNOCKOUT",
+      "name": "TrainerTower_4F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834D804/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834D804/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_4F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_4F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834DA8C",
-      "name": "UnusedLayout_834DA8C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_5F_KNOCKOUT",
+      "name": "TrainerTower_5F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834DA8C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834DA8C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_5F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_5F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834DD14",
-      "name": "UnusedLayout_834DD14_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_6F_KNOCKOUT",
+      "name": "TrainerTower_6F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834DD14/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834DD14/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_6F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_6F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834DF9C",
-      "name": "UnusedLayout_834DF9C_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_7F_KNOCKOUT",
+      "name": "TrainerTower_7F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834DF9C/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834DF9C/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_7F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_7F_Knockout/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_LAYOUT_834E224",
-      "name": "UnusedLayout_834E224_Layout",
+      "id": "LAYOUT_TRAINER_TOWER_8F_KNOCKOUT",
+      "name": "TrainerTower_8F_Knockout_Layout",
       "width": 18,
       "height": 17,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_82D4BB4",
       "secondary_tileset": "gTileset_82D5094",
-      "border_filepath": "data/layouts/UnusedLayout_834E224/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedLayout_834E224/map.bin"
+      "border_filepath": "data/layouts/TrainerTower_8F_Knockout/border.bin",
+      "blockdata_filepath": "data/layouts/TrainerTower_8F_Knockout/map.bin"
     },
     {
       "id": "LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1",

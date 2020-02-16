@@ -1,10 +1,10 @@
-ViridianCity_House2_EventScript_1ACD65:: @ 81ACD65
+ViridianCity_House2_EventScript_PokemonJournal:: @ 81ACD65
 	lock
 	faceplayer
 	famechecker FAMECHECKER_OAK, 3
 	famechecker FAMECHECKER_DAISY, 3
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -14,7 +14,7 @@ EventScript_1ACD8D:: @ 81ACD8D
 	famechecker FAMECHECKER_DAISY, 1
 	famechecker FAMECHECKER_OAK, 4
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -23,7 +23,7 @@ EventScript_1ACDB5:: @ 81ACDB5
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 4
 	textcolor 3
-	msgbox gUnknown_81B1AB9
+	msgbox PokemonJournal_Text_SpecialFeatureProfOak
 	release
 	end
 
@@ -92,12 +92,12 @@ VermilionCity_PokemonCenter_1F_EventScript_PokemonJournalLtSurge:: @ 81ACE83
 	releaseall
 	end
 
-CeladonCity_Condominiums_2F_EventScript_1ACE9D:: @ 81ACE9D
+CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika:: @ 81ACE9D
 	lock
 	faceplayer
 	famechecker FAMECHECKER_ERIKA, 5
 	textcolor 3
-	msgbox gUnknown_81B161B
+	msgbox PokemonJournal_Text_SpecialFeatureErika
 	release
 	end
 
@@ -118,12 +118,12 @@ SafariZone_North_RestHouse_EventScript_BaldingMan:: @ 81ACED3
 	release
 	end
 
-SaffronCity_PokemonCenter_1F_EventScript_1ACEEC:: @ 81ACEEC
+SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina:: @ 81ACEEC
 	lock
 	faceplayer
 	famechecker FAMECHECKER_SABRINA, 4
 	textcolor 3
-	msgbox gUnknown_81B1753
+	msgbox PokemonJournal_Text_SpecialFeatureSabrina
 	release
 	end
 
@@ -160,12 +160,12 @@ FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_1ACF7A:: @ 81ACF7A
+SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 2
 	textcolor 3
-	msgbox gUnknown_81B1913
+	msgbox PokemonJournal_Text_SpecialFeatureBruno
 	release
 	end
 
@@ -215,23 +215,23 @@ EventScript_1AD021:: @ 81AD021
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 
-SaffronCity_EventScript_1AD03A:: @ 81AD03A
+SaffronCity_EventScript_BattleGirl:: @ 81AD03A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 2
-	msgbox Text_181569
+	msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
 	release
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_1AD053:: @ 81AD053
+CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 3
-	msgbox Text_19566B
+	msgbox CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes
 	release
 	end
 

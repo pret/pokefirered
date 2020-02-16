@@ -73,5 +73,6 @@ extern const char RomHeaderGameCode[4];
 extern const char RomHeaderSoftwareVersion;
 
 extern u8 gLinkTransferringData;
+extern u16 gKeyRepeatStartDelay;
 
 #endif // GUARD_MAIN_H

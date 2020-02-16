@@ -20,7 +20,7 @@ void ClearMailStruct(struct MailStruct *mail)
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)
         mail->words[i] = 0xFFFF;
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->playerName[i] = EOS;
     for (i = 0; i < 4; i++)
         mail->trainerId[i] = 0;
@@ -52,7 +52,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
         {
             for (i = 0; i < MAIL_WORDS_COUNT; i++)
                 gSaveBlock1Ptr->mail[id].words[i] = 0xFFFF;
-            for (i = 0; i < PLAYER_NAME_LENGTH - 1 && gSaveBlock2Ptr->playerName[i] != EOS; i++)
+            for (i = 0; i < PLAYER_NAME_LENGTH && gSaveBlock2Ptr->playerName[i] != EOS; i++)
                 gSaveBlock1Ptr->mail[id].playerName[i] = gSaveBlock2Ptr->playerName[i];
             for (; i <= 5; i++)
             	gSaveBlock1Ptr->mail[id].playerName[i] = CHAR_SPACE;

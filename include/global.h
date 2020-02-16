@@ -74,8 +74,8 @@
 // GameFreak never ceases to amaze.
 // TODO: Propagate use of this macro
 #define TEST_BUTTON(field, button) ({(field) & (button);})
-#define JOY_NEW(button) TEST_BUTTON(gMain.newKeys,  button)
-#define JOY_HELD(button)  TEST_BUTTON(gMain.heldKeys, button)
+#define JOY_NEW(button)  TEST_BUTTON(gMain.newKeys,  button)
+#define JOY_HELD(button) TEST_BUTTON(gMain.heldKeys, button)
 #define JOY_REPT(button) TEST_BUTTON(gMain.newAndRepeatedKeys, button)
 
 extern u8 gStringVar1[];
@@ -168,13 +168,6 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u8 field_F;
 };
 
-struct PyramidBag
-{
-    u16 items_Lvl50[10];
-    u16 items_OpenLvl[10];
-    u8 quantity[10];
-};
-
 struct BerryCrush
 {
     u16 berryCrushResults[4];
@@ -182,13 +175,13 @@ struct BerryCrush
     u32 unk;
 };
 
-#define PLAYER_NAME_LENGTH  8
+#define PLAYER_NAME_LENGTH   7
 
 #define LINK_B_RECORDS_COUNT 5
 
 struct LinkBattleRecord
 {
-    u8 name[PLAYER_NAME_LENGTH];
+    u8 name[PLAYER_NAME_LENGTH + 1];
     u16 trainerId;
     u16 wins;
     u16 losses;
@@ -261,7 +254,7 @@ struct BattleTowerData // Leftover from R/S
 
 struct SaveBlock2
 {
-    /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH];
+    /*0x000*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x008*/ u8 playerGender; // MALE, FEMALE
     /*0x009*/ u8 specialSaveWarpFlags;
     /*0x00A*/ u8 playerTrainerId[4];
@@ -312,7 +305,7 @@ struct SecretBaseRecord
     /*0x1A9D*/ u8 gender:1;
     /*0x1A9D*/ u8 sbr_field_1_5:1;
     /*0x1A9D*/ u8 sbr_field_1_6:2;
-    /*0x1A9E*/ u8 trainerName[7]; // TODO: Change PLAYER_NAME_LENGTH to 7
+    /*0x1A9E*/ u8 trainerName[PLAYER_NAME_LENGTH];
     /*0x1AA5*/ u8 trainerId[4]; // byte 0 is used for determining trainer class
     /*0x1AA9*/ u8 language;
     /*0x1AAA*/ u16 sbr_field_e;
@@ -398,41 +391,68 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct UnkMauvilleOldManStruct
+struct MauvilleManCommon
 {
-    u8 unk_2D94;
-    u8 unk_2D95;
-    /*0x2D96*/ u16 mauvilleOldMan_ecArray[6];
-    /*0x2DA2*/ u16 mauvilleOldMan_ecArray2[6];
-    /*0x2DAE*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x2DB6*/ u8 filler_2DB6[0x3];
-    /*0x2DB9*/ u8 playerTrainerId[4];
-    u8 unk_2DBD;
+    u8 id;
+};
+
+struct MauvilleManBard
+{
+    /*0x00*/ u8 id;
+    /*0x02*/ u16 songLyrics[BARD_SONG_LENGTH];
+    /*0x0E*/ u16 temporaryLyrics[BARD_SONG_LENGTH];
+    /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
+    /*0x22*/ u8 filler_2DB6[0x3];
+    /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
+    /*0x29*/ bool8 hasChangedSong;
+    /*0x2A*/ u8 language;
 }; /*size = 0x2C*/
 
-struct UnkMauvilleOldManStruct2
+struct MauvilleManStoryteller
 {
-    u8 filler0;
-    u8 unk1;
-    u8 unk2;
-    u16 mauvilleOldMan_ecArray[10];
-    u8 mauvilleOldMan_ecArray2[12];
-    u8 fillerF[0x2];
+    u8 id;
+    bool8 alreadyRecorded;
+    u8 filler2[2];
+    u8 gameStatIDs[NUM_STORYTELLER_TALES];
+    u8 trainerNames[NUM_STORYTELLER_TALES][PLAYER_NAME_LENGTH];
+    u8 statValues[NUM_STORYTELLER_TALES][4];
+    u8 language[NUM_STORYTELLER_TALES];
+};
+
+struct MauvilleManGiddy
+{
+    /*0x00*/ u8 id;
+    /*0x01*/ u8 taleCounter;
+    /*0x02*/ u8 questionNum;
+    /*0x04*/ u16 randomWords[10];
+    /*0x18*/ u8 questionList[8];
+    /*0x20*/ u8 language;
 }; /*size = 0x2C*/
+
+struct MauvilleManHipster
+{
+    u8 id;
+    bool8 alreadySpoken;
+    u8 language;
+};
 
 struct MauvilleOldManTrader
 {
-    u8 unk0;
-    u8 unk1[4];
-    u8 unk5[4][11];
-    u8 unk31;
+    u8 id;
+    u8 decorIds[NUM_TRADER_ITEMS];
+    u8 playerNames[NUM_TRADER_ITEMS][11];
+    u8 alreadyTraded;
+    u8 language[NUM_TRADER_ITEMS];
 };
 
 typedef union OldMan
 {
-    struct UnkMauvilleOldManStruct oldMan1;
-    struct UnkMauvilleOldManStruct2 oldMan2;
+    struct MauvilleManCommon common;
+    struct MauvilleManBard bard;
+    struct MauvilleManGiddy giddy;
+    struct MauvilleManHipster hipster;
     struct MauvilleOldManTrader trader;
+    struct MauvilleManStoryteller storyteller;
     u8 filler[0x40];
 } OldMan;
 
@@ -564,22 +584,22 @@ union QuestLogMovement
 struct QuestLogObjectEvent
 {
     /*0x00*/ u8 active:1;
-    /*0x00*/ u8 mapobj_bit_3:1;
-    /*0x00*/ u8 mapobj_bit_4:1;
-    /*0x00*/ u8 mapobj_bit_5:1;
-    /*0x00*/ u8 mapobj_bit_8:1;
-    /*0x00*/ u8 mapobj_bit_9:1;
-    /*0x00*/ u8 mapobj_bit_10:1;
-    /*0x00*/ u8 mapobj_bit_11:1;
-    /*0x01*/ u8 mapobj_bit_12:1;
-    /*0x01*/ u8 mapobj_bit_13:1;
-    /*0x01*/ u8 mapobj_bit_14:1;
-    /*0x01*/ u8 mapobj_bit_15:1;
-    /*0x01*/ u8 mapobj_bit_16:1;
-    /*0x01*/ u8 mapobj_bit_23:1;
-    /*0x01*/ u8 mapobj_bit_24:1;
-    /*0x01*/ u8 mapobj_bit_25:1;
-    /*0x02*/ u8 mapobj_bit_26:1;
+    /*0x00*/ u8 triggerGroundEffectsOnStop:1;
+    /*0x00*/ u8 disableCoveringGroundEffects:1;
+    /*0x00*/ u8 landingJump:1;
+    /*0x00*/ u8 frozen:1;
+    /*0x00*/ u8 facingDirectionLocked:1;
+    /*0x00*/ u8 disableAnim:1;
+    /*0x00*/ u8 enableAnim:1;
+    /*0x01*/ u8 inanimate:1;
+    /*0x01*/ u8 invisible:1;
+    /*0x01*/ u8 offScreen:1;
+    /*0x01*/ u8 trackedByCamera:1;
+    /*0x01*/ u8 isPlayer:1;
+    /*0x01*/ u8 spriteAnimPausedBackup:1;
+    /*0x01*/ u8 spriteAffineAnimPausedBackup:1;
+    /*0x01*/ u8 disableJumpLandingGroundEffect:1;
+    /*0x02*/ u8 fixedPriority:1;
     /*0x02*/ u8 mapobj_unk_18:4;
     /*0x02*/ u8 unused_02_5:3;
     /*0x03*/ u8 mapobj_unk_0B_0:4;
@@ -631,8 +651,8 @@ struct FameCheckerSaveData
 
 struct MEWonderNewsData
 {
-    u16 unk_00;
-    u8 unk_02;
+    u16 newsId;
+    u8 shareState;
     u8 unk_03;
     u8 unk_04[40];
     u8 unk_2C[10][40];
@@ -646,13 +666,13 @@ struct MEWonderNewsStruct
 
 struct MEWonderCardData
 {
-    u16 unk_00;
+    u16 cardId;
     u16 unk_02;
     u32 unk_04;
     u8 unk_08_0:2;
     u8 unk_08_2:4;
-    u8 unk_08_6:2;
-    u8 unk_09;
+    u8 shareState:2;
+    u8 recvMonCapacity;
     u8 unk_0A[40];
     u8 unk_32[40];
     u8 unk_5A[4][40];
@@ -668,11 +688,12 @@ struct MEWonderCardStruct
 
 struct MEventBuffer_3430_Sub
 {
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
+    u16 linkWins;
+    u16 linkLosses;
+    u16 linkTrades;
     u16 unk_06;
-    u16 unk_08[2][7];
+    u16 distributedMons[2][7]; // [0][x] = species
+                               // [1][x] = ???
 };
 
 struct MEventBuffer_3430
@@ -691,19 +712,18 @@ struct MEventBuffers
     /*0x344 0x3464*/ u32 unk_344[2][5];
 }; // 0x36C 0x348C
 
-struct TrainerTowerLog
+struct TrainerTower
 {
-    u32 unk0;
-    u32 unk4;
-    u8 unk8;
+    u32 timer;
+    u32 bestTime;
+    u8 floorsCleared;
     u8 unk9;
-    u8 unkA_0:1;
-    u8 unkA_1:1;
-    u8 unkA_2:1;
-    u8 unkA_3:1;
-    u8 unkA_4:1;
-    u8 unkA_5:1;
-    u8 unkA_6:2;
+    bool8 receivedPrize:1;
+    bool8 checkedFinalTime:1;
+    bool8 spokeToOwner:1;
+    bool8 hasLost:1;
+    bool8 unkA_4:1;
+    bool8 validated:1;
 };
 
 struct TrainerRematchState
@@ -715,8 +735,10 @@ struct TrainerRematchState
 struct TrainerNameRecord
 {
     u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH];
+    u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
+
+#define UNION_ROOM_KB_ROW_COUNT 10
 
 struct SaveBlock1
 {
@@ -770,14 +792,15 @@ struct SaveBlock1
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ u8 filler3A08[16];
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
-    /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH];
+    /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 filler3A94[0x114];
+    /*0x3A94*/ u8 filler3A94[0x40];
+    /*0x3AD4*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;
     /*0x3D24*/ u8 filler3D24[0x10];
-    /*0x3D34*/ u32 unkArrayIdx;
-    /*0x3D38*/ struct TrainerTowerLog unkArray[4];
+    /*0x3D34*/ u32 towerChallengeId;
+    /*0x3D38*/ struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
 };
 
 struct MapPosition

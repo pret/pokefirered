@@ -19,22 +19,22 @@
 static EWRAM_DATA u16 sSomeVariable = 0;
 static EWRAM_DATA u8 gUnknown_203B0EE = 0;
 
-u8 gUnknown_3005E9C[4];
+u8 sHelpSystemState[4];
 u16 gSomeVariableBackup;
 
 static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
-static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-static bool8 sub_812B754(void);
-static bool8 sub_812B780(u8);
-static bool8 sub_812BB10(void);
+static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static bool8 HelpSystem_HasDefeatedBrock(void);
+static bool8 HelpSystemSubmenuIndexIsActive(u8);
+static bool8 HasGottenAtLeastOneHM(void);
 
-static void sub_812BF5C(void);
-static void sub_812BF74(const u8 *);
-static void sub_812BF94(struct HelpSystemListMenu * a0);
-static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static void PrintWelcomeMessageOnPanel1(void);
+static void PrintTextOnPanel2Row52RightAlign(const u8 *);
+static void ResetHelpSystemCursor(struct HelpSystemListMenu * a0);
+static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
 
-static const u8 *const gUnknown_845B080[] = {
+static const u8 *const sHelpSystemTopicPtrs[] = {
     gUnknown_81B2DF8,
     gUnknown_81B2E1C,
     gUnknown_81B2E2E,
@@ -43,7 +43,7 @@ static const u8 *const gUnknown_845B080[] = {
     gUnknown_81B2E6A
 };
 
-static const u8 *const gUnknown_845B098[] = {
+static const u8 *const sHelpSystemTopicMouseoverDescriptionPtrs[] = {
     gUnknown_81B2E88,
     gUnknown_81B2EC8,
     gUnknown_81B2F00,
@@ -52,7 +52,7 @@ static const u8 *const gUnknown_845B098[] = {
     gUnknown_81B2FA9
 };
 
-static const u8 *const gUnknown_845B0B0[] = {
+static const u8 *const sHelpSystemSpecializedQuestionTextPtrs[] = {
     NULL,
     gUnknown_81B3083,
     gUnknown_81B30A9,
@@ -100,7 +100,7 @@ static const u8 *const gUnknown_845B0B0[] = {
     gUnknown_81B3516
 };
 
-static const u8 *const gUnknown_845B164[] = {
+static const u8 *const sHelpSystemSpecializedAnswerTextPtrs[] = {
     NULL,
     gUnknown_81B3525,
     gUnknown_81B35E6,
@@ -148,7 +148,7 @@ static const u8 *const gUnknown_845B164[] = {
     gUnknown_81B55F4
 };
 
-static const u8 *const gUnknown_845B218[] = {
+static const u8 *const sHelpSystemMenuTopicTextPtrs[] = {
     NULL,
     gUnknown_81B56E3,
     gUnknown_81B56F4,
@@ -200,7 +200,7 @@ static const u8 *const gUnknown_845B218[] = {
     gUnknown_81B5A37
 };
 
-static const u8 *const gUnknown_845B2DC[] = {
+static const u8 *const sHelpSystemSpecializedControlsTextPtrs[] = {
     NULL,
     gUnknown_81B5A4D,
     gUnknown_81B5B0C,
@@ -252,7 +252,7 @@ static const u8 *const gUnknown_845B2DC[] = {
     gUnknown_81B7C57
 };
 
-static const u8 *const gUnknown_845B3A0[] = {
+static const u8 *const sHelpSystemSpecializedStringsTextPtrs[] = {
     NULL,
     gUnknown_81B7CC1,
     gUnknown_81B7CC4,
@@ -299,7 +299,7 @@ static const u8 *const gUnknown_845B3A0[] = {
     gUnknown_81B7E0F
 };
 
-static const u8 *const gUnknown_845B450[] = {
+static const u8 *const sHelpSystemSpecializedStringDefinitionsTextPtrs[] = {
     NULL,
     gUnknown_81B7E16,
     gUnknown_81B7F0A,
@@ -346,7 +346,7 @@ static const u8 *const gUnknown_845B450[] = {
     gUnknown_81B9B2F
 };
 
-static const u8 *const gUnknown_845B500[] = {
+static const u8 *const sHelpSystemGeneralTopicTextPtrs[] = {
     NULL,
     gUnknown_81B9BB7,
     gUnknown_81B9BC7,
@@ -357,7 +357,7 @@ static const u8 *const gUnknown_845B500[] = {
     gUnknown_81B9C1D
 };
 
-static const u8 *const gUnknown_845B520[] = {
+static const u8 *const sHelpSystemGeneralTopicDescriptionTextPtrs[] = {
     NULL,
     gUnknown_81B9C2F,
     gUnknown_81B9D04,
@@ -368,7 +368,7 @@ static const u8 *const gUnknown_845B520[] = {
     gUnknown_81BA027
 };
 
-static const u8 *const gUnknown_845B540[] = {
+static const u8 *const sHelpSystemTypeMatchupTextPtrs[] = {
     NULL,
     gUnknown_81BA0F1,
     gUnknown_81BA10D,
@@ -407,7 +407,7 @@ static const u8 *const gUnknown_845B540[] = {
     gUnknown_81BA400
 };
 
-static const u8 *const gUnknown_845B5D0[] = {
+static const u8 *const sHelpSystemTypeMatchupDescriptionTextPtrs[] = {
     NULL,
     gUnknown_81BA416,
     gUnknown_81BA4E6,
@@ -445,7 +445,6 @@ static const u8 *const gUnknown_845B5D0[] = {
     gUnknown_81BB0DF,
     gUnknown_81BB156
 };
-
 
 static const u8 gUnknown_845B660[] = {
     0x01, 0x02, 0x03, 0xff
@@ -739,7 +738,7 @@ static const u8 gUnknown_845B9BE[] = {
     0x09, 0x01, 0x02, 0x03, 0x23, 0x25, 0x24, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0b, 0x0c, 0x0d, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x27, 0x15, 0x26, 0x16, 0x17, 0x18, 0x1a, 0x0e, 0x1b, 0xff
 };
 
-static const u8 *const gUnknown_845B9E0[] = {
+static const u8 *const sHelpSystemSubmenuIndexPointers[] = {
     NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, gUnknown_845B660, NULL,
     NULL, NULL, NULL, gUnknown_845B664, NULL,
@@ -780,48 +779,48 @@ static const u8 *const gUnknown_845B9E0[] = {
 
 static const u16 unref_845BCB0[] = INCBIN_U16("graphics/help_system/unk_845BCB0.bin");
 
-static const u8 gUnknown_845C4B0[] = {
+static const u8 sHelpSystemContextTopicOrder[] = {
     3, 0, 1, 2, 4, 5
 };
 
-static const u8 gUnknown_845C4B6[][6] = {
-    {0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 1, 0, 1},
-    {0, 0, 0, 1, 0, 1},
-    {0, 1, 0, 1, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 0, 1, 0, 0, 1},
-    {0, 0, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {1, 0, 0, 1, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 1, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0}
+static const bool8 sHelpSystemContextTopicFlags[][6] = {
+    {FALSE, FALSE, FALSE, FALSE, FALSE, TRUE },
+    {FALSE, FALSE, FALSE, TRUE,  FALSE, TRUE },
+    {FALSE, FALSE, FALSE, TRUE,  FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, TRUE,  FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, FALSE, TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, FALSE, TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  FALSE, FALSE, TRUE,  FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  TRUE,  FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, TRUE,  TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, FALSE, TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, TRUE,  TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, TRUE,  TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, TRUE,  TRUE },
+    {TRUE,  TRUE,  TRUE,  FALSE, TRUE,  TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, TRUE,  FALSE, FALSE, FALSE, TRUE },
+    {FALSE, FALSE, FALSE, FALSE, FALSE, FALSE},
+    {FALSE, FALSE, FALSE, FALSE, FALSE, FALSE}
 };
 
 static const u16 sMartMaps[] = {
@@ -961,12 +960,12 @@ static bool8 IsInDungeonMap(void)
 
 void sub_812B35C(void)
 {
-    sub_812B4B8();
+    HelpSystem_EnableToggleWithRButton();
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         HelpSystem_SetSomeVariable2(0x16);
     else if (IsInDungeonMap())
         HelpSystem_SetSomeVariable2(0x15);
-    else if (is_light_level_8_or_9(gMapHeader.mapType))
+    else if (IsMapTypeIndoors(gMapHeader.mapType))
     {
         if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F)))
             HelpSystem_SetSomeVariable2(0x0E);
@@ -1015,126 +1014,126 @@ void HelpSystem_Enable(void)
     if (gQuestLogState != 2 && gQuestLogState != 3)
     {
         gHelpSystemEnabled = TRUE;
-        sub_812B4B8();
+        HelpSystem_EnableToggleWithRButton();
     }
 }
 
-void sub_812B4AC(void)
+void HelpSystem_DisableToggleWithRButton(void)
 {
-    gUnknown_203F175 = 1;
+    gHelpSystemToggleWithRButtonDisabled = TRUE;
 }
 
-void sub_812B4B8(void)
+void HelpSystem_EnableToggleWithRButton(void)
 {
-    gUnknown_203F175 = 0;
+    gHelpSystemToggleWithRButtonDisabled = FALSE;
 }
 
-static void sub_812B4C4(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void ResetHelpSystemListMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    a0->sub.items = a1;
-    a0->sub.totalItems = 1;
-    a0->sub.maxShowed = 1;
-    a0->sub.left = 1;
-    a0->sub.top = 4;
+    helpListMenu->sub.items = listMenuItemsBuffer;
+    helpListMenu->sub.totalItems = 1;
+    helpListMenu->sub.maxShowed = 1;
+    helpListMenu->sub.left = 1;
+    helpListMenu->sub.top = 4;
 }
 
-static void sub_812B4D8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildAndPrintMainTopicsListMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_812B4C4(a0, a1);
-    sub_812B520(a0, a1);
-    sub_812BF74(gUnknown_841DFAC);
-    HelpSystem_InitListMenuController(a0, 0, gUnknown_3005E9C[2]);
-    sub_812BF9C(a0, a1);
+    ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
+    BuildMainTopicsListAndMoveToH00(helpListMenu, listMenuItemsBuffer);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFAC);
+    HelpSystem_InitListMenuController(helpListMenu, 0, sHelpSystemState[2]);
+    PrintHelpSystemTopicMouseoverDescription(helpListMenu, listMenuItemsBuffer);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     u8 i;
-    u8 r4 = 0;
+    u8 totalItems = 0;
     for (i = 0; i < 6; i++)
     {
-        if (gUnknown_845C4B6[sSomeVariable][gUnknown_845C4B0[i]] == 1)
+        if (sHelpSystemContextTopicFlags[sSomeVariable][sHelpSystemContextTopicOrder[i]] == TRUE)
         {
-            a1[r4].label = gUnknown_845B080[gUnknown_845C4B0[i]];
-            a1[r4].index = gUnknown_845C4B0[i];
-            r4++;
+            listMenuItemsBuffer[totalItems].label = sHelpSystemTopicPtrs[sHelpSystemContextTopicOrder[i]];
+            listMenuItemsBuffer[totalItems].index = sHelpSystemContextTopicOrder[i];
+            totalItems++;
         }
     }
-    a1[r4 - 1].index = -2;
-    a0->sub.totalItems = r4;
-    a0->sub.maxShowed = r4;
-    a0->sub.left = 0;
+    listMenuItemsBuffer[totalItems - 1].index = -2;
+    helpListMenu->sub.totalItems = totalItems;
+    helpListMenu->sub.maxShowed = totalItems;
+    helpListMenu->sub.left = 0;
 }
 
-static void sub_812B5A8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildAndPrintSubmenuList(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     sub_813BDE8(0);
     sub_813BFC0(0);
     sub_813BE78(1);
-    sub_812B4C4(a0, a1);
-    sub_812B614(a0, a1);
-    sub_812BF74(gUnknown_841DFC9);
-    HelpSystem_InitListMenuController(a0, a0->field_0C, a0->field_0D);
-    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
+    SetHelpSystemSubmenuItems(helpListMenu, listMenuItemsBuffer);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFC9);
+    HelpSystem_InitListMenuController(helpListMenu, helpListMenu->itemsAbove, helpListMenu->cursorPos);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[sHelpSystemState[1]], 0, 0);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    u8 r6 = 0;
-    const u8 * r3 = gUnknown_845B9E0[sSomeVariable * 5 + gUnknown_3005E9C[1]];
+    u8 totalItems = 0;
+    const u8 * indexPtr = sHelpSystemSubmenuIndexPointers[sSomeVariable * 5 + sHelpSystemState[1]];
     u8 i;
-    for (i = 0; r3[i] != 0xFF; i++)
+    for (i = 0; indexPtr[i] != 0xFF; i++)
     {
-        if (sub_812B780(r3[i]) == TRUE)
+        if (HelpSystemSubmenuIndexIsActive(indexPtr[i]) == TRUE)
         {
-            if (gUnknown_3005E9C[1] == 0)
-                a1[r6].label = gUnknown_845B0B0[r3[i]];
-            else if (gUnknown_3005E9C[1] == 1)
-                a1[r6].label = gUnknown_845B218[r3[i]];
-            else if (gUnknown_3005E9C[1] == 2)
-                a1[r6].label = gUnknown_845B3A0[r3[i]];
-            else if (gUnknown_3005E9C[1] == 3)
-                a1[r6].label = gUnknown_845B500[r3[i]];
+            if (sHelpSystemState[1] == 0)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedQuestionTextPtrs[indexPtr[i]];
+            else if (sHelpSystemState[1] == 1)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemMenuTopicTextPtrs[indexPtr[i]];
+            else if (sHelpSystemState[1] == 2)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedStringsTextPtrs[indexPtr[i]];
+            else if (sHelpSystemState[1] == 3)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemGeneralTopicTextPtrs[indexPtr[i]];
             else
-                a1[r6].label = gUnknown_845B540[r3[i]];
-            a1[r6].index = r3[i];
-            r6++;
+                listMenuItemsBuffer[totalItems].label = sHelpSystemTypeMatchupTextPtrs[indexPtr[i]];
+            listMenuItemsBuffer[totalItems].index = indexPtr[i];
+            totalItems++;
         }
     }
-    if (sub_812B754() == TRUE)
+    if (HelpSystem_HasDefeatedBrock() == TRUE)
     {
-        for (i = 0, r3 = gUnknown_845B9BE; r3[i] != 0xFF; i++)
+        for (i = 0, indexPtr = gUnknown_845B9BE; indexPtr[i] != 0xFF; i++)
         {
-            a1[r6].label = gUnknown_845B3A0[r3[i]];
-            a1[r6].index = r3[i];
-            r6++;
+            listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedStringsTextPtrs[indexPtr[i]];
+            listMenuItemsBuffer[totalItems].index = indexPtr[i];
+            totalItems++;
         }
     }
-    a1[r6].label = gUnknown_81B2E6F;
-    a1[r6].index = -2;
-    r6++;
-    a0->sub.totalItems = r6;
-    a0->sub.maxShowed = 7;
-    a0->sub.left = 0;
-    a0->sub.top = 21;
+    listMenuItemsBuffer[totalItems].label = gUnknown_81B2E6F;
+    listMenuItemsBuffer[totalItems].index = -2;
+    totalItems++;
+    helpListMenu->sub.totalItems = totalItems;
+    helpListMenu->sub.maxShowed = 7;
+    helpListMenu->sub.left = 0;
+    helpListMenu->sub.top = 21;
 }
 
-static bool8 sub_812B754(void)
+static bool8 HelpSystem_HasDefeatedBrock(void)
 {
-    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gUnknown_3005E9C[1] == 2)
+    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && sHelpSystemState[1] == 2)
         return TRUE;
     return FALSE;
 }
 
-static bool8 sub_812B780(u8 id)
+static bool8 HelpSystemSubmenuIndexIsActive(u8 id)
 {
     u8 i = 0;
 
-    if (gUnknown_3005E9C[1] == 0)
+    if (sHelpSystemState[1] == 0)
     {
         switch (id)
         {
@@ -1188,7 +1187,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_BADGE01_GET);
         case 28:
         case 40:
-            return sub_812BB10();
+            return HasGottenAtLeastOneHM();
         case 39:
             return FlagGet(FLAG_GOT_FAME_CHECKER);
         case 44:
@@ -1196,7 +1195,7 @@ static bool8 sub_812B780(u8 id)
         }
         return FALSE;
     }
-    if (gUnknown_3005E9C[1] == 1)
+    if (sHelpSystemState[1] == 1)
     {
         switch (id)
         {
@@ -1254,7 +1253,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_BADGE01_GET);
         case 16:
         case 17:
-            return sub_812BB10();
+            return HasGottenAtLeastOneHM();
         case 18:
             return FlagGet(FLAG_GOT_BICYCLE);
         case 48:
@@ -1262,9 +1261,9 @@ static bool8 sub_812B780(u8 id)
         }
         return FALSE;
     }
-    if (gUnknown_3005E9C[1] == 2)
+    if (sHelpSystemState[1] == 2)
     {
-        if (sub_812B754() == TRUE)
+        if (HelpSystem_HasDefeatedBrock() == TRUE)
         {
             for (i = 0; gUnknown_845B9BE[i] != 0xFF; i++)
             {
@@ -1311,7 +1310,7 @@ static bool8 sub_812B780(u8 id)
             return FlagGet(FLAG_SYS_POKEMON_GET);
         case 36:
         case 37:
-            return sub_812BB10();
+            return HasGottenAtLeastOneHM();
         case 3:
         case 15:
         case 18:
@@ -1320,7 +1319,7 @@ static bool8 sub_812B780(u8 id)
         }
         return TRUE;
     }
-    if (gUnknown_3005E9C[1] == 3)
+    if (sHelpSystemState[1] == 3)
     {
         switch (id)
         {
@@ -1331,7 +1330,7 @@ static bool8 sub_812B780(u8 id)
         }
         return TRUE;
     }
-    if (gUnknown_3005E9C[1] == 4)
+    if (sHelpSystemState[1] == 4)
     {
         return TRUE;
     }
@@ -1339,7 +1338,7 @@ static bool8 sub_812B780(u8 id)
     return FALSE;
 }
 
-static bool8 sub_812BB10(void)
+static bool8 HasGottenAtLeastOneHM(void)
 {
     if (FlagGet(FLAG_GOT_HM01) == TRUE)
         return TRUE;
@@ -1358,64 +1357,64 @@ static bool8 sub_812BB10(void)
     return FALSE;
 }
 
-bool8 sub_812BB9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 RunHelpMenuSubroutine(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    switch (a0->field_0E)
+    switch (helpListMenu->state)
     {
     case  8:
-        return sub_812BC54(a0, a1);
+        return HelpSystemSubroutine_PrintWelcomeMessage(helpListMenu, listMenuItemsBuffer);
     case  9:
-        return sub_812BC80(a0, a1);
+        return HelpSystemSubroutine_WelcomeWaitButton(helpListMenu, listMenuItemsBuffer);
     case 10:
-        return sub_812BCA8(a0, a1);
+        return HelpSystemSubroutine_WelcomeEndGotoMenu(helpListMenu, listMenuItemsBuffer);
     case  0:
-        return sub_812BCD0(a0, a1);
+        return HelpSystemSubroutine_MenuInputHandlerMain(helpListMenu, listMenuItemsBuffer);
     case  1:
-        return sub_812BD2C(a0, a1);
+        return HelpMenuSubroutine_InitSubmenu(helpListMenu, listMenuItemsBuffer);
     case  2:
-        return sub_812BD64(a0, a1);
+        return HelpMenuSubroutine_ReturnFromSubmenu(helpListMenu, listMenuItemsBuffer);
     case  3:
-        return sub_812BD98(a0, a1);
+        return HelpMenuSubroutine_SubmenuInputHandler(helpListMenu, listMenuItemsBuffer);
     case  4:
-        return sub_812BE10(a0, a1);
+        return HelpMenuSubroutine_HelpItemPrint(helpListMenu, listMenuItemsBuffer);
     case  5:
-        return sub_812BEEC(a0, a1);
+        return HelpMenuSubroutine_ReturnFromHelpItem(helpListMenu, listMenuItemsBuffer);
     case  6:
-        return sub_812BF18(a0, a1);
+        return HelpMenuSubroutine_HelpItemWaitButton(helpListMenu, listMenuItemsBuffer);
     }
     return FALSE;
 }
 
-bool8 sub_812BC54(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_PrintWelcomeMessage(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_812BF74(gUnknown_841DFA5);
-    sub_812BF5C();
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFA5);
+    PrintWelcomeMessageOnPanel1();
     sub_813BDA4(1);
     sub_813BD5C(1);
-    a0->field_0E = 9;
+    helpListMenu->state = 9;
     return TRUE;
 }
 
-bool8 sub_812BC80(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_WelcomeWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        a0->field_0E = 10;
+        helpListMenu->state = 10;
     }
     return TRUE;
 }
 
-bool8 sub_812BCA8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_WelcomeEndGotoMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[2] = 0;
-    sub_812BF94(a0);
-    sub_812B4D8(a0, a1);
-    a0->field_0E = 0;
+    sHelpSystemState[2] = 0;
+    ResetHelpSystemCursor(helpListMenu);
+    BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
+    helpListMenu->state = 0;
     return TRUE;
 }
 
-bool8 sub_812BCD0(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_MenuInputHandlerMain(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     s32 v0 = HelpSystem_GetMenuInput();
     switch (v0)
@@ -1425,42 +1424,42 @@ bool8 sub_812BCD0(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
         return FALSE;
     case -5:
     case -4:
-        sub_812BF9C(a0, a1);
+        PrintHelpSystemTopicMouseoverDescription(helpListMenu, listMenuItemsBuffer);
         break;
     case -3:
     case -1:
         break;
     default:
-        gUnknown_3005E9C[1] = v0;
-        a0->field_0E = 1;
+        sHelpSystemState[1] = v0;
+        helpListMenu->state = 1;
         break;
     }
     return TRUE;
 }
 
-bool8 sub_812BD2C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_InitSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 1;
-    gUnknown_3005E9C[2] = a0->field_0D;
-    sub_812BF94(a0);
-    sub_812B5A8(a0, a1);
+    sHelpSystemState[0] = 1;
+    sHelpSystemState[2] = helpListMenu->cursorPos;
+    ResetHelpSystemCursor(helpListMenu);
+    BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
     sub_813C75C();
     HelpSystem_SetInputDelay(2);
-    a0->field_0E = 3;
+    helpListMenu->state = 3;
     return TRUE;
 }
 
-bool8 sub_812BD64(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_ReturnFromSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     sub_813C004(0, 0);
     sub_813C004(1, 0);
-    gUnknown_3005E9C[0] = 0;
-    sub_812B4D8(a0, a1);
-    a0->field_0E = 0;
+    sHelpSystemState[0] = 0;
+    BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
+    helpListMenu->state = 0;
     return TRUE;
 }
 
-bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_SubmenuInputHandler(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     s32 v0 = HelpSystem_GetMenuInput();
     switch (v0)
@@ -1468,7 +1467,7 @@ bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
     case -6:
         return FALSE;
     case -2:
-        a0->field_0E = 2;
+        helpListMenu->state = 2;
         break;
     case -5:
     case -4:
@@ -1476,8 +1475,8 @@ bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
     case -1:
         break;
     default:
-        gUnknown_3005E9C[3] = v0;
-        a0->field_0E = 4;
+        sHelpSystemState[3] = v0;
+        helpListMenu->state = 4;
         break;
     }
     return TRUE;
@@ -1485,60 +1484,60 @@ bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
 
 void sub_812BDEC(void)
 {
-    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[sHelpSystemState[1]], 0, 0);
 }
 
-bool8 sub_812BE10(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_HelpItemPrint(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 2;
+    sHelpSystemState[0] = 2;
     sub_813BDA4(0);
     HelpSystem_FillPanel1();
-    sub_812BF74(gUnknown_841DFBE);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFBE);
     sub_813BDE8(1);
     sub_813BEE4(1);
 
-    if (gUnknown_3005E9C[1] == 0)
+    if (sHelpSystemState[1] == 0)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B0B0[gUnknown_3005E9C[3]], gUnknown_845B164[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedQuestionTextPtrs[sHelpSystemState[3]], sHelpSystemSpecializedAnswerTextPtrs[sHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 1)
+    else if (sHelpSystemState[1] == 1)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B218[gUnknown_3005E9C[3]], gUnknown_845B2DC[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemMenuTopicTextPtrs[sHelpSystemState[3]], sHelpSystemSpecializedControlsTextPtrs[sHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 2)
+    else if (sHelpSystemState[1] == 2)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B3A0[gUnknown_3005E9C[3]], gUnknown_845B450[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedStringsTextPtrs[sHelpSystemState[3]], sHelpSystemSpecializedStringDefinitionsTextPtrs[sHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 3)
+    else if (sHelpSystemState[1] == 3)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B500[gUnknown_3005E9C[3]], gUnknown_845B520[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemGeneralTopicTextPtrs[sHelpSystemState[3]], sHelpSystemGeneralTopicDescriptionTextPtrs[sHelpSystemState[3]]);
     }
     else
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B540[gUnknown_3005E9C[3]], gUnknown_845B5D0[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemTypeMatchupTextPtrs[sHelpSystemState[3]], sHelpSystemTypeMatchupDescriptionTextPtrs[sHelpSystemState[3]]);
     }
     sub_813BDA4(1);
     sub_813BD5C(1);
-    a0->field_0E = 6;
+    helpListMenu->state = 6;
     return TRUE;
 }
 
-bool8 sub_812BEEC(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_ReturnFromHelpItem(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 1;
-    sub_812B5A8(a0, a1);
+    sHelpSystemState[0] = 1;
+    BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
     sub_813C75C();
     HelpSystem_SetInputDelay(2);
-    a0->field_0E = 3;
+    helpListMenu->state = 3;
     return TRUE;
 }
 
-bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_HelpItemWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        a0->field_0E = 5;
+        helpListMenu->state = 5;
         return TRUE;
     }
     if (JOY_NEW(L_BUTTON | R_BUTTON))
@@ -1546,13 +1545,13 @@ bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
     return TRUE;
 }
 
-static void sub_812BF5C(void)
+static void PrintWelcomeMessageOnPanel1(void)
 {
     HelpSystem_FillPanel1();
     HelpSystem_PrintTextAt(gUnknown_81B2FC9, 0, 0);
 }
 
-static void sub_812BF74(const u8 * str)
+static void PrintTextOnPanel2Row52RightAlign(const u8 * str)
 {
     HelpSystem_FillPanel2();
     HelpSystem_PrintTextRightAlign_Row52(str);
@@ -1560,21 +1559,21 @@ static void sub_812BF74(const u8 * str)
 
 u8 sub_812BF88(void)
 {
-    return gUnknown_3005E9C[0];
+    return sHelpSystemState[0];
 }
 
-static void sub_812BF94(struct HelpSystemListMenu * a0)
+static void ResetHelpSystemCursor(struct HelpSystemListMenu * helpListMenu)
 {
-    a0->field_0C = 0;
-    a0->field_0D = 0;
+    helpListMenu->itemsAbove = 0;
+    helpListMenu->cursorPos = 0;
 }
 
-static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    s32 index = a1[a0->field_0C + a0->field_0D].index;
+    s32 index = listMenuItemsBuffer[helpListMenu->itemsAbove + helpListMenu->cursorPos].index;
     if (index == -2)
-        HelpSystem_PrintText_813C584(gUnknown_845B098[5]);
+        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
     else
-        HelpSystem_PrintText_813C584(gUnknown_845B098[index]);
+        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[index]);
     sub_813BE30(1);
 }

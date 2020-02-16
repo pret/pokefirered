@@ -4,7 +4,7 @@ SilphCo_Elevator_MapScripts:: @ 8161F6E
 SilphCo_Elevator_EventScript_161F6F:: @ 8161F6F
 	lockall
 	setvar VAR_0x8004, 1
-	call_if_unset FLAG_TEMP_2, EventScript_1A7AB9
+	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
 	special Special_DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor

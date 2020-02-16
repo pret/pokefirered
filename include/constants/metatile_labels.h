@@ -4,6 +4,10 @@
 // General
 #define METATILE_General_CalmWater  0x12B
 
+// PokeMart
+#define METATILE_Shop_CounterMid_Top     0x2BF
+#define METATILE_Shop_CounterMid_Bottom  0x2C0     
+
 // Vermilion Gym
 #define METATILE_VermilionGym_Floor                             0x281
 #define METATILE_VermilionGym_Beam_MidTop                       0x285
@@ -34,6 +38,15 @@
 #define METATILE_VermilionGym_Beam_MidBottom_HalfOn             0x2C5
 #define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn 0x2C6
 #define METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn      0x2C7
+
+// Celadon Game Corner
+#define METATILE_GameCorner_Floor_ShadeFull          0x292
+#define METATILE_GameCorner_Floor_StairsTop          0x29D
+#define METATILE_GameCorner_StairsTop                0x29E
+#define METATILE_GameCorner_StairsBottom             0x29F
+#define METATILE_GameCorner_PurpleWall_Floor         0x2CF
+#define METATILE_GameCorner_PurpleWall_StairsTop     0x2A6
+#define METATILE_GameCorner_PurpleWall_stairsBottom  0x2A7
 
 // Pokemon Mansion
 #define METATILE_PokemonMansion_Floor                                    0x284
@@ -92,5 +105,8 @@
 // gTileset_82D504C. Below metatile probably needs generic name
 #define METATILE_MtEmber_CaveEntrance  0x346
 
+// Trainer Tower
+#define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287
+#define METATILE_TrainerTower_CounterBarrier         0x2B4
 
 #endif // GUARD_METATILE_LABELS_H

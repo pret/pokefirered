@@ -3,15 +3,14 @@
 
 #include "union_room.h"
 
-void sub_811C1C8(void);
-void sub_811BAAC(u8 *spriteIds, s32 arg1);
-void sub_811BB40(u8 *spriteIds);
-void sub_811BB68(void);
-void sub_811BECC(struct UnkStruct_URoom *arg0);
-void sub_811BEDC(struct UnkStruct_URoom *arg0);
-bool32 sub_811BF00(struct UnkStruct_Main0 *arg0, s16 *arg1, s16 *arg2, u8 *arg3);
-void sub_811C028(u32 arg0, u32 arg1, struct UnkStruct_Main0 *arg2);
 u8 ZeroUnionObjWork(struct UnionObj * ptr);
-void sub_811BA78(void);
+void DeleteUnionObjWorkAndStopTask(void);
+void CreateGroupMemberObjectsInvisible(u8 *spriteIds, s32 group);
+void DestroyGroupMemberObjects(u8 *spriteIds);
+void MakeGroupAssemblyAreasPassable(void);
+void ScheduleUnionRoomPlayerRefresh(struct UnkStruct_URoom *uroom_p);
+void HandleUnionRoomPlayerRefresh(struct UnkStruct_URoom *uroom_p);
+bool32 RfuUnionTool_GetGroupAndMemberInFrontOfPlayer(struct UnkStruct_Main0 *main0_p, s16 *member_p, s16 *group_p, u8 *spriteIds);
+void UpdateUnionGroupMemberFacing(u32 member, u32 group, struct UnkStruct_Main0 *main0_p);
 
 #endif //GUARD_UNION_ROOM_PLAYER_AVATAR_H

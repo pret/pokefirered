@@ -4,6 +4,8 @@
 #include "global.h"
 #include "main.h"
 
+#define LIBRFU_VERSION 1024
+
 /* TODOs:
  * - documentation
  * - check if any field needs to be volatile
@@ -307,7 +309,11 @@ struct STWIStatus
     u8 ackActiveCommand;
     u8 timerSelect;
     u8 unk_b;
-    u32 timerState; // this field is s32 in emerald
+#if LIBRFU_VERSION >= 1026
+    s32 timerState;
+#else
+    u32 timerState;
+#endif
     vu8 timerActive;
     u8 unk_11;
     vu16 error;
@@ -472,7 +478,7 @@ extern struct RfuFixed *gRfuFixed;
 extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
 
-// librfu_s32id
+// librfu_sio32id
 s32 AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation. 

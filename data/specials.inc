@@ -103,7 +103,7 @@ gSpecials:: @ 815FD60
 	def_special sub_8081128
 	def_special Field_AskSaveTheGame
 	def_special nullsub_56
-	def_special sub_80FEE44
+	def_special ShowEasyChatScreen
 	def_special Special_BufferEasyChatMessage
 	def_special nullsub_75
 	def_special nullsub_75
@@ -374,7 +374,7 @@ gSpecials:: @ 815FD60
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
-	def_special sub_814F1D4
+	def_special Special_WirelessCommunicationScreen
 	def_special EnableNationalPokedex
 	def_special sub_80699E0
 	def_special sub_80699BC
@@ -412,7 +412,7 @@ gSpecials:: @ 815FD60
 	def_special Special_SSAnneDepartureCutscene
 	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled
-	def_special sub_815D9E8
+	def_special CallTrainerTowerFunc
 	def_special ShowPokemonJumpRecords
 	def_special Special_ItemIsTM_GetMoveName
 	def_special Special_DaisyMassageServices
@@ -439,7 +439,7 @@ gSpecials:: @ 815FD60
 	def_special Special_SetDeoxysTriangleObjectPal
 	def_special IsPlayerLeftOfVermilionSailor
 	def_special Special_BadEggInParty
-	def_special sub_815D834
+	def_special ReadTrainerTowerAndValidate
 	def_special HasAllMons
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle

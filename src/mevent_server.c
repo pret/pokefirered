@@ -176,7 +176,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         case 9:
             AGB_ASSERT_EX(cmd->flag == FALSE, ABSPATH("mevent_server.c"), 408);
             ptr = mevent_first_if_not_null_else_second(cmd->parameter, &svr->sendWord);
-            svr->param = sub_8144434(ptr, svr->mevent_unk1442cc, ptr);
+            svr->param = MEvent_CanPlayerReceiveDistributionMon(ptr, svr->mevent_unk1442cc, ptr);
             break;
         case 10:
             AGB_ASSERT_EX(cmd->parameter == NULL, ABSPATH("mevent_server.c"), 415);
@@ -247,7 +247,7 @@ static u32 common_mainseq_4(struct mevent_srv_common * svr)
         case 26:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 506);
             memcpy(svr->card, GetSavedWonderCard(), 332);
-            sub_814410C(svr->card);
+            MEvent_WonderCardResetUnk08_6(svr->card);
             break;
         case 27:
             AGB_ASSERT_EX(cmd->flag == FALSE && cmd->parameter == NULL, ABSPATH("mevent_server.c"), 512);

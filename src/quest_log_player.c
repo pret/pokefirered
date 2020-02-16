@@ -100,7 +100,7 @@ static void sub_81505C4(u8 taskId)
     {
         case 0:
             ObjectEventClearAnimIfSpecialAnimActive(objectEvent);
-            objectEvent->mapobj_bit_11 = TRUE;
+            objectEvent->enableAnim = TRUE;
             sub_81507BC(objectEvent, sub_805C808(4));
             StartSpriteAnim(sprite, sub_80634F0(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;

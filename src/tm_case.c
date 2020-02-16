@@ -1304,7 +1304,7 @@ static void InitWindowTemplatesAndPals(void)
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
     LoadPalette(sPal3Override, 0xF6, 0x04);
     LoadPalette(sPal3Override, 0xD6, 0x04);
-    sub_8107D38(0xc0, 0x01);
+    ListMenuLoadStdPalAt(0xc0, 0x01);
     for (i = 0; i < 9; i++)
         FillWindowPixelBuffer(i, 0x00);
     PutWindowTilemap(0);

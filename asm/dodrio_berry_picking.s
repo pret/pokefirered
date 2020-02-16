@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81507FC
-sub_81507FC: @ 81507FC
+	thumb_func_start StartDodrioBerryPicking
+StartDodrioBerryPicking: @ 81507FC
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	lsls r0, 16
@@ -97,7 +97,7 @@ _081508D2:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81507FC
+	thumb_func_end StartDodrioBerryPicking
 
 	thumb_func_start sub_81508D8
 sub_81508D8: @ 81508D8
@@ -382,7 +382,7 @@ _08150B08:
 	bl sub_8155E68
 	cmp r0, 0
 	bne _08150BFC
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 	b _08150BDC
 _08150B16:
 	bl IsLinkTaskFinished
@@ -649,7 +649,7 @@ _08150D28:
 	movs r1, 0x8
 	movs r2, 0x78
 	movs r3, 0x50
-	bl sub_815F138
+	bl StartMinigameCountdown
 	b _08150D52
 _08150D3A:
 	bl IsLinkTaskFinished
@@ -658,11 +658,11 @@ _08150D3A:
 	beq _08150D74
 	b _08150D52
 _08150D46:
-	bl sub_815F198
+	bl IsMinigameCountdownRunning
 	cmp r0, 0
 	bne _08150D74
 _08150D4E:
-	bl sub_80FA42C
+	bl LinkRfu_SetRfuFuncToSend6600
 _08150D52:
 	ldr r0, _08150D60 @ =gUnknown_203F3E0
 	ldr r1, [r0]
@@ -1611,7 +1611,7 @@ _081514A4:
 	beq _081514C0
 	b _081514D6
 _081514AA:
-	bl sub_800AAC0
+	bl Link_TryStartSend5FFF
 	movs r0, 0x7
 	bl sub_81549D4
 	b _081514CC

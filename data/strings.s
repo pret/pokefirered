@@ -4230,51 +4230,51 @@ gJPText_MysteryGift:: @ 841DE50
 gJPText_DecideStop:: @ 841DE51
 	.string "$"
 
-gUnknown_841DE52:: @ 841DE52
+gJPText_ReceiveMysteryGiftWithEReader:: @ 841DE52
 	.string "$"
 
-gUnknown_841DE53:: @ 841DE53
+gJPText_SelectConnectFromEReaderMenu:: @ 841DE53
 	.string "$"
 
-gUnknown_841DE54:: @ 841DE54
+gJPText_SelectConnectWithGBA:: @ 841DE54
 	.string "$"
 
-gUnknown_841DE55:: @ 841DE55
+gJPText_SelectConnectAndPressA:: @ 841DE55
 	.string "カ-ドeリ-ダ-{PLUS}の ‘つうしん'を\n"
 	.string "えらんで Aボタンを おしてください$"
 
-gUnknown_841DE7C:: @ 841DE7C
+gJPText_LinkIsIncorrect:: @ 841DE7C
 	.string "$"
 
-gUnknown_841DE7D:: @ 841DE7D
+gJPText_CardReadingHasBeenHalted:: @ 841DE7D
 	.string "$"
 
-gUnknown_841DE7E:: @ 841DE7E
+gJPText_UnableConnectWithEReader:: @ 841DE7E
 	.string "カ-ドeリ-ダ-{PLUS}と\n"
 	.string "つうしん できません$"
 
-gUnknown_841DE95:: @ 841DE95
+gJPText_Connecting:: @ 841DE95
 	.string "$"
 
-gUnknown_841DE96:: @ 841DE96
+gJPText_ConnectionErrorCheckLink:: @ 841DE96
 	.string "$"
 
-gUnknown_841DE97:: @ 841DE97
+gJPText_ConnectionErrorTryAgain:: @ 841DE97
 	.string "$"
 
-gUnknown_841DE98:: @ 841DE98
+gJPText_AllowEReaderToLoadCard:: @ 841DE98
 	.string "$"
 
-gUnknown_841DE99:: @ 841DE99
+gJPText_ConnectionComplete:: @ 841DE99
 	.string "$"
 
-gUnknown_841DE9A:: @ 841DE9A
+gJPText_NewTrainerHasComeToSevii:: @ 841DE9A
 	.string "$"
 
-gUnknown_841DE9B:: @ 841DE9B
+gJPText_PleaseWaitAMoment:: @ 841DE9B
 	.string "$"
 
-gUnknown_841DE9C:: @ 841DE9C
+gJPText_WriteErrorUnableToSaveData:: @ 841DE9C
 	.string "$"
 
 gText_CommErrorCheckConnections:: @ 841DE9D
@@ -4498,19 +4498,19 @@ gUnknown_841E243:: @ 841E243
 gUnknown_841E244:: @ 841E244
 	.string "$"
 
-gUnknown_841E245:: @ 841E245
+gText_WirelessCommunicationStatus:: @ 841E245
 	.string "Wireless Communication Status$"
 
-gUnknown_841E263:: @ 841E263
+gText_PeopleTrading:: @ 841E263
 	.string "People trading:$"
 
-gUnknown_841E273:: @ 841E273
+gText_PeopleBattling:: @ 841E273
 	.string "People battling:$"
 
-gUnknown_841E284:: @ 841E284
+gText_PeopleInUnionRoom:: @ 841E284
 	.string "People in the UNION ROOM:$"
 
-gUnknown_841E29E:: @ 841E29E
+gText_PeopleCommunicating:: @ 841E29E
 	.string "People communicating:$"
 
 gUnknown_841E2B4:: @ 841E2B4

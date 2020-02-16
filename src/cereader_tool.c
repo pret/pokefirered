@@ -6,40 +6,40 @@
 
 u8 sub_815D654(void)
 {
-    return (gSaveBlock1Ptr->unkArray[0].unk9 + 1) % 256;
+    return (gSaveBlock1Ptr->trainerTower[0].unk9 + 1) % 256;
 }
 
 static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerFloor * floor)
 {
-    if (floor->floorIdx < 1 || floor->floorIdx > 8)
+    if (floor->floorIdx < 1 || floor->floorIdx > MAX_TRAINER_TOWER_FLOORS)
         return FALSE;
-    if (floor->challengeType > 2)
+    if (floor->challengeType > CHALLENGE_TYPE_KNOCKOUT)
         return FALSE;
     if (CalcByteArraySum((const u8 *)floor, offsetof(typeof(*floor), checksum)) != floor->checksum)
         return FALSE;
     return TRUE;
 }
 
-bool32 ValidateTrainerTowerData(struct EReaderTrainerHillSet * ttdata)
+bool32 ValidateTrainerTowerData(struct EReaderTrainerTowerSet * ttdata)
 {
-    u32 count = ttdata->count;
+    u32 numFloors = ttdata->numFloors;
     s32 i;
-    if (count < 1 || count > 8)
+    if (numFloors < 1 || numFloors > MAX_TRAINER_TOWER_FLOORS)
         return FALSE;
-    for (i = 0; i < count; i++)
+    for (i = 0; i < numFloors; i++)
     {
         if (!ValidateTrainerTowerTrainer(&ttdata->floors[i]))
             return FALSE;
     }
-    if (CalcByteArraySum((const u8 *)ttdata->floors, count * sizeof(ttdata->floors[0])) != ttdata->checksum)
+    if (CalcByteArraySum((const u8 *)ttdata->floors, numFloors * sizeof(ttdata->floors[0])) != ttdata->checksum)
         return FALSE;
     return TRUE;
 }
 
-#define SEC30_SIZE  (offsetof(struct EReaderTrainerHillSet, floors[4]))
-#define SEC31_SIZE  (sizeof(struct EReaderTrainerHillSet) - SEC30_SIZE)
+#define SEC30_SIZE  (offsetof(struct EReaderTrainerTowerSet, floors[4]))
+#define SEC31_SIZE  (sizeof(struct EReaderTrainerTowerSet) - SEC30_SIZE)
 
-static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerHillSet * ttdata, u8 * buffer)
+static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, u8 * buffer)
 {
     AGB_ASSERT_EX(ttdata->dummy == 0, ABSPATH("cereader_tool.c"), 198);
     AGB_ASSERT_EX(ttdata->id == 0, ABSPATH("cereader_tool.c"), 199)
@@ -56,7 +56,7 @@ static bool32 CEReaderTool_SaveTrainerTower_r(struct EReaderTrainerHillSet * ttd
     return TRUE;
 }
 
-bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata)
+bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 {
     u8 * buffer = AllocZeroed(0x1000);
     bool32 result = CEReaderTool_SaveTrainerTower_r(ttdata, buffer);
@@ -64,7 +64,7 @@ bool32 CEReaderTool_SaveTrainerTower(struct EReaderTrainerHillSet * ttdata)
     return result;
 }
 
-static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerHillSet * ttdata, void * buffer)
+static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerTowerSet * ttdata, void * buffer)
 {
     if (TryCopySpecialSaveSection(SECTOR_TTOWER(0), buffer) != 1)
         return FALSE;
@@ -79,10 +79,16 @@ static bool32 CEReaderTool_LoadTrainerTower_r(struct EReaderTrainerHillSet * ttd
     return TRUE;
 }
 
-bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerHillSet * ttdata)
+bool32 CEReaderTool_LoadTrainerTower(struct EReaderTrainerTowerSet * ttdata)
 {
     void * buffer = AllocZeroed(0x1000);
     bool32 success = CEReaderTool_LoadTrainerTower_r(ttdata, buffer);
     Free(buffer);
     return success;
+}
+
+bool32 ReadTrainerTowerAndValidate(void)
+{
+    // Stubbed out. Populated in Emerald
+    return FALSE;
 }

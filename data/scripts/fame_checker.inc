@@ -177,12 +177,12 @@ SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1ACFAE:: @ 81ACFAE
+IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt:: @ 81ACFAE
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 1
 	famechecker FAMECHECKER_AGATHA, 2
-	msgbox Text_19A9E7
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs
 	release
 	end
 
@@ -235,20 +235,20 @@ CeladonCity_DepartmentStore_2F_EventScript_Woman:: @ 81AD053
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD06C:: @ 81AD06C
+IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81AD06C
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 4
 	textcolor 3
-	msgbox gUnknown_81B1A31
+	msgbox PokemonJournal_Text_SpecialFeatureLance
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_1AD087:: @ 81AD087
+IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM:: @ 81AD087
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 5
-	msgbox Text_19AB16
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway
 	release
 	end
 

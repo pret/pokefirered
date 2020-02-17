@@ -14,11 +14,11 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "25",
+      "graphics_id": "OBJECT_EVENT_GFX_MAN",
       "x": 7,
       "y": 4,
       "elevation": 3,
-      "movement_type": "15",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,

@@ -1,110 +1,97 @@
 SaffronCity_Gym_MapScripts:: @ 816EDD7
 	.byte 0
 
-SaffronCity_Gym_EventScript_16EDD8:: @ 816EDD8
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 420, 0, Text_19B53C, Text_19B602, EventScript_16EE0A
-	checkflag FLAG_0x29A
-	goto_if 0, EventScript_16EE3D
-	msgbox gUnknown_819B7F2
+SaffronCity_Gym_EventScript_Sabrina:: @ 816EDD8
+	famechecker FAMECHECKER_SABRINA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	trainerbattle_single TRAINER_LEADER_SABRINA, SaffronCity_Gym_Text_SabrinaIntro, SaffronCity_Gym_Text_SabrinaDefeat, SaffronCity_Gym_EventScript_DefeatedSabrina, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM04_FROM_SABRINA, SaffronCity_Gym_EventScript_GiveTM04
+	msgbox SaffronCity_Gym_Text_ExplainTM04
 	release
 	end
 
-EventScript_16EE0A:: @ 816EE0A
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
-	clearflag FLAG_0x0AE
-	setflag FLAG_0x4B5
-	setflag FLAG_0x825
-	setvar VAR_0x8008, 6
-	call EventScript_1A6B18
-	goto EventScript_16EE3D
+SaffronCity_Gym_EventScript_DefeatedSabrina:: @ 816EE0A
+	famechecker FAMECHECKER_SABRINA, 2
+	famechecker FAMECHECKER_SABRINA, 3
+	clearflag FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS
+	setflag FLAG_DEFEATED_SABRINA
+	setflag FLAG_BADGE06_GET
+	set_gym_trainers 6
+	goto SaffronCity_Gym_EventScript_GiveTM04
 	end
 
-EventScript_16EE3D:: @ 816EE3D
-	msgbox gUnknown_819B6FA
+SaffronCity_Gym_EventScript_GiveTM04:: @ 816EE3D
+	msgbox SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis
 	checkitemspace ITEM_TM04, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16EE7E
-	additem ITEM_TM04, 1
-	giveitemfanfaremsg gUnknown_819B7D3, ITEM_TM04
-	setflag FLAG_0x29A
-	msgbox gUnknown_819B685
+	compare VAR_RESULT, FALSE
+	goto_if_eq SaffronCity_Gym_EventScript_NoRoomForTM04
+	giveitem_msg SaffronCity_Gym_Text_ReceivedTM04FromSabrina, ITEM_TM04
+	setflag FLAG_GOT_TM04_FROM_SABRINA
+	msgbox SaffronCity_Gym_Text_SabrinaPostBattle
 	release
 	end
 
-EventScript_16EE7E:: @ 816EE7E
-	msgbox gUnknown_819B849
+SaffronCity_Gym_EventScript_NoRoomForTM04:: @ 816EE7E
+	msgbox SaffronCity_Gym_Text_BagFullOfOtherItems
 	release
 	end
 
-SaffronCity_Gym_EventScript_16EE88:: @ 816EE88
-	trainerbattle 0, 280, 0, Text_19B936, Text_19B957
-	msgbox gUnknown_819B96D, 6
+SaffronCity_Gym_EventScript_Johan:: @ 816EE88
+	trainerbattle_single TRAINER_PSYCHIC_JOHAN, SaffronCity_Gym_Text_JohanIntro, SaffronCity_Gym_Text_JohanDefeat
+	msgbox SaffronCity_Gym_Text_JohanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EE9F:: @ 816EE9F
-	trainerbattle 0, 281, 0, Text_19BA45, Text_19BA9E
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_819BAB4, 6
+SaffronCity_Gym_EventScript_Tyron:: @ 816EE9F
+	trainerbattle_single TRAINER_PSYCHIC_TYRON, SaffronCity_Gym_Text_TyronIntro, SaffronCity_Gym_Text_TyronDefeat
+	famechecker FAMECHECKER_SABRINA, 5
+	msgbox SaffronCity_Gym_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EEC3:: @ 816EEC3
-	trainerbattle 0, 282, 0, Text_19BB49, Text_19BBA1
-	msgbox gUnknown_819BBB3, 6
+SaffronCity_Gym_EventScript_Cameron:: @ 816EEC3
+	trainerbattle_single TRAINER_PSYCHIC_CAMERON, SaffronCity_Gym_Text_CameronIntro, SaffronCity_Gym_Text_CameronDefeat
+	msgbox SaffronCity_Gym_Text_CameronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EEDA:: @ 816EEDA
-	trainerbattle 0, 283, 0, Text_19BC57, Text_19BCBC
-	msgbox gUnknown_819BCC4, 6
+SaffronCity_Gym_EventScript_Preston:: @ 816EEDA
+	trainerbattle_single TRAINER_PSYCHIC_PRESTON, SaffronCity_Gym_Text_PrestonIntro, SaffronCity_Gym_Text_PrestonDefeat
+	msgbox SaffronCity_Gym_Text_PrestonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EEF1:: @ 816EEF1
-	trainerbattle 0, 462, 0, Text_19B86A, Text_19B8A8
-	msgbox gUnknown_819B8B9, 6
+SaffronCity_Gym_EventScript_Amanda:: @ 816EEF1
+	trainerbattle_single TRAINER_CHANNELER_AMANDA, SaffronCity_Gym_Text_AmandaIntro, SaffronCity_Gym_Text_AmandaDefeat
+	msgbox SaffronCity_Gym_Text_AmandaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EF08:: @ 816EF08
-	trainerbattle 0, 463, 0, Text_19B998, Text_19B9EC
-	msgbox gUnknown_819B9F7, 6
+SaffronCity_Gym_EventScript_Stacy:: @ 816EF08
+	trainerbattle_single TRAINER_CHANNELER_STACY, SaffronCity_Gym_Text_StacyIntro, SaffronCity_Gym_Text_StacyDefeat
+	msgbox SaffronCity_Gym_Text_StacyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EF1F:: @ 816EF1F
-	trainerbattle 0, 464, 0, Text_19BAE8, Text_19BB0D
-	msgbox gUnknown_819BB1F, 6
+SaffronCity_Gym_EventScript_Tasha:: @ 816EF1F
+	trainerbattle_single TRAINER_CHANNELER_TASHA, SaffronCity_Gym_Text_TashaIntro, SaffronCity_Gym_Text_TashaDefeat
+	msgbox SaffronCity_Gym_Text_TashaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SaffronCity_Gym_EventScript_16EF36:: @ 816EF36
+SaffronCity_Gym_EventScript_GymGuy:: @ 816EF36
 	lock
 	faceplayer
-	checkflag FLAG_0x4B5
-	goto_if_eq EventScript_16EF4B
-	msgbox gUnknown_819BCF6
+	goto_if_set FLAG_DEFEATED_SABRINA, SaffronCity_Gym_EventScript_GymGuyPostVictory
+	msgbox SaffronCity_Gym_Text_GymGuyAdvice
 	release
 	end
 
-EventScript_16EF4B:: @ 816EF4B
-	msgbox gUnknown_819BDBB
+SaffronCity_Gym_EventScript_GymGuyPostVictory:: @ 816EF4B
+	msgbox SaffronCity_Gym_Text_GymGuyPostVictory
 	release
 	end
 
-SaffronCity_Gym_EventScript_16EF55:: @ 816EF55
+SaffronCity_Gym_EventScript_GymStatue:: @ 816EF55
 	lockall
-	checkflag FLAG_0x825
-	goto_if_eq EventScript_16EF69
-	msgbox gUnknown_819BDFE
+	goto_if_set FLAG_BADGE06_GET, SaffronCity_Gym_EventScript_GymStatuePostVictory
+	msgbox SaffronCity_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16EF69:: @ 816EF69
-	msgbox gUnknown_819BE37
+SaffronCity_Gym_EventScript_GymStatuePostVictory:: @ 816EF69
+	msgbox SaffronCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end

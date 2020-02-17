@@ -1,103 +1,85 @@
 CeladonCity_Gym_MapScripts:: @ 816D060
 	.byte 0
 
-CeladonCity_Gym_EventScript_16D061:: @ 816D061
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 417, 0, Text_197114, Text_197260, EventScript_16D0A0
-	checkflag FLAG_0x293
-	goto_if 0, EventScript_16D0C6
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_81972B8
+CeladonCity_Gym_EventScript_Erika:: @ 816D061
+	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	trainerbattle_single TRAINER_LEADER_ERIKA, CeladonCity_Gym_Text_ErikaIntro, CeladonCity_Gym_Text_ErikaDefeat, CeladonCity_Gym_EventScript_DefeatedErika, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM19_FROM_ERIKA, CeladonCity_Gym_EventScript_GiveTM19
+	famechecker FAMECHECKER_ERIKA, 4
+	msgbox CeladonCity_Gym_Text_ErikaPostBattle
 	release
 	end
 
-EventScript_16D0A0:: @ 816D0A0
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	clearflag FLAG_0x09E
-	setflag FLAG_0x4B3
-	setflag FLAG_0x823
-	setvar VAR_0x8008, 4
-	call EventScript_1A6B18
-	goto EventScript_16D0C6
+CeladonCity_Gym_EventScript_DefeatedErika:: @ 816D0A0
+	famechecker FAMECHECKER_ERIKA, 1
+	clearflag FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS
+	setflag FLAG_DEFEATED_ERIKA
+	setflag FLAG_BADGE04_GET
+	set_gym_trainers 4
+	goto CeladonCity_Gym_EventScript_GiveTM19
 	end
 
-EventScript_16D0C6:: @ 816D0C6
-	msgbox gUnknown_8197327
+CeladonCity_Gym_EventScript_GiveTM19:: @ 816D0C6
+	msgbox CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis
 	checkitemspace ITEM_TM19, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D107
-	additem ITEM_TM19, 1
-	loadword 0, gUnknown_81973BA
-	setorcopyvar VAR_0x8000, ITEM_TM19
-	setorcopyvar VAR_0x8001, 1
-	setorcopyvar VAR_0x8002, MUS_FANFA1
-	callstd 9 @ gStdScript_ItemMessageAndFanfare
-	setflag FLAG_0x293
-	msgbox gUnknown_81973D7
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeladonCity_Gym_EventScript_NoRoomForTM19
+	giveitem_msg CeladonCity_Gym_Text_ReceivedTM19FromErika, ITEM_TM19
+	setflag FLAG_GOT_TM19_FROM_ERIKA
+	msgbox CeladonCity_Gym_Text_ExplainTM19
 	release
 	end
 
-EventScript_16D107:: @ 816D107
-	msgbox gUnknown_819745D
+CeladonCity_Gym_EventScript_NoRoomForTM19:: @ 816D107
+	msgbox CeladonCity_Gym_Text_ShouldMakeRoomForThis
 	release
 	end
 
-CeladonCity_Gym_EventScript_16D111:: @ 816D111
-	trainerbattle 0, 132, 0, Text_19747C, Text_1974C4
-	msgbox gUnknown_81974D6, 6
+CeladonCity_Gym_EventScript_Kay:: @ 816D111
+	trainerbattle_single TRAINER_LASS_KAY, CeladonCity_Gym_Text_KayIntro, CeladonCity_Gym_Text_KayDefeat
+	msgbox CeladonCity_Gym_Text_KayPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D128:: @ 816D128
-	trainerbattle 0, 133, 0, Text_1976C5, Text_1976FF
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_8197708, 6
+CeladonCity_Gym_EventScript_Lisa:: @ 816D128
+	trainerbattle_single TRAINER_LASS_LISA, CeladonCity_Gym_Text_LisaIntro, CeladonCity_Gym_Text_LisaDefeat
+	famechecker FAMECHECKER_ERIKA, 2
+	msgbox CeladonCity_Gym_Text_LisaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D14C:: @ 816D14C
-	trainerbattle 0, 160, 0, Text_197595, Text_1975BB
-	msgbox gUnknown_81975D1, 6
+CeladonCity_Gym_EventScript_Tina:: @ 816D14C
+	trainerbattle_single TRAINER_PICNICKER_TINA, CeladonCity_Gym_Text_TinaIntro, CeladonCity_Gym_Text_TinaDefeat
+	msgbox CeladonCity_Gym_Text_TinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D163:: @ 816D163
-	trainerbattle 0, 265, 0, Text_1974FA, Text_19751C
-	msgbox gUnknown_8197527, 6
+CeladonCity_Gym_EventScript_Bridget:: @ 816D163
+	trainerbattle_single TRAINER_BEAUTY_BRIDGET, CeladonCity_Gym_Text_BridgetIntro, CeladonCity_Gym_Text_BridgetDefeat
+	msgbox CeladonCity_Gym_Text_BridgetPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D17A:: @ 816D17A
-	trainerbattle 0, 266, 0, Text_19760B, Text_197660
-	setvar VAR_0x8004, 5
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_8197664, 6
+CeladonCity_Gym_EventScript_Tamia:: @ 816D17A
+	trainerbattle_single TRAINER_BEAUTY_TAMIA, CeladonCity_Gym_Text_TamiaIntro, CeladonCity_Gym_Text_TamiaDefeat
+	famechecker FAMECHECKER_ERIKA, 3
+	msgbox CeladonCity_Gym_Text_TamiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D19E:: @ 816D19E
-	trainerbattle 0, 267, 0, Text_197747, Text_19777A
-	msgbox gUnknown_8197788, 6
+CeladonCity_Gym_EventScript_Lori:: @ 816D19E
+	trainerbattle_single TRAINER_BEAUTY_LORI, CeladonCity_Gym_Text_LoriIntro, CeladonCity_Gym_Text_LoriDefeat
+	msgbox CeladonCity_Gym_Text_LoriPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D1B5:: @ 816D1B5
-	trainerbattle 0, 402, 0, Text_1977E5, Text_197832
-	msgbox gUnknown_819783E, 6
+CeladonCity_Gym_EventScript_Mary:: @ 816D1B5
+	trainerbattle_single TRAINER_COOLTRAINER_MARY, CeladonCity_Gym_Text_MaryIntro, CeladonCity_Gym_Text_MaryDefeat
+	msgbox CeladonCity_Gym_Text_MaryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-CeladonCity_Gym_EventScript_16D1CC:: @ 816D1CC
+CeladonCity_Gym_EventScript_GymStatue:: @ 816D1CC
 	lockall
-	checkflag FLAG_0x823
-	goto_if_eq EventScript_16D1E0
-	msgbox gUnknown_8197874
+	goto_if_set FLAG_BADGE04_GET, CeladonCity_Gym_EventScript_GymStatuePostVictory
+	msgbox CeladonCity_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16D1E0:: @ 816D1E0
-	msgbox gUnknown_81978AB
+CeladonCity_Gym_EventScript_GymStatuePostVictory:: @ 816D1E0
+	msgbox CeladonCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end

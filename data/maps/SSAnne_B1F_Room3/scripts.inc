@@ -1,7 +1,7 @@
 SSAnne_B1F_Room3_MapScripts:: @ 8160D8E
 	.byte 0
 
-SSAnne_B1F_Room3_EventScript_160D8F:: @ 8160D8F
-	trainerbattle 0, 139, 0, Text_1742A6, Text_1742C3
-	msgbox gUnknown_81742D2, 6
+SSAnne_B1F_Room3_EventScript_Dylan:: @ 8160D8F
+	trainerbattle_single TRAINER_SAILOR_DYLAN, SSAnne_B1F_Room3_Text_DylanIntro, SSAnne_B1F_Room3_Text_DylanDefeat
+	msgbox SSAnne_B1F_Room3_Text_DylanPostBattle, MSGBOX_AUTOCLOSE
 	end

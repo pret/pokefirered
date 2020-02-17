@@ -1,143 +1,142 @@
+.equ LOCALID_DOME_FOSSIL,  1
+.equ LOCALID_HELIX_FOSSIL, 2
+.equ LOCALID_MIGUEL,       3
+
 MtMoon_B2F_MapScripts:: @ 8160699
-	map_script 3, MtMoon_B2F_MapScript1_16069F
+	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_B2F_OnTransition
 	.byte 0
 
-MtMoon_B2F_MapScript1_16069F:: @ 816069F
-	checkflag FLAG_0x232
-	call_if 0, EventScript_1606A9
+MtMoon_B2F_OnTransition:: @ 816069F
+	call_if_unset FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_ShowFossils
 	end
 
-EventScript_1606A9:: @ 81606A9
-	clearflag FLAG_0x02F
-	clearflag FLAG_0x030
+MtMoon_B2F_EventScript_ShowFossils:: @ 81606A9
+	clearflag FLAG_HIDE_DOME_FOSSIL
+	clearflag FLAG_HIDE_HELIX_FOSSIL
 	return
 
-MtMoon_B2F_EventScript_1606B0:: @ 81606B0
+MtMoon_B2F_EventScript_MiguelTrigger:: @ 81606B0
 	lockall
-	applymovement 3, Movement_1A75EB
+	applymovement LOCALID_MIGUEL, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	call EventScript_1606DD
+	call MtMoon_B2F_EventScript_BattleMiguel
 	releaseall
 	end
 
-MtMoon_B2F_EventScript_1606C2:: @ 81606C2
+MtMoon_B2F_EventScript_Miguel:: @ 81606C2
 	lock
 	faceplayer
-	checkflag FLAG_0x232
-	goto_if_eq EventScript_160707
-	checktrainerflag FLAG_0x0AA
-	goto_if_eq EventScript_160711
-	call EventScript_1606DD
+	goto_if_set FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_MiguelFossilPicked
+	goto_if_defeated TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_EventScript_MiguelGoPickFossil
+	call MtMoon_B2F_EventScript_BattleMiguel
 	release
 	end
 
-EventScript_1606DD:: @ 81606DD
+MtMoon_B2F_EventScript_BattleMiguel:: @ 81606DD
 	textcolor 0
-	message Text_172B64
+	message MtMoon_B2F_Text_MiguelIntro
 	waitmessage
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
-	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 170, 0, Text_172B99
-	setvar VAR_0x408B, 1
-	msgbox gUnknown_8172BAB
+	setvar VAR_LAST_TALKED, LOCALID_MIGUEL
+	trainerbattle_no_intro TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_Text_MiguelDefeat
+	setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
+	msgbox MtMoon_B2F_Text_WellEachTakeAFossil
 	return
 
-EventScript_160707:: @ 8160707
-	msgbox gUnknown_8172BFB
+MtMoon_B2F_EventScript_MiguelFossilPicked:: @ 8160707
+	msgbox MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils
 	release
 	end
 
-EventScript_160711:: @ 8160711
-	msgbox gUnknown_8172BAB
+MtMoon_B2F_EventScript_MiguelGoPickFossil:: @ 8160711
+	msgbox MtMoon_B2F_Text_WellEachTakeAFossil
 	release
 	end
 
-MtMoon_B2F_EventScript_16071B:: @ 816071B
+MtMoon_B2F_EventScript_DomeFossil:: @ 816071B
 	lock
 	faceplayer
-	msgbox gUnknown_8172E77, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1607DE
-	removeobject 1
-	additem ITEM_DOME_FOSSIL, 1
-	giveitemfanfaremsg gUnknown_8172ECD, ITEM_DOME_FOSSIL, 1, MUS_FAN5
+	msgbox MtMoon_B2F_Text_YouWantDomeFossil, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq MtMoon_B2F_EventScript_DontTakeFossil
+	removeobject LOCALID_DOME_FOSSIL
+	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_FAN5
 	closemessage
 	special sub_8112364
 	delay 10
-	applymovement 3, Movement_16077A
+	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
-	moveobjectoffscreen 3
+	moveobjectoffscreen LOCALID_MIGUEL
 	textcolor 0
 	playfanfare MUS_FAN5
-	message Text_172BD6
+	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage
 	waitfanfare
-	removeobject 2
-	setflag FLAG_0x272
-	setflag FLAG_0x232
+	removeobject LOCALID_HELIX_FOSSIL
+	setflag FLAG_GOT_DOME_FOSSIL
+	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
 
-Movement_16077A:: @ 816077A
-	step_13
-	step_11
-	step_11
-	step_11
+MtMoon_B2F_Movement_MiguelToHelixFossil:: @ 816077A
+	walk_right
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
-MtMoon_B2F_EventScript_16077F:: @ 816077F
+MtMoon_B2F_EventScript_HelixFossil:: @ 816077F
 	lock
 	faceplayer
-	msgbox gUnknown_8172E94, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1607DE
-	removeobject 2
-	additem ITEM_HELIX_FOSSIL, 1
-	giveitemfanfaremsg gUnknown_8172EB2, ITEM_HELIX_FOSSIL, 1, MUS_FAN5
+	msgbox MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq MtMoon_B2F_EventScript_DontTakeFossil
+	removeobject LOCALID_HELIX_FOSSIL
+	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_FAN5
 	closemessage
 	special sub_8112364
 	delay 10
-	applymovement 3, Movement_1607E0
+	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
-	moveobjectoffscreen 3
+	moveobjectoffscreen LOCALID_MIGUEL
 	textcolor 0
 	playfanfare MUS_FAN5
-	message Text_172BD6
+	message MtMoon_B2F_Text_ThenThisFossilIsMine
 	waitmessage
 	waitfanfare
-	removeobject 1
-	setflag FLAG_0x273
-	setflag FLAG_0x232
+	removeobject LOCALID_DOME_FOSSIL
+	setflag FLAG_GOT_HELIX_FOSSIL
+	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
 
-EventScript_1607DE:: @ 81607DE
+MtMoon_B2F_EventScript_DontTakeFossil:: @ 81607DE
 	release
 	end
 
-Movement_1607E0:: @ 81607E0
-	step_11
-	step_11
-	step_11
+MtMoon_B2F_Movement_MiguelToDomeFossil:: @ 81607E0
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
-MtMoon_B2F_EventScript_1607E4:: @ 81607E4
-	trainerbattle 0, 351, 0, Text_172C5A, Text_172CB8
-	msgbox gUnknown_8172CCB, 6
+MtMoon_B2F_EventScript_Grunt1:: @ 81607E4
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT, MtMoon_B2F_Text_Grunt1Intro, MtMoon_B2F_Text_Grunt1Defeat
+	msgbox MtMoon_B2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_B2F_EventScript_1607FB:: @ 81607FB
-	trainerbattle 0, 352, 0, Text_172CFC, Text_172D46
-	msgbox gUnknown_8172D51, 6
+MtMoon_B2F_EventScript_Grunt2:: @ 81607FB
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_2, MtMoon_B2F_Text_Grunt2Intro, MtMoon_B2F_Text_Grunt2Defeat
+	msgbox MtMoon_B2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_B2F_EventScript_160812:: @ 8160812
-	trainerbattle 0, 353, 0, Text_172D82, Text_172DAF
-	msgbox gUnknown_8172DC1, 6
+MtMoon_B2F_EventScript_Grunt3:: @ 8160812
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_3, MtMoon_B2F_Text_Grunt3Intro, MtMoon_B2F_Text_Grunt3Defeat
+	msgbox MtMoon_B2F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_B2F_EventScript_160829:: @ 8160829
-	trainerbattle 0, 354, 0, Text_172DF0, Text_172E3E
-	msgbox gUnknown_8172E4B, 6
+MtMoon_B2F_EventScript_Grunt4:: @ 8160829
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, MtMoon_B2F_Text_Grunt4Intro, MtMoon_B2F_Text_Grunt4Defeat
+	msgbox MtMoon_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end

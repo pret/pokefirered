@@ -14,81 +14,81 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "61",
+      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
       "x": 5,
       "y": 4,
       "elevation": 4,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B47F",
+      "script": "VermilionCity_PokemonFanClub_EventScript_Chairman",
       "flag": "0"
     },
     {
-      "graphics_id": "48",
+      "graphics_id": "OBJECT_EVENT_GFX_WORKER_F",
       "x": 6,
       "y": 4,
       "elevation": 4,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B4FC",
+      "script": "VermilionCity_PokemonFanClub_EventScript_WorkerF",
       "flag": "0"
     },
     {
-      "graphics_id": "120",
+      "graphics_id": "OBJECT_EVENT_GFX_PIKACHU",
       "x": 7,
       "y": 6,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B59E",
+      "script": "VermilionCity_PokemonFanClub_EventScript_Pikachu",
       "flag": "0"
     },
     {
-      "graphics_id": "126",
+      "graphics_id": "OBJECT_EVENT_GFX_SEEL",
       "x": 4,
       "y": 6,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B5B1",
+      "script": "VermilionCity_PokemonFanClub_EventScript_Seel",
       "flag": "0"
     },
     {
-      "graphics_id": "23",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_1",
       "x": 4,
       "y": 5,
       "elevation": 0,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B528",
+      "script": "VermilionCity_PokemonFanClub_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "27",
+      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
       "x": 7,
       "y": 5,
       "elevation": 0,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B563",
+      "script": "VermilionCity_PokemonFanClub_EventScript_FatMan",
       "flag": "0"
     }
   ],
@@ -122,14 +122,14 @@
       "x": 2,
       "y": 1,
       "elevation": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B5C4"
+      "script": "VermilionCity_PokemonFanClub_EventScript_RulesSign1"
     },
     {
       "type": "bg_event_type_0",
       "x": 9,
       "y": 1,
       "elevation": 0,
-      "script": "VermilionCity_PokemonFanClub_EventScript_16B5CD"
+      "script": "VermilionCity_PokemonFanClub_EventScript_RulesSign2"
     }
   ]
 }

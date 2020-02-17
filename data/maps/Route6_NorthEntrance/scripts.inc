@@ -1,88 +1,87 @@
 Route6_NorthEntrance_MapScripts:: @ 816F9C6
 	.byte 0
 
-Route6_NorthEntrance_EventScript_16F9C7:: @ 816F9C7
-	msgbox gUnknown_819E2A3, 2
+Route6_NorthEntrance_EventScript_Guard:: @ 816F9C7
+	msgbox Route6_NorthEntrance_Text_HiHowsItGoing, MSGBOX_NPC
 	end
 
-Route6_NorthEntrance_EventScript_16F9D0:: @ 816F9D0
+Route6_NorthEntrance_EventScript_GuardTriggerLeft:: @ 816F9D0
 	lockall
-	setvar VAR_0x4001, 0
-	goto EventScript_16F9F4
+	setvar VAR_TEMP_1, 0
+	goto Route6_NorthEntrance_EventScript_GuardTrigger
 	end
 
-Route6_NorthEntrance_EventScript_16F9DC:: @ 816F9DC
+Route6_NorthEntrance_EventScript_GuardTriggerMid:: @ 816F9DC
 	lockall
-	setvar VAR_0x4001, 1
-	goto EventScript_16F9F4
+	setvar VAR_TEMP_1, 1
+	goto Route6_NorthEntrance_EventScript_GuardTrigger
 	end
 
-Route6_NorthEntrance_EventScript_16F9E8:: @ 816F9E8
+Route6_NorthEntrance_EventScript_GuardTriggerRight:: @ 816F9E8
 	lockall
-	setvar VAR_0x4001, 2
-	goto EventScript_16F9F4
+	setvar VAR_TEMP_1, 2
+	goto Route6_NorthEntrance_EventScript_GuardTrigger
 	end
 
-EventScript_16F9F4:: @ 816F9F4
+Route6_NorthEntrance_EventScript_GuardTrigger:: @ 816F9F4
 	textcolor 0
-	applymovement 255, Movement_1A75EB
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16FA1E
-	msgbox gUnknown_819E181
+	goto_if_set FLAG_GOT_TEA, Route6_NorthEntrance_EventScript_GiveTea
+	msgbox Route6_NorthEntrance_Text_ThirstyOnGuardDuty
 	closemessage
-	applymovement 255, Movement_16FA8A
+	applymovement OBJ_EVENT_ID_PLAYER, Route6_NorthEntrance_Movement_BlockPlayerEntry
 	waitmovement 0
 	releaseall
 	end
 
-EventScript_16FA1E:: @ 816FA1E
+Route6_NorthEntrance_EventScript_GiveTea:: @ 816FA1E
 	removeitem ITEM_TEA, 1
-	goto EventScript_16FA29
+	goto Route6_NorthEntrance_EventScript_GuardDrinkTea
 	end
 
-EventScript_16FA29:: @ 816FA29
-	msgbox gUnknown_819E1D1
+Route6_NorthEntrance_EventScript_GuardDrinkTea:: @ 816FA29
+	msgbox Route6_NorthEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16FA62
-	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16FA6D
-	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16FA78
-	msgbox gUnknown_819E1F7
-	setvar VAR_0x4062, 1
+	compare VAR_TEMP_1, 0
+	call_if_eq Route6_NorthEntrance_EventScript_WalkToGuardLeft
+	compare VAR_TEMP_1, 1
+	call_if_eq Route6_NorthEntrance_EventScript_WalkToGuardMid
+	compare VAR_TEMP_1, 2
+	call_if_eq Route6_NorthEntrance_EventScript_WalkToGuardRight
+	msgbox Route6_NorthEntrance_Text_ThanksIllShareTeaWithGuards
+	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall
 	end
 
-EventScript_16FA62:: @ 816FA62
-	applymovement 255, Movement_16FA83
+Route6_NorthEntrance_EventScript_WalkToGuardLeft:: @ 816FA62
+	applymovement OBJ_EVENT_ID_PLAYER, Route6_NorthEntrance_Movement_WalkToGuardLeft
 	waitmovement 0
 	return
 
-EventScript_16FA6D:: @ 816FA6D
-	applymovement 255, Movement_16FA86
+Route6_NorthEntrance_EventScript_WalkToGuardMid:: @ 816FA6D
+	applymovement OBJ_EVENT_ID_PLAYER, Route6_NorthEntrance_Movement_WalkToGuardMid
 	waitmovement 0
 	return
 
-EventScript_16FA78:: @ 816FA78
-	applymovement 255, Movement_16FA88
+Route6_NorthEntrance_EventScript_WalkToGuardRight:: @ 816FA78
+	applymovement OBJ_EVENT_ID_PLAYER, Route6_NorthEntrance_Movement_WalkToGuardRight
 	waitmovement 0
 	return
 
-Movement_16FA83:: @ 816FA83
-	step_13
-	step_13
+Route6_NorthEntrance_Movement_WalkToGuardLeft:: @ 816FA83
+	walk_right
+	walk_right
 	step_end
 
-Movement_16FA86:: @ 816FA86
-	step_13
+Route6_NorthEntrance_Movement_WalkToGuardMid:: @ 816FA86
+	walk_right
 	step_end
 
-Movement_16FA88:: @ 816FA88
-	step_28
+Route6_NorthEntrance_Movement_WalkToGuardRight:: @ 816FA88
+	walk_in_place_right
 	step_end
 
-Movement_16FA8A:: @ 816FA8A
-	step_10
+Route6_NorthEntrance_Movement_BlockPlayerEntry:: @ 816FA8A
+	walk_down
 	step_end

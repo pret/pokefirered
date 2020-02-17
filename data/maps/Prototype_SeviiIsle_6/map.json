@@ -1,0 +1,25 @@
+{
+  "id": "MAP_PROTOTYPE_SEVII_ISLE_6",
+  "name": "Prototype_SeviiIsle_6",
+  "layout": "LAYOUT_PROTOTYPE_SEVII_ISLE_6",
+  "music": "MUS_NANASHIMA",
+  "region_map_section": "MAPSEC_SEVII_ISLE_6",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_3",
+  "allow_cycling": true,
+  "unknown_19": 6,
+  "floor_number": 0,
+  "battle_scene": "BATTLE_SCENE_0",
+  "connections": [
+    {
+      "map": "MAP_THREE_ISLAND",
+      "offset": 0,
+      "direction": "up"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
+}

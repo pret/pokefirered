@@ -1,36 +1,35 @@
 SilphCo_10F_MapScripts:: @ 8161D86
-	map_script 1, SilphCo_10F_MapScript1_161D8C
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_10F_OnLoad
 	.byte 0
 
-SilphCo_10F_MapScript1_161D8C:: @ 8161D8C
-	checkflag FLAG_0x28C
-	call_if 0, EventScript_1A84D6
+SilphCo_10F_OnLoad:: @ 8161D8C
+	call_if_unset FLAG_SILPH_10F_DOOR, EventScript_Close10FDoor
 	end
 
-SilphCo_10F_EventScript_161D96:: @ 8161D96
+SilphCo_10F_EventScript_WorkerF:: @ 8161D96
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
-	goto_if 4, EventScript_161DAD
-	msgbox gUnknown_8176DBA
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_10F_EventScript_WorkerFRocketsGone
+	msgbox SilphCo_10F_Text_WaaaImScared
 	release
 	end
 
-EventScript_161DAD:: @ 8161DAD
-	msgbox gUnknown_8176DCE
+SilphCo_10F_EventScript_WorkerFRocketsGone:: @ 8161DAD
+	msgbox SilphCo_10F_Text_KeepMeCryingASecret
 	release
 	end
 
-SilphCo_10F_EventScript_161DB7:: @ 8161DB7
-	msgbox gUnknown_8176DF8, 3
+SilphCo_10F_EventScript_FloorSign:: @ 8161DB7
+	msgbox SilphCo_10F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_10F_EventScript_161DC0:: @ 8161DC0
-	trainerbattle 0, 345, 0, Text_176D57, Text_176D73
-	msgbox gUnknown_8176D86, 6
+SilphCo_10F_EventScript_Travis:: @ 8161DC0
+	trainerbattle_single TRAINER_SCIENTIST_TRAVIS, SilphCo_10F_Text_TravisIntro, SilphCo_10F_Text_TravisDefeat
+	msgbox SilphCo_10F_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_10F_EventScript_161DD7:: @ 8161DD7
-	trainerbattle 0, 389, 0, Text_176CED, Text_176D18
-	msgbox gUnknown_8176D25, 6
+SilphCo_10F_EventScript_Grunt:: @ 8161DD7
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_39, SilphCo_10F_Text_GruntIntro, SilphCo_10F_Text_GruntDefeat
+	msgbox SilphCo_10F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
 	end

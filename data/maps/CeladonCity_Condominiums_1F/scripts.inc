@@ -1,68 +1,63 @@
 CeladonCity_Condominiums_1F_MapScripts:: @ 816C320
 	.byte 0
 
-CeladonCity_Condominiums_1F_EventScript_16C321:: @ 816C321
+CeladonCity_Condominiums_1F_EventScript_TeaWoman:: @ 816C321
 	lock
 	faceplayer
-	checkflag FLAG_0x2F8
-	goto_if_eq EventScript_16C36A
-	checkflag FLAG_0x82C
-	goto_if_eq EventScript_16C374
-	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16C36A
-	msgbox gUnknown_81960C9
-	setflag FLAG_0x2A6
+	goto_if_set FLAG_TALKED_TO_TEA_LADY_AFTER_HOF, CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea
+	goto_if_set FLAG_SYS_GAME_CLEAR, CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy
+	goto_if_set FLAG_GOT_TEA, CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea
+	msgbox CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead
+	setflag FLAG_GOT_TEA
 	giveitem ITEM_TEA
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A6BF9
-	msgbox gUnknown_8196109
+	compare VAR_RESULT, FALSE
+	goto_if_eq EventScript_BagIsFull
+	msgbox CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea
 	release
 	end
 
-EventScript_16C36A:: @ 816C36A
-	msgbox gUnknown_8196148
+CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea:: @ 816C36A
+	msgbox CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany
 	release
 	end
 
-EventScript_16C374:: @ 816C374
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	setflag FLAG_0x2F8
-	msgbox gUnknown_8196188
+CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy:: @ 816C374
+	famechecker FAMECHECKER_DAISY, 4
+	setflag FLAG_TALKED_TO_TEA_LADY_AFTER_HOF
+	msgbox CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_16C38E:: @ 816C38E
+CeladonCity_Condominiums_1F_EventScript_Meowth:: @ 816C38E
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_MEOWTH, 0
-	msgbox gUnknown_81960BB
+	msgbox CeladonCity_Condominiums_1F_Text_Meowth
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_16C3A1:: @ 816C3A1
+CeladonCity_Condominiums_1F_EventScript_Clefairy:: @ 816C3A1
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_CLEFAIRY, 0
-	msgbox gUnknown_819625B
+	msgbox CeladonCity_Condominiums_1F_Text_Clefairy
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_16C3B4:: @ 816C3B4
+CeladonCity_Condominiums_1F_EventScript_Nidoran:: @ 816C3B4
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_NIDORAN_F, 0
-	msgbox gUnknown_8196272
+	msgbox CeladonCity_Condominiums_1F_Text_Nidoran
 	waitmoncry
 	release
 	end
 
-CeladonCity_Condominiums_1F_EventScript_16C3C7:: @ 816C3C7
-	msgbox gUnknown_8196287, 3
+CeladonCity_Condominiums_1F_EventScript_SuiteSign:: @ 816C3C7
+	msgbox CeladonCity_Condominiums_1F_Text_ManagersSuite, MSGBOX_SIGN
 	end

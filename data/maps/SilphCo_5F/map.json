@@ -14,120 +14,120 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 35,
       "y": 7,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_5F_EventScript_161853",
-      "flag": "83"
+      "script": "SilphCo_5F_EventScript_Grunt2",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
       "x": 23,
       "y": 13,
       "elevation": 3,
-      "movement_type": "13",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_5F_EventScript_16186A",
-      "flag": "83"
+      "script": "SilphCo_5F_EventScript_Dalton",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "47",
+      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
       "x": 16,
       "y": 13,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1617E0",
+      "script": "SilphCo_5F_EventScript_WorkerM",
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 11,
       "y": 6,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SilphCo_5F_EventScript_161825",
-      "flag": "83"
+      "script": "SilphCo_5F_EventScript_Beau",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 9,
       "y": 21,
       "elevation": 3,
-      "movement_type": "16",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_5F_EventScript_16183C",
-      "flag": "83"
+      "script": "SilphCo_5F_EventScript_Grunt1",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 9,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1BE89A",
-      "flag": "400"
+      "script": "SilphCo_5F_EventScript_ItemProtein",
+      "flag": "FLAG_HIDE_SILPH_CO_5F_PROTEIN"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 1,
       "y": 18,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1BE8A7",
-      "flag": "401"
+      "script": "SilphCo_5F_EventScript_ItemTM01",
+      "flag": "FLAG_HIDE_SILPH_CO_5F_TM01"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 22,
       "y": 21,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1BE8B4",
-      "flag": "402"
+      "script": "SilphCo_5F_EventScript_ItemCardKey",
+      "flag": "FLAG_HIDE_SILPH_CO_5F_CARD_KEY"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 2,
       "y": 7,
       "elevation": 3,
-      "movement_type": "28",
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_5F_EventScript_1AD0D4",
+      "script": "SilphCo_5F_EventScript_Scientist",
       "flag": "0"
     }
   ],
@@ -190,113 +190,114 @@
       "y": 16,
       "elevation": 0,
       "item": "ITEM_ELIXIR",
-      "flag": "24",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_5F_ELIXIR",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89B7"
+      "script": "SilphCo_5F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 10,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89B7"
+      "script": "SilphCo_5F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 18,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89D1"
+      "script": "SilphCo_5F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 19,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89D1"
+      "script": "SilphCo_5F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 19,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89EB"
+      "script": "SilphCo_5F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 19,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89EB"
+      "script": "SilphCo_5F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 9,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89B7"
+      "script": "SilphCo_5F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 10,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89B7"
+      "script": "SilphCo_5F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 19,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89D1"
+      "script": "SilphCo_5F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 7,
       "y": 18,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89D1"
+      "script": "SilphCo_5F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 18,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89EB"
+      "script": "SilphCo_5F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 18,
       "y": 14,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_1A89EB"
+      "script": "SilphCo_5F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 28,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_161813"
+      "script": "SilphCo_5F_EventScript_PokemonReport3"
     },
     {
       "type": "bg_event_type_0",
       "x": 30,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_16180A"
+      "script": "SilphCo_5F_EventScript_PokemonReport2"
     },
     {
       "type": "bg_event_type_0",
       "x": 25,
       "y": 15,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_161801"
+      "script": "SilphCo_5F_EventScript_PokemonReport1"
     },
     {
       "type": "hidden_item",
@@ -304,15 +305,16 @@
       "y": 9,
       "elevation": 0,
       "item": "ITEM_PP_UP",
-      "flag": "138",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_5F_PP_UP",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",
       "x": 29,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_5F_EventScript_16181C"
+      "script": "SilphCo_5F_EventScript_FloorSign"
     }
   ]
 }

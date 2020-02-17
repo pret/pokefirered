@@ -14,11 +14,11 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "76",
+      "graphics_id": "OBJECT_EVENT_GFX_DAISY",
       "x": 10,
       "y": 6,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 3,
       "trainer_type": 0,
@@ -27,17 +27,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "93",
+      "graphics_id": "OBJECT_EVENT_GFX_TOWN_MAP",
       "x": 6,
       "y": 4,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "PalletTown_GarysHouse_EventScript_168F63",
-      "flag": "57"
+      "flag": "FLAG_HIDE_TOWN_MAP"
     }
   ],
   "warp_events": [

@@ -1,16 +1,16 @@
 SSAnne_1F_Room2_MapScripts:: @ 8160BE5
 	.byte 0
 
-SSAnne_1F_Room2_EventScript_160BE6:: @ 8160BE6
-	msgbox gUnknown_8173AC5, 2
+SSAnne_1F_Room2_EventScript_Woman:: @ 8160BE6
+	msgbox SSAnne_1F_Room2_Text_CruisingAroundWorld, MSGBOX_NPC
 	end
 
-SSAnne_1F_Room2_EventScript_160BEF:: @ 8160BEF
-	trainerbattle 0, 126, 0, Text_173A1A, Text_173A4F
-	msgbox gUnknown_8173A7A, 6
+SSAnne_1F_Room2_EventScript_Ann:: @ 8160BEF
+	trainerbattle_single TRAINER_LASS_ANN, SSAnne_1F_Room2_Text_AnnIntro, SSAnne_1F_Room2_Text_AnnDefeat
+	msgbox SSAnne_1F_Room2_Text_AnnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SSAnne_1F_Room2_EventScript_160C06:: @ 8160C06
-	trainerbattle 0, 96, 0, Text_173999, Text_1739B1
-	msgbox gUnknown_81739C5, 6
+SSAnne_1F_Room2_EventScript_Tyler:: @ 8160C06
+	trainerbattle_single TRAINER_YOUNGSTER_TYLER, SSAnne_1F_Room2_Text_TylerIntro, SSAnne_1F_Room2_Text_TylerDefeat
+	msgbox SSAnne_1F_Room2_Text_TylerPostBattle, MSGBOX_AUTOCLOSE
 	end

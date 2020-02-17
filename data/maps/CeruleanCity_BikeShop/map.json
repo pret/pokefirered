@@ -14,42 +14,42 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "25",
+      "graphics_id": "OBJECT_EVENT_GFX_MAN",
       "x": 9,
       "y": 3,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16ABBD",
+      "script": "CeruleanCity_BikeShop_EventScript_Clerk",
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 9,
       "y": 7,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC75",
+      "script": "CeruleanCity_BikeShop_EventScript_Youngster",
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 5,
       "y": 5,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC6C",
+      "script": "CeruleanCity_BikeShop_EventScript_Woman",
       "flag": "0"
     }
   ],
@@ -83,56 +83,56 @@
       "x": 4,
       "y": 3,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 4,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 5,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 3,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 1,
       "y": 4,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 5,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 7,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 8,
       "elevation": 0,
-      "script": "CeruleanCity_BikeShop_EventScript_16AC94"
+      "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     }
   ]
 }

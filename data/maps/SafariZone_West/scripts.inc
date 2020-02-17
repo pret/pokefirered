@@ -1,18 +1,18 @@
 SafariZone_West_MapScripts:: @ 81623C6
 	.byte 0
 
-SafariZone_West_EventScript_1623C7:: @ 81623C7
-	msgbox gUnknown_817796E, 3
+SafariZone_West_EventScript_RestHouseSign:: @ 81623C7
+	msgbox SafariZone_West_Text_RestHouse, MSGBOX_SIGN
 	end
 
-SafariZone_West_EventScript_1623D0:: @ 81623D0
-	msgbox gUnknown_8177979, 3
+SafariZone_West_EventScript_LostTeethNotice:: @ 81623D0
+	msgbox SafariZone_West_Text_PleaseFindWardensLostTeeth, MSGBOX_SIGN
 	end
 
-SafariZone_West_EventScript_1623D9:: @ 81623D9
-	msgbox gUnknown_81779F8, 3
+SafariZone_West_EventScript_TrainerTips:: @ 81623D9
+	msgbox SafariZone_West_Text_SearchForSecretHouse, MSGBOX_SIGN
 	end
 
-SafariZone_West_EventScript_1623E2:: @ 81623E2
-	msgbox gUnknown_8177A41, 3
+SafariZone_West_EventScript_AreaSign:: @ 81623E2
+	msgbox SafariZone_West_Text_AreaSign, MSGBOX_SIGN
 	end

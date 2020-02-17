@@ -1,208 +1,200 @@
 PewterCity_Museum_1F_MapScripts:: @ 816A31A
 	.byte 0
 
-PewterCity_Museum_1F_EventScript_16A31B:: @ 816A31B
+PewterCity_Museum_1F_EventScript_Scientist1:: @ 816A31B
 	lock
 	faceplayer
-	compare_var_to_value VAR_FACING, 3
-	goto_if_eq EventScript_16A348
-	compare_var_to_value VAR_FACING, 1
-	goto_if_eq EventScript_16A348
-	compare_var_to_value VAR_FACING, 2
-	goto_if_eq EventScript_16A348
-	msgbox gUnknown_8190539
+	compare VAR_FACING, DIR_WEST
+	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	compare VAR_FACING, DIR_SOUTH
+	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	compare VAR_FACING, DIR_NORTH
+	goto_if_eq PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
+	msgbox PewterCity_Museum_1F_Text_PleaseEnjoyYourself
 	release
 	end
 
-EventScript_16A348:: @ 816A348
-	msgbox gUnknown_8190550, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16A367
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A37B
+PewterCity_Museum_1F_EventScript_Scientist1BehindCounter:: @ 816A348
+	msgbox PewterCity_Museum_1F_Text_DoYouKnowWhatAmberIs, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter
+	compare VAR_RESULT, NO
+	goto_if_eq PewterCity_Museum_1F_EventScript_ExplainAmber
 	end
 
-EventScript_16A367:: @ 816A367
-	msgbox gUnknown_81905B1
-	applymovement 1, Movement_1A75E5
-	waitmovement 0
-	release
-	end
-
-EventScript_16A37B:: @ 816A37B
-	msgbox gUnknown_8190627
-	applymovement 1, Movement_1A75E5
+PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter:: @ 816A367
+	msgbox PewterCity_Museum_1F_Text_AmberContainsGeneticMatter
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_16A38F:: @ 816A38F
-	lockall
-	setvar VAR_0x4001, 0
-	applymovement 255, Movement_1A75EB
+PewterCity_Museum_1F_EventScript_ExplainAmber:: @ 816A37B
+	msgbox PewterCity_Museum_1F_Text_AmberIsFossilizedSap
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
-	goto EventScript_16A3D1
+	release
 	end
 
-PewterCity_Museum_1F_EventScript_16A3A5:: @ 816A3A5
+PewterCity_Museum_1F_EventScript_EntranceTriggerLeft:: @ 816A38F
 	lockall
-	setvar VAR_0x4001, 1
-	applymovement 255, Movement_1A75EB
+	setvar VAR_TEMP_1, 0
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	goto EventScript_16A3D1
+	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
 
-PewterCity_Museum_1F_EventScript_16A3BB:: @ 816A3BB
+PewterCity_Museum_1F_EventScript_EntranceTriggerMid:: @ 816A3A5
 	lockall
-	setvar VAR_0x4001, 2
-	applymovement 255, Movement_1A75EB
+	setvar VAR_TEMP_1, 1
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
-	goto EventScript_16A3D1
+	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
 
-EventScript_16A3D1:: @ 816A3D1
+PewterCity_Museum_1F_EventScript_EntranceTriggerRight:: @ 816A3BB
+	lockall
+	setvar VAR_TEMP_1, 2
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
+	waitmovement 0
+	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
+	end
+
+PewterCity_Museum_1F_EventScript_EntranceTrigger:: @ 816A3D1
 	textcolor 0
 	showmoneybox 0, 0, 0
-	msgbox gUnknown_81904B5, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16A402
-	msgbox gUnknown_81904F9
+	msgbox PewterCity_Museum_1F_Text_Its50YForChildsTicket, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq PewterCity_Museum_1F_EventScript_TryPayForTicket
+	msgbox PewterCity_Museum_1F_Text_ComeAgain
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
-	applymovement 255, Movement_16A48E
+	hidemoneybox 0, 0
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall
 	end
 
-EventScript_16A402:: @ 816A402
+PewterCity_Museum_1F_EventScript_TryPayForTicket:: @ 816A402
 	checkmoney 50, 0
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A476
+	compare VAR_RESULT, FALSE
+	goto_if_eq PewterCity_Museum_1F_EventScript_NotEnoughMoney
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16A455
-	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16A460
-	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16A46B
+	compare VAR_TEMP_1, 0
+	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterLeft
+	compare VAR_TEMP_1, 1
+	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterMid
+	compare VAR_TEMP_1, 2
+	call_if_eq PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight
 	playse SE_SHOP
-	takemoney 50, 0
+	removemoney 50, 0
 	updatemoneybox 0, 0, 0
 	waitse
-	msgbox gUnknown_8190505
-	setvar VAR_0x4061, 1
-	hidemoneybox
-	.byte 0
-	.byte 0
+	msgbox PewterCity_Museum_1F_Text_Right50YThankYou
+	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 1
+	hidemoneybox 0, 0
 	releaseall
 	end
 
-EventScript_16A455:: @ 816A455
-	applymovement 255, Movement_16A490
+PewterCity_Museum_1F_EventScript_PlayerApproachCounterLeft:: @ 816A455
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterLeft
 	waitmovement 0
 	return
 
-EventScript_16A460:: @ 816A460
-	applymovement 255, Movement_16A495
+PewterCity_Museum_1F_EventScript_PlayerApproachCounterMid:: @ 816A460
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterMid
 	waitmovement 0
 	return
 
-EventScript_16A46B:: @ 816A46B
-	applymovement 255, Movement_16A499
+PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight:: @ 816A46B
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterRight
 	waitmovement 0
 	return
 
-EventScript_16A476:: @ 816A476
-	msgbox gUnknown_819051C
+PewterCity_Museum_1F_EventScript_NotEnoughMoney:: @ 816A476
+	msgbox PewterCity_Museum_1F_Text_DontHaveEnoughMoney
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
-	applymovement 255, Movement_16A48E
+	hidemoneybox 0, 0
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall
 	end
 
-Movement_16A48E:: @ 816A48E
-	step_10
+PewterCity_Museum_1F_Movement_ForcePlayerExit:: @ 816A48E
+	walk_down
 	step_end
 
-Movement_16A490:: @ 816A490
-	step_13
-	step_13
-	step_1b
-	step_28
+PewterCity_Museum_1F_Movement_ApproachCounterLeft:: @ 816A490
+	walk_right
+	walk_right
+	delay_8
+	walk_in_place_right
 	step_end
 
-Movement_16A495:: @ 816A495
-	step_13
-	step_1b
-	step_28
+PewterCity_Museum_1F_Movement_ApproachCounterMid:: @ 816A495
+	walk_right
+	delay_8
+	walk_in_place_right
 	step_end
 
-Movement_16A499:: @ 816A499
-	step_1b
-	step_28
+PewterCity_Museum_1F_Movement_ApproachCounterRight:: @ 816A499
+	delay_8
+	walk_in_place_right
 	step_end
 
-PewterCity_Museum_1F_EventScript_16A49C:: @ 816A49C
-	msgbox gUnknown_81908CD, 2
+PewterCity_Museum_1F_EventScript_Scientist2:: @ 816A49C
+	msgbox PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit, MSGBOX_NPC
 	end
 
-PewterCity_Museum_1F_EventScript_16A4A5:: @ 816A4A5
-	msgbox gUnknown_81906B4, 2
+PewterCity_Museum_1F_EventScript_OldMan:: @ 816A4A5
+	msgbox PewterCity_Museum_1F_Text_ShouldBeGratefulForLongLife, MSGBOX_NPC
 	end
 
-PewterCity_Museum_1F_EventScript_16A4AE:: @ 816A4AE
+PewterCity_Museum_1F_EventScript_OldAmberScientist:: @ 816A4AE
 	lock
 	faceplayer
-	checkflag FLAG_0x25E
-	goto_if_eq EventScript_16A4FF
-	msgbox gUnknown_8190717
+	goto_if_set FLAG_GOT_OLD_AMBER, PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber
+	msgbox PewterCity_Museum_1F_Text_WantYouToGetAmberExamined
 	checkitemspace ITEM_OLD_AMBER, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16A4F5
-	setflag FLAG_0x25E
+	compare VAR_RESULT, FALSE
+	goto_if_eq PewterCity_Museum_1F_EventScript_NoRoomForOldAmber
+	setflag FLAG_GOT_OLD_AMBER
 	removeobject 4
-	additem ITEM_OLD_AMBER, 1
-	giveitemfanfaremsg gUnknown_8190866, ITEM_OLD_AMBER, 1, MUS_FAN5
+	giveitem_msg PewterCity_Museum_1F_Text_ReceivedOldAmberFromMan, ITEM_OLD_AMBER, 1, MUS_FAN5
 	release
 	end
 
-EventScript_16A4F5:: @ 816A4F5
-	msgbox gUnknown_81908AE
+PewterCity_Museum_1F_EventScript_NoRoomForOldAmber:: @ 816A4F5
+	msgbox PewterCity_Museum_1F_Text_DontHaveSpaceForThis
 	release
 	end
 
-EventScript_16A4FF:: @ 816A4FF
-	msgbox gUnknown_819088E
+PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber:: @ 816A4FF
+	msgbox PewterCity_Museum_1F_Text_GetOldAmberChecked
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_16A509:: @ 816A509
-	msgbox gUnknown_819090A, 2
+PewterCity_Museum_1F_EventScript_OldAmber:: @ 816A509
+	msgbox PewterCity_Museum_1F_Text_BeautifulPieceOfAmber, MSGBOX_NPC
 	end
 
-PewterCity_Museum_1F_EventScript_16A512:: @ 816A512
+PewterCity_Museum_1F_EventScript_AerodactylFossil:: @ 816A512
 	lockall
 	setvar VAR_0x8004, SPECIES_AERODACTYL
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
-	special sub_809D504
-	msgbox gUnknown_8190945
-	special sub_809D620
+	special Special_OpenMuseumFossilPic
+	msgbox PewterCity_Museum_1F_Text_AerodactylFossil
+	special Special_CloseMuseumFossilPic
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_16A532:: @ 816A532
+PewterCity_Museum_1F_EventScript_KabutopsFossil:: @ 816A532
 	lockall
 	setvar VAR_0x8004, SPECIES_KABUTOPS
 	setvar VAR_0x8005, 10
 	setvar VAR_0x8006, 3
-	special sub_809D504
-	msgbox gUnknown_8190975
-	special sub_809D620
+	special Special_OpenMuseumFossilPic
+	msgbox PewterCity_Museum_1F_Text_KabutopsFossil
+	special Special_CloseMuseumFossilPic
 	releaseall
 	end

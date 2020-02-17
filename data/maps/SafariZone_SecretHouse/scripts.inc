@@ -1,28 +1,26 @@
 SafariZone_SecretHouse_MapScripts:: @ 8162452
 	.byte 0
 
-SafariZone_SecretHouse_EventScript_162453:: @ 8162453
+SafariZone_SecretHouse_EventScript_Attendant:: @ 8162453
 	lock
 	faceplayer
-	checkflag FLAG_0x239
-	goto_if_eq EventScript_1624A9
-	msgbox gUnknown_8177DC1
+	goto_if_set FLAG_GOT_HM03, SafariZone_SecretHouse_EventScript_ExplainSurf
+	msgbox SafariZone_SecretHouse_Text_CongratsYouveWon
 	checkitemspace ITEM_HM03, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16249F
-	additem ITEM_HM03, 1
-	giveitemfanfaremsg gUnknown_8177E92, ITEM_HM03
-	msgbox gUnknown_8177EB7
-	setflag FLAG_0x239
+	compare VAR_RESULT, FALSE
+	goto_if_eq SafariZone_SecretHouse_EventScript_NoRoomForHM03
+	giveitem_msg SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant, ITEM_HM03
+	msgbox SafariZone_SecretHouse_Text_ExplainSurf
+	setflag FLAG_GOT_HM03
 	release
 	end
 
-EventScript_16249F:: @ 816249F
-	msgbox gUnknown_8177F72
+SafariZone_SecretHouse_EventScript_NoRoomForHM03:: @ 816249F
+	msgbox SafariZone_SecretHouse_Text_DontHaveRoomForPrize
 	release
 	end
 
-EventScript_1624A9:: @ 81624A9
-	msgbox gUnknown_8177EB7
+SafariZone_SecretHouse_EventScript_ExplainSurf:: @ 81624A9
+	msgbox SafariZone_SecretHouse_Text_ExplainSurf
 	release
 	end

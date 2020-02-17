@@ -1,12 +1,12 @@
 PalletTown_GarysHouse_MapScripts:: @ 8168D27
-	map_script 3, PalletTown_GarysHouse_MapScript1_168D2D
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_GarysHouse_OnTransition
 	.byte 0
 
-PalletTown_GarysHouse_MapScript1_168D2D:: @ 8168D2D
-	compare_var_to_value VAR_0x4058, 2
-	call_if 0, EventScript_168D44
-	compare_var_to_value VAR_0x4058, 2
-	call_if 4, EventScript_168D50
+PalletTown_GarysHouse_OnTransition:: @ 8168D2D
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	call_if_lt EventScript_168D44
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
+	call_if_ge EventScript_168D50
 	end
 
 EventScript_168D44:: @ 8168D44
@@ -15,28 +15,25 @@ EventScript_168D44:: @ 8168D44
 	return
 
 EventScript_168D50:: @ 8168D50
-	setvar VAR_0x4001, 1
+	setvar VAR_TEMP_1, 1
 	return
 
 PalletTown_GarysHouse_EventScript_168D56:: @ 8168D56
 	lock
 	faceplayer
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	checkflag FLAG_0x82C
-	goto_if_eq EventScript_168DB9
-	compare_var_to_value VAR_0x4001, 1
+	famechecker FAMECHECKER_DAISY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	goto_if_set FLAG_SYS_GAME_CLEAR, EventScript_168DB9
+	compare VAR_TEMP_1, 1
 	goto_if_eq EventScript_168EEC
-	compare_var_to_value VAR_0x4058, 2
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	goto_if_eq EventScript_168F59
-	compare_var_to_value VAR_0x4058, 1
+	compare VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 1
 	goto_if_eq EventScript_168EF6
-	compare_var_to_value VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
-	goto_if 4, EventScript_168DAF
+	compare VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
+	goto_if_ge EventScript_168DAF
 	msgbox gUnknown_818D58C
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -47,33 +44,31 @@ EventScript_168DAF:: @ 8168DAF
 	end
 
 EventScript_168DB9:: @ 8168DB9
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
-	compare_var_to_value VAR_0x4025, 500
-	goto_if 0, EventScript_168E46
+	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
+	goto_if_lt EventScript_168E46
 	msgbox gUnknown_818D7D3, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_168E3C
 	msgbox gUnknown_818D8B2
-	special sub_80BF8FC
+	special Special_ChooseMonFromParty
 	waitstate
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_168E3C
-	specialvar VAR_RESULT, sub_80CAD54
-	compare_var_to_value VAR_RESULT, SPECIES_EGG
+	compare VAR_0x8004, 6
+	goto_if_ge EventScript_168E3C
+	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
+	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq EventScript_168E32
 	msgbox gUnknown_818D8CC
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special sub_80CC948
-	fadescreen 0
-	special TV_CopyNicknameToStringVar1AndEnsureTerminated
+	special Special_DaisyMassageServices
+	fadescreen FADE_FROM_BLACK
+	special Special_GetMonNickname
 	msgbox gUnknown_818D8FE
 	release
 	end
@@ -90,7 +85,7 @@ EventScript_168E3C:: @ 8168E3C
 
 EventScript_168E46:: @ 8168E46
 	msgbox gUnknown_818D9A5
-	specialvar VAR_RESULT, sub_80CA76C
+	specialvar VAR_RESULT, Special_GetLeadMonFriendship
 	switch VAR_RESULT
 	case 0, EventScript_168EA6
 	case 1, EventScript_168EB0
@@ -145,18 +140,17 @@ EventScript_168EF6:: @ 8168EF6
 	msgbox gUnknown_818D60A
 	closemessage
 	checkitemspace ITEM_TOWN_MAP, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_168F4F
-	applymovement 1, Movement_1A75EB
+	applymovement 1, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	removeobject 2
-	setvar VAR_0x4058, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_GARYS_HOUSE, 2
 	delay 15
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	delay 12
-	additem ITEM_TOWN_MAP, 1
-	giveitemfanfaremsg gUnknown_818D661, ITEM_TOWN_MAP, 1, MUS_FAN5
+	giveitem_msg gUnknown_818D661, ITEM_TOWN_MAP, 1, MUS_FAN5
 	release
 	end
 
@@ -171,13 +165,13 @@ EventScript_168F59:: @ 8168F59
 	end
 
 PalletTown_GarysHouse_EventScript_168F63:: @ 8168F63
-	msgbox gUnknown_818D763, 2
+	msgbox gUnknown_818D763, MSGBOX_NPC
 	end
 
 PalletTown_GarysHouse_EventScript_168F6C:: @ 8168F6C
-	msgbox gUnknown_818D7A1, 3
+	msgbox gUnknown_818D7A1, MSGBOX_SIGN
 	end
 
 PalletTown_GarysHouse_EventScript_168F75:: @ 8168F75
-	msgbox gUnknown_818DC47, 3
+	msgbox gUnknown_818DC47, MSGBOX_SIGN
 	end

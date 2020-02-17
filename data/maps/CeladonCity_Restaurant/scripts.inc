@@ -1,43 +1,41 @@
 CeladonCity_Restaurant_MapScripts:: @ 816D1EA
 	.byte 0
 
-CeladonCity_Restaurant_EventScript_16D1EB:: @ 816D1EB
-	msgbox gUnknown_81978E6, 2
+CeladonCity_Restaurant_EventScript_Chef:: @ 816D1EB
+	msgbox CeladonCity_Restaurant_Text_TakingBreakRightNow, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_16D1F4:: @ 816D1F4
-	msgbox gUnknown_8197915, 2
+CeladonCity_Restaurant_EventScript_Woman:: @ 816D1F4
+	msgbox CeladonCity_Restaurant_Text_OftenGoToDrugstore, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_16D1FD:: @ 816D1FD
+CeladonCity_Restaurant_EventScript_CoinCaseMan:: @ 816D1FD
 	lock
 	faceplayer
-	checkflag FLAG_GOT_COIN_CASE
-	goto_if_eq EventScript_16D24B
-	msgbox gUnknown_81979C1
+	goto_if_set FLAG_GOT_COIN_CASE, CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase
+	msgbox CeladonCity_Restaurant_Text_TakeThisImBusted
 	checkitemspace ITEM_COIN_CASE, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D241
-	additem ITEM_COIN_CASE, 1
-	giveitemfanfaremsg gUnknown_8197A38, ITEM_COIN_CASE
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeladonCity_Restaurant_EventScript_NoRoomForCoinCase
+	giveitem_msg CeladonCity_Restaurant_Text_ReceivedCoinCaseFromMan, ITEM_COIN_CASE
 	setflag FLAG_GOT_COIN_CASE
 	release
 	end
 
-EventScript_16D241:: @ 816D241
-	msgbox gUnknown_8197A5E
+CeladonCity_Restaurant_EventScript_NoRoomForCoinCase:: @ 816D241
+	msgbox CeladonCity_Restaurant_Text_MakeRoomForThis
 	release
 	end
 
-EventScript_16D24B:: @ 816D24B
-	msgbox gUnknown_8197A72
+CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase:: @ 816D24B
+	msgbox CeladonCity_Restaurant_Text_ThoughtIdWinItBack
 	release
 	end
 
-CeladonCity_Restaurant_EventScript_16D255:: @ 816D255
-	msgbox gUnknown_8197952, 2
+CeladonCity_Restaurant_EventScript_WorkerM:: @ 816D255
+	msgbox CeladonCity_Restaurant_Text_PsstBasementUnderGameCorner, MSGBOX_NPC
 	end
 
-CeladonCity_Restaurant_EventScript_16D25E:: @ 816D25E
-	msgbox gUnknown_819798A, 2
+CeladonCity_Restaurant_EventScript_FatMan:: @ 816D25E
+	msgbox CeladonCity_Restaurant_Text_ManLostItAllAtSlots, MSGBOX_NPC
 	end

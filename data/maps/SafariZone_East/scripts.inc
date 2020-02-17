@@ -1,14 +1,14 @@
 SafariZone_East_MapScripts:: @ 816237C
 	.byte 0
 
-SafariZone_East_EventScript_16237D:: @ 816237D
-	msgbox gUnknown_817783B, 3
+SafariZone_East_EventScript_RestHouseSign:: @ 816237D
+	msgbox SafariZone_East_Text_RestHouse, MSGBOX_SIGN
 	end
 
-SafariZone_East_EventScript_162386:: @ 8162386
-	msgbox gUnknown_8177846, 3
+SafariZone_East_EventScript_TrainerTips:: @ 8162386
+	msgbox SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk, MSGBOX_SIGN
 	end
 
-SafariZone_East_EventScript_16238F:: @ 816238F
-	msgbox gUnknown_8177884, 3
+SafariZone_East_EventScript_AreaSign:: @ 816238F
+	msgbox SafariZone_East_Text_AreaSign, MSGBOX_SIGN
 	end

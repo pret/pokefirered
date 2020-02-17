@@ -1,192 +1,197 @@
+.equ LOCALID_ROCKET1, 1
+.equ LOCALID_ROCKET2, 2
+.equ LOCALID_LORELEI, 3
+.equ LOCALID_ROCKET3, 4
+
 FourIsland_IcefallCave_Back_MapScripts:: @ 8163D82
-	map_script 3, FourIsland_IcefallCave_Back_MapScript1_163D88
+	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_IcefallCave_Back_OnTransition
 	.byte 0
 
-FourIsland_IcefallCave_Back_MapScript1_163D88:: @ 8163D88
-	compare_var_to_value VAR_0x4080, 1
-	call_if 1, EventScript_163D94
+FourIsland_IcefallCave_Back_OnTransition:: @ 8163D88
+	compare VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
+	call_if_eq FourIsland_IcefallCave_Back_EventScript_HideLorelei
 	end
 
-EventScript_163D94:: @ 8163D94
-	setflag FLAG_0x08B
+FourIsland_IcefallCave_Back_EventScript_HideLorelei:: @ 8163D94
+	setflag FLAG_HIDE_ICEFALL_CAVE_LORELEI
 	return
 
-FourIsland_IcefallCave_Back_EventScript_163D98:: @ 8163D98
+FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene:: @ 8163D98
 	lockall
 	textcolor 1
-	msgbox gUnknown_817B04F
-	applymovement 1, Movement_163EE8
+	msgbox FourIsland_IcefallCave_Back_Text_LoreleiKeepHandsOffMons
+	applymovement LOCALID_ROCKET1, FourIsland_IcefallCave_Back_Movement_WalkInPlaceDown
 	waitmovement 0
 	textcolor 0
-	msgbox gUnknown_817B0B9
+	msgbox FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe
 	closemessage
 	playse SE_PIN
-	applymovement 3, Movement_1A75DB
+	applymovement LOCALID_LORELEI, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 3, Movement_1A75ED
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 3, Movement_1A75DD
+	applymovement LOCALID_LORELEI, Movement_Delay48
 	waitmovement 0
 	textcolor 1
-	msgbox gUnknown_817B109
+	msgbox FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut
 	closemessage
-	applymovement 3, Movement_1A75EB
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 18
-	applymovement 3, Movement_1A75ED
+	applymovement LOCALID_LORELEI, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 35
-	applymovement 4, Movement_163F11
-	applymovement 3, Movement_163F18
-	applymovement 255, Movement_163EDD
+	applymovement LOCALID_ROCKET3, FourIsland_IcefallCave_Back_Movement_Rocket3FaceLorelei
+	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_LoreleiToRockets
+	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_IcefallCave_Back_Movement_PlayerToRockets
 	waitmovement 0
-	applymovement 2, Movement_163EE8
+	applymovement LOCALID_ROCKET2, FourIsland_IcefallCave_Back_Movement_WalkInPlaceDown
 	waitmovement 0
 	playbgm MUS_ROCKET, 0
 	textcolor 0
-	msgbox gUnknown_817B20B
-	setvar VAR_LAST_TALKED, 4
-	trainerbattle 3, 539, 0, Text_17B251
-	applymovement 3, Movement_163F1B
+	msgbox FourIsland_IcefallCave_Back_Text_GruntIntro
+	setvar VAR_LAST_TALKED, LOCALID_ROCKET3
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_45, FourIsland_IcefallCave_Back_Text_GruntDefeat
+	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_WalkInPlaceUp
 	waitmovement 0
 	textcolor 1
-	msgbox gUnknown_817B269
+	msgbox FourIsland_IcefallCave_Back_Text_LoreleiWhereHaveYouTakenMons
 	textcolor 0
-	msgbox gUnknown_817B2EF
+	msgbox FourIsland_IcefallCave_Back_Text_NotTellingYouThat
 	textcolor 1
-	message Text_17B313
+	message FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou
 	waitmessage
 	waitse
 	playmoncry SPECIES_LAPRAS, 2
 	waitbuttonpress
 	waitmoncry
-	applymovement 1, Movement_163EEE
+	applymovement LOCALID_ROCKET1, FourIsland_IcefallCave_Back_Movement_Rocket1ReactToThreat
 	waitmovement 0
 	textcolor 0
-	msgbox gUnknown_817B399
+	msgbox FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland
 	closemessage
-	applymovement 3, Movement_163F1D
-	applymovement 255, Movement_163EE2
-	applymovement 1, Movement_163EF0
-	applymovement 2, Movement_163EFA
-	applymovement 4, Movement_163F05
+	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_LoreleiWatchRocketsExit
+	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_IcefallCave_Back_Movement_PlayerWatchRocketsExit
+	applymovement LOCALID_ROCKET1, FourIsland_IcefallCave_Back_Movement_Rocket1Exit
+	applymovement LOCALID_ROCKET2, FourIsland_IcefallCave_Back_Movement_Rocket2Exit
+	applymovement LOCALID_ROCKET3, FourIsland_IcefallCave_Back_Movement_Rocket3Exit
 	waitmovement 0
-	removeobject 1
-	removeobject 2
-	removeobject 4
+	removeobject LOCALID_ROCKET1
+	removeobject LOCALID_ROCKET2
+	removeobject LOCALID_ROCKET3
 	delay 50
-	applymovement 3, Movement_163F23
+	applymovement LOCALID_LORELEI, FourIsland_IcefallCave_Back_Movement_LoreleiWalkToPlayer
 	waitmovement 0
-	applymovement 255, Movement_1A75E7
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	textcolor 1
-	msgbox gUnknown_817B457
-	setflag FLAG_0x08E
-	clearflag FLAG_0x08C
-	setvar VAR_0x4080, 1
+	msgbox FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful
+	setflag FLAG_HIDE_RUIN_VALLEY_SCIENTIST
+	clearflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
+	setvar VAR_MAP_SCENE_ICEFALL_CAVE_BACK, 1
 	releaseall
 	end
 
-Movement_163EDD:: @ 8163EDD
-	step_11
-	step_11
-	step_13
-	step_11
+FourIsland_IcefallCave_Back_Movement_PlayerToRockets:: @ 8163EDD
+	walk_up
+	walk_up
+	walk_right
+	walk_up
 	step_end
 
-Movement_163EE2:: @ 8163EE2
-	step_1c
-	step_2f
-	step_1c
-	step_1c
-	step_2d
+FourIsland_IcefallCave_Back_Movement_PlayerWatchRocketsExit:: @ 8163EE2
+	delay_16
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
-Movement_163EE8:: @ 8163EE8
-	step_25
+FourIsland_IcefallCave_Back_Movement_WalkInPlaceDown:: @ 8163EE8
+	walk_in_place_down
 	step_end
 
-gUnknown_163EEA:: @ 8163EEA
-	step_4c
-	step_13
-	step_4d
+FourIsland_IcefallCave_Back_Movement_UnusedPushRight:: @ 8163EEA
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
 	step_end
 
-Movement_163EEE:: @ 8163EEE
-	step_29
+FourIsland_IcefallCave_Back_Movement_Rocket1ReactToThreat:: @ 8163EEE
+	walk_in_place_fast_down
 	step_end
 
-Movement_163EF0:: @ 8163EF0
-	step_13
-	step_10
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+FourIsland_IcefallCave_Back_Movement_Rocket1Exit:: @ 8163EF0
+	walk_right
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
-Movement_163EFA:: @ 8163EFA
-	step_1c
-	step_12
-	step_10
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+FourIsland_IcefallCave_Back_Movement_Rocket2Exit:: @ 8163EFA
+	delay_16
+	walk_left
+	walk_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
-Movement_163F05:: @ 8163F05
-	step_1c
-	step_10
-	step_1c
-	step_10
-	step_20
-	step_20
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+FourIsland_IcefallCave_Back_Movement_Rocket3Exit:: @ 8163F05
+	delay_16
+	walk_down
+	delay_16
+	walk_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
-Movement_163F11:: @ 8163F11
-	step_1c
-	step_1b
-	step_30
+FourIsland_IcefallCave_Back_Movement_Rocket3FaceLorelei:: @ 8163F11
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
 	step_end
 
-Movement_163F15:: @ 8163F15
-	step_12
-	step_12
+FourIsland_IcefallCave_Back_Movement_UnusedWalkLeft:: @ 8163F15
+	walk_left
+	walk_left
 	step_end
 
-Movement_163F18:: @ 8163F18
-	step_12
-	step_11
+FourIsland_IcefallCave_Back_Movement_LoreleiToRockets:: @ 8163F18
+	walk_left
+	walk_up
 	step_end
 
-Movement_163F1B:: @ 8163F1B
-	step_26
+FourIsland_IcefallCave_Back_Movement_WalkInPlaceUp:: @ 8163F1B
+	walk_in_place_up
 	step_end
 
-Movement_163F1D:: @ 8163F1D
-	step_1b
-	step_30
-	step_1c
-	step_1c
-	step_2d
+FourIsland_IcefallCave_Back_Movement_LoreleiWatchRocketsExit:: @ 8163F1D
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
-Movement_163F23:: @ 8163F23
-	step_13
+FourIsland_IcefallCave_Back_Movement_LoreleiWalkToPlayer:: @ 8163F23
+	walk_right
 	step_end
 
-FourIsland_IcefallCave_Back_EventScript_163F25:: @ 8163F25
-	msgbox gUnknown_817B457, 2
+FourIsland_IcefallCave_Back_EventScript_Lorelei:: @ 8163F25
+	msgbox FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful, MSGBOX_NPC
 	end

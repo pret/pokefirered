@@ -1,33 +1,31 @@
 CeladonCity_DepartmentStore_2F_MapScripts:: @ 816BAF4
 	.byte 0
 
-CeladonCity_DepartmentStore_2F_EventScript_16BAF5:: @ 816BAF5
-	msgbox gUnknown_81955C7, 2
+CeladonCity_DepartmentStore_2F_EventScript_UnusedNPC:: @ 816BAF5
+	msgbox CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel, MSGBOX_NPC
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_16BAFE:: @ 816BAFE
-	msgbox gUnknown_819560F, 2
+CeladonCity_DepartmentStore_2F_EventScript_Lass:: @ 816BAFE
+	msgbox CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings, MSGBOX_NPC
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_16BB07:: @ 816BB07
-	msgbox gUnknown_8195638, 3
+CeladonCity_DepartmentStore_2F_EventScript_FloorSign:: @ 816BB07
+	msgbox CeladonCity_DepartmentStore_2F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_16BB10:: @ 816BB10
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+CeladonCity_DepartmentStore_2F_EventScript_ClerkItems:: @ 816BB10
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16BB38
-	msgbox gUnknown_81A5190
+	pokemart CeladonCity_DepartmentStore_2F_Items
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16BB38:: @ 816BB38
+CeladonCity_DepartmentStore_2F_Items:: @ 816BB38
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_REVIVE
@@ -41,21 +39,19 @@ Items_16BB38:: @ 816BB38
 	release
 	end
 
-CeladonCity_DepartmentStore_2F_EventScript_16BB4E:: @ 816BB4E
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs:: @ 816BB4E
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16BB74
-	msgbox gUnknown_81A5190
+	pokemart CeladonCity_DepartmentStore_2F_TMs
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16BB74:: @ 816BB74
+CeladonCity_DepartmentStore_2F_TMs:: @ 816BB74
 	.2byte ITEM_TM05
 	.2byte ITEM_TM15
 	.2byte ITEM_TM28

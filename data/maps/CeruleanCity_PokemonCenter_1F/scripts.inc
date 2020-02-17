@@ -1,37 +1,35 @@
 CeruleanCity_PokemonCenter_1F_MapScripts:: @ 816AA2D
-	map_script 3, CeruleanCity_PokemonCenter_1F_MapScript1_16AA38
-	map_script 5, CeruleanCity_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-CeruleanCity_PokemonCenter_1F_MapScript1_16AA38:: @ 816AA38
+CeruleanCity_PokemonCenter_1F_OnTransition:: @ 816AA38
 	setrespawn SPAWN_CERULEAN_CITY
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_16AA3C:: @ 816AA3C
+CeruleanCity_PokemonCenter_1F_EventScript_Nurse:: @ 816AA3C
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_16AA45:: @ 816AA45
-	msgbox gUnknown_8192079, 2
+CeruleanCity_PokemonCenter_1F_EventScript_Gentleman:: @ 816AA45
+	msgbox CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac, MSGBOX_NPC
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_16AA4E:: @ 816AA4E
-	msgbox gUnknown_8191FFB, 2
+CeruleanCity_PokemonCenter_1F_EventScript_Rocker:: @ 816AA4E
+	msgbox CeruleanCity_PokemonCenter_1F_Text_BillDoesWhateverForRareMons, MSGBOX_NPC
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_16AA57:: @ 816AA57
+CeruleanCity_PokemonCenter_1F_EventScript_Youngster:: @ 816AA57
 	lock
 	faceplayer
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_8192116
+	famechecker FAMECHECKER_BILL, 1
+	msgbox CeruleanCity_PokemonCenter_1F_Text_BillCollectsRareMons
 	release
 	end
 
-CeruleanCity_PokemonCenter_1F_EventScript_16AA70:: @ 816AA70
-	msgbox gUnknown_819214C, 2
+CeruleanCity_PokemonCenter_1F_EventScript_Lass:: @ 816AA70
+	msgbox CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs, MSGBOX_NPC
 	end

@@ -1,38 +1,36 @@
 SilphCo_3F_MapScripts:: @ 81616C5
-	map_script 1, SilphCo_3F_MapScript1_1616CB
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_3F_OnLoad
 	.byte 0
 
-SilphCo_3F_MapScript1_1616CB:: @ 81616CB
-	checkflag FLAG_0x27C
-	call_if 0, EventScript_1A81A5
-	checkflag FLAG_0x27D
-	call_if 0, EventScript_1A81DC
+SilphCo_3F_OnLoad:: @ 81616CB
+	call_if_unset FLAG_SILPH_3F_DOOR_1, EventScript_Close3FDoor1
+	call_if_unset FLAG_SILPH_3F_DOOR_2, EventScript_Close3FDoor2
 	end
 
-SilphCo_3F_EventScript_1616DE:: @ 81616DE
+SilphCo_3F_EventScript_WorkerM:: @ 81616DE
 	lock
 	faceplayer
-	compare_var_to_value VAR_0x4060, 1
-	goto_if 4, EventScript_1616F5
-	msgbox gUnknown_81758AD
+	compare VAR_MAP_SCENE_SILPH_CO_11F, 1
+	goto_if_ge SilphCo_3F_EventScript_WorkerMRocketsGone
+	msgbox SilphCo_3F_Text_WhatAmIToDo
 	release
 	end
 
-EventScript_1616F5:: @ 81616F5
-	msgbox gUnknown_81758D3
+SilphCo_3F_EventScript_WorkerMRocketsGone:: @ 81616F5
+	msgbox SilphCo_3F_Text_YouAndYourMonsSavedUs
 	release
 	end
 
-SilphCo_3F_EventScript_1616FF:: @ 81616FF
-	msgbox gUnknown_81759DC, 3
+SilphCo_3F_EventScript_FloorSign:: @ 81616FF
+	msgbox SilphCo_3F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_3F_EventScript_161708:: @ 8161708
-	trainerbattle 0, 338, 0, Text_175948, Text_17597D
-	msgbox gUnknown_8175990, 6
+SilphCo_3F_EventScript_Jose:: @ 8161708
+	trainerbattle_single TRAINER_SCIENTIST_JOSE, SilphCo_3F_Text_JoseIntro, SilphCo_3F_Text_JoseDefeat
+	msgbox SilphCo_3F_Text_JosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_3F_EventScript_16171F:: @ 816171F
-	trainerbattle 0, 375, 0, Text_1758F6, Text_175911
-	msgbox gUnknown_817591C, 6
+SilphCo_3F_EventScript_Grunt:: @ 816171F
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_25, SilphCo_3F_Text_GruntIntro, SilphCo_3F_Text_GruntDefeat
+	msgbox SilphCo_3F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
 	end

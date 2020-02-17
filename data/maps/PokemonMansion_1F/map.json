@@ -5,7 +5,7 @@
   "music": "MUS_POKEYASHI",
   "region_map_section": "MAPSEC_POKEMON_MANSION",
   "requires_flash": false,
-  "weather": "WEATHER_CLOUDY",
+  "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_8",
   "allow_cycling": false,
   "unknown_19": 7,
@@ -14,68 +14,68 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 22,
       "y": 24,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "PokemonMansion_1F_EventScript_162226",
+      "script": "PokemonMansion_1F_EventScript_Ted",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 29,
       "y": 32,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BE95D",
-      "flag": "415"
+      "script": "PokemonMansion_1F_EventScript_ItemCarbos",
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_CARBOS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 22,
       "y": 6,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BE96A",
-      "flag": "416"
+      "script": "PokemonMansion_1F_EventScript_ItemEscapeRope",
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 27,
       "y": 15,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonMansion_1F_EventScript_1BEB65",
-      "flag": "458"
+      "script": "PokemonMansion_1F_EventScript_ItemProtein",
+      "flag": "FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 8,
       "y": 8,
       "elevation": 3,
-      "movement_type": "5",
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "PokemonMansion_1F_EventScript_16223D",
+      "script": "PokemonMansion_1F_EventScript_Johnson",
       "flag": "0"
     }
   ],
@@ -158,7 +158,7 @@
       "x": 5,
       "y": 5,
       "elevation": 0,
-      "script": "PokemonMansion_1F_EventScript_162212"
+      "script": "PokemonMansion_1F_EventScript_Statue"
     },
     {
       "type": "hidden_item",
@@ -166,8 +166,9 @@
       "y": 21,
       "elevation": 0,
       "item": "ITEM_MOON_STONE",
-      "flag": "31",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_POKEMON_MANSION_1F_MOON_STONE",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

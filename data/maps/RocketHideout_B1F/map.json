@@ -14,95 +14,95 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 4,
       "y": 9,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "RocketHideout_B1F_EventScript_1611C5",
-      "flag": "173"
+      "script": "RocketHideout_B1F_EventScript_Grunt2",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 24,
       "y": 12,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "RocketHideout_B1F_EventScript_1611AE",
-      "flag": "173"
+      "script": "RocketHideout_B1F_EventScript_Grunt1",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 6,
       "y": 32,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RocketHideout_B1F_EventScript_1611F3",
-      "flag": "173"
+      "script": "RocketHideout_B1F_EventScript_Grunt4",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 10,
       "y": 22,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RocketHideout_B1F_EventScript_1611DC",
-      "flag": "173"
+      "script": "RocketHideout_B1F_EventScript_Grunt3",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 21,
       "y": 27,
       "elevation": 3,
-      "movement_type": "16",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "RocketHideout_B1F_EventScript_16120A",
-      "flag": "173"
+      "script": "RocketHideout_B1F_EventScript_Grunt5",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 16,
       "elevation": 0,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B1F_EventScript_1BE6C6",
-      "flag": "364"
+      "script": "RocketHideout_B1F_EventScript_ItemEscapeRope",
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 1,
       "y": 22,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B1F_EventScript_1BE6D3",
-      "flag": "365"
+      "script": "RocketHideout_B1F_EventScript_ItemHyperPotion",
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION"
     }
   ],
   "warp_events": [
@@ -157,8 +157,9 @@
       "y": 17,
       "elevation": 0,
       "item": "ITEM_PP_UP",
-      "flag": "11",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B1F_PP_UP",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

@@ -1,4 +1,4 @@
-Text_182F01:: @ 8182F01
+Text_SwordsDanceTeach:: @ 8182F01
     .string "Not many people come out here.\p"
     .string "If I train here, I'm convinced that\n"
     .string "I'll get stronger and stronger.\p"
@@ -6,14 +6,14 @@ Text_182F01:: @ 8182F01
     .string "How would you like to learn a move\n"
     .string "like that? It's SWORDS DANCE.$"
 
-Text_182FC1:: @ 8182FC1
+Text_SwordsDanceDeclined:: @ 8182FC1
     .string "Well, that's fine, too.$"
 
-Text_182FD9:: @ 8182FD9
+Text_SwordsDanceWhichMon:: @ 8182FD9
     .string "All right, pick which POKéMON\n"
     .string "I should teach it to.$"
 
-Text_18300D:: @ 818300D
+Text_SwordsDanceTaught:: @ 818300D
     .string "If only we could keep getting\n"
     .string "stronger and stronger, eh?$"
 

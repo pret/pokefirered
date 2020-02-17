@@ -20,11 +20,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "44",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
       "x": 11,
       "y": 32,
       "elevation": 1,
-      "movement_type": "14",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -33,11 +33,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "46",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_LAND",
       "x": 17,
       "y": 132,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -46,11 +46,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "43",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
       "x": 7,
       "y": 39,
       "elevation": 1,
-      "movement_type": "52",
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP",
       "movement_range_x": 6,
       "movement_range_y": 3,
       "trainer_type": 1,
@@ -59,11 +59,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "45",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_LAND",
       "x": 19,
       "y": 79,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -72,11 +72,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "57",
+      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
       "x": 15,
       "y": 25,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -85,11 +85,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "24",
+      "graphics_id": "OBJECT_EVENT_GFX_BATTLE_GIRL",
       "x": 9,
       "y": 53,
       "elevation": 3,
-      "movement_type": "26",
+      "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 7,
       "trainer_type": 1,
@@ -98,11 +98,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "24",
+      "graphics_id": "OBJECT_EVENT_GFX_BATTLE_GIRL",
       "x": 18,
       "y": 105,
       "elevation": 4,
-      "movement_type": "50",
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 4,
       "trainer_type": 1,
@@ -111,11 +111,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
       "x": 16,
       "y": 64,
       "elevation": 3,
-      "movement_type": "27",
+      "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -124,11 +124,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
       "x": 11,
       "y": 64,
       "elevation": 3,
-      "movement_type": "28",
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -137,11 +137,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 11,
       "y": 89,
       "elevation": 3,
-      "movement_type": "14",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -150,11 +150,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 9,
       "y": 108,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -163,11 +163,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "54",
+      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
       "x": 8,
       "y": 68,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -176,11 +176,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "24",
+      "graphics_id": "OBJECT_EVENT_GFX_BATTLE_GIRL",
       "x": 9,
       "y": 68,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -189,212 +189,212 @@
       "flag": "0"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 8,
       "y": 104,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "19"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 11,
       "y": 95,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "21"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 12,
       "y": 96,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "22"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 10,
       "y": 95,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "23"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 105,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "24"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 75,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "25"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 84,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "26"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 74,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "27"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1B"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 15,
       "y": 73,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "28"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1C"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 18,
       "y": 111,
       "elevation": 4,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "29"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1D"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 10,
       "y": 86,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "30"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1E"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 9,
       "y": 110,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "31"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_1F"
     },
     {
-      "graphics_id": "96",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 18,
       "y": 112,
       "elevation": 4,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BE00C",
-      "flag": "17"
+      "script": "EventScript_InteractWithRockSmashRockObject",
+      "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 15,
       "y": 70,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC42",
-      "flag": "475"
+      "script": "OneIsland_KindleRoad_EventScript_ItemEther",
+      "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_ETHER"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 103,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC4F",
-      "flag": "476"
+      "script": "OneIsland_KindleRoad_EventScript_ItemMaxRepel",
+      "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_MAX_REPEL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 18,
       "y": 114,
       "elevation": 4,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EventScript_1BEC5C",
-      "flag": "477"
+      "script": "OneIsland_KindleRoad_EventScript_ItemCarbos",
+      "flag": "FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_CARBOS"
     }
   ],
   "warp_events": [

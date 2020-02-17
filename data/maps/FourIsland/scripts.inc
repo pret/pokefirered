@@ -1,47 +1,46 @@
 FourIsland_MapScripts:: @ 8167CAE
-	map_script 3, FourIsland_MapScript1_167CB9
-	map_script 2, FourIsland_MapScript2_167CE2
+	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
 	.byte 0
 
-FourIsland_MapScript1_167CB9:: @ 8167CB9
+FourIsland_OnTransition:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
-	compare_var_to_value VAR_MAP_SCENE_FOUR_ISLAND, 0
-	call_if 1, EventScript_167CCD
+	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
+	call_if_eq EventScript_167CCD
 	call EventScript_167CD1
 	end
 
 EventScript_167CCD:: @ 8167CCD
-	clearflag FLAG_0x097
+	clearflag FLAG_HIDE_FOUR_ISLAND_RIVAL
 	return
 
 EventScript_167CD1:: @ 8167CD1
-	checkflag FLAG_PENDING_DAYCARE_EGG
-	goto_if 0, EventScript_167CE1
+	goto_if_unset FLAG_PENDING_DAYCARE_EGG, EventScript_167CE1
 	setobjectxyperm 1, 16, 14
 
 EventScript_167CE1:: @ 8167CE1
 	return
 
-FourIsland_MapScript2_167CE2:: @ 8167CE2
+FourIsland_OnFrame:: @ 8167CE2
 	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, EventScript_167CEC
 	.2byte 0
 
 EventScript_167CEC:: @ 8167CEC
 	lockall
 	textcolor 0
-	applymovement 10, Movement_1A75ED
+	applymovement 10, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 10, Movement_1A75DB
+	applymovement 10, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 10, Movement_1A75DD
+	applymovement 10, Movement_Delay48
 	waitmovement 0
 	delay 25
 	applymovement 10, Movement_167D49
 	waitmovement 0
 	msgbox gUnknown_8182B37
 	closemessage
-	applymovement 255, Movement_167D52
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_167D52
 	applymovement 10, Movement_167D4E
 	waitmovement 0
 	fadedefaultbgm
@@ -53,87 +52,85 @@ EventScript_167CEC:: @ 8167CEC
 	end
 
 Movement_167D49:: @ 8167D49
-	step_13
-	step_13
-	step_10
-	step_10
+	walk_right
+	walk_right
+	walk_down
+	walk_down
 	step_end
 
 Movement_167D4E:: @ 8167D4E
-	step_1c
-	step_1a
-	step_10
+	delay_16
+	delay_4
+	walk_down
 	step_end
 
 Movement_167D52:: @ 8167D52
-	step_12
-	step_30
+	walk_left
+	walk_in_place_fastest_right
 	step_end
 
-FourIsland_EventScript_167D55:: @ 8167D55
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+FourIsland_EventScript_DaycareMan:: @ 8167D55
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167D9B
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_167E0C
-	compare_var_to_value VAR_RESULT, 3
-	goto_if_eq EventScript_167E19
-	msgbox gUnknown_81BF555
+	compare VAR_RESULT, DAYCARE_EGG_WAITING
+	goto_if_eq FourIsland_EventScript_DaycareEggWaiting
+	compare VAR_RESULT, DAYCARE_ONE_MON
+	goto_if_eq FourIsland_EventScript_CheckOnOneMon
+	compare VAR_RESULT, DAYCARE_TWO_MONS
+	goto_if_eq FourIsland_EventScript_CheckOnTwoMons
+	msgbox DayCare_Text_ImDaycareManSpeakToMyWife
 	release
 	end
 
-EventScript_167D9B:: @ 8167D9B
-	msgbox gUnknown_81BF5E3, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167DD1
-	msgbox gUnknown_81BF7B6, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_167DD1
-	msgbox gUnknown_81BF6CF
+FourIsland_EventScript_DaycareEggWaiting:: @ 8167D9B
+	msgbox DayCare_Text_DoYouWantEgg, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	msgbox DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq FourIsland_EventScript_DaycareAcceptEgg
+	msgbox DayCare_Text_IllKeepIt
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	special RejectEggFromDayCare
 	release
 	end
 
-EventScript_167DD1:: @ 8167DD1
+FourIsland_EventScript_DaycareAcceptEgg:: @ 8167DD1
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	compare_var_to_value VAR_RESULT, 6
-	goto_if 5, EventScript_167DEB
-	msgbox gUnknown_81BF6F0
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne FourIsland_EventScript_DaycareReceivedEgg
+	msgbox DayCare_Text_YouHaveNoRoomForIt
 	release
 	end
 
-EventScript_167DEB:: @ 8167DEB
+FourIsland_EventScript_DaycareReceivedEgg:: @ 8167DEB
 	textcolor 3
-	message Text_1BF72A
+	message DayCare_Text_ReceivedEgg
 	call EventScript_1A6675
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
-	msgbox gUnknown_81BF755
+	msgbox DayCare_Text_TakeGoodCareOfIt
 	special GiveEggFromDaycare
 	clearflag FLAG_PENDING_DAYCARE_EGG
 	release
 	end
 
-EventScript_167E0C:: @ 8167E0C
+FourIsland_EventScript_CheckOnOneMon:: @ 8167E0C
 	special GetDaycareMonNicknames
-	msgbox gUnknown_81BF69A
+	msgbox DayCare_Text_YourMonIsDoingFine
 	release
 	end
 
-EventScript_167E19:: @ 8167E19
+FourIsland_EventScript_CheckOnTwoMons:: @ 8167E19
 	special GetDaycareMonNicknames
-	msgbox gUnknown_81BF789
+	msgbox DayCare_Text_YourMonsAreDoingFine
 	special SetDaycareCompatibilityString
-	special sub_80CA68C
+	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	release
@@ -142,16 +139,13 @@ EventScript_167E19:: @ 8167E19
 FourIsland_EventScript_167E2E:: @ 8167E2E
 	lock
 	faceplayer
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_167E43
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_167E43
 	msgbox gUnknown_8182A2B
 	release
 	end
 
 EventScript_167E43:: @ 8167E43
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 5
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 5
 	msgbox gUnknown_8182A75
 	release
 	end
@@ -159,21 +153,19 @@ EventScript_167E43:: @ 8167E43
 FourIsland_EventScript_167E5A:: @ 8167E5A
 	lock
 	faceplayer
-	setvar VAR_0x8004, 9
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
+	famechecker FAMECHECKER_LORELEI, 4
 	msgbox gUnknown_8182CE3
 	release
 	end
 
 FourIsland_EventScript_167E73:: @ 8167E73
-	msgbox gUnknown_8182D8E, 2
+	msgbox gUnknown_8182D8E, MSGBOX_NPC
 	end
 
 FourIsland_EventScript_167E7C:: @ 8167E7C
-	msgbox gUnknown_8182A03, 3
+	msgbox gUnknown_8182A03, MSGBOX_SIGN
 	end
 
 FourIsland_EventScript_167E85:: @ 8167E85
-	msgbox gUnknown_8182DEB, 3
+	msgbox gUnknown_8182DEB, MSGBOX_SIGN
 	end

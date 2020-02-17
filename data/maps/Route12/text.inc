@@ -1,20 +1,20 @@
-gUnknown_8185317:: @ 8185317
+Route12_Text_MonSprawledOutInSlumber:: @ 8185317
     .string "A POKéMON is sprawled out in\n"
     .string "a deep and comfortable slumber.$"
 
-Text_185354:: @ 8185354
+Text_SnorlaxWokeUp:: @ 8185354
     .string "SNORLAX woke up!\p"
     .string "It attacked in a grumpy rage!$"
 
-gUnknown_8185383:: @ 8185383
+Text_SnorlaxReturnedToMountains:: @ 8185383
     .string "SNORLAX calmed down.\n"
     .string "It gave a huge yawn…\l"
     .string "And returned to the mountains.$"
 
-gUnknown_81853CC:: @ 81853CC
+Text_WantToUsePokeFlute:: @ 81853CC
     .string "Want to use the POKé FLUTE?$"
 
-Text_1853E8:: @ 81853E8
+Text_PlayedPokeFlute:: @ 81853E8
     .string "{PLAYER} played the POKé FLUTE.$"
 
 Text_185402:: @ 8185402
@@ -102,10 +102,10 @@ Text_18574D:: @ 818574D
     .string "I catch them all the time, sure.\n"
     .string "But, boy are they wimpy.$"
 
-gUnknown_8185797:: @ 8185797
+Route12_Text_RouteSign:: @ 8185797
     .string "ROUTE 12 \n"
     .string "North to LAVENDER$"
 
-gUnknown_81857B3:: @ 81857B3
+Route12_Text_SportfishingArea:: @ 81857B3
     .string "SPORTFISHING AREA$"
 

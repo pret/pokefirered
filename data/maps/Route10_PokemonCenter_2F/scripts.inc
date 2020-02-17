@@ -1,18 +1,19 @@
 Route10_PokemonCenter_2F_MapScripts:: @ 816FCFA
-	map_script 2, Route10_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, Route10_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, Route10_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, Route10_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-Route10_PokemonCenter_2F_EventScript_16FD0F:: @ 816FD0F
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+Route10_PokemonCenter_2F_EventScript_Colosseum:: @ 816FD0F
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16FD15:: @ 816FD15
-	call EventScript_1BB6AB
+Route10_PokemonCenter_2F_EventScript_TradeCenter:: @ 816FD15
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16FD1B:: @ 816FD1B
-	call EventScript_1BB7DE
+Route10_PokemonCenter_2F_EventScript_RecordCorner:: @ 816FD1B
+	call CableClub_EventScript_RecordCorner
 	end

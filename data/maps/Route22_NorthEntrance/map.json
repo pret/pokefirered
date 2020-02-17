@@ -14,16 +14,16 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "60",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 8,
       "y": 2,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route22_NorthEntrance_EventScript_1704FC",
+      "script": "Route22_NorthEntrance_EventScript_BoulderBadgeGuard",
       "flag": "0"
     }
   ],
@@ -63,9 +63,9 @@
       "x": 7,
       "y": 2,
       "elevation": 3,
-      "var": "VAR_0x405F",
+      "var": "VAR_MAP_SCENE_ROUTE23",
       "var_value": 0,
-      "script": "Route22_NorthEntrance_EventScript_17050D"
+      "script": "Route22_NorthEntrance_EventScript_BoulderBadgeGuardTrigger"
     }
   ],
   "bg_events": []

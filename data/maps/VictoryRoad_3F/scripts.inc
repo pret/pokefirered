@@ -1,62 +1,62 @@
 VictoryRoad_3F_MapScripts:: @ 81610AA
-	map_script 1, VictoryRoad_3F_MapScript1_1610B0
+	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_3F_OnLoad
 	.byte 0
 
-VictoryRoad_3F_MapScript1_1610B0:: @ 81610B0
-	compare_var_to_value VAR_0x4067, 100
-	call_if 5, EventScript_1610BC
+VictoryRoad_3F_OnLoad:: @ 81610B0
+	compare VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
+	call_if_ne VictoryRoad_3F_EventScript_SetRockBarrier
 	end
 
-EventScript_1610BC:: @ 81610BC
-	setmetatile 12, 12, 775, 1
-	setmetatile 12, 13, 791, 1
+VictoryRoad_3F_EventScript_SetRockBarrier:: @ 81610BC
+	setmetatile 12, 12, METATILE_Cave_RockBarrier_Top, 1
+	setmetatile 12, 13, METATILE_Cave_RockBarrier_Bottom, 1
 	return
 
-VictoryRoad_3F_EventScript_1610CF:: @ 81610CF
+VictoryRoad_3F_EventScript_FloorSwitch:: @ 81610CF
 	lockall
-	compare_var_to_value VAR_0x4067, 100
-	goto_if_eq EventScript_161101
-	setmetatile 12, 12, 721, 0
-	setmetatile 12, 13, 737, 0
+	compare VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
+	goto_if_eq VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed
+	setmetatile 12, 12, METATILE_Cave_Floor_Ledge_Top, 0
+	setmetatile 12, 13, METATILE_Cave_Floor_Ledge_Bottom, 0
 	playse SE_RU_GASYAN
 	special DrawWholeMapView
 	waitse
 	moveobjectoffscreen 7
 	moveobjectoffscreen 10
-	setvar VAR_0x4067, 100
+	setvar VAR_MAP_SCENE_VICTORY_ROAD_3F, 100
 	releaseall
 	end
 
-EventScript_161101:: @ 8161101
+VictoryRoad_3F_EventScript_FloorSwitchAlreadyPressed:: @ 8161101
 	releaseall
 	end
 
-VictoryRoad_3F_EventScript_161103:: @ 8161103
-	trainerbattle 0, 393, 0, Text_174B60, Text_174B83
-	msgbox gUnknown_8174B99, 6
+VictoryRoad_3F_EventScript_George:: @ 8161103
+	trainerbattle_single TRAINER_COOLTRAINER_GEORGE, VictoryRoad_3F_Text_GeorgeIntro, VictoryRoad_3F_Text_GeorgeDefeat
+	msgbox VictoryRoad_3F_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_3F_EventScript_16111A:: @ 816111A
-	trainerbattle 0, 394, 0, Text_174C8A, Text_174CA9
-	msgbox gUnknown_8174CBD, 6
+VictoryRoad_3F_EventScript_Colby:: @ 816111A
+	trainerbattle_single TRAINER_COOLTRAINER_COLBY, VictoryRoad_3F_Text_ColbyIntro, VictoryRoad_3F_Text_ColbyDefeat
+	msgbox VictoryRoad_3F_Text_ColbyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_3F_EventScript_161131:: @ 8161131
-	trainerbattle 0, 403, 0, Text_174C30, Text_174C5A
-	msgbox gUnknown_8174C67, 6
+VictoryRoad_3F_EventScript_Caroline:: @ 8161131
+	trainerbattle_single TRAINER_COOLTRAINER_CAROLINE, VictoryRoad_3F_Text_CarolineIntro, VictoryRoad_3F_Text_CarolineDefeat
+	msgbox VictoryRoad_3F_Text_CarolinePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_3F_EventScript_161148:: @ 8161148
-	trainerbattle 0, 404, 0, Text_174BCA, Text_174BF4
-	msgbox gUnknown_8174C03, 6
+VictoryRoad_3F_EventScript_Alexa:: @ 8161148
+	trainerbattle_single TRAINER_COOLTRAINER_ALEXA, VictoryRoad_3F_Text_AlexaIntro, VictoryRoad_3F_Text_AlexaDefeat
+	msgbox VictoryRoad_3F_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_3F_EventScript_16115F:: @ 816115F
-	trainerbattle 4, 485, 0, Text_174D0C, Text_174D45, Text_174D96
-	msgbox gUnknown_8174D64, 6
+VictoryRoad_3F_EventScript_Ray:: @ 816115F
+	trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_RayIntro, VictoryRoad_3F_Text_RayDefeat, VictoryRoad_3F_Text_RayNotEnoughMons
+	msgbox VictoryRoad_3F_Text_RayPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VictoryRoad_3F_EventScript_16117A:: @ 816117A
-	trainerbattle 4, 485, 0, Text_174E08, Text_174E39, Text_174E8D
-	msgbox gUnknown_8174E48, 6
+VictoryRoad_3F_EventScript_Tyra:: @ 816117A
+	trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_TyraIntro, VictoryRoad_3F_Text_TyraDefeat, VictoryRoad_3F_Text_TyraNotEnoughMons
+	msgbox VictoryRoad_3F_Text_TyraPostBattle, MSGBOX_AUTOCLOSE
 	end

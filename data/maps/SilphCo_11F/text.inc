@@ -1,4 +1,4 @@
-gUnknown_8176E12:: @ 8176E12
+SilphCo_11F_Text_ThanksForSavingMeDearBoy:: @ 8176E12
     .string "PRESIDENT: Oh, dear boy!\n"
     .string "Thank you for saving SILPH.\p"
     .string "I will never forget you saved us in\n"
@@ -8,7 +8,7 @@ gUnknown_8176E12:: @ 8176E12
     .string "anything.\p"
     .string "Here, maybe this will do.$"
 
-gUnknown_8176EE7:: @ 8176EE7
+SilphCo_11F_Text_ThanksForSavingMeDearGirl:: @ 8176EE7
     .string "PRESIDENT: Oh, dear girl!\n"
     .string "Thank you for saving SILPH.\p"
     .string "I will never forget you saved us in\n"
@@ -18,11 +18,11 @@ gUnknown_8176EE7:: @ 8176EE7
     .string "anything.\p"
     .string "Here, maybe this will do.$"
 
-gUnknown_8176FBD:: @ 8176FBD
+SilphCo_11F_Text_ObtainedMasterBallFromPresident:: @ 8176FBD
     .string "{PLAYER} obtained a MASTER BALL\n"
     .string "from the PRESIDENT!$"
 
-gUnknown_8176FEB:: @ 8176FEB
+SilphCo_11F_Text_ThatsOurSecretPrototype:: @ 8176FEB
     .string "PRESIDENT: You can't buy that\n"
     .string "anywhere.\p"
     .string "It's our secret prototype MASTER\n"
@@ -32,16 +32,16 @@ gUnknown_8176FEB:: @ 8176FEB
     .string "You should be quiet about using it,\n"
     .string "though.$"
 
-gUnknown_817708E:: @ 817708E
+SilphCo_11F_Text_YouHaveNoRoomForThis:: @ 817708E
     .string "You have no room for this.$"
 
-gUnknown_81770A9:: @ 81770A9
+SilphCo_11F_Text_ThanksForRescuingUs:: @ 81770A9
     .string "SECRETARY: Thank you for rescuing\n"
     .string "all of us.\p"
     .string "We, from the PRESIDENT down,\n"
     .string "are indebted to you.$"
 
-gUnknown_8177108:: @ 8177108
+SilphCo_11F_Text_GiovanniIntro:: @ 8177108
     .string "Ah, {PLAYER}!\n"
     .string "So we meet again!\p"
     .string "The PRESIDENT and I are discussing\n"
@@ -50,11 +50,11 @@ gUnknown_8177108:: @ 8177108
     .string "matters…\p"
     .string "Or, experience a world of pain!$"
 
-Text_1771AB:: @ 81771AB
+SilphCo_11F_Text_GiovanniDefeat:: @ 81771AB
     .string "Arrgh!!\n"
     .string "I lost again!?$"
 
-gUnknown_81771C2:: @ 81771C2
+SilphCo_11F_Text_GiovanniPostBattle:: @ 81771C2
     .string "Blast it all!\n"
     .string "You ruined our plans for SILPH!\p"
     .string "But, TEAM ROCKET will never fall!\p"
@@ -62,33 +62,33 @@ gUnknown_81771C2:: @ 81771C2
     .string "POKéMON exist for TEAM ROCKET!\p"
     .string "I must go, but I shall return!$"
 
-Text_17726A:: @ 817726A
+SilphCo_11F_Text_Grunt2Intro:: @ 817726A
     .string "Stop right there!\n"
     .string "Don't you move!$"
 
-Text_17728C:: @ 817728C
+SilphCo_11F_Text_Grunt2Defeat:: @ 817728C
     .string "Don't…\n"
     .string "Please!$"
 
-gUnknown_817729B:: @ 817729B
+SilphCo_11F_Text_Grunt2PostBattle:: @ 817729B
     .string "So, you want to see my BOSS?$"
 
-Text_1772B8:: @ 81772B8
+SilphCo_11F_Text_Grunt1Intro:: @ 81772B8
     .string "Halt! Do you have an appointment\n"
     .string "with my BOSS?$"
 
-Text_1772E7:: @ 81772E7
+SilphCo_11F_Text_Grunt1Defeat:: @ 81772E7
     .string "Gaah!\n"
     .string "Demolished!$"
 
-gUnknown_81772F9:: @ 81772F9
+SilphCo_11F_Text_Grunt1PostBattle:: @ 81772F9
     .string "Watch your step…\n"
     .string "My BOSS likes his POKéMON tough!$"
 
-gUnknown_817732B:: @ 817732B
+SilphCo_11F_Text_MonitorHasMonsOnIt:: @ 817732B
     .string "The monitor has POKéMON on it!$"
 
-gUnknown_817734A:: @ 817734A
+SilphCo_11F_Text_FloorSign:: @ 817734A
     .string "SILPH CO. HEAD OFFICE\n"
     .string "11F$"
 

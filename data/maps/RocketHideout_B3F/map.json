@@ -14,69 +14,69 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 19,
       "y": 9,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "RocketHideout_B3F_EventScript_1612D1",
-      "flag": "173"
+      "script": "RocketHideout_B3F_EventScript_Grunt2",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 2,
       "y": 20,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "RocketHideout_B3F_EventScript_1612BA",
-      "flag": "173"
+      "script": "RocketHideout_B3F_EventScript_Grunt1",
+      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 12,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B3F_EventScript_1BE714",
-      "flag": "370"
+      "script": "RocketHideout_B3F_EventScript_ItemRareCandy",
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B3F_RARE_CANDY"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 14,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B3F_EventScript_1BE721",
-      "flag": "371"
+      "script": "RocketHideout_B3F_EventScript_ItemTM21",
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B3F_TM21"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 14,
       "y": 24,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "RocketHideout_B3F_EventScript_1BEBCD",
-      "flag": "466"
+      "script": "RocketHideout_B3F_EventScript_ItemBlackGlasses",
+      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B3F_BLACK_GLASSES"
     }
   ],
   "warp_events": [
@@ -103,8 +103,9 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_NUGGET",
-      "flag": "12",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B3F_NUGGET",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

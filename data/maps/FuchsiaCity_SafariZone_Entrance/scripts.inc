@@ -1,216 +1,215 @@
 FuchsiaCity_SafariZone_Entrance_MapScripts:: @ 816D2A8
-	map_script 2, FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, FuchsiaCity_SafariZone_Entrance_OnFrame
 	.byte 0
 
-FuchsiaCity_SafariZone_Entrance_MapScript1_16D2AE:: @ 816D2AE
-	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1, EventScript_16D2F2
-	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2, EventScript_16D312
-	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3, EventScript_16D2C8
+FuchsiaCity_SafariZone_Entrance_OnFrame:: @ 816D2AE
+	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 1, FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn
+	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2, FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly
+	map_script_2 VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 3, FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn
 	.2byte 0
 
-EventScript_16D2C8:: @ 816D2C8
+@ When player runs out of balls mid-battle
+FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn:: @ 816D2C8
 	lockall
 	textcolor 0
-	applymovement 255, Movement_16D36A
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter
 	waitmovement 0
-	msgbox gUnknown_8197E85
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
 	closemessage
-	applymovement 255, Movement_16D367
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit2
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
 
-EventScript_16D2F2:: @ 816D2F2
+@ When player runs of out balls after catching a pokemon, or runs out of steps
+FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn:: @ 816D2F2
 	lockall
 	textcolor 0
-	msgbox gUnknown_8197E85
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
 	closemessage
-	applymovement 255, Movement_16D362
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
 
-EventScript_16D312:: @ 816D312
+@ When player re-enters the entrance building with balls/steps remaining
+FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly:: @ 816D312
 	lockall
 	textcolor 0
-	msgbox gUnknown_8197E1A, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D345
-	msgbox gUnknown_8197E48
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls
 	closemessage
-	applymovement 255, Movement_16D362
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
 	releaseall
 	end
 
-EventScript_16D345:: @ 816D345
-	msgbox gUnknown_8197E7A
+FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone:: @ 816D345
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_GoodLuck
 	closemessage
-	applymovement 255, Movement_16D365
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter
 	waitmovement 0
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
 	waitstate
 	end
 
-Movement_16D362:: @ 816D362
-	step_10
-	step_10
+FuchsiaCity_SafariZone_Entrance_Movement_Exit:: @ 816D362
+	walk_down
+	walk_down
 	step_end
 
-Movement_16D365:: @ 816D365
-	step_11
+FuchsiaCity_SafariZone_Entrance_Movement_ReEnter:: @ 816D365
+	walk_up
 	step_end
 
-Movement_16D367:: @ 816D367
-	step_10
-	step_10
+FuchsiaCity_SafariZone_Entrance_Movement_Exit2:: @ 816D367
+	walk_down
+	walk_down
 	step_end
 
-Movement_16D36A:: @ 816D36A
-	step_10
-	step_1b
+FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter:: @ 816D36A
+	walk_down
+	delay_8
 	step_end
 
-FuchsiaCity_SafariZone_Entrance_EventScript_16D36D:: @ 816D36D
+FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerMid:: @ 816D36D
 	lockall
-	setvar VAR_0x4002, 0
-	goto EventScript_16D391
+	setvar VAR_TEMP_2, 0
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone
 	end
 
-FuchsiaCity_SafariZone_Entrance_EventScript_16D379:: @ 816D379
+FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerRight:: @ 816D379
 	lockall
-	setvar VAR_0x4002, 1
-	goto EventScript_16D391
+	setvar VAR_TEMP_2, 1
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone
 	end
 
-FuchsiaCity_SafariZone_Entrance_EventScript_16D385:: @ 816D385
+FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerLeft:: @ 816D385
 	lockall
-	setvar VAR_0x4002, 2
-	goto EventScript_16D391
+	setvar VAR_TEMP_2, 2
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone
 	end
 
-EventScript_16D391:: @ 816D391
+FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone:: @ 816D391
 	textcolor 0
-	msgbox gUnknown_8197C6B
-	applymovement 255, Movement_1A75EB
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	showmoneybox 0, 0, 0
-	msgbox gUnknown_8197C87, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16D3CA
-	msgbox gUnknown_8197DE9
-	goto EventScript_16D49A
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack
 	end
 
-EventScript_16D3CA:: @ 816D3CA
-	call EventScript_16D462
+FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone:: @ 816D3CA
+	call FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons
 	checkmoney 500, 0
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16D48C
-	takemoney 500, 0
+	compare VAR_RESULT, FALSE
+	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney
+	removemoney 500, 0
 	updatemoneybox 0, 0, 0
-	msgbox gUnknown_8197D07
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls
 	textcolor 3
 	playfanfare MUS_FANFA1
-	message Text_197D50
+	message FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls
 	waitfanfare
 	call EventScript_1A6675
-	msgbox gUnknown_8197D80
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
-	compare_var_to_value VAR_0x4002, 0
-	call_if 1, EventScript_16D44C
-	compare_var_to_value VAR_0x4002, 1
-	call_if 1, EventScript_16D441
-	compare_var_to_value VAR_0x4002, 2
-	call_if 1, EventScript_16D457
+	hidemoneybox 0, 0
+	compare VAR_TEMP_2, 0
+	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid
+	compare VAR_TEMP_2, 1
+	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight
+	compare VAR_TEMP_2, 2
+	call_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft
 	special EnterSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 2
 	warp MAP_SAFARI_ZONE_CENTER, 255, 26, 30
 	waitstate
 	end
 
-EventScript_16D441:: @ 816D441
-	applymovement 255, Movement_16D4AF
+FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight:: @ 816D441
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight
 	waitmovement 0
 	return
 
-EventScript_16D44C:: @ 816D44C
-	applymovement 255, Movement_16D4AC
+FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid:: @ 816D44C
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid
 	waitmovement 0
 	return
 
-EventScript_16D457:: @ 816D457
-	applymovement 255, Movement_16D4B3
+FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft:: @ 816D457
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft
 	waitmovement 0
 	return
 
-EventScript_16D462:: @ 816D462
-	countpokemon
-	compare_var_to_value VAR_RESULT, 6
-	goto_if 5, EventScript_1A77A9
-	specialvar VAR_RESULT, sub_80CABD0
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_1A77A9
-	msgbox gUnknown_81BFEAC
-	goto EventScript_16D49A
+FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons:: @ 816D462
+	getpartysize
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne EventScript_Return
+	specialvar VAR_RESULT, Special_IsThereRoomInAnyBoxForMorePokemon
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_Return
+	msgbox SafariZone_Text_ExcuseMeYourPCBoxIsFull
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack
 	end
 
-EventScript_16D48C:: @ 816D48C
-	msgbox gUnknown_8197E02
-	goto EventScript_16D49A
+FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney:: @ 816D48C
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_OopsNotEnoughMoney
+	goto FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack
 	end
 
-EventScript_16D49A:: @ 816D49A
+FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack:: @ 816D49A
 	closemessage
-	hidemoneybox
-	.byte 0
-	.byte 0
-	applymovement 255, Movement_16D4AA
+	hidemoneybox 0, 0
+	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ForceBack
 	waitmovement 0
 	releaseall
 	end
 
-Movement_16D4AA:: @ 816D4AA
-	step_10
+FuchsiaCity_SafariZone_Entrance_Movement_ForceBack:: @ 816D4AA
+	walk_down
 	step_end
 
-Movement_16D4AC:: @ 816D4AC
-	step_11
-	step_11
+FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid:: @ 816D4AC
+	walk_up
+	walk_up
 	step_end
 
-Movement_16D4AF:: @ 816D4AF
-	step_11
-	step_12
-	step_11
+FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight:: @ 816D4AF
+	walk_up
+	walk_left
+	walk_up
 	step_end
 
-Movement_16D4B3:: @ 816D4B3
-	step_11
-	step_13
-	step_11
+FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft:: @ 816D4B3
+	walk_up
+	walk_right
+	walk_up
 	step_end
 
-FuchsiaCity_SafariZone_Entrance_EventScript_16D4B7:: @ 816D4B7
+FuchsiaCity_SafariZone_Entrance_EventScript_InfoAttendant:: @ 816D4B7
 	lock
 	faceplayer
-	msgbox gUnknown_8197EB0, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16D4D6
-	msgbox gUnknown_819809E
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere
 	release
 	end
 
-EventScript_16D4D6:: @ 816D4D6
-	msgbox gUnknown_8197EE3
+FuchsiaCity_SafariZone_Entrance_EventScript_ExplainSafariZone:: @ 816D4D6
+	msgbox FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone
 	release
 	end

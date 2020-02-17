@@ -1,103 +1,99 @@
+.equ NUM_BOULDERS_PRESENT, VAR_TEMP_2
+
 SeafoamIslands_B3F_MapScripts:: @ 8162F4F
-	map_script 3, SeafoamIslands_B3F_MapScript1_162F5A
-	map_script 2, SeafoamIslands_B3F_MapScript2_162F98
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafoamIslands_B3F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, SeafoamIslands_B3F_OnFrame
 	.byte 0
 
-SeafoamIslands_B3F_MapScript1_162F5A:: @ 8162F5A
-	checkflag FLAG_0x2D2
-	call_if 0, EventScript_162F6D
-	checkflag FLAG_0x2D2
-	call_if 1, EventScript_162F94
+SeafoamIslands_B3F_OnTransition:: @ 8162F5A
+	call_if_unset FLAG_STOPPED_SEAFOAM_B3F_CURRENT, SeafoamIslands_B3F_EventScript_CheckStoppedCurrent
+	call_if_set FLAG_STOPPED_SEAFOAM_B3F_CURRENT, SeafoamIslands_B3F_EventScript_SetNoCurrentLayout
 	end
 
-EventScript_162F6D:: @ 8162F6D
-	setvar VAR_0x4002, 0
-	checkflag FLAG_0x046
-	call_if 0, EventScript_162FF0
-	checkflag FLAG_0x047
-	call_if 0, EventScript_162FF0
-	compare_var_to_value VAR_0x4002, 2
-	call_if 1, EventScript_162F90
+SeafoamIslands_B3F_EventScript_CheckStoppedCurrent:: @ 8162F6D
+	setvar NUM_BOULDERS_PRESENT, 0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, SeafoamIslands_B3F_EventScript_AddBoulderPresent
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, SeafoamIslands_B3F_EventScript_AddBoulderPresent
+	compare NUM_BOULDERS_PRESENT, 2
+	call_if_eq SeafoamIslands_B3F_EventScript_StoppedCurrent
 	return
 
-EventScript_162F90:: @ 8162F90
-	setflag FLAG_0x2D2
+SeafoamIslands_B3F_EventScript_StoppedCurrent:: @ 8162F90
+	setflag FLAG_STOPPED_SEAFOAM_B3F_CURRENT
 	return
 
-EventScript_162F94:: @ 8162F94
-	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_833B6EC
+SeafoamIslands_B3F_EventScript_SetNoCurrentLayout:: @ 8162F94
+	setmaplayoutindex LAYOUT_SEAFOAM_ISLANDS_B3F_CURRENT_STOPPED
 	return
 
-SeafoamIslands_B3F_MapScript2_162F98:: @ 8162F98
-	map_script_2 VAR_0x4001, 1, EventScript_162FA2
+SeafoamIslands_B3F_OnFrame:: @ 8162F98
+	map_script_2 VAR_TEMP_1, 1, SeafoamIslands_B3F_EventScript_EnterByFalling
 	.2byte 0
 
-EventScript_162FA2:: @ 8162FA2
+SeafoamIslands_B3F_EventScript_EnterByFalling:: @ 8162FA2
 	lockall
-	setvar VAR_0x4002, 0
-	checkflag FLAG_0x046
-	call_if 0, EventScript_162FF0
-	checkflag FLAG_0x047
-	call_if 0, EventScript_162FF0
-	compare_var_to_value VAR_0x4002, 2
-	goto_if_eq EventScript_16300C
+	setvar NUM_BOULDERS_PRESENT, 0
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_1, SeafoamIslands_B3F_EventScript_AddBoulderPresent
+	call_if_unset FLAG_HIDE_SEAFOAM_B3F_BOULDER_2, SeafoamIslands_B3F_EventScript_AddBoulderPresent
+	compare NUM_BOULDERS_PRESENT, 2
+	goto_if_eq SeafoamIslands_B3F_EventScript_CurrentBlocked
 	getplayerxy VAR_0x8008, VAR_0x8009
-	compare_var_to_value VAR_0x8008, 24
-	call_if 0, EventScript_162FF6
-	compare_var_to_value VAR_0x8008, 24
-	call_if 4, EventScript_163001
+	compare VAR_0x8008, 24
+	call_if_lt SeafoamIslands_B3F_EventScript_RideCurrentFar
+	compare VAR_0x8008, 24
+	call_if_ge SeafoamIslands_B3F_EventScript_RideCurrentClose
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 1
 	warp MAP_SEAFOAM_ISLANDS_B4F, 255, 27, 21
 	waitstate
 	releaseall
 	end
 
-EventScript_162FF0:: @ 8162FF0
-	addvar VAR_0x4002, 1
+SeafoamIslands_B3F_EventScript_AddBoulderPresent:: @ 8162FF0
+	addvar NUM_BOULDERS_PRESENT, 1
 	return
 
-EventScript_162FF6:: @ 8162FF6
-	applymovement 255, Movement_163013
+SeafoamIslands_B3F_EventScript_RideCurrentFar:: @ 8162FF6
+	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentFar
 	waitmovement 0
 	return
 
-EventScript_163001:: @ 8163001
-	applymovement 255, Movement_163021
+SeafoamIslands_B3F_EventScript_RideCurrentClose:: @ 8163001
+	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentClose
 	waitmovement 0
 	return
 
-EventScript_16300C:: @ 816300C
-	setvar VAR_0x4001, 0
+SeafoamIslands_B3F_EventScript_CurrentBlocked:: @ 816300C
+	setvar VAR_TEMP_1, 0
 	releaseall
 	end
 
-Movement_163013:: @ 8163013
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_20
-	step_20
-	step_20
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+SeafoamIslands_B3F_Movement_RideCurrentFar:: @ 8163013
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end
 
-Movement_163021:: @ 8163021
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_20
-	step_20
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
-	step_1d
+SeafoamIslands_B3F_Movement_RideCurrentClose:: @ 8163021
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
 	step_end

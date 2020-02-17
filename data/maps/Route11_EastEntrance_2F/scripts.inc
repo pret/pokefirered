@@ -3,8 +3,7 @@ Route11_EastEntrance_2F_MapScripts:: @ 816FD34
 
 Route11_EastEntrance_2F_EventScript_16FD35:: @ 816FD35
 	lockall
-	checkflag FLAG_0x253
-	goto_if_eq EventScript_16FD49
+	goto_if_set FLAG_WOKE_UP_ROUTE_12_SNORLAX, EventScript_16FD49
 	msgbox gUnknown_819EC8A
 	releaseall
 	end
@@ -15,44 +14,43 @@ EventScript_16FD49:: @ 816FD49
 	end
 
 Route11_EastEntrance_2F_EventScript_16FD53:: @ 816FD53
-	msgbox gUnknown_819ED1F, 3
+	msgbox gUnknown_819ED1F, MSGBOX_SIGN
 	end
 
 Route11_EastEntrance_2F_EventScript_16FD5C:: @ 816FD5C
 	lock
 	faceplayer
-	setvar VAR_0x8008, 4
-	call EventScript_1A8CAD
-	checkflag FLAG_0x251
-	goto_if_eq EventScript_16FDCE
-	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
+	setvar VAR_0x8008, INGAME_TRADE_NIDORINOA
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_NINA_TRADE, EventScript_16FDCE
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	compare VAR_RESULT, NO
 	goto_if_eq EventScript_16FDB6
-	call EventScript_1A8CBD
-	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16FDB6
-	call EventScript_1A8CC9
-	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16FDC0
-	call EventScript_1A8CD9
-	msgbox gUnknown_81A59DA
-	setflag FLAG_0x251
+	call EventScript_ChooseMonForInGameTrade
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge EventScript_16FDB6
+	call EventScript_GetInGameTradeSpecies
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne EventScript_16FDC0
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_NINA_TRADE
 	release
 	end
 
 EventScript_16FDB6:: @ 816FDB6
-	msgbox gUnknown_81A59B6
+	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
 EventScript_16FDC0:: @ 816FDC0
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A59C6
+	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
 EventScript_16FDCE:: @ 816FDCE
-	msgbox gUnknown_81A59E7
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end
 
@@ -60,24 +58,22 @@ Route11_EastEntrance_2F_EventScript_16FDD8:: @ 816FDD8
 	lock
 	faceplayer
 	call EventScript_16FE64
-	checkflag FLAG_0x252
-	goto_if_eq EventScript_16FE5A
+	goto_if_set FLAG_GOT_ITEMFINDER, EventScript_16FE5A
 	msgbox gUnknown_819E9E5, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AD1
+	compare VAR_RESULT, NO
+	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, Special_GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call EventScript_16FE64
-	compare_var_to_value VAR_0x8006, 30
-	goto_if 0, EventScript_1A7ABD
+	compare VAR_0x8006, 30
+	goto_if_lt Aide_EventScript_HaventCaughtEnough
 	msgbox gUnknown_819EAE4
 	checkitemspace ITEM_ITEMFINDER, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1A7AC7
-	additem ITEM_ITEMFINDER, 1
-	giveitemfanfaremsg gUnknown_819EB37, ITEM_ITEMFINDER
-	setflag FLAG_0x252
+	compare VAR_RESULT, FALSE
+	goto_if_eq Aide_EventScript_NoRoomForItem
+	giveitem_msg gUnknown_819EB37, ITEM_ITEMFINDER
+	setflag FLAG_GOT_ITEMFINDER
 	msgbox gUnknown_819EB59
 	release
 	end

@@ -14,11 +14,11 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 48,
       "y": 15,
       "elevation": 3,
-      "movement_type": "20",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -27,11 +27,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 10,
       "y": 5,
       "elevation": 3,
-      "movement_type": "18",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -40,11 +40,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 51,
       "y": 6,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -53,11 +53,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 12,
       "y": 13,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 2,
       "trainer_type": 1,
@@ -66,11 +66,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 37,
       "y": 23,
       "elevation": 3,
-      "movement_type": "51",
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
       "movement_range_x": 2,
       "movement_range_y": 5,
       "trainer_type": 1,
@@ -79,11 +79,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 32,
       "y": 5,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -92,11 +92,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 52,
       "y": 20,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -105,11 +105,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 8,
       "y": 21,
       "elevation": 3,
-      "movement_type": "17",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -118,11 +118,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 39,
       "y": 6,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -131,11 +131,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 3,
       "y": 9,
       "elevation": 3,
-      "movement_type": "3",
+      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 2,
       "trainer_type": 1,
@@ -144,11 +144,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 19,
       "y": 24,
       "elevation": 3,
-      "movement_type": "28",
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
       "movement_range_x": 5,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -157,11 +157,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "56",
+      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
       "x": 30,
       "y": 19,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,

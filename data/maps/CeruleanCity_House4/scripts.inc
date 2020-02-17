@@ -1,96 +1,94 @@
 CeruleanCity_House4_MapScripts:: @ 816ACEE
 	.byte 0
 
-CeruleanCity_House4_EventScript_16ACEF:: @ 816ACEF
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
-	specialvar VAR_0x8004, sub_8146CE8
+	specialvar VAR_0x8004, Special_GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8004, 0
-	goto_if_eq EventScript_16AD59
-	compare_var_to_value VAR_0x8004, 1
-	goto_if_eq EventScript_16AD63
-	compare_var_to_value VAR_0x8004, 2
-	goto_if_eq EventScript_16AD89
-	compare_var_to_value VAR_0x8004, 3
-	goto_if_eq EventScript_16ADAF
-	compare_var_to_value VAR_0x8004, 4
-	goto_if_eq EventScript_16ADC3
-	compare_var_to_value VAR_0x8004, 5
-	goto_if_eq EventScript_16ADE9
-	compare_var_to_value VAR_0x8004, 6
-	goto_if_eq EventScript_16AE0F
+	compare VAR_0x8004, 0
+	goto_if_eq CeruleanCity_House4_EventScript_NoNews
+	compare VAR_0x8004, 1
+	goto_if_eq CeruleanCity_House4_EventScript_News1
+	compare VAR_0x8004, 2
+	goto_if_eq CeruleanCity_House4_EventScript_News2
+	compare VAR_0x8004, 3
+	goto_if_eq CeruleanCity_House4_EventScript_NewsNotSpread
+	compare VAR_0x8004, 4
+	goto_if_eq CeruleanCity_House4_EventScript_NewsSpread1
+	compare VAR_0x8004, 5
+	goto_if_eq CeruleanCity_House4_EventScript_NewsSpread2
+	compare VAR_0x8004, 6
+	goto_if_eq CeruleanCity_House4_EventScript_NewsDone
 	end
 
-EventScript_16AD59:: @ 816AD59
-	msgbox gUnknown_8192AF0
+CeruleanCity_House4_EventScript_NoNews:: @ 816AD59
+	msgbox CeruleanCity_House4_Text_NothingEntertaining
 	release
 	end
 
-EventScript_16AD63:: @ 816AD63
-	call EventScript_16AE23
-	msgbox gUnknown_8192B43
+CeruleanCity_House4_EventScript_News1:: @ 816AD63
+	call CeruleanCity_House4_EventScript_MovementReactionToNews
+	msgbox CeruleanCity_House4_Text_NewNewsInformativeHaveThis
 	giveitem VAR_0x8008
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AE45
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
-EventScript_16AD89:: @ 816AD89
-	call EventScript_16AE23
-	msgbox gUnknown_8192C07
+CeruleanCity_House4_EventScript_News2:: @ 816AD89
+	call CeruleanCity_House4_EventScript_MovementReactionToNews
+	msgbox CeruleanCity_House4_Text_IncredibleNewsHaveBerries
 	giveitem VAR_0x8008, 4
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AE45
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
-EventScript_16ADAF:: @ 816ADAF
-	applymovement 1, Movement_1A75E1
+CeruleanCity_House4_EventScript_NewsNotSpread:: @ 816ADAF
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_8192CD5
+	msgbox CeruleanCity_House4_Text_WishCouldShareNewsWithOthers
 	release
 	end
 
-EventScript_16ADC3:: @ 816ADC3
-	call EventScript_16AE23
-	msgbox gUnknown_8192D4B
+CeruleanCity_House4_EventScript_NewsSpread1:: @ 816ADC3
+	call CeruleanCity_House4_EventScript_MovementReactionToNews
+	msgbox CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis
 	giveitem VAR_0x8008
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AE45
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
-EventScript_16ADE9:: @ 816ADE9
-	call EventScript_16AE23
-	msgbox gUnknown_8192DE3
+CeruleanCity_House4_EventScript_NewsSpread2:: @ 816ADE9
+	call CeruleanCity_House4_EventScript_MovementReactionToNews
+	msgbox CeruleanCity_House4_Text_MagnificentNewsSpreadHaveBerries
 	giveitem VAR_0x8008, 4
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AE45
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeruleanCity_House4_EventScript_NoRoomForBerries
 	release
 	end
 
-EventScript_16AE0F:: @ 816AE0F
-	applymovement 1, Movement_1A75E1
+CeruleanCity_House4_EventScript_NewsDone:: @ 816AE0F
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_8192EC5
+	msgbox CeruleanCity_House4_Text_EnjoyingMyselfWithAllSortsOfNews
 	release
 	end
 
-EventScript_16AE23:: @ 816AE23
+CeruleanCity_House4_EventScript_MovementReactionToNews:: @ 816AE23
 	playse SE_PIN
-	applymovement 1, Movement_1A75DB
+	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	applymovement 1, Movement_1A75DD
+	applymovement 1, Movement_Delay48
 	waitmovement 0
 	return
 
-EventScript_16AE45:: @ 816AE45
-	msgbox gUnknown_8192F2A
+CeruleanCity_House4_EventScript_NoRoomForBerries:: @ 816AE45
+	msgbox CeruleanCity_House4_Text_YourBerryPouchIsFull
 	release
 	end

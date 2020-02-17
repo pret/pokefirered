@@ -1,18 +1,19 @@
 TwoIsland_PokemonCenter_2F_MapScripts:: @ 81717DE
-	map_script 2, TwoIsland_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, TwoIsland_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, TwoIsland_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, TwoIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-TwoIsland_PokemonCenter_2F_EventScript_1717F3:: @ 81717F3
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+TwoIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 81717F3
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_1717F9:: @ 81717F9
-	call EventScript_1BB6AB
+TwoIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 81717F9
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_1717FF:: @ 81717FF
-	call EventScript_1BB7DE
+TwoIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 81717FF
+	call CableClub_EventScript_RecordCorner
 	end

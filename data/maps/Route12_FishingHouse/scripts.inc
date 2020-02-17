@@ -4,10 +4,9 @@ Route12_FishingHouse_MapScripts:: @ 816FF0B
 Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 	lock
 	faceplayer
-	checkflag FLAG_0x255
-	goto_if_eq EventScript_16FF7F
+	goto_if_set FLAG_GOT_SUPER_ROD, EventScript_16FF7F
 	msgbox gUnknown_819EFE0, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, YES
 	goto_if_eq EventScript_16FF34
 	msgbox gUnknown_819F1FA
 	release
@@ -15,12 +14,12 @@ Route12_FishingHouse_EventScript_16FF0C:: @ 816FF0C
 
 EventScript_16FF34:: @ 816FF34
 	checkitemspace ITEM_SUPER_ROD, 1
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_16FF75
-	additem ITEM_SUPER_ROD, 1
+	additem ITEM_SUPER_ROD
 	msgbox gUnknown_819F05B
-	giveitemfanfaremsg gUnknown_819F0B2, ITEM_SUPER_ROD
-	setflag FLAG_0x255
+	msgreceiveditem gUnknown_819F0B2, ITEM_SUPER_ROD
+	setflag FLAG_GOT_SUPER_ROD
 	msgbox gUnknown_819F0EB
 	release
 	end
@@ -31,29 +30,27 @@ EventScript_16FF75:: @ 816FF75
 	end
 
 EventScript_16FF7F:: @ 816FF7F
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_MAGIKARP
-	specialvar VAR_RESULT, sub_80CC48C
-	compare_var_to_value VAR_RESULT, 0
+	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_16FFF5
-	special sub_80A096C
+	special GetMagikarpSizeRecordInfo
 	msgbox gUnknown_819F2DB
-	special sub_80BF8FC
+	special Special_ChooseMonFromParty
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
-	compare_var_to_value VAR_RESULT, 6
-	goto_if 4, EventScript_16FFFF
-	special sub_80A0984
-	compare_var_to_value VAR_RESULT, 1
+	compare VAR_RESULT, 6
+	goto_if_ge EventScript_16FFFF
+	special CompareMagikarpSize
+	compare VAR_RESULT, 1
 	goto_if_eq EventScript_170001
-	compare_var_to_value VAR_RESULT, 2
+	compare VAR_RESULT, 2
 	goto_if_eq EventScript_17000B
-	compare_var_to_value VAR_RESULT, 3
+	compare VAR_RESULT, 3
 	goto_if_eq EventScript_170031
-	compare_var_to_value VAR_RESULT, 4
+	compare VAR_RESULT, 4
 	goto_if_eq EventScript_17001E
 	release
 	end
@@ -73,24 +70,22 @@ EventScript_170001:: @ 8170001
 	end
 
 EventScript_17000B:: @ 817000B
-	checkflag FLAG_0x29C
-	goto_if 0, EventScript_170031
+	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_170031
 	msgbox gUnknown_819F40A
 	release
 	end
 
 EventScript_17001E:: @ 817001E
-	checkflag FLAG_0x29C
-	goto_if 0, EventScript_170031
+	goto_if_unset FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_170031
 	msgbox gUnknown_819F3CB
 	release
 	end
 
 EventScript_170031:: @ 8170031
-	setflag FLAG_0x29C
+	setflag FLAG_GOT_RECORD_SETTING_MAGIKARP
 	msgbox gUnknown_819F31B
 	giveitem ITEM_NET_BALL
-	compare_var_to_value VAR_RESULT, 0
+	compare VAR_RESULT, 0
 	goto_if_eq EventScript_17005D
 	msgbox gUnknown_819F395
 	release
@@ -103,14 +98,13 @@ EventScript_17005D:: @ 817005D
 
 Route12_FishingHouse_EventScript_170067:: @ 8170067
 	lockall
-	checkflag FLAG_0x29C
-	goto_if_eq EventScript_17007B
+	goto_if_set FLAG_GOT_RECORD_SETTING_MAGIKARP, EventScript_17007B
 	msgbox gUnknown_819F50C
 	releaseall
 	end
 
 EventScript_17007B:: @ 817007B
-	special sub_80A096C
+	special GetMagikarpSizeRecordInfo
 	msgbox gUnknown_819F4CF
 	releaseall
 	end

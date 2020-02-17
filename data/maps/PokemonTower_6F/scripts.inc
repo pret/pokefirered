@@ -1,51 +1,49 @@
 PokemonTower_6F_MapScripts:: @ 81634B7
 	.byte 0
 
-PokemonTower_6F_EventScript_1634B8:: @ 81634B8
+PokemonTower_6F_EventScript_MarowakGhost:: @ 81634B8
 	lockall
 	textcolor 2
-	msgbox gUnknown_817A2F8
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	msgbox PokemonTower_6F_Text_BeGoneIntruders
+	goto_if_questlog EventScript_ReleaseEnd
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
-	special sub_807F904
+	special ScrSpecial_StartMarowakBattle
 	waitstate
 	special sub_8112364
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_1634F5
-	applymovement 255, Movement_163512
+	compare VAR_RESULT, FALSE  @ Set by CB2_EndMarowakBattle
+	goto_if_eq PokemonTower_6F_EventScript_DefeatedMarowakGhost
+	applymovement OBJ_EVENT_ID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp
 	waitmovement 0
 	releaseall
 	end
 
-EventScript_1634F5:: @ 81634F5
-	message Text_17A30C
+PokemonTower_6F_EventScript_DefeatedMarowakGhost:: @ 81634F5
+	message PokemonTower_6F_Text_GhostWasCubonesMother
 	waitmessage
 	waitse
 	playmoncry SPECIES_MAROWAK, 0
 	waitbuttonpress
 	waitmoncry
-	msgbox gUnknown_817A342
-	setvar VAR_0x4059, 1
+	msgbox PokemonTower_6F_Text_MothersSpiritWasCalmed
+	setvar VAR_MAP_SCENE_POKEMON_TOWER_6F, 1
 	releaseall
 	end
 
-Movement_163512:: @ 8163512
-	step_11
+PokemonTower_6F_Movement_ForcePlayerUp:: @ 8163512
+	walk_up
 	step_end
 
-PokemonTower_6F_EventScript_163514:: @ 8163514
-	trainerbattle 0, 451, 0, Text_17A243, Text_17A253
-	msgbox gUnknown_817A25A, 6
+PokemonTower_6F_EventScript_Angelica:: @ 8163514
+	trainerbattle_single TRAINER_CHANNELER_ANGELICA, PokemonTower_6F_Text_AngelicaIntro, PokemonTower_6F_Text_AngelicaDefeat
+	msgbox PokemonTower_6F_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonTower_6F_EventScript_16352B:: @ 816352B
-	trainerbattle 0, 452, 0, Text_17A272, Text_17A27F
-	msgbox gUnknown_817A293, 6
+PokemonTower_6F_EventScript_Emilia:: @ 816352B
+	trainerbattle_single TRAINER_CHANNELER_EMILIA, PokemonTower_6F_Text_EmiliaIntro, PokemonTower_6F_Text_EmiliaDefeat
+	msgbox PokemonTower_6F_Text_EmiliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonTower_6F_EventScript_163542:: @ 8163542
-	trainerbattle 0, 453, 0, Text_17A2C8, Text_17A2DC
-	msgbox gUnknown_817A2E2, 6
+PokemonTower_6F_EventScript_Jennifer:: @ 8163542
+	trainerbattle_single TRAINER_CHANNELER_JENNIFER, PokemonTower_6F_Text_JenniferIntro, PokemonTower_6F_Text_JenniferDefeat
+	msgbox PokemonTower_6F_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
 	end

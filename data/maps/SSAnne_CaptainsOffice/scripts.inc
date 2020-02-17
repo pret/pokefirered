@@ -1,48 +1,47 @@
 SSAnne_CaptainsOffice_MapScripts:: @ 8160B39
 	.byte 0
 
-SSAnne_CaptainsOffice_EventScript_160B3A:: @ 8160B3A
+SSAnne_CaptainsOffice_EventScript_Captain:: @ 8160B3A
 	lock
-	checkflag FLAG_0x237
-	goto_if_eq EventScript_160BB5
-	msgbox gUnknown_8173646
+	goto_if_set FLAG_GOT_HM01, SSAnne_CaptainsOffice_EventScript_AlreadyGotCut
+	msgbox SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick
 	textcolor 3
-	message Text_173676
+	message SSAnne_CaptainsOffice_Text_RubbedCaptainsBack
 	waitmessage
 	playfanfare MUS_ME_ASA
 	waitfanfare
 	call EventScript_1A6675
 	delay 50
-	applymovement 1, Movement_1A75E1
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_81736A6
-	additem ITEM_HM01, 1
-	giveitemfanfaremsg gUnknown_81737AF, ITEM_HM01, 1, MUS_FAN5
-	msgbox gUnknown_81737D2
-	setflag FLAG_0x237
+	msgbox SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut
+	giveitem_msg SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain, ITEM_HM01, 1, MUS_FAN5
+	msgbox SSAnne_CaptainsOffice_Text_ExplainCut
+	setflag FLAG_GOT_HM01
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 1
 	release
 	end
 
-EventScript_160BA0:: @ 8160BA0
-	msgbox gUnknown_81738C3
+@ Unused
+SSAnne_CaptainsOffice_EventScript_NoRoomForCut:: @ 8160BA0
+	msgbox SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-EventScript_160BB5:: @ 8160BB5
-	applymovement 1, Movement_1A75E1
+SSAnne_CaptainsOffice_EventScript_AlreadyGotCut:: @ 8160BB5
+	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_8173831
+	msgbox SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon
 	release
 	end
 
-SSAnne_CaptainsOffice_EventScript_160BC9:: @ 8160BC9
-	msgbox gUnknown_81738E6, 3
+SSAnne_CaptainsOffice_EventScript_TrashCan:: @ 8160BC9
+	msgbox SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked, MSGBOX_SIGN
 	end
 
-SSAnne_CaptainsOffice_EventScript_160BD2:: @ 8160BD2
-	msgbox gUnknown_8173903, 3
+SSAnne_CaptainsOffice_EventScript_Book:: @ 8160BD2
+	msgbox SSAnne_CaptainsOffice_Text_HowToConquerSeasickness, MSGBOX_SIGN
 	end

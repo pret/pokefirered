@@ -25,11 +25,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "23",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_1",
       "x": 11,
       "y": 8,
       "elevation": 3,
-      "movement_type": "20",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -89,9 +89,10 @@
       "x": 12,
       "y": 9,
       "elevation": 3,
-      "item": "POCKET_KEY_ITEMS",
-      "flag": "180",
-      "unknown": 1
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "HIDDEN_ITEM_SIX_ISLAND_GREEN_PATH_ULTRA_BALL",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

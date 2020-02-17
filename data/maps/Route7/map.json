@@ -18,7 +18,7 @@
       "direction": "left"
     },
     {
-      "map": "MAP_SAFFRON_CITY_CLASSIC",
+      "map": "MAP_SAFFRON_CITY_CONNECTION",
       "offset": -10,
       "direction": "right"
     }
@@ -29,7 +29,7 @@
       "x": 65528,
       "y": 12,
       "elevation": 10,
-      "movement_type": "0",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": 6,
@@ -69,8 +69,9 @@
       "y": 15,
       "elevation": 3,
       "item": "ITEM_WEPEAR_BERRY",
-      "flag": "152",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE7_WEPEAR_BERRY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

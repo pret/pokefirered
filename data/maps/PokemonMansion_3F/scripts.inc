@@ -1,32 +1,31 @@
 PokemonMansion_3F_MapScripts:: @ 81622A1
-	map_script 1, PokemonMansion_3F_MapScript1_1622A7
+	map_script MAP_SCRIPT_ON_LOAD, PokemonMansion_3F_OnLoad
 	.byte 0
 
-PokemonMansion_3F_MapScript1_1622A7:: @ 81622A7
-	checkflag FLAG_0x26C
-	call_if 1, EventScript_1A7E72
+PokemonMansion_3F_OnLoad:: @ 81622A7
+	call_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_EventScript_PressSwitch_3F
 	end
 
-PokemonMansion_3F_EventScript_1622B1:: @ 81622B1
+PokemonMansion_3F_EventScript_Statue:: @ 81622B1
 	lockall
 	setvar VAR_0x8004, 2
-	call EventScript_1A7AE2
+	call PokemonMansion_EventScript_SecretSwitch
 	playse SE_KI_GASYAN
 	special DrawWholeMapView
 	waitse
 	releaseall
 	end
 
-PokemonMansion_3F_EventScript_1622C5:: @ 81622C5
-	msgbox gUnknown_8177685, 3
+PokemonMansion_3F_EventScript_DiaryFeb6th:: @ 81622C5
+	msgbox PokemonMansion_1F_Text_MewGaveBirthToMewtwo, MSGBOX_SIGN
 	end
 
-PokemonMansion_3F_EventScript_1622CE:: @ 81622CE
-	trainerbattle 0, 218, 0, Text_1775E7, Text_177602
-	msgbox gUnknown_8177608, 6
+PokemonMansion_3F_EventScript_Simon:: @ 81622CE
+	trainerbattle_single TRAINER_BURGLAR_SIMON, PokemonMansion_1F_Text_SimonIntro, PokemonMansion_1F_Text_SimonDefeat
+	msgbox PokemonMansion_1F_Text_SimonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-PokemonMansion_3F_EventScript_1622E5:: @ 81622E5
-	trainerbattle 0, 346, 0, Text_177628, Text_177643
-	msgbox gUnknown_8177657, 6
+PokemonMansion_3F_EventScript_Braydon:: @ 81622E5
+	trainerbattle_single TRAINER_SCIENTIST_BRAYDON, PokemonMansion_1F_Text_BraydonIntro, PokemonMansion_1F_Text_BraydonDefeat
+	msgbox PokemonMansion_1F_Text_BraydonPostBattle, MSGBOX_AUTOCLOSE
 	end

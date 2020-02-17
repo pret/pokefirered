@@ -1,29 +1,27 @@
 CinnabarIsland_Mart_MapScripts:: @ 816EA0F
 	.byte 0
 
-CinnabarIsland_Mart_EventScript_16EA10:: @ 816EA10
-	msgbox gUnknown_819A7A0, 2
+CinnabarIsland_Mart_EventScript_Woman:: @ 816EA10
+	msgbox CinnabarIsland_Mart_Text_DontTheyHaveXAttack, MSGBOX_NPC
 	end
 
-CinnabarIsland_Mart_EventScript_16EA19:: @ 816EA19
-	msgbox gUnknown_819A7F1, 2
+CinnabarIsland_Mart_EventScript_Scientist:: @ 816EA19
+	msgbox CinnabarIsland_Mart_Text_ExtraItemsNeverHurt, MSGBOX_NPC
 	end
 
-CinnabarIsland_Mart_EventScript_16EA22:: @ 816EA22
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+CinnabarIsland_Mart_EventScript_Clerk:: @ 816EA22
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16EA48
-	msgbox gUnknown_81A5190
+	pokemart CinnabarIsland_Mart_Items
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16EA48:: @ 816EA48
+CinnabarIsland_Mart_Items:: @ 816EA48
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_HYPER_POTION

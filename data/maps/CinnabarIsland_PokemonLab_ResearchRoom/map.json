@@ -14,29 +14,29 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "52",
+      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
       "x": 5,
       "y": 4,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3DF",
+      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_MetronomeTutor",
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 10,
       "y": 3,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3E5",
+      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_Scientist",
       "flag": "0"
     }
   ],
@@ -56,14 +56,14 @@
       "x": 6,
       "y": 1,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3F7"
+      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_AmberPipe"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 1,
       "elevation": 0,
-      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_16E3EE"
+      "script": "CinnabarIsland_PokemonLab_ResearchRoom_EventScript_Computer"
     }
   ]
 }

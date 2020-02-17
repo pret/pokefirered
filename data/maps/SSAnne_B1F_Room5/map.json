@@ -14,43 +14,43 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "19",
+      "graphics_id": "OBJECT_EVENT_GFX_BOY",
       "x": 3,
       "y": 5,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_B1F_Room5_EventScript_160DD6",
+      "script": "SSAnne_B1F_Room5_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "134",
+      "graphics_id": "OBJECT_EVENT_GFX_MACHOKE",
       "x": 2,
       "y": 5,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_B1F_Room5_EventScript_160DDF",
+      "script": "SSAnne_B1F_Room5_EventScript_Machoke",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 2,
       "elevation": 0,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_B1F_Room5_EventScript_1BE69F",
-      "flag": "361"
+      "script": "SSAnne_B1F_Room5_EventScript_ItemSuperPotion",
+      "flag": "FLAG_HIDE_SSANNE_B1F_ROOM5_SUPER_POTION"
     }
   ],
   "warp_events": [

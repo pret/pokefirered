@@ -25,24 +25,24 @@
   ],
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
       "x": 7,
       "y": 18,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_EventScript_1C4B56",
+      "script": "SevenIsland_EventScript_SwordsDanceTutor",
       "flag": "0"
     },
     {
-      "graphics_id": "35",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_WOMAN",
       "x": 9,
       "y": 7,
       "elevation": 3,
-      "movement_type": "13",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
@@ -51,11 +51,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 15,
       "y": 5,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,

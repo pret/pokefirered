@@ -1,144 +1,138 @@
 SilphCo_11F_MapScripts:: @ 8161DEE
-	map_script 1, SilphCo_11F_MapScript1_161DF4
+	map_script MAP_SCRIPT_ON_LOAD, SilphCo_11F_OnLoad
 	.byte 0
 
-SilphCo_11F_MapScript1_161DF4:: @ 8161DF4
-	checkflag FLAG_0x28D
-	call_if 0, EventScript_1A8504
+SilphCo_11F_OnLoad:: @ 8161DF4
+	call_if_unset FLAG_SILPH_11F_DOOR, EventScript_Close11FDoor
 	end
 
-SilphCo_11F_EventScript_161DFE:: @ 8161DFE
+SilphCo_11F_EventScript_President:: @ 8161DFE
 	lock
 	faceplayer
-	checkflag FLAG_0x250
-	goto_if_eq EventScript_161E75
+	goto_if_set FLAG_GOT_MASTER_BALL_FROM_SILPH, SilphCo_11F_EventScript_AlreadyGotMasterBall
 	checkplayergender
-	compare_var_to_value VAR_RESULT, 0
-	call_if 1, EventScript_161E59
-	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_161E62
+	compare VAR_RESULT, MALE
+	call_if_eq SilphCo_11F_EventScript_PresidentThanksMale
+	compare VAR_RESULT, FEMALE
+	call_if_eq SilphCo_11F_EventScript_PresidentThanksFemale
 	checkitemspace ITEM_MASTER_BALL, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_161E6B
-	additem ITEM_MASTER_BALL, 1
-	giveitemfanfaremsg gUnknown_8176FBD, ITEM_MASTER_BALL, 1, MUS_FAN5
-	msgbox gUnknown_8176FEB
-	setflag FLAG_0x250
+	compare VAR_RESULT, FALSE
+	goto_if_eq SilphCo_11F_EventScript_NoRoomForMasterBall
+	giveitem_msg SilphCo_11F_Text_ObtainedMasterBallFromPresident, ITEM_MASTER_BALL, 1, MUS_FAN5
+	msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
+	setflag FLAG_GOT_MASTER_BALL_FROM_SILPH
 	release
 	end
 
-EventScript_161E59:: @ 8161E59
-	msgbox gUnknown_8176E12
+SilphCo_11F_EventScript_PresidentThanksMale:: @ 8161E59
+	msgbox SilphCo_11F_Text_ThanksForSavingMeDearBoy
 	return
 
-EventScript_161E62:: @ 8161E62
-	msgbox gUnknown_8176EE7
+SilphCo_11F_EventScript_PresidentThanksFemale:: @ 8161E62
+	msgbox SilphCo_11F_Text_ThanksForSavingMeDearGirl
 	return
 
-EventScript_161E6B:: @ 8161E6B
-	msgbox gUnknown_817708E
+SilphCo_11F_EventScript_NoRoomForMasterBall:: @ 8161E6B
+	msgbox SilphCo_11F_Text_YouHaveNoRoomForThis
 	release
 	end
 
-EventScript_161E75:: @ 8161E75
-	msgbox gUnknown_8176FEB
+SilphCo_11F_EventScript_AlreadyGotMasterBall:: @ 8161E75
+	msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
 	release
 	end
 
-SilphCo_11F_EventScript_161E7F:: @ 8161E7F
-	msgbox gUnknown_81770A9, 2
+SilphCo_11F_EventScript_Secretary:: @ 8161E7F
+	msgbox SilphCo_11F_Text_ThanksForRescuingUs, MSGBOX_NPC
 	end
 
-SilphCo_11F_EventScript_161E88:: @ 8161E88
+SilphCo_11F_EventScript_GiovanniTriggerLeft:: @ 8161E88
 	lockall
-	setvar VAR_0x4001, 0
-	goto EventScript_161EA0
-
-EventScript_161E93:: @ 8161E93
+	setvar VAR_TEMP_1, 0
+	goto SilphCo_11F_EventScript_BattleGiovanni
 	end
 
-SilphCo_11F_EventScript_161E94:: @ 8161E94
+SilphCo_11F_EventScript_GiovanniTriggerRight:: @ 8161E94
 	lockall
-	setvar VAR_0x4001, 1
-	goto EventScript_161EA0
-
-EventScript_161E9F:: @ 8161E9F
+	setvar VAR_TEMP_1, 1
+	goto SilphCo_11F_EventScript_BattleGiovanni
 	end
 
-EventScript_161EA0:: @ 8161EA0
+SilphCo_11F_EventScript_BattleGiovanni:: @ 8161EA0
 	textcolor 0
-	applymovement 3, Movement_1A75ED
+	applymovement 3, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	delay 25
-	msgbox gUnknown_8177108
+	msgbox SilphCo_11F_Text_GiovanniIntro
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_161F00
-	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_161F12
+	compare VAR_TEMP_1, 0
+	call_if_eq SilphCo_11F_EventScript_GiovanniApproachLeft
+	compare VAR_TEMP_1, 1
+	call_if_eq SilphCo_11F_EventScript_GiovanniApproachRight
 	setvar VAR_LAST_TALKED, 3
-	trainerbattle 3, 349, 0, Text_1771AB
-	msgbox gUnknown_81771C2
+	trainerbattle_no_intro TRAINER_BOSS_GIOVANNI_2, SilphCo_11F_Text_GiovanniDefeat
+	msgbox SilphCo_11F_Text_GiovanniPostBattle
 	closemessage
-	fadescreen 1
+	fadescreen FADE_TO_BLACK
 	removeobject 3
 	removeobject 4
 	removeobject 6
-	fadescreen 0
-	setvar VAR_0x4060, 1
-	setflag FLAG_0x03E
-	clearflag FLAG_0x03F
+	fadescreen FADE_FROM_BLACK
+	setvar VAR_MAP_SCENE_SILPH_CO_11F, 1
+	setflag FLAG_HIDE_SAFFRON_ROCKETS
+	clearflag FLAG_HIDE_SAFFRON_CIVILIANS
 	releaseall
 	end
 
-EventScript_161F00:: @ 8161F00
-	applymovement 3, Movement_161F1D
-	applymovement 255, Movement_161F27
+SilphCo_11F_EventScript_GiovanniApproachLeft:: @ 8161F00
+	applymovement 3, SilphCo_11F_Movement_GiovanniApproachLeft
+	applymovement OBJ_EVENT_ID_PLAYER, SilphCo_11F_Movement_PlayerFaceGiovanni
 	waitmovement 0
 	return
 
-EventScript_161F12:: @ 8161F12
-	applymovement 3, Movement_161F23
+SilphCo_11F_EventScript_GiovanniApproachRight:: @ 8161F12
+	applymovement 3, SilphCo_11F_Movement_GiovanniApproachRight
 	waitmovement 0
 	return
 
-Movement_161F1D:: @ 8161F1D
-	step_10
-	step_10
-	step_10
-	step_10
-	step_2f
+SilphCo_11F_Movement_GiovanniApproachLeft:: @ 8161F1D
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_left
 	step_end
 
-Movement_161F23:: @ 8161F23
-	step_10
-	step_10
-	step_10
+SilphCo_11F_Movement_GiovanniApproachRight:: @ 8161F23
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
-Movement_161F27:: @ 8161F27
-	step_1c
-	step_1c
-	step_1c
-	step_1b
-	step_1a
-	step_30
+SilphCo_11F_Movement_PlayerFaceGiovanni:: @ 8161F27
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	delay_4
+	walk_in_place_fastest_right
 	step_end
 
-EventScript_161F2E:: @ 8161F2E
-	msgbox gUnknown_817732B, 3
+@ Unused
+SilphCo_11F_EventScript_Monitor:: @ 8161F2E
+	msgbox SilphCo_11F_Text_MonitorHasMonsOnIt, MSGBOX_SIGN
 	end
 
-SilphCo_11F_EventScript_161F37:: @ 8161F37
-	msgbox gUnknown_817734A, 3
+SilphCo_11F_EventScript_FloorSign:: @ 8161F37
+	msgbox SilphCo_11F_Text_FloorSign, MSGBOX_SIGN
 	end
 
-SilphCo_11F_EventScript_161F40:: @ 8161F40
-	trainerbattle 0, 390, 0, Text_1772B8, Text_1772E7
-	msgbox gUnknown_81772F9, 6
+SilphCo_11F_EventScript_Grunt1:: @ 8161F40
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_40, SilphCo_11F_Text_Grunt1Intro, SilphCo_11F_Text_Grunt1Defeat
+	msgbox SilphCo_11F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SilphCo_11F_EventScript_161F57:: @ 8161F57
-	trainerbattle 0, 391, 0, Text_17726A, Text_17728C
-	msgbox gUnknown_817729B, 6
+SilphCo_11F_EventScript_Grunt2:: @ 8161F57
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_41, SilphCo_11F_Text_Grunt2Intro, SilphCo_11F_Text_Grunt2Defeat
+	msgbox SilphCo_11F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end

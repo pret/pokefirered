@@ -14,95 +14,95 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "58",
+      "graphics_id": "OBJECT_EVENT_GFX_CHANNELER",
       "x": 11,
       "y": 4,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "PokemonTower_5F_EventScript_163472",
+      "script": "PokemonTower_5F_EventScript_Ruth",
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "OBJECT_EVENT_GFX_CHANNELER",
       "x": 19,
       "y": 7,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "PokemonTower_5F_EventScript_16345B",
+      "script": "PokemonTower_5F_EventScript_Tammy",
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "OBJECT_EVENT_GFX_CHANNELER",
       "x": 7,
       "y": 12,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "PokemonTower_5F_EventScript_163489",
+      "script": "PokemonTower_5F_EventScript_Karina",
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "OBJECT_EVENT_GFX_CHANNELER",
       "x": 11,
       "y": 16,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "PokemonTower_5F_EventScript_1634A0",
+      "script": "PokemonTower_5F_EventScript_Janae",
       "flag": "0"
     },
     {
-      "graphics_id": "58",
+      "graphics_id": "OBJECT_EVENT_GFX_CHANNELER",
       "x": 12,
       "y": 8,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_163433",
+      "script": "PokemonTower_5F_EventScript_Channeler",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 6,
       "y": 16,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BE789",
-      "flag": "379"
+      "script": "PokemonTower_5F_EventScript_ItemNugget",
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_NUGGET"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 9,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PokemonTower_5F_EventScript_1BEBB3",
-      "flag": "464"
+      "script": "PokemonTower_5F_EventScript_ItemCleanseTag",
+      "flag": "FLAG_HIDE_POKEMON_TOWER_5F_CLEANSE_TAG"
     }
   ],
   "warp_events": [
@@ -127,153 +127,153 @@
       "x": 10,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 12,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 10,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 9,
       "y": 8,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 12,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 10,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 12,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "PokemonTower_5F_EventScript_16343C"
+      "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
       "type": "trigger",
       "x": 9,
       "y": 9,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 9,
       "y": 10,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 10,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 11,
       "y": 11,
       "elevation": 3,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 12,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 13,
       "y": 8,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 13,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
       "type": "trigger",
       "x": 13,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_0x4001",
+      "var": "VAR_TEMP_1",
       "var_value": 1,
-      "script": "PokemonTower_5F_EventScript_163453"
+      "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     }
   ],
   "bg_events": [
@@ -283,8 +283,9 @@
       "y": 3,
       "elevation": 3,
       "item": "ITEM_BIG_MUSHROOM",
-      "flag": "14",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_POKEMON_TOWER_5F_BIG_MUSHROOM",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

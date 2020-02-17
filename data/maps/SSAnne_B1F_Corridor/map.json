@@ -65,8 +65,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_HYPER_POTION",
-      "flag": "8",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SSANNE_B1F_CORRIDOR_HYPER_POTION",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

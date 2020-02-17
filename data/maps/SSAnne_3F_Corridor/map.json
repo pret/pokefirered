@@ -14,16 +14,16 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "62",
+      "graphics_id": "OBJECT_EVENT_GFX_SAILOR",
       "x": 10,
       "y": 4,
       "elevation": 3,
-      "movement_type": "5",
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 3,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_3F_Corridor_EventScript_160A5E",
+      "script": "SSAnne_3F_Corridor_EventScript_Sailor",
       "flag": "0"
     }
   ],

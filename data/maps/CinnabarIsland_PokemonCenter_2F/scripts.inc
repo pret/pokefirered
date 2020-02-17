@@ -1,18 +1,19 @@
 CinnabarIsland_PokemonCenter_2F_MapScripts:: @ 816E9E8
-	map_script 2, CinnabarIsland_PokemonCenter_2F_MapScript1_1BB2A3
-	map_script 4, CinnabarIsland_PokemonCenter_2F_MapScript2_1BB1ED
-	map_script 1, CinnabarIsland_PokemonCenter_2F_MapScript3_1BB237
-	map_script 3, CinnabarIsland_PokemonCenter_2F_MapScript4_1BB1B4
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, CableClub_OnFrame
+	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, CableClub_OnWarp
+	map_script MAP_SCRIPT_ON_LOAD, CableClub_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, CableClub_OnTransition
 	.byte 0
 
-CinnabarIsland_PokemonCenter_2F_EventScript_16E9FD:: @ 816E9FD
-	call EventScript_1BB4A3
+@ The below 3 are unused and leftover from RS
+CinnabarIsland_PokemonCenter_2F_EventScript_Colosseum:: @ 816E9FD
+	call CableClub_EventScript_Colosseum
 	end
 
-EventScript_16EA03:: @ 816EA03
-	call EventScript_1BB6AB
+CinnabarIsland_PokemonCenter_2F_EventScript_TradeCenter:: @ 816EA03
+	call CableClub_EventScript_TradeCenter
 	end
 
-EventScript_16EA09:: @ 816EA09
-	call EventScript_1BB7DE
+CinnabarIsland_PokemonCenter_2F_EventScript_RecordCorner:: @ 816EA09
+	call CableClub_EventScript_RecordCorner
 	end

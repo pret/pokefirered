@@ -14,55 +14,55 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "61",
+      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
       "x": 11,
       "y": 6,
       "elevation": 3,
-      "movement_type": "5",
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC41",
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_Gentleman",
       "flag": "0"
     },
     {
-      "graphics_id": "62",
+      "graphics_id": "OBJECT_EVENT_GFX_SAILOR",
       "x": 6,
       "y": 8,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC4A",
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_Sailor",
       "flag": "0"
     },
     {
-      "graphics_id": "68",
+      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
       "x": 1,
       "y": 7,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC5C",
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems",
       "flag": "0"
     },
     {
-      "graphics_id": "68",
+      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
       "x": 1,
       "y": 6,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC96",
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins",
       "flag": "0"
     }
   ],
@@ -96,7 +96,7 @@
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_5F_EventScript_16BC53"
+      "script": "CeladonCity_DepartmentStore_5F_EventScript_FloorSign"
     }
   ]
 }

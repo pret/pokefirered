@@ -1,98 +1,99 @@
 Route8_WestEntrance_MapScripts:: @ 816FB53
 	.byte 0
 
-Route8_WestEntrance_EventScript_16FB54:: @ 816FB54
-	msgbox gUnknown_819E50F, 2
+Route8_WestEntrance_EventScript_Guard:: @ 816FB54
+	msgbox Route8_WestEntrance_Text_HiHowsItGoing, MSGBOX_NPC
 	end
 
-Route8_WestEntrance_EventScript_16FB5D:: @ 816FB5D
+Route8_WestEntrance_EventScript_GuardTriggerTop:: @ 816FB5D
 	lockall
-	setvar VAR_0x4001, 0
-	goto EventScript_16FB81
+	setvar VAR_TEMP_1, 0
+	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
 
-Route8_WestEntrance_EventScript_16FB69:: @ 816FB69
+Route8_WestEntrance_EventScript_GuardTriggerMid:: @ 816FB69
 	lockall
-	setvar VAR_0x4001, 1
-	goto EventScript_16FB81
+	setvar VAR_TEMP_1, 1
+	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
 
-Route8_WestEntrance_EventScript_16FB75:: @ 816FB75
+Route8_WestEntrance_EventScript_GuardTriggerBottom:: @ 816FB75
 	lockall
-	setvar VAR_0x4001, 2
-	goto EventScript_16FB81
+	setvar VAR_TEMP_1, 2
+	goto Route8_WestEntrance_EventScript_GuardTrigger
 	end
 
-EventScript_16FB81:: @ 816FB81
+Route8_WestEntrance_EventScript_GuardTrigger:: @ 816FB81
 	textcolor 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	checkflag FLAG_0x2A6
-	goto_if_eq EventScript_16FBAB
-	msgbox gUnknown_819E3ED
+	goto_if_set FLAG_GOT_TEA, Route8_WestEntrance_EventScript_GiveTea
+	msgbox Route8_WestEntrance_Text_ThirstyOnGuardDuty
 	closemessage
-	applymovement 255, Movement_16FC2D
+	applymovement OBJ_EVENT_ID_PLAYER, Route8_WestEntrance_Movement_BlockPlayerEntry
 	waitmovement 0
 	releaseall
 	end
 
-EventScript_16FBAB:: @ 816FBAB
+Route8_WestEntrance_EventScript_GiveTea:: @ 816FBAB
 	removeitem ITEM_TEA, 1
-	goto EventScript_16FBCC
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
-EventScript_16FBB6:: @ 816FBB6
+@ Unused
+Route8_WestEntrance_EventScript_GiveSodaPop:: @ 816FBB6
 	removeitem ITEM_SODA_POP, 1
-	goto EventScript_16FBCC
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
-EventScript_16FBC1:: @ 816FBC1
+@ Unused
+Route8_WestEntrance_EventScript_GiveLemonade:: @ 816FBC1
 	removeitem ITEM_LEMONADE, 1
-	goto EventScript_16FBCC
+	goto Route8_WestEntrance_EventScript_GuardDrinkTea
 	end
 
-EventScript_16FBCC:: @ 816FBCC
-	msgbox gUnknown_819E43D
+Route8_WestEntrance_EventScript_GuardDrinkTea:: @ 816FBCC
+	msgbox Route8_WestEntrance_Text_ThatTeaLooksTasty
 	closemessage
-	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_16FC05
-	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_16FC10
-	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_16FC1B
-	msgbox gUnknown_819E463
-	setvar VAR_0x4062, 1
+	compare VAR_TEMP_1, 0
+	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardTop
+	compare VAR_TEMP_1, 1
+	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardMid
+	compare VAR_TEMP_1, 2
+	call_if_eq Route8_WestEntrance_EventScript_WalkToGuardBottom
+	msgbox Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards
+	setvar VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1
 	releaseall
 	end
 
-EventScript_16FC05:: @ 816FC05
-	applymovement 255, Movement_16FC2B
+Route8_WestEntrance_EventScript_WalkToGuardTop:: @ 816FC05
+	applymovement OBJ_EVENT_ID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardTop
 	waitmovement 0
 	return
 
-EventScript_16FC10:: @ 816FC10
-	applymovement 255, Movement_16FC26
+Route8_WestEntrance_EventScript_WalkToGuardMid:: @ 816FC10
+	applymovement OBJ_EVENT_ID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardMid
 	waitmovement 0
 	return
 
-EventScript_16FC1B:: @ 816FC1B
-	applymovement 255, Movement_16FC28
+Route8_WestEntrance_EventScript_WalkToGuardBottom:: @ 816FC1B
+	applymovement OBJ_EVENT_ID_PLAYER, Route8_WestEntrance_Movement_WalkToGuardBottom
 	waitmovement 0
 	return
 
-Movement_16FC26:: @ 816FC26
-	step_11
+Route8_WestEntrance_Movement_WalkToGuardMid:: @ 816FC26
+	walk_up
 	step_end
 
-Movement_16FC28:: @ 816FC28
-	step_11
-	step_11
+Route8_WestEntrance_Movement_WalkToGuardBottom:: @ 816FC28
+	walk_up
+	walk_up
 	step_end
 
-Movement_16FC2B:: @ 816FC2B
-	step_26
+Route8_WestEntrance_Movement_WalkToGuardTop:: @ 816FC2B
+	walk_in_place_up
 	step_end
 
-Movement_16FC2D:: @ 816FC2D
-	step_13
+Route8_WestEntrance_Movement_BlockPlayerEntry:: @ 816FC2D
+	walk_right
 	step_end

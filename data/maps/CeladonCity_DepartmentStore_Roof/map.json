@@ -14,29 +14,29 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "41",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
       "x": 9,
       "y": 5,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C022",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM",
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
       "x": 5,
       "y": 4,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16BCCD",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl",
       "flag": "0"
     }
   ],
@@ -56,28 +56,28 @@
       "x": 14,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C02B"
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_FloorSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 10,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     }
   ]
 }

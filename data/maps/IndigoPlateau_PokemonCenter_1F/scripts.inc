@@ -1,62 +1,58 @@
 IndigoPlateau_PokemonCenter_1F_MapScripts:: @ 816EA5A
-	map_script 3, IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65
-	map_script 5, IndigoPlateau_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-IndigoPlateau_PokemonCenter_1F_MapScript1_16EA65:: @ 816EA65
+IndigoPlateau_PokemonCenter_1F_OnTransition:: @ 816EA65
 	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare_var_to_value VAR_RESULT, 1
-	call_if 1, EventScript_16EA79
+	compare VAR_RESULT, TRUE
+	call_if_eq IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor
 	end
 
-EventScript_16EA79:: @ 816EA79
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_1A77A9
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor:: @ 816EA79
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_Return
 	setobjectxyperm 4, 4, 2
 	return
 
-IndigoPlateau_PokemonCenter_1F_EventScript_16EA8A:: @ 816EA8A
+IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard:: @ 816EA8A
 	lock
 	faceplayer
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16EAA6
-	msgbox gUnknown_819A8D8
+	compare VAR_RESULT, TRUE
+	goto_if_eq IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
 	release
 	end
 
-EventScript_16EAA6:: @ 816EAA6
-	checkflag FLAG_0x844
-	goto_if_eq EventScript_16EAB9
-	msgbox gUnknown_819A943
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete:: @ 816EAA6
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing
 	release
 	end
 
-EventScript_16EAB9:: @ 816EAB9
-	msgbox gUnknown_819A8D8
+IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete:: @ 816EAB9
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_16EAC3:: @ 816EAC3
-	msgbox gUnknown_819A837, 2
+IndigoPlateau_PokemonCenter_1F_EventScript_GymGuy:: @ 816EAC3
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice, MSGBOX_NPC
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_16EACC:: @ 816EACC
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+IndigoPlateau_PokemonCenter_1F_EventScript_Clerk:: @ 816EACC
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16EAF4
-	msgbox gUnknown_81A5190
+	pokemart IndigoPlateau_PokemonCenter_1F_Items
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16EAF4:: @ 816EAF4
+IndigoPlateau_PokemonCenter_1F_Items:: @ 816EAF4
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_FULL_RESTORE
@@ -68,9 +64,9 @@ Items_16EAF4:: @ 816EAF4
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_16EB06:: @ 816EB06
+IndigoPlateau_PokemonCenter_1F_EventScript_Nurse:: @ 816EB06
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end

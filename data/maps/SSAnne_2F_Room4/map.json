@@ -14,43 +14,43 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "61",
+      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
       "x": 0,
       "y": 5,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_2F_Room4_EventScript_160CF3",
+      "script": "SSAnne_2F_Room4_EventScript_Lamar",
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 3,
       "y": 3,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SSAnne_2F_Room4_EventScript_160D0A",
+      "script": "SSAnne_2F_Room4_EventScript_Dawn",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 4,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SSAnne_2F_Room4_EventScript_1BE678",
-      "flag": "358"
+      "script": "SSAnne_2F_Room4_EventScript_ItemXAttack",
+      "flag": "FLAG_HIDE_SSANNE_2F_ROOM4_X_ATTACK"
     }
   ],
   "warp_events": [

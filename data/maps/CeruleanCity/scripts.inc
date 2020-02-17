@@ -1,383 +1,381 @@
+.equ LOCALID_POLICEMAN, 1
+.equ LOCALID_GRUNT,     2
+.equ LOCALID_SLOWBRO,   5
+.equ LOCALID_LASS,      6
+.equ LOCALID_RIVAL,     8
+
 CeruleanCity_MapScripts:: @ 8166471
-	map_script 3, CeruleanCity_MapScript1_166477
+	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_OnTransition
 	.byte 0
 
-CeruleanCity_MapScript1_166477:: @ 8166477
+CeruleanCity_OnTransition:: @ 8166477
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
-	checkflag FLAG_0x234
-	call_if 0, EventScript_166484
+	call_if_unset FLAG_GOT_SS_TICKET, CeruleanCity_EventScript_BlockExits
 	end
 
-EventScript_166484:: @ 8166484
-	setobjectxyperm 1, 30, 12
-	setobjectxyperm 5, 26, 31
-	setobjectxyperm 6, 27, 31
+CeruleanCity_EventScript_BlockExits:: @ 8166484
+	setobjectxyperm LOCALID_POLICEMAN, 30, 12
+	setobjectxyperm LOCALID_SLOWBRO, 26, 31
+	setobjectxyperm LOCALID_LASS, 27, 31
 	return
 
-CeruleanCity_EventScript_16649A:: @ 816649A
+CeruleanCity_EventScript_RivalTriggerLeft:: @ 816649A
 	lockall
-	setvar VAR_0x4001, 0
-	goto EventScript_1664CC
+	setvar VAR_TEMP_1, 0
+	goto CeruleanCity_EventScript_Rival
 	end
 
-CeruleanCity_EventScript_1664A6:: @ 81664A6
+CeruleanCity_EventScript_RivalTriggerMid:: @ 81664A6
 	lockall
-	setvar VAR_0x4001, 1
-	setobjectxyperm 8, 23, 0
-	goto EventScript_1664CC
+	setvar VAR_TEMP_1, 1
+	setobjectxyperm LOCALID_RIVAL, 23, 0
+	goto CeruleanCity_EventScript_Rival
 	end
 
-CeruleanCity_EventScript_1664B9:: @ 81664B9
+CeruleanCity_EventScript_RivalTriggerRight:: @ 81664B9
 	lockall
-	setvar VAR_0x4001, 2
-	setobjectxyperm 8, 24, 0
-	goto EventScript_1664CC
+	setvar VAR_TEMP_1, 2
+	setobjectxyperm LOCALID_RIVAL, 24, 0
+	goto CeruleanCity_EventScript_Rival
 	end
 
-EventScript_1664CC:: @ 81664CC
+CeruleanCity_EventScript_Rival:: @ 81664CC
 	textcolor 0
-	setvar VAR_0x4054, 2
+	setvar VAR_MAP_SCENE_ROUTE22, 2
 	playbgm MUS_RIVAL1, 0
-	addobject 8
-	applymovement 8, Movement_1665D3
+	addobject LOCALID_RIVAL
+	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalEnter
 	waitmovement 0
-	msgbox gUnknown_817EAD7
-	setvar VAR_LAST_TALKED, 8
-	compare_var_to_value VAR_STARTER_MON, 2
-	call_if 1, EventScript_166582
-	compare_var_to_value VAR_STARTER_MON, 1
-	call_if 1, EventScript_16658D
-	compare_var_to_value VAR_STARTER_MON, 0
-	call_if 1, EventScript_166598
-	setvar VAR_0x8004, 13
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_817EB95
+	msgbox CeruleanCity_Text_RivalIntro
+	setvar VAR_LAST_TALKED, LOCALID_RIVAL
+	compare VAR_STARTER_MON, 2
+	call_if_eq CeruleanCity_EventScript_RivalSquirtle
+	compare VAR_STARTER_MON, 1
+	call_if_eq CeruleanCity_EventScript_RivalBulbasaur
+	compare VAR_STARTER_MON, 0
+	call_if_eq CeruleanCity_EventScript_RivalCharmander
+	famechecker FAMECHECKER_BILL, 0
+	msgbox CeruleanCity_Text_RivalPostBattle
 	closemessage
 	playbgm MUS_RIVAL2, 0
-	compare_var_to_value VAR_0x4001, 0
-	call_if 1, EventScript_1665A3
-	compare_var_to_value VAR_0x4001, 1
-	call_if 1, EventScript_1665A3
-	compare_var_to_value VAR_0x4001, 2
-	call_if 1, EventScript_1665B5
-	msgbox gUnknown_817ECD4
-	setvar VAR_0x4052, 1
-	setflag FLAG_0x29B
+	compare VAR_TEMP_1, 0
+	call_if_eq CeruleanCity_EventScript_RivalStartExit
+	compare VAR_TEMP_1, 1
+	call_if_eq CeruleanCity_EventScript_RivalStartExit
+	compare VAR_TEMP_1, 2
+	call_if_eq CeruleanCity_EventScript_RivalStartExitRight
+	msgbox CeruleanCity_Text_OhRightLittlePresentAsFavor
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_RIVAL, 1
+	setflag FLAG_GOT_FAME_CHECKER
 	giveitem ITEM_FAME_CHECKER
-	msgbox gUnknown_817ED5D
+	msgbox CeruleanCity_Text_ExplainFameCheckerSmellYa
 	closemessage
-	applymovement 8, Movement_1665FB
+	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
-	removeobject 8
+	removeobject LOCALID_RIVAL
 	releaseall
 	end
 
-EventScript_166582:: @ 8166582
-	trainerbattle 3, 332, 0, Text_17EB71
+CeruleanCity_EventScript_RivalSquirtle:: @ 8166582
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_SQUIRTLE, CeruleanCity_Text_RivalDefeat
 	return
 
-EventScript_16658D:: @ 816658D
-	trainerbattle 3, 333, 0, Text_17EB71
+CeruleanCity_EventScript_RivalBulbasaur:: @ 816658D
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_BULBASAUR, CeruleanCity_Text_RivalDefeat
 	return
 
-EventScript_166598:: @ 8166598
-	trainerbattle 3, 334, 0, Text_17EB71
+CeruleanCity_EventScript_RivalCharmander:: @ 8166598
+	trainerbattle_no_intro TRAINER_RIVAL_CERULEAN_CHARMANDER, CeruleanCity_Text_RivalDefeat
 	return
 
-EventScript_1665A3:: @ 81665A3
-	applymovement 255, Movement_1665C7
-	applymovement 8, Movement_1665D9
+CeruleanCity_EventScript_RivalStartExit:: @ 81665A3
+	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExit
 	waitmovement 0
 	return
 
-EventScript_1665B5:: @ 81665B5
-	applymovement 255, Movement_1665CD
-	applymovement 8, Movement_1665EA
+CeruleanCity_EventScript_RivalStartExitRight:: @ 81665B5
+	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExitRight
+	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExitRight
 	waitmovement 0
 	return
 
-Movement_1665C7:: @ 81665C7
-	step_1c
-	step_1b
-	step_30
-	step_1c
-	step_2d
+CeruleanCity_Movement_PlayerWatchRivalExit:: @ 81665C7
+	delay_16
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
-Movement_1665CD:: @ 81665CD
-	step_1c
-	step_1b
-	step_2f
-	step_1c
-	step_2d
+CeruleanCity_Movement_PlayerWatchRivalExitRight:: @ 81665CD
+	delay_16
+	delay_8
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_down
 	step_end
 
-Movement_1665D3:: @ 81665D3
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+CeruleanCity_Movement_RivalEnter:: @ 81665D3
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
-Movement_1665D9:: @ 81665D9
-	step_13
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1c
-	step_1c
-	step_12
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+CeruleanCity_Movement_RivalStartExit:: @ 81665D9
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
-Movement_1665EA:: @ 81665EA
-	step_12
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_1c
-	step_1c
-	step_13
-	step_11
-	step_11
-	step_11
-	step_11
-	step_11
+CeruleanCity_Movement_RivalStartExitRight:: @ 81665EA
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
-Movement_1665FB:: @ 81665FB
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
-	step_10
+CeruleanCity_Movement_RivalExit:: @ 81665FB
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	step_end
 
-CeruleanCity_EventScript_166603:: @ 8166603
+CeruleanCity_EventScript_Grunt:: @ 8166603
 	lock
 	faceplayer
-	checktrainerflag FLAG_0x163
-	goto_if_eq EventScript_16662E
-	message Text_17EE0E
+	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_EventScript_GruntDefeated
+	message CeruleanCity_Text_GruntIntro
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	trainerbattle 3, 355, 0, Text_17EE70
-	setvar VAR_0x407D, 1
-	goto EventScript_16662E
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
+	goto CeruleanCity_EventScript_GruntDefeated
 	end
 
-EventScript_16662E:: @ 816662E
-	msgbox gUnknown_817EE9C
+CeruleanCity_EventScript_GruntDefeated:: @ 816662E
+	msgbox CeruleanCity_Text_OkayIllReturnStolenTM
 	checkitemspace ITEM_TM28, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_166677
-	additem ITEM_TM28, 1
-	giveitemfanfaremsg gUnknown_817EEBF, ITEM_TM28
-	msgbox gUnknown_817EEED
+	compare VAR_RESULT, FALSE
+	goto_if_eq CeruleanCity_EventScript_NoRoomForTM28
+	giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28
+	msgbox CeruleanCity_Text_BetterGetMovingBye
 	closemessage
-	fadescreen 1
-	removeobject 2
-	fadescreen 0
-	setflag FLAG_0x23F
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_GRUNT
+	fadescreen FADE_FROM_BLACK
+	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
 	end
 
-EventScript_166677:: @ 8166677
+CeruleanCity_EventScript_NoRoomForTM28:: @ 8166677
 	textcolor 0
-	msgbox gUnknown_817EF07
+	msgbox CeruleanCity_Text_MakeRoomForThisCantRun
 	release
 	end
 
-CeruleanCity_EventScript_166683:: @ 8166683
+CeruleanCity_EventScript_GruntTriggerTop:: @ 8166683
 	lockall
-	setvar VAR_0x4001, 0
-	applymovement 2, Movement_1A75E9
+	setvar VAR_TEMP_1, 0
+	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	applymovement 255, Movement_1A75ED
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	goto EventScript_1666C3
+	goto CeruleanCity_EventScript_GruntTrigger
 	end
 
-CeruleanCity_EventScript_1666A3:: @ 81666A3
+CeruleanCity_EventScript_GruntTriggerBottom:: @ 81666A3
 	lockall
-	setvar VAR_0x4001, 1
-	applymovement 2, Movement_1A75ED
+	setvar VAR_TEMP_1, 1
+	applymovement LOCALID_GRUNT, Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	applymovement 255, Movement_1A75E9
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	goto EventScript_1666C3
+	goto CeruleanCity_EventScript_GruntTrigger
 	end
 
-EventScript_1666C3:: @ 81666C3
+CeruleanCity_EventScript_GruntTrigger:: @ 81666C3
 	textcolor 0
-	msgbox Text_17EE0E
-	setvar VAR_LAST_TALKED, 2
-	trainerbattle 3, 355, 0, Text_17EE70
-	setvar VAR_0x407D, 1
-	goto EventScript_16662E
+	msgbox CeruleanCity_Text_GruntIntro
+	setvar VAR_LAST_TALKED, LOCALID_GRUNT
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat
+	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
+	goto CeruleanCity_EventScript_GruntDefeated
 	end
 
-CeruleanCity_EventScript_1666E7:: @ 81666E7
+CeruleanCity_EventScript_Policeman:: @ 81666E7
 	lock
 	faceplayer
-	msgbox gUnknown_817F0F1
+	msgbox CeruleanCity_Text_PeopleHereWereRobbed
 	closemessage
-	applymovement 1, Movement_1A75E5
+	applymovement LOCALID_POLICEMAN, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-CeruleanCity_EventScript_1666FE:: @ 81666FE
+CeruleanCity_EventScript_LittleBoy:: @ 81666FE
 	lock
 	faceplayer
-	checkflag FLAG_0x234
-	goto_if_eq EventScript_166713
-	msgbox gUnknown_817F01D
+	goto_if_set FLAG_GOT_SS_TICKET, CeruleanCity_EventScript_LittleBoySlowbroMoved
+	msgbox CeruleanCity_Text_IfSlowbroWasntThereCouldCutTree
 	release
 	end
 
-EventScript_166713:: @ 8166713
-	msgbox gUnknown_817EF89
+CeruleanCity_EventScript_LittleBoySlowbroMoved:: @ 8166713
+	msgbox CeruleanCity_Text_YouCanCutDownSmallTrees
 	release
 	end
 
-CeruleanCity_EventScript_16671D:: @ 816671D
-	msgbox gUnknown_817F0B2, 2
+CeruleanCity_EventScript_BaldingMan:: @ 816671D
+	msgbox CeruleanCity_Text_PokemonEncyclopediaAmusing, MSGBOX_NPC
 	end
 
-CeruleanCity_EventScript_166726:: @ 8166726
-	msgbox gUnknown_817EF3F, 2
+CeruleanCity_EventScript_Youngster:: @ 8166726
+	msgbox CeruleanCity_Text_TrainerLifeIsToughIsntIt, MSGBOX_NPC
 	end
 
-CeruleanCity_EventScript_16672F:: @ 816672F
-	msgbox gUnknown_817F319, 2
+CeruleanCity_EventScript_CeruleanCaveGuard:: @ 816672F
+	msgbox CeruleanCity_Text_ThisIsCeruleanCave, MSGBOX_NPC
 	end
 
-CeruleanCity_EventScript_166738:: @ 8166738
+CeruleanCity_EventScript_Woman:: @ 8166738
 	lock
 	faceplayer
-	msgbox gUnknown_817F2CF
+	msgbox CeruleanCity_Text_WantBrightRedBicycle
 	closemessage
-	applymovement 11, Movement_1A75E5
+	applymovement 11, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-CeruleanCity_EventScript_16674F:: @ 816674F
+CeruleanCity_EventScript_Lass:: @ 816674F
 	lock
 	random 3
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667B0
-	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667B6
-	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667BC
+	compare VAR_0x8008, 0
+	call_if_eq CeruleanCity_EventScript_SlowbroCommand1
+	compare VAR_0x8008, 1
+	call_if_eq CeruleanCity_EventScript_SlowbroCommand2
+	compare VAR_0x8008, 2
+	call_if_eq CeruleanCity_EventScript_SlowbroCommand3
 	waitmessage
 	delay 40
 	playse SE_PIN
-	applymovement 5, Movement_1A75D9
+	applymovement LOCALID_SLOWBRO, Movement_QuestionMark
 	waitmovement 0
 	delay 30
-	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_1667C2
-	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_1667CB
-	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_1667D4
+	compare VAR_0x8008, 0
+	call_if_eq CeruleanCity_EventScript_SlowbroFailed1
+	compare VAR_0x8008, 1
+	call_if_eq CeruleanCity_EventScript_SlowbroFailed2
+	compare VAR_0x8008, 2
+	call_if_eq CeruleanCity_EventScript_SlowbroFailed3
 	release
 	end
 
-EventScript_1667B0:: @ 81667B0
-	message Text_17F183
+CeruleanCity_EventScript_SlowbroCommand1:: @ 81667B0
+	message CeruleanCity_Text_SlowbroUseSonicboom
 	return
 
-EventScript_1667B6:: @ 81667B6
-	message Text_17F1C2
+CeruleanCity_EventScript_SlowbroCommand2:: @ 81667B6
+	message CeruleanCity_Text_SlowbroPunch
 	return
 
-EventScript_1667BC:: @ 81667BC
-	message Text_17F1E9
+CeruleanCity_EventScript_SlowbroCommand3:: @ 81667BC
+	message CeruleanCity_Text_SlowbroWithdraw
 	return
 
-EventScript_1667C2:: @ 81667C2
-	msgbox gUnknown_817F1A1
+CeruleanCity_EventScript_SlowbroFailed1:: @ 81667C2
+	msgbox CeruleanCity_Text_SlowbroPayAttention
 	return
 
-EventScript_1667CB:: @ 81667CB
-	msgbox gUnknown_817F1D2
+CeruleanCity_EventScript_SlowbroFailed2:: @ 81667CB
+	msgbox CeruleanCity_Text_NoYouBlewItAgain
 	return
 
-EventScript_1667D4:: @ 81667D4
-	msgbox gUnknown_817F1FC
+CeruleanCity_EventScript_SlowbroFailed3:: @ 81667D4
+	msgbox CeruleanCity_Text_HardToControlMonsObedience
 	return
 
-CeruleanCity_EventScript_1667DD:: @ 81667DD
+CeruleanCity_EventScript_Slowbro:: @ 81667DD
 	lock
 	random 4
 	copyvar VAR_0x8008, VAR_RESULT
-	compare_var_to_value VAR_0x8008, 0
-	call_if 1, EventScript_166814
-	compare_var_to_value VAR_0x8008, 1
-	call_if 1, EventScript_16681D
-	compare_var_to_value VAR_0x8008, 2
-	call_if 1, EventScript_166826
-	compare_var_to_value VAR_0x8008, 3
-	call_if 1, EventScript_16682F
+	compare VAR_0x8008, 0
+	call_if_eq CeruleanCity_EventScript_SlowbroText1
+	compare VAR_0x8008, 1
+	call_if_eq CeruleanCity_EventScript_SlowbroText2
+	compare VAR_0x8008, 2
+	call_if_eq CeruleanCity_EventScript_SlowbroText3
+	compare VAR_0x8008, 3
+	call_if_eq CeruleanCity_EventScript_SlowbroText4
 	release
 	end
 
-EventScript_166814:: @ 8166814
-	msgbox gUnknown_817F270
+CeruleanCity_EventScript_SlowbroText1:: @ 8166814
+	msgbox CeruleanCity_Text_SlowbroTookSnooze
 	return
 
-EventScript_16681D:: @ 816681D
-	msgbox gUnknown_817F287
+CeruleanCity_EventScript_SlowbroText2:: @ 816681D
+	msgbox CeruleanCity_Text_SlowbroLoafingAround
 	return
 
-EventScript_166826:: @ 8166826
-	msgbox gUnknown_817F2A2
+CeruleanCity_EventScript_SlowbroText3:: @ 8166826
+	msgbox CeruleanCity_Text_SlowbroTurnedAway
 	return
 
-EventScript_16682F:: @ 816682F
-	msgbox gUnknown_817F2B7
+CeruleanCity_EventScript_SlowbroText4:: @ 816682F
+	msgbox CeruleanCity_Text_SlowbroIgnoredOrders
 	return
 
-CeruleanCity_EventScript_166838:: @ 8166838
-	msgbox gUnknown_817F420, 3
+CeruleanCity_EventScript_CitySign:: @ 8166838
+	msgbox CeruleanCity_Text_CitySign, MSGBOX_SIGN
 	end
 
-CeruleanCity_EventScript_166841:: @ 8166841
-	msgbox gUnknown_817F453, 3
+CeruleanCity_EventScript_TrainerTips:: @ 8166841
+	msgbox CeruleanCity_Text_TrainerTipsHeldItems, MSGBOX_SIGN
 	end
 
-CeruleanCity_EventScript_16684A:: @ 816684A
-	msgbox gUnknown_817F4C5, 3
+CeruleanCity_EventScript_BikeShopSign:: @ 816684A
+	msgbox CeruleanCity_Text_BikeShopSign, MSGBOX_SIGN
 	end
 
-CeruleanCity_EventScript_166853:: @ 8166853
+CeruleanCity_EventScript_GymSign:: @ 8166853
 	lockall
-	setvar VAR_0x8004, 3
-	setvar VAR_0x8005, 0
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_817F4EF
+	famechecker FAMECHECKER_MISTY, 0
+	msgbox CeruleanCity_Text_GymSign
 	releaseall
 	end

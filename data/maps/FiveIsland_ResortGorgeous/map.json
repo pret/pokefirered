@@ -20,11 +20,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 44,
       "y": 10,
       "elevation": 3,
-      "movement_type": "18",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -33,11 +33,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 33,
       "y": 12,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -46,11 +46,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "22",
+      "graphics_id": "OBJECT_EVENT_GFX_LASS",
       "x": 12,
       "y": 10,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -59,11 +59,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 23,
       "y": 9,
       "elevation": 3,
-      "movement_type": "2",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -72,11 +72,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 33,
       "y": 8,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -85,11 +85,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 33,
       "y": 3,
       "elevation": 3,
-      "movement_type": "46",
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
       "movement_range_x": 10,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -98,11 +98,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "43",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
       "x": 56,
       "y": 7,
       "elevation": 1,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -111,17 +111,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 39,
       "y": 9,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "148"
+      "flag": "FLAG_HIDE_RESORT_GORGEOUS_SELPHY"
     }
   ],
   "warp_events": [
@@ -148,8 +148,9 @@
       "y": 7,
       "elevation": 3,
       "item": "ITEM_NEST_BALL",
-      "flag": "174",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_NEST_BALL",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -157,8 +158,9 @@
       "y": 11,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "175",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -166,8 +168,9 @@
       "y": 12,
       "elevation": 3,
       "item": "ITEM_STAR_PIECE",
-      "flag": "176",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STAR_PIECE",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -175,8 +178,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_STARDUST",
-      "flag": "177",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STARDUST_2",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

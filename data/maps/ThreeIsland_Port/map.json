@@ -20,11 +20,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "31",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_3",
       "x": 14,
       "y": 9,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
@@ -33,30 +33,30 @@
       "flag": "0"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
       "x": 8,
       "y": 8,
       "elevation": 3,
-      "movement_type": "28",
+      "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
       "movement_range_x": 3,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_Port_EventScript_1687CC",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "53",
+      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
       "x": 13,
       "y": 10,
       "elevation": 3,
-      "movement_type": "49",
+      "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT",
       "movement_range_x": 2,
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "ThreeIsland_Port_EventScript_1687D5",
-      "flag": "121"
+      "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     }
   ],
   "warp_events": [

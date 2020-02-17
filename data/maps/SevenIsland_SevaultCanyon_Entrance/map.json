@@ -25,11 +25,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 12,
       "y": 6,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -38,11 +38,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "29",
+      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
       "x": 3,
       "y": 34,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -51,11 +51,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "OBJECT_EVENT_GFX_MAN",
       "x": 4,
       "y": 34,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -64,11 +64,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 11,
       "y": 26,
       "elevation": 3,
-      "movement_type": "20",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -77,11 +77,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 10,
       "y": 26,
       "elevation": 3,
-      "movement_type": "19",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -90,11 +90,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "26",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
       "x": 11,
       "y": 17,
       "elevation": 5,
-      "movement_type": "23",
+      "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -107,7 +107,7 @@
       "x": 7,
       "y": 65534,
       "elevation": 1,
-      "movement_type": "0",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": 17,
@@ -125,8 +125,9 @@
       "y": 29,
       "elevation": 5,
       "item": "ITEM_RAWST_BERRY",
-      "flag": "188",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE_RAWST_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",

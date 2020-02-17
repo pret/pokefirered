@@ -1,27 +1,27 @@
 LavenderTown_PokemonCenter_1F_MapScripts:: @ 816B0EF
-	map_script 3, LavenderTown_PokemonCenter_1F_MapScript1_16B0FA
-	map_script 5, LavenderTown_PokemonCenter_1F_MapScript2_1BC05C
+	map_script MAP_SCRIPT_ON_TRANSITION, LavenderTown_PokemonCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
-LavenderTown_PokemonCenter_1F_MapScript1_16B0FA:: @ 816B0FA
+LavenderTown_PokemonCenter_1F_OnTransition:: @ 816B0FA
 	setrespawn SPAWN_LAVENDER_TOWN
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_16B0FE:: @ 816B0FE
+LavenderTown_PokemonCenter_1F_EventScript_Nurse:: @ 816B0FE
 	lock
 	faceplayer
-	call EventScript_1A6578
+	call EventScript_PkmnCenterNurse
 	release
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_16B107:: @ 816B107
-	msgbox gUnknown_8193465, 2
+LavenderTown_PokemonCenter_1F_EventScript_Gentleman:: @ 816B107
+	msgbox LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney, MSGBOX_NPC
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_16B110:: @ 816B110
-	msgbox gUnknown_81934DE, 2
+LavenderTown_PokemonCenter_1F_EventScript_Lass:: @ 816B110
+	msgbox LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets, MSGBOX_NPC
 	end
 
-LavenderTown_PokemonCenter_1F_EventScript_16B119:: @ 816B119
-	msgbox gUnknown_819353A, 2
+LavenderTown_PokemonCenter_1F_EventScript_Youngster:: @ 816B119
+	msgbox LavenderTown_PokemonCenter_1F_Text_PeoplePayForCuboneSkulls, MSGBOX_NPC
 	end

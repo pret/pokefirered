@@ -1,309 +1,291 @@
+.equ FOUND_FIRST_SWITCH, FLAG_TEMP_1
+.equ SWITCH1_ID,         VAR_0x8004
+.equ SWITCH2_ID,         VAR_0x8005
+.equ TRASH_CAN_ID,       VAR_0x8008
+
 VermilionCity_Gym_MapScripts:: @ 816B69E
-	map_script 1, VermilionCity_Gym_MapScript1_16B6A9
-	map_script 3, VermilionCity_Gym_MapScript2_16B772
+	map_script MAP_SCRIPT_ON_LOAD, VermilionCity_Gym_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_Gym_OnTransition
 	.byte 0
 
-VermilionCity_Gym_MapScript1_16B6A9:: @ 816B6A9
-	checkflag FLAG_0x001
-	call_if 1, EventScript_16B6BC
-	checkflag FLAG_0x264
-	call_if 1, EventScript_16B717
+VermilionCity_Gym_OnLoad:: @ 816B6A9
+	call_if_set FOUND_FIRST_SWITCH, VermilionCity_Gym_EventScript_SetOneBeamOff
+	call_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_SetBeamsOff
 	end
 
-EventScript_16B6BC:: @ 816B6BC
-	setmetatile 3, 6, 699, 1
-	setmetatile 4, 6, 700, 1
-	setmetatile 5, 6, 701, 1
-	setmetatile 6, 6, 702, 1
-	setmetatile 7, 6, 703, 1
-	setmetatile 3, 7, 707, 1
-	setmetatile 4, 7, 708, 1
-	setmetatile 5, 7, 709, 1
-	setmetatile 6, 7, 710, 1
-	setmetatile 7, 7, 711, 1
+VermilionCity_Gym_EventScript_SetOneBeamOff:: @ 816B6BC
+	setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_HalfOn, 1
+	setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_HalfOn, 1
+	setmetatile 5, 6, METATILE_VermilionGym_Beam_MidTop_HalfOn, 1
+	setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_HalfOn, 1
+	setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_HalfOn, 1
+	setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_HalfOn, 1
+	setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_HalfOn, 1
+	setmetatile 5, 7, METATILE_VermilionGym_Beam_MidBottom_HalfOn, 1
+	setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn, 1
+	setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn, 1
 	return
 
-EventScript_16B717:: @ 816B717
-	setmetatile 3, 6, 659, 1
-	setmetatile 4, 6, 660, 0
-	setmetatile 5, 6, 641, 0
-	setmetatile 6, 6, 661, 0
-	setmetatile 7, 6, 662, 1
-	setmetatile 3, 7, 667, 1
-	setmetatile 4, 7, 668, 0
-	setmetatile 5, 7, 641, 0
-	setmetatile 6, 7, 669, 0
-	setmetatile 7, 7, 670, 1
+VermilionCity_Gym_EventScript_SetBeamsOff:: @ 816B717
+	setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Off, 1
+	setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_Off, 0
+	setmetatile 5, 6, METATILE_VermilionGym_Floor, 0
+	setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_Off, 0
+	setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_Off, 1
+	setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Off, 1
+	setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_Off, 0
+	setmetatile 5, 7, METATILE_VermilionGym_Floor, 0
+	setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_Off, 0
+	setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Off, 1
 	return
 
-VermilionCity_Gym_MapScript2_16B772:: @ 816B772
-	call EventScript_16B778
+VermilionCity_Gym_OnTransition:: @ 816B772
+	call VermilionCity_Gym_EventScript_InitTrashCans
 	end
 
-EventScript_16B778:: @ 816B778
-	checkflag FLAG_0x264
-	goto_if_eq EventScript_1A77A9
-	special sub_80CADEC
-	copyvar VAR_0x4000, VAR_0x8004
-	copyvar VAR_0x4001, VAR_0x8005
+VermilionCity_Gym_EventScript_InitTrashCans:: @ 816B778
+	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, EventScript_Return
+	special Special_SetVermilionTrashCans
+	copyvar VAR_TEMP_0, SWITCH1_ID
+	copyvar VAR_TEMP_1, SWITCH2_ID
 	return
 
-VermilionCity_Gym_EventScript_16B78F:: @ 816B78F
+VermilionCity_Gym_EventScript_TrashCan1:: @ 816B78F
 	lockall
-	setvar VAR_0x8008, 1
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 1
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B79B:: @ 816B79B
+VermilionCity_Gym_EventScript_TrashCan2:: @ 816B79B
 	lockall
-	setvar VAR_0x8008, 2
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 2
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7A7:: @ 816B7A7
+VermilionCity_Gym_EventScript_TrashCan3:: @ 816B7A7
 	lockall
-	setvar VAR_0x8008, 3
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 3
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7B3:: @ 816B7B3
+VermilionCity_Gym_EventScript_TrashCan4:: @ 816B7B3
 	lockall
-	setvar VAR_0x8008, 4
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 4
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7BF:: @ 816B7BF
+VermilionCity_Gym_EventScript_TrashCan5:: @ 816B7BF
 	lockall
-	setvar VAR_0x8008, 5
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 5
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7CB:: @ 816B7CB
+VermilionCity_Gym_EventScript_TrashCan6:: @ 816B7CB
 	lockall
-	setvar VAR_0x8008, 6
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 6
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7D7:: @ 816B7D7
+VermilionCity_Gym_EventScript_TrashCan7:: @ 816B7D7
 	lockall
-	setvar VAR_0x8008, 7
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 7
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7E3:: @ 816B7E3
+VermilionCity_Gym_EventScript_TrashCan8:: @ 816B7E3
 	lockall
-	setvar VAR_0x8008, 8
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 8
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7EF:: @ 816B7EF
+VermilionCity_Gym_EventScript_TrashCan9:: @ 816B7EF
 	lockall
-	setvar VAR_0x8008, 9
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 9
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B7FB:: @ 816B7FB
+VermilionCity_Gym_EventScript_TrashCan10:: @ 816B7FB
 	lockall
-	setvar VAR_0x8008, 10
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 10
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B807:: @ 816B807
+VermilionCity_Gym_EventScript_TrashCan11:: @ 816B807
 	lockall
-	setvar VAR_0x8008, 11
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 11
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B813:: @ 816B813
+VermilionCity_Gym_EventScript_TrashCan12:: @ 816B813
 	lockall
-	setvar VAR_0x8008, 12
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 12
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B81F:: @ 816B81F
+VermilionCity_Gym_EventScript_TrashCan13:: @ 816B81F
 	lockall
-	setvar VAR_0x8008, 13
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 13
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B82B:: @ 816B82B
+VermilionCity_Gym_EventScript_TrashCan14:: @ 816B82B
 	lockall
-	setvar VAR_0x8008, 14
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 14
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-VermilionCity_Gym_EventScript_16B837:: @ 816B837
+VermilionCity_Gym_EventScript_TrashCan15:: @ 816B837
 	lockall
-	setvar VAR_0x8008, 15
-	goto EventScript_16B843
+	setvar TRASH_CAN_ID, 15
+	goto VermilionCity_Gym_EventScript_TrashCan
 	end
 
-EventScript_16B843:: @ 816B843
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+VermilionCity_Gym_EventScript_TrashCan:: @ 816B843
+	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
-	copyvar VAR_0x8004, VAR_0x4000
-	copyvar VAR_0x8005, VAR_0x4001
-	checkflag FLAG_0x264
-	goto_if_eq EventScript_16B8E5
-	checkflag FLAG_0x001
-	goto_if_eq EventScript_16B89E
-	compare_var_to_var VAR_0x8004, VAR_0x8008
-	goto_if_eq EventScript_16B885
-	msgbox gUnknown_8195289
+	copyvar SWITCH1_ID, VAR_TEMP_0
+	copyvar SWITCH2_ID, VAR_TEMP_1
+	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_LocksAlreadyOpen
+	goto_if_set FOUND_FIRST_SWITCH, VermilionCity_Gym_EventScript_TrySwitchTwo
+	compare SWITCH1_ID, TRASH_CAN_ID
+	goto_if_eq VermilionCity_Gym_EventScript_FoundSwitchOne
+	msgbox VermilionCity_Gym_Text_NopeOnlyTrashHere
 	releaseall
 	end
 
-EventScript_16B885:: @ 816B885
-	msgbox gUnknown_81952A8
+VermilionCity_Gym_EventScript_FoundSwitchOne:: @ 816B885
+	msgbox VermilionCity_Gym_Text_SwitchUnderTrashFirstLockOpened
 	playse SE_PIN
 	waitse
-	call EventScript_16B6BC
+	call VermilionCity_Gym_EventScript_SetOneBeamOff
 	special DrawWholeMapView
-	setflag FLAG_0x001
+	setflag FOUND_FIRST_SWITCH
 	releaseall
 	end
 
-EventScript_16B89E:: @ 816B89E
-	compare_var_to_var VAR_0x8005, VAR_0x8008
-	goto_if_eq EventScript_16B8CB
-	msgbox gUnknown_819536C
-	clearflag FLAG_0x001
-	special sub_80CADEC
-	copyvar VAR_0x4000, VAR_0x8004
-	copyvar VAR_0x4001, VAR_0x8005
-	call EventScript_16B8EF
+VermilionCity_Gym_EventScript_TrySwitchTwo:: @ 816B89E
+	compare SWITCH2_ID, TRASH_CAN_ID
+	goto_if_eq VermilionCity_Gym_EventScript_FoundSwitchTwo
+	msgbox VermilionCity_Gym_Text_OnlyTrashLocksWereReset
+	clearflag FOUND_FIRST_SWITCH
+	special Special_SetVermilionTrashCans
+	copyvar VAR_TEMP_0, SWITCH1_ID
+	copyvar VAR_TEMP_1, SWITCH2_ID
+	call VermilionCity_Gym_EventScript_SetBeamsOn
 	special DrawWholeMapView
 	releaseall
 	end
 
-EventScript_16B8CB:: @ 816B8CB
-	msgbox gUnknown_8195330
+VermilionCity_Gym_EventScript_FoundSwitchTwo:: @ 816B8CB
+	msgbox VermilionCity_Gym_Text_SecondLockOpened
 	closemessage
-	call EventScript_16B717
+	call VermilionCity_Gym_EventScript_SetBeamsOff
 	special DrawWholeMapView
 	playse SE_KI_GASYAN
 	waitse
-	setflag FLAG_0x264
+	setflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
 	releaseall
 	end
 
-EventScript_16B8E5:: @ 816B8E5
-	msgbox gUnknown_8195289
+VermilionCity_Gym_EventScript_LocksAlreadyOpen:: @ 816B8E5
+	msgbox VermilionCity_Gym_Text_NopeOnlyTrashHere
 	releaseall
 	end
 
-EventScript_16B8EF:: @ 816B8EF
-	setmetatile 3, 6, 681, 1
-	setmetatile 4, 6, 682, 1
-	setmetatile 5, 6, 645, 1
-	setmetatile 6, 6, 683, 1
-	setmetatile 7, 6, 684, 1
-	setmetatile 3, 7, 689, 1
-	setmetatile 4, 7, 690, 1
-	setmetatile 5, 7, 653, 1
-	setmetatile 6, 7, 691, 1
-	setmetatile 7, 7, 692, 1
+VermilionCity_Gym_EventScript_SetBeamsOn:: @ 816B8EF
+	setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_On, 1
+	setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_On, 1
+	setmetatile 5, 6, METATILE_VermilionGym_Beam_MidTop, 1
+	setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_On, 1
+	setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_On, 1
+	setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_On, 1
+	setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_On, 1
+	setmetatile 5, 7, METATILE_VermilionGym_Beam_MidBottom, 1
+	setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_On, 1
+	setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_On, 1
 	return
 
-VermilionCity_Gym_EventScript_16B94A:: @ 816B94A
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 2
-	special UpdatePickStateFromSpecialVar8005
-	trainerbattle 1, 416, 0, Text_194BA4, Text_194E03, EventScript_16B97C
-	checkflag FLAG_0x231
-	goto_if 0, EventScript_16B9AF
-	msgbox gUnknown_8194C8E
+VermilionCity_Gym_EventScript_LtSurge:: @ 816B94A
+	famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	trainerbattle_single TRAINER_LEADER_LT_SURGE, VermilionCity_Gym_Text_LtSurgeIntro, VermilionCity_Gym_Text_LtSurgeDefeat, VermilionCity_Gym_EventScript_DefeatedLtSurge, NO_MUSIC
+	goto_if_unset FLAG_GOT_TM34_FROM_SURGE, VermilionCity_Gym_EventScript_GiveTM43
+	msgbox VermilionCity_Gym_Text_LtSurgePostBattle
 	release
 	end
 
-EventScript_16B97C:: @ 816B97C
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 1
-	special SetFlavorTextFlagFromSpecialVars
-	checkflag FLAG_0x23B
-	call_if 0, EventScript_16B9AB
-	clearflag FLAG_0x0A0
-	setflag FLAG_0x4B2
-	setflag FLAG_0x822
-	setvar VAR_0x8008, 3
-	call EventScript_1A6B18
-	goto EventScript_16B9AF
+VermilionCity_Gym_EventScript_DefeatedLtSurge:: @ 816B97C
+	famechecker FAMECHECKER_LTSURGE, 1
+	call_if_unset FLAG_GOT_HM05, VermilionCity_Gym_EventScript_ShowOaksAide
+	clearflag FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL
+	setflag FLAG_DEFEATED_LT_SURGE
+	setflag FLAG_BADGE03_GET
+	set_gym_trainers 3
+	goto VermilionCity_Gym_EventScript_GiveTM43
 	end
 
-EventScript_16B9AB:: @ 816B9AB
-	clearflag FLAG_0x0A1
+VermilionCity_Gym_EventScript_ShowOaksAide:: @ 816B9AB
+	clearflag FLAG_HIDE_VERMILION_CITY_OAKS_AIDE
 	return
 
-EventScript_16B9AF:: @ 816B9AF
-	msgbox gUnknown_8194CFA
+VermilionCity_Gym_EventScript_GiveTM43:: @ 816B9AF
+	msgbox VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis
 	checkitemspace ITEM_TM34, 1
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16B9F0
-	additem ITEM_TM34, 1
-	giveitemfanfaremsg gUnknown_8194D87, ITEM_TM34
-	setflag FLAG_0x231
-	msgbox gUnknown_8194DA8
+	compare VAR_RESULT, FALSE
+	goto_if_eq VermilionCity_Gym_EventScript_NoRoomForTM43
+	giveitem_msg VermilionCity_Gym_Text_ReceivedTM43FromLtSurge, ITEM_TM34
+	setflag FLAG_GOT_TM34_FROM_SURGE
+	msgbox VermilionCity_Gym_Text_ExplainTM34
 	release
 	end
 
-EventScript_16B9F0:: @ 816B9F0
-	msgbox gUnknown_8194DE3
+VermilionCity_Gym_EventScript_NoRoomForTM43:: @ 816B9F0
+	msgbox VermilionCity_Gym_Text_MakeRoomInYourBag
 	release
 	end
 
-VermilionCity_Gym_EventScript_16B9FA:: @ 816B9FA
-	trainerbattle 0, 141, 0, Text_194FBD, Text_194FF1
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 4
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_8195004, 6
+VermilionCity_Gym_EventScript_Dwayne:: @ 816B9FA
+	trainerbattle_single TRAINER_SAILOR_DWAYNE, VermilionCity_Gym_Text_DwayneIntro, VermilionCity_Gym_Text_DwayneDefeat
+	famechecker FAMECHECKER_LTSURGE, 4
+	msgbox VermilionCity_Gym_Text_DwaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VermilionCity_Gym_EventScript_16BA1E:: @ 816BA1E
-	trainerbattle 0, 220, 0, Text_194F1F, Text_194F6F
-	msgbox gUnknown_8194F76, 6
+VermilionCity_Gym_EventScript_Baily:: @ 816BA1E
+	trainerbattle_single TRAINER_ENGINEER_BAILY, VermilionCity_Gym_Text_BailyIntro, VermilionCity_Gym_Text_BailyDefeat
+	msgbox VermilionCity_Gym_Text_BailyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-VermilionCity_Gym_EventScript_16BA35:: @ 816BA35
-	trainerbattle 2, 423, 0, Text_194E57, Text_194EA5, EventScript_16BA5D
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 3
-	special SetFlavorTextFlagFromSpecialVars
-	msgbox gUnknown_8194EBD, 6
+VermilionCity_Gym_EventScript_Tucker:: @ 816BA35
+	trainerbattle_single TRAINER_GENTLEMAN_TUCKER, VermilionCity_Gym_Text_TuckerIntro, VermilionCity_Gym_Text_TuckerDefeat, VermilionCity_Gym_EventScript_DefeatedTucker
+	famechecker FAMECHECKER_LTSURGE, 3
+	msgbox VermilionCity_Gym_Text_TuckerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_16BA5D:: @ 816BA5D
-	setvar VAR_0x8004, 4
-	setvar VAR_0x8005, 2
-	special SetFlavorTextFlagFromSpecialVars
+VermilionCity_Gym_EventScript_DefeatedTucker:: @ 816BA5D
+	famechecker FAMECHECKER_LTSURGE, 2
 	release
 	end
 
-VermilionCity_Gym_EventScript_16BA6C:: @ 816BA6C
+VermilionCity_Gym_EventScript_GymGuy:: @ 816BA6C
 	lock
 	faceplayer
-	checkflag FLAG_0x4B2
-	goto_if_eq EventScript_16BA81
-	msgbox gUnknown_81950B4
+	goto_if_set FLAG_DEFEATED_LT_SURGE, VermilionCity_Gym_EventScript_GymGuyPostVictory
+	msgbox VermilionCity_Gym_Text_GymGuyAdvice
 	release
 	end
 
-EventScript_16BA81:: @ 816BA81
-	msgbox gUnknown_81951EC
+VermilionCity_Gym_EventScript_GymGuyPostVictory:: @ 816BA81
+	msgbox VermilionCity_Gym_Text_GymGuyPostVictory
 	release
 	end
 
-VermilionCity_Gym_EventScript_16BA8B:: @ 816BA8B
+VermilionCity_Gym_EventScript_GymStatue:: @ 816BA8B
 	lockall
-	checkflag FLAG_0x822
-	goto_if_eq EventScript_16BA9F
-	msgbox gUnknown_819520B
+	goto_if_set FLAG_BADGE03_GET, VermilionCity_Gym_EventScript_GymStatuePostVictory
+	msgbox VermilionCity_Gym_Text_GymStatue
 	releaseall
 	end
 
-EventScript_16BA9F:: @ 816BA9F
-	msgbox gUnknown_8195248
+VermilionCity_Gym_EventScript_GymStatuePostVictory:: @ 816BA9F
+	msgbox VermilionCity_Gym_Text_GymStatuePlayerWon
 	releaseall
 	end

@@ -2,15 +2,13 @@ FourIsland_Mart_MapScripts:: @ 8171CAD
 	.byte 0
 
 FourIsland_Mart_EventScript_171CAE:: @ 8171CAE
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
 	pokemart Items_171CD4
-	msgbox gUnknown_81A5190
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
@@ -29,5 +27,5 @@ Items_171CD4:: @ 8171CD4
 	end
 
 FourIsland_Mart_EventScript_171CE8:: @ 8171CE8
-	msgbox gUnknown_81A3B14, 2
+	msgbox gUnknown_81A3B14, MSGBOX_NPC
 	end

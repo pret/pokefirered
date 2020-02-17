@@ -1,29 +1,27 @@
 CeruleanCity_Mart_MapScripts:: @ 816AC9D
 	.byte 0
 
-CeruleanCity_Mart_EventScript_16AC9E:: @ 816AC9E
-	msgbox gUnknown_81929C2, 2
+CeruleanCity_Mart_EventScript_Youngster:: @ 816AC9E
+	msgbox CeruleanCity_Mart_Text_RepelWorksOnWeakMons, MSGBOX_NPC
 	end
 
-CeruleanCity_Mart_EventScript_16ACA7:: @ 816ACA7
-	msgbox gUnknown_8192A79, 2
+CeruleanCity_Mart_EventScript_Woman:: @ 816ACA7
+	msgbox CeruleanCity_Mart_Text_DoYouKnowAboutRareCandy, MSGBOX_NPC
 	end
 
-CeruleanCity_Mart_EventScript_16ACB0:: @ 816ACB0
-	special sub_8110AB4
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A7AE0
+CeruleanCity_Mart_EventScript_Clerk:: @ 816ACB0
+	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	message Text_1A6211
+	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_16ACD8
-	msgbox gUnknown_81A5190
+	pokemart CeruleanCity_Mart_Items
+	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_16ACD8:: @ 816ACD8
+CeruleanCity_Mart_Items:: @ 816ACD8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_POTION

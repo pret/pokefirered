@@ -1,44 +1,43 @@
 CeruleanCity_House3_MapScripts:: @ 816A9A7
 	.byte 0
 
-CeruleanCity_House3_EventScript_16A9A8:: @ 816A9A8
-	msgbox gUnknown_8191F80, 2
+CeruleanCity_House3_EventScript_OldWoman:: @ 816A9A8
+	msgbox CeruleanCity_House3_Text_PleaseTradeWithMyHusband, MSGBOX_NPC
 	end
 
-CeruleanCity_House3_EventScript_16A9B1:: @ 816A9B1
+CeruleanCity_House3_EventScript_Dontae:: @ 816A9B1
 	lock
 	faceplayer
-	setvar VAR_0x8008, 1
-	call EventScript_1A8CAD
-	checkflag FLAG_0x24A
-	goto_if_eq EventScript_16AA23
-	msgbox gUnknown_81A59FE, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16AA0B
-	call EventScript_1A8CBD
-	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16AA0B
-	call EventScript_1A8CC9
-	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16AA15
-	call EventScript_1A8CD9
-	msgbox gUnknown_81A5A9D
-	setflag FLAG_0x24A
+	setvar VAR_0x8008, INGAME_TRADE_JYNX
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_ZYNX_TRADE, CeruleanCity_House3_EventScript_AlreadyTraded
+	msgbox Trade_Text_DoYouHaveMonWouldYouTradeForMon, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CeruleanCity_House3_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge CeruleanCity_House3_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne CeruleanCity_House3_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_Thanks
+	setflag FLAG_DID_ZYNX_TRADE
 	release
 	end
 
-EventScript_16AA0B:: @ 816AA0B
-	msgbox gUnknown_81A5A4E
+CeruleanCity_House3_EventScript_DeclineTrade:: @ 816AA0B
+	msgbox Trade_Text_WellIfYouDontWantTo
 	release
 	end
 
-EventScript_16AA15:: @ 816AA15
+CeruleanCity_House3_EventScript_NotRequestedMon:: @ 816AA15
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A5A6A
+	msgbox Trade_Text_ThisIsntMon
 	release
 	end
 
-EventScript_16AA23:: @ 816AA23
-	msgbox gUnknown_81A5AA5
+CeruleanCity_House3_EventScript_AlreadyTraded:: @ 816AA23
+	msgbox Trade_Text_HasTradedMonGrownStronger
 	release
 	end

@@ -1,12 +1,3 @@
-Text_181569:: @ 8181569
-    .string "This FAN CLUB…\n"
-    .string "No one here has a clue!\p"
-    .string "How could they not recognize\n"
-    .string "the brilliance that is LANCE?\p"
-    .string "He stands for justice!\n"
-    .string "He's cool, and yet passionate!\l"
-    .string "He's the greatest, LANCE!$"
-
 gUnknown_818161B:: @ 818161B
     .string "BILL: Here we are!\n"
     .string "This is ONE ISLAND.\p"
@@ -19,7 +10,7 @@ gUnknown_818161B:: @ 818161B
     .string "…Why am I telling you this now?\n"
     .string "Let's just go see CELIO!$"
 
-Text_181726:: @ 8181726
+Text_WhereDoYouWantToSail:: @ 8181726
     .string "Ahoy, there!\n"
     .string "Where do you want to sail?$"
 

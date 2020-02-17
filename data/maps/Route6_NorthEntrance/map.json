@@ -14,16 +14,16 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "60",
+      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
       "x": 7,
       "y": 5,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route6_NorthEntrance_EventScript_16F9C7",
+      "script": "Route6_NorthEntrance_EventScript_Guard",
       "flag": "0"
     }
   ],
@@ -63,27 +63,27 @@
       "x": 3,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route6_NorthEntrance_EventScript_16F9D0"
+      "script": "Route6_NorthEntrance_EventScript_GuardTriggerLeft"
     },
     {
       "type": "trigger",
       "x": 4,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route6_NorthEntrance_EventScript_16F9DC"
+      "script": "Route6_NorthEntrance_EventScript_GuardTriggerMid"
     },
     {
       "type": "trigger",
       "x": 5,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4062",
+      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
       "var_value": 0,
-      "script": "Route6_NorthEntrance_EventScript_16F9E8"
+      "script": "Route6_NorthEntrance_EventScript_GuardTriggerRight"
     }
   ],
   "bg_events": []

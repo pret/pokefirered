@@ -1,42 +1,42 @@
 RockTunnel_B1F_MapScripts:: @ 8162E8A
 	.byte 0
 
-RockTunnel_B1F_EventScript_162E8B:: @ 8162E8B
-	trainerbattle 0, 158, 0, Text_179657, Text_1796B9
-	msgbox gUnknown_81796CE, 6
+RockTunnel_B1F_EventScript_Sofia:: @ 8162E8B
+	trainerbattle_single TRAINER_PICNICKER_SOFIA, RockTunnel_B1F_Text_SofiaIntro, RockTunnel_B1F_Text_SofiaDefeat
+	msgbox RockTunnel_B1F_Text_SofiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162EA2:: @ 8162EA2
-	trainerbattle 0, 159, 0, Text_1798AD, Text_1798DD
-	msgbox gUnknown_81798E9, 6
+RockTunnel_B1F_EventScript_Martha:: @ 8162EA2
+	trainerbattle_single TRAINER_PICNICKER_MARTHA, RockTunnel_B1F_Text_MarthaIntro, RockTunnel_B1F_Text_MarthaDefeat
+	msgbox RockTunnel_B1F_Text_MarthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162EB9:: @ 8162EB9
-	trainerbattle 0, 189, 0, Text_1796E1, Text_179700
-	msgbox gUnknown_8179712, 6
+RockTunnel_B1F_EventScript_Dudley:: @ 8162EB9
+	trainerbattle_single TRAINER_HIKER_DUDLEY, RockTunnel_B1F_Text_DudleyIntro, RockTunnel_B1F_Text_DudleyDefeat
+	msgbox RockTunnel_B1F_Text_DudleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162ED0:: @ 8162ED0
-	trainerbattle 0, 190, 0, Text_179829, Text_179856
-	msgbox gUnknown_817987A, 6
+RockTunnel_B1F_EventScript_Allen:: @ 8162ED0
+	trainerbattle_single TRAINER_HIKER_ALLEN, RockTunnel_B1F_Text_AllenIntro, RockTunnel_B1F_Text_AllenDefeat
+	msgbox RockTunnel_B1F_Text_AllenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162EE7:: @ 8162EE7
-	trainerbattle 0, 191, 0, Text_179916, Text_179932
-	msgbox gUnknown_817993E, 6
+RockTunnel_B1F_EventScript_Eric:: @ 8162EE7
+	trainerbattle_single TRAINER_HIKER_ERIC, RockTunnel_B1F_Text_EricIntro, RockTunnel_B1F_Text_EricDefeat
+	msgbox RockTunnel_B1F_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162EFE:: @ 8162EFE
-	trainerbattle 0, 164, 0, Text_17973A, Text_17975F
-	msgbox gUnknown_8179777, 6
+RockTunnel_B1F_EventScript_Cooper:: @ 8162EFE
+	trainerbattle_single TRAINER_POKEMANIAC_COOPER, RockTunnel_B1F_Text_CooperIntro, RockTunnel_B1F_Text_CooperDefeat
+	msgbox RockTunnel_B1F_Text_CooperPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162F15:: @ 8162F15
-	trainerbattle 0, 165, 0, Text_1797A4, Text_1797CB
-	msgbox gUnknown_81797DE, 6
+RockTunnel_B1F_EventScript_Steve:: @ 8162F15
+	trainerbattle_single TRAINER_POKEMANIAC_STEVE, RockTunnel_B1F_Text_SteveIntro, RockTunnel_B1F_Text_SteveDefeat
+	msgbox RockTunnel_B1F_Text_StevePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-RockTunnel_B1F_EventScript_162F2C:: @ 8162F2C
-	trainerbattle 0, 166, 0, Text_179968, Text_179997
-	msgbox gUnknown_81799AC, 6
+RockTunnel_B1F_EventScript_Winston:: @ 8162F2C
+	trainerbattle_single TRAINER_POKEMANIAC_WINSTON, RockTunnel_B1F_Text_WinstonIntro, RockTunnel_B1F_Text_WinstonDefeat
+	msgbox RockTunnel_B1F_Text_WinstonPostBattle, MSGBOX_AUTOCLOSE
 	end

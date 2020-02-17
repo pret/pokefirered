@@ -14,56 +14,56 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 26,
       "y": 16,
       "elevation": 3,
-      "movement_type": "3",
+      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_9F_EventScript_161D41",
-      "flag": "83"
+      "script": "SilphCo_9F_EventScript_Ed",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 15,
       "y": 18,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_9F_EventScript_161D6F",
-      "flag": "83"
+      "script": "SilphCo_9F_EventScript_Grunt2",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "28",
+      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
       "x": 2,
       "y": 16,
       "elevation": 0,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_9F_EventScript_161D09",
+      "script": "SilphCo_9F_EventScript_HealWoman",
       "flag": "0"
     },
     {
-      "graphics_id": "49",
+      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
       "x": 1,
       "y": 6,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "SilphCo_9F_EventScript_161D58",
-      "flag": "83"
+      "script": "SilphCo_9F_EventScript_Grunt1",
+      "flag": "FLAG_HIDE_SILPH_ROCKETS"
     }
   ],
   "warp_events": [
@@ -111,120 +111,121 @@
       "y": 14,
       "elevation": 3,
       "item": "ITEM_MAX_POTION",
-      "flag": "25",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 10,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8A87"
+      "script": "SilphCo_9F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8A87"
+      "script": "SilphCo_9F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 16,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AA1"
+      "script": "SilphCo_9F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 17,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AA1"
+      "script": "SilphCo_9F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 21,
       "y": 6,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8ABB"
+      "script": "SilphCo_9F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 6,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8ABB"
+      "script": "SilphCo_9F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8ABB"
+      "script": "SilphCo_9F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 21,
       "y": 7,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8ABB"
+      "script": "SilphCo_9F_EventScript_Door3"
     },
     {
       "type": "bg_event_type_0",
       "x": 21,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AD5"
+      "script": "SilphCo_9F_EventScript_Door4"
     },
     {
       "type": "bg_event_type_0",
       "x": 21,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AD5"
+      "script": "SilphCo_9F_EventScript_Door4"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 12,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AD5"
+      "script": "SilphCo_9F_EventScript_Door4"
     },
     {
       "type": "bg_event_type_0",
       "x": 22,
       "y": 13,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AD5"
+      "script": "SilphCo_9F_EventScript_Door4"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 11,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8A87"
+      "script": "SilphCo_9F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 2,
       "y": 10,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8A87"
+      "script": "SilphCo_9F_EventScript_Door1"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 16,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AA1"
+      "script": "SilphCo_9F_EventScript_Door2"
     },
     {
       "type": "bg_event_type_0",
       "x": 12,
       "y": 17,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_1A8AA1"
+      "script": "SilphCo_9F_EventScript_Door2"
     },
     {
       "type": "hidden_item",
@@ -232,15 +233,16 @@
       "y": 8,
       "elevation": 0,
       "item": "ITEM_CALCIUM",
-      "flag": "142",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_SILPH_CO_9F_CALCIUM",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "bg_event_type_0",
       "x": 17,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_9F_EventScript_161D38"
+      "script": "SilphCo_9F_EventScript_FloorSign"
     }
   ]
 }

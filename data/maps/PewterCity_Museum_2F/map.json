@@ -14,68 +14,68 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "55",
+      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
       "x": 10,
       "y": 5,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A565",
+      "script": "PewterCity_Museum_2F_EventScript_Scientist",
       "flag": "0"
     },
     {
-      "graphics_id": "25",
+      "graphics_id": "OBJECT_EVENT_GFX_MAN",
       "x": 4,
       "y": 9,
       "elevation": 3,
-      "movement_type": "5",
+      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 3,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A553",
+      "script": "PewterCity_Museum_2F_EventScript_Man",
       "flag": "0"
     },
     {
-      "graphics_id": "33",
+      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_2",
       "x": 0,
       "y": 6,
       "elevation": 3,
-      "movement_type": "1",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 3,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A55C",
+      "script": "PewterCity_Museum_2F_EventScript_OldMan",
       "flag": "0"
     },
     {
-      "graphics_id": "17",
+      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
       "x": 15,
       "y": 8,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A56E",
+      "script": "PewterCity_Museum_2F_EventScript_LittleGirl",
       "flag": "0"
     },
     {
-      "graphics_id": "30",
+      "graphics_id": "OBJECT_EVENT_GFX_BALDING_MAN",
       "x": 16,
       "y": 8,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A577",
+      "script": "PewterCity_Museum_2F_EventScript_BaldingMan",
       "flag": "0"
     }
   ],
@@ -95,56 +95,56 @@
       "x": 3,
       "y": 6,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A589"
+      "script": "PewterCity_Museum_2F_EventScript_MoonStone"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 5,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 14,
       "y": 5,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 16,
       "y": 5,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 14,
       "y": 4,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 4,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 16,
       "y": 4,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A580"
+      "script": "PewterCity_Museum_2F_EventScript_SpaceShuttle"
     },
     {
       "type": "bg_event_type_0",
       "x": 3,
       "y": 5,
       "elevation": 0,
-      "script": "PewterCity_Museum_2F_EventScript_16A589"
+      "script": "PewterCity_Museum_2F_EventScript_MoonStone"
     }
   ]
 }

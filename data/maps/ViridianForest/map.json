@@ -5,7 +5,7 @@
   "music": "MUS_T_MORI",
   "region_map_section": "MAPSEC_VIRIDIAN_FOREST",
   "requires_flash": false,
-  "weather": "WEATHER_CLOUDY",
+  "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_3",
   "allow_cycling": true,
   "unknown_19": 7,
@@ -14,147 +14,147 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "18",
+      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
       "x": 29,
       "y": 58,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_160529",
+      "script": "ViridianForest_EventScript_Youngster",
       "flag": "0"
     },
     {
-      "graphics_id": "19",
+      "graphics_id": "OBJECT_EVENT_GFX_BOY",
       "x": 45,
       "y": 58,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_160532",
+      "script": "ViridianForest_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 47,
       "y": 45,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "ViridianForest_EventScript_160571",
+      "script": "ViridianForest_EventScript_Rick",
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 47,
       "y": 29,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "ViridianForest_EventScript_160588",
+      "script": "ViridianForest_EventScript_Doug",
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 7,
       "y": 22,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "ViridianForest_EventScript_16059F",
+      "script": "ViridianForest_EventScript_Sammy",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 41,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_1BE5A8",
-      "flag": "342"
+      "script": "ViridianForest_EventScript_ItemPokeBall",
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_POKE_BALL"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 40,
       "y": 21,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_1BE5B5",
-      "flag": "343"
+      "script": "ViridianForest_EventScript_ItemAntidote",
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 21,
       "y": 34,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_1BE5C2",
-      "flag": "344"
+      "script": "ViridianForest_EventScript_ItemPotion",
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_POTION"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 43,
       "y": 6,
       "elevation": 3,
-      "movement_type": "13",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ViridianForest_EventScript_1605B6",
+      "script": "ViridianForest_EventScript_Anthony",
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 16,
       "y": 5,
       "elevation": 3,
-      "movement_type": "7",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ViridianForest_EventScript_1605CD",
+      "script": "ViridianForest_EventScript_Charlie",
       "flag": "0"
     },
     {
-      "graphics_id": "92",
+      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
       "x": 49,
       "y": 60,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ViridianForest_EventScript_1BEAC9",
-      "flag": "446"
+      "script": "ViridianForest_EventScript_ItemPotion2",
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_POTION_2"
     }
   ],
   "warp_events": [
@@ -208,42 +208,42 @@
       "x": 39,
       "y": 59,
       "elevation": 3,
-      "script": "ViridianForest_EventScript_16053B"
+      "script": "ViridianForest_EventScript_TrainerTips1"
     },
     {
       "type": "bg_event_type_0",
       "x": 43,
       "y": 26,
       "elevation": 0,
-      "script": "ViridianForest_EventScript_16054D"
+      "script": "ViridianForest_EventScript_TrainerTips3"
     },
     {
       "type": "bg_event_type_0",
       "x": 9,
       "y": 29,
       "elevation": 0,
-      "script": "ViridianForest_EventScript_160556"
+      "script": "ViridianForest_EventScript_TrainerTips4"
     },
     {
       "type": "bg_event_type_0",
       "x": 6,
       "y": 12,
       "elevation": 0,
-      "script": "ViridianForest_EventScript_160568"
+      "script": "ViridianForest_EventScript_ExitSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 28,
       "y": 44,
       "elevation": 0,
-      "script": "ViridianForest_EventScript_160544"
+      "script": "ViridianForest_EventScript_TrainerTips2"
     },
     {
       "type": "bg_event_type_0",
       "x": 31,
       "y": 60,
       "elevation": 0,
-      "script": "ViridianForest_EventScript_16055F"
+      "script": "ViridianForest_EventScript_TrainerTips5"
     },
     {
       "type": "hidden_item",
@@ -251,8 +251,9 @@
       "y": 22,
       "elevation": 3,
       "item": "ITEM_POTION",
-      "flag": "0",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_POTION",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -260,8 +261,9 @@
       "y": 57,
       "elevation": 0,
       "item": "ITEM_ANTIDOTE",
-      "flag": "1",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

@@ -1,8 +1,8 @@
-gUnknown_819A015:: @ 819A015
+CinnabarIsland_PokemonLab_ResearchRoom_Text_EeveeCanEvolveIntroThreeMons:: @ 819A015
     .string "EEVEE can evolve into one of three\n"
     .string "kinds of POKéMON.$"
 
-gUnknown_819A04A:: @ 819A04A
+CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail:: @ 819A04A
     .string "There's an e-mail message.\p"
     .string "… … …\p"
     .string "There are three legendary bird\n"
@@ -14,6 +14,6 @@ gUnknown_819A04A:: @ 819A04A
     .string "close to CERULEAN.\p"
     .string "From: POKéMON RESEARCH TEAM…$"
 
-gUnknown_819A128:: @ 819A128
+CinnabarIsland_PokemonLab_ResearchRoom_Text_AnAmberPipe:: @ 819A128
     .string "An amber pipe!$"
 

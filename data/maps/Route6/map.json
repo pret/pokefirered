@@ -13,7 +13,7 @@
   "battle_scene": "BATTLE_SCENE_0",
   "connections": [
     {
-      "map": "MAP_SAFFRON_CITY_CLASSIC",
+      "map": "MAP_SAFFRON_CITY_CONNECTION",
       "offset": 0,
       "direction": "up"
     },
@@ -25,11 +25,11 @@
   ],
   "object_events": [
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 3,
       "y": 16,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -38,11 +38,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 12,
       "y": 21,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -51,11 +51,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 13,
       "y": 21,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -64,11 +64,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "20",
+      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
       "x": 20,
       "y": 25,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -77,11 +77,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 13,
       "y": 32,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -90,11 +90,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "39",
+      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
       "x": 13,
       "y": 33,
       "elevation": 3,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
@@ -141,8 +141,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_SITRUS_BERRY",
-      "flag": "118",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE6_SITRUS_BERRY",
+      "quantity": 1,
+      "underfoot": false
     },
     {
       "type": "hidden_item",
@@ -150,8 +151,9 @@
       "y": 5,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
-      "flag": "119",
-      "unknown": 1
+      "flag": "HIDDEN_ITEM_ROUTE6_RARE_CANDY",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

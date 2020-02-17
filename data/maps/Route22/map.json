@@ -25,17 +25,17 @@
   ],
   "object_events": [
     {
-      "graphics_id": "72",
+      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
       "x": 25,
       "y": 4,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
       "script": "0x0",
-      "flag": "79"
+      "flag": "FLAG_HIDE_ROUTE_22_RIVAL"
     }
   ],
   "warp_events": [
@@ -60,54 +60,54 @@
       "x": 33,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
-      "script": "Route22_EventScript_16828C"
+      "script": "Route22_EventScript_EarlyRivalTriggerTop"
     },
     {
       "type": "trigger",
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
-      "script": "Route22_EventScript_168298"
+      "script": "Route22_EventScript_EarlyRivalTriggerMid"
     },
     {
       "type": "trigger",
       "x": 33,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 1,
-      "script": "Route22_EventScript_1682AB"
+      "script": "Route22_EventScript_EarlyRivalTriggerBottom"
     },
     {
       "type": "trigger",
       "x": 33,
       "y": 4,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
-      "script": "Route22_EventScript_1683ED"
+      "script": "Route22_EventScript_LateRivalTriggerTop"
     },
     {
       "type": "trigger",
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
-      "script": "Route22_EventScript_1683F9"
+      "script": "Route22_EventScript_LateRivalTriggerMid"
     },
     {
       "type": "trigger",
       "x": 33,
       "y": 6,
       "elevation": 0,
-      "var": "VAR_0x4054",
+      "var": "VAR_MAP_SCENE_ROUTE22",
       "var_value": 3,
-      "script": "Route22_EventScript_16840C"
+      "script": "Route22_EventScript_LateRivalTriggerBottom"
     }
   ],
   "bg_events": [
@@ -116,7 +116,7 @@
       "x": 7,
       "y": 12,
       "elevation": 0,
-      "script": "Route22_EventScript_1684E2"
+      "script": "Route22_EventScript_LeagueGateSign"
     }
   ]
 }

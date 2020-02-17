@@ -1,91 +1,87 @@
 CeruleanCity_House1_MapScripts:: @ 816A7EF
 	.byte 0
 
-CeruleanCity_House1_EventScript_16A7F0:: @ 816A7F0
+CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	lock
 	faceplayer
-	msgbox gUnknown_81918E7
-	message Text_191967
+	msgbox CeruleanCity_House1_Text_BadgesHaveAmazingSecrets
+	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
-	setvar VAR_0x8004, 0
-	special sub_80CB7C4
+	setvar VAR_0x8004, LISTMENU_BADGES
+	special Special_ListMenu
 	waitstate
 	switch VAR_RESULT
-	case 0, EventScript_16A8FB
-	case 1, EventScript_16A909
-	case 2, EventScript_16A917
-	case 3, EventScript_16A925
-	case 4, EventScript_16A933
-	case 5, EventScript_16A941
-	case 6, EventScript_16A94F
-	case 7, EventScript_16A95D
-	case 8, EventScript_16A96B
-	case 127, EventScript_16A96B
+	case 0, CeruleanCity_House1_EventScript_DescribeBoulderBadge
+	case 1, CeruleanCity_House1_EventScript_DescribeCascadeBadge
+	case 2, CeruleanCity_House1_EventScript_DescribeThunderBadge
+	case 3, CeruleanCity_House1_EventScript_DescribeRainbowBadge
+	case 4, CeruleanCity_House1_EventScript_DescribeSoulBadge
+	case 5, CeruleanCity_House1_EventScript_DescribeMarshBadge
+	case 6, CeruleanCity_House1_EventScript_DescribeVolcanoBadge
+	case 7, CeruleanCity_House1_EventScript_DescribeEarthBadge
+	case 8, CeruleanCity_House1_EventScript_StopDescribingBadges
+	case 127, CeruleanCity_House1_EventScript_StopDescribingBadges
 	end
 
-EventScript_16A87D:: @ 816A87D
-	message Text_191967
+CeruleanCity_House1_EventScript_DescribeAnotherBadge:: @ 816A87D
+	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
-	special sub_80CBC5C
+	special Special_ReturnToListMenu
 	waitstate
 	switch VAR_RESULT
-	case 0, EventScript_16A8FB
-	case 1, EventScript_16A909
-	case 2, EventScript_16A917
-	case 3, EventScript_16A925
-	case 4, EventScript_16A933
-	case 5, EventScript_16A941
-	case 6, EventScript_16A94F
-	case 7, EventScript_16A95D
-	case 8, EventScript_16A96B
-	case 127, EventScript_16A96B
+	case 0, CeruleanCity_House1_EventScript_DescribeBoulderBadge
+	case 1, CeruleanCity_House1_EventScript_DescribeCascadeBadge
+	case 2, CeruleanCity_House1_EventScript_DescribeThunderBadge
+	case 3, CeruleanCity_House1_EventScript_DescribeRainbowBadge
+	case 4, CeruleanCity_House1_EventScript_DescribeSoulBadge
+	case 5, CeruleanCity_House1_EventScript_DescribeMarshBadge
+	case 6, CeruleanCity_House1_EventScript_DescribeVolcanoBadge
+	case 7, CeruleanCity_House1_EventScript_DescribeEarthBadge
+	case 8, CeruleanCity_House1_EventScript_StopDescribingBadges
+	case 127, CeruleanCity_House1_EventScript_StopDescribingBadges
 	end
 
-EventScript_16A8FB:: @ 816A8FB
-	msgbox gUnknown_81919BE
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeBoulderBadge:: @ 816A8FB
+	msgbox CeruleanCity_House1_Text_AttackStatFlash
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A909:: @ 816A909
-	msgbox gUnknown_8191A31
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeCascadeBadge:: @ 816A909
+	msgbox CeruleanCity_House1_Text_ObeyLv30Cut
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A917:: @ 816A917
-	msgbox gUnknown_8191AF9
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeThunderBadge:: @ 816A917
+	msgbox CeruleanCity_House1_Text_SpeedStatFly
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A925:: @ 816A925
-	msgbox gUnknown_8191B69
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeRainbowBadge:: @ 816A925
+	msgbox CeruleanCity_House1_Text_ObeyLv50Strength
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A933:: @ 816A933
-	msgbox gUnknown_8191C36
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeSoulBadge:: @ 816A933
+	msgbox CeruleanCity_House1_Text_DefenseStatSurf
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A941:: @ 816A941
-	msgbox gUnknown_8191CA9
-	goto EventScript_16A87D
+CeruleanCity_House1_EventScript_DescribeMarshBadge:: @ 816A941
+	msgbox CeruleanCity_House1_Text_ObeyLv70RockSmash
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A94F:: @ 816A94F
-	msgbox gUnknown_8191D78
-	goto EventScript_16A87D
-
-EventScript_16A95C:: @ 816A95C
+CeruleanCity_House1_EventScript_DescribeVolcanoBadge:: @ 816A94F
+	msgbox CeruleanCity_House1_Text_SpStatsWaterfall
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A95D:: @ 816A95D
-	msgbox gUnknown_8191DF8
-	goto EventScript_16A87D
-
-EventScript_16A96A:: @ 816A96A
+CeruleanCity_House1_EventScript_DescribeEarthBadge:: @ 816A95D
+	msgbox CeruleanCity_House1_Text_AllMonsWillObeyYou
+	goto CeruleanCity_House1_EventScript_DescribeAnotherBadge
 	end
 
-EventScript_16A96B:: @ 816A96B
-	msgbox gUnknown_819199E
+CeruleanCity_House1_EventScript_StopDescribingBadges:: @ 816A96B
+	msgbox CeruleanCity_House1_Text_ComeVisitAnytime
 	release
 	end

@@ -14,55 +14,55 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "43",
+      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
       "x": 10,
       "y": 12,
       "elevation": 0,
-      "movement_type": "9",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "CeruleanCity_Gym_EventScript_16AB5B",
+      "script": "CeruleanCity_Gym_EventScript_Luis",
       "flag": "0"
     },
     {
-      "graphics_id": "40",
+      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
       "x": 4,
       "y": 7,
       "elevation": 3,
-      "movement_type": "10",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "CeruleanCity_Gym_EventScript_16AB44",
+      "script": "CeruleanCity_Gym_EventScript_Diana",
       "flag": "0"
     },
     {
-      "graphics_id": "81",
+      "graphics_id": "OBJECT_EVENT_GFX_MISTY",
       "x": 8,
       "y": 6,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_Gym_EventScript_16AAA1",
+      "script": "CeruleanCity_Gym_EventScript_Misty",
       "flag": "0"
     },
     {
-      "graphics_id": "91",
+      "graphics_id": "OBJECT_EVENT_GFX_GYM_GUY",
       "x": 7,
       "y": 16,
       "elevation": 3,
-      "movement_type": "8",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeruleanCity_Gym_EventScript_16AB7F",
+      "script": "CeruleanCity_Gym_EventScript_GymGuy",
       "flag": "0"
     }
   ],
@@ -96,14 +96,14 @@
       "x": 6,
       "y": 17,
       "elevation": 0,
-      "script": "CeruleanCity_Gym_EventScript_16AB9E"
+      "script": "CeruleanCity_Gym_EventScript_GymStatue"
     },
     {
       "type": "bg_event_type_0",
       "x": 10,
       "y": 17,
       "elevation": 0,
-      "script": "CeruleanCity_Gym_EventScript_16AB9E"
+      "script": "CeruleanCity_Gym_EventScript_GymStatue"
     }
   ]
 }

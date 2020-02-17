@@ -1,4 +1,4 @@
-Text_1A3505:: @ 81A3505
+Text_BodySlamTeach:: @ 81A3505
     .string "Ready?\n"
     .string "Boing!\p"
     .string "We're having a BODY SLAM match\n"
@@ -8,15 +8,15 @@ Text_1A3505:: @ 81A3505
     .string "How about I teach BODY SLAM to\n"
     .string "a POKéMON of yours instead?$"
 
-Text_1A35C7:: @ 81A35C7
+Text_BodySlamDeclined:: @ 81A35C7
     .string "Come again!\n"
     .string "Boing!$"
 
-Text_1A35DA:: @ 81A35DA
+Text_BodySlamWhichMon:: @ 81A35DA
     .string "Which POKéMON wants to learn how\n"
     .string "to BODY SLAM?$"
 
-Text_1A3609:: @ 81A3609
+Text_BodySlamTaught:: @ 81A3609
     .string "Boioing!$"
 
 Text_1A3612:: @ 81A3612

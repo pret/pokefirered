@@ -1,321 +1,313 @@
+.equ HELIX_FOSSIL, 1
+.equ DOME_FOSSIL,  2
+.equ OLD_AMBER,    3
+
 CinnabarIsland_PokemonLab_ExperimentRoom_MapScripts:: @ 816E400
 	.byte 0
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E401:: @ 816E401
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_Garett:: @ 816E401
 	lock
 	faceplayer
-	setvar VAR_0x8008, 8
-	call EventScript_1A8CAD
-	checkflag FLAG_0x276
-	goto_if_eq EventScript_16E473
-	msgbox gUnknown_81A597B, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E45B
-	call EventScript_1A8CBD
-	compare_var_to_value VAR_0x8004, 6
-	goto_if 4, EventScript_16E45B
-	call EventScript_1A8CC9
-	compare_var_to_var VAR_RESULT, VAR_0x8009
-	goto_if 5, EventScript_16E465
-	call EventScript_1A8CD9
-	msgbox gUnknown_81A59DA
-	setflag FLAG_0x276
+	setvar VAR_0x8008, INGAME_TRADE_SEEL
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_SEELOR_TRADE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	compare VAR_0x8004, PARTY_SIZE
+	goto_if_ge CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	compare VAR_RESULT, VAR_0x8009
+	goto_if_ne CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_SEELOR_TRADE
 	release
 	end
 
-EventScript_16E45B:: @ 816E45B
-	msgbox gUnknown_81A59B6
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineTrade:: @ 816E45B
+	msgbox Trade_Text_AwwOhWell
 	release
 	end
 
-EventScript_16E465:: @ 816E465
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NotRequestedMon:: @ 816E465
 	getspeciesname 0, VAR_0x8009
-	msgbox gUnknown_81A59C6
+	msgbox Trade_Text_WhatThatsNoMon
 	release
 	end
 
-EventScript_16E473:: @ 816E473
-	msgbox gUnknown_81A59E7
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded:: @ 816E473
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end
 
-CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_16E47D:: @ 816E47D
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist:: @ 816E47D
 	lock
 	faceplayer
-	setvar VAR_RESULT, 0
-	checkflag FLAG_0x2EE
-	call_if 1, EventScript_16E8A1
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E897
-	compare_var_to_value VAR_0x406A, 2
-	goto_if_eq EventScript_16E736
-	compare_var_to_value VAR_0x406A, 1
-	goto_if_eq EventScript_16E72C
-	call EventScript_16E4EC
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E544
-	call EventScript_16E504
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E586
-	call EventScript_16E51C
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E5C8
-	msgbox gUnknown_819A282
-	goto EventScript_16E53A
+	setvar VAR_RESULT, FALSE
+	call_if_set FLAG_REVIVED_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 2
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E4EC:: @ 816E4EC
-	checkflag FLAG_0x273
-	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2ED
-	goto_if_eq EventScript_16E534
-	setvar VAR_RESULT, 1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList:: @ 816E4EC
+	goto_if_unset FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto_if_set FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_16E504:: @ 816E504
-	checkflag FLAG_0x272
-	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2EC
-	goto_if_eq EventScript_16E534
-	setvar VAR_RESULT, 1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddDomeFossilToList:: @ 816E504
+	goto_if_unset FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto_if_set FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_16E51C:: @ 816E51C
-	checkflag FLAG_0x25E
-	goto_if 0, EventScript_16E534
-	checkflag FLAG_0x2EE
-	goto_if_eq EventScript_16E534
-	setvar VAR_RESULT, 1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList:: @ 816E51C
+	goto_if_unset FLAG_GOT_OLD_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	goto_if_set FLAG_REVIVED_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_16E534:: @ 816E534
-	setvar VAR_RESULT, 0
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse:: @ 816E534
+	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_16E53A:: @ 816E53A
-	msgbox gUnknown_819A314
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil:: @ 816E53A
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad
 	release
 	end
 
-EventScript_16E544:: @ 816E544
-	message Text_19A282
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelix:: @ 816E544
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
 	waitmessage
-	call EventScript_16E51C
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E5FA
-	multichoice 0, 0, 21, 0
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber
+	multichoice 0, 0, MULTICHOICE_HELIX, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16E668
-	case 1, EventScript_16E53A
-	case 127, EventScript_16E53A
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E586:: @ 816E586
-	message Text_19A282
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDome:: @ 816E586
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
 	waitmessage
-	call EventScript_16E51C
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E631
-	multichoice 0, 0, 22, 0
+	call CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddOldAmberToList
+	compare VAR_RESULT, TRUE
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber
+	multichoice 0, 0, MULTICHOICE_DOME, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16E6A6
-	case 1, EventScript_16E53A
-	case 127, EventScript_16E53A
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E5C8:: @ 816E5C8
-	message Text_19A282
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilAmber:: @ 816E5C8
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe
 	waitmessage
-	multichoice 0, 0, 23, 0
+	multichoice 0, 0, MULTICHOICE_AMBER, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16E6E4
-	case 1, EventScript_16E53A
-	case 127, EventScript_16E53A
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E5FA:: @ 816E5FA
-	multichoice 0, 0, 24, 0
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilHelixAmber:: @ 816E5FA
+	multichoice 0, 0, MULTICHOICE_HELIX_AMBER, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16E668
-	case 1, EventScript_16E6E4
-	case 2, EventScript_16E53A
-	case 127, EventScript_16E53A
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	case 2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E631:: @ 816E631
-	multichoice 0, 0, 25, 0
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ChooseFossilDomeAmber:: @ 816E631
+	multichoice 0, 0, MULTICHOICE_DOME_AMBER, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_16E6A6
-	case 1, EventScript_16E6E4
-	case 2, EventScript_16E53A
-	case 127, EventScript_16E53A
+	case 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil
+	case 1, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber
+	case 2, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+	case 127, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
 	end
 
-EventScript_16E668:: @ 816E668
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowHelixFossil:: @ 816E668
 	getspeciesname 0, SPECIES_OMANYTE
 	getitemname 1, ITEM_HELIX_FOSSIL
-	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E722
-	msgbox gUnknown_819A45D
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
 	textcolor 0
-	removeitem ITEM_HELIX_FOSSIL, 1
-	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 1
+	removeitem ITEM_HELIX_FOSSIL
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, HELIX_FOSSIL
 	release
 	end
 
-EventScript_16E6A6:: @ 816E6A6
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowDomeFossil:: @ 816E6A6
 	getspeciesname 0, SPECIES_KABUTO
 	getitemname 1, ITEM_DOME_FOSSIL
-	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E722
-	msgbox gUnknown_819A45D
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
 	textcolor 0
-	removeitem ITEM_DOME_FOSSIL, 1
-	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 2
+	removeitem ITEM_DOME_FOSSIL
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, DOME_FOSSIL
 	release
 	end
 
-EventScript_16E6E4:: @ 816E6E4
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ShowOldAmber:: @ 816E6E4
 	getspeciesname 0, SPECIES_AERODACTYL
 	getitemname 1, ITEM_OLD_AMBER
-	msgbox gUnknown_819A3D4, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E722
-	msgbox gUnknown_819A45D
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor
 	textcolor 0
-	removeitem ITEM_OLD_AMBER, 1
-	msgbox gUnknown_819A4AB
-	setvar VAR_0x406A, 1
-	setvar VAR_0x4069, 3
+	removeitem ITEM_OLD_AMBER
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, OLD_AMBER
 	release
 	end
 
-EventScript_16E722:: @ 816E722
-	msgbox gUnknown_819A4E1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DeclineReviveFossil:: @ 816E722
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain
 	release
 	end
 
-EventScript_16E72C:: @ 816E72C
-	msgbox gUnknown_819A4AB
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilStillReviving:: @ 816E72C
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk
 	release
 	end
 
-EventScript_16E736:: @ 816E736
-	compare_var_to_value VAR_0x4069, 1
-	goto_if_eq EventScript_16E758
-	compare_var_to_value VAR_0x4069, 2
-	goto_if_eq EventScript_16E79D
-	compare_var_to_value VAR_0x4069, 3
-	goto_if_eq EventScript_16E7E2
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveRevivedMon:: @ 816E736
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, HELIX_FOSSIL
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, DOME_FOSSIL
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto
+	compare VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_WHICH_FOSSIL, OLD_AMBER
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl
 	end
 
-EventScript_16E758:: @ 816E758
-	setvar VAR_0x4001, 138
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte:: @ 816E758
+	setvar VAR_TEMP_1, SPECIES_OMANYTE
 	getspeciesname 0, SPECIES_OMANYTE
-	msgbox gUnknown_819A34F
-	givemon SPECIES_OMANYTE, 5, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2ED
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E827
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E85B
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+	givemon SPECIES_OMANYTE, 5, ITEM_NONE
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_NoMoreRoomForPokemon
+	setflag FLAG_REVIVED_HELIX
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
-EventScript_16E79D:: @ 816E79D
-	setvar VAR_0x4001, 140
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto:: @ 816E79D
+	setvar VAR_TEMP_1, SPECIES_KABUTO
 	getspeciesname 0, SPECIES_KABUTO
-	msgbox gUnknown_819A34F
-	givemon SPECIES_KABUTO, 5, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2EC
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E827
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E85B
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+	givemon SPECIES_KABUTO, 5, ITEM_NONE
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_NoMoreRoomForPokemon
+	setflag FLAG_REVIVED_DOME
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
-EventScript_16E7E2:: @ 816E7E2
-	setvar VAR_0x4001, 142
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl:: @ 816E7E2
+	setvar VAR_TEMP_1, SPECIES_AERODACTYL
 	getspeciesname 0, SPECIES_AERODACTYL
-	msgbox gUnknown_819A34F
-	givemon SPECIES_AERODACTYL, 5, ITEM_NONE, 0, 0, 0
-	compare_var_to_value VAR_RESULT, 2
-	goto_if_eq EventScript_1A927C
-	setflag FLAG_0x2EE
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E827
-	compare_var_to_value VAR_RESULT, 1
-	goto_if_eq EventScript_16E85B
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+	givemon SPECIES_AERODACTYL, 5, ITEM_NONE
+	compare VAR_RESULT, 2
+	goto_if_eq EventScript_NoMoreRoomForPokemon
+	setflag FLAG_REVIVED_AMBER
+	compare VAR_RESULT, 0
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+	compare VAR_RESULT, 1
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC
 	end
 
-EventScript_16E827:: @ 816E827
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty:: @ 816E827
 	textcolor 3
 	playfanfare MUS_FANFA1
-	message Text_19A39E
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
 	waitmessage
 	waitfanfare
-	setvar VAR_0x406A, 0
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E895
-	call EventScript_1A8C27
-	call EventScript_1A74EB
-	goto EventScript_16E895
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
+	call EventScript_GetGiftMonPartySlot
+	call EventScript_ChangePokemonNickname
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
 	end
 
-EventScript_16E85B:: @ 816E85B
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonPC:: @ 816E85B
 	textcolor 3
 	playfanfare MUS_FANFA1
-	message Text_19A39E
+	message CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReceivedMonFromDoctor
 	waitmessage
 	waitfanfare
-	setvar VAR_0x406A, 0
-	msgbox gUnknown_81A56A7, MSGBOX_YESNO
-	compare_var_to_value VAR_RESULT, 0
-	goto_if_eq EventScript_16E88A
-	call EventScript_1A8C33
-	goto EventScript_16E88A
+	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 0
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
+	call EventScript_NameReceivedBoxMon
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC
 	end
 
-EventScript_16E88A:: @ 816E88A
-	call EventScript_1A8C3C
-	goto EventScript_16E895
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_MonSentToPC:: @ 816E88A
+	call EventScript_TransferredToPC
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon
 	end
 
-EventScript_16E895:: @ 816E895
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_EndGiveMon:: @ 816E895
 	release
 	end
 
-EventScript_16E897:: @ 816E897
-	msgbox gUnknown_819A4E1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils:: @ 816E897
+	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain
 	release
 	end
 
-EventScript_16E8A1:: @ 816E8A1
-	checkflag FLAG_0x273
-	goto_if_eq EventScript_16E8B9
-	checkflag FLAG_0x272
-	goto_if_eq EventScript_16E8C8
-	goto EventScript_16E534
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil:: @ 816E8A1
+	goto_if_set FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix
+	goto_if_set FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome
+	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
 	end
 
-EventScript_16E8B9:: @ 816E8B9
-	checkflag FLAG_0x2ED
-	goto_if 0, EventScript_16E534
-	setvar VAR_RESULT, 1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix:: @ 816E8B9
+	goto_if_unset FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_16E8C8:: @ 816E8C8
-	checkflag FLAG_0x2EC
-	goto_if 0, EventScript_16E534
-	setvar VAR_RESULT, 1
+CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome:: @ 816E8C8
+	goto_if_unset FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+	setvar VAR_RESULT, TRUE
 	return

@@ -108,7 +108,7 @@ gUnknown_81A1321:: @ 81A1321
     .string "I'm also sorry for being such a \n"
     .string "poor host on your visit here.$"
 
-Text_1A1390:: @ 81A1390
+Text_UsualPCServicesUnavailable:: @ 81A1390
     .string "The usual PC services aren't\n"
     .string "available…$"
 

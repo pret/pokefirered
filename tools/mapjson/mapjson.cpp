@@ -105,7 +105,7 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << map_data["map_type"].string_value() << "\n";
 
     if (version == "firered")
-        text << "\t.byte " << map_data["unknown_18"].int_value() << "\n"
+        text << "\t.byte " << map_data["allow_cycling"].bool_value() << "\n"
              << "\t.byte " << map_data["unknown_19"].int_value() << "\n";
     else
         text << "\t.2byte 0\n";
@@ -115,13 +115,13 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     }
     else if (version == "emerald") {
         text << "\tmap_header_flags "
-             << "allow_bike=" << map_data["allow_bike"].bool_value() << ", "
+             << "allow_cycling=" << map_data["allow_cycling"].bool_value() << ", "
              << "allow_escape_rope=" << map_data["allow_escape_rope"].bool_value() << ", "
              << "allow_run=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
     }
     else if (version == "firered") {
-        text << "\t.byte " << map_data["elevator_flag"].int_value() << "\n";
+        text << "\t.byte " << map_data["floor_number"].int_value() << "\n";
     }
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";

@@ -7,7 +7,7 @@
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",
   "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
+  "allow_cycling": false,
   "unknown_19": 5,
   "elevator_flag": 0,
   "battle_scene": "BATTLE_SCENE_2",

@@ -179,33 +179,12 @@ void sub_814B348(struct PokemonJump2 *, int);
 void sub_814AF0C(struct PokemonJump2 *, int);
 void sub_814ADCC(struct PokemonJump2 *, struct PokemonJump1_MonInfo *,s16, s16, u8);
 void sub_814B240(struct PokemonJump2 *,s16, s16, u8);
-void sub_814AFE8(struct PokemonJump2 *, u8 multiplayerId);
-void sub_814B080(struct PokemonJump2 *, u8 multiplayerId);
-int sub_814B010(struct PokemonJump2 *, int multiplayerId);
+void sub_814AFE8(struct PokemonJump2 *, int multiplayerId);
+void sub_814B080(struct PokemonJump2 *, int multiplayerId);
+bool32 sub_814B010(struct PokemonJump2 *, int multiplayerId);
 void sub_814B0A8(struct PokemonJump2 *);
 void sub_814B134(struct PokemonJump2 *);
 void sub_814B168(struct PokemonJump2 *, int multiplayerId);
-int sub_814B190(struct PokemonJump2 *);
-
-bool32 sub_802EC98(u8 spriteId);
-bool32 sub_802EE30(u8 spriteId);
-u8 sub_802EFA8(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority);
-void Task_ShowPokemonJumpRecords(u8 taskId);
-void TruncateToFirstWordOnly(u8 *str);
-void sub_802CB7C(struct Sprite *sprite);
-void sub_802CC40(struct Sprite *sprite);
-void sub_802CD08(struct Sprite *sprite);
-void sub_802CDD4(struct Sprite *sprite);
-void sub_802E500(u16 windowId, int width);
-void sub_802E6D0(u8 taskId);
-void sub_802E83C(u8 taskId);
-void sub_802E8C8(u8 taskId);
-void sub_802EA50(u8 taskId);
-void sub_802EAB0(u8 taskId);
-void sub_802EB98(u8 taskId);
-void sub_802EDCC(u8 spriteId1, u8 spriteId2, u8 spriteId3);
-void sub_802EE5C(struct Sprite *sprite);
-void sub_802EF50(u16 tileTag, u16 palTag);
-void sub_802EFFC(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 *spriteId1, s16 *spriteId2);
+bool32 sub_814B190(struct PokemonJump2 *);
 
 #endif // GUARD_POKEMON_JUMP_H

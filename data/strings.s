@@ -3295,16 +3295,16 @@ gText_SpacePoints2:: @ 841CB52
 gText_SpaceTimes3:: @ 841CB5A
 	.string " time(s)$"
 
-gUnknown_841CB63:: @ 841CB63
+gText_PkmnJumpRecords:: @ 841CB63
 	.string "POKéMON JUMP RECORDS$"
 
-gUnknown_841CB78::
+gText_JumpsInARow::
 	.string "Jumps in a row:$"
 
-gUnknown_841CB88::
+gText_BestScore2::
 	.string "Best score:$"
 
-gUnknown_841CB94::
+gText_ExcellentsInARow::
 	.string "EXCELLENTS in a row:$"
 
 gText_AwesomeWonF701F700:: @ 841CBA9

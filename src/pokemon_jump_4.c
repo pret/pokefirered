@@ -165,7 +165,7 @@ void sub_8149D40(int arg0)
 {
     int i;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_846D8FC); i++)
+    for (i = 0; i < NELEMS(gUnknown_846D8FC); i++)
     {
         if (gUnknown_846D8FC[i].id == arg0)
             sub_8149D80(gUnknown_846D8FC[i].func);
@@ -200,7 +200,7 @@ static void sub_8149DC8(void)
     {
     case 0:
         ResetBgsAndClearDma3BusyFlags(FALSE);
-        InitBgsFromTemplates(0, gUnknown_846D8D4, ARRAY_COUNT(gUnknown_846D8D4));
+        InitBgsFromTemplates(0, gUnknown_846D8D4, NELEMS(gUnknown_846D8D4));
         InitWindows(gUnknown_846D8E4);
         ResetBgPositions();
         ResetTempTileDataBuffers();

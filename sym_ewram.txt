@@ -450,10 +450,8 @@ gUnknown_203B170: @ 203B170
 	.include "src/seagallop.o"
 	.align 2
 	.include "src/pokemon_jump_2.o"
-
 	.align 2
-gUnknown_203F3D8: @ 203F3D8
-	.space 0x4
+	.include "src/pokemon_jump_4.o"
 
 gUnknown_203F3DC: @ 203F3DC
 	.space 0x4

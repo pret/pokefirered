@@ -1,27 +1,12 @@
 #include "global.h"
-#include "malloc.h"
-#include "battle_anim.h"
-#include "bg.h"
-#include "data.h"
-#include "decompress.h"
-#include "dynamic_placeholder_text_util.h"
+#include "gflib.h"
 #include "event_data.h"
 #include "item.h"
 #include "link_rfu.h"
-#include "main.h"
 #include "menu.h"
-#include "palette.h"
 #include "random.h"
 #include "save.h"
-#include "script.h"
-#include "sound.h"
-#include "sprite.h"
-#include "string_util.h"
-#include "strings.h"
 #include "task.h"
-#include "text_window.h"
-#include "trig.h"
-#include "pokemon.h"
 #include "pokemon_jump.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -98,53 +83,8 @@ static void sub_8149900(u16, u16 *, u16 *);
 static u16 sub_8149910(void);
 static u16 sub_8149930(void);
 static u16 sub_8149978(u16 item, u16 quantity);
-static void sub_802CB7C(struct Sprite *sprite);
-static void sub_802CC40(struct Sprite *sprite);
-static void sub_802CD08(struct Sprite *sprite);
-static void sub_802CDD4(struct Sprite *sprite);
-
-static void sub_802D12C(u8 taskId);
-static void sub_802E00C(u8 arg0);
-static void sub_802E090(u8 taskId);
-static void sub_802D150(void);
-static void sub_802DD08(void);
-static void sub_802DB8C(void);
-static void sub_802DBF8(void);
-static void sub_802DE1C(void);
-static void sub_802DFD4(void);
-static void sub_802D108(void (*func)(void));
-static void sub_802DF70(bool32 arg0);
-static u32 sub_802DA9C(u32 left, u32 top, u32 width, u32 height);
-static void sub_802DB18(u16 left, u16 top, u8 cursorPos);
-static void sub_802D150(void);
-static void sub_802D2E4(void);
-static void sub_802D350(void);
-static void sub_802D3BC(void);
-static void sub_802D448(void);
-static void sub_802D4F4(void);
-static void sub_802D598(void);
-static void sub_802D5E4(void);
-static void sub_802D72C(void);
-static void sub_802D688(void);
-static void Task_ShowPokemonJumpRecords(u8 taskId);
-static void sub_802E6D0(u8 taskId);
-static void sub_802EB98(u8 taskId);
-static void sub_802E500(u16 windowId, int width);
-static void TruncateToFirstWordOnly(u8 *str);
-static void sub_802EF50(u16 tileTag, u16 palTag);
-static u8 sub_802EFA8(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority);
-static void sub_802EFFC(u16 tileTag, u16 palTag, s16 x, s16 y, u8 subpriority, s16 *spriteId1, s16 *spriteId2);
-static bool32 sub_802EC98(u8 spriteId);
-static bool32 sub_802EE30(u8 spriteId);
-static void sub_802EDCC(u8 spriteId1, u8 spriteId2, u8 spriteId3);
-static void sub_802EE5C(struct Sprite *sprite);
-static void sub_802E83C(u8 taskId);
-static void sub_802E8C8(u8 taskId);
-static void sub_802EA50(u8 taskId);
-static void sub_802EAB0(u8 taskId);
 
 EWRAM_DATA static struct PokemonJump1 *gUnknown_203F3D4 = NULL;
-// EWRAM_DATA static struct PokemonJump2 *gUnknown_203F3D8 = NULL;
 
 static const struct PokemonJumpMons gPkmnJumpSpecies[] =
 {

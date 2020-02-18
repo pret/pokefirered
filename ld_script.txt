@@ -276,6 +276,8 @@ SECTIONS {
         src/seagallop.o(.text);
         src/pokemon_jump.o(.text);
         src/pokemon_jump_2.o(.text);
+        src/pokemon_jump_3.o(.text);
+        src/pokemon_jump_4.o(.text);
         asm/pokemon_jump_2.o(.text);
         asm/berry_crush.o(.text);
         asm/berry_crush_2.o(.text);
@@ -568,6 +570,7 @@ SECTIONS {
         src/seagallop.o(.rodata);
         src/pokemon_jump.o(.rodata);
         src/pokemon_jump_2.o(.rodata);
+        src/pokemon_jump_4.o(.rodata);
         data/pokemon_jump.o(.rodata);
         data/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);

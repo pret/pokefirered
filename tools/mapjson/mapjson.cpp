@@ -274,6 +274,7 @@ string generate_firered_map_events_text(Json map_data) {
             auto obj_event = map_data["object_events"].array_items()[i];
             text << "\tobject_event " << i + 1 << ", "
                  << obj_event["graphics_id"].string_value() << ", "
+                 << obj_event["in_connection"].int_value() << ", "
                  << obj_event["x"].int_value() << ", "
                  << obj_event["y"].int_value() << ", "
                  << obj_event["elevation"].int_value() << ", "

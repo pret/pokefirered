@@ -183,8 +183,9 @@
       "flag": "0"
     },
     {
-      "graphics_id": "65375",
-      "x": 65529,
+      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "in_connection": 255,
+      "x": -7,
       "y": 21,
       "elevation": 7,
       "movement_type": "MOVEMENT_TYPE_NONE",

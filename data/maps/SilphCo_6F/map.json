@@ -8,8 +8,10 @@
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_8",
   "allow_cycling": false,
-  "unknown_19": 7,
-  "elevator_flag": 6,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 6,
   "battle_scene": "BATTLE_SCENE_0",
   "connections": null,
   "object_events": [

@@ -6,13 +6,13 @@
   "region_map_section": "MAPSEC_POKEMON_TOWER",
   "requires_flash": false,
   "weather": "WEATHER_FOG_HORIZONTAL",
-  "map_type": "MAP_TYPE_8",
+  "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
   "allow_escaping": true,
   "allow_running": false,
   "show_map_name": true,
   "floor_number": 0,
-  "battle_scene": "BATTLE_SCENE_2",
+  "battle_scene": "MAP_BATTLE_SCENE_INDOOR_1",
   "connections": null,
   "object_events": [
     {

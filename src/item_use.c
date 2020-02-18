@@ -42,7 +42,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/map_types.h"
+#include "constants/maps.h"
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 

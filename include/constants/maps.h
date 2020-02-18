@@ -11,33 +11,25 @@
 
 #define MAP(map) MAP_GROUP(map), MAP_NUM(map)
 
-// temporary map constants
-#define BATTLE_SCENE_0 0
-#define BATTLE_SCENE_1 1
-#define BATTLE_SCENE_2 2
-#define BATTLE_SCENE_3 3
-#define BATTLE_SCENE_4 4
-#define BATTLE_SCENE_5 5
-#define BATTLE_SCENE_6 6
-#define BATTLE_SCENE_7 7
-#define BATTLE_SCENE_8 8
-#define BATTLE_SCENE_9 9
-#define BATTLE_SCENE_10 10
-#define BATTLE_SCENE_11 11
-#define BATTLE_SCENE_12 12
-#define BATTLE_SCENE_13 13
-#define BATTLE_SCENE_14 14
-#define BATTLE_SCENE_15 15
+#define MAP_BATTLE_SCENE_NORMAL   0
+#define MAP_BATTLE_SCENE_GYM      1
+#define MAP_BATTLE_SCENE_INDOOR_1 2 // Pokemon Tower, Tanoby ruins
+#define MAP_BATTLE_SCENE_INDOOR_2 3 // Pokemon Mansion, Power Plant, Rocket Hideout/Warehouse
+#define MAP_BATTLE_SCENE_LORELEI  4
+#define MAP_BATTLE_SCENE_BRUNO    5
+#define MAP_BATTLE_SCENE_AGATHA   6
+#define MAP_BATTLE_SCENE_LANCE    7
+#define MAP_BATTLE_SCENE_LINK     8
 
-#define MAP_TYPE_0 0
-#define MAP_TYPE_1 1
-#define MAP_TYPE_2 2
-#define MAP_TYPE_3 3
-#define MAP_TYPE_4 4
-#define MAP_TYPE_5 5
-#define MAP_TYPE_6 6
-#define MAP_TYPE_7 7
-#define MAP_TYPE_8 8
-#define MAP_TYPE_9 9
+#define MAP_TYPE_NONE        0
+#define MAP_TYPE_TOWN        1
+#define MAP_TYPE_CITY        2 // Unused. RSE use this map type to distinguish Town and City. FRLG make no distinction
+#define MAP_TYPE_ROUTE       3
+#define MAP_TYPE_UNDERGROUND 4
+#define MAP_TYPE_UNDERWATER  5 // Unused
+#define MAP_TYPE_OCEAN_ROUTE 6 // Unused
+#define MAP_TYPE_UNKNOWN     7 // Unused
+#define MAP_TYPE_INDOOR      8
+#define MAP_TYPE_SECRET_BASE 9 // Unused
 
 #endif  // GUARD_CONSTANTS_MAPS_H

@@ -88,3 +88,8 @@
 	map \map
 	.space 2
 	.endm
+
+	.macro map_header_flags allow_cycling:req, allow_escaping:req, allow_running:req, show_map_name:req
+	.byte \allow_cycling
+	.byte ((\show_map_name & 1) << 2) | ((\allow_running & 1) << 1) | ((\allow_escaping & 1) << 0)
+	.endm

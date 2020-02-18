@@ -37,7 +37,7 @@
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/trainer_classes.h"
-#include "constants/map_types.h"
+#include "constants/maps.h"
 
 enum
 {

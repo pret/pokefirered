@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 7,
-  "elevator_flag": -1,
-  "battle_scene": "BATTLE_SCENE_3",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": -1,
+  "battle_scene": "MAP_BATTLE_SCENE_INDOOR_2",
   "connections": null,
   "object_events": [
     {

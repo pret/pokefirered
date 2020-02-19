@@ -76,7 +76,7 @@ u8 GetStepInPlaceDelay4AnimId(u32);
 u8 GetStepInPlaceDelay8AnimId(u32);
 u8 GetStepInPlaceDelay16AnimId(u32);
 u8 GetStepInPlaceDelay32AnimId(u32);
-u8 npc_block_way(struct ObjectEvent *, s16, s16, u32);
+u8 GetCollisionAtCoords(struct ObjectEvent *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
 bool8 ObjectEventIsSpecialAnimActive(struct ObjectEvent *);
 u8 ObjectEventClearHeldMovementIfFinished(struct ObjectEvent *);
@@ -98,6 +98,9 @@ u8 GetTrainerFacingDirectionMovementType(u8 direction);
 void CameraObjectSetFollowedObjectId(u8 spriteId);
 void UnfreezeObjectEvents(void);
 void TurnObjectEvent(u8, u8);
+const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId);
+u8 sub_805DF30(void);
+u8 GetCollisionFlagsAtCoords(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction);
 
 // Exported data declarations
 

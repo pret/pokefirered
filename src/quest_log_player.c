@@ -145,8 +145,8 @@ static void sub_8150708(void)
         sub_81507BC(objectEvent, sub_805C808(2));
         ObjectEventTurn(objectEvent, objectEvent->placeholder18);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
-        gFieldEffectArguments[0] = objectEvent->coords2.x;
-        gFieldEffectArguments[1] = objectEvent->coords2.y;
+        gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+        gFieldEffectArguments[1] = objectEvent->currentCoords.y;
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
         fieldEffectId = FieldEffectStart(FLDEFF_SURF_BLOB);
         objectEvent->mapobj_unk_1A = fieldEffectId;

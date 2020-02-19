@@ -1120,7 +1120,7 @@ sub_805BBA8: @ 805BBA8
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1323,7 +1323,7 @@ sub_805BCEC: @ 805BCEC
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r7, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BDA0
@@ -2906,7 +2906,7 @@ IsPlayerFacingSurfableFishableWater: @ 805C8B0
 	lsls r3, 28
 	lsrs r3, 28
 	adds r0, r4, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3

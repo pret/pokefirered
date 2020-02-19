@@ -4,15 +4,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83C6AC8::
-	.incbin "graphics/object_events/emoticons.4bpp"
-
-gUnknown_83C7248:: @ 83C7248
-	.4byte IsTrainerInRangeSouth
-	.4byte IsTrainerInRangeNorth
-	.4byte IsTrainerInRangeWest
-	.4byte IsTrainerInRangeEast
-
 gUnknown_83C7258:: @ 83C7258
 	.4byte sub_8081F34
 	.4byte sub_8081F38

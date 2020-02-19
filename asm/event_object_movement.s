@@ -10521,7 +10521,7 @@ sub_80629B8: @ 80629B8
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062A3E
@@ -10610,7 +10610,7 @@ sub_8062A70: @ 8062A70
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062AF6
@@ -10699,7 +10699,7 @@ sub_8062B28: @ 8062B28
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062BAE
@@ -10788,7 +10788,7 @@ sub_8062BE0: @ 8062BE0
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062C66
@@ -10913,7 +10913,7 @@ sub_8062CE0: @ 8062CE0
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062D66
@@ -11009,7 +11009,7 @@ oac_hopping: @ 8062D98
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062E2C
@@ -12292,7 +12292,7 @@ npc_block_way__next_tile: @ 806366C
 	ldrsh r2, [r4, r0]
 	adds r0, r6, 0
 	adds r3, r5, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -12301,8 +12301,8 @@ npc_block_way__next_tile: @ 806366C
 	bx r1
 	thumb_func_end npc_block_way__next_tile
 
-	thumb_func_start npc_block_way
-npc_block_way: @ 80636AC
+	thumb_func_start GetCollisionAtCoords
+GetCollisionAtCoords: @ 80636AC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12400,10 +12400,10 @@ _08063762:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end npc_block_way
+	thumb_func_end GetCollisionAtCoords
 
-	thumb_func_start sub_8063770
-sub_8063770: @ 8063770
+	thumb_func_start GetCollisionFlagsAtCoords
+GetCollisionFlagsAtCoords: @ 8063770
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12503,7 +12503,7 @@ _0806382C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8063770
+	thumb_func_end GetCollisionFlagsAtCoords
 
 	thumb_func_start IsCoordOutsideObjectEventMovementRect
 IsCoordOutsideObjectEventMovementRect: @ 806383C

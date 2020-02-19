@@ -92,9 +92,10 @@
       "flag": "0"
     },
     {
-      "graphics_id": "65307",
+      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
+      "in_connection": true,
       "x": 13,
-      "y": 65533,
+      "y": -3,
       "elevation": 2,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,

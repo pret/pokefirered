@@ -53,7 +53,8 @@
       "flag": "0"
     },
     {
-      "graphics_id": "65375",
+      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "in_connection": true,
       "x": 32,
       "y": 9,
       "elevation": 4,

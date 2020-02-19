@@ -105,9 +105,10 @@
       "flag": "0"
     },
     {
-      "graphics_id": "65321",
+      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": true,
       "x": 7,
-      "y": 65534,
+      "y": -2,
       "elevation": 1,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,

@@ -3289,46 +3289,46 @@ gString_Help:: @ 841CB49
 gString_HelpSystem_ClearTo8:: @ 841CB4E
 	.string "{CLEAR_TO 8}$"
 
-gUnknown_841CB52:: @ 841CB52
+gText_SpacePoints2:: @ 841CB52
 	.string " points$"
 
-gUnknown_841CB5A:: @ 841CB5A
+gText_SpaceTimes3:: @ 841CB5A
 	.string " time(s)$"
 
-gUnknown_841CB63:: @ 841CB63
+gText_PkmnJumpRecords:: @ 841CB63
 	.string "POKéMON JUMP RECORDS$"
 
-gUnknown_841CB78::
+gText_JumpsInARow::
 	.string "Jumps in a row:$"
 
-gUnknown_841CB88::
+gText_BestScore2::
 	.string "Best score:$"
 
-gUnknown_841CB94::
+gText_ExcellentsInARow::
 	.string "EXCELLENTS in a row:$"
 
-gUnknown_841CBA9:: @ 841CBA9
+gText_AwesomeWonF701F700:: @ 841CBA9
 	.string "Awesome score! You've\n"
 	.string "won {DYNAMIC 01} {DYNAMIC 00}!$"
 
-gUnknown_841CBCA:: @ 841CBCA
+gText_FilledStorageSpace2:: @ 841CBCA
 	.string "There's no room left now.$"
 
-gUnknown_841CBE4:: @ 841CBE4
+gText_CantHoldMore:: @ 841CBE4
 	.string "You can't hold any more!$"
 
-gUnknown_841CBFD:: @ 841CBFD
+gText_WantToPlayAgain2:: @ 841CBFD
 	.string "Want to play again?$"
 
-gUnknown_841CC11:: @ 841CC11
+gText_SomeoneDroppedOut2:: @ 841CC11
 	.string "Somebody dropped out.\n"
 	.string "The link will be canceled.$"
 
-gUnknown_841CC42:: @ 841CC42
+gText_SavingDontTurnOffPower:: @ 841CC42
 	.string "SAVING…\n"
 	.string "DON'T TURN OFF THE POWER.$"
 
-gUnknown_841CC64:: @ 841CC64
+gText_CommunicationStandby4:: @ 841CC64
 	.string "Communication standby…$"
 
 	.string "SAVING...\n"

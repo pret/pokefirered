@@ -274,8 +274,12 @@ SECTIONS {
         src/mevent_show_news.o(.text);
         src/menews_jisan.o(.text);
         src/seagallop.o(.text);
-        asm/pokemon_jump.o(.text);
-        asm/pokemon_jump_2.o(.text);
+        src/pokemon_jump.o(.text);
+        src/pokemon_jump_2.o(.text);
+        src/pokemon_jump_3.o(.text);
+        src/pokemon_jump_4.o(.text);
+        src/pokemon_jump_5.o(.text);
+        src/pokemon_jump_6.o(.text);
         asm/berry_crush.o(.text);
         asm/berry_crush_2.o(.text);
         asm/berry_crush_3.o(.text);
@@ -565,7 +569,11 @@ SECTIONS {
         src/menews_jisan.o(.rodata);
         src/menews_jisan.o(.rodata.str1.4);
         src/seagallop.o(.rodata);
-        data/pokemon_jump.o(.rodata);
+        src/pokemon_jump.o(.rodata);
+        src/pokemon_jump_2.o(.rodata);
+        src/pokemon_jump_4.o(.rodata);
+        src/pokemon_jump_5.o(.rodata);
+        src/pokemon_jump_6.o(.rodata);
         data/berry_crush.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);

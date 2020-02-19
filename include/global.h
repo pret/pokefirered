@@ -148,8 +148,7 @@ struct PokemonJumpResults // possibly used in the game itself?
     u16 field2;
     u16 excellentsInRow;
     u16 field6;
-    u16 field8;
-    u16 fieldA;
+    u32 field8;
     u32 bestJumpScore;
 };
 

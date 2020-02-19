@@ -183,6 +183,7 @@ typedef struct UnkRfuStruct_2
 
 extern struct GFtgtGname gHostRFUtgtGnameBuffer;
 extern u8 gHostRFUtgtUnameBuffer[];
+extern GF_RFU_MANAGER Rfu;
 
 // GameFreak signatures
 void AddTextPrinterToWindow1(const u8 *str);

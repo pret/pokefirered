@@ -34,7 +34,7 @@ void StartMinigameCountdown(u16 tilesTag, u16 palTag, s16 x, s16 y, u8 subpriori
     gTasks[taskId].tSubpriority = subpriority;
 }
 
-bool8 IsMinigameCountdownRunning(void)
+bool32 IsMinigameCountdownRunning(void)
 {
     return FuncIsActiveTask(Task_MinigameCountdown);
 }

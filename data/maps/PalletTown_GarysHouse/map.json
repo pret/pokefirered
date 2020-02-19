@@ -25,7 +25,7 @@
       "movement_range_y": 3,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168D56",
+      "script": "PalletTown_GarysHouse_EventScript_Daisy",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F63",
+      "script": "PalletTown_GarysHouse_EventScript_TownMap",
       "flag": "FLAG_HIDE_TOWN_MAP"
     }
   ],
@@ -72,21 +72,21 @@
       "x": 12,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+      "script": "PalletTown_GarysHouse_EventScript_Bookshelf"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+      "script": "PalletTown_GarysHouse_EventScript_Bookshelf"
     },
     {
       "type": "bg_event_type_0",
       "x": 9,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F75"
+      "script": "PalletTown_GarysHouse_EventScript_Picture"
     }
   ]
 }

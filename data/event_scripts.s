@@ -1620,34 +1620,7 @@ Text_1ACD45:: @ 81ACD45
 
 	.include "data/scripts/fame_checker.inc"
 	.include "data/text/fame_checker.inc"
-
-gUnknown_81B1C8B:: @ 81B1C8B
-	.string "Hmm…\n"
-	.string "Is that right…$"
-
-gUnknown_81B1C9F:: @ 81B1C9F
-	.string "Oh!\n"
-	.string "Look, look!$"
-
-gUnknown_81B1CAF:: @ 81B1CAF
-	.string "Read it, read it!$"
-
-gUnknown_81B1CC1:: @ 81B1CC1
-	.string "TRAINER TIPS\p"
-	.string "Press START to open the MENU!$"
-
-gUnknown_81B1CEC:: @ 81B1CEC
-	.string "Signs are useful, aren't they?$"
-
-gUnknown_81B1D0B:: @ 81B1D0B
-	.string "Look, look!\p"
-	.string "I copied what it said on one of\n"
-	.string "those TRAINER TIPS signs!$"
-
-gUnknown_81B1D51:: @ 81B1D51
-	.string "TRAINER TIPS!\p"
-	.string "Press START to open the MENU!$"
-
+	.include "data/text/sign_lady.inc"
 	.include "data/text/trainer_card.inc"
 	.include "data/scripts/trainer_card.inc"
 	.include "data/text/help_system.inc"

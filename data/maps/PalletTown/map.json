@@ -36,7 +36,7 @@
       "movement_range_y": 4,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_EventScript_16575C",
+      "script": "PalletTown_EventScript_SignLady",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_EventScript_16582F",
+      "script": "PalletTown_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -97,7 +97,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
       "var_value": 0,
-      "script": "PalletTown_EventScript_1655ED"
+      "script": "PalletTown_EventScript_OakTriggerLeft"
     },
     {
       "type": "trigger",
@@ -106,7 +106,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
       "var_value": 0,
-      "script": "PalletTown_EventScript_1655F9"
+      "script": "PalletTown_EventScript_OakTriggerRight"
     },
     {
       "type": "trigger",
@@ -115,7 +115,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_2",
       "var_value": 1,
-      "script": "PalletTown_EventScript_16587B"
+      "script": "PalletTown_EventScript_SignLadyTrigger"
     }
   ],
   "bg_events": [
@@ -124,35 +124,35 @@
       "x": 16,
       "y": 16,
       "elevation": 0,
-      "script": "PalletTown_EventScript_165838"
+      "script": "PalletTown_EventScript_OaksLabSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 4,
       "y": 7,
       "elevation": 0,
-      "script": "PalletTown_EventScript_165850"
+      "script": "PalletTown_EventScript_PlayersHouseSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 13,
       "y": 7,
       "elevation": 0,
-      "script": "PalletTown_EventScript_165859"
+      "script": "PalletTown_EventScript_RivalsHouseSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 9,
       "y": 11,
       "elevation": 0,
-      "script": "PalletTown_EventScript_165862"
+      "script": "PalletTown_EventScript_TownSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 5,
       "y": 14,
       "elevation": 0,
-      "script": "PalletTown_EventScript_16586B"
+      "script": "PalletTown_EventScript_TrainerTips"
     }
   ]
 }

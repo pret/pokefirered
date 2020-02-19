@@ -25,7 +25,7 @@
       "movement_range_y": 0,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_PlayersHouse_1F_EventScript_168C09",
+      "script": "PalletTown_PlayersHouse_1F_EventScript_Mom",
       "flag": "0"
     }
   ],
@@ -66,7 +66,7 @@
       "x": 6,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_PlayersHouse_1F_EventScript_168C62"
+      "script": "PalletTown_PlayersHouse_1F_EventScript_TV"
     }
   ]
 }

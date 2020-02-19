@@ -798,7 +798,7 @@ sub_806CEA0: @ 806CEA0
 	movs r0, 0
 	b _0806CED2
 _0806CEB8:
-	ldr r0, _0806CED8 @ =gUnknown_8168CE4
+	ldr r0, _0806CED8 @ =PalletTown_PlayersHouse_2F_EventScript_PC
 	cmp r4, r0
 	beq _0806CECA
 	ldr r0, _0806CEDC @ =EventScript_PC
@@ -815,7 +815,7 @@ _0806CED2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806CED8: .4byte gUnknown_8168CE4
+_0806CED8: .4byte PalletTown_PlayersHouse_2F_EventScript_PC
 _0806CEDC: .4byte EventScript_PC
 	thumb_func_end sub_806CEA0
 

@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route12_FishingHouse_EventScript_16FF0C",
+      "script": "Route12_FishingHouse_EventScript_FishingGuruBrother",
       "flag": "0"
     }
   ],
@@ -59,7 +59,7 @@
       "x": 9,
       "y": 1,
       "elevation": 0,
-      "script": "Route12_FishingHouse_EventScript_170067"
+      "script": "Route12_FishingHouse_EventScript_MagikarpRecordSign"
     }
   ]
 }

@@ -1,9 +1,3 @@
-Text_1882E1:: @ 81882E1
-	.string "Strong TRAINERS and WATER POKéMON\n"
-	.string "are common sights in these parts.\p"
-	.string "They say that MISTY of the\n"
-	.string "CERULEAN GYM trains here.$"
-
 Text_18835A:: @ 818835A
 	.string "You want to know if the fish are\n"
 	.string "biting?$"

@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route10_PokemonCenter_1F_EventScript_16FC41",
+      "script": "Route10_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route10_PokemonCenter_1F_EventScript_16FC53",
+      "script": "Route10_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route10_PokemonCenter_1F_EventScript_16FC4A",
+      "script": "Route10_PokemonCenter_1F_EventScript_FatMan",
       "flag": "0"
     },
     {
@@ -64,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route10_PokemonCenter_1F_EventScript_16FC5C",
+      "script": "Route10_PokemonCenter_1F_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -77,7 +77,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route10_PokemonCenter_1F_EventScript_16FC65",
+      "script": "Route10_PokemonCenter_1F_EventScript_Aide",
       "flag": "0"
     }
   ],

@@ -388,134 +388,134 @@ Route6_EventScript_IsabelleRematch:: @ 81A9AF6
 	msgbox Route6_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9B0D:: @ 81A9B0D
-	trainerbattle_single TRAINER_YOUNGSTER_EDDIE, Text_184FBD, Text_184FD8
+Route11_EventScript_Eddie:: @ 81A9B0D
+	trainerbattle_single TRAINER_YOUNGSTER_EDDIE, Route11_Text_EddieIntro, Route11_Text_EddieDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9B34
-	msgbox Text_184FEF, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_EddieRematch
+	msgbox Route11_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9B34:: @ 81A9B34
-	trainerbattle_rematch TRAINER_YOUNGSTER_EDDIE, Text_1C1DB5, Text_184FD8
-	msgbox Text_184FEF, MSGBOX_AUTOCLOSE
+Route11_EventScript_EddieRematch:: @ 81A9B34
+	trainerbattle_rematch TRAINER_YOUNGSTER_EDDIE, Route11_Text_EddieRematchIntro, Route11_Text_EddieDefeat
+	msgbox Route11_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9B4B:: @ 81A9B4B
-	trainerbattle_single TRAINER_YOUNGSTER_DILLON, Text_18506A, Text_18509B
+Route11_EventScript_Dillon:: @ 81A9B4B
+	trainerbattle_single TRAINER_YOUNGSTER_DILLON, Route11_Text_DillonIntro, Route11_Text_DillonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9B72
-	msgbox Text_1850CF, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_DillonRematch
+	msgbox Route11_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9B72:: @ 81A9B72
-	trainerbattle_rematch TRAINER_YOUNGSTER_DILLON, Text_1C1E1F, Text_18509B
-	msgbox Text_1850CF, MSGBOX_AUTOCLOSE
+Route11_EventScript_DillonRematch:: @ 81A9B72
+	trainerbattle_rematch TRAINER_YOUNGSTER_DILLON, Route11_Text_DillonRematchIntro, Route11_Text_DillonDefeat
+	msgbox Route11_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9B89:: @ 81A9B89
-	trainerbattle_single TRAINER_YOUNGSTER_YASU, Text_18517B, Text_1851AC
+Route11_EventScript_Yasu:: @ 81A9B89
+	trainerbattle_single TRAINER_YOUNGSTER_YASU, Route11_Text_YasuIntro, Route11_Text_YasuDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9BB0
-	msgbox Text_1851D2, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_YasuRematch
+	msgbox Route11_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9BB0:: @ 81A9BB0
-	trainerbattle_rematch TRAINER_YOUNGSTER_YASU, Text_1C1EE2, Text_1851AC
-	msgbox Text_1851D2, MSGBOX_AUTOCLOSE
+Route11_EventScript_YasuRematch:: @ 81A9BB0
+	trainerbattle_rematch TRAINER_YOUNGSTER_YASU, Route11_Text_YasuRematchIntro, Route11_Text_YasuDefeat
+	msgbox Route11_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9BC7:: @ 81A9BC7
-	trainerbattle_single TRAINER_YOUNGSTER_DAVE, Text_185285, Text_1852C1
+Route11_EventScript_Dave:: @ 81A9BC7
+	trainerbattle_single TRAINER_YOUNGSTER_DAVE, Route11_Text_DaveIntro, Route11_Text_DaveDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9BEE
-	msgbox Text_1852E3, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_DaveRematch
+	msgbox Route11_Text_DavePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9BEE:: @ 81A9BEE
-	trainerbattle_rematch TRAINER_YOUNGSTER_DAVE, Text_1C1F40, Text_1852C1
-	msgbox Text_1852E3, MSGBOX_AUTOCLOSE
+Route11_EventScript_DaveRematch:: @ 81A9BEE
+	trainerbattle_rematch TRAINER_YOUNGSTER_DAVE, Route11_Text_DaveRematchIntro, Route11_Text_DaveDefeat
+	msgbox Route11_Text_DavePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9C05:: @ 81A9C05
-	trainerbattle_single TRAINER_ENGINEER_BRAXTON, Text_185011, Text_185037
+Route11_EventScript_Braxton:: @ 81A9C05
+	trainerbattle_single TRAINER_ENGINEER_BRAXTON, Route11_Text_BraxtonIntro, Route11_Text_BraxtonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9C2C
-	msgbox Text_18504A, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_BraxtonRematch
+	msgbox Route11_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9C2C:: @ 81A9C2C
-	trainerbattle_rematch TRAINER_ENGINEER_BRAXTON, Text_1C1DE1, Text_185037
-	msgbox Text_18504A, MSGBOX_AUTOCLOSE
+Route11_EventScript_BraxtonRematch:: @ 81A9C2C
+	trainerbattle_rematch TRAINER_ENGINEER_BRAXTON, Route11_Text_BraxtonRematchIntro, Route11_Text_BraxtonDefeat
+	msgbox Route11_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9C43:: @ 81A9C43
-	trainerbattle_single TRAINER_ENGINEER_BERNIE, Text_185236, Text_185250
+Route11_EventScript_Bernie:: @ 81A9C43
+	trainerbattle_single TRAINER_ENGINEER_BERNIE, Route11_Text_BernieIntro, Route11_Text_BernieDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9C6A
-	msgbox Text_185266, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_BernieRematch
+	msgbox Route11_Text_BerniePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9C6A:: @ 81A9C6A
-	trainerbattle_rematch TRAINER_ENGINEER_BERNIE, Text_1C1F1D, Text_185250
-	msgbox Text_185266, MSGBOX_AUTOCLOSE
+Route11_EventScript_BernieRematch:: @ 81A9C6A
+	trainerbattle_rematch TRAINER_ENGINEER_BERNIE, Route11_Text_BernieRematchIntro, Route11_Text_BernieDefeat
+	msgbox Route11_Text_BerniePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9C81:: @ 81A9C81
-	trainerbattle_single TRAINER_GAMER_HUGO, Text_184F01, Text_184F15
+Route11_EventScript_Hugo:: @ 81A9C81
+	trainerbattle_single TRAINER_GAMER_HUGO, Route11_Text_HugoIntro, Route11_Text_HugoDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9CA8
-	msgbox Text_184F2E, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_HugoRematch
+	msgbox Route11_Text_HugoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9CA8:: @ 81A9CA8
-	trainerbattle_rematch TRAINER_GAMER_HUGO, Text_1C1D50, Text_184F15
-	msgbox Text_184F2E, MSGBOX_AUTOCLOSE
+Route11_EventScript_HugoRematch:: @ 81A9CA8
+	trainerbattle_rematch TRAINER_GAMER_HUGO, Route11_Text_HugoRematchIntro, Route11_Text_HugoDefeat
+	msgbox Route11_Text_HugoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9CBF:: @ 81A9CBF
-	trainerbattle_single TRAINER_GAMER_JASPER, Text_184F5D, Text_184F7E
+Route11_EventScript_Jasper:: @ 81A9CBF
+	trainerbattle_single TRAINER_GAMER_JASPER, Route11_Text_JasperIntro, Route11_Text_JasperDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9CE6
-	msgbox Text_184F8E, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_JasperRematch
+	msgbox Route11_Text_JasperPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9CE6:: @ 81A9CE6
-	trainerbattle_rematch TRAINER_GAMER_JASPER, Text_1C1D79, Text_184F7E
-	msgbox Text_184F8E, MSGBOX_AUTOCLOSE
+Route11_EventScript_JasperRematch:: @ 81A9CE6
+	trainerbattle_rematch TRAINER_GAMER_JASPER, Route11_Text_JasperRematchIntro, Route11_Text_JasperDefeat
+	msgbox Route11_Text_JasperPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9CFD:: @ 81A9CFD
-	trainerbattle_single TRAINER_GAMER_DIRK, Text_1850E9, Text_185105
+Route11_EventScript_Dirk:: @ 81A9CFD
+	trainerbattle_single TRAINER_GAMER_DIRK, Route11_Text_DirkIntro, Route11_Text_DirkDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9D24
-	msgbox Text_185114, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_DirkRematch
+	msgbox Route11_Text_DirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9D24:: @ 81A9D24
-	trainerbattle_rematch TRAINER_GAMER_DIRK, Text_1C1E57, Text_185105
-	msgbox Text_185114, MSGBOX_AUTOCLOSE
+Route11_EventScript_DirkRematch:: @ 81A9D24
+	trainerbattle_rematch TRAINER_GAMER_DIRK, Route11_Text_DirkRematchIntro, Route11_Text_DirkDefeat
+	msgbox Route11_Text_DirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route11_EventScript_1A9D3B:: @ 81A9D3B
-	trainerbattle_single TRAINER_GAMER_DARIAN, Text_185135, Text_18514E
+Route11_EventScript_Darian:: @ 81A9D3B
+	trainerbattle_single TRAINER_GAMER_DARIAN, Route11_Text_DarianIntro, Route11_Text_DarianDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9D62
-	msgbox Text_185161, MSGBOX_AUTOCLOSE
+	goto_if_eq Route11_EventScript_DarianRematch
+	msgbox Route11_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9D62:: @ 81A9D62
-	trainerbattle_rematch TRAINER_GAMER_DARIAN, Text_1C1E9F, Text_18514E
-	msgbox Text_185161, MSGBOX_AUTOCLOSE
+Route11_EventScript_DarianRematch:: @ 81A9D62
+	trainerbattle_rematch TRAINER_GAMER_DARIAN, Route11_Text_DarianRematchIntro, Route11_Text_DarianDefeat
+	msgbox Route11_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route9_EventScript_Brent:: @ 81A9D79
@@ -635,82 +635,82 @@ Route9_EventScript_JeremyRematch:: @ 81A9F90
 	msgbox Route9_Text_JeremyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1A9FA7:: @ 81A9FA7
-	trainerbattle_single TRAINER_PICNICKER_HEIDI, Text_184CF1, Text_184D31
+Route10_EventScript_Heidi:: @ 81A9FA7
+	trainerbattle_single TRAINER_PICNICKER_HEIDI, Route10_Text_HeidiIntro, Route10_Text_HeidiDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A9FCE
-	msgbox Text_184D4D, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_HeidiRematch
+	msgbox Route10_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1A9FCE:: @ 81A9FCE
-	trainerbattle_rematch TRAINER_PICNICKER_HEIDI, Text_1C1C9A, Text_184D31
-	msgbox Text_184D4D, MSGBOX_AUTOCLOSE
+Route10_EventScript_HeidiRematch:: @ 81A9FCE
+	trainerbattle_rematch TRAINER_PICNICKER_HEIDI, Route10_Text_HeidiRematchIntro, Route10_Text_HeidiDefeat
+	msgbox Route10_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1A9FE5:: @ 81A9FE5
-	trainerbattle_single TRAINER_PICNICKER_CAROL, Text_184E04, Text_184E3B
+Route10_EventScript_Carol:: @ 81A9FE5
+	trainerbattle_single TRAINER_PICNICKER_CAROL, Route10_Text_CarolIntro, Route10_Text_CarolDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA00C
-	msgbox Text_184E5E, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_CarolRematch
+	msgbox Route10_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA00C:: @ 81AA00C
-	trainerbattle_rematch TRAINER_PICNICKER_CAROL, Text_1C1D14, Text_184E3B
-	msgbox Text_184E5E, MSGBOX_AUTOCLOSE
+Route10_EventScript_CarolRematch:: @ 81AA00C
+	trainerbattle_rematch TRAINER_PICNICKER_CAROL, Route10_Text_CarolRematchIntro, Route10_Text_CarolDefeat
+	msgbox Route10_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1AA023:: @ 81AA023
-	trainerbattle_single TRAINER_POKEMANIAC_MARK, Text_184B8A, Text_184BE5
+Route10_EventScript_Mark:: @ 81AA023
+	trainerbattle_single TRAINER_POKEMANIAC_MARK, Route10_Text_MarkIntro, Route10_Text_MarkDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA04A
-	msgbox Text_184BFB, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_MarkRematch
+	msgbox Route10_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA04A:: @ 81AA04A
-	trainerbattle_rematch TRAINER_POKEMANIAC_MARK, Text_1C1BFA, Text_184BE5
-	msgbox Text_184BFB, MSGBOX_AUTOCLOSE
+Route10_EventScript_MarkRematch:: @ 81AA04A
+	trainerbattle_rematch TRAINER_POKEMANIAC_MARK, Route10_Text_MarkRematchIntro, Route10_Text_MarkDefeat
+	msgbox Route10_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1AA061:: @ 81AA061
-	trainerbattle_single TRAINER_POKEMANIAC_HERMAN, Text_184C86, Text_184CA7
+Route10_EventScript_Herman:: @ 81AA061
+	trainerbattle_single TRAINER_POKEMANIAC_HERMAN, Route10_Text_HermanIntro, Route10_Text_HermanDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA088
-	msgbox Text_184CBB, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_HermanRematch
+	msgbox Route10_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA088:: @ 81AA088
-	trainerbattle_rematch TRAINER_POKEMANIAC_HERMAN, Text_1C1C76, Text_184CA7
-	msgbox Text_184CBB, MSGBOX_AUTOCLOSE
+Route10_EventScript_HermanRematch:: @ 81AA088
+	trainerbattle_rematch TRAINER_POKEMANIAC_HERMAN, Route10_Text_HermanRematchIntro, Route10_Text_HermanDefeat
+	msgbox Route10_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1AA09F:: @ 81AA09F
-	trainerbattle_single TRAINER_HIKER_CLARK, Text_184C1D, Text_184C2D
+Route10_EventScript_Clark:: @ 81AA09F
+	trainerbattle_single TRAINER_HIKER_CLARK, Route10_Text_ClarkIntro, Route10_Text_ClarkDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA0C6
-	msgbox Text_184C60, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_ClarkRematch
+	msgbox Route10_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA0C6:: @ 81AA0C6
-	trainerbattle_rematch TRAINER_HIKER_CLARK, Text_1C1C4F, Text_184C2D
-	msgbox Text_184C60, MSGBOX_AUTOCLOSE
+Route10_EventScript_ClarkRematch:: @ 81AA0C6
+	trainerbattle_rematch TRAINER_HIKER_CLARK, Route10_Text_ClarkRematchIntro, Route10_Text_ClarkDefeat
+	msgbox Route10_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route10_EventScript_1AA0DD:: @ 81AA0DD
-	trainerbattle_single TRAINER_HIKER_TRENT, Text_184DAA, Text_184DCE
+Route10_EventScript_Trent:: @ 81AA0DD
+	trainerbattle_single TRAINER_HIKER_TRENT, Route10_Text_TrentIntro, Route10_Text_TrentDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA104
-	msgbox Text_184DE4, MSGBOX_AUTOCLOSE
+	goto_if_eq Route10_EventScript_TrentRematch
+	msgbox Route10_Text_TrentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA104:: @ 81AA104
-	trainerbattle_rematch TRAINER_HIKER_TRENT, Text_1C1CD3, Text_184DCE
-	msgbox Text_184DE4, MSGBOX_AUTOCLOSE
+Route10_EventScript_TrentRematch:: @ 81AA104
+	trainerbattle_rematch TRAINER_HIKER_TRENT, Route10_Text_TrentRematchIntro, Route10_Text_TrentDefeat
+	msgbox Route10_Text_TrentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route8_EventScript_Paige:: @ 81AA11B
@@ -882,407 +882,407 @@ Route8_EventScript_JarenRematch:: @ 81AA43A
 	msgbox Route8_Text_JarenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA451:: @ 81AA451
-	trainerbattle_single TRAINER_FISHERMAN_NED, Text_185402, Text_18541B
+Route12_EventScript_Ned:: @ 81AA451
+	trainerbattle_single TRAINER_FISHERMAN_NED, Route12_Text_NedIntro, Route12_Text_NedDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA478
-	msgbox Text_185432, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_NedRematch
+	msgbox Route12_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA478:: @ 81AA478
-	trainerbattle_rematch TRAINER_FISHERMAN_NED, Text_1C1F9D, Text_18541B
-	msgbox Text_185432, MSGBOX_AUTOCLOSE
+Route12_EventScript_NedRematch:: @ 81AA478
+	trainerbattle_rematch TRAINER_FISHERMAN_NED, Route12_Text_NedRematchIntro, Route12_Text_NedDefeat
+	msgbox Route12_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA48F:: @ 81AA48F
-	trainerbattle_single TRAINER_FISHERMAN_CHIP, Text_18544E, Text_185475
+Route12_EventScript_Chip:: @ 81AA48F
+	trainerbattle_single TRAINER_FISHERMAN_CHIP, Route12_Text_ChipIntro, Route12_Text_ChipDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA4B6
-	msgbox Text_185488, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_ChipRematch
+	msgbox Route12_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA4B6:: @ 81AA4B6
-	trainerbattle_rematch TRAINER_FISHERMAN_CHIP, Text_1C1FD8, Text_185475
-	msgbox Text_185488, MSGBOX_AUTOCLOSE
+Route12_EventScript_ChipRematch:: @ 81AA4B6
+	trainerbattle_rematch TRAINER_FISHERMAN_CHIP, Route12_Text_ChipRematchIntro, Route12_Text_ChipDefeat
+	msgbox Route12_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA4CD:: @ 81AA4CD
-	trainerbattle_single TRAINER_FISHERMAN_HANK, Text_1855E1, Text_185606
+Route12_EventScript_Hank:: @ 81AA4CD
+	trainerbattle_single TRAINER_FISHERMAN_HANK, Route12_Text_HankIntro, Route12_Text_HankDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA4F4
-	msgbox Text_185616, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_HankRematch
+	msgbox Route12_Text_HankPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA4F4:: @ 81AA4F4
-	trainerbattle_rematch TRAINER_FISHERMAN_HANK, Text_1C209C, Text_185606
-	msgbox Text_185616, MSGBOX_AUTOCLOSE
+Route12_EventScript_HankRematch:: @ 81AA4F4
+	trainerbattle_rematch TRAINER_FISHERMAN_HANK, Route12_Text_HankRematchIntro, Route12_Text_HankDefeat
+	msgbox Route12_Text_HankPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA50B:: @ 81AA50B
-	trainerbattle_single TRAINER_FISHERMAN_ELLIOT, Text_185682, Text_1856D0
+Route12_EventScript_Elliot:: @ 81AA50B
+	trainerbattle_single TRAINER_FISHERMAN_ELLIOT, Route12_Text_ElliotIntro, Route12_Text_ElliotDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA532
-	msgbox Text_1856DF, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_ElliotRematch
+	msgbox Route12_Text_ElliotPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA532:: @ 81AA532
-	trainerbattle_rematch TRAINER_FISHERMAN_ELLIOT, Text_1C20D4, Text_1856D0
-	msgbox Text_1856DF, MSGBOX_AUTOCLOSE
+Route12_EventScript_ElliotRematch:: @ 81AA532
+	trainerbattle_rematch TRAINER_FISHERMAN_ELLIOT, Route12_Text_ElliotRematchIntro, Route12_Text_ElliotDefeat
+	msgbox Route12_Text_ElliotPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA549:: @ 81AA549
-	trainerbattle_single TRAINER_FISHERMAN_ANDREW, Text_18570E, Text_185744
+Route12_EventScript_Andrew:: @ 81AA549
+	trainerbattle_single TRAINER_FISHERMAN_ANDREW, Route12_Text_AndrewIntro, Route12_Text_AndrewDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA570
-	msgbox Text_18574D, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_AndrewRematch
+	msgbox Route12_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA570:: @ 81AA570
-	trainerbattle_rematch TRAINER_FISHERMAN_ANDREW, Text_1C2134, Text_185744
-	msgbox Text_18574D, MSGBOX_AUTOCLOSE
+Route12_EventScript_AndrewRematch:: @ 81AA570
+	trainerbattle_rematch TRAINER_FISHERMAN_ANDREW, Route12_Text_AndrewRematchIntro, Route12_Text_AndrewDefeat
+	msgbox Route12_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA587:: @ 81AA587
-	trainerbattle_single TRAINER_ROCKER_LUCA, Text_185547, Text_18559B
+Route12_EventScript_Luca:: @ 81AA587
+	trainerbattle_single TRAINER_ROCKER_LUCA, Route12_Text_LucaIntro, Route12_Text_LucaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA5AE
-	msgbox Text_1855A6, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_LucaRematch
+	msgbox Route12_Text_LucaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA5AE:: @ 81AA5AE
-	trainerbattle_rematch TRAINER_ROCKER_LUCA, Text_1C203B, Text_18559B
-	msgbox Text_1855A6, MSGBOX_AUTOCLOSE
+Route12_EventScript_LucaRematch:: @ 81AA5AE
+	trainerbattle_rematch TRAINER_ROCKER_LUCA, Route12_Text_LucaRematchIntro, Route12_Text_LucaDefeat
+	msgbox Route12_Text_LucaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA5C5:: @ 81AA5C5
-	trainerbattle_single TRAINER_CAMPER_JUSTIN, Text_1854B9, Text_1854ED
+Route12_EventScript_Justin:: @ 81AA5C5
+	trainerbattle_single TRAINER_CAMPER_JUSTIN, Route12_Text_JustinIntro, Route12_Text_JustinDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA5EC
-	msgbox Text_1854F2, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_JustinRematch
+	msgbox Route12_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA5EC:: @ 81AA5EC
-	trainerbattle_rematch TRAINER_CAMPER_JUSTIN, Text_1C2008, Text_1854ED
-	msgbox Text_1854F2, MSGBOX_AUTOCLOSE
+Route12_EventScript_JustinRematch:: @ 81AA5EC
+	trainerbattle_rematch TRAINER_CAMPER_JUSTIN, Route12_Text_JustinRematchIntro, Route12_Text_JustinDefeat
+	msgbox Route12_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA603:: @ 81AA603
-	trainerbattle_double TRAINER_YOUNG_COUPLE_GIA_JES, Text_1857C5, Text_1857F1, Text_185842
+Route12_EventScript_Jes:: @ 81AA603
+	trainerbattle_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_JesIntro, Route12_Text_JesDefeat, Route12_Text_JesNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA62E
-	msgbox Text_18581F, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_JesRematch
+	msgbox Route12_Text_JesPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA62E:: @ 81AA62E
-	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Text_1C216B, Text_1857F1, Text_185842
-	msgbox Text_18581F, MSGBOX_AUTOCLOSE
+Route12_EventScript_JesRematch:: @ 81AA62E
+	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_JesRematchIntro, Route12_Text_JesDefeat, Route12_Text_JesNotEnoughMons
+	msgbox Route12_Text_JesPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route12_EventScript_1AA649:: @ 81AA649
-	trainerbattle_double TRAINER_YOUNG_COUPLE_GIA_JES, Text_1858A6, Text_1858D0, Text_185908
+Route12_EventScript_Gia:: @ 81AA649
+	trainerbattle_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_GiaIntro, Route12_Text_GiaDefeat, Route12_Text_GiaNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA674
-	msgbox Text_1858E2, MSGBOX_AUTOCLOSE
+	goto_if_eq Route12_EventScript_GiaRematch
+	msgbox Route12_Text_GiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA674:: @ 81AA674
-	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Text_1C219B, Text_1858D0, Text_185908
-	msgbox Text_1858E2, MSGBOX_AUTOCLOSE
+Route12_EventScript_GiaRematch:: @ 81AA674
+	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_GiaRematchIntro, Route12_Text_GiaDefeat, Route12_Text_GiaNotEnoughMons
+	msgbox Route12_Text_GiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA68F:: @ 81AA68F
-	trainerbattle_single TRAINER_BIKER_JARED, Text_185D05, Text_185D1D
+Route13_EventScript_Jared:: @ 81AA68F
+	trainerbattle_single TRAINER_BIKER_JARED, Route13_Text_JaredIntro, Route13_Text_JaredDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA6B6
-	msgbox Text_185D33, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_JaredRematch
+	msgbox Route13_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA6B6:: @ 81AA6B6
-	trainerbattle_rematch TRAINER_BIKER_JARED, Text_1C236B, Text_185D1D
-	msgbox Text_185D33, MSGBOX_AUTOCLOSE
+Route13_EventScript_JaredRematch:: @ 81AA6B6
+	trainerbattle_rematch TRAINER_BIKER_JARED, Route13_Text_JaredRematchIntro, Route13_Text_JaredDefeat
+	msgbox Route13_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA6CD:: @ 81AA6CD
-	trainerbattle_single TRAINER_BEAUTY_LOLA, Text_185BFC, Text_185C1F
+Route13_EventScript_Lola:: @ 81AA6CD
+	trainerbattle_single TRAINER_BEAUTY_LOLA, Route13_Text_LolaIntro, Route13_Text_LolaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA6F4
-	msgbox Text_185C35, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_LolaRematch
+	msgbox Route13_Text_LolaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA6F4:: @ 81AA6F4
-	trainerbattle_rematch TRAINER_BEAUTY_LOLA, Text_1C2306, Text_185C1F
-	msgbox Text_185C35, MSGBOX_AUTOCLOSE
+Route13_EventScript_LolaRematch:: @ 81AA6F4
+	trainerbattle_rematch TRAINER_BEAUTY_LOLA, Route13_Text_LolaRematchIntro, Route13_Text_LolaDefeat
+	msgbox Route13_Text_LolaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA70B:: @ 81AA70B
-	trainerbattle_single TRAINER_BEAUTY_SHEILA, Text_185C69, Text_185C95
+Route13_EventScript_Sheila:: @ 81AA70B
+	trainerbattle_single TRAINER_BEAUTY_SHEILA, Route13_Text_SheilaIntro, Route13_Text_SheilaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA732
-	msgbox Text_185CA8, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_SheilaRematch
+	msgbox Route13_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA732:: @ 81AA732
-	trainerbattle_rematch TRAINER_BEAUTY_SHEILA, Text_1C2340, Text_185C95
-	msgbox Text_185CA8, MSGBOX_AUTOCLOSE
+Route13_EventScript_SheilaRematch:: @ 81AA732
+	trainerbattle_rematch TRAINER_BEAUTY_SHEILA, Route13_Text_SheilaRematchIntro, Route13_Text_SheilaDefeat
+	msgbox Route13_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA749:: @ 81AA749
-	trainerbattle_single TRAINER_BIRD_KEEPER_SEBASTIAN, Text_185955, Text_18597E
+Route13_EventScript_Sebastian:: @ 81AA749
+	trainerbattle_single TRAINER_BIRD_KEEPER_SEBASTIAN, Route13_Text_SebastianIntro, Route13_Text_SebastianDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA770
-	msgbox Text_1859A2, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_SebastianRematch
+	msgbox Route13_Text_SebastianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA770:: @ 81AA770
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_SEBASTIAN, Text_1C21EE, Text_18597E
-	msgbox Text_1859A2, MSGBOX_AUTOCLOSE
+Route13_EventScript_SebastianRematch:: @ 81AA770
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_SEBASTIAN, Route13_Text_SebastianRematchIntro, Route13_Text_SebastianDefeat
+	msgbox Route13_Text_SebastianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA787:: @ 81AA787
-	trainerbattle_single TRAINER_BIRD_KEEPER_PERRY, Text_185B8F, Text_185BCA
+Route13_EventScript_Perry:: @ 81AA787
+	trainerbattle_single TRAINER_BIRD_KEEPER_PERRY, Route13_Text_PerryIntro, Route13_Text_PerryDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA7AE
-	msgbox Text_185BDB, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_PerryRematch
+	msgbox Route13_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA7AE:: @ 81AA7AE
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_PERRY, Text_1C22CA, Text_185BCA
-	msgbox Text_185BDB, MSGBOX_AUTOCLOSE
+Route13_EventScript_PerryRematch:: @ 81AA7AE
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_PERRY, Route13_Text_PerryRematchIntro, Route13_Text_PerryDefeat
+	msgbox Route13_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA7C5:: @ 81AA7C5
-	trainerbattle_single TRAINER_BIRD_KEEPER_ROBERT, Text_185D3D, Text_185D7B
+Route13_EventScript_Robert:: @ 81AA7C5
+	trainerbattle_single TRAINER_BIRD_KEEPER_ROBERT, Route13_Text_RobertIntro, Route13_Text_RobertDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA7EC
-	msgbox Text_185D89, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_RobertRematch
+	msgbox Route13_Text_RobertPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA7EC:: @ 81AA7EC
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_ROBERT, Text_1C2383, Text_185D7B
-	msgbox Text_185D89, MSGBOX_AUTOCLOSE
+Route13_EventScript_RobertRematch:: @ 81AA7EC
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_ROBERT, Route13_Text_RobertRematchIntro, Route13_Text_RobertDefeat
+	msgbox Route13_Text_RobertPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA803:: @ 81AA803
-	trainerbattle_single TRAINER_PICNICKER_ALMA, Text_185B12, Text_185B48
+Route13_EventScript_Alma:: @ 81AA803
+	trainerbattle_single TRAINER_PICNICKER_ALMA, Route13_Text_AlmaIntro, Route13_Text_AlmaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA82A
-	msgbox Text_185B67, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_AlmaRematch
+	msgbox Route13_Text_AlmaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA82A:: @ 81AA82A
-	trainerbattle_rematch TRAINER_PICNICKER_ALMA, Text_1C2299, Text_185B48
-	msgbox Text_185B67, MSGBOX_AUTOCLOSE
+Route13_EventScript_AlmaRematch:: @ 81AA82A
+	trainerbattle_rematch TRAINER_PICNICKER_ALMA, Route13_Text_AlmaRematchIntro, Route13_Text_AlmaDefeat
+	msgbox Route13_Text_AlmaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA841:: @ 81AA841
-	trainerbattle_single TRAINER_PICNICKER_SUSIE, Text_1859CF, Text_1859EC
+Route13_EventScript_Susie:: @ 81AA841
+	trainerbattle_single TRAINER_PICNICKER_SUSIE, Route13_Text_SusieIntro, Route13_Text_SusieDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA868
-	msgbox Text_1859F9, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_SusieRematch
+	msgbox Route13_Text_SusiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA868:: @ 81AA868
-	trainerbattle_rematch TRAINER_PICNICKER_SUSIE, Text_1C220C, Text_1859EC
-	msgbox Text_1859F9, MSGBOX_AUTOCLOSE
+Route13_EventScript_SusieRematch:: @ 81AA868
+	trainerbattle_rematch TRAINER_PICNICKER_SUSIE, Route13_Text_SusieRematchIntro, Route13_Text_SusieDefeat
+	msgbox Route13_Text_SusiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA87F:: @ 81AA87F
-	trainerbattle_single TRAINER_PICNICKER_VALERIE, Text_185A37, Text_185A56
+Route13_EventScript_Valerie:: @ 81AA87F
+	trainerbattle_single TRAINER_PICNICKER_VALERIE, Route13_Text_ValerieIntro, Route13_Text_ValerieDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA8A6
-	msgbox Text_185A62, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_ValerieRematch
+	msgbox Route13_Text_ValeriePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA8A6:: @ 81AA8A6
-	trainerbattle_rematch TRAINER_PICNICKER_VALERIE, Text_1C223C, Text_185A56
-	msgbox Text_185A62, MSGBOX_AUTOCLOSE
+Route13_EventScript_ValerieRematch:: @ 81AA8A6
+	trainerbattle_rematch TRAINER_PICNICKER_VALERIE, Route13_Text_ValerieRematchIntro, Route13_Text_ValerieDefeat
+	msgbox Route13_Text_ValeriePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route13_EventScript_1AA8BD:: @ 81AA8BD
-	trainerbattle_single TRAINER_PICNICKER_GWEN, Text_185A91, Text_185AC1
+Route13_EventScript_Gwen:: @ 81AA8BD
+	trainerbattle_single TRAINER_PICNICKER_GWEN, Route13_Text_GwenIntro, Route13_Text_GwenDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA8E4
-	msgbox Text_185ADE, MSGBOX_AUTOCLOSE
+	goto_if_eq Route13_EventScript_GwenRematch
+	msgbox Route13_Text_GwenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA8E4:: @ 81AA8E4
-	trainerbattle_rematch TRAINER_PICNICKER_GWEN, Text_1C225B, Text_185AC1
-	msgbox Text_185ADE, MSGBOX_AUTOCLOSE
+Route13_EventScript_GwenRematch:: @ 81AA8E4
+	trainerbattle_rematch TRAINER_PICNICKER_GWEN, Route13_Text_GwenRematchIntro, Route13_Text_GwenDefeat
+	msgbox Route13_Text_GwenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AA8FB:: @ 81AA8FB
-	trainerbattle_single TRAINER_BIKER_MALIK, Text_186344, Text_186362
+Route14_EventScript_Malik:: @ 81AA8FB
+	trainerbattle_single TRAINER_BIKER_MALIK, Route14_Text_MalikIntro, Route14_Text_MalikDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA922
-	msgbox Text_18636E, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_MalikRematch
+	msgbox Route14_Text_MalikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA922:: @ 81AA922
-	trainerbattle_rematch TRAINER_BIKER_MALIK, Text_1C25D6, Text_186362
-	msgbox Text_18636E, MSGBOX_AUTOCLOSE
+Route14_EventScript_MalikRematch:: @ 81AA922
+	trainerbattle_rematch TRAINER_BIKER_MALIK, Route14_Text_MalikRematchIntro, Route14_Text_MalikDefeat
+	msgbox Route14_Text_MalikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AA939:: @ 81AA939
-	trainerbattle_single TRAINER_BIKER_LUKAS, Text_1861F7, Text_186223
+Route14_EventScript_Lukas:: @ 81AA939
+	trainerbattle_single TRAINER_BIKER_LUKAS, Route14_Text_LukasIntro, Route14_Text_LukasDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA960
-	msgbox Text_186239, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_LukasRematch
+	msgbox Route14_Text_LukasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA960:: @ 81AA960
-	trainerbattle_rematch TRAINER_BIKER_LUKAS, Text_1C2531, Text_186223
-	msgbox Text_186239, MSGBOX_AUTOCLOSE
+Route14_EventScript_LukasRematch:: @ 81AA960
+	trainerbattle_rematch TRAINER_BIKER_LUKAS, Route14_Text_LukasRematchIntro, Route14_Text_LukasDefeat
+	msgbox Route14_Text_LukasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AA977:: @ 81AA977
-	trainerbattle_single TRAINER_BIKER_ISAAC, Text_186263, Text_186291
+Route14_EventScript_Isaac:: @ 81AA977
+	trainerbattle_single TRAINER_BIKER_ISAAC, Route14_Text_IsaacIntro, Route14_Text_IsaacDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA99E
-	msgbox Text_18629D, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_IsaacRematch
+	msgbox Route14_Text_IsaacPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA99E:: @ 81AA99E
-	trainerbattle_rematch TRAINER_BIKER_ISAAC, Text_1C2572, Text_186291
-	msgbox Text_18629D, MSGBOX_AUTOCLOSE
+Route14_EventScript_IsaacRematch:: @ 81AA99E
+	trainerbattle_rematch TRAINER_BIKER_ISAAC, Route14_Text_IsaacRematchIntro, Route14_Text_IsaacDefeat
+	msgbox Route14_Text_IsaacPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AA9B5:: @ 81AA9B5
-	trainerbattle_single TRAINER_BIKER_GERALD, Text_1862BD, Text_1862EF
+Route14_EventScript_Gerald:: @ 81AA9B5
+	trainerbattle_single TRAINER_BIKER_GERALD, Route14_Text_GeraldIntro, Route14_Text_GeraldDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AA9DC
-	msgbox Text_1862F8, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_GeraldRematch
+	msgbox Route14_Text_GeraldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AA9DC:: @ 81AA9DC
-	trainerbattle_rematch TRAINER_BIKER_GERALD, Text_1C259E, Text_1862EF
-	msgbox Text_1862F8, MSGBOX_AUTOCLOSE
+Route14_EventScript_GeraldRematch:: @ 81AA9DC
+	trainerbattle_rematch TRAINER_BIKER_GERALD, Route14_Text_GeraldRematchIntro, Route14_Text_GeraldDefeat
+	msgbox Route14_Text_GeraldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AA9F3:: @ 81AA9F3
-	trainerbattle_single TRAINER_BIRD_KEEPER_DONALD, Text_1860D9, Text_18610A
+Route14_EventScript_Donald:: @ 81AA9F3
+	trainerbattle_single TRAINER_BIRD_KEEPER_DONALD, Route14_Text_DonaldIntro, Route14_Text_DonaldDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAA1A
-	msgbox Text_18611D, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_DonaldRematch
+	msgbox Route14_Text_DonaldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAA1A:: @ 81AAA1A
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_DONALD, Text_1C24CB, Text_18610A
-	msgbox Text_18611D, MSGBOX_AUTOCLOSE
+Route14_EventScript_DonaldRematch:: @ 81AAA1A
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_DONALD, Route14_Text_DonaldRematchIntro, Route14_Text_DonaldDefeat
+	msgbox Route14_Text_DonaldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAA31:: @ 81AAA31
-	trainerbattle_single TRAINER_BIRD_KEEPER_BENNY, Text_18618E, Text_1861B3
+Route14_EventScript_Benny:: @ 81AAA31
+	trainerbattle_single TRAINER_BIRD_KEEPER_BENNY, Route14_Text_BennyIntro, Route14_Text_BennyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAA58
-	msgbox Text_1861BE, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_BennyRematch
+	msgbox Route14_Text_BennyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAA58:: @ 81AAA58
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_BENNY, Text_1C2505, Text_1861B3
-	msgbox Text_1861BE, MSGBOX_AUTOCLOSE
+Route14_EventScript_BennyRematch:: @ 81AAA58
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_BENNY, Route14_Text_BennyRematchIntro, Route14_Text_BennyDefeat
+	msgbox Route14_Text_BennyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAA6F:: @ 81AAA6F
-	trainerbattle_single TRAINER_BIRD_KEEPER_CARTER, Text_185E4D, Text_185E81
+Route14_EventScript_Carter:: @ 81AAA6F
+	trainerbattle_single TRAINER_BIRD_KEEPER_CARTER, Route14_Text_CarterIntro, Route14_Text_CarterDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAA96
-	msgbox Text_185E9C, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_CarterRematch
+	msgbox Route14_Text_CarterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAA96:: @ 81AAA96
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_CARTER, Text_1C23C1, Text_185E81
-	msgbox Text_185E9C, MSGBOX_AUTOCLOSE
+Route14_EventScript_CarterRematch:: @ 81AAA96
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_CARTER, Route14_Text_CarterRematchIntro, Route14_Text_CarterDefeat
+	msgbox Route14_Text_CarterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAAAD:: @ 81AAAAD
-	trainerbattle_single TRAINER_BIRD_KEEPER_MITCH, Text_185EDF, Text_185F0B
+Route14_EventScript_Mitch:: @ 81AAAAD
+	trainerbattle_single TRAINER_BIRD_KEEPER_MITCH, Route14_Text_MitchIntro, Route14_Text_MitchDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAAD4
-	msgbox Text_185F1A, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_MitchRematch
+	msgbox Route14_Text_MitchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAAD4:: @ 81AAAD4
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_MITCH, Text_1C23EF, Text_185F0B
-	msgbox Text_185F1A, MSGBOX_AUTOCLOSE
+Route14_EventScript_MitchRematch:: @ 81AAAD4
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_MITCH, Route14_Text_MitchRematchIntro, Route14_Text_MitchDefeat
+	msgbox Route14_Text_MitchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAAEB:: @ 81AAAEB
-	trainerbattle_single TRAINER_BIRD_KEEPER_BECK, Text_185F46, Text_185FAE
+Route14_EventScript_Beck:: @ 81AAAEB
+	trainerbattle_single TRAINER_BIRD_KEEPER_BECK, Route14_Text_BeckIntro, Route14_Text_BeckDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAB12
-	msgbox Text_185FBB, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_BeckRematch
+	msgbox Route14_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAB12:: @ 81AAB12
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_BECK, Text_1C2425, Text_185FAE
-	msgbox Text_185FBB, MSGBOX_AUTOCLOSE
+Route14_EventScript_BeckRematch:: @ 81AAB12
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_BECK, Route14_Text_BeckRematchIntro, Route14_Text_BeckDefeat
+	msgbox Route14_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAB29:: @ 81AAB29
-	trainerbattle_single TRAINER_BIRD_KEEPER_MARLON, Text_186021, Text_18607C
+Route14_EventScript_Marlon:: @ 81AAB29
+	trainerbattle_single TRAINER_BIRD_KEEPER_MARLON, Route14_Text_MarlonIntro, Route14_Text_MarlonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAB50
-	msgbox Text_186091, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_MarlonRematch
+	msgbox Route14_Text_MarlonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAB50:: @ 81AAB50
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_MARLON, Text_1C2461, Text_18607C
-	msgbox Text_186091, MSGBOX_AUTOCLOSE
+Route14_EventScript_MarlonRematch:: @ 81AAB50
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_MARLON, Route14_Text_MarlonRematchIntro, Route14_Text_MarlonDefeat
+	msgbox Route14_Text_MarlonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AAB67:: @ 81AAB67
-	trainerbattle_double TRAINER_TWINS_KIRI_JAN, Text_1863B7, Text_1863EA, Text_18642E
+Route14_EventScript_Kiri:: @ 81AAB67
+	trainerbattle_double TRAINER_TWINS_KIRI_JAN, Route14_Text_KiriIntro, Route14_Text_KiriDefeat, Route14_Text_KiriNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AAB92
-	msgbox Text_18640D, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_KiriRematch
+	msgbox Route14_Text_KiriPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AAB92:: @ 81AAB92
-	trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Text_1C25FB, Text_1863EA, Text_18642E
-	msgbox Text_18640D, MSGBOX_AUTOCLOSE
+Route14_EventScript_KiriRematch:: @ 81AAB92
+	trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Route14_Text_KiriRematchIntro, Route14_Text_KiriDefeat, Route14_Text_KiriNotEnoughMons
+	msgbox Route14_Text_KiriPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route14_EventScript_1AABAD:: @ 81AABAD
-	trainerbattle_double TRAINER_TWINS_KIRI_JAN, Text_18645B, Text_186487, Text_1864D3
+Route14_EventScript_Jan:: @ 81AABAD
+	trainerbattle_double TRAINER_TWINS_KIRI_JAN, Route14_Text_JanIntro, Route14_Text_JanDefeat, Route14_Text_JanNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AABD8
-	msgbox Text_18649C, MSGBOX_AUTOCLOSE
+	goto_if_eq Route14_EventScript_JanRematch
+	msgbox Route14_Text_JanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AABD8:: @ 81AABD8
-	trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Text_1C261B, Text_186487, Text_1864D3
-	msgbox Text_18649C, MSGBOX_AUTOCLOSE
+Route14_EventScript_JanRematch:: @ 81AABD8
+	trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Route14_Text_JanRematchIntro, Route14_Text_JanDefeat, Route14_Text_JanNotEnoughMons
+	msgbox Route14_Text_JanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route15_EventScript_1AABF3:: @ 81AABF3

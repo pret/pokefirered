@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route11_EastEntrance_2F_EventScript_16FD5C",
+      "script": "Route11_EastEntrance_2F_EventScript_Turner",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route11_EastEntrance_2F_EventScript_16FDD8",
+      "script": "Route11_EastEntrance_2F_EventScript_Aide",
       "flag": "0"
     }
   ],
@@ -58,14 +58,14 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "Route11_EastEntrance_2F_EventScript_16FD35"
+      "script": "Route11_EastEntrance_2F_EventScript_LeftBinoculars"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "Route11_EastEntrance_2F_EventScript_16FD53"
+      "script": "Route11_EastEntrance_2F_EventScript_RightBinoculars"
     }
   ]
 }

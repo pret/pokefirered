@@ -41,7 +41,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA451",
+      "script": "Route12_EventScript_Ned",
       "flag": "0"
     },
     {
@@ -54,7 +54,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA48F",
+      "script": "Route12_EventScript_Chip",
       "flag": "0"
     },
     {
@@ -67,7 +67,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route12_EventScript_1AA4CD",
+      "script": "Route12_EventScript_Hank",
       "flag": "0"
     },
     {
@@ -80,7 +80,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA50B",
+      "script": "Route12_EventScript_Elliot",
       "flag": "0"
     },
     {
@@ -106,7 +106,7 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA587",
+      "script": "Route12_EventScript_Luca",
       "flag": "0"
     },
     {
@@ -119,7 +119,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA5C5",
+      "script": "Route12_EventScript_Justin",
       "flag": "0"
     },
     {
@@ -132,7 +132,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route12_EventScript_1AA549",
+      "script": "Route12_EventScript_Andrew",
       "flag": "0"
     },
     {
@@ -184,7 +184,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route12_EventScript_1AA649",
+      "script": "Route12_EventScript_Gia",
       "flag": "0"
     },
     {
@@ -197,7 +197,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route12_EventScript_1AA603",
+      "script": "Route12_EventScript_Jes",
       "flag": "0"
     },
     {

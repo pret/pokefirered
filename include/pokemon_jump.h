@@ -44,7 +44,7 @@ struct PokemonJump2
     u16 unk1C[5];
     u8 txtBuff[2][0x40];
     u8 strBuff[0x100];
-    u16 tilemapBuffer[(0x81a8 - 0x1a6) / 2]; // 0x1A6
+    u16 tilemapBuffer[0x4000]; // Bug: way larger than it should be
     struct Sprite *unk81A8[MAX_RFU_PLAYERS];
     struct Sprite *unk81BC[MAX_RFU_PLAYERS];
     struct Sprite *unk81D0[8];
@@ -59,73 +59,6 @@ struct PokemonJump1Sub
     u16 unk2;
     u16 unk4;
     u32 unk8;
-};
-
-struct PokemonJump1
-{
-    MainCallback returnCallback;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u16 unk8;
-    u16 unkA;
-    u16 unkC;
-    u16 unkE;
-    int unk10;
-    u32 unk14;
-    u32 unk18;
-    int unk1C;
-    u32 unk20;
-    u32 unk24;
-    u32 unk28;
-    int unk2C;
-    u32 unk30;
-    u16 unk34;
-    u16 unk36;
-    u8 filler38[0x2];
-    u16 unk3A;
-    u16 unk3C;
-    u16 unk3E;
-    u16 unk40;
-    u16 unk42;
-    u8 unk44;
-    u8 unk45;
-    u8 unk46;
-    u8 isLeader;
-    u8 unk48;
-    u8 unk49;
-    u16 unk4A;
-    u8 unk4C;
-    u8 unk4D;
-    u16 unk4E;
-    u8 unk50;
-    u8 unk51;
-    u8 filler52[0x2];
-    int unk54;
-    int unk58;
-    int unk5C;
-    int unk60;
-    int unk64;
-    int unk68;
-    int unk6C;
-    struct PokemonJump1Sub unk70;
-    u8 unk7C[MAX_RFU_PLAYERS];
-    u8 unk81[MAX_RFU_PLAYERS];
-    u8 unk86[MAX_RFU_PLAYERS];
-    u8 unk8B[MAX_RFU_PLAYERS];
-    u16 unk90[MAX_RFU_PLAYERS];
-    u16 unk9A[MAX_RFU_PLAYERS];
-    struct PokemonJump2 unkA4;
-    struct PokemonJump1_MonInfo unk82A8[MAX_RFU_PLAYERS];
-    struct PokemonJump1_82E4 unk82E4[MAX_RFU_PLAYERS];
-    struct PokemonJump1_82E4 *unk83AC;
-};
-
-struct PokemonJumpMons
-{
-    u16 species;
-    u16 unk2;
 };
 
 void ResetPokeJumpResults(void);

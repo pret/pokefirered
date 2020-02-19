@@ -13,11 +13,11 @@ struct MonInfoPacket
 void sub_8149A6C(struct PokemonJump1_MonInfo *arg0)
 {
     struct MonInfoPacket packet;
-    packet.id = 1,
-    packet.species = arg0->species,
-    packet.otId = arg0->otId,
-    packet.personality = arg0->personality,
-        RfuPrepareSend0x2f00(&packet);
+    packet.id = 1;
+    packet.species = arg0->species;
+    packet.otId = arg0->otId;
+    packet.personality = arg0->personality;
+    RfuPrepareSend0x2f00(&packet);
 }
 
 bool32 sub_8149A90(int multiplayerId, struct PokemonJump1_MonInfo *arg0)

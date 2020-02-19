@@ -11,6 +11,67 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+struct PokemonJump1
+{
+    MainCallback returnCallback;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u16 unk8;
+    u16 unkA;
+    u16 unkC;
+    u16 unkE;
+    int unk10;
+    u32 unk14;
+    u32 unk18;
+    int unk1C;
+    u32 unk20;
+    u32 unk24;
+    u32 unk28;
+    int unk2C;
+    u32 unk30;
+    u16 unk34;
+    u16 unk36;
+    u8 filler38[0x2];
+    u16 unk3A;
+    u16 unk3C;
+    u16 unk3E;
+    u16 unk40;
+    u16 unk42;
+    u8 unk44;
+    u8 unk45;
+    u8 unk46;
+    u8 isLeader;
+    u8 unk48;
+    u8 unk49;
+    u16 unk4A;
+    u8 unk4C;
+    u8 unk4D;
+    u16 unk4E;
+    u8 unk50;
+    u8 unk51;
+    u8 filler52[0x2];
+    int unk54;
+    int unk58;
+    int unk5C;
+    int unk60;
+    int unk64;
+    int unk68;
+    int unk6C;
+    struct PokemonJump1Sub unk70;
+    u8 unk7C[MAX_RFU_PLAYERS];
+    u8 unk81[MAX_RFU_PLAYERS];
+    u8 unk86[MAX_RFU_PLAYERS];
+    u8 unk8B[MAX_RFU_PLAYERS];
+    u16 unk90[MAX_RFU_PLAYERS];
+    u16 unk9A[MAX_RFU_PLAYERS];
+    struct PokemonJump2 unkA4;
+    struct PokemonJump1_MonInfo unk82A8[MAX_RFU_PLAYERS];
+    struct PokemonJump1_82E4 unk82E4[MAX_RFU_PLAYERS];
+    struct PokemonJump1_82E4 *unk83AC;
+};
+
 static void sub_8147B60(struct PokemonJump1 *);
 static void sub_8147B94(struct PokemonJump1 *);
 static void sub_8147C20(void);
@@ -86,7 +147,11 @@ static u16 sub_8149978(u16 item, u16 quantity);
 
 EWRAM_DATA static struct PokemonJump1 *gUnknown_203F3D4 = NULL;
 
-static const struct PokemonJumpMons gPkmnJumpSpecies[] =
+static const struct PokemonJumpMons
+{
+    u16 species;
+    u16 unk2;
+} sPkmnJumpSpecies[] =
 {
     { .species = SPECIES_BULBASAUR,  .unk2 = 2, },
     { .species = SPECIES_CHARMANDER, .unk2 = 1, },
@@ -197,7 +262,7 @@ void StartPokemonJump(u16 partyIndex, MainCallback callback)
     if (gReceivedRemoteLinkPlayers)
     {
         gUnknown_203F3D4 = Alloc(sizeof(*gUnknown_203F3D4));
-        if (gUnknown_203F3D4)
+        if (gUnknown_203F3D4 != NULL)
         {
             ResetTasks();
             taskId = CreateTask(sub_8147DA0, 1);
@@ -207,7 +272,7 @@ void StartPokemonJump(u16 partyIndex, MainCallback callback)
             gUnknown_203F3D4->unk6 = GetMultiplayerId();
             sub_8147D2C(&gUnknown_203F3D4->unk82A8[gUnknown_203F3D4->unk6], &gPlayerParty[partyIndex]);
             sub_8147B60(gUnknown_203F3D4);
-            SetWordTaskArg(taskId, 2, (u32)gUnknown_203F3D4);
+            SetWordTaskArg(taskId, 2, (uintptr_t)gUnknown_203F3D4);
             SetMainCallback2(sub_8147D6C);
             return;
         }
@@ -280,7 +345,7 @@ static void sub_8147C20(void)
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
         index = GetPokemonJumpSpeciesIdx(gUnknown_203F3D4->unk82A8[i].species);
-        gUnknown_203F3D4->unk82E4[i].unkC = gPkmnJumpSpecies[index].unk2;
+        gUnknown_203F3D4->unk82E4[i].unkC = sPkmnJumpSpecies[index].unk2;
     }
 
     gUnknown_203F3D4->unk83AC = &gUnknown_203F3D4->unk82E4[gUnknown_203F3D4->unk6];
@@ -305,9 +370,9 @@ static void sub_8147C98(void)
 static s16 GetPokemonJumpSpeciesIdx(u16 species)
 {
     u32 i;
-    for (i = 0; i < ARRAY_COUNT(gPkmnJumpSpecies); i++)
+    for (i = 0; i < NELEMS(sPkmnJumpSpecies); i++)
     {
-        if (gPkmnJumpSpecies[i].species == species)
+        if (sPkmnJumpSpecies[i].species == species)
             return i;
     }
 
@@ -1327,7 +1392,7 @@ static void sub_8148E80(u8 taskId)
 static void sub_8148F5C(TaskFunc func, u8 taskPriority)
 {
     u8 taskId = CreateTask(func, taskPriority);
-    SetWordTaskArg(taskId, 14, (u32)gUnknown_203F3D4);
+    SetWordTaskArg(taskId, 14, (uintptr_t)gUnknown_203F3D4);
 }
 
 static void sub_8148F7C(void)
@@ -1422,7 +1487,7 @@ static void sub_8149078(void)
         if (!(gUnknown_203F3D4->unk50 & 8))
         {
             gUnknown_203F3D4->unk28 = gUnknown_846B694[gUnknown_203F3D4->unk50] + (gUnknown_203F3D4->unk51 * 7);
-            gUnknown_203F3D4->unk4E = gUnknown_846B6A4[sub_8149194() % ARRAY_COUNT(gUnknown_846B6A4)] + 2;
+            gUnknown_203F3D4->unk4E = gUnknown_846B6A4[sub_8149194() % NELEMS(gUnknown_846B6A4)] + 2;
             gUnknown_203F3D4->unk50++;
         }
         else
@@ -1894,7 +1959,7 @@ static void sub_8149900(u16 arg0, u16 *arg1, u16 *arg2)
 
 static u16 sub_8149910(void)
 {
-    u16 index = Random() % ARRAY_COUNT(gUnknown_846B764);
+    u16 index = Random() % NELEMS(gUnknown_846B764);
     return gUnknown_846B764[index];
 }
 

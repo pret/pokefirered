@@ -12,33 +12,33 @@ static void sub_814B038(struct Sprite *sprite);
 static void sub_814B100(struct Sprite *sprite);
 static void sub_814B1CC(struct Sprite *sprite);
 
-static const u16 gPkmnJumpPal1[] = INCBIN_U16("graphics/link_games/pkmnjump_pal1.gbapal");
-static const u16 gPkmnJumpPal2[] = INCBIN_U16("graphics/link_games/pkmnjump_pal2.gbapal");
+static const u16 sPkmnJumpPal1[] = INCBIN_U16("graphics/link_games/pkmnjump_pal1.gbapal");
+static const u16 sPkmnJumpPal2[] = INCBIN_U16("graphics/link_games/pkmnjump_pal2.gbapal");
 
-static const u32 gPkmnJumpRopeGfx1[] = INCBIN_U32("graphics/link_games/pkmnjump_rope1.4bpp.lz");
-static const u32 gPkmnJumpRopeGfx2[] = INCBIN_U32("graphics/link_games/pkmnjump_rope2.4bpp.lz");
-static const u32 gPkmnJumpRopeGfx3[] = INCBIN_U32("graphics/link_games/pkmnjump_rope3.4bpp.lz");
-static const u32 gPkmnJumpRopeGfx4[] = INCBIN_U32("graphics/link_games/pkmnjump_rope4.4bpp.lz");
+static const u32 sPkmnJumpRopeGfx1[] = INCBIN_U32("graphics/link_games/pkmnjump_rope1.4bpp.lz");
+static const u32 sPkmnJumpRopeGfx2[] = INCBIN_U32("graphics/link_games/pkmnjump_rope2.4bpp.lz");
+static const u32 sPkmnJumpRopeGfx3[] = INCBIN_U32("graphics/link_games/pkmnjump_rope3.4bpp.lz");
+static const u32 sPkmnJumpRopeGfx4[] = INCBIN_U32("graphics/link_games/pkmnjump_rope4.4bpp.lz");
 
-static const u32 gPkmnJumpStarGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_star.4bpp.lz");
+static const u32 sPkmnJumpStarGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_star.4bpp.lz");
 
 static const struct CompressedSpriteSheet gUnknown_846E0B0[] =
 {
-    {gPkmnJumpRopeGfx1, 0x600, 5},
-    {gPkmnJumpRopeGfx2, 0x0c00, 6},
-    {gPkmnJumpRopeGfx3, 0x0600, 7},
-    {gPkmnJumpRopeGfx4, 0x0600, 8},
-    {gPkmnJumpStarGfx, 0x0200, 10},
+    {sPkmnJumpRopeGfx1, 0x600, 5},
+    {sPkmnJumpRopeGfx2, 0x0c00, 6},
+    {sPkmnJumpRopeGfx3, 0x0600, 7},
+    {sPkmnJumpRopeGfx4, 0x0600, 8},
+    {sPkmnJumpStarGfx, 0x0200, 10},
 };
 
 static const struct SpritePalette gUnknown_846E0D8[] =
 {
-    {gPkmnJumpPal1, 5},
-    {gPkmnJumpPal2, 6},
+    {sPkmnJumpPal1, 5},
+    {sPkmnJumpPal2, 6},
 };
 
 // Forward declarations.
-static const struct OamData gUnknown_846E170;
+static const struct OamData sOamData_846E170;
 static const struct SpriteTemplate gUnknown_846E220;
 static const struct SpriteTemplate gUnknown_846E238;
 static const struct SpriteTemplate gUnknown_846E250;
@@ -48,7 +48,7 @@ static const struct SpriteTemplate gUnknown_846E0E8 =
 {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &gUnknown_846E170,
+    .oam = &sOamData_846E170,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -73,7 +73,7 @@ static const struct SpriteTemplate *const gUnknown_846E160[] =
     &gUnknown_846E268,
 };
 
-static const struct OamData gUnknown_846E170 =
+static const struct OamData sOamData_846E170 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -90,7 +90,7 @@ static const struct OamData gUnknown_846E170 =
     .affineParam = 0
 };
 
-static const struct OamData gUnknown_846E178 =
+static const struct OamData sOamData_846E178 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -107,7 +107,7 @@ static const struct OamData gUnknown_846E178 =
     .affineParam = 0
 };
 
-static const struct OamData gUnknown_846E180 =
+static const struct OamData sOamData_846E180 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -124,7 +124,7 @@ static const struct OamData gUnknown_846E180 =
     .affineParam = 0
 };
 
-static const struct OamData gUnknown_846E188 =
+static const struct OamData sOamData_846E188 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -141,104 +141,104 @@ static const struct OamData gUnknown_846E188 =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_82FBEE8[] =
+static const union AnimCmd sSpriteAnim_846E190[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBEF0[] =
+static const union AnimCmd sSpriteAnim_846E198[] =
 {
     ANIMCMD_FRAME(8, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBEF8[] =
+static const union AnimCmd sSpriteAnim_846E1A0[] =
 {
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF00[] =
+static const union AnimCmd sSpriteAnim_846E1A8[] =
 {
     ANIMCMD_FRAME(24, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF08[] =
+static const union AnimCmd sSpriteAnim_846E1B0[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF10[] =
+static const union AnimCmd sSpriteAnim_846E1B8[] =
 {
     ANIMCMD_FRAME(40, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF18[] =
+static const union AnimCmd sSpriteAnim_846E1C0[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF20[] =
+static const union AnimCmd sSpriteAnim_846E1C8[] =
 {
     ANIMCMD_FRAME(16, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF28[] =
+static const union AnimCmd sSpriteAnim_846E1D0[] =
 {
     ANIMCMD_FRAME(32, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF30[] =
+static const union AnimCmd sSpriteAnim_846E1D8[] =
 {
     ANIMCMD_FRAME(48, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF38[] =
+static const union AnimCmd sSpriteAnim_846E1E0[] =
 {
     ANIMCMD_FRAME(64, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBF40[] =
+static const union AnimCmd sSpriteAnim_846E1E8[] =
 {
     ANIMCMD_FRAME(80, 1),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_82FBF48[] =
+static const union AnimCmd *const sSpriteAnimTable_846E1F0[] =
 {
-    sSpriteAnim_82FBEE8,
-    sSpriteAnim_82FBEF0,
-    sSpriteAnim_82FBEF8,
-    sSpriteAnim_82FBF00,
-    sSpriteAnim_82FBF08,
-    sSpriteAnim_82FBF10
+    sSpriteAnim_846E190,
+    sSpriteAnim_846E198,
+    sSpriteAnim_846E1A0,
+    sSpriteAnim_846E1A8,
+    sSpriteAnim_846E1B0,
+    sSpriteAnim_846E1B8
 };
 
-static const union AnimCmd *const sSpriteAnimTable_82FBF60[] =
+static const union AnimCmd *const sSpriteAnimTable_846E208[] =
 {
-    sSpriteAnim_82FBF18,
-    sSpriteAnim_82FBF20,
-    sSpriteAnim_82FBF28,
-    sSpriteAnim_82FBF30,
-    sSpriteAnim_82FBF38,
-    sSpriteAnim_82FBF40
+    sSpriteAnim_846E1C0,
+    sSpriteAnim_846E1C8,
+    sSpriteAnim_846E1D0,
+    sSpriteAnim_846E1D8,
+    sSpriteAnim_846E1E0,
+    sSpriteAnim_846E1E8
 };
 
 static const struct SpriteTemplate gUnknown_846E220 =
 {
     .tileTag = 5,
     .paletteTag = 5,
-    .oam = &gUnknown_846E178,
-    .anims = sSpriteAnimTable_82FBF48,
+    .oam = &sOamData_846E178,
+    .anims = sSpriteAnimTable_846E1F0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -248,8 +248,8 @@ static const struct SpriteTemplate gUnknown_846E238 =
 {
     .tileTag = 6,
     .paletteTag = 5,
-    .oam = &gUnknown_846E180,
-    .anims = sSpriteAnimTable_82FBF60,
+    .oam = &sOamData_846E180,
+    .anims = sSpriteAnimTable_846E208,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -259,8 +259,8 @@ static const struct SpriteTemplate gUnknown_846E250 =
 {
     .tileTag = 7,
     .paletteTag = 5,
-    .oam = &gUnknown_846E188,
-    .anims = sSpriteAnimTable_82FBF48,
+    .oam = &sOamData_846E188,
+    .anims = sSpriteAnimTable_846E1F0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -270,14 +270,14 @@ static const struct SpriteTemplate gUnknown_846E268 =
 {
     .tileTag = 8,
     .paletteTag = 5,
-    .oam = &gUnknown_846E188,
-    .anims = sSpriteAnimTable_82FBF48,
+    .oam = &sOamData_846E188,
+    .anims = sSpriteAnimTable_846E1F0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-static const struct OamData sOamData_82FBFD8 =
+static const struct OamData sOamData_846E280 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -294,13 +294,13 @@ static const struct OamData sOamData_82FBFD8 =
     .affineParam = 0
 };
 
-static const union AnimCmd sSpriteAnim_82FBFE0[] =
+static const union AnimCmd sSpriteAnim_846E288[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_82FBFE8[] =
+static const union AnimCmd sSpriteAnim_846E290[] =
 {
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_FRAME(4, 4),
@@ -311,18 +311,18 @@ static const union AnimCmd sSpriteAnim_82FBFE8[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_82FC004[] =
+static const union AnimCmd *const sSpriteAnimTable_846E2AC[] =
 {
-    sSpriteAnim_82FBFE0,
-    sSpriteAnim_82FBFE8
+    sSpriteAnim_846E288,
+    sSpriteAnim_846E290
 };
 
 static const struct SpriteTemplate gUnknown_846E2B4 =
 {
     .tileTag = 10,
     .paletteTag = 5,
-    .oam = &sOamData_82FBFD8,
-    .anims = sSpriteAnimTable_82FC004,
+    .oam = &sOamData_846E280,
+    .anims = sSpriteAnimTable_846E2AC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -405,7 +405,7 @@ void sub_814AF0C(struct PokemonJump2 *arg0, int multiplayerId)
 {
     sub_814ADB4(arg0->unk81BC[multiplayerId]);
     arg0->unk81BC[multiplayerId]->data[7] = arg0->unk81A8[multiplayerId] - gSprites;
-    arg0->unk81BC[multiplayerId]->invisible = 0;
+    arg0->unk81BC[multiplayerId]->invisible = FALSE;
     arg0->unk81BC[multiplayerId]->pos1.y = 96;
     arg0->unk81BC[multiplayerId]->callback = sub_814AF74;
     StartSpriteAnim(arg0->unk81BC[multiplayerId], 1);
@@ -418,7 +418,7 @@ static void sub_814AF74(struct Sprite *sprite)
     case 0:
         if (sprite->animEnded)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -434,7 +434,7 @@ static void sub_814AF74(struct Sprite *sprite)
     case 2:
         if (++sprite->data[1] >= 48)
         {
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
             sprite->callback = SpriteCallbackDummy;
         }
         break;
@@ -486,7 +486,7 @@ void sub_814B0A8(struct PokemonJump2 *arg0)
     {
         if (arg0->unk81A8[i]->callback == sub_814B100)
         {
-            arg0->unk81A8[i]->invisible = 0;
+            arg0->unk81A8[i]->invisible = FALSE;
             arg0->unk81A8[i]->callback = SpriteCallbackDummy;
             arg0->unk81A8[i]->subpriority = 10;
         }
@@ -560,7 +560,7 @@ void sub_814B240(struct PokemonJump2 *arg0, s16 x, s16 y, u8 multiplayerId)
     u8 spriteId = CreateSprite(&gUnknown_846E2B4, x, y, 1);
     if (spriteId != MAX_SPRITES)
     {
-        gSprites[spriteId].invisible = 1;
+        gSprites[spriteId].invisible = TRUE;
         arg0->unk81BC[multiplayerId] = &gSprites[spriteId];
     }
 }

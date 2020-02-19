@@ -48,7 +48,7 @@ void sub_8149CEC(struct PokemonJump2 *arg0)
     sub_8149D34(gUnknown_203F3D8);
     taskId = CreateTask(sub_8149DA4, 3);
     gUnknown_203F3D8->unk6 = taskId;
-    SetWordTaskArg(gUnknown_203F3D8->unk6, 2, (u32) gUnknown_203F3D8);
+    SetWordTaskArg(gUnknown_203F3D8->unk6, 2, (uintptr_t)gUnknown_203F3D8);
     sub_8149D80(sub_8149DC8);
 }
 
@@ -66,19 +66,19 @@ static void sub_8149D34(struct PokemonJump2 *arg0)
 }
 
 // Gfx
-static const u16 gPkmnJumpPal3[] = INCBIN_U16("graphics/link_games/pkmnjump_pal3.gbapal");
+static const u16 sPkmnJumpPal3[] = INCBIN_U16("graphics/link_games/pkmnjump_pal3.gbapal");
 
-static const u16 gPkmnJumpBgPal[] = INCBIN_U16("graphics/link_games/pkmnjump_bg.gbapal");
-static const u32 gPkmnJumpBgGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_bg.4bpp.lz");
-static const u32 gPkmnJumpBgTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_bg.bin.lz");
+static const u16 sPkmnJumpBgPal[] = INCBIN_U16("graphics/link_games/pkmnjump_bg.gbapal");
+static const u32 sPkmnJumpBgGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_bg.4bpp.lz");
+static const u32 sPkmnJumpBgTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_bg.bin.lz");
 
-static const u16 gPkmnJumpVenusaurPal[] = INCBIN_U16("graphics/link_games/pkmnjump_venusaur.gbapal");
-static const u32 gPkmnJumpVenusaurGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_venusaur.4bpp.lz");
-static const u32 gPkmnJumpVenusaurTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_venusaur.bin.lz");
+static const u16 sPkmnJumpVenusaurPal[] = INCBIN_U16("graphics/link_games/pkmnjump_venusaur.gbapal");
+static const u32 sPkmnJumpVenusaurGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_venusaur.4bpp.lz");
+static const u32 sPkmnJumpVenusaurTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_venusaur.bin.lz");
 
-static const u16 gPkmnJumpResultsPal[] = INCBIN_U16("graphics/link_games/pkmnjump_results.gbapal");
-static const u32 gPkmnJumpResultsGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_results.4bpp.lz");
-static const u32 gPkmnJumpResultsTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_results.bin.lz");
+static const u16 sPkmnJumpResultsPal[] = INCBIN_U16("graphics/link_games/pkmnjump_results.gbapal");
+static const u32 sPkmnJumpResultsGfx[] = INCBIN_U32("graphics/link_games/pkmnjump_results.4bpp.lz");
+static const u32 sPkmnJumpResultsTilemap[] = INCBIN_U32("graphics/link_games/pkmnjump_results.bin.lz");
 
 static const struct BgTemplate gUnknown_846D8D4[] =
 {
@@ -179,7 +179,7 @@ bool32 sub_8149D68(void)
 
 static void sub_8149D80(void (*func)(void))
 {
-    SetWordTaskArg(gUnknown_203F3D8->unk6, 0, (u32) func);
+    SetWordTaskArg(gUnknown_203F3D8->unk6, 0, (uintptr_t)func);
     gUnknown_203F3D8->unk4 = 0;
     gUnknown_203F3D8->unk0 = 0;
 }
@@ -206,16 +206,16 @@ static void sub_8149DC8(void)
         ResetTempTileDataBuffers();
         sub_814AD6C(gUnknown_203F3D8);
         sub_814A9C8();
-        LoadPalette(gPkmnJumpBgPal, 0, 0x20);
-        DecompressAndCopyTileDataToVram(3, gPkmnJumpBgGfx, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, gPkmnJumpBgTilemap, 0, 0, 1);
-        LoadPalette(gPkmnJumpVenusaurPal, 0x30, 0x20);
-        DecompressAndCopyTileDataToVram(2, gPkmnJumpVenusaurGfx, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(2, gPkmnJumpVenusaurTilemap, 0, 0, 1);
-        LoadPalette(gPkmnJumpResultsPal, 0x10, 0x20);
-        DecompressAndCopyTileDataToVram(1, gPkmnJumpResultsGfx, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, gPkmnJumpResultsTilemap, 0, 0, 1);
-        LoadPalette(gPkmnJumpPal3, 0x20, 0x20);
+        LoadPalette(sPkmnJumpBgPal, 0, 0x20);
+        DecompressAndCopyTileDataToVram(3, sPkmnJumpBgGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, sPkmnJumpBgTilemap, 0, 0, 1);
+        LoadPalette(sPkmnJumpVenusaurPal, 0x30, 0x20);
+        DecompressAndCopyTileDataToVram(2, sPkmnJumpVenusaurGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(2, sPkmnJumpVenusaurTilemap, 0, 0, 1);
+        LoadPalette(sPkmnJumpResultsPal, 0x10, 0x20);
+        DecompressAndCopyTileDataToVram(1, sPkmnJumpResultsGfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sPkmnJumpResultsTilemap, 0, 0, 1);
+        LoadPalette(sPkmnJumpPal3, 0x20, 0x20);
         SetBgTilemapBuffer(0, gUnknown_203F3D8->tilemapBuffer);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         sub_814A84C();
@@ -501,7 +501,7 @@ bool32 sub_814A408(void)
     return TRUE;
 }
 
-const u8 gUnknown_846D94C[] = _("IES");
+static const u8 sPluralTxt[] = _("IES");
 
 void sub_814A468(u16 itemId, u16 quantity)
 {
@@ -516,7 +516,7 @@ void sub_814A468(u16 itemId, u16 quantity)
             {
                 endi--;
                 endi[gUnknown_203F3D8->txtBuff[0]] = EOS;
-                StringAppend(gUnknown_203F3D8->txtBuff[0], gUnknown_846D94C);
+                StringAppend(gUnknown_203F3D8->txtBuff[0], sPluralTxt);
             }
         }
     }
@@ -645,7 +645,7 @@ static u32 sub_814A754(u32 left, u32 top, u32 width, u32 height)
     window.baseBlock = 0x43;
 
     windowId = AddWindow(&window);
-    FillWindowPixelBuffer(windowId, 0x11);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     return windowId;
 }
 
@@ -671,8 +671,8 @@ static void sub_814A84C(void)
 
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    FillWindowPixelBuffer(0, 0);
-    FillWindowPixelBuffer(1, 0);
+    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
     AddTextPrinterParameterized3(0, 0, 0, 2, color, 0, gText_SpacePoints2);
     AddTextPrinterParameterized3(1, 0, 0, 2, color, 0, gText_SpaceTimes3);
 }
@@ -687,7 +687,7 @@ static const u16 gUnknown_846D978[] = {0x06, 0x08, 0x0b, 0x06, 0x10, 0x08};
 static const u16 gUnknown_846D984[] = {0x02, 0x06, 0x06, 0x08, 0x10, 0x08, 0x14, 0x06};
 static const u16 gUnknown_846D994[] = {0x02, 0x06, 0x06, 0x08, 0x0b, 0x06, 0x10, 0x08, 0x14, 0x06};
 
-static const u16 *const gUnknown_082FE234[] =
+static const u16 *const gUnknown_846D9A8[] =
 {
     gUnknown_846D970,
     gUnknown_846D978,
@@ -827,7 +827,7 @@ static void sub_814AADC(void)
 {
     struct WindowTemplate window;
     int i, playersCount = sub_81499A4();
-    const u16 *winCoords = gUnknown_082FE234[playersCount - 2];
+    const u16 *winCoords = gUnknown_846D9A8[playersCount - 2];
 
     window.bg = 0;
     window.width = 8;
@@ -853,7 +853,7 @@ static void sub_814AB98(int multiplayerId, u8 clr1, u8 clr2, u8 clr3)
     u32 x;
     u8 colors[3] = {clr1, clr2, clr3};
 
-    FillWindowPixelBuffer(gUnknown_203F3D8->unk1C[multiplayerId], 0);
+    FillWindowPixelBuffer(gUnknown_203F3D8->unk1C[multiplayerId], PIXEL_FILL(0));
     x = 64 - GetStringWidth(0, sub_81499E0(multiplayerId), -1);
     x /= 2;
     AddTextPrinterParameterized3(gUnknown_203F3D8->unk1C[multiplayerId], 0, x, 2, colors, -1, sub_81499E0(multiplayerId));

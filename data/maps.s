@@ -1,5 +1,4 @@
 #include "constants/layouts.h"
-@#include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/region_map.h"
 #include "constants/songs.h"

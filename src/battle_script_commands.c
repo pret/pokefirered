@@ -48,7 +48,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
-#include "constants/map_types.h"
+#include "constants/maps.h"
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 

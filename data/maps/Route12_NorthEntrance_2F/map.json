@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_12",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
@@ -23,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route12_NorthEntrance_2F_EventScript_16FE8A",
+      "script": "Route12_NorthEntrance_2F_EventScript_Lass",
       "flag": "0"
     }
   ],
@@ -43,14 +45,14 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "Route12_NorthEntrance_2F_EventScript_16FE78"
+      "script": "Route12_NorthEntrance_2F_EventScript_LeftBinoculars"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "Route12_NorthEntrance_2F_EventScript_16FE81"
+      "script": "Route12_NorthEntrance_2F_EventScript_RightBinoculars"
     }
   ]
 }

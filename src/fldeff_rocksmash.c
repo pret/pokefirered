@@ -16,7 +16,7 @@
 #include "event_object_movement.h"
 #include "constants/songs.h"
 #include "constants/object_events.h"
-#include "constants/map_types.h"
+#include "constants/maps.h"
 
 static void task08_080C9820(u8 taskId);
 static void sub_80C98FC(u8 taskId);

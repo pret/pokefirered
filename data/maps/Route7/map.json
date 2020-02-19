@@ -63,7 +63,7 @@
       "x": 5,
       "y": 14,
       "elevation": 0,
-      "script": "Route7_EventScript_167FBC"
+      "script": "Route7_EventScript_UndergroundPathSign"
     },
     {
       "type": "hidden_item",

@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route3_EventScript_167F78",
+      "script": "Route3_EventScript_Youngster",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route3_EventScript_1A957B",
+      "script": "Route3_EventScript_Robin",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route3_EventScript_1A94C1",
+      "script": "Route3_EventScript_James",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route3_EventScript_1A953D",
+      "script": "Route3_EventScript_Sally",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route3_EventScript_1A9483",
+      "script": "Route3_EventScript_Greg",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route3_EventScript_1A9407",
+      "script": "Route3_EventScript_Calvin",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route3_EventScript_1A94FF",
+      "script": "Route3_EventScript_Janice",
       "flag": "0"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route3_EventScript_1A9445",
+      "script": "Route3_EventScript_Colton",
       "flag": "0"
     },
     {
@@ -140,7 +140,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route3_EventScript_1A93C9",
+      "script": "Route3_EventScript_Ben",
       "flag": "0"
     }
   ],
@@ -152,7 +152,7 @@
       "x": 72,
       "y": 11,
       "elevation": 0,
-      "script": "Route3_EventScript_167F81"
+      "script": "Route3_EventScript_RouteSign"
     },
     {
       "type": "hidden_item",

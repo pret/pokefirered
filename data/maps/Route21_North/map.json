@@ -93,7 +93,7 @@
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
-      "in_connection": 255,
+      "in_connection": true,
       "x": 13,
       "y": -3,
       "elevation": 2,

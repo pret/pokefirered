@@ -106,7 +106,7 @@
     },
     {
       "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
-      "in_connection": 255,
+      "in_connection": true,
       "x": 109,
       "y": 3,
       "elevation": 12,

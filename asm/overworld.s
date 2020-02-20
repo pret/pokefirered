@@ -7190,7 +7190,7 @@ SpawnLinkPlayerObjectEvent: @ 805839C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	bl sub_805DF30
+	bl GetIndexOfFirstInactiveObjectEvent
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24

@@ -415,7 +415,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], sub_8063F84(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;

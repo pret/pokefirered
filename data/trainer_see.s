@@ -4,23 +4,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83C7258:: @ 83C7258
-	.4byte sub_8081F34
-	.4byte sub_8081F38
-	.4byte sub_8081F90
-	.4byte sub_8081FD0
-	.4byte sub_808202C
-	.4byte sub_80820BC
-	.4byte sub_8082100
-	.4byte sub_8082134
-	.4byte sub_8082150
-	.4byte sub_8082184
-	.4byte sub_80821DC
-	.4byte sub_8082250
-	.4byte sub_808226C
-	.4byte sub_80822CC
-	.4byte sub_808237C
-
 gUnknown_83C7294:: @ 83C7294
 	.4byte sub_8082150
 	.4byte sub_8082184

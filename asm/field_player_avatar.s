@@ -1840,7 +1840,7 @@ sub_805C104: @ 805C104
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1976,7 +1976,7 @@ PlayerFaceDirection: @ 805C1F4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2065,7 +2065,7 @@ _0805C27E:
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_805BFFC
@@ -3713,7 +3713,7 @@ PlayerAvatar_DoSecretBaseMatJump: @ 805CEEC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806413C
+	bl GetJumpInPlaceMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3846,7 +3846,7 @@ sub_805CFEC: @ 805CFEC
 	add r0, sp
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4138,7 +4138,7 @@ sub_805D240: @ 805D240
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5450,7 +5450,7 @@ _0805DC9A:
 	ldrsh r0, [r5, r3]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5618,7 +5618,7 @@ _0805DDE4:
 	lsrs r0, 28
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

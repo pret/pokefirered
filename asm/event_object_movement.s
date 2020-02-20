@@ -137,8 +137,8 @@ _0805DF28: .4byte gFieldEffectObjectTemplatePointers
 _0805DF2C: .4byte gSprites
 	thumb_func_end sub_805DE8C
 
-	thumb_func_start sub_805DF30
-sub_805DF30: @ 805DF30
+	thumb_func_start GetIndexOfFirstInactiveObjectEvent
+GetIndexOfFirstInactiveObjectEvent: @ 805DF30
 	push {lr}
 	movs r1, 0
 	ldr r2, _0805DF3C @ =gObjectEvents
@@ -165,7 +165,7 @@ _0805DF5A:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805DF30
+	thumb_func_end GetIndexOfFirstInactiveObjectEvent
 
 	thumb_func_start GetObjectEventIdByLocalIdAndMap
 GetObjectEventIdByLocalIdAndMap: @ 805DF60
@@ -4408,8 +4408,8 @@ _0805FE52:
 	bx r1
 	thumb_func_end sub_805FDE8
 
-	thumb_func_start sub_805FE5C
-sub_805FE5C: @ 805FE5C
+	thumb_func_start OverrideTemplateCoordsForObjectEvent
+OverrideTemplateCoordsForObjectEvent: @ 805FE5C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_805FDE8
@@ -4426,10 +4426,10 @@ _0805FE76:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FE5C
+	thumb_func_end OverrideTemplateCoordsForObjectEvent
 
-	thumb_func_start sub_805FE7C
-sub_805FE7C: @ 805FE7C
+	thumb_func_start TryOverrideTemplateCoordsForObjectEvent
+TryOverrideTemplateCoordsForObjectEvent: @ 805FE7C
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -4441,7 +4441,7 @@ _0805FE8C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FE7C
+	thumb_func_end TryOverrideTemplateCoordsForObjectEvent
 
 	thumb_func_start sub_805FE94
 sub_805FE94: @ 805FE94
@@ -4465,7 +4465,7 @@ sub_805FE94: @ 805FE94
 	lsls r0, 2
 	ldr r1, _0805FEC8 @ =gObjectEvents
 	adds r0, r1
-	bl sub_805FE5C
+	bl OverrideTemplateCoordsForObjectEvent
 _0805FEC2:
 	add sp, 0x4
 	pop {r0}
@@ -4717,7 +4717,7 @@ sub_8060078: @ 8060078
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -4831,7 +4831,7 @@ sub_806014C: @ 806014C
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5487,7 +5487,7 @@ sub_80605E4: @ 80605E4
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5660,7 +5660,7 @@ sub_8060724: @ 8060724
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5774,7 +5774,7 @@ sub_80607F8: @ 80607F8
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5875,7 +5875,7 @@ sub_80608A8: @ 80608A8
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -5989,7 +5989,7 @@ sub_806097C: @ 806097C
 	adds r5, r1, 0
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6079,7 +6079,7 @@ sub_8060A18: @ 8060A18
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6183,7 +6183,7 @@ sub_8060ACC: @ 8060ACC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6356,7 +6356,7 @@ sub_8060C0C: @ 8060C0C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6529,7 +6529,7 @@ sub_8060D4C: @ 8060D4C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6702,7 +6702,7 @@ sub_8060E8C: @ 8060E8C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -6875,7 +6875,7 @@ sub_8060FCC: @ 8060FCC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7048,7 +7048,7 @@ sub_806110C: @ 806110C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7221,7 +7221,7 @@ sub_806124C: @ 806124C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7394,7 +7394,7 @@ sub_806138C: @ 806138C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7567,7 +7567,7 @@ sub_80614CC: @ 80614CC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7740,7 +7740,7 @@ sub_806160C: @ 806160C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -7902,7 +7902,7 @@ sub_8061738: @ 8061738
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8045,7 +8045,7 @@ sub_806183C: @ 806183C
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8255,7 +8255,7 @@ _080619BC:
 	lsrs r5, r0, 24
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r5, 0x1
@@ -8275,7 +8275,7 @@ _080619BC:
 	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r1, [r4, 0x18]
@@ -8374,7 +8374,7 @@ _08061AA2:
 	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r1, [r4, 0x18]
@@ -8395,7 +8395,7 @@ _08061AA2:
 	bl ObjectEventSetDirection
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r1, [r4, 0x18]
@@ -10457,7 +10457,7 @@ sub_8062970: @ 8062970
 	adds r1, 0x21
 	ldrb r1, [r1]
 	bl state_to_direction
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10507,7 +10507,7 @@ sub_80629B8: @ 80629B8
 	adds r3, r5, 0
 	bl ObjectEventMoveDestCoords
 	adds r0, r6, 0
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10542,7 +10542,7 @@ sub_80629B8: @ 80629B8
 	bne _08062A52
 _08062A3E:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10631,7 +10631,7 @@ sub_8062A70: @ 8062A70
 	bne _08062B0A
 _08062AF6:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10720,7 +10720,7 @@ sub_8062B28: @ 8062B28
 	bne _08062BC2
 _08062BAE:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10809,7 +10809,7 @@ sub_8062BE0: @ 8062BE0
 	bne _08062C7A
 _08062C66:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10849,7 +10849,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	adds r1, 0x21
 	ldrb r1, [r1]
 	bl state_to_direction
-	bl sub_806413C
+	bl GetJumpInPlaceMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -10934,7 +10934,7 @@ sub_8062CE0: @ 8062CE0
 	bne _08062D7A
 _08062D66:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -11030,7 +11030,7 @@ oac_hopping: @ 8062D98
 	bne _08062E40
 _08062E2C:
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -11599,7 +11599,7 @@ sub_8063234: @ 8063234
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -13416,8 +13416,8 @@ _08063E88:
 	bx r0
 	thumb_func_end sub_8063E28
 
-	thumb_func_start sub_8063EB8
-sub_8063EB8: @ 8063EB8
+	thumb_func_start GetFaceDirectionMovementAction
+GetFaceDirectionMovementAction: @ 8063EB8
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13439,7 +13439,7 @@ _08063ED0:
 	bx r1
 	.align 2, 0
 _08063EE0: .4byte gUnknown_83A64EC
-	thumb_func_end sub_8063EB8
+	thumb_func_end GetFaceDirectionMovementAction
 
 	thumb_func_start sub_8063EE4
 sub_8063EE4: @ 8063EE4
@@ -13534,8 +13534,8 @@ _08063F70:
 _08063F80: .4byte gUnknown_83A6500
 	thumb_func_end sub_8063F58
 
-	thumb_func_start sub_8063F84
-sub_8063F84: @ 8063F84
+	thumb_func_start GetWalkNormalMovementAction
+GetWalkNormalMovementAction: @ 8063F84
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13557,7 +13557,7 @@ _08063F9C:
 	bx r1
 	.align 2, 0
 _08063FAC: .4byte gUnknown_83A6505
-	thumb_func_end sub_8063F84
+	thumb_func_end GetWalkNormalMovementAction
 
 	thumb_func_start sub_8063FB0
 sub_8063FB0: @ 8063FB0
@@ -13784,8 +13784,8 @@ _08064128:
 _08064138: .4byte gUnknown_83A6532
 	thumb_func_end GetJumpLedgeAnimId
 
-	thumb_func_start sub_806413C
-sub_806413C: @ 806413C
+	thumb_func_start GetJumpInPlaceMovementAction
+GetJumpInPlaceMovementAction: @ 806413C
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -13807,7 +13807,7 @@ _08064154:
 	bx r1
 	.align 2, 0
 _08064164: .4byte gUnknown_83A6537
-	thumb_func_end sub_806413C
+	thumb_func_end GetJumpInPlaceMovementAction
 
 	thumb_func_start sub_8064168
 sub_8064168: @ 8064168
@@ -14018,7 +14018,7 @@ ObjectEventFaceOppositeDirection: @ 80642C8
 	bl GetOppositeDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

@@ -951,7 +951,7 @@ void sub_810CB90(void)
                 TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gObjectEvents[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
+                TryOverrideTemplateCoordsForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gSelectedObjectEvent == sp0)
                     r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
@@ -1312,7 +1312,7 @@ static void StartAllRespondantIdleMovements(void)
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
-                sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                TryOverrideTemplateCoordsForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }
         }

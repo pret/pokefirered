@@ -2238,7 +2238,7 @@ sub_80844BC: @ 80844BC
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2666,7 +2666,7 @@ _0808484A:
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2947,7 +2947,7 @@ sub_8084A5C: @ 8084A5C
 	ldr r0, _08084AC0 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x4
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3200,7 +3200,7 @@ sub_8084C3C: @ 8084C3C
 	bl ScriptContext2_Disable
 	bl UnfreezeObjectEvents
 	movs r0, 0x4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4668,7 +4668,7 @@ _0808579E:
 	lsrs r0, 28
 	adds r0, r7
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7194,7 +7194,7 @@ sub_8086B30: @ 8086B30
 	strb r0, [r5]
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7380,7 +7380,7 @@ _08086CD2:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

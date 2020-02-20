@@ -47,7 +47,7 @@
 #define FLDEFF_USE_WATERFALL             43
 #define FLDEFF_USE_DIVE                  44
 #define FLDEFF_POKEBALL                  45
-#define FLDEFF_HEART_ICON                46
+#define FLDEFF_X_ICON                    46
 #define FLDEFF_NOP_47                    47
 #define FLDEFF_NOP_48                    48
 #define FLDEFF_POP_OUT_OF_ASH            49
@@ -65,9 +65,9 @@
 #define FLDEFF_PCTURN_ON                 61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_UNK_40                    64 // TODO: game corner smile icon?
+#define FLDEFF_SMILEY_FACE_ICON                    64 // TODO: game corner smile icon?
 #define FLDEFF_UNK_41                    65 // TODO: related to vs_seeker
-#define FLDEFF_UNK_42                    66 // TODO: related to trainer see
+#define FLDEFF_DOUBLE_EXCL_MARK_ICON                    66 // TODO: related to trainer see
 #define FLDEFF_UNK_43                    67 // TODO: related to deoxys
 #define FLDEFF_UNK_44                    68 // TODO: related to trainer see
 #define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos

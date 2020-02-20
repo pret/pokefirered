@@ -19567,7 +19567,7 @@ sub_80669D4: @ 80669D4
 	cmp r0, 0x3F
 	bne _080669EA
 	adds r0, r4, 0
-	bl sub_80824EC
+	bl MovementAction_RevealTrainer_RunTrainerSeeFuncList
 	movs r0, 0
 	b _08066A12
 _080669EA:

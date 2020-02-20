@@ -204,7 +204,7 @@ gFldEffScript_FlyIn:: @ 81D98BE
 	end 
 
 gFldEffScript_ExclamationMarkIcon2:: @ 81D98C4
-	callnative sub_8082624
+	callnative FldEff_QuestionMarkIcon
 	end 
 
 gFldEffScript_FeetInFlowingWater:: @ 81D98CA
@@ -257,7 +257,7 @@ gFldEffScript_Pokeball:: @ 81D9920
 	end 
 
 gFldEffScript_HeartIcon:: @ 81D992B
-	callnative sub_80825B4
+	callnative FldEff_XIcon
 	end 
 
 gFldEffScript_Nop47:: @ 81D9931
@@ -322,7 +322,7 @@ gFldEffScript_UseTeleport:: @ 81D9986
 	end 
 
 gFldEffScript_Unk40:: @ 81D998C
-	callnative sub_80825EC
+	callnative FldEff_SmileyFaceIcon
 	end 
 
 gFldEffScript_Unk41:: @ 81D9992
@@ -330,7 +330,7 @@ gFldEffScript_Unk41:: @ 81D9992
 	end 
 
 gFldEffScript_Unk42:: @ 81D9998
-	callnative sub_808257C
+	callnative FldEff_DoubleExclMarkIcon
 	end 
 
 gFldEffScript_Unk43:: @ 81D999E

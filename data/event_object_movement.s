@@ -8164,8 +8164,7 @@ gUnknown_83A65A9:: @ 83A65A9
 	.byte 0x00
 	.byte 0x00
 
-@ gMovementActionFuncs
-gUnknown_83A65BC:: @ 83A65BC
+sMovementActionFuncs:: @ 83A65BC
 	.4byte gUnknown_83A6864
 	.4byte gUnknown_83A686C
 	.4byte gUnknown_83A6874

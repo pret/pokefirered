@@ -6,15 +6,14 @@
 #include "quest_log.h"
 #include "script.h"
 #include "task.h"
-#include "trainer_see.h"
 #include "util.h"
 #include "constants/battle_setup.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/object_events.h"
 
-typedef u8 (*TRAINER_APPROACH_FUNC)(struct ObjectEvent *, s16, s16, s16);
-typedef bool8 (*TRAINER_SEE_FUNC)(u8, struct Task *, struct ObjectEvent *);
+typedef u8 (*trainerApproachFunc)(struct ObjectEvent *, s16, s16, s16);
+typedef bool8 (*trainerSeeFunc)(u8, struct Task *, struct ObjectEvent *);
 
 static bool8 CheckTrainer(u8 trainerObjId);
 static u8 GetTrainerApproachDistance(struct ObjectEvent * trainerObj);
@@ -51,7 +50,7 @@ static const u16 sGfx_Emoticons[] = INCBIN_U16("graphics/object_events/emoticons
 // x and y are the player's coordinates
 // Returns distance to walk if trainer has unobstructed view of player
 // Returns 0 if trainer can't see player
-static const TRAINER_APPROACH_FUNC sDirectionalApproachDistanceFuncs[] = {
+static const trainerApproachFunc sDirectionalApproachDistanceFuncs[] = {
     GetTrainerApproachDistanceSouth,
     GetTrainerApproachDistanceNorth,
     GetTrainerApproachDistanceWest,
@@ -61,7 +60,7 @@ static const TRAINER_APPROACH_FUNC sDirectionalApproachDistanceFuncs[] = {
 // bool8 func(u8 taskId, struct Task * task, struct ObjectEvent * trainerObj)
 // Returns TRUE to run the next func immediately
 // Returns FALSE to delay the next func to the next frame
-static const TRAINER_SEE_FUNC sTrainerSeeFuncList[] = {
+static const trainerSeeFunc sTrainerSeeFuncList[] = {
     TrainerSeeFunc_Dummy,
     TrainerSeeFunc_StartExclMark,
     TrainerSeeFunc_WaitExclMark,
@@ -79,7 +78,7 @@ static const TRAINER_SEE_FUNC sTrainerSeeFuncList[] = {
     TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown
 };
 
-static const TRAINER_SEE_FUNC sTrainerSeeFuncList2[] = {
+static const trainerSeeFunc sTrainerSeeFuncList2[] = {
     TrainerSeeFunc_TrainerInAshFacesPlayer,
     TrainerSeeFunc_BeginJumpOutOfAsh,
     TrainerSeeFunc_WaitJumpOutOfAsh,
@@ -427,8 +426,8 @@ static bool8 TrainerSeeFunc_WaitJumpOutOfAsh(u8 taskId, struct Task * task, stru
 
     if (gSprites[task->tOutOfAshSpriteId].animCmdIndex == 2)
     {
-        trainerObj->fixedPriority = 0;
-        trainerObj->triggerGroundEffectsOnMove = 1;
+        trainerObj->fixedPriority = FALSE;
+        trainerObj->triggerGroundEffectsOnMove = TRUE;
 
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
@@ -537,7 +536,7 @@ static void Task_RevealTrainer_RunTrainerSeeFuncList(u8 taskId)
     }
     else
     {
-        trainerObj->heldMovementFinished = 0;
+        trainerObj->heldMovementFinished = FALSE;
     }
 }
 

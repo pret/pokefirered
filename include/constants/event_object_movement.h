@@ -186,6 +186,7 @@
 #define MOVEMENT_ACTION_SHOW_REFLECTION                 0x6F
 #define MOVEMENT_ACTION_WALK_DOWN_START_AFFINE          0x70
 #define MOVEMENT_ACTION_WALK_DOWN_AFFINE                0x71
+// Acro Bike related movement actions might not be in FRLG at all
 #define MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN          0x72
 #define MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP            0x73
 #define MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT          0x74

@@ -4723,7 +4723,7 @@ sub_8060078: @ 8060078
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -4736,7 +4736,7 @@ sub_8060078: @ 8060078
 sub_80600A4: @ 80600A4
 	push {r4-r6,lr}
 	adds r6, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _080600D8
@@ -4837,7 +4837,7 @@ sub_806014C: @ 806014C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -4863,7 +4863,7 @@ sub_806017C: @ 806017C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -4881,7 +4881,7 @@ sub_80601AC: @ 80601AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _080601CA
@@ -5493,7 +5493,7 @@ sub_80605E4: @ 80605E4
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -5507,7 +5507,7 @@ sub_8060610: @ 8060610
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060646
@@ -5666,7 +5666,7 @@ sub_8060724: @ 8060724
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -5679,7 +5679,7 @@ sub_8060724: @ 8060724
 sub_8060750: @ 8060750
 	push {r4-r6,lr}
 	adds r6, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060784
@@ -5780,7 +5780,7 @@ sub_80607F8: @ 80607F8
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -5798,7 +5798,7 @@ sub_8060828: @ 8060828
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060846
@@ -5881,7 +5881,7 @@ sub_80608A8: @ 80608A8
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -5894,7 +5894,7 @@ sub_80608A8: @ 80608A8
 sub_80608D4: @ 80608D4
 	push {r4-r6,lr}
 	adds r6, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060908
@@ -5995,7 +5995,7 @@ sub_806097C: @ 806097C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -6013,7 +6013,7 @@ sub_80609AC: @ 80609AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _080609CA
@@ -6085,7 +6085,7 @@ sub_8060A18: @ 8060A18
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -6097,7 +6097,7 @@ sub_8060A18: @ 8060A18
 sub_8060A44: @ 8060A44
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	bne _08060A56
@@ -6189,7 +6189,7 @@ sub_8060ACC: @ 8060ACC
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -6203,7 +6203,7 @@ sub_8060AF8: @ 8060AF8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060B2E
@@ -6362,7 +6362,7 @@ sub_8060C0C: @ 8060C0C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -6376,7 +6376,7 @@ sub_8060C38: @ 8060C38
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060C6E
@@ -6535,7 +6535,7 @@ sub_8060D4C: @ 8060D4C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -6549,7 +6549,7 @@ sub_8060D78: @ 8060D78
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060DAE
@@ -6708,7 +6708,7 @@ sub_8060E8C: @ 8060E8C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -6722,7 +6722,7 @@ sub_8060EB8: @ 8060EB8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08060EEE
@@ -6881,7 +6881,7 @@ sub_8060FCC: @ 8060FCC
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -6895,7 +6895,7 @@ sub_8060FF8: @ 8060FF8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806102E
@@ -7054,7 +7054,7 @@ sub_806110C: @ 806110C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -7068,7 +7068,7 @@ sub_8061138: @ 8061138
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806116E
@@ -7227,7 +7227,7 @@ sub_806124C: @ 806124C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -7241,7 +7241,7 @@ sub_8061278: @ 8061278
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _080612AE
@@ -7400,7 +7400,7 @@ sub_806138C: @ 806138C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -7414,7 +7414,7 @@ sub_80613B8: @ 80613B8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _080613EE
@@ -7573,7 +7573,7 @@ sub_80614CC: @ 80614CC
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -7587,7 +7587,7 @@ sub_80614F8: @ 80614F8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806152E
@@ -7746,7 +7746,7 @@ sub_806160C: @ 806160C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x2
 	strh r0, [r5, 0x30]
 	movs r0, 0x1
@@ -7760,7 +7760,7 @@ sub_8061638: @ 8061638
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806166E
@@ -7908,7 +7908,7 @@ sub_8061738: @ 8061738
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -7920,7 +7920,7 @@ sub_8061738: @ 8061738
 sub_8061764: @ 8061764
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806177E
@@ -8051,7 +8051,7 @@ sub_806183C: @ 806183C
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -8063,7 +8063,7 @@ sub_806183C: @ 806183C
 sub_8061868: @ 8061868
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061882
@@ -8297,7 +8297,7 @@ _08061A24:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -8315,7 +8315,7 @@ sub_8061A44: @ 8061A44
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061A62
@@ -8417,7 +8417,7 @@ _08061B0E:
 	adds r0, r4, 0
 	mov r1, r8
 	adds r2, r6, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -8438,7 +8438,7 @@ sub_8061B34: @ 8061B34
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08061B52
@@ -10418,7 +10418,7 @@ sub_8062944: @ 8062944
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08062962
@@ -10463,7 +10463,7 @@ sub_8062970: @ 8062970
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -10513,7 +10513,7 @@ sub_80629B8: @ 80629B8
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -10548,7 +10548,7 @@ _08062A3E:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062A52:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -10602,7 +10602,7 @@ sub_8062A70: @ 8062A70
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -10637,7 +10637,7 @@ _08062AF6:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062B0A:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -10691,7 +10691,7 @@ sub_8062B28: @ 8062B28
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -10726,7 +10726,7 @@ _08062BAE:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062BC2:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -10780,7 +10780,7 @@ sub_8062BE0: @ 8062BE0
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -10815,7 +10815,7 @@ _08062C66:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062C7A:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -10855,7 +10855,7 @@ cph_IM_DIFFERENT: @ 8062C98
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4]
 	movs r1, 0x2
 	orrs r0, r1
@@ -10905,7 +10905,7 @@ sub_8062CE0: @ 8062CE0
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -10940,7 +10940,7 @@ _08062D66:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062D7A:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -11001,7 +11001,7 @@ oac_hopping: @ 8062D98
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	add r0, sp, 0x4
 	movs r2, 0
 	ldrsh r1, [r0, r2]
@@ -11036,7 +11036,7 @@ _08062E2C:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 _08062E40:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -11352,7 +11352,7 @@ sub_8063078: @ 8063078
 sub_8063084: @ 8063084
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063096
@@ -11419,7 +11419,7 @@ sub_80630E4: @ 80630E4
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -11481,7 +11481,7 @@ sub_8063154: @ 8063154
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -11543,7 +11543,7 @@ sub_80631C4: @ 80631C4
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r5, 0x30]
 	pop {r4,r5}
@@ -11605,7 +11605,7 @@ sub_8063234: @ 8063234
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x20
 	orrs r0, r1
@@ -11621,7 +11621,7 @@ sub_8063234: @ 8063234
 sub_8063268: @ 8063268
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806327A
@@ -11774,7 +11774,7 @@ sub_8063364: @ 8063364
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x98
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	pop {r4,r5}
@@ -11786,7 +11786,7 @@ sub_8063364: @ 8063364
 sub_8063384: @ 8063384
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	bne _08063396
@@ -11822,7 +11822,7 @@ sub_80633B4: @ 80633B4
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x99
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	movs r0, 0
@@ -11840,7 +11840,7 @@ sub_80633D4: @ 80633D4
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x9A
-	bl sub_80645C8
+	bl ObjectEventSetSingleMovement
 	movs r0, 0x1
 	strh r0, [r4, 0x30]
 	movs r0, 0
@@ -11853,7 +11853,7 @@ sub_80633D4: @ 80633D4
 sub_80633F4: @ 80633F4
 	push {r4,lr}
 	adds r4, r1, 0
-	bl sub_8064588
+	bl ObjectEventExecSingleMovementAction
 	lsls r0, 24
 	cmp r0, 0
 	beq _08063406
@@ -13370,7 +13370,7 @@ sub_8063E28: @ 8063E28
 	bne _08063E5C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064544
+	bl ObjectEventExecHeldMovementAction
 _08063E5C:
 	ldrb r0, [r4, 0x1E]
 	bl MetatileBehavior_IsIce_2
@@ -14344,7 +14344,7 @@ _08064508: .4byte gUnknown_83A65A9
 ObjectEventExecSpecialAnim: @ 806450C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, _08064540 @ =gUnknown_83A65BC
+	ldr r2, _08064540 @ =sMovementActionFuncs
 	ldrb r0, [r4, 0x1C]
 	lsls r0, 2
 	adds r0, r2
@@ -14368,14 +14368,14 @@ _08064538:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064540: .4byte gUnknown_83A65BC
+_08064540: .4byte sMovementActionFuncs
 	thumb_func_end ObjectEventExecSpecialAnim
 
-	thumb_func_start sub_8064544
-sub_8064544: @ 8064544
+	thumb_func_start ObjectEventExecHeldMovementAction
+ObjectEventExecHeldMovementAction: @ 8064544
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, _08064584 @ =gUnknown_83A65BC
+	ldr r2, _08064584 @ =sMovementActionFuncs
 	ldrb r0, [r4, 0x1C]
 	lsls r0, 2
 	adds r0, r2
@@ -14404,15 +14404,15 @@ _0806457C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064584: .4byte gUnknown_83A65BC
-	thumb_func_end sub_8064544
+_08064584: .4byte sMovementActionFuncs
+	thumb_func_end ObjectEventExecHeldMovementAction
 
-	thumb_func_start sub_8064588
-sub_8064588: @ 8064588
+	thumb_func_start ObjectEventExecSingleMovementAction
+ObjectEventExecSingleMovementAction: @ 8064588
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r1, _080645B4 @ =gUnknown_83A65BC
+	ldr r1, _080645B4 @ =sMovementActionFuncs
 	ldrb r0, [r4, 0x1C]
 	lsls r0, 2
 	adds r0, r1
@@ -14431,7 +14431,7 @@ sub_8064588: @ 8064588
 	movs r0, 0
 	b _080645C2
 	.align 2, 0
-_080645B4: .4byte gUnknown_83A65BC
+_080645B4: .4byte sMovementActionFuncs
 _080645B8:
 	movs r0, 0xFF
 	strb r0, [r4, 0x1C]
@@ -14442,10 +14442,10 @@ _080645C2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064588
+	thumb_func_end ObjectEventExecSingleMovementAction
 
-	thumb_func_start sub_80645C8
-sub_80645C8: @ 80645C8
+	thumb_func_start ObjectEventSetSingleMovement
+ObjectEventSetSingleMovement: @ 80645C8
 	push {r4,lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -14468,10 +14468,10 @@ _080645EA:
 	bx r0
 	.align 2, 0
 _080645F0: .4byte gUnknown_3005E88
-	thumb_func_end sub_80645C8
+	thumb_func_end ObjectEventSetSingleMovement
 
-	thumb_func_start an_look_any
-an_look_any: @ 80645F4
+	thumb_func_start FaceDirection
+FaceDirection: @ 80645F4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14501,13 +14501,13 @@ an_look_any: @ 80645F4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end an_look_any
+	thumb_func_end FaceDirection
 
 	thumb_func_start sub_8064638
 sub_8064638: @ 8064638
 	push {lr}
 	movs r2, 0x1
-	bl an_look_any
+	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14517,7 +14517,7 @@ sub_8064638: @ 8064638
 sub_8064648: @ 8064648
 	push {lr}
 	movs r2, 0x2
-	bl an_look_any
+	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14527,7 +14527,7 @@ sub_8064648: @ 8064648
 sub_8064658: @ 8064658
 	push {lr}
 	movs r2, 0x3
-	bl an_look_any
+	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -14537,7 +14537,7 @@ sub_8064658: @ 8064658
 sub_8064668: @ 8064668
 	push {lr}
 	movs r2, 0x4
-	bl an_look_any
+	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -18678,7 +18678,7 @@ sub_806637C: @ 806637C
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl an_look_any
+	bl FaceDirection
 _080663C6:
 	movs r0, 0x1
 	strh r0, [r6, 0x32]
@@ -18728,7 +18728,7 @@ sub_80663D8: @ 80663D8
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl an_look_any
+	bl FaceDirection
 _0806642A:
 	movs r0, 0x1
 	strh r0, [r6, 0x32]
@@ -19358,7 +19358,7 @@ sub_806687C: @ 806687C
 	ldrb r2, [r0, 0x6]
 	adds r2, r3
 	ldrb r2, [r2]
-	bl an_look_any
+	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1

@@ -21,7 +21,7 @@
 #include "field_player_avatar.h"
 #include "event_object_8097404.h"
 #include "vs_seeker.h"
-#include "constants/movement_commands.h"
+#include "constants/event_object_movement.h"
 #include "constants/object_events.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
@@ -545,29 +545,35 @@ static const VsSeekerData sVsSeekerData[] = {
 };
 
 static const u8 gUnknown_8453F5C[] = {
-    delay_16,
-    delay_16,
-    delay_16,
-    step_end
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 gUnknown_8453F60[] = {
-    emote_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerNoRematch[] = {
-    emote_x,
-    step_end
+    MOVEMENT_ACTION_EMOTE_X,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerRematch[] = {
-    walk_in_place_fastest_down,
-    emote_double_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_8453F67[] = { 0x08, 0x08, 0x07, 0x09, 0x0a };
+static const u8 gUnknown_8453F67[] = {
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_UP,
+    MOVEMENT_TYPE_FACE_LEFT,
+    MOVEMENT_TYPE_FACE_RIGHT
+};
 
 
 // text
@@ -954,7 +960,7 @@ void sub_810CB90(void)
                 if (gSelectedObjectEvent == sp0)
                     r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
                 else
-                    r4_2->animPattern = 0x08;
+                    r4_2->animPattern = MOVEMENT_TYPE_FACE_DOWN;
             }
         }
     }

@@ -88,7 +88,14 @@
 #define MOVEMENT_ACTION_FACE_UP                         0x1
 #define MOVEMENT_ACTION_FACE_LEFT                       0x2
 #define MOVEMENT_ACTION_FACE_RIGHT                      0x3
-// Something else here maybe? idk
+#define MOVEMENT_ACTION_FACE_DOWN_FAST                  0x4
+#define MOVEMENT_ACTION_FACE_UP_FAST                    0x5
+#define MOVEMENT_ACTION_FACE_LEFT_FAST                  0x6
+#define MOVEMENT_ACTION_FACE_RIGHT_FAST                 0x7
+#define MOVEMENT_ACTION_WALK_SLOWEST_DOWN               0x8
+#define MOVEMENT_ACTION_WALK_SLOWEST_UP                 0x9
+#define MOVEMENT_ACTION_WALK_SLOWEST_LEFT               0xA
+#define MOVEMENT_ACTION_WALK_SLOWEST_RIGHT              0xB
 #define MOVEMENT_ACTION_WALK_SLOW_DOWN                  0xC
 #define MOVEMENT_ACTION_WALK_SLOW_UP                    0xD
 #define MOVEMENT_ACTION_WALK_SLOW_LEFT                  0xE
@@ -126,10 +133,10 @@
 #define MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP        0x2E
 #define MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT      0x2F
 #define MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT     0x30
-#define MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN         0x31
-#define MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP           0x32
-#define MOVEMENT_ACTION_RIDE_WATER_CURRENT_LEFT         0x33
-#define MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT        0x34
+#define MOVEMENT_ACTION_FASE_DOWN_SLOW                  0x31
+#define MOVEMENT_ACTION_FASE_UP_SLOW                    0x32
+#define MOVEMENT_ACTION_FASE_LEFT_SLOW                  0x33
+#define MOVEMENT_ACTION_FASE_RIGHT_SLOW                 0x34
 #define MOVEMENT_ACTION_WALK_FASTEST_DOWN               0x35
 #define MOVEMENT_ACTION_WALK_FASTEST_UP                 0x36
 #define MOVEMENT_ACTION_WALK_FASTEST_LEFT               0x37
@@ -142,7 +149,11 @@
 #define MOVEMENT_ACTION_PLAYER_RUN_UP                   0x3E
 #define MOVEMENT_ACTION_PLAYER_RUN_LEFT                 0x3F
 #define MOVEMENT_ACTION_PLAYER_RUN_RIGHT                0x40
-#define MOVEMENT_ACTION_START_ANIM_IN_DIRECTION         0x41
+#define MOVEMENT_ACTION_PLAYER_RUN_DOWN_SLOW            0x41
+#define MOVEMENT_ACTION_PLAYER_RUN_UP_SLOW              0x42
+#define MOVEMENT_ACTION_PLAYER_RUN_LEFT_SLOW            0x43
+#define MOVEMENT_ACTION_PLAYER_RUN_RIGHT_SLOW           0x44
+#define MOVEMENT_ACTION_UNKNOWN_STEP_45                 0x45
 #define MOVEMENT_ACTION_JUMP_SPECIAL_DOWN               0x46
 #define MOVEMENT_ACTION_JUMP_SPECIAL_UP                 0x47
 #define MOVEMENT_ACTION_JUMP_SPECIAL_LEFT               0x48

@@ -2,7 +2,7 @@
 	.section script_data, "aw", %progbits
 	.align 2
 gUnknown_81D96AC:: @ 81D96AC
-	.4byte gFldEffScript_ExclamationMarkIcon1
+	.4byte gFldEffScript_ExclamationMarkIcon
 	.4byte gFldEffScript_UseCutOnGrass
 	.4byte gFldEffScript_UseCutOnTree
 	.4byte gFldEffScript_Shadow
@@ -66,14 +66,14 @@ gUnknown_81D96AC:: @ 81D96AC
 	.4byte gFldEffScript_PcturnOn
 	.4byte gFldEffScript_HallOfFameRecord
 	.4byte gFldEffScript_UseTeleport
-	.4byte gFldEffScript_Unk40
+	.4byte gFldEffScript_SmileyFaceIcon
 	.4byte gFldEffScript_Unk41
-	.4byte gFldEffScript_Unk42
+	.4byte gFldEffScript_DoubleExclMarkIcon
 	.4byte gFldEffScript_Unk43
 	.4byte gFldEffScript_Unk44
 	.4byte gFldEffScript_Unk45
 
-gFldEffScript_ExclamationMarkIcon1:: @ 81D97C4
+gFldEffScript_ExclamationMarkIcon:: @ 81D97C4
 	callnative FldEff_ExclamationMarkIcon1
 	end 
 
@@ -321,7 +321,7 @@ gFldEffScript_UseTeleport:: @ 81D9986
 	callnative FldEff_UseTeleport
 	end 
 
-gFldEffScript_Unk40:: @ 81D998C
+gFldEffScript_SmileyFaceIcon:: @ 81D998C
 	callnative FldEff_SmileyFaceIcon
 	end 
 
@@ -329,7 +329,7 @@ gFldEffScript_Unk41:: @ 81D9992
 	callnative sub_8086BA8
 	end 
 
-gFldEffScript_Unk42:: @ 81D9998
+gFldEffScript_DoubleExclMarkIcon:: @ 81D9998
 	callnative FldEff_DoubleExclMarkIcon
 	end 
 

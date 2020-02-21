@@ -7880,7 +7880,7 @@ _080588BC:
 	ldrb r0, [r4]
 	lsls r0, 30
 	lsrs r0, 31
-	bl sub_805C7F8
+	bl GetHoennLinkPartnerGraphicsIdByGender
 _080588C6:
 	lsls r0, 24
 	lsrs r0, 24

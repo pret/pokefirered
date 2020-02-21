@@ -7130,7 +7130,7 @@ sub_8086AB4: @ 8086AB4
 	ldr r0, _08086B28 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7361,7 +7361,7 @@ _08086CA4:
 	beq _08086CC0
 	movs r0, 0x2
 _08086CAE:
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7370,7 +7370,7 @@ _08086CAE:
 	b _08086CD2
 _08086CC0:
 	movs r0, 0
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7804,7 +7804,7 @@ sub_8086FFC: @ 8086FFC
 	ldr r0, _08087064 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8463,7 +8463,7 @@ _080874F2:
 	bl sub_80DC44C
 _0808751A:
 	movs r0, 0x2
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8790,7 +8790,7 @@ fishE: @ 8087780
 	bl sub_80DC44C
 _080877B4:
 	adds r0, r7, 0
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

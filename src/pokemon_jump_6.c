@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "menu.h"
-#include "pokemon_jump.h"
 #include "script.h"
 #include "strings.h"
 #include "task.h"

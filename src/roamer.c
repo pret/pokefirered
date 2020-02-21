@@ -1,5 +1,4 @@
 #include "global.h"
-#include "roamer.h"
 #include "random.h"
 #include "overworld.h"
 #include "field_specials.h"

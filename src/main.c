@@ -9,7 +9,6 @@
 #include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
-#include "battle.h"
 #include "help_system.h"
 #include "sound.h"
 #include "new_menu_helpers.h"
@@ -17,12 +16,10 @@
 #include "overworld.h"
 #include "sprite.h"
 #include "play_time.h"
-#include "pokemon.h"
 #include "intro.h"
 #include "battle_controllers.h"
 #include "scanline_effect.h"
 #include "save_failed_screen.h"
-#include "battle.h"
 
 extern u32 intr_main[];
 

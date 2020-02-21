@@ -13,8 +13,6 @@
 #include "party_menu.h"
 #include "battle.h"
 #include "battle_main.h"
-#include "battle_controllers.h"
-#include "battle_ai_script_commands.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "constants/battle_anim.h"

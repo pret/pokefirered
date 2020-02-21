@@ -1,11 +1,8 @@
 #include "global.h"
-#include "event_data.h"
 #include "quest_log.h"
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
-#include "link.h"
-#include "link_rfu.h"
 
 void SetQuestLogObjectEventsData(struct QuestLog * questLog)
 {

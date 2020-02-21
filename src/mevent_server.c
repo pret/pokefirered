@@ -1,10 +1,6 @@
 #include "global.h"
 #include "malloc.h"
-#include "decompress.h"
-#include "overworld.h"
 #include "script.h"
-#include "battle_tower.h"
-#include "mystery_event_script.h"
 #include "mevent.h"
 #include "mevent_server.h"
 

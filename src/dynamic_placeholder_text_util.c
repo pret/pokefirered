@@ -1,6 +1,5 @@
 #include "global.h"
 #include "text.h"
-#include "dynamic_placeholder_text_util.h"
 #include "string_util.h"
 #include "constants/object_events.h"
 

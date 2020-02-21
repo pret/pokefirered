@@ -1,7 +1,6 @@
 #include "global.h"
 #include "bg.h"
 #include "palette.h"
-#include "text.h"
 #include "window.h"
 #include "text_window.h"
 #include "text_window_graphics.h"

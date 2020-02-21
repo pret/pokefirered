@@ -1,5 +1,4 @@
 #include "global.h"
-#include "new_game.h"
 #include "random.h"
 #include "main.h"
 #include "overworld.h"

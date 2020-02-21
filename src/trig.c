@@ -1,5 +1,4 @@
 #include "global.h"
-#include "trig.h"
 
 // Values of sin(x*(π/128)) as Q8.8 fixed-point numbers from x = 0 to x = 319
 const s16 gSineTable[] =

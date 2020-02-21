@@ -10,9 +10,7 @@
 #include "strings.h"
 #include "text.h"
 #include "blit.h"
-#include "event_data.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 
 extern u8 gGlyphInfo[];
 

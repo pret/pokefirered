@@ -2,7 +2,6 @@
 #include "data.h"
 #include "script.h"
 #include "overworld.h"
-#include "battle.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "party_menu.h"

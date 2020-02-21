@@ -12,7 +12,6 @@
 #include "safari_zone.h"
 #include "sound.h"
 #include "string_util.h"
-#include "strings.h"
 #include "text.h"
 #include "window.h"
 #include "constants/songs.h"

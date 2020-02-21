@@ -18,7 +18,6 @@
 #include "field_door.h"
 #include "field_effect.h"
 #include "field_screen_effect.h"
-#include "event_object_movement.h"
 #include "field_specials.h"
 #include "event_object_lock.h"
 #include "start_menu.h"

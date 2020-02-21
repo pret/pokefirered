@@ -5,7 +5,6 @@
 #include "quest_log.h"
 #include "m4a.h"
 #include "main.h"
-#include "pokemon.h"
 #include "constants/songs.h"
 #include "task.h"
 

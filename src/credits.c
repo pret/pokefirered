@@ -11,8 +11,6 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "strings.h"
-#include "menu.h"
-#include "field_weather.h"
 #include "trainer_pokemon_sprites.h"
 #include "sound.h"
 #include "constants/species.h"

@@ -19,7 +19,6 @@
 #include "battle_setup.h"
 #include "random.h"
 #include "field_player_avatar.h"
-#include "event_object_8097404.h"
 #include "vs_seeker.h"
 #include "constants/event_object_movement.h"
 #include "constants/object_events.h"

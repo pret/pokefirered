@@ -109,6 +109,7 @@ void sub_805C774(void);
 
 void FreezeObjectEvents(void);
 bool8 FreezeObjectEvent(struct ObjectEvent *);
+void UnfreezeObjectEvent(struct ObjectEvent *);
 void FreezeObjectEventsExceptOne(u8 objEventId);
 void RfuUnionObjectSetFacingDirection(u8 objectEventId, u8 direction);
 void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 invisible);

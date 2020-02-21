@@ -12,8 +12,8 @@
 #include "constants/event_objects.h"
 #include "constants/object_events.h"
 
-typedef u8 (*trainerApproachFunc)(struct ObjectEvent *, s16, s16, s16);
-typedef bool8 (*trainerSeeFunc)(u8, struct Task *, struct ObjectEvent *);
+typedef u8 (*TrainerApproachFunc)(struct ObjectEvent *, s16, s16, s16);
+typedef bool8 (*TrainerSeeFunc)(u8, struct Task *, struct ObjectEvent *);
 
 static bool8 CheckTrainer(u8 trainerObjId);
 static u8 GetTrainerApproachDistance(struct ObjectEvent * trainerObj);
@@ -50,7 +50,7 @@ static const u16 sGfx_Emoticons[] = INCBIN_U16("graphics/object_events/emoticons
 // x and y are the player's coordinates
 // Returns distance to walk if trainer has unobstructed view of player
 // Returns 0 if trainer can't see player
-static const trainerApproachFunc sDirectionalApproachDistanceFuncs[] = {
+static const TrainerApproachFunc sDirectionalApproachDistanceFuncs[] = {
     GetTrainerApproachDistanceSouth,
     GetTrainerApproachDistanceNorth,
     GetTrainerApproachDistanceWest,
@@ -60,7 +60,7 @@ static const trainerApproachFunc sDirectionalApproachDistanceFuncs[] = {
 // bool8 func(u8 taskId, struct Task * task, struct ObjectEvent * trainerObj)
 // Returns TRUE to run the next func immediately
 // Returns FALSE to delay the next func to the next frame
-static const trainerSeeFunc sTrainerSeeFuncList[] = {
+static const TrainerSeeFunc sTrainerSeeFuncList[] = {
     TrainerSeeFunc_Dummy,
     TrainerSeeFunc_StartExclMark,
     TrainerSeeFunc_WaitExclMark,
@@ -78,7 +78,7 @@ static const trainerSeeFunc sTrainerSeeFuncList[] = {
     TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown
 };
 
-static const trainerSeeFunc sTrainerSeeFuncList2[] = {
+static const TrainerSeeFunc sTrainerSeeFuncList2[] = {
     TrainerSeeFunc_TrainerInAshFacesPlayer,
     TrainerSeeFunc_BeginJumpOutOfAsh,
     TrainerSeeFunc_WaitJumpOutOfAsh,
@@ -299,7 +299,7 @@ static bool8 TrainerSeeFunc_StartExclMark(u8 taskId, struct Task * task, struct 
     else
     {
         ObjectEventGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
+        FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
         action = GetFaceDirectionMovementAction(trainerObj->facingDirection);
         ObjectEventSetHeldMovement(trainerObj, action);
         task->tFuncId++;
@@ -309,7 +309,7 @@ static bool8 TrainerSeeFunc_StartExclMark(u8 taskId, struct Task * task, struct 
 
 static bool8 TrainerSeeFunc_WaitExclMark(u8 taskId, struct Task * task, struct ObjectEvent * trainerObj)
 {
-    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON_1))
+    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
     {
         return FALSE;
     }
@@ -475,7 +475,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveUp(u8 taskId, stru
     else
     {
         ObjectEventGetLocalIdAndMap(trainerObj, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
-        FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
+        FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
         task->tData5 = 0;
         task->tFuncId++;
     }
@@ -487,7 +487,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown(u8 taskId, st
     u8 specialObjectId;
     TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &specialObjectId);
 
-    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON_1))
+    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
         return FALSE;
 
     if (ObjectEventIsMovementOverridden(&gObjectEvents[specialObjectId]) && !ObjectEventClearHeldMovementIfFinished(&gObjectEvents[specialObjectId]))
@@ -661,7 +661,7 @@ u8 FldEff_ExclamationMarkIcon1(void)
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON_1, 0);
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON, 0);
 
     return 0;
 }
@@ -701,7 +701,7 @@ u8 FldEff_QuestionMarkIcon(void)
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON_2, 4);
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON, 4);
 
     return 0;
 }

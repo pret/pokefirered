@@ -35,7 +35,7 @@ gUnknown_81D96AC:: @ 81D96AC
 	.4byte gFldEffScript_NpcflyOut
 	.4byte gFldEffScript_UseFly
 	.4byte gFldEffScript_FlyIn
-	.4byte gFldEffScript_ExclamationMarkIcon2
+	.4byte gFldEffScript_QuestionMarkIcon
 	.4byte gFldEffScript_FeetInFlowingWater
 	.4byte gFldEffScript_BikeTireTracks
 	.4byte gFldEffScript_SandDisguise
@@ -203,7 +203,7 @@ gFldEffScript_FlyIn:: @ 81D98BE
 	callnative FldEff_FlyIn
 	end 
 
-gFldEffScript_ExclamationMarkIcon2:: @ 81D98C4
+gFldEffScript_QuestionMarkIcon:: @ 81D98C4
 	callnative FldEff_QuestionMarkIcon
 	end 
 

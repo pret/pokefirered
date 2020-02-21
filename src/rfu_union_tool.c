@@ -1,7 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "event_object_movement.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "event_object_8097404.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"

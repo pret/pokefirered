@@ -13,7 +13,7 @@
 #include "metatile_behavior.h"
 #include "quest_log.h"
 #include "link.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "sound.h"
 #include "field_door.h"
 #include "field_effect.h"

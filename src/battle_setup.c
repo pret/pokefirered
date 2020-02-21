@@ -13,7 +13,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "event_data.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "metatile_behavior.h"
 #include "event_scripts.h"
 #include "fldeff.h"

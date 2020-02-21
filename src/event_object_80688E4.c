@@ -1,5 +1,5 @@
 #include "global.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_ground_effect.h"
@@ -204,6 +204,7 @@ void sub_8068BBC(struct Sprite *sprite, u8 direction)
     sprite->tStepNo = 0;
 }
 
+// used by an_walk_any_2
 bool8 sub_8068BCC(struct Sprite *sprite)
 {
     if (!(sprite->tDelay & 1))

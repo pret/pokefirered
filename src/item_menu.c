@@ -5,7 +5,7 @@
 #include "berry_pouch.h"
 #include "decompress.h"
 #include "event_scripts.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "help_system.h"

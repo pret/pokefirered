@@ -20,7 +20,7 @@
 #include "random.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "event_object_8097404.h"
 #include "vs_seeker.h"
 #include "constants/movement_commands.h"

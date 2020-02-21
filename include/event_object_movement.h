@@ -107,6 +107,15 @@ u8 sub_8063FB0(u8 direction);
 void OverrideTemplateCoordsForObjectEvent(struct ObjectEvent *);
 void sub_805C774(void);
 
+void FreezeObjectEvents(void);
+bool8 FreezeObjectEvent(struct ObjectEvent *);
+void FreezeObjectEventsExceptOne(u8 objEventId);
+void RfuUnionObjectSetFacingDirection(u8 objectEventId, u8 direction);
+void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 invisible);
+bool32 RfuUnionObjectIsInvisible(u8 objectEventId);
+void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo);
+bool32 RfuUnionObjectIsWarping(u8 objectEventId);
+
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];

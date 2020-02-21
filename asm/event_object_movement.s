@@ -11933,8 +11933,8 @@ get_go_faster_image_anim_num: @ 8063460
 _0806346C: .4byte gUnknown_83A6427
 	thumb_func_end get_go_faster_image_anim_num
 
-	thumb_func_start sub_8063470
-sub_8063470: @ 8063470
+	thumb_func_start MovementActionFunc_x03_4
+MovementActionFunc_x03_4: @ 8063470
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0806347C @ =gUnknown_83A6430
@@ -11943,7 +11943,7 @@ sub_8063470: @ 8063470
 	bx lr
 	.align 2, 0
 _0806347C: .4byte gUnknown_83A6430
-	thumb_func_end sub_8063470
+	thumb_func_end MovementActionFunc_x03_4
 
 	thumb_func_start sub_8063480
 sub_8063480: @ 8063480
@@ -14503,45 +14503,45 @@ FaceDirection: @ 80645F4
 	bx r0
 	thumb_func_end FaceDirection
 
-	thumb_func_start sub_8064638
-sub_8064638: @ 8064638
+	thumb_func_start MovementActionFunc_x00_0
+MovementActionFunc_x00_0: @ 8064638
 	push {lr}
 	movs r2, 0x1
 	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064638
+	thumb_func_end MovementActionFunc_x00_0
 
-	thumb_func_start sub_8064648
-sub_8064648: @ 8064648
+	thumb_func_start MovementActionFunc_x01_0
+MovementActionFunc_x01_0: @ 8064648
 	push {lr}
 	movs r2, 0x2
 	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064648
+	thumb_func_end MovementActionFunc_x01_0
 
-	thumb_func_start sub_8064658
-sub_8064658: @ 8064658
+	thumb_func_start MovementActionFunc_x02_0
+MovementActionFunc_x02_0: @ 8064658
 	push {lr}
 	movs r2, 0x3
 	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064658
+	thumb_func_end MovementActionFunc_x02_0
 
-	thumb_func_start sub_8064668
-sub_8064668: @ 8064668
+	thumb_func_start MovementActionFunc_x03_0
+MovementActionFunc_x03_0: @ 8064668
 	push {lr}
 	movs r2, 0x4
 	bl FaceDirection
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064668
+	thumb_func_end MovementActionFunc_x03_0
 
 	thumb_func_start sub_8064678
 sub_8064678: @ 8064678
@@ -14934,8 +14934,8 @@ _08064962:
 	bx r1
 	thumb_func_end sub_8064930
 
-	thumb_func_start sub_8064968
-sub_8064968: @ 8064968
+	thumb_func_start MovementActionFunc_x9B_0
+MovementActionFunc_x9B_0: @ 8064968
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14943,16 +14943,16 @@ sub_8064968: @ 8064968
 	bl sub_8064904
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064988
+	bl MovementActionFunc_x9B_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064968
+	thumb_func_end MovementActionFunc_x9B_0
 
-	thumb_func_start sub_8064988
-sub_8064988: @ 8064988
+	thumb_func_start MovementActionFunc_x9B_1
+MovementActionFunc_x9B_1: @ 8064988
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064930
@@ -14969,10 +14969,10 @@ _080649A0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064988
+	thumb_func_end MovementActionFunc_x9B_1
 
-	thumb_func_start sub_80649A8
-sub_80649A8: @ 80649A8
+	thumb_func_start MovementActionFunc_x9C_0
+MovementActionFunc_x9C_0: @ 80649A8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -14980,16 +14980,16 @@ sub_80649A8: @ 80649A8
 	bl sub_8064904
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80649C8
+	bl MovementActionFunc_x9C_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80649A8
+	thumb_func_end MovementActionFunc_x9C_0
 
-	thumb_func_start sub_80649C8
-sub_80649C8: @ 80649C8
+	thumb_func_start MovementActionFunc_x9C_1
+MovementActionFunc_x9C_1: @ 80649C8
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064930
@@ -15006,10 +15006,10 @@ _080649E0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80649C8
+	thumb_func_end MovementActionFunc_x9C_1
 
-	thumb_func_start sub_80649E8
-sub_80649E8: @ 80649E8
+	thumb_func_start MovementActionFunc_x9D_0
+MovementActionFunc_x9D_0: @ 80649E8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15017,16 +15017,16 @@ sub_80649E8: @ 80649E8
 	bl sub_8064904
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064A08
+	bl MovementActionFunc_x9D_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80649E8
+	thumb_func_end MovementActionFunc_x9D_0
 
-	thumb_func_start sub_8064A08
-sub_8064A08: @ 8064A08
+	thumb_func_start MovementActionFunc_x9D_1
+MovementActionFunc_x9D_1: @ 8064A08
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064930
@@ -15043,10 +15043,10 @@ _08064A20:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064A08
+	thumb_func_end MovementActionFunc_x9D_1
 
-	thumb_func_start sub_8064A28
-sub_8064A28: @ 8064A28
+	thumb_func_start MovementActionFunc_x9E_0
+MovementActionFunc_x9E_0: @ 8064A28
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15054,16 +15054,16 @@ sub_8064A28: @ 8064A28
 	bl sub_8064904
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064A48
+	bl MovementActionFunc_x9E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064A28
+	thumb_func_end MovementActionFunc_x9E_0
 
-	thumb_func_start sub_8064A48
-sub_8064A48: @ 8064A48
+	thumb_func_start MovementActionFunc_x9E_1
+MovementActionFunc_x9E_1: @ 8064A48
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064930
@@ -15080,10 +15080,10 @@ _08064A60:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064A48
+	thumb_func_end MovementActionFunc_x9E_1
 
-	thumb_func_start sub_8064A68
-sub_8064A68: @ 8064A68
+	thumb_func_start MovementActionFunc_x08_0
+MovementActionFunc_x08_0: @ 8064A68
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15091,16 +15091,16 @@ sub_8064A68: @ 8064A68
 	bl sub_8064830
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064A88
+	bl MovementActionFunc_x08_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064A68
+	thumb_func_end MovementActionFunc_x08_0
 
-	thumb_func_start sub_8064A88
-sub_8064A88: @ 8064A88
+	thumb_func_start MovementActionFunc_x08_1
+MovementActionFunc_x08_1: @ 8064A88
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -15117,10 +15117,10 @@ _08064AA0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064A88
+	thumb_func_end MovementActionFunc_x08_1
 
-	thumb_func_start sub_8064AA8
-sub_8064AA8: @ 8064AA8
+	thumb_func_start MovementActionFunc_x09_0
+MovementActionFunc_x09_0: @ 8064AA8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15128,16 +15128,16 @@ sub_8064AA8: @ 8064AA8
 	bl sub_8064830
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064AC8
+	bl MovementActionFunc_x09_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064AA8
+	thumb_func_end MovementActionFunc_x09_0
 
-	thumb_func_start sub_8064AC8
-sub_8064AC8: @ 8064AC8
+	thumb_func_start MovementActionFunc_x09_1
+MovementActionFunc_x09_1: @ 8064AC8
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -15154,10 +15154,10 @@ _08064AE0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064AC8
+	thumb_func_end MovementActionFunc_x09_1
 
-	thumb_func_start sub_8064AE8
-sub_8064AE8: @ 8064AE8
+	thumb_func_start MovementActionFunc_x0A_0
+MovementActionFunc_x0A_0: @ 8064AE8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15165,16 +15165,16 @@ sub_8064AE8: @ 8064AE8
 	bl sub_8064830
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064B08
+	bl MovementActionFunc_x0A_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064AE8
+	thumb_func_end MovementActionFunc_x0A_0
 
-	thumb_func_start sub_8064B08
-sub_8064B08: @ 8064B08
+	thumb_func_start MovementActionFunc_x0A_1
+MovementActionFunc_x0A_1: @ 8064B08
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -15191,10 +15191,10 @@ _08064B20:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064B08
+	thumb_func_end MovementActionFunc_x0A_1
 
-	thumb_func_start sub_8064B28
-sub_8064B28: @ 8064B28
+	thumb_func_start MovementActionFunc_x0B_0
+MovementActionFunc_x0B_0: @ 8064B28
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15202,16 +15202,16 @@ sub_8064B28: @ 8064B28
 	bl sub_8064830
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064B48
+	bl MovementActionFunc_x0B_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064B28
+	thumb_func_end MovementActionFunc_x0B_0
 
-	thumb_func_start sub_8064B48
-sub_8064B48: @ 8064B48
+	thumb_func_start MovementActionFunc_x0B_1
+MovementActionFunc_x0B_1: @ 8064B48
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -15228,7 +15228,7 @@ _08064B60:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064B48
+	thumb_func_end MovementActionFunc_x0B_1
 
 	thumb_func_start sub_8064B68
 sub_8064B68: @ 8064B68
@@ -15341,8 +15341,8 @@ _08064C36:
 	bx r1
 	thumb_func_end sub_8064C04
 
-	thumb_func_start sub_8064C3C
-sub_8064C3C: @ 8064C3C
+	thumb_func_start MovementActionFunc_x0D_0
+MovementActionFunc_x0D_0: @ 8064C3C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15350,16 +15350,16 @@ sub_8064C3C: @ 8064C3C
 	bl sub_8064BD8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064C5C
+	bl MovementActionFunc_x0D_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064C3C
+	thumb_func_end MovementActionFunc_x0D_0
 
-	thumb_func_start sub_8064C5C
-sub_8064C5C: @ 8064C5C
+	thumb_func_start MovementActionFunc_x0D_1
+MovementActionFunc_x0D_1: @ 8064C5C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064C04
@@ -15376,10 +15376,10 @@ _08064C74:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064C5C
+	thumb_func_end MovementActionFunc_x0D_1
 
-	thumb_func_start sub_8064C7C
-sub_8064C7C: @ 8064C7C
+	thumb_func_start MovementActionFunc_x0C_0
+MovementActionFunc_x0C_0: @ 8064C7C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15387,16 +15387,16 @@ sub_8064C7C: @ 8064C7C
 	bl sub_8064BD8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064C9C
+	bl MovementActionFunc_x0C_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064C7C
+	thumb_func_end MovementActionFunc_x0C_0
 
-	thumb_func_start sub_8064C9C
-sub_8064C9C: @ 8064C9C
+	thumb_func_start MovementActionFunc_x0C_1
+MovementActionFunc_x0C_1: @ 8064C9C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064C04
@@ -15413,10 +15413,10 @@ _08064CB4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064C9C
+	thumb_func_end MovementActionFunc_x0C_1
 
-	thumb_func_start sub_8064CBC
-sub_8064CBC: @ 8064CBC
+	thumb_func_start MovementActionFunc_x0E_0
+MovementActionFunc_x0E_0: @ 8064CBC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15424,16 +15424,16 @@ sub_8064CBC: @ 8064CBC
 	bl sub_8064BD8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064CDC
+	bl MovementActionFunc_x0E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064CBC
+	thumb_func_end MovementActionFunc_x0E_0
 
-	thumb_func_start sub_8064CDC
-sub_8064CDC: @ 8064CDC
+	thumb_func_start MovementActionFunc_x0E_1
+MovementActionFunc_x0E_1: @ 8064CDC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064C04
@@ -15450,10 +15450,10 @@ _08064CF4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064CDC
+	thumb_func_end MovementActionFunc_x0E_1
 
-	thumb_func_start sub_8064CFC
-sub_8064CFC: @ 8064CFC
+	thumb_func_start MovementActionFunc_x0F_0
+MovementActionFunc_x0F_0: @ 8064CFC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15461,16 +15461,16 @@ sub_8064CFC: @ 8064CFC
 	bl sub_8064BD8
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064D1C
+	bl MovementActionFunc_x0F_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064CFC
+	thumb_func_end MovementActionFunc_x0F_0
 
-	thumb_func_start sub_8064D1C
-sub_8064D1C: @ 8064D1C
+	thumb_func_start MovementActionFunc_x0F_1
+MovementActionFunc_x0F_1: @ 8064D1C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8064C04
@@ -15487,10 +15487,10 @@ _08064D34:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064D1C
+	thumb_func_end MovementActionFunc_x0F_1
 
-	thumb_func_start sub_8064D3C
-sub_8064D3C: @ 8064D3C
+	thumb_func_start MovementActionFunc_x10_0
+MovementActionFunc_x10_0: @ 8064D3C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15499,16 +15499,16 @@ sub_8064D3C: @ 8064D3C
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064D5C
+	bl MovementActionFunc_x10_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064D3C
+	thumb_func_end MovementActionFunc_x10_0
 
-	thumb_func_start sub_8064D5C
-sub_8064D5C: @ 8064D5C
+	thumb_func_start MovementActionFunc_x10_1
+MovementActionFunc_x10_1: @ 8064D5C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -15525,10 +15525,10 @@ _08064D74:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064D5C
+	thumb_func_end MovementActionFunc_x10_1
 
-	thumb_func_start sub_8064D7C
-sub_8064D7C: @ 8064D7C
+	thumb_func_start MovementActionFunc_x11_0
+MovementActionFunc_x11_0: @ 8064D7C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15537,16 +15537,16 @@ sub_8064D7C: @ 8064D7C
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064D9C
+	bl MovementActionFunc_x11_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064D7C
+	thumb_func_end MovementActionFunc_x11_0
 
-	thumb_func_start sub_8064D9C
-sub_8064D9C: @ 8064D9C
+	thumb_func_start MovementActionFunc_x11_1
+MovementActionFunc_x11_1: @ 8064D9C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -15563,10 +15563,10 @@ _08064DB4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064D9C
+	thumb_func_end MovementActionFunc_x11_1
 
-	thumb_func_start sub_8064DBC
-sub_8064DBC: @ 8064DBC
+	thumb_func_start MovementActionFunc_x12_0
+MovementActionFunc_x12_0: @ 8064DBC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15575,16 +15575,16 @@ sub_8064DBC: @ 8064DBC
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064DDC
+	bl MovementActionFunc_x12_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064DBC
+	thumb_func_end MovementActionFunc_x12_0
 
-	thumb_func_start sub_8064DDC
-sub_8064DDC: @ 8064DDC
+	thumb_func_start MovementActionFunc_x12_1
+MovementActionFunc_x12_1: @ 8064DDC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -15601,10 +15601,10 @@ _08064DF4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064DDC
+	thumb_func_end MovementActionFunc_x12_1
 
-	thumb_func_start sub_8064DFC
-sub_8064DFC: @ 8064DFC
+	thumb_func_start MovementActionFunc_x13_0
+MovementActionFunc_x13_0: @ 8064DFC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -15613,16 +15613,16 @@ sub_8064DFC: @ 8064DFC
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8064E1C
+	bl MovementActionFunc_x13_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064DFC
+	thumb_func_end MovementActionFunc_x13_0
 
-	thumb_func_start sub_8064E1C
-sub_8064E1C: @ 8064E1C
+	thumb_func_start MovementActionFunc_x13_1
+MovementActionFunc_x13_1: @ 8064E1C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -15639,7 +15639,7 @@ _08064E34:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064E1C
+	thumb_func_end MovementActionFunc_x13_1
 
 	thumb_func_start sub_8064E3C
 sub_8064E3C: @ 8064E3C
@@ -15966,8 +15966,8 @@ _080650A0:
 	bx r1
 	thumb_func_end sub_8065058
 
-	thumb_func_start sub_80650A8
-sub_80650A8: @ 80650A8
+	thumb_func_start MovementActionFunc_x14_0
+MovementActionFunc_x14_0: @ 80650A8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -15980,17 +15980,17 @@ sub_80650A8: @ 80650A8
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80650D4
+	bl MovementActionFunc_x14_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80650A8
+	thumb_func_end MovementActionFunc_x14_0
 
-	thumb_func_start sub_80650D4
-sub_80650D4: @ 80650D4
+	thumb_func_start MovementActionFunc_x14_1
+MovementActionFunc_x14_1: @ 80650D4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16013,10 +16013,10 @@ _080650F8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80650D4
+	thumb_func_end MovementActionFunc_x14_1
 
-	thumb_func_start sub_8065100
-sub_8065100: @ 8065100
+	thumb_func_start MovementActionFunc_x15_0
+MovementActionFunc_x15_0: @ 8065100
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -16029,17 +16029,17 @@ sub_8065100: @ 8065100
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806512C
+	bl MovementActionFunc_x15_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065100
+	thumb_func_end MovementActionFunc_x15_0
 
-	thumb_func_start sub_806512C
-sub_806512C: @ 806512C
+	thumb_func_start MovementActionFunc_x15_1
+MovementActionFunc_x15_1: @ 806512C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16062,10 +16062,10 @@ _08065150:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806512C
+	thumb_func_end MovementActionFunc_x15_1
 
-	thumb_func_start sub_8065158
-sub_8065158: @ 8065158
+	thumb_func_start MovementActionFunc_x16_0
+MovementActionFunc_x16_0: @ 8065158
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -16078,17 +16078,17 @@ sub_8065158: @ 8065158
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065184
+	bl MovementActionFunc_x16_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065158
+	thumb_func_end MovementActionFunc_x16_0
 
-	thumb_func_start sub_8065184
-sub_8065184: @ 8065184
+	thumb_func_start MovementActionFunc_x16_1
+MovementActionFunc_x16_1: @ 8065184
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16111,10 +16111,10 @@ _080651A8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065184
+	thumb_func_end MovementActionFunc_x16_1
 
-	thumb_func_start sub_80651B0
-sub_80651B0: @ 80651B0
+	thumb_func_start MovementActionFunc_x17_0
+MovementActionFunc_x17_0: @ 80651B0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -16127,17 +16127,17 @@ sub_80651B0: @ 80651B0
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80651DC
+	bl MovementActionFunc_x17_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80651B0
+	thumb_func_end MovementActionFunc_x17_0
 
-	thumb_func_start sub_80651DC
-sub_80651DC: @ 80651DC
+	thumb_func_start MovementActionFunc_x17_1
+MovementActionFunc_x17_1: @ 80651DC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16160,7 +16160,7 @@ _08065200:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80651DC
+	thumb_func_end MovementActionFunc_x17_1
 
 	thumb_func_start sub_8065208
 sub_8065208: @ 8065208
@@ -16170,8 +16170,8 @@ sub_8065208: @ 8065208
 	bx lr
 	thumb_func_end sub_8065208
 
-	thumb_func_start sub_8065210
-sub_8065210: @ 8065210
+	thumb_func_start MovementActionFunc_x18_1
+MovementActionFunc_x18_1: @ 8065210
 	push {lr}
 	ldrh r0, [r1, 0x34]
 	subs r0, 0x1
@@ -16188,10 +16188,10 @@ _08065222:
 _08065228:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065210
+	thumb_func_end MovementActionFunc_x18_1
 
-	thumb_func_start sub_806522C
-sub_806522C: @ 806522C
+	thumb_func_start MovementActionFunc_x18_0
+MovementActionFunc_x18_0: @ 806522C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16200,16 +16200,16 @@ sub_806522C: @ 806522C
 	bl sub_8065208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8065210
+	bl MovementActionFunc_x18_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806522C
+	thumb_func_end MovementActionFunc_x18_0
 
-	thumb_func_start sub_806524C
-sub_806524C: @ 806524C
+	thumb_func_start MovementActionFunc_x19_0
+MovementActionFunc_x19_0: @ 806524C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16218,16 +16218,16 @@ sub_806524C: @ 806524C
 	bl sub_8065208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8065210
+	bl MovementActionFunc_x18_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806524C
+	thumb_func_end MovementActionFunc_x19_0
 
-	thumb_func_start sub_806526C
-sub_806526C: @ 806526C
+	thumb_func_start MovementActionFunc_x1A_0
+MovementActionFunc_x1A_0: @ 806526C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16236,16 +16236,16 @@ sub_806526C: @ 806526C
 	bl sub_8065208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8065210
+	bl MovementActionFunc_x18_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806526C
+	thumb_func_end MovementActionFunc_x1A_0
 
-	thumb_func_start sub_806528C
-sub_806528C: @ 806528C
+	thumb_func_start MovementActionFunc_x1B_0
+MovementActionFunc_x1B_0: @ 806528C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16254,16 +16254,16 @@ sub_806528C: @ 806528C
 	bl sub_8065208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8065210
+	bl MovementActionFunc_x18_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806528C
+	thumb_func_end MovementActionFunc_x1B_0
 
-	thumb_func_start sub_80652AC
-sub_80652AC: @ 80652AC
+	thumb_func_start MovementActionFunc_x1C_0
+MovementActionFunc_x1C_0: @ 80652AC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16272,16 +16272,16 @@ sub_80652AC: @ 80652AC
 	bl sub_8065208
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8065210
+	bl MovementActionFunc_x18_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80652AC
+	thumb_func_end MovementActionFunc_x1C_0
 
-	thumb_func_start sub_80652CC
-sub_80652CC: @ 80652CC
+	thumb_func_start MovementActionFunc_x1D_0
+MovementActionFunc_x1D_0: @ 80652CC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16290,16 +16290,16 @@ sub_80652CC: @ 80652CC
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80652EC
+	bl MovementActionFunc_x1D_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80652CC
+	thumb_func_end MovementActionFunc_x1D_0
 
-	thumb_func_start sub_80652EC
-sub_80652EC: @ 80652EC
+	thumb_func_start MovementActionFunc_x1D_1
+MovementActionFunc_x1D_1: @ 80652EC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -16316,10 +16316,10 @@ _08065304:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80652EC
+	thumb_func_end MovementActionFunc_x1D_1
 
-	thumb_func_start sub_806530C
-sub_806530C: @ 806530C
+	thumb_func_start MovementActionFunc_x1E_0
+MovementActionFunc_x1E_0: @ 806530C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16328,16 +16328,16 @@ sub_806530C: @ 806530C
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806532C
+	bl MovementActionFunc_x1E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806530C
+	thumb_func_end MovementActionFunc_x1E_0
 
-	thumb_func_start sub_806532C
-sub_806532C: @ 806532C
+	thumb_func_start MovementActionFunc_x1E_1
+MovementActionFunc_x1E_1: @ 806532C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -16354,10 +16354,10 @@ _08065344:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806532C
+	thumb_func_end MovementActionFunc_x1E_1
 
-	thumb_func_start sub_806534C
-sub_806534C: @ 806534C
+	thumb_func_start MovementActionFunc_x1F_0
+MovementActionFunc_x1F_0: @ 806534C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16366,16 +16366,16 @@ sub_806534C: @ 806534C
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806536C
+	bl MovementActionFunc_x1F_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806534C
+	thumb_func_end MovementActionFunc_x1F_0
 
-	thumb_func_start sub_806536C
-sub_806536C: @ 806536C
+	thumb_func_start MovementActionFunc_x1F_1
+MovementActionFunc_x1F_1: @ 806536C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -16392,10 +16392,10 @@ _08065384:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806536C
+	thumb_func_end MovementActionFunc_x1F_1
 
-	thumb_func_start sub_806538C
-sub_806538C: @ 806538C
+	thumb_func_start MovementActionFunc_x20_0
+MovementActionFunc_x20_0: @ 806538C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16404,16 +16404,16 @@ sub_806538C: @ 806538C
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80653AC
+	bl MovementActionFunc_x20_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806538C
+	thumb_func_end MovementActionFunc_x20_0
 
-	thumb_func_start sub_80653AC
-sub_80653AC: @ 80653AC
+	thumb_func_start MovementActionFunc_x20_1
+MovementActionFunc_x20_1: @ 80653AC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -16430,7 +16430,7 @@ _080653C4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80653AC
+	thumb_func_end MovementActionFunc_x20_1
 
 	thumb_func_start sub_80653CC
 sub_80653CC: @ 80653CC
@@ -16457,8 +16457,8 @@ _080653F0:
 	bx r1
 	thumb_func_end sub_80653CC
 
-	thumb_func_start sub_80653F8
-sub_80653F8: @ 80653F8
+	thumb_func_start MovementActionFunc_xA0_0
+MovementActionFunc_xA0_0: @ 80653F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16482,16 +16482,16 @@ _0806541A:
 	bl sub_8064678
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065438
+	bl MovementActionFunc_xA0_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80653F8
+	thumb_func_end MovementActionFunc_xA0_0
 
-	thumb_func_start sub_8065438
-sub_8065438: @ 8065438
+	thumb_func_start MovementActionFunc_xA0_1
+MovementActionFunc_xA0_1: @ 8065438
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16513,10 +16513,10 @@ _0806545C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065438
+	thumb_func_end MovementActionFunc_xA0_1
 
-	thumb_func_start sub_8065464
-sub_8065464: @ 8065464
+	thumb_func_start MovementActionFunc_xA1_0
+MovementActionFunc_xA1_0: @ 8065464
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16540,16 +16540,16 @@ _08065486:
 	bl sub_8064678
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80654A4
+	bl MovementActionFunc_xA1_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065464
+	thumb_func_end MovementActionFunc_xA1_0
 
-	thumb_func_start sub_80654A4
-sub_80654A4: @ 80654A4
+	thumb_func_start MovementActionFunc_xA1_1
+MovementActionFunc_xA1_1: @ 80654A4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16571,10 +16571,10 @@ _080654C8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80654A4
+	thumb_func_end MovementActionFunc_xA1_1
 
-	thumb_func_start sub_80654D0
-sub_80654D0: @ 80654D0
+	thumb_func_start MovementActionFunc_xA2_0
+MovementActionFunc_xA2_0: @ 80654D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16598,16 +16598,16 @@ _080654F2:
 	bl sub_8064678
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065510
+	bl MovementActionFunc_xA2_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80654D0
+	thumb_func_end MovementActionFunc_xA2_0
 
-	thumb_func_start sub_8065510
-sub_8065510: @ 8065510
+	thumb_func_start MovementActionFunc_xA2_1
+MovementActionFunc_xA2_1: @ 8065510
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16629,10 +16629,10 @@ _08065534:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065510
+	thumb_func_end MovementActionFunc_xA2_1
 
-	thumb_func_start sub_806553C
-sub_806553C: @ 806553C
+	thumb_func_start MovementActionFunc_xA3_0
+MovementActionFunc_xA3_0: @ 806553C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16656,16 +16656,16 @@ _0806555E:
 	bl sub_8064678
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806557C
+	bl MovementActionFunc_xA3_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806553C
+	thumb_func_end MovementActionFunc_xA3_0
 
-	thumb_func_start sub_806557C
-sub_806557C: @ 806557C
+	thumb_func_start MovementActionFunc_xA3_1
+MovementActionFunc_xA3_1: @ 806557C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -16687,7 +16687,7 @@ _080655A0:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806557C
+	thumb_func_end MovementActionFunc_xA3_1
 
 	thumb_func_start sub_80655A8
 sub_80655A8: @ 80655A8
@@ -16713,8 +16713,8 @@ sub_80655A8: @ 80655A8
 	bx r0
 	thumb_func_end sub_80655A8
 
-	thumb_func_start sub_80655D4
-sub_80655D4: @ 80655D4
+	thumb_func_start MovementActionFunc_x04_0
+MovementActionFunc_x04_0: @ 80655D4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16741,10 +16741,10 @@ _080655F6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80655D4
+	thumb_func_end MovementActionFunc_x04_0
 
-	thumb_func_start sub_8065610
-sub_8065610: @ 8065610
+	thumb_func_start MovementActionFunc_x05_0
+MovementActionFunc_x05_0: @ 8065610
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16771,10 +16771,10 @@ _08065632:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065610
+	thumb_func_end MovementActionFunc_x05_0
 
-	thumb_func_start sub_806564C
-sub_806564C: @ 806564C
+	thumb_func_start MovementActionFunc_x06_0
+MovementActionFunc_x06_0: @ 806564C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16801,10 +16801,10 @@ _0806566E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806564C
+	thumb_func_end MovementActionFunc_x06_0
 
-	thumb_func_start sub_8065688
-sub_8065688: @ 8065688
+	thumb_func_start MovementActionFunc_x07_0
+MovementActionFunc_x07_0: @ 8065688
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16831,7 +16831,7 @@ _080656AA:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065688
+	thumb_func_end MovementActionFunc_x07_0
 
 	thumb_func_start sub_80656C4
 sub_80656C4: @ 80656C4
@@ -16871,8 +16871,8 @@ sub_80656C4: @ 80656C4
 	bx r0
 	thumb_func_end sub_80656C4
 
-	thumb_func_start sub_806570C
-sub_806570C: @ 806570C
+	thumb_func_start MovementActionFunc_x25_1
+MovementActionFunc_x25_1: @ 806570C
 	push {lr}
 	ldrh r0, [r1, 0x34]
 	subs r0, 0x1
@@ -16895,10 +16895,10 @@ _0806571E:
 _08065730:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806570C
+	thumb_func_end MovementActionFunc_x25_1
 
-	thumb_func_start sub_8065734
-sub_8065734: @ 8065734
+	thumb_func_start MovementActionFunc_x21_1
+MovementActionFunc_x21_1: @ 8065734
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -16923,16 +16923,16 @@ sub_8065734: @ 8065734
 _0806575E:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065734
+	thumb_func_end MovementActionFunc_x21_1
 
-	thumb_func_start sub_8065770
-sub_8065770: @ 8065770
+	thumb_func_start MovementActionFunc_x21_0
+MovementActionFunc_x21_0: @ 8065770
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -16950,17 +16950,17 @@ sub_8065770: @ 8065770
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065734
+	bl MovementActionFunc_x21_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065770
+	thumb_func_end MovementActionFunc_x21_0
 
-	thumb_func_start sub_80657A8
-sub_80657A8: @ 80657A8
+	thumb_func_start MovementActionFunc_x22_0
+MovementActionFunc_x22_0: @ 80657A8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -16978,17 +16978,17 @@ sub_80657A8: @ 80657A8
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065734
+	bl MovementActionFunc_x21_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80657A8
+	thumb_func_end MovementActionFunc_x22_0
 
-	thumb_func_start sub_80657E0
-sub_80657E0: @ 80657E0
+	thumb_func_start MovementActionFunc_x23_0
+MovementActionFunc_x23_0: @ 80657E0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17006,17 +17006,17 @@ sub_80657E0: @ 80657E0
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065734
+	bl MovementActionFunc_x21_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80657E0
+	thumb_func_end MovementActionFunc_x23_0
 
-	thumb_func_start sub_8065818
-sub_8065818: @ 8065818
+	thumb_func_start MovementActionFunc_x24_0
+MovementActionFunc_x24_0: @ 8065818
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17034,17 +17034,17 @@ sub_8065818: @ 8065818
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065734
+	bl MovementActionFunc_x21_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065818
+	thumb_func_end MovementActionFunc_x24_0
 
-	thumb_func_start sub_8065850
-sub_8065850: @ 8065850
+	thumb_func_start MovementActionFunc_x25_0
+MovementActionFunc_x25_0: @ 8065850
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17062,17 +17062,17 @@ sub_8065850: @ 8065850
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065850
+	thumb_func_end MovementActionFunc_x25_0
 
-	thumb_func_start sub_8065888
-sub_8065888: @ 8065888
+	thumb_func_start MovementActionFunc_x26_0
+MovementActionFunc_x26_0: @ 8065888
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17090,17 +17090,17 @@ sub_8065888: @ 8065888
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065888
+	thumb_func_end MovementActionFunc_x26_0
 
-	thumb_func_start sub_80658C0
-sub_80658C0: @ 80658C0
+	thumb_func_start MovementActionFunc_x27_0
+MovementActionFunc_x27_0: @ 80658C0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17118,17 +17118,17 @@ sub_80658C0: @ 80658C0
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80658C0
+	thumb_func_end MovementActionFunc_x27_0
 
-	thumb_func_start sub_80658F8
-sub_80658F8: @ 80658F8
+	thumb_func_start MovementActionFunc_x28_0
+MovementActionFunc_x28_0: @ 80658F8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17146,17 +17146,17 @@ sub_80658F8: @ 80658F8
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80658F8
+	thumb_func_end MovementActionFunc_x28_0
 
-	thumb_func_start sub_8065930
-sub_8065930: @ 8065930
+	thumb_func_start MovementActionFunc_x29_0
+MovementActionFunc_x29_0: @ 8065930
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17174,17 +17174,17 @@ sub_8065930: @ 8065930
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065930
+	thumb_func_end MovementActionFunc_x29_0
 
-	thumb_func_start sub_8065968
-sub_8065968: @ 8065968
+	thumb_func_start MovementActionFunc_x2A_0
+MovementActionFunc_x2A_0: @ 8065968
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17202,17 +17202,17 @@ sub_8065968: @ 8065968
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065968
+	thumb_func_end MovementActionFunc_x2A_0
 
-	thumb_func_start sub_80659A0
-sub_80659A0: @ 80659A0
+	thumb_func_start MovementActionFunc_x2B_0
+MovementActionFunc_x2B_0: @ 80659A0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17230,17 +17230,17 @@ sub_80659A0: @ 80659A0
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80659A0
+	thumb_func_end MovementActionFunc_x2B_0
 
-	thumb_func_start sub_80659D8
-sub_80659D8: @ 80659D8
+	thumb_func_start MovementActionFunc_x2C_0
+MovementActionFunc_x2C_0: @ 80659D8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17258,17 +17258,17 @@ sub_80659D8: @ 80659D8
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80659D8
+	thumb_func_end MovementActionFunc_x2C_0
 
-	thumb_func_start sub_8065A10
-sub_8065A10: @ 8065A10
+	thumb_func_start MovementActionFunc_x2D_0
+MovementActionFunc_x2D_0: @ 8065A10
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17286,17 +17286,17 @@ sub_8065A10: @ 8065A10
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065A10
+	thumb_func_end MovementActionFunc_x2D_0
 
-	thumb_func_start sub_8065A48
-sub_8065A48: @ 8065A48
+	thumb_func_start MovementActionFunc_x2E_0
+MovementActionFunc_x2E_0: @ 8065A48
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17314,17 +17314,17 @@ sub_8065A48: @ 8065A48
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065A48
+	thumb_func_end MovementActionFunc_x2E_0
 
-	thumb_func_start sub_8065A80
-sub_8065A80: @ 8065A80
+	thumb_func_start MovementActionFunc_x2F_0
+MovementActionFunc_x2F_0: @ 8065A80
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17342,17 +17342,17 @@ sub_8065A80: @ 8065A80
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065A80
+	thumb_func_end MovementActionFunc_x2F_0
 
-	thumb_func_start sub_8065AB8
-sub_8065AB8: @ 8065AB8
+	thumb_func_start MovementActionFunc_x30_0
+MovementActionFunc_x30_0: @ 8065AB8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -17370,17 +17370,17 @@ sub_8065AB8: @ 8065AB8
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065AB8
+	thumb_func_end MovementActionFunc_x30_0
 
-	thumb_func_start sub_8065AF0
-sub_8065AF0: @ 8065AF0
+	thumb_func_start MovementActionFunc_x31_0
+MovementActionFunc_x31_0: @ 8065AF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17389,16 +17389,16 @@ sub_8065AF0: @ 8065AF0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065B10
+	bl MovementActionFunc_x31_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065AF0
+	thumb_func_end MovementActionFunc_x31_0
 
-	thumb_func_start sub_8065B10
-sub_8065B10: @ 8065B10
+	thumb_func_start MovementActionFunc_x31_1
+MovementActionFunc_x31_1: @ 8065B10
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17415,10 +17415,10 @@ _08065B28:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065B10
+	thumb_func_end MovementActionFunc_x31_1
 
-	thumb_func_start sub_8065B30
-sub_8065B30: @ 8065B30
+	thumb_func_start MovementActionFunc_x32_0
+MovementActionFunc_x32_0: @ 8065B30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17427,16 +17427,16 @@ sub_8065B30: @ 8065B30
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065B50
+	bl MovementActionFunc_x32_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065B30
+	thumb_func_end MovementActionFunc_x32_0
 
-	thumb_func_start sub_8065B50
-sub_8065B50: @ 8065B50
+	thumb_func_start MovementActionFunc_x32_1
+MovementActionFunc_x32_1: @ 8065B50
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17453,10 +17453,10 @@ _08065B68:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065B50
+	thumb_func_end MovementActionFunc_x32_1
 
-	thumb_func_start sub_8065B70
-sub_8065B70: @ 8065B70
+	thumb_func_start MovementActionFunc_x33_0
+MovementActionFunc_x33_0: @ 8065B70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17465,16 +17465,16 @@ sub_8065B70: @ 8065B70
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065B90
+	bl MovementActionFunc_x33_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065B70
+	thumb_func_end MovementActionFunc_x33_0
 
-	thumb_func_start sub_8065B90
-sub_8065B90: @ 8065B90
+	thumb_func_start MovementActionFunc_x33_1
+MovementActionFunc_x33_1: @ 8065B90
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17491,10 +17491,10 @@ _08065BA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065B90
+	thumb_func_end MovementActionFunc_x33_1
 
-	thumb_func_start sub_8065BB0
-sub_8065BB0: @ 8065BB0
+	thumb_func_start MovementActionFunc_x34_0
+MovementActionFunc_x34_0: @ 8065BB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17503,16 +17503,16 @@ sub_8065BB0: @ 8065BB0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065BD0
+	bl MovementActionFunc_x34_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065BB0
+	thumb_func_end MovementActionFunc_x34_0
 
-	thumb_func_start sub_8065BD0
-sub_8065BD0: @ 8065BD0
+	thumb_func_start MovementActionFunc_x34_1
+MovementActionFunc_x34_1: @ 8065BD0
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17529,10 +17529,10 @@ _08065BE8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065BD0
+	thumb_func_end MovementActionFunc_x34_1
 
-	thumb_func_start sub_8065BF0
-sub_8065BF0: @ 8065BF0
+	thumb_func_start MovementActionFunc_x35_0
+MovementActionFunc_x35_0: @ 8065BF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17541,16 +17541,16 @@ sub_8065BF0: @ 8065BF0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065C10
+	bl MovementActionFunc_x35_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065BF0
+	thumb_func_end MovementActionFunc_x35_0
 
-	thumb_func_start sub_8065C10
-sub_8065C10: @ 8065C10
+	thumb_func_start MovementActionFunc_x35_1
+MovementActionFunc_x35_1: @ 8065C10
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17567,10 +17567,10 @@ _08065C28:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065C10
+	thumb_func_end MovementActionFunc_x35_1
 
-	thumb_func_start sub_8065C30
-sub_8065C30: @ 8065C30
+	thumb_func_start MovementActionFunc_x36_0
+MovementActionFunc_x36_0: @ 8065C30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17579,16 +17579,16 @@ sub_8065C30: @ 8065C30
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065C50
+	bl MovementActionFunc_x36_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065C30
+	thumb_func_end MovementActionFunc_x36_0
 
-	thumb_func_start sub_8065C50
-sub_8065C50: @ 8065C50
+	thumb_func_start MovementActionFunc_x36_1
+MovementActionFunc_x36_1: @ 8065C50
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17605,10 +17605,10 @@ _08065C68:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065C50
+	thumb_func_end MovementActionFunc_x36_1
 
-	thumb_func_start sub_8065C70
-sub_8065C70: @ 8065C70
+	thumb_func_start MovementActionFunc_x37_0
+MovementActionFunc_x37_0: @ 8065C70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17617,16 +17617,16 @@ sub_8065C70: @ 8065C70
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065C90
+	bl MovementActionFunc_x37_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065C70
+	thumb_func_end MovementActionFunc_x37_0
 
-	thumb_func_start sub_8065C90
-sub_8065C90: @ 8065C90
+	thumb_func_start MovementActionFunc_x37_1
+MovementActionFunc_x37_1: @ 8065C90
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17643,10 +17643,10 @@ _08065CA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065C90
+	thumb_func_end MovementActionFunc_x37_1
 
-	thumb_func_start sub_8065CB0
-sub_8065CB0: @ 8065CB0
+	thumb_func_start MovementActionFunc_x38_0
+MovementActionFunc_x38_0: @ 8065CB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17655,16 +17655,16 @@ sub_8065CB0: @ 8065CB0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065CD0
+	bl MovementActionFunc_x38_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065CB0
+	thumb_func_end MovementActionFunc_x38_0
 
-	thumb_func_start sub_8065CD0
-sub_8065CD0: @ 8065CD0
+	thumb_func_start MovementActionFunc_x38_1
+MovementActionFunc_x38_1: @ 8065CD0
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17681,10 +17681,10 @@ _08065CE8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065CD0
+	thumb_func_end MovementActionFunc_x38_1
 
-	thumb_func_start sub_8065CF0
-sub_8065CF0: @ 8065CF0
+	thumb_func_start MovementActionFunc_x39_0
+MovementActionFunc_x39_0: @ 8065CF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17693,16 +17693,16 @@ sub_8065CF0: @ 8065CF0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065D10
+	bl MovementActionFunc_x39_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065CF0
+	thumb_func_end MovementActionFunc_x39_0
 
-	thumb_func_start sub_8065D10
-sub_8065D10: @ 8065D10
+	thumb_func_start MovementActionFunc_x39_1
+MovementActionFunc_x39_1: @ 8065D10
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17719,10 +17719,10 @@ _08065D28:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065D10
+	thumb_func_end MovementActionFunc_x39_1
 
-	thumb_func_start sub_8065D30
-sub_8065D30: @ 8065D30
+	thumb_func_start MovementActionFunc_x3A_0
+MovementActionFunc_x3A_0: @ 8065D30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17731,16 +17731,16 @@ sub_8065D30: @ 8065D30
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065D50
+	bl MovementActionFunc_x3A_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065D30
+	thumb_func_end MovementActionFunc_x3A_0
 
-	thumb_func_start sub_8065D50
-sub_8065D50: @ 8065D50
+	thumb_func_start MovementActionFunc_x3A_1
+MovementActionFunc_x3A_1: @ 8065D50
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17757,10 +17757,10 @@ _08065D68:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065D50
+	thumb_func_end MovementActionFunc_x3A_1
 
-	thumb_func_start sub_8065D70
-sub_8065D70: @ 8065D70
+	thumb_func_start MovementActionFunc_x3B_0
+MovementActionFunc_x3B_0: @ 8065D70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17769,16 +17769,16 @@ sub_8065D70: @ 8065D70
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065D90
+	bl MovementActionFunc_x3B_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065D70
+	thumb_func_end MovementActionFunc_x3B_0
 
-	thumb_func_start sub_8065D90
-sub_8065D90: @ 8065D90
+	thumb_func_start MovementActionFunc_x3B_1
+MovementActionFunc_x3B_1: @ 8065D90
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17795,10 +17795,10 @@ _08065DA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065D90
+	thumb_func_end MovementActionFunc_x3B_1
 
-	thumb_func_start sub_8065DB0
-sub_8065DB0: @ 8065DB0
+	thumb_func_start MovementActionFunc_x3C_0
+MovementActionFunc_x3C_0: @ 8065DB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -17807,16 +17807,16 @@ sub_8065DB0: @ 8065DB0
 	bl do_go_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065DD0
+	bl MovementActionFunc_x3C_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065DB0
+	thumb_func_end MovementActionFunc_x3C_0
 
-	thumb_func_start sub_8065DD0
-sub_8065DD0: @ 8065DD0
+	thumb_func_start MovementActionFunc_x3C_1
+MovementActionFunc_x3C_1: @ 8065DD0
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17833,7 +17833,7 @@ _08065DE8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065DD0
+	thumb_func_end MovementActionFunc_x3C_1
 
 	thumb_func_start do_run_south_anim
 do_run_south_anim: @ 8065DF0
@@ -17844,7 +17844,7 @@ do_run_south_anim: @ 8065DF0
 	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065E10
+	bl MovementActionFunc_x3D_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -17852,8 +17852,8 @@ do_run_south_anim: @ 8065DF0
 	bx r1
 	thumb_func_end do_run_south_anim
 
-	thumb_func_start sub_8065E10
-sub_8065E10: @ 8065E10
+	thumb_func_start MovementActionFunc_x3D_1
+MovementActionFunc_x3D_1: @ 8065E10
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17870,7 +17870,7 @@ _08065E28:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065E10
+	thumb_func_end MovementActionFunc_x3D_1
 
 	thumb_func_start do_run_north_anim
 do_run_north_anim: @ 8065E30
@@ -17881,7 +17881,7 @@ do_run_north_anim: @ 8065E30
 	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065E50
+	bl MovementActionFunc_x3E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -17889,8 +17889,8 @@ do_run_north_anim: @ 8065E30
 	bx r1
 	thumb_func_end do_run_north_anim
 
-	thumb_func_start sub_8065E50
-sub_8065E50: @ 8065E50
+	thumb_func_start MovementActionFunc_x3E_1
+MovementActionFunc_x3E_1: @ 8065E50
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17907,7 +17907,7 @@ _08065E68:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065E50
+	thumb_func_end MovementActionFunc_x3E_1
 
 	thumb_func_start do_run_west_anim
 do_run_west_anim: @ 8065E70
@@ -17918,7 +17918,7 @@ do_run_west_anim: @ 8065E70
 	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065E90
+	bl MovementActionFunc_x3F_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -17926,8 +17926,8 @@ do_run_west_anim: @ 8065E70
 	bx r1
 	thumb_func_end do_run_west_anim
 
-	thumb_func_start sub_8065E90
-sub_8065E90: @ 8065E90
+	thumb_func_start MovementActionFunc_x3F_1
+MovementActionFunc_x3F_1: @ 8065E90
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17944,7 +17944,7 @@ _08065EA8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065E90
+	thumb_func_end MovementActionFunc_x3F_1
 
 	thumb_func_start do_run_east_anim
 do_run_east_anim: @ 8065EB0
@@ -17955,7 +17955,7 @@ do_run_east_anim: @ 8065EB0
 	bl do_run_anim
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065ED0
+	bl MovementActionFunc_x40_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -17963,8 +17963,8 @@ do_run_east_anim: @ 8065EB0
 	bx r1
 	thumb_func_end do_run_east_anim
 
-	thumb_func_start sub_8065ED0
-sub_8065ED0: @ 8065ED0
+	thumb_func_start MovementActionFunc_x40_1
+MovementActionFunc_x40_1: @ 8065ED0
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -17981,7 +17981,7 @@ _08065EE8:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065ED0
+	thumb_func_end MovementActionFunc_x40_1
 
 	thumb_func_start sub_8065EF0
 sub_8065EF0: @ 8065EF0
@@ -18094,8 +18094,8 @@ _08065FBE:
 	bx r1
 	thumb_func_end sub_8065F8C
 
-	thumb_func_start sub_8065FC4
-sub_8065FC4: @ 8065FC4
+	thumb_func_start MovementActionFunc_x41_0
+MovementActionFunc_x41_0: @ 8065FC4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18103,16 +18103,16 @@ sub_8065FC4: @ 8065FC4
 	bl sub_8065F60
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8065FE4
+	bl MovementActionFunc_x41_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065FC4
+	thumb_func_end MovementActionFunc_x41_0
 
-	thumb_func_start sub_8065FE4
-sub_8065FE4: @ 8065FE4
+	thumb_func_start MovementActionFunc_x41_1
+MovementActionFunc_x41_1: @ 8065FE4
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065F8C
@@ -18129,10 +18129,10 @@ _08065FFC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8065FE4
+	thumb_func_end MovementActionFunc_x41_1
 
-	thumb_func_start sub_8066004
-sub_8066004: @ 8066004
+	thumb_func_start MovementActionFunc_x42_0
+MovementActionFunc_x42_0: @ 8066004
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18140,16 +18140,16 @@ sub_8066004: @ 8066004
 	bl sub_8065F60
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066024
+	bl MovementActionFunc_x42_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066004
+	thumb_func_end MovementActionFunc_x42_0
 
-	thumb_func_start sub_8066024
-sub_8066024: @ 8066024
+	thumb_func_start MovementActionFunc_x42_1
+MovementActionFunc_x42_1: @ 8066024
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065F8C
@@ -18166,10 +18166,10 @@ _0806603C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066024
+	thumb_func_end MovementActionFunc_x42_1
 
-	thumb_func_start sub_8066044
-sub_8066044: @ 8066044
+	thumb_func_start MovementActionFunc_x43_0
+MovementActionFunc_x43_0: @ 8066044
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18177,16 +18177,16 @@ sub_8066044: @ 8066044
 	bl sub_8065F60
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066064
+	bl MovementActionFunc_x43_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066044
+	thumb_func_end MovementActionFunc_x43_0
 
-	thumb_func_start sub_8066064
-sub_8066064: @ 8066064
+	thumb_func_start MovementActionFunc_x43_1
+MovementActionFunc_x43_1: @ 8066064
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065F8C
@@ -18203,10 +18203,10 @@ _0806607C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066064
+	thumb_func_end MovementActionFunc_x43_1
 
-	thumb_func_start sub_8066084
-sub_8066084: @ 8066084
+	thumb_func_start MovementActionFunc_x44_0
+MovementActionFunc_x44_0: @ 8066084
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18214,16 +18214,16 @@ sub_8066084: @ 8066084
 	bl sub_8065F60
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80660A4
+	bl MovementActionFunc_x44_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066084
+	thumb_func_end MovementActionFunc_x44_0
 
-	thumb_func_start sub_80660A4
-sub_80660A4: @ 80660A4
+	thumb_func_start MovementActionFunc_x44_1
+MovementActionFunc_x44_1: @ 80660A4
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065F8C
@@ -18240,7 +18240,7 @@ _080660BC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80660A4
+	thumb_func_end MovementActionFunc_x44_1
 
 	thumb_func_start npc_set_direction_and_anim__an_proceed
 npc_set_direction_and_anim__an_proceed: @ 80660C4
@@ -18266,8 +18266,8 @@ npc_set_direction_and_anim__an_proceed: @ 80660C4
 	bx r0
 	thumb_func_end npc_set_direction_and_anim__an_proceed
 
-	thumb_func_start sub_80660F0
-sub_80660F0: @ 80660F0
+	thumb_func_start MovementActionFunc_x45_0
+MovementActionFunc_x45_0: @ 80660F0
 	push {lr}
 	ldrb r2, [r0, 0x18]
 	lsrs r2, 4
@@ -18278,10 +18278,10 @@ sub_80660F0: @ 80660F0
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80660F0
+	thumb_func_end MovementActionFunc_x45_0
 
-	thumb_func_start sub_8066108
-sub_8066108: @ 8066108
+	thumb_func_start MovementActionFunc_x45_1
+MovementActionFunc_x45_1: @ 8066108
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
@@ -18299,7 +18299,7 @@ _08066122:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066108
+	thumb_func_end MovementActionFunc_x45_1
 
 	thumb_func_start sub_8066128
 sub_8066128: @ 8066128
@@ -18327,8 +18327,8 @@ sub_8066128: @ 8066128
 	bx r0
 	thumb_func_end sub_8066128
 
-	thumb_func_start sub_806615C
-sub_806615C: @ 806615C
+	thumb_func_start MovementActionFunc_x46_0
+MovementActionFunc_x46_0: @ 806615C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18336,16 +18336,16 @@ sub_806615C: @ 806615C
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806617C
+	bl MovementActionFunc_x46_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806615C
+	thumb_func_end MovementActionFunc_x46_0
 
-	thumb_func_start sub_806617C
-sub_806617C: @ 806617C
+	thumb_func_start MovementActionFunc_x46_1
+MovementActionFunc_x46_1: @ 806617C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18367,10 +18367,10 @@ _0806619E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806617C
+	thumb_func_end MovementActionFunc_x46_1
 
-	thumb_func_start sub_80661A4
-sub_80661A4: @ 80661A4
+	thumb_func_start MovementActionFunc_x47_0
+MovementActionFunc_x47_0: @ 80661A4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18378,16 +18378,16 @@ sub_80661A4: @ 80661A4
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80661C4
+	bl MovementActionFunc_x47_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80661A4
+	thumb_func_end MovementActionFunc_x47_0
 
-	thumb_func_start sub_80661C4
-sub_80661C4: @ 80661C4
+	thumb_func_start MovementActionFunc_x47_1
+MovementActionFunc_x47_1: @ 80661C4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18409,10 +18409,10 @@ _080661E6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80661C4
+	thumb_func_end MovementActionFunc_x47_1
 
-	thumb_func_start sub_80661EC
-sub_80661EC: @ 80661EC
+	thumb_func_start MovementActionFunc_x48_0
+MovementActionFunc_x48_0: @ 80661EC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18420,16 +18420,16 @@ sub_80661EC: @ 80661EC
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806620C
+	bl MovementActionFunc_x48_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80661EC
+	thumb_func_end MovementActionFunc_x48_0
 
-	thumb_func_start sub_806620C
-sub_806620C: @ 806620C
+	thumb_func_start MovementActionFunc_x48_1
+MovementActionFunc_x48_1: @ 806620C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18451,10 +18451,10 @@ _0806622E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806620C
+	thumb_func_end MovementActionFunc_x48_1
 
-	thumb_func_start sub_8066234
-sub_8066234: @ 8066234
+	thumb_func_start MovementActionFunc_x49_0
+MovementActionFunc_x49_0: @ 8066234
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18462,16 +18462,16 @@ sub_8066234: @ 8066234
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066254
+	bl MovementActionFunc_x49_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066234
+	thumb_func_end MovementActionFunc_x49_0
 
-	thumb_func_start sub_8066254
-sub_8066254: @ 8066254
+	thumb_func_start MovementActionFunc_x49_1
+MovementActionFunc_x49_1: @ 8066254
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18493,10 +18493,10 @@ _08066276:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066254
+	thumb_func_end MovementActionFunc_x49_1
 
-	thumb_func_start sub_806627C
-sub_806627C: @ 806627C
+	thumb_func_start MovementActionFunc_xA6_0
+MovementActionFunc_xA6_0: @ 806627C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18504,16 +18504,16 @@ sub_806627C: @ 806627C
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806629C
+	bl MovementActionFunc_xA6_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806627C
+	thumb_func_end MovementActionFunc_xA6_0
 
-	thumb_func_start sub_806629C
-sub_806629C: @ 806629C
+	thumb_func_start MovementActionFunc_xA6_1
+MovementActionFunc_xA6_1: @ 806629C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065040
@@ -18530,10 +18530,10 @@ _080662B4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806629C
+	thumb_func_end MovementActionFunc_xA6_1
 
-	thumb_func_start sub_80662BC
-sub_80662BC: @ 80662BC
+	thumb_func_start MovementActionFunc_xA7_0
+MovementActionFunc_xA7_0: @ 80662BC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18541,16 +18541,16 @@ sub_80662BC: @ 80662BC
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80662DC
+	bl MovementActionFunc_xA7_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80662BC
+	thumb_func_end MovementActionFunc_xA7_0
 
-	thumb_func_start sub_80662DC
-sub_80662DC: @ 80662DC
+	thumb_func_start MovementActionFunc_xA7_1
+MovementActionFunc_xA7_1: @ 80662DC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065040
@@ -18567,10 +18567,10 @@ _080662F4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80662DC
+	thumb_func_end MovementActionFunc_xA7_1
 
-	thumb_func_start sub_80662FC
-sub_80662FC: @ 80662FC
+	thumb_func_start MovementActionFunc_xA8_0
+MovementActionFunc_xA8_0: @ 80662FC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18578,16 +18578,16 @@ sub_80662FC: @ 80662FC
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806631C
+	bl MovementActionFunc_xA8_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80662FC
+	thumb_func_end MovementActionFunc_xA8_0
 
-	thumb_func_start sub_806631C
-sub_806631C: @ 806631C
+	thumb_func_start MovementActionFunc_xA8_1
+MovementActionFunc_xA8_1: @ 806631C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065040
@@ -18604,10 +18604,10 @@ _08066334:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806631C
+	thumb_func_end MovementActionFunc_xA8_1
 
-	thumb_func_start sub_806633C
-sub_806633C: @ 806633C
+	thumb_func_start MovementActionFunc_xA9_0
+MovementActionFunc_xA9_0: @ 806633C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18615,16 +18615,16 @@ sub_806633C: @ 806633C
 	bl sub_8066128
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806635C
+	bl MovementActionFunc_xA9_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806633C
+	thumb_func_end MovementActionFunc_xA9_0
 
-	thumb_func_start sub_806635C
-sub_806635C: @ 806635C
+	thumb_func_start MovementActionFunc_xA9_1
+MovementActionFunc_xA9_1: @ 806635C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_8065040
@@ -18641,10 +18641,10 @@ _08066374:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806635C
+	thumb_func_end MovementActionFunc_xA9_1
 
-	thumb_func_start sub_806637C
-sub_806637C: @ 806637C
+	thumb_func_start MovementActionFunc_x4A_0
+MovementActionFunc_x4A_0: @ 806637C
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -18688,10 +18688,10 @@ _080663C6:
 	bx r1
 	.align 2, 0
 _080663D4: .4byte gObjectEvents
-	thumb_func_end sub_806637C
+	thumb_func_end MovementActionFunc_x4A_0
 
-	thumb_func_start sub_80663D8
-sub_80663D8: @ 80663D8
+	thumb_func_start MovementActionFunc_x4B_0
+MovementActionFunc_x4B_0: @ 80663D8
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -18738,10 +18738,10 @@ _0806642A:
 	bx r1
 	.align 2, 0
 _08066438: .4byte gObjectEvents
-	thumb_func_end sub_80663D8
+	thumb_func_end MovementActionFunc_x4B_0
 
-	thumb_func_start sub_806643C
-sub_806643C: @ 806643C
+	thumb_func_start MovementActionFunc_x4C_0
+MovementActionFunc_x4C_0: @ 806643C
 	ldrb r2, [r0, 0x1]
 	movs r3, 0x2
 	orrs r2, r3
@@ -18749,10 +18749,10 @@ sub_806643C: @ 806643C
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_806643C
+	thumb_func_end MovementActionFunc_x4C_0
 
-	thumb_func_start sub_806644C
-sub_806644C: @ 806644C
+	thumb_func_start MovementActionFunc_x4D_0
+MovementActionFunc_x4D_0: @ 806644C
 	ldrb r3, [r0, 0x1]
 	movs r2, 0x3
 	negs r2, r2
@@ -18761,10 +18761,10 @@ sub_806644C: @ 806644C
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_806644C
+	thumb_func_end MovementActionFunc_x4D_0
 
-	thumb_func_start sub_806645C
-sub_806645C: @ 806645C
+	thumb_func_start MovementActionFunc_x4E_0
+MovementActionFunc_x4E_0: @ 806645C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -18777,17 +18777,17 @@ sub_806645C: @ 806645C
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066488
+	bl MovementActionFunc_x4E_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806645C
+	thumb_func_end MovementActionFunc_x4E_0
 
-	thumb_func_start sub_8066488
-sub_8066488: @ 8066488
+	thumb_func_start MovementActionFunc_x4E_1
+MovementActionFunc_x4E_1: @ 8066488
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18810,10 +18810,10 @@ _080664AC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066488
+	thumb_func_end MovementActionFunc_x4E_1
 
-	thumb_func_start sub_80664B4
-sub_80664B4: @ 80664B4
+	thumb_func_start MovementActionFunc_x4F_0
+MovementActionFunc_x4F_0: @ 80664B4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -18826,17 +18826,17 @@ sub_80664B4: @ 80664B4
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80664E0
+	bl MovementActionFunc_x4F_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80664B4
+	thumb_func_end MovementActionFunc_x4F_0
 
-	thumb_func_start sub_80664E0
-sub_80664E0: @ 80664E0
+	thumb_func_start MovementActionFunc_x4F_1
+MovementActionFunc_x4F_1: @ 80664E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18859,10 +18859,10 @@ _08066504:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80664E0
+	thumb_func_end MovementActionFunc_x4F_1
 
-	thumb_func_start sub_806650C
-sub_806650C: @ 806650C
+	thumb_func_start MovementActionFunc_x50_0
+MovementActionFunc_x50_0: @ 806650C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -18875,17 +18875,17 @@ sub_806650C: @ 806650C
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066538
+	bl MovementActionFunc_x50_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806650C
+	thumb_func_end MovementActionFunc_x50_0
 
-	thumb_func_start sub_8066538
-sub_8066538: @ 8066538
+	thumb_func_start MovementActionFunc_x50_1
+MovementActionFunc_x50_1: @ 8066538
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18908,10 +18908,10 @@ _0806655C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066538
+	thumb_func_end MovementActionFunc_x50_1
 
-	thumb_func_start sub_8066564
-sub_8066564: @ 8066564
+	thumb_func_start MovementActionFunc_x51_0
+MovementActionFunc_x51_0: @ 8066564
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -18924,17 +18924,17 @@ sub_8066564: @ 8066564
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066590
+	bl MovementActionFunc_x51_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066564
+	thumb_func_end MovementActionFunc_x51_0
 
-	thumb_func_start sub_8066590
-sub_8066590: @ 8066590
+	thumb_func_start MovementActionFunc_x51_1
+MovementActionFunc_x51_1: @ 8066590
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -18957,10 +18957,10 @@ _080665B4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066590
+	thumb_func_end MovementActionFunc_x51_1
 
-	thumb_func_start sub_80665BC
-sub_80665BC: @ 80665BC
+	thumb_func_start MovementActionFunc_x52_0
+MovementActionFunc_x52_0: @ 80665BC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -18973,17 +18973,17 @@ sub_80665BC: @ 80665BC
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80665E8
+	bl MovementActionFunc_x52_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80665BC
+	thumb_func_end MovementActionFunc_x52_0
 
-	thumb_func_start sub_80665E8
-sub_80665E8: @ 80665E8
+	thumb_func_start MovementActionFunc_x52_1
+MovementActionFunc_x52_1: @ 80665E8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19006,10 +19006,10 @@ _0806660C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80665E8
+	thumb_func_end MovementActionFunc_x52_1
 
-	thumb_func_start sub_8066614
-sub_8066614: @ 8066614
+	thumb_func_start MovementActionFunc_x53_0
+MovementActionFunc_x53_0: @ 8066614
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19022,17 +19022,17 @@ sub_8066614: @ 8066614
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066640
+	bl MovementActionFunc_x53_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066614
+	thumb_func_end MovementActionFunc_x53_0
 
-	thumb_func_start sub_8066640
-sub_8066640: @ 8066640
+	thumb_func_start MovementActionFunc_x53_1
+MovementActionFunc_x53_1: @ 8066640
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19055,10 +19055,10 @@ _08066664:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066640
+	thumb_func_end MovementActionFunc_x53_1
 
-	thumb_func_start sub_806666C
-sub_806666C: @ 806666C
+	thumb_func_start MovementActionFunc_x54_0
+MovementActionFunc_x54_0: @ 806666C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19071,17 +19071,17 @@ sub_806666C: @ 806666C
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066698
+	bl MovementActionFunc_x54_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806666C
+	thumb_func_end MovementActionFunc_x54_0
 
-	thumb_func_start sub_8066698
-sub_8066698: @ 8066698
+	thumb_func_start MovementActionFunc_x54_1
+MovementActionFunc_x54_1: @ 8066698
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19104,10 +19104,10 @@ _080666BC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066698
+	thumb_func_end MovementActionFunc_x54_1
 
-	thumb_func_start sub_80666C4
-sub_80666C4: @ 80666C4
+	thumb_func_start MovementActionFunc_x55_0
+MovementActionFunc_x55_0: @ 80666C4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19120,17 +19120,17 @@ sub_80666C4: @ 80666C4
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80666F0
+	bl MovementActionFunc_x55_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80666C4
+	thumb_func_end MovementActionFunc_x55_0
 
-	thumb_func_start sub_80666F0
-sub_80666F0: @ 80666F0
+	thumb_func_start MovementActionFunc_x55_1
+MovementActionFunc_x55_1: @ 80666F0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19153,10 +19153,10 @@ _08066714:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80666F0
+	thumb_func_end MovementActionFunc_x55_1
 
-	thumb_func_start sub_806671C
-sub_806671C: @ 806671C
+	thumb_func_start MovementActionFunc_x56_0
+MovementActionFunc_x56_0: @ 806671C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19169,17 +19169,17 @@ sub_806671C: @ 806671C
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066748
+	bl MovementActionFunc_x56_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806671C
+	thumb_func_end MovementActionFunc_x56_0
 
-	thumb_func_start sub_8066748
-sub_8066748: @ 8066748
+	thumb_func_start MovementActionFunc_x56_1
+MovementActionFunc_x56_1: @ 8066748
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19202,10 +19202,10 @@ _0806676C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066748
+	thumb_func_end MovementActionFunc_x56_1
 
-	thumb_func_start sub_8066774
-sub_8066774: @ 8066774
+	thumb_func_start MovementActionFunc_x57_0
+MovementActionFunc_x57_0: @ 8066774
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19218,17 +19218,17 @@ sub_8066774: @ 8066774
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80667A0
+	bl MovementActionFunc_x57_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066774
+	thumb_func_end MovementActionFunc_x57_0
 
-	thumb_func_start sub_80667A0
-sub_80667A0: @ 80667A0
+	thumb_func_start MovementActionFunc_x57_1
+MovementActionFunc_x57_1: @ 80667A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19251,10 +19251,10 @@ _080667C4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80667A0
+	thumb_func_end MovementActionFunc_x57_1
 
-	thumb_func_start sub_80667CC
-sub_80667CC: @ 80667CC
+	thumb_func_start MovementActionFunc_x58_0
+MovementActionFunc_x58_0: @ 80667CC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19267,17 +19267,17 @@ sub_80667CC: @ 80667CC
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80667F8
+	bl MovementActionFunc_x58_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80667CC
+	thumb_func_end MovementActionFunc_x58_0
 
-	thumb_func_start sub_80667F8
-sub_80667F8: @ 80667F8
+	thumb_func_start MovementActionFunc_x58_1
+MovementActionFunc_x58_1: @ 80667F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19300,10 +19300,10 @@ _0806681C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80667F8
+	thumb_func_end MovementActionFunc_x58_1
 
-	thumb_func_start sub_8066824
-sub_8066824: @ 8066824
+	thumb_func_start MovementActionFunc_x59_0
+MovementActionFunc_x59_0: @ 8066824
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -19316,17 +19316,17 @@ sub_8066824: @ 8066824
 	bl maybe_shadow_1
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066850
+	bl MovementActionFunc_x59_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066824
+	thumb_func_end MovementActionFunc_x59_0
 
-	thumb_func_start sub_8066850
-sub_8066850: @ 8066850
+	thumb_func_start MovementActionFunc_x59_1
+MovementActionFunc_x59_1: @ 8066850
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19349,10 +19349,10 @@ _08066874:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066850
+	thumb_func_end MovementActionFunc_x59_1
 
-	thumb_func_start sub_806687C
-sub_806687C: @ 806687C
+	thumb_func_start MovementActionFunc_x5A_0
+MovementActionFunc_x5A_0: @ 806687C
 	push {lr}
 	ldr r3, _08066890 @ =gInitialMovementTypeFacingDirections
 	ldrb r2, [r0, 0x6]
@@ -19364,10 +19364,10 @@ sub_806687C: @ 806687C
 	bx r1
 	.align 2, 0
 _08066890: .4byte gInitialMovementTypeFacingDirections
-	thumb_func_end sub_806687C
+	thumb_func_end MovementActionFunc_x5A_0
 
-	thumb_func_start sub_8066894
-sub_8066894: @ 8066894
+	thumb_func_start MovementActionFunc_x5B_0
+MovementActionFunc_x5B_0: @ 8066894
 	push {lr}
 	movs r2, 0x1
 	movs r3, 0x14
@@ -19375,10 +19375,10 @@ sub_8066894: @ 8066894
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066894
+	thumb_func_end MovementActionFunc_x5B_0
 
-	thumb_func_start sub_80668A4
-sub_80668A4: @ 80668A4
+	thumb_func_start MovementActionFunc_x5C_0
+MovementActionFunc_x5C_0: @ 80668A4
 	ldrb r3, [r0, 0x3]
 	movs r2, 0x3
 	negs r2, r2
@@ -19387,10 +19387,10 @@ sub_80668A4: @ 80668A4
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_80668A4
+	thumb_func_end MovementActionFunc_x5C_0
 
-	thumb_func_start sub_80668B4
-sub_80668B4: @ 80668B4
+	thumb_func_start MovementActionFunc_x5D_0
+MovementActionFunc_x5D_0: @ 80668B4
 	ldrb r2, [r0, 0x3]
 	movs r3, 0x2
 	orrs r2, r3
@@ -19398,10 +19398,10 @@ sub_80668B4: @ 80668B4
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_80668B4
+	thumb_func_end MovementActionFunc_x5D_0
 
-	thumb_func_start sub_80668C4
-sub_80668C4: @ 80668C4
+	thumb_func_start MovementActionFunc_x5E_0
+MovementActionFunc_x5E_0: @ 80668C4
 	ldrb r2, [r0, 0x1]
 	movs r3, 0x10
 	orrs r2, r3
@@ -19409,10 +19409,10 @@ sub_80668C4: @ 80668C4
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_80668C4
+	thumb_func_end MovementActionFunc_x5E_0
 
-	thumb_func_start sub_80668D4
-sub_80668D4: @ 80668D4
+	thumb_func_start MovementActionFunc_x5F_0
+MovementActionFunc_x5F_0: @ 80668D4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19433,10 +19433,10 @@ sub_80668D4: @ 80668D4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80668D4
+	thumb_func_end MovementActionFunc_x5F_0
 
-	thumb_func_start sub_8066900
-sub_8066900: @ 8066900
+	thumb_func_start MovementActionFunc_x60_0
+MovementActionFunc_x60_0: @ 8066900
 	ldrb r2, [r0, 0x1]
 	movs r3, 0x20
 	orrs r2, r3
@@ -19444,10 +19444,10 @@ sub_8066900: @ 8066900
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_8066900
+	thumb_func_end MovementActionFunc_x60_0
 
-	thumb_func_start sub_8066910
-sub_8066910: @ 8066910
+	thumb_func_start MovementActionFunc_x61_0
+MovementActionFunc_x61_0: @ 8066910
 	ldrb r3, [r0, 0x1]
 	movs r2, 0x21
 	negs r2, r2
@@ -19456,7 +19456,7 @@ sub_8066910: @ 8066910
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_8066910
+	thumb_func_end MovementActionFunc_x61_0
 
 	thumb_func_start do_exclamation_mark_bubble_1
 do_exclamation_mark_bubble_1: @ 8066920
@@ -19467,7 +19467,7 @@ do_exclamation_mark_bubble_1: @ 8066920
 	adds r3, r1, 0
 	adds r3, 0x8
 	bl ObjectEventGetLocalIdAndMap
-	movs r0, 0
+	movs r0, 0 @ FLDEFF_EXCLAMATION_MARK_ICON
 	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
@@ -19487,7 +19487,7 @@ do_exclamation_mark_bubble_2: @ 8066944
 	adds r3, r1, 0
 	adds r3, 0x8
 	bl ObjectEventGetLocalIdAndMap
-	movs r0, 0x21
+	movs r0, 0x21 @ FLDEFF_QUESTION_MARK_ICON
 	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
@@ -19498,8 +19498,8 @@ do_exclamation_mark_bubble_2: @ 8066944
 _08066964: .4byte gFieldEffectArguments
 	thumb_func_end do_exclamation_mark_bubble_2
 
-	thumb_func_start do_heart_bubble
-do_heart_bubble: @ 8066968
+	thumb_func_start do_x_bubble
+do_x_bubble: @ 8066968
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _08066988 @ =gFieldEffectArguments
@@ -19507,7 +19507,7 @@ do_heart_bubble: @ 8066968
 	adds r3, r1, 0
 	adds r3, 0x8
 	bl ObjectEventGetLocalIdAndMap
-	movs r0, 0x2E
+	movs r0, 0x2E @ FLDEFF_X_ICON
 	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
@@ -19516,10 +19516,10 @@ do_heart_bubble: @ 8066968
 	bx r1
 	.align 2, 0
 _08066988: .4byte gFieldEffectArguments
-	thumb_func_end do_heart_bubble
+	thumb_func_end do_x_bubble
 
-	thumb_func_start sub_806698C
-sub_806698C: @ 806698C
+	thumb_func_start do_double_excl_bubble
+do_double_excl_bubble: @ 806698C
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _080669AC @ =gFieldEffectArguments
@@ -19527,7 +19527,7 @@ sub_806698C: @ 806698C
 	adds r3, r1, 0
 	adds r3, 0x8
 	bl ObjectEventGetLocalIdAndMap
-	movs r0, 0x42
+	movs r0, 0x42 @ FLDEFF_DOUBLE_EXCL_MARK_ICON
 	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
@@ -19536,10 +19536,10 @@ sub_806698C: @ 806698C
 	bx r1
 	.align 2, 0
 _080669AC: .4byte gFieldEffectArguments
-	thumb_func_end sub_806698C
+	thumb_func_end do_double_excl_bubble
 
-	thumb_func_start sub_80669B0
-sub_80669B0: @ 80669B0
+	thumb_func_start do_smile_bubble
+do_smile_bubble: @ 80669B0
 	push {r4,lr}
 	adds r4, r1, 0
 	ldr r1, _080669D0 @ =gFieldEffectArguments
@@ -19547,7 +19547,7 @@ sub_80669B0: @ 80669B0
 	adds r3, r1, 0
 	adds r3, 0x8
 	bl ObjectEventGetLocalIdAndMap
-	movs r0, 0x40
+	movs r0, 0x40 @ FLDEFF_SMILEY_FACE_ICON
 	bl FieldEffectStart
 	movs r0, 0x1
 	strh r0, [r4, 0x32]
@@ -19556,10 +19556,10 @@ sub_80669B0: @ 80669B0
 	bx r1
 	.align 2, 0
 _080669D0: .4byte gFieldEffectArguments
-	thumb_func_end sub_80669B0
+	thumb_func_end do_smile_bubble
 
-	thumb_func_start sub_80669D4
-sub_80669D4: @ 80669D4
+	thumb_func_start MovementActionFunc_x67_0
+MovementActionFunc_x67_0: @ 80669D4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19582,7 +19582,7 @@ _080669EA:
 	strh r0, [r5, 0x32]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066A18
+	bl MovementActionFunc_x67_1
 	lsls r0, 24
 	lsrs r0, 24
 	b _08066A12
@@ -19594,10 +19594,10 @@ _08066A12:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80669D4
+	thumb_func_end MovementActionFunc_x67_0
 
-	thumb_func_start sub_8066A18
-sub_8066A18: @ 8066A18
+	thumb_func_start MovementActionFunc_x67_1
+MovementActionFunc_x67_1: @ 8066A18
 	push {r4,lr}
 	adds r4, r1, 0
 	bl sub_80DCBE0
@@ -19614,10 +19614,10 @@ _08066A30:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066A18
+	thumb_func_end MovementActionFunc_x67_1
 
-	thumb_func_start sub_8066A38
-sub_8066A38: @ 8066A38
+	thumb_func_start MovementActionFunc_x68_0
+MovementActionFunc_x68_0: @ 8066A38
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
@@ -19630,10 +19630,10 @@ sub_8066A38: @ 8066A38
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066A38
+	thumb_func_end MovementActionFunc_x68_0
 
-	thumb_func_start sub_8066A54
-sub_8066A54: @ 8066A54
+	thumb_func_start MovementActionFunc_x68_1
+MovementActionFunc_x68_1: @ 8066A54
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
@@ -19651,10 +19651,10 @@ _08066A70:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066A54
+	thumb_func_end MovementActionFunc_x68_1
 
-	thumb_func_start sub_8066A78
-sub_8066A78: @ 8066A78
+	thumb_func_start MovementActionFunc_x68_2
+MovementActionFunc_x68_2: @ 8066A78
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19684,10 +19684,10 @@ _08066AAA:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066A78
+	thumb_func_end MovementActionFunc_x68_2
 
-	thumb_func_start sub_8066AB4
-sub_8066AB4: @ 8066AB4
+	thumb_func_start MovementActionFunc_x69_0
+MovementActionFunc_x69_0: @ 8066AB4
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
@@ -19700,10 +19700,10 @@ sub_8066AB4: @ 8066AB4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066AB4
+	thumb_func_end MovementActionFunc_x69_0
 
-	thumb_func_start sub_8066AD0
-sub_8066AD0: @ 8066AD0
+	thumb_func_start MovementActionFunc_x69_1
+MovementActionFunc_x69_1: @ 8066AD0
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
@@ -19721,10 +19721,10 @@ _08066AEC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066AD0
+	thumb_func_end MovementActionFunc_x69_1
 
-	thumb_func_start sub_8066AF4
-sub_8066AF4: @ 8066AF4
+	thumb_func_start MovementActionFunc_x69_2
+MovementActionFunc_x69_2: @ 8066AF4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -19754,10 +19754,10 @@ _08066B26:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066AF4
+	thumb_func_end MovementActionFunc_x69_2
 
-	thumb_func_start sub_8066B30
-sub_8066B30: @ 8066B30
+	thumb_func_start MovementActionFunc_x6A_0
+MovementActionFunc_x6A_0: @ 8066B30
 	ldrb r2, [r0, 0x3]
 	movs r3, 0x4
 	orrs r2, r3
@@ -19765,10 +19765,10 @@ sub_8066B30: @ 8066B30
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_8066B30
+	thumb_func_end MovementActionFunc_x6A_0
 
-	thumb_func_start sub_8066B40
-sub_8066B40: @ 8066B40
+	thumb_func_start MovementActionFunc_x6B_0
+MovementActionFunc_x6B_0: @ 8066B40
 	ldrb r3, [r0, 0x3]
 	movs r2, 0x5
 	negs r2, r2
@@ -19777,10 +19777,10 @@ sub_8066B40: @ 8066B40
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
 	bx lr
-	thumb_func_end sub_8066B40
+	thumb_func_end MovementActionFunc_x6B_0
 
-	thumb_func_start sub_8066B50
-sub_8066B50: @ 8066B50
+	thumb_func_start MovementActionFunc_x6C_0
+MovementActionFunc_x6C_0: @ 8066B50
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r4, 0x1]
@@ -19804,10 +19804,10 @@ sub_8066B50: @ 8066B50
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066B50
+	thumb_func_end MovementActionFunc_x6C_0
 
-	thumb_func_start sub_8066B80
-sub_8066B80: @ 8066B80
+	thumb_func_start MovementActionFunc_x6D_0
+MovementActionFunc_x6D_0: @ 8066B80
 	push {r4,lr}
 	adds r4, r1, 0
 	ldrb r0, [r4, 0x3]
@@ -19829,10 +19829,10 @@ sub_8066B80: @ 8066B80
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066B80
+	thumb_func_end MovementActionFunc_x6D_0
 
-	thumb_func_start sub_8066BB0
-sub_8066BB0: @ 8066BB0
+	thumb_func_start MovementActionFunc_x6E_0
+MovementActionFunc_x6E_0: @ 8066BB0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -19849,16 +19849,16 @@ sub_8066BB0: @ 8066BB0
 	bl StartSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8066BE4
+	bl MovementActionFunc_x6E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066BB0
+	thumb_func_end MovementActionFunc_x6E_0
 
-	thumb_func_start sub_8066BE4
-sub_8066BE4: @ 8066BE4
+	thumb_func_start MovementActionFunc_x6E_1
+MovementActionFunc_x6E_1: @ 8066BE4
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -19881,10 +19881,10 @@ _08066C08:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066BE4
+	thumb_func_end MovementActionFunc_x6E_1
 
-	thumb_func_start sub_8066C10
-sub_8066C10: @ 8066C10
+	thumb_func_start MovementActionFunc_x6F_0
+MovementActionFunc_x6F_0: @ 8066C10
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -19901,16 +19901,16 @@ sub_8066C10: @ 8066C10
 	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8066C44
+	bl MovementActionFunc_x6F_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066C10
+	thumb_func_end MovementActionFunc_x6F_0
 
-	thumb_func_start sub_8066C44
-sub_8066C44: @ 8066C44
+	thumb_func_start MovementActionFunc_x6F_1
+MovementActionFunc_x6F_1: @ 8066C44
 	push {r4,lr}
 	adds r4, r1, 0
 	bl an_walk_any_2
@@ -19933,7 +19933,7 @@ _08066C68:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066C44
+	thumb_func_end MovementActionFunc_x6F_1
 
 	thumb_func_start sub_8066C70
 sub_8066C70: @ 8066C70
@@ -19967,48 +19967,48 @@ sub_8066C70: @ 8066C70
 	bx r0
 	thumb_func_end sub_8066C70
 
-	thumb_func_start sub_8066CB0
-sub_8066CB0: @ 8066CB0
+	thumb_func_start MovementActionFunc_x70_0
+MovementActionFunc_x70_0: @ 8066CB0
 	push {lr}
 	movs r2, 0x1
 	bl sub_8066C70
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066CB0
+	thumb_func_end MovementActionFunc_x70_0
 
-	thumb_func_start sub_8066CC0
-sub_8066CC0: @ 8066CC0
+	thumb_func_start MovementActionFunc_x71_0
+MovementActionFunc_x71_0: @ 8066CC0
 	push {lr}
 	movs r2, 0x2
 	bl sub_8066C70
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066CC0
+	thumb_func_end MovementActionFunc_x71_0
 
-	thumb_func_start sub_8066CD0
-sub_8066CD0: @ 8066CD0
+	thumb_func_start MovementActionFunc_x72_0
+MovementActionFunc_x72_0: @ 8066CD0
 	push {lr}
 	movs r2, 0x3
 	bl sub_8066C70
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066CD0
+	thumb_func_end MovementActionFunc_x72_0
 
-	thumb_func_start sub_8066CE0
-sub_8066CE0: @ 8066CE0
+	thumb_func_start MovementActionFunc_x73_0
+MovementActionFunc_x73_0: @ 8066CE0
 	push {lr}
 	movs r2, 0x4
 	bl sub_8066C70
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066CE0
+	thumb_func_end MovementActionFunc_x73_0
 
-	thumb_func_start sub_8066CF0
-sub_8066CF0: @ 8066CF0
+	thumb_func_start MovementActionFunc_x74_0
+MovementActionFunc_x74_0: @ 8066CF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20025,10 +20025,10 @@ sub_8066CF0: @ 8066CF0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066CF0
+	thumb_func_end MovementActionFunc_x74_0
 
-	thumb_func_start sub_8066D14
-sub_8066D14: @ 8066D14
+	thumb_func_start MovementActionFunc_x75_0
+MovementActionFunc_x75_0: @ 8066D14
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20045,10 +20045,10 @@ sub_8066D14: @ 8066D14
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066D14
+	thumb_func_end MovementActionFunc_x75_0
 
-	thumb_func_start sub_8066D38
-sub_8066D38: @ 8066D38
+	thumb_func_start MovementActionFunc_x76_0
+MovementActionFunc_x76_0: @ 8066D38
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20065,10 +20065,10 @@ sub_8066D38: @ 8066D38
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066D38
+	thumb_func_end MovementActionFunc_x76_0
 
-	thumb_func_start sub_8066D5C
-sub_8066D5C: @ 8066D5C
+	thumb_func_start MovementActionFunc_x77_0
+MovementActionFunc_x77_0: @ 8066D5C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20085,10 +20085,10 @@ sub_8066D5C: @ 8066D5C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066D5C
+	thumb_func_end MovementActionFunc_x77_0
 
-	thumb_func_start sub_8066D80
-sub_8066D80: @ 8066D80
+	thumb_func_start MovementActionFunc_x78_0
+MovementActionFunc_x78_0: @ 8066D80
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20105,10 +20105,10 @@ sub_8066D80: @ 8066D80
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066D80
+	thumb_func_end MovementActionFunc_x78_0
 
-	thumb_func_start sub_8066DA4
-sub_8066DA4: @ 8066DA4
+	thumb_func_start MovementActionFunc_x79_0
+MovementActionFunc_x79_0: @ 8066DA4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20125,10 +20125,10 @@ sub_8066DA4: @ 8066DA4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066DA4
+	thumb_func_end MovementActionFunc_x79_0
 
-	thumb_func_start sub_8066DC8
-sub_8066DC8: @ 8066DC8
+	thumb_func_start MovementActionFunc_x7A_0
+MovementActionFunc_x7A_0: @ 8066DC8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20145,10 +20145,10 @@ sub_8066DC8: @ 8066DC8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066DC8
+	thumb_func_end MovementActionFunc_x7A_0
 
-	thumb_func_start sub_8066DEC
-sub_8066DEC: @ 8066DEC
+	thumb_func_start MovementActionFunc_x7B_0
+MovementActionFunc_x7B_0: @ 8066DEC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20165,10 +20165,10 @@ sub_8066DEC: @ 8066DEC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066DEC
+	thumb_func_end MovementActionFunc_x7B_0
 
-	thumb_func_start sub_8066E10
-sub_8066E10: @ 8066E10
+	thumb_func_start MovementActionFunc_x7B_3
+MovementActionFunc_x7B_3: @ 8066E10
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20185,10 +20185,10 @@ sub_8066E10: @ 8066E10
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066E10
+	thumb_func_end MovementActionFunc_x7B_3
 
-	thumb_func_start sub_8066E34
-sub_8066E34: @ 8066E34
+	thumb_func_start MovementActionFunc_x7B_6
+MovementActionFunc_x7B_6: @ 8066E34
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20205,10 +20205,10 @@ sub_8066E34: @ 8066E34
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066E34
+	thumb_func_end MovementActionFunc_x7B_6
 
-	thumb_func_start sub_8066E58
-sub_8066E58: @ 8066E58
+	thumb_func_start MovementActionFunc_x7B_9
+MovementActionFunc_x7B_9: @ 8066E58
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20225,10 +20225,10 @@ sub_8066E58: @ 8066E58
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066E58
+	thumb_func_end MovementActionFunc_x7B_9
 
-	thumb_func_start sub_8066E7C
-sub_8066E7C: @ 8066E7C
+	thumb_func_start MovementActionFunc_x7B_12
+MovementActionFunc_x7B_12: @ 8066E7C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20245,7 +20245,7 @@ sub_8066E7C: @ 8066E7C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066E7C
+	thumb_func_end MovementActionFunc_x7B_12
 
 	thumb_func_start sub_8066EA0
 sub_8066EA0: @ 8066EA0
@@ -20280,8 +20280,8 @@ sub_8066EA0: @ 8066EA0
 	bx r0
 	thumb_func_end sub_8066EA0
 
-	thumb_func_start sub_8066EE4
-sub_8066EE4: @ 8066EE4
+	thumb_func_start MovementActionFunc_x7C_0
+MovementActionFunc_x7C_0: @ 8066EE4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20294,17 +20294,17 @@ sub_8066EE4: @ 8066EE4
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066F10
+	bl MovementActionFunc_x7C_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066EE4
+	thumb_func_end MovementActionFunc_x7C_0
 
-	thumb_func_start sub_8066F10
-sub_8066F10: @ 8066F10
+	thumb_func_start MovementActionFunc_x7C_1
+MovementActionFunc_x7C_1: @ 8066F10
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20327,10 +20327,10 @@ _08066F34:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066F10
+	thumb_func_end MovementActionFunc_x7C_1
 
-	thumb_func_start sub_8066F3C
-sub_8066F3C: @ 8066F3C
+	thumb_func_start MovementActionFunc_x7D_0
+MovementActionFunc_x7D_0: @ 8066F3C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20343,17 +20343,17 @@ sub_8066F3C: @ 8066F3C
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066F68
+	bl MovementActionFunc_x7D_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066F3C
+	thumb_func_end MovementActionFunc_x7D_0
 
-	thumb_func_start sub_8066F68
-sub_8066F68: @ 8066F68
+	thumb_func_start MovementActionFunc_x7D_1
+MovementActionFunc_x7D_1: @ 8066F68
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20376,10 +20376,10 @@ _08066F8C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066F68
+	thumb_func_end MovementActionFunc_x7D_1
 
-	thumb_func_start sub_8066F94
-sub_8066F94: @ 8066F94
+	thumb_func_start MovementActionFunc_x7E_0
+MovementActionFunc_x7E_0: @ 8066F94
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20392,17 +20392,17 @@ sub_8066F94: @ 8066F94
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8066FC0
+	bl MovementActionFunc_x7E_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066F94
+	thumb_func_end MovementActionFunc_x7E_0
 
-	thumb_func_start sub_8066FC0
-sub_8066FC0: @ 8066FC0
+	thumb_func_start MovementActionFunc_x7E_1
+MovementActionFunc_x7E_1: @ 8066FC0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20425,10 +20425,10 @@ _08066FE4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066FC0
+	thumb_func_end MovementActionFunc_x7E_1
 
-	thumb_func_start sub_8066FEC
-sub_8066FEC: @ 8066FEC
+	thumb_func_start MovementActionFunc_x7F_0
+MovementActionFunc_x7F_0: @ 8066FEC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20441,17 +20441,17 @@ sub_8066FEC: @ 8066FEC
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067018
+	bl MovementActionFunc_x7F_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066FEC
+	thumb_func_end MovementActionFunc_x7F_0
 
-	thumb_func_start sub_8067018
-sub_8067018: @ 8067018
+	thumb_func_start MovementActionFunc_x7F_1
+MovementActionFunc_x7F_1: @ 8067018
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20474,10 +20474,10 @@ _0806703C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067018
+	thumb_func_end MovementActionFunc_x7F_1
 
-	thumb_func_start sub_8067044
-sub_8067044: @ 8067044
+	thumb_func_start MovementActionFunc_x80_0
+MovementActionFunc_x80_0: @ 8067044
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20490,17 +20490,17 @@ sub_8067044: @ 8067044
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067070
+	bl MovementActionFunc_x80_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067044
+	thumb_func_end MovementActionFunc_x80_0
 
-	thumb_func_start sub_8067070
-sub_8067070: @ 8067070
+	thumb_func_start MovementActionFunc_x80_1
+MovementActionFunc_x80_1: @ 8067070
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20523,10 +20523,10 @@ _08067094:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067070
+	thumb_func_end MovementActionFunc_x80_1
 
-	thumb_func_start sub_806709C
-sub_806709C: @ 806709C
+	thumb_func_start MovementActionFunc_x81_0
+MovementActionFunc_x81_0: @ 806709C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20539,17 +20539,17 @@ sub_806709C: @ 806709C
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80670C8
+	bl MovementActionFunc_x81_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806709C
+	thumb_func_end MovementActionFunc_x81_0
 
-	thumb_func_start sub_80670C8
-sub_80670C8: @ 80670C8
+	thumb_func_start MovementActionFunc_x81_1
+MovementActionFunc_x81_1: @ 80670C8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20572,10 +20572,10 @@ _080670EC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80670C8
+	thumb_func_end MovementActionFunc_x81_1
 
-	thumb_func_start sub_80670F4
-sub_80670F4: @ 80670F4
+	thumb_func_start MovementActionFunc_x82_0
+MovementActionFunc_x82_0: @ 80670F4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20588,17 +20588,17 @@ sub_80670F4: @ 80670F4
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067120
+	bl MovementActionFunc_x82_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80670F4
+	thumb_func_end MovementActionFunc_x82_0
 
-	thumb_func_start sub_8067120
-sub_8067120: @ 8067120
+	thumb_func_start MovementActionFunc_x82_1
+MovementActionFunc_x82_1: @ 8067120
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20621,10 +20621,10 @@ _08067144:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067120
+	thumb_func_end MovementActionFunc_x82_1
 
-	thumb_func_start sub_806714C
-sub_806714C: @ 806714C
+	thumb_func_start MovementActionFunc_x83_0
+MovementActionFunc_x83_0: @ 806714C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20637,17 +20637,17 @@ sub_806714C: @ 806714C
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067178
+	bl MovementActionFunc_x83_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806714C
+	thumb_func_end MovementActionFunc_x83_0
 
-	thumb_func_start sub_8067178
-sub_8067178: @ 8067178
+	thumb_func_start MovementActionFunc_x83_1
+MovementActionFunc_x83_1: @ 8067178
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20670,10 +20670,10 @@ _0806719C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067178
+	thumb_func_end MovementActionFunc_x83_1
 
-	thumb_func_start sub_80671A4
-sub_80671A4: @ 80671A4
+	thumb_func_start MovementActionFunc_x84_0
+MovementActionFunc_x84_0: @ 80671A4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20686,17 +20686,17 @@ sub_80671A4: @ 80671A4
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80671D0
+	bl MovementActionFunc_x84_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80671A4
+	thumb_func_end MovementActionFunc_x84_0
 
-	thumb_func_start sub_80671D0
-sub_80671D0: @ 80671D0
+	thumb_func_start MovementActionFunc_x84_1
+MovementActionFunc_x84_1: @ 80671D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20719,10 +20719,10 @@ _080671F4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80671D0
+	thumb_func_end MovementActionFunc_x84_1
 
-	thumb_func_start sub_80671FC
-sub_80671FC: @ 80671FC
+	thumb_func_start MovementActionFunc_x85_0
+MovementActionFunc_x85_0: @ 80671FC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20735,17 +20735,17 @@ sub_80671FC: @ 80671FC
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067228
+	bl MovementActionFunc_x85_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80671FC
+	thumb_func_end MovementActionFunc_x85_0
 
-	thumb_func_start sub_8067228
-sub_8067228: @ 8067228
+	thumb_func_start MovementActionFunc_x85_1
+MovementActionFunc_x85_1: @ 8067228
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20768,10 +20768,10 @@ _0806724C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067228
+	thumb_func_end MovementActionFunc_x85_1
 
-	thumb_func_start sub_8067254
-sub_8067254: @ 8067254
+	thumb_func_start MovementActionFunc_x86_0
+MovementActionFunc_x86_0: @ 8067254
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20784,17 +20784,17 @@ sub_8067254: @ 8067254
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067280
+	bl MovementActionFunc_x86_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067254
+	thumb_func_end MovementActionFunc_x86_0
 
-	thumb_func_start sub_8067280
-sub_8067280: @ 8067280
+	thumb_func_start MovementActionFunc_x86_1
+MovementActionFunc_x86_1: @ 8067280
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20817,10 +20817,10 @@ _080672A4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067280
+	thumb_func_end MovementActionFunc_x86_1
 
-	thumb_func_start sub_80672AC
-sub_80672AC: @ 80672AC
+	thumb_func_start MovementActionFunc_x87_0
+MovementActionFunc_x87_0: @ 80672AC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20833,17 +20833,17 @@ sub_80672AC: @ 80672AC
 	bl sub_8066EA0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80672D8
+	bl MovementActionFunc_x87_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80672AC
+	thumb_func_end MovementActionFunc_x87_0
 
-	thumb_func_start sub_80672D8
-sub_80672D8: @ 80672D8
+	thumb_func_start MovementActionFunc_x87_1
+MovementActionFunc_x87_1: @ 80672D8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20866,10 +20866,10 @@ _080672FC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80672D8
+	thumb_func_end MovementActionFunc_x87_1
 
-	thumb_func_start sub_8067304
-sub_8067304: @ 8067304
+	thumb_func_start MovementActionFunc_x88_0
+MovementActionFunc_x88_0: @ 8067304
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20887,17 +20887,17 @@ sub_8067304: @ 8067304
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067304
+	thumb_func_end MovementActionFunc_x88_0
 
-	thumb_func_start sub_806733C
-sub_806733C: @ 806733C
+	thumb_func_start MovementActionFunc_x89_0
+MovementActionFunc_x89_0: @ 806733C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20915,17 +20915,17 @@ sub_806733C: @ 806733C
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806733C
+	thumb_func_end MovementActionFunc_x89_0
 
-	thumb_func_start sub_8067374
-sub_8067374: @ 8067374
+	thumb_func_start MovementActionFunc_x8A_0
+MovementActionFunc_x8A_0: @ 8067374
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20943,17 +20943,17 @@ sub_8067374: @ 8067374
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067374
+	thumb_func_end MovementActionFunc_x8A_0
 
-	thumb_func_start sub_80673AC
-sub_80673AC: @ 80673AC
+	thumb_func_start MovementActionFunc_x8B_0
+MovementActionFunc_x8B_0: @ 80673AC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -20971,14 +20971,14 @@ sub_80673AC: @ 80673AC
 	bl sub_80656C4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806570C
+	bl MovementActionFunc_x25_1
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80673AC
+	thumb_func_end MovementActionFunc_x8B_0
 
 	thumb_func_start sub_80673E4
 sub_80673E4: @ 80673E4
@@ -21007,8 +21007,8 @@ sub_80673E4: @ 80673E4
 	bx r0
 	thumb_func_end sub_80673E4
 
-	thumb_func_start sub_806741C
-sub_806741C: @ 806741C
+	thumb_func_start MovementActionFunc_x8C_0
+MovementActionFunc_x8C_0: @ 806741C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21017,16 +21017,16 @@ sub_806741C: @ 806741C
 	bl sub_80673E4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806743C
+	bl MovementActionFunc_x8C_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806741C
+	thumb_func_end MovementActionFunc_x8C_0
 
-	thumb_func_start sub_806743C
-sub_806743C: @ 806743C
+	thumb_func_start MovementActionFunc_x8C_1
+MovementActionFunc_x8C_1: @ 806743C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21043,10 +21043,10 @@ _08067454:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806743C
+	thumb_func_end MovementActionFunc_x8C_1
 
-	thumb_func_start sub_806745C
-sub_806745C: @ 806745C
+	thumb_func_start MovementActionFunc_x8D_0
+MovementActionFunc_x8D_0: @ 806745C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21055,16 +21055,16 @@ sub_806745C: @ 806745C
 	bl sub_80673E4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806747C
+	bl MovementActionFunc_x8D_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806745C
+	thumb_func_end MovementActionFunc_x8D_0
 
-	thumb_func_start sub_806747C
-sub_806747C: @ 806747C
+	thumb_func_start MovementActionFunc_x8D_1
+MovementActionFunc_x8D_1: @ 806747C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21081,10 +21081,10 @@ _08067494:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806747C
+	thumb_func_end MovementActionFunc_x8D_1
 
-	thumb_func_start sub_806749C
-sub_806749C: @ 806749C
+	thumb_func_start MovementActionFunc_x8E_0
+MovementActionFunc_x8E_0: @ 806749C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21093,16 +21093,16 @@ sub_806749C: @ 806749C
 	bl sub_80673E4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80674BC
+	bl MovementActionFunc_x8E_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806749C
+	thumb_func_end MovementActionFunc_x8E_0
 
-	thumb_func_start sub_80674BC
-sub_80674BC: @ 80674BC
+	thumb_func_start MovementActionFunc_x8E_1
+MovementActionFunc_x8E_1: @ 80674BC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21119,10 +21119,10 @@ _080674D4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80674BC
+	thumb_func_end MovementActionFunc_x8E_1
 
-	thumb_func_start sub_80674DC
-sub_80674DC: @ 80674DC
+	thumb_func_start MovementActionFunc_x8F_0
+MovementActionFunc_x8F_0: @ 80674DC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21131,16 +21131,16 @@ sub_80674DC: @ 80674DC
 	bl sub_80673E4
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80674FC
+	bl MovementActionFunc_x8F_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80674DC
+	thumb_func_end MovementActionFunc_x8F_0
 
-	thumb_func_start sub_80674FC
-sub_80674FC: @ 80674FC
+	thumb_func_start MovementActionFunc_x8F_1
+MovementActionFunc_x8F_1: @ 80674FC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21157,7 +21157,7 @@ _08067514:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80674FC
+	thumb_func_end MovementActionFunc_x8F_1
 
 	thumb_func_start sub_806751C
 sub_806751C: @ 806751C
@@ -21184,8 +21184,8 @@ sub_806751C: @ 806751C
 	bx r0
 	thumb_func_end sub_806751C
 
-	thumb_func_start sub_806754C
-sub_806754C: @ 806754C
+	thumb_func_start MovementActionFunc_x90_0
+MovementActionFunc_x90_0: @ 806754C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21194,16 +21194,16 @@ sub_806754C: @ 806754C
 	bl sub_806751C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806756C
+	bl MovementActionFunc_x90_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806754C
+	thumb_func_end MovementActionFunc_x90_0
 
-	thumb_func_start sub_806756C
-sub_806756C: @ 806756C
+	thumb_func_start MovementActionFunc_x90_1
+MovementActionFunc_x90_1: @ 806756C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21220,10 +21220,10 @@ _08067584:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806756C
+	thumb_func_end MovementActionFunc_x90_1
 
-	thumb_func_start sub_806758C
-sub_806758C: @ 806758C
+	thumb_func_start MovementActionFunc_x91_0
+MovementActionFunc_x91_0: @ 806758C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21232,16 +21232,16 @@ sub_806758C: @ 806758C
 	bl sub_806751C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80675AC
+	bl MovementActionFunc_x91_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806758C
+	thumb_func_end MovementActionFunc_x91_0
 
-	thumb_func_start sub_80675AC
-sub_80675AC: @ 80675AC
+	thumb_func_start MovementActionFunc_x91_1
+MovementActionFunc_x91_1: @ 80675AC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21258,10 +21258,10 @@ _080675C4:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80675AC
+	thumb_func_end MovementActionFunc_x91_1
 
-	thumb_func_start sub_80675CC
-sub_80675CC: @ 80675CC
+	thumb_func_start MovementActionFunc_x92_0
+MovementActionFunc_x92_0: @ 80675CC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21270,16 +21270,16 @@ sub_80675CC: @ 80675CC
 	bl sub_806751C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80675EC
+	bl MovementActionFunc_x92_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80675CC
+	thumb_func_end MovementActionFunc_x92_0
 
-	thumb_func_start sub_80675EC
-sub_80675EC: @ 80675EC
+	thumb_func_start MovementActionFunc_x92_1
+MovementActionFunc_x92_1: @ 80675EC
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21296,10 +21296,10 @@ _08067604:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80675EC
+	thumb_func_end MovementActionFunc_x92_1
 
-	thumb_func_start sub_806760C
-sub_806760C: @ 806760C
+	thumb_func_start MovementActionFunc_x93_0
+MovementActionFunc_x93_0: @ 806760C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21308,16 +21308,16 @@ sub_806760C: @ 806760C
 	bl sub_806751C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806762C
+	bl MovementActionFunc_x93_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806760C
+	thumb_func_end MovementActionFunc_x93_0
 
-	thumb_func_start sub_806762C
-sub_806762C: @ 806762C
+	thumb_func_start MovementActionFunc_x93_1
+MovementActionFunc_x93_1: @ 806762C
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21334,7 +21334,7 @@ _08067644:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806762C
+	thumb_func_end MovementActionFunc_x93_1
 
 	thumb_func_start sub_806764C
 sub_806764C: @ 806764C
@@ -21364,8 +21364,8 @@ sub_806764C: @ 806764C
 	bx r0
 	thumb_func_end sub_806764C
 
-	thumb_func_start sub_8067684
-sub_8067684: @ 8067684
+	thumb_func_start MovementActionFunc_x94_0
+MovementActionFunc_x94_0: @ 8067684
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21374,16 +21374,16 @@ sub_8067684: @ 8067684
 	bl sub_806764C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80676A4
+	bl MovementActionFunc_x94_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067684
+	thumb_func_end MovementActionFunc_x94_0
 
-	thumb_func_start sub_80676A4
-sub_80676A4: @ 80676A4
+	thumb_func_start MovementActionFunc_x94_1
+MovementActionFunc_x94_1: @ 80676A4
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21400,10 +21400,10 @@ _080676BC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80676A4
+	thumb_func_end MovementActionFunc_x94_1
 
-	thumb_func_start sub_80676C4
-sub_80676C4: @ 80676C4
+	thumb_func_start MovementActionFunc_x95_0
+MovementActionFunc_x95_0: @ 80676C4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21412,16 +21412,16 @@ sub_80676C4: @ 80676C4
 	bl sub_806764C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80676E4
+	bl MovementActionFunc_x95_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80676C4
+	thumb_func_end MovementActionFunc_x95_0
 
-	thumb_func_start sub_80676E4
-sub_80676E4: @ 80676E4
+	thumb_func_start MovementActionFunc_x95_1
+MovementActionFunc_x95_1: @ 80676E4
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21438,10 +21438,10 @@ _080676FC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80676E4
+	thumb_func_end MovementActionFunc_x95_1
 
-	thumb_func_start sub_8067704
-sub_8067704: @ 8067704
+	thumb_func_start MovementActionFunc_x96_0
+MovementActionFunc_x96_0: @ 8067704
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21450,16 +21450,16 @@ sub_8067704: @ 8067704
 	bl sub_806764C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067724
+	bl MovementActionFunc_x96_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067704
+	thumb_func_end MovementActionFunc_x96_0
 
-	thumb_func_start sub_8067724
-sub_8067724: @ 8067724
+	thumb_func_start MovementActionFunc_x96_1
+MovementActionFunc_x96_1: @ 8067724
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21476,10 +21476,10 @@ _0806773C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067724
+	thumb_func_end MovementActionFunc_x96_1
 
-	thumb_func_start sub_8067744
-sub_8067744: @ 8067744
+	thumb_func_start MovementActionFunc_x97_0
+MovementActionFunc_x97_0: @ 8067744
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -21488,16 +21488,16 @@ sub_8067744: @ 8067744
 	bl sub_806764C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8067764
+	bl MovementActionFunc_x97_1
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067744
+	thumb_func_end MovementActionFunc_x97_0
 
-	thumb_func_start sub_8067764
-sub_8067764: @ 8067764
+	thumb_func_start MovementActionFunc_x97_1
+MovementActionFunc_x97_1: @ 8067764
 	push {r4,lr}
 	adds r4, r1, 0
 	bl npc_obj_ministep_stop_on_arrival
@@ -21514,10 +21514,10 @@ _0806777C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067764
+	thumb_func_end MovementActionFunc_x97_1
 
-	thumb_func_start sub_8067784
-sub_8067784: @ 8067784
+	thumb_func_start MovementActionFunc_x98_0
+MovementActionFunc_x98_0: @ 8067784
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -21547,19 +21547,19 @@ sub_8067784: @ 8067784
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067784
+	thumb_func_end MovementActionFunc_x98_0
 
-	thumb_func_start sub_80677C0
-sub_80677C0: @ 80677C0
+	thumb_func_start MovementActionFunc_x98_1
+MovementActionFunc_x98_1: @ 80677C0
 	adds r1, 0x3F
 	ldrb r0, [r1]
 	lsls r0, 27
 	lsrs r0, 31
 	bx lr
-	thumb_func_end sub_80677C0
+	thumb_func_end MovementActionFunc_x98_1
 
-	thumb_func_start sub_80677CC
-sub_80677CC: @ 80677CC
+	thumb_func_start MovementActionFunc_x99_1
+MovementActionFunc_x99_1: @ 80677CC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -21687,10 +21687,10 @@ _080678B8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80677CC
+	thumb_func_end MovementActionFunc_x99_1
 
-	thumb_func_start sub_80678C0
-sub_80678C0: @ 80678C0
+	thumb_func_start MovementActionFunc_x9A_1
+MovementActionFunc_x9A_1: @ 80678C0
 	push {r4,lr}
 	ldrh r2, [r1, 0x3C]
 	adds r2, 0x4
@@ -21716,10 +21716,10 @@ _080678E6:
 	bx r1
 	.align 2, 0
 _080678EC: .4byte gSineTable
-	thumb_func_end sub_80678C0
+	thumb_func_end MovementActionFunc_x9A_1
 
-	thumb_func_start sub_80678F0
-sub_80678F0: @ 80678F0
+	thumb_func_start MovementActionFunc_x9F_0
+MovementActionFunc_x9F_0: @ 80678F0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -21744,25 +21744,25 @@ sub_80678F0: @ 80678F0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80678F0
+	thumb_func_end MovementActionFunc_x9F_0
 
-	thumb_func_start sub_8067924
-sub_8067924: @ 8067924
+	thumb_func_start MovementActionFunc_x9F_1
+MovementActionFunc_x9F_1: @ 8067924
 	adds r1, 0x3F
 	ldrb r0, [r1]
 	lsls r0, 27
 	lsrs r0, 31
 	bx lr
-	thumb_func_end sub_8067924
+	thumb_func_end MovementActionFunc_x9F_1
 
-	thumb_func_start sub_8067930
-sub_8067930: @ 8067930
+	thumb_func_start MovementActionFunc_x18_2
+MovementActionFunc_x18_2: @ 8067930
 	movs r0, 0x1
 	bx lr
-	thumb_func_end sub_8067930
+	thumb_func_end MovementActionFunc_x18_2
 
-	thumb_func_start sub_8067934
-sub_8067934: @ 8067934
+	thumb_func_start MovementActionFunc_x00_1
+MovementActionFunc_x00_1: @ 8067934
 	adds r1, 0x2C
 	ldrb r0, [r1]
 	movs r2, 0x40
@@ -21770,10 +21770,10 @@ sub_8067934: @ 8067934
 	strb r0, [r1]
 	movs r0, 0x1
 	bx lr
-	thumb_func_end sub_8067934
+	thumb_func_end MovementActionFunc_x00_1
 
-	thumb_func_start sub_8067944
-sub_8067944: @ 8067944
+	thumb_func_start MovementActionFunc_xA4_0
+MovementActionFunc_xA4_0: @ 8067944
 	movs r0, 0
 	strh r0, [r1, 0x26]
 	ldrh r0, [r1, 0x32]
@@ -21781,10 +21781,10 @@ sub_8067944: @ 8067944
 	strh r0, [r1, 0x32]
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_8067944
+	thumb_func_end MovementActionFunc_xA4_0
 
-	thumb_func_start sub_8067954
-sub_8067954: @ 8067954
+	thumb_func_start MovementActionFunc_xA4_1
+MovementActionFunc_xA4_1: @ 8067954
 	push {lr}
 	adds r2, r1, 0
 	ldrh r0, [r2, 0x26]
@@ -21803,10 +21803,10 @@ _08067970:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067954
+	thumb_func_end MovementActionFunc_xA4_1
 
-	thumb_func_start sub_8067978
-sub_8067978: @ 8067978
+	thumb_func_start MovementActionFunc_xA5_0
+MovementActionFunc_xA5_0: @ 8067978
 	ldr r0, _08067988 @ =0x0000ff60
 	strh r0, [r1, 0x26]
 	ldrh r0, [r1, 0x32]
@@ -21816,10 +21816,10 @@ sub_8067978: @ 8067978
 	bx lr
 	.align 2, 0
 _08067988: .4byte 0x0000ff60
-	thumb_func_end sub_8067978
+	thumb_func_end MovementActionFunc_xA5_0
 
-	thumb_func_start sub_806798C
-sub_806798C: @ 806798C
+	thumb_func_start MovementActionFunc_xA5_1
+MovementActionFunc_xA5_1: @ 806798C
 	push {lr}
 	ldrh r0, [r1, 0x26]
 	adds r0, 0x8
@@ -21834,13 +21834,13 @@ _080679A0:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806798C
+	thumb_func_end MovementActionFunc_xA5_1
 
-	thumb_func_start sub_80679A8
-sub_80679A8: @ 80679A8
+	thumb_func_start MovementActionFunc_xA4_2
+MovementActionFunc_xA4_2: @ 80679A8
 	movs r0, 0x1
 	bx lr
-	thumb_func_end sub_80679A8
+	thumb_func_end MovementActionFunc_xA4_2
 
 	thumb_func_start npc_obj_transfer_image_anim_pause_flag
 npc_obj_transfer_image_anim_pause_flag: @ 80679AC
@@ -22058,5 +22058,1891 @@ _08067B2E:
 	pop {r0}
 	bx r0
 	thumb_func_end npc_update_obj_anim_flag
+
+	thumb_func_start GetAllGroundEffectFlags_OnSpawn
+GetAllGroundEffectFlags_OnSpawn: @ 8067B34
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	bl ObjectEventUpdateMetatileBehaviors
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Reflection
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_TallGrassOnSpawn
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_LongGrassOnSpawn
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_SandHeap
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShallowFlowingWater
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShortGrass
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_HotSprings
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetAllGroundEffectFlags_OnSpawn
+
+	thumb_func_start GetAllGroundEffectFlags_OnBeginStep
+GetAllGroundEffectFlags_OnBeginStep: @ 8067B7C
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	bl ObjectEventUpdateMetatileBehaviors
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Reflection
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_TallGrassOnBeginStep
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_LongGrassOnBeginStep
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Tracks
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_SandHeap
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShallowFlowingWater
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Puddle
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShortGrass
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_HotSprings
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetAllGroundEffectFlags_OnBeginStep
+
+	thumb_func_start GetAllGroundEffectFlags_OnFinishStep
+GetAllGroundEffectFlags_OnFinishStep: @ 8067BD4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	bl ObjectEventUpdateMetatileBehaviors
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShallowFlowingWater
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_SandHeap
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Puddle
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Ripple
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_ShortGrass
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_HotSprings
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_Seaweed
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl GetGroundEffectFlags_JumpLanding
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetAllGroundEffectFlags_OnFinishStep
+
+	thumb_func_start ObjectEventUpdateMetatileBehaviors
+ObjectEventUpdateMetatileBehaviors: @ 8067C24
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x14
+	ldrsh r0, [r4, r1]
+	movs r2, 0x16
+	ldrsh r1, [r4, r2]
+	bl MapGridGetMetatileBehaviorAt
+	strb r0, [r4, 0x1F]
+	movs r1, 0x10
+	ldrsh r0, [r4, r1]
+	movs r2, 0x12
+	ldrsh r1, [r4, r2]
+	bl MapGridGetMetatileBehaviorAt
+	strb r0, [r4, 0x1E]
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end ObjectEventUpdateMetatileBehaviors
+
+	thumb_func_start GetGroundEffectFlags_Reflection
+GetGroundEffectFlags_Reflection: @ 8067C4C
+	push {r4,r5,lr}
+	sub sp, 0x8
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldr r0, _08067C90 @ =gUnknown_83A7024
+	ldr r1, [r0, 0x4]
+	ldr r0, [r0]
+	str r0, [sp]
+	str r1, [sp, 0x4]
+	adds r0, r4, 0
+	bl sub_8067F88
+	lsls r0, 24
+	lsrs r2, r0, 24
+	cmp r2, 0
+	beq _08067C94
+	ldrb r1, [r4, 0x2]
+	lsls r0, r1, 30
+	cmp r0, 0
+	blt _08067C9E
+	movs r0, 0x3
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x2
+	orrs r0, r1
+	strb r0, [r4, 0x2]
+	subs r0, r2, 0x1
+	lsls r0, 2
+	add r0, sp
+	ldr r1, [r5]
+	ldr r0, [r0]
+	orrs r1, r0
+	str r1, [r5]
+	b _08067C9E
+	.align 2, 0
+_08067C90: .4byte gUnknown_83A7024
+_08067C94:
+	ldrb r1, [r4, 0x2]
+	movs r0, 0x3
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4, 0x2]
+_08067C9E:
+	add sp, 0x8
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_Reflection
+
+	thumb_func_start GetGroundEffectFlags_TallGrassOnSpawn
+GetGroundEffectFlags_TallGrassOnSpawn: @ 8067CA8
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsTallGrass_2
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067CC0
+	ldr r0, [r4]
+	movs r1, 0x1
+	orrs r0, r1
+	str r0, [r4]
+_08067CC0:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_TallGrassOnSpawn
+
+	thumb_func_start GetGroundEffectFlags_TallGrassOnBeginStep
+GetGroundEffectFlags_TallGrassOnBeginStep: @ 8067CC8
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsTallGrass_2
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067CE0
+	ldr r0, [r4]
+	movs r1, 0x2
+	orrs r0, r1
+	str r0, [r4]
+_08067CE0:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_TallGrassOnBeginStep
+
+	thumb_func_start GetGroundEffectFlags_LongGrassOnSpawn
+GetGroundEffectFlags_LongGrassOnSpawn: @ 8067CE8
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsLongGrass
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067D00
+	ldr r0, [r4]
+	movs r1, 0x4
+	orrs r0, r1
+	str r0, [r4]
+_08067D00:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_LongGrassOnSpawn
+
+	thumb_func_start GetGroundEffectFlags_LongGrassOnBeginStep
+GetGroundEffectFlags_LongGrassOnBeginStep: @ 8067D08
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsLongGrass
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067D20
+	ldr r0, [r4]
+	movs r1, 0x8
+	orrs r0, r1
+	str r0, [r4]
+_08067D20:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_LongGrassOnBeginStep
+
+	thumb_func_start GetGroundEffectFlags_Tracks
+GetGroundEffectFlags_Tracks: @ 8067D28
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_ReturnFalse
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067D42
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 1
+	b _08067D5E
+_08067D42:
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_IsMB21OrSand
+	lsls r0, 24
+	cmp r0, 0
+	bne _08067D5A
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_ReturnFalse_5
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067D62
+_08067D5A:
+	ldr r0, [r5]
+	movs r1, 0x80
+_08067D5E:
+	orrs r0, r1
+	str r0, [r5]
+_08067D62:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_Tracks
+
+	thumb_func_start GetGroundEffectFlags_SandHeap
+GetGroundEffectFlags_SandHeap: @ 8067D68
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_ReturnFalse
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067DA6
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_ReturnFalse
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067DA6
+	ldrb r1, [r4, 0x2]
+	lsls r0, r1, 27
+	cmp r0, 0
+	blt _08067DB0
+	movs r0, 0x11
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x10
+	orrs r0, r1
+	strb r0, [r4, 0x2]
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 4
+	orrs r0, r1
+	str r0, [r5]
+	b _08067DB0
+_08067DA6:
+	ldrb r1, [r4, 0x2]
+	movs r0, 0x11
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4, 0x2]
+_08067DB0:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_SandHeap
+
+	thumb_func_start GetGroundEffectFlags_ShallowFlowingWater
+GetGroundEffectFlags_ShallowFlowingWater: @ 8067DB8
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_IsWaterfallBottom
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067DD6
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_IsWaterfallBottom
+	lsls r0, 24
+	cmp r0, 0
+	bne _08067DEE
+_08067DD6:
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_ReturnFalse_10
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067E0C
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_ReturnFalse_10
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067E0C
+_08067DEE:
+	ldrb r1, [r4, 0x2]
+	lsls r0, r1, 28
+	cmp r0, 0
+	blt _08067E16
+	movs r0, 0x9
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x8
+	orrs r0, r1
+	strb r0, [r4, 0x2]
+	ldr r0, [r5]
+	movs r1, 0x40
+	orrs r0, r1
+	str r0, [r5]
+	b _08067E16
+_08067E0C:
+	ldrb r1, [r4, 0x2]
+	movs r0, 0x9
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4, 0x2]
+_08067E16:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_ShallowFlowingWater
+
+	thumb_func_start GetGroundEffectFlags_Puddle
+GetGroundEffectFlags_Puddle: @ 8067E1C
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_IsPuddle
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067E44
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_IsPuddle
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067E44
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 3
+	orrs r0, r1
+	str r0, [r5]
+_08067E44:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_Puddle
+
+	thumb_func_start GetGroundEffectFlags_Ripple
+GetGroundEffectFlags_Ripple: @ 8067E4C
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsPondWaterOrPuddle
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067E66
+	ldr r0, [r4]
+	movs r1, 0x80
+	lsls r1, 2
+	orrs r0, r1
+	str r0, [r4]
+_08067E66:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_Ripple
+
+	thumb_func_start GetGroundEffectFlags_ShortGrass
+GetGroundEffectFlags_ShortGrass: @ 8067E6C
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_ReturnFalse_8
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067EAA
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_ReturnFalse_8
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067EAA
+	ldrb r1, [r4, 0x2]
+	lsls r0, r1, 29
+	cmp r0, 0
+	blt _08067EB4
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r4, 0x2]
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 10
+	orrs r0, r1
+	str r0, [r5]
+	b _08067EB4
+_08067EAA:
+	ldrb r1, [r4, 0x2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4, 0x2]
+_08067EB4:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_ShortGrass
+
+	thumb_func_start GetGroundEffectFlags_HotSprings
+GetGroundEffectFlags_HotSprings: @ 8067EBC
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x1E]
+	bl MetatileBehavior_IsHotSprings
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067EFA
+	ldrb r0, [r4, 0x1F]
+	bl MetatileBehavior_IsHotSprings
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067EFA
+	ldrb r1, [r4, 0x2]
+	lsls r0, r1, 26
+	cmp r0, 0
+	blt _08067F04
+	movs r0, 0x21
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x20
+	orrs r0, r1
+	strb r0, [r4, 0x2]
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 11
+	orrs r0, r1
+	str r0, [r5]
+	b _08067F04
+_08067EFA:
+	ldrb r1, [r4, 0x2]
+	movs r0, 0x21
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4, 0x2]
+_08067F04:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_HotSprings
+
+	thumb_func_start GetGroundEffectFlags_Seaweed
+GetGroundEffectFlags_Seaweed: @ 8067F0C
+	push {r4,lr}
+	adds r4, r1, 0
+	ldrb r0, [r0, 0x1E]
+	bl MetatileBehavior_IsMB22
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067F26
+	ldr r0, [r4]
+	movs r1, 0x80
+	lsls r1, 12
+	orrs r0, r1
+	str r0, [r4]
+_08067F26:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_Seaweed
+
+	thumb_func_start GetGroundEffectFlags_JumpLanding
+GetGroundEffectFlags_JumpLanding: @ 8067F2C
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	adds r7, r0, 0
+	adds r6, r1, 0
+	ldr r0, [r7]
+	ldr r1, _08067F68 @ =0x02000020
+	ands r0, r1
+	cmp r0, 0x20
+	bne _08067F7E
+	movs r5, 0
+	ldr r0, _08067F6C @ =gUnknown_83A702C
+	mov r8, r0
+_08067F46:
+	lsls r4, r5, 2
+	mov r0, r8
+	adds r1, r4, r0
+	ldrb r0, [r7, 0x1E]
+	ldr r1, [r1]
+	bl _call_via_r1
+	lsls r0, 24
+	cmp r0, 0
+	beq _08067F74
+	ldr r0, _08067F70 @ =gUnknown_83A7044
+	adds r0, r4, r0
+	ldr r1, [r6]
+	ldr r0, [r0]
+	orrs r1, r0
+	str r1, [r6]
+	b _08067F7E
+	.align 2, 0
+_08067F68: .4byte 0x02000020
+_08067F6C: .4byte gUnknown_83A702C
+_08067F70: .4byte gUnknown_83A7044
+_08067F74:
+	adds r0, r5, 0x1
+	lsls r0, 24
+	lsrs r5, r0, 24
+	cmp r5, 0x5
+	bls _08067F46
+_08067F7E:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end GetGroundEffectFlags_JumpLanding
+
+	thumb_func_start sub_8067F88
+sub_8067F88: @ 8067F88
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	adds r5, r0, 0
+	ldrb r0, [r5, 0x5]
+	bl GetObjectEventGraphicsInfo
+	movs r4, 0
+	movs r0, 0x1
+	mov r10, r0
+_08067FA0:
+	movs r1, 0x10
+	ldrsh r0, [r5, r1]
+	ldrh r1, [r5, 0x12]
+	add r1, r10
+	lsls r4, 16
+	asrs r6, r4, 16
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	mov r9, r4
+	cmp r0, 0
+	bne _080680BA
+	movs r3, 0x14
+	ldrsh r0, [r5, r3]
+	ldrh r1, [r5, 0x16]
+	add r1, r10
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080680BA
+	movs r2, 0x1
+	lsls r0, r2, 16
+	asrs r1, r0, 16
+	mov r8, r0
+	cmp r2, r1
+	bge _080680A8
+	movs r0, 0x80
+	lsls r0, 9
+	asrs r7, r0, 16
+_08067FFC:
+	ldrh r0, [r5, 0x10]
+	lsls r1, r2, 16
+	asrs r4, r1, 16
+	adds r0, r4, r0
+	lsls r0, 16
+	asrs r0, 16
+	ldrh r1, [r5, 0x12]
+	adds r1, r7, r1
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080680BA
+	ldrh r0, [r5, 0x10]
+	subs r0, r4
+	lsls r0, 16
+	asrs r0, 16
+	ldrh r1, [r5, 0x12]
+	adds r1, r7, r1
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080680BA
+	ldrh r0, [r5, 0x14]
+	adds r0, r4, r0
+	lsls r0, 16
+	asrs r0, 16
+	ldrh r1, [r5, 0x16]
+	adds r1, r7, r1
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080680BA
+	ldrh r0, [r5, 0x14]
+	subs r0, r4
+	lsls r0, 16
+	asrs r0, 16
+	ldrh r1, [r5, 0x16]
+	adds r1, r7, r1
+	adds r1, r6, r1
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	bl GetReflectionTypeByMetatileBehavior
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	bne _080680BA
+	adds r0, r4, 0x1
+	lsls r0, 16
+	lsrs r2, r0, 16
+	asrs r0, 16
+	mov r3, r8
+	asrs r1, r3, 16
+	cmp r0, r1
+	blt _08067FFC
+_080680A8:
+	movs r0, 0x80
+	lsls r0, 9
+	add r0, r9
+	lsrs r4, r0, 16
+	asrs r0, 16
+	cmp r0, 0x2
+	bge _080680B8
+	b _08067FA0
+_080680B8:
+	movs r0, 0
+_080680BA:
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	thumb_func_end sub_8067F88
+
+	thumb_func_start GetReflectionTypeByMetatileBehavior
+GetReflectionTypeByMetatileBehavior: @ 80680C8
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	adds r0, r4, 0
+	bl MetatileBehavior_IsIce
+	lsls r0, 24
+	cmp r0, 0
+	beq _080680DE
+	movs r0, 0x1
+	b _080680F0
+_080680DE:
+	adds r0, r4, 0
+	bl MetatileBehavior_IsReflective
+	lsls r0, 24
+	cmp r0, 0
+	bne _080680EE
+	movs r0, 0
+	b _080680F0
+_080680EE:
+	movs r0, 0x2
+_080680F0:
+	pop {r4}
+	pop {r1}
+	bx r1
+	thumb_func_end GetReflectionTypeByMetatileBehavior
+
+	thumb_func_start GetLedgeJumpDirection
+GetLedgeJumpDirection: @ 80680F8
+	push {r4,lr}
+	lsls r0, 16
+	lsrs r3, r0, 16
+	lsls r1, 16
+	lsrs r1, 16
+	lsls r2, 24
+	lsrs r4, r2, 24
+	cmp r4, 0
+	beq _0806813E
+	cmp r4, 0x4
+	bls _08068114
+	subs r0, r4, 0x4
+	lsls r0, 24
+	lsrs r4, r0, 24
+_08068114:
+	subs r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	lsls r0, r3, 16
+	asrs r0, 16
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetMetatileBehaviorAt
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r2, _08068144 @ =gUnknown_83A705C
+	lsls r1, r4, 2
+	adds r1, r2
+	ldr r1, [r1]
+	bl _call_via_r1
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	beq _08068148
+_0806813E:
+	movs r0, 0
+	b _0806814E
+	.align 2, 0
+_08068144: .4byte gUnknown_83A705C
+_08068148:
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+_0806814E:
+	pop {r4}
+	pop {r1}
+	bx r1
+	thumb_func_end GetLedgeJumpDirection
+
+	thumb_func_start ObjectEventSetSpriteOamTableForLongGrass
+ObjectEventSetSpriteOamTableForLongGrass: @ 8068154
+	push {r4-r6,lr}
+	adds r5, r0, 0
+	adds r4, r1, 0
+	ldrb r0, [r5]
+	lsls r0, 27
+	cmp r0, 0
+	blt _080681A8
+	ldrb r0, [r5, 0x1E]
+	bl MetatileBehavior_IsLongGrass
+	lsls r0, 24
+	cmp r0, 0
+	beq _080681A8
+	ldrb r0, [r5, 0x1F]
+	bl MetatileBehavior_IsLongGrass
+	lsls r0, 24
+	cmp r0, 0
+	beq _080681A8
+	adds r4, 0x42
+	ldrb r1, [r4]
+	movs r6, 0x40
+	negs r6, r6
+	adds r0, r6, 0
+	ands r0, r1
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r4]
+	ldrb r0, [r5, 0xB]
+	lsrs r0, 4
+	bl ZCoordToPriority
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x1
+	bne _080681A8
+	ldrb r0, [r4]
+	adds r1, r6, 0
+	ands r1, r0
+	movs r0, 0x5
+	orrs r1, r0
+	strb r1, [r4]
+_080681A8:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end ObjectEventSetSpriteOamTableForLongGrass
+
+	thumb_func_start IsZCoordMismatchAt
+IsZCoordMismatchAt: @ 80681B0
+	push {r4,lr}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	lsls r1, 16
+	lsrs r0, r1, 16
+	lsls r2, 16
+	lsrs r1, r2, 16
+	cmp r4, 0
+	beq _080681DE
+	lsls r0, 16
+	asrs r0, 16
+	lsls r1, 16
+	asrs r1, 16
+	bl MapGridGetZCoordAt
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0
+	beq _080681DE
+	cmp r0, 0xF
+	beq _080681DE
+	cmp r0, r4
+	bne _080681E2
+_080681DE:
+	movs r0, 0
+	b _080681E4
+_080681E2:
+	movs r0, 0x1
+_080681E4:
+	pop {r4}
+	pop {r1}
+	bx r1
+	thumb_func_end IsZCoordMismatchAt
+
+	thumb_func_start ObjectEventUpdateZCoordAndPriority
+ObjectEventUpdateZCoordAndPriority: @ 80681EC
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x3]
+	lsls r0, 29
+	cmp r0, 0
+	blt _0806823A
+	adds r0, r4, 0
+	bl ObjectEventUpdateZCoord
+	ldr r1, _08068240 @ =gUnknown_83A708C
+	ldrb r2, [r4, 0xB]
+	lsls r2, 24
+	lsrs r0, r2, 28
+	adds r0, r1
+	ldrb r0, [r0]
+	adds r4, r5, 0
+	adds r4, 0x42
+	movs r1, 0x3F
+	ands r1, r0
+	ldrb r3, [r4]
+	movs r0, 0x40
+	negs r0, r0
+	ands r0, r3
+	orrs r0, r1
+	strb r0, [r4]
+	ldr r0, _08068244 @ =gUnknown_83A707C
+	lsrs r2, 28
+	adds r2, r0
+	movs r0, 0x3
+	ldrb r1, [r2]
+	ands r1, r0
+	lsls r1, 2
+	ldrb r2, [r5, 0x5]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r5, 0x5]
+_0806823A:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068240: .4byte gUnknown_83A708C
+_08068244: .4byte gUnknown_83A707C
+	thumb_func_end ObjectEventUpdateZCoordAndPriority
+
+	thumb_func_start InitObjectPriorityByZCoord
+InitObjectPriorityByZCoord: @ 8068248
+	push {r4,lr}
+	lsls r1, 24
+	lsrs r1, 24
+	ldr r2, _0806828C @ =gUnknown_83A708C
+	adds r2, r1, r2
+	ldrb r2, [r2]
+	movs r3, 0x42
+	adds r3, r0
+	mov r12, r3
+	movs r3, 0x3F
+	ands r3, r2
+	mov r2, r12
+	ldrb r4, [r2]
+	movs r2, 0x40
+	negs r2, r2
+	ands r2, r4
+	orrs r2, r3
+	mov r3, r12
+	strb r2, [r3]
+	ldr r2, _08068290 @ =gUnknown_83A707C
+	adds r1, r2
+	movs r3, 0x3
+	ldrb r2, [r1]
+	ands r2, r3
+	lsls r2, 2
+	ldrb r3, [r0, 0x5]
+	movs r1, 0xD
+	negs r1, r1
+	ands r1, r3
+	orrs r1, r2
+	strb r1, [r0, 0x5]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806828C: .4byte gUnknown_83A708C
+_08068290: .4byte gUnknown_83A707C
+	thumb_func_end InitObjectPriorityByZCoord
+
+	thumb_func_start ZCoordToPriority
+ZCoordToPriority: @ 8068294
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r1, _080682A0 @ =gUnknown_83A707C
+	adds r0, r1
+	ldrb r0, [r0]
+	bx lr
+	.align 2, 0
+_080682A0: .4byte gUnknown_83A707C
+	thumb_func_end ZCoordToPriority
+
+	thumb_func_start ObjectEventUpdateZCoord
+ObjectEventUpdateZCoord: @ 80682A4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x10
+	ldrsh r0, [r4, r1]
+	movs r2, 0x12
+	ldrsh r1, [r4, r2]
+	bl MapGridGetZCoordAt
+	lsls r0, 24
+	lsrs r5, r0, 24
+	movs r1, 0x14
+	ldrsh r0, [r4, r1]
+	movs r2, 0x16
+	ldrsh r1, [r4, r2]
+	bl MapGridGetZCoordAt
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r5, 0xF
+	beq _080682F2
+	cmp r0, 0xF
+	beq _080682F2
+	movs r3, 0xF
+	adds r0, r5, 0
+	ands r0, r3
+	ldrb r1, [r4, 0xB]
+	movs r2, 0x10
+	negs r2, r2
+	ands r2, r1
+	orrs r2, r0
+	strb r2, [r4, 0xB]
+	cmp r5, 0
+	beq _080682F2
+	cmp r5, 0xF
+	beq _080682F2
+	lsls r0, r5, 4
+	ands r2, r3
+	orrs r2, r0
+	strb r2, [r4, 0xB]
+_080682F2:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end ObjectEventUpdateZCoord
+
+	thumb_func_start SetObjectSubpriorityByZCoord
+SetObjectSubpriorityByZCoord: @ 80682F8
+	push {r4,r5,lr}
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r2, 24
+	lsrs r2, 24
+	adds r3, r1, 0
+	adds r3, 0x29
+	movs r5, 0
+	ldrsb r5, [r3, r5]
+	ldrh r4, [r1, 0x22]
+	ldr r3, _08068338 @ =gSpriteCoordOffsetY
+	subs r4, r5
+	ldrh r3, [r3]
+	adds r4, r3
+	adds r4, 0x8
+	movs r3, 0xFF
+	ands r4, r3
+	lsrs r4, 4
+	movs r3, 0x10
+	subs r3, r4
+	lsls r3, 17
+	ldr r4, _0806833C @ =gUnknown_83A706C
+	adds r0, r4
+	lsrs r3, 16
+	ldrb r0, [r0]
+	adds r3, r0
+	adds r2, r3
+	adds r1, 0x43
+	strb r2, [r1]
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068338: .4byte gSpriteCoordOffsetY
+_0806833C: .4byte gUnknown_83A706C
+	thumb_func_end SetObjectSubpriorityByZCoord
+
+	thumb_func_start ObjectEventUpdateSubpriority
+ObjectEventUpdateSubpriority: @ 8068340
+	push {lr}
+	adds r2, r0, 0
+	ldrb r0, [r2, 0x3]
+	lsls r0, 29
+	cmp r0, 0
+	blt _08068356
+	ldrb r0, [r2, 0xB]
+	lsrs r0, 4
+	movs r2, 0x1
+	bl SetObjectSubpriorityByZCoord
+_08068356:
+	pop {r0}
+	bx r0
+	thumb_func_end ObjectEventUpdateSubpriority
+
+	thumb_func_start AreZCoordsCompatible
+AreZCoordsCompatible: @ 806835C
+	push {lr}
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r1, 24
+	lsrs r1, 24
+	cmp r0, 0
+	beq _08068372
+	cmp r1, 0
+	beq _08068372
+	cmp r0, r1
+	bne _08068376
+_08068372:
+	movs r0, 0x1
+	b _08068378
+_08068376:
+	movs r0, 0
+_08068378:
+	pop {r1}
+	bx r1
+	thumb_func_end AreZCoordsCompatible
+
+	thumb_func_start GroundEffect_SpawnOnTallGrass
+GroundEffect_SpawnOnTallGrass: @ 806837C
+	push {lr}
+	ldr r3, _080683C0 @ =gFieldEffectArguments
+	movs r2, 0x10
+	ldrsh r1, [r0, r2]
+	str r1, [r3]
+	movs r2, 0x12
+	ldrsh r1, [r0, r2]
+	str r1, [r3, 0x4]
+	ldrb r1, [r0, 0xB]
+	lsrs r1, 4
+	str r1, [r3, 0x8]
+	movs r1, 0x2
+	str r1, [r3, 0xC]
+	ldrb r1, [r0, 0x8]
+	lsls r1, 8
+	ldrb r2, [r0, 0x9]
+	orrs r1, r2
+	str r1, [r3, 0x10]
+	ldrb r0, [r0, 0xA]
+	str r0, [r3, 0x14]
+	ldr r0, _080683C4 @ =gSaveBlock1Ptr
+	ldr r1, [r0]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 8
+	ldrb r1, [r1, 0x4]
+	orrs r0, r1
+	str r0, [r3, 0x18]
+	movs r0, 0x1
+	str r0, [r3, 0x1C]
+	movs r0, 0x4
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080683C0: .4byte gFieldEffectArguments
+_080683C4: .4byte gSaveBlock1Ptr
+	thumb_func_end GroundEffect_SpawnOnTallGrass
+
+	thumb_func_start GroundEffect_StepOnTallGrass
+GroundEffect_StepOnTallGrass: @ 80683C8
+	push {lr}
+	ldr r3, _0806840C @ =gFieldEffectArguments
+	movs r2, 0x10
+	ldrsh r1, [r0, r2]
+	str r1, [r3]
+	movs r2, 0x12
+	ldrsh r1, [r0, r2]
+	str r1, [r3, 0x4]
+	ldrb r1, [r0, 0xB]
+	lsrs r1, 4
+	str r1, [r3, 0x8]
+	movs r1, 0x2
+	str r1, [r3, 0xC]
+	ldrb r1, [r0, 0x8]
+	lsls r1, 8
+	ldrb r2, [r0, 0x9]
+	orrs r1, r2
+	str r1, [r3, 0x10]
+	ldrb r0, [r0, 0xA]
+	str r0, [r3, 0x14]
+	ldr r0, _08068410 @ =gSaveBlock1Ptr
+	ldr r1, [r0]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 8
+	ldrb r1, [r1, 0x4]
+	orrs r0, r1
+	str r0, [r3, 0x18]
+	movs r0, 0
+	str r0, [r3, 0x1C]
+	movs r0, 0x4
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0806840C: .4byte gFieldEffectArguments
+_08068410: .4byte gSaveBlock1Ptr
+	thumb_func_end GroundEffect_StepOnTallGrass
+
+	thumb_func_start GroundEffect_SpawnOnLongGrass
+GroundEffect_SpawnOnLongGrass: @ 8068414
+	push {lr}
+	ldr r3, _08068458 @ =gFieldEffectArguments
+	movs r2, 0x10
+	ldrsh r1, [r0, r2]
+	str r1, [r3]
+	movs r2, 0x12
+	ldrsh r1, [r0, r2]
+	str r1, [r3, 0x4]
+	ldrb r1, [r0, 0xB]
+	lsrs r1, 4
+	str r1, [r3, 0x8]
+	movs r1, 0x2
+	str r1, [r3, 0xC]
+	ldrb r1, [r0, 0x8]
+	lsls r1, 8
+	ldrb r2, [r0, 0x9]
+	orrs r1, r2
+	str r1, [r3, 0x10]
+	ldrb r0, [r0, 0xA]
+	str r0, [r3, 0x14]
+	ldr r0, _0806845C @ =gSaveBlock1Ptr
+	ldr r1, [r0]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 8
+	ldrb r1, [r1, 0x4]
+	orrs r0, r1
+	str r0, [r3, 0x18]
+	movs r0, 0x1
+	str r0, [r3, 0x1C]
+	movs r0, 0x11
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068458: .4byte gFieldEffectArguments
+_0806845C: .4byte gSaveBlock1Ptr
+	thumb_func_end GroundEffect_SpawnOnLongGrass
+
+	thumb_func_start GroundEffect_StepOnLongGrass
+GroundEffect_StepOnLongGrass: @ 8068460
+	push {lr}
+	ldr r3, _080684A4 @ =gFieldEffectArguments
+	movs r2, 0x10
+	ldrsh r1, [r0, r2]
+	str r1, [r3]
+	movs r2, 0x12
+	ldrsh r1, [r0, r2]
+	str r1, [r3, 0x4]
+	ldrb r1, [r0, 0xB]
+	lsrs r1, 4
+	str r1, [r3, 0x8]
+	movs r1, 0x2
+	str r1, [r3, 0xC]
+	ldrb r1, [r0, 0x8]
+	lsls r1, 8
+	ldrb r2, [r0, 0x9]
+	orrs r1, r2
+	str r1, [r3, 0x10]
+	ldrb r0, [r0, 0xA]
+	str r0, [r3, 0x14]
+	ldr r0, _080684A8 @ =gSaveBlock1Ptr
+	ldr r1, [r0]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 8
+	ldrb r1, [r1, 0x4]
+	orrs r0, r1
+	str r0, [r3, 0x18]
+	movs r0, 0
+	str r0, [r3, 0x1C]
+	movs r0, 0x11
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080684A4: .4byte gFieldEffectArguments
+_080684A8: .4byte gSaveBlock1Ptr
+	thumb_func_end GroundEffect_StepOnLongGrass
+
+	thumb_func_start GroundEffect_WaterReflection
+GroundEffect_WaterReflection: @ 80684AC
+	push {lr}
+	movs r2, 0
+	bl SetUpReflection
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_WaterReflection
+
+	thumb_func_start GroundEffect_IceReflection
+GroundEffect_IceReflection: @ 80684B8
+	push {lr}
+	movs r2, 0x1
+	bl SetUpReflection
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_IceReflection
+
+	thumb_func_start GroundEffect_FlowingWater
+GroundEffect_FlowingWater: @ 80684C4
+	push {lr}
+	adds r1, r0, 0
+	movs r0, 0x22
+	bl oe_exec_and_other_stuff
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_FlowingWater
+
+	thumb_func_start GroundEffect_SandTracks
+GroundEffect_SandTracks: @ 80684D4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x5]
+	bl GetObjectEventGraphicsInfo
+	ldr r1, _080684FC @ =gUnknown_83A709C
+	ldrb r0, [r0, 0xD]
+	lsls r0, 2
+	adds r0, r1
+	ldr r3, [r0]
+	adds r0, r4, 0
+	adds r1, r5, 0
+	movs r2, 0
+	bl _call_via_r3
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080684FC: .4byte gUnknown_83A709C
+	thumb_func_end GroundEffect_SandTracks
+
+	thumb_func_start GroundEffect_DeepSandTracks
+GroundEffect_DeepSandTracks: @ 8068500
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4, 0x5]
+	bl GetObjectEventGraphicsInfo
+	ldr r1, _08068528 @ =gUnknown_83A709C
+	ldrb r0, [r0, 0xD]
+	lsls r0, 2
+	adds r0, r1
+	ldr r3, [r0]
+	adds r0, r4, 0
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl _call_via_r3
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068528: .4byte gUnknown_83A709C
+	thumb_func_end GroundEffect_DeepSandTracks
+
+	thumb_func_start nullsub_26
+nullsub_26: @ 806852C
+	bx lr
+	thumb_func_end nullsub_26
+
+	thumb_func_start DoTracksGroundEffect_Footprints
+DoTracksGroundEffect_Footprints: @ 8068530
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r5, r0, 0
+	lsls r4, r2, 24
+	lsrs r4, 24
+	ldr r1, _08068578 @ =gUnknown_83A70A8
+	mov r0, sp
+	movs r2, 0x4
+	bl memcpy
+	ldr r1, _0806857C @ =gFieldEffectArguments
+	movs r2, 0x14
+	ldrsh r0, [r5, r2]
+	str r0, [r1]
+	movs r2, 0x16
+	ldrsh r0, [r5, r2]
+	str r0, [r1, 0x4]
+	movs r0, 0x95
+	str r0, [r1, 0x8]
+	movs r0, 0x2
+	str r0, [r1, 0xC]
+	ldrb r0, [r5, 0x18]
+	lsls r0, 28
+	lsrs r0, 28
+	str r0, [r1, 0x10]
+	lsls r4, 1
+	mov r1, sp
+	adds r0, r1, r4
+	ldrb r0, [r0]
+	bl FieldEffectStart
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068578: .4byte gUnknown_83A70A8
+_0806857C: .4byte gFieldEffectArguments
+	thumb_func_end DoTracksGroundEffect_Footprints
+
+	thumb_func_start DoTracksGroundEffect_BikeTireTracks
+DoTracksGroundEffect_BikeTireTracks: @ 8068580
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r1, [r4, 0x10]
+	ldr r0, [r4, 0x14]
+	cmp r1, r0
+	beq _080685C2
+	ldr r2, _080685C8 @ =gFieldEffectArguments
+	movs r1, 0x14
+	ldrsh r0, [r4, r1]
+	str r0, [r2]
+	movs r1, 0x16
+	ldrsh r0, [r4, r1]
+	str r0, [r2, 0x4]
+	movs r0, 0x95
+	str r0, [r2, 0x8]
+	movs r0, 0x2
+	str r0, [r2, 0xC]
+	ldr r3, _080685CC @ =gUnknown_83A70AC
+	ldrb r1, [r4, 0x18]
+	lsls r1, 28
+	lsrs r1, 28
+	adds r0, r4, 0
+	adds r0, 0x20
+	ldrb r0, [r0]
+	lsls r0, 2
+	subs r0, 0x5
+	adds r1, r0
+	adds r1, r3
+	ldrb r0, [r1]
+	str r0, [r2, 0x10]
+	movs r0, 0x23
+	bl FieldEffectStart
+_080685C2:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080685C8: .4byte gFieldEffectArguments
+_080685CC: .4byte gUnknown_83A70AC
+	thumb_func_end DoTracksGroundEffect_BikeTireTracks
+
+	thumb_func_start GroundEffect_Ripple
+GroundEffect_Ripple: @ 80685D0
+	push {lr}
+	bl DoRippleFieldEffect
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_Ripple
+
+	thumb_func_start GroundEffect_StepOnPuddle
+GroundEffect_StepOnPuddle: @ 80685DC
+	push {lr}
+	adds r1, r0, 0
+	movs r0, 0xF
+	bl oe_exec_and_other_stuff
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_StepOnPuddle
+
+	thumb_func_start GroundEffect_SandHeap
+GroundEffect_SandHeap: @ 80685EC
+	push {lr}
+	adds r1, r0, 0
+	movs r0, 0x27
+	bl oe_exec_and_other_stuff
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_SandHeap
+
+	thumb_func_start GroundEffect_JumpOnTallGrass
+GroundEffect_JumpOnTallGrass: @ 80685FC
+	push {r4-r7,lr}
+	sub sp, 0x4
+	adds r5, r0, 0
+	adds r6, r1, 0
+	ldr r1, _08068650 @ =gFieldEffectArguments
+	movs r2, 0x10
+	ldrsh r0, [r5, r2]
+	str r0, [r1]
+	movs r4, 0x12
+	ldrsh r0, [r5, r4]
+	str r0, [r1, 0x4]
+	ldrb r0, [r5, 0xB]
+	lsrs r0, 4
+	str r0, [r1, 0x8]
+	movs r0, 0x2
+	str r0, [r1, 0xC]
+	movs r0, 0xC
+	bl FieldEffectStart
+	ldrb r0, [r5, 0x8]
+	ldrb r1, [r5, 0x9]
+	ldrb r2, [r5, 0xA]
+	movs r7, 0x10
+	ldrsh r3, [r5, r7]
+	movs r7, 0x12
+	ldrsh r4, [r5, r7]
+	str r4, [sp]
+	bl sub_80DB564
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x40
+	bne _08068646
+	adds r0, r5, 0
+	adds r1, r6, 0
+	bl GroundEffect_SpawnOnTallGrass
+_08068646:
+	add sp, 0x4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068650: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_JumpOnTallGrass
+
+	thumb_func_start GroundEffect_JumpOnLongGrass
+GroundEffect_JumpOnLongGrass: @ 8068654
+	push {lr}
+	ldr r2, _08068678 @ =gFieldEffectArguments
+	movs r3, 0x10
+	ldrsh r1, [r0, r3]
+	str r1, [r2]
+	movs r3, 0x12
+	ldrsh r1, [r0, r3]
+	str r1, [r2, 0x4]
+	ldrb r0, [r0, 0xB]
+	lsrs r0, 4
+	str r0, [r2, 0x8]
+	movs r0, 0x2
+	str r0, [r2, 0xC]
+	movs r0, 0x12
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068678: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_JumpOnLongGrass
+
+	thumb_func_start GroundEffect_JumpOnShallowWater
+GroundEffect_JumpOnShallowWater: @ 806867C
+	push {r4,lr}
+	ldr r3, _080686A8 @ =gFieldEffectArguments
+	movs r4, 0x10
+	ldrsh r2, [r0, r4]
+	str r2, [r3]
+	movs r4, 0x12
+	ldrsh r2, [r0, r4]
+	str r2, [r3, 0x4]
+	ldrb r0, [r0, 0xB]
+	lsrs r0, 4
+	str r0, [r3, 0x8]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 28
+	lsrs r0, 30
+	str r0, [r3, 0xC]
+	movs r0, 0x10
+	bl FieldEffectStart
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080686A8: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_JumpOnShallowWater
+
+	thumb_func_start GroundEffect_JumpOnWater
+GroundEffect_JumpOnWater: @ 80686AC
+	push {r4,lr}
+	ldr r3, _080686D8 @ =gFieldEffectArguments
+	movs r4, 0x10
+	ldrsh r2, [r0, r4]
+	str r2, [r3]
+	movs r4, 0x12
+	ldrsh r2, [r0, r4]
+	str r2, [r3, 0x4]
+	ldrb r0, [r0, 0xB]
+	lsrs r0, 4
+	str r0, [r3, 0x8]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 28
+	lsrs r0, 30
+	str r0, [r3, 0xC]
+	movs r0, 0xE
+	bl FieldEffectStart
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080686D8: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_JumpOnWater
+
+	thumb_func_start GroundEffect_JumpLandingDust
+GroundEffect_JumpLandingDust: @ 80686DC
+	push {r4,lr}
+	ldr r3, _08068708 @ =gFieldEffectArguments
+	movs r4, 0x10
+	ldrsh r2, [r0, r4]
+	str r2, [r3]
+	movs r4, 0x12
+	ldrsh r2, [r0, r4]
+	str r2, [r3, 0x4]
+	ldrb r0, [r0, 0xB]
+	lsrs r0, 4
+	str r0, [r3, 0x8]
+	ldrb r0, [r1, 0x5]
+	lsls r0, 28
+	lsrs r0, 30
+	str r0, [r3, 0xC]
+	movs r0, 0xA
+	bl FieldEffectStart
+	pop {r4}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068708: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_JumpLandingDust
+
+	thumb_func_start GroundEffect_ShortGrass
+GroundEffect_ShortGrass: @ 806870C
+	push {lr}
+	adds r1, r0, 0
+	movs r0, 0x29
+	bl oe_exec_and_other_stuff
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_ShortGrass
+
+	thumb_func_start GroundEffect_HotSprings
+GroundEffect_HotSprings: @ 806871C
+	push {lr}
+	adds r1, r0, 0
+	movs r0, 0x2A
+	bl oe_exec_and_other_stuff
+	pop {r0}
+	bx r0
+	thumb_func_end GroundEffect_HotSprings
+
+	thumb_func_start GroundEffect_Seaweed
+GroundEffect_Seaweed: @ 806872C
+	push {lr}
+	ldr r2, _08068748 @ =gFieldEffectArguments
+	movs r3, 0x10
+	ldrsh r1, [r0, r3]
+	str r1, [r2]
+	movs r1, 0x12
+	ldrsh r0, [r0, r1]
+	str r0, [r2, 0x4]
+	movs r0, 0x35
+	bl FieldEffectStart
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068748: .4byte gFieldEffectArguments
+	thumb_func_end GroundEffect_Seaweed
+
+	thumb_func_start DoFlaggedGroundEffects
+DoFlaggedGroundEffects: @ 806874C
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	adds r6, r0, 0
+	adds r7, r1, 0
+	adds r5, r2, 0
+	ldrb r0, [r6, 0x8]
+	cmp r0, 0x7F
+	bne _08068766
+	ldrb r0, [r6, 0x1]
+	lsls r0, 26
+	cmp r0, 0
+	blt _0806878E
+_08068766:
+	movs r4, 0
+	ldr r0, _08068798 @ =gUnknown_83A70BC
+	mov r8, r0
+_0806876C:
+	movs r0, 0x1
+	ands r0, r5
+	cmp r0, 0
+	beq _08068782
+	lsls r0, r4, 2
+	add r0, r8
+	ldr r2, [r0]
+	adds r0, r6, 0
+	adds r1, r7, 0
+	bl _call_via_r2
+_08068782:
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	lsrs r5, 1
+	cmp r4, 0x13
+	bls _0806876C
+_0806878E:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08068798: .4byte gUnknown_83A70BC
+	thumb_func_end DoFlaggedGroundEffects
+
+	thumb_func_start filters_out_some_ground_effects
+filters_out_some_ground_effects: @ 806879C
+	push {lr}
+	adds r2, r0, 0
+	adds r3, r1, 0
+	ldrb r0, [r2]
+	lsls r0, 27
+	cmp r0, 0
+	bge _080687CA
+	ldrb r1, [r2, 0x2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x11
+	negs r1, r1
+	ands r0, r1
+	adds r1, 0x8
+	ands r0, r1
+	subs r1, 0x18
+	ands r0, r1
+	strb r0, [r2, 0x2]
+	ldr r0, [r3]
+	ldr r1, _080687D0 @ =0xfff9f7bd
+	ands r0, r1
+	str r0, [r3]
+_080687CA:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080687D0: .4byte 0xfff9f7bd
+	thumb_func_end filters_out_some_ground_effects
+
+	thumb_func_start FilterOutStepOnPuddleGroundEffectIfJumping
+FilterOutStepOnPuddleGroundEffectIfJumping: @ 80687D4
+	push {lr}
+	adds r2, r1, 0
+	ldrb r0, [r0]
+	lsls r0, 26
+	cmp r0, 0
+	bge _080687E8
+	ldr r0, [r2]
+	ldr r1, _080687EC @ =0xfffffbff
+	ands r0, r1
+	str r0, [r2]
+_080687E8:
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080687EC: .4byte 0xfffffbff
+	thumb_func_end FilterOutStepOnPuddleGroundEffectIfJumping
+
+	thumb_func_start DoGroundEffects_OnSpawn
+DoGroundEffects_OnSpawn: @ 80687F0
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4]
+	lsls r0, 29
+	cmp r0, 0
+	bge _08068834
+	movs r0, 0
+	str r0, [sp]
+	adds r0, r4, 0
+	bl ObjectEventUpdateZCoordAndPriority
+	adds r0, r4, 0
+	mov r1, sp
+	bl GetAllGroundEffectFlags_OnSpawn
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl ObjectEventSetSpriteOamTableForLongGrass
+	ldr r2, [sp]
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl DoFlaggedGroundEffects
+	ldrb r1, [r4]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x11
+	negs r1, r1
+	ands r0, r1
+	strb r0, [r4]
+_08068834:
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end DoGroundEffects_OnSpawn
+
+	thumb_func_start DoGroundEffects_OnBeginStep
+DoGroundEffects_OnBeginStep: @ 806883C
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4]
+	lsls r0, 29
+	cmp r0, 0
+	bge _08068888
+	movs r0, 0
+	str r0, [sp]
+	adds r0, r4, 0
+	bl ObjectEventUpdateZCoordAndPriority
+	adds r0, r4, 0
+	mov r1, sp
+	bl GetAllGroundEffectFlags_OnBeginStep
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl ObjectEventSetSpriteOamTableForLongGrass
+	adds r0, r4, 0
+	mov r1, sp
+	bl filters_out_some_ground_effects
+	ldr r2, [sp]
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl DoFlaggedGroundEffects
+	ldrb r1, [r4]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x11
+	negs r1, r1
+	ands r0, r1
+	strb r0, [r4]
+_08068888:
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end DoGroundEffects_OnBeginStep
+
+	thumb_func_start DoGroundEffects_OnFinishStep
+DoGroundEffects_OnFinishStep: @ 8068890
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldrb r0, [r4]
+	lsls r0, 28
+	cmp r0, 0
+	bge _080688DC
+	movs r0, 0
+	str r0, [sp]
+	adds r0, r4, 0
+	bl ObjectEventUpdateZCoordAndPriority
+	adds r0, r4, 0
+	mov r1, sp
+	bl GetAllGroundEffectFlags_OnFinishStep
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl ObjectEventSetSpriteOamTableForLongGrass
+	adds r0, r4, 0
+	mov r1, sp
+	bl FilterOutStepOnPuddleGroundEffectIfJumping
+	ldr r2, [sp]
+	adds r0, r4, 0
+	adds r1, r5, 0
+	bl DoFlaggedGroundEffects
+	ldrb r1, [r4]
+	movs r0, 0x9
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x21
+	negs r1, r1
+	ands r0, r1
+	strb r0, [r4]
+_080688DC:
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end DoGroundEffects_OnFinishStep
 
 	.align 2, 0 @ Don't pad with nop.

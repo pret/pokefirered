@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_FIELD_EFFECTS_H 
 #define GUARD_CONSTANTS_FIELD_EFFECTS_H 
        
-#define FLDEFF_EXCLAMATION_MARK_ICON_1   0 
+#define FLDEFF_EXCLAMATION_MARK_ICON     0
 #define FLDEFF_USE_CUT_ON_GRASS          1 
 #define FLDEFF_USE_CUT_ON_TREE           2 
 #define FLDEFF_SHADOW                    3 
@@ -34,7 +34,7 @@
 #define FLDEFF_NPCFLY_OUT                30
 #define FLDEFF_USE_FLY                   31
 #define FLDEFF_FLY_IN                    32
-#define FLDEFF_EXCLAMATION_MARK_ICON_2   33
+#define FLDEFF_QUESTION_MARK_ICON        33
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
 #define FLDEFF_BIKE_TIRE_TRACKS          35
 #define FLDEFF_SAND_DISGUISE             36
@@ -65,11 +65,11 @@
 #define FLDEFF_PCTURN_ON                 61
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_SMILEY_FACE_ICON                    64 // TODO: game corner smile icon?
+#define FLDEFF_SMILEY_FACE_ICON          64
 #define FLDEFF_UNK_41                    65 // TODO: related to vs_seeker
-#define FLDEFF_DOUBLE_EXCL_MARK_ICON                    66 // TODO: related to trainer see
+#define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
 #define FLDEFF_UNK_43                    67 // TODO: related to deoxys
-#define FLDEFF_UNK_44                    68 // TODO: related to trainer see
+#define FLDEFF_UNK_44                    68 // TODO: related to ???
 #define FLDEFF_UNK_45                    69 // TODO: related to fame checker photos
 
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

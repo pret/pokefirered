@@ -946,13 +946,13 @@ static void TradeAnimInit_LoadGfx(void)
     DeactivateAllTextPrinters();
     // Doing the graphics load...
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gFile_graphics_interface_menu_map_tilemap, gDecompressionBuffer);
+    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
     InitWindows(gUnknown_826D1BC);
     // ... and doing the same load again
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gFile_graphics_interface_menu_map_tilemap, gDecompressionBuffer);
+    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
 }

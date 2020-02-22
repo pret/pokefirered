@@ -1156,3 +1156,5 @@ const u8 gUnknown_8E86D6C[] = INCBIN_U8("graphics/teachy_tv/bg2_tilemap.bin.lz")
 const u32 gUnknown_8E86F98[] = INCBIN_U32("graphics/teachy_tv/palettes.gbapal.lz");
 
 const u32 gUnknown_8E87010[] = INCBIN_U32("graphics/unknown/unknown_E87010.gbapal.lz");
+
+#include "data/graphics/items.h"

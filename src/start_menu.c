@@ -23,7 +23,7 @@
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "new_menu_helpers.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "script.h"
 #include "sound.h"

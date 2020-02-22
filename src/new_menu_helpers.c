@@ -3,7 +3,6 @@
 #include "dma3.h"
 #include "task.h"
 #include "bg.h"
-#include "gpu_regs.h"
 #include "window.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -13,7 +12,6 @@
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
-#include "graphics.h"
 #include "palette.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15

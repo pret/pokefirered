@@ -6,7 +6,6 @@
 #include "link.h"
 #include "data.h"
 #include "sprite.h"
-#include "text.h"
 #include "gpu_regs.h"
 #include "scanline_effect.h"
 #include "help_system.h"
@@ -14,8 +13,6 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
-#include "reshow_battle_screen.h"
-#include "constants/species.h"
 
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static void sub_8077AAC(void);

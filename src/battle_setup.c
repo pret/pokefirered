@@ -13,7 +13,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "event_data.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "metatile_behavior.h"
 #include "event_scripts.h"
 #include "fldeff.h"
@@ -22,10 +22,8 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_message_box.h"
-#include "event_object_movement.h"
 #include "vs_seeker.h"
 #include "battle.h"
-#include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle_controllers.h"
 #include "constants/battle_setup.h"
@@ -37,7 +35,6 @@
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/trainer_classes.h"
-#include "constants/maps.h"
 
 enum
 {

@@ -1,5 +1,4 @@
 #include "global.h"
-#include "union_room_message.h"
 #include "mevent_server.h"
 #include "constants/union_room.h"
 

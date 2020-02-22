@@ -5,7 +5,6 @@
 #include "pokemon.h"
 #include "malloc.h"
 #include "trainer_tower.h"
-#include "battle_util2.h"
 
 void AllocateBattleResources(void)
 {

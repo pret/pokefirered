@@ -3,7 +3,6 @@
 #include "field_effect.h"
 #include "party_menu.h"
 #include "malloc.h"
-#include "event_data.h"
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"

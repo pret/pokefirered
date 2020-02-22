@@ -22,7 +22,6 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/trainer_classes.h"
-#include "constants/trainer_tower.h"
 
 struct BattleWindowText
 {

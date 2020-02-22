@@ -10,7 +10,6 @@
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "fieldmap.h"
-#include "itemfinder.h"
 #include "constants/songs.h"
 
 static void Task_NoResponse_CleanUp(u8 taskId);

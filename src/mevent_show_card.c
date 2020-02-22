@@ -1,7 +1,6 @@
 #include "global.h"
 #include "constants/species.h"
 #include "bg.h"
-#include "gpu_regs.h"
 #include "palette.h"
 #include "decompress.h"
 #include "malloc.h"
@@ -9,9 +8,7 @@
 #include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "mystery_gift_menu.h"
-#include "menu_indicators.h"
 #include "string_util.h"
-#include "link_rfu.h"
 #include "mevent.h"
 #include "battle_anim.h"
 

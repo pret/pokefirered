@@ -21,7 +21,6 @@
 #include "field_message_box.h"
 #include "new_menu_helpers.h"
 #include "window.h"
-#include "start_menu.h"
 #include "script_menu.h"
 #include "string_util.h"
 #include "data.h"
@@ -38,7 +37,6 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "field_door.h"
-#include "scrcmd.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);

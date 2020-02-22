@@ -8,7 +8,6 @@
 #include "item.h"
 #include "save_location.h"
 #include "berry_powder.h"
-#include "item.h"
 #include "overworld.h"
 #include "quest_log.h"
 

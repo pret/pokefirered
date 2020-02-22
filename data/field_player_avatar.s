@@ -1,3 +1,4 @@
+#include "constants/object_events.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -36,11 +37,11 @@ gUnknown_835B820:: @ 835B820
 
 	.align 2
 gUnknown_835B828:: @ 835B828
-	.4byte MetatileBehavior_ReturnFalse_14
-	.4byte MetatileBehavior_ReturnFalse_15
-	.4byte MetatileBehavior_ReturnFalse_16
-	.4byte MetatileBehavior_ReturnFalse_17
-	.4byte MetatileBehavior_ReturnFalse_18
+	.4byte MetatileBehavior_ReturnFalse_14 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_15 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_16 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_17 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_18 // Related to Acro Bike
 
 gUnknown_835B83C:: @ 835B83C
 	.byte 0x09, 0x0a, 0x0b, 0x0c, 0x0d
@@ -63,16 +64,30 @@ gUnknown_835B864:: @ 835B864
 	.4byte MetatileBehavior_IsEastArrowWarp
 
 gUnknown_835B874:: @ 835B874
-	.byte 0x00, 0x07, 0x01, 0x08, 0x02, 0x09, 0x03, 0x0a, 0x04, 0x0b, 0x05, 0x0c
+	.byte OBJECT_EVENT_GFX_RED_NORMAL,    OBJECT_EVENT_GFX_GREEN_NORMAL
+	.byte OBJECT_EVENT_GFX_RED_BIKE,      OBJECT_EVENT_GFX_GREEN_BIKE
+	.byte OBJECT_EVENT_GFX_RED_SURF,      OBJECT_EVENT_GFX_GREEN_SURF
+	.byte OBJECT_EVENT_GFX_RED_ITEM,      OBJECT_EVENT_GFX_GREEN_ITEM
+	.byte OBJECT_EVENT_GFX_RED_FISH,      OBJECT_EVENT_GFX_GREEN_FISH
+	.byte OBJECT_EVENT_GFX_RED_ITEM_COPY, OBJECT_EVENT_GFX_GREEN_ITEM_COPY
 
 gUnknown_835B880:: @ 835B880
-	.byte 0x0e, 0x0f
+	.byte OBJECT_EVENT_GFX_RS_BRENDAN
+	.byte OBJECT_EVENT_GFX_RS_MAY
 
 gUnknown_835B882:: @ 835B882
-	.byte 0x00, 0x01, 0x01, 0x02, 0x02, 0x08, 0x07, 0x01, 0x08, 0x02, 0x09, 0x08
+	@ Male
+	.byte OBJECT_EVENT_GFX_RED_NORMAL, 0x01
+	.byte OBJECT_EVENT_GFX_RED_BIKE, 0x02
+	.byte OBJECT_EVENT_GFX_RED_SURF, 0x08
+	@ Female
+	.byte OBJECT_EVENT_GFX_GREEN_NORMAL, 0x01
+	.byte OBJECT_EVENT_GFX_GREEN_BIKE, 0x02
+	.byte OBJECT_EVENT_GFX_GREEN_SURF, 0x08
 
 gUnknown_835B88E:: @ 835B88E
-	.byte 0x06, 0x0d
+	.byte OBJECT_EVENT_GFX_RED_VS_SEEKER
+	.byte OBJECT_EVENT_GFX_GREEN_VS_SEEKER
 
 gUnknown_835B890:: @ 835B890
 	.4byte MetatileBehavior_IsSouthArrowWarp

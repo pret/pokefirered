@@ -13,12 +13,11 @@
 #include "metatile_behavior.h"
 #include "quest_log.h"
 #include "link.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "sound.h"
 #include "field_door.h"
 #include "field_effect.h"
 #include "field_screen_effect.h"
-#include "event_object_movement.h"
 #include "field_specials.h"
 #include "event_object_lock.h"
 #include "start_menu.h"
@@ -415,7 +414,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], sub_8063F84(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;

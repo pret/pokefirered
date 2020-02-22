@@ -15,7 +15,6 @@
 #include "link.h"
 #include "battle_gfx_sfx_util.h"
 #include "constants/songs.h"
-#include "constants/species.h"
 
 #define tFrames          data[0]
 #define tPan             data[1]

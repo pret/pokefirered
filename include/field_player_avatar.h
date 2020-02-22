@@ -16,7 +16,7 @@ void sub_808D074(u8);
 void sub_805C270(void);
 void sub_805C780(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
-u8 sub_805C808(u8);
+u8 GetPlayerAvatarGraphicsIdByStateId(u8);
 void SetPlayerAvatarStateMask(u8 mask);
 void sub_805D9C4(struct Sprite *sprite);
 void sub_805D154(u8 direction);

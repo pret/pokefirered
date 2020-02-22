@@ -18,12 +18,9 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "random.h"
-#include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "event_object_80688E4.h"
-#include "event_object_8097404.h"
 #include "vs_seeker.h"
-#include "constants/movement_commands.h"
+#include "constants/event_object_movement.h"
 #include "constants/object_events.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
@@ -547,29 +544,35 @@ static const VsSeekerData sVsSeekerData[] = {
 };
 
 static const u8 gUnknown_8453F5C[] = {
-    delay_16,
-    delay_16,
-    delay_16,
-    step_end
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 gUnknown_8453F60[] = {
-    emote_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerNoRematch[] = {
-    emote_x,
-    step_end
+    MOVEMENT_ACTION_EMOTE_X,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerRematch[] = {
-    walk_in_place_fastest_down,
-    emote_double_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_8453F67[] = { 0x08, 0x08, 0x07, 0x09, 0x0a };
+static const u8 gUnknown_8453F67[] = {
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_UP,
+    MOVEMENT_TYPE_FACE_LEFT,
+    MOVEMENT_TYPE_FACE_RIGHT
+};
 
 
 // text
@@ -798,8 +801,8 @@ static void GatherNearbyTrainerInfo(void)
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[objectEventIdx].localId;
             TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].objectEventId = objectEventId;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].coords2.x - 7;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].coords2.y - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].currentCoords.x - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].currentCoords.y - 7;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[objectEventIdx].graphicsId;
             vsSeekerObjectIdx++;
         }
@@ -951,12 +954,12 @@ void sub_810CB90(void)
                 TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gObjectEvents[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
+                TryOverrideTemplateCoordsForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gSelectedObjectEvent == sp0)
                     r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
                 else
-                    r4_2->animPattern = 0x08;
+                    r4_2->animPattern = MOVEMENT_TYPE_FACE_DOWN;
             }
         }
     }
@@ -1312,7 +1315,7 @@ static void StartAllRespondantIdleMovements(void)
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
-                sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                TryOverrideTemplateCoordsForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }
         }

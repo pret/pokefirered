@@ -25,7 +25,6 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
-#include "tm_case.h"
 #include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"

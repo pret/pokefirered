@@ -6,7 +6,6 @@
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
-#include "constants/songs.h"
 #include "constants/object_events.h"
 
 static void FldEff_UseStrength(void);

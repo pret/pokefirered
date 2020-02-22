@@ -1,17 +1,12 @@
 #include "global.h"
 #include "gpu_regs.h"
 #include "multiboot.h"
-#include "malloc.h"
-#include "bg.h"
 #include "graphics.h"
 #include "main.h"
 #include "sprite.h"
 #include "task.h"
 #include "scanline_effect.h"
-#include "window.h"
-#include "text.h"
 #include "help_system.h"
-#include "menu.h"
 #include "m4a.h"
 
 // Static type declarations

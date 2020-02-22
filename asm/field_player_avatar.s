@@ -1120,7 +1120,7 @@ sub_805BBA8: @ 805BBA8
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -1323,7 +1323,7 @@ sub_805BCEC: @ 805BCEC
 	ldrsh r2, [r5, r0]
 	adds r0, r4, 0
 	adds r3, r7, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BDA0
@@ -1840,7 +1840,7 @@ sub_805C104: @ 805C104
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1976,7 +1976,7 @@ PlayerFaceDirection: @ 805C1F4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2065,7 +2065,7 @@ _0805C27E:
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_805BFFC
@@ -2759,8 +2759,8 @@ GetPlayerAvatarGraphicsIdByStateIdAndGender: @ 805C7E0
 _0805C7F4: .4byte gUnknown_835B874
 	thumb_func_end GetPlayerAvatarGraphicsIdByStateIdAndGender
 
-	thumb_func_start sub_805C7F8
-sub_805C7F8: @ 805C7F8
+	thumb_func_start GetHoennLinkPartnerGraphicsIdByGender
+GetHoennLinkPartnerGraphicsIdByGender: @ 805C7F8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0805C804 @ =gUnknown_835B880
@@ -2769,10 +2769,10 @@ sub_805C7F8: @ 805C7F8
 	bx lr
 	.align 2, 0
 _0805C804: .4byte gUnknown_835B880
-	thumb_func_end sub_805C7F8
+	thumb_func_end GetHoennLinkPartnerGraphicsIdByGender
 
-	thumb_func_start sub_805C808
-sub_805C808: @ 805C808
+	thumb_func_start GetPlayerAvatarGraphicsIdByStateId
+GetPlayerAvatarGraphicsIdByStateId: @ 805C808
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2785,7 +2785,7 @@ sub_805C808: @ 805C808
 	bx r1
 	.align 2, 0
 _0805C820: .4byte gPlayerAvatar
-	thumb_func_end sub_805C808
+	thumb_func_end GetPlayerAvatarGraphicsIdByStateId
 
 	thumb_func_start sub_805C824
 sub_805C824: @ 805C824
@@ -2906,7 +2906,7 @@ IsPlayerFacingSurfableFishableWater: @ 805C8B0
 	lsls r3, 28
 	lsrs r3, 28
 	adds r0, r4, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -3252,7 +3252,7 @@ sub_805CB70: @ 805CB70
 	ldr r0, _0805CBB0 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x3
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3285,7 +3285,7 @@ sub_805CBB8: @ 805CBB8
 	cmp r0, 0
 	bne _0805CBD8
 	movs r0, 0x5
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CBE0
@@ -3713,7 +3713,7 @@ PlayerAvatar_DoSecretBaseMatJump: @ 805CEEC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806413C
+	bl GetJumpInPlaceMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3846,7 +3846,7 @@ sub_805CFEC: @ 805CFEC
 	add r0, sp
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4129,7 +4129,7 @@ sub_805D240: @ 805D240
 	cmp r0, 0
 	beq _0805D2AE
 	movs r0, 0
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4138,7 +4138,7 @@ sub_805D240: @ 805D240
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5450,7 +5450,7 @@ _0805DC9A:
 	ldrsh r0, [r5, r3]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5618,7 +5618,7 @@ _0805DDE4:
 	lsrs r0, 28
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

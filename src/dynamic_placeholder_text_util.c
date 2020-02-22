@@ -1,6 +1,5 @@
 #include "global.h"
 #include "text.h"
-#include "dynamic_placeholder_text_util.h"
 #include "string_util.h"
 #include "constants/object_events.h"
 
@@ -10,10 +9,10 @@ static const u8 sTextColorTable[] =
 {
  // [LOW_NYBBLE / 2]                               = 0xXY, // HIGH_NYBBLE
     [OBJECT_EVENT_GFX_RED_NORMAL / 2]              = 0x00, // OBJECT_EVENT_GFX_RED_BIKE
-    [OBJECT_EVENT_GFX_RED_RUN / 2]                 = 0x00, // OBJECT_EVENT_GFX_RED_ITEM
+    [OBJECT_EVENT_GFX_RED_SURF / 2]                 = 0x00, // OBJECT_EVENT_GFX_RED_ITEM
     [OBJECT_EVENT_GFX_RED_FISH / 2]                = 0x00, // OBJECT_EVENT_GFX_RED_ITEM_COPY
     [OBJECT_EVENT_GFX_RED_VS_SEEKER / 2]           = 0x10, // OBJECT_EVENT_GFX_GREEN_NORMAL
-    [OBJECT_EVENT_GFX_GREEN_BIKE / 2]              = 0x11, // OBJECT_EVENT_GFX_GREEN_RUN
+    [OBJECT_EVENT_GFX_GREEN_BIKE / 2]              = 0x11, // OBJECT_EVENT_GFX_GREEN_SURF
     [OBJECT_EVENT_GFX_GREEN_ITEM / 2]              = 0x11, // OBJECT_EVENT_GFX_GREEN_FISH
     [OBJECT_EVENT_GFX_GREEN_ITEM_COPY / 2]         = 0x11, // OBJECT_EVENT_GFX_GREEN_VS_SEEKER
     [OBJECT_EVENT_GFX_RS_BRENDAN / 2]              = 0x10, // OBJECT_EVENT_GFX_RS_MAY

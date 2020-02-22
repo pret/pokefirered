@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle.h"
-#include "daycare.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "mail_data.h"

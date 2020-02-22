@@ -31,8 +31,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "trig.h"
-#include "trade.h"
-#include "util.h"
 #include "battle_string_ids.h"
 #include "constants/species.h"
 #include "constants/songs.h"

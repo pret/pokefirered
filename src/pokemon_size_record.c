@@ -3,7 +3,6 @@
 #include "event_data.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "pokemon_size_record.h"
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"

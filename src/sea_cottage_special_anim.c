@@ -1,10 +1,8 @@
 #include "global.h"
 #include "event_data.h"
 #include "task.h"
-#include "menu.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "event_object_movement.h"
 #include "field_camera.h"
 
 static EWRAM_DATA u8 gUnknown_2039984 = 0;

@@ -4,7 +4,6 @@
 #include "task.h"
 #include "malloc.h"
 #include "gpu_regs.h"
-#include "wild_encounter.h"
 #include "palette.h"
 #include "blend_palette.h"
 #include "text.h"
@@ -25,7 +24,6 @@
 #include "overworld.h"
 #include "random.h"
 #include "data.h"
-#include "oak_speech.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 

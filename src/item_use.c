@@ -19,7 +19,6 @@
 #include "mail.h"
 #include "main.h"
 #include "malloc.h"
-#include "event_object_80688E4.h"
 #include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
@@ -42,7 +41,6 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/maps.h"
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 

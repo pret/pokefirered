@@ -5,8 +5,6 @@
 #include "item_use.h"
 #include "overworld.h"
 #include "party_menu.h"
-#include "sprite.h"
-#include "constants/object_events.h"
 
 static void FieldCallback_Dig(void);
 static void sub_80C9AFC(void);

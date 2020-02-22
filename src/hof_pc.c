@@ -5,7 +5,6 @@
 #include "script.h"
 #include "script_menu.h"
 #include "task.h"
-#include "hall_of_fame.h"
 #include "bg.h"
 #include "window.h"
 

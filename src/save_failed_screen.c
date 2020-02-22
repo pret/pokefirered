@@ -6,7 +6,6 @@
 #include "help_system.h"
 #include "m4a.h"
 #include "save.h"
-#include "save_failed_screen.h"
 #include "strings.h"
 #include "text.h"
 

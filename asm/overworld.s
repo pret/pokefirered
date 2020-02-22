@@ -7190,7 +7190,7 @@ SpawnLinkPlayerObjectEvent: @ 805839C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	bl sub_805DF30
+	bl GetIndexOfFirstInactiveObjectEvent
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -7880,7 +7880,7 @@ _080588BC:
 	ldrb r0, [r4]
 	lsls r0, 30
 	lsrs r0, 31
-	bl sub_805C7F8
+	bl GetHoennLinkPartnerGraphicsIdByGender
 _080588C6:
 	lsls r0, 24
 	lsrs r0, 24

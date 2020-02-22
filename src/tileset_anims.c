@@ -1,10 +1,4 @@
 #include "global.h"
-#include "graphics.h"
-#include "palette.h"
-#include "util.h"
-#include "battle_transition.h"
-#include "task.h"
-#include "fieldmap.h"
 
 static EWRAM_DATA struct {
     const u16 *src;

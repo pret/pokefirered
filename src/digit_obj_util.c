@@ -3,7 +3,6 @@
 #include "decompress.h"
 #include "digit_obj_util.h"
 #include "main.h"
-#include "battle.h"
 
 struct DigitPrinterAlloc
 {

@@ -1,11 +1,8 @@
 #include "global.h"
-#include "event_data.h"
 #include "quest_log.h"
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
-#include "link.h"
-#include "link_rfu.h"
 
 void SetQuestLogObjectEventsData(struct QuestLog * questLog)
 {
@@ -39,8 +36,8 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
         questLog->unk_008[i].localId = gObjectEvents[i].localId;
         questLog->unk_008[i].mapNum = gObjectEvents[i].mapNum;
         questLog->unk_008[i].mapGroup = gObjectEvents[i].mapGroup;
-        questLog->unk_008[i].x = gObjectEvents[i].coords2.x;
-        questLog->unk_008[i].y = gObjectEvents[i].coords2.y;
+        questLog->unk_008[i].x = gObjectEvents[i].currentCoords.x;
+        questLog->unk_008[i].y = gObjectEvents[i].currentCoords.y;
         questLog->unk_008[i].trainerRange_berryTreeId = gObjectEvents[i].trainerRange_berryTreeId;
         questLog->unk_008[i].mapobj_unk_1F = gObjectEvents[i].mapobj_unk_1F;
         questLog->unk_008[i].mapobj_unk_21 = gObjectEvents[i].mapobj_unk_21;
@@ -83,8 +80,8 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         gObjectEvents[i].localId = questLogObjectEvents[i].localId;
         gObjectEvents[i].mapNum = questLogObjectEvents[i].mapNum;
         gObjectEvents[i].mapGroup = questLogObjectEvents[i].mapGroup;
-        gObjectEvents[i].coords2.x = questLogObjectEvents[i].x;
-        gObjectEvents[i].coords2.y = questLogObjectEvents[i].y;
+        gObjectEvents[i].currentCoords.x = questLogObjectEvents[i].x;
+        gObjectEvents[i].currentCoords.y = questLogObjectEvents[i].y;
         gObjectEvents[i].trainerRange_berryTreeId = questLogObjectEvents[i].trainerRange_berryTreeId;
         gObjectEvents[i].mapobj_unk_1F = questLogObjectEvents[i].mapobj_unk_1F;
         gObjectEvents[i].mapobj_unk_21 = questLogObjectEvents[i].mapobj_unk_21;
@@ -94,38 +91,38 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         {
             if (gObjectEvents[i].localId == templates[j].localId)
             {
-                gObjectEvents[i].coords1.x = templates[j].x + 7;
-                gObjectEvents[i].coords1.y = templates[j].y + 7;
+                gObjectEvents[i].initialCoords.x = templates[j].x + 7;
+                gObjectEvents[i].initialCoords.y = templates[j].y + 7;
                 gObjectEvents[i].range.as_nybbles.x = templates[j].movementRangeX;
                 gObjectEvents[i].range.as_nybbles.y = templates[j].movementRangeY;
             }
         }
 
-        gObjectEvents[i].mapobj_unk_1E = MapGridGetMetatileBehaviorAt(gObjectEvents[i].coords2.x, gObjectEvents[i].coords2.y);
-        if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].coords2.x), (s16)(gObjectEvents[i].coords2.y)))
+        gObjectEvents[i].mapobj_unk_1E = MapGridGetMetatileBehaviorAt(gObjectEvents[i].currentCoords.x, gObjectEvents[i].currentCoords.y);
+        if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y)))
         {
-            gObjectEvents[i].coords3.x = gObjectEvents[i].coords2.x;
-            gObjectEvents[i].coords3.y = gObjectEvents[i].coords2.y;
+            gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
+            gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].coords2.x - 1), (s16)(gObjectEvents[i].coords2.y)))
+        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x - 1), (s16)(gObjectEvents[i].currentCoords.y)))
         {
-            gObjectEvents[i].coords3.x = gObjectEvents[i].coords2.x - 1;
-            gObjectEvents[i].coords3.y = gObjectEvents[i].coords2.y;
+            gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x - 1;
+            gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].coords2.x + 1), (s16)(gObjectEvents[i].coords2.y)))
+        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x + 1), (s16)(gObjectEvents[i].currentCoords.y)))
         {
-            gObjectEvents[i].coords3.x = gObjectEvents[i].coords2.x + 1;
-            gObjectEvents[i].coords3.y = gObjectEvents[i].coords2.y;
+            gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x + 1;
+            gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].coords2.x), (s16)(gObjectEvents[i].coords2.y - 1)))
+        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y - 1)))
         {
-            gObjectEvents[i].coords3.x = gObjectEvents[i].coords2.x;
-            gObjectEvents[i].coords3.y = gObjectEvents[i].coords2.y - 1;
+            gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
+            gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y - 1;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].coords2.x), (s16)(gObjectEvents[i].coords2.y + 1)))
+        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y + 1)))
         {
-            gObjectEvents[i].coords3.x = gObjectEvents[i].coords2.x;
-            gObjectEvents[i].coords3.y = gObjectEvents[i].coords2.y + 1;
+            gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
+            gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y + 1;
         }
     }
 

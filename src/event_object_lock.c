@@ -3,9 +3,7 @@
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
 #include "script_movement.h"
-#include "event_object_80688E4.h"
 #include "event_data.h"
-#include "event_object_lock.h"
 
 bool8 walkrun_is_standing_still(void)
 {

@@ -21,7 +21,7 @@
 #include "field_player_avatar.h"
 #include "vs_seeker.h"
 #include "constants/event_object_movement.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
 #include "constants/items.h"
@@ -1129,32 +1129,32 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
     switch (graphicsId)
     {
-        case OBJECT_EVENT_GFX_LITTLE_GIRL:
-        case OBJECT_EVENT_GFX_YOUNGSTER:
-        case OBJECT_EVENT_GFX_BOY:
-        case OBJECT_EVENT_GFX_BUG_CATCHER:
-        case OBJECT_EVENT_GFX_LASS:
-        case OBJECT_EVENT_GFX_WOMAN_1:
-        case OBJECT_EVENT_GFX_BATTLE_GIRL:
-        case OBJECT_EVENT_GFX_MAN:
-        case OBJECT_EVENT_GFX_ROCKER:
-        case OBJECT_EVENT_GFX_WOMAN_2:
-        case OBJECT_EVENT_GFX_BEAUTY:
-        case OBJECT_EVENT_GFX_BALDING_MAN:
-        case OBJECT_EVENT_GFX_TUBER_F:
-        case OBJECT_EVENT_GFX_CAMPER:
-        case OBJECT_EVENT_GFX_PICNICKER:
-        case OBJECT_EVENT_GFX_COOLTRAINER_M:
-        case OBJECT_EVENT_GFX_COOLTRAINER_F:
-        case OBJECT_EVENT_GFX_SWIMMER_M_LAND:
-        case OBJECT_EVENT_GFX_SWIMMER_F_LAND:
-        case OBJECT_EVENT_GFX_BLACKBELT:
-        case OBJECT_EVENT_GFX_HIKER:
-        case OBJECT_EVENT_GFX_SAILOR:
+        case OBJ_EVENT_GFX_LITTLE_GIRL:
+        case OBJ_EVENT_GFX_YOUNGSTER:
+        case OBJ_EVENT_GFX_BOY:
+        case OBJ_EVENT_GFX_BUG_CATCHER:
+        case OBJ_EVENT_GFX_LASS:
+        case OBJ_EVENT_GFX_WOMAN_1:
+        case OBJ_EVENT_GFX_BATTLE_GIRL:
+        case OBJ_EVENT_GFX_MAN:
+        case OBJ_EVENT_GFX_ROCKER:
+        case OBJ_EVENT_GFX_WOMAN_2:
+        case OBJ_EVENT_GFX_BEAUTY:
+        case OBJ_EVENT_GFX_BALDING_MAN:
+        case OBJ_EVENT_GFX_TUBER_F:
+        case OBJ_EVENT_GFX_CAMPER:
+        case OBJ_EVENT_GFX_PICNICKER:
+        case OBJ_EVENT_GFX_COOLTRAINER_M:
+        case OBJ_EVENT_GFX_COOLTRAINER_F:
+        case OBJ_EVENT_GFX_SWIMMER_M_LAND:
+        case OBJ_EVENT_GFX_SWIMMER_F_LAND:
+        case OBJ_EVENT_GFX_BLACKBELT:
+        case OBJ_EVENT_GFX_HIKER:
+        case OBJ_EVENT_GFX_SAILOR:
             return 0x4e;
-        case OBJECT_EVENT_GFX_TUBER_M_1:
-        case OBJECT_EVENT_GFX_SWIMMER_M_WATER:
-        case OBJECT_EVENT_GFX_SWIMMER_F_WATER:
+        case OBJ_EVENT_GFX_TUBER_M_1:
+        case OBJ_EVENT_GFX_SWIMMER_M_WATER:
+        case OBJ_EVENT_GFX_SWIMMER_F_WATER:
             return 0x4f;
         default:
             return 0x4d;

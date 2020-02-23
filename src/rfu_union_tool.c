@@ -9,7 +9,7 @@
 #include "constants/flags.h"
 #include "constants/event_object_movement.h"
 #include "constants/union_room.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 
 static EWRAM_DATA struct UnionObj * UnionObjWork = NULL;
 static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
@@ -20,24 +20,24 @@ static void UnionPartnerObjectSetFacing(s32 member, s32 group, u8 direction);
 
 static const u8 sUnionObjectEventGfxIds[][10] = {
     [MALE]   = {
-        OBJECT_EVENT_GFX_COOLTRAINER_M,
-        OBJECT_EVENT_GFX_BLACKBELT,
-        OBJECT_EVENT_GFX_CAMPER,
-        OBJECT_EVENT_GFX_YOUNGSTER,
-        OBJECT_EVENT_GFX_BOY,
-        OBJECT_EVENT_GFX_BUG_CATCHER,
-        OBJECT_EVENT_GFX_MAN,
-        OBJECT_EVENT_GFX_ROCKER
+        OBJ_EVENT_GFX_COOLTRAINER_M,
+        OBJ_EVENT_GFX_BLACKBELT,
+        OBJ_EVENT_GFX_CAMPER,
+        OBJ_EVENT_GFX_YOUNGSTER,
+        OBJ_EVENT_GFX_BOY,
+        OBJ_EVENT_GFX_BUG_CATCHER,
+        OBJ_EVENT_GFX_MAN,
+        OBJ_EVENT_GFX_ROCKER
     },
     [FEMALE] = {
-        OBJECT_EVENT_GFX_COOLTRAINER_F,
-        OBJECT_EVENT_GFX_CHANNELER,
-        OBJECT_EVENT_GFX_PICNICKER,
-        OBJECT_EVENT_GFX_LASS,
-        OBJECT_EVENT_GFX_WOMAN_1,
-        OBJECT_EVENT_GFX_BATTLE_GIRL,
-        OBJECT_EVENT_GFX_WOMAN_2,
-        OBJECT_EVENT_GFX_BEAUTY
+        OBJ_EVENT_GFX_COOLTRAINER_F,
+        OBJ_EVENT_GFX_CHANNELER,
+        OBJ_EVENT_GFX_PICNICKER,
+        OBJ_EVENT_GFX_LASS,
+        OBJ_EVENT_GFX_WOMAN_1,
+        OBJ_EVENT_GFX_BATTLE_GIRL,
+        OBJ_EVENT_GFX_WOMAN_2,
+        OBJ_EVENT_GFX_BEAUTY
     }
 };
 
@@ -440,7 +440,7 @@ void CreateGroupMemberObjectsInvisible(u8 * sprite_ids, s32 group)
     for (i = 0; i < 5; i++)
     {
         s32 obj_id = 5 * group + i;
-        sprite_ids[obj_id] = sprite_new(OBJECT_EVENT_GFX_MAN, obj_id - 0x38, sUnionPartnerCoords[group][0] + sFacingDirectionOffsets[i][0], sUnionPartnerCoords[group][1] + sFacingDirectionOffsets[i][1], 3, 1);
+        sprite_ids[obj_id] = sprite_new(OBJ_EVENT_GFX_MAN, obj_id - 0x38, sUnionPartnerCoords[group][0] + sFacingDirectionOffsets[i][0], sUnionPartnerCoords[group][1] + sFacingDirectionOffsets[i][1], 3, 1);
         RfuUnionObjectToggleInvisibility(obj_id - 0x38, TRUE);
     }
 }

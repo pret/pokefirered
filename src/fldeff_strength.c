@@ -6,14 +6,14 @@
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 
 static void FldEff_UseStrength(void);
 static void sub_80D08A8(void);
 
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJECT_EVENT_GFX_STRENGTH_BOULDER) != TRUE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_STRENGTH_BOULDER) != TRUE)
     {
     	return FALSE;
     }

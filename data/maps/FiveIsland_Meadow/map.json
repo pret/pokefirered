@@ -27,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_F",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
       "x": 18,
       "y": 18,
       "elevation": 3,
@@ -40,7 +40,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 17,
       "y": 5,
       "elevation": 3,
@@ -53,7 +53,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 11,
       "y": 27,
       "elevation": 3,
@@ -66,7 +66,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -79,7 +79,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 19,
       "y": 12,
       "elevation": 3,
@@ -92,7 +92,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 11,
       "elevation": 3,
@@ -105,7 +105,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_MEADOW_MAX_POTION"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 22,
       "elevation": 3,

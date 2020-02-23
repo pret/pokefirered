@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PROF_OAK",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 6,
       "y": 15,
       "elevation": 0,

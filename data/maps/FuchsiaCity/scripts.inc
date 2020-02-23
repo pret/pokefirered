@@ -9,11 +9,11 @@ FuchsiaCity_OnTransition:: @ 8166D7B
 	end
 
 FuchsicaCity_EventScript_SetOmanyteGfx:: @ 8166D91
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_OMANYTE
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OMANYTE
 	return
 
 FuchsiaCity_EventScript_SetKabutoGfx:: @ 8166D97
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_KABUTO
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_KABUTO
 	return
 
 FuchsiaCity_EventScript_LittleBoy:: @ 8166D9D

@@ -18,7 +18,6 @@
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
 #include "constants/trainer_tower.h"
-#include "constants/object_events.h"
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
 #include "constants/game_stat.h"

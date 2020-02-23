@@ -17,17 +17,17 @@ ViridianCity_OnTransition:: @ 81658D9
 	end
 
 ViridianCity_EventScript_SetOldManNormal:: @ 8165909
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_OLD_MAN_1
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OLD_MAN_1
 	return
 
 ViridianCity_EventScript_SetOldManStandingByRoad:: @ 816590F
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_OLD_MAN_1
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OLD_MAN_1
 	setobjectxyperm LOCALID_TUTORIAL_MAN, 21, 8
 	setobjectmovementtype LOCALID_TUTORIAL_MAN, MOVEMENT_TYPE_LOOK_AROUND
 	return
 
 ViridianCity_EventScript_SetOldManBlockingRoad:: @ 8165920
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_OLD_MAN_LYING_DOWN
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OLD_MAN_LYING_DOWN
 	setobjectxyperm LOCALID_TUTORIAL_MAN, 21, 11
 	setobjectmovementtype LOCALID_TUTORIAL_MAN, MOVEMENT_TYPE_FACE_DOWN
 	return

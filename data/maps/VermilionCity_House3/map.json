@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PIDGEY",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
       "x": 2,
       "y": 5,
       "elevation": 3,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CLIPBOARD",
+      "graphics_id": "OBJ_EVENT_GFX_CLIPBOARD",
       "x": 6,
       "y": 4,
       "elevation": 0,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 2,
       "y": 4,
       "elevation": 3,

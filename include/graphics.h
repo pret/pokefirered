@@ -2879,7 +2879,7 @@ extern const u16 gTMCaseMainWindowPalette[];
 
 // egg_hatch
 extern const u32 gBattleTextboxTiles[];
-extern const u32 gFile_graphics_interface_menu_map_tilemap[];
+extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleTextboxPalette[];
 extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
@@ -4314,7 +4314,7 @@ extern const u32 gHealthboxSafariGfx[];
 extern const u32 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u32 gFile_graphics_interface_hp_numbers[];
+extern const u32 gInterfaceGfx_HPNumbers[];
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];

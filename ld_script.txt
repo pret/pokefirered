@@ -63,7 +63,7 @@ SECTIONS {
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
-        asm/battle_bg.o(.text);
+        src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
         src/battle_script_commands.o(.text);
@@ -400,7 +400,7 @@ SECTIONS {
         src/link.o(.rodata);
         src/main_menu.o(.rodata);
         src/data.o(.rodata);
-        data/battle_bg.o(.rodata);
+        src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
         src/battle_script_commands.o(.rodata);

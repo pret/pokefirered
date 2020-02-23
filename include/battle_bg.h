@@ -7,7 +7,7 @@ extern const struct BgTemplate gBattleBgTemplates[];
 
 void InitBattleBgsVideo(void);
 void DrawBattleEntryBackground(void);
-void sub_800F6FC(u8 taskId);
+void InitLinkBattleVsScreen(u8 taskId);
 void LoadBattleMenuWindowGfx(void);
 void LoadBattleTextboxAndBackground(void);
 void sub_800F324(void);

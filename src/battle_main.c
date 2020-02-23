@@ -975,7 +975,7 @@ static void CB2_HandleStartBattle(void)
             ResetBlockReceivedFlags();
             sub_8010414(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(sub_800F6FC, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
@@ -1223,7 +1223,7 @@ static void CB2_HandleStartMultiBattle(void)
             SetAllPlayersBerryData();
             SetDeoxysStats();
             memcpy(gDecompressionBuffer, gPlayerParty, sizeof(struct Pokemon) * 3);
-            taskId = CreateTask(sub_800F6FC, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
@@ -1781,7 +1781,7 @@ void sub_8011A1C(void)
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(VBlankCB_Battle);
-    taskId = CreateTask(sub_800F6FC, 0);
+    taskId = CreateTask(InitLinkBattleVsScreen, 0);
     gTasks[taskId].data[1] = 270;
     gTasks[taskId].data[2] = 90;
     gTasks[taskId].data[5] = 1;

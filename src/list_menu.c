@@ -256,7 +256,7 @@ void DestroyListMenuTask(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove)
     if (itemsAbove != NULL)
         *itemsAbove = list->itemsAbove;
 
-    if (list->taskId != TASK_NONE)
+    if (list->taskId != TAIL_SENTINEL)
         ListMenuRemoveCursorObject(list->taskId, list->template.cursorKind - 2);
 
     DestroyTask(listTaskId);
@@ -346,7 +346,7 @@ static u8 ListMenuInitInternal(const struct ListMenuTemplate *listMenuTemplate, 
     list->itemsAbove = itemsAbove;
     list->unk_1C = 0;
     list->unk_1D = 0;
-    list->taskId = TASK_NONE;
+    list->taskId = TAIL_SENTINEL;
     list->unk_1F = 0;
     gListMenuOverride.cursorPal = list->template.cursorPal;
     gListMenuOverride.fillValue = list->template.fillValue;
@@ -418,12 +418,12 @@ static void ListMenuDrawCursor(struct ListMenu *list)
     case 1:
         break;
     case 2:
-        if (list->taskId == TASK_NONE)
+        if (list->taskId == TAIL_SENTINEL)
             list->taskId = ListMenuAddCursorObject(list, 0);
         ListMenuUpdateCursorObject(list->taskId, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 - 1, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y - 1, 0);
         break;
     case 3:
-        if (list->taskId == TASK_NONE)
+        if (list->taskId == TAIL_SENTINEL)
             list->taskId = ListMenuAddCursorObject(list, 1);
         ListMenuUpdateCursorObject(list->taskId, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 + x, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y, 1);
         break;

@@ -216,9 +216,10 @@ gUnknown_2039828: @ 2039828
 gUnknown_203982C: @ 203982C
 	.space 0x4
 
-gUnknown_2039830: @ 2039830
-	.space 0x40
+	.align 2
+	.include "src/script_movement.o"
 
+	.align 2
 gUnknown_2039870: @ 2039870
 	.space 0x4
 

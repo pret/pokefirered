@@ -3,20 +3,23 @@
 
 #include "global.h"
 
+#define HEAD_SENTINEL 0xFE
+#define TAIL_SENTINEL 0xFF
+
 #define NUM_TASKS 16
-#define TASK_NONE 0xFF
+#define NUM_TASK_DATA 16
 
 typedef void (*TaskFunc)(u8 taskId);
 
 struct Task
 {
-    /*0x00*/ TaskFunc func;
-    /*0x04*/ bool8 isActive;
-    /*0x05*/ u8 prev;
-    /*0x06*/ u8 next;
-    /*0x07*/ u8 priority;
-    /*0x08*/ s16 data[16];
-}; /*size = 0x28*/
+    TaskFunc func;
+    bool8 isActive;
+    u8 prev;
+    u8 next;
+    u8 priority;
+    s16 data[NUM_TASK_DATA];
+};
 
 extern struct Task gTasks[];
 

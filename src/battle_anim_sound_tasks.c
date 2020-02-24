@@ -178,7 +178,7 @@ void sub_80DD148(u8 taskId)
     gTasks[taskId].data[2] = pan;
     if (species != SPECIES_NONE)
     {
-        if (gBattleAnimArgs[1] == TASK_NONE)
+        if (gBattleAnimArgs[1] == TAIL_SENTINEL)
             PlayCry3(species, pan, 9);
         else
             PlayCry3(species, pan, 7);
@@ -199,7 +199,7 @@ static void sub_80DD270(u8 taskId)
     {
         ++gTasks[taskId].data[9];
     }
-    else if (gTasks[taskId].data[0] == TASK_NONE)
+    else if (gTasks[taskId].data[0] == TAIL_SENTINEL)
     {
         if (!IsCryPlaying())
         {

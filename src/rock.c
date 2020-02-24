@@ -704,7 +704,7 @@ static void sub_80B4F78(struct Sprite *sprite)
     {
         u8 taskId = FindTaskIdByFunc(sub_80B4D00);
 
-        if (taskId != TASK_NONE)
+        if (taskId != TAIL_SENTINEL)
             --gTasks[taskId].data[11];
         DestroySprite(sprite);
     }

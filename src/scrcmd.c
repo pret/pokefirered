@@ -1238,7 +1238,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     HideFieldMessageBox();
     playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
     return FALSE;
 }
@@ -1252,7 +1252,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
     playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
     return FALSE;
 }

@@ -251,4 +251,8 @@ extern const u8 gUnknown_83FE864[];
 extern const u8 gText_SafariBalls[];
 extern const u8 gText_HighlightRed_Left[];
 
+extern const u8 gText_Win[];
+extern const u8 gText_Loss[];
+extern const u8 gText_Draw[];
+
 #endif // GUARD_BATTLE_MESSAGE_H

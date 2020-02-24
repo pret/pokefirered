@@ -298,6 +298,16 @@
 #define BATTLE_TERRAIN_CAVE         7
 #define BATTLE_TERRAIN_BUILDING     8
 #define BATTLE_TERRAIN_PLAIN        9
+#define BATTLE_TERRAIN_LINK        10
+#define BATTLE_TERRAIN_GYM         11
+#define BATTLE_TERRAIN_LEADER      12
+#define BATTLE_TERRAIN_INDOOR_2    13
+#define BATTLE_TERRAIN_INDOOR_1    14
+#define BATTLE_TERRAIN_LORELEI     15
+#define BATTLE_TERRAIN_BRUNO       16
+#define BATTLE_TERRAIN_AGATHA      17
+#define BATTLE_TERRAIN_LANCE       18
+#define BATTLE_TERRAIN_CHAMPION    19
 
 // Return value for IsRunningFromBattleImpossible. 
 #define BATTLE_RUN_SUCCESS        0

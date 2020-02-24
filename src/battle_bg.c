@@ -16,8 +16,17 @@
 
 #define TAG_VS_LETTERS 10000
 
-static void sub_800F228(void);
-static u8 sub_800FC2C(void);
+struct BattleBackground
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+};
+
+static void CB2_unused(void);
+static u8 GetBattleTerrainOverride(void);
 
 static const u8 gUnknown_824829C[] = {1, 2};
 
@@ -89,7 +98,7 @@ static const struct SpriteTemplate sVsLetter_S_SpriteTemplate = {
 };
 
 static const struct CompressedSpriteSheet sVsLettersSpriteSheet = {
-    gFile_graphics_battle_transitions_vs_sheet,
+    gVsLettersGfx,
     0x1000,
     TAG_VS_LETTERS
 };
@@ -393,7 +402,7 @@ static const u32 gUnknown_824E81C[] = INCBIN_U32("graphics/battle/unk_824E81C.gb
 static const u32 gUnknown_824E858[] = INCBIN_U32("graphics/battle/unk_824E858.4bpp.lz");
 static const u32 gUnknown_824EB90[] = INCBIN_U32("graphics/battle/unk_824EB90.bin.lz");
 
-static const u32 *const gUnknown_824EE34[][5] = {
+static const struct BattleBackground gUnknown_824EE34[] = {
     {gUnknown_824844C, gUnknown_82489A8, gUnknown_8248C68, gUnknown_8248F58, gUnknown_8248400},
     {gUnknown_82490C4, gUnknown_8249620, gUnknown_82498DC, gUnknown_8249E10, gUnknown_8249074},
     {gUnknown_8249FE4, gUnknown_824A37C, gUnknown_824A618, gUnknown_824A844, gUnknown_8249F98},
@@ -417,70 +426,72 @@ static const u32 *const gUnknown_824EE34[][5] = {
 };
 
 static const struct {
-    u8 unk0;
-    u8 unk1;
-} gUnknown_824EFC4[] = {
-    {1, 11},
-    {2, 14},
-    {3, 13},
-    {4, 15},
-    {5, 16},
-    {6, 17},
-    {7, 18},
-    {8, 10}
+    u8 mapScene;
+    u8 battleTerrain;
+} sMapBattleSceneMapping[] = {
+    {MAP_BATTLE_SCENE_GYM,      BATTLE_TERRAIN_GYM},
+    {MAP_BATTLE_SCENE_INDOOR_1, BATTLE_TERRAIN_INDOOR_1},
+    {MAP_BATTLE_SCENE_INDOOR_2, BATTLE_TERRAIN_INDOOR_2},
+    {MAP_BATTLE_SCENE_LORELEI,  BATTLE_TERRAIN_LORELEI},
+    {MAP_BATTLE_SCENE_BRUNO,    BATTLE_TERRAIN_BRUNO},
+    {MAP_BATTLE_SCENE_AGATHA,   BATTLE_TERRAIN_AGATHA},
+    {MAP_BATTLE_SCENE_LANCE,    BATTLE_TERRAIN_LANCE},
+    {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
 };
 
-UNUSED void sub_800F1E8(void)
+UNUSED void CreateUnknownDebugSprite(void)
 {
     u8 spriteId;
 
     ResetSpriteData();
     spriteId = CreateSprite(&gUnknown_824EFF0, 0, 0, 0);
     gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(sub_800F228);
+    SetMainCallback2(CB2_unused);
 }
 
-static void sub_800F228(void)
+static void CB2_unused(void)
 {
     AnimateSprites();
     BuildOamBuffer();
 }
 
-static u8 sub_800F238(u8 a0)
+static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
 {
     int i;
-    for (i = 0; i < NELEMS(gUnknown_824EFC4); i++)
+    for (i = 0; i < NELEMS(sMapBattleSceneMapping); i++)
     {
-        if (a0 == gUnknown_824EFC4[i].unk0)
-            return gUnknown_824EFC4[i].unk1;
+        if (mapBattleScene == sMapBattleSceneMapping[i].mapScene)
+            return sMapBattleSceneMapping[i].battleTerrain;
     }
     return 9;
 }
 
-static void sub_800F260(u16 envId)
+static void LoadBattleTerrainGfx(u16 terrain)
 {
-    if (envId >= NELEMS(gUnknown_824EE34))
-        envId = 9;
-    LZDecompressVram(gUnknown_824EE34[envId][0], (void *)BG_CHAR_ADDR(2));
-    LZDecompressVram(gUnknown_824EE34[envId][1], (void *)BG_SCREEN_ADDR(26));
-    LoadCompressedPalette(gUnknown_824EE34[envId][4], 0x20, 0x60);
+    if (terrain >= NELEMS(gUnknown_824EE34))
+        terrain = 9;
+    // Copy to bg3
+    LZDecompressVram(gUnknown_824EE34[terrain].tileset, (void *)BG_CHAR_ADDR(2));
+    LZDecompressVram(gUnknown_824EE34[terrain].tilemap, (void *)BG_SCREEN_ADDR(26));
+    LoadCompressedPalette(gUnknown_824EE34[terrain].palette, 0x20, 0x60);
 }
 
-static void sub_800F2AC(u16 envId)
+static void LoadBattleTerrainEntryGfx(u16 terrain)
 {
-    if (envId >= NELEMS(gUnknown_824EE34))
-        envId = 9;
-    LZDecompressVram(gUnknown_824EE34[envId][2], (void *)BG_CHAR_ADDR(1));
-    LZDecompressVram(gUnknown_824EE34[envId][3], (void *)BG_SCREEN_ADDR(28));
+    if (terrain >= NELEMS(gUnknown_824EE34))
+        terrain = 9;
+    // Copy to bg1
+    LZDecompressVram(gUnknown_824EE34[terrain].entryTileset, (void *)BG_CHAR_ADDR(1));
+    LZDecompressVram(gUnknown_824EE34[terrain].entryTilemap, (void *)BG_SCREEN_ADDR(28));
 }
 
-UNUSED void sub_800F2EC(u8 envId, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
+UNUSED void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
 {
-    if (envId > 9)
-        envId = 9;
-    *tilesPtr = gUnknown_824EE34[envId][0];
-    *mapPtr = gUnknown_824EE34[envId][1];
-    *palPtr = gUnknown_824EE34[envId][4];
+    if (terrain > 9)
+        terrain = 9;
+    *tilesPtr = gUnknown_824EE34[terrain].tileset;
+    *mapPtr = gUnknown_824EE34[terrain].tilemap;
+    *palPtr = gUnknown_824EE34[terrain].palette;
 }
 
 void sub_800F324(void)
@@ -521,7 +532,7 @@ void LoadBattleMenuWindowGfx(void)
 
 void DrawMainBattleBackground(void)
 {
-    sub_800F260(sub_800FC2C());
+    LoadBattleTerrainGfx(GetBattleTerrainOverride());
 }
 
 void LoadBattleTextboxAndBackground(void)
@@ -794,37 +805,37 @@ void DrawBattleEntryBackground(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         LZDecompressVram(gFile_graphics_battle_transitions_vs_frame_sheet, (void*)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gFile_graphics_battle_transitions_vs_sheet, (void*)(VRAM + 0x10000));
+        LZDecompressVram(gVsLettersGfx, (void*)(VRAM + 0x10000));
         LoadCompressedPalette(gFile_graphics_battle_transitions_vs_frame_palette, 0x60, 0x20);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
-        SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);
+        SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT512x256);
         CopyToBgTilemapBuffer(1, gFile_graphics_battle_transitions_vs_frame_tilemap, 0, 0);
         CopyToBgTilemapBuffer(2, gFile_graphics_battle_transitions_vs_frame_tilemap, 0, 0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
-        SetGpuReg(REG_OFFSET_WININ, 0x36);
-        SetGpuReg(REG_OFFSET_WINOUT, 0x36);
-        gBattle_BG1_Y = 0xFF5C;
-        gBattle_BG2_Y = 0xFF5C;
+        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
+        gBattle_BG1_Y = -164;
+        gBattle_BG2_Y = -164;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        sub_800F2AC(0);
+        LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_GRASS);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
     {
-        sub_800F2AC(8);
+        LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
     {
         if (gGameVersion == VERSION_FIRE_RED)
         {
-            sub_800F2AC(7);
+            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_CAVE);
         }
         else
         {
-            sub_800F2AC(4);
+            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_WATER);
         }
     }
     else
@@ -834,56 +845,56 @@ void DrawBattleEntryBackground(void)
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
             if (trainerClass == CLASS_LEADER_2)
             {
-                sub_800F2AC(8);
+                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
                 return;
             }
             else if (trainerClass == CLASS_CHAMPION_2)
             {
-                sub_800F2AC(8);
+                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
                 return;
             }
         }
 
         if (GetCurrentMapBattleScene() == MAP_BATTLE_SCENE_NORMAL)
         {
-            sub_800F2AC(gBattleTerrain);
+            LoadBattleTerrainEntryGfx(gBattleTerrain);
         }
         else
         {
-            sub_800F2AC(8);
+            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
         }
     }
 }
 
-static u8 sub_800FC2C(void)
+static u8 GetBattleTerrainOverride(void)
 {
     u8 battleScene;
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
     {
-        return 10;
+        return BATTLE_TERRAIN_LINK;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        gBattleTerrain = 0;
-        return 0;
+        gBattleTerrain = BATTLE_TERRAIN_GRASS;
+        return BATTLE_TERRAIN_GRASS;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_LEADER_2)
         {
-            return 12;
+            return BATTLE_TERRAIN_LEADER;
         }
         else if (gTrainers[gTrainerBattleOpponent_A].trainerClass == CLASS_CHAMPION_2)
         {
-            return 19;
+            return BATTLE_TERRAIN_CHAMPION;
         }
     }
     battleScene = GetCurrentMapBattleScene();
-    if (battleScene == 0)
+    if (battleScene == MAP_BATTLE_SCENE_NORMAL)
     {
         return gBattleTerrain;
     }
-    return sub_800F238(battleScene);
+    return GetBattleTerrainByMapScene(battleScene);
 }
 
 bool8 LoadChosenBattleElement(u8 caseId)
@@ -903,16 +914,16 @@ bool8 LoadChosenBattleElement(u8 caseId)
         LoadCompressedPalette(gBattleTextboxPalette, 0x00, 0x40);
         break;
     case 3:
-        battleScene = sub_800FC2C();
-        LZDecompressVram(gUnknown_824EE34[battleScene][0], (void *)BG_CHAR_ADDR(2));
+        battleScene = GetBattleTerrainOverride();
+        LZDecompressVram(gUnknown_824EE34[battleScene].tileset, (void *)BG_CHAR_ADDR(2));
         // fallthrough
     case 4:
-        battleScene = sub_800FC2C();
-        LZDecompressVram(gUnknown_824EE34[battleScene][1], (void *)BG_SCREEN_ADDR(26));
+        battleScene = GetBattleTerrainOverride();
+        LZDecompressVram(gUnknown_824EE34[battleScene].tilemap, (void *)BG_SCREEN_ADDR(26));
         break;
     case 5:
-        battleScene = sub_800FC2C();
-        LoadCompressedPalette(gUnknown_824EE34[battleScene][4], 0x20, 0x60);
+        battleScene = GetBattleTerrainOverride();
+        LoadCompressedPalette(gUnknown_824EE34[battleScene].palette, 0x20, 0x60);
         break;
     case 6:
         LoadBattleMenuWindowGfx();

@@ -891,7 +891,7 @@ void InitLinkBattleVsScreen(u8 taskId)
         break;
     case 1:
         palId = AllocSpritePalette(TAG_VS_LETTERS);
-        gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
+        gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = RGB(31, 31, 31);
         gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&sVsLetter_V_SpriteTemplate, 108, 80, 0);
         gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&sVsLetter_S_SpriteTemplate, 132, 80, 0);
         gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;

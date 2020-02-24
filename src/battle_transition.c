@@ -644,7 +644,7 @@ static bool8 BT_Phase1Blink(struct Task *task)
 
 static bool8 BT_WaitForPhase1(struct Task *task)
 {
-    if (FindTaskIdByFunc(sBT_Phase1Tasks[task->tTransitionId]) == TASK_NONE)
+    if (FindTaskIdByFunc(sBT_Phase1Tasks[task->tTransitionId]) == TAIL_SENTINEL)
     {
         ++task->tState;
         return TRUE;
@@ -665,7 +665,7 @@ static bool8 BT_Phase2LaunchAnimTask(struct Task *task)
 static bool8 BT_WaitForPhase2(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sBT_Phase2Tasks[task->tTransitionId]) == TASK_NONE)
+    if (FindTaskIdByFunc(sBT_Phase2Tasks[task->tTransitionId]) == TAIL_SENTINEL)
         task->tTransitionDone = TRUE;
     return FALSE;
 }
@@ -3432,7 +3432,7 @@ static void BT_CreatePhase1SubTask(s16 fadeOutDelay, s16 fadeInDelay, s16 blinkT
 
 static bool8 BT_IsPhase1Done(void)
 {
-    if (FindTaskIdByFunc(BT_Phase1SubTask) == TASK_NONE)
+    if (FindTaskIdByFunc(BT_Phase1SubTask) == TAIL_SENTINEL)
         return TRUE;
     else
         return FALSE;

@@ -87,7 +87,7 @@ void sub_80696C0(void)
 {
     u8 objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
 }
 
@@ -98,7 +98,7 @@ void UnionRoom_UnlockPlayerAndChatPartner(void)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
     objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
 }
 

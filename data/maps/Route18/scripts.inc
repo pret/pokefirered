@@ -5,25 +5,25 @@ Route18_MapScripts:: @ 81681F6
 
 Route18_OnTransition:: @ 8168201
 	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if_eq EventScript_16820D
+	call_if_eq Route18_OnTransitionCyclingRoad
 	end
 
-EventScript_16820D:: @ 816820D
+Route18_OnTransitionCyclingRoad:: @ 816820D
 	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
 Route18_OnWarp:: @ 8168211
-	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, EventScript_16821B
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route18_OnWarpCyclingRoad
 	.2byte 0
 
-EventScript_16821B:: @ 816821B
+Route18_OnWarpCyclingRoad:: @ 816821B
 	special Special_ForcePlayerOntoBike
 	end
 
-Route18_EventScript_16821F:: @ 816821F
-	msgbox gUnknown_8187757, MSGBOX_SIGN
+Route18_EventScript_RouteSign:: @ 816821F
+	msgbox Route18_Text_RouteSign, MSGBOX_SIGN
 	end
 
-Route18_EventScript_168228:: @ 8168228
-	msgbox gUnknown_818777C, MSGBOX_SIGN
+Route18_EventScript_CyclingRoadSign:: @ 8168228
+	msgbox Route18_Text_CyclingRoadSign, MSGBOX_SIGN
 	end

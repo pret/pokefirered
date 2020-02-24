@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route18_EventScript_1AB3D3",
+      "script": "Route18_EventScript_Jacob",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route18_EventScript_1AB395",
+      "script": "Route18_EventScript_Ramiro",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 6,
-      "script": "Route18_EventScript_1AB357",
+      "script": "Route18_EventScript_Wilton",
       "flag": "0"
     }
   ],
@@ -89,14 +89,14 @@
       "x": 37,
       "y": 7,
       "elevation": 0,
-      "script": "Route18_EventScript_168228"
+      "script": "Route18_EventScript_CyclingRoadSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 52,
       "y": 7,
       "elevation": 0,
-      "script": "Route18_EventScript_16821F"
+      "script": "Route18_EventScript_RouteSign"
     }
   ]
 }

@@ -1,131 +1,131 @@
-Text_18717E:: @ 818717E
+Route17_Text_RaulIntro:: @ 818717E
     .string "There's no getting rich quick in\n"
     .string "battling kids.$"
 
-Text_1871AE:: @ 81871AE
+Route17_Text_RaulDefeat:: @ 81871AE
     .string "Burned out!$"
 
-Text_1871BA:: @ 81871BA
+Route17_Text_RaulPostBattle:: @ 81871BA
     .string "You can find good stuff lying\n"
     .string "around on CYCLING ROAD.\p"
     .string "There's good money in picking them\n"
     .string "up and selling them.$"
 
-Text_187228:: @ 8187228
+Route17_Text_IsaiahIntro:: @ 8187228
     .string "I'm mighty proud of my bod, kiddo.\n"
     .string "Come on!$"
 
-Text_187254:: @ 8187254
+Route17_Text_IsaiahDefeat:: @ 8187254
     .string "Whoo!$"
 
-Text_18725A:: @ 818725A
+Route17_Text_IsaiahPostBattle:: @ 818725A
     .string "I could belly-bump you outta\n"
     .string "here!$"
 
-Text_18727D:: @ 818727D
+Route17_Text_VirgilIntro:: @ 818727D
     .string "You heading to FUCHSIA?$"
 
-Text_187295:: @ 8187295
+Route17_Text_VirgilDefeat:: @ 8187295
     .string "Crash and burn!$"
 
-Text_1872A5:: @ 81872A5
+Route17_Text_VirgilPostBattle:: @ 81872A5
     .string "I love racing downhill!$"
 
-Text_1872BD:: @ 81872BD
+Route17_Text_BillyIntro:: @ 81872BD
     .string "We're BIKERS!\n"
     .string "We rule the roads, man!$"
 
-Text_1872E3:: @ 81872E3
+Route17_Text_BillyDefeat:: @ 81872E3
     .string "Smoked!$"
 
-Text_1872EB:: @ 81872EB
+Route17_Text_BillyPostBattle:: @ 81872EB
     .string "Are you looking for adventure?$"
 
-Text_18730A:: @ 818730A
+Route17_Text_NikolasIntro:: @ 818730A
     .string "Let VOLTORB electrify you!$"
 
-Text_187325:: @ 8187325
+Route17_Text_NikolasDefeat:: @ 8187325
     .string "Grounded out!$"
 
-Text_187333:: @ 8187333
+Route17_Text_NikolasPostBattle:: @ 8187333
     .string "I got my VOLTORB at the abandoned\n"
     .string "POWER PLANT.$"
 
-Text_187362:: @ 8187362
+Route17_Text_ZeekIntro:: @ 8187362
     .string "I leveled up my POKéMON, but it\n"
     .string "won't evolve. Why?$"
 
-Text_187395:: @ 8187395
+Route17_Text_ZeekDefeat:: @ 8187395
     .string "Why, you!$"
 
-Text_18739F:: @ 818739F
+Route17_Text_ZeekPostBattle:: @ 818739F
     .string "Maybe some POKéMON need element\n"
     .string "STONES to evolve.$"
 
-Text_1873D1:: @ 81873D1
+Route17_Text_JamalIntro:: @ 81873D1
     .string "I need a little exercise!$"
 
-Text_1873EB:: @ 81873EB
+Route17_Text_JamalDefeat:: @ 81873EB
     .string "Whew!\n"
     .string "Good workout!$"
 
-Text_1873FF:: @ 81873FF
+Route17_Text_JamalPostBattle:: @ 81873FF
     .string "I'm sure I lost weight there!$"
 
-Text_18741D:: @ 818741D
+Route17_Text_CoreyIntro:: @ 818741D
     .string "Be a rebel!$"
 
-Text_187429:: @ 8187429
+Route17_Text_CoreyDefeat:: @ 8187429
     .string "Aaaargh!$"
 
-Text_187432:: @ 8187432
+Route17_Text_CoreyPostBattle:: @ 8187432
     .string "Be ready to fight for your beliefs!$"
 
-Text_187456:: @ 8187456
+Route17_Text_JaxonIntro:: @ 8187456
     .string "Nice BIKE!\n"
     .string "How's it handle?$"
 
-Text_187472:: @ 8187472
+Route17_Text_JaxonDefeat:: @ 8187472
     .string "Shoot!$"
 
-Text_187479:: @ 8187479
+Route17_Text_JaxonPostBattle:: @ 8187479
     .string "The slope makes it hard to steer.$"
 
-Text_18749B:: @ 818749B
+Route17_Text_WilliamIntro:: @ 818749B
     .string "Get lost, kid!\n"
     .string "I'm bushed!$"
 
-Text_1874B6:: @ 81874B6
+Route17_Text_WilliamDefeat:: @ 81874B6
     .string "Are you satisfied?$"
 
-Text_1874C9:: @ 81874C9
+Route17_Text_WilliamPostBattle:: @ 81874C9
     .string "I need to catch a few z's!$"
 
-gUnknown_81874E4:: @ 81874E4
+Route17_Text_WatchOutForDiscardedItems:: @ 81874E4
     .string "It's a notice.\p"
     .string "Watch out for discarded items.$"
 
-gUnknown_8187512:: @ 8187512
+Route17_Text_SameSpeciesGrowDifferentRates:: @ 8187512
     .string "TRAINER TIPS\p"
     .string "All POKéMON are unique.\p"
     .string "Even POKéMON of the same species\n"
     .string "and level grow at different rates.$"
 
-gUnknown_818757B:: @ 818757B
+Route17_Text_PressBToStayInPlace:: @ 818757B
     .string "TRAINER TIPS\p"
     .string "Press the B Button to stay in place\n"
     .string "while on a slope.$"
 
-gUnknown_81875BE:: @ 81875BE
+Route17_Text_RouteSign:: @ 81875BE
     .string "ROUTE 17\n"
     .string "CELADON CITY - FUCHSIA CITY$"
 
-gUnknown_81875E3:: @ 81875E3
+Route17_Text_DontThrowGameThrowBalls:: @ 81875E3
     .string "It's a notice!\p"
     .string "Don't throw the game, throw POKé\n"
     .string "BALLS instead!$"
 
-gUnknown_8187622:: @ 8187622
+Route17_Text_CyclingRoadSign:: @ 8187622
     .string "CYCLING ROAD\n"
     .string "Slope ends here!$"
 

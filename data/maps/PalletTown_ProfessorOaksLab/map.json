@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_F",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_F",
       "x": 2,
       "y": 10,
       "elevation": 3,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 11,
       "y": 10,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PROF_OAK",
+      "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -68,7 +68,7 @@
       "flag": "FLAG_HIDE_OAK_IN_HIS_LAB"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
       "y": 4,
       "elevation": 0,
@@ -81,7 +81,7 @@
       "flag": "FLAG_HIDE_BULBASAUR_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -94,7 +94,7 @@
       "flag": "FLAG_HIDE_SQUIRTLE_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -107,7 +107,7 @@
       "flag": "FLAG_HIDE_CHARMANDER_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -120,7 +120,7 @@
       "flag": "FLAG_HIDE_RIVAL_IN_LAB"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_POKEDEX",
+      "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
       "x": 4,
       "y": 1,
       "elevation": 0,
@@ -133,7 +133,7 @@
       "flag": "FLAG_HIDE_POKEDEX"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_POKEDEX",
+      "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
       "x": 5,
       "y": 1,
       "elevation": 0,

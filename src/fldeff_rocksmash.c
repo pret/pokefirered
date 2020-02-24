@@ -11,7 +11,7 @@
 #include "overworld.h"
 #include "event_object_movement.h"
 #include "constants/songs.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 
 static void task08_080C9820(u8 taskId);
@@ -104,7 +104,7 @@ static void sub_80C99A0(u8 taskId)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (CheckObjectGraphicsInFrontOfPlayer(OBJECT_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_80C9A10;

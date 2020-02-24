@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 12,
       "y": 3,
       "elevation": 3,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 6,
       "y": 4,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 10,
       "y": 8,
       "elevation": 3,

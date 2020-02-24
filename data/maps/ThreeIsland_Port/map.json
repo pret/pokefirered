@@ -22,7 +22,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_3",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 14,
       "y": 9,
       "elevation": 3,
@@ -35,7 +35,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 8,
       "y": 8,
       "elevation": 3,
@@ -48,7 +48,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 13,
       "y": 10,
       "elevation": 3,

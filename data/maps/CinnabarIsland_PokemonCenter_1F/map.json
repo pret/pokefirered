@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_F",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 2,
       "y": 4,
       "elevation": 3,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -94,7 +94,7 @@
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BILL",
+      "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 11,
       "y": 5,
       "elevation": 3,

@@ -41,7 +41,6 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/items.h"
-#include "constants/object_events.h"
 #include "constants/maps.h"
 #include "constants/region_map.h"
 #include "constants/moves.h"
@@ -316,7 +315,7 @@ void Special_AnimatePcTurnOff()
 
 void SpawnCameraObject(void)
 {
-    u8 objectEventId = SpawnSpecialObjectEventParameterized(OBJECT_EVENT_GFX_YOUNGSTER, 8, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    u8 objectEventId = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_YOUNGSTER, 8, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
     gObjectEvents[objectEventId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[objectEventId].spriteId);
 }
@@ -1529,8 +1528,8 @@ u8 ContextNpcGetTextColor(void)
     else
     {
         gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
-        if (gfxId >= OBJECT_EVENT_GFX_VAR_0)
-            gfxId = VarGetObjectEventGraphicsId(gfxId - OBJECT_EVENT_GFX_VAR_0);
+        if (gfxId >= OBJ_EVENT_GFX_VAR_0)
+            gfxId = VarGetObjectEventGraphicsId(gfxId - OBJ_EVENT_GFX_VAR_0);
         return GetColorFromTextColorTable(gfxId);
     }
 }

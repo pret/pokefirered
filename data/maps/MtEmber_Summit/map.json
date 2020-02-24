@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MOLTRES",
+      "graphics_id": "OBJ_EVENT_GFX_MOLTRES",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "FLAG_HIDE_MOLTRES"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 10,
       "y": 12,
       "elevation": 3,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 9,
       "y": 12,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 11,
       "elevation": 3,
@@ -68,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 10,
       "elevation": 3,

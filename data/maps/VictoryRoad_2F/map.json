@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
+      "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 20,
       "y": 11,
       "elevation": 4,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 31,
       "y": 16,
       "elevation": 4,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 26,
       "y": 6,
       "elevation": 3,
@@ -68,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 36,
       "y": 5,
       "elevation": 3,
@@ -81,7 +81,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 6,
       "elevation": 3,
@@ -94,7 +94,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_GUARD_SPEC"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 40,
       "y": 7,
       "elevation": 3,
@@ -107,7 +107,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_TM07"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 25,
       "y": 13,
       "elevation": 3,
@@ -120,7 +120,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_FULL_HEAL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 14,
       "y": 13,
       "elevation": 3,
@@ -133,7 +133,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_TM37"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -146,7 +146,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 6,
       "y": 17,
       "elevation": 3,
@@ -159,7 +159,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 33,
       "y": 19,
       "elevation": 3,
@@ -172,7 +172,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_BOULDER"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 40,
       "y": 9,
       "elevation": 3,

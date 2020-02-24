@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 5,
       "y": 4,
       "elevation": 4,
@@ -29,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_F",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_F",
       "x": 6,
       "y": 4,
       "elevation": 4,
@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PIKACHU",
+      "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
       "x": 7,
       "y": 6,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SEEL",
+      "graphics_id": "OBJ_EVENT_GFX_SEEL",
       "x": 4,
       "y": 6,
       "elevation": 3,
@@ -68,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 4,
       "y": 5,
       "elevation": 0,
@@ -81,7 +81,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 7,
       "y": 5,
       "elevation": 0,

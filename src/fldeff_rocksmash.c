@@ -12,6 +12,7 @@
 #include "event_object_movement.h"
 #include "constants/songs.h"
 #include "constants/event_objects.h"
+#include "constants/event_object_movement.h"
 #include "constants/maps.h"
 
 static void task08_080C9820(u8 taskId);
@@ -60,7 +61,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_805CB70();
-            ObjectEventSetHeldMovement(&gObjectEvents[mapObjId], 0x45);
+            ObjectEventSetHeldMovement(&gObjectEvents[mapObjId], MOVEMENT_ACTION_UNKNOWN_STEP_45);
             gTasks[taskId].func = sub_80C98B0;
         }
     }

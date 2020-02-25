@@ -26,5 +26,6 @@ u16 GetHiddenItemAttr(u32 hiddenItem, u8 attr);
 u8 GetUnlockedSeviiAreas(void);
 u32 GetPlayerTrainerId(void);
 bool8 CutMoveRuinValleyCheck(void);
+void CutMoveOpenDottedHoleDoor(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

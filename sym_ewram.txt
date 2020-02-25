@@ -220,10 +220,10 @@ gUnknown_203982C: @ 203982C
 	.include "src/script_movement.o"
 
 	.align 2
-gUnknown_2039870: @ 2039870
+sCutGrassSpriteArrayPtr: @ 2039870
 	.space 0x4
 
-gUnknown_2039874: @ 2039874
+sScheduleOpenDottedHole: @ 2039874
 	.space 0x4
 
 	.align 2

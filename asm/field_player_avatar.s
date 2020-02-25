@@ -2921,7 +2921,7 @@ IsPlayerFacingSurfableFishableWater: @ 805C8B0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_805C938
+	bl MetatileAtCoordsIsWaterTile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2940,24 +2940,24 @@ _0805C92E:
 	bx r1
 	thumb_func_end IsPlayerFacingSurfableFishableWater
 
-	thumb_func_start sub_805C938
-sub_805C938: @ 805C938
+	thumb_func_start MetatileAtCoordsIsWaterTile
+MetatileAtCoordsIsWaterTile: @ 805C938
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
 	movs r2, 0x1
-	bl sub_8058F48
+	bl MapGridGetMetatileAttributeAt
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_805A2BC
+	bl TestMetatileAttributeBit
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C938
+	thumb_func_end MetatileAtCoordsIsWaterTile
 
 	thumb_func_start ClearPlayerAvatarInfo
 ClearPlayerAvatarInfo: @ 805C95C

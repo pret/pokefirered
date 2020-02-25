@@ -35,18 +35,18 @@ EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
 
 const struct ConnectionFlags sDummyConnectionFlags = {};
 
-const u32 gUnknown_8352EF0[] = {
-    0x1ff,
-    0x3e00,
-    0x3c000,
-    0xfc0000,
-    0x7000000,
+const u32 sMetatileAttrMasks[] = {
+    0x000001ff,
+    0x00003e00,
+    0x0003c000,
+    0x00fc0000,
+    0x07000000,
     0x18000000,
     0x60000000,
     0x80000000
 };
 
-const u8 gUnknown_8352F10[] = {
+const u8 sMetatileAttrShifts[] = {
     0,
     9,
     14,
@@ -443,28 +443,28 @@ u32 MapGridGetMetatileIdAt(s32 x, s32 y)
     return block & 0x3FF;
 }
 
-u32 sub_8058F1C(u32 original, u8 bit)
+u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit)
 {
     if (bit >= 8)
         return original;
 
-    return (original & gUnknown_8352EF0[bit]) >> gUnknown_8352F10[bit];
+    return (original & sMetatileAttrMasks[bit]) >> sMetatileAttrShifts[bit];
 }
 
-u32 sub_8058F48(s16 x, s16 y, u8 z)
+u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
-    return GetBehaviorByMetatileIdAndMapLayout(gMapHeader.mapLayout, metatileId, z);
+    return GetBehaviorByMetatileIdAndMapLayout(gMapHeader.mapLayout, metatileId, attr);
 }
 
 u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
 {
-    return sub_8058F48(x, y, 0);
+    return MapGridGetMetatileAttributeAt(x, y, 0);
 }
 
 u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y)
 {
-    return sub_8058F48(x, y, 6);
+    return MapGridGetMetatileAttributeAt(x, y, 6);
 }
 
 void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
@@ -512,12 +512,12 @@ u32 GetBehaviorByMetatileIdAndMapLayout(struct MapLayout *mapLayout, u16 metatil
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = mapLayout->primaryTileset->metatileAttributes;
-        return sub_8058F1C(attributes[metatile], attr);
+        return GetMetatileAttributeFromRawMetatileBehavior(attributes[metatile], attr);
     }
     else if (metatile < 0x400)
     {
         attributes = mapLayout->secondaryTileset->metatileAttributes;
-        return sub_8058F1C(attributes[metatile - NUM_METATILES_IN_PRIMARY], attr);
+        return GetMetatileAttributeFromRawMetatileBehavior(attributes[metatile - NUM_METATILES_IN_PRIMARY], attr);
     }
     else
     {

@@ -5,143 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8097874
-sub_8097874: @ 8097874
-	push {lr}
-	lsls r0, 16
-	asrs r0, 16
-	lsls r1, 16
-	asrs r1, 16
-	movs r2, 0x1
-	bl sub_8058F48
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x1
-	bl sub_805A2BC
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8097874
-
-	thumb_func_start SetUpFieldMove_Cut
-SetUpFieldMove_Cut: @ 8097898
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	ldr r4, _080978CC @ =gUnknown_2039874
-	movs r0, 0
-	strb r0, [r4]
-	bl CutMoveRuinValleyCheck
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080978E0
-	movs r0, 0x5F
-	bl CheckObjectGraphicsInFrontOfPlayer
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08097904
-	ldr r1, _080978D0 @ =gFieldCallback2
-	ldr r0, _080978D4 @ =FieldCallback_PrepareFadeInFromMenu
-	str r0, [r1]
-	ldr r1, _080978D8 @ =gPostMenuFieldCallback
-	ldr r0, _080978DC @ =sub_80979D0
-	b _080978EC
-	.align 2, 0
-_080978CC: .4byte gUnknown_2039874
-_080978D0: .4byte gFieldCallback2
-_080978D4: .4byte FieldCallback_PrepareFadeInFromMenu
-_080978D8: .4byte gPostMenuFieldCallback
-_080978DC: .4byte sub_80979D0
-_080978E0:
-	strb r0, [r4]
-_080978E2:
-	ldr r1, _080978F4 @ =gFieldCallback2
-	ldr r0, _080978F8 @ =FieldCallback_PrepareFadeInFromMenu
-	str r0, [r1]
-	ldr r1, _080978FC @ =gPostMenuFieldCallback
-	ldr r0, _08097900 @ =sub_8097984
-_080978EC:
-	str r0, [r1]
-	movs r0, 0x1
-	b _08097970
-	.align 2, 0
-_080978F4: .4byte gFieldCallback2
-_080978F8: .4byte FieldCallback_PrepareFadeInFromMenu
-_080978FC: .4byte gPostMenuFieldCallback
-_08097900: .4byte sub_8097984
-_08097904:
-	ldr r4, _0809797C @ =gPlayerFacingPosition
-	adds r1, r4, 0x2
-	adds r0, r4, 0
-	bl PlayerGetDestCoords
-	movs r7, 0
-	adds r2, r4, 0
-	ldr r0, _08097980 @ =0x0000ffff
-	mov r8, r0
-_08097916:
-	mov r1, r8
-	adds r0, r1, r7
-	ldrh r1, [r2, 0x2]
-	adds r0, r1
-	movs r6, 0
-	lsls r0, 16
-	asrs r5, r0, 16
-_08097924:
-	mov r1, r8
-	adds r0, r1, r6
-	ldrh r1, [r2]
-	adds r0, r1
-	lsls r0, 16
-	asrs r4, r0, 16
-	adds r0, r4, 0
-	adds r1, r5, 0
-	str r2, [sp]
-	bl MapGridGetZCoordAt
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, [sp]
-	movs r1, 0x4
-	ldrsb r1, [r2, r1]
-	cmp r0, r1
-	bne _0809795A
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl sub_8097874
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, [sp]
-	cmp r0, 0x1
-	beq _080978E2
-_0809795A:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0x2
-	bls _08097924
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	cmp r7, 0x2
-	bls _08097916
-	movs r0, 0
-_08097970:
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809797C: .4byte gPlayerFacingPosition
-_08097980: .4byte 0x0000ffff
-	thumb_func_end SetUpFieldMove_Cut
-
-	thumb_func_start sub_8097984
-sub_8097984: @ 8097984
+	thumb_func_start FieldCallback_CutGrass
+FieldCallback_CutGrass: @ 8097984
 	push {lr}
 	movs r0, 0x1
 	bl FieldEffectStart
@@ -154,7 +19,7 @@ sub_8097984: @ 8097984
 	bx r0
 	.align 2, 0
 _0809799C: .4byte gFieldEffectArguments
-	thumb_func_end sub_8097984
+	thumb_func_end FieldCallback_CutGrass
 
 	thumb_func_start sub_80979A0
 sub_80979A0: @ 80979A0
@@ -181,8 +46,8 @@ _080979C8: .4byte gTasks
 _080979CC: .4byte sub_8097A20
 	thumb_func_end sub_80979A0
 
-	thumb_func_start sub_80979D0
-sub_80979D0: @ 80979D0
+	thumb_func_start FieldCallback_CutTree
+FieldCallback_CutTree: @ 80979D0
 	push {lr}
 	bl GetCursorSelectionMonId
 	ldr r1, _080979E8 @ =gFieldEffectArguments
@@ -196,7 +61,7 @@ sub_80979D0: @ 80979D0
 	.align 2, 0
 _080979E8: .4byte gFieldEffectArguments
 _080979EC: .4byte EventScript_FldEffCut
-	thumb_func_end sub_80979D0
+	thumb_func_end FieldCallback_CutTree
 
 	thumb_func_start sub_80979F0
 sub_80979F0: @ 80979F0
@@ -228,14 +93,14 @@ sub_8097A20: @ 8097A20
 	push {lr}
 	movs r0, 0x1
 	bl FieldEffectActiveListRemove
-	ldr r0, _08097A38 @ =gUnknown_2039874
+	ldr r0, _08097A38 @ =sScheduleOpenDottedHole
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08097A3C
 	bl CutMoveOpenDottedHoleDoor
 	b _08097A42
 	.align 2, 0
-_08097A38: .4byte gUnknown_2039874
+_08097A38: .4byte sScheduleOpenDottedHole
 _08097A3C:
 	movs r0, 0x3A
 	bl FieldEffectStart
@@ -289,7 +154,7 @@ _08097A78:
 	bne _08097ABC
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_8097874
+	bl MetatileAtCoordsIsGrassTile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -312,7 +177,7 @@ _08097ABC:
 	cmp r7, 0x2
 	bls _08097A68
 	bl DrawWholeMapView
-	ldr r4, _08097B40 @ =gUnknown_2039870
+	ldr r4, _08097B40 @ =sCutGrassSpriteArrayPtr
 	movs r0, 0x8
 	bl Alloc
 	str r0, [r4]
@@ -364,7 +229,7 @@ _08097AE2:
 	.align 2, 0
 _08097B38: .4byte gPlayerFacingPosition
 _08097B3C: .4byte 0x0000ffff
-_08097B40: .4byte gUnknown_2039870
+_08097B40: .4byte sCutGrassSpriteArrayPtr
 _08097B44: .4byte gSprites
 _08097B48: .4byte gPlayerAvatar
 _08097B4C: .4byte gUnknown_83D414C
@@ -485,7 +350,7 @@ sub_8097C18: @ 8097C18
 	push {r4-r6,lr}
 	movs r4, 0x1
 _08097C1C:
-	ldr r6, _08097C64 @ =gUnknown_2039870
+	ldr r6, _08097C64 @ =sCutGrassSpriteArrayPtr
 	ldr r0, [r6]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -516,7 +381,7 @@ _08097C1C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08097C64: .4byte gUnknown_2039870
+_08097C64: .4byte sCutGrassSpriteArrayPtr
 _08097C68: .4byte gSprites
 	thumb_func_end sub_8097C18
 

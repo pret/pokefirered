@@ -332,7 +332,7 @@ sub_806CAC8: @ 806CAC8
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	movs r2, 0xFF
-	bl sub_8058F48
+	bl MapGridGetMetatileAttributeAt
 	mov r8, r0
 	mov r0, sp
 	movs r1, 0

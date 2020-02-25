@@ -235,7 +235,7 @@ gBagPockets: @ 203988C
 	.align 2
 	.include "src/shop.o"
 	.align 2
-	.include "src/sea_cottage_special_anim.o"
+	.include "src/special_field_anim.o"
 	.align 2
 	.include "src/script_menu.o"
 

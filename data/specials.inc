@@ -445,9 +445,9 @@ gSpecials:: @ 815FD60
 	def_special Special_BrailleCursorToggle
 	def_special Script_ResetUnionRoomTrade
 	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
-	def_special sub_809C4A8
+	def_special AnimateTeleporterHousing
 	def_special IsDodrioInParty
-	def_special sub_809C5FC
+	def_special AnimateTeleporterCable
 	def_special Special_InitElevatorFloorSelectMenuPos
 	def_special Special_ComputeLoreleiDollCollection
 	def_special Special_LoopWingFlapSound

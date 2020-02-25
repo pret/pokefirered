@@ -177,7 +177,7 @@ Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	playse SE_PIN
 	waitse
 	setvar VAR_0x8004, 0
-	special sub_809C4A8
+	special AnimateTeleporterHousing
 	delay 10
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
@@ -187,9 +187,9 @@ Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	setvar VAR_0x8004, 1
-	special sub_809C4A8
+	special AnimateTeleporterHousing
 	playse SE_TK_WARPIN
-	special sub_809C5FC
+	special AnimateTeleporterCable
 	waitse
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE

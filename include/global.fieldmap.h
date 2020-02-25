@@ -3,6 +3,8 @@
 
 #define OBJECT_EVENTS_COUNT 16
 
+#define METATILE_COLLISION_MASK 0x0C00
+
 enum
 {
     CONNECTION_SOUTH = 1,

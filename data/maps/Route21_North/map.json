@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_North_EventScript_1AB975",
+      "script": "Route21_North_EventScript_Ronald",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_North_EventScript_1AB9F1",
+      "script": "Route21_North_EventScript_Wade",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 2,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABA6D",
+      "script": "Route21_North_EventScript_Spencer",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABB65",
+      "script": "Route21_North_EventScript_Lil",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABBAB",
+      "script": "Route21_North_EventScript_Ian",
       "flag": "0"
     },
     {

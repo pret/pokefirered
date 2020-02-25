@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route24_EventScript_168620",
+      "script": "Route24_EventScript_Rocket",
       "flag": "FLAG_HIDE_NUGGET_BRIDGE_ROCKET"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A972D",
+      "script": "Route24_EventScript_Ethan",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A9673",
+      "script": "Route24_EventScript_Reli",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A95F7",
+      "script": "Route24_EventScript_Timmy",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A96B1",
+      "script": "Route24_EventScript_Ali",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A9635",
+      "script": "Route24_EventScript_Cale",
       "flag": "0"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route24_EventScript_1A96EF",
+      "script": "Route24_EventScript_Shane",
       "flag": "0"
     },
     {
@@ -140,7 +140,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
-      "script": "Route24_EventScript_168660"
+      "script": "Route24_EventScript_RocketTriggerLeft"
     },
     {
       "type": "trigger",
@@ -149,7 +149,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
-      "script": "Route24_EventScript_16866C"
+      "script": "Route24_EventScript_RocketTriggerRight"
     }
   ],
   "bg_events": [

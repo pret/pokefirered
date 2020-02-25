@@ -1,143 +1,150 @@
+.equ LOCALID_BILL_HUMAN,    1
+.equ LOCALID_BILL_CLEFAIRY, 2
+
+.equ BILL_IN_TELEPORTER,     FLAG_TEMP_2
+.equ RETURN_AFTER_SS_TICKET, FLAG_TEMP_3
+
 Route25_SeaCottage_MapScripts:: @ 8170523
 	map_script MAP_SCRIPT_ON_TRANSITION, Route25_SeaCottage_OnTransition
 	.byte 0
 
 Route25_SeaCottage_OnTransition:: @ 8170529
-	call_if_unset FLAG_HELPED_BILL_IN_SEA_COTTAGE, EventScript_17053C
+	call_if_unset FLAG_HELPED_BILL_IN_SEA_COTTAGE, Route25_SeaCottage_EventScript_HideClefairyBill
 	call_if_set FLAG_GOT_SS_TICKET, EventScript_170547
 	end
 
-EventScript_17053C:: @ 817053C
+Route25_SeaCottage_EventScript_HideClefairyBill:: @ 817053C
 	clearflag FLAG_HIDE_BILL_CLEFAIRY
-	setobjectxyperm 1, 3, 3
+	setobjectxyperm LOCALID_BILL_HUMAN, 3, 3
 	return
 
 EventScript_170547:: @ 8170547
-	setflag FLAG_TEMP_3
+	setflag RETURN_AFTER_SS_TICKET
 	return
 
-Route25_SeaCottage_EventScript_17054B:: @ 817054B
+Route25_SeaCottage_EventScript_Bill:: @ 817054B
 	lock
 	faceplayer
-	goto_if_set FLAG_TEMP_3, EventScript_1706C8
-	goto_if_set FLAG_GOT_SS_TICKET, EventScript_170640
-	goto_if_set FLAG_HELPED_BILL_IN_SEA_COTTAGE, EventScript_17064A
+	goto_if_set RETURN_AFTER_SS_TICKET, Route25_SeaCottage_EventScript_BillGoLookAtPC
+	goto_if_set FLAG_GOT_SS_TICKET, Route25_SeaCottage_EventScript_BillGoToSSAnne
+	goto_if_set FLAG_HELPED_BILL_IN_SEA_COTTAGE, Route25_SeaCottage_EventScript_BillGiveSSTicket
 	checkplayergender
 	compare VAR_RESULT, MALE
-	goto_if_eq EventScript_170580
+	goto_if_eq Route25_SeaCottage_EventScript_BillAskForHelpMale
 	compare VAR_RESULT, FEMALE
-	goto_if_eq EventScript_17058E
+	goto_if_eq Route25_SeaCottage_EventScript_BillAskForHelpFemale
 	end
 
-EventScript_170580:: @ 8170580
-	msgbox gUnknown_819FDFA, MSGBOX_YESNO
-	goto EventScript_17059C
+Route25_SeaCottage_EventScript_BillAskForHelpMale:: @ 8170580
+	msgbox Route25_SeaCottage_Text_ImBillHelpMeOutPal, MSGBOX_YESNO
+	goto Route25_SeaCottage_EventScript_BillAskForHelp
 	end
 
-EventScript_17058E:: @ 817058E
-	msgbox gUnknown_819FEE6, MSGBOX_YESNO
-	goto EventScript_17059C
+Route25_SeaCottage_EventScript_BillAskForHelpFemale:: @ 817058E
+	msgbox Route25_SeaCottage_Text_ImBillHelpMeOutLady, MSGBOX_YESNO
+	goto Route25_SeaCottage_EventScript_BillAskForHelp
 	end
 
-EventScript_17059C:: @ 817059C
+Route25_SeaCottage_EventScript_BillAskForHelp:: @ 817059C
 	compare VAR_RESULT, NO
-	call_if_eq EventScript_170600
-	msgbox gUnknown_819FFD3
+	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBill
+	msgbox Route25_SeaCottage_Text_RunCellSeparationOnPC
 	closemessage
 	delay 10
 	compare VAR_FACING, DIR_SOUTH
-	call_if_eq EventScript_17062A
+	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq EventScript_170635
+	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
 	compare VAR_FACING, DIR_WEST
-	call_if_eq EventScript_170635
+	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
 	compare VAR_FACING, DIR_EAST
-	call_if_eq EventScript_170635
+	call_if_eq Route25_SeaCottage_EventScript_BillWalkToTeleporter
 	opendoor 10, 3
 	waitdooranim
-	applymovement 2, Movement_1706DB
+	applymovement LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillEnterTeleporter
 	waitmovement 0
-	removeobject 2
+	removeobject LOCALID_BILL_CLEFAIRY
 	playse SE_C_MAKU_D
 	closedoor 10, 3
 	waitdooranim
-	setflag FLAG_TEMP_2
+	setflag BILL_IN_TELEPORTER
 	release
 	end
 
-EventScript_170600:: @ 8170600
+@ Just returns after message, execution continues as if player had said yes
+Route25_SeaCottage_EventScript_DeclineHelpBill:: @ 8170600
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq EventScript_170618
+	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBillMale
 	compare VAR_RESULT, FEMALE
-	call_if_eq EventScript_170621
+	call_if_eq Route25_SeaCottage_EventScript_DeclineHelpBillFemale
 	return
 
-EventScript_170618:: @ 8170618
-	msgbox gUnknown_81A0035
+Route25_SeaCottage_EventScript_DeclineHelpBillMale:: @ 8170618
+	msgbox Route25_SeaCottage_Text_NoPleaseChief
 	return
 
-EventScript_170621:: @ 8170621
-	msgbox gUnknown_81A00B6
+Route25_SeaCottage_EventScript_DeclineHelpBillFemale:: @ 8170621
+	msgbox Route25_SeaCottage_Text_NoPleaseBeautiful
 	return
 
-EventScript_17062A:: @ 817062A
-	applymovement 2, Movement_1706D5
+Route25_SeaCottage_EventScript_BillWalkToTeleporterSouth:: @ 817062A
+	applymovement LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillWalkToTeleporterSouth
 	waitmovement 0
 	return
 
-EventScript_170635:: @ 8170635
-	applymovement 2, Movement_1706D2
+Route25_SeaCottage_EventScript_BillWalkToTeleporter:: @ 8170635
+	applymovement LOCALID_BILL_CLEFAIRY, Route25_SeaCottage_Movement_BillWalkToTeleporter
 	waitmovement 0
 	return
 
-EventScript_170640:: @ 8170640
-	msgbox gUnknown_81A02CF
+Route25_SeaCottage_EventScript_BillGoToSSAnne:: @ 8170640
+	msgbox Route25_SeaCottage_Text_SSAnnePartyYouGoInstead
 	release
 	end
 
-EventScript_17064A:: @ 817064A
+Route25_SeaCottage_EventScript_BillGiveSSTicket:: @ 817064A
 	famechecker FAMECHECKER_BILL, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq EventScript_1706AC
+	call_if_eq Route25_SeaCottage_EventScript_BillThanksMale
 	compare VAR_RESULT, FEMALE
-	call_if_eq EventScript_1706B5
+	call_if_eq Route25_SeaCottage_EventScript_BillThanksFemale
 	checkitemspace ITEM_SS_TICKET, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1706BE
-	giveitem_msg gUnknown_81A028E, ITEM_SS_TICKET, 1, MUS_FAN5
+	goto_if_eq Route25_SeaCottage_EventScript_NoRoomForSSTicket
+	giveitem_msg Route25_SeaCottage_Text_ReceivedSSTicketFromBill, ITEM_SS_TICKET, 1, MUS_FAN5
 	setflag FLAG_GOT_SS_TICKET_DUP
 	setflag FLAG_HIDE_NUGGET_BRIDGE_ROCKET
 	setflag FLAG_GOT_SS_TICKET
 	setflag FLAG_SYS_NOT_SOMEONES_PC
-	goto EventScript_170640
+	goto Route25_SeaCottage_EventScript_BillGoToSSAnne
 	end
 
-EventScript_1706AC:: @ 81706AC
-	msgbox gUnknown_81A013B
+Route25_SeaCottage_EventScript_BillThanksMale:: @ 81706AC
+	msgbox Route25_SeaCottage_Text_ThanksBudTakeThis
 	return
 
-EventScript_1706B5:: @ 81706B5
-	msgbox gUnknown_81A01E4
+Route25_SeaCottage_EventScript_BillThanksFemale:: @ 81706B5
+	msgbox Route25_SeaCottage_Text_ThanksLadyTakeThis
 	return
 
-EventScript_1706BE:: @ 81706BE
-	msgbox gUnknown_81A02B4
+Route25_SeaCottage_EventScript_NoRoomForSSTicket:: @ 81706BE
+	msgbox Route25_SeaCottage_Text_YouveGotTooMuchStuff
 	release
 	end
 
-EventScript_1706C8:: @ 81706C8
-	msgbox gUnknown_81A03AB
+Route25_SeaCottage_EventScript_BillGoLookAtPC:: @ 81706C8
+	msgbox Route25_SeaCottage_Text_CheckOutRareMonsOnPC
 	release
 	end
 
-Movement_1706D2:: @ 81706D2
+Route25_SeaCottage_Movement_BillWalkToTeleporter:: @ 81706D2
 	walk_up
 	walk_up
 	step_end
 
-Movement_1706D5:: @ 81706D5
+Route25_SeaCottage_Movement_BillWalkToTeleporterSouth:: @ 81706D5
 	walk_right
 	walk_up
 	walk_up
@@ -145,26 +152,26 @@ Movement_1706D5:: @ 81706D5
 	walk_in_place_fastest_up
 	step_end
 
-Movement_1706DB:: @ 81706DB
+Route25_SeaCottage_Movement_BillEnterTeleporter:: @ 81706DB
 	walk_up
 	step_end
 
-Route25_SeaCottage_EventScript_1706DD:: @ 81706DD
+Route25_SeaCottage_EventScript_Computer:: @ 81706DD
 	lockall
-	goto_if_set FLAG_TEMP_3, EventScript_1707CA
-	goto_if_set FLAG_TEMP_2, EventScript_1706FA
-	msgbox gUnknown_81A0402
+	goto_if_set RETURN_AFTER_SS_TICKET, Route25_SeaCottage_EventScript_OpenBillsMonList
+	goto_if_set BILL_IN_TELEPORTER, Route25_SeaCottage_EventScript_RunCellSeparator
+	msgbox Route25_SeaCottage_Text_TeleporterIsDisplayed
 	releaseall
 	end
 
-EventScript_1706FA:: @ 81706FA
+Route25_SeaCottage_EventScript_RunCellSeparator:: @ 81706FA
 	fadeoutbgm 0
-	msgbox gUnknown_81A042D
+	msgbox Route25_SeaCottage_Text_InitiatedTeleportersCellSeparator
 	closemessage
-	clearflag FLAG_TEMP_2
+	clearflag BILL_IN_TELEPORTER
 	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, Movement_1707BE
+	applymovement OBJ_EVENT_ID_CAMERA, Route25_SeaCottage_Movement_CameraPanToTeleporters
 	waitmovement 0
 	delay 35
 	playse SE_PIN
@@ -172,58 +179,58 @@ EventScript_1706FA:: @ 81706FA
 	setvar VAR_0x8004, 0
 	special sub_809C4A8
 	delay 10
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	setvar VAR_0x8004, 1
 	special sub_809C4A8
 	playse SE_TK_WARPIN
 	special sub_809C5FC
 	waitse
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
-	call EventScript_1707B6
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
+	call Route25_SeaCottage_EventScript_PlayTeleporterBeepSE
 	opendoor 3, 3
 	waitdooranim
 	fadeinbgm 0
-	addobject 1
+	addobject LOCALID_BILL_HUMAN
 	clearflag FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE
 	delay 50
 	playfanfare MUS_FANFA1
-	applymovement 1, Movement_170888
+	applymovement LOCALID_BILL_HUMAN, Route25_SeaCottage_Movement_BillExitTeleporter
 	waitmovement 0
 	waitfanfare
-	applymovement OBJ_EVENT_ID_CAMERA, Movement_1707C3
+	applymovement OBJ_EVENT_ID_CAMERA, Route25_SeaCottage_Movement_CameraPanBackFromTeleporters
 	waitmovement 0
 	playse SE_C_MAKU_D
 	closedoor 3, 3
 	waitdooranim
-	applymovement 1, Movement_170881
+	applymovement LOCALID_BILL_HUMAN, Route25_SeaCottage_Movement_BillWalkToMiddleOfRoom
 	waitmovement 0
 	special RemoveCameraObject
 	releaseall
 	end
 
-EventScript_1707B6:: @ 81707B6
+Route25_SeaCottage_EventScript_PlayTeleporterBeepSE:: @ 81707B6
 	playse SE_BOWA
 	waitse
 	delay 20
 	return
 
-Movement_1707BE:: @ 81707BE
+Route25_SeaCottage_Movement_CameraPanToTeleporters:: @ 81707BE
 	walk_up
 	walk_up
 	walk_right
 	walk_right
 	step_end
 
-Movement_1707C3:: @ 81707C3
+Route25_SeaCottage_Movement_CameraPanBackFromTeleporters:: @ 81707C3
 	delay_16
 	delay_16
 	walk_down
@@ -232,65 +239,65 @@ Movement_1707C3:: @ 81707C3
 	walk_left
 	step_end
 
-EventScript_1707CA:: @ 81707CA
-	msgbox gUnknown_81A045B
-	goto EventScript_1707D8
+Route25_SeaCottage_EventScript_OpenBillsMonList:: @ 81707CA
+	msgbox Route25_SeaCottage_Text_BillsFavoriteMonList
+	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
-EventScript_1707D8:: @ 81707D8
-	message Text_1A0479
+Route25_SeaCottage_EventScript_BillsMonList:: @ 81707D8
+	message Route25_SeaCottage_Text_SeeWhichMon
 	waitmessage
 	multichoice 0, 0, MULTICHOICE_EEVEELUTIONS, FALSE
 	switch VAR_RESULT
-	case 0, EventScript_17082B
-	case 1, EventScript_170840
-	case 2, EventScript_170855
-	case 3, EventScript_17086A
-	case 4, EventScript_17087F
-	case 127, EventScript_17087F
+	case 0, Route25_SeaCottage_EventScript_ViewEevee
+	case 1, Route25_SeaCottage_EventScript_ViewFlareon
+	case 2, Route25_SeaCottage_EventScript_ViewJolteon
+	case 3, Route25_SeaCottage_EventScript_ViewVaporeon
+	case 4, Route25_SeaCottage_EventScript_ExitBillsMonList
+	case 127, Route25_SeaCottage_EventScript_ExitBillsMonList
 	end
 
-EventScript_17082B:: @ 817082B
+Route25_SeaCottage_EventScript_ViewEevee:: @ 817082B
 	drawmonpic SPECIES_EEVEE, 10, 3
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_EEVEE
 	special Special_SetSeenMon
-	goto EventScript_1707D8
+	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
-EventScript_170840:: @ 8170840
+Route25_SeaCottage_EventScript_ViewFlareon:: @ 8170840
 	drawmonpic SPECIES_FLAREON, 10, 3
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_FLAREON
 	special Special_SetSeenMon
-	goto EventScript_1707D8
+	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
-EventScript_170855:: @ 8170855
+Route25_SeaCottage_EventScript_ViewJolteon:: @ 8170855
 	drawmonpic SPECIES_JOLTEON, 10, 3
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_JOLTEON
 	special Special_SetSeenMon
-	goto EventScript_1707D8
+	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
-EventScript_17086A:: @ 817086A
+Route25_SeaCottage_EventScript_ViewVaporeon:: @ 817086A
 	drawmonpic SPECIES_VAPOREON, 10, 3
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_VAPOREON
 	special Special_SetSeenMon
-	goto EventScript_1707D8
+	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
-EventScript_17087F:: @ 817087F
+Route25_SeaCottage_EventScript_ExitBillsMonList:: @ 817087F
 	releaseall
 	end
 
-Movement_170881:: @ 8170881
+Route25_SeaCottage_Movement_BillWalkToMiddleOfRoom:: @ 8170881
 	walk_right
 	walk_right
 	walk_right
@@ -299,6 +306,6 @@ Movement_170881:: @ 8170881
 	walk_down
 	step_end
 
-Movement_170888:: @ 8170888
+Route25_SeaCottage_Movement_BillExitTeleporter:: @ 8170888
 	walk_down
 	step_end

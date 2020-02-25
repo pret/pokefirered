@@ -1,3 +1,5 @@
+.equ LOCALID_ROCKET, 1
+
 Route24_MapScripts:: @ 816861F
 	.byte 0
 
@@ -10,7 +12,7 @@ Route24_EventScript_Rocket:: @ 8168620
 	checkitemspace ITEM_NUGGET, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route24_EventScript_NoRoomForNugget
-	call Route24_EventScript_ReceiveNugget
+	call Route24_EventScript_BattleRocket
 	release
 	end
 
@@ -39,61 +41,61 @@ Route24_EventScript_RocketTriggerRight:: @ 816866C
 Route24_EventScript_RocketTrigger:: @ 8168678
 	textcolor 0
 	compare VAR_TEMP_1, 0
-	call_if_eq EventScript_1686FD
+	call_if_eq Route24_EventScript_RocketApproachPlayer
 	compare VAR_TEMP_1, 1
-	call_if_eq EventScript_168708
+	call_if_eq Route24_EventScript_RocketMotionToPlayer
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox Route24_Text_JustEarnedFabulousPrize
 	checkitemspace ITEM_NUGGET, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_168713
-	call Route24_EventScript_ReceiveNugget
+	goto_if_eq Route24_EventScript_NoRoomForNuggetTrigger
+	call Route24_EventScript_BattleRocket
 	releaseall
 	end
 
-Route24_EventScript_ReceiveNugget:: @ 81686B9
+Route24_EventScript_BattleRocket:: @ 81686B9
 	giveitem_msg Route24_Text_ReceivedNuggetFromMysteryTrainer, ITEM_NUGGET
 	message Route24_Text_JoinTeamRocket
 	waitmessage
 	playbgm MUS_ROCKET, 0
 	waitbuttonpress
-	setvar VAR_LAST_TALKED, 1
+	setvar VAR_LAST_TALKED, LOCALID_ROCKET
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_6, Route24_Text_RocketDefeat
 	msgbox Route24_Text_YoudBecomeTopRocketLeader
 	setvar VAR_MAP_SCENE_ROUTE24, 1
 	return
 
-EventScript_1686FD:: @ 81686FD
-	applymovement 1, Route24_Movement_WalkLeft
+Route24_EventScript_RocketApproachPlayer:: @ 81686FD
+	applymovement LOCALID_ROCKET, Route24_Movement_RocketApproachPlayer
 	waitmovement 0
 	return
 
-EventScript_168708:: @ 8168708
-	applymovement 1, Movement_WalkInPlaceFastestLeft
+Route24_EventScript_RocketMotionToPlayer:: @ 8168708
+	applymovement LOCALID_ROCKET, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	return
 
-EventScript_168713:: @ 8168713
+Route24_EventScript_NoRoomForNuggetTrigger:: @ 8168713
 	msgbox Route24_Text_YouDontHaveAnyRoom
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Route24_Movement_WalkDown
 	waitmovement 0
 	compare VAR_TEMP_1, 0
-	call_if_eq EventScript_168733
+	call_if_eq Route24_EventScript_RocketWalkBackToPos
 	release
 	end
 
-EventScript_168733:: @ 8168733
-	applymovement 1, Movement_168740
+Route24_EventScript_RocketWalkBackToPos:: @ 8168733
+	applymovement LOCALID_ROCKET, Route24_Movement_RocketWalkBackToPos
 	waitmovement 0
 	return
 
-Route24_Movement_WalkLeft:: @ 816873E
+Route24_Movement_RocketApproachPlayer:: @ 816873E
 	walk_left
 	step_end
 
-Movement_168740:: @ 8168740
+Route24_Movement_RocketWalkBackToPos:: @ 8168740
 	walk_right
 	walk_in_place_fastest_left
 	step_end

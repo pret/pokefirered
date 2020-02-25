@@ -10,7 +10,7 @@ Route25_SeaCottage_MapScripts:: @ 8170523
 
 Route25_SeaCottage_OnTransition:: @ 8170529
 	call_if_unset FLAG_HELPED_BILL_IN_SEA_COTTAGE, Route25_SeaCottage_EventScript_HideClefairyBill
-	call_if_set FLAG_GOT_SS_TICKET, EventScript_170547
+	call_if_set FLAG_GOT_SS_TICKET, Route25_SeaCottage_EventScript_SetReturnedAfterSSTicket
 	end
 
 Route25_SeaCottage_EventScript_HideClefairyBill:: @ 817053C
@@ -18,7 +18,7 @@ Route25_SeaCottage_EventScript_HideClefairyBill:: @ 817053C
 	setobjectxyperm LOCALID_BILL_HUMAN, 3, 3
 	return
 
-EventScript_170547:: @ 8170547
+Route25_SeaCottage_EventScript_SetReturnedAfterSSTicket:: @ 8170547
 	setflag RETURN_AFTER_SS_TICKET
 	return
 

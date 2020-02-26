@@ -1,58 +1,59 @@
 PalletTown_PlayersHouse_1F_MapScripts:: @ 8168C08
 	.byte 0
 
-PalletTown_PlayersHouse_1F_EventScript_168C09:: @ 8168C09
+PalletTown_PlayersHouse_1F_EventScript_Mom:: @ 8168C09
 	lock
 	faceplayer
-	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, EventScript_168C4A
+	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq EventScript_168C38
+	call_if_eq PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
 	compare VAR_RESULT, FEMALE
-	call_if_eq EventScript_168C41
+	call_if_eq PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
 	closemessage
 	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-EventScript_168C38:: @ 8168C38
-	msgbox gUnknown_818D2F0
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale:: @ 8168C38
+	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
 	return
 
-EventScript_168C41:: @ 8168C41
-	msgbox gUnknown_818D360
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale:: @ 8168C41
+	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
 	return
 
-EventScript_168C4A:: @ 8168C4A
-	msgbox gUnknown_818D3D1
+PalletTown_PlayersHouse_1F_EventScript_MomHeal:: @ 8168C4A
+	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
-	msgbox gUnknown_818D3F8
+	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
 	release
 	end
 
-PalletTown_PlayersHouse_1F_EventScript_168C62:: @ 8168C62
+@ Displays special text if interacted with from side or back (which are normally inaccessible)
+PalletTown_PlayersHouse_1F_EventScript_TV:: @ 8168C62
 	lockall
 	compare VAR_FACING, DIR_NORTH
-	goto_if_eq EventScript_168C78
-	msgbox gUnknown_818D4F9
+	goto_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreen
+	msgbox PalletTown_PlayersHouse_1F_Text_OopsWrongSide
 	releaseall
 	end
 
-EventScript_168C78:: @ 8168C78
+PalletTown_PlayersHouse_1F_EventScript_TVScreen:: @ 8168C78
 	checkplayergender
 	compare VAR_RESULT, MALE
-	call_if_eq EventScript_168C91
+	call_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
 	compare VAR_RESULT, FEMALE
-	call_if_eq EventScript_168C9A
+	call_if_eq PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
 	releaseall
 	end
 
-EventScript_168C91:: @ 8168C91
-	msgbox gUnknown_818D43E
+PalletTown_PlayersHouse_1F_EventScript_TVScreenMale:: @ 8168C91
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
 	return
 
-EventScript_168C9A:: @ 8168C9A
-	msgbox gUnknown_818D492
+PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale:: @ 8168C9A
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
 	return

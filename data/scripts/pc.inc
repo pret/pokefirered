@@ -90,7 +90,7 @@ EventScript_AccessProfOaksPC:: @ 81A6A7A
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_ExitOaksPC
 	setflag FLAG_OAKS_RATING_IS_VIA_PC
-	call ProfOak_EventScript_RatePokedex
+	call PokedexRating_EventScript_Rate
 	clearflag FLAG_OAKS_RATING_IS_VIA_PC
 	goto EventScript_ExitOaksPC
 	end

@@ -31,21 +31,21 @@
       "x": 6,
       "y": 5,
       "elevation": 3,
-      "script": "PalletTown_PlayersHouse_2F_EventScript_168CD2"
+      "script": "PalletTown_PlayersHouse_2F_EventScript_NES"
     },
     {
       "type": "bg_event_type_0",
       "x": 1,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_PlayersHouse_2F_EventScript_168CE4"
+      "script": "PalletTown_PlayersHouse_2F_EventScript_PC"
     },
     {
       "type": "bg_event_type_0",
       "x": 11,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_PlayersHouse_2F_EventScript_168CDB"
+      "script": "PalletTown_PlayersHouse_2F_EventScript_Sign"
     }
   ]
 }

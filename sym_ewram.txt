@@ -218,14 +218,8 @@ gUnknown_203982C: @ 203982C
 
 	.align 2
 	.include "src/script_movement.o"
-
 	.align 2
-sCutGrassSpriteArrayPtr: @ 2039870
-	.space 0x4
-
-sScheduleOpenDottedHole: @ 2039874
-	.space 0x4
-
+	.include "src/fldeff_cut.o"
 	.align 2
 	.include "src/item_menu_icons.o"
 

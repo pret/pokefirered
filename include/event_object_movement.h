@@ -117,6 +117,8 @@ bool32 RfuUnionObjectIsInvisible(u8 objectEventId);
 void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo);
 bool32 RfuUnionObjectIsWarping(u8 objectEventId);
 
+void sub_805F378(s16 x, s16 y);
+
 // Exported data declarations
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
@@ -124,5 +126,7 @@ extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
 extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct UCoords16 gUnknown_83A64C8[];
+extern const u16 gUnknown_8398648[];
+extern const u16 gUnknown_8398688[];
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

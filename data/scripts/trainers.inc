@@ -2130,186 +2130,186 @@ Route21_North_EventScript_IanRematch:: @ 81ABBD6
 	msgbox Route21_North_Text_IanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABBF1:: @ 81ABBF1
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_MARIA, Text_18961F, Text_18964D
+OneIsland_KindleRoad_EventScript_Maria:: @ 81ABBF1
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_MARIA, OneIsland_KindleRoad_Text_MariaIntro, OneIsland_KindleRoad_Text_MariaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABC18
-	msgbox Text_189657, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_MariaRematch
+	msgbox OneIsland_KindleRoad_Text_MariaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABC18:: @ 81ABC18
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_MARIA, Text_1C37B5, Text_18964D
-	msgbox Text_189657, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_MariaRematch:: @ 81ABC18
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_MARIA, OneIsland_KindleRoad_Text_MariaRematchIntro, OneIsland_KindleRoad_Text_MariaDefeat
+	msgbox OneIsland_KindleRoad_Text_MariaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABC2F:: @ 81ABC2F
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_ABIGAIL, Text_18968C, Text_1896AC
+OneIsland_KindleRoad_EventScript_Abigail:: @ 81ABC2F
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_ABIGAIL, OneIsland_KindleRoad_Text_AbigailIntro, OneIsland_KindleRoad_Text_AbigailDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABC56
-	msgbox Text_1896C1, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_AbigailRematch
+	msgbox OneIsland_KindleRoad_Text_AbigailPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABC56:: @ 81ABC56
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_ABIGAIL, Text_1C37E7, Text_1896AC
-	msgbox Text_1896C1, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_AbigailRematch:: @ 81ABC56
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_ABIGAIL, OneIsland_KindleRoad_Text_AbigailRematchIntro, OneIsland_KindleRoad_Text_AbigailDefeat
+	msgbox OneIsland_KindleRoad_Text_AbigailPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABC6D:: @ 81ABC6D
-	trainerbattle_single TRAINER_SWIMMER_MALE_FINN, Text_1896F9, Text_189728
+OneIsland_KindleRoad_EventScript_Finn:: @ 81ABC6D
+	trainerbattle_single TRAINER_SWIMMER_MALE_FINN, OneIsland_KindleRoad_Text_FinnIntro, OneIsland_KindleRoad_Text_FinnDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABC94
-	msgbox Text_189740, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_FinnRematch
+	msgbox OneIsland_KindleRoad_Text_FinnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABC94:: @ 81ABC94
-	trainerbattle_rematch TRAINER_SWIMMER_MALE_FINN, Text_1C3807, Text_189728
-	msgbox Text_189740, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_FinnRematch:: @ 81ABC94
+	trainerbattle_rematch TRAINER_SWIMMER_MALE_FINN, OneIsland_KindleRoad_Text_FinnRematchIntro, OneIsland_KindleRoad_Text_FinnDefeat
+	msgbox OneIsland_KindleRoad_Text_FinnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABCAB:: @ 81ABCAB
-	trainerbattle_single TRAINER_SWIMMER_MALE_GARRETT, Text_189767, Text_1897A4
+OneIsland_KindleRoad_EventScript_Garrett:: @ 81ABCAB
+	trainerbattle_single TRAINER_SWIMMER_MALE_GARRETT, OneIsland_KindleRoad_Text_GarrettIntro, OneIsland_KindleRoad_Text_GarrettDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABCD2
-	msgbox Text_1897C5, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_GarrettRematch
+	msgbox OneIsland_KindleRoad_Text_GarrettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABCD2:: @ 81ABCD2
-	trainerbattle_rematch TRAINER_SWIMMER_MALE_GARRETT, Text_1C3835, Text_1897A4
-	msgbox Text_1897C5, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_GarrettRematch:: @ 81ABCD2
+	trainerbattle_rematch TRAINER_SWIMMER_MALE_GARRETT, OneIsland_KindleRoad_Text_GarrettRematchIntro, OneIsland_KindleRoad_Text_GarrettDefeat
+	msgbox OneIsland_KindleRoad_Text_GarrettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABCE9:: @ 81ABCE9
-	trainerbattle_single TRAINER_FISHERMAN_TOMMY, Text_1897FF, Text_189833
+OneIsland_KindleRoad_EventScript_Tommy:: @ 81ABCE9
+	trainerbattle_single TRAINER_FISHERMAN_TOMMY, OneIsland_KindleRoad_Text_TommyIntro, OneIsland_KindleRoad_Text_TommyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABD10
-	msgbox Text_18984B, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_TommyRematch
+	msgbox OneIsland_KindleRoad_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABD10:: @ 81ABD10
-	trainerbattle_rematch TRAINER_FISHERMAN_TOMMY, Text_1C386A, Text_189833
-	msgbox Text_18984B, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_TommyRematch:: @ 81ABD10
+	trainerbattle_rematch TRAINER_FISHERMAN_TOMMY, OneIsland_KindleRoad_Text_TommyRematchIntro, OneIsland_KindleRoad_Text_TommyDefeat
+	msgbox OneIsland_KindleRoad_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABD27:: @ 81ABD27
-	trainerbattle_single TRAINER_CRUSH_GIRL_SHARON, Text_189883, Text_1898AB
+OneIsland_KindleRoad_EventScript_Sharon:: @ 81ABD27
+	trainerbattle_single TRAINER_CRUSH_GIRL_SHARON, OneIsland_KindleRoad_Text_SharonIntro, OneIsland_KindleRoad_Text_SharonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABD4E
-	msgbox Text_1898C4, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_SharonRematch
+	msgbox OneIsland_KindleRoad_Text_SharonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABD4E:: @ 81ABD4E
-	trainerbattle_rematch TRAINER_CRUSH_GIRL_SHARON, Text_1C389F, Text_1898AB
-	msgbox Text_1898C4, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_SharonRematch:: @ 81ABD4E
+	trainerbattle_rematch TRAINER_CRUSH_GIRL_SHARON, OneIsland_KindleRoad_Text_SharonRematchIntro, OneIsland_KindleRoad_Text_SharonDefeat
+	msgbox OneIsland_KindleRoad_Text_SharonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABD65:: @ 81ABD65
-	trainerbattle_single TRAINER_CRUSH_GIRL_TANYA, Text_1898F0, Text_18991B
+OneIsland_KindleRoad_EventScript_Tanya:: @ 81ABD65
+	trainerbattle_single TRAINER_CRUSH_GIRL_TANYA, OneIsland_KindleRoad_Text_TanyaIntro, OneIsland_KindleRoad_Text_TanyaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABD8C
-	msgbox Text_18992C, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_TanyaRematch
+	msgbox OneIsland_KindleRoad_Text_TanyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABD8C:: @ 81ABD8C
-	trainerbattle_rematch TRAINER_CRUSH_GIRL_TANYA, Text_1C38CA, Text_18991B
-	msgbox Text_18992C, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_TanyaRematch:: @ 81ABD8C
+	trainerbattle_rematch TRAINER_CRUSH_GIRL_TANYA, OneIsland_KindleRoad_Text_TanyaRematchIntro, OneIsland_KindleRoad_Text_TanyaDefeat
+	msgbox OneIsland_KindleRoad_Text_TanyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABDA3:: @ 81ABDA3
-	trainerbattle_single TRAINER_BLACK_BELT_SHEA, Text_189950, Text_18998C
+OneIsland_KindleRoad_EventScript_Shea:: @ 81ABDA3
+	trainerbattle_single TRAINER_BLACK_BELT_SHEA, OneIsland_KindleRoad_Text_SheaIntro, OneIsland_KindleRoad_Text_SheaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABDCA
-	msgbox Text_189998, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_SheaRematch
+	msgbox OneIsland_KindleRoad_Text_SheaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABDCA:: @ 81ABDCA
-	trainerbattle_rematch TRAINER_BLACK_BELT_SHEA, Text_1C38FA, Text_18998C
-	msgbox Text_189998, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_SheaRematch:: @ 81ABDCA
+	trainerbattle_rematch TRAINER_BLACK_BELT_SHEA, OneIsland_KindleRoad_Text_SheaRematchIntro, OneIsland_KindleRoad_Text_SheaDefeat
+	msgbox OneIsland_KindleRoad_Text_SheaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABDE1:: @ 81ABDE1
-	trainerbattle_single TRAINER_BLACK_BELT_HUGH, Text_1899CE, Text_189A0A
+OneIsland_KindleRoad_EventScript_Hugh:: @ 81ABDE1
+	trainerbattle_single TRAINER_BLACK_BELT_HUGH, OneIsland_KindleRoad_Text_HughIntro, OneIsland_KindleRoad_Text_HughDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABE08
-	msgbox Text_189A13, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_HughRematch
+	msgbox OneIsland_KindleRoad_Text_HughPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABE08:: @ 81ABE08
-	trainerbattle_rematch TRAINER_BLACK_BELT_HUGH, Text_1C3943, Text_189A0A
-	msgbox Text_189A13, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_HughRematch:: @ 81ABE08
+	trainerbattle_rematch TRAINER_BLACK_BELT_HUGH, OneIsland_KindleRoad_Text_HughRematchIntro, OneIsland_KindleRoad_Text_HughDefeat
+	msgbox OneIsland_KindleRoad_Text_HughPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABE1F:: @ 81ABE1F
-	trainerbattle_single TRAINER_CAMPER_BRYCE, Text_189A53, Text_189A92
+OneIsland_KindleRoad_EventScript_Bryce:: @ 81ABE1F
+	trainerbattle_single TRAINER_CAMPER_BRYCE, OneIsland_KindleRoad_Text_BryceIntro, OneIsland_KindleRoad_Text_BryceDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABE46
-	msgbox Text_189A9F, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_BryceRematch
+	msgbox OneIsland_KindleRoad_Text_BrycePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABE46:: @ 81ABE46
-	trainerbattle_rematch TRAINER_CAMPER_BRYCE, Text_1C3987, Text_189A92
-	msgbox Text_189A9F, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_BryceRematch:: @ 81ABE46
+	trainerbattle_rematch TRAINER_CAMPER_BRYCE, OneIsland_KindleRoad_Text_BryceRematchIntro, OneIsland_KindleRoad_Text_BryceDefeat
+	msgbox OneIsland_KindleRoad_Text_BrycePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABE5D:: @ 81ABE5D
-	trainerbattle_single TRAINER_PICNICKER_CLAIRE, Text_189ACB, Text_189B0B
+OneIsland_KindleRoad_EventScript_Claire:: @ 81ABE5D
+	trainerbattle_single TRAINER_PICNICKER_CLAIRE, OneIsland_KindleRoad_Text_ClaireIntro, OneIsland_KindleRoad_Text_ClaireDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABE84
-	msgbox Text_189B24, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_ClaireRematch
+	msgbox OneIsland_KindleRoad_Text_ClairePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABE84:: @ 81ABE84
-	trainerbattle_rematch TRAINER_PICNICKER_CLAIRE, Text_1C39C6, Text_189B0B
-	msgbox Text_189B24, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_ClaireRematch:: @ 81ABE84
+	trainerbattle_rematch TRAINER_PICNICKER_CLAIRE, OneIsland_KindleRoad_Text_ClaireRematchIntro, OneIsland_KindleRoad_Text_ClaireDefeat
+	msgbox OneIsland_KindleRoad_Text_ClairePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABE9B:: @ 81ABE9B
-	trainerbattle_double TRAINER_CRUSH_KIN_MIK_KIA, Text_189B4D, Text_189B84, Text_189BDE
+OneIsland_KindleRoad_EventScript_Kia:: @ 81ABE9B
+	trainerbattle_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_KiaIntro, OneIsland_KindleRoad_Text_KiaDefeat, OneIsland_KindleRoad_Text_KiaNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABEC6
-	msgbox Text_189BA3, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_KiaRematch
+	msgbox OneIsland_KindleRoad_Text_KiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABEC6:: @ 81ABEC6
-	trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, Text_1C3A05, Text_189B84, Text_189BDE
-	msgbox Text_189BA3, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_KiaRematch:: @ 81ABEC6
+	trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_KiaRematchIntro, OneIsland_KindleRoad_Text_KiaDefeat, OneIsland_KindleRoad_Text_KiaNotEnoughMons
+	msgbox OneIsland_KindleRoad_Text_KiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_KindleRoad_EventScript_1ABEE1:: @ 81ABEE1
-	trainerbattle_double TRAINER_CRUSH_KIN_MIK_KIA, Text_189C33, Text_189C62, Text_189CAB
+OneIsland_KindleRoad_EventScript_Mik:: @ 81ABEE1
+	trainerbattle_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_MikIntro, OneIsland_KindleRoad_Text_MikDefeat, OneIsland_KindleRoad_Text_MikNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABF0C
-	msgbox Text_189C7E, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_KindleRoad_EventScript_MikRematch
+	msgbox OneIsland_KindleRoad_Text_MikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABF0C:: @ 81ABF0C
-	trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, Text_1C3A55, Text_189C62, Text_189CAB
-	msgbox Text_189C7E, MSGBOX_AUTOCLOSE
+OneIsland_KindleRoad_EventScript_MikRematch:: @ 81ABF0C
+	trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_MikRematchIntro, OneIsland_KindleRoad_Text_MikDefeat, OneIsland_KindleRoad_Text_MikNotEnoughMons
+	msgbox OneIsland_KindleRoad_Text_MikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OneIsland_TreasureBeach_EventScript_1ABF27:: @ 81ABF27
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_AMARA, Text_189D5A, Text_189D8B
+OneIsland_TreasureBeach_EventScript_Amara:: @ 81ABF27
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_AMARA, OneIsland_TreasureBeach_Text_AmaraIntro, OneIsland_TreasureBeach_Text_AmaraDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABF4E
-	msgbox Text_189DA3, MSGBOX_AUTOCLOSE
+	goto_if_eq OneIsland_TreasureBeach_EventScript_AmaraRematch
+	msgbox OneIsland_TreasureBeach_Text_AmaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABF4E:: @ 81ABF4E
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_AMARA, Text_1C3773, Text_189D8B
-	msgbox Text_189DA3, MSGBOX_AUTOCLOSE
+OneIsland_TreasureBeach_EventScript_AmaraRematch:: @ 81ABF4E
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_AMARA, OneIsland_TreasureBeach_Text_AmaraRematchIntro, OneIsland_TreasureBeach_Text_AmaraDefeat
+	msgbox OneIsland_TreasureBeach_Text_AmaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65

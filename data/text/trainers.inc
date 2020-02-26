@@ -707,60 +707,60 @@ Route24_Text_CaleRematchIntro:: @ 81C36DA
 	.string "…But, you're welcome to battle with\n"
 	.string "us again.$"
 
-Text_1C3773:: @ 81C3773
+OneIsland_TreasureBeach_Text_AmaraRematchIntro:: @ 81C3773
 	.string "Lying back, rocked by the waves…\n"
 	.string "I don't notice time slipping by…$"
 
-Text_1C37B5:: @ 81C37B5
+OneIsland_KindleRoad_Text_MariaRematchIntro:: @ 81C37B5
 	.string "The weather's gorgeous!\n"
 	.string "I'll try not to spoil it.$"
 
-Text_1C37E7:: @ 81C37E7
+OneIsland_KindleRoad_Text_AbigailRematchIntro:: @ 81C37E7
 	.string "My sunburn is starting to hurt…$"
 
-Text_1C3807:: @ 81C3807
+OneIsland_KindleRoad_Text_FinnRematchIntro:: @ 81C3807
 	.string "The fire bird's mountain casts\n"
 	.string "a huge shadow…$"
 
-Text_1C3835:: @ 81C3835
+OneIsland_KindleRoad_Text_GarrettRematchIntro:: @ 81C3835
 	.string "I have this strong feeling that\n"
 	.string "I can win this time!$"
 
-Text_1C386A:: @ 81C386A
+OneIsland_KindleRoad_Text_TommyRematchIntro:: @ 81C386A
 	.string "Wait! Wait a second!\n"
 	.string "I'm sure I've hooked a big one!$"
 
-Text_1C389F:: @ 81C389F
+OneIsland_KindleRoad_Text_SharonRematchIntro:: @ 81C389F
 	.string "You'll help me out with my\n"
 	.string "training again?$"
 
-Text_1C38CA:: @ 81C38CA
+OneIsland_KindleRoad_Text_TanyaRematchIntro:: @ 81C38CA
 	.string "We haven't missed a single day of\n"
 	.string "training yet!$"
 
-Text_1C38FA:: @ 81C38FA
+OneIsland_KindleRoad_Text_SheaRematchIntro:: @ 81C38FA
 	.string "Every morning, before breakfast,\n"
 	.string "I swim around this island…\l"
 	.string "Three times!$"
 
-Text_1C3943:: @ 81C3943
+OneIsland_KindleRoad_Text_HughRematchIntro:: @ 81C3943
 	.string "Dress appropriately for battle!\n"
 	.string "Lose that frivolous outfit, I said!$"
 
-Text_1C3987:: @ 81C3987
+OneIsland_KindleRoad_Text_BryceRematchIntro:: @ 81C3987
 	.string "You know, everything tastes great\n"
 	.string "when you're out in the wild.$"
 
-Text_1C39C6:: @ 81C39C6
+OneIsland_KindleRoad_Text_ClaireRematchIntro:: @ 81C39C6
 	.string "I ate too much again, so will you\n"
 	.string "battle us for some exercise?$"
 
-Text_1C3A05:: @ 81C3A05
+OneIsland_KindleRoad_Text_KiaRematchIntro:: @ 81C3A05
 	.string "KIA: My big brother and I make\n"
 	.string "an awesome combination!\p"
 	.string "We won't lose this time!$"
 
-Text_1C3A55:: @ 81C3A55
+OneIsland_KindleRoad_Text_MikRematchIntro:: @ 81C3A55
 	.string "MIK: Together with KIA, we're\n"
 	.string "afraid of nothing!\p"
 	.string "We'll prove it to you this time!$"

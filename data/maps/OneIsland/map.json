@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_EventScript_167517",
+      "script": "OneIsland_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_EventScript_167549",
+      "script": "OneIsland_EventScript_BaldingMan",
       "flag": "0"
     }
   ],
@@ -103,14 +103,14 @@
       "x": 14,
       "y": 13,
       "elevation": 0,
-      "script": "OneIsland_EventScript_167552"
+      "script": "OneIsland_EventScript_IslandSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 15,
       "y": 6,
       "elevation": 0,
-      "script": "OneIsland_EventScript_16755B"
+      "script": "OneIsland_EventScript_PokemonNetCenterSign"
     }
   ]
 }

@@ -14,9 +14,13 @@
 
 // gTileset_Mart
 #define METATILE_Mart_CounterMid_Top     0x2BF
-#define METATILE_Mart_CounterMid_Bottom  0x2C0   
+#define METATILE_Mart_CounterMid_Bottom  0x2C0    
 
 // gTileset_PokemonCenter
+#define METATILE_PokemonCenter_NetworkMachine_ScreenLeft_On          0x35A
+#define METATILE_PokemonCenter_NetworkMachine_ScreenRight_On         0x35B
+#define METATILE_PokemonCenter_NetworkMachine_Ruby                   0x35D
+#define METATILE_PokemonCenter_NetworkMachine_Sapphire               0x35F
 #define METATILE_PokemonCenter_Escalator_Top_Normal                  0x2E4
 #define METATILE_PokemonCenter_Escalator_Top_Transition1             0x317
 #define METATILE_PokemonCenter_Escalator_Top_Transition2             0x315

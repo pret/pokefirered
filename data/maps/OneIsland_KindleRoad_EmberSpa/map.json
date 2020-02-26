@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_16535C",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_OldMan",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_165365",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan1",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_165380",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_BlackBelt",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     },
     {
@@ -64,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_165377",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_OldWoman",
       "flag": "0"
     },
     {
@@ -77,7 +77,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_165399",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan",
       "flag": "0"
     },
     {
@@ -90,7 +90,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_16536E",
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2",
       "flag": "0"
     }
   ],
@@ -111,7 +111,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_1653CF"
+      "script": "OneIsland_KindleRoad_EmberSpa_EventScript_SpaHeal"
     }
   ],
   "bg_events": []

@@ -7,33 +7,33 @@ ThreeIsland_Port_OnTransition:: @ 816878F
 	setflag FLAG_SEVII_DETOUR_FINISHED
 	end
 
-ThreeIsland_Port_EventScript_168796:: @ 8168796
+ThreeIsland_Port_EventScript_Woman:: @ 8168796
 	lock
 	faceplayer
 	compare VAR_MAP_SCENE_TWO_ISLAND_JOYFUL_GAME_CORNER, 2
-	goto_if_ge EventScript_1687B8
+	goto_if_ge ThreeIsland_Port_EventScript_WomanLostelleFound
 	compare VAR_MAP_SCENE_THREE_ISLAND, 4
-	goto_if_ge EventScript_1687C2
-	msgbox gUnknown_818A307
+	goto_if_ge ThreeIsland_Port_EventScript_WomanBikersGone
+	msgbox ThreeIsland_Port_Text_IllCallThePolice
 	release
 	end
 
-EventScript_1687B8:: @ 81687B8
-	msgbox gUnknown_818A38B
+ThreeIsland_Port_EventScript_WomanLostelleFound:: @ 81687B8
+	msgbox ThreeIsland_Port_Text_EverythingTurnedOutForBest
 	release
 	end
 
-EventScript_1687C2:: @ 81687C2
-	msgbox gUnknown_818A339
+ThreeIsland_Port_EventScript_WomanBikersGone:: @ 81687C2
+	msgbox ThreeIsland_Port_Text_ThankGoodnessBikersGone
 	release
 	end
 
-ThreeIsland_Port_EventScript_1687CC:: @ 81687CC
-	msgbox gUnknown_818A261, MSGBOX_NPC
+ThreeIsland_Port_EventScript_Biker1:: @ 81687CC
+	msgbox ThreeIsland_Port_Text_WereKantoRiderFederation, MSGBOX_NPC
 	end
 
-ThreeIsland_Port_EventScript_1687D5:: @ 81687D5
+ThreeIsland_Port_EventScript_Biker2:: @ 81687D5
 	lock
-	msgbox gUnknown_818A2D8
+	msgbox ThreeIsland_Port_Text_ForkOverMoney
 	release
 	end

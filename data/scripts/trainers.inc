@@ -2312,95 +2312,95 @@ OneIsland_TreasureBeach_EventScript_AmaraRematch:: @ 81ABF4E
 	msgbox OneIsland_TreasureBeach_Text_AmaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1ABF65:: @ 81ABF65
-	trainerbattle_single TRAINER_AROMA_LADY_NIKKI, Text_189E42, Text_189E72
+ThreeIsland_BondBridge_EventScript_Nikki:: @ 81ABF65
+	trainerbattle_single TRAINER_AROMA_LADY_NIKKI, ThreeIsland_BondBridge_Text_NikkiIntro, ThreeIsland_BondBridge_Text_NikkiDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABF8C
-	msgbox Text_189E9E, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_NikkiRematch
+	msgbox ThreeIsland_BondBridge_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABF8C:: @ 81ABF8C
-	trainerbattle_rematch TRAINER_AROMA_LADY_NIKKI, Text_1C3AA7, Text_189E72
-	msgbox Text_189E9E, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_NikkiRematch:: @ 81ABF8C
+	trainerbattle_rematch TRAINER_AROMA_LADY_NIKKI, ThreeIsland_BondBridge_Text_NikkiRematchIntro, ThreeIsland_BondBridge_Text_NikkiDefeat
+	msgbox ThreeIsland_BondBridge_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1ABFA3:: @ 81ABFA3
-	trainerbattle_single TRAINER_AROMA_LADY_VIOLET, Text_189ED4, Text_189EFA
+ThreeIsland_BondBridge_EventScript_Violet:: @ 81ABFA3
+	trainerbattle_single TRAINER_AROMA_LADY_VIOLET, ThreeIsland_BondBridge_Text_VioletIntro, ThreeIsland_BondBridge_Text_VioletDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ABFCA
-	msgbox Text_189F21, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_VioletRematch
+	msgbox ThreeIsland_BondBridge_Text_VioletPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ABFCA:: @ 81ABFCA
-	trainerbattle_rematch TRAINER_AROMA_LADY_VIOLET, Text_1C3ABF, Text_189EFA
-	msgbox Text_189F21, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_VioletRematch:: @ 81ABFCA
+	trainerbattle_rematch TRAINER_AROMA_LADY_VIOLET, ThreeIsland_BondBridge_Text_VioletRematchIntro, ThreeIsland_BondBridge_Text_VioletDefeat
+	msgbox ThreeIsland_BondBridge_Text_VioletPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1ABFE1:: @ 81ABFE1
-	trainerbattle_single TRAINER_TUBER_AMIRA, Text_189F63, Text_189F9A
+ThreeIsland_BondBridge_EventScript_Amira:: @ 81ABFE1
+	trainerbattle_single TRAINER_TUBER_AMIRA, ThreeIsland_BondBridge_Text_AmiraIntro, ThreeIsland_BondBridge_Text_AmiraDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC008
-	msgbox Text_189FA8, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_AmiraRematch
+	msgbox ThreeIsland_BondBridge_Text_AmiraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC008:: @ 81AC008
-	trainerbattle_rematch TRAINER_TUBER_AMIRA, Text_1C3AF2, Text_189F9A
-	msgbox Text_189FA8, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_AmiraRematch:: @ 81AC008
+	trainerbattle_rematch TRAINER_TUBER_AMIRA, ThreeIsland_BondBridge_Text_AmiraRematchIntro, ThreeIsland_BondBridge_Text_AmiraDefeat
+	msgbox ThreeIsland_BondBridge_Text_AmiraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1AC01F:: @ 81AC01F
-	trainerbattle_single TRAINER_TUBER_ALEXIS, Text_189FDB, Text_189FEE
+ThreeIsland_BondBridge_EventScript_Alexis:: @ 81AC01F
+	trainerbattle_single TRAINER_TUBER_ALEXIS, ThreeIsland_BondBridge_Text_AlexisIntro, ThreeIsland_BondBridge_Text_AlexisDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC046
-	msgbox Text_18A000, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_AlexisRematch
+	msgbox ThreeIsland_BondBridge_Text_AlexisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC046:: @ 81AC046
-	trainerbattle_rematch TRAINER_TUBER_ALEXIS, Text_1C3B1D, Text_189FEE
-	msgbox Text_18A000, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_AlexisRematch:: @ 81AC046
+	trainerbattle_rematch TRAINER_TUBER_ALEXIS, ThreeIsland_BondBridge_Text_AlexisRematchIntro, ThreeIsland_BondBridge_Text_AlexisDefeat
+	msgbox ThreeIsland_BondBridge_Text_AlexisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1AC05D:: @ 81AC05D
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_TISHA, Text_18A01F, Text_18A053
+ThreeIsland_BondBridge_EventScript_Tisha:: @ 81AC05D
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_TISHA, ThreeIsland_BondBridge_Text_TishaIntro, ThreeIsland_BondBridge_Text_TishaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC084
-	msgbox Text_18A082, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_TishaRematch
+	msgbox ThreeIsland_BondBridge_Text_TishaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC084:: @ 81AC084
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_TISHA, Text_1C3B30, Text_18A053
-	msgbox Text_18A082, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_TishaRematch:: @ 81AC084
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_TISHA, ThreeIsland_BondBridge_Text_TishaRematchIntro, ThreeIsland_BondBridge_Text_TishaDefeat
+	msgbox ThreeIsland_BondBridge_Text_TishaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1AC09B:: @ 81AC09B
-	trainerbattle_double TRAINER_TWINS_JOY_MEG, Text_18A0C4, Text_18A0F7, Text_18A138
+ThreeIsland_BondBridge_EventScript_Joy:: @ 81AC09B
+	trainerbattle_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_JoyIntro, ThreeIsland_BondBridge_Text_JoyDefeat, ThreeIsland_BondBridge_Text_JoyNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC0C6
-	msgbox Text_18A106, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_JoyRematch
+	msgbox ThreeIsland_BondBridge_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC0C6:: @ 81AC0C6
-	trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, Text_1C3B6E, Text_18A0F7, Text_18A138
-	msgbox Text_18A106, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_JoyRematch:: @ 81AC0C6
+	trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_JoyRematchIntro, ThreeIsland_BondBridge_Text_JoyDefeat, ThreeIsland_BondBridge_Text_JoyNotEnoughMons
+	msgbox ThreeIsland_BondBridge_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ThreeIsland_BondBridge_EventScript_1AC0E1:: @ 81AC0E1
-	trainerbattle_double TRAINER_TWINS_JOY_MEG, Text_18A179, Text_18A1A3, Text_18A1CD
+ThreeIsland_BondBridge_EventScript_Meg:: @ 81AC0E1
+	trainerbattle_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_MegIntro, ThreeIsland_BondBridge_Text_MegDefeat, ThreeIsland_BondBridge_Text_MegNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC10C
-	msgbox Text_18A1B2, MSGBOX_AUTOCLOSE
+	goto_if_eq ThreeIsland_BondBridge_EventScript_MegRematch
+	msgbox ThreeIsland_BondBridge_Text_MegPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC10C:: @ 81AC10C
-	trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, Text_1C3B99, Text_18A1A3, Text_18A1CD
-	msgbox Text_18A1B2, MSGBOX_AUTOCLOSE
+ThreeIsland_BondBridge_EventScript_MegRematch:: @ 81AC10C
+	trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_MegRematchIntro, ThreeIsland_BondBridge_Text_MegDefeat, ThreeIsland_BondBridge_Text_MegNotEnoughMons
+	msgbox ThreeIsland_BondBridge_Text_MegPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127

@@ -765,30 +765,30 @@ OneIsland_KindleRoad_Text_MikRematchIntro:: @ 81C3A55
 	.string "afraid of nothing!\p"
 	.string "We'll prove it to you this time!$"
 
-Text_1C3AA7:: @ 81C3AA7
+ThreeIsland_BondBridge_Text_NikkiRematchIntro:: @ 81C3AA7
 	.string "Are we to battle again?$"
 
-Text_1C3ABF:: @ 81C3ABF
+ThreeIsland_BondBridge_Text_VioletRematchIntro:: @ 81C3ABF
 	.string "From where have you come, and\n"
 	.string "where are you bound?$"
 
-Text_1C3AF2:: @ 81C3AF2
+ThreeIsland_BondBridge_Text_AmiraRematchIntro:: @ 81C3AF2
 	.string "I want to swim without my float\n"
 	.string "ring soon.$"
 
-Text_1C3B1D:: @ 81C3B1D
+ThreeIsland_BondBridge_Text_AlexisRematchIntro:: @ 81C3B1D
 	.string "Yay, yay!\n"
 	.string "POKéMON!$"
 
-Text_1C3B30:: @ 81C3B30
+ThreeIsland_BondBridge_Text_TishaRematchIntro:: @ 81C3B30
 	.string "Oh, no, didn't I tell you already?\n"
 	.string "Please, stay away from me!$"
 
-Text_1C3B6E:: @ 81C3B6E
+ThreeIsland_BondBridge_Text_JoyRematchIntro:: @ 81C3B6E
 	.string "JOY: We've gotten stronger!\n"
 	.string "Lots and lots!$"
 
-Text_1C3B99:: @ 81C3B99
+ThreeIsland_BondBridge_Text_MegRematchIntro:: @ 81C3B99
 	.string "MEG: You can't beat us today!$"
 
 Text_1C3BB7:: @ 81C3BB7

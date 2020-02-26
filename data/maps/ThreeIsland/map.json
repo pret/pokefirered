@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677E5",
+      "script": "ThreeIsland_EventScript_AntiBiker1",
       "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_167989",
+      "script": "ThreeIsland_EventScript_AntiBiker2",
       "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_LONE_BIKER"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
@@ -114,7 +114,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
@@ -127,7 +127,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_1677D8",
+      "script": "ThreeIsland_EventScript_Biker",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
@@ -166,7 +166,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_167C77",
+      "script": "ThreeIsland_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -179,7 +179,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_167C80",
+      "script": "ThreeIsland_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -192,7 +192,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_167C89",
+      "script": "ThreeIsland_EventScript_Doduo",
       "flag": "0"
     },
     {
@@ -205,7 +205,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_EventScript_167CA5",
+      "script": "ThreeIsland_EventScript_Biker6",
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     }
   ],
@@ -268,7 +268,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
-      "script": "ThreeIsland_EventScript_1679B5"
+      "script": "ThreeIsland_EventScript_BikerBossIntroTrigger"
     },
     {
       "type": "trigger",
@@ -277,7 +277,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
-      "script": "ThreeIsland_EventScript_1679B5"
+      "script": "ThreeIsland_EventScript_BikerBossIntroTrigger"
     },
     {
       "type": "trigger",
@@ -286,7 +286,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
-      "script": "ThreeIsland_EventScript_1679B5"
+      "script": "ThreeIsland_EventScript_BikerBossIntroTrigger"
     },
     {
       "type": "trigger",
@@ -295,7 +295,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
-      "script": "ThreeIsland_EventScript_1679B5"
+      "script": "ThreeIsland_EventScript_BikerBossIntroTrigger"
     },
     {
       "type": "trigger",
@@ -304,7 +304,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
-      "script": "ThreeIsland_EventScript_167A1D"
+      "script": "ThreeIsland_EventScript_BattleBikersTriggerLeft"
     },
     {
       "type": "trigger",
@@ -313,7 +313,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
-      "script": "ThreeIsland_EventScript_167A29"
+      "script": "ThreeIsland_EventScript_BattleBikersTriggerMidLeft"
     },
     {
       "type": "trigger",
@@ -322,7 +322,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
-      "script": "ThreeIsland_EventScript_167A35"
+      "script": "ThreeIsland_EventScript_BattleBikersTriggerMid"
     },
     {
       "type": "trigger",
@@ -331,7 +331,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 2,
-      "script": "ThreeIsland_EventScript_1679B5"
+      "script": "ThreeIsland_EventScript_BikerBossIntroTrigger"
     },
     {
       "type": "trigger",
@@ -340,7 +340,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
-      "script": "ThreeIsland_EventScript_167A41"
+      "script": "ThreeIsland_EventScript_BattleBikersTriggerMidRight"
     },
     {
       "type": "trigger",
@@ -349,7 +349,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_THREE_ISLAND",
       "var_value": 3,
-      "script": "ThreeIsland_EventScript_167A4D"
+      "script": "ThreeIsland_EventScript_BattleBikersTriggerRight"
     }
   ],
   "bg_events": [
@@ -358,7 +358,7 @@
       "x": 12,
       "y": 31,
       "elevation": 0,
-      "script": "ThreeIsland_EventScript_167C9C"
+      "script": "ThreeIsland_EventScript_IslandSign"
     },
     {
       "type": "hidden_item",

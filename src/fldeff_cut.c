@@ -22,12 +22,12 @@ static EWRAM_DATA bool8 sScheduleOpenDottedHole = FALSE;
 
 static void FieldCallback_CutGrass(void);
 static void FieldCallback_CutTree(void);
-static void sub_8097A20(void);
-static void sub_8097B50(s16 x, s16 y);
-static void objc_8097BA8(struct Sprite * sprite);
-static void objc_8097BBC(struct Sprite * sprite);
-static void sub_8097C18(struct Sprite * sprite);
-static void sub_8097C6C(void);
+static void FieldMoveCallback_CutGrass(void);
+static void SetCutGrassMetatileAt(s16 x, s16 y);
+static void SpriteCallback_CutGrass_Init(struct Sprite * sprite);
+static void SpriteCallback_CutGrass_Run(struct Sprite * sprite);
+static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite);
+static void FieldMoveCallback_CutTree(void);
 
 static const u16 sCutGrassMetatileMapping[][2] = {
     {0x000d, 0x0001},
@@ -42,7 +42,7 @@ static const u16 sCutGrassMetatileMapping[][2] = {
     {0xffff, 0xffff}
 };
 
-static const struct OamData gOamData_83D4128 = {
+static const struct OamData sOamData_FldEff_CutGrass = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -58,31 +58,31 @@ static const struct OamData gOamData_83D4128 = {
     .affineParam = 0
 };
 
-static const union AnimCmd gAnimCmd_83D4130[] = {
+static const union AnimCmd sSpriteAnim_Fldeff_CutGrass_0[] = {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const gSpriteAnimTable_83D4138[] = {
-    gAnimCmd_83D4130
+static const union AnimCmd *const sSpriteAnimTable_FldEff_CutGrass[] = {
+    sSpriteAnim_Fldeff_CutGrass_0
 };
 
-static const struct SpriteFrameImage gUnknown_83D413C[] = {
+static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
     {gUnknown_8398648, 0x20}
 };
 
-const struct SpritePalette gUnknown_83D4144[] = {
+const struct SpritePalette gFldEffPalette_CutGrass[] = {
     gUnknown_8398688, 4096
 };
 
-static const struct SpriteTemplate sSpriteTemplate_CutGrass = {
+static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {
     .tileTag = 0xFFFF,
     .paletteTag = 4096,
-    .oam = &gOamData_83D4128,
-    .anims = gSpriteAnimTable_83D4138,
-    .images = gUnknown_83D413C,
+    .oam = &sOamData_FldEff_CutGrass,
+    .anims = sSpriteAnimTable_FldEff_CutGrass,
+    .images = sSpriteFrameImages_FldEff_CutGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = objc_8097BA8
+    .callback = SpriteCallback_CutGrass_Init
 };
 
 static u8 MetatileAtCoordsIsGrassTile(s16 x, s16 y)
@@ -111,6 +111,7 @@ bool8 SetUpFieldMove_Cut(void)
     }
     else
     {
+        // FIXME: this fakematch
         register s32 neg1 asm("r8");
         struct MapPosition *pos;
         PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
@@ -143,10 +144,10 @@ static void FieldCallback_CutGrass(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 sub_80979A0(void)
+bool8 FldEff_UseCutOnGrass(void)
 {
-    u8 taskId = oei_task_add();
-    FLDEFF_SET_FUNC_TO_DATA(sub_8097A20);
+    u8 taskId = CreateFieldEffectShowMon();
+    FLDEFF_SET_FUNC_TO_DATA(FieldMoveCallback_CutGrass);
     IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
@@ -157,15 +158,15 @@ static void FieldCallback_CutTree(void)
     ScriptContext1_SetupScript(EventScript_FldEffCut);
 }
 
-bool8 sub_80979F0(void)
+bool8 FldEff_UseCutOnTree(void)
 {
-    u8 taskId = oei_task_add();
-    FLDEFF_SET_FUNC_TO_DATA(sub_8097C6C);
+    u8 taskId = CreateFieldEffectShowMon();
+    FLDEFF_SET_FUNC_TO_DATA(FieldMoveCallback_CutTree);
     IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
-static void sub_8097A20(void)
+static void FieldMoveCallback_CutGrass(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
     if (sScheduleOpenDottedHole == TRUE)
@@ -174,10 +175,11 @@ static void sub_8097A20(void)
         FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
-bool8 sub_8097A48(void)
+bool8 FldEff_CutGrass(void)
 {
     u8 i, j;
     s16 x, y;
+    // FIXME: this fakematch
     register s32 neg1 asm("r9");
     struct MapPosition *pos;
 
@@ -196,7 +198,7 @@ bool8 sub_8097A48(void)
             {
                 if (MetatileAtCoordsIsGrassTile(x, y) == TRUE)
                 {
-                    sub_8097B50(x, y);
+                    SetCutGrassMetatileAt(x, y);
                     sub_805F378(x, y);
                 }
             }
@@ -206,13 +208,13 @@ bool8 sub_8097A48(void)
     sCutGrassSpriteArrayPtr = Alloc(8);
     for (i = 0; i < 8; i++)
     {
-        sCutGrassSpriteArrayPtr[i] = CreateSprite(&sSpriteTemplate_CutGrass, gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
+        sCutGrassSpriteArrayPtr[i] = CreateSprite(&sSpriteTemplate_FldEff_CutGrass, gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
         gSprites[sCutGrassSpriteArrayPtr[i]].data[2] = i * 32;
     }
     return FALSE;
 }
 
-static void sub_8097B50(s16 x, s16 y)
+static void SetCutGrassMetatileAt(s16 x, s16 y)
 {
     u16 i = 0;
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
@@ -229,15 +231,15 @@ static void sub_8097B50(s16 x, s16 y)
     }
 }
 
-static void objc_8097BA8(struct Sprite * sprite)
+static void SpriteCallback_CutGrass_Init(struct Sprite * sprite)
 {
     sprite->data[0] = 8;
     sprite->data[1] = 0;
     sprite->data[3] = 0;
-    sprite->callback = objc_8097BBC;
+    sprite->callback = SpriteCallback_CutGrass_Run;
 }
 
-static void objc_8097BBC(struct Sprite * sprite)
+static void SpriteCallback_CutGrass_Run(struct Sprite * sprite)
 {
     sprite->pos2.x = Sin(sprite->data[2], sprite->data[0]);
     sprite->pos2.y = Cos(sprite->data[2], sprite->data[0]);
@@ -249,10 +251,10 @@ static void objc_8097BBC(struct Sprite * sprite)
     if (sprite->data[1] != 28)
         sprite->data[1]++;
     else
-        sprite->callback = sub_8097C18;
+        sprite->callback = SpriteCallback_CutGrass_Cleanup;
 }
 
-static void sub_8097C18(struct Sprite * sprite)
+static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite)
 {
     u8 i;
     for (i = 1; i < 8; i++)
@@ -265,7 +267,7 @@ static void sub_8097C18(struct Sprite * sprite)
     ScriptContext2_Disable();
 }
 
-static void sub_8097C6C(void)
+static void FieldMoveCallback_CutTree(void)
 {
     PlaySE(SE_W015);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);

@@ -17,6 +17,8 @@
 #include "constants/event_objects.h"
 #include "constants/songs.h"
 
+#define CUT_GRASS_SPRITE_COUNT 8
+
 static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;
 static EWRAM_DATA bool8 sScheduleOpenDottedHole = FALSE;
 
@@ -205,11 +207,11 @@ bool8 FldEff_CutGrass(void)
         }
     }
     DrawWholeMapView();
-    sCutGrassSpriteArrayPtr = Alloc(8);
+    sCutGrassSpriteArrayPtr = Alloc(CUT_GRASS_SPRITE_COUNT);
     for (i = 0; i < 8; i++)
     {
         sCutGrassSpriteArrayPtr[i] = CreateSprite(&sSpriteTemplate_FldEff_CutGrass, gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
-        gSprites[sCutGrassSpriteArrayPtr[i]].data[2] = i * 32;
+        gSprites[sCutGrassSpriteArrayPtr[i]].data[2] = i * (0x100 / CUT_GRASS_SPRITE_COUNT);
     }
     return FALSE;
 }
@@ -257,7 +259,7 @@ static void SpriteCallback_CutGrass_Run(struct Sprite * sprite)
 static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite)
 {
     u8 i;
-    for (i = 1; i < 8; i++)
+    for (i = 1; i < CUT_GRASS_SPRITE_COUNT; i++)
     {
         DestroySprite(&gSprites[sCutGrassSpriteArrayPtr[i]]);
     }

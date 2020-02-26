@@ -2,6 +2,14 @@
 #define GUARD_METATILE_LABELS_H
 
 // gTileset_General
+#define METATILE_General_Plain_Mowed 0x001
+#define METATILE_General_ThinTreeTop_Grass 0x00A
+#define METATILE_General_WideTreeTopLeft_Grass 0x00B
+#define METATILE_General_WideTreeTopRight_Grass 0x00C
+#define METATILE_General_Plain_Grass 0x00D
+#define METATILE_General_WideTreeTopLeft_Mowed 0x00E
+#define METATILE_General_WideTreeTopRight_Mowed 0x00F
+#define METATILE_General_ThinTreeTop_Mowed 0x013
 #define METATILE_General_CalmWater  0x12B
 
 // gTileset_Mart
@@ -126,5 +134,21 @@
 // gTileset_TrainerTower
 #define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287
 #define METATILE_TrainerTower_CounterBarrier         0x2B4
+
+// gTileset_ViridianForest
+#define METATILE_ViridianForest_HugeTreeTopMiddle_Grass 0x284
+#define METATILE_ViridianForest_HugeTreeTopMiddle_Mowed 0x281
+
+// gTileset_CeladonCity
+#define METATILE_CeladonCity_CyclingRoad_Grass 0x352
+#define METATILE_CeladonCity_CyclingRoad_Mowed 0x33E
+
+// gTileset_FuchsiaCity
+#define METATILE_FuchsiaCity_SafariZoneTreeTopLeft_Grass 0x300
+#define METATILE_FuchsiaCity_SafariZoneTreeTopMiddle_Grass 0x301
+#define METATILE_FuchsiaCity_SafariZoneTreeTopRight_Grass 0x302
+#define METATILE_FuchsiaCity_SafariZoneTreeTopLeft_Mowed 0x310
+#define METATILE_FuchsiaCity_SafariZoneTreeTopMiddle_Mowed 0x311
+#define METATILE_FuchsiaCity_SafariZoneTreeTopRight_Mowed 0x312
 
 #endif // GUARD_METATILE_LABELS_H

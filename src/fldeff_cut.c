@@ -16,6 +16,7 @@
 #include "trig.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
+#include "constants/metatile_labels.h"
 
 #define CUT_GRASS_SPRITE_COUNT 8
 
@@ -32,16 +33,37 @@ static void SpriteCallback_CutGrass_Cleanup(struct Sprite * sprite);
 static void FieldMoveCallback_CutTree(void);
 
 static const u16 sCutGrassMetatileMapping[][2] = {
-    {0x000d, 0x0001},
-    {0x000a, 0x0013},
-    {0x000b, 0x000e},
-    {0x000c, 0x000f},
-    {0x0352, 0x033e},
-    {0x0300, 0x0310},
-    {0x0301, 0x0311},
-    {0x0302, 0x0312},
-    {0x0284, 0x0281},
-    {0xffff, 0xffff}
+    {
+        METATILE_ID(General, Plain_Grass),
+        METATILE_ID(General, Plain_Mowed)
+    }, {
+        METATILE_ID(General, ThinTreeTop_Grass),
+        METATILE_ID(General, ThinTreeTop_Mowed)
+    }, {
+        METATILE_ID(General, WideTreeTopLeft_Grass),
+        METATILE_ID(General, WideTreeTopLeft_Mowed)
+    }, {
+        METATILE_ID(General, WideTreeTopRight_Grass),
+        METATILE_ID(General, WideTreeTopRight_Mowed)
+    }, {
+        METATILE_ID(CeladonCity, CyclingRoad_Grass),
+        METATILE_ID(CeladonCity, CyclingRoad_Mowed)
+    }, {
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopLeft_Grass),
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopLeft_Mowed)
+    }, {
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopMiddle_Grass),
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopMiddle_Mowed)
+    }, {
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopRight_Grass),
+        METATILE_ID(FuchsiaCity, SafariZoneTreeTopRight_Mowed)
+    }, {
+        METATILE_ID(ViridianForest, HugeTreeTopMiddle_Grass),
+        METATILE_ID(ViridianForest, HugeTreeTopMiddle_Mowed)
+    }, {
+        0xffff,
+        0xffff
+    }
 };
 
 static const struct OamData sOamData_FldEff_CutGrass = {

@@ -6,7 +6,13 @@
 
 // gTileset_Mart
 #define METATILE_Mart_CounterMid_Top     0x2BF
-#define METATILE_Mart_CounterMid_Bottom  0x2C0     
+#define METATILE_Mart_CounterMid_Bottom  0x2C0    
+
+// gTileset_PokemonCenter
+#define METATILE_PokemonCenter_NetworkMachine_ScreenLeft_On  0x35A
+#define METATILE_PokemonCenter_NetworkMachine_ScreenRight_On 0x35B
+#define METATILE_PokemonCenter_NetworkMachine_Ruby           0x35D
+#define METATILE_PokemonCenter_NetworkMachine_Sapphire       0x35F
 
 // gTileset_VermilionGym
 #define METATILE_VermilionGym_Floor                             0x281

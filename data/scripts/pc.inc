@@ -11,8 +11,9 @@ EventScript_PC:: @ 81A6955
 	goto EventScript_PCMainMenu
 	end
 
+@ For when the player first arrives on One Island
 EventScript_PCDisabled:: @ 81A698E
-	msgbox Text_UsualPCServicesUnavailable
+	msgbox OneIsland_PokemonCenter_1F_Text_UsualPCServicesUnavailable
 	releaseall
 	end
 

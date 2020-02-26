@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_PokemonCenter_1F_EventScript_1717C3",
+      "script": "TwoIsland_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_PokemonCenter_1F_EventScript_1717CC",
+      "script": "TwoIsland_PokemonCenter_1F_EventScript_GBAKid",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_PokemonCenter_1F_EventScript_1717D5",
+      "script": "TwoIsland_PokemonCenter_1F_EventScript_BugCatcher",
       "flag": "0"
     }
   ],

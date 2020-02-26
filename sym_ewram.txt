@@ -218,14 +218,8 @@ gUnknown_203982C: @ 203982C
 
 	.align 2
 	.include "src/script_movement.o"
-
 	.align 2
-gUnknown_2039870: @ 2039870
-	.space 0x4
-
-gUnknown_2039874: @ 2039874
-	.space 0x4
-
+	.include "src/fldeff_cut.o"
 	.align 2
 	.include "src/item_menu_icons.o"
 
@@ -235,7 +229,7 @@ gBagPockets: @ 203988C
 	.align 2
 	.include "src/shop.o"
 	.align 2
-	.include "src/sea_cottage_special_anim.o"
+	.include "src/special_field_anim.o"
 	.align 2
 	.include "src/script_menu.o"
 

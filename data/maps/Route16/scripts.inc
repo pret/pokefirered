@@ -14,18 +14,18 @@ Route16_EventScript_RemoveSnorlax:: @ 81680FF
 
 Route16_OnTransition:: @ 8168103
 	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if_eq Route16_EventScript_EnterCyclingRoad
+	call_if_eq Route16_OnTransitionCyclingRoad
 	end
 
-Route16_EventScript_EnterCyclingRoad:: @ 816810F
+Route16_OnTransitionCyclingRoad:: @ 816810F
 	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
 Route16_OnWarp:: @ 8168113
-	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_EventScript_WarpIntoCyclingRoad
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_OnWarpCyclingRoad
 	.2byte 0
 
-Route16_EventScript_WarpIntoCyclingRoad:: @ 816811D
+Route16_OnWarpCyclingRoad:: @ 816811D
 	special Special_ForcePlayerOntoBike
 	end
 

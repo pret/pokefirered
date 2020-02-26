@@ -22,6 +22,7 @@
 #include "event_object_lock.h"
 #include "start_menu.h"
 #include "constants/songs.h"
+#include "constants/event_object_movement.h"
 
 static void sub_807DF4C(u8 a0);
 static void sub_807DFBC(u8 taskId);
@@ -348,7 +349,7 @@ static void sub_807DFBC(u8 taskId)
         {
             PlayerGetDestCoords(&task->data[12], &task->data[13]);
             sub_807DCB0(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 16);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 8;
         }
         break;
@@ -372,7 +373,7 @@ static void sub_807DFBC(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 16);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 2;
         }
         break;
@@ -752,7 +753,7 @@ static void sub_807E80C(u8 taskId)
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
             ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 17);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_UP);
             task->data[0] = 2;
         }
         break;

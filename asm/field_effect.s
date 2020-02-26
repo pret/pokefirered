@@ -2629,7 +2629,7 @@ sub_80847F8: @ 80847F8
 	bl FreezeObjectEvents
 	bl CameraObjectReset2
 	ldrb r0, [r4, 0xA]
-	bl sub_809C448
+	bl StartEscalator
 	movs r0, 0x1
 	bl sub_81128BC
 	ldrh r0, [r4, 0x8]
@@ -2859,7 +2859,7 @@ sub_80849A0: @ 80849A0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080849DC
-	bl sub_809C460
+	bl StopEscalator
 	bl WarpIntoMap
 	ldr r1, _080849E4 @ =gFieldCallback
 	ldr r0, _080849E8 @ =sub_80849F4
@@ -2984,7 +2984,7 @@ _08084AC4:
 	movs r1, 0
 _08084AC6:
 	adds r0, r1, 0
-	bl sub_809C448
+	bl StartEscalator
 	movs r0, 0x1
 	add sp, 0x4
 	pop {r4,r5}
@@ -3163,11 +3163,11 @@ _08084C14: .4byte gSprites
 sub_8084C18: @ 8084C18
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809C474
+	bl IsEscalatorMoving
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084C34
-	bl sub_809C460
+	bl StopEscalator
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]

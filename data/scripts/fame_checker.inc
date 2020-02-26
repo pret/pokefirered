@@ -59,19 +59,19 @@ PewterCity_Museum_1F_EventScript_PokemonJournalBrock:: @ 81ACE1C
 	releaseall
 	end
 
-Route20_EventScript_1ACE36:: @ 81ACE36
+Route20_EventScript_Camper:: @ 81ACE36
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 3
-	msgbox Text_1882E1
+	msgbox Route20_Text_MistyTrainsHere
 	release
 	end
 
-Route25_EventScript_1ACE4F:: @ 81ACE4F
+Route25_EventScript_Beauty:: @ 81ACE4F
 	lock
 	faceplayer
 	famechecker FAMECHECKER_MISTY, 4
-	msgbox Text_189569
+	msgbox Route25_Text_MistyHighHopesAboutThisPlace
 	release
 	end
 

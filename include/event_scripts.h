@@ -1201,4 +1201,7 @@ extern const u8 Text_MonSentToBoxBillsBoxFull[];
 
 extern const u8 EventScript_BagItemCanBeRegistered[];
 
+// fldeff_cut
+extern const u8 EventScript_FldEffCut[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

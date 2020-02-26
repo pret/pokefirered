@@ -31,7 +31,7 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_16760F",
+      "script": "TwoIsland_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_167755",
+      "script": "TwoIsland_EventScript_Woman",
       "flag": "FLAG_HIDE_TWO_ISLAND_WOMAN"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_16775E",
+      "script": "TwoIsland_EventScript_Beauty",
       "flag": "FLAG_HIDE_TWO_ISLAND_BEAUTY"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_16774C",
+      "script": "TwoIsland_EventScript_Sailor",
       "flag": "0"
     },
     {
@@ -83,7 +83,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_167777",
+      "script": "TwoIsland_EventScript_SuperNerd",
       "flag": "FLAG_HIDE_TWO_ISLAND_SUPER_NERD"
     },
     {
@@ -122,7 +122,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_167789",
+      "script": "TwoIsland_EventScript_LittleBoy",
       "flag": "0"
     },
     {
@@ -135,7 +135,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "TwoIsland_EventScript_167780",
+      "script": "TwoIsland_EventScript_Boy",
       "flag": "0"
     }
   ],
@@ -176,21 +176,21 @@
       "x": 29,
       "y": 8,
       "elevation": 0,
-      "script": "TwoIsland_EventScript_167792"
+      "script": "TwoIsland_EventScript_IslandSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 40,
       "y": 10,
       "elevation": 0,
-      "script": "TwoIsland_EventScript_16779B"
+      "script": "TwoIsland_EventScript_JoyfulGameCornerSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 3,
       "elevation": 0,
-      "script": "TwoIsland_EventScript_1677A4"
+      "script": "TwoIsland_EventScript_FastCurrentSign"
     }
   ]
 }

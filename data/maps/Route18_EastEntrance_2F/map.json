@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route18_EastEntrance_2F_EventScript_17047E",
+      "script": "Route18_EastEntrance_2F_EventScript_Haden",
       "flag": "0"
     }
   ],
@@ -45,14 +45,14 @@
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "Route18_EastEntrance_2F_EventScript_17046C"
+      "script": "Route18_EastEntrance_2F_EventScript_LeftBinoculars"
     },
     {
       "type": "bg_event_type_0",
       "x": 8,
       "y": 1,
       "elevation": 0,
-      "script": "Route18_EastEntrance_2F_EventScript_170475"
+      "script": "Route18_EastEntrance_2F_EventScript_RightBinoculars"
     }
   ]
 }

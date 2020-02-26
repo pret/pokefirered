@@ -1330,16 +1330,14 @@ EventScript_SetResultFalse:: @ 81A77B0
 	setvar VAR_RESULT, FALSE
 	return
 
-Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
-Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
+EventScript_SetExitingCyclingRoad:: @ 81A77B6
 	lockall
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	setvar VAR_MAP_SCENE_ROUTE16, 0
 	releaseall
 	end
 
-Route16_NorthEntrance_1F_EventScript_1A77C1:: @ 81A77C1
-Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
+EventScript_SetEnteringCyclingRoad:: @ 81A77C1
 	lockall
 	setvar VAR_MAP_SCENE_ROUTE16, 1
 	releaseall

@@ -1,36 +1,36 @@
 Route16_House_MapScripts:: @ 817014E
 	.byte 0
 
-Route16_House_EventScript_17014F:: @ 817014F
+Route16_House_EventScript_Woman:: @ 817014F
 	lock
 	faceplayer
-	goto_if_set FLAG_GOT_HM02, EventScript_1701A5
-	msgbox gUnknown_819F851
+	goto_if_set FLAG_GOT_HM02, Route16_House_EventScript_AlreadyGotHM02
+	msgbox Route16_House_Text_FoundMySecretRetreat
 	checkitemspace ITEM_HM02, 1
 	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_17019B
-	giveitem_msg gUnknown_819F8C0, ITEM_HM02
-	msgbox gUnknown_819F8E0
+	goto_if_eq Route16_House_EventScript_NoRoomForHM02
+	giveitem_msg Route16_House_Text_ReceivedHM02FromGirl, ITEM_HM02
+	msgbox Route16_House_Text_ExplainHM02
 	setflag FLAG_GOT_HM02
 	release
 	end
 
-EventScript_17019B:: @ 817019B
-	msgbox gUnknown_819F92D
+Route16_House_EventScript_NoRoomForHM02:: @ 817019B
+	msgbox Route16_House_Text_DontHaveAnyRoomForThis
 	release
 	end
 
-EventScript_1701A5:: @ 81701A5
-	msgbox gUnknown_819F8E0
+Route16_House_EventScript_AlreadyGotHM02:: @ 81701A5
+	msgbox Route16_House_Text_ExplainHM02
 	release
 	end
 
-Route16_House_EventScript_1701AF:: @ 81701AF
+Route16_House_EventScript_Fearow:: @ 81701AF
 	lock
 	faceplayer
 	waitse
 	playmoncry SPECIES_FEAROW, 0
-	msgbox gUnknown_819F94F
+	msgbox Route16_House_Text_Fearow
 	waitmoncry
 	release
 	end

@@ -3,11 +3,11 @@ Route20_MapScripts:: @ 816823B
 	.byte 0
 
 Route20_OnTransition:: @ 8168241
-	call_if_unset FLAG_STOPPED_SEAFOAM_B3F_CURRENT, EventScript_168254
-	call_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, EventScript_16826D
+	call_if_unset FLAG_STOPPED_SEAFOAM_B3F_CURRENT, Route20_EventScript_ResetSeafoamBouldersForB3F
+	call_if_unset FLAG_STOPPED_SEAFOAM_B4F_CURRENT, Route20_EventScript_ResetSeafoamBouldersForB4F
 	end
 
-EventScript_168254:: @ 8168254
+Route20_EventScript_ResetSeafoamBouldersForB3F:: @ 8168254
 	clearflag FLAG_HIDE_SEAFOAM_1F_BOULDER_1
 	clearflag FLAG_HIDE_SEAFOAM_1F_BOULDER_2
 	setflag FLAG_HIDE_SEAFOAM_B1F_BOULDER_1
@@ -18,7 +18,7 @@ EventScript_168254:: @ 8168254
 	setflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_2
 	return
 
-EventScript_16826D:: @ 816826D
+Route20_EventScript_ResetSeafoamBouldersForB4F:: @ 816826D
 	clearflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_3
 	clearflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_4
 	clearflag FLAG_HIDE_SEAFOAM_B3F_BOULDER_5
@@ -27,6 +27,6 @@ EventScript_16826D:: @ 816826D
 	setflag FLAG_HIDE_SEAFOAM_B4F_BOULDER_2
 	return
 
-Route20_EventScript_168280:: @ 8168280
-	msgbox gUnknown_81882D1, MSGBOX_SIGN
+Route20_EventScript_SeafoamIslandsSign:: @ 8168280
+	msgbox Route20_Text_SeafoamIslands, MSGBOX_SIGN
 	end

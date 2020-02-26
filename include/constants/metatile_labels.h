@@ -14,7 +14,30 @@
 
 // gTileset_Mart
 #define METATILE_Mart_CounterMid_Top     0x2BF
-#define METATILE_Mart_CounterMid_Bottom  0x2C0     
+#define METATILE_Mart_CounterMid_Bottom  0x2C0   
+
+// gTileset_PokemonCenter
+#define METATILE_PokemonCenter_Escalator_Top_Normal                  0x2E4
+#define METATILE_PokemonCenter_Escalator_Top_Transition1             0x317
+#define METATILE_PokemonCenter_Escalator_Top_Transition2             0x315
+#define METATILE_PokemonCenter_Escalator_TopNext_Normal              0x2E3
+#define METATILE_PokemonCenter_Escalator_TopNext_Transition1         0x316
+#define METATILE_PokemonCenter_Escalator_TopNext_Transition2         0x314
+#define METATILE_PokemonCenter_Escalator_TopNextRail_Normal          0x2EB
+#define METATILE_PokemonCenter_Escalator_TopNextRail_Transition1     0x31E
+#define METATILE_PokemonCenter_Escalator_TopNextRail_Transition2     0x31C
+#define METATILE_PokemonCenter_Escalator_Bottom_Normal               0x2D9
+#define METATILE_PokemonCenter_Escalator_Bottom_Transition1          0x313
+#define METATILE_PokemonCenter_Escalator_Bottom_Transition2          0x311
+#define METATILE_PokemonCenter_Escalator_BottomRail_Normal           0x2D1
+#define METATILE_PokemonCenter_Escalator_BottomRail_Transition1      0x30B
+#define METATILE_PokemonCenter_Escalator_BottomRail_Transition2      0x309
+#define METATILE_PokemonCenter_Escalator_BottomNext_Normal           0x2D8
+#define METATILE_PokemonCenter_Escalator_BottomNext_Transition1      0x312
+#define METATILE_PokemonCenter_Escalator_BottomNext_Transition2      0x310
+#define METATILE_PokemonCenter_Escalator_BottomNextRail_Normal       0x2D0
+#define METATILE_PokemonCenter_Escalator_BottomNextRail_Transition1  0x30A
+#define METATILE_PokemonCenter_Escalator_BottomNextRail_Transition2  0x308
 
 // gTileset_VermilionGym
 #define METATILE_VermilionGym_Floor                             0x281
@@ -46,6 +69,18 @@
 #define METATILE_VermilionGym_Beam_MidBottom_HalfOn             0x2C5
 #define METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn 0x2C6
 #define METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn      0x2C7
+
+// gTileset_SeaCottage
+#define METATILE_SeaCottage_Teleporter_Light_Green      0x28A
+#define METATILE_SeaCottage_Teleporter_Light_Yellow     0x2B5
+#define METATILE_SeaCottage_Teleporter_Light_Red        0x2B6
+#define METATILE_SeaCottage_Teleporter_Cable_Top        0x285
+#define METATILE_SeaCottage_Teleporter_Cable_Bottom     0x2B4
+#define METATILE_SeaCottage_Teleporter_CableBall_Top    0x2B9
+#define METATILE_SeaCottage_Teleporter_CableBall_Bottom 0x2BA
+#define METATILE_SeaCottage_Teleporter_Door             0x296
+#define METATILE_SeaCottage_Teleporter_Door_HalfGlowing 0x2B7
+#define METATILE_SeaCottage_Teleporter_Door_FullGlowing 0x2B8
 
 // gTileset_GameCorner
 #define METATILE_GameCorner_Floor_ShadeFull          0x292

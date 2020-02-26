@@ -113,7 +113,7 @@ static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 static EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 static EWRAM_DATA u16 sQuestLogIdx = 0;
-static EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
+static EWRAM_DATA u8 sMovementScripts[64][2] = {{0}};
 static EWRAM_DATA u16 gUnknown_203B01A = 0;
 static EWRAM_DATA u16 gUnknown_203B01C = 0;
 static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
@@ -1551,24 +1551,24 @@ void sub_811246C(struct Sprite *sprite)
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
     if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
     {
-        if (gUnknown_203AF9A[0][0] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[0][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[0][0]);
-            gUnknown_203AF9A[0][0] = OBJ_EVENT_ID_PLAYER;
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[0][0]);
+            sMovementScripts[0][0] = 0xFF;
         }
-        if (gUnknown_203AF9A[0][1] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[0][1] != OBJ_EVENT_ID_PLAYER)
         {
             sub_8150454();
-            gUnknown_203AF9A[0][1] = OBJ_EVENT_ID_PLAYER;
+            sMovementScripts[0][1] = OBJ_EVENT_ID_PLAYER;
         }
         sub_8063E28(objectEvent, sprite);
     }
     else
     {
-        if (gUnknown_203AF9A[objectEvent->localId][0] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[objectEvent->localId][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[objectEvent->localId][0]);
-            gUnknown_203AF9A[objectEvent->localId][0] = OBJ_EVENT_ID_PLAYER;
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
+            sMovementScripts[objectEvent->localId][0] = 0xFF;
         }
         sub_8063E28(objectEvent, sprite);
     }
@@ -1736,15 +1736,15 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
         sNumQuestLogs = a2 / 8;
         for (i = 0; i < 0x40; i++)
         {
-            gUnknown_203AF9A[i][0] |= 0xFF;
-            gUnknown_203AF9A[i][1] |= 0xFF;
+            sMovementScripts[i][0] |= 0xFF;
+            sMovementScripts[i][1] |= 0xFF;
         }
         sQuestLogIdx = 0;
         gUnknown_203B01C = 0;
         gUnknown_3005E90 = (struct UnkStruct_3005E90){};
         gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
-        gUnknown_203AF9A[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
-        gUnknown_203AF9A[0][1] = 0xFF;
+        sMovementScripts[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+        sMovementScripts[0][1] = 0xFF;
         gUnknown_3005E88 = 1;
         break;
     case 2:
@@ -1807,10 +1807,10 @@ void sub_8112B3C(void)
                     switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
                     {
                     case 0:
-                        gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                         break;
                     case 1:
-                        gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                         break;
                     case 2:
                         *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[sQuestLogIdx].unk_3 << 24) | (gUnknown_3005E94[sQuestLogIdx].unk_2 << 16) | (gUnknown_3005E94[sQuestLogIdx].unk_1 << 8) | (gUnknown_3005E94[sQuestLogIdx].unk_0 << 0));

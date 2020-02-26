@@ -42,7 +42,7 @@ _080C9B6E:
 	thumb_func_start sub_80C9B74
 sub_80C9B74: @ 80C9B74
 	push {r4,lr}
-	bl oei_task_add
+	bl CreateFieldEffectShowMon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

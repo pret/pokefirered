@@ -114,7 +114,7 @@ bool8 MetatileBehavior_UnusedReturnFalse_10(u8 metatileBehavior);
 bool8 MetatileBehavior_UnusedReturnFalse_11(u8 metatileBehavior);
 bool8 MetatileBehavior_UnusedReturnFalse_12(u8 metatileBehavior);
 bool8 MetatileBehavior_UnusedReturnFalse_13(u8 metatileBehavior);
-bool8 sub_805A2BC(u8 metatileBehavior, u8 playerDirection);
+bool8 TestMetatileAttributeBit(u8 attr, u8 bitmask);
 bool8 MetatileBehavior_UnusedIsSpinRight(u8 metatileBehavior);
 bool8 MetatileBehavior_UnusedIsSpinLeft(u8 metatileBehavior);
 bool8 MetatileBehavior_UnusedIsSpinUp(u8 metatileBehavior);

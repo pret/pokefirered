@@ -15,6 +15,8 @@ enum
 
 typedef void (*TilesetCB)(void);
 
+#define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
+
 struct Tileset
 {
     /*0x00*/ bool8 isCompressed;

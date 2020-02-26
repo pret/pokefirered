@@ -19,6 +19,7 @@ u32 MapGridGetMetatileBehaviorAt(int, int);
 u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
 void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);
+u8 MapGridGetZCoordAt(s32 x, s32 y);
 void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(s32, s32);
 s32 GetMapBorderIdAt(s32, s32);
@@ -29,8 +30,8 @@ struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
 void sub_8059948(u8 a0, u8 a1);
 
 void save_serialize_map(void);
-u32 sub_8058F1C(u32 original, u8 bit);
-u32 sub_8058F48(s16 x, s16 y, u8 z);
+u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit);
+u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr);
 void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2);
 
 #endif //GUARD_FIELDMAP_H

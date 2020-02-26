@@ -10,7 +10,7 @@ gTasks[taskId].data[9] = (u32)func;
 extern struct MapPosition gPlayerFacingPosition;
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
-u8 oei_task_add(void);
+u8 CreateFieldEffectShowMon(void);
 
 // flash
 u8 sub_80C9DCC(u8 lightLevel, u8 mapType);

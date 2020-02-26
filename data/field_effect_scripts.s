@@ -78,11 +78,11 @@ gFldEffScript_ExclamationMarkIcon:: @ 81D97C4
 	end 
 
 gFldEffScript_UseCutOnGrass:: @ 81D97CA
-	callnative sub_80979A0
+	callnative FldEff_UseCutOnGrass
 	end 
 
 gFldEffScript_UseCutOnTree:: @ 81D97D0
-	callnative sub_80979F0
+	callnative FldEff_UseCutOnTree
 	end 
 
 gFldEffScript_Shadow:: @ 81D97D6
@@ -299,7 +299,7 @@ gFldEffScript_SecretPowerShrub:: @ 81D9964
 	end 
 
 gFldEffScript_CutGrass:: @ 81D9965
-	loadfadedpal_callnative gUnknown_83D4144, sub_8097A48
+	loadfadedpal_callnative gFldEffPalette_CutGrass, FldEff_CutGrass
 	end 
 
 gFldEffScript_FieldMoveShowMonInit:: @ 81D996F

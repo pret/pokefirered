@@ -33,7 +33,7 @@ static void FldEff_UseStrength(void)
 
 bool8 sub_80D0860(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(sub_80D08A8);
     GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);
     return FALSE;

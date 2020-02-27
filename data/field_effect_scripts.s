@@ -1,7 +1,7 @@
 	.include "asm/macros/field_effect_script.inc"
 	.section script_data, "aw", %progbits
 	.align 2
-gUnknown_81D96AC:: @ 81D96AC
+gFieldEffectScriptPointers:: @ 81D96AC
 	.4byte gFldEffScript_ExclamationMarkIcon
 	.4byte gFldEffScript_UseCutOnGrass
 	.4byte gFldEffScript_UseCutOnTree

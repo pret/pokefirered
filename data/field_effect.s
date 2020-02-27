@@ -49,12 +49,12 @@ gUnknown_83CBDB0::
 	.incbin "graphics/field_effects/unk_83CBDB0.4bpp"
 
 	.align 2
-gUnknown_83CBE30:: @ 83CBE30 dataptr
+sFldEffScrcmdTable:: @ 83CBE30 dataptr
 	.4byte FieldEffectCmd_loadtiles
 	.4byte FieldEffectCmd_loadfadedpal
 	.4byte FieldEffectCmd_loadpal
 	.4byte FieldEffectCmd_callnative
-	.4byte sub_80834DC
+	.4byte FieldEffectCmd_end
 	.4byte FieldEffectCmd_loadgfx_callnative
 	.4byte FieldEffectCmd_loadtiles_callnative
 	.4byte FieldEffectCmd_loadfadedpal_callnative

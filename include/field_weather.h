@@ -18,5 +18,6 @@ void SetWeatherScreenFadeOut(void);
 void sub_807B070(void);
 u8 GetCurrentWeather(void);
 void FieldWeather_StartFadingOutCreditsMap(u8, u8, u32);
+void sub_807AA8C(u8 palIdx);
 
 #endif // GUARD_WEATHER_H

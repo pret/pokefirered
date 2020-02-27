@@ -7,16 +7,6 @@
 	.align 2
 
 	.align 2
-sFallWarpEffectCBPtrs:: @ 83CC034 dataptr
-	.4byte FallWarpEffect_1
-	.4byte FallWarpEffect_2
-	.4byte FallWarpEffect_3
-	.4byte FallWarpEffect_4
-	.4byte FallWarpEffect_5
-	.4byte FallWarpEffect_6
-	.4byte FallWarpEffect_7
-
-	.align 2
 sEscalatorWarpFieldEffectFuncs:: @ 83CC050 dataptr
 	.4byte EscalatorWarpEffect_1
 	.4byte EscalatorWarpEffect_2

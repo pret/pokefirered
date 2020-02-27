@@ -16,6 +16,7 @@ void sub_807DC18(void);
 void FieldCallback_ReturnToEventScript2(void);
 void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);
+void pal_fill_for_maplights(void);
 
 void sub_807DCE4(void);
 

@@ -1066,3 +1066,40 @@ void Task_FlyIn(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void Task_FallWarpFieldEffect(u8 taskId);
+bool8 FallWarpEffect_1(struct Task * task);
+bool8 FallWarpEffect_2(struct Task * task);
+bool8 FallWarpEffect_3(struct Task * task);
+bool8 FallWarpEffect_4(struct Task * task);
+bool8 FallWarpEffect_5(struct Task * task);
+bool8 FallWarpEffect_6(struct Task * task);
+bool8 FallWarpEffect_7(struct Task * task);
+
+bool8 (*const sFallWarpEffectCBPtrs[])(struct Task * task) = {
+    FallWarpEffect_1,
+    FallWarpEffect_2,
+    FallWarpEffect_3,
+    FallWarpEffect_4,
+    FallWarpEffect_5,
+    FallWarpEffect_6,
+    FallWarpEffect_7
+};
+
+void FieldCB_FallWarpExit(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    pal_fill_for_maplights();
+    sub_8111CF0();
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    CreateTask(Task_FallWarpFieldEffect, 0);
+    gFieldCallback = NULL;
+}
+
+void Task_FallWarpFieldEffect(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    while (sFallWarpEffectCBPtrs[task->data[0]](task))
+        ;
+}

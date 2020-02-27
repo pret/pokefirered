@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldCB_FallWarpExit
-FieldCB_FallWarpExit: @ 8084454
-	push {lr}
-	bl Overworld_PlaySpecialMapMusic
-	bl pal_fill_for_maplights
-	bl sub_8111CF0
-	bl ScriptContext2_Enable
-	bl FreezeObjectEvents
-	ldr r0, _0808447C @ =Task_FallWarpFieldEffect
-	movs r1, 0
-	bl CreateTask
-	ldr r1, _08084480 @ =gFieldCallback
-	movs r0, 0
-	str r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808447C: .4byte Task_FallWarpFieldEffect
-_08084480: .4byte gFieldCallback
-	thumb_func_end FieldCB_FallWarpExit
-
-	thumb_func_start Task_FallWarpFieldEffect
-Task_FallWarpFieldEffect: @ 8084484
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _080844B4 @ =gTasks
-	adds r4, r1, r0
-	ldr r5, _080844B8 @ =sFallWarpEffectCBPtrs
-_08084496:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _08084496
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080844B4: .4byte gTasks
-_080844B8: .4byte sFallWarpEffectCBPtrs
-	thumb_func_end Task_FallWarpFieldEffect
-
 	thumb_func_start FallWarpEffect_1
 FallWarpEffect_1: @ 80844BC
 	push {r4-r6,lr}

@@ -2698,8 +2698,8 @@ _0807B07C: .4byte gUnknown_2037F34
 _0807B080: .4byte 0x000006c6
 	thumb_func_end sub_807B070
 
-	thumb_func_start sub_807B084
-sub_807B084: @ 807B084
+	thumb_func_start PreservePaletteInWeather
+PreservePaletteInWeather: @ 807B084
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2721,7 +2721,7 @@ sub_807B084: @ 807B084
 _0807B0A8: .4byte gUnknown_83C2CC0
 _0807B0AC: .4byte gUnknown_2038684
 _0807B0B0: .4byte gUnknown_20386A4
-	thumb_func_end sub_807B084
+	thumb_func_end PreservePaletteInWeather
 
 	thumb_func_start ResetPreservedPalettesInWeather
 ResetPreservedPalettesInWeather: @ 807B0B4

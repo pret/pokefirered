@@ -1,16 +1,27 @@
 #include "global.h"
 #include "gflib.h"
+#include "data.h"
+#include "decompress.h"
 #include "field_effect.h"
 #include "field_effect_scripts.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "quest_log.h"
+#include "trainer_pokemon_sprites.h"
 
 #define FIELD_EFFECT_COUNT 32
 
 static u8 sFieldEffectActiveList[FIELD_EFFECT_COUNT];
 
 void FieldEffectActiveListAdd(u8 fldeff);
+bool8 FieldEffectCmd_loadtiles(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_loadfadedpal(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_loadpal(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_callnative(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_end(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_loadgfx_callnative(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_loadtiles_callnative(const u8 **script, u32 *result);
+bool8 FieldEffectCmd_loadfadedpal_callnative(const u8 **script, u32 *result);
 void FieldEffectScript_LoadTiles(const u8 **script);
 void FieldEffectScript_LoadFadedPal(const u8 **script);
 void FieldEffectScript_LoadPal(const u8 **script);
@@ -18,7 +29,106 @@ void FieldEffectScript_CallNative(const u8 **script, u32 *result);
 void FieldEffectFreeTilesIfUnused(u16 tilesTag);
 void FieldEffectFreePaletteIfUnused(u8 paletteNum);
 
-extern bool8 (*const sFldEffScrcmdTable[])(const u8 **script, u32 *result);
+const u16 sNewGameOakObjectSpriteTiles[] = INCBIN_U16("graphics/field_effects/unk_83CA770.4bpp");
+const u16 sNewGameOakObjectPals[] = INCBIN_U16("graphics/field_effects/unk_83CAF70.gbapal");
+const u16 gUnknown_83CAF90[] = INCBIN_U16("graphics/field_effects/unk_83CAF90.4bpp");
+const u16 gUnknown_83CAFB0[] = INCBIN_U16("graphics/field_effects/unk_83CAFB0.gbapal");
+const u16 gUnknown_83CAFD0[] = INCBIN_U16("graphics/field_effects/unk_83CAFD0.4bpp");
+const u16 gUnknown_83CB3D0[] = INCBIN_U16("graphics/field_effects/unk_83CB3D0.gbapal");
+const u16 gUnknown_83CB3F0[] = INCBIN_U16("graphics/field_effects/unk_83CB3F0.4bpp");
+const u16 gUnknown_83CB5F0[] = INCBIN_U16("graphics/field_effects/unk_83CB5F0.4bpp");
+const u16 gUnknown_83CB7F0[] = INCBIN_U16("graphics/field_effects/unk_83CB7F0.gbapal");
+const u16 gUnknown_83CB810[] = INCBIN_U16("graphics/field_effects/unk_83CB810.bin");
+const u16 gUnknown_83CBA90[] = INCBIN_U16("graphics/field_effects/unk_83CBA90.4bpp");
+const u16 gUnknown_83CBB10[] = INCBIN_U16("graphics/field_effects/unk_83CBB10.gbapal");
+const u16 gUnknown_83CBB30[] = INCBIN_U16("graphics/field_effects/unk_83CBB30.bin");
+const u16 gUnknown_83CBDB0[] = INCBIN_U16("graphics/field_effects/unk_83CBDB0.4bpp");
+
+bool8 (*const sFldEffScrcmdTable[])(const u8 **script, u32 *result) = {
+    FieldEffectCmd_loadtiles,
+    FieldEffectCmd_loadfadedpal,
+    FieldEffectCmd_loadpal,
+    FieldEffectCmd_callnative,
+    FieldEffectCmd_end,
+    FieldEffectCmd_loadgfx_callnative,
+    FieldEffectCmd_loadtiles_callnative,
+    FieldEffectCmd_loadfadedpal_callnative
+};
+
+const struct OamData gNewGameOakOamAttributes = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 0x0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83CBE58 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 0x0,
+    .affineParam = 0
+};
+
+const struct OamData gOamData_83CBE60 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 0x0,
+    .affineParam = 0
+};
+
+const struct SpriteFrameImage gNewGameOakObjectSpriteFrames[] = {
+    {sNewGameOakObjectSpriteTiles, 0x800}
+};
+
+const struct SpritePalette gNewGameOakObjectPaletteInfo = {
+    sNewGameOakObjectPals, 4102
+};
+
+const union AnimCmd gNewGameOakAnim[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gNewGameOakAnimTable[] = {
+    gNewGameOakAnim
+};
+
+const struct SpriteTemplate gNewGameOakObjectTemplate = {
+    .tileTag = 0xFFFF,
+    .paletteTag = 4102,
+    .oam = &gNewGameOakOamAttributes,
+    .anims = gNewGameOakAnimTable,
+    .images = gNewGameOakObjectSpriteFrames,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 u32 FieldEffectStart(u8 fldeff)
 {
@@ -240,4 +350,104 @@ bool8 FieldEffectActiveListContains(u8 fldeff)
         }
     }
     return FALSE;
+}
+
+u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer)
+{
+    struct SpriteTemplate spriteTemplate;
+    LoadCompressedSpritePaletteOverrideBuffer(&gTrainerFrontPicPaletteTable[trainerSpriteID], buffer);
+    LoadCompressedSpriteSheetOverrideBuffer(&gTrainerFrontPicTable[trainerSpriteID], buffer);
+    spriteTemplate.tileTag = gTrainerFrontPicTable[trainerSpriteID].tag;
+    spriteTemplate.paletteTag = gTrainerFrontPicPaletteTable[trainerSpriteID].tag;
+    spriteTemplate.oam = &gNewGameOakOamAttributes;
+    spriteTemplate.anims = gDummySpriteAnimTable;
+    spriteTemplate.images = NULL;
+    spriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    spriteTemplate.callback = SpriteCallbackDummy;
+    return CreateSprite(&spriteTemplate, x, y, subpriority);
+}
+
+void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
+{
+    LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
+    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, 0x20);
+}
+
+u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
+{
+    LoadSpritePalette(&gNewGameOakObjectPaletteInfo);
+    return CreateSprite(&gNewGameOakObjectTemplate, x, y, subpriority);
+}
+
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
+{
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, TRUE, x, y, 0, gMonPaletteTable[species].tag);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
+    if (spriteId == 0xFFFF)
+        return MAX_SPRITES;
+    else
+        return spriteId;
+}
+
+u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
+{
+    const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    if (spriteId == 0xFFFF)
+        return MAX_SPRITES;
+    else
+        return spriteId;
+}
+
+void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
+{
+    ResetPreservedPalettesInWeather();
+    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
+    {
+        FreeOamMatrix(sprite->oam.matrixNum);
+    }
+    FreeAndDestroyMonPicSprite(spriteId);
+}
+
+// r, g, b are between 0 and 16
+void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    int curRed;
+    int curGreen;
+    int curBlue;
+    u16 outPal;
+
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
+    curRed += (((0x1f - curRed) * r) >> 4);
+    curGreen += (((0x1f - curGreen) * g) >> 4);
+    curBlue += (((0x1f - curBlue) * b) >> 4);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
+}
+
+// r, g, b are between 0 and 16
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
+{
+    int curRed;
+    int curGreen;
+    int curBlue;
+    u16 outPal;
+
+    outPal = gPlttBufferUnfaded[i];
+    curRed = outPal & 0x1f;
+    curGreen = (outPal & (0x1f << 5)) >> 5;
+    curBlue = (outPal & (0x1f << 10)) >> 10;
+    curRed -= ((curRed * r) >> 4);
+    curGreen -= ((curGreen * g) >> 4);
+    curBlue -= ((curBlue * b) >> 4);
+    outPal = curRed;
+    outPal |= curGreen << 5;
+    outPal |= curBlue << 10;
+    gPlttBufferFaded[i] = outPal;
 }

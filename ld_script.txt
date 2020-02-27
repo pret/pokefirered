@@ -445,6 +445,7 @@ SECTIONS {
         data/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
+        src/field_effect.o(.rodata);
         data/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/trainer_card.o(.rodata);

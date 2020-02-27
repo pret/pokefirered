@@ -46,6 +46,7 @@
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
 #include "constants/species.h"
+#include "constants/trainer_card.h"
 #include "constants/union_room.h"
 
 static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
@@ -4727,9 +4728,9 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
     ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, uroom->trainerCardStrbufs[2]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
     {
-        CopyEasyChatWord(uroom->trainerCardStrbufs[i + 3], trainerCard->var_28[i]);
+        CopyEasyChatWord(uroom->trainerCardStrbufs[i + 3], trainerCard->easyChatProfile[i]);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, uroom->trainerCardStrbufs[i + 3]);
     }
 

@@ -177,6 +177,7 @@ void sub_805546C(u8 a0);
 bool32 sub_80582E0(void);
 bool32 sub_8058274(void);
 u8 GetCurrentMapBattleScene(void);
+void Overworld_ResetStateAfterFly(void);
 
 extern u16 gHeldKeyCodeToSend;
 

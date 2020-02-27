@@ -2,11 +2,15 @@
 #include "gflib.h"
 #include "data.h"
 #include "decompress.h"
+#include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_effect_scripts.h"
+#include "field_fadetransition.h"
 #include "field_weather.h"
 #include "overworld.h"
+#include "party_menu.h"
 #include "quest_log.h"
+#include "script.h"
 #include "task.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/songs.h"
@@ -981,4 +985,84 @@ void SpriteCB_HallOfFameMonitor(struct Sprite * sprite)
 {
     if (sprite->animEnded)
         FieldEffectFreeGraphicsResources(sprite);
+}
+
+void FieldCallback_Fly(void);
+void Task_FlyOut(u8 taskId);
+void FieldCallback_FlyArrive(void);
+void Task_FlyIn(u8 taskId);
+
+void ReturnToFieldFromFlyMapSelect(void)
+{
+    SetMainCallback2(CB2_ReturnToField);
+    gFieldCallback = FieldCallback_Fly;
+}
+
+void FieldCallback_Fly(void)
+{
+    FadeInFromBlack();
+    CreateTask(Task_FlyOut, 0);
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gFieldCallback = NULL;
+}
+
+void Task_FlyOut(u8 taskId)
+{
+    struct Task * task;
+    task = &gTasks[taskId];
+    if (task->data[0] == 0)
+    {
+        if (!IsWeatherNotFadingIn())
+            return;
+        gFieldEffectArguments[0] = GetCursorSelectionMonId();
+        if ((int)gFieldEffectArguments[0] >= PARTY_SIZE)
+            gFieldEffectArguments[0] = 0;
+        FieldEffectStart(FLDEFF_USE_FLY);
+        task->data[0]++;
+    }
+    if (!FieldEffectActiveListContains(FLDEFF_USE_FLY))
+    {
+        Overworld_ResetStateAfterFly();
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMap);
+        gFieldCallback = FieldCallback_FlyArrive;
+        DestroyTask(taskId);
+    }
+}
+
+void FieldCallback_FlyArrive(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    FadeInFromBlack();
+    CreateTask(Task_FlyIn, 0);
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+    {
+        ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_WEST);
+    }
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gFieldCallback = NULL;
+}
+
+void Task_FlyIn(u8 taskId)
+{
+    struct Task *task;
+    task = &gTasks[taskId];
+    if (task->data[0] == 0)
+    {
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+        FieldEffectStart(FLDEFF_FLY_IN);
+        task->data[0]++;
+    }
+    if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
+    {
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        DestroyTask(taskId);
+    }
 }

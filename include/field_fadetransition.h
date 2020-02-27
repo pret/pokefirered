@@ -14,7 +14,7 @@ void sub_807E500(void);
 void sub_807DF64(void);
 void sub_807DC18(void);
 void FieldCallback_ReturnToEventScript2(void);
-void sub_807DC00(void);
+void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);
 
 void sub_807DCE4(void);

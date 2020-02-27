@@ -174,7 +174,7 @@ gFldEffScript_DeepSandFootprints:: @ 81D988B
 
 gFldEffScript_PokecenterHeal:: @ 81D9895
 	loadfadedpal gUnknown_83CBE9C
-	loadfadedpal_callnative gUnknown_83A5340, sub_8083B8C
+	loadfadedpal_callnative gUnknown_83A5340, FldEff_PokecenterHeal
 	end 
 
 gFldEffScript_UseSecretPowerTree:: @ 81D98A4
@@ -244,7 +244,7 @@ gFldEffScript_HotSpringsWater:: @ 81D990A
 	end 
 
 gFldEffScript_UseWaterfall:: @ 81D9914
-	callnative oei_waterfall
+	callnative FldEff_UseWaterfall
 	end 
 
 gFldEffScript_UseDive:: @ 81D991A
@@ -314,7 +314,7 @@ gFldEffScript_PcturnOn:: @ 81D9976
 
 gFldEffScript_HallOfFameRecord:: @ 81D9977
 	loadfadedpal gUnknown_83CBE9C
-	loadfadedpal_callnative gUnknown_83CBEA4, sub_8083CE0
+	loadfadedpal_callnative gUnknown_83CBEA4, FldEff_HallOfFameRecord
 	end 
 
 gFldEffScript_UseTeleport:: @ 81D9986

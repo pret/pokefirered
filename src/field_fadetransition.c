@@ -84,7 +84,7 @@ static void sub_807DBAC(void)
     }
 }
 
-void sub_807DC00(void)
+void FadeInFromBlack(void)
 {
     palette_bg_faded_fill_black();
     FadeScreen(0, 0);
@@ -138,7 +138,7 @@ void sub_807DCE4(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(task0A_nop_for_a_while, 10);
 }
 
@@ -155,14 +155,14 @@ void FieldCallback_ReturnToEventScript2(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
 void sub_807DD44(void)
 {
     ScriptContext2_Enable();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
@@ -280,7 +280,7 @@ static void sub_807DF4C(bool8 a0)
     if (!a0)
         pal_fill_for_maplights();
     else
-        sub_807DC00();
+        FadeInFromBlack();
 }
 
 void sub_807DF64(void)
@@ -485,7 +485,7 @@ static void Task_WaitFadeAndCreateStartMenuTask(u8 taskId)
 
 void FadeTransition_FadeInOnReturnToStartMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_WaitFadeAndCreateStartMenuTask, 80);
     ScriptContext2_Enable();
 }
@@ -510,7 +510,7 @@ void sub_807E3EC(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(task_mpl_807E3C8, 10);
 }
 
@@ -580,25 +580,25 @@ void sub_807E524(void)
 void DoFallWarp(void)
 {
     DoDiveWarp();
-    gFieldCallback = sub_8084454;
+    gFieldCallback = FieldCB_FallWarpExit;
 }
 
 void sub_807E560(u8 a0)
 {
     ScriptContext2_Enable();
-    sub_8084784(a0, 10);
+    StartEscalatorWarp(a0, 10);
 }
 
 void sub_807E57C(void)
 {
     ScriptContext2_Enable();
-    sub_8084F2C(10);
+    StartLavaridgeGymB1FWarp(10);
 }
 
 void sub_807E58C(void)
 {
     ScriptContext2_Enable();
-    sub_80853CC(10);
+    StartLavaridgeGym1FWarp(10);
 }
 
 void sub_807E59C(void)

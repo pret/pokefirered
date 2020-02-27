@@ -13,16 +13,16 @@ bool8 FieldEffectActiveListContains(u8 id);
 void sub_80B69DC(void);
 void CreateTeleportFieldEffectTask(void);
 void FieldEffectActiveListRemove(u8 id);
-void sub_8085620(void);
+void StartEscapeRopeFieldEffect(void);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
-void sub_8084454(void);
-void sub_8084784(u8 a0, u8 a1);
-void sub_8084F2C(u8 a0);
-void sub_80853CC(u8 a0);
+void FieldCB_FallWarpExit(void);
+void StartEscalatorWarp(u8 a0, u8 a1);
+void StartLavaridgeGymB1FWarp(u8 a0);
+void StartLavaridgeGym1FWarp(u8 a0);
 void sub_8083598(u8 a0);
-void sub_8083A5C(struct Sprite * sprite, u8 spriteId);
-u8 sub_8083970(u16 species, s16 x, s16 y, bool8 unused);
-void sub_80842C8(void);
+void FreeResourcesAndDestroySprite(struct Sprite * sprite, u8 spriteId);
+u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, bool8 unused);
+void ReturnToFieldFromFlyMapSelect(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

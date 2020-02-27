@@ -347,7 +347,7 @@ static void CB2_ReturnFromDepositMenu(void)
     DrawDialogueFrame(0, TRUE);
     taskId = CreateTask(Task_ReturnToItemStorageSubmenu, 0);
     Task_CreateItemStorageSubmenu(taskId, 1);
-    sub_807DC00();
+    FadeInFromBlack();
 }
 
 static void Task_PlayerPcWithdrawItem(u8 taskId)
@@ -376,7 +376,7 @@ static void CB2_ReturnFromWithdrawMenu(void)
     DrawDialogueFrame(0, TRUE);
     taskId = CreateTask(Task_ReturnToItemStorageSubmenu, 0);
     Task_CreateItemStorageSubmenu(taskId, 0);
-    sub_807DC00();
+    FadeInFromBlack();
 }
 
 static void Task_WithdrawItem_WaitFadeAndGoToItemStorage(u8 taskId)
@@ -590,7 +590,7 @@ static void CB2_ReturnToMailbox(void)
         Task_DrawMailboxPcMenu(taskId);
     else
         DestroyTask(taskId);
-    sub_807DC00();
+    FadeInFromBlack();
 }
 
 static void CB2_SetCbToReturnToMailbox(void)
@@ -705,7 +705,7 @@ static void CB2_ReturnToMailboxPc_UpdateScrollVariables(void)
         Task_DrawMailboxPcMenu(taskId);
     else
         DestroyTask(taskId);
-    sub_807DC00();
+    FadeInFromBlack();
 }
 
 void Mailbox_ReturnToMailListAfterDeposit(void)

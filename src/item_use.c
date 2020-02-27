@@ -170,7 +170,7 @@ static void sub_80A103C(u8 taskId)
 
 static void sub_80A1084(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(sub_80A109C, 8);
 }
 
@@ -223,7 +223,7 @@ static bool8 sub_80A1194(void)
 {
     FreezeObjectEvents();
     ScriptContext2_Enable();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(sub_80A11C0, 10);
     gUnknown_2031DE0 = 0;
     return TRUE;
@@ -646,7 +646,7 @@ static void sub_80A1C08(u8 taskId)
 void sub_80A1C44(u8 taskId)
 {
     ResetInitialPlayerAvatarState();
-    sub_8085620();
+    StartEscapeRopeFieldEffect();
     DestroyTask(taskId);
 }
 

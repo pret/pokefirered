@@ -4044,7 +4044,7 @@ static void Task_HandleFieldMoveExitAreaYesNoInput(u8 taskId)
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_FieldMoveWaitForFade, 8);
     return TRUE;
 }
@@ -6361,7 +6361,7 @@ void ChoosePartyMonByMenuType(u8 menuType)
 
 static bool8 CB2_FadeFromPartyMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_PartyMenuWaitForFade, 10);
     return TRUE;
 }

@@ -430,7 +430,7 @@ static void sub_807F45C(u8 taskId)
         CopyWindowToVram(windowId, 1);
         RemoveWindow(windowId);
         palette_bg_faded_fill_black();
-        sub_807DC00();
+        FadeInFromBlack();
         ++gTasks[taskId].data[0];
         break;
     case 3:

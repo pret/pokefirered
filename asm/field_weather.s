@@ -2723,8 +2723,8 @@ _0807B0AC: .4byte gUnknown_2038684
 _0807B0B0: .4byte gUnknown_20386A4
 	thumb_func_end sub_807B084
 
-	thumb_func_start sub_807B0B4
-sub_807B0B4: @ 807B0B4
+	thumb_func_start ResetPreservedPalettesInWeather
+ResetPreservedPalettesInWeather: @ 807B0B4
 	ldr r1, _0807B0BC @ =gUnknown_20386A4
 	ldr r0, _0807B0C0 @ =gUnknown_83C2CC0
 	str r0, [r1]
@@ -2732,7 +2732,7 @@ sub_807B0B4: @ 807B0B4
 	.align 2, 0
 _0807B0BC: .4byte gUnknown_20386A4
 _0807B0C0: .4byte gUnknown_83C2CC0
-	thumb_func_end sub_807B0B4
+	thumb_func_end ResetPreservedPalettesInWeather
 
 	thumb_func_start sub_807B0C4
 sub_807B0C4: @ 807B0C4

@@ -87,7 +87,7 @@ void player_avatar_init_params_reset(void);
 
 void Overworld_SetFlashLevel(s32 a1);
 u8 Overworld_GetFlashLevel(void);
-void sub_8085524(u16);
+void LavaridgeGym1FWarpEffect_4(u16);
 
 void Overworld_SetSavedMusic(u16);
 void Overworld_ChangeMusicToDefault(void);

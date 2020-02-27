@@ -59,7 +59,7 @@ sFldEffScrcmdTable:: @ 83CBE30 dataptr
 	.4byte FieldEffectCmd_loadtiles_callnative
 	.4byte FieldEffectCmd_loadfadedpal_callnative
 
-gUnknown_83CBE50:: @ 83CBE50 oamdata
+gNewGameBirchOamAttributes:: @ 83CBE50 oamdata
 	.4byte 0xc0000000, 0x00000000
 
 gOamData_83CBE58:: @ 83CBE58 oamdata
@@ -71,7 +71,7 @@ gOamData_83CBE60:: @ 83CBE60 oamdata
 gUnknown_83CBE68:: @ 83CBE68 sprite_frames
 	obj_frame_tiles gUnknown_83CA770, 0x0800
 
-gUnknown_83CBE70:: @ 83CBE70 sprite_palette
+gNewGameBirchObjectPaletteInfo:: @ 83CBE70 sprite_palette
 	obj_pal gUnknown_83CAF70, 4102
 
 gUnknown_83CBE78:: @ 83CBE78
@@ -82,8 +82,8 @@ gUnknown_83CBE78:: @ 83CBE78
 gUnknown_83CBE80:: @ 83CBE80 dataptr
 	.4byte gUnknown_83CBE78
 
-gUnknown_83CBE84:: @ 83CBE84 spr_template
-	spr_template 65535, 4102, gUnknown_83CBE50, gUnknown_83CBE80, gUnknown_83CBE68, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+gNewGameBirchObjectTemplate:: @ 83CBE84 spr_template
+	spr_template 65535, 4102, gNewGameBirchOamAttributes, gUnknown_83CBE80, gUnknown_83CBE68, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_83CBE9C:: @ 83CBE9C sprite_palette
 	obj_pal gUnknown_83CAFB0, 4103
@@ -168,27 +168,27 @@ gUnknown_83CBF88:: @ 83CBF88 spr_template
 	spr_template 65535, 4103, gOamData_83CBE58, gUnknown_83CBF54, gUnknown_83CBEB4, gDummySpriteAffineAnimTable, SpriteCB_PokeballGlow
 
 gUnknown_83CBFA0:: @ 83CBFA0 spr_template
-	spr_template 65535, 4103, gOamData_83CBEAC, gUnknown_83CBF54, gUnknown_83CBEBC, gDummySpriteAffineAnimTable, sub_808424C
+	spr_template 65535, 4103, gOamData_83CBEAC, gUnknown_83CBF54, gUnknown_83CBEBC, gDummySpriteAffineAnimTable, SpriteCB_PokecenterMonitor
 
 gUnknown_83CBFB8:: @ 83CBFB8 spr_template
-	spr_template 65535, 4112, gOamData_83CBE60, gUnknown_83CBF84, gUnknown_83CBEDC, gDummySpriteAffineAnimTable, sub_80842AC
+	spr_template 65535, 4112, gOamData_83CBE60, gUnknown_83CBF84, gUnknown_83CBEDC, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
-gUnknown_83CBFD0:: @ 83CBFD0 dataptr
+sPokecenterHealTaskCBTable:: @ 83CBFD0 dataptr
 	.4byte PokecenterHealEffect_0
 	.4byte PokecenterHealEffect_1
-	.4byte sub_8083C78
+	.4byte PokecenterHealEffect_2
 	.4byte PokecenterHealEffect_3
 
 	.align 2
-gUnknown_83CBFE0:: @ 83CBFE0 dataptr
+sHallOfFameRecordTaskCBTable:: @ 83CBFE0 dataptr
 	.4byte HallOfFameRecordEffect_0
-	.4byte sub_8083D74
-	.4byte sub_8083DAC
-	.4byte sub_8083DD4
+	.4byte HallOfFameRecordEffect_1
+	.4byte HallOfFameRecordEffect_2
+	.4byte HallOfFameRecordEffect_3
 
 	.align 2
-gUnknown_83CBFF0:: @ 83CBFF0 dataptr
+sPokeballGlowSpriteCBTable:: @ 83CBFF0 dataptr
 	.4byte PokeballGlowEffect_0
 	.4byte PokeballGlowEffect_1
 	.4byte PokeballGlowEffect_2
@@ -196,10 +196,15 @@ gUnknown_83CBFF0:: @ 83CBFF0 dataptr
 	.4byte PokeballGlowEffect_4
 	.4byte PokeballGlowEffect_5
 	.4byte PokeballGlowEffect_6
-	.4byte nullsub_50
+	.4byte PokeballGlowEffect_7
 
 gUnknown_83CC010:: @ 83CC010 data16
-	.2byte 0x0000, 0x0000, 0x0006, 0x0000, 0x0000, 0x0004, 0x0006, 0x0004, 0x0000, 0x0008, 0x0006, 0x0008
+	.2byte 0, 0
+	.2byte 6, 0
+	.2byte 0, 4
+	.2byte 6, 4
+	.2byte 0, 8
+	.2byte 6, 8
 
 gUnknown_83CC028:: @ 83CC028 data8
 	.byte 0x10, 0x0c, 0x08, 0x00
@@ -211,23 +216,23 @@ gUnknown_83CC030:: @ 83CC030 data8
 	.byte 0x00, 0x00, 0x00, 0x00
 
 	.align 2
-gUnknown_83CC034:: @ 83CC034 dataptr
-	.4byte sub_80844BC
-	.4byte sub_8084564
-	.4byte sub_8084580
-	.4byte sub_80845F4
-	.4byte sub_80846AC
-	.4byte sub_80846C8
-	.4byte sub_8084708
+sFallWarpEffectCBPtrs:: @ 83CC034 dataptr
+	.4byte FallWarpEffect_1
+	.4byte FallWarpEffect_2
+	.4byte FallWarpEffect_3
+	.4byte FallWarpEffect_4
+	.4byte FallWarpEffect_5
+	.4byte FallWarpEffect_6
+	.4byte FallWarpEffect_7
 
 	.align 2
-gUnknown_83CC050:: @ 83CC050 dataptr
-	.4byte sub_80847F8
-	.4byte sub_8084820
-	.4byte sub_8084890
-	.4byte sub_80848B4
-	.4byte sub_80848C4
-	.4byte sub_80848E8
+sEscalatorWarpFieldEffectFuncs:: @ 83CC050 dataptr
+	.4byte EscalatorWarpEffect_1
+	.4byte EscalatorWarpEffect_2
+	.4byte EscalatorWarpEffect_3
+	.4byte EscalatorWarpEffect_4
+	.4byte EscalatorWarpEffect_5
+	.4byte EscalatorWarpEffect_6
 
 	.align 2
 gUnknown_83CC068:: @ 83CC068 dataptr
@@ -240,91 +245,91 @@ gUnknown_83CC068:: @ 83CC068 dataptr
 	.4byte sub_8084C3C
 
 	.align 2
-gUnknown_83CC084:: @ 83CC084 dataptr
-	.4byte sub_8084D24
+sUseWaterfallFieldEffectFuncs:: @ 83CC084 dataptr
+	.4byte waterfall_0_setup
 	.4byte waterfall_1_do_anim_probably
 	.4byte waterfall_2_wait_anim_finish_probably
-	.4byte sub_8084DA4
-	.4byte sub_8084DCC
+	.4byte waterfall_3_move_player_probably
+	.4byte waterfall_4_wait_player_move_probably
 
 	.align 2
-gUnknown_83CC098:: @ 83CC098 dataptr
+sDiveFieldEffectFuncPtrs:: @ 83CC098 dataptr
 	.4byte dive_1_lock
 	.4byte dive_2_unknown
 	.4byte dive_3_unknown
 
 	.align 2
-gUnknown_83CC0A4:: @ 83CC0A4 dataptr
-	.4byte sub_8084FA0
-	.4byte sub_8084FD8
-	.4byte sub_808500C
-	.4byte sub_8085058
-	.4byte sub_808514C
-	.4byte sub_8085168
+sLavaridgeGymB1FWarpEffectFuncs:: @ 83CC0A4 dataptr
+	.4byte LavaridgeGymB1FWarpEffect_1
+	.4byte LavaridgeGymB1FWarpEffect_2
+	.4byte LavaridgeGymB1FWarpEffect_3
+	.4byte LavaridgeGymB1FWarpEffect_4
+	.4byte LavaridgeGymB1FWarpEffect_5
+	.4byte LavaridgeGymB1FWarpEffect_6
 
 	.align 2
-gUnknown_83CC0BC:: @ 83CC0BC dataptr
-	.4byte sub_8085244
-	.4byte sub_8085274
-	.4byte sub_80852C0
-	.4byte sub_8085314
+sLavaridgeGymB1FWarpExitEffectFuncs:: @ 83CC0BC dataptr
+	.4byte LavaridgeGymB1FWarpExitEffect_1
+	.4byte LavaridgeGymB1FWarpExitEffect_2
+	.4byte LavaridgeGymB1FWarpExitEffect_3
+	.4byte LavaridgeGymB1FWarpExitEffect_4
 
 	.align 2
-gUnknown_83CC0CC:: @ 83CC0CC dataptr
-	.4byte sub_8085440
-	.4byte sub_8085470
-	.4byte sub_80854EC
-	.4byte sub_8085524
-	.4byte sub_808554C
+sLavaridgeGym1FWarpEffectFuncs:: @ 83CC0CC dataptr
+	.4byte LavaridgeGym1FWarpEffect_1
+	.4byte LavaridgeGym1FWarpEffect_2
+	.4byte LavaridgeGym1FWarpEffect_3
+	.4byte LavaridgeGym1FWarpEffect_4
+	.4byte LavaridgeGym1FWarpEffect_5
 
 	.align 2
-gUnknown_83CC0E0:: @ 83CC0E0 dataptr
-	.4byte sub_808566C
-	.4byte sub_8085690
+gEscapeRopeFieldEffectFuncs:: @ 83CC0E0 dataptr
+	.4byte EscapeRopeFieldEffect_Step0
+	.4byte EscapeRopeFieldEffect_Step1
 
 gUnknown_83CC0E8:: @ 83CC0E8 data8
 	.byte 0x01, 0x03, 0x04, 0x02, 0x01
 
 	.align 2
-gUnknown_83CC0F0:: @ 83CC0F0 dataptr
-	.4byte sub_8085A54
-	.4byte sub_8085A80
+sEscapeRopeExitEffectFuncs:: @ 83CC0F0 dataptr
+	.4byte EscapeRopeExitFieldEffect_Step0
+	.4byte EscapeRopeExitFieldEffect_Step1
 
 	.align 2
-gUnknown_83CC0F8:: @ 83CC0F8 dataptr
-	.4byte sub_8085BA8
-	.4byte sub_8085BD0
-	.4byte sub_8085C60
-	.4byte sub_8085D34
+sTeleportEffectFuncs:: @ 83CC0F8 dataptr
+	.4byte TeleportFieldEffectTask1
+	.4byte TeleportFieldEffectTask2
+	.4byte TeleportFieldEffectTask3
+	.4byte TeleportFieldEffectTask4
 
 gUnknown_83CC108:: @ 83CC108 data8
 	.byte 0x01, 0x03, 0x04, 0x02, 0x01
 
 	.align 2
-gUnknown_83CC110:: @ 83CC110 dataptr
-	.4byte sub_8085E0C
-	.4byte sub_8085E98
-	.4byte sub_8085F9C
+sTeleportInEffectFuncs:: @ 83CC110 dataptr
+	.4byte TeleportInFieldEffectTask1
+	.4byte TeleportInFieldEffectTask2
+	.4byte TeleportInFieldEffectTask3
 
 	.align 2
-gUnknown_83CC11C:: @ 83CC11C dataptr
-	.4byte sub_8086110
-	.4byte sub_8086180
-	.4byte sub_80861FC
-	.4byte sub_8086288
-	.4byte sub_80862B8
-	.4byte sub_808630C
-	.4byte sub_8086358
+sShowMonOutdoorsEffectFuncs:: @ 83CC11C dataptr
+	.4byte ShowMonEffect_Outdoors_1
+	.4byte ShowMonEffect_Outdoors_2
+	.4byte ShowMonEffect_Outdoors_3
+	.4byte ShowMonEffect_Outdoors_4
+	.4byte ShowMonEffect_Outdoors_5
+	.4byte ShowMonEffect_Outdoors_6
+	.4byte ShowMonEffect_Outdoors_7
 
 	.align 2
-gUnknown_83CC138:: @ 83CC138 dataptr
-	.4byte sub_8086498
-	.4byte sub_80864D4
-	.4byte sub_8086554
-	.4byte sub_80865C0
-	.4byte sub_80865F0
-	.4byte sub_8086630
-	.4byte sub_8086650
+sShowMonIndoorsEffectFuncs:: @ 83CC138 dataptr
+	.4byte ShowMonEffect_Indoors_1
+	.4byte ShowMonEffect_Indoors_2
+	.4byte ShowMonEffect_Indoors_3
+	.4byte ShowMonEffect_Indoors_4
+	.4byte ShowMonEffect_Indoors_5
+	.4byte ShowMonEffect_Indoors_6
+	.4byte ShowMonEffect_Indoors_7
 
 	.align 2
 gUnknown_83CC154:: @ 83CC154 dataptr

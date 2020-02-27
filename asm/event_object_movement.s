@@ -669,7 +669,7 @@ sub_805E2E8: @ 805E2E8
 	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C

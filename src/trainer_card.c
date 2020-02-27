@@ -32,13 +32,6 @@
 
 #define BADGE_COUNT 8
 
-// Trainer Card Types
-enum
-{
-    CARD_TYPE_FRLG,
-    CARD_TYPE_EMERALD,
-};
-
 // Trainer Card Strings
 enum
 {
@@ -620,13 +613,13 @@ static bool8 LoadCardGfx(void)
     switch (sTrainerCardDataPtr->gfxLoadState)
     {
     case 0:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
             LZ77UnCompWram(sUnknown_83CCE30, &sTrainerCardDataPtr->var_E1C);
         else
             LZ77UnCompWram(sUnknown_83CCEC8, &sTrainerCardDataPtr->var_E1C);
         break;
     case 1:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
             LZ77UnCompWram(sUnknown_83CC8A8, &sTrainerCardDataPtr->var_96C);
         else
             LZ77UnCompWram(sUnknown_83CC984, &sTrainerCardDataPtr->var_96C);
@@ -634,14 +627,14 @@ static bool8 LoadCardGfx(void)
     case 2:
         if (!sTrainerCardDataPtr->isLink)
         {
-            if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+            if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
                 LZ77UnCompWram(sUnknown_83CC4DC, &sTrainerCardDataPtr->var_4BC);
             else
                 LZ77UnCompWram(sUnknown_83CC6F0, &sTrainerCardDataPtr->var_4BC);
         }
         else
         {
-            if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+            if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
                 LZ77UnCompWram(sUnknown_83CCAB0, &sTrainerCardDataPtr->var_4BC);
             else
                 LZ77UnCompWram(sUnknown_83CCCA4, &sTrainerCardDataPtr->var_4BC);
@@ -651,7 +644,7 @@ static bool8 LoadCardGfx(void)
         LZ77UnCompWram(sFireRedTrainerCardBadges_Tile, &sTrainerCardDataPtr->cardTiles);
         break;
     case 4:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
             LZ77UnCompWram(gEmeraldTrainerCard_Gfx, &sTrainerCardDataPtr->var_18CC);
         else
             LZ77UnCompWram(gFireRedTrainerCard_Gfx, &sTrainerCardDataPtr->var_18CC);
@@ -810,7 +803,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     {
         trainerCard->stars = GetTrainerStarCount(trainerCard);
     }
-    else if (cardType == CARD_TYPE_EMERALD)
+    else if (cardType == CARD_TYPE_RSE)
     {
         trainerCard->stars = 0;
         if (trainerCard->hofDebutHours != 0 || (trainerCard->hofDebutMinutes != 0 || trainerCard->hofDebutSeconds != 0))
@@ -829,7 +822,7 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
     u8 id = 0;
 
     trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
+    SetPlayerCardData(trainerCard, CARD_TYPE_RSE);
     if (GetCardType() != CARD_TYPE_FRLG)
         return;
 
@@ -1118,7 +1111,7 @@ static void PrintMoneyOnCard(void)
 
     txtPtr = StringCopy(buffer, gText_TrainerCardYen);
     ConvertIntToDecimalStringN(txtPtr, sTrainerCardDataPtr->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, 6);
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         x = -122 - 6 * StringLength(buffer);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 56, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, gText_TrainerCardMoney);
@@ -1148,7 +1141,7 @@ static void PrintPokedexOnCard(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         ConvertIntToDecimalStringN(buffer, sTrainerCardDataPtr->trainerCard.caughtMonsCount, 0, 3);
-        if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
         {
             x = -120 - 6 * StringLength(buffer);
             AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 72, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, gText_TrainerCardPokedex);
@@ -1186,7 +1179,7 @@ static void PrintTimeOnCard(void)
         minutes = 59;
 
     FillWindowPixelRect(1, PIXEL_FILL(0), sTrainerCardTimeHoursXPositions[sTrainerCardDataPtr->cardType], sTrainerCardTimeMinutesYPositions[sTrainerCardDataPtr->cardType], 50, 12);
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 88, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, gText_TrainerCardTime);
     else
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 89, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, gText_TrainerCardTime);
@@ -1223,7 +1216,7 @@ static void PrintNameOnCard2(void)
 {
     StringCopy(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_NAME], sTrainerCardDataPtr->trainerCard.playerName);
     ConvertInternationalString(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_NAME], sTrainerCardDataPtr->language);
-    if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
     {
         StringAppend(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_NAME], gText_Var1sTrainerCard);
     }
@@ -1321,7 +1314,7 @@ static void PrintTradesStringOnCard(void)
 
 static void PrintBerryCrushNumOnCard(void)
 {
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         StringCopy(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_BERRY_CRUSH], gText_BerryCrushes);
         ConvertIntToDecimalStringN(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_BERRY_CRUSH_COUNT], sTrainerCardDataPtr->trainerCard.berryCrushPoints, STR_CONV_MODE_RIGHT_ALIGN, 5);
@@ -1330,7 +1323,7 @@ static void PrintBerryCrushNumOnCard(void)
 
 static void PrintBerryCrushStringOnCard(void)
 {
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD && sTrainerCardDataPtr->trainerCard.berryCrushPoints)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE && sTrainerCardDataPtr->trainerCard.berryCrushPoints)
     {
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardHofDebutXPositions[sTrainerCardDataPtr->cardType], 99, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_BERRY_CRUSH]);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 186, 99, sTrainerCardPage2TextColors, TEXT_SPEED_FF, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_BERRY_CRUSH_COUNT]);
@@ -1339,7 +1332,7 @@ static void PrintBerryCrushStringOnCard(void)
 
 static void PrintUnionNumOnCard(void)
 {
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         StringCopy(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_UNION_ROOM], gText_UnionRoomTradesBattles);
         ConvertIntToDecimalStringN(sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_UNION_ROOM_NUM], sTrainerCardDataPtr->trainerCard.unionRoomNum, STR_CONV_MODE_RIGHT_ALIGN, 5);
@@ -1348,7 +1341,7 @@ static void PrintUnionNumOnCard(void)
 
 static void PrintUnionStringOnCard(void)
 {
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD && sTrainerCardDataPtr->trainerCard.unionRoomNum)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE && sTrainerCardDataPtr->trainerCard.unionRoomNum)
     {
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardHofDebutXPositions[sTrainerCardDataPtr->cardType], 83, sFireRedTrainerCardPage1TextColors, TEXT_SPEED_FF, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_UNION_ROOM]);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 186, 83, sTrainerCardPage2TextColors, TEXT_SPEED_FF, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_UNION_ROOM_NUM]);
@@ -1363,7 +1356,7 @@ static void TrainerCard_PrintPokemonIconsOnCard(void)
 
     memcpy(buffer, sUnknown_83CD94C, sizeof(sUnknown_83CD94C));
     memcpy(buffer2, sUnknown_83CD952, sizeof(sUnknown_83CD952));
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         for (i = 0; i < 6; i++)
         {
@@ -1446,19 +1439,19 @@ static bool8 SetTrainerCardBgsAndPals(void)
         LoadBgTiles(0, sTrainerCardDataPtr->var_18CC, 6144, 0);
         break;
     case 2:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
             LoadPalette(sEmeraldTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.stars], 0, 96);
         else
             LoadPalette(sFireRedTrainerCardStarPals[sTrainerCardDataPtr->trainerCard.stars], 0, 96);
         break;
     case 3:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)
             LoadPalette(sEmeraldTrainerCardBadges_Pal, 48, 32);
         else
             LoadPalette(sFireRedTrainerCardBadges_Pal, 48, 32);
         break;
     case 4:
-        if (sTrainerCardDataPtr->cardType == CARD_TYPE_EMERALD && sTrainerCardDataPtr->trainerCard.gender != MALE)
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE && sTrainerCardDataPtr->trainerCard.gender != MALE)
             LoadPalette(sEmeraldTrainerCardFemaleBackground_Pal, 16, 32);
         else if (sTrainerCardDataPtr->trainerCard.gender != MALE)
             LoadPalette(sFireRedTrainerCardFemaleBackground_Pal, 16, 32);
@@ -1546,7 +1539,7 @@ static void TrainerCard_PrintStarsAndBadgesOnCard(void)
 
 static void sub_808B090(void)
 {
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_EMERALD)
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         if (sTrainerCardDataPtr->hasTrades)
         {
@@ -1848,8 +1841,8 @@ static void sub_808B774(void)
     sTrainerCardDataPtr->var_7 = 0;
     sTrainerCardDataPtr->var_8 = 0;
     sTrainerCardDataPtr->var_456 = 0;
-    if (GetCardType() == CARD_TYPE_EMERALD)
-        sTrainerCardDataPtr->cardType = CARD_TYPE_EMERALD;
+    if (GetCardType() == CARD_TYPE_RSE)
+        sTrainerCardDataPtr->cardType = CARD_TYPE_RSE;
     else
         sTrainerCardDataPtr->cardType = CARD_TYPE_FRLG;
 
@@ -1866,14 +1859,14 @@ static u8 GetCardType(void)
         if (gGameVersion == VERSION_FIRE_RED || gGameVersion == VERSION_LEAF_GREEN)
             return CARD_TYPE_FRLG;
         else
-            return CARD_TYPE_EMERALD;
+            return CARD_TYPE_RSE;
     }
     else
     {
         if (sTrainerCardDataPtr->trainerCard.version == VERSION_FIRE_RED || sTrainerCardDataPtr->trainerCard.version == VERSION_LEAF_GREEN)
             return CARD_TYPE_FRLG;
         else
-            return CARD_TYPE_EMERALD;
+            return CARD_TYPE_RSE;
     }
 }
 

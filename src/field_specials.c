@@ -1695,7 +1695,7 @@ void Special_UpdateTrainerCardPhotoIcons(void)
     VarSet(VAR_TRAINER_CARD_MON_ICON_TINT_IDX, gSpecialVar_0x8004);
 }
 
-u16 Special_StickerLadyGetBragFlags(void)
+u16 StickerManGetBragFlags(void)
 {
     u16 result = 0;
     u32 numEggs;

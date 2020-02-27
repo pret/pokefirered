@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_CARD_H
 #define GUARD_TRAINER_CARD_H
 
+#include "constants/trainer_card.h"
+
 struct TrainerCard
 {
     /*0x00*/ u8 gender;

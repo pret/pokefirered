@@ -2,11 +2,16 @@
 #include "gflib.h"
 #include "data.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
+#include "field_camera.h"
 #include "field_effect.h"
 #include "field_effect_scripts.h"
 #include "field_fadetransition.h"
+#include "field_player_avatar.h"
 #include "field_weather.h"
+#include "fieldmap.h"
+#include "help_system.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "quest_log.h"
@@ -1102,4 +1107,125 @@ void Task_FallWarpFieldEffect(u8 taskId)
     struct Task * task = &gTasks[taskId];
     while (sFallWarpEffectCBPtrs[task->data[0]](task))
         ;
+}
+
+bool8 FallWarpEffect_1(struct Task *task)
+{
+    struct ObjectEvent *playerObject;
+    struct Sprite *playerSprite;
+    playerObject = &gObjectEvents[gPlayerAvatar.objectEventId];
+    playerSprite = &gSprites[gPlayerAvatar.spriteId];
+    CameraObjectReset2();
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
+    gPlayerAvatar.preventStep = TRUE;
+    ObjectEventSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+    task->data[4] = playerSprite->subspriteMode;
+    playerObject->fixedPriority = 1;
+    playerSprite->oam.priority = 1;
+    playerSprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 FallWarpEffect_2(struct Task *task)
+{
+    if (IsWeatherNotFadingIn())
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 FallWarpEffect_3(struct Task *task)
+{
+    struct Sprite *sprite;
+    s16 centerToCornerVecY;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
+    sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
+    task->data[1] = 1;
+    task->data[2] = 0;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
+    PlaySE(SE_RU_HYUU);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 FallWarpEffect_4(struct Task *task)
+{
+    struct ObjectEvent *objectEvent;
+    struct Sprite *sprite;
+
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.y += task->data[1];
+    if (task->data[1] < 8)
+    {
+        task->data[2] += task->data[1];
+        if (task->data[2] & 0xf)
+        {
+            task->data[1] <<= 1;
+        }
+    }
+    if (task->data[3] == 0 && sprite->pos2.y >= -16)
+    {
+        task->data[3]++;
+        objectEvent->fixedPriority = 0;
+        sprite->subspriteMode = task->data[4];
+        objectEvent->triggerGroundEffectsOnMove = 1;
+    }
+    if (sprite->pos2.y >= 0)
+    {
+        PlaySE(SE_W070);
+        objectEvent->triggerGroundEffectsOnStop = 1;
+        objectEvent->landingJump = 1;
+        sprite->pos2.y = 0;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 FallWarpEffect_5(struct Task *task)
+{
+    task->data[0]++;
+    task->data[1] = 4;
+    task->data[2] = 0;
+    SetCameraPanningCallback(NULL);
+    return TRUE;
+}
+
+bool8 FallWarpEffect_6(struct Task *task)
+{
+    SetCameraPanning(0, task->data[1]);
+    task->data[1] = -task->data[1];
+    task->data[2]++;
+    if ((task->data[2] & 3) == 0)
+    {
+        task->data[1] >>= 1;
+    }
+    if (task->data[1] == 0)
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 FallWarpEffect_7(struct Task *task)
+{
+    s16 x, y;
+    gPlayerAvatar.preventStep = FALSE;
+    ScriptContext2_Disable();
+    CameraObjectReset1();
+    UnfreezeObjectEvents();
+    InstallCameraPanAheadCallback();
+    PlayerGetDestCoords(&x, &y);
+    // Seafoam Islands
+    if (sub_8055B38(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+    {
+        VarSet(VAR_TEMP_1, 1);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
+        HelpSystem_SetSomeVariable2(22);
+    }
+    DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
+    return FALSE;
 }

@@ -80,7 +80,7 @@ static void sub_8150530(void)
     {
         u8 taskId;
         ScriptContext2_Enable();
-        gPlayerAvatar.unk6 = 1;
+        gPlayerAvatar.preventStep = TRUE;
         taskId = CreateTask(sub_81505C4, 0xFF);
         gTasks[taskId].data[0] = 0;
     }

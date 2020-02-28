@@ -195,11 +195,11 @@ SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
 	release
 	end
 
-SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
+SixIsland_Mart_EventScript_OldWoman:: @ 81ACFEF
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 5
-	msgbox Text_1A41CA
+	msgbox SixIsland_Mart_Text_AgathaOldestEverEliteFourMember
 	release
 	end
 

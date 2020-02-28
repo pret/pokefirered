@@ -795,6 +795,7 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_House/text.inc"
 	.include "data/maps/SixIsland_Mart/text.inc"
 	.include "data/maps/FiveIsland_ResortGorgeous_House/text.inc"
+	.include "data/maps/TwoIsland_CapeBrink_House/text.inc"
 	.include "data/maps/SixIsland_WaterPath_House1/text.inc"
 	.include "data/maps/SixIsland_WaterPath_House2/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/text.inc"

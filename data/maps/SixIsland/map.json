@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_EventScript_167EEB",
+      "script": "SixIsland_EventScript_Boy",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_EventScript_167EE2",
+      "script": "SixIsland_EventScript_Hiker",
       "flag": "0"
     }
   ],
@@ -85,7 +85,7 @@
       "x": 9,
       "y": 17,
       "elevation": 0,
-      "script": "SixIsland_EventScript_167EF4"
+      "script": "SixIsland_EventScript_IslandSign"
     },
     {
       "type": "hidden_item",

@@ -41,7 +41,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SixIsland_WaterPath_EventScript_1AC555",
+      "script": "SixIsland_WaterPath_EventScript_Rose",
       "flag": "0"
     },
     {
@@ -54,7 +54,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SixIsland_WaterPath_EventScript_1AC593",
+      "script": "SixIsland_WaterPath_EventScript_Edward",
       "flag": "0"
     },
     {
@@ -67,7 +67,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SixIsland_WaterPath_EventScript_1AC5D1",
+      "script": "SixIsland_WaterPath_EventScript_Samir",
       "flag": "0"
     },
     {
@@ -80,7 +80,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC60F",
+      "script": "SixIsland_WaterPath_EventScript_Denise",
       "flag": "0"
     },
     {
@@ -93,7 +93,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC64D",
+      "script": "SixIsland_WaterPath_EventScript_Miu",
       "flag": "0"
     },
     {
@@ -106,7 +106,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC693",
+      "script": "SixIsland_WaterPath_EventScript_Mia",
       "flag": "0"
     },
     {
@@ -119,7 +119,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SixIsland_WaterPath_EventScript_1AC6D9",
+      "script": "SixIsland_WaterPath_EventScript_Earl",
       "flag": "0"
     },
     {
@@ -172,7 +172,7 @@
       "x": 8,
       "y": 14,
       "elevation": 0,
-      "script": "SixIsland_WaterPath_EventScript_168B41"
+      "script": "SixIsland_WaterPath_EventScript_HornWantedSign"
     },
     {
       "type": "hidden_item",
@@ -209,7 +209,7 @@
       "x": 12,
       "y": 54,
       "elevation": 0,
-      "script": "SixIsland_WaterPath_EventScript_168B4A"
+      "script": "SixIsland_WaterPath_EventScript_RouteSign"
     }
   ]
 }

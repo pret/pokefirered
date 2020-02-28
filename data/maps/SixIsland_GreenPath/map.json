@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SixIsland_GreenPath_EventScript_1AC517",
+      "script": "SixIsland_GreenPath_EventScript_Jaclyn",
       "flag": "0"
     }
   ],
@@ -77,14 +77,14 @@
       "x": 40,
       "y": 10,
       "elevation": 0,
-      "script": "SixIsland_GreenPath_EventScript_168B37"
+      "script": "SixIsland_GreenPath_EventScript_LeftRouteSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 69,
       "y": 10,
       "elevation": 0,
-      "script": "SixIsland_GreenPath_EventScript_168B2E"
+      "script": "SixIsland_GreenPath_EventScript_RightRouteSign"
     },
     {
       "type": "hidden_item",

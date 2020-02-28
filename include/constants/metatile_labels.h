@@ -190,4 +190,8 @@
 #define METATILE_FuchsiaCity_SafariZoneTreeTopMiddle_Mowed 0x311
 #define METATILE_FuchsiaCity_SafariZoneTreeTopRight_Mowed 0x312
 
+// gTileset_SeviiIslands67
+#define METATILE_SeviiIslands67_DottedHoleDoor_Closed    0x357
+#define METATILE_SeviiIslands67_DottedHoleDoor_Open      0x358
+
 #endif // GUARD_METATILE_LABELS_H

@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_RuinValley_EventScript_168B6D",
+      "script": "SixIsland_RuinValley_EventScript_Scientist",
       "flag": "FLAG_HIDE_RUIN_VALLEY_SCIENTIST"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SixIsland_RuinValley_EventScript_1AC717",
+      "script": "SixIsland_RuinValley_EventScript_Stanly",
       "flag": "0"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SixIsland_RuinValley_EventScript_1AC755",
+      "script": "SixIsland_RuinValley_EventScript_Foster",
       "flag": "0"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_RuinValley_EventScript_1AC793",
+      "script": "SixIsland_RuinValley_EventScript_Larry",
       "flag": "0"
     },
     {
@@ -83,7 +83,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SixIsland_RuinValley_EventScript_1AC7D1",
+      "script": "SixIsland_RuinValley_EventScript_Daryl",
       "flag": "0"
     },
     {
@@ -96,7 +96,7 @@
       "movement_range_y": 3,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_RuinValley_EventScript_1AC80F",
+      "script": "SixIsland_RuinValley_EventScript_Hector",
       "flag": "0"
     },
     {
@@ -259,7 +259,7 @@
       "x": 24,
       "y": 24,
       "elevation": 3,
-      "script": "SixIsland_RuinValley_EventScript_168B94"
+      "script": "SixIsland_RuinValley_EventScript_DottedHoleDoor"
     }
   ]
 }

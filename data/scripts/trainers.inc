@@ -2546,238 +2546,238 @@ EventScript_1AC3BA:: @ 81AC3BA
 	msgbox Text_18AFF2, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1
-	trainerbattle_single TRAINER_FISHERMAN_TYLOR, Text_18B400, Text_18B43B
+SixIsland_OutcastIsland_EventScript_Tylor:: @ 81AC3D1
+	trainerbattle_single TRAINER_FISHERMAN_TYLOR, SixIsland_OutcastIsland_Text_TylorIntro, SixIsland_OutcastIsland_Text_TylorDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC3F8
-	msgbox Text_18B451, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_OutcastIsland_EventScript_TylorRematch
+	msgbox SixIsland_OutcastIsland_Text_TylorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC3F8:: @ 81AC3F8
-	trainerbattle_rematch TRAINER_FISHERMAN_TYLOR, Text_1C3ED0, Text_18B43B
-	msgbox Text_18B451, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_TylorRematch:: @ 81AC3F8
+	trainerbattle_rematch TRAINER_FISHERMAN_TYLOR, SixIsland_OutcastIsland_Text_TylorRematchIntro, SixIsland_OutcastIsland_Text_TylorDefeat
+	msgbox SixIsland_OutcastIsland_Text_TylorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_OutcastIsland_EventScript_1AC40F:: @ 81AC40F
-	trainerbattle_single TRAINER_SWIMMER_MALE_MYMO, Text_18B48F, Text_18B4C5
+SixIsland_OutcastIsland_EventScript_Mymo:: @ 81AC40F
+	trainerbattle_single TRAINER_SWIMMER_MALE_MYMO, SixIsland_OutcastIsland_Text_MymoIntro, SixIsland_OutcastIsland_Text_MymoDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC436
-	msgbox Text_18B4D1, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_OutcastIsland_EventScript_MymoRematch
+	msgbox SixIsland_OutcastIsland_Text_MymoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC436:: @ 81AC436
-	trainerbattle_rematch TRAINER_SWIMMER_MALE_MYMO, Text_1C3F11, Text_18B4C5
-	msgbox Text_18B4D1, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_MymoRematch:: @ 81AC436
+	trainerbattle_rematch TRAINER_SWIMMER_MALE_MYMO, SixIsland_OutcastIsland_Text_MymoRematchIntro, SixIsland_OutcastIsland_Text_MymoDefeat
+	msgbox SixIsland_OutcastIsland_Text_MymoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_OutcastIsland_EventScript_1AC44D:: @ 81AC44D
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_NICOLE, Text_18B4FA, Text_18B539
+SixIsland_OutcastIsland_EventScript_Nicole:: @ 81AC44D
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_NICOLE, SixIsland_OutcastIsland_Text_NicoleIntro, SixIsland_OutcastIsland_Text_NicoleDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC474
-	msgbox Text_18B573, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_OutcastIsland_EventScript_NicoleRematch
+	msgbox SixIsland_OutcastIsland_Text_NicolePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC474:: @ 81AC474
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_NICOLE, Text_1C3F51, Text_18B539
-	msgbox Text_18B573, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_NicoleRematch:: @ 81AC474
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_NICOLE, SixIsland_OutcastIsland_Text_NicoleRematchIntro, SixIsland_OutcastIsland_Text_NicoleDefeat
+	msgbox SixIsland_OutcastIsland_Text_NicolePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_OutcastIsland_EventScript_1AC48B:: @ 81AC48B
-	trainerbattle_double TRAINER_SIS_AND_BRO_AVA_GEB, Text_18B5C8, Text_18B5F4, Text_18B660
+SixIsland_OutcastIsland_EventScript_Ava:: @ 81AC48B
+	trainerbattle_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_AvaIntro, SixIsland_OutcastIsland_Text_AvaDefeat, SixIsland_OutcastIsland_Text_AvaNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC4B6
-	msgbox Text_18B62E, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_OutcastIsland_EventScript_AvaRematch
+	msgbox SixIsland_OutcastIsland_Text_AvaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC4B6:: @ 81AC4B6
-	trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, Text_1C3F7B, Text_18B5F4, Text_18B660
-	msgbox Text_18B62E, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_AvaRematch:: @ 81AC4B6
+	trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_AvaRematchIntro, SixIsland_OutcastIsland_Text_AvaDefeat, SixIsland_OutcastIsland_Text_AvaNotEnoughMons
+	msgbox SixIsland_OutcastIsland_Text_AvaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_OutcastIsland_EventScript_1AC4D1:: @ 81AC4D1
-	trainerbattle_double TRAINER_SIS_AND_BRO_AVA_GEB, Text_18B6C1, Text_18B6EF, Text_18B762
+SixIsland_OutcastIsland_EventScript_Geb:: @ 81AC4D1
+	trainerbattle_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_GebIntro, SixIsland_OutcastIsland_Text_GebDefeat, SixIsland_OutcastIsland_Text_GebNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC4FC
-	msgbox Text_18B720, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_OutcastIsland_EventScript_GebRematch
+	msgbox SixIsland_OutcastIsland_Text_GebPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC4FC:: @ 81AC4FC
-	trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, Text_1C3FB3, Text_18B6EF, Text_18B762
-	msgbox Text_18B720, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_GebRematch:: @ 81AC4FC
+	trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_GebRematchIntro, SixIsland_OutcastIsland_Text_GebDefeat, SixIsland_OutcastIsland_Text_GebNotEnoughMons
+	msgbox SixIsland_OutcastIsland_Text_GebPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_GreenPath_EventScript_1AC517:: @ 81AC517
-	trainerbattle_single TRAINER_PSYCHIC_JACLYN, Text_18B7B0, Text_18B7F0
+SixIsland_GreenPath_EventScript_Jaclyn:: @ 81AC517
+	trainerbattle_single TRAINER_PSYCHIC_JACLYN, SixIsland_GreenPath_Text_JaclynIntro, SixIsland_GreenPath_Text_JaclynDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC53E
-	msgbox Text_18B7FD, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_GreenPath_EventScript_JaclynRematch
+	msgbox SixIsland_GreenPath_Text_JaclynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC53E:: @ 81AC53E
-	trainerbattle_rematch TRAINER_PSYCHIC_JACLYN, Text_1C3FE9, Text_18B7F0
-	msgbox Text_18B7FD, MSGBOX_AUTOCLOSE
+SixIsland_GreenPath_EventScript_JaclynRematch:: @ 81AC53E
+	trainerbattle_rematch TRAINER_PSYCHIC_JACLYN, SixIsland_GreenPath_Text_JaclynRematchIntro, SixIsland_GreenPath_Text_JaclynDefeat
+	msgbox SixIsland_GreenPath_Text_JaclynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC555:: @ 81AC555
-	trainerbattle_single TRAINER_AROMA_LADY_ROSE, Text_18B896, Text_18B8C8
+SixIsland_WaterPath_EventScript_Rose:: @ 81AC555
+	trainerbattle_single TRAINER_AROMA_LADY_ROSE, SixIsland_WaterPath_Text_RoseIntro, SixIsland_WaterPath_Text_RoseDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC57C
-	msgbox Text_18B8F7, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_RoseRematch
+	msgbox SixIsland_WaterPath_Text_RosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC57C:: @ 81AC57C
-	trainerbattle_rematch TRAINER_AROMA_LADY_ROSE, Text_1C4028, Text_18B8C8
-	msgbox Text_18B8F7, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_RoseRematch:: @ 81AC57C
+	trainerbattle_rematch TRAINER_AROMA_LADY_ROSE, SixIsland_WaterPath_Text_RoseRematchIntro, SixIsland_WaterPath_Text_RoseDefeat
+	msgbox SixIsland_WaterPath_Text_RosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC593:: @ 81AC593
-	trainerbattle_single TRAINER_JUGGLER_EDWARD, Text_18B959, Text_18B988
+SixIsland_WaterPath_EventScript_Edward:: @ 81AC593
+	trainerbattle_single TRAINER_JUGGLER_EDWARD, SixIsland_WaterPath_Text_EdwardIntro, SixIsland_WaterPath_Text_EdwardDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC5BA
-	msgbox Text_18B9A5, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_EdwardRematch
+	msgbox SixIsland_WaterPath_Text_EdwardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC5BA:: @ 81AC5BA
-	trainerbattle_rematch TRAINER_JUGGLER_EDWARD, Text_1C4057, Text_18B988
-	msgbox Text_18B9A5, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_EdwardRematch:: @ 81AC5BA
+	trainerbattle_rematch TRAINER_JUGGLER_EDWARD, SixIsland_WaterPath_Text_EdwardRematchIntro, SixIsland_WaterPath_Text_EdwardDefeat
+	msgbox SixIsland_WaterPath_Text_EdwardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC5D1:: @ 81AC5D1
-	trainerbattle_single TRAINER_SWIMMER_MALE_SAMIR, Text_18B9EC, Text_18BA47
+SixIsland_WaterPath_EventScript_Samir:: @ 81AC5D1
+	trainerbattle_single TRAINER_SWIMMER_MALE_SAMIR, SixIsland_WaterPath_Text_SamirIntro, SixIsland_WaterPath_Text_SamirDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC5F8
-	msgbox Text_18BA57, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_SamirRematch
+	msgbox SixIsland_WaterPath_Text_SamirPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC5F8:: @ 81AC5F8
-	trainerbattle_rematch TRAINER_SWIMMER_MALE_SAMIR, Text_1C407F, Text_18BA47
-	msgbox Text_18BA57, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_SamirRematch:: @ 81AC5F8
+	trainerbattle_rematch TRAINER_SWIMMER_MALE_SAMIR, SixIsland_WaterPath_Text_SamirRematchIntro, SixIsland_WaterPath_Text_SamirDefeat
+	msgbox SixIsland_WaterPath_Text_SamirPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC60F:: @ 81AC60F
-	trainerbattle_single TRAINER_SWIMMER_FEMALE_DENISE, Text_18BA86, Text_18BAC0
+SixIsland_WaterPath_EventScript_Denise:: @ 81AC60F
+	trainerbattle_single TRAINER_SWIMMER_FEMALE_DENISE, SixIsland_WaterPath_Text_DeniseIntro, SixIsland_WaterPath_Text_DeniseDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC636
-	msgbox Text_18BAE0, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_DeniseRematch
+	msgbox SixIsland_WaterPath_Text_DenisePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC636:: @ 81AC636
-	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_DENISE, Text_1C40D9, Text_18BAC0
-	msgbox Text_18BAE0, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_DeniseRematch:: @ 81AC636
+	trainerbattle_rematch TRAINER_SWIMMER_FEMALE_DENISE, SixIsland_WaterPath_Text_DeniseRematchIntro, SixIsland_WaterPath_Text_DeniseDefeat
+	msgbox SixIsland_WaterPath_Text_DenisePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC64D:: @ 81AC64D
-	trainerbattle_double TRAINER_TWINS_MIU_MIA, Text_18BBBA, Text_18BBE2, Text_18BC24
+SixIsland_WaterPath_EventScript_Miu:: @ 81AC64D
+	trainerbattle_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiuIntro, SixIsland_WaterPath_Text_MiuDefeat, SixIsland_WaterPath_Text_MiuNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC678
-	msgbox Text_18BBF6, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_MiuRematch
+	msgbox SixIsland_WaterPath_Text_MiuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC678:: @ 81AC678
-	trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, Text_1C4138, Text_18BBE2, Text_18BC24
-	msgbox Text_18BBF6, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_MiuRematch:: @ 81AC678
+	trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiuRematchIntro, SixIsland_WaterPath_Text_MiuDefeat, SixIsland_WaterPath_Text_MiuNotEnoughMons
+	msgbox SixIsland_WaterPath_Text_MiuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC693:: @ 81AC693
-	trainerbattle_double TRAINER_TWINS_MIU_MIA, Text_18BC5A, Text_18BC84, Text_18BCCF
+SixIsland_WaterPath_EventScript_Mia:: @ 81AC693
+	trainerbattle_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiaIntro, SixIsland_WaterPath_Text_MiaDefeat, SixIsland_WaterPath_Text_MiaNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC6BE
-	msgbox Text_18BCAE, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_MiaRematch
+	msgbox SixIsland_WaterPath_Text_MiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC6BE:: @ 81AC6BE
-	trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, Text_1C4166, Text_18BC84, Text_18BCCF
-	msgbox Text_18BCAE, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_MiaRematch:: @ 81AC6BE
+	trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiaRematchIntro, SixIsland_WaterPath_Text_MiaDefeat, SixIsland_WaterPath_Text_MiaNotEnoughMons
+	msgbox SixIsland_WaterPath_Text_MiaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_WaterPath_EventScript_1AC6D9:: @ 81AC6D9
-	trainerbattle_single TRAINER_HIKER_EARL, Text_18BB2D, Text_18BB62
+SixIsland_WaterPath_EventScript_Earl:: @ 81AC6D9
+	trainerbattle_single TRAINER_HIKER_EARL, SixIsland_WaterPath_Text_EarlIntro, SixIsland_WaterPath_Text_EarlDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC700
-	msgbox Text_18BB8B, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_WaterPath_EventScript_EarlRematch
+	msgbox SixIsland_WaterPath_Text_EarlPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC700:: @ 81AC700
-	trainerbattle_rematch TRAINER_HIKER_EARL, Text_1C40FA, Text_18BB62
-	msgbox Text_18BB8B, MSGBOX_AUTOCLOSE
+SixIsland_WaterPath_EventScript_EarlRematch:: @ 81AC700
+	trainerbattle_rematch TRAINER_HIKER_EARL, SixIsland_WaterPath_Text_EarlRematchIntro, SixIsland_WaterPath_Text_EarlDefeat
+	msgbox SixIsland_WaterPath_Text_EarlPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_RuinValley_EventScript_1AC717:: @ 81AC717
-	trainerbattle_single TRAINER_RUIN_MANIAC_STANLY, Text_18BE5D, Text_18BE9B
+SixIsland_RuinValley_EventScript_Stanly:: @ 81AC717
+	trainerbattle_single TRAINER_RUIN_MANIAC_STANLY, SixIsland_RuinValley_Text_StanlyIntro, SixIsland_RuinValley_Text_StanlyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC73E
-	msgbox Text_18BEA0, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_RuinValley_EventScript_StanlyRematch
+	msgbox SixIsland_RuinValley_Text_StanlyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC73E:: @ 81AC73E
-	trainerbattle_rematch TRAINER_RUIN_MANIAC_STANLY, Text_1C4196, Text_18BE9B
-	msgbox Text_18BEA0, MSGBOX_AUTOCLOSE
+SixIsland_RuinValley_EventScript_StanlyRematch:: @ 81AC73E
+	trainerbattle_rematch TRAINER_RUIN_MANIAC_STANLY, SixIsland_RuinValley_Text_StanlyRematchIntro, SixIsland_RuinValley_Text_StanlyDefeat
+	msgbox SixIsland_RuinValley_Text_StanlyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_RuinValley_EventScript_1AC755:: @ 81AC755
-	trainerbattle_single TRAINER_RUIN_MANIAC_FOSTER, Text_18BF05, Text_18BF33
+SixIsland_RuinValley_EventScript_Foster:: @ 81AC755
+	trainerbattle_single TRAINER_RUIN_MANIAC_FOSTER, SixIsland_RuinValley_Text_FosterIntro, SixIsland_RuinValley_Text_FosterDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC77C
-	msgbox Text_18BF6C, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_RuinValley_EventScript_FosterRematch
+	msgbox SixIsland_RuinValley_Text_FosterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC77C:: @ 81AC77C
-	trainerbattle_rematch TRAINER_RUIN_MANIAC_FOSTER, Text_1C41D4, Text_18BF33
-	msgbox Text_18BF6C, MSGBOX_AUTOCLOSE
+SixIsland_RuinValley_EventScript_FosterRematch:: @ 81AC77C
+	trainerbattle_rematch TRAINER_RUIN_MANIAC_FOSTER, SixIsland_RuinValley_Text_FosterRematchIntro, SixIsland_RuinValley_Text_FosterDefeat
+	msgbox SixIsland_RuinValley_Text_FosterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_RuinValley_EventScript_1AC793:: @ 81AC793
-	trainerbattle_single TRAINER_RUIN_MANIAC_LARRY, Text_18BFC5, Text_18C03B
+SixIsland_RuinValley_EventScript_Larry:: @ 81AC793
+	trainerbattle_single TRAINER_RUIN_MANIAC_LARRY, SixIsland_RuinValley_Text_LarryIntro, SixIsland_RuinValley_Text_LarryDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC7BA
-	msgbox Text_18C04C, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_RuinValley_EventScript_LarryRematch
+	msgbox SixIsland_RuinValley_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC7BA:: @ 81AC7BA
-	trainerbattle_rematch TRAINER_RUIN_MANIAC_LARRY, Text_1C4210, Text_18C03B
-	msgbox Text_18C04C, MSGBOX_AUTOCLOSE
+SixIsland_RuinValley_EventScript_LarryRematch:: @ 81AC7BA
+	trainerbattle_rematch TRAINER_RUIN_MANIAC_LARRY, SixIsland_RuinValley_Text_LarryRematchIntro, SixIsland_RuinValley_Text_LarryDefeat
+	msgbox SixIsland_RuinValley_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_RuinValley_EventScript_1AC7D1:: @ 81AC7D1
-	trainerbattle_single TRAINER_HIKER_DARYL, Text_18C09C, Text_18C0BB
+SixIsland_RuinValley_EventScript_Daryl:: @ 81AC7D1
+	trainerbattle_single TRAINER_HIKER_DARYL, SixIsland_RuinValley_Text_DarylIntro, SixIsland_RuinValley_Text_DarylDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC7F8
-	msgbox Text_18C0EA, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_RuinValley_EventScript_DarylRematch
+	msgbox SixIsland_RuinValley_Text_DarylPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC7F8:: @ 81AC7F8
-	trainerbattle_rematch TRAINER_HIKER_DARYL, Text_1C4280, Text_18C0BB
-	msgbox Text_18C0EA, MSGBOX_AUTOCLOSE
+SixIsland_RuinValley_EventScript_DarylRematch:: @ 81AC7F8
+	trainerbattle_rematch TRAINER_HIKER_DARYL, SixIsland_RuinValley_Text_DarylRematchIntro, SixIsland_RuinValley_Text_DarylDefeat
+	msgbox SixIsland_RuinValley_Text_DarylPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SixIsland_RuinValley_EventScript_1AC80F:: @ 81AC80F
-	trainerbattle_single TRAINER_POKEMANIAC_HECTOR, Text_18C10A, Text_18C140
+SixIsland_RuinValley_EventScript_Hector:: @ 81AC80F
+	trainerbattle_single TRAINER_POKEMANIAC_HECTOR, SixIsland_RuinValley_Text_HectorIntro, SixIsland_RuinValley_Text_HectorDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC836
-	msgbox Text_18C17A, MSGBOX_AUTOCLOSE
+	goto_if_eq SixIsland_RuinValley_EventScript_HectorRematch
+	msgbox SixIsland_RuinValley_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC836:: @ 81AC836
-	trainerbattle_rematch TRAINER_POKEMANIAC_HECTOR, Text_1C42A0, Text_18C140
-	msgbox Text_18C17A, MSGBOX_AUTOCLOSE
+SixIsland_RuinValley_EventScript_HectorRematch:: @ 81AC836
+	trainerbattle_rematch TRAINER_POKEMANIAC_HECTOR, SixIsland_RuinValley_Text_HectorRematchIntro, SixIsland_RuinValley_Text_HectorDefeat
+	msgbox SixIsland_RuinValley_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D

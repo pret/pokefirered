@@ -844,80 +844,80 @@ Text_1C3E6A:: @ 81C3E6A
 	.string "I love birds for their down.\n"
 	.string "I didn't think I'd see you again!$"
 
-Text_1C3ED0:: @ 81C3ED0
+SixIsland_OutcastIsland_Text_TylorRematchIntro:: @ 81C3ED0
 	.string "I'm still having no luck at all.\n"
 	.string "A battle'd be a change of pace!$"
 
-Text_1C3F11:: @ 81C3F11
+SixIsland_OutcastIsland_Text_MymoRematchIntro:: @ 81C3F11
 	.string "Gasp… Gasp…\p"
 	.string "I swam here from SIX ISLAND's port\n"
 	.string "in one go again.$"
 
-Text_1C3F51:: @ 81C3F51
+SixIsland_OutcastIsland_Text_NicoleRematchIntro:: @ 81C3F51
 	.string "You always come along while I'm\n"
 	.string "swimming.$"
 
-Text_1C3F7B:: @ 81C3F7B
+SixIsland_OutcastIsland_Text_AvaRematchIntro:: @ 81C3F7B
 	.string "AVA: Let's have another\n"
 	.string "two-on-two marine battle today!$"
 
-Text_1C3FB3:: @ 81C3FB3
+SixIsland_OutcastIsland_Text_GebRematchIntro:: @ 81C3FB3
 	.string "GEB: My big sister and I are way\n"
 	.string "tougher than before!$"
 
-Text_1C3FE9:: @ 81C3FE9
+SixIsland_GreenPath_Text_JaclynRematchIntro:: @ 81C3FE9
 	.string "…Huh?\p"
 	.string "I envision my house, but TELEPORT\n"
 	.string "always brings me here!$"
 
-Text_1C4028:: @ 81C4028
+SixIsland_WaterPath_Text_RoseRematchIntro:: @ 81C4028
 	.string "Oh, hello.\n"
 	.string "A pleasant breeze is blowing again.$"
 
-Text_1C4057:: @ 81C4057
+SixIsland_WaterPath_Text_EdwardRematchIntro:: @ 81C4057
 	.string "Hehehe, I'm practicing in secret\n"
 	.string "again.$"
 
-Text_1C407F:: @ 81C407F
+SixIsland_WaterPath_Text_SamirRematchIntro:: @ 81C407F
 	.string "What, you're sick of seeing\n"
 	.string "SWIMMERS like me?\p"
 	.string "Aww, don't be hatin'!\n"
 	.string "Battle with me again.$"
 
-Text_1C40D9:: @ 81C40D9
+SixIsland_WaterPath_Text_DeniseRematchIntro:: @ 81C40D9
 	.string "Sigh…\n"
 	.string "My boyfriend's busy again…$"
 
-Text_1C40FA:: @ 81C40FA
+SixIsland_WaterPath_Text_EarlRematchIntro:: @ 81C40FA
 	.string "Come on, tell me, where are the\n"
 	.string "mountains around these parts?$"
 
-Text_1C4138:: @ 81C4138
+SixIsland_WaterPath_Text_MiuRematchIntro:: @ 81C4138
 	.string "MIU: Hello, POKéMON!\n"
 	.string "It's time to play again!$"
 
-Text_1C4166:: @ 81C4166
+SixIsland_WaterPath_Text_MiaRematchIntro:: @ 81C4166
 	.string "MIA: Hello, POKéMON!\n"
 	.string "It's time to battle again!$"
 
-Text_1C4196:: @ 81C4196
+SixIsland_RuinValley_Text_StanlyRematchIntro:: @ 81C4196
 	.string "There appear to be many secrets\n"
 	.string "still unsolved in this world.$"
 
-Text_1C41D4:: @ 81C41D4
+SixIsland_RuinValley_Text_FosterRematchIntro:: @ 81C41D4
 	.string "Hi, didn't we meet before?\n"
 	.string "What compelled you to come back?$"
 
-Text_1C4210:: @ 81C4210
+SixIsland_RuinValley_Text_LarryRematchIntro:: @ 81C4210
 	.string "It's been said that there are\n"
 	.string "mysterious stones on this island.\p"
 	.string "Have you discovered anything since\n"
 	.string "we last met?$"
 
-Text_1C4280:: @ 81C4280
+SixIsland_RuinValley_Text_DarylRematchIntro:: @ 81C4280
 	.string "A rematch with you, so high up!$"
 
-Text_1C42A0:: @ 81C42A0
+SixIsland_RuinValley_Text_HectorRematchIntro:: @ 81C42A0
 	.string "I'm pretty familiar with the land\n"
 	.string "around these parts.$"
 

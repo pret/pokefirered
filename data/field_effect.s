@@ -7,12 +7,6 @@
 	.align 2
 
 	.align 2
-sDiveFieldEffectFuncPtrs:: @ 83CC098 dataptr
-	.4byte dive_1_lock
-	.4byte dive_2_unknown
-	.4byte dive_3_unknown
-
-	.align 2
 sLavaridgeGymB1FWarpEffectFuncs:: @ 83CC0A4 dataptr
 	.4byte LavaridgeGymB1FWarpEffect_1
 	.4byte LavaridgeGymB1FWarpEffect_2

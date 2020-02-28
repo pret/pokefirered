@@ -5,6 +5,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
+#include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_effect_scripts.h"
 #include "field_fadetransition.h"
@@ -1609,5 +1610,60 @@ bool8 waterfall_4_wait_player_move_probably(struct Task * task, struct ObjectEve
     gPlayerAvatar.preventStep = FALSE;
     DestroyTask(FindTaskIdByFunc(Task_UseWaterfall));
     FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
+    return FALSE;
+}
+
+void Task_Dive(u8 taskId);
+bool8 dive_1_lock(struct Task * task);
+bool8 dive_2_unknown(struct Task * task);
+bool8 dive_3_unknown(struct Task * task);
+
+bool8 (*const sDiveFieldEffectFuncPtrs[])(struct Task * task) = {
+    dive_1_lock,
+    dive_2_unknown,
+    dive_3_unknown
+};
+
+u32 FldEff_UseDive(void)
+{
+    u8 taskId = CreateTask(Task_Dive, 0xFF);
+    gTasks[taskId].data[15] = gFieldEffectArguments[0];
+    gTasks[taskId].data[14] = gFieldEffectArguments[1];
+    Task_Dive(taskId);
+    return 0;
+}
+
+void Task_Dive(u8 taskId)
+{
+    while (sDiveFieldEffectFuncPtrs[gTasks[taskId].data[0]](&gTasks[taskId]))
+        ;
+}
+
+bool8 dive_1_lock(struct Task * task)
+{
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 dive_2_unknown(struct Task * task)
+{
+    ScriptContext2_Enable();
+    gFieldEffectArguments[0] = task->data[15];
+    FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 dive_3_unknown(struct Task * task)
+{
+    struct MapPosition pos;
+    PlayerGetDestCoords(&pos.x, &pos.y);
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        dive_warp(&pos, gObjectEvents[gPlayerAvatar.objectEventId].mapobj_unk_1E);
+        DestroyTask(FindTaskIdByFunc(Task_Dive));
+        FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
+    }
     return FALSE;
 }

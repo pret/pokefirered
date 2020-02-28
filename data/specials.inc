@@ -238,7 +238,7 @@ gSpecials:: @ 815FD60
 	def_special Special_GetPlayerAvatarBike
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special Special_GetLeadMonFriendship
+	def_special GetLeadMonFriendship
 	def_special ScrSpecial_BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
@@ -357,7 +357,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CADC4
 	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
-	def_special Special_SampleResortGorgeousMonAndReward
+	def_special SampleResortGorgeousMonAndReward
 	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
 	def_special Special_CloseElevatorCurrentFloorWindow
@@ -444,7 +444,7 @@ gSpecials:: @ 815FD60
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle
 	def_special Script_ResetUnionRoomTrade
-	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
+	def_special PlayerPartyContainsSpeciesWithPlayerID
 	def_special AnimateTeleporterHousing
 	def_special IsDodrioInParty
 	def_special AnimateTeleporterCable

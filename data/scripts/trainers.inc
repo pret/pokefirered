@@ -2403,147 +2403,147 @@ EventScript_1AC10C:: @ 81AC10C
 	msgbox Text_18A1B2, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC127:: @ 81AC127
-	trainerbattle_single TRAINER_PAINTER_DAISY, Text_18A3E2, Text_18A40E
+FiveIsland_ResortGorgeous_EventScript_Daisy:: @ 81AC127
+	trainerbattle_single TRAINER_PAINTER_DAISY, FiveIsland_ResortGorgeous_Text_DaisyIntro, FiveIsland_ResortGorgeous_Text_DaisyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC14E
-	msgbox Text_18A430, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_DaisyRematch
+	msgbox FiveIsland_ResortGorgeous_Text_DaisyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC14E:: @ 81AC14E
-	trainerbattle_rematch TRAINER_PAINTER_DAISY, Text_1C3BF6, Text_18A40E
-	msgbox Text_18A430, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_DaisyRematch:: @ 81AC14E
+	trainerbattle_rematch TRAINER_PAINTER_DAISY, FiveIsland_ResortGorgeous_Text_DaisyRematchIntro, FiveIsland_ResortGorgeous_Text_DaisyDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_DaisyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC165:: @ 81AC165
-	trainerbattle_single TRAINER_PAINTER_CELINA, Text_18A461, Text_18A49E
+FiveIsland_ResortGorgeous_EventScript_Celina:: @ 81AC165
+	trainerbattle_single TRAINER_PAINTER_CELINA, FiveIsland_ResortGorgeous_Text_CelinaIntro, FiveIsland_ResortGorgeous_Text_CelinaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC18C
-	msgbox Text_18A4C6, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_CelinaRematch
+	msgbox FiveIsland_ResortGorgeous_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC18C:: @ 81AC18C
-	trainerbattle_rematch TRAINER_PAINTER_CELINA, Text_1C3C28, Text_18A49E
-	msgbox Text_18A4C6, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_CelinaRematch:: @ 81AC18C
+	trainerbattle_rematch TRAINER_PAINTER_CELINA, FiveIsland_ResortGorgeous_Text_CelinaRematchIntro, FiveIsland_ResortGorgeous_Text_CelinaDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC1A3:: @ 81AC1A3
-	trainerbattle_single TRAINER_PAINTER_RAYNA, Text_18A50E, Text_18A535
+FiveIsland_ResortGorgeous_EventScript_Rayna:: @ 81AC1A3
+	trainerbattle_single TRAINER_PAINTER_RAYNA, FiveIsland_ResortGorgeous_Text_RaynaIntro, FiveIsland_ResortGorgeous_Text_RaynaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC1CA
-	msgbox Text_18A555, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_RaynaRematch
+	msgbox FiveIsland_ResortGorgeous_Text_RaynaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC1CA:: @ 81AC1CA
-	trainerbattle_rematch TRAINER_PAINTER_RAYNA, Text_1C3C70, Text_18A535
-	msgbox Text_18A555, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_RaynaRematch:: @ 81AC1CA
+	trainerbattle_rematch TRAINER_PAINTER_RAYNA, FiveIsland_ResortGorgeous_Text_RaynaRematchIntro, FiveIsland_ResortGorgeous_Text_RaynaDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_RaynaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC1E1:: @ 81AC1E1
-	trainerbattle_single TRAINER_LADY_JACKI, Text_18A5B9, Text_18A5EE
+FiveIsland_ResortGorgeous_EventScript_Jacki:: @ 81AC1E1
+	trainerbattle_single TRAINER_LADY_JACKI, FiveIsland_ResortGorgeous_Text_JackiIntro, FiveIsland_ResortGorgeous_Text_JackiDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC208
-	msgbox Text_18A601, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_JackiRematch
+	msgbox FiveIsland_ResortGorgeous_Text_JackiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC208:: @ 81AC208
-	trainerbattle_rematch TRAINER_LADY_JACKI, Text_1C3CB0, Text_18A5EE
-	msgbox Text_18A601, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_JackiRematch:: @ 81AC208
+	trainerbattle_rematch TRAINER_LADY_JACKI, FiveIsland_ResortGorgeous_Text_JackiRematchIntro, FiveIsland_ResortGorgeous_Text_JackiDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_JackiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC21F:: @ 81AC21F
-	trainerbattle_single TRAINER_LADY_GILLIAN, Text_18A645, Text_18A67F
+FiveIsland_ResortGorgeous_EventScript_Gillian:: @ 81AC21F
+	trainerbattle_single TRAINER_LADY_GILLIAN, FiveIsland_ResortGorgeous_Text_GillianIntro, FiveIsland_ResortGorgeous_Text_GillianDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC246
-	msgbox Text_18A699, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_GillianRematch
+	msgbox FiveIsland_ResortGorgeous_Text_GillianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC246:: @ 81AC246
-	trainerbattle_rematch TRAINER_LADY_GILLIAN, Text_1C3CF1, Text_18A67F
-	msgbox Text_18A699, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_GillianRematch:: @ 81AC246
+	trainerbattle_rematch TRAINER_LADY_GILLIAN, FiveIsland_ResortGorgeous_Text_GillianRematchIntro, FiveIsland_ResortGorgeous_Text_GillianDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_GillianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC25D:: @ 81AC25D
-	trainerbattle_single TRAINER_YOUNGSTER_DESTIN, Text_18A6DA, Text_18A6FE
+FiveIsland_ResortGorgeous_EventScript_Destin:: @ 81AC25D
+	trainerbattle_single TRAINER_YOUNGSTER_DESTIN, FiveIsland_ResortGorgeous_Text_DestinIntro, FiveIsland_ResortGorgeous_Text_DestinDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC284
-	msgbox Text_18A715, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_DestinRematch
+	msgbox FiveIsland_ResortGorgeous_Text_DestinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC284:: @ 81AC284
-	trainerbattle_rematch TRAINER_YOUNGSTER_DESTIN, Text_1C3D47, Text_18A6FE
-	msgbox Text_18A715, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_DestinRematch:: @ 81AC284
+	trainerbattle_rematch TRAINER_YOUNGSTER_DESTIN, FiveIsland_ResortGorgeous_Text_DestinRematchIntro, FiveIsland_ResortGorgeous_Text_DestinDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_DestinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_ResortGorgeous_EventScript_1AC29B:: @ 81AC29B
-	trainerbattle_single TRAINER_SWIMMER_MALE_TOBY, Text_18A74A, Text_18A786
+FiveIsland_ResortGorgeous_EventScript_Toby:: @ 81AC29B
+	trainerbattle_single TRAINER_SWIMMER_MALE_TOBY, FiveIsland_ResortGorgeous_Text_TobyIntro, FiveIsland_ResortGorgeous_Text_TobyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC2C2
-	msgbox Text_18A7AC, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_ResortGorgeous_EventScript_TobyRematch
+	msgbox FiveIsland_ResortGorgeous_Text_TobyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC2C2:: @ 81AC2C2
-	trainerbattle_rematch TRAINER_SWIMMER_MALE_TOBY, Text_1C3D73, Text_18A786
-	msgbox Text_18A7AC, MSGBOX_AUTOCLOSE
+FiveIsland_ResortGorgeous_EventScript_TobyRematch:: @ 81AC2C2
+	trainerbattle_rematch TRAINER_SWIMMER_MALE_TOBY, FiveIsland_ResortGorgeous_Text_TobyRematchIntro, FiveIsland_ResortGorgeous_Text_TobyDefeat
+	msgbox FiveIsland_ResortGorgeous_Text_TobyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_WaterLabyrinth_EventScript_1AC2D9:: @ 81AC2D9
-	trainerbattle_single TRAINER_PKMN_BREEDER_ALIZE, Text_18AAD5, Text_18AB0B
+FiveIsland_WaterLabyrinth_EventScript_Alize:: @ 81AC2D9
+	trainerbattle_single TRAINER_PKMN_BREEDER_ALIZE, FiveIsland_WaterLabyrinth_Text_AlizeIntro, FiveIsland_WaterLabyrinth_Text_AlizeDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC300
-	msgbox Text_18AB37, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_WaterLabyrinth_EventScript_AlizeRematch
+	msgbox FiveIsland_WaterLabyrinth_Text_AlizePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC300:: @ 81AC300
-	trainerbattle_rematch TRAINER_PKMN_BREEDER_ALIZE, Text_1C3BB7, Text_18AB0B
-	msgbox Text_18AB37, MSGBOX_AUTOCLOSE
+FiveIsland_WaterLabyrinth_EventScript_AlizeRematch:: @ 81AC300
+	trainerbattle_rematch TRAINER_PKMN_BREEDER_ALIZE, FiveIsland_WaterLabyrinth_Text_AlizeRematchIntro, FiveIsland_WaterLabyrinth_Text_AlizeDefeat
+	msgbox FiveIsland_WaterLabyrinth_Text_AlizePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_MemorialPillar_EventScript_1AC317:: @ 81AC317
-	trainerbattle_single TRAINER_BIRD_KEEPER_MILO, Text_18AE50, Text_18AEA8
+FiveIsland_MemorialPillar_EventScript_Milo:: @ 81AC317
+	trainerbattle_single TRAINER_BIRD_KEEPER_MILO, FiveIsland_MemorialPillar_Text_MiloIntro, FiveIsland_MemorialPillar_Text_MiloDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC33E
-	msgbox Text_18AEB6, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_MemorialPillar_EventScript_MiloRematch
+	msgbox FiveIsland_MemorialPillar_Text_MiloPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC33E:: @ 81AC33E
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_MILO, Text_1C3DA2, Text_18AEA8
-	msgbox Text_18AEB6, MSGBOX_AUTOCLOSE
+FiveIsland_MemorialPillar_EventScript_MiloRematch:: @ 81AC33E
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_MILO, FiveIsland_MemorialPillar_Text_MiloRematchIntro, FiveIsland_MemorialPillar_Text_MiloDefeat
+	msgbox FiveIsland_MemorialPillar_Text_MiloPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_MemorialPillar_EventScript_1AC355:: @ 81AC355
-	trainerbattle_single TRAINER_BIRD_KEEPER_CHAZ, Text_18AEDC, Text_18AF39
+FiveIsland_MemorialPillar_EventScript_Chaz:: @ 81AC355
+	trainerbattle_single TRAINER_BIRD_KEEPER_CHAZ, FiveIsland_MemorialPillar_Text_ChazIntro, FiveIsland_MemorialPillar_Text_ChazDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC37C
-	msgbox Text_18AF45, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_MemorialPillar_EventScript_ChazRematch
+	msgbox FiveIsland_MemorialPillar_Text_ChazPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC37C:: @ 81AC37C
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_CHAZ, Text_1C3E0F, Text_18AF39
-	msgbox Text_18AF45, MSGBOX_AUTOCLOSE
+FiveIsland_MemorialPillar_EventScript_ChazRematch:: @ 81AC37C
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_CHAZ, FiveIsland_MemorialPillar_Text_ChazRematchIntro, FiveIsland_MemorialPillar_Text_ChazDefeat
+	msgbox FiveIsland_MemorialPillar_Text_ChazPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-FiveIsland_MemorialPillar_EventScript_1AC393:: @ 81AC393
-	trainerbattle_single TRAINER_BIRD_KEEPER_HAROLD, Text_18AF72, Text_18AFCC
+FiveIsland_MemorialPillar_EventScript_Harold:: @ 81AC393
+	trainerbattle_single TRAINER_BIRD_KEEPER_HAROLD, FiveIsland_MemorialPillar_Text_HaroldIntro, FiveIsland_MemorialPillar_Text_HaroldDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC3BA
-	msgbox Text_18AFF2, MSGBOX_AUTOCLOSE
+	goto_if_eq FiveIsland_MemorialPillar_EventScript_HaroldRematch
+	msgbox FiveIsland_MemorialPillar_Text_HaroldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC3BA:: @ 81AC3BA
-	trainerbattle_rematch TRAINER_BIRD_KEEPER_HAROLD, Text_1C3E6A, Text_18AFCC
-	msgbox Text_18AFF2, MSGBOX_AUTOCLOSE
+FiveIsland_MemorialPillar_EventScript_HaroldRematch:: @ 81AC3BA
+	trainerbattle_rematch TRAINER_BIRD_KEEPER_HAROLD, FiveIsland_MemorialPillar_Text_HaroldRematchIntro, FiveIsland_MemorialPillar_Text_HaroldDefeat
+	msgbox FiveIsland_MemorialPillar_Text_HaroldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SixIsland_OutcastIsland_EventScript_1AC3D1:: @ 81AC3D1

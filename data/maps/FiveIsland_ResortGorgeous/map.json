@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC127",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Daisy",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC165",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Celina",
       "flag": "0"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC1A3",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Rayna",
       "flag": "0"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC1E1",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Jacki",
       "flag": "0"
     },
     {
@@ -83,7 +83,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC21F",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Gillian",
       "flag": "0"
     },
     {
@@ -96,7 +96,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC25D",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Destin",
       "flag": "0"
     },
     {
@@ -109,7 +109,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC29B",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Toby",
       "flag": "0"
     },
     {
@@ -189,7 +189,7 @@
       "x": 42,
       "y": 9,
       "elevation": 0,
-      "script": "FiveIsland_ResortGorgeous_EventScript_168844"
+      "script": "FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign"
     }
   ]
 }

@@ -14,6 +14,7 @@
 #include "fieldmap.h"
 #include "help_system.h"
 #include "metatile_behavior.h"
+#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "quest_log.h"
@@ -22,6 +23,7 @@
 #include "task.h"
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
+#include "util.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 
@@ -57,12 +59,12 @@ const u16 gUnknown_83CAFB0[] = INCBIN_U16("graphics/field_effects/unk_83CAFB0.gb
 const u16 gUnknown_83CAFD0[] = INCBIN_U16("graphics/field_effects/unk_83CAFD0.4bpp");
 const u16 gUnknown_83CB3D0[] = INCBIN_U16("graphics/field_effects/unk_83CB3D0.gbapal");
 const u16 gUnknown_83CB3F0[] = INCBIN_U16("graphics/field_effects/unk_83CB3F0.4bpp");
-const u16 gUnknown_83CB5F0[] = INCBIN_U16("graphics/field_effects/unk_83CB5F0.4bpp");
-const u16 gUnknown_83CB7F0[] = INCBIN_U16("graphics/field_effects/unk_83CB7F0.gbapal");
-const u16 gUnknown_83CB810[] = INCBIN_U16("graphics/field_effects/unk_83CB810.bin");
-const u16 gUnknown_83CBA90[] = INCBIN_U16("graphics/field_effects/unk_83CBA90.4bpp");
-const u16 gUnknown_83CBB10[] = INCBIN_U16("graphics/field_effects/unk_83CBB10.gbapal");
-const u16 gUnknown_83CBB30[] = INCBIN_U16("graphics/field_effects/unk_83CBB30.bin");
+const u16 gFieldMoveStreaksTiles[] = INCBIN_U16("graphics/field_effects/unk_83CB5F0.4bpp");
+const u16 gFieldMoveStreaksPalette[] = INCBIN_U16("graphics/field_effects/unk_83CB7F0.gbapal");
+const u16 gFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/field_effects/unk_83CB810.bin");
+const u16 gDarknessFieldMoveStreaksTiles[] = INCBIN_U16("graphics/field_effects/unk_83CBA90.4bpp");
+const u16 gDarknessFieldMoveStreaksPalette[] = INCBIN_U16("graphics/field_effects/unk_83CBB10.gbapal");
+const u16 gDarknessFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/field_effects/unk_83CBB30.bin");
 const u16 gUnknown_83CBDB0[] = INCBIN_U16("graphics/field_effects/unk_83CBDB0.4bpp");
 
 bool8 (*const sFldEffScrcmdTable[])(const u8 **script, u32 *result) = {
@@ -591,10 +593,10 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
         return spriteId;
 }
 
-u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
+u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
-    const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
+    const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
@@ -1346,9 +1348,9 @@ bool8 EscalatorWarpEffect_6(struct Task * task)
 }
 
 
-void Escalator_AnimatePlayerGoingDown(struct Task *task)
+void Escalator_AnimatePlayerGoingDown(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x84, task->data[2]);
     sprite->pos2.y = Sin(0x94, task->data[2]);
@@ -1359,9 +1361,9 @@ void Escalator_AnimatePlayerGoingDown(struct Task *task)
     }
 }
 
-void Escalator_AnimatePlayerGoingUp(struct Task *task)
+void Escalator_AnimatePlayerGoingUp(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x7c, task->data[2]);
     sprite->pos2.y = Sin(0x76, task->data[2]);
@@ -1418,9 +1420,9 @@ void Task_EscalatorWarpInFieldEffect(u8 taskId)
         ;
 }
 
-bool8 EscalatorWarpInEffect_1(struct Task *task)
+bool8 EscalatorWarpInEffect_1(struct Task * task)
 {
-    struct ObjectEvent *objectEvent;
+    struct ObjectEvent * objectEvent;
     s16 x;
     s16 y;
     u8 behavior;
@@ -1443,9 +1445,9 @@ bool8 EscalatorWarpInEffect_1(struct Task *task)
     return TRUE;
 }
 
-bool8 EscalatorWarpInEffect_2(struct Task *task)
+bool8 EscalatorWarpInEffect_2(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x84, task->data[1]);
     sprite->pos2.y = Sin(0x94, task->data[1]);
@@ -1453,9 +1455,9 @@ bool8 EscalatorWarpInEffect_2(struct Task *task)
     return FALSE;
 }
 
-bool8 EscalatorWarpInEffect_3(struct Task *task)
+bool8 EscalatorWarpInEffect_3(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x84, task->data[1]);
     sprite->pos2.y = Sin(0x94, task->data[1]);
@@ -1474,9 +1476,9 @@ bool8 EscalatorWarpInEffect_3(struct Task *task)
 }
 
 
-bool8 EscalatorWarpInEffect_4(struct Task *task)
+bool8 EscalatorWarpInEffect_4(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x7c, task->data[1]);
     sprite->pos2.y = Sin(0x76, task->data[1]);
@@ -1484,9 +1486,9 @@ bool8 EscalatorWarpInEffect_4(struct Task *task)
     return FALSE;
 }
 
-bool8 EscalatorWarpInEffect_5(struct Task *task)
+bool8 EscalatorWarpInEffect_5(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.x = Cos(0x7c, task->data[1]);
     sprite->pos2.y = Sin(0x76, task->data[1]);
@@ -1504,7 +1506,7 @@ bool8 EscalatorWarpInEffect_5(struct Task *task)
     return FALSE;
 }
 
-bool8 EscalatorWarpInEffect_6(struct Task *task)
+bool8 EscalatorWarpInEffect_6(struct Task * task)
 {
     if (IsEscalatorMoving())
     {
@@ -1515,9 +1517,9 @@ bool8 EscalatorWarpInEffect_6(struct Task *task)
     return TRUE;
 }
 
-bool8 EscalatorWarpInEffect_7(struct Task *task)
+bool8 EscalatorWarpInEffect_7(struct Task * task)
 {
-    struct ObjectEvent *objectEvent;
+    struct ObjectEvent * objectEvent;
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
@@ -1876,13 +1878,13 @@ bool8 LavaridgeGymB1FWarpExitEffect_4(struct Task * task, struct ObjectEvent * o
 }
 
 void Task_LavaridgeGym1FWarp(u8 taskId);
-bool8 LavaridgeGym1FWarpEffect_1(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite);
-bool8 LavaridgeGym1FWarpEffect_2(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite);
-bool8 LavaridgeGym1FWarpEffect_3(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite);
-bool8 LavaridgeGym1FWarpEffect_4(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite);
-bool8 LavaridgeGym1FWarpEffect_5(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite);
+bool8 LavaridgeGym1FWarpEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGym1FWarpEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGym1FWarpEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGym1FWarpEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGym1FWarpEffect_5(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
 
-bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite) = {
+bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite) = {
     LavaridgeGym1FWarpEffect_1,
     LavaridgeGym1FWarpEffect_2,
     LavaridgeGym1FWarpEffect_3,
@@ -1901,7 +1903,7 @@ u8 FldEff_LavaridgeGymWarp(void)
     return spriteId;
 }
 
-void SpriteCB_LavaridgeGymWarp(struct Sprite *sprite)
+void SpriteCB_LavaridgeGymWarp(struct Sprite * sprite)
 {
     if (sprite->animEnded)
     {
@@ -1919,7 +1921,7 @@ void Task_LavaridgeGym1FWarp(u8 taskId)
     while(sLavaridgeGym1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-bool8 LavaridgeGym1FWarpEffect_1(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 LavaridgeGym1FWarpEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
 {
     FreezeObjectEvents();
     CameraObjectReset2();
@@ -1929,7 +1931,7 @@ bool8 LavaridgeGym1FWarpEffect_1(struct Task *task, struct ObjectEvent *objectEv
     return FALSE;
 }
 
-bool8 LavaridgeGym1FWarpEffect_2(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 LavaridgeGym1FWarpEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
 {
     if (ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
@@ -1951,7 +1953,7 @@ bool8 LavaridgeGym1FWarpEffect_2(struct Task *task, struct ObjectEvent *objectEv
     return FALSE;
 }
 
-bool8 LavaridgeGym1FWarpEffect_3(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 LavaridgeGym1FWarpEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
@@ -1961,7 +1963,7 @@ bool8 LavaridgeGym1FWarpEffect_3(struct Task *task, struct ObjectEvent *objectEv
     return FALSE;
 }
 
-bool8 LavaridgeGym1FWarpEffect_4(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 LavaridgeGym1FWarpEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
@@ -1972,7 +1974,7 @@ bool8 LavaridgeGym1FWarpEffect_4(struct Task *task, struct ObjectEvent *objectEv
     return FALSE;
 }
 
-bool8 LavaridgeGym1FWarpEffect_5(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
+bool8 LavaridgeGym1FWarpEffect_5(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
 {
     if (!gPaletteFade.active && BGMusicStopped() == TRUE)
     {
@@ -1994,7 +1996,7 @@ u8 FldEff_PopOutOfAsh(void)
     return spriteId;
 }
 
-void SpriteCB_PopOutOfAsh(struct Sprite *sprite)
+void SpriteCB_PopOutOfAsh(struct Sprite * sprite)
 {
     if (sprite->animEnded)
     {
@@ -2240,7 +2242,7 @@ void TeleportInFieldEffectTask1(struct Task * task);
 void TeleportInFieldEffectTask2(struct Task * task);
 void TeleportInFieldEffectTask3(struct Task * task);
 
-void (*const sTeleportEffectFuncs[])(struct Task *) = {
+void (*const sTeleportEffectFuncs[])(struct Task * ) = {
     TeleportFieldEffectTask1,
     TeleportFieldEffectTask2,
     TeleportFieldEffectTask3,
@@ -2257,7 +2259,7 @@ void Task_DoTeleportFieldEffect(u8 taskId)
     sTeleportEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void TeleportFieldEffectTask1(struct Task *task)
+void TeleportFieldEffectTask1(struct Task * task)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -2266,7 +2268,7 @@ void TeleportFieldEffectTask1(struct Task *task)
     task->data[0]++;
 }
 
-void TeleportFieldEffectTask2(struct Task *task)
+void TeleportFieldEffectTask2(struct Task * task)
 {
     u8 spinDirections[5] = {
         [DIR_NONE]  = DIR_SOUTH,
@@ -2275,7 +2277,7 @@ void TeleportFieldEffectTask2(struct Task *task)
         [DIR_NORTH] = DIR_EAST,
         [DIR_EAST]  = DIR_SOUTH
     };
-    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
         ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
@@ -2292,11 +2294,11 @@ void TeleportFieldEffectTask2(struct Task *task)
     }
 }
 
-void TeleportFieldEffectTask3(struct Task *task)
+void TeleportFieldEffectTask3(struct Task * task)
 {
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite * sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((--task->data[1]) <= 0)
     {
         task->data[1] = 4;
@@ -2320,7 +2322,7 @@ void TeleportFieldEffectTask3(struct Task *task)
     }
 }
 
-void TeleportFieldEffectTask4(struct Task *task)
+void TeleportFieldEffectTask4(struct Task * task)
 {
     if (!gPaletteFade.active)
     {
@@ -2335,7 +2337,7 @@ void TeleportFieldEffectTask4(struct Task *task)
     }
 }
 
-void (*const sTeleportInEffectFuncs[])(struct Task *) = {
+void (*const sTeleportInEffectFuncs[])(struct Task * ) = {
     TeleportInFieldEffectTask1,
     TeleportInFieldEffectTask2,
     TeleportInFieldEffectTask3
@@ -2359,9 +2361,9 @@ void Task_DoTeleportInFieldEffect(u8 taskId)
     sTeleportInEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void TeleportInFieldEffectTask1(struct Task *task)
+void TeleportInFieldEffectTask1(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     s16 centerToCornerVecY;
     if (IsWeatherNotFadingIn())
     {
@@ -2378,11 +2380,11 @@ void TeleportInFieldEffectTask1(struct Task *task)
     }
 }
 
-void TeleportInFieldEffectTask2(struct Task *task)
+void TeleportInFieldEffectTask2(struct Task * task)
 {
     u8 spinDirections[5] = {1, 3, 4, 2, 1};
-    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite * sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
     {
         if (task->data[13] == 0)
@@ -2417,10 +2419,10 @@ void TeleportInFieldEffectTask2(struct Task *task)
     }
 }
 
-void TeleportInFieldEffectTask3(struct Task *task)
+void TeleportInFieldEffectTask3(struct Task * task)
 {
     u8 spinDirections[5] = {1, 3, 4, 2, 1};
-    struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if ((--task->data[1]) == 0)
     {
         ObjectEventTurn(objectEvent, spinDirections[objectEvent->facingDirection]);
@@ -2432,5 +2434,434 @@ void TeleportInFieldEffectTask3(struct Task *task)
             UnfreezeObjectEvents();
             DestroyTask(FindTaskIdByFunc(Task_DoTeleportInFieldEffect));
         }
+    }
+}
+
+void Task_ShowMon_Outdoors(u8 taskId);
+void ShowMonEffect_Outdoors_1(struct Task * task);
+void ShowMonEffect_Outdoors_2(struct Task * task);
+void ShowMonEffect_Outdoors_3(struct Task * task);
+void ShowMonEffect_Outdoors_4(struct Task * task);
+void ShowMonEffect_Outdoors_5(struct Task * task);
+void ShowMonEffect_Outdoors_6(struct Task * task);
+void ShowMonEffect_Outdoors_7(struct Task * task);
+void VBlankCB_ShowMonEffect_Outdoors(void);
+void LoadFieldMoveStreaksTilemapToVram(u16 screenbase);
+void Task_ShowMon_Indoors(u8 taskId);
+void ShowMonEffect_Indoors_1(struct Task * task);
+void ShowMonEffect_Indoors_2(struct Task * task);
+void ShowMonEffect_Indoors_3(struct Task * task);
+void ShowMonEffect_Indoors_4(struct Task * task);
+void ShowMonEffect_Indoors_5(struct Task * task);
+void ShowMonEffect_Indoors_6(struct Task * task);
+void ShowMonEffect_Indoors_7(struct Task * task);
+void VBlankCB_ShowMonEffect_Indoors(void);
+void sub_8086728(struct Task * task);
+bool8 sub_8086738(struct Task * task);
+bool8 sub_80867F0(struct Task * task);
+u8 sub_8086860(u32 species, u32 otId, u32 personality);
+void sub_80868C0(struct Sprite * sprite);
+void sub_8086904(struct Sprite * sprite);
+void sub_8086920(struct Sprite * sprite);
+
+void (*const sShowMonOutdoorsEffectFuncs[])(struct Task * task) = {
+    ShowMonEffect_Outdoors_1,
+    ShowMonEffect_Outdoors_2,
+    ShowMonEffect_Outdoors_3,
+    ShowMonEffect_Outdoors_4,
+    ShowMonEffect_Outdoors_5,
+    ShowMonEffect_Outdoors_6,
+    ShowMonEffect_Outdoors_7
+};
+
+u32 FldEff_FieldMoveShowMon(void)
+{
+    u8 taskId;
+    if (IsMapTypeOutdoors(GetCurrentMapType()) == TRUE)
+        taskId = CreateTask(Task_ShowMon_Outdoors, 0xFF);
+    else
+        taskId = CreateTask(Task_ShowMon_Indoors, 0xFF);
+    gTasks[taskId].data[15] = sub_8086860(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    return 0;
+}
+
+u32 FldEff_FieldMoveShowMonInit(void)
+{
+    u32 r6 = gFieldEffectArguments[0] & 0x80000000;
+    u8 partyIdx = gFieldEffectArguments[0];
+    gFieldEffectArguments[0] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+    gFieldEffectArguments[1] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_OT_ID);
+    gFieldEffectArguments[2] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+    gFieldEffectArguments[0] |= r6;
+    FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    return 0;
+}
+
+void Task_ShowMon_Outdoors(u8 taskId)
+{
+    sShowMonOutdoorsEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void ShowMonEffect_Outdoors_1(struct Task * task)
+{
+    task->data[11] = GetGpuReg(REG_OFFSET_WININ);
+    task->data[12] = GetGpuReg(REG_OFFSET_WINOUT);
+    StoreWordInTwoHalfwords((u16*)&task->data[13], (u32)gMain.vblankCallback);
+    task->data[1] = 0xf0f1;
+    task->data[2] = 0x5051;
+    task->data[3] = 0x3f;
+    task->data[4] = 0x3e;
+    SetGpuReg(REG_OFFSET_WIN0H, task->data[1]);
+    SetGpuReg(REG_OFFSET_WIN0V, task->data[2]);
+    SetGpuReg(REG_OFFSET_WININ, task->data[3]);
+    SetGpuReg(REG_OFFSET_WINOUT, task->data[4]);
+    SetVBlankCallback(VBlankCB_ShowMonEffect_Outdoors);
+    task->data[0]++;
+}
+
+void ShowMonEffect_Outdoors_2(struct Task * task)
+{
+    u16 charbase = ((GetGpuReg(REG_OFFSET_BG0CNT) >> 2) << 14);
+    u16 screenbase = ((GetGpuReg(REG_OFFSET_BG0CNT) >> 8) << 11);
+    CpuCopy16(gFieldMoveStreaksTiles, (void *)(VRAM + charbase), 0x200);
+    CpuFill32(0, (void *)(VRAM + screenbase), 0x800);
+    LoadPalette(gFieldMoveStreaksPalette, 0xf0, 0x20);
+    LoadFieldMoveStreaksTilemapToVram(screenbase);
+    task->data[0]++;
+}
+
+void ShowMonEffect_Outdoors_3(struct Task * task)
+{
+    s16 v0;
+    s16 v2;
+    s16 v3;
+    task->data[5] -= 16;
+    v0 = ((u16)task->data[1] >> 8);
+    v2 = ((u16)task->data[2] >> 8);
+    v3 = ((u16)task->data[2] & 0xff);
+    v0 -= 16;
+    v2 -= 2;
+    v3 += 2;
+    if (v0 < 0)
+    {
+        v0 = 0;
+    }
+    if (v2 < 0x28)
+    {
+        v2 = 0x28;
+    }
+    if (v3 > 0x78)
+    {
+        v3 = 0x78;
+    }
+    task->data[1] = (v0 << 8) | (task->data[1] & 0xff);
+    task->data[2] = (v2 << 8) | v3;
+    if (v0 == 0 && v2 == 0x28 && v3 == 0x78)
+    {
+        gSprites[task->data[15]].callback = sub_80868C0;
+        task->data[0]++;
+    }
+}
+
+void ShowMonEffect_Outdoors_4(struct Task * task)
+{
+    task->data[5] -= 16;
+    if (gSprites[task->data[15]].data[7])
+    {
+        task->data[0]++;
+    }
+}
+
+void ShowMonEffect_Outdoors_5(struct Task * task)
+{
+    s16 v2;
+    s16 v3;
+    task->data[5] -= 16;
+    v2 = (task->data[2] >> 8);
+    v3 = (task->data[2] & 0xff);
+    v2 += 6;
+    v3 -= 6;
+    if (v2 > 0x50)
+    {
+        v2 = 0x50;
+    }
+    if (v3 < 0x51)
+    {
+        v3 = 0x51;
+    }
+    task->data[2] = (v2 << 8) | v3;
+    if (v2 == 0x50 && v3 == 0x51)
+    {
+        task->data[0]++;
+    }
+}
+
+void ShowMonEffect_Outdoors_6(struct Task * task)
+{
+    u16 bg0cnt = (GetGpuReg(REG_OFFSET_BG0CNT) >> 8) << 11;
+    CpuFill32(0, (void *)VRAM + bg0cnt, 0x800);
+    task->data[1] = 0xf1;
+    task->data[2] = 0xa1;
+    task->data[3] = task->data[11];
+    task->data[4] = task->data[12];
+    task->data[0]++;
+}
+
+void ShowMonEffect_Outdoors_7(struct Task * task)
+{
+    IntrCallback callback;
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    SetVBlankCallback(callback);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    Menu_LoadStdPal();
+    FreeResourcesAndDestroySprite(&gSprites[task->data[15]], task->data[15]);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+    DestroyTask(FindTaskIdByFunc(Task_ShowMon_Outdoors));
+}
+
+void VBlankCB_ShowMonEffect_Outdoors(void)
+{
+    IntrCallback callback;
+    struct Task * task = &gTasks[FindTaskIdByFunc(Task_ShowMon_Outdoors)];
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
+    callback();
+    SetGpuReg(REG_OFFSET_WIN0H, task->data[1]);
+    SetGpuReg(REG_OFFSET_WIN0V, task->data[2]);
+    SetGpuReg(REG_OFFSET_WININ, task->data[3]);
+    SetGpuReg(REG_OFFSET_WINOUT, task->data[4]);
+    SetGpuReg(REG_OFFSET_BG0HOFS, task->data[5]);
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->data[6]);
+}
+
+void LoadFieldMoveStreaksTilemapToVram(u16 screenbase)
+{
+    u16 i;
+    u16 *dest;
+    dest = (u16 *)(VRAM + (10 * 32) + screenbase);
+    for (i = 0; i < (10 * 32); i++, dest++)
+    {
+        *dest = gFieldMoveStreaksTilemap[i] | METATILE_ELEVATION_MASK;
+    }
+}
+
+void (*const sShowMonIndoorsEffectFuncs[])(struct Task * ) = {
+    ShowMonEffect_Indoors_1,
+    ShowMonEffect_Indoors_2,
+    ShowMonEffect_Indoors_3,
+    ShowMonEffect_Indoors_4,
+    ShowMonEffect_Indoors_5,
+    ShowMonEffect_Indoors_6,
+    ShowMonEffect_Indoors_7
+};
+
+void Task_ShowMon_Indoors(u8 taskId)
+{
+    sShowMonIndoorsEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void ShowMonEffect_Indoors_1(struct Task * task)
+{
+    SetGpuReg(REG_OFFSET_BG0HOFS, task->data[1]);
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->data[2]);
+    StoreWordInTwoHalfwords((u16 *)&task->data[13], (u32)gMain.vblankCallback);
+    SetVBlankCallback(VBlankCB_ShowMonEffect_Indoors);
+    task->data[0]++;
+}
+
+void ShowMonEffect_Indoors_2(struct Task * task)
+{
+    u16 charbase;
+    u16 screenbase;
+    charbase = ((GetGpuReg(REG_OFFSET_BG0CNT) >> 2) << 14);
+    screenbase = ((GetGpuReg(REG_OFFSET_BG0CNT) >> 8) << 11);
+    task->data[12] = screenbase;
+    CpuCopy16(gDarknessFieldMoveStreaksTiles, (void *)(VRAM + charbase), 0x80);
+    CpuFill32(0, (void *)(VRAM + screenbase), 0x800);
+    LoadPalette(gDarknessFieldMoveStreaksPalette, 0xf0, 0x20);
+    task->data[0]++;
+}
+
+void ShowMonEffect_Indoors_3(struct Task * task)
+{
+    if (sub_8086738(task))
+    {
+        task->data[5] = GetGpuReg(REG_OFFSET_WININ);
+        SetGpuReg(REG_OFFSET_WININ, (task->data[5] & 0xFF) | 0x1100);
+        SetGpuReg(REG_OFFSET_WIN1H, 0x00f0);
+        SetGpuReg(REG_OFFSET_WIN1V, 0x2878);
+        gSprites[task->data[15]].callback = sub_80868C0;
+        task->data[0]++;
+    }
+    sub_8086728(task);
+}
+
+void ShowMonEffect_Indoors_4(struct Task * task)
+{
+    sub_8086728(task);
+    if (gSprites[task->data[15]].data[7])
+    {
+        task->data[0]++;
+    }
+}
+
+void ShowMonEffect_Indoors_5(struct Task * task)
+{
+    sub_8086728(task);
+    task->data[3] = task->data[1] & 7;
+    task->data[4] = 0;
+    SetGpuReg(REG_OFFSET_WIN1H, 0xffff);
+    SetGpuReg(REG_OFFSET_WIN1V, 0xffff);
+    SetGpuReg(REG_OFFSET_WININ, task->data[5]);
+    task->data[0]++;
+}
+
+void ShowMonEffect_Indoors_6(struct Task * task)
+{
+    sub_8086728(task);
+    if (sub_80867F0(task))
+    {
+        task->data[0]++;
+    }
+}
+
+void ShowMonEffect_Indoors_7(struct Task * task)
+{
+    IntrCallback intrCallback;
+    u16 charbase;
+    charbase = (GetGpuReg(REG_OFFSET_BG0CNT) >> 8) << 11;
+    CpuFill32(0, (void *)VRAM + charbase, 0x800);
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    SetVBlankCallback(intrCallback);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    Menu_LoadStdPal();
+    FreeResourcesAndDestroySprite(&gSprites[task->data[15]], task->data[15]);
+    FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
+    DestroyTask(FindTaskIdByFunc(Task_ShowMon_Indoors));
+}
+
+void VBlankCB_ShowMonEffect_Indoors(void)
+{
+    IntrCallback intrCallback;
+    struct Task * task;
+    task = &gTasks[FindTaskIdByFunc(Task_ShowMon_Indoors)];
+    LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
+    intrCallback();
+    SetGpuReg(REG_OFFSET_BG0HOFS, task->data[1]);
+    SetGpuReg(REG_OFFSET_BG0VOFS, task->data[2]);
+}
+
+void sub_8086728(struct Task * task)
+{
+    task->data[1] -= 16;
+    task->data[3] += 16;
+}
+
+bool8 sub_8086738(struct Task * task)
+{
+    u16 i;
+    u16 srcOffs;
+    u16 dstOffs;
+    u16 *dest;
+    if (task->data[4] >= 32)
+    {
+        return TRUE;
+    }
+    dstOffs = (task->data[3] >> 3) & 0x1f;
+    if (dstOffs >= task->data[4])
+    {
+        dstOffs = (32 - dstOffs) & 0x1f;
+        srcOffs = (32 - task->data[4]) & 0x1f;
+        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        for (i = 0; i < 10; i++)
+        {
+            dest[dstOffs + i * 32] = gDarknessFieldMoveStreaksTilemap[srcOffs + i * 32];
+            dest[dstOffs + i * 32] |= 0xf000;
+
+            dest[((dstOffs + 1) & 0x1f) + i * 32] = gDarknessFieldMoveStreaksTilemap[((srcOffs + 1) & 0x1f) + i * 32] | 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] |= 0xf000;
+        }
+        task->data[4] += 2;
+    }
+    return FALSE;
+}
+
+bool8 sub_80867F0(struct Task * task)
+{
+    u16 i;
+    u16 dstOffs;
+    u16 *dest;
+    if (task->data[4] >= 32)
+    {
+        return TRUE;
+    }
+    dstOffs = task->data[3] >> 3;
+    if (dstOffs >= task->data[4])
+    {
+        dstOffs = (task->data[1] >> 3) & 0x1f;
+        dest = (u16 *)(VRAM + 0x140 + (u16)task->data[12]);
+        for (i = 0; i < 10; i++)
+        {
+            dest[dstOffs + i * 32] = 0xf000;
+            dest[((dstOffs + 1) & 0x1f) + i * 32] = 0xf000;
+        }
+        task->data[4] += 2;
+    }
+    return FALSE;
+}
+
+u8 sub_8086860(u32 species, u32 otId, u32 personality)
+{
+    bool16 playCry;
+    u8 monSprite;
+    struct Sprite * sprite;
+    playCry = (species & 0x80000000) >> 16;
+    species &= 0x7fffffff;
+    monSprite = CreateMonSprite_FieldMove(species, otId, personality, 0x140, 0x50, 0);
+    sprite = &gSprites[monSprite];
+    sprite->callback = SpriteCallbackDummy;
+    sprite->oam.priority = 0;
+    sprite->data[0] = species;
+    sprite->data[6] = playCry;
+    return monSprite;
+}
+
+void sub_80868C0(struct Sprite * sprite)
+{
+    if ((sprite->pos1.x -= 20) <= 0x78)
+    {
+        sprite->pos1.x = 0x78;
+        sprite->data[1] = 30;
+        sprite->callback = sub_8086904;
+        if (sprite->data[6])
+        {
+            PlayCry2(sprite->data[0], 0, 0x7d, 0xa);
+        }
+        else
+        {
+            PlayCry1(sprite->data[0], 0);
+        }
+    }
+}
+
+void sub_8086904(struct Sprite * sprite)
+{
+    if ((--sprite->data[1]) == 0)
+    {
+        sprite->callback = sub_8086920;
+    }
+}
+
+void sub_8086920(struct Sprite * sprite)
+{
+    if (sprite->pos1.x < -0x40)
+    {
+        sprite->data[7] = 1;
+    }
+    else
+    {
+        sprite->pos1.x -= 20;
     }
 }

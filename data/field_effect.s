@@ -7,26 +7,6 @@
 	.align 2
 
 	.align 2
-sShowMonOutdoorsEffectFuncs:: @ 83CC11C dataptr
-	.4byte ShowMonEffect_Outdoors_1
-	.4byte ShowMonEffect_Outdoors_2
-	.4byte ShowMonEffect_Outdoors_3
-	.4byte ShowMonEffect_Outdoors_4
-	.4byte ShowMonEffect_Outdoors_5
-	.4byte ShowMonEffect_Outdoors_6
-	.4byte ShowMonEffect_Outdoors_7
-
-	.align 2
-sShowMonIndoorsEffectFuncs:: @ 83CC138 dataptr
-	.4byte ShowMonEffect_Indoors_1
-	.4byte ShowMonEffect_Indoors_2
-	.4byte ShowMonEffect_Indoors_3
-	.4byte ShowMonEffect_Indoors_4
-	.4byte ShowMonEffect_Indoors_5
-	.4byte ShowMonEffect_Indoors_6
-	.4byte ShowMonEffect_Indoors_7
-
-	.align 2
 sUseSurfEffectFuncs:: @ 83CC154 dataptr
 	.4byte UseSurfEffect_1
 	.4byte UseSurfEffect_2

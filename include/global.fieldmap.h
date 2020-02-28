@@ -4,6 +4,13 @@
 #define OBJECT_EVENTS_COUNT 16
 
 #define METATILE_COLLISION_MASK 0x0C00
+#define METATILE_ID_MASK 0x03FF
+#define METATILE_ID_UNDEFINED 0x03FF
+#define METATILE_ELEVATION_SHIFT 12
+#define METATILE_COLLISION_SHIFT 10
+#define METATILE_ELEVATION_MASK 0xF000
+
+#define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
 enum
 {
@@ -16,8 +23,6 @@ enum
 };
 
 typedef void (*TilesetCB)(void);
-
-#define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)
 
 struct Tileset
 {

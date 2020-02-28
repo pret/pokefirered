@@ -6,60 +6,6 @@
 	.section .rodata
 	.align 2
 
-sUseFlyEffectFuncs:: @ 83CC178 dataptr (incomplete)
-	.4byte UseFlyEffect_1
-	.4byte UseFlyEffect_2
-	.4byte UseFlyEffect_3
-	.4byte UseFlyEffect_4
-	.4byte UseFlyEffect_5
-	.4byte UseFlyEffect_6
-	.4byte UseFlyEffect_7
-	.4byte UseFlyEffect_8
-	.4byte UseFlyEffect_9
-
-gUnknown_83CC19C:: @ 83CC19C affineanimcmd
-	obj_rot_scal_anim_frame 8, 8, 226, 0
-	obj_rot_scal_anim_frame 28, 28, 0, 30
-	obj_rot_scal_anim_end
-
-gUnknown_83CC1B4:: @ 83CC1B4 affineanimcmd
-	obj_rot_scal_anim_frame 256, 256, 64, 0
-	obj_rot_scal_anim_frame -10, -10, 0, 22
-	obj_rot_scal_anim_end
-
-	.align 2
-gUnknown_83CC1CC:: @ 83CC1CC dataptr
-	.4byte gUnknown_83CC19C
-	.4byte gUnknown_83CC1B4
-
-	.align 2
-gUnknown_83CC1D4:: @ 83CC1D4 dataptr
-	.4byte sub_80874C8
-	.4byte sub_80875C8
-	.4byte sub_8087644
-	.4byte sub_8087698
-	.4byte sub_8087710
-	.4byte sub_8087748
-	.4byte fishE
-
-gUnknown_83CC1F0:: @ 83CC1F0 data16
-	.2byte 0xfffe, 0xfffc, 0xfffb, 0xfffa, 0xfff9, 0xfff8, 0xfff8, 0xfff8, 0xfff9, 0xfff9, 0xfffa, 0xfffb, 0xfffd, 0xfffe, 0x0000, 0x0002
-	.2byte 0x0004, 0x0008
-
-gUnknown_83CC214:: @ 83CC214 affineanimcmd
-	obj_rot_scal_anim_frame 24, 24, 0, 1
-	obj_rot_scal_anim_jump 0
-
-gUnknown_83CC224:: @ 83CC224 affineanimcmd
-	obj_rot_scal_anim_frame 512, 512, 0, 1
-	obj_rot_scal_anim_frame -16, -16, 0, 1
-	obj_rot_scal_anim_jump 1
-
-	.align 2
-gUnknown_83CC23C:: @ 83CC23C dataptr
-	.4byte gUnknown_83CC214
-	.4byte gUnknown_83CC224
-
 gUnknown_83CC244:: @ 83CC244 dataptr
 	.4byte sub_8087C00
 	.4byte sub_8087C2C

@@ -3039,3 +3039,588 @@ void UseVsSeekerEffect_4(struct Task * task)
         DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
     }
 }
+
+void sub_8086D94(struct Sprite * sprite);
+
+u8 FldEff_NpcFlyOut(void)
+{
+    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0x78, 0, 1);
+    struct Sprite * sprite = &gSprites[spriteId];
+
+    sprite->oam.paletteNum = 0;
+    sprite->oam.priority = 1;
+    sprite->callback = sub_8086D94;
+    sprite->data[1] = gFieldEffectArguments[0];
+    PlaySE(SE_W019);
+    return spriteId;
+}
+
+void sub_8086D94(struct Sprite * sprite)
+{
+    struct Sprite * npcSprite;
+
+    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
+    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->data[2] = (sprite->data[2] + 4) & 0xff;
+    if (sprite->data[0])
+    {
+        npcSprite = &gSprites[sprite->data[1]];
+        npcSprite->coordOffsetEnabled = 0;
+        npcSprite->pos1.x = sprite->pos1.x + sprite->pos2.x;
+        npcSprite->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
+        npcSprite->pos2.x = 0;
+        npcSprite->pos2.y = 0;
+    }
+    if (sprite->data[2] >= 0x80)
+    {
+        FieldEffectStop(sprite, FLDEFF_NPCFLY_OUT);
+    }
+}
+
+void Task_UseFly(u8 taskId);
+void UseFlyEffect_1(struct Task * task);
+void UseFlyEffect_2(struct Task * task);
+void UseFlyEffect_3(struct Task * task);
+void UseFlyEffect_4(struct Task * task);
+void UseFlyEffect_5(struct Task * task);
+void UseFlyEffect_6(struct Task * task);
+void UseFlyEffect_7(struct Task * task);
+void UseFlyEffect_8(struct Task * task);
+void UseFlyEffect_9(struct Task * task);
+u8 sub_8087168(void);
+bool8 sub_80871AC(u8 flyBlobSpriteId);
+void sub_80871C8(u8 flyBlobSpriteId);
+void sub_8087204(u8 flyBlobSpriteId, u8 playerSpriteId);
+void sub_8087220(struct Sprite * sprite);
+void sub_80872F0(struct Sprite * sprite);
+void sub_80877FC(struct Sprite * sprite, u8 affineAnimId);
+void sub_8087828(struct Sprite * sprite);
+
+void (*const sUseFlyEffectFuncs[])(struct Task * ) = {
+    UseFlyEffect_1,
+    UseFlyEffect_2,
+    UseFlyEffect_3,
+    UseFlyEffect_4,
+    UseFlyEffect_5,
+    UseFlyEffect_6,
+    UseFlyEffect_7,
+    UseFlyEffect_8,
+    UseFlyEffect_9
+};
+
+u8 FldEff_UseFly(void)
+{
+    u8 taskId = CreateTask(Task_UseFly, 0xfe);
+    gTasks[taskId].data[1] = gFieldEffectArguments[0];
+    return 0;
+}
+
+void Task_UseFly(u8 taskId)
+{
+    sUseFlyEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void UseFlyEffect_1(struct Task * task)
+{
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        task->data[15] = gPlayerAvatar.flags;
+        gPlayerAvatar.preventStep = TRUE;
+        SetPlayerAvatarStateMask(1);
+        sub_805CB70();
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        task->data[0]++;
+    }
+}
+
+void UseFlyEffect_2(struct Task * task)
+{
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        task->data[0]++;
+        gFieldEffectArguments[0] = task->data[1];
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+    }
+}
+
+void UseFlyEffect_3(struct Task * task)
+{
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        if (task->data[15] & 0x08)
+        {
+            sub_80DC44C(objectEvent->mapobj_unk_1A, 2);
+            sub_80DC478(objectEvent->mapobj_unk_1A, 0);
+        }
+        task->data[1] = sub_8087168();
+        task->data[0]++;
+    }
+}
+
+void UseFlyEffect_4(struct Task * task)
+{
+    if (sub_80871AC(task->data[1]))
+    {
+        task->data[0]++;
+        task->data[2] = 16;
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+        ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_FACE_LEFT);
+    }
+}
+
+void UseFlyEffect_5(struct Task * task)
+{
+    struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if ((task->data[2] == 0 || (--task->data[2]) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        task->data[0]++;
+        PlaySE(SE_W019);
+        sub_80871C8(task->data[1]);
+    }
+}
+
+void UseFlyEffect_6(struct Task * task)
+{
+    if ((++task->data[2]) >= 8)
+    {
+        struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        objectEvent->inanimate = 1;
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
+        task->data[0]++;
+        task->data[2] = 0;
+    }
+}
+
+void UseFlyEffect_7(struct Task * task)
+{
+    if ((++task->data[2]) >= 10)
+    {
+        struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventClearAnimIfSpecialAnimActive(objectEvent);
+        objectEvent->inanimate = 0;
+        objectEvent->hasShadow = 0;
+        sub_8087204(task->data[1], objectEvent->spriteId);
+        StartSpriteAnim(&gSprites[task->data[1]], gSaveBlock2Ptr->playerGender * 2 + 1);
+        sub_80877FC(&gSprites[task->data[1]], 0);
+        gSprites[task->data[1]].callback = sub_8087828;
+        CameraObjectReset2();
+        task->data[0]++;
+    }
+}
+
+void UseFlyEffect_8(struct Task * task)
+{
+    if (sub_80871AC(task->data[1]))
+    {
+        WarpFadeOutScreen();
+        task->data[0]++;
+    }
+}
+
+void UseFlyEffect_9(struct Task * task)
+{
+    if (!gPaletteFade.active)
+    {
+        FieldEffectActiveListRemove(FLDEFF_USE_FLY);
+        DestroyTask(FindTaskIdByFunc(Task_UseFly));
+    }
+}
+
+u8 sub_8087168(void)
+{
+    u8 spriteId;
+    struct Sprite * sprite;
+    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[26], 0xff, 0xb4, 0x1);
+    sprite = &gSprites[spriteId];
+    sprite->oam.paletteNum = 0;
+    sprite->oam.priority = 1;
+    sprite->callback = sub_8087220;
+    return spriteId;
+}
+
+u8 sub_80871AC(u8 spriteId)
+{
+    return gSprites[spriteId].data[7];
+}
+
+void sub_80871C8(u8 spriteId)
+{
+    struct Sprite * sprite;
+    sprite = &gSprites[spriteId];
+    sprite->callback = sub_80872F0;
+    sprite->pos1.x = 0x78;
+    sprite->pos1.y = 0x00;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
+    sprite->data[6] = 0x40;
+}
+
+void sub_8087204(u8 a0, u8 a1)
+{
+    gSprites[a0].data[6] = a1;
+}
+
+const union AffineAnimCmd gUnknown_83CC19C[] = {
+    AFFINEANIMCMD_FRAME( 8,  8, 226,  0),
+    AFFINEANIMCMD_FRAME(28, 28,   0, 30),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gUnknown_83CC1B4[] = {
+    AFFINEANIMCMD_FRAME(256, 256, 64,  0),
+    AFFINEANIMCMD_FRAME(-10, -10,  0, 22),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gUnknown_83CC1CC[] = {
+    gUnknown_83CC19C,
+    gUnknown_83CC1B4
+};
+
+void sub_8087220(struct Sprite * sprite)
+{
+    if (sprite->data[7] == 0)
+    {
+        if (sprite->data[0] == 0)
+        {
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+            sprite->affineAnims = gUnknown_83CC1CC;
+            InitSpriteAffineAnim(sprite);
+            StartSpriteAffineAnim(sprite, 0);
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                sprite->pos1.x = 0x80;
+            else
+                sprite->pos1.x = 0x76;
+            sprite->pos1.y = -0x30;
+            sprite->data[0]++;
+            sprite->data[1] = 0x40;
+            sprite->data[2] = 0x100;
+        }
+        sprite->data[1] += (sprite->data[2] >> 8);
+        sprite->pos2.x = Cos(sprite->data[1], 0x78);
+        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        if (sprite->data[2] < 0x800)
+        {
+            sprite->data[2] += 0x60;
+        }
+        if (sprite->data[1] > 0x81)
+        {
+            sprite->data[7]++;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+            FreeOamMatrix(sprite->oam.matrixNum);
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
+        }
+    }
+}
+
+void sub_80872F0(struct Sprite * sprite)
+{
+    sprite->pos2.x = Cos(sprite->data[2], 0x8c);
+    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->data[2] = (sprite->data[2] + 4) & 0xff;
+    if (sprite->data[6] != MAX_SPRITES)
+    {
+        struct Sprite * sprite1 = &gSprites[sprite->data[6]];
+        sprite1->coordOffsetEnabled = 0;
+        sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
+        sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
+        sprite1->pos2.x = 0;
+        sprite1->pos2.y = 0;
+    }
+    if (sprite->data[2] >= 0x80)
+    {
+        sprite->data[7] = 1;
+    }
+}
+
+void sub_8087364(struct Sprite * sprite)
+{
+    if (sprite->data[7] == 0)
+    {
+        if (sprite->data[0] == 0)
+        {
+            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+            sprite->affineAnims = gUnknown_83CC1CC;
+            InitSpriteAffineAnim(sprite);
+            StartSpriteAffineAnim(sprite, 1);
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                sprite->pos1.x = 0x70;
+            else
+                sprite->pos1.x = 0x64;
+            sprite->pos1.y = -0x20;
+            sprite->data[0]++;
+            sprite->data[1] = 0xf0;
+            sprite->data[2] = 0x800;
+            sprite->data[4] = 0x80;
+        }
+        sprite->data[1] += sprite->data[2] >> 8;
+        sprite->data[3] += sprite->data[2] >> 8;
+        sprite->data[1] &= 0xff;
+        sprite->pos2.x = Cos(sprite->data[1], 0x20);
+        sprite->pos2.y = Sin(sprite->data[1], 0x78);
+        if (sprite->data[2] > 0x100)
+        {
+            sprite->data[2] -= sprite->data[4];
+        }
+        if (sprite->data[4] < 0x100)
+        {
+            sprite->data[4] += 24;
+        }
+        if (sprite->data[2] < 0x100)
+        {
+            sprite->data[2] = 0x100;
+        }
+        if (sprite->data[3] >= 60)
+        {
+            sprite->data[7]++;
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+            FreeOamMatrix(sprite->oam.matrixNum);
+            sprite->invisible = TRUE;
+        }
+    }
+}
+
+void sub_8087458(u8 spriteId)
+{
+    sub_80871C8(spriteId);
+    gSprites[spriteId].callback = sub_8087364;
+}
+
+void Task_FldEffFlyIn(u8 taskId);
+void FlyInEffect_1(struct Task * task);
+void FlyInEffect_2(struct Task * task);
+void FlyInEffect_3(struct Task * task);
+void FlyInEffect_4(struct Task * task);
+void FlyInEffect_5(struct Task * task);
+void FlyInEffect_6(struct Task * task);
+void FlyInEffect_7(struct Task * task);
+void sub_80878C0(struct Sprite * sprite);
+
+void (*const sFlyInEffectFuncs[])(struct Task * task) = {
+    FlyInEffect_1,
+    FlyInEffect_2,
+    FlyInEffect_3,
+    FlyInEffect_4,
+    FlyInEffect_5,
+    FlyInEffect_6,
+    FlyInEffect_7
+};
+
+u32 FldEff_FlyIn(void)
+{
+    CreateTask(Task_FldEffFlyIn, 0xfe);
+    return 0;
+}
+
+void Task_FldEffFlyIn(u8 taskId)
+{
+    sFlyInEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void FlyInEffect_1(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        task->data[0]++;
+        task->data[2] = 33;
+        task->data[15] = gPlayerAvatar.flags;
+        gPlayerAvatar.preventStep = TRUE;
+        SetPlayerAvatarStateMask(0x01);
+        if (task->data[15] & 0x08)
+        {
+            sub_80DC44C(objectEvent->mapobj_unk_1A, 0);
+        }
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        CameraObjectReset2();
+        ObjectEventTurn(objectEvent, DIR_WEST);
+        StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
+        objectEvent->invisible = FALSE;
+        task->data[1] = sub_8087168();
+        sub_80871C8(task->data[1]);
+        sub_8087204(task->data[1], objectEvent->spriteId);
+        StartSpriteAnim(&gSprites[task->data[1]], gSaveBlock2Ptr->playerGender * 2 + 2);
+        sub_80877FC(&gSprites[task->data[1]], 1);
+        gSprites[task->data[1]].callback = sub_8087828;
+    }
+}
+
+void FlyInEffect_2(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    struct Sprite * sprite;
+    sub_80878C0(&gSprites[task->data[1]]);
+    if (task->data[2] == 0 || (--task->data[2]) == 0)
+    {
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        sprite = &gSprites[objectEvent->spriteId];
+        sub_8087204(task->data[1], 0x40);
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0]++;
+        task->data[2] = 0;
+    }
+}
+
+void FlyInEffect_3(struct Task * task)
+{
+    s16 gUnknown_83CC1F0[18] = {
+        -2,
+        -4,
+        -5,
+        -6,
+        -7,
+        -8,
+        -8,
+        -8,
+        -7,
+        -7,
+        -6,
+        -5,
+        -3,
+        -2,
+        0,
+        2,
+        4,
+        8
+    };
+    struct Sprite * sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.y = gUnknown_83CC1F0[task->data[2]];
+    if ((++task->data[2]) >= 18)
+    {
+        task->data[0]++;
+    }
+}
+
+void FlyInEffect_4(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    struct Sprite * sprite;
+    if (sub_80871AC(task->data[1]))
+    {
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        sprite = &gSprites[objectEvent->spriteId];
+        objectEvent->inanimate = 0;
+        sub_805F724(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        sprite->coordOffsetEnabled = 1;
+        sub_805CB70();
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        task->data[0]++;
+    }
+}
+
+void FlyInEffect_5(struct Task * task)
+{
+    if (ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
+    {
+        task->data[0]++;
+        sub_8087458(task->data[1]);
+    }
+}
+
+void FlyInEffect_6(struct Task * task)
+{
+    if (sub_80871AC(task->data[1]))
+    {
+        DestroySprite(&gSprites[task->data[1]]);
+        task->data[0]++;
+        task->data[1] = 0x10;
+    }
+}
+
+void FlyInEffect_7(struct Task * task)
+{
+    u8 state;
+    struct ObjectEvent * objectEvent;
+    if ((--task->data[1]) == 0)
+    {
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        state = 0;
+        if (task->data[15] & 0x08)
+        {
+            state = 2;
+            sub_80DC44C(objectEvent->mapobj_unk_1A, 1);
+        }
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(state));
+        ObjectEventTurn(objectEvent, DIR_SOUTH);
+        gPlayerAvatar.flags = task->data[15];
+        gPlayerAvatar.preventStep = FALSE;
+        FieldEffectActiveListRemove(FLDEFF_FLY_IN);
+        DestroyTask(FindTaskIdByFunc(Task_FldEffFlyIn));
+    }
+}
+
+const union AffineAnimCmd gUnknown_83CC214[] = {
+    AFFINEANIMCMD_FRAME(24, 24, 0, 1),
+    AFFINEANIMCMD_JUMP(0)
+};
+
+const union AffineAnimCmd gUnknown_83CC224[] = {
+    AFFINEANIMCMD_FRAME(512, 512, 0, 1),
+    AFFINEANIMCMD_FRAME(-16, -16, 0, 1),
+    AFFINEANIMCMD_JUMP(1)
+};
+
+const union AffineAnimCmd *const gUnknown_83CC23C[] = {
+    gUnknown_83CC214,
+    gUnknown_83CC224
+};
+
+void sub_80877FC(struct Sprite * sprite, u8 affineAnimId)
+{
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+    sprite->affineAnims = gUnknown_83CC23C;
+    InitSpriteAffineAnim(sprite);
+    StartSpriteAffineAnim(sprite, affineAnimId);
+}
+
+void sub_8087828(struct Sprite * sprite)
+{
+    struct Sprite * sprite2;
+    sprite->pos2.x = Cos(sprite->data[2], 0xB4);
+    sprite->pos2.y = Sin(sprite->data[2], 0x48);
+    sprite->data[2] += 2;
+    sprite->data[2] &= 0xFF;
+    if (sprite->data[6] != MAX_SPRITES)
+    {
+        sprite2 = &gSprites[sprite->data[6]];
+        sprite2->coordOffsetEnabled = FALSE;
+        sprite2->pos1.x = sprite->pos1.x + sprite->pos2.x;
+        sprite2->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
+        sprite2->pos2.x = 0;
+        sprite2->pos2.y = 0;
+    }
+    if (sprite->data[2] >= 0x80)
+    {
+        sprite->data[7] = 1;
+        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+        FreeOamMatrix(sprite->oam.matrixNum);
+        CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
+    }
+}
+
+void sub_80878C0(struct Sprite * sprite)
+{
+    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
+    {
+        if (gOamMatrices[sprite->oam.matrixNum].a == 0x100 || gOamMatrices[sprite->oam.matrixNum].d == 0x100)
+        {
+            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+            FreeOamMatrix(sprite->oam.matrixNum);
+            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
+            StartSpriteAnim(sprite, 0);
+            sprite->callback = sub_80872F0;
+        }
+    }
+}

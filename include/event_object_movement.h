@@ -131,5 +131,6 @@ extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct UCoords16 gUnknown_83A64C8[];
 extern const u16 gUnknown_8398648[];
 extern const u16 gUnknown_8398688[];
+void sub_805F724(struct ObjectEvent *, s16 x, s16 y);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

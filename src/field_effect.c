@@ -1099,7 +1099,7 @@ bool8 (*const sFallWarpEffectCBPtrs[])(struct Task * task) = {
 void FieldCB_FallWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     sub_8111CF0();
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -1403,7 +1403,7 @@ void Escalator_TransitionToWarpInEffect(void)
 void FieldCB_EscalatorWarpIn(void)
 {
     Overworld_PlaySpecialMapMusic();
-    pal_fill_for_maplights();
+    WarpFadeInScreen();
     sub_8111CF0();
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -1664,6 +1664,213 @@ bool8 dive_3_unknown(struct Task * task)
         dive_warp(&pos, gObjectEvents[gPlayerAvatar.objectEventId].mapobj_unk_1E);
         DestroyTask(FindTaskIdByFunc(Task_Dive));
         FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
+    }
+    return FALSE;
+}
+
+void Task_LavaridgeGymB1FWarp(u8 taskId);
+bool8 LavaridgeGymB1FWarpEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpEffect_5(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpEffect_6(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+void FieldCB_LavaridgeGymB1FWarpExit(void);
+void Task_LavaridgeGymB1FWarpExit(u8 taskId);
+bool8 LavaridgeGymB1FWarpExitEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpExitEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+bool8 LavaridgeGymB1FWarpExitEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite);
+
+bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite) = {
+    LavaridgeGymB1FWarpEffect_1,
+    LavaridgeGymB1FWarpEffect_2,
+    LavaridgeGymB1FWarpEffect_3,
+    LavaridgeGymB1FWarpEffect_4,
+    LavaridgeGymB1FWarpEffect_5,
+    LavaridgeGymB1FWarpEffect_6
+};
+
+bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite) = {
+    LavaridgeGymB1FWarpExitEffect_1,
+    LavaridgeGymB1FWarpExitEffect_2,
+    LavaridgeGymB1FWarpExitEffect_3,
+    LavaridgeGymB1FWarpExitEffect_4
+};
+
+void StartLavaridgeGymB1FWarp(u8 priority)
+{
+    CreateTask(Task_LavaridgeGymB1FWarp, priority);
+}
+
+void Task_LavaridgeGymB1FWarp(u8 taskId)
+{
+    while (sLavaridgeGymB1FWarpEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
+}
+
+bool8 LavaridgeGymB1FWarpEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    FreezeObjectEvents();
+    CameraObjectReset2();
+    SetCameraPanningCallback(NULL);
+    gPlayerAvatar.preventStep = TRUE;
+    objectEvent->fixedPriority = 1;
+    task->data[1] = 1;
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 LavaridgeGymB1FWarpEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    SetCameraPanning(0, task->data[1]);
+    task->data[1] = -task->data[1];
+    task->data[2]++;
+    if (task->data[2] > 7)
+    {
+        task->data[2] = 0;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    sprite->pos2.y = 0;
+    task->data[3] = 1;
+    gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objectEvent->currentCoords.y;
+    gFieldEffectArguments[2] = sprite->subpriority - 1;
+    gFieldEffectArguments[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
+    PlaySE(SE_W153);
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 LavaridgeGymB1FWarpEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    s16 centerToCornerVecY;
+    SetCameraPanning(0, task->data[1]);
+    if (task->data[1] = -task->data[1], ++task->data[2] <= 17)
+    {
+        if (!(task->data[2] & 1) && (task->data[1] <= 3))
+        {
+            task->data[1] <<= 1;
+        }
+    } else if (!(task->data[2] & 4) && (task->data[1] > 0))
+    {
+        task->data[1] >>= 1;
+    }
+    if (task->data[2] > 6)
+    {
+        centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
+        if (sprite->pos2.y > -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY))
+        {
+            sprite->pos2.y -= task->data[3];
+            if (task->data[3] <= 7)
+            {
+                task->data[3]++;
+            }
+        } else
+        {
+            task->data[4] = 1;
+        }
+    }
+    if (task->data[5] == 0 && sprite->pos2.y < -0x10)
+    {
+        task->data[5]++;
+        objectEvent->fixedPriority = 1;
+        sprite->oam.priority = 1;
+        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+    }
+    if (task->data[1] == 0 && task->data[4] != 0)
+    {
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpEffect_5(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    TryFadeOutOldMapMusic();
+    WarpFadeOutScreen();
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpEffect_6(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
+    {
+        WarpIntoMap();
+        gFieldCallback = FieldCB_LavaridgeGymB1FWarpExit;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(FindTaskIdByFunc(Task_LavaridgeGymB1FWarp));
+    }
+    return FALSE;
+}
+
+void FieldCB_LavaridgeGymB1FWarpExit(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    WarpFadeInScreen();
+    sub_8111CF0();
+    ScriptContext2_Enable();
+    gFieldCallback = NULL;
+    CreateTask(Task_LavaridgeGymB1FWarpExit, 0);
+}
+
+void Task_LavaridgeGymB1FWarpExit(u8 taskId)
+{
+    while (sLavaridgeGymB1FWarpExitEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId], &gSprites[gPlayerAvatar.spriteId]));
+}
+
+bool8 LavaridgeGymB1FWarpExitEffect_1(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    CameraObjectReset2();
+    FreezeObjectEvents();
+    gPlayerAvatar.preventStep = TRUE;
+    objectEvent->invisible = TRUE;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpExitEffect_2(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    if (IsWeatherNotFadingIn())
+    {
+        gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+        gFieldEffectArguments[1] = objectEvent->currentCoords.y;
+        gFieldEffectArguments[2] = sprite->subpriority - 1;
+        gFieldEffectArguments[3] = sprite->oam.priority;
+        task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    sprite = &gSprites[task->data[1]];
+    if (sprite->animCmdIndex > 1)
+    {
+        task->data[0]++;
+        objectEvent->invisible = FALSE;
+        CameraObjectReset1();
+        PlaySE(SE_W091);
+        ObjectEventSetHeldMovement(objectEvent, sub_8064194(DIR_EAST));
+    }
+    return FALSE;
+}
+
+bool8 LavaridgeGymB1FWarpExitEffect_4(struct Task * task, struct ObjectEvent * objectEvent, struct Sprite * sprite)
+{
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        DestroyTask(FindTaskIdByFunc(Task_LavaridgeGymB1FWarpExit));
     }
     return FALSE;
 }

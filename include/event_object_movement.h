@@ -117,6 +117,7 @@ bool32 RfuUnionObjectIsInvisible(u8 objectEventId);
 void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo);
 bool32 RfuUnionObjectIsWarping(u8 objectEventId);
 u8 sub_8063F2C(u8 direction);
+u8 sub_8064194(u8 direction);
 
 void sub_805F378(s16 x, s16 y);
 

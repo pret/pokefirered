@@ -7,22 +7,6 @@
 	.align 2
 
 	.align 2
-sLavaridgeGymB1FWarpEffectFuncs:: @ 83CC0A4 dataptr
-	.4byte LavaridgeGymB1FWarpEffect_1
-	.4byte LavaridgeGymB1FWarpEffect_2
-	.4byte LavaridgeGymB1FWarpEffect_3
-	.4byte LavaridgeGymB1FWarpEffect_4
-	.4byte LavaridgeGymB1FWarpEffect_5
-	.4byte LavaridgeGymB1FWarpEffect_6
-
-	.align 2
-sLavaridgeGymB1FWarpExitEffectFuncs:: @ 83CC0BC dataptr
-	.4byte LavaridgeGymB1FWarpExitEffect_1
-	.4byte LavaridgeGymB1FWarpExitEffect_2
-	.4byte LavaridgeGymB1FWarpExitEffect_3
-	.4byte LavaridgeGymB1FWarpExitEffect_4
-
-	.align 2
 sLavaridgeGym1FWarpEffectFuncs:: @ 83CC0CC dataptr
 	.4byte LavaridgeGym1FWarpEffect_1
 	.4byte LavaridgeGym1FWarpEffect_2
@@ -80,19 +64,19 @@ sShowMonIndoorsEffectFuncs:: @ 83CC138 dataptr
 	.4byte ShowMonEffect_Indoors_7
 
 	.align 2
-gUnknown_83CC154:: @ 83CC154 dataptr
-	.4byte sub_80869C0
-	.4byte sub_8086A20
-	.4byte sub_8086A6C
-	.4byte sub_8086AB4
-	.4byte sub_8086B30
+sUseSurfEffectFuncs:: @ 83CC154 dataptr
+	.4byte UseSurfEffect_1
+	.4byte UseSurfEffect_2
+	.4byte UseSurfEffect_3
+	.4byte UseSurfEffect_4
+	.4byte UseSurfEffect_5
 
 	.align 2
-gUnknown_83CC168:: @ 83CC168 dataptr
-	.4byte sub_8086C00
-	.4byte sub_8086C24
-	.4byte sub_8086C70
-	.4byte sub_8086CF4
+sUnk41EffectFuncs:: @ 83CC168 dataptr
+	.4byte Unk41Effect_1
+	.4byte Unk41Effect_2
+	.4byte Unk41Effect_3
+	.4byte Unk41Effect_4
 
 gUnknown_83CC178:: @ 83CC178 dataptr (incomplete)
 	.4byte sub_8086E70

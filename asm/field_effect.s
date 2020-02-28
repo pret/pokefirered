@@ -5,548 +5,6 @@
 
 	.text
 
-	thumb_func_start StartLavaridgeGymB1FWarp
-StartLavaridgeGymB1FWarp: @ 8084F2C
-	push {lr}
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, _08084F40 @ =Task_LavaridgeGymB1FWarp
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08084F40: .4byte Task_LavaridgeGymB1FWarp
-	thumb_func_end StartLavaridgeGymB1FWarp
-
-	thumb_func_start Task_LavaridgeGymB1FWarp
-Task_LavaridgeGymB1FWarp: @ 8084F44
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r6, _08084F8C @ =sLavaridgeGymB1FWarpEffectFuncs
-	ldr r2, _08084F90 @ =gTasks
-	ldr r5, _08084F94 @ =gPlayerAvatar
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_08084F58:
-	movs r0, 0x8
-	ldrsh r3, [r4, r0]
-	lsls r3, 2
-	adds r3, r6
-	ldrb r0, [r5, 0x5]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, _08084F98 @ =gObjectEvents
-	adds r1, r0
-	ldrb r0, [r5, 0x4]
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _08084F9C @ =gSprites
-	adds r2, r0
-	ldr r3, [r3]
-	adds r0, r4, 0
-	bl _call_via_r3
-	lsls r0, 24
-	cmp r0, 0
-	bne _08084F58
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08084F8C: .4byte sLavaridgeGymB1FWarpEffectFuncs
-_08084F90: .4byte gTasks
-_08084F94: .4byte gPlayerAvatar
-_08084F98: .4byte gObjectEvents
-_08084F9C: .4byte gSprites
-	thumb_func_end Task_LavaridgeGymB1FWarp
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_1
-LavaridgeGymB1FWarpEffect_1: @ 8084FA0
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl FreezeObjectEvents
-	bl CameraObjectReset2
-	movs r0, 0
-	bl SetCameraPanningCallback
-	ldr r0, _08084FD4 @ =gPlayerAvatar
-	movs r2, 0x1
-	strb r2, [r0, 0x6]
-	ldrb r0, [r5, 0x3]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r5, 0x3]
-	strh r2, [r4, 0xA]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08084FD4: .4byte gPlayerAvatar
-	thumb_func_end LavaridgeGymB1FWarpEffect_1
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_2
-LavaridgeGymB1FWarpEffect_2: @ 8084FD8
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0xA
-	ldrsh r1, [r4, r0]
-	movs r0, 0
-	bl SetCameraPanning
-	ldrh r0, [r4, 0xA]
-	negs r0, r0
-	strh r0, [r4, 0xA]
-	ldrh r0, [r4, 0xC]
-	adds r0, 0x1
-	strh r0, [r4, 0xC]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x7
-	ble _08085004
-	movs r0, 0
-	strh r0, [r4, 0xC]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_08085004:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end LavaridgeGymB1FWarpEffect_2
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_3
-LavaridgeGymB1FWarpEffect_3: @ 808500C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r0, 0
-	strh r0, [r2, 0x26]
-	movs r0, 0x1
-	strh r0, [r4, 0xE]
-	ldr r3, _08085054 @ =gFieldEffectArguments
-	movs r5, 0x10
-	ldrsh r0, [r1, r5]
-	str r0, [r3]
-	movs r5, 0x12
-	ldrsh r0, [r1, r5]
-	str r0, [r3, 0x4]
-	adds r0, r2, 0
-	adds r0, 0x43
-	ldrb r0, [r0]
-	subs r0, 0x1
-	str r0, [r3, 0x8]
-	ldrb r0, [r2, 0x5]
-	lsls r0, 28
-	lsrs r0, 30
-	str r0, [r3, 0xC]
-	movs r0, 0x32
-	bl FieldEffectStart
-	movs r0, 0xAB
-	bl PlaySE
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08085054: .4byte gFieldEffectArguments
-	thumb_func_end LavaridgeGymB1FWarpEffect_3
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_4
-LavaridgeGymB1FWarpEffect_4: @ 8085058
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	adds r6, r1, 0
-	adds r5, r2, 0
-	movs r0, 0xA
-	ldrsh r1, [r4, r0]
-	movs r0, 0
-	bl SetCameraPanning
-	ldrh r0, [r4, 0xA]
-	negs r2, r0
-	strh r2, [r4, 0xA]
-	ldrh r0, [r4, 0xC]
-	adds r1, r0, 0x1
-	strh r1, [r4, 0xC]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0x11
-	bgt _08085092
-	movs r0, 0x1
-	ands r1, r0
-	cmp r1, 0
-	bne _080850A4
-	lsls r0, r2, 16
-	asrs r0, 16
-	cmp r0, 0x3
-	bgt _080850A4
-	lsls r0, r2, 1
-	b _080850A2
-_08085092:
-	movs r0, 0x4
-	ands r1, r0
-	cmp r1, 0
-	bne _080850A4
-	lsls r0, r2, 16
-	cmp r0, 0
-	ble _080850A4
-	asrs r0, 17
-_080850A2:
-	strh r0, [r4, 0xA]
-_080850A4:
-	movs r1, 0xC
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x6
-	ble _080850F0
-	adds r0, r5, 0
-	adds r0, 0x29
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	lsls r2, r1, 17
-	negs r2, r2
-	movs r7, 0x26
-	ldrsh r3, [r5, r7]
-	movs r7, 0x22
-	ldrsh r0, [r5, r7]
-	adds r0, r1
-	ldr r1, _080850E8 @ =gSpriteCoordOffsetY
-	movs r7, 0
-	ldrsh r1, [r1, r7]
-	adds r0, r1
-	asrs r2, 16
-	adds r0, r2
-	cmn r3, r0
-	ble _080850EC
-	ldrh r0, [r5, 0x26]
-	ldrh r1, [r4, 0xE]
-	subs r0, r1
-	strh r0, [r5, 0x26]
-	lsls r0, r1, 16
-	asrs r0, 16
-	cmp r0, 0x7
-	bgt _080850F0
-	adds r0, r1, 0x1
-	strh r0, [r4, 0xE]
-	b _080850F0
-	.align 2, 0
-_080850E8: .4byte gSpriteCoordOffsetY
-_080850EC:
-	movs r0, 0x1
-	strh r0, [r4, 0x10]
-_080850F0:
-	ldrh r2, [r4, 0x12]
-	movs r1, 0x12
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _0808512E
-	movs r7, 0x26
-	ldrsh r1, [r5, r7]
-	movs r0, 0x10
-	negs r0, r0
-	cmp r1, r0
-	bge _0808512E
-	adds r0, r2, 0x1
-	strh r0, [r4, 0x12]
-	ldrb r0, [r6, 0x3]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r6, 0x3]
-	ldrb r1, [r5, 0x5]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r1
-	orrs r0, r2
-	strb r0, [r5, 0x5]
-	adds r2, r5, 0
-	adds r2, 0x42
-	ldrb r1, [r2]
-	movs r0, 0x3F
-	ands r0, r1
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-_0808512E:
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _08085144
-	movs r7, 0x10
-	ldrsh r0, [r4, r7]
-	cmp r0, 0
-	beq _08085144
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_08085144:
-	movs r0, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end LavaridgeGymB1FWarpEffect_4
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_5
-LavaridgeGymB1FWarpEffect_5: @ 808514C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl TryFadeOutOldMapMusic
-	bl WarpFadeOutScreen
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end LavaridgeGymB1FWarpEffect_5
-
-	thumb_func_start LavaridgeGymB1FWarpEffect_6
-LavaridgeGymB1FWarpEffect_6: @ 8085168
-	push {lr}
-	ldr r0, _080851A8 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _080851A0
-	bl BGMusicStopped
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080851A0
-	bl WarpIntoMap
-	ldr r1, _080851AC @ =gFieldCallback
-	ldr r0, _080851B0 @ =FieldCB_LavaridgeGymB1FWarpExit
-	str r0, [r1]
-	ldr r0, _080851B4 @ =CB2_LoadMap
-	bl SetMainCallback2
-	ldr r0, _080851B8 @ =Task_LavaridgeGymB1FWarp
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_080851A0:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080851A8: .4byte gPaletteFade
-_080851AC: .4byte gFieldCallback
-_080851B0: .4byte FieldCB_LavaridgeGymB1FWarpExit
-_080851B4: .4byte CB2_LoadMap
-_080851B8: .4byte Task_LavaridgeGymB1FWarp
-	thumb_func_end LavaridgeGymB1FWarpEffect_6
-
-	thumb_func_start FieldCB_LavaridgeGymB1FWarpExit
-FieldCB_LavaridgeGymB1FWarpExit: @ 80851BC
-	push {lr}
-	bl Overworld_PlaySpecialMapMusic
-	bl pal_fill_for_maplights
-	bl sub_8111CF0
-	bl ScriptContext2_Enable
-	ldr r0, _080851E0 @ =gFieldCallback
-	movs r1, 0
-	str r1, [r0]
-	ldr r0, _080851E4 @ =Task_LavaridgeGymB1FWarpExit
-	bl CreateTask
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080851E0: .4byte gFieldCallback
-_080851E4: .4byte Task_LavaridgeGymB1FWarpExit
-	thumb_func_end FieldCB_LavaridgeGymB1FWarpExit
-
-	thumb_func_start Task_LavaridgeGymB1FWarpExit
-Task_LavaridgeGymB1FWarpExit: @ 80851E8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r6, _08085230 @ =sLavaridgeGymB1FWarpExitEffectFuncs
-	ldr r2, _08085234 @ =gTasks
-	ldr r5, _08085238 @ =gPlayerAvatar
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_080851FC:
-	movs r0, 0x8
-	ldrsh r3, [r4, r0]
-	lsls r3, 2
-	adds r3, r6
-	ldrb r0, [r5, 0x5]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, _0808523C @ =gObjectEvents
-	adds r1, r0
-	ldrb r0, [r5, 0x4]
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _08085240 @ =gSprites
-	adds r2, r0
-	ldr r3, [r3]
-	adds r0, r4, 0
-	bl _call_via_r3
-	lsls r0, 24
-	cmp r0, 0
-	bne _080851FC
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08085230: .4byte sLavaridgeGymB1FWarpExitEffectFuncs
-_08085234: .4byte gTasks
-_08085238: .4byte gPlayerAvatar
-_0808523C: .4byte gObjectEvents
-_08085240: .4byte gSprites
-	thumb_func_end Task_LavaridgeGymB1FWarpExit
-
-	thumb_func_start LavaridgeGymB1FWarpExitEffect_1
-LavaridgeGymB1FWarpExitEffect_1: @ 8085244
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl CameraObjectReset2
-	bl FreezeObjectEvents
-	ldr r1, _08085270 @ =gPlayerAvatar
-	movs r0, 0x1
-	strb r0, [r1, 0x6]
-	ldrb r0, [r4, 0x1]
-	movs r1, 0x20
-	orrs r0, r1
-	strb r0, [r4, 0x1]
-	ldrh r0, [r5, 0x8]
-	adds r0, 0x1
-	strh r0, [r5, 0x8]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08085270: .4byte gPlayerAvatar
-	thumb_func_end LavaridgeGymB1FWarpExitEffect_1
-
-	thumb_func_start LavaridgeGymB1FWarpExitEffect_2
-LavaridgeGymB1FWarpExitEffect_2: @ 8085274
-	push {r4-r6,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r6, r2, 0
-	bl IsWeatherNotFadingIn
-	lsls r0, 24
-	cmp r0, 0
-	beq _080852B4
-	ldr r1, _080852BC @ =gFieldEffectArguments
-	movs r2, 0x10
-	ldrsh r0, [r5, r2]
-	str r0, [r1]
-	movs r2, 0x12
-	ldrsh r0, [r5, r2]
-	str r0, [r1, 0x4]
-	adds r0, r6, 0
-	adds r0, 0x43
-	ldrb r0, [r0]
-	subs r0, 0x1
-	str r0, [r1, 0x8]
-	ldrb r0, [r6, 0x5]
-	lsls r0, 28
-	lsrs r0, 30
-	str r0, [r1, 0xC]
-	movs r0, 0x31
-	bl FieldEffectStart
-	strh r0, [r4, 0xA]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_080852B4:
-	movs r0, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080852BC: .4byte gFieldEffectArguments
-	thumb_func_end LavaridgeGymB1FWarpExitEffect_2
-
-	thumb_func_start LavaridgeGymB1FWarpExitEffect_3
-LavaridgeGymB1FWarpExitEffect_3: @ 80852C0
-	push {r4,lr}
-	adds r2, r0, 0
-	adds r4, r1, 0
-	movs r0, 0xA
-	ldrsh r1, [r2, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08085310 @ =gSprites
-	adds r0, r1
-	adds r0, 0x2B
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bls _08085308
-	ldrh r0, [r2, 0x8]
-	adds r0, 0x1
-	strh r0, [r2, 0x8]
-	ldrb r1, [r4, 0x1]
-	movs r0, 0x21
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r4, 0x1]
-	bl CameraObjectReset1
-	movs r0, 0xA8
-	bl PlaySE
-	movs r0, 0x4
-	bl sub_8064194
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl ObjectEventSetHeldMovement
-_08085308:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08085310: .4byte gSprites
-	thumb_func_end LavaridgeGymB1FWarpExitEffect_3
-
-	thumb_func_start LavaridgeGymB1FWarpExitEffect_4
-LavaridgeGymB1FWarpExitEffect_4: @ 8085314
-	push {lr}
-	adds r0, r1, 0
-	bl ObjectEventClearHeldMovementIfFinished
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808533E
-	ldr r1, _08085344 @ =gPlayerAvatar
-	movs r0, 0
-	strb r0, [r1, 0x6]
-	bl ScriptContext2_Disable
-	bl UnfreezeObjectEvents
-	ldr r0, _08085348 @ =Task_LavaridgeGymB1FWarpExit
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_0808533E:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08085344: .4byte gPlayerAvatar
-_08085348: .4byte Task_LavaridgeGymB1FWarpExit
-	thumb_func_end LavaridgeGymB1FWarpExitEffect_4
-
 	thumb_func_start FldEff_LavaridgeGymWarp
 FldEff_LavaridgeGymWarp: @ 808534C
 	push {r4,lr}
@@ -1406,7 +864,7 @@ _080859C4:
 FieldCallback_EscapeRopeExit: @ 80859D4
 	push {lr}
 	bl Overworld_PlaySpecialMapMusic
-	bl pal_fill_for_maplights
+	bl WarpFadeInScreen
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl FreezeObjectEvents
@@ -1872,7 +1330,7 @@ _08085D84: .4byte Task_DoTeleportFieldEffect
 FieldCallback_TeleportIn: @ 8085D88
 	push {lr}
 	bl Overworld_PlaySpecialMapMusic
-	bl pal_fill_for_maplights
+	bl WarpFadeInScreen
 	bl sub_8111CF0
 	bl ScriptContext2_Enable
 	bl FreezeObjectEvents
@@ -3372,10 +2830,10 @@ _0808693E:
 	bx r0
 	thumb_func_end sub_8086920
 
-	thumb_func_start sub_8086944
-sub_8086944: @ 8086944
+	thumb_func_start FldEff_UseSurf
+FldEff_UseSurf: @ 8086944
 	push {r4,lr}
-	ldr r0, _08086980 @ =sub_8086990
+	ldr r0, _08086980 @ =Task_FldEffUseSurf
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
@@ -3389,7 +2847,7 @@ sub_8086944: @ 8086944
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
 	bl sav1_reset_battle_music_maybe
-	ldr r4, _0808698C @ =0x00000131
+	ldr r4, _0808698C @ =0x00000131 @MUS_NAMINORI
 	adds r0, r4, 0
 	bl sub_8056124
 	cmp r0, 0
@@ -3402,19 +2860,19 @@ _08086978:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08086980: .4byte sub_8086990
+_08086980: .4byte Task_FldEffUseSurf
 _08086984: .4byte gTasks
 _08086988: .4byte gFieldEffectArguments
-_0808698C: .4byte 0x00000131
-	thumb_func_end sub_8086944
+_0808698C: .4byte 0x00000131 @MUS_NAMINORI
+	thumb_func_end FldEff_UseSurf
 
-	thumb_func_start sub_8086990
-sub_8086990: @ 8086990
+	thumb_func_start Task_FldEffUseSurf
+Task_FldEffUseSurf: @ 8086990
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _080869B8 @ =gUnknown_83CC154
+	ldr r3, _080869B8 @ =sUseSurfEffectFuncs
 	ldr r2, _080869BC @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3429,12 +2887,12 @@ sub_8086990: @ 8086990
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080869B8: .4byte gUnknown_83CC154
+_080869B8: .4byte sUseSurfEffectFuncs
 _080869BC: .4byte gTasks
-	thumb_func_end sub_8086990
+	thumb_func_end Task_FldEffUseSurf
 
-	thumb_func_start sub_80869C0
-sub_80869C0: @ 80869C0
+	thumb_func_start UseSurfEffect_1
+UseSurfEffect_1: @ 80869C0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3476,10 +2934,10 @@ sub_80869C0: @ 80869C0
 	.align 2, 0
 _08086A18: .4byte gPlayerAvatar
 _08086A1C: .4byte gObjectEvents
-	thumb_func_end sub_80869C0
+	thumb_func_end UseSurfEffect_1
 
-	thumb_func_start sub_8086A20
-sub_8086A20: @ 8086A20
+	thumb_func_start UseSurfEffect_2
+UseSurfEffect_2: @ 8086A20
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, _08086A64 @ =gPlayerAvatar
@@ -3514,10 +2972,10 @@ _08086A5C:
 	.align 2, 0
 _08086A64: .4byte gPlayerAvatar
 _08086A68: .4byte gObjectEvents
-	thumb_func_end sub_8086A20
+	thumb_func_end UseSurfEffect_2
 
-	thumb_func_start sub_8086A6C
-sub_8086A6C: @ 8086A6C
+	thumb_func_start UseSurfEffect_3
+UseSurfEffect_3: @ 8086A6C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _08086AA8 @ =gPlayerAvatar
@@ -3551,10 +3009,10 @@ _08086AA2:
 _08086AA8: .4byte gPlayerAvatar
 _08086AAC: .4byte gObjectEvents
 _08086AB0: .4byte gFieldEffectArguments
-	thumb_func_end sub_8086A6C
+	thumb_func_end UseSurfEffect_3
 
-	thumb_func_start sub_8086AB4
-sub_8086AB4: @ 8086AB4
+	thumb_func_start UseSurfEffect_4
+UseSurfEffect_4: @ 8086AB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r0, 0x6
@@ -3609,10 +3067,10 @@ _08086B1E:
 _08086B24: .4byte gPlayerAvatar
 _08086B28: .4byte gObjectEvents
 _08086B2C: .4byte gFieldEffectArguments
-	thumb_func_end sub_8086AB4
+	thumb_func_end UseSurfEffect_4
 
-	thumb_func_start sub_8086B30
-sub_8086B30: @ 8086B30
+	thumb_func_start UseSurfEffect_5
+UseSurfEffect_5: @ 8086B30
 	push {r4,r5,lr}
 	ldr r5, _08086B9C @ =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
@@ -3647,7 +3105,7 @@ sub_8086B30: @ 8086B30
 	bl ScriptContext2_Disable
 	movs r0, 0x9
 	bl FieldEffectActiveListRemove
-	ldr r0, _08086BA4 @ =sub_8086990
+	ldr r0, _08086BA4 @ =Task_FldEffUseSurf
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3661,11 +3119,11 @@ _08086B96:
 	.align 2, 0
 _08086B9C: .4byte gPlayerAvatar
 _08086BA0: .4byte gObjectEvents
-_08086BA4: .4byte sub_8086990
-	thumb_func_end sub_8086B30
+_08086BA4: .4byte Task_FldEffUseSurf
+	thumb_func_end UseSurfEffect_5
 
-	thumb_func_start sub_8086BA8
-sub_8086BA8: @ 8086BA8
+	thumb_func_start FldEff_Unk41
+FldEff_Unk41: @ 8086BA8
 	push {lr}
 	ldr r0, _08086BC8 @ =gQuestLogState
 	ldrb r0, [r0]
@@ -3675,7 +3133,7 @@ sub_8086BA8: @ 8086BA8
 	movs r1, 0x59
 	bl sub_811278C
 _08086BBA:
-	ldr r0, _08086BCC @ =sub_8086BD0
+	ldr r0, _08086BCC @ =Task_FldEffUnk41
 	movs r1, 0xFF
 	bl CreateTask
 	movs r0, 0
@@ -3683,16 +3141,16 @@ _08086BBA:
 	bx r1
 	.align 2, 0
 _08086BC8: .4byte gQuestLogState
-_08086BCC: .4byte sub_8086BD0
-	thumb_func_end sub_8086BA8
+_08086BCC: .4byte Task_FldEffUnk41
+	thumb_func_end FldEff_Unk41
 
-	thumb_func_start sub_8086BD0
-sub_8086BD0: @ 8086BD0
+	thumb_func_start Task_FldEffUnk41
+Task_FldEffUnk41: @ 8086BD0
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08086BF8 @ =gUnknown_83CC168
+	ldr r3, _08086BF8 @ =sUnk41EffectFuncs
 	ldr r2, _08086BFC @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3707,12 +3165,12 @@ sub_8086BD0: @ 8086BD0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086BF8: .4byte gUnknown_83CC168
+_08086BF8: .4byte sUnk41EffectFuncs
 _08086BFC: .4byte gTasks
-	thumb_func_end sub_8086BD0
+	thumb_func_end Task_FldEffUnk41
 
-	thumb_func_start sub_8086C00
-sub_8086C00: @ 8086C00
+	thumb_func_start Unk41Effect_1
+Unk41Effect_1: @ 8086C00
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
@@ -3728,10 +3186,10 @@ sub_8086C00: @ 8086C00
 	bx r0
 	.align 2, 0
 _08086C20: .4byte gPlayerAvatar
-	thumb_func_end sub_8086C00
+	thumb_func_end Unk41Effect_1
 
-	thumb_func_start sub_8086C24
-sub_8086C24: @ 8086C24
+	thumb_func_start Unk41Effect_2
+Unk41Effect_2: @ 8086C24
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, _08086C68 @ =gPlayerAvatar
@@ -3766,10 +3224,10 @@ _08086C60:
 	.align 2, 0
 _08086C68: .4byte gPlayerAvatar
 _08086C6C: .4byte gObjectEvents
-	thumb_func_end sub_8086C24
+	thumb_func_end Unk41Effect_2
 
-	thumb_func_start sub_8086C70
-sub_8086C70: @ 8086C70
+	thumb_func_start Unk41Effect_3
+Unk41Effect_3: @ 8086C70
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r5, _08086C9C @ =gPlayerAvatar
@@ -3833,10 +3291,10 @@ _08086CEE:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8086C70
+	thumb_func_end Unk41Effect_3
 
-	thumb_func_start sub_8086CF4
-sub_8086CF4: @ 8086CF4
+	thumb_func_start Unk41Effect_4
+Unk41Effect_4: @ 8086CF4
 	push {r4,lr}
 	ldr r4, _08086D2C @ =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
@@ -3853,7 +3311,7 @@ sub_8086CF4: @ 8086CF4
 	strb r0, [r4, 0x6]
 	movs r0, 0x41
 	bl FieldEffectActiveListRemove
-	ldr r0, _08086D34 @ =sub_8086BD0
+	ldr r0, _08086D34 @ =Task_FldEffUnk41
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3865,8 +3323,8 @@ _08086D26:
 	.align 2, 0
 _08086D2C: .4byte gPlayerAvatar
 _08086D30: .4byte gObjectEvents
-_08086D34: .4byte sub_8086BD0
-	thumb_func_end sub_8086CF4
+_08086D34: .4byte Task_FldEffUnk41
+	thumb_func_end Unk41Effect_4
 
 	thumb_func_start sub_8086D38
 sub_8086D38: @ 8086D38

@@ -102,15 +102,15 @@ gFldEffScript_FieldMoveShowMon:: @ 81D97F0
 	end 
 
 gFldEffScript_Ash:: @ 81D97F6
-	loadfadedpal_callnative gUnknown_83A5348, oei_ash
+	loadfadedpal_callnative gUnknown_83A5348, FldEff_Ash
 	end 
 
 gFldEffScript_SurfBlob:: @ 81D9800
-	callnative sub_80DC3D0
+	callnative FldEff_SurfBlob
 	end 
 
 gFldEffScript_UseSurf:: @ 81D9806
-	callnative sub_8086944
+	callnative FldEff_UseSurf
 	end 
 
 gFldEffScript_Dust:: @ 81D980C
@@ -326,7 +326,7 @@ gFldEffScript_SmileyFaceIcon:: @ 81D998C
 	end 
 
 gFldEffScript_Unk41:: @ 81D9992
-	callnative sub_8086BA8
+	callnative FldEff_Unk41
 	end 
 
 gFldEffScript_DoubleExclMarkIcon:: @ 81D9998

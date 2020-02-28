@@ -162,7 +162,7 @@ static void sub_815077C(void)
 
 static void sub_8150794(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(0x41))
+    if (!FieldEffectActiveListContains(FLDEFF_UNK_41))
     {
         UnfreezeObjectEvents();
         ScriptContext2_Disable();

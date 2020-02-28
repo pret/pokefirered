@@ -16,7 +16,7 @@ void WarpFadeOutScreen(void);
 void FieldCallback_ReturnToEventScript2(void);
 void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);
-void pal_fill_for_maplights(void);
+void WarpFadeInScreen(void);
 
 void sub_807DCE4(void);
 

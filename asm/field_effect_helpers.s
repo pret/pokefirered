@@ -2720,8 +2720,8 @@ StartAshFieldEffect: @ 80DC23C
 _080DC26C: .4byte gFieldEffectArguments
 	thumb_func_end StartAshFieldEffect
 
-	thumb_func_start oei_ash
-oei_ash: @ 80DC270
+	thumb_func_start FldEff_Ash
+FldEff_Ash: @ 80DC270
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080DC2F0 @ =gFieldEffectArguments
@@ -2789,7 +2789,7 @@ _080DC2E6:
 _080DC2F0: .4byte gFieldEffectArguments
 _080DC2F4: .4byte gFieldEffectObjectTemplatePointers
 _080DC2F8: .4byte gSprites
-	thumb_func_end oei_ash
+	thumb_func_end FldEff_Ash
 
 	thumb_func_start sub_80DC2FC
 sub_80DC2FC: @ 80DC2FC
@@ -2906,8 +2906,8 @@ _080DC3C8:
 	bx r0
 	thumb_func_end sub_80DC3A8
 
-	thumb_func_start sub_80DC3D0
-sub_80DC3D0: @ 80DC3D0
+	thumb_func_start FldEff_SurfBlob
+FldEff_SurfBlob: @ 80DC3D0
 	push {r4,r5,lr}
 	ldr r4, _080DC43C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
@@ -2964,7 +2964,7 @@ _080DC43C: .4byte gFieldEffectArguments
 _080DC440: .4byte gFieldEffectObjectTemplatePointers
 _080DC444: .4byte gSprites
 _080DC448: .4byte 0x0000ffff
-	thumb_func_end sub_80DC3D0
+	thumb_func_end FldEff_SurfBlob
 
 	thumb_func_start sub_80DC44C
 sub_80DC44C: @ 80DC44C

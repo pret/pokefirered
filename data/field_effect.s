@@ -7,25 +7,6 @@
 	.align 2
 
 	.align 2
-sEscalatorWarpFieldEffectFuncs:: @ 83CC050 dataptr
-	.4byte EscalatorWarpEffect_1
-	.4byte EscalatorWarpEffect_2
-	.4byte EscalatorWarpEffect_3
-	.4byte EscalatorWarpEffect_4
-	.4byte EscalatorWarpEffect_5
-	.4byte EscalatorWarpEffect_6
-
-	.align 2
-gUnknown_83CC068:: @ 83CC068 dataptr
-	.4byte sub_8084A5C
-	.4byte sub_8084AD8
-	.4byte sub_8084B18
-	.4byte sub_8084B78
-	.4byte sub_8084BB8
-	.4byte sub_8084C18
-	.4byte sub_8084C3C
-
-	.align 2
 sUseWaterfallFieldEffectFuncs:: @ 83CC084 dataptr
 	.4byte waterfall_0_setup
 	.4byte waterfall_1_do_anim_probably

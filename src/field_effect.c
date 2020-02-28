@@ -16,8 +16,11 @@
 #include "party_menu.h"
 #include "quest_log.h"
 #include "script.h"
+#include "special_field_anim.h"
 #include "task.h"
 #include "trainer_pokemon_sprites.h"
+#include "trig.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
@@ -402,7 +405,7 @@ u32 FieldEffectScript_ReadWord(const u8 **script)
 
 void FieldEffectScript_LoadTiles(const u8 **script)
 {
-    const struct SpriteSheet * spriteSheet = (const struct SpriteSheet *)FieldEffectScript_ReadWord(script);
+    const struct SpriteSheet * spriteSheet = (const struct SpriteSheet * )FieldEffectScript_ReadWord(script);
     if (GetSpriteTileStartByTag(spriteSheet->tag) == 0xFFFF)
         LoadSpriteSheet(spriteSheet);
     *script += sizeof(u32);
@@ -432,7 +435,7 @@ void sub_8083598(u8 paletteIdx)
 
 void FieldEffectScript_LoadFadedPal(const u8 **script)
 {
-    const struct SpritePalette * spritePalette = (const struct SpritePalette *)FieldEffectScript_ReadWord(script);
+    const struct SpritePalette * spritePalette = (const struct SpritePalette * )FieldEffectScript_ReadWord(script);
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx == 0xFF)
@@ -443,7 +446,7 @@ void FieldEffectScript_LoadFadedPal(const u8 **script)
 
 void FieldEffectScript_LoadPal(const u8 **script)
 {
-    const struct SpritePalette * spritePalette = (const struct SpritePalette *)FieldEffectScript_ReadWord(script);
+    const struct SpritePalette * spritePalette = (const struct SpritePalette * )FieldEffectScript_ReadWord(script);
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx != 0xFF)
@@ -588,7 +591,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subpriority)
 {
-    const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
+    const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, d, g);
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, d, g, 1, x, y, 0, spritePalette->tag);
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
@@ -597,7 +600,7 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
         return spriteId;
 }
 
-void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
+void FreeResourcesAndDestroySprite(struct Sprite * sprite, u8 spriteId)
 {
     ResetPreservedPalettesInWeather();
     if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
@@ -671,21 +674,21 @@ void PokeballGlowEffect_7(struct Sprite * sprite);
 u8 PokecenterHealEffectHelper(s32 x, s32 y);
 void HallOfFameRecordEffectHelper(s32 x, s32 y);
 
-void (*const sPokecenterHealTaskCBTable[])(struct Task *) = {
+void (*const sPokecenterHealTaskCBTable[])(struct Task * ) = {
     PokecenterHealEffect_0,
     PokecenterHealEffect_1,
     PokecenterHealEffect_2,
     PokecenterHealEffect_3
 };
 
-void (*const sHallOfFameRecordTaskCBTable[])(struct Task *) = {
+void (*const sHallOfFameRecordTaskCBTable[])(struct Task * ) = {
     HallOfFameRecordEffect_0,
     HallOfFameRecordEffect_1,
     HallOfFameRecordEffect_2,
     HallOfFameRecordEffect_3
 };
 
-void (*const sPokeballGlowSpriteCBTable[])(struct Sprite *) = {
+void (*const sPokeballGlowSpriteCBTable[])(struct Sprite * ) = {
     PokeballGlowEffect_0,
     PokeballGlowEffect_1,
     PokeballGlowEffect_2,
@@ -699,7 +702,7 @@ void (*const sPokeballGlowSpriteCBTable[])(struct Sprite *) = {
 bool8 FldEff_PokecenterHeal(void)
 {
     u8 nPokemon;
-    struct Task *task;
+    struct Task * task;
 
     nPokemon = CalculatePlayerPartyCount();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
@@ -717,14 +720,14 @@ void Task_PokecenterHeal(u8 taskId)
     sPokecenterHealTaskCBTable[task->data[0]](task);
 }
 
-void PokecenterHealEffect_0(struct Task *task)
+void PokecenterHealEffect_0(struct Task * task)
 {
     task->data[0]++;
     task->data[6] = CreatePokeballGlowSprite(task->data[1], task->data[2], task->data[3], TRUE);
     task->data[7] = PokecenterHealEffectHelper(task->data[4], task->data[5]);
 }
 
-void PokecenterHealEffect_1(struct Task *task)
+void PokecenterHealEffect_1(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 1)
     {
@@ -733,7 +736,7 @@ void PokecenterHealEffect_1(struct Task *task)
     }
 }
 
-void PokecenterHealEffect_2(struct Task *task)
+void PokecenterHealEffect_2(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 4)
     {
@@ -741,7 +744,7 @@ void PokecenterHealEffect_2(struct Task *task)
     }
 }
 
-void PokecenterHealEffect_3(struct Task *task)
+void PokecenterHealEffect_3(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 6)
     {
@@ -755,7 +758,7 @@ void PokecenterHealEffect_3(struct Task *task)
 bool8 FldEff_HallOfFameRecord(void)
 {
     u8 nPokemon;
-    struct Task *task;
+    struct Task * task;
 
     nPokemon = CalculatePlayerPartyCount();
     task = &gTasks[CreateTask(Task_HallOfFameRecord, 0xff)];
@@ -767,19 +770,19 @@ bool8 FldEff_HallOfFameRecord(void)
 
 void Task_HallOfFameRecord(u8 taskId)
 {
-    struct Task *task;
+    struct Task * task;
     task = &gTasks[taskId];
     sHallOfFameRecordTaskCBTable[task->data[0]](task);
 }
 
-void HallOfFameRecordEffect_0(struct Task *task)
+void HallOfFameRecordEffect_0(struct Task * task)
 {
     u8 taskId;
     task->data[0]++;
     task->data[6] = CreatePokeballGlowSprite(task->data[1], task->data[2], task->data[3], FALSE);
 }
 
-void HallOfFameRecordEffect_1(struct Task *task)
+void HallOfFameRecordEffect_1(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 1)
     {
@@ -789,7 +792,7 @@ void HallOfFameRecordEffect_1(struct Task *task)
     }
 }
 
-void HallOfFameRecordEffect_2(struct Task *task)
+void HallOfFameRecordEffect_2(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 4)
     {
@@ -797,7 +800,7 @@ void HallOfFameRecordEffect_2(struct Task *task)
     }
 }
 
-void HallOfFameRecordEffect_3(struct Task *task)
+void HallOfFameRecordEffect_3(struct Task * task)
 {
     if (gSprites[task->data[6]].data[0] > 6)
     {
@@ -810,7 +813,7 @@ void HallOfFameRecordEffect_3(struct Task *task)
 u8 CreatePokeballGlowSprite(s16 duration, s16 x, s16 y, bool16 fanfare)
 {
     u8 spriteId;
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     spriteId = CreateInvisibleSprite(SpriteCB_PokeballGlowEffect);
     sprite = &gSprites[spriteId];
     sprite->pos2.x = x;
@@ -840,7 +843,7 @@ const u8 gUnknown_83CC028[] = {16, 12,  8,  0};
 const u8 gUnknown_83CC02C[] = {16, 12,  8,  0};
 const u8 gUnknown_83CC030[] = { 0,  0,  0,  0};
 
-void PokeballGlowEffect_0(struct Sprite *sprite)
+void PokeballGlowEffect_0(struct Sprite * sprite)
 {
     u8 endSpriteId;
     if (sprite->data[1] == 0 || (--sprite->data[1]) == 0)
@@ -860,7 +863,7 @@ void PokeballGlowEffect_0(struct Sprite *sprite)
     }
 }
 
-void PokeballGlowEffect_1(struct Sprite *sprite)
+void PokeballGlowEffect_1(struct Sprite * sprite)
 {
     if ((--sprite->data[1]) == 0)
     {
@@ -875,7 +878,7 @@ void PokeballGlowEffect_1(struct Sprite *sprite)
     }
 }
 
-void PokeballGlowEffect_2(struct Sprite *sprite)
+void PokeballGlowEffect_2(struct Sprite * sprite)
 {
     u8 phase;
     if ((--sprite->data[1]) == 0)
@@ -905,7 +908,7 @@ void PokeballGlowEffect_2(struct Sprite *sprite)
     }
 }
 
-void PokeballGlowEffect_3(struct Sprite *sprite)
+void PokeballGlowEffect_3(struct Sprite * sprite)
 {
     u8 phase;
     if ((--sprite->data[1]) == 0)
@@ -927,7 +930,7 @@ void PokeballGlowEffect_3(struct Sprite *sprite)
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(0x1007) << 4) + 0x103, gUnknown_83CC028[phase], gUnknown_83CC02C[phase], gUnknown_83CC030[phase]);
 }
 
-void PokeballGlowEffect_4(struct Sprite *sprite)
+void PokeballGlowEffect_4(struct Sprite * sprite)
 {
     if ((--sprite->data[1]) == 0)
     {
@@ -935,12 +938,12 @@ void PokeballGlowEffect_4(struct Sprite *sprite)
     }
 }
 
-void PokeballGlowEffect_5(struct Sprite *sprite)
+void PokeballGlowEffect_5(struct Sprite * sprite)
 {
     sprite->data[0]++;
 }
 
-void PokeballGlowEffect_6(struct Sprite *sprite)
+void PokeballGlowEffect_6(struct Sprite * sprite)
 {
     if (sprite->data[5] == 0 || IsFanfareTaskInactive())
     {
@@ -948,7 +951,7 @@ void PokeballGlowEffect_6(struct Sprite *sprite)
     }
 }
 
-void PokeballGlowEffect_7(struct Sprite *sprite)
+void PokeballGlowEffect_7(struct Sprite * sprite)
 {
 }
 
@@ -1053,7 +1056,7 @@ void FieldCallback_FlyArrive(void)
 
 void Task_FlyIn(u8 taskId)
 {
-    struct Task *task;
+    struct Task * task;
     task = &gTasks[taskId];
     if (task->data[0] == 0)
     {
@@ -1109,10 +1112,10 @@ void Task_FallWarpFieldEffect(u8 taskId)
         ;
 }
 
-bool8 FallWarpEffect_1(struct Task *task)
+bool8 FallWarpEffect_1(struct Task * task)
 {
-    struct ObjectEvent *playerObject;
-    struct Sprite *playerSprite;
+    struct ObjectEvent * playerObject;
+    struct Sprite * playerSprite;
     playerObject = &gObjectEvents[gPlayerAvatar.objectEventId];
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
@@ -1127,7 +1130,7 @@ bool8 FallWarpEffect_1(struct Task *task)
     return TRUE;
 }
 
-bool8 FallWarpEffect_2(struct Task *task)
+bool8 FallWarpEffect_2(struct Task * task)
 {
     if (IsWeatherNotFadingIn())
     {
@@ -1136,9 +1139,9 @@ bool8 FallWarpEffect_2(struct Task *task)
     return FALSE;
 }
 
-bool8 FallWarpEffect_3(struct Task *task)
+bool8 FallWarpEffect_3(struct Task * task)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     s16 centerToCornerVecY;
     sprite = &gSprites[gPlayerAvatar.spriteId];
     centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
@@ -1151,10 +1154,10 @@ bool8 FallWarpEffect_3(struct Task *task)
     return FALSE;
 }
 
-bool8 FallWarpEffect_4(struct Task *task)
+bool8 FallWarpEffect_4(struct Task * task)
 {
-    struct ObjectEvent *objectEvent;
-    struct Sprite *sprite;
+    struct ObjectEvent * objectEvent;
+    struct Sprite * sprite;
 
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     sprite = &gSprites[gPlayerAvatar.spriteId];
@@ -1185,7 +1188,7 @@ bool8 FallWarpEffect_4(struct Task *task)
     return FALSE;
 }
 
-bool8 FallWarpEffect_5(struct Task *task)
+bool8 FallWarpEffect_5(struct Task * task)
 {
     task->data[0]++;
     task->data[1] = 4;
@@ -1194,7 +1197,7 @@ bool8 FallWarpEffect_5(struct Task *task)
     return TRUE;
 }
 
-bool8 FallWarpEffect_6(struct Task *task)
+bool8 FallWarpEffect_6(struct Task * task)
 {
     SetCameraPanning(0, task->data[1]);
     task->data[1] = -task->data[1];
@@ -1210,7 +1213,7 @@ bool8 FallWarpEffect_6(struct Task *task)
     return FALSE;
 }
 
-bool8 FallWarpEffect_7(struct Task *task)
+bool8 FallWarpEffect_7(struct Task * task)
 {
     s16 x, y;
     gPlayerAvatar.preventStep = FALSE;
@@ -1227,5 +1230,301 @@ bool8 FallWarpEffect_7(struct Task *task)
         HelpSystem_SetSomeVariable2(22);
     }
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
+    return FALSE;
+}
+
+void Task_EscalatorWarpFieldEffect(u8 taskId);
+bool8 EscalatorWarpEffect_1(struct Task * task);
+bool8 EscalatorWarpEffect_2(struct Task * task);
+bool8 EscalatorWarpEffect_3(struct Task * task);
+bool8 EscalatorWarpEffect_4(struct Task * task);
+bool8 EscalatorWarpEffect_5(struct Task * task);
+bool8 EscalatorWarpEffect_6(struct Task * task);
+void Escalator_AnimatePlayerGoingDown(struct Task * task);
+void Escalator_AnimatePlayerGoingUp(struct Task * task);
+void Escalator_BeginFadeOutToNewMap(void);
+void Escalator_TransitionToWarpInEffect(void);
+void FieldCB_EscalatorWarpIn(void);
+void Task_EscalatorWarpInFieldEffect(u8 taskId);
+bool8 EscalatorWarpInEffect_1(struct Task * task);
+bool8 EscalatorWarpInEffect_2(struct Task * task);
+bool8 EscalatorWarpInEffect_3(struct Task * task);
+bool8 EscalatorWarpInEffect_4(struct Task * task);
+bool8 EscalatorWarpInEffect_5(struct Task * task);
+bool8 EscalatorWarpInEffect_6(struct Task * task);
+bool8 EscalatorWarpInEffect_7(struct Task * task);
+
+bool8 (*const sEscalatorWarpFieldEffectFuncs[])(struct Task * task) = {
+    EscalatorWarpEffect_1,
+    EscalatorWarpEffect_2,
+    EscalatorWarpEffect_3,
+    EscalatorWarpEffect_4,
+    EscalatorWarpEffect_5,
+    EscalatorWarpEffect_6
+};
+
+bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task * task) = {
+    EscalatorWarpInEffect_1,
+    EscalatorWarpInEffect_2,
+    EscalatorWarpInEffect_3,
+    EscalatorWarpInEffect_4,
+    EscalatorWarpInEffect_5,
+    EscalatorWarpInEffect_6,
+    EscalatorWarpInEffect_7
+};
+
+void StartEscalatorWarp(u8 metatileBehavior, u8 priority)
+{
+    u8 taskId = CreateTask(Task_EscalatorWarpFieldEffect, priority);
+    gTasks[taskId].data[1] = 0;
+    if (metatileBehavior == MB_UP_ESCALATOR)
+        gTasks[taskId].data[1] = 1;
+}
+
+void Task_EscalatorWarpFieldEffect(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    while (sEscalatorWarpFieldEffectFuncs[task->data[0]](task))
+        ;
+}
+
+bool8 EscalatorWarpEffect_1(struct Task * task)
+{
+    FreezeObjectEvents();
+    CameraObjectReset2();
+    StartEscalator(task->data[1]);
+    sub_81128BC(1);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 EscalatorWarpEffect_2(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+        task->data[0]++;
+        task->data[2] = 0;
+        task->data[3] = 0;
+        if ((u8)task->data[1] == 0)
+        {
+            task->data[0] = 4;
+        }
+        PlaySE(SE_ESUKA);
+    }
+    return FALSE;
+}
+
+bool8 EscalatorWarpEffect_3(struct Task * task)
+{
+    Escalator_AnimatePlayerGoingDown(task);
+    if (task->data[2] > 3)
+    {
+        Escalator_BeginFadeOutToNewMap();
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 EscalatorWarpEffect_4(struct Task * task)
+{
+    Escalator_AnimatePlayerGoingDown(task);
+    Escalator_TransitionToWarpInEffect();
+    return FALSE;
+}
+
+bool8 EscalatorWarpEffect_5(struct Task * task)
+{
+    Escalator_AnimatePlayerGoingUp(task);
+    if (task->data[2] > 3)
+    {
+        Escalator_BeginFadeOutToNewMap();
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 EscalatorWarpEffect_6(struct Task * task)
+{
+    Escalator_AnimatePlayerGoingUp(task);
+    Escalator_TransitionToWarpInEffect();
+    return FALSE;
+}
+
+
+void Escalator_AnimatePlayerGoingDown(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x84, task->data[2]);
+    sprite->pos2.y = Sin(0x94, task->data[2]);
+    task->data[3]++;
+    if (task->data[3] & 1)
+    {
+        task->data[2]++;
+    }
+}
+
+void Escalator_AnimatePlayerGoingUp(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x7c, task->data[2]);
+    sprite->pos2.y = Sin(0x76, task->data[2]);
+    task->data[3]++;
+    if (task->data[3] & 1)
+    {
+        task->data[2]++;
+    }
+}
+
+void Escalator_BeginFadeOutToNewMap(void)
+{
+    TryFadeOutOldMapMusic();
+    WarpFadeOutScreen();
+}
+
+void Escalator_TransitionToWarpInEffect(void)
+{
+    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
+    {
+        StopEscalator();
+        WarpIntoMap();
+        gFieldCallback = FieldCB_EscalatorWarpIn;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpFieldEffect));
+    }
+}
+
+void FieldCB_EscalatorWarpIn(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    pal_fill_for_maplights();
+    sub_8111CF0();
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    CreateTask(Task_EscalatorWarpInFieldEffect, 0);
+    gFieldCallback = NULL;
+}
+
+void Task_EscalatorWarpInFieldEffect(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    while (sEscalatorWarpInFieldEffectFuncs[task->data[0]](task))
+        ;
+}
+
+bool8 EscalatorWarpInEffect_1(struct Task *task)
+{
+    struct ObjectEvent *objectEvent;
+    s16 x;
+    s16 y;
+    u8 behavior;
+    CameraObjectReset2();
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(DIR_EAST));
+    PlayerGetDestCoords(&x, &y);
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
+    task->data[0]++;
+    task->data[1] = 16;
+    if (behavior == MB_DOWN_ESCALATOR)
+    {
+        behavior = 1;
+        task->data[0] = 3;
+    } else
+    {
+        behavior = 0;
+    }
+    StartEscalator(behavior);
+    return TRUE;
+}
+
+bool8 EscalatorWarpInEffect_2(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x84, task->data[1]);
+    sprite->pos2.y = Sin(0x94, task->data[1]);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 EscalatorWarpInEffect_3(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x84, task->data[1]);
+    sprite->pos2.y = Sin(0x94, task->data[1]);
+    task->data[2]++;
+    if (task->data[2] & 1)
+    {
+        task->data[1]--;
+    }
+    if (task->data[1] == 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0] = 5;
+    }
+    return FALSE;
+}
+
+
+bool8 EscalatorWarpInEffect_4(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x7c, task->data[1]);
+    sprite->pos2.y = Sin(0x76, task->data[1]);
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 EscalatorWarpInEffect_5(struct Task *task)
+{
+    struct Sprite *sprite;
+    sprite = &gSprites[gPlayerAvatar.spriteId];
+    sprite->pos2.x = Cos(0x7c, task->data[1]);
+    sprite->pos2.y = Sin(0x76, task->data[1]);
+    task->data[2]++;
+    if (task->data[2] & 1)
+    {
+        task->data[1]--;
+    }
+    if (task->data[1] == 0)
+    {
+        sprite->pos2.x = 0;
+        sprite->pos2.y = 0;
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 EscalatorWarpInEffect_6(struct Task *task)
+{
+    if (IsEscalatorMoving())
+    {
+        return FALSE;
+    }
+    StopEscalator();
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 EscalatorWarpInEffect_7(struct Task *task)
+{
+    struct ObjectEvent *objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        CameraObjectReset1();
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_EAST));
+        DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpInFieldEffect));
+        sub_81128BC(2);
+    }
     return FALSE;
 }

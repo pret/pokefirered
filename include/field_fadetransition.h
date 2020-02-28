@@ -12,7 +12,7 @@ void DoFallWarp(void);
 void sub_807E59C(void);
 void sub_807E500(void);
 void sub_807DF64(void);
-void sub_807DC18(void);
+void WarpFadeOutScreen(void);
 void FieldCallback_ReturnToEventScript2(void);
 void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);

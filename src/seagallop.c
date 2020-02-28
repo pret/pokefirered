@@ -295,7 +295,7 @@ static void Task_Seagallop_1(u8 taskId)
     if (++task->data[1] == 140)
     {
         Overworld_FadeOutMapMusic();
-        sub_807DC18();
+        WarpFadeOutScreen();
         task->func = Task_Seagallop_2;
     }
 }

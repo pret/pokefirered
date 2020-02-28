@@ -2611,8 +2611,8 @@ _08055F82:
 	bx r1
 	thumb_func_end GetMapMusicFadeoutSpeed
 
-	thumb_func_start sub_8055F88
-sub_8055F88: @ 8055F88
+	thumb_func_start TryFadeOutOldMapMusic
+TryFadeOutOldMapMusic: @ 8055F88
 	push {r4,lr}
 	bl sub_8055DA4
 	lsls r0, 16
@@ -2638,7 +2638,7 @@ _08055FB8:
 	bx r0
 	.align 2, 0
 _08055FC0: .4byte 0x00004001
-	thumb_func_end sub_8055F88
+	thumb_func_end TryFadeOutOldMapMusic
 
 	thumb_func_start BGMusicStopped
 BGMusicStopped: @ 8055FC4

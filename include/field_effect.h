@@ -17,7 +17,7 @@ void StartEscapeRopeFieldEffect(void);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void FieldCB_FallWarpExit(void);
-void StartEscalatorWarp(u8 a0, u8 a1);
+void StartEscalatorWarp(u8 metatileBehavior, u8 priority);
 void StartLavaridgeGymB1FWarp(u8 a0);
 void StartLavaridgeGym1FWarp(u8 a0);
 void sub_8083598(u8 a0);

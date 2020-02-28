@@ -156,13 +156,13 @@ static void sub_8150708(void)
 
 static void sub_815077C(void)
 {
-    FieldEffectStart(FLDEFF_UNK_41);
+    FieldEffectStart(FLDEFF_USE_VS_SEEKER);
     CreateTask(sub_8150794, 0x00);
 }
 
 static void sub_8150794(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(FLDEFF_UNK_41))
+    if (!FieldEffectActiveListContains(FLDEFF_USE_VS_SEEKER))
     {
         UnfreezeObjectEvents();
         ScriptContext2_Disable();

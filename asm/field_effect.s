@@ -5,212 +5,8 @@
 
 	.text
 
-	thumb_func_start FldEff_Unk41
-FldEff_Unk41: @ 8086BA8
-	push {lr}
-	ldr r0, _08086BC8 @ =gQuestLogState
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08086BBA
-	movs r0, 0x8
-	movs r1, 0x59
-	bl sub_811278C
-_08086BBA:
-	ldr r0, _08086BCC @ =Task_FldEffUnk41
-	movs r1, 0xFF
-	bl CreateTask
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08086BC8: .4byte gQuestLogState
-_08086BCC: .4byte Task_FldEffUnk41
-	thumb_func_end FldEff_Unk41
-
-	thumb_func_start Task_FldEffUnk41
-Task_FldEffUnk41: @ 8086BD0
-	push {lr}
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r3, _08086BF8 @ =sUnk41EffectFuncs
-	ldr r2, _08086BFC @ =gTasks
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	movs r2, 0x8
-	ldrsh r1, [r0, r2]
-	lsls r1, 2
-	adds r1, r3
-	ldr r1, [r1]
-	bl _call_via_r1
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086BF8: .4byte sUnk41EffectFuncs
-_08086BFC: .4byte gTasks
-	thumb_func_end Task_FldEffUnk41
-
-	thumb_func_start Unk41Effect_1
-Unk41Effect_1: @ 8086C00
-	push {r4,lr}
-	adds r4, r0, 0
-	bl ScriptContext2_Enable
-	bl FreezeObjectEvents
-	ldr r1, _08086C20 @ =gPlayerAvatar
-	movs r0, 0x1
-	strb r0, [r1, 0x6]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086C20: .4byte gPlayerAvatar
-	thumb_func_end Unk41Effect_1
-
-	thumb_func_start Unk41Effect_2
-Unk41Effect_2: @ 8086C24
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, _08086C68 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08086C6C @ =gObjectEvents
-	adds r4, r0, r1
-	adds r0, r4, 0
-	bl ObjectEventIsMovementOverridden
-	lsls r0, 24
-	cmp r0, 0
-	beq _08086C4E
-	adds r0, r4, 0
-	bl ObjectEventClearHeldMovementIfFinished
-	lsls r0, 24
-	cmp r0, 0
-	beq _08086C60
-_08086C4E:
-	bl sub_805CBE8
-	adds r0, r4, 0
-	movs r1, 0x45
-	bl ObjectEventSetHeldMovement
-	ldrh r0, [r5, 0x8]
-	adds r0, 0x1
-	strh r0, [r5, 0x8]
-_08086C60:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086C68: .4byte gPlayerAvatar
-_08086C6C: .4byte gObjectEvents
-	thumb_func_end Unk41Effect_2
-
-	thumb_func_start Unk41Effect_3
-Unk41Effect_3: @ 8086C70
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	ldr r5, _08086C9C @ =gPlayerAvatar
-	ldrb r1, [r5, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08086CA0 @ =gObjectEvents
-	adds r4, r0, r1
-	adds r0, r4, 0
-	bl ObjectEventClearHeldMovementIfFinished
-	lsls r0, 24
-	cmp r0, 0
-	beq _08086CEE
-	ldrb r1, [r5]
-	movs r0, 0x6
-	ands r0, r1
-	cmp r0, 0
-	beq _08086CA4
-	movs r0, 0x1
-	b _08086CAE
-	.align 2, 0
-_08086C9C: .4byte gPlayerAvatar
-_08086CA0: .4byte gObjectEvents
-_08086CA4:
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08086CC0
-	movs r0, 0x2
-_08086CAE:
-	bl GetPlayerAvatarGraphicsIdByStateId
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl ObjectEventSetGraphicsId
-	b _08086CD2
-_08086CC0:
-	movs r0, 0
-	bl GetPlayerAvatarGraphicsIdByStateId
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl ObjectEventSetGraphicsId
-_08086CD2:
-	ldrb r0, [r4, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	bl GetFaceDirectionMovementAction
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl ObjectEventForceSetSpecialAnim
-	ldrh r0, [r6, 0x8]
-	adds r0, 0x1
-	strh r0, [r6, 0x8]
-_08086CEE:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end Unk41Effect_3
-
-	thumb_func_start Unk41Effect_4
-Unk41Effect_4: @ 8086CF4
-	push {r4,lr}
-	ldr r4, _08086D2C @ =gPlayerAvatar
-	ldrb r1, [r4, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _08086D30 @ =gObjectEvents
-	adds r0, r1
-	bl ObjectEventClearHeldMovementIfFinished
-	lsls r0, 24
-	cmp r0, 0
-	beq _08086D26
-	movs r0, 0
-	strb r0, [r4, 0x6]
-	movs r0, 0x41
-	bl FieldEffectActiveListRemove
-	ldr r0, _08086D34 @ =Task_FldEffUnk41
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-_08086D26:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08086D2C: .4byte gPlayerAvatar
-_08086D30: .4byte gObjectEvents
-_08086D34: .4byte Task_FldEffUnk41
-	thumb_func_end Unk41Effect_4
-
-	thumb_func_start sub_8086D38
-sub_8086D38: @ 8086D38
+	thumb_func_start FldEff_NpcFlyOut
+FldEff_NpcFlyOut: @ 8086D38
 	push {r4,lr}
 	ldr r0, _08086D84 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x68]
@@ -251,7 +47,7 @@ _08086D84: .4byte gFieldEffectObjectTemplatePointers
 _08086D88: .4byte gSprites
 _08086D8C: .4byte sub_8086D94
 _08086D90: .4byte gFieldEffectArguments
-	thumb_func_end sub_8086D38
+	thumb_func_end FldEff_NpcFlyOut
 
 	thumb_func_start sub_8086D94
 sub_8086D94: @ 8086D94
@@ -321,7 +117,7 @@ _08086E0C: .4byte gSprites
 	thumb_func_start FldEff_UseFly
 FldEff_UseFly: @ 8086E10
 	push {lr}
-	ldr r0, _08086E34 @ =sub_8086E40
+	ldr r0, _08086E34 @ =Task_UseFly
 	movs r1, 0xFE
 	bl CreateTask
 	lsls r0, 24
@@ -338,18 +134,18 @@ FldEff_UseFly: @ 8086E10
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08086E34: .4byte sub_8086E40
+_08086E34: .4byte Task_UseFly
 _08086E38: .4byte gTasks
 _08086E3C: .4byte gFieldEffectArguments
 	thumb_func_end FldEff_UseFly
 
-	thumb_func_start sub_8086E40
-sub_8086E40: @ 8086E40
+	thumb_func_start Task_UseFly
+Task_UseFly: @ 8086E40
 	push {lr}
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08086E68 @ =gUnknown_83CC178
+	ldr r3, _08086E68 @ =sUseFlyEffectFuncs
 	ldr r2, _08086E6C @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
@@ -364,12 +160,12 @@ sub_8086E40: @ 8086E40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08086E68: .4byte gUnknown_83CC178
+_08086E68: .4byte sUseFlyEffectFuncs
 _08086E6C: .4byte gTasks
-	thumb_func_end sub_8086E40
+	thumb_func_end Task_UseFly
 
-	thumb_func_start sub_8086E70
-sub_8086E70: @ 8086E70
+	thumb_func_start UseFlyEffect_1
+UseFlyEffect_1: @ 8086E70
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldr r6, _08086EC0 @ =gPlayerAvatar
@@ -409,10 +205,10 @@ _08086EB8:
 	.align 2, 0
 _08086EC0: .4byte gPlayerAvatar
 _08086EC4: .4byte gObjectEvents
-	thumb_func_end sub_8086E70
+	thumb_func_end UseFlyEffect_1
 
-	thumb_func_start sub_8086EC8
-sub_8086EC8: @ 8086EC8
+	thumb_func_start UseFlyEffect_2
+UseFlyEffect_2: @ 8086EC8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _08086F00 @ =gPlayerAvatar
@@ -443,10 +239,10 @@ _08086EF8:
 _08086F00: .4byte gPlayerAvatar
 _08086F04: .4byte gObjectEvents
 _08086F08: .4byte gFieldEffectArguments
-	thumb_func_end sub_8086EC8
+	thumb_func_end UseFlyEffect_2
 
-	thumb_func_start sub_8086F0C
-sub_8086F0C: @ 8086F0C
+	thumb_func_start UseFlyEffect_3
+UseFlyEffect_3: @ 8086F0C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0x6
@@ -487,10 +283,10 @@ _08086F54:
 	.align 2, 0
 _08086F5C: .4byte gPlayerAvatar
 _08086F60: .4byte gObjectEvents
-	thumb_func_end sub_8086F0C
+	thumb_func_end UseFlyEffect_3
 
-	thumb_func_start sub_8086F64
-sub_8086F64: @ 8086F64
+	thumb_func_start UseFlyEffect_4
+UseFlyEffect_4: @ 8086F64
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0xA]
@@ -521,10 +317,10 @@ _08086F98:
 	.align 2, 0
 _08086FA0: .4byte gPlayerAvatar
 _08086FA4: .4byte gObjectEvents
-	thumb_func_end sub_8086F64
+	thumb_func_end UseFlyEffect_4
 
-	thumb_func_start sub_8086FA8
-sub_8086FA8: @ 8086FA8
+	thumb_func_start UseFlyEffect_5
+UseFlyEffect_5: @ 8086FA8
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _08086FF4 @ =gPlayerAvatar
@@ -564,10 +360,10 @@ _08086FEC:
 	.align 2, 0
 _08086FF4: .4byte gPlayerAvatar
 _08086FF8: .4byte gObjectEvents
-	thumb_func_end sub_8086FA8
+	thumb_func_end UseFlyEffect_5
 
-	thumb_func_start sub_8086FFC
-sub_8086FFC: @ 8086FFC
+	thumb_func_start UseFlyEffect_6
+UseFlyEffect_6: @ 8086FFC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0xC]
@@ -619,10 +415,10 @@ _0808705A:
 _08087060: .4byte gPlayerAvatar
 _08087064: .4byte gObjectEvents
 _08087068: .4byte gSprites
-	thumb_func_end sub_8086FFC
+	thumb_func_end UseFlyEffect_6
 
-	thumb_func_start sub_808706C
-sub_808706C: @ 808706C
+	thumb_func_start UseFlyEffect_7
+UseFlyEffect_7: @ 808706C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0xC]
@@ -700,10 +496,10 @@ _08087108: .4byte gObjectEvents
 _0808710C: .4byte gSprites
 _08087110: .4byte gSaveBlock2Ptr
 _08087114: .4byte sub_8087828
-	thumb_func_end sub_808706C
+	thumb_func_end UseFlyEffect_7
 
-	thumb_func_start sub_8087118
-sub_8087118: @ 8087118
+	thumb_func_start UseFlyEffect_8
+UseFlyEffect_8: @ 8087118
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0xA]
@@ -719,10 +515,10 @@ _08087132:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8087118
+	thumb_func_end UseFlyEffect_8
 
-	thumb_func_start sub_8087138
-sub_8087138: @ 8087138
+	thumb_func_start UseFlyEffect_9
+UseFlyEffect_9: @ 8087138
 	push {lr}
 	ldr r0, _08087160 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -732,7 +528,7 @@ sub_8087138: @ 8087138
 	bne _0808715A
 	movs r0, 0x1F
 	bl FieldEffectActiveListRemove
-	ldr r0, _08087164 @ =sub_8086E40
+	ldr r0, _08087164 @ =Task_UseFly
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -742,8 +538,8 @@ _0808715A:
 	bx r0
 	.align 2, 0
 _08087160: .4byte gPaletteFade
-_08087164: .4byte sub_8086E40
-	thumb_func_end sub_8087138
+_08087164: .4byte Task_UseFly
+	thumb_func_end UseFlyEffect_9
 
 	thumb_func_start sub_8087168
 sub_8087168: @ 8087168

@@ -51,5 +51,6 @@ void sub_8110840(void *oldSave);
 void sub_8112F18(u8 windowId);
 bool8 sub_8111C2C(void);
 void sub_81128BC(u8 a0);
+void sub_811278C(u8, u8);
 
 #endif //GUARD_QUEST_LOG_H

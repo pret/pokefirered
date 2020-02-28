@@ -748,7 +748,7 @@ void Task_VsSeeker_0(u8 taskId)
     else if (respval == 2)
     {
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, 0, gSpecialVar_ItemId, 0xffff);
-        FieldEffectStart(FLDEFF_UNK_41); // TODO: name this enum
+        FieldEffectStart(FLDEFF_USE_VS_SEEKER); // TODO: name this enum
         gTasks[taskId].func = Task_VsSeeker_1;
         gTasks[taskId].data[0] = 15;
     }
@@ -774,7 +774,7 @@ static void Task_VsSeeker_2(u8 taskId)
         data[2]++;
     }
 
-    if (!FieldEffectActiveListContains(FLDEFF_UNK_41))
+    if (!FieldEffectActiveListContains(FLDEFF_USE_VS_SEEKER))
     {
         data[1] = 0;
         data[2] = 0;

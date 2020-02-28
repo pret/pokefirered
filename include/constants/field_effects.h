@@ -66,7 +66,7 @@
 #define FLDEFF_HALL_OF_FAME_RECORD       62
 #define FLDEFF_USE_TELEPORT              63
 #define FLDEFF_SMILEY_FACE_ICON          64
-#define FLDEFF_UNK_41                    65 // TODO: related to vs_seeker
+#define FLDEFF_USE_VS_SEEKER                    65 // TODO: related to vs_seeker
 #define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
 #define FLDEFF_UNK_43                    67 // TODO: related to deoxys
 #define FLDEFF_UNK_44                    68 // TODO: related to ???

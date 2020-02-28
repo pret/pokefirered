@@ -2967,3 +2967,75 @@ void UseSurfEffect_5(struct Task * task)
         HelpSystem_SetSomeVariable2(22);
     }
 }
+
+void Task_FldEffUseVsSeeker(u8 taskId);
+void UseVsSeekerEffect_1(struct Task * task);
+void UseVsSeekerEffect_2(struct Task * task);
+void UseVsSeekerEffect_3(struct Task * task);
+void UseVsSeekerEffect_4(struct Task * task);
+
+void (*const sUseVsSeekerEffectFuncs[])(struct Task * task) = {
+    UseVsSeekerEffect_1,
+    UseVsSeekerEffect_2,
+    UseVsSeekerEffect_3,
+    UseVsSeekerEffect_4
+};
+
+u32 FldEff_UseVsSeeker(void)
+{
+    if (gQuestLogState == QL_STATE_1)
+        sub_811278C(8, 89);
+    CreateTask(Task_FldEffUseVsSeeker, 0xFF);
+    return 0;
+}
+
+void Task_FldEffUseVsSeeker(u8 taskId)
+{
+    sUseVsSeekerEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void UseVsSeekerEffect_1(struct Task * task)
+{
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+}
+
+void UseVsSeekerEffect_2(struct Task * task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
+    {
+        sub_805CBE8();
+        ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        task->data[0]++;
+    }
+}
+
+void UseVsSeekerEffect_3(struct Task * task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(playerObj))
+    {
+        if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE))
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(1));
+        else if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(2));
+        else
+            ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(0));
+        ObjectEventForceSetSpecialAnim(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
+        task->data[0]++;
+    }
+}
+
+void UseVsSeekerEffect_4(struct Task * task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(playerObj))
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        FieldEffectActiveListRemove(FLDEFF_USE_VS_SEEKER);
+        DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
+    }
+}

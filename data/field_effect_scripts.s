@@ -67,7 +67,7 @@ gFieldEffectScriptPointers:: @ 81D96AC
 	.4byte gFldEffScript_HallOfFameRecord
 	.4byte gFldEffScript_UseTeleport
 	.4byte gFldEffScript_SmileyFaceIcon
-	.4byte gFldEffScript_Unk41
+	.4byte gFldEffScript_UseVsSeeker
 	.4byte gFldEffScript_DoubleExclMarkIcon
 	.4byte gFldEffScript_Unk43
 	.4byte gFldEffScript_Unk44
@@ -192,7 +192,7 @@ gFldEffScript_MountainDisguise:: @ 81D98AC
 	end 
 
 gFldEffScript_NpcflyOut:: @ 81D98B2
-	callnative sub_8086D38
+	callnative FldEff_NpcFlyOut
 	end 
 
 gFldEffScript_UseFly:: @ 81D98B8
@@ -325,8 +325,8 @@ gFldEffScript_SmileyFaceIcon:: @ 81D998C
 	callnative FldEff_SmileyFaceIcon
 	end 
 
-gFldEffScript_Unk41:: @ 81D9992
-	callnative FldEff_Unk41
+gFldEffScript_UseVsSeeker:: @ 81D9992
+	callnative FldEff_UseVsSeeker
 	end 
 
 gFldEffScript_DoubleExclMarkIcon:: @ 81D9998

@@ -6,23 +6,16 @@
 	.section .rodata
 	.align 2
 
-	.align 2
-sUnk41EffectFuncs:: @ 83CC168 dataptr
-	.4byte Unk41Effect_1
-	.4byte Unk41Effect_2
-	.4byte Unk41Effect_3
-	.4byte Unk41Effect_4
-
-gUnknown_83CC178:: @ 83CC178 dataptr (incomplete)
-	.4byte sub_8086E70
-	.4byte sub_8086EC8
-	.4byte sub_8086F0C
-	.4byte sub_8086F64
-	.4byte sub_8086FA8
-	.4byte sub_8086FFC
-	.4byte sub_808706C
-	.4byte sub_8087118
-	.4byte sub_8087138
+sUseFlyEffectFuncs:: @ 83CC178 dataptr (incomplete)
+	.4byte UseFlyEffect_1
+	.4byte UseFlyEffect_2
+	.4byte UseFlyEffect_3
+	.4byte UseFlyEffect_4
+	.4byte UseFlyEffect_5
+	.4byte UseFlyEffect_6
+	.4byte UseFlyEffect_7
+	.4byte UseFlyEffect_8
+	.4byte UseFlyEffect_9
 
 gUnknown_83CC19C:: @ 83CC19C affineanimcmd
 	obj_rot_scal_anim_frame 8, 8, 226, 0

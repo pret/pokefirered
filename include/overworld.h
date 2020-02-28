@@ -82,6 +82,7 @@ void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084E2C(s8, s8, s8, s8, s8);
 void sub_8084E80(s8, s8, s8, s8, s8);
 void sub_8084EBC(s16, s16);
+void sub_80555E0(void);
 
 void player_avatar_init_params_reset(void);
 

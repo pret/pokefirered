@@ -7,19 +7,6 @@
 	.align 2
 
 	.align 2
-gEscapeRopeFieldEffectFuncs:: @ 83CC0E0 dataptr
-	.4byte EscapeRopeFieldEffect_Step0
-	.4byte EscapeRopeFieldEffect_Step1
-
-gUnknown_83CC0E8:: @ 83CC0E8 data8
-	.byte 0x01, 0x03, 0x04, 0x02, 0x01
-
-	.align 2
-sEscapeRopeExitEffectFuncs:: @ 83CC0F0 dataptr
-	.4byte EscapeRopeExitFieldEffect_Step0
-	.4byte EscapeRopeExitFieldEffect_Step1
-
-	.align 2
 sTeleportEffectFuncs:: @ 83CC0F8 dataptr
 	.4byte TeleportFieldEffectTask1
 	.4byte TeleportFieldEffectTask2

@@ -1983,3 +1983,249 @@ bool8 LavaridgeGym1FWarpEffect_5(struct Task *task, struct ObjectEvent *objectEv
     }
     return FALSE;
 }
+
+u8 FldEff_PopOutOfAsh(void)
+{
+    u8 spriteId;
+    sub_8063BC4((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[32], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
+    gSprites[spriteId].coordOffsetEnabled = 1;
+    return spriteId;
+}
+
+void SpriteCB_PopOutOfAsh(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        FieldEffectStop(sprite, FLDEFF_POP_OUT_OF_ASH);
+    }
+}
+
+void Task_DoEscapeRopeFieldEffect(u8 taskId);
+void EscapeRopeFieldEffect_Step0(struct Task * task);
+void EscapeRopeFieldEffect_Step1(struct Task * task);
+u8 sub_808576C(struct ObjectEvent * playerObj, s16 *a1p, s16 *a2p);
+bool32 sub_80857F0(struct ObjectEvent * playerObj, s16 *a1p, s16 *a2p);
+void FieldCallback_EscapeRopeExit(void);
+void Task_DoEscapeRopeExitFieldEffect(u8 taskId);
+void EscapeRopeExitFieldEffect_Step0(struct Task * task);
+void EscapeRopeExitFieldEffect_Step1(struct Task * task);
+
+void (*const gEscapeRopeFieldEffectFuncs[])(struct Task * task) = {
+    EscapeRopeFieldEffect_Step0,
+    EscapeRopeFieldEffect_Step1
+};
+
+const u8 gUnknown_83CC0E8[] = {
+    [DIR_NONE] = DIR_SOUTH,
+    [DIR_SOUTH] = DIR_WEST,
+    [DIR_WEST] = DIR_NORTH,
+    [DIR_NORTH] = DIR_EAST,
+    [DIR_EAST] = DIR_SOUTH,
+};
+
+void (*const sEscapeRopeExitEffectFuncs[])(struct Task * task) = {
+    EscapeRopeExitFieldEffect_Step0,
+    EscapeRopeExitFieldEffect_Step1
+};
+
+void StartEscapeRopeFieldEffect(void)
+{
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    CreateTask(Task_DoEscapeRopeFieldEffect, 80);
+}
+
+void Task_DoEscapeRopeFieldEffect(u8 taskId)
+{
+    gEscapeRopeFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void EscapeRopeFieldEffect_Step0(struct Task * task)
+{
+    task->data[0]++;
+    task->data[13] = 64;
+    task->data[14] = GetPlayerFacingDirection();
+    task->data[15] = 0;
+}
+
+void EscapeRopeFieldEffect_Step1(struct Task * task)
+{
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 *data = task->data;
+    sub_808576C(playerObj, &task->data[1], &task->data[2]);
+    if (data[3] < 60)
+    {
+        data[3]++;
+        if (data[3] == 20)
+        {
+            PlaySE(SE_TK_WARPIN);
+        }
+    }
+    else if (data[4] == 0 && !sub_80857F0(playerObj, &task->data[5], &task->data[6]))
+    {
+        TryFadeOutOldMapMusic();
+        WarpFadeOutScreen();
+        data[4] = 1;
+    }
+    if (data[4] == 1 && !gPaletteFade.active && BGMusicStopped() == TRUE)
+    {
+        ObjectEventSetDirection(playerObj, task->data[15]);
+        sub_80555E0();
+        WarpIntoMap();
+        gFieldCallback = FieldCallback_EscapeRopeExit;
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(FindTaskIdByFunc(Task_DoEscapeRopeFieldEffect));
+    }
+}
+
+
+u8 sub_808576C(struct ObjectEvent * playerObj, s16 *delay_p, s16 *stage_p)
+{
+    if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
+    {
+        if (*delay_p != 0 && --(*delay_p) != 0)
+            return playerObj->facingDirection;
+        ObjectEventSetHeldMovement(playerObj, GetFaceDirectionMovementAction(gUnknown_83CC0E8[playerObj->facingDirection]));
+        if (*stage_p < 12)
+            (*stage_p)++;
+        *delay_p = 12 >> (*stage_p); // 12 >> 4 = 0
+        return gUnknown_83CC0E8[playerObj->facingDirection];
+    }
+    return playerObj->facingDirection;
+}
+
+bool32 sub_80857F0(struct ObjectEvent * playerObj, s16 *state_p, s16 *y_p)
+{
+    struct Sprite * sprite = &gSprites[playerObj->spriteId];
+    switch (*state_p)
+    {
+    case 0:
+        CameraObjectReset2();
+        (*state_p)++;
+        // fallthrough
+    case 1:
+        sprite->pos2.y -= 8;
+        (*y_p) -= 8;
+        if (*y_p <= -16)
+        {
+            playerObj->fixedPriority = TRUE;
+            sprite->oam.priority = 1;
+            sprite->subpriority = 0;
+            sprite->subspriteMode = SUBSPRITES_OFF;
+            (*state_p)++;
+        }
+        break;
+    case 2:
+        sprite->pos2.y -= 8;
+        (*y_p) -= 8;
+        if (*y_p <= -88)
+        {
+            (*state_p)++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool32 sub_80858A4(struct ObjectEvent * playerObj, s16 *state_p, s16 *y_p, s16 *priority_p, s16 *subpriority_p, s16 *subspriteMode_p)
+{
+    struct Sprite * sprite = &gSprites[playerObj->spriteId];
+    switch (*state_p)
+    {
+    case 0:
+        CameraObjectReset2();
+        *y_p = -88;
+        sprite->pos2.y -= 88;
+        *priority_p = sprite->oam.priority;
+        *subpriority_p = sprite->subpriority;
+        *subspriteMode_p = sprite->subspriteMode;
+        playerObj->fixedPriority = TRUE;
+        sprite->oam.priority = 1;
+        sprite->subpriority = 0;
+        sprite->subspriteMode = SUBSPRITES_OFF;
+        (*state_p)++;
+        // fallthrough
+    case 1:
+        sprite->pos2.y += 4;
+        (*y_p) += 4;
+        if (*y_p >= -16)
+        {
+            sprite->oam.priority = *priority_p;
+            sprite->subpriority = *subpriority_p;
+            sprite->subspriteMode = *subspriteMode_p;
+            (*state_p)++;
+        }
+        break;
+    case 2:
+        sprite->pos2.y += 4;
+        (*y_p) += 4;
+        if (*y_p >= 0)
+        {
+            PlaySE(SE_TK_KASYA);
+            CameraObjectReset1();
+            (*state_p)++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void FieldCallback_EscapeRopeExit(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    WarpFadeInScreen();
+    sub_8111CF0();
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gFieldCallback = NULL;
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
+    CreateTask(Task_DoEscapeRopeExitFieldEffect, 0);
+}
+
+void Task_DoEscapeRopeExitFieldEffect(u8 taskId)
+{
+    sEscapeRopeExitEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void EscapeRopeExitFieldEffect_Step0(struct Task * task)
+{
+    if (IsWeatherNotFadingIn())
+    {
+        PlaySE(SE_TK_WARPOUT);
+        task->data[15] = GetPlayerFacingDirection();
+        task->data[0]++;
+    }
+}
+
+void EscapeRopeExitFieldEffect_Step1(struct Task * task)
+{
+    s16 *data = task->data;
+    struct ObjectEvent * playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    bool32 finished = sub_80858A4(playerObj, &data[1], &data[2], &data[3], &data[4], &data[5]);
+    playerObj->invisible = FALSE;
+    if (data[6] < 8)
+        data[6]++;
+    else if (data[7] == 0)
+    {
+        data[6]++;
+        data[8] = sub_808576C(playerObj, &data[9], &data[10]);
+        if (data[6] >= 50 && data[8] == data[15])
+            data[7] = 1;
+    }
+    if (!finished && data[8] == data[15] && ObjectEventCheckHeldMovementStatus(playerObj) == TRUE)
+    {
+        playerObj->invisible = FALSE;
+        playerObj->fixedPriority = FALSE;
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        DestroyTask(FindTaskIdByFunc(Task_DoEscapeRopeExitFieldEffect));
+    }
+}

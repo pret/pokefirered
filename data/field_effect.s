@@ -7,14 +7,6 @@
 	.align 2
 
 	.align 2
-sUseWaterfallFieldEffectFuncs:: @ 83CC084 dataptr
-	.4byte waterfall_0_setup
-	.4byte waterfall_1_do_anim_probably
-	.4byte waterfall_2_wait_anim_finish_probably
-	.4byte waterfall_3_move_player_probably
-	.4byte waterfall_4_wait_player_move_probably
-
-	.align 2
 sDiveFieldEffectFuncPtrs:: @ 83CC098 dataptr
 	.4byte dive_1_lock
 	.4byte dive_2_unknown

@@ -12,6 +12,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "help_system.h"
+#include "metatile_behavior.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "quest_log.h"
@@ -1526,5 +1527,87 @@ bool8 EscalatorWarpInEffect_7(struct Task *task)
         DestroyTask(FindTaskIdByFunc(Task_EscalatorWarpInFieldEffect));
         sub_81128BC(2);
     }
+    return FALSE;
+}
+
+void Task_UseWaterfall(u8 taskId);
+
+bool8 waterfall_0_setup(struct Task * task, struct ObjectEvent * playerObj);
+bool8 waterfall_1_do_anim_probably(struct Task * task, struct ObjectEvent * playerObj);
+bool8 waterfall_2_wait_anim_finish_probably(struct Task * task, struct ObjectEvent * playerObj);
+bool8 waterfall_3_move_player_probably(struct Task * task, struct ObjectEvent * playerObj);
+bool8 waterfall_4_wait_player_move_probably(struct Task * task, struct ObjectEvent * playerObj);
+
+bool8 (*const sUseWaterfallFieldEffectFuncs[])(struct Task * task, struct ObjectEvent * playerObj) = {
+    waterfall_0_setup,
+    waterfall_1_do_anim_probably,
+    waterfall_2_wait_anim_finish_probably,
+    waterfall_3_move_player_probably,
+    waterfall_4_wait_player_move_probably
+};
+
+u32 FldEff_UseWaterfall(void)
+{
+    u8 taskId = CreateTask(Task_UseWaterfall, 0xFF);
+    gTasks[taskId].data[1] = gFieldEffectArguments[0];
+    Task_UseWaterfall(taskId);
+    return 0;
+}
+
+void Task_UseWaterfall(u8 taskId)
+{
+    while (sUseWaterfallFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]))
+        ;
+}
+
+bool8 waterfall_0_setup(struct Task * task, struct ObjectEvent * playerObj)
+{
+    ScriptContext2_Enable();
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 waterfall_1_do_anim_probably(struct Task * task, struct ObjectEvent * playerObj)
+{
+    ScriptContext2_Enable();
+    if (!ObjectEventIsMovementOverridden(playerObj))
+    {
+        ObjectEventClearHeldMovementIfFinished(playerObj);
+        gFieldEffectArguments[0] = task->data[1];
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 waterfall_2_wait_anim_finish_probably(struct Task * task, struct ObjectEvent * playerObj)
+{
+    if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+        return FALSE;
+    task->data[0]++;
+    return TRUE;
+}
+
+bool8 waterfall_3_move_player_probably(struct Task * task, struct ObjectEvent * playerObj)
+{
+    ObjectEventSetHeldMovement(playerObj, sub_8063F2C(DIR_NORTH));
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 waterfall_4_wait_player_move_probably(struct Task * task, struct ObjectEvent * playerObj)
+{
+    if (!ObjectEventClearHeldMovementIfFinished(playerObj))
+        return FALSE;
+    if (MetatileBehavior_IsWaterfall(playerObj->mapobj_unk_1E))
+    {
+        task->data[0] = 3;
+        return TRUE;
+    }
+    ScriptContext2_Disable();
+    gPlayerAvatar.preventStep = FALSE;
+    DestroyTask(FindTaskIdByFunc(Task_UseWaterfall));
+    FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
     return FALSE;
 }

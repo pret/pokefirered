@@ -7,6 +7,7 @@
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_effect_scripts.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
@@ -24,6 +25,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/event_object_movement.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 
@@ -2863,5 +2865,105 @@ void sub_8086920(struct Sprite * sprite)
     else
     {
         sprite->pos1.x -= 20;
+    }
+}
+
+void Task_FldEffUseSurf(u8 taskId);
+void UseSurfEffect_1(struct Task * task);
+void UseSurfEffect_2(struct Task * task);
+void UseSurfEffect_3(struct Task * task);
+void UseSurfEffect_4(struct Task * task);
+void UseSurfEffect_5(struct Task * task);
+
+void (*const sUseSurfEffectFuncs[])(struct Task * ) = {
+    UseSurfEffect_1,
+    UseSurfEffect_2,
+    UseSurfEffect_3,
+    UseSurfEffect_4,
+    UseSurfEffect_5,
+};
+
+u8 FldEff_UseSurf(void)
+{
+    u8 taskId = CreateTask(Task_FldEffUseSurf, 0xff);
+    gTasks[taskId].data[15] = gFieldEffectArguments[0];
+    sav1_reset_battle_music_maybe();
+    if (sub_8056124(MUS_NAMINORI))
+        Overworld_ChangeMusicTo(MUS_NAMINORI);
+    return FALSE;
+}
+
+void Task_FldEffUseSurf(u8 taskId)
+{
+    sUseSurfEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
+}
+
+void UseSurfEffect_1(struct Task * task)
+{
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gPlayerAvatar.preventStep = TRUE;
+    SetPlayerAvatarStateMask(8);
+    PlayerGetDestCoords(&task->data[1], &task->data[2]);
+    MoveCoords(gObjectEvents[gPlayerAvatar.objectEventId].placeholder18, &task->data[1], &task->data[2]);
+    task->data[0]++;
+}
+
+void UseSurfEffect_2(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        sub_805CB70();
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        task->data[0]++;
+    }
+}
+
+void UseSurfEffect_3(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventCheckHeldMovementStatus(objectEvent))
+    {
+        gFieldEffectArguments[0] = task->data[15] | 0x80000000;
+        FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        task->data[0]++;
+    }
+}
+
+void UseSurfEffect_4(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+    {
+        objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
+        ObjectEventClearHeldMovementIfFinished(objectEvent);
+        ObjectEventSetHeldMovement(objectEvent, sub_80641C0(objectEvent->placeholder18));
+        gFieldEffectArguments[0] = task->data[1];
+        gFieldEffectArguments[1] = task->data[2];
+        gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
+        objectEvent->mapobj_unk_1A = FieldEffectStart(FLDEFF_SURF_BLOB);
+        task->data[0]++;
+    }
+}
+
+void UseSurfEffect_5(struct Task * task)
+{
+    struct ObjectEvent * objectEvent;
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        gPlayerAvatar.flags &= 0xdf;
+        ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(objectEvent->placeholder18));
+        sub_80DC44C(objectEvent->mapobj_unk_1A, 1);
+        UnfreezeObjectEvents();
+        ScriptContext2_Disable();
+        FieldEffectActiveListRemove(FLDEFF_USE_SURF);
+        DestroyTask(FindTaskIdByFunc(Task_FldEffUseSurf));
+        HelpSystem_SetSomeVariable2(22);
     }
 }

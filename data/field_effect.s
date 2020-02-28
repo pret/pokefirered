@@ -7,14 +7,6 @@
 	.align 2
 
 	.align 2
-sUseSurfEffectFuncs:: @ 83CC154 dataptr
-	.4byte UseSurfEffect_1
-	.4byte UseSurfEffect_2
-	.4byte UseSurfEffect_3
-	.4byte UseSurfEffect_4
-	.4byte UseSurfEffect_5
-
-	.align 2
 sUnk41EffectFuncs:: @ 83CC168 dataptr
 	.4byte Unk41Effect_1
 	.4byte Unk41Effect_2

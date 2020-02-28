@@ -85,6 +85,8 @@ void sub_8084EBC(s16, s16);
 void sub_80555E0(void);
 void copy_saved_warp3_bank_and_enter_x_to_warp1(void);
 u8 IsMapTypeOutdoors(u8 mapType);
+void sav1_reset_battle_music_maybe(void);
+bool32 sub_8056124(u16 song);
 
 void player_avatar_init_params_reset(void);
 

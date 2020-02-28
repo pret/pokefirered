@@ -7,22 +7,6 @@
 	.align 2
 
 	.align 2
-sTeleportEffectFuncs:: @ 83CC0F8 dataptr
-	.4byte TeleportFieldEffectTask1
-	.4byte TeleportFieldEffectTask2
-	.4byte TeleportFieldEffectTask3
-	.4byte TeleportFieldEffectTask4
-
-gUnknown_83CC108:: @ 83CC108 data8
-	.byte 0x01, 0x03, 0x04, 0x02, 0x01
-
-	.align 2
-sTeleportInEffectFuncs:: @ 83CC110 dataptr
-	.4byte TeleportInFieldEffectTask1
-	.4byte TeleportInFieldEffectTask2
-	.4byte TeleportInFieldEffectTask3
-
-	.align 2
 sShowMonOutdoorsEffectFuncs:: @ 83CC11C dataptr
 	.4byte ShowMonEffect_Outdoors_1
 	.4byte ShowMonEffect_Outdoors_2

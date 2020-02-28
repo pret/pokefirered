@@ -41,7 +41,7 @@ void sub_808E16C(s16, s16);
 void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 ObjectEventDirectionToImageAnimId(u8);
-void sub_80930E0(s16 *, s16 *, s16, s16);
+void sub_8063BC4(s16 *, s16 *, s16, s16);
 void ObjectEventClearAnim(struct ObjectEvent *);
 void ObjectEventClearAnimIfSpecialAnimActive(struct ObjectEvent *);
 void SpawnObjectEventsInView(s16, s16);

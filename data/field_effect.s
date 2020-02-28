@@ -7,14 +7,6 @@
 	.align 2
 
 	.align 2
-sLavaridgeGym1FWarpEffectFuncs:: @ 83CC0CC dataptr
-	.4byte LavaridgeGym1FWarpEffect_1
-	.4byte LavaridgeGym1FWarpEffect_2
-	.4byte LavaridgeGym1FWarpEffect_3
-	.4byte LavaridgeGym1FWarpEffect_4
-	.4byte LavaridgeGym1FWarpEffect_5
-
-	.align 2
 gEscapeRopeFieldEffectFuncs:: @ 83CC0E0 dataptr
 	.4byte EscapeRopeFieldEffect_Step0
 	.4byte EscapeRopeFieldEffect_Step1

@@ -1,16 +1,32 @@
 #include "global.h"
 #include "gflib.h"
+#include "battle.h"
+#include "battle_records.h"
+#include "cable_club.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_message_box.h"
+#include "field_weather.h"
 #include "link.h"
-#include "overworld.h"
+#include "load_save.h"
+#include "m4a.h"
+#include "mevent.h"
 #include "new_menu_helpers.h"
+#include "overworld.h"
+#include "quest_log.h"
 #include "script.h"
+#include "script_pokemon_util.h"
+#include "start_menu.h"
 #include "strings.h"
 #include "task.h"
+#include "trade.h"
 #include "trainer_card.h"
+#include "union_room.h"
 #include "constants/songs.h"
+#include "constants/cable_club.h"
+#include "constants/field_weather.h"
+
+u32 UnusedVarNeededToMatch;
 
 void sub_80809F8(u8 taskId);
 void sub_8080A4C(u8 taskId);
@@ -25,6 +41,10 @@ void sub_8080F78(u8 taskId);
 void sub_8080FB4(u8 taskId);
 void sub_8080FF0(u8 taskId);
 bool8 sub_808102C(u8 taskId);
+void sub_80811FC(u8 taskId);
+void sub_808124C(u8 taskId);
+void sub_80812A0(u8 taskId);
+void sub_80812D8(u8 taskId);
 
 static const struct WindowTemplate gUnknown_83C6AB0 = {
     .bg = 0,
@@ -43,14 +63,14 @@ const u8 *const gUnknown_83C6AB8[] = {
     gUnknown_841DFA0
 };
 
-void sub_8080748(u8 a0, u8 a1)
+void sub_8080748(u8 lower, u8 higher)
 {
     u8 taskId;
     if (FindTaskIdByFunc(sub_80809F8) == 0xFF)
     {
         taskId = CreateTask(sub_80809F8, 80);
-        gTasks[taskId].data[1] = a0;
-        gTasks[taskId].data[2] = a1;
+        gTasks[taskId].data[1] = lower;
+        gTasks[taskId].data[2] = higher;
     }
 }
 
@@ -382,8 +402,8 @@ void sub_8080E6C(u8 taskId)
         if (gSpecialVar_Result == 1)
         {
             // Dumb trick required to match
-            if (gLinkType == 0x4411)
-                gFieldLinkPlayerCount += 0;
+            if (gLinkType == LINKTYPE_0x4411)
+                UnusedVarNeededToMatch += 0;
             sub_80807E8(gTasks[taskId].data[5]);
             EnableBothScriptContexts();
             DestroyTask(taskId);
@@ -394,4 +414,551 @@ void sub_8080E6C(u8 taskId)
             gTasks[taskId].func = sub_8080F78;
         }
     }
+}
+
+void sub_8080F78(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        sub_80807E8(gTasks[taskId].data[5]);
+        EnableBothScriptContexts();
+        RemoveWindow(gTasks[taskId].data[5]);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8080FB4(u8 taskId)
+{
+    gSpecialVar_Result = 5;
+    sub_80807E8(gTasks[taskId].data[5]);
+    HideFieldMessageBox();
+    EnableBothScriptContexts();
+    DestroyTask(taskId);
+}
+
+void sub_8080FF0(u8 taskId)
+{
+    gSpecialVar_Result = 6;
+    sub_80807E8(gTasks[taskId].data[5]);
+    HideFieldMessageBox();
+    EnableBothScriptContexts();
+    DestroyTask(taskId);
+}
+
+bool8 sub_808102C(u8 taskId)
+{
+    gTasks[taskId].data[4]++;
+    if (gTasks[taskId].data[4] > 600)
+    {
+        gTasks[taskId].func = sub_8080FF0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void TryBattleLinkup(void)
+{
+    u8 lower, higher;
+    higher = lower = 2;
+    switch (gSpecialVar_0x8004)
+    {
+    case USING_SINGLE_BATTLE:
+        higher = lower = 2;
+        gLinkType = LINKTYPE_SINGLE_BATTLE;
+        break;
+    case USING_DOUBLE_BATTLE:
+        higher = lower = 2;
+        gLinkType = LINKTYPE_DOUBLE_BATTLE;
+        break;
+    case USING_MULTI_BATTLE:
+        higher = lower = 4;
+        gLinkType = LINKTYPE_MULTI_BATTLE;
+        break;
+    }
+    sub_8080748(lower, higher);
+}
+
+void TryTradeLinkup(void)
+{
+    gLinkType = LINKTYPE_0x1133;
+    gBattleTypeFlags = 0;
+    sub_8080748(2, 2);
+}
+
+void TryRecordMixLinkup(void)
+{
+    gSpecialVar_Result = 0;
+    gLinkType = LINKTYPE_0x3311;
+    gBattleTypeFlags = 0;
+    sub_8080748(2, 4);
+}
+
+void sub_8081128(void)
+{
+    gLinkType = LINKTYPE_0x6601;
+    gBattleTypeFlags = 0;
+    sub_8080748(4, 4);
+}
+
+u8 sub_8081150(void)
+{
+    if (FuncIsActiveTask(sub_80811FC))
+        return 0xFF;
+    switch (gSpecialVar_0x8004)
+    {
+    case USING_SINGLE_BATTLE:
+        gLinkType = LINKTYPE_SINGLE_BATTLE;
+        break;
+    case USING_DOUBLE_BATTLE:
+        gLinkType = LINKTYPE_DOUBLE_BATTLE;
+        break;
+    case USING_MULTI_BATTLE:
+        gLinkType = LINKTYPE_MULTI_BATTLE;
+        break;
+    case USING_TRADE_CENTER:
+        gLinkType = LINKTYPE_0x1111;
+        break;
+    case USING_RECORD_CORNER:
+        gLinkType = LINKTYPE_0x3322;
+        break;
+    }
+    return CreateTask(sub_80811FC, 80);
+}
+
+void sub_80811FC(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[0] == 0)
+    {
+        OpenLink();
+        ResetLinkPlayers();
+        CreateTask(sub_8081A90, 80);
+    }
+    else if (data[0] > 9)
+        gTasks[taskId].func = sub_808124C;
+    data[0]++;
+}
+
+void sub_808124C(u8 taskId)
+{
+    if (GetLinkPlayerCount_2() >= 2)
+    {
+        if (IsLinkMaster() == TRUE)
+        {
+            gTasks[taskId].func = sub_80812A0;
+        }
+        else
+        {
+            gTasks[taskId].func = sub_80812D8;
+        }
+    }
+}
+
+void sub_80812A0(u8 taskId)
+{
+    if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
+    {
+        CheckShouldAdvanceLinkState();
+        gTasks[taskId].func = sub_80812D8;
+    }
+}
+
+void sub_80812D8(u8 taskId)
+{
+    if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
+    {
+        sub_800A9A4();
+        sub_8009FE8();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_808130C(void)
+{
+    Field_AskSaveTheGame();
+}
+
+void sub_8081318(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+    case 0:
+        FadeScreen(FADE_TO_BLACK, 0);
+        gLinkType = LINKTYPE_BATTLE;
+        ClearLinkCallback_2();
+        task->data[0]++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            task->data[0]++;
+        break;
+    case 2:
+        task->data[1]++;
+        if (task->data[1] > 20)
+            task->data[0]++;
+        break;
+    case 3:
+        Link_TryStartSend5FFF();
+        task->data[0]++;
+        break;
+    case 4:
+        if (!gReceivedRemoteLinkPlayers)
+            task->data[0]++;
+        break;
+    case 5:
+        if (gLinkPlayers[0].trainerId & 1)
+            PlayMapChosenOrBattleBGM(MUS_BATTLE32);
+        else
+            PlayMapChosenOrBattleBGM(MUS_BATTLE20);
+        switch (gSpecialVar_0x8004)
+        {
+        case USING_SINGLE_BATTLE:
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK;
+            break;
+        case USING_DOUBLE_BATTLE:
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE;
+            break;
+        case USING_MULTI_BATTLE:
+            ReducePlayerPartyToThree();
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI;
+            break;
+        }
+        CleanupOverworldWindowsAndTilemaps();
+        gTrainerBattleOpponent_A = TRAINER_LINK_OPPONENT;
+        SetMainCallback2(CB2_InitBattle);
+        gMain.savedCallback = sub_8081668;
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8081454(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    int i;
+    switch (data[0])
+    {
+    case 0:
+        FadeScreen(FADE_TO_BLACK, 0);
+        gLinkType = LINKTYPE_BATTLE;
+        ClearLinkCallback_2();
+        data[0] = 1;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            data[0] = 2;
+        break;
+    case 2:
+        SendBlock(0, &gLocalLinkPlayer, sizeof(struct LinkPlayer));
+        data[0] = 3;
+        break;
+    case 3:
+        if (GetBlockReceivedStatus() == sub_800A8D4())
+        {
+            for (i = 0; i < GetLinkPlayerCount(); i++)
+            {
+                gLinkPlayers[i] = *(struct LinkPlayer *)gBlockRecvBuffer[i];
+                IntlConvertLinkPlayerName(&gLinkPlayers[i]);
+                ResetBlockReceivedFlag(i);
+            }
+            data[0] = 4;
+        }
+        break;
+    case 4:
+        data[1]++;
+        if (data[1] > 20)
+            data[0] = 5;
+        break;
+    case 5:
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        data[0] = 6;
+        break;
+    case 6:
+        if (IsLinkTaskFinished())
+            data[0] = 7;
+        break;
+    case 7:
+        if (gLinkPlayers[0].trainerId & 1)
+            PlayMapChosenOrBattleBGM(MUS_BATTLE32);
+        else
+            PlayMapChosenOrBattleBGM(MUS_BATTLE20);
+        gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
+        switch (gSpecialVar_0x8004)
+        {
+        case USING_SINGLE_BATTLE:
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK;
+            break;
+        case USING_DOUBLE_BATTLE:
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE;
+            break;
+        case USING_MULTI_BATTLE:
+            ReducePlayerPartyToThree();
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI;
+            break;
+        }
+        CleanupOverworldWindowsAndTilemaps();
+        gTrainerBattleOpponent_A = TRAINER_LINK_OPPONENT;
+        SetMainCallback2(CB2_InitBattle);
+        gMain.savedCallback = sub_8081668;
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8081624(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        Link_TryStartSend5FFF();
+        gMain.state++;
+        break;
+    case 1:
+        if (IsLinkTaskFinished())
+            SetMainCallback2(CB2_ReturnToField);
+        break;
+    }
+}
+
+void sub_8081668(void)
+{
+    gBattleTypeFlags &= (u16)~BATTLE_TYPE_20;
+    sub_8055DB8();
+    LoadPlayerParty();
+    SavePlayerBag();
+    Special_UpdateTrainerFansAfterLinkBattle();
+    if (gSpecialVar_0x8004 != USING_MULTI_BATTLE)
+    {
+        TryRecordLinkBattleOutcome(gLocalLinkPlayerId ^ 1);
+        if (gWirelessCommType != 0)
+        {
+            switch (gBattleOutcome)
+            {
+            case B_OUTCOME_WON:
+                MEvent_RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                break;
+            case B_OUTCOME_LOST:
+                MEvent_RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+                break;
+            }
+        }
+    }
+    if (InUnionRoom() == TRUE)
+    {
+        gMain.savedCallback = sub_8081624;
+    }
+    else
+    {
+        gMain.savedCallback = c2_8056854;
+    }
+    SetMainCallback2(CB2_SetUpSaveAfterLinkBattle);
+}
+
+void CleanupLinkRoomState(void)
+{
+    if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE || gSpecialVar_0x8004 == USING_MULTI_BATTLE)
+    {
+        LoadPlayerParty();
+        SavePlayerBag();
+    }
+    copy_saved_warp2_bank_and_enter_x_to_warp1(127);
+}
+
+void sub_8081770(void)
+{
+    sub_8057F5C();
+}
+
+void sub_808177C(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+    case 0:
+        ShowFieldMessage(CableClub_Text_PleaseWaitBCancel);
+        task->data[0] = 1;
+        break;
+    case 1:
+        if (IsFieldMessageBoxHidden())
+        {
+            sub_8057F34();
+            SetLocalLinkPlayerId(gSpecialVar_0x8005);
+            task->data[0] = 2;
+        }
+        break;
+    case 2:
+        switch (sub_8057EC0())
+        {
+        case 0:
+            break;
+        case 1:
+            HideFieldMessageBox();
+            task->data[0] = 0;
+            sub_8057F70();
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 2:
+            task->data[0] = 3;
+            break;
+        }
+        break;
+    case 3:
+        sub_8057F48();
+        sub_80F771C(TRUE);
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+        break;
+    }
+}
+
+void sub_8081828(TaskFunc followUpFunc)
+{
+    u8 taskId = CreateTask(sub_808177C, 80);
+    SetTaskFuncWithFollowupFunc(taskId, sub_808177C, followUpFunc);
+    ScriptContext1_Stop();
+}
+
+void sub_8081850(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    switch (task->data[0])
+    {
+    case 0:
+        ScriptContext2_Enable();
+        FadeScreen(FADE_TO_BLACK, 0);
+        ClearLinkCallback_2();
+        task->data[0]++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            task->data[0]++;
+        break;
+    case 2:
+        gSelectedTradeMonPositions[0] = 0;
+        gSelectedTradeMonPositions[1] = 0;
+        m4aMPlayAllStop();
+        Link_TryStartSend5FFF();
+        task->data[0]++;
+        break;
+    case 3:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            SetMainCallback2(CB2_ReturnFromLinkTrade);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_80818E8(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        ScriptContext2_Enable();
+        FadeScreen(FADE_TO_BLACK, 0);
+        Rfu_set_zero();
+        data[0]++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            data[0]++;
+        break;
+    case 2:
+        gSelectedTradeMonPositions[0] = 0;
+        gSelectedTradeMonPositions[1] = 0;
+        m4aMPlayAllStop();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
+        data[0]++;
+        break;
+    case 3:
+        if (IsLinkTaskFinished())
+        {
+            UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void EnterTradeSeat(void)
+{
+    if (gWirelessCommType)
+        sub_8081828(sub_80818E8);
+    else
+        sub_8081828(sub_8081850);
+}
+
+void sub_80819A4(void)
+{
+    CreateTask(sub_8081850, 80);
+}
+
+void sub_80819B8(void)
+{
+    sub_80819A4();
+    ScriptContext1_Stop();
+}
+
+void EnterColosseumPlayerSpot(void)
+{
+    gLinkType = LINKTYPE_BATTLE;
+    if (gWirelessCommType)
+        sub_8081828(sub_8081454);
+    else
+        sub_8081828(sub_8081318);
+}
+
+void sub_8081A04(void)
+{
+    CreateTask(sub_808177C, 80);
+    ScriptContext1_Stop();
+}
+
+void Script_ShowLinkTrainerCard(void)
+{
+    ShowTrainerCardInLink(gSpecialVar_0x8006, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+bool32 sub_8081A34(u8 who)
+{
+    u8 stars;
+    gSpecialVar_0x8006 = who;
+    StringCopy(gStringVar1, gLinkPlayers[who].name);
+    stars = GetTrainerCardStars(who);
+    if (stars == 0)
+        return FALSE;
+    StringCopy(gStringVar2, gUnknown_83C6AB8[stars - 1]);
+    return TRUE;
+}
+
+void sub_8081A90(u8 taskId)
+{
+    struct Task * task = &gTasks[taskId];
+    task->data[0]++;
+    if (task->data[0] > 300)
+    {
+        CloseLink();
+        SetMainCallback2(CB2_LinkError);
+        DestroyTask(taskId);
+    }
+    if (gReceivedRemoteLinkPlayers)
+        DestroyTask(taskId);
+}
+
+void sub_8081AE4(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        EnableBothScriptContexts();
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8081B08(u8 taskId)
+{
+    Link_TryStartSend5FFF();
+    gTasks[taskId].func = sub_8081AE4;
 }

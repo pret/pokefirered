@@ -121,7 +121,6 @@ SECTIONS {
         src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
         src/cable_club.o(.text);
-        asm/cable_club.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         asm/field_effect.o(.text);

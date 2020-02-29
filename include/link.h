@@ -77,6 +77,10 @@
 #define LINKTYPE_BATTLE_TOWER_50     0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN   0x2277
 #define LINKTYPE_BATTLE_TOWER        0x2288
+#define LINKTYPE_0x3311              0x3311
+#define LINKTYPE_0x3322              0x3322
+#define LINKTYPE_0x4411              0x4411
+#define LINKTYPE_0x6601              0x6601
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
@@ -199,6 +203,7 @@ extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
+extern struct LinkPlayer gLocalLinkPlayer;
 
 extern u8 gShouldAdvanceLinkState;
 extern u16 gLinkPartnersHeldKeys[6];
@@ -282,5 +287,7 @@ u8 sub_800A8D4(void);
 void sub_800AA24(void);
 void sub_800A900(u8 a0);
 u8 sub_800A8A4(void);
+void sub_800A9A4(void);
+void SetLocalLinkPlayerId(u8 playerId);
 
 #endif // GUARD_LINK_H

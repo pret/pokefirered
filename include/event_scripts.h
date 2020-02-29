@@ -1208,5 +1208,6 @@ extern const u8 EventScript_FldEffCut[];
 extern const u8 CableClub_Text_WhenAllPlayersReadyAConfirmBCancel[];
 extern const u8 CableClub_Text_AwaitingLinkupBCancel[];
 extern const u8 CableClub_Text_StartLinkWithXPlayersAConfirmBCancel[];
+extern const u8 CableClub_Text_PleaseWaitBCancel[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

@@ -73,9 +73,9 @@ gUnknown_3005078: @ 3005078
 	.include "sound.o"
 	.align 2
 	.include "task.o"
-	
-	@ what is this?
-	.space 0x20
+	.align 2
+	.include "cable_club.o"
+	.space 0x1C
 	.align 2
 	.include "image_processing_effects.o"
 	.align 2

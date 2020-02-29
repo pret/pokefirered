@@ -28,23 +28,23 @@
 
 u32 UnusedVarNeededToMatch;
 
-void sub_80809F8(u8 taskId);
-void sub_8080A4C(u8 taskId);
-void sub_8080AD0(u8 taskId);
-void sub_8080B20(u8 taskId);
-void sub_8080BC8(u8 taskId);
-void sub_8080C6C(u8 taskId);
-void sub_8080CDC(u8 taskId);
-void sub_8080DC0(u8 taskId);
-void sub_8080E6C(u8 taskId);
-void sub_8080F78(u8 taskId);
-void sub_8080FB4(u8 taskId);
-void sub_8080FF0(u8 taskId);
-bool8 sub_808102C(u8 taskId);
-void sub_80811FC(u8 taskId);
-void sub_808124C(u8 taskId);
-void sub_80812A0(u8 taskId);
-void sub_80812D8(u8 taskId);
+static void sub_80809F8(u8 taskId);
+static void sub_8080A4C(u8 taskId);
+static void sub_8080AD0(u8 taskId);
+static void sub_8080B20(u8 taskId);
+static void sub_8080BC8(u8 taskId);
+static void sub_8080C6C(u8 taskId);
+static void sub_8080CDC(u8 taskId);
+static void sub_8080DC0(u8 taskId);
+static void sub_8080E6C(u8 taskId);
+static void sub_8080F78(u8 taskId);
+static void sub_8080FB4(u8 taskId);
+static void sub_8080FF0(u8 taskId);
+static bool8 sub_808102C(u8 taskId);
+static void sub_80811FC(u8 taskId);
+static void sub_808124C(u8 taskId);
+static void sub_80812A0(u8 taskId);
+static void sub_80812D8(u8 taskId);
 
 static const struct WindowTemplate gUnknown_83C6AB0 = {
     .bg = 0,
@@ -56,14 +56,14 @@ static const struct WindowTemplate gUnknown_83C6AB0 = {
     .baseBlock = 0x125
 };
 
-const u8 *const gUnknown_83C6AB8[] = {
+static const u8 *const gUnknown_83C6AB8[] = {
     gUnknown_841DF8B,
     gUnknown_841DF92,
     gUnknown_841DF99,
     gUnknown_841DFA0
 };
 
-void sub_8080748(u8 lower, u8 higher)
+static void sub_8080748(u8 lower, u8 higher)
 {
     u8 taskId;
     if (FindTaskIdByFunc(sub_80809F8) == 0xFF)
@@ -74,7 +74,7 @@ void sub_8080748(u8 lower, u8 higher)
     }
 }
 
-void sub_808078C(u16 windowId, s32 num)
+static void sub_808078C(u16 windowId, s32 num)
 {
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStdWindowBorderStyle(windowId, FALSE);
@@ -83,13 +83,13 @@ void sub_808078C(u16 windowId, s32 num)
     CopyWindowToVram(windowId, 3);
 }
 
-void sub_80807E8(u16 windowId)
+static void sub_80807E8(u16 windowId)
 {
     ClearStdWindowAndFrame(windowId, FALSE);
     CopyWindowToVram(windowId, 3);
 }
 
-void sub_8080808(u8 taskId, u8 num)
+static void sub_8080808(u8 taskId, u8 num)
 {
     s16 *data = gTasks[taskId].data;
     if (num != data[3])
@@ -102,7 +102,7 @@ void sub_8080808(u8 taskId, u8 num)
     }
 }
 
-u16 sub_8080844(u8 lower, u8 higher)
+static u16 sub_8080844(u8 lower, u8 higher)
 {
     switch (GetLinkPlayerDataExchangeStatusTimed(lower, higher))
     {
@@ -122,7 +122,7 @@ u16 sub_8080844(u8 lower, u8 higher)
     }
 }
 
-bool32 sub_80808BC(u8 taskId)
+static bool32 sub_80808BC(u8 taskId)
 {
     if (HasLinkErrorOccurred() == TRUE)
     {
@@ -132,7 +132,7 @@ bool32 sub_80808BC(u8 taskId)
     return FALSE;
 }
 
-bool32 sub_80808F0(u8 taskId)
+static bool32 sub_80808F0(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON) && !IsLinkConnectionEstablished())
     {
@@ -143,7 +143,7 @@ bool32 sub_80808F0(u8 taskId)
     return FALSE;
 }
 
-bool32 sub_808093C(u8 taskId)
+static bool32 sub_808093C(u8 taskId)
 {
     if (IsLinkConnectionEstablished())
     {
@@ -158,7 +158,7 @@ bool32 sub_808093C(u8 taskId)
     return FALSE;
 }
 
-bool32 sub_8080990(u8 taskId)
+static bool32 sub_8080990(u8 taskId)
 {
     if (GetSioMultiSI() == TRUE)
     {
@@ -168,7 +168,7 @@ bool32 sub_8080990(u8 taskId)
     return FALSE;
 }
 
-void sub_80809C4(u8 taskId)
+static void sub_80809C4(u8 taskId)
 {
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 10)
@@ -178,7 +178,7 @@ void sub_80809C4(u8 taskId)
     }
 }
 
-void sub_80809F8(u8 taskId)
+static void sub_80809F8(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
@@ -195,7 +195,7 @@ void sub_80809F8(u8 taskId)
     data[0]++;
 }
 
-void sub_8080A4C(u8 taskId)
+static void sub_8080A4C(u8 taskId)
 {
     u8 linkPlayerCount = GetLinkPlayerCount_2();
     if (sub_80808F0(taskId) != TRUE && sub_808093C(taskId) != TRUE && linkPlayerCount >= 2)
@@ -217,7 +217,7 @@ void sub_8080A4C(u8 taskId)
     }
 }
 
-void sub_8080AD0(u8 taskId)
+static void sub_8080AD0(u8 taskId)
 {
     if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !textbox_any_visible())
     {
@@ -226,7 +226,7 @@ void sub_8080AD0(u8 taskId)
     }
 }
 
-void sub_8080B20(u8 taskId)
+static void sub_8080B20(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s32 linkPlayerCount = GetLinkPlayerCount_2();
@@ -244,7 +244,7 @@ void sub_8080B20(u8 taskId)
     }
 }
 
-void sub_8080BC8(u8 taskId)
+static void sub_8080BC8(u8 taskId)
 {
     if (sub_80808F0(taskId) != TRUE && sub_8080990(taskId) != TRUE && sub_80808BC(taskId) != TRUE && !textbox_any_visible())
     {
@@ -267,7 +267,7 @@ void sub_8080BC8(u8 taskId)
     }
 }
 
-void sub_8080C6C(u8 taskId)
+static void sub_8080C6C(u8 taskId)
 {
     u8 lower = gTasks[taskId].data[1];
     u8 higher = gTasks[taskId].data[2];
@@ -288,7 +288,7 @@ void sub_8080C6C(u8 taskId)
     }
 }
 
-void sub_8080CDC(u8 taskId)
+static void sub_8080CDC(u8 taskId)
 {
     u8 lower = gTasks[taskId].data[1];
     u8 higher = gTasks[taskId].data[2];
@@ -323,7 +323,7 @@ void sub_8080CDC(u8 taskId)
     }
 }
 
-bool32 sub_8080D8C(void)
+static bool32 sub_8080D8C(void)
 {
     int i;
     u16 version;
@@ -337,7 +337,7 @@ bool32 sub_8080D8C(void)
     return FALSE;
 }
 
-void sub_8080DC0(u8 taskId)
+static void sub_8080DC0(u8 taskId)
 {
     if (sub_80808BC(taskId) != TRUE)
     {
@@ -374,7 +374,7 @@ void sub_8080DC0(u8 taskId)
     }
 }
 
-void sub_8080E6C(u8 taskId)
+static void sub_8080E6C(u8 taskId)
 {
     u8 i;
     u16 version;
@@ -416,7 +416,7 @@ void sub_8080E6C(u8 taskId)
     }
 }
 
-void sub_8080F78(u8 taskId)
+static void sub_8080F78(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -427,7 +427,7 @@ void sub_8080F78(u8 taskId)
     }
 }
 
-void sub_8080FB4(u8 taskId)
+static void sub_8080FB4(u8 taskId)
 {
     gSpecialVar_Result = 5;
     sub_80807E8(gTasks[taskId].data[5]);
@@ -436,7 +436,7 @@ void sub_8080FB4(u8 taskId)
     DestroyTask(taskId);
 }
 
-void sub_8080FF0(u8 taskId)
+static void sub_8080FF0(u8 taskId)
 {
     gSpecialVar_Result = 6;
     sub_80807E8(gTasks[taskId].data[5]);
@@ -445,7 +445,7 @@ void sub_8080FF0(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 sub_808102C(u8 taskId)
+static bool8 sub_808102C(u8 taskId)
 {
     gTasks[taskId].data[4]++;
     if (gTasks[taskId].data[4] > 600)
@@ -525,7 +525,7 @@ u8 sub_8081150(void)
     return CreateTask(sub_80811FC, 80);
 }
 
-void sub_80811FC(u8 taskId)
+static void sub_80811FC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (data[0] == 0)
@@ -539,7 +539,7 @@ void sub_80811FC(u8 taskId)
     data[0]++;
 }
 
-void sub_808124C(u8 taskId)
+static void sub_808124C(u8 taskId)
 {
     if (GetLinkPlayerCount_2() >= 2)
     {
@@ -554,7 +554,7 @@ void sub_808124C(u8 taskId)
     }
 }
 
-void sub_80812A0(u8 taskId)
+static void sub_80812A0(u8 taskId)
 {
     if (GetSavedPlayerCount() == GetLinkPlayerCount_2())
     {
@@ -563,7 +563,7 @@ void sub_80812A0(u8 taskId)
     }
 }
 
-void sub_80812D8(u8 taskId)
+static void sub_80812D8(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
     {
@@ -578,7 +578,7 @@ void sub_808130C(void)
     Field_AskSaveTheGame();
 }
 
-void sub_8081318(u8 taskId)
+static void sub_8081318(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     switch (task->data[0])
@@ -633,7 +633,7 @@ void sub_8081318(u8 taskId)
     }
 }
 
-void sub_8081454(u8 taskId)
+static void sub_8081454(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     int i;
@@ -706,7 +706,7 @@ void sub_8081454(u8 taskId)
     }
 }
 
-void sub_8081624(void)
+static void sub_8081624(void)
 {
     switch (gMain.state)
     {
@@ -770,7 +770,7 @@ void sub_8081770(void)
     sub_8057F5C();
 }
 
-void sub_808177C(u8 taskId)
+static void sub_808177C(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     switch (task->data[0])
@@ -812,14 +812,14 @@ void sub_808177C(u8 taskId)
     }
 }
 
-void sub_8081828(TaskFunc followUpFunc)
+static void sub_8081828(TaskFunc followUpFunc)
 {
     u8 taskId = CreateTask(sub_808177C, 80);
     SetTaskFuncWithFollowupFunc(taskId, sub_808177C, followUpFunc);
     ScriptContext1_Stop();
 }
 
-void sub_8081850(u8 taskId)
+static void sub_8081850(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     switch (task->data[0])
@@ -851,7 +851,7 @@ void sub_8081850(u8 taskId)
     }
 }
 
-void sub_80818E8(u8 taskId)
+static void sub_80818E8(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -891,7 +891,7 @@ void EnterTradeSeat(void)
         sub_8081828(sub_8081850);
 }
 
-void sub_80819A4(void)
+static void sub_80819A4(void)
 {
     CreateTask(sub_8081850, 80);
 }
@@ -911,7 +911,7 @@ void EnterColosseumPlayerSpot(void)
         sub_8081828(sub_8081318);
 }
 
-void sub_8081A04(void)
+static void sub_8081A04(void)
 {
     CreateTask(sub_808177C, 80);
     ScriptContext1_Stop();
@@ -948,7 +948,7 @@ void sub_8081A90(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_8081AE4(u8 taskId)
+static void sub_8081AE4(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
@@ -957,7 +957,7 @@ void sub_8081AE4(u8 taskId)
     }
 }
 
-void sub_8081B08(u8 taskId)
+static void sub_8081B08(u8 taskId)
 {
     Link_TryStartSend5FFF();
     gTasks[taskId].func = sub_8081AE4;

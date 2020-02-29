@@ -1848,7 +1848,7 @@ void StartUnionRoomBattle(u16 battleFlags)
     gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
     gLinkPlayers[GetMultiplayerId()].id = GetMultiplayerId();
     gLinkPlayers[GetMultiplayerId() ^ 1].id = GetMultiplayerId() ^ 1;
-    gMain.savedCallback = sub_8081668;
+    gMain.savedCallback = CB2_ReturnFromCableClubBattle;
     gBattleTypeFlags = battleFlags;
     PlayBattleBGM();
 }

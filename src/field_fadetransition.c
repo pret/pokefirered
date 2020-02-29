@@ -172,7 +172,7 @@ static void task_mpl_807DD60(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        task->data[1] = sub_8081150();
+        task->data[1] = CreateTask_ReestablishLinkInCableClubRoom();
         task->data[0]++;
         break;
     case 1:
@@ -192,7 +192,7 @@ static void task_mpl_807DD60(u8 taskId)
     }
 }
 
-void sub_807DDD0(void)
+void FieldCB_ReturnToFieldWiredLink(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();

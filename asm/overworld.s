@@ -3741,7 +3741,7 @@ _08056880: .4byte gFieldCallback
 _08056884: .4byte FieldCB_ReturnToFieldWirelessLink
 _08056888:
 	ldr r1, _080568A0 @ =gFieldCallback
-	ldr r0, _080568A4 @ =sub_807DDD0
+	ldr r0, _080568A4 @ =FieldCB_ReturnToFieldWiredLink
 _0805688C:
 	str r0, [r1]
 	bl ScriptContext1_Init
@@ -3751,7 +3751,7 @@ _0805688C:
 	bx r0
 	.align 2, 0
 _080568A0: .4byte gFieldCallback
-_080568A4: .4byte sub_807DDD0
+_080568A4: .4byte FieldCB_ReturnToFieldWiredLink
 	thumb_func_end c2_8056854
 
 	thumb_func_start CB2_ReturnToFieldWithOpenMenu
@@ -6809,7 +6809,7 @@ _080580F4: .4byte gUnknown_3000E80
 _080580F8: .4byte CableClub_EventScript_TooBusyToNotice
 _080580FC:
 	adds r0, r2, 0
-	bl sub_8081A34
+	bl GetSeeingLinkPlayerCardMsg
 	cmp r0, 0
 	bne _08058110
 	ldr r0, _0805810C @ =CableClub_EventScript_ReadTrainerCard

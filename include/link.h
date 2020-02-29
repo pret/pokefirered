@@ -272,12 +272,15 @@ void ClearLinkCallback_2(void);
 void LinkRfu_SetRfuFuncToSend6600(void);
 void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
-bool8 sub_800A474(u8 a0);
+bool8 sub_800A474(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
 void PrepareLocalLinkPlayerBlock(void);
 void LinkPlayerFromBlock(u32 who);
 void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 u8 sub_800A8D4(void);
+void sub_800AA24(void);
+void sub_800A900(u8 a0);
+u8 sub_800A8A4(void);
 
 #endif // GUARD_LINK_H

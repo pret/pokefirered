@@ -921,71 +921,71 @@ SixIsland_RuinValley_Text_HectorRematchIntro:: @ 81C42A0
 	.string "I'm pretty familiar with the land\n"
 	.string "around these parts.$"
 
-Text_1C42D6:: @ 81C42D6
+SevenIsland_TrainerTower_Text_DarioRematchIntro:: @ 81C42D6
 	.string "I sensed your approach.$"
 
-Text_1C42EE:: @ 81C42EE
+SevenIsland_TrainerTower_Text_RodetteRematchIntro:: @ 81C42EE
 	.string "Somewhere on this island, peculiar\n"
 	.string "POKéMON are sleeping.$"
 
-Text_1C4327:: @ 81C4327
+SevenIsland_SevaultCanyon_Entrance_Text_MiahRematchIntro:: @ 81C4327
 	.string "Kyahaha!\p"
 	.string "Coming back won't change a thing.\n"
 	.string "I'll flick you away effortlessly!$"
 
-Text_1C4374:: @ 81C4374
+SevenIsland_SevaultCanyon_Entrance_Text_MasonRematchIntro:: @ 81C4374
 	.string "Howdy! You're a member of my\n"
 	.string "fan club, isn't that right?$"
 
-Text_1C43AD:: @ 81C43AD
+SevenIsland_SevaultCanyon_Entrance_Text_NicolasRematchIntro:: @ 81C43AD
 	.string "This island is too spread out…\n"
 	.string "Patrolling the place is a drag…$"
 
-Text_1C43EC:: @ 81C43EC
+SevenIsland_SevaultCanyon_Entrance_Text_MadelineRematchIntro:: @ 81C43EC
 	.string "I don't forgive people who abuse\n"
 	.string "POKéMON!$"
 
-Text_1C4416:: @ 81C4416
+SevenIsland_SevaultCanyon_Entrance_Text_EveRematchIntro:: @ 81C4416
 	.string "EVE: I'll team up with JON and\n"
 	.string "battle together again.$"
 
-Text_1C444C:: @ 81C444C
+SevenIsland_SevaultCanyon_Entrance_Text_JonRematchIntro:: @ 81C444C
 	.string "JON: When I'm with EVE, it feels\n"
 	.string "like we could never lose, not ever.$"
 
-Text_1C4491:: @ 81C4491
+SevenIsland_SevaultCanyon_Text_CyndyRematchIntro:: @ 81C4491
 	.string "Let's have another battle.\n"
 	.string "My conditioning's in top form!$"
 
-Text_1C44CB:: @ 81C44CB
+SevenIsland_SevaultCanyon_Text_EvanRematchIntro:: @ 81C44CB
 	.string "It doesn't matter if you happen to\n"
 	.string "have the strongest POKéMON…\p"
 	.string "It doesn't mean a thing if you don't\n"
 	.string "know how to use them properly!$"
 
-Text_1C454E:: @ 81C454E
+SevenIsland_SevaultCanyon_Text_JacksonRematchIntro:: @ 81C454E
 	.string "I work to protect the environment.\n"
 	.string "In turn, nature protects me!$"
 
-Text_1C458E:: @ 81C458E
+SevenIsland_SevaultCanyon_Text_KatelynRematchIntro:: @ 81C458E
 	.string "Every time we meet, you have those\n"
 	.string "snazzy shoes on.$"
 
-Text_1C45C2:: @ 81C45C2
+SevenIsland_SevaultCanyon_Text_LeroyRematchIntro:: @ 81C45C2
 	.string "You must have gotten tougher.\n"
 	.string "Let me battle you, please!$"
 
-Text_1C45FB:: @ 81C45FB
+SevenIsland_SevaultCanyon_Text_MichelleRematchIntro:: @ 81C45FB
 	.string "I was given the best possible\n"
 	.string "education to become this strong.\p"
 	.string "I won't lose this time.\n"
 	.string "Absolutely not!$"
 
-Text_1C4662:: @ 81C4662
+SevenIsland_SevaultCanyon_Text_LexRematchIntro:: @ 81C4662
 	.string "LEX: My darling NYA, together\n"
 	.string "we will win for certain!$"
 
-Text_1C4699:: @ 81C4699
+SevenIsland_SevaultCanyon_Text_NyaRematchIntro:: @ 81C4699
 	.string "NYA: I won't drag down my mentor\n"
 	.string "LEX! We're going to win!$"
 

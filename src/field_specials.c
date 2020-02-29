@@ -326,7 +326,7 @@ void RemoveCameraObject(void)
     RemoveObjectEventByLocalIdAndMap(127, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
-void Special_BufferEReaderTrainerName5(void)
+void BufferEReaderTrainerName(void)
 {
     CopyEReaderTrainerName5(gStringVar1);
 }

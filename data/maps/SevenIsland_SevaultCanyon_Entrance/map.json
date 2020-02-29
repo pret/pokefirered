@@ -36,7 +36,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Miah",
       "flag": "0"
     },
     {
@@ -49,7 +49,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Eve",
       "flag": "0"
     },
     {
@@ -62,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Jon",
       "flag": "0"
     },
     {
@@ -75,7 +75,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Nicolas",
       "flag": "0"
     },
     {
@@ -88,7 +88,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Madeline",
       "flag": "0"
     },
     {
@@ -101,7 +101,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993",
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_Mason",
       "flag": "0"
     },
     {
@@ -137,7 +137,7 @@
       "x": 14,
       "y": 26,
       "elevation": 0,
-      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_168BF4"
+      "script": "SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign"
     }
   ]
 }

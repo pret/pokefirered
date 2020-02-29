@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TrainerTower_EventScript_1AC84D",
+      "script": "SevenIsland_TrainerTower_EventScript_Dario",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TrainerTower_EventScript_1AC88B",
+      "script": "SevenIsland_TrainerTower_EventScript_Rodette",
       "flag": "0"
     }
   ],
@@ -94,14 +94,14 @@
       "x": 56,
       "y": 8,
       "elevation": 0,
-      "script": "SevenIsland_TrainerTower_EventScript_168BE1"
+      "script": "SevenIsland_TrainerTower_EventScript_TrainerTowerSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 50,
       "y": 30,
       "elevation": 0,
-      "script": "SevenIsland_TrainerTower_EventScript_168BEA"
+      "script": "SevenIsland_TrainerTower_EventScript_TrainerTowerAheadSign"
     }
   ]
 }

@@ -1,4 +1,4 @@
-gUnknown_81A049B:: @ 81A049B
+SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles:: @ 81A049B
     .string "I may not look like much now,\n"
     .string "but when I was younger…\p"
     .string "I flew everywhere, challenging\n"
@@ -7,11 +7,11 @@ gUnknown_81A049B:: @ 81A049B
     .string "is reminiscing about the past while\l"
     .string "watching battles.$"
 
-gUnknown_81A0567:: @ 81A0567
+SevenIsland_House_Room1_Text_SlightBreezeAroundBox:: @ 81A0567
     .string "There is a slight breeze blowing\n"
     .string "around the box.$"
 
-gUnknown_81A0598:: @ 81A0598
+SevenIsland_House_Room1_Text_ChallengeVisitingTrainer:: @ 81A0598
     .string "Ah!\n"
     .string "Welcome, my friend!\p"
     .string "Let me tell you something. There's\n"
@@ -21,7 +21,7 @@ gUnknown_81A0598:: @ 81A0598
     .string "Tell me, you did come to challenge\n"
     .string "{STR_VAR_1}, am I right?$"
 
-gUnknown_81A064E:: @ 81A064E
+SevenIsland_House_Room1_Text_OhYouWontBattle:: @ 81A064E
     .string "Oh…\n"
     .string "You won't battle…\p"
     .string "I see, I see.\n"
@@ -29,7 +29,7 @@ gUnknown_81A064E:: @ 81A064E
     .string "Well, perhaps if you change your\n"
     .string "mind, do come back.$"
 
-gUnknown_81A06AB:: @ 81A06AB
+SevenIsland_House_Room1_Text_LimitThreeMonsPerSide:: @ 81A06AB
     .string "Ah!\n"
     .string "You will battle for me?\p"
     .string "It was worth my time moving the\n"
@@ -41,31 +41,33 @@ gUnknown_81A06AB:: @ 81A06AB
     .string "Can I get you to limit it to\n"
     .string "battles of three POKéMON per side?$"
 
-gUnknown_81A0788:: @ 81A0788
+SevenIsland_House_Room1_Text_SaveProgressBeforeBattle:: @ 81A0788
     .string "Fine! Before your battle, would\n"
     .string "you like to save your game?$"
 
-gUnknown_81A07C4:: @ 81A07C4
+SevenIsland_House_Room1_Text_DontHoldAnythingBack:: @ 81A07C4
     .string "All right.\n"
     .string "Don't hold anything back!$"
 
-Text_1A07E9:: @ 81A07E9
+@ Unused
+SevenIsland_House_Room1_Text_StrVar1_1:: @ 81A07E9
     .string "{STR_VAR_1}$"
 
-gUnknown_81A07EC:: @ 81A07EC
+SevenIsland_House_Room2_Text_MatchEndedUpDraw:: @ 81A07EC
     .string "The match ended up a draw.$"
 
-gUnknown_81A0807:: @ 81A0807
+SevenIsland_House_Room1_Text_DrawWasIt:: @ 81A0807
     .string "A draw, was it?\p"
     .string "However, let me say that it was\n"
     .string "a worthy spectacle.\p"
     .string "I'd say it was a wonderful battle\n"
     .string "with a real sense of depth!$"
 
-Text_1A0889:: @ 81A0889
+@ Unused
+SevenIsland_House_Room1_Text_StrVar1_2:: @ 81A0889
     .string "{STR_VAR_1}$"
 
-gUnknown_81A088C:: @ 81A088C
+SevenIsland_House_Room1_Text_AstoundingBattle:: @ 81A088C
     .string "Bravo!\p"
     .string "Bravo, indeed!\n"
     .string "What an astounding battle!\p"
@@ -77,10 +79,11 @@ gUnknown_81A088C:: @ 81A088C
     .string "Yes!\n"
     .string "It was sheer magnificence!$"
 
-Text_1A096E:: @ 81A096E
+@ Unused
+SevenIsland_House_Room1_Text_StrVar1_3:: @ 81A096E
     .string "{STR_VAR_1}$"
 
-gUnknown_81A0971:: @ 81A0971
+SevenIsland_House_Room1_Text_FeelYourDisappointment:: @ 81A0971
     .string "Too bad!\n"
     .string "I feel your disappointment.\p"
     .string "However, that disappointment is\n"

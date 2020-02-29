@@ -1,19 +1,19 @@
 SevenIsland_Mart_MapScripts:: @ 8170B30
 	.byte 0
 
-SevenIsland_Mart_EventScript_170B31:: @ 8170B31
+SevenIsland_Mart_EventScript_Clerk:: @ 8170B31
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_170B58
+	pokemart SevenIsland_Mart_Items
 	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_170B58:: @ 8170B58
+SevenIsland_Mart_Items:: @ 8170B58
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_FULL_RESTORE
@@ -27,14 +27,14 @@ Items_170B58:: @ 8170B58
 	release
 	end
 
-SevenIsland_Mart_EventScript_170B6E:: @ 8170B6E
-	msgbox gUnknown_81A0A4F, MSGBOX_NPC
+SevenIsland_Mart_EventScript_Lass:: @ 8170B6E
+	msgbox SevenIsland_Mart_Text_MonHavePersonalitiesOfTheirOwn, MSGBOX_NPC
 	end
 
-SevenIsland_Mart_EventScript_170B77:: @ 8170B77
-	msgbox gUnknown_81A0ACC, MSGBOX_NPC
+SevenIsland_Mart_EventScript_Hiker:: @ 8170B77
+	msgbox SevenIsland_Mart_Text_PreparationsCompleteForRuins, MSGBOX_NPC
 	end
 
-SevenIsland_Mart_EventScript_170B80:: @ 8170B80
-	msgbox gUnknown_81A0B09, MSGBOX_NPC
+SevenIsland_Mart_EventScript_Fisher:: @ 8170B80
+	msgbox SevenIsland_Mart_Text_NeedToFishOnSevenIsland, MSGBOX_NPC
 	end

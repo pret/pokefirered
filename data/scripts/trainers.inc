@@ -2780,223 +2780,223 @@ SixIsland_RuinValley_EventScript_HectorRematch:: @ 81AC836
 	msgbox SixIsland_RuinValley_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TrainerTower_EventScript_1AC84D:: @ 81AC84D
-	trainerbattle_single TRAINER_PSYCHIC_DARIO, Text_18C1ED, Text_18C205
+SevenIsland_TrainerTower_EventScript_Dario:: @ 81AC84D
+	trainerbattle_single TRAINER_PSYCHIC_DARIO, SevenIsland_TrainerTower_Text_DarioIntro, SevenIsland_TrainerTower_Text_DarioDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC874
-	msgbox Text_18C20E, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TrainerTower_EventScript_DarioRematch
+	msgbox SevenIsland_TrainerTower_Text_DarioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC874:: @ 81AC874
-	trainerbattle_rematch TRAINER_PSYCHIC_DARIO, Text_1C42D6, Text_18C205
-	msgbox Text_18C20E, MSGBOX_AUTOCLOSE
+SevenIsland_TrainerTower_EventScript_DarioRematch:: @ 81AC874
+	trainerbattle_rematch TRAINER_PSYCHIC_DARIO, SevenIsland_TrainerTower_Text_DarioRematchIntro, SevenIsland_TrainerTower_Text_DarioDefeat
+	msgbox SevenIsland_TrainerTower_Text_DarioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TrainerTower_EventScript_1AC88B:: @ 81AC88B
-	trainerbattle_single TRAINER_PSYCHIC_RODETTE, Text_18C283, Text_18C2BC
+SevenIsland_TrainerTower_EventScript_Rodette:: @ 81AC88B
+	trainerbattle_single TRAINER_PSYCHIC_RODETTE, SevenIsland_TrainerTower_Text_RodetteIntro, SevenIsland_TrainerTower_Text_RodetteDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC8B2
-	msgbox Text_18C2D5, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_TrainerTower_EventScript_RodetteRematch
+	msgbox SevenIsland_TrainerTower_Text_RodettePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC8B2:: @ 81AC8B2
-	trainerbattle_rematch TRAINER_PSYCHIC_RODETTE, Text_1C42EE, Text_18C2BC
-	msgbox Text_18C2D5, MSGBOX_AUTOCLOSE
+SevenIsland_TrainerTower_EventScript_RodetteRematch:: @ 81AC8B2
+	trainerbattle_rematch TRAINER_PSYCHIC_RODETTE, SevenIsland_TrainerTower_Text_RodetteRematchIntro, SevenIsland_TrainerTower_Text_RodetteDefeat
+	msgbox SevenIsland_TrainerTower_Text_RodettePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC8C9:: @ 81AC8C9
-	trainerbattle_single TRAINER_AROMA_LADY_MIAH, Text_18C3BC, Text_18C3E7
+SevenIsland_SevaultCanyon_Entrance_EventScript_Miah:: @ 81AC8C9
+	trainerbattle_single TRAINER_AROMA_LADY_MIAH, SevenIsland_SevaultCanyon_Entrance_Text_MiahIntro, SevenIsland_SevaultCanyon_Entrance_Text_MiahDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC8F0
-	msgbox Text_18C3FF, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_MiahRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MiahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC8F0:: @ 81AC8F0
-	trainerbattle_rematch TRAINER_AROMA_LADY_MIAH, Text_1C4327, Text_18C3E7
-	msgbox Text_18C3FF, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_MiahRematch:: @ 81AC8F0
+	trainerbattle_rematch TRAINER_AROMA_LADY_MIAH, SevenIsland_SevaultCanyon_Entrance_Text_MiahRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_MiahDefeat
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MiahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC907:: @ 81AC907
-	trainerbattle_double TRAINER_YOUNG_COUPLE_EVE_JON, Text_18C632, Text_18C662, Text_18C6AB
+SevenIsland_SevaultCanyon_Entrance_EventScript_Eve:: @ 81AC907
+	trainerbattle_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_EveIntro, SevenIsland_SevaultCanyon_Entrance_Text_EveDefeat, SevenIsland_SevaultCanyon_Entrance_Text_EveNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC932
-	msgbox Text_18C683, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_EvePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC932:: @ 81AC932
-	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, Text_1C4416, Text_18C662, Text_18C6AB
-	msgbox Text_18C683, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch:: @ 81AC932
+	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_EveRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_EveDefeat, SevenIsland_SevaultCanyon_Entrance_Text_EveNotEnoughMons
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_EvePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC94D:: @ 81AC94D
-	trainerbattle_double TRAINER_YOUNG_COUPLE_EVE_JON, Text_18C700, Text_18C73B, Text_18C7BD
+SevenIsland_SevaultCanyon_Entrance_EventScript_Jon:: @ 81AC94D
+	trainerbattle_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_JonIntro, SevenIsland_SevaultCanyon_Entrance_Text_JonDefeat, SevenIsland_SevaultCanyon_Entrance_Text_JonNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC978
-	msgbox Text_18C773, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_JonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC978:: @ 81AC978
-	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, Text_1C444C, Text_18C73B, Text_18C7BD
-	msgbox Text_18C773, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch:: @ 81AC978
+	trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_JonRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_JonDefeat, SevenIsland_SevaultCanyon_Entrance_Text_JonNotEnoughMons
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_JonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC993:: @ 81AC993
-	trainerbattle_single TRAINER_JUGGLER_MASON, Text_18C44B, Text_18C473
+SevenIsland_SevaultCanyon_Entrance_EventScript_Mason:: @ 81AC993
+	trainerbattle_single TRAINER_JUGGLER_MASON, SevenIsland_SevaultCanyon_Entrance_Text_MasonIntro, SevenIsland_SevaultCanyon_Entrance_Text_MasonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC9BA
-	msgbox Text_18C4BA, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_MasonRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MasonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC9BA:: @ 81AC9BA
-	trainerbattle_rematch TRAINER_JUGGLER_MASON, Text_1C4374, Text_18C473
-	msgbox Text_18C4BA, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_MasonRematch:: @ 81AC9BA
+	trainerbattle_rematch TRAINER_JUGGLER_MASON, SevenIsland_SevaultCanyon_Entrance_Text_MasonRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_MasonDefeat
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MasonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1AC9D1:: @ 81AC9D1
-	trainerbattle_single TRAINER_PKMN_RANGER_NICOLAS, Text_18C500, Text_18C543
+SevenIsland_SevaultCanyon_Entrance_EventScript_Nicolas:: @ 81AC9D1
+	trainerbattle_single TRAINER_PKMN_RANGER_NICOLAS, SevenIsland_SevaultCanyon_Entrance_Text_NicolasIntro, SevenIsland_SevaultCanyon_Entrance_Text_NicolasDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1AC9F8
-	msgbox Text_18C54B, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_NicolasRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_NicolasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1AC9F8:: @ 81AC9F8
-	trainerbattle_rematch TRAINER_PKMN_RANGER_NICOLAS, Text_1C43AD, Text_18C543
-	msgbox Text_18C54B, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_NicolasRematch:: @ 81AC9F8
+	trainerbattle_rematch TRAINER_PKMN_RANGER_NICOLAS, SevenIsland_SevaultCanyon_Entrance_Text_NicolasRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_NicolasDefeat
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_NicolasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_Entrance_EventScript_1ACA0F:: @ 81ACA0F
-	trainerbattle_single TRAINER_PKMN_RANGER_MADELINE, Text_18C5AA, Text_18C5CD
+SevenIsland_SevaultCanyon_Entrance_EventScript_Madeline:: @ 81ACA0F
+	trainerbattle_single TRAINER_PKMN_RANGER_MADELINE, SevenIsland_SevaultCanyon_Entrance_Text_MadelineIntro, SevenIsland_SevaultCanyon_Entrance_Text_MadelineDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACA36
-	msgbox Text_18C5F5, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_Entrance_EventScript_MadelineRematch
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MadelinePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACA36:: @ 81ACA36
-	trainerbattle_rematch TRAINER_PKMN_RANGER_MADELINE, Text_1C43EC, Text_18C5CD
-	msgbox Text_18C5F5, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_Entrance_EventScript_MadelineRematch:: @ 81ACA36
+	trainerbattle_rematch TRAINER_PKMN_RANGER_MADELINE, SevenIsland_SevaultCanyon_Entrance_Text_MadelineRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_MadelineDefeat
+	msgbox SevenIsland_SevaultCanyon_Entrance_Text_MadelinePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACA4D:: @ 81ACA4D
-	trainerbattle_single TRAINER_CRUSH_GIRL_CYNDY, Text_18C887, Text_18C8A6
+SevenIsland_SevaultCanyon_EventScript_Cyndy:: @ 81ACA4D
+	trainerbattle_single TRAINER_CRUSH_GIRL_CYNDY, SevenIsland_SevaultCanyon_Text_CyndyIntro, SevenIsland_SevaultCanyon_Text_CyndyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACA74
-	msgbox Text_18C8C2, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_CyndyRematch
+	msgbox SevenIsland_SevaultCanyon_Text_CyndyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACA74:: @ 81ACA74
-	trainerbattle_rematch TRAINER_CRUSH_GIRL_CYNDY, Text_1C4491, Text_18C8A6
-	msgbox Text_18C8C2, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_CyndyRematch:: @ 81ACA74
+	trainerbattle_rematch TRAINER_CRUSH_GIRL_CYNDY, SevenIsland_SevaultCanyon_Text_CyndyRematchIntro, SevenIsland_SevaultCanyon_Text_CyndyDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_CyndyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACA8B:: @ 81ACA8B
-	trainerbattle_single TRAINER_TAMER_EVAN, Text_18C8FD, Text_18C980
+SevenIsland_SevaultCanyon_EventScript_Evan:: @ 81ACA8B
+	trainerbattle_single TRAINER_TAMER_EVAN, SevenIsland_SevaultCanyon_Text_EvanIntro, SevenIsland_SevaultCanyon_Text_EvanDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACAB2
-	msgbox Text_18C999, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_EvanRematch
+	msgbox SevenIsland_SevaultCanyon_Text_EvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACAB2:: @ 81ACAB2
-	trainerbattle_rematch TRAINER_TAMER_EVAN, Text_1C44CB, Text_18C980
-	msgbox Text_18C999, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_EvanRematch:: @ 81ACAB2
+	trainerbattle_rematch TRAINER_TAMER_EVAN, SevenIsland_SevaultCanyon_Text_EvanRematchIntro, SevenIsland_SevaultCanyon_Text_EvanDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_EvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACAC9:: @ 81ACAC9
-	trainerbattle_single TRAINER_PKMN_RANGER_JACKSON, Text_18CA2F, Text_18CA6F
+SevenIsland_SevaultCanyon_EventScript_Jackson:: @ 81ACAC9
+	trainerbattle_single TRAINER_PKMN_RANGER_JACKSON, SevenIsland_SevaultCanyon_Text_JacksonIntro, SevenIsland_SevaultCanyon_Text_JacksonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACAF0
-	msgbox Text_18CA9C, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_JacksonRematch
+	msgbox SevenIsland_SevaultCanyon_Text_JacksonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACAF0:: @ 81ACAF0
-	trainerbattle_rematch TRAINER_PKMN_RANGER_JACKSON, Text_1C454E, Text_18CA6F
-	msgbox Text_18CA9C, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_JacksonRematch:: @ 81ACAF0
+	trainerbattle_rematch TRAINER_PKMN_RANGER_JACKSON, SevenIsland_SevaultCanyon_Text_JacksonRematchIntro, SevenIsland_SevaultCanyon_Text_JacksonDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_JacksonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACB07:: @ 81ACB07
-	trainerbattle_single TRAINER_PKMN_RANGER_KATELYN, Text_18CB16, Text_18CB3E
+SevenIsland_SevaultCanyon_EventScript_Katelyn:: @ 81ACB07
+	trainerbattle_single TRAINER_PKMN_RANGER_KATELYN, SevenIsland_SevaultCanyon_Text_KatelynIntro, SevenIsland_SevaultCanyon_Text_KatelynDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACB2E
-	msgbox Text_18CB6C, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_KatelynRematch
+	msgbox SevenIsland_SevaultCanyon_Text_KatelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACB2E:: @ 81ACB2E
-	trainerbattle_rematch TRAINER_PKMN_RANGER_KATELYN, Text_1C458E, Text_18CB3E
-	msgbox Text_18CB6C, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_KatelynRematch:: @ 81ACB2E
+	trainerbattle_rematch TRAINER_PKMN_RANGER_KATELYN, SevenIsland_SevaultCanyon_Text_KatelynRematchIntro, SevenIsland_SevaultCanyon_Text_KatelynDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_KatelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACB45:: @ 81ACB45
-	trainerbattle_single TRAINER_COOLTRAINER_LEROY, Text_18CBB4, Text_18CBE0
+SevenIsland_SevaultCanyon_EventScript_Leroy:: @ 81ACB45
+	trainerbattle_single TRAINER_COOLTRAINER_LEROY, SevenIsland_SevaultCanyon_Text_LeroyIntro, SevenIsland_SevaultCanyon_Text_LeroyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACB6C
-	msgbox Text_18CC09, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_LeroyRematch
+	msgbox SevenIsland_SevaultCanyon_Text_LeroyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACB6C:: @ 81ACB6C
-	trainerbattle_rematch TRAINER_COOLTRAINER_LEROY, Text_1C45C2, Text_18CBE0
-	msgbox Text_18CC09, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_LeroyRematch:: @ 81ACB6C
+	trainerbattle_rematch TRAINER_COOLTRAINER_LEROY, SevenIsland_SevaultCanyon_Text_LeroyRematchIntro, SevenIsland_SevaultCanyon_Text_LeroyDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_LeroyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACB83:: @ 81ACB83
-	trainerbattle_single TRAINER_COOLTRAINER_MICHELLE, Text_18CC4F, Text_18CCAE
+SevenIsland_SevaultCanyon_EventScript_Michelle:: @ 81ACB83
+	trainerbattle_single TRAINER_COOLTRAINER_MICHELLE, SevenIsland_SevaultCanyon_Text_MichelleIntro, SevenIsland_SevaultCanyon_Text_MichelleDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACBAA
-	msgbox Text_18CCEA, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_MichelleRematch
+	msgbox SevenIsland_SevaultCanyon_Text_MichellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACBAA:: @ 81ACBAA
-	trainerbattle_rematch TRAINER_COOLTRAINER_MICHELLE, Text_1C45FB, Text_18CCAE
-	msgbox Text_18CCEA, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_MichelleRematch:: @ 81ACBAA
+	trainerbattle_rematch TRAINER_COOLTRAINER_MICHELLE, SevenIsland_SevaultCanyon_Text_MichelleRematchIntro, SevenIsland_SevaultCanyon_Text_MichelleDefeat
+	msgbox SevenIsland_SevaultCanyon_Text_MichellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACBC1:: @ 81ACBC1
-	trainerbattle_double TRAINER_COOL_COUPLE_LEX_NYA, Text_18CD49, Text_18CD75, Text_18CDE2
+SevenIsland_SevaultCanyon_EventScript_Lex:: @ 81ACBC1
+	trainerbattle_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_LexIntro, SevenIsland_SevaultCanyon_Text_LexDefeat, SevenIsland_SevaultCanyon_Text_LexNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACBEC
-	msgbox Text_18CD9C, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_LexRematch
+	msgbox SevenIsland_SevaultCanyon_Text_LexPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACBEC:: @ 81ACBEC
-	trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, Text_1C4662, Text_18CD75, Text_18CDE2
-	msgbox Text_18CD9C, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_LexRematch:: @ 81ACBEC
+	trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_LexRematchIntro, SevenIsland_SevaultCanyon_Text_LexDefeat, SevenIsland_SevaultCanyon_Text_LexNotEnoughMons
+	msgbox SevenIsland_SevaultCanyon_Text_LexPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACC07:: @ 81ACC07
-	trainerbattle_double TRAINER_COOL_COUPLE_LEX_NYA, Text_18CE20, Text_18CE5A, Text_18CEF4
+SevenIsland_SevaultCanyon_EventScript_Nya:: @ 81ACC07
+	trainerbattle_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_NyaIntro, SevenIsland_SevaultCanyon_Text_NyaDefeat, SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1ACC32
-	msgbox Text_18CE78, MSGBOX_AUTOCLOSE
+	goto_if_eq SevenIsland_SevaultCanyon_EventScript_NyaRematch
+	msgbox SevenIsland_SevaultCanyon_Text_NyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-EventScript_1ACC32:: @ 81ACC32
-	trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, Text_1C4699, Text_18CE5A, Text_18CEF4
-	msgbox Text_18CE78, MSGBOX_AUTOCLOSE
+SevenIsland_SevaultCanyon_EventScript_NyaRematch:: @ 81ACC32
+	trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_NyaRematchIntro, SevenIsland_SevaultCanyon_Text_NyaDefeat, SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons
+	msgbox SevenIsland_SevaultCanyon_Text_NyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SevenIsland_TanobyRuins_EventScript_Brandon:: @ 81ACC4D
 	trainerbattle_single TRAINER_RUIN_MANIAC_BRANDON, SevenIsland_TanobyRuins_Text_BrandonIntro, SevenIsland_TanobyRuins_Text_BrandonDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchBrandon
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_BrandonRematch
 	msgbox SevenIsland_TanobyRuins_Text_BrandonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_RematchBrandon:: @ 81ACC74
+SevenIsland_TanobyRuins_EventScript_BrandonRematch:: @ 81ACC74
 	trainerbattle_rematch TRAINER_RUIN_MANIAC_BRANDON, SevenIsland_TanobyRuins_Text_BrandonRematchIntro, SevenIsland_TanobyRuins_Text_BrandonDefeat
 	msgbox SevenIsland_TanobyRuins_Text_BrandonPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -3005,11 +3005,11 @@ SevenIsland_TanobyRuins_EventScript_Benjamin:: @ 81ACC8B
 	trainerbattle_single TRAINER_RUIN_MANIAC_BENJAMIN, SevenIsland_TanobyRuins_Text_BenjaminIntro, SevenIsland_TanobyRuins_Text_BenjaminDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchBenjamin
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_BenjaminRematch
 	msgbox SevenIsland_TanobyRuins_Text_BenjaminPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_RematchBenjamin:: @ 81ACCB2
+SevenIsland_TanobyRuins_EventScript_BenjaminRematch:: @ 81ACCB2
 	trainerbattle_rematch TRAINER_RUIN_MANIAC_BENJAMIN, SevenIsland_TanobyRuins_Text_BenjaminRematchIntro, SevenIsland_TanobyRuins_Text_BenjaminDefeat
 	msgbox SevenIsland_TanobyRuins_Text_BenjaminPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -3018,11 +3018,11 @@ SevenIsland_TanobyRuins_EventScript_Edna:: @ 81ACCC9
 	trainerbattle_single TRAINER_PAINTER_EDNA, SevenIsland_TanobyRuins_Text_EdnaIntro, SevenIsland_TanobyRuins_Text_EdnaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchEdna
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_EdnaRematch
 	msgbox SevenIsland_TanobyRuins_Text_EdnaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_RematchEdna:: @ 81ACCF0
+SevenIsland_TanobyRuins_EventScript_EdnaRematch:: @ 81ACCF0
 	trainerbattle_rematch TRAINER_PAINTER_EDNA, SevenIsland_TanobyRuins_Text_EdnaRematchIntro, SevenIsland_TanobyRuins_Text_EdnaDefeat
 	msgbox SevenIsland_TanobyRuins_Text_EdnaPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -3031,11 +3031,11 @@ SevenIsland_TanobyRuins_EventScript_Clifford:: @ 81ACD07
 	trainerbattle_single TRAINER_GENTLEMAN_CLIFFORD, SevenIsland_TanobyRuins_Text_CliffordIntro, SevenIsland_TanobyRuins_Text_CliffordDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
-	goto_if_eq SevenIsland_TanobyRuins_EventScript_RematchClifford
+	goto_if_eq SevenIsland_TanobyRuins_EventScript_CliffordRematch
 	msgbox SevenIsland_TanobyRuins_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-SevenIsland_TanobyRuins_EventScript_RematchClifford:: @ 81ACD2E
+SevenIsland_TanobyRuins_EventScript_CliffordRematch:: @ 81ACD2E
 	trainerbattle_rematch TRAINER_GENTLEMAN_CLIFFORD, SevenIsland_TanobyRuins_Text_CliffordRematchIntro, SevenIsland_TanobyRuins_Text_CliffordDefeat
 	msgbox SevenIsland_TanobyRuins_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end

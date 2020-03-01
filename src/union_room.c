@@ -1735,7 +1735,7 @@ static void Task_CallCB2ReturnFromLinkTrade(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade(void)
+u8 UnionRoom_CreateTask_CallCB2ReturnFromLinkTrade(void)
 {
     u8 taskId = CreateTask(Task_CallCB2ReturnFromLinkTrade, 0);
 

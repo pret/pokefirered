@@ -26,7 +26,7 @@
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
 
-u32 UnusedVarNeededToMatch;
+u32 UnusedVarNeededToMatch[8];
 
 static void Task_Linkup0(u8 taskId);
 static void Task_Linkup1(u8 taskId);
@@ -403,7 +403,7 @@ static void Task_Linkup_6a(u8 taskId)
         {
             // Dumb trick required to match
             if (gLinkType == LINKTYPE_0x4411)
-                UnusedVarNeededToMatch += 0;
+                *UnusedVarNeededToMatch += 0;
             DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
             EnableBothScriptContexts();
             DestroyTask(taskId);
@@ -876,7 +876,7 @@ static void Task_StartWirelessCableClubTrade(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade();
+            UnionRoom_CreateTask_CallCB2ReturnFromLinkTrade();
             DestroyTask(taskId);
         }
         break;

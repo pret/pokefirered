@@ -75,7 +75,6 @@ gUnknown_3005078: @ 3005078
 	.include "task.o"
 	.align 2
 	.include "cable_club.o"
-	.space 0x1C
 	.align 2
 	.include "image_processing_effects.o"
 	.align 2

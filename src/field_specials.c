@@ -533,7 +533,8 @@ bool8 Special_IsMonOTNameNotPlayers(void)
         return TRUE;
 }
 
-void nullsub_75(void)
+// Used to nop all the unused specials from RS
+void NullFieldSpecial(void)
 {
 
 }

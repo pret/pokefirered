@@ -32,6 +32,7 @@ Route21_North_Text_SpencerPostBattle:: @ 8188465
 
 @ Below is the battle text for the Cue Ball that was on Route 21 in Gen 1.
 @ This trainer wasnt used in Gen 3 so their text goes unused/untranslated
+@ Interestingly they did add a rematch intro text for this trainer
 @ English translations from RB are listed
 
 @ "What's wrong with me swimming?"

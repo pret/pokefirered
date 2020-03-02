@@ -1421,7 +1421,7 @@ PokemonJournal_Text_SpecialFeatureSabrina:: @ 81B1753
 	.string "communicate with her POKéMON\l"
 	.string "during battle without speaking.$"
 
-gUnknown_81B17E9:: @ 81B17E9
+PokemonJournal_Text_SpecialFeatureBlaine:: @ 81B17E9
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature: CINNABAR GYM\n"
 	.string "LEADER BLAINE!\p"

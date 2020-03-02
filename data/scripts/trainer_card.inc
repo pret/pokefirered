@@ -68,7 +68,7 @@ FourIsland_House2_EventScript_StickerMan:: @ 81B2938
 	lock
 	specialvar VAR_0x8008, StickerManGetBragFlags
 	goto_if_unset FLAG_MET_STICKER_MAN, FourIsland_House2_EventScript_MeetStickerMan
-	goto_if_set FLAG_MET_STICKER_MAN, EventScript_1B2994
+	goto_if_set FLAG_MET_STICKER_MAN, FourIsland_House2_EventScript_StickerManAskForBrag
 	end
 
 FourIsland_House2_EventScript_MeetStickerMan:: @ 81B2951
@@ -88,19 +88,19 @@ FourIsland_House2_EventScript_MeetStickerMan:: @ 81B2951
 	goto FourIsland_House2_EventScript_ChooseBrag
 	end
 
-EventScript_1B2994:: @ 81B2994
+FourIsland_House2_EventScript_StickerManAskForBrag:: @ 81B2994
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	compare VAR_0x8008, 0
-	goto_if_eq EventScript_1B29C6
+	goto_if_eq FourIsland_House2_EventScript_NothingToBragAbout
 	message FourIsland_House2_Text_BragAboutWhatToday
 	waitmessage
 	goto FourIsland_House2_EventScript_ChooseBrag
 	end
 
-EventScript_1B29C6:: @ 81B29C6
+FourIsland_House2_EventScript_NothingToBragAbout:: @ 81B29C6
 	msgbox FourIsland_House2_Text_BragAboutSomethingForMe
 	release
 	end

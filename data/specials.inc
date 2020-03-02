@@ -14,28 +14,28 @@ gSpecials:: @ 815FD60
 	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
 	def_special sub_8081770
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
 	def_special TryRecordMixLinkup
@@ -44,20 +44,20 @@ gSpecials:: @ 815FD60
 	def_special EnterTradeSeat
 	def_special Special_WiredCableClubTrade
 	def_special Special_CableClub_AskSaveTheGame
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
 	def_special Script_ShowLinkTrainerCard
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
 	def_special ScrSpecial_ShowTrainerIntroSpeech
@@ -70,63 +70,63 @@ gSpecials:: @ 815FD60
 	def_special ScrSpecial_StartTrainerEyeRematch
 	def_special ShowPokemonStorageSystem
 	def_special HasEnoughMonsForDoubleBattle
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_HasLeadMonBeenRenamed
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special sub_8081128
 	def_special Field_AskSaveTheGame
 	def_special nullsub_56
 	def_special ShowEasyChatScreen
 	def_special Special_BufferEasyChatMessage
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special GetHeracrossSizeRecordInfo
 	def_special CompareHeracrossSize
 	def_special GetMagikarpSizeRecordInfo
@@ -134,43 +134,43 @@ gSpecials:: @ 815FD60
 	def_special NameRaterWasNicknameChanged
 	def_special Special_GetMonNickname
 	def_special Special_IsMonOTIDNotPlayers
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special BufferRandomHobbyOrLifestyleString
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_ShowStringVar4AsFieldMessage
 	def_special DrawWholeMapView
 	def_special Special_GetPlayerXY
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_GetPlayerTrainerIdOnesDigit
 	def_special Special_BufferBigGuyOrBigGirlString
 	def_special Special_BufferSonOrDaughterString
 	def_special Special_SetHiddenItemFlag
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Overworld_PlaySpecialMapMusic
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special ScrSpecial_StartOldManTutorialBattle
 	def_special ChangePokemonNickname
 	def_special Special_ChooseMonFromParty
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_IsFanClubMemberFanOfPlayer
 	def_special Special_GetNumFansOfPlayerInTrainerFanClub
 	def_special Special_BufferFanClubTrainerName
@@ -180,14 +180,14 @@ gSpecials:: @ 815FD60
 	def_special Special_UpdateTrainerFanClubGameClear
 	def_special Special_TryGainNewFanFromCounter
 	def_special ScrSpecial_RockSmashWildEncounter
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -209,35 +209,35 @@ gSpecials:: @ 815FD60
 	def_special SubtractMoneyFromVar0x8005
 	def_special TryFieldPoisonWhiteOut
 	def_special SetCB2Whiteout
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special EnterSafariMode
 	def_special ExitSafariMode
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_GetPokedexCount
 	def_special Special_GetProfOaksRatingMessage
 	def_special Special_AnimatePcTurnOn
 	def_special Special_AnimatePcTurnOff
 	def_special Special_GetElevatorFloor
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_SelectMoveTutorMon
 	def_special Special_SelectMove
 	def_special Special_MoveDeleterForgetMove
 	def_special Special_BufferMoveDeleterNicknameAndMove
 	def_special Special_GetNumMovesSelectedMonHas
 	def_special DisplayMoveTutorMenu
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_GetPlayerAvatarBike
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special GetLeadMonFriendship
 	def_special ScrSpecial_BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
@@ -255,7 +255,7 @@ gSpecials:: @ 815FD60
 	def_special AwardBattleTowerRibbons
 	def_special ChooseBattleTowerPlayerParty
 	def_special ValidateEReaderTrainer
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
 	def_special PlayerPC
@@ -264,58 +264,58 @@ gSpecials:: @ 815FD60
 	def_special CreateInGameTradePokemon
 	def_special DoInGameTradeScene
 	def_special GetTradeSpecies
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special ScrSpecial_CreatePCMenu
 	def_special HallOfFamePCBeginFade
 	def_special Special_ShowDiploma
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special nullsub_61
 	def_special DoSoftReset
 	def_special Special_HallOfFame
 	def_special Special_AnimateElevator
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special BufferEReaderTrainerName
 	def_special Special_GetRandomSlotMachine
 	def_special GetPlayerFacingDirection
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
 	def_special ScrSpecial_AreLeadMonEVsMaxedOut
 	def_special Script_FacePlayer
 	def_special Script_ClearHeldMovement
 	def_special InitRoamer
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special Special_PlayerHasGrassPokemonInParty
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_IsStarterFirstStageInParty
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special Special_IsThereRoomInAnyBoxForMorePokemon
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special Special_DrawElevatorCurrentFloorWindow
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special Special_CheckPartyPokerus
 	def_special Special_SetIcefallCaveCrackedIceMetatiles
 	def_special Special_ShakeScreen
@@ -323,32 +323,32 @@ gSpecials:: @ 815FD60
 	def_special Special_StartLegendaryBattle
 	def_special Special_StartRegiBattle
 	def_special SetUpTrainerMovement
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special sub_807B6C0
 	def_special DoDiveWarp
 	def_special DoFallWarp
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special SetEReaderTrainerGfxId
 	def_special ScrSpecial_StartSouthernIslandBattle
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special Special_GetSpeciesOfPartySlot_x8004
 	def_special Special_IsSelectedMonEgg
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special LoadPlayerBag
 	def_special Script_FadeOutMapMusic
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special HasAllKantoMons
 	def_special Special_IsMonOTNameNotPlayers
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special Dummy_TryEnableBravoTrainerBattleTower
 	def_special GetNameOfEnigmaBerryInPlayerParty
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special sub_810B82C
 	def_special ScrSpecial_StartMarowakBattle
 	def_special Special_ForcePlayerOntoBike

@@ -379,9 +379,9 @@ extern const u8 gText_LtSurge[];
 extern const u8 gText_Koga[];
 extern const u8 gText_PokemonCenter[];
 // vs_seeker
-extern const u8 gUnknown_81C137C[];
-extern const u8 gUnknown_81C13D6[];
-extern const u8 gUnknown_81C1429[];
+extern const u8 VSSeeker_Text_BatteryNotChargedNeedXSteps[];
+extern const u8 VSSeeker_Text_NoTrainersWithinRange[];
+extern const u8 VSSeeker_Text_TrainersNotReady[];
 
 // fame_checker
 

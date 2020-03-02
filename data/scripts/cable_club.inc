@@ -19,7 +19,7 @@ CableClub_EventScript_MysteryGiftMan:: @ 81BB1D2
 	execram
 
 @ Unused
-EventScript_1BB1E4:: @ 81BB1E4
+EventScript_MysteryGiftThankYou:: @ 81BB1E4
 	msgbox Text_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end
 

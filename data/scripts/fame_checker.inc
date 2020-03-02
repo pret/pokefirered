@@ -151,12 +151,12 @@ FourIsland_Mart_EventScript_OldMan:: @ 81ACF46
 	release
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
+FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACF5F
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 3
 	textcolor 3
-	msgbox gUnknown_81B187F
+	msgbox PokemonJournal_Text_SpecialFeatureLorelei
 	release
 	end
 

@@ -7,17 +7,17 @@ FiveIsland_PokemonCenter_1F_OnTransition:: @ 8171CFC
 	setrespawn SPAWN_FIVE_ISLAND
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_171D00:: @ 8171D00
+FiveIsland_PokemonCenter_1F_EventScript_Nurse:: @ 8171D00
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_171D09:: @ 8171D09
-	msgbox gUnknown_81A3BBA, MSGBOX_NPC
+FiveIsland_PokemonCenter_1F_EventScript_Chef:: @ 8171D09
+	msgbox FiveIsland_PokemonCenter_1F_Text_OnMyWayToPrepareMeal, MSGBOX_NPC
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_171D12:: @ 8171D12
-	msgbox gUnknown_81A3BFD, MSGBOX_NPC
+FiveIsland_PokemonCenter_1F_EventScript_CooltrainerF:: @ 8171D12
+	msgbox FiveIsland_PokemonCenter_1F_Text_YoureOnQuestToCatchEveryMon, MSGBOX_NPC
 	end

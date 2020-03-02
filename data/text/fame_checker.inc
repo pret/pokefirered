@@ -1429,7 +1429,7 @@ gUnknown_81B17E9:: @ 81B17E9
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
 
-gUnknown_81B187F:: @ 81B187F
+PokemonJournal_Text_SpecialFeatureLorelei:: @ 81B187F
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LORELEI!\p"

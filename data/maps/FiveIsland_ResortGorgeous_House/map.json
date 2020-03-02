@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FiveIsland_ResortGorgeous_House_EventScript_171EBE",
+      "script": "FiveIsland_ResortGorgeous_House_EventScript_Selphy",
       "flag": "FLAG_HIDE_RESORT_GORGEOUS_INSIDE_SELPHY"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FiveIsland_ResortGorgeous_House_EventScript_172062",
+      "script": "FiveIsland_ResortGorgeous_House_EventScript_Butler",
       "flag": "FLAG_HIDE_SELPHYS_BUTLER"
     }
   ],

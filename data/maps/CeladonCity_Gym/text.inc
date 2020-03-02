@@ -1,9 +1,3 @@
-Text_SorryDontHaveAnyMore:: @ 81970FE
-    .string "おきゃくさん もう もてないよ$"
-
-Text_ISee:: @ 819710E
-    .string "あっ そう$"
-
 CeladonCity_Gym_Text_ErikaIntro:: @ 8197114
     .string "Hello…\n"
     .string "Lovely weather, isn't it?\l"

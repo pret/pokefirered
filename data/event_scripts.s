@@ -843,7 +843,7 @@ Text_PlayerWhatCanIDoForYou:: @ 81A51D0
 
 	.include "data/text/obtain_item.inc"
 
-Text_1A5351:: @ 81A5351
+Text_MakingPreparations:: @ 81A5351
 	.string "じゅんびちゅうです！$"
 
 Text_WantWhichFloor:: @ 81A535C
@@ -926,16 +926,7 @@ Text_GiveNicknameToThisMon:: @ 81A56A7
 	.string "Do you want to give a nickname to\n"
 	.string "this {STR_VAR_1}?$"
 
-Text_1A56D2:: @ 81A56D2
-	.string "おッ！　ダウジングマシンが\n"
-	.string "はんのう　してるぞ！\p"
-	.string "ましたに　どうぐが　うまってる！\n"
-	.string "‥‥‥$"
-
-Text_DugUpItemFromGround:: @ 81A5700
-	.string "{PLAYER} dug up one {STR_VAR_2}\n"
-	.string "from deep in the ground.$"
-
+	.include "data/text/itemfinder.inc"
 	.include "data/text/route23.inc"
 	.include "data/text/aide.inc"
 	.include "data/text/ingame_trade.inc"
@@ -995,7 +986,7 @@ Text_TheDoorIsOpen:: @ 81A5CDF
 Text_MonFlewAway:: @ 81A63C4
 	.string "The {STR_VAR_1} flew away!$"
 
-Text_1A63D6:: @ 81A63D6
+Text_TheresBedLetsRest:: @ 81A63D6
 	.string "ベッドが　ある‥‥\n"
 	.string "やすんでいこう$"
 

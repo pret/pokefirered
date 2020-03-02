@@ -1,7 +1,7 @@
 #ifndef GUARD_TRAINER_CARD_H
 #define GUARD_TRAINER_CARD_H
 
-struct TrainerCard
+struct TrainerCardRSE
 {
     /*0x00*/ u8 gender;
     /*0x01*/ u8 stars;
@@ -25,6 +25,11 @@ struct TrainerCard
     /*0x24*/ u32 money;
     /*0x28*/ u16 var_28[4];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
+};
+
+struct TrainerCard
+{
+    /*0x00*/ struct TrainerCardRSE rse;
     /*0x38*/ u8 version;
     /*0x3A*/ u16 var_3A;
     /*0x3C*/ u32 berryCrushPoints;

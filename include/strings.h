@@ -1141,4 +1141,11 @@ extern const u8 gText_BestScore2[];
 extern const u8 gText_ExcellentsInARow[];
 extern const u8 gText_PkmnJumpRecords[];
 
+// cable_club
+extern const u8 gUnknown_841DF82[];
+extern const u8 gUnknown_841DF8B[];
+extern const u8 gUnknown_841DF92[];
+extern const u8 gUnknown_841DF99[];
+extern const u8 gUnknown_841DFA0[];
+
 #endif //GUARD_STRINGS_H

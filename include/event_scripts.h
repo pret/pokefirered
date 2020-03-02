@@ -1204,4 +1204,10 @@ extern const u8 EventScript_BagItemCanBeRegistered[];
 // fldeff_cut
 extern const u8 EventScript_FldEffCut[];
 
+// cable_club
+extern const u8 CableClub_Text_WhenAllPlayersReadyAConfirmBCancel[];
+extern const u8 CableClub_Text_AwaitingLinkupBCancel[];
+extern const u8 CableClub_Text_StartLinkWithXPlayersAConfirmBCancel[];
+extern const u8 CableClub_Text_PleaseWaitBCancel[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

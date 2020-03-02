@@ -183,6 +183,12 @@ bool32 sub_8058274(void);
 u8 GetCurrentMapBattleScene(void);
 void Overworld_ResetStateAfterFly(void);
 bool8 sub_8055B38(u16 metatileBehavior);
+void sub_8055DB8(void);
+void sub_8057F5C(void);
+void sub_8057F34(void);
+u32 sub_8057EC0(void);
+void sub_8057F70(void);
+void sub_8057F48(void);
 
 extern u16 gHeldKeyCodeToSend;
 

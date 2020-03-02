@@ -412,7 +412,7 @@ static u32 FieldEffectScript_ReadWord(const u8 **script)
 static void FieldEffectScript_LoadTiles(const u8 **script)
 {
     const struct SpriteSheet * spriteSheet = (const struct SpriteSheet * )FieldEffectScript_ReadWord(script);
-    if (GetSpriteTileStartByTag(spriteSheet->tag) == SPRITE_INVALID_TAG)
+    if (GetSpriteTileStartByTag(spriteSheet->tag) == 0xFFFF)
         LoadSpriteSheet(spriteSheet);
     *script += sizeof(u32);
 }

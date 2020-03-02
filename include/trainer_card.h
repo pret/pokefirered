@@ -3,7 +3,7 @@
 
 #include "constants/trainer_card.h"
 
-struct TrainerCard
+struct TrainerCardRSE
 {
     /*0x00*/ u8 gender;
     /*0x01*/ u8 stars;
@@ -27,12 +27,17 @@ struct TrainerCard
     /*0x24*/ u32 money;
     /*0x28*/ u16 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
+};
+
+struct TrainerCard
+{
+    /*0x00*/ struct TrainerCardRSE rse;
     /*0x38*/ u8 version;
     /*0x3A*/ bool16 hasAllFrontierSymbols;
     /*0x3C*/ u32 berryCrushPoints;
     /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u32 berriesPicked;
-	/*0x48*/ u32 jumpsInRow;
+	  /*0x48*/ u32 jumpsInRow;
     /*0x4C*/ bool8 shouldDrawStickers;
     /*0x4D*/ bool8 hasAllMons;
     /*0x4E*/ u8 monIconTint;

@@ -38,12 +38,12 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
-	def_special sub_80810F4
+	def_special TryRecordMixLinkup
 	def_special CloseLink
 	def_special EnterColosseumPlayerSpot
 	def_special EnterTradeSeat
-	def_special sub_80819B8
-	def_special sub_808130C
+	def_special Special_WiredCableClubTrade
+	def_special Special_CableClub_AskSaveTheGame
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75

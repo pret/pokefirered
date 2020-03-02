@@ -50,5 +50,6 @@ void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void sub_8110840(void *oldSave);
 void sub_8112F18(u8 windowId);
 bool8 sub_8111C2C(void);
+void Special_UpdateTrainerFansAfterLinkBattle(void);
 
 #endif //GUARD_QUEST_LOG_H

@@ -796,7 +796,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper)
         if (lower > cmpVal || cmpVal > upper)
         {
             sPlayerDataExchangeStatus = EXCHANGE_STAT_6;
-            return 6;
+            return EXCHANGE_STAT_6;
         }
         else
         {
@@ -1006,15 +1006,15 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
     return InitBlockSend(src, size);
 }
 
-bool8 sub_800A474(u8 a0)
+bool8 sub_800A474(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
-        return sub_80FA0F8(a0);
+        return sub_80FA0F8(blockRequestType);
     }
     if (gLinkCallback == NULL)
     {
-        gBlockRequestType = a0;
+        gBlockRequestType = blockRequestType;
         BuildSendCmd(LINKCMD_0xCCCC);
         return TRUE;
     }

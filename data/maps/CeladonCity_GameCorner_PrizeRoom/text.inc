@@ -29,3 +29,9 @@ CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins:: @ 81970D5
     .string "Sorry, you'll need more COINS\n"
     .string "than that.$"
 
+CeladonCity_GameCorner_PrizeRoom_Text_OopsNotEnoughRoom:: @ 81970FE
+    .string "おきゃくさん もう もてないよ$"
+
+CeladonCity_GameCorner_PrizeRoom_Text_OhFineThen:: @ 819710E
+    .string "あっ そう$"
+

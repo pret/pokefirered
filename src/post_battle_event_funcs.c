@@ -52,7 +52,7 @@ bool8 Special_HallOfFame(void)
     return FALSE;
 }
 
-bool8 sp0C8_whiteout_maybe(void)
+bool8 SetCB2Whiteout(void)
 {
     SetMainCallback2(CB2_WhiteOut);
     return FALSE;

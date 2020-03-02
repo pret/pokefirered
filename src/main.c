@@ -20,6 +20,7 @@
 #include "battle_controllers.h"
 #include "scanline_effect.h"
 #include "save_failed_screen.h"
+#include "quest_log.h"
 
 extern u32 intr_main[];
 
@@ -76,9 +77,6 @@ static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
 EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
 EWRAM_DATA u16 gTrainerId = 0;
-
-extern bool8 gWirelessCommType;
-extern bool8 gUnknown_3005E88;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
@@ -178,7 +176,7 @@ static void InitMainCallbacks(void)
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
-    gUnknown_3005E88 = FALSE;
+    gUnknown_3005E88 = 0;
 }
 
 static void CallCallbacks(void)

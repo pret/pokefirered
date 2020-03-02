@@ -2761,7 +2761,7 @@ static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
         return FALSE;
 
     sub_81138F8();
-    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
+    if (gUnknown_3005E88 != 0 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
     {
         gUnknown_203B024.unk_00 = eventId;
         memcpy(gUnknown_203B024.unk_04, eventData, 8);

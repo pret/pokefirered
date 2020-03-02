@@ -1906,8 +1906,8 @@ _0807AA84: .4byte gUnknown_2037F34
 _0807AA88: .4byte 0x000006c6
 	thumb_func_end IsWeatherNotFadingIn
 
-	thumb_func_start sub_807AA8C
-sub_807AA8C: @ 807AA8C
+	thumb_func_start UpdateSpritePaletteWithWeather
+UpdateSpritePaletteWithWeather: @ 807AA8C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 8
@@ -2017,7 +2017,7 @@ _0807AB68:
 	bx r0
 	.align 2, 0
 _0807AB70: .4byte 0x000073fc
-	thumb_func_end sub_807AA8C
+	thumb_func_end UpdateSpritePaletteWithWeather
 
 	thumb_func_start sub_807AB74
 sub_807AB74: @ 807AB74
@@ -2078,7 +2078,7 @@ sub_807ABC0: @ 807ABC0
 	movs r2, 0x20
 	bl LoadPalette
 	ldrb r0, [r4]
-	bl sub_807AA8C
+	bl UpdateSpritePaletteWithWeather
 	pop {r4}
 	pop {r0}
 	bx r0

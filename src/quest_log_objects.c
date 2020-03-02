@@ -39,8 +39,8 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
         questLog->unk_008[i].x = gObjectEvents[i].currentCoords.x;
         questLog->unk_008[i].y = gObjectEvents[i].currentCoords.y;
         questLog->unk_008[i].trainerRange_berryTreeId = gObjectEvents[i].trainerRange_berryTreeId;
-        questLog->unk_008[i].mapobj_unk_1F = gObjectEvents[i].mapobj_unk_1F;
-        questLog->unk_008[i].mapobj_unk_21 = gObjectEvents[i].mapobj_unk_21;
+        questLog->unk_008[i].previousMetatileBehavior = gObjectEvents[i].previousMetatileBehavior;
+        questLog->unk_008[i].directionSequenceIndex = gObjectEvents[i].directionSequenceIndex;
         questLog->unk_008[i].animId = gObjectEvents[i].animId;
     }
 }
@@ -83,8 +83,8 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         gObjectEvents[i].currentCoords.x = questLogObjectEvents[i].x;
         gObjectEvents[i].currentCoords.y = questLogObjectEvents[i].y;
         gObjectEvents[i].trainerRange_berryTreeId = questLogObjectEvents[i].trainerRange_berryTreeId;
-        gObjectEvents[i].mapobj_unk_1F = questLogObjectEvents[i].mapobj_unk_1F;
-        gObjectEvents[i].mapobj_unk_21 = questLogObjectEvents[i].mapobj_unk_21;
+        gObjectEvents[i].previousMetatileBehavior = questLogObjectEvents[i].previousMetatileBehavior;
+        gObjectEvents[i].directionSequenceIndex = questLogObjectEvents[i].directionSequenceIndex;
         gObjectEvents[i].animId = questLogObjectEvents[i].animId;
 
         for (j = 0; j < 0x40; j++)
@@ -98,28 +98,28 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
             }
         }
 
-        gObjectEvents[i].mapobj_unk_1E = MapGridGetMetatileBehaviorAt(gObjectEvents[i].currentCoords.x, gObjectEvents[i].currentCoords.y);
-        if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y)))
+        gObjectEvents[i].currentMetatileBehavior = MapGridGetMetatileBehaviorAt(gObjectEvents[i].currentCoords.x, gObjectEvents[i].currentCoords.y);
+        if (gObjectEvents[i].previousMetatileBehavior == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y)))
         {
             gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
             gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x - 1), (s16)(gObjectEvents[i].currentCoords.y)))
+        else if (gObjectEvents[i].previousMetatileBehavior == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x - 1), (s16)(gObjectEvents[i].currentCoords.y)))
         {
             gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x - 1;
             gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x + 1), (s16)(gObjectEvents[i].currentCoords.y)))
+        else if (gObjectEvents[i].previousMetatileBehavior == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x + 1), (s16)(gObjectEvents[i].currentCoords.y)))
         {
             gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x + 1;
             gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y - 1)))
+        else if (gObjectEvents[i].previousMetatileBehavior == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y - 1)))
         {
             gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
             gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y - 1;
         }
-        else if (gObjectEvents[i].mapobj_unk_1F == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y + 1)))
+        else if (gObjectEvents[i].previousMetatileBehavior == MapGridGetMetatileBehaviorAt((s16)(gObjectEvents[i].currentCoords.x), (s16)(gObjectEvents[i].currentCoords.y + 1)))
         {
             gObjectEvents[i].previousCoords.x = gObjectEvents[i].currentCoords.x;
             gObjectEvents[i].previousCoords.y = gObjectEvents[i].currentCoords.y + 1;
@@ -140,7 +140,7 @@ void sub_815A540(void)
         {
             struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
             SetPlayerAvatarTransitionFlags(0x01);
-            DestroySprite(&gSprites[objectEvent->mapobj_unk_1A]);
+            DestroySprite(&gSprites[objectEvent->fieldEffectSpriteId]);
         }
     }
 }

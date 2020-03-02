@@ -3158,7 +3158,7 @@ InitPlayerAvatar: @ 805CA3C
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4, 0x2]
-	bl sub_80DB0C4
+	bl CreateWarpArrowSprite
 	strb r0, [r4, 0x1B]
 	adds r0, r4, 0
 	mov r1, r9
@@ -3403,7 +3403,7 @@ _0805CC62:
 	movs r1, 0
 	ldrsh r3, [r7, r1]
 	adds r1, r6, 0
-	bl sub_80DB134
+	bl ShowWarpArrowSprite
 	b _0805CCC2
 	.align 2, 0
 _0805CCA4: .4byte gUnknown_835B890
@@ -3419,7 +3419,7 @@ _0805CCA8:
 	cmp r1, 0x3
 	ble _0805CC62
 	ldrb r0, [r5, 0x1B]
-	bl objid_set_invisible
+	bl SetSpriteInvisible
 _0805CCC2:
 	add sp, 0x4
 	pop {r3,r4}

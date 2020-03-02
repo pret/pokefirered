@@ -7273,7 +7273,7 @@ InitLinkPlayerObjectEventPos: @ 8058448
 	adds r2, 0xC
 	adds r3, r4, 0
 	adds r3, 0xE
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x8
 	strh r0, [r4, 0xC]

@@ -252,7 +252,7 @@ _0807B456:
 	adds r2, 0x20
 	adds r3, r4, 0
 	adds r3, 0x22
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r1, 0x2

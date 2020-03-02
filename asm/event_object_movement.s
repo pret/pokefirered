@@ -1084,7 +1084,7 @@ _0805E5CA:
 	ldrh r0, [r6, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__no_record
+	bl LoadPlayerObjectReflectionPalette
 	b _0805E606
 	.align 2, 0
 _0805E5F4: .4byte gObjectEvents
@@ -1094,7 +1094,7 @@ _0805E5F8:
 	ldrh r0, [r6, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 _0805E606:
 	ldrb r0, [r5, 0x6]
 	cmp r0, 0x4C
@@ -1728,7 +1728,7 @@ sprite_new: @ 805E9F8
 	ldrh r0, [r4, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 _0805EAE4:
 	ldr r1, [sp, 0x1C]
 	cmp r1, 0
@@ -1852,7 +1852,7 @@ sub_805EB44: @ 805EB44
 	ldrh r0, [r7, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 _0805EBE6:
 	ldr r1, [sp, 0x18]
 	cmp r1, 0
@@ -2239,7 +2239,7 @@ _0805EE70:
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__no_record
+	bl LoadPlayerObjectReflectionPalette
 _0805EECA:
 	ldrb r0, [r5, 0xC]
 	lsls r1, r0, 28
@@ -2248,7 +2248,7 @@ _0805EECA:
 	bls _0805EEDC
 	ldrh r0, [r5, 0x2]
 	lsrs r1, 28
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 _0805EEDC:
 	mov r0, sp
 	strh r4, [r0, 0x2]
@@ -2315,7 +2315,7 @@ _0805EEDC:
 	mov r0, r8
 	adds r1, r7, 0
 	bl SetPlayerAvatarObjectEventIdAndObjectId
-	bl sub_80DB0C4
+	bl CreateWarpArrowSprite
 	strb r0, [r6, 0x1B]
 _0805EF6A:
 	ldr r1, [sp, 0x20]
@@ -2470,7 +2470,7 @@ ObjectEventSetGraphicsId: @ 805F060
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 _0805F09E:
 	ldrb r1, [r5, 0xC]
 	mov r0, r8
@@ -2480,7 +2480,7 @@ _0805F09E:
 	ldrh r0, [r5, 0x2]
 	lsls r1, 28
 	lsrs r1, 28
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 _0805F0B2:
 	ldr r0, [r4, 0xC]
 	ldrh r0, [r0, 0x4]
@@ -2583,7 +2583,7 @@ _0805F152:
 	adds r2, 0x20
 	adds r3, r4, 0
 	adds r3, 0x22
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	ldrh r0, [r5, 0x8]
 	lsls r0, 16
 	asrs r0, 17
@@ -3107,8 +3107,8 @@ _0805F530:
 	bx r1
 	thumb_func_end sub_805F510
 
-	thumb_func_start pal_patch_for_npc
-pal_patch_for_npc: @ 805F538
+	thumb_func_start PatchObjectPalette
+PatchObjectPalette: @ 805F538
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -3135,7 +3135,7 @@ pal_patch_for_npc: @ 805F538
 	bx r0
 	.align 2, 0
 _0805F570: .4byte gObjectEventSpritePalettes
-	thumb_func_end pal_patch_for_npc
+	thumb_func_end PatchObjectPalette
 
 	thumb_func_start pal_patch_for_npc_range
 pal_patch_for_npc_range: @ 805F574
@@ -3150,7 +3150,7 @@ pal_patch_for_npc_range: @ 805F574
 _0805F584:
 	ldrh r0, [r5]
 	adds r1, r4, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	adds r5, 0x2
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -3205,8 +3205,8 @@ _0805F5E2:
 	bx r1
 	thumb_func_end FindObjectEventPaletteIndexByTag
 
-	thumb_func_start npc_load_two_palettes__no_record
-npc_load_two_palettes__no_record: @ 805F5E8
+	thumb_func_start LoadPlayerObjectReflectionPalette
+LoadPlayerObjectReflectionPalette: @ 805F5E8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3214,14 +3214,14 @@ npc_load_two_palettes__no_record: @ 805F5E8
 	lsrs r5, r1, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	movs r3, 0
 	ldr r1, _0805F630 @ =gUnknown_83A5208
 	ldrh r0, [r1]
 	ldr r2, _0805F634 @ =0x000011ff
 	cmp r0, r2
 	beq _0805F650
-	ldr r0, _0805F638 @ =gUnknown_835B934
+	ldr r0, _0805F638 @ =gReflectionEffectPaletteMap
 	adds r5, r0
 	adds r6, r2, 0
 _0805F60C:
@@ -3239,12 +3239,12 @@ _0805F60C:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrb r1, [r5]
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	b _0805F650
 	.align 2, 0
 _0805F630: .4byte gUnknown_83A5208
 _0805F634: .4byte 0x000011ff
-_0805F638: .4byte gUnknown_835B934
+_0805F638: .4byte gReflectionEffectPaletteMap
 _0805F63C: .4byte gUnknown_2037098
 _0805F640:
 	adds r0, r3, 0x1
@@ -3259,10 +3259,10 @@ _0805F650:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end npc_load_two_palettes__no_record
+	thumb_func_end LoadPlayerObjectReflectionPalette
 
-	thumb_func_start npc_load_two_palettes__and_record
-npc_load_two_palettes__and_record: @ 805F658
+	thumb_func_start LoadSpecialObjectReflectionPalette
+LoadSpecialObjectReflectionPalette: @ 805F658
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3272,14 +3272,14 @@ npc_load_two_palettes__and_record: @ 805F658
 	strh r4, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	movs r3, 0
 	ldr r1, _0805F6A8 @ =gUnknown_83A5278
 	ldrh r0, [r1]
 	ldr r2, _0805F6AC @ =0x000011ff
 	cmp r0, r2
 	beq _0805F6C8
-	ldr r0, _0805F6B0 @ =gUnknown_835B934
+	ldr r0, _0805F6B0 @ =gReflectionEffectPaletteMap
 	adds r5, r0
 	adds r6, r2, 0
 _0805F680:
@@ -3297,13 +3297,13 @@ _0805F680:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrb r1, [r5]
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	b _0805F6C8
 	.align 2, 0
 _0805F6A4: .4byte gUnknown_203709A
 _0805F6A8: .4byte gUnknown_83A5278
 _0805F6AC: .4byte 0x000011ff
-_0805F6B0: .4byte gUnknown_835B934
+_0805F6B0: .4byte gReflectionEffectPaletteMap
 _0805F6B4: .4byte gUnknown_2037098
 _0805F6B8:
 	adds r0, r3, 0x1
@@ -3318,18 +3318,18 @@ _0805F6C8:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end npc_load_two_palettes__and_record
+	thumb_func_end LoadSpecialObjectReflectionPalette
 
 	thumb_func_start sub_805F6D0
 sub_805F6D0: @ 805F6D0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0805F6DC @ =gUnknown_835B934
+	ldr r1, _0805F6DC @ =gReflectionEffectPaletteMap
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_0805F6DC: .4byte gUnknown_835B934
+_0805F6DC: .4byte gReflectionEffectPaletteMap
 	thumb_func_end sub_805F6D0
 
 	thumb_func_start unref_sub_808EAC4
@@ -3413,7 +3413,7 @@ sub_805F724: @ 805F724
 	adds r2, 0x20
 	adds r3, r7, 0
 	adds r3, 0x22
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	mov r1, r8
 	ldrh r0, [r1, 0x8]
 	lsls r0, 16
@@ -3979,8 +3979,8 @@ _0805FB5E:
 	bx r1
 	thumb_func_end CopySprite
 
-	thumb_func_start obj_unfreeze
-obj_unfreeze: @ 805FB6C
+	thumb_func_start CreateCopySpriteAt
+CreateCopySpriteAt: @ 805FB6C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4038,7 +4038,7 @@ _0805FBD2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end obj_unfreeze
+	thumb_func_end CreateCopySpriteAt
 
 	thumb_func_start ObjectEventSetDirection
 ObjectEventSetDirection: @ 805FBDC
@@ -4524,8 +4524,8 @@ _0805FF2A:
 _0805FF30: .4byte gUnknown_83A5330
 	thumb_func_end npc_paltag_set_load
 
-	thumb_func_start npc_paltag_by_palslot
-npc_paltag_by_palslot: @ 805FF34
+	thumb_func_start GetObjectPaletteTag
+GetObjectPaletteTag: @ 805FF34
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4591,7 +4591,7 @@ _0805FFA2:
 _0805FFA8: .4byte gUnknown_83A5278
 _0805FFAC: .4byte 0x000011ff
 _0805FFB0: .4byte gUnknown_203709A
-	thumb_func_end npc_paltag_by_palslot
+	thumb_func_end GetObjectPaletteTag
 
 	thumb_func_start sub_805FFB4
 sub_805FFB4: @ 805FFB4
@@ -12912,8 +12912,8 @@ _08063B14: .4byte gTotalCameraPixelOffsetX
 _08063B18: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end sub_8063AD4
 
-	thumb_func_start sub_8063B1C
-sub_8063B1C: @ 8063B1C
+	thumb_func_start SetSpritePosToMapCoords
+SetSpritePosToMapCoords: @ 8063B1C
 	push {r4-r7,lr}
 	adds r7, r2, 0
 	mov r12, r3
@@ -12997,7 +12997,7 @@ _08063BB4: .4byte gUnknown_3005050
 _08063BB8: .4byte gTotalCameraPixelOffsetY
 _08063BBC: .4byte 0xfff00000
 _08063BC0: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8063B1C
+	thumb_func_end SetSpritePosToMapCoords
 
 	thumb_func_start sub_8063BC4
 sub_8063BC4: @ 8063BC4
@@ -13019,7 +13019,7 @@ sub_8063BC4: @ 8063BC4
 	ldrsh r1, [r2, r3]
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	lsls r4, 16
 	asrs r4, 16
 	ldrh r0, [r6]
@@ -23568,7 +23568,7 @@ GroundEffect_JumpOnTallGrass: @ 80685FC
 	movs r7, 0x12
 	ldrsh r4, [r5, r7]
 	str r4, [sp]
-	bl sub_80DB564
+	bl FindTallGrassFieldEffectSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40

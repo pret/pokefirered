@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-gUnknown_835B934:: @ 835B934
+gReflectionEffectPaletteMap:: @ 835B934
 	.byte 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0b, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_835B944:: @ 835B944
@@ -6325,16 +6325,16 @@ gUnknown_83A5374:: @ 83A5374
 	obj_frame_tiles gUnknown_8398128, 0x400
 
 gUnknown_83A537C:: @ 83A537C
-	spr_template 65535, 65535, gObjectEventBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A5394:: @ 83A5394
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53AC:: @ 83A53AC
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53C4:: @ 83A53C4
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53DC:: @ 83A53DC
 	overworld_frame gUnknown_839A008, 2, 2, 0
@@ -6355,7 +6355,7 @@ gUnknown_83A541C:: @ 83A541C
 	.4byte gUnknown_83A5404
 
 gUnknown_83A5420:: @ 83A5420
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, unc_grass_normal
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, UpdateTallGrassFieldEffect
 
 gUnknown_83A5438:: @ 83A5438
 	overworld_frame gUnknown_83986A8, 2, 2, 0
@@ -6379,7 +6379,7 @@ gUnknown_83A5484:: @ 83A5484
 	.4byte gUnknown_83A5460
 
 gUnknown_83A5488:: @ 83A5488
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A54A0:: @ 83A54A0
 	overworld_frame gUnknown_8398928, 2, 2, 0
@@ -6400,7 +6400,7 @@ gUnknown_83A54E0:: @ 83A54E0
 	.4byte gUnknown_83A54C8
 
 gUnknown_83A54E4:: @ 83A54E4
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, sub_80DC2FC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, UpdateAshFieldEffect
 
 gUnknown_83A54FC:: @ 83A54FC
 	overworld_frame gUnknown_8396B08, 2, 8, 0
@@ -6437,7 +6437,7 @@ gUnknown_83A555C:: @ 83A555C
 	.4byte gUnknown_83A5550
 
 gUnknown_83A556C:: @ 83A556C
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, sub_80DC4F8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, UpdateSurfBlobFieldEffect
 
 gUnknown_83A5584:: @ 83A5584
 	overworld_frame gUnknown_8398BA8, 2, 2, 0
@@ -6542,7 +6542,7 @@ gUnknown_83A56E0:: @ 83A56E0
 	.4byte gUnknown_83A56D8
 
 gUnknown_83A56F4:: @ 83A56F4
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A570C:: @ 83A570C
 	overworld_frame gUnknown_839A488, 2, 2, 0
@@ -6572,7 +6572,7 @@ gUnknown_83A573C:: @ 83A573C
 	.4byte gUnknown_83A5734
 
 gUnknown_83A5750:: @ 83A5750
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A5768:: @ 83A5768
 	overworld_frame gUnknown_839A588, 2, 2, 0
@@ -6624,7 +6624,7 @@ gUnknown_83A57C8:: @ 83A57C8
 	.4byte gUnknown_83A57C0
 
 gUnknown_83A57EC:: @ 83A57EC
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A5804:: @ 83A5804
 	overworld_frame gUnknown_839AA48, 2, 2, 0
@@ -6670,7 +6670,7 @@ gUnknown_83A5894:: @ 83A5894
 	.4byte gUnknown_83A5870
 
 gUnknown_83A589C:: @ 83A589C
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, sub_80DBC2C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, UpdateSplashFieldEffect
 
 gUnknown_83A58B4:: @ 83A58B4
 	overworld_frame gUnknown_839ACC8, 2, 1, 0
@@ -6709,7 +6709,7 @@ gUnknown_83A5938:: @ 83A5938
 	.4byte gUnknown_83A5918
 
 gUnknown_83A593C:: @ 83A593C
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, unc_grass_tall
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, UpdateLongGrassFieldEffect
 
 gUnknown_83A5954:: @ 83A5954
 	overworld_frame gUnknown_8399488, 2, 2, 0
@@ -6761,7 +6761,7 @@ gUnknown_83A5A2C:: @ 83A5A2C
 	.4byte gUnknown_83A5A04
 
 gUnknown_83A5A30:: @ 83A5A30
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5A48:: @ 83A5A48
 	overworld_frame gUnknown_8399C08, 2, 2, 0
@@ -6782,7 +6782,7 @@ gUnknown_83A5A84:: @ 83A5A84
 	.4byte gUnknown_83A5A68
 
 gUnknown_83A5A88:: @ 83A5A88
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5AA0:: @ 83A5AA0
 	overworld_frame gUnknown_839A788, 2, 2, 0
@@ -6801,7 +6801,7 @@ gUnknown_83A5AD4:: @ 83A5AD4
 	.4byte gUnknown_83A5AC0
 
 gUnknown_83A5AD8:: @ 83A5AD8
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5AF0:: @ 83A5AF0
 	overworld_frame gUnknown_839A988, 2, 1, 0
@@ -6818,7 +6818,7 @@ gUnknown_83A5B18:: @ 83A5B18
 	.4byte gUnknown_83A5B08
 
 gUnknown_83A5B1C:: @ 83A5B1C
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, sub_80DC86C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, UpdateSandPileFieldEffect
 
 gUnknown_83A5B34:: @ 83A5B34
 	overworld_frame gUnknown_839AD88, 2, 2, 0
@@ -6839,7 +6839,7 @@ gUnknown_83A5B70:: @ 83A5B70
 	.4byte gUnknown_83A5B54
 
 gUnknown_83A5B74:: @ 83A5B74
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5B8C:: @ 83A5B8C
 	obj_rot_scal_anim_frame -256, 256, 128, 0
@@ -6900,7 +6900,7 @@ gUnknown_83A5CAC:: @ 83A5CAC
 	.4byte gUnknown_83A5C8C
 
 gUnknown_83A5CB4:: @ 83A5CB4
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5CCC:: @ 83A5CCC
 	overworld_frame gUnknown_839B708, 2, 4, 0
@@ -6930,7 +6930,7 @@ gUnknown_83A5D2C:: @ 83A5D2C
 	.4byte gUnknown_83A5D0C
 
 gUnknown_83A5D34:: @ 83A5D34
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 0
@@ -6942,7 +6942,7 @@ gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 6
 
 gUnknown_83A5D84:: @ 83A5D84
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5D9C:: @ 83A5D9C
 	overworld_frame gUnknown_839D3C8, 8, 8, 0
@@ -6994,7 +6994,7 @@ gUnknown_83A5E34:: @ 83A5E34
 	.4byte gUnknown_83A5E28
 
 gUnknown_83A5E38:: @ 83A5E38
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, sub_80DB8AC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, UpdateShortGrassFieldEffect
 
 gUnknown_83A5E50:: @ 83A5E50
 	overworld_frame gUnknown_839C508, 2, 2, 0
@@ -7007,7 +7007,7 @@ gUnknown_83A5E60:: @ 83A5E60
 	.4byte gUnknown_83A5E58
 
 gUnknown_83A5E64:: @ 83A5E64
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, sub_80DBFF4
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, UpdateHotSpringsWaterFieldEffect
 
 gUnknown_83A5E7C:: @ 83A5E7C
 	overworld_frame gUnknown_839C5A8, 2, 2, 0
@@ -7079,7 +7079,7 @@ gUnknown_83A5FA0:: @ 83A5FA0
 	.4byte gUnknown_83A5F7C
 
 gUnknown_83A5FA4:: @ 83A5FA4
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, sub_80DC99C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, UpdateBubblesFieldEffect
 
 gUnknown_83A5FBC:: @ 83A5FBC
 	overworld_frame gUnknown_839D2A8, 2, 2, 0
@@ -7095,7 +7095,7 @@ gUnknown_83A5FDC:: @ 83A5FDC
 	.4byte gUnknown_83A5FCC
 
 gUnknown_83A5FE0:: @ 83A5FE0
-	spr_template 0xFFFF, 0x100F, gObjectEventBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
+	spr_template 0xFFFF, 0x100F, gObjectEventBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, UpdateSparkleFieldEffect
 
 gUnknown_83A5FF8::
 	obj_pal gUnknown_839D3A8, 0x100F

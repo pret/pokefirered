@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163C83",
+      "script": "ThreeIsland_BerryForest_EventScript_Lostelle",
       "flag": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST"
     },
     {
@@ -228,14 +228,14 @@
       "x": 7,
       "y": 27,
       "elevation": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163D31"
+      "script": "ThreeIsland_BerryForest_EventScript_BewareSign"
     },
     {
       "type": "bg_event_type_0",
       "x": 39,
       "y": 35,
       "elevation": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163D28"
+      "script": "ThreeIsland_BerryForest_EventScript_WelcomeSign"
     },
     {
       "type": "hidden_item",

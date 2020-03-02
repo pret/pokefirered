@@ -7,16 +7,16 @@ ThreeIsland_BerryForest_OnTransition:: @ 8163C77
 	setescapewarp MAP_THREE_ISLAND_BOND_BRIDGE, 255, 12, 6
 	end
 
-ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
+ThreeIsland_BerryForest_EventScript_Lostelle:: @ 8163C83
 	lock
 	faceplayer
-	msgbox gUnknown_817ADD6
+	msgbox ThreeIsland_BerryForest_Text_HelpScaryPokemon
 	playse SE_PIN
 	applymovement 1, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 1, Movement_163D22
+	applymovement 1, ThreeIsland_BerryForest_Movement_LostelleLookAround
 	waitmovement 0
-	msgbox gUnknown_817AE8E
+	msgbox ThreeIsland_BerryForest_Text_HereItComesAgain
 	goto_if_questlog EventScript_ReleaseEnd
 	waitse
 	playmoncry SPECIES_HYPNO, 2
@@ -26,12 +26,12 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	special sub_8112364
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_817AEE1
+	msgbox ThreeIsland_BerryForest_Text_ThankYouHaveThis
 	giveitem ITEM_IAPAPA_BERRY
-	compare VAR_RESULT, 0
-	call_if_eq EventScript_163D19
+	compare VAR_RESULT, FALSE
+	call_if_eq ThreeIsland_BerryForest_EventScript_NoRoomForBerry
 	special Special_BufferBigGuyOrBigGirlString
-	msgbox gUnknown_817AF3B
+	msgbox ThreeIsland_BerryForest_Text_LetsGoHome
 	closemessage
 	setflag FLAG_RESCUED_LOSTELLE
 	setflag FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST
@@ -42,11 +42,11 @@ ThreeIsland_BerryForest_EventScript_163C83:: @ 8163C83
 	release
 	end
 
-EventScript_163D19:: @ 8163D19
-	msgbox gUnknown_817AF9F
+ThreeIsland_BerryForest_EventScript_NoRoomForBerry:: @ 8163D19
+	msgbox ThreeIsland_BerryForest_Text_BerryPouchIsFull
 	return
 
-Movement_163D22:: @ 8163D22
+ThreeIsland_BerryForest_Movement_LostelleLookAround:: @ 8163D22
 	walk_in_place_fastest_left
 	delay_16
 	walk_in_place_fastest_right
@@ -54,10 +54,10 @@ Movement_163D22:: @ 8163D22
 	walk_in_place_fastest_left
 	step_end
 
-ThreeIsland_BerryForest_EventScript_163D28:: @ 8163D28
-	msgbox gUnknown_817AFD6, MSGBOX_SIGN
+ThreeIsland_BerryForest_EventScript_WelcomeSign:: @ 8163D28
+	msgbox ThreeIsland_BerryForest_Text_WelcomeToBerryForest, MSGBOX_SIGN
 	end
 
-ThreeIsland_BerryForest_EventScript_163D31:: @ 8163D31
-	msgbox gUnknown_817B029, MSGBOX_SIGN
+ThreeIsland_BerryForest_EventScript_BewareSign:: @ 8163D31
+	msgbox ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons, MSGBOX_SIGN
 	end

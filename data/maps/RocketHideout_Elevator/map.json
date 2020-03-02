@@ -34,10 +34,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 0,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "RocketHideout_Elevator_EventScript_FloorSelect"
     }
   ]

@@ -369,17 +369,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SaffronCity_Gym_EventScript_GymStatue"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 16,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SaffronCity_Gym_EventScript_GymStatue"
     }
   ]

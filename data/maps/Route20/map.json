@@ -189,17 +189,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 68,
       "y": 14,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route20_EventScript_SeafoamIslandsSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 64,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route20_EventScript_SeafoamIslandsSign"
     },
     {

@@ -197,17 +197,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 17,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route16_EventScript_RouteSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 33,
       "y": 11,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route16_EventScript_CyclingRoadSign"
     },
     {

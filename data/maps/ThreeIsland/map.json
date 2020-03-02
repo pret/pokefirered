@@ -354,10 +354,11 @@
   ],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 31,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThreeIsland_EventScript_IslandSign"
     },
     {

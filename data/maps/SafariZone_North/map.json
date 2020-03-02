@@ -151,38 +151,43 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 13,
       "y": 27,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_North_EventScript_TrainerTips1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 23,
       "y": 31,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_North_EventScript_AreaSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 29,
       "y": 32,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_North_EventScript_TrainerTips2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 34,
       "y": 28,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_North_EventScript_TrainerTips3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 44,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_North_EventScript_RestHouseSign"
     }
   ]

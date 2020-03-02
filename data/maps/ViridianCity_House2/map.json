@@ -68,38 +68,43 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianCity_House2_EventScript_Notebook"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianCity_House2_EventScript_Blackboard"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianCity_House2_EventScript_Blackboard"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 9,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ViridianCity_House2_EventScript_PokemonJournal"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 8,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "ViridianCity_House2_EventScript_PokemonJournal"
     }
   ]

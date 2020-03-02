@@ -54,17 +54,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 9,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "FiveIsland_ResortGorgeous_House_EventScript_1ACF2C"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 8,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "FiveIsland_ResortGorgeous_House_EventScript_1ACF2C"
     }
   ]

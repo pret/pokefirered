@@ -227,31 +227,35 @@
   ],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PalletTown_ProfessorOaksLab_EventScript_Computer"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 3,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PalletTown_ProfessorOaksLab_EventScript_Computer"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PalletTown_ProfessorOaksLab_EventScript_LeftSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PalletTown_ProfessorOaksLab_EventScript_RightSign"
     }
   ]

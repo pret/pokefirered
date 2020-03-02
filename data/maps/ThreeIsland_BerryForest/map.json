@@ -224,17 +224,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 27,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThreeIsland_BerryForest_EventScript_BewareSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 39,
       "y": 35,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ThreeIsland_BerryForest_EventScript_WelcomeSign"
     },
     {

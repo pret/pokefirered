@@ -610,10 +610,11 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 3,
       "y": 31,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route23_EventScript_VictoryRoadGateSign"
     }
   ]

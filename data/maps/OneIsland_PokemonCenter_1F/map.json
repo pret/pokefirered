@@ -150,66 +150,75 @@
   ],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 3,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 13,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 15,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 14,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 16,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 17,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
     }
   ]

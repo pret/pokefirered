@@ -87,17 +87,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 3,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "FourIsland_PokemonCenter_1F_EventScript_PokemonJournal"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 2,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "FourIsland_PokemonCenter_1F_EventScript_PokemonJournal"
     }
   ]

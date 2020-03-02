@@ -139,17 +139,19 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 30,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SeafoamIslands_B4F_EventScript_FastCurrentSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 14,
       "y": 18,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SeafoamIslands_B4F_EventScript_BoulderHintSign"
     }
   ]

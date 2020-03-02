@@ -337,7 +337,15 @@ string generate_firered_map_events_text(Json map_data) {
         bgs_label = map_data["name"].string_value() + "_MapBGEvents";
         text << bgs_label << "::\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
-            if (bg_event["type"] == "hidden_item") {
+            if (bg_event["type"] == "sign") {
+                text << "\tbg_event "
+                     << bg_event["x"].int_value() << ", "
+                     << bg_event["y"].int_value() << ", "
+                     << bg_event["elevation"].int_value() << ", "
+                     << bg_event["player_facing_dir"].string_value() << ", 0,"
+                     << bg_event["script"].string_value() << "\n";
+            }
+            else if (bg_event["type"] == "hidden_item") {
                 text << "\tbg_hidden_item_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
@@ -346,17 +354,6 @@ string generate_firered_map_events_text(Json map_data) {
                      << bg_event["flag"].string_value() << ", "
                      << bg_event["quantity"].int_value() << ", "
                      << bg_event["underfoot"].bool_value() << "\n";
-            }
-            else {
-                string type_string = bg_event["type"].string_value();
-                type_string.erase(0, 14);
-                int type = std::stoi(type_string);
-                text << "\tbg_event "
-                     << bg_event["x"].int_value() << ", "
-                     << bg_event["y"].int_value() << ", "
-                     << bg_event["elevation"].int_value() << ", "
-                     << type << ", 0, "
-                     << bg_event["script"].string_value() << "\n";
             }
         }
         text << "\n";

@@ -102,7 +102,7 @@ Route5_PokemonDayCare_EventScript_RetrieveMon:: @ 81BF4EA
 	waitse
 	playmoncry VAR_RESULT, 0
 	msgbox Route5_PokemonDayCare_Text_PlayerGotMonBack
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	waitmoncry
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end

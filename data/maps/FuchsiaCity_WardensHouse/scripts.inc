@@ -21,7 +21,7 @@ FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth:: @ 816D780
 	waitmessage
 	waitfanfare
 	msgbox FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	checkplayergender
 	compare VAR_RESULT, MALE
 	call_if_eq FuchsiaCity_WardensHouse_EventScript_WardenThanksMale

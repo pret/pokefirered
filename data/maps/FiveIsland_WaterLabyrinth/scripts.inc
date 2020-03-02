@@ -38,7 +38,7 @@ FiveIsland_WaterLabyrinth_EventScript_TryGiveEgg:: @ 81688BA
 	message FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan
 	waitfanfare
 	waitmessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	goto FiveIsland_WaterLabyrinth_EventScript_PostEggComment
 	end
 

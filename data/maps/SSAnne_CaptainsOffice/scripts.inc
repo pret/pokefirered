@@ -10,7 +10,7 @@ SSAnne_CaptainsOffice_EventScript_Captain:: @ 8160B3A
 	waitmessage
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	delay 50
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0

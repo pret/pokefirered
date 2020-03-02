@@ -560,7 +560,7 @@ EventScript_CanOnlyBeLearnedOnce:: @ 81C4F37
 	signmsg
 	msgbox Text_MoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
 	normalmsg
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	return
 
 Movement_JumpInPlaceDown: @ 81C4F4C

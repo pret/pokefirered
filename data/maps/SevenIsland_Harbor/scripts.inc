@@ -1,7 +1,7 @@
 SevenIsland_Harbor_MapScripts:: @ 8170BE4
 	.byte 0
 
-SevenIsland_Harbor_EventScript_170BE5:: @ 8170BE5
+SevenIsland_Harbor_EventScript_Sailor:: @ 8170BE5
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

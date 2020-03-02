@@ -3,42 +3,42 @@ SixIsland_RuinValley_MapScripts:: @ 8168B53
 	.byte 0
 
 SixIsland_RuinValley_OnLoad:: @ 8168B59
-	call_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, EventScript_168B63
+	call_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, SixIsland_RuinValley_EventScript_OpenDottedHoleDoor
 	end
 
-EventScript_168B63:: @ 8168B63
-	setmetatile 24, 24, 856, 0
+SixIsland_RuinValley_EventScript_OpenDottedHoleDoor:: @ 8168B63
+	setmetatile 24, 24, METATILE_SeviiIslands67_DottedHoleDoor_Open, 0
 	return
 
-SixIsland_RuinValley_EventScript_168B6D:: @ 8168B6D
+SixIsland_RuinValley_EventScript_Scientist:: @ 8168B6D
 	lock
-	msgbox gUnknown_818BD47
+	msgbox SixIsland_RuinValley_Text_CantFigureOutHowToGetInside
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
-	msgbox gUnknown_818BD7A
+	msgbox SixIsland_RuinValley_Text_IFoundThisPlace
 	applymovement 1, Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-SixIsland_RuinValley_EventScript_168B94:: @ 8168B94
+SixIsland_RuinValley_EventScript_DottedHoleDoor:: @ 8168B94
 	lockall
-	goto_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, EventScript_168BC1
-	msgbox gUnknown_818BDC0, MSGBOX_YESNO
+	goto_if_set FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE, SixIsland_RuinValley_EventScript_DottedHoleDoorOpen
+	msgbox SixIsland_RuinValley_Text_CheckDoorMoreThoroughly, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_168BCB
-	msgbox gUnknown_818BE11
+	goto_if_eq SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor
+	msgbox SixIsland_RuinValley_Text_SeveralDotsOnTheDoor
 	braillemessage Braille_Text_Cut
 	waitbuttonpress
 	releaseall
 	end
 
-EventScript_168BC1:: @ 8168BC1
-	msgbox gUnknown_818BE4B
+SixIsland_RuinValley_EventScript_DottedHoleDoorOpen:: @ 8168BC1
+	msgbox SixIsland_RuinValley_Text_DoorIsOpen
 	releaseall
 	end
 
-EventScript_168BCB:: @ 8168BCB
-	msgbox gUnknown_818BDF9
+SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor:: @ 8168BCB
+	msgbox SixIsland_RuinValley_Text_LeftDoorAlone
 	releaseall
 	end

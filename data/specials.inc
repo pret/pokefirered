@@ -243,7 +243,7 @@ gSpecials:: @ 815FD60
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
 	def_special PrintBattleTowerTrainerGreeting
-	def_special PrintEReaderTrainerGreeting
+	def_special BufferEReaderTrainerGreeting
 	def_special StartSpecialBattle
 	def_special SetBattleTowerProperty
 	def_special BattleTowerUtil
@@ -293,7 +293,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special Special_BufferEReaderTrainerName5
+	def_special BufferEReaderTrainerName
 	def_special Special_GetRandomSlotMachine
 	def_special GetPlayerFacingDirection
 	def_special nullsub_75

@@ -1,19 +1,19 @@
 SixIsland_Mart_MapScripts:: @ 8171E65
 	.byte 0
 
-SixIsland_Mart_EventScript_171E66:: @ 8171E66
+SixIsland_Mart_EventScript_Clerk:: @ 8171E66
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
 	message Text_MayIHelpYou
 	waitmessage
-	pokemart Items_171E8C
+	pokemart SixIsland_Mart_Items
 	msgbox Text_PleaseComeAgain
 	release
 	end
 
 	.align 2
-Items_171E8C:: @ 8171E8C
+SixIsland_Mart_Items:: @ 8171E8C
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_MAX_POTION
@@ -26,6 +26,6 @@ Items_171E8C:: @ 8171E8C
 	release
 	end
 
-SixIsland_Mart_EventScript_171EA0:: @ 8171EA0
-	msgbox gUnknown_81A4271, MSGBOX_NPC
+SixIsland_Mart_EventScript_Picnicker:: @ 8171EA0
+	msgbox SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter, MSGBOX_NPC
 	end

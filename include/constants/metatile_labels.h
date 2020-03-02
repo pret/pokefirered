@@ -194,4 +194,8 @@
 #define METATILE_SeviiIslands45_RocketWarehouseDoor_Locked    0x30B
 #define METATILE_SeviiIslands45_RocketWarehouseDoor_Unlocked  0x2AF
 
+// gTileset_SeviiIslands67
+#define METATILE_SeviiIslands67_DottedHoleDoor_Closed    0x357
+#define METATILE_SeviiIslands67_DottedHoleDoor_Open      0x358
+
 #endif // GUARD_METATILE_LABELS_H

@@ -8,14 +8,14 @@ SevenIsland_House_Room2_OnTransition:: @ 8170A89
 	end
 
 SevenIsland_House_Room2_OnFrame:: @ 8170A8D
-	map_script_2 VAR_TEMP_1, 0, EventScript_170A97
+	map_script_2 VAR_TEMP_1, 0, SevenIsland_House_Room2_EventScript_BattleVisitingTrainer
 	.2byte 0
 
-EventScript_170A97:: @ 8170A97
+SevenIsland_House_Room2_EventScript_BattleVisitingTrainer:: @ 8170A97
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B22
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room2_Movement_PlayerEnterRoom
 	waitmovement 0
-	special PrintEReaderTrainerGreeting
+	special BufferEReaderTrainerGreeting
 	msgbox gStringVar4
 	closemessage
 	setvar VAR_0x8004, 2
@@ -23,14 +23,14 @@ EventScript_170A97:: @ 8170A97
 	special StartSpecialBattle
 	waitstate
 	compare VAR_RESULT, 3
-	call_if_eq EventScript_170AFE
+	call_if_eq SevenIsland_House_Room2_EventScript_BattleTie
 	compare VAR_RESULT, 1
-	call_if_eq EventScript_170B0C
+	call_if_eq SevenIsland_House_Room2_EventScript_BattleWon
 	compare VAR_RESULT, 2
-	call_if_eq EventScript_170B17
+	call_if_eq SevenIsland_House_Room2_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170B28
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room2_Movement_PlayerExitRoom
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1
@@ -39,26 +39,26 @@ EventScript_170A97:: @ 8170A97
 	releaseall
 	end
 
-EventScript_170AFE:: @ 8170AFE
+SevenIsland_House_Room2_EventScript_BattleTie:: @ 8170AFE
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
-	msgbox gUnknown_81A07EC
+	msgbox SevenIsland_House_Room2_Text_MatchEndedUpDraw
 	return
 
-EventScript_170B0C:: @ 8170B0C
+SevenIsland_House_Room2_EventScript_BattleWon:: @ 8170B0C
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
 	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return
 
-EventScript_170B17:: @ 8170B17
+SevenIsland_House_Room2_EventScript_BattleLost:: @ 8170B17
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
 	special Special_ShowStringVar4AsFieldMessage
 	waitmessage
 	waitbuttonpress
 	return
 
-Movement_170B22:: @ 8170B22
+SevenIsland_House_Room2_Movement_PlayerEnterRoom:: @ 8170B22
 	walk_down
 	walk_down
 	walk_down
@@ -66,7 +66,7 @@ Movement_170B22:: @ 8170B22
 	walk_right
 	step_end
 
-Movement_170B28:: @ 8170B28
+SevenIsland_House_Room2_Movement_PlayerExitRoom:: @ 8170B28
 	walk_left
 	walk_left
 	walk_up

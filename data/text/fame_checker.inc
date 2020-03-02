@@ -1445,7 +1445,7 @@ PokemonJournal_Text_SpecialFeatureBruno:: @ 81B1913
 	.string "FOUR out of his burning ambition to\l"
 	.string "battle the best TRAINERS.$"
 
-gUnknown_81B19A8:: @ 81B19A8
+PokemonJournal_Text_SpecialFeatureAgatha:: @ 81B19A8
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's AGATHA!\p"

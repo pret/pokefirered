@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_Mart_EventScript_170B31",
+      "script": "SevenIsland_Mart_EventScript_Clerk",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_Mart_EventScript_170B6E",
+      "script": "SevenIsland_Mart_EventScript_Lass",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_Mart_EventScript_170B80",
+      "script": "SevenIsland_Mart_EventScript_Fisher",
       "flag": "0"
     },
     {
@@ -64,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_Mart_EventScript_170B77",
+      "script": "SevenIsland_Mart_EventScript_Hiker",
       "flag": "0"
     }
   ],

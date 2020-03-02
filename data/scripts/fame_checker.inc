@@ -169,11 +169,11 @@ SaffronCity_PokemonTrainerFanClub_EventScript_PokemonJournalBruno:: @ 81ACF7A
 	release
 	end
 
-SevenIsland_SevaultCanyon_EventScript_1ACF95:: @ 81ACF95
+SevenIsland_SevaultCanyon_EventScript_BlackBelt:: @ 81ACF95
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BRUNO, 5
-	msgbox Text_18CF4D
+	msgbox SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly
 	release
 	end
 
@@ -186,20 +186,20 @@ IndigoPlateau_PokemonCenter_1F_EventScript_BlackBelt:: @ 81ACFAE
 	release
 	end
 
-SevenIsland_PokemonCenter_1F_EventScript_1ACFD4:: @ 81ACFD4
+SevenIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACFD4
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 3
 	textcolor 3
-	msgbox gUnknown_81B19A8
+	msgbox PokemonJournal_Text_SpecialFeatureAgatha
 	release
 	end
 
-SixIsland_Mart_EventScript_1ACFEF:: @ 81ACFEF
+SixIsland_Mart_EventScript_OldWoman:: @ 81ACFEF
 	lock
 	faceplayer
 	famechecker FAMECHECKER_AGATHA, 5
-	msgbox Text_1A41CA
+	msgbox SixIsland_Mart_Text_AgathaOldestEverEliteFourMember
 	release
 	end
 

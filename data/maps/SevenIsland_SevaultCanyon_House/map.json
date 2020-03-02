@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SevaultCanyon_House_EventScript_172183",
+      "script": "SevenIsland_SevaultCanyon_House_EventScript_BaldingMan",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_SevaultCanyon_House_EventScript_172242",
+      "script": "SevenIsland_SevaultCanyon_House_EventScript_Chansey",
       "flag": "0"
     },
     {

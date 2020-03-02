@@ -7028,7 +7028,7 @@ gUnknown_83A5EBC:: @ 83A5EBC
 	.4byte gUnknown_83A5EA4
 
 gUnknown_83A5EC0:: @ 83A5EC0
-	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, SpriteCB_PopOutOfAsh
 
 gUnknown_83A5ED8:: @ 83A5ED8
 	obj_pal gUnknown_839C588, 0x100D
@@ -7052,7 +7052,7 @@ gUnknown_83A5F20:: @ 83A5F20
 	.4byte gUnknown_83A5F08
 
 gUnknown_83A5F24:: @ 83A5F24
-	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, sub_80853B0
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, SpriteCB_LavaridgeGymWarp
 
 gUnknown_83A5F3C:: @ 83A5F3C
 	overworld_frame gUnknown_839CAA8, 2, 4, 0

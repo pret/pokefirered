@@ -60,10 +60,8 @@ gUnknown_3000EA0: @ 3000EA0
 	.include "src/tileset_anims.o"
 	.align 2
 	.include "src/sound.o"
-
 	.align 2
-gUnknown_3000FC8: @ 3000FC8
-	.space 0x20
+	.include "src/field_effect.o"
 
 gUnknown_3000FE8: @ 3000FE8
 	.space 0x184

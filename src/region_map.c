@@ -4395,5 +4395,5 @@ static void sub_80C527C(u16 mapsec)
     {
         warp1_set_2(sMapsecToSpawn[idx][0], sMapsecToSpawn[idx][1], -1);
     }
-    sub_80842C8();
+    ReturnToFieldFromFlyMapSelect();
 }

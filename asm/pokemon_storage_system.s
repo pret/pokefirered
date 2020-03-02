@@ -1801,7 +1801,7 @@ mapldr_0808C6D8: @ 808C6D8
 	bl _call_via_r4
 	adds r0, r5, 0
 	bl SetVBlankCallback
-	bl sub_807DC00
+	bl FadeInFromBlack
 	pop {r4,r5}
 	pop {r0}
 	bx r0

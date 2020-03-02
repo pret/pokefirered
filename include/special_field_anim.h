@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void StartEscalator(u8 a0);
+void StartEscalator(bool8 goingUp);
 void StopEscalator(void);
 bool8 IsEscalatorMoving(void);
 

@@ -490,7 +490,7 @@ static void sub_80F83D0(u8 taskId)
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_807DC00();
+            FadeInFromBlack();
             data[0]++;
         }
         break;

@@ -41,7 +41,7 @@ void sub_808E16C(s16, s16);
 void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 ObjectEventDirectionToImageAnimId(u8);
-void sub_80930E0(s16 *, s16 *, s16, s16);
+void sub_8063BC4(s16 *, s16 *, s16, s16);
 void ObjectEventClearAnim(struct ObjectEvent *);
 void ObjectEventClearAnimIfSpecialAnimActive(struct ObjectEvent *);
 void SpawnObjectEventsInView(s16, s16);
@@ -116,6 +116,9 @@ void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 invisible);
 bool32 RfuUnionObjectIsInvisible(u8 objectEventId);
 void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo);
 bool32 RfuUnionObjectIsWarping(u8 objectEventId);
+u8 sub_8063F2C(u8 direction);
+u8 sub_8064194(u8 direction);
+u8 sub_80641C0(u8 direction);
 
 void sub_805F378(s16 x, s16 y);
 
@@ -128,5 +131,6 @@ extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct UCoords16 gUnknown_83A64C8[];
 extern const u16 gUnknown_8398648[];
 extern const u16 gUnknown_8398688[];
+void sub_805F724(struct ObjectEvent *, s16 x, s16 y);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

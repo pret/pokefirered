@@ -1369,8 +1369,8 @@ _080DB800: .4byte gFieldEffectObjectTemplatePointers
 _080DB804: .4byte gSprites
 	thumb_func_end FldEff_JumpLongGrass
 
-	thumb_func_start sub_80DB808
-sub_80DB808: @ 80DB808
+	thumb_func_start FldEff_ShortGrass
+FldEff_ShortGrass: @ 80DB808
 	push {r4-r6,lr}
 	ldr r6, _080DB89C @ =gFieldEffectArguments
 	ldrb r0, [r6]
@@ -1449,7 +1449,7 @@ _080DB89C: .4byte gFieldEffectArguments
 _080DB8A0: .4byte gObjectEvents
 _080DB8A4: .4byte gFieldEffectObjectTemplatePointers
 _080DB8A8: .4byte gSprites
-	thumb_func_end sub_80DB808
+	thumb_func_end FldEff_ShortGrass
 
 	thumb_func_start sub_80DB8AC
 sub_80DB8AC: @ 80DB8AC
@@ -2310,8 +2310,8 @@ _080DBF48: .4byte gFieldEffectArguments
 _080DBF4C: .4byte gSprites
 	thumb_func_end oei_ripples
 
-	thumb_func_start sub_80DBF50
-sub_80DBF50: @ 80DBF50
+	thumb_func_start FldEff_HotSpringsWater
+FldEff_HotSpringsWater: @ 80DBF50
 	push {r4-r6,lr}
 	ldr r6, _080DBFE4 @ =gFieldEffectArguments
 	ldrb r0, [r6]
@@ -2390,7 +2390,7 @@ _080DBFE4: .4byte gFieldEffectArguments
 _080DBFE8: .4byte gObjectEvents
 _080DBFEC: .4byte gFieldEffectObjectTemplatePointers
 _080DBFF0: .4byte gSprites
-	thumb_func_end sub_80DBF50
+	thumb_func_end FldEff_HotSpringsWater
 
 	thumb_func_start sub_80DBFF4
 sub_80DBFF4: @ 80DBFF4
@@ -2720,8 +2720,8 @@ StartAshFieldEffect: @ 80DC23C
 _080DC26C: .4byte gFieldEffectArguments
 	thumb_func_end StartAshFieldEffect
 
-	thumb_func_start oei_ash
-oei_ash: @ 80DC270
+	thumb_func_start FldEff_Ash
+FldEff_Ash: @ 80DC270
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _080DC2F0 @ =gFieldEffectArguments
@@ -2789,7 +2789,7 @@ _080DC2E6:
 _080DC2F0: .4byte gFieldEffectArguments
 _080DC2F4: .4byte gFieldEffectObjectTemplatePointers
 _080DC2F8: .4byte gSprites
-	thumb_func_end oei_ash
+	thumb_func_end FldEff_Ash
 
 	thumb_func_start sub_80DC2FC
 sub_80DC2FC: @ 80DC2FC
@@ -2906,8 +2906,8 @@ _080DC3C8:
 	bx r0
 	thumb_func_end sub_80DC3A8
 
-	thumb_func_start sub_80DC3D0
-sub_80DC3D0: @ 80DC3D0
+	thumb_func_start FldEff_SurfBlob
+FldEff_SurfBlob: @ 80DC3D0
 	push {r4,r5,lr}
 	ldr r4, _080DC43C @ =gFieldEffectArguments
 	adds r1, r4, 0x4
@@ -2964,7 +2964,7 @@ _080DC43C: .4byte gFieldEffectArguments
 _080DC440: .4byte gFieldEffectObjectTemplatePointers
 _080DC444: .4byte gSprites
 _080DC448: .4byte 0x0000ffff
-	thumb_func_end sub_80DC3D0
+	thumb_func_end FldEff_SurfBlob
 
 	thumb_func_start sub_80DC44C
 sub_80DC44C: @ 80DC44C
@@ -3723,11 +3723,11 @@ _080DC9D0:
 _080DC9D8: .4byte 0x00001004
 	thumb_func_end sub_80DC99C
 
-	thumb_func_start sub_80DC9DC
-sub_80DC9DC: @ 80DC9DC
+	thumb_func_start FldEff_BerryTreeGrowthSparkle
+FldEff_BerryTreeGrowthSparkle: @ 80DC9DC
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80DC9DC
+	thumb_func_end FldEff_BerryTreeGrowthSparkle
 
 	thumb_func_start ShowTreeDisguiseFieldEffect
 ShowTreeDisguiseFieldEffect: @ 80DC9E0

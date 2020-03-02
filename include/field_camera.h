@@ -15,12 +15,12 @@ struct CameraObject
     s32 y;
 };
 
-extern struct CameraObject gUnknown_03005DD0;
+extern struct CameraObject gFieldCamera;
 
 // Exported RAM declarations
 
-extern u16 gUnknown_03005DEC;
-extern u16 gUnknown_03005DE8;
+extern u16 gTotalCameraPixelOffsetX;
+extern u16 gTotalCameraPixelOffsetY;
 
 // Exported ROM declarations
 
@@ -29,6 +29,7 @@ void CurrentMapDrawMetatileAt(int x, int y);
 void sub_805A658(s16 *x, s16 *y);
 void SetCameraPanningCallback(void (*cb)(void));
 void SetCameraPanning(s16 x, s16 y);
+void UpdateCameraPanning(void);
 void InstallCameraPanAheadCallback(void);
 void DrawDoorMetatileAt(int x, int y, const u16 *data);
 

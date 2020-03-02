@@ -669,7 +669,7 @@ sub_805E2E8: @ 805E2E8
 	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E37C
@@ -12893,12 +12893,12 @@ sub_8063AD4: @ 8063AD4
 	subs r1, r0
 	lsls r1, 4
 	strh r1, [r3]
-	ldr r1, _08063B14 @ =gUnknown_300506C
+	ldr r1, _08063B14 @ =gTotalCameraPixelOffsetX
 	ldrh r0, [r2]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r2]
-	ldr r1, _08063B18 @ =gUnknown_3005068
+	ldr r1, _08063B18 @ =gTotalCameraPixelOffsetY
 	ldrh r0, [r3]
 	ldrh r1, [r1]
 	subs r0, r1
@@ -12908,8 +12908,8 @@ sub_8063AD4: @ 8063AD4
 	bx r0
 	.align 2, 0
 _08063B10: .4byte gSaveBlock1Ptr
-_08063B14: .4byte gUnknown_300506C
-_08063B18: .4byte gUnknown_3005068
+_08063B14: .4byte gTotalCameraPixelOffsetX
+_08063B18: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end sub_8063AD4
 
 	thumb_func_start sub_8063B1C
@@ -12921,7 +12921,7 @@ sub_8063B1C: @ 8063B1C
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r0, _08063BB0 @ =gUnknown_300506C
+	ldr r0, _08063BB0 @ =gTotalCameraPixelOffsetX
 	ldrh r0, [r0]
 	negs r0, r0
 	ldr r1, _08063BB4 @ =gUnknown_3005050
@@ -12929,7 +12929,7 @@ sub_8063B1C: @ 8063B1C
 	subs r0, r2
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, _08063BB8 @ =gUnknown_3005068
+	ldr r0, _08063BB8 @ =gTotalCameraPixelOffsetY
 	ldrh r0, [r0]
 	negs r0, r0
 	ldr r1, [r1, 0x14]
@@ -12992,9 +12992,9 @@ _08063B7C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063BB0: .4byte gUnknown_300506C
+_08063BB0: .4byte gTotalCameraPixelOffsetX
 _08063BB4: .4byte gUnknown_3005050
-_08063BB8: .4byte gUnknown_3005068
+_08063BB8: .4byte gTotalCameraPixelOffsetY
 _08063BBC: .4byte 0xfff00000
 _08063BC0: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8063B1C

@@ -37,7 +37,7 @@ bool32 FldEffPoison_IsActive(void);
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
-bool8 sub_80D0860(void);
+bool8 FldEff_UseStrength(void);
 
 // teleport
 bool8 SetUpFieldMove_Teleport(void);

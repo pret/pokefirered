@@ -29,7 +29,7 @@ void sub_811539C(void);
 void sub_8115748(u16);
 u8 sub_8112CAC(void);
 bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
-void sub_8111F38(u16, u16);
+void sub_8111F38(u16 offset, u16 idx);
 void sub_8111134(void);
 void DestroyHelpMessageWindow(u8 a0);
 u8 CreateHelpMessageWindow(void);
@@ -50,6 +50,8 @@ void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void sub_8110840(void *oldSave);
 void sub_8112F18(u8 windowId);
 bool8 sub_8111C2C(void);
+void sub_81128BC(u8 a0);
+void sub_811278C(u8, u8);
 void Special_UpdateTrainerFansAfterLinkBattle(void);
 
 #endif //GUARD_QUEST_LOG_H

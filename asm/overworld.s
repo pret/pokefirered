@@ -115,8 +115,8 @@ _08054C8A:
 _08054C9C: .4byte sWhiteOutMoneyLossBadgeFlagIDs
 	thumb_func_end CountBadgesForOverworldWhiteOutLossCalculation
 
-	thumb_func_start sub_8054CA0
-sub_8054CA0: @ 8054CA0
+	thumb_func_start Overworld_ResetStateAfterFly
+Overworld_ResetStateAfterFly: @ 8054CA0
 	push {lr}
 	bl ResetInitialPlayerAvatarState
 	movs r0, 0x83
@@ -152,7 +152,7 @@ _08054CF8: .4byte 0x00000805
 _08054CFC: .4byte 0x00000806
 _08054D00: .4byte 0x00000808
 _08054D04: .4byte 0x0000404d
-	thumb_func_end sub_8054CA0
+	thumb_func_end Overworld_ResetStateAfterFly
 
 	thumb_func_start Overworld_ResetStateAfterTeleport
 Overworld_ResetStateAfterTeleport: @ 8054D08
@@ -1242,12 +1242,12 @@ sub_805550C: @ 805550C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	lsls r0, 24
 	cmp r0, 0
 	beq _08055590
 	adds r0, r5, 0
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1764,7 +1764,7 @@ sub_8055920: @ 8055920
 	bl sub_8054F68
 	ldr r0, _0805599C @ =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1815,7 +1815,7 @@ sub_80559A8: @ 80559A8
 	bl sub_8054F68
 	ldr r0, _080559E0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	bl TrySetMapSaveWarpStatus
 	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
@@ -2611,8 +2611,8 @@ _08055F82:
 	bx r1
 	thumb_func_end GetMapMusicFadeoutSpeed
 
-	thumb_func_start sub_8055F88
-sub_8055F88: @ 8055F88
+	thumb_func_start TryFadeOutOldMapMusic
+TryFadeOutOldMapMusic: @ 8055F88
 	push {r4,lr}
 	bl sub_8055DA4
 	lsls r0, 16
@@ -2638,7 +2638,7 @@ _08055FB8:
 	bx r0
 	.align 2, 0
 _08055FC0: .4byte 0x00004001
-	thumb_func_end sub_8055F88
+	thumb_func_end TryFadeOutOldMapMusic
 
 	thumb_func_start BGMusicStopped
 BGMusicStopped: @ 8055FC4
@@ -2933,8 +2933,8 @@ sub_80561B4: @ 80561B4
 _080561D4: .4byte gUnknown_2031DB4
 	thumb_func_end sub_80561B4
 
-	thumb_func_start is_light_level_1_2_3_5_or_6
-is_light_level_1_2_3_5_or_6: @ 80561D8
+	thumb_func_start IsMapTypeOutdoors
+IsMapTypeOutdoors: @ 80561D8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2956,7 +2956,7 @@ _080561F6:
 _080561F8:
 	pop {r1}
 	bx r1
-	thumb_func_end is_light_level_1_2_3_5_or_6
+	thumb_func_end IsMapTypeOutdoors
 
 	thumb_func_start Overworld_MapTypeAllowsTeleportAndFly
 Overworld_MapTypeAllowsTeleportAndFly: @ 80561FC
@@ -4659,10 +4659,10 @@ _0805706A:
 	thumb_func_start sub_8057074
 sub_8057074: @ 8057074
 	push {lr}
-	ldr r0, _08057094 @ =gUnknown_300506C
+	ldr r0, _08057094 @ =gTotalCameraPixelOffsetX
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08057098 @ =gUnknown_3005068
+	ldr r0, _08057098 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
 	bl sub_805DE74
 	movs r0, 0
@@ -4672,18 +4672,18 @@ sub_8057074: @ 8057074
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057094: .4byte gUnknown_300506C
-_08057098: .4byte gUnknown_3005068
+_08057094: .4byte gTotalCameraPixelOffsetX
+_08057098: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end sub_8057074
 
 	thumb_func_start mli4_mapscripts_and_other
 mli4_mapscripts_and_other: @ 805709C
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _080570F4 @ =gUnknown_300506C
+	ldr r0, _080570F4 @ =gTotalCameraPixelOffsetX
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080570F8 @ =gUnknown_3005068
+	ldr r0, _080570F8 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
 	bl sub_805DE74
 	mov r4, sp
@@ -4715,8 +4715,8 @@ mli4_mapscripts_and_other: @ 805709C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080570F4: .4byte gUnknown_300506C
-_080570F8: .4byte gUnknown_3005068
+_080570F4: .4byte gTotalCameraPixelOffsetX
+_080570F8: .4byte gTotalCameraPixelOffsetY
 _080570FC: .4byte gSaveBlock2Ptr
 	thumb_func_end mli4_mapscripts_and_other
 

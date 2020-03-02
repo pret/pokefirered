@@ -207,8 +207,8 @@ gSpecials:: @ 815FD60
 	def_special Special_BattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special ExecuteWhiteOut
-	def_special sp0C8_whiteout_maybe
+	def_special TryFieldPoisonWhiteOut
+	def_special SetCB2Whiteout
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -340,7 +340,7 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special LoadPlayerBag
-	def_special sub_807F0B0
+	def_special Script_FadeOutMapMusic
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special HasAllKantoMons

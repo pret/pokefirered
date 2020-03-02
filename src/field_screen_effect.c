@@ -212,7 +212,7 @@ void WriteFlashScanlineEffectBuffer(u8 flashLevel)
     }
 }
 
-void sub_807F0B0(void)
+void Script_FadeOutMapMusic(void)
 {
     Overworld_FadeOutMapMusic();
     CreateTask(Task_EnableScriptAfterMusicFade, 80);
@@ -444,7 +444,7 @@ static void sub_807F45C(u8 taskId)
         if (sub_807E418() == TRUE)
         {
             DestroyTask(taskId);
-            ScriptContext1_SetupScript(EventScript_MomHeal);
+            ScriptContext1_SetupScript(EventScript_AfterWhiteOutMomHeal);
         }
         break;
     }

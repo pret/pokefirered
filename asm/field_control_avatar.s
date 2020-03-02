@@ -1530,10 +1530,10 @@ _0806D4A0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4B8
-	ldr r0, _0806D4B4 @ =gUnknown_81A7702
+	ldr r0, _0806D4B4 @ =EventScript_Questionnaire
 	b _0806D53E
 	.align 2, 0
-_0806D4B4: .4byte gUnknown_81A7702
+_0806D4B4: .4byte EventScript_Questionnaire
 _0806D4B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -1822,11 +1822,11 @@ _0806D6EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D704
-	ldr r0, _0806D700 @ =EventScript_PoisonWhiteOut
+	ldr r0, _0806D700 @ =EventScript_FieldPoison
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D700: .4byte EventScript_PoisonWhiteOut
+_0806D700: .4byte EventScript_FieldPoison
 _0806D704:
 	bl ShouldEggHatch
 	lsls r0, 24

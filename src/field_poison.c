@@ -48,42 +48,45 @@ static bool32 MonFaintedFromPoison(u8 partyIdx)
     return FALSE;
 }
 
-static void Task_WhiteOut(u8 taskId)
+#define tState   data[0]
+#define tPartyId data[1]
+
+static void Task_TryFieldPoisonWhiteOut(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        for (; data[1] < PARTY_SIZE; data[1]++)
+        for (; tPartyId < PARTY_SIZE; tPartyId++)
         {
-            if (MonFaintedFromPoison(data[1]))
+            if (MonFaintedFromPoison(tPartyId))
             {
-                FaintFromFieldPoison(data[1]);
+                FaintFromFieldPoison(tPartyId);
                 ShowFieldMessage(gText_PkmnFainted3);
                 data[0]++;
                 return;
             }
         }
-        data[0] = 2;
+        tState = 2;
         break;
     case 1:
         if (IsFieldMessageBoxHidden())
-            data[0]--;
+            tState--;
         break;
     case 2:
         if (AllMonsFainted())
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = TRUE;
         else
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = FALSE;
         EnableBothScriptContexts();
         DestroyTask(taskId);
         break;
     }
 }
 
-void ExecuteWhiteOut(void)
+void TryFieldPoisonWhiteOut(void)
 {
-    CreateTask(Task_WhiteOut, 80);
+    CreateTask(Task_TryFieldPoisonWhiteOut, 80);
     ScriptContext1_Stop();
 }
 

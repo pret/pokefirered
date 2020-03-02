@@ -8,7 +8,7 @@
 	thumb_func_start sub_8054BC8
 sub_8054BC8: @ 8054BC8
 	push {r4,lr}
-	ldr r0, _08054BFC @ =gUnknown_81A654B
+	ldr r0, _08054BFC @ =EventScript_ResetEliteFourEnd
 	bl ScriptContext2_RunNewScript
 	ldr r0, _08054C00 @ =gSaveBlock1Ptr
 	ldr r4, [r0]
@@ -27,7 +27,7 @@ sub_8054BC8: @ 8054BC8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054BFC: .4byte gUnknown_81A654B
+_08054BFC: .4byte EventScript_ResetEliteFourEnd
 _08054C00: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_8054BC8
 

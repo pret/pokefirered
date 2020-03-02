@@ -288,7 +288,7 @@ CableClub_EventScript_TryEnterColosseum:: @ 81BB54C
 	textcolor 3
 	special TryBattleLinkup
 	waitstate
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, 1
 	goto_if_eq CableClub_EventScript_EnterColosseum
 	compare VAR_RESULT, 2
@@ -395,7 +395,7 @@ CableClub_EventScript_TradeCenter:: @ 81BB6AB
 	textcolor 3
 	special TryTradeLinkup
 	waitstate
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, 1
 	goto_if_eq CableClub_EventScript_EnterTradeCenter
 	compare VAR_RESULT, 2
@@ -1001,7 +1001,7 @@ CableClub_EventScript_ChooseLinkLeaderFrom2:: @ 81BBDBC
 	textcolor 3
 	message CableClub_Text_ChooseGroupLeaderOfTwo
 	waitmessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroup2Players
@@ -1036,7 +1036,7 @@ CableClub_EventScript_ChooseLinkLeaderFrom4:: @ 81BBE50
 	textcolor 3
 	message CableClub_Text_ChooseGroupLeaderOfFour
 	waitmessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroup4Players
@@ -1071,7 +1071,7 @@ CableClub_EventScript_ChooseLinkLeader:: @ 81BBEE4
 	textcolor 3
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinGroupXPlayers
@@ -1281,7 +1281,7 @@ CableClub_EventScript_ChooseLinkLeaderMinigame:: @ 81BC1CE
 	textcolor 3
 	message CableClub_Text_ChooseGroupLeader
 	waitmessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	multichoice 13, 6, MULTICHOICE_JOIN_OR_LEAD, FALSE
 	switch VAR_RESULT
 	case 0, CableClub_EventScript_TryJoinMinigameLinkGroup

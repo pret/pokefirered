@@ -29,7 +29,7 @@ SaffronCity_Dojo_EventScript_HitmonleeBall:: @ 816EC00
 	waitmovement 0
 	textcolor 0
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES
 	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
 	erasemonpic
@@ -51,7 +51,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall:: @ 816EC46
 	waitmovement 0
 	textcolor 0
 	msgbox SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_RESULT, YES
 	goto_if_eq SaffronCity_Dojo_EventScript_GiveHitmon
 	erasemonpic

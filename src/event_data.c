@@ -24,7 +24,7 @@ EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_TextColor = 0;
 EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
-EWRAM_DATA u16 gUnknown_20370DE = 0;
+EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_COUNT] = {};
 
 u16 gLastQuestLogStoredFlagOrVarIdx;
@@ -321,5 +321,5 @@ void ResetSpecialVars(void)
     gSpecialVar_MonBoxPos = 0;
     gSpecialVar_TextColor = 0;
     gSpecialVar_PrevTextColor = 0;
-    gUnknown_20370DE = 0;
+    gSpecialVar_0x8014 = 0;
 }

@@ -154,7 +154,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_GiveDrink:: @ 816BF7C
 	waitmessage
 	waitfanfare
 	putitemaway VAR_0x8009
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_0x8008, ITEM_FRESH_WATER
 	call_if_eq CeladonCity_DepartmentStore_Roof_EventScript_ExplainTM16
 	compare VAR_0x8008, ITEM_SODA_POP

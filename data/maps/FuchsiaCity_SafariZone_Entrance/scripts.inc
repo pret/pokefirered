@@ -123,7 +123,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone:: @ 816D3CA
 	playfanfare MUS_FANFA1
 	message FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut
 	closemessage
 	hidemoneybox 0, 0

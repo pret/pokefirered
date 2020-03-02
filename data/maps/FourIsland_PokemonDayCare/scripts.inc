@@ -138,7 +138,7 @@ FourIsland_PokemonDayCare_RetrieveMon:: @ 8171B05
 	playmoncry VAR_RESULT, 0
 	textcolor 3
 	msgbox DayCare_Text_TookBackMon
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	waitmoncry
 	specialvar VAR_RESULT, GetDaycareState
 	compare VAR_RESULT, DAYCARE_ONE_MON

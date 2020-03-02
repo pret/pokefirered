@@ -98,7 +98,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene:: @ 8169035
 	textcolor 3
 	msgbox PalletTown_ProfessorOaksLab_Text_OakTookBothPokedexUnits
 	closemessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_FACING, DIR_NORTH
 	call_if_eq PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskNorth
 	compare VAR_FACING, DIR_SOUTH
@@ -128,7 +128,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene:: @ 8169035
 	message PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	special EnableNationalPokedex
 	msgbox PalletTown_ProfessorOaksLab_Text_OakMustReallyWorkToFillPokedex
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex
@@ -655,7 +655,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @ 816961E
 	message PalletTown_ProfessorOaksLab_Text_DeliveredOaksParcel
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	removeitem ITEM_OAKS_PARCEL, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCustomBallIOrdered
 	playbgm MUS_RIVAL1, 0
@@ -721,7 +721,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @ 816961E
 	message PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	setflag FLAG_SYS_POKEDEX_GET
 	special sub_810B810
 	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1
@@ -1212,7 +1212,7 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter:: @ 8169C74
 	erasemonpic
 	removeobject VAR_LAST_TALKED
 	msgbox PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
 	givemon PLAYER_STARTER_SPECIES, 5, ITEM_NONE

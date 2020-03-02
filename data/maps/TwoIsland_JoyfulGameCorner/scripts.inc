@@ -162,7 +162,7 @@ TwoIsland_JoyfulGameCorner_EventScript_GiveDaddyMeteorite:: @ 817158A
 	message TwoIsland_JoyfulGameCorner_Text_HandedMeteoriteToLostellesDaddy
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	removeitem ITEM_METEORITE, 1
 	msgbox TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill
 	goto TwoIsland_JoyfulGameCorner_EventScript_ReceiveMoonStone

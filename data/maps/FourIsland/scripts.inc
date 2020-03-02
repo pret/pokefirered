@@ -112,7 +112,7 @@ FourIsland_EventScript_DaycareAcceptEgg:: @ 8167DD1
 FourIsland_EventScript_DaycareReceivedEgg:: @ 8167DEB
 	textcolor 3
 	message DayCare_Text_ReceivedEgg
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress

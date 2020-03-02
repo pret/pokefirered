@@ -141,7 +141,7 @@ OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMapPage:: @ 8170E46
 	message OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	return
 
 OneIsland_PokemonCenter_1F_EventScript_ReceiveTownMap:: @ 8170E58
@@ -264,7 +264,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire:: @ 8170FA5
 	message OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	removeitem ITEM_SAPPHIRE, 1
 	msgbox OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime
 	closemessage
@@ -310,7 +310,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioRuby:: @ 8171044
 	message OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	closemessage
 	applymovement LOCALID_CELIO, OneIsland_PokemonCenter_1F_Movement_CelioPutGemInMachine
 	waitmovement 0
@@ -349,7 +349,7 @@ OneIsland_PokemonCenter_1F_EventScript_GiveRainbowPass:: @ 81710B2
 	message OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage
 	waitmessage
 	waitfanfare
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	goto OneIsland_PokemonCenter_1F_EventScript_ExplainRainbowPass
 	end
 

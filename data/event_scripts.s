@@ -66,7 +66,7 @@ gSpecialVars:: @ 815FD0C
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gSpecialVar_TextColor
 	.4byte gSpecialVar_PrevTextColor
-	.4byte gUnknown_20370DE
+	.4byte gSpecialVar_0x8014
 
 	.include "data/specials.inc"
 

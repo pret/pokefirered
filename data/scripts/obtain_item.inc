@@ -1,18 +1,19 @@
-EventScript_1A666F:: @ 81A666F
-	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
+@ Unused, handled by textcolor script cmd
+EventScript_SaveTextColor:: @ 81A666F
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	return
 
-EventScript_1A6675:: @ 81A6675
-	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
+EventScript_RestorePrevTextColor:: @ 81A6675
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
 Std_ObtainItem:: @ 81A667B
-	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	textcolor 3
 	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
-	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
 EventScript_ObtainItemMessage:: @ 81A6697

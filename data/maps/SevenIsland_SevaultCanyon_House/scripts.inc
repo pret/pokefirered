@@ -18,7 +18,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan:: @ 8172183
 	goto_if_eq SevenIsland_SevaultCanyon_House_EventScript_DeclineDance
 	msgbox SevenIsland_SevaultCanyon_House_Text_DancedChanseyDance
 	closemessage
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	compare VAR_FACING, DIR_SOUTH
 	call_if_ne SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown
 	delay 30

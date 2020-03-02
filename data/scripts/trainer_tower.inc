@@ -299,7 +299,7 @@ TrainerTower_Roof_EventScript_ReceivePrize:
 	waitmessage
 	getstdstring 2, STDSTRING_ITEMS_POCKET
 	msgbox Text_PutItemAway
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	goto TrainerTower_Roof_EventScript_CheckFinalTime
 
 TrainerTower_Roof_EventScript_NoRoomForPrize:: @ 81C543A

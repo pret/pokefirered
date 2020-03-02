@@ -27,5 +27,5 @@ PewterCity_House1_EventScript_DoNidoranCry:: @ 816A749
 	playmoncry SPECIES_NIDORAN_M, 0
 	msgbox PewterCity_House1_Text_Nidoran
 	waitmoncry
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	return

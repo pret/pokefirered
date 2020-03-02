@@ -78,7 +78,7 @@ TwoIsland_House_EventScript_GiveBigMushroom:: @ 8171727
 	removeitem ITEM_BIG_MUSHROOM, 1
 	textcolor 3
 	msgbox TwoIsland_House_Text_HandedOverOneBigMushroom
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	goto TwoIsland_House_EventScript_EndTutorMove
 	end
 
@@ -86,7 +86,7 @@ TwoIsland_House_EventScript_GiveTinyMushrooms:: @ 8171741
 	removeitem ITEM_TINY_MUSHROOM, 2
 	textcolor 3
 	msgbox TwoIsland_House_Text_HandedOverTwoTinyMushrooms
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	goto TwoIsland_House_EventScript_EndTutorMove
 	end
 

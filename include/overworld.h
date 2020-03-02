@@ -189,6 +189,8 @@ void sub_8057F34(void);
 u32 sub_8057EC0(void);
 void sub_8057F70(void);
 void sub_8057F48(void);
+void SetMainCallback1(MainCallback cb);
+void CB1_Overworld(void);
 
 extern u16 gHeldKeyCodeToSend;
 

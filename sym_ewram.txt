@@ -447,10 +447,10 @@ gUnknown_203B170: @ 203B170
 	.include "src/pokemon_jump_2.o"
 	.align 2
 	.include "src/pokemon_jump_4.o"
+	.align 2
+	.include "src/berry_crush.o"
 
-gUnknown_203F3DC: @ 203F3DC
-	.space 0x4
-
+	.align 2
 gUnknown_203F3E0: @ 203F3E0
 	.space 0x4
 

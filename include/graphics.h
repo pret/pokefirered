@@ -4845,10 +4845,10 @@ extern const u32 gBuyMenuFrame_Pal[];
 extern const u16 gUnknown_8D2FBB4[];
 
 // trainer card
-extern const u16 gFireRedTrainerCard_Pal[];
-extern const u32 gFireRedTrainerCard_Gfx[];
-extern const u16 gEmeraldTrainerCard_Pal[];
-extern const u32 gEmeraldTrainerCard_Gfx[];
+extern const u16 gKantoTrainerCard_Pal[];
+extern const u32 gKantoTrainerCard_Gfx[];
+extern const u16 gHoennTrainerCard_Pal[];
+extern const u32 gHoennTrainerCard_Gfx[];
 
 // battle_interface
 extern const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[];

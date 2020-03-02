@@ -38,12 +38,12 @@ gSpecials:: @ 815FD60
 	def_special nullsub_75
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
-	def_special sub_80810F4
+	def_special TryRecordMixLinkup
 	def_special CloseLink
 	def_special EnterColosseumPlayerSpot
 	def_special EnterTradeSeat
-	def_special sub_80819B8
-	def_special sub_808130C
+	def_special Special_WiredCableClubTrade
+	def_special Special_CableClub_AskSaveTheGame
 	def_special nullsub_75
 	def_special nullsub_75
 	def_special nullsub_75
@@ -238,7 +238,7 @@ gSpecials:: @ 815FD60
 	def_special Special_GetPlayerAvatarBike
 	def_special nullsub_75
 	def_special nullsub_75
-	def_special Special_GetLeadMonFriendship
+	def_special GetLeadMonFriendship
 	def_special ScrSpecial_BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
@@ -357,7 +357,7 @@ gSpecials:: @ 815FD60
 	def_special sub_80CADC4
 	def_special Special_SetVermilionTrashCans
 	def_special sub_805D1A8
-	def_special Special_SampleResortGorgeousMonAndReward
+	def_special SampleResortGorgeousMonAndReward
 	def_special Special_CheckAddCoins
 	def_special GetDaycarePokemonCount
 	def_special Special_CloseElevatorCurrentFloorWindow
@@ -368,7 +368,7 @@ gSpecials:: @ 815FD60
 	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
 	def_special Special_UpdateTrainerCardPhotoIcons
-	def_special Special_StickerLadyGetBragFlags
+	def_special StickerManGetBragFlags
 	def_special SetUsedPkmnCenterQuestLogEvent
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader
@@ -444,7 +444,7 @@ gSpecials:: @ 815FD60
 	def_special Special_PlayerIsNotInTrainerTowerLobby
 	def_special Special_BrailleCursorToggle
 	def_special Script_ResetUnionRoomTrade
-	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
+	def_special PlayerPartyContainsSpeciesWithPlayerID
 	def_special AnimateTeleporterHousing
 	def_special IsDodrioInParty
 	def_special AnimateTeleporterCable

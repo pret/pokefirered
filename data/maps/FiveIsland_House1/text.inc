@@ -1,11 +1,11 @@
-Text_1A3C71:: @ 81A3C71
+FiveIsland_House1_JPText_HusbandWentOffFishing:: @ 81A3C71
     .string "こんばんの　おかずは\n"
     .string "ようい　しなくて　いいぞ！\p"
     .string "って　だんなが\n"
     .string "つりに　いったん　だけど‥\l"
     .string "しんじて　いいのかねえ$"
 
-gUnknown_81A3CAC:: @ 81A3CAC
+FiveIsland_House1_Text_HusbandWentOffFishing:: @ 81A3CAC
     .string "Don't worry about buying anything\n"
     .string "for dinner tonight!\p"
     .string "…That's what my husband said when\n"

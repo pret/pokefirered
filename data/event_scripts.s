@@ -34,6 +34,7 @@
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
 #include "constants/easy_chat.h"
+#include "constants/trainer_card.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0

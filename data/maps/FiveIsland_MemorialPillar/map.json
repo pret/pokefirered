@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FiveIsland_MemorialPillar_EventScript_1689D3",
+      "script": "FiveIsland_MemorialPillar_EventScript_MemorialMan",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "FiveIsland_MemorialPillar_EventScript_1AC317",
+      "script": "FiveIsland_MemorialPillar_EventScript_Milo",
       "flag": "0"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "FiveIsland_MemorialPillar_EventScript_1AC355",
+      "script": "FiveIsland_MemorialPillar_EventScript_Chaz",
       "flag": "0"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "FiveIsland_MemorialPillar_EventScript_1AC393",
+      "script": "FiveIsland_MemorialPillar_EventScript_Harold",
       "flag": "0"
     },
     {
@@ -95,7 +95,7 @@
       "x": 9,
       "y": 43,
       "elevation": 0,
-      "script": "FiveIsland_MemorialPillar_EventScript_168A48"
+      "script": "FiveIsland_MemorialPillar_EventScript_Memorial"
     },
     {
       "type": "hidden_item",

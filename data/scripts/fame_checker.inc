@@ -27,11 +27,11 @@ EventScript_1ACDB5:: @ 81ACDB5
 	release
 	end
 
-FourIsland_PokemonCenter_1F_EventScript_1ACDD0:: @ 81ACDD0
+FourIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACDD0
 	lockall
 	famechecker FAMECHECKER_DAISY, 5
 	textcolor 3
-	msgbox gUnknown_81B1B3D
+	msgbox PokemonJournal_Text_SpecialFeatureDaisyOak
 	releaseall
 	end
 
@@ -143,20 +143,20 @@ FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
 	releaseall
 	end
 
-FourIsland_Mart_EventScript_1ACF46:: @ 81ACF46
+FourIsland_Mart_EventScript_OldMan:: @ 81ACF46
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 2
-	msgbox Text_1A3A60
+	msgbox FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland
 	release
 	end
 
-FiveIsland_PokemonCenter_1F_EventScript_1ACF5F:: @ 81ACF5F
+FiveIsland_PokemonCenter_1F_EventScript_PokemonJournal:: @ 81ACF5F
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 3
 	textcolor 3
-	msgbox gUnknown_81B187F
+	msgbox PokemonJournal_Text_SpecialFeatureLorelei
 	release
 	end
 

@@ -1127,11 +1127,11 @@ static void LinkOpponentHandleDrawTrainerPic(void)
         }
         else if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender != MALE)
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PLAYER_4];
+            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
         }
         else
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PLAYER_3];
+            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
         }
     }
     else
@@ -1152,11 +1152,11 @@ static void LinkOpponentHandleDrawTrainerPic(void)
         }
         else if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PLAYER_4];
+            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
         }
         else
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PLAYER_3];
+            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
         }
     }
     DecompressTrainerFrontPic(trainerPicId, gActiveBattler);

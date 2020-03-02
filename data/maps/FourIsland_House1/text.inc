@@ -1,4 +1,7 @@
-Text_1A3778:: @ 81A3778
+@ Text for this file was split weirdly, and is instead in FourIsland_PokemonCenter_1F/text.inc
+@ Theres also an unused JP version of that text in this file instead
+
+JPText_BodySlamTeach:: @ 81A3778
     .string "そーれ　ぼよーん！\n"
     .string "どっちが　さきに　へたばるか？\l"
     .string "のしかかり　しょうぶ　してるんだ\p"
@@ -7,17 +10,17 @@ Text_1A3778:: @ 81A3778
     .string "かわりに　きみの　ポケモンに\l"
     .string "のしかかり　おしえて　やろっか？$"
 
-Text_1A37DB:: @ 81A37DB
+JPText_BodySlamDeclined:: @ 81A37DB
     .string "また　おいで　ぼよーん！$"
 
-Text_1A37E8:: @ 81A37E8
+JPText_BodySlamWhichMon:: @ 81A37E8
     .string "どの　ポケモンに\n"
     .string "おしえたい　かい？$"
 
-Text_1A37FB:: @ 81A37FB
+JPText_BodySlamTaught:: @ 81A37FB
     .string "ぼよよーん！$"
 
-gUnknown_81A3802:: @ 81A3802
+FourIsland_House1_Text_YoureAwfullyHeavy:: @ 81A3802
     .string "There! Boing!\n"
     .string "You're awfully heavy!$"
 

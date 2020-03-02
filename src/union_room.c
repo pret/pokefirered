@@ -46,6 +46,7 @@
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
 #include "constants/species.h"
+#include "constants/trainer_card.h"
 #include "constants/union_room.h"
 
 static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
@@ -1735,7 +1736,7 @@ static void Task_CallCB2ReturnFromLinkTrade(u8 taskId)
     DestroyTask(taskId);
 }
 
-u8 UnionRoom_CreateTask_CallBC2ReturnFromLinkTrade(void)
+u8 UnionRoom_CreateTask_CallCB2ReturnFromLinkTrade(void)
 {
     u8 taskId = CreateTask(Task_CallCB2ReturnFromLinkTrade, 0);
 
@@ -1848,7 +1849,7 @@ void StartUnionRoomBattle(u16 battleFlags)
     gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
     gLinkPlayers[GetMultiplayerId()].id = GetMultiplayerId();
     gLinkPlayers[GetMultiplayerId() ^ 1].id = GetMultiplayerId() ^ 1;
-    gMain.savedCallback = sub_8081668;
+    gMain.savedCallback = CB2_ReturnFromCableClubBattle;
     gBattleTypeFlags = battleFlags;
     PlayBattleBGM();
 }
@@ -4692,23 +4693,23 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
     StringCopy(uroom->trainerCardStrbufs[0], gTrainerClassNames[sub_80447F0()]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, uroom->trainerCardStrbufs[0]);
 
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->playerName);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->rse.playerName);
 
-    StringCopy(uroom->field_174, gUnknown_84594B0[trainerCard->stars]);
+    StringCopy(uroom->field_174, gUnknown_84594B0[trainerCard->rse.stars]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, uroom->field_174);
 
-    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[2], trainerCard->caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[2], trainerCard->rse.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, uroom->trainerCardStrbufs[2]);
 
-    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[3], trainerCard->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[4], trainerCard->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[3], trainerCard->rse.playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[4], trainerCard->rse.playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, uroom->trainerCardStrbufs[3]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, uroom->trainerCardStrbufs[4]);
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(uroom->field_1A4, gUnknown_84594C4);
     StringCopy(gStringVar4, uroom->field_1A4);
 
-    n = trainerCard->linkBattleWins;
+    n = trainerCard->rse.linkBattleWins;
     if (n > 9999)
     {
         n = 9999;
@@ -4716,7 +4717,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
     ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[0], n, STR_CONV_MODE_LEFT_ALIGN, 4);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, uroom->trainerCardStrbufs[0]);
 
-    n = trainerCard->linkBattleLosses;
+    n = trainerCard->rse.linkBattleLosses;
     if (n > 9999)
     {
         n = 9999;
@@ -4724,12 +4725,12 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
     ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[1], n, STR_CONV_MODE_LEFT_ALIGN, 4);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, uroom->trainerCardStrbufs[1]);
 
-    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[2], trainerCard->pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(uroom->trainerCardStrbufs[2], trainerCard->rse.pokemonTrades, STR_CONV_MODE_LEFT_ALIGN, 5);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, uroom->trainerCardStrbufs[2]);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
     {
-        CopyEasyChatWord(uroom->trainerCardStrbufs[i + 3], trainerCard->var_28[i]);
+        CopyEasyChatWord(uroom->trainerCardStrbufs[i + 3], trainerCard->rse.easyChatProfile[i]);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(i + 4, uroom->trainerCardStrbufs[i + 3]);
     }
 
@@ -4743,7 +4744,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct UnkStruct_URoom * uro
     }
     else if (parent_child == MODE_CHILD)
     {
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(uroom->field_1A4, gUnknown_8459580[trainerCard->gender]);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(uroom->field_1A4, gUnknown_8459580[trainerCard->rse.gender]);
         StringAppend(gStringVar4, uroom->field_1A4);
     }
 }

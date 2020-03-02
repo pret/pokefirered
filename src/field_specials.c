@@ -165,7 +165,7 @@ void Special_SetHiddenItemFlag(void)
     FlagSet(gSpecialVar_0x8004);
 }
 
-u8 Special_GetLeadMonFriendship(void)
+u8 GetLeadMonFriendship(void)
 {
     struct Pokemon * pokemon = &gPlayerParty[GetLeadMonIndex()];
     if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
@@ -672,10 +672,10 @@ void IncrementResortGorgeousStepCounter(void)
     }
 }
 
-void Special_SampleResortGorgeousMonAndReward(void)
+void SampleResortGorgeousMonAndReward(void)
 {
-    u16 var4036 = VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON);
-    if (var4036 == SPECIES_NONE || var4036 == 0xFFFF)
+    u16 requestedSpecies = VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON);
+    if (requestedSpecies == SPECIES_NONE || requestedSpecies == 0xFFFF)
     {
         VarSet(VAR_RESORT_GORGEOUS_REQUESTED_MON, SampleResortGorgeousMon());
         VarSet(VAR_RESORT_GORGEOUS_REWARD, SampleResortGorgeousReward());
@@ -1695,7 +1695,7 @@ void Special_UpdateTrainerCardPhotoIcons(void)
     VarSet(VAR_TRAINER_CARD_MON_ICON_TINT_IDX, gSpecialVar_0x8004);
 }
 
-u16 Special_StickerLadyGetBragFlags(void)
+u16 StickerManGetBragFlags(void)
 {
     u16 result = 0;
     u32 numEggs;
@@ -2458,14 +2458,15 @@ void Special_BrailleCursorToggle(void)
     }
 }
 
-bool8 Special_PlayerPartyContainsSpeciesWithPlayerID(void)
+bool8 PlayerPartyContainsSpeciesWithPlayerID(void)
 {
     // 8004 = species
     u8 playerCount = CalculatePlayerPartyCount();
     u8 i;
     for (i = 0; i < playerCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004 && GetPlayerTrainerId() == GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == gSpecialVar_0x8004 
+            && GetPlayerTrainerId() == GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL))
             return TRUE;
     }
     return FALSE;

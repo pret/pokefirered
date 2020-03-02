@@ -1,7 +1,7 @@
 FiveIsland_LostCave_Room4_MapScripts:: @ 8164C10
 	.byte 0
 
-FiveIsland_LostCave_Room4_EventScript_164C11:: @ 8164C11
-	trainerbattle_single TRAINER_PSYCHIC_LAURA, Text_17CFC1, Text_17CFFB
-	msgbox gUnknown_817D037, MSGBOX_AUTOCLOSE
+FiveIsland_LostCave_Room4_EventScript_Laura:: @ 8164C11
+	trainerbattle_single TRAINER_PSYCHIC_LAURA, FiveIsland_LostCave_Room4_Text_LauraIntro, FiveIsland_LostCave_Room4_Text_LauraDefeat
+	msgbox FiveIsland_LostCave_Room4_Text_LauraPostBattle, MSGBOX_AUTOCLOSE
 	end

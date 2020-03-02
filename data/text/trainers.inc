@@ -765,80 +765,80 @@ OneIsland_KindleRoad_Text_MikRematchIntro:: @ 81C3A55
 	.string "afraid of nothing!\p"
 	.string "We'll prove it to you this time!$"
 
-Text_1C3AA7:: @ 81C3AA7
+ThreeIsland_BondBridge_Text_NikkiRematchIntro:: @ 81C3AA7
 	.string "Are we to battle again?$"
 
-Text_1C3ABF:: @ 81C3ABF
+ThreeIsland_BondBridge_Text_VioletRematchIntro:: @ 81C3ABF
 	.string "From where have you come, and\n"
 	.string "where are you bound?$"
 
-Text_1C3AF2:: @ 81C3AF2
+ThreeIsland_BondBridge_Text_AmiraRematchIntro:: @ 81C3AF2
 	.string "I want to swim without my float\n"
 	.string "ring soon.$"
 
-Text_1C3B1D:: @ 81C3B1D
+ThreeIsland_BondBridge_Text_AlexisRematchIntro:: @ 81C3B1D
 	.string "Yay, yay!\n"
 	.string "POKéMON!$"
 
-Text_1C3B30:: @ 81C3B30
+ThreeIsland_BondBridge_Text_TishaRematchIntro:: @ 81C3B30
 	.string "Oh, no, didn't I tell you already?\n"
 	.string "Please, stay away from me!$"
 
-Text_1C3B6E:: @ 81C3B6E
+ThreeIsland_BondBridge_Text_JoyRematchIntro:: @ 81C3B6E
 	.string "JOY: We've gotten stronger!\n"
 	.string "Lots and lots!$"
 
-Text_1C3B99:: @ 81C3B99
+ThreeIsland_BondBridge_Text_MegRematchIntro:: @ 81C3B99
 	.string "MEG: You can't beat us today!$"
 
-Text_1C3BB7:: @ 81C3BB7
+FiveIsland_WaterLabyrinth_Text_AlizeRematchIntro:: @ 81C3BB7
 	.string "Oh, hello!\p"
 	.string "Are you raising your POKéMON in a\n"
 	.string "good environment?$"
 
-Text_1C3BF6:: @ 81C3BF6
+FiveIsland_ResortGorgeous_Text_DaisyRematchIntro:: @ 81C3BF6
 	.string "With these hands, I will create\n"
 	.string "my victory today.$"
 
-Text_1C3C28:: @ 81C3C28
+FiveIsland_ResortGorgeous_Text_CelinaRematchIntro:: @ 81C3C28
 	.string "Must I repeat myself?\n"
 	.string "I'm trying to paint.\l"
 	.string "Please keep out of my sight!$"
 
-Text_1C3C70:: @ 81C3C70
+FiveIsland_ResortGorgeous_Text_RaynaRematchIntro:: @ 81C3C70
 	.string "I haven't made any progress…\n"
 	.string "I still can't get the right angle…$"
 
-Text_1C3CB0:: @ 81C3CB0
+FiveIsland_ResortGorgeous_Text_JackiRematchIntro:: @ 81C3CB0
 	.string "Oh, you will give me another\n"
 	.string "opportunity to match wits with you?$"
 
-Text_1C3CF1:: @ 81C3CF1
+FiveIsland_ResortGorgeous_Text_GillianRematchIntro:: @ 81C3CF1
 	.string "They're almost finished making the\n"
 	.string "pool for my POKéMON.\p"
 	.string "You must drop in for a visit.$"
 
-Text_1C3D47:: @ 81C3D47
+FiveIsland_ResortGorgeous_Text_DestinRematchIntro:: @ 81C3D47
 	.string "I'm a good runner.\n"
 	.string "I've gotten even faster!$"
 
-Text_1C3D73:: @ 81C3D73
+FiveIsland_ResortGorgeous_Text_TobyRematchIntro:: @ 81C3D73
 	.string "I say, friend!\n"
 	.string "Let us enjoy our time together!$"
 
-Text_1C3DA2:: @ 81C3DA2
+FiveIsland_MemorialPillar_Text_MiloRematchIntro:: @ 81C3DA2
 	.string "I'm the eldest of the BIRD\n"
 	.string "BROTHERS. Remember me?\p"
 	.string "That's right, I'm the one who loves\n"
 	.string "birds for their beaks!$"
 
-Text_1C3E0F:: @ 81C3E0F
+FiveIsland_MemorialPillar_Text_ChazRematchIntro:: @ 81C3E0F
 	.string "I'm the middle kid of the BIRD\n"
 	.string "BROTHERS.\p"
 	.string "I'm the one that loves wings.\n"
 	.string "Let's battle again!$"
 
-Text_1C3E6A:: @ 81C3E6A
+FiveIsland_MemorialPillar_Text_HaroldRematchIntro:: @ 81C3E6A
 	.string "I'm the youngest of the BIRD\n"
 	.string "BROTHERS.\p"
 	.string "I love birds for their down.\n"

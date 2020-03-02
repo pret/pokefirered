@@ -1429,7 +1429,7 @@ gUnknown_81B17E9:: @ 81B17E9
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
 
-gUnknown_81B187F:: @ 81B187F
+PokemonJournal_Text_SpecialFeatureLorelei:: @ 81B187F
 	.string "POKéMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LORELEI!\p"
@@ -1468,7 +1468,7 @@ PokemonJournal_Text_SpecialFeatureProfOak:: @ 81B1AB9
 	.string "PROF. OAK reportedly lives with his\n"
 	.string "grandchildren DAISY and {RIVAL}.$"
 
-gUnknown_81B1B3D:: @ 81B1B3D
+PokemonJournal_Text_SpecialFeatureDaisyOak:: @ 81B1B3D
 	.string "This is a POKéMON JOURNAL from\n"
 	.string "years ago…\p"
 	.string "POKéMON JOURNAL\n"

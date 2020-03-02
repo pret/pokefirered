@@ -31,7 +31,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "ThreeIsland_BondBridge_EventScript_1ABF65",
+      "script": "ThreeIsland_BondBridge_EventScript_Nikki",
       "flag": "0"
     },
     {
@@ -44,7 +44,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "ThreeIsland_BondBridge_EventScript_1ABFA3",
+      "script": "ThreeIsland_BondBridge_EventScript_Violet",
       "flag": "0"
     },
     {
@@ -57,7 +57,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ThreeIsland_BondBridge_EventScript_1ABFE1",
+      "script": "ThreeIsland_BondBridge_EventScript_Amira",
       "flag": "0"
     },
     {
@@ -70,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ThreeIsland_BondBridge_EventScript_1AC01F",
+      "script": "ThreeIsland_BondBridge_EventScript_Alexis",
       "flag": "0"
     },
     {
@@ -83,7 +83,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ThreeIsland_BondBridge_EventScript_1AC05D",
+      "script": "ThreeIsland_BondBridge_EventScript_Tisha",
       "flag": "0"
     },
     {
@@ -96,7 +96,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ThreeIsland_BondBridge_EventScript_1AC09B",
+      "script": "ThreeIsland_BondBridge_EventScript_Joy",
       "flag": "0"
     },
     {
@@ -109,7 +109,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "ThreeIsland_BondBridge_EventScript_1AC0E1",
+      "script": "ThreeIsland_BondBridge_EventScript_Meg",
       "flag": "0"
     },
     {
@@ -162,7 +162,7 @@
       "x": 14,
       "y": 7,
       "elevation": 0,
-      "script": "ThreeIsland_BondBridge_EventScript_168777"
+      "script": "ThreeIsland_BondBridge_EventScript_BerryForestSign"
     },
     {
       "type": "hidden_item",
@@ -199,7 +199,7 @@
       "x": 91,
       "y": 9,
       "elevation": 0,
-      "script": "ThreeIsland_BondBridge_EventScript_168780"
+      "script": "ThreeIsland_BondBridge_EventScript_BondBridgeSign"
     }
   ]
 }

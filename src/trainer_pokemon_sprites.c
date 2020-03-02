@@ -300,7 +300,7 @@ u16 sub_810C2FC(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
     return sub_810C050(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
 }
 
-u16 sub_810C330(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+u16 CreateTrainerCardTrainerPicSprite(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
 {
     return sub_810C0C0(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
 }

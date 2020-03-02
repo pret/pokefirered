@@ -25,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_171BF9",
+      "script": "FourIsland_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_171C02",
+      "script": "FourIsland_PokemonCenter_1F_EventScript_Man",
       "flag": "0"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_171C0B",
+      "script": "FourIsland_PokemonCenter_1F_EventScript_Woman",
       "flag": "0"
     },
     {
@@ -64,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_171C14",
+      "script": "FourIsland_PokemonCenter_1F_EventScript_Gentleman",
       "flag": "0"
     }
   ],
@@ -91,14 +91,14 @@
       "x": 3,
       "y": 1,
       "elevation": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_1ACDD0"
+      "script": "FourIsland_PokemonCenter_1F_EventScript_PokemonJournal"
     },
     {
       "type": "bg_event_type_1",
       "x": 2,
       "y": 1,
       "elevation": 0,
-      "script": "FourIsland_PokemonCenter_1F_EventScript_1ACDD0"
+      "script": "FourIsland_PokemonCenter_1F_EventScript_PokemonJournal"
     }
   ]
 }

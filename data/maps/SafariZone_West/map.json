@@ -150,31 +150,35 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 27,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_West_EventScript_LostTeethNotice"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 36,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_West_EventScript_TrainerTips"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 35,
       "y": 26,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_West_EventScript_AreaSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 22,
       "y": 19,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_West_EventScript_RestHouseSign"
     },
     {

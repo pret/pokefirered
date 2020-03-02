@@ -120,17 +120,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "VermilionCity_PokemonFanClub_EventScript_RulesSign1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 9,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "VermilionCity_PokemonFanClub_EventScript_RulesSign2"
     }
   ]

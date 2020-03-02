@@ -222,10 +222,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 3,
       "y": 7,
       "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route11_EventScript_DiglettsCaveSign"
     },
     {

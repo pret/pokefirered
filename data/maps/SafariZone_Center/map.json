@@ -125,17 +125,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 30,
       "y": 26,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_RestHouseSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 27,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_TrainerTips"
     },
     {
@@ -149,10 +151,11 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 33,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_AreaSign"
     }
   ]

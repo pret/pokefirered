@@ -81,59 +81,67 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 3,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 3,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 1,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 7,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 2,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     }
   ]

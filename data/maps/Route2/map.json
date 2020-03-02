@@ -194,17 +194,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 14,
       "y": 12,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route2_EventScript_DiglettsCaveSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 73,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route2_EventScript_RouteSign"
     }
   ]

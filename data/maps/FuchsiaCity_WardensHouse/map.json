@@ -94,31 +94,35 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FuchsiaCity_WardensHouse_EventScript_DisplaySign2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FuchsiaCity_WardensHouse_EventScript_DisplaySign1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FuchsiaCity_WardensHouse_EventScript_DisplaySign1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 4,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FuchsiaCity_WardensHouse_EventScript_DisplaySign2"
     }
   ]

@@ -233,10 +233,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 13,
       "y": 19,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FourIsland_EventScript_IslandSign"
     },
     {
@@ -260,10 +261,11 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 31,
       "y": 23,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FourIsland_EventScript_LoreleisHouseSign"
     }
   ]

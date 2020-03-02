@@ -197,24 +197,27 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 15,
       "y": 59,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_SouthRockTunnelSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 42,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_PowerPlantSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 21,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_NorthRockTunnelSign"
     },
     {

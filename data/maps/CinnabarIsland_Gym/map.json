@@ -159,108 +159,123 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 23,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CinnabarIsland_Gym_EventScript_GymStatue"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 27,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CinnabarIsland_Gym_EventScript_GymStatue"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 22,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quz1Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 23,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quz1Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 15,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz2Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 16,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz2Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 13,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz3Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 14,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz3Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 13,
       "y": 17,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz4Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 14,
       "y": 17,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz4Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 1,
       "y": 18,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz5Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 2,
       "y": 18,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz5Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 1,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz6Left"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 2,
       "y": 10,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_Quiz6Right"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 3,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CinnabarIsland_Gym_EventScript_BlaineFujiPhoto"
     }
   ]

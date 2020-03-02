@@ -135,59 +135,67 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 15,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 15,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 16,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 16,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_Door2"
     },
     {
@@ -201,10 +209,11 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 29,
       "y": 1,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_2F_EventScript_FloorSign"
     }
   ]

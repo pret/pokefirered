@@ -193,10 +193,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 14,
       "y": 33,
       "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "RockTunnel_1F_EventScript_RouteSign"
     }
   ]

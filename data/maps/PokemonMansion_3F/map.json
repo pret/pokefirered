@@ -129,17 +129,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 8,
       "y": 16,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PokemonMansion_3F_EventScript_DiaryFeb6th"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 12,
       "y": 5,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "PokemonMansion_3F_EventScript_Statue"
     },
     {

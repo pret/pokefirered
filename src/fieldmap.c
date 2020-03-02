@@ -946,7 +946,7 @@ void sub_8059948(u8 a0, u8 a1)
             TintPalette_SepiaTone(gPlttBufferUnfaded + a0 * 16, a1 * 16);
             break;
         case 3:
-            sub_8111F38((a0 * 16), a1 * 16);
+            sub_8111F38(a0 * 16, a1 * 16);
             TintPalette_GrayScale(gPlttBufferUnfaded + a0 * 16, a1 * 16);
             break;
         default:

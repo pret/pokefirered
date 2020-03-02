@@ -285,7 +285,7 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 objectEventId;
-    /*0x06*/ u8 preventStep;
+    /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
     u8 acroBikeState;
     u8 unk9;

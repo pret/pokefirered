@@ -3624,3 +3624,67 @@ void sub_80878C0(struct Sprite * sprite)
         }
     }
 }
+
+void Task_FldEffUnk43(u8 taskId);
+
+bool8 FldEff_Unk43(void)
+{
+    u8 taskId;
+    u8 objectEventIdBuffer;
+    s32 x;
+    s32 y;
+    struct ObjectEvent * objectEvent;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))
+    {
+        objectEvent = &gObjectEvents[objectEventIdBuffer];
+        x = objectEvent->currentCoords.x - 7;
+        y = objectEvent->currentCoords.y - 7;
+        x = (gFieldEffectArguments[3] - x) * 16;
+        y = (gFieldEffectArguments[4] - y) * 16;
+        npc_coords_shift(objectEvent, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
+        taskId = CreateTask(Task_FldEffUnk43, 0x50);
+        gTasks[taskId].data[1] = objectEvent->spriteId;
+        gTasks[taskId].data[2] = gSprites[objectEvent->spriteId].pos1.x + x;
+        gTasks[taskId].data[3] = gSprites[objectEvent->spriteId].pos1.y + y;
+        gTasks[taskId].data[8] = gFieldEffectArguments[5];
+        gTasks[taskId].data[9] = objectEventIdBuffer;
+    }
+    return FALSE;
+}
+
+void Task_FldEffUnk43(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Sprite * sprite = &gSprites[data[1]];
+    struct ObjectEvent * objectEvent;
+    switch (data[0])
+    {
+    case 0:
+        data[4] = sprite->pos1.x << 4;
+        data[5] = sprite->pos1.y << 4;
+        data[6] = ((data[2] << 4) - data[4]) / data[8];
+        data[7] = ((data[3] << 4) - data[5]) / data[8];
+        data[0]++;
+        // fallthrough
+    case 1:
+        if (data[8] != 0)
+        {
+            data[8]--;
+            data[4] += data[6];
+            data[5] += data[7];
+            sprite->pos1.x = data[4] >> 4;
+            sprite->pos1.y = data[5] >> 4;
+        }
+        else
+        {
+            objectEvent = &gObjectEvents[data[9]];
+            sprite->pos1.x = data[2];
+            sprite->pos1.y = data[3];
+            npc_coords_shift_still(objectEvent);
+            objectEvent->triggerGroundEffectsOnStop = TRUE;
+            FieldEffectActiveListRemove(FLDEFF_UNK_43);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}

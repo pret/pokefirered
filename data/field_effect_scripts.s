@@ -334,7 +334,7 @@ gFldEffScript_DoubleExclMarkIcon:: @ 81D9998
 	end 
 
 gFldEffScript_Unk43:: @ 81D999E
-	callnative sub_8087924
+	callnative FldEff_Unk43
 	end 
 
 gFldEffScript_Unk44:: @ 81D99A4

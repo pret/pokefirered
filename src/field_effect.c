@@ -67,7 +67,7 @@ const u16 gFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/field_effects/unk_83
 const u16 gDarknessFieldMoveStreaksTiles[] = INCBIN_U16("graphics/field_effects/unk_83CBA90.4bpp");
 const u16 gDarknessFieldMoveStreaksPalette[] = INCBIN_U16("graphics/field_effects/unk_83CBB10.gbapal");
 const u16 gDarknessFieldMoveStreaksTilemap[] = INCBIN_U16("graphics/field_effects/unk_83CBB30.bin");
-const u16 gUnknown_83CBDB0[] = INCBIN_U16("graphics/field_effects/unk_83CBDB0.4bpp");
+const u16 sFldEffUnk44_Tiles[] = INCBIN_U16("graphics/field_effects/unk_83CBDB0.4bpp");
 
 bool8 (*const sFldEffScrcmdTable[])(const u8 **script, u32 *result) = {
     FieldEffectCmd_loadtiles,
@@ -96,7 +96,7 @@ const struct OamData gNewGameOakOamAttributes = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83CBE58 = {
+const struct OamData sOamData_8x8 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -112,7 +112,7 @@ const struct OamData gOamData_83CBE58 = {
     .affineParam = 0
 };
 
-const struct OamData gOamData_83CBE60 = {
+const struct OamData sOamData_16x16 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -308,7 +308,7 @@ const union AnimCmd *const gUnknown_83CBF84[] = {
 const struct SpriteTemplate gUnknown_83CBF88 = {
     .tileTag = 65535,
     .paletteTag = 4103,
-    .oam = &gOamData_83CBE58,
+    .oam = &sOamData_8x8,
     .anims = gUnknown_83CBF54,
     .images = gUnknown_83CBEB4,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -328,7 +328,7 @@ const struct SpriteTemplate gUnknown_83CBFA0 = {
 const struct SpriteTemplate gUnknown_83CBFB8 = {
     .tileTag = 65535,
     .paletteTag = 4112,
-    .oam = &gOamData_83CBE60,
+    .oam = &sOamData_16x16,
     .anims = gUnknown_83CBF84,
     .images = gUnknown_83CBEDC,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -3625,9 +3625,9 @@ void sub_80878C0(struct Sprite * sprite)
     }
 }
 
-void Task_FldEffUnk43(u8 taskId);
+void Task_MoveDeoxysRock_Step(u8 taskId);
 
-bool8 FldEff_Unk43(void)
+u32 Fldeff_MoveDeoxysRock(void)
 {
     u8 taskId;
     u8 objectEventIdBuffer;
@@ -3642,7 +3642,7 @@ bool8 FldEff_Unk43(void)
         x = (gFieldEffectArguments[3] - x) * 16;
         y = (gFieldEffectArguments[4] - y) * 16;
         npc_coords_shift(objectEvent, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
-        taskId = CreateTask(Task_FldEffUnk43, 0x50);
+        taskId = CreateTask(Task_MoveDeoxysRock_Step, 0x50);
         gTasks[taskId].data[1] = objectEvent->spriteId;
         gTasks[taskId].data[2] = gSprites[objectEvent->spriteId].pos1.x + x;
         gTasks[taskId].data[3] = gSprites[objectEvent->spriteId].pos1.y + y;
@@ -3652,7 +3652,7 @@ bool8 FldEff_Unk43(void)
     return FALSE;
 }
 
-void Task_FldEffUnk43(u8 taskId)
+void Task_MoveDeoxysRock_Step(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite * sprite = &gSprites[data[1]];
@@ -3682,9 +3682,226 @@ void Task_FldEffUnk43(u8 taskId)
             sprite->pos1.y = data[3];
             npc_coords_shift_still(objectEvent);
             objectEvent->triggerGroundEffectsOnStop = TRUE;
-            FieldEffectActiveListRemove(FLDEFF_UNK_43);
+            FieldEffectActiveListRemove(FLDEFF_MOVE_DEOXYS_ROCK);
             DestroyTask(taskId);
         }
         break;
     }
+}
+
+void Task_FldEffUnk44(u8 taskId);
+void Unk44Effect_0(s16 *data, u8 taskId);
+void Unk44Effect_1(s16 *data, u8 taskId);
+void Unk44Effect_2(s16 *data, u8 taskId);
+void sub_8087CFC(struct Sprite * sprite);
+void SpriteCB_FldEffUnk44(struct Sprite * sprite);
+
+void (*const sUnk44EffectFuncs[])(s16 *data, u8 taskId) = {
+    Unk44Effect_0,
+    Unk44Effect_1,
+    Unk44Effect_2
+};
+
+const struct SpriteFrameImage sImages_FldEffUnk44[] = {
+    {sFldEffUnk44_Tiles + 0x00, 0x20},
+    {sFldEffUnk44_Tiles + 0x10, 0x20},
+    {sFldEffUnk44_Tiles + 0x20, 0x20},
+    {sFldEffUnk44_Tiles + 0x30, 0x20}
+};
+
+const union AnimCmd sAnimCmd_FldEffUnk44_0[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd sAnimCmd_FldEffUnk44_1[] = {
+    ANIMCMD_FRAME(1, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd sAnimCmd_FldEffUnk44_2[] = {
+    ANIMCMD_FRAME(2, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd sAnimCmd_FldEffUnk44_3[] = {
+    ANIMCMD_FRAME(3, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const sAnimCmdTable_FldEffUnk44[] = {
+    sAnimCmd_FldEffUnk44_0,
+    sAnimCmd_FldEffUnk44_1,
+    sAnimCmd_FldEffUnk44_2,
+    sAnimCmd_FldEffUnk44_3
+};
+
+const struct SpriteTemplate gUnknown_83CC2A0 = {
+    .tileTag = 0xFFFF,
+    .paletteTag = 4371,
+    .oam = &sOamData_8x8,
+    .anims = sAnimCmdTable_FldEffUnk44,
+    .images = sImages_FldEffUnk44,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_FldEffUnk44
+};
+
+u32 FldEff_Unk44(void)
+{
+    u8 taskId;
+    u8 objectEventIdBuffer;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))
+    {
+        taskId = CreateTask(Task_FldEffUnk44, 0x50);
+        gTasks[taskId].data[2] = objectEventIdBuffer;
+        gTasks[taskId].data[6] = gFieldEffectArguments[0];
+        gTasks[taskId].data[7] = gFieldEffectArguments[1];
+        gTasks[taskId].data[8] = gFieldEffectArguments[2];
+    }
+    else
+    {
+        FieldEffectActiveListRemove(FLDEFF_UNK_44);
+    }
+    return FALSE;
+}
+
+void sub_8087B14(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (data[7] != 0)
+    {
+        if (++data[6] > 20)
+        {
+            data[6] = 0;
+            if (data[5] != 0)
+                data[5]--;
+        }
+    }
+    else
+    {
+        data[5] = 4;
+    }
+
+    if (++data[0] > 1)
+    {
+        data[0] = 0;
+        if (++data[1] & 1)
+        {
+            SetCameraPanning(0, -data[5]);
+        }
+        else
+        {
+            SetCameraPanning(0, data[5]);
+        }
+    }
+    UpdateCameraPanning();
+    if (data[5] == 0)
+        DestroyTask(taskId);
+}
+
+void sub_8087BA8(u8 taskId)
+{
+    gTasks[taskId].data[7] = 1;
+}
+
+void Task_FldEffUnk44(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    InstallCameraPanAheadCallback();
+    SetCameraPanningCallback(NULL);
+    sUnk44EffectFuncs[data[1]](data, taskId);
+}
+
+void Unk44Effect_0(s16 *data, u8 taskId)
+{
+    u8 newTaskId = CreateTask(sub_8087B14, 90);
+    PlaySE(SE_T_KAMI2);
+    data[5] = newTaskId;
+    data[1]++;
+}
+
+void Unk44Effect_1(s16 *data, u8 taskId)
+{
+    if (++data[3] > 0x78)
+    {
+        struct Sprite * sprite = &gSprites[gObjectEvents[data[2]].spriteId];
+        gObjectEvents[data[2]].invisible = TRUE;
+        BlendPalettes(0x0000FFFF, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(0x0000FFFF, 0, 0x10, 0, RGB_WHITE);
+        sub_8087CFC(sprite);
+        PlaySE(SE_T_KAMI);
+        sub_8087BA8(data[5]);
+        data[3] = 0;
+        data[1]++;
+    }
+}
+
+void Unk44Effect_2(s16 *data, u8 taskId)
+{
+    if (!gPaletteFade.active && !FuncIsActiveTask(sub_8087B14))
+    {
+        InstallCameraPanAheadCallback();
+        RemoveObjectEventByLocalIdAndMap(data[6], data[7], data[8]);
+        FieldEffectActiveListRemove(FLDEFF_UNK_44);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_8087CFC(struct Sprite* sprite)
+{
+    int i;
+    int xPos = (s16)gTotalCameraPixelOffsetX + sprite->pos1.x + sprite->pos2.x;
+    int yPos = (s16)gTotalCameraPixelOffsetY + sprite->pos1.y + sprite->pos2.y - 4;
+
+    for (i = 0; i < 4; i++)
+    {
+        u8 spriteId = CreateSprite(&gUnknown_83CC2A0, xPos, yPos, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            StartSpriteAnim(&gSprites[spriteId], i);
+            gSprites[spriteId].data[0] = i;
+            gSprites[spriteId].oam.paletteNum = sprite->oam.paletteNum;
+        }
+    }
+}
+
+void SpriteCB_FldEffUnk44(struct Sprite* sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.x -= 16;
+        sprite->pos1.y -= 12;
+        break;
+    case 1:
+        sprite->pos1.x += 16;
+        sprite->pos1.y -= 12;
+        break;
+    case 2:
+        sprite->pos1.x -= 16;
+        sprite->pos1.y += 12;
+        break;
+    case 3:
+        sprite->pos1.x += 16;
+        sprite->pos1.y += 12;
+        break;
+    }
+    if (sprite->pos1.x < -4 || sprite->pos1.x > 0xF4 || sprite->pos1.y < -4 || sprite->pos1.y > 0xA4)
+        DestroySprite(sprite);
+}
+
+void Task_FldEffUnk45(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        FieldEffectActiveListRemove(FLDEFF_UNK_45);
+        DestroyTask(taskId);
+    }
+}
+
+void FldEff_Unk45(void)
+{
+    BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);
+    BeginNormalPaletteFade(0xFFFFFFFF, -1, 0x0F, 0x00, RGB_WHITE);
+    CreateTask(Task_FldEffUnk45, 90);
 }

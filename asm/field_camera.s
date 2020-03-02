@@ -956,11 +956,11 @@ _0805AC7E:
 	adds r1, r7, 0
 	mov r2, r8
 	bl coords8_add
-	ldr r1, _0805ACAC @ =gUnknown_300506C
+	ldr r1, _0805ACAC @ =gTotalCameraPixelOffsetX
 	ldrh r0, [r1]
 	subs r0, r7
 	strh r0, [r1]
-	ldr r1, _0805ACB0 @ =gUnknown_3005068
+	ldr r1, _0805ACB0 @ =gTotalCameraPixelOffsetY
 	ldrh r0, [r1]
 	mov r2, r8
 	subs r0, r2
@@ -973,8 +973,8 @@ _0805AC7E:
 	.align 2, 0
 _0805ACA4: .4byte gUnknown_3005050
 _0805ACA8: .4byte gUnknown_3000E90
-_0805ACAC: .4byte gUnknown_300506C
-_0805ACB0: .4byte gUnknown_3005068
+_0805ACAC: .4byte gTotalCameraPixelOffsetX
+_0805ACB0: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end CameraUpdate
 
 	thumb_func_start sub_805ACB4
@@ -989,12 +989,12 @@ sub_805ACB4: @ 805ACB4
 	asrs r1, 16
 	bl UpdateObjectEventsForCameraUpdate
 	bl DrawWholeMapView
-	ldr r1, _0805ACE8 @ =gUnknown_300506C
+	ldr r1, _0805ACE8 @ =gTotalCameraPixelOffsetX
 	lsls r4, 4
 	ldrh r0, [r1]
 	subs r0, r4
 	strh r0, [r1]
-	ldr r1, _0805ACEC @ =gUnknown_3005068
+	ldr r1, _0805ACEC @ =gTotalCameraPixelOffsetY
 	lsls r5, 4
 	ldrh r0, [r1]
 	subs r0, r5
@@ -1003,8 +1003,8 @@ sub_805ACB4: @ 805ACB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805ACE8: .4byte gUnknown_300506C
-_0805ACEC: .4byte gUnknown_3005068
+_0805ACE8: .4byte gTotalCameraPixelOffsetX
+_0805ACEC: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end sub_805ACB4
 
 	thumb_func_start sub_805ACF0
@@ -1184,14 +1184,14 @@ UpdateCameraPanning: @ 805AE28
 	bl _call_via_r0
 _0805AE36:
 	ldr r2, _0805AE5C @ =gSpriteCoordOffsetX
-	ldr r0, _0805AE60 @ =gUnknown_300506C
+	ldr r0, _0805AE60 @ =gTotalCameraPixelOffsetX
 	ldr r1, _0805AE64 @ =gUnknown_3000E98
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r2]
 	ldr r2, _0805AE68 @ =gSpriteCoordOffsetY
-	ldr r0, _0805AE6C @ =gUnknown_3005068
+	ldr r0, _0805AE6C @ =gTotalCameraPixelOffsetY
 	ldr r1, _0805AE70 @ =gUnknown_3000E9A
 	ldrh r0, [r0]
 	ldrh r1, [r1]
@@ -1203,10 +1203,10 @@ _0805AE36:
 	.align 2, 0
 _0805AE58: .4byte gUnknown_3000EA0
 _0805AE5C: .4byte gSpriteCoordOffsetX
-_0805AE60: .4byte gUnknown_300506C
+_0805AE60: .4byte gTotalCameraPixelOffsetX
 _0805AE64: .4byte gUnknown_3000E98
 _0805AE68: .4byte gSpriteCoordOffsetY
-_0805AE6C: .4byte gUnknown_3005068
+_0805AE6C: .4byte gTotalCameraPixelOffsetY
 _0805AE70: .4byte gUnknown_3000E9A
 	thumb_func_end UpdateCameraPanning
 

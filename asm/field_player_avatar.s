@@ -5337,7 +5337,7 @@ _0805DBBA:
 	strh r0, [r7, 0x22]
 	movs r2, 0x22
 	ldrsh r1, [r7, r2]
-	ldr r0, _0805DBF0 @ =gUnknown_3005068
+	ldr r0, _0805DBF0 @ =gTotalCameraPixelOffsetY
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	adds r1, r0
@@ -5350,7 +5350,7 @@ _0805DBBA:
 	strh r0, [r5]
 	b _0805DBFA
 	.align 2, 0
-_0805DBF0: .4byte gUnknown_3005068
+_0805DBF0: .4byte gTotalCameraPixelOffsetY
 _0805DBF4:
 	adds r0, r2, 0
 	bl DestroyTask

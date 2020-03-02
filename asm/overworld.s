@@ -4659,10 +4659,10 @@ _0805706A:
 	thumb_func_start sub_8057074
 sub_8057074: @ 8057074
 	push {lr}
-	ldr r0, _08057094 @ =gUnknown_300506C
+	ldr r0, _08057094 @ =gTotalCameraPixelOffsetX
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _08057098 @ =gUnknown_3005068
+	ldr r0, _08057098 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
 	bl sub_805DE74
 	movs r0, 0
@@ -4672,18 +4672,18 @@ sub_8057074: @ 8057074
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057094: .4byte gUnknown_300506C
-_08057098: .4byte gUnknown_3005068
+_08057094: .4byte gTotalCameraPixelOffsetX
+_08057098: .4byte gTotalCameraPixelOffsetY
 	thumb_func_end sub_8057074
 
 	thumb_func_start mli4_mapscripts_and_other
 mli4_mapscripts_and_other: @ 805709C
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r0, _080570F4 @ =gUnknown_300506C
+	ldr r0, _080570F4 @ =gTotalCameraPixelOffsetX
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, _080570F8 @ =gUnknown_3005068
+	ldr r0, _080570F8 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
 	bl sub_805DE74
 	mov r4, sp
@@ -4715,8 +4715,8 @@ mli4_mapscripts_and_other: @ 805709C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080570F4: .4byte gUnknown_300506C
-_080570F8: .4byte gUnknown_3005068
+_080570F4: .4byte gTotalCameraPixelOffsetX
+_080570F8: .4byte gTotalCameraPixelOffsetY
 _080570FC: .4byte gSaveBlock2Ptr
 	thumb_func_end mli4_mapscripts_and_other
 

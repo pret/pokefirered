@@ -69,7 +69,7 @@ gFieldEffectScriptPointers:: @ 81D96AC
 	.4byte gFldEffScript_SmileyFaceIcon
 	.4byte gFldEffScript_UseVsSeeker
 	.4byte gFldEffScript_DoubleExclMarkIcon
-	.4byte gFldEffScript_Unk43
+	.4byte gFldEffScript_MoveDeoxysRock
 	.4byte gFldEffScript_Unk44
 	.4byte gFldEffScript_Unk45
 
@@ -333,14 +333,14 @@ gFldEffScript_DoubleExclMarkIcon:: @ 81D9998
 	callnative FldEff_DoubleExclMarkIcon
 	end 
 
-gFldEffScript_Unk43:: @ 81D999E
-	callnative FldEff_Unk43
+gFldEffScript_MoveDeoxysRock:: @ 81D999E
+	callnative Fldeff_MoveDeoxysRock
 	end 
 
 gFldEffScript_Unk44:: @ 81D99A4
-	callnative sub_8087AB4
+	callnative FldEff_Unk44
 	end 
 
 gFldEffScript_Unk45:: @ 81D99AA
-	callnative sub_8087E28
+	callnative FldEff_Unk45
 	end 

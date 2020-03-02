@@ -325,6 +325,7 @@ void UpdateTallGrassFieldEffect(struct Sprite * sprite)
         if ((objectEvent->currentCoords.x != sprite->data[1] || objectEvent->currentCoords.y != sprite->data[2]) && (objectEvent->previousCoords.x != sprite->data[1] || objectEvent->previousCoords.y != sprite->data[2]))
             sprite->data[7] = TRUE;
 
+        // This variable is misused.
         metatileBehavior = 0;
         if (sprite->animCmdIndex == 0)
             metatileBehavior = 4;
@@ -357,7 +358,7 @@ u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s
     struct Sprite * sprite;
     u8 i;
 
-    for (i = 0; i < MAX_SPRITES; i ++)
+    for (i = 0; i < MAX_SPRITES; i++)
     {
         if (gSprites[i].inUse)
         {
@@ -1034,7 +1035,7 @@ void sub_80DC588(struct ObjectEvent * objectEvent, struct Sprite * sprite)
             MoveCoords(i, &x, &y);
             if (MapGridGetZCoordAt(x, y) == 3)
             {
-                sprite->data[5] ++;
+                sprite->data[5]++;
                 break;
             }
         }
@@ -1249,7 +1250,7 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx, u8 paletteNum)
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
-        sprite->coordOffsetEnabled ++;
+        sprite->coordOffsetEnabled++;
         sprite->oam.paletteNum = paletteNum;
         sprite->data[1] = fldEff;
         sprite->data[2] = gFieldEffectArguments[0];
@@ -1278,7 +1279,7 @@ void UpdateDisguiseFieldEffect(struct Sprite * sprite)
     sprite->subpriority = linkedSprite->subpriority - 1;
     if (sprite->data[0] == 1)
     {
-        sprite->data[0] ++;
+        sprite->data[0]++;
         StartSpriteAnim(sprite, 1);
     }
     if (sprite->data[0] == 2 && sprite->animEnded)
@@ -1384,7 +1385,7 @@ static void sub_80DCD48(struct Sprite * sprite, u8 z, u8 offset)
     struct Sprite * linkedSprite;
 
     SetObjectSubpriorityByZCoord(z, sprite, offset);
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i ++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
         if (objectEvent->active)

@@ -1,4 +1,4 @@
-EventScript_InteractWithCutTreeObject:: @ 81BDF13
+EventScript_CutTree:: @ 81BDF13
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE02_GET, EventScript_CantCutTree
@@ -15,24 +15,24 @@ EventScript_InteractWithCutTreeObject:: @ 81BDF13
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
-	goto EventScript_CutTree
+	goto EventScript_CutTreeDown
 	end
 
 EventScript_FldEffCut:: @ 81BDF6B
 	lockall
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
-	goto EventScript_CutTree
+	goto EventScript_CutTreeDown
 	end
 
-EventScript_CutTree:: @ 81BDF76
-	applymovement VAR_LAST_TALKED, Movement_CutTree
+EventScript_CutTreeDown:: @ 81BDF76
+	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
 
-Movement_CutTree:: @ 81BDF85
+Movement_CutTreeDown:: @ 81BDF85
 	cut_tree
 	step_end
 
@@ -58,7 +58,7 @@ Text_TreeCanBeCutDown:: @ 81BDFE3
 	.string "This tree looks like it can be CUT\n"
 	.string "down!$"
 
-EventScript_InteractWithRockSmashRockObject:: @ 81BE00C
+EventScript_RockSmash:: @ 81BE00C
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE06_GET, EventScript_CantSmashRock
@@ -121,7 +121,7 @@ Text_MonMaySmashRock:: @ 81BE0E2
 	.string "It's a rugged rock, but a POKéMON\n"
 	.string "may be able to smash it.$"
 
-EventScript_InteractWithStrengthBoulderObject:: @ 81BE11D
+EventScript_StrengthBoulder:: @ 81BE11D
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantMoveBoulder
@@ -182,7 +182,7 @@ Text_StrengthMadeMovingBouldersPossible:: @ 81BE284
 	.string "STRENGTH made it possible to move\n"
 	.string "boulders around.$"
 
-EventScript_InteractWithWaterfall:: @ 81BE2B7
+EventScript_Waterfall:: @ 81BE2B7
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	checkpartymove MOVE_WATERFALL
@@ -197,7 +197,7 @@ EventScript_InteractWithWaterfall:: @ 81BE2B7
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
 
-EventScript_81BE2FF:: @ 81BE2FF
+EventScript_CantUseWaterfall:: @ 81BE2FF
 	lockall
 EventScript_WaterCrashingDown:
 	msgbox Text_WallOfWaterCrashingDown
@@ -217,7 +217,7 @@ Text_MonUsedWaterfall:: @ 81BE378
 	.string "{STR_VAR_1} used WATERFALL.$"
 
 @ Unused leftover from R/S
-EventScript_InteractWithDeepWater:: @ 81BE38B
+EventScript_DeepWater:: @ 81BE38B
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE

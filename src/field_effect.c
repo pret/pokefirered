@@ -412,7 +412,7 @@ static u32 FieldEffectScript_ReadWord(const u8 **script)
 static void FieldEffectScript_LoadTiles(const u8 **script)
 {
     const struct SpriteSheet * spriteSheet = (const struct SpriteSheet * )FieldEffectScript_ReadWord(script);
-    if (GetSpriteTileStartByTag(spriteSheet->tag) == 0xFFFF)
+    if (GetSpriteTileStartByTag(spriteSheet->tag) == SPRITE_INVALID_TAG)
         LoadSpriteSheet(spriteSheet);
     *script += sizeof(u32);
 }
@@ -486,7 +486,7 @@ static void FieldEffectFreeTilesIfUnused(u16 tileStart)
 {
     u8 i;
     u16 tileTag = GetSpriteTileTagByTileStart(tileStart);
-    if (tileTag == 0xFFFF)
+    if (tileTag == SPRITE_INVALID_TAG)
         return;
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -500,7 +500,7 @@ static void FieldEffectFreePaletteIfUnused(u8 paletteNum)
 {
     u8 i;
     u16 paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
-    if (paletteTag == 0xFFFF)
+    if (paletteTag == SPRITE_INVALID_TAG)
         return;
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -1900,7 +1900,7 @@ u8 FldEff_LavaridgeGymWarp(void)
     sub_8063BC4((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[33], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
-    gSprites[spriteId].coordOffsetEnabled = 1;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
     return spriteId;
 }
 
@@ -1993,7 +1993,7 @@ u8 FldEff_PopOutOfAsh(void)
     sub_8063BC4((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[32], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
-    gSprites[spriteId].coordOffsetEnabled = 1;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
     return spriteId;
 }
 
@@ -3064,7 +3064,7 @@ static void sub_8086D94(struct Sprite * sprite)
     if (sprite->data[0])
     {
         npcSprite = &gSprites[sprite->data[1]];
-        npcSprite->coordOffsetEnabled = 0;
+        npcSprite->coordOffsetEnabled = FALSE;
         npcSprite->pos1.x = sprite->pos1.x + sprite->pos2.x;
         npcSprite->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
         npcSprite->pos2.x = 0;
@@ -3326,7 +3326,7 @@ static void sub_80872F0(struct Sprite * sprite)
     if (sprite->data[6] != MAX_SPRITES)
     {
         struct Sprite * sprite1 = &gSprites[sprite->data[6]];
-        sprite1->coordOffsetEnabled = 0;
+        sprite1->coordOffsetEnabled = FALSE;
         sprite1->pos1.x = sprite->pos1.x + sprite->pos2.x;
         sprite1->pos1.y = sprite->pos1.y + sprite->pos2.y - 8;
         sprite1->pos2.x = 0;
@@ -3512,7 +3512,7 @@ static void FlyInEffect_4(struct Task * task)
         sub_805F724(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
-        sprite->coordOffsetEnabled = 1;
+        sprite->coordOffsetEnabled = TRUE;
         sub_805CB70();
         ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;

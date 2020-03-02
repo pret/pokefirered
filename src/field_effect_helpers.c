@@ -330,7 +330,7 @@ void UpdateTallGrassFieldEffect(struct Sprite * sprite)
         if (sprite->animCmdIndex == 0)
             metatileBehavior = 4;
 
-        UpdateObjectEventSpriteVisibility(sprite, 0);
+        UpdateObjectEventSpriteVisibility(sprite, FALSE);
         sub_80DCD48(sprite, sprite->data[0], metatileBehavior);
     }
 }
@@ -433,7 +433,7 @@ void UpdateLongGrassFieldEffect(struct Sprite * sprite)
         {
             sprite->data[7] = TRUE;
         }
-        UpdateObjectEventSpriteVisibility(sprite, 0);
+        UpdateObjectEventSpriteVisibility(sprite, FALSE);
         sub_80DCD48(sprite, sprite->data[0], 0);
     }
 }

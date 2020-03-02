@@ -125,7 +125,7 @@ static void SetPokedudeMonData(u8 monId);
 static void sub_8159478(u8 battlerId);
 static void PokedudeDoMoveAnimation(void);
 static void sub_81595EC(u8 taskId);
-static const u8 *sub_8159EF0(void);
+static const u8 *GetPokeDudeText(void);
 
 u8 *gUnknown_3005EE0[MAX_BATTLERS_COUNT];
 
@@ -222,10 +222,10 @@ static const u8 gUnknown_8479048[][8] =
 
 static const u8 (*const gUnknown_8479060[])[8] =
 {
-    gUnknown_8479008,
-    gUnknown_8479018,
-    gUnknown_8479030,
-    gUnknown_8479048,
+    [TTVSCR_BATTLE]   = gUnknown_8479008,
+    [TTVSCR_STATUS]   = gUnknown_8479018,
+    [TTVSCR_MATCHUPS] = gUnknown_8479030,
+    [TTVSCR_CATCHING] = gUnknown_8479048,
 };
 
 static const u8 gUnknown_8479070[][8] =
@@ -259,10 +259,10 @@ static const u8 gUnknown_84790C0[][8] =
 
 static const u8 (*const gUnknown_84790D8[])[8] =
 {
-    gUnknown_8479070,
-    gUnknown_8479080,
-    gUnknown_84790A0,
-    gUnknown_84790C0,
+    [TTVSCR_BATTLE]   = gUnknown_8479070,
+    [TTVSCR_STATUS]   = gUnknown_8479080,
+    [TTVSCR_MATCHUPS] = gUnknown_84790A0,
+    [TTVSCR_CATCHING] = gUnknown_84790C0,
 };
 
 static const struct Unk_84790E8 gUnknown_84790E8[] =
@@ -415,48 +415,48 @@ static const struct Unk_84790E8 gUnknown_8479168[] =
 
 static const struct Unk_84790E8 *const gUnknown_8479198[] =
 {
-    gUnknown_84790E8,
-    gUnknown_8479108,
-    gUnknown_8479130,
-    gUnknown_8479168,
+    [TTVSCR_BATTLE]   = gUnknown_84790E8,
+    [TTVSCR_STATUS]   = gUnknown_8479108,
+    [TTVSCR_MATCHUPS] = gUnknown_8479130,
+    [TTVSCR_CATCHING] = gUnknown_8479168,
 };
 
-static const u8 *const gUnknown_84791A8[] =
+static const u8 *const sPokeDudeTexts_Battle[] =
 {
-    gUnknown_81C5F69,
-    gUnknown_81C5FA7,
-    gUnknown_81C5FDC,
-    gUnknown_81C601C,
+    PokeDude_Text_SpeedierBattlerGoesFirst,
+    PokeDude_Text_MyRattataFasterThanPidgey,
+    PokeDude_Text_BattlersTakeTurnsAttacking,
+    PokeDude_Text_MyRattataWonGetsEXP,
 };
 
-static const u8 *const gUnknown_84791B8[] =
+static const u8 *const sPokeDudeTexts_Status[] =
 {
-    gUnknown_81C60FA,
-    gUnknown_81C60FA,
-    gUnknown_81C615A,
-    gUnknown_81C6196,
-    gUnknown_81C61EA,
+    PokeDude_Text_UhOhRattataPoisoned,
+    PokeDude_Text_UhOhRattataPoisoned,
+    PokeDude_Text_HealStatusRightAway,
+    PokeDude_Text_UsingItemTakesTurn,
+    PokeDude_Text_YayWeManagedToWin,
 };
 
-static const u8 *const gUnknown_84791CC[] =
+static const u8 *const sPokeDudeTexts_TypeMatchup[] =
 {
-    gUnknown_81C6202,
-    gUnknown_81C6301,
-    gUnknown_81C63A9,
-    gUnknown_81C63F9,
-    gUnknown_81C6446,
-    gUnknown_81C657A,
-    gUnknown_81C6637,
+    PokeDude_Text_WaterNotVeryEffectiveAgainstGrass,
+    PokeDude_Text_GrassEffectiveAgainstWater,
+    PokeDude_Text_LetsTryShiftingMons,
+    PokeDude_Text_ShiftingUsesTurn,
+    PokeDude_Text_ButterfreeDoubleResistsGrass,
+    PokeDude_Text_ButterfreeGoodAgainstOddish,
+    PokeDude_Text_YeahWeWon,
 };
 
-static const u8 *const gUnknown_84791E8[] =
+static const u8 *const sPokeDudeTexts_Catching[] =
 {
-    gUnknown_81C6645,
-    gUnknown_81C6645,
-    gUnknown_81C66CF,
-    gUnknown_81C6787,
-    gUnknown_81C684B,
-    gUnknown_81C686C,
+    PokeDude_Text_WeakenMonBeforeCatching,
+    PokeDude_Text_WeakenMonBeforeCatching,
+    PokeDude_Text_BestIfTargetStatused,
+    PokeDude_Text_CantDoubleUpOnStatus,
+    PokeDude_Text_LetMeThrowBall,
+    PokeDude_Text_PickBestKindOfBall,
 };
 
 static const struct PokedudeBattlePartyInfo sParties_Battle[] =
@@ -554,10 +554,10 @@ static const struct PokedudeBattlePartyInfo sParties_Catching[] =
 
 static const struct PokedudeBattlePartyInfo *const sPokedudeBattlePartyPointers[] =
 {
-    sParties_Battle,
-    sParties_Status,
-    sParties_Matchups,
-    sParties_Catching,
+    [TTVSCR_BATTLE]   = sParties_Battle,
+    [TTVSCR_STATUS]   = sParties_Status,
+    [TTVSCR_MATCHUPS] = sParties_Matchups,
+    [TTVSCR_CATCHING] = sParties_Catching,
 };
 
 static void nullsub_99(void)
@@ -2595,7 +2595,7 @@ static void sub_8159BA8(void)
         break;
     case 2:
         gBattle_BG0_Y = 0;
-        BattleStringExpandPlaceholdersToDisplayedString(sub_8159EF0());
+        BattleStringExpandPlaceholdersToDisplayedString(GetPokeDudeText());
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gUnknown_3005EE0[gActiveBattler][2];
         break;
@@ -2656,7 +2656,7 @@ static void sub_8159D04(void)
         }
         break;
     case 3:
-        BattleStringExpandPlaceholdersToDisplayedString(sub_8159EF0());
+        BattleStringExpandPlaceholdersToDisplayedString(GetPokeDudeText());
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gUnknown_3005EE0[gActiveBattler][2];
         break;
@@ -2696,19 +2696,19 @@ static void sub_8159D04(void)
     }
 }
 
-static const u8 *sub_8159EF0(void)
+static const u8 *GetPokeDudeText(void)
 {
     switch (gBattleStruct->field_96)
     {
-    case 0:
+    case TTVSCR_BATTLE:
     default:
-        return gUnknown_84791A8[gBattleStruct->field_97 - 1];
-    case 1:
-        return gUnknown_84791B8[gBattleStruct->field_97 - 1];
-    case 2:
-        return gUnknown_84791CC[gBattleStruct->field_97 - 1];
-    case 3:
-        return gUnknown_84791E8[gBattleStruct->field_97 - 1];
+        return sPokeDudeTexts_Battle[gBattleStruct->field_97 - 1];
+    case TTVSCR_STATUS:
+        return sPokeDudeTexts_Status[gBattleStruct->field_97 - 1];
+    case TTVSCR_MATCHUPS:
+        return sPokeDudeTexts_TypeMatchup[gBattleStruct->field_97 - 1];
+    case TTVSCR_CATCHING:
+        return sPokeDudeTexts_Catching[gBattleStruct->field_97 - 1];
     }
 }
 

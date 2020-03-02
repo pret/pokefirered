@@ -244,26 +244,26 @@ extern const u8 gUnknown_83FDCD2[];
 extern const u8 gUnknown_83FE6FA[];
 
 // battle_controller_pokedude
-extern const u8 gUnknown_81C5F69[];
-extern const u8 gUnknown_81C5FA7[];
-extern const u8 gUnknown_81C5FDC[];
-extern const u8 gUnknown_81C601C[];
-extern const u8 gUnknown_81C60FA[];
-extern const u8 gUnknown_81C615A[];
-extern const u8 gUnknown_81C6196[];
-extern const u8 gUnknown_81C61EA[];
-extern const u8 gUnknown_81C6202[];
-extern const u8 gUnknown_81C6301[];
-extern const u8 gUnknown_81C63A9[];
-extern const u8 gUnknown_81C63F9[];
-extern const u8 gUnknown_81C6446[];
-extern const u8 gUnknown_81C657A[];
-extern const u8 gUnknown_81C6637[];
-extern const u8 gUnknown_81C6645[];
-extern const u8 gUnknown_81C66CF[];
-extern const u8 gUnknown_81C6787[];
-extern const u8 gUnknown_81C684B[];
-extern const u8 gUnknown_81C686C[];
+extern const u8 PokeDude_Text_SpeedierBattlerGoesFirst[];
+extern const u8 PokeDude_Text_MyRattataFasterThanPidgey[];
+extern const u8 PokeDude_Text_BattlersTakeTurnsAttacking[];
+extern const u8 PokeDude_Text_MyRattataWonGetsEXP[];
+extern const u8 PokeDude_Text_UhOhRattataPoisoned[];
+extern const u8 PokeDude_Text_HealStatusRightAway[];
+extern const u8 PokeDude_Text_UsingItemTakesTurn[];
+extern const u8 PokeDude_Text_YayWeManagedToWin[];
+extern const u8 PokeDude_Text_WaterNotVeryEffectiveAgainstGrass[];
+extern const u8 PokeDude_Text_GrassEffectiveAgainstWater[];
+extern const u8 PokeDude_Text_LetsTryShiftingMons[];
+extern const u8 PokeDude_Text_ShiftingUsesTurn[];
+extern const u8 PokeDude_Text_ButterfreeDoubleResistsGrass[];
+extern const u8 PokeDude_Text_ButterfreeGoodAgainstOddish[];
+extern const u8 PokeDude_Text_YeahWeWon[];
+extern const u8 PokeDude_Text_WeakenMonBeforeCatching[];
+extern const u8 PokeDude_Text_BestIfTargetStatused[];
+extern const u8 PokeDude_Text_CantDoubleUpOnStatus[];
+extern const u8 PokeDude_Text_LetMeThrowBall[];
+extern const u8 PokeDude_Text_PickBestKindOfBall[];
 
 // party_menu
 extern const u8 gText_ChoosePokemon[];

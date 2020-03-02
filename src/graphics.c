@@ -1210,10 +1210,10 @@ const u32 gUnknown_8E990F8[] = INCBIN_U32("graphics/interface/naming_screen_8E99
 
 const u8 gUnknown_8E99118[] = INCBIN_U8("graphics/tm_case/unk_8E99118.4bpp");
 
-const u16 gFireRedTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
-const u32 gFireRedTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card.4bpp.lz");
-const u16 gEmeraldTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star_em.gbapal");
-const u32 gEmeraldTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_em.4bpp.lz");
+const u16 gKantoTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star.gbapal");
+const u32 gKantoTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card.4bpp.lz");
+const u16 gHoennTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star_em.gbapal");
+const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_em.4bpp.lz");
 
 const u16 gUnknown_8E99D8C[] = INCBIN_U16("graphics/link_rfu/unk_8E99DAC.gbapal");
 const u32 gUnknown_8E99DAC[] = INCBIN_U32("graphics/link_rfu/unk_8E99DAC.4bpp.lz");

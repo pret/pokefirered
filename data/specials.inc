@@ -368,7 +368,7 @@ gSpecials:: @ 815FD60
 	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
 	def_special Special_UpdateTrainerCardPhotoIcons
-	def_special Special_StickerLadyGetBragFlags
+	def_special StickerManGetBragFlags
 	def_special SetUsedPkmnCenterQuestLogEvent
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader

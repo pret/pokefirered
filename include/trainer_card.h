@@ -1,6 +1,8 @@
 #ifndef GUARD_TRAINER_CARD_H
 #define GUARD_TRAINER_CARD_H
 
+#include "constants/trainer_card.h"
+
 struct TrainerCardRSE
 {
     /*0x00*/ u8 gender;
@@ -23,7 +25,7 @@ struct TrainerCardRSE
     /*0x1E*/ u16 pokeblocksWithFriends;
     /*0x20*/ u16 pokemonTrades;
     /*0x24*/ u32 money;
-    /*0x28*/ u16 var_28[4];
+    /*0x28*/ u16 easyChatProfile[TRAINER_CARD_PROFILE_LENGTH];
     /*0x30*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
 };
 
@@ -31,16 +33,16 @@ struct TrainerCard
 {
     /*0x00*/ struct TrainerCardRSE rse;
     /*0x38*/ u8 version;
-    /*0x3A*/ u16 var_3A;
+    /*0x3A*/ bool16 hasAllFrontierSymbols;
     /*0x3C*/ u32 berryCrushPoints;
     /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u32 berriesPicked;
-	/*0x48*/ u32 jumpsInRow;
-    /*0x4C*/ bool8 var_4C;
+    /*0x48*/ u32 jumpsInRow;
+    /*0x4C*/ bool8 shouldDrawStickers;
     /*0x4D*/ bool8 hasAllMons;
-    /*0x4E*/ u8 var_4E;
-    /*0x4F*/ u8 var_4F;
-    /*0x50*/ u8 var_50[4];
+    /*0x4E*/ u8 monIconTint;
+    /*0x4F*/ u8 facilityClass;
+    /*0x50*/ u8 stickers[TRAINER_CARD_STICKER_TYPES];
     /*0x54*/ u16 monSpecies[PARTY_SIZE];
 };
 

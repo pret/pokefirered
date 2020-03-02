@@ -217,17 +217,17 @@ struct ObjectEvent
     /*0x0C*/        struct Coords16 initialCoords;
     /*0x10*/        struct Coords16 currentCoords;
     /*0x14*/        struct Coords16 previousCoords;
-    /*0x18*/        u8 facingDirection:4;  //current direction?
-    /*0x18*/        u8 placeholder18:4;
+    /*0x18*/        u8 facingDirection:4;
+    /*0x18*/        u8 movementDirection:4;
     /*0x19*/        union ObjectEventRange range;
-    /*0x1A*/        u8 mapobj_unk_1A;
+    /*0x1A*/        u8 fieldEffectSpriteId;
     /*0x1B*/        u8 mapobj_unk_1B;
     /*0x1C*/        u8 mapobj_unk_1C;
     /*0x1D*/        u8 trainerRange_berryTreeId;
-    /*0x1E*/        u8 mapobj_unk_1E;
-    /*0x1F*/        u8 mapobj_unk_1F;
+    /*0x1E*/        u8 currentMetatileBehavior;
+    /*0x1F*/        u8 previousMetatileBehavior;
     /*0x20*/        u8 mapobj_unk_20;
-    /*0x21*/        u8 mapobj_unk_21;
+    /*0x21*/        u8 directionSequenceIndex;
     /*0x22*/        u8 animId;
     /*size = 0x24*/
 };

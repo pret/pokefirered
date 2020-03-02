@@ -612,8 +612,8 @@ struct QuestLogObjectEvent
     /*0x0a*/ s16 x;
     /*0x0c*/ s16 y;
     /*0x0e*/ u8 trainerRange_berryTreeId;
-    /*0x0f*/ u8 mapobj_unk_1F;
-    /*0x10*/ u8 mapobj_unk_21;
+    /*0x0f*/ u8 previousMetatileBehavior;
+    /*0x10*/ u8 directionSequenceIndex;
     /*0x11*/ u8 animId;
 };
 

@@ -86,15 +86,15 @@ gFldEffScript_UseCutOnTree:: @ 81D97D0
 	end 
 
 gFldEffScript_Shadow:: @ 81D97D6
-	callnative oei_shadow
+	callnative FldEff_Shadow
 	end 
 
 gFldEffScript_TallGrass:: @ 81D97DC
-	loadfadedpal_callnative gUnknown_83A5348, oei_grass_normal
+	loadfadedpal_callnative gUnknown_83A5348, FldEff_TallGrass
 	end 
 
 gFldEffScript_Ripple:: @ 81D97E6
-	loadfadedpal_callnative gUnknown_83A5348, oei_ripples
+	loadfadedpal_callnative gUnknown_83A5348, FldEff_Ripple
 	end 
 
 gFldEffScript_FieldMoveShowMon:: @ 81D97F0
@@ -129,7 +129,7 @@ gFldEffScript_SandFootprints:: @ 81D9821
 	end 
 
 gFldEffScript_JumpBigSplash:: @ 81D982B
-	loadfadedpal_callnative gUnknown_83A5340, oei_water_drop_tall
+	loadfadedpal_callnative gUnknown_83A5340, FldEff_JumpBigSplash
 	end 
 
 gFldEffScript_Splash:: @ 81D9835

@@ -165,7 +165,7 @@ gFldEffScript_Unknown22:: @ 81D987B
 	end 
 
 gFldEffScript_BerryTreeGrowthSparkle:: @ 81D9885
-	callnative sub_80DC9DC
+	callnative FldEff_BerryTreeGrowthSparkle
 	end 
 
 gFldEffScript_DeepSandFootprints:: @ 81D988B
@@ -224,7 +224,7 @@ gFldEffScript_UseRockSmash:: @ 81D98E4
 	end 
 
 gFldEffScript_UseStrength:: @ 81D98EA
-	callnative sub_80D0860
+	callnative FldEff_UseStrength
 	end 
 
 gFldEffScript_UseDig:: @ 81D98F0
@@ -236,11 +236,11 @@ gFldEffScript_SandPile:: @ 81D98F6
 	end 
 
 gFldEffScript_ShortGrass:: @ 81D9900
-	loadfadedpal_callnative gUnknown_83A5348, sub_80DB808
+	loadfadedpal_callnative gUnknown_83A5348, FldEff_ShortGrass
 	end 
 
 gFldEffScript_HotSpringsWater:: @ 81D990A
-	loadfadedpal_callnative gUnknown_83A5348, sub_80DBF50
+	loadfadedpal_callnative gUnknown_83A5348, FldEff_HotSpringsWater
 	end 
 
 gFldEffScript_UseWaterfall:: @ 81D9914

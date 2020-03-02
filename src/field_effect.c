@@ -3899,6 +3899,7 @@ void Task_FldEffUnk45(u8 taskId)
     }
 }
 
+// Bug: Return value should be u32, not void
 void FldEff_Unk45(void)
 {
     BlendPalettes(0xFFFFFFFF, 0x10, RGB_WHITE);

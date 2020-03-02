@@ -334,7 +334,7 @@ gFldEffScript_DoubleExclMarkIcon:: @ 81D9998
 	end 
 
 gFldEffScript_MoveDeoxysRock:: @ 81D999E
-	callnative Fldeff_MoveDeoxysRock
+	callnative FldEff_MoveDeoxysRock
 	end 
 
 gFldEffScript_Unk44:: @ 81D99A4

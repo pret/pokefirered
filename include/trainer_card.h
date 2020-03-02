@@ -37,7 +37,7 @@ struct TrainerCard
     /*0x3C*/ u32 berryCrushPoints;
     /*0x40*/ u32 unionRoomNum;
     /*0x44*/ u32 berriesPicked;
-	  /*0x48*/ u32 jumpsInRow;
+    /*0x48*/ u32 jumpsInRow;
     /*0x4C*/ bool8 shouldDrawStickers;
     /*0x4D*/ bool8 hasAllMons;
     /*0x4E*/ u8 monIconTint;

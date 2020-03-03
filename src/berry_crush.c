@@ -15,7 +15,6 @@
 
 static EWRAM_DATA struct BerryCrushGame *gUnknown_203F3DC = NULL;
 
-struct BerryCrushGame *sub_814B6F0(void);
 static void sub_814B860(void);
 static void sub_814BA6C(void);
 static void sub_814BA80(void);

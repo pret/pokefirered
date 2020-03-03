@@ -1148,4 +1148,15 @@ extern const u8 gUnknown_841DF92[];
 extern const u8 gUnknown_841DF99[];
 extern const u8 gUnknown_841DFA0[];
 
+// berry_cursh
+extern const u8 gUnknown_841CE3C[];
+extern const u8 gUnknown_841CE78[];
+extern const u8 gUnknown_841CEA8[];
+extern const u8 gUnknown_841CF14[];
+extern const u8 gUnknown_841CF50[];
+extern const u8 gUnknown_841CF70[];
+extern const u8 gUnknown_841CFA0[];
+extern const u8 gUnknown_841CFD4[];
+extern const u8 gUnknown_841D008[];
+
 #endif //GUARD_STRINGS_H

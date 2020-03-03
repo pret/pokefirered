@@ -151,6 +151,7 @@ struct BerryCrushGame
     u8 unk31C0[0x1000];
 };
 
+struct BerryCrushGame *sub_814B6F0(void);
 void StartBerryCrush(MainCallback callback);
 u32 sub_814B6FC(MainCallback callback);
 void sub_814B8F0(void);
@@ -161,5 +162,16 @@ void sub_814BABC(struct BerryCrushGame *arg0);
 void sub_814BB4C(u16, u8, u8 *);
 void sub_814D564(u8 *, u32, s32, u32, u32, u32, u32);
 void sub_814D9CC(struct BerryCrushGame *arg0);
+bool32 sub_814D5C8(void);
+bool32 sub_814D888(void);
+void sub_814DA24(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
+void sub_814DC24(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
+void sub_814DC5C(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
+bool32 sub_814DE50(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
+bool32 sub_814E644(struct BerryCrushGame *arg0, struct BerryCrushGame_138 *arg1);
+void sub_814E80C(struct BerryCrushGame *arg0);
+void sub_814DA04(struct BerryCrushGame *arg0);
+void sub_814EB04(struct BerryCrushGame_138 *arg0);
+void sub_814DB84(struct Sprite * sprite);
 
 #endif //GUARD_BERRY_CRUSH_H

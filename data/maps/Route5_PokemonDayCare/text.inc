@@ -59,7 +59,7 @@ Route5_PokemonDayCare_Text_YouveGotNoRoomForIt:: @ 819DFC2
 Route5_PokemonDayCare_Text_DontHaveEnoughMoney:: @ 819E001
 	.string "You don't have enough money.$"
 
-Route5_PokemonDayCare_Text_19E01E:: @ 819E01E
+Route5_PokemonDayCare_Text_WantMeToTakeALookAtYours:: @ 819E01E
     .string "きみの\n"
     .string "みてみるかね？$"
 

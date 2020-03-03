@@ -957,22 +957,23 @@ Text_VoiceRangOutDontRunAway:: @ 81A5C4D
 	.string "Someone's voice rang out,\n"
 	.string "“Don't run away!”$"
 
-Text_1A5C79:: @ 81A5C79
+@ Uncear what the below unused JP texts were for
+Text_IdLikeToSeeRequest:: @ 81A5C79
 	.string "えっとー\n"
 	.string "{STR_VAR_2}が　みてみたいなー\p"
 	.string "それも　{STR_VAR_1}{STR_VAR_3}\n"
 	.string "{STR_VAR_2}が　みてみたいなー$"
 
-Text_1A5C9F:: @ 81A5C9F
+Text_ThankYouForShowingMe:: @ 81A5C9F
 	.string "わぁー　すごい！\n"
 	.string "{STR_VAR_1}{STR_VAR_3}{STR_VAR_2}だー！\p"
 	.string "ありがとー\n"
 	.string "また　よろしくねー！$"
 
-Text_1A5CC3:: @ 81A5CC3
+Text_ThatsNotRight:: @ 81A5CC3
 	.string "それっ　ちがうよー！$"
 
-Text_1A5CCE:: @ 81A5CCE
+Text_ISee:: @ 81A5CCE
 	.string "そっか‥$"
 
 Text_TheDoorIsClosed:: @ 81A5CD3

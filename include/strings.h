@@ -1148,7 +1148,7 @@ extern const u8 gUnknown_841DF92[];
 extern const u8 gUnknown_841DF99[];
 extern const u8 gUnknown_841DFA0[];
 
-// berry_cursh
+// berry_crush
 extern const u8 gUnknown_841CE3C[];
 extern const u8 gUnknown_841CE78[];
 extern const u8 gUnknown_841CEA8[];

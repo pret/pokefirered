@@ -1155,12 +1155,12 @@ extern const u8 SafariZone_EventScript_OutOfBalls[];
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 
 // battle_setup
-extern const u8 EventScript_DoTrainerBattle[];
+extern const u8 EventScript_DoNoIntroTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleTrainerBattle[];
 extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
-extern const u8 gUnknown_81A4EB4[];
+extern const u8 EventScript_DoTrainerBattleFromApproach[];
 extern const u8 Test_EventScript_Sign[];
 
 // new_game

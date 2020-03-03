@@ -1086,7 +1086,7 @@ s32 GetRematchTrainerId(u16 a0)
     return sVsSeekerData[i].trainerIdxs[j];
 }
 
-u8 ScrSpecial_GetTrainerEyeRematchFlag(void) // unreferenced, or reference not disassembled
+u8 IsTrainerReadyForRematch(void)
 {
     return sub_810CED0(sVsSeekerData, gTrainerBattleOpponent_A);
 }

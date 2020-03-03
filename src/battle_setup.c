@@ -778,7 +778,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     {
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
-        return EventScript_DoTrainerBattle;
+        return EventScript_DoNoIntroTrainerBattle;
     case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
@@ -807,7 +807,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         return EventScript_TryDoRematchBattle;
     case TRAINER_BATTLE_EARLY_RIVAL:
         TrainerBattleLoadArgs(sEarlyRivalBattleParams, data);
-        return EventScript_DoTrainerBattle;
+        return EventScript_DoNoIntroTrainerBattle;
     default:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
@@ -820,7 +820,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
     gSelectedObjectEvent = trainerEventObjId;
     gSpecialVar_LastTalked = gObjectEvents[trainerEventObjId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext1_SetupScript(gUnknown_81A4EB4);
+    ScriptContext1_SetupScript(EventScript_DoTrainerBattleFromApproach);
     ScriptContext2_Enable();
 }
 
@@ -838,7 +838,7 @@ void SetUpTrainerMovement(void)
     SetTrainerMovementType(objectEvent, GetTrainerFacingDirectionMovementType(objectEvent->facingDirection));
 }
 
-u8 ScrSpecial_GetTrainerBattleMode(void)
+u8 GetTrainerBattleMode(void)
 {
     return sTrainerBattleMode;
 }
@@ -882,7 +882,7 @@ void ClearTrainerFlag(u16 trainerId)
 void BattleSetup_StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    if (ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
+    if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
     DoTrainerBattle();
@@ -956,7 +956,7 @@ static void CB2_EndRematchBattle(void)
     }
 }
 
-void ScrSpecial_StartTrainerEyeRematch(void)
+void BattleSetup_StartRematchBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;
@@ -964,7 +964,7 @@ void ScrSpecial_StartTrainerEyeRematch(void)
     ScriptContext1_Stop();
 }
 
-void ScrSpecial_ShowTrainerIntroSpeech(void)
+void ShowTrainerIntroSpeech(void)
 {
     ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
 }
@@ -985,7 +985,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
         return Test_EventScript_Sign;
 }
 
-void ScrSpecial_ShowTrainerNonBattlingSpeech(void)
+void ShowTrainerCantBattleSpeech(void)
 {
     ShowFieldMessage(GetTrainerCantBattleSpeech());
 }

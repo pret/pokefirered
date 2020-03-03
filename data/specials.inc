@@ -59,15 +59,15 @@ gSpecials:: @ 815FD60
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special IsEnigmaBerryValid
-	def_special ScrSpecial_GetTrainerBattleMode
-	def_special ScrSpecial_ShowTrainerIntroSpeech
-	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
+	def_special GetTrainerBattleMode
+	def_special ShowTrainerIntroSpeech
+	def_special ShowTrainerCantBattleSpeech
 	def_special ScrSpecial_HasTrainerBeenFought
-	def_special ScrSpecial_EndTrainerApproach
+	def_special EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
-	def_special ScrSpecial_GetTrainerEyeRematchFlag
-	def_special ScrSpecial_StartTrainerEyeRematch
+	def_special IsTrainerReadyForRematch
+	def_special BattleSetup_StartRematchBattle
 	def_special ShowPokemonStorageSystem
 	def_special HasEnoughMonsForDoubleBattle
 	def_special NullFieldSpecial

@@ -275,6 +275,7 @@ bool32 GetRfuUnkCE8(void);
 void sub_80FA4A8(void);
 void sub_80FB9D0(void);
 void sub_80FB030(u32 a0);
+void sub_80FBA44(void);
 
 #include "mevent_server.h"
 extern const struct mevent_server_cmd gMEventSrvScript_OtherTrainerCanceled[];

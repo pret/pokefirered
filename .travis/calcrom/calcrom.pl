@@ -1,7 +1,17 @@
 #!/usr/bin/perl
 
-use IPC::Cmd qw[ run ];
+# Usage:
+#   calcrom.pl <mapfile> [--verbose]
+#
+#   mapfile: path to .map file output by LD
+#   verbose: set to get more detailed output
 
+use IPC::Cmd qw[ run ];
+use Getopt::Long;
+
+my $verbose = "";
+
+GetOptions("verbose" => \$verbose);
 (@ARGV == 1)
     or die "ERROR: no map file specified.\n";
 open(my $file, $ARGV[0])
@@ -11,13 +21,15 @@ my $src = 0;
 my $asm = 0;
 my $srcdata = 0;
 my $data = 0;
+my @pairs = ();
 while (my $line = <$file>)
 {
-    if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/.+\.o/)
+    if ($line =~ /^ \.(\w+)\s+0x[0-9a-f]+\s+(0x[0-9a-f]+) (\w+)\/(.+)\.o/)
     {
         my $section = $1;
         my $size = hex($2);
         my $dir = $3;
+        my $basename = $4;
         if ($size & 3)
         {
             $size += 4 - ($size % 3);
@@ -31,6 +43,10 @@ while (my $line = <$file>)
             }
             elsif ($dir eq 'asm')
             {
+                if (!($basename =~ /(crt0|libagbsyscall|libgcnmultiboot|m4a_1)/))
+                {
+                    push @pairs, [$basename, $size];
+                }
                 $asm += $size;
             }
         }
@@ -47,6 +63,8 @@ while (my $line = <$file>)
         }
     }
 }
+
+my @sorted = sort { $a->[1] <=> $b->[1] } @pairs;
 
 # Note that the grep filters out all branch labels. It also requires a minimum
 # line length of 5, to filter out a ton of generated symbols (like AcCn). No
@@ -131,6 +149,17 @@ print "$total total bytes of code\n";
 print "$src bytes of code in src ($srcPct%)\n";
 print "$asm bytes of code in asm ($asmPct%)\n";
 print "\n";
+
+if ($verbose != 0)
+{
+    print "BREAKDOWN\n";
+    foreach my $item (@sorted)
+    {
+        print "    $item->[1] bytes in asm/$item->[0].s\n"
+    }
+    print "\n";
+}
+
 print "$total_syms total symbols\n";
 print "$documented symbols documented ($docPct%)\n";
 print "$partial_documented symbols partially documented ($partialPct%)\n";

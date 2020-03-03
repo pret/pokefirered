@@ -11,8 +11,12 @@ struct DigitObjUtilTemplate
     u8 xDelta;
     s16 x;
     s16 y;
-    const struct SpriteSheet *spriteSheet;
-    const struct SpritePalette *spritePal;
+    union
+    {
+        const struct SpriteSheet * uncompressed;
+        const struct CompressedSpriteSheet * compressed;
+    } spriteSheet;
+    const struct SpritePalette * spritePal;
 };
 
 extern const u16 gUnknown_8479668[];

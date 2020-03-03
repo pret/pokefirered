@@ -65,6 +65,10 @@ static const u8 sTilesPerImage[4][4] =
     }
 };
 
+const u16 gUnknown_8479668[] = INCBIN_U16("graphics/misc/unk_8479688.gbapal");
+const u32 gUnknown_8479688[] = INCBIN_U32("graphics/misc/unk_8479688.4bpp.lz");
+const u32 gUnknown_8479748[] = INCBIN_U32("graphics/misc/unk_8479748.4bpp.lz");
+
 // code
 bool32 DigitObjUtil_Init(u32 count)
 {
@@ -125,19 +129,19 @@ bool32 DigitObjUtil_CreatePrinter(u32 id, s32 num, const struct DigitObjUtilTemp
     if (sOamWork->array[id].firstOamId == 0xFF)
         return FALSE;
 
-    sOamWork->array[id].tileStart = GetSpriteTileStartByTag(template->spriteSheet->tag);
+    sOamWork->array[id].tileStart = GetSpriteTileStartByTag(template->spriteSheet.uncompressed->tag);
     if (sOamWork->array[id].tileStart == 0xFFFF)
     {
-        if (template->spriteSheet->size != 0)
+        if (template->spriteSheet.uncompressed->size != 0)
         {
-            sOamWork->array[id].tileStart = LoadSpriteSheet(template->spriteSheet);
+            sOamWork->array[id].tileStart = LoadSpriteSheet(template->spriteSheet.uncompressed);
         }
         else
         {
             struct CompressedSpriteSheet compObjectPic;
 
-            compObjectPic = *(struct CompressedSpriteSheet*)(template->spriteSheet);
-            compObjectPic.size = GetDecompressedDataSize(template->spriteSheet->data);
+            compObjectPic = *template->spriteSheet.compressed;
+            compObjectPic.size = GetDecompressedDataSize((const void *)template->spriteSheet.compressed->data);
             sOamWork->array[id].tileStart = LoadCompressedSpriteSheet(&compObjectPic);
         }
 
@@ -158,7 +162,7 @@ bool32 DigitObjUtil_CreatePrinter(u32 id, s32 num, const struct DigitObjUtilTemp
     sOamWork->array[id].priority = template->priority;
     sOamWork->array[id].xDelta = template->xDelta;
     sOamWork->array[id].tilesPerImage = GetTilesPerImage(template->shape, template->size);
-    sOamWork->array[id].tileTag = template->spriteSheet->tag;
+    sOamWork->array[id].tileTag = template->spriteSheet.uncompressed->tag;
     sOamWork->array[id].palTag = template->spritePal->tag;
     sOamWork->array[id].isActive = TRUE;
 

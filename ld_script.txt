@@ -279,9 +279,9 @@ SECTIONS {
         src/pokemon_jump_4.o(.text);
         src/pokemon_jump_5.o(.text);
         src/pokemon_jump_6.o(.text);
-        asm/berry_crush.o(.text);
-        asm/berry_crush_2.o(.text);
-        asm/berry_crush_3.o(.text);
+        src/berry_crush.o(.text);
+        src/berry_crush_2.o(.text);
+        src/berry_crush_3.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/braille_text.o(.text);
         src/text_window.o(.text);
@@ -572,24 +572,23 @@ SECTIONS {
         src/pokemon_jump_4.o(.rodata);
         src/pokemon_jump_5.o(.rodata);
         src/pokemon_jump_6.o(.rodata);
-        data/berry_crush.o(.rodata);
+        src/berry_crush_2.o(.rodata);
+        src/berry_crush_3.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
         src/quest_log_player.o(.rodata);
-        data/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);
         src/digit_obj_util.o(.rodata);
-        data/data_8479668.o(.rodata);
         src/ss_anne.o(.rodata);
         src/cereader_tool.o(.rodata);
         src/renewable_hidden_items.o(.rodata);
         src/trainer_tower.o(.rodata);
         src/minigame_countdown.o(.rodata);
         src/berry_fix_program.o(.rodata);
-        data/data_8479668.o(.rodata.after_trainer_tower);
+        data/data_8479668.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);

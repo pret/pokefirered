@@ -3347,8 +3347,8 @@ _08056522:
 _08056530: .4byte gUnknown_3005E90
 	thumb_func_end sub_80564C8
 
-	thumb_func_start sub_8056534
-sub_8056534: @ 8056534
+	thumb_func_start CB1_Overworld
+CB1_Overworld: @ 8056534
 	push {r4,lr}
 	ldr r4, _0805655C @ =gMain
 	ldr r1, [r4, 0x4]
@@ -3379,7 +3379,7 @@ _08056570:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8056534
+	thumb_func_end CB1_Overworld
 
 	thumb_func_start sub_8056578
 sub_8056578: @ 8056578
@@ -3507,7 +3507,7 @@ CB2_NewGame: @ 8056644
 	ldr r0, _08056698 @ =gMain + 0x438
 	bl do_load_map_stuff_loop
 	bl SetFieldVBlankCallback
-	ldr r0, _0805669C @ =sub_8056534
+	ldr r0, _0805669C @ =CB1_Overworld
 	bl SetMainCallback1
 	ldr r0, _080566A0 @ =sub_80565B4
 	bl SetMainCallback2
@@ -3518,7 +3518,7 @@ _0805668C: .4byte gFieldCallback
 _08056690: .4byte sub_807DF7C
 _08056694: .4byte gFieldCallback2
 _08056698: .4byte gMain + 0x438
-_0805669C: .4byte sub_8056534
+_0805669C: .4byte CB1_Overworld
 _080566A0: .4byte sub_80565B4
 	thumb_func_end CB2_NewGame
 
@@ -3555,7 +3555,7 @@ CB2_WhiteOut: @ 80566A4
 	bl do_load_map_stuff_loop
 	bl sub_8112364
 	bl SetFieldVBlankCallback
-	ldr r0, _08056714 @ =sub_8056534
+	ldr r0, _08056714 @ =CB1_Overworld
 	bl SetMainCallback1
 	ldr r0, _08056718 @ =sub_80565B4
 	bl SetMainCallback2
@@ -3567,7 +3567,7 @@ _08056702:
 _08056708: .4byte gMain
 _0805670C: .4byte gFieldCallback
 _08056710: .4byte sub_807F5F0
-_08056714: .4byte sub_8056534
+_08056714: .4byte CB1_Overworld
 _08056718: .4byte sub_80565B4
 	thumb_func_end CB2_WhiteOut
 
@@ -3608,7 +3608,7 @@ sub_805674C: @ 805674C
 _08056768: .4byte gMain + 0x438
 _0805676C:
 	bl SetFieldVBlankCallback
-	ldr r0, _08056780 @ =sub_8056534
+	ldr r0, _08056780 @ =CB1_Overworld
 	bl SetMainCallback1
 	ldr r0, _08056784 @ =sub_80565B4
 	bl SetMainCallback2
@@ -3616,7 +3616,7 @@ _0805677C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056780: .4byte sub_8056534
+_08056780: .4byte CB1_Overworld
 _08056784: .4byte sub_80565B4
 	thumb_func_end sub_805674C
 
@@ -3870,7 +3870,7 @@ _0805699C:
 	ldr r0, _080569B0 @ =gFieldCallback
 	ldr r1, _080569B4 @ =sub_8056918
 	str r1, [r0]
-	ldr r0, _080569B8 @ =sub_8056534
+	ldr r0, _080569B8 @ =CB1_Overworld
 	bl SetMainCallback1
 	bl CB2_ReturnToField
 _080569AC:
@@ -3879,7 +3879,7 @@ _080569AC:
 	.align 2, 0
 _080569B0: .4byte gFieldCallback
 _080569B4: .4byte sub_8056918
-_080569B8: .4byte sub_8056534
+_080569B8: .4byte CB1_Overworld
 	thumb_func_end CB2_ContinueSavedGame
 
 	thumb_func_start FieldClearVBlankHBlankCallbacks
@@ -4963,7 +4963,7 @@ sub_80572D8: @ 80572D8
 	ldr r0, _080572F4 @ =gMain + 0x438
 	bl sub_8057300
 	bl SetFieldVBlankCallback
-	ldr r0, _080572F8 @ =sub_8056534
+	ldr r0, _080572F8 @ =CB1_Overworld
 	bl SetMainCallback1
 	ldr r0, _080572FC @ =sub_80565B4
 	bl SetMainCallback2
@@ -4971,7 +4971,7 @@ sub_80572D8: @ 80572D8
 	bx r0
 	.align 2, 0
 _080572F4: .4byte gMain + 0x438
-_080572F8: .4byte sub_8056534
+_080572F8: .4byte CB1_Overworld
 _080572FC: .4byte sub_80565B4
 	thumb_func_end sub_80572D8
 
@@ -5148,14 +5148,14 @@ _08057484: .4byte gUnknown_2036E28
 _08057488: .4byte gUnknown_2031DE0
 _0805748C: .4byte CB2_LoadMap
 _08057490:
-	ldr r0, _080574A0 @ =sub_8056534
+	ldr r0, _080574A0 @ =CB1_Overworld
 	bl SetMainCallback1
 	bl CB2_ReturnToField
 _0805749A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080574A0: .4byte sub_8056534
+_080574A0: .4byte CB1_Overworld
 	thumb_func_end sub_8057430
 
 	thumb_func_start Overworld_CreditsMainCB

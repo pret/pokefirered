@@ -32,6 +32,128 @@
 /*static*/ void nullsub_98(void);
 
 // const rom data
+
+// Large chunk of data
+/*static*/ const struct BgTemplate sUnknown_847565C_Unref_Dupe[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 12,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 14,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+};
+
+// Unknown unreferenced data, feel free to remove.
+/*static*/ const u32 sUnused_Unref_Dupe[] = {255, 0};
+
+/*static*/ const struct WindowTemplate sUnknown_8475674_Unref_Dupe[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 28,
+        .height = 3,
+        .paletteNum = 13,
+        .baseBlock = 0x13,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 6,
+        .width = 28,
+        .height = 13,
+        .paletteNum = 13,
+        .baseBlock = 0x67,
+    }
+};
+
+/*static*/ const struct WindowTemplate sUnknown_8475684_Unref_Dupe =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 6,
+    .width = 28,
+    .height = 7,
+    .paletteNum = 13,
+    .baseBlock = 0x67,
+};
+
+/*static*/ const struct WindowTemplate sUnknown_847568C_Unref_Dupe[] =
+{
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 8,
+        .width = 19,
+        .height = 3,
+        .paletteNum = 13,
+        .baseBlock = 0x13,
+    },
+    {
+        .bg = 0,
+        .tilemapLeft = 22,
+        .tilemapTop = 7,
+        .width = 6,
+        .height = 4,
+        .paletteNum = 13,
+        .baseBlock = 0x4C,
+    }
+};
+
+/*static*/ const struct WindowTemplate sUnknown_847569C_Unref_Dupe =
+{
+    .bg = 0,
+    .tilemapLeft = 4,
+    .tilemapTop = 6,
+    .width = 22,
+    .height = 5,
+    .paletteNum = 13,
+    .baseBlock = 0x13,
+};
+
+/*static*/ const struct WindowTemplate sUnknown_84756A4_Unref_Dupe =
+{
+    .bg = 0,
+    .tilemapLeft = 5,
+    .tilemapTop = 8,
+    .width = 19,
+    .height = 3,
+    .paletteNum = 13,
+    .baseBlock = 0x13,
+};
+
 /*static*/ const u8 sUnknown_8471F50[5][5][11] =
 {
     {

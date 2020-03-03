@@ -13,18 +13,6 @@
 
 	.section .rodata
 
-	.align 2
-gUnknown_8479668:: @ 8479668
-	.incbin "graphics/misc/unk_8479688.gbapal"
-
-gUnknown_8479688::
-	.incbin "graphics/misc/unk_8479688.4bpp.lz"
-
-gUnknown_8479748::
-	.incbin "graphics/misc/unk_8479748.4bpp.lz"
-
-	.section .rodata.after_trainer_tower
-
 	// berry_fix_program
 
 gUnknown_847A8D8::

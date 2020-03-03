@@ -578,7 +578,6 @@ SECTIONS {
         src/braille_text.o(.rodata);
         src/text_window_graphics.o(.rodata);
         src/quest_log_player.o(.rodata);
-        data/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
         src/battle_controller_pokedude.o(.rodata);
         src/teachy_tv.o(.rodata);

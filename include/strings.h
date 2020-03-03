@@ -1158,5 +1158,28 @@ extern const u8 gUnknown_841CF70[];
 extern const u8 gUnknown_841CFA0[];
 extern const u8 gUnknown_841CFD4[];
 extern const u8 gUnknown_841D008[];
+extern const u8 gText_1_ClrLtGryShdwBlk_Dynamic0[];
+extern const u8 gText_1_Dynamic0[];
+extern const u8 gText_SpaceTimes[];
+extern const u8 gText_XDotY[];
+extern const u8 gText_StrVar1Berry[];
+extern const u8 gText_TimeColon[];
+extern const u8 gText_PressingSpeed[];
+extern const u8 gText_Silkiness[];
+extern const u8 gText_StrVar1[];
+extern const u8 gText_SpaceMin[];
+extern const u8 gText_XDotY2[];
+extern const u8 gText_SpaceSec[];
+extern const u8 gText_XDotY3[];
+extern const u8 gText_TimesPerSec[];
+extern const u8 gText_Var1Percent[];
+extern const u8 gText_PressesRankings[];
+extern const u8 gText_CrushingResults[];
+extern const u8 gText_BerryCrush2[];
+extern const u8 gText_PressingSpeedRankings[];
+extern const u8 gText_Var1Players[];
+extern const u8 gText_NeatnessRankings[];
+extern const u8 gText_CooperativeRankings[];
+extern const u8 gText_PressingPowerRankings[];
 
 #endif //GUARD_STRINGS_H

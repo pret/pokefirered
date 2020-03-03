@@ -766,7 +766,7 @@ static void sub_814A9C8(void)
     ptr->xDelta = 8;
     ptr->x = 108;
     ptr->y = 6;
-    ptr->spriteSheet = (void*) &gUnknown_846D960;
+    ptr->spriteSheet.compressed = &gUnknown_846D960;
     ptr->spritePal = &gUnknown_846D968;
 
     DigitObjUtil_Init(2);

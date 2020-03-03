@@ -3448,90 +3448,90 @@ gUnknown_841D008:: @ 841D008
 	.string "Communication standby…$"
 
 	.align 2
-gUnknown_841D020:: @ 841D020
+gText_1_ClrLtGryShdwBlk_Dynamic0:: @ 841D020
 	.string "1. {COLOR LIGHT_GRAY}{SHADOW BLACK}{DYNAMIC 0x00}$"
 
-gUnknown_841D02C:: @ 841D02C
+gText_1_Dynamic0:: @ 841D02C
 	.string "1. {DYNAMIC 0x00}$"
 
 	.align 2
-gUnknown_841D034:: @ 0x841D034
+gText_SpaceTimes:: @ 0x841D034
 	.string " times$"
 
 	.align 2
-gUnknown_841D03C:: @ 0x841D03C
+gText_XDotY:: @ 0x841D03C
 	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
 	.align 2
-gUnknown_841D044:: @ 0x841D044
+gText_StrVar1Berry:: @ 0x841D044
 	.string "{STR_VAR_1} BERRY$"
 
 	.align 2
-gUnknown_841D050:: @ 841D050
+gText_TimeColon:: @ 841D050
 	.string "Time:$"
 
 	.align 2
-gUnknown_841D058:: @ 841D058
+gText_PressingSpeed:: @ 841D058
 	.string "Pressing Speed:$"
 
-gUnknown_841D068:: @ 841D068
+gText_Silkiness:: @ 841D068
 	.string "Silkiness:$"
 
 	.align 2
-gUnknown_841D074:: @ 841D074
+gText_StrVar1:: @ 841D074
 	.string "{STR_VAR_1}$"
 
 	.align 2
-gUnknown_841D078:: @ 841D078
+gText_SpaceMin:: @ 841D078
 	.string "min.$"
 
 	.align 2
-gUnknown_841D080:: @ 841D080
+gText_XDotY2:: @ 841D080
 	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
 	.align 2
-gUnknown_841D088:: @ 841D088
+gText_SpaceSec:: @ 841D088
 	.string "sec.$"
 
 	.align 2
-gUnknown_841D090:: @ 841D090
+gText_XDotY3:: @ 841D090
 	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
 	.align 2
-gUnknown_841D098:: @ 841D098
+gText_TimesPerSec:: @ 841D098
 	.string "Times/sec.$"
 
 	.align 2
-gUnknown_841D0A4:: @ 841D0A4
-	.string "{STR_VAR_1}サ$"
+gText_Var1Percent:: @ 841D0A4
+	.string "{STR_VAR_1}%$"
 
 	.align 2
-gUnknown_841D0A8:: @ 841D0A8
+gText_PressesRankings:: @ 841D0A8
 	.string "No. of Presses Rankings$"
 
 	.align 2
-gUnknown_841D0C0:: @ 841D0C0
+gText_CrushingResults:: @ 841D0C0
 	.string "Crushing Results$"
 
 	.align 2
-gUnknown_841D0D4:: @ 0x841D0D4
+gText_NeatnessRankings:: @ 0x841D0D4
 	.string "Neatness Rankings$"
 
 	.align 2
-gUnknown_841D0E8:: @ 0x841D0E8
+gText_CooperativeRankings:: @ 0x841D0E8
 	.string "Cooperative Rankings$"
 
 	.align 2
-gUnknown_841D100:: @ 0x841D100
+gText_PressingPowerRankings:: @ 0x841D100
 	.string "Pressing-Power Rankings$"
 
-gUnknown_841D118:: @ 841D118
+gText_BerryCrush2:: @ 841D118
 	.string "BERRY CRUSH$"
 
-gUnknown_841D124:: @ 841D124
+gText_PressingSpeedRankings:: @ 841D124
 	.string "Pressing-Speed Rankings$"
 
-gUnknown_841D13C:: @ 841D13C
+gText_Var1Players:: @ 841D13C
 	.string "{STR_VAR_1} PLAYERS$"
 
 	.align 2

@@ -198,12 +198,6 @@ static void sub_814BA98(u8 taskId)
     sub_814D9CC(gUnknown_203F3DC);
 }
 
-#define PLAYER_UNK14(game, i)                        \
-    ((u8 *)(game)                                    \
-    + offsetof(struct BerryCrushGame, unk68)         \
-    + offsetof(struct BerryCrushGame_68_x, unk30)    \
-    + sizeof(struct BerryCrushGame_Player) * (i))
-
 void sub_814BABC(struct BerryCrushGame *arg0)
 {
     u8 i;

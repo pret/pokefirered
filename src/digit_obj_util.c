@@ -65,6 +65,10 @@ static const u8 sTilesPerImage[4][4] =
     }
 };
 
+const u16 gUnknown_8479668[] = INCBIN_U16("graphics/misc/unk_8479688.gbapal");
+const u32 gUnknown_8479688[] = INCBIN_U32("graphics/misc/unk_8479688.4bpp.lz");
+const u32 gUnknown_8479748[] = INCBIN_U32("graphics/misc/unk_8479748.4bpp.lz");
+
 // code
 bool32 DigitObjUtil_Init(u32 count)
 {

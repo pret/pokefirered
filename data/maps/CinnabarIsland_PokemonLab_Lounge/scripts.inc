@@ -53,7 +53,7 @@ CinnabarIsland_PokemonLab_Lounge_EventScript_Norma:: @ 816E33E
 	msgbox Trade_Text_DoYouHaveMonWantToTradeForMon, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	compare VAR_0x8004, PARTY_SIZE

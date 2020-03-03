@@ -171,7 +171,7 @@ static void VBlankCB_WirelessCommunicationScreen(void)
     TransferPlttBuffer();
 }
 
-void Special_WirelessCommunicationScreen(void)
+void ShowWirelessCommunicationScreen(void)
 {
     SetMainCallback2(CB2_InitWirelessCommunicationScreen);
 }

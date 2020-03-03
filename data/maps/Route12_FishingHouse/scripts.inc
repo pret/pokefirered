@@ -33,12 +33,12 @@ Route12_FishingHouse_EventScript_CheckMagikarpRecord:: @ 816FF7F
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_MAGIKARP
-	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
+	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route12_FishingHouse_EventScript_NoMagikarpInParty
 	special GetMagikarpSizeRecordInfo
 	msgbox Route12_FishingHouse_Text_OhMagikarpAllowMeToSee
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, PARTY_SIZE

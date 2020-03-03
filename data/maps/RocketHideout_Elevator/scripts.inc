@@ -7,11 +7,11 @@ RocketHideout_Elevator_EventScript_FloorSelect:: @ 81614D9
 	setvar VAR_0x8004, 2
 	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special Special_DrawElevatorCurrentFloorWindow
+	special DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 2
-	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
+	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, RocketHideout_Elevator_EventScript_FloorSelectFromB1F
 	case 1, RocketHideout_Elevator_EventScript_FloorSelectFromB2F
@@ -73,15 +73,15 @@ RocketHideout_Elevator_EventScript_ToB4F:: @ 81615E1
 	end
 
 RocketHideout_Elevator_EventScript_ExitFloorSelect:: @ 8161609
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 RocketHideout_Elevator_EventScript_MoveElevator:: @ 816160E
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special Special_AnimateElevator
+	special AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

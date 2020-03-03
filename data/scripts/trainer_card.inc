@@ -47,7 +47,7 @@ CeladonCity_GameCorner_EventScript_PrintPhoto:: @ 81B2907
 	playse MUS_ME_PHOTO
 	dofieldeffect FLDEFF_UNK_45
 	delay 60
-	special Special_UpdateTrainerCardPhotoIcons
+	special UpdateTrainerCardPhotoIcons
 	msgbox CeladonCity_GameCorner_Text_PrintIsReadyCheckTrainerCard
 	hidemoneybox 0, 0
 	releaseall

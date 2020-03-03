@@ -60,5 +60,5 @@ PokemonLeague_Movement_ForcePlayerIn:: @ 81A75D3
 	step_end
 
 PokemonLeague_EventScript_DoLightingEffect:: @ 81A75D5
-	special Special_PokemonLeagueLightingEffect
+	special DoPokemonLeagueLightingEffect
 	return

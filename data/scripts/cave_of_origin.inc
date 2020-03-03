@@ -22,7 +22,7 @@ CaveOfOrigin_EventScript_Shake:: @ 81A74B7
 	setvar VAR_0x8005, 1
 	setvar VAR_0x8006, 8
 	setvar VAR_0x8007, 5
-	special Special_ShakeScreen
+	special ShakeScreen
 	waitstate
 	releaseall
 	end

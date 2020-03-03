@@ -35,7 +35,7 @@ PalletTown_PlayersHouse_2F_EventScript_PC:: @ 8168CE4
 	setvar VAR_0x8004, 32
 	special Special_SetSomeVariable
 	setvar VAR_0x8004, 1
-	special Special_AnimatePcTurnOn
+	special AnimatePcTurnOn
 	playse SE_PC_ON
 	msgbox Text_PlayerBootedUpPC
 	special BedroomPC
@@ -47,7 +47,7 @@ PalletTown_PlayersHouse_2F_EventScript_PC:: @ 8168CE4
 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC:: @ 8168D17
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
-	special Special_AnimatePcTurnOff
+	special AnimatePcTurnOff
 	special sub_812B35C
 	releaseall
 	end

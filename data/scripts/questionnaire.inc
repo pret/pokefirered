@@ -8,7 +8,7 @@ EventScript_Questionnaire:: @ 81A7702
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	specialvar VAR_0x8008, Special_GetMartClerkObjectId
+	specialvar VAR_0x8008, GetMartClerkObjectId
 	textcolor 0
 	compare VAR_0x8004, 0
 	goto_if_eq EventScript_EnableMysteryGift

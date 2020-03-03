@@ -90,7 +90,7 @@
 	special CallTrainerTowerFunc
 	.endm
 
-	@ Unused. Displays Trainer Tower results. Handled by Special_BattleRecords instead
+	@ Unused. Displays Trainer Tower results. Handled by ShowBattleRecords instead
 	.macro ttower_showresults
 	setvar VAR_0x8004, TRAINER_TOWER_FUNC_SHOW_RESULTS
 	special CallTrainerTowerFunc

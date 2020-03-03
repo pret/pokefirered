@@ -262,7 +262,7 @@ Route25_SeaCottage_EventScript_ViewEevee:: @ 817082B
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_EEVEE
-	special Special_SetSeenMon
+	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
@@ -271,7 +271,7 @@ Route25_SeaCottage_EventScript_ViewFlareon:: @ 8170840
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_FLAREON
-	special Special_SetSeenMon
+	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
@@ -280,7 +280,7 @@ Route25_SeaCottage_EventScript_ViewJolteon:: @ 8170855
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_JOLTEON
-	special Special_SetSeenMon
+	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 
@@ -289,7 +289,7 @@ Route25_SeaCottage_EventScript_ViewVaporeon:: @ 817086A
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_VAPOREON
-	special Special_SetSeenMon
+	special SetSeenMon
 	goto Route25_SeaCottage_EventScript_BillsMonList
 	end
 

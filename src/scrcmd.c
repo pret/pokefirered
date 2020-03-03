@@ -1892,7 +1892,7 @@ bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dotrainerbattle(struct ScriptContext *ctx)
 {
-    BattleSetup_StartTrainerBattle();
+    StartTrainerBattle();
     return TRUE;
 }
 
@@ -1944,7 +1944,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    BattleSetup_StartScriptedWildBattle();
+    StartScriptedWildBattle();
     ScriptContext1_Stop();
     return TRUE;
 }

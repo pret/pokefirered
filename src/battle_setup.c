@@ -221,7 +221,7 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
         return FALSE;
 }
 
-void BattleSetup_StartWildBattle(void)
+void StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
         DoSafariBattle();
@@ -243,7 +243,7 @@ static void DoStandardWildBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void BattleSetup_StartRoamerBattle(void)
+void StartRoamerBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -285,7 +285,7 @@ static void DoTrainerBattle(void)
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
 }
 
-void ScrSpecial_StartOldManTutorialBattle(void)
+void StartOldManTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
     ScriptContext2_Enable();
@@ -294,7 +294,7 @@ void ScrSpecial_StartOldManTutorialBattle(void)
     CreateBattleStartTask(B_TRANSITION_SLICED_SCREEN, 0);
 }
 
-void BattleSetup_StartScriptedWildBattle(void)
+void StartScriptedWildBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -304,7 +304,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void ScrSpecial_StartMarowakBattle(void)
+void StartMarowakBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndMarowakBattle;
@@ -323,7 +323,7 @@ void ScrSpecial_StartMarowakBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void ScrSpecial_StartSouthernIslandBattle(void)
+void StartSouthernIslandBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -333,7 +333,7 @@ void ScrSpecial_StartSouthernIslandBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartLegendaryBattle(void)
+void StartLegendaryBattle(void)
 {
     u16 species;
     
@@ -364,7 +364,7 @@ void Special_StartLegendaryBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartGroudonKyogreBattle(void)
+void StartGroudonKyogreBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -377,7 +377,7 @@ void Special_StartGroudonKyogreBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartRegiBattle(void)
+void StartRegiBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -879,7 +879,7 @@ void ClearTrainerFlag(u16 trainerId)
     FlagClear(FLAG_TRAINER_FLAG_START + trainerId);
 }
 
-void BattleSetup_StartTrainerBattle(void)
+void StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
@@ -956,7 +956,7 @@ static void CB2_EndRematchBattle(void)
     }
 }
 
-void BattleSetup_StartRematchBattle(void)
+void StartRematchBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;

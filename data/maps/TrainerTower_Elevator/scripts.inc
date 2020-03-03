@@ -8,11 +8,11 @@ TrainerTower_Elevator_EventScript_FloorSelect:: @ 8164B03
 	setvar VAR_0x8004, 6
 	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special Special_DrawElevatorCurrentFloorWindow
+	special DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 6
-	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
+	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, TrainerTower_Elevator_EventScript_FloorSelectFromRoof
 	case 1, TrainerTower_Elevator_EventScript_FloorSelectFromLobby
@@ -43,7 +43,7 @@ TrainerTower_Elevator_EventScript_SelectLobby:: @ 8164B90
 	goto_if_eq TrainerTower_Elevator_EventScript_CloseFloorSelect
 	call TrainerTower_Elevator_EventScript_MoveElevator
 	setvar VAR_ELEVATOR_FLOOR, 3
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	delay 25
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Elevator_Movement_ExitElevator
 	waitmovement 0
@@ -57,15 +57,15 @@ TrainerTower_Elevator_EventScript_SelectRoof:: @ 8164BCD
 	end
 
 TrainerTower_Elevator_EventScript_CloseFloorSelect:: @ 8164BD3
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 TrainerTower_Elevator_EventScript_MoveElevator:: @ 8164BD8
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special Special_AnimateElevator
+	special AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

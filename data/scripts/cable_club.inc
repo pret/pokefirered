@@ -446,7 +446,7 @@ CableClub_EventScript_CheckPartyTradeRequirements:: @ 81BB79C
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 2
 	goto_if_lt CableClub_EventScript_NeedTwoMonsToTrade
-	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	specialvar VAR_RESULT, DoesPartyHaveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_CantTradeEnigmaBerry
 	setvar VAR_RESULT, TRUE
@@ -601,7 +601,7 @@ CableClub_EventScript_ShowBattleRecords:: @ 81BB8A7
 	lockall
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 0
-	special Special_BattleRecords
+	special ShowBattleRecords
 	waitstate
 	releaseall
 	end
@@ -760,7 +760,7 @@ TradeCenter_TerminateLink:: @ 81BB9F0
 	textcolor 3
 	messageautoscroll Text_TerminateLinkConfirmation
 	waitmessage
-	special sub_8081770
+	special ExitLinkRoom
 	end
 
 CableClub_EventScript_DoLinkRoomExit:: @ 81BB9FC
@@ -775,7 +775,7 @@ CableClub_EventScript_UnionRoomAttendant:: @ 81BBA04
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, Special_BadEggInParty
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	copyvar VAR_0x8007, VAR_LAST_TALKED
@@ -842,7 +842,7 @@ CableClub_EventScript_CheckPartyUnionRoomRequirements:: @ 81BBB1E
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 2
 	goto_if_lt CableClub_EventScript_NeedTwoMonsForUnionRoom
-	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	specialvar VAR_RESULT, DoesPartyHaveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_NoEnigmaBerryInUnionRoom
 	setvar VAR_RESULT, TRUE
@@ -885,7 +885,7 @@ CableClub_EventScript_DirectCornerAttendant:: @ 81BBB9C
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, Special_BadEggInParty
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
@@ -1149,7 +1149,7 @@ CableClub_EventScript_81BBFD8:: @ 81BBFD8
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	special HelpSystem_Disable
 	fadescreen FADE_TO_BLACK
-	special Special_WirelessCommunicationScreen
+	special ShowWirelessCommunicationScreen
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter
 	special HelpSystem_Enable

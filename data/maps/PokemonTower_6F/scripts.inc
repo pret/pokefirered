@@ -7,7 +7,7 @@ PokemonTower_6F_EventScript_MarowakGhost:: @ 81634B8
 	msgbox PokemonTower_6F_Text_BeGoneIntruders
 	goto_if_questlog EventScript_ReleaseEnd
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
-	special ScrSpecial_StartMarowakBattle
+	special StartMarowakBattle
 	waitstate
 	special sub_8112364
 	compare VAR_RESULT, FALSE  @ Set by CB2_EndMarowakBattle

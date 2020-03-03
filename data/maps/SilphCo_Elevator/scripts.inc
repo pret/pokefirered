@@ -6,11 +6,11 @@ SilphCo_Elevator_EventScript_FloorSelect:: @ 8161F6F
 	setvar VAR_0x8004, 1
 	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special Special_DrawElevatorCurrentFloorWindow
+	special DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, LISTMENU_SILPHCO_FLOORS
-	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
+	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
 	special Special_ListMenu
 	waitstate
 	switch VAR_RESULT
@@ -140,15 +140,15 @@ SilphCo_Elevator_EventScript_To11F:: @ 81621BF
 	end
 
 SilphCo_Elevator_EventScript_ExitFloorSelect:: @ 81621E7
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 SilphCo_Elevator_EventScript_MoveElevator:: @ 81621EC
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special Special_AnimateElevator
+	special AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

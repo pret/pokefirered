@@ -147,7 +147,7 @@ ViridianCity_EventScript_TutorialUnused:: @ 8165A65
 	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
-	special ScrSpecial_StartOldManTutorialBattle
+	special StartOldManTutorialBattle
 	waitstate
 	release
 	end
@@ -240,7 +240,7 @@ ViridianCity_EventScript_DoTutorialBattle:: @ 8165B4C
 	closemessage
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
-	special ScrSpecial_StartOldManTutorialBattle
+	special StartOldManTutorialBattle
 	waitstate
 	lock
 	faceplayer

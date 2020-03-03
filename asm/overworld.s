@@ -66,8 +66,8 @@ _08054C40: .4byte sWhiteOutMoneyLossMultipliers
 _08054C44: .4byte gSaveBlock1Ptr
 	thumb_func_end ComputeWhiteOutMoneyLoss
 
-	thumb_func_start Special_OverworldWhiteOutGetMoneyLoss
-Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
+	thumb_func_start OverworldWhiteOutGetMoneyLoss
+OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	push {r4,r5,lr}
 	bl ComputeWhiteOutMoneyLoss
 	adds r4, r0, 0
@@ -85,7 +85,7 @@ Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	bx r0
 	.align 2, 0
 _08054C6C: .4byte gStringVar1
-	thumb_func_end Special_OverworldWhiteOutGetMoneyLoss
+	thumb_func_end OverworldWhiteOutGetMoneyLoss
 
 	thumb_func_start CountBadgesForOverworldWhiteOutLossCalculation
 CountBadgesForOverworldWhiteOutLossCalculation: @ 8054C70

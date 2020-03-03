@@ -3,7 +3,7 @@ FourIsland_LoreleisHouse_MapScripts:: @ 8171C4E
 	.byte 0
 
 FourIsland_LoreleisHouse_OnTransition:: @ 8171C54
-	special Special_ComputeLoreleiDollCollection
+	special UpdateLoreleiDollCollection
 	end
 
 FourIsland_LoreleisHouse_EventScript_Lorelei:: @ 8171C58

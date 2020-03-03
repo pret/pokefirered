@@ -88,7 +88,7 @@ static u8 *const sStringVars[3] = {
     gStringVar3
 };
 
-void Special_BattleRecords(void)
+void ShowBattleRecords(void)
 {
     SetVBlankCallback(NULL);
     SetMainCallback2(MainCB2_SetUp);

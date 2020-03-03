@@ -559,6 +559,6 @@ EventScript_OpenDoor:: @ 81A8B32
     playse SE_KI_GASYAN
     special DrawWholeMapView
     waitse
-    special Special_SetHiddenItemFlag
+    special SetHiddenItemFlag
     releaseall
     end

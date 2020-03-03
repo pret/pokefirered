@@ -6,11 +6,11 @@ CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelect:: @ 816C153
 	setvar VAR_0x8004, 3
 	call_if_unset FLAG_TEMP_2, EventScript_GetElevatorFloor
 	copyvar VAR_0x8005, VAR_ELEVATOR_FLOOR
-	special Special_DrawElevatorCurrentFloorWindow
+	special DrawElevatorCurrentFloorWindow
 	message Text_WantWhichFloor
 	waitmessage
 	setvar VAR_0x8004, 3
-	specialvar VAR_RESULT, Special_InitElevatorFloorSelectMenuPos
+	specialvar VAR_RESULT, InitElevatorFloorSelectMenuPos
 	switch VAR_RESULT
 	case 0, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom5F
 	case 1, CeladonCity_DepartmentStore_Elevator_EventScript_FloorSelectFrom4F
@@ -106,15 +106,15 @@ CeladonCity_DepartmentStore_Elevator_EventScript_To5F:: @ 816C2E6
 	end
 
 CeladonCity_DepartmentStore_Elevator_EventScript_ExitFloorSelect:: @ 816C30E
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	releaseall
 	end
 
 CeladonCity_DepartmentStore_Elevator_EventScript_MoveElevator:: @ 816C313
-	special Special_CloseElevatorCurrentFloorWindow
+	special CloseElevatorCurrentFloorWindow
 	closemessage
 	waitse
-	special Special_AnimateElevator
+	special AnimateElevator
 	waitstate
 	setflag FLAG_TEMP_2
 	return

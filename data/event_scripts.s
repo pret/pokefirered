@@ -1093,7 +1093,7 @@ EventScript_WallTownMap:: @ 81A6C32
 	msgbox Text_ATownMap
 	goto_if_questlog EventScript_ReleaseEnd
 	fadescreen FADE_TO_BLACK
-	special Special_TownMap
+	special ShowTownMap
 	waitstate
 	releaseall
 	end
@@ -1154,7 +1154,7 @@ EventScript_SetEnteringCyclingRoad:: @ 81A77C1
 	.include "data/scripts/route23.inc"
 
 EventScript_GetElevatorFloor:: @ 81A7AB9
-	special Special_GetElevatorFloor
+	special GetElevatorFloor
 	return
 
 	.include "data/scripts/aide.inc"
@@ -1198,7 +1198,7 @@ EventScript_GetInGameTradeSpeciesInfo:: @ 81A8CAD
 	return
 
 EventScript_ChooseMonForInGameTrade:: @ 81A8CBD
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
@@ -1307,11 +1307,11 @@ EventScript_TryDarkenRuins:: @ 81A925E
 	return
 
 EventScript_BrailleCursorWaitButton:: @ 81A926C
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	waitbuttonpress
 	playse SE_SELECT
 	setvar VAR_0x8006, 1
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	return
 
 EventScript_NoMoreRoomForPokemon:: @ 81A927C

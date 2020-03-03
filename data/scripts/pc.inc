@@ -5,7 +5,7 @@ EventScript_PC:: @ 81A6955
 	setvar VAR_0x8004, 27
 	special Special_SetSomeVariable
 	setvar VAR_0x8004, 0
-	special Special_AnimatePcTurnOn
+	special AnimatePcTurnOn
 	playse SE_PC_ON
 	msgbox Text_BootedUpPC
 	goto EventScript_PCMainMenu
@@ -66,7 +66,7 @@ EventScript_AccessBillsPC:: @ 81A6A3D
 EventScript_TurnOffPC:: @ 81A6A46
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
-	special Special_AnimatePcTurnOff
+	special AnimatePcTurnOff
 	special sub_812B35C
 	releaseall
 	end

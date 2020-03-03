@@ -89,7 +89,7 @@ EventScript_UseRockSmash:: @ 81BE06F
 	applymovement VAR_LAST_TALKED, Movement_BreakRock
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
-	special ScrSpecial_RockSmashWildEncounter
+	special RockSmashWildEncounter
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_RockSmashNoEncounter
 	waitstate

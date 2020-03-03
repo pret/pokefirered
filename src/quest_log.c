@@ -526,7 +526,7 @@ static void sub_8110A3C(void)
     }
 }
 
-void Special_GetQuestLogState(void)
+void GetQuestLogState(void)
 {
     gSpecialVar_Result = gQuestLogState;
 }

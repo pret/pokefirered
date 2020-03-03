@@ -22,7 +22,7 @@ NavelRock_Base_OnResume:: @ 8165116
 	end
 
 NavelRock_Base_EventScript_TryRemoveLugia:: @ 8165120
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject 1
@@ -40,14 +40,14 @@ NavelRock_Base_EventScript_Lugia:: @ 8165134
 	setvar VAR_0x8005, 3  @ Horizontal pan
 	setvar VAR_0x8006, 4  @ Num shakes
 	setvar VAR_0x8007, 2  @ Shake delay
-	special Special_ShakeScreen
+	special ShakeScreen
 	delay 30
 	playse SE_T_AME_E
 	setvar VAR_0x8004, 0  @ Vertical pan
 	setvar VAR_0x8005, 3  @ Horizontal pan
 	setvar VAR_0x8006, 4  @ Num shakes
 	setvar VAR_0x8007, 2  @ Shake delay
-	special Special_ShakeScreen
+	special ShakeScreen
 	delay 30
 	delay 50
 	waitse
@@ -59,10 +59,10 @@ NavelRock_Base_EventScript_Lugia:: @ 8165134
 	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NavelRock_Base_EventScript_DefeatedLugia
 	compare VAR_RESULT, B_OUTCOME_RAN

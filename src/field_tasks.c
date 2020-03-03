@@ -137,7 +137,7 @@ static void MarkIcefallCaveCoordVisited(s16 x, s16 y)
     }
 }
 
-void Special_SetIcefallCaveCrackedIceMetatiles(void)
+void SetIcefallCaveCrackedIceMetatiles(void)
 {
     u8 i = 0;
     for (; i < NELEMS(sIcefallCaveIceTileCoords); ++i)

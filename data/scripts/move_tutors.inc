@@ -455,7 +455,7 @@ TwoIsland_CapeBrink_House_EventScript_StarterTutor:: @ 81C4DEC
 	goto_if_set FLAG_TEMP_2, CapeBrinkTutor_EventScript_MoveJustTaught
 	getfirstpartymonname 0
 	msgbox Text_UltimateMoveThatMon
-	specialvar VAR_RESULT, Special_CapeBrinkGetMoveToTeachLeadPokemon
+	specialvar VAR_RESULT, CapeBrinkGetMoveToTeachLeadPokemon
 	compare VAR_RESULT, FALSE
 	goto_if_eq CapeBrinkTutor_EventScript_NoLeadStarter
 	copyvar VAR_0x8009, VAR_0x8005
@@ -496,7 +496,7 @@ CapeBrinkTutor_EventScript_TaughtAllMoves:: @ 81C4EA1
 
 CapeBrinkTutor_EventScript_TaughtMove:: @ 81C4EAB
 	copyvar VAR_0x8005, VAR_0x8009
-	specialvar VAR_RESULT, Special_HasLearnedAllMovesFromCapeBrinkTutor
+	specialvar VAR_RESULT, HasLearnedAllMovesFromCapeBrinkTutor
 	compare VAR_RESULT, TRUE
 	goto_if_eq CapeBrinkTutor_EventScript_LearnedAllMoves
 	msgbox Text_TaughtMove

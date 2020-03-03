@@ -8,7 +8,7 @@
 #include "constants/flags.h"
 #include "constants/spawn_points.h"
 
-bool8 Special_HallOfFame(void)
+bool8 EnterHallOfFame(void)
 {
     bool8 ribbonState;
     bool8 *r7;
@@ -52,7 +52,7 @@ bool8 Special_HallOfFame(void)
     return FALSE;
 }
 
-bool8 SetCB2Whiteout(void)
+bool8 SetCB2WhiteOut(void)
 {
     SetMainCallback2(CB2_WhiteOut);
     return FALSE;

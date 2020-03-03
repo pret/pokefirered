@@ -766,8 +766,8 @@
 #define FLAG_REVIVED_HELIX                               0x2ED
 #define FLAG_REVIVED_AMBER                               0x2EE
 #define FLAG_GOT_HM06                                    0x2EF
-#define FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN              0x2F0
-#define FLAG_SHOWED_AURORATICKET_TO_CAPTAIN              0x2F1
+#define FLAG_SHOWN_MYSTIC_TICKET                         0x2F0
+#define FLAG_SHOWN_AURORA_TICKET                         0x2F1
 #define FLAG_FOUGHT_LUGIA                                0x2F2
 #define FLAG_FOUGHT_HO_OH                                0x2F3
 #define FLAG_OAK_SAW_DEX_COMPLETION                      0x2F4
@@ -1372,8 +1372,8 @@
 #define FLAG_SYS_GOT_BERRY_POUCH (SYS_FLAGS + 0x47)
 #define FLAG_SYS_DEOXYS_AWAKENED (SYS_FLAGS + 0x48)
 #define FLAG_SYS_UNLOCKED_TANOBY_RUINS (SYS_FLAGS + 0x49)
-#define FLAG_SYS_GOT_MYSTIC_TICKET (SYS_FLAGS + 0x4A)
-#define FLAG_SYS_GOT_AURORA_TICKET (SYS_FLAGS + 0x4B)
+#define FLAG_ENABLE_SHIP_NAVEL_ROCK (SYS_FLAGS + 0x4A)
+#define FLAG_ENABLE_SHIP_BIRTH_ISLAND (SYS_FLAGS + 0x4B)
 
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  (SYS_FLAGS + 0x90)

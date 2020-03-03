@@ -4,6 +4,7 @@
 #include "berry_crush.h"
 #include "decompress.h"
 #include "digit_obj_util.h"
+#include "dynamic_placeholder_text_util.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
 #include "link.h"

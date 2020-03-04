@@ -1,45 +1,21 @@
 #include "global.h"
 #include "gflib.h"
 #include "dodrio_berry_picking.h"
+#include "event_data.h"
 #include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "m4a.h"
 #include "minigame_countdown.h"
 #include "random.h"
+#include "script.h"
 #include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "constants/songs.h"
 #include "constants/fanfares.h"
 #include "constants/items.h"
-
-struct DodrioSubstruct_0160
-{
-    /*0x0000 : 0x3000*/ u16 ALIGNED(4) tilemapBuffers[3][BG_SCREEN_SIZE];
-    /*0x3000 : 0x3160*/ bool32 finished;
-    /*0x3004 : 0x3164*/ u8 ALIGNED(4) unk3004;
-    /*0x3008 : 0x3168*/ u8 ALIGNED(4) unk3008[10];
-    /*0x3014 : 0x3174*/ u8 ALIGNED(4) state;
-    /*0x3018 : 0x3178*/ u8 ALIGNED(4) unk3018;
-    /*0x301C : 0x317C*/ u16 ALIGNED(4) unk301C;
-    /*0x3020 : 0x3180*/ u8 ALIGNED(4) unk3020;
-    /*0x3024 : 0x3184*/ u8 ALIGNED(4) unk3024;
-    /*0x3024 : 0x3184*/ void (*unk3028)(void);
-}; // size = 0x302C
-
-struct DodrioStruct_2022CF4
-{
-    u8 filler_00[0xc];
-    u8 unkC[10];
-    s16 unk16[10];
-    u16 unk2A[10];
-    u16 unk3E;
-}; // size = 0x40
-
-struct DodrioSubstruct_318C
-{
-    bool8 isShiny;
-};
+#include "constants/species.h"
 
 struct DodrioSubstruct_3308
 {
@@ -102,12 +78,6 @@ struct DodrioStruct
 }; // size = 0x3330
 
 EWRAM_DATA struct DodrioStruct * gUnknown_203F3E0 = NULL;
-EWRAM_DATA u16 *gUnknown_203F3E4[5] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F3F8[2] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F400[11] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F42C[4] = {NULL};
-EWRAM_DATA struct DodrioStruct_2022CF4 *gUnknown_203F43C = NULL;
-EWRAM_DATA struct DodrioSubstruct_0160 *gUnknown_203F440 = NULL;
 
 IWRAM_DATA bool32 gUnknown_3002044;
 
@@ -171,294 +141,12 @@ void sub_815336C(void);
 u32 sub_8153424(u8 mpId);
 u32 sub_81534AC(void);
 u32 Min(u32 x, u32 y);
-void sub_8153A9C(void);
-void sub_8153AFC(struct DodrioSubstruct_318C * unk318C, u8 a1, u8 a2, u8 a3);
-void sub_8153BC0(u8 a0);
-void sub_8153BF8(u8 a0);
-void sub_8153D08(u8 playerCount);
-void sub_8153D80(bool8 a0, u8 a1);
-void sub_8153DA8(u8 a0, u8 a1);
-void sub_8153FC8(u8 a0);
-void sub_8153DD8(void);
-void nullsub_97(struct Sprite *sprite);
-void sub_8153E28(void);
-void sub_8153ED8(void);
-bool32 sub_8153F1C(void);
-void sub_81540DC(bool8 a0);
-void sub_8154128(void);
-void sub_815417C(void);
-void sub_8154274(void);
-void sub_81542EC(u8 a0, u8 a1);
-void sub_8154370(u8 a0, u8 a1);
-void sub_8154398(u8 a0, u8 a1);
-void sub_81543E8(struct Sprite *sprite);
-void sub_8154438(void);
-void sub_81544F0(void);
-void sub_8154540(void);
-void sub_8154578(void);
-void sub_81545BC(bool8 a0);
-void sub_81546C0(void);
-void sub_8154730(void);
-void sub_8154968(struct DodrioSubstruct_0160 * unk0160);
-void sub_81549D4(u8 a0);
-void sub_8154A2C(void);
-void sub_8154B34(void);
-void sub_8154F80(void);
-void sub_81556E0(void);
-void sub_8155A78(void);
-void sub_8155B4C(void);
-void sub_8155C2C(void);
-void sub_8155C80(void);
-void unused_0(void);
-void nullsub_98(void);
-u8 sub_8155E8C(void);
+void Task_ShowDodrioBerryPickingRecords(u8 taskId);
+void sub_81538D0(u8 windowId);
 
 // const rom data
 
-// Large chunk of data
-const struct BgTemplate sUnknown_847565C_Unref_Dupe[] =
-{
-    {
-        .bg = 0,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 30,
-        .screenSize = 0,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0
-    },
-    {
-        .bg = 1,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 12,
-        .screenSize = 1,
-        .paletteMode = 0,
-        .priority = 1,
-        .baseTile = 0
-    },
-    {
-        .bg = 2,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 14,
-        .screenSize = 1,
-        .paletteMode = 0,
-        .priority = 1,
-        .baseTile = 0
-    },
-    {
-        .bg = 3,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 31,
-        .screenSize = 0,
-        .paletteMode = 0,
-        .priority = 2,
-        .baseTile = 0
-    },
-};
-
-// Unknown unreferenced data, feel free to remove.
-const u32 sUnused_Unref_Dupe[] = {255, 0};
-
-const struct WindowTemplate sUnknown_8475674_Unref_Dupe[] =
-{
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 1,
-        .width = 28,
-        .height = 3,
-        .paletteNum = 13,
-        .baseBlock = 0x13,
-    },
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 6,
-        .width = 28,
-        .height = 13,
-        .paletteNum = 13,
-        .baseBlock = 0x67,
-    }
-};
-
-const struct WindowTemplate sUnknown_8475684_Unref_Dupe =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 6,
-    .width = 28,
-    .height = 7,
-    .paletteNum = 13,
-    .baseBlock = 0x67,
-};
-
-const struct WindowTemplate sUnknown_847568C_Unref_Dupe[] =
-{
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 8,
-        .width = 19,
-        .height = 3,
-        .paletteNum = 13,
-        .baseBlock = 0x13,
-    },
-    {
-        .bg = 0,
-        .tilemapLeft = 22,
-        .tilemapTop = 7,
-        .width = 6,
-        .height = 4,
-        .paletteNum = 13,
-        .baseBlock = 0x4C,
-    }
-};
-
-const struct WindowTemplate sUnknown_847569C_Unref_Dupe =
-{
-    .bg = 0,
-    .tilemapLeft = 4,
-    .tilemapTop = 6,
-    .width = 22,
-    .height = 5,
-    .paletteNum = 13,
-    .baseBlock = 0x13,
-};
-
-const struct WindowTemplate sUnknown_84756A4_Unref_Dupe =
-{
-    .bg = 0,
-    .tilemapLeft = 5,
-    .tilemapTop = 8,
-    .width = 19,
-    .height = 3,
-    .paletteNum = 13,
-    .baseBlock = 0x13,
-};
-
-const u8 sUnknown_8471F50[5][5][11] =
-{
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 3, 8, 9, 0},
-        {0, 1, 2, 5, 6, 3, 4, 5, 8, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 2, 9, 0},
-        {0, 1, 4, 5, 6, 7, 2, 3, 4, 9, 0},
-        {0, 1, 6, 7, 2, 3, 4, 5, 6, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 1, 0},
-        {0, 3, 4, 5, 6, 7, 8, 1, 2, 3, 0},
-        {0, 5, 6, 7, 8, 1, 2, 3, 4, 5, 0},
-        {0, 7, 8, 1, 2, 3, 4, 5, 6, 7, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
-        {2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2},
-        {4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4},
-        {6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6},
-        {8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8},
-    },
-};
-
-const u8 sUnknown_8472063[5][5][3] =
-{
-    {
-        {4, 5, 6},
-    },
-    {
-        {3, 4, 5},
-        {5, 6, 3},
-    },
-    {
-        {4, 5, 6},
-        {6, 7, 2},
-        {2, 3, 4},
-    },
-    {
-        {3, 4, 5},
-        {5, 6, 7},
-        {7, 8, 1},
-        {1, 2, 3},
-    },
-    {
-        {4, 5, 6},
-        {6, 7, 8},
-        {8, 9, 0},
-        {0, 1, 2},
-        {2, 3, 4},
-    },
-};
-
-const u8 sUnknown_84720AE[5][5][3] =
-{
-    {
-        {1, 0, 1},
-    },
-    {
-        {1, 0, 1},
-        {0, 1, 0},
-    },
-    {
-        {2, 0, 1},
-        {0, 1, 2},
-        {1, 2, 0},
-    },
-    {
-        {3, 0, 1},
-        {0, 1, 2},
-        {1, 2, 3},
-        {2, 3, 0},
-    },
-    {
-        {4, 0, 1},
-        {0, 1, 2},
-        {1, 2, 3},
-        {2, 3, 4},
-        {3, 4, 0},
-    },
-};
-
-ALIGNED(4)
-const u8 sUnknown_84720FC[5][11] =
-{
-    {9, 9, 9, 9, 1, 1, 1, 9, 9, 9, 9},
-    {9, 9, 9, 0, 0, 1, 1, 0, 9, 9, 9},
-    {9, 9, 2, 2, 0, 0, 1, 1, 1, 9, 9},
-    {9, 3, 3, 0, 0, 1, 1, 2, 2, 3, 9},
-    {3, 3, 4, 4, 0, 0, 1, 1, 2, 2, 3},
-};
-
-const u8 sUnknown_8472133[5][5] =
-{
-    {5},
-    {4, 6},
-    {3, 5, 7},
-    {2, 4, 6, 8},
-    {1, 3, 5, 6, 9},
-};
-
-// Duplicate and unused gfx. Feel free to remove.
-const u32 sDuplicateGfx[] = INCBIN_U32("graphics/link_games/dodrioberry_bg1.gbapal",
-                                     "graphics/link_games/dodrioberry_bg2.gbapal",
-                                     "graphics/link_games/dodrioberry_pkmn.gbapal",
-                                     "graphics/link_games/dodrioberry_shiny.gbapal",
-                                     "graphics/link_games/dodrioberry_status.gbapal",
-                                     "graphics/link_games/dodrioberry_berrysprites.gbapal",
-                                     "graphics/link_games/dodrioberry_berrysprites.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_platform.gbapal",
-                                     "graphics/link_games/dodrioberry_bg1.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_bg2.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_status.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_platform.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_pkmn.4bpp.lz",
-                                     "graphics/link_games/dodrioberry_bg1.bin.lz",
-                                     "graphics/link_games/dodrioberry_bg2right.bin.lz",
-                                     "graphics/link_games/dodrioberry_bg2left.bin.lz");
+#include "data/dodrio_berry_picking.h"
 
 const u8 sUnknown_847553C[][3] =
 {
@@ -2611,6 +2299,28 @@ u8 sub_81537AC(u8 id)
     return gUnknown_203F3E0->unk34[id];
 }
 
+void IsDodrioInParty(void)
+{
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DODRIO)
+        {
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+
+    gSpecialVar_Result = FALSE;
+}
+
+void ShowDodrioBerryPickingRecords(void)
+{
+    u8 taskId = CreateTask(Task_ShowDodrioBerryPickingRecords, 0);
+    Task_ShowDodrioBerryPickingRecords(taskId);
+}
+
 // Data related to printing saved results.
 const struct WindowTemplate sUnknown_84755E0 =
 {
@@ -2630,6 +2340,67 @@ ALIGNED(4)
 const u8 sUnknown_84755FC[][2] = {{24}, {40}, {56}};
 const u8 sUnknown_8475602[][2] = {{24}, {40}, {70}};
 
+void Task_ShowDodrioBerryPickingRecords(u8 taskId)
+{
+    struct WindowTemplate window;
+    s32 i, width, widthCurr;
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        data[1] = AddWindow(&sUnknown_84755E0);
+        sub_81538D0(data[1]);
+        CopyWindowToVram(data[1], 3);
+        data[0]++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            data[0]++;
+        break;
+    case 2:
+        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        {
+            rbox_fill_rectangle(data[1]);
+            CopyWindowToVram(data[1], 1);
+            data[0]++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            RemoveWindow(data[1]);
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+        }
+        break;
+    }
+}
+
+void sub_81538D0(u8 windowId)
+{
+    s32 i, x, numWidth;
+    s32 results[3];
+    u8 strbuf[20];
+    results[0] = gSaveBlock2Ptr->berryPick.berriesPicked;
+    results[1] = gSaveBlock2Ptr->berryPick.bestScore;
+    results[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;
+
+    TextWindow_SetStdFrame0_WithPal(windowId, 0x21D, 0xD0);
+    DrawTextBorderOuter(windowId, 0x21D, 0xD);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[0], 1, 1, TEXT_SPEED_FF, NULL);
+    for (i = 0; i < 3; i++)
+    {
+        ConvertIntToDecimalStringN(strbuf, results[i], STR_CONV_MODE_LEFT_ALIGN, sUnknown_84755F8[i]);
+        numWidth = GetStringWidth(2, strbuf, -1);
+        AddTextPrinterParameterized(windowId, 2, sUnknown_84755E8[i + 1], 1, sUnknown_84755FC[i][0], TEXT_SPEED_FF, NULL);
+        x = 224 - numWidth;
+        AddTextPrinterParameterized(windowId, 2, strbuf, x, sUnknown_8475602[i][0], TEXT_SPEED_FF, NULL);
+    }
+    PutWindowTilemap(windowId);
+}
+
 // Debug functions?
 const u16 sUnknown_8475608[][4] =
 {
@@ -2644,7 +2415,7 @@ const u8 sUnknown_8475630[] = _("あいうえおかき");
 const u8 sUnknown_8475638[] = _("ABCDEFG");
 const u8 sUnknown_8475640[] = _("0123456");
 
-const u8 *const sUnknown_8475648[] =
+const u8 *const sPlaceholderPlayerNames[] =
 {
     sUnknown_8475630,
     sUnknown_8475630,
@@ -2653,585 +2424,22 @@ const u8 *const sUnknown_8475648[] =
     sUnknown_8475640
 };
 
-// Large chunk of data
-const struct BgTemplate sUnknown_847565C[] =
+void sub_81539EC(void)
 {
-    {
-        .bg = 0,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 30,
-        .screenSize = 0,
-        .paletteMode = 0,
-        .priority = 0,
-        .baseTile = 0
-    },
-    {
-        .bg = 1,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 12,
-        .screenSize = 1,
-        .paletteMode = 0,
-        .priority = 1,
-        .baseTile = 0
-    },
-    {
-        .bg = 2,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 14,
-        .screenSize = 1,
-        .paletteMode = 0,
-        .priority = 1,
-        .baseTile = 0
-    },
-    {
-        .bg = 3,
-        .charBaseIndex = 3,
-        .mapBaseIndex = 31,
-        .screenSize = 0,
-        .paletteMode = 0,
-        .priority = 2,
-        .baseTile = 0
-    },
-};
+    gUnknown_203F3E0->unk24 = GetLinkPlayerCount();
+}
 
-// Unknown unreferenced data, feel free to remove.
-const u32 sUnused[] = {255, 0};
-
-const struct WindowTemplate sUnknown_8475674[] =
+void sub_8153A04(void)
 {
+    u8 i, playerId;
+
+    for (playerId = gUnknown_203F3E0->unk24; playerId < NELEMS(sPlaceholderPlayerNames); playerId++)
+        StringCopy(gLinkPlayers[playerId].name, sPlaceholderPlayerNames[playerId]);
+
+    gUnknown_203F3E0->unk24 = 5;
+    for (i = 0; i < 4; i++)
     {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 1,
-        .width = 28,
-        .height = 3,
-        .paletteNum = 13,
-        .baseBlock = 0x13,
-    },
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 6,
-        .width = 28,
-        .height = 13,
-        .paletteNum = 13,
-        .baseBlock = 0x67,
+        for (playerId = 0; playerId < gUnknown_203F3E0->unk24; playerId++)
+            gUnknown_203F3E0->unk4A[playerId][i] = sUnknown_8475608[playerId][i];
     }
-};
-
-const struct WindowTemplate sUnknown_8475684 =
-{
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 6,
-    .width = 28,
-    .height = 7,
-    .paletteNum = 13,
-    .baseBlock = 0x67,
-};
-
-const struct WindowTemplate sUnknown_847568C[] =
-{
-    {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 8,
-        .width = 19,
-        .height = 3,
-        .paletteNum = 13,
-        .baseBlock = 0x13,
-    },
-    {
-        .bg = 0,
-        .tilemapLeft = 22,
-        .tilemapTop = 7,
-        .width = 6,
-        .height = 4,
-        .paletteNum = 13,
-        .baseBlock = 0x4C,
-    }
-};
-
-const struct WindowTemplate sUnknown_847569C =
-{
-    .bg = 0,
-    .tilemapLeft = 4,
-    .tilemapTop = 6,
-    .width = 22,
-    .height = 5,
-    .paletteNum = 13,
-    .baseBlock = 0x13,
-};
-
-const struct WindowTemplate sUnknown_84756A4 =
-{
-    .bg = 0,
-    .tilemapLeft = 5,
-    .tilemapTop = 8,
-    .width = 19,
-    .height = 3,
-    .paletteNum = 13,
-    .baseBlock = 0x13,
-};
-
-// This is an unused copy of the tables from the top of the file. Feel free to remove.
-const u8 sUnknown_8471F50_UnrefDup[5][5][11] =
-{
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 3, 8, 9, 0},
-        {0, 1, 2, 5, 6, 3, 4, 5, 8, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 2, 9, 0},
-        {0, 1, 4, 5, 6, 7, 2, 3, 4, 9, 0},
-        {0, 1, 6, 7, 2, 3, 4, 5, 6, 9, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 1, 0},
-        {0, 3, 4, 5, 6, 7, 8, 1, 2, 3, 0},
-        {0, 5, 6, 7, 8, 1, 2, 3, 4, 5, 0},
-        {0, 7, 8, 1, 2, 3, 4, 5, 6, 7, 0},
-    },
-    {
-        {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0},
-        {2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2},
-        {4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4},
-        {6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6},
-        {8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8},
-    },
-};
-
-const u8 sUnknown_8472063_UnrefDup[5][5][3] =
-{
-    {
-        {4, 5, 6},
-    },
-    {
-        {3, 4, 5},
-        {5, 6, 3},
-    },
-    {
-        {4, 5, 6},
-        {6, 7, 2},
-        {2, 3, 4},
-    },
-    {
-        {3, 4, 5},
-        {5, 6, 7},
-        {7, 8, 1},
-        {1, 2, 3},
-    },
-    {
-        {4, 5, 6},
-        {6, 7, 8},
-        {8, 9, 0},
-        {0, 1, 2},
-        {2, 3, 4},
-    },
-};
-
-const u8 sUnknown_84720AE_UnrefDup[5][5][3] =
-{
-    {
-        {1, 0, 1},
-    },
-    {
-        {1, 0, 1},
-        {0, 1, 0},
-    },
-    {
-        {2, 0, 1},
-        {0, 1, 2},
-        {1, 2, 0},
-    },
-    {
-        {3, 0, 1},
-        {0, 1, 2},
-        {1, 2, 3},
-        {2, 3, 0},
-    },
-    {
-        {4, 0, 1},
-        {0, 1, 2},
-        {1, 2, 3},
-        {2, 3, 4},
-        {3, 4, 0},
-    },
-};
-
-ALIGNED(4)
-const u8 sUnknown_84720FC_UnrefDup[5][11] =
-{
-    {9, 9, 9, 9, 1, 1, 1, 9, 9, 9, 9},
-    {9, 9, 9, 0, 0, 1, 1, 0, 9, 9, 9},
-    {9, 9, 2, 2, 0, 0, 1, 1, 1, 9, 9},
-    {9, 3, 3, 0, 0, 1, 1, 2, 2, 3, 9},
-    {3, 3, 4, 4, 0, 0, 1, 1, 2, 2, 3},
-};
-
-const u8 sUnknown_8472133_UnrefDup[5][5] =
-{
-    {5},
-    {4, 6},
-    {3, 5, 7},
-    {2, 4, 6, 8},
-    {1, 3, 5, 6, 9},
-};
-
-const u16 sDodrioBerryBgPal1[] = INCBIN_U16("graphics/link_games/dodrioberry_bg1.gbapal",
-                                            "graphics/link_games/dodrioberry_bg2.gbapal");
-const u16 sDodrioBerryPkmnPal[] = INCBIN_U16("graphics/link_games/dodrioberry_pkmn.gbapal");
-const u16 sDodrioBerryShinyPal[] = INCBIN_U16("graphics/link_games/dodrioberry_shiny.gbapal");
-const u16 sDodrioBerryStatusPal[] = INCBIN_U16("graphics/link_games/dodrioberry_status.gbapal");
-const u16 sDodrioBerrySpritesPal[] = INCBIN_U16("graphics/link_games/dodrioberry_berrysprites.gbapal");
-const u32 sDodrioBerrySpritesGfx[] = INCBIN_U32("graphics/link_games/dodrioberry_berrysprites.4bpp.lz");
-const u16 sDodrioBerryPlatformPal[] = INCBIN_U16("graphics/link_games/dodrioberry_platform.gbapal");
-const u32 sDodrioBerryBgGfx1[] = INCBIN_U32("graphics/link_games/dodrioberry_bg1.4bpp.lz");
-const u32 sDodrioBerryBgGfx2[] = INCBIN_U32("graphics/link_games/dodrioberry_bg2.4bpp.lz");
-const u32 sDodrioBerryStatusGfx[] = INCBIN_U32("graphics/link_games/dodrioberry_status.4bpp.lz");
-const u32 sDodrioBerryPlatformGfx[] = INCBIN_U32("graphics/link_games/dodrioberry_platform.4bpp.lz");
-const u32 sDodrioBerryPkmnGfx[] = INCBIN_U32("graphics/link_games/dodrioberry_pkmn.4bpp.lz");
-const u32 sDodrioBerryBgTilemap1[] = INCBIN_U32("graphics/link_games/dodrioberry_bg1.bin.lz");
-const u32 sDodrioBerryBgTilemap2Right[] = INCBIN_U32("graphics/link_games/dodrioberry_bg2right.bin.lz");
-const u32 sDodrioBerryBgTilemap2Left[] = INCBIN_U32("graphics/link_games/dodrioberry_bg2left.bin.lz");
-
-const struct OamData sOamData_8478C98 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x64),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
-    .tileNum = 0,
-    .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const struct OamData sOamData_8478CA0 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(16x16),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(16x16),
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const struct OamData sOamData_8478CA8 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(16x16),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(16x16),
-    .tileNum = 0,
-    .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const struct OamData sOamData_8478CB0 =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x32),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(64x32),
-    .tileNum = 0,
-    .priority = 3,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const union AnimCmd sSpriteAnim_8478CB8[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478CC0[] =
-{
-    ANIMCMD_FRAME(64, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478CC8[] =
-{
-    ANIMCMD_FRAME(128, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478CD0[] =
-{
-    ANIMCMD_FRAME(192, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478CD8[] =
-{
-    ANIMCMD_FRAME(256, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd *const sSpriteAnimTable_8478CE0[] =
-{
-    sSpriteAnim_8478CB8,
-    sSpriteAnim_8478CC0,
-    sSpriteAnim_8478CC8,
-    sSpriteAnim_8478CD0,
-    sSpriteAnim_8478CD8
-};
-
-const union AnimCmd sSpriteAnim_8478CF4[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478CFC[] =
-{
-    ANIMCMD_FRAME(4, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D04[] =
-{
-    ANIMCMD_FRAME(8, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd *const sSpriteAnimTable_8478D0C[] =
-{
-    sSpriteAnim_8478CF4,
-    sSpriteAnim_8478CFC,
-    sSpriteAnim_8478D04
-};
-
-const union AnimCmd sSpriteAnim_8478D18[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D20[] =
-{
-    ANIMCMD_FRAME(4, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D28[] =
-{
-    ANIMCMD_FRAME(8, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D30[] =
-{
-    ANIMCMD_FRAME(12, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D38[] =
-{
-    ANIMCMD_FRAME(16, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D40[] =
-{
-    ANIMCMD_FRAME(20, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D48[] =
-{
-    ANIMCMD_FRAME(24, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D50[] =
-{
-    ANIMCMD_FRAME(28, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd sSpriteAnim_8478D58[] =
-{
-    ANIMCMD_FRAME(32, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd *const sSpriteAnimTable_8478D60[] =
-{
-    sSpriteAnim_8478D18,
-    sSpriteAnim_8478D20,
-    sSpriteAnim_8478D28,
-    sSpriteAnim_8478D30,
-    sSpriteAnim_8478D38,
-    sSpriteAnim_8478D40,
-    sSpriteAnim_8478D48,
-    sSpriteAnim_8478D50,
-    sSpriteAnim_8478D58
-};
-
-const union AnimCmd sSpriteAnim_8478D84[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd *const sSpriteAnimTable_8478D8C[] =
-{
-    sSpriteAnim_8478D84
-};
-
-// These are declared inside pokeemerald's sub_8153A9C
-const struct SpritePalette gUnknown_8478D90 = {sDodrioBerryPkmnPal, 0};
-const struct SpritePalette gUnknown_8478D98 = {sDodrioBerryShinyPal, 1};
-
-// These are declared inside pokeemerald's sub_8153E28
-const struct SpritePalette gUnknown_8478DA0 = {sDodrioBerryStatusPal, 2};
-const struct SpriteTemplate gUnknown_8478DA8 =
-        {
-            .tileTag = 1,
-            .paletteTag = 2,
-            .oam = &sOamData_8478CA0,
-            .anims = sSpriteAnimTable_8478D0C,
-            .images = NULL,
-            .affineAnims = gDummySpriteAffineAnimTable,
-            .callback = nullsub_97,
-        };
-
-// Unknown unused data, feel free to remove.
-const u8 sUnused2[] = {0xCD, 0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0xF4, 0x0, 0x0};
-
-// This is declared inside pokeemerald's sub_8154128
-const struct SpritePalette gUnknown_8478DCC = {sDodrioBerrySpritesPal, 3};
-
-const s16 sUnknown_8478DD4[] = {88, 128, 168, 208};
-
-// These are declared inside pokeemerald's sub_815417C
-const struct SpriteTemplate gUnknown_8478DDC =
-    {
-        .tileTag = 2,
-        .paletteTag = 3,
-        .oam = &sOamData_8478CA8,
-        .anims = sSpriteAnimTable_8478D60,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
-    };
-const struct SpriteTemplate gUnknown_8478DF4 =
-    {
-        .tileTag = 2,
-        .paletteTag = 3,
-        .oam = &sOamData_8478CA0,
-        .anims = sSpriteAnimTable_8478D60,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
-    };
-
-// This is declared inside pokeemerald's sub_8028CF4
-const u8 gUnknown_8478E0C[] = {30, 20};
-
-const s16 gUnknown_8478E0E[][2] = {{230, 55}, {30, 74}};
-
-// These are declared inside pokeemerald's sub_8154438
-const struct SpritePalette gUnknown_8478E18 = {sDodrioBerryPlatformPal, 6};
-const struct SpriteTemplate gUnknown_8478E20 =
-    {
-        .tileTag = 5,
-        .paletteTag = 6,
-        .oam = &sOamData_8478CB0,
-        .anims = sSpriteAnimTable_8478D8C,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = sub_81543E8,
-    };
-
-struct WinCoords
-{
-    u8 left;
-    u8 top;
-};
-
-const u8 sUnknown_8478E38[][3] =
-{
-    {1, 2, 3},
-    {1, 4, 5},
-    {1, 8, 9},
-    {1, 6, 7},
-};
-
-const struct WinCoords sUnknown_8478E44[] = {{12, 6}};
-const struct WinCoords sUnknown_8478E48[] = {{9, 10}, {15, 6}};
-const struct WinCoords sUnknown_8478E50[] = {{12, 6}, {18, 10}, {6, 10}};
-const struct WinCoords sUnknown_8478E5C[] = {{9, 10}, {15, 6}, {21, 10}, {3, 6}};
-const struct WinCoords sUnknown_8478E6C[] = {{12, 6}, {18, 10}, {23, 6}, {1, 6}, {6, 10}};
-
-const struct WinCoords *const sUnknown_8478E80[] =
-{
-    sUnknown_8478E44,
-    sUnknown_8478E48,
-    sUnknown_8478E50,
-    sUnknown_8478E5C,
-    sUnknown_8478E6C,
-};
-
-const u8 *const sUnknown_8478E94[] =
-{
-    gText_1Colon,
-    gText_2Colon,
-    gText_3Colon,
-    gText_4Colon,
-    gText_5Colon,
-};
-
-const u16 sUnknown_8478EA8[] = {92, 132, 172, 212};
-const u16 sUnknown_8478EB0[] = {30, 45, 60, 75, 90};
-const u16 sUnknown_8478EBA[] = {12, 28, 44, 60, 76};
-
-struct
-{
-    u8 id;
-    void (*func)(void);
-} const gUnknown_8478EC4[] =
-{
-    {0, sub_8154A2C},
-    {1, sub_8154B34},
-    {2, sub_8154F80},
-    {3, sub_81556E0},
-    {4, sub_8155A78},
-    {5, sub_8155B4C},
-    {6, sub_8155C2C},
-    {7, sub_8155C80},
-    {8, unused_0},
-    {9, nullsub_98},
-};
-
-// This is declared inside pokeemerald's sub_80296A8
-const u8 gUnknown_8478F14[5] = {0, 1, 2, 3, 4};
+}

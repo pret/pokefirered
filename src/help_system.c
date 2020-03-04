@@ -90,7 +90,7 @@ u8 RunHelpSystemCallback(void)
         HelpSystem_FillPanel2();
         HelpSystem_PrintText_Row61(gString_Help);
         sub_813BD14(1);
-        if (sub_812B40C() == TRUE)
+        if (HelpSystem_UpdateHasntSeenIntro() == TRUE)
             HelpSystemSubroutine_PrintWelcomeMessage(&gHelpSystemListMenu, gHelpSystemListMenuItems);
         else
             HelpSystemSubroutine_WelcomeEndGotoMenu(&gHelpSystemListMenu, gHelpSystemListMenuItems);
@@ -1184,7 +1184,7 @@ bool8 MoveCursor(u8 by, u8 dirn)
             HelpSystem_FillPanel1();
             PrintListMenuItems();
             PlaceListMenuCursor();
-            sub_812BDEC();
+            HelpSystem_PrintTopicLabel();
             sub_813C75C();
         }
         else

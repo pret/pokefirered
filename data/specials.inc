@@ -389,9 +389,9 @@ gSpecials:: @ 815FD60
 	def_special TakePokemonFromRoute5Daycare
 	def_special DoSeagallopFerryScene
 	def_special DoesPlayerPartyContainSpecies
-	def_special HelpSystem_SetSomeVariable
-	def_special HelpSystem_BackupSomeVariable
-	def_special HelpSystem_RestoreSomeVariable
+	def_special Script_SetHelpContext
+	def_special BackupHelpContext
+	def_special RestoreHelpContext
 	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special InitUnionRoom
@@ -408,7 +408,7 @@ gSpecials:: @ 815FD60
 	def_special ChooseMonForMoveTutor
 	def_special ChooseMonForWirelessMinigame
 	def_special SetBattledTrainerFlag
-	def_special sub_812B35C
+	def_special SetHelpContextForMap
 	def_special DoSSAnneDepartureCutscene
 	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled

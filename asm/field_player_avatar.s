@@ -4157,7 +4157,7 @@ sub_805D240: @ 805D240
 	bl DestroySprite
 	adds r0, r5, 0
 	bl DestroyTask
-	bl sub_812B35C
+	bl SetHelpContextForMap
 _0805D2AE:
 	pop {r4-r6}
 	pop {r0}

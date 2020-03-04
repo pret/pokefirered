@@ -32,15 +32,15 @@ PalletTown_PlayersHouse_2F_EventScript_Sign:: @ 8168CDB
 PalletTown_PlayersHouse_2F_EventScript_PC:: @ 8168CE4
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
-	setvar VAR_0x8004, 32
-	special HelpSystem_SetSomeVariable
+	setvar VAR_0x8004, HELPCONTEXT_BEDROOM_PC
+	special Script_SetHelpContext
 	setvar VAR_0x8004, 1
 	special AnimatePcTurnOn
 	playse SE_PC_ON
 	msgbox Text_PlayerBootedUpPC
 	special BedroomPC
 	waitstate
-	special sub_812B35C
+	special SetHelpContextForMap
 	releaseall
 	end
 
@@ -48,6 +48,6 @@ EventScript_PalletTown_PlayersHouse_2F_ShutDownPC:: @ 8168D17
 	setvar VAR_0x8004, 1
 	playse SE_PC_OFF
 	special AnimatePcTurnOff
-	special sub_812B35C
+	special SetHelpContextForMap
 	releaseall
 	end

@@ -500,7 +500,7 @@ static void TeachyTvMainCallback(void)
         ScheduleBgCopyTilemapToVram(1);
         ScheduleBgCopyTilemapToVram(2);
         ScheduleBgCopyTilemapToVram(3);
-        HelpSystem_SetSomeVariable(9); // help system something
+        SetHelpContextDontCheckBattle(HELPCONTEXT_BAG);
         BlendPalettes(0xFFFFFFFF, 0x10, 0);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         SetVBlankCallback(TeachyTvVblankHandler);

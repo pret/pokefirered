@@ -562,8 +562,8 @@ static bool8 StartMenuLinkPlayerCallback(void)
 
 static bool8 StartCB_Save1(void)
 {
-    HelpSystem_BackupSomeVariable();
-    HelpSystem_SetSomeVariable2(12);
+    BackupHelpContext();
+    SetHelpContext(HELPCONTEXT_SAVE);
     StartMenu_PrepareForSave();
     sStartMenuCallback = StartCB_Save2;
     return FALSE;
@@ -579,19 +579,19 @@ static bool8 StartCB_Save2(void)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         sub_80696C0();
         ScriptContext2_Disable();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         return TRUE;
     case SAVECB_RETURN_CANCEL:
         ClearDialogWindowAndFrameToTransparent(0, FALSE);
         DrawStartMenuInOneGo();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         sStartMenuCallback = StartCB_HandleInput;
         break;
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         sub_80696C0();
         ScriptContext2_Disable();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         return TRUE;
     }
     return FALSE;
@@ -614,8 +614,8 @@ static u8 RunSaveDialogCB(void)
 
 void Field_AskSaveTheGame(void)
 {
-    HelpSystem_BackupSomeVariable();
-    HelpSystem_SetSomeVariable2(12);
+    BackupHelpContext();
+    SetHelpContext(HELPCONTEXT_SAVE);
     StartMenu_PrepareForSave();
     CreateTask(task50_save_game, 80);
 }
@@ -645,7 +645,7 @@ static void task50_save_game(u8 taskId)
     }
     DestroyTask(taskId);
     EnableBothScriptContexts();
-    HelpSystem_RestoreSomeVariable();
+    RestoreHelpContext();
 }
 
 static void CloseSaveMessageWindow(void)

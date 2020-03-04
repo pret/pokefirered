@@ -491,9 +491,9 @@ sub_809DD60: @ 809DD60
 	bl CreateTask
 	ldr r0, _0809DD84 @ =sub_809FB70
 	bl SetMainCallback2
-	bl HelpSystem_BackupSomeVariable
-	movs r0, 0x3
-	bl HelpSystem_SetSomeVariable2
+	bl BackupHelpContext
+	movs r0, 0x3 @ HELPCONTEXT_NAMING_SCREEN
+	bl SetHelpContext
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -868,7 +868,7 @@ _0809E06C:
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	bl HelpSystem_RestoreSomeVariable
+	bl RestoreHelpContext
 _0809E096:
 	movs r0, 0
 	pop {r4,r5}

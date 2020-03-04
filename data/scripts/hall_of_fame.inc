@@ -1,7 +1,7 @@
 EventScript_SetDefeatedEliteFourFlagsVars:: @ 81A651A
 	clearflag FLAG_HIDE_POSTGAME_GOSSIPERS
 	call EventScript_ResetEliteFour
-	special Special_UpdateTrainerFanClubGameClear
+	special Script_UpdateTrainerFanClubGameClear
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	compare VAR_RESULT, FALSE
 	call_if_eq EventScript_SetReadyTryGiveNationalDexScene

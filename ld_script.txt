@@ -286,6 +286,7 @@ SECTIONS {
         src/braille_text.o(.text);
         src/text_window.o(.text);
         src/quest_log_player.o(.text);
+        src/dodrio_berry_picking.o(.text);
         asm/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
         src/quest_log_objects.o(.text);

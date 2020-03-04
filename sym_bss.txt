@@ -86,17 +86,12 @@ gUnknown_3002038: @ 3002038
 
 	.align 2
 	.include "src/wireless_communication_status_screen.o"
-
 	.align 2
-gUnknown_3002044: @ 3002044
-	.space 0x4
-
+	.include "src/dodrio_berry_picking.o"
 	.align 3
 	.include "src/ereader_helpers.o"
-
 	.align 3
 	.include "src/digit_obj_util.o"
-
 	.align 3
 	.include "asm/m4a_1.o"
 	.align 3

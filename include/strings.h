@@ -244,26 +244,26 @@ extern const u8 gUnknown_83FDCD2[];
 extern const u8 gUnknown_83FE6FA[];
 
 // battle_controller_pokedude
-extern const u8 PokeDude_Text_SpeedierBattlerGoesFirst[];
-extern const u8 PokeDude_Text_MyRattataFasterThanPidgey[];
-extern const u8 PokeDude_Text_BattlersTakeTurnsAttacking[];
-extern const u8 PokeDude_Text_MyRattataWonGetsEXP[];
-extern const u8 PokeDude_Text_UhOhRattataPoisoned[];
-extern const u8 PokeDude_Text_HealStatusRightAway[];
-extern const u8 PokeDude_Text_UsingItemTakesTurn[];
-extern const u8 PokeDude_Text_YayWeManagedToWin[];
-extern const u8 PokeDude_Text_WaterNotVeryEffectiveAgainstGrass[];
-extern const u8 PokeDude_Text_GrassEffectiveAgainstWater[];
-extern const u8 PokeDude_Text_LetsTryShiftingMons[];
-extern const u8 PokeDude_Text_ShiftingUsesTurn[];
-extern const u8 PokeDude_Text_ButterfreeDoubleResistsGrass[];
-extern const u8 PokeDude_Text_ButterfreeGoodAgainstOddish[];
-extern const u8 PokeDude_Text_YeahWeWon[];
-extern const u8 PokeDude_Text_WeakenMonBeforeCatching[];
-extern const u8 PokeDude_Text_BestIfTargetStatused[];
-extern const u8 PokeDude_Text_CantDoubleUpOnStatus[];
-extern const u8 PokeDude_Text_LetMeThrowBall[];
-extern const u8 PokeDude_Text_PickBestKindOfBall[];
+extern const u8 Pokedude_Text_SpeedierBattlerGoesFirst[];
+extern const u8 Pokedude_Text_MyRattataFasterThanPidgey[];
+extern const u8 Pokedude_Text_BattlersTakeTurnsAttacking[];
+extern const u8 Pokedude_Text_MyRattataWonGetsEXP[];
+extern const u8 Pokedude_Text_UhOhRattataPoisoned[];
+extern const u8 Pokedude_Text_HealStatusRightAway[];
+extern const u8 Pokedude_Text_UsingItemTakesTurn[];
+extern const u8 Pokedude_Text_YayWeManagedToWin[];
+extern const u8 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass[];
+extern const u8 Pokedude_Text_GrassEffectiveAgainstWater[];
+extern const u8 Pokedude_Text_LetsTryShiftingMons[];
+extern const u8 Pokedude_Text_ShiftingUsesTurn[];
+extern const u8 Pokedude_Text_ButterfreeDoubleResistsGrass[];
+extern const u8 Pokedude_Text_ButterfreeGoodAgainstOddish[];
+extern const u8 Pokedude_Text_YeahWeWon[];
+extern const u8 Pokedude_Text_WeakenMonBeforeCatching[];
+extern const u8 Pokedude_Text_BestIfTargetStatused[];
+extern const u8 Pokedude_Text_CantDoubleUpOnStatus[];
+extern const u8 Pokedude_Text_LetMeThrowBall[];
+extern const u8 Pokedude_Text_PickBestKindOfBall[];
 
 // party_menu
 extern const u8 gText_ChoosePokemon[];

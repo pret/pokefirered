@@ -125,7 +125,7 @@ static void SetPokedudeMonData(u8 monId);
 static void sub_8159478(u8 battlerId);
 static void PokedudeDoMoveAnimation(void);
 static void sub_81595EC(u8 taskId);
-static const u8 *GetPokeDudeText(void);
+static const u8 *GetPokedudeText(void);
 
 u8 *gUnknown_3005EE0[MAX_BATTLERS_COUNT];
 
@@ -421,42 +421,42 @@ static const struct Unk_84790E8 *const gUnknown_8479198[] =
     [TTVSCR_CATCHING] = gUnknown_8479168,
 };
 
-static const u8 *const sPokeDudeTexts_Battle[] =
+static const u8 *const sPokedudeTexts_Battle[] =
 {
-    PokeDude_Text_SpeedierBattlerGoesFirst,
-    PokeDude_Text_MyRattataFasterThanPidgey,
-    PokeDude_Text_BattlersTakeTurnsAttacking,
-    PokeDude_Text_MyRattataWonGetsEXP,
+    Pokedude_Text_SpeedierBattlerGoesFirst,
+    Pokedude_Text_MyRattataFasterThanPidgey,
+    Pokedude_Text_BattlersTakeTurnsAttacking,
+    Pokedude_Text_MyRattataWonGetsEXP,
 };
 
-static const u8 *const sPokeDudeTexts_Status[] =
+static const u8 *const sPokedudeTexts_Status[] =
 {
-    PokeDude_Text_UhOhRattataPoisoned,
-    PokeDude_Text_UhOhRattataPoisoned,
-    PokeDude_Text_HealStatusRightAway,
-    PokeDude_Text_UsingItemTakesTurn,
-    PokeDude_Text_YayWeManagedToWin,
+    Pokedude_Text_UhOhRattataPoisoned,
+    Pokedude_Text_UhOhRattataPoisoned,
+    Pokedude_Text_HealStatusRightAway,
+    Pokedude_Text_UsingItemTakesTurn,
+    Pokedude_Text_YayWeManagedToWin,
 };
 
-static const u8 *const sPokeDudeTexts_TypeMatchup[] =
+static const u8 *const sPokedudeTexts_TypeMatchup[] =
 {
-    PokeDude_Text_WaterNotVeryEffectiveAgainstGrass,
-    PokeDude_Text_GrassEffectiveAgainstWater,
-    PokeDude_Text_LetsTryShiftingMons,
-    PokeDude_Text_ShiftingUsesTurn,
-    PokeDude_Text_ButterfreeDoubleResistsGrass,
-    PokeDude_Text_ButterfreeGoodAgainstOddish,
-    PokeDude_Text_YeahWeWon,
+    Pokedude_Text_WaterNotVeryEffectiveAgainstGrass,
+    Pokedude_Text_GrassEffectiveAgainstWater,
+    Pokedude_Text_LetsTryShiftingMons,
+    Pokedude_Text_ShiftingUsesTurn,
+    Pokedude_Text_ButterfreeDoubleResistsGrass,
+    Pokedude_Text_ButterfreeGoodAgainstOddish,
+    Pokedude_Text_YeahWeWon,
 };
 
-static const u8 *const sPokeDudeTexts_Catching[] =
+static const u8 *const sPokedudeTexts_Catching[] =
 {
-    PokeDude_Text_WeakenMonBeforeCatching,
-    PokeDude_Text_WeakenMonBeforeCatching,
-    PokeDude_Text_BestIfTargetStatused,
-    PokeDude_Text_CantDoubleUpOnStatus,
-    PokeDude_Text_LetMeThrowBall,
-    PokeDude_Text_PickBestKindOfBall,
+    Pokedude_Text_WeakenMonBeforeCatching,
+    Pokedude_Text_WeakenMonBeforeCatching,
+    Pokedude_Text_BestIfTargetStatused,
+    Pokedude_Text_CantDoubleUpOnStatus,
+    Pokedude_Text_LetMeThrowBall,
+    Pokedude_Text_PickBestKindOfBall,
 };
 
 static const struct PokedudeBattlePartyInfo sParties_Battle[] =
@@ -2595,7 +2595,7 @@ static void sub_8159BA8(void)
         break;
     case 2:
         gBattle_BG0_Y = 0;
-        BattleStringExpandPlaceholdersToDisplayedString(GetPokeDudeText());
+        BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gUnknown_3005EE0[gActiveBattler][2];
         break;
@@ -2656,7 +2656,7 @@ static void sub_8159D04(void)
         }
         break;
     case 3:
-        BattleStringExpandPlaceholdersToDisplayedString(GetPokeDudeText());
+        BattleStringExpandPlaceholdersToDisplayedString(GetPokedudeText());
         BattlePutTextOnWindow(gDisplayedStringBattle, 24);
         ++gUnknown_3005EE0[gActiveBattler][2];
         break;
@@ -2696,19 +2696,19 @@ static void sub_8159D04(void)
     }
 }
 
-static const u8 *GetPokeDudeText(void)
+static const u8 *GetPokedudeText(void)
 {
     switch (gBattleStruct->field_96)
     {
     case TTVSCR_BATTLE:
     default:
-        return sPokeDudeTexts_Battle[gBattleStruct->field_97 - 1];
+        return sPokedudeTexts_Battle[gBattleStruct->field_97 - 1];
     case TTVSCR_STATUS:
-        return sPokeDudeTexts_Status[gBattleStruct->field_97 - 1];
+        return sPokedudeTexts_Status[gBattleStruct->field_97 - 1];
     case TTVSCR_MATCHUPS:
-        return sPokeDudeTexts_TypeMatchup[gBattleStruct->field_97 - 1];
+        return sPokedudeTexts_TypeMatchup[gBattleStruct->field_97 - 1];
     case TTVSCR_CATCHING:
-        return sPokeDudeTexts_Catching[gBattleStruct->field_97 - 1];
+        return sPokedudeTexts_Catching[gBattleStruct->field_97 - 1];
     }
 }
 

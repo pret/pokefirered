@@ -1358,4 +1358,4 @@ Text_TestMsg:: @ 81ACD45
 	.include "data/scripts/test.inc"
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
-	.include "data/text/poke_dude.inc"
+	.include "data/text/pokedude.inc"

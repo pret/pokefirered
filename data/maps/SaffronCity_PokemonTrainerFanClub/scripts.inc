@@ -119,42 +119,42 @@ SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions:: @ 816F1
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable:: @ 816F207
 	setobjectxyperm 1, 5, 2
-	setobjectmovementtype 1, 7
+	setobjectmovementtype 1, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable:: @ 816F213
 	setobjectxyperm 3, 7, 4
-	setobjectmovementtype 3, 9
+	setobjectmovementtype 3, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable:: @ 816F21F
 	setobjectxyperm 4, 2, 2
-	setobjectmovementtype 4, 7
+	setobjectmovementtype 4, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable:: @ 816F22B
 	setobjectxyperm 2, 3, 4
-	setobjectmovementtype 2, 10
+	setobjectmovementtype 2, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable:: @ 816F237
 	setobjectxyperm 6, 4, 6
-	setobjectmovementtype 6, 7
+	setobjectmovementtype 6, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable:: @ 816F243
 	setobjectxyperm 5, 10, 3
-	setobjectmovementtype 5, 7
+	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable:: @ 816F24F
 	setobjectxyperm 7, 7, 5
-	setobjectmovementtype 7, 9
+	setobjectmovementtype 7, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable:: @ 816F25B
 	setobjectxyperm 8, 9, 6
-	setobjectmovementtype 8, 9
+	setobjectmovementtype 8, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting:: @ 816F267

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "dodrio_berry_picking.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "m4a.h"
@@ -10,6 +11,7 @@
 #include "task.h"
 #include "constants/songs.h"
 #include "constants/fanfares.h"
+#include "constants/items.h"
 
 struct DodrioSubstruct_0160
 {
@@ -166,7 +168,9 @@ void sub_81531FC(void);
 u8 sub_815327C(u8);
 void sub_81532B8(void);
 void sub_815336C(void);
+u32 sub_8153424(u8 mpId);
 u32 sub_81534AC(void);
+u32 Min(u32 x, u32 y);
 void sub_8153A9C(void);
 void sub_8153AFC(struct DodrioSubstruct_318C * unk318C, u8 a1, u8 a2, u8 a3);
 void sub_8153BC0(u8 a0);
@@ -2331,6 +2335,281 @@ void sub_8153048(void)
 }
 
 const s16 sUnknown_84755D8[] = {10, 30, 50, 50};
+
+void sub_8153150(void)
+{
+    u8 i, var = 0, var2 = 0;
+
+    switch (gUnknown_203F3E0->unk24)
+    {
+    case 4:  var = 1; break;
+    case 5:  var = 2; break;
+    }
+
+    var2 = Random() % 10;
+    for (i = 0; i < 5; i++)
+        gUnknown_203F3E0->unk4A[i][4] = sUnknown_8475558[var][var2];
+}
+
+u32 sub_81531BC(u8 arg0)
+{
+    u32 sum = gUnknown_203F3E0->unk4A[arg0][0]
+              + gUnknown_203F3E0->unk4A[arg0][1]
+              + gUnknown_203F3E0->unk4A[arg0][2];
+    return min(sum, 9999);
+}
+
+void sub_81531FC(void)
+{
+    u32 berriesPicked = Min(sub_81531BC(gUnknown_203F3E0->multiplayerId), 9999);
+    u32 score = Min(sub_8153424(gUnknown_203F3E0->multiplayerId), 999990);
+
+    if (gSaveBlock2Ptr->berryPick.bestScore < score)
+        gSaveBlock2Ptr->berryPick.bestScore = score;
+    if (gSaveBlock2Ptr->berryPick.berriesPicked < berriesPicked)
+        gSaveBlock2Ptr->berryPick.berriesPicked = berriesPicked;
+    if (gSaveBlock2Ptr->berryPick.berriesPickedInRow < gUnknown_203F3E0->unk114)
+        gSaveBlock2Ptr->berryPick.berriesPickedInRow = gUnknown_203F3E0->unk114;
+}
+
+u8 sub_815327C(u8 arg0)
+{
+    u8 i, saved;
+
+    saved = gUnknown_203F3E0->unk98[3];
+    for (i = 3; i != 0; i--)
+        gUnknown_203F3E0->unk98[i] = gUnknown_203F3E0->unk98[i - 1];
+    gUnknown_203F3E0->unk98[0] = arg0;
+    return saved;
+}
+
+void sub_81532B8(void)
+{
+    if (gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] == 0)
+    {
+        if (gMain.newKeys & DPAD_UP)
+        {
+            gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 2;
+            gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
+            PlaySE(SE_W204);
+        }
+        else if (gMain.newKeys & DPAD_LEFT)
+        {
+            gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 3;
+            gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
+            PlaySE(SE_W204);
+        }
+        else if (gMain.newKeys & DPAD_RIGHT)
+        {
+            gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 1;
+            gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
+            PlaySE(SE_W204);
+        }
+        else
+        {
+            gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 0;
+        }
+    }
+    else
+    {
+        gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId]--;
+    }
+}
+
+void sub_815336C(void)
+{
+    gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 0;
+}
+
+u16 sub_8153390(void)
+{
+    return gUnknown_203F3E0->unk4A[gUnknown_203F3E0->multiplayerId][4] + FIRST_BERRY_INDEX;
+}
+
+u8 sub_81533B4(void)
+{
+    return gUnknown_203F3E0->unk24;
+}
+
+u8 *sub_81533C4(u8 id)
+{
+    if (gReceivedRemoteLinkPlayers)
+        return gLinkPlayers[id].name;
+    else
+        return gUnknown_203F3E0->unk31A0[id].name;
+}
+
+u16 sub_8153404(u8 arg0, u8 arg1)
+{
+    return gUnknown_203F3E0->unk4A[arg0][arg1];
+}
+
+u32 sub_8153424(u8 arg0)
+{
+    u8 i;
+    u32 var, sum = 0;
+
+    for (i = 0; i < 3; i++)
+        sum += gUnknown_203F3E0->unk4A[arg0][i] * sUnknown_84755D8[i];
+
+    var = gUnknown_203F3E0->unk4A[arg0][3] * sUnknown_84755D8[3];
+    if (sum <= var)
+        return 0;
+    else
+        return sum - var;
+}
+
+u32 sub_81534AC(void)
+{
+    u8 i, count = gUnknown_203F3E0->unk24;
+    u32 maxVar = sub_8153424(0);
+
+    for (i = 1; i < count; i++)
+    {
+        u32 var = sub_8153424(i);
+        if (var > maxVar)
+            maxVar = var;
+    }
+    return Min(maxVar, 999990);
+}
+
+u32 sub_81534F0(u8 arg0)
+{
+    u8 i, count = gUnknown_203F3E0->unk24;
+    u16 maxVar = gUnknown_203F3E0->unk4A[0][arg0];
+
+    for (i = 0; i < count; i++)
+    {
+        u16 var = gUnknown_203F3E0->unk4A[i][arg0];
+        if (var > maxVar)
+            maxVar = var;
+    }
+    return maxVar;
+}
+
+u32 sub_8153534(u8 arg0)
+{
+    u32 vals[5], temp;
+    s16 r6 = TRUE;
+    u8 i, count = gUnknown_203F3E0->unk24;
+
+    for (i = 0; i < count; i++)
+        vals[i] = temp = sub_8153424(i);
+
+    while (r6)
+    {
+        r6 = FALSE;
+        for (i = 0; i < count - 1; i++)
+        {
+            if (vals[i] < vals[i + 1])
+            {
+                SWAP(vals[i], vals[i + 1], temp);
+                r6 = TRUE;
+            }
+        }
+    }
+
+    return vals[arg0];
+}
+
+u32 sub_81535B0(void)
+{
+    u8 i, r10 = 0, r8 = 0, r9 = 0, count = gUnknown_203F3E0->unk24;
+
+    // Function called two times for some reason.
+    sub_81534AC();
+    if (sub_81534AC() == 0)
+    {
+        for (i = 0; i < count; i++)
+        {
+            gUnknown_203F3E0->unk3308[i].unk0 = 4;
+            gUnknown_203F3E0->unk3308[i].unk4 = 0;
+        }
+    }
+
+    for (i = 0; i < count; i++)
+        gUnknown_203F3E0->unk3308[i].unk4 = Min(sub_8153424(i), 999990);
+
+    do
+    {
+        u32 r6 = sub_8153534(r10);
+        u8 r3 = r8;
+        for (i = 0; i < count; i++)
+        {
+            if (r6 == gUnknown_203F3E0->unk3308[i].unk4)
+            {
+                gUnknown_203F3E0->unk3308[i].unk0 = r3;
+                r8++;
+                r9++;
+            }
+        }
+        r10 = r8;
+    } while (r9 < count);
+
+    return 0;
+}
+
+void sub_81536A0(struct DodrioSubstruct_3308 *dst, u8 id)
+{
+    *dst = gUnknown_203F3E0->unk3308[id];
+}
+
+u8 sub_81536C0(u8 arg0)
+{
+    u8 i, ret = 0, count = gUnknown_203F3E0->unk24;
+    u32 var, vars[5] = {0};
+
+    for (i = 0; i < count; i++)
+        vars[i] = sub_8153424(i);
+
+    var = vars[arg0];
+    for (i = 0; i < 5; i++)
+    {
+        if (i != arg0 && var < vars[i])
+            ret++;
+    }
+
+    return ret;
+}
+
+u8 sub_815372C(void)
+{
+    u8 multiplayerId = gUnknown_203F3E0->multiplayerId;
+    u16 itemId = sub_8153390();
+
+    if (sub_8153424(multiplayerId) != sub_81534AC())
+        return 3;
+    if (!CheckBagHasSpace(itemId, 1))
+        return 2;
+
+    AddBagItem(itemId, 1);
+    if (!CheckBagHasSpace(itemId, 1))
+        return 1;
+    return 0;
+}
+
+// Really? What next, u32 Add(u32 a)return a+1;?
+u32 IncrementWithLimit(u32 a, u32 max)
+{
+    if (a < max)
+        return a + 1;
+    else
+        return max;
+}
+
+// Gamefreak pls, min(a, b) ((a) < (b) ? (a) : (b)) is a well-known macro
+u32 Min(u32 a, u32 b)
+{
+    if (a < b)
+        return a;
+    else
+        return b;
+}
+
+u8 sub_81537AC(u8 id)
+{
+    return gUnknown_203F3E0->unk34[id];
+}
 
 // Data related to printing saved results.
 const struct WindowTemplate sUnknown_84755E0 =

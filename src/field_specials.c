@@ -46,6 +46,7 @@
 #include "constants/moves.h"
 #include "constants/menu.h"
 #include "constants/event_objects.h"
+#include "constants/metatile_labels.h"
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
@@ -211,6 +212,9 @@ bool8 PlayerHasGrassPokemonInParty(void)
     return FALSE;
 }
 
+#define tState data[0]
+#define tTimer data[1]
+
 void AnimatePcTurnOn(void)
 {
     u8 taskId;
@@ -218,27 +222,31 @@ void AnimatePcTurnOn(void)
     if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE)
     {
         taskId = CreateTask(Task_AnimatePcTurnOn, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tTimer = 0;
     }
 }
 
+// PC flickers on and off while turning on
 static void Task_AnimatePcTurnOn(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (data[1] == 6)
+    if (tTimer == 6)
     {
-        PcTurnOnUpdateMetatileId(data[0] & 1);
+        PcTurnOnUpdateMetatileId(tState & 1);
         DrawWholeMapView();
-        data[1] = 0;
-        data[0]++;
-        if (data[0] == 5)
+        tTimer = 0;
+        tState++;
+        if (tState == 5)
             DestroyTask(taskId);
     }
-    data[1]++;
+    tTimer++;
 }
 
-static void PcTurnOnUpdateMetatileId(bool16 a0)
+#undef tState
+#undef tTimer
+
+static void PcTurnOnUpdateMetatileId(bool16 flickerOff)
 {
     u16 metatileId = 0;
     s8 deltaX = 0;
@@ -260,25 +268,25 @@ static void PcTurnOnUpdateMetatileId(bool16 a0)
         deltaY = -1;
         break;
     }
-    if (a0)
+    if (flickerOff)
     {
         if (gSpecialVar_0x8004 == 0)
-            metatileId = 0x62;
+            metatileId = METATILE_Building_PCOff;
         else if (gSpecialVar_0x8004 == 1)
-            metatileId = 0x28F;
+            metatileId = METATILE_GenericBuilding1_PlayersPCOff;
         else if (gSpecialVar_0x8004 == 2)
-            metatileId = 0x28F;
+            metatileId = METATILE_GenericBuilding1_PlayersPCOff;
     }
     else
     {
         if (gSpecialVar_0x8004 == 0)
-            metatileId = 0x63;
+            metatileId = METATILE_Building_PCOn;
         else if (gSpecialVar_0x8004 == 1)
-            metatileId = 0x28A;
+            metatileId = METATILE_GenericBuilding1_PlayersPCOn;
         else if (gSpecialVar_0x8004 == 2)
-            metatileId = 0x28A;
+            metatileId = METATILE_GenericBuilding1_PlayersPCOn;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + deltaX + 7, gSaveBlock1Ptr->pos.y + deltaY + 7, metatileId | 0xC00);
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + deltaX + 7, gSaveBlock1Ptr->pos.y + deltaY + 7, metatileId | METATILE_COLLISION_MASK);
 }
 
 void AnimatePcTurnOff()
@@ -304,12 +312,12 @@ void AnimatePcTurnOff()
         break;
     }
     if (gSpecialVar_0x8004 == 0)
-        metatileId = 0x62;
+        metatileId = METATILE_Building_PCOff;
     else if (gSpecialVar_0x8004 == 1)
-        metatileId = 0x28F;
+        metatileId = METATILE_GenericBuilding1_PlayersPCOff;
     else if (gSpecialVar_0x8004 == 2)
-        metatileId = 0x28F;
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + deltaX + 7, gSaveBlock1Ptr->pos.y + deltaY + 7, metatileId | 0xC00);
+        metatileId = METATILE_GenericBuilding1_PlayersPCOff;
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + deltaX + 7, gSaveBlock1Ptr->pos.y + deltaY + 7, metatileId | METATILE_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -770,15 +778,39 @@ static const u8 sUnused_83F5B84[] = {
 };
 
 static const u16 sElevatorWindowMetatilesGoingUp[][3] = {
-    {0x2e8, 0x2e9, 0x2ea},
-    {0x2f0, 0x2f1, 0x2f2},
-    {0x2f8, 0x2f9, 0x2fa}
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0, 
+        METATILE_SilphCo_ElevatorWindow_Top1, 
+        METATILE_SilphCo_ElevatorWindow_Top2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0, 
+        METATILE_SilphCo_ElevatorWindow_Mid1, 
+        METATILE_SilphCo_ElevatorWindow_Mid2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0, 
+        METATILE_SilphCo_ElevatorWindow_Bottom1, 
+        METATILE_SilphCo_ElevatorWindow_Bottom2
+    }
 };
 
 static const u16 sElevatorWindowMetatilesGoingDown[][3] = {
-    {0x2e8, 0x2ea, 0x2e9},
-    {0x2f0, 0x2f2, 0x2f1},
-    {0x2f8, 0x2fa, 0x2f9}
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0, 
+        METATILE_SilphCo_ElevatorWindow_Top2, 
+        METATILE_SilphCo_ElevatorWindow_Top1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0, 
+        METATILE_SilphCo_ElevatorWindow_Mid2, 
+        METATILE_SilphCo_ElevatorWindow_Mid1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0, 
+        METATILE_SilphCo_ElevatorWindow_Bottom2, 
+        METATILE_SilphCo_ElevatorWindow_Bottom1
+    }
 };
 
 static const u8 sElevatorAnimationDuration[] = {
@@ -1114,7 +1146,7 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
             {
                 for (j = 0; j < 3; j++)
                 {
-                    MapGridSetMetatileIdAt(j + 8, i + 7, sElevatorWindowMetatilesGoingUp[i][data[0] % 3] | 0xC00);
+                    MapGridSetMetatileIdAt(j + 8, i + 7, sElevatorWindowMetatilesGoingUp[i][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
@@ -1124,7 +1156,7 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
             {
                 for (j = 0; j < 3; j++)
                 {
-                    MapGridSetMetatileIdAt(j + 8, i + 7, sElevatorWindowMetatilesGoingDown[i][data[0] % 3] | 0xC00);
+                    MapGridSetMetatileIdAt(j + 8, i + 7, sElevatorWindowMetatilesGoingDown[i][data[0] % 3] | METATILE_COLLISION_MASK);
                 }
             }
         }
@@ -2277,7 +2309,7 @@ bool8 CutMoveRuinValleyCheck(void)
 
 void CutMoveOpenDottedHoleDoor(void)
 {
-    MapGridSetMetatileIdAt(31, 31, 0x358);
+    MapGridSetMetatileIdAt(31, 31, METATILE_SeviiIslands67_DottedHoleDoor_Open);
     DrawWholeMapView();
     PlaySE(SE_BAN);
     FlagSet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE);

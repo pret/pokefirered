@@ -13,6 +13,7 @@
 #include "task.h"
 #include "constants/field_tasks.h"
 #include "constants/flags.h"
+#include "constants/metatile_labels.h"
 #include "constants/songs.h"
 #include "constants/vars.h"
 
@@ -37,15 +38,15 @@ static const TaskFunc sPerStepCallbacks[] =
 
 static const u8 sIcefallCaveIceTileCoords[][2] =
 {
-    { 0x08, 0x03 },
-    { 0x0a, 0x05 },
-    { 0x0f, 0x05 },
-    { 0x08, 0x09 },
-    { 0x09, 0x09 },
-    { 0x10, 0x09 },
-    { 0x08, 0x0a },
-    { 0x09, 0x0a },
-    { 0x08, 0x0e }
+    {  8,  3 },
+    { 10,  5 },
+    { 15,  5 },
+    {  8,  9 },
+    {  9,  9 },
+    { 16,  9 },
+    {  8, 10 },
+    {  9, 10 },
+    {  8, 14 }
 };
 
 static void Task_RunPerStepCallback(u8 taskId)
@@ -146,7 +147,7 @@ void SetIcefallCaveCrackedIceMetatiles(void)
         {
             int x = sIcefallCaveIceTileCoords[i][0] + 7;
             int y = sIcefallCaveIceTileCoords[i][1] + 7;
-            MapGridSetMetatileIdAt(x, y, 0x35a);
+            MapGridSetMetatileIdAt(x, y, METATILE_SeafoamIslands_CrackedIce);
         }
     }
 }
@@ -199,7 +200,7 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
                 x = data[4];
                 y = data[5];
                 PlaySE(SE_RU_BARI);
-                MapGridSetMetatileIdAt(x, y, 0x35a);
+                MapGridSetMetatileIdAt(x, y, METATILE_SeafoamIslands_CrackedIce);
                 CurrentMapDrawMetatileAt(x, y);
                 data[1] = 1;
             }
@@ -214,7 +215,7 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
                 x = data[4];
                 y = data[5];
                 PlaySE(SE_RU_GASYAN);
-                MapGridSetMetatileIdAt(x, y, 0x35b);
+                MapGridSetMetatileIdAt(x, y, METATILE_SeafoamIslands_IceHole);
                 CurrentMapDrawMetatileAt(x, y);
                 VarSet(VAR_TEMP_1, 1);
                 data[1] = 1;

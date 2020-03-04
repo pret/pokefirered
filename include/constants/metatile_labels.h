@@ -12,11 +12,21 @@
 #define METATILE_General_ThinTreeTop_Mowed 0x013
 #define METATILE_General_CalmWater  0x12B
 
+// gTileset_Building
+#define METATILE_Building_PCOff 0x062
+#define METATILE_Building_PCOn  0x063
+
+// gTileset_GenericBuilding1
+#define METATILE_GenericBuilding1_PlayersPCOn  0x28A
+#define METATILE_GenericBuilding1_PlayersPCOff 0x28F
+
 // gTileset_Mart
 #define METATILE_Mart_CounterMid_Top     0x2BF
 #define METATILE_Mart_CounterMid_Bottom  0x2C0    
 
 // gTileset_PokemonCenter
+#define METATILE_PokemonCenter_Floor_ShadeLeft                       0x2C5
+#define METATILE_PokemonCenter_CounterBarrier                        0x2F9
 #define METATILE_PokemonCenter_NetworkMachine_ScreenLeft_On          0x35A
 #define METATILE_PokemonCenter_NetworkMachine_ScreenRight_On         0x35B
 #define METATILE_PokemonCenter_NetworkMachine_Ruby                   0x35D
@@ -94,6 +104,8 @@
 #define METATILE_GameCorner_PurpleWall_Floor         0x2CF
 #define METATILE_GameCorner_PurpleWall_StairsTop     0x2A6
 #define METATILE_GameCorner_PurpleWall_stairsBottom  0x2A7
+#define METATILE_GameCorner_CheckeredFloor_ShadeLeft 0x2E1
+#define METATILE_GameCorner_CounterBarrier           0x2F7
 
 // gTileset_PokemonMansion
 #define METATILE_PokemonMansion_Floor                                    0x284
@@ -128,17 +140,44 @@
 #define METATILE_PokemonMansion_Statue_RedEyes_Shade                     0x34E
 #define METATILE_PokemonMansion_Statue_RedEyes_Basement                  0x34F
 
-// gTileset_SilphCo  TODO: Bring below metatile labels in line with new tileset name
-#define METATILE_Hideout_Arrow_Up               0x2A0
-#define METATILE_Hideout_Arrow_Left             0x2A1
-#define METATILE_Hideout_Arrow_Down             0x2A8
-#define METATILE_Hideout_Arrow_RIght            0x2A9   
-#define METATILE_Hideout_Barrier_TopLeft_Floor  0x2CE
-#define METATILE_Hideout_Barrier_TopRight_Floor 0x2CF
-#define METATILE_Hideout_Barrier_BottomLeft     0x2D6
-#define METATILE_Hideout_Barrier_BottomRight    0x2D7
-#define METATILE_Hideout_Floor                  0x281
-#define METATILE_Hideout_Floor_ShadeFull        0x282
+// gTileset_SilphCo  Includes Silph Co, Rocket Hideout/Warehouse, and all Elevators
+#define METATILE_SilphCo_HideoutFloor                   0x281
+#define METATILE_SilphCo_HideoutFloor_ShadeFull         0x282
+#define METATILE_SilphCo_Arrow_Up                       0x2A0
+#define METATILE_SilphCo_Arrow_Left                     0x2A1
+#define METATILE_SilphCo_Arrow_Down                     0x2A8
+#define METATILE_SilphCo_Arrow_Right                    0x2A9 
+#define METATILE_SilphCo_HideoutBarrier_TopLeft_Wall    0x2C6
+#define METATILE_SilphCo_HideoutBarrier_TopRight_Wall   0x2C7
+#define METATILE_SilphCo_HideoutBarrier_TopLeft_Floor   0x2CE
+#define METATILE_SilphCo_HideoutBarrier_TopRight_Floor  0x2CF
+#define METATILE_SilphCo_HideoutBarrier_BottomLeft      0x2D6
+#define METATILE_SilphCo_HideoutBarrier_BottomRight     0x2D7 
+#define METATILE_SilphCo_ElevatorWindow_Top0            0x2E8
+#define METATILE_SilphCo_ElevatorWindow_Top1            0x2E9
+#define METATILE_SilphCo_ElevatorWindow_Top2            0x2EA
+#define METATILE_SilphCo_ElevatorWindow_Mid0            0x2F0
+#define METATILE_SilphCo_ElevatorWindow_Mid1            0x2F1
+#define METATILE_SilphCo_ElevatorWindow_Mid2            0x2F2
+#define METATILE_SilphCo_ElevatorWindow_Bottom0         0x2F8
+#define METATILE_SilphCo_ElevatorWindow_Bottom1         0x2F9
+#define METATILE_SilphCo_ElevatorWindow_Bottom2         0x2FA
+#define METATILE_SilphCo_Floor                          0x334
+#define METATILE_SilphCo_Floor_ShadeFull                0x335
+#define METATILE_SilphCo_Floor_WallLeftCorner           0x339
+#define METATILE_SilphCo_Floor_WallRightCorner          0x33A
+#define METATILE_SilphCo_Wall_RightEdge                 0x346
+#define METATILE_SilphCo_Wall_LeftEdge                  0x347
+#define METATILE_SilphCo_HorizontalBarrier_TopLeft      0x3B0
+#define METATILE_SilphCo_HorizontalBarrier_TopRight     0x3B1
+#define METATILE_SilphCo_HorizontalBarrier_BottomLeft   0x3B8
+#define METATILE_SilphCo_HorizontalBarrier_BottomRight  0x3B9
+#define METATILE_SilphCo_VerticalBarrier_TopLeft        0x3C0
+#define METATILE_SilphCo_VerticalBarrier_TopRight       0x3C1
+#define METATILE_SilphCo_VerticalBarrier_MidLeft        0x3C2
+#define METATILE_SilphCo_VerticalBarrier_MidRight       0x3C3
+#define METATILE_SilphCo_VerticalBarrier_BottomLeft     0x3C4
+#define METATILE_SilphCo_VerticalBarrier_BottomRight    0x3C5
 
 // gTileset_CinnabarGym
 #define METATILE_CinnabarGym_Floor                  0x281
@@ -169,6 +208,12 @@
 #define METATILE_Cave_Floor_Ledge_Bottom 0x2E1
 #define METATILE_Cave_RockBarrier_Top    0x307
 #define METATILE_Cave_RockBarrier_Bottom 0x317
+
+// gTileset_SeafoamIslands
+#define METATILE_SeafoamIslands_SlidingIce   0x34B
+#define METATILE_SeafoamIslands_UncrackedIce 0x359
+#define METATILE_SeafoamIslands_CrackedIce   0x35A
+#define METATILE_SeafoamIslands_IceHole      0x35B
 
 // gTileset_TrainerTower
 #define METATILE_TrainerTower_Floor_ShadeBottomLeft  0x287

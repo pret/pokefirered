@@ -2111,7 +2111,7 @@ bool8 ScrCmd_setmetatile(struct ScriptContext *ctx)
     if (!v8)
         MapGridSetMetatileIdAt(x, y, tileId);
     else
-        MapGridSetMetatileIdAt(x, y, tileId | 0xC00);
+        MapGridSetMetatileIdAt(x, y, tileId | METATILE_COLLISION_MASK);
     return FALSE;
 }
 

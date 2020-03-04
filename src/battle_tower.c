@@ -177,7 +177,7 @@ static const u16 sLongStreakPrizes[] = {
     ITEM_CHOICE_BAND
 };
 
-void ScrSpecial_BattleTowerMapScript2(void)
+void BattleTowerMapScript2(void)
 {
     u8 count = 0;
     s32 levelType;

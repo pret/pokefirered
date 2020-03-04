@@ -944,7 +944,7 @@ static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 ScrSpecial_CreatePCMenu(void)
+bool8 CreatePCMenu(void)
 {
     if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;

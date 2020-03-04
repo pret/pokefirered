@@ -2151,7 +2151,7 @@ void ResetTrainerFanClub(void)
     VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, 0);
 }
 
-void Special_TryLoseFansFromPlayTimeAfterLinkBattle(void)
+void Script_TryLoseFansFromPlayTimeAfterLinkBattle(void)
 {
     TryLoseFansFromPlayTimeAfterLinkBattle(TRAINER_FAN_CLUB);
 }
@@ -2165,7 +2165,7 @@ static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *fanClu
     }
 }
 
-void Special_UpdateTrainerFanClubGameClear(void)
+void Script_UpdateTrainerFanClubGameClear(void)
 {
     UpdateTrainerFanClubGameClear(TRAINER_FAN_CLUB);
 }
@@ -2282,7 +2282,7 @@ static u8 PlayerLoseRandomTrainerFan(struct TrainerFanClub *fanClub)
     return sFanClubMemberIds[idx];
 }
 
-u16 Special_GetNumFansOfPlayerInTrainerFanClub(void)
+u16 Script_GetNumFansOfPlayerInTrainerFanClub(void)
 {
     return GetNumFansOfPlayerInTrainerFanClub(TRAINER_FAN_CLUB);
 }
@@ -2301,7 +2301,7 @@ static u16 GetNumFansOfPlayerInTrainerFanClub(struct TrainerFanClub *fanClub)
     return count;
 }
 
-void Special_TryLoseFansFromPlayTime(void)
+void Script_TryLoseFansFromPlayTime(void)
 {
     TryLoseFansFromPlayTime(TRAINER_FAN_CLUB);
 }
@@ -2335,7 +2335,7 @@ static void TryLoseFansFromPlayTime(struct TrainerFanClub *fanClub)
     }
 }
 
-bool16 Special_IsFanClubMemberFanOfPlayer(void)
+bool16 Script_IsFanClubMemberFanOfPlayer(void)
 {
     return IsFanClubMemberFanOfPlayer(TRAINER_FAN_CLUB);
 }
@@ -2352,7 +2352,7 @@ static void SetInitialFansOfPlayer(struct TrainerFanClub *fanClub)
     SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER3);
 }
 
-void Special_BufferFanClubTrainerName(void)
+void Script_BufferFanClubTrainerName(void)
 {
     u8 whichLinkTrainer = 0;
     u8 whichNPCTrainer = 0;
@@ -2446,7 +2446,7 @@ static bool8 DidPlayerGetFirstFans(struct TrainerFanClub *fanClub)
     return fanClub->gotInitialFans;
 }
 
-void Special_SetPlayerGotFirstFans(void)
+void Script_SetPlayerGotFirstFans(void)
 {
     SetPlayerGotFirstFans(TRAINER_FAN_CLUB);
 }
@@ -2456,7 +2456,7 @@ static void SetPlayerGotFirstFans(struct TrainerFanClub *fanClub)
     fanClub->gotInitialFans = TRUE;
 }
 
-u8 Special_TryGainNewFanFromCounter(void)
+u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(TRAINER_FAN_CLUB, gSpecialVar_0x8004);
 }

@@ -1168,7 +1168,7 @@ static void Task_AnimateElevatorWindowView(u8 taskId)
     data[1]++;
 }
 
-void Special_ListMenu(void)
+void ListMenu(void)
 {
     u8 taskId;
     struct Task * task;
@@ -1472,7 +1472,7 @@ static void Task_SuspendListMenu(u8 taskId)
     }
 }
 
-void Special_ReturnToListMenu(void)
+void ReturnToListMenu(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_SuspendListMenu);
     if (taskId == 0xFF)
@@ -1948,7 +1948,7 @@ void sub_80CC59C(void)
     }
 }
 
-u16 Special_BattleCardAction(void)
+u16 BattleCardAction(void)
 {
     switch (gSpecialVar_Result)
     {

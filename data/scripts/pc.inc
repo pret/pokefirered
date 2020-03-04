@@ -3,7 +3,7 @@ EventScript_PC:: @ 81A6955
 	lockall
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
 	setvar VAR_0x8004, 27
-	special Special_SetSomeVariable
+	special HelpSystem_SetSomeVariable
 	setvar VAR_0x8004, 0
 	special AnimatePcTurnOn
 	playse SE_PC_ON
@@ -20,7 +20,7 @@ EventScript_PCDisabled:: @ 81A698E
 EventScript_PCMainMenu:: @ 81A6998
 	message Text_AccessWhichPC
 	waitmessage
-	special ScrSpecial_CreatePCMenu
+	special CreatePCMenu
 	waitstate
 	goto EventScript_ChoosePCMenu
 	end
@@ -51,7 +51,7 @@ EventScript_AccessPokemonStorage:: @ 81A6A05
 	special ShowPokemonStorageSystem
 	waitstate
 	setvar VAR_0x8004, 27
-	special Special_SetSomeVariable
+	special HelpSystem_SetSomeVariable
 	goto EventScript_PCMainMenu
 	end
 
@@ -76,7 +76,7 @@ EventScript_AccessHallOfFame:: @ 81A6A56
 	playse SE_PC_LOGIN
 	setvar VAR_0x8004, 31
 	special HelpSystem_BackupSomeVariable
-	special Special_SetSomeVariable
+	special HelpSystem_SetSomeVariable
 	special HallOfFamePCBeginFade
 	waitstate
 	special HelpSystem_RestoreSomeVariable

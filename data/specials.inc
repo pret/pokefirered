@@ -62,7 +62,7 @@ gSpecials:: @ 815FD60
 	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
-	def_special ScrSpecial_HasTrainerBeenFought
+	def_special Script_HasTrainerBeenFought
 	def_special EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
@@ -171,14 +171,14 @@ gSpecials:: @ 815FD60
 	def_special NullFieldSpecial  @ Berry Blender/Roulette specials
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
-	def_special Special_IsFanClubMemberFanOfPlayer
-	def_special Special_GetNumFansOfPlayerInTrainerFanClub
-	def_special Special_BufferFanClubTrainerName
-	def_special Special_TryLoseFansFromPlayTimeAfterLinkBattle
-	def_special Special_TryLoseFansFromPlayTime
-	def_special Special_SetPlayerGotFirstFans
-	def_special Special_UpdateTrainerFanClubGameClear
-	def_special Special_TryGainNewFanFromCounter
+	def_special Script_IsFanClubMemberFanOfPlayer
+	def_special Script_GetNumFansOfPlayerInTrainerFanClub
+	def_special Script_BufferFanClubTrainerName
+	def_special Script_TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special Script_TryLoseFansFromPlayTime
+	def_special Script_SetPlayerGotFirstFans
+	def_special Script_UpdateTrainerFanClubGameClear
+	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
 	def_special NullFieldSpecial  @ Gabby and Ty specials
 	def_special NullFieldSpecial
@@ -239,7 +239,7 @@ gSpecials:: @ 815FD60
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special GetLeadMonFriendship
-	def_special ScrSpecial_BattleTowerMapScript2
+	def_special BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
 	def_special PrintBattleTowerTrainerGreeting
@@ -270,7 +270,7 @@ gSpecials:: @ 815FD60
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
-	def_special ScrSpecial_CreatePCMenu
+	def_special CreatePCMenu
 	def_special HallOfFamePCBeginFade
 	def_special ShowDiploma
 	def_special NullFieldSpecial  @ Check lead mon Contest strength specials
@@ -352,8 +352,8 @@ gSpecials:: @ 815FD60
 	def_special sub_810B82C
 	def_special StartMarowakBattle
 	def_special ForcePlayerOntoBike
-	def_special Special_ListMenu
-	def_special Special_ReturnToListMenu
+	def_special ListMenu
+	def_special ReturnToListMenu
 	def_special sub_80CADC4
 	def_special SetVermilionTrashCans
 	def_special sub_805D1A8
@@ -389,7 +389,7 @@ gSpecials:: @ 815FD60
 	def_special TakePokemonFromRoute5Daycare
 	def_special DoSeagallopFerryScene
 	def_special DoesPlayerPartyContainSpecies
-	def_special Special_SetSomeVariable
+	def_special HelpSystem_SetSomeVariable
 	def_special HelpSystem_BackupSomeVariable
 	def_special HelpSystem_RestoreSomeVariable
 	def_special ValidateReceivedWonderCard
@@ -398,10 +398,10 @@ gSpecials:: @ 815FD60
 	def_special BufferUnionRoomPlayerName
 	def_special sub_811390C
 	def_special GetMartClerkObjectId
-	def_special Special_BattleCardAction
+	def_special BattleCardAction
 	def_special GetQuestLogState
 	def_special sub_8112364
-	def_special Special_GetMENewsJisanItemAndState
+	def_special GetMENewsJisanItemAndState
 	def_special GetPCBoxToSendMon
 	def_special OpenMuseumFossilPic
 	def_special CloseMuseumFossilPic
@@ -422,8 +422,8 @@ gSpecials:: @ 815FD60
 	def_special CheckHasAtLeastOneBerry
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu
-	def_special Special_HasEnoughBerryPowder
-	def_special Special_TakeBerryPowder
+	def_special Script_HasEnoughBerryPowder
+	def_special Script_TakeBerryPowder
 	def_special PrintPlayerBerryPowderAmount
 	def_special DoPokemonLeagueLightingEffect
 	def_special ShowBerryCrushRankings

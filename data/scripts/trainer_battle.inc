@@ -10,7 +10,7 @@ EventScript_TryDoNormalTrainerBattle:: @ 81A4EC1
 	faceplayer
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar VAR_RESULT, Script_HasTrainerBeenFought
 	compare VAR_RESULT, FALSE
 	goto_if_ne EventScript_NoTrainerBattle
 	special PlayTrainerEncounterMusic
@@ -24,7 +24,7 @@ EventScript_TryDoDoubleTrainerBattle:: @ 81A4EE9
 	lock
 	faceplayer
 	call EventScript_RevealTrainer
-	specialvar VAR_RESULT, ScrSpecial_HasTrainerBeenFought
+	specialvar VAR_RESULT, Script_HasTrainerBeenFought
 	compare VAR_RESULT, FALSE
 	goto_if_ne EventScript_NoDoubleTrainerBattle
 	special HasEnoughMonsForDoubleBattle

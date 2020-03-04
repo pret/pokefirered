@@ -54,7 +54,7 @@ void MENewsJisanStepCounter(void)
     }
 }
 
-u16 Special_GetMENewsJisanItemAndState(void)
+u16 GetMENewsJisanItemAndState(void)
 {
     u16 *r6 = &gSpecialVar_Result;
     struct MENewsJisanStruct *r4 = GetMENewsJisanStructPtr();

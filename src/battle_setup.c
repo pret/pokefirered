@@ -848,7 +848,7 @@ u16 GetRivalBattleFlags(void)
     return sRivalBattleFlags;
 }
 
-u16 ScrSpecial_HasTrainerBeenFought(void)
+u16 Script_HasTrainerBeenFought(void)
 {
     return FlagGet(GetTrainerAFlag());
 }

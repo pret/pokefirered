@@ -37,7 +37,7 @@ PokedexRating_EventScript_DexCompleteFanfare:: @ 81A73DC
 PokedexRating_EventScript_Rate:: @ 81A73E0
 	setvar VAR_0x8004, 31
 	special HelpSystem_BackupSomeVariable
-	special Special_SetSomeVariable
+	special HelpSystem_SetSomeVariable
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005

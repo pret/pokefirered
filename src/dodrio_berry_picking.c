@@ -1,6 +1,8 @@
 #include "global.h"
 #include "gflib.h"
+#include "dodrio_berry_picking.h"
 #include "link.h"
+#include "link_rfu.h"
 #include "minigame_countdown.h"
 #include "strings.h"
 #include "task.h"
@@ -28,28 +30,6 @@ struct DodrioStruct_2022CF4
     u16 unk2A[10];
     u16 unk3E;
 }; // size = 0x40
-
-struct DodrioSubstruct_31A0_14
-{
-    u8 unk0[11];
-    u8 unkB[11];
-};
-
-struct DodrioSubstruct_31A0_2C
-{
-    u8 unk0;
-    u8 ALIGNED(4) unk4;
-    u8 ALIGNED(4) unk8;
-};
-
-struct DodrioSubstruct_31A0
-{
-    u8 name[0x10];
-    u32 unk10;
-    struct DodrioSubstruct_31A0_14 unk14;
-    struct DodrioSubstruct_31A0_2C unk2C;
-    u8 filler_35[4];
-}; // size = 0x3C
 
 struct DodrioSubstruct_318C
 {
@@ -159,6 +139,7 @@ void sub_8152048(struct DodrioSubstruct_318C * dodrioMon, struct Pokemon * party
 void sub_815205C(TaskFunc func, u8 priority);
 void sub_815206C(TaskFunc func);
 void sub_8152090(u8 a0);
+bool32 sub_81520B4(void);
 void sub_8152110(void);
 void sub_815256C(void);
 void sub_815293C(void);
@@ -167,18 +148,35 @@ void sub_81529A4(u8 a0, u8 *a1, u8 *a2);
 bool32 sub_8152A98(void);
 bool32 sub_8152AD8(void);
 void sub_8153004(void);
+void sub_8153048(void);
 void sub_8153150(void);
+void sub_81531FC(void);
 u8 sub_815327C(u8);
+void sub_81532B8(void);
+void sub_815336C(void);
+u32 sub_81534AC(void);
 void sub_8153A9C(void);
 void sub_8153AFC(struct DodrioSubstruct_318C * unk318C, u8 a1, u8 a2, u8 a3);
 void sub_8153BF8(u8 a0);
+void sub_8153D08(u8 playerCount);
 void sub_8153D80(bool8 a0, u8 a1);
+void sub_8153DD8(void);
 void nullsub_97(struct Sprite *sprite);
 void sub_8153E28(void);
+void sub_8153ED8(void);
+bool32 sub_8153F1C(void);
+void sub_81540DC(bool8 a0);
 void sub_8154128(void);
 void sub_815417C(void);
+void sub_8154274(void);
 void sub_81543E8(struct Sprite *sprite);
 void sub_8154438(void);
+void sub_81544F0(void);
+void sub_8154540(void);
+void sub_8154578(void);
+void sub_81545BC(bool8 a0);
+void sub_81546C0(void);
+void sub_8154730(void);
 void sub_8154968(struct DodrioSubstruct_0160 * unk0160);
 void sub_81549D4(u8 a0);
 void sub_8154A2C(void);
@@ -191,6 +189,7 @@ void sub_8155C2C(void);
 void sub_8155C80(void);
 void unused_0(void);
 void nullsub_98(void);
+u8 sub_8155E8C(void);
 
 // const rom data
 
@@ -496,7 +495,7 @@ void StartDodrioBerryPicking(u16 a0, MainCallback callback)
 {
     gUnknown_3002044 = FALSE;
 
-    if (gReceivedRemoteLinkPlayers != 0 && (gUnknown_203F3E0 = AllocZeroed(sizeof(*gUnknown_203F3E0))) != NULL)
+    if (gReceivedRemoteLinkPlayers && (gUnknown_203F3E0 = AllocZeroed(sizeof(*gUnknown_203F3E0))) != NULL)
     {
         sub_81508D8();
         sub_81508EC(gUnknown_203F3E0);
@@ -607,7 +606,7 @@ void sub_8150A84(u8 taskId)
     case 3:
         if (IsLinkTaskFinished())
         {
-            if (gReceivedRemoteLinkPlayers != 0)
+            if (gReceivedRemoteLinkPlayers)
             {
                 LoadWirelessStatusIndicatorSpriteGfx();
                 CreateWirelessStatusIndicatorSprite(0, 0);
@@ -904,6 +903,469 @@ void sub_8150FDC(void)
             FadeOutAndPlayNewMapMusic(MUS_WIN_YASEI, 4);
         }
         break;
+    }
+}
+
+void sub_815109C(void)
+{
+    u8 i;
+    u8 blockReceivedStatus;
+
+    switch (gUnknown_203F3E0->unk10) {
+    case 0:
+        SendBlock(0, gUnknown_203F3E0->unk4A[gUnknown_203F3E0->unk14], sizeof(gUnknown_203F3E0->unk4A));
+        gUnknown_203F3E0->unk08 = 0;
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        if (IsLinkTaskFinished()) {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        blockReceivedStatus = GetBlockReceivedStatus();
+        for (i = 0; i < gUnknown_203F3E0->unk24; blockReceivedStatus >>= 1, i++)
+        {
+            if (blockReceivedStatus & 1)
+            {
+                memcpy(gUnknown_203F3E0->unk4A, gBlockRecvBuffer, sizeof(gUnknown_203F3E0->unk4A));
+                ResetBlockReceivedFlag(i);
+                gUnknown_203F3E0->unk08++;
+            }
+        }
+        if (gUnknown_203F3E0->unk08 >= gUnknown_203F3E0->unk24) {
+            gUnknown_203F3E0->unk14++;
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    default:
+        if (WaitFanfare(TRUE)) {
+            gUnknown_203F3E0->unk114 = gUnknown_203F3E0->unk4A[gUnknown_203F3E0->multiplayerId][5];
+            sub_8152090(6);
+            FadeOutAndPlayNewMapMusic(MUS_WIN_YASEI, 4);
+        }
+        break;
+    }
+}
+
+void sub_8151198(void)
+{
+    u8 sp00;
+    u8 i;
+    u8 blockReceivedStatus;
+
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        sub_81531FC();
+        sub_81540DC(TRUE);
+        sub_81544F0();
+        sub_81545BC(TRUE);
+        sub_81549D4(2);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        if (!sub_8155E68())
+        {
+            sp00 = 1;
+            sub_81549D4(5);
+            sp00 = sub_8155E8C();
+            SendBlock(0, &sp00, sizeof(sp00));
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        if (IsLinkTaskFinished())
+        {
+            gUnknown_203F3E0->unk10++;
+            gUnknown_203F3E0->unk08 = 0;
+        }
+        break;
+    case 3:
+        blockReceivedStatus = GetBlockReceivedStatus();
+        for (i = 0; i < gUnknown_203F3E0->unk24; blockReceivedStatus >>= 1, i++)
+        {
+            if (blockReceivedStatus & 1)
+            {
+                *(gUnknown_203F3E0->unk10C + i) = *(u8 *)gBlockRecvBuffer[i];
+                ResetBlockReceivedFlag(i);
+                gUnknown_203F3E0->unk08++;
+            }
+        }
+        if (gUnknown_203F3E0->unk08 >= gUnknown_203F3E0->unk24) {
+            if (++gUnknown_203F3E0->unk14 >= 120)
+            {
+                sub_81549D4(6);
+                gUnknown_203F3E0->unk10++;
+            }
+        }
+        break;
+    default:
+        if (!sub_8155E68())
+        {
+            sub_8152090(7);
+        }
+        break;
+    }
+}
+
+void sub_81512B4(void)
+{
+    u8 sp0;
+    u8 i;
+    u8 blockReceivedStatus;
+
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        if (sub_81534AC() >= 3000)
+        {
+            sub_81549D4(4);
+        }
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        if (!sub_8155E68())
+        {
+            sub_81549D4(3);
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        sub_81546C0();
+        sub_8153048();
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 3:
+        if ((sp0 = sub_8155E8C()) != 0)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 4:
+        if (!sub_8155E68())
+        {
+            sub_81549D4(5);
+            sp0 = sub_8155E8C();
+            SendBlock(0, &sp0, sizeof(sp0));
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 5:
+        if (IsLinkTaskFinished())
+        {
+            gUnknown_203F3E0->unk10++;
+            gUnknown_203F3E0->unk08 = 0;
+        }
+        break;
+    case 6:
+        blockReceivedStatus = GetBlockReceivedStatus();
+        for (i = 0; i < gUnknown_203F3E0->unk24; blockReceivedStatus >>= 1, i++)
+        {
+            if (blockReceivedStatus & 1)
+            {
+                *(gUnknown_203F3E0->unk10C + i) = *(u8 *)gBlockRecvBuffer[i];
+                ResetBlockReceivedFlag(i);
+                gUnknown_203F3E0->unk08++;
+            }
+        }
+        if (gUnknown_203F3E0->unk08 >= gUnknown_203F3E0->unk24) {
+            if (++gUnknown_203F3E0->unk14 >= 120)
+            {
+                sub_815336C();
+                sub_81549D4(6);
+                gUnknown_203F3E0->unk10++;
+            }
+        }
+        else
+        {
+            sub_81532B8();
+        }
+        break;
+    default:
+        if (!sub_8155E68())
+        {
+            for (i = 0; i < gUnknown_203F3E0->unk24; i++)
+            {
+                if (gUnknown_203F3E0->unk10C[i] == 2)
+                {
+                    sub_8152090(8);
+                    return;
+                }
+            }
+            sub_8152090(10);
+        }
+        break;
+    }
+}
+
+void sub_8151488(void)
+{
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        Link_TryStartSend5FFF();
+        sub_81549D4(7);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        if (!sub_8155E68())
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        if (sub_8155E8C() == 5)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    default:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            sub_8152090(9);
+        }
+        break;
+    }
+}
+
+void sub_81514F0(void)
+{
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        sub_8154274();
+        sub_8153ED8();
+        sub_8153D08(gUnknown_203F3E0->unk24);
+        sub_8154578();
+        gUnknown_3002044 = TRUE;
+        sub_81549D4(8);
+        gUnknown_203F3E0->unk10++;
+        break;
+    default:
+        if (!sub_8155E68())
+        {
+            SetMainCallback2(gUnknown_203F3E0->savedCallback);
+            DestroyTask(gUnknown_203F3E0->unk04);
+            Free(gUnknown_203F3E0);
+            FreeAllWindowBuffers();
+        }
+        break;
+    }
+}
+
+void sub_815159C(void)
+{
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        sub_81549D4(9);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 1:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 2:
+        ChangeBgX(0, 0, 0);
+        ChangeBgY(0, 0, 0);
+        ChangeBgX(1, 0, 0);
+        ChangeBgY(1, 0, 0);
+        ChangeBgX(2, 0, 0);
+        ChangeBgY(2, 0, 0);
+        ChangeBgX(3, 0, 0);
+        ChangeBgY(3, 0, 0);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 3:
+        StopMapMusic();
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 4:
+        PlayNewMapMusic(MUS_KINOMIKUI);
+        sub_8154540();
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 5:
+        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 6:
+        UpdatePaletteFade();
+        if (!gPaletteFade.active)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    default:
+        DestroyTask(gUnknown_203F3E0->unk04);
+        sub_815206C(sub_81516DC);
+        sub_8154730();
+        sub_81508EC(gUnknown_203F3E0);
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            gUnknown_203F3E0->unk24 = 1;
+        }
+        sub_8153150();
+        sub_81545BC(FALSE);
+        break;
+    }
+}
+
+void sub_81516DC(u8 taskId)
+{
+    switch (gUnknown_203F3E0->unk10)
+    {
+    case 0:
+        if (sub_81520B4() == 1)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    case 1:
+        sub_8153DD8();
+        gUnknown_203F3E0->unk10++;
+        break;
+    case 2:
+        if (sub_8153F1C() == TRUE)
+        {
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    default:
+        if (gUnknown_203F3E0->unk20 != 0)
+        {
+            sub_815206C(sub_8150C08);
+        }
+        else
+        {
+            sub_815206C(sub_8150C40);
+        }
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_8151750(u8 taskId)
+{
+    s16 * data = gTasks[taskId].data;
+    u8 i;
+    u8 blockReceivedStatus;
+
+    switch (data[0])
+    {
+    case 0:
+        SendBlock(0, &gUnknown_203F3E0->unk318C[gUnknown_203F3E0->multiplayerId].isShiny, sizeof(gUnknown_203F3E0->unk318C[gUnknown_203F3E0->multiplayerId].isShiny));
+        gUnknown_203F3E0->unk08 = 0;
+        data[0]++;
+        break;
+    case 1:
+        if (IsLinkTaskFinished())
+        {
+            data[0]++;
+        }
+        break;
+    case 2:
+        blockReceivedStatus = GetBlockReceivedStatus();
+        for (i = 0; i < gUnknown_203F3E0->unk24; blockReceivedStatus >>= 1, i++)
+        {
+            if (blockReceivedStatus & 1)
+            {
+                *(u8 *)&gUnknown_203F3E0->unk318C[i] = *(u8 *)gBlockRecvBuffer[i];
+                ResetBlockReceivedFlag(i);
+                gUnknown_203F3E0->unk08++;
+            }
+        }
+        if (gUnknown_203F3E0->unk08 >= gUnknown_203F3E0->unk24)
+        {
+            DestroyTask(taskId);
+            sub_81549D4(6);
+            gUnknown_203F3E0->unk10++;
+        }
+        break;
+    }
+}
+
+void sub_815184C(void)
+{
+    u8 i;
+    u8 r7 = gUnknown_203F3E0->unk24;
+
+    gUnknown_203F3E0->unk31A0[0].unk10 = sub_815A950(0, &gUnknown_203F3E0->unk31A0[0], &gUnknown_203F3E0->unk31A0[0].unk2C, &gUnknown_203F3E0->unk31A0[1].unk2C, &gUnknown_203F3E0->unk31A0[2].unk2C, &gUnknown_203F3E0->unk31A0[3].unk2C, &gUnknown_203F3E0->unk31A0[4].unk2C, &gUnknown_203F3E0->unk40, &gUnknown_203F3E0->unk120, &gUnknown_203F3E0->unk12C);
+    gUnknown_203F3E0->unk128 = 1;
+
+    for (i = 1; i < r7; i++)
+    {
+        if (   gUnknown_203F3E0->unkA8[i] == 0
+               && sub_815AB04(i, &gUnknown_203F3E0->unk31A0[i].unk2C.unk0) == 0)
+        {
+            gUnknown_203F3E0->unk31A0[i].unk2C.unk0 = 0;
+            gUnknown_203F3E0->unk128 = 0;
+        }
+    }
+    if (++gUnknown_203F3E0->unk124 >= 60)
+    {
+        if (gUnknown_203F3E0->unk128 != 0)
+        {
+            sub_80FBA44();
+            gUnknown_203F3E0->unk124 = 0;
+        }
+        else if (gUnknown_203F3E0->unk124 > 70)
+        {
+            sub_80FBA44();
+            gUnknown_203F3E0->unk124 = 0;
+        }
+    }
+
+    for (i = 0; i < r7; i++)
+    {
+        if (   gUnknown_203F3E0->unk31A0[i].unk2C.unk0 != 0
+               && gUnknown_203F3E0->unkA8[i] == 0)
+        {
+            gUnknown_203F3E0->unkA8[i] = 1;
+        }
+        switch (gUnknown_203F3E0->unkA8[i])
+        {
+        case 0:
+        default:
+            break;
+        case 1 ... 3:
+            if (++gUnknown_203F3E0->unkB0[i] >= 6)
+            {
+                gUnknown_203F3E0->unkB0[i] = 0;
+                gUnknown_203F3E0->unkA8[i] = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk0 = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk4 = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk8 = 0;
+            }
+            break;
+        case 4:
+            if (++gUnknown_203F3E0->unkB0[i] >= 40)
+            {
+                gUnknown_203F3E0->unkB0[i] = 0;
+                gUnknown_203F3E0->unkA8[i] = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk0 = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk4 = 0;
+                gUnknown_203F3E0->unk31A0[i].unk2C.unk8 = 0;
+            }
+            break;
+        }
     }
 }
 

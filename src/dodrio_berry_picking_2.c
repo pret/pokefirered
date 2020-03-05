@@ -5,29 +5,13 @@
 #include "item.h"
 #include "link.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
+#include "save.h"
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "constants/songs.h"
-
-// Temporary stopgap to export duplicate data 
-// included from data/dodrio_berry_picking.h
-asm(".global sDodrioBerryStatusGfx\n"
-    "\t.global sDodrioBerrySpritesGfx\n"
-    "\t.global sDodrioBerryPlatformGfx\n"
-    "\t.global sDodrioBerryBgTilemap1\n"
-    "\t.global sDodrioBerryBgTilemap2Left\n"
-    "\t.global sDodrioBerryBgTilemap2Right\n"
-    "\t.global sUnknown_8475674\n"
-    "\t.global sUnknown_8475684\n"
-    "\t.global sUnknown_847568C\n"
-    "\t.global sUnknown_84756A4\n"
-    "\t.global sUnknown_847569C\n"
-    "\t.global sUnknown_847565C\n"
-    "\t.global sDodrioBerryBgPal1\n"
-    "\t.global sDodrioBerryBgGfx1\n"
-    "\t.global sDodrioBerryBgGfx2");
 
 struct DodrioStruct_2022CF4
 {
@@ -1428,4 +1412,205 @@ void sub_81556E0(void)
         gUnknown_203F440->finished = TRUE;
         break;
     }
+}
+
+void sub_8155A78(void)
+{
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        DrawDialogueFrame(0, FALSE);
+        AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+        gUnknown_203F440->state++;
+        break;
+    case 1:
+        CopyWindowToVram(0, 3);
+        gUnknown_203F440->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            CreateTask(sub_80DA634, 0);
+            gUnknown_203F440->state++;
+        }
+        break;
+    case 3:
+        if (!FuncIsActiveTask(sub_80DA634))
+            gUnknown_203F440->state++;
+        break;
+    default:
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->finished = TRUE;
+        break;
+    }
+}
+
+void sub_8155B4C(void)
+{
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        gUnknown_203F440->unk3008[0] = AddWindow(&sUnknown_84756A4);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        sub_8154868(&sUnknown_84756A4);
+        gUnknown_203F440->state++;
+        break;
+    case 1:
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_CommunicationStandby3, 0, 6, -1, NULL);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->state++;
+        break;
+    default:
+        gUnknown_203F440->finished = TRUE;
+        break;
+    }
+}
+
+void sub_8155C2C(void)
+{
+    ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+    RemoveWindow(gUnknown_203F440->unk3008[0]);
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+    CopyBgTilemapBufferToVram(0);
+    gUnknown_203F440->finished = TRUE;
+}
+
+void sub_8155C80(void)
+{
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        gUnknown_203F440->unk3008[0] = AddWindow(&sUnknown_847569C);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        sub_8154868(&sUnknown_847569C);
+        gUnknown_203F440->state++;
+        gUnknown_203F440->unk301C = 0;
+        gUnknown_203F440->unk3020 = 0;
+        gUnknown_203F440->unk3024 = 0;
+        break;
+    case 1:
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_SomeoneDroppedOut, 0, 6, TEXT_SPEED_FF, NULL);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->state++;
+        break;
+    case 3:
+        if (++gUnknown_203F440->unk301C >= 120)
+            gUnknown_203F440->state++;
+        break;
+    default:
+        gUnknown_203F440->unk3024 = 5;
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        RemoveWindow(gUnknown_203F440->unk3008[0]);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->finished = TRUE;
+        break;
+    }
+}
+
+void unused_0(void)
+{
+    DestroyTask(gUnknown_203F440->unk3004);
+    gUnknown_203F440->finished = TRUE;
+}
+
+void nullsub_98(void)
+{
+
+}
+
+void sub_8155E24(void (*func)(void))
+{
+    gUnknown_203F440->state = 0;
+    gUnknown_203F440->finished = FALSE;
+    gUnknown_203F440->unk3028 = func;
+}
+
+void (*sub_8155E54(void))(void)
+{
+    return gUnknown_203F440->unk3028;
+}
+
+bool32 sub_8155E68(void)
+{
+    if (gUnknown_203F440->finished == TRUE)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+u8 sub_8155E8C(void)
+{
+    return gUnknown_203F440->unk3024;
+}
+
+void sub_8155EA0(void)
+{
+    DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+    DmaClear32(3,(void *)OAM, OAM_SIZE);
+    DmaClear16(3, (void *)PLTT, PLTT_SIZE);
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, sUnknown_847565C, ARRAY_COUNT(sUnknown_847565C));
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+    InitStandardTextBoxWindows();
+    ResetBg0();
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    SetBgTilemapBuffer(3, gUnknown_203F440->tilemapBuffers[0]);
+    SetBgTilemapBuffer(1, gUnknown_203F440->tilemapBuffers[1]);
+    SetBgTilemapBuffer(2, gUnknown_203F440->tilemapBuffers[2]);
+}
+
+bool32 sub_8155FE0(void)
+{
+    switch (gUnknown_203F440->unk3018)
+    {
+    case 0:
+        LoadPalette(sDodrioBerryBgPal1, 0, sizeof(sDodrioBerryBgPal1));
+        break;
+    case 1:
+        ResetTempTileDataBuffers();
+        break;
+    case 2:
+        DecompressAndCopyTileDataToVram(3, sDodrioBerryBgGfx1, 0, 0, 0);
+        break;
+    case 3:
+        DecompressAndCopyTileDataToVram(1, sDodrioBerryBgGfx2, 0, 0, 0);
+        break;
+    case 4:
+        if (FreeTempTileDataBuffersIfPossible() == TRUE)
+            return FALSE;
+        break;
+    case 5:
+        LoadPalette(stdpal_get(3), 0xD0, 0x20);
+        break;
+    default:
+        gUnknown_203F440->unk3018 = 0;
+        return TRUE;
+    }
+
+    gUnknown_203F440->unk3018++;
+    return FALSE;
 }

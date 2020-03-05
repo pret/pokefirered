@@ -288,7 +288,6 @@ SECTIONS {
         src/quest_log_player.o(.text);
         src/dodrio_berry_picking.o(.text);
         src/dodrio_berry_picking_2.o(.text);
-        asm/dodrio_berry_picking.o(.text);
         src/battle_controller_pokedude.o(.text);
         src/quest_log_objects.o(.text);
         src/dodrio_berry_picking_3.o(.text);

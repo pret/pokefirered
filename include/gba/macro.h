@@ -105,20 +105,21 @@
     }                                                     \
 }
 
-#define DmaClearLarge(dmaNum, dest, size, block, bit)     \
-{                                                         \
-    u32 _size = size;                                     \
-    while (1)                                             \
-    {                                                     \
-        DmaFill##bit(dmaNum, 0, dest, (block));           \
-        dest += (block);                                  \
-        _size -= (block);                                 \
-        if (_size <= (block))                             \
-        {                                                 \
-            DmaFill##bit(dmaNum, 0, dest, _size);         \
-            break;                                        \
-        }                                                 \
-    }                                                     \
+#define DmaClearLarge(dmaNum, dest, size, block, bit) \
+{                                                           \
+    void *_dest = dest;                                     \
+    u32 _size = size;                                       \
+    while (1)                                               \
+    {                                                       \
+        DmaFill##bit(dmaNum, 0, _dest, (block));       \
+        _dest += (block);                                   \
+        _size -= (block);                                   \
+        if (_size <= (block))                               \
+        {                                                   \
+            DmaFill##bit(dmaNum, 0, _dest, _size);     \
+            break;                                          \
+        }                                                   \
+    }                                                       \
 }
 
 #define DmaFillLarge(dmaNum, value, dest, size, block, bit) \

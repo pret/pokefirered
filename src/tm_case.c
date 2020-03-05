@@ -797,7 +797,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
     Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, 2, 0, 2, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, 0);
     strbuf = Alloc(256);
     GetTMNumberAndMoveString(strbuf, gSpecialVar_ItemId);
-    StringAppend(strbuf, gText_IsSelected);
+    StringAppend(strbuf, gText_Var1IsSelected + 2); // +2 skips over the stringvar
     AddTextPrinterParameterized_ColorByIndex(2, 2, strbuf, 0, 2, 1, 0, 0, 1);
     Free(strbuf);
     if (itemid_is_unique(gSpecialVar_ItemId))

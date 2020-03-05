@@ -30,7 +30,7 @@ Route12_EventScript_Snorlax:: @ 8168014
 	setflag FLAG_WOKE_UP_ROUTE_12_SNORLAX
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq Route12_EventScript_FoughtSnorlax
 	compare VAR_RESULT, B_OUTCOME_RAN

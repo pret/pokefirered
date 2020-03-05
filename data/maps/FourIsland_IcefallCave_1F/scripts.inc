@@ -9,7 +9,7 @@ FourIsland_IcefallCave_1F_OnResume:: @ 8163D54
 	end
 
 FourIsland_IcefallCave_1F_OnLoad:: @ 8163D57
-	special Special_SetIcefallCaveCrackedIceMetatiles
+	special SetIcefallCaveCrackedIceMetatiles
 	end
 
 FourIsland_IcefallCave_1F_OnFrame:: @ 8163D5B

@@ -29,7 +29,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 81A65CE
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom:: @ 81A65EC
-	specialvar VAR_RESULT, Special_PlayerIsNotInTrainerTowerLobby
+	specialvar VAR_RESULT, IsPlayerNotInTrainerTowerLobby
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
 	specialvar VAR_RESULT, BufferUnionRoomPlayerName

@@ -16,7 +16,7 @@
 #include "field_weather.h"
 #include "constants/songs.h"
 #include "constants/maps.h"
-#include "seagallop.h"
+#include "constants/seagallop.h"
 
 #define TILESTAG_FERRY 3000
 #define TILESTAG_WAKE  4000

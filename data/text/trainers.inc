@@ -1,14 +1,14 @@
-gUnknown_81C137C:: @ 81C137C
+VSSeeker_Text_BatteryNotChargedNeedXSteps:: @ 81C137C
 	.string "The battery isn't charged enough.\p"
 	.string "No. of steps required to fully\n"
 	.string "charge the battery: {STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_81C13D6:: @ 81C13D6
+VSSeeker_Text_NoTrainersWithinRange:: @ 81C13D6
 	.string "There are no TRAINERS within range\n"
 	.string "who can battle…\p"
 	.string "The VS SEEKER was turned off.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_81C1429:: @ 81C1429
+VSSeeker_Text_TrainersNotReady:: @ 81C1429
 	.string "The other TRAINERS don't appear\n"
 	.string "to be ready for battle.\p"
 	.string "Let's wait till later.{PAUSE_UNTIL_PRESS}$"
@@ -610,7 +610,8 @@ Route21_North_Text_WadeRematchIntro:: @ 81C3231
 Route21_North_Text_SpencerRematchIntro:: @ 81C3264
 	.string "The sea cleanses my body and soul!$"
 
-Text_1C3287:: @ 81C3287
+@ Unused trainer from RB that had a rematch intro added
+Route21_North_Text_CueBallRematchIntro:: @ 81C3287
 	.string "きょうも　およぎに\n"
 	.string "きちまったぜ$"
 

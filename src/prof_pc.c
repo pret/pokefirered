@@ -21,7 +21,7 @@ extern const u8 PokedexRating_Text_LessThan140[];
 extern const u8 PokedexRating_Text_LessThan150[];
 extern const u8 PokedexRating_Text_Complete[];
 
-u16 Special_GetPokedexCount(void)
+u16 GetPokedexCount(void)
 {
     if (gSpecialVar_0x8004 == 0)
     {
@@ -104,7 +104,7 @@ static const u8 *GetProfOaksRatingMessageByCount(u16 count)
     return PokedexRating_Text_LessThan10;
 }
 
-void Special_GetProfOaksRatingMessage(void)
+void GetProfOaksRatingMessage(void)
 {
     ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }

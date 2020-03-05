@@ -114,19 +114,19 @@ RocketHideout_B4F_EventScript_DrawMapForBarrierRemoval:: @ 8161462
 	return
 
 RocketHideout_B4F_EventScript_SetBarrier:: @ 816146A
-	setmetatile 17, 12, METATILE_Hideout_Barrier_TopLeft_Floor, 1
-	setmetatile 18, 12, METATILE_Hideout_Barrier_TopRight_Floor, 1
-	setmetatile 17, 13, METATILE_Hideout_Barrier_BottomLeft, 1
-	setmetatile 18, 13, METATILE_Hideout_Barrier_BottomRight, 1
-	setmetatile 17, 14, METATILE_Hideout_Floor_ShadeFull, 0
-	setmetatile 18, 14, METATILE_Hideout_Floor_ShadeFull, 0
+	setmetatile 17, 12, METATILE_SilphCo_HideoutBarrier_TopLeft_Floor, 1
+	setmetatile 18, 12, METATILE_SilphCo_HideoutBarrier_TopRight_Floor, 1
+	setmetatile 17, 13, METATILE_SilphCo_HideoutBarrier_BottomLeft, 1
+	setmetatile 18, 13, METATILE_SilphCo_HideoutBarrier_BottomRight, 1
+	setmetatile 17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+	setmetatile 18, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
 	return
 
 RocketHideout_B4F_EventScript_RemoveBarrier:: @ 81614A1
-	setmetatile 17, 12, METATILE_Hideout_Floor_ShadeFull, 0
-	setmetatile 18, 12, METATILE_Hideout_Floor, 0
-	setmetatile 17, 13, METATILE_Hideout_Floor_ShadeFull, 0
-	setmetatile 18, 13, METATILE_Hideout_Floor, 0
-	setmetatile 17, 14, METATILE_Hideout_Floor_ShadeFull, 0
-	setmetatile 18, 14, METATILE_Hideout_Floor, 0
+	setmetatile 17, 12, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+	setmetatile 18, 12, METATILE_SilphCo_HideoutFloor, 0
+	setmetatile 17, 13, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+	setmetatile 18, 13, METATILE_SilphCo_HideoutFloor, 0
+	setmetatile 17, 14, METATILE_SilphCo_HideoutFloor_ShadeFull, 0
+	setmetatile 18, 14, METATILE_SilphCo_HideoutFloor, 0
 	return

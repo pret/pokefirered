@@ -30,7 +30,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle:: @ 8163C83
 	giveitem ITEM_IAPAPA_BERRY
 	compare VAR_RESULT, FALSE
 	call_if_eq ThreeIsland_BerryForest_EventScript_NoRoomForBerry
-	special Special_BufferBigGuyOrBigGirlString
+	special BufferBigGuyOrBigGirlString
 	msgbox ThreeIsland_BerryForest_Text_LetsGoHome
 	closemessage
 	setflag FLAG_RESCUED_LOSTELLE

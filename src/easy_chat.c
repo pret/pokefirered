@@ -276,7 +276,7 @@ static u16 GetRandomWordFromAnyGroup(u16 groupId)
     return GetRandomWordFromGroup(groupId);
 }
 
-void Special_BufferEasyChatMessage(void)
+void ShowEasyChatMessage(void)
 {
     u16 *easyChatWords;
     int columns, rows;

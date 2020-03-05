@@ -5,7 +5,7 @@ BirthIsland_Exterior_MapScripts:: @ 8165203
 	.byte 0
 
 BirthIsland_Exterior_OnReturnToField:: @ 8165213
-	special Special_SetDeoxysTriangleObjectPal
+	special SetDeoxysTrianglePalette
 	end
 
 BirthIsland_Exterior_OnTransition:: @ 8165217
@@ -33,7 +33,7 @@ BirthIsland_Exterior_OnResume:: @ 8165253
 	end
 
 BirthIsland_Exterior_EventScript_TryRemoveDeoxys:: @ 816525D
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject 2
@@ -44,7 +44,7 @@ BirthIsland_Exterior_EventScript_Triangle:: @ 8165271
 	faceplayer
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
-	special DoDeoxysRockInteraction
+	special DoDeoxysTriangleInteraction
 	waitstate
 	switch VAR_RESULT
 	case 0, BirthIsland_Exterior_EventScript_NotSolved1
@@ -86,10 +86,10 @@ BirthIsland_Exterior_EventScript_Deoxys:: @ 81652C0
 	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq BirthIsland_Exterior_EventScript_DefeatedDeoxys
 	compare VAR_RESULT, B_OUTCOME_RAN

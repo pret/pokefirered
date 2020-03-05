@@ -38,7 +38,7 @@ CeruleanCity_House5_EventScript_ChooseExchangeItem:: @ 816AEC8
 	message CeruleanCity_House5_Text_ExchangeWithWhat
 	waitmessage
 	setvar VAR_0x8004, LISTMENU_BERRY_POWDER
-	special Special_ListMenu
+	special ListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, CeruleanCity_House5_EventScript_EnergyPowder
@@ -144,14 +144,14 @@ CeruleanCity_House5_EventScript_ExchangePowderForItem:: @ 816B055
 	compare VAR_RESULT, NO
 	goto_if_eq CeruleanCity_House5_EventScript_ChooseExchangeItem
 	copyvar VAR_0x8004, VAR_0x8009
-	specialvar VAR_RESULT, Special_HasEnoughBerryPowder
+	specialvar VAR_RESULT, Script_HasEnoughBerryPowder
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeruleanCity_House5_EventScript_NotEnoughBerryPowder
 	giveitem VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq CeruleanCity_House5_EventScript_BagIsFull
 	copyvar VAR_0x8004, VAR_0x8009
-	special Special_TakeBerryPowder
+	special Script_TakeBerryPowder
 	special PrintPlayerBerryPowderAmount
 	msgbox CeruleanCity_House1_Text_TradeMoreBerryPowder, MSGBOX_YESNO
 	compare VAR_RESULT, YES

@@ -35,6 +35,7 @@
 #include "constants/daycare.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_card.h"
+#include "constants/help_system.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -957,22 +958,23 @@ Text_VoiceRangOutDontRunAway:: @ 81A5C4D
 	.string "Someone's voice rang out,\n"
 	.string "“Don't run away!”$"
 
-Text_1A5C79:: @ 81A5C79
+@ Uncear what the below unused JP texts were for
+Text_IdLikeToSeeRequest:: @ 81A5C79
 	.string "えっとー\n"
 	.string "{STR_VAR_2}が　みてみたいなー\p"
 	.string "それも　{STR_VAR_1}{STR_VAR_3}\n"
 	.string "{STR_VAR_2}が　みてみたいなー$"
 
-Text_1A5C9F:: @ 81A5C9F
+Text_ThankYouForShowingMe:: @ 81A5C9F
 	.string "わぁー　すごい！\n"
 	.string "{STR_VAR_1}{STR_VAR_3}{STR_VAR_2}だー！\p"
 	.string "ありがとー\n"
 	.string "また　よろしくねー！$"
 
-Text_1A5CC3:: @ 81A5CC3
+Text_ThatsNotRight:: @ 81A5CC3
 	.string "それっ　ちがうよー！$"
 
-Text_1A5CCE:: @ 81A5CCE
+Text_ISee:: @ 81A5CCE
 	.string "そっか‥$"
 
 Text_TheDoorIsClosed:: @ 81A5CD3
@@ -1093,7 +1095,7 @@ EventScript_WallTownMap:: @ 81A6C32
 	msgbox Text_ATownMap
 	goto_if_questlog EventScript_ReleaseEnd
 	fadescreen FADE_TO_BLACK
-	special Special_TownMap
+	special ShowTownMap
 	waitstate
 	releaseall
 	end
@@ -1154,7 +1156,7 @@ EventScript_SetEnteringCyclingRoad:: @ 81A77C1
 	.include "data/scripts/route23.inc"
 
 EventScript_GetElevatorFloor:: @ 81A7AB9
-	special Special_GetElevatorFloor
+	special GetElevatorFloor
 	return
 
 	.include "data/scripts/aide.inc"
@@ -1198,7 +1200,7 @@ EventScript_GetInGameTradeSpeciesInfo:: @ 81A8CAD
 	return
 
 EventScript_ChooseMonForInGameTrade:: @ 81A8CBD
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
@@ -1307,11 +1309,11 @@ EventScript_TryDarkenRuins:: @ 81A925E
 	return
 
 EventScript_BrailleCursorWaitButton:: @ 81A926C
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	waitbuttonpress
 	playse SE_SELECT
 	setvar VAR_0x8006, 1
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	return
 
 EventScript_NoMoreRoomForPokemon:: @ 81A927C
@@ -1356,4 +1358,4 @@ Text_TestMsg:: @ 81ACD45
 	.include "data/scripts/test.inc"
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
-	.include "data/text/poke_dude.inc"
+	.include "data/text/pokedude.inc"

@@ -1664,16 +1664,16 @@ _0806D5A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5D8
-	ldr r0, _0806D5D4 @ =EventScript_InteractWithWaterfall
+	ldr r0, _0806D5D4 @ =EventScript_Waterfall
 	b _0806D5E2
 	.align 2, 0
 _0806D5D0: .4byte 0x00000826
-_0806D5D4: .4byte EventScript_InteractWithWaterfall
+_0806D5D4: .4byte EventScript_Waterfall
 _0806D5D8:
-	ldr r0, _0806D5DC @ =EventScript_81BE2FF
+	ldr r0, _0806D5DC @ =EventScript_CantUseWaterfall
 	b _0806D5E2
 	.align 2, 0
-_0806D5DC: .4byte EventScript_81BE2FF
+_0806D5DC: .4byte EventScript_CantUseWaterfall
 _0806D5E0:
 	movs r0, 0
 _0806D5E2:

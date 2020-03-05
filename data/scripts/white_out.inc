@@ -55,7 +55,7 @@ EventScript_FieldWhiteOutNoMoney:: @ 81A8E2E
 	end
 
 EventScript_FieldWhiteOutHasMoney:: @ 81A8E3C
-	special Special_OverworldWhiteOutGetMoneyLoss
+	special OverworldWhiteOutGetMoneyLoss
 	msgbox Text_WhitedOutLostMoney
 	goto EventScript_FieldWhiteOutFade
 	end
@@ -64,6 +64,6 @@ EventScript_FieldWhiteOutFade:: @ 81A8E4D
 	special Script_FadeOutMapMusic
 	waitstate
 	fadescreen FADE_TO_BLACK
-	special SetCB2Whiteout
+	special SetCB2WhiteOut
 	waitstate
 	end

@@ -36,7 +36,7 @@ static bool8 HasEnoughBerryPowder(u32 cost)
         return TRUE;
 }
 
-bool8 Special_HasEnoughBerryPowder(void)
+bool8 Script_HasEnoughBerryPowder(void)
 {
     if (DecryptBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount) < gSpecialVar_0x8004)
         return FALSE;
@@ -73,7 +73,7 @@ static bool8 TakeBerryPowder(u32 cost)
     }
 }
 
-bool8 Special_TakeBerryPowder(void)
+bool8 Script_TakeBerryPowder(void)
 {
     u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
     if (!HasEnoughBerryPowder(gSpecialVar_0x8004))

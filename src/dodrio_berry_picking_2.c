@@ -26,16 +26,16 @@ EWRAM_DATA u16 *gUnknown_203F3E4[5] = {NULL};
 EWRAM_DATA u16 *gUnknown_203F3F8[2] = {NULL};
 EWRAM_DATA u16 *gUnknown_203F400[11] = {NULL};
 EWRAM_DATA u16 *gUnknown_203F42C[4] = {NULL};
-EWRAM_DATA struct DodrioStruct_2022CF4 *gUnknown_203F43C = NULL;
-EWRAM_DATA struct DodrioSubstruct_0160 *gUnknown_203F440 = NULL;
+EWRAM_DATA struct DodrioStruct_2022CF4 * gUnknown_203F43C = NULL;
+EWRAM_DATA struct DodrioSubstruct_0160 * gUnknown_203F440 = NULL;
 
 void sub_8153B9C(struct Sprite * sprite);
 u32 sub_8153C30(struct Sprite * sprite);
 u32 sub_8153CA0(struct Sprite * sprite);
 void sub_8153D48(bool8 a0, u8 a1);
-void nullsub_97(struct Sprite *sprite);
+void nullsub_97(struct Sprite * sprite);
 void sub_8154324(bool8 a0);
-void sub_81543E8(struct Sprite *sprite);
+void sub_81543E8(struct Sprite * sprite);
 s16 sub_8154608(u8 a0, u8 a1);
 void sub_8154A08(u8 taskId);
 void sub_8154A2C(void);
@@ -285,7 +285,7 @@ void sub_8153A9C(void)
     LoadSpritePalette(&pal2);
 }
 
-void sub_8153AFC(struct DodrioSubstruct_318C *arg0, u8 arg1, u8 id, u8 arg3)
+void sub_8153AFC(struct DodrioSubstruct_318C * arg0, u8 arg1, u8 id, u8 arg3)
 {
     struct SpriteTemplate sprTemplate =
     {
@@ -303,7 +303,7 @@ void sub_8153AFC(struct DodrioSubstruct_318C *arg0, u8 arg1, u8 id, u8 arg3)
     sub_8153D48(TRUE, id);
 }
 
-void sub_8153B9C(struct Sprite *sprite)
+void sub_8153B9C(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -320,7 +320,7 @@ void sub_8153B9C(struct Sprite *sprite)
 
 void sub_8153BC0(u8 unused)
 {
-    struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
+    struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
     sprite->data[0] = 1;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -330,7 +330,7 @@ void sub_8153BC0(u8 unused)
 
 void sub_8153BF8(u8 unused)
 {
-    struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
+    struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[GetMultiplayerId()]];
     sprite->data[0] = 2;
     sprite->data[1] = 0;
     sprite->data[2] = 0;
@@ -338,7 +338,7 @@ void sub_8153BF8(u8 unused)
     sprite->data[4] = 0;
 }
 
-u32 sub_8153C30(struct Sprite *sprite)
+u32 sub_8153C30(struct Sprite * sprite)
 {
     s8 var;
     u8 mod = (++sprite->data[1] / 2) % 4;
@@ -367,7 +367,7 @@ u32 sub_8153C30(struct Sprite *sprite)
     return 0;
 }
 
-u32 sub_8153CA0(struct Sprite *sprite)
+u32 sub_8153CA0(struct Sprite * sprite)
 {
     u8 mod = (++sprite->data[1] / 13) % 4;
 
@@ -387,7 +387,7 @@ void sub_8153D08(u8 count)
     u8 i;
     for (i = 0; i < count; i++)
     {
-        struct Sprite *sprite = &gSprites[*gUnknown_203F3E4[i]];
+        struct Sprite * sprite = &gSprites[*gUnknown_203F3E4[i]];
         if (sprite != NULL)
             DestroySpriteAndFreeResources(sprite);
         // Memory should be freed here but is not.
@@ -421,7 +421,7 @@ void sub_8153DD8(void)
     u8 i;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         sprite->pos1.x = (i * 16) + 48;
         sprite->pos1.y = -8 - (i * 8);
         gUnknown_203F43C->unkC[i] = 0;
@@ -465,7 +465,7 @@ void sub_8153ED8(void)
     u8 i;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         if (sprite != NULL)
             DestroySpriteAndFreeResources(sprite);
     }
@@ -478,7 +478,7 @@ bool32 sub_8153F1C(void)
     bool32 r3 = FALSE;
     for (i = 0; i < 10; i++)
     {
-        struct Sprite *sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
+        struct Sprite * sprite = &gSprites[gUnknown_203F43C->unk2A[i]];
         gUnknown_203F43C->unk16[i] = 2;
         if (gUnknown_203F43C->unkC[i] != 0 && sprite->pos1.y == 8)
             continue;
@@ -620,7 +620,7 @@ void sub_815417C(void)
 
 void sub_8154274(void)
 {
-    struct Sprite *sprite;
+    struct Sprite * sprite;
     u8 i;
 
     for (i = 0; i < 11; i++)
@@ -676,7 +676,7 @@ void sub_81543C4(u8 spriteId)
 #define sKeepPosX data[10]
 #endif // NONMATCHING
 
-void sub_81543E8(struct Sprite *sprite)
+void sub_81543E8(struct Sprite * sprite)
 {
     u8 i;
     static const u8 array[] = {30, 20};
@@ -734,7 +734,7 @@ void sub_81544F0(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
         sprite->sKeepPosX = TRUE;
         sprite->pos1.x = gUnknown_8478E0E[i][0];
         sprite->pos1.y = gUnknown_8478E0E[i][1];
@@ -746,7 +746,7 @@ void sub_8154540(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
         sprite->sKeepPosX = FALSE;
     }
 }
@@ -756,7 +756,7 @@ void sub_8154578(void)
     u8 i;
     for (i = 0; i < 2; i++)
     {
-        struct Sprite *sprite = &gSprites[*gUnknown_203F3F8[i]];
+        struct Sprite * sprite = &gSprites[*gUnknown_203F3F8[i]];
         if (sprite)
             DestroySprite(sprite);
         FREE_AND_SET_NULL(gUnknown_203F3F8[i]);
@@ -850,7 +850,7 @@ void sub_8154730(void)
     gUnknown_203F440->unk3024 = 0;
 }
 
-void sub_8154768(const struct WindowTemplate *winTempl)
+void sub_8154768(const struct WindowTemplate * winTempl)
 {
     u8 pal = 0xA;
 
@@ -864,7 +864,7 @@ void sub_8154768(const struct WindowTemplate *winTempl)
     FillBgTilemapBufferRect(0, 9, winTempl->tilemapLeft + winTempl->width,  winTempl->tilemapTop + winTempl->height,    1, 1, pal);
 }
 
-void sub_8154868(const struct WindowTemplate *winTempl)
+void sub_8154868(const struct WindowTemplate * winTempl)
 {
     u8 pal = 0xB;
 
@@ -878,7 +878,7 @@ void sub_8154868(const struct WindowTemplate *winTempl)
     FillBgTilemapBufferRect(0, 18, winTempl->tilemapLeft + winTempl->width,  winTempl->tilemapTop + winTempl->height,    1, 1, pal);
 }
 
-void sub_8154968(struct DodrioSubstruct_0160 *ptr)
+void sub_8154968(struct DodrioSubstruct_0160 * ptr)
 {
     gUnknown_203F440 = ptr;
     gUnknown_203F440->finished = FALSE;
@@ -928,7 +928,7 @@ const struct WinCoords sUnknown_8478E50[] = {{12, 6}, {18, 10}, {6, 10}};
 const struct WinCoords sUnknown_8478E5C[] = {{9, 10}, {15, 6}, {21, 10}, {3, 6}};
 const struct WinCoords sUnknown_8478E6C[] = {{12, 6}, {18, 10}, {23, 6}, {1, 6}, {6, 10}};
 
-const struct WinCoords *const sUnknown_8478E80[] =
+const struct WinCoords * const sUnknown_8478E80[] =
 {
     sUnknown_8478E44,
     sUnknown_8478E48,
@@ -1028,7 +1028,7 @@ void sub_8154B34(void)
     u8 i, playersCount, id, colorsId, *name;
     u32 left;
     struct WindowTemplate window;
-    const struct WinCoords *ptr;
+    const struct WinCoords * ptr;
 
     switch (gUnknown_203F440->state)
     {

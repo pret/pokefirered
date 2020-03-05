@@ -66,8 +66,8 @@ _08054C40: .4byte sWhiteOutMoneyLossMultipliers
 _08054C44: .4byte gSaveBlock1Ptr
 	thumb_func_end ComputeWhiteOutMoneyLoss
 
-	thumb_func_start Special_OverworldWhiteOutGetMoneyLoss
-Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
+	thumb_func_start OverworldWhiteOutGetMoneyLoss
+OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	push {r4,r5,lr}
 	bl ComputeWhiteOutMoneyLoss
 	adds r4, r0, 0
@@ -85,7 +85,7 @@ Special_OverworldWhiteOutGetMoneyLoss: @ 8054C48
 	bx r0
 	.align 2, 0
 _08054C6C: .4byte gStringVar1
-	thumb_func_end Special_OverworldWhiteOutGetMoneyLoss
+	thumb_func_end OverworldWhiteOutGetMoneyLoss
 
 	thumb_func_start CountBadgesForOverworldWhiteOutLossCalculation
 CountBadgesForOverworldWhiteOutLossCalculation: @ 8054C70
@@ -4012,7 +4012,7 @@ _08056ACE:
 	bl sub_8057074
 	bl sub_80571A8
 	bl sub_8057140
-	bl sub_812B35C
+	bl SetHelpContextForMap
 	b _08056B62
 _08056AE4:
 	bl InitCurrentFlashLevelScanlineEffect
@@ -4152,7 +4152,7 @@ _08056BFE:
 	bl sub_80CC534
 	bl sub_80CC59C
 _08056C16:
-	bl sub_812B35C
+	bl SetHelpContextForMap
 	b _08056CCA
 	.align 2, 0
 _08056C1C: .4byte gQuestLogState
@@ -4275,7 +4275,7 @@ _08056D04:
 	b _08056D30
 _08056D1C:
 	bl sub_8056F08
-	bl sub_812B35C
+	bl SetHelpContextForMap
 	b _08056D30
 _08056D26:
 	bl map_post_load_hook_exec
@@ -4343,7 +4343,7 @@ _08056DAE:
 	bl sub_8057230
 	bl sub_8057100
 	bl sub_805715C
-	bl sub_812B35C
+	bl SetHelpContextForMap
 	b _08056E3E
 _08056DC0:
 	bl InitCurrentFlashLevelScanlineEffect

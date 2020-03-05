@@ -17,9 +17,9 @@
 MysteryEventScript_StampCard:: @ 8488E28
 	setvaddress MysteryEventScript_StampCard
 	setorcopyvar VAR_RESULT, 1
-	specialvar VAR_0x8008, Special_BattleCardAction
+	specialvar VAR_0x8008, BattleCardAction
 	setorcopyvar VAR_RESULT, 0
-	specialvar VAR_0x8009, Special_BattleCardAction
+	specialvar VAR_0x8009, BattleCardAction
 	subvar VAR_0x8008, VAR_0x8009
 	getnumberstring 0, VAR_0x8008
 	lock
@@ -169,7 +169,7 @@ MysteryEventScript_BattleCard:: @ 84892B9
 	setvaddress MysteryEventScript_BattleCard
 	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
-	specialvar VAR_0x8008, Special_BattleCardAction
+	specialvar VAR_0x8008, BattleCardAction
 	compare VAR_0x8008, 3
 	vgoto_if_ne MysteryEventScript_BattleCardInfo
 	lock

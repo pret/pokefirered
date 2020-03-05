@@ -38,7 +38,7 @@ Route10_PokemonCenter_1F_EventScript_Aide:: @ 816FC65
 	compare VAR_RESULT, NO
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, Special_GetPokedexCount
+	specialvar VAR_RESULT, GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_OWNED_MONS

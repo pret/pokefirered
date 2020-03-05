@@ -1629,7 +1629,7 @@
 
 	@ Jumps to dest if the Quest Log is currently showing playback scenes (dest is usually a release/end)
 	.macro goto_if_questlog dest:req
-	special Special_GetQuestLogState
+	special GetQuestLogState
 	compare VAR_RESULT, 2
 	goto_if_eq \dest
 	.endm

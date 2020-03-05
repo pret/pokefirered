@@ -8,7 +8,7 @@ CeruleanCave_B1F_OnResume:: @ 81624C9
 	end
 
 CeruleanCave_B1F_EventScript_TryRemoveMewtwo:: @ 81624D3
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
@@ -37,10 +37,10 @@ CeruleanCave_B1F_EventScript_Mewtwo:: @ 81624F5
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70, ITEM_NONE
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq CeruleanCave_B1F_EventScript_DefeatedMewtwo
 	compare VAR_RESULT, B_OUTCOME_RAN

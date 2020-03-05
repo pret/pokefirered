@@ -79,7 +79,7 @@ static const struct SpriteTemplate sSmokeSpriteTemplate = {
     SmokeSpriteCallback
 };
 
-void Special_SSAnneDepartureCutscene(void)
+void DoSSAnneDepartureCutscene(void)
 {
     u8 taskId;
 

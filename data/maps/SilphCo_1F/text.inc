@@ -3,7 +3,8 @@ SilphCo_1F_Text_WelcomePresidentInBoardroom:: @ 81754F7
     .string "The PRESIDENT is in the boardroom\n"
     .string "on 11F.$"
 
-SilphCo_1F_Text_17552A:: @ 817552A
+@ Tentative translation. Unknown origin
+SilphCo_1F_Text_DestroyedWontBeFixedForWhile:: @ 817552A
     .string "めちゃめちゃに　こわされてる\n"
     .string "とうぶん　なおりそうに　ない‥$"
 

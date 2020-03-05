@@ -1,4 +1,4 @@
-void nullsub_56(void)
+// From R/S, removed
+void DoWateringBerryTreeAnim(void)
 {
-	
 }

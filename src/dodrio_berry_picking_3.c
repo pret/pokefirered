@@ -22,7 +22,6 @@ u8 sub_815A5E8(s32 a0)
     return 0;
 }
 
-
 struct UnkPacket2
 {
     u8 id;
@@ -66,11 +65,12 @@ struct UnkPacket2
     u8 unkB_6:1;
 };
 
+// Yeah not even attempting this lol
 #ifdef NONMATCHING
-static void sub_815A61C(struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_2C *arg1, struct DodrioSubstruct_31A0_2C *arg2, struct DodrioSubstruct_31A0_2C *arg3, struct DodrioSubstruct_31A0_2C *arg4, struct DodrioSubstruct_31A0_2C *arg5, u8 arg6, u32 arg7, u32 arg8)
+static void sub_815A61C(struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 arg6, u32 arg7, u32 arg8)
 {
     struct UnkPacket2 packet;
-    struct DodrioSubstruct_31A0_14 *ptr = &arg0->unk14;
+    struct DodrioSubstruct_31A0_14 * ptr = &arg0->unk14;
 
     packet.id = 2;
     packet.unk1_0 = ptr->unkB[0];
@@ -120,7 +120,7 @@ static void sub_815A61C(struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruc
 }
 #else
 NAKED
-void sub_815A61C(struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_2C *arg1, struct DodrioSubstruct_31A0_2C *arg2, struct DodrioSubstruct_31A0_2C *arg3, struct DodrioSubstruct_31A0_2C *arg4, struct DodrioSubstruct_31A0_2C *arg5, u8 arg6, u32 arg7, u32 arg8)
+void sub_815A61C(struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 arg6, u32 arg7, u32 arg8)
 {
     asm_unified("   push {r4-r7,lr}\n\
     mov r7, r10\n\
@@ -535,10 +535,10 @@ void sub_815A61C(struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_
 }
 #endif
 
-u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_2C *arg1, struct DodrioSubstruct_31A0_2C *arg2, struct DodrioSubstruct_31A0_2C *arg3, struct DodrioSubstruct_31A0_2C *arg4, struct DodrioSubstruct_31A0_2C *arg5, u8 *arg6, u32 *arg7, u32 *arg8)
+u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 * arg0, struct DodrioSubstruct_31A0_2C * arg1, struct DodrioSubstruct_31A0_2C * arg2, struct DodrioSubstruct_31A0_2C * arg3, struct DodrioSubstruct_31A0_2C * arg4, struct DodrioSubstruct_31A0_2C * arg5, u8 *arg6, u32 *arg7, u32 *arg8)
 {
-    struct UnkPacket2 *packet;
-    struct DodrioSubstruct_31A0_14 *ptr = &arg0->unk14;
+    struct UnkPacket2 * packet;
+    struct DodrioSubstruct_31A0_14 * ptr = &arg0->unk14;
 
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
         return 0;
@@ -615,7 +615,7 @@ void sub_815AAD8(u8 arg0)
 
 u32 sub_815AB04(u32 arg0, u8 *arg1)
 {
-    struct UnkPacket3 *packet;
+    struct UnkPacket3 * packet;
 
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
         return 0;
@@ -646,7 +646,7 @@ void sub_815AB3C(u32 arg0)
 
 u32 sub_815AB60(u32 arg0)
 {
-    struct UnkPacket4 *packet;
+    struct UnkPacket4 * packet;
 
     if ((gRecvCmds[0][0] & 0xFF00) != 0x2F00)
         return 0;

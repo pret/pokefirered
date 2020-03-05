@@ -1501,7 +1501,7 @@ void sub_815256C(void)
     u8 r10 = 0;
     u8 i;
     u8 r2;
-    struct DodrioStruct *ptr;
+    struct DodrioStruct * ptr;
 
     gUnknown_203F3E0->unk120 = 0;
 
@@ -1588,7 +1588,7 @@ void sub_81527D0(void)
     count = gUnknown_203F3E0->unk48;
     for (i = first; i < count; i++)
     {
-        struct DodrioSubstruct_31A0 *ptr = &gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId];
+        struct DodrioSubstruct_31A0 * ptr = &gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId];
         u8 var = sUnknown_8471F50[gUnknown_203F3E0->unk24 - 1][gUnknown_203F3E0->multiplayerId][i];
 
         if (ptr->unk14.unkB[var] != 0)
@@ -1622,7 +1622,7 @@ void sub_81528D0(void)
     count = gUnknown_203F3E0->unk24;
     for (i = 0; i < count; i++)
     {
-        struct DodrioSubstruct_31A0 *ptr = &gUnknown_203F3E0->unk31A0[i];
+        struct DodrioSubstruct_31A0 * ptr = &gUnknown_203F3E0->unk31A0[i];
         sub_8153DA8(i, ptr->unk2C.unk0);
     }
 }
@@ -1737,7 +1737,7 @@ bool32 sub_8152AD8(void)
         {
             for (i = first; i < count; i++)
             {
-                struct DodrioSubstruct_31A0 *ptr = &gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId];
+                struct DodrioSubstruct_31A0 * ptr = &gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId];
                 u8 var = sUnknown_8471F50[gUnknown_203F3E0->unk24 - 1][gUnknown_203F3E0->multiplayerId][i];
 
                 if (ptr->unk14.unkB[var] != 10)
@@ -2230,7 +2230,7 @@ u32 sub_81535B0(void)
     return 0;
 }
 
-void sub_81536A0(struct DodrioSubstruct_3308 *dst, u8 id)
+void sub_81536A0(struct DodrioSubstruct_3308 * dst, u8 id)
 {
     *dst = gUnknown_203F3E0->unk3308[id];
 }

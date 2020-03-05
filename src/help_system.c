@@ -1085,7 +1085,7 @@ void PlaceListMenuCursor(void)
     u8 glyphHeight = GetFontAttribute(2, 1) + 1;
     u8 x = gHelpSystemListMenu.sub.left;
     u8 y = gHelpSystemListMenu.sub.top + glyphHeight * gHelpSystemListMenu.cursorPos;
-    HelpSystem_PrintTextAt(gFameCheckerText_ListMenuCursor, x, y);
+    HelpSystem_PrintTextAt(gText_SelectorArrow2, x, y);
 }
 
 void sub_813C860(u8 i)

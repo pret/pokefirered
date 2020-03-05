@@ -449,29 +449,10 @@ gUnknown_203B170: @ 203B170
 	.include "src/pokemon_jump_4.o"
 	.align 2
 	.include "src/berry_crush.o"
-
 	.align 2
-gUnknown_203F3E0: @ 203F3E0
-	.space 0x4
-
-gUnknown_203F3E4: @ 203F3E4
-	.space 0x14
-
-gUnknown_203F3F8: @ 203F3F8
-	.space 0x8
-
-gUnknown_203F400: @ 203F400
-	.space 0x2C
-
-gUnknown_203F42C: @ 203F42C
-	.space 0x10
-
-gUnknown_203F43C: @ 203F43C
-	.space 0x4
-
-gUnknown_203F440: @ 203F440
-	.space 0x4
-
+	.include "src/dodrio_berry_picking.o"
+	.align 2
+	.include "src/dodrio_berry_picking_2.o"
 	.align 2
 	.include "src/teachy_tv.o"
 	.align 2

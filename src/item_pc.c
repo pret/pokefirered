@@ -577,7 +577,7 @@ static void ItemPc_PrintOrRemoveCursorAt(u8 y, u8 colorIdx)
     }
     else
     {
-        ItemPc_AddTextPrinterParameterized(0, 2, gFameCheckerText_ListMenuCursor, 0, y, 0, 0, 0, colorIdx);
+        ItemPc_AddTextPrinterParameterized(0, 2, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
     }
 }
 

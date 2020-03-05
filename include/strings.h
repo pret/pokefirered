@@ -114,7 +114,7 @@ extern const u8 gText_TurnedOverItemsWorthYen[];
 extern const u8 gPokedudeText_TMTypes[];
 extern const u8 gPokedudeText_ReadTMDescription[];
 extern const u8 gFameCheckerText_Cancel[];
-extern const u8 gFameCheckerText_ListMenuCursor[];
+extern const u8 gText_SelectorArrow2[];
 extern const u8 gFameCheckerText_FameCheckerWillBeClosed[];
 extern const u8 gFameCheckerText_ClearTextbox[];
 extern const u8 gFameCheckerText_MainScreenUI[]; // "{DPAD_ANY}PICK {DPAD_UPDOWN}SELECT {A_BUTTON}OK$"

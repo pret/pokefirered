@@ -1,7 +1,10 @@
 #include "global.h"
 #include "gflib.h"
 #include "dodrio_berry_picking.h"
+#include "dynamic_placeholder_text_util.h"
+#include "item.h"
 #include "link.h"
+#include "menu.h"
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
@@ -914,7 +917,7 @@ struct WinCoords
     u8 top;
 };
 
-const u8 sUnknown_8478E38[][3] =
+const u8 sTextColorTable[][3] =
 {
     {
         TEXT_COLOR_WHITE,
@@ -1036,5 +1039,393 @@ void sub_8154A2C(void)
     }
 }
 
-// This is declared inside pokeemerald's sub_80296A8
-const u8 gUnknown_8478F14[5] = {0, 1, 2, 3, 4};
+void sub_8154B34(void)
+{
+    u8 i, playersCount, id, colorsId, *name;
+    u32 left;
+    struct WindowTemplate window;
+    const struct WinCoords *ptr;
+
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        playersCount = sub_81533B4();
+        ptr = sUnknown_8478E80[playersCount - 1];
+        window.bg = 0;
+        window.width = 7;
+        window.height = 2;
+        window.paletteNum = 0xD;
+        window.baseBlock = 0x13;
+        for (i = 0; i < playersCount; ptr++, i++)
+        {
+            colorsId = 0;
+            id = sub_81537AC(i);
+            left = (56 - GetStringWidth(0, sub_81533C4(id), -1)) / 2u;
+            window.tilemapLeft = ptr->left;
+            window.tilemapTop = ptr->top;
+            gUnknown_203F440->unk3008[i] = AddWindow(&window);
+            ClearWindowTilemap(gUnknown_203F440->unk3008[i]);
+            FillWindowPixelBuffer(gUnknown_203F440->unk3008[i], PIXEL_FILL(1));
+            if (id == GetMultiplayerId())
+                colorsId = 2;
+            name = sub_81533C4(id);
+            AddTextPrinterParameterized3(gUnknown_203F440->unk3008[i], 0, left, 1, sTextColorTable[colorsId], -1, name);
+            CopyWindowToVram(gUnknown_203F440->unk3008[i], 2);
+            window.baseBlock += 0xE;
+            sub_8154868(&window);
+        }
+        gUnknown_203F440->state++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            playersCount = sub_81533B4();
+            for (i = 0; i < playersCount; i++)
+                PutWindowTilemap(gUnknown_203F440->unk3008[i]);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203F440->state++;
+        }
+        break;
+    default:
+        if (++gUnknown_203F440->state > 180)
+        {
+            playersCount = sub_81533B4();
+            for (i = 0; i < playersCount; i++)
+            {
+                ClearWindowTilemap(gUnknown_203F440->unk3008[i]);
+                RemoveWindow(gUnknown_203F440->unk3008[i]);
+            }
+            FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+            CopyBgTilemapBufferToVram(0);
+            gUnknown_203F440->finished = TRUE;
+        }
+        break;
+    }
+}
+
+void sub_8154D9C(u8 playersCount_)
+{
+    u8 i, r8 = 0, r6 = 0;
+    u8 playersCount = playersCount_; // Pointless variable, I know, but it's needed to match.
+    u8 *name;
+    u32 x, numWidth;
+    u8 numString[32];
+    u8 array[5] = {0, 1, 2, 3, 4};
+    struct DodrioSubstruct_3308 temp, structArray[5];
+
+    for (i = 0; i < playersCount; i++)
+    {
+        array[i] = i;
+        sub_81536A0(&temp, i);
+        structArray[i] = temp;
+    }
+
+    if (sub_81534AC() != 0)
+    {
+        do
+        {
+            for (i = 0; i < playersCount; i++)
+            {
+                if (structArray[i].unk0 == r8)
+                {
+                    array[r6] = i;
+                    r6++;
+                }
+            }
+            r8 = r6;
+        } while (r6 < playersCount);
+    }
+
+    for (i = 0; i < playersCount; i++)
+    {
+        if (structArray[i].unk4 == 0)
+            structArray[i].unk0 = playersCount - 1;
+    }
+
+    x = 216 - GetStringWidth(0, gText_SpacePoints, 0);
+    for (i = 0; i < playersCount; i++)
+    {
+        u8 colorsId = 0;
+        u8 id = array[i];
+        u32 points = structArray[id].unk4;
+
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sUnknown_8478E94[structArray[id].unk0], 8, sUnknown_8478EBA[i], -1, NULL);
+        if (id == GetMultiplayerId())
+            colorsId = 2;
+        name = sub_81533C4(id);
+        AddTextPrinterParameterized3(gUnknown_203F440->unk3008[1], 0, 28, sUnknown_8478EBA[i], sTextColorTable[colorsId], -1, name);
+        ConvertIntToDecimalStringN(numString, points, STR_CONV_MODE_RIGHT_ALIGN, 7);
+        numWidth = GetStringWidth(0, numString, -1);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, numString, x - 35, sUnknown_8478EBA[i], -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, gText_SpacePoints, x, sUnknown_8478EBA[i], -1, NULL);
+    }
+}
+
+void sub_8154F80(void)
+{
+    u8 i, j, itemGiveRet, playersCount = sub_81533B4();
+    u8 *name;
+    u32 strWidth, x;
+    u8 sp0C[100];
+    u8 sp70[20];
+
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        sub_81535B0();
+        gUnknown_203F440->unk301C = 0;
+        gUnknown_203F440->state++;
+        break;
+    case 1:
+        gUnknown_203F440->unk3008[0] = AddWindow(&sUnknown_8475674[0]);
+        gUnknown_203F440->unk3008[1] = AddWindow(&sUnknown_8475674[1]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[1]);
+        sub_8154868(&sUnknown_8475674[0]);
+        sub_8154868(&sUnknown_8475674[1]);
+        gUnknown_203F440->state++;
+        break;
+    case 2:
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
+        strWidth = GetStringWidth(0, gText_BerryPickingResults, -1);
+        x = (224 - strWidth) / 2;
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 0, gText_BerryPickingResults, x, 2, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, gText_10P30P50P50P, 68, 16, -1, NULL);
+        for (i = 0; i < playersCount; i++)
+        {
+            u8 colorsId = 0;
+            if (i == GetMultiplayerId())
+                colorsId = 2;
+
+            name = sub_81533C4(i);
+            AddTextPrinterParameterized3(gUnknown_203F440->unk3008[1], 0, 2, sUnknown_8478EB0[i], sTextColorTable[colorsId], -1, name);
+            for (j = 0; j < 4; j++)
+            {
+                u32 width;
+                u16 result1 = Min(sub_8153404(i, j), 9999);
+                u16 result2 = Min(sub_81534F0(j), 9999);
+
+                ConvertIntToDecimalStringN(sp0C, result1, STR_CONV_MODE_LEFT_ALIGN, 4);
+                width = GetStringWidth(0, sp0C, -1);
+                if (result2 == result1 && result2 != 0)
+                    AddTextPrinterParameterized3(gUnknown_203F440->unk3008[1], 0, sUnknown_8478EA8[j] - width, sUnknown_8478EB0[i], sTextColorTable[1], -1, sp0C);
+                else
+                    AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sp0C, sUnknown_8478EA8[j] - width, sUnknown_8478EB0[i], -1, NULL);
+            }
+        }
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+            PutWindowTilemap(gUnknown_203F440->unk3008[1]);
+        }
+        CopyBgTilemapBufferToVram(0);
+        sub_8154324(FALSE);
+        gUnknown_203F440->state++;
+        break;
+    case 4:
+        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        {
+            gUnknown_203F440->unk301C = 0;
+            PlaySE(SE_SELECT);
+            sub_8154324(TRUE);
+            gUnknown_203F440->state++;
+        }
+        break;
+    case 5:
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
+        strWidth = GetStringWidth(0, gText_AnnouncingRankings, -1);
+        x = (224 - strWidth) / 2;
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 0, gText_AnnouncingRankings, x, 2, -1, NULL);
+        gUnknown_203F440->state++;
+        break;
+    case 6:
+        sub_8154D9C(playersCount);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 7:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+            PutWindowTilemap(gUnknown_203F440->unk3008[1]);
+        }
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->state++;
+        break;
+    case 8:
+        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        {
+            gUnknown_203F440->unk301C = 0;
+            PlaySE(SE_SELECT);
+            if (sub_81534AC() < 3000)
+            {
+                gUnknown_203F440->state = 127;
+            }
+            else
+            {
+                StopMapMusic();
+                gUnknown_203F440->state++;
+            }
+
+            FillBgTilemapBufferRect_Palette0(0, 0, 0, 5, 30, 15);
+            RemoveWindow(gUnknown_203F440->unk3008[1]);
+            gUnknown_203F440->unk3008[1] = AddWindow(&sUnknown_8475684);
+            ClearWindowTilemap(gUnknown_203F440->unk3008[1]);
+            sub_8154868(&sUnknown_8475684);
+        }
+        break;
+    case 9:
+        PlayNewMapMusic(MUS_FANFA1);
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
+        strWidth = GetStringWidth(0, gText_AnnouncingPrizes, -1);
+        x = (224 - strWidth) / 2;
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 0, gText_AnnouncingPrizes, x, 2, -1, NULL);
+        DynamicPlaceholderTextUtil_Reset();
+        CopyItemName(sub_8153390(), sp70);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sp70);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(sp0C, gText_FirstPlacePrize);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sp0C, 8, 2, -1, NULL);
+        itemGiveRet = sub_815372C();
+        if (itemGiveRet != 0 && itemGiveRet != 3)
+        {
+            DynamicPlaceholderTextUtil_Reset();
+            CopyItemName(sub_8153390(), sp70);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sp70);
+            if (itemGiveRet == 2)
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(sp0C, gText_CantHoldAnyMore);
+            else if (itemGiveRet == 1)
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(sp0C, gText_FilledStorageSpace);
+            AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 0, sp0C, 8, 40, -1, NULL);
+        }
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 10:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+            PutWindowTilemap(gUnknown_203F440->unk3008[1]);
+        }
+        CopyBgTilemapBufferToVram(0);
+        FadeOutAndFadeInNewMapMusic(MUS_WIN_YASEI, 20, 10);
+        gUnknown_203F440->state++;
+        break;
+    case 11:
+        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        {
+            gUnknown_203F440->unk301C = 0;
+            PlaySE(SE_SELECT);
+            gUnknown_203F440->state++;
+        }
+        break;
+    default:
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[1]);
+        RemoveWindow(gUnknown_203F440->unk3008[0]);
+        RemoveWindow(gUnknown_203F440->unk3008[1]);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->finished = TRUE;
+        break;
+    }
+}
+
+void sub_81556E0(void)
+{
+    u8 y;
+
+    switch (gUnknown_203F440->state)
+    {
+    case 0:
+        gUnknown_203F440->unk3008[0] = AddWindow(&sUnknown_847568C[0]);
+        gUnknown_203F440->unk3008[1] = AddWindow(&sUnknown_847568C[1]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[1]);
+        sub_8154868(&sUnknown_847568C[0]);
+        sub_8154768(&sUnknown_847568C[1]);
+        gUnknown_203F440->state++;
+        gUnknown_203F440->unk3020 = 0;
+        gUnknown_203F440->unk3024 = 0;
+        break;
+    case 1:
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[0], PIXEL_FILL(1));
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[0], 2, gText_WantToPlayAgain, 0, 6, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_Yes, 8, 2, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_No, 8, 16, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_SelectorArrow2, 0, 2, -1, NULL);
+        CopyWindowToVram(gUnknown_203F440->unk3008[0], 2);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], 2);
+        gUnknown_203F440->state++;
+        break;
+    case 2:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            PutWindowTilemap(gUnknown_203F440->unk3008[0]);
+            PutWindowTilemap(gUnknown_203F440->unk3008[1]);
+        }
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->state++;
+        break;
+    case 3:
+        y = gUnknown_203F440->unk3020;
+        if (y == 0)
+            y = 1;
+        FillWindowPixelBuffer(gUnknown_203F440->unk3008[1], PIXEL_FILL(1));
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_Yes, 8, 2, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_No, 8, 16, -1, NULL);
+        AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_SelectorArrow2, 0, y == 1 ? 2 : 16, -1, NULL);
+        CopyWindowToVram(gUnknown_203F440->unk3008[1], 3);
+        // Increment state only if A or B button have been pressed.
+        if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            if (gUnknown_203F440->unk3020 == 0)
+                gUnknown_203F440->unk3020 = 1;
+            gUnknown_203F440->state++;
+        }
+        else if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
+        {
+            PlaySE(SE_SELECT);
+            switch (gUnknown_203F440->unk3020)
+            {
+            case 0:
+                gUnknown_203F440->unk3020 = 2;
+                break;
+            case 1:
+                gUnknown_203F440->unk3020 = 2;
+                break;
+            case 2:
+                gUnknown_203F440->unk3020 = 1;
+                break;
+            }
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            gUnknown_203F440->unk3020 = 2;
+            gUnknown_203F440->state++;
+        }
+        break;
+    default:
+        gUnknown_203F440->unk3024 = gUnknown_203F440->unk3020;
+        ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
+        ClearWindowTilemap(gUnknown_203F440->unk3008[1]);
+        RemoveWindow(gUnknown_203F440->unk3008[0]);
+        RemoveWindow(gUnknown_203F440->unk3008[1]);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        CopyBgTilemapBufferToVram(0);
+        gUnknown_203F440->finished = TRUE;
+        break;
+    }
+}

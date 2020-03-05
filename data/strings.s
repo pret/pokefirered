@@ -504,7 +504,7 @@ gUnknown_8416233::
 gUnknown_8416238:: @ 8416238
 	.string "{PP}$"
 
-gFameCheckerText_ListMenuCursor:: @ 841623B
+gText_SelectorArrow2:: @ 841623B
 	.string "▶$"
 
 gUnknown_841623D:: @ 841623D

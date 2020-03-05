@@ -42,6 +42,12 @@ struct DodrioSubstruct_31A0
     u8 filler_35[4];
 }; // size = 0x3C
 
+struct DodrioSubstruct_3308
+{
+    u8 unk0;
+    u32 unk4;
+};
+
 void StartDodrioBerryPicking(u16 species, MainCallback callback);
 
 u32 sub_815A950(u32 unused, struct DodrioSubstruct_31A0 *arg0, struct DodrioSubstruct_31A0_2C *arg1, struct DodrioSubstruct_31A0_2C *arg2, struct DodrioSubstruct_31A0_2C *arg3, struct DodrioSubstruct_31A0_2C *arg4, struct DodrioSubstruct_31A0_2C *arg5, u8 *arg6, u32 *arg7, u32 *arg8);
@@ -83,5 +89,15 @@ void sub_81546C0(void);
 void sub_8154730(void);
 void sub_8154968(struct DodrioSubstruct_0160 * unk0160);
 void sub_81549D4(u8 a0);
+u8 *sub_81533C4(u8 id);
+u8 sub_81537AC(u8 id);
+void sub_81536A0(struct DodrioSubstruct_3308 *dst, u8 id);
+u32 sub_81534AC(void);
+u32 Min(u32 x, u32 y);
+u16 sub_8153404(u8 arg0, u8 arg1);
+u32 sub_81534F0(u8 arg0);
+u32 sub_81535B0(void);
+u16 sub_8153390(void);
+u8 sub_815372C(void);
 
 #endif //GUARD_DODRIO_BERRY_PICKING_H

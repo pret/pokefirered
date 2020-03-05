@@ -17,12 +17,6 @@
 #include "constants/items.h"
 #include "constants/species.h"
 
-struct DodrioSubstruct_3308
-{
-    u8 unk0;
-    u32 unk4;
-};
-
 struct DodrioStruct
 {
     /*0x0000*/ void (*savedCallback)(void);
@@ -139,7 +133,6 @@ u8 sub_815327C(u8);
 void sub_81532B8(void);
 void sub_815336C(void);
 u32 sub_8153424(u8 mpId);
-u32 sub_81534AC(void);
 u32 Min(u32 x, u32 y);
 void Task_ShowDodrioBerryPickingRecords(u8 taskId);
 void sub_81538D0(u8 windowId);

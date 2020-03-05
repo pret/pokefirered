@@ -740,7 +740,7 @@ static void bag_menu_print_cursor(u8 y, u8 colorIdx)
     }
     else
     {
-        BagPrintTextOnWindow(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+        BagPrintTextOnWindow(0, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
     }
 }
 

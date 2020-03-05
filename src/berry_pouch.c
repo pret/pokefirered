@@ -748,7 +748,7 @@ static void BerryPouchSetArrowCursorAt(u8 y, u8 colorIdx)
     }
     else
     {
-        BerryPouchPrint(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+        BerryPouchPrint(0, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
     }
 }
 

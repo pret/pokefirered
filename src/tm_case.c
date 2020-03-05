@@ -612,7 +612,7 @@ static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1)
     }
     else
     {
-        AddTextPrinterParameterized_ColorByIndex(0, 2, gFameCheckerText_ListMenuCursor, 0, a0, 0, 0, 0, a1);
+        AddTextPrinterParameterized_ColorByIndex(0, 2, gText_SelectorArrow2, 0, a0, 0, 0, 0, a1);
     }
 }
 

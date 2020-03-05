@@ -668,7 +668,7 @@ static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1)
     }
     else
     {
-        BuyMenuPrint(4, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, a1);
+        BuyMenuPrint(4, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, a1);
     }
 }
 

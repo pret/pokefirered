@@ -671,7 +671,7 @@ static void sub_81543C4(u8 spriteId)
 
 // Gamefreak made a mistake there and goes out of bounds for the data array as it holds 8 elements
 // in turn overwriting sprite's subpriority and subsprites fields.
-#if defined(NONMATCHING)
+#if defined(BUGFIX)
 #define sKeepPosX data[1]
 #else
 #define sKeepPosX data[10]

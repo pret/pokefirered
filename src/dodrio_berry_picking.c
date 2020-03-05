@@ -2350,7 +2350,7 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
             data[0]++;
         break;
     case 2:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             rbox_fill_rectangle(data[1]);
             CopyWindowToVram(data[1], 1);

@@ -4,10 +4,10 @@ PokemonLeague_HallOfFame_MapScripts:: @ 8162D4C
 	.byte 0
 
 PokemonLeague_HallOfFame_OnWarp:: @ 8162D57
-	map_script_2 VAR_TEMP_1, 0, EventScript_162D61
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_HallOfFame_EventScript_TurnPlayerNorth
 	.2byte 0
 
-EventScript_162D61:: @ 8162D61
+PokemonLeague_HallOfFame_EventScript_TurnPlayerNorth:: @ 8162D61
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
@@ -37,7 +37,7 @@ PokemonLeague_HallOfFame_EventScript_EnterRoom:: @ 8162D70
 	call EventScript_SetDefeatedEliteFourFlagsVars
 	setrespawn SPAWN_PALLET_TOWN
 	fadescreenspeed FADE_TO_BLACK, 24
-	special Special_HallOfFame
+	special EnterHallOfFame
 	waitstate
 	releaseall
 	end

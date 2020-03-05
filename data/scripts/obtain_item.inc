@@ -133,7 +133,7 @@ Std_FindItem:: @ 81A67B3
 EventScript_PickUpItem:: @ 81A67EE
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, Special_ItemIsTM_GetMoveName
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, TRUE
 	call_if_eq EventScript_FoundTMHM
@@ -187,7 +187,7 @@ EventScript_PickedUpHiddenItem::
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway
-	special Special_SetHiddenItemFlag
+	special SetHiddenItemFlag
 	releaseall
 	end
 
@@ -215,7 +215,7 @@ EventScript_NoRoomForHiddenItem::
 EventScript_TryPickUpHiddenCoins::
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_NoCaseForHiddenCoins
 	checkcoins VAR_RESULT
-	specialvar VAR_RESULT, Special_CheckAddCoins
+	specialvar VAR_RESULT, CheckAddCoins
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_HiddenCoinsButCaseIsFull
 	addcoins VAR_0x8006
@@ -225,7 +225,7 @@ EventScript_TryPickUpHiddenCoins::
 	waitfanfare
 	waitmessage
 	msgbox Text_PutCoinsAwayInCoinCase
-	special Special_SetHiddenItemFlag
+	special SetHiddenItemFlag
 	releaseall
 	end
 

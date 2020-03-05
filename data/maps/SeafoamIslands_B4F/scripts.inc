@@ -13,7 +13,7 @@ SeafoamIslands_B4F_OnResume:: @ 8163048
 	end
 
 SeafoamIslands_B4F_EventScript_TryRemoveArticuno:: @ 8163052
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
@@ -64,7 +64,7 @@ SeafoamIslands_B4F_OnWarp:: @ 81630E7
 
 SeafoamIslands_B4F_EventScript_WarpInOnCurrent:: @ 81630F1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
-	special Special_ForcePlayerToStartSurfing
+	special ForcePlayerToStartSurfing
 	end
 
 SeafoamIslands_B4F_OnFrame:: @ 81630F9
@@ -172,10 +172,10 @@ SeafoamIslands_B4F_EventScript_Articuno:: @ 81631AC
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq SeafoamIslands_B4F_EventScript_DefeatedArticuno
 	compare VAR_RESULT, B_OUTCOME_RAN

@@ -17,7 +17,7 @@ Route18_OnWarp:: @ 8168211
 	.2byte 0
 
 Route18_OnWarpCyclingRoad:: @ 816821B
-	special Special_ForcePlayerOntoBike
+	special ForcePlayerOntoBike
 	end
 
 Route18_EventScript_RouteSign:: @ 816821F

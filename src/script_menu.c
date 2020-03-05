@@ -944,7 +944,7 @@ static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 ScrSpecial_CreatePCMenu(void)
+bool8 CreatePCMenu(void)
 {
     if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;
@@ -1116,7 +1116,7 @@ void Task_WaitMuseumFossilPic(u8 taskId)
     }
 }
 
-bool8 Special_OpenMuseumFossilPic(void)
+bool8 OpenMuseumFossilPic(void)
 {
     u8 spriteId;
     u8 taskId;
@@ -1149,7 +1149,7 @@ bool8 Special_OpenMuseumFossilPic(void)
     return TRUE;
 }
 
-bool8 Special_CloseMuseumFossilPic(void)
+bool8 CloseMuseumFossilPic(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_WaitMuseumFossilPic);
     if (taskId == 0xFF)
@@ -1197,7 +1197,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
     }
 }
 
-void Special_DrawSeagallopDestinationMenu(void)
+void DrawSeagallopDestinationMenu(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)
@@ -1249,7 +1249,7 @@ void Special_DrawSeagallopDestinationMenu(void)
     }
 }
 
-u16 Special_GetSelectedSeagallopDestination(void)
+u16 GetSelectedSeagallopDestination(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)

@@ -61,7 +61,7 @@ void ClearRoamerData(void)
 
 #define GetRoamerSpecies() ({\
     u16 a;\
-    switch (ScrSpecial_GetStarter())\
+    switch (GetStarterSpecies())\
     {\
     default:\
         a = SPECIES_RAIKOU;\

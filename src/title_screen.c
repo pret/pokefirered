@@ -575,7 +575,7 @@ static void SetTitleScreenScene_Run(s16 * data)
     switch (data[1])
     {
     case 0:
-        HelpSystem_SetSomeVariable2(1);
+        SetHelpContext(HELPCONTEXT_TITLE_SCREEN);
         CreateTask(Task_TitleScreen_BlinkPressStart, 0);
         CreateTask(Task_FlameOrLeafSpawner, 5);
         SetGpuRegsForTitleScreenRun();

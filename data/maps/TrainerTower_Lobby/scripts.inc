@@ -212,7 +212,7 @@ TrainerTower_Lobby_EventScript_ShowRecords:: @ 8164AD8
 	lockall
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
-	special Special_BattleRecords
+	special ShowBattleRecords
 	waitstate
 	releaseall
 	end

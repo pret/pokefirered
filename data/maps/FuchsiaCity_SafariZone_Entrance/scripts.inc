@@ -158,7 +158,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_CheckSpaceForMons:: @ 816D462
 	getpartysize
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EventScript_Return
-	specialvar VAR_RESULT, Special_IsThereRoomInAnyBoxForMorePokemon
+	specialvar VAR_RESULT, IsThereRoomInAnyBoxForMorePokemon
 	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_Return
 	msgbox SafariZone_Text_ExcuseMeYourPCBoxIsFull

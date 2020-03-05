@@ -526,8 +526,8 @@ sub_807B6BC: @ 807B6BC
 	bx lr
 	thumb_func_end sub_807B6BC
 
-	thumb_func_start sub_807B6C0
-sub_807B6C0: @ 807B6C0
+	thumb_func_start StartDroughtWeatherBlend
+StartDroughtWeatherBlend: @ 807B6C0
 	push {lr}
 	ldr r0, _0807B6D0 @ =task50_0807B6D4
 	movs r1, 0x50
@@ -536,7 +536,7 @@ sub_807B6C0: @ 807B6C0
 	bx r0
 	.align 2, 0
 _0807B6D0: .4byte task50_0807B6D4
-	thumb_func_end sub_807B6C0
+	thumb_func_end StartDroughtWeatherBlend
 
 	thumb_func_start task50_0807B6D4
 task50_0807B6D4: @ 807B6D4

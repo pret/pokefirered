@@ -45,7 +45,7 @@ EventScript_CancelGiveProfile: @ 81BEE9E
 EventScript_GaveProfile: @ 81BEEA8
 	setvar GAVE_PROFILE, TRUE
 	setvar VAR_0x8004, 0
-	special Special_BufferEasyChatMessage
+	special ShowEasyChatMessage
 	waitmessage
 	delay 80
 	msgbox Text_ProfileSaysSomethingAboutYou
@@ -92,7 +92,7 @@ EventScript_DeclineGiveNewProfile: @ 81BEF35
 EventScript_GaveSpecialProfile: @ 81BEF3F
 	setvar GAVE_PROFILE, TRUE
 	setvar VAR_0x8004, 0
-	special Special_BufferEasyChatMessage
+	special ShowEasyChatMessage
 	waitmessage
 	delay 80
 	msgbox Text_HeardThatBefore

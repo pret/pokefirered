@@ -11,7 +11,7 @@ Route15_WestEntrance_2F_EventScript_LeftBinoculars:: @ 8170093
 	waitbuttonpress
 	erasemonpic
 	setvar VAR_0x8004, SPECIES_ARTICUNO
-	special Special_SetSeenMon
+	special SetSeenMon
 	releaseall
 	end
 
@@ -28,7 +28,7 @@ Route15_WestEntrance_2F_EventScript_Aide:: @ 81700B9
 	compare VAR_RESULT, NO
 	goto_if_eq Aide_EventScript_DeclineCheckMons
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, Special_GetPokedexCount
+	specialvar VAR_RESULT, GetPokedexCount
 	getnumberstring 2, VAR_0x8006
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
 	compare VAR_0x8006, REQUIRED_CAUGHT_MONS

@@ -21,6 +21,7 @@ void nullsub_60(void)
 {
 }
 
-void nullsub_61(void)
+// From Hoenn's SS Tidal
+void LookThroughPorthole(void)
 {
 }

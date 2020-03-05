@@ -46,14 +46,14 @@ SevenIsland_House_Room2_EventScript_BattleTie:: @ 8170AFE
 
 SevenIsland_House_Room2_EventScript_BattleWon:: @ 8170B0C
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	special Special_ShowStringVar4AsFieldMessage
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
 SevenIsland_House_Room2_EventScript_BattleLost:: @ 8170B17
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	special Special_ShowStringVar4AsFieldMessage
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return

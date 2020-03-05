@@ -25,7 +25,7 @@ NavelRock_Summit_OnResume:: @ 8164FDD
 	end
 
 NavelRock_Summit_EventScript_TryRemoveHoOh:: @ 8164FE7
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject 1
@@ -39,7 +39,7 @@ NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	special SpawnCameraObject
 	setvar VAR_0x8004, 3  @ Num loops
 	setvar VAR_0x8005, 35 @ Delay
-	special Special_LoopWingFlapSound
+	special LoopWingFlapSound
 	applymovement 1, Movement_HoOhAppear
 	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanUp
 	waitmovement 0
@@ -53,7 +53,7 @@ NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	delay 60
 	setvar VAR_0x8004, 3  @ Num loops
 	setvar VAR_0x8005, 35 @ Delay
-	special Special_LoopWingFlapSound
+	special LoopWingFlapSound
 	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanDown
 	applymovement 1, Movement_HoOhApproach
 	waitmovement 0
@@ -63,11 +63,11 @@ NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	setvar VAR_0x8006, ITEM_NONE
 	special CreateObedientEnemyMon
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	setvar VAR_LAST_TALKED, 1
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq NavelRock_Summit_EventScript_DefeatedHoOh
 	compare VAR_RESULT, B_OUTCOME_RAN

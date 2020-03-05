@@ -57,13 +57,13 @@ PalletTown_GarysHouse_EventScript_GroomMon:: @ 8168DB9
 	compare VAR_RESULT, NO
 	goto_if_eq PalletTown_GarysHouse_EventScript_DeclineGrooming
 	msgbox PalletTown_GarysHouse_Text_GroomWhichOne
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge PalletTown_GarysHouse_EventScript_DeclineGrooming
-	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
+	specialvar VAR_RESULT, GetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq PalletTown_GarysHouse_EventScript_CantGroomEgg
 	msgbox PalletTown_GarysHouse_Text_LookingNiceInNoTime
@@ -71,9 +71,9 @@ PalletTown_GarysHouse_EventScript_GroomMon:: @ 8168DB9
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_ME_ASA
 	waitfanfare
-	special Special_DaisyMassageServices
+	special DaisyMassageServices
 	fadescreen FADE_FROM_BLACK
-	special Special_GetMonNickname
+	special BufferMonNickname
 	msgbox PalletTown_GarysHouse_Text_ThereYouGoAllDone
 	release
 	end

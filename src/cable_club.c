@@ -573,7 +573,7 @@ static void Task_ReestablishLinkInCableClubRoom_2(u8 taskId)
     }
 }
 
-void Special_CableClub_AskSaveTheGame(void)
+void CableClub_AskSaveTheGame(void)
 {
     Field_AskSaveTheGame();
 }
@@ -765,7 +765,7 @@ void CleanupLinkRoomState(void)
     copy_saved_warp2_bank_and_enter_x_to_warp1(127);
 }
 
-void sub_8081770(void)
+void ExitLinkRoom(void)
 {
     sub_8057F5C();
 }
@@ -896,7 +896,7 @@ static void CreateTask_StartWiredCableClubTrade(void)
     CreateTask(Task_StartWiredCableClubTrade, 80);
 }
 
-void Special_WiredCableClubTrade(void)
+void StartWiredCableClubTrade(void)
 {
     CreateTask_StartWiredCableClubTrade();
     ScriptContext1_Stop();

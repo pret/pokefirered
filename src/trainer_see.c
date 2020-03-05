@@ -544,7 +544,7 @@ void MovementAction_RevealTrainer_RunTrainerSeeFuncList(struct ObjectEvent *var)
     StoreWordInTwoHalfwords((u16 *)&gTasks[CreateTask(Task_RevealTrainer_RunTrainerSeeFuncList, 0)].data[1], (u32)var);
 }
 
-void ScrSpecial_EndTrainerApproach(void)
+void EndTrainerApproach(void)
 {
     StartTrainerApproachWithFollowupTask(Task_DestroyTrainerApproachTask);
 }

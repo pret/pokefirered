@@ -19,7 +19,7 @@ CableClub_EventScript_MysteryGiftMan:: @ 81BB1D2
 	execram
 
 @ Unused
-EventScript_1BB1E4:: @ 81BB1E4
+EventScript_MysteryGiftThankYou:: @ 81BB1E4
 	msgbox Text_ThankYouForAccessingMysteryGift, MSGBOX_NPC
 	end
 
@@ -446,7 +446,7 @@ CableClub_EventScript_CheckPartyTradeRequirements:: @ 81BB79C
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	compare VAR_RESULT, 2
 	goto_if_lt CableClub_EventScript_NeedTwoMonsToTrade
-	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	specialvar VAR_RESULT, DoesPartyHaveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_CantTradeEnigmaBerry
 	setvar VAR_RESULT, TRUE
@@ -601,7 +601,7 @@ CableClub_EventScript_ShowBattleRecords:: @ 81BB8A7
 	lockall
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 0
-	special Special_BattleRecords
+	special ShowBattleRecords
 	waitstate
 	releaseall
 	end
@@ -760,7 +760,7 @@ TradeCenter_TerminateLink:: @ 81BB9F0
 	textcolor 3
 	messageautoscroll Text_TerminateLinkConfirmation
 	waitmessage
-	special sub_8081770
+	special ExitLinkRoom
 	end
 
 CableClub_EventScript_DoLinkRoomExit:: @ 81BB9FC
@@ -775,7 +775,7 @@ CableClub_EventScript_UnionRoomAttendant:: @ 81BBA04
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, Special_BadEggInParty
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	copyvar VAR_0x8007, VAR_LAST_TALKED
@@ -842,7 +842,7 @@ CableClub_EventScript_CheckPartyUnionRoomRequirements:: @ 81BBB1E
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	compare VAR_RESULT, 2
 	goto_if_lt CableClub_EventScript_NeedTwoMonsForUnionRoom
-	specialvar VAR_RESULT, GetNameOfEnigmaBerryInPlayerParty
+	specialvar VAR_RESULT, DoesPartyHaveEnigmaBerry
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_NoEnigmaBerryInUnionRoom
 	setvar VAR_RESULT, TRUE
@@ -885,7 +885,7 @@ CableClub_EventScript_DirectCornerAttendant:: @ 81BBB9C
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, Special_BadEggInParty
+	specialvar VAR_RESULT, IsBadEggInParty
 	compare VAR_RESULT, TRUE
 	goto_if_eq CableClub_EventScript_AbortLinkPlayerHasBadEgg
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
@@ -1149,7 +1149,7 @@ CableClub_EventScript_81BBFD8:: @ 81BBFD8
 	goto_if_eq CableClub_EventScript_AdapterNotConnected
 	special HelpSystem_Disable
 	fadescreen FADE_TO_BLACK
-	special Special_WirelessCommunicationScreen
+	special ShowWirelessCommunicationScreen
 	waitstate
 	msgbox CableClub_Text_ParticipantsStepUpToCounter
 	special HelpSystem_Enable
@@ -1162,27 +1162,27 @@ CableClub_EventScript_AdapterNotConnected:: @ 81BC016
 	end
 
 CableClub_EventScript_OpenUnionRoomBarrier:: @ 81BC020
-	setmetatile 5, 3, 709, 0
+	setmetatile 5, 3, METATILE_PokemonCenter_Floor_ShadeLeft, 0
 	return
 
 CableClub_EventScript_CloseUnionRoomBarrier:: @ 81BC02A
-	setmetatile 5, 3, 761, 1
+	setmetatile 5, 3, METATILE_PokemonCenter_CounterBarrier, 1
 	return
 
 CableClub_EventScript_OpenDirectCornerBarrier:: @ 81BC034
-	setmetatile 9, 3, 709, 0
+	setmetatile 9, 3, METATILE_PokemonCenter_Floor_ShadeLeft, 0
 	return
 
 CableClub_EventScript_CloseDirectCornerBarrier:: @ 81BC03E
-	setmetatile 9, 3, 761, 1
+	setmetatile 9, 3, METATILE_PokemonCenter_CounterBarrier, 1
 	return
 
 CableClub_EventScript_OpenGameCornerBarrier:: @ 81BC048
-	setmetatile 5, 3, 737, 0
+	setmetatile 5, 3, METATILE_GameCorner_CheckeredFloor_ShadeLeft, 0
 	return
 
 CableClub_EventScript_CloseGameCornerBarrier:: @ 81BC052
-	setmetatile 5, 3, 759, 1
+	setmetatile 5, 3, METATILE_GameCorner_CounterBarrier, 1
 	return
 
 CableClub_OnResume:: @ 81BC05C

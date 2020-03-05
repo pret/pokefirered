@@ -361,7 +361,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 17:
-        HelpSystem_SetSomeVariable2(29);
+        SetHelpContext(HELPCONTEXT_PLAYERS_PC_ITEMS);
         gMain.state++;
         break;
     case 18:

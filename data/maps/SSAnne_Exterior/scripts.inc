@@ -20,7 +20,7 @@ SSAnne_Exterior_ExitSSAnne:: @ 8160859
 	call_if_ge SSAnne_Exterior_WalkInPlaceDown
 	fadenewbgm MUS_NAMINORI
 	delay 50
-	special Special_SSAnneDepartureCutscene
+	special DoSSAnneDepartureCutscene
 	waitstate
 	removeobject 1
 	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_Exterior_Movement_Exit

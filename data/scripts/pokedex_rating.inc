@@ -16,7 +16,7 @@ PokedexRating_EventScript_NormalIntro:: @ 81A73AD
 
 PokedexRating_EventScript_ShowRatingMsg:: @ 81A73B6
 	copyvar VAR_0x8004, VAR_0x8009
-	special Special_GetProfOaksRatingMessage
+	special GetProfOaksRatingMessage
 	waitmessage
 	compare VAR_RESULT, FALSE
 	call_if_eq PokedexRating_EventScript_NormalFanfare
@@ -35,11 +35,11 @@ PokedexRating_EventScript_DexCompleteFanfare:: @ 81A73DC
 	return
 
 PokedexRating_EventScript_Rate:: @ 81A73E0
-	setvar VAR_0x8004, 31
-	special HelpSystem_BackupSomeVariable
-	special Special_SetSomeVariable
+	setvar VAR_0x8004, HELPCONTEXT_PC_MISC
+	special BackupHelpContext
+	special Script_SetHelpContext
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, Special_GetPokedexCount
+	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	copyvar VAR_0x800A, VAR_RESULT
@@ -51,7 +51,7 @@ PokedexRating_EventScript_Rate:: @ 81A73E0
 	compare VAR_0x800A, FALSE
 	goto_if_eq PokedexRating_EventScript_EndRating  @ National Dex not enabled
 	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, Special_GetPokedexCount
+	specialvar VAR_RESULT, GetPokedexCount
 	copyvar VAR_0x8008, VAR_0x8005
 	copyvar VAR_0x8009, VAR_0x8006
 	getnumberstring 0, VAR_0x8008 @ Num National Seen
@@ -80,5 +80,5 @@ PokedexRating_EventScript_DexComplete:: @ 81A747E
 	end
 
 PokedexRating_EventScript_EndRating:: @ 81A748F
-	special HelpSystem_RestoreSomeVariable
+	special RestoreHelpContext
 	return

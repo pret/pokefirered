@@ -7,12 +7,12 @@ SixIsland_WaterPath_House1_EventScript_Beauty:: @ 817206D
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	setvar VAR_0x8004, SPECIES_HERACROSS
-	specialvar VAR_RESULT, Special_PlayerPartyContainsSpecies
+	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
 	compare VAR_RESULT, FALSE
 	goto_if_eq SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty
 	special GetHeracrossSizeRecordInfo
 	msgbox SixIsland_WaterPath_House1_Text_MayIMeasureHeracross
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	copyvar VAR_RESULT, VAR_0x8004
 	compare VAR_RESULT, PARTY_SIZE

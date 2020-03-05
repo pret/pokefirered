@@ -40,7 +40,7 @@ TwoIsland_JoyfulGameCorner_EventScript_FoundLostelleScene:: @ 8171435
 	textcolor 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_YouRescuedLostelle
 	textcolor 1
-	special Special_BufferBigGuyOrBigGirlString
+	special BufferBigGuyOrBigGirlString
 	msgbox TwoIsland_JoyfulGameCorner_Text_LostelleItsOkayDaddy
 	closemessage
 	applymovement LOCALID_LOSTELLE, Movement_WalkInPlaceFastestDown

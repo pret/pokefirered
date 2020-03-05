@@ -51,11 +51,11 @@ TwoIsland_House_EventScript_AskTutorMon:: @ 81716A5
 
 TwoIsland_House_EventScript_ChooseMonToTutor:: @ 81716BE
 	msgbox TwoIsland_House_Text_TutorWhichMon
-	special Special_SelectMoveTutorMon
+	special SelectMoveTutorMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge TwoIsland_House_EventScript_EndTutorMove
-	special Special_IsSelectedMonEgg
+	special IsSelectedMonEgg
 	compare VAR_RESULT, TRUE
 	goto_if_eq TwoIsland_House_EventScript_CantTutorEgg
 	compare VAR_0x8005, 0

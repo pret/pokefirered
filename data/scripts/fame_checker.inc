@@ -8,7 +8,7 @@ ViridianCity_House2_EventScript_PokemonJournal:: @ 81ACD65
 	release
 	end
 
-EventScript_1ACD8D:: @ 81ACD8D
+EventScript_PokemonJournalUnused1:: @ 81ACD8D
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 1
@@ -18,7 +18,7 @@ EventScript_1ACD8D:: @ 81ACD8D
 	release
 	end
 
-EventScript_1ACDB5:: @ 81ACDB5
+EventScript_PokemonJournalUnused2:: @ 81ACDB5
 	lock
 	faceplayer
 	famechecker FAMECHECKER_DAISY, 4
@@ -135,11 +135,11 @@ CinnabarIsland_Gym_EventScript_BlaineFujiPhoto:: @ 81ACF07
 	releaseall
 	end
 
-FiveIsland_ResortGorgeous_House_EventScript_1ACF2C:: @ 81ACF2C
+FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal:: @ 81ACF2C
 	lockall
 	famechecker FAMECHECKER_BLAINE, 5
 	textcolor 3
-	msgbox gUnknown_81B17E9
+	msgbox PokemonJournal_Text_SpecialFeatureBlaine
 	releaseall
 	end
 
@@ -203,7 +203,7 @@ SixIsland_Mart_EventScript_OldWoman:: @ 81ACFEF
 	release
 	end
 
-EventScript_1AD008:: @ 81AD008
+EventScript_LanceUnused:: @ 81AD008
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 0
@@ -211,7 +211,7 @@ EventScript_1AD008:: @ 81AD008
 	release
 	end
 
-EventScript_1AD021:: @ 81AD021
+SaffronCity_EventScript_BattleGirlUnused:: @ 81AD021
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1

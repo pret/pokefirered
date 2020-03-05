@@ -13,7 +13,7 @@ LavenderTown_House2_EventScript_NameRater:: @ 816B266
 
 LavenderTown_House2_EventScript_ChooseMon:: @ 816B287
 	msgbox LavenderTown_House2_Text_CritiqueWhichMonsNickname
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_lt LavenderTown_House2_EventScript_CheckCanRateMon
@@ -27,15 +27,15 @@ LavenderTown_House2_EventScript_DontRateNickname:: @ 816B2AA
 	end
 
 LavenderTown_House2_EventScript_CheckCanRateMon:: @ 816B2B4
-	specialvar VAR_RESULT, Special_GetSpeciesOfPartySlot_x8004
+	specialvar VAR_RESULT, GetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq LavenderTown_House2_EventScript_CantNicknameEgg
-	special Special_GetMonNickname
-	special Special_IsMonOTIDNotPlayers
+	special BufferMonNickname
+	special IsMonOTIDNotPlayers
 	compare VAR_RESULT, TRUE
 	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
-	specialvar VAR_RESULT, Special_IsMonOTNameNotPlayers
-	special Special_GetMonNickname
+	specialvar VAR_RESULT, IsMonOTNameNotPlayers
+	special BufferMonNickname
 	compare VAR_RESULT, TRUE
 	goto_if_eq LavenderTown_House2_EventScript_CantNicknameTradeMon
 	msgbox LavenderTown_House2_Text_GiveItANicerName, MSGBOX_YESNO
@@ -59,7 +59,7 @@ LavenderTown_House2_EventScript_ChooseNewNickname:: @ 816B31B
 	msgbox LavenderTown_House2_Text_WhatShallNewNicknameBe
 	call EventScript_ChangePokemonNickname
 	specialvar VAR_RESULT, NameRaterWasNicknameChanged
-	special Special_GetMonNickname
+	special BufferMonNickname
 	compare VAR_RESULT, TRUE
 	goto_if_eq LavenderTown_House2_EventScript_ChoseNewNickname
 	msgbox LavenderTown_House2_Text_FromNowOnShallBeKnownAsSameName

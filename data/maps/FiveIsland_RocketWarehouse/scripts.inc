@@ -21,8 +21,8 @@ FiveIsland_RocketWarehouse_OnLoad:: @ 8163F3D
 	end
 
 FiveIsland_RocketWarehouse_EventScript_SetArrowsForReEntry:: @ 8163F47
-	setmetatile 26, 20, METATILE_Hideout_Arrow_Up, 0
-	setmetatile 27, 20, METATILE_Hideout_Arrow_Up, 0
+	setmetatile 26, 20, METATILE_SilphCo_Arrow_Up, 0
+	setmetatile 27, 20, METATILE_SilphCo_Arrow_Up, 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_Cage:: @ 8163F5A

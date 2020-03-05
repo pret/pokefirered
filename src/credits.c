@@ -714,7 +714,7 @@ static const struct CreditsTextHeader sCreditsTexts[] = {
     { gString_Dummy, gString_Dummy, FALSE }
 };
 
-void Special_Credits(void)
+void DoCredits(void)
 {
     sCreditsMgr = AllocZeroed(sizeof(*sCreditsMgr));
     ResetTasks();

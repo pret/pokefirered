@@ -1411,8 +1411,8 @@ _0808C3CC:
 	.4byte _0808C5A6
 	.4byte _0808C680
 _0808C3E0:
-	movs r0, 0x1C
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x1C @ HELPCONTEXT_BILLS_PC
+	bl SetHelpContext
 	ldrb r0, [r5, 0xA]
 	adds r1, r5, 0
 	adds r1, 0x26
@@ -2715,8 +2715,8 @@ _0808CE18:
 	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
-	movs r0, 0x1C
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x1C @ HELPCONTEXT_BILLS_PC
+	bl SetHelpContext
 	bl StorageGetCurrentBox
 	ldr r1, _0808CE58 @ =gUnknown_20397B8
 	strb r0, [r1]
@@ -2766,8 +2766,8 @@ _0808CE8C:
 	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
-	movs r0, 0x1C
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x1C @ HELPCONTEXT_BILLS_PC
+	bl SetHelpContext
 	ldr r0, _0808CEC4 @ =c2_Box
 	bl SetMainCallback2
 _0808CEB6:

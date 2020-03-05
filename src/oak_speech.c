@@ -512,7 +512,7 @@ static void Task_OaksSpeech1(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         ResetTempTileDataBuffers();
-        HelpSystem_SetSomeVariable2(2);
+        SetHelpContext(HELPCONTEXT_NEW_GAME);
         break;
     case 1:
         sOakSpeechResources = AllocZeroed(sizeof(*sOakSpeechResources));

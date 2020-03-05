@@ -109,7 +109,7 @@
 	create_movement emote_x
 	create_movement emote_double_exclamation_mark
 	create_movement emote_smile
-	create_movement step_67
+	create_movement reveal_trainer
 	create_movement rock_smash_break
 	create_movement cut_tree
 

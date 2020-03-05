@@ -259,7 +259,7 @@ CeladonCity_GameCorner_EventScript_SlotMachine:: @ 816C96C
 	setfieldeffectarg 2, 14
 	dofieldeffect FLDEFF_SMILEY_FACE_ICON
 	waitfieldeffect FLDEFF_SMILEY_FACE_ICON
-	specialvar VAR_RESULT, Special_GetRandomSlotMachine
+	specialvar VAR_RESULT, GetRandomSlotMachineId
 	playslotmachine VAR_RESULT
 	releaseall
 	end

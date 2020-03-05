@@ -641,17 +641,17 @@ void CB2_InitBattle(void)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                    HelpSystem_SetSomeVariable2(0x19);
+                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_DOUBLE);
                 else
-                    HelpSystem_SetSomeVariable2(0x18);
+                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_SINGLE);
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             {
-                HelpSystem_SetSomeVariable2(0x1A);
+                SetHelpContext(HELPCONTEXT_SAFARI_BATTLE);
             }
             else
             {
-                HelpSystem_SetSomeVariable2(0x17);
+                SetHelpContext(HELPCONTEXT_WILD_BATTLE);
             }
         }
     }
@@ -3713,7 +3713,7 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
         {
             if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text

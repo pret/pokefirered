@@ -59,7 +59,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "FiveIsland_ResortGorgeous_House_EventScript_1ACF2C"
+      "script": "FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal"
     },
     {
       "type": "sign",
@@ -67,7 +67,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "FiveIsland_ResortGorgeous_House_EventScript_1ACF2C"
+      "script": "FiveIsland_ResortGorgeous_House_EventScript_PokemonJournal"
     }
   ]
 }

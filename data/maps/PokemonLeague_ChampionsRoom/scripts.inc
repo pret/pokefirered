@@ -78,7 +78,7 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom:: @ 8162B76
 	applymovement LOCALID_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakEnter
 	waitmovement 0
 	delay 25
-	specialvar VAR_RESULT, ScrSpecial_GetStarter
+	specialvar VAR_RESULT, GetStarterSpecies
 	getspeciesname 0, VAR_RESULT
 	msgbox PokemonLeague_ChampionsRoom_Text_OakCongratulations
 	applymovement LOCALID_PROF_OAK, Movement_WalkInPlaceFastestRight

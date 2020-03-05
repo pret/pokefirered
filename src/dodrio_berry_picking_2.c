@@ -53,6 +53,7 @@ MainCallback sub_8155E54(void);
 static void sub_8155EA0(void);
 static bool32 sub_8155FE0(void);
 
+// Assets in this header are duplicated
 #include "data/dodrio_berry_picking.h"
 
 static const struct OamData sOamData_8478C98 =

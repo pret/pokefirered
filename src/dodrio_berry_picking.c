@@ -137,6 +137,7 @@ static void sub_81538D0(u8 windowId);
 
 // const rom data
 
+// Assets in this header are duplicated
 #include "data/dodrio_berry_picking.h"
 
 static const u8 sUnknown_847553C[][3] =

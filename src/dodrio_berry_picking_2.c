@@ -561,7 +561,7 @@ void sub_8154128(void)
     struct SpritePalette sprPal = {sDodrioBerrySpritesPal, 3};
 
     LZ77UnCompWram(sDodrioBerrySpritesGfx, ptr);
-    if (ptr != NULL)
+    if (ptr != NULL) // This should be one line up
     {
         struct SpriteSheet sprSheet = {ptr, 0x480, 2};
         LoadSpriteSheet(&sprSheet);
@@ -704,7 +704,7 @@ void sub_8154438(void)
     struct SpritePalette sprPal = {sDodrioBerryPlatformPal, 6};
 
     LZ77UnCompWram(sDodrioBerryPlatformGfx, ptr);
-    if (ptr != NULL)
+    if (ptr != NULL) // This should be one line up
     {
         struct SpriteSheet sprSheet = {ptr, 0x400, 5};
         struct SpriteTemplate sprTemplate =
@@ -1214,7 +1214,7 @@ static void sub_8154F80(void)
         gUnknown_203F440->state++;
         break;
     case 4:
-        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_203F440->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_203F440->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -1246,7 +1246,7 @@ static void sub_8154F80(void)
         gUnknown_203F440->state++;
         break;
     case 8:
-        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_203F440->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_203F440->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -1306,7 +1306,7 @@ static void sub_8154F80(void)
         gUnknown_203F440->state++;
         break;
     case 11:
-        if (++gUnknown_203F440->unk301C >= 30 && gMain.newKeys & A_BUTTON)
+        if (++gUnknown_203F440->unk301C >= 30 && JOY_NEW(A_BUTTON))
         {
             gUnknown_203F440->unk301C = 0;
             PlaySE(SE_SELECT);
@@ -1372,14 +1372,14 @@ static void sub_81556E0(void)
         AddTextPrinterParameterized(gUnknown_203F440->unk3008[1], 2, gText_SelectorArrow2, 0, y == 1 ? 2 : 16, -1, NULL);
         CopyWindowToVram(gUnknown_203F440->unk3008[1], 3);
         // Increment state only if A or B button have been pressed.
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
             if (gUnknown_203F440->unk3020 == 0)
                 gUnknown_203F440->unk3020 = 1;
             gUnknown_203F440->state++;
         }
-        else if (gMain.newKeys & (DPAD_UP | DPAD_DOWN))
+        else if (JOY_NEW(DPAD_UP | DPAD_DOWN))
         {
             PlaySE(SE_SELECT);
             switch (gUnknown_203F440->unk3020)
@@ -1395,7 +1395,7 @@ static void sub_81556E0(void)
                 break;
             }
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gUnknown_203F440->unk3020 = 2;

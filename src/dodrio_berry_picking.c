@@ -30,8 +30,7 @@ struct DodrioStruct
     /*0x0020*/ u8 ALIGNED(4) unk20;
     /*0x0024*/ u8 ALIGNED(4) unk24;
     /*0x0028*/ u8 ALIGNED(4) multiplayerId;
-    /*0x0029*/ u8 filler_0029[7];
-    /*0x0030*/ u8 ALIGNED(4) unk30;
+    /*0x0030*/ u8 ALIGNED(8) unk30;
     /*0x0034*/ u8 ALIGNED(4) unk34[5];
     /*0x003C*/ u8 ALIGNED(4) unk3C;
     /*0x0040*/ u8 ALIGNED(4) unk40;
@@ -334,8 +333,8 @@ static void sub_8150A84(u8 taskId)
         gUnknown_203F3E0->unk0C++;
         break;
     case 6:
-        BlendPalettes(0xFFFFFFFF, 0x10, 0x00);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(sub_8152034);
         gUnknown_203F3E0->unk0C++;
         break;
@@ -836,7 +835,7 @@ static void sub_81514F0(void)
     switch (gUnknown_203F3E0->unk10)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 1:
@@ -873,7 +872,7 @@ static void sub_815159C(void)
     {
     case 0:
         sub_81549D4(9);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 1:
@@ -904,8 +903,8 @@ static void sub_815159C(void)
         gUnknown_203F3E0->unk10++;
         break;
     case 5:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
         gUnknown_203F3E0->unk10++;
         break;
     case 6:
@@ -1691,7 +1690,7 @@ static bool32 sub_8152A00(void)
             gUnknown_203F3E0->unk158[i] = sub_815A5E8(i);
     }
 
-    // This loop won't ever run, the seemingly poitnless assingment below is to make the compiler
+    // This loop won't ever run, the seemingly pointless assingment below is to make the compiler
     // generate code for it.
     count = count;
     for (; i < count; i++)
@@ -2067,19 +2066,19 @@ static void sub_81532B8(void)
 {
     if (gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] == 0)
     {
-        if (gMain.newKeys & DPAD_UP)
+        if (JOY_NEW(DPAD_UP))
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 2;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
             PlaySE(SE_W204);
         }
-        else if (gMain.newKeys & DPAD_LEFT)
+        else if (JOY_NEW(DPAD_LEFT))
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 3;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;
             PlaySE(SE_W204);
         }
-        else if (gMain.newKeys & DPAD_RIGHT)
+        else if (JOY_NEW(DPAD_RIGHT))
         {
             gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 1;
             gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] = 6;

@@ -22,40 +22,40 @@ struct DodrioStruct_2022CF4
     u16 unk3E;
 }; // size = 0x40
 
-EWRAM_DATA u16 *gUnknown_203F3E4[5] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F3F8[2] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F400[11] = {NULL};
-EWRAM_DATA u16 *gUnknown_203F42C[4] = {NULL};
-EWRAM_DATA struct DodrioStruct_2022CF4 * gUnknown_203F43C = NULL;
-EWRAM_DATA struct DodrioSubstruct_0160 * gUnknown_203F440 = NULL;
+static EWRAM_DATA u16 *gUnknown_203F3E4[5] = {NULL};
+static EWRAM_DATA u16 *gUnknown_203F3F8[2] = {NULL};
+static EWRAM_DATA u16 *gUnknown_203F400[11] = {NULL};
+static EWRAM_DATA u16 *gUnknown_203F42C[4] = {NULL};
+static EWRAM_DATA struct DodrioStruct_2022CF4 * gUnknown_203F43C = NULL;
+static EWRAM_DATA struct DodrioSubstruct_0160 * gUnknown_203F440 = NULL;
 
-void sub_8153B9C(struct Sprite * sprite);
-u32 sub_8153C30(struct Sprite * sprite);
-u32 sub_8153CA0(struct Sprite * sprite);
-void sub_8153D48(bool8 a0, u8 a1);
-void nullsub_97(struct Sprite * sprite);
-void sub_8154324(bool8 a0);
-void sub_81543E8(struct Sprite * sprite);
-s16 sub_8154608(u8 a0, u8 a1);
-void sub_8154A08(u8 taskId);
-void sub_8154A2C(void);
-void sub_8154B34(void);
-void sub_8154F80(void);
-void sub_81556E0(void);
-void sub_8155A78(void);
-void sub_8155B4C(void);
-void sub_8155C2C(void);
-void sub_8155C80(void);
-void unused_0(void);
-void nullsub_98(void);
-void sub_8155E24(MainCallback cb);
+static void sub_8153B9C(struct Sprite * sprite);
+static u32 sub_8153C30(struct Sprite * sprite);
+static u32 sub_8153CA0(struct Sprite * sprite);
+static void sub_8153D48(bool8 a0, u8 a1);
+static void nullsub_97(struct Sprite * sprite);
+static void sub_8154324(bool8 a0);
+static void sub_81543E8(struct Sprite * sprite);
+static s16 sub_8154608(u8 a0, u8 a1);
+static void sub_8154A08(u8 taskId);
+static void sub_8154A2C(void);
+static void sub_8154B34(void);
+static void sub_8154F80(void);
+static void sub_81556E0(void);
+static void sub_8155A78(void);
+static void sub_8155B4C(void);
+static void sub_8155C2C(void);
+static void sub_8155C80(void);
+static void unused_0(void);
+static void nullsub_98(void);
+static void sub_8155E24(MainCallback cb);
 MainCallback sub_8155E54(void);
-void sub_8155EA0(void);
-bool32 sub_8155FE0(void);
+static void sub_8155EA0(void);
+static bool32 sub_8155FE0(void);
 
 #include "data/dodrio_berry_picking.h"
 
-const struct OamData sOamData_8478C98 =
+static const struct OamData sOamData_8478C98 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -72,7 +72,7 @@ const struct OamData sOamData_8478C98 =
     .affineParam = 0
 };
 
-const struct OamData sOamData_8478CA0 =
+static const struct OamData sOamData_8478CA0 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -89,7 +89,7 @@ const struct OamData sOamData_8478CA0 =
     .affineParam = 0
 };
 
-const struct OamData sOamData_8478CA8 =
+static const struct OamData sOamData_8478CA8 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -106,7 +106,7 @@ const struct OamData sOamData_8478CA8 =
     .affineParam = 0
 };
 
-const struct OamData sOamData_8478CB0 =
+static const struct OamData sOamData_8478CB0 =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -123,37 +123,37 @@ const struct OamData sOamData_8478CB0 =
     .affineParam = 0
 };
 
-const union AnimCmd sSpriteAnim_8478CB8[] =
+static const union AnimCmd sSpriteAnim_8478CB8[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478CC0[] =
+static const union AnimCmd sSpriteAnim_8478CC0[] =
 {
     ANIMCMD_FRAME(64, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478CC8[] =
+static const union AnimCmd sSpriteAnim_8478CC8[] =
 {
     ANIMCMD_FRAME(128, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478CD0[] =
+static const union AnimCmd sSpriteAnim_8478CD0[] =
 {
     ANIMCMD_FRAME(192, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478CD8[] =
+static const union AnimCmd sSpriteAnim_8478CD8[] =
 {
     ANIMCMD_FRAME(256, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sSpriteAnimTable_8478CE0[] =
+static const union AnimCmd *const sSpriteAnimTable_8478CE0[] =
 {
     sSpriteAnim_8478CB8,
     sSpriteAnim_8478CC0,
@@ -162,86 +162,86 @@ const union AnimCmd *const sSpriteAnimTable_8478CE0[] =
     sSpriteAnim_8478CD8
 };
 
-const union AnimCmd sSpriteAnim_8478CF4[] =
+static const union AnimCmd sSpriteAnim_8478CF4[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478CFC[] =
+static const union AnimCmd sSpriteAnim_8478CFC[] =
 {
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D04[] =
+static const union AnimCmd sSpriteAnim_8478D04[] =
 {
     ANIMCMD_FRAME(8, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sSpriteAnimTable_8478D0C[] =
+static const union AnimCmd *const sSpriteAnimTable_8478D0C[] =
 {
     sSpriteAnim_8478CF4,
     sSpriteAnim_8478CFC,
     sSpriteAnim_8478D04
 };
 
-const union AnimCmd sSpriteAnim_8478D18[] =
+static const union AnimCmd sSpriteAnim_8478D18[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D20[] =
+static const union AnimCmd sSpriteAnim_8478D20[] =
 {
     ANIMCMD_FRAME(4, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D28[] =
+static const union AnimCmd sSpriteAnim_8478D28[] =
 {
     ANIMCMD_FRAME(8, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D30[] =
+static const union AnimCmd sSpriteAnim_8478D30[] =
 {
     ANIMCMD_FRAME(12, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D38[] =
+static const union AnimCmd sSpriteAnim_8478D38[] =
 {
     ANIMCMD_FRAME(16, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D40[] =
+static const union AnimCmd sSpriteAnim_8478D40[] =
 {
     ANIMCMD_FRAME(20, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D48[] =
+static const union AnimCmd sSpriteAnim_8478D48[] =
 {
     ANIMCMD_FRAME(24, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D50[] =
+static const union AnimCmd sSpriteAnim_8478D50[] =
 {
     ANIMCMD_FRAME(28, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sSpriteAnim_8478D58[] =
+static const union AnimCmd sSpriteAnim_8478D58[] =
 {
     ANIMCMD_FRAME(32, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sSpriteAnimTable_8478D60[] =
+static const union AnimCmd *const sSpriteAnimTable_8478D60[] =
 {
     sSpriteAnim_8478D18,
     sSpriteAnim_8478D20,
@@ -254,13 +254,13 @@ const union AnimCmd *const sSpriteAnimTable_8478D60[] =
     sSpriteAnim_8478D58
 };
 
-const union AnimCmd sSpriteAnim_8478D84[] =
+static const union AnimCmd sSpriteAnim_8478D84[] =
 {
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const sSpriteAnimTable_8478D8C[] =
+static const union AnimCmd *const sSpriteAnimTable_8478D8C[] =
 {
     sSpriteAnim_8478D84
 };
@@ -303,7 +303,7 @@ void sub_8153AFC(struct DodrioSubstruct_318C * arg0, u8 arg1, u8 id, u8 arg3)
     sub_8153D48(TRUE, id);
 }
 
-void sub_8153B9C(struct Sprite * sprite)
+static void sub_8153B9C(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -338,7 +338,7 @@ void sub_8153BF8(u8 unused)
     sprite->data[4] = 0;
 }
 
-u32 sub_8153C30(struct Sprite * sprite)
+static u32 sub_8153C30(struct Sprite * sprite)
 {
     s8 var;
     u8 mod = (++sprite->data[1] / 2) % 4;
@@ -367,7 +367,7 @@ u32 sub_8153C30(struct Sprite * sprite)
     return 0;
 }
 
-u32 sub_8153CA0(struct Sprite * sprite)
+static u32 sub_8153CA0(struct Sprite * sprite)
 {
     u8 mod = (++sprite->data[1] / 13) % 4;
 
@@ -394,7 +394,7 @@ void sub_8153D08(u8 count)
     }
 }
 
-void sub_8153D48(bool8 invisible, u8 id)
+static void sub_8153D48(bool8 invisible, u8 id)
 {
     gSprites[*gUnknown_203F3E4[id]].invisible = invisible;
 }
@@ -411,7 +411,7 @@ void sub_8153DA8(u8 id, u8 frameNum)
     StartSpriteAnim(&gSprites[*gUnknown_203F3E4[id]], frameNum);
 }
 
-void nullsub_97(struct Sprite * sprite)
+static void nullsub_97(struct Sprite * sprite)
 {
 
 }
@@ -541,7 +541,7 @@ void sub_81540DC(bool8 invisible)
 }
 
 // Unknown unused data, feel free to remove.
-const u8 sUnused2[] = {
+static const u8 sUnused2[] = {
     SE_W204,
     SE_TOY_C,
     SE_TOY_D,
@@ -570,7 +570,7 @@ void sub_8154128(void)
     Free(ptr);
 }
 
-const s16 sUnknown_8478DD4[] = {88, 128, 168, 208};
+static const s16 sUnknown_8478DD4[] = {88, 128, 168, 208};
 
 void sub_815417C(void)
 {
@@ -644,7 +644,7 @@ void sub_81542EC(u8 id, bool8 invisible)
     gSprites[*gUnknown_203F400[id]].invisible = invisible;
 }
 
-void sub_8154324(bool8 invisible)
+static void sub_8154324(bool8 invisible)
 {
     u8 i;
     for (i = 0; i < 4; i++)
@@ -662,7 +662,7 @@ void sub_8154398(u16 id, u8 frameNum)
 }
 
 // Unused
-void sub_81543C4(u8 spriteId)
+static void sub_81543C4(u8 spriteId)
 {
     gSprites[spriteId].pos1.x = 20 * spriteId + 50;
     gSprites[spriteId].pos1.y = 50;
@@ -676,7 +676,7 @@ void sub_81543C4(u8 spriteId)
 #define sKeepPosX data[10]
 #endif // NONMATCHING
 
-void sub_81543E8(struct Sprite * sprite)
+static void sub_81543E8(struct Sprite * sprite)
 {
     u8 i;
     static const u8 array[] = {30, 20};
@@ -694,7 +694,7 @@ void sub_81543E8(struct Sprite * sprite)
     }
 }
 
-const s16 gUnknown_8478E0E[][2] = {{230, 55}, {30, 74}};
+static const s16 gUnknown_8478E0E[][2] = {{230, 55}, {30, 74}};
 
 void sub_8154438(void)
 {
@@ -772,7 +772,7 @@ void sub_81545BC(bool8 invisible)
 
 #undef sKeepPosX
 
-s16 sub_8154608(u8 arg0, u8 arg1)
+static s16 sub_8154608(u8 arg0, u8 arg1)
 {
     s16 x = 0;
     switch (arg1)
@@ -830,13 +830,13 @@ void sub_81546C0(void)
     sub_81540DC(FALSE);
 }
 
-void sub_81546EC(u8 frameId)
+static void sub_81546EC(u8 frameId)
 {
     LoadBgTiles(0, GetUserFrameGraphicsInfo(frameId)->tiles, 0x120, 1);
     LoadPalette(GetUserFrameGraphicsInfo(frameId)->palette, 0xA0, 0x20);
 }
 
-void sub_8154720(void)
+static void sub_8154720(void)
 {
     TextWindow_SetStdFrame0_WithPal(0, 0xA, 0xB0);
 }
@@ -850,7 +850,7 @@ void sub_8154730(void)
     gUnknown_203F440->unk3024 = 0;
 }
 
-void sub_8154768(const struct WindowTemplate * winTempl)
+static void sub_8154768(const struct WindowTemplate * winTempl)
 {
     u8 pal = 0xA;
 
@@ -864,7 +864,7 @@ void sub_8154768(const struct WindowTemplate * winTempl)
     FillBgTilemapBufferRect(0, 9, winTempl->tilemapLeft + winTempl->width,  winTempl->tilemapTop + winTempl->height,    1, 1, pal);
 }
 
-void sub_8154868(const struct WindowTemplate * winTempl)
+static void sub_8154868(const struct WindowTemplate * winTempl)
 {
     u8 pal = 0xB;
 
@@ -890,7 +890,7 @@ void sub_8154968(struct DodrioSubstruct_0160 * ptr)
     sub_8155E24(sub_8154A2C);
 }
 
-void sub_81549C8(void)
+static void sub_81549C8(void)
 {
     FreeAllWindowBuffers();
 }
@@ -901,7 +901,7 @@ struct WinCoords
     u8 top;
 };
 
-const u8 sTextColorTable[][3] =
+static const u8 sTextColorTable[][3] =
 {
     {
         TEXT_COLOR_WHITE,
@@ -922,13 +922,13 @@ const u8 sTextColorTable[][3] =
     }
 };
 
-const struct WinCoords sUnknown_8478E44[] = {{12, 6}};
-const struct WinCoords sUnknown_8478E48[] = {{9, 10}, {15, 6}};
-const struct WinCoords sUnknown_8478E50[] = {{12, 6}, {18, 10}, {6, 10}};
-const struct WinCoords sUnknown_8478E5C[] = {{9, 10}, {15, 6}, {21, 10}, {3, 6}};
-const struct WinCoords sUnknown_8478E6C[] = {{12, 6}, {18, 10}, {23, 6}, {1, 6}, {6, 10}};
+static const struct WinCoords sUnknown_8478E44[] = {{12, 6}};
+static const struct WinCoords sUnknown_8478E48[] = {{9, 10}, {15, 6}};
+static const struct WinCoords sUnknown_8478E50[] = {{12, 6}, {18, 10}, {6, 10}};
+static const struct WinCoords sUnknown_8478E5C[] = {{9, 10}, {15, 6}, {21, 10}, {3, 6}};
+static const struct WinCoords sUnknown_8478E6C[] = {{12, 6}, {18, 10}, {23, 6}, {1, 6}, {6, 10}};
 
-const struct WinCoords * const sUnknown_8478E80[] =
+static const struct WinCoords * const sUnknown_8478E80[] =
 {
     sUnknown_8478E44,
     sUnknown_8478E48,
@@ -937,7 +937,7 @@ const struct WinCoords * const sUnknown_8478E80[] =
     sUnknown_8478E6C,
 };
 
-const u8 *const sUnknown_8478E94[] =
+static const u8 *const sUnknown_8478E94[] =
 {
     gText_1Colon,
     gText_2Colon,
@@ -946,9 +946,9 @@ const u8 *const sUnknown_8478E94[] =
     gText_5Colon,
 };
 
-const u16 sUnknown_8478EA8[] = {92, 132, 172, 212};
-const u16 sUnknown_8478EB0[] = {30, 45, 60, 75, 90};
-const u16 sUnknown_8478EBA[] = {12, 28, 44, 60, 76};
+static const u16 sUnknown_8478EA8[] = {92, 132, 172, 212};
+static const u16 sUnknown_8478EB0[] = {30, 45, 60, 75, 90};
+static const u16 sUnknown_8478EBA[] = {12, 28, 44, 60, 76};
 
 struct
 {
@@ -978,13 +978,13 @@ void sub_81549D4(u8 arg0)
     }
 }
 
-void sub_8154A08(u8 taskId)
+static void sub_8154A08(u8 taskId)
 {
     if (!gUnknown_203F440->finished)
         sub_8155E54()();
 }
 
-void sub_8154A2C(void)
+static void sub_8154A2C(void)
 {
     switch (gUnknown_203F440->state)
     {
@@ -1023,7 +1023,7 @@ void sub_8154A2C(void)
     }
 }
 
-void sub_8154B34(void)
+static void sub_8154B34(void)
 {
     u8 i, playersCount, id, colorsId, *name;
     u32 left;
@@ -1087,7 +1087,7 @@ void sub_8154B34(void)
     }
 }
 
-void sub_8154D9C(u8 playersCount_)
+static void sub_8154D9C(u8 playersCount_)
 {
     u8 i, r8 = 0, r6 = 0;
     u8 playersCount = playersCount_; // Pointless variable, I know, but it's needed to match.
@@ -1145,7 +1145,7 @@ void sub_8154D9C(u8 playersCount_)
     }
 }
 
-void sub_8154F80(void)
+static void sub_8154F80(void)
 {
     u8 i, j, itemGiveRet, playersCount = sub_81533B4();
     u8 *name;
@@ -1324,7 +1324,7 @@ void sub_8154F80(void)
     }
 }
 
-void sub_81556E0(void)
+static void sub_81556E0(void)
 {
     u8 y;
 
@@ -1414,7 +1414,7 @@ void sub_81556E0(void)
     }
 }
 
-void sub_8155A78(void)
+static void sub_8155A78(void)
 {
     switch (gUnknown_203F440->state)
     {
@@ -1446,7 +1446,7 @@ void sub_8155A78(void)
     }
 }
 
-void sub_8155B4C(void)
+static void sub_8155B4C(void)
 {
     switch (gUnknown_203F440->state)
     {
@@ -1474,7 +1474,7 @@ void sub_8155B4C(void)
     }
 }
 
-void sub_8155C2C(void)
+static void sub_8155C2C(void)
 {
     ClearWindowTilemap(gUnknown_203F440->unk3008[0]);
     RemoveWindow(gUnknown_203F440->unk3008[0]);
@@ -1483,7 +1483,7 @@ void sub_8155C2C(void)
     gUnknown_203F440->finished = TRUE;
 }
 
-void sub_8155C80(void)
+static void sub_8155C80(void)
 {
     switch (gUnknown_203F440->state)
     {
@@ -1523,18 +1523,18 @@ void sub_8155C80(void)
     }
 }
 
-void unused_0(void)
+static void unused_0(void)
 {
     DestroyTask(gUnknown_203F440->unk3004);
     gUnknown_203F440->finished = TRUE;
 }
 
-void nullsub_98(void)
+static void nullsub_98(void)
 {
 
 }
 
-void sub_8155E24(void (*func)(void))
+static void sub_8155E24(void (*func)(void))
 {
     gUnknown_203F440->state = 0;
     gUnknown_203F440->finished = FALSE;
@@ -1559,7 +1559,7 @@ u8 sub_8155E8C(void)
     return gUnknown_203F440->unk3024;
 }
 
-void sub_8155EA0(void)
+static void sub_8155EA0(void)
 {
     DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3,(void *)OAM, OAM_SIZE);
@@ -1583,7 +1583,7 @@ void sub_8155EA0(void)
     SetBgTilemapBuffer(2, gUnknown_203F440->tilemapBuffers[2]);
 }
 
-bool32 sub_8155FE0(void)
+static bool32 sub_8155FE0(void)
 {
     switch (gUnknown_203F440->unk3018)
     {

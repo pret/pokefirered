@@ -71,77 +71,75 @@ struct DodrioStruct
     /*0x3308*/ struct DodrioSubstruct_3308 unk3308[5];
 }; // size = 0x3330
 
-EWRAM_DATA struct DodrioStruct * gUnknown_203F3E0 = NULL;
+static EWRAM_DATA struct DodrioStruct * gUnknown_203F3E0 = NULL;
 
-IWRAM_DATA bool32 gUnknown_3002044;
+static bool32 gUnknown_3002044;
 
-bool32 sub_8155E68(void);
-void sub_81508D8(void);
-void sub_81508EC(struct DodrioStruct * dodrio);
-void sub_8150A84(u8 taskId);
-void sub_8150C78(void);
-void sub_8150CBC(void);
-void sub_8150CF4(void);
-void sub_8150D7C(void);
-void sub_8150DA4(void);
-void sub_8150E68(void);
-void sub_8150F40(void);
-void sub_8150FC4(void);
-void sub_8150FDC(void);
-void sub_815109C(void);
-void sub_8151198(void);
-void sub_81512B4(void);
-void sub_8151488(void);
-void sub_81514F0(void);
-void sub_815159C(void);
-void sub_81516DC(u8 taskId);
-void sub_8151750(u8 taskId);
-void sub_8151B54(void);
-void sub_8151BA0(void);
-void sub_8151C5C(void);
-void sub_8151D28(void);
-void sub_8151D98(void);
-void sub_8151E94(void);
-void sub_815201C(void);
-void sub_8152034(void);
-void sub_8152048(struct DodrioSubstruct_318C * dodrioMon, struct Pokemon * partyMon);
-void sub_815205C(TaskFunc func, u8 priority);
-void sub_815206C(TaskFunc func);
-void sub_8152090(u8 a0);
-bool32 sub_81520B4(void);
-void sub_8152110(void);
-bool32 sub_8152484(u8 a0, u8 a1, u8 a2);
-void sub_815256C(void);
-void sub_815293C(void);
-void sub_8152970(void);
-bool32 sub_8152A00(void);
-void sub_8152A70(void);
-void sub_81529A4(u8 a0, u8 *a1, u8 *a2);
-bool32 sub_8152A98(void);
-bool32 sub_8152AD8(void);
-void sub_8152B64(u8 a0);
-u8 sub_8152BD4(u8 a0);
-u8 sub_8152BF8(u8 a0, u8 a1);
-u8 sub_8152CB8(u8 arg0, u8 arg1);
-void sub_8152D34(u8 a0, u8 a1, u8 a2);
-void sub_8152F94(bool32 a0);
-void sub_8153004(void);
-void sub_8153048(void);
-void sub_8153150(void);
-void sub_81531FC(void);
-u8 sub_815327C(u8);
-void sub_81532B8(void);
-void sub_815336C(void);
-u32 sub_8153424(u8 mpId);
-u32 Min(u32 x, u32 y);
-void Task_ShowDodrioBerryPickingRecords(u8 taskId);
-void sub_81538D0(u8 windowId);
+static void sub_81508D8(void);
+static void sub_81508EC(struct DodrioStruct * dodrio);
+static void sub_8150A84(u8 taskId);
+static void sub_8150C78(void);
+static void sub_8150CBC(void);
+static void sub_8150CF4(void);
+static void sub_8150D7C(void);
+static void sub_8150DA4(void);
+static void sub_8150E68(void);
+static void sub_8150F40(void);
+static void sub_8150FC4(void);
+static void sub_8150FDC(void);
+static void sub_815109C(void);
+static void sub_8151198(void);
+static void sub_81512B4(void);
+static void sub_8151488(void);
+static void sub_81514F0(void);
+static void sub_815159C(void);
+static void sub_81516DC(u8 taskId);
+static void sub_8151750(u8 taskId);
+static void sub_8151B54(void);
+static void sub_8151BA0(void);
+static void sub_8151C5C(void);
+static void sub_8151D28(void);
+static void sub_8151D98(void);
+static void sub_8151E94(void);
+static void sub_815201C(void);
+static void sub_8152034(void);
+static void sub_8152048(struct DodrioSubstruct_318C * dodrioMon, struct Pokemon * partyMon);
+static void sub_815205C(TaskFunc func, u8 priority);
+static void sub_815206C(TaskFunc func);
+static void sub_8152090(u8 a0);
+static bool32 sub_81520B4(void);
+static void sub_8152110(void);
+static bool32 sub_8152484(u8 a0, u8 a1, u8 a2);
+static void sub_815256C(void);
+static void sub_815293C(void);
+static void sub_8152970(void);
+static bool32 sub_8152A00(void);
+static void sub_8152A70(void);
+static void sub_81529A4(u8 a0, u8 *a1, u8 *a2);
+static bool32 sub_8152A98(void);
+static bool32 sub_8152AD8(void);
+static void sub_8152B64(u8 a0);
+static u8 sub_8152BD4(u8 a0);
+static u8 sub_8152BF8(u8 a0, u8 a1);
+static u8 sub_8152CB8(u8 arg0, u8 arg1);
+static void sub_8152D34(u8 a0, u8 a1, u8 a2);
+static void sub_8152F94(bool32 a0);
+static void sub_8153004(void);
+static void sub_8153048(void);
+static void sub_8153150(void);
+static void sub_81531FC(void);
+static u8 sub_815327C(u8);
+static void sub_81532B8(void);
+static void sub_815336C(void);
+static u32 sub_8153424(u8 mpId);
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId);
+static void sub_81538D0(u8 windowId);
 
 // const rom data
 
 #include "data/dodrio_berry_picking.h"
 
-const u8 sUnknown_847553C[][3] =
+static const u8 sUnknown_847553C[][3] =
 {
     {40, 24, 13},
     {32, 19, 10},
@@ -149,20 +147,20 @@ const u8 sUnknown_847553C[][3] =
 };
 
 ALIGNED(4)
-const u8 sUnknown_8475548[] = {8, 5, 8, 11, 15};
+static const u8 sUnknown_8475548[] = {8, 5, 8, 11, 15};
 
 ALIGNED(4)
-const u8 sUnknown_8475550[] = {5, 10, 20, 30, 50, 70, 100};
+static const u8 sUnknown_8475550[] = {5, 10, 20, 30, 50, 70, 100};
 
 ALIGNED(4)
-const u8 sUnknown_8475558[][10] =
+static const u8 sUnknown_8475558[][10] =
 {
     {15, 16, 17, 18, 19, 19, 18, 17, 16, 15},
     {20, 21, 22, 23, 24, 25, 26, 27, 28, 29},
     {30, 31, 32, 33, 34, 34, 33, 32, 31, 30},
 };
 
-void (*const sUnknown_8475578[])(void) =
+static void (*const sUnknown_8475578[])(void) =
 {
     sub_8150C78,
     sub_8150CBC,
@@ -178,7 +176,7 @@ void (*const sUnknown_8475578[])(void) =
     sub_8150F40
 };
 
-void (*const sUnknown_84755A8[])(void) =
+static void (*const sUnknown_84755A8[])(void) =
 {
     sub_8150C78,
     sub_8150CBC,
@@ -220,14 +218,14 @@ void StartDodrioBerryPicking(u16 a0, MainCallback callback)
     }
 }
 
-void sub_81508D8(void)
+static void sub_81508D8(void)
 {
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
 }
 
-void sub_81508EC(struct DodrioStruct * data)
+static void sub_81508EC(struct DodrioStruct * data)
 {
     u8 i;
 
@@ -281,7 +279,7 @@ void sub_81508EC(struct DodrioStruct * data)
     }
 }
 
-void sub_8150A84(u8 taskId)
+static void sub_8150A84(u8 taskId)
 {
     u8 r4, r5;
 
@@ -354,7 +352,7 @@ void sub_8150A84(u8 taskId)
     }
 }
 
-void sub_8150C08(u8 taskId)
+static void sub_8150C08(u8 taskId)
 {
     sub_8151B54();
     sUnknown_8475578[gUnknown_203F3E0->unk18]();
@@ -365,7 +363,7 @@ void sub_8150C08(u8 taskId)
     sub_8151BA0();
 }
 
-void sub_8150C40(u8 taskId)
+static void sub_8150C40(u8 taskId)
 {
     sub_8151C5C();
     sUnknown_84755A8[gUnknown_203F3E0->unk18]();
@@ -376,7 +374,7 @@ void sub_8150C40(u8 taskId)
     sub_8151D28();
 }
 
-void sub_8150C78(void)
+static void sub_8150C78(void)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -392,7 +390,7 @@ void sub_8150C78(void)
     }
 }
 
-void sub_8150CBC(void)
+static void sub_8150CBC(void)
 {
     if (gUnknown_203F3E0->unk10 == 0)
     {
@@ -406,7 +404,7 @@ void sub_8150CBC(void)
     }
 }
 
-void sub_8150CF4(void)
+static void sub_8150CF4(void)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -440,7 +438,7 @@ void sub_8150CF4(void)
     }
 }
 
-void sub_8150D7C(void)
+static void sub_8150D7C(void)
 {
     if (gUnknown_203F3E0->unk10 == 0)
     {
@@ -451,7 +449,7 @@ void sub_8150D7C(void)
     }
 }
 
-void sub_8150DA4(void)
+static void sub_8150DA4(void)
 {
     if (gUnknown_203F3E0->unk10 == 0)
     {
@@ -497,7 +495,7 @@ void sub_8150DA4(void)
         sub_8151D98();
     }
 }
-void sub_8150E68(void)
+static void sub_8150E68(void)
 {
     if (gUnknown_203F3E0->unk40 < 10)
     {
@@ -534,7 +532,7 @@ void sub_8150E68(void)
     sub_8151E94();
 }
 
-void sub_8150F40(void)
+static void sub_8150F40(void)
 {
     u8 i;
 
@@ -559,14 +557,14 @@ void sub_8150F40(void)
     }
 }
 
-void sub_8150FC4(void)
+static void sub_8150FC4(void)
 {
     sub_8151E94();
     if (sub_8152AD8() == 1)
         sub_8152090(5);
 }
 
-void sub_8150FDC(void)
+static void sub_8150FDC(void)
 {
     u8 blockReceivedStatus;
     u8 i;
@@ -609,7 +607,7 @@ void sub_8150FDC(void)
     }
 }
 
-void sub_815109C(void)
+static void sub_815109C(void)
 {
     u8 i;
     u8 blockReceivedStatus;
@@ -651,7 +649,7 @@ void sub_815109C(void)
     }
 }
 
-void sub_8151198(void)
+static void sub_8151198(void)
 {
     u8 sp00;
     u8 i;
@@ -712,7 +710,7 @@ void sub_8151198(void)
     }
 }
 
-void sub_81512B4(void)
+static void sub_81512B4(void)
 {
     u8 sp0;
     u8 i;
@@ -802,7 +800,7 @@ void sub_81512B4(void)
     }
 }
 
-void sub_8151488(void)
+static void sub_8151488(void)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -832,7 +830,7 @@ void sub_8151488(void)
     }
 }
 
-void sub_81514F0(void)
+static void sub_81514F0(void)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -868,7 +866,7 @@ void sub_81514F0(void)
     }
 }
 
-void sub_815159C(void)
+static void sub_815159C(void)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -931,7 +929,7 @@ void sub_815159C(void)
     }
 }
 
-void sub_81516DC(u8 taskId)
+static void sub_81516DC(u8 taskId)
 {
     switch (gUnknown_203F3E0->unk10)
     {
@@ -965,7 +963,7 @@ void sub_81516DC(u8 taskId)
     }
 }
 
-void sub_8151750(u8 taskId)
+static void sub_8151750(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 i;
@@ -1005,7 +1003,7 @@ void sub_8151750(u8 taskId)
     }
 }
 
-void sub_815184C(void)
+static void sub_815184C(void)
 {
     u8 i;
     u8 r7 = gUnknown_203F3E0->unk24;
@@ -1072,7 +1070,7 @@ void sub_815184C(void)
     }
 }
 
-void sub_8151A5C(void)
+static void sub_8151A5C(void)
 {
     u8 i;
     u8 r6 = gUnknown_203F3E0->unk24;
@@ -1103,7 +1101,7 @@ void sub_8151A5C(void)
     }
 }
 
-void sub_8151B54(void)
+static void sub_8151B54(void)
 {
     switch (gUnknown_203F3E0->unk18)
     {
@@ -1123,7 +1121,7 @@ void sub_8151B54(void)
     }
 }
 
-void sub_8151BA0(void)
+static void sub_8151BA0(void)
 {
     switch (gUnknown_203F3E0->unk18)
     {
@@ -1136,7 +1134,7 @@ void sub_8151BA0(void)
     }
 }
 
-void sub_8151C5C(void)
+static void sub_8151C5C(void)
 {
     switch (gUnknown_203F3E0->unk18)
     {
@@ -1149,7 +1147,7 @@ void sub_8151C5C(void)
     }
 }
 
-void sub_8151D28(void)
+static void sub_8151D28(void)
 {
     switch (gUnknown_203F3E0->unk18)
     {
@@ -1172,7 +1170,7 @@ void sub_8151D28(void)
     }
 }
 
-void sub_8151D98(void)
+static void sub_8151D98(void)
 {
     if (gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 == 0)
     {
@@ -1212,7 +1210,7 @@ void sub_8151D98(void)
     }
 }
 
-void sub_8151E94(void)
+static void sub_8151E94(void)
 {
     u8 r8 = gUnknown_203F3E0->unk44;
     u8 r7 = gUnknown_203F3E0->unk48;
@@ -1270,7 +1268,7 @@ void sub_8151E94(void)
     }
 }
 
-void sub_815201C(void)
+static void sub_815201C(void)
 {
     RunTasks();
     AnimateSprites();
@@ -1278,24 +1276,24 @@ void sub_815201C(void)
     UpdatePaletteFade();
 }
 
-void sub_8152034(void)
+static void sub_8152034(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-void sub_8152048(struct DodrioSubstruct_318C * a0, struct Pokemon * a1)
+static void sub_8152048(struct DodrioSubstruct_318C * a0, struct Pokemon * a1)
 {
     a0->isShiny = IsMonShiny(a1);
 }
 
-void sub_815205C(TaskFunc func, u8 priority)
+static void sub_815205C(TaskFunc func, u8 priority)
 {
     CreateTask(func, priority);
 }
 
-void sub_815206C(TaskFunc func)
+static void sub_815206C(TaskFunc func)
 {
     gUnknown_203F3E0->unk04 = CreateTask(func, 1);
     gUnknown_203F3E0->unk10 = 0;
@@ -1303,7 +1301,7 @@ void sub_815206C(TaskFunc func)
     gUnknown_203F3E0->unk14 = 0;
 }
 
-void sub_8152090(u8 a0)
+static void sub_8152090(u8 a0)
 {
     gUnknown_203F3E0->unk1C = gUnknown_203F3E0->unk18;
     gUnknown_203F3E0->unk18 = a0;
@@ -1311,7 +1309,7 @@ void sub_8152090(u8 a0)
     gUnknown_203F3E0->unk14 = 0;
 }
 
-bool32 sub_81520B4(void)
+static bool32 sub_81520B4(void)
 {
     u8 r2 = gUnknown_203F3E0->unk14 / 4;
     gUnknown_203F3E0->unk14++;
@@ -1334,7 +1332,7 @@ bool32 sub_81520B4(void)
     }
 }
 
-void sub_8152110(void)
+static void sub_8152110(void)
 {
     u8 i;
     u8 start = gUnknown_203F3E0->unk44;
@@ -1348,7 +1346,7 @@ void sub_8152110(void)
     }
 }
 
-void sub_8152174(void)
+static void sub_8152174(void)
 {
     u8 sp0 = gUnknown_203F3E0->unk44;
     u8 sp4 = gUnknown_203F3E0->unk48;
@@ -1448,7 +1446,7 @@ void sub_8152174(void)
     }
 }
 
-bool32 sub_8152484(u8 a0, u8 a1, u8 a2)
+static bool32 sub_8152484(u8 a0, u8 a1, u8 a2)
 {
     s32 r7 = 0;
     u8 r5 = gUnknown_203F3E0->unk24 - 1;
@@ -1493,7 +1491,7 @@ bool32 sub_8152484(u8 a0, u8 a1, u8 a2)
     return FALSE;
 }
 
-void sub_815256C(void)
+static void sub_815256C(void)
 {
     u8 r1 = gUnknown_203F3E0->unk44;
     u8 r9 = gUnknown_203F3E0->unk48;
@@ -1580,7 +1578,7 @@ void sub_815256C(void)
     }
 }
 
-void sub_81527D0(void)
+static void sub_81527D0(void)
 {
     u8 i, first, count;
 
@@ -1615,7 +1613,7 @@ void sub_81527D0(void)
     }
 }
 
-void sub_81528D0(void)
+static void sub_81528D0(void)
 {
     u8 i, count;
 
@@ -1627,7 +1625,7 @@ void sub_81528D0(void)
     }
 }
 
-void sub_8152910(void)
+static void sub_8152910(void)
 {
     u8 i, count;
 
@@ -1636,7 +1634,7 @@ void sub_8152910(void)
         sub_8153DA8(i, 4);
 }
 
-void sub_815293C(void)
+static void sub_815293C(void)
 {
     sub_81527D0();
     if (gUnknown_203F3E0->unk40 > 9)
@@ -1648,7 +1646,7 @@ void sub_815293C(void)
 }
 
 // This function is literally the same as the one above...Why?
-void sub_8152970(void)
+static void sub_8152970(void)
 {
     sub_81527D0();
     if (gUnknown_203F3E0->unk40 > 9)
@@ -1659,7 +1657,7 @@ void sub_8152970(void)
     sub_8153FC8(gUnknown_203F3E0->unk40);
 }
 
-void sub_81529A4(u8 arg0, u8 *arg1, u8 *arg2)
+static void sub_81529A4(u8 arg0, u8 *arg1, u8 *arg2)
 {
     switch (arg0)
     {
@@ -1681,7 +1679,7 @@ void sub_81529A4(u8 arg0, u8 *arg1, u8 *arg2)
     }
 }
 
-bool32 sub_8152A00(void)
+static bool32 sub_8152A00(void)
 {
     u8 i, count;
 
@@ -1704,7 +1702,7 @@ bool32 sub_8152A00(void)
     return TRUE;
 }
 
-void sub_8152A70(void)
+static void sub_8152A70(void)
 {
     u8 i;
 
@@ -1712,7 +1710,7 @@ void sub_8152A70(void)
         gUnknown_203F3E0->unk158[i] = 0;
 }
 
-bool32 sub_8152A98(void)
+static bool32 sub_8152A98(void)
 {
     if (gUnknown_203F3E0->unk40 > 9 && gUnknown_203F3E0->unk120 == 0)
     {
@@ -1724,7 +1722,7 @@ bool32 sub_8152A98(void)
     return FALSE;
 }
 
-bool32 sub_8152AD8(void)
+static bool32 sub_8152AD8(void)
 {
     u8 i, first, count;
 
@@ -1750,19 +1748,19 @@ bool32 sub_8152AD8(void)
     return FALSE;
 }
 
-void sub_8152B64(u8 arg0)
+static void sub_8152B64(u8 arg0)
 {
     u8 var = sUnknown_8475550[gUnknown_203F3E0->unk90[arg0] % 7] + (gUnknown_203F3E0->unk90[arg0] / 7) * 100;
     if (gUnknown_203F3E0->unk86[arg0] >= var)
         gUnknown_203F3E0->unk90[arg0]++;
 }
 
-u8 sub_8152BD4(u8 arg0)
+static u8 sub_8152BD4(u8 arg0)
 {
     return sUnknown_84720FC[gUnknown_203F3E0->unk24 - 1][arg0];
 }
 
-u8 sub_8152BF8(u8 arg0, u8 arg1)
+static u8 sub_8152BF8(u8 arg0, u8 arg1)
 {
     u8 i, var3;
     u8 count = gUnknown_203F3E0->unk24 - 1;
@@ -1788,7 +1786,7 @@ u8 sub_8152BF8(u8 arg0, u8 arg1)
     return sub_8152CB8(var3, arg1);
 }
 
-u8 sub_8152CB8(u8 arg0, u8 arg1)
+static u8 sub_8152CB8(u8 arg0, u8 arg1)
 {
     u8 var = gUnknown_203F3E0->unkE8[arg1];
     switch (arg0 % 7)
@@ -1822,7 +1820,7 @@ u8 sub_8152CB8(u8 arg0, u8 arg1)
     }
 }
 
-void sub_8152D34(u8 arg0, u8 arg1, u8 arg2)
+static void sub_8152D34(u8 arg0, u8 arg1, u8 arg2)
 {
     u8 var;
     u8 count = gUnknown_203F3E0->unk24;
@@ -1960,7 +1958,7 @@ void sub_8152D34(u8 arg0, u8 arg1, u8 arg2)
     }
 }
 
-void sub_8152F94(bool32 arg0)
+static void sub_8152F94(bool32 arg0)
 {
     if (gUnknown_203F3E0->unk24 != 5)
         return;
@@ -1980,14 +1978,14 @@ void sub_8152F94(bool32 arg0)
     }
 }
 
-void sub_8153004(void)
+static void sub_8153004(void)
 {
     u8 i;
     for (i = 0; i < gUnknown_203F3E0->unk24; i++)
         gUnknown_203F3E0->unk4A[i][5] = gUnknown_203F3E0->unk114;
 }
 
-void sub_8153048(void)
+static void sub_8153048(void)
 {
     u8 i, j;
 
@@ -2015,9 +2013,9 @@ void sub_8153048(void)
     sub_81527D0();
 }
 
-const s16 sUnknown_84755D8[] = {10, 30, 50, 50};
+static const s16 sUnknown_84755D8[] = {10, 30, 50, 50};
 
-void sub_8153150(void)
+static void sub_8153150(void)
 {
     u8 i, var = 0, var2 = 0;
 
@@ -2032,7 +2030,7 @@ void sub_8153150(void)
         gUnknown_203F3E0->unk4A[i][4] = sUnknown_8475558[var][var2];
 }
 
-u32 sub_81531BC(u8 arg0)
+static u32 sub_81531BC(u8 arg0)
 {
     u32 sum = gUnknown_203F3E0->unk4A[arg0][0]
               + gUnknown_203F3E0->unk4A[arg0][1]
@@ -2040,7 +2038,7 @@ u32 sub_81531BC(u8 arg0)
     return min(sum, 9999);
 }
 
-void sub_81531FC(void)
+static void sub_81531FC(void)
 {
     u32 berriesPicked = Min(sub_81531BC(gUnknown_203F3E0->multiplayerId), 9999);
     u32 score = Min(sub_8153424(gUnknown_203F3E0->multiplayerId), 999990);
@@ -2053,7 +2051,7 @@ void sub_81531FC(void)
         gSaveBlock2Ptr->berryPick.berriesPickedInRow = gUnknown_203F3E0->unk114;
 }
 
-u8 sub_815327C(u8 arg0)
+static u8 sub_815327C(u8 arg0)
 {
     u8 i, saved;
 
@@ -2064,7 +2062,7 @@ u8 sub_815327C(u8 arg0)
     return saved;
 }
 
-void sub_81532B8(void)
+static void sub_81532B8(void)
 {
     if (gUnknown_203F3E0->unkB0[gUnknown_203F3E0->multiplayerId] == 0)
     {
@@ -2097,7 +2095,7 @@ void sub_81532B8(void)
     }
 }
 
-void sub_815336C(void)
+static void sub_815336C(void)
 {
     gUnknown_203F3E0->unk31A0[gUnknown_203F3E0->multiplayerId].unk2C.unk0 = 0;
 }
@@ -2125,7 +2123,7 @@ u16 sub_8153404(u8 arg0, u8 arg1)
     return gUnknown_203F3E0->unk4A[arg0][arg1];
 }
 
-u32 sub_8153424(u8 arg0)
+static u32 sub_8153424(u8 arg0)
 {
     u8 i;
     u32 var, sum = 0;
@@ -2168,7 +2166,7 @@ u32 sub_81534F0(u8 arg0)
     return maxVar;
 }
 
-u32 sub_8153534(u8 arg0)
+static u32 sub_8153534(u8 arg0)
 {
     u32 vals[5], temp;
     s16 r6 = TRUE;
@@ -2235,7 +2233,7 @@ void sub_81536A0(struct DodrioSubstruct_3308 * dst, u8 id)
     *dst = gUnknown_203F3E0->unk3308[id];
 }
 
-u8 sub_81536C0(u8 arg0)
+static u8 sub_81536C0(u8 arg0)
 {
     u8 i, ret = 0, count = gUnknown_203F3E0->unk24;
     u32 var, vars[5] = {0};
@@ -2315,7 +2313,7 @@ void ShowDodrioBerryPickingRecords(void)
 }
 
 // Data related to printing saved results.
-const struct WindowTemplate sUnknown_84755E0 =
+static const struct WindowTemplate sUnknown_84755E0 =
 {
     .bg = 0,
     .tilemapLeft = 1,
@@ -2326,14 +2324,14 @@ const struct WindowTemplate sUnknown_84755E0 =
     .baseBlock = 1,
 };
 
-const u8 *const sUnknown_84755E8[] = {gText_BerryPickingRecords, gText_BerriesPicked, gText_BestScore, gText_BerriesInRowFivePlayers};
-const u8 sUnknown_84755F8[] = {4, 7, 4};
+static const u8 *const sUnknown_84755E8[] = {gText_BerryPickingRecords, gText_BerriesPicked, gText_BestScore, gText_BerriesInRowFivePlayers};
+static const u8 sUnknown_84755F8[] = {4, 7, 4};
 
 ALIGNED(4)
-const u8 sUnknown_84755FC[][2] = {{24}, {40}, {56}};
-const u8 sUnknown_8475602[][2] = {{24}, {40}, {70}};
+static const u8 sUnknown_84755FC[][2] = {{24}, {40}, {56}};
+static const u8 sUnknown_8475602[][2] = {{24}, {40}, {70}};
 
-void Task_ShowDodrioBerryPickingRecords(u8 taskId)
+static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
 {
     struct WindowTemplate window;
     s32 i, width, widthCurr;
@@ -2370,7 +2368,7 @@ void Task_ShowDodrioBerryPickingRecords(u8 taskId)
     }
 }
 
-void sub_81538D0(u8 windowId)
+static void sub_81538D0(u8 windowId)
 {
     s32 i, x, numWidth;
     s32 results[3];
@@ -2395,7 +2393,7 @@ void sub_81538D0(u8 windowId)
 }
 
 // Debug functions?
-const u16 sUnknown_8475608[][4] =
+static const u16 sUnknown_8475608[][4] =
 {
     {9999, 0, 90, 9999},
     {9999, 9999, 70, 9999},
@@ -2404,11 +2402,11 @@ const u16 sUnknown_8475608[][4] =
     {9999, 9999, 9999, 0},
 };
 
-const u8 sUnknown_8475630[] = _("あいうえおかき");
-const u8 sUnknown_8475638[] = _("ABCDEFG");
-const u8 sUnknown_8475640[] = _("0123456");
+static const u8 sUnknown_8475630[] = _("あいうえおかき");
+static const u8 sUnknown_8475638[] = _("ABCDEFG");
+static const u8 sUnknown_8475640[] = _("0123456");
 
-const u8 *const sPlaceholderPlayerNames[] =
+static const u8 *const sPlaceholderPlayerNames[] =
 {
     sUnknown_8475630,
     sUnknown_8475630,
@@ -2417,12 +2415,12 @@ const u8 *const sPlaceholderPlayerNames[] =
     sUnknown_8475640
 };
 
-void sub_81539EC(void)
+static void sub_81539EC(void)
 {
     gUnknown_203F3E0->unk24 = GetLinkPlayerCount();
 }
 
-void sub_8153A04(void)
+static void sub_8153A04(void)
 {
     u8 i, playerId;
 

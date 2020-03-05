@@ -99,5 +99,8 @@ u32 sub_81534F0(u8 arg0);
 u32 sub_81535B0(void);
 u16 sub_8153390(void);
 u8 sub_815372C(void);
+bool32 sub_8155E68(void);
+void ShowDodrioBerryPickingRecords(void);
+void IsDodrioInParty(void);
 
 #endif //GUARD_DODRIO_BERRY_PICKING_H

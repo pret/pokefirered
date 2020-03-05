@@ -811,10 +811,8 @@ const u8 gUnknown_8419860[] = _("{DYNAMIC 0x00} nature.\nApparently met in {DYNA
 const u8 gUnknown_841988A[] = _("{DYNAMIC 0x00} nature.\nApparently met in {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}.");
 const u8 gUnknown_84198B4[] = _("{DYNAMIC 0x00} nature.\nHatched: {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}.");
 const u8 gUnknown_84198D5[] = _("{DYNAMIC 0x00} nature.\nHatched: {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}.");
-
-// TODO: Replace this gibberish with the proper Hiragana
-const u8 gUnknown_84198F6[] = _("{DYNAMIC 0x00}ßÓÁÉË {LV_2}{DYNAMIC 0x01}çÑÊ\n{DYNAMIC 0x02}で ÉÇっŒ ùÂだ");
-const u8 gUnknown_8419913[] = _("{DYNAMIC 0x00}ÓÁÉË {LV_2}{DYNAMIC 0x01}çÑÊ\n{DYNAMIC 0x02}で ÉÇっŒ ùÂだ");
+const u8 gUnknown_84198F6[] = _("{DYNAMIC 0x00}なせいかく {LV_2}{DYNAMIC 0x01}のとき\n{DYNAMIC 0x02}で かえった ようだ");
+const u8 gUnknown_8419913[] = _("{DYNAMIC 0x00}せいかく {LV_2}{DYNAMIC 0x01}のとき\n{DYNAMIC 0x02}で かえった ようだ");
 const u8 gUnknown_841992F[] = _("{DYNAMIC 0x00} nature. Met in a fateful\nencounter (hatched: {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}).");
 const u8 gUnknown_841996D[] = _("{DYNAMIC 0x00} nature. Met in a fateful\nencounter (hatched: {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}).");
 const u8 gUnknown_84199AB[] = _("{DYNAMIC 0x00} nature. Apparently met in\na fateful encounter (hatched:\n{DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}).");

@@ -32,6 +32,7 @@ static EWRAM_DATA u16 gBackupMapLayout[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
+EWRAM_DATA u8 gUnknown_2036E28 = 0;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 

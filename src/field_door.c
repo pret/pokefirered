@@ -142,14 +142,14 @@ static const u16 sDoorNullPalette52[16] = {};
 // Unused block of door tiles
 static const u8 sDoorAnimTiles_UnusedTop[] = INCBIN_U8("graphics/door_anims/unused_top.4bpp");
 static const u8 sDoorAnimTiles_Empty32[256] = {};
-static const u8 sDoorAnimTiles_MidTop[] = INCBIN_U8("graphics/door_anims/unused_midtop.4bpp");
+static const u8 sDoorAnimTiles_UnusedMidTop[] = INCBIN_U8("graphics/door_anims/unused_midtop.4bpp");
 static const u8 sDoorAnimTiles_Empty33[256] = {};
-static const u8 sDoorAnimTiles_MidBottom[] = INCBIN_U8("graphics/door_anims/unused_midbottom.4bpp");
+static const u8 sDoorAnimTiles_UnusedMidBottom[] = INCBIN_U8("graphics/door_anims/unused_midbottom.4bpp");
 static const u8 sDoorAnimTiles_Empty34[256] = {};
-static const u8 sDoorAnimTiles_Bottom[] = INCBIN_U8("graphics/door_anims/unused_bottom.4bpp");
+static const u8 sDoorAnimTiles_UnusedBottom[] = INCBIN_U8("graphics/door_anims/unused_bottom.4bpp");
 static const u16 sDoorNullPalette53[16] = {};
 
-// Used FLRG doors resume
+// Used FRLG doors resume
 static const u8 sDoorAnimTiles_SilphCoElevator[] = INCBIN_U8("graphics/door_anims/silph_co_elevator.4bpp");
 static const u16 sDoorNullPalette54[16] = {};
 static const u8 sDoorAnimTiles_Sevii123[] = INCBIN_U8("graphics/door_anims/sevii_123.4bpp");

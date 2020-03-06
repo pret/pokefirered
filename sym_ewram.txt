@@ -297,14 +297,10 @@ gUnknown_203998C: @ 203998C
 	.include "src/credits.o"
 	.align 2
 	.include "src/diploma.o"
-
 	.align 2
 	.include "src/save_failed_screen.o"
-
 	.align 2
-gUnknown_203AB54: @ 203AB54
-	.space 0x4
-
+	.include "src/clear_save_data_screen.o"
 	.align 2
 	.include "src/new_menu_helpers.o"
 	.align 2

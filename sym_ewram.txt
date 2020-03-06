@@ -316,7 +316,7 @@ gUnknown_203998C: @ 203998C
 	.align 2
 
 	@ .include "src/easy_chat_2.o"
-gUnknown_203ACE8: @ 203ACE8
+sEasyChatScreen: @ 203ACE8
 	.space 0x4
 
 gUnknown_203ACEC: @ 203ACEC

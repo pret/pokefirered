@@ -46,5 +46,6 @@ u16 GetNumDisplayedWords(void);
 const u8 *GetEasyChatWordGroupName(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback);
+u8 GetNumDisplayableGroups(void);
 
 #endif // GUARD_EASY_CHAT_H

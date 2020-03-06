@@ -1313,4 +1313,40 @@ extern const u8 gText_QuestLog_CeruleanCave[];
 extern const u8 gUnknown_841B69E[];
 extern const u8 gUnknown_841B6B9[];
 
+// easy_chat_2
+extern const u8 gUnknown_84186D1[];
+extern const u8 gUnknown_84186EF[];
+extern const u8 gUnknown_8418706[];
+extern const u8 gUnknown_8418725[];
+extern const u8 gUnknown_8418745[];
+extern const u8 gUnknown_8418763[];
+extern const u8 gUnknown_8418780[];
+extern const u8 gUnknown_841879E[];
+extern const u8 gUnknown_84187B2[];
+extern const u8 gUnknown_84187D1[];
+extern const u8 gUnknown_84187EE[];
+extern const u8 gUnknown_841880E[];
+extern const u8 gUnknown_841881B[];
+extern const u8 gUnknown_841883E[];
+extern const u8 gUnknown_841885F[];
+extern const u8 gUnknown_8418881[];
+extern const u8 gUnknown_841888C[];
+extern const u8 gUnknown_84188AC[];
+extern const u8 gUnknown_84188B9[];
+extern const u8 gUnknown_84188D6[];
+extern const u8 gUnknown_84188F0[];
+extern const u8 gUnknown_8418902[];
+extern const u8 gUnknown_8418937[];
+extern const u8 gUnknown_8418956[];
+extern const u8 gUnknown_84189E0[];
+extern const u8 gUnknown_84189EE[];
+extern const u8 gUnknown_8418A2B[];
+extern const u8 gUnknown_8418A33[];
+extern const u8 gUnknown_8418A4A[];
+extern const u8 gUnknown_8418A61[];
+extern const u8 gUnknown_8418A77[];
+extern const u8 gUnknown_8418A87[];
+extern const u8 gUnknown_8418AA1[];
+extern const u8 gUnknown_8418AB2[];
+
 #endif //GUARD_STRINGS_H

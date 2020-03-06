@@ -131,7 +131,7 @@ static void Task_HandleYesNoMenu(u8 taskId)
     {
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             PlaySE(SE_SELECT);
             break;
@@ -142,7 +142,7 @@ static void Task_HandleYesNoMenu(u8 taskId)
             CopyWindowToVram(1, 3);
             ClearSaveData();
             break;
-        case -2:
+        case MENU_NOTHING_CHOSEN:
         default:
             return;
         }

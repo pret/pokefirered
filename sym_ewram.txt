@@ -100,9 +100,8 @@ gUnknown_2037098: @ 2037098
 gUnknown_203709A: @ 203709A
 	.space 0x2
 
-gUnknown_203709C: @ 203709C
-	.space 0x4
-
+	.align 2
+	.include "src/field_message_box.o"
 	.align 2
 	.include "src/script.o"
 	.align 2

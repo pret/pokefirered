@@ -95,7 +95,7 @@ SECTIONS {
         asm/field_player_avatar.o(.text);
         asm/event_object_movement.o(.text);
         src/event_object_80688E4.o(.text); /* event_object_movement */
-        asm/field_message_box.o(.text);
+        src/field_message_box.o(.text);
         src/event_object_lock.o(.text);
         src/text_window_graphics.o(.text);
         src/script.o(.text);

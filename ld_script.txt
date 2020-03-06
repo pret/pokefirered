@@ -216,7 +216,7 @@ SECTIONS {
         src/credits.o(.text);
         src/diploma.o(.text);
         src/save_failed_screen.o(.text);
-        asm/clear_save_data_screen.o(.text);
+        src/clear_save_data_screen.o(.text);
         src/evolution_graphics.o(.text);
         src/fldeff_teleport.o(.text);
         src/new_menu_helpers.o(.text);
@@ -510,7 +510,7 @@ SECTIONS {
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
         src/save_failed_screen.o(.rodata);
-        data/clear_save_data_screen.o(.rodata);
+        src/clear_save_data_screen.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/new_menu_helpers.o(.rodata);
         src/box_party_pokemon_dropdown.o(.rodata);

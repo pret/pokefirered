@@ -32,6 +32,8 @@
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 #define FIELD_EFFECT_COUNT 32
 
+EWRAM_DATA u32 gFieldEffectArguments[8] = {0};
+
 static u8 sFieldEffectActiveList[FIELD_EFFECT_COUNT];
 
 static void FieldEffectActiveListAdd(u8 fldeff);

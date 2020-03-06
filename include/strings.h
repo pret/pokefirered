@@ -1309,4 +1309,8 @@ extern const u8 gText_QuestLog_VictoryRoad[];
 extern const u8 gText_QuestLog_PokemonLeague[];
 extern const u8 gText_QuestLog_CeruleanCave[];
 
+// clear_save_data_screen
+extern const u8 gUnknown_841B69E[];
+extern const u8 gUnknown_841B6B9[];
+
 #endif //GUARD_STRINGS_H

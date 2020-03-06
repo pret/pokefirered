@@ -716,7 +716,7 @@ void DestroyHelpMessageWindow_(void)
     DestroyHelpMessageWindow(2);
 }
 
-void sub_80F79A4(void)
+void LoadSignPostWindowFrameGfx(void)
 {
     Menu_LoadStdPal();
     sub_814FEEC(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);

@@ -47,7 +47,7 @@ void RemoveStartMenuWindow(void);
 u16 GetStdWindowBaseTileNum(void);
 void DrawHelpMessageWindowWithText(const u8 * text);
 void DestroyHelpMessageWindow_(void);
-void sub_80F79A4(void);
+void LoadSignPostWindowFrameGfx(void);
 void SetDefaultFontsPointer(void);
 
 #endif // GUARD_NEW_MENU_HELPERS_H

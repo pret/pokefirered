@@ -17,7 +17,7 @@ struct Unk203A11C
     s8 unk8;
     u8 unk9;
     u8 unkA[0xC1];
-    u8 unkCC[0x202];
+    u8 unkCC[0x200];
     u16 unk2CE;
     int unk2D0;
     int unk2D4;
@@ -91,8 +91,10 @@ void sub_8101478(void);
 void sub_81014AC(u8 a0, u8 a1);
 void sub_8101558(u8 a0, u8 a1);
 void sub_81015BC(void);
-void sub_81015D4(u8 a0);
+void sub_81015D4(int a0);
 bool8 sub_81016AC(void);
+void sub_81016E4(u8 a0);
+void sub_8101830(int left, int top, int width, int height);
 void sub_810198C(void);
 void sub_81019B0(s16 a0, u8 a1);
 bool8 sub_8101A10(void);
@@ -1416,4 +1418,225 @@ void sub_8101558(u8 arg0, u8 arg1)
     FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, var2);
     if (var1)
         FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, var1);
+}
+
+void sub_81015BC(void)
+{
+    FillWindowPixelBuffer(2, PIXEL_FILL(1));
+    CopyWindowToVram(2, 2);
+}
+
+void sub_81015D4(int arg0)
+{
+    switch (arg0)
+    {
+    case 0:
+        gUnknown_203ACEC->unk6 = 0;
+        gUnknown_203ACEC->unk7 = 10;
+        break;
+    case 1:
+        gUnknown_203ACEC->unk6 = 9;
+        gUnknown_203ACEC->unk7 = 0;
+        break;
+    case 2:
+        gUnknown_203ACEC->unk6 = 11;
+        gUnknown_203ACEC->unk7 = 17;
+        break;
+    case 3:
+        gUnknown_203ACEC->unk6 = 17;
+        gUnknown_203ACEC->unk7 = 0;
+        break;
+    case 4:
+        gUnknown_203ACEC->unk6 = 17;
+        gUnknown_203ACEC->unk7 = 10;
+        break;
+    case 5:
+        gUnknown_203ACEC->unk6 = 18;
+        gUnknown_203ACEC->unk7 = 22;
+        break;
+    case 6:
+        gUnknown_203ACEC->unk6 = 22;
+        gUnknown_203ACEC->unk7 = 18;
+        break;
+    }
+
+    gUnknown_203ACEC->unk8 = gUnknown_203ACEC->unk6 < gUnknown_203ACEC->unk7 ? 1 : -1;
+}
+
+bool8 sub_81016AC(void)
+{
+    u8 var0, var1;
+    if (gUnknown_203ACEC->unk6 == gUnknown_203ACEC->unk7)
+        return FALSE;
+
+    gUnknown_203ACEC->unk6 += gUnknown_203ACEC->unk8;
+    sub_81016E4(gUnknown_203ACEC->unk6);
+    var0 = gUnknown_203ACEC->unk6;
+    var1 = gUnknown_203ACEC->unk7;
+    return (var0 ^ var1) > 0;
+}
+
+void sub_81016E4(u8 arg0)
+{
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 10, 30, 10);
+    switch (arg0)
+    {
+    case 0:
+        break;
+    case 1:
+        sub_8101830(11, 14, 3, 2);
+        break;
+    case 2:
+        sub_8101830(9, 14, 7, 2);
+        break;
+    case 3:
+        sub_8101830(7, 14, 11, 2);
+        break;
+    case 4:
+        sub_8101830(5, 14, 15, 2);
+        break;
+    case 5:
+        sub_8101830(3, 14, 19, 2);
+        break;
+    case 6:
+        sub_8101830(1, 14, 23, 2);
+        break;
+    case 11:
+        sub_8101830(1, 10, 24, 10);
+        break;
+    case 12:
+        sub_8101830(1, 10, 25, 10);
+        break;
+    case 13:
+        sub_8101830(1, 10, 26, 10);
+        break;
+    case 14:
+        sub_8101830(1, 10, 27, 10);
+        break;
+    case 15:
+        sub_8101830(1, 10, 28, 10);
+        break;
+    case 16:
+        sub_8101830(1, 10, 29, 10);
+        break;
+    case 17:
+        sub_8101830(0, 10, 30, 10);
+        break;
+    case 10:
+    case 18:
+        sub_8101830(1, 10, 23, 10);
+        break;
+    case 9:
+    case 19:
+        sub_8101830(1, 11, 23, 8);
+        break;
+    case 8:
+    case 20:
+        sub_8101830(1, 12, 23, 6);
+        break;
+    case 7:
+    case 21:
+        sub_8101830(1, 13, 23, 4);
+        break;
+    case 22:
+        sub_8101830(1, 14, 23, 2);
+        break;
+    }
+
+    CopyBgTilemapBufferToVram(1);
+}
+
+void sub_8101830(int left, int top, int width, int height)
+{
+    u16 *tilemap;
+    int right;
+    int bottom;
+    int x, y;
+
+    tilemap = gUnknown_203ACEC->unk300;
+    right = left + width - 1;
+    bottom = top + height - 1;
+    x = left;
+    y = top;
+    tilemap[y * 32 + x] = 0x4001;
+    x++;
+    for (; x < right; x++)
+        tilemap[y * 32 + x] = 0x4002;
+
+    tilemap[y * 32 + x] = 0x4003;
+    y++;
+    for (; y < bottom; y++)
+    {
+        tilemap[y * 32 + left] = 0x4005;
+        x = left + 1;
+        for (; x < right; x++)
+            tilemap[y * 32 + x] = 0x4000;
+
+        tilemap[y * 32 + x] = 0x4007;
+    }
+
+    tilemap[y * 32 + left] = 0x4009;
+    x = left + 1;
+    for (; x < right; x++)
+        tilemap[y * 32 + x] = 0x400A;
+
+    tilemap[y * 32 + x] = 0x400B;
+    sub_8101A5C((left + 1) * 8, (top + 1) * 8, (width - 2) * 8, (height - 2) * 8);
+}
+
+void sub_810198C(void)
+{
+    ChangeBgY(2, 0x800, 0);
+    gUnknown_203ACEC->unk2CE = 0;
+}
+
+void sub_81019B0(s16 arg0, u8 arg1)
+{
+    int bgY;
+    s16 var0;
+
+    bgY = GetBgY(2);
+    gUnknown_203ACEC->unk2CE += arg0;
+    var0 = arg0 * 16;
+    bgY += var0 << 8;
+    if (arg1)
+    {
+        gUnknown_203ACEC->unk2D0 = bgY;
+        gUnknown_203ACEC->unk2D4 = arg1 * 256;
+        if (var0 < 0)
+            gUnknown_203ACEC->unk2D4 = -gUnknown_203ACEC->unk2D4;
+    }
+    else
+    {
+        ChangeBgY(2, bgY, 0);
+    }
+}
+
+bool8 sub_8101A10(void)
+{
+    int bgY;
+
+    bgY = GetBgY(2);
+    if (bgY == gUnknown_203ACEC->unk2D0)
+    {
+        return FALSE;
+    }
+    else
+    {
+        ChangeBgY(2, gUnknown_203ACEC->unk2D4, 1);
+        return TRUE;
+    }
+}
+
+int sub_8101A48(void)
+{
+    return gUnknown_203ACEC->unk2CE;
+}
+
+void sub_8101A5C(u8 left, u8 top, u8 width, u8 height)
+{
+    u16 horizontalDimensions = WIN_RANGE(left, left + width);
+    u16 verticalDimensions = WIN_RANGE(top, top + height);
+    SetGpuReg(REG_OFFSET_WIN0H, horizontalDimensions);
+    SetGpuReg(REG_OFFSET_WIN0V, verticalDimensions);
 }

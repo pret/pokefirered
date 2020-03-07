@@ -47,5 +47,28 @@ const u8 *GetEasyChatWordGroupName(u8);
 u8 *CopyEasyChatWordPadded(u8 *, u16, u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback);
 u8 GetNumDisplayableGroups(void);
+bool8 sub_80FFF80(void);
+bool8 sub_80FFF98(void);
+void sub_810011C(void);
+void sub_8100134(u16 v0);
+bool8 sub_810014C(void);
+u8 GetEasyChatScreenFrameId(void);
+const u8 *GetTitleText(void);
+u16 *GetEasyChatWordBuffer(void);
+u8 GetNumRows(void);
+u8 GetNumColumns(void);
+u8 GetMainCursorColumn(void);
+u8 GetMainCursorRow(void);
+void GetEasyChatInstructionsText(const u8 **str1, const u8 **str2);
+void GetEasyChatConfirmText(const u8 **str1, const u8 **str2);
+void sub_80FFDC8(const u8 **str1, const u8 **str2);
+void GetEasyChatConfirmDeletionText(const u8 **str1, const u8 **str2);
+void sub_80FFE08(u8 *arg0, u8 *arg1);
+u8 sub_80FFE1C(void);
+u8 sub_80FFE28(void);
+void sub_80FFE34(u8 *arg0, u8 *arg1);
+u8 sub_80FFE48(void);
+u8 sub_80FFE54(void);
+u8 unref_sub_80FFE60(void);
 
 #endif // GUARD_EASY_CHAT_H

@@ -4886,4 +4886,8 @@ extern const u16 gUnknown_8EAFEA0[];
 extern const u32 gUnknown_8EAFFC0[];
 extern const u32 gUnknown_8EB0ADC[];
 
+// easy_chat_3
+extern const u32 gEasyChatWindow_Gfx[];
+extern const u32 gEasyChatWindow_Tilemap[];
+
 #endif //GUARD_GRAPHICS_H

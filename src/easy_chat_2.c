@@ -107,12 +107,6 @@ bool8 GetEasyChatScreenFrameId(void);
 bool8 IsPhraseDifferentThanPlayerInput(const u16 *wordsToCompare, u8 numWords);
 u8 GetEasyChatScreenTemplateId(u8 type);
 bool32 IsEcWordBufferUninitialized(void);
-bool8 sub_80FFF80(void);
-bool8 sub_80FFF98(void);
-void sub_810011C(void);
-void sub_8100134(u16 v0);
-bool8 sub_810014C(void);
-bool8 sub_8100BF4(void);
 
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback)
 {
@@ -1369,12 +1363,4 @@ bool32 IsEcWordBufferUninitialized(void)
     }
 
     return TRUE;
-}
-
-bool8 sub_80FFF80(void)
-{
-    if (!sub_8100BF4())
-        return FALSE;
-    else
-        return TRUE;
 }

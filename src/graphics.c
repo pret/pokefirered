@@ -1216,8 +1216,8 @@ const u16 gHoennTrainerCard_Pal[] = INCBIN_U16("graphics/trainer_card/0star_em.g
 const u32 gHoennTrainerCard_Gfx[] = INCBIN_U32("graphics/trainer_card/card_em.4bpp.lz");
 
 const u16 gUnknown_8E99D8C[] = INCBIN_U16("graphics/link_rfu/unk_8E99DAC.gbapal");
-const u32 gUnknown_8E99DAC[] = INCBIN_U32("graphics/link_rfu/unk_8E99DAC.4bpp.lz");
-const u32 gUnknown_8E99E74[] = INCBIN_U32("graphics/link_rfu/unk_8E99E74.bin.lz");
+const u32 gEasyChatWindow_Gfx[] = INCBIN_U32("graphics/link_rfu/unk_8E99DAC.4bpp.lz");
+const u32 gEasyChatWindow_Tilemap[] = INCBIN_U32("graphics/link_rfu/unk_8E99E74.bin.lz");
 
 const u16 gUnknown_8E99F24[] = INCBIN_U16("graphics/link_rfu/unk_8E9A168.gbapal");
 const u32 gUnknown_8E99F44[] = INCBIN_U32("graphics/link_rfu/unk_8E99F44.4bpp.lz");

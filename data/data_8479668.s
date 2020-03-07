@@ -13,7 +13,7 @@
 
 	.section .rodata
 
-	// berry_fix_program
+	// easy_chat_2
 
 gUnknown_847A8D8::
 	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 26}others$"
@@ -26,6 +26,8 @@ gUnknown_847A913::
 
 gUnknown_847A934::
 	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
+
+	// naming_screen
 
 gUnknown_847A955::
 	.string "{CLEAR 11}a{CLEAR 6}b{CLEAR 6}c{CLEAR 26}d{CLEAR 6}e{CLEAR 6}f{CLEAR 6} {CLEAR 26}.$"
@@ -62,6 +64,8 @@ gUnknown_847AA8F::
 
 gUnknown_847AAA8::
 	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 18}'{CLEAR 18} $"
+
+	// union_room_chat
 
 gText_UnionRoomChatKeyboard_ABCDE::
 	.string "ABCDE$"

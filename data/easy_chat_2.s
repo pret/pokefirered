@@ -7,13 +7,6 @@
 	.section .rodata
 	.align 2
 
-	.align 2
-gUnknown_843F8E0:: @ 843F8E0
-	.4byte gUnknown_847A8D8
-	.4byte gUnknown_847A8FA
-	.4byte gUnknown_847A913
-	.4byte gUnknown_847A934
-
 gUnknown_843F8F0:: @ 843F8F0 sprite_sheet
 	obj_tiles gUnknown_843F3F8, 0x0020, 0
 	obj_tiles gUnknown_843F418, 0x0100, 2

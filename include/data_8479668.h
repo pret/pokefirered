@@ -32,4 +32,9 @@ extern const u8 gText_UnionRoomChatKeyboard_Emoji8[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji9[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji10[];
 
+extern const u8 gUnknown_847A8D8[];
+extern const u8 gUnknown_847A8FA[];
+extern const u8 gUnknown_847A913[];
+extern const u8 gUnknown_847A934[];
+
 #endif //GUARD_DATA_8479668_H

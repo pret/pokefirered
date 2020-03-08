@@ -53,7 +53,7 @@ struct EasyChatScreen
     /*0x18*/ u16 ecWordBuffer[9];
 };
 
-static EWRAM_DATA struct EasyChatScreen *sEasyChatScreen = NULL;
+static EWRAM_DATA struct EasyChatScreen * sEasyChatScreen = NULL;
 
 static void CB2_EasyChatScreen(void);
 static void Task_InitEasyChat(u8 taskId);

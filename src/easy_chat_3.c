@@ -23,16 +23,16 @@ struct ECWork
     u16 bg2ScrollRow;
     int tgtBgY;
     int deltaBgY;
-    struct Sprite *selectDestFieldCursorSprite;
-    struct Sprite *rectCursorSpriteRight;
-    struct Sprite *rectCursorSpriteLeft;
-    struct Sprite *selectWordCursorSprite;
-    struct Sprite *selectGroupHelpSprite;
-    struct Sprite *modeIconsSprite;
-    struct Sprite *upTriangleCursorSprite;
-    struct Sprite *downTriangleCursorSprite;
-    struct Sprite *startPgUpButtonSprite;
-    struct Sprite *selectPgDnButtonSprite;
+    struct Sprite * selectDestFieldCursorSprite;
+    struct Sprite * rectCursorSpriteRight;
+    struct Sprite * rectCursorSpriteLeft;
+    struct Sprite * selectWordCursorSprite;
+    struct Sprite * selectGroupHelpSprite;
+    struct Sprite * modeIconsSprite;
+    struct Sprite * upTriangleCursorSprite;
+    struct Sprite * downTriangleCursorSprite;
+    struct Sprite * startPgUpButtonSprite;
+    struct Sprite * selectPgDnButtonSprite;
     u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
     u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
@@ -45,7 +45,7 @@ struct EasyChatPhraseFrameDimensions
     u8 height;
 };
 
-static EWRAM_DATA struct ECWork *sEasyChatGraphicsResources = NULL;
+static EWRAM_DATA struct ECWork * sEasyChatGraphicsResources = NULL;
 
 static bool8 ECInterfaceCmd_01(void);
 static bool8 ECInterfaceCmd_02(void);
@@ -1933,7 +1933,7 @@ static void CreateSelectDestFieldCursorSprite(void)
     gSprites[spriteId].data[1] = 1;
 }
 
-static void SpriteCB_BounceCursor(struct Sprite *sprite)
+static void SpriteCB_BounceCursor(struct Sprite * sprite)
 {
     if (sprite->data[1])
     {
@@ -2076,7 +2076,7 @@ static void CreateSelectWordCursorSprite(void)
     SetSelectWordCursorSpritePos();
 }
 
-static void SpriteCB_SelectWordCursorSprite(struct Sprite *sprite)
+static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite)
 {
     if (++sprite->data[0] > 2)
     {

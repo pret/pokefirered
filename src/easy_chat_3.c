@@ -1270,7 +1270,7 @@ static bool8 ECInterfaceCmd_20(void)
 static bool8 InitEasyChatGraphicsWork_Internal(void)
 {
     sEasyChatGraphicsResources = Alloc(sizeof(*sEasyChatGraphicsResources));
-    if (!sEasyChatGraphicsResources)
+    if (sEasyChatGraphicsResources == NULL)
         return FALSE;
 
     sEasyChatGraphicsResources->state = 0;
@@ -1316,7 +1316,7 @@ static void PrintTitleText(void)
 {
     int xOffset;
     const u8 *titleText = GetTitleText();
-    if (!titleText)
+    if (titleText == NULL)
         return;
 
     xOffset = (128 - GetStringWidth(1, titleText, 0)) / 2u;

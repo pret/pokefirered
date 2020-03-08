@@ -76,25 +76,25 @@ static u16 Cancel_CreateYesNoMenu(void);
 static u16 DelAll_CreateYesNoMenu(void);
 static u16 Confirm_CreateYesNoMenu(void);
 static u8 GetStateBackup(void);
-int OpenSelectedGroup(void);
-int BackOutFromGroupToFieldSelect(void);
-int ToggleGroupAlphaMode(void);
-int DeleteSelectedWord(void);
-int PlaceSelectedWord(void);
+static int OpenSelectedGroup(void);
+static int BackOutFromGroupToFieldSelect(void);
+static int ToggleGroupAlphaMode(void);
+static int DeleteSelectedWord(void);
+static int PlaceSelectedWord(void);
 static void CommitECWords(void);
 static void DeleteAllECFields(void);
 static void SetEasyChatWordToField(u16 word);
 static bool8 HasECMessageChanged(void);
 static u16 SelectGroupCursorAction(u32 action);
-int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 action);
-int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 action);
-int UpdateSelectGroupCursorPos_InsideBlueBox(u32 action);
+static int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 action);
+static int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 action);
+static int UpdateSelectGroupCursorPos_InsideBlueBox(u32 action);
 static void GroupCursorMoveToBlueBox(void);
 static void GroupCursorWrapAroundLeft(void);
 static u16 SelectWordCursorAction(u32 action);
 static u16 GetSelectedFieldIndex(void);
 static u16 GetSelectedGroupIndex(void);
-int GetSelectedLetter(void);
+static int GetSelectedLetter(void);
 static u16 GetSelectWordCursorPos(void);
 static u8 GetMaxGroupCursorXinAlphaMode(u8 unkB);
 static void MoveGroupCursorXToMaxCol(void);
@@ -162,7 +162,7 @@ static void Task_RunEasyChat(u8 taskId)
     {
     case 0:
         SetVBlankCallback(VBlankCallback_EasyChatScreen);
-        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
         data[EZCHAT_TASK_STATE]++;
         break;
@@ -763,7 +763,7 @@ static u8 GetStateBackup(void)
     return sEasyChatScreen->stateBackup;
 }
 
-int OpenSelectedGroup(void)
+static int OpenSelectedGroup(void)
 {
     u16 numDisplayedWords;
 
@@ -789,13 +789,13 @@ int OpenSelectedGroup(void)
     return 11;
 }
 
-int BackOutFromGroupToFieldSelect(void)
+static int BackOutFromGroupToFieldSelect(void)
 {
     sEasyChatScreen->state = 0;
     return 10;
 }
 
-int ToggleGroupAlphaMode(void)
+static int ToggleGroupAlphaMode(void)
 {
     sEasyChatScreen->selectGroupCursorX = 0;
     sEasyChatScreen->selectGroupCursorY = 0;
@@ -808,13 +808,13 @@ int ToggleGroupAlphaMode(void)
     return 22;
 }
 
-int DeleteSelectedWord(void)
+static int DeleteSelectedWord(void)
 {
     SetEasyChatWordToField(0xFFFF);
     return 1;
 }
 
-int PlaceSelectedWord(void)
+static int PlaceSelectedWord(void)
 {
     u16 easyChatWord = GetDisplayedWordByIndex(GetSelectWordCursorPos());
     SetEasyChatWordToField(easyChatWord);
@@ -869,7 +869,7 @@ static u16 SelectGroupCursorAction(u32 action)
     }
 }
 
-int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 arg0)
+static int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 arg0)
 {
     switch (arg0)
     {
@@ -931,7 +931,7 @@ int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 arg0)
     return 0;
 }
 
-int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 arg0)
+static int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 arg0)
 {
     switch (arg0)
     {
@@ -968,7 +968,7 @@ int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 arg0)
     return 0;
 }
 
-int UpdateSelectGroupCursorPos_InsideBlueBox(u32 arg0)
+static int UpdateSelectGroupCursorPos_InsideBlueBox(u32 arg0)
 {
     switch (arg0)
     {
@@ -1124,7 +1124,7 @@ static const u8 sAlphabetLayout[][7] = {
     {20, 21, 22, 23, 24, 25, 26}
 };
 
-int GetSelectedLetter(void)
+static int GetSelectedLetter(void)
 {
     int col = sEasyChatScreen->selectGroupCursorX < NELEMS(*sAlphabetLayout) ? sEasyChatScreen->selectGroupCursorX : 0;
     int row = sEasyChatScreen->selectGroupCursorY < NELEMS(sAlphabetLayout) ? sEasyChatScreen->selectGroupCursorY : 0;

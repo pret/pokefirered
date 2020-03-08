@@ -66,7 +66,7 @@ void GetEasyChatConfirmDeletionText(const u8 **str1, const u8 **str2);
 void sub_80FFE08(u8 *arg0, u8 *arg1);
 u8 sub_80FFE1C(void);
 u8 sub_80FFE28(void);
-void sub_80FFE34(u8 *arg0, u8 *arg1);
+void sub_80FFE34(s8 *arg0, s8 *arg1);
 u8 sub_80FFE48(void);
 u8 sub_80FFE54(void);
 u8 unref_sub_80FFE60(void);

@@ -110,8 +110,12 @@ void sub_8101BA8(void);
 void sub_8101BC0(void);
 void sub_8101C48(void);
 void sub_8101C80(void);
+void sub_8101CE4(s8 a0, s8 a1);
+void sub_8101D9C(s8 a0, s8 a1);
 void sub_8101E80(void);
+void sub_8101ED4(struct Sprite * sprite);
 void sub_8101F04(void);
+void sub_8101F40(u8 x, u8 y);
 void sub_8101F80(void);
 void sub_8101FAC(void);
 bool8 sub_8102018(void);
@@ -331,6 +335,119 @@ const struct SpriteTemplate gUnknown_843F968 = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = sub_8101B20
+};
+
+const struct OamData gUnknown_843F980 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .mosaic = FALSE,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
+
+const union AnimCmd gUnknown_843F988[] = {
+    ANIMCMD_FRAME(0x00, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F990[] = {
+    ANIMCMD_FRAME(0x20, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F998[] = {
+    ANIMCMD_FRAME(0x40, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F9A0[] = {
+    ANIMCMD_FRAME(0x60, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_843F9A8[] = {
+    gUnknown_843F988,
+    gUnknown_843F990,
+    gUnknown_843F998,
+    gUnknown_843F9A0
+};
+
+const struct SpriteTemplate gUnknown_843F9B8 = {
+    .tileTag = 1,
+    .paletteTag = 1,
+    .oam = &gUnknown_843F980,
+    .anims = gUnknown_843F9A8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8101B20
+};
+
+const struct OamData gUnknown_843F9D0 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .mosaic = FALSE,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
+
+const union AnimCmd gUnknown_843F9D8[] = {
+    ANIMCMD_FRAME(0x60, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F9E0[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_FRAME(0x20, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F9EC[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_FRAME(0x00, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843F9F8[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_FRAME(0x60, 0),
+    ANIMCMD_END
+};
+
+const union AnimCmd gUnknown_843FA04[] = {
+    ANIMCMD_FRAME(0x40, 4),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gUnknown_843FA0C[] = {
+    gUnknown_843F9D8,
+    gUnknown_843F9E0,
+    gUnknown_843F9EC,
+    gUnknown_843F9F8,
+    gUnknown_843FA04
+};
+
+const struct SpriteTemplate gUnknown_843FA20 = {
+    .tileTag = 4,
+    .paletteTag = 2,
+    .oam = &gUnknown_843F9D0,
+    .anims = gUnknown_843FA0C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 bool8 sub_80FFF80(void)
@@ -1751,4 +1868,155 @@ void sub_8101B88(void)
 void sub_8101BA8(void)
 {
     gUnknown_203ACEC->unk2D8->data[1] = 1;
+}
+
+void sub_8101BC0(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_843F9B8, 0, 0, 3);
+    gUnknown_203ACEC->unk2DC = &gSprites[spriteId];
+    gUnknown_203ACEC->unk2DC->pos2.x = 32;
+
+    spriteId = CreateSprite(&gUnknown_843F9B8, 0, 0, 3);
+    gUnknown_203ACEC->unk2E0 = &gSprites[spriteId];
+    gUnknown_203ACEC->unk2E0->pos2.x = -32;
+
+    gUnknown_203ACEC->unk2DC->hFlip = 1;
+    sub_8101C80();
+}
+
+void sub_8101C48(void)
+{
+    DestroySprite(gUnknown_203ACEC->unk2DC);
+    gUnknown_203ACEC->unk2DC = NULL;
+    DestroySprite(gUnknown_203ACEC->unk2E0);
+    gUnknown_203ACEC->unk2E0 = NULL;
+}
+
+void sub_8101C80(void)
+{
+    u8 var0;
+    u8 var1;
+
+    if (gUnknown_203ACEC->unk2DC && gUnknown_203ACEC->unk2E0)
+    {
+        sub_80FFE08(&var0, &var1);
+        if (!sub_80FFE1C())
+            sub_8101CE4(var0, var1);
+        else
+            sub_8101D9C(var0, var1);
+    }
+}
+
+void sub_8101CE4(s8 arg0, s8 arg1)
+{
+    if (arg0 != -1)
+    {
+        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 0);
+        gUnknown_203ACEC->unk2DC->pos1.x = arg0 * 84 + 58;
+        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 96;
+
+        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 0);
+        gUnknown_203ACEC->unk2E0->pos1.x = arg0 * 84 + 58;
+        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 96;
+    }
+    else
+    {
+        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 1);
+        gUnknown_203ACEC->unk2DC->pos1.x = 216;
+        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 112;
+
+        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 1);
+        gUnknown_203ACEC->unk2E0->pos1.x = 216;
+        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 112;
+    }
+}
+
+void sub_8101D9C(s8 arg0, s8 arg1)
+{
+    int anim;
+    int x, y;
+
+    if (arg0 != -1)
+    {
+        y = arg1 * 16 + 96;
+        x = 32;
+        if (arg0 == 6 && arg1 == 0)
+        {
+            x = 157;
+            anim = 2;
+        }
+        else
+        {
+            x += gUnknown_843F958[arg0 < NELEMS(gUnknown_843F958) ? arg0 : 0];
+            anim = 3;
+        }
+
+        StartSpriteAnim(gUnknown_203ACEC->unk2DC, anim);
+        gUnknown_203ACEC->unk2DC->pos1.x = x;
+        gUnknown_203ACEC->unk2DC->pos1.y = y;
+
+        StartSpriteAnim(gUnknown_203ACEC->unk2E0, anim);
+        gUnknown_203ACEC->unk2E0->pos1.x = x;
+        gUnknown_203ACEC->unk2E0->pos1.y = y;
+    }
+    else
+    {
+        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 1);
+        gUnknown_203ACEC->unk2DC->pos1.x = 216;
+        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 112;
+
+        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 1);
+        gUnknown_203ACEC->unk2E0->pos1.x = 216;
+        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 112;
+    }
+}
+
+void sub_8101E80(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_843F968, 0, 0, 4);
+    gUnknown_203ACEC->unk2E4 = &gSprites[spriteId];
+    gUnknown_203ACEC->unk2E4->callback = sub_8101ED4;
+    gUnknown_203ACEC->unk2E4->oam.priority = 2;
+    sub_8101F04();
+}
+
+void sub_8101ED4(struct Sprite *sprite)
+{
+    if (++sprite->data[0] > 2)
+    {
+        sprite->data[0] = 0;
+        if (++sprite->pos2.x > 0)
+            sprite->pos2.x = -6;
+    }
+}
+
+void sub_8101F04(void)
+{
+    s8 var0, var1;
+    u8 x, y;
+
+    sub_80FFE34(&var0, &var1);
+    x = var0 * 13 + 3;
+    y = var1 * 2 + 11;
+    sub_8101F40(x, y);
+}
+
+void sub_8101F40(u8 x, u8 y)
+{
+    if (gUnknown_203ACEC->unk2E4)
+    {
+        gUnknown_203ACEC->unk2E4->pos1.x = x * 8 + 4;
+        gUnknown_203ACEC->unk2E4->pos1.y = (y + 1) * 8 + 1;
+        gUnknown_203ACEC->unk2E4->pos2.x = 0;
+        gUnknown_203ACEC->unk2E4->data[0] = 0;
+    }
+}
+
+void sub_8101F80(void)
+{
+    if (gUnknown_203ACEC->unk2E4)
+    {
+        DestroySprite(gUnknown_203ACEC->unk2E4);
+        gUnknown_203ACEC->unk2E4 = NULL;
+    }
 }

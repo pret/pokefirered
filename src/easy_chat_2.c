@@ -1271,7 +1271,7 @@ u8 sub_80FFE28(void)
     return sEasyChatScreen->unk_0c;
 }
 
-void sub_80FFE34(u8 *arg0, u8 *arg1)
+void sub_80FFE34(s8 *arg0, s8 *arg1)
 {
     *arg0 = sEasyChatScreen->unk_10;
     *arg1 = sEasyChatScreen->unk_11;

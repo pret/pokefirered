@@ -49,7 +49,6 @@ struct EasyChatScreen
     /*0x0F*/ u8 selectWordNumRows;
     /*0x10*/ s8 selectWordCursorX;
     /*0x11*/ s8 selectWordCursorY;
-    /*0x12*/ u8 unk_12;
     /*0x14*/ u16 *words;
     /*0x18*/ u16 ecWordBuffer[9];
 };

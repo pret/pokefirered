@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "data_8479668.h"
+#include "decompress.h"
 #include "easy_chat.h"
 #include "graphics.h"
 #include "menu.h"
@@ -102,7 +103,8 @@ s32 sub_8101A48(void);
 void sub_8101A5C(u8 left, u8 top, u8 right, u8 bottom);
 void sub_8101A90(void);
 void sub_8101AC4(void);
-void sub_8101B58(u8 a0, u8 a1);
+void sub_8101B20(struct Sprite * sprite);
+void sub_8101B58(u8 x, u8 y);
 void sub_8101B88(void);
 void sub_8101BA8(void);
 void sub_8101BC0(void);
@@ -272,6 +274,63 @@ const u8 *const sEasyChatKeyboardText[] = {
     gUnknown_847A8FA,
     gUnknown_847A913,
     gUnknown_847A934
+};
+
+const struct SpriteSheet sEasyChatSpriteSheets[] = {
+    {gUnknown_843F3F8, 0x0020, 0},
+    {gUnknown_843F418, 0x0100, 2},
+    {gUnknown_843F518, 0x0100, 3},
+    {}
+};
+
+const struct SpritePalette sEasyChatSpritePalettes[] = {
+    {gUnknown_843F3B8, 0},
+    {gUnknown_843F3D8, 1},
+    {gUnknown_8E99F24, 2},
+    {gUnknown_843F618, 3},
+    {}
+};
+
+const struct CompressedSpriteSheet gUnknown_843F938[] = {
+    {gUnknown_843F638, 0x0800, 5},
+    {gUnknown_8E9BD28, 0x1000, 1},
+    {gUnknown_8E99F44, 0x0800, 6},
+    {gUnknown_8E9A168, 0x1000, 4}
+};
+
+const u8 gUnknown_843F958[] = {
+     0,
+    12,
+    24,
+    56,
+    68,
+    80,
+    92
+};
+
+const struct OamData gUnknown_843F960 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .mosaic = FALSE,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0x000,
+    .priority = 3,
+    .paletteNum = 0
+};
+
+const struct SpriteTemplate gUnknown_843F968 = {
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gUnknown_843F960,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8101B20
 };
 
 bool8 sub_80FFF80(void)
@@ -1639,4 +1698,57 @@ void sub_8101A5C(u8 left, u8 top, u8 width, u8 height)
     u16 verticalDimensions = WIN_RANGE(top, top + height);
     SetGpuReg(REG_OFFSET_WIN0H, horizontalDimensions);
     SetGpuReg(REG_OFFSET_WIN0V, verticalDimensions);
+}
+
+void sub_8101A90(void)
+{
+    u32 i;
+
+    LoadSpriteSheets(sEasyChatSpriteSheets);
+    LoadSpritePalettes(sEasyChatSpritePalettes);
+    for (i = 0; i < NELEMS(gUnknown_843F938); i++)
+        LoadCompressedSpriteSheet(&gUnknown_843F938[i]);
+}
+
+void sub_8101AC4(void)
+{
+    u8 frameId = GetEasyChatScreenFrameId();
+    s16 x = sPhraseFrameDimensions[frameId].left * 8 + 13;
+    s16 y = (sPhraseFrameDimensions[frameId].top + 1) * 8 + 1;
+    u8 spriteId = CreateSprite(&gUnknown_843F968, x, y, 2);
+    gUnknown_203ACEC->unk2D8 = &gSprites[spriteId];
+    gSprites[spriteId].data[1] = 1;
+}
+
+void sub_8101B20(struct Sprite *sprite)
+{
+    if (sprite->data[1])
+    {
+        if (++sprite->data[0] > 2)
+        {
+            sprite->data[0] = 0;
+            if (++sprite->pos2.x > 0)
+                sprite->pos2.x = -6;
+        }
+    }
+}
+
+void sub_8101B58(u8 x, u8 y)
+{
+    gUnknown_203ACEC->unk2D8->pos1.x = x;
+    gUnknown_203ACEC->unk2D8->pos1.y = y;
+    gUnknown_203ACEC->unk2D8->pos2.x = 0;
+    gUnknown_203ACEC->unk2D8->data[0] = 0;
+}
+
+void sub_8101B88(void)
+{
+    gUnknown_203ACEC->unk2D8->data[0] = 0;
+    gUnknown_203ACEC->unk2D8->data[1] = 0;
+    gUnknown_203ACEC->unk2D8->pos2.x = 0;
+}
+
+void sub_8101BA8(void)
+{
+    gUnknown_203ACEC->unk2D8->data[1] = 1;
 }

@@ -4294,7 +4294,7 @@ static const u16 sQuestLogWorldMapFlags[] =
     FLAG_WORLD_MAP_SIX_ISLAND
 };
 
-void sub_8115748(u16 worldMapFlag)
+void QuestLog_RecordEnteredMap(u16 worldMapFlag)
 {
     s32 i;
 

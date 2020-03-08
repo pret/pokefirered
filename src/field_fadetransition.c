@@ -52,7 +52,7 @@ void palette_bg_faded_fill_black(void)
 
 void WarpFadeInScreen(void)
 {
-    switch (sub_80C9DCC(get_map_light_from_warp0(), GetCurrentMapType()))
+    switch (MapTransitionIsExit(GetLastUsedWarpMapType(), GetCurrentMapType()))
     {
     case 0:
         palette_bg_faded_fill_black();
@@ -69,7 +69,7 @@ void WarpFadeInScreen(void)
 
 static void sub_807DBAC(void)
 {
-    switch (sub_80C9DCC(get_map_light_from_warp0(), GetCurrentMapType()))
+    switch (MapTransitionIsExit(GetLastUsedWarpMapType(), GetCurrentMapType()))
     {
     case 0:
         palette_bg_faded_fill_black();
@@ -94,11 +94,11 @@ void FadeInFromBlack(void)
 void WarpFadeOutScreen(void)
 {
     const struct MapHeader *header = warp1_get_mapheader();
-    if (header->regionMapSectionId != gMapHeader.regionMapSectionId && sub_80F8110(header->regionMapSectionId, FALSE))
+    if (header->regionMapSectionId != gMapHeader.regionMapSectionId && MapHasPreviewScreen(header->regionMapSectionId, FALSE))
         FadeScreen(1, 0);
     else
     {
-        switch (sub_80C9D7C(GetCurrentMapType(), header->mapType))
+        switch (MapTransitionIsEnter(GetCurrentMapType(), header->mapType))
         {
         case 0:
             FadeScreen(1, 0);
@@ -112,7 +112,7 @@ void WarpFadeOutScreen(void)
 
 static void sub_807DC70(void)
 {
-    switch (sub_80C9D7C(GetCurrentMapType(), warp1_get_mapheader()->mapType))
+    switch (MapTransitionIsEnter(GetCurrentMapType(), warp1_get_mapheader()->mapType))
     {
     case 0:
         FadeScreen(1, 3);
@@ -246,7 +246,7 @@ static void sub_807DE78(bool8 a0)
     if (MetatileBehavior_IsWarpDoor_2(behavior) == TRUE)
     {
         func = sub_807DFBC;
-        switch (sub_80C9DCC(get_map_light_from_warp0(), GetCurrentMapType()))
+        switch (MapTransitionIsExit(GetLastUsedWarpMapType(), GetCurrentMapType()))
         {
         case 0:
             palette_bg_faded_fill_black();
@@ -521,7 +521,7 @@ static bool32 sub_807E40C(void)
 
 bool32 sub_807E418(void)
 {
-    if (IsWeatherNotFadingIn() == TRUE && sub_80F83B0())
+    if (IsWeatherNotFadingIn() == TRUE && ForestMapPreviewScreenIsRunning())
         return TRUE;
     else
         return FALSE;

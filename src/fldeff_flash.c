@@ -9,6 +9,7 @@
 #include "party_menu.h"
 #include "script.h"
 #include "constants/songs.h"
+#include "constants/map_types.h"
 
 struct FlashStruct
 {
@@ -20,136 +21,136 @@ struct FlashStruct
     void (*func2)(u8 mapSecId);
 };
 
-static void sub_80C9B74(void);
-static void sub_80C9BB0(void);
-static bool8 sub_80C9CE8(void);
-static void sub_80C9E1C(void);
-static void sub_80C9E30(u8 taskId);
-static void sub_80C9E4C(u8 taskId);
-static void sub_80C9EF0(u8 taskId);
-static void sub_80C9F38(u8 taskId);
-static void sub_80C9FA0(u8 taskId);
-static void sub_80C9FD4(void);
-static void sub_80C9FE8(u8 taskId);
-static void sub_80CA004(u8 taskId);
-static void sub_80CA0A4(u8 taskId);
-static void sub_80CA108(u8 taskId);
-static void sub_80CA160(u8 mapsecId);
-static void sub_80CA190(u8 taskId);
+static void FieldCallback_Flash(void);
+static void FldEff_UseFlash(void);
+static bool8 TryDoMapTransition(void);
+static void FlashTransition_Exit(void);
+static void Task_FlashTransition_Exit_0(u8 taskId);
+static void Task_FlashTransition_Exit_1(u8 taskId);
+static void Task_FlashTransition_Exit_2(u8 taskId);
+static void Task_FlashTransition_Exit_3(u8 taskId);
+static void Task_FlashTransition_Exit_4(u8 taskId);
+static void FlashTransition_Enter(void);
+static void Task_FlashTransition_Enter_0(u8 taskId);
+static void Task_FlashTransition_Enter_1(u8 taskId);
+static void Task_FlashTransition_Enter_2(u8 taskId);
+static void Task_FlashTransition_Enter_3(u8 taskId);
+static void RunMapPreviewScreen(u8 mapsecId);
+static void Task_MapPreviewScreen_0(u8 taskId);
 
-static const struct FlashStruct gUnknown_83F5738[] = {
+static const struct FlashStruct sTransitionTypes[] = {
     {
-        .fromType = 1,
-        .toType = 4,
+        .fromType = MAP_TYPE_TOWN,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 2,
-        .toType = 4,
+        .fromType = MAP_TYPE_CITY,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 3,
-        .toType = 4,
+        .fromType = MAP_TYPE_ROUTE,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 5,
-        .toType = 4,
+        .fromType = MAP_TYPE_UNDERWATER,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 6,
-        .toType = 4,
+        .fromType = MAP_TYPE_OCEAN_ROUTE,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 7,
-        .toType = 4,
+        .fromType = MAP_TYPE_UNKNOWN,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 8,
-        .toType = 4,
+        .fromType = MAP_TYPE_INDOOR,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 9,
-        .toType = 4,
+        .fromType = MAP_TYPE_SECRET_BASE,
+        .toType = MAP_TYPE_UNDERGROUND,
         .isEnter = TRUE,
         .isExit = FALSE,
-        .func1 = sub_80C9FD4,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Enter,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 1,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_TOWN,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 2,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_CITY,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 3,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_ROUTE,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 5,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_UNDERWATER,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 6,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_OCEAN_ROUTE,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 7,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_UNKNOWN,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 8,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_INDOOR,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {
-        .fromType = 4,
-        .toType = 9,
+        .fromType = MAP_TYPE_UNDERGROUND,
+        .toType = MAP_TYPE_SECRET_BASE,
         .isEnter = FALSE,
         .isExit = TRUE,
-        .func1 = sub_80C9E1C,
-        .func2 = sub_80CA160
+        .func1 = FlashTransition_Exit,
+        .func2 = RunMapPreviewScreen
     }, {0}
 };
 
@@ -168,26 +169,28 @@ bool8 SetUpFieldMove_Flash(void)
         return FALSE;
 
     gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-    gPostMenuFieldCallback = sub_80C9B74;
+    gPostMenuFieldCallback = FieldCallback_Flash;
     return TRUE;
 }
 
-static void sub_80C9B74(void)
+static void FieldCallback_Flash(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    gTasks[taskId].data[8] = ((uintptr_t)sub_80C9BB0) >> 16;
-    gTasks[taskId].data[9] = ((uintptr_t)sub_80C9BB0);
+    gTasks[taskId].data[8] = ((uintptr_t)FldEff_UseFlash) >> 16;
+    gTasks[taskId].data[9] = ((uintptr_t)FldEff_UseFlash);
 }
 
-static void sub_80C9BB0(void)
+static void FldEff_UseFlash(void)
 {
     PlaySE(SE_W115);
     FlagSet(FLAG_SYS_FLASH_ACTIVE);
     ScriptContext1_SetupScript(EventScript_FldEffFlash);
 }
 
-static void sub_80C9BD0(void)
+// Map transition animatics
+
+static void CB2_ChangeMapMain(void)
 {
     RunTasks();
     AnimateSprites();
@@ -195,14 +198,14 @@ static void sub_80C9BD0(void)
     UpdatePaletteFade();
 }
 
-static void sub_80C9BE8(void)
+static void VBC_ChangeMapVBlank(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_80C9BFC(void)
+void CB2_DoChangeMap(void)
 {
     SetVBlankCallback(NULL);
 
@@ -224,74 +227,74 @@ void sub_80C9BFC(void)
     ResetTasks();
     ResetSpriteData();
     EnableInterrupts(INTR_FLAG_VBLANK);
-    SetVBlankCallback(sub_80C9BE8);
-    SetMainCallback2(sub_80C9BD0);
-    if (!sub_80C9CE8())
+    SetVBlankCallback(VBC_ChangeMapVBlank);
+    SetMainCallback2(CB2_ChangeMapMain);
+    if (!TryDoMapTransition())
         SetMainCallback2(gMain.savedCallback);
 }
 
-static bool8 sub_80C9CE8(void)
+static bool8 TryDoMapTransition(void)
 {
-    u8 fromType = get_map_light_from_warp0();
+    u8 fromType = GetLastUsedWarpMapType();
     u8 toType = GetCurrentMapType();
     u8 i = 0;
-    if (sub_80561B4() != gMapHeader.regionMapSectionId && sub_80F8154(gMapHeader.regionMapSectionId, FALSE) == TRUE)
+    if (GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId && MapHasPreviewScreen_HandleQLState2(gMapHeader.regionMapSectionId, FALSE) == TRUE)
     {
-        sub_80CA160(gMapHeader.regionMapSectionId);
+        RunMapPreviewScreen(gMapHeader.regionMapSectionId);
         return TRUE;
     }
-    for (; gUnknown_83F5738[i].fromType != 0; i++)
+    for (; sTransitionTypes[i].fromType != 0; i++)
     {
-        if (gUnknown_83F5738[i].fromType == fromType && gUnknown_83F5738[i].toType == toType)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            gUnknown_83F5738[i].func1();
+            sTransitionTypes[i].func1();
             return TRUE;
         }
     }
     return FALSE;
 }
 
-bool8 sub_80C9D7C(u8 _fromType, u8 _toType)
+bool8 MapTransitionIsEnter(u8 _fromType, u8 _toType)
 {
     u8 fromType = _fromType;
     u8 toType = _toType;
     u8 i = 0;
-    for (; gUnknown_83F5738[i].fromType != 0; i++)
+    for (; sTransitionTypes[i].fromType != 0; i++)
     {
-        if (gUnknown_83F5738[i].fromType == fromType && gUnknown_83F5738[i].toType == toType)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return gUnknown_83F5738[i].isEnter;
+            return sTransitionTypes[i].isEnter;
         }
     }
     return FALSE;
 }
 
-bool8 sub_80C9DCC(u8 _fromType, u8 _toType)
+bool8 MapTransitionIsExit(u8 _fromType, u8 _toType)
 {
     u8 fromType = _fromType;
     u8 toType = _toType;
     u8 i = 0;
-    for (; gUnknown_83F5738[i].fromType != 0; i++)
+    for (; sTransitionTypes[i].fromType != 0; i++)
     {
-        if (gUnknown_83F5738[i].fromType == fromType && gUnknown_83F5738[i].toType == toType)
+        if (sTransitionTypes[i].fromType == fromType && sTransitionTypes[i].toType == toType)
         {
-            return gUnknown_83F5738[i].isExit;
+            return sTransitionTypes[i].isExit;
         }
     }
     return FALSE;
 }
 
-static void sub_80C9E1C(void)
+static void FlashTransition_Exit(void)
 {
-    CreateTask(sub_80C9E30, 0);
+    CreateTask(Task_FlashTransition_Exit_0, 0);
 }
 
-static void sub_80C9E30(u8 taskId)
+static void Task_FlashTransition_Exit_0(u8 taskId)
 {
-    gTasks[taskId].func = sub_80C9E4C;
+    gTasks[taskId].func = Task_FlashTransition_Exit_1;
 }
 
-static void sub_80C9E4C(u8 taskId)
+static void Task_FlashTransition_Exit_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gUnknown_83F5A44, (void *)BG_CHAR_ADDR(3));
@@ -303,12 +306,12 @@ static void sub_80C9E4C(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(31));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
-    gTasks[taskId].func = sub_80C9EF0;
+    gTasks[taskId].func = Task_FlashTransition_Exit_2;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
 }
 
-static void sub_80C9EF0(u8 taskId)
+static void Task_FlashTransition_Exit_2(u8 taskId)
 {
     u16 r4 = gTasks[taskId].data[1];
     SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8) + r4);
@@ -319,11 +322,11 @@ static void sub_80C9EF0(u8 taskId)
     else
     {
         gTasks[taskId].data[2] = 0;
-        gTasks[taskId].func = sub_80C9F38;
+        gTasks[taskId].func = Task_FlashTransition_Exit_3;
     }
 }
 
-static void sub_80C9F38(u8 taskId)
+static void Task_FlashTransition_Exit_3(u8 taskId)
 {
     u16 r4;
     SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8) + 16);
@@ -336,12 +339,12 @@ static void sub_80C9F38(u8 taskId)
     else
     {
         LoadPalette(gUnknown_83F5804, 0x00, 0x20);
-        gTasks[taskId].func = sub_80C9FA0;
+        gTasks[taskId].func = Task_FlashTransition_Exit_4;
         gTasks[taskId].data[2] = 8;
     }
 }
 
-static void sub_80C9FA0(u8 taskId)
+static void Task_FlashTransition_Exit_4(u8 taskId)
 {
     if (gTasks[taskId].data[2] != 0)
         gTasks[taskId].data[2]--;
@@ -349,17 +352,17 @@ static void sub_80C9FA0(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
 }
 
-static void sub_80C9FD4(void)
+static void FlashTransition_Enter(void)
 {
-    CreateTask(sub_80C9FE8, 0);
+    CreateTask(Task_FlashTransition_Enter_0, 0);
 }
 
-static void sub_80C9FE8(u8 taskId)
+static void Task_FlashTransition_Enter_0(u8 taskId)
 {
-    gTasks[taskId].func = sub_80CA004;
+    gTasks[taskId].func = Task_FlashTransition_Enter_1;
 }
 
-static void sub_80CA004(u8 taskId)
+static void Task_FlashTransition_Enter_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     LZ77UnCompVram(gUnknown_83F5A44, (void *)BG_CHAR_ADDR(3));
@@ -371,13 +374,13 @@ static void sub_80CA004(u8 taskId)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     LoadPalette(gUnknown_83F5804, 0xE0, 0x20);
     LoadPalette(gUnknown_83F5824, 0, 0x20);
-    gTasks[taskId].func = sub_80CA0A4;
+    gTasks[taskId].func = Task_FlashTransition_Enter_2;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 0;
 }
 
-static void sub_80CA0A4(u8 taskId)
+static void Task_FlashTransition_Enter_2(u8 taskId)
 {
     u16 r4;
     r4 = gTasks[taskId].data[2];
@@ -391,11 +394,11 @@ static void sub_80CA0A4(u8 taskId)
     {
         SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8) + 16);
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
-        gTasks[taskId].func = sub_80CA108;
+        gTasks[taskId].func = Task_FlashTransition_Enter_3;
     }
 }
 
-static void sub_80CA108(u8 taskId)
+static void Task_FlashTransition_Enter_3(u8 taskId)
 {
     u16 r4 = 16 - gTasks[taskId].data[1];
     SetGpuReg(REG_OFFSET_BLDALPHA, (16 << 8) + r4);
@@ -410,13 +413,13 @@ static void sub_80CA108(u8 taskId)
     }
 }
 
-static void sub_80CA160(u8 mapSecId)
+static void RunMapPreviewScreen(u8 mapSecId)
 {
-    u8 taskId = CreateTask(sub_80CA190, 0);
+    u8 taskId = CreateTask(Task_MapPreviewScreen_0, 0);
     gTasks[taskId].data[3] = mapSecId;
 }
 
-static void sub_80CA190(u8 taskId)
+static void Task_MapPreviewScreen_0(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -424,15 +427,15 @@ static void sub_80CA190(u8 taskId)
     case 0:
         SetWordTaskArg(taskId, 5, (uintptr_t)gMain.vblankCallback);
         SetVBlankCallback(NULL);
-        sub_80F8180();
-        sub_80F819C(data[3]);
+        MapPreview_InitBgs();
+        MapPreview_LoadGfx(data[3]);
         BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
         data[0]++;
         break;
     case 1:
-        if (!sub_80F8258())
+        if (!MapPreview_IsGfxLoadFinished())
         {
-            data[4] = sub_80F8318(data[3]);
+            data[4] = MapPreview_CreateMapNameWindow(data[3]);
             CopyWindowToVram(data[4], 3);
             data[0]++;
         }
@@ -448,7 +451,7 @@ static void sub_80CA190(u8 taskId)
     case 3:
         if (!UpdatePaletteFade())
         {
-            data[2] = sub_80F856C(data[3]);
+            data[2] = MapPreview_GetDuration(data[3]);
             data[0]++;
         }
         break;
@@ -468,8 +471,8 @@ static void sub_80CA190(u8 taskId)
             {
                 data[i] = 0;
             }
-            sub_80F8234(data[4]);
-            gTasks[taskId].func = sub_80CA004;
+            MapPreview_Unload(data[4]);
+            gTasks[taskId].func = Task_FlashTransition_Enter_1;
         }
         break;
     }

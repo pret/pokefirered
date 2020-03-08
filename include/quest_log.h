@@ -26,7 +26,7 @@ extern const u16 gUnknown_84566A8[];
 void sub_8112720(u8);
 void SetQuestLogEvent(u16, const u16 *);
 void sub_811539C(void);
-void sub_8115748(u16);
+void QuestLog_RecordEnteredMap(u16);
 u8 sub_8112CAC(void);
 bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
 void sub_8111F38(u16 offset, u16 idx);

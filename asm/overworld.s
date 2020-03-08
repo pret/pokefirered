@@ -1739,7 +1739,7 @@ _080558D4:
 	bl DoCurrentWeather
 	bl ResetFieldTasksArgs
 	bl mapheader_run_script_with_tag_x5
-	bl sub_80561B4
+	bl GetLastUsedWarpMapSectionId
 	ldr r1, _0805591C @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
@@ -2899,8 +2899,8 @@ GetCurrentMapType: @ 8056188
 _0805619C: .4byte gSaveBlock1Ptr
 	thumb_func_end GetCurrentMapType
 
-	thumb_func_start get_map_light_from_warp0
-get_map_light_from_warp0: @ 80561A0
+	thumb_func_start GetLastUsedWarpMapType
+GetLastUsedWarpMapType: @ 80561A0
 	push {lr}
 	ldr r0, _080561B0 @ =gUnknown_2031DB4
 	bl get_map_light_level_from_warp
@@ -2910,10 +2910,10 @@ get_map_light_from_warp0: @ 80561A0
 	bx r1
 	.align 2, 0
 _080561B0: .4byte gUnknown_2031DB4
-	thumb_func_end get_map_light_from_warp0
+	thumb_func_end GetLastUsedWarpMapType
 
-	thumb_func_start sub_80561B4
-sub_80561B4: @ 80561B4
+	thumb_func_start GetLastUsedWarpMapSectionId
+GetLastUsedWarpMapSectionId: @ 80561B4
 	push {lr}
 	ldr r1, _080561D4 @ =gUnknown_2031DB4
 	movs r0, 0
@@ -2931,7 +2931,7 @@ sub_80561B4: @ 80561B4
 	bx r1
 	.align 2, 0
 _080561D4: .4byte gUnknown_2031DB4
-	thumb_func_end sub_80561B4
+	thumb_func_end GetLastUsedWarpMapSectionId
 
 	thumb_func_start IsMapTypeOutdoors
 IsMapTypeOutdoors: @ 80561D8
@@ -3579,7 +3579,7 @@ CB2_LoadMap: @ 805671C
 	bl ScriptContext2_Disable
 	movs r0, 0
 	bl SetMainCallback1
-	ldr r0, _08056740 @ =sub_80C9BFC
+	ldr r0, _08056740 @ =CB2_DoChangeMap
 	bl SetMainCallback2
 	ldr r1, _08056744 @ =gMain
 	ldr r0, _08056748 @ =sub_805674C
@@ -3587,7 +3587,7 @@ CB2_LoadMap: @ 805671C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056740: .4byte sub_80C9BFC
+_08056740: .4byte CB2_DoChangeMap
 _08056744: .4byte gMain
 _08056748: .4byte sub_805674C
 	thumb_func_end CB2_LoadMap
@@ -4196,7 +4196,7 @@ _08056C72:
 	bl InitTilesetAnimations
 	b _08056CCA
 _08056C78:
-	bl sub_80561B4
+	bl GetLastUsedWarpMapSectionId
 	ldr r5, _08056CA4 @ =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
@@ -4205,13 +4205,13 @@ _08056C78:
 	beq _08056CA8
 	ldrb r0, [r5, 0x14]
 	movs r1, 0x1
-	bl sub_80F8154
+	bl MapHasPreviewScreen_HandleQLState2
 	cmp r0, 0x1
 	bne _08056CA8
 	ldrb r0, [r5, 0x14]
-	bl sub_80F819C
+	bl MapPreview_LoadGfx
 	ldrb r0, [r5, 0x14]
-	bl sub_80F8268
+	bl MapPreview_StartForestTransition
 	b _08056CCA
 	.align 2, 0
 _08056CA4: .4byte gMapHeader
@@ -4922,7 +4922,7 @@ sub_805726C: @ 805726C
 	bl ScriptContext2_Disable
 	movs r0, 0
 	bl SetMainCallback1
-	ldr r0, _0805729C @ =sub_80C9BFC
+	ldr r0, _0805729C @ =CB2_DoChangeMap
 	bl SetMainCallback2
 	ldr r1, _080572A0 @ =gMain
 	ldr r0, _080572A4 @ =sub_80572D8
@@ -4931,7 +4931,7 @@ sub_805726C: @ 805726C
 	bx r0
 	.align 2, 0
 _08057298: .4byte gUnknown_2036E28
-_0805729C: .4byte sub_80C9BFC
+_0805729C: .4byte CB2_DoChangeMap
 _080572A0: .4byte gMain
 _080572A4: .4byte sub_80572D8
 	thumb_func_end sub_805726C

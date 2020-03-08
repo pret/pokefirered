@@ -70,5 +70,7 @@ void sub_80FFE34(s8 *arg0, s8 *arg1);
 u8 sub_80FFE48(void);
 u8 sub_80FFE54(void);
 u8 unref_sub_80FFE60(void);
+bool32 sub_80FFE64(void);
+bool32 sub_80FFE98(void);
 
 #endif // GUARD_EASY_CHAT_H

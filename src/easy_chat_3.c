@@ -6,6 +6,7 @@
 #include "graphics.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
+#include "strings.h"
 #include "text_window.h"
 
 struct Unk203A11C
@@ -127,7 +128,7 @@ bool8 sub_81021B8(void);
 void sub_81021D4(void);
 void sub_810224C(void);
 void sub_81022B0(void);
-void sub_81022E0(u8 a0);
+void sub_81022E0(int a0);
 void sub_8102320(void);
 void sub_8102394(void);
 void sub_81023F8(void);
@@ -448,6 +449,96 @@ const struct SpriteTemplate gUnknown_843FA20 = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_843FA38 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x64),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x64),
+    .tileNum = 0x000,
+    .priority = 3,
+    .paletteNum = 0
+};
+
+const struct SpriteTemplate gUnknown_843FA40 = {
+    .tileTag = 6,
+    .paletteTag = 2,
+    .oam = &gUnknown_843FA38,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_843FA58 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x8),
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
+
+const struct OamData gUnknown_843FA60 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0x000,
+    .priority = 1,
+    .paletteNum = 0
+};
+
+const union AnimCmd gUnknown_843FA68[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gUnknown_843FA70[] = {
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gUnknown_843FA78[] = {
+    gUnknown_843FA68,
+    gUnknown_843FA70,
+};
+
+const struct SpriteTemplate gUnknown_843FA80 = {
+    .tileTag = 3,
+    .paletteTag = 2,
+    .oam = &gUnknown_843FA58,
+    .anims = gUnknown_843FA78,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct SpriteTemplate gUnknown_843FA98 = {
+    .tileTag = 2,
+    .paletteTag = 2,
+    .oam = &gUnknown_843FA60,
+    .anims = gUnknown_843FA78,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 bool8 sub_80FFF80(void)
@@ -2019,4 +2110,182 @@ void sub_8101F80(void)
         DestroySprite(gUnknown_203ACEC->unk2E4);
         gUnknown_203ACEC->unk2E4 = NULL;
     }
+}
+
+void sub_8101FAC(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_843FA40, 208, 128, 6);
+    gUnknown_203ACEC->unk2E8 = &gSprites[spriteId];
+    gUnknown_203ACEC->unk2E8->pos2.x = -64;
+
+    spriteId = CreateSprite(&gUnknown_843FA20, 208, 80, 5);
+    gUnknown_203ACEC->unk2EC = &gSprites[spriteId];
+    gUnknown_203ACEC->unk9 = 0;
+}
+
+bool8 sub_8102018(void)
+{
+    switch (gUnknown_203ACEC->unk9)
+    {
+    default:
+        return FALSE;
+    case 0:
+        gUnknown_203ACEC->unk2E8->pos2.x += 8;
+        if (gUnknown_203ACEC->unk2E8->pos2.x >= 0)
+        {
+            gUnknown_203ACEC->unk2E8->pos2.x = 0;
+            if (!sub_80FFE1C())
+                StartSpriteAnim(gUnknown_203ACEC->unk2EC, 1);
+            else
+                StartSpriteAnim(gUnknown_203ACEC->unk2EC, 2);
+
+            gUnknown_203ACEC->unk9++;
+        }
+        break;
+    case 1:
+        if (gUnknown_203ACEC->unk2EC->animEnded)
+        {
+            gUnknown_203ACEC->unk9 = 2;
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+void sub_81020AC(void)
+{
+    gUnknown_203ACEC->unk9 = 0;
+    StartSpriteAnim(gUnknown_203ACEC->unk2EC, 3);
+}
+
+bool8 sub_81020D0(void)
+{
+    switch (gUnknown_203ACEC->unk9)
+    {
+    default:
+        return FALSE;
+    case 0:
+        if (gUnknown_203ACEC->unk2EC->animEnded)
+            gUnknown_203ACEC->unk9 = 1;
+        break;
+    case 1:
+        gUnknown_203ACEC->unk2E8->pos2.x -= 8;
+        if (gUnknown_203ACEC->unk2E8->pos2.x <= -64)
+        {
+            DestroySprite(gUnknown_203ACEC->unk2EC);
+            DestroySprite(gUnknown_203ACEC->unk2E8);
+            gUnknown_203ACEC->unk2EC = NULL;
+            gUnknown_203ACEC->unk2E8 = NULL;
+            gUnknown_203ACEC->unk9++;
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+void sub_810215C(void)
+{
+    StartSpriteAnim(gUnknown_203ACEC->unk2EC, 4);
+}
+
+void sub_8102178(void)
+{
+    if (!sub_80FFE1C())
+        StartSpriteAnim(gUnknown_203ACEC->unk2EC, 1);
+    else
+        StartSpriteAnim(gUnknown_203ACEC->unk2EC, 2);
+}
+
+bool8 sub_81021B8(void)
+{
+    return !gUnknown_203ACEC->unk2EC->animEnded;
+}
+
+void sub_81021D4(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_843FA98, 96, 80, 0);
+    if (spriteId != MAX_SPRITES)
+        gUnknown_203ACEC->unk2F0 = &gSprites[spriteId];
+
+    spriteId = CreateSprite(&gUnknown_843FA98, 96, 156, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gUnknown_203ACEC->unk2F4 = &gSprites[spriteId];
+        gUnknown_203ACEC->unk2F4->vFlip = 1;
+    }
+
+    sub_81022B0();
+}
+
+void sub_810224C(void)
+{
+    gUnknown_203ACEC->unk2F0->invisible = !sub_80FFE64();
+    gUnknown_203ACEC->unk2F4->invisible = !sub_80FFE98();
+}
+
+void sub_81022B0(void)
+{
+    gUnknown_203ACEC->unk2F0->invisible = TRUE;
+    gUnknown_203ACEC->unk2F4->invisible = TRUE;
+}
+
+void sub_81022E0(int arg0)
+{
+    if (!arg0)
+    {
+        gUnknown_203ACEC->unk2F0->pos1.x = 96;
+        gUnknown_203ACEC->unk2F4->pos1.x = 96;
+    }
+    else
+    {
+        gUnknown_203ACEC->unk2F0->pos1.x = 120;
+        gUnknown_203ACEC->unk2F4->pos1.x = 120;
+    }
+}
+
+void sub_8102320(void)
+{
+    u8 spriteId = CreateSprite(&gUnknown_843FA80, 220, 84, 1);
+    if (spriteId != MAX_SPRITES)
+        gUnknown_203ACEC->unk2F8 = &gSprites[spriteId];
+
+    spriteId = CreateSprite(&gUnknown_843FA80, 220, 156, 1);
+    if (spriteId != MAX_SPRITES)
+    {
+        gUnknown_203ACEC->unk2FC = &gSprites[spriteId];
+        StartSpriteAnim(gUnknown_203ACEC->unk2FC, 1);
+    }
+
+    sub_81023F8();
+}
+
+void sub_8102394(void)
+{
+    gUnknown_203ACEC->unk2F8->invisible = !sub_80FFE64();
+    gUnknown_203ACEC->unk2FC->invisible = !sub_80FFE98();
+}
+
+void sub_81023F8(void)
+{
+    gUnknown_203ACEC->unk2F8->invisible = TRUE;
+    gUnknown_203ACEC->unk2FC->invisible = TRUE;
+}
+
+void sub_8102428(void)
+{
+    u16 windowId;
+    struct WindowTemplate template;
+    template.bg = 3;
+    template.tilemapLeft = 4;
+    template.tilemapTop = 11;
+    template.width = 24;
+    template.height = 2;
+    template.paletteNum = 11;
+    template.baseBlock = 0x030;
+    windowId = AddWindow(&template);
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+    sub_8100D84(windowId, 1, gUnknown_841EE2B, 0, 0, 0, NULL);
+    PutWindowTilemap(windowId);
 }

@@ -9,32 +9,32 @@
 #include "strings.h"
 #include "text_window.h"
 
-struct Unk203A11C
+struct ECWork
 {
-    u16 unk0;
+    u16 state;
     u16 windowId;
-    u16 unk4;
-    u8 unk6;
-    u8 unk7;
-    s8 unk8;
-    u8 unk9;
-    u8 unkA[0xC1];
-    u8 unkCC[0x200];
-    u16 unk2CE;
-    int unk2D0;
-    int unk2D4;
-    struct Sprite *unk2D8;
-    struct Sprite *unk2DC;
-    struct Sprite *unk2E0;
-    struct Sprite *unk2E4;
-    struct Sprite *unk2E8;
-    struct Sprite *unk2EC;
-    struct Sprite *unk2F0;
-    struct Sprite *unk2F4;
-    struct Sprite *unk2F8;
-    struct Sprite *unk2FC;
-    u16 unk300[BG_SCREEN_SIZE / 2];
-    u16 unkB00[BG_SCREEN_SIZE / 2];
+    u16 id;
+    u8 frameAnimIdx;
+    u8 frameAnimTarget;
+    s8 frameAnimDelta;
+    u8 modeIconState;
+    u8 ecPrintBuffer[0xC1];
+    u8 ecPaddedWordBuffer[0x200];
+    u16 bg2ScrollRow;
+    int tgtBgY;
+    int deltaBgY;
+    struct Sprite *selectDestFieldCursorSprite;
+    struct Sprite *rectCursorSpriteRight;
+    struct Sprite *rectCursorSpriteLeft;
+    struct Sprite *selectWordCursorSprite;
+    struct Sprite *selectGroupHelpSprite;
+    struct Sprite *modeIconsSprite;
+    struct Sprite *upTriangleCursorSprite;
+    struct Sprite *downTriangleCursorSprite;
+    struct Sprite *startPgUpButtonSprite;
+    struct Sprite *selectPgDnButtonSprite;
+    u16 bg1TilemapBuffer[BG_SCREEN_SIZE / 2];
+    u16 bg3TilemapBuffer[BG_SCREEN_SIZE / 2];
 };
 
 struct EasyChatPhraseFrameDimensions
@@ -45,114 +45,114 @@ struct EasyChatPhraseFrameDimensions
     u8 height;
 };
 
-EWRAM_DATA struct Unk203A11C *gUnknown_203ACEC = NULL;
+static EWRAM_DATA struct ECWork *sEasyChatGraphicsResources = NULL;
 
-bool8 sub_8100258(void);
-bool8 sub_8100290(void);
-bool8 sub_8100374(void);
-bool8 sub_81003A8(void);
-bool8 sub_81003EC(void);
-bool8 sub_8100430(void);
-bool8 sub_8100474(void);
-bool8 sub_81004B8(void);
-bool8 sub_81004F4(void);
-bool8 sub_81005C0(void);
-bool8 sub_8100660(void);
-bool8 sub_8100720(void);
-bool8 sub_810072C(void);
-bool8 sub_8100774(void);
-bool8 sub_81007D0(void);
-bool8 sub_8100890(void);
-bool8 sub_810093C(void);
-bool8 sub_81009F8(void);
-bool8 sub_8100A04(void);
-bool8 sub_8100A78(void);
-bool8 sub_8100AE8(void);
-bool8 sub_8100B70(void);
-bool8 sub_8100BF4(void);
-void sub_8100C5C(void);
-void sub_8100CBC(void);
-void sub_8100D24(void);
-void sub_8100DC4(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 bg, u8 fg, u8 shadow);
-void sub_8100E34(void);
-void sub_8100E7C(u8 a0);
-void sub_8100F18(u8 initialCursorPos);
-void sub_8100F44(void);
-void sub_8100FDC(void);
-void sub_8101100(u16 *buffer);
-void sub_81012CC(void);
-void sub_81012E0(u32 a0);
-void sub_810131C(void);
-void sub_810133C(void);
-void PrintEasyChatKeyboardText(void);
-void sub_81013DC(void);
-void sub_81013EC(void);
-void sub_8101410(void);
-void sub_8101434(void);
-void sub_8101478(void);
-void sub_81014AC(u8 a0, u8 a1);
-void sub_8101558(u8 a0, u8 a1);
-void sub_81015BC(void);
-void sub_81015D4(int a0);
-bool8 sub_81016AC(void);
-void sub_81016E4(u8 a0);
-void sub_8101830(int left, int top, int width, int height);
-void sub_810198C(void);
-void sub_81019B0(s16 a0, u8 a1);
-bool8 sub_8101A10(void);
-s32 sub_8101A48(void);
-void sub_8101A5C(u8 left, u8 top, u8 right, u8 bottom);
-void sub_8101A90(void);
-void sub_8101AC4(void);
-void sub_8101B20(struct Sprite * sprite);
-void sub_8101B58(u8 x, u8 y);
-void sub_8101B88(void);
-void sub_8101BA8(void);
-void sub_8101BC0(void);
-void sub_8101C48(void);
-void sub_8101C80(void);
-void sub_8101CE4(s8 a0, s8 a1);
-void sub_8101D9C(s8 a0, s8 a1);
-void sub_8101E80(void);
-void sub_8101ED4(struct Sprite * sprite);
-void sub_8101F04(void);
-void sub_8101F40(u8 x, u8 y);
-void sub_8101F80(void);
-void sub_8101FAC(void);
-bool8 sub_8102018(void);
-void sub_81020AC(void);
-bool8 sub_81020D0(void);
-void sub_810215C(void);
-void sub_8102178(void);
-bool8 sub_81021B8(void);
-void sub_81021D4(void);
-void sub_810224C(void);
-void sub_81022B0(void);
-void sub_81022E0(int a0);
-void sub_8102320(void);
-void sub_8102394(void);
-void sub_81023F8(void);
-void sub_8102428(void);
+static bool8 ECInterfaceCmd_01(void);
+static bool8 ECInterfaceCmd_02(void);
+static bool8 ECInterfaceCmd_03(void);
+static bool8 ECInterfaceCmd_05(void);
+static bool8 ECInterfaceCmd_06(void);
+static bool8 ECInterfaceCmd_04(void);
+static bool8 ECInterfaceCmd_07(void);
+static bool8 ECInterfaceCmd_08(void);
+static bool8 ECInterfaceCmd_09(void);
+static bool8 ECInterfaceCmd_10(void);
+static bool8 ECInterfaceCmd_22(void);
+static bool8 ECInterfaceCmd_14(void);
+static bool8 ECInterfaceCmd_15(void);
+static bool8 ECInterfaceCmd_16(void);
+static bool8 ECInterfaceCmd_11(void);
+static bool8 ECInterfaceCmd_12(void);
+static bool8 ECInterfaceCmd_13(void);
+static bool8 ECInterfaceCmd_17(void);
+static bool8 ECInterfaceCmd_19(void);
+static bool8 ECInterfaceCmd_18(void);
+static bool8 ECInterfaceCmd_21(void);
+static bool8 ECInterfaceCmd_20(void);
+static bool8 InitEasyChatGraphicsWork_Internal(void);
+static void SetGpuRegsForEasyChatInit(void);
+static void LoadEasyChatPals(void);
+static void PrintTitleText(void);
+static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top, u8 speed, u8 bg, u8 fg, u8 shadow);
+static void PrintECInstructionsText(void);
+static void PrintECInterfaceTextById(u8 a0);
+static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos);
+static void CreatePhraseFrameWindow(void);
+static void PrintECFields(void);
+static void DrawECFrameInTilemapBuffer(u16 *buffer);
+static void PutWin2TilemapAndCopyToVram(void);
+static void PrintECMenuById(u32 a0);
+static void PrintECGroupOrAlphaMenu(void);
+static void PrintECGroupsMenu(void);
+static void PrintEasyChatKeyboardText(void);
+static void PrintECWordsMenu(void);
+static void UpdateWin2PrintWordsScrollDown(void);
+static void UpdateWin2PrintWordsScrollUp(void);
+static void UpdateWin2PrintWordsScrollPageDown(void);
+static void UpdateWin2PrintWordsScrollPageUp(void);
+static void PrintECRowsWin2(u8 row, u8 remrow);
+static void ClearECRowsWin2(u8 row, u8 remrow);
+static void ClearWin2AndCopyToVram(void);
+static void StartWin2FrameAnim(int a0);
+static bool8 AnimateFrameResize(void);
+static void RedrawFrameByIndex(u8 a0);
+static void RedrawFrameByRect(int left, int top, int width, int height);
+static void InitBg2Scroll(void);
+static void ScheduleBg2VerticalScroll(s16 direction, u8 speed);
+static bool8 AnimateBg2VerticalScroll(void);
+static int GetBg2ScrollRow(void);
+static void SetRegWin0Coords(u8 left, u8 top, u8 right, u8 bottom);
+static void LoadSpriteGfx(void);
+static void CreateSelectDestFieldCursorSprite(void);
+static void SpriteCB_BounceCursor(struct Sprite * sprite);
+static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y);
+static void FreezeSelectDestFieldCursorSprite(void);
+static void UnfreezeSelectDestFieldCursorSprite(void);
+static void CreateRedRectangularCursorSpritePair(void);
+static void DestroyRedRectangularCursor(void);
+static void EC_MoveCursor(void);
+static void MoveCursor_Group(s8 a0, s8 a1);
+static void MoveCursor_Alpha(s8 a0, s8 a1);
+static void CreateSelectWordCursorSprite(void);
+static void SpriteCB_SelectWordCursorSprite(struct Sprite * sprite);
+static void SetSelectWordCursorSpritePos(void);
+static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y);
+static void DestroySelectWordCursorSprite(void);
+static void CreateSelectGroupHelpSprite(void);
+static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void);
+static void StartModeIconHidingAnimation(void);
+static bool8 RunModeIconHidingAnimation(void);
+static void ShrinkModeIconsSprite(void);
+static void ShowModeIconsSprite(void);
+static bool8 ModeIconsSpriteAnimIsEnded(void);
+static void CreateVerticalScrollArrowSprites(void);
+static void UpdateVerticalScrollArrowVisibility(void);
+static void HideVerticalScrollArrowSprites(void);
+static void UpdateVerticalScrollArrowSpriteXPos(int a0);
+static void CreateStartSelectButtonsSprites(void);
+static void UpdateStartSelectButtonSpriteVisibility(void);
+static void HideStartSelectButtonSprites(void);
+static void CreateFooterWindow(void);
 
-const u16 gUnknown_843F3B8[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.gbapal");
-const u16 gUnknown_843F3D8[] = INCBIN_U16("graphics/link_rfu/unk_8E9BD28.gbapal");
-const u16 gUnknown_843F3F8[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.4bpp");
-const u16 gUnknown_843F418[] = INCBIN_U16("graphics/link_rfu/unk_843F418.4bpp");
-const u16 gUnknown_843F518[] = INCBIN_U16("graphics/link_rfu/unk_843F518.4bpp");
-const u16 gUnknown_843F618[] = INCBIN_U16("graphics/link_rfu/unk_843F638.gbapal");
-const u32 gUnknown_843F638[] = INCBIN_U32("graphics/link_rfu/unk_843F638.4bpp.lz");
-const u16 gUnknown_843F76C[] = INCBIN_U16("graphics/link_rfu/unk_843F76C.gbapal");
-const u16 gUnknown_843F78C[] = INCBIN_U16("graphics/link_rfu/unk_843F78C.gbapal");
-const u32 gUnknown_843F7AC[] = INCBIN_U32("graphics/link_rfu/unk_843F7AC.4bpp.lz");
+static const u16 gUnknown_843F3B8[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.gbapal");
+static const u16 gUnknown_843F3D8[] = INCBIN_U16("graphics/link_rfu/unk_8E9BD28.gbapal");
+static const u16 sRightTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F3F8.4bpp");
+static const u16 sUpTriangleCursor_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F418.4bpp");
+static const u16 sStartSelectButtons_Tiles[] = INCBIN_U16("graphics/link_rfu/unk_843F518.4bpp");
+static const u16 gUnknown_843F618[] = INCBIN_U16("graphics/link_rfu/unk_843F638.gbapal");
+static const u32 gUnknown_843F638[] = INCBIN_U32("graphics/link_rfu/unk_843F638.4bpp.lz");
+static const u16 gUnknown_843F76C[] = INCBIN_U16("graphics/link_rfu/unk_843F76C.gbapal");
+static const u16 gUnknown_843F78C[] = INCBIN_U16("graphics/link_rfu/unk_843F78C.gbapal");
+static const u32 gUnknown_843F7AC[] = INCBIN_U32("graphics/link_rfu/unk_843F7AC.4bpp.lz");
 
-const u16 gUnknown_843F874[] = {
+static const u16 gUnknown_843F874[] = {
     RGB( 0,  0,  0),
     RGB( 0,  0,  0),
     RGB( 7, 25, 31),
     RGB(21, 21, 29)
 };
 
-const u16 gUnknown_843F87C[] = {
+static const u16 gUnknown_843F87C[] = {
     RGB( 0,  0,  0),
     RGB(31, 31, 31),
     RGB(12, 12, 12),
@@ -160,7 +160,7 @@ const u16 gUnknown_843F87C[] = {
     RGB( 8, 17,  9)
 };
 
-const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
+static const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
     {
         .left = 0x03,
         .top = 0x04,
@@ -194,7 +194,7 @@ const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
     }
 };
 
-const struct BgTemplate sEasyChatBgTemplates[] = {
+static const struct BgTemplate sEasyChatBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -230,7 +230,7 @@ const struct BgTemplate sEasyChatBgTemplates[] = {
     }
 };
 
-const struct WindowTemplate sEasyChatWindowTemplates[] = {
+static const struct WindowTemplate sEasyChatWindowTemplates[] = {
     {
         .bg = 1,
         .tilemapLeft = 7,
@@ -261,7 +261,7 @@ const struct WindowTemplate sEasyChatWindowTemplates[] = {
     DUMMY_WIN_TEMPLATE,
 };
 
-const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
+static const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
     .bg = 0,
     .tilemapLeft = 22,
     .tilemapTop = 9,
@@ -271,24 +271,24 @@ const struct WindowTemplate sEasyChatYesNoWindowTemplate = {
     .baseBlock = 0x062
 };
 
-const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
-const u8 sText_Clear17[] = _("{CLEAR 17}");
+static const u8 gUnknown_843F8D8[] = _("{UNDERSCORE}");
+static const u8 sText_Clear17[] = _("{CLEAR 17}");
 
-const u8 *const sEasyChatKeyboardText[] = {
+static const u8 *const sEasyChatKeyboardText[] = {
     gUnknown_847A8D8,
     gUnknown_847A8FA,
     gUnknown_847A913,
     gUnknown_847A934
 };
 
-const struct SpriteSheet sEasyChatSpriteSheets[] = {
-    {gUnknown_843F3F8, 0x0020, 0},
-    {gUnknown_843F418, 0x0100, 2},
-    {gUnknown_843F518, 0x0100, 3},
+static const struct SpriteSheet sEasyChatSpriteSheets[] = {
+    {sRightTriangleCursor_Tiles, 0x0020, 0},
+    {sUpTriangleCursor_Tiles, 0x0100, 2},
+    {sStartSelectButtons_Tiles, 0x0100, 3},
     {}
 };
 
-const struct SpritePalette sEasyChatSpritePalettes[] = {
+static const struct SpritePalette sEasyChatSpritePalettes[] = {
     {gUnknown_843F3B8, 0},
     {gUnknown_843F3D8, 1},
     {gUnknown_8E99F24, 2},
@@ -296,14 +296,14 @@ const struct SpritePalette sEasyChatSpritePalettes[] = {
     {}
 };
 
-const struct CompressedSpriteSheet gUnknown_843F938[] = {
+static const struct CompressedSpriteSheet sEasyChatCompressedSpriteSheets[] = {
     {gUnknown_843F638, 0x0800, 5},
-    {gUnknown_8E9BD28, 0x1000, 1},
-    {gUnknown_8E99F44, 0x0800, 6},
-    {gUnknown_8E9A168, 0x1000, 4}
+    {gEasyChatRedRectangularCursor_Tiles, 0x1000, 1},
+    {gEasyChatSelectGroupHelp_Tiles, 0x0800, 6},
+    {gEasyChatModeIcons_Tiles, 0x1000, 4}
 };
 
-const u8 gUnknown_843F958[] = {
+static const u8 sECDisplay_AlphaModeXCoords[] = {
      0,
     12,
     24,
@@ -313,7 +313,7 @@ const u8 gUnknown_843F958[] = {
     92
 };
 
-const struct OamData gUnknown_843F960 = {
+static const struct OamData sOamData_RightTriangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -328,17 +328,17 @@ const struct OamData gUnknown_843F960 = {
     .paletteNum = 0
 };
 
-const struct SpriteTemplate gUnknown_843F968 = {
+static const struct SpriteTemplate sSpriteTemplate_RightTriangleCursor = {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &gUnknown_843F960,
+    .oam = &sOamData_RightTriangleCursor,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8101B20
+    .callback = SpriteCB_BounceCursor
 };
 
-const struct OamData gUnknown_843F980 = {
+static const struct OamData sOamData_RedRectangularCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -353,44 +353,44 @@ const struct OamData gUnknown_843F980 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_843F988[] = {
+static const union AnimCmd sAnimCmd_RectCursor_Wide[] = {
     ANIMCMD_FRAME(0x00, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F990[] = {
+static const union AnimCmd sAnimCmd_RectCursor_Norm[] = {
     ANIMCMD_FRAME(0x20, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F998[] = {
+static const union AnimCmd sAnimCmd_RectCursor_NormTaller[] = {
     ANIMCMD_FRAME(0x40, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F9A0[] = {
+static const union AnimCmd sAnimCmd_RectCursor_Narrow[] = {
     ANIMCMD_FRAME(0x60, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_843F9A8[] = {
-    gUnknown_843F988,
-    gUnknown_843F990,
-    gUnknown_843F998,
-    gUnknown_843F9A0
+static const union AnimCmd *const sAnimTable_RedRectangularCursor[] = {
+    sAnimCmd_RectCursor_Wide,
+    sAnimCmd_RectCursor_Norm,
+    sAnimCmd_RectCursor_NormTaller,
+    sAnimCmd_RectCursor_Narrow
 };
 
-const struct SpriteTemplate gUnknown_843F9B8 = {
+static const struct SpriteTemplate sSpriteTemplate_RedRectangularCursor = {
     .tileTag = 1,
     .paletteTag = 1,
-    .oam = &gUnknown_843F980,
-    .anims = gUnknown_843F9A8,
+    .oam = &sOamData_RedRectangularCursor,
+    .anims = sAnimTable_RedRectangularCursor,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_8101B20
+    .callback = SpriteCB_BounceCursor
 };
 
-const struct OamData gUnknown_843F9D0 = {
+static const struct OamData sOamData_EasyChatModeIcons = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -405,53 +405,53 @@ const struct OamData gUnknown_843F9D0 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_843F9D8[] = {
+static const union AnimCmd sAnim_EasyChatModeIcon_Hidden[] = {
     ANIMCMD_FRAME(0x60, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F9E0[] = {
+static const union AnimCmd sAnim_EasyChatModeIcon_ToGroupMode[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F9EC[] = {
+static const union AnimCmd sAnim_EasyChatModeIcon_ToAlphaMode[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843F9F8[] = {
+static const union AnimCmd sAnim_EasyChatModeIcon_ToHidden[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_FRAME(0x60, 0),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_843FA04[] = {
+static const union AnimCmd sAnim_EasyChatModeIcon_HoldSmall[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_843FA0C[] = {
-    gUnknown_843F9D8,
-    gUnknown_843F9E0,
-    gUnknown_843F9EC,
-    gUnknown_843F9F8,
-    gUnknown_843FA04
+static const union AnimCmd *const sAnimTable_EasyChatModeIcons[] = {
+    sAnim_EasyChatModeIcon_Hidden,
+    sAnim_EasyChatModeIcon_ToGroupMode,
+    sAnim_EasyChatModeIcon_ToAlphaMode,
+    sAnim_EasyChatModeIcon_ToHidden,
+    sAnim_EasyChatModeIcon_HoldSmall
 };
 
-const struct SpriteTemplate gUnknown_843FA20 = {
+static const struct SpriteTemplate sSpriteTemplate_EasyChatModeIcons = {
     .tileTag = 4,
     .paletteTag = 2,
-    .oam = &gUnknown_843F9D0,
-    .anims = gUnknown_843FA0C,
+    .oam = &sOamData_EasyChatModeIcons,
+    .anims = sAnimTable_EasyChatModeIcons,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_843FA38 = {
+static const struct OamData sOamData_SelectGroupHelp = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -466,17 +466,17 @@ const struct OamData gUnknown_843FA38 = {
     .paletteNum = 0
 };
 
-const struct SpriteTemplate gUnknown_843FA40 = {
+static const struct SpriteTemplate sSpriteTemplate_SelectGroupHelp = {
     .tileTag = 6,
     .paletteTag = 2,
-    .oam = &gUnknown_843FA38,
+    .oam = &sOamData_SelectGroupHelp,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_843FA58 = {
+static const struct OamData gUnknown_843FA58 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -491,7 +491,7 @@ const struct OamData gUnknown_843FA58 = {
     .paletteNum = 0
 };
 
-const struct OamData gUnknown_843FA60 = {
+static const struct OamData sOamData_UpTriangleCursor = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -506,22 +506,22 @@ const struct OamData gUnknown_843FA60 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_843FA68[] = {
+static const union AnimCmd gUnknown_843FA68[] = {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-const union AnimCmd gUnknown_843FA70[] = {
+static const union AnimCmd gUnknown_843FA70[] = {
     ANIMCMD_FRAME(4, 0),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gUnknown_843FA78[] = {
+static const union AnimCmd *const gUnknown_843FA78[] = {
     gUnknown_843FA68,
     gUnknown_843FA70,
 };
 
-const struct SpriteTemplate gUnknown_843FA80 = {
+static const struct SpriteTemplate sSpriteTemplate_StartSelectButtons = {
     .tileTag = 3,
     .paletteTag = 2,
     .oam = &gUnknown_843FA58,
@@ -531,60 +531,60 @@ const struct SpriteTemplate gUnknown_843FA80 = {
     .callback = SpriteCallbackDummy,
 };
 
-const struct SpriteTemplate gUnknown_843FA98 = {
+static const struct SpriteTemplate sSpriteTemplate_UpTriangleCursor = {
     .tileTag = 2,
     .paletteTag = 2,
-    .oam = &gUnknown_843FA60,
+    .oam = &sOamData_UpTriangleCursor,
     .anims = gUnknown_843FA78,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-bool8 sub_80FFF80(void)
+bool8 InitEasyChatGraphicsWork(void)
 {
-    if (!sub_8100BF4())
+    if (!InitEasyChatGraphicsWork_Internal())
         return FALSE;
     else
         return TRUE;
 }
 
-bool8 sub_80FFF98(void)
+bool8 LoadEasyChatGraphics(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sEasyChatBgTemplates, NELEMS(sEasyChatBgTemplates));
-        SetBgTilemapBuffer(3, gUnknown_203ACEC->unkB00);
-        SetBgTilemapBuffer(1, gUnknown_203ACEC->unk300);
+        SetBgTilemapBuffer(3, sEasyChatGraphicsResources->bg3TilemapBuffer);
+        SetBgTilemapBuffer(1, sEasyChatGraphicsResources->bg1TilemapBuffer);
         InitWindows(sEasyChatWindowTemplates);
         DeactivateAllTextPrinters();
-        sub_8100CBC();
-        sub_8100C5C();
+        LoadEasyChatPals();
+        SetGpuRegsForEasyChatInit();
         CpuFastFill(0, (void *)VRAM + 0x1000000, 0x400);
         break;
     case 1:
         DecompressAndLoadBgGfxUsingHeap(3, gEasyChatWindow_Gfx, 0, 0, 0);
         CopyToBgTilemapBuffer(3, gEasyChatWindow_Tilemap, 0, 0);
-        sub_8100F44();
-        sub_8102428();
+        CreatePhraseFrameWindow();
+        CreateFooterWindow();
         CopyBgTilemapBufferToVram(3);
         break;
     case 2:
-        sub_8101100(gUnknown_203ACEC->unk300);
+        DrawECFrameInTilemapBuffer(sEasyChatGraphicsResources->bg1TilemapBuffer);
         DecompressAndLoadBgGfxUsingHeap(1, gUnknown_843F7AC, 0, 0, 0);
         CopyBgTilemapBufferToVram(1);
         break;
     case 3:
-        sub_8100D24();
-        sub_8100E34();
-        sub_8100FDC();
-        sub_81012CC();
+        PrintTitleText();
+        PrintECInstructionsText();
+        PrintECFields();
+        PutWin2TilemapAndCopyToVram();
         break;
     case 4:
-        sub_8101A90();
-        sub_8101AC4();
+        LoadSpriteGfx();
+        CreateSelectDestFieldCursorSprite();
         break;
     case 5:
         if (IsDma3ManagerBusyWithBgCopy())
@@ -593,76 +593,76 @@ bool8 sub_80FFF98(void)
         }
         else
         {
-            sub_8101A5C(0, 0, 0, 0);
+            SetRegWin0Coords(0, 0, 0, 0);
             SetGpuReg(REG_OFFSET_WININ, WIN_RANGE(0, 63));
             SetGpuReg(REG_OFFSET_WINOUT, WIN_RANGE(0, 59));
             ShowBg(3);
             ShowBg(1);
             ShowBg(2);
             ShowBg(0);
-            sub_81021D4();
-            sub_8102320();
+            CreateVerticalScrollArrowSprites();
+            CreateStartSelectButtonsSprites();
         }
         break;
     default:
         return FALSE;
     }
 
-    gUnknown_203ACEC->unk0++;
+    sEasyChatGraphicsResources->state++;
     return TRUE;
 }
 
-void sub_810011C(void)
+void DestroyEasyChatGraphicsResources(void)
 {
-    if (gUnknown_203ACEC)
-        Free(gUnknown_203ACEC);
+    if (sEasyChatGraphicsResources)
+        Free(sEasyChatGraphicsResources);
 }
 
-void sub_8100134(u16 arg0)
+void EasyChatInterfaceCommand_Setup(u16 id)
 {
-    gUnknown_203ACEC->unk4 = arg0;
-    gUnknown_203ACEC->unk0 = 0;
-    sub_810014C();
+    sEasyChatGraphicsResources->id = id;
+    sEasyChatGraphicsResources->state = 0;
+    EasyChatInterfaceCommand_Run();
 }
 
-bool8 sub_810014C(void)
+bool8 EasyChatInterfaceCommand_Run(void)
 {
-    switch (gUnknown_203ACEC->unk4)
+    switch (sEasyChatGraphicsResources->id)
     {
     case 0:  return FALSE;
-    case 1:  return sub_8100258();
-    case 2:  return sub_8100290();
-    case 3:  return sub_8100374();
-    case 4:  return sub_8100430();
-    case 5:  return sub_81003A8();
-    case 6:  return sub_81003EC();
-    case 7:  return sub_8100474();
-    case 8:  return sub_81004B8();
-    case 9:  return sub_81004F4();
-    case 10: return sub_81005C0();
-    case 11: return sub_81007D0();
-    case 12: return sub_8100890();
-    case 13: return sub_810093C();
-    case 14: return sub_8100720();
-    case 15: return sub_810072C();
-    case 16: return sub_8100774();
-    case 17: return sub_81009F8();
-    case 18: return sub_8100A78();
-    case 19: return sub_8100A04();
-    case 20: return sub_8100B70();
-    case 21: return sub_8100AE8();
-    case 22: return sub_8100660();
+    case 1:  return ECInterfaceCmd_01();
+    case 2:  return ECInterfaceCmd_02();
+    case 3:  return ECInterfaceCmd_03();
+    case 4:  return ECInterfaceCmd_04();
+    case 5:  return ECInterfaceCmd_05();
+    case 6:  return ECInterfaceCmd_06();
+    case 7:  return ECInterfaceCmd_07();
+    case 8:  return ECInterfaceCmd_08();
+    case 9:  return ECInterfaceCmd_09();
+    case 10: return ECInterfaceCmd_10();
+    case 11: return ECInterfaceCmd_11();
+    case 12: return ECInterfaceCmd_12();
+    case 13: return ECInterfaceCmd_13();
+    case 14: return ECInterfaceCmd_14();
+    case 15: return ECInterfaceCmd_15();
+    case 16: return ECInterfaceCmd_16();
+    case 17: return ECInterfaceCmd_17();
+    case 18: return ECInterfaceCmd_18();
+    case 19: return ECInterfaceCmd_19();
+    case 20: return ECInterfaceCmd_20();
+    case 21: return ECInterfaceCmd_21();
+    case 22: return ECInterfaceCmd_22();
     default: return FALSE;
     }
 }
 
-bool8 sub_8100258(void)
+static bool8 ECInterfaceCmd_01(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8100FDC();
-        gUnknown_203ACEC->unk0++;
+        PrintECFields();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -671,7 +671,7 @@ bool8 sub_8100258(void)
     return TRUE;
 }
 
-bool8 sub_8100290(void)
+static bool8 ECInterfaceCmd_02(void)
 {
     u8 i;
     u16 *ecWordBuffer;
@@ -709,11 +709,11 @@ bool8 sub_8100290(void)
     }
 
     var2 = 8 * (sPhraseFrameDimensions[frameId].top + cursorRow * 2 + 1) + 1;
-    sub_8101B58(var1, var2);
+    SetSelectDestFieldCursorSpritePosAndResetAnim(var1, var2);
     return FALSE;
 }
 
-bool8 sub_8100374(void)
+static bool8 ECInterfaceCmd_03(void)
 {
     u8 xOffset;
     switch (GetMainCursorColumn())
@@ -730,19 +730,19 @@ bool8 sub_8100374(void)
     default:
         return FALSE;
     }
-    sub_8101B58(xOffset, 97);
+    SetSelectDestFieldCursorSpritePosAndResetAnim(xOffset, 97);
     return FALSE;
 }
 
-bool8 sub_81003A8(void)
+static bool8 ECInterfaceCmd_05(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101B88();
-        sub_8100E7C(2);
-        sub_8100F18(1);
-        gUnknown_203ACEC->unk0++;
+        FreezeSelectDestFieldCursorSprite();
+        PrintECInterfaceTextById(2);
+        EC_CreateYesNoMenuWithInitialCursorPos(1);
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -751,15 +751,15 @@ bool8 sub_81003A8(void)
     return TRUE;
 }
 
-bool8 sub_81003EC(void)
+static bool8 ECInterfaceCmd_06(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101B88();
-        sub_8100E7C(3);
-        sub_8100F18(0);
-        gUnknown_203ACEC->unk0++;
+        FreezeSelectDestFieldCursorSprite();
+        PrintECInterfaceTextById(3);
+        EC_CreateYesNoMenuWithInitialCursorPos(0);
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -768,15 +768,15 @@ bool8 sub_81003EC(void)
     return TRUE;
 }
 
-bool8 sub_8100430(void)
+static bool8 ECInterfaceCmd_04(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101B88();
-        sub_8100E7C(1);
-        sub_8100F18(1);
-        gUnknown_203ACEC->unk0++;
+        FreezeSelectDestFieldCursorSprite();
+        PrintECInterfaceTextById(1);
+        EC_CreateYesNoMenuWithInitialCursorPos(1);
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -785,15 +785,15 @@ bool8 sub_8100430(void)
     return TRUE;
 }
 
-bool8 sub_8100474(void)
+static bool8 ECInterfaceCmd_07(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101BA8();
-        sub_8100E7C(0);
+        UnfreezeSelectDestFieldCursorSprite();
+        PrintECInterfaceTextById(0);
         ShowBg(0);
-        gUnknown_203ACEC->unk0++;
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -802,15 +802,15 @@ bool8 sub_8100474(void)
     return TRUE;
 }
 
-bool8 sub_81004B8(void)
+static bool8 ECInterfaceCmd_08(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101BA8();
-        sub_8100E7C(0);
-        sub_8100FDC();
-        gUnknown_203ACEC->unk0++;
+        UnfreezeSelectDestFieldCursorSprite();
+        PrintECInterfaceTextById(0);
+        PrintECFields();
+        sEasyChatGraphicsResources->state++;
         // Fall through
     case 1:
         return IsDma3ManagerBusyWithBgCopy();
@@ -819,42 +819,42 @@ bool8 sub_81004B8(void)
     return TRUE;
 }
 
-bool8 sub_81004F4(void)
+static bool8 ECInterfaceCmd_09(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101B88();
+        FreezeSelectDestFieldCursorSprite();
         HideBg(0);
-        sub_8101A5C(0, 0, 0, 0);
-        sub_810131C();
-        gUnknown_203ACEC->unk0++;
+        SetRegWin0Coords(0, 0, 0, 0);
+        PrintECGroupOrAlphaMenu();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81015D4(0);
-            gUnknown_203ACEC->unk0++;
+            StartWin2FrameAnim(0);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!IsDma3ManagerBusyWithBgCopy() && !sub_81016AC())
-            gUnknown_203ACEC->unk0++;
+        if (!IsDma3ManagerBusyWithBgCopy() && !AnimateFrameResize())
+            sEasyChatGraphicsResources->state++;
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8101FAC();
-            gUnknown_203ACEC->unk0++;
+            CreateSelectGroupHelpSprite();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 4:
-        if (!sub_8102018())
+        if (!AnimateSeletGroupModeAndHelpSpriteEnter())
         {
-            sub_8101BC0();
-            sub_81022E0(0);
-            sub_810224C();
-            gUnknown_203ACEC->unk0++;
+            CreateRedRectangularCursorSpritePair();
+            UpdateVerticalScrollArrowSpriteXPos(0);
+            UpdateVerticalScrollArrowVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -865,33 +865,33 @@ bool8 sub_81004F4(void)
     return TRUE;
 }
 
-bool8 sub_81005C0(void)
+static bool8 ECInterfaceCmd_10(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101C48();
-        sub_81020AC();
-        sub_81022B0();
-        gUnknown_203ACEC->unk0++;
+        DestroyRedRectangularCursor();
+        StartModeIconHidingAnimation();
+        HideVerticalScrollArrowSprites();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
-        if (sub_81020D0() == TRUE)
+        if (RunModeIconHidingAnimation() == TRUE)
             break;
 
-        sub_81015D4(1);
-        gUnknown_203ACEC->unk0++;
+        StartWin2FrameAnim(1);
+        sEasyChatGraphicsResources->state++;
         // Fall through
     case 2:
-        if (!sub_81016AC())
-            gUnknown_203ACEC->unk0++;
+        if (!AnimateFrameResize())
+            sEasyChatGraphicsResources->state++;
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8101BA8();
+            UnfreezeSelectDestFieldCursorSprite();
             ShowBg(0);
-            gUnknown_203ACEC->unk0++;
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 4:
@@ -901,38 +901,38 @@ bool8 sub_81005C0(void)
     return TRUE;
 }
 
-bool8 sub_8100660(void)
+static bool8 ECInterfaceCmd_22(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101C48();
-        sub_81022B0();
-        sub_810215C();
-        sub_81015D4(5);
-        gUnknown_203ACEC->unk0++;
+        DestroyRedRectangularCursor();
+        HideVerticalScrollArrowSprites();
+        ShrinkModeIconsSprite();
+        StartWin2FrameAnim(5);
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
-        if (!sub_81016AC() && !sub_81021B8())
+        if (!AnimateFrameResize() && !ModeIconsSpriteAnimIsEnded())
         {
-            sub_810131C();
-            gUnknown_203ACEC->unk0++;
+            PrintECGroupOrAlphaMenu();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81015D4(6);
-            sub_8102178();
-            gUnknown_203ACEC->unk0++;
+            StartWin2FrameAnim(6);
+            ShowModeIconsSprite();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 3:
-        if (!sub_81016AC() && !sub_81021B8())
+        if (!AnimateFrameResize() && !ModeIconsSpriteAnimIsEnded())
         {
-            sub_810224C();
-            sub_8101BC0();
-            gUnknown_203ACEC->unk0++;
+            UpdateVerticalScrollArrowVisibility();
+            CreateRedRectangularCursorSpritePair();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -943,25 +943,25 @@ bool8 sub_8100660(void)
     return TRUE;
 }
 
-bool8 sub_8100720(void)
+static bool8 ECInterfaceCmd_14(void)
 {
-    sub_8101C80();
+    EC_MoveCursor();
     return FALSE;
 }
 
-bool8 sub_810072C(void)
+static bool8 ECInterfaceCmd_15(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_81019B0(1, 2);
-        gUnknown_203ACEC->unk0++;
+        ScheduleBg2VerticalScroll(1, 2);
+        sEasyChatGraphicsResources->state++;
         // Fall through
     case 1:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_8101C80();
-            sub_810224C();
+            EC_MoveCursor();
+            UpdateVerticalScrollArrowVisibility();
             return FALSE;
         }
         break;
@@ -970,19 +970,19 @@ bool8 sub_810072C(void)
     return TRUE;
 }
 
-bool8 sub_8100774(void)
+static bool8 ECInterfaceCmd_16(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_81019B0(-1, 2);
-        gUnknown_203ACEC->unk0++;
+        ScheduleBg2VerticalScroll(-1, 2);
+        sEasyChatGraphicsResources->state++;
         // Fall through
     case 1:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_810224C();
-            gUnknown_203ACEC->unk0++;
+            UpdateVerticalScrollArrowVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -993,45 +993,45 @@ bool8 sub_8100774(void)
     return TRUE;
 }
 
-bool8 sub_81007D0(void)
+static bool8 ECInterfaceCmd_11(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101C48();
-        sub_81020AC();
-        sub_81022B0();
-        gUnknown_203ACEC->unk0++;
+        DestroyRedRectangularCursor();
+        StartModeIconHidingAnimation();
+        HideVerticalScrollArrowSprites();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
-        if (!sub_81020D0())
+        if (!RunModeIconHidingAnimation())
         {
-            sub_81015BC();
-            gUnknown_203ACEC->unk0++;
+            ClearWin2AndCopyToVram();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81015D4(2);
-            gUnknown_203ACEC->unk0++;
+            StartWin2FrameAnim(2);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 3:
-        if (!sub_81016AC())
+        if (!AnimateFrameResize())
         {
-            sub_81012E0(2);
-            gUnknown_203ACEC->unk0++;
+            PrintECMenuById(2);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8101E80();
-            sub_81022E0(1);
-            sub_810224C();
-            sub_8102394();
-            gUnknown_203ACEC->unk0++;
+            CreateSelectWordCursorSprite();
+            UpdateVerticalScrollArrowSpriteXPos(1);
+            UpdateVerticalScrollArrowVisibility();
+            UpdateStartSelectButtonSpriteVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1042,40 +1042,40 @@ bool8 sub_81007D0(void)
     return TRUE;
 }
 
-bool8 sub_8100890(void)
+static bool8 ECInterfaceCmd_12(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8100FDC();
-        gUnknown_203ACEC->unk0++;
+        PrintECFields();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
-        sub_8101F80();
-        sub_81022B0();
-        sub_81023F8();
-        sub_81015BC();
-        gUnknown_203ACEC->unk0++;
+        DestroySelectWordCursorSprite();
+        HideVerticalScrollArrowSprites();
+        HideStartSelectButtonSprites();
+        ClearWin2AndCopyToVram();
+        sEasyChatGraphicsResources->state++;
         break;
     case 2:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81015D4(3);
-            gUnknown_203ACEC->unk0++;
+            StartWin2FrameAnim(3);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 3:
-        if (!sub_81016AC())
+        if (!AnimateFrameResize())
         {
             ShowBg(0);
-            gUnknown_203ACEC->unk0++;
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8101BA8();
-            gUnknown_203ACEC->unk0++;
+            UnfreezeSelectDestFieldCursorSprite();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1086,45 +1086,45 @@ bool8 sub_8100890(void)
     return TRUE;
 }
 
-bool8 sub_810093C(void)
+static bool8 ECInterfaceCmd_13(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101F80();
-        sub_81022B0();
-        sub_81023F8();
-        sub_81015BC();
-        gUnknown_203ACEC->unk0++;
+        DestroySelectWordCursorSprite();
+        HideVerticalScrollArrowSprites();
+        HideStartSelectButtonSprites();
+        ClearWin2AndCopyToVram();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81015D4(4);
-            gUnknown_203ACEC->unk0++;
+            StartWin2FrameAnim(4);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!sub_81016AC())
+        if (!AnimateFrameResize())
         {
-            sub_810131C();
-            gUnknown_203ACEC->unk0++;
+            PrintECGroupOrAlphaMenu();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_8101FAC();
-            gUnknown_203ACEC->unk0++;
+            CreateSelectGroupHelpSprite();
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 4:
-        if (!sub_8102018())
+        if (!AnimateSeletGroupModeAndHelpSpriteEnter())
         {
-            sub_8101BC0();
-            sub_81022E0(0);
-            sub_810224C();
-            gUnknown_203ACEC->unk0++;
+            CreateRedRectangularCursorSpritePair();
+            UpdateVerticalScrollArrowSpriteXPos(0);
+            UpdateVerticalScrollArrowVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1133,34 +1133,34 @@ bool8 sub_810093C(void)
     return TRUE;
 }
 
-bool8 sub_81009F8(void)
+static bool8 ECInterfaceCmd_17(void)
 {
-    sub_8101F04();
+    SetSelectWordCursorSpritePos();
     return FALSE;
 }
 
-bool8 sub_8100A04(void)
+static bool8 ECInterfaceCmd_19(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_81013EC();
-        gUnknown_203ACEC->unk0++;
+        UpdateWin2PrintWordsScrollDown();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81019B0(1, 2);
-            gUnknown_203ACEC->unk0++;
+            ScheduleBg2VerticalScroll(1, 2);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_8101F04();
-            sub_810224C();
-            sub_8102394();
-            gUnknown_203ACEC->unk0++;
+            SetSelectWordCursorSpritePos();
+            UpdateVerticalScrollArrowVisibility();
+            UpdateStartSelectButtonSpriteVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1171,27 +1171,27 @@ bool8 sub_8100A04(void)
     return TRUE;
 }
 
-bool8 sub_8100A78(void)
+static bool8 ECInterfaceCmd_18(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101410();
-        gUnknown_203ACEC->unk0++;
+        UpdateWin2PrintWordsScrollUp();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            sub_81019B0(-1, 2);
-            gUnknown_203ACEC->unk0++;
+            ScheduleBg2VerticalScroll(-1, 2);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_810224C();
-            sub_8102394();
-            gUnknown_203ACEC->unk0++;
+            UpdateVerticalScrollArrowVisibility();
+            UpdateStartSelectButtonSpriteVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1202,29 +1202,29 @@ bool8 sub_8100A78(void)
     return TRUE;
 }
 
-bool8 sub_8100AE8(void)
+static bool8 ECInterfaceCmd_21(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101434();
-        gUnknown_203ACEC->unk0++;
+        UpdateWin2PrintWordsScrollPageDown();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 var0 = sub_80FFE48() - sub_8101A48();
-            sub_81019B0(var0, 4);
-            gUnknown_203ACEC->unk0++;
+            s16 direction = GetECSelectWordRowsAbove() - GetBg2ScrollRow();
+            ScheduleBg2VerticalScroll(direction, 4);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_8101F04();
-            sub_810224C();
-            sub_8102394();
-            gUnknown_203ACEC->unk0++;
+            SetSelectWordCursorSpritePos();
+            UpdateVerticalScrollArrowVisibility();
+            UpdateStartSelectButtonSpriteVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1235,28 +1235,28 @@ bool8 sub_8100AE8(void)
     return TRUE;
 }
 
-bool8 sub_8100B70(void)
+static bool8 ECInterfaceCmd_20(void)
 {
-    switch (gUnknown_203ACEC->unk0)
+    switch (sEasyChatGraphicsResources->state)
     {
     case 0:
-        sub_8101478();
-        gUnknown_203ACEC->unk0++;
+        UpdateWin2PrintWordsScrollPageUp();
+        sEasyChatGraphicsResources->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            s16 var0 = sub_80FFE48() - sub_8101A48();
-            sub_81019B0(var0, 4);
-            gUnknown_203ACEC->unk0++;
+            s16 direction = GetECSelectWordRowsAbove() - GetBg2ScrollRow();
+            ScheduleBg2VerticalScroll(direction, 4);
+            sEasyChatGraphicsResources->state++;
         }
         break;
     case 2:
-        if (!sub_8101A10())
+        if (!AnimateBg2VerticalScroll())
         {
-            sub_810224C();
-            sub_8102394();
-            gUnknown_203ACEC->unk0++;
+            UpdateVerticalScrollArrowVisibility();
+            UpdateStartSelectButtonSpriteVisibility();
+            sEasyChatGraphicsResources->state++;
             return FALSE;
         }
         break;
@@ -1267,27 +1267,27 @@ bool8 sub_8100B70(void)
     return TRUE;
 }
 
-bool8 sub_8100BF4(void)
+static bool8 InitEasyChatGraphicsWork_Internal(void)
 {
-    gUnknown_203ACEC = Alloc(sizeof(*gUnknown_203ACEC));
-    if (!gUnknown_203ACEC)
+    sEasyChatGraphicsResources = Alloc(sizeof(*sEasyChatGraphicsResources));
+    if (!sEasyChatGraphicsResources)
         return FALSE;
 
-    gUnknown_203ACEC->unk0 = 0;
-    gUnknown_203ACEC->unk2D8 = NULL;
-    gUnknown_203ACEC->unk2DC = NULL;
-    gUnknown_203ACEC->unk2E0 = NULL;
-    gUnknown_203ACEC->unk2E4 = NULL;
-    gUnknown_203ACEC->unk2E8 = NULL;
-    gUnknown_203ACEC->unk2EC = NULL;
-    gUnknown_203ACEC->unk2F0 = NULL;
-    gUnknown_203ACEC->unk2F4 = NULL;
-    gUnknown_203ACEC->unk2F8 = NULL;
-    gUnknown_203ACEC->unk2FC = NULL;
+    sEasyChatGraphicsResources->state = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite = NULL;
+    sEasyChatGraphicsResources->rectCursorSpriteRight = NULL;
+    sEasyChatGraphicsResources->rectCursorSpriteLeft = NULL;
+    sEasyChatGraphicsResources->selectWordCursorSprite = NULL;
+    sEasyChatGraphicsResources->selectGroupHelpSprite = NULL;
+    sEasyChatGraphicsResources->modeIconsSprite = NULL;
+    sEasyChatGraphicsResources->upTriangleCursorSprite = NULL;
+    sEasyChatGraphicsResources->downTriangleCursorSprite = NULL;
+    sEasyChatGraphicsResources->startPgUpButtonSprite = NULL;
+    sEasyChatGraphicsResources->selectPgDnButtonSprite = NULL;
     return TRUE;
 }
 
-void sub_8100C5C(void)
+static void SetGpuRegsForEasyChatInit(void)
 {
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
@@ -1300,7 +1300,7 @@ void sub_8100C5C(void)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON);
 }
 
-void sub_8100CBC(void)
+static void LoadEasyChatPals(void)
 {
     ResetPaletteFade();
     LoadPalette(gEasyChatMode_Pal, 0, 32);
@@ -1312,7 +1312,7 @@ void sub_8100CBC(void)
     LoadPalette(gUnknown_843F87C,  3 * 16, 10);
 }
 
-void sub_8100D24(void)
+static void PrintTitleText(void)
 {
     int xOffset;
     const u8 *titleText = GetTitleText();
@@ -1321,18 +1321,18 @@ void sub_8100D24(void)
 
     xOffset = (128 - GetStringWidth(1, titleText, 0)) / 2u;
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    sub_8100DC4(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
+    EC_AddTextPrinterParameterized2(0, 1, titleText, xOffset, 0, TEXT_SPEED_FF, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(0);
     CopyWindowToVram(0, 3);
 }
 
-void sub_8100D84(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
+static void EC_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
     if (fontId == 1) y += 2;
     AddTextPrinterParameterized(windowId, fontId, str, x, y, speed, callback);
 }
 
-void sub_8100DC4(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow)
+static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8 bg, u8 fg, u8 shadow)
 {
     u8 color[3];
     if (fontId == 1) y += 2;
@@ -1342,27 +1342,27 @@ void sub_8100DC4(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, u8
     AddTextPrinterParameterized3(windowId, fontId, x, y, color, speed, str);
 }
 
-void sub_8100E34(void)
+static void PrintECInstructionsText(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
     TextWindow_SetUserSelectedFrame(1, 1, 0xE0);
     DrawTextBorderOuter(1, 1, 14);
-    sub_8100E7C(0);
+    PrintECInterfaceTextById(0);
     PutWindowTilemap(1);
     CopyBgTilemapBufferToVram(0);
 }
 
-void sub_8100E7C(u8 arg0)
+static void PrintECInterfaceTextById(u8 direction)
 {
     const u8 *text2 = NULL;
     const u8 *text1 = NULL;
-    switch (arg0)
+    switch (direction)
     {
     case 0:
         GetEasyChatInstructionsText(&text1, &text2);
         break;
     case 2:
-        sub_80FFDC8(&text1, &text2);
+        GetEasyChatConfirmCancelText(&text1, &text2);
         break;
     case 3:
         GetEasyChatConfirmText(&text1, &text2);
@@ -1374,20 +1374,20 @@ void sub_8100E7C(u8 arg0)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
-        sub_8100D84(1, 1, text1, 0, 0, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(1, 1, text1, 0, 0, TEXT_SPEED_FF, NULL);
 
     if (text2)
-        sub_8100D84(1, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(1, 1, text2, 0, 16, TEXT_SPEED_FF, NULL);
 
     CopyWindowToVram(1, 3);
 }
 
-void sub_8100F18(u8 initialCursorPos)
+static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
 {
     CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, 1, 0, 2, 0x001, 14, initialCursorPos);
 }
 
-void sub_8100F44(void)
+static void CreatePhraseFrameWindow(void)
 {
     u8 frameId;
     struct WindowTemplate template;
@@ -1400,11 +1400,11 @@ void sub_8100F44(void)
     template.height = sPhraseFrameDimensions[frameId].height;
     template.paletteNum = 11;
     template.baseBlock = 0x060;
-    gUnknown_203ACEC->windowId = AddWindow(&template);
-    PutWindowTilemap(gUnknown_203ACEC->windowId);
+    sEasyChatGraphicsResources->windowId = AddWindow(&template);
+    PutWindowTilemap(sEasyChatGraphicsResources->windowId);
 }
 
-void sub_8100FDC(void)
+static void PrintECFields(void)
 {
     u16 *ecWord;
     u8 numColumns, numRows;
@@ -1416,10 +1416,10 @@ void sub_8100FDC(void)
     numColumns = GetNumColumns();
     numRows = GetNumRows();
     frameId = GetEasyChatScreenFrameId();
-    FillWindowPixelBuffer(gUnknown_203ACEC->windowId, PIXEL_FILL(1));
+    FillWindowPixelBuffer(sEasyChatGraphicsResources->windowId, PIXEL_FILL(1));
     for (i = 0; i < numRows; i++)
     {
-        str = gUnknown_203ACEC->unkA;
+        str = sEasyChatGraphicsResources->ecPrintBuffer;
         str[0] = EOS;
         str = StringAppend(str, sText_Clear17);
         for (j = 0; j < numColumns; j++)
@@ -1451,13 +1451,13 @@ void sub_8100FDC(void)
         }
 
         *str = EOS;
-        sub_8100D84(gUnknown_203ACEC->windowId, 1, gUnknown_203ACEC->unkA, 0, i * 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(sEasyChatGraphicsResources->windowId, 1, sEasyChatGraphicsResources->ecPrintBuffer, 0, i * 16, TEXT_SPEED_FF, NULL);
     }
 
-    CopyWindowToVram(gUnknown_203ACEC->windowId, 3);
+    CopyWindowToVram(sEasyChatGraphicsResources->windowId, 3);
 }
 
-void sub_8101100(u16 *tilemap)
+static void DrawECFrameInTilemapBuffer(u16 *tilemap)
 {
     u8 frameId;
     int right, bottom;
@@ -1514,41 +1514,41 @@ void sub_8101100(u16 *tilemap)
     }
 }
 
-void sub_81012CC(void)
+static void PutWin2TilemapAndCopyToVram(void)
 {
     PutWindowTilemap(2);
     CopyBgTilemapBufferToVram(2);
 }
 
-void sub_81012E0(u32 arg0)
+static void PrintECMenuById(u32 id)
 {
-    sub_810198C();
+    InitBg2Scroll();
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    switch (arg0)
+    switch (id)
     {
     case 0:
-        sub_810133C();
+        PrintECGroupsMenu();
         break;
     case 1:
         PrintEasyChatKeyboardText();
         break;
     case 2:
-        sub_81013DC();
+        PrintECWordsMenu();
         break;
     }
 
     CopyWindowToVram(2, 2);
 }
 
-void sub_810131C(void)
+static void PrintECGroupOrAlphaMenu(void)
 {
-    if (!sub_80FFE1C())
-        sub_81012E0(0);
+    if (!IsEasyChatAlphaMode())
+        PrintECMenuById(0);
     else
-        sub_81012E0(1);
+        PrintECMenuById(1);
 }
 
-void sub_810133C(void)
+static void PrintECGroupsMenu(void)
 {
     int i;
     int x, y;
@@ -1562,97 +1562,97 @@ void sub_810133C(void)
             u8 groupId = GetSelectedGroupByIndex(i++);
             if (groupId == EC_NUM_GROUPS)
             {
-                sub_81019B0(sub_80FFE28(), 0);
+                ScheduleBg2VerticalScroll(GetECSelectGroupRowsAbove(), 0);
                 return;
             }
 
-            sub_8100D84(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
+            EC_AddTextPrinterParameterized(2, 1, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SPEED_FF, NULL);
         }
 
         y += 16;
     }
 }
 
-void PrintEasyChatKeyboardText(void)
+static void PrintEasyChatKeyboardText(void)
 {
     u32 i;
 
     for (i = 0; i < NELEMS(sEasyChatKeyboardText); i++)
-        sub_8100D84(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
+        EC_AddTextPrinterParameterized(2, 1, sEasyChatKeyboardText[i], 10, 96 + i * 16, TEXT_SPEED_FF, NULL);
 }
 
-void sub_81013DC(void)
+static void PrintECWordsMenu(void)
 {
-    sub_81014AC(0, 4);
+    PrintECRowsWin2(0, 4);
 }
 
-void sub_81013EC(void)
+static void UpdateWin2PrintWordsScrollDown(void)
 {
-    u8 var0 = sub_80FFE48() + 3;
-    sub_8101558(var0, 1);
-    sub_81014AC(var0, 1);
+    u8 rowsAbove = GetECSelectWordRowsAbove() + 3;
+    ClearECRowsWin2(rowsAbove, 1);
+    PrintECRowsWin2(rowsAbove, 1);
 }
 
-void sub_8101410(void)
+static void UpdateWin2PrintWordsScrollUp(void)
 {
-    u8 var0 = sub_80FFE48();
-    sub_8101558(var0, 1);
-    sub_81014AC(var0, 1);
+    u8 rowsAbove = GetECSelectWordRowsAbove();
+    ClearECRowsWin2(rowsAbove, 1);
+    PrintECRowsWin2(rowsAbove, 1);
 }
 
-void sub_8101434(void)
+static void UpdateWin2PrintWordsScrollPageDown(void)
 {
-    u8 var0 = sub_80FFE48();
-    u8 var1 = var0 + 4;
-    u8 var2 = sub_80FFE54() + 1;
-    if (var1 > var2)
-        var1 = var2;
+    u8 row = GetECSelectWordRowsAbove();
+    u8 maxrow = row + 4;
+    u8 numrowsplus1 = GetECSelectWordNumRows() + 1;
+    if (maxrow > numrowsplus1)
+        maxrow = numrowsplus1;
 
-    if (var0 < var1)
+    if (row < maxrow)
     {
-        u8 var3 = var1 - var0;
-        sub_8101558(var0, var3);
-        sub_81014AC(var0, var3);
+        u8 remrow = maxrow - row;
+        ClearECRowsWin2(row, remrow);
+        PrintECRowsWin2(row, remrow);
     }
 }
 
-void sub_8101478(void)
+static void UpdateWin2PrintWordsScrollPageUp(void)
 {
-    u8 var0 = sub_80FFE48();
-    u8 var1 = sub_8101A48();
-    if (var0 < var1)
+    u8 row = GetECSelectWordRowsAbove();
+    u8 maxrow = GetBg2ScrollRow();
+    if (row < maxrow)
     {
-        u8 var2 = var1 - var0;
-        sub_8101558(var0, var2);
-        sub_81014AC(var0, var2);
+        u8 remrow = maxrow - row;
+        ClearECRowsWin2(row, remrow);
+        PrintECRowsWin2(row, remrow);
     }
 }
 
-void sub_81014AC(u8 arg0, u8 arg1)
+static void PrintECRowsWin2(u8 row, u8 remrow)
 {
     int i, j;
     u16 easyChatWord;
     u8 *str;
     int y;
     u8 y_;
-    int var0;
+    int ecWordIdx;
 
-    var0 = arg0 * 2;
-    y = (arg0 * 16 + 96) & 0xFF;
+    ecWordIdx = row * 2;
+    y = (row * 16 + 96) & 0xFF;
 
-    for (i = 0; i < arg1; i++)
+    for (i = 0; i < remrow; i++)
     {
         for (j = 0; j < 2; j++)
         {
             // FIXME: Dumb trick needed to match
             y_ = y << 18 >> 18;
-            easyChatWord = GetDisplayedWordByIndex(var0++);
+            easyChatWord = GetDisplayedWordByIndex(ecWordIdx++);
             if (easyChatWord != 0xFFFF)
             {
 
-                CopyEasyChatWordPadded(gUnknown_203ACEC->unkCC, easyChatWord, 0);
+                CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
 
-                sub_8100D84(2, 1, gUnknown_203ACEC->unkCC, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
+                EC_AddTextPrinterParameterized(2, 1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SPEED_FF, NULL);
             }
         }
         y += 16;
@@ -1662,165 +1662,170 @@ void sub_81014AC(u8 arg0, u8 arg1)
     CopyWindowToVram(2, 2);
 }
 
-void sub_8101558(u8 arg0, u8 arg1)
+static void ClearECRowsWin2(u8 row, u8 remrow)
 {
     int y;
-    int var0;
-    int var1;
-    int var2;
+    int totalHeight;
+    int heightWrappedAround;
+    int heightToBottom;
 
-    y = (arg0 * 16 + 96) & 0xFF;
-    var2 = arg1 * 16;
-    var0 = y + var2;
-    if (var0 > 255)
+    y = (row * 16 + 96) & 0xFF;
+    heightToBottom = remrow * 16;
+    totalHeight = y + heightToBottom;
+    if (totalHeight > 255)
     {
-        var1 = var0 - 256;
-        var2 = 256 - y;
+        heightWrappedAround = totalHeight - 256;
+        heightToBottom = 256 - y;
     }
     else
     {
-        var1 = 0;
+        heightWrappedAround = 0;
     }
 
-    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, var2);
-    if (var1)
-        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, var1);
+    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, heightToBottom);
+    if (heightWrappedAround)
+        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, heightWrappedAround);
 }
 
-void sub_81015BC(void)
+static void ClearWin2AndCopyToVram(void)
 {
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
     CopyWindowToVram(2, 2);
 }
 
-void sub_81015D4(int arg0)
+static void StartWin2FrameAnim(int animNo)
 {
-    switch (arg0)
+    switch (animNo)
     {
     case 0:
-        gUnknown_203ACEC->unk6 = 0;
-        gUnknown_203ACEC->unk7 = 10;
+        sEasyChatGraphicsResources->frameAnimIdx = 0;
+        sEasyChatGraphicsResources->frameAnimTarget = 10;
         break;
     case 1:
-        gUnknown_203ACEC->unk6 = 9;
-        gUnknown_203ACEC->unk7 = 0;
+        sEasyChatGraphicsResources->frameAnimIdx = 9;
+        sEasyChatGraphicsResources->frameAnimTarget = 0;
         break;
     case 2:
-        gUnknown_203ACEC->unk6 = 11;
-        gUnknown_203ACEC->unk7 = 17;
+        sEasyChatGraphicsResources->frameAnimIdx = 11;
+        sEasyChatGraphicsResources->frameAnimTarget = 17;
         break;
     case 3:
-        gUnknown_203ACEC->unk6 = 17;
-        gUnknown_203ACEC->unk7 = 0;
+        sEasyChatGraphicsResources->frameAnimIdx = 17;
+        sEasyChatGraphicsResources->frameAnimTarget = 0;
         break;
     case 4:
-        gUnknown_203ACEC->unk6 = 17;
-        gUnknown_203ACEC->unk7 = 10;
+        sEasyChatGraphicsResources->frameAnimIdx = 17;
+        sEasyChatGraphicsResources->frameAnimTarget = 10;
         break;
     case 5:
-        gUnknown_203ACEC->unk6 = 18;
-        gUnknown_203ACEC->unk7 = 22;
+        sEasyChatGraphicsResources->frameAnimIdx = 18;
+        sEasyChatGraphicsResources->frameAnimTarget = 22;
         break;
     case 6:
-        gUnknown_203ACEC->unk6 = 22;
-        gUnknown_203ACEC->unk7 = 18;
+        sEasyChatGraphicsResources->frameAnimIdx = 22;
+        sEasyChatGraphicsResources->frameAnimTarget = 18;
         break;
     }
 
-    gUnknown_203ACEC->unk8 = gUnknown_203ACEC->unk6 < gUnknown_203ACEC->unk7 ? 1 : -1;
+    sEasyChatGraphicsResources->frameAnimDelta = sEasyChatGraphicsResources->frameAnimIdx < sEasyChatGraphicsResources->frameAnimTarget ? 1 : -1;
 }
 
-bool8 sub_81016AC(void)
+static bool8 AnimateFrameResize(void)
 {
-    u8 var0, var1;
-    if (gUnknown_203ACEC->unk6 == gUnknown_203ACEC->unk7)
+    if (sEasyChatGraphicsResources->frameAnimIdx == sEasyChatGraphicsResources->frameAnimTarget)
         return FALSE;
 
-    gUnknown_203ACEC->unk6 += gUnknown_203ACEC->unk8;
-    sub_81016E4(gUnknown_203ACEC->unk6);
-    var0 = gUnknown_203ACEC->unk6;
-    var1 = gUnknown_203ACEC->unk7;
-    return (var0 ^ var1) > 0;
+    sEasyChatGraphicsResources->frameAnimIdx += sEasyChatGraphicsResources->frameAnimDelta;
+    RedrawFrameByIndex(sEasyChatGraphicsResources->frameAnimIdx);
+    return sEasyChatGraphicsResources->frameAnimIdx != sEasyChatGraphicsResources->frameAnimTarget;
 }
 
-void sub_81016E4(u8 arg0)
+static void RedrawFrameByIndex(u8 direction)
 {
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 10, 30, 10);
-    switch (arg0)
+    switch (direction)
     {
     case 0:
         break;
     case 1:
-        sub_8101830(11, 14, 3, 2);
+        RedrawFrameByRect(11, 14, 3, 2);
         break;
     case 2:
-        sub_8101830(9, 14, 7, 2);
+        RedrawFrameByRect(9, 14, 7, 2);
         break;
     case 3:
-        sub_8101830(7, 14, 11, 2);
+        RedrawFrameByRect(7, 14, 11, 2);
         break;
     case 4:
-        sub_8101830(5, 14, 15, 2);
+        RedrawFrameByRect(5, 14, 15, 2);
         break;
     case 5:
-        sub_8101830(3, 14, 19, 2);
+        RedrawFrameByRect(3, 14, 19, 2);
         break;
     case 6:
-        sub_8101830(1, 14, 23, 2);
-        break;
-    case 11:
-        sub_8101830(1, 10, 24, 10);
-        break;
-    case 12:
-        sub_8101830(1, 10, 25, 10);
-        break;
-    case 13:
-        sub_8101830(1, 10, 26, 10);
-        break;
-    case 14:
-        sub_8101830(1, 10, 27, 10);
-        break;
-    case 15:
-        sub_8101830(1, 10, 28, 10);
-        break;
-    case 16:
-        sub_8101830(1, 10, 29, 10);
-        break;
-    case 17:
-        sub_8101830(0, 10, 30, 10);
-        break;
-    case 10:
-    case 18:
-        sub_8101830(1, 10, 23, 10);
-        break;
-    case 9:
-    case 19:
-        sub_8101830(1, 11, 23, 8);
-        break;
-    case 8:
-    case 20:
-        sub_8101830(1, 12, 23, 6);
+        RedrawFrameByRect(1, 14, 23, 2);
         break;
     case 7:
+        RedrawFrameByRect(1, 13, 23, 4);
+        break;
+    case 8:
+        RedrawFrameByRect(1, 12, 23, 6);
+        break;
+    case 9:
+        RedrawFrameByRect(1, 11, 23, 8);
+        break;
+    case 10:
+        RedrawFrameByRect(1, 10, 23, 10);
+        break;
+    case 11:
+        RedrawFrameByRect(1, 10, 24, 10);
+        break;
+    case 12:
+        RedrawFrameByRect(1, 10, 25, 10);
+        break;
+    case 13:
+        RedrawFrameByRect(1, 10, 26, 10);
+        break;
+    case 14:
+        RedrawFrameByRect(1, 10, 27, 10);
+        break;
+    case 15:
+        RedrawFrameByRect(1, 10, 28, 10);
+        break;
+    case 16:
+        RedrawFrameByRect(1, 10, 29, 10);
+        break;
+    case 17:
+        RedrawFrameByRect(0, 10, 30, 10);
+        break;
+    case 18:
+        RedrawFrameByRect(1, 10, 23, 10);
+        break;
+    case 19:
+        RedrawFrameByRect(1, 11, 23, 8);
+        break;
+    case 20:
+        RedrawFrameByRect(1, 12, 23, 6);
+        break;
     case 21:
-        sub_8101830(1, 13, 23, 4);
+        RedrawFrameByRect(1, 13, 23, 4);
         break;
     case 22:
-        sub_8101830(1, 14, 23, 2);
+        RedrawFrameByRect(1, 14, 23, 2);
         break;
     }
 
     CopyBgTilemapBufferToVram(1);
 }
 
-void sub_8101830(int left, int top, int width, int height)
+static void RedrawFrameByRect(int left, int top, int width, int height)
 {
     u16 *tilemap;
     int right;
     int bottom;
     int x, y;
 
-    tilemap = gUnknown_203ACEC->unk300;
+    tilemap = sEasyChatGraphicsResources->bg1TilemapBuffer;
     right = left + width - 1;
     bottom = top + height - 1;
     x = left;
@@ -1848,30 +1853,30 @@ void sub_8101830(int left, int top, int width, int height)
         tilemap[y * 32 + x] = 0x400A;
 
     tilemap[y * 32 + x] = 0x400B;
-    sub_8101A5C((left + 1) * 8, (top + 1) * 8, (width - 2) * 8, (height - 2) * 8);
+    SetRegWin0Coords((left + 1) * 8, (top + 1) * 8, (width - 2) * 8, (height - 2) * 8);
 }
 
-void sub_810198C(void)
+static void InitBg2Scroll(void)
 {
     ChangeBgY(2, 0x800, 0);
-    gUnknown_203ACEC->unk2CE = 0;
+    sEasyChatGraphicsResources->bg2ScrollRow = 0;
 }
 
-void sub_81019B0(s16 arg0, u8 arg1)
+static void ScheduleBg2VerticalScroll(s16 direction, u8 speed)
 {
     int bgY;
-    s16 var0;
+    s16 totalDelta;
 
     bgY = GetBgY(2);
-    gUnknown_203ACEC->unk2CE += arg0;
-    var0 = arg0 * 16;
-    bgY += var0 << 8;
-    if (arg1)
+    sEasyChatGraphicsResources->bg2ScrollRow += direction;
+    totalDelta = direction * 16;
+    bgY += totalDelta << 8;
+    if (speed)
     {
-        gUnknown_203ACEC->unk2D0 = bgY;
-        gUnknown_203ACEC->unk2D4 = arg1 * 256;
-        if (var0 < 0)
-            gUnknown_203ACEC->unk2D4 = -gUnknown_203ACEC->unk2D4;
+        sEasyChatGraphicsResources->tgtBgY = bgY;
+        sEasyChatGraphicsResources->deltaBgY = speed * 256;
+        if (totalDelta < 0)
+            sEasyChatGraphicsResources->deltaBgY = -sEasyChatGraphicsResources->deltaBgY;
     }
     else
     {
@@ -1879,28 +1884,28 @@ void sub_81019B0(s16 arg0, u8 arg1)
     }
 }
 
-bool8 sub_8101A10(void)
+static bool8 AnimateBg2VerticalScroll(void)
 {
     int bgY;
 
     bgY = GetBgY(2);
-    if (bgY == gUnknown_203ACEC->unk2D0)
+    if (bgY == sEasyChatGraphicsResources->tgtBgY)
     {
         return FALSE;
     }
     else
     {
-        ChangeBgY(2, gUnknown_203ACEC->unk2D4, 1);
+        ChangeBgY(2, sEasyChatGraphicsResources->deltaBgY, 1);
         return TRUE;
     }
 }
 
-int sub_8101A48(void)
+static int GetBg2ScrollRow(void)
 {
-    return gUnknown_203ACEC->unk2CE;
+    return sEasyChatGraphicsResources->bg2ScrollRow;
 }
 
-void sub_8101A5C(u8 left, u8 top, u8 width, u8 height)
+static void SetRegWin0Coords(u8 left, u8 top, u8 width, u8 height)
 {
     u16 horizontalDimensions = WIN_RANGE(left, left + width);
     u16 verticalDimensions = WIN_RANGE(top, top + height);
@@ -1908,27 +1913,27 @@ void sub_8101A5C(u8 left, u8 top, u8 width, u8 height)
     SetGpuReg(REG_OFFSET_WIN0V, verticalDimensions);
 }
 
-void sub_8101A90(void)
+static void LoadSpriteGfx(void)
 {
     u32 i;
 
     LoadSpriteSheets(sEasyChatSpriteSheets);
     LoadSpritePalettes(sEasyChatSpritePalettes);
-    for (i = 0; i < NELEMS(gUnknown_843F938); i++)
-        LoadCompressedSpriteSheet(&gUnknown_843F938[i]);
+    for (i = 0; i < NELEMS(sEasyChatCompressedSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sEasyChatCompressedSpriteSheets[i]);
 }
 
-void sub_8101AC4(void)
+static void CreateSelectDestFieldCursorSprite(void)
 {
     u8 frameId = GetEasyChatScreenFrameId();
     s16 x = sPhraseFrameDimensions[frameId].left * 8 + 13;
     s16 y = (sPhraseFrameDimensions[frameId].top + 1) * 8 + 1;
-    u8 spriteId = CreateSprite(&gUnknown_843F968, x, y, 2);
-    gUnknown_203ACEC->unk2D8 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, x, y, 2);
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite = &gSprites[spriteId];
     gSprites[spriteId].data[1] = 1;
 }
 
-void sub_8101B20(struct Sprite *sprite)
+static void SpriteCB_BounceCursor(struct Sprite *sprite)
 {
     if (sprite->data[1])
     {
@@ -1941,137 +1946,137 @@ void sub_8101B20(struct Sprite *sprite)
     }
 }
 
-void sub_8101B58(u8 x, u8 y)
+static void SetSelectDestFieldCursorSpritePosAndResetAnim(u8 x, u8 y)
 {
-    gUnknown_203ACEC->unk2D8->pos1.x = x;
-    gUnknown_203ACEC->unk2D8->pos1.y = y;
-    gUnknown_203ACEC->unk2D8->pos2.x = 0;
-    gUnknown_203ACEC->unk2D8->data[0] = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.x = x;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos1.y = y;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
 }
 
-void sub_8101B88(void)
+static void FreezeSelectDestFieldCursorSprite(void)
 {
-    gUnknown_203ACEC->unk2D8->data[0] = 0;
-    gUnknown_203ACEC->unk2D8->data[1] = 0;
-    gUnknown_203ACEC->unk2D8->pos2.x = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[0] = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[1] = 0;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->pos2.x = 0;
 }
 
-void sub_8101BA8(void)
+static void UnfreezeSelectDestFieldCursorSprite(void)
 {
-    gUnknown_203ACEC->unk2D8->data[1] = 1;
+    sEasyChatGraphicsResources->selectDestFieldCursorSprite->data[1] = 1;
 }
 
-void sub_8101BC0(void)
+static void CreateRedRectangularCursorSpritePair(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_843F9B8, 0, 0, 3);
-    gUnknown_203ACEC->unk2DC = &gSprites[spriteId];
-    gUnknown_203ACEC->unk2DC->pos2.x = 32;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
+    sEasyChatGraphicsResources->rectCursorSpriteRight = &gSprites[spriteId];
+    sEasyChatGraphicsResources->rectCursorSpriteRight->pos2.x = 32;
 
-    spriteId = CreateSprite(&gUnknown_843F9B8, 0, 0, 3);
-    gUnknown_203ACEC->unk2E0 = &gSprites[spriteId];
-    gUnknown_203ACEC->unk2E0->pos2.x = -32;
+    spriteId = CreateSprite(&sSpriteTemplate_RedRectangularCursor, 0, 0, 3);
+    sEasyChatGraphicsResources->rectCursorSpriteLeft = &gSprites[spriteId];
+    sEasyChatGraphicsResources->rectCursorSpriteLeft->pos2.x = -32;
 
-    gUnknown_203ACEC->unk2DC->hFlip = 1;
-    sub_8101C80();
+    sEasyChatGraphicsResources->rectCursorSpriteRight->hFlip = TRUE;
+    EC_MoveCursor();
 }
 
-void sub_8101C48(void)
+static void DestroyRedRectangularCursor(void)
 {
-    DestroySprite(gUnknown_203ACEC->unk2DC);
-    gUnknown_203ACEC->unk2DC = NULL;
-    DestroySprite(gUnknown_203ACEC->unk2E0);
-    gUnknown_203ACEC->unk2E0 = NULL;
+    DestroySprite(sEasyChatGraphicsResources->rectCursorSpriteRight);
+    sEasyChatGraphicsResources->rectCursorSpriteRight = NULL;
+    DestroySprite(sEasyChatGraphicsResources->rectCursorSpriteLeft);
+    sEasyChatGraphicsResources->rectCursorSpriteLeft = NULL;
 }
 
-void sub_8101C80(void)
+static void EC_MoveCursor(void)
 {
-    u8 var0;
-    u8 var1;
+    u8 x;
+    u8 y;
 
-    if (gUnknown_203ACEC->unk2DC && gUnknown_203ACEC->unk2E0)
+    if (sEasyChatGraphicsResources->rectCursorSpriteRight && sEasyChatGraphicsResources->rectCursorSpriteLeft)
     {
-        sub_80FFE08(&var0, &var1);
-        if (!sub_80FFE1C())
-            sub_8101CE4(var0, var1);
+        GetECSelectGroupCursorCoords(&x, &y);
+        if (!IsEasyChatAlphaMode())
+            MoveCursor_Group(x, y);
         else
-            sub_8101D9C(var0, var1);
+            MoveCursor_Alpha(x, y);
     }
 }
 
-void sub_8101CE4(s8 arg0, s8 arg1)
+static void MoveCursor_Group(s8 x, s8 y)
 {
-    if (arg0 != -1)
+    if (x != -1)
     {
-        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 0);
-        gUnknown_203ACEC->unk2DC->pos1.x = arg0 * 84 + 58;
-        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 96;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 0);
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x * 84 + 58;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 96;
 
-        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 0);
-        gUnknown_203ACEC->unk2E0->pos1.x = arg0 * 84 + 58;
-        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 96;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 0);
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x * 84 + 58;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 96;
     }
     else
     {
-        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 1);
-        gUnknown_203ACEC->unk2DC->pos1.x = 216;
-        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 112;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y * 16 + 112;
 
-        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 1);
-        gUnknown_203ACEC->unk2E0->pos1.x = 216;
-        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 112;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y * 16 + 112;
     }
 }
 
-void sub_8101D9C(s8 arg0, s8 arg1)
+static void MoveCursor_Alpha(s8 cursorX, s8 cursorY)
 {
     int anim;
     int x, y;
 
-    if (arg0 != -1)
+    if (cursorX != -1)
     {
-        y = arg1 * 16 + 96;
+        y = cursorY * 16 + 96;
         x = 32;
-        if (arg0 == 6 && arg1 == 0)
+        if (cursorX == 6 && cursorY == 0)
         {
             x = 157;
             anim = 2;
         }
         else
         {
-            x += gUnknown_843F958[arg0 < NELEMS(gUnknown_843F958) ? arg0 : 0];
+            x += sECDisplay_AlphaModeXCoords[cursorX < NELEMS(sECDisplay_AlphaModeXCoords) ? cursorX : 0];
             anim = 3;
         }
 
-        StartSpriteAnim(gUnknown_203ACEC->unk2DC, anim);
-        gUnknown_203ACEC->unk2DC->pos1.x = x;
-        gUnknown_203ACEC->unk2DC->pos1.y = y;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, anim);
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = x;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = y;
 
-        StartSpriteAnim(gUnknown_203ACEC->unk2E0, anim);
-        gUnknown_203ACEC->unk2E0->pos1.x = x;
-        gUnknown_203ACEC->unk2E0->pos1.y = y;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, anim);
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = x;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = y;
     }
     else
     {
-        StartSpriteAnim(gUnknown_203ACEC->unk2DC, 1);
-        gUnknown_203ACEC->unk2DC->pos1.x = 216;
-        gUnknown_203ACEC->unk2DC->pos1.y = arg1 * 16 + 112;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteRight, 1);
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteRight->pos1.y = cursorY * 16 + 112;
 
-        StartSpriteAnim(gUnknown_203ACEC->unk2E0, 1);
-        gUnknown_203ACEC->unk2E0->pos1.x = 216;
-        gUnknown_203ACEC->unk2E0->pos1.y = arg1 * 16 + 112;
+        StartSpriteAnim(sEasyChatGraphicsResources->rectCursorSpriteLeft, 1);
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.x = 216;
+        sEasyChatGraphicsResources->rectCursorSpriteLeft->pos1.y = cursorY * 16 + 112;
     }
 }
 
-void sub_8101E80(void)
+static void CreateSelectWordCursorSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_843F968, 0, 0, 4);
-    gUnknown_203ACEC->unk2E4 = &gSprites[spriteId];
-    gUnknown_203ACEC->unk2E4->callback = sub_8101ED4;
-    gUnknown_203ACEC->unk2E4->oam.priority = 2;
-    sub_8101F04();
+    u8 spriteId = CreateSprite(&sSpriteTemplate_RightTriangleCursor, 0, 0, 4);
+    sEasyChatGraphicsResources->selectWordCursorSprite = &gSprites[spriteId];
+    sEasyChatGraphicsResources->selectWordCursorSprite->callback = SpriteCB_SelectWordCursorSprite;
+    sEasyChatGraphicsResources->selectWordCursorSprite->oam.priority = 2;
+    SetSelectWordCursorSpritePos();
 }
 
-void sub_8101ED4(struct Sprite *sprite)
+static void SpriteCB_SelectWordCursorSprite(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 2)
     {
@@ -2081,71 +2086,71 @@ void sub_8101ED4(struct Sprite *sprite)
     }
 }
 
-void sub_8101F04(void)
+static void SetSelectWordCursorSpritePos(void)
 {
-    s8 var0, var1;
+    s8 cursorX, cursorY;
     u8 x, y;
 
-    sub_80FFE34(&var0, &var1);
-    x = var0 * 13 + 3;
-    y = var1 * 2 + 11;
-    sub_8101F40(x, y);
+    GetECSelectWordCursorCoords(&cursorX, &cursorY);
+    x = cursorX * 13 + 3;
+    y = cursorY * 2 + 11;
+    SetSelectWordCursorSpritePosExplicit(x, y);
 }
 
-void sub_8101F40(u8 x, u8 y)
+static void SetSelectWordCursorSpritePosExplicit(u8 x, u8 y)
 {
-    if (gUnknown_203ACEC->unk2E4)
+    if (sEasyChatGraphicsResources->selectWordCursorSprite)
     {
-        gUnknown_203ACEC->unk2E4->pos1.x = x * 8 + 4;
-        gUnknown_203ACEC->unk2E4->pos1.y = (y + 1) * 8 + 1;
-        gUnknown_203ACEC->unk2E4->pos2.x = 0;
-        gUnknown_203ACEC->unk2E4->data[0] = 0;
+        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.x = x * 8 + 4;
+        sEasyChatGraphicsResources->selectWordCursorSprite->pos1.y = (y + 1) * 8 + 1;
+        sEasyChatGraphicsResources->selectWordCursorSprite->pos2.x = 0;
+        sEasyChatGraphicsResources->selectWordCursorSprite->data[0] = 0;
     }
 }
 
-void sub_8101F80(void)
+static void DestroySelectWordCursorSprite(void)
 {
-    if (gUnknown_203ACEC->unk2E4)
+    if (sEasyChatGraphicsResources->selectWordCursorSprite)
     {
-        DestroySprite(gUnknown_203ACEC->unk2E4);
-        gUnknown_203ACEC->unk2E4 = NULL;
+        DestroySprite(sEasyChatGraphicsResources->selectWordCursorSprite);
+        sEasyChatGraphicsResources->selectWordCursorSprite = NULL;
     }
 }
 
-void sub_8101FAC(void)
+static void CreateSelectGroupHelpSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_843FA40, 208, 128, 6);
-    gUnknown_203ACEC->unk2E8 = &gSprites[spriteId];
-    gUnknown_203ACEC->unk2E8->pos2.x = -64;
+    u8 spriteId = CreateSprite(&sSpriteTemplate_SelectGroupHelp, 208, 128, 6);
+    sEasyChatGraphicsResources->selectGroupHelpSprite = &gSprites[spriteId];
+    sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = -64;
 
-    spriteId = CreateSprite(&gUnknown_843FA20, 208, 80, 5);
-    gUnknown_203ACEC->unk2EC = &gSprites[spriteId];
-    gUnknown_203ACEC->unk9 = 0;
+    spriteId = CreateSprite(&sSpriteTemplate_EasyChatModeIcons, 208, 80, 5);
+    sEasyChatGraphicsResources->modeIconsSprite = &gSprites[spriteId];
+    sEasyChatGraphicsResources->modeIconState = 0;
 }
 
-bool8 sub_8102018(void)
+static bool8 AnimateSeletGroupModeAndHelpSpriteEnter(void)
 {
-    switch (gUnknown_203ACEC->unk9)
+    switch (sEasyChatGraphicsResources->modeIconState)
     {
     default:
         return FALSE;
     case 0:
-        gUnknown_203ACEC->unk2E8->pos2.x += 8;
-        if (gUnknown_203ACEC->unk2E8->pos2.x >= 0)
+        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x += 8;
+        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x >= 0)
         {
-            gUnknown_203ACEC->unk2E8->pos2.x = 0;
-            if (!sub_80FFE1C())
-                StartSpriteAnim(gUnknown_203ACEC->unk2EC, 1);
+            sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x = 0;
+            if (!IsEasyChatAlphaMode())
+                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
             else
-                StartSpriteAnim(gUnknown_203ACEC->unk2EC, 2);
+                StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
 
-            gUnknown_203ACEC->unk9++;
+            sEasyChatGraphicsResources->modeIconState++;
         }
         break;
     case 1:
-        if (gUnknown_203ACEC->unk2EC->animEnded)
+        if (sEasyChatGraphicsResources->modeIconsSprite->animEnded)
         {
-            gUnknown_203ACEC->unk9 = 2;
+            sEasyChatGraphicsResources->modeIconState = 2;
             return FALSE;
         }
     }
@@ -2153,31 +2158,31 @@ bool8 sub_8102018(void)
     return TRUE;
 }
 
-void sub_81020AC(void)
+static void StartModeIconHidingAnimation(void)
 {
-    gUnknown_203ACEC->unk9 = 0;
-    StartSpriteAnim(gUnknown_203ACEC->unk2EC, 3);
+    sEasyChatGraphicsResources->modeIconState = 0;
+    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 3);
 }
 
-bool8 sub_81020D0(void)
+static bool8 RunModeIconHidingAnimation(void)
 {
-    switch (gUnknown_203ACEC->unk9)
+    switch (sEasyChatGraphicsResources->modeIconState)
     {
     default:
         return FALSE;
     case 0:
-        if (gUnknown_203ACEC->unk2EC->animEnded)
-            gUnknown_203ACEC->unk9 = 1;
+        if (sEasyChatGraphicsResources->modeIconsSprite->animEnded)
+            sEasyChatGraphicsResources->modeIconState = 1;
         break;
     case 1:
-        gUnknown_203ACEC->unk2E8->pos2.x -= 8;
-        if (gUnknown_203ACEC->unk2E8->pos2.x <= -64)
+        sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x -= 8;
+        if (sEasyChatGraphicsResources->selectGroupHelpSprite->pos2.x <= -64)
         {
-            DestroySprite(gUnknown_203ACEC->unk2EC);
-            DestroySprite(gUnknown_203ACEC->unk2E8);
-            gUnknown_203ACEC->unk2EC = NULL;
-            gUnknown_203ACEC->unk2E8 = NULL;
-            gUnknown_203ACEC->unk9++;
+            DestroySprite(sEasyChatGraphicsResources->modeIconsSprite);
+            DestroySprite(sEasyChatGraphicsResources->selectGroupHelpSprite);
+            sEasyChatGraphicsResources->modeIconsSprite = NULL;
+            sEasyChatGraphicsResources->selectGroupHelpSprite = NULL;
+            sEasyChatGraphicsResources->modeIconState++;
             return FALSE;
         }
     }
@@ -2185,95 +2190,97 @@ bool8 sub_81020D0(void)
     return TRUE;
 }
 
-void sub_810215C(void)
+static void ShrinkModeIconsSprite(void)
 {
-    StartSpriteAnim(gUnknown_203ACEC->unk2EC, 4);
+    StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 4);
 }
 
-void sub_8102178(void)
+static void ShowModeIconsSprite(void)
 {
-    if (!sub_80FFE1C())
-        StartSpriteAnim(gUnknown_203ACEC->unk2EC, 1);
+    if (!IsEasyChatAlphaMode())
+        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 1);
     else
-        StartSpriteAnim(gUnknown_203ACEC->unk2EC, 2);
+        StartSpriteAnim(sEasyChatGraphicsResources->modeIconsSprite, 2);
 }
 
-bool8 sub_81021B8(void)
+static bool8 ModeIconsSpriteAnimIsEnded(void)
 {
-    return !gUnknown_203ACEC->unk2EC->animEnded;
+    return !sEasyChatGraphicsResources->modeIconsSprite->animEnded;
 }
 
-void sub_81021D4(void)
+static void CreateVerticalScrollArrowSprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_843FA98, 96, 80, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 80, 0);
     if (spriteId != MAX_SPRITES)
-        gUnknown_203ACEC->unk2F0 = &gSprites[spriteId];
+        sEasyChatGraphicsResources->upTriangleCursorSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&gUnknown_843FA98, 96, 156, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_UpTriangleCursor, 96, 156, 0);
     if (spriteId != MAX_SPRITES)
     {
-        gUnknown_203ACEC->unk2F4 = &gSprites[spriteId];
-        gUnknown_203ACEC->unk2F4->vFlip = 1;
+        sEasyChatGraphicsResources->downTriangleCursorSprite = &gSprites[spriteId];
+        sEasyChatGraphicsResources->downTriangleCursorSprite->vFlip = TRUE;
     }
 
-    sub_81022B0();
+    HideVerticalScrollArrowSprites();
 }
 
-void sub_810224C(void)
+static void UpdateVerticalScrollArrowVisibility(void)
 {
-    gUnknown_203ACEC->unk2F0->invisible = !sub_80FFE64();
-    gUnknown_203ACEC->unk2F4->invisible = !sub_80FFE98();
+    sEasyChatGraphicsResources->upTriangleCursorSprite->invisible = !ShouldDrawECUpArrow();
+    sEasyChatGraphicsResources->downTriangleCursorSprite->invisible = !ShouldDrawECDownArrow();
 }
 
-void sub_81022B0(void)
+static void HideVerticalScrollArrowSprites(void)
 {
-    gUnknown_203ACEC->unk2F0->invisible = TRUE;
-    gUnknown_203ACEC->unk2F4->invisible = TRUE;
+    sEasyChatGraphicsResources->upTriangleCursorSprite->invisible = TRUE;
+    sEasyChatGraphicsResources->downTriangleCursorSprite->invisible = TRUE;
 }
 
-void sub_81022E0(int arg0)
+static void UpdateVerticalScrollArrowSpriteXPos(int direction)
 {
-    if (!arg0)
+    if (!direction)
     {
-        gUnknown_203ACEC->unk2F0->pos1.x = 96;
-        gUnknown_203ACEC->unk2F4->pos1.x = 96;
+        // Group select
+        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 96;
+        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 96;
     }
     else
     {
-        gUnknown_203ACEC->unk2F0->pos1.x = 120;
-        gUnknown_203ACEC->unk2F4->pos1.x = 120;
+        // Word select
+        sEasyChatGraphicsResources->upTriangleCursorSprite->pos1.x = 120;
+        sEasyChatGraphicsResources->downTriangleCursorSprite->pos1.x = 120;
     }
 }
 
-void sub_8102320(void)
+static void CreateStartSelectButtonsSprites(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_843FA80, 220, 84, 1);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_StartSelectButtons, 220, 84, 1);
     if (spriteId != MAX_SPRITES)
-        gUnknown_203ACEC->unk2F8 = &gSprites[spriteId];
+        sEasyChatGraphicsResources->startPgUpButtonSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&gUnknown_843FA80, 220, 156, 1);
+    spriteId = CreateSprite(&sSpriteTemplate_StartSelectButtons, 220, 156, 1);
     if (spriteId != MAX_SPRITES)
     {
-        gUnknown_203ACEC->unk2FC = &gSprites[spriteId];
-        StartSpriteAnim(gUnknown_203ACEC->unk2FC, 1);
+        sEasyChatGraphicsResources->selectPgDnButtonSprite = &gSprites[spriteId];
+        StartSpriteAnim(sEasyChatGraphicsResources->selectPgDnButtonSprite, 1);
     }
 
-    sub_81023F8();
+    HideStartSelectButtonSprites();
 }
 
-void sub_8102394(void)
+static void UpdateStartSelectButtonSpriteVisibility(void)
 {
-    gUnknown_203ACEC->unk2F8->invisible = !sub_80FFE64();
-    gUnknown_203ACEC->unk2FC->invisible = !sub_80FFE98();
+    sEasyChatGraphicsResources->startPgUpButtonSprite->invisible = !ShouldDrawECUpArrow();
+    sEasyChatGraphicsResources->selectPgDnButtonSprite->invisible = !ShouldDrawECDownArrow();
 }
 
-void sub_81023F8(void)
+static void HideStartSelectButtonSprites(void)
 {
-    gUnknown_203ACEC->unk2F8->invisible = TRUE;
-    gUnknown_203ACEC->unk2FC->invisible = TRUE;
+    sEasyChatGraphicsResources->startPgUpButtonSprite->invisible = TRUE;
+    sEasyChatGraphicsResources->selectPgDnButtonSprite->invisible = TRUE;
 }
 
-void sub_8102428(void)
+static void CreateFooterWindow(void)
 {
     u16 windowId;
     struct WindowTemplate template;
@@ -2286,6 +2293,6 @@ void sub_8102428(void)
     template.baseBlock = 0x030;
     windowId = AddWindow(&template);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    sub_8100D84(windowId, 1, gUnknown_841EE2B, 0, 0, 0, NULL);
+    EC_AddTextPrinterParameterized(windowId, 1, gUnknown_841EE2B, 0, 0, 0, NULL);
     PutWindowTilemap(windowId);
 }

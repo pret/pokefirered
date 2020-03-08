@@ -8,7 +8,6 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/songs.h"
-#include "constants/flags.h"
 
 #define EZCHAT_TASK_STATE        0
 #define EZCHAT_TASK_TYPE         1
@@ -39,87 +38,86 @@ struct EasyChatScreen
     /*0x04*/ u8 state;
     /*0x05*/ s8 mainCursorColumn;
     /*0x06*/ s8 mainCursorRow;
-    /*0x07*/ u8 unk_07;
+    /*0x07*/ u8 numWords;
     /*0x08*/ u8 stateBackup;
-    /*0x09*/ u8 unk_09;
-    /*0x0A*/ s8 unk_0a;
-    /*0x0B*/ s8 unk_0b;
-    /*0x0C*/ u8 unk_0c;
-    /*0x0D*/ u8 unk_0d;
-    /*0x0E*/ u8 unk_0e;
-    /*0x0F*/ u8 unk_0f;
-    /*0x10*/ s8 unk_10;
-    /*0x11*/ s8 unk_11;
+    /*0x09*/ bool8 isAlphaMode;
+    /*0x0A*/ s8 selectGroupCursorX;
+    /*0x0B*/ s8 selectGroupCursorY;
+    /*0x0C*/ u8 selectGroupRowsAbove;
+    /*0x0D*/ u8 selectGroupNumRows;
+    /*0x0E*/ u8 selectWordRowsAbove;
+    /*0x0F*/ u8 selectWordNumRows;
+    /*0x10*/ s8 selectWordCursorX;
+    /*0x11*/ s8 selectWordCursorY;
     /*0x12*/ u8 unk_12;
     /*0x14*/ u16 *words;
     /*0x18*/ u16 ecWordBuffer[9];
 };
 
-EWRAM_DATA struct EasyChatScreen *sEasyChatScreen = NULL;
+static EWRAM_DATA struct EasyChatScreen *sEasyChatScreen = NULL;
 
-void sub_80FEC0C(void);
-void sub_80FEC54(u8 taskId);
-void sub_80FEC90(u8 taskId);
-bool8 sub_80FED80(u8 taskId);
-void sub_80FEE24(MainCallback cb);
-void sub_80FEF2C(void);
-void sub_80FEF4C(void);
-bool8 EasyChat_AllocateResources(u8 type, u16 *words);
-void EasyChat_FreeResources(void);
-u16 sub_80FF028(void);
-u16 sub_80FF098(void);
-u16 sub_80FF20C(void);
-u16 sub_80FF360(void);
-u16 sub_80FF41C(void);
-u16 sub_80FF4A8(void);
-u16 sub_80FF4F0(void);
-u16 sub_80FF544(void);
-u16 sub_80FF590(void);
-u16 sub_80FF5A8(void);
-u16 sub_80FF5C0(void);
-u8 sub_80FF5F0(void);
-int sub_80FF5FC(void);
-int sub_80FF678(void);
-int sub_80FF688(void);
-int sub_80FF6B4(void);
-int sub_80FF6C8(void);
-void sub_80FF6F0(void);
-void sub_80FF728(void);
-void sub_80FF768(u16 word);
-bool8 sub_80FF78C(void);
-u16 sub_80FF7CC(u32 action);
-int sub_80FF80C(u32 action);
-int sub_80FF8D8(u32 action);
-int sub_80FF968(u32 action);
-void sub_80FF9E8(void);
-void sub_80FFA0C(void);
-u16 sub_80FFA38(u32 action);
-u16 sub_80FFB6C(void);
-u16 sub_80FFB8C(void);
-int sub_80FFBAC(void);
-u16 sub_80FFBE4(void);
-u8 sub_80FFC04(u8 unkB);
-void sub_80FFC1C(void);
-void sub_80FFC44(void);
-bool8 sub_80FFC6C(void);
-bool8 sub_80FFCC0(void);
-bool8 GetEasyChatScreenFrameId(void);
-bool8 IsPhraseDifferentThanPlayerInput(const u16 *wordsToCompare, u8 numWords);
-u8 GetEasyChatScreenTemplateId(u8 type);
-bool32 IsEcWordBufferUninitialized(void);
+static void CB2_EasyChatScreen(void);
+static void Task_InitEasyChat(u8 taskId);
+static void Task_RunEasyChat(u8 taskId);
+static bool8 Task_InitEasyChatInternal(u8 taskId);
+static void DismantleEasyChat(MainCallback cb);
+static void CompareProfileResponseWithPassphrase(void);
+static void CompareQuestionnaireResponseWithPassphrase(void);
+static bool8 EasyChat_AllocateResources(u8 type, u16 *words);
+static void EasyChat_FreeResources(void);
+static u16 EasyChatScreen_HandleJoypad(void);
+static u16 HandleJoypad_SelectField(void);
+static u16 HandleJoypad_SelectFooter(void);
+static u16 HandleJoypad_SelectGroup(void);
+static u16 HandleJoypad_SelectWord(void);
+static u16 Cancel_HandleYesNoMenu(void);
+static u16 Confirm_HandleYesNoMenu(void);
+static u16 DelAll_HandleYesNoMenu(void);
+static u16 Cancel_CreateYesNoMenu(void);
+static u16 DelAll_CreateYesNoMenu(void);
+static u16 Confirm_CreateYesNoMenu(void);
+static u8 GetStateBackup(void);
+int OpenSelectedGroup(void);
+int BackOutFromGroupToFieldSelect(void);
+int ToggleGroupAlphaMode(void);
+int DeleteSelectedWord(void);
+int PlaceSelectedWord(void);
+static void CommitECWords(void);
+static void DeleteAllECFields(void);
+static void SetEasyChatWordToField(u16 word);
+static bool8 HasECMessageChanged(void);
+static u16 SelectGroupCursorAction(u32 action);
+int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 action);
+int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 action);
+int UpdateSelectGroupCursorPos_InsideBlueBox(u32 action);
+static void GroupCursorMoveToBlueBox(void);
+static void GroupCursorWrapAroundLeft(void);
+static u16 SelectWordCursorAction(u32 action);
+static u16 GetSelectedFieldIndex(void);
+static u16 GetSelectedGroupIndex(void);
+int GetSelectedLetter(void);
+static u16 GetSelectWordCursorPos(void);
+static u8 GetMaxGroupCursorXinAlphaMode(u8 unkB);
+static void MoveGroupCursorXToMaxCol(void);
+static void MoveWordCursorXToMaxCol(void);
+static bool8 GroupSelectCursorXPosTooFarRight(void);
+static bool8 WordSelectCursorXPosTooFarRight(void);
+static bool8 IsPhraseDifferentThanPlayerInput(const u16 *wordsToCompare, u8 numWords);
+static u8 GetEasyChatScreenTemplateId(u8 type);
+static bool32 IsEcWordBufferUninitialized(void);
 
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback)
 {
     u8 taskId;
     ResetTasks();
-    taskId = CreateTask(sub_80FEC54, 0);
+    taskId = CreateTask(Task_InitEasyChat, 0);
     gTasks[taskId].data[EZCHAT_TASK_TYPE] = type;
     SetWordTaskArg(taskId, EZCHAT_TASK_WORDS, (uintptr_t)words);
     SetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK, (uintptr_t)callback);
-    SetMainCallback2(sub_80FEC0C);
+    SetMainCallback2(CB2_EasyChatScreen);
 }
 
-void sub_80FEC0C(void)
+static void CB2_EasyChatScreen(void)
 {
     RunTasks();
     AnimateSprites();
@@ -127,37 +125,37 @@ void sub_80FEC0C(void)
     UpdatePaletteFade();
 }
 
-void VBlankCallback_EasyChatScreen(void)
+static void VBlankCallback_EasyChatScreen(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-void sub_80FEC38(u8 taskId, TaskFunc func)
+static void SetEasyChatTaskFunc(u8 taskId, TaskFunc func)
 {
     gTasks[taskId].func = func;
     gTasks[taskId].data[EZCHAT_TASK_STATE] = 0;
 }
 
-void sub_80FEC54(u8 taskId)
+static void Task_InitEasyChat(u8 taskId)
 {
     if (!IsUpdateLinkStateCBActive())
     {
-        while (sub_80FED80(taskId))
+        while (Task_InitEasyChatInternal(taskId))
             ;
     }
     else
     {
-        if (sub_80FED80(taskId) == TRUE)
+        if (Task_InitEasyChatInternal(taskId) == TRUE)
             return;
     }
-    sub_80FEC38(taskId, sub_80FEC90);
+    SetEasyChatTaskFunc(taskId, Task_RunEasyChat);
 }
 
-void sub_80FEC90(u8 taskId)
+static void Task_RunEasyChat(u8 taskId)
 {
-    u16 v0;
+    u16 action;
     s16 *data;
 
     data = gTasks[taskId].data;
@@ -170,40 +168,40 @@ void sub_80FEC90(u8 taskId)
         data[EZCHAT_TASK_STATE]++;
         break;
     case 1:
-        v0 = sub_80FF028();
-        if (v0 == 23)
+        action = EasyChatScreen_HandleJoypad();
+        if (action == 23)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
             data[EZCHAT_TASK_STATE] = 3;
         }
-        else if (v0 != 0)
+        else if (action != 0)
         {
             PlaySE(SE_SELECT);
-            sub_8100134(v0);
+            EasyChatInterfaceCommand_Setup(action);
             data[EZCHAT_TASK_STATE]++;
         }
         break;
     case 2:
-        if (!sub_810014C())
+        if (!EasyChatInterfaceCommand_Run())
             data[EZCHAT_TASK_STATE] = 1;
         break;
     case 3:
         if (!gPaletteFade.active)
         {
-            if (data[EZCHAT_TASK_TYPE] == 14)
-                sub_80FEF4C();
-            if (data[EZCHAT_TASK_TYPE] == 0)
+            if (data[EZCHAT_TASK_TYPE] == EASY_CHAT_TYPE_QUESTIONNAIRE)
+                CompareQuestionnaireResponseWithPassphrase();
+            if (data[EZCHAT_TASK_TYPE] == EASY_CHAT_TYPE_PROFILE)
             {
                 FlagSet(FLAG_SYS_SET_TRAINER_CARD_PROFILE);
-                sub_80FEF2C();
+                CompareProfileResponseWithPassphrase();
             }
-            sub_80FEE24((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
+            DismantleEasyChat((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
         }
         break;
     }
 }
 
-bool8 sub_80FED80(u8 taskId)
+static bool8 Task_InitEasyChatInternal(u8 taskId)
 {
     s16 *data;
 
@@ -219,23 +217,23 @@ bool8 sub_80FED80(u8 taskId)
     case 1:
         if (!InitEasyChatSelection())
         {
-            sub_80FEE24((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
+            DismantleEasyChat((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
         }
         break;
     case 2:
         if (!EasyChat_AllocateResources(data[EZCHAT_TASK_TYPE], (u16 *)GetWordTaskArg(taskId, EZCHAT_TASK_WORDS)))
         {
-            sub_80FEE24((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
+            DismantleEasyChat((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
         }
         break;
     case 3:
-        if (!sub_80FFF80())
+        if (!InitEasyChatGraphicsWork())
         {
-            sub_80FEE24((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
+            DismantleEasyChat((MainCallback)GetWordTaskArg(taskId, EZCHAT_TASK_MAINCALLBACK));
         }
         break;
     case 4:
-        if (sub_80FFF98())
+        if (LoadEasyChatGraphics())
         {
             return TRUE;
         }
@@ -247,11 +245,11 @@ bool8 sub_80FED80(u8 taskId)
     return TRUE;
 }
 
-void sub_80FEE24(MainCallback callback)
+static void DismantleEasyChat(MainCallback callback)
 {
     DestroyEasyChatSelectionData();
     EasyChat_FreeResources();
-    sub_810011C();
+    DestroyEasyChatGraphicsResources();
     FreeAllWindowBuffers();
     SetMainCallback2(callback);
 }
@@ -285,31 +283,31 @@ void ShowEasyChatScreen(void)
     DoEasyChatScreen(gSpecialVar_0x8004, words, sub_80568C4);
 }
 
-static const u16 gUnknown_843F29C[] = {
+static const u16 sECPhrase_MysteryEventIsExciting[] = {
     EC_WORD_MYSTERY,
     EC_WORD_EVENT,
     EC_WORD_IS,
     EC_WORD_EXCITING
 };
 
-void sub_80FEF2C(void)
+static void CompareProfileResponseWithPassphrase(void)
 {
-    gSpecialVar_0x8004 = IsPhraseDifferentThanPlayerInput(gUnknown_843F29C, NELEMS(gUnknown_843F29C));
+    gSpecialVar_0x8004 = IsPhraseDifferentThanPlayerInput(sECPhrase_MysteryEventIsExciting, NELEMS(sECPhrase_MysteryEventIsExciting));
 }
 
-static const u16 gUnknown_843F2A4[] = {
+static const u16 sECPhrase_LinkTogetherWithAll[] = {
     EC_WORD_LINK,
     EC_WORD_TOGETHER,
     EC_WORD_WITH,
     EC_WORD_ALL
 };
 
-void sub_80FEF4C(void)
+static void CompareQuestionnaireResponseWithPassphrase(void)
 {
-    gSpecialVar_0x8004 = IsPhraseDifferentThanPlayerInput(gUnknown_843F2A4, NELEMS(gUnknown_843F2A4));
+    gSpecialVar_0x8004 = IsPhraseDifferentThanPlayerInput(sECPhrase_LinkTogetherWithAll, NELEMS(sECPhrase_LinkTogetherWithAll));
 }
 
-const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
+static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
     {
         .type = EASY_CHAT_TYPE_PROFILE,
         .numColumns = 2,
@@ -410,7 +408,7 @@ const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
     }
 };
 
-bool8 EasyChat_AllocateResources(u8 type, u16 *words)
+static bool8 EasyChat_AllocateResources(u8 type, u16 *words)
 {
     u8 templateId;
     int i;
@@ -424,68 +422,68 @@ bool8 EasyChat_AllocateResources(u8 type, u16 *words)
     sEasyChatScreen->state = 0;
     sEasyChatScreen->mainCursorColumn = 0;
     sEasyChatScreen->mainCursorRow = 0;
-    sEasyChatScreen->unk_09 = 0;
+    sEasyChatScreen->isAlphaMode = FALSE;
     templateId = GetEasyChatScreenTemplateId(type);
 
     sEasyChatScreen->numColumns = sEasyChatScreenTemplates[templateId].numColumns;
     sEasyChatScreen->numRows = sEasyChatScreenTemplates[templateId].numRows;
-    sEasyChatScreen->unk_07 = sEasyChatScreen->numColumns * sEasyChatScreen->numRows;
+    sEasyChatScreen->numWords = sEasyChatScreen->numColumns * sEasyChatScreen->numRows;
     sEasyChatScreen->templateId = templateId;
-    if (sEasyChatScreen->unk_07 > 9)
-        sEasyChatScreen->unk_07 = 9;
+    if (sEasyChatScreen->numWords > 9)
+        sEasyChatScreen->numWords = 9;
 
-    CpuCopy16(words, sEasyChatScreen->ecWordBuffer, sEasyChatScreen->unk_07 * sizeof(u16));
-    sEasyChatScreen->unk_0d = (GetNumDisplayableGroups() - 1) / 2 + 1;
+    CpuCopy16(words, sEasyChatScreen->ecWordBuffer, sEasyChatScreen->numWords * sizeof(u16));
+    sEasyChatScreen->selectGroupNumRows = (GetNumDisplayableGroups() - 1) / 2 + 1;
     return TRUE;
 }
 
-void EasyChat_FreeResources(void)
+static void EasyChat_FreeResources(void)
 {
     if (sEasyChatScreen != NULL)
         Free(sEasyChatScreen);
 }
 
-u16 sub_80FF028(void)
+static u16 EasyChatScreen_HandleJoypad(void)
 {
     switch (sEasyChatScreen->state)
     {
     case 0:
-        return sub_80FF098();
+        return HandleJoypad_SelectField();
     case 1:
-        return sub_80FF20C();
+        return HandleJoypad_SelectFooter();
     case 2:
-        return sub_80FF360();
+        return HandleJoypad_SelectGroup();
     case 3:
-        return sub_80FF41C();
+        return HandleJoypad_SelectWord();
     case 4:
-        return sub_80FF4A8();
+        return Cancel_HandleYesNoMenu();
     case 5:
-        return sub_80FF544();
+        return DelAll_HandleYesNoMenu();
     case 6:
-        return sub_80FF4F0();
+        return Confirm_HandleYesNoMenu();
     }
     return 0;
 }
 
-u16 sub_80FF098(void)
+static u16 HandleJoypad_SelectField(void)
 {
     do
     {
         if (JOY_NEW(A_BUTTON))
         {
             sEasyChatScreen->state = 2;
-            sEasyChatScreen->unk_0a = 0;
-            sEasyChatScreen->unk_0b = 0;
-            sEasyChatScreen->unk_0c = 0;
+            sEasyChatScreen->selectGroupCursorX = 0;
+            sEasyChatScreen->selectGroupCursorY = 0;
+            sEasyChatScreen->selectGroupRowsAbove = 0;
             return 9;
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            return sub_80FF590();
+            return Cancel_CreateYesNoMenu();
         }
         else if (JOY_NEW(START_BUTTON))
         {
-            return sub_80FF5C0();
+            return Confirm_CreateYesNoMenu();
         }
         else if (JOY_NEW(DPAD_UP))
         {
@@ -538,7 +536,7 @@ u16 sub_80FF098(void)
     return 2;
 }
 
-u16 sub_80FF20C(void)
+static u16 HandleJoypad_SelectFooter(void)
 {
     do
     {
@@ -547,21 +545,21 @@ u16 sub_80FF20C(void)
             switch (sEasyChatScreen->mainCursorColumn)
             {
             case 0:
-                return sub_80FF5A8();
+                return DelAll_CreateYesNoMenu();
             case 1:
-                return sub_80FF590();
+                return Cancel_CreateYesNoMenu();
             case 2:
-                return sub_80FF5C0();
+                return Confirm_CreateYesNoMenu();
             }
         }
 
         if (JOY_NEW(B_BUTTON))
         {
-            return sub_80FF590();
+            return Cancel_CreateYesNoMenu();
         }
         else if (JOY_NEW(START_BUTTON))
         {
-            return sub_80FF5C0();
+            return Confirm_CreateYesNoMenu();
         }
         else if (JOY_NEW(DPAD_UP))
         {
@@ -608,46 +606,46 @@ u16 sub_80FF20C(void)
     return 2;
 }
 
-u16 sub_80FF360(void)
+static u16 HandleJoypad_SelectGroup(void)
 {
     if (JOY_NEW(B_BUTTON))
-        return sub_80FF678();
+        return BackOutFromGroupToFieldSelect();
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (sEasyChatScreen->unk_0a != -1)
-            return sub_80FF5FC();
+        if (sEasyChatScreen->selectGroupCursorX != -1)
+            return OpenSelectedGroup();
 
-        switch (sEasyChatScreen->unk_0b)
+        switch (sEasyChatScreen->selectGroupCursorY)
         {
         case 0:
-            return sub_80FF688();
+            return ToggleGroupAlphaMode();
         case 1:
-            return sub_80FF6B4();
+            return DeleteSelectedWord();
         case 2:
-            return sub_80FF678();
+            return BackOutFromGroupToFieldSelect();
         }
     }
 
     if (JOY_NEW(SELECT_BUTTON))
-        return sub_80FF688();
+        return ToggleGroupAlphaMode();
 
     if (JOY_REPT(DPAD_UP))
-        return sub_80FF7CC(2);
+        return SelectGroupCursorAction(2);
 
     if (JOY_REPT(DPAD_DOWN))
-        return sub_80FF7CC(3);
+        return SelectGroupCursorAction(3);
 
     if (JOY_REPT(DPAD_LEFT))
-        return sub_80FF7CC(1);
+        return SelectGroupCursorAction(1);
 
     if (JOY_REPT(DPAD_RIGHT))
-        return sub_80FF7CC(0);
+        return SelectGroupCursorAction(0);
 
     return 0;
 }
 
-u16 sub_80FF41C(void)
+static u16 HandleJoypad_SelectWord(void)
 {
     if (JOY_NEW(B_BUTTON))
     {
@@ -656,30 +654,30 @@ u16 sub_80FF41C(void)
     }
 
     if (JOY_NEW(A_BUTTON))
-        return sub_80FF6C8();
+        return PlaceSelectedWord();
 
     if (JOY_NEW(START_BUTTON))
-        return sub_80FFA38(4);
+        return SelectWordCursorAction(4);
 
     if (JOY_NEW(SELECT_BUTTON))
-        return sub_80FFA38(5);
+        return SelectWordCursorAction(5);
 
     if (JOY_REPT(DPAD_UP))
-        return sub_80FFA38(2);
+        return SelectWordCursorAction(2);
 
     if (JOY_REPT(DPAD_DOWN))
-        return sub_80FFA38(3);
+        return SelectWordCursorAction(3);
 
     if (JOY_REPT(DPAD_LEFT))
-        return sub_80FFA38(1);
+        return SelectWordCursorAction(1);
 
     if (JOY_REPT(DPAD_RIGHT))
-        return sub_80FFA38(0);
+        return SelectWordCursorAction(0);
 
     return 0;
 }
 
-u16 sub_80FF4A8(void)
+static u16 Cancel_HandleYesNoMenu(void)
 {
     u8 var0;
 
@@ -687,7 +685,7 @@ u16 sub_80FF4A8(void)
     {
     case MENU_B_PRESSED: // B Button
     case 1: // No
-        sEasyChatScreen->state = sub_80FF5F0();
+        sEasyChatScreen->state = GetStateBackup();
         return 7;
     case 0: // Yes
         gSpecialVar_Result = 0;
@@ -698,24 +696,24 @@ u16 sub_80FF4A8(void)
     }
 }
 
-u16 sub_80FF4F0(void)
+static u16 Confirm_HandleYesNoMenu(void)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case MENU_B_PRESSED: // B Button
     case 1: // No
-        sEasyChatScreen->state = sub_80FF5F0();
+        sEasyChatScreen->state = GetStateBackup();
         return 7;
     case 0: // Yes
-        gSpecialVar_Result = sub_80FF78C();
-        sub_80FF6F0();
+        gSpecialVar_Result = HasECMessageChanged();
+        CommitECWords();
         return 23;
     default:
         return 0;
     }
 }
 
-u16 sub_80FF544(void)
+static u16 DelAll_HandleYesNoMenu(void)
 {
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
@@ -724,7 +722,7 @@ u16 sub_80FF544(void)
         sEasyChatScreen->state = 1;
         return 7;
     case 0: // Yes
-        sub_80FF728();
+        DeleteAllECFields();
         sEasyChatScreen->state = 1;
         return 8;
     default:
@@ -732,21 +730,21 @@ u16 sub_80FF544(void)
     }
 }
 
-u16 sub_80FF590(void)
+static u16 Cancel_CreateYesNoMenu(void)
 {
     sEasyChatScreen->stateBackup = sEasyChatScreen->state;
     sEasyChatScreen->state = 4;
     return 5;
 }
 
-u16 sub_80FF5A8(void)
+static u16 DelAll_CreateYesNoMenu(void)
 {
     sEasyChatScreen->stateBackup = sEasyChatScreen->state;
     sEasyChatScreen->state = 5;
     return 4;
 }
 
-u16 sub_80FF5C0(void)
+static u16 Confirm_CreateYesNoMenu(void)
 {
     sEasyChatScreen->stateBackup = sEasyChatScreen->state;
     if (IsEcWordBufferUninitialized())
@@ -761,94 +759,94 @@ u16 sub_80FF5C0(void)
     }
 }
 
-u8 sub_80FF5F0(void)
+static u8 GetStateBackup(void)
 {
     return sEasyChatScreen->stateBackup;
 }
 
-int sub_80FF5FC(void)
+int OpenSelectedGroup(void)
 {
-    u16 var1;
+    u16 numDisplayedWords;
 
-    if (sEasyChatScreen->unk_09 == 0)
+    if (!sEasyChatScreen->isAlphaMode)
     {
-        u8 groupId = GetSelectedGroupByIndex(sub_80FFB8C());
+        u8 groupId = GetSelectedGroupByIndex(GetSelectedGroupIndex());
         GetUnlockedECWords(FALSE, groupId);
     }
     else
     {
-        GetUnlockedECWords(TRUE, sub_80FFBAC());
+        GetUnlockedECWords(TRUE, GetSelectedLetter());
     }
 
-    var1 = GetNumDisplayedWords();
-    if (var1 == 0)
+    numDisplayedWords = GetNumDisplayedWords();
+    if (numDisplayedWords == 0)
         return 0;
 
-    sEasyChatScreen->unk_0f = (var1 - 1) / 2;
-    sEasyChatScreen->unk_0e = 0;
-    sEasyChatScreen->unk_10 = 0;
-    sEasyChatScreen->unk_11 = 0;
+    sEasyChatScreen->selectWordNumRows = (numDisplayedWords - 1) / 2;
+    sEasyChatScreen->selectWordRowsAbove = 0;
+    sEasyChatScreen->selectWordCursorX = 0;
+    sEasyChatScreen->selectWordCursorY = 0;
     sEasyChatScreen->state = 3;
     return 11;
 }
 
-int sub_80FF678(void)
+int BackOutFromGroupToFieldSelect(void)
 {
     sEasyChatScreen->state = 0;
     return 10;
 }
 
-int sub_80FF688(void)
+int ToggleGroupAlphaMode(void)
 {
-    sEasyChatScreen->unk_0a = 0;
-    sEasyChatScreen->unk_0b = 0;
-    sEasyChatScreen->unk_0c = 0;
-    if (!sEasyChatScreen->unk_09)
-        sEasyChatScreen->unk_09 = 1;
+    sEasyChatScreen->selectGroupCursorX = 0;
+    sEasyChatScreen->selectGroupCursorY = 0;
+    sEasyChatScreen->selectGroupRowsAbove = 0;
+    if (!sEasyChatScreen->isAlphaMode)
+        sEasyChatScreen->isAlphaMode = TRUE;
     else
-        sEasyChatScreen->unk_09 = 0;
+        sEasyChatScreen->isAlphaMode = FALSE;
 
     return 22;
 }
 
-int sub_80FF6B4(void)
+int DeleteSelectedWord(void)
 {
-    sub_80FF768(0xFFFF);
+    SetEasyChatWordToField(0xFFFF);
     return 1;
 }
 
-int sub_80FF6C8(void)
+int PlaceSelectedWord(void)
 {
-    u16 easyChatWord = GetDisplayedWordByIndex(sub_80FFBE4());
-    sub_80FF768(easyChatWord);
+    u16 easyChatWord = GetDisplayedWordByIndex(GetSelectWordCursorPos());
+    SetEasyChatWordToField(easyChatWord);
     sEasyChatScreen->state = 0;
     return 12;
 }
 
-void sub_80FF6F0(void)
+static void CommitECWords(void)
 {
     u16 i;
-    for (i = 0; i < sEasyChatScreen->unk_07; i++)
+    for (i = 0; i < sEasyChatScreen->numWords; i++)
         sEasyChatScreen->words[i] = sEasyChatScreen->ecWordBuffer[i];
 }
 
-void sub_80FF728(void)
+static void DeleteAllECFields(void)
 {
     u16 i;
-    for (i = 0; i < sEasyChatScreen->unk_07; i++)
+    for (i = 0; i < sEasyChatScreen->numWords; i++)
         sEasyChatScreen->ecWordBuffer[i] = 0xFFFF;
 }
 
-void sub_80FF768(u16 easyChatWord)
+static void SetEasyChatWordToField(u16 easyChatWord)
 {
-    u16 index = sub_80FFB6C();
+    u16 index = GetSelectedFieldIndex();
     sEasyChatScreen->ecWordBuffer[index] = easyChatWord;
 }
 
-bool8 sub_80FF78C(void)
+static bool8 HasECMessageChanged(void)
 {
     u16 i;
-    for (i = 0; i < sEasyChatScreen->unk_07; i++)
+    for (i = 0; i < sEasyChatScreen->numWords; i++)
     {
         if (sEasyChatScreen->ecWordBuffer[i] != sEasyChatScreen->words[i])
             return TRUE;
@@ -857,76 +855,76 @@ bool8 sub_80FF78C(void)
     return FALSE;
 }
 
-u16 sub_80FF7CC(u32 action)
+static u16 SelectGroupCursorAction(u32 action)
 {
-    if (sEasyChatScreen->unk_0a != -1)
+    if (sEasyChatScreen->selectGroupCursorX != -1)
     {
-        if (sEasyChatScreen->unk_09 == 0)
-            return sub_80FF80C(action);
+        if (!sEasyChatScreen->isAlphaMode)
+            return UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(action);
         else
-            return sub_80FF8D8(action);
+            return UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(action);
     }
     else
     {
-        return sub_80FF968(action);
+        return UpdateSelectGroupCursorPos_InsideBlueBox(action);
     }
 }
 
-int sub_80FF80C(u32 arg0)
+int UpdateSelectGroupCursorPos_OutsideBlueBox_GroupMode(u32 arg0)
 {
     switch (arg0)
     {
     case 2:
-        if (sEasyChatScreen->unk_0b != -sEasyChatScreen->unk_0c)
+        if (sEasyChatScreen->selectGroupCursorY != -sEasyChatScreen->selectGroupRowsAbove)
         {
-            if (sEasyChatScreen->unk_0b)
+            if (sEasyChatScreen->selectGroupCursorY)
             {
-                sEasyChatScreen->unk_0b--;
+                sEasyChatScreen->selectGroupCursorY--;
                 return 14;
             }
             else
             {
-                sEasyChatScreen->unk_0c--;
+                sEasyChatScreen->selectGroupRowsAbove--;
                 return 16;
             }
         }
         break;
     case 3:
-        if (sEasyChatScreen->unk_0b + sEasyChatScreen->unk_0c < sEasyChatScreen->unk_0d - 1)
+        if (sEasyChatScreen->selectGroupCursorY + sEasyChatScreen->selectGroupRowsAbove < sEasyChatScreen->selectGroupNumRows - 1)
         {
             int var0;
-            if (sEasyChatScreen->unk_0b < 3)
+            if (sEasyChatScreen->selectGroupCursorY < 3)
             {
-                sEasyChatScreen->unk_0b++;
+                sEasyChatScreen->selectGroupCursorY++;
                 var0 = 14;
             }
             else
             {
-                sEasyChatScreen->unk_0c++;
+                sEasyChatScreen->selectGroupRowsAbove++;
                 var0 = 15;
             }
 
-            sub_80FFC1C();
+            MoveGroupCursorXToMaxCol();
             return var0;
         }
         break;
     case 1:
-        if (sEasyChatScreen->unk_0a)
-            sEasyChatScreen->unk_0a--;
+        if (sEasyChatScreen->selectGroupCursorX)
+            sEasyChatScreen->selectGroupCursorX--;
         else
-            sub_80FF9E8();
+            GroupCursorMoveToBlueBox();
 
         return 14;
     case 0:
-        if (sEasyChatScreen->unk_0a < 1)
+        if (sEasyChatScreen->selectGroupCursorX < 1)
         {
-            sEasyChatScreen->unk_0a++;
-            if (sub_80FFC6C())
-                sub_80FF9E8();
+            sEasyChatScreen->selectGroupCursorX++;
+            if (GroupSelectCursorXPosTooFarRight())
+                GroupCursorMoveToBlueBox();
         }
         else
         {
-            sub_80FF9E8();
+            GroupCursorMoveToBlueBox();
         }
         return 14;
     }
@@ -934,36 +932,36 @@ int sub_80FF80C(u32 arg0)
     return 0;
 }
 
-int sub_80FF8D8(u32 arg0)
+int UpdateSelectGroupCursorPos_OutsideBlueBox_AlphaMode(u32 arg0)
 {
     switch (arg0)
     {
     case 2:
-        if (sEasyChatScreen->unk_0b > 0)
-            sEasyChatScreen->unk_0b--;
+        if (sEasyChatScreen->selectGroupCursorY > 0)
+            sEasyChatScreen->selectGroupCursorY--;
         else
-            sEasyChatScreen->unk_0b = 3;
+            sEasyChatScreen->selectGroupCursorY = 3;
 
-        sub_80FFC1C();
+        MoveGroupCursorXToMaxCol();
         return 14;
     case 3:
-        if (sEasyChatScreen->unk_0b < 3)
-            sEasyChatScreen->unk_0b++;
+        if (sEasyChatScreen->selectGroupCursorY < 3)
+            sEasyChatScreen->selectGroupCursorY++;
         else
-            sEasyChatScreen->unk_0b = 0;
+            sEasyChatScreen->selectGroupCursorY = 0;
 
-        sub_80FFC1C();
+        MoveGroupCursorXToMaxCol();
         return 14;
     case 0:
-        sEasyChatScreen->unk_0a++;
-        if (sub_80FFC6C())
-            sub_80FF9E8();
+        sEasyChatScreen->selectGroupCursorX++;
+        if (GroupSelectCursorXPosTooFarRight())
+            GroupCursorMoveToBlueBox();
 
         return 14;
     case 1:
-        sEasyChatScreen->unk_0a--;
-        if (sEasyChatScreen->unk_0a < 0)
-            sub_80FF9E8();
+        sEasyChatScreen->selectGroupCursorX--;
+        if (sEasyChatScreen->selectGroupCursorX < 0)
+            GroupCursorMoveToBlueBox();
 
         return 14;
     }
@@ -971,137 +969,137 @@ int sub_80FF8D8(u32 arg0)
     return 0;
 }
 
-int sub_80FF968(u32 arg0)
+int UpdateSelectGroupCursorPos_InsideBlueBox(u32 arg0)
 {
     switch (arg0)
     {
     case 2:
-        if (sEasyChatScreen->unk_0b)
-            sEasyChatScreen->unk_0b--;
+        if (sEasyChatScreen->selectGroupCursorY)
+            sEasyChatScreen->selectGroupCursorY--;
         else
-            sEasyChatScreen->unk_0b = 2;
+            sEasyChatScreen->selectGroupCursorY = 2;
 
         return 14;
     case 3:
-        if (sEasyChatScreen->unk_0b < 2)
-            sEasyChatScreen->unk_0b++;
+        if (sEasyChatScreen->selectGroupCursorY < 2)
+            sEasyChatScreen->selectGroupCursorY++;
         else
-            sEasyChatScreen->unk_0b = 0;
+            sEasyChatScreen->selectGroupCursorY = 0;
 
         return 14;
     case 1:
-        sEasyChatScreen->unk_0b++;
-        sub_80FFA0C();
+        sEasyChatScreen->selectGroupCursorY++;
+        GroupCursorWrapAroundLeft();
         return 14;
     case 0:
-        sEasyChatScreen->unk_0a = 0;
-        sEasyChatScreen->unk_0b++;
+        sEasyChatScreen->selectGroupCursorX = 0;
+        sEasyChatScreen->selectGroupCursorY++;
         return 14;
     }
 
     return 0;
 }
 
-void sub_80FF9E8(void)
+static void GroupCursorMoveToBlueBox(void)
 {
-    sEasyChatScreen->unk_0a = 0xFF;
-    if (sEasyChatScreen->unk_0b)
-        sEasyChatScreen->unk_0b--;
+    sEasyChatScreen->selectGroupCursorX = 0xFF;
+    if (sEasyChatScreen->selectGroupCursorY)
+        sEasyChatScreen->selectGroupCursorY--;
 }
 
-void sub_80FFA0C(void)
+static void GroupCursorWrapAroundLeft(void)
 {
-    if (sEasyChatScreen->unk_09 == 0)
+    if (!sEasyChatScreen->isAlphaMode)
     {
-        sEasyChatScreen->unk_0a = 1;
-        sub_80FFC1C();
+        sEasyChatScreen->selectGroupCursorX = 1;
+        MoveGroupCursorXToMaxCol();
     }
     else
     {
-        sEasyChatScreen->unk_0a = sub_80FFC04(sEasyChatScreen->unk_0b);
+        sEasyChatScreen->selectGroupCursorX = GetMaxGroupCursorXinAlphaMode(sEasyChatScreen->selectGroupCursorY);
     }
 }
 
-u16 sub_80FFA38(u32 arg0)
+static u16 SelectWordCursorAction(u32 arg0)
 {
     u16 result;
     switch (arg0)
     {
-    case 2:
-        if (sEasyChatScreen->unk_11 + sEasyChatScreen->unk_0e > 0)
+    case 2: // up
+        if (sEasyChatScreen->selectWordCursorY + sEasyChatScreen->selectWordRowsAbove > 0)
         {
-            if (sEasyChatScreen->unk_11 > 0)
+            if (sEasyChatScreen->selectWordCursorY > 0)
             {
-                sEasyChatScreen->unk_11--;
+                sEasyChatScreen->selectWordCursorY--;
                 result = 17;
             }
             else
             {
-                sEasyChatScreen->unk_0e--;
+                sEasyChatScreen->selectWordRowsAbove--;
                 result = 18;
             }
 
-            sub_80FFC44();
+            MoveWordCursorXToMaxCol();
             return result;
         }
         break;
-    case 3:
-        if (sEasyChatScreen->unk_11 + sEasyChatScreen->unk_0e < sEasyChatScreen->unk_0f)
+    case 3: // down
+        if (sEasyChatScreen->selectWordCursorY + sEasyChatScreen->selectWordRowsAbove < sEasyChatScreen->selectWordNumRows)
         {
-            if (sEasyChatScreen->unk_11 < 3)
+            if (sEasyChatScreen->selectWordCursorY < 3)
             {
-                sEasyChatScreen->unk_11++;
+                sEasyChatScreen->selectWordCursorY++;
                 result = 17;
             }
             else
             {
-                sEasyChatScreen->unk_0e++;
+                sEasyChatScreen->selectWordRowsAbove++;
                 result = 19;
             }
 
-            sub_80FFC44();
+            MoveWordCursorXToMaxCol();
             return result;
         }
         break;
-    case 1:
-        if (sEasyChatScreen->unk_10 > 0)
-            sEasyChatScreen->unk_10--;
+    case 1: // left
+        if (sEasyChatScreen->selectWordCursorX > 0)
+            sEasyChatScreen->selectWordCursorX--;
         else
-            sEasyChatScreen->unk_10 = 1;
+            sEasyChatScreen->selectWordCursorX = 1;
 
-        sub_80FFC44();
+        MoveWordCursorXToMaxCol();
         return 17;
-    case 0:
-        if (sEasyChatScreen->unk_10 < 1)
+    case 0: // right
+        if (sEasyChatScreen->selectWordCursorX < 1)
         {
-            sEasyChatScreen->unk_10++;
-            if (sub_80FFCC0())
-                sEasyChatScreen->unk_10 = 0;
+            sEasyChatScreen->selectWordCursorX++;
+            if (WordSelectCursorXPosTooFarRight())
+                sEasyChatScreen->selectWordCursorX = 0;
         }
         else
         {
-            sEasyChatScreen->unk_10 = 0;
+            sEasyChatScreen->selectWordCursorX = 0;
         }
         return 17;
-    case 4:
-        if (sEasyChatScreen->unk_0e)
+    case 4: // pg up
+        if (sEasyChatScreen->selectWordRowsAbove)
         {
-            if (sEasyChatScreen->unk_0e > 3)
-                sEasyChatScreen->unk_0e -= 4;
+            if (sEasyChatScreen->selectWordRowsAbove > 3)
+                sEasyChatScreen->selectWordRowsAbove -= 4;
             else
-                sEasyChatScreen->unk_0e = 0;
+                sEasyChatScreen->selectWordRowsAbove = 0;
 
             return 20;
         }
         break;
-    case 5:
-        if (sEasyChatScreen->unk_0e <= sEasyChatScreen->unk_0f - 4)
+    case 5: // pg dn
+        if (sEasyChatScreen->selectWordRowsAbove <= sEasyChatScreen->selectWordNumRows - 4)
         {
-            sEasyChatScreen->unk_0e += 4;
-            if (sEasyChatScreen->unk_0e > sEasyChatScreen->unk_0f - 3)
-                sEasyChatScreen->unk_0e = sEasyChatScreen->unk_0f + -3u;
+            sEasyChatScreen->selectWordRowsAbove += 4;
+            if (sEasyChatScreen->selectWordRowsAbove > sEasyChatScreen->selectWordNumRows - 3)
+                sEasyChatScreen->selectWordRowsAbove = sEasyChatScreen->selectWordNumRows + -3u;
 
-            sub_80FFC44();
+            MoveWordCursorXToMaxCol();
             return 21;
         }
         break;
@@ -1110,36 +1108,36 @@ u16 sub_80FFA38(u32 arg0)
     return 0;
 }
 
-u16 sub_80FFB6C(void)
+static u16 GetSelectedFieldIndex(void)
 {
     return (sEasyChatScreen->mainCursorRow * sEasyChatScreen->numColumns) + sEasyChatScreen->mainCursorColumn;
 }
 
-u16 sub_80FFB8C(void)
+static u16 GetSelectedGroupIndex(void)
 {
-    return 2 * (sEasyChatScreen->unk_0b + sEasyChatScreen->unk_0c) + sEasyChatScreen->unk_0a;
+    return 2 * (sEasyChatScreen->selectGroupCursorY + sEasyChatScreen->selectGroupRowsAbove) + sEasyChatScreen->selectGroupCursorX;
 }
 
-const u8 gUnknown_843F39C[][7] = {
-    {0x01, 0x02, 0x03, 0x04, 0x05, 0x06},
-    {0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c},
-    {0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13},
-    {0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a}
+static const u8 sAlphabetLayout[][7] = {
+    { 1,  2,  3,  4,  5,  6},
+    { 7,  8,  9, 10, 11, 12},
+    {13, 14, 15, 16, 17, 18, 19},
+    {20, 21, 22, 23, 24, 25, 26}
 };
 
-int sub_80FFBAC(void)
+int GetSelectedLetter(void)
 {
-    int var0 = sEasyChatScreen->unk_0a < NELEMS(*gUnknown_843F39C) ? sEasyChatScreen->unk_0a : 0;
-    int var1 = sEasyChatScreen->unk_0b < NELEMS(gUnknown_843F39C) ? sEasyChatScreen->unk_0b : 0;
-    return gUnknown_843F39C[var1][var0];
+    int col = sEasyChatScreen->selectGroupCursorX < NELEMS(*sAlphabetLayout) ? sEasyChatScreen->selectGroupCursorX : 0;
+    int row = sEasyChatScreen->selectGroupCursorY < NELEMS(sAlphabetLayout) ? sEasyChatScreen->selectGroupCursorY : 0;
+    return sAlphabetLayout[row][col];
 }
 
-u16 sub_80FFBE4(void)
+static u16 GetSelectWordCursorPos(void)
 {
-    return 2 * (sEasyChatScreen->unk_11 + sEasyChatScreen->unk_0e)  + sEasyChatScreen->unk_10;
+    return 2 * (sEasyChatScreen->selectWordCursorY + sEasyChatScreen->selectWordRowsAbove)  + sEasyChatScreen->selectWordCursorX;
 }
 
-u8 sub_80FFC04(u8 arg0)
+static u8 GetMaxGroupCursorXinAlphaMode(u8 arg0)
 {
     switch (arg0)
     {
@@ -1151,39 +1149,39 @@ u8 sub_80FFC04(u8 arg0)
     }
 }
 
-void sub_80FFC1C(void)
+static void MoveGroupCursorXToMaxCol(void)
 {
-    while (sub_80FFC6C())
+    while (GroupSelectCursorXPosTooFarRight())
     {
-        if (sEasyChatScreen->unk_0a)
-            sEasyChatScreen->unk_0a--;
+        if (sEasyChatScreen->selectGroupCursorX)
+            sEasyChatScreen->selectGroupCursorX--;
         else
             break;
     }
 }
 
-void sub_80FFC44(void)
+static void MoveWordCursorXToMaxCol(void)
 {
-    while (sub_80FFCC0())
+    while (WordSelectCursorXPosTooFarRight())
     {
-        if (sEasyChatScreen->unk_10)
-            sEasyChatScreen->unk_10--;
+        if (sEasyChatScreen->selectWordCursorX)
+            sEasyChatScreen->selectWordCursorX--;
         else
             break;
     }
 }
 
-bool8 sub_80FFC6C(void)
+static bool8 GroupSelectCursorXPosTooFarRight(void)
 {
-    if (sEasyChatScreen->unk_09 == 0)
-        return sub_80FFB8C() >= GetNumDisplayableGroups() ? TRUE : FALSE;
+    if (!sEasyChatScreen->isAlphaMode)
+        return GetSelectedGroupIndex() >= GetNumDisplayableGroups() ? TRUE : FALSE;
     else
-        return sEasyChatScreen->unk_0a > sub_80FFC04(sEasyChatScreen->unk_0b) ? TRUE : FALSE;
+        return sEasyChatScreen->selectGroupCursorX > GetMaxGroupCursorXinAlphaMode(sEasyChatScreen->selectGroupCursorY) ? TRUE : FALSE;
 }
 
-bool8 sub_80FFCC0(void)
+static bool8 WordSelectCursorXPosTooFarRight(void)
 {
-    return sub_80FFBE4() >= GetNumDisplayedWords() ? TRUE : FALSE;
+    return GetSelectWordCursorPos() >= GetNumDisplayedWords() ? TRUE : FALSE;
 }
 
 u8 GetEasyChatScreenFrameId(void)
@@ -1233,7 +1231,7 @@ void GetEasyChatConfirmText(const u8 **str1, const u8 **str2)
     *str2 = sEasyChatScreenTemplates[sEasyChatScreen->templateId].confirmText2;
 }
 
-void sub_80FFDC8(const u8 **str1, const u8 **str2)
+void GetEasyChatConfirmCancelText(const u8 **str1, const u8 **str2)
 {
     switch (sEasyChatScreen->type)
     {
@@ -1255,36 +1253,36 @@ void GetEasyChatConfirmDeletionText(const u8 **str1, const u8 **str2)
     *str2 = gUnknown_8418956;
 }
 
-void sub_80FFE08(u8 *arg0, u8 *arg1)
+void GetECSelectGroupCursorCoords(u8 *Xp, u8 *Yp)
 {
-    *arg0 = sEasyChatScreen->unk_0a;
-    *arg1 = sEasyChatScreen->unk_0b;
+    *Xp = sEasyChatScreen->selectGroupCursorX;
+    *Yp = sEasyChatScreen->selectGroupCursorY;
 }
 
-u8 sub_80FFE1C(void)
+bool8 IsEasyChatAlphaMode(void)
 {
-    return sEasyChatScreen->unk_09;
+    return sEasyChatScreen->isAlphaMode;
 }
 
-u8 sub_80FFE28(void)
+u8 GetECSelectGroupRowsAbove(void)
 {
-    return sEasyChatScreen->unk_0c;
+    return sEasyChatScreen->selectGroupRowsAbove;
 }
 
-void sub_80FFE34(s8 *arg0, s8 *arg1)
+void GetECSelectWordCursorCoords(s8 *Xp, s8 *Yp)
 {
-    *arg0 = sEasyChatScreen->unk_10;
-    *arg1 = sEasyChatScreen->unk_11;
+    *Xp = sEasyChatScreen->selectWordCursorX;
+    *Yp = sEasyChatScreen->selectWordCursorY;
 }
 
-u8 sub_80FFE48(void)
+u8 GetECSelectWordRowsAbove(void)
 {
-    return sEasyChatScreen->unk_0e;
+    return sEasyChatScreen->selectWordRowsAbove;
 }
 
-u8 sub_80FFE54(void)
+u8 GetECSelectWordNumRows(void)
 {
-    return sEasyChatScreen->unk_0f;
+    return sEasyChatScreen->selectWordNumRows;
 }
 
 u8 unref_sub_80FFE60(void)
@@ -1292,16 +1290,16 @@ u8 unref_sub_80FFE60(void)
     return 0;
 }
 
-bool32 sub_80FFE64(void)
+bool32 ShouldDrawECUpArrow(void)
 {
     switch (sEasyChatScreen->state)
     {
     case 2:
-        if (sEasyChatScreen->unk_09 == 0 && sEasyChatScreen->unk_0c)
+        if (!sEasyChatScreen->isAlphaMode && sEasyChatScreen->selectGroupRowsAbove != 0)
             return TRUE;
         break;
     case 3:
-        if (sEasyChatScreen->unk_0e)
+        if (sEasyChatScreen->selectWordRowsAbove != 0)
             return TRUE;
         break;
     }
@@ -1309,16 +1307,16 @@ bool32 sub_80FFE64(void)
     return FALSE;
 }
 
-bool32 sub_80FFE98(void)
+bool32 ShouldDrawECDownArrow(void)
 {
     switch (sEasyChatScreen->state)
     {
     case 2:
-        if (sEasyChatScreen->unk_09 == 0 && sEasyChatScreen->unk_0c + 4 <= sEasyChatScreen->unk_0d - 1)
+        if (!sEasyChatScreen->isAlphaMode && sEasyChatScreen->selectGroupRowsAbove + 4 <= sEasyChatScreen->selectGroupNumRows - 1)
             return TRUE;
         break;
     case 3:
-        if (sEasyChatScreen->unk_0e + 4 <= sEasyChatScreen->unk_0f)
+        if (sEasyChatScreen->selectWordRowsAbove + 4 <= sEasyChatScreen->selectWordNumRows)
             return TRUE;
         break;
     }
@@ -1326,7 +1324,7 @@ bool32 sub_80FFE98(void)
     return FALSE;
 }
 
-bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
+static bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
 {
     u8 i;
 
@@ -1339,7 +1337,7 @@ bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
     return FALSE;
 }
 
-u8 GetEasyChatScreenTemplateId(u8 type)
+static u8 GetEasyChatScreenTemplateId(u8 type)
 {
     u32 i;
 
@@ -1352,11 +1350,11 @@ u8 GetEasyChatScreenTemplateId(u8 type)
     return 0;
 }
 
-bool32 IsEcWordBufferUninitialized(void)
+static bool32 IsEcWordBufferUninitialized(void)
 {
     int i;
 
-    for (i = 0; i < sEasyChatScreen->unk_07; i++)
+    for (i = 0; i < sEasyChatScreen->numWords; i++)
     {
         if (sEasyChatScreen->ecWordBuffer[i] != 0xFFFF)
             return FALSE;

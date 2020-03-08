@@ -1209,4 +1209,7 @@ extern const u8 CableClub_Text_AwaitingLinkupBCancel[];
 extern const u8 CableClub_Text_StartLinkWithXPlayersAConfirmBCancel[];
 extern const u8 CableClub_Text_PleaseWaitBCancel[];
 
+// fldeff_flash
+extern const u8 EventScript_FldEffFlash[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

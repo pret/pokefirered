@@ -364,7 +364,7 @@ bool8 sub_80F8110(u8 mapsec, u8 forceFirstTime)
     }
 }
 
-bool8 sub_80F8154(u8 mapsec, u8 forceFirstTime)
+bool32 sub_80F8154(u8 mapsec, u8 forceFirstTime)
 {
     if (gQuestLogState == 2)
     {

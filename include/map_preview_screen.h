@@ -50,5 +50,10 @@ u16 sub_80F856C(u8 id);
 bool8 sub_80F8110(u8 mapsec, bool8 forceFirstTime);
 bool32 sub_80F83B0(void);
 const struct MapPreviewScreen * GetDungeonMapPreviewScreenInfo(u8 mapsec);
+bool32 sub_80F8154(u8 mapsec, u8 forceFirstTime);
+void sub_80F8180(void);
+void sub_80F819C(u8 mapsec);
+bool32 sub_80F8258(void);
+void sub_80F8234(s32 windowId);
 
 #endif //GUARD_MAP_PREVIEW_SCREEN_H

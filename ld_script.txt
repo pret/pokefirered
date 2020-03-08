@@ -226,7 +226,8 @@ SECTIONS {
         src/link_rfu_2.o(.text);
         src/link_rfu_3.o(.text);
         src/AgbRfu_LinkManager.o(.text);
-        asm/easy_chat_2.o(.text);
+        src/easy_chat_2.o(.text);
+        src/easy_chat_3.o(.text);
         src/pokedex_screen.o(.text);
         asm/pokedex_screen.o(.text);
         src/list_menu.o(.text);
@@ -517,7 +518,8 @@ SECTIONS {
         src/map_preview_screen.o(.rodata);
         src/link_rfu_2.o(.rodata);
         src/link_rfu_3.o(.rodata);
-        data/easy_chat_2.o(.rodata);
+        src/easy_chat_2.o(.rodata);
+        src/easy_chat_3.o(.rodata);
         src/pokedex_screen.o(.rodata);
         data/pokedex_screen.o(.rodata);
         src/list_menu.o(.rodata);

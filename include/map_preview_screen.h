@@ -34,10 +34,14 @@ enum MapPreviewScreenId
     MPS_COUNT
 };
 
+#define MPS_TYPE_CAVE   0
+#define MPS_TYPE_FOREST 1
+#define MPS_TYPE_ANY    2
+
 struct MapPreviewScreen
 {
     u8 mapsec;
-    bool8 type;
+    u8 type;
     u16 flagId;
     const void * tilesptr;
     const void * tilemapptr;

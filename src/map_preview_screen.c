@@ -88,7 +88,7 @@ static const u8 gAlteringCaveMapPreviewTilemap[] = INCBIN_U8("data/map_preview/a
 static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     [MPS_VIRIDIAN_FOREST] = {
         .mapsec = MAPSEC_VIRIDIAN_FOREST,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_VIRIDIAN_FOREST,
         .tilesptr = gViridianForestMapPreviewTiles,
         .tilemapptr = gViridianForestMapPreviewTilemap,
@@ -96,7 +96,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_MT_MOON] = {
         .mapsec = MAPSEC_MT_MOON,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_MT_MOON_1F,
         .tilesptr = gMtMoonMapPreviewTiles,
         .tilemapptr = gMtMoonMapPreviewTilemap,
@@ -104,7 +104,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_DIGLETTS_CAVE] = {
         .mapsec = MAPSEC_DIGLETTS_CAVE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_DIGLETTS_CAVE_B1F,
         .tilesptr = gDiglettsCaveMapPreviewTiles,
         .tilemapptr = gDiglettsCaveMapPreviewTilemap,
@@ -112,7 +112,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_ROCK_TUNNEL] = {
         .mapsec = MAPSEC_ROCK_TUNNEL,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_ROCK_TUNNEL_1F,
         .tilesptr = gRockTunnelMapPreviewTiles,
         .tilemapptr = gRockTunnelMapPreviewTilemap,
@@ -120,7 +120,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_POKEMON_TOWER] = {
         .mapsec = MAPSEC_POKEMON_TOWER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_POKEMON_TOWER_1F,
         .tilesptr = gPokemonTowerMapPreviewTiles,
         .tilemapptr = gPokemonTowerMapPreviewTilemap,
@@ -128,7 +128,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_SAFARI_ZONE] = {
         .mapsec = MAPSEC_KANTO_SAFARI_ZONE,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_SAFARI_ZONE_CENTER,
         .tilesptr = gKantoSafariZoneMapPreviewTiles,
         .tilemapptr = gKantoSafariZoneMapPreviewTilemap,
@@ -136,7 +136,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_SEAFOAM_ISLANDS] = {
         .mapsec = MAPSEC_SEAFOAM_ISLANDS,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEAFOAM_ISLANDS_1F,
         .tilesptr = gSeafoamIslandsMapPreviewTiles,
         .tilemapptr = gSeafoamIslandsMapPreviewTilemap,
@@ -144,7 +144,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_POKEMON_MANSION] = {
         .mapsec = MAPSEC_POKEMON_MANSION,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_POKEMON_MANSION_1F,
         .tilesptr = gPokemonMansionMapPreviewTiles,
         .tilemapptr = gPokemonMansionMapPreviewTilemap,
@@ -152,7 +152,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_ROCKET_HIDEOUT] = {
         .mapsec = MAPSEC_ROCKET_HIDEOUT,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_ROCKET_HIDEOUT_B1F,
         .tilesptr = gRocketHideoutMapPreviewTiles,
         .tilemapptr = gRocketHideoutMapPreviewTilemap,
@@ -160,7 +160,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_SILPH_CO] = {
         .mapsec = MAPSEC_SILPH_CO,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SILPH_CO_1F,
         .tilesptr = gSilphCoMapPreviewTiles,
         .tilemapptr = gSilphCoMapPreviewTilemap,
@@ -168,7 +168,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_VICTORY_ROAD] = {
         .mapsec = MAPSEC_KANTO_VICTORY_ROAD,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_VICTORY_ROAD_1F,
         .tilesptr = gKantoVictoryRoadMapPreviewTiles,
         .tilemapptr = gKantoVictoryRoadMapPreviewTilemap,
@@ -176,7 +176,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_CERULEAN_CAVE] = {
         .mapsec = MAPSEC_CERULEAN_CAVE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_CERULEAN_CAVE_1F,
         .tilesptr = gCeruleanCaveMapPreviewTiles,
         .tilemapptr = gCeruleanCaveMapPreviewTilemap,
@@ -184,7 +184,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_POWER_PLANT] = {
         .mapsec = MAPSEC_POWER_PLANT,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_POWER_PLANT,
         .tilesptr = gPowerPlantMapPreviewTiles,
         .tilemapptr = gPowerPlantMapPreviewTilemap,
@@ -192,7 +192,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_MT_EMBER] = {
         .mapsec = MAPSEC_MT_EMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_MT_EMBER_EXTERIOR,
         .tilesptr = gMtEmberMapPreviewTiles,
         .tilemapptr = gMtEmberMapPreviewTilemap,
@@ -200,7 +200,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_ROCKET_WAREHOUSE] = {
         .mapsec = MAPSEC_ROCKET_WAREHOUSE,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST,
         .tilesptr = gRocketWarehouseMapPreviewTiles,
         .tilemapptr = gRocketWarehouseMapPreviewTilemap,
@@ -208,7 +208,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_MONEAN_CHAMBER] = {
         .mapsec = MAPSEC_MONEAN_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -216,7 +216,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_DOTTED_HOLE] = {
         .mapsec = MAPSEC_DOTTED_HOLE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F,
         .tilesptr = gDottedHoleMapPreviewTiles,
         .tilemapptr = gDottedHoleMapPreviewTilemap,
@@ -224,7 +224,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_BERRY_FOREST] = {
         .mapsec = MAPSEC_BERRY_FOREST,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST,
         .tilesptr = gBerryForestMapPreviewTiles,
         .tilemapptr = gBerryForestMapPreviewTilemap,
@@ -232,7 +232,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_ICEFALL_CAVE] = {
         .mapsec = MAPSEC_ICEFALL_CAVE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE,
         .tilesptr = gIcefallCaveMapPreviewTiles,
         .tilemapptr = gIcefallCaveMapPreviewTilemap,
@@ -240,7 +240,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_LOST_CAVE] = {
         .mapsec = MAPSEC_LOST_CAVE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE,
         .tilesptr = gLostCaveMapPreviewTiles,
         .tilemapptr = gLostCaveMapPreviewTilemap,
@@ -248,7 +248,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_ALTERING_CAVE] = {
         .mapsec = MAPSEC_ALTERING_CAVE,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SIX_ISLAND_ALTERING_CAVE,
         .tilesptr = gAlteringCaveMapPreviewTiles,
         .tilemapptr = gAlteringCaveMapPreviewTilemap,
@@ -256,7 +256,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_PATTERN_BUSH] = {
         .mapsec = MAPSEC_PATTERN_BUSH,
-        .type = TRUE,
+        .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH,
         .tilesptr = gViridianForestMapPreviewTiles,
         .tilemapptr = gViridianForestMapPreviewTilemap,
@@ -264,7 +264,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_LIPTOO_CHAMBER] = {
         .mapsec = MAPSEC_LIPTOO_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -272,7 +272,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_WEEPTH_CHAMBER] = {
         .mapsec = MAPSEC_WEEPTH_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -280,7 +280,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_TDILFORD_CHAMBER] = {
         .mapsec = MAPSEC_DILFORD_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -288,7 +288,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_SCUFIB_CHAMBER] = {
         .mapsec = MAPSEC_SCUFIB_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -296,7 +296,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_RIXY_CHAMBER] = {
         .mapsec = MAPSEC_RIXY_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -304,7 +304,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     },
     [MPS_VIAPOIS_CHAMBER] = {
         .mapsec = MAPSEC_VIAPOIS_CHAMBER,
-        .type = FALSE,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = gMoneanChamberMapPreviewTiles,
         .tilemapptr = gMoneanChamberMapPreviewTilemap,
@@ -349,7 +349,7 @@ bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
     idx = GetMapPreviewScreenIdx(mapsec);
     if (idx != MPS_COUNT)
     {
-        if (type == 2)
+        if (type == MPS_TYPE_ANY)
         {
             return TRUE;
         }
@@ -578,7 +578,7 @@ u16 MapPreview_GetDuration(u8 mapsec)
         return 0;
     }
     flagId = sMapPreviewScreenData[idx].flagId;
-    if (sMapPreviewScreenData[idx].type == 0)
+    if (sMapPreviewScreenData[idx].type == MPS_TYPE_CAVE)
     {
         if (!FlagGet(flagId))
         {

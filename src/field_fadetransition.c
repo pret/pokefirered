@@ -94,7 +94,7 @@ void FadeInFromBlack(void)
 void WarpFadeOutScreen(void)
 {
     const struct MapHeader *header = warp1_get_mapheader();
-    if (header->regionMapSectionId != gMapHeader.regionMapSectionId && MapHasPreviewScreen(header->regionMapSectionId, FALSE))
+    if (header->regionMapSectionId != gMapHeader.regionMapSectionId && MapHasPreviewScreen(header->regionMapSectionId, MPS_TYPE_CAVE))
         FadeScreen(1, 0);
     else
     {

@@ -154,11 +154,11 @@ static const struct FlashStruct sTransitionTypes[] = {
     }, {0}
 };
 
-static const u16 gUnknown_83F5804[] = INCBIN_U16("graphics/field_effects/flash_white.gbapal");
-static const u16 gUnknown_83F5824[] = INCBIN_U16("graphics/field_effects/flash_black.gbapal");
-static const u16 gUnknown_83F5844[] = INCBIN_U16("graphics/field_effects/flash_gradient.gbapal");
-static const u32 gUnknown_83F5864[] = INCBIN_U32("graphics/field_effects/flash_effect_map.bin.lz");
-static const u32 gUnknown_83F5A44[] = INCBIN_U32("graphics/field_effects/flash_effect_tiles.4bpp.lz");
+static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/field_effects/flash_white.gbapal");
+static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/field_effects/flash_black.gbapal");
+static const u16 sCaveTransitionPalette_Gradient[] = INCBIN_U16("graphics/field_effects/flash_gradient.gbapal");
+static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/field_effects/flash_effect_map.bin.lz");
+static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/field_effects/flash_effect_tiles.4bpp.lz");
 
 bool8 SetUpFieldMove_Flash(void)
 {
@@ -297,10 +297,10 @@ static void Task_FlashTransition_Exit_0(u8 taskId)
 static void Task_FlashTransition_Exit_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gUnknown_83F5A44, (void *)BG_CHAR_ADDR(3));
-    LZ77UnCompVram(gUnknown_83F5864, (void *)BG_SCREEN_ADDR(31));
-    LoadPalette(gUnknown_83F5804, 0xE0, 0x20);
-    LoadPalette(gUnknown_83F5844 + 8, 0xE0, 0x10);
+    LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
+    LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
+    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
+    LoadPalette(sCaveTransitionPalette_Gradient + 8, 0xE0, 0x10);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -334,11 +334,11 @@ static void Task_FlashTransition_Exit_3(u8 taskId)
     if (r4 < 8)
     {
         gTasks[taskId].data[2]++;
-        LoadPalette(gUnknown_83F5844 + 8 + r4, 0xE0, 0x10 - 2 * r4);
+        LoadPalette(sCaveTransitionPalette_Gradient + 8 + r4, 0xE0, 0x10 - 2 * r4);
     }
     else
     {
-        LoadPalette(gUnknown_83F5804, 0x00, 0x20);
+        LoadPalette(sCaveTransitionPalette_White, 0x00, 0x20);
         gTasks[taskId].func = Task_FlashTransition_Exit_4;
         gTasks[taskId].data[2] = 8;
     }
@@ -365,15 +365,15 @@ static void Task_FlashTransition_Enter_0(u8 taskId)
 static void Task_FlashTransition_Enter_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(gUnknown_83F5A44, (void *)BG_CHAR_ADDR(3));
-    LZ77UnCompVram(gUnknown_83F5864, (void *)BG_SCREEN_ADDR(31));
+    LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
+    LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(3) | BGCNT_SCREENBASE(31));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
-    LoadPalette(gUnknown_83F5804, 0xE0, 0x20);
-    LoadPalette(gUnknown_83F5824, 0, 0x20);
+    LoadPalette(sCaveTransitionPalette_White, 0xE0, 0x20);
+    LoadPalette(sCaveTransitionPalette_Black, 0, 0x20);
     gTasks[taskId].func = Task_FlashTransition_Enter_2;
     gTasks[taskId].data[0] = 16;
     gTasks[taskId].data[1] = 0;
@@ -388,7 +388,7 @@ static void Task_FlashTransition_Enter_2(u8 taskId)
     {
         gTasks[taskId].data[2]++;
         gTasks[taskId].data[2]++;
-        LoadPalette(&gUnknown_83F5844[16 - (r4 + 1)], 0xE0, 2 * (r4 + 1));
+        LoadPalette(&sCaveTransitionPalette_Gradient[16 - (r4 + 1)], 0xE0, 2 * (r4 + 1));
     }
     else
     {
@@ -408,7 +408,7 @@ static void Task_FlashTransition_Enter_3(u8 taskId)
     }
     else
     {
-        LoadPalette(gUnknown_83F5824, 0x00, 0x20);
+        LoadPalette(sCaveTransitionPalette_Black, 0x00, 0x20);
         SetMainCallback2(gMain.savedCallback);
     }
 }

@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-void FadeScreen(u8, s8);
+void FadeScreen(u8 mode, s8 delay);
 
 void SetSav1Weather(u32);
 u8 GetSav1Weather(void);

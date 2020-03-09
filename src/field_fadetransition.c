@@ -23,6 +23,7 @@
 #include "start_menu.h"
 #include "constants/songs.h"
 #include "constants/event_object_movement.h"
+#include "constants/field_weather.h"
 
 static void sub_807DF4C(u8 a0);
 static void sub_807DFBC(u8 taskId);
@@ -56,12 +57,12 @@ void WarpFadeInScreen(void)
     {
     case 0:
         palette_bg_faded_fill_black();
-        FadeScreen(0, 0);
+        FadeScreen(FADE_FROM_BLACK, 0);
         palette_bg_faded_fill_black();
         break;
     case 1:
         palette_bg_faded_fill_white();
-        FadeScreen(2, 0);
+        FadeScreen(FADE_FROM_WHITE, 0);
         palette_bg_faded_fill_white();
         break;
     }
@@ -73,12 +74,12 @@ static void sub_807DBAC(void)
     {
     case 0:
         palette_bg_faded_fill_black();
-        FadeScreen(0, 3);
+        FadeScreen(FADE_FROM_BLACK, 3);
         palette_bg_faded_fill_black();
         break;
     case 1:
         palette_bg_faded_fill_white();
-        FadeScreen(2, 3);
+        FadeScreen(FADE_FROM_WHITE, 3);
         palette_bg_faded_fill_white();
         break;
     }
@@ -87,7 +88,7 @@ static void sub_807DBAC(void)
 void FadeInFromBlack(void)
 {
     palette_bg_faded_fill_black();
-    FadeScreen(0, 0);
+    FadeScreen(FADE_FROM_BLACK, 0);
     palette_bg_faded_fill_black();
 }
 
@@ -95,16 +96,16 @@ void WarpFadeOutScreen(void)
 {
     const struct MapHeader *header = warp1_get_mapheader();
     if (header->regionMapSectionId != gMapHeader.regionMapSectionId && MapHasPreviewScreen(header->regionMapSectionId, MPS_TYPE_CAVE))
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
     else
     {
         switch (MapTransitionIsEnter(GetCurrentMapType(), header->mapType))
         {
-        case 0:
-            FadeScreen(1, 0);
+        case FALSE:
+            FadeScreen(FADE_TO_BLACK, 0);
             break;
-        case 1:
-            FadeScreen(3, 0);
+        case TRUE:
+            FadeScreen(FADE_TO_WHITE, 0);
             break;
         }
     }
@@ -114,11 +115,11 @@ static void sub_807DC70(void)
 {
     switch (MapTransitionIsEnter(GetCurrentMapType(), warp1_get_mapheader()->mapType))
     {
-    case 0:
-        FadeScreen(1, 3);
+    case FALSE:
+        FadeScreen(FADE_TO_BLACK, 3);
         break;
-    case 1:
-        FadeScreen(3, 3);
+    case TRUE:
+        FadeScreen(FADE_TO_WHITE, 3);
         break;
     }
 }
@@ -654,7 +655,7 @@ static void sub_807E678(u8 taskId)
     {
     case 0:
         ClearLinkCallback_2();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         TryFadeOutOldMapMusic();
         PlaySE(SE_KAIDAN);
         data[0]++;

@@ -5,723 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_809E700
-sub_809E700: @ 809E700
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0809E718
-	adds r0, r5, 0
-	movs r1, 0
-	bl StartSpriteAnim
-_0809E718:
-	ldrh r0, [r5, 0x36]
-	movs r1, 0xFF
-	ands r1, r0
-	adds r6, r5, 0
-	adds r6, 0x3E
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 2
-	ldrb r2, [r6]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r6]
-	movs r0, 0x2E
-	ldrsh r4, [r5, r0]
-	bl GetCurrentPageColumnCount
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bne _0809E74C
-	ldrb r0, [r6]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r6]
-_0809E74C:
-	ldrb r1, [r6]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	bne _0809E77C
-	movs r1, 0x36
-	ldrsh r0, [r5, r1]
-	movs r1, 0xFF
-	lsls r1, 8
-	ands r0, r1
-	cmp r0, 0
-	beq _0809E77C
-	movs r2, 0x2E
-	ldrsh r1, [r5, r2]
-	movs r2, 0x32
-	ldrsh r0, [r5, r2]
-	cmp r1, r0
-	bne _0809E77C
-	movs r0, 0x30
-	ldrsh r1, [r5, r0]
-	movs r2, 0x34
-	ldrsh r0, [r5, r2]
-	cmp r1, r0
-	beq _0809E786
-_0809E77C:
-	movs r0, 0
-	strh r0, [r5, 0x38]
-	movs r0, 0x2
-	strh r0, [r5, 0x3A]
-	strh r0, [r5, 0x3C]
-_0809E786:
-	ldrh r0, [r5, 0x3C]
-	subs r0, 0x1
-	strh r0, [r5, 0x3C]
-	lsls r0, 16
-	cmp r0, 0
-	bne _0809E7AE
-	ldrh r1, [r5, 0x3A]
-	ldrh r2, [r5, 0x38]
-	adds r0, r1, r2
-	strh r0, [r5, 0x38]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x10
-	beq _0809E7A6
-	cmp r0, 0
-	bne _0809E7AA
-_0809E7A6:
-	negs r0, r1
-	strh r0, [r5, 0x3A]
-_0809E7AA:
-	movs r0, 0x2
-	strh r0, [r5, 0x3C]
-_0809E7AE:
-	movs r1, 0x36
-	ldrsh r0, [r5, r1]
-	movs r1, 0xFF
-	lsls r1, 8
-	ands r0, r1
-	cmp r0, 0
-	beq _0809E7E4
-	ldrh r4, [r5, 0x38]
-	lsls r5, r4, 24
-	lsrs r5, 24
-	lsls r4, 16
-	asrs r4, 17
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x5
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 4
-	ldr r2, _0809E7EC @ =0x01010000
-	adds r0, r2
-	lsrs r0, 16
-	adds r1, r4, 0
-	adds r2, r5, 0
-	adds r3, r5, 0
-	bl MultiplyInvertedPaletteRGBComponents
-_0809E7E4:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E7EC: .4byte 0x01010000
-	thumb_func_end sub_809E700
-
-	thumb_func_start sub_809E7F0
-sub_809E7F0: @ 809E7F0
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	ldr r1, _0809E838 @ =gUnknown_83E2364
-	mov r0, sp
-	movs r2, 0x8
-	bl memcpy
-	ldrh r1, [r4, 0x2E]
-	movs r2, 0x2E
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	beq _0809E814
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x2E]
-	lsls r0, 16
-	cmp r0, 0
-	bne _0809E822
-_0809E814:
-	movs r0, 0x8
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x1
-	movs r1, 0x3
-	ands r0, r1
-	strh r0, [r4, 0x30]
-_0809E822:
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	lsls r0, 1
-	add r0, sp
-	ldrh r0, [r0]
-	strh r0, [r4, 0x24]
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E838: .4byte gUnknown_83E2364
-	thumb_func_end sub_809E7F0
-
-	thumb_func_start sub_809E83C
-sub_809E83C: @ 809E83C
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	ldr r1, _0809E864 @ =gUnknown_83E236C
-	mov r0, sp
-	movs r2, 0x8
-	bl memcpy
-	bl sub_809F668
-	lsls r0, 24
-	ldrh r1, [r4, 0x2E]
-	lsls r1, 24
-	cmp r0, r1
-	beq _0809E868
-	movs r0, 0
-	strh r0, [r4, 0x26]
-	strh r0, [r4, 0x30]
-	b _0809E88E
-	.align 2, 0
-_0809E864: .4byte gUnknown_83E236C
-_0809E868:
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	lsls r0, 1
-	add r0, sp
-	ldrh r0, [r0]
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x1
-	strh r0, [r4, 0x32]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x8
-	ble _0809E890
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x1
-	movs r1, 0x3
-	ands r0, r1
-	strh r0, [r4, 0x30]
-	movs r0, 0
-_0809E88E:
-	strh r0, [r4, 0x32]
-_0809E890:
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_809E83C
-
-	thumb_func_start sub_809E898
-sub_809E898: @ 809E898
-	push {lr}
-	bl sub_809E8B4
-	bl sub_809EB5C
-	bl sub_809EDE8
-	bl sub_809EE60
-	bl sub_809EF24
-	pop {r0}
-	bx r0
-	thumb_func_end sub_809E898
-
-	thumb_func_start sub_809E8B4
-sub_809E8B4: @ 809E8B4
-	push {r4-r6,lr}
-	ldr r0, _0809E938 @ =gUnknown_83E25EC
-	movs r1, 0x26
-	movs r2, 0x58
-	movs r3, 0x1
-	bl CreateSprite
-	ldr r5, _0809E93C @ =gNamingScreenData
-	ldr r1, [r5]
-	ldr r4, _0809E940 @ =0x00001e23
-	adds r1, r4
-	strb r0, [r1]
-	movs r0, 0x1
-	bl sub_809EA0C
-	ldr r6, _0809E944 @ =gSprites
-	ldr r0, [r5]
-	adds r0, r4
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r6
-	ldrb r3, [r1, 0x5]
-	movs r2, 0xD
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r3
-	movs r3, 0x4
-	orrs r0, r3
-	strb r0, [r1, 0x5]
-	ldr r0, [r5]
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	ldrb r1, [r0, 0x1]
-	ands r2, r1
-	orrs r2, r3
-	strb r2, [r0, 0x1]
-	ldr r2, [r5]
-	adds r2, r4
-	ldrb r1, [r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x1
-	strh r1, [r0, 0x3A]
-	ldrb r1, [r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r6
-	movs r1, 0x2
-	strh r1, [r0, 0x3A]
-	movs r0, 0
-	movs r1, 0
-	bl SetCursorPos
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E938: .4byte gUnknown_83E25EC
-_0809E93C: .4byte gNamingScreenData
-_0809E940: .4byte 0x00001e23
-_0809E944: .4byte gSprites
-	thumb_func_end sub_809E8B4
-
-	thumb_func_start SetCursorPos
-SetCursorPos: @ 809E948
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 16
-	lsls r1, 16
-	lsrs r7, r1, 16
-	ldr r1, _0809E994 @ =gNamingScreenData
-	ldr r1, [r1]
-	ldr r2, _0809E998 @ =0x00001e23
-	adds r1, r2
-	ldrb r2, [r1]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	ldr r2, _0809E99C @ =gSprites
-	adds r5, r1, r2
-	lsrs r1, r0, 16
-	mov r8, r1
-	asrs r6, r0, 16
-	ldr r4, _0809E9A0 @ =gUnknown_83E2330
-	bl sub_809DE50
-	lsls r0, 24
-	lsrs r0, 24
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r6, r0
-	bge _0809E9A8
-	bl sub_809DE50
-	ldr r1, _0809E9A4 @ =gUnknown_83E2333
-	lsls r0, 24
-	lsrs r0, 21
-	adds r0, r6, r0
-	adds r0, r1
-	ldrb r0, [r0]
-	adds r0, 0x26
-	b _0809E9AA
-	.align 2, 0
-_0809E994: .4byte gNamingScreenData
-_0809E998: .4byte 0x00001e23
-_0809E99C: .4byte gSprites
-_0809E9A0: .4byte gUnknown_83E2330
-_0809E9A4: .4byte gUnknown_83E2333
-_0809E9A8:
-	movs r0, 0
-_0809E9AA:
-	strh r0, [r5, 0x20]
-	lsls r0, r7, 16
-	asrs r0, 12
-	adds r0, 0x58
-	strh r0, [r5, 0x22]
-	ldrh r0, [r5, 0x2E]
-	strh r0, [r5, 0x32]
-	ldrh r0, [r5, 0x30]
-	strh r0, [r5, 0x34]
-	mov r2, r8
-	strh r2, [r5, 0x2E]
-	strh r7, [r5, 0x30]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end SetCursorPos
-
-	thumb_func_start GetCursorPos
-GetCursorPos: @ 809E9CC
-	ldr r2, _0809E9EC @ =gNamingScreenData
-	ldr r2, [r2]
-	ldr r3, _0809E9F0 @ =0x00001e23
-	adds r2, r3
-	ldrb r3, [r2]
-	lsls r2, r3, 4
-	adds r2, r3
-	lsls r2, 2
-	ldr r3, _0809E9F4 @ =gSprites
-	adds r2, r3
-	ldrh r3, [r2, 0x2E]
-	strh r3, [r0]
-	ldrh r0, [r2, 0x30]
-	strh r0, [r1]
-	bx lr
-	.align 2, 0
-_0809E9EC: .4byte gNamingScreenData
-_0809E9F0: .4byte 0x00001e23
-_0809E9F4: .4byte gSprites
-	thumb_func_end GetCursorPos
-
-	thumb_func_start MoveCursorToOKButton
-MoveCursorToOKButton: @ 809E9F8
-	push {lr}
-	bl GetCurrentPageColumnCount
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x2
-	bl SetCursorPos
-	pop {r0}
-	bx r0
-	thumb_func_end MoveCursorToOKButton
-
-	thumb_func_start sub_809EA0C
-sub_809EA0C: @ 809EA0C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0809EA54 @ =gSprites
-	ldr r1, _0809EA58 @ =gNamingScreenData
-	ldr r4, [r1]
-	ldr r1, _0809EA5C @ =0x00001e23
-	adds r4, r1
-	ldrb r1, [r4]
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r5
-	ldrh r3, [r2, 0x36]
-	ldr r1, _0809EA60 @ =0xffffff00
-	ands r1, r3
-	strh r1, [r2, 0x36]
-	ldrb r2, [r4]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r5
-	ldrh r2, [r1, 0x36]
-	orrs r0, r2
-	strh r0, [r1, 0x36]
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	movs r1, 0
-	bl StartSpriteAnim
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809EA54: .4byte gSprites
-_0809EA58: .4byte gNamingScreenData
-_0809EA5C: .4byte 0x00001e23
-_0809EA60: .4byte 0xffffff00
-	thumb_func_end sub_809EA0C
-
-	thumb_func_start sub_809EA64
-sub_809EA64: @ 809EA64
-	push {r4,r5,lr}
-	lsls r0, 24
-	ldr r5, _0809EA9C @ =gSprites
-	ldr r1, _0809EAA0 @ =gNamingScreenData
-	ldr r4, [r1]
-	ldr r1, _0809EAA4 @ =0x00001e23
-	adds r4, r1
-	ldrb r1, [r4]
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r5
-	ldrh r3, [r2, 0x36]
-	movs r1, 0xFF
-	ands r1, r3
-	strh r1, [r2, 0x36]
-	ldrb r2, [r4]
-	lsls r1, r2, 4
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r5
-	lsrs r0, 16
-	ldrh r2, [r1, 0x36]
-	orrs r0, r2
-	strh r0, [r1, 0x36]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809EA9C: .4byte gSprites
-_0809EAA0: .4byte gNamingScreenData
-_0809EAA4: .4byte 0x00001e23
-	thumb_func_end sub_809EA64
-
-	thumb_func_start sub_809EAA8
-sub_809EAA8: @ 809EAA8
-	push {lr}
-	ldr r0, _0809EAC8 @ =gNamingScreenData
-	ldr r0, [r0]
-	ldr r1, _0809EACC @ =0x00001e23
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0809EAD0 @ =gSprites
-	adds r0, r1
-	movs r1, 0x1
-	bl StartSpriteAnim
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809EAC8: .4byte gNamingScreenData
-_0809EACC: .4byte 0x00001e23
-_0809EAD0: .4byte gSprites
-	thumb_func_end sub_809EAA8
-
-	thumb_func_start IsCursorAnimFinished
-IsCursorAnimFinished: @ 809EAD4
-	ldr r2, _0809EAF4 @ =gSprites
-	ldr r0, _0809EAF8 @ =gNamingScreenData
-	ldr r0, [r0]
-	ldr r1, _0809EAFC @ =0x00001e23
-	adds r0, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3F
-	ldrb r0, [r0]
-	lsls r0, 27
-	lsrs r0, 31
-	bx lr
-	.align 2, 0
-_0809EAF4: .4byte gSprites
-_0809EAF8: .4byte gNamingScreenData
-_0809EAFC: .4byte 0x00001e23
-	thumb_func_end IsCursorAnimFinished
-
-	thumb_func_start sub_809EB00
-sub_809EB00: @ 809EB00
-	push {r4,r5,lr}
-	sub sp, 0x4
-	mov r5, sp
-	adds r5, 0x2
-	mov r0, sp
-	adds r1, r5, 0
-	bl GetCursorPos
-	mov r0, sp
-	movs r1, 0
-	ldrsh r4, [r0, r1]
-	bl GetCurrentPageColumnCount
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	blt _0809EB34
-	ldr r0, _0809EB30 @ =gUnknown_83E2374
-	movs r2, 0
-	ldrsh r1, [r5, r2]
-	adds r1, r0
-	ldrb r0, [r1]
-	b _0809EB36
-	.align 2, 0
-_0809EB30: .4byte gUnknown_83E2374
-_0809EB34:
-	movs r0, 0
-_0809EB36:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809EB00
-
-	thumb_func_start GetCurrentPageColumnCount
-GetCurrentPageColumnCount: @ 809EB40
-	push {r4,lr}
-	ldr r4, _0809EB58 @ =gUnknown_83E2330
-	bl sub_809DE50
-	lsls r0, 24
-	lsrs r0, 24
-	adds r0, r4
-	ldrb r0, [r0]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809EB58: .4byte gUnknown_83E2330
-	thumb_func_end GetCurrentPageColumnCount
-
-	thumb_func_start sub_809EB5C
-sub_809EB5C: @ 809EB5C
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r0, _0809EC00 @ =gUnknown_83E2574
-	movs r1, 0xCC
-	movs r2, 0x58
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _0809EC04 @ =gNamingScreenData
-	ldr r1, [r1]
-	ldr r2, _0809EC08 @ =0x00001e24
-	adds r1, r2
-	strb r0, [r1]
-	lsls r5, r0, 4
-	adds r5, r0
-	lsls r5, 2
-	ldr r0, _0809EC0C @ =gSprites
-	mov r8, r0
-	add r5, r8
-	ldr r1, _0809EC10 @ =gUnknown_83E2504
-	adds r0, r5, 0
-	bl SetSubspriteTables
-	adds r1, r5, 0
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	movs r6, 0x4
-	orrs r0, r6
-	strb r0, [r1]
-	ldr r0, _0809EC14 @ =gUnknown_83E25A4
-	movs r1, 0xCC
-	movs r2, 0x54
-	movs r3, 0x1
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x3A]
-	lsls r4, r0, 4
-	adds r4, r0
-	lsls r4, 2
-	add r4, r8
-	ldr r1, _0809EC18 @ =gUnknown_83E250C
-	adds r0, r4, 0
-	bl SetSubspriteTables
-	adds r4, 0x3E
-	ldrb r0, [r4]
-	orrs r0, r6
-	strb r0, [r4]
-	ldr r0, _0809EC1C @ =gUnknown_83E258C
-	movs r1, 0xCC
-	movs r2, 0x53
-	movs r3, 0x2
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	add r2, r8
-	ldrb r3, [r2, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r3
-	orrs r1, r6
-	strb r1, [r2, 0x5]
-	strh r0, [r5, 0x3C]
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	orrs r0, r6
-	strb r0, [r2]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809EC00: .4byte gUnknown_83E2574
-_0809EC04: .4byte gNamingScreenData
-_0809EC08: .4byte 0x00001e24
-_0809EC0C: .4byte gSprites
-_0809EC10: .4byte gUnknown_83E2504
-_0809EC14: .4byte gUnknown_83E25A4
-_0809EC18: .4byte gUnknown_83E250C
-_0809EC1C: .4byte gUnknown_83E258C
-	thumb_func_end sub_809EB5C
-
-	thumb_func_start sub_809EC20
-sub_809EC20: @ 809EC20
-	ldr r0, _0809EC44 @ =gNamingScreenData
-	ldr r2, [r0]
-	ldr r1, _0809EC48 @ =0x00001e24
-	adds r0, r2, r1
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0809EC4C @ =gSprites
-	adds r0, r1
-	movs r1, 0x2
-	strh r1, [r0, 0x2E]
-	ldr r1, _0809EC50 @ =0x00001e22
-	adds r2, r1
-	ldrb r1, [r2]
-	strh r1, [r0, 0x30]
-	bx lr
-	.align 2, 0
-_0809EC44: .4byte gNamingScreenData
-_0809EC48: .4byte 0x00001e24
-_0809EC4C: .4byte gSprites
-_0809EC50: .4byte 0x00001e22
-	thumb_func_end sub_809EC20
-
-	thumb_func_start sub_809EC54
-sub_809EC54: @ 809EC54
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r5, _0809EC78 @ =gUnknown_83E2378
-_0809EC5A:
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0809EC5A
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809EC78: .4byte gUnknown_83E2378
-	thumb_func_end sub_809EC54
-
 	thumb_func_start sub_809EC7C
 sub_809EC7C: @ 809EC7C
 	push {r4-r6,lr}
@@ -914,8 +197,8 @@ _0809EDE0: .4byte gUnknown_83E2388
 _0809EDE4: .4byte gUnknown_83E238E
 	thumb_func_end sub_809ED88
 
-	thumb_func_start sub_809EDE8
-sub_809EDE8: @ 809EDE8
+	thumb_func_start CreateBackOkSprites
+CreateBackOkSprites: @ 809EDE8
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -969,10 +252,10 @@ _0809EE50: .4byte gUnknown_83E25BC
 _0809EE54: .4byte gSprites
 _0809EE58: .4byte gUnknown_83E2524
 _0809EE5C: .4byte gUnknown_83E25D4
-	thumb_func_end sub_809EDE8
+	thumb_func_end CreateBackOkSprites
 
-	thumb_func_start sub_809EE60
-sub_809EE60: @ 809EE60
+	thumb_func_start CreateUnderscoreSprites
+CreateUnderscoreSprites: @ 809EE60
 	push {r4-r6,lr}
 	ldr r5, _0809EF0C @ =gNamingScreenData
 	ldr r0, [r5]
@@ -1065,10 +348,10 @@ _0809EF14: .4byte gUnknown_83E2604
 _0809EF18: .4byte gSprites
 _0809EF1C: .4byte 0x00001e28
 _0809EF20: .4byte gUnknown_83E261C
-	thumb_func_end sub_809EE60
+	thumb_func_end CreateUnderscoreSprites
 
-	thumb_func_start sub_809EF24
-sub_809EF24: @ 809EF24
+	thumb_func_start CreateInputTargetIcon
+CreateInputTargetIcon: @ 809EF24
 	push {lr}
 	ldr r1, _0809EF44 @ =gUnknown_83E2394
 	ldr r0, _0809EF48 @ =gNamingScreenData
@@ -1087,7 +370,7 @@ sub_809EF24: @ 809EF24
 _0809EF44: .4byte gUnknown_83E2394
 _0809EF48: .4byte gNamingScreenData
 _0809EF4C: .4byte 0x00001e28
-	thumb_func_end sub_809EF24
+	thumb_func_end CreateInputTargetIcon
 
 	thumb_func_start nullsub_54
 nullsub_54: @ 809EF50
@@ -1278,7 +561,7 @@ HandleKeyboardEvent: @ 809F0CC
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_809EB00
+	bl GetKeyRoleAtCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x8
@@ -2023,8 +1306,8 @@ sub_809F634: @ 809F634
 _0809F664: .4byte gUnknown_83E22D0
 	thumb_func_end sub_809F634
 
-	thumb_func_start sub_809F668
-sub_809F668: @ 809F668
+	thumb_func_start GetTextCaretPosition
+GetTextCaretPosition: @ 809F668
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r0, _0809F690 @ =gNamingScreenData
@@ -2070,7 +1353,7 @@ _0809F6B2:
 	bx r1
 	.align 2, 0
 _0809F6B8: .4byte 0x00001e28
-	thumb_func_end sub_809F668
+	thumb_func_end GetTextCaretPosition
 
 	thumb_func_start sub_809F6BC
 sub_809F6BC: @ 809F6BC
@@ -2134,7 +1417,7 @@ sub_809F700: @ 809F700
 	adds r0, r4
 	movs r1, 0xFF
 	strb r1, [r0]
-	bl sub_809EB00
+	bl GetKeyRoleAtCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2211,7 +1494,7 @@ sub_809F7C4: @ 809F7C4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl sub_809F668
+	bl GetTextCaretPosition
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0809F7E8 @ =gNamingScreenData

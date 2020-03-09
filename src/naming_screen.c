@@ -46,6 +46,14 @@ enum
     INPUT_STATE_2,
 };
 
+enum
+{
+    KEY_ROLE_CHAR,
+    KEY_ROLE_PAGE,
+    KEY_ROLE_BACKSPACE,
+    KEY_ROLE_OK,
+};
+
 struct NamingScreenTemplate
 {
     u8 copyExistingString;
@@ -115,23 +123,36 @@ void Task_809E58C(u8 taskId);
 u16 sub_809E644(u8 tag);
 void sub_809E6B8(u8 a0);
 void sub_809E6E0(struct Task * task, u8 a1, u8 a2);
-void GetCursorPos(s16 *xP, s16 *yP);
-u8 GetCurrentPageColumnCount(void);
+void sub_809E700(struct Sprite * sprite);
+void sub_809E7F0(struct Sprite * sprite);
+void sub_809E83C(struct Sprite * sprite);
+void sub_809E898(void);
+void CursorInit(void);
 void SetCursorPos(s16 x, s16 y);
+void GetCursorPos(s16 *xP, s16 *yP);
+void MoveCursorToOKButton();
+void sub_809EA0C(u8 a0);
+void sub_809EA64(u8 a0);
+bool8 IsCursorAnimFinished();
+u8 GetCurrentPageColumnCount(void);
+void CreatePageSwitcherSprites(void);
+void sub_809EC20(void);
+bool8 sub_809EC7C(struct Sprite * sprite);
+bool8 sub_809ECD0(struct Sprite * sprite);
+bool8 sub_809ECD4(struct Sprite * sprite);
+bool8 sub_809ED48(struct Sprite * sprite);
+void CreateBackOkSprites(void);
+void CreateUnderscoreSprites(void);
+void CreateInputTargetIcon(void);
 void sub_809FA60(void);
 bool8 NamingScreen_InitDisplayMode(void);
 void NamingScreen_TurnOffScreen(void);
 void choose_name_or_words_screen_apply_bg_pals(void);
 void choose_name_or_words_screen_load_bg_tile_patterns(void);
-void sub_809E898(void);
-bool8 IsCursorAnimFinished();
-void MoveCursorToOKButton();
-void sub_809EA0C(u8 a0);
-void sub_809EA64(u8 a0);
-void sub_809EC20(void);
 bool8 HandleKeyboardEvent(void);
 void SetInputState(u8 state);
 void sub_809F56C(void);
+u8 GetTextCaretPosition(void);
 void sub_809F7EC(void);
 void sub_809F8C0(void);
 void sub_809F900(u8 bgId, const u32 * tmap);
@@ -140,6 +161,19 @@ void sub_809F9E8(u8 windowId, u8 kbPage);
 void sub_809FAE4(void);
 void sub_809FB70(void);
 void sub_809FC34(void);
+
+extern const struct SubspriteTable gUnknown_83E2504[];
+extern const struct SubspriteTable gUnknown_83E250C[];
+
+extern const struct SpriteTemplate gUnknown_83E2574;
+extern const struct SpriteTemplate gUnknown_83E258C;
+extern const struct SpriteTemplate gUnknown_83E25A4;
+extern const struct SpriteTemplate gUnknown_83E25BC;
+extern const struct SpriteTemplate gUnknown_83E25D4;
+extern const struct SpriteTemplate gUnknown_83E25EC;
+extern const struct SpriteTemplate gUnknown_83E2604;
+extern const struct SpriteTemplate gUnknown_83E261C;
+extern const struct SpriteTemplate gUnknown_83E2634;
 
 const u16 gUnknown_83E1800[] = INCBIN_U16("graphics/interface/naming_screen_83E1800.4bpp");
 const u16 gUnknown_83E18C0[] = INCBIN_U16("graphics/interface/naming_screen_83E18C0.4bpp");
@@ -886,4 +920,210 @@ void sub_809E6E0(struct Task *task, u8 b, u8 c)
     task->data[4] = 2;
     task->data[5] = 0;
     task->data[6] = 4;
+}
+
+//--------------------------------------------------
+// Cursor
+//--------------------------------------------------
+
+void sub_809E700(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        StartSpriteAnim(sprite, 0);
+    sprite->invisible = (sprite->data[4] & 0xFF);
+    if (sprite->data[0] == GetCurrentPageColumnCount())
+        sprite->invisible = TRUE;
+    if (sprite->invisible || (sprite->data[4] & 0xFF00) == 0
+        || sprite->data[0] != sprite->data[2] || sprite->data[1] != sprite->data[3])
+    {
+        sprite->data[5] = 0;
+        sprite->data[6] = 2;
+        sprite->data[7] = 2;
+    }
+    sprite->data[7]--;
+    if (sprite->data[7] == 0)
+    {
+        sprite->data[5] += sprite->data[6];
+        if (sprite->data[5] == 16 || sprite->data[5] == 0)
+            sprite->data[6] = -sprite->data[6];
+        sprite->data[7] = 2;
+    }
+    if ((sprite->data[4] & 0xFF00) != 0)
+    {
+        s8 gb = sprite->data[5];
+        s8 r = sprite->data[5] >> 1;
+        u16 index = IndexOfSpritePaletteTag(5) * 16 + 0x0101;
+
+        MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
+    }
+}
+
+void sub_809E7F0(struct Sprite *sprite)
+{
+    const s16 arr[] = {0, -4, -2, -1};
+
+    if (sprite->data[0] == 0 || --sprite->data[0] == 0)
+    {
+        sprite->data[0] = 8;
+        sprite->data[1] = (sprite->data[1] + 1) & 3;
+    }
+    sprite->pos2.x = arr[sprite->data[1]];
+}
+
+void sub_809E83C(struct Sprite *sprite)
+{
+    const s16 arr[] = {2, 3, 2, 1};
+    u8 var;
+
+    var = GetTextCaretPosition();
+    if (var != (u8)sprite->data[0])
+    {
+        sprite->pos2.y = 0;
+        sprite->data[1] = 0;
+        sprite->data[2] = 0;
+    }
+    else
+    {
+        sprite->pos2.y = arr[sprite->data[1]];
+        sprite->data[2]++;
+        if (sprite->data[2] > 8)
+        {
+            sprite->data[1] = (sprite->data[1] + 1) & 3;
+            sprite->data[2] = 0;
+        }
+    }
+}
+
+void sub_809E898(void)
+{
+    CursorInit();
+    CreatePageSwitcherSprites();
+    CreateBackOkSprites();
+    CreateUnderscoreSprites();
+    CreateInputTargetIcon();
+}
+
+void CursorInit(void)
+{
+    gNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_83E25EC, 38, 88, 1);
+    sub_809EA0C(1);
+    gSprites[gNamingScreenData->cursorSpriteId].oam.priority = 1;
+    gSprites[gNamingScreenData->cursorSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+    gSprites[gNamingScreenData->cursorSpriteId].data[6] = 1;
+    gSprites[gNamingScreenData->cursorSpriteId].data[6] = 2;
+    SetCursorPos(0, 0);
+}
+
+void SetCursorPos(s16 x, s16 y)
+{
+    struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
+
+    if (x < gUnknown_83E2330[sub_809DE50()])
+        cursorSprite->pos1.x = gUnknown_83E2333[sub_809DE50()][x] + 38;
+    else
+        cursorSprite->pos1.x = 0;
+
+    cursorSprite->pos1.y = y * 16 + 88;
+    cursorSprite->data[2] = cursorSprite->data[0];
+    cursorSprite->data[3] = cursorSprite->data[1];
+    cursorSprite->data[0] = x;
+    cursorSprite->data[1] = y;
+}
+
+void GetCursorPos(s16 *x, s16 *y)
+{
+    struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
+
+    *x = cursorSprite->data[0];
+    *y = cursorSprite->data[1];
+}
+
+void MoveCursorToOKButton(void)
+{
+    SetCursorPos(GetCurrentPageColumnCount(), 2);
+}
+
+void sub_809EA0C(u8 a)
+{
+    gSprites[gNamingScreenData->cursorSpriteId].data[4] &= ~0xFF;
+    gSprites[gNamingScreenData->cursorSpriteId].data[4] |= a;
+    StartSpriteAnim(&gSprites[gNamingScreenData->cursorSpriteId], 0);
+}
+
+void sub_809EA64(u8 a)
+{
+    gSprites[gNamingScreenData->cursorSpriteId].data[4] &= 0xFF;
+    gSprites[gNamingScreenData->cursorSpriteId].data[4] |= a << 8;
+}
+
+void sub_809EAA8(void)
+{
+    StartSpriteAnim(&gSprites[gNamingScreenData->cursorSpriteId], 1);
+}
+
+bool8 IsCursorAnimFinished(void)
+{
+    return gSprites[gNamingScreenData->cursorSpriteId].animEnded;
+}
+
+const u8 sKeyRoles[] = {KEY_ROLE_PAGE, KEY_ROLE_BACKSPACE, KEY_ROLE_OK};
+
+u8 GetKeyRoleAtCursorPos(void)
+{
+    s16 cursorX;
+    s16 cursorY;
+
+    GetCursorPos(&cursorX, &cursorY);
+    if (cursorX < GetCurrentPageColumnCount())
+        return KEY_ROLE_CHAR;
+    else
+        return sKeyRoles[cursorY];
+}
+
+u8 GetCurrentPageColumnCount(void)
+{
+    return gUnknown_83E2330[sub_809DE50()];
+}
+
+void CreatePageSwitcherSprites(void)
+{
+    u8 spriteId1;
+    u8 spriteId2;
+    u8 spriteId3;
+
+    spriteId1 = CreateSprite(&gUnknown_83E2574, 0xCC, 0x58, 0);
+    gNamingScreenData->selectBtnFrameSpriteId = spriteId1;
+    SetSubspriteTables(&gSprites[spriteId1], gUnknown_83E2504);
+    gSprites[spriteId1].invisible = TRUE;
+
+    spriteId2 = CreateSprite(&gUnknown_83E25A4, 0xCC, 0x54, 1);
+    gSprites[spriteId1].data[6] = spriteId2;
+    SetSubspriteTables(&gSprites[spriteId2], gUnknown_83E250C);
+    gSprites[spriteId2].invisible = TRUE;
+
+    spriteId3 = CreateSprite(&gUnknown_83E258C, 0xCC, 0x53, 2);
+    gSprites[spriteId3].oam.priority = 1;
+    gSprites[spriteId1].data[7] = spriteId3;
+    gSprites[spriteId3].invisible = TRUE;
+}
+
+void sub_809EC20(void)
+{
+    struct Sprite *sprite = &gSprites[gNamingScreenData->selectBtnFrameSpriteId];
+
+    sprite->data[0] = 2;
+    sprite->data[1] = gNamingScreenData->currentPage;
+}
+
+bool8 (*const gUnknown_83E2378[])(struct Sprite * sprite) = {
+    sub_809EC7C,
+    sub_809ECD0,
+    sub_809ECD4,
+    sub_809ED48
+};
+
+void sub_809EC54(struct Sprite *sprite)
+{
+    while (gUnknown_83E2378[sprite->data[0]](sprite))
+        ;
 }

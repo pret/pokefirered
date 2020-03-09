@@ -6,22 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83E2364:: @ 83E2364
-	.2byte 0x0000, 0xfffc, 0xfffe, 0xffff
-
-gUnknown_83E236C:: @ 83E236C
-	.2byte 0x0002, 0x0003, 0x0002, 0x0001
-
-gUnknown_83E2374:: @ 83E2374
-	.byte 0x01, 0x02, 0x03
-
-	.align 2
-gUnknown_83E2378:: @ 83E2378
-	.4byte sub_809EC7C
-	.4byte sub_809ECD0
-	.4byte sub_809ECD4
-	.4byte sub_809ED48
-
 gUnknown_83E2388:: @ 83E2388
 	.2byte 0x0001, 0x0003, 0x0002
 

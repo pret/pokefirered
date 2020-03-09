@@ -1,0 +1,567 @@
+#include "global.h"
+#include "gflib.h"
+#include "graphics.h"
+#include "event_scripts.h"
+#include "help_system.h"
+#include "naming_screen.h"
+#include "new_menu_helpers.h"
+#include "strings.h"
+#include "task.h"
+#include "constants/help_system.h"
+
+enum
+{
+    KBPAGE_LETTERS_LOWER,
+    KBPAGE_LETTERS_UPPER,
+    KBPAGE_SYMBOLS,
+    KBPAGE_COUNT,
+};
+
+enum
+{
+    MAIN_STATE_BEGIN_FADE_IN,
+    MAIN_STATE_WAIT_FADE_IN,
+    MAIN_STATE_HANDLE_INPUT,
+    MAIN_STATE_MOVE_TO_OK_BUTTON,
+    MAIN_STATE_START_PAGE_SWAP,
+    MAIN_STATE_WAIT_PAGE_SWAP,
+    MAIN_STATE_6,
+    MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE,
+    MAIN_STATE_BEGIN_FADE_OUT,
+    MAIN_STATE_WAIT_FADE_OUT_AND_EXIT,
+};
+
+enum
+{
+    INPUT_STATE_DISABLED,
+    INPUT_STATE_ENABLED,
+    INPUT_STATE_2,
+};
+
+struct NamingScreenTemplate
+{
+    u8 copyExistingString;
+    u8 maxChars;
+    u8 iconFunction;
+    u8 addGenderIcon;
+    u8 initialPage;
+    u8 unused;
+    const u8 *title;
+};
+
+struct NamingScreenData {
+    /*0x0*/    u8 tilemapBuffer1[0x800];
+    /*0x800*/  u8 tilemapBuffer2[0x800];
+    /*0x800*/  u8 tilemapBuffer3[0x800];
+    /*0x1800*/ u8 textBuffer[0x10];
+    /*0x1810*/ u8 tileBuffer[0x600];
+    /*0x1E10*/ u8 state;
+    /*0x1E11*/ u8 windows[5];
+    /*0x1E16*/ u16 inputCharBaseXPos;
+    /*0x1E18*/ u16 bg1vOffset;
+    /*0x1E1A*/ u16 bg2vOffset;
+    /*0x1E1C*/ u16 bg1Priority;
+    /*0x1E1E*/ u16 bg2Priority;
+    /*0x1E20*/ u8 bgToReveal;
+    /*0x1E21*/ u8 bgToHide;
+    /*0x1E22*/ u8 currentPage;
+    /*0x1E23*/ u8 cursorSpriteId;
+    /*0x1E24*/ u8 selectBtnFrameSpriteId;
+    /*0x1E25*/ u8 keyRepeatStartDelayCopy;
+    /*0x1E28*/ const struct NamingScreenTemplate *template;
+    /*0x1E2C*/ u8 templateNum;
+    /*0x1E30*/ u8 *destBuffer;
+    /*0x1E34*/ u16 monSpecies;
+    /*0x1E36*/ u16 monGender;
+    /*0x1E38*/ u32 monPersonality;
+    /*0x1E3C*/ MainCallback returnCallback;
+};
+
+EWRAM_DATA struct NamingScreenData * gNamingScreenData = NULL;
+
+void C2_NamingScreen(void);
+void NamingScreen_Init(void);
+void NamingScreen_InitBGs(void);
+void sub_809DD60(void);
+void sub_809DD88(u8 taskId);
+bool8 MainState_BeginFadeIn(void);
+bool8 MainState_WaitFadeIn(void);
+bool8 MainState_HandleInput(void);
+bool8 MainState_MoveToOKButton(void);
+bool8 pokemon_store(void);
+void pokemon_transfer_to_pc_with_message(void);
+bool8 NamingScreen_InitDisplayMode(void);
+bool8 MainState_StartPageSwap(void);
+bool8 MainState_WaitPageSwap(void);
+bool8 sub_809E1D4(void);
+bool8 PageSwapAnimState_Init(struct Task * task);
+bool8 PageSwapAnimState_1(struct Task * task);
+bool8 PageSwapAnimState_2(struct Task * task);
+bool8 PageSwapAnimState_Done(struct Task * task);
+void MainState_BeginFadeInOut(void);
+void MainState_WaitFadeOutAndExit(void);
+void NamingScreen_TurnOffScreen(void);
+void choose_name_or_words_screen_apply_bg_pals(void);
+void choose_name_or_words_screen_load_bg_tile_patterns(void);
+void sub_809E518(u8 a0, u8 a1, u8 a2);
+void sub_809E898(void);
+bool8 IsCursorAnimFinished();
+void MoveCursorToOKButton();
+void sub_809EA0C(u8 a0);
+void sub_809EA64(u8 a0);
+bool8 HandleKeyboardEvent(void);
+void SetInputState(u8 state);
+void sub_809F56C(void);
+void sub_809F7EC(void);
+void sub_809F8C0(void);
+void sub_809F900(u8 bgId, const u32 * tmap);
+void sub_809F914(void);
+void sub_809F9E8(u8 windowId, u8 kbPage);
+void sub_809FAE4(void);
+void sub_809FB70(void);
+void sub_809FC34(void);
+
+const u16 gUnknown_83E1800[] = INCBIN_U16("graphics/interface/naming_screen_83E1800.4bpp");
+const u16 gUnknown_83E18C0[] = INCBIN_U16("graphics/interface/naming_screen_83E18C0.4bpp");
+const u16 gUnknown_83E1980[] = INCBIN_U16("graphics/interface/naming_screen_83E1980.4bpp");
+
+const u8 *const gUnknown_83E2280[] = {
+    Text_MonSentToBoxInSomeonesPC,
+    Text_MonSentToBoxInBillsPC,
+    Text_MonSentToBoxSomeonesBoxFull,
+    Text_MonSentToBoxBillsBoxFull
+};
+
+const struct BgTemplate gUnknown_83E2290[4] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }
+};
+
+const struct WindowTemplate gUnknown_83E22A0[6] = {
+    {
+        .bg = 1,
+        .tilemapLeft = 3,
+        .tilemapTop = 10,
+        .width = 19,
+        .height = 8,
+        .paletteNum = 10,
+        .baseBlock = 0x0030
+    }, {
+        .bg = 2,
+        .tilemapLeft = 3,
+        .tilemapTop = 10,
+        .width = 19,
+        .height = 8,
+        .paletteNum = 10,
+        .baseBlock = 0x00c8
+    }, {
+        .bg = 3,
+        .tilemapLeft = 8,
+        .tilemapTop = 6,
+        .width = 14,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x0030
+    }, {
+        .bg = 3,
+        .tilemapLeft = 9,
+        .tilemapTop = 4,
+        .width = 16,
+        .height = 2,
+        .paletteNum = 10,
+        .baseBlock = 0x004c
+    }, {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 30,
+        .height = 2,
+        .paletteNum = 11,
+        .baseBlock = 0x006c
+    }, DUMMY_WIN_TEMPLATE
+};
+
+const u8 gUnknown_83E22D0[][4][8] = {
+    [KBPAGE_LETTERS_LOWER] = {
+        __("abcdef ."),
+        __("ghijkl ,"),
+        __("mnopqrs"),
+        __("tuvwxyz"),
+    },
+    [KBPAGE_LETTERS_UPPER] = {
+        __("ABCDEF ."),
+        __("GHIJKL ,"),
+        __("MNOPQRS"),
+        __("TUVWXYZ"),
+    },
+    [KBPAGE_SYMBOLS] = {
+        __("01234"),
+        __("56789"),
+        __("!?♂♀/-"),
+        __("…“”‘'"),
+    }
+};
+
+const u8 gUnknown_83E2330[] = {
+    [KBPAGE_LETTERS_LOWER] = 8, // lower
+    [KBPAGE_LETTERS_UPPER] = 8, // upper
+    [KBPAGE_SYMBOLS]       = 6
+};
+
+const u8 gUnknown_83E2333[][8] = {
+    [KBPAGE_LETTERS_LOWER] = {
+          0,
+         12,
+         24,
+         56,
+         68,
+         80,
+         92,
+        123
+    },
+    [KBPAGE_LETTERS_UPPER] = {
+         0,
+         12,
+         24,
+         56,
+         68,
+         80,
+         92,
+        123
+    },
+    [KBPAGE_SYMBOLS] = {
+          0,
+         22,
+         44,
+         66,
+         88,
+        110
+    }
+};
+
+extern const struct NamingScreenTemplate *const sNamingScreenTemplates[];
+
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
+{
+    gNamingScreenData = Alloc(sizeof(struct NamingScreenData));
+    if (!gNamingScreenData)
+    {
+        SetMainCallback2(returnCallback);
+    }
+    else
+    {
+        gNamingScreenData->templateNum = templateNum;
+        gNamingScreenData->monSpecies = monSpecies;
+        gNamingScreenData->monGender = monGender;
+        gNamingScreenData->monPersonality = monPersonality;
+        gNamingScreenData->destBuffer = destBuffer;
+        gNamingScreenData->returnCallback = returnCallback;
+
+        if (templateNum == 0)
+            StartTimer1();
+
+        SetMainCallback2(C2_NamingScreen);
+    }
+}
+
+void C2_NamingScreen(void)
+{
+    switch (gMain.state)
+    {
+    case 0:
+        NamingScreen_TurnOffScreen();
+        NamingScreen_Init();
+        gMain.state++;
+        break;
+    case 1:
+        NamingScreen_InitBGs();
+        gMain.state++;
+        break;
+    case 2:
+        ResetPaletteFade();
+        gMain.state++;
+        break;
+    case 3:
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gMain.state++;
+        break;
+    case 4:
+        ResetTasks();
+        gMain.state++;
+        break;
+    case 5:
+        choose_name_or_words_screen_apply_bg_pals();
+        gMain.state++;
+        break;
+    case 6:
+        choose_name_or_words_screen_load_bg_tile_patterns();
+        gMain.state++;
+        break;
+    case 7:
+        sub_809E898();
+        UpdatePaletteFade();
+        sub_809FC34();
+        gMain.state++;
+        break;
+    default:
+        sub_809F8C0();
+        sub_809DD60();
+        break;
+    }
+}
+
+void NamingScreen_Init(void)
+{
+    gNamingScreenData->state = 0;
+    gNamingScreenData->bg1vOffset = 0;
+    gNamingScreenData->bg2vOffset = 0;
+    gNamingScreenData->bg1Priority = BGCNT_PRIORITY(1);
+    gNamingScreenData->bg2Priority = BGCNT_PRIORITY(2);
+    gNamingScreenData->bgToReveal = 0;
+    gNamingScreenData->bgToHide = 1;
+    gNamingScreenData->template = sNamingScreenTemplates[gNamingScreenData->templateNum];
+    gNamingScreenData->currentPage = gNamingScreenData->template->initialPage;
+    gNamingScreenData->inputCharBaseXPos = (240 - gNamingScreenData->template->maxChars * 8) / 2 + 6;
+    gNamingScreenData->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
+    memset(gNamingScreenData->textBuffer, 0xFF, sizeof(gNamingScreenData->textBuffer));
+    if (gNamingScreenData->template->copyExistingString != 0)
+        StringCopy(gNamingScreenData->textBuffer, gNamingScreenData->destBuffer);
+    gKeyRepeatStartDelay = 16;
+}
+
+void sub_809DB70(void)
+{
+    u8 i;
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        if (gSprites[i].inUse)
+            gSprites[i].invisible = FALSE;
+    }
+    sub_809EA0C(0);
+}
+
+void NamingScreen_InitBGs(void)
+{
+    u8 i;
+
+    DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+    DmaClear32(3, (void *)OAM, OAM_SIZE);
+    DmaClear16(3, (void *)PLTT, PLTT_SIZE);
+
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, gUnknown_83E2290, NELEMS(gUnknown_83E2290));
+
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+
+    InitStandardTextBoxWindows();
+    ResetBg0();
+
+    for (i = 0; i < NELEMS(gUnknown_83E22A0) - 1; i++)
+        gNamingScreenData->windows[i] = AddWindow(&gUnknown_83E22A0[i]);
+
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0xC, 0x8));
+
+    SetBgTilemapBuffer(1, gNamingScreenData->tilemapBuffer1);
+    SetBgTilemapBuffer(2, gNamingScreenData->tilemapBuffer2);
+    SetBgTilemapBuffer(3, gNamingScreenData->tilemapBuffer3);
+
+    FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 0x20, 0x20);
+    FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
+}
+
+void sub_809DD60(void)
+{
+    CreateTask(sub_809DD88, 2);
+    SetMainCallback2(sub_809FB70);
+    BackupHelpContext();
+    SetHelpContext(HELPCONTEXT_NAMING_SCREEN);
+}
+
+void sub_809DD88(u8 taskId)
+{
+    switch (gNamingScreenData->state)
+    {
+    case MAIN_STATE_BEGIN_FADE_IN:
+        MainState_BeginFadeIn();
+        sub_809DB70();
+        NamingScreen_InitDisplayMode();
+        break;
+    case MAIN_STATE_WAIT_FADE_IN:
+        MainState_WaitFadeIn();
+        break;
+    case MAIN_STATE_HANDLE_INPUT:
+        MainState_HandleInput();
+        break;
+    case MAIN_STATE_MOVE_TO_OK_BUTTON:
+        MainState_MoveToOKButton();
+        break;
+    case MAIN_STATE_START_PAGE_SWAP:
+        MainState_StartPageSwap();
+        break;
+    case MAIN_STATE_WAIT_PAGE_SWAP:
+        MainState_WaitPageSwap();
+        break;
+    case MAIN_STATE_6:
+        pokemon_store();
+        break;
+    case MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE:
+        sub_809E1D4();
+        break;
+    case MAIN_STATE_BEGIN_FADE_OUT:
+        MainState_BeginFadeInOut();
+        break;
+    case MAIN_STATE_WAIT_FADE_OUT_AND_EXIT:
+        MainState_WaitFadeOutAndExit();
+        break;
+    }
+}
+
+const u8 sPageOrderLowerFirst[] = {
+    KBPAGE_LETTERS_LOWER,
+    KBPAGE_SYMBOLS,
+    KBPAGE_LETTERS_UPPER
+};
+
+const u8 sPageOrderUpperFirst[] = {
+    KBPAGE_LETTERS_UPPER,
+    KBPAGE_LETTERS_LOWER,
+    KBPAGE_SYMBOLS
+};
+
+const u8 sPageOrderSymbolsFirst[] = {
+    KBPAGE_SYMBOLS,
+    KBPAGE_LETTERS_UPPER,
+    KBPAGE_LETTERS_LOWER
+};
+
+u8 sub_809DE20(u8 a1)
+{
+    return sPageOrderLowerFirst[a1];
+}
+
+bool8 (*const sPageSwapAnimStateFuncs[])(struct Task * task) = {
+    PageSwapAnimState_Init,
+    PageSwapAnimState_1,
+    PageSwapAnimState_2,
+    PageSwapAnimState_Done
+};
+
+u8 sub_809DE30(void)
+{
+    return sPageOrderUpperFirst[gNamingScreenData->currentPage];
+}
+
+u8 sub_809DE50(void)
+{
+    return sPageOrderSymbolsFirst[gNamingScreenData->currentPage];
+}
+
+bool8 MainState_BeginFadeIn(void)
+{
+    sub_809F900(3, gUnknown_8E982BC);
+    gNamingScreenData->currentPage = KBPAGE_LETTERS_UPPER;
+    sub_809F900(2, gUnknown_8E98458);
+    sub_809F900(1, gUnknown_8E98398);
+    sub_809F9E8(gNamingScreenData->windows[1], KBPAGE_LETTERS_LOWER);
+    sub_809F9E8(gNamingScreenData->windows[0], KBPAGE_LETTERS_UPPER);
+    sub_809F914();
+    sub_809F56C();
+    sub_809FAE4();
+    CopyBgTilemapBufferToVram(1);
+    CopyBgTilemapBufferToVram(2);
+    CopyBgTilemapBufferToVram(3);
+    BlendPalettes(-1, 16, RGB_BLACK);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+    gNamingScreenData->state++;
+    return FALSE;
+}
+
+bool8 MainState_WaitFadeIn(void)
+{
+    if (!gPaletteFade.active)
+    {
+        SetInputState(INPUT_STATE_ENABLED);
+        sub_809EA64(1);
+        gNamingScreenData->state++;
+    }
+    return FALSE;
+}
+
+bool8 MainState_HandleInput(void)
+{
+    return HandleKeyboardEvent();
+}
+
+bool8 MainState_MoveToOKButton(void)
+{
+    if (IsCursorAnimFinished())
+    {
+        SetInputState(INPUT_STATE_ENABLED);
+        MoveCursorToOKButton();
+        gNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
+    }
+    return FALSE;
+}
+
+bool8 pokemon_store(void)
+{
+    sub_809F7EC();
+    SetInputState(INPUT_STATE_DISABLED);
+    sub_809EA64(0);
+    sub_809E518(3, 0, 1);
+    if (gNamingScreenData->templateNum == NAMING_SCREEN_CAUGHT_MON &&
+        CalculatePlayerPartyCount() >= 6)
+    {
+        pokemon_transfer_to_pc_with_message();
+        gNamingScreenData->state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
+        return FALSE;
+    }
+    else
+    {
+        gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
+        return TRUE;  //Exit the naming screen
+    }
+}

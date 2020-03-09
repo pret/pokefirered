@@ -4895,4 +4895,9 @@ extern const u32 gEasyChatRedRectangularCursor_Tiles[];
 extern const u32 gEasyChatSelectGroupHelp_Tiles[];
 extern const u32 gEasyChatModeIcons_Tiles[];
 
+// naming_screen
+extern const u32 gUnknown_8E982BC[];
+extern const u32 gUnknown_8E98458[];
+extern const u32 gUnknown_8E98398[];
+
 #endif //GUARD_GRAPHICS_H

@@ -236,7 +236,7 @@ gUnknown_203982C: @ 203982C
 
 	.align 2
 	@ .include "src/naming_screen.o"
-gUnknown_203998C: @ 203998C
+gNamingScreenData: @ 203998C
 	.space 0x4
 
 	.align 2

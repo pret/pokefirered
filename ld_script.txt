@@ -141,6 +141,7 @@ SECTIONS {
         src/special_field_anim.o(.text);
         src/berry.o(.text);
         src/script_menu.o(.text);
+        src/naming_screen.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
         src/script_pokemon_util.o(.text);
@@ -459,6 +460,7 @@ SECTIONS {
         src/special_field_anim.o(.rodata);
         src/berry.o(.rodata);
         src/script_menu.o(.rodata);
+        src/naming_screen.o(.rodata);
         data/naming_screen.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         src/item_use.o(.rodata);

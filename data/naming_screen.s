@@ -6,166 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83E1800:: @ 83E1800
-	.incbin "graphics/interface/naming_screen_83E1800.4bpp"
-
-gUnknown_83E18C0:: @ 83E18C0
-	.incbin "graphics/interface/naming_screen_83E18C0.4bpp"
-
-gUnknown_83E1980:: @ 83E1980
-	.incbin "graphics/interface/naming_screen_83E1980.4bpp"
-
-gUnknown_83E2280:: @ 83E2280
-	.4byte Text_MonSentToBoxInSomeonesPC
-	.4byte Text_MonSentToBoxInBillsPC
-	.4byte Text_MonSentToBoxSomeonesBoxFull
-	.4byte Text_MonSentToBoxBillsBoxFull
-
-gUnknown_83E2290:: @ 83E2290
-	.4byte 0x000001e0
-	@ {
-	@   .bg = 0,
-	@   .charBaseIndex = 0,
-	@   .mapBaseIndex = 30,
-	@   .screenSize = 0,
-	@   .paletteMode = 0,
-	@   .priority = 0,
-	@   .baseTile = 0x0000
-	@ }
-	.4byte 0x000011d9
-	@ {
-	@   .bg = 1,
-	@   .charBaseIndex = 2,
-	@   .mapBaseIndex = 29,
-	@   .screenSize = 0,
-	@   .paletteMode = 0,
-	@   .priority = 1,
-	@   .baseTile = 0x0000
-	@ }
-	.4byte 0x000021ca
-	@ {
-	@   .bg = 2,
-	@   .charBaseIndex = 2,
-	@   .mapBaseIndex = 28,
-	@   .screenSize = 0,
-	@   .paletteMode = 0,
-	@   .priority = 2,
-	@   .baseTile = 0x0000
-	@ }
-	.4byte 0x000031ff
-	@ {
-	@   .bg = 3,
-	@   .charBaseIndex = 3,
-	@   .mapBaseIndex = 31,
-	@   .screenSize = 0,
-	@   .paletteMode = 0,
-	@   .priority = 3,
-	@   .baseTile = 0x0000
-	@ }
-
-gUnknown_83E22A0:: @ 83E22A0
-	.byte 1, 3, 10, 19, 8, 10
-	.2byte 0x0030
-	@ {
-	@   .bg = 1,
-	@   .tilemapLeft = 3,
-	@   .tilemapTop = 10,
-	@   .width = 19,
-	@   .height = 8,
-	@   .paletteNum = 10,
-	@   .baseBlock = 0x0030
-	@ }
-	.byte 2, 3, 10, 19, 8, 10
-	.2byte 0x00c8
-	@ {
-	@   .bg = 2,
-	@   .tilemapLeft = 3,
-	@   .tilemapTop = 10,
-	@   .width = 19,
-	@   .height = 8,
-	@   .paletteNum = 10,
-	@   .baseBlock = 0x00c8
-	@ }
-	.byte 3, 8, 6, 14, 2, 10
-	.2byte 0x0030
-	@ {
-	@   .bg = 3,
-	@   .tilemapLeft = 8,
-	@   .tilemapTop = 6,
-	@   .width = 14,
-	@   .height = 2,
-	@   .paletteNum = 10,
-	@   .baseBlock = 0x0030
-	@ }
-	.byte 3, 9, 4, 16, 2, 10
-	.2byte 0x004c
-	@ {
-	@   .bg = 3,
-	@   .tilemapLeft = 9,
-	@   .tilemapTop = 4,
-	@   .width = 16,
-	@   .height = 2,
-	@   .paletteNum = 10,
-	@   .baseBlock = 0x004c
-	@ }
-	.byte 0, 0, 0, 30, 2, 11
-	.2byte 0x006c
-	@ {
-	@   .bg = 0,
-	@   .tilemapLeft = 0,
-	@   .tilemapTop = 0,
-	@   .width = 30,
-	@   .height = 2,
-	@   .paletteNum = 11,
-	@   .baseBlock = 0x006c
-	@ }
-	.byte 255, 0, 0, 0, 0, 0
-	.2byte 0x0000
-	@ {
-	@   .bg = 255,
-	@   .tilemapLeft = 0,
-	@   .tilemapTop = 0,
-	@   .width = 0,
-	@   .height = 0,
-	@   .paletteNum = 0,
-	@   .baseBlock = 0x0000
-	@ }
-
-gUnknown_83E22D0:: @ 83E22D0
-	.string "abcdef .", 8
-	.string "ghijkl ,", 8
-	.string "mnopqrs",  8
-	.string "tuvwxyz",  8
-	.string "ABCDEF .", 8
-	.string "GHIJKL ,", 8
-	.string "MNOPQRS",  8
-	.string "TUVWXYZ",  8
-	.string "01234",    8
-	.string "56789",    8
-	.string "!?♂♀/-",   8
-	.string "…“”‘'",    8
-
-gUnknown_83E2330:: @ 83E2330
-	.byte 0x08, 0x08, 0x06
-
-gUnknown_83E2333:: @ 83E2333
-	.byte 0x00, 0x0c, 0x18, 0x38, 0x44, 0x50, 0x5c, 0x7b, 0x00, 0x0c, 0x18, 0x38, 0x44, 0x50, 0x5c, 0x7b, 0x00, 0x16, 0x2c, 0x42, 0x58, 0x6e, 0x00, 0x00
-
-gUnknown_83E234B:: @ 83E234B
-	.byte 0x00, 0x02, 0x01
-
-gUnknown_83E234E:: @ 83E234E
-	.byte 0x01, 0x00, 0x02
-
-gUnknown_83E2351:: @ 83E2351
-	.byte 0x02, 0x01, 0x00
-
-gUnknown_83E2354:: @ 83E2354
-	.4byte sub_809E384
-	.4byte sub_809E3AC
-	.4byte sub_809E440
-	.4byte sub_809E4D4
-
 gUnknown_83E2364:: @ 83E2364
 	.2byte 0x0000, 0xfffc, 0xfffe, 0xffff
 
@@ -173,8 +13,9 @@ gUnknown_83E236C:: @ 83E236C
 	.2byte 0x0002, 0x0003, 0x0002, 0x0001
 
 gUnknown_83E2374:: @ 83E2374
-	.byte 0x01, 0x02, 0x03, 0x00
+	.byte 0x01, 0x02, 0x03
 
+	.align 2
 gUnknown_83E2378:: @ 83E2378
 	.4byte sub_809EC7C
 	.4byte sub_809ECD0
@@ -293,7 +134,7 @@ gUnknown_83E2480:: @ 83E2480
 	.align 2
 	.4byte gUnknown_8418E69
 
-gUnknown_83E248C:: @ 83E248C
+sNamingScreenTemplates:: @ 83E248C
 	.4byte gUnknown_83E245C
 	.4byte gUnknown_83E2468
 	.4byte gUnknown_83E2474

@@ -23,6 +23,7 @@
 #include "party_menu.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "constants/field_weather.h"
 
 #define PC_ITEM_ID  0
 #define PC_QUANTITY 1
@@ -331,7 +332,7 @@ static void Task_DepositItem_WaitFadeAndGoToBag(u8 taskId)
 static void Task_PlayerPcDepositItem(u8 taskId)
 {
     gTasks[taskId].func = Task_DepositItem_WaitFadeAndGoToBag;
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_ReturnToItemStorageSubmenu(u8 taskId)
@@ -394,7 +395,7 @@ static void Task_WithdrawItemBeginFade(u8 taskId)
 {
     gTasks[taskId].func = Task_WithdrawItem_WaitFadeAndGoToItemStorage;
     ItemPc_SetInitializedFlag(0);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
 static void Task_PlayerPcCancel(u8 taskId)
@@ -556,7 +557,7 @@ static void Task_MailSubmenuHandleInput(u8 taskId)
 
 static void Task_PlayerPcReadMail(u8 taskId)
 {
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_WaitFadeAndReadSelectedMail;
 }
 
@@ -663,7 +664,7 @@ static void Task_PlayerPcGiveMailToMon(u8 taskId)
     }
     else
     {
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_WaitFadeAndGoToPartyMenu;
     }
 }

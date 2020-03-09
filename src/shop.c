@@ -36,6 +36,7 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/game_stat.h"
+#include "constants/field_weather.h"
 
 #define tItemCount data[1]
 #define tItemId data[5]
@@ -292,14 +293,14 @@ static void Task_ShopMenu(u8 taskId)
 static void Task_HandleShopMenuBuy(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_InitBuyMenu);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_GoToSellMenu);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;    
 }
 

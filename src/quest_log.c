@@ -42,6 +42,7 @@
 #include "constants/trainer_classes.h"
 #include "constants/species.h"
 #include "constants/items.h"
+#include "constants/field_weather.h"
 
 u8 gUnknown_3005E88;
 
@@ -152,7 +153,7 @@ static u8 sub_8111BD4(void);
 static void DrawQuestLogSceneDescription(void);
 static void sub_8111D90(u8);
 static void QuestLog_CloseTextWindow(void);
-static void QuestLog_SkipToEndOfPlayback(s8);
+static void QuestLog_SkipToEndOfPlayback(s8 delay);
 static void QuestLog_WaitFadeAndCancelPlayback(void);
 static bool8 sub_8111F60(void);
 static void sub_8111F8C(u8);
@@ -920,7 +921,7 @@ static void sub_811175C(u8 sceneNum, struct UnkStruct_203AE98 * a1)
 
 static void sub_81118F4(s8 a0)
 {
-    FadeScreen(1, a0);
+    FadeScreen(FADE_TO_BLACK, a0);
     sQuestLogCB = QuestLog_AdvancePlayhead;
 }
 
@@ -1178,9 +1179,9 @@ static void QuestLog_CloseTextWindow(void)
     CopyWindowToVram(gUnknown_203ADFE[1], 1);
 }
 
-static void QuestLog_SkipToEndOfPlayback(s8 a0)
+static void QuestLog_SkipToEndOfPlayback(s8 delay)
 {
-    FadeScreen(1, a0);
+    FadeScreen(FADE_TO_BLACK, delay);
     sQuestLogCB = QuestLog_WaitFadeAndCancelPlayback;
 }
 
@@ -4294,7 +4295,7 @@ static const u16 sQuestLogWorldMapFlags[] =
     FLAG_WORLD_MAP_SIX_ISLAND
 };
 
-void sub_8115748(u16 worldMapFlag)
+void QuestLog_RecordEnteredMap(u16 worldMapFlag)
 {
     s32 i;
 

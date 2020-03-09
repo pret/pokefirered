@@ -41,6 +41,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/field_weather.h"
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -456,7 +457,7 @@ void FieldUseFunc_TmCase(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitTMCaseFromField;
     }
 }
@@ -487,7 +488,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitBerryPouchFromField;
     }
 }
@@ -530,7 +531,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitTeachyTvFromField;
     }
 }
@@ -660,7 +661,7 @@ void FieldUseFunc_TownMap(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = sub_80A1CC0;
     }
 }
@@ -692,7 +693,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = sub_80A1D68;
     }
 }

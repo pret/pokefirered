@@ -183,7 +183,7 @@ SECTIONS {
         src/battle_ai_script_commands.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
-        asm/fldeff_flash.o(.text);
+        src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
@@ -489,7 +489,7 @@ SECTIONS {
         src/region_map.o(.rodata);
         src/image_processing_effects.o(.rodata);
         src/battle_ai_script_commands.o(.rodata);
-        data/fldeff_flash.o(.rodata);
+        src/fldeff_flash.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         src/evolution_scene.o(.rodata);

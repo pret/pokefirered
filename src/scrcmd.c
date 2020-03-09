@@ -598,8 +598,8 @@ bool8 ScrCmd_comparestattoword(struct ScriptContext * ctx)
 bool8 ScrCmd_setworldmapflag(struct ScriptContext * ctx)
 {
     u16 value = ScriptReadHalfword(ctx);
-    sub_8115748(value);
-    sub_80F85BC(value);
+    QuestLog_RecordEnteredMap(value);
+    MapPreview_SetFlag(value);
     return FALSE;
 }
 

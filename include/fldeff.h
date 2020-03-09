@@ -13,8 +13,8 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
 u8 CreateFieldEffectShowMon(void);
 
 // flash
-u8 sub_80C9DCC(u8 lightLevel, u8 mapType);
-u8 sub_80C9D7C(u8 mapType1, u8 mapType2);
+u8 MapTransitionIsExit(u8 lightLevel, u8 mapType);
+u8 MapTransitionIsEnter(u8 mapType1, u8 mapType2);
 bool8 SetUpFieldMove_Flash(void);
 
 // cut

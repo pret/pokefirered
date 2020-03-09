@@ -39,6 +39,7 @@
 #include "help_system.h"
 #include "constants/songs.h"
 #include "constants/flags.h"
+#include "constants/field_weather.h"
 
 enum StartMenuOption
 {
@@ -446,7 +447,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
     }
 }
 

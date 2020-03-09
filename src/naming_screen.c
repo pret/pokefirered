@@ -1,13 +1,21 @@
 #include "global.h"
 #include "gflib.h"
+#include "battle_message.h"
 #include "graphics.h"
+#include "event_data.h"
 #include "event_scripts.h"
+#include "field_effect.h"
+#include "field_specials.h"
 #include "help_system.h"
 #include "naming_screen.h"
 #include "new_menu_helpers.h"
+#include "pokemon_storage_system.h"
 #include "strings.h"
 #include "task.h"
+#include "trig.h"
 #include "constants/help_system.h"
+#include "constants/flags.h"
+#include "constants/songs.h"
 
 enum
 {
@@ -89,26 +97,38 @@ bool8 MainState_WaitFadeIn(void);
 bool8 MainState_HandleInput(void);
 bool8 MainState_MoveToOKButton(void);
 bool8 pokemon_store(void);
+bool8 MainState_BeginFadeInOut(void);
+bool8 MainState_WaitFadeOutAndExit(void);
 void pokemon_transfer_to_pc_with_message(void);
-bool8 NamingScreen_InitDisplayMode(void);
+bool8 sub_809E1D4(void);
 bool8 MainState_StartPageSwap(void);
 bool8 MainState_WaitPageSwap(void);
-bool8 sub_809E1D4(void);
+void StartPageSwapAnim(void);
+void Task_HandlePageSwapAnim(u8 taskId);
+bool8 IsPageSwapAnimNotInProgress(void);
 bool8 PageSwapAnimState_Init(struct Task * task);
 bool8 PageSwapAnimState_1(struct Task * task);
 bool8 PageSwapAnimState_2(struct Task * task);
 bool8 PageSwapAnimState_Done(struct Task * task);
-void MainState_BeginFadeInOut(void);
-void MainState_WaitFadeOutAndExit(void);
+void sub_809E518(u8 a0, u8 a1, u8 a2);
+void Task_809E58C(u8 taskId);
+u16 sub_809E644(u8 tag);
+void sub_809E6B8(u8 a0);
+void sub_809E6E0(struct Task * task, u8 a1, u8 a2);
+void GetCursorPos(s16 *xP, s16 *yP);
+u8 GetCurrentPageColumnCount(void);
+void SetCursorPos(s16 x, s16 y);
+void sub_809FA60(void);
+bool8 NamingScreen_InitDisplayMode(void);
 void NamingScreen_TurnOffScreen(void);
 void choose_name_or_words_screen_apply_bg_pals(void);
 void choose_name_or_words_screen_load_bg_tile_patterns(void);
-void sub_809E518(u8 a0, u8 a1, u8 a2);
 void sub_809E898(void);
 bool8 IsCursorAnimFinished();
 void MoveCursorToOKButton();
 void sub_809EA0C(u8 a0);
 void sub_809EA64(u8 a0);
+void sub_809EC20(void);
 bool8 HandleKeyboardEvent(void);
 void SetInputState(u8 state);
 void sub_809F56C(void);
@@ -125,7 +145,7 @@ const u16 gUnknown_83E1800[] = INCBIN_U16("graphics/interface/naming_screen_83E1
 const u16 gUnknown_83E18C0[] = INCBIN_U16("graphics/interface/naming_screen_83E18C0.4bpp");
 const u16 gUnknown_83E1980[] = INCBIN_U16("graphics/interface/naming_screen_83E1980.4bpp");
 
-const u8 *const gUnknown_83E2280[] = {
+const u8 *const sTransferredToPCMessages[] = {
     Text_MonSentToBoxInSomeonesPC,
     Text_MonSentToBoxInBillsPC,
     Text_MonSentToBoxSomeonesBoxFull,
@@ -482,13 +502,6 @@ u8 sub_809DE20(u8 a1)
     return sPageOrderLowerFirst[a1];
 }
 
-bool8 (*const sPageSwapAnimStateFuncs[])(struct Task * task) = {
-    PageSwapAnimState_Init,
-    PageSwapAnimState_1,
-    PageSwapAnimState_2,
-    PageSwapAnimState_Done
-};
-
 u8 sub_809DE30(void)
 {
     return sPageOrderUpperFirst[gNamingScreenData->currentPage];
@@ -564,4 +577,313 @@ bool8 pokemon_store(void)
         gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
         return TRUE;  //Exit the naming screen
     }
+}
+
+bool8 MainState_BeginFadeInOut(void)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gNamingScreenData->state++;
+    return FALSE;
+}
+
+bool8 MainState_WaitFadeOutAndExit(void)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gNamingScreenData->templateNum == NAMING_SCREEN_PLAYER)
+            SeedRngAndSetTrainerId();
+        SetMainCallback2(gNamingScreenData->returnCallback);
+        DestroyTask(FindTaskIdByFunc(sub_809DD88));
+        FreeAllWindowBuffers();
+        FREE_AND_SET_NULL(gNamingScreenData);
+        RestoreHelpContext();
+    }
+    return FALSE;
+}
+
+void pokemon_transfer_to_pc_with_message(void)
+{
+    u8 stringToDisplay = 0;
+
+    if (!IsDestinationBoxFull())
+    {
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
+        StringCopy(gStringVar2, gNamingScreenData->destBuffer);
+    }
+    else
+    {
+        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
+        StringCopy(gStringVar2, gNamingScreenData->destBuffer);
+        StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
+        stringToDisplay = 2;
+    }
+
+    if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC))
+        stringToDisplay++;
+
+    StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
+    DrawDialogueFrame(0, FALSE);
+    gTextFlags.canABSpeedUpPrint = TRUE;
+    AddTextPrinterParameterized2(0, 2, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+    CopyWindowToVram(0, 3);
+}
+
+bool8 sub_809E1D4(void)
+{
+    RunTextPrinters();
+
+    if (!IsTextPrinterActive(0) && (JOY_NEW(A_BUTTON)))
+        gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
+
+    return FALSE;
+}
+
+bool8 MainState_StartPageSwap(void)
+{
+    SetInputState(INPUT_STATE_DISABLED);
+    sub_809EC20();
+    StartPageSwapAnim();
+    sub_809EA0C(1);
+    sub_809E518(0, 0, 1);
+    PlaySE(SE_WIN_OPEN);
+    gNamingScreenData->state = MAIN_STATE_WAIT_PAGE_SWAP;
+    return FALSE;
+}
+
+bool8 MainState_WaitPageSwap(void)
+{
+    s16 cursorX;
+    s16 cursorY;
+    bool32 var3;
+
+    if (IsPageSwapAnimNotInProgress())
+    {
+
+        GetCursorPos(&cursorX, &cursorY);
+        var3 = (cursorX == GetCurrentPageColumnCount());
+
+        gNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
+        gNamingScreenData->currentPage++;
+        gNamingScreenData->currentPage %= 3;
+
+        if (var3)
+        {
+            cursorX = GetCurrentPageColumnCount();
+        }
+        else
+        {
+            if (cursorX >= GetCurrentPageColumnCount())
+                cursorX = GetCurrentPageColumnCount() - 1;
+        }
+
+        SetCursorPos(cursorX, cursorY);
+        sub_809FA60();
+        SetInputState(INPUT_STATE_ENABLED);
+        sub_809EA0C(0);
+    }
+    return FALSE;
+}
+
+//--------------------------------------------------
+// Page Swap
+//--------------------------------------------------
+
+#define tState data[0]
+#define tFrameCount data[1]
+
+bool8 (*const sPageSwapAnimStateFuncs[])(struct Task * task) = {
+    PageSwapAnimState_Init,
+    PageSwapAnimState_1,
+    PageSwapAnimState_2,
+    PageSwapAnimState_Done
+};
+
+void StartPageSwapAnim(void)
+{
+    u8 taskId;
+
+    taskId = CreateTask(Task_HandlePageSwapAnim, 0);
+    Task_HandlePageSwapAnim(taskId);
+}
+
+void Task_HandlePageSwapAnim(u8 taskId)
+{
+    while (sPageSwapAnimStateFuncs[gTasks[taskId].tState](&gTasks[taskId]))
+        ;
+}
+
+bool8 IsPageSwapAnimNotInProgress(void)
+{
+    if (FindTaskIdByFunc(Task_HandlePageSwapAnim) == 0xFF)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 PageSwapAnimState_Init(struct Task *task)
+{
+    gNamingScreenData->bg1vOffset = 0;
+    gNamingScreenData->bg2vOffset = 0;
+    task->tState++;
+    return 0;
+}
+
+bool8 PageSwapAnimState_1(struct Task *task)
+{
+    u16 *const arr[] =
+        {
+            &gNamingScreenData->bg2vOffset,
+            &gNamingScreenData->bg1vOffset
+        };
+
+    task->tFrameCount += 4;
+    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    if (task->tFrameCount >= 64)
+    {
+        u8 temp = gNamingScreenData->bg1Priority;  //Why u8 and not u16?
+
+        gNamingScreenData->bg1Priority = gNamingScreenData->bg2Priority;
+        gNamingScreenData->bg2Priority = temp;
+        task->tState++;
+    }
+    return 0;
+}
+
+bool8 PageSwapAnimState_2(struct Task *task)
+{
+    u16 *const arr[] =
+        {
+            &gNamingScreenData->bg2vOffset,
+            &gNamingScreenData->bg1vOffset
+        };
+
+    task->tFrameCount += 4;
+    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    if (task->tFrameCount >= 128)
+    {
+        u8 temp = gNamingScreenData->bgToReveal;
+
+        gNamingScreenData->bgToReveal = gNamingScreenData->bgToHide;
+        gNamingScreenData->bgToHide = temp;
+        task->tState++;
+    }
+    return 0;
+}
+
+bool8 PageSwapAnimState_Done(struct Task *task)
+{
+    DestroyTask(FindTaskIdByFunc(Task_HandlePageSwapAnim));
+    return 0;
+}
+
+#undef tState
+#undef tFrameCount
+
+//--------------------------------------------------
+// Cursor blink
+//--------------------------------------------------
+
+#define tIdent data[0]
+
+void sub_809E4F0(void)
+{
+    u8 taskId;
+
+    taskId = CreateTask(Task_809E58C, 3);
+    gTasks[taskId].data[0] = 3;
+}
+
+void sub_809E518(u8 a, u8 b, u8 c)
+{
+    struct Task *task = &gTasks[FindTaskIdByFunc(Task_809E58C)];
+
+    if (a == task->data[0] && c == 0)
+    {
+        task->data[1] = b;
+        task->data[2] = 1;
+        return;
+    }
+    if (a == 3 && task->data[1] == 0 && c == 0)
+        return;
+    if (task->data[0] != 3)
+        sub_809E6B8(task->data[0]);
+    sub_809E6E0(task, a, b);
+}
+
+void Task_809E58C(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (task->data[0] == 3 || task->data[2] == 0)
+        return;
+    MultiplyInvertedPaletteRGBComponents(sub_809E644(task->data[0]), task->data[3], task->data[3], task->data[3]);
+    if (task->data[5] != 0)
+    {
+        task->data[5]--;
+        if (task->data[5] != 0)
+            return;
+    }
+    task->data[5] = 2;
+    if (task->data[4] >= 0)
+    {
+        if (task->data[3] < 14)
+        {
+            task->data[3] += task->data[4];
+            task->data[6] += task->data[4];
+        }
+        else
+        {
+            task->data[3] = 16;
+            task->data[6]++;
+        }
+    }
+    else
+    {
+        task->data[3] += task->data[4];
+        task->data[6] += task->data[4];
+    }
+
+    if (task->data[3] == 16 && task->data[6] == 22)
+    {
+        task->data[4] = -4;
+    }
+    else if (task->data[3] == 0)
+    {
+        task->data[2] = task->data[1];
+        task->data[4] = 2;
+        task->data[6] = 0;
+    }
+}
+
+u16 sub_809E644(u8 a)
+{
+    const u16 arr[] =
+    {
+        IndexOfSpritePaletteTag(4) * 16 + 0x10E, // Swap
+        IndexOfSpritePaletteTag(6) * 16 + 0x10E, // BACK
+        IndexOfSpritePaletteTag(7) * 16 + 0x10E, // OK
+        IndexOfSpritePaletteTag(7) * 16 + 0x101, // kbd
+    };
+
+    return arr[a];
+}
+
+void sub_809E6B8(u8 a)
+{
+    u16 index = sub_809E644(a);
+
+    gPlttBufferFaded[index] = gPlttBufferUnfaded[index];
+}
+
+void sub_809E6E0(struct Task *task, u8 b, u8 c)
+{
+    task->data[0] = b;
+    task->data[1] = c;
+    task->data[2] = 1;
+    task->data[3] = 4;
+    task->data[4] = 2;
+    task->data[5] = 0;
+    task->data[6] = 4;
 }

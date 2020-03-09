@@ -5,881 +5,6 @@
 
 	.text
 
-	thumb_func_start MainState_BeginFadeInOut
-MainState_BeginFadeInOut: @ 809E014
-	push {lr}
-	sub sp, 0x4
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r0, _0809E040 @ =gNamingScreenData
-	ldr r1, [r0]
-	ldr r0, _0809E044 @ =0x00001e10
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	movs r0, 0
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E040: .4byte gNamingScreenData
-_0809E044: .4byte 0x00001e10
-	thumb_func_end MainState_BeginFadeInOut
-
-	thumb_func_start MainState_WaitFadeOutAndExit
-MainState_WaitFadeOutAndExit: @ 809E048
-	push {r4,r5,lr}
-	ldr r0, _0809E0A0 @ =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0
-	bne _0809E096
-	ldr r4, _0809E0A4 @ =gNamingScreenData
-	ldr r0, [r4]
-	ldr r1, _0809E0A8 @ =0x00001e2c
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0809E06C
-	bl SeedRngAndSetTrainerId
-_0809E06C:
-	ldr r0, [r4]
-	ldr r1, _0809E0AC @ =0x00001e3c
-	adds r0, r1
-	ldr r0, [r0]
-	bl SetMainCallback2
-	ldr r0, _0809E0B0 @ =sub_809DD88
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-	bl FreeAllWindowBuffers
-	ldr r0, [r4]
-	bl Free
-	str r5, [r4]
-	bl RestoreHelpContext
-_0809E096:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E0A0: .4byte gPaletteFade
-_0809E0A4: .4byte gNamingScreenData
-_0809E0A8: .4byte 0x00001e2c
-_0809E0AC: .4byte 0x00001e3c
-_0809E0B0: .4byte sub_809DD88
-	thumb_func_end MainState_WaitFadeOutAndExit
-
-	thumb_func_start pokemon_transfer_to_pc_with_message
-pokemon_transfer_to_pc_with_message: @ 809E0B4
-	push {r4,r5,lr}
-	sub sp, 0x10
-	movs r5, 0
-	bl IsDestinationBoxFull
-	lsls r0, 24
-	cmp r0, 0
-	bne _0809E104
-	ldr r4, _0809E0F0 @ =gStringVar1
-	ldr r0, _0809E0F4 @ =0x00004037
-	bl VarGet
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBoxNamePtr
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	ldr r0, _0809E0F8 @ =gStringVar2
-	ldr r1, _0809E0FC @ =gNamingScreenData
-	ldr r1, [r1]
-	ldr r2, _0809E100 @ =0x00001e30
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	b _0809E144
-	.align 2, 0
-_0809E0F0: .4byte gStringVar1
-_0809E0F4: .4byte 0x00004037
-_0809E0F8: .4byte gStringVar2
-_0809E0FC: .4byte gNamingScreenData
-_0809E100: .4byte 0x00001e30
-_0809E104:
-	ldr r4, _0809E1AC @ =gStringVar1
-	ldr r0, _0809E1B0 @ =0x00004037
-	bl VarGet
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBoxNamePtr
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	ldr r0, _0809E1B4 @ =gStringVar2
-	ldr r1, _0809E1B8 @ =gNamingScreenData
-	ldr r1, [r1]
-	ldr r2, _0809E1BC @ =0x00001e30
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	ldr r4, _0809E1C0 @ =gStringVar3
-	bl GetPCBoxToSendMon
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBoxNamePtr
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	movs r5, 0x2
-_0809E144:
-	ldr r0, _0809E1C4 @ =0x00000834
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809E156
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-_0809E156:
-	ldr r4, _0809E1C8 @ =gStringVar4
-	ldr r1, _0809E1CC @ =gUnknown_83E2280
-	lsls r0, r5, 2
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	movs r0, 0
-	movs r1, 0
-	bl DrawDialogueFrame
-	ldr r2, _0809E1D0 @ =gTextFlags
-	ldrb r0, [r2]
-	movs r1, 0x1
-	orrs r0, r1
-	strb r0, [r2]
-	bl GetTextSpeedSetting
-	adds r3, r0, 0
-	lsls r3, 24
-	lsrs r3, 24
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x2
-	str r0, [sp, 0x4]
-	movs r0, 0x1
-	str r0, [sp, 0x8]
-	movs r0, 0x3
-	str r0, [sp, 0xC]
-	movs r0, 0
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl AddTextPrinterParameterized2
-	movs r0, 0
-	movs r1, 0x3
-	bl CopyWindowToVram
-	add sp, 0x10
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E1AC: .4byte gStringVar1
-_0809E1B0: .4byte 0x00004037
-_0809E1B4: .4byte gStringVar2
-_0809E1B8: .4byte gNamingScreenData
-_0809E1BC: .4byte 0x00001e30
-_0809E1C0: .4byte gStringVar3
-_0809E1C4: .4byte 0x00000834
-_0809E1C8: .4byte gStringVar4
-_0809E1CC: .4byte gUnknown_83E2280
-_0809E1D0: .4byte gTextFlags
-	thumb_func_end pokemon_transfer_to_pc_with_message
-
-	thumb_func_start sub_809E1D4
-sub_809E1D4: @ 809E1D4
-	push {lr}
-	bl RunTextPrinters
-	movs r0, 0
-	bl IsTextPrinterActive
-	lsls r0, 16
-	cmp r0, 0
-	bne _0809E1FE
-	ldr r0, _0809E204 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0809E1FE
-	ldr r0, _0809E208 @ =gNamingScreenData
-	ldr r0, [r0]
-	ldr r1, _0809E20C @ =0x00001e10
-	adds r0, r1
-	movs r1, 0x8
-	strb r1, [r0]
-_0809E1FE:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E204: .4byte gMain
-_0809E208: .4byte gNamingScreenData
-_0809E20C: .4byte 0x00001e10
-	thumb_func_end sub_809E1D4
-
-	thumb_func_start MainState_StartPageSwap
-MainState_StartPageSwap: @ 809E210
-	push {lr}
-	movs r0, 0
-	bl SetInputState
-	bl sub_809EC20
-	bl sub_809E30C
-	movs r0, 0x1
-	bl sub_809EA0C
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x1
-	bl sub_809E518
-	movs r0, 0x6
-	bl PlaySE
-	ldr r0, _0809E248 @ =gNamingScreenData
-	ldr r0, [r0]
-	ldr r1, _0809E24C @ =0x00001e10
-	adds r0, r1
-	movs r1, 0x5
-	strb r1, [r0]
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E248: .4byte gNamingScreenData
-_0809E24C: .4byte 0x00001e10
-	thumb_func_end MainState_StartPageSwap
-
-	thumb_func_start MainState_WaitPageSwap
-MainState_WaitPageSwap: @ 809E250
-	push {r4-r6,lr}
-	sub sp, 0x4
-	bl sub_809E364
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809E302
-	mov r4, sp
-	adds r4, 0x2
-	mov r0, sp
-	adds r1, r4, 0
-	bl sub_809E9CC
-	bl sub_809EB40
-	movs r5, 0
-	mov r1, sp
-	movs r2, 0
-	ldrsh r1, [r1, r2]
-	lsls r0, 24
-	lsrs r0, 24
-	adds r6, r4, 0
-	cmp r1, r0
-	bne _0809E282
-	movs r5, 0x1
-_0809E282:
-	ldr r2, _0809E2B8 @ =gNamingScreenData
-	ldr r0, [r2]
-	ldr r1, _0809E2BC @ =0x00001e10
-	adds r0, r1
-	movs r1, 0x2
-	strb r1, [r0]
-	ldr r1, [r2]
-	ldr r3, _0809E2C0 @ =0x00001e22
-	adds r1, r3
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r4, [r2]
-	adds r4, r3
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl __umodsi3
-	strb r0, [r4]
-	cmp r5, 0
-	beq _0809E2C4
-	mov r4, sp
-	bl sub_809EB40
-	lsls r0, 24
-	lsrs r0, 24
-	b _0809E2E2
-	.align 2, 0
-_0809E2B8: .4byte gNamingScreenData
-_0809E2BC: .4byte 0x00001e10
-_0809E2C0: .4byte 0x00001e22
-_0809E2C4:
-	mov r0, sp
-	movs r2, 0
-	ldrsh r4, [r0, r2]
-	bl sub_809EB40
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	blt _0809E2E4
-	mov r4, sp
-	bl sub_809EB40
-	lsls r0, 24
-	lsrs r0, 24
-	subs r0, 0x1
-_0809E2E2:
-	strh r0, [r4]
-_0809E2E4:
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r2, 0
-	ldrsh r1, [r6, r2]
-	bl sub_809E948
-	bl sub_809FA60
-	movs r0, 0x1
-	bl SetInputState
-	movs r0, 0
-	bl sub_809EA0C
-_0809E302:
-	movs r0, 0
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end MainState_WaitPageSwap
-
-	thumb_func_start sub_809E30C
-sub_809E30C: @ 809E30C
-	push {r4,lr}
-	ldr r4, _0809E328 @ =sub_809E32C
-	adds r0, r4, 0
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	bl _call_via_r4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E328: .4byte sub_809E32C
-	thumb_func_end sub_809E30C
-
-	thumb_func_start sub_809E32C
-sub_809E32C: @ 809E32C
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, _0809E35C @ =sPageSwapAnimStateFuncs
-	ldr r2, _0809E360 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-_0809E33E:
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	lsls r0, 2
-	adds r0, r5
-	ldr r1, [r0]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _0809E33E
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E35C: .4byte sPageSwapAnimStateFuncs
-_0809E360: .4byte gTasks
-	thumb_func_end sub_809E32C
-
-	thumb_func_start sub_809E364
-sub_809E364: @ 809E364
-	push {lr}
-	ldr r0, _0809E378 @ =sub_809E32C
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	beq _0809E37C
-	movs r0, 0
-	b _0809E37E
-	.align 2, 0
-_0809E378: .4byte sub_809E32C
-_0809E37C:
-	movs r0, 0x1
-_0809E37E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_809E364
-
-	thumb_func_start PageSwapAnimState_Init
-PageSwapAnimState_Init: @ 809E384
-	ldr r1, _0809E3A0 @ =gNamingScreenData
-	ldr r1, [r1]
-	ldr r3, _0809E3A4 @ =0x00001e18
-	adds r2, r1, r3
-	movs r3, 0
-	strh r3, [r2]
-	ldr r2, _0809E3A8 @ =0x00001e1a
-	adds r1, r2
-	strh r3, [r1]
-	ldrh r1, [r0, 0x8]
-	adds r1, 0x1
-	strh r1, [r0, 0x8]
-	movs r0, 0
-	bx lr
-	.align 2, 0
-_0809E3A0: .4byte gNamingScreenData
-_0809E3A4: .4byte 0x00001e18
-_0809E3A8: .4byte 0x00001e1a
-	thumb_func_end PageSwapAnimState_Init
-
-	thumb_func_start PageSwapAnimState_1
-PageSwapAnimState_1: @ 809E3AC
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	ldr r5, _0809E42C @ =gNamingScreenData
-	ldr r0, [r5]
-	ldr r2, _0809E430 @ =0x00001e1a
-	adds r1, r0, r2
-	str r1, [sp]
-	ldr r1, _0809E434 @ =0x00001e18
-	adds r0, r1
-	str r0, [sp, 0x4]
-	ldrh r0, [r4, 0xA]
-	adds r0, 0x4
-	strh r0, [r4, 0xA]
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	movs r1, 0x28
-	bl Sin
-	ldr r1, [r5]
-	movs r2, 0xF1
-	lsls r2, 5
-	adds r1, r2
-	ldrb r1, [r1]
-	lsls r1, 2
-	add r1, sp
-	ldr r1, [r1]
-	strh r0, [r1]
-	ldrh r0, [r4, 0xA]
-	adds r0, 0x80
-	movs r1, 0xFF
-	ands r0, r1
-	movs r1, 0x28
-	bl Sin
-	ldr r1, [r5]
-	ldr r2, _0809E438 @ =0x00001e21
-	adds r1, r2
-	ldrb r1, [r1]
-	lsls r1, 2
-	add r1, sp
-	ldr r1, [r1]
-	strh r0, [r1]
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x3F
-	ble _0809E422
-	ldr r0, [r5]
-	ldr r1, _0809E43C @ =0x00001e1c
-	adds r2, r0, r1
-	ldrb r3, [r2]
-	adds r1, 0x2
-	adds r0, r1
-	ldrh r1, [r0]
-	strh r1, [r2]
-	strh r3, [r0]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_0809E422:
-	movs r0, 0
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E42C: .4byte gNamingScreenData
-_0809E430: .4byte 0x00001e1a
-_0809E434: .4byte 0x00001e18
-_0809E438: .4byte 0x00001e21
-_0809E43C: .4byte 0x00001e1c
-	thumb_func_end PageSwapAnimState_1
-
-	thumb_func_start PageSwapAnimState_2
-PageSwapAnimState_2: @ 809E440
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	ldr r5, _0809E4C4 @ =gNamingScreenData
-	ldr r0, [r5]
-	ldr r2, _0809E4C8 @ =0x00001e1a
-	adds r1, r0, r2
-	str r1, [sp]
-	ldr r3, _0809E4CC @ =0x00001e18
-	adds r0, r3
-	str r0, [sp, 0x4]
-	ldrh r0, [r4, 0xA]
-	adds r0, 0x4
-	strh r0, [r4, 0xA]
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	movs r1, 0x28
-	bl Sin
-	ldr r1, [r5]
-	movs r2, 0xF1
-	lsls r2, 5
-	adds r1, r2
-	ldrb r1, [r1]
-	lsls r1, 2
-	add r1, sp
-	ldr r1, [r1]
-	strh r0, [r1]
-	ldrh r0, [r4, 0xA]
-	adds r0, 0x80
-	movs r1, 0xFF
-	ands r0, r1
-	movs r1, 0x28
-	bl Sin
-	ldr r1, [r5]
-	ldr r3, _0809E4D0 @ =0x00001e21
-	adds r1, r3
-	ldrb r1, [r1]
-	lsls r1, 2
-	add r1, sp
-	ldr r1, [r1]
-	strh r0, [r1]
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x7F
-	ble _0809E4BA
-	ldr r0, [r5]
-	movs r2, 0xF1
-	lsls r2, 5
-	adds r1, r0, r2
-	ldrb r2, [r1]
-	adds r0, r3
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r0, [r5]
-	adds r0, r3
-	strb r2, [r0]
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x1
-	strh r0, [r4, 0x8]
-_0809E4BA:
-	movs r0, 0
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E4C4: .4byte gNamingScreenData
-_0809E4C8: .4byte 0x00001e1a
-_0809E4CC: .4byte 0x00001e18
-_0809E4D0: .4byte 0x00001e21
-	thumb_func_end PageSwapAnimState_2
-
-	thumb_func_start PageSwapAnimState_Done
-PageSwapAnimState_Done: @ 809E4D4
-	push {lr}
-	ldr r0, _0809E4EC @ =sub_809E32C
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	bl DestroyTask
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E4EC: .4byte sub_809E32C
-	thumb_func_end PageSwapAnimState_Done
-
-	thumb_func_start sub_809E4F0
-sub_809E4F0: @ 809E4F0
-	push {lr}
-	ldr r0, _0809E510 @ =c3_0809E58C
-	movs r1, 0x3
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0809E514 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r0, 0x3
-	strh r0, [r1, 0x8]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E510: .4byte c3_0809E58C
-_0809E514: .4byte gTasks
-	thumb_func_end sub_809E4F0
-
-	thumb_func_start sub_809E518
-sub_809E518: @ 809E518
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r7, r1, 24
-	lsls r2, 24
-	lsrs r6, r2, 24
-	ldr r0, _0809E550 @ =c3_0809E58C
-	bl FindTaskIdByFunc
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _0809E554 @ =gTasks
-	adds r4, r1, r0
-	movs r1, 0x8
-	ldrsh r0, [r4, r1]
-	cmp r5, r0
-	bne _0809E558
-	cmp r6, 0
-	bne _0809E558
-	strh r7, [r4, 0xA]
-	movs r0, 0x1
-	strh r0, [r4, 0xC]
-	b _0809E584
-	.align 2, 0
-_0809E550: .4byte c3_0809E58C
-_0809E554: .4byte gTasks
-_0809E558:
-	cmp r5, 0x3
-	bne _0809E568
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	bne _0809E568
-	cmp r6, 0
-	beq _0809E584
-_0809E568:
-	ldrh r1, [r4, 0x8]
-	movs r2, 0x8
-	ldrsh r0, [r4, r2]
-	cmp r0, 0x3
-	beq _0809E57A
-	lsls r0, r1, 24
-	lsrs r0, 24
-	bl sub_809E6B8
-_0809E57A:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r7, 0
-	bl sub_809E6E0
-_0809E584:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_809E518
-
-	thumb_func_start c3_0809E58C
-c3_0809E58C: @ 809E58C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _0809E5F4 @ =gTasks
-	adds r4, r1, r0
-	ldrh r1, [r4, 0x8]
-	movs r2, 0x8
-	ldrsh r0, [r4, r2]
-	cmp r0, 0x3
-	beq _0809E63E
-	movs r3, 0xC
-	ldrsh r0, [r4, r3]
-	cmp r0, 0
-	beq _0809E63E
-	lsls r0, r1, 24
-	lsrs r0, 24
-	bl sub_809E644
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r3, [r4, 0xE]
-	adds r1, r3, 0
-	adds r2, r3, 0
-	bl MultiplyInvertedPaletteRGBComponents
-	ldrh r1, [r4, 0x12]
-	movs r2, 0x12
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	beq _0809E5D8
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x12]
-	lsls r0, 16
-	cmp r0, 0
-	bne _0809E63E
-_0809E5D8:
-	movs r0, 0x2
-	strh r0, [r4, 0x12]
-	ldrh r1, [r4, 0x10]
-	movs r3, 0x10
-	ldrsh r0, [r4, r3]
-	cmp r0, 0
-	blt _0809E602
-	ldrh r2, [r4, 0xE]
-	movs r3, 0xE
-	ldrsh r0, [r4, r3]
-	cmp r0, 0xD
-	bgt _0809E5F8
-	adds r0, r2, r1
-	b _0809E606
-	.align 2, 0
-_0809E5F4: .4byte gTasks
-_0809E5F8:
-	movs r0, 0x10
-	strh r0, [r4, 0xE]
-	ldrh r0, [r4, 0x14]
-	adds r0, 0x1
-	b _0809E60C
-_0809E602:
-	ldrh r3, [r4, 0xE]
-	adds r0, r1, r3
-_0809E606:
-	strh r0, [r4, 0xE]
-	ldrh r2, [r4, 0x14]
-	adds r0, r1, r2
-_0809E60C:
-	strh r0, [r4, 0x14]
-	movs r3, 0xE
-	ldrsh r0, [r4, r3]
-	ldrh r1, [r4, 0xE]
-	cmp r0, 0x10
-	bne _0809E62C
-	movs r2, 0x14
-	ldrsh r0, [r4, r2]
-	cmp r0, 0x16
-	bne _0809E62C
-	ldr r0, _0809E628 @ =0x0000fffc
-	strh r0, [r4, 0x10]
-	b _0809E63E
-	.align 2, 0
-_0809E628: .4byte 0x0000fffc
-_0809E62C:
-	lsls r0, r1, 16
-	asrs r1, r0, 16
-	cmp r1, 0
-	bne _0809E63E
-	ldrh r0, [r4, 0xA]
-	strh r0, [r4, 0xC]
-	movs r0, 0x2
-	strh r0, [r4, 0x10]
-	strh r1, [r4, 0x14]
-_0809E63E:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end c3_0809E58C
-
-	thumb_func_start sub_809E644
-sub_809E644: @ 809E644
-	push {r4-r6,lr}
-	sub sp, 0x10
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x4
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 20
-	movs r1, 0x87
-	lsls r1, 1
-	adds r5, r1, 0
-	adds r0, r5
-	add r6, sp, 0x8
-	strh r0, [r6]
-	movs r0, 0x6
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 20
-	adds r0, r5
-	mov r1, sp
-	adds r1, 0xA
-	strh r0, [r1]
-	movs r0, 0x7
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 20
-	adds r0, r5
-	add r1, sp, 0xC
-	strh r0, [r1]
-	movs r0, 0x7
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 20
-	ldr r1, _0809E6B4 @ =0x00000101
-	adds r0, r1
-	mov r1, sp
-	adds r1, 0xE
-	strh r0, [r1]
-	mov r0, sp
-	adds r1, r6, 0
-	movs r2, 0x8
-	bl memcpy
-	lsls r4, 1
-	mov r1, sp
-	adds r0, r1, r4
-	ldrh r0, [r0]
-	add sp, 0x10
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0809E6B4: .4byte 0x00000101
-	thumb_func_end sub_809E644
-
-	thumb_func_start sub_809E6B8
-sub_809E6B8: @ 809E6B8
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_809E644
-	lsls r0, 16
-	ldr r2, _0809E6D8 @ =gPlttBufferFaded
-	lsrs r0, 15
-	adds r2, r0, r2
-	ldr r1, _0809E6DC @ =gPlttBufferUnfaded
-	adds r0, r1
-	ldrh r0, [r0]
-	strh r0, [r2]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0809E6D8: .4byte gPlttBufferFaded
-_0809E6DC: .4byte gPlttBufferUnfaded
-	thumb_func_end sub_809E6B8
-
-	thumb_func_start sub_809E6E0
-sub_809E6E0: @ 809E6E0
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	movs r3, 0
-	strh r1, [r0, 0x8]
-	strh r2, [r0, 0xA]
-	movs r1, 0x1
-	strh r1, [r0, 0xC]
-	movs r2, 0x4
-	strh r2, [r0, 0xE]
-	movs r1, 0x2
-	strh r1, [r0, 0x10]
-	strh r3, [r0, 0x12]
-	strh r2, [r0, 0x14]
-	bx lr
-	thumb_func_end sub_809E6E0
-
 	thumb_func_start sub_809E700
 sub_809E700: @ 809E700
 	push {r4-r6,lr}
@@ -910,7 +35,7 @@ _0809E718:
 	strb r0, [r6]
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1171,7 +296,7 @@ sub_809E8B4: @ 809E8B4
 	strh r1, [r0, 0x3A]
 	movs r0, 0
 	movs r1, 0
-	bl sub_809E948
+	bl SetCursorPos
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1182,8 +307,8 @@ _0809E940: .4byte 0x00001e23
 _0809E944: .4byte gSprites
 	thumb_func_end sub_809E8B4
 
-	thumb_func_start sub_809E948
-sub_809E948: @ 809E948
+	thumb_func_start SetCursorPos
+SetCursorPos: @ 809E948
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1246,10 +371,10 @@ _0809E9AA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809E948
+	thumb_func_end SetCursorPos
 
-	thumb_func_start sub_809E9CC
-sub_809E9CC: @ 809E9CC
+	thumb_func_start GetCursorPos
+GetCursorPos: @ 809E9CC
 	ldr r2, _0809E9EC @ =gNamingScreenData
 	ldr r2, [r2]
 	ldr r3, _0809E9F0 @ =0x00001e23
@@ -1269,16 +394,16 @@ sub_809E9CC: @ 809E9CC
 _0809E9EC: .4byte gNamingScreenData
 _0809E9F0: .4byte 0x00001e23
 _0809E9F4: .4byte gSprites
-	thumb_func_end sub_809E9CC
+	thumb_func_end GetCursorPos
 
 	thumb_func_start MoveCursorToOKButton
 MoveCursorToOKButton: @ 809E9F8
 	push {lr}
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_809E948
+	bl SetCursorPos
 	pop {r0}
 	bx r0
 	thumb_func_end MoveCursorToOKButton
@@ -1417,11 +542,11 @@ sub_809EB00: @ 809EB00
 	adds r5, 0x2
 	mov r0, sp
 	adds r1, r5, 0
-	bl sub_809E9CC
+	bl GetCursorPos
 	mov r0, sp
 	movs r1, 0
 	ldrsh r4, [r0, r1]
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1443,8 +568,8 @@ _0809EB36:
 	bx r1
 	thumb_func_end sub_809EB00
 
-	thumb_func_start sub_809EB40
-sub_809EB40: @ 809EB40
+	thumb_func_start GetCurrentPageColumnCount
+GetCurrentPageColumnCount: @ 809EB40
 	push {r4,lr}
 	ldr r4, _0809EB58 @ =gUnknown_83E2330
 	bl sub_809DE50
@@ -1457,7 +582,7 @@ sub_809EB40: @ 809EB40
 	bx r1
 	.align 2, 0
 _0809EB58: .4byte gUnknown_83E2330
-	thumb_func_end sub_809EB40
+	thumb_func_end GetCurrentPageColumnCount
 
 	thumb_func_start sub_809EB5C
 sub_809EB5C: @ 809EB5C
@@ -2493,7 +1618,7 @@ sub_809F2F8: @ 809F2F8
 	adds r5, 0x2A
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_809E9CC
+	bl GetCursorPos
 	ldr r0, _0809F3F4 @ =gMain
 	ldrh r2, [r0, 0x30]
 	movs r0, 0x40
@@ -2538,14 +1663,14 @@ _0809F37A:
 	ldrsh r0, [r6, r2]
 	cmp r0, 0
 	bge _0809F3A6
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]
 _0809F3A6:
 	movs r0, 0
 	ldrsh r4, [r6, r0]
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2559,7 +1684,7 @@ _0809F3BA:
 	beq _0809F426
 	movs r2, 0
 	ldrsh r4, [r6, r2]
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2583,7 +1708,7 @@ _0809F3F8:
 	mov r2, r8
 	lsls r4, r2, 16
 	asrs r4, 16
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2608,7 +1733,7 @@ _0809F424:
 _0809F426:
 	movs r0, 0
 	ldrsh r4, [r6, r0]
-	bl sub_809EB40
+	bl GetCurrentPageColumnCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -2660,7 +1785,7 @@ _0809F480:
 	ldrsh r0, [r6, r2]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_809E948
+	bl SetCursorPos
 	add sp, 0x34
 	pop {r3-r5}
 	mov r8, r3
@@ -3039,7 +2164,7 @@ sub_809F75C: @ 809F75C
 	adds r4, 0x2
 	mov r0, sp
 	adds r1, r4, 0
-	bl sub_809E9CC
+	bl GetCursorPos
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]

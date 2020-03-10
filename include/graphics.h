@@ -4899,5 +4899,6 @@ extern const u32 gEasyChatModeIcons_Tiles[];
 extern const u32 gUnknown_8E982BC[];
 extern const u32 gUnknown_8E98458[];
 extern const u32 gUnknown_8E98398[];
+extern const u16 gUnknown_8E98004[];
 
 #endif //GUARD_GRAPHICS_H

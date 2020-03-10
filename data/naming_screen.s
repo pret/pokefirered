@@ -6,35 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83E2388:: @ 83E2388
-	.2byte 0x0001, 0x0003, 0x0002
-
-gUnknown_83E238E:: @ 83E238E
-	.2byte 0x0004, 0x0006, 0x0005
-
-gUnknown_83E2394:: @ 83E2394
-	.4byte nullsub_54
-	.4byte sub_809EF54
-	.4byte sub_809EFB0
-	.4byte sub_809EFF0
-	.4byte sub_809F04C
-
-gUnknown_83E23A8:: @ 83E23A8
-	obj_image_anim_frame 0, 10
-	obj_image_anim_frame 24, 10
-	obj_image_anim_frame 0, 10
-	obj_image_anim_frame 32, 10
-	obj_image_anim_jump 0
-
-gUnknown_83E23BC:: @ 83E23BC
-	.4byte gUnknown_83E23A8
-
-gUnknown_83E23C0:: @ 83E23C0
-	obj_tiles gUnknown_83E1980, 0x0900, 255
-
-gUnknown_83E23C8:: @ 83E23C8
-	obj_pal gUnknown_8E98004, 255
-
 gUnknown_83E23D0:: @ 83E23D0
 	.4byte sub_809F11C
 	.4byte KeyboardKeyHandler_Page
@@ -119,11 +90,11 @@ gUnknown_83E2480:: @ 83E2480
 	.4byte gUnknown_8418E69
 
 sNamingScreenTemplates:: @ 83E248C
-	.4byte gUnknown_83E245C
-	.4byte gUnknown_83E2468
-	.4byte gUnknown_83E2474
-	.4byte gUnknown_83E2474
-	.4byte gUnknown_83E2480
+	.4byte gUnknown_83E245C @ NAMING_SCREEN_PLAYER
+	.4byte gUnknown_83E2468 @ NAMING_SCREEN_BOX
+	.4byte gUnknown_83E2474 @ NAMING_SCREEN_CAUGHT_MON
+	.4byte gUnknown_83E2474 @ NAMING_SCREEN_NAME_RATER
+	.4byte gUnknown_83E2480 @ NAMING_SCREEN_RIVAL
 
 gUnknown_83E24A0:: @ 83E24A0
 	.4byte 0x00000000, 0x00000000
@@ -216,7 +187,7 @@ gUnknown_83E2570:: @ 83E2570
 	.4byte gUnknown_83E2558
 
 gUnknown_83E2574:: @ 83E2574
-	spr_template 2, 4, gUnknown_83E24A0, gUnknown_83E2564, NULL, gDummySpriteAffineAnimTable, sub_809EC54
+	spr_template 2, 4, gUnknown_83E24A0, gUnknown_83E2564, NULL, gDummySpriteAffineAnimTable, SpriteCB_PageSwap
 
 gUnknown_83E258C:: @ 83E258C
 	spr_template 3, 1, gUnknown_83E24B0, gUnknown_83E2564, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
@@ -233,10 +204,10 @@ gUnknown_83E25D4:: @ 83E25D4
 gUnknown_83E25EC:: @ 83E25EC
 	spr_template 7, 5, gUnknown_83E24A8, gUnknown_83E2568, NULL, gDummySpriteAffineAnimTable, sub_809E700
 
-gUnknown_83E2604:: @ 83E2604
+sSpriteTemplate_InputArrow:: @ 83E2604
 	spr_template 10, 3, gUnknown_83E24A0, gUnknown_83E2564, NULL, gDummySpriteAffineAnimTable, sub_809E7F0
 
-gUnknown_83E261C:: @ 83E261C
+sSpriteTemplate_Underscore:: @ 83E261C
 	spr_template 11, 3, gUnknown_83E24A0, gUnknown_83E2564, NULL, gDummySpriteAffineAnimTable, sub_809E83C
 
 gUnknown_83E2634:: @ 83E2634

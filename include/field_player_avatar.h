@@ -37,5 +37,6 @@ bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerSurfingNorth(void);
 void player_get_pos_including_state_based_drift(s16 *x, s16 *y);
 void sub_805CBE8(void);
+u8 sub_805C7C8(u8 state, u8 gender);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

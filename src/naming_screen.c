@@ -1,21 +1,23 @@
 #include "global.h"
 #include "gflib.h"
-#include "battle_message.h"
 #include "graphics.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_effect.h"
+#include "field_player_avatar.h"
 #include "field_specials.h"
 #include "help_system.h"
 #include "naming_screen.h"
 #include "new_menu_helpers.h"
+#include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
-#include "strings.h"
 #include "task.h"
 #include "trig.h"
 #include "constants/help_system.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
+#include "constants/event_objects.h"
 
 enum
 {
@@ -137,13 +139,19 @@ bool8 IsCursorAnimFinished();
 u8 GetCurrentPageColumnCount(void);
 void CreatePageSwitcherSprites(void);
 void sub_809EC20(void);
-bool8 sub_809EC7C(struct Sprite * sprite);
-bool8 sub_809ECD0(struct Sprite * sprite);
-bool8 sub_809ECD4(struct Sprite * sprite);
-bool8 sub_809ED48(struct Sprite * sprite);
+bool8 PageSwapSpritesCB_Init(struct Sprite * sprite);
+bool8 PageSwapSpritesCB_Idle(struct Sprite * sprite);
+bool8 PageSwapSpritesCB_SwapHide(struct Sprite * sprite);
+bool8 PageSwapSpritesCB_SwapShow(struct Sprite * sprite);
+void sub_809ED88(u8 a0, struct Sprite * spr1, struct Sprite * spr2);
 void CreateBackOkSprites(void);
 void CreateUnderscoreSprites(void);
 void CreateInputTargetIcon(void);
+void NamingScreen_NoCreateIcon(void);
+void NamingScreen_CreatePlayerIcon(void);
+void NamingScreen_CreatePCIcon(void);
+void NamingScreen_CreateMonIcon(void);
+void NamingScreen_CreateRivalIcon(void);
 void sub_809FA60(void);
 bool8 NamingScreen_InitDisplayMode(void);
 void NamingScreen_TurnOffScreen(void);
@@ -164,6 +172,8 @@ void sub_809FC34(void);
 
 extern const struct SubspriteTable gUnknown_83E2504[];
 extern const struct SubspriteTable gUnknown_83E250C[];
+extern const struct SubspriteTable gUnknown_83E2524[];
+extern const struct SubspriteTable gUnknown_83E252C[];
 
 extern const struct SpriteTemplate gUnknown_83E2574;
 extern const struct SpriteTemplate gUnknown_83E258C;
@@ -171,8 +181,8 @@ extern const struct SpriteTemplate gUnknown_83E25A4;
 extern const struct SpriteTemplate gUnknown_83E25BC;
 extern const struct SpriteTemplate gUnknown_83E25D4;
 extern const struct SpriteTemplate gUnknown_83E25EC;
-extern const struct SpriteTemplate gUnknown_83E2604;
-extern const struct SpriteTemplate gUnknown_83E261C;
+extern const struct SpriteTemplate sSpriteTemplate_InputArrow;
+extern const struct SpriteTemplate sSpriteTemplate_Underscore;
 extern const struct SpriteTemplate gUnknown_83E2634;
 
 const u16 gUnknown_83E1800[] = INCBIN_U16("graphics/interface/naming_screen_83E1800.4bpp");
@@ -1115,15 +1125,197 @@ void sub_809EC20(void)
     sprite->data[1] = gNamingScreenData->currentPage;
 }
 
-bool8 (*const gUnknown_83E2378[])(struct Sprite * sprite) = {
-    sub_809EC7C,
-    sub_809ECD0,
-    sub_809ECD4,
-    sub_809ED48
+bool8 (*const sPageSwapSpritesCBs[])(struct Sprite * sprite) = {
+    PageSwapSpritesCB_Init,
+    PageSwapSpritesCB_Idle,
+    PageSwapSpritesCB_SwapHide,
+    PageSwapSpritesCB_SwapShow
 };
 
-void sub_809EC54(struct Sprite *sprite)
+void SpriteCB_PageSwap(struct Sprite *sprite)
 {
-    while (gUnknown_83E2378[sprite->data[0]](sprite))
+    while (sPageSwapSpritesCBs[sprite->data[0]](sprite))
         ;
+}
+
+bool8 PageSwapSpritesCB_Init(struct Sprite *sprite)
+{
+    struct Sprite *sprite1 = &gSprites[sprite->data[6]];
+    struct Sprite *sprite2 = &gSprites[sprite->data[7]];
+
+    sub_809ED88(sub_809DE20(gNamingScreenData->currentPage), sprite1, sprite2);
+    sprite->data[0]++;
+    return FALSE;
+}
+
+bool8 PageSwapSpritesCB_Idle(struct Sprite *sprite)
+{
+    struct Sprite *sprite1 = &gSprites[sprite->data[6]];
+    struct Sprite *sprite2 = &gSprites[sprite->data[7]];
+
+    return FALSE;
+}
+
+bool8 PageSwapSpritesCB_SwapHide(struct Sprite *sprite)
+{
+    struct Sprite *sprite1 = &gSprites[sprite->data[6]];
+    struct Sprite *sprite2 = &gSprites[sprite->data[7]];
+    u8 page;
+
+    sprite1->pos2.y++;
+    if (sprite1->pos2.y > 7)
+    {
+        sprite->data[0]++;
+        sprite1->pos2.y = -4;
+        sprite1->invisible = TRUE;
+        page = sprite->data[1];
+        sub_809ED88(sub_809DE20((page + 1) % 3), sprite1, sprite2);
+    }
+    return FALSE;
+}
+
+bool8 PageSwapSpritesCB_SwapShow(struct Sprite *sprite)
+{
+    struct Sprite *sprite1 = &gSprites[sprite->data[6]];
+    struct Sprite *sprite2 = &gSprites[sprite->data[7]];
+
+    sprite1->invisible = FALSE;
+    sprite1->pos2.y++;
+    if (sprite1->pos2.y >= 0)
+    {
+        sprite1->pos2.y = 0;
+        sprite->data[0] = 1;
+    }
+    return FALSE;
+}
+
+const u16 gUnknown_83E2388[] = {1, 3, 2};
+const u16 gUnknown_83E238E[] = {4, 6, 5};
+
+void sub_809ED88(u8 page, struct Sprite * sprite1, struct Sprite * sprite2)
+{
+    sprite2->oam.paletteNum = IndexOfSpritePaletteTag(gUnknown_83E2388[page]);
+    sprite1->sheetTileStart = GetSpriteTileStartByTag(gUnknown_83E238E[page]);
+    sprite1->subspriteTableNum = page;
+}
+
+//
+
+void CreateBackOkSprites(void)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&gUnknown_83E25BC, 0xCC, 0x74, 0);
+    SetSubspriteTables(&gSprites[spriteId], gUnknown_83E2524);
+    gSprites[spriteId].invisible = TRUE;
+
+    spriteId = CreateSprite(&gUnknown_83E25D4, 0xCC, 0x8C, 0);
+    SetSubspriteTables(&gSprites[spriteId], gUnknown_83E2524);
+    gSprites[spriteId].invisible = TRUE;
+}
+
+void CreateUnderscoreSprites(void)
+{
+    u8 spriteId;
+    s16 xPos;
+    u8 i;
+
+    xPos = gNamingScreenData->inputCharBaseXPos - 5;
+    spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 0x38, 0);
+    gSprites[spriteId].oam.priority = 3;
+    gSprites[spriteId].invisible = TRUE;
+    xPos = gNamingScreenData->inputCharBaseXPos;
+    for (i = 0; i < gNamingScreenData->template->maxChars; i++, xPos += 8)
+    {
+        spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos + 3, 0x3C, 0);
+        gSprites[spriteId].oam.priority = 3;
+        gSprites[spriteId].data[0] = i;
+        gSprites[spriteId].invisible = TRUE;
+    }
+}
+
+//--------------------------------------------------
+// Icon creation (the thing you're naming or giving input to)
+//--------------------------------------------------
+
+void (*const sIconFunctions[])(void) = {
+    NamingScreen_NoCreateIcon,
+    NamingScreen_CreatePlayerIcon,
+    NamingScreen_CreatePCIcon,
+    NamingScreen_CreateMonIcon,
+    NamingScreen_CreateRivalIcon
+};
+
+void CreateInputTargetIcon(void)
+{
+    sIconFunctions[gNamingScreenData->template->iconFunction]();
+}
+
+void NamingScreen_NoCreateIcon(void)
+{
+
+}
+
+void NamingScreen_CreatePlayerIcon(void)
+{
+    u8 rivalGfxId;
+    u8 spriteId;
+
+    rivalGfxId = sub_805C7C8(0, gNamingScreenData->monSpecies);
+    spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
+    gSprites[spriteId].oam.priority = 3;
+    StartSpriteAnim(&gSprites[spriteId], 4);
+}
+
+void NamingScreen_CreatePCIcon(void)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&gUnknown_83E2634, 0x38, 0x29, 0);
+    SetSubspriteTables(&gSprites[spriteId], gUnknown_83E252C);
+    gSprites[spriteId].oam.priority = 3;
+}
+
+void NamingScreen_CreateMonIcon(void)
+{
+    u8 spriteId;
+
+    LoadMonIconPalettes();
+    spriteId = CreateMonIcon(gNamingScreenData->monSpecies, SpriteCallbackDummy, 0x38, 0x28, 0, gNamingScreenData->monPersonality, 1);
+    gSprites[spriteId].oam.priority = 3;
+}
+
+const union AnimCmd gUnknown_83E23A8[] = {
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_FRAME(24, 10),
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_FRAME(32, 10),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gUnknown_83E23BC[] = {
+    gUnknown_83E23A8
+};
+
+void NamingScreen_CreateRivalIcon(void)
+{
+    const struct SpriteSheet sheet = {
+        gUnknown_83E1980, 0x900, 255
+    };
+    const struct SpritePalette palette = {
+        gUnknown_8E98004, 255
+    };
+    struct SpriteTemplate template;
+    const struct SubspriteTable * tables_p;
+    u8 spriteId;
+
+    MakeObjectTemplateFromObjectEventGraphicsInfo(OBJ_EVENT_GFX_RED_NORMAL, SpriteCallbackDummy, &template, &tables_p);
+
+    template.tileTag = sheet.tag;
+    template.paletteTag = palette.tag;
+    template.anims = gUnknown_83E23BC;
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&palette);
+    spriteId = CreateSprite(&template, 0x38, 0x25, 0);
+    gSprites[spriteId].oam.priority = 3;
 }

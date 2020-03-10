@@ -1,7 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "data.h"
-#include "data_8479668.h"
+#include "keyboard_text.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"

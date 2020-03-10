@@ -14,7 +14,7 @@
 #include "task.h"
 #include "union_room_chat.h"
 #include "union_room_chat_display.h"
-#include "data_8479668.h"
+#include "keyboard_text.h"
 #include "constants/songs.h"
 
 #define MESSAGE_BUFFER_NCHAR 15

@@ -1,5 +1,5 @@
-#ifndef GUARD_DATA_8479668_H
-#define GUARD_DATA_8479668_H
+#ifndef GUARD_KEYBOARD_TEXT_H
+#define GUARD_KEYBOARD_TEXT_H
 
 extern const u8 gText_UnionRoomChatKeyboard_ABCDE[];
 extern const u8 gText_UnionRoomChatKeyboard_FGHIJ[];
@@ -50,4 +50,4 @@ extern const u8 gText_NamingScreenKeyboard_56789[];
 extern const u8 gText_NamingScreenKeyboard_Symbols1[];
 extern const u8 gText_NamingScreenKeyboard_Symbols2[];
 
-#endif //GUARD_DATA_8479668_H
+#endif //GUARD_KEYBOARD_TEXT_H

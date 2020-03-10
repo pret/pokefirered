@@ -81,7 +81,8 @@ struct NamingScreenTemplate
     const u8 *title;
 };
 
-struct NamingScreenData {
+struct NamingScreenData
+{
     /*0x0*/    u8 tilemapBuffer1[0x800];
     /*0x800*/  u8 tilemapBuffer2[0x800];
     /*0x800*/  u8 tilemapBuffer3[0x800];
@@ -111,7 +112,7 @@ struct NamingScreenData {
 
 static EWRAM_DATA struct NamingScreenData * gNamingScreenData = NULL;
 
-static void C2_NamingScreen(void);
+static void CB2_NamingScreen(void);
 static void NamingScreen_Init(void);
 static void NamingScreen_InitBGs(void);
 static void sub_809DD60(void);
@@ -146,10 +147,10 @@ static void sub_809E898(void);
 static void CursorInit(void);
 static void SetCursorPos(s16 x, s16 y);
 static void GetCursorPos(s16 *xP, s16 *yP);
-static void MoveCursorToOKButton();
+static void MoveCursorToOKButton(void);
 static void sub_809EA0C(u8 a0);
 static void sub_809EA64(u8 a0);
-static bool8 IsCursorAnimFinished();
+static bool8 IsCursorAnimFinished(void);
 static u8 GetCurrentPageColumnCount(void);
 static void CreatePageSwitcherSprites(void);
 static void sub_809EC20(void);
@@ -393,11 +394,11 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         if (templateNum == 0)
             StartTimer1();
 
-        SetMainCallback2(C2_NamingScreen);
+        SetMainCallback2(CB2_NamingScreen);
     }
 }
 
-static void C2_NamingScreen(void)
+static void CB2_NamingScreen(void)
 {
     switch (gMain.state)
     {
@@ -1496,13 +1497,13 @@ static void InputState_Enabled(struct Task *task)
 {
     task->tKeyboardEvent = 0;
 
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         task->tKeyboardEvent = KBEVENT_PRESSED_A;
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
         task->tKeyboardEvent = KBEVENT_PRESSED_B;
-    else if (gMain.newKeys & SELECT_BUTTON)
+    else if (JOY_NEW(SELECT_BUTTON))
         task->tKeyboardEvent = KBEVENT_PRESSED_SELECT;
-    else if (gMain.newKeys & START_BUTTON)
+    else if (JOY_NEW(START_BUTTON))
         task->tKeyboardEvent = KBEVENT_PRESSED_START;
     else
         HandleDpadMovement(task);
@@ -1536,13 +1537,13 @@ static void HandleDpadMovement(struct Task *task)
 
     GetCursorPos(&cursorX, &cursorY);
     dpadDir = 0;
-    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    if (JOY_REPT(DPAD_UP))
         dpadDir = 1;
-    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    if (JOY_REPT(DPAD_DOWN))
         dpadDir = 2;
-    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    if (JOY_REPT(DPAD_LEFT))
         dpadDir = 3;
-    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    if (JOY_REPT(DPAD_RIGHT))
         dpadDir = 4;
 
     //Get new cursor position
@@ -1648,14 +1649,14 @@ static void AddGenderIconFunc_No(void)
 }
 
 static const u8 sGenderColors[2][3] = {
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_BLUE},
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
+    [MALE]   = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_BLUE, TEXT_COLOR_BLUE},
+    [FEMALE] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_RED}
 };
 
 static void AddGenderIconFunc_Yes(void)
 {
     u8 genderSymbol[2];
-    bool8 isFemale = FALSE;
+    bool8 gender = MALE;
 
     StringCopy(genderSymbol, gText_MaleSymbol);
 
@@ -1664,9 +1665,9 @@ static void AddGenderIconFunc_Yes(void)
         if (gNamingScreenData->monGender == MON_FEMALE)
         {
             StringCopy(genderSymbol, gText_FemaleSymbol);
-            isFemale = TRUE;
+            gender = FEMALE;
         }
-        AddTextPrinterParameterized3(gNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[isFemale], TEXT_SPEED_FF, genderSymbol);
+        AddTextPrinterParameterized3(gNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
     }
 }
 
@@ -1974,7 +1975,7 @@ static void Debug_DoNamingScreen_Rival(void)
 // Forward-declared variables
 //--------------------------------------------------
 
-static const struct NamingScreenTemplate playerNamingScreenTemplate = {
+static const struct NamingScreenTemplate sPlayerNamingScreenTemplate = {
     .copyExistingString = FALSE,
     .maxChars = PLAYER_NAME_LENGTH,
     .iconFunction = 1,
@@ -1983,7 +1984,7 @@ static const struct NamingScreenTemplate playerNamingScreenTemplate = {
     .title = gText_YourName,
 };
 
-static const struct NamingScreenTemplate pcBoxNamingTemplate = {
+static const struct NamingScreenTemplate sPcBoxNamingScreenTemplate = {
     .copyExistingString = FALSE,
     .maxChars = 8/*BOX_NAME_LENGTH*/,
     .iconFunction = 2,
@@ -1992,7 +1993,7 @@ static const struct NamingScreenTemplate pcBoxNamingTemplate = {
     .title = gText_BoxName,
 };
 
-static const struct NamingScreenTemplate monNamingScreenTemplate = {
+static const struct NamingScreenTemplate sMonNamingScreenTemplate = {
     .copyExistingString = FALSE,
     .maxChars = POKEMON_NAME_LENGTH,
     .iconFunction = 3,
@@ -2001,7 +2002,7 @@ static const struct NamingScreenTemplate monNamingScreenTemplate = {
     .title = gText_PkmnsNickname,
 };
 
-static const struct NamingScreenTemplate rivalNamingScreenTemplate = {
+static const struct NamingScreenTemplate sRivalNamingScreenTemplate = {
     .copyExistingString = FALSE,
     .maxChars = OT_NAME_LENGTH,
     .iconFunction = 4,
@@ -2011,11 +2012,11 @@ static const struct NamingScreenTemplate rivalNamingScreenTemplate = {
 };
 
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] = {
-    &playerNamingScreenTemplate,
-    &pcBoxNamingTemplate,
-    &monNamingScreenTemplate,
-    &monNamingScreenTemplate,
-    &rivalNamingScreenTemplate,
+    &sPlayerNamingScreenTemplate,
+    &sPcBoxNamingScreenTemplate,
+    &sMonNamingScreenTemplate,
+    &sMonNamingScreenTemplate,
+    &sRivalNamingScreenTemplate,
 };
 
 static const struct OamData gOamData_858BFEC = {
@@ -2384,7 +2385,7 @@ static const struct SpriteSheet gUnknown_83E267C[] = {
     {gUnknown_8E98F38, 0x080,  0x0009},
     {gUnknown_8E990D8, 0x020,  0x000A},
     {gUnknown_8E990F8, 0x020,  0x000B},
-    {NULL}
+    {} // terminator
 };
 
 static const struct SpritePalette gUnknown_83E26E4[] = {
@@ -2396,5 +2397,5 @@ static const struct SpritePalette gUnknown_83E26E4[] = {
     {gNamingScreenMenu_Pal + 0x50,  0x0005},
     {gNamingScreenMenu_Pal + 0x40,  0x0006},
     {gNamingScreenMenu_Pal + 0x40,  0x0007},
-    {NULL}
+    {} // terminator
 };

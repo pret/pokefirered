@@ -76,11 +76,8 @@ gUnknown_2031DEC: @ 2031DEC
 
 	.align 2
 	.include "src/fieldmap.o"
-
 	.align 2
-	@ .include "src/field_camera.o"
-gUnknown_2036E2C: @ 2036E2C
-	.space 0x4
+	.include "src/field_camera.o"
 
 	.align 2
 	@ .include "src/field_player_avatar.o"

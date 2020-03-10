@@ -20,13 +20,13 @@
 	.include "load_save.o"
 
 	.align 2
-gUnknown_3005014: @ 3005014
+gBGTilemapBuffers1: @ 3005014
 	.space 0x4
 
-gUnknown_3005018: @ 3005018
+gBGTilemapBuffers2: @ 3005018
 	.space 0x4
 
-gUnknown_300501C: @ 300501C
+gBGTilemapBuffers3: @ 300501C
 	.space 0x4
 
 gFieldCallback: @ 3005020
@@ -48,14 +48,7 @@ gFieldLinkPlayerCount: @ 3005030
 	.include "fieldmap.o"
 
 	.align 4
-gUnknown_3005050: @ 3005050
-	.space 0x18
-
-gTotalCameraPixelOffsetY: @ 3005068
-	.space 0x4
-
-gTotalCameraPixelOffsetX: @ 300506C
-	.space 0x4
+	.include "field_camera.o"
 
 	.align 2
 	.include "scrcmd.o"

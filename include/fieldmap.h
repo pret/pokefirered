@@ -33,5 +33,6 @@ void save_serialize_map(void);
 u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr);
 void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2);
+bool8 CameraMove(s32 x, s32 y);
 
 #endif //GUARD_FIELDMAP_H

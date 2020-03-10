@@ -194,6 +194,9 @@ void CB1_Overworld(void);
 void sub_80568C4(void);
 u8 GetLastUsedWarpMapSectionId(void);
 
+extern u16 *gBGTilemapBuffers1;
+extern u16 *gBGTilemapBuffers2;
+extern u16 *gBGTilemapBuffers3;
 extern u16 gHeldKeyCodeToSend;
 
 #endif //GUARD_OVERWORLD_H

@@ -37,22 +37,10 @@ gUnknown_3000E88: @ 3000E88
 gUnknown_3000E89: @ 3000E89
 	.space 0x7
 
-gUnknown_3000E90: @ 3000E90
-	.space 0x8
+	.align 3
+	.include "src/field_camera.o"
 
-gUnknown_3000E98: @ 3000E98
-	.space 0x2
-
-gUnknown_3000E9A: @ 3000E9A
-	.space 0x2
-
-gUnknown_3000E9C: @ 3000E9C
-	.space 0x4
-
-gUnknown_3000EA0: @ 3000EA0
-	.space 0x8
-
-	.align 2
+	.align 3
 	.include "src/script.o"
 	.align 2
 	.include "src/start_menu.o"

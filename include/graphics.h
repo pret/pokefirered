@@ -4895,4 +4895,26 @@ extern const u32 gEasyChatRedRectangularCursor_Tiles[];
 extern const u32 gEasyChatSelectGroupHelp_Tiles[];
 extern const u32 gEasyChatModeIcons_Tiles[];
 
+// naming_screen
+extern const u32 gUnknown_8E982BC[];
+extern const u32 gUnknown_8E98458[];
+extern const u32 gUnknown_8E98398[];
+extern const u32 gUnknown_8E98518[];
+extern const u32 gNamingScreenMenu_Gfx[];
+extern const u16 gUnknown_8E98004[];
+extern const u16 gUnknown_8E97FE4[];
+extern const u16 gNamingScreenMenu_Pal[];
+extern const u16 gUnknown_8E98858[];
+extern const u16 gUnknown_8E98A38[];
+extern const u16 gUnknown_8E985D8[];
+extern const u16 gUnknown_8E98FD8[];
+extern const u16 gUnknown_8E98C18[];
+extern const u16 gUnknown_8E98CB8[];
+extern const u16 gUnknown_8E98D58[];
+extern const u16 gUnknown_8E98DF8[];
+extern const u16 gUnknown_8E98E98[];
+extern const u16 gUnknown_8E98F38[];
+extern const u16 gUnknown_8E990D8[];
+extern const u16 gUnknown_8E990F8[];
+
 #endif //GUARD_GRAPHICS_H

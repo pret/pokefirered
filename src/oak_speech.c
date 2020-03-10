@@ -1223,13 +1223,13 @@ static void Task_OakSpeech25(u8 taskId)
         GetDefaultName(sOakSpeechResources->unk_0010, 0);
         if (sOakSpeechResources->unk_0010 == 0)
         {
-            DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnFromNamingScreen);
         }
         else
         {
             ClearStdWindowAndFrameToTransparent(gTasks[taskId].data[13], 1);
             RemoveWindow(gTasks[taskId].data[13]);
-            DoNamingScreen(4, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock1Ptr->rivalName, 0, 0, 0, CB2_ReturnFromNamingScreen);
         }
         DestroyLinkedPikaOrGrassPlatformSprites(taskId, 1);
         FreeAllWindowBuffers();

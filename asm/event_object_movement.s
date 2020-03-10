@@ -1470,8 +1470,8 @@ _0805E8E0:
 	bx r1
 	thumb_func_end TrySpawnObjectEvent
 
-	thumb_func_start sub_805E8E8
-sub_805E8E8: @ 805E8E8
+	thumb_func_start MakeObjectTemplateFromObjectEventGraphicsInfo
+MakeObjectTemplateFromObjectEventGraphicsInfo: @ 805E8E8
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	adds r4, r2, 0
@@ -1515,7 +1515,7 @@ _0805E936:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805E8E8
+	thumb_func_end MakeObjectTemplateFromObjectEventGraphicsInfo
 
 	thumb_func_start MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex
 MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex: @ 805E940
@@ -1527,7 +1527,7 @@ MakeObjectTemplateFromObjectEventGraphicsInfoWithCallbackIndex: @ 805E940
 	lsrs r1, 14
 	adds r1, r4
 	ldr r1, [r1]
-	bl sub_805E8E8
+	bl MakeObjectTemplateFromObjectEventGraphicsInfo
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1565,7 +1565,7 @@ AddPseudoObjectEvent: @ 805E978
 	lsrs r4, 24
 	add r3, sp, 0x18
 	mov r2, sp
-	bl sub_805E8E8
+	bl MakeObjectTemplateFromObjectEventGraphicsInfo
 	mov r0, sp
 	ldrh r1, [r0, 0x2]
 	ldr r0, _0805E9F0 @ =0x0000ffff
@@ -1649,7 +1649,7 @@ sprite_new: @ 805E9F8
 	add r3, sp, 0x1C
 	adds r0, r5, 0
 	mov r2, sp
-	bl sub_805E8E8
+	bl MakeObjectTemplateFromObjectEventGraphicsInfo
 	mov r1, sp
 	ldr r2, _0805EB3C @ =0x0000ffff
 	adds r0, r2, 0
@@ -1799,7 +1799,7 @@ sub_805EB44: @ 805EB44
 	add r3, sp, 0x18
 	adds r0, r6, 0
 	mov r2, sp
-	bl sub_805E8E8
+	bl MakeObjectTemplateFromObjectEventGraphicsInfo
 	mov r1, sp
 	ldr r2, _0805EC28 @ =0x0000ffff
 	adds r0, r2, 0

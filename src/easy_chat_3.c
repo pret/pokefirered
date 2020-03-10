@@ -1,6 +1,6 @@
 #include "global.h"
 #include "gflib.h"
-#include "data_8479668.h"
+#include "keyboard_text.h"
 #include "decompress.h"
 #include "easy_chat.h"
 #include "graphics.h"

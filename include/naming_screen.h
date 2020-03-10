@@ -6,9 +6,9 @@
 #define NAMING_SCREEN_PLAYER        0
 #define NAMING_SCREEN_BOX           1
 #define NAMING_SCREEN_CAUGHT_MON    2
-#define NAMING_SCREEN_3             3
-#define NAMING_SCREEN_WALDA         4
+#define NAMING_SCREEN_NAME_RATER    3
+#define NAMING_SCREEN_RIVAL         4
 
-void DoNamingScreen(u8 caseId, u8* dst, u16 monSpecies, u8 monGender, u32 monPersonality, void (*callback)(void));
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback);
 
 #endif // GUARD_NAMING_SCREEN_H

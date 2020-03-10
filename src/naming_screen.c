@@ -110,7 +110,7 @@ struct NamingScreenData
     /*0x1E3C*/ MainCallback returnCallback;
 };
 
-static EWRAM_DATA struct NamingScreenData * gNamingScreenData = NULL;
+static EWRAM_DATA struct NamingScreenData * sNamingScreenData = NULL;
 
 static void CB2_NamingScreen(void);
 static void NamingScreen_Init(void);
@@ -377,19 +377,19 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
-    gNamingScreenData = Alloc(sizeof(struct NamingScreenData));
-    if (!gNamingScreenData)
+    sNamingScreenData = Alloc(sizeof(struct NamingScreenData));
+    if (!sNamingScreenData)
     {
         SetMainCallback2(returnCallback);
     }
     else
     {
-        gNamingScreenData->templateNum = templateNum;
-        gNamingScreenData->monSpecies = monSpecies;
-        gNamingScreenData->monGender = monGender;
-        gNamingScreenData->monPersonality = monPersonality;
-        gNamingScreenData->destBuffer = destBuffer;
-        gNamingScreenData->returnCallback = returnCallback;
+        sNamingScreenData->templateNum = templateNum;
+        sNamingScreenData->monSpecies = monSpecies;
+        sNamingScreenData->monGender = monGender;
+        sNamingScreenData->monPersonality = monPersonality;
+        sNamingScreenData->destBuffer = destBuffer;
+        sNamingScreenData->returnCallback = returnCallback;
 
         if (templateNum == 0)
             StartTimer1();
@@ -447,20 +447,20 @@ static void CB2_NamingScreen(void)
 
 static void NamingScreen_Init(void)
 {
-    gNamingScreenData->state = 0;
-    gNamingScreenData->bg1vOffset = 0;
-    gNamingScreenData->bg2vOffset = 0;
-    gNamingScreenData->bg1Priority = BGCNT_PRIORITY(1);
-    gNamingScreenData->bg2Priority = BGCNT_PRIORITY(2);
-    gNamingScreenData->bgToReveal = 0;
-    gNamingScreenData->bgToHide = 1;
-    gNamingScreenData->template = sNamingScreenTemplates[gNamingScreenData->templateNum];
-    gNamingScreenData->currentPage = gNamingScreenData->template->initialPage;
-    gNamingScreenData->inputCharBaseXPos = (240 - gNamingScreenData->template->maxChars * 8) / 2 + 6;
-    gNamingScreenData->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
-    memset(gNamingScreenData->textBuffer, 0xFF, sizeof(gNamingScreenData->textBuffer));
-    if (gNamingScreenData->template->copyExistingString != 0)
-        StringCopy(gNamingScreenData->textBuffer, gNamingScreenData->destBuffer);
+    sNamingScreenData->state = 0;
+    sNamingScreenData->bg1vOffset = 0;
+    sNamingScreenData->bg2vOffset = 0;
+    sNamingScreenData->bg1Priority = BGCNT_PRIORITY(1);
+    sNamingScreenData->bg2Priority = BGCNT_PRIORITY(2);
+    sNamingScreenData->bgToReveal = 0;
+    sNamingScreenData->bgToHide = 1;
+    sNamingScreenData->template = sNamingScreenTemplates[sNamingScreenData->templateNum];
+    sNamingScreenData->currentPage = sNamingScreenData->template->initialPage;
+    sNamingScreenData->inputCharBaseXPos = (240 - sNamingScreenData->template->maxChars * 8) / 2 + 6;
+    sNamingScreenData->keyRepeatStartDelayCopy = gKeyRepeatStartDelay;
+    memset(sNamingScreenData->textBuffer, 0xFF, sizeof(sNamingScreenData->textBuffer));
+    if (sNamingScreenData->template->copyExistingString != 0)
+        StringCopy(sNamingScreenData->textBuffer, sNamingScreenData->destBuffer);
     gKeyRepeatStartDelay = 16;
 }
 
@@ -500,15 +500,15 @@ static void NamingScreen_InitBGs(void)
     ResetBg0();
 
     for (i = 0; i < NELEMS(gUnknown_83E22A0) - 1; i++)
-        gNamingScreenData->windows[i] = AddWindow(&gUnknown_83E22A0[i]);
+        sNamingScreenData->windows[i] = AddWindow(&gUnknown_83E22A0[i]);
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0xC, 0x8));
 
-    SetBgTilemapBuffer(1, gNamingScreenData->tilemapBuffer1);
-    SetBgTilemapBuffer(2, gNamingScreenData->tilemapBuffer2);
-    SetBgTilemapBuffer(3, gNamingScreenData->tilemapBuffer3);
+    SetBgTilemapBuffer(1, sNamingScreenData->tilemapBuffer1);
+    SetBgTilemapBuffer(2, sNamingScreenData->tilemapBuffer2);
+    SetBgTilemapBuffer(3, sNamingScreenData->tilemapBuffer3);
 
     FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 0x20, 0x20);
     FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 0x20, 0x20);
@@ -525,7 +525,7 @@ static void sub_809DD60(void)
 
 static void sub_809DD88(u8 taskId)
 {
-    switch (gNamingScreenData->state)
+    switch (sNamingScreenData->state)
     {
     case MAIN_STATE_BEGIN_FADE_IN:
         MainState_BeginFadeIn();
@@ -587,22 +587,22 @@ static u8 sub_809DE20(u8 a1)
 
 static u8 sub_809DE30(void)
 {
-    return sPageOrderUpperFirst[gNamingScreenData->currentPage];
+    return sPageOrderUpperFirst[sNamingScreenData->currentPage];
 }
 
 static u8 sub_809DE50(void)
 {
-    return sPageOrderSymbolsFirst[gNamingScreenData->currentPage];
+    return sPageOrderSymbolsFirst[sNamingScreenData->currentPage];
 }
 
 static bool8 MainState_BeginFadeIn(void)
 {
     DecompressToBgTilemapBuffer(3, gUnknown_8E982BC);
-    gNamingScreenData->currentPage = KBPAGE_LETTERS_UPPER;
+    sNamingScreenData->currentPage = KBPAGE_LETTERS_UPPER;
     DecompressToBgTilemapBuffer(2, gUnknown_8E98458);
     DecompressToBgTilemapBuffer(1, gUnknown_8E98398);
-    sub_809F9E8(gNamingScreenData->windows[1], KBPAGE_LETTERS_LOWER);
-    sub_809F9E8(gNamingScreenData->windows[0], KBPAGE_LETTERS_UPPER);
+    sub_809F9E8(sNamingScreenData->windows[1], KBPAGE_LETTERS_LOWER);
+    sub_809F9E8(sNamingScreenData->windows[0], KBPAGE_LETTERS_UPPER);
     PrintBufferCharactersOnScreen();
     PrintTitle();
     sub_809FAE4();
@@ -611,7 +611,7 @@ static bool8 MainState_BeginFadeIn(void)
     CopyBgTilemapBufferToVram(3);
     BlendPalettes(-1, 16, RGB_BLACK);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-    gNamingScreenData->state++;
+    sNamingScreenData->state++;
     return FALSE;
 }
 
@@ -621,7 +621,7 @@ static bool8 MainState_WaitFadeIn(void)
     {
         SetInputState(INPUT_STATE_ENABLED);
         sub_809EA64(1);
-        gNamingScreenData->state++;
+        sNamingScreenData->state++;
     }
     return FALSE;
 }
@@ -637,7 +637,7 @@ static bool8 MainState_MoveToOKButton(void)
     {
         SetInputState(INPUT_STATE_ENABLED);
         MoveCursorToOKButton();
-        gNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
+        sNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
     }
     return FALSE;
 }
@@ -648,16 +648,16 @@ static bool8 pokemon_store(void)
     SetInputState(INPUT_STATE_DISABLED);
     sub_809EA64(0);
     sub_809E518(3, 0, 1);
-    if (gNamingScreenData->templateNum == NAMING_SCREEN_CAUGHT_MON &&
+    if (sNamingScreenData->templateNum == NAMING_SCREEN_CAUGHT_MON &&
         CalculatePlayerPartyCount() >= 6)
     {
         pokemon_transfer_to_pc_with_message();
-        gNamingScreenData->state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
+        sNamingScreenData->state = MAIN_STATE_UPDATE_SENT_TO_PC_MESSAGE;
         return FALSE;
     }
     else
     {
-        gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
+        sNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
         return TRUE;  //Exit the naming screen
     }
 }
@@ -665,7 +665,7 @@ static bool8 pokemon_store(void)
 static bool8 MainState_BeginFadeInOut(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    gNamingScreenData->state++;
+    sNamingScreenData->state++;
     return FALSE;
 }
 
@@ -673,12 +673,12 @@ static bool8 MainState_WaitFadeOutAndExit(void)
 {
     if (!gPaletteFade.active)
     {
-        if (gNamingScreenData->templateNum == NAMING_SCREEN_PLAYER)
+        if (sNamingScreenData->templateNum == NAMING_SCREEN_PLAYER)
             SeedRngAndSetTrainerId();
-        SetMainCallback2(gNamingScreenData->returnCallback);
+        SetMainCallback2(sNamingScreenData->returnCallback);
         DestroyTask(FindTaskIdByFunc(sub_809DD88));
         FreeAllWindowBuffers();
-        FREE_AND_SET_NULL(gNamingScreenData);
+        FREE_AND_SET_NULL(sNamingScreenData);
         RestoreHelpContext();
     }
     return FALSE;
@@ -691,12 +691,12 @@ static void pokemon_transfer_to_pc_with_message(void)
     if (!IsDestinationBoxFull())
     {
         StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
-        StringCopy(gStringVar2, gNamingScreenData->destBuffer);
+        StringCopy(gStringVar2, sNamingScreenData->destBuffer);
     }
     else
     {
         StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
-        StringCopy(gStringVar2, gNamingScreenData->destBuffer);
+        StringCopy(gStringVar2, sNamingScreenData->destBuffer);
         StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
         stringToDisplay = 2;
     }
@@ -716,7 +716,7 @@ static bool8 sub_809E1D4(void)
     RunTextPrinters();
 
     if (!IsTextPrinterActive(0) && (JOY_NEW(A_BUTTON)))
-        gNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
+        sNamingScreenData->state = MAIN_STATE_BEGIN_FADE_OUT;
 
     return FALSE;
 }
@@ -729,7 +729,7 @@ static bool8 MainState_StartPageSwap(void)
     sub_809EA0C(1);
     sub_809E518(0, 0, 1);
     PlaySE(SE_WIN_OPEN);
-    gNamingScreenData->state = MAIN_STATE_WAIT_PAGE_SWAP;
+    sNamingScreenData->state = MAIN_STATE_WAIT_PAGE_SWAP;
     return FALSE;
 }
 
@@ -745,9 +745,9 @@ static bool8 MainState_WaitPageSwap(void)
         GetCursorPos(&cursorX, &cursorY);
         var3 = (cursorX == GetCurrentPageColumnCount());
 
-        gNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
-        gNamingScreenData->currentPage++;
-        gNamingScreenData->currentPage %= 3;
+        sNamingScreenData->state = MAIN_STATE_HANDLE_INPUT;
+        sNamingScreenData->currentPage++;
+        sNamingScreenData->currentPage %= 3;
 
         if (var3)
         {
@@ -805,8 +805,8 @@ static bool8 IsPageSwapAnimNotInProgress(void)
 
 static bool8 PageSwapAnimState_Init(struct Task *task)
 {
-    gNamingScreenData->bg1vOffset = 0;
-    gNamingScreenData->bg2vOffset = 0;
+    sNamingScreenData->bg1vOffset = 0;
+    sNamingScreenData->bg2vOffset = 0;
     task->tState++;
     return 0;
 }
@@ -815,19 +815,19 @@ static bool8 PageSwapAnimState_1(struct Task *task)
 {
     u16 *const arr[] =
         {
-            &gNamingScreenData->bg2vOffset,
-            &gNamingScreenData->bg1vOffset
+            &sNamingScreenData->bg2vOffset,
+            &sNamingScreenData->bg1vOffset
         };
 
     task->tFrameCount += 4;
-    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
-    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[sNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[sNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 64)
     {
-        u8 temp = gNamingScreenData->bg1Priority;  //Why u8 and not u16?
+        u8 temp = sNamingScreenData->bg1Priority;  //Why u8 and not u16?
 
-        gNamingScreenData->bg1Priority = gNamingScreenData->bg2Priority;
-        gNamingScreenData->bg2Priority = temp;
+        sNamingScreenData->bg1Priority = sNamingScreenData->bg2Priority;
+        sNamingScreenData->bg2Priority = temp;
         task->tState++;
     }
     return 0;
@@ -837,19 +837,19 @@ static bool8 PageSwapAnimState_2(struct Task *task)
 {
     u16 *const arr[] =
         {
-            &gNamingScreenData->bg2vOffset,
-            &gNamingScreenData->bg1vOffset
+            &sNamingScreenData->bg2vOffset,
+            &sNamingScreenData->bg1vOffset
         };
 
     task->tFrameCount += 4;
-    *arr[gNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
-    *arr[gNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
+    *arr[sNamingScreenData->bgToReveal] = Sin(task->tFrameCount, 40);
+    *arr[sNamingScreenData->bgToHide] = Sin((task->tFrameCount + 128) & 0xFF, 40);
     if (task->tFrameCount >= 128)
     {
-        u8 temp = gNamingScreenData->bgToReveal;
+        u8 temp = sNamingScreenData->bgToReveal;
 
-        gNamingScreenData->bgToReveal = gNamingScreenData->bgToHide;
-        gNamingScreenData->bgToHide = temp;
+        sNamingScreenData->bgToReveal = sNamingScreenData->bgToHide;
+        sNamingScreenData->bgToHide = temp;
         task->tState++;
     }
     return 0;
@@ -1054,18 +1054,18 @@ static void sub_809E898(void)
 
 static void CursorInit(void)
 {
-    gNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_83E25EC, 38, 88, 1);
+    sNamingScreenData->cursorSpriteId = CreateSprite(&gUnknown_83E25EC, 38, 88, 1);
     sub_809EA0C(1);
-    gSprites[gNamingScreenData->cursorSpriteId].oam.priority = 1;
-    gSprites[gNamingScreenData->cursorSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-    gSprites[gNamingScreenData->cursorSpriteId].data[6] = 1;
-    gSprites[gNamingScreenData->cursorSpriteId].data[6] = 2;
+    gSprites[sNamingScreenData->cursorSpriteId].oam.priority = 1;
+    gSprites[sNamingScreenData->cursorSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+    gSprites[sNamingScreenData->cursorSpriteId].data[6] = 1;
+    gSprites[sNamingScreenData->cursorSpriteId].data[6] = 2;
     SetCursorPos(0, 0);
 }
 
 static void SetCursorPos(s16 x, s16 y)
 {
-    struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
+    struct Sprite *cursorSprite = &gSprites[sNamingScreenData->cursorSpriteId];
 
     if (x < gUnknown_83E2330[sub_809DE50()])
         cursorSprite->pos1.x = gUnknown_83E2333[sub_809DE50()][x] + 38;
@@ -1081,7 +1081,7 @@ static void SetCursorPos(s16 x, s16 y)
 
 static void GetCursorPos(s16 *x, s16 *y)
 {
-    struct Sprite *cursorSprite = &gSprites[gNamingScreenData->cursorSpriteId];
+    struct Sprite *cursorSprite = &gSprites[sNamingScreenData->cursorSpriteId];
 
     *x = cursorSprite->data[0];
     *y = cursorSprite->data[1];
@@ -1094,25 +1094,25 @@ static void MoveCursorToOKButton(void)
 
 static void sub_809EA0C(u8 a)
 {
-    gSprites[gNamingScreenData->cursorSpriteId].data[4] &= ~0xFF;
-    gSprites[gNamingScreenData->cursorSpriteId].data[4] |= a;
-    StartSpriteAnim(&gSprites[gNamingScreenData->cursorSpriteId], 0);
+    gSprites[sNamingScreenData->cursorSpriteId].data[4] &= ~0xFF;
+    gSprites[sNamingScreenData->cursorSpriteId].data[4] |= a;
+    StartSpriteAnim(&gSprites[sNamingScreenData->cursorSpriteId], 0);
 }
 
 static void sub_809EA64(u8 a)
 {
-    gSprites[gNamingScreenData->cursorSpriteId].data[4] &= 0xFF;
-    gSprites[gNamingScreenData->cursorSpriteId].data[4] |= a << 8;
+    gSprites[sNamingScreenData->cursorSpriteId].data[4] &= 0xFF;
+    gSprites[sNamingScreenData->cursorSpriteId].data[4] |= a << 8;
 }
 
 static void sub_809EAA8(void)
 {
-    StartSpriteAnim(&gSprites[gNamingScreenData->cursorSpriteId], 1);
+    StartSpriteAnim(&gSprites[sNamingScreenData->cursorSpriteId], 1);
 }
 
 static bool8 IsCursorAnimFinished(void)
 {
-    return gSprites[gNamingScreenData->cursorSpriteId].animEnded;
+    return gSprites[sNamingScreenData->cursorSpriteId].animEnded;
 }
 
 static const u8 sKeyRoles[] = {KEY_ROLE_PAGE, KEY_ROLE_BACKSPACE, KEY_ROLE_OK};
@@ -1141,7 +1141,7 @@ static void CreatePageSwitcherSprites(void)
     u8 spriteId3;
 
     spriteId1 = CreateSprite(&gUnknown_83E2574, 0xCC, 0x58, 0);
-    gNamingScreenData->selectBtnFrameSpriteId = spriteId1;
+    sNamingScreenData->selectBtnFrameSpriteId = spriteId1;
     SetSubspriteTables(&gSprites[spriteId1], gUnknown_83E2504);
     gSprites[spriteId1].invisible = TRUE;
 
@@ -1158,10 +1158,10 @@ static void CreatePageSwitcherSprites(void)
 
 static void sub_809EC20(void)
 {
-    struct Sprite *sprite = &gSprites[gNamingScreenData->selectBtnFrameSpriteId];
+    struct Sprite *sprite = &gSprites[sNamingScreenData->selectBtnFrameSpriteId];
 
     sprite->data[0] = 2;
-    sprite->data[1] = gNamingScreenData->currentPage;
+    sprite->data[1] = sNamingScreenData->currentPage;
 }
 
 static bool8 (*const sPageSwapSpritesCBs[])(struct Sprite * sprite) = {
@@ -1182,7 +1182,7 @@ static bool8 PageSwapSpritesCB_Init(struct Sprite *sprite)
     struct Sprite *sprite1 = &gSprites[sprite->data[6]];
     struct Sprite *sprite2 = &gSprites[sprite->data[7]];
 
-    sub_809ED88(sub_809DE20(gNamingScreenData->currentPage), sprite1, sprite2);
+    sub_809ED88(sub_809DE20(sNamingScreenData->currentPage), sprite1, sprite2);
     sprite->data[0]++;
     return FALSE;
 }
@@ -1259,12 +1259,12 @@ static void CreateUnderscoreSprites(void)
     s16 xPos;
     u8 i;
 
-    xPos = gNamingScreenData->inputCharBaseXPos - 5;
+    xPos = sNamingScreenData->inputCharBaseXPos - 5;
     spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 0x38, 0);
     gSprites[spriteId].oam.priority = 3;
     gSprites[spriteId].invisible = TRUE;
-    xPos = gNamingScreenData->inputCharBaseXPos;
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++, xPos += 8)
+    xPos = sNamingScreenData->inputCharBaseXPos;
+    for (i = 0; i < sNamingScreenData->template->maxChars; i++, xPos += 8)
     {
         spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos + 3, 0x3C, 0);
         gSprites[spriteId].oam.priority = 3;
@@ -1287,7 +1287,7 @@ static void (*const sIconFunctions[])(void) = {
 
 static void CreateInputTargetIcon(void)
 {
-    sIconFunctions[gNamingScreenData->template->iconFunction]();
+    sIconFunctions[sNamingScreenData->template->iconFunction]();
 }
 
 static void NamingScreen_NoCreateIcon(void)
@@ -1300,7 +1300,7 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = sub_805C7C8(0, gNamingScreenData->monSpecies);
+    rivalGfxId = sub_805C7C8(0, sNamingScreenData->monSpecies);
     spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 0x38, 0x25, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
@@ -1320,7 +1320,7 @@ static void NamingScreen_CreateMonIcon(void)
     u8 spriteId;
 
     LoadMonIconPalettes();
-    spriteId = CreateMonIcon(gNamingScreenData->monSpecies, SpriteCallbackDummy, 0x38, 0x28, 0, gNamingScreenData->monPersonality, 1);
+    spriteId = CreateMonIcon(sNamingScreenData->monSpecies, SpriteCallbackDummy, 0x38, 0x28, 0, sNamingScreenData->monPersonality, 1);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1402,7 +1402,7 @@ static bool8 KeyboardKeyHandler_Character(u8 event)
         if (var)
         {
             SetInputState(INPUT_STATE_DISABLED);
-            gNamingScreenData->state = MAIN_STATE_MOVE_TO_OK_BUTTON;
+            sNamingScreenData->state = MAIN_STATE_MOVE_TO_OK_BUTTON;
         }
     }
     return FALSE;
@@ -1431,7 +1431,7 @@ static bool8 KeyboardKeyHandler_OK(u8 event)
     if (event == KBEVENT_PRESSED_A)
     {
         PlaySE(SE_SELECT);
-        gNamingScreenData->state = MAIN_STATE_6;
+        sNamingScreenData->state = MAIN_STATE_6;
         return TRUE;
     }
     else
@@ -1440,7 +1440,7 @@ static bool8 KeyboardKeyHandler_OK(u8 event)
 
 static bool8 TriggerKeyboardChange(void)
 {
-    gNamingScreenData->state = MAIN_STATE_START_PAGE_SWAP;
+    sNamingScreenData->state = MAIN_STATE_START_PAGE_SWAP;
     return TRUE;
 }
 
@@ -1604,20 +1604,20 @@ static void HandleDpadMovement(struct Task *task)
 
 static void PrintTitleFunction_NoMon(void)
 {
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
-    AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, gNamingScreenData->template->title, 1, 1, 0, NULL);
-    PutWindowTilemap(gNamingScreenData->windows[3]);
+    FillWindowPixelBuffer(sNamingScreenData->windows[3], PIXEL_FILL(1));
+    AddTextPrinterParameterized(sNamingScreenData->windows[3], 1, sNamingScreenData->template->title, 1, 1, 0, NULL);
+    PutWindowTilemap(sNamingScreenData->windows[3]);
 }
 
 static void PrintTitleFunction_WithMon(void)
 {
     u8 buffer[0x20];
 
-    StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
-    StringAppendN(buffer, gNamingScreenData->template->title, 15);
-    FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
-    AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 1, 1, 0, NULL);
-    PutWindowTilemap(gNamingScreenData->windows[3]);
+    StringCopy(buffer, gSpeciesNames[sNamingScreenData->monSpecies]);
+    StringAppendN(buffer, sNamingScreenData->template->title, 15);
+    FillWindowPixelBuffer(sNamingScreenData->windows[3], PIXEL_FILL(1));
+    AddTextPrinterParameterized(sNamingScreenData->windows[3], 1, buffer, 1, 1, 0, NULL);
+    PutWindowTilemap(sNamingScreenData->windows[3]);
 }
 
 static void (*const sPrintTitleFuncs[])(void) = {
@@ -1630,7 +1630,7 @@ static void (*const sPrintTitleFuncs[])(void) = {
 
 static void PrintTitle(void)
 {
-    sPrintTitleFuncs[gNamingScreenData->templateNum]();
+    sPrintTitleFuncs[sNamingScreenData->templateNum]();
 }
 
 static void (*const sAddGenderIconFuncs[])(void) = {
@@ -1640,7 +1640,7 @@ static void (*const sAddGenderIconFuncs[])(void) = {
 
 static void CallAddGenderIconFunc(void)
 {
-    sAddGenderIconFuncs[gNamingScreenData->template->addGenderIcon]();
+    sAddGenderIconFuncs[sNamingScreenData->template->addGenderIcon]();
 }
 
 static void AddGenderIconFunc_No(void)
@@ -1660,14 +1660,14 @@ static void AddGenderIconFunc_Yes(void)
 
     StringCopy(genderSymbol, gText_MaleSymbol);
 
-    if (gNamingScreenData->monGender != MON_GENDERLESS)
+    if (sNamingScreenData->monGender != MON_GENDERLESS)
     {
-        if (gNamingScreenData->monGender == MON_FEMALE)
+        if (sNamingScreenData->monGender == MON_FEMALE)
         {
             StringCopy(genderSymbol, gText_FemaleSymbol);
             gender = FEMALE;
         }
-        AddTextPrinterParameterized3(gNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
+        AddTextPrinterParameterized3(sNamingScreenData->windows[2], 2, 0x68, 1, sGenderColors[gender], TEXT_SPEED_FF, genderSymbol);
     }
 }
 
@@ -1680,21 +1680,21 @@ static u8 GetTextCaretPosition(void)
 {
     u8 i;
 
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++)
+    for (i = 0; i < sNamingScreenData->template->maxChars; i++)
     {
-        if (gNamingScreenData->textBuffer[i] == EOS)
+        if (sNamingScreenData->textBuffer[i] == EOS)
             return i;
     }
-    return gNamingScreenData->template->maxChars - 1;
+    return sNamingScreenData->template->maxChars - 1;
 }
 
 static u8 GetPreviousTextCaretPosition(void)
 {
     s8 i;
 
-    for (i = gNamingScreenData->template->maxChars - 1; i > 0; i--)
+    for (i = sNamingScreenData->template->maxChars - 1; i > 0; i--)
     {
-        if (gNamingScreenData->textBuffer[i] != EOS)
+        if (sNamingScreenData->textBuffer[i] != EOS)
             return i;
     }
     return 0;
@@ -1707,10 +1707,10 @@ static void DeleteTextCharacter(void)
 
     index = GetPreviousTextCaretPosition();
     // Temporarily make this a space for redrawing purposes
-    gNamingScreenData->textBuffer[index] = CHAR_SPACE;
+    sNamingScreenData->textBuffer[index] = CHAR_SPACE;
     PrintBufferCharactersOnScreen();
     CopyBgTilemapBufferToVram(3);
-    gNamingScreenData->textBuffer[index] = EOS;
+    sNamingScreenData->textBuffer[index] = EOS;
     var2 = GetKeyRoleAtCursorPos();
     if (var2 == KEY_ROLE_CHAR || var2 == KEY_ROLE_BACKSPACE)
         sub_809E518(1, 0, 1);
@@ -1728,7 +1728,7 @@ static bool8 AppendCharToBuffer_CheckBufferFull(void)
     CopyBgTilemapBufferToVram(3);
     PlaySE(SE_SELECT);
 
-    if (GetPreviousTextCaretPosition() != gNamingScreenData->template->maxChars - 1)
+    if (GetPreviousTextCaretPosition() != sNamingScreenData->template->maxChars - 1)
         return FALSE;
     else
         return TRUE;
@@ -1738,7 +1738,7 @@ static void AddTextCharacter(u8 ch)
 {
     u8 index = GetTextCaretPosition();
 
-    gNamingScreenData->textBuffer[index] = ch;
+    sNamingScreenData->textBuffer[index] = ch;
 }
 
 static void CopyStringToDestBuffer(void)
@@ -1746,11 +1746,11 @@ static void CopyStringToDestBuffer(void)
     // Copy from the first non-whitespace character
     u8 i;
 
-    for (i = 0; i < gNamingScreenData->template->maxChars; i++)
+    for (i = 0; i < sNamingScreenData->template->maxChars; i++)
     {
-        if (gNamingScreenData->textBuffer[i] != CHAR_SPACE && gNamingScreenData->textBuffer[i] != EOS)
+        if (sNamingScreenData->textBuffer[i] != CHAR_SPACE && sNamingScreenData->textBuffer[i] != EOS)
         {
-            StringCopyN(gNamingScreenData->destBuffer, gNamingScreenData->textBuffer, gNamingScreenData->template->maxChars + 1);
+            StringCopyN(sNamingScreenData->destBuffer, sNamingScreenData->textBuffer, sNamingScreenData->template->maxChars + 1);
             break;
         }
     }
@@ -1758,10 +1758,10 @@ static void CopyStringToDestBuffer(void)
 
 static void choose_name_or_words_screen_load_bg_tile_patterns(void)
 {
-    LZ77UnCompWram(gNamingScreenMenu_Gfx, gNamingScreenData->tileBuffer);
-    LoadBgTiles(1, gNamingScreenData->tileBuffer, 0x600, 0);
-    LoadBgTiles(2, gNamingScreenData->tileBuffer, 0x600, 0);
-    LoadBgTiles(3, gNamingScreenData->tileBuffer, 0x600, 0);
+    LZ77UnCompWram(gNamingScreenMenu_Gfx, sNamingScreenData->tileBuffer);
+    LoadBgTiles(1, sNamingScreenData->tileBuffer, 0x600, 0);
+    LoadBgTiles(2, sNamingScreenData->tileBuffer, 0x600, 0);
+    LoadBgTiles(3, sNamingScreenData->tileBuffer, 0x600, 0);
     LoadSpriteSheets(gUnknown_83E267C);
     LoadSpritePalettes(gUnknown_83E26E4);
 }
@@ -1789,23 +1789,23 @@ static void PrintBufferCharactersOnScreen(void)
     u8 i;
     u8 temp[2];
     u16 xoff;
-    u8 maxChars = gNamingScreenData->template->maxChars;
-    u16 xpos = gNamingScreenData->inputCharBaseXPos - 0x40;
+    u8 maxChars = sNamingScreenData->template->maxChars;
+    u16 xpos = sNamingScreenData->inputCharBaseXPos - 0x40;
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[2], PIXEL_FILL(1));
+    FillWindowPixelBuffer(sNamingScreenData->windows[2], PIXEL_FILL(1));
 
     for (i = 0; i < maxChars; i++)
     {
-        temp[0] = gNamingScreenData->textBuffer[i];
+        temp[0] = sNamingScreenData->textBuffer[i];
         temp[1] = gExpandedPlaceholder_Empty[0];
         xoff = (IsLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(gNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(sNamingScreenData->windows[2], 2, temp, i * 8 + xpos + xoff, 1, TEXT_SPEED_FF, NULL);
     }
 
     CallAddGenderIconFunc();
-    CopyWindowToVram(gNamingScreenData->windows[2], 2);
-    PutWindowTilemap(gNamingScreenData->windows[2]);
+    CopyWindowToVram(sNamingScreenData->windows[2], 2);
+    PutWindowTilemap(sNamingScreenData->windows[2]);
 }
 
 struct TextColor   // Needed because of alignment
@@ -1865,16 +1865,16 @@ static void sub_809FA60(void)
     {
         bgId = 1;
         bgId_copy = 1;
-        windowId = gNamingScreenData->windows[0];
+        windowId = sNamingScreenData->windows[0];
     }
     else
     {
         bgId = 2;
         bgId_copy = 2;
-        windowId = gNamingScreenData->windows[1];
+        windowId = sNamingScreenData->windows[1];
     }
 
-    DecompressToBgTilemapBuffer(bgId, gUnknown_83E244C[gNamingScreenData->currentPage]);
+    DecompressToBgTilemapBuffer(bgId, gUnknown_83E244C[sNamingScreenData->currentPage]);
     sub_809F9E8(windowId, sub_809DE30());
     CopyBgTilemapBufferToVram(bgId_copy);
 }
@@ -1884,10 +1884,10 @@ static void sub_809FAE4(void)
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
     int strwidth = GetStringWidth(0, gText_MoveOkBack, 0);
 
-    FillWindowPixelBuffer(gNamingScreenData->windows[4], PIXEL_FILL(15));
-    AddTextPrinterParameterized3(gNamingScreenData->windows[4], 0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
-    PutWindowTilemap(gNamingScreenData->windows[4]);
-    CopyWindowToVram(gNamingScreenData->windows[4], 3);
+    FillWindowPixelBuffer(sNamingScreenData->windows[4], PIXEL_FILL(15));
+    AddTextPrinterParameterized3(sNamingScreenData->windows[4], 0, 236 - strwidth, 0, color, 0, gText_MoveOkBack);
+    PutWindowTilemap(sNamingScreenData->windows[4]);
+    CopyWindowToVram(sNamingScreenData->windows[4], 3);
 }
 
 static void sub_809FB70(void)
@@ -1914,12 +1914,12 @@ static void VBlankCB_NamingScreen(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    SetGpuReg(REG_OFFSET_BG1VOFS, gNamingScreenData->bg1vOffset);
-    SetGpuReg(REG_OFFSET_BG2VOFS, gNamingScreenData->bg2vOffset);
+    SetGpuReg(REG_OFFSET_BG1VOFS, sNamingScreenData->bg1vOffset);
+    SetGpuReg(REG_OFFSET_BG2VOFS, sNamingScreenData->bg2vOffset);
     SetGpuReg(REG_OFFSET_BG1CNT, GetGpuReg(REG_OFFSET_BG1CNT) & 0xFFFC); // clear priority bits
-    SetGpuRegBits(REG_OFFSET_BG1CNT, gNamingScreenData->bg1Priority);
+    SetGpuRegBits(REG_OFFSET_BG1CNT, sNamingScreenData->bg1Priority);
     SetGpuReg(REG_OFFSET_BG2CNT, GetGpuReg(REG_OFFSET_BG2CNT) & 0xFFFC); // clear priority bits
-    SetGpuRegBits(REG_OFFSET_BG2CNT, gNamingScreenData->bg2Priority);
+    SetGpuRegBits(REG_OFFSET_BG2CNT, sNamingScreenData->bg2Priority);
 }
 
 static void ShowAllBgs(void)

@@ -93,7 +93,7 @@ void sub_805A658(s16 *a, s16 *b)
 void DrawWholeMapView(void)
 {
     DrawWholeMapViewInternal(gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y, gMapHeader.mapLayout);
-//    sFieldCameraOffset.copyBGToVRAM = TRUE;
+   // sFieldCameraOffset.copyBGToVRAM = TRUE;
 }
 
 static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout *mapLayout)
@@ -207,7 +207,7 @@ void CurrentMapDrawMetatileAt(int x, int y)
     if (offset >= 0)
     {
         DrawMetatileAt(gMapHeader.mapLayout, offset, x, y);
-//        sFieldCameraOffset.copyBGToVRAM = TRUE;
+       // sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
 
@@ -218,7 +218,7 @@ void DrawDoorMetatileAt(int x, int y, const u16 *arr)
     if (offset >= 0)
     {
         DrawMetatile(1, arr, offset);
-//        sFieldCameraOffset.copyBGToVRAM = TRUE;
+       // sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
 
@@ -411,8 +411,8 @@ void CameraUpdate(void)
     {
         CameraMove(deltaX, deltaY);
         UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
-//        RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
-//        ResetBerryTreeSparkleFlags();
+        // RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
+        // ResetBerryTreeSparkleFlags();
         tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
@@ -422,7 +422,7 @@ void CameraUpdate(void)
     gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
-void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
+void MoveCameraAndRedrawMap(int deltaX, int deltaY) // unused
 {
     CameraMove(deltaX, deltaY);
     UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
@@ -487,16 +487,16 @@ void sub_805ACF0(void)
     if (deltaX != 0 || deltaY != 0)
     {
         CameraMove(deltaX, deltaY);
-//        UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
-//        RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
-//        ResetBerryTreeSparkleFlags();
+        // UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
+        // RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
+        // ResetBerryTreeSparkleFlags();
         tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
         RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
 
     coords8_add(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
-//    gTotalCameraPixelOffsetX -= movementSpeedX;
-//    gTotalCameraPixelOffsetY -= movementSpeedY;
+    // gTotalCameraPixelOffsetX -= movementSpeedX;
+    // gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
 void SetCameraPanningCallback(void (*a)(void))
@@ -522,7 +522,7 @@ void UpdateCameraPanning(void)
 {
     if (sFieldCameraPanningCallback != NULL)
         sFieldCameraPanningCallback();
-    //Update sprite offset of overworld objects
+    // Update sprite offset of overworld objects
     gSpriteCoordOffsetX = gTotalCameraPixelOffsetX - sHorizontalCameraPan;
     gSpriteCoordOffsetY = gTotalCameraPixelOffsetY - sVerticalCameraPan - 8;
 }

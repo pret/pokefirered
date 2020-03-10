@@ -1182,14 +1182,14 @@ const u32 gUnknown_8E97EC4[] = INCBIN_U32("graphics/interface/learn_move.bin.lz"
 
 const u16 gUnknown_8E97FE4[] = INCBIN_U16("graphics/interface/naming_screen_8E97FE4.gbapal");
 const u16 gUnknown_8E98004[] = INCBIN_U16("graphics/interface/naming_screen_8E98004.gbapal");
-const u16 gUnknown_8E98024[] = INCBIN_U16("graphics/interface/naming_screen_8E98024.gbapal");
+const u16 gNamingScreenMenu_Pal[] = INCBIN_U16("graphics/interface/naming_screen_8E98024.gbapal");
 const u16 gUnknown_8E98044[] = INCBIN_U16("graphics/interface/naming_screen_8E98044.gbapal");
 const u16 gUnknown_8E98064[] = INCBIN_U16("graphics/interface/naming_screen_8E98064.gbapal");
 const u16 gUnknown_8E98084[] = INCBIN_U16("graphics/interface/naming_screen_8E98084.gbapal");
 const u16 gUnknown_8E980A4[] = INCBIN_U16("graphics/interface/naming_screen_8E980A4.gbapal");
 const u16 gUnknown_8E980C4[] = INCBIN_U16("graphics/interface/naming_screen_8E980C4.gbapal");
 
-const u32 gUnknown_8E980E4[] = INCBIN_U32("graphics/interface/naming_screen_menu.4bpp.lz");
+const u32 gNamingScreenMenu_Gfx[] = INCBIN_U32("graphics/interface/naming_screen_menu.4bpp.lz");
 const u32 gUnknown_8E982BC[] = INCBIN_U32("graphics/interface/naming_screen_menu.bin.lz");
 const u32 gUnknown_8E98398[] = INCBIN_U32("graphics/interface/naming_screen_E98398.bin.lz");
 const u32 gUnknown_8E98458[] = INCBIN_U32("graphics/interface/naming_screen_E98458.bin.lz");

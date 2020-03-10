@@ -1350,4 +1350,12 @@ extern const u8 gUnknown_8418AA1[];
 extern const u8 gUnknown_8418AB2[];
 extern const u8 gUnknown_841EE2B[];
 
+// naming_screen
+extern const u8 gText_MoveOkBack[];
+extern const u8 gText_AlphabetUpperLower[];
+extern const u8 gText_YourName[];
+extern const u8 gText_BoxName[];
+extern const u8 gText_PkmnsNickname[];
+extern const u8 gText_RivalsName[];
+
 #endif //GUARD_STRINGS_H

@@ -37,4 +37,17 @@ extern const u8 gUnknown_847A8FA[];
 extern const u8 gUnknown_847A913[];
 extern const u8 gUnknown_847A934[];
 
+extern const u8 gText_NamingScreenKeyboard_abcdef[];
+extern const u8 gText_NamingScreenKeyboard_ghijkl[];
+extern const u8 gText_NamingScreenKeyboard_mnopqrs[];
+extern const u8 gText_NamingScreenKeyboard_tuvwxyz[];
+extern const u8 gText_NamingScreenKeyboard_ABCDEF[];
+extern const u8 gText_NamingScreenKeyboard_GHIJKL[];
+extern const u8 gText_NamingScreenKeyboard_MNOPQRS[];
+extern const u8 gText_NamingScreenKeyboard_TUVWXYZ[];
+extern const u8 gText_NamingScreenKeyboard_01234[];
+extern const u8 gText_NamingScreenKeyboard_56789[];
+extern const u8 gText_NamingScreenKeyboard_Symbols1[];
+extern const u8 gText_NamingScreenKeyboard_Symbols2[];
+
 #endif //GUARD_DATA_8479668_H

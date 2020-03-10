@@ -29,40 +29,40 @@ gUnknown_847A934::
 
 	// naming_screen
 
-gUnknown_847A955::
+gText_NamingScreenKeyboard_abcdef::
 	.string "{CLEAR 11}a{CLEAR 6}b{CLEAR 6}c{CLEAR 26}d{CLEAR 6}e{CLEAR 6}f{CLEAR 6} {CLEAR 26}.$"
 
-gUnknown_847A976::
+gText_NamingScreenKeyboard_ghijkl::
 	.string "{CLEAR 11}g{CLEAR 6}h{CLEAR 7}i{CLEAR 27}j{CLEAR 6}k{CLEAR 6}l{CLEAR 7} {CLEAR 26},$"
 
-gUnknown_847A997::
+gText_NamingScreenKeyboard_mnopqrs::
 	.string "{CLEAR 11}m{CLEAR 6}n{CLEAR 7}o{CLEAR 26}p{CLEAR 6}q{CLEAR 7}r{CLEAR 6}s{CLEAR 27} $"
 
-gUnknown_847A9B8::
+gText_NamingScreenKeyboard_tuvwxyz::
 	.string "{CLEAR 12}t{CLEAR 6}u{CLEAR 6}v{CLEAR 26}w{CLEAR 6}x{CLEAR 6}y{CLEAR 6}z{CLEAR 26} $"
 
-gUnknown_847A9D9::
+gText_NamingScreenKeyboard_ABCDEF::
 	.string "{CLEAR 11}A{CLEAR 6}B{CLEAR 6}C{CLEAR 26}D{CLEAR 6}E{CLEAR 6}F{CLEAR 6} {CLEAR 26}.$"
 
-gUnknown_847A9FA::
+gText_NamingScreenKeyboard_GHIJKL::
 	.string "{CLEAR 11}G{CLEAR 6}H{CLEAR 6}I{CLEAR 26}J{CLEAR 6}K{CLEAR 6}L{CLEAR 6} {CLEAR 26},$"
 
-gUnknown_847AA1B::
+gText_NamingScreenKeyboard_MNOPQRS::
 	.string "{CLEAR 11}M{CLEAR 6}N{CLEAR 6}O{CLEAR 26}P{CLEAR 6}Q{CLEAR 6}R{CLEAR 6}S{CLEAR 26} $"
 
-gUnknown_847AA3C::
+gText_NamingScreenKeyboard_TUVWXYZ::
 	.string "{CLEAR 11}T{CLEAR 6}U{CLEAR 6}V{CLEAR 26}W{CLEAR 6}X{CLEAR 6}Y{CLEAR 6}Z{CLEAR 26} $"
 
-gUnknown_847AA5D::
+gText_NamingScreenKeyboard_01234::
 	.string "{CLEAR 11}0{CLEAR 16}1{CLEAR 16}2{CLEAR 16}3{CLEAR 16}4{CLEAR 16} $"
 
-gUnknown_847AA76::
+gText_NamingScreenKeyboard_56789::
 	.string "{CLEAR 11}5{CLEAR 16}6{CLEAR 16}7{CLEAR 16}8{CLEAR 16}9{CLEAR 16} $"
 
-gUnknown_847AA8F::
+gText_NamingScreenKeyboard_Symbols1::
 	.string "{CLEAR 11}!{CLEAR 16}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 16}-$"
 
-gUnknown_847AAA8::
+gText_NamingScreenKeyboard_Symbols2::
 	.string "{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 18}'{CLEAR 18} $"
 
 	// union_room_chat

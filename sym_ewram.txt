@@ -233,12 +233,8 @@ gUnknown_203982C: @ 203982C
 	.include "src/special_field_anim.o"
 	.align 2
 	.include "src/script_menu.o"
-
 	.align 2
-	@ .include "src/naming_screen.o"
-gNamingScreenData: @ 203998C
-	.space 0x4
-
+	.include "src/naming_screen.o"
 	.align 2
 	.include "src/money.o"
 	.align 2

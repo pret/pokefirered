@@ -129,6 +129,8 @@ void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
 u8 ZCoordToPriority(u8 z);
 void SetObjectSubpriorityByZCoord(u8 z, struct Sprite * sprite, u8 offset);
 void MakeObjectTemplateFromObjectEventGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
+u8 AddCameraObject(u8 trackedSpriteId);
+void UpdateObjectEventsForCameraUpdate(s16 x, s16 y);
 
 // Exported data declarations
 

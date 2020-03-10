@@ -8,9 +8,9 @@
 struct CameraObject
 {
     void (*callback)(struct CameraObject *);
-    u32 unk4;
-    s32 unk8;
-    s32 unkC;
+    u32 spriteId;
+    s32 movementSpeedX;
+    s32 movementSpeedY;
     s32 x;
     s32 y;
 };

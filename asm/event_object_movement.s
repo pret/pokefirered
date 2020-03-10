@@ -12924,7 +12924,7 @@ SetSpritePosToMapCoords: @ 8063B1C
 	ldr r0, _08063BB0 @ =gTotalCameraPixelOffsetX
 	ldrh r0, [r0]
 	negs r0, r0
-	ldr r1, _08063BB4 @ =gUnknown_3005050
+	ldr r1, _08063BB4 @ =gFieldCamera
 	ldr r2, [r1, 0x10]
 	subs r0, r2
 	lsls r0, 16
@@ -12993,7 +12993,7 @@ _08063B7C:
 	bx r0
 	.align 2, 0
 _08063BB0: .4byte gTotalCameraPixelOffsetX
-_08063BB4: .4byte gUnknown_3005050
+_08063BB4: .4byte gFieldCamera
 _08063BB8: .4byte gTotalCameraPixelOffsetY
 _08063BBC: .4byte 0xfff00000
 _08063BC0: .4byte gSaveBlock1Ptr
@@ -13046,7 +13046,7 @@ GetObjectEventMovingCameraOffset: @ 8063C10
 	movs r0, 0
 	strh r0, [r2]
 	strh r0, [r1]
-	ldr r3, _08063C4C @ =gUnknown_3005050
+	ldr r3, _08063C4C @ =gFieldCamera
 	ldr r0, [r3, 0x10]
 	cmp r0, 0
 	ble _08063C26
@@ -13076,7 +13076,7 @@ _08063C48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063C4C: .4byte gUnknown_3005050
+_08063C4C: .4byte gFieldCamera
 	thumb_func_end GetObjectEventMovingCameraOffset
 
 	thumb_func_start ObjectEventMoveDestCoords

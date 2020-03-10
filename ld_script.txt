@@ -90,7 +90,7 @@ SECTIONS {
         asm/overworld.o(.text);
         src/fieldmap.o(.text);
         src/metatile_behavior.o(.text);
-        asm/field_camera.o(.text);
+        src/field_camera.o(.text);
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         asm/event_object_movement.o(.text);

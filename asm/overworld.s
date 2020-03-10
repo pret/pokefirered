@@ -3091,7 +3091,7 @@ InitOverworldBgs: @ 80562B0
 	movs r1, 0x5
 	movs r2, 0x1
 	bl SetBgAttribute
-	ldr r0, _08056348 @ =gUnknown_3005018
+	ldr r0, _08056348 @ =gBGTilemapBuffers2
 	mov r8, r0
 	movs r4, 0x80
 	lsls r4, 4
@@ -3099,11 +3099,11 @@ InitOverworldBgs: @ 80562B0
 	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
-	ldr r6, _0805634C @ =gUnknown_3005014
+	ldr r6, _0805634C @ =gBGTilemapBuffers1
 	adds r0, r4, 0
 	bl AllocZeroed
 	str r0, [r6]
-	ldr r5, _08056350 @ =gUnknown_300501C
+	ldr r5, _08056350 @ =gBGTilemapBuffers3
 	adds r0, r4, 0
 	bl AllocZeroed
 	str r0, [r5]
@@ -3127,9 +3127,9 @@ InitOverworldBgs: @ 80562B0
 	bx r0
 	.align 2, 0
 _08056344: .4byte gUnknown_826D320
-_08056348: .4byte gUnknown_3005018
-_0805634C: .4byte gUnknown_3005014
-_08056350: .4byte gUnknown_300501C
+_08056348: .4byte gBGTilemapBuffers2
+_0805634C: .4byte gBGTilemapBuffers1
+_08056350: .4byte gBGTilemapBuffers3
 	thumb_func_end InitOverworldBgs
 
 	thumb_func_start sub_8056354
@@ -3155,7 +3155,7 @@ sub_8056354: @ 8056354
 	movs r1, 0x5
 	movs r2, 0x1
 	bl SetBgAttribute
-	ldr r0, _080563E4 @ =gUnknown_3005018
+	ldr r0, _080563E4 @ =gBGTilemapBuffers2
 	mov r8, r0
 	movs r4, 0x80
 	lsls r4, 4
@@ -3163,11 +3163,11 @@ sub_8056354: @ 8056354
 	bl AllocZeroed
 	mov r1, r8
 	str r0, [r1]
-	ldr r6, _080563E8 @ =gUnknown_3005014
+	ldr r6, _080563E8 @ =gBGTilemapBuffers1
 	adds r0, r4, 0
 	bl AllocZeroed
 	str r0, [r6]
-	ldr r5, _080563EC @ =gUnknown_300501C
+	ldr r5, _080563EC @ =gBGTilemapBuffers3
 	adds r0, r4, 0
 	bl AllocZeroed
 	str r0, [r5]
@@ -3191,30 +3191,30 @@ sub_8056354: @ 8056354
 	bx r0
 	.align 2, 0
 _080563E0: .4byte gUnknown_826D320
-_080563E4: .4byte gUnknown_3005018
-_080563E8: .4byte gUnknown_3005014
-_080563EC: .4byte gUnknown_300501C
+_080563E4: .4byte gBGTilemapBuffers2
+_080563E8: .4byte gBGTilemapBuffers1
+_080563EC: .4byte gBGTilemapBuffers3
 	thumb_func_end sub_8056354
 
 	thumb_func_start CleanupOverworldWindowsAndTilemaps
 CleanupOverworldWindowsAndTilemaps: @ 80563F0
 	push {lr}
 	bl FreeAllOverworldWindowBuffers
-	ldr r0, _08056414 @ =gUnknown_300501C
+	ldr r0, _08056414 @ =gBGTilemapBuffers3
 	ldr r0, [r0]
 	bl Free
-	ldr r0, _08056418 @ =gUnknown_3005014
+	ldr r0, _08056418 @ =gBGTilemapBuffers1
 	ldr r0, [r0]
 	bl Free
-	ldr r0, _0805641C @ =gUnknown_3005018
+	ldr r0, _0805641C @ =gBGTilemapBuffers2
 	ldr r0, [r0]
 	bl Free
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056414: .4byte gUnknown_300501C
-_08056418: .4byte gUnknown_3005014
-_0805641C: .4byte gUnknown_3005018
+_08056414: .4byte gBGTilemapBuffers3
+_08056418: .4byte gBGTilemapBuffers1
+_0805641C: .4byte gBGTilemapBuffers2
 	thumb_func_end CleanupOverworldWindowsAndTilemaps
 
 	thumb_func_start sub_8056420
@@ -5344,7 +5344,7 @@ _08057620:
 	beq _08057648
 	b _0805754E
 _0805762C:
-	ldr r0, _08057640 @ =gUnknown_3005050
+	ldr r0, _08057640 @ =gFieldCamera
 	ldr r1, _08057644 @ =sub_8057748
 	str r1, [r0]
 	bl SetFieldVBlankCallback
@@ -5353,7 +5353,7 @@ _0805762C:
 	movs r0, 0x1
 	b _0805764A
 	.align 2, 0
-_08057640: .4byte gUnknown_3005050
+_08057640: .4byte gFieldCamera
 _08057644: .4byte sub_8057748
 _08057648:
 	movs r0, 0

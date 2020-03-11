@@ -20,6 +20,7 @@
 	.include "load_save.o"
 
 	.align 2
+	@ .include "overworld.o"
 gBGTilemapBuffers1: @ 3005014
 	.space 0x4
 
@@ -44,7 +45,7 @@ gLocalLinkPlayerId: @ 300502C
 gFieldLinkPlayerCount: @ 3005030
 	.space 0x10
 
-	.align 2
+	.align 4
 	.include "fieldmap.o"
 
 	.align 4
@@ -54,6 +55,7 @@ gFieldLinkPlayerCount: @ 3005030
 	.include "scrcmd.o"
 
 	.align 2
+	@ .include "field_control_avatar.o"
 gSelectedObjectEvent: @ 3005074
 	.space 0x4
 

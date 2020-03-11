@@ -1,4 +1,4 @@
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
 #define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))

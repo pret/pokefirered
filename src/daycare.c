@@ -28,7 +28,7 @@
 #include "field_fadetransition.h"
 #include "trade.h"
 #include "constants/daycare.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 
 // Combination of RSE's Day-Care (re-used on Four Island), FRLG's Day-Care, and egg_hatch.c
 

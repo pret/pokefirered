@@ -14,7 +14,7 @@
 #include "overworld.h"
 #include "event_data.h"
 #include "map_preview_screen.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 
 static EWRAM_DATA bool8 sHasVisitedMapBefore = FALSE;
 static EWRAM_DATA bool8 sAllocedBg0TilemapBuffer = FALSE;

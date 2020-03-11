@@ -42,7 +42,7 @@
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/maps.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/moves.h"
 #include "constants/menu.h"
 #include "constants/event_objects.h"

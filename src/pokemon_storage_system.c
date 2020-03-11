@@ -3,27 +3,6 @@
 #include "pokemon_storage_system.h"
 #include "constants/species.h"
 
-enum
-{
-    WALLPAPER_FOREST,
-    WALLPAPER_CITY,
-    WALLPAPER_DESERT,
-    WALLPAPER_SAVANNA,
-    WALLPAPER_CRAG,
-    WALLPAPER_VOLCANO,
-    WALLPAPER_SNOW,
-    WALLPAPER_CAVE,
-    WALLPAPER_BEACH,
-    WALLPAPER_SEAFLOOR,
-    WALLPAPER_RIVER,
-    WALLPAPER_SKY,
-    WALLPAPER_POLKADOT,
-    WALLPAPER_POKECENTER,
-    WALLPAPER_MACHINE,
-    WALLPAPER_PLAIN,
-    WALLPAPER_COUNT
-};
-
 void BackupPokemonStorage(struct PokemonStorage * dest)
 {
     *dest = *gPokemonStoragePtr;
@@ -92,13 +71,13 @@ u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst)
         return 0;
 }
 
-void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon *src)
+void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         gPokemonStoragePtr->boxes[boxId][boxPosition] = *src;
 }
 
-void CopyBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon *dst)
+void CopyBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * dst)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         *dst = gPokemonStoragePtr->boxes[boxId][boxPosition];
@@ -123,13 +102,13 @@ void ZeroBoxMonAt(u8 boxId, u8 boxPosition)
         ZeroBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition]);
 }
 
-void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon *dst)
+void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         BoxMonToMon(&gPokemonStoragePtr->boxes[boxId][boxPosition], dst);
 }
 
-struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 boxPosition)
+struct BoxPokemon * GetBoxedMonPtr(u8 boxId, u8 boxPosition)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         return &gPokemonStoragePtr->boxes[boxId][boxPosition];
@@ -159,17 +138,21 @@ void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
         gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
 }
 
-s16 sub_808BDE8(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3)
+s16 sub_808BDE8(struct BoxPokemon * boxMons, s8 currIndex, u8 maxIndex, u8 flags)
 {
+    // flags:
+    // bit 0: Allow eggs
+    // bit 1: Search backwards
     s16 i;
-    s16 adder = -1;
-
-    if (arg3 < 2)
+    s16 adder;
+    if (flags == 0 || flags == 1)
         adder = 1;
+    else
+        adder = -1;
 
-    if (arg3 == 1 || arg3 == 3)
+    if (flags == 1 || flags == 3)
     {
-        for (i = (s8)currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE)
                 return i;
@@ -177,7 +160,7 @@ s16 sub_808BDE8(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3)
     }
     else
     {
-        for (i = (s8)currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
+        for (i = currIndex + adder; i >= 0 && i <= maxIndex; i += adder)
         {
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE
                 && !GetBoxMonData(&boxMons[i], MON_DATA_IS_EGG))

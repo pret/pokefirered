@@ -6,6 +6,27 @@
 #define TOTAL_BOXES_COUNT       14
 #define IN_BOX_COUNT            30
 
+enum
+{
+    WALLPAPER_FOREST,
+    WALLPAPER_CITY,
+    WALLPAPER_DESERT,
+    WALLPAPER_SAVANNA,
+    WALLPAPER_CRAG,
+    WALLPAPER_VOLCANO,
+    WALLPAPER_SNOW,
+    WALLPAPER_CAVE,
+    WALLPAPER_BEACH,
+    WALLPAPER_SEAFLOOR,
+    WALLPAPER_RIVER,
+    WALLPAPER_SKY,
+    WALLPAPER_POLKADOT,
+    WALLPAPER_POKECENTER,
+    WALLPAPER_MACHINE,
+    WALLPAPER_PLAIN,
+    WALLPAPER_COUNT
+};
+
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
 void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);

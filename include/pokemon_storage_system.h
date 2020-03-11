@@ -8,10 +8,10 @@
 
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
-void SetBoxMonNickFromAnyBox(u8 boxId, u8 monPosition, u8 * newNick);
+void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);
 void CompactPartySlots(void);
-u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
-void sub_808BCB4(u8 boxId, u8 monPosition);
+u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, s32 request);
+void ZeroBoxMonAt(u8 boxId, u8 monPosition);
 void sub_808CE60(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);

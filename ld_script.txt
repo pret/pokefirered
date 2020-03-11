@@ -128,7 +128,8 @@ SECTIONS {
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         src/trainer_card.o(.text);
-        asm/pokemon_storage_system.o(.text);
+        src/pokemon_storage_system.o(.text);
+        asm/pokemon_storage_system_2.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);

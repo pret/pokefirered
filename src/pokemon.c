@@ -3806,7 +3806,7 @@ static bool8 IsPokemonStorageFull(void)
 
     for (i = 0; i < 14; i++)
         for (j = 0; j < 30; j++)
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
+            if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
                 return FALSE;
 
     return TRUE;

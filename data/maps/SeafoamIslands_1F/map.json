@@ -23,8 +23,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 66,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "66",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_HIDE_SEAFOAM_1F_BOULDER_1"
     },
@@ -36,8 +36,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 67,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "67",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_HIDE_SEAFOAM_1F_BOULDER_2"
     },
@@ -49,8 +49,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SeafoamIslands_1F_EventScript_ItemIceHeal",
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_1F_ICE_HEAL"
     }

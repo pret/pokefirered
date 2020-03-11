@@ -1,4 +1,4 @@
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/flags.h"
 #include "constants/moves.h"
 #include "constants/species.h"

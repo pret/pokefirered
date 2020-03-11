@@ -19,7 +19,7 @@
 #include "map_preview_screen.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/spawn_points.h"
 #include "constants/maps.h"
 

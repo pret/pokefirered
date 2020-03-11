@@ -1784,7 +1784,7 @@ static void GoToBerryPouch_PCBox(void)
 
 static void ReturnToBagMenuFromSubmenu_PCBox(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_PCBOX, OPEN_BAG_LAST, sub_808CE60);
+    GoToBagMenu(ITEMMENULOCATION_PCBOX, OPEN_BAG_LAST, Cb2_ReturnToPSS);
 }
 
 static void Task_ItemContext_Sell(u8 taskId)

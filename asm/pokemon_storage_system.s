@@ -5,228 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808CD98
-sub_808CD98: @ 808CD98
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl sub_8096BF8
-	bl TransferPlttBuffer
-	ldr r0, _0808CDC0 @ =sPSSData
-	ldr r0, [r0]
-	movs r1, 0xB3
-	lsls r1, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0x18
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CDC0: .4byte sPSSData
-	thumb_func_end sub_808CD98
-
-	thumb_func_start c2_Box
-c2_Box: @ 808CDC4
-	push {lr}
-	bl RunTasks
-	bl DoScheduledBgTilemapCopiesToVram
-	bl sub_808EFC8
-	bl sub_808F99C
-	bl AnimateSprites
-	bl BuildOamBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end c2_Box
-
-	thumb_func_start Cb2_EnterPSS
-Cb2_EnterPSS: @ 808CDE4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl ResetTasks
-	ldr r0, _0808CE08 @ =sCurrentBoxOption
-	strb r5, [r0]
-	ldr r4, _0808CE0C @ =sPSSData
-	ldr r0, _0808CE10 @ =0x000062bc
-	bl Alloc
-	str r0, [r4]
-	cmp r0, 0
-	bne _0808CE18
-	ldr r0, _0808CE14 @ =Cb2_ExitPSS
-	bl SetMainCallback2
-	b _0808CE4A
-	.align 2, 0
-_0808CE08: .4byte sCurrentBoxOption
-_0808CE0C: .4byte sPSSData
-_0808CE10: .4byte 0x000062bc
-_0808CE14: .4byte Cb2_ExitPSS
-_0808CE18:
-	movs r2, 0
-	strb r5, [r0, 0x1]
-	ldr r0, [r4]
-	strb r2, [r0, 0x3]
-	ldr r0, _0808CE50 @ =gUnknown_20397BA
-	movs r1, 0
-	strh r2, [r0]
-	ldr r0, [r4]
-	strb r1, [r0]
-	ldr r0, _0808CE54 @ =task_box_related_3
-	movs r1, 0x3
-	bl CreateTask
-	ldr r1, [r4]
-	strb r0, [r1, 0x4]
-	movs r0, 0x1C @ HELPCONTEXT_BILLS_PC
-	bl SetHelpContext
-	bl StorageGetCurrentBox
-	ldr r1, _0808CE58 @ =sLastUsedBox
-	strb r0, [r1]
-	ldr r0, _0808CE5C @ =c2_Box
-	bl SetMainCallback2
-_0808CE4A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CE50: .4byte gUnknown_20397BA
-_0808CE54: .4byte task_box_related_3
-_0808CE58: .4byte sLastUsedBox
-_0808CE5C: .4byte c2_Box
-	thumb_func_end Cb2_EnterPSS
-
-	thumb_func_start sub_808CE60
-sub_808CE60: @ 808CE60
-	push {r4,lr}
-	bl ResetTasks
-	ldr r4, _0808CE80 @ =sPSSData
-	ldr r0, _0808CE84 @ =0x000062bc
-	bl Alloc
-	adds r1, r0, 0
-	str r1, [r4]
-	cmp r1, 0
-	bne _0808CE8C
-	ldr r0, _0808CE88 @ =Cb2_ExitPSS
-	bl SetMainCallback2
-	b _0808CEB6
-	.align 2, 0
-_0808CE80: .4byte sPSSData
-_0808CE84: .4byte 0x000062bc
-_0808CE88: .4byte Cb2_ExitPSS
-_0808CE8C:
-	ldr r0, _0808CEBC @ =sCurrentBoxOption
-	ldrb r0, [r0]
-	movs r2, 0
-	strb r0, [r1, 0x1]
-	ldr r1, [r4]
-	movs r0, 0x1
-	strb r0, [r1, 0x3]
-	ldr r0, [r4]
-	strb r2, [r0]
-	ldr r0, _0808CEC0 @ =task_box_related_3
-	movs r1, 0x3
-	bl CreateTask
-	ldr r1, [r4]
-	strb r0, [r1, 0x4]
-	movs r0, 0x1C @ HELPCONTEXT_BILLS_PC
-	bl SetHelpContext
-	ldr r0, _0808CEC4 @ =c2_Box
-	bl SetMainCallback2
-_0808CEB6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CEBC: .4byte sCurrentBoxOption
-_0808CEC0: .4byte task_box_related_3
-_0808CEC4: .4byte c2_Box
-	thumb_func_end sub_808CE60
-
-	thumb_func_start sub_808CEC8
-sub_808CEC8: @ 808CEC8
-	push {lr}
-	movs r0, 0x10
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x12
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x14
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x16
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x18
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1A
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1C
-	movs r1, 0
-	bl SetGpuReg
-	movs r0, 0x1E
-	movs r1, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808CEC8
-
-	thumb_func_start sub_808CF10
-sub_808CF10: @ 808CF10
-	push {r4,lr}
-	sub sp, 0x4
-	bl ResetPaletteFade
-	bl ResetSpriteData
-	bl FreeSpriteTileRanges
-	bl FreeAllSpritePalettes
-	bl ClearDma3Requests
-	ldr r1, _0808CF80 @ =gReservedSpriteTileCount
-	movs r2, 0xA0
-	lsls r2, 2
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r4, _0808CF84 @ =sPSSData
-	ldr r1, [r4]
-	adds r0, r1, 0
-	adds r0, 0x8
-	adds r1, 0x10
-	movs r2, 0x8
-	bl sub_8096BE4
-	ldr r1, _0808CF88 @ =gKeyRepeatStartDelay
-	movs r0, 0x14
-	strh r0, [r1]
-	bl ClearScheduledBgCopiesToVram
-	movs r0, 0x3
-	bl sub_80F7AD8
-	ldr r2, _0808CF8C @ =gUnknown_83CE6F8
-	movs r0, 0x4
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0x1
-	movs r3, 0x8
-	bl sub_80F7B80
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl sub_80F7CAC
-	ldr r0, [r4]
-	ldr r1, _0808CF90 @ =0x000002c7
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808CF80: .4byte gReservedSpriteTileCount
-_0808CF84: .4byte sPSSData
-_0808CF88: .4byte gKeyRepeatStartDelay
-_0808CF8C: .4byte gUnknown_83CE6F8
-_0808CF90: .4byte 0x000002c7
-	thumb_func_end sub_808CF10
-
 	thumb_func_start sub_808CF94
 sub_808CF94: @ 808CF94
 	push {lr}
@@ -401,7 +179,7 @@ _0808D0D6:
 	.align 2, 0
 _0808D100: .4byte 0x05000080
 _0808D104:
-	bl sub_808CEC8
+	bl ResetAllBgCoords
 	ldr r0, _0808D11C @ =sPSSData
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x3]
@@ -511,12 +289,12 @@ _0808D1E8:
 	ldr r0, _0808D204 @ =sub_808D26C
 	bl add_to_c3_somehow
 _0808D1FA:
-	ldr r0, _0808D208 @ =sub_808CD98
+	ldr r0, _0808D208 @ =VblankCb_PSS
 	bl SetVBlankCallback
 	b _0808D216
 	.align 2, 0
 _0808D204: .4byte sub_808D26C
-_0808D208: .4byte sub_808CD98
+_0808D208: .4byte VblankCb_PSS
 _0808D20C:
 	ldr r0, _0808D21C @ =sPSSData
 	ldr r1, [r0]
@@ -3917,7 +3695,7 @@ _0808EE78:
 	adds r1, r0
 	ldrb r4, [r1]
 	bl sub_808EF68
-	ldr r3, _0808EEB8 @ =sub_808CE60
+	ldr r3, _0808EEB8 @ =Cb2_ReturnToPSS
 	str r4, [sp]
 	mov r0, r8
 	adds r1, r6, 0
@@ -3928,7 +3706,7 @@ _0808EE78:
 _0808EEAC: .4byte sPSSData
 _0808EEB0: .4byte 0x0000217c
 _0808EEB4: .4byte 0x0000217a
-_0808EEB8: .4byte sub_808CE60
+_0808EEB8: .4byte Cb2_ReturnToPSS
 _0808EEBC:
 	bl sub_808EF68
 	bl StorageGetCurrentBox
@@ -3938,7 +3716,7 @@ _0808EEBC:
 	adds r1, r0, 0
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, _0808EEE4 @ =sub_808CE60
+	ldr r0, _0808EEE4 @ =Cb2_ReturnToPSS
 	str r0, [sp, 0x4]
 	movs r0, 0x1
 	movs r2, 0
@@ -3946,10 +3724,10 @@ _0808EEBC:
 	bl DoNamingScreen
 	b _0808EEF6
 	.align 2, 0
-_0808EEE4: .4byte sub_808CE60
+_0808EEE4: .4byte Cb2_ReturnToPSS
 _0808EEE8:
 	bl sub_808EF68
-	ldr r2, _0808EF08 @ =sub_808CE60
+	ldr r2, _0808EF08 @ =Cb2_ReturnToPSS
 	movs r0, 0x4
 	movs r1, 0
 	bl GoToBagMenu
@@ -3963,7 +3741,7 @@ _0808EEF6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808EF08: .4byte sub_808CE60
+_0808EF08: .4byte Cb2_ReturnToPSS
 	thumb_func_end sub_808EE18
 
 	thumb_func_start sub_808EF0C
@@ -4917,22 +4695,22 @@ sub_808F68C: @ 808F68C
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0xC
-	bl sub_80F7B80
+	bl SetBoxPartyPokemonDropdownMap2
 	ldr r2, _0808F710 @ =gUnknown_83CE778
 	movs r0, 0x4
 	str r0, [sp]
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0x9
-	bl sub_80F7B80
+	bl SetBoxPartyPokemonDropdownMap2
 	movs r0, 0x1
 	movs r1, 0xA
 	movs r2, 0
-	bl sub_80F7CAC
+	bl SetBoxPartyPokemonDropdownMap2Pos
 	movs r0, 0x2
 	movs r1, 0x15
 	movs r2, 0
-	bl sub_80F7CAC
+	bl SetBoxPartyPokemonDropdownMap2Pos
 	bl sub_808F9FC
 	ldr r0, _0808F714 @ =sInPartyMenu
 	ldrb r0, [r0]

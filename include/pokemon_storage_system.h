@@ -33,7 +33,7 @@ void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);
 void CompactPartySlots(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, s32 request);
 void ZeroBoxMonAt(u8 boxId, u8 monPosition);
-void sub_808CE60(void);
+void Cb2_ReturnToPSS(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
 void DrawTextWindowAndBufferTiles(const u8 *name, void *a1, u8 a2, u8 a3, u8 *buffer, s32 a5);

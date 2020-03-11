@@ -7,7 +7,7 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
-#include "pokemon_storage_system.h"
+#include "pokemon_storage_system_internal.h"
 #include "script.h"
 #include "strings.h"
 #include "task.h"
@@ -20,22 +20,6 @@ struct PSS_MenuStringPtrs
 {
     const u8 *text;
     const u8 *desc;
-};
-
-struct UnkPSSStruct_2002370
-{
-    struct Sprite *unk_0000;
-    struct Sprite *unk_0004[4];
-    u32 unk_0014[3];
-    struct Sprite *unk_0020[2];
-    u8 filler_0028[0x200];
-    u8 unk_0228[0x14];
-    u32 unk_023c;
-    u16 unk_0240;
-    u16 unk_0242;
-    u8 curBox;
-    u8 unk_0245;
-    u8 unk_0246;
 };
 
 EWRAM_DATA u8 sPreviousBoxOption = 0;

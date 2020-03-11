@@ -21,9 +21,9 @@ struct UnkStruct_203ABE4
     const void * src2;
     u16 src1Height;
     u16 src1Width;
+    u16 src2Width;
     u16 src2Height;
-    u16 unk_26;
-    u16 unk_28;
+    u16 bytesPerRow;
     u8 mapSize;
     u8 bgId;
     bool8 bgUpdateScheduled;
@@ -52,7 +52,7 @@ static const struct {
     }
 };
 
-void sub_80F7AD8(u8 num)
+void AllocBoxPartyPokemonDropdowns(u8 num)
 {
     u16 i;
     sBoxPartyPokemonDropdownPtr = Alloc(num * sizeof(struct UnkStruct_203ABE4));
@@ -80,35 +80,35 @@ void sub_80F7B40(void)
     }
 }
 
-void sub_80F7B80(u8 a0, u8 a1, const void * a2, u16 a3, u16 a4)
+void SetBoxPartyPokemonDropdownMap2(u8 idx, u8 bgId, const void * src, u16 width, u16 height)
 {
     u16 screenSize;
     u16 bgType;
 
-    if (a0 < sBoxPartyPokemonDropdownCount)
+    if (idx < sBoxPartyPokemonDropdownCount)
     {
-        sBoxPartyPokemonDropdownPtr[a0].src1 = NULL;
-        sBoxPartyPokemonDropdownPtr[a0].src2 = a2;
-        sBoxPartyPokemonDropdownPtr[a0].bgId = a1;
-        sBoxPartyPokemonDropdownPtr[a0].src2Height = a3;
-        sBoxPartyPokemonDropdownPtr[a0].unk_26 = a4;
-        screenSize = GetBgAttribute(a1, BG_ATTR_SCREENSIZE);
-        bgType = GetBgAttribute(a1, BG_ATTR_BGTYPE);
-        sBoxPartyPokemonDropdownPtr[a0].src1Height = sBGdims[bgType][screenSize].height;
-        sBoxPartyPokemonDropdownPtr[a0].src1Width = sBGdims[bgType][screenSize].width;
+        sBoxPartyPokemonDropdownPtr[idx].src1 = NULL;
+        sBoxPartyPokemonDropdownPtr[idx].src2 = src;
+        sBoxPartyPokemonDropdownPtr[idx].bgId = bgId;
+        sBoxPartyPokemonDropdownPtr[idx].src2Width = width;
+        sBoxPartyPokemonDropdownPtr[idx].src2Height = height;
+        screenSize = GetBgAttribute(bgId, BG_ATTR_SCREENSIZE);
+        bgType = GetBgAttribute(bgId, BG_ATTR_BGTYPE);
+        sBoxPartyPokemonDropdownPtr[idx].src1Height = sBGdims[bgType][screenSize].height;
+        sBoxPartyPokemonDropdownPtr[idx].src1Width = sBGdims[bgType][screenSize].width;
         if (bgType != 0)
-            sBoxPartyPokemonDropdownPtr[a0].mapSize = 1;
+            sBoxPartyPokemonDropdownPtr[idx].mapSize = 1;
         else
-            sBoxPartyPokemonDropdownPtr[a0].mapSize = 2;
-        sBoxPartyPokemonDropdownPtr[a0].unk_28 = a3 * sBoxPartyPokemonDropdownPtr[a0].mapSize;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.width = a3;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.height = a4;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destX = 0;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destY = 0;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destX2 = 0;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destY2 = 0;
-        sBoxPartyPokemonDropdownPtr[a0].map1Rect = sBoxPartyPokemonDropdownPtr[a0].map2Rect;
-        sBoxPartyPokemonDropdownPtr[a0].bgUpdateScheduled = TRUE;
+            sBoxPartyPokemonDropdownPtr[idx].mapSize = 2;
+        sBoxPartyPokemonDropdownPtr[idx].bytesPerRow = width * sBoxPartyPokemonDropdownPtr[idx].mapSize;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.width = width;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.height = height;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX = 0;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY = 0;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 = 0;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 = 0;
+        sBoxPartyPokemonDropdownPtr[idx].map1Rect = sBoxPartyPokemonDropdownPtr[idx].map2Rect;
+        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
     }
 }
 
@@ -121,13 +121,13 @@ void sub_80F7C7C(u8 a0, const void * a1)
     }
 }
 
-void sub_80F7CAC(u8 a0, u16 a1, u16 a2)
+void SetBoxPartyPokemonDropdownMap2Pos(u8 idx, u16 x, u16 y)
 {
-    if (a0 < sBoxPartyPokemonDropdownCount)
+    if (idx < sBoxPartyPokemonDropdownCount)
     {
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destX2 = a1;
-        sBoxPartyPokemonDropdownPtr[a0].map2Rect.destY2 = a2;
-        sBoxPartyPokemonDropdownPtr[a0].bgUpdateScheduled = TRUE;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destX2 = x;
+        sBoxPartyPokemonDropdownPtr[idx].map2Rect.destY2 = y;
+        sBoxPartyPokemonDropdownPtr[idx].bgUpdateScheduled = TRUE;
     }
 }
 
@@ -202,7 +202,7 @@ static void PushMap1(u8 a0)
 static void PushMap2(u8 a0)
 {
     int i;
-    int r9 = sBoxPartyPokemonDropdownPtr[a0].mapSize * sBoxPartyPokemonDropdownPtr[a0].src2Height;
+    int r9 = sBoxPartyPokemonDropdownPtr[a0].mapSize * sBoxPartyPokemonDropdownPtr[a0].src2Width;
     const void * addr = sBoxPartyPokemonDropdownPtr[a0].src2 + r9 * sBoxPartyPokemonDropdownPtr[a0].map2Rect.destY + sBoxPartyPokemonDropdownPtr[a0].map2Rect.destX * sBoxPartyPokemonDropdownPtr[a0].mapSize;
     for (i = 0; i < sBoxPartyPokemonDropdownPtr[a0].map2Rect.height; i++)
     {

@@ -6,58 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83CDA20:: @ 83CDA20
-	.4byte gUnknown_841856C, gUnknown_84185AD
-	.4byte gUnknown_841857D, gUnknown_84185E2
-	.4byte gUnknown_841858D, gUnknown_8418611
-	.4byte gUnknown_841859A, gUnknown_8418642
-	.4byte gUnknown_84185A5, gUnknown_8418681
-
-gUnknown_83CDA48:: @ 83CDA48
-	.byte 0, 1, 1, 17, 10, 15
-	.2byte 0x0001
-
-gUnknown_83CDA50::
-	obj_image_anim_frame 0x0000, 5
-	obj_image_anim_end
-
-gUnknown_83CDA58::
-	obj_image_anim_frame 0x0004, 5
-	obj_image_anim_end
-
-gUnknown_83CDA60::
-	obj_image_anim_frame 0x0006, 5
-	obj_image_anim_end
-
-gUnknown_83CDA68::
-	obj_image_anim_frame 0x000a, 5
-	obj_image_anim_end
-
-gUnknown_83CDA70:: @ 83CDA70
-	.4byte gUnknown_83CDA50
-	.4byte gUnknown_83CDA58
-	.4byte gUnknown_83CDA60
-	.4byte gUnknown_83CDA68
-
-gUnknown_83CDA80::
-	obj_rot_scal_anim_frame 224, 224, 0, 0
-	obj_rot_scal_anim_end
-
-gUnknown_83CDA90::
-	.4byte gUnknown_83CDA80
-
-gUnknown_83CDA94:: @ 83CDA94
-	.string "/30$"
-
-gUnknown_83CDA98:: @ 83CDA98 gbapal
-	.incbin "graphics/interface/pss_unk_83CDA98.gbapal"
-
-gUnknown_83CDAB8:: @ 83CDAB8 4bpp
-	.incbin "graphics/interface/pss_unk_83CDAB8.4bpp"
-
-gUnknown_83CE2B8:: @ 83CE2B8 4bpp
-	.incbin "graphics/interface/pss_unk_83CE2B8.4bpp"
-
 gUnknown_83CE438:: @ 83CE438 4bpp.lz
 	.incbin "graphics/interface/pss_unk_83CE438.4bpp.lz"
 

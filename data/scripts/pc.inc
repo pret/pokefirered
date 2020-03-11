@@ -48,7 +48,7 @@ EventScript_AccessPokemonStorage:: @ 81A6A05
 	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_AccessSomeonesPC
 	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_AccessBillsPC
 	msgbox Text_OpenedPkmnStorage
-	special ShowPokemonStorageSystem
+	special ShowPokemonStorageSystemPC
 	waitstate
 	setvar VAR_0x8004, HELPCONTEXT_PC
 	special Script_SetHelpContext

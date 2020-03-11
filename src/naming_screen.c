@@ -1986,7 +1986,7 @@ static const struct NamingScreenTemplate sPlayerNamingScreenTemplate = {
 
 static const struct NamingScreenTemplate sPcBoxNamingScreenTemplate = {
     .copyExistingString = FALSE,
-    .maxChars = 8/*BOX_NAME_LENGTH*/,
+    .maxChars = BOX_NAME_LENGTH,
     .iconFunction = 2,
     .addGenderIcon = 0,
     .initialPage = KBPAGE_LETTERS_UPPER,

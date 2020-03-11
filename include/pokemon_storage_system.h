@@ -15,6 +15,12 @@ void ZeroBoxMonAt(u8 boxId, u8 monPosition);
 void sub_808CE60(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
-void PSS_RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 a2, u8 a3, u8 *buffer, u8 a5);
+void DrawTextWindowAndBufferTiles(const u8 *name, void *a1, u8 a2, u8 a3, u8 *buffer, s32 a5);
+void SetCurrentBox(u8 boxId);
+void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
+struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
+
+void Cb2_EnterPSS(u8 a0);
+u8 GetCurrentBoxOption(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

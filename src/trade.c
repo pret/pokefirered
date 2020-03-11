@@ -882,10 +882,10 @@ static void sub_804C728(void)
         gMain.state++;
         break;
     case 10:
-        PSS_RenderTextToVramViaBuffer(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
+        DrawTextWindowAndBufferTiles(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
         id = GetMultiplayerId();
-        PSS_RenderTextToVramViaBuffer(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
-        PSS_RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
+        DrawTextWindowAndBufferTiles(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
+        DrawTextWindowAndBufferTiles(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
         RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
         sTradeMenuResourcesPtr->unk_A8 = 0;
@@ -1080,10 +1080,10 @@ void sub_804CF14(void)
         gMain.state++;
         break;
     case 10:
-        PSS_RenderTextToVramViaBuffer(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
+        DrawTextWindowAndBufferTiles(gSaveBlock2Ptr->playerName, sSpriteTextTilePtrs[0], 0, 0, gDecompressionBuffer, 3);
         id = GetMultiplayerId();
-        PSS_RenderTextToVramViaBuffer(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
-        PSS_RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
+        DrawTextWindowAndBufferTiles(gLinkPlayers[id ^ 1].name, sSpriteTextTilePtrs[3], 0, 0, gDecompressionBuffer, 3);
+        DrawTextWindowAndBufferTiles(sTradeUITextPtrs[TRADEUITEXT_CANCEL], sSpriteTextTilePtrs[6], 0, 0, gDecompressionBuffer, 2);
         RenderTextToVramViaBuffer(sTradeUITextPtrs[TRADEUITEXT_CHOOSE], sSpriteTextTilePtrs[8], 24);
         gMain.state++;
         sTradeMenuResourcesPtr->unk_A8 = 0;
@@ -2502,7 +2502,7 @@ static bool8 sub_804F610(void)
 
 static void RenderTextToVramViaBuffer(const u8 *name, u8 *dest, u8 unused)
 {
-    PSS_RenderTextToVramViaBuffer(name, dest, 0, 0, gDecompressionBuffer, 6);
+    DrawTextWindowAndBufferTiles(name, dest, 0, 0, gDecompressionBuffer, 6);
 }
 
 static void sub_804F748(u8 who)

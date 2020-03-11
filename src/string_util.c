@@ -532,11 +532,11 @@ u8 *StringFillWithTerminator(u8 *dest, u16 n)
     return StringFill(dest, EOS, n);
 }
 
-u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
+u8 *StringCopyN_Multibyte(u8 *dest, const u8 *src, u32 n)
 {
     u32 i;
 
-    for (i = n - 1; i != (u32)-1; i--)
+    for (i = n - 1; i != -1u; i--)
     {
         if (*src == EOS)
         {
@@ -554,7 +554,7 @@ u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
     return dest;
 }
 
-u32 StringLength_Multibyte(u8 *str)
+u32 StringLength_Multibyte(const u8 *str)
 {
     u32 length = 0;
 

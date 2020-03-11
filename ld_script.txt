@@ -129,7 +129,8 @@ SECTIONS {
         src/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/pokemon_storage_system.o(.text);
-        asm/pokemon_storage_system_2.o(.text);
+        src/pokemon_storage_system_2.o(.text);
+        asm/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
         src/fldeff_cut.o(.text);
@@ -449,6 +450,7 @@ SECTIONS {
         src/field_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/trainer_card.o(.rodata);
+        src/pokemon_storage_system_2.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
         src/fldeff_cut.o(.rodata);

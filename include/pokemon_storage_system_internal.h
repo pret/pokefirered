@@ -4,6 +4,71 @@
 #include "pokemon_storage_system.h"
 #include "mon_markings.h"
 
+enum
+{
+    BOX_OPTION_WITHDRAW,
+    BOX_OPTION_DEPOSIT,
+    BOX_OPTION_MOVE_MONS,
+    BOX_OPTION_MOVE_ITEMS,
+    BOX_OPTION_EXIT,
+};
+
+enum
+{
+    PC_TEXT_EXIT_BOX,
+    PC_TEXT_WHAT_YOU_DO,
+    PC_TEXT_PICK_A_THEME,
+    PC_TEXT_PICK_A_WALLPAPER,
+    PC_TEXT_IS_SELECTED,
+    PC_TEXT_JUMP_TO_WHICH_BOX,
+    PC_TEXT_DEPOSIT_IN_WHICH_BOX,
+    PC_TEXT_WAS_DEPOSITED,
+    PC_TEXT_BOX_IS_FULL,
+    PC_TEXT_RELEASE_POKE,
+    PC_TEXT_WAS_RELEASED,
+    PC_TEXT_BYE_BYE,
+    PC_TEXT_MARK_POKE,
+    PC_TEXT_LAST_POKE,
+    PC_TEXT_PARTY_FULL,
+    PC_TEXT_HOLDING_POKE,
+    PC_TEXT_WHICH_ONE_WILL_TAKE,
+    PC_TEXT_CANT_RELEASE_EGG,
+    PC_TEXT_CONTINUE_BOX,
+    PC_TEXT_CAME_BACK,
+    PC_TEXT_WORRIED,
+    PC_TEXT_SURPRISE,
+    PC_TEXT_PLEASE_REMOVE_MAIL,
+    PC_TEXT_IS_SELECTED2,
+    PC_TEXT_GIVE_TO_MON,
+    PC_TEXT_PLACED_IN_BAG,
+    PC_TEXT_BAG_FULL,
+    PC_TEXT_PUT_IN_BAG,
+    PC_TEXT_ITEM_IS_HELD,
+    PC_TEXT_CHANGED_TO_ITEM,
+    PC_TEXT_CANT_STORE_MAIL,
+};
+
+#define TAG_PAL_WAVEFORM    0xDACA
+#define TAG_PAL_DAC8        0xDAC8
+#define TAG_PAL_DAC6        0xDAC6
+#define TAG_PAL_DACE        0xDACE
+#define TAG_PAL_DAC7        0xDAC7
+#define TAG_PAL_DAC9        0xDAC9
+#define TAG_PAL_DAC0        0xDAC0
+#define TAG_PAL_DACB        0xDACB
+
+#define TAG_TILE_WAVEFORM   0x5
+#define TAG_TILE_10         0x10
+#define TAG_TILE_2          0x2
+#define TAG_TILE_D          0xD
+#define TAG_TILE_A          0xA
+#define TAG_TILE_3          0x3
+#define TAG_TILE_4          0x4
+#define TAG_TILE_12         0x12
+#define TAG_TILE_7          0x7
+#define TAG_TILE_0          0x0
+#define TAG_TILE_1          0x1
+
 struct UnkPSSStruct_2002370
 {
     struct Sprite *unk_0000;
@@ -114,69 +179,70 @@ struct PokemonStorageSystemData
     u8 field_A63;
     u8 field_A64;
     s8 field_A65;
-    u8 *wallpaperTiles;
-    struct Sprite *movingMonSprite;
-    struct Sprite *partySprites[PARTY_SIZE];
-    struct Sprite *boxMonsSprites[IN_BOX_COUNT];
-    struct Sprite **field_B00;
-    struct Sprite **field_B04;
-    u16 field_B08[40];
-    u16 field_B58[40];
-    u16 boxSpecies[IN_BOX_COUNT];
-    u32 boxPersonalities[IN_BOX_COUNT];
-    u8 field_C5C;
-    u8 field_C5D;
-    u8 field_C5E;
-    u16 field_C60;
-    s16 field_C62;
-    s16 field_C64;
-    u16 field_C66;
-    u8 field_C68;
-    s8 field_C69;
-    u8 field_C6A;
-    u8 field_C6B;
-    struct WindowTemplate menuWindow;
-    struct StorageMenu menuItems[7];
-    u8 menuItemsCount;
-    u8 menuWidth;
-    u8 field_CAE;
-    u16 field_CB0;
-    struct Sprite *field_CB4;
-    struct Sprite *field_CB8;
-    s32 field_CBC;
-    s32 field_CC0;
-    u32 field_CC4;
-    u32 field_CC8;
-    s16 field_CCC;
-    s16 field_CCE;
-    u16 field_CD0;
-    s8 field_CD2;
-    s8 field_CD3;
-    u8 field_CD4;
-    u8 field_CD5;
-    u8 field_CD6;
-    u8 field_CD7;
-    u8 field_CD8[2];
-    const u32 *cursorMonPalette;
-    u32 cursorMonPersonality;
-    u16 cursorMonSpecies;
-    u16 cursorMonItem;
-    u16 field_CE8;
-    bool8 setMosaic;
-    u8 cursorMonMarkings;
-    u8 cursorMonLevel;
-    bool8 cursorMonIsEgg;
-    u8 cursorMonNick[POKEMON_NAME_LENGTH + 1];
-    u8 cursorMonNickText[36];
-    u8 cursorMonSpeciesName[36];
-    u8 cursorMonGenderLvlText[36];
-    u8 cursorMonItemName[36];
-    bool8 (*monPlaceChangeFunc)(void);
-    u8 monPlaceChangeState;
-    u8 field_D91;
-    struct Sprite *field_D94;
-    struct Sprite *field_D98[2];
-    struct PokemonMarkMenu field_DA4;
+    // u8 *wallpaperTiles; // used only in Emerald for Walda
+    /* 0a68 */ struct Sprite *movingMonSprite;
+    /* 0a6c */ struct Sprite *partySprites[PARTY_SIZE];
+    /* 0a84 */ struct Sprite *boxMonsSprites[IN_BOX_COUNT];
+    /* 0afc */ struct Sprite **field_B00;
+    /* 0b00 */ struct Sprite **field_B04;
+    /* 0b04 */ u16 field_B08[40];
+    /* 0b54 */ u16 field_B58[40];
+    /* 0ba4 */ u16 boxSpecies[IN_BOX_COUNT];
+    /* 0be0 */ u32 boxPersonalities[IN_BOX_COUNT];
+    /* 0c58 */ u8 field_C5C;
+    /* 0c59 */ u8 field_C5D;
+    /* 0c5a */ u8 field_C5E;
+    /* 0c5c */ u16 field_C60;
+    /* 0c5e */ s16 field_C62;
+    /* 0c60 */ s16 field_C64;
+    /* 0c62 */ u16 field_C66;
+    /* 0c64 */ u8 field_C68;
+    /* 0c65 */ s8 field_C69;
+    /* 0c66 */ u8 field_C6A;
+    /* 0c67 */ u8 field_C6B;
+    /* 0c68 */ struct WindowTemplate menuWindow;
+    /* 0c70 */ struct StorageMenu menuItems[7];
+    /* 0ca8 */ u8 menuItemsCount;
+    /* 0ca9 */ u8 menuWidth;
+    /* 0caa */ u8 field_CAE;
+    /* 0cac */ u16 field_CB0;
+    /* 0cb0 */ struct Sprite *field_CB4;
+    /* 0cb4 */ struct Sprite *field_CB8;
+    /* 0cb8 */ s32 field_CBC;
+    /* 0cbc */ s32 field_CC0;
+    /* 0cc0 */ u32 field_CC4;
+    /* 0cc4 */ u32 field_CC8;
+    /* 0cc8 */ s16 field_CCC;
+    /* 0cca */ s16 field_CCE;
+    /* 0ccc */ u16 field_CD0;
+    /* 0cce */ s8 field_CD2;
+    /* 0ccf */ s8 field_CD3;
+    /* 0cd0 */ u8 field_CD4;
+    /* 0cd1 */ u8 field_CD5;
+    /* 0cd2 */ u8 field_CD6;
+    /* 0cd3 */ u8 field_CD7;
+    /* 0cd4 */ u8 field_CD8[2];
+    /* 0cd8 */ const u32 *cursorMonPalette;
+    /* 0cdc */ u32 cursorMonPersonality;
+    /* 0ce0 */ u16 cursorMonSpecies;
+    /* 0ce2 */ u16 cursorMonItem;
+    /* 0ce4 */ u16 field_CE8;
+    /* 0ce6 */ bool8 setMosaic;
+    /* 0ce7 */ u8 cursorMonMarkings;
+    /* 0ce8 */ u8 cursorMonLevel;
+    /* 0ce9 */ bool8 cursorMonIsEgg;
+    /* 0cea */ u8 cursorMonNick[POKEMON_NAME_LENGTH + 1];
+    /* 0cf5 */ u8 cursorMonNickText[36];
+    /* 0d19 */ u8 cursorMonSpeciesName[36];
+    /* 0d3d */ u8 cursorMonGenderLvlText[36];
+    /* 0d61 */ u8 cursorMonItemName[36];
+    /* 0d88 */ bool8 (*monPlaceChangeFunc)(void);
+    /* 0d8c */ u8 monPlaceChangeState;
+    /* 0d8d */ u8 field_D91;
+    /* 0d90 */ struct Sprite *field_D94;
+    /* 0d94 */ struct Sprite *field_D98[2];
+    /* 0d9c */ u16 *field_DA0;
+    /* 0da0 */ struct PokemonMarkMenu field_DA4;
     /* 1e58 */ struct UnkPSSStruct_2002370 field_1E5C;
     /* 20a0 */ struct Pokemon movingMon;
     /* 2104 */ struct Pokemon field_2108;
@@ -217,7 +283,7 @@ struct PokemonStorageSystemData
     /* 42bc */ u8 field_42C4[0x800];
     /* 4abc */ u8 field_4AC4[0x1000];
     /* 5abc */ u8 field_5AC4[0x800];
-};
+}; // size=62bc
 
 extern struct PokemonStorageSystemData *sPSSData;
 

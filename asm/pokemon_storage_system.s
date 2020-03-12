@@ -5,1773 +5,8 @@
 
 	.text
 
-	thumb_func_start Cb_ShowMarkMenu
-Cb_ShowMarkMenu: @ 808E0BC
-	push {r4,lr}
-	ldr r4, _0808E0D0 @ =sPSSData
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0808E0D4
-	cmp r0, 0x1
-	beq _0808E108
-	b _0808E130
-	.align 2, 0
-_0808E0D0: .4byte sPSSData
-_0808E0D4:
-	movs r0, 0xC
-	bl PrintStorageActionText
-	ldr r0, [r4]
-	ldr r2, _0808E100 @ =0x00000ce7
-	adds r1, r0, r2
-	ldrb r1, [r1]
-	ldr r3, _0808E104 @ =0x00000da4
-	adds r0, r3
-	strb r1, [r0]
-	ldr r0, [r4]
-	adds r0, r2
-	ldrb r0, [r0]
-	movs r1, 0xB0
-	movs r2, 0x10
-	bl DrawMonMarkingsMenu
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E130
-	.align 2, 0
-_0808E100: .4byte 0x00000ce7
-_0808E104: .4byte 0x00000da4
-_0808E108:
-	bl MonMarkingsHandleInput
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E130
-	bl TeardownMonMarkingsMenu
-	bl ClearBottomWindow
-	ldr r0, [r4]
-	ldr r1, _0808E138 @ =0x00000da4
-	adds r0, r1
-	ldrb r0, [r0]
-	bl sub_8093878
-	bl RefreshCursorMonData
-	ldr r0, _0808E13C @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E130:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E138: .4byte 0x00000da4
-_0808E13C: .4byte Cb_MainPSS
-	thumb_func_end Cb_ShowMarkMenu
-
-	thumb_func_start Cb_TakeItemForMoving
-Cb_TakeItemForMoving: @ 808E140
-	push {r4,r5,lr}
-	ldr r5, _0808E158 @ =sPSSData
-	ldr r0, [r5]
-	ldrb r1, [r0]
-	cmp r1, 0x1
-	beq _0808E18C
-	cmp r1, 0x1
-	bgt _0808E15C
-	cmp r1, 0
-	beq _0808E166
-	b _0808E1EA
-	.align 2, 0
-_0808E158: .4byte sPSSData
-_0808E15C:
-	cmp r1, 0x2
-	beq _0808E1B4
-	cmp r1, 0x3
-	beq _0808E1DA
-	b _0808E1EA
-_0808E166:
-	ldr r1, _0808E17C @ =0x00000ce2
-	adds r0, r1
-	ldrh r0, [r0]
-	bl ItemIsMail
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E180
-	bl ClearBottomWindow
-	b _0808E1D0
-	.align 2, 0
-_0808E17C: .4byte 0x00000ce2
-_0808E180:
-	ldr r0, _0808E188 @ =sub_808E6D0
-	bl SetPSSCallback
-	b _0808E1EA
-	.align 2, 0
-_0808E188: .4byte sub_808E6D0
-_0808E18C:
-	movs r0, 0x2
-	bl sub_8094D14
-	ldr r0, _0808E1B0 @ =sInPartyMenu
-	ldrb r0, [r0]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_8094CC8
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_8095D84
-	b _0808E1D0
-	.align 2, 0
-_0808E1B0: .4byte sInPartyMenu
-_0808E1B4:
-	bl sub_809610C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E1EA
-	movs r0, 0x3
-	bl sub_8094D14
-	bl ClearBottomWindow
-	bl sub_8092F54
-	bl sub_808F49C
-_0808E1D0:
-	ldr r1, [r5]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E1EA
-_0808E1DA:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E1EA
-	ldr r0, _0808E1F0 @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E1EA:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E1F0: .4byte Cb_MainPSS
-	thumb_func_end Cb_TakeItemForMoving
-
-	thumb_func_start Cb_GiveMovingItemToMon
-Cb_GiveMovingItemToMon: @ 808E1F4
-	push {r4,lr}
-	ldr r0, _0808E20C @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bhi _0808E2A4
-	lsls r0, 2
-	ldr r1, _0808E210 @ =_0808E214
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E20C: .4byte sPSSData
-_0808E210: .4byte _0808E214
-	.align 2, 0
-_0808E214:
-	.4byte _0808E27C
-	.4byte _0808E228
-	.4byte _0808E250
-	.4byte _0808E270
-	.4byte _0808E294
-_0808E228:
-	movs r0, 0x2
-	bl sub_8094D14
-	ldr r0, _0808E24C @ =sInPartyMenu
-	ldrb r0, [r0]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_8094CC8
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_8095F74
-	b _0808E280
-	.align 2, 0
-_0808E24C: .4byte sInPartyMenu
-_0808E250:
-	bl sub_809610C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E2A4
-	movs r0, 0
-	bl sub_8094D14
-	bl sub_8092F54
-	bl sub_808F49C
-	movs r0, 0x1C
-	bl PrintStorageActionText
-	b _0808E280
-_0808E270:
-	ldr r0, _0808E28C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E2A4
-_0808E27C:
-	bl ClearBottomWindow
-_0808E280:
-	ldr r0, _0808E290 @ =sPSSData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E2A4
-	.align 2, 0
-_0808E28C: .4byte gMain
-_0808E290: .4byte sPSSData
-_0808E294:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E2A4
-	ldr r0, _0808E2AC @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E2A4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E2AC: .4byte Cb_MainPSS
-	thumb_func_end Cb_GiveMovingItemToMon
-
-	thumb_func_start Cb_ItemToBag
-Cb_ItemToBag: @ 808E2B0
-	push {r4,r5,lr}
-	ldr r1, _0808E2CC @ =sPSSData
-	ldr r0, [r1]
-	ldrb r0, [r0]
-	adds r5, r1, 0
-	cmp r0, 0x4
-	bls _0808E2C0
-	b _0808E3BA
-_0808E2C0:
-	lsls r0, 2
-	ldr r1, _0808E2D0 @ =_0808E2D4
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E2CC: .4byte sPSSData
-_0808E2D0: .4byte _0808E2D4
-	.align 2, 0
-_0808E2D4:
-	.4byte _0808E2E8
-	.4byte _0808E340
-	.4byte _0808E360
-	.4byte _0808E3A4
-	.4byte _0808E38C
-_0808E2E8:
-	ldr r0, [r5]
-	ldr r1, _0808E310 @ =0x00000ce2
-	adds r0, r1
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E314
-	movs r0, 0x1A
-	bl PlaySE
-	movs r0, 0x1A
-	bl PrintStorageActionText
-	ldr r1, [r5]
-	movs r0, 0x3
-	strb r0, [r1]
-	b _0808E3BA
-	.align 2, 0
-_0808E310: .4byte 0x00000ce2
-_0808E314:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _0808E33C @ =sInPartyMenu
-	ldrb r0, [r0]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_8094CC8
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_8096008
-	ldr r1, [r5]
-	movs r0, 0x1
-	strb r0, [r1]
-	b _0808E3BA
-	.align 2, 0
-_0808E33C: .4byte sInPartyMenu
-_0808E340:
-	bl sub_809610C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E3BA
-	movs r0, 0x19
-	bl PrintStorageActionText
-	ldr r0, _0808E35C @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x2
-	strb r0, [r1]
-	b _0808E3BA
-	.align 2, 0
-_0808E35C: .4byte sPSSData
-_0808E360:
-	ldr r0, _0808E384 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E3BA
-	bl ClearBottomWindow
-	bl sub_8092F54
-	bl sub_808F49C
-	ldr r0, _0808E388 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x4
-	strb r0, [r1]
-	b _0808E3BA
-	.align 2, 0
-_0808E384: .4byte gMain
-_0808E388: .4byte sPSSData
-_0808E38C:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E3BA
-	ldr r0, _0808E3A0 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808E3BA
-	.align 2, 0
-_0808E3A0: .4byte Cb_MainPSS
-_0808E3A4:
-	ldr r0, _0808E3C0 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E3BA
-	bl ClearBottomWindow
-	ldr r0, _0808E3C4 @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E3BA:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E3C0: .4byte gMain
-_0808E3C4: .4byte Cb_MainPSS
-	thumb_func_end Cb_ItemToBag
-
-	thumb_func_start Cb_SwitchSelectedItem
-Cb_SwitchSelectedItem: @ 808E3C8
-	push {r4,lr}
-	ldr r1, _0808E3E0 @ =sPSSData
-	ldr r0, [r1]
-	ldrb r0, [r0]
-	adds r4, r1, 0
-	cmp r0, 0x4
-	bhi _0808E4A4
-	lsls r0, 2
-	ldr r1, _0808E3E4 @ =_0808E3E8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E3E0: .4byte sPSSData
-_0808E3E4: .4byte _0808E3E8
-	.align 2, 0
-_0808E3E8:
-	.4byte _0808E3FC
-	.4byte _0808E428
-	.4byte _0808E450
-	.4byte _0808E470
-	.4byte _0808E494
-_0808E3FC:
-	ldr r0, [r4]
-	ldr r1, _0808E418 @ =0x00000ce2
-	adds r0, r1
-	ldrh r0, [r0]
-	bl ItemIsMail
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E41C
-	bl ClearBottomWindow
-	ldr r1, [r4]
-	b _0808E484
-	.align 2, 0
-_0808E418: .4byte 0x00000ce2
-_0808E41C:
-	ldr r0, _0808E424 @ =sub_808E6D0
-	bl SetPSSCallback
-	b _0808E4A4
-	.align 2, 0
-_0808E424: .4byte sub_808E6D0
-_0808E428:
-	movs r0, 0x2
-	bl sub_8094D14
-	ldr r0, _0808E44C @ =sInPartyMenu
-	ldrb r0, [r0]
-	negs r4, r0
-	orrs r4, r0
-	lsrs r4, 31
-	bl sub_8094CC8
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_8095EA0
-	b _0808E480
-	.align 2, 0
-_0808E44C: .4byte sInPartyMenu
-_0808E450:
-	bl sub_809610C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E4A4
-	movs r0, 0x3
-	bl sub_8094D14
-	bl sub_8092F54
-	bl sub_808F49C
-	movs r0, 0x1D
-	bl PrintStorageActionText
-	b _0808E480
-_0808E470:
-	ldr r0, _0808E48C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E4A4
-	bl ClearBottomWindow
-_0808E480:
-	ldr r0, _0808E490 @ =sPSSData
-	ldr r1, [r0]
-_0808E484:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E4A4
-	.align 2, 0
-_0808E48C: .4byte gMain
-_0808E490: .4byte sPSSData
-_0808E494:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E4A4
-	ldr r0, _0808E4AC @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E4A4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E4AC: .4byte Cb_MainPSS
-	thumb_func_end Cb_SwitchSelectedItem
-
-	thumb_func_start Cb_ShowItemInfo
-Cb_ShowItemInfo: @ 808E4B0
-	push {lr}
-	ldr r0, _0808E4C8 @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x6
-	bhi _0808E55C
-	lsls r0, 2
-	ldr r1, _0808E4CC @ =_0808E4D0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E4C8: .4byte sPSSData
-_0808E4CC: .4byte _0808E4D0
-	.align 2, 0
-_0808E4D0:
-	.4byte _0808E4EC
-	.4byte _0808E4F2
-	.4byte _0808E50C
-	.4byte _0808E512
-	.4byte _0808E518
-	.4byte _0808E530
-	.4byte _0808E54C
-_0808E4EC:
-	bl ClearBottomWindow
-	b _0808E53A
-_0808E4F2:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E55C
-	movs r0, 0x6
-	bl PlaySE
-	bl sub_8096694
-	bl sub_80966F4
-	b _0808E53A
-_0808E50C:
-	bl sub_8096728
-	b _0808E534
-_0808E512:
-	bl IsDma3ManagerBusyWithBgCopy
-	b _0808E534
-_0808E518:
-	ldr r0, _0808E52C @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E55C
-	movs r0, 0x6
-	bl PlaySE
-	b _0808E53A
-	.align 2, 0
-_0808E52C: .4byte gMain
-_0808E530:
-	bl sub_80967C0
-_0808E534:
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E55C
-_0808E53A:
-	ldr r0, _0808E548 @ =sPSSData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E55C
-	.align 2, 0
-_0808E548: .4byte sPSSData
-_0808E54C:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E55C
-	ldr r0, _0808E560 @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E55C:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E560: .4byte Cb_MainPSS
-	thumb_func_end Cb_ShowItemInfo
-
-	thumb_func_start sub_808E564
-sub_808E564: @ 808E564
-	push {r4,lr}
-	ldr r0, _0808E57C @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bls _0808E572
-	b _0808E67C
-_0808E572:
-	lsls r0, 2
-	ldr r1, _0808E580 @ =_0808E584
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E57C: .4byte sPSSData
-_0808E580: .4byte _0808E584
-	.align 2, 0
-_0808E584:
-	.4byte _0808E59C
-	.4byte _0808E5BC
-	.4byte _0808E61A
-	.4byte _0808E63C
-	.4byte _0808E650
-	.4byte _0808E66C
-_0808E59C:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x1B
-	bl PrintStorageActionText
-	movs r0, 0
-	bl ShowYesNoWindow
-	ldr r0, _0808E5B8 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x1
-	strb r0, [r1]
-	b _0808E67C
-	.align 2, 0
-_0808E5B8: .4byte sPSSData
-_0808E5BC:
-	bl Menu_ProcessInputNoWrapClearOnChoose
-	lsls r0, 24
-	asrs r1, r0, 24
-	cmp r1, 0
-	beq _0808E5E0
-	cmp r1, 0
-	bgt _0808E5D6
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0808E5DA
-	b _0808E67C
-_0808E5D6:
-	cmp r1, 0x1
-	bne _0808E67C
-_0808E5DA:
-	bl ClearBottomWindow
-	b _0808E660
-_0808E5E0:
-	ldr r4, _0808E604 @ =sPSSData
-	ldr r0, [r4]
-	ldr r1, _0808E608 @ =0x00002224
-	adds r0, r1
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl AddBagItem
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0808E60C
-	bl ClearBottomWindow
-	ldr r1, [r4]
-	movs r0, 0x3
-	strb r0, [r1]
-	b _0808E67C
-	.align 2, 0
-_0808E604: .4byte sPSSData
-_0808E608: .4byte 0x00002224
-_0808E60C:
-	movs r0, 0x1A
-	bl PrintStorageActionText
-	ldr r1, [r4]
-	movs r0, 0x2
-	strb r0, [r1]
-	b _0808E67C
-_0808E61A:
-	ldr r0, _0808E634 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E67C
-	bl ClearBottomWindow
-	ldr r0, _0808E638 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x5
-	strb r0, [r1]
-	b _0808E67C
-	.align 2, 0
-_0808E634: .4byte gMain
-_0808E638: .4byte sPSSData
-_0808E63C:
-	bl sub_8096088
-	ldr r0, _0808E64C @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x4
-	strb r0, [r1]
-	b _0808E67C
-	.align 2, 0
-_0808E64C: .4byte sPSSData
-_0808E650:
-	bl sub_809610C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E67C
-	movs r0, 0
-	bl sub_8094D14
-_0808E660:
-	ldr r0, _0808E668 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808E67C
-	.align 2, 0
-_0808E668: .4byte Cb_MainPSS
-_0808E66C:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E67C
-	ldr r0, _0808E684 @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E67C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E684: .4byte Cb_MainPSS
-	thumb_func_end sub_808E564
-
-	thumb_func_start Cb_HandleMovingMonFromParty
-Cb_HandleMovingMonFromParty: @ 808E688
-	push {r4,lr}
-	ldr r4, _0808E69C @ =sPSSData
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0808E6A0
-	cmp r0, 0x1
-	beq _0808E6B2
-	b _0808E6C6
-	.align 2, 0
-_0808E69C: .4byte sPSSData
-_0808E6A0:
-	bl CompactPartySlots
-	bl sub_80909F4
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E6C6
-_0808E6B2:
-	bl sub_8090A60
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E6C6
-	bl sub_808FAA8
-	ldr r0, _0808E6CC @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E6C6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E6CC: .4byte Cb_MainPSS
-	thumb_func_end Cb_HandleMovingMonFromParty
-
-	thumb_func_start sub_808E6D0
-sub_808E6D0: @ 808E6D0
-	push {r4,lr}
-	ldr r4, _0808E6E8 @ =sPSSData
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0808E6FE
-	cmp r0, 0x1
-	bgt _0808E6EC
-	cmp r0, 0
-	beq _0808E6F6
-	b _0808E738
-	.align 2, 0
-_0808E6E8: .4byte sPSSData
-_0808E6EC:
-	cmp r0, 0x2
-	beq _0808E70A
-	cmp r0, 0x3
-	beq _0808E728
-	b _0808E738
-_0808E6F6:
-	movs r0, 0x1E
-	bl PrintStorageActionText
-	b _0808E71A
-_0808E6FE:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E738
-	b _0808E71A
-_0808E70A:
-	ldr r0, _0808E724 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808E738
-	bl ClearBottomWindow
-_0808E71A:
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E738
-	.align 2, 0
-_0808E724: .4byte gMain
-_0808E728:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E738
-	ldr r0, _0808E740 @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E738:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E740: .4byte Cb_MainPSS
-	thumb_func_end sub_808E6D0
-
-	thumb_func_start Cb_HandleBoxOptions
-Cb_HandleBoxOptions: @ 808E744
-	push {r4,lr}
-	ldr r4, _0808E75C @ =sPSSData
-	ldr r0, [r4]
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _0808E77A
-	cmp r0, 0x1
-	bgt _0808E760
-	cmp r0, 0
-	beq _0808E766
-	b _0808E830
-	.align 2, 0
-_0808E75C: .4byte sPSSData
-_0808E760:
-	cmp r0, 0x2
-	beq _0808E78C
-	b _0808E830
-_0808E766:
-	movs r0, 0x1
-	bl PrintStorageActionText
-	bl AddMenu
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E830
-_0808E77A:
-	bl sub_8094F90
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E830
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0808E78C:
-	bl sub_8094F94
-	adds r0, 0x1
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xC
-	bhi _0808E830
-	lsls r0, 2
-	ldr r1, _0808E7A4 @ =_0808E7A8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E7A4: .4byte _0808E7A8
-	.align 2, 0
-_0808E7A8:
-	.4byte _0808E7DC
-	.4byte _0808E7DC
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E830
-	.4byte _0808E820
-	.4byte _0808E808
-	.4byte _0808E7F4
-_0808E7DC:
-	movs r0, 0x1
-	bl sub_80920FC
-	bl ClearBottomWindow
-	ldr r0, _0808E7F0 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808E830
-	.align 2, 0
-_0808E7F0: .4byte Cb_MainPSS
-_0808E7F4:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _0808E804 @ =sub_808EA90
-	bl SetPSSCallback
-	b _0808E830
-	.align 2, 0
-_0808E804: .4byte sub_808EA90
-_0808E808:
-	movs r0, 0x5
-	bl PlaySE
-	bl ClearBottomWindow
-	ldr r0, _0808E81C @ =sub_808E83C
-	bl SetPSSCallback
-	b _0808E830
-	.align 2, 0
-_0808E81C: .4byte sub_808E83C
-_0808E820:
-	movs r0, 0x5
-	bl PlaySE
-	bl ClearBottomWindow
-	ldr r0, _0808E838 @ =sub_808E9A0
-	bl SetPSSCallback
-_0808E830:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E838: .4byte sub_808E9A0
-	thumb_func_end Cb_HandleBoxOptions
-
-	thumb_func_start sub_808E83C
-sub_808E83C: @ 808E83C
-	push {r4,r5,lr}
-	ldr r0, _0808E854 @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bls _0808E84A
-	b _0808E994
-_0808E84A:
-	lsls r0, 2
-	ldr r1, _0808E858 @ =_0808E85C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808E854: .4byte sPSSData
-_0808E858: .4byte _0808E85C
-	.align 2, 0
-_0808E85C:
-	.4byte _0808E874
-	.4byte _0808E888
-	.4byte _0808E8A0
-	.4byte _0808E8FA
-	.4byte _0808E924
-	.4byte _0808E97E
-_0808E874:
-	bl sub_808FD34
-	movs r0, 0x2
-	bl PrintStorageActionText
-	ldr r0, _0808E884 @ =sPSSData
-	ldr r1, [r0]
-	b _0808E976
-	.align 2, 0
-_0808E884: .4byte sPSSData
-_0808E888:
-	bl sub_8094F90
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808E894
-	b _0808E994
-_0808E894:
-	ldr r0, _0808E89C @ =sPSSData
-	ldr r1, [r0]
-	b _0808E976
-	.align 2, 0
-_0808E89C: .4byte sPSSData
-_0808E8A0:
-	bl sub_8094F94
-	ldr r5, _0808E8CC @ =sPSSData
-	ldr r1, [r5]
-	ldr r4, _0808E8D0 @ =0x0000078e
-	adds r1, r4
-	strh r0, [r1]
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	bne _0808E8D8
-	movs r0, 0x1
-	bl sub_80920FC
-	bl ClearBottomWindow
-	ldr r0, _0808E8D4 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808E994
-	.align 2, 0
-_0808E8CC: .4byte sPSSData
-_0808E8D0: .4byte 0x0000078e
-_0808E8D4: .4byte Cb_MainPSS
-_0808E8D8:
-	cmp r0, r1
-	blt _0808E994
-	cmp r0, 0x15
-	bgt _0808E994
-	cmp r0, 0x12
-	blt _0808E994
-	movs r0, 0x5
-	bl PlaySE
-	bl sub_8095024
-	ldr r1, [r5]
-	adds r2, r1, r4
-	ldrh r0, [r2]
-	subs r0, 0x12
-	strh r0, [r2]
-	b _0808E976
-_0808E8FA:
-	bl IsDma3ManagerBusyWithBgCopy
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E994
-	ldr r4, _0808E91C @ =sPSSData
-	ldr r0, [r4]
-	ldr r1, _0808E920 @ =0x0000078e
-	adds r0, r1
-	ldrb r0, [r0]
-	bl sub_808FD5C
-	movs r0, 0x3
-	bl PrintStorageActionText
-	b _0808E974
-	.align 2, 0
-_0808E91C: .4byte sPSSData
-_0808E920: .4byte 0x0000078e
-_0808E924:
-	bl sub_8094F94
-	ldr r4, _0808E954 @ =sPSSData
-	ldr r1, [r4]
-	movs r5, 0xF2
-	lsls r5, 3
-	adds r1, r5
-	strh r0, [r1]
-	movs r2, 0
-	ldrsh r1, [r1, r2]
-	movs r0, 0x2
-	negs r0, r0
-	cmp r1, r0
-	beq _0808E994
-	adds r0, 0x1
-	cmp r1, r0
-	bne _0808E958
-	bl ClearBottomWindow
-	ldr r1, [r4]
-	movs r0, 0
-	strb r0, [r1]
-	b _0808E994
-	.align 2, 0
-_0808E954: .4byte sPSSData
-_0808E958:
-	movs r0, 0x5
-	bl PlaySE
-	bl ClearBottomWindow
-	ldr r1, [r4]
-	adds r1, r5
-	ldrh r0, [r1]
-	subs r0, 0x16
-	strh r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_8091730
-_0808E974:
-	ldr r1, [r4]
-_0808E976:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808E994
-_0808E97E:
-	bl sub_8091760
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E994
-	movs r0, 0x1
-	bl sub_80920FC
-	ldr r0, _0808E99C @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808E994:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808E99C: .4byte Cb_MainPSS
-	thumb_func_end sub_808E83C
-
-	thumb_func_start sub_808E9A0
-sub_808E9A0: @ 808E9A0
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r5, _0808E9B8 @ =sPSSData
-	ldr r0, [r5]
-	ldrb r4, [r0]
-	cmp r4, 0x1
-	beq _0808E9F4
-	cmp r4, 0x1
-	bgt _0808E9BC
-	cmp r4, 0
-	beq _0808E9C6
-	b _0808EA80
-	.align 2, 0
-_0808E9B8: .4byte sPSSData
-_0808E9BC:
-	cmp r4, 0x2
-	beq _0808EA4C
-	cmp r4, 0x3
-	beq _0808EA64
-	b _0808EA80
-_0808E9C6:
-	movs r0, 0x5
-	bl PrintStorageActionText
-	ldr r0, [r5]
-	ldr r1, _0808E9EC @ =0x00001e58
-	adds r0, r1
-	ldr r2, _0808E9F0 @ =0x0000dac7
-	str r4, [sp]
-	movs r1, 0xA
-	movs r3, 0x3
-	bl sub_808C854
-	bl StorageGetCurrentBox
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_808C940
-	b _0808EA56
-	.align 2, 0
-_0808E9EC: .4byte 0x00001e58
-_0808E9F0: .4byte 0x0000dac7
-_0808E9F4:
-	bl HandleBoxChooseSelectionInput
-	ldr r1, [r5]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0808EA44 @ =0x000002ca
-	adds r1, r2
-	strh r0, [r1]
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	cmp r0, 0xC8
-	beq _0808EA80
-	bl ClearBottomWindow
-	bl sub_808C950
-	bl sub_808C8FC
-	ldr r0, [r5]
-	ldr r2, _0808EA44 @ =0x000002ca
-	adds r1, r0, r2
-	movs r2, 0
-	ldrsh r0, [r1, r2]
-	cmp r0, 0xC9
-	beq _0808EA34
-	adds r4, r0, 0
-	bl StorageGetCurrentBox
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bne _0808EA56
-_0808EA34:
-	movs r0, 0x1
-	bl sub_80920FC
-	ldr r0, _0808EA48 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808EA80
-	.align 2, 0
-_0808EA44: .4byte 0x000002ca
-_0808EA48: .4byte Cb_MainPSS
-_0808EA4C:
-	ldr r1, _0808EA60 @ =0x000002ca
-	adds r0, r1
-	ldrb r0, [r0]
-	bl SetUpScrollToBox
-_0808EA56:
-	ldr r1, [r5]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808EA80
-	.align 2, 0
-_0808EA60: .4byte 0x000002ca
-_0808EA64:
-	bl ScrollToBox
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808EA80
-	ldr r0, [r5]
-	ldr r2, _0808EA88 @ =0x000002ca
-	adds r0, r2
-	ldrb r0, [r0]
-	bl SetCurrentBox
-	ldr r0, _0808EA8C @ =Cb_MainPSS
-	bl SetPSSCallback
-_0808EA80:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EA88: .4byte 0x000002ca
-_0808EA8C: .4byte Cb_MainPSS
-	thumb_func_end sub_808E9A0
-
-	thumb_func_start sub_808EA90
-sub_808EA90: @ 808EA90
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r5, _0808EAA4 @ =sPSSData
-	ldr r0, [r5]
-	ldrb r4, [r0]
-	cmp r4, 0
-	beq _0808EAA8
-	cmp r4, 0x1
-	beq _0808EAC6
-	b _0808EAE0
-	.align 2, 0
-_0808EAA4: .4byte sPSSData
-_0808EAA8:
-	bl sub_8093630
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, [r5]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808EAE0
-_0808EAC6:
-	bl UpdatePaletteFade
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808EAE0
-	ldr r0, _0808EAE8 @ =sWhichToReshow
-	strb r4, [r0]
-	ldr r1, [r5]
-	movs r0, 0x2
-	strb r0, [r1, 0x2]
-	ldr r0, _0808EAEC @ =Cb_ChangeScreen
-	bl SetPSSCallback
-_0808EAE0:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EAE8: .4byte sWhichToReshow
-_0808EAEC: .4byte Cb_ChangeScreen
-	thumb_func_end sub_808EA90
-
-	thumb_func_start Cb_ShowMonSummary
-Cb_ShowMonSummary: @ 808EAF0
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r5, _0808EB04 @ =sPSSData
-	ldr r0, [r5]
-	ldrb r4, [r0]
-	cmp r4, 0
-	beq _0808EB08
-	cmp r4, 0x1
-	beq _0808EB26
-	b _0808EB40
-	.align 2, 0
-_0808EB04: .4byte sPSSData
-_0808EB08:
-	bl sub_80936B8
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, [r5]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808EB40
-_0808EB26:
-	bl UpdatePaletteFade
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	bne _0808EB40
-	ldr r0, _0808EB48 @ =sWhichToReshow
-	strb r1, [r0]
-	ldr r0, [r5]
-	strb r4, [r0, 0x2]
-	ldr r0, _0808EB4C @ =Cb_ChangeScreen
-	bl SetPSSCallback
-_0808EB40:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EB48: .4byte sWhichToReshow
-_0808EB4C: .4byte Cb_ChangeScreen
-	thumb_func_end Cb_ShowMonSummary
-
-	thumb_func_start Cb_GiveItemFromBag
-Cb_GiveItemFromBag: @ 808EB50
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r4, _0808EB64 @ =sPSSData
-	ldr r0, [r4]
-	ldrb r1, [r0]
-	cmp r1, 0
-	beq _0808EB68
-	cmp r1, 0x1
-	beq _0808EB82
-	b _0808EB9E
-	.align 2, 0
-_0808EB64: .4byte sPSSData
-_0808EB68:
-	movs r0, 0x1
-	negs r0, r0
-	str r1, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, [r4]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808EB9E
-_0808EB82:
-	bl UpdatePaletteFade
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808EB9E
-	ldr r1, _0808EBA8 @ =sWhichToReshow
-	movs r0, 0x2
-	strb r0, [r1]
-	ldr r1, [r4]
-	movs r0, 0x3
-	strb r0, [r1, 0x2]
-	ldr r0, _0808EBAC @ =Cb_ChangeScreen
-	bl SetPSSCallback
-_0808EB9E:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EBA8: .4byte sWhichToReshow
-_0808EBAC: .4byte Cb_ChangeScreen
-	thumb_func_end Cb_GiveItemFromBag
-
-	thumb_func_start Cb_OnCloseBoxPressed
-Cb_OnCloseBoxPressed: @ 808EBB0
-	push {r4,lr}
-	ldr r0, _0808EBC8 @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bls _0808EBBE
-	b _0808ECD0
-_0808EBBE:
-	lsls r0, 2
-	ldr r1, _0808EBCC @ =_0808EBD0
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808EBC8: .4byte sPSSData
-_0808EBCC: .4byte _0808EBD0
-	.align 2, 0
-_0808EBD0:
-	.4byte _0808EBE4
-	.4byte _0808EC40
-	.4byte _0808EC54
-	.4byte _0808EC90
-	.4byte _0808ECAC
-_0808EBE4:
-	bl IsMonBeingMoved
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808EC08
-	movs r0, 0x1A
-	bl PlaySE
-	movs r0, 0xF
-	bl PrintStorageActionText
-	ldr r0, _0808EC04 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x1
-	strb r0, [r1]
-	b _0808ECD0
-	.align 2, 0
-_0808EC04: .4byte sPSSData
-_0808EC08:
-	bl IsActiveItemMoving
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808EC20
-	ldr r0, _0808EC1C @ =sub_808E564
-	bl SetPSSCallback
-	b _0808ECD0
-	.align 2, 0
-_0808EC1C: .4byte sub_808E564
-_0808EC20:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0
-	bl PrintStorageActionText
-	movs r0, 0
-	bl ShowYesNoWindow
-	ldr r0, _0808EC3C @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x2
-	strb r0, [r1]
-	b _0808ECD0
-	.align 2, 0
-_0808EC3C: .4byte sPSSData
-_0808EC40:
-	ldr r0, _0808EC50 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808ECD0
-	b _0808EC72
-	.align 2, 0
-_0808EC50: .4byte gMain
-_0808EC54:
-	bl Menu_ProcessInputNoWrapClearOnChoose
-	lsls r0, 24
-	asrs r1, r0, 24
-	cmp r1, 0
-	beq _0808EC84
-	cmp r1, 0
-	bgt _0808EC6E
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0808EC72
-	b _0808ECD0
-_0808EC6E:
-	cmp r1, 0x1
-	bne _0808ECD0
-_0808EC72:
-	bl ClearBottomWindow
-	ldr r0, _0808EC80 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808ECD0
-	.align 2, 0
-_0808EC80: .4byte Cb_MainPSS
-_0808EC84:
-	movs r0, 0x3
-	bl PlaySE
-	bl ClearBottomWindow
-	b _0808EC9A
-_0808EC90:
-	movs r0, 0x14
-	movs r1, 0
-	movs r2, 0x1
-	bl sub_80A0A70
-_0808EC9A:
-	ldr r0, _0808ECA8 @ =sPSSData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808ECD0
-	.align 2, 0
-_0808ECA8: .4byte sPSSData
-_0808ECAC:
-	bl sub_80A0AAC
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _0808ECD0
-	bl sub_808FF70
-	bl CalculatePlayerPartyCount
-	ldr r1, _0808ECD8 @ =gPlayerPartyCount
-	strb r0, [r1]
-	ldr r0, _0808ECDC @ =sPSSData
-	ldr r0, [r0]
-	strb r4, [r0, 0x2]
-	ldr r0, _0808ECE0 @ =Cb_ChangeScreen
-	bl SetPSSCallback
-_0808ECD0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808ECD8: .4byte gPlayerPartyCount
-_0808ECDC: .4byte sPSSData
-_0808ECE0: .4byte Cb_ChangeScreen
-	thumb_func_end Cb_OnCloseBoxPressed
-
-	thumb_func_start Cb_OnBPressed
-Cb_OnBPressed: @ 808ECE4
-	push {r4,lr}
-	ldr r0, _0808ECFC @ =sPSSData
-	ldr r0, [r0]
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bls _0808ECF2
-	b _0808EE04
-_0808ECF2:
-	lsls r0, 2
-	ldr r1, _0808ED00 @ =_0808ED04
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0808ECFC: .4byte sPSSData
-_0808ED00: .4byte _0808ED04
-	.align 2, 0
-_0808ED04:
-	.4byte _0808ED18
-	.4byte _0808ED74
-	.4byte _0808ED88
-	.4byte _0808EDC4
-	.4byte _0808EDE0
-_0808ED18:
-	bl IsMonBeingMoved
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808ED3C
-	movs r0, 0x1A
-	bl PlaySE
-	movs r0, 0xF
-	bl PrintStorageActionText
-	ldr r0, _0808ED38 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x1
-	strb r0, [r1]
-	b _0808EE04
-	.align 2, 0
-_0808ED38: .4byte sPSSData
-_0808ED3C:
-	bl IsActiveItemMoving
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808ED54
-	ldr r0, _0808ED50 @ =sub_808E564
-	bl SetPSSCallback
-	b _0808EE04
-	.align 2, 0
-_0808ED50: .4byte sub_808E564
-_0808ED54:
-	movs r0, 0x5
-	bl PlaySE
-	movs r0, 0x12
-	bl PrintStorageActionText
-	movs r0, 0
-	bl ShowYesNoWindow
-	ldr r0, _0808ED70 @ =sPSSData
-	ldr r1, [r0]
-	movs r0, 0x2
-	strb r0, [r1]
-	b _0808EE04
-	.align 2, 0
-_0808ED70: .4byte sPSSData
-_0808ED74:
-	ldr r0, _0808ED84 @ =gMain
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0xF3
-	ands r0, r1
-	cmp r0, 0
-	beq _0808EE04
-	b _0808EDA8
-	.align 2, 0
-_0808ED84: .4byte gMain
-_0808ED88:
-	bl Menu_ProcessInputNoWrapClearOnChoose
-	lsls r0, 24
-	asrs r1, r0, 24
-	cmp r1, 0
-	beq _0808EDA8
-	cmp r1, 0
-	bgt _0808EDA2
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0808EDB8
-	b _0808EE04
-_0808EDA2:
-	cmp r1, 0x1
-	beq _0808EDB8
-	b _0808EE04
-_0808EDA8:
-	bl ClearBottomWindow
-	ldr r0, _0808EDB4 @ =Cb_MainPSS
-	bl SetPSSCallback
-	b _0808EE04
-	.align 2, 0
-_0808EDB4: .4byte Cb_MainPSS
-_0808EDB8:
-	movs r0, 0x3
-	bl PlaySE
-	bl ClearBottomWindow
-	b _0808EDCE
-_0808EDC4:
-	movs r0, 0x14
-	movs r1, 0
-	movs r2, 0
-	bl sub_80A0A70
-_0808EDCE:
-	ldr r0, _0808EDDC @ =sPSSData
-	ldr r1, [r0]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0808EE04
-	.align 2, 0
-_0808EDDC: .4byte sPSSData
-_0808EDE0:
-	bl sub_80A0AAC
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _0808EE04
-	bl sub_808FF70
-	bl CalculatePlayerPartyCount
-	ldr r1, _0808EE0C @ =gPlayerPartyCount
-	strb r0, [r1]
-	ldr r0, _0808EE10 @ =sPSSData
-	ldr r0, [r0]
-	strb r4, [r0, 0x2]
-	ldr r0, _0808EE14 @ =Cb_ChangeScreen
-	bl SetPSSCallback
-_0808EE04:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EE0C: .4byte gPlayerPartyCount
-_0808EE10: .4byte sPSSData
-_0808EE14: .4byte Cb_ChangeScreen
-	thumb_func_end Cb_OnBPressed
-
-	thumb_func_start Cb_ChangeScreen
-Cb_ChangeScreen: @ 808EE18
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r0, _0808EE44 @ =sPSSData
-	ldr r0, [r0]
-	ldrb r4, [r0, 0x2]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x3
-	bne _0808EE4C
-	bl IsActiveItemMoving
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0808EE4C
-	bl sub_80961C4
-	ldr r1, _0808EE48 @ =gUnknown_20397BA
-	b _0808EE50
-	.align 2, 0
-_0808EE44: .4byte sPSSData
-_0808EE48: .4byte gUnknown_20397BA
-_0808EE4C:
-	ldr r1, _0808EE70 @ =gUnknown_20397BA
-	movs r0, 0
-_0808EE50:
-	strh r0, [r1]
-	cmp r4, 0x1
-	beq _0808EE78
-	cmp r4, 0x1
-	ble _0808EE62
-	cmp r4, 0x2
-	beq _0808EEBC
-	cmp r4, 0x3
-	beq _0808EEE8
-_0808EE62:
-	bl sub_808EF68
-	ldr r0, _0808EE74 @ =Cb2_ExitPSS
-	bl SetMainCallback2
-	b _0808EEF6
-	.align 2, 0
-_0808EE70: .4byte gUnknown_20397BA
-_0808EE74: .4byte Cb2_ExitPSS
-_0808EE78:
-	ldr r0, _0808EEAC @ =sPSSData
-	ldr r1, [r0]
-	ldr r2, _0808EEB0 @ =0x0000217c
-	adds r0, r1, r2
-	ldr r0, [r0]
-	mov r8, r0
-	subs r2, 0x3
-	adds r0, r1, r2
-	ldrb r6, [r0]
-	subs r2, 0x1
-	adds r0, r1, r2
-	ldrb r5, [r0]
-	ldr r0, _0808EEB4 @ =0x0000217a
-	adds r1, r0
-	ldrb r4, [r1]
-	bl sub_808EF68
-	ldr r3, _0808EEB8 @ =Cb2_ReturnToPSS
-	str r4, [sp]
-	mov r0, r8
-	adds r1, r6, 0
-	adds r2, r5, 0
-	bl ShowPokemonSummaryScreen
-	b _0808EEF6
-	.align 2, 0
-_0808EEAC: .4byte sPSSData
-_0808EEB0: .4byte 0x0000217c
-_0808EEB4: .4byte 0x0000217a
-_0808EEB8: .4byte Cb2_ReturnToPSS
-_0808EEBC:
-	bl sub_808EF68
-	bl StorageGetCurrentBox
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetBoxNamePtr
-	adds r1, r0, 0
-	movs r0, 0
-	str r0, [sp]
-	ldr r0, _0808EEE4 @ =Cb2_ReturnToPSS
-	str r0, [sp, 0x4]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0
-	bl DoNamingScreen
-	b _0808EEF6
-	.align 2, 0
-_0808EEE4: .4byte Cb2_ReturnToPSS
-_0808EEE8:
-	bl sub_808EF68
-	ldr r2, _0808EF08 @ =Cb2_ReturnToPSS
-	movs r0, 0x4
-	movs r1, 0
-	bl GoToBagMenu
-_0808EEF6:
-	adds r0, r7, 0
-	bl DestroyTask
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0808EF08: .4byte Cb2_ReturnToPSS
-	thumb_func_end Cb_ChangeScreen
-
-	thumb_func_start GiveChosenBagItem
-GiveChosenBagItem: @ 808EF0C
-	push {lr}
-	sub sp, 0x4
-	ldr r0, _0808EF40 @ =gSpecialVar_ItemId
-	ldrh r1, [r0]
-	mov r0, sp
-	strh r1, [r0]
-	cmp r1, 0
-	beq _0808EF60
-	bl sub_8094CC8
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, _0808EF44 @ =sInPartyMenu
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0808EF4C
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _0808EF48 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0xC
-	mov r2, sp
-	bl SetMonData
-	b _0808EF56
-	.align 2, 0
-_0808EF40: .4byte gSpecialVar_ItemId
-_0808EF44: .4byte sInPartyMenu
-_0808EF48: .4byte gPlayerParty
-_0808EF4C:
-	adds r0, r1, 0
-	movs r1, 0xC
-	mov r2, sp
-	bl SetCurrentBoxMonData
-_0808EF56:
-	mov r0, sp
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl RemoveBagItem
-_0808EF60:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	thumb_func_end GiveChosenBagItem
-
-	thumb_func_start sub_808EF68
-sub_808EF68: @ 808EF68
+	thumb_func_start FreePSSData
+FreePSSData: @ 808EF68
 	push {r4,lr}
 	bl sub_80F7B2C
 	bl sub_80950A4
@@ -1786,7 +21,7 @@ sub_808EF68: @ 808EF68
 	bx r0
 	.align 2, 0
 _0808EF88: .4byte sPSSData
-	thumb_func_end sub_808EF68
+	thumb_func_end FreePSSData
 
 	thumb_func_start SetScrollingBackground
 SetScrollingBackground: @ 808EF8C
@@ -2073,7 +308,7 @@ RefreshCursorMonData: @ 808F1D0
 	adds r1, r2
 	ldr r1, [r1]
 	bl sub_808F3F8
-	bl sub_808F49C
+	bl PrintCursorMonInfo
 	bl sub_808F5E8
 	movs r0, 0
 	bl ScheduleBgCopyTilemapToVram
@@ -2409,8 +644,8 @@ _0808F496:
 	bx r0
 	thumb_func_end sub_808F3F8
 
-	thumb_func_start sub_808F49C
-sub_808F49C: @ 808F49C
+	thumb_func_start PrintCursorMonInfo
+PrintCursorMonInfo: @ 808F49C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2573,7 +808,7 @@ _0808F5D8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808F49C
+	thumb_func_end PrintCursorMonInfo
 
 	thumb_func_start sub_808F5E8
 sub_808F5E8: @ 808F5E8
@@ -3490,8 +1725,8 @@ ClearBottomWindow: @ 808FD20
 	bx r0
 	thumb_func_end ClearBottomWindow
 
-	thumb_func_start sub_808FD34
-sub_808FD34: @ 808FD34
+	thumb_func_start AddWallpaperSetsMenu
+AddWallpaperSetsMenu: @ 808FD34
 	push {lr}
 	bl sub_8094DA8
 	movs r0, 0x12
@@ -3505,10 +1740,10 @@ sub_808FD34: @ 808FD34
 	bl AddMenu
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808FD34
+	thumb_func_end AddWallpaperSetsMenu
 
-	thumb_func_start sub_808FD5C
-sub_808FD5C: @ 808FD5C
+	thumb_func_start AddWallpapersMenu
+AddWallpapersMenu: @ 808FD5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3571,7 +1806,7 @@ _0808FDE6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808FD5C
+	thumb_func_end AddWallpapersMenu
 
 	thumb_func_start GetCurrentBoxOption
 GetCurrentBoxOption: @ 808FDF0
@@ -3593,7 +1828,7 @@ sub_808FDFC: @ 808FDFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808FE28
-	bl sub_8094CC8
+	bl GetBoxCursorPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3603,7 +1838,7 @@ sub_808FDFC: @ 808FDFC
 	.align 2, 0
 _0808FE24: .4byte sInPartyMenu
 _0808FE28:
-	bl sub_8094CC8
+	bl GetBoxCursorPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3643,7 +1878,7 @@ sub_808FE54: @ 808FE54
 	cmp r0, 0
 	beq _0808FE9C
 	movs r6, 0xE
-	bl sub_8094CC8
+	bl GetBoxCursorPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -3661,7 +1896,7 @@ _0808FE9C:
 	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_8094CC8
+	bl GetBoxCursorPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x41
@@ -6909,8 +5144,8 @@ _08091728:
 	bx r1
 	thumb_func_end sub_80916F4
 
-	thumb_func_start sub_8091730
-sub_8091730: @ 8091730
+	thumb_func_start SetWallpaperForCurrentBox
+SetWallpaperForCurrentBox: @ 8091730
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -6932,10 +5167,10 @@ sub_8091730: @ 8091730
 	.align 2, 0
 _08091758: .4byte sPSSData
 _0809175C: .4byte 0x00000a62
-	thumb_func_end sub_8091730
+	thumb_func_end SetWallpaperForCurrentBox
 
-	thumb_func_start sub_8091760
-sub_8091760: @ 8091760
+	thumb_func_start DoWallpaperGfxChange
+DoWallpaperGfxChange: @ 8091760
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, _08091780 @ =sPSSData
@@ -7045,7 +5280,7 @@ _08091846:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8091760
+	thumb_func_end DoWallpaperGfxChange
 
 	thumb_func_start sub_8091850
 sub_8091850: @ 8091850
@@ -11160,8 +9395,8 @@ _08093862:
 _08093874: .4byte gPlayerParty
 	thumb_func_end CompactPartySlots
 
-	thumb_func_start sub_8093878
-sub_8093878: @ 8093878
+	thumb_func_start SetMonMarkings
+SetMonMarkings: @ 8093878
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -11224,7 +9459,7 @@ _080938EC:
 _080938F4: .4byte sBoxCursorArea
 _080938F8: .4byte sBoxCursorPosition
 _080938FC: .4byte gPlayerParty
-	thumb_func_end sub_8093878
+	thumb_func_end SetMonMarkings
 
 	thumb_func_start CanMovePartyMon
 CanMovePartyMon: @ 8093900
@@ -13738,14 +11973,14 @@ _08094CC0: .4byte sPSSData
 _08094CC4: .4byte 0x00000cd4
 	thumb_func_end sub_8094C84
 
-	thumb_func_start sub_8094CC8
-sub_8094CC8: @ 8094CC8
+	thumb_func_start GetBoxCursorPosition
+GetBoxCursorPosition: @ 8094CC8
 	ldr r0, _08094CD0 @ =sBoxCursorPosition
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _08094CD0: .4byte sBoxCursorPosition
-	thumb_func_end sub_8094CC8
+	thumb_func_end GetBoxCursorPosition
 
 	thumb_func_start sub_8094CD4
 sub_8094CD4: @ 8094CD4
@@ -15952,8 +14187,8 @@ _08095D7A:
 _08095D80: .4byte sPSSData
 	thumb_func_end sub_8095D44
 
-	thumb_func_start sub_8095D84
-sub_8095D84: @ 8095D84
+	thumb_func_start Item_FromMonToMoving
+Item_FromMonToMoving: @ 8095D84
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -16029,7 +14264,7 @@ _08095E1C: .4byte gPlayerParty
 _08095E20: .4byte sPSSData
 _08095E24: .4byte 0x00000ce2
 _08095E28: .4byte 0x00002224
-	thumb_func_end sub_8095D84
+	thumb_func_end Item_FromMonToMoving
 
 	thumb_func_start sub_8095E2C
 sub_8095E2C: @ 8095E2C
@@ -16083,8 +14318,8 @@ _08095E98: .4byte sPSSData
 _08095E9C: .4byte 0x00002224
 	thumb_func_end sub_8095E2C
 
-	thumb_func_start sub_8095EA0
-sub_8095EA0: @ 8095EA0
+	thumb_func_start Item_SwitchMonsWithMoving
+Item_SwitchMonsWithMoving: @ 8095EA0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -16181,10 +14416,10 @@ _08095F5E:
 	.align 2, 0
 _08095F6C: .4byte gPlayerParty
 _08095F70: .4byte 0x00002224
-	thumb_func_end sub_8095EA0
+	thumb_func_end Item_SwitchMonsWithMoving
 
-	thumb_func_start sub_8095F74
-sub_8095F74: @ 8095F74
+	thumb_func_start Item_GiveMovingToMon
+Item_GiveMovingToMon: @ 8095F74
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -16251,10 +14486,10 @@ _08095FF4:
 	.align 2, 0
 _08096000: .4byte gPlayerParty
 _08096004: .4byte 0x00002224
-	thumb_func_end sub_8095F74
+	thumb_func_end Item_GiveMovingToMon
 
-	thumb_func_start sub_8096008
-sub_8096008: @ 8096008
+	thumb_func_start Item_TakeMons
+Item_TakeMons: @ 8096008
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -16314,7 +14549,7 @@ _0809607C:
 	bx r0
 	.align 2, 0
 _08096084: .4byte gPlayerParty
-	thumb_func_end sub_8096008
+	thumb_func_end Item_TakeMons
 
 	thumb_func_start sub_8096088
 sub_8096088: @ 8096088
@@ -16492,8 +14727,8 @@ _080961BC: .4byte sPSSData
 _080961C0: .4byte 0x00002224
 	thumb_func_end sub_80961A8
 
-	thumb_func_start sub_80961C4
-sub_80961C4: @ 80961C4
+	thumb_func_start GetMovingItem
+GetMovingItem: @ 80961C4
 	ldr r0, _080961D0 @ =sPSSData
 	ldr r0, [r0]
 	ldr r1, _080961D4 @ =0x00002224
@@ -16503,7 +14738,7 @@ sub_80961C4: @ 80961C4
 	.align 2, 0
 _080961D0: .4byte sPSSData
 _080961D4: .4byte 0x00002224
-	thumb_func_end sub_80961C4
+	thumb_func_end GetMovingItem
 
 	thumb_func_start sub_80961D8
 sub_80961D8: @ 80961D8
@@ -17137,8 +15372,8 @@ GetItemIconPalette: @ 8096684
 	bx r1
 	thumb_func_end GetItemIconPalette
 
-	thumb_func_start sub_8096694
-sub_8096694: @ 8096694
+	thumb_func_start PrintItemDescription
+PrintItemDescription: @ 8096694
 	push {r4,lr}
 	sub sp, 0x14
 	bl IsActiveItemMoving
@@ -17182,7 +15417,7 @@ _080966BA:
 	.align 2, 0
 _080966EC: .4byte sPSSData
 _080966F0: .4byte 0x00000ce2
-	thumb_func_end sub_8096694
+	thumb_func_end PrintItemDescription
 
 	thumb_func_start sub_80966F4
 sub_80966F4: @ 80966F4

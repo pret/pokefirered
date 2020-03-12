@@ -48,6 +48,22 @@ enum
     PC_TEXT_CANT_STORE_MAIL,
 };
 
+enum
+{
+    CURSOR_AREA_IN_BOX,
+    CURSOR_AREA_IN_PARTY,
+    CURSOR_AREA_BOX,
+    CURSOR_AREA_BUTTONS, // Party Pokemon and Close Box
+};
+
+enum
+{
+    SCREEN_CHANGE_EXIT_BOX,
+    SCREEN_CHANGE_SUMMARY_SCREEN,
+    SCREEN_CHANGE_NAME_BOX,
+    SCREEN_CHANGE_ITEM_FROM_BAG,
+};
+
 #define TAG_PAL_WAVEFORM    0xDACA
 #define TAG_PAL_DAC8        0xDAC8
 #define TAG_PAL_DAC6        0xDAC6
@@ -293,5 +309,6 @@ void sub_808C940(u8 curBox);
 void sub_808C950(void);
 u8 HandleBoxChooseSelectionInput(void);
 void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
+void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

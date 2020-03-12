@@ -70,7 +70,7 @@ gUnknown_2031DE8: @ 2031DE8
 gUnknown_2031DEA: @ 2031DEA
 	.space 0x2
 
-gUnknown_2031DEC: @ 2031DEC
+gLinkPlayerObjectEvents: @ 2031DEC
 	.space 0x10
 
 	.align 2
@@ -94,10 +94,10 @@ gObjectEvents: @ 2036E38
 gPlayerAvatar: @ 2037078
 	.space 0x20
 
-gUnknown_2037098: @ 2037098
+sCurrentReflectionType: @ 2037098
 	.space 0x2
 
-gUnknown_203709A: @ 203709A
+sCurrentSpecialObjectPaletteTag: @ 203709A
 	.space 0x2
 
 gUnknown_203709C: @ 203709C

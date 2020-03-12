@@ -598,7 +598,7 @@ static void sub_810C3B8(u8 taskId)
         {
             if (sub_810CF04(i) == TRUE)
             {
-                if (gObjectEvents[i].mapobj_bit_1)
+                if (gObjectEvents[i].singleMovementActive)
                     return;
                 FreezeObjectEvent(&gObjectEvents[i]);
             }
@@ -687,7 +687,7 @@ static void sub_810C594(void)
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
-        if (objectEvent->animPattern == 0x4D || objectEvent->animPattern == 0x4E || objectEvent->animPattern == 0x4F)
+        if (objectEvent->movementType == 0x4D || objectEvent->movementType == 0x4E || objectEvent->movementType == 0x4F)
         {
             u8 r3 = sub_810CF54();
             if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)
@@ -799,8 +799,8 @@ static void GatherNearbyTrainerInfo(void)
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[objectEventIdx].localId;
             TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].objectEventId = objectEventId;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].coords2.x - 7;
-            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].coords2.y - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].currentCoords.x - 7;
+            sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].currentCoords.y - 7;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].graphicsId = templates[objectEventIdx].graphicsId;
             vsSeekerObjectIdx++;
         }
@@ -909,7 +909,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     else
                     {
                         gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
-                        npc_coords_shift_still(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
+                        ShiftStillObjectEventCoords(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
                         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
                         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
                         sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
@@ -952,12 +952,12 @@ void sub_810CB90(void)
                 TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gObjectEvents[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                sub_805FE7C(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
+                OverrideMovementTypeForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gSelectedObjectEvent == sp0)
-                    r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
+                    r4_2->movementType = gUnknown_8453F67[r4_2->facingDirection];
                 else
-                    r4_2->animPattern = 0x08;
+                    r4_2->movementType = 0x08;
             }
         }
     }
@@ -1313,7 +1313,7 @@ static void StartAllRespondantIdleMovements(void)
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
-                sub_805FE7C(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                OverrideMovementTypeForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }
         }

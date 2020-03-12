@@ -560,7 +560,7 @@ sub_80977F0: @ 80977F0
 	ldr r1, _08097850 @ =gObjectEvents
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl ObjectEventIsSpecialAnimActive
+	bl ObjectEventIsHeldMovementActive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08097838

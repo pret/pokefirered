@@ -8,6 +8,8 @@
 #include "quest_log.h"
 #include "fieldmap.h"
 
+#define VMap gBackupMapLayout // Needed for AGB_ASSERT_EX to match
+
 struct ConnectionFlags
 {
     u8 south:1;
@@ -28,8 +30,8 @@ struct MapConnection *sub_8059600(u8 direction, s32 x, s32 y);
 bool8 sub_8059658(u8 direction, s32 x, s32 y, struct MapConnection *connection);
 bool8 sub_80596BC(s32 x, s32 src_width, s32 dest_width, s32 offset);
 
-struct BackupMapLayout VMap;
-EWRAM_DATA u16 gBackupMapLayout[VIRTUAL_MAP_SIZE] = {};
+struct BackupMapLayout gBackupMapLayout;
+EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
@@ -79,10 +81,10 @@ void sub_80589E8(void)
 void sub_8058A00(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
-    CpuFastFill(0x03FF03FF, gBackupMapLayout, sizeof(gBackupMapLayout));
-    VMap.map = gBackupMapLayout;
-    VMap.Xsize = mapLayout->width + 15;
-    VMap.Ysize = mapLayout->height + 14;
+    CpuFastFill(0x03FF03FF, gBackupMapData, sizeof(gBackupMapData));
+    gBackupMapLayout.map = gBackupMapData;
+    gBackupMapLayout.Xsize = mapLayout->width + 15;
+    gBackupMapLayout.Ysize = mapLayout->height + 14;
     AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, ABSPATH("fieldmap.c"), 158);
     map_copy_with_padding(mapLayout->map, mapLayout->width, mapLayout->height);
     mapheader_copy_mapdata_of_adjacent_maps(mapHeader);
@@ -91,8 +93,8 @@ void sub_8058A00(struct MapHeader * mapHeader)
 void map_copy_with_padding(u16 *map, u16 width, u16 height)
 {
     s32 y;
-    u16 *dest = VMap.map;
-    dest += VMap.Xsize * 7 + 7;
+    u16 *dest = gBackupMapLayout.map;
+    dest += gBackupMapLayout.Xsize * 7 + 7;
 
     for (y = 0; y < height; y++)
     {
@@ -157,12 +159,12 @@ void sub_8058B54(s32 x, s32 y, const struct MapHeader *connectedMapHeader, s32 x
 
     mapWidth = connectedMapHeader->mapLayout->width;
     src = &connectedMapHeader->mapLayout->map[mapWidth * y2 + x2];
-    dest = &VMap.map[VMap.Xsize * y + x];
+    dest = &gBackupMapLayout.map[gBackupMapLayout.Xsize * y + x];
 
     for (i = 0; i < height; i++)
     {
         CpuCopy16(src, dest, width * 2);
-        dest += VMap.Xsize;
+        dest += gBackupMapLayout.Xsize;
         src += mapWidth;
     }
 }
@@ -183,26 +185,26 @@ void fillSouthConnection(struct MapHeader const *mapHeader, struct MapHeader con
         {
             x2 = -x;
             x += cWidth;
-            if (x < VMap.Xsize)
+            if (x < gBackupMapLayout.Xsize)
             {
                 width = x;
             }
             else
             {
-                width = VMap.Xsize;
+                width = gBackupMapLayout.Xsize;
             }
             x = 0;
         }
         else
         {
             x2 = 0;
-            if (x + cWidth < VMap.Xsize)
+            if (x + cWidth < gBackupMapLayout.Xsize)
             {
                 width = cWidth;
             }
             else
             {
-                width = VMap.Xsize - x;
+                width = gBackupMapLayout.Xsize - x;
             }
         }
 
@@ -231,26 +233,26 @@ void fillNorthConnection(struct MapHeader const *mapHeader, struct MapHeader con
         {
             x2 = -x;
             x += cWidth;
-            if (x < VMap.Xsize)
+            if (x < gBackupMapLayout.Xsize)
             {
                 width = x;
             }
             else
             {
-                width = VMap.Xsize;
+                width = gBackupMapLayout.Xsize;
             }
             x = 0;
         }
         else
         {
             x2 = 0;
-            if (x + cWidth < VMap.Xsize)
+            if (x + cWidth < gBackupMapLayout.Xsize)
             {
                 width = cWidth;
             }
             else
             {
-                width = VMap.Xsize - x;
+                width = gBackupMapLayout.Xsize - x;
             }
         }
 
@@ -278,26 +280,26 @@ void fillWestConnection(struct MapHeader const *mapHeader, struct MapHeader cons
         if (y < 0)
         {
             y2 = -y;
-            if (y + cHeight < VMap.Ysize)
+            if (y + cHeight < gBackupMapLayout.Ysize)
             {
                 height = y + cHeight;
             }
             else
             {
-                height = VMap.Ysize;
+                height = gBackupMapLayout.Ysize;
             }
             y = 0;
         }
         else
         {
             y2 = 0;
-            if (y + cHeight < VMap.Ysize)
+            if (y + cHeight < gBackupMapLayout.Ysize)
             {
                 height = cHeight;
             }
             else
             {
-                height = VMap.Ysize - y;
+                height = gBackupMapLayout.Ysize - y;
             }
         }
 
@@ -323,26 +325,26 @@ void fillEastConnection(struct MapHeader const *mapHeader, struct MapHeader cons
         if (y < 0)
         {
             y2 = -y;
-            if (y + cHeight < VMap.Ysize)
+            if (y + cHeight < gBackupMapLayout.Ysize)
             {
                 height = y + cHeight;
             }
             else
             {
-                height = VMap.Ysize;
+                height = gBackupMapLayout.Ysize;
             }
             y = 0;
         }
         else
         {
             y2 = 0;
-            if (y + cHeight < VMap.Ysize)
+            if (y + cHeight < gBackupMapLayout.Ysize)
             {
                 height = cHeight;
             }
             else
             {
-                height = VMap.Ysize - y;
+                height = gBackupMapLayout.Ysize - y;
             }
         }
 
@@ -404,9 +406,9 @@ union Block
     block;                                                             \
 })
 
-#define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize)
+#define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < gBackupMapLayout.Xsize && y >= 0 && y < gBackupMapLayout.Ysize)
 
-#define MapGridGetTileAt(x, y) (AreCoordsWithinMapGridBounds(x, y) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt2(x, y))
+#define MapGridGetTileAt(x, y) (AreCoordsWithinMapGridBounds(x, y) ? gBackupMapLayout.map[x + gBackupMapLayout.Xsize * y] : MapGridGetBorderTileAt2(x, y))
 
 u8 MapGridGetZCoordAt(s32 x, s32 y)
 {
@@ -471,37 +473,37 @@ u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y)
 void MapGridSetMetatileIdAt(s32 x, s32 y, u16 metatile)
 {
     s32 i;
-    if (x >= 0 && x < VMap.Xsize
-        && y >= 0 && y < VMap.Ysize)
+    if (x >= 0 && x < gBackupMapLayout.Xsize
+        && y >= 0 && y < gBackupMapLayout.Ysize)
     {
-        i = x + y * VMap.Xsize;
-        VMap.map[i] = (VMap.map[i] & 0xf000) | (metatile & 0xfff);
+        i = x + y * gBackupMapLayout.Xsize;
+        gBackupMapLayout.map[i] = (gBackupMapLayout.map[i] & 0xf000) | (metatile & 0xfff);
     }
 }
 
 void MapGridSetMetatileEntryAt(s32 x, s32 y, u16 metatile)
 {
     s32 i;
-    if (x >= 0 && x < VMap.Xsize
-        && y >= 0 && y < VMap.Ysize)
+    if (x >= 0 && x < gBackupMapLayout.Xsize
+        && y >= 0 && y < gBackupMapLayout.Ysize)
     {
-        i = x + VMap.Xsize * y;
-        VMap.map[i] = metatile;
+        i = x + gBackupMapLayout.Xsize * y;
+        gBackupMapLayout.map[i] = metatile;
     }
 }
 
 void sub_8059024(s32 x, s32 y, bool32 arg2)
 {
-    if (x >= 0 && x < VMap.Xsize
-        && y >= 0 && y < VMap.Ysize)
+    if (x >= 0 && x < gBackupMapLayout.Xsize
+        && y >= 0 && y < gBackupMapLayout.Ysize)
     {
         if (arg2)
         {
-            VMap.map[x + VMap.Xsize * y] |= 0x0C00;
+            gBackupMapLayout.map[x + gBackupMapLayout.Xsize * y] |= 0x0C00;
         }
         else
         {
-            VMap.map[x + VMap.Xsize * y] &= ~0x0C00;
+            gBackupMapLayout.map[x + gBackupMapLayout.Xsize * y] &= ~0x0C00;
         }
     }
 }
@@ -533,14 +535,14 @@ void save_serialize_map(void)
     u16 *mapView;
     s32 width;
     mapView = gSaveBlock2Ptr->mapView;
-    width = VMap.Xsize;
+    width = gBackupMapLayout.Xsize;
     x = gSaveBlock1Ptr->pos.x;
     y = gSaveBlock1Ptr->pos.y;
     for (i = y; i < y + 14; i++)
     {
         for (j = x; j < x + 15; j++)
         {
-            *mapView++ = gBackupMapLayout[width * i + j];
+            *mapView++ = gBackupMapData[width * i + j];
         }
     }
 }
@@ -574,14 +576,14 @@ void LoadSavedMapView(void)
     mapView = gSaveBlock2Ptr->mapView;
     if (!SavedMapViewIsEmpty())
     {
-        width = VMap.Xsize;
+        width = gBackupMapLayout.Xsize;
         x = gSaveBlock1Ptr->pos.x;
         y = gSaveBlock1Ptr->pos.y;
         for (i = y; i < y + 14; i++)
         {
             for (j = x; j < x + 15; j++)
             {
-                gBackupMapLayout[j + width * i] = *mapView;
+                gBackupMapData[j + width * i] = *mapView;
                 mapView++;
             }
         }
@@ -601,7 +603,7 @@ void sub_8059250(u8 a1)
     s32 x, y;
     s32 i, j;
     mapView = gSaveBlock2Ptr->mapView;
-    width = VMap.Xsize;
+    width = gBackupMapLayout.Xsize;
     r9 = 0;
     r8 = 0;
     x0 = gSaveBlock1Ptr->pos.x;
@@ -636,7 +638,7 @@ void sub_8059250(u8 a1)
             desti = width * (y + y0);
             srci = (y + r8) * 15 + r9;
             src = &mapView[srci + i];
-            dest = &gBackupMapLayout[x0 + desti + j];
+            dest = &gBackupMapData[x0 + desti + j];
             *dest = *src;
             i++;
             j++;
@@ -652,7 +654,7 @@ s32 GetMapBorderIdAt(s32 x, s32 y)
         return -1;
     }
 
-    if (x >= VMap.Xsize - 8)
+    if (x >= gBackupMapLayout.Xsize - 8)
     {
         if (!gMapConnectionFlags.east)
         {
@@ -670,7 +672,7 @@ s32 GetMapBorderIdAt(s32 x, s32 y)
         return CONNECTION_WEST;
     }
 
-    if (y >= VMap.Ysize - 7)
+    if (y >= gBackupMapLayout.Ysize - 7)
     {
         if (!gMapConnectionFlags.south)
         {

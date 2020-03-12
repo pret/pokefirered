@@ -48,13 +48,13 @@ gFieldLinkPlayerCount: @ 3005030
 	.include "fieldmap.o"
 
 	.align 4
-gUnknown_3005050: @ 3005050
+gFieldCamera: @ 3005050
 	.space 0x18
 
-gUnknown_3005068: @ 3005068
+gTotalCameraPixelOffsetY: @ 3005068
 	.space 0x4
 
-gUnknown_300506C: @ 300506C
+gTotalCameraPixelOffsetX: @ 300506C
 	.space 0x4
 
 	.align 2

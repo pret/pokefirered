@@ -2,13 +2,13 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-gUnknown_835B934:: @ 835B934
+gReflectionEffectPaletteMap:: @ 835B934
 	.byte 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0b, 0x00, 0x00, 0x00, 0x00
 
-gUnknown_835B944:: @ 835B944
+gCameraSpriteTemplate:: @ 835B944
 	spr_template 0, 65535, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
 
-gUnknown_835B95C:: @ 835B95C
+gCameraObjectFuncs:: @ 835B95C
 	.4byte CameraObject_0
 	.4byte CameraObject_1
 	.4byte CameraObject_2
@@ -757,88 +757,88 @@ gUnknown_839D3A8:: @ 839D3A8
 gUnknown_839D3C8:: @ 839D3C8
 	.incbin "graphics/object_events/pics/unknown/839D3C8.4bpp"
 
-gMovementTypeCallbacks:: @ 839FBC8
-	.4byte sub_805FFB4
-	.4byte sub_806058C
-	.4byte sub_805FFDC
-	.4byte sub_80606CC
-	.4byte sub_80606CC
-	.4byte sub_8060850
-	.4byte sub_8060850
-	.4byte sub_80609D4
-	.4byte sub_80609D4
-	.4byte sub_80609D4
-	.4byte sub_80609D4
+sMovementTypeCallbacks:: @ 839FBC8
+	.4byte MovementType_None
+	.4byte MovementType_LookAround
+	.4byte MovementType_WanderAround
+	.4byte MovementType_WanderUpAndDown
+	.4byte MovementType_WanderUpAndDown
+	.4byte MovementType_WanderLeftAndRight
+	.4byte MovementType_WanderLeftAndRight
+	.4byte MovementType_FaceDirection
+	.4byte MovementType_FaceDirection
+	.4byte MovementType_FaceDirection
+	.4byte MovementType_FaceDirection
 	.4byte sub_805B3B8
 	.4byte NULL
-	.4byte sub_8060A74
-	.4byte sub_8060BB4
-	.4byte sub_8060CF4
-	.4byte sub_8060E34
-	.4byte sub_8060F74
-	.4byte sub_80610B4
-	.4byte sub_80611F4
-	.4byte sub_8061334
-	.4byte sub_8061474
-	.4byte sub_80615B4
-	.4byte sub_80616F4
-	.4byte sub_80617F8
-	.4byte sub_80618FC
-	.4byte sub_80618FC
-	.4byte sub_80618FC
-	.4byte sub_80618FC
-	.4byte sub_8061B5C
-	.4byte sub_8061BE8
-	.4byte sub_8061C74
-	.4byte sub_8061D00
-	.4byte sub_8061D8C
-	.4byte sub_8061E18
-	.4byte sub_8061EA4
-	.4byte sub_8061F30
-	.4byte sub_8061FBC
-	.4byte sub_8062048
-	.4byte sub_80620D4
-	.4byte sub_8062160
-	.4byte sub_80621EC
-	.4byte sub_8062278
-	.4byte sub_8062304
-	.4byte sub_8062390
-	.4byte sub_806241C
-	.4byte sub_80624A8
-	.4byte sub_8062534
-	.4byte sub_80625C0
-	.4byte sub_806264C
-	.4byte sub_80626D8
-	.4byte sub_8062764
-	.4byte sub_80627F0
-	.4byte sub_806287C
-	.4byte sub_806287C
-	.4byte sub_806287C
-	.4byte sub_806287C
-	.4byte ObjectEventCB_TreeDisguise
-	.4byte ObjectEventCB_MountainDisguise
-	.4byte sub_8062E60
-	.4byte sub_8062E60
-	.4byte sub_8062E60
-	.4byte sub_8062E60
-	.4byte ObjectEventCB_Hidden1
-	.4byte sub_80630A0
-	.4byte sub_80630A0
-	.4byte sub_80630A0
-	.4byte sub_80630A0
-	.4byte sub_8063110
-	.4byte sub_8063110
-	.4byte sub_8063110
-	.4byte sub_8063110
-	.4byte sub_8063180
-	.4byte sub_8063180
-	.4byte sub_8063180
-	.4byte sub_8063180
-	.4byte sub_80631F0
+	.4byte MovementType_FaceDownAndUp
+	.4byte MovementType_FaceLeftAndRight
+	.4byte MovementType_FaceUpAndLeft
+	.4byte MovementType_FaceUpAndRight
+	.4byte MovementType_FaceDownAndLeft
+	.4byte MovementType_FaceDownAndRight
+	.4byte MovementType_FaceDownUpAndLeft
+	.4byte MovementType_FaceDownUpAndRight
+	.4byte MovementType_FaceUpRightAndLeft
+	.4byte MovementType_FaceDownRightAndLeft
+	.4byte MovementType_RotateCounterclockwise
+	.4byte MovementType_RotateClockwise
+	.4byte MovementType_WalkBackAndForth
+	.4byte MovementType_WalkBackAndForth
+	.4byte MovementType_WalkBackAndForth
+	.4byte MovementType_WalkBackAndForth
+	.4byte MovementType_WalkSequenceUpRightLeftDown
+	.4byte MovementType_WalkSequenceRightLeftDownUp
+	.4byte MovementType_WalkSequenceDownUpRightLeft
+	.4byte MovementType_WalkSequenceLeftDownUpRight
+	.4byte MovementType_WalkSequenceUpLeftRightDown
+	.4byte MovementType_WalkSequenceLeftRightDownUp
+	.4byte MovementType_WalkSequenceDownUpLeftRight
+	.4byte MovementType_WalkSequenceRightDownUpLeft
+	.4byte MovementType_WalkSequenceLeftUpDownRight
+	.4byte MovementType_WalkSequenceUpDownRightLeft
+	.4byte MovementType_WalkSequenceRightLeftUpDown
+	.4byte MovementType_WalkSequenceDownRightLeftUp
+	.4byte MovementType_WalkSequenceRightUpDownLeft
+	.4byte MovementType_WalkSequenceUpDownLeftRight
+	.4byte MovementType_WalkSequenceLeftRightUpDown
+	.4byte MovementType_WalkSequenceDownLeftRightUp
+	.4byte MovementType_WalkSequenceUpLeftDownRight
+	.4byte MovementType_WalkSequenceDownRightUpLeft
+	.4byte MovementType_WalkSequenceLeftDownRightUp
+	.4byte MovementType_WalkSequenceRightUpLeftDown
+	.4byte MovementType_WalkSequenceUpRightDownLeft
+	.4byte MovementType_WalkSequenceDownLeftUpRight
+	.4byte MovementType_WalkSequenceLeftUpRightDown
+	.4byte MovementType_WalkSequenceRightDownLeftUp
+	.4byte MovementType_CopyPlayer
+	.4byte MovementType_CopyPlayer
+	.4byte MovementType_CopyPlayer
+	.4byte MovementType_CopyPlayer
+	.4byte MovementType_TreeDisguise
+	.4byte MovementType_MountainDisguise
+	.4byte MovementType_CopyPlayerInGrass
+	.4byte MovementType_CopyPlayerInGrass
+	.4byte MovementType_CopyPlayerInGrass
+	.4byte MovementType_CopyPlayerInGrass
+	.4byte MovementType_Hidden
+	.4byte MovementType_WalkInPlace
+	.4byte MovementType_WalkInPlace
+	.4byte MovementType_WalkInPlace
+	.4byte MovementType_WalkInPlace
+	.4byte MovementType_WalkSlowlyInPlace
+	.4byte MovementType_WalkSlowlyInPlace
+	.4byte MovementType_WalkSlowlyInPlace
+	.4byte MovementType_WalkSlowlyInPlace
+	.4byte MovementType_JogInPlace
+	.4byte MovementType_JogInPlace
+	.4byte MovementType_JogInPlace
+	.4byte MovementType_JogInPlace
+	.4byte MovementType_Invisible
 	.4byte sub_8063298
 	.4byte sub_80632BC
 	.4byte sub_80632E0
-	.4byte sub_8060020
+	.4byte MovementType_WanderAroundDuplicate
 
 gRangedMovementTypes:: @ 839FD0C
 	.byte FALSE @ MOVEMENT_TYPE_NONE
@@ -6093,7 +6093,7 @@ gObjectEventGraphicsInfo_83A5134:: @ 83A5134
 	.4byte gSpriteImages_83A1CF0
 	.4byte gDummySpriteAffineAnimTable
 
-gObjectEventSpritePalettes:: @ 83A5158
+sObjectEventSpritePalettes:: @ 83A5158
 	obj_pal gUnknown_836D828, 0x1103
 	obj_pal gUnknown_836D848, 0x1104
 	obj_pal gUnknown_836D868, 0x1105
@@ -6130,7 +6130,7 @@ gUnknownPaletteTags_83A5200:: @ 83A5200
 	.2byte 0x1116
 	.2byte 0x1116
 
-gUnknown_83A5208:: @ 83A5208
+gPlayerReflectionPaletteSets:: @ 83A5208
 	.2byte 0x1100
 	.2byte 0x0
 	.4byte gPlayerReflectionPaletteTags
@@ -6204,7 +6204,7 @@ gUnknownPaletteTags_83A5270::
 	.2byte 0x1109
 	.2byte 0x1109
 
-gUnknown_83A5278:: @ 83A5278
+gSpecialObjectReflectionPaletteSets:: @ 83A5278
 	.2byte 0x1100
 	.2byte 0x0
 	.4byte gPlayerReflectionPaletteTags
@@ -6293,7 +6293,7 @@ gUnknownPaletteTags_83A531C::
 	.2byte 0x1109
 	.2byte 0x110a
 
-gUnknown_83A5330:: @ 83A5330
+gObjectPaletteTagSets:: @ 83A5330
 	.4byte gUnknownPaletteTags_83A52E0
 	.4byte gUnknownPaletteTags_83A52F4
 	.4byte gUnknownPaletteTags_83A5308
@@ -7100,7 +7100,7 @@ gUnknown_83A5FE0:: @ 83A5FE0
 gUnknown_83A5FF8::
 	obj_pal gUnknown_839D3A8, 0x100F
 
-gUnknown_83A6000:: @ 83A6000
+gMovementDelaysMedium:: @ 83A6000
 	.2byte 0x0020
 	.2byte 0x0040
 	.2byte 0x0060
@@ -7112,216 +7112,216 @@ gUnknown_83A6008:: @ 83A6008
 	.2byte 0x0080
 	.2byte 0x00C0
 
-gUnknown_83A6010:: @ 83A6010
+gMovementDelaysShort:: @ 83A6010
 	.2byte 0x0020
 	.2byte 0x0030
 	.2byte 0x0040
 	.2byte 0x0050
 
-gUnknown_83A6018:: @ 83A6018
-	.4byte sub_8060064
-	.4byte sub_8060078
-	.4byte sub_80600A4
-	.4byte sub_80600E0
-	.4byte sub_8060100
-	.4byte sub_806014C
-	.4byte sub_80601AC
+gMovementTypeFuncs_WanderAround:: @ 83A6018
+	.4byte MovementType_WanderAround_Step0
+	.4byte MovementType_WanderAround_Step1
+	.4byte MovementType_WanderAround_Step2
+	.4byte MovementType_WanderAround_Step3
+	.4byte MovementType_WanderAround_Step4
+	.4byte MovementType_WanderAround_Step5
+	.4byte MovementType_WanderAround_Step6
 
-gUnknown_83A6034:: @ 83A6034
-	.4byte sub_8060064
-	.4byte sub_8060078
-	.4byte sub_80600A4
-	.4byte sub_80600E0
-	.4byte sub_8060100
-	.4byte sub_806017C
-	.4byte sub_80601AC
+gMovementTypeFuncs_WanderAroundDuplicate:: @ 83A6034
+	.4byte MovementType_WanderAround_Step0
+	.4byte MovementType_WanderAround_Step1
+	.4byte MovementType_WanderAround_Step2
+	.4byte MovementType_WanderAround_Step3
+	.4byte MovementType_WanderAround_Step4
+	.4byte MovementType_WanderAround_Step5Duplicate
+	.4byte MovementType_WanderAround_Step6
 
-gUnknown_83A6050:: @ 83A6050
+gStandardDirections:: @ 83A6050
 	.byte 1 @ DIR_SOUTH
 	.byte 2 @ DIR_NORTH
 	.byte 3 @ DIR_WEST
 	.byte 4 @ DIR_EAST
 
-gUnknown_83A6054:: @ 83A6054
-	.4byte GetRegularRunningPastFacingDirection
-	.4byte GetNorthSouthRunningPastFacingDirection
-	.4byte GetEastWestRunningPastFacingDirection
-	.4byte GetNorthEastRunningPastFacingDirection
-	.4byte GetNorthWestRunningPastFacingDirection
-	.4byte GetSouthEastRunningPastFacingDirection
-	.4byte GetSouthWestRunningPastFacingDirection
-	.4byte GetNonEastRunningPastFacingDirection
-	.4byte GetNonWestRunningPastFacingDirection
-	.4byte GetNonSouthRunningPastFacingDirection
-	.4byte GetNonNorthRunningPastFacingDirection
+gGetVectorDirectionFuncs:: @ 83A6054
+	.4byte GetVectorDirection
+	.4byte GetLimitedVectorDirection_SouthNorth
+	.4byte GetLimitedVectorDirection_WestEast
+	.4byte GetLimitedVectorDirection_WestNorth
+	.4byte GetLimitedVectorDirection_EastNorth
+	.4byte GetLimitedVectorDirection_WestSouth
+	.4byte GetLimitedVectorDirection_EastSouth
+	.4byte GetLimitedVectorDirection_SouthNorthWest
+	.4byte GetLimitedVectorDirection_SouthNorthEast
+	.4byte GetLimitedVectorDirection_NorthWestEast
+	.4byte GetLimitedVectorDirection_SouthWestEast
 
-gUnknown_83A6080:: @ 83A6080
-	.4byte sub_80605D0
-	.4byte sub_80605E4
-	.4byte sub_8060610
-	.4byte sub_8060654
-	.4byte sub_8060684
+gMovementTypeFuncs_LookAround:: @ 83A6080
+	.4byte MovementType_LookAround_Step0
+	.4byte MovementType_LookAround_Step1
+	.4byte MovementType_LookAround_Step2
+	.4byte MovementType_LookAround_Step3
+	.4byte MovementType_LookAround_Step4
 
-gUnknown_83A6094:: @ 83A6094
-	.4byte sub_8060710
-	.4byte sub_8060724
-	.4byte sub_8060750
-	.4byte sub_806078C
-	.4byte sub_80607AC
-	.4byte sub_80607F8
-	.4byte sub_8060828
+gMovementTypeFuncs_WanderUpAndDown:: @ 83A6094
+	.4byte MovementType_WanderUpAndDown_Step0
+	.4byte MovementType_WanderUpAndDown_Step1
+	.4byte MovementType_WanderUpAndDown_Step2
+	.4byte MovementType_WanderUpAndDown_Step3
+	.4byte MovementType_WanderUpAndDown_Step4
+	.4byte MovementType_WanderUpAndDown_Step5
+	.4byte MovementType_WanderUpAndDown_Step6
 
-gUnknown_83A60B0:: @ 83A60B0
+gUpAndDownDirections:: @ 83A60B0
 	.byte 1 @ DIR_SOUTH
 	.byte 2 @ DIR_NORTH
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A60B4:: @ 83A60B4
-	.4byte sub_8060894
-	.4byte sub_80608A8
-	.4byte sub_80608D4
-	.4byte sub_8060910
-	.4byte sub_8060930
-	.4byte sub_806097C
-	.4byte sub_80609AC
+gMovementTypeFuncs_WanderLeftAndRight:: @ 83A60B4
+	.4byte MovementType_WanderLeftAndRight_Step0
+	.4byte MovementType_WanderLeftAndRight_Step1
+	.4byte MovementType_WanderLeftAndRight_Step2
+	.4byte MovementType_WanderLeftAndRight_Step3
+	.4byte MovementType_WanderLeftAndRight_Step4
+	.4byte MovementType_WanderLeftAndRight_Step5
+	.4byte MovementType_WanderLeftAndRight_Step6
 
-gUnknown_83A60D0:: @ 83A60D0
+gLeftAndRightDirections:: @ 83A60D0
 	.byte 3 @ DIR_WEST
 	.byte 4 @ DIR_EAST
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A60D4:: @ 83A60D4
-	.4byte sub_8060A18
-	.4byte sub_8060A44
-	.4byte sub_8060A64
+gMovementTypeFuncs_FaceDirection:: @ 83A60D4
+	.4byte MovementType_FaceDirection_Step0
+	.4byte MovementType_FaceDirection_Step1
+	.4byte MovementType_FaceDirection_Step2
 
-gUnknown_83A60E0:: @ 83A60E0
-	.4byte sub_8060AB8
-	.4byte sub_8060ACC
-	.4byte sub_8060AF8
-	.4byte sub_8060B3C
-	.4byte sub_8060B6C
+gMovementTypeFuncs_FaceDownAndUp:: @ 83A60E0
+	.4byte MovementType_FaceDownAndUp_Step0
+	.4byte MovementType_FaceDownAndUp_Step1
+	.4byte MovementType_FaceDownAndUp_Step2
+	.4byte MovementType_FaceDownAndUp_Step3
+	.4byte MovementType_FaceDownAndUp_Step4
 
-gUnknown_83A60F4:: @ 83A60F4
-	.4byte sub_8060BF8
-	.4byte sub_8060C0C
-	.4byte sub_8060C38
-	.4byte sub_8060C7C
-	.4byte sub_8060CAC
+gMovementTypeFuncs_FaceLeftAndRight:: @ 83A60F4
+	.4byte MovementType_FaceLeftAndRight_Step0
+	.4byte MovementType_FaceLeftAndRight_Step1
+	.4byte MovementType_FaceLeftAndRight_Step2
+	.4byte MovementType_FaceLeftAndRight_Step3
+	.4byte MovementType_FaceLeftAndRight_Step4
 
-gUnknown_83A6108:: @ 83A6108
-	.4byte sub_8060D38
-	.4byte sub_8060D4C
-	.4byte sub_8060D78
-	.4byte sub_8060DBC
-	.4byte sub_8060DEC
+gMovementTypeFuncs_FaceUpAndLeft:: @ 83A6108
+	.4byte MovementType_FaceUpAndLeft_Step0
+	.4byte MovementType_FaceUpAndLeft_Step1
+	.4byte MovementType_FaceUpAndLeft_Step2
+	.4byte MovementType_FaceUpAndLeft_Step3
+	.4byte MovementType_FaceUpAndLeft_Step4
 
-gUnknown_83A611C:: @ 83A611C
+gUpAndLeftDirections:: @ 83A611C
 	.byte 2 @ DIR_NORTH
 	.byte 3 @ DIR_WEST
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A6120:: @ 83A6120
-	.4byte sub_8060E78
-	.4byte sub_8060E8C
-	.4byte sub_8060EB8
-	.4byte sub_8060EFC
-	.4byte sub_8060F2C
+gMovementTypeFuncs_FaceUpAndRight:: @ 83A6120
+	.4byte MovementType_FaceUpAndRight_Step0
+	.4byte MovementType_FaceUpAndRight_Step1
+	.4byte MovementType_FaceUpAndRight_Step2
+	.4byte MovementType_FaceUpAndRight_Step3
+	.4byte MovementType_FaceUpAndRight_Step4
 
-gUnknown_83A6134:: @ 83A6134
+gUpAndRightDirections:: @ 83A6134
 	.byte 2 @ DIR_NORTH
 	.byte 4 @ DIR_EAST
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A6138:: @ 83A6138
-	.4byte sub_8060FB8
-	.4byte sub_8060FCC
-	.4byte sub_8060FF8
-	.4byte sub_806103C
-	.4byte sub_806106C
+gMovementTypeFuncs_FaceDownAndLeft:: @ 83A6138
+	.4byte MovementType_FaceDownAndLeft_Step0
+	.4byte MovementType_FaceDownAndLeft_Step1
+	.4byte MovementType_FaceDownAndLeft_Step2
+	.4byte MovementType_FaceDownAndLeft_Step3
+	.4byte MovementType_FaceDownAndLeft_Step4
 
-gUnknown_83A614C:: @ 83A614C
+gDownAndLeftDirections:: @ 83A614C
 	.byte 1 @ DIR_SOUTH
 	.byte 3 @ DIR_WEST
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A6150:: @ 83A6150
-	.4byte sub_80610F8
-	.4byte sub_806110C
-	.4byte sub_8061138
-	.4byte sub_806117C
-	.4byte sub_80611AC
+gMovementTypeFuncs_FaceDownAndRight:: @ 83A6150
+	.4byte MovementType_FaceDownAndRight_Step0
+	.4byte MovementType_FaceDownAndRight_Step1
+	.4byte MovementType_FaceDownAndRight_Step2
+	.4byte MovementType_FaceDownAndRight_Step3
+	.4byte MovementType_FaceDownAndRight_Step4
 
-gUnknown_83A6164:: @ 83A6164
+gDownAndRightDirections:: @ 83A6164
 	.byte 1 @ DIR_SOUTH
 	.byte 4 @ DIR_EAST
 	.byte 0 @ DIR_NONE
 	.byte 0 @ DIR_NONE
 
-gUnknown_83A6168:: @ 83A6168
-	.4byte sub_8061238
-	.4byte sub_806124C
-	.4byte sub_8061278
-	.4byte sub_80612BC
-	.4byte sub_80612EC
+gMovementTypeFuncs_FaceDownUpAndLeft:: @ 83A6168
+	.4byte MovementType_FaceDownUpAndLeft_Step0
+	.4byte MovementType_FaceDownUpAndLeft_Step1
+	.4byte MovementType_FaceDownUpAndLeft_Step2
+	.4byte MovementType_FaceDownUpAndLeft_Step3
+	.4byte MovementType_FaceDownUpAndLeft_Step4
 
-gUnknown_83A617C:: @ 83A617C
+gDownUpAndLeftDirections:: @ 83A617C
 	.byte 2 @ DIR_NORTH
 	.byte 1 @ DIR_SOUTH
 	.byte 3 @ DIR_WEST
 	.byte 1 @ DIR_SOUTH
 
-gUnknown_83A6180:: @ 83A6180
-	.4byte sub_8061378
-	.4byte sub_806138C
-	.4byte sub_80613B8
-	.4byte sub_80613FC
-	.4byte sub_806142C
+gMovementTypeFuncs_FaceDownUpAndRight:: @ 83A6180
+	.4byte MovementType_FaceDownUpAndRight_Step0
+	.4byte MovementType_FaceDownUpAndRight_Step1
+	.4byte MovementType_FaceDownUpAndRight_Step2
+	.4byte MovementType_FaceDownUpAndRight_Step3
+	.4byte MovementType_FaceDownUpAndRight_Step4
 
-gUnknown_83A6194:: @ 83A6194
+gDownUpAndRightDirections:: @ 83A6194
 	.byte 1 @ DIR_SOUTH
 	.byte 2 @ DIR_NORTH
 	.byte 4 @ DIR_EAST
 	.byte 1 @ DIR_SOUTH
 
-gUnknown_83A6198:: @ 83A6198
-	.4byte sub_80614B8
-	.4byte sub_80614CC
-	.4byte sub_80614F8
-	.4byte sub_806153C
-	.4byte sub_806156C
+gMovementTypeFuncs_FaceUpLeftAndRight:: @ 83A6198
+	.4byte MovementType_FaceUpLeftAndRight_Step0
+	.4byte MovementType_FaceUpLeftAndRight_Step1
+	.4byte MovementType_FaceUpLeftAndRight_Step2
+	.4byte MovementType_FaceUpLeftAndRight_Step3
+	.4byte MovementType_FaceUpLeftAndRight_Step4
 
-gUnknown_83A61AC:: @ 83A61AC
+gUpLeftAndRightDirections:: @ 83A61AC
 	.byte 2 @ DIR_NORTH
 	.byte 3 @ DIR_WEST
 	.byte 4 @ DIR_EAST
 	.byte 2 @ DIR_NORTH
 
-gUnknown_83A61B0:: @ 83A61B0
-	.4byte sub_80615F8
-	.4byte sub_806160C
-	.4byte sub_8061638
-	.4byte sub_806167C
-	.4byte sub_80616AC
+gMovementTypeFuncs_FaceDownLeftAndRight:: @ 83A61B0
+	.4byte MovementType_FaceDownLeftAndRight_Step0
+	.4byte MovementType_FaceDownLeftAndRight_Step1
+	.4byte MovementType_FaceDownLeftAndRight_Step2
+	.4byte MovementType_FaceDownLeftAndRight_Step3
+	.4byte MovementType_FaceDownLeftAndRight_Step4
 
-gUnknown_83A61C4:: @ 83A61C4
+gDownLeftAndRightDirections:: @ 83A61C4
 	.byte 3 @ DIR_WEST
 	.byte 4 @ DIR_EAST
 	.byte 1 @ DIR_SOUTH
 	.byte 1 @ DIR_SOUTH
 
-gUnknown_83A61C8:: @ 83A61C8
-	.4byte sub_8061738
-	.4byte sub_8061764
-	.4byte sub_8061788
-	.4byte sub_80617B4
+gMovementTypeFuncs_RotateCounterclockwise:: @ 83A61C8
+	.4byte MovementType_RotateCounterclockwise_Step0
+	.4byte MovementType_RotateCounterclockwise_Step1
+	.4byte MovementType_RotateCounterclockwise_Step2
+	.4byte MovementType_RotateCounterclockwise_Step3
 
-gUnknown_83A61D8:: @ 83A61D8
+gCounterclockwiseDirections:: @ 83A61D8
 	.byte 0x01
 	.byte 0x04
 	.byte 0x03
@@ -7331,13 +7331,13 @@ gUnknown_83A61D8:: @ 83A61D8
 	.byte 0x00
 	.byte 0x00
 
-gUnknown_83A61E0:: @ 83A61E0
-	.4byte sub_806183C
-	.4byte sub_8061868
-	.4byte sub_806188C
-	.4byte sub_80618B8
+gMovementTypeFuncs_RotateClockwise:: @ 83A61E0
+	.4byte MovementType_RotateClockwise_Step0
+	.4byte MovementType_RotateClockwise_Step1
+	.4byte MovementType_RotateClockwise_Step2
+	.4byte MovementType_RotateClockwise_Step3
 
-gUnknown_83A61F0:: @ 83A61F0
+gClockwiseDirections:: @ 83A61F0
 	.byte 0x01
 	.byte 0x03
 	.byte 0x04
@@ -7347,312 +7347,312 @@ gUnknown_83A61F0:: @ 83A61F0
 	.byte 0x00
 	.byte 0x00
 
-gUnknown_83A61F8:: @ 83A61F8
-	.4byte sub_8061940
-	.4byte sub_8061954
-	.4byte sub_806198C
-	.4byte sub_8061A44
+gMovementTypeFuncs_WalkBackAndForth:: @ 83A61F8
+	.4byte MovementType_WalkBackAndForth_Step0
+	.4byte MovementType_WalkBackAndForth_Step1
+	.4byte MovementType_WalkBackAndForth_Step2
+	.4byte MovementType_WalkBackAndForth_Step3
 
-gUnknown_83A6208:: @ 83A6208
-	.4byte sub_8061A6C
-	.4byte sub_8061BA0
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpRightLeftDown:: @ 83A6208
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpRightLeftDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6214:: @ 83A6214
+gUpRightLeftDownDirections:: @ 83A6214
 	.byte 2
 	.byte 4
 	.byte 3
 	.byte 1
 
-gUnknown_83A6218:: @ 83A6218
-	.4byte sub_8061A6C
-	.4byte sub_8061C2C
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightLeftDownUp:: @ 83A6218
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightLeftDownUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6224:: @ 83A6224
+gRightLeftDownUpDirections:: @ 83A6224
 	.byte 4
 	.byte 3
 	.byte 1
 	.byte 2
 
-gUnknown_83A6228:: @ 83A6228
-	.4byte sub_8061A6C
-	.4byte sub_8061CB8
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownUpRightLeft:: @ 83A6228
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownUpRightLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6234:: @ 83A6234
+gDownUpRightLeftDirections:: @ 83A6234
 	.byte 1
 	.byte 2
 	.byte 4
 	.byte 3
 
-gUnknown_83A6238:: @ 83A6238
-	.4byte sub_8061A6C
-	.4byte sub_8061D44
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftDownUpRight:: @ 83A6238
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftDownUpRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6244:: @ 83A6244
+gLeftDownUpRightDirections:: @ 83A6244
 	.byte 3
 	.byte 1
 	.byte 2
 	.byte 4
 
-gUnknown_83A6248:: @ 83A6248
-	.4byte sub_8061A6C
-	.4byte sub_8061DD0
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpLeftRightDown:: @ 83A6248
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpLeftRightDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6254:: @ 83A6254
+gUpLeftRightDownDirections:: @ 83A6254
 	.byte 2
 	.byte 3
 	.byte 4
 	.byte 1
 
-gUnknown_83A6258:: @ 83A6258
-	.4byte sub_8061A6C
-	.4byte sub_8061E5C
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftRightDownUp:: @ 83A6258
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftRightDownUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6264:: @ 83A6264
+gLeftRightDownUpDirections:: @ 83A6264
 	.byte 3
 	.byte 4
 	.byte 1
 	.byte 2
 
-gUnknown_83A6268:: @ 83A6268
-	.4byte sub_8061A6C
-	.4byte sub_8061EE8
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownUpLeftRight:: @ 83A6268
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownUpLeftRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6274:: @ 83A6274
-	.4byte sub_8061A6C
-	.4byte sub_8061F74
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightDownUpLeft:: @ 83A6274
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightDownUpLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6280:: @ 83A6280
+gRightDownUpLeftDirections:: @ 83A6280
 	.byte 4
 	.byte 1
 	.byte 2
 	.byte 3
 
-gUnknown_83A6284:: @ 83A6284
-	.4byte sub_8061A6C
-	.4byte sub_8062000
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftUpDownRight:: @ 83A6284
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftUpDownRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6290:: @ 83A6290
+gLeftUpDownRightDirections:: @ 83A6290
 	.byte 3
 	.byte 2
 	.byte 1
 	.byte 4
 
-gUnknown_83A6294:: @ 83A6294
-	.4byte sub_8061A6C
-	.4byte sub_806208C
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpDownRightLeft:: @ 83A6294
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpDownRightLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62A0:: @ 83A62A0
+gUpDownRightLeftDirections:: @ 83A62A0
 	.byte 2
 	.byte 1
 	.byte 4
 	.byte 3
 
-gUnknown_83A62A4:: @ 83A62A4
-	.4byte sub_8061A6C
-	.4byte sub_8062118
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightLeftUpDown:: @ 83A62A4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightLeftUpDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62B0:: @ 83A62B0
+gRightLeftUpDownDirections:: @ 83A62B0
 	.byte 4
 	.byte 3
 	.byte 2
 	.byte 1
 
-gUnknown_83A62B4:: @ 83A62B4
-	.4byte sub_8061A6C
-	.4byte sub_80621A4
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownRightLeftUp:: @ 83A62B4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownRightLeftUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62C0:: @ 83A62C0
+gDownRightLeftUpDirections:: @ 83A62C0
 	.byte 1
 	.byte 4
 	.byte 3
 	.byte 2
 
-gUnknown_83A62C4:: @ 83A62C4
-	.4byte sub_8061A6C
-	.4byte sub_8062230
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightUpDownLeft:: @ 83A62C4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightUpDownLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62D0:: @ 83A62D0
+gRightUpDownLeftDirections:: @ 83A62D0
 	.byte 4
 	.byte 2
 	.byte 1
 	.byte 3
 
-gUnknown_83A62D4:: @ 83A62D4
-	.4byte sub_8061A6C
-	.4byte sub_80622BC
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpDownLeftRight:: @ 83A62D4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpDownLeftRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62E0:: @ 83A62E0
+gUpDownLeftRightDirections:: @ 83A62E0
 	.byte 2
 	.byte 1
 	.byte 3
 	.byte 4
 
-gUnknown_83A62E4:: @ 83A62E4
-	.4byte sub_8061A6C
-	.4byte sub_8062348
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftRightUpDown:: @ 83A62E4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftRightUpDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A62F0:: @ 83A62F0
+gLeftRightUpDownDirections:: @ 83A62F0
 	.byte 3
 	.byte 4
 	.byte 2
 	.byte 1
 
-gUnknown_83A62F4:: @ 83A62F4
-	.4byte sub_8061A6C
-	.4byte sub_80623D4
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownLeftRightUp:: @ 83A62F4
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownLeftRightUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6300:: @ 83A6300
+gDownLeftRightUpDirections:: @ 83A6300
 	.byte 1
 	.byte 3
 	.byte 4
 	.byte 2
 
-gUnknown_83A6304:: @ 83A6304
-	.4byte sub_8061A6C
-	.4byte sub_8062460
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpLeftDownRight:: @ 83A6304
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpLeftDownRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6310:: @ 83A6310
+gUpLeftDownRightDirections:: @ 83A6310
 	.byte 2
 	.byte 3
 	.byte 1
 	.byte 4
 
-gUnknown_83A6314:: @ 83A6314
-	.4byte sub_8061A6C
-	.4byte sub_80624EC
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownRightUpLeft:: @ 83A6314
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownRightUpLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6320:: @ 83A6320
+gDownRightUpLeftDirections:: @ 83A6320
 	.byte 1
 	.byte 4
 	.byte 2
 	.byte 3
 
-gUnknown_83A6324:: @ 83A6324
-	.4byte sub_8061A6C
-	.4byte sub_8062578
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftDownRightUp:: @ 83A6324
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftDownRightUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6330:: @ 83A6330
+gLeftDownRightUpDirections:: @ 83A6330
 	.byte 3
 	.byte 1
 	.byte 4
 	.byte 2
 
-gUnknown_83A6334:: @ 83A6334
-	.4byte sub_8061A6C
-	.4byte sub_8062604
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightUpLeftDown:: @ 83A6334
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightUpLeftDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6340:: @ 83A6340
+gRightUpLeftDownDirections:: @ 83A6340
 	.byte 4
 	.byte 2
 	.byte 3
 	.byte 1
 
-gUnknown_83A6344:: @ 83A6344
-	.4byte sub_8061A6C
-	.4byte sub_8062690
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceUpRightDownLeft:: @ 83A6344
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceUpRightDownLeft_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6350:: @ 83A6350
+gUpRightDownLeftDirections:: @ 83A6350
 	.byte 2
 	.byte 4
 	.byte 1
 	.byte 3
 
-gUnknown_83A6354:: @ 83A6354
-	.4byte sub_8061A6C
-	.4byte sub_806271C
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceDownLeftUpRight:: @ 83A6354
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceDownLeftUpRight_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6360:: @ 83A6360
+gDownLeftUpRightDirections:: @ 83A6360
 	.byte 1
 	.byte 3
 	.byte 2
 	.byte 4
 
-gUnknown_83A6364:: @ 83A6364
-	.4byte sub_8061A6C
-	.4byte sub_80627A8
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceLeftUpRightDown:: @ 83A6364
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceLeftUpRightDown_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6370:: @ 83A6370
+gLeftUpRightDownDirections:: @ 83A6370
 	.byte 3
 	.byte 2
 	.byte 4
 	.byte 1
 
-gUnknown_83A6374:: @ 83A6374
-	.4byte sub_8061A6C
-	.4byte sub_8062834
-	.4byte sub_8061B34
+gMovementTypeFuncs_WalkSequenceRightDownLeftUp:: @ 83A6374
+	.4byte MovementType_WalkSequence_Step0
+	.4byte MovementType_WalkSequenceRightDownLeftUp_Step1
+	.4byte MovementType_WalkSequence_Step2
 
-gUnknown_83A6380:: @ 83A6380
+gRightDownLeftUpDirections:: @ 83A6380
 	.byte 4
 	.byte 1
 	.byte 3
 	.byte 2
 
-gUnknown_83A6384:: @ 83A6384
-	.4byte mss_npc_reset_oampriv3_1_unk2_unk3
-	.4byte sub_80628E4
-	.4byte sub_8062944
+gMovementTypeFuncs_CopyPlayer:: @ 83A6384
+	.4byte MovementType_CopyPlayer_Step0
+	.4byte MovementType_CopyPlayer_Step1
+	.4byte MovementType_CopyPlayer_Step2
 
-gUnknown_83A6390:: @ 83A6390
-	.4byte sub_806296C
-	.4byte sub_8062970
-	.4byte sub_80629B8
-	.4byte sub_8062A70
-	.4byte sub_8062B28
-	.4byte sub_8062BE0
+gCopyPlayerMovementFuncs:: @ 83A6390
+	.4byte CopyablePlayerMovement_None
+	.4byte CopyablePlayerMovement_FaceDirection
+	.4byte CopyablePlayerMovement_GoSpeed0
+	.4byte CopyablePlayerMovement_GoSpeed1
+	.4byte CopyablePlayerMovement_GoSpeed2
+	.4byte CopyablePlayerMovement_Slide
 	.4byte cph_IM_DIFFERENT
-	.4byte sub_8062CE0
-	.4byte oac_hopping
-	.4byte sub_806296C
-	.4byte sub_806296C
+	.4byte CopyablePlayerMovement_GoSpeed4
+	.4byte CopyablePlayerMovement_Jump
+	.4byte CopyablePlayerMovement_None
+	.4byte CopyablePlayerMovement_None
 
-gUnknown_83A63BC:: @ 83A63BC
-	.4byte mss_npc_reset_oampriv3_1_unk2_unk3
-	.4byte mss_08062EA4
-	.4byte sub_8062944
+gMovementTypeFuncs_CopyPlayerInGrass:: @ 83A63BC
+	.4byte MovementType_CopyPlayer_Step0
+	.4byte MovementType_CopyPlayerInGrass_Step1
+	.4byte MovementType_CopyPlayer_Step2
 
-gUnknown_83A63C8:: @ 83A63C8
-	.4byte sub_8063078
+gMovementTypeFuncs_Hidden:: @ 83A63C8
+	.4byte MovementType_Hidden_Step0
 
-gUnknown_83A63CC:: @ 83A63CC
-	.4byte sub_80630E4
-	.4byte sub_8063084
+gMovementTypeFuncs_WalkInPlace:: @ 83A63CC
+	.4byte MovementType_WalkInPlace_Step0
+	.4byte MovementType_MoveInPlace_Step1
 
-gUnknown_83A63D4:: @ 83A63D4
-	.4byte sub_8063154
-	.4byte sub_8063084
+gMovementTypeFuncs_WalkSlowlyInPlace:: @ 83A63D4
+	.4byte MovementType_WalkSlowlyInPlace_Step0
+	.4byte MovementType_MoveInPlace_Step1
 
-gUnknown_83A63DC:: @ 83A63DC
-	.4byte sub_80631C4
-	.4byte sub_8063084
+gMovementTypeFuncs_JogInPlace:: @ 83A63DC
+	.4byte MovementType_JogInPlace_Step0
+	.4byte MovementType_MoveInPlace_Step1
 
-gUnknown_83A63E4:: @ 83A63E4
-	.4byte sub_8063234
-	.4byte sub_8063268
-	.4byte sub_8063288
+gMovementTypeFuncs_Invisible:: @ 83A63E4
+	.4byte MovementType_Invisible_Step0
+	.4byte MovementType_Invisible_Step1
+	.4byte MovementType_Invisible_Step2
 
 gUnknown_83A63F0:: @ 83A63F0
 	.4byte sub_8063364
@@ -7668,7 +7668,7 @@ gUnknown_83A6404:: @ 83A6404
 	.4byte sub_80633F4
 
 @ gFaceDirectionAnimNums ?
-gUnknown_83A640C:: @ 83A640C
+gFaceDirectionAnimNums:: @ 83A640C
 	.byte 0x00
 	.byte 0x00
 	.byte 0x01
@@ -7679,7 +7679,7 @@ gUnknown_83A640C:: @ 83A640C
 	.byte 0x01
 	.byte 0x01
 
-gUnknown_83A6415:: @ 83A6415
+gMoveDirectionAnimNums:: @ 83A6415
 	.byte 0x4 @ DIR_NONE
 	.byte 0x4 @ DIR_SOUTH
 	.byte 0x5 @ DIR_NORTH
@@ -7690,7 +7690,7 @@ gUnknown_83A6415:: @ 83A6415
 	.byte 0x5 @ DIR_NORTHWEST
 	.byte 0x5 @ DIR_NORTHEAST
 
-gUnknown_83A641E:: @ 83A641E
+gMoveDirectionFastAnimNums:: @ 83A641E
 	.byte 0x8 @ DIR_NONE
 	.byte 0x8 @ DIR_SOUTH
 	.byte 0x9 @ DIR_NORTH
@@ -7701,7 +7701,7 @@ gUnknown_83A641E:: @ 83A641E
 	.byte 0x9 @ DIR_NORTHWEST
 	.byte 0x9 @ DIR_NORTHEAST
 
-gUnknown_83A6427:: @ 83A6427
+gMoveDirectionFasterAnimNums:: @ 83A6427
 	.byte 0xC @ DIR_NONE
 	.byte 0xC @ DIR_SOUTH
 	.byte 0xD @ DIR_NORTH
@@ -7712,7 +7712,7 @@ gUnknown_83A6427:: @ 83A6427
 	.byte 0xD @ DIR_NORTHWEST
 	.byte 0xD @ DIR_NORTHEAST
 
-gUnknown_83A6430:: @ 83A6430
+gMoveDirectionFastestAnimNums:: @ 83A6430
 	.byte 0x10 @ DIR_NONE
 	.byte 0x10 @ DIR_SOUTH
 	.byte 0x11 @ DIR_NORTH
@@ -7723,7 +7723,7 @@ gUnknown_83A6430:: @ 83A6430
 	.byte 0x11 @ DIR_NORTHWEST
 	.byte 0x11 @ DIR_NORTHEAST
 
-gUnknown_83A6439:: @ 83A6439
+gJumpSpecialDirectionAnimNums:: @ 83A6439
 	.byte 0x14 @ DIR_NONE
 	.byte 0x14 @ DIR_SOUTH
 	.byte 0x15 @ DIR_NORTH
@@ -7734,7 +7734,7 @@ gUnknown_83A6439:: @ 83A6439
 	.byte 0x15 @ DIR_NORTHWEST
 	.byte 0x15 @ DIR_NORTHEAST
 
-gUnknown_83A6442:: @ 83A6442
+gAcroWheelieDirectionAnimNums:: @ 83A6442
 	.byte 0x14 @ DIR_NONE
 	.byte 0x14 @ DIR_SOUTH
 	.byte 0x15 @ DIR_NORTH
@@ -7745,7 +7745,7 @@ gUnknown_83A6442:: @ 83A6442
 	.byte 0x15 @ DIR_NORTHWEST
 	.byte 0x15 @ DIR_NORTHEAST
 
-gUnknown_83A644B:: @ 83A644B
+gUnrefAnimNums_080634A0:: @ 83A644B
 	.byte 0x18 @ DIR_NONE
 	.byte 0x18 @ DIR_SOUTH
 	.byte 0x19 @ DIR_NORTH
@@ -7756,7 +7756,7 @@ gUnknown_83A644B:: @ 83A644B
 	.byte 0x19 @ DIR_NORTHWEST
 	.byte 0x19 @ DIR_NORTHEAST
 
-gUnknown_83A6454:: @ 83A6454
+gAcroEndWheelieDirectionAnimNums:: @ 83A6454
 	.byte 0x1C @ DIR_NONE
 	.byte 0x1C @ DIR_SOUTH
 	.byte 0x1D @ DIR_NORTH
@@ -7767,7 +7767,7 @@ gUnknown_83A6454:: @ 83A6454
 	.byte 0x1D @ DIR_NORTHWEST
 	.byte 0x1D @ DIR_NORTHEAST
 
-gUnknown_83A645D:: @ 83A645D
+gAcroUnusedActionDirectionAnimNums:: @ 83A645D
 	.byte 0x18 @ DIR_NONE
 	.byte 0x18 @ DIR_SOUTH
 	.byte 0x19 @ DIR_NORTH
@@ -7778,7 +7778,7 @@ gUnknown_83A645D:: @ 83A645D
 	.byte 0x1A @ DIR_NORTHWEST
 	.byte 0x1B @ DIR_NORTHEAST
 
-gUnknown_83A6466:: @ 83A6466
+gAcroWheeliePedalDirectionAnimNums:: @ 83A6466
 	.byte 0x20 @ DIR_NONE
 	.byte 0x20 @ DIR_SOUTH
 	.byte 0x21 @ DIR_NORTH
@@ -7789,7 +7789,7 @@ gUnknown_83A6466:: @ 83A6466
 	.byte 0x21 @ DIR_NORTHWEST
 	.byte 0x21 @ DIR_NORTHEAST
 
-gUnknown_83A646F:: @ 83A646F
+gFishingDirectionAnimNums:: @ 83A646F
 	.byte 0x24 @ DIR_NONE
 	.byte 0x24 @ DIR_SOUTH
 	.byte 0x25 @ DIR_NORTH
@@ -7800,7 +7800,7 @@ gUnknown_83A646F:: @ 83A646F
 	.byte 0x25 @ DIR_NORTHWEST
 	.byte 0x25 @ DIR_NORTHEAST
 
-gUnknown_83A6478:: @ 83A6478
+gFishingNoCatchDirectionAnimNums:: @ 83A6478
 	.byte 0x0 @ DIR_NONE
 	.byte 0x0 @ DIR_SOUTH
 	.byte 0x1 @ DIR_NORTH
@@ -7811,7 +7811,7 @@ gUnknown_83A6478:: @ 83A6478
 	.byte 0x1 @ DIR_NORTHWEST
 	.byte 0x1 @ DIR_NORTHEAST
 
-gUnknown_83A6481:: @ 83A6481
+gFishingBiteDirectionAnimNums:: @ 83A6481
 	.byte 0x4 @ DIR_NONE
 	.byte 0x4 @ DIR_SOUTH
 	.byte 0x5 @ DIR_NORTH
@@ -7833,7 +7833,7 @@ gUnknown_83A648A:: @ 83A648A
 	.byte 0x9 @ DIR_NORTHWEST
 	.byte 0x9 @ DIR_NORTHEAST
 
-gUnknown_83A6493:: @ 83A6493
+gRunningDirectionAnimNums:: @ 83A6493
 	.byte 0x14 @ DIR_NONE
 	.byte 0x14 @ DIR_SOUTH
 	.byte 0x15 @ DIR_NORTH
@@ -7844,7 +7844,7 @@ gUnknown_83A6493:: @ 83A6493
 	.byte 0x15 @ DIR_NORTHWEST
 	.byte 0x15 @ DIR_NORTHEAST
 
-gUnknown_83A649C:: @ 83A649C
+gTrainerFacingDirectionMovementTypes:: @ 83A649C
 	.byte 0x08
 	.byte 0x08
 	.byte 0x07
@@ -7858,20 +7858,20 @@ gUnknown_83A649C:: @ 83A649C
 	.byte 0x00
 	.byte 0x00
 
-gUnknown_83A64A8:: @ 83A64A8
+gOppositeDirectionBlockedMetatileFuncs:: @ 83A64A8
 	.4byte MetatileBehavior_IsSouthBlocked
 	.4byte MetatileBehavior_IsNorthBlocked
 	.4byte MetatileBehavior_IsWestBlocked
 	.4byte MetatileBehavior_IsEastBlocked
 
-gUnknown_83A64B8:: @ 83A64B8
+gDirectionBlockedMetatileFuncs:: @ 83A64B8
 	.4byte MetatileBehavior_IsNorthBlocked
 	.4byte MetatileBehavior_IsSouthBlocked
 	.4byte MetatileBehavior_IsEastBlocked
 	.4byte MetatileBehavior_IsWestBlocked
 
 @ sDirectionToVectors
-gUnknown_83A64C8:: @ 83A64C8
+sDirectionToVectors:: @ 83A64C8
 	.2byte  0,  0 @ DIR_NONE
 	.2byte  0,  1 @ DIR_SOUTH
 	.2byte  0, -1 @ DIR_NORTH
@@ -7883,14 +7883,14 @@ gUnknown_83A64C8:: @ 83A64C8
 	.2byte  1, -1 @ DIR_NORTHEAST
 
 @ gFaceDirectionMovementActions
-gUnknown_83A64EC:: @ 83A64EC
+gFaceDirectionMovementActions:: @ 83A64EC
 	.byte 0x0 @ DIR_NONE
 	.byte 0x0 @ DIR_SOUTH
 	.byte 0x1 @ DIR_NORTH
 	.byte 0x2 @ DIR_WEST
 	.byte 0x3 @ DIR_EAST
 
-gUnknown_83A64F1:: @ 83A64F1
+gWalkSlowMovementActions:: @ 83A64F1
 	.byte 0x4 @ DIR_NONE
 	.byte 0x4 @ DIR_SOUTH
 	.byte 0x5 @ DIR_NORTH
@@ -8115,7 +8115,7 @@ gUnknown_83A658C:: @ 83A658C
 	.byte 0x93 @ DIR_EAST
 
 @ gOppositeDirections ?
-gUnknown_83A6591:: @ 83A6591
+gOppositeDirections:: @ 83A6591
 	.byte 0x02
 	.byte 0x01
 	.byte 0x04
@@ -8165,7 +8165,7 @@ gUnknown_83A65A9:: @ 83A65A9
 	.byte 0x00
 
 @ gMovementActionFuncs
-gUnknown_83A65BC:: @ 83A65BC
+gMovementActionFuncs:: @ 83A65BC
 	.4byte gUnknown_83A6864
 	.4byte gUnknown_83A686C
 	.4byte gUnknown_83A6874
@@ -8338,107 +8338,107 @@ gUnknown_83A65BC:: @ 83A65BC
 	.4byte gUnknown_83A6C60
 
 gUnknown_83A6864:: @ 83A6864
-	.4byte sub_8064638
-	.4byte sub_8067934
+	.4byte MovementAction_FaceDown_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A686C:: @ 83A686C
-	.4byte sub_8064648
-	.4byte sub_8067934
+	.4byte MovementAction_FaceUp_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6874:: @ 83A6874
-	.4byte sub_8064658
-	.4byte sub_8067934
+	.4byte MovementAction_FaceLeft_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A687C:: @ 83A687C
-	.4byte sub_8064668
-	.4byte sub_8067934
+	.4byte MovementAction_FaceRight_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6884:: @ 83A6884
-	.4byte get_go_image_anim_num
-	.4byte get_go_fast_image_anim_num
-	.4byte get_go_fast_image_anim_num
-	.4byte get_go_faster_image_anim_num
-	.4byte sub_8063470
+	.4byte GetMoveDirectionAnimNum
+	.4byte GetMoveDirectionFastAnimNum
+	.4byte GetMoveDirectionFastAnimNum
+	.4byte GetMoveDirectionFasterAnimNum
+	.4byte GetMoveDirectionFastestAnimNum
 
 gUnknown_83A6898:: @ 83A6898
 	.4byte sub_8064968
 	.4byte sub_8064988
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68A4:: @ 83A68A4
 	.4byte sub_80649A8
 	.4byte sub_80649C8
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68B0:: @ 83A68B0
 	.4byte sub_80649E8
 	.4byte sub_8064A08
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68BC:: @ 83A68BC
 	.4byte sub_8064A28
 	.4byte sub_8064A48
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68C8:: @ 83A68C8
 	.4byte sub_8064A68
 	.4byte sub_8064A88
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68D4:: @ 83A68D4
 	.4byte sub_8064AA8
 	.4byte sub_8064AC8
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68E0:: @ 83A68E0
 	.4byte sub_8064AE8
 	.4byte sub_8064B08
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68EC:: @ 83A68EC
 	.4byte sub_8064B28
 	.4byte sub_8064B48
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A68F8:: @ 83A68F8
 	.4byte sub_8064C3C
 	.4byte sub_8064C5C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6904:: @ 83A6904
 	.4byte sub_8064C7C
 	.4byte sub_8064C9C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6910:: @ 83A6910
 	.4byte sub_8064CBC
 	.4byte sub_8064CDC
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A691C:: @ 83A691C
 	.4byte sub_8064CFC
 	.4byte sub_8064D1C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6928:: @ 83A6928
-	.4byte sub_8064D3C
-	.4byte sub_8064D5C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkNormalDown_Step0
+	.4byte MovementAction_WalkNormalDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6934:: @ 83A6934
-	.4byte sub_8064D7C
-	.4byte sub_8064D9C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkNormalUp_Step0
+	.4byte MovementAction_WalkNormalUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6940:: @ 83A6940
-	.4byte sub_8064DBC
-	.4byte sub_8064DDC
-	.4byte sub_8067934
+	.4byte MovementAction_WalkNormalLeft_Step0
+	.4byte MovementAction_WalkNormalLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A694C:: @ 83A694C
-	.4byte sub_8064DFC
-	.4byte sub_8064E1C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkNormalRight_Step0
+	.4byte MovementAction_WalkNormalRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6958:: @ 83A6958
 	.2byte 0x0000
@@ -8451,710 +8451,710 @@ gUnknown_83A695E:: @ 83A695E
 	.2byte 0x0001
 
 gUnknown_83A6964:: @ 83A6964
-	.4byte sub_80650A8
-	.4byte sub_80650D4
-	.4byte sub_8067934
+	.4byte MovementAction_Jump2Down_Step0
+	.4byte MovementAction_Jump2Down_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6970:: @ 83A6970
-	.4byte sub_8065100
-	.4byte sub_806512C
-	.4byte sub_8067934
+	.4byte MovementAction_Jump2Up_Step0
+	.4byte MovementAction_Jump2Up_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A697C:: @ 83A697C
-	.4byte sub_8065158
-	.4byte sub_8065184
-	.4byte sub_8067934
+	.4byte MovementAction_Jump2Left_Step0
+	.4byte MovementAction_Jump2Left_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6988:: @ 83A6988
-	.4byte sub_80651B0
-	.4byte sub_80651DC
-	.4byte sub_8067934
+	.4byte MovementAction_Jump2Right_Step0
+	.4byte MovementAction_Jump2Right_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6994:: @ 83A6994
-	.4byte sub_806522C
-	.4byte sub_8065210
-	.4byte sub_8067930
+	.4byte MovementAction_Delay1_Step0
+	.4byte MovementAction_Delay_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A69A0:: @ 83A69A0
-	.4byte sub_806524C
-	.4byte sub_8065210
-	.4byte sub_8067930
+	.4byte MovementAction_Delay2_Step0
+	.4byte MovementAction_Delay_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A69AC:: @ 83A69AC
-	.4byte sub_806526C
-	.4byte sub_8065210
-	.4byte sub_8067930
+	.4byte MovementAction_Delay4_Step0
+	.4byte MovementAction_Delay_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A69B8:: @ 83A69B8
-	.4byte sub_806528C
-	.4byte sub_8065210
-	.4byte sub_8067930
+	.4byte MovementAction_Delay8_Step0
+	.4byte MovementAction_Delay_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A69C4:: @ 83A69C4
-	.4byte sub_80652AC
-	.4byte sub_8065210
-	.4byte sub_8067930
+	.4byte MovementAction_Delay16_Step0
+	.4byte MovementAction_Delay_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A69D0:: @ 83A69D0
-	.4byte sub_80652CC
-	.4byte sub_80652EC
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastDown_Step0
+	.4byte MovementAction_WalkFastDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A69DC:: @ 83A69DC
-	.4byte sub_806530C
-	.4byte sub_806532C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastUp_Step0
+	.4byte MovementAction_WalkFastUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A69E8:: @ 83A69E8
-	.4byte sub_806534C
-	.4byte sub_806536C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastLeft_Step0
+	.4byte MovementAction_WalkFastLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A69F4:: @ 83A69F4
-	.4byte sub_806538C
-	.4byte sub_80653AC
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastRight_Step0
+	.4byte MovementAction_WalkFastRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A00:: @ 83A6A00
 	.4byte sub_80653F8
 	.4byte sub_8065438
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A0C:: @ 83A6A0C
 	.4byte sub_8065464
 	.4byte sub_80654A4
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A18:: @ 83A6A18
 	.4byte sub_80654D0
 	.4byte sub_8065510
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A24:: @ 83A6A24
 	.4byte sub_806553C
 	.4byte sub_806557C
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A30:: @ 83A6A30
 	.4byte sub_80655D4
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A38:: @ 83A6A38
 	.4byte sub_8065610
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A40:: @ 83A6A40
 	.4byte sub_806564C
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A48:: @ 83A6A48
 	.4byte sub_8065688
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6A50:: @ 83A6A50
-	.4byte sub_8065770
-	.4byte sub_8065734
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceSlowDown_Step0
+	.4byte MovementAction_WalkInPlaceSlow_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A5C:: @ 83A6A5C
-	.4byte sub_80657A8
-	.4byte sub_8065734
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceSlowUp_Step0
+	.4byte MovementAction_WalkInPlaceSlow_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A68:: @ 83A6A68
-	.4byte sub_80657E0
-	.4byte sub_8065734
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceSlowLeft_Step0
+	.4byte MovementAction_WalkInPlaceSlow_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A74:: @ 83A6A74
-	.4byte sub_8065818
-	.4byte sub_8065734
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceSlowRight_Step0
+	.4byte MovementAction_WalkInPlaceSlow_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A80:: @ 83A6A80
-	.4byte sub_8065850
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceNormalDown_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A8C:: @ 83A6A8C
-	.4byte sub_8065888
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceNormalUp_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6A98:: @ 83A6A98
-	.4byte sub_80658C0
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceNormalLeft_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AA4:: @ 83A6AA4
-	.4byte sub_80658F8
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceNormalRight_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AB0:: @ 83A6AB0
-	.4byte sub_8065930
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastDown_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6ABC:: @ 83A6ABC
-	.4byte sub_8065968
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastUp_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AC8:: @ 83A6AC8
-	.4byte sub_80659A0
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastLeft_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AD4:: @ 83A6AD4
-	.4byte sub_80659D8
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastRight_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AE0:: @ 83A6AE0
-	.4byte sub_8065A10
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastestDown_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AEC:: @ 83A6AEC
-	.4byte sub_8065A48
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastestUp_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6AF8:: @ 83A6AF8
-	.4byte sub_8065A80
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastestLeft_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B04:: @ 83A6B04
-	.4byte sub_8065AB8
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlaceFastestRight_Step0
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B10:: @ 83A6B10
-	.4byte sub_8065AF0
-	.4byte sub_8065B10
-	.4byte sub_8067934
+	.4byte MovementAction_RideWaterCurrentDown_Step0
+	.4byte MovementAction_RideWaterCurrentDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B1C:: @ 83A6B1C
-	.4byte sub_8065B30
-	.4byte sub_8065B50
-	.4byte sub_8067934
+	.4byte MovementAction_RideWaterCurrentUp_Step0
+	.4byte MovementAction_RideWaterCurrentUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B28:: @ 83A6B28
-	.4byte sub_8065B70
-	.4byte sub_8065B90
-	.4byte sub_8067934
+	.4byte MovementAction_RideWaterCurrentLeft_Step0
+	.4byte MovementAction_RideWaterCurrentLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B34:: @ 83A6B34
-	.4byte sub_8065BB0
-	.4byte sub_8065BD0
-	.4byte sub_8067934
+	.4byte MovementAction_RideWaterCurrentRight_Step0
+	.4byte MovementAction_RideWaterCurrentRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B40:: @ 83A6B40
-	.4byte sub_8065BF0
-	.4byte sub_8065C10
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastestDown_Step0
+	.4byte MovementAction_WalkFastestDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B4C:: @ 83A6B4C
-	.4byte sub_8065C30
-	.4byte sub_8065C50
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastestUp_Step0
+	.4byte MovementAction_WalkFastestUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B58:: @ 83A6B58
-	.4byte sub_8065C70
-	.4byte sub_8065C90
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastestLeft_Step0
+	.4byte MovementAction_WalkFastestLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B64:: @ 83A6B64
-	.4byte sub_8065CB0
-	.4byte sub_8065CD0
-	.4byte sub_8067934
+	.4byte MovementAction_WalkFastestRight_Step0
+	.4byte MovementAction_WalkFastestRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B70:: @ 83A6B70
-	.4byte sub_8065CF0
-	.4byte sub_8065D10
-	.4byte sub_8067934
+	.4byte MovementAction_SlideDown_Step0
+	.4byte MovementAction_SlideDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B7C:: @ 83A6B7C
-	.4byte sub_8065D30
-	.4byte sub_8065D50
-	.4byte sub_8067934
+	.4byte MovementAction_SlideUp_Step0
+	.4byte MovementAction_SlideUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B88:: @ 83A6B88
-	.4byte sub_8065D70
-	.4byte sub_8065D90
-	.4byte sub_8067934
+	.4byte MovementAction_SlideLeft_Step0
+	.4byte MovementAction_SlideLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6B94:: @ 83A6B94
-	.4byte sub_8065DB0
-	.4byte sub_8065DD0
-	.4byte sub_8067934
+	.4byte MovementAction_SlideRight_Step0
+	.4byte MovementAction_SlideRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BA0:: @ 83A6BA0
-	.4byte do_run_south_anim
-	.4byte sub_8065E10
-	.4byte sub_8067934
+	.4byte MovementAction_PlayerRunDown_Step0
+	.4byte MovementAction_PlayerRunDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BAC:: @ 83A6BAC
-	.4byte do_run_north_anim
-	.4byte sub_8065E50
-	.4byte sub_8067934
+	.4byte MovementAction_PlayerRunUp_Step0
+	.4byte MovementAction_PlayerRunUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BB8:: @ 83A6BB8
-	.4byte do_run_west_anim
-	.4byte sub_8065E90
-	.4byte sub_8067934
+	.4byte MovementAction_PlayerRunLeft_Step0
+	.4byte MovementAction_PlayerRunLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BC4:: @ 83A6BC4
-	.4byte do_run_east_anim
-	.4byte sub_8065ED0
-	.4byte sub_8067934
+	.4byte MovementAction_PlayerRunRight_Step0
+	.4byte MovementAction_PlayerRunRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BD0:: @ 83A6BD0
 	.4byte sub_8065FC4
 	.4byte sub_8065FE4
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BDC:: @ 83A6BDC
 	.4byte sub_8066004
 	.4byte sub_8066024
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BE8:: @ 83A6BE8
 	.4byte sub_8066044
 	.4byte sub_8066064
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6BF4:: @ 83A6BF4
 	.4byte sub_8066084
 	.4byte sub_80660A4
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C00:: @ 83A6C00
-	.4byte sub_80660F0
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_StartAnimInDirection_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C0C:: @ 83A6C0C
-	.4byte sub_806615C
-	.4byte sub_806617C
-	.4byte sub_8067934
+	.4byte MovementAction_JumpSpecialDown_Step0
+	.4byte MovementAction_JumpSpecialDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C18:: @ 83A6C18
-	.4byte sub_80661A4
-	.4byte sub_80661C4
-	.4byte sub_8067934
+	.4byte MovementAction_JumpSpecialUp_Step0
+	.4byte MovementAction_JumpSpecialUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C24:: @ 83A6C24
-	.4byte sub_80661EC
-	.4byte sub_806620C
-	.4byte sub_8067934
+	.4byte MovementAction_JumpSpecialLeft_Step0
+	.4byte MovementAction_JumpSpecialLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C30:: @ 83A6C30
-	.4byte sub_8066234
-	.4byte sub_8066254
-	.4byte sub_8067934
+	.4byte MovementAction_JumpSpecialRight_Step0
+	.4byte MovementAction_JumpSpecialRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C3C:: @ 83A6C3C
 	.4byte sub_806627C
 	.4byte sub_806629C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C48:: @ 83A6C48
 	.4byte sub_80662BC
 	.4byte sub_80662DC
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C54:: @ 83A6C54
 	.4byte sub_80662FC
 	.4byte sub_806631C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C60:: @ 83A6C60
 	.4byte sub_806633C
 	.4byte sub_806635C
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C6C:: @ 83A6C6C
-	.4byte sub_806637C
-	.4byte sub_8067934
+	.4byte MovementAction_FacePlayer_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C74:: @ 83A6C74
-	.4byte sub_80663D8
-	.4byte sub_8067934
+	.4byte MovementAction_FaceAwayPlayer_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C7C:: @ 83A6C7C
-	.4byte sub_806643C
-	.4byte sub_8067934
+	.4byte MovementAction_LockFacingDirection_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C84:: @ 83A6C84
-	.4byte sub_806644C
-	.4byte sub_8067934
+	.4byte MovementAction_UnlockFacingDirection_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C8C:: @ 83A6C8C
-	.4byte sub_806645C
-	.4byte sub_8066488
-	.4byte sub_8067934
+	.4byte MovementAction_JumpDown_Step0
+	.4byte MovementAction_JumpDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6C98:: @ 83A6C98
-	.4byte sub_80664B4
-	.4byte sub_80664E0
-	.4byte sub_8067934
+	.4byte MovementAction_JumpUp_Step0
+	.4byte MovementAction_JumpUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CA4:: @ 83A6CA4
-	.4byte sub_806650C
-	.4byte sub_8066538
-	.4byte sub_8067934
+	.4byte MovementAction_JumpLeft_Step0
+	.4byte MovementAction_JumpLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CB0:: @ 83A6CB0
-	.4byte sub_8066564
-	.4byte sub_8066590
-	.4byte sub_8067934
+	.4byte MovementAction_JumpRight_Step0
+	.4byte MovementAction_JumpRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CBC:: @ 83A6CBC
-	.4byte sub_80665BC
-	.4byte sub_80665E8
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceDown_Step0
+	.4byte MovementAction_JumpInPlaceDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CC8:: @ 83A6CC8
-	.4byte sub_8066614
-	.4byte sub_8066640
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceUp_Step0
+	.4byte MovementAction_JumpInPlaceUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CD4:: @ 83A6CD4
-	.4byte sub_806666C
-	.4byte sub_8066698
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceLeft_Step0
+	.4byte MovementAction_JumpInPlaceLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CE0:: @ 83A6CE0
-	.4byte sub_80666C4
-	.4byte sub_80666F0
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceRight_Step0
+	.4byte MovementAction_JumpInPlaceRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CEC:: @ 83A6CEC
-	.4byte sub_806671C
-	.4byte sub_8066748
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceDownUp_Step0
+	.4byte MovementAction_JumpInPlaceDownUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6CF8:: @ 83A6CF8
-	.4byte sub_8066774
-	.4byte sub_80667A0
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceUpDown_Step0
+	.4byte MovementAction_JumpInPlaceUpDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6D04:: @ 83A6D04
-	.4byte sub_80667CC
-	.4byte sub_80667F8
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceLeftRight_Step0
+	.4byte MovementAction_JumpInPlaceLeftRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6D10:: @ 83A6D10
-	.4byte sub_8066824
-	.4byte sub_8066850
-	.4byte sub_8067934
+	.4byte MovementAction_JumpInPlaceRightLeft_Step0
+	.4byte MovementAction_JumpInPlaceRightLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6D1C:: @ 83A6D1C
-	.4byte sub_806687C
-	.4byte sub_8067934
+	.4byte MovementAction_FaceOriginalDirection_Step0
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6D24:: @ 83A6D24
-	.4byte sub_8066894
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_NurseJoyBowDown_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6D30:: @ 83A6D30
-	.4byte sub_80668A4
-	.4byte sub_8067930
+	.4byte MovementAction_EnableJumpLandingGroundEffect_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D38:: @ 83A6D38
-	.4byte sub_80668B4
-	.4byte sub_8067930
+	.4byte MovementAction_DisableJumpLandingGroundEffect_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D40:: @ 83A6D40
-	.4byte sub_80668C4
-	.4byte sub_8067930
+	.4byte MovementAction_DisableAnimation_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D48:: @ 83A6D48
-	.4byte sub_80668D4
-	.4byte sub_8067930
+	.4byte MovementAction_RestoreAnimation_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D50:: @ 83A6D50
-	.4byte sub_8066900
-	.4byte sub_8067930
+	.4byte MovementAction_SetInvisible_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D58:: @ 83A6D58
-	.4byte sub_8066910
-	.4byte sub_8067930
+	.4byte MovementAction_SetVisible_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D60:: @ 83A6D60
-	.4byte do_exclamation_mark_bubble_1
-	.4byte sub_8067930
+	.4byte MovementAction_EmoteExclamationMark_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D68:: @ 83A6D68
-	.4byte do_exclamation_mark_bubble_2
-	.4byte sub_8067930
+	.4byte MovementAction_EmoteQuestionMark_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D70:: @ 83A6D70
-	.4byte do_heart_bubble
-	.4byte sub_8067930
+	.4byte MovementAction_EmoteHeart_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D78:: @ 83A6D78
 	.4byte sub_806698C
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D80:: @ 83A6D80
 	.4byte sub_80669B0
-	.4byte sub_8067930
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D88:: @ 83A6D88
-	.4byte sub_80669D4
-	.4byte sub_8066A18
-	.4byte sub_8067930
+	.4byte MovementAction_RevealTrainer_Step0
+	.4byte MovementAction_RevealTrainer_Step1
+	.4byte MovementAction_Finish
 
 gUnknown_83A6D94:: @ 83A6D94
-	.4byte sub_8066A38
-	.4byte sub_8066A54
-	.4byte sub_8066A78
-	.4byte sub_8067930
+	.4byte MovementAction_RockSmashBreak_Step0
+	.4byte MovementAction_RockSmashBreak_Step1
+	.4byte MovementAction_RockSmashBreak_Step2
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DA4:: @ 83A6DA4
-	.4byte sub_8066AB4
-	.4byte sub_8066AD0
-	.4byte sub_8066AF4
-	.4byte sub_8067930
+	.4byte MovementAction_CutTree_Step0
+	.4byte MovementAction_CutTree_Step1
+	.4byte MovementAction_CutTree_Step2
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DB4:: @ 83A6DB4
-	.4byte sub_8066B30
-	.4byte sub_8067930
+	.4byte MovementAction_SetFixedPriority_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DBC:: @ 83A6DBC
-	.4byte sub_8066B40
-	.4byte sub_8067930
+	.4byte MovementAction_ClearFixedPriority_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DC4:: @ 83A6DC4
-	.4byte sub_8066B50
-	.4byte sub_8067930
+	.4byte MovementAction_InitAffineAnim_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DCC:: @ 83A6DCC
-	.4byte sub_8066B80
-	.4byte sub_8067930
+	.4byte MovementAction_ClearAffineAnim_Step0
+	.4byte MovementAction_Finish
 
 gUnknown_83A6DD4:: @ 83A6DD4
-	.4byte sub_8066BB0
-	.4byte sub_8066BE4
-	.4byte sub_8067934
+	.4byte MovementAction_WalkDownStartAffine_Step0
+	.4byte MovementAction_WalkDownStartAffine_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6DE0:: @ 83A6DE0
-	.4byte sub_8066C10
-	.4byte sub_8066C44
-	.4byte sub_8067934
+	.4byte MovementAction_WalkDownAffine_Step0
+	.4byte MovementAction_WalkDownAffine_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6DEC:: @ 83A6DEC
 	.4byte sub_8066CB0
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6DF4:: @ 83A6DF4
 	.4byte sub_8066CC0
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6DFC:: @ 83A6DFC
 	.4byte sub_8066CD0
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E04:: @ 83A6E04
 	.4byte sub_8066CE0
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E0C:: @ 83A6E0C
-	.4byte sub_8066CF0
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieDown_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E18:: @ 83A6E18
-	.4byte sub_8066D14
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieUp_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E24:: @ 83A6E24
-	.4byte sub_8066D38
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieLeft_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E30:: @ 83A6E30
-	.4byte sub_8066D5C
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieRight_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E3C:: @ 83A6E3C
-	.4byte sub_8066D80
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroEndWheelieFaceDown_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E48:: @ 83A6E48
-	.4byte sub_8066DA4
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroEndWheelieFaceUp_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E54:: @ 83A6E54
-	.4byte sub_8066DC8
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroEndWheelieFaceLeft_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E60:: @ 83A6E60
-	.4byte sub_8066DEC
-	.4byte sub_8066108
-	.4byte sub_8067934
-	.4byte sub_8066E10
-	.4byte sub_8066108
-	.4byte sub_8067934
-	.4byte sub_8066E34
-	.4byte sub_8066108
-	.4byte sub_8067934
-	.4byte sub_8066E58
-	.4byte sub_8066108
-	.4byte sub_8067934
-	.4byte sub_8066E7C
-	.4byte sub_8066108
-	.4byte sub_8067934
+	.4byte MovementAction_AcroEndWheelieFaceRight_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
+	.4byte MovementAction_UnusedAcroActionDown_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
+	.4byte MovementAction_UnusedAcroActionUp_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
+	.4byte MovementAction_UnusedAcroActionLeft_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
+	.4byte MovementAction_UnusedAcroActionRight_Step0
+	.4byte MovementAction_WaitSpriteAnim
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6E9C:: @ 83A6E9C
-	.4byte sub_8066EE4
-	.4byte sub_8066F10
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopFaceDown_Step0
+	.4byte MovementAction_AcroWheelieHopFaceDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EA8:: @ 83A6EA8
-	.4byte sub_8066F3C
-	.4byte sub_8066F68
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopFaceUp_Step0
+	.4byte MovementAction_AcroWheelieHopFaceUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EB4:: @ 83A6EB4
-	.4byte sub_8066F94
-	.4byte sub_8066FC0
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopFaceLeft_Step0
+	.4byte MovementAction_AcroWheelieHopFaceLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EC0:: @ 83A6EC0
-	.4byte sub_8066FEC
-	.4byte sub_8067018
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopFaceRight_Step0
+	.4byte MovementAction_AcroWheelieHopFaceRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6ECC:: @ 83A6ECC
-	.4byte sub_8067044
-	.4byte sub_8067070
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopDown_Step0
+	.4byte MovementAction_AcroWheelieHopDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6ED8:: @ 83A6ED8
-	.4byte sub_806709C
-	.4byte sub_80670C8
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopUp_Step0
+	.4byte MovementAction_AcroWheelieHopUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EE4:: @ 83A6EE4
-	.4byte sub_80670F4
-	.4byte sub_8067120
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopLeft_Step0
+	.4byte MovementAction_AcroWheelieHopLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EF0:: @ 83A6EF0
-	.4byte sub_806714C
-	.4byte sub_8067178
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieHopRight_Step0
+	.4byte MovementAction_AcroWheelieHopRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6EFC:: @ 83A6EFC
-	.4byte sub_80671A4
-	.4byte sub_80671D0
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieJumpDown_Step0
+	.4byte MovementAction_AcroWheelieJumpDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F08:: @ 83A6F08
-	.4byte sub_80671FC
-	.4byte sub_8067228
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieJumpUp_Step0
+	.4byte MovementAction_AcroWheelieJumpUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F14:: @ 83A6F14
-	.4byte sub_8067254
-	.4byte sub_8067280
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieJumpLeft_Step0
+	.4byte MovementAction_AcroWheelieJumpLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F20:: @ 83A6F20
-	.4byte sub_80672AC
-	.4byte sub_80672D8
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieJumpRight_Step0
+	.4byte MovementAction_AcroWheelieJumpRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F2C:: @ 83A6F2C
 	.4byte sub_8067304
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F38:: @ 83A6F38
 	.4byte sub_806733C
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F44:: @ 83A6F44
 	.4byte sub_8067374
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F50:: @ 83A6F50
 	.4byte sub_80673AC
-	.4byte sub_806570C
-	.4byte sub_8067934
+	.4byte MovementAction_WalkInPlace_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F5C:: @ 83A6F5C
-	.4byte sub_806741C
-	.4byte sub_806743C
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieMoveDown_Step0
+	.4byte MovementAction_AcroPopWheelieMoveDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F68:: @ 83A6F68
-	.4byte sub_806745C
-	.4byte sub_806747C
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieMoveUp_Step0
+	.4byte MovementAction_AcroPopWheelieMoveUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F74:: @ 83A6F74
-	.4byte sub_806749C
-	.4byte sub_80674BC
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieMoveLeft_Step0
+	.4byte MovementAction_AcroPopWheelieMoveLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F80:: @ 83A6F80
-	.4byte sub_80674DC
-	.4byte sub_80674FC
-	.4byte sub_8067934
+	.4byte MovementAction_AcroPopWheelieMoveRight_Step0
+	.4byte MovementAction_AcroPopWheelieMoveRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F8C:: @ 83A6F8C
-	.4byte sub_806754C
-	.4byte sub_806756C
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieMoveDown_Step0
+	.4byte MovementAction_AcroWheelieMoveDown_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6F98:: @ 83A6F98
-	.4byte sub_806758C
-	.4byte sub_80675AC
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieMoveUp_Step0
+	.4byte MovementAction_AcroWheelieMoveUp_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FA4:: @ 83A6FA4
-	.4byte sub_80675CC
-	.4byte sub_80675EC
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieMoveLeft_Step0
+	.4byte MovementAction_AcroWheelieMoveLeft_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FB0:: @ 83A6FB0
-	.4byte sub_806760C
-	.4byte sub_806762C
-	.4byte sub_8067934
+	.4byte MovementAction_AcroWheelieMoveRight_Step0
+	.4byte MovementAction_AcroWheelieMoveRight_Step1
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FBC:: @ 83A6FBC
 	.4byte sub_8067684
 	.4byte sub_80676A4
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FC8:: @ 83A6FC8
 	.4byte sub_80676C4
 	.4byte sub_80676E4
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FD4:: @ 83A6FD4
 	.4byte sub_8067704
 	.4byte sub_8067724
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FE0:: @ 83A6FE0
 	.4byte sub_8067744
 	.4byte sub_8067764
-	.4byte sub_8067934
+	.4byte MovementAction_PauseSpriteAnim
 
 gUnknown_83A6FEC:: @ 83A6FEC
 	.4byte sub_8067784

@@ -225,7 +225,7 @@ IsTrainerInRangeSouth: @ 8081C9C
 	bgt _08081CE4
 	cmp r1, 0x3
 	ble _08081CDA
-	bl sub_805DF30
+	bl GetFirstInactiveObjectEventId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x10
@@ -398,7 +398,7 @@ _08081DEC:
 	ldrsh r2, [r3, r0]
 	adds r0, r6, 0
 	adds r3, r7, 0
-	bl sub_8063770
+	bl GetCollisionFlagsAtCoords
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -433,7 +433,7 @@ _08081E26:
 	ldrsh r2, [r3, r0]
 	adds r0, r6, 0
 	adds r3, r7, 0
-	bl npc_block_way
+	bl GetCollisionAtCoords
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r4, 4
@@ -596,7 +596,7 @@ _08081F54:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -675,7 +675,7 @@ _08081FEE:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -732,9 +732,9 @@ _0808204A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805FE7C
+	bl OverrideMovementTypeForObjectEvent
 	adds r0, r4, 0
-	bl sub_805FE5C
+	bl OverrideTemplateCoordsForObjectEvent
 	ldr r0, _080820B4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -965,7 +965,7 @@ sub_80821DC: @ 80821DC
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_806413C
+	bl GetJumpInPlaceMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1099,7 +1099,7 @@ _08082312:
 	ldr r0, _0808234C @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x2
-	bl sub_8063FB0
+	bl GetWalkFastMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1190,7 +1190,7 @@ _080823CC:
 	ldr r0, _08082408 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x1
-	bl sub_8063FB0
+	bl GetWalkFastMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1249,7 +1249,7 @@ sub_808243C: @ 808243C
 	cmp r0, 0
 	bne _0808246E
 	ldr r0, [sp]
-	bl ObjectEventClearAnim
+	bl ObjectEventClearHeldMovement
 	ldrh r0, [r4, 0x16]
 	adds r0, 0x1
 	strh r0, [r4, 0x16]
@@ -1292,7 +1292,7 @@ _0808246E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_805FE7C
+	bl OverrideMovementTypeForObjectEvent
 	adds r0, r5, 0
 	bl DestroyTask
 	b _080824E2

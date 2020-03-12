@@ -20,7 +20,7 @@ SetUpReflection: @ 80DAD7C
 	ldrsh r2, [r4, r0]
 	adds r0, r4, 0
 	movs r3, 0x98
-	bl obj_unfreeze
+	bl CreateCopySpriteAt
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -34,7 +34,7 @@ SetUpReflection: @ 80DAD7C
 	movs r0, 0xC
 	orrs r1, r0
 	strb r1, [r7, 0x5]
-	ldr r2, _080DAE34 @ =gUnknown_835B934
+	ldr r2, _080DAE34 @ =gReflectionEffectPaletteMap
 	lsrs r0, r1, 4
 	adds r0, r2
 	ldrb r0, [r0]
@@ -96,7 +96,7 @@ _080DAE22:
 	.align 2, 0
 _080DAE2C: .4byte gSprites
 _080DAE30: .4byte sub_80DAF50
-_080DAE34: .4byte gUnknown_835B934
+_080DAE34: .4byte gReflectionEffectPaletteMap
 _080DAE38: .4byte gDummySpriteAnimTable
 _080DAE3C: .4byte gDummySpriteAffineAnimTable
 	thumb_func_end SetUpReflection
@@ -189,7 +189,7 @@ npc_pal_op_B: @ 80DAEC4
 	bne _080DAEF4
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl npc_load_two_palettes__no_record
+	bl LoadPlayerObjectReflectionPalette
 	b _080DAF12
 	.align 2, 0
 _080DAEF0: .4byte 0x000011ff
@@ -198,15 +198,15 @@ _080DAEF4:
 	bne _080DAF02
 	ldrh r0, [r2, 0x2]
 	adds r1, r4, 0
-	bl npc_load_two_palettes__and_record
+	bl LoadSpecialObjectReflectionPalette
 	b _080DAF12
 _080DAF02:
 	adds r0, r4, 0
-	bl npc_paltag_by_palslot
+	bl GetObjectPaletteTag
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 _080DAF12:
 	adds r0, r4, 0
 	bl sub_807AA8C
@@ -230,7 +230,7 @@ npc_pal_op_A: @ 80DAF20
 	beq _080DAF44
 	adds r0, r1, 0
 	adds r1, r4, 0
-	bl pal_patch_for_npc
+	bl PatchObjectPalette
 	adds r0, r4, 0
 	bl sub_807AA8C
 _080DAF44:
@@ -285,7 +285,7 @@ _080DAF98: .4byte gObjectEvents
 _080DAF9C: .4byte gSprites
 _080DAFA0: .4byte 0x00020001
 _080DAFA4:
-	ldr r1, _080DB0BC @ =gUnknown_835B934
+	ldr r1, _080DB0BC @ =gReflectionEffectPaletteMap
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
 	adds r0, r1
@@ -425,12 +425,12 @@ _080DB0AE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DB0BC: .4byte gUnknown_835B934
+_080DB0BC: .4byte gReflectionEffectPaletteMap
 _080DB0C0: .4byte 0xfffffc00
 	thumb_func_end sub_80DAF50
 
-	thumb_func_start sub_80DB0C4
-sub_80DB0C4: @ 80DB0C4
+	thumb_func_start CreateWarpArrowSprite
+CreateWarpArrowSprite: @ 80DB0C4
 	push {r4,lr}
 	ldr r0, _080DB10C @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x20]
@@ -469,7 +469,7 @@ _080DB102:
 	.align 2, 0
 _080DB10C: .4byte gFieldEffectObjectTemplatePointers
 _080DB110: .4byte gSprites
-	thumb_func_end sub_80DB0C4
+	thumb_func_end CreateWarpArrowSprite
 
 	thumb_func_start objid_set_invisible
 objid_set_invisible: @ 80DB114
@@ -538,7 +538,7 @@ _080DB17E:
 	adds r4, 0x2
 	mov r2, sp
 	adds r3, r4, 0
-	bl sub_8063B1C
+	bl SetSpritePosToMapCoords
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -714,7 +714,7 @@ _080DB2AE:
 	cmp r0, r1
 	bne _080DB32C
 	ldrb r0, [r4, 0x1E]
-	bl MetatileBehavior_IsTallGrass
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB32C

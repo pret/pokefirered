@@ -241,7 +241,7 @@ _08068A88: .4byte gObjectEvents
 	thumb_func_start little_step
 little_step: @ 8068A8C
 	lsls r1, 24
-	ldr r2, _08068AA8 @ =gUnknown_83A64C8
+	ldr r2, _08068AA8 @ =sDirectionToVectors
 	lsrs r1, 22
 	adds r1, r2
 	ldrh r2, [r1]
@@ -254,13 +254,13 @@ little_step: @ 8068A8C
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_08068AA8: .4byte gUnknown_83A64C8
+_08068AA8: .4byte sDirectionToVectors
 	thumb_func_end little_step
 
 	thumb_func_start double_little_steps
 double_little_steps: @ 8068AAC
 	lsls r1, 24
-	ldr r2, _08068ACC @ =gUnknown_83A64C8
+	ldr r2, _08068ACC @ =sDirectionToVectors
 	lsrs r1, 22
 	adds r1, r2
 	ldrh r2, [r1]
@@ -275,13 +275,13 @@ double_little_steps: @ 8068AAC
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_08068ACC: .4byte gUnknown_83A64C8
+_08068ACC: .4byte sDirectionToVectors
 	thumb_func_end double_little_steps
 
 	thumb_func_start triple_little_steps
 triple_little_steps: @ 8068AD0
 	lsls r1, 24
-	ldr r2, _08068AF4 @ =gUnknown_83A64C8
+	ldr r2, _08068AF4 @ =sDirectionToVectors
 	lsrs r1, 22
 	adds r1, r2
 	ldrh r2, [r1]
@@ -298,13 +298,13 @@ triple_little_steps: @ 8068AD0
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_08068AF4: .4byte gUnknown_83A64C8
+_08068AF4: .4byte sDirectionToVectors
 	thumb_func_end triple_little_steps
 
 	thumb_func_start quad_little_steps
 quad_little_steps: @ 8068AF8
 	lsls r1, 24
-	ldr r2, _08068B18 @ =gUnknown_83A64C8
+	ldr r2, _08068B18 @ =sDirectionToVectors
 	lsrs r1, 22
 	adds r1, r2
 	ldrh r2, [r1]
@@ -319,13 +319,13 @@ quad_little_steps: @ 8068AF8
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_08068B18: .4byte gUnknown_83A64C8
+_08068B18: .4byte sDirectionToVectors
 	thumb_func_end quad_little_steps
 
 	thumb_func_start oct_little_steps
 oct_little_steps: @ 8068B1C
 	lsls r1, 24
-	ldr r2, _08068B3C @ =gUnknown_83A64C8
+	ldr r2, _08068B3C @ =sDirectionToVectors
 	lsrs r1, 22
 	adds r1, r2
 	ldrh r2, [r1]
@@ -340,7 +340,7 @@ oct_little_steps: @ 8068B1C
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_08068B3C: .4byte gUnknown_83A64C8
+_08068B3C: .4byte sDirectionToVectors
 	thumb_func_end oct_little_steps
 
 	thumb_func_start oamt_npc_ministep_reset
@@ -788,14 +788,14 @@ _08068E50: .4byte gUnknown_83A7202
 _08068E54: .4byte gUnknown_83A7208
 	thumb_func_end sub_8068DC4
 
-	thumb_func_start SetObjectEventStepTimer
-SetObjectEventStepTimer: @ 8068E58
+	thumb_func_start SetMovementDelay
+SetMovementDelay: @ 8068E58
 	strh r1, [r0, 0x34]
 	bx lr
-	thumb_func_end SetObjectEventStepTimer
+	thumb_func_end SetMovementDelay
 
-	thumb_func_start RunObjectEventStepTimer
-RunObjectEventStepTimer: @ 8068E5C
+	thumb_func_start WaitForMovementDelay
+WaitForMovementDelay: @ 8068E5C
 	push {lr}
 	ldrh r1, [r0, 0x34]
 	subs r1, 0x1
@@ -810,10 +810,10 @@ _08068E6E:
 _08068E70:
 	pop {r1}
 	bx r1
-	thumb_func_end RunObjectEventStepTimer
+	thumb_func_end WaitForMovementDelay
 
-	thumb_func_start obj_anim_image_set_and_seek
-obj_anim_image_set_and_seek: @ 8068E74
+	thumb_func_start SetAndStartSpriteAnim
+SetAndStartSpriteAnim: @ 8068E74
 	push {r4,lr}
 	lsls r2, 24
 	lsrs r2, 24
@@ -832,10 +832,10 @@ obj_anim_image_set_and_seek: @ 8068E74
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end obj_anim_image_set_and_seek
+	thumb_func_end SetAndStartSpriteAnim
 
-	thumb_func_start sub_8068E9C
-sub_8068E9C: @ 8068E9C
+	thumb_func_start SpriteAnimEnded
+SpriteAnimEnded: @ 8068E9C
 	push {lr}
 	adds r0, 0x3F
 	ldrb r1, [r0]
@@ -850,7 +850,7 @@ _08068EAE:
 _08068EB0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8068E9C
+	thumb_func_end SpriteAnimEnded
 
 	thumb_func_start sub_8068EB4
 sub_8068EB4: @ 8068EB4
@@ -983,8 +983,8 @@ _08068FA2:
 	bx r0
 	thumb_func_end sub_8068EB4
 
-	thumb_func_start sub_8068FA8
-sub_8068FA8: @ 8068FA8
+	thumb_func_start UpdateObjectEventSpriteSubpriorityAndVisibility
+UpdateObjectEventSpriteSubpriorityAndVisibility: @ 8068FA8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8069248
@@ -1002,7 +1002,7 @@ sub_8068FA8: @ 8068FA8
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8068FA8
+	thumb_func_end UpdateObjectEventSpriteSubpriorityAndVisibility
 
 	thumb_func_start sub_8068FD0
 sub_8068FD0: @ 8068FD0
@@ -1020,7 +1020,7 @@ _08068FD6:
 	cmp r0, 0
 	beq _08068FF6
 	ldr r1, [r2, 0x1C]
-	ldr r0, _08069008 @ =sub_8068FA8
+	ldr r0, _08069008 @ =UpdateObjectEventSpriteSubpriorityAndVisibility
 	cmp r1, r0
 	bne _08068FF6
 	adds r0, r2, 0
@@ -1035,7 +1035,7 @@ _08068FF6:
 	bx r0
 	.align 2, 0
 _08069004: .4byte gSprites
-_08069008: .4byte sub_8068FA8
+_08069008: .4byte UpdateObjectEventSpriteSubpriorityAndVisibility
 	thumb_func_end sub_8068FD0
 
 	thumb_func_start sub_806900C
@@ -1056,7 +1056,7 @@ _08069018:
 	cmp r0, 0
 	beq _08069048
 	ldr r1, [r2, 0x1C]
-	ldr r0, _08069044 @ =sub_8068FA8
+	ldr r0, _08069044 @ =UpdateObjectEventSpriteSubpriorityAndVisibility
 	cmp r1, r0
 	bne _08069048
 	ldrh r0, [r2, 0x2E]
@@ -1068,7 +1068,7 @@ _08069018:
 	b _08069052
 	.align 2, 0
 _08069040: .4byte gSprites
-_08069044: .4byte sub_8068FA8
+_08069044: .4byte UpdateObjectEventSpriteSubpriorityAndVisibility
 _08069048:
 	adds r4, 0x44
 	adds r3, 0x1
@@ -1099,7 +1099,7 @@ sub_8069058: @ 8069058
 	ldr r0, _08069090 @ =gSprites
 	adds r4, r0
 	adds r0, r5, 0
-	bl ObjectEventDirectionToImageAnimId
+	bl GetFaceDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

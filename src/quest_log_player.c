@@ -58,7 +58,7 @@ static void sub_81504A8(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     sub_81507BC(objectEvent, sub_805C808(0));
-    ObjectEventTurn(objectEvent, objectEvent->placeholder18);
+    ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
@@ -66,7 +66,7 @@ static void sub_81504E8(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     sub_81507BC(objectEvent, sub_805C808(1));
-    ObjectEventTurn(objectEvent, objectEvent->placeholder18);
+    ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     sub_80BD620(0, 0);
 }
@@ -87,7 +87,7 @@ static void sub_8150530(void)
     else
     {
         sub_81507BC(objectEvent, sub_805C808(4));
-        StartSpriteAnim(sprite, sub_80634F0(objectEvent->facingDirection));
+        StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
     }
 }
 
@@ -99,10 +99,10 @@ static void sub_81505C4(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
         case 0:
-            ObjectEventClearAnimIfSpecialAnimActive(objectEvent);
-            objectEvent->mapobj_bit_11 = TRUE;
+            ObjectEventClearHeldMovementIfActive(objectEvent);
+            objectEvent->enableAnim = TRUE;
             sub_81507BC(objectEvent, sub_805C808(4));
-            StartSpriteAnim(sprite, sub_80634F0(objectEvent->facingDirection));
+            StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
             break;
@@ -114,7 +114,7 @@ static void sub_81505C4(u8 taskId)
                 gTasks[taskId].data[0]++;
             break;
         case 2:
-            StartSpriteAnim(sprite, sub_8063500(GetPlayerFacingDirection()));
+            StartSpriteAnim(sprite, GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
             gTasks[taskId].data[0]++;
             break;
         case 3:
@@ -125,7 +125,7 @@ static void sub_81505C4(u8 taskId)
                     sub_81507BC(objectEvent, sub_805C808(0));
                 else
                     sub_81507BC(objectEvent, sub_805C808(2));
-                ObjectEventTurn(objectEvent, objectEvent->placeholder18);
+                ObjectEventTurn(objectEvent, objectEvent->movementDirection);
                 sprite->pos2.x = 0;
                 sprite->pos2.y = 0;
                 ScriptContext2_Disable();
@@ -143,13 +143,13 @@ static void sub_8150708(void)
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
         sub_81507BC(objectEvent, sub_805C808(2));
-        ObjectEventTurn(objectEvent, objectEvent->placeholder18);
+        ObjectEventTurn(objectEvent, objectEvent->movementDirection);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
-        gFieldEffectArguments[0] = objectEvent->coords2.x;
-        gFieldEffectArguments[1] = objectEvent->coords2.y;
+        gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+        gFieldEffectArguments[1] = objectEvent->currentCoords.y;
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
         fieldEffectId = FieldEffectStart(FLDEFF_SURF_BLOB);
-        objectEvent->mapobj_unk_1A = fieldEffectId;
+        objectEvent->fieldEffectSpriteId = fieldEffectId;
         sub_80DC44C(fieldEffectId, 1);
     }
 }

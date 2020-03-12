@@ -2238,7 +2238,7 @@ sub_80844BC: @ 80844BC
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2666,7 +2666,7 @@ _0808484A:
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2947,7 +2947,7 @@ sub_8084A5C: @ 8084A5C
 	ldr r0, _08084AC0 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x4
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3200,7 +3200,7 @@ sub_8084C3C: @ 8084C3C
 	bl ScriptContext2_Disable
 	bl UnfreezeObjectEvents
 	movs r0, 0x4
-	bl sub_8063F84
+	bl GetWalkNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4065,7 +4065,7 @@ sub_80852C0: @ 80852C0
 	movs r0, 0xA8
 	bl PlaySE
 	movs r0, 0x4
-	bl sub_8064194
+	bl GetJumpMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4306,7 +4306,7 @@ _080854C4:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl GetStepInPlaceDelay4AnimId
+	bl GetWalkInPlaceFastMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4610,7 +4610,7 @@ _08085702:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl ObjectEventSetDirection
+	bl SetObjectEventDirection
 	bl sub_80555E0
 	bl WarpIntoMap
 	ldr r1, _0808575C @ =gFieldCallback
@@ -4668,7 +4668,7 @@ _0808579E:
 	lsrs r0, 28
 	adds r0, r7
 	ldrb r0, [r0]
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5761,7 +5761,7 @@ FldEff_FieldMoveShowMon: @ 8086028
 	bl GetCurrentMapType
 	lsls r0, 24
 	lsrs r0, 24
-	bl is_light_level_1_2_3_5_or_6
+	bl IsMapTypeOutdoors
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7194,7 +7194,7 @@ sub_8086B30: @ 8086B30
 	strb r0, [r5]
 	ldrb r0, [r4, 0x18]
 	lsrs r0, 4
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7380,12 +7380,12 @@ _08086CD2:
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
-	bl sub_8063EB8
+	bl GetFaceDirectionMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl ObjectEventForceSetSpecialAnim
+	bl ObjectEventForceSetHeldMovement
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -7859,7 +7859,7 @@ sub_808706C: @ 808706C
 	ldr r0, _08087108 @ =gObjectEvents
 	adds r4, r0
 	adds r0, r4, 0
-	bl ObjectEventClearAnimIfSpecialAnimActive
+	bl ObjectEventClearHeldMovementIfActive
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x11
 	negs r0, r0
@@ -8676,7 +8676,7 @@ sub_8087698: @ 8087698
 	movs r0, 0x12
 	ldrsh r2, [r5, r0]
 	adds r0, r5, 0
-	bl sub_805F724
+	bl MoveObjectEventToMapCoords
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
@@ -9012,7 +9012,7 @@ sub_8087924: @ 8087924
 	lsls r2, 16
 	asrs r2, 16
 	adds r0, r4, 0
-	bl npc_coords_shift
+	bl ShiftObjectEventCoords
 	ldr r0, _080879CC @ =sub_80879D8
 	movs r1, 0x50
 	bl CreateTask
@@ -9155,7 +9155,7 @@ _08087A78:
 	ldrh r0, [r5, 0x6]
 	strh r0, [r6, 0x22]
 	adds r0, r4, 0
-	bl npc_coords_shift_still
+	bl ShiftStillObjectEventCoords
 	ldrb r0, [r4]
 	movs r1, 0x8
 	orrs r0, r1
@@ -9474,7 +9474,7 @@ sub_8087CFC: @ 8087CFC
 	mov r7, r8
 	push {r7}
 	adds r6, r0, 0
-	ldr r0, _08087D80 @ =gUnknown_300506C
+	ldr r0, _08087D80 @ =gTotalCameraPixelOffsetX
 	movs r1, 0
 	ldrsh r2, [r0, r1]
 	movs r3, 0x20
@@ -9483,7 +9483,7 @@ sub_8087CFC: @ 8087CFC
 	movs r1, 0x24
 	ldrsh r0, [r6, r1]
 	adds r2, r0
-	ldr r0, _08087D84 @ =gUnknown_3005068
+	ldr r0, _08087D84 @ =gTotalCameraPixelOffsetY
 	movs r3, 0
 	ldrsh r0, [r0, r3]
 	movs r3, 0x22
@@ -9536,8 +9536,8 @@ _08087D6E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08087D80: .4byte gUnknown_300506C
-_08087D84: .4byte gUnknown_3005068
+_08087D80: .4byte gTotalCameraPixelOffsetX
+_08087D84: .4byte gTotalCameraPixelOffsetY
 _08087D88: .4byte gUnknown_83CC2A0
 _08087D8C: .4byte gSprites
 	thumb_func_end sub_8087CFC

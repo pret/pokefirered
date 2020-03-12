@@ -79,7 +79,7 @@ sub_80BD100: @ 80BD100
 	lsls r4, 2
 	ldr r0, _080BD160 @ =gObjectEvents
 	adds r4, r0
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0
@@ -195,7 +195,7 @@ sub_80BD1E8: @ 80BD1E8
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
@@ -881,7 +881,7 @@ Bike_HandleBumpySlopeJump: @ 80BD6C4
 	beq _080BD70C
 	movs r0, 0x2
 	strb r0, [r5, 0x8]
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	bl nullsub_24

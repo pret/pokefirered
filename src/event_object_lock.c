@@ -51,7 +51,7 @@ void sub_80695CC(u8 taskId)
         task->data[0] = 1;
     }
 
-    if (task->data[1] == 0 && !gObjectEvents[gSelectedObjectEvent].mapobj_bit_1)
+    if (task->data[1] == 0 && !gObjectEvents[gSelectedObjectEvent].singleMovementActive)
     {
         FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
         task->data[1] = 1;
@@ -78,7 +78,7 @@ void LockSelectedObjectEvent(void)
 
     FreezeObjectEventsExceptOne(gSelectedObjectEvent);
     taskId = CreateTask(sub_80695CC, 80);
-    if (!gObjectEvents[gSelectedObjectEvent].mapobj_bit_1)
+    if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
     {
         FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
         gTasks[taskId].data[1] = 1;
@@ -111,5 +111,5 @@ void Script_FacePlayer(void)
 
 void Script_ClearHeldMovement(void)
 {
-    ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[gSelectedObjectEvent]);
+    ObjectEventClearHeldMovementIfActive(&gObjectEvents[gSelectedObjectEvent]);
 }

@@ -2907,7 +2907,7 @@ sub_809F04C: @ 809F04C
 	add r3, sp, 0x18
 	movs r0, 0
 	mov r2, sp
-	bl sub_805E8E8
+	bl MakeObjectTemplateFromObjectEventGraphicsInfo
 	mov r2, sp
 	add r0, sp, 0x1C
 	ldrh r1, [r0, 0x6]

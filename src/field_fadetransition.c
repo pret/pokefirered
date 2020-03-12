@@ -415,7 +415,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         if (sub_807E418())
         {
             sub_807DCB0(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], sub_8063F84(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;
@@ -752,7 +752,7 @@ static void sub_807E80C(u8 taskId)
     case 1:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
+            ObjectEventClearHeldMovementIfActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], 17);
             task->data[0] = 2;
         }
@@ -850,15 +850,15 @@ static void sub_807EAC4(s16 a0, s16 a1, s16 *a2, s16 *a3, s16 *a4)
     (*a4)++;
     playerSpr->pos2.x = *a2 >> 5;
     playerSpr->pos2.y = *a3 >> 5;
-    if (playerObj->mapobj_bit_7)
+    if (playerObj->heldMovementFinished)
     {
-        ObjectEventForceSetSpecialAnim(playerObj, GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
+        ObjectEventForceSetHeldMovement(playerObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
     }
 }
 
 static void sub_807EB64(u16 a0, s16 *a1, s16 *a2)
 {
-    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.objectEventId], GetStepInPlaceDelay16AnimId(GetPlayerFacingDirection()));
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
     sub_807EBBC(a0, a1, a2);
 }
 
@@ -930,7 +930,7 @@ static void sub_807ECBC(s16 *a0, s16 *a1, s16 *a2, s16 *a3, s16 *a4)
         r1 = 3;
     else
         r1 = 4;
-    ObjectEventForceSetSpecialAnim(&gObjectEvents[gPlayerAvatar.objectEventId], sub_8064270(r1));
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceSlowMovementAction(r1));
     sub_807EBBC(behavior, a0, a1);
     *a2 = *a0 * 16;
     *a3 = *a1 * 16;

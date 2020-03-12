@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_FIELD_EFFECTS_H 
 #define GUARD_CONSTANTS_FIELD_EFFECTS_H 
        
-#define FLDEFF_EXCLAMATION_MARK_ICON_1   0 
+#define FLDEFF_EXCLAMATION_MARK_ICON     0 
 #define FLDEFF_USE_CUT_ON_GRASS          1 
 #define FLDEFF_USE_CUT_ON_TREE           2 
 #define FLDEFF_SHADOW                    3 
@@ -34,7 +34,7 @@
 #define FLDEFF_NPCFLY_OUT                30
 #define FLDEFF_USE_FLY                   31
 #define FLDEFF_FLY_IN                    32
-#define FLDEFF_EXCLAMATION_MARK_ICON_2   33
+#define FLDEFF_QUESTION_MARK_ICON        33
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
 #define FLDEFF_BIKE_TIRE_TRACKS          35
 #define FLDEFF_SAND_DISGUISE             36

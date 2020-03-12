@@ -49,5 +49,7 @@ void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value);
 void sub_8110840(void *oldSave);
 void sub_8112F18(u8 windowId);
+void sub_811246C(struct Sprite *sprite);
+void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3);
 
 #endif //GUARD_QUEST_LOG_H

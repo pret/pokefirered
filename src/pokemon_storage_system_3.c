@@ -3,6 +3,7 @@
 #include "box_party_pokemon_dropdown.h"
 #include "help_system.h"
 #include "mail_data.h"
+#include "menu.h"
 #include "new_menu_helpers.h"
 #include "pc_screen_effect.h"
 #include "pokemon_storage_system_internal.h"
@@ -23,7 +24,32 @@ void Cb_InitPSS(u8 taskId);
 void Cb_ShowPSS(u8 taskId);
 void Cb_ReshowPSS(u8 taskId);
 void Cb_MainPSS(u8 taskId);
+void Cb_ShowPartyPokemon(u8 taskId);
+void Cb_HidePartyPokemon(u8 taskId);
+void Cb_OnSelectedMon(u8 taskId);
+void Cb_MoveMon(u8 taskId);
+void Cb_PlaceMon(u8 taskId);
+void Cb_ShiftMon(u8 taskId);
+void Cb_WithdrawMon(u8 taskId);
+void Cb_DepositMenu(u8 taskId);
+void Cb_ReleaseMon(u8 taskId);
+void Cb_HandleMovingMonFromParty(u8 taskId);
+void Cb_GiveMovingItemToMon(u8 taskId);
+void Cb_HandleBoxOptions(u8 taskId);
+void Cb_OnBPressed(u8 taskId);
+void Cb_OnCloseBoxPressed(u8 taskId);
+void Cb_SwitchSelectedItem(u8 taskId);
+void Cb_TakeItemForMoving(u8 taskId);
 void Cb_ChangeScreen(u8 taskId);
+void Cb_ShowMonSummary(u8 taskId);
+void Cb_ShowMarkMenu(u8 taskId);
+void Cb_ItemToBag(u8 taskId);
+void Cb_GiveItemFromBag(u8 taskId);
+void Cb_ShowItemInfo(u8 taskId);
+void InitMonPlaceChange(u8 a0);
+bool8 DoMonPlaceChange(void);
+void SetUpDoShowPartyMenu(void);
+bool8 DoShowPartyMenu(void);
 void GiveChosenBagItem(void);
 bool8 InitPSSWindows(void);
 void LoadPSSMenuGfx(void);
@@ -31,36 +57,30 @@ void LoadWaveformSpritePalette(void);
 void SetScrollingBackground(void);
 void sub_808EFC8(void);
 void sub_808F078(void);
+bool8 sub_808F258(void);
 void sub_808F68C(void);
+void sub_808F948(void);
+void sub_808F974(void);
 void sub_808F99C(void);
 void sub_808FB68(void);
 void sub_808FDFC(void);
+void sub_808FE54(u8 a0);
 void sub_808FFAC(void);
 void sub_80913DC(u8 box);
 bool8 sub_809140C(void);
+void SetUpHidePartyMenu(void);
+bool8 HidePartyMenu(void);
 void sub_80922C0(void);
 void sub_8092340(void);
+void sub_8092B3C(u8 a0);
 void sub_8092B50(void);
+u8 sub_8092B70(void);
 void sub_8093660(void);
 void sub_80937B4(void);
 bool8 sub_8095050(void);
 void sub_8095B5C(void);
 void sub_8096BE4(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2);
 void sub_8096BF8(void);
-void Cb_DepositMenu(u8 taskId);
-void Cb_GiveMovingItemToMon(u8 taskId);
-void Cb_HandleBoxOptions(u8 taskId);
-void Cb_HidePartyPokemon(u8 taskId);
-void Cb_MoveMon(u8 taskId);
-void Cb_OnBPressed(u8 taskId);
-void Cb_OnCloseBoxPressed(u8 taskId);
-void Cb_OnSelectedMon(u8 taskId);
-void Cb_PlaceMon(u8 taskId);
-void Cb_ShiftMon(u8 taskId);
-void Cb_ShowPartyPokemon(u8 taskId);
-void Cb_SwitchSelectedItem(u8 taskId);
-void Cb_TakeItemForMoving(u8 taskId);
-void Cb_WithdrawMon(u8 taskId);
 void BoxSetMosaic(void);
 bool8 CanMovePartyMon(void);
 bool8 CanShiftMon(void);
@@ -71,9 +91,6 @@ bool8 IsMonBeingMoved(void);
 void PrintStorageActionText(u8 textId);
 bool8 ScrollToBox(void);
 void SetUpScrollToBox(u8 targetBox);
-void sub_808FE54(u8 a0);
-void sub_808F948(void);
-void sub_808F974(void);
 bool8 sub_80924A8(void);
 void sub_8092F54(void);
 void sub_8094D60(void);
@@ -81,6 +98,27 @@ void sub_8094D84(void);
 void sub_80950BC(u8 a0);
 bool8 sub_80950D0(void);
 bool8 sub_809610C(void);
+bool8 IsActiveItemMoving(void);
+void AddMenu(void);
+bool8 sub_8094F90(void);
+s16 sub_8094F94(void);
+void sub_8092B5C(void);
+void SetMovingMonPriority(u8 priority);
+void sub_808FAA8(void);
+bool8 TryStorePartyMonInBox(u8 boxId);
+void sub_80909F4(void);
+bool8 sub_8090A60(void);
+void sub_8093174(void);
+void ShowYesNoWindow(u8 a0);
+void InitCanReleaseMonVars(void);
+void sub_8093194(void);
+s8 RunCanReleaseMon(void);
+bool8 sub_80931EC(void);
+void ReleaseMon(void);
+void RefreshCursorMonData(void);
+void sub_8091114(void);
+bool8 sub_8091150(void);
+void sub_8093264(void);
 
 extern const u16 gUnknown_83CE6F8[];
 
@@ -562,7 +600,7 @@ void Cb_MainPSS(u8 taskId)
         sPSSData->state = 6;
         break;
     case 6:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON | DPAD_ANY))
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
             SetPSSCallback(Cb_MainPSS);
@@ -594,6 +632,513 @@ void Cb_MainPSS(u8 taskId)
     case 11:
         if (!sub_809610C())
             sPSSData->state = 0;
+        break;
+    }
+}
+
+void Cb_ShowPartyPokemon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        SetUpDoShowPartyMenu();
+        sPSSData->state++;
+        break;
+    case 1:
+        if (!DoShowPartyMenu())
+            SetPSSCallback(Cb_MainPSS);
+        break;
+    }
+}
+
+void Cb_HidePartyPokemon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        PlaySE(SE_SELECT);
+        SetUpHidePartyMenu();
+        sPSSData->state++;
+        break;
+    case 1:
+        if (!HidePartyMenu())
+        {
+            sub_8092B3C(sub_8092B70());
+            sPSSData->state++;
+        }
+        break;
+    case 2:
+        if (!sub_80924A8())
+        {
+            if (sPSSData->setMosaic)
+                BoxSetMosaic();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    }
+}
+
+void Cb_OnSelectedMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        if (!sub_808F258())
+        {
+            PlaySE(SE_SELECT);
+            if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+                PrintStorageActionText(PC_TEXT_IS_SELECTED);
+            else if (IsActiveItemMoving() || sPSSData->cursorMonItem != 0)
+                PrintStorageActionText(PC_TEXT_IS_SELECTED2);
+            else
+                PrintStorageActionText(PC_TEXT_GIVE_TO_MON);
+
+            AddMenu();
+            sPSSData->state = 1;
+        }
+        break;
+    case 1: // debug?
+        if (!sub_8094F90())
+            sPSSData->state = 2;
+        break;
+    case 2:
+        switch (sub_8094F94())
+        {
+        case -1:
+        case  0:
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+            break;
+        case 3:
+            if (CanMovePartyMon())
+            {
+                sPSSData->state = 3;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(Cb_MoveMon);
+            }
+            break;
+        case 5:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(Cb_PlaceMon);
+            break;
+        case 4:
+            if (!CanShiftMon())
+            {
+                sPSSData->state = 3;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(Cb_ShiftMon);
+            }
+            break;
+        case 2:
+            PlaySE(SE_SELECT);
+            ClearBottomWindow();
+            SetPSSCallback(Cb_WithdrawMon);
+            break;
+        case 1:
+            if (CanMovePartyMon())
+            {
+                sPSSData->state = 3;
+            }
+            else if (ItemIsMail(sPSSData->cursorMonItem))
+            {
+                sPSSData->state = 4;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                ClearBottomWindow();
+                SetPSSCallback(Cb_DepositMenu);
+            }
+            break;
+        case 7:
+            if (CanMovePartyMon())
+            {
+                sPSSData->state = 3;
+            }
+            else if (sPSSData->cursorMonIsEgg)
+            {
+                sPSSData->state = 5; // Cannot release an Egg.
+            }
+            else if (ItemIsMail(sPSSData->cursorMonItem))
+            {
+                sPSSData->state = 4;
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                SetPSSCallback(Cb_ReleaseMon);
+            }
+            break;
+        case 6:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_ShowMonSummary);
+            break;
+        case 8:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_ShowMarkMenu);
+            break;
+        case 12:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_TakeItemForMoving);
+            break;
+        case 13:
+            PlaySE(SE_SELECT);
+            SetPSSCallback(Cb_GiveMovingItemToMon);
+            break;
+        case 16:
+            SetPSSCallback(Cb_ItemToBag);
+            break;
+        case 15:
+            SetPSSCallback(Cb_SwitchSelectedItem);
+            break;
+        case 14:
+            SetPSSCallback(Cb_GiveItemFromBag);
+            break;
+        case 17:
+            SetPSSCallback(Cb_ShowItemInfo);
+            break;
+        }
+        break;
+    case 3:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_LAST_POKE);
+        sPSSData->state = 6;
+        break;
+    case 5:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_CANT_RELEASE_EGG);
+        sPSSData->state = 6;
+        break;
+    case 4:
+        PlaySE(SE_HAZURE);
+        PrintStorageActionText(PC_TEXT_PLEASE_REMOVE_MAIL);
+        sPSSData->state = 6;
+        break;
+    case 6:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    }
+}
+
+void Cb_MoveMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        InitMonPlaceChange(0);
+        sPSSData->state++;
+        break;
+    case 1:
+        if (!DoMonPlaceChange())
+        {
+            if (sInPartyMenu)
+                SetPSSCallback(Cb_HandleMovingMonFromParty);
+            else
+                SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    }
+}
+
+void Cb_PlaceMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        sub_808FE54(1);
+        InitMonPlaceChange(1);
+        sPSSData->state++;
+        break;
+    case 1:
+        if (!DoMonPlaceChange())
+        {
+            if (sInPartyMenu)
+                SetPSSCallback(Cb_HandleMovingMonFromParty);
+            else
+                SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    }
+}
+
+void Cb_ShiftMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        sub_808FE54(0);
+        InitMonPlaceChange(2);
+        sPSSData->state++;
+        break;
+    case 1:
+        if (!DoMonPlaceChange())
+        {
+            BoxSetMosaic();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    }
+}
+
+void Cb_WithdrawMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        if (CalculatePlayerPartyCount() == PARTY_SIZE)
+        {
+            PrintStorageActionText(PC_TEXT_PARTY_FULL);
+            sPSSData->state = 1;
+        }
+        else
+        {
+            sub_8092B5C();
+            InitMonPlaceChange(0);
+            sPSSData->state = 2;
+        }
+        break;
+    case 1:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    case 2:
+        if (!DoMonPlaceChange())
+        {
+            SetMovingMonPriority(1);
+            SetUpDoShowPartyMenu();
+            sPSSData->state++;
+        }
+        break;
+    case 3:
+        if (!DoShowPartyMenu())
+        {
+            sub_808FE54(1);
+            InitMonPlaceChange(1);
+            sPSSData->state++;
+        }
+        break;
+    case 4:
+        if (!DoMonPlaceChange())
+        {
+            sub_808FAA8();
+            sPSSData->state++;
+        }
+        break;
+    case 5:
+        SetPSSCallback(Cb_HidePartyPokemon);
+        break;
+    }
+}
+
+void Cb_DepositMenu(u8 taskId)
+{
+    u8 boxId;
+
+    switch (sPSSData->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+        sub_808C854(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        sub_808C940(gUnknown_20397B6);
+        sPSSData->state++;
+        break;
+    case 1:
+        boxId = HandleBoxChooseSelectionInput();
+        if (boxId == 200)
+        {
+            // no box chosen yet
+        }
+        else if (boxId == 201)
+        {
+            ClearBottomWindow();
+            sub_808C950();
+            sub_808C8FC();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        else
+        {
+            if (TryStorePartyMonInBox(boxId))
+            {
+                gUnknown_20397B6 = boxId;
+                sub_808FE54(2);
+                ClearBottomWindow();
+                sub_808C950();
+                sub_808C8FC();
+                sPSSData->state = 2;
+            }
+            else
+            {
+                PrintStorageActionText(PC_TEXT_BOX_IS_FULL);
+                sPSSData->state = 4;
+            }
+        }
+        break;
+    case 2:
+        CompactPartySlots();
+        sub_80909F4();
+        sPSSData->state++;
+        break;
+    case 3:
+        if (!sub_8090A60())
+        {
+            sub_8093174();
+            BoxSetMosaic();
+            sub_808FAA8();
+            SetPSSCallback(Cb_MainPSS);
+        }
+        break;
+    case 4:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
+            sPSSData->state = 1;
+        }
+        break;
+    }
+}
+
+void Cb_ReleaseMon(u8 taskId)
+{
+    switch (sPSSData->state)
+    {
+    case 0:
+        PrintStorageActionText(PC_TEXT_RELEASE_POKE);
+        ShowYesNoWindow(1);
+        sPSSData->state++;
+        // fallthrough
+    case 1:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case MENU_B_PRESSED:
+        case  1:
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+            break;
+        case  0:
+            ClearBottomWindow();
+            InitCanReleaseMonVars();
+            sub_8093194();
+            sPSSData->state++;
+            break;
+        }
+        break;
+    case 2:
+        RunCanReleaseMon();
+        if (!sub_80931EC())
+        {
+            while (1)
+            {
+                s8 r0 = RunCanReleaseMon();
+                if (r0 == 1)
+                {
+                    sPSSData->state++;
+                    break;
+                }
+                else if (r0 == 0)
+                {
+                    sPSSData->state = 8; // Can't release the mon.
+                    break;
+                }
+            }
+        }
+        break;
+    case 3:
+        ReleaseMon();
+        RefreshCursorMonData();
+        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        sPSSData->state++;
+        break;
+    case 4:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_BYE_BYE);
+            sPSSData->state++;
+        }
+        break;
+    case 5:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            if (sInPartyMenu)
+            {
+                CompactPartySlots();
+                sub_80909F4();
+                sPSSData->state++;
+            }
+            else
+            {
+                sPSSData->state = 7;
+            }
+        }
+        break;
+    case 6:
+        if (!sub_8090A60())
+        {
+            sub_8092F54();
+            BoxSetMosaic();
+            sub_808FAA8();
+            sPSSData->state++;
+        }
+        break;
+    case 7:
+        SetPSSCallback(Cb_MainPSS);
+        break;
+    case 8:
+        PrintStorageActionText(PC_TEXT_WAS_RELEASED);
+        sPSSData->state++;
+        break;
+    case 9:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_SURPRISE);
+            sPSSData->state++;
+        }
+        break;
+    case 10:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            sub_8091114();
+            sPSSData->state++;
+        }
+        break;
+    case 11:
+        if (!sub_8091150())
+        {
+            sub_8093264();
+            PrintStorageActionText(PC_TEXT_CAME_BACK);
+            sPSSData->state++;
+        }
+        break;
+    case 12:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            PrintStorageActionText(PC_TEXT_WORRIED);
+            sPSSData->state++;
+        }
+        break;
+    case 13:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            SetPSSCallback(Cb_MainPSS);
+        }
         break;
     }
 }

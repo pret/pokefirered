@@ -288,5 +288,10 @@ struct PokemonStorageSystemData
 extern struct PokemonStorageSystemData *sPSSData;
 
 void Cb2_ExitPSS(void);
+void sub_808C8FC(void);
+void sub_808C940(u8 curBox);
+void sub_808C950(void);
+u8 HandleBoxChooseSelectionInput(void);
+void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

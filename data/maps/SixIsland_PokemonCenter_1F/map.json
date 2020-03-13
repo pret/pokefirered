@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_SIX_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_PokemonCenter_1F_EventScript_171E05",
+      "script": "SixIsland_PokemonCenter_1F_EventScript_Nurse",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 5,
       "y": 5,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 13,
       "y": 3,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_PokemonCenter_1F_EventScript_171E0E",
+      "script": "SixIsland_PokemonCenter_1F_EventScript_Hiker",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 12,
       "y": 5,
       "elevation": 3,
@@ -62,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SixIsland_PokemonCenter_1F_EventScript_171E17",
+      "script": "SixIsland_PokemonCenter_1F_EventScript_OldMan",
       "flag": "0"
     }
   ],

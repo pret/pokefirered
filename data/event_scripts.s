@@ -17,19 +17,25 @@
 #include "constants/spawn_points.h"
 #include "constants/field_effects.h"
 #include "constants/trainers.h"
-#include "constants/object_events.h"
+#include "constants/trainer_tower.h"
 #include "constants/fame_checker.h"
 #include "constants/seagallop.h"
 #include "constants/game_stat.h"
+#include "constants/coins.h"
 #include "constants/menu.h"
 #include "constants/battle_setup.h"
 #include "constants/map_scripts.h"
 #include "constants/cable_club.h"
+#include "constants/field_tasks.h"
 #include "constants/field_weather.h"
+#include "constants/weather.h"
 #include "constants/union_room.h"
 #include "constants/trade.h"
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
+#include "constants/easy_chat.h"
+#include "constants/trainer_card.h"
+#include "constants/help_system.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.set FALSE, 0
@@ -61,7 +67,7 @@ gSpecialVars:: @ 815FD0C
 	.4byte gSpecialVar_MonBoxPos
 	.4byte gSpecialVar_TextColor
 	.4byte gSpecialVar_PrevTextColor
-	.4byte gUnknown_20370DE
+	.4byte gSpecialVar_0x8014
 
 	.include "data/specials.inc"
 
@@ -208,17 +214,17 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_PatternBush/scripts.inc"
 	.include "data/maps/SixIsland_AlteringCave/scripts.inc"
 	.include "data/maps/NavelRock_Exterior/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_1F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_2F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_3F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_4F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_5F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_6F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_7F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_8F/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Roof/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/scripts.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Elevator/scripts.inc"
+	.include "data/maps/TrainerTower_1F/scripts.inc"
+	.include "data/maps/TrainerTower_2F/scripts.inc"
+	.include "data/maps/TrainerTower_3F/scripts.inc"
+	.include "data/maps/TrainerTower_4F/scripts.inc"
+	.include "data/maps/TrainerTower_5F/scripts.inc"
+	.include "data/maps/TrainerTower_6F/scripts.inc"
+	.include "data/maps/TrainerTower_7F/scripts.inc"
+	.include "data/maps/TrainerTower_8F/scripts.inc"
+	.include "data/maps/TrainerTower_Roof/scripts.inc"
+	.include "data/maps/TrainerTower_Lobby/scripts.inc"
+	.include "data/maps/TrainerTower_Elevator/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Entrance/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/scripts.inc"
 	.include "data/maps/FiveIsland_LostCave_Room2/scripts.inc"
@@ -278,7 +284,7 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland/scripts.inc"
 	.include "data/maps/IndigoPlateau_Exterior/scripts.inc"
 	.include "data/maps/SaffronCity/scripts.inc"
-	.include "data/maps/SaffronCity_Classic/scripts.inc"
+	.include "data/maps/SaffronCity_Connection/scripts.inc"
 	.include "data/maps/OneIsland/scripts.inc"
 	.include "data/maps/TwoIsland/scripts.inc"
 	.include "data/maps/ThreeIsland/scripts.inc"
@@ -317,10 +323,10 @@ gStdScriptsEnd::
 	.include "data/maps/TwoIsland_CapeBrink/scripts.inc"
 	.include "data/maps/ThreeIsland_BondBridge/scripts.inc"
 	.include "data/maps/ThreeIsland_Port/scripts.inc"
-	.include "data/maps/UnknownMap_03_50/scripts.inc"
-	.include "data/maps/UnknownMap_03_51/scripts.inc"
-	.include "data/maps/UnknownMap_03_52/scripts.inc"
-	.include "data/maps/UnknownMap_03_53/scripts.inc"
+	.include "data/maps/Prototype_SeviiIsle_6/scripts.inc"
+	.include "data/maps/Prototype_SeviiIsle_7/scripts.inc"
+	.include "data/maps/Prototype_SeviiIsle_8/scripts.inc"
+	.include "data/maps/Prototype_SeviiIsle_9/scripts.inc"
 	.include "data/maps/FiveIsland_ResortGorgeous/scripts.inc"
 	.include "data/maps/FiveIsland_WaterLabyrinth/scripts.inc"
 	.include "data/maps/FiveIsland_Meadow/scripts.inc"
@@ -415,15 +421,15 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland_Mart/scripts.inc"
 	.include "data/maps/IndigoPlateau_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/IndigoPlateau_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/SaffronCity_House1_1F/scripts.inc"
-	.include "data/maps/SaffronCity_House1_2F/scripts.inc"
+	.include "data/maps/SaffronCity_CopycatsHouse_1F/scripts.inc"
+	.include "data/maps/SaffronCity_CopycatsHouse_2F/scripts.inc"
 	.include "data/maps/SaffronCity_Dojo/scripts.inc"
 	.include "data/maps/SaffronCity_Gym/scripts.inc"
-	.include "data/maps/SaffronCity_House2/scripts.inc"
+	.include "data/maps/SaffronCity_House/scripts.inc"
 	.include "data/maps/SaffronCity_Mart/scripts.inc"
 	.include "data/maps/SaffronCity_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/SaffronCity_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/SaffronCity_House3/scripts.inc"
+	.include "data/maps/SaffronCity_MrPsychicsHouse/scripts.inc"
 	.include "data/maps/SaffronCity_PokemonTrainerFanClub/scripts.inc"
 	.include "data/maps/Route2_ViridianForest_SouthEntrance/scripts.inc"
 	.include "data/maps/Route2_House/scripts.inc"
@@ -593,7 +599,7 @@ gStdScriptsEnd::
 	.include "data/maps/FiveIsland_RocketWarehouse/text.inc"
 	.include "data/maps/SixIsland_DottedHole_SapphireRoom/text.inc"
 	.include "data/maps/SixIsland_PatternBush/text.inc"
-	.include "data/maps/SevenIsland_TrainerTower_Lobby/text.inc"
+	.include "data/maps/TrainerTower_Lobby/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room1/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room4/text.inc"
 	.include "data/maps/FiveIsland_LostCave_Room10/text.inc"
@@ -658,6 +664,7 @@ gStdScriptsEnd::
 	.include "data/maps/SevenIsland_TrainerTower/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_Entrance/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon/text.inc"
+	.include "data/maps/SevenIsland_TanobyRuins/text.inc"
 	.include "data/maps/PalletTown_PlayersHouse_1F/text.inc"
 	.include "data/maps/PalletTown_PlayersHouse_2F/text.inc"
 	.include "data/maps/PalletTown_GarysHouse/text.inc"
@@ -730,14 +737,14 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland_PokemonCenter_1F/text.inc"
 	.include "data/maps/CinnabarIsland_Mart/text.inc"
 	.include "data/maps/IndigoPlateau_PokemonCenter_1F/text.inc"
-	.include "data/maps/SaffronCity_House1_1F/text.inc"
-	.include "data/maps/SaffronCity_House1_2F/text.inc"
+	.include "data/maps/SaffronCity_CopycatsHouse_1F/text.inc"
+	.include "data/maps/SaffronCity_CopycatsHouse_2F/text.inc"
 	.include "data/maps/SaffronCity_Dojo/text.inc"
 	.include "data/maps/SaffronCity_Gym/text.inc"
-	.include "data/maps/SaffronCity_House2/text.inc"
+	.include "data/maps/SaffronCity_House/text.inc"
 	.include "data/maps/SaffronCity_Mart/text.inc"
 	.include "data/maps/SaffronCity_PokemonCenter_1F/text.inc"
-	.include "data/maps/SaffronCity_House3/text.inc"
+	.include "data/maps/SaffronCity_MrPsychicsHouse/text.inc"
 	.include "data/maps/SaffronCity_PokemonTrainerFanClub/text.inc"
 	.include "data/maps/Route2_ViridianForest_SouthEntrance/text.inc"
 	.include "data/maps/Route2_House/text.inc"
@@ -790,6 +797,7 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_House/text.inc"
 	.include "data/maps/SixIsland_Mart/text.inc"
 	.include "data/maps/FiveIsland_ResortGorgeous_House/text.inc"
+	.include "data/maps/TwoIsland_CapeBrink_House/text.inc"
 	.include "data/maps/SixIsland_WaterPath_House1/text.inc"
 	.include "data/maps/SixIsland_WaterPath_House2/text.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/text.inc"
@@ -806,33 +814,20 @@ Text_WouldYouLikeToMixRecords:: @ 81A5028
 Text_WeHopeToSeeYouAgain2:: @ 81A505B
 	.string "We hope to see you again!$"
 
-Text_BootedUpPC:: @ 81A5075
-	.string "{PLAYER} booted up the PC.$"
+	.include "data/text/pc.inc"
 
-Text_AccessWhichPC:: @ 81A508A
-	.string "Which PC should be accessed?$"
-
-Text_AccessedSomeonesPC:: @ 81A50A7
-	.string "Accessed Someone's PC.$"
-
-Text_OpenedPkmnStorage:: @ 81A50BE
-	.string "POKéMON Storage System opened.$"
-
-Text_AccessedPlayersPC:: @ 81A50DD
-	.string "Accessed {PLAYER}'s PC.$"
-
-Text_AccessedBillsPC:: @ 81A50EF
-	.string "Accessed BILL's PC.$"
-
-Text_1A5103:: @ 81A5103
+@ Unused
+Text_WelcomeTradeCenter:: @ 81A5103
 	.string "Welcome to the POKéMON CABLE CLUB\n"
 	.string "TRADE CENTER.$"
 
-Text_1A5133:: @ 81A5133
+@ Unused
+Text_WelcomeColosseum:: @ 81A5133
 	.string "Welcome to the POKéMON CABLE CLUB\n"
 	.string "COLOSSEUM.$"
 
-Text_1A5160:: @ 81A5160
+@ Unused
+Text_WelcomeTimeCapsule:: @ 81A5160
 	.string "Welcome to the POKéMON CABLE CLUB\n"
 	.string "TIME CAPSULE.$"
 
@@ -851,7 +846,7 @@ Text_PlayerWhatCanIDoForYou:: @ 81A51D0
 
 	.include "data/text/obtain_item.inc"
 
-Text_1A5351:: @ 81A5351
+Text_MakingPreparations:: @ 81A5351
 	.string "じゅんびちゅうです！$"
 
 Text_WantWhichFloor:: @ 81A535C
@@ -861,7 +856,8 @@ Text_BagItemCanBeRegistered:: @ 81A5375
 	.string "An item in the BAG can be\n"
 	.string "registered to SELECT for easy use.$"
 
-Text_1A53B2:: @ 81A53B2
+@ Unused (email from R/S Rivals computer)
+Text_TrainerSchoolEmail:: @ 81A53B2
 	.string "パソコンに\n"
 	.string "ポケモン　トレーナー　こうざの\l"
 	.string "メールが　きている！\p"
@@ -874,7 +870,8 @@ Text_1A53B2:: @ 81A53B2
 Text_PlayerBootedUpPC:: @ 81A5420
 	.string "{PLAYER} booted up the PC.$"
 
-Text_1A5435:: @ 81A5435
+@ Unused
+Text_LinkWasCanceled:: @ 81A5435
 	.string "つうしんは　キャンセルされました$"
 
 @ Unused
@@ -924,7 +921,7 @@ Text_AppearsToBeUndergoingAdjustments:: @ 81A5667
 	.string "It appears to be undergoing\n"
 	.string "adjustments…$"
 
-Text_1A5690:: @ 81A5690
+Text_HandedOverItem:: @ 81A5690
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
@@ -932,16 +929,7 @@ Text_GiveNicknameToThisMon:: @ 81A56A7
 	.string "Do you want to give a nickname to\n"
 	.string "this {STR_VAR_1}?$"
 
-Text_1A56D2:: @ 81A56D2
-	.string "おッ！　ダウジングマシンが\n"
-	.string "はんのう　してるぞ！\p"
-	.string "ましたに　どうぐが　うまってる！\n"
-	.string "‥‥‥$"
-
-Text_DugUpItemFromGround:: @ 81A5700
-	.string "{PLAYER} dug up one {STR_VAR_2}\n"
-	.string "from deep in the ground.$"
-
+	.include "data/text/itemfinder.inc"
 	.include "data/text/route23.inc"
 	.include "data/text/aide.inc"
 	.include "data/text/ingame_trade.inc"
@@ -966,96 +954,43 @@ Text_HavePokedexRated:: @ 81A5C03
 Text_ClosedLinkToProfOaksPC:: @ 81A5C2E
 	.string "Closed link to PROF. OAK's PC.$"
 
-Text_1A5C4D:: @ 81A5C4D
+Text_VoiceRangOutDontRunAway:: @ 81A5C4D
 	.string "Someone's voice rang out,\n"
 	.string "“Don't run away!”$"
 
-Text_1A5C79:: @ 81A5C79
+@ Uncear what the below unused JP texts were for
+Text_IdLikeToSeeRequest:: @ 81A5C79
 	.string "えっとー\n"
 	.string "{STR_VAR_2}が　みてみたいなー\p"
 	.string "それも　{STR_VAR_1}{STR_VAR_3}\n"
 	.string "{STR_VAR_2}が　みてみたいなー$"
 
-Text_1A5C9F:: @ 81A5C9F
+Text_ThankYouForShowingMe:: @ 81A5C9F
 	.string "わぁー　すごい！\n"
 	.string "{STR_VAR_1}{STR_VAR_3}{STR_VAR_2}だー！\p"
 	.string "ありがとー\n"
 	.string "また　よろしくねー！$"
 
-Text_1A5CC3:: @ 81A5CC3
+Text_ThatsNotRight:: @ 81A5CC3
 	.string "それっ　ちがうよー！$"
 
-Text_1A5CCE:: @ 81A5CCE
+Text_ISee:: @ 81A5CCE
 	.string "そっか‥$"
 
-Text_1A5CD3:: @ 81A5CD3
+Text_TheDoorIsClosed:: @ 81A5CD3
 	.string "ドアは　しまっている‥$"
 
 Text_TheDoorIsOpen:: @ 81A5CDF
 	.string "The door is open…$"
 
 	.include "data/text/pc_transfer.inc"
-
-Text_1A5E89:: @ 81A5E89
-	.string "First, you should restore your\n"
-	.string "POKéMON to full health.$"
-
-Text_1A5EC0:: @ 81A5EC0
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "If your POKéMON's energy, HP,\n"
-	.string "is down, please come see us.\p"
-	.string "If you're planning to go far in the\n"
-	.string "field, you should buy some POTIONS\l"
-	.string "at the POKéMON MART.\p"
-	.string "We hope you excel!$"
-
-Text_1A5F9B:: @ 81A5F9B
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "We hope you excel!$"
-
-Text_1A5FDF:: @ 81A5FDF
-	.string "MOM: {PLAYER}!\n"
-	.string "Welcome home.\p"
-	.string "It sounds like you had quite\n"
-	.string "an experience.\p"
-	.string "Maybe you should take a quick\n"
-	.string "rest.$"
-
-Text_1A6046:: @ 81A6046
-	.string "MOM: Oh, good! You and your\n"
-	.string "POKéMON are looking great.\p"
-	.string "I just heard from PROF. OAK.\p"
-	.string "He said that POKéMON's energy is\n"
-	.string "measured in HP.\p"
-	.string "If your POKéMON lose their HP,\n"
-	.string "you can restore them at any\l"
-	.string "POKéMON CENTER.\p"
-	.string "If you're going to travel far away,\n"
-	.string "the smart TRAINER stocks up on\l"
-	.string "POTIONS at the POKéMON MART.\p"
-	.string "Make me proud, honey!\p"
-	.string "Take care!$"
-
-Text_1A6197:: @ 81A6197
-	.string "{PLAYER} is out of usable\n"
-	.string "POKéMON!\p"
-	.string "{PLAYER} panicked and lost ¥{STR_VAR_1}…\p"
-	.string "… … … …\p"
-	.string "{PLAYER} whited out!$"
-
-Text_1A61E5:: @ 81A61E5
-	.string "{PLAYER} is out of usable\n"
-	.string "POKéMON!\p"
-	.string "{PLAYER} whited out!$"
-
+	.include "data/text/white_out.inc"
 	.include "data/text/poke_mart.inc"
 
 Text_MonFlewAway:: @ 81A63C4
 	.string "The {STR_VAR_1} flew away!$"
 
-Text_1A63D6:: @ 81A63D6
+Text_TheresBedLetsRest:: @ 81A63D6
 	.string "ベッドが　ある‥‥\n"
 	.string "やすんでいこう$"
 
@@ -1126,53 +1061,14 @@ EventScript_ResetAllMapFlags:: @ 81A6481
 	setvar VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	end
 
-EventScript_1A651A:: @ 81A651A
-	clearflag FLAG_HIDE_POSTGAME_GOSSIPERS
-	call EventScript_ResetEliteFour
-	special Special_UpdateTrainerFanClubGameClear
-	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	compare VAR_RESULT, FALSE
-	call_if_eq EventScript_1A653B
-	call EventScript_ResetLegendaries
-	return
-
-EventScript_1A653B:: @ 81A653B
-	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 2
-	return
-
-EventScript_ResetLegendaries:: @ 81A6541
-	clearflag FLAG_LUGIA_FLEW_AWAY
-	clearflag FLAG_HO_OH_FLEW_AWAY
-	clearflag FLAG_DEOXYS_FLEW_AWAY
-	return
-
-gUnknown_81A654B:: @ 81A654B
-	call EventScript_ResetEliteFour
-	end
-
-EventScript_ResetEliteFour:: @ 81A6551
-	clearflag FLAG_DEFEATED_LORELEI
-	clearflag FLAG_DEFEATED_BRUNO
-	clearflag FLAG_DEFEATED_AGATHA
-	clearflag FLAG_DEFEATED_LANCE
-	clearflag FLAG_DEFEATED_CHAMP
-	cleartrainerflag TRAINER_CHAMPION_FIRST_SQUIRTLE
-	cleartrainerflag TRAINER_CHAMPION_FIRST_BULBASAUR
-	cleartrainerflag TRAINER_CHAMPION_FIRST_CHARMANDER
-	cleartrainerflag TRAINER_CHAMPION_REMATCH_SQUIRTLE
-	cleartrainerflag TRAINER_CHAMPION_REMATCH_BULBASAUR
-	cleartrainerflag TRAINER_CHAMPION_REMATCH_CHARMANDER
-	setvar VAR_MAP_SCENE_POKEMON_LEAGUE, 0
-	return
-
+	.include "data/scripts/hall_of_fame.inc"
 	.include "data/scripts/pkmn_center_nurse.inc"
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/pc.inc"
 
-@ DoEasyChatScreen?
-EventScript_1A6AC0:: @ 81A6AC0
+Common_ShowEasyChatScreen:: @ 81A6AC0
 	fadescreen FADE_TO_BLACK
-	special sub_80FEE44
+	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
@@ -1199,49 +1095,14 @@ EventScript_WallTownMap:: @ 81A6C32
 	msgbox Text_ATownMap
 	goto_if_questlog EventScript_ReleaseEnd
 	fadescreen FADE_TO_BLACK
-	special Special_TownMap
+	special ShowTownMap
 	waitstate
 	releaseall
 	end
 
 	.include "data/text/pokedex_rating.inc"
 	.include "data/scripts/pokedex_rating.inc"
-
-EventScript_1A7493:: @ 81A7493
-	lockall
-	setvar VAR_TEMP_1, 1
-	goto EventScript_1A74B7
-	end
-
-EventScript_1A749F:: @ 81A749F
-	lockall
-	setvar VAR_TEMP_2, 1
-	goto EventScript_1A74B7
-	end
-
-EventScript_1A74AB:: @ 81A74AB
-	lockall
-	setvar VAR_TEMP_3, 1
-	goto EventScript_1A74B7
-	end
-
-EventScript_1A74B7:: @ 81A74B7
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, 1
-	setvar VAR_0x8006, 8
-	setvar VAR_0x8007, 5
-	special Special_ShakeScreen
-	waitstate
-	releaseall
-	end
-
-EventScript_1A74D1:: @ 81A74D1
-	setvar VAR_TEMP_1, 1
-	setvar VAR_TEMP_2, 1
-	setvar VAR_TEMP_3, 1
-	setvar VAR_TEMP_4, 1
-	setvar VAR_TEMP_5, 1
-	return
+	.include "data/scripts/cave_of_origin.inc"
 
 EventScript_ChangePokemonNickname:: @ 81A74EB
 	fadescreen FADE_TO_BLACK
@@ -1249,131 +1110,20 @@ EventScript_ChangePokemonNickname:: @ 81A74EB
 	waitstate
 	return
 
-EventScript_1A74F2:: @ 81A74F2
+@ Unused
+EventScript_HandOverItem:: @ 81A74F2
 	getitemname 0, VAR_0x8004
 	playfanfare MUS_ME_WAZA
-	message Text_1A5690
+	message Text_HandedOverItem
 	waitmessage
 	waitfanfare
 	removeitem VAR_0x8004, 1
 	return
 
-EventScript_1A7506:: @ 81A7506
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
-	waitmovement 0
-	playse SE_DOOR
-	call EventScript_1A7538
-	special DrawWholeMapView
-	setflag FLAG_TEMP_4
-	return
-
-EventScript_1A751F:: @ 81A751F
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkUp5
-	waitmovement 0
-	setflag FLAG_TEMP_2
-	playse SE_KI_GASYAN
-	call EventScript_1A759C
-	special DrawWholeMapView
-	return
-
-EventScript_1A7538:: @ 81A7538
-	setmetatile 6, 1, 654, 1
-	setmetatile 6, 2, 662, 0
-	return
-
-EventScript_1A754B:: @ 81A754B
-	lockall
-	textcolor 0
-	msgbox Text_1A5C4D
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_1A75D3
-	waitmovement 0
-	releaseall
-	end
-
-EventScript_1A7563:: @ 81A7563
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_Delay32
-	waitmovement 0
-	playse SE_DOOR
-	setmetatile 6, 4, 654, 1
-	setmetatile 6, 5, 662, 0
-	special DrawWholeMapView
-	setflag FLAG_TEMP_4
-	return
-
-EventScript_1A7589:: @ 81A7589
-	setmetatile 6, 4, 654, 1
-	setmetatile 6, 5, 662, 0
-	return
-
-EventScript_1A759C:: @ 81A759C
-	setmetatile 5, 11, 669, 1
-	setmetatile 6, 11, 670, 1
-	setmetatile 7, 11, 671, 1
-	setmetatile 5, 12, 677, 1
-	setmetatile 6, 12, 678, 1
-	setmetatile 7, 12, 679, 1
-	return
-
-Movement_1A75D3:: @ 81A75D3
-	walk_up
-	step_end
-
-EventScript_1A75D5:: @ 81A75D5
-	special Special_PokemonLeagueLightingEffect
-	return
-
+	.include "data/scripts/pokemon_league.inc"
 	.include "data/scripts/movement.inc"	
 	.include "data/scripts/flavor_text.inc"
-
-gUnknown_81A7702:: @ 81A7702
-	lockall
-	textcolor 3
-	msgbox Text_FillOutQuestionnaire, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1A778A
-	setvar VAR_0x8004, 14
-	call EventScript_1A6AC0
-	lock
-	faceplayer
-	specialvar VAR_0x8008, Special_GetMartClerkObjectId
-	textcolor 0
-	compare VAR_0x8004, 0
-	goto_if_eq EventScript_1A774D
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_1A778A
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1A778C
-	end
-
-EventScript_1A774D:: @ 81A774D
-	applymovement VAR_0x8008, Movement_FaceDown
-	waitmovement 0
-	playse SE_PIN
-	applymovement VAR_0x8008, Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8008, Movement_Delay48
-	waitmovement 0
-	msgbox Text_YouKnowThoseWords
-	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
-	textcolor 3
-	special sub_80699BC
-	signmsg
-	msgbox Text_YouCanAccessMysteryGift
-	normalmsg
-	releaseall
-	end
-
-EventScript_1A778A:: @ 81A778A
-	releaseall
-	end
-
-EventScript_1A778C:: @ 81A778C
-	applymovement VAR_0x8008, Movement_FaceDown
-	waitmovement 0
-	msgbox Text_QuestionnaireThankYou
-	releaseall
-	end
+	.include "data/scripts/questionnaire.inc"
 
 EventScript_BagItemCanBeRegistered:: @ 81A77A0
 	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
@@ -1390,16 +1140,14 @@ EventScript_SetResultFalse:: @ 81A77B0
 	setvar VAR_RESULT, FALSE
 	return
 
-Route16_NorthEntrance_1F_EventScript_1A77B6:: @ 81A77B6
-Route18_EastEntrance_1F_EventScript_1A77B6:: @ 81A77B6
+EventScript_SetExitingCyclingRoad:: @ 81A77B6
 	lockall
 	clearflag FLAG_SYS_ON_CYCLING_ROAD
 	setvar VAR_MAP_SCENE_ROUTE16, 0
 	releaseall
 	end
 
-Route16_NorthEntrance_1F_EventScript_1A77C1:: @ 81A77C1
-Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
+EventScript_SetEnteringCyclingRoad:: @ 81A77C1
 	lockall
 	setvar VAR_MAP_SCENE_ROUTE16, 1
 	releaseall
@@ -1407,8 +1155,8 @@ Route18_EastEntrance_1F_EventScript_1A77C1:: @ 81A77C1
 
 	.include "data/scripts/route23.inc"
 
-EventScript_1A7AB9:: @ 81A7AB9
-	special Special_GetElevatorFloor
+EventScript_GetElevatorFloor:: @ 81A7AB9
+	special GetElevatorFloor
 	return
 
 	.include "data/scripts/aide.inc"
@@ -1424,7 +1172,8 @@ EventScript_ReleaseEnd:: @ 81A7AE0
 
 	.include "data/scripts/pokemon_mansion.inc"
 
-EventScript_1A80FE:: @ 81A80FE
+@ Unused
+EventScript_DelayedLookAround:: @ 81A80FE
 	lockall
 	applymovement VAR_0x8004, Movement_WalkInPlaceFastestLeft
 	waitmovement 0
@@ -1451,7 +1200,7 @@ EventScript_GetInGameTradeSpeciesInfo:: @ 81A8CAD
 	return
 
 EventScript_ChooseMonForInGameTrade:: @ 81A8CBD
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	lock
 	faceplayer
@@ -1511,155 +1260,60 @@ VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker:: @ 81A8D3F
 	release
 	end
 
-EventScript_ItemfinderDigUpUnderfootItem:: @ 81A8D49
-	lockall
-	textcolor 3
-	waitse
-	call EventScript_TryPickUpHiddenItem
-	compare VAR_0x8007, TRUE
-	goto_if_eq EventScript_DigUpItemPutInPocket
-	compare VAR_0x8007, FALSE
-	goto_if_eq EventScript_DigUpItemBagIsFull
-	end
-
-EventScript_DigUpItemPutInPocket::
-	message Text_DugUpItemFromGround
-	waitfanfare
-	waitmessage
-	delay 60
-	msgbox Text_PutItemAway
-	special Special_SetHiddenItemFlag
-	releaseall
-	end
-
-EventScript_DigUpItemBagIsFull::
-	msgbox Text_DugUpItemFromGround
-	msgbox Text_TooBadBagFull
-	setvar VAR_RESULT, 0
-	releaseall
-	end
-
-EventScript_AfterWhiteOutHeal:: @ 81A8D97
-	lockall
-	textcolor 1
-	msgbox Text_1A5E89
-	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-	call_if_unset FLAG_DEFEATED_BROCK, EventScript_1A8DC6
-	call_if_set FLAG_DEFEATED_BROCK, EventScript_1A8DCF
-	applymovement VAR_LAST_TALKED, Movement_Bow
-	waitmovement 0
-	fadedefaultbgm
-	releaseall
-	end
-
-EventScript_1A8DC6:: @ 81A8DC6
-	msgbox Text_1A5EC0
-	return
-
-EventScript_1A8DCF:: @ 81A8DCF
-	msgbox Text_1A5F9B
-	return
-
-EventScript_MomHeal:: @ 81A8DD8
-	lockall
-	textcolor 1
-	applymovement 1, Movement_WalkInPlaceFastestDown
-	waitmovement 0
-	msgbox Text_1A5FDF
-	call EventScript_OutOfCenterPartyHeal
-	msgbox Text_1A6046
-	fadedefaultbgm
-	releaseall
-	end
-
-EventScript_PoisonWhiteOut:: @ 81A8DFD
-	lockall
-	textcolor 3
-	special ExecuteWhiteOut
-	waitstate
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_1A8E11
-	releaseall
-	end
-
-EventScript_1A8E11:: @ 81A8E11
-	checkmoney 1, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1A8E2E
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_1A8E3C
-	end
-
-EventScript_1A8E2E:: @ 81A8E2E
-	msgbox Text_1A61E5
-	goto EventScript_1A8E4D
-	end
-
-EventScript_1A8E3C:: @ 81A8E3C
-	special Special_OverworldWhiteOutGetMoneyLoss
-	msgbox Text_1A6197
-	goto EventScript_1A8E4D
-	end
-
-EventScript_1A8E4D:: @ 81A8E4D
-	special sub_807F0B0
-	waitstate
-	fadescreen FADE_TO_BLACK
-	special sp0C8_whiteout_maybe
-	waitstate
-	end
+	.include "data/scripts/itemfinder.inc"
+	.include "data/scripts/white_out.inc"
 
 Std_PutItemAway:: @ 81A8E58
 	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
 	checkitemtype VAR_0x8000
-	call EventScript_1A8E6F
+	call EventScript_BufferPutAwayPocketName
 	msgbox Text_PutItemAway
 	return
 
-EventScript_1A8E6F:: @ 81A8E6F
+EventScript_BufferPutAwayPocketName:: @ 81A8E6F
 	switch VAR_RESULT
-	case POCKET_ITEMS, EventScript_1A8EAC
-	case POCKET_KEY_ITEMS, EventScript_1A8EB1
-	case POCKET_POKE_BALLS, EventScript_1A8EB6
-	case POCKET_TM_CASE, EventScript_1A8EBB
-	case POCKET_BERRY_POUCH, EventScript_1A8EC0
+	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
+	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
+	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
+	case POCKET_TM_CASE,     EventScript_BufferPutAwayPocketTMCase
+	case POCKET_BERRY_POUCH, EventScript_BufferPutAwayPocketBerryPouch
 	end
 
-EventScript_1A8EAC:: @ 81A8EAC
+EventScript_BufferPutAwayPocketItems:: @ 81A8EAC
 	getstdstring 2, STDSTRING_ITEMS_POCKET
 	return
 
-EventScript_1A8EB1:: @ 81A8EB1
+EventScript_BufferPutAwayPocketKeyItems:: @ 81A8EB1
 	getstdstring 2, STDSTRING_KEY_ITEMS_POCKET
 	return
 
-EventScript_1A8EB6:: @ 81A8EB6
+EventScript_BufferPutAwayPocketPokeBalls:: @ 81A8EB6
 	getstdstring 2, STDSTRING_POKEBALLS_POCKET
 	return
 
-EventScript_1A8EBB:: @ 81A8EBB
+EventScript_BufferPutAwayPocketTMCase:: @ 81A8EBB
 	getstdstring 2, STDSTRING_TM_CASE
 	return
 
-EventScript_1A8EC0:: @ 81A8EC0
+EventScript_BufferPutAwayPocketBerryPouch:: @ 81A8EC0
 	getstdstring 2, STDSTRING_BERRY_POUCH
 	return
 
 	.include "data/scripts/seagallop.inc"
 	.include "data/scripts/static_pokemon.inc"
 
-EventScript_1A925E:: @ 81A925E
+EventScript_TryDarkenRuins:: @ 81A925E
 	goto_if_set FLAG_SYS_UNLOCKED_TANOBY_RUINS, EventScript_Return
-	setweather 11
+	setweather WEATHER_SHADE
 	doweather
 	return
 
 EventScript_BrailleCursorWaitButton:: @ 81A926C
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	waitbuttonpress
 	playse SE_SELECT
 	setvar VAR_0x8006, 1
-	special Special_BrailleCursorToggle
+	special BrailleCursorToggle
 	return
 
 EventScript_NoMoreRoomForPokemon:: @ 81A927C
@@ -1673,426 +1327,15 @@ EventScript_NoMoreRoomForPokemon:: @ 81A927C
 
 @ Test message!
 @ Welcome to the world of Pokémon!
-Text_1ACD45:: @ 81ACD45
+Text_TestMsg:: @ 81ACD45
 	.string "テストよう　メッセージです！\n"
 	.string "ポケモンの　せかいへ　ようこそ！$"
 
 	.include "data/scripts/fame_checker.inc"
 	.include "data/text/fame_checker.inc"
-
-CeladonCity_GameCorner_EventScript_1B2867:: @ 81B2867
-	lockall
-	showmoneybox 0, 0, 0
-	msgbox gUnknown_81B1D7D, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_1B2926
-	checkmoney 50, 0
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_1B292B
-	playse SE_SHOP
-	removemoney 50, 0
-	updatemoneybox 0, 0, 0
-	waitse
-	message gUnknown_81B1E24
-	waitmessage
-	multichoice 21, 0, MULTICHOICE_TRAINER_CARD_ICON_TINT, TRUE
-	switch VAR_RESULT
-	case 0, EventScript_1B28DB
-	case 1, EventScript_1B28E6
-	case 2, EventScript_1B28F1
-	case 3, EventScript_1B28FC
-	end
-
-EventScript_1B28DB:: @ 81B28DB
-	setvar VAR_0x8004, 0
-	goto EventScript_1B2907
-
-EventScript_1B28E5:: @ 81B28E5
-	end
-
-EventScript_1B28E6:: @ 81B28E6
-	setvar VAR_0x8004, 1
-	goto EventScript_1B2907
-
-EventScript_1B28F0:: @ 81B28F0
-	end
-
-EventScript_1B28F1:: @ 81B28F1
-	setvar VAR_0x8004, 2
-	goto EventScript_1B2907
-
-EventScript_1B28FB:: @ 81B28FB
-	end
-
-EventScript_1B28FC:: @ 81B28FC
-	setvar VAR_0x8004, 3
-	goto EventScript_1B2907
-
-EventScript_1B2906:: @ 81B2906
-	end
-
-EventScript_1B2907:: @ 81B2907
-	message gUnknown_81B1E42
-	waitmessage
-	playse MUS_ME_PHOTO
-	dofieldeffect FLDEFF_UNK_45
-	delay 60
-	special Special_UpdateTrainerCardPhotoIcons
-	msgbox gUnknown_81B1E7D
-	hidemoneybox 0, 0
-	releaseall
-	end
-
-EventScript_1B2926:: @ 81B2926
-	hidemoneybox 0, 0
-	releaseall
-	end
-
-EventScript_1B292B:: @ 81B292B
-	msgbox gUnknown_81B1E07
-	hidemoneybox 0, 0
-	releaseall
-	end
-
-FourIsland_House2_EventScript_1B2938:: @ 81B2938
-	lock
-	specialvar VAR_0x8008, Special_StickerLadyGetBragFlags
-	goto_if_unset FLAG_MET_STICKER_LADY, EventScript_1B2951
-	goto_if_set FLAG_MET_STICKER_LADY, EventScript_1B2994
-	end
-
-EventScript_1B2951:: @ 81B2951
-	setflag FLAG_MET_STICKER_LADY
-	msgbox gUnknown_81B1EB3
-	applymovement 1, Movement_FacePlayer
-	waitmovement 0
-	playse SE_PIN
-	applymovement 1, Movement_ExclamationMark
-	waitmovement 0
-	applymovement 1, Movement_Delay48
-	waitmovement 0
-	compare VAR_0x8008, 0
-	goto_if_eq EventScript_1B2B8E
-	message gUnknown_81B1EF8
-	waitmessage
-	goto EventScript_1B29D0
-
-EventScript_1B2993:: @ 81B2993
-	end
-
-EventScript_1B2994:: @ 81B2994
-	applymovement 1, Movement_FacePlayer
-	waitmovement 0
-	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
-	compare VAR_0x8008, 0
-	goto_if_eq EventScript_1B29C6
-	message gUnknown_81B2025
-	waitmessage
-	goto EventScript_1B29D0
-
-EventScript_1B29C5:: @ 81B29C5
-	end
-
-EventScript_1B29C6:: @ 81B29C6
-	msgbox gUnknown_81B1FEF
-	release
-	end
-
-EventScript_1B29D0:: @ 81B29D0
-	switch VAR_0x8008
-	case 1, EventScript_1B2A23
-	case 2, EventScript_1B2A4F
-	case 4, EventScript_1B2A7B
-	case 3, EventScript_1B2AA7
-	case 5, EventScript_1B2ADE
-	case 6, EventScript_1B2B15
-	case 7, EventScript_1B2B4C
-	end
-
-EventScript_1B2A23:: @ 81B2A23
-	multichoice 15, 8, MULTICHOICE_HOF_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2B98
-	case 1, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2A4F:: @ 81B2A4F
-	multichoice 16, 8, MULTICHOICE_EGGS_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2C62
-	case 1, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2A7B:: @ 81B2A7B
-	multichoice 15, 8, MULTICHOICE_VICTORIES_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2D2C
-	case 1, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2AA7:: @ 81B2AA7
-	multichoice 15, 6, MULTICHOICE_HOF_EGGS_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2B98
-	case 1, EventScript_1B2C62
-	case 2, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2ADE:: @ 81B2ADE
-	multichoice 15, 6, MULTICHOICE_HOF_VICTORIES_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2B98
-	case 1, EventScript_1B2D2C
-	case 2, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2B15:: @ 81B2B15
-	multichoice 15, 6, MULTICHOICE_EGGS_VICTORIES_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2C62
-	case 1, EventScript_1B2D2C
-	case 2, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2B4C:: @ 81B2B4C
-	multichoice 15, 5, MULTICHOICE_HOF_EGGS_VICTORIES_QUIT, FALSE
-	switch VAR_RESULT
-	case 0, EventScript_1B2B98
-	case 1, EventScript_1B2C62
-	case 2, EventScript_1B2D2C
-	case 3, EventScript_1B2DF6
-	case SCR_MENU_CANCEL, EventScript_1B2DF6
-	end
-
-EventScript_1B2B8E:: @ 81B2B8E
-	msgbox gUnknown_81B1EF8
-	release
-	end
-
-EventScript_1B2B98:: @ 81B2B98
-	compare VAR_0x8004, 39
-	goto_if_le EventScript_1B2BC5
-	compare VAR_0x8004, 99
-	goto_if_le EventScript_1B2BE3
-	compare VAR_0x8004, 199
-	goto_if_le EventScript_1B2C01
-	compare VAR_0x8004, 200
-	goto_if_ge EventScript_1B2C1F
-	end
-
-EventScript_1B2BC5:: @ 81B2BC5
-	compare VAR_HOF_BRAG_STATE, 1
-	goto_if_eq EventScript_1B2C3D
-	setvar VAR_HOF_BRAG_STATE, 1
-	msgbox gUnknown_81B206E
-	goto EventScript_1B2C51
-
-EventScript_1B2BE2:: @ 81B2BE2
-	end
-
-EventScript_1B2BE3:: @ 81B2BE3
-	compare VAR_HOF_BRAG_STATE, 2
-	goto_if_eq EventScript_1B2C3D
-	setvar VAR_HOF_BRAG_STATE, 2
-	msgbox gUnknown_81B20CF
-	goto EventScript_1B2C51
-
-EventScript_1B2C00:: @ 81B2C00
-	end
-
-EventScript_1B2C01:: @ 81B2C01
-	compare VAR_HOF_BRAG_STATE, 3
-	goto_if_eq EventScript_1B2C3D
-	setvar VAR_HOF_BRAG_STATE, 3
-	msgbox gUnknown_81B2133
-	goto EventScript_1B2C51
-
-EventScript_1B2C1E:: @ 81B2C1E
-	end
-
-EventScript_1B2C1F:: @ 81B2C1F
-	compare VAR_HOF_BRAG_STATE, 4
-	goto_if_eq EventScript_1B2C47
-	setvar VAR_HOF_BRAG_STATE, 4
-	msgbox gUnknown_81B21C4
-	goto EventScript_1B2C51
-
-EventScript_1B2C3C:: @ 81B2C3C
-	end
-
-EventScript_1B2C3D:: @ 81B2C3D
-	msgbox gUnknown_81B227C
-	release
-	end
-
-EventScript_1B2C47:: @ 81B2C47
-	msgbox gUnknown_81B22B0
-	release
-	end
-
-EventScript_1B2C51:: @ 81B2C51
-	textcolor 3
-	playfanfare MUS_FANFA1
-	message gUnknown_81B2242
-	waitmessage
-	waitfanfare
-	delay 90
-	release
-	end
-
-EventScript_1B2C62:: @ 81B2C62
-	compare VAR_0x8005, 99
-	goto_if_le EventScript_1B2C8F
-	compare VAR_0x8005, 199
-	goto_if_le EventScript_1B2CAD
-	compare VAR_0x8005, 299
-	goto_if_le EventScript_1B2CCB
-	compare VAR_0x8005, 300
-	goto_if_ge EventScript_1B2CE9
-	end
-
-EventScript_1B2C8F:: @ 81B2C8F
-	compare VAR_EGG_BRAG_STATE, 1
-	goto_if_eq EventScript_1B2D07
-	setvar VAR_EGG_BRAG_STATE, 1
-	msgbox gUnknown_81B2308
-	goto EventScript_1B2D1B
-
-EventScript_1B2CAC:: @ 81B2CAC
-	end
-
-EventScript_1B2CAD:: @ 81B2CAD
-	compare VAR_EGG_BRAG_STATE, 2
-	goto_if_eq EventScript_1B2D07
-	setvar VAR_EGG_BRAG_STATE, 2
-	msgbox gUnknown_81B2372
-	goto EventScript_1B2D1B
-
-EventScript_1B2CCA:: @ 81B2CCA
-	end
-
-EventScript_1B2CCB:: @ 81B2CCB
-	compare VAR_EGG_BRAG_STATE, 3
-	goto_if_eq EventScript_1B2D07
-	setvar VAR_EGG_BRAG_STATE, 3
-	msgbox gUnknown_81B23E0
-	goto EventScript_1B2D1B
-
-EventScript_1B2CE8:: @ 81B2CE8
-	end
-
-EventScript_1B2CE9:: @ 81B2CE9
-	compare VAR_EGG_BRAG_STATE, 4
-	goto_if_eq EventScript_1B2D11
-	setvar VAR_EGG_BRAG_STATE, 4
-	msgbox gUnknown_81B2448
-	goto EventScript_1B2D1B
-
-EventScript_1B2D06:: @ 81B2D06
-	end
-
-EventScript_1B2D07:: @ 81B2D07
-	msgbox gUnknown_81B251B
-	release
-	end
-
-EventScript_1B2D11:: @ 81B2D11
-	msgbox gUnknown_81B254F
-	release
-	end
-
-EventScript_1B2D1B:: @ 81B2D1B
-	textcolor 3
-	playfanfare MUS_FANFA1
-	message gUnknown_81B24EA
-	waitmessage
-	waitfanfare
-	delay 90
-	release
-	end
-
-EventScript_1B2D2C:: @ 81B2D2C
-	compare VAR_0x8006, 19
-	goto_if_le EventScript_1B2D59
-	compare VAR_0x8006, 49
-	goto_if_le EventScript_1B2D77
-	compare VAR_0x8006, 99
-	goto_if_le EventScript_1B2D95
-	compare VAR_0x8006, 100
-	goto_if_ge EventScript_1B2DB3
-	end
-
-EventScript_1B2D59:: @ 81B2D59
-	compare VAR_LINK_WIN_BRAG_STATE, 1
-	goto_if_eq EventScript_1B2DD1
-	setvar VAR_LINK_WIN_BRAG_STATE, 1
-	msgbox gUnknown_81B25A7
-	goto EventScript_1B2DE5
-
-EventScript_1B2D76:: @ 81B2D76
-	end
-
-EventScript_1B2D77:: @ 81B2D77
-	compare VAR_LINK_WIN_BRAG_STATE, 2
-	goto_if_eq EventScript_1B2DD1
-	setvar VAR_LINK_WIN_BRAG_STATE, 2
-	msgbox gUnknown_81B2609
-	goto EventScript_1B2DE5
-
-EventScript_1B2D94:: @ 81B2D94
-	end
-
-EventScript_1B2D95:: @ 81B2D95
-	compare VAR_LINK_WIN_BRAG_STATE, 3
-	goto_if_eq EventScript_1B2DD1
-	setvar VAR_LINK_WIN_BRAG_STATE, 3
-	msgbox gUnknown_81B267B
-	goto EventScript_1B2DE5
-
-EventScript_1B2DB2:: @ 81B2DB2
-	end
-
-EventScript_1B2DB3:: @ 81B2DB3
-	compare VAR_LINK_WIN_BRAG_STATE, 4
-	goto_if_eq EventScript_1B2DDB
-	setvar VAR_LINK_WIN_BRAG_STATE, 4
-	msgbox gUnknown_81B26F6
-	goto EventScript_1B2DE5
-
-EventScript_1B2DD0:: @ 81B2DD0
-	end
-
-EventScript_1B2DD1:: @ 81B2DD1
-	msgbox gUnknown_81B27DB
-	release
-	end
-
-EventScript_1B2DDB:: @ 81B2DDB
-	msgbox gUnknown_81B280F
-	release
-	end
-
-EventScript_1B2DE5:: @ 81B2DE5
-	textcolor 3
-	playfanfare MUS_FANFA1
-	message gUnknown_81B27A6
-	waitmessage
-	waitfanfare
-	delay 90
-	release
-	end
-
-EventScript_1B2DF6:: @ 81B2DF6
-	release
-	end
-
+	.include "data/text/sign_lady.inc"
+	.include "data/text/trainer_card.inc"
+	.include "data/scripts/trainer_card.inc"
 	.include "data/text/help_system.inc"
 	.include "data/scripts/cable_club.inc"
 	.include "data/scripts/field_moves.inc"
@@ -2115,4 +1358,4 @@ EventScript_1B2DF6:: @ 81B2DF6
 	.include "data/scripts/test.inc"
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
-	.include "data/text/poke_dude.inc"
+	.include "data/text/pokedude.inc"

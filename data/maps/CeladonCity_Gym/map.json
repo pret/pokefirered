@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_1",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_GYM",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 3,
       "y": 11,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D111",
+      "script": "CeladonCity_Gym_EventScript_Kay",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 9,
       "y": 10,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D163",
+      "script": "CeladonCity_Gym_EventScript_Bridget",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 10,
       "y": 7,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D14C",
+      "script": "CeladonCity_Gym_EventScript_Tina",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 2,
       "y": 6,
       "elevation": 3,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "CeladonCity_Gym_EventScript_16D17A",
+      "script": "CeladonCity_Gym_EventScript_Tamia",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -75,11 +77,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "CeladonCity_Gym_EventScript_16D19E",
+      "script": "CeladonCity_Gym_EventScript_Lori",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D128",
+      "script": "CeladonCity_Gym_EventScript_Lisa",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ERIKA",
+      "graphics_id": "OBJ_EVENT_GFX_ERIKA",
       "x": 6,
       "y": 4,
       "elevation": 3,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Gym_EventScript_16D061",
+      "script": "CeladonCity_Gym_EventScript_Erika",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_F",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -114,11 +116,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "CeladonCity_Gym_EventScript_16D1B5",
+      "script": "CeladonCity_Gym_EventScript_Mary",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 6,
       "y": 8,
       "elevation": 3,
@@ -127,11 +129,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 3,
       "y": 5,
       "elevation": 3,
@@ -140,11 +142,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -153,7 +155,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_14"
     }
   ],
@@ -183,18 +185,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 16,
       "elevation": 0,
-      "script": "CeladonCity_Gym_EventScript_16D1CC"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Gym_EventScript_GymStatue"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 8,
       "y": 16,
       "elevation": 0,
-      "script": "CeladonCity_Gym_EventScript_16D1CC"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Gym_EventScript_GymStatue"
     }
   ]
 }

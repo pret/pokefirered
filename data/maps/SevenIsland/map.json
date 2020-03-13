@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_SEVEN_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_1",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_SEVEN_ISLAND_TRAINER_TOWER",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 7,
       "y": 18,
       "elevation": 3,
@@ -38,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 9,
       "y": 7,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_EventScript_167EC6",
+      "script": "SevenIsland_EventScript_OldWoman",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 15,
       "y": 5,
       "elevation": 3,
@@ -60,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SevenIsland_EventScript_167ECF",
+      "script": "SevenIsland_EventScript_Scientist",
       "flag": "0"
     }
   ],
@@ -97,11 +99,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 17,
       "y": 9,
       "elevation": 0,
-      "script": "SevenIsland_EventScript_167EBD"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SevenIsland_EventScript_IslandSign"
     }
   ]
 }

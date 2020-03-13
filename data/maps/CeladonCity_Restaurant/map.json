@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CHEF",
+      "graphics_id": "OBJ_EVENT_GFX_CHEF",
       "x": 12,
       "y": 7,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1EB",
+      "script": "CeladonCity_Restaurant_EventScript_Chef",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 2,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1F4",
+      "script": "CeladonCity_Restaurant_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 9,
       "y": 4,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D25E",
+      "script": "CeladonCity_Restaurant_EventScript_FatMan",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BALDING_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
       "x": 1,
       "y": 2,
       "elevation": 0,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D1FD",
+      "script": "CeladonCity_Restaurant_EventScript_CoinCaseMan",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 3,
       "y": 7,
       "elevation": 0,
@@ -75,7 +77,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Restaurant_EventScript_16D255",
+      "script": "CeladonCity_Restaurant_EventScript_WorkerM",
       "flag": "0"
     }
   ],

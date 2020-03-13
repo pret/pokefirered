@@ -361,7 +361,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 17:
-        HelpSystem_SetSomeVariable2(29);
+        SetHelpContext(HELPCONTEXT_PLAYERS_PC_ITEMS);
         gMain.state++;
         break;
     case 18:
@@ -577,7 +577,7 @@ static void ItemPc_PrintOrRemoveCursorAt(u8 y, u8 colorIdx)
     }
     else
     {
-        ItemPc_AddTextPrinterParameterized(0, 2, gFameCheckerText_ListMenuCursor, 0, y, 0, 0, 0, colorIdx);
+        ItemPc_AddTextPrinterParameterized(0, 2, gText_SelectorArrow2, 0, y, 0, 0, 0, colorIdx);
     }
 }
 
@@ -848,7 +848,7 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
     PrintTextArray(4, 2, 8, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
     Menu_InitCursor(4, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
     CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
     ItemPc_AddTextPrinterParameterized(windowId, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_ItemPcSubmenuRun;

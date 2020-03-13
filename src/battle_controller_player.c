@@ -10,7 +10,6 @@
 #include "party_menu.h"
 #include "pokeball.h"
 #include "pokemon.h"
-#include "random.h"
 #include "sound.h"
 #include "strings.h"
 #include "string_util.h"
@@ -24,7 +23,6 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
-#include "battle_setup.h"
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
 #include "constants/battle_anim.h"
@@ -831,9 +829,9 @@ void sub_802F6A8(void)
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
             if (gWirelessCommType == 0)
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
             else
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             gBattlerControllerFuncs[gActiveBattler] = sub_802F610;
         }
         else

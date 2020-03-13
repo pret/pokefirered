@@ -18,10 +18,8 @@
 #include "field_fadetransition.h"
 #include "field_weather.h"
 #include "event_object_movement.h"
-#include "event_object_80688E4.h"
 #include "event_object_lock.h"
 #include "field_player_avatar.h"
-#include "field_control_avatar.h"
 #include "battle.h"
 #include "item.h"
 #include "region_map.h"
@@ -44,6 +42,7 @@
 #include "constants/trainer_classes.h"
 #include "constants/species.h"
 #include "constants/items.h"
+#include "constants/field_weather.h"
 
 u8 gUnknown_3005E88;
 
@@ -115,7 +114,7 @@ static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
 static EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
 static EWRAM_DATA u16 sQuestLogIdx = 0;
-static EWRAM_DATA u8 gUnknown_203AF9A[64][2] = {{0}};
+static EWRAM_DATA u8 sMovementScripts[64][2] = {{0}};
 static EWRAM_DATA u16 gUnknown_203B01A = 0;
 static EWRAM_DATA u16 gUnknown_203B01C = 0;
 static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
@@ -154,7 +153,7 @@ static u8 sub_8111BD4(void);
 static void DrawQuestLogSceneDescription(void);
 static void sub_8111D90(u8);
 static void QuestLog_CloseTextWindow(void);
-static void QuestLog_SkipToEndOfPlayback(s8);
+static void QuestLog_SkipToEndOfPlayback(s8 delay);
 static void QuestLog_WaitFadeAndCancelPlayback(void);
 static bool8 sub_8111F60(void);
 static void sub_8111F8C(u8);
@@ -283,133 +282,6 @@ static bool8 sub_81153A8(u16, const u16 *);
 static bool8 sub_81153E4(u16, const u16 *);
 static void BufferLinkPartnersName(u8 *);
 
-extern const u8 QuestLog_Text_PreviouslyOnYourQuest[];
-extern const u8 QuestLog_Text_SwitchMon1WithMon2[];
-extern const u8 QuestLog_Text_SwappedHeldItemsOnMon[];
-extern const u8 QuestLog_Text_TookHeldItemFromMon[];
-extern const u8 QuestLog_Text_UsedItemOnMonAtThisLocation[];
-extern const u8 QuestLog_Text_UsedTheItem[];
-extern const u8 QuestLog_Text_UsedTheKeyItem[];
-extern const u8 QuestLog_Text_MonLearnedMoveFromTM[];
-extern const u8 QuestLog_Text_MonReplacedMoveWithTM[];
-extern const u8 QuestLog_Text_MonsWereFullyRestoredAtCenter[];
-extern const u8 QuestLog_Text_PlayerBattledChampionRival[];
-extern const u8 QuestLog_Text_PlayerSentOutMon1RivalSentOutMon2[];
-extern const u8 QuestLog_Text_WonTheMatchAsAResult[];
-extern const u8 QuestLog_Text_StoredItemInPC[];
-extern const u8 QuestLog_Text_WithdrewItemFromPC[];
-extern const u8 QuestLog_Text_TradedMon1ForPersonsMon2[];
-extern const u8 QuestLog_Text_SingleBattleWithPersonResultedInOutcome[];
-extern const u8 QuestLog_Text_DoubleBattleWithPersonResultedInOutcome[];
-extern const u8 QuestLog_Text_MultiBattleWithPeopleResultedInOutcome[];
-extern const u8 QuestLog_Text_Win[];
-extern const u8 QuestLog_Text_Loss[];
-extern const u8 QuestLog_Text_MingledInUnionRoom[];
-extern const u8 QuestLog_Text_DepartedPlaceInTownForNextDestination[];
-extern const u8 QuestLog_Text_SwitchedMonsBetweenBoxes[];
-extern const u8 QuestLog_Text_MovedMonToNewBox[];
-extern const u8 QuestLog_Text_SwitchedMonsWithinBox[];
-extern const u8 QuestLog_Text_MovedMonWithinBox[];
-extern const u8 QuestLog_Text_SwitchedPartyMonForPCMon[];
-extern const u8 QuestLog_Text_WithdrewMonFromPC[];
-extern const u8 QuestLog_Text_DepositedMonInPC[];
-extern const u8 QuestLog_Text_SwitchedMultipleMons[];
-extern const u8 QuestLog_Text_ADifferentSpot[];
-extern const u8 QuestLog_Text_GaveMonHeldItemFromPC[];
-extern const u8 QuestLog_Text_SwappedHeldItemFromPC[];
-extern const u8 QuestLog_Text_ChattedWithManyTrainers[];
-extern const u8 QuestLog_Text_Handily[];
-extern const u8 QuestLog_Text_Tenaciously[];
-extern const u8 QuestLog_Text_Somehow[];
-extern const u8 QuestLog_Text_TradedMon1ForTrainersMon2[];
-extern const u8 QuestLog_Text_BattledTrainerEndedInOutcome[];
-extern const u8 QuestLog_Text_BoughtItem[];
-extern const u8 QuestLog_Text_BoughtItemsIncludingItem[];
-extern const u8 QuestLog_Text_SoldNumOfItem[];
-extern const u8 QuestLog_Text_SoldItemsIncludingItem[];
-extern const u8 QuestLog_Text_JustOne[];
-extern const u8 QuestLog_Text_Num[];
-extern const u8 QuestLog_Text_UsedSoftboiled[];
-extern const u8 QuestLog_Text_UsedMilkDrink[];
-extern const u8 QuestLog_Text_MonLearnedMoveFromHM[];
-extern const u8 QuestLog_Text_MonReplacedMoveWithHM[];
-extern const u8 QuestLog_Text_DefeatedWildMon[];
-extern const u8 QuestLog_Text_DefeatedWildMons[];
-extern const u8 QuestLog_Text_CaughtWildMon[];
-extern const u8 QuestLog_Text_CaughtWildMons[];
-extern const u8 QuestLog_Text_DefeatedWildMonAndCaughtWildMon[];
-extern const u8 QuestLog_Text_DefeatedWildMonAndCaughtWildMons[];
-extern const u8 QuestLog_Text_DefeatedWildMonsAndCaughtWildMon[];
-extern const u8 QuestLog_Text_DefeatedWildMonsAndCaughtWildMons[];
-extern const u8 QuestLog_Text_GaveMonHeldItem[];
-extern const u8 QuestLog_Text_GaveMonHeldItem2[];
-extern const u8 QuestLog_Text_UsedCut[];
-extern const u8 QuestLog_Text_UsedFly[];
-extern const u8 QuestLog_Text_UsedSurf[];
-extern const u8 QuestLog_Text_UsedStrength[];
-extern const u8 QuestLog_Text_UsedFlash[];
-extern const u8 QuestLog_Text_UsedRockSmash[];
-extern const u8 QuestLog_Text_UsedWaterfall[];
-extern const u8 QuestLog_Text_UsedDive[];
-extern const u8 QuestLog_Text_UsedDigInLocation[];
-extern const u8 QuestLog_Text_UsedSweetScent[];
-extern const u8 QuestLog_Text_UsedTeleportToLocation[];
-extern const u8 QuestLog_Text_LeftTownsLocationForNextDestination[];
-extern const u8 QuestLog_Text_PlayedGamesAtGameCorner[];
-extern const u8 QuestLog_Text_RestedAtHome[];
-extern const u8 QuestLog_Text_LeftOaksLab[];
-extern const u8 QuestLog_Text_GymWasFullOfToughTrainers[];
-extern const u8 QuestLog_Text_DepartedGym[];
-extern const u8 QuestLog_Text_HadGreatTimeInSafariZone[];
-extern const u8 QuestLog_Text_ManagedToGetOutOfLocation[];
-extern const u8 QuestLog_Text_TookOnGymLeadersMonWithMonAndWon[];
-extern const u8 QuestLog_Text_TookOnEliteFoursMonWithMonAndWon[];
-extern const u8 QuestLog_Text_TookOnTrainersMonWithMonAndWon[];
-extern const u8 QuestLog_Text_Coolly[];
-extern const u8 QuestLog_Text_Barely[];
-extern const u8 QuestLog_Text_UsedEscapeRope[];
-extern const u8 QuestLog_Text_Draw[];
-extern const u8 QuestLog_Text_DepartedTheLocationForNextDestination[];
-extern const u8 QuestLog_Text_DepartedFromLocationToNextDestination[];
-extern const u8 QuestLog_Text_ObtainedItemInLocation[];
-extern const u8 QuestLog_Text_ArrivedInLocation[];
-extern const u8 QuestLog_Text_SavedGameAtLocation[];
-extern const u8 QuestLog_Text_Home[];
-extern const u8 QuestLog_Text_OakResearchLab[];
-extern const u8 QuestLog_Text_Gym[];
-extern const u8 QuestLog_Text_PokemonLeagueGate[];
-extern const u8 QuestLog_Text_ViridianForest[];
-extern const u8 QuestLog_Text_PewterMuseumOfScience[];
-extern const u8 QuestLog_Text_MtMoon[];
-extern const u8 QuestLog_Text_BikeShop[];
-extern const u8 QuestLog_Text_BillsHouse[];
-extern const u8 QuestLog_Text_DayCare[];
-extern const u8 QuestLog_Text_UndergroundPath[];
-extern const u8 QuestLog_Text_PokemonFanClub[];
-extern const u8 QuestLog_Text_SSAnne[];
-extern const u8 QuestLog_Text_DiglettsCave[];
-extern const u8 QuestLog_Text_RockTunnel[];
-extern const u8 QuestLog_Text_PowerPlant[];
-extern const u8 QuestLog_Text_PokemonTower[];
-extern const u8 QuestLog_Text_VolunteerHouse[];
-extern const u8 QuestLog_Text_NameRatersHouse[];
-extern const u8 QuestLog_Text_CeladonDeptStore[];
-extern const u8 QuestLog_Text_CeladonMansion[];
-extern const u8 QuestLog_Text_RocketGameCorner[];
-extern const u8 QuestLog_Text_Restaurant[];
-extern const u8 QuestLog_Text_RocketHideout[];
-extern const u8 QuestLog_Text_SafariZone[];
-extern const u8 QuestLog_Text_WardensHome[];
-extern const u8 QuestLog_Text_FightingDojo[];
-extern const u8 QuestLog_Text_SilphCo[];
-extern const u8 QuestLog_Text_SeafoamIslands[];
-extern const u8 QuestLog_Text_PokemonMansion[];
-extern const u8 QuestLog_Text_PokemonResearchLab[];
-extern const u8 QuestLog_Text_VictoryRoad[];
-extern const u8 QuestLog_Text_PokemonLeague[];
-extern const u8 QuestLog_Text_CeruleanCave[];
-
-
 static const struct WindowTemplate gUnknown_845661C[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
     { 0, 0, 18, 30, 2, 15, 0x0ad },
@@ -528,7 +400,7 @@ static void sub_8110A3C(void)
     }
 }
 
-void Special_GetQuestLogState(void)
+void GetQuestLogState(void)
 {
     gSpecialVar_Result = gQuestLogState;
 }
@@ -753,7 +625,7 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
         FillWindowPixelRect(gUnknown_203ADFE[i], 15, 0, 0, gUnknown_845661C[i].width * 8, gUnknown_845661C[i].height * 8);
     }
 
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_PreviouslyOnYourQuest);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_PreviouslyOnYourQuest);
 
     // Scene numbers count from 4 to 0, 0 being where the player saved
     if (sceneNum != 0)
@@ -1049,7 +921,7 @@ static void sub_811175C(u8 sceneNum, struct UnkStruct_203AE98 * a1)
 
 static void sub_81118F4(s8 a0)
 {
-    FadeScreen(1, a0);
+    FadeScreen(FADE_TO_BLACK, a0);
     sQuestLogCB = QuestLog_AdvancePlayhead;
 }
 
@@ -1307,9 +1179,9 @@ static void QuestLog_CloseTextWindow(void)
     CopyWindowToVram(gUnknown_203ADFE[1], 1);
 }
 
-static void QuestLog_SkipToEndOfPlayback(s8 a0)
+static void QuestLog_SkipToEndOfPlayback(s8 delay)
 {
-    FadeScreen(1, a0);
+    FadeScreen(FADE_TO_BLACK, delay);
     sQuestLogCB = QuestLog_WaitFadeAndCancelPlayback;
 }
 
@@ -1372,7 +1244,7 @@ static void Task_QuestLogScene_SavedGame(u8 taskId)
         if (gUnknown_203AE94.unk_0_6 != 1)
         {
             GetMapNameGeneric(gStringVar1, gMapHeader.regionMapSectionId);
-            StringExpandPlaceholders(gStringVar4, QuestLog_Text_SavedGameAtLocation);
+            StringExpandPlaceholders(gStringVar4, gText_QuestLog_SavedGameAtLocation);
             DrawQuestLogSceneDescription();
         }
         task->data[0] = 0;
@@ -1553,24 +1425,24 @@ void sub_811246C(struct Sprite *sprite)
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
     if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
     {
-        if (gUnknown_203AF9A[0][0] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[0][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[0][0]);
-            gUnknown_203AF9A[0][0] = OBJ_EVENT_ID_PLAYER;
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[0][0]);
+            sMovementScripts[0][0] = 0xFF;
         }
-        if (gUnknown_203AF9A[0][1] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[0][1] != OBJ_EVENT_ID_PLAYER)
         {
             sub_8150454();
-            gUnknown_203AF9A[0][1] = OBJ_EVENT_ID_PLAYER;
+            sMovementScripts[0][1] = OBJ_EVENT_ID_PLAYER;
         }
         sub_8063E28(objectEvent, sprite);
     }
     else
     {
-        if (gUnknown_203AF9A[objectEvent->localId][0] != OBJ_EVENT_ID_PLAYER)
+        if (sMovementScripts[objectEvent->localId][0] != 0xFF)
         {
-            ObjectEventSetHeldMovement(objectEvent, gUnknown_203AF9A[objectEvent->localId][0]);
-            gUnknown_203AF9A[objectEvent->localId][0] = OBJ_EVENT_ID_PLAYER;
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
+            sMovementScripts[objectEvent->localId][0] = 0xFF;
         }
         sub_8063E28(objectEvent, sprite);
     }
@@ -1738,15 +1610,15 @@ static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
         sNumQuestLogs = a2 / 8;
         for (i = 0; i < 0x40; i++)
         {
-            gUnknown_203AF9A[i][0] |= 0xFF;
-            gUnknown_203AF9A[i][1] |= 0xFF;
+            sMovementScripts[i][0] |= 0xFF;
+            sMovementScripts[i][1] |= 0xFF;
         }
         sQuestLogIdx = 0;
         gUnknown_203B01C = 0;
         gUnknown_3005E90 = (struct UnkStruct_3005E90){};
         gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
-        gUnknown_203AF9A[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
-        gUnknown_203AF9A[0][1] = 0xFF;
+        sMovementScripts[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+        sMovementScripts[0][1] = 0xFF;
         gUnknown_3005E88 = 1;
         break;
     case 2:
@@ -1809,10 +1681,10 @@ void sub_8112B3C(void)
                     switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
                     {
                     case 0:
-                        gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                         break;
                     case 1:
-                        gUnknown_203AF9A[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
                         break;
                     case 2:
                         *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[sQuestLogIdx].unk_3 << 24) | (gUnknown_3005E94[sQuestLogIdx].unk_2 << 16) | (gUnknown_3005E94[sQuestLogIdx].unk_1 << 8) | (gUnknown_3005E94[sQuestLogIdx].unk_0 << 0));
@@ -2153,7 +2025,7 @@ void ResetTrainerFanClub(void)
     VarSet(VAR_FANCLUB_LOSE_FAN_TIMER, 0);
 }
 
-void Special_TryLoseFansFromPlayTimeAfterLinkBattle(void)
+void Script_TryLoseFansFromPlayTimeAfterLinkBattle(void)
 {
     TryLoseFansFromPlayTimeAfterLinkBattle(TRAINER_FAN_CLUB);
 }
@@ -2167,7 +2039,7 @@ static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *fanClu
     }
 }
 
-void Special_UpdateTrainerFanClubGameClear(void)
+void Script_UpdateTrainerFanClubGameClear(void)
 {
     UpdateTrainerFanClubGameClear(TRAINER_FAN_CLUB);
 }
@@ -2284,7 +2156,7 @@ static u8 PlayerLoseRandomTrainerFan(struct TrainerFanClub *fanClub)
     return sFanClubMemberIds[idx];
 }
 
-u16 Special_GetNumFansOfPlayerInTrainerFanClub(void)
+u16 Script_GetNumFansOfPlayerInTrainerFanClub(void)
 {
     return GetNumFansOfPlayerInTrainerFanClub(TRAINER_FAN_CLUB);
 }
@@ -2303,7 +2175,7 @@ static u16 GetNumFansOfPlayerInTrainerFanClub(struct TrainerFanClub *fanClub)
     return count;
 }
 
-void Special_TryLoseFansFromPlayTime(void)
+void Script_TryLoseFansFromPlayTime(void)
 {
     TryLoseFansFromPlayTime(TRAINER_FAN_CLUB);
 }
@@ -2337,7 +2209,7 @@ static void TryLoseFansFromPlayTime(struct TrainerFanClub *fanClub)
     }
 }
 
-bool16 Special_IsFanClubMemberFanOfPlayer(void)
+bool16 Script_IsFanClubMemberFanOfPlayer(void)
 {
     return IsFanClubMemberFanOfPlayer(TRAINER_FAN_CLUB);
 }
@@ -2354,7 +2226,7 @@ static void SetInitialFansOfPlayer(struct TrainerFanClub *fanClub)
     SET_TRAINER_FAN_CLUB_FLAG(FANCLUB_MEMBER3);
 }
 
-void Special_BufferFanClubTrainerName(void)
+void Script_BufferFanClubTrainerName(void)
 {
     u8 whichLinkTrainer = 0;
     u8 whichNPCTrainer = 0;
@@ -2448,7 +2320,7 @@ static bool8 DidPlayerGetFirstFans(struct TrainerFanClub *fanClub)
     return fanClub->gotInitialFans;
 }
 
-void Special_SetPlayerGotFirstFans(void)
+void Script_SetPlayerGotFirstFans(void)
 {
     SetPlayerGotFirstFans(TRAINER_FAN_CLUB);
 }
@@ -2458,7 +2330,7 @@ static void SetPlayerGotFirstFans(struct TrainerFanClub *fanClub)
     fanClub->gotInitialFans = TRUE;
 }
 
-u8 Special_TryGainNewFanFromCounter(void)
+u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(TRAINER_FAN_CLUB, gSpecialVar_0x8004);
 }
@@ -2602,18 +2474,18 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 static bool8 InQuestLogDisabledLocation(void)
 {
     // In Trainer Tower
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_1F)
-        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_1F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_2F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_3F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_4F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_5F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_6F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_7F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_8F) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ROOF) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_LOBBY) 
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_1F)
+        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_1F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY) 
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
     // In pokemon trainer fan club
@@ -2629,7 +2501,7 @@ static bool8 InQuestLogDisabledLocation(void)
     // In elevator
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR)) 
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER_ELEVATOR)) 
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)) 
      || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 
@@ -2763,7 +2635,7 @@ static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
         return FALSE;
 
     sub_81138F8();
-    if (gUnknown_3005E88 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
+    if (gUnknown_3005E88 != 0 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
     {
         gUnknown_203B024.unk_00 = eventId;
         memcpy(gUnknown_203B024.unk_04, eventData, 8);
@@ -3172,7 +3044,7 @@ static const u16 *BufferQuestLogText_SwitchedPartyOrder(const u16 *eventData)
     const u16 *r4 = sub_8113E88(QL_EVENT_SWITCHED_PARTY_ORDER, eventData);
     QuestLog_GetSpeciesName(r4[0], gStringVar1, 0);
     QuestLog_GetSpeciesName(r4[1], gStringVar2, 0);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchMon1WithMon2);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_SwitchMon1WithMon2);
     r4 += 2;
     return r4;
 }
@@ -3206,21 +3078,21 @@ static const u16 *BufferQuestLogText_UsedItem(const u16 *eventData)
         if (r5[0] == ITEM_ESCAPE_ROPE)
         {
             GetMapNameGeneric(gStringVar2, (u8)r5[2]);
-            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedEscapeRope);
+            StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedEscapeRope);
         }
         else if (r5[1] != 0xFFFF)
         {
             QuestLog_GetSpeciesName(r5[1], gStringVar2, 0);
-            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedItemOnMonAtThisLocation);
+            StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedItemOnMonAtThisLocation);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedTheItem);
+            StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedTheItem);
         }
         break;
     case POCKET_KEY_ITEMS:
         StringCopy(gStringVar1, ItemId_GetName(r5[0]));
-        StringExpandPlaceholders(gStringVar4, QuestLog_Text_UsedTheKeyItem);
+        StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedTheKeyItem);
         break;
     case POCKET_TM_CASE:
         QuestLog_GetSpeciesName(r5[1], gStringVar1, 0);
@@ -3229,16 +3101,16 @@ static const u16 *BufferQuestLogText_UsedItem(const u16 *eventData)
         {
             StringCopy(gStringVar3, gMoveNames[r5[2]]);
             if (r5[0] > ITEM_TM50)
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonReplacedMoveWithHM);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonReplacedMoveWithHM);
             else
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonReplacedMoveWithTM);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonReplacedMoveWithTM);
         }
         else
         {
             if (r5[0] > ITEM_TM50)
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonLearnedMoveFromHM);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonLearnedMoveFromHM);
             else
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonLearnedMoveFromTM);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonLearnedMoveFromTM);
         }
         break;
     }
@@ -3266,7 +3138,7 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromPartyMenu(const u16 *eventD
     const u16 *r4 = sub_8113E88(QL_EVENT_GAVE_HELD_ITEM, eventData);
     QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItem);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItem);
     r4 += 2;
     return r4;
 }
@@ -3281,7 +3153,7 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromBagMenu(const u16 *eventDat
     const u16 *r4 = sub_8113E88(QL_EVENT_GAVE_HELD_ITEM_BAG, eventData);
     QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItem2);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItem2);
     r4 += 2;
     return r4;
 }
@@ -3297,7 +3169,7 @@ static const u16 *BufferQuestLogText_GaveHeldItemFromPC(const u16 *eventData)
 
     QuestLog_GetSpeciesName(r4[1], gStringVar2, 0);
     StringCopy(gStringVar1, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_GaveMonHeldItemFromPC);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItemFromPC);
     r4 += 2;
     return r4;
 }
@@ -3313,7 +3185,7 @@ static const u16 *BufferQuestLogText_TookHeldItem(const u16 *eventData)
 
     QuestLog_GetSpeciesName(r4[1], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TookHeldItemFromMon);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_TookHeldItemFromMon);
     r4 += 2;
     return r4;
 }
@@ -3341,7 +3213,7 @@ static const u16 *BufferQuestLogText_SwappedHeldItem(const u16 *eventData)
     QuestLog_GetSpeciesName(r4[2], gStringVar1, 0);
     StringCopy(gStringVar2, ItemId_GetName(r4[0])); // Item taken
     StringCopy(gStringVar3, ItemId_GetName(r4[1])); // Item given
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwappedHeldItemsOnMon);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_SwappedHeldItemsOnMon);
     r4 += 3;
     return r4;
 }
@@ -3357,7 +3229,7 @@ static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *eventData)
     QuestLog_GetSpeciesName(r4[2], gStringVar2, 0);
     StringCopy(gStringVar3, ItemId_GetName(r4[0]));
     StringCopy(gStringVar1, ItemId_GetName(r4[1]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_SwappedHeldItemFromPC);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_SwappedHeldItemFromPC);
     r4 += 3;
     return r4;
 }
@@ -3378,7 +3250,7 @@ static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *a0, const u16 *eventData)
 
 static const u16 *BufferQuestLogText_UsedPkmnCenter(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_MonsWereFullyRestoredAtCenter);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonsWereFullyRestoredAtCenter);
     a0 += 2;
     return a0;
 }
@@ -3407,27 +3279,27 @@ static const u16 *BufferQuestLogText_LinkTraded(const u16 *a0)
     BufferLinkPartnersName(gStringVar1);
     QuestLog_GetSpeciesName(a0[3], gStringVar2, 0); // Mon received
     QuestLog_GetSpeciesName(a0[2], gStringVar3, 0); // Mon sent
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TradedMon1ForPersonsMon2);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_TradedMon1ForPersonsMon2);
     r6 += 4;
     return r6;
 }
 
 static const u8 *const sDefeatedOpponentFlavorTexts[] = {
-    QuestLog_Text_Handily,
-    QuestLog_Text_Tenaciously,
-    QuestLog_Text_Somehow
+    gText_QuestLog_Handily,
+    gText_QuestLog_Tenaciously,
+    gText_QuestLog_Somehow
 };
 
 static const u8 *const sDefeatedChampionFlavorTexts[] = {
-    QuestLog_Text_Coolly,
-    QuestLog_Text_Somehow,
-    QuestLog_Text_Barely
+    gText_QuestLog_Coolly,
+    gText_QuestLog_Somehow,
+    gText_QuestLog_Barely
 };
 
 static const u8 *const sBattleOutcomeTexts[] = {
-    QuestLog_Text_Win,
-    QuestLog_Text_Loss,
-    QuestLog_Text_Draw
+    gText_QuestLog_Win,
+    gText_QuestLog_Loss,
+    gText_QuestLog_Draw
 };
 
 static u16 *BufferQuestLogData_LinkBattledSingle(u16 *a0, const u16 *eventData)
@@ -3449,7 +3321,7 @@ static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
     BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SingleBattleWithPersonResultedInOutcome);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SingleBattleWithPersonResultedInOutcome);
     a0 += 6;
     return a0;
 }
@@ -3473,7 +3345,7 @@ static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
     BufferLinkPartnersName(gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DoubleBattleWithPersonResultedInOutcome);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DoubleBattleWithPersonResultedInOutcome);
     a0 += 6;
     return a0;
 }
@@ -3508,7 +3380,7 @@ static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2); // opponent 1
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gStringVar3); // opponent 2
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sBattleOutcomeTexts[((const u8 *)a0)[4]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MultiBattleWithPeopleResultedInOutcome);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_MultiBattleWithPeopleResultedInOutcome);
     a0 += 13;
     return a0;
 }
@@ -3522,7 +3394,7 @@ static u16 *BufferQuestLogData_UsedUnionRoom(u16 *a0, const u16 *eventData)
 
 static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_MingledInUnionRoom);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_MingledInUnionRoom);
     a0 += 2;
     return a0;
 }
@@ -3536,7 +3408,7 @@ static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *a0, const u16 *eventData)
 
 static const u16 *BufferQuestLogText_UsedUnionRoomChat(const u16 *a0)
 {
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ChattedWithManyTrainers);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_ChattedWithManyTrainers);
     a0 += 2;
     return a0;
 }
@@ -3561,7 +3433,7 @@ static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *a0)
     BufferLinkPartnersName(gStringVar1);
     QuestLog_GetSpeciesName(a0[3], gStringVar2, 0);
     QuestLog_GetSpeciesName(a0[2], gStringVar3, 0);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_TradedMon1ForTrainersMon2);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_TradedMon1ForTrainersMon2);
     r6 += 8;
     return (const u16 *)r6;
 }
@@ -3582,7 +3454,7 @@ static const u16 *BufferQuestLogText_LinkBattledUnionRoom(const u16 *a0)
     memcpy(gStringVar1, (const u8 *)a0 + 5, PLAYER_NAME_LENGTH);
     BufferLinkPartnersName(gStringVar1);
     StringCopy(gStringVar2, sBattleOutcomeTexts[*(const u8 *)&a0[2]]);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_BattledTrainerEndedInOutcome);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_BattledTrainerEndedInOutcome);
     a0 += 6;
     return a0;
 }
@@ -3609,7 +3481,7 @@ static const u16 *BufferQuestLogText_SwitchedMonsBetweenBoxes(const u16 *eventDa
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, GetBoxNamePtr(boxIdxs[1]));
     QuestLog_GetSpeciesName(eventData[1], NULL, 3);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMonsBetweenBoxes);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SwitchedMonsBetweenBoxes);
     return eventData + 3;
 }
 
@@ -3633,7 +3505,7 @@ static const u16 *BufferQuestLogText_SwitchedMonsWithinBox(const u16 *eventData)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     QuestLog_GetSpeciesName(eventData[1], NULL, 2);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMonsWithinBox);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SwitchedMonsWithinBox);
     return eventData + 3;
 }
 
@@ -3669,7 +3541,7 @@ static const u16 *BufferQuestLogText_SwitchedPartyMonForPCMon(const u16 *eventDa
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     QuestLog_GetSpeciesName(eventData[1], NULL, 2);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedPartyMonForPCMon);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SwitchedPartyMonForPCMon);
     return eventData + 3;
 }
 
@@ -3696,7 +3568,7 @@ static const u16 *BufferQuestLogText_MovedMonBetweenBoxes(const u16 *eventData)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, GetBoxNamePtr(boxIdxs[1]));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MovedMonToNewBox);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_MovedMonToNewBox);
     return (const u16 *)boxIdxs + 1;
 }
 
@@ -3719,7 +3591,7 @@ static const u16 *BufferQuestLogText_MovedMonWithinBox(const u16 *eventData)
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_MovedMonWithinBox);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_MovedMonWithinBox);
     return (const u16 *)boxIdxs + 1;
 }
 
@@ -3742,7 +3614,7 @@ static const u16 *BufferQuestLogText_WithdrewMonFromPC(const u16 *eventData)
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(boxIdxs[0]));
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_WithdrewMonFromPC);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_WithdrewMonFromPC);
     return (const u16 *)boxIdxs + 1;
 }
 
@@ -3765,7 +3637,7 @@ static const u16 *BufferQuestLogText_DepositedMonInPC(const u16 *eventData)
     DynamicPlaceholderTextUtil_Reset();
     QuestLog_GetSpeciesName(eventData[0], NULL, 0);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetBoxNamePtr(boxIdxs[0]));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DepositedMonInPC);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DepositedMonInPC);
     return (const u16 *)boxIdxs + 1;
 }
 
@@ -3786,10 +3658,10 @@ static const u16 *BufferQuestLogText_SwitchedMultipleMons(const u16 *eventData)
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, GetBoxNamePtr(*((const u8 *)r4 + 0)));
     if (*((const u8 *)r4 + 0) == *((const u8 *)r4 + 1))
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, QuestLog_Text_ADifferentSpot);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gText_QuestLog_ADifferentSpot);
     else
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetBoxNamePtr(*((const u8 *)r4 + 1)));
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SwitchedMultipleMons);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SwitchedMultipleMons);
     return r4 + 1;
 }
 
@@ -3806,7 +3678,7 @@ static const u16 *BufferQuestLogText_DepositedItemInPC(const u16 *eventData)
 {
     const u16 *r4 = sub_8113E88(QL_EVENT_DEPOSITED_ITEM_PC, eventData);
     CopyItemName(r4[0], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_StoredItemInPC);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_StoredItemInPC);
     return r4 + 1;
 }
 
@@ -3823,7 +3695,7 @@ static const u16 *BufferQuestLogText_WithdrewItemFromPC(const u16 *eventData)
 {
     const u16 *r4 = sub_8113E88(QL_EVENT_WITHDREW_ITEM_PC, eventData);
     CopyItemName(r4[0], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_WithdrewItemFromPC);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_WithdrewItemFromPC);
     return r4 + 1;
 }
 
@@ -3858,7 +3730,7 @@ static const u16 *BufferQuestLogText_DefeatedGymLeader(const u16 *eventData)
     QuestLog_GetSpeciesName(eventData[0], 0, 2);
     QuestLog_GetSpeciesName(eventData[1], 0, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sDefeatedOpponentFlavorTexts[r6[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnGymLeadersMonWithMonAndWon);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_TookOnGymLeadersMonWithMonAndWon);
     return eventData + 4;
 }
 
@@ -3905,30 +3777,30 @@ static const u16 *BufferQuestLogText_DefeatedWildMon(const u16 *a0)
     if (data[0] == 0)
     {
         if (data[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_CaughtWildMon);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_CaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_CaughtWildMons);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_CaughtWildMons);
     }
     else if (data[1] == 0)
     {
         if (data[0] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMon);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMons);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMons);
     }
     else if (data[0] == 1)
     {
         if (data[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonAndCaughtWildMon);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMonAndCaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonAndCaughtWildMons);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMonAndCaughtWildMons);
     }
     else
     {
         if (data[1] == 1)
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonsAndCaughtWildMon);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMonsAndCaughtWildMon);
         else
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_DefeatedWildMonsAndCaughtWildMons);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_DefeatedWildMonsAndCaughtWildMons);
     }
     return (const u16 *)(data + 4);
 }
@@ -3966,7 +3838,7 @@ static const u16 *BufferQuestLogText_DefeatedEliteFourMember(const u16 *eventDat
     QuestLog_GetSpeciesName(eventData[0], NULL, 1);
     QuestLog_GetSpeciesName(eventData[1], NULL, 2);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, sDefeatedOpponentFlavorTexts[r5[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnEliteFoursMonWithMonAndWon);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_TookOnEliteFoursMonWithMonAndWon);
     return eventData + 4;
 }
 
@@ -3997,18 +3869,18 @@ static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
     case 0:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gSaveBlock1Ptr->rivalName);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_PlayerBattledChampionRival);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_PlayerBattledChampionRival);
         break;
     case 1:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock1Ptr->rivalName);
         QuestLog_GetSpeciesName(a0[2], NULL, 1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gSaveBlock2Ptr->playerName);
         QuestLog_GetSpeciesName(a0[3], NULL, 3);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_PlayerSentOutMon1RivalSentOutMon2);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_PlayerSentOutMon1RivalSentOutMon2);
         break;
     case 2:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sDefeatedChampionFlavorTexts[r5[0]]);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_WonTheMatchAsAResult);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_WonTheMatchAsAResult);
         break;
     }
     return (const u16 *)(r5 + 2);
@@ -4038,77 +3910,77 @@ static const u16 *BufferQuestLogText_DefeatedTrainer(const u16 *eventData)
     QuestLog_GetSpeciesName(r5[0], NULL, 2);
     QuestLog_GetSpeciesName(r5[1], NULL, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sDefeatedOpponentFlavorTexts[r6[1]]);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_TookOnTrainersMonWithMonAndWon);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_TookOnTrainersMonWithMonAndWon);
     return (const u16 *)(r6 + 2);
 }
 
 static const u8 *const sLocationNameTexts[] = 
 {
-    [QL_LOCATION_HOME]               = QuestLog_Text_Home,
-    [QL_LOCATION_OAKS_LAB]           = QuestLog_Text_OakResearchLab,
-    [QL_LOCATION_VIRIDIAN_GYM]       = QuestLog_Text_Gym,
-    [QL_LOCATION_LEAGUE_GATE_1]      = QuestLog_Text_PokemonLeagueGate,
-    [QL_LOCATION_LEAGUE_GATE_2]      = QuestLog_Text_PokemonLeagueGate,
-    [QL_LOCATION_VIRIDIAN_FOREST_1]  = QuestLog_Text_ViridianForest,
-    [QL_LOCATION_VIRIDIAN_FOREST_2]  = QuestLog_Text_ViridianForest,
-    [QL_LOCATION_PEWTER_MUSEUM]      = QuestLog_Text_PewterMuseumOfScience,
-    [QL_LOCATION_PEWTER_GYM]         = QuestLog_Text_Gym,
-    [QL_LOCATION_MT_MOON_1]          = QuestLog_Text_MtMoon,
-    [QL_LOCATION_MT_MOON_2]          = QuestLog_Text_MtMoon,
-    [QL_LOCATION_CERULEAN_GYM]       = QuestLog_Text_Gym,
-    [QL_LOCATION_BIKE_SHOP]          = QuestLog_Text_BikeShop,
-    [QL_LOCATION_BILLS_HOUSE]        = QuestLog_Text_BillsHouse,
-    [QL_LOCATION_DAY_CARE]           = QuestLog_Text_DayCare,
-    [QL_LOCATION_UNDERGROUND_PATH_1] = QuestLog_Text_UndergroundPath,
-    [QL_LOCATION_UNDERGROUND_PATH_2] = QuestLog_Text_UndergroundPath,
-    [QL_LOCATION_PKMN_FAN_CLUB]      = QuestLog_Text_PokemonFanClub,
-    [QL_LOCATION_VERMILION_GYM]      = QuestLog_Text_Gym,
-    [QL_LOCATION_SS_ANNE]            = QuestLog_Text_SSAnne,
-    [QL_LOCATION_DIGLETTS_CAVE_1]    = QuestLog_Text_DiglettsCave,
-    [QL_LOCATION_DIGLETTS_CAVE_2]    = QuestLog_Text_DiglettsCave,
-    [QL_LOCATION_ROCK_TUNNEL_1]      = QuestLog_Text_RockTunnel,
-    [QL_LOCATION_ROCK_TUNNEL_2]      = QuestLog_Text_RockTunnel,
-    [QL_LOCATION_POWER_PLANT]        = QuestLog_Text_PowerPlant,
-    [QL_LOCATION_PKMN_TOWER]         = QuestLog_Text_PokemonTower,
-    [QL_LOCATION_VOLUNTEER_HOUSE]    = QuestLog_Text_VolunteerHouse,
-    [QL_LOCATION_NAME_RATERS_HOUSE]  = QuestLog_Text_NameRatersHouse,
-    [QL_LOCATION_UNDERGROUND_PATH_3] = QuestLog_Text_UndergroundPath,
-    [QL_LOCATION_UNDERGROUND_PATH_4] = QuestLog_Text_UndergroundPath,
-    [QL_LOCATION_CELADON_DEPT_STORE] = QuestLog_Text_CeladonDeptStore,
-    [QL_LOCATION_CELADON_MANSION]    = QuestLog_Text_CeladonMansion,
-    [QL_LOCATION_GAME_CORNER]        = QuestLog_Text_RocketGameCorner,
-    [QL_LOCATION_CELADON_GYM]        = QuestLog_Text_Gym,
-    [QL_LOCATION_CELADON_RESTAURANT] = QuestLog_Text_Restaurant,
-    [QL_LOCATION_ROCKET_HIDEOUT]     = QuestLog_Text_RocketHideout,
-    [QL_LOCATION_SAFARI_ZONE]        = QuestLog_Text_SafariZone,
-    [QL_LOCATION_FUCHSIA_GYM]        = QuestLog_Text_Gym,
-    [QL_LOCATION_WARDENS_HOME]       = QuestLog_Text_WardensHome,
-    [QL_LOCATION_FIGHTING_DOJO]      = QuestLog_Text_FightingDojo,
-    [QL_LOCATION_SAFFRON_GYM]        = QuestLog_Text_Gym,
-    [QL_LOCATION_SILPH_CO]           = QuestLog_Text_SilphCo,
-    [QL_LOCATION_SEAFOAM_ISLANDS_1]  = QuestLog_Text_SeafoamIslands,
-    [QL_LOCATION_SEAFOAM_ISLANDS_2]  = QuestLog_Text_SeafoamIslands,
-    [QL_LOCATION_PKMN_MANSION]       = QuestLog_Text_PokemonMansion,
-    [QL_LOCATION_CINNABAR_GYM]       = QuestLog_Text_Gym,
-    [QL_LOCATION_CINNABAR_LAB]       = QuestLog_Text_PokemonResearchLab,
-    [QL_LOCATION_VICTORY_ROAD_1]     = QuestLog_Text_VictoryRoad,
-    [QL_LOCATION_VICTORY_ROAD_2]     = QuestLog_Text_VictoryRoad,
-    [QL_LOCATION_PKMN_LEAGUE]        = QuestLog_Text_PokemonLeague,
-    [QL_LOCATION_CERULEAN_CAVE]      = QuestLog_Text_CeruleanCave
+    [QL_LOCATION_HOME]               = gText_QuestLog_Home,
+    [QL_LOCATION_OAKS_LAB]           = gText_QuestLog_OakResearchLab,
+    [QL_LOCATION_VIRIDIAN_GYM]       = gText_QuestLog_Gym,
+    [QL_LOCATION_LEAGUE_GATE_1]      = gText_QuestLog_PokemonLeagueGate,
+    [QL_LOCATION_LEAGUE_GATE_2]      = gText_QuestLog_PokemonLeagueGate,
+    [QL_LOCATION_VIRIDIAN_FOREST_1]  = gText_QuestLog_ViridianForest,
+    [QL_LOCATION_VIRIDIAN_FOREST_2]  = gText_QuestLog_ViridianForest,
+    [QL_LOCATION_PEWTER_MUSEUM]      = gText_QuestLog_PewterMuseumOfScience,
+    [QL_LOCATION_PEWTER_GYM]         = gText_QuestLog_Gym,
+    [QL_LOCATION_MT_MOON_1]          = gText_QuestLog_MtMoon,
+    [QL_LOCATION_MT_MOON_2]          = gText_QuestLog_MtMoon,
+    [QL_LOCATION_CERULEAN_GYM]       = gText_QuestLog_Gym,
+    [QL_LOCATION_BIKE_SHOP]          = gText_QuestLog_BikeShop,
+    [QL_LOCATION_BILLS_HOUSE]        = gText_QuestLog_BillsHouse,
+    [QL_LOCATION_DAY_CARE]           = gText_QuestLog_DayCare,
+    [QL_LOCATION_UNDERGROUND_PATH_1] = gText_QuestLog_UndergroundPath,
+    [QL_LOCATION_UNDERGROUND_PATH_2] = gText_QuestLog_UndergroundPath,
+    [QL_LOCATION_PKMN_FAN_CLUB]      = gText_QuestLog_PokemonFanClub,
+    [QL_LOCATION_VERMILION_GYM]      = gText_QuestLog_Gym,
+    [QL_LOCATION_SS_ANNE]            = gText_QuestLog_SSAnne,
+    [QL_LOCATION_DIGLETTS_CAVE_1]    = gText_QuestLog_DiglettsCave,
+    [QL_LOCATION_DIGLETTS_CAVE_2]    = gText_QuestLog_DiglettsCave,
+    [QL_LOCATION_ROCK_TUNNEL_1]      = gText_QuestLog_RockTunnel,
+    [QL_LOCATION_ROCK_TUNNEL_2]      = gText_QuestLog_RockTunnel,
+    [QL_LOCATION_POWER_PLANT]        = gText_QuestLog_PowerPlant,
+    [QL_LOCATION_PKMN_TOWER]         = gText_QuestLog_PokemonTower,
+    [QL_LOCATION_VOLUNTEER_HOUSE]    = gText_QuestLog_VolunteerHouse,
+    [QL_LOCATION_NAME_RATERS_HOUSE]  = gText_QuestLog_NameRatersHouse,
+    [QL_LOCATION_UNDERGROUND_PATH_3] = gText_QuestLog_UndergroundPath,
+    [QL_LOCATION_UNDERGROUND_PATH_4] = gText_QuestLog_UndergroundPath,
+    [QL_LOCATION_CELADON_DEPT_STORE] = gText_QuestLog_CeladonDeptStore,
+    [QL_LOCATION_CELADON_MANSION]    = gText_QuestLog_CeladonMansion,
+    [QL_LOCATION_GAME_CORNER]        = gText_QuestLog_RocketGameCorner,
+    [QL_LOCATION_CELADON_GYM]        = gText_QuestLog_Gym,
+    [QL_LOCATION_CELADON_RESTAURANT] = gText_QuestLog_Restaurant,
+    [QL_LOCATION_ROCKET_HIDEOUT]     = gText_QuestLog_RocketHideout,
+    [QL_LOCATION_SAFARI_ZONE]        = gText_QuestLog_SafariZone,
+    [QL_LOCATION_FUCHSIA_GYM]        = gText_QuestLog_Gym,
+    [QL_LOCATION_WARDENS_HOME]       = gText_QuestLog_WardensHome,
+    [QL_LOCATION_FIGHTING_DOJO]      = gText_QuestLog_FightingDojo,
+    [QL_LOCATION_SAFFRON_GYM]        = gText_QuestLog_Gym,
+    [QL_LOCATION_SILPH_CO]           = gText_QuestLog_SilphCo,
+    [QL_LOCATION_SEAFOAM_ISLANDS_1]  = gText_QuestLog_SeafoamIslands,
+    [QL_LOCATION_SEAFOAM_ISLANDS_2]  = gText_QuestLog_SeafoamIslands,
+    [QL_LOCATION_PKMN_MANSION]       = gText_QuestLog_PokemonMansion,
+    [QL_LOCATION_CINNABAR_GYM]       = gText_QuestLog_Gym,
+    [QL_LOCATION_CINNABAR_LAB]       = gText_QuestLog_PokemonResearchLab,
+    [QL_LOCATION_VICTORY_ROAD_1]     = gText_QuestLog_VictoryRoad,
+    [QL_LOCATION_VICTORY_ROAD_2]     = gText_QuestLog_VictoryRoad,
+    [QL_LOCATION_PKMN_LEAGUE]        = gText_QuestLog_PokemonLeague,
+    [QL_LOCATION_CERULEAN_CAVE]      = gText_QuestLog_CeruleanCave
 };
 
 static const u8 *const sDepartedLocationTexts[] = 
 {
-    [QL_DEPARTED_TOWN_BUILDING]   = QuestLog_Text_DepartedPlaceInTownForNextDestination,
-    [QL_DEPARTED_MUSEUM]          = QuestLog_Text_LeftTownsLocationForNextDestination,
-    [QL_DEPARTED_GAME_CORNER]     = QuestLog_Text_PlayedGamesAtGameCorner,
-    [QL_DEPARTED_HOME]            = QuestLog_Text_RestedAtHome,
-    [QL_DEPARTED_OAKS_LAB]        = QuestLog_Text_LeftOaksLab,
-    [QL_DEPARTED_GYM]             = QuestLog_Text_GymWasFullOfToughTrainers,
-    [QL_DEPARTED_SAFARI_ZONE]     = QuestLog_Text_HadGreatTimeInSafariZone,
-    [QL_DEPARTED_CAVE]            = QuestLog_Text_ManagedToGetOutOfLocation,
-    [QL_DEPARTED_MISC_BUILDING_1] = QuestLog_Text_DepartedTheLocationForNextDestination,
-    [QL_DEPARTED_MISC_BUILDING_2] = QuestLog_Text_DepartedFromLocationToNextDestination
+    [QL_DEPARTED_TOWN_BUILDING]   = gText_QuestLog_DepartedPlaceInTownForNextDestination,
+    [QL_DEPARTED_MUSEUM]          = gText_QuestLog_LeftTownsLocationForNextDestination,
+    [QL_DEPARTED_GAME_CORNER]     = gText_QuestLog_PlayedGamesAtGameCorner,
+    [QL_DEPARTED_HOME]            = gText_QuestLog_RestedAtHome,
+    [QL_DEPARTED_OAKS_LAB]        = gText_QuestLog_LeftOaksLab,
+    [QL_DEPARTED_GYM]             = gText_QuestLog_GymWasFullOfToughTrainers,
+    [QL_DEPARTED_SAFARI_ZONE]     = gText_QuestLog_HadGreatTimeInSafariZone,
+    [QL_DEPARTED_CAVE]            = gText_QuestLog_ManagedToGetOutOfLocation,
+    [QL_DEPARTED_MISC_BUILDING_1] = gText_QuestLog_DepartedTheLocationForNextDestination,
+    [QL_DEPARTED_MISC_BUILDING_2] = gText_QuestLog_DepartedFromLocationToNextDestination
 };
 
 static const u8 sLocationToDepartedTextId[] = 
@@ -4179,18 +4051,18 @@ static const u8 gUnknown_8456C17[] = {
 
 static const u8 *const sUsedFieldMoveTexts[] = 
 {
-    [FIELD_MOVE_FLASH]       = QuestLog_Text_UsedFlash,
-    [FIELD_MOVE_CUT]         = QuestLog_Text_UsedCut,
-    [FIELD_MOVE_FLY]         = QuestLog_Text_UsedFly,
-    [FIELD_MOVE_STRENGTH]    = QuestLog_Text_UsedStrength,
-    [FIELD_MOVE_SURF]        = QuestLog_Text_UsedSurf,
-    [FIELD_MOVE_ROCK_SMASH]  = QuestLog_Text_UsedRockSmash,
-    [FIELD_MOVE_WATERFALL]   = QuestLog_Text_UsedWaterfall,
-    [FIELD_MOVE_TELEPORT]    = QuestLog_Text_UsedTeleportToLocation,
-    [FIELD_MOVE_DIG]         = QuestLog_Text_UsedDigInLocation,
-    [FIELD_MOVE_MILK_DRINK]  = QuestLog_Text_UsedMilkDrink,
-    [FIELD_MOVE_SOFT_BOILED] = QuestLog_Text_UsedSoftboiled,
-    [FIELD_MOVE_SWEET_SCENT] = QuestLog_Text_UsedSweetScent
+    [FIELD_MOVE_FLASH]       = gText_QuestLog_UsedFlash,
+    [FIELD_MOVE_CUT]         = gText_QuestLog_UsedCut,
+    [FIELD_MOVE_FLY]         = gText_QuestLog_UsedFly,
+    [FIELD_MOVE_STRENGTH]    = gText_QuestLog_UsedStrength,
+    [FIELD_MOVE_SURF]        = gText_QuestLog_UsedSurf,
+    [FIELD_MOVE_ROCK_SMASH]  = gText_QuestLog_UsedRockSmash,
+    [FIELD_MOVE_WATERFALL]   = gText_QuestLog_UsedWaterfall,
+    [FIELD_MOVE_TELEPORT]    = gText_QuestLog_UsedTeleportToLocation,
+    [FIELD_MOVE_DIG]         = gText_QuestLog_UsedDigInLocation,
+    [FIELD_MOVE_MILK_DRINK]  = gText_QuestLog_UsedMilkDrink,
+    [FIELD_MOVE_SOFT_BOILED] = gText_QuestLog_UsedSoftboiled,
+    [FIELD_MOVE_SWEET_SCENT] = gText_QuestLog_UsedSweetScent
 };
 
 static u16 *BufferQuestLogData_DepartedLocation(u16 *a0, const u16 *eventData)
@@ -4219,9 +4091,9 @@ static const u16 *BufferQuestLogText_DepartedLocation(const u16 *eventData)
             if (r5_2[0] != gUnknown_8456C17[r4])
                 continue;
             if (FlagGet(FLAG_BADGE01_GET + r4) == TRUE)
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_DepartedGym);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_DepartedGym);
             else
-                StringExpandPlaceholders(gStringVar4, QuestLog_Text_GymWasFullOfToughTrainers);
+                StringExpandPlaceholders(gStringVar4, gText_QuestLog_GymWasFullOfToughTrainers);
             break;
         }
         if (r4 == 8)
@@ -4292,7 +4164,7 @@ static const u16 *BufferQuestLogText_UsedFieldMove(const u16 *eventData)
     if (r5[0] == FIELD_MOVE_TELEPORT)
     {
         if (r5[1] == 0x58)
-            StringCopy(gStringVar3, QuestLog_Text_Home);
+            StringCopy(gStringVar3, gText_QuestLog_Home);
         else
             StringCopy(gStringVar3, gText_PokemonCenter);
     }
@@ -4325,12 +4197,12 @@ static const u16 *BufferQuestLogText_BoughtItem(const u16 *eventData)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r4[0]));
     if (r4[1] < 2)
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_BoughtItem);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_BoughtItem);
     else
     {
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_BoughtItemsIncludingItem);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_BoughtItemsIncludingItem);
     }
     return (const u16 *)(r7 + 2);
 }
@@ -4361,15 +4233,15 @@ static const u16 *BufferQuestLogText_SoldItem(const u16 *eventData)
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, ItemId_GetName(r5[0]));
         if (r5[1] == 1)
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, QuestLog_Text_JustOne);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gText_QuestLog_JustOne);
         else
         {
             ConvertIntToDecimalStringN(gStringVar2, r5[1], STR_CONV_MODE_LEFT_ALIGN, 3);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, gStringVar2);
-            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar3, QuestLog_Text_Num);
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar3, gText_QuestLog_Num);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gStringVar3);
         }
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SoldNumOfItem);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SoldNumOfItem);
     }
     else
     {
@@ -4377,7 +4249,7 @@ static const u16 *BufferQuestLogText_SoldItem(const u16 *eventData)
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r5[0]));
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, QuestLog_Text_SoldItemsIncludingItem);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SoldItemsIncludingItem);
     }
     return (const u16 *)(r7 + 2);
 }
@@ -4398,7 +4270,7 @@ static const u16 *BufferQuestLogText_ObtainedItem(const u16 *eventData)
     const u8 *r5 = (const u8 *)r4 + 2;
     GetMapNameGeneric(gStringVar1, r5[0]);
     StringCopy(gStringVar2, ItemId_GetName(r4[0]));
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ObtainedItemInLocation);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_ObtainedItemInLocation);
     return (const u16 *)(r5 + 2);
 }
 
@@ -4423,7 +4295,7 @@ static const u16 sQuestLogWorldMapFlags[] =
     FLAG_WORLD_MAP_SIX_ISLAND
 };
 
-void sub_8115748(u16 worldMapFlag)
+void QuestLog_RecordEnteredMap(u16 worldMapFlag)
 {
     s32 i;
 
@@ -4476,7 +4348,7 @@ static const u16 *BufferQuestLogText_ArrivedInLocation(const u16 *eventData)
 {
     const u16 *r4 = sub_8113E88(QL_EVENT_ARRIVED, eventData);
     GetMapNameGeneric(gStringVar1, (u8)r4[0]);
-    StringExpandPlaceholders(gStringVar4, QuestLog_Text_ArrivedInLocation);
+    StringExpandPlaceholders(gStringVar4, gText_QuestLog_ArrivedInLocation);
     return r4 + 1;
 }
 

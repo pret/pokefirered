@@ -23,7 +23,7 @@
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "new_menu_helpers.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "script.h"
 #include "sound.h"
@@ -39,6 +39,7 @@
 #include "help_system.h"
 #include "constants/songs.h"
 #include "constants/flags.h"
+#include "constants/field_weather.h"
 
 enum StartMenuOption
 {
@@ -446,7 +447,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
     }
 }
 
@@ -562,8 +563,8 @@ static bool8 StartMenuLinkPlayerCallback(void)
 
 static bool8 StartCB_Save1(void)
 {
-    HelpSystem_BackupSomeVariable();
-    HelpSystem_SetSomeVariable2(12);
+    BackupHelpContext();
+    SetHelpContext(HELPCONTEXT_SAVE);
     StartMenu_PrepareForSave();
     sStartMenuCallback = StartCB_Save2;
     return FALSE;
@@ -579,19 +580,19 @@ static bool8 StartCB_Save2(void)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         sub_80696C0();
         ScriptContext2_Disable();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         return TRUE;
     case SAVECB_RETURN_CANCEL:
         ClearDialogWindowAndFrameToTransparent(0, FALSE);
         DrawStartMenuInOneGo();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         sStartMenuCallback = StartCB_HandleInput;
         break;
     case SAVECB_RETURN_ERROR:
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         sub_80696C0();
         ScriptContext2_Disable();
-        HelpSystem_RestoreSomeVariable();
+        RestoreHelpContext();
         return TRUE;
     }
     return FALSE;
@@ -614,8 +615,8 @@ static u8 RunSaveDialogCB(void)
 
 void Field_AskSaveTheGame(void)
 {
-    HelpSystem_BackupSomeVariable();
-    HelpSystem_SetSomeVariable2(12);
+    BackupHelpContext();
+    SetHelpContext(HELPCONTEXT_SAVE);
     StartMenu_PrepareForSave();
     CreateTask(task50_save_game, 80);
 }
@@ -645,7 +646,7 @@ static void task50_save_game(u8 taskId)
     }
     DestroyTask(taskId);
     EnableBothScriptContexts();
-    HelpSystem_RestoreSomeVariable();
+    RestoreHelpContext();
 }
 
 static void CloseSaveMessageWindow(void)

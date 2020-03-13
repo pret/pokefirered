@@ -82,12 +82,16 @@ void sub_8084DD4(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8084E2C(s8, s8, s8, s8, s8);
 void sub_8084E80(s8, s8, s8, s8, s8);
 void sub_8084EBC(s16, s16);
+void sub_80555E0(void);
+void copy_saved_warp3_bank_and_enter_x_to_warp1(void);
+u8 IsMapTypeOutdoors(u8 mapType);
+void sav1_reset_battle_music_maybe(void);
+bool32 sub_8056124(u16 song);
 
 void player_avatar_init_params_reset(void);
 
 void Overworld_SetFlashLevel(s32 a1);
 u8 Overworld_GetFlashLevel(void);
-void sub_8085524(u16);
 
 void Overworld_SetSavedMusic(u16);
 void Overworld_ChangeMusicToDefault(void);
@@ -148,16 +152,16 @@ void Overworld_ResetStateAfterTeleport(void);
 void Overworld_FadeOutMapMusic(void);
 void CB2_LoadMap(void);
 bool8 BGMusicStopped(void);
-bool8 is_light_level_8_or_9(u8 mapType);
+bool8 IsMapTypeIndoors(u8 mapType);
 bool32 sub_8055C9C(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 u8 GetCurrentMapType(void);
 
-u8 get_map_light_from_warp0(void);
+u8 GetLastUsedWarpMapType(void);
 const struct MapHeader *warp1_get_mapheader(void);
-void sub_8055F88(void);
-void sub_8056788(void);
+void TryFadeOutOldMapMusic(void);
+void CB2_ReturnToFieldCableClub(void);
 void ResetGameStats(void);
 
 void Overworld_CreditsMainCB(void);
@@ -177,7 +181,23 @@ void sub_8056078(void *, void *);
 void sub_805546C(u8 a0);
 bool32 sub_80582E0(void);
 bool32 sub_8058274(void);
+u8 GetCurrentMapBattleScene(void);
+void Overworld_ResetStateAfterFly(void);
+bool8 sub_8055B38(u16 metatileBehavior);
+void sub_8055DB8(void);
+void sub_8057F5C(void);
+void sub_8057F34(void);
+u32 sub_8057EC0(void);
+void sub_8057F70(void);
+void sub_8057F48(void);
+void SetMainCallback1(MainCallback cb);
+void CB1_Overworld(void);
+void sub_80568C4(void);
+u8 GetLastUsedWarpMapSectionId(void);
 
+extern u16 *gBGTilemapBuffers1;
+extern u16 *gBGTilemapBuffers2;
+extern u16 *gBGTilemapBuffers3;
 extern u16 gHeldKeyCodeToSend;
 
 #endif //GUARD_OVERWORLD_H

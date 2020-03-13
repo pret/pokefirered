@@ -1,5 +1,4 @@
 #include "global.h"
-#include "new_game.h"
 #include "random.h"
 #include "main.h"
 #include "overworld.h"
@@ -145,7 +144,7 @@ void NewGameInitData(void)
     ResetTrainerFanClub();
     UnionRoomChat_InitializeRegisteredTexts();
     ResetMiniGamesResults();
-    sub_8143D24();
+    InitMEventData();
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);

@@ -5,7 +5,7 @@
 #include "berry_pouch.h"
 #include "decompress.h"
 #include "event_scripts.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "help_system.h"
@@ -496,9 +496,9 @@ static bool8 LoadBagMenuGraphics(void)
         break;
     case 19:
         if (gBagMenuState.location == ITEMMENULOCATION_ITEMPC)
-            HelpSystem_SetSomeVariable2(29);
+            SetHelpContext(HELPCONTEXT_PLAYERS_PC_ITEMS);
         else
-            HelpSystem_SetSomeVariable2(9);
+            SetHelpContext(HELPCONTEXT_BAG);
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -740,7 +740,7 @@ static void bag_menu_print_cursor(u8 y, u8 colorIdx)
     }
     else
     {
-        BagPrintTextOnWindow(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+        BagPrintTextOnWindow(0, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
     }
 }
 
@@ -1434,7 +1434,7 @@ static void OpenContextMenu(u8 taskId)
     Menu_InitCursor(r6, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
     r4 = ShowBagWindow(6, 0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
     BagPrintTextOnWindow(r4, 2, gStringVar4, 0, 2, 1, 0, 0, 1);
 }
 

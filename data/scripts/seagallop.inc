@@ -138,9 +138,9 @@ VermilionCity_Movement_WalkUp:: @ 81A911C
 
 EventScript_SeviiDestinationsPage1:: @ 81A911E
     setvar VAR_0x8005, 0
-    special Special_DrawSeagallopDestinationMenu
+    special DrawSeagallopDestinationMenu
     waitstate
-    specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
+    specialvar VAR_0x8006, GetSelectedSeagallopDestination
     switch VAR_0x8006
     case SEAGALLOP_VERMILION_CITY, EventScript_SailToVermilionCity
     case SEAGALLOP_ONE_ISLAND,     EventScript_SailToOneIsland
@@ -153,9 +153,9 @@ EventScript_SeviiDestinationsPage1:: @ 81A911E
 
 EventScript_SeviiDestinationsPage2:: @ 81A917F
     setvar VAR_0x8005, 1
-    special Special_DrawSeagallopDestinationMenu
+    special DrawSeagallopDestinationMenu
     waitstate
-    specialvar VAR_0x8006, Special_GetSelectedSeagallopDestination
+    specialvar VAR_0x8006, GetSelectedSeagallopDestination
     switch VAR_0x8006
     case SEAGALLOP_FOUR_ISLAND,  EventScript_SailToFourIsland
     case SEAGALLOP_FIVE_ISLAND,  EventScript_SailToFiveIsland

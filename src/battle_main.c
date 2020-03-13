@@ -8,13 +8,11 @@
 #include "battle_message.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
-#include "battle_tower.h"
 #include "battle_string_ids.h"
 #include "berry.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
-#include "dma3.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "graphics.h"
@@ -40,14 +38,12 @@
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "strings.h"
 #include "task.h"
 #include "text.h"
 #include "trig.h"
 #include "vs_seeker.h"
 #include "util.h"
 #include "window.h"
-#include "cable_club.h"
 #include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_setup.h"
@@ -645,17 +641,17 @@ void CB2_InitBattle(void)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                    HelpSystem_SetSomeVariable2(0x19);
+                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_DOUBLE);
                 else
-                    HelpSystem_SetSomeVariable2(0x18);
+                    SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_SINGLE);
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             {
-                HelpSystem_SetSomeVariable2(0x1A);
+                SetHelpContext(HELPCONTEXT_SAFARI_BATTLE);
             }
             else
             {
-                HelpSystem_SetSomeVariable2(0x17);
+                SetHelpContext(HELPCONTEXT_WILD_BATTLE);
             }
         }
     }
@@ -979,7 +975,7 @@ static void CB2_HandleStartBattle(void)
             ResetBlockReceivedFlags();
             sub_8010414(2, playerMultiplayerId);
             SetAllPlayersBerryData();
-            taskId = CreateTask(sub_800F6FC, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
@@ -1152,9 +1148,9 @@ static void CB2_PreInitMultiBattle(void)
         {
             ++gBattleCommunication[MULTIUSE_STATE];
             if (gWirelessCommType)
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             else
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
         }
         break;
     case 3:
@@ -1227,7 +1223,7 @@ static void CB2_HandleStartMultiBattle(void)
             SetAllPlayersBerryData();
             SetDeoxysStats();
             memcpy(gDecompressionBuffer, gPlayerParty, sizeof(struct Pokemon) * 3);
-            taskId = CreateTask(sub_800F6FC, 0);
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;
             gTasks[taskId].data[2] = 90;
             gTasks[taskId].data[5] = 0;
@@ -1785,7 +1781,7 @@ void sub_8011A1C(void)
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(VBlankCB_Battle);
-    taskId = CreateTask(sub_800F6FC, 0);
+    taskId = CreateTask(InitLinkBattleVsScreen, 0);
     gTasks[taskId].data[1] = 270;
     gTasks[taskId].data[2] = 90;
     gTasks[taskId].data[5] = 1;
@@ -3717,7 +3713,7 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL)
         {
             if (GetRivalBattleFlags() & RIVAL_BATTLE_HEAL_AFTER)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1; // Dont do white out text
@@ -4164,7 +4160,6 @@ bool8 TryRunFromBattle(u8 battler)
 {
     bool8 effect = FALSE;
     u8 holdEffect;
-    u8 pyramidMultiplier;
     u8 speedVar;
 
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)

@@ -1,13 +1,13 @@
-gUnknown_819E3ED:: @ 819E3ED
+Route8_WestEntrance_Text_ThirstyOnGuardDuty:: @ 819E3ED
     .string "I'm on guard duty.\n"
     .string "Gee, I'm thirsty, though!\p"
     .string "Oh, wait there, the road's closed.$"
 
-gUnknown_819E43D:: @ 819E43D
+Route8_WestEntrance_Text_ThatTeaLooksTasty:: @ 819E43D
     .string "Oh, that TEA…\n"
     .string "It looks awfully tasty…$"
 
-gUnknown_819E463:: @ 819E463
+Route8_WestEntrance_Text_ThanksIllShareTeaWithGuards:: @ 819E463
     .string "Huh? I can have this drink?\n"
     .string "Gee, thanks!\l"
     .string "… …\l"
@@ -21,6 +21,6 @@ gUnknown_819E463:: @ 819E463
     .string "I'll share this TEA with the other\n"
     .string "guards!$"
 
-gUnknown_819E50F:: @ 819E50F
+Route8_WestEntrance_Text_HiHowsItGoing:: @ 819E50F
     .string "Hi, how's it going?$"
 

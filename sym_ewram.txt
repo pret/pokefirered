@@ -34,6 +34,7 @@
 	.include "src/new_game.o"
 
 	.align 2
+	@ .include "src/overworld.o"
 gUnknown_2031DB4: @ 2031DB4
 	.space 0x8
 
@@ -75,19 +76,19 @@ gLinkPlayerObjectEvents: @ 2031DEC
 
 	.align 2
 	.include "src/fieldmap.o"
+	.align 2
+	.include "src/field_camera.o"
 
-gUnknown_2036E28: @ 2036E28
-	.space 0x4
-
-gUnknown_2036E2C: @ 2036E2C
-	.space 0x4
-
+	.align 2
+	@ .include "src/field_player_avatar.o"
 gUnknown_2036E30: @ 2036E30
 	.space 0x4
 
 gUnknown_2036E34: @ 2036E34
 	.space 0x4
 
+	.align 2
+	@ .include "src/event_object_movement.o"
 gObjectEvents: @ 2036E38
 	.space 0x240
 
@@ -100,9 +101,8 @@ sCurrentReflectionType: @ 2037098
 sCurrentSpecialObjectPaletteTag: @ 203709A
 	.space 0x2
 
-gUnknown_203709C: @ 203709C
-	.space 0x4
-
+	.align 2
+	.include "src/field_message_box.o"
 	.align 2
 	.include "src/script.o"
 	.align 2
@@ -125,6 +125,7 @@ gUnknown_203709C: @ 203709C
 	.include "src/title_screen.o"
 
 	.align 2
+	@ .include "src/field_weather.o"
 gUnknown_2037F34: @ 2037F34
 	.space 0x200
 
@@ -147,11 +148,8 @@ gUnknown_20386A8: @ 20386A8
 	.include "src/battle_setup.o"
 	.align 2
 	.include "src/wild_encounter.o"
-
 	.align 2
-gFieldEffectArguments: @ 20386E0
-	.space 0x20
-
+	.include "src/field_effect.o"
 	.align 2
 	.include "src/scanline_effect.o"
 	.align 2
@@ -159,28 +157,30 @@ gFieldEffectArguments: @ 20386E0
 	.align 2
 	.include "src/trainer_card.o"
 
-gUnknown_20397A8: @ 20397A8
+	.align 2
+	@ .include "src/pokemon_storage_system.o"
+sPreviousBoxOption: @ 20397A8
 	.space 0x4
 
 gUnknown_20397AC: @ 20397AC
 	.space 0x4
 
-gUnknown_20397B0: @ 20397B0
+sPSSData: @ 20397B0
 	.space 0x4
 
-gUnknown_20397B4: @ 20397B4
+sInPartyMenu: @ 20397B4
 	.space 0x1
 
-gUnknown_20397B5: @ 20397B5
+sCurrentBoxOption: @ 20397B5
 	.space 0x1
 
 gUnknown_20397B6: @ 20397B6
 	.space 0x1
 
-gUnknown_20397B7: @ 20397B7
+sWhichToReshow: @ 20397B7
 	.space 0x1
 
-gUnknown_20397B8: @ 20397B8
+sLastUsedBox: @ 20397B8
 	.space 0x2
 
 gUnknown_20397BA: @ 20397BA
@@ -189,22 +189,22 @@ gUnknown_20397BA: @ 20397BA
 gUnknown_20397BC: @ 20397BC
 	.space 0x64
 
-gUnknown_2039820: @ 2039820
+sBoxCursorArea: @ 2039820
 	.space 0x1
 
-gUnknown_2039821: @ 2039821
+sBoxCursorPosition: @ 2039821
 	.space 0x1
 
-gUnknown_2039822: @ 2039822
+sIsMonBeingMoved: @ 2039822
 	.space 0x1
 
-gUnknown_2039823: @ 2039823
+sMovingMonOrigBoxId: @ 2039823
 	.space 0x1
 
-gUnknown_2039824: @ 2039824
+sMovingMonOrigBoxPos: @ 2039824
 	.space 0x1
 
-gUnknown_2039825: @ 2039825
+sCanOnlyMove: @ 2039825
 	.space 0x1
 
 gUnknown_2039826: @ 2039826
@@ -216,35 +216,24 @@ gUnknown_2039828: @ 2039828
 gUnknown_203982C: @ 203982C
 	.space 0x4
 
-gUnknown_2039830: @ 2039830
-	.space 0x40
-
-gUnknown_2039870: @ 2039870
-	.space 0x4
-
-gUnknown_2039874: @ 2039874
-	.space 0x4
-
+	.align 2
+	.include "src/script_movement.o"
+	.align 2
+	.include "src/fldeff_cut.o"
 	.align 2
 	.include "src/item_menu_icons.o"
-
-gBagPockets: @ 203988C
-	.space 0x28
-
+	.align 2
+	.include "src/item.o"
 	.align 2
 	.include "src/shop.o"
 	.align 2
-	.include "src/sea_cottage_special_anim.o"
+	.include "src/special_field_anim.o"
 	.align 2
 	.include "src/script_menu.o"
-
 	.align 2
-gUnknown_203998C: @ 203998C
-	.space 0x4
-
+	.include "src/naming_screen.o"
 	.align 2
 	.include "src/money.o"
-
 	.align 2
 	.include "src/safari_zone.o"
 	.align 2
@@ -303,14 +292,10 @@ gUnknown_203998C: @ 203998C
 	.include "src/credits.o"
 	.align 2
 	.include "src/diploma.o"
-
 	.align 2
 	.include "src/save_failed_screen.o"
-
 	.align 2
-gUnknown_203AB54: @ 203AB54
-	.space 0x4
-
+	.include "src/clear_save_data_screen.o"
 	.align 2
 	.include "src/new_menu_helpers.o"
 	.align 2
@@ -322,16 +307,11 @@ gUnknown_203AB54: @ 203AB54
 	.align 2
 	.include "src/link_rfu_3.o"
 	.align 2
-
-gUnknown_203ACE8: @ 203ACE8
-	.space 0x4
-
-gUnknown_203ACEC: @ 203ACEC
-	.space 0x4
-
-gUnknown_203ACF0: @ 203ACF0
-	.space 0x4
-
+	.include "src/easy_chat_2.o"
+	.align 2
+	.include "src/easy_chat_3.o"
+	.align 2
+	.include "src/pokedex_screen.o"
 	.align 2
 	.include "src/list_menu.o"
 	.align 2
@@ -358,6 +338,7 @@ gUnknown_203ACF0: @ 203ACF0
 	.include "src/union_room_battle.o"
 
 	.align 2
+	@ .include "src/pokemon_special_anim.o"
 gUnknown_203B090: @ 203B090
 	.space 0x4
 
@@ -386,6 +367,8 @@ gUnknown_203B098: @ 203B098
 	.align 2
 	.include "src/menu_indicators.o"
 
+	.align 2
+	@ .include "src/pokemon_summary_screen.o"
 gUnknown_203B140: @ 203B140
 	.space 0x4
 
@@ -443,45 +426,25 @@ gUnknown_203B170: @ 203B170
 	.align 2
 	.include "src/mevent_server.o"
 	.align 2
-	.include "src/mevent_8145654.o"
+	.include "src/mevent_show_card.o"
+	.align 2
+	.include "src/mevent_show_news.o"
 	.align 2
 	.include "src/seagallop.o"
-
 	.align 2
-gUnknown_203F3D4: @ 203F3D4
-	.space 0x4
-
-gUnknown_203F3D8: @ 203F3D8
-	.space 0x4
-
-gUnknown_203F3DC: @ 203F3DC
-	.space 0x4
-
-gUnknown_203F3E0: @ 203F3E0
-	.space 0x4
-
-gUnknown_203F3E4: @ 203F3E4
-	.space 0x14
-
-gUnknown_203F3F8: @ 203F3F8
-	.space 0x8
-
-gUnknown_203F400: @ 203F400
-	.space 0x2C
-
-gUnknown_203F42C: @ 203F42C
-	.space 0x10
-
-gUnknown_203F43C: @ 203F43C
-	.space 0x4
-
-gUnknown_203F440: @ 203F440
-	.space 0x4
-
+	.include "src/pokemon_jump_2.o"
+	.align 2
+	.include "src/pokemon_jump_4.o"
+	.align 2
+	.include "src/berry_crush.o"
+	.align 2
+	.include "src/dodrio_berry_picking.o"
+	.align 2
+	.include "src/dodrio_berry_picking_2.o"
 	.align 2
 	.include "src/teachy_tv.o"
 	.align 2
-	.include "src/unk_815C980.o"
+	.include "src/digit_obj_util.o"
 	.align 2
 	.include "src/trainer_tower.o"
 	.align 2

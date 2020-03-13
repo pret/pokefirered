@@ -10,7 +10,6 @@
 #include "window.h"
 #include "field_specials.h"
 #include "field_weather.h"
-#include "field_camera.h"
 #include "task.h"
 #include "text.h"
 #include "item.h"
@@ -19,7 +18,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "overworld.h"
-#include "window.h"
 #include "palette.h"
 #include "field_fadetransition.h"
 #include "scanline_effect.h"
@@ -38,6 +36,7 @@
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/game_stat.h"
+#include "constants/field_weather.h"
 
 #define tItemCount data[1]
 #define tItemId data[5]
@@ -294,14 +293,14 @@ static void Task_ShopMenu(u8 taskId)
 static void Task_HandleShopMenuBuy(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_InitBuyMenu);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
 {
     SetWordTaskArg(taskId, 0xE, (u32)CB2_GoToSellMenu);
-    FadeScreen(1, 0);
+    FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Task_GoToBuyOrSellMenu;    
 }
 
@@ -338,7 +337,7 @@ static void Task_GoToBuyOrSellMenu(u8 taskId)
 
 static void MapPostLoadHook_ReturnToShopMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_ReturnToShopMenu, 8);
 }
 
@@ -670,7 +669,7 @@ static void BuyMenuPrintCursorAtYPosition(u8 y, u8 a1)
     }
     else
     {
-        BuyMenuPrint(4, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, a1);
+        BuyMenuPrint(4, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, a1);
     }
 }
 

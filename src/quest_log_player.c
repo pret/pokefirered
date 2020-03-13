@@ -57,7 +57,7 @@ void sub_8150498(u8 a0)
 static void sub_81504A8(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    sub_81507BC(objectEvent, sub_805C808(0));
+    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0));
     ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
@@ -65,7 +65,7 @@ static void sub_81504A8(void)
 static void sub_81504E8(void)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    sub_81507BC(objectEvent, sub_805C808(1));
+    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(1));
     ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     sub_80BD620(0, 0);
@@ -80,13 +80,13 @@ static void sub_8150530(void)
     {
         u8 taskId;
         ScriptContext2_Enable();
-        gPlayerAvatar.unk6 = 1;
+        gPlayerAvatar.preventStep = TRUE;
         taskId = CreateTask(sub_81505C4, 0xFF);
         gTasks[taskId].data[0] = 0;
     }
     else
     {
-        sub_81507BC(objectEvent, sub_805C808(4));
+        sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
         StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
     }
 }
@@ -101,7 +101,7 @@ static void sub_81505C4(u8 taskId)
         case 0:
             ObjectEventClearHeldMovementIfActive(objectEvent);
             objectEvent->enableAnim = TRUE;
-            sub_81507BC(objectEvent, sub_805C808(4));
+            sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
             StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
@@ -122,9 +122,9 @@ static void sub_81505C4(u8 taskId)
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
-                    sub_81507BC(objectEvent, sub_805C808(0));
+                    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(0));
                 else
-                    sub_81507BC(objectEvent, sub_805C808(2));
+                    sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
                 ObjectEventTurn(objectEvent, objectEvent->movementDirection);
                 sprite->pos2.x = 0;
                 sprite->pos2.y = 0;
@@ -142,7 +142,7 @@ static void sub_8150708(void)
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
     {
-        sub_81507BC(objectEvent, sub_805C808(2));
+        sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(2));
         ObjectEventTurn(objectEvent, objectEvent->movementDirection);
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
         gFieldEffectArguments[0] = objectEvent->currentCoords.x;
@@ -156,13 +156,13 @@ static void sub_8150708(void)
 
 static void sub_815077C(void)
 {
-    FieldEffectStart(FLDEFF_UNK_41);
+    FieldEffectStart(FLDEFF_USE_VS_SEEKER);
     CreateTask(sub_8150794, 0x00);
 }
 
 static void sub_8150794(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(0x41))
+    if (!FieldEffectActiveListContains(FLDEFF_USE_VS_SEEKER))
     {
         UnfreezeObjectEvents();
         ScriptContext2_Disable();

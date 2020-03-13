@@ -13,182 +13,182 @@ gSpecials:: @ 815FD60
 	def_special DoCableClubWarp
 	def_special ReturnFromLinkRoom
 	def_special CleanupLinkRoomState
-	def_special sub_8081770
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special ExitLinkRoom
+	def_special NullFieldSpecial  @ Secret Base specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
-	def_special sub_80810F4
+	def_special TryRecordMixLinkup
 	def_special CloseLink
 	def_special EnterColosseumPlayerSpot
 	def_special EnterTradeSeat
-	def_special sub_80819B8
-	def_special sub_808130C
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special StartWiredCableClubTrade
+	def_special CableClub_AskSaveTheGame
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
 	def_special Script_ShowLinkTrainerCard
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial  @ Berry Tree specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special IsEnigmaBerryValid
-	def_special ScrSpecial_GetTrainerBattleMode
-	def_special ScrSpecial_ShowTrainerIntroSpeech
-	def_special ScrSpecial_ShowTrainerNonBattlingSpeech
-	def_special ScrSpecial_HasTrainerBeenFought
-	def_special ScrSpecial_EndTrainerApproach
+	def_special GetTrainerBattleMode
+	def_special ShowTrainerIntroSpeech
+	def_special ShowTrainerCantBattleSpeech
+	def_special Script_HasTrainerBeenFought
+	def_special EndTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
-	def_special ScrSpecial_GetTrainerEyeRematchFlag
-	def_special ScrSpecial_StartTrainerEyeRematch
+	def_special IsTrainerReadyForRematch
+	def_special StartRematchBattle
 	def_special ShowPokemonStorageSystem
 	def_special HasEnoughMonsForDoubleBattle
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_HasLeadMonBeenRenamed
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial  @ Hoenn TV specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special HasLeadMonBeenRenamed
+	def_special NullFieldSpecial  @ Contest specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special sub_8081128
 	def_special Field_AskSaveTheGame
-	def_special nullsub_56
-	def_special sub_80FEE44
-	def_special Special_BufferEasyChatMessage
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special DoWateringBerryTreeAnim
+	def_special ShowEasyChatScreen
+	def_special ShowEasyChatMessage
+	def_special NullFieldSpecial  @ Mauville Man specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special GetHeracrossSizeRecordInfo
 	def_special CompareHeracrossSize
 	def_special GetMagikarpSizeRecordInfo
 	def_special CompareMagikarpSize
 	def_special NameRaterWasNicknameChanged
-	def_special Special_GetMonNickname
-	def_special Special_IsMonOTIDNotPlayers
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special BufferMonNickname
+	def_special IsMonOTIDNotPlayers
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special BufferRandomHobbyOrLifestyleString
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special RegisteredItemHandleBikeSwap
 	def_special CalculatePlayerPartyCount
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_ShowStringVar4AsFieldMessage
+	def_special NullFieldSpecial  @ Contest specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial  @ Mauville Gym specials
+	def_special NullFieldSpecial
+	def_special ShowFieldMessageStringVar4
 	def_special DrawWholeMapView
-	def_special Special_GetPlayerXY
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetPlayerTrainerIdOnesDigit
-	def_special Special_BufferBigGuyOrBigGirlString
-	def_special Special_BufferSonOrDaughterString
-	def_special Special_SetHiddenItemFlag
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special GetPlayerXY
+	def_special NullFieldSpecial  @ Mauville/Petalburg Gym specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special GetPlayerTrainerIdOnesDigit
+	def_special BufferBigGuyOrBigGirlString
+	def_special BufferSonOrDaughterString
+	def_special SetHiddenItemFlag
+	def_special NullFieldSpecial  @ Cable Car specials
+	def_special NullFieldSpecial
 	def_special Overworld_PlaySpecialMapMusic
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special ScrSpecial_StartOldManTutorialBattle
+	def_special NullFieldSpecial  @ Wall Clock specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special StartOldManTutorialBattle
 	def_special ChangePokemonNickname
-	def_special Special_ChooseMonFromParty
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_IsFanClubMemberFanOfPlayer
-	def_special Special_GetNumFansOfPlayerInTrainerFanClub
-	def_special Special_BufferFanClubTrainerName
-	def_special Special_TryLoseFansFromPlayTimeAfterLinkBattle
-	def_special Special_TryLoseFansFromPlayTime
-	def_special Special_SetPlayerGotFirstFans
-	def_special Special_UpdateTrainerFanClubGameClear
-	def_special Special_TryGainNewFanFromCounter
-	def_special ScrSpecial_RockSmashWildEncounter
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetBattleOutcome
+	def_special ChoosePartyMon
+	def_special NullFieldSpecial  @ Berry Blender/Roulette specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special Script_IsFanClubMemberFanOfPlayer
+	def_special Script_GetNumFansOfPlayerInTrainerFanClub
+	def_special Script_BufferFanClubTrainerName
+	def_special Script_TryLoseFansFromPlayTimeAfterLinkBattle
+	def_special Script_TryLoseFansFromPlayTime
+	def_special Script_SetPlayerGotFirstFans
+	def_special Script_UpdateTrainerFanClubGameClear
+	def_special Script_TryGainNewFanFromCounter
+	def_special RockSmashWildEncounter
+	def_special NullFieldSpecial  @ Gabby and Ty specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
 	def_special RejectEggFromDayCare
@@ -204,46 +204,46 @@ gSpecials:: @ 815FD60
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special DaycareMonReceivedMail
-	def_special Special_BattleRecords
+	def_special ShowBattleRecords
 	def_special IsEnoughForCostInVar0x8005
 	def_special SubtractMoneyFromVar0x8005
-	def_special ExecuteWhiteOut
-	def_special sp0C8_whiteout_maybe
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special TryFieldPoisonWhiteOut
+	def_special SetCB2WhiteOut
+	def_special NullFieldSpecial  @ Rotating gate puzzle specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial  @ SS Tidal specials
+	def_special NullFieldSpecial
 	def_special EnterSafariMode
 	def_special ExitSafariMode
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetPokedexCount
-	def_special Special_GetProfOaksRatingMessage
-	def_special Special_AnimatePcTurnOn
-	def_special Special_AnimatePcTurnOff
-	def_special Special_GetElevatorFloor
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_SelectMoveTutorMon
-	def_special Special_SelectMove
-	def_special Special_MoveDeleterForgetMove
-	def_special Special_BufferMoveDeleterNicknameAndMove
-	def_special Special_GetNumMovesSelectedMonHas
+	def_special NullFieldSpecial  @ Misc Hoenn specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special GetPokedexCount
+	def_special GetProfOaksRatingMessage
+	def_special AnimatePcTurnOn
+	def_special AnimatePcTurnOff
+	def_special GetElevatorFloor
+	def_special NullFieldSpecial  @ Lottery Corner specials
+	def_special NullFieldSpecial
+	def_special SelectMoveTutorMon
+	def_special SelectMoveDeleterMove
+	def_special MoveDeleterForgetMove
+	def_special BufferMoveDeleterNicknameAndMove
+	def_special GetNumMovesSelectedMonHas
 	def_special DisplayMoveTutorMenu
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetPlayerAvatarBike
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetLeadMonFriendship
-	def_special ScrSpecial_BattleTowerMapScript2
+	def_special NullFieldSpecial  @ Hoenn Cycling Road specials
+	def_special NullFieldSpecial
+	def_special GetPlayerAvatarBike
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special GetLeadMonFriendship
+	def_special BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
 	def_special PrintBattleTowerTrainerGreeting
-	def_special PrintEReaderTrainerGreeting
+	def_special BufferEReaderTrainerGreeting
 	def_special StartSpecialBattle
 	def_special SetBattleTowerProperty
 	def_special BattleTowerUtil
@@ -255,201 +255,201 @@ gSpecials:: @ 815FD60
 	def_special AwardBattleTowerRibbons
 	def_special ChooseBattleTowerPlayerParty
 	def_special ValidateEReaderTrainer
-	def_special nullsub_75
+	def_special NullFieldSpecial
 	def_special ReducePlayerPartyToThree
 	def_special BedroomPC
 	def_special PlayerPC
-	def_special Special_TownMap
+	def_special ShowTownMap
 	def_special GetInGameTradeSpeciesInfo
 	def_special CreateInGameTradePokemon
 	def_special DoInGameTradeScene
 	def_special GetTradeSpecies
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special ScrSpecial_CreatePCMenu
+	def_special NullFieldSpecial  @ Misc Hoenn specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special CreatePCMenu
 	def_special HallOfFamePCBeginFade
-	def_special Special_ShowDiploma
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_61
+	def_special ShowDiploma
+	def_special NullFieldSpecial  @ Check lead mon Contest strength specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special LookThroughPorthole
 	def_special DoSoftReset
-	def_special Special_HallOfFame
-	def_special Special_AnimateElevator
-	def_special nullsub_75
+	def_special EnterHallOfFame
+	def_special AnimateElevator
+	def_special NullFieldSpecial  @ ShowGlassWorkshopMenu
 	def_special SpawnCameraObject
 	def_special RemoveCameraObject
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_BufferEReaderTrainerName5
-	def_special Special_GetRandomSlotMachine
+	def_special NullFieldSpecial  @ Misc Hoenn specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special BufferEReaderTrainerName
+	def_special GetRandomSlotMachineId
 	def_special GetPlayerFacingDirection
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial  @ Abandoned Ship room key specials
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special LeadMonHasEffortRibbon
 	def_special GiveLeadMonEffortRibbon
-	def_special ScrSpecial_AreLeadMonEVsMaxedOut
+	def_special AreLeadMonEVsMaxedOut
 	def_special Script_FacePlayer
 	def_special Script_ClearHeldMovement
 	def_special InitRoamer
-	def_special nullsub_75
-	def_special Special_PlayerHasGrassPokemonInParty
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_IsStarterFirstStageInParty
-	def_special nullsub_75
-	def_special Special_IsThereRoomInAnyBoxForMorePokemon
-	def_special nullsub_75
-	def_special Special_DrawElevatorCurrentFloorWindow
-	def_special nullsub_75
-	def_special Special_CheckPartyPokerus
-	def_special Special_SetIcefallCaveCrackedIceMetatiles
-	def_special Special_ShakeScreen
-	def_special Special_StartGroudonKyogreBattle
-	def_special Special_StartLegendaryBattle
-	def_special Special_StartRegiBattle
+	def_special NullFieldSpecial
+	def_special PlayerHasGrassPokemonInParty
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special IsStarterFirstStageInParty
+	def_special NullFieldSpecial
+	def_special IsThereRoomInAnyBoxForMorePokemon
+	def_special NullFieldSpecial
+	def_special DrawElevatorCurrentFloorWindow
+	def_special NullFieldSpecial
+	def_special IsPokerusInParty
+	def_special SetIcefallCaveCrackedIceMetatiles
+	def_special ShakeScreen
+	def_special StartGroudonKyogreBattle
+	def_special StartLegendaryBattle
+	def_special StartRegiBattle
 	def_special SetUpTrainerMovement
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special sub_807B6C0
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
 	def_special DoFallWarp
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special SetEReaderTrainerGfxId
-	def_special ScrSpecial_StartSouthernIslandBattle
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special nullsub_75
-	def_special Special_GetSpeciesOfPartySlot_x8004
-	def_special Special_IsSelectedMonEgg
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special StartSouthernIslandBattle
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
+	def_special GetPartyMonSpecies
+	def_special IsSelectedMonEgg
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special LoadPlayerBag
-	def_special sub_807F0B0
-	def_special nullsub_75
-	def_special nullsub_75
+	def_special Script_FadeOutMapMusic
+	def_special NullFieldSpecial
+	def_special NullFieldSpecial
 	def_special HasAllKantoMons
-	def_special Special_IsMonOTNameNotPlayers
-	def_special nullsub_75
+	def_special IsMonOTNameNotPlayers
+	def_special NullFieldSpecial
 	def_special Dummy_TryEnableBravoTrainerBattleTower
-	def_special GetNameOfEnigmaBerryInPlayerParty
-	def_special nullsub_75
+	def_special DoesPartyHaveEnigmaBerry
+	def_special NullFieldSpecial
 	def_special sub_810B82C
-	def_special ScrSpecial_StartMarowakBattle
-	def_special Special_ForcePlayerOntoBike
-	def_special Special_ListMenu
-	def_special Special_ReturnToListMenu
+	def_special StartMarowakBattle
+	def_special ForcePlayerOntoBike
+	def_special ListMenu
+	def_special ReturnToListMenu
 	def_special sub_80CADC4
-	def_special Special_SetVermilionTrashCans
+	def_special SetVermilionTrashCans
 	def_special sub_805D1A8
-	def_special Special_SampleResortGorgeousMonAndReward
-	def_special Special_CheckAddCoins
+	def_special SampleResortGorgeousMonAndReward
+	def_special CheckAddCoins
 	def_special GetDaycarePokemonCount
-	def_special Special_CloseElevatorCurrentFloorWindow
-	def_special Special_ForcePlayerToStartSurfing
-	def_special ScrSpecial_GetStarter
-	def_special Special_SetSeenMon
+	def_special CloseElevatorCurrentFloorWindow
+	def_special ForcePlayerToStartSurfing
+	def_special GetStarterSpecies
+	def_special SetSeenMon
 	def_special sub_810C444
 	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
-	def_special Special_UpdateTrainerCardPhotoIcons
-	def_special Special_StickerLadyGetBragFlags
+	def_special UpdateTrainerCardPhotoIcons
+	def_special StickerManGetBragFlags
 	def_special SetUsedPkmnCenterQuestLogEvent
 	def_special IsWirelessAdapterConnected
 	def_special TryBecomeLinkLeader
 	def_special TryJoinLinkGroup
 	def_special UnionRoomSpecial
-	def_special sub_814F1D4
+	def_special ShowWirelessCommunicationScreen
 	def_special EnableNationalPokedex
 	def_special sub_80699E0
 	def_special sub_80699BC
 	def_special sub_810C3A4
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
-	def_special Special_OverworldWhiteOutGetMoneyLoss
+	def_special OverworldWhiteOutGetMoneyLoss
 	def_special PutMonInRoute5Daycare
 	def_special GetCostToWithdrawRoute5DaycareMon
 	def_special IsThereMonInRoute5Daycare
 	def_special GetNumLevelsGainedForRoute5DaycareMon
 	def_special TakePokemonFromRoute5Daycare
 	def_special DoSeagallopFerryScene
-	def_special Special_PlayerPartyContainsSpecies
-	def_special Special_SetSomeVariable
-	def_special HelpSystem_BackupSomeVariable
-	def_special HelpSystem_RestoreSomeVariable
+	def_special DoesPlayerPartyContainSpecies
+	def_special Script_SetHelpContext
+	def_special BackupHelpContext
+	def_special RestoreHelpContext
 	def_special ValidateReceivedWonderCard
 	def_special sub_810B810
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
 	def_special sub_811390C
-	def_special Special_GetMartClerkObjectId
-	def_special Special_BattleCardAction
-	def_special Special_GetQuestLogState
+	def_special GetMartClerkObjectId
+	def_special BattleCardAction
+	def_special GetQuestLogState
 	def_special sub_8112364
-	def_special Special_GetMENewsJisanItemAndState
+	def_special GetMENewsJisanItemAndState
 	def_special GetPCBoxToSendMon
-	def_special Special_OpenMuseumFossilPic
-	def_special Special_CloseMuseumFossilPic
+	def_special OpenMuseumFossilPic
+	def_special CloseMuseumFossilPic
 	def_special ChooseMonForMoveTutor
 	def_special ChooseMonForWirelessMinigame
 	def_special SetBattledTrainerFlag
-	def_special sub_812B35C
-	def_special Special_SSAnneDepartureCutscene
+	def_special SetHelpContextForMap
+	def_special DoSSAnneDepartureCutscene
 	def_special IsPokemonJumpSpeciesInParty
 	def_special IsNationalPokedexEnabled
-	def_special sub_815D9E8
+	def_special CallTrainerTowerFunc
 	def_special ShowPokemonJumpRecords
-	def_special Special_ItemIsTM_GetMoveName
-	def_special Special_DaisyMassageServices
+	def_special BufferTMHMMoveName
+	def_special DaisyMassageServices
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
 	def_special sub_810B82C
 	def_special CheckHasAtLeastOneBerry
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu
-	def_special Special_HasEnoughBerryPowder
-	def_special Special_TakeBerryPowder
+	def_special Script_HasEnoughBerryPowder
+	def_special Script_TakeBerryPowder
 	def_special PrintPlayerBerryPowderAmount
-	def_special Special_PokemonLeagueLightingEffect
+	def_special DoPokemonLeagueLightingEffect
 	def_special ShowBerryCrushRankings
-	def_special Special_CapeBrinkGetMoveToTeachLeadPokemon
-	def_special Special_HasLearnedAllMovesFromCapeBrinkTutor
-	def_special Special_Credits
+	def_special CapeBrinkGetMoveToTeachLeadPokemon
+	def_special HasLearnedAllMovesFromCapeBrinkTutor
+	def_special DoCredits
 	def_special ShowDodrioBerryPickingRecords
-	def_special Special_DrawSeagallopDestinationMenu
-	def_special Special_GetSelectedSeagallopDestination
+	def_special DrawSeagallopDestinationMenu
+	def_special GetSelectedSeagallopDestination
 	def_special GetSeagallopNumber
 	def_special GetPlayerFacingDirection
-	def_special DoDeoxysRockInteraction
-	def_special Special_SetDeoxysTriangleObjectPal
+	def_special DoDeoxysTriangleInteraction
+	def_special SetDeoxysTrianglePalette
 	def_special IsPlayerLeftOfVermilionSailor
-	def_special Special_BadEggInParty
-	def_special sub_815D834
+	def_special IsBadEggInParty
+	def_special ReadTrainerTowerAndValidate
 	def_special HasAllMons
-	def_special Special_PlayerIsNotInTrainerTowerLobby
-	def_special Special_BrailleCursorToggle
+	def_special IsPlayerNotInTrainerTowerLobby
+	def_special BrailleCursorToggle
 	def_special Script_ResetUnionRoomTrade
-	def_special Special_PlayerPartyContainsSpeciesWithPlayerID
-	def_special sub_809C4A8
+	def_special PlayerPartyContainsSpeciesWithPlayerID
+	def_special AnimateTeleporterHousing
 	def_special IsDodrioInParty
-	def_special sub_809C5FC
-	def_special Special_InitElevatorFloorSelectMenuPos
-	def_special Special_ComputeLoreleiDollCollection
-	def_special Special_LoopWingFlapSound
+	def_special AnimateTeleporterCable
+	def_special InitElevatorFloorSelectMenuPos
+	def_special UpdateLoreleiDollCollection
+	def_special LoopWingFlapSound
 	def_special CreateObedientEnemyMon
 gSpecialsEnd::

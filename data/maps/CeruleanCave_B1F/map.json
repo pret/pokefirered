@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CERULEAN_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_4",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 31,
       "y": 9,
       "elevation": 4,
@@ -27,7 +29,7 @@
       "flag": "FLAG_HIDE_CERULEAN_CAVE_B1F_ULTRA_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 2,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "FLAG_HIDE_CERULEAN_CAVE_B1F_MAX_REVIVE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MEWTWO",
+      "graphics_id": "OBJ_EVENT_GFX_MEWTWO",
       "x": 7,
       "y": 12,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "FLAG_HIDE_MEWTWO"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 37,
       "y": 1,
       "elevation": 3,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 38,
       "y": 2,
       "elevation": 3,
@@ -75,11 +77,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 35,
       "y": 1,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 37,
       "y": 4,
       "elevation": 3,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 35,
       "y": 5,
       "elevation": 3,
@@ -114,11 +116,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -127,11 +129,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 4,
       "y": 1,
       "elevation": 3,
@@ -140,11 +142,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 6,
       "y": 1,
       "elevation": 3,
@@ -153,11 +155,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 3,
       "y": 4,
       "elevation": 3,
@@ -166,7 +168,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_1A"
     }
   ],

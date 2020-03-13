@@ -2,7 +2,6 @@
 #include "battle.h"
 #include "event_scripts.h"
 #include "overworld.h"
-#include "battle.h"
 #include "script.h"
 #include "event_data.h"
 #include "field_screen_effect.h"

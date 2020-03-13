@@ -529,12 +529,6 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
     },
 };
 
-bool32 sub_815D834(void)
-{
-    // Stubbed out?
-    return FALSE;
-}
-
 void SetAllRenewableItemFlags(void)
 {
     u8 i, j;

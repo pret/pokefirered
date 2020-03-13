@@ -6325,16 +6325,16 @@ gUnknown_83A5374:: @ 83A5374
 	obj_frame_tiles gUnknown_8398128, 0x400
 
 gUnknown_83A537C:: @ 83A537C
-	spr_template 65535, 65535, gObjectEventBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_128x64, gUnknown_83A5358, gUnknown_83A535C, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A5394:: @ 83A5394
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown1, gUnknown_83A5358, gUnknown_83A5364, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53AC:: @ 83A53AC
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown2, gUnknown_83A5358, gUnknown_83A536C, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53C4:: @ 83A53C4
-	spr_template 65535, 65535, gObjectEventBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, oamc_shadow
+	spr_template 65535, 65535, gObjectEventBaseOam_Unknown3, gUnknown_83A5358, gUnknown_83A5374, gDummySpriteAffineAnimTable, UpdateShadowFieldEffect
 
 gUnknown_83A53DC:: @ 83A53DC
 	overworld_frame gUnknown_839A008, 2, 2, 0
@@ -6355,7 +6355,7 @@ gUnknown_83A541C:: @ 83A541C
 	.4byte gUnknown_83A5404
 
 gUnknown_83A5420:: @ 83A5420
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, unc_grass_normal
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A541C, gUnknown_83A53DC, gDummySpriteAffineAnimTable, UpdateTallGrassFieldEffect
 
 gUnknown_83A5438:: @ 83A5438
 	overworld_frame gUnknown_83986A8, 2, 2, 0
@@ -6379,7 +6379,7 @@ gUnknown_83A5484:: @ 83A5484
 	.4byte gUnknown_83A5460
 
 gUnknown_83A5488:: @ 83A5488
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5484, gUnknown_83A5438, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A54A0:: @ 83A54A0
 	overworld_frame gUnknown_8398928, 2, 2, 0
@@ -6400,7 +6400,7 @@ gUnknown_83A54E0:: @ 83A54E0
 	.4byte gUnknown_83A54C8
 
 gUnknown_83A54E4:: @ 83A54E4
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, sub_80DC2FC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A54E0, gUnknown_83A54A0, gDummySpriteAffineAnimTable, UpdateAshFieldEffect
 
 gUnknown_83A54FC:: @ 83A54FC
 	overworld_frame gUnknown_8396B08, 2, 8, 0
@@ -6437,7 +6437,7 @@ gUnknown_83A555C:: @ 83A555C
 	.4byte gUnknown_83A5550
 
 gUnknown_83A556C:: @ 83A556C
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, sub_80DC4F8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_32x32, gUnknown_83A555C, gUnknown_83A54FC, gDummySpriteAffineAnimTable, UpdateSurfBlobFieldEffect
 
 gUnknown_83A5584:: @ 83A5584
 	overworld_frame gUnknown_8398BA8, 2, 2, 0
@@ -6542,7 +6542,7 @@ gUnknown_83A56E0:: @ 83A56E0
 	.4byte gUnknown_83A56D8
 
 gUnknown_83A56F4:: @ 83A56F4
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A56E0, gUnknown_83A56B0, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A570C:: @ 83A570C
 	overworld_frame gUnknown_839A488, 2, 2, 0
@@ -6572,7 +6572,7 @@ gUnknown_83A573C:: @ 83A573C
 	.4byte gUnknown_83A5734
 
 gUnknown_83A5750:: @ 83A5750
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A573C, gUnknown_83A570C, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A5768:: @ 83A5768
 	overworld_frame gUnknown_839A588, 2, 2, 0
@@ -6624,7 +6624,7 @@ gUnknown_83A57C8:: @ 83A57C8
 	.4byte gUnknown_83A57C0
 
 gUnknown_83A57EC:: @ 83A57EC
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, sub_80DBAFC
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A57C8, gUnknown_83A5768, gDummySpriteAffineAnimTable, UpdateFootprintsTireTracksFieldEffect
 
 gUnknown_83A5804:: @ 83A5804
 	overworld_frame gUnknown_839AA48, 2, 2, 0
@@ -6670,7 +6670,7 @@ gUnknown_83A5894:: @ 83A5894
 	.4byte gUnknown_83A5870
 
 gUnknown_83A589C:: @ 83A589C
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, sub_80DBC2C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5894, gUnknown_83A5854, gDummySpriteAffineAnimTable, UpdateSplashFieldEffect
 
 gUnknown_83A58B4:: @ 83A58B4
 	overworld_frame gUnknown_839ACC8, 2, 1, 0
@@ -6709,7 +6709,7 @@ gUnknown_83A5938:: @ 83A5938
 	.4byte gUnknown_83A5918
 
 gUnknown_83A593C:: @ 83A593C
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, unc_grass_tall
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5938, gUnknown_83A58F8, gDummySpriteAffineAnimTable, UpdateLongGrassFieldEffect
 
 gUnknown_83A5954:: @ 83A5954
 	overworld_frame gUnknown_8399488, 2, 2, 0
@@ -6761,7 +6761,7 @@ gUnknown_83A5A2C:: @ 83A5A2C
 	.4byte gUnknown_83A5A04
 
 gUnknown_83A5A30:: @ 83A5A30
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A2C, gUnknown_83A59BC, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5A48:: @ 83A5A48
 	overworld_frame gUnknown_8399C08, 2, 2, 0
@@ -6782,7 +6782,7 @@ gUnknown_83A5A84:: @ 83A5A84
 	.4byte gUnknown_83A5A68
 
 gUnknown_83A5A88:: @ 83A5A88
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5A84, gUnknown_83A5A48, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5AA0:: @ 83A5AA0
 	overworld_frame gUnknown_839A788, 2, 2, 0
@@ -6801,7 +6801,7 @@ gUnknown_83A5AD4:: @ 83A5AD4
 	.4byte gUnknown_83A5AC0
 
 gUnknown_83A5AD8:: @ 83A5AD8
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5AD4, gUnknown_83A5AA0, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5AF0:: @ 83A5AF0
 	overworld_frame gUnknown_839A988, 2, 1, 0
@@ -6818,7 +6818,7 @@ gUnknown_83A5B18:: @ 83A5B18
 	.4byte gUnknown_83A5B08
 
 gUnknown_83A5B1C:: @ 83A5B1C
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, sub_80DC86C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_Unknown1, gUnknown_83A5B18, gUnknown_83A5AF0, gDummySpriteAffineAnimTable, UpdateSandPileFieldEffect
 
 gUnknown_83A5B34:: @ 83A5B34
 	overworld_frame gUnknown_839AD88, 2, 2, 0
@@ -6839,7 +6839,7 @@ gUnknown_83A5B70:: @ 83A5B70
 	.4byte gUnknown_83A5B54
 
 gUnknown_83A5B74:: @ 83A5B74
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, sub_80DCD1C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x16, gUnknown_83A5B70, gUnknown_83A5B34, gDummySpriteAffineAnimTable, WaitFieldEffectSpriteAnim
 
 gUnknown_83A5B8C:: @ 83A5B8C
 	obj_rot_scal_anim_frame -256, 256, 128, 0
@@ -6900,7 +6900,7 @@ gUnknown_83A5CAC:: @ 83A5CAC
 	.4byte gUnknown_83A5C8C
 
 gUnknown_83A5CB4:: @ 83A5CB4
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5C4C, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5CCC:: @ 83A5CCC
 	overworld_frame gUnknown_839B708, 2, 4, 0
@@ -6930,7 +6930,7 @@ gUnknown_83A5D2C:: @ 83A5D2C
 	.4byte gUnknown_83A5D0C
 
 gUnknown_83A5D34:: @ 83A5D34
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5D2C, gUnknown_83A5CCC, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 0
@@ -6942,7 +6942,7 @@ gUnknown_83A5D4C:: @ 83A5D4C
 	overworld_frame gUnknown_839BE08, 2, 4, 6
 
 gUnknown_83A5D84:: @ 83A5D84
-	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, sub_80DCAC8
+	spr_template 0xFFFF, 0xFFFF, gObjectEventBaseOam_16x32, gUnknown_83A5CAC, gUnknown_83A5D4C, gDummySpriteAffineAnimTable, UpdateDisguiseFieldEffect
 
 gUnknown_83A5D9C:: @ 83A5D9C
 	overworld_frame gUnknown_839D3C8, 8, 8, 0
@@ -6994,7 +6994,7 @@ gUnknown_83A5E34:: @ 83A5E34
 	.4byte gUnknown_83A5E28
 
 gUnknown_83A5E38:: @ 83A5E38
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, sub_80DB8AC
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E34, gUnknown_83A5E18, gDummySpriteAffineAnimTable, UpdateShortGrassFieldEffect
 
 gUnknown_83A5E50:: @ 83A5E50
 	overworld_frame gUnknown_839C508, 2, 2, 0
@@ -7007,7 +7007,7 @@ gUnknown_83A5E60:: @ 83A5E60
 	.4byte gUnknown_83A5E58
 
 gUnknown_83A5E64:: @ 83A5E64
-	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, sub_80DBFF4
+	spr_template 0xFFFF, 0x1005, gObjectEventBaseOam_16x16, gUnknown_83A5E60, gUnknown_83A5E50, gDummySpriteAffineAnimTable, UpdateHotSpringsWaterFieldEffect
 
 gUnknown_83A5E7C:: @ 83A5E7C
 	overworld_frame gUnknown_839C5A8, 2, 2, 0
@@ -7028,7 +7028,7 @@ gUnknown_83A5EBC:: @ 83A5EBC
 	.4byte gUnknown_83A5EA4
 
 gUnknown_83A5EC0:: @ 83A5EC0
-	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, sub_8085604
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5EBC, gUnknown_83A5E7C, gDummySpriteAffineAnimTable, SpriteCB_PopOutOfAsh
 
 gUnknown_83A5ED8:: @ 83A5ED8
 	obj_pal gUnknown_839C588, 0x100D
@@ -7052,7 +7052,7 @@ gUnknown_83A5F20:: @ 83A5F20
 	.4byte gUnknown_83A5F08
 
 gUnknown_83A5F24:: @ 83A5F24
-	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, sub_80853B0
+	spr_template 0xFFFF, 0x100D, gObjectEventBaseOam_16x16, gUnknown_83A5F20, gUnknown_83A5EE0, gDummySpriteAffineAnimTable, SpriteCB_LavaridgeGymWarp
 
 gUnknown_83A5F3C:: @ 83A5F3C
 	overworld_frame gUnknown_839CAA8, 2, 4, 0
@@ -7079,7 +7079,7 @@ gUnknown_83A5FA0:: @ 83A5FA0
 	.4byte gUnknown_83A5F7C
 
 gUnknown_83A5FA4:: @ 83A5FA4
-	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, sub_80DC99C
+	spr_template 0xFFFF, 0x1004, gObjectEventBaseOam_16x32, gUnknown_83A5FA0, gUnknown_83A5F3C, gDummySpriteAffineAnimTable, UpdateBubblesFieldEffect
 
 gUnknown_83A5FBC:: @ 83A5FBC
 	overworld_frame gUnknown_839D2A8, 2, 2, 0
@@ -7095,7 +7095,7 @@ gUnknown_83A5FDC:: @ 83A5FDC
 	.4byte gUnknown_83A5FCC
 
 gUnknown_83A5FE0:: @ 83A5FE0
-	spr_template 0xFFFF, 0x100F, gObjectEventBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, sub_80DCC90
+	spr_template 0xFFFF, 0x100F, gObjectEventBaseOam_16x16, gUnknown_83A5FDC, gUnknown_83A5FBC, gDummySpriteAffineAnimTable, UpdateSparkleFieldEffect
 
 gUnknown_83A5FF8::
 	obj_pal gUnknown_839D3A8, 0x100F
@@ -7667,17 +7667,16 @@ gUnknown_83A6404:: @ 83A6404
 	.4byte sub_80633D4
 	.4byte sub_80633F4
 
-@ gFaceDirectionAnimNums ?
 gFaceDirectionAnimNums:: @ 83A640C
-	.byte 0x00
-	.byte 0x00
-	.byte 0x01
-	.byte 0x02
-	.byte 0x03
-	.byte 0x00
-	.byte 0x00
-	.byte 0x01
-	.byte 0x01
+	.byte 0x00 @ DIR_NONE
+	.byte 0x00 @ DIR_SOUTH
+	.byte 0x01 @ DIR_NORTH
+	.byte 0x02 @ DIR_WEST
+	.byte 0x03 @ DIR_EAST
+	.byte 0x00 @ DIR_SOUTHWEST
+	.byte 0x00 @ DIR_SOUTHEAST
+	.byte 0x01 @ DIR_NORTHWEST
+	.byte 0x01 @ DIR_NORTHEAST
 
 gMoveDirectionAnimNums:: @ 83A6415
 	.byte 0x4 @ DIR_NONE
@@ -7767,6 +7766,7 @@ gAcroEndWheelieDirectionAnimNums:: @ 83A6454
 	.byte 0x1D @ DIR_NORTHWEST
 	.byte 0x1D @ DIR_NORTHEAST
 
+@ gAcroUnusedActionDirectionAnimNums?
 gAcroUnusedActionDirectionAnimNums:: @ 83A645D
 	.byte 0x18 @ DIR_NONE
 	.byte 0x18 @ DIR_SOUTH
@@ -7778,6 +7778,7 @@ gAcroUnusedActionDirectionAnimNums:: @ 83A645D
 	.byte 0x1A @ DIR_NORTHWEST
 	.byte 0x1B @ DIR_NORTHEAST
 
+@ gAcroWheeliePedalDirectionAnimNums?
 gAcroWheeliePedalDirectionAnimNums:: @ 83A6466
 	.byte 0x20 @ DIR_NONE
 	.byte 0x20 @ DIR_SOUTH
@@ -7789,6 +7790,7 @@ gAcroWheeliePedalDirectionAnimNums:: @ 83A6466
 	.byte 0x21 @ DIR_NORTHWEST
 	.byte 0x21 @ DIR_NORTHEAST
 
+@ ???
 gFishingDirectionAnimNums:: @ 83A646F
 	.byte 0x24 @ DIR_NONE
 	.byte 0x24 @ DIR_SOUTH
@@ -7800,6 +7802,7 @@ gFishingDirectionAnimNums:: @ 83A646F
 	.byte 0x25 @ DIR_NORTHWEST
 	.byte 0x25 @ DIR_NORTHEAST
 
+@ gFishingDirectionAnimNums?
 gFishingNoCatchDirectionAnimNums:: @ 83A6478
 	.byte 0x0 @ DIR_NONE
 	.byte 0x0 @ DIR_SOUTH
@@ -7811,6 +7814,7 @@ gFishingNoCatchDirectionAnimNums:: @ 83A6478
 	.byte 0x1 @ DIR_NORTHWEST
 	.byte 0x1 @ DIR_NORTHEAST
 
+@ gFishingNoCatchDirectionAnimNums?
 gFishingBiteDirectionAnimNums:: @ 83A6481
 	.byte 0x4 @ DIR_NONE
 	.byte 0x4 @ DIR_SOUTH
@@ -7822,6 +7826,7 @@ gFishingBiteDirectionAnimNums:: @ 83A6481
 	.byte 0x5 @ DIR_NORTHWEST
 	.byte 0x5 @ DIR_NORTHEAST
 
+@ gFishingBiteDirectionAnimNums?
 gUnknown_83A648A:: @ 83A648A
 	.byte 0x8 @ DIR_NONE
 	.byte 0x8 @ DIR_SOUTH
@@ -7833,6 +7838,7 @@ gUnknown_83A648A:: @ 83A648A
 	.byte 0x9 @ DIR_NORTHWEST
 	.byte 0x9 @ DIR_NORTHEAST
 
+@ gRunningDirectionAnimNums?
 gRunningDirectionAnimNums:: @ 83A6493
 	.byte 0x14 @ DIR_NONE
 	.byte 0x14 @ DIR_SOUTH
@@ -7845,19 +7851,17 @@ gRunningDirectionAnimNums:: @ 83A6493
 	.byte 0x15 @ DIR_NORTHEAST
 
 gTrainerFacingDirectionMovementTypes:: @ 83A649C
-	.byte 0x08
-	.byte 0x08
-	.byte 0x07
-	.byte 0x09
-	.byte 0x0A
-	.byte 0x08
-	.byte 0x08
-	.byte 0x07
-	.byte 0x07
-	.byte 0x00
-	.byte 0x00
-	.byte 0x00
+	.byte 0x08 @ DIR_NONE
+	.byte 0x08 @ DIR_SOUTH
+	.byte 0x07 @ DIR_NORTH
+	.byte 0x09 @ DIR_WEST
+	.byte 0x0A @ DIR_EAST
+	.byte 0x08 @ DIR_SOUTHWEST
+	.byte 0x08 @ DIR_SOUTHEAST
+	.byte 0x07 @ DIR_NORTHWEST
+	.byte 0x07 @ DIR_NORTHEAST
 
+	.align 2
 gOppositeDirectionBlockedMetatileFuncs:: @ 83A64A8
 	.4byte MetatileBehavior_IsSouthBlocked
 	.4byte MetatileBehavior_IsNorthBlocked
@@ -8164,192 +8168,191 @@ gUnknown_83A65A9:: @ 83A65A9
 	.byte 0x00
 	.byte 0x00
 
-@ gMovementActionFuncs
 gMovementActionFuncs:: @ 83A65BC
-	.4byte gUnknown_83A6864
-	.4byte gUnknown_83A686C
-	.4byte gUnknown_83A6874
-	.4byte gUnknown_83A687C
-	.4byte gUnknown_83A6A30
-	.4byte gUnknown_83A6A38
-	.4byte gUnknown_83A6A40
-	.4byte gUnknown_83A6A48
-	.4byte gUnknown_83A68C8
-	.4byte gUnknown_83A68D4
-	.4byte gUnknown_83A68E0
-	.4byte gUnknown_83A68EC
-	.4byte gUnknown_83A6904
-	.4byte gUnknown_83A68F8
-	.4byte gUnknown_83A6910
-	.4byte gUnknown_83A691C
-	.4byte gUnknown_83A6928
-	.4byte gUnknown_83A6934
-	.4byte gUnknown_83A6940
-	.4byte gUnknown_83A694C
-	.4byte gUnknown_83A6964
-	.4byte gUnknown_83A6970
-	.4byte gUnknown_83A697C
-	.4byte gUnknown_83A6988
-	.4byte gUnknown_83A6994
-	.4byte gUnknown_83A69A0
-	.4byte gUnknown_83A69AC
-	.4byte gUnknown_83A69B8
-	.4byte gUnknown_83A69C4
-	.4byte gUnknown_83A69D0
-	.4byte gUnknown_83A69DC
-	.4byte gUnknown_83A69E8
-	.4byte gUnknown_83A69F4
-	.4byte gUnknown_83A6A50
-	.4byte gUnknown_83A6A5C
-	.4byte gUnknown_83A6A68
-	.4byte gUnknown_83A6A74
-	.4byte gUnknown_83A6A80
-	.4byte gUnknown_83A6A8C
-	.4byte gUnknown_83A6A98
-	.4byte gUnknown_83A6AA4
-	.4byte gUnknown_83A6AB0
-	.4byte gUnknown_83A6ABC
-	.4byte gUnknown_83A6AC8
-	.4byte gUnknown_83A6AD4
-	.4byte gUnknown_83A6AE0
-	.4byte gUnknown_83A6AEC
-	.4byte gUnknown_83A6AF8
-	.4byte gUnknown_83A6B04
-	.4byte gUnknown_83A6B10
-	.4byte gUnknown_83A6B1C
-	.4byte gUnknown_83A6B28
-	.4byte gUnknown_83A6B34
-	.4byte gUnknown_83A6B40
-	.4byte gUnknown_83A6B4C
-	.4byte gUnknown_83A6B58
-	.4byte gUnknown_83A6B64
-	.4byte gUnknown_83A6B70
-	.4byte gUnknown_83A6B7C
-	.4byte gUnknown_83A6B88
-	.4byte gUnknown_83A6B94
-	.4byte gUnknown_83A6BA0
-	.4byte gUnknown_83A6BAC
-	.4byte gUnknown_83A6BB8
-	.4byte gUnknown_83A6BC4
-	.4byte gUnknown_83A6BD0
-	.4byte gUnknown_83A6BDC
-	.4byte gUnknown_83A6BE8
-	.4byte gUnknown_83A6BF4
-	.4byte gUnknown_83A6C00
-	.4byte gUnknown_83A6C0C
-	.4byte gUnknown_83A6C18
-	.4byte gUnknown_83A6C24
-	.4byte gUnknown_83A6C30
-	.4byte gUnknown_83A6C6C
-	.4byte gUnknown_83A6C74
-	.4byte gUnknown_83A6C7C
-	.4byte gUnknown_83A6C84
-	.4byte gUnknown_83A6C8C
-	.4byte gUnknown_83A6C98
-	.4byte gUnknown_83A6CA4
-	.4byte gUnknown_83A6CB0
-	.4byte gUnknown_83A6CBC
-	.4byte gUnknown_83A6CC8
-	.4byte gUnknown_83A6CD4
-	.4byte gUnknown_83A6CE0
-	.4byte gUnknown_83A6CEC
-	.4byte gUnknown_83A6CF8
-	.4byte gUnknown_83A6D04
-	.4byte gUnknown_83A6D10
-	.4byte gUnknown_83A6D1C
-	.4byte gUnknown_83A6D24
-	.4byte gUnknown_83A6D30
-	.4byte gUnknown_83A6D38
-	.4byte gUnknown_83A6D40
-	.4byte gUnknown_83A6D48
-	.4byte gUnknown_83A6D50
-	.4byte gUnknown_83A6D58
-	.4byte gUnknown_83A6D60
-	.4byte gUnknown_83A6D68
-	.4byte gUnknown_83A6D70
-	.4byte gUnknown_83A6D78
-	.4byte gUnknown_83A6D80
-	.4byte gUnknown_83A6D88
-	.4byte gUnknown_83A6D94
-	.4byte gUnknown_83A6DA4
-	.4byte gUnknown_83A6DB4
-	.4byte gUnknown_83A6DBC
-	.4byte gUnknown_83A6DC4
-	.4byte gUnknown_83A6DCC
-	.4byte gUnknown_83A6DD4
-	.4byte gUnknown_83A6DE0
-	.4byte gUnknown_83A6DEC
-	.4byte gUnknown_83A6DF4
-	.4byte gUnknown_83A6DFC
-	.4byte gUnknown_83A6E04
-	.4byte gUnknown_83A6E0C
-	.4byte gUnknown_83A6E18
-	.4byte gUnknown_83A6E24
-	.4byte gUnknown_83A6E30
-	.4byte gUnknown_83A6E3C
-	.4byte gUnknown_83A6E48
-	.4byte gUnknown_83A6E54
-	.4byte gUnknown_83A6E60
-	.4byte gUnknown_83A6E9C
-	.4byte gUnknown_83A6EA8
-	.4byte gUnknown_83A6EB4
-	.4byte gUnknown_83A6EC0
-	.4byte gUnknown_83A6ECC
-	.4byte gUnknown_83A6ED8
-	.4byte gUnknown_83A6EE4
-	.4byte gUnknown_83A6EF0
-	.4byte gUnknown_83A6EFC
-	.4byte gUnknown_83A6F08
-	.4byte gUnknown_83A6F14
-	.4byte gUnknown_83A6F20
-	.4byte gUnknown_83A6F2C
-	.4byte gUnknown_83A6F38
-	.4byte gUnknown_83A6F44
-	.4byte gUnknown_83A6F50
-	.4byte gUnknown_83A6F5C
-	.4byte gUnknown_83A6F68
-	.4byte gUnknown_83A6F74
-	.4byte gUnknown_83A6F80
-	.4byte gUnknown_83A6F8C
-	.4byte gUnknown_83A6F98
-	.4byte gUnknown_83A6FA4
-	.4byte gUnknown_83A6FB0
-	.4byte gUnknown_83A6FBC
-	.4byte gUnknown_83A6FC8
-	.4byte gUnknown_83A6FD4
-	.4byte gUnknown_83A6FE0
-	.4byte gUnknown_83A6FEC
-	.4byte gUnknown_83A6FF4
-	.4byte gUnknown_83A6FFC
-	.4byte gUnknown_83A6898
-	.4byte gUnknown_83A68A4
-	.4byte gUnknown_83A68B0
-	.4byte gUnknown_83A68BC
-	.4byte gUnknown_83A7004
-	.4byte gUnknown_83A6A00
-	.4byte gUnknown_83A6A0C
-	.4byte gUnknown_83A6A18
-	.4byte gUnknown_83A6A24
-	.4byte gUnknown_83A700C
-	.4byte gUnknown_83A7018
-	.4byte gUnknown_83A6C3C
-	.4byte gUnknown_83A6C48
-	.4byte gUnknown_83A6C54
-	.4byte gUnknown_83A6C60
+	.4byte sMovementActionFuncs_x00
+	.4byte sMovementActionFuncs_x01
+	.4byte sMovementActionFuncs_x02
+	.4byte sMovementActionFuncs_x03
+	.4byte sMovementActionFuncs_x04
+	.4byte sMovementActionFuncs_x05
+	.4byte sMovementActionFuncs_x06
+	.4byte sMovementActionFuncs_x07
+	.4byte sMovementActionFuncs_x08
+	.4byte sMovementActionFuncs_x09
+	.4byte sMovementActionFuncs_x0A
+	.4byte sMovementActionFuncs_x0B
+	.4byte sMovementActionFuncs_x0C
+	.4byte sMovementActionFuncs_x0D
+	.4byte sMovementActionFuncs_x0E
+	.4byte sMovementActionFuncs_x0F
+	.4byte sMovementActionFuncs_x10
+	.4byte sMovementActionFuncs_x11
+	.4byte sMovementActionFuncs_x12
+	.4byte sMovementActionFuncs_x13
+	.4byte sMovementActionFuncs_x14
+	.4byte sMovementActionFuncs_x15
+	.4byte sMovementActionFuncs_x16
+	.4byte sMovementActionFuncs_x17
+	.4byte sMovementActionFuncs_x18
+	.4byte sMovementActionFuncs_x19
+	.4byte sMovementActionFuncs_x1A
+	.4byte sMovementActionFuncs_x1B
+	.4byte sMovementActionFuncs_x1C
+	.4byte sMovementActionFuncs_x1D
+	.4byte sMovementActionFuncs_x1E
+	.4byte sMovementActionFuncs_x1F
+	.4byte sMovementActionFuncs_x20
+	.4byte sMovementActionFuncs_x21
+	.4byte sMovementActionFuncs_x22
+	.4byte sMovementActionFuncs_x23
+	.4byte sMovementActionFuncs_x24
+	.4byte sMovementActionFuncs_x25
+	.4byte sMovementActionFuncs_x26
+	.4byte sMovementActionFuncs_x27
+	.4byte sMovementActionFuncs_x28
+	.4byte sMovementActionFuncs_x29
+	.4byte sMovementActionFuncs_x2A
+	.4byte sMovementActionFuncs_x2B
+	.4byte sMovementActionFuncs_x2C
+	.4byte sMovementActionFuncs_x2D
+	.4byte sMovementActionFuncs_x2E
+	.4byte sMovementActionFuncs_x2F
+	.4byte sMovementActionFuncs_x30
+	.4byte sMovementActionFuncs_x31
+	.4byte sMovementActionFuncs_x32
+	.4byte sMovementActionFuncs_x33
+	.4byte sMovementActionFuncs_x34
+	.4byte sMovementActionFuncs_x35
+	.4byte sMovementActionFuncs_x36
+	.4byte sMovementActionFuncs_x37
+	.4byte sMovementActionFuncs_x38
+	.4byte sMovementActionFuncs_x39
+	.4byte sMovementActionFuncs_x3A
+	.4byte sMovementActionFuncs_x3B
+	.4byte sMovementActionFuncs_x3C
+	.4byte sMovementActionFuncs_x3D
+	.4byte sMovementActionFuncs_x3E
+	.4byte sMovementActionFuncs_x3F
+	.4byte sMovementActionFuncs_x40
+	.4byte sMovementActionFuncs_x41
+	.4byte sMovementActionFuncs_x42
+	.4byte sMovementActionFuncs_x43
+	.4byte sMovementActionFuncs_x44
+	.4byte sMovementActionFuncs_x45
+	.4byte sMovementActionFuncs_x46
+	.4byte sMovementActionFuncs_x47
+	.4byte sMovementActionFuncs_x48
+	.4byte sMovementActionFuncs_x49
+	.4byte sMovementActionFuncs_x4A
+	.4byte sMovementActionFuncs_x4B
+	.4byte sMovementActionFuncs_x4C
+	.4byte sMovementActionFuncs_x4D
+	.4byte sMovementActionFuncs_x4E
+	.4byte sMovementActionFuncs_x4F
+	.4byte sMovementActionFuncs_x50
+	.4byte sMovementActionFuncs_x51
+	.4byte sMovementActionFuncs_x52
+	.4byte sMovementActionFuncs_x53
+	.4byte sMovementActionFuncs_x54
+	.4byte sMovementActionFuncs_x55
+	.4byte sMovementActionFuncs_x56
+	.4byte sMovementActionFuncs_x57
+	.4byte sMovementActionFuncs_x58
+	.4byte sMovementActionFuncs_x59
+	.4byte sMovementActionFuncs_x5A
+	.4byte sMovementActionFuncs_x5B
+	.4byte sMovementActionFuncs_x5C
+	.4byte sMovementActionFuncs_x5D
+	.4byte sMovementActionFuncs_x5E
+	.4byte sMovementActionFuncs_x5F
+	.4byte sMovementActionFuncs_x60
+	.4byte sMovementActionFuncs_x61
+	.4byte sMovementActionFuncs_x62
+	.4byte sMovementActionFuncs_x63
+	.4byte sMovementActionFuncs_x64
+	.4byte sMovementActionFuncs_x65
+	.4byte sMovementActionFuncs_x66
+	.4byte sMovementActionFuncs_x67
+	.4byte sMovementActionFuncs_x68
+	.4byte sMovementActionFuncs_x69
+	.4byte sMovementActionFuncs_x6A
+	.4byte sMovementActionFuncs_x6B
+	.4byte sMovementActionFuncs_x6C
+	.4byte sMovementActionFuncs_x6D
+	.4byte sMovementActionFuncs_x6E
+	.4byte sMovementActionFuncs_x6F
+	.4byte sMovementActionFuncs_x70
+	.4byte sMovementActionFuncs_x71
+	.4byte sMovementActionFuncs_x72
+	.4byte sMovementActionFuncs_x73
+	.4byte sMovementActionFuncs_x74
+	.4byte sMovementActionFuncs_x75
+	.4byte sMovementActionFuncs_x76
+	.4byte sMovementActionFuncs_x77
+	.4byte sMovementActionFuncs_x78
+	.4byte sMovementActionFuncs_x79
+	.4byte sMovementActionFuncs_x7A
+	.4byte sMovementActionFuncs_x7B
+	.4byte sMovementActionFuncs_x7C
+	.4byte sMovementActionFuncs_x7D
+	.4byte sMovementActionFuncs_x7E
+	.4byte sMovementActionFuncs_x7F
+	.4byte sMovementActionFuncs_x80
+	.4byte sMovementActionFuncs_x81
+	.4byte sMovementActionFuncs_x82
+	.4byte sMovementActionFuncs_x83
+	.4byte sMovementActionFuncs_x84
+	.4byte sMovementActionFuncs_x85
+	.4byte sMovementActionFuncs_x86
+	.4byte sMovementActionFuncs_x87
+	.4byte sMovementActionFuncs_x88
+	.4byte sMovementActionFuncs_x89
+	.4byte sMovementActionFuncs_x8A
+	.4byte sMovementActionFuncs_x8B
+	.4byte sMovementActionFuncs_x8C
+	.4byte sMovementActionFuncs_x8D
+	.4byte sMovementActionFuncs_x8E
+	.4byte sMovementActionFuncs_x8F
+	.4byte sMovementActionFuncs_x90
+	.4byte sMovementActionFuncs_x91
+	.4byte sMovementActionFuncs_x92
+	.4byte sMovementActionFuncs_x93
+	.4byte sMovementActionFuncs_x94
+	.4byte sMovementActionFuncs_x95
+	.4byte sMovementActionFuncs_x96
+	.4byte sMovementActionFuncs_x97
+	.4byte sMovementActionFuncs_x98
+	.4byte sMovementActionFuncs_x99
+	.4byte sMovementActionFuncs_x9A
+	.4byte sMovementActionFuncs_x9B
+	.4byte sMovementActionFuncs_x9C
+	.4byte sMovementActionFuncs_x9D
+	.4byte sMovementActionFuncs_x9E
+	.4byte sMovementActionFuncs_x9F
+	.4byte sMovementActionFuncs_xA0
+	.4byte sMovementActionFuncs_xA1
+	.4byte sMovementActionFuncs_xA2
+	.4byte sMovementActionFuncs_xA3
+	.4byte sMovementActionFuncs_xA4
+	.4byte sMovementActionFuncs_xA5
+	.4byte sMovementActionFuncs_xA6
+	.4byte sMovementActionFuncs_xA7
+	.4byte sMovementActionFuncs_xA8
+	.4byte sMovementActionFuncs_xA9
 
-gUnknown_83A6864:: @ 83A6864
+sMovementActionFuncs_x00:: @ 83A6864
 	.4byte MovementAction_FaceDown_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A686C:: @ 83A686C
+sMovementActionFuncs_x01:: @ 83A686C
 	.4byte MovementAction_FaceUp_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6874:: @ 83A6874
+sMovementActionFuncs_x02:: @ 83A6874
 	.4byte MovementAction_FaceLeft_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A687C:: @ 83A687C
+sMovementActionFuncs_x03:: @ 83A687C
 	.4byte MovementAction_FaceRight_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
@@ -8360,82 +8363,82 @@ gUnknown_83A6884:: @ 83A6884
 	.4byte GetMoveDirectionFasterAnimNum
 	.4byte GetMoveDirectionFastestAnimNum
 
-gUnknown_83A6898:: @ 83A6898
-	.4byte sub_8064968
-	.4byte sub_8064988
+sMovementActionFuncs_x9B:: @ 83A6898
+	.4byte MovementActionFunc_x9B_0
+	.4byte MovementActionFunc_x9B_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68A4:: @ 83A68A4
-	.4byte sub_80649A8
-	.4byte sub_80649C8
+sMovementActionFuncs_x9C:: @ 83A68A4
+	.4byte MovementActionFunc_x9C_0
+	.4byte MovementActionFunc_x9C_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68B0:: @ 83A68B0
-	.4byte sub_80649E8
-	.4byte sub_8064A08
+sMovementActionFuncs_x9D:: @ 83A68B0
+	.4byte MovementActionFunc_x9D_0
+	.4byte MovementActionFunc_x9D_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68BC:: @ 83A68BC
-	.4byte sub_8064A28
-	.4byte sub_8064A48
+sMovementActionFuncs_x9E:: @ 83A68BC
+	.4byte MovementActionFunc_x9E_0
+	.4byte MovementActionFunc_x9E_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68C8:: @ 83A68C8
-	.4byte sub_8064A68
-	.4byte sub_8064A88
+sMovementActionFuncs_x08:: @ 83A68C8
+	.4byte MovementActionFunc_x08_0
+	.4byte MovementActionFunc_x08_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68D4:: @ 83A68D4
-	.4byte sub_8064AA8
-	.4byte sub_8064AC8
+sMovementActionFuncs_x09:: @ 83A68D4
+	.4byte MovementActionFunc_x09_0
+	.4byte MovementActionFunc_x09_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68E0:: @ 83A68E0
-	.4byte sub_8064AE8
-	.4byte sub_8064B08
+sMovementActionFuncs_x0A:: @ 83A68E0
+	.4byte MovementActionFunc_x0A_0
+	.4byte MovementActionFunc_x0A_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68EC:: @ 83A68EC
-	.4byte sub_8064B28
-	.4byte sub_8064B48
+sMovementActionFuncs_x0B:: @ 83A68EC
+	.4byte MovementActionFunc_x0B_0
+	.4byte MovementActionFunc_x0B_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A68F8:: @ 83A68F8
-	.4byte sub_8064C3C
-	.4byte sub_8064C5C
+sMovementActionFuncs_x0D:: @ 83A68F8
+	.4byte MovementActionFunc_x0D_0
+	.4byte MovementActionFunc_x0D_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6904:: @ 83A6904
-	.4byte sub_8064C7C
-	.4byte sub_8064C9C
+sMovementActionFuncs_x0C:: @ 83A6904
+	.4byte MovementActionFunc_x0C_0
+	.4byte MovementActionFunc_x0C_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6910:: @ 83A6910
-	.4byte sub_8064CBC
-	.4byte sub_8064CDC
+sMovementActionFuncs_x0E:: @ 83A6910
+	.4byte MovementActionFunc_x0E_0
+	.4byte MovementActionFunc_x0E_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A691C:: @ 83A691C
-	.4byte sub_8064CFC
-	.4byte sub_8064D1C
+sMovementActionFuncs_x0F:: @ 83A691C
+	.4byte MovementActionFunc_x0F_0
+	.4byte MovementActionFunc_x0F_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6928:: @ 83A6928
+sMovementActionFuncs_x10:: @ 83A6928
 	.4byte MovementAction_WalkNormalDown_Step0
 	.4byte MovementAction_WalkNormalDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6934:: @ 83A6934
+sMovementActionFuncs_x11:: @ 83A6934
 	.4byte MovementAction_WalkNormalUp_Step0
 	.4byte MovementAction_WalkNormalUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6940:: @ 83A6940
+sMovementActionFuncs_x12:: @ 83A6940
 	.4byte MovementAction_WalkNormalLeft_Step0
 	.4byte MovementAction_WalkNormalLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A694C:: @ 83A694C
+sMovementActionFuncs_x13:: @ 83A694C
 	.4byte MovementAction_WalkNormalRight_Step0
 	.4byte MovementAction_WalkNormalRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
@@ -8450,556 +8453,556 @@ gUnknown_83A695E:: @ 83A695E
 	.2byte 0x0000
 	.2byte 0x0001
 
-gUnknown_83A6964:: @ 83A6964
+sMovementActionFuncs_x14:: @ 83A6964
 	.4byte MovementAction_Jump2Down_Step0
 	.4byte MovementAction_Jump2Down_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6970:: @ 83A6970
+sMovementActionFuncs_x15:: @ 83A6970
 	.4byte MovementAction_Jump2Up_Step0
 	.4byte MovementAction_Jump2Up_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A697C:: @ 83A697C
+sMovementActionFuncs_x16:: @ 83A697C
 	.4byte MovementAction_Jump2Left_Step0
 	.4byte MovementAction_Jump2Left_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6988:: @ 83A6988
+sMovementActionFuncs_x17:: @ 83A6988
 	.4byte MovementAction_Jump2Right_Step0
 	.4byte MovementAction_Jump2Right_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6994:: @ 83A6994
+sMovementActionFuncs_x18:: @ 83A6994
 	.4byte MovementAction_Delay1_Step0
 	.4byte MovementAction_Delay_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A69A0:: @ 83A69A0
+sMovementActionFuncs_x19:: @ 83A69A0
 	.4byte MovementAction_Delay2_Step0
 	.4byte MovementAction_Delay_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A69AC:: @ 83A69AC
+sMovementActionFuncs_x1A:: @ 83A69AC
 	.4byte MovementAction_Delay4_Step0
 	.4byte MovementAction_Delay_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A69B8:: @ 83A69B8
+sMovementActionFuncs_x1B:: @ 83A69B8
 	.4byte MovementAction_Delay8_Step0
 	.4byte MovementAction_Delay_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A69C4:: @ 83A69C4
+sMovementActionFuncs_x1C:: @ 83A69C4
 	.4byte MovementAction_Delay16_Step0
 	.4byte MovementAction_Delay_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A69D0:: @ 83A69D0
+sMovementActionFuncs_x1D:: @ 83A69D0
 	.4byte MovementAction_WalkFastDown_Step0
 	.4byte MovementAction_WalkFastDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A69DC:: @ 83A69DC
+sMovementActionFuncs_x1E:: @ 83A69DC
 	.4byte MovementAction_WalkFastUp_Step0
 	.4byte MovementAction_WalkFastUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A69E8:: @ 83A69E8
+sMovementActionFuncs_x1F:: @ 83A69E8
 	.4byte MovementAction_WalkFastLeft_Step0
 	.4byte MovementAction_WalkFastLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A69F4:: @ 83A69F4
+sMovementActionFuncs_x20:: @ 83A69F4
 	.4byte MovementAction_WalkFastRight_Step0
 	.4byte MovementAction_WalkFastRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A00:: @ 83A6A00
-	.4byte sub_80653F8
-	.4byte sub_8065438
+sMovementActionFuncs_xA0:: @ 83A6A00
+	.4byte MovementActionFunc_xA0_0
+	.4byte MovementActionFunc_xA0_1
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A0C:: @ 83A6A0C
-	.4byte sub_8065464
-	.4byte sub_80654A4
+sMovementActionFuncs_xA1:: @ 83A6A0C
+	.4byte MovementActionFunc_xA1_0
+	.4byte MovementActionFunc_xA1_1
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A18:: @ 83A6A18
-	.4byte sub_80654D0
-	.4byte sub_8065510
+sMovementActionFuncs_xA2:: @ 83A6A18
+	.4byte MovementActionFunc_xA2_0
+	.4byte MovementActionFunc_xA2_1
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A24:: @ 83A6A24
-	.4byte sub_806553C
-	.4byte sub_806557C
+sMovementActionFuncs_xA3:: @ 83A6A24
+	.4byte MovementActionFunc_xA3_0
+	.4byte MovementActionFunc_xA3_1
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A30:: @ 83A6A30
-	.4byte sub_80655D4
+sMovementActionFuncs_x04:: @ 83A6A30
+	.4byte MovementActionFunc_x04_0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A38:: @ 83A6A38
-	.4byte sub_8065610
+sMovementActionFuncs_x05:: @ 83A6A38
+	.4byte MovementActionFunc_x05_0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A40:: @ 83A6A40
-	.4byte sub_806564C
+sMovementActionFuncs_x06:: @ 83A6A40
+	.4byte MovementActionFunc_x06_0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A48:: @ 83A6A48
-	.4byte sub_8065688
+sMovementActionFuncs_x07:: @ 83A6A48
+	.4byte MovementActionFunc_x07_0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6A50:: @ 83A6A50
+sMovementActionFuncs_x21:: @ 83A6A50
 	.4byte MovementAction_WalkInPlaceSlowDown_Step0
 	.4byte MovementAction_WalkInPlaceSlow_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A5C:: @ 83A6A5C
+sMovementActionFuncs_x22:: @ 83A6A5C
 	.4byte MovementAction_WalkInPlaceSlowUp_Step0
 	.4byte MovementAction_WalkInPlaceSlow_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A68:: @ 83A6A68
+sMovementActionFuncs_x23:: @ 83A6A68
 	.4byte MovementAction_WalkInPlaceSlowLeft_Step0
 	.4byte MovementAction_WalkInPlaceSlow_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A74:: @ 83A6A74
+sMovementActionFuncs_x24:: @ 83A6A74
 	.4byte MovementAction_WalkInPlaceSlowRight_Step0
 	.4byte MovementAction_WalkInPlaceSlow_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A80:: @ 83A6A80
+sMovementActionFuncs_x25:: @ 83A6A80
 	.4byte MovementAction_WalkInPlaceNormalDown_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A8C:: @ 83A6A8C
+sMovementActionFuncs_x26:: @ 83A6A8C
 	.4byte MovementAction_WalkInPlaceNormalUp_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6A98:: @ 83A6A98
+sMovementActionFuncs_x27:: @ 83A6A98
 	.4byte MovementAction_WalkInPlaceNormalLeft_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AA4:: @ 83A6AA4
+sMovementActionFuncs_x28:: @ 83A6AA4
 	.4byte MovementAction_WalkInPlaceNormalRight_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AB0:: @ 83A6AB0
+sMovementActionFuncs_x29:: @ 83A6AB0
 	.4byte MovementAction_WalkInPlaceFastDown_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6ABC:: @ 83A6ABC
+sMovementActionFuncs_x2A:: @ 83A6ABC
 	.4byte MovementAction_WalkInPlaceFastUp_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AC8:: @ 83A6AC8
+sMovementActionFuncs_x2B:: @ 83A6AC8
 	.4byte MovementAction_WalkInPlaceFastLeft_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AD4:: @ 83A6AD4
+sMovementActionFuncs_x2C:: @ 83A6AD4
 	.4byte MovementAction_WalkInPlaceFastRight_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AE0:: @ 83A6AE0
+sMovementActionFuncs_x2D:: @ 83A6AE0
 	.4byte MovementAction_WalkInPlaceFastestDown_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AEC:: @ 83A6AEC
+sMovementActionFuncs_x2E:: @ 83A6AEC
 	.4byte MovementAction_WalkInPlaceFastestUp_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6AF8:: @ 83A6AF8
+sMovementActionFuncs_x2F:: @ 83A6AF8
 	.4byte MovementAction_WalkInPlaceFastestLeft_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B04:: @ 83A6B04
+sMovementActionFuncs_x30:: @ 83A6B04
 	.4byte MovementAction_WalkInPlaceFastestRight_Step0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B10:: @ 83A6B10
+sMovementActionFuncs_x31:: @ 83A6B10
 	.4byte MovementAction_RideWaterCurrentDown_Step0
 	.4byte MovementAction_RideWaterCurrentDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B1C:: @ 83A6B1C
+sMovementActionFuncs_x32:: @ 83A6B1C
 	.4byte MovementAction_RideWaterCurrentUp_Step0
 	.4byte MovementAction_RideWaterCurrentUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B28:: @ 83A6B28
+sMovementActionFuncs_x33:: @ 83A6B28
 	.4byte MovementAction_RideWaterCurrentLeft_Step0
 	.4byte MovementAction_RideWaterCurrentLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B34:: @ 83A6B34
+sMovementActionFuncs_x34:: @ 83A6B34
 	.4byte MovementAction_RideWaterCurrentRight_Step0
 	.4byte MovementAction_RideWaterCurrentRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B40:: @ 83A6B40
+sMovementActionFuncs_x35:: @ 83A6B40
 	.4byte MovementAction_WalkFastestDown_Step0
 	.4byte MovementAction_WalkFastestDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B4C:: @ 83A6B4C
+sMovementActionFuncs_x36:: @ 83A6B4C
 	.4byte MovementAction_WalkFastestUp_Step0
 	.4byte MovementAction_WalkFastestUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B58:: @ 83A6B58
+sMovementActionFuncs_x37:: @ 83A6B58
 	.4byte MovementAction_WalkFastestLeft_Step0
 	.4byte MovementAction_WalkFastestLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B64:: @ 83A6B64
+sMovementActionFuncs_x38:: @ 83A6B64
 	.4byte MovementAction_WalkFastestRight_Step0
 	.4byte MovementAction_WalkFastestRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B70:: @ 83A6B70
+sMovementActionFuncs_x39:: @ 83A6B70
 	.4byte MovementAction_SlideDown_Step0
 	.4byte MovementAction_SlideDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B7C:: @ 83A6B7C
+sMovementActionFuncs_x3A:: @ 83A6B7C
 	.4byte MovementAction_SlideUp_Step0
 	.4byte MovementAction_SlideUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B88:: @ 83A6B88
+sMovementActionFuncs_x3B:: @ 83A6B88
 	.4byte MovementAction_SlideLeft_Step0
 	.4byte MovementAction_SlideLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6B94:: @ 83A6B94
+sMovementActionFuncs_x3C:: @ 83A6B94
 	.4byte MovementAction_SlideRight_Step0
 	.4byte MovementAction_SlideRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BA0:: @ 83A6BA0
+sMovementActionFuncs_x3D:: @ 83A6BA0
 	.4byte MovementAction_PlayerRunDown_Step0
 	.4byte MovementAction_PlayerRunDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BAC:: @ 83A6BAC
+sMovementActionFuncs_x3E:: @ 83A6BAC
 	.4byte MovementAction_PlayerRunUp_Step0
 	.4byte MovementAction_PlayerRunUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BB8:: @ 83A6BB8
+sMovementActionFuncs_x3F:: @ 83A6BB8
 	.4byte MovementAction_PlayerRunLeft_Step0
 	.4byte MovementAction_PlayerRunLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BC4:: @ 83A6BC4
+sMovementActionFuncs_x40:: @ 83A6BC4
 	.4byte MovementAction_PlayerRunRight_Step0
 	.4byte MovementAction_PlayerRunRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BD0:: @ 83A6BD0
-	.4byte sub_8065FC4
-	.4byte sub_8065FE4
+sMovementActionFuncs_x41:: @ 83A6BD0
+	.4byte MovementActionFunc_x41_0
+	.4byte MovementActionFunc_x41_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BDC:: @ 83A6BDC
-	.4byte sub_8066004
-	.4byte sub_8066024
+sMovementActionFuncs_x42:: @ 83A6BDC
+	.4byte MovementActionFunc_x42_0
+	.4byte MovementActionFunc_x42_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BE8:: @ 83A6BE8
-	.4byte sub_8066044
-	.4byte sub_8066064
+sMovementActionFuncs_x43:: @ 83A6BE8
+	.4byte MovementActionFunc_x43_0
+	.4byte MovementActionFunc_x43_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6BF4:: @ 83A6BF4
-	.4byte sub_8066084
-	.4byte sub_80660A4
+sMovementActionFuncs_x44:: @ 83A6BF4
+	.4byte MovementActionFunc_x44_0
+	.4byte MovementActionFunc_x44_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C00:: @ 83A6C00
+sMovementActionFuncs_x45:: @ 83A6C00
 	.4byte MovementAction_StartAnimInDirection_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C0C:: @ 83A6C0C
+sMovementActionFuncs_x46:: @ 83A6C0C
 	.4byte MovementAction_JumpSpecialDown_Step0
 	.4byte MovementAction_JumpSpecialDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C18:: @ 83A6C18
+sMovementActionFuncs_x47:: @ 83A6C18
 	.4byte MovementAction_JumpSpecialUp_Step0
 	.4byte MovementAction_JumpSpecialUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C24:: @ 83A6C24
+sMovementActionFuncs_x48:: @ 83A6C24
 	.4byte MovementAction_JumpSpecialLeft_Step0
 	.4byte MovementAction_JumpSpecialLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C30:: @ 83A6C30
+sMovementActionFuncs_x49:: @ 83A6C30
 	.4byte MovementAction_JumpSpecialRight_Step0
 	.4byte MovementAction_JumpSpecialRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C3C:: @ 83A6C3C
-	.4byte sub_806627C
-	.4byte sub_806629C
+sMovementActionFuncs_xA6:: @ 83A6C3C
+	.4byte MovementActionFunc_xA6_0
+	.4byte MovementActionFunc_xA6_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C48:: @ 83A6C48
-	.4byte sub_80662BC
-	.4byte sub_80662DC
+sMovementActionFuncs_xA7:: @ 83A6C48
+	.4byte MovementActionFunc_xA7_0
+	.4byte MovementActionFunc_xA7_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C54:: @ 83A6C54
-	.4byte sub_80662FC
-	.4byte sub_806631C
+sMovementActionFuncs_xA8:: @ 83A6C54
+	.4byte MovementActionFunc_xA8_0
+	.4byte MovementActionFunc_xA8_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C60:: @ 83A6C60
-	.4byte sub_806633C
-	.4byte sub_806635C
+sMovementActionFuncs_xA9:: @ 83A6C60
+	.4byte MovementActionFunc_xA9_0
+	.4byte MovementActionFunc_xA9_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C6C:: @ 83A6C6C
+sMovementActionFuncs_x4A:: @ 83A6C6C
 	.4byte MovementAction_FacePlayer_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C74:: @ 83A6C74
+sMovementActionFuncs_x4B:: @ 83A6C74
 	.4byte MovementAction_FaceAwayPlayer_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C7C:: @ 83A6C7C
+sMovementActionFuncs_x4C:: @ 83A6C7C
 	.4byte MovementAction_LockFacingDirection_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C84:: @ 83A6C84
+sMovementActionFuncs_x4D:: @ 83A6C84
 	.4byte MovementAction_UnlockFacingDirection_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C8C:: @ 83A6C8C
+sMovementActionFuncs_x4E:: @ 83A6C8C
 	.4byte MovementAction_JumpDown_Step0
 	.4byte MovementAction_JumpDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6C98:: @ 83A6C98
+sMovementActionFuncs_x4F:: @ 83A6C98
 	.4byte MovementAction_JumpUp_Step0
 	.4byte MovementAction_JumpUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CA4:: @ 83A6CA4
+sMovementActionFuncs_x50:: @ 83A6CA4
 	.4byte MovementAction_JumpLeft_Step0
 	.4byte MovementAction_JumpLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CB0:: @ 83A6CB0
+sMovementActionFuncs_x51:: @ 83A6CB0
 	.4byte MovementAction_JumpRight_Step0
 	.4byte MovementAction_JumpRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CBC:: @ 83A6CBC
+sMovementActionFuncs_x52:: @ 83A6CBC
 	.4byte MovementAction_JumpInPlaceDown_Step0
 	.4byte MovementAction_JumpInPlaceDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CC8:: @ 83A6CC8
+sMovementActionFuncs_x53:: @ 83A6CC8
 	.4byte MovementAction_JumpInPlaceUp_Step0
 	.4byte MovementAction_JumpInPlaceUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CD4:: @ 83A6CD4
+sMovementActionFuncs_x54:: @ 83A6CD4
 	.4byte MovementAction_JumpInPlaceLeft_Step0
 	.4byte MovementAction_JumpInPlaceLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CE0:: @ 83A6CE0
+sMovementActionFuncs_x55:: @ 83A6CE0
 	.4byte MovementAction_JumpInPlaceRight_Step0
 	.4byte MovementAction_JumpInPlaceRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CEC:: @ 83A6CEC
+sMovementActionFuncs_x56:: @ 83A6CEC
 	.4byte MovementAction_JumpInPlaceDownUp_Step0
 	.4byte MovementAction_JumpInPlaceDownUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6CF8:: @ 83A6CF8
+sMovementActionFuncs_x57:: @ 83A6CF8
 	.4byte MovementAction_JumpInPlaceUpDown_Step0
 	.4byte MovementAction_JumpInPlaceUpDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6D04:: @ 83A6D04
+sMovementActionFuncs_x58:: @ 83A6D04
 	.4byte MovementAction_JumpInPlaceLeftRight_Step0
 	.4byte MovementAction_JumpInPlaceLeftRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6D10:: @ 83A6D10
+sMovementActionFuncs_x59:: @ 83A6D10
 	.4byte MovementAction_JumpInPlaceRightLeft_Step0
 	.4byte MovementAction_JumpInPlaceRightLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6D1C:: @ 83A6D1C
+sMovementActionFuncs_x5A:: @ 83A6D1C
 	.4byte MovementAction_FaceOriginalDirection_Step0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6D24:: @ 83A6D24
+sMovementActionFuncs_x5B:: @ 83A6D24
 	.4byte MovementAction_NurseJoyBowDown_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6D30:: @ 83A6D30
+sMovementActionFuncs_x5C:: @ 83A6D30
 	.4byte MovementAction_EnableJumpLandingGroundEffect_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D38:: @ 83A6D38
+sMovementActionFuncs_x5D:: @ 83A6D38
 	.4byte MovementAction_DisableJumpLandingGroundEffect_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D40:: @ 83A6D40
+sMovementActionFuncs_x5E:: @ 83A6D40
 	.4byte MovementAction_DisableAnimation_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D48:: @ 83A6D48
+sMovementActionFuncs_x5F:: @ 83A6D48
 	.4byte MovementAction_RestoreAnimation_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D50:: @ 83A6D50
+sMovementActionFuncs_x60:: @ 83A6D50
 	.4byte MovementAction_SetInvisible_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D58:: @ 83A6D58
+sMovementActionFuncs_x61:: @ 83A6D58
 	.4byte MovementAction_SetVisible_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D60:: @ 83A6D60
+sMovementActionFuncs_x62:: @ 83A6D60
 	.4byte MovementAction_EmoteExclamationMark_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D68:: @ 83A6D68
+sMovementActionFuncs_x63:: @ 83A6D68
 	.4byte MovementAction_EmoteQuestionMark_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D70:: @ 83A6D70
+sMovementActionFuncs_x64:: @ 83A6D70
 	.4byte MovementAction_EmoteHeart_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D78:: @ 83A6D78
-	.4byte sub_806698C
+sMovementActionFuncs_x65:: @ 83A6D78
+	.4byte do_double_excl_bubble
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D80:: @ 83A6D80
-	.4byte sub_80669B0
+sMovementActionFuncs_x66:: @ 83A6D80
+	.4byte do_smile_bubble
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D88:: @ 83A6D88
+sMovementActionFuncs_x67:: @ 83A6D88
 	.4byte MovementAction_RevealTrainer_Step0
 	.4byte MovementAction_RevealTrainer_Step1
 	.4byte MovementAction_Finish
 
-gUnknown_83A6D94:: @ 83A6D94
+sMovementActionFuncs_x68:: @ 83A6D94
 	.4byte MovementAction_RockSmashBreak_Step0
 	.4byte MovementAction_RockSmashBreak_Step1
 	.4byte MovementAction_RockSmashBreak_Step2
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DA4:: @ 83A6DA4
+sMovementActionFuncs_x69:: @ 83A6DA4
 	.4byte MovementAction_CutTree_Step0
 	.4byte MovementAction_CutTree_Step1
 	.4byte MovementAction_CutTree_Step2
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DB4:: @ 83A6DB4
+sMovementActionFuncs_x6A:: @ 83A6DB4
 	.4byte MovementAction_SetFixedPriority_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DBC:: @ 83A6DBC
+sMovementActionFuncs_x6B:: @ 83A6DBC
 	.4byte MovementAction_ClearFixedPriority_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DC4:: @ 83A6DC4
+sMovementActionFuncs_x6C:: @ 83A6DC4
 	.4byte MovementAction_InitAffineAnim_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DCC:: @ 83A6DCC
+sMovementActionFuncs_x6D:: @ 83A6DCC
 	.4byte MovementAction_ClearAffineAnim_Step0
 	.4byte MovementAction_Finish
 
-gUnknown_83A6DD4:: @ 83A6DD4
+sMovementActionFuncs_x6E:: @ 83A6DD4
 	.4byte MovementAction_WalkDownStartAffine_Step0
 	.4byte MovementAction_WalkDownStartAffine_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6DE0:: @ 83A6DE0
+sMovementActionFuncs_x6F:: @ 83A6DE0
 	.4byte MovementAction_WalkDownAffine_Step0
 	.4byte MovementAction_WalkDownAffine_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6DEC:: @ 83A6DEC
-	.4byte sub_8066CB0
+sMovementActionFuncs_x70:: @ 83A6DEC
+	.4byte MovementActionFunc_x70_0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6DF4:: @ 83A6DF4
-	.4byte sub_8066CC0
+sMovementActionFuncs_x71:: @ 83A6DF4
+	.4byte MovementActionFunc_x71_0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6DFC:: @ 83A6DFC
-	.4byte sub_8066CD0
+sMovementActionFuncs_x72:: @ 83A6DFC
+	.4byte MovementActionFunc_x72_0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E04:: @ 83A6E04
-	.4byte sub_8066CE0
+sMovementActionFuncs_x73:: @ 83A6E04
+	.4byte MovementActionFunc_x73_0
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E0C:: @ 83A6E0C
+sMovementActionFuncs_x74:: @ 83A6E0C
 	.4byte MovementAction_AcroPopWheelieDown_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E18:: @ 83A6E18
+sMovementActionFuncs_x75:: @ 83A6E18
 	.4byte MovementAction_AcroPopWheelieUp_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E24:: @ 83A6E24
+sMovementActionFuncs_x76:: @ 83A6E24
 	.4byte MovementAction_AcroPopWheelieLeft_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E30:: @ 83A6E30
+sMovementActionFuncs_x77:: @ 83A6E30
 	.4byte MovementAction_AcroPopWheelieRight_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E3C:: @ 83A6E3C
+sMovementActionFuncs_x78:: @ 83A6E3C
 	.4byte MovementAction_AcroEndWheelieFaceDown_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E48:: @ 83A6E48
+sMovementActionFuncs_x79:: @ 83A6E48
 	.4byte MovementAction_AcroEndWheelieFaceUp_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E54:: @ 83A6E54
+sMovementActionFuncs_x7A:: @ 83A6E54
 	.4byte MovementAction_AcroEndWheelieFaceLeft_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E60:: @ 83A6E60
+sMovementActionFuncs_x7B:: @ 83A6E60
 	.4byte MovementAction_AcroEndWheelieFaceRight_Step0
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
@@ -9016,168 +9019,231 @@ gUnknown_83A6E60:: @ 83A6E60
 	.4byte MovementAction_WaitSpriteAnim
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6E9C:: @ 83A6E9C
+sMovementActionFuncs_x7C:: @ 83A6E9C
 	.4byte MovementAction_AcroWheelieHopFaceDown_Step0
 	.4byte MovementAction_AcroWheelieHopFaceDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EA8:: @ 83A6EA8
+sMovementActionFuncs_x7D:: @ 83A6EA8
 	.4byte MovementAction_AcroWheelieHopFaceUp_Step0
 	.4byte MovementAction_AcroWheelieHopFaceUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EB4:: @ 83A6EB4
+sMovementActionFuncs_x7E:: @ 83A6EB4
 	.4byte MovementAction_AcroWheelieHopFaceLeft_Step0
 	.4byte MovementAction_AcroWheelieHopFaceLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EC0:: @ 83A6EC0
+sMovementActionFuncs_x7F:: @ 83A6EC0
 	.4byte MovementAction_AcroWheelieHopFaceRight_Step0
 	.4byte MovementAction_AcroWheelieHopFaceRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6ECC:: @ 83A6ECC
+sMovementActionFuncs_x80:: @ 83A6ECC
 	.4byte MovementAction_AcroWheelieHopDown_Step0
 	.4byte MovementAction_AcroWheelieHopDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6ED8:: @ 83A6ED8
+sMovementActionFuncs_x81:: @ 83A6ED8
 	.4byte MovementAction_AcroWheelieHopUp_Step0
 	.4byte MovementAction_AcroWheelieHopUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EE4:: @ 83A6EE4
+sMovementActionFuncs_x82:: @ 83A6EE4
 	.4byte MovementAction_AcroWheelieHopLeft_Step0
 	.4byte MovementAction_AcroWheelieHopLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EF0:: @ 83A6EF0
+sMovementActionFuncs_x83:: @ 83A6EF0
 	.4byte MovementAction_AcroWheelieHopRight_Step0
 	.4byte MovementAction_AcroWheelieHopRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6EFC:: @ 83A6EFC
+sMovementActionFuncs_x84:: @ 83A6EFC
 	.4byte MovementAction_AcroWheelieJumpDown_Step0
 	.4byte MovementAction_AcroWheelieJumpDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F08:: @ 83A6F08
+sMovementActionFuncs_x85:: @ 83A6F08
 	.4byte MovementAction_AcroWheelieJumpUp_Step0
 	.4byte MovementAction_AcroWheelieJumpUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F14:: @ 83A6F14
+sMovementActionFuncs_x86:: @ 83A6F14
 	.4byte MovementAction_AcroWheelieJumpLeft_Step0
 	.4byte MovementAction_AcroWheelieJumpLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F20:: @ 83A6F20
+sMovementActionFuncs_x87:: @ 83A6F20
 	.4byte MovementAction_AcroWheelieJumpRight_Step0
 	.4byte MovementAction_AcroWheelieJumpRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F2C:: @ 83A6F2C
-	.4byte sub_8067304
+sMovementActionFuncs_x88:: @ 83A6F2C
+	.4byte MovementActionFunc_x88_0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F38:: @ 83A6F38
-	.4byte sub_806733C
+sMovementActionFuncs_x89:: @ 83A6F38
+	.4byte MovementActionFunc_x89_0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F44:: @ 83A6F44
-	.4byte sub_8067374
+sMovementActionFuncs_x8A:: @ 83A6F44
+	.4byte MovementActionFunc_x8A_0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F50:: @ 83A6F50
-	.4byte sub_80673AC
+sMovementActionFuncs_x8B:: @ 83A6F50
+	.4byte MovementActionFunc_x8B_0
 	.4byte MovementAction_WalkInPlace_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F5C:: @ 83A6F5C
+sMovementActionFuncs_x8C:: @ 83A6F5C
 	.4byte MovementAction_AcroPopWheelieMoveDown_Step0
 	.4byte MovementAction_AcroPopWheelieMoveDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F68:: @ 83A6F68
+sMovementActionFuncs_x8D:: @ 83A6F68
 	.4byte MovementAction_AcroPopWheelieMoveUp_Step0
 	.4byte MovementAction_AcroPopWheelieMoveUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F74:: @ 83A6F74
+sMovementActionFuncs_x8E:: @ 83A6F74
 	.4byte MovementAction_AcroPopWheelieMoveLeft_Step0
 	.4byte MovementAction_AcroPopWheelieMoveLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F80:: @ 83A6F80
+sMovementActionFuncs_x8F:: @ 83A6F80
 	.4byte MovementAction_AcroPopWheelieMoveRight_Step0
 	.4byte MovementAction_AcroPopWheelieMoveRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F8C:: @ 83A6F8C
+sMovementActionFuncs_x90:: @ 83A6F8C
 	.4byte MovementAction_AcroWheelieMoveDown_Step0
 	.4byte MovementAction_AcroWheelieMoveDown_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6F98:: @ 83A6F98
+sMovementActionFuncs_x91:: @ 83A6F98
 	.4byte MovementAction_AcroWheelieMoveUp_Step0
 	.4byte MovementAction_AcroWheelieMoveUp_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FA4:: @ 83A6FA4
+sMovementActionFuncs_x92:: @ 83A6FA4
 	.4byte MovementAction_AcroWheelieMoveLeft_Step0
 	.4byte MovementAction_AcroWheelieMoveLeft_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FB0:: @ 83A6FB0
+sMovementActionFuncs_x93:: @ 83A6FB0
 	.4byte MovementAction_AcroWheelieMoveRight_Step0
 	.4byte MovementAction_AcroWheelieMoveRight_Step1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FBC:: @ 83A6FBC
-	.4byte sub_8067684
-	.4byte sub_80676A4
+sMovementActionFuncs_x94:: @ 83A6FBC
+	.4byte MovementActionFunc_x94_0
+	.4byte MovementActionFunc_x94_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FC8:: @ 83A6FC8
-	.4byte sub_80676C4
-	.4byte sub_80676E4
+sMovementActionFuncs_x95:: @ 83A6FC8
+	.4byte MovementActionFunc_x95_0
+	.4byte MovementActionFunc_x95_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FD4:: @ 83A6FD4
-	.4byte sub_8067704
-	.4byte sub_8067724
+sMovementActionFuncs_x96:: @ 83A6FD4
+	.4byte MovementActionFunc_x96_0
+	.4byte MovementActionFunc_x96_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FE0:: @ 83A6FE0
-	.4byte sub_8067744
-	.4byte sub_8067764
+sMovementActionFuncs_x97:: @ 83A6FE0
+	.4byte MovementActionFunc_x97_0
+	.4byte MovementActionFunc_x97_1
 	.4byte MovementAction_PauseSpriteAnim
 
-gUnknown_83A6FEC:: @ 83A6FEC
-	.4byte sub_8067784
-	.4byte sub_80677C0
+sMovementActionFuncs_x98:: @ 83A6FEC
+	.4byte MovementActionFunc_x98_0
+	.4byte MovementActionFunc_x98_1
 
-gUnknown_83A6FF4:: @ 83A6FF4
-	.4byte sub_8067784
-	.4byte sub_80677CC
+sMovementActionFuncs_x99:: @ 83A6FF4
+	.4byte MovementActionFunc_x98_0
+	.4byte MovementActionFunc_x99_1
 
-gUnknown_83A6FFC:: @ 83A6FFC
-	.4byte sub_8067784
-	.4byte sub_80678C0
+sMovementActionFuncs_x9A:: @ 83A6FFC
+	.4byte MovementActionFunc_x98_0
+	.4byte MovementActionFunc_x9A_1
 
-gUnknown_83A7004:: @ 83A7004
-	.4byte sub_80678F0
-	.4byte sub_8067924
+sMovementActionFuncs_x9F:: @ 83A7004
+	.4byte MovementActionFunc_x9F_0
+	.4byte MovementActionFunc_x9F_1
 
-gUnknown_83A700C:: @ 83A700C
-	.4byte sub_8067944
-	.4byte sub_8067954
-	.4byte sub_80679A8
+sMovementActionFuncs_xA4:: @ 83A700C
+	.4byte MovementActionFunc_xA4_0
+	.4byte MovementActionFunc_xA4_1
+	.4byte MovementActionFunc_xA4_2
 
-gUnknown_83A7018:: @ 83A7018
-	.4byte sub_8067978
-	.4byte sub_806798C
-	.4byte sub_80679A8
+sMovementActionFuncs_xA5:: @ 83A7018
+	.4byte MovementActionFunc_xA5_0
+	.4byte MovementActionFunc_xA5_1
+	.4byte MovementActionFunc_xA4_2
+
+	.align 2
+gUnknown_83A7024:: @ 83A7024
+	.4byte 0x00000020, 0x00000010
+
+gUnknown_83A702C:: @ 83A702C
+	.4byte MetatileBehavior_IsTallGrass_2
+	.4byte MetatileBehavior_IsLongGrass
+	.4byte MetatileBehavior_IsPuddle
+	.4byte MetatileBehavior_IsSurfable
+	.4byte MetatileBehavior_IsWaterfallBottom
+	.4byte MetatileBehavior_UnusedReturnTrue
+
+gUnknown_83A7044:: @ 83A7044
+	.4byte 0x00001000, 0x00002000, 0x00004000, 0x00008000, 0x00004000, 0x00010000
+
+gUnknown_83A705C:: @ 83A705C
+	.4byte MetatileBehavior_IsJumpSouth
+	.4byte MetatileBehavior_IsJumpNorth
+	.4byte MetatileBehavior_IsJumpWest
+	.4byte MetatileBehavior_IsJumpEast
+
+gUnknown_83A706C:: @ 83A706C
+	.byte 0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
+
+gUnknown_83A707C:: @ 83A707C
+	.byte 0x02, 0x02, 0x02, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01, 0x00, 0x00, 0x02
+
+gUnknown_83A708C:: @ 83A708C
+	.byte 0x01, 0x01, 0x01, 0x01, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01
+
+gUnknown_83A709C:: @ 83A709C
+	.4byte nullsub_26
+	.4byte DoTracksGroundEffect_Footprints
+	.4byte DoTracksGroundEffect_BikeTireTracks
+
+gUnknown_83A70A8:: @ 83A70A8
+	.byte 0x0d, 0x00, 0x18, 0x00
+
+gUnknown_83A70AC:: @ 83A70AC
+	.byte 0x01, 0x02, 0x07, 0x08, 0x01, 0x02, 0x06, 0x05, 0x05, 0x08, 0x03, 0x04, 0x06, 0x07, 0x03, 0x04
+
+gUnknown_83A70BC:: @ 83A70BC
+	.4byte GroundEffect_SpawnOnTallGrass
+	.4byte GroundEffect_StepOnTallGrass
+	.4byte GroundEffect_SpawnOnLongGrass
+	.4byte GroundEffect_StepOnLongGrass
+	.4byte GroundEffect_WaterReflection
+	.4byte GroundEffect_IceReflection
+	.4byte GroundEffect_FlowingWater
+	.4byte GroundEffect_SandTracks
+	.4byte GroundEffect_DeepSandTracks
+	.4byte GroundEffect_Ripple
+	.4byte GroundEffect_StepOnPuddle
+	.4byte GroundEffect_SandHeap
+	.4byte GroundEffect_JumpOnTallGrass
+	.4byte GroundEffect_JumpOnLongGrass
+	.4byte GroundEffect_JumpOnShallowWater
+	.4byte GroundEffect_JumpOnWater
+	.4byte GroundEffect_JumpLandingDust
+	.4byte GroundEffect_ShortGrass
+	.4byte GroundEffect_HotSprings
+	.4byte GroundEffect_Seaweed

@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 0,
       "y": 10,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C3DB",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Programmer",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 3,
       "y": 8,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C3F6",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Designer",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SUPER_NERD",
+      "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 4,
       "y": 10,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C3E4",
+      "script": "CeladonCity_Condominiums_3F_EventScript_GraphicArtist",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 0,
       "y": 13,
       "elevation": 3,
@@ -62,7 +64,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C3ED",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Writer",
       "flag": "0"
     }
   ],
@@ -99,60 +101,68 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 8,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C435"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 1,
       "y": 9,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C43E"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer1"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 5,
       "y": 9,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C447"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer2"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 1,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C450"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C435"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Condominiums_3F_EventScript_DevelopmentRoomSign"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 0,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C450"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer3"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 0,
       "y": 9,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C43E"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer1"
     },
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 4,
       "y": 9,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_3F_EventScript_16C447"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "CeladonCity_Condominiums_3F_EventScript_Computer2"
     }
   ]
 }

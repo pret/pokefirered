@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_POWER_PLANT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_3",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_INDOOR_2",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 27,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_MAX_POTION"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 40,
       "y": 22,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_TM17"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 46,
       "y": 37,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_TM25"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 45,
       "y": 4,
       "elevation": 3,
@@ -66,7 +68,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_THUNDER_STONE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 26,
       "y": 22,
       "elevation": 3,
@@ -79,7 +81,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_ELIXIR"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ZAPDOS",
+      "graphics_id": "OBJ_EVENT_GFX_ZAPDOS",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -92,7 +94,7 @@
       "flag": "FLAG_HIDE_ZAPDOS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 36,
       "y": 5,
       "elevation": 3,
@@ -105,7 +107,7 @@
       "flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 30,
       "y": 38,
       "elevation": 3,

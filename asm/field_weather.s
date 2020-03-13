@@ -1906,8 +1906,8 @@ _0807AA84: .4byte gUnknown_2037F34
 _0807AA88: .4byte 0x000006c6
 	thumb_func_end IsWeatherNotFadingIn
 
-	thumb_func_start sub_807AA8C
-sub_807AA8C: @ 807AA8C
+	thumb_func_start UpdateSpritePaletteWithWeather
+UpdateSpritePaletteWithWeather: @ 807AA8C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 8
@@ -2017,7 +2017,7 @@ _0807AB68:
 	bx r0
 	.align 2, 0
 _0807AB70: .4byte 0x000073fc
-	thumb_func_end sub_807AA8C
+	thumb_func_end UpdateSpritePaletteWithWeather
 
 	thumb_func_start sub_807AB74
 sub_807AB74: @ 807AB74
@@ -2078,7 +2078,7 @@ sub_807ABC0: @ 807ABC0
 	movs r2, 0x20
 	bl LoadPalette
 	ldrb r0, [r4]
-	bl sub_807AA8C
+	bl UpdateSpritePaletteWithWeather
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2698,8 +2698,8 @@ _0807B07C: .4byte gUnknown_2037F34
 _0807B080: .4byte 0x000006c6
 	thumb_func_end sub_807B070
 
-	thumb_func_start sub_807B084
-sub_807B084: @ 807B084
+	thumb_func_start PreservePaletteInWeather
+PreservePaletteInWeather: @ 807B084
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2721,10 +2721,10 @@ sub_807B084: @ 807B084
 _0807B0A8: .4byte gUnknown_83C2CC0
 _0807B0AC: .4byte gUnknown_2038684
 _0807B0B0: .4byte gUnknown_20386A4
-	thumb_func_end sub_807B084
+	thumb_func_end PreservePaletteInWeather
 
-	thumb_func_start sub_807B0B4
-sub_807B0B4: @ 807B0B4
+	thumb_func_start ResetPreservedPalettesInWeather
+ResetPreservedPalettesInWeather: @ 807B0B4
 	ldr r1, _0807B0BC @ =gUnknown_20386A4
 	ldr r0, _0807B0C0 @ =gUnknown_83C2CC0
 	str r0, [r1]
@@ -2732,7 +2732,7 @@ sub_807B0B4: @ 807B0B4
 	.align 2, 0
 _0807B0BC: .4byte gUnknown_20386A4
 _0807B0C0: .4byte gUnknown_83C2CC0
-	thumb_func_end sub_807B0B4
+	thumb_func_end ResetPreservedPalettesInWeather
 
 	thumb_func_start sub_807B0C4
 sub_807B0C4: @ 807B0C4

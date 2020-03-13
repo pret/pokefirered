@@ -4,10 +4,10 @@
 	.align 2
 
 gSmokescreenImpactSpriteSheet:: @ 825098C
-	obj_tiles gFile_graphics_battle_anims_sprites_smokescreen_impact_sheet, 0x0180, 55019
+	obj_tiles gSmokescreenImpactTiles, 0x0180, 55019
 
 gSmokescreenImpactSpritePalette:: @ 8250994
-	obj_pal gFile_graphics_battle_anims_sprites_smokescreen_impact_palette, 55019
+	obj_pal gSmokescreenImpactPalette, 55019
 
 gOamData_835099C::
 	.4byte 0x40000000, 0x00000400

@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_4",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 22,
       "y": 8,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 0,
       "trainer_type": 68,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_HIDE_SEAFOAM_B1F_BOULDER_1"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
       "x": 30,
       "y": 8,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 0,
       "trainer_type": 69,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithStrengthBoulderObject",
+      "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_HIDE_SEAFOAM_B1F_BOULDER_2"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 18,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B1F_WATER_STONE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 24,
       "y": 14,
       "elevation": 4,

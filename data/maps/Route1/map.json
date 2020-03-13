@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_1",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_VIRIDIAN_CITY",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
+      "graphics_id": "OBJ_EVENT_GFX_CLERK",
       "x": 6,
       "y": 28,
       "elevation": 3,
@@ -38,7 +40,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 19,
       "y": 16,
       "elevation": 3,
@@ -55,10 +57,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 9,
       "y": 31,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route1_EventScript_RouteSign"
     }
   ]

@@ -1,6 +1,6 @@
 SixIsland_House_MapScripts:: @ 8171E5B
 	.byte 0
 
-SixIsland_House_EventScript_171E5C:: @ 8171E5C
-	msgbox gUnknown_81A412E, MSGBOX_NPC
+SixIsland_House_EventScript_OldMan:: @ 8171E5C
+	msgbox SixIsland_House_Text_GoodPlaceForNatureAndHistory, MSGBOX_NPC
 	end

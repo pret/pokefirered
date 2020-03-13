@@ -1,2 +1,2 @@
-gUnknown_3005E9C
-gSomeVariableBackup
+gHelpSystemState
+gHelpContextIdBackup

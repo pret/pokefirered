@@ -5,16 +5,18 @@
   "music": "MUS_T_MORI",
   "region_map_section": "MAPSEC_VIRIDIAN_FOREST",
   "requires_flash": false,
-  "weather": "WEATHER_CLOUDY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "weather": "WEATHER_SHADE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 29,
       "y": 58,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 45,
       "y": 58,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 47,
       "y": 45,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 47,
       "y": 29,
       "elevation": 3,
@@ -66,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 7,
       "y": 22,
       "elevation": 3,
@@ -79,7 +81,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 41,
       "elevation": 3,
@@ -92,7 +94,7 @@
       "flag": "FLAG_HIDE_VIRIDIAN_FOREST_POKE_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 40,
       "y": 21,
       "elevation": 3,
@@ -105,7 +107,7 @@
       "flag": "FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 21,
       "y": 34,
       "elevation": 3,
@@ -118,7 +120,7 @@
       "flag": "FLAG_HIDE_VIRIDIAN_FOREST_POTION"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 43,
       "y": 6,
       "elevation": 3,
@@ -131,7 +133,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 16,
       "y": 5,
       "elevation": 3,
@@ -144,7 +146,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 49,
       "y": 60,
       "elevation": 3,
@@ -204,45 +206,51 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 39,
       "y": 59,
       "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_TrainerTips1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 43,
       "y": 26,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_TrainerTips3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 9,
       "y": 29,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_TrainerTips4"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 12,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_ExitSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 28,
       "y": 44,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_TrainerTips2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 31,
       "y": 60,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianForest_EventScript_TrainerTips5"
     },
     {

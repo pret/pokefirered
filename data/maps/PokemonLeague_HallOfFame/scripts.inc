@@ -4,45 +4,45 @@ PokemonLeague_HallOfFame_MapScripts:: @ 8162D4C
 	.byte 0
 
 PokemonLeague_HallOfFame_OnWarp:: @ 8162D57
-	map_script_2 VAR_TEMP_1, 0, EventScript_162D61
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_HallOfFame_EventScript_TurnPlayerNorth
 	.2byte 0
 
-EventScript_162D61:: @ 8162D61
+PokemonLeague_HallOfFame_EventScript_TurnPlayerNorth:: @ 8162D61
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_HallOfFame_OnFrame:: @ 8162D66
-	map_script_2 VAR_TEMP_1, 0, EventScript_162D70
+	map_script_2 VAR_TEMP_1, 0, PokemonLeague_HallOfFame_EventScript_EnterRoom
 	.2byte 0
 
-EventScript_162D70:: @ 8162D70
+PokemonLeague_HallOfFame_EventScript_EnterRoom:: @ 8162D70
 	lockall
 	textcolor 0
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_162DCD
+	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_HallOfFame_Movement_EnterRoom
 	waitmovement 0
 	applymovement 1, Movement_WalkInPlaceFastestLeft
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	delay 18
-	msgbox gUnknown_817922F
+	msgbox PokemonLeague_HallOfFame_Text_OakCongratulations
 	closemessage
 	applymovement 1, Movement_WalkInPlaceFastestUp
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	delay 20
-	dofieldeffect 62
-	waitfieldeffect 62
+	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
+	waitfieldeffect FLDEFF_HALL_OF_FAME_RECORD
 	delay 40
 	setvar VAR_TEMP_1, 1
-	call EventScript_1A651A
+	call EventScript_SetDefeatedEliteFourFlagsVars
 	setrespawn SPAWN_PALLET_TOWN
 	fadescreenspeed FADE_TO_BLACK, 24
-	special Special_HallOfFame
+	special EnterHallOfFame
 	waitstate
 	releaseall
 	end
 
-Movement_162DCD:: @ 8162DCD
+PokemonLeague_HallOfFame_Movement_EnterRoom:: @ 8162DCD
 	walk_up
 	walk_up
 	walk_up

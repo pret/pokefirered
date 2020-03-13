@@ -24,7 +24,7 @@ EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_TextColor = 0;
 EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
-EWRAM_DATA u16 gUnknown_20370DE = 0;
+EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_COUNT] = {};
 
 u16 gLastQuestLogStoredFlagOrVarIdx;
@@ -118,7 +118,7 @@ bool32 IsMysteryGiftEnabled(void)
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLED);
 }
 
-void sub_806E2D0(void)
+void ResetMysteryEventFlags(void)
 {
     FlagClear(FLAG_MYSTERY_EVENT_DONE);
     FlagClear(FLAG_0x3D9);
@@ -138,7 +138,7 @@ void sub_806E2D0(void)
     FlagClear(FLAG_0x3E7);
 }
 
-void sub_806E370(void)
+void ResetMysteryEventVars(void)
 {
     VarSet(VAR_EVENT_PICHU_SLOT, 0);
     VarSet(VAR_0x40B6, 0);
@@ -321,5 +321,5 @@ void ResetSpecialVars(void)
     gSpecialVar_MonBoxPos = 0;
     gSpecialVar_TextColor = 0;
     gSpecialVar_PrevTextColor = 0;
-    gUnknown_20370DE = 0;
+    gSpecialVar_0x8014 = 0;
 }

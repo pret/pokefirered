@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_22",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE23",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 25,
       "y": 4,
       "elevation": 3,
@@ -112,10 +114,11 @@
   ],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 12,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route22_EventScript_LeagueGateSign"
     }
   ]

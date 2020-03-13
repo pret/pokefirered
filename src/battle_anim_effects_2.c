@@ -5,7 +5,6 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
-#include "main.h"
 #include "math_util.h"
 #include "palette.h"
 #include "random.h"

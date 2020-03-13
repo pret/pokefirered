@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_4",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE3",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 9,
       "y": 8,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route4_EventScript_167F8C",
+      "script": "Route4_EventScript_Woman",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 75,
       "y": 3,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route4_EventScript_1A95B9",
+      "script": "Route4_EventScript_Crissy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 67,
       "y": 5,
       "elevation": 3,
@@ -64,7 +66,7 @@
       "flag": "FLAG_HIDE_ROUTE4_TM05"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 15,
       "y": 14,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route4_EventScript_1ACDEA",
+      "script": "Route4_EventScript_Boy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 47,
       "y": 3,
       "elevation": 3,
@@ -90,7 +92,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 50,
       "y": 3,
       "elevation": 3,
@@ -103,7 +105,8 @@
       "flag": "0"
     },
     {
-      "graphics_id": "65321",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
+      "in_connection": true,
       "x": 109,
       "y": 3,
       "elevation": 12,
@@ -142,18 +145,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 18,
       "y": 7,
       "elevation": 0,
-      "script": "Route4_EventScript_167F95"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route4_EventScript_MtMoonSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 34,
       "y": 7,
       "elevation": 0,
-      "script": "Route4_EventScript_167F9E"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route4_EventScript_RouteSign"
     },
     {
       "type": "hidden_item",

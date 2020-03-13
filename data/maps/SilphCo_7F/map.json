@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_SILPH_CO",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 7,
-  "elevator_flag": 7,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 7,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 2,
       "y": 6,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "FLAG_HIDE_SILPH_RIVAL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 0,
       "y": 7,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161AC8",
+      "script": "SilphCo_7F_EventScript_LaprasGuy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 24,
       "y": 5,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SilphCo_7F_EventScript_161C1A",
+      "script": "SilphCo_7F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 24,
       "y": 15,
       "elevation": 3,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "SilphCo_7F_EventScript_161C31",
+      "script": "SilphCo_7F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 13,
       "y": 4,
       "elevation": 3,
@@ -75,11 +77,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SilphCo_7F_EventScript_161C48",
+      "script": "SilphCo_7F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_F",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_F",
       "x": 10,
       "y": 10,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161BD9",
+      "script": "SilphCo_7F_EventScript_WorkerF",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 13,
       "y": 14,
       "elevation": 3,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161B97",
+      "script": "SilphCo_7F_EventScript_WorkerM1",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 9,
       "y": 14,
       "elevation": 3,
@@ -114,11 +116,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "SilphCo_7F_EventScript_161BB8",
+      "script": "SilphCo_7F_EventScript_WorkerM2",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SCIENTIST",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 3,
       "y": 13,
       "elevation": 3,
@@ -127,11 +129,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SilphCo_7F_EventScript_161C03",
+      "script": "SilphCo_7F_EventScript_Joshua",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 0,
       "y": 12,
       "elevation": 3,
@@ -144,7 +146,7 @@
       "flag": "FLAG_HIDE_SILPH_CO_7F_CALCIUM"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 30,
       "y": 11,
       "elevation": 3,
@@ -209,7 +211,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_7F",
       "var_value": 0,
-      "script": "SilphCo_7F_EventScript_1619BC"
+      "script": "SilphCo_7F_EventScript_RivalTriggerTop"
     },
     {
       "type": "trigger",
@@ -218,92 +220,104 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_SILPH_CO_7F",
       "var_value": 0,
-      "script": "SilphCo_7F_EventScript_1619C8"
+      "script": "SilphCo_7F_EventScript_RivalTriggerBottom"
     }
   ],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 11,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 11,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 9,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 24,
       "y": 7,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 7,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 24,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 13,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 26,
       "y": 13,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 14,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door3"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 26,
       "y": 14,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SilphCo_7F_EventScript_Door3"
     },
     {
@@ -317,11 +331,12 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 20,
       "y": 1,
       "elevation": 0,
-      "script": "SilphCo_7F_EventScript_161BFA"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SilphCo_7F_EventScript_FloorSign"
     }
   ]
 }

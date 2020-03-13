@@ -1,11 +1,8 @@
 #include "global.h"
-#include "event_data.h"
 #include "quest_log.h"
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
-#include "link.h"
-#include "link_rfu.h"
 
 void SetQuestLogObjectEventsData(struct QuestLog * questLog)
 {
@@ -14,22 +11,22 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         questLog->unk_008[i].active = gObjectEvents[i].active;
-        questLog->unk_008[i].mapobj_bit_3 = gObjectEvents[i].triggerGroundEffectsOnStop;
-        questLog->unk_008[i].mapobj_bit_4 = gObjectEvents[i].disableCoveringGroundEffects;
-        questLog->unk_008[i].mapobj_bit_5 = gObjectEvents[i].landingJump;
-        questLog->unk_008[i].mapobj_bit_8 = gObjectEvents[i].frozen;
-        questLog->unk_008[i].mapobj_bit_9 = gObjectEvents[i].facingDirectionLocked;
-        questLog->unk_008[i].mapobj_bit_10 = gObjectEvents[i].disableAnim;
-        questLog->unk_008[i].mapobj_bit_11 = gObjectEvents[i].enableAnim;
-        questLog->unk_008[i].mapobj_bit_12 = gObjectEvents[i].inanimate;
-        questLog->unk_008[i].mapobj_bit_13 = gObjectEvents[i].invisible;
-        questLog->unk_008[i].mapobj_bit_14 = gObjectEvents[i].offScreen;
-        questLog->unk_008[i].mapobj_bit_15 = gObjectEvents[i].trackedByCamera;
-        questLog->unk_008[i].mapobj_bit_16 = gObjectEvents[i].isPlayer;
-        questLog->unk_008[i].mapobj_bit_23 = gObjectEvents[i].spriteAnimPausedBackup;
-        questLog->unk_008[i].mapobj_bit_24 = gObjectEvents[i].spriteAffineAnimPausedBackup;
-        questLog->unk_008[i].mapobj_bit_25 = gObjectEvents[i].disableJumpLandingGroundEffect;
-        questLog->unk_008[i].mapobj_bit_26 = gObjectEvents[i].fixedPriority;
+        questLog->unk_008[i].triggerGroundEffectsOnStop = gObjectEvents[i].triggerGroundEffectsOnStop;
+        questLog->unk_008[i].disableCoveringGroundEffects = gObjectEvents[i].disableCoveringGroundEffects;
+        questLog->unk_008[i].landingJump = gObjectEvents[i].landingJump;
+        questLog->unk_008[i].frozen = gObjectEvents[i].frozen;
+        questLog->unk_008[i].facingDirectionLocked = gObjectEvents[i].facingDirectionLocked;
+        questLog->unk_008[i].disableAnim = gObjectEvents[i].disableAnim;
+        questLog->unk_008[i].enableAnim = gObjectEvents[i].enableAnim;
+        questLog->unk_008[i].inanimate = gObjectEvents[i].inanimate;
+        questLog->unk_008[i].invisible = gObjectEvents[i].invisible;
+        questLog->unk_008[i].offScreen = gObjectEvents[i].offScreen;
+        questLog->unk_008[i].trackedByCamera = gObjectEvents[i].trackedByCamera;
+        questLog->unk_008[i].isPlayer = gObjectEvents[i].isPlayer;
+        questLog->unk_008[i].spriteAnimPausedBackup = gObjectEvents[i].spriteAnimPausedBackup;
+        questLog->unk_008[i].spriteAffineAnimPausedBackup = gObjectEvents[i].spriteAffineAnimPausedBackup;
+        questLog->unk_008[i].disableJumpLandingGroundEffect = gObjectEvents[i].disableJumpLandingGroundEffect;
+        questLog->unk_008[i].fixedPriority = gObjectEvents[i].fixedPriority;
         questLog->unk_008[i].mapobj_unk_18 = gObjectEvents[i].facingDirection;
         questLog->unk_008[i].mapobj_unk_0B_0 = gObjectEvents[i].currentElevation;
         questLog->unk_008[i].elevation = gObjectEvents[i].previousElevation;
@@ -42,8 +39,8 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
         questLog->unk_008[i].x = gObjectEvents[i].currentCoords.x;
         questLog->unk_008[i].y = gObjectEvents[i].currentCoords.y;
         questLog->unk_008[i].trainerRange_berryTreeId = gObjectEvents[i].trainerRange_berryTreeId;
-        questLog->unk_008[i].mapobj_unk_1F = gObjectEvents[i].previousMetatileBehavior;
-        questLog->unk_008[i].mapobj_unk_21 = gObjectEvents[i].directionSequenceIndex;
+        questLog->unk_008[i].previousMetatileBehavior = gObjectEvents[i].previousMetatileBehavior;
+        questLog->unk_008[i].directionSequenceIndex = gObjectEvents[i].directionSequenceIndex;
         questLog->unk_008[i].animId = gObjectEvents[i].playerCopyableMovement;
     }
 }
@@ -58,22 +55,22 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         gObjectEvents[i].active = questLogObjectEvents[i].active;
-        gObjectEvents[i].triggerGroundEffectsOnStop = questLogObjectEvents[i].mapobj_bit_3;
-        gObjectEvents[i].disableCoveringGroundEffects = questLogObjectEvents[i].mapobj_bit_4;
-        gObjectEvents[i].landingJump = questLogObjectEvents[i].mapobj_bit_5;
-        gObjectEvents[i].frozen = questLogObjectEvents[i].mapobj_bit_8;
-        gObjectEvents[i].facingDirectionLocked = questLogObjectEvents[i].mapobj_bit_9;
-        gObjectEvents[i].disableAnim = questLogObjectEvents[i].mapobj_bit_10;
-        gObjectEvents[i].enableAnim = questLogObjectEvents[i].mapobj_bit_11;
-        gObjectEvents[i].inanimate = questLogObjectEvents[i].mapobj_bit_12;
-        gObjectEvents[i].invisible = questLogObjectEvents[i].mapobj_bit_13;
-        gObjectEvents[i].offScreen = questLogObjectEvents[i].mapobj_bit_14;
-        gObjectEvents[i].trackedByCamera = questLogObjectEvents[i].mapobj_bit_15;
-        gObjectEvents[i].isPlayer = questLogObjectEvents[i].mapobj_bit_16;
-        gObjectEvents[i].spriteAnimPausedBackup = questLogObjectEvents[i].mapobj_bit_23;
-        gObjectEvents[i].spriteAffineAnimPausedBackup = questLogObjectEvents[i].mapobj_bit_24;
-        gObjectEvents[i].disableJumpLandingGroundEffect = questLogObjectEvents[i].mapobj_bit_25;
-        gObjectEvents[i].fixedPriority = questLogObjectEvents[i].mapobj_bit_26;
+        gObjectEvents[i].triggerGroundEffectsOnStop = questLogObjectEvents[i].triggerGroundEffectsOnStop;
+        gObjectEvents[i].disableCoveringGroundEffects = questLogObjectEvents[i].disableCoveringGroundEffects;
+        gObjectEvents[i].landingJump = questLogObjectEvents[i].landingJump;
+        gObjectEvents[i].frozen = questLogObjectEvents[i].frozen;
+        gObjectEvents[i].facingDirectionLocked = questLogObjectEvents[i].facingDirectionLocked;
+        gObjectEvents[i].disableAnim = questLogObjectEvents[i].disableAnim;
+        gObjectEvents[i].enableAnim = questLogObjectEvents[i].enableAnim;
+        gObjectEvents[i].inanimate = questLogObjectEvents[i].inanimate;
+        gObjectEvents[i].invisible = questLogObjectEvents[i].invisible;
+        gObjectEvents[i].offScreen = questLogObjectEvents[i].offScreen;
+        gObjectEvents[i].trackedByCamera = questLogObjectEvents[i].trackedByCamera;
+        gObjectEvents[i].isPlayer = questLogObjectEvents[i].isPlayer;
+        gObjectEvents[i].spriteAnimPausedBackup = questLogObjectEvents[i].spriteAnimPausedBackup;
+        gObjectEvents[i].spriteAffineAnimPausedBackup = questLogObjectEvents[i].spriteAffineAnimPausedBackup;
+        gObjectEvents[i].disableJumpLandingGroundEffect = questLogObjectEvents[i].disableJumpLandingGroundEffect;
+        gObjectEvents[i].fixedPriority = questLogObjectEvents[i].fixedPriority;
         gObjectEvents[i].facingDirection = questLogObjectEvents[i].mapobj_unk_18;
         gObjectEvents[i].currentElevation = questLogObjectEvents[i].mapobj_unk_0B_0;
         gObjectEvents[i].previousElevation = questLogObjectEvents[i].elevation;
@@ -86,8 +83,8 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         gObjectEvents[i].currentCoords.x = questLogObjectEvents[i].x;
         gObjectEvents[i].currentCoords.y = questLogObjectEvents[i].y;
         gObjectEvents[i].trainerRange_berryTreeId = questLogObjectEvents[i].trainerRange_berryTreeId;
-        gObjectEvents[i].previousMetatileBehavior = questLogObjectEvents[i].mapobj_unk_1F;
-        gObjectEvents[i].directionSequenceIndex = questLogObjectEvents[i].mapobj_unk_21;
+        gObjectEvents[i].previousMetatileBehavior = questLogObjectEvents[i].previousMetatileBehavior;
+        gObjectEvents[i].directionSequenceIndex = questLogObjectEvents[i].directionSequenceIndex;
         gObjectEvents[i].playerCopyableMovement = questLogObjectEvents[i].animId;
 
         for (j = 0; j < 0x40; j++)

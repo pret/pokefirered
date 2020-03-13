@@ -16,812 +16,1678 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA u16 sSomeVariable = 0;
-static EWRAM_DATA u8 gUnknown_203B0EE = 0;
+static EWRAM_DATA u16 sHelpSystemContextId = 0;
+static EWRAM_DATA u8 sSeenHelpSystemIntro = 0;
 
-u8 gUnknown_3005E9C[4];
-u16 gSomeVariableBackup;
+u8 gHelpSystemState[4];
+u16 gHelpContextIdBackup;
 
 static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
-static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-static bool8 sub_812B754(void);
-static bool8 sub_812B780(u8);
-static bool8 sub_812BB10(void);
-
-static void sub_812BF5C(void);
-static void sub_812BF74(const u8 *);
-static void sub_812BF94(struct HelpSystemListMenu * a0);
-static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
-
-static const u8 *const gUnknown_845B080[] = {
-    gUnknown_81B2DF8,
-    gUnknown_81B2E1C,
-    gUnknown_81B2E2E,
-    gUnknown_81B2E48,
-    gUnknown_81B2E58,
-    gUnknown_81B2E6A
-};
-
-static const u8 *const gUnknown_845B098[] = {
-    gUnknown_81B2E88,
-    gUnknown_81B2EC8,
-    gUnknown_81B2F00,
-    gUnknown_81B2F43,
-    gUnknown_81B2F74,
-    gUnknown_81B2FA9
-};
-
-static const u8 *const gUnknown_845B0B0[] = {
-    NULL,
-    gUnknown_81B3083,
-    gUnknown_81B30A9,
-    gUnknown_81B30C1,
-    gUnknown_81B30DC,
-    gUnknown_81B30FC,
-    gUnknown_81B311F,
-    gUnknown_81B3140,
-    gUnknown_81B314F,
-    gUnknown_81B3168,
-    gUnknown_81B3189,
-    gUnknown_81B31AE,
-    gUnknown_81B31D3,
-    gUnknown_81B31EC,
-    gUnknown_81B31FF,
-    gUnknown_81B3215,
-    gUnknown_81B3226,
-    gUnknown_81B3243,
-    gUnknown_81B3261,
-    gUnknown_81B3276,
-    gUnknown_81B3290,
-    gUnknown_81B32B6,
-    gUnknown_81B32CD,
-    gUnknown_81B32E3,
-    gUnknown_81B32F9,
-    gUnknown_81B330B,
-    gUnknown_81B332B,
-    gUnknown_81B3344,
-    gUnknown_81B335C,
-    gUnknown_81B3373,
-    gUnknown_81B338C,
-    gUnknown_81B33A6,
-    gUnknown_81B33CA,
-    gUnknown_81B33EA,
-    gUnknown_81B3402,
-    gUnknown_81B3427,
-    gUnknown_81B3440,
-    gUnknown_81B3457,
-    gUnknown_81B346F,
-    gUnknown_81B3481,
-    gUnknown_81B349B,
-    gUnknown_81B34B7,
-    gUnknown_81B34D6,
-    gUnknown_81B34F6,
-    gUnknown_81B3516
-};
-
-static const u8 *const gUnknown_845B164[] = {
-    NULL,
-    gUnknown_81B3525,
-    gUnknown_81B35E6,
-    gUnknown_81B36EB,
-    gUnknown_81B379A,
-    gUnknown_81B3849,
-    gUnknown_81B3876,
-    gUnknown_81B3972,
-    gUnknown_81B3A51,
-    gUnknown_81B3ACC,
-    gUnknown_81B3BB6,
-    gUnknown_81B3C99,
-    gUnknown_81B3D1B,
-    gUnknown_81B3DE3,
-    gUnknown_81B3EBC,
-    gUnknown_81B3F7F,
-    gUnknown_81B406C,
-    gUnknown_81B410B,
-    gUnknown_81B41D7,
-    gUnknown_81B42B3,
-    gUnknown_81B439D,
-    gUnknown_81B4483,
-    gUnknown_81B457C,
-    gUnknown_81B4645,
-    gUnknown_81B470A,
-    gUnknown_81B47F0,
-    gUnknown_81B48C6,
-    gUnknown_81B497A,
-    gUnknown_81B4A72,
-    gUnknown_81B4B65,
-    gUnknown_81B4C54,
-    gUnknown_81B4D26,
-    gUnknown_81B4E0B,
-    gUnknown_81B4ED8,
-    gUnknown_81B4FB2,
-    gUnknown_81B4FFD,
-    gUnknown_81B50FF,
-    gUnknown_81B51B1,
-    gUnknown_81B5272,
-    gUnknown_81B5325,
-    gUnknown_81B5382,
-    gUnknown_81B547C,
-    gUnknown_81B54E1,
-    gUnknown_81B5589,
-    gUnknown_81B55F4
-};
-
-static const u8 *const gUnknown_845B218[] = {
-    NULL,
-    gUnknown_81B56E3,
-    gUnknown_81B56F4,
-    gUnknown_81B5705,
-    gUnknown_81B5717,
-    gUnknown_81B5728,
-    gUnknown_81B5737,
-    gUnknown_81B5744,
-    gUnknown_81B5754,
-    gUnknown_81B5767,
-    gUnknown_81B577B,
-    gUnknown_81B5787,
-    gUnknown_81B5795,
-    gUnknown_81B57A5,
-    gUnknown_81B57B8,
-    gUnknown_81B57CF,
-    gUnknown_81B57DE,
-    gUnknown_81B57EE,
-    gUnknown_81B580D,
-    gUnknown_81B5824,
-    gUnknown_81B5834,
-    gUnknown_81B583F,
-    gUnknown_81B5850,
-    gUnknown_81B5863,
-    gUnknown_81B5875,
-    gUnknown_81B5884,
-    gUnknown_81B5893,
-    gUnknown_81B58A4,
-    gUnknown_81B58BC,
-    gUnknown_81B58D3,
-    gUnknown_81B58E5,
-    gUnknown_81B58FD,
-    gUnknown_81B590E,
-    gUnknown_81B591D,
-    gUnknown_81B592E,
-    gUnknown_81B593E,
-    gUnknown_81B5950,
-    gUnknown_81B595D,
-    gUnknown_81B5974,
-    gUnknown_81B5989,
-    gUnknown_81B59A7,
-    gUnknown_81B59BF,
-    gUnknown_81B59D6,
-    gUnknown_81B59E8,
-    gUnknown_81B59F5,
-    gUnknown_81B5A0D,
-    gUnknown_81B5A1B,
-    gUnknown_81B5A29,
-    gUnknown_81B5A37
-};
-
-static const u8 *const gUnknown_845B2DC[] = {
-    NULL,
-    gUnknown_81B5A4D,
-    gUnknown_81B5B0C,
-    gUnknown_81B5B7D,
-    gUnknown_81B5C13,
-    gUnknown_81B5CDF,
-    gUnknown_81B5D87,
-    gUnknown_81B5E41,
-    gUnknown_81B5F10,
-    gUnknown_81B5FA6,
-    gUnknown_81B606C,
-    gUnknown_81B6140,
-    gUnknown_81B6203,
-    gUnknown_81B62E4,
-    gUnknown_81B6397,
-    gUnknown_81B6478,
-    gUnknown_81B6525,
-    gUnknown_81B65E7,
-    gUnknown_81B66BA,
-    gUnknown_81B678E,
-    gUnknown_81B6883,
-    gUnknown_81B68CD,
-    gUnknown_81B69B9,
-    gUnknown_81B6A9A,
-    gUnknown_81B6B6E,
-    gUnknown_81B6C4F,
-    gUnknown_81B6D4A,
-    gUnknown_81B6E02,
-    gUnknown_81B6EC1,
-    gUnknown_81B6FA8,
-    gUnknown_81B7075,
-    gUnknown_81B7108,
-    gUnknown_81B71EA,
-    gUnknown_81B723B,
-    gUnknown_81B7319,
-    gUnknown_81B73E8,
-    gUnknown_81B747E,
-    gUnknown_81B752C,
-    gUnknown_81B7611,
-    gUnknown_81B7692,
-    gUnknown_81B771E,
-    gUnknown_81B77DD,
-    gUnknown_81B7884,
-    gUnknown_81B7931,
-    gUnknown_81B79CB,
-    gUnknown_81B7A60,
-    gUnknown_81B7AEE,
-    gUnknown_81B7BBE,
-    gUnknown_81B7C57
-};
-
-static const u8 *const gUnknown_845B3A0[] = {
-    NULL,
-    gUnknown_81B7CC1,
-    gUnknown_81B7CC4,
-    gUnknown_81B7CD9,
-    gUnknown_81B7CDF,
-    gUnknown_81B7CE6,
-    gUnknown_81B7CEE,
-    gUnknown_81B7CF6,
-    gUnknown_81B7CFE,
-    gUnknown_81B7D04,
-    gUnknown_81B7D12,
-    gUnknown_81B7D17,
-    gUnknown_81B7D1A,
-    gUnknown_81B7D1F,
-    gUnknown_81B7D27,
-    gUnknown_81B7D2D,
-    gUnknown_81B7D37,
-    gUnknown_81B7D3E,
-    gUnknown_81B7D45,
-    gUnknown_81B7D48,
-    gUnknown_81B7D4E,
-    gUnknown_81B7D57,
-    gUnknown_81B7D5B,
-    gUnknown_81B7D61,
-    gUnknown_81B7D6B,
-    gUnknown_81B7D76,
-    gUnknown_81B7D7E,
-    gUnknown_81B7D88,
-    gUnknown_81B7D8F,
-    gUnknown_81B7D9A,
-    gUnknown_81B7DA7,
-    gUnknown_81B7DB4,
-    gUnknown_81B7DBA,
-    gUnknown_81B7DC6,
-    gUnknown_81B7DCC,
-    gUnknown_81B7DD3,
-    gUnknown_81B7DD6,
-    gUnknown_81B7DD9,
-    gUnknown_81B7DE1,
-    gUnknown_81B7DEB,
-    gUnknown_81B7DFA,
-    gUnknown_81B7E02,
-    gUnknown_81B7E09,
-    gUnknown_81B7E0F
-};
-
-static const u8 *const gUnknown_845B450[] = {
-    NULL,
-    gUnknown_81B7E16,
-    gUnknown_81B7F0A,
-    gUnknown_81B800A,
-    gUnknown_81B80EC,
-    gUnknown_81B81C2,
-    gUnknown_81B8256,
-    gUnknown_81B8348,
-    gUnknown_81B83EF,
-    gUnknown_81B847B,
-    gUnknown_81B8550,
-    gUnknown_81B8647,
-    gUnknown_81B86E2,
-    gUnknown_81B87B8,
-    gUnknown_81B8897,
-    gUnknown_81B8924,
-    gUnknown_81B8A04,
-    gUnknown_81B8A84,
-    gUnknown_81B8B62,
-    gUnknown_81B8C18,
-    gUnknown_81B8C94,
-    gUnknown_81B8D1D,
-    gUnknown_81B8DD4,
-    gUnknown_81B8E67,
-    gUnknown_81B8F4D,
-    gUnknown_81B901B,
-    gUnknown_81B90A7,
-    gUnknown_81B90E8,
-    gUnknown_81B9170,
-    gUnknown_81B91C2,
-    gUnknown_81B91F9,
-    gUnknown_81B92B8,
-    gUnknown_81B92ED,
-    gUnknown_81B93D8,
-    gUnknown_81B9439,
-    gUnknown_81B9497,
-    gUnknown_81B9560,
-    gUnknown_81B9656,
-    gUnknown_81B9749,
-    gUnknown_81B984F,
-    gUnknown_81B991C,
-    gUnknown_81B99C4,
-    gUnknown_81B9AA2,
-    gUnknown_81B9B2F
-};
-
-static const u8 *const gUnknown_845B500[] = {
-    NULL,
-    gUnknown_81B9BB7,
-    gUnknown_81B9BC7,
-    gUnknown_81B9BD0,
-    gUnknown_81B9BE1,
-    gUnknown_81B9BF5,
-    gUnknown_81B9C09,
-    gUnknown_81B9C1D
-};
-
-static const u8 *const gUnknown_845B520[] = {
-    NULL,
-    gUnknown_81B9C2F,
-    gUnknown_81B9D04,
-    gUnknown_81B9DC5,
-    gUnknown_81B9E75,
-    gUnknown_81B9F09,
-    gUnknown_81B9FCE,
-    gUnknown_81BA027
-};
-
-static const u8 *const gUnknown_845B540[] = {
-    NULL,
-    gUnknown_81BA0F1,
-    gUnknown_81BA10D,
-    gUnknown_81BA121,
-    gUnknown_81BA138,
-    gUnknown_81BA14C,
-    gUnknown_81BA163,
-    gUnknown_81BA17A,
-    gUnknown_81BA194,
-    gUnknown_81BA1AC,
-    gUnknown_81BA1C7,
-    gUnknown_81BA1DC,
-    gUnknown_81BA1F4,
-    gUnknown_81BA209,
-    gUnknown_81BA221,
-    gUnknown_81BA234,
-    gUnknown_81BA24A,
-    gUnknown_81BA260,
-    gUnknown_81BA279,
-    gUnknown_81BA291,
-    gUnknown_81BA2AC,
-    gUnknown_81BA2C2,
-    gUnknown_81BA2DB,
-    gUnknown_81BA2F1,
-    gUnknown_81BA30A,
-    gUnknown_81BA320,
-    gUnknown_81BA339,
-    gUnknown_81BA34E,
-    gUnknown_81BA366,
-    gUnknown_81BA37C,
-    gUnknown_81BA395,
-    gUnknown_81BA3A9,
-    gUnknown_81BA3C0,
-    gUnknown_81BA3D5,
-    gUnknown_81BA3ED,
-    gUnknown_81BA400
-};
-
-static const u8 *const gUnknown_845B5D0[] = {
-    NULL,
-    gUnknown_81BA416,
-    gUnknown_81BA4E6,
-    gUnknown_81BA539,
-    gUnknown_81BA595,
-    gUnknown_81BA5F2,
-    gUnknown_81BA66F,
-    gUnknown_81BA6C9,
-    gUnknown_81BA71F,
-    gUnknown_81BA796,
-    gUnknown_81BA7E9,
-    gUnknown_81BA862,
-    gUnknown_81BA8D3,
-    gUnknown_81BA92A,
-    gUnknown_81BA98D,
-    gUnknown_81BA9F1,
-    gUnknown_81BAA44,
-    gUnknown_81BAAB6,
-    gUnknown_81BAB18,
-    gUnknown_81BAB7A,
-    gUnknown_81BABCC,
-    gUnknown_81BAC29,
-    gUnknown_81BAC89,
-    gUnknown_81BACC4,
-    gUnknown_81BAD20,
-    gUnknown_81BAD60,
-    gUnknown_81BADA2,
-    gUnknown_81BADF7,
-    gUnknown_81BAEA8,
-    gUnknown_81BAF01,
-    gUnknown_81BAF6B,
-    gUnknown_81BAFCA,
-    gUnknown_81BB02E,
-    gUnknown_81BB084,
-    gUnknown_81BB0DF,
-    gUnknown_81BB156
-};
-
-
-static const u8 gUnknown_845B660[] = {
-    0x01, 0x02, 0x03, 0xff
-};
-
-static const u8 gUnknown_845B664[] = {
-    0x01, 0x02, 0x03, 0xff
-};
-
-static const u8 gUnknown_845B668[] = {
-    0x13, 0xff
-};
-
-static const u8 gUnknown_845B66A[] = {
-    0x01, 0x02, 0x03, 0xff
-};
-
-static const u8 gUnknown_845B66E[] = {
-    0x01, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B671[] = {
-    0x02, 0x03, 0x04, 0x05, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B677[] = {
-    0x09, 0x01, 0xff
-};
-
-static const u8 gUnknown_845B67A[] = {
-    0x02, 0x03, 0xff
-};
-
-static const u8 gUnknown_845B67D[] = {
-    0x09, 0x0a, 0x0b, 0x11, 0x0c, 0x10, 0xff
-};
-
-static const u8 gUnknown_845B684[] = {
-    0x09, 0x01, 0x04, 0x05, 0x06, 0x07, 0x08, 0x02, 0x0d, 0xff
-};
-
-static const u8 gUnknown_845B68E[] = {
-    0x09, 0x03, 0x0a, 0x0f, 0x12, 0x13, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B696[] = {
-    0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x12, 0xff
-};
-
-static const u8 gUnknown_845B6A1[] = {
-    0x16, 0x17, 0x18, 0xff
-};
-
-static const u8 gUnknown_845B6A5[] = {
-    0x0a, 0xff
-};
-
-static const u8 gUnknown_845B6A7[] = {
-    0x11, 0x0e, 0x19, 0x1a, 0x1b, 0xff
-};
-
-static const u8 gUnknown_845B6AD[] = {
-    0x0a, 0xff
-};
-
-static const u8 gUnknown_845B6AF[] = {
-    0x0b, 0xff
-};
-
-static const u8 gUnknown_845B6B1[] = {
-    0x2b, 0x19, 0x1a, 0xff
-};
-
-static const u8 gUnknown_845B6B5[] = {
-    0x0c, 0xff
-};
-
-static const u8 gUnknown_845B6B7[] = {
-    0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0xff
-};
-
-static const u8 gUnknown_845B6BF[] = {
-    0x02, 0x03, 0x04, 0xff
-};
-
-static const u8 gUnknown_845B6C3[] = {
-    0x01, 0x02, 0x03, 0x07, 0xff
-};
-
-static const u8 gUnknown_845B6C8[] = {
-    0x02, 0x04, 0x05, 0x09, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B6CE[] = {
-    0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B6E2[] = {
-    0x09, 0x01, 0x02, 0x03, 0x0a, 0x28, 0xff
-};
-
-static const u8 gUnknown_845B6E9[] = {
-    0x02, 0x05, 0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B6F2[] = {
-    0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B707[] = {
-    0x09, 0x01, 0x02, 0x03, 0x0a, 0x28, 0xff
-};
-
-static const u8 gUnknown_845B70E[] = {
-    0x03, 0x07, 0x04, 0x05, 0x06, 0xff
-};
-
-static const u8 gUnknown_845B714[] = {
-    0x02, 0x05, 0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B71D[] = {
-    0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B731[] = {
-    0x09, 0x01, 0x02, 0x03, 0x0a, 0x0c, 0x0e, 0x16, 0x17, 0x18, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B73D[] = {
-    0x06, 0x0a, 0x23, 0x24, 0x09, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B744[] = {
-    0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B758[] = {
-    0x09, 0x01, 0x02, 0x03, 0x0a, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B75F[] = {
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
-};
-
-static const u8 gUnknown_845B783[] = {
-    0x02, 0x0a, 0x04, 0x05, 0x06, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x17, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B7A7[] = {
-    0x1f, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x2c, 0x09, 0x0d, 0x0e, 0x0f, 0x10, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B7BB[] = {
-    0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B7C4[] = {
-    0x02, 0x0a, 0x04, 0x05, 0x06, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x17, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B7E8[] = {
-    0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B7F1[] = {
-    0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0x28, 0xff
-};
-
-static const u8 gUnknown_845B7FB[] = {
-    0x0a, 0x07, 0x0d, 0x27, 0x08, 0x0b, 0x21, 0x23, 0x24, 0x2c, 0x09, 0x0e, 0x16, 0x0f, 0x10, 0x11, 0x1a, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B81A[] = {
-    0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B823[] = {
-    0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B82C[] = {
-    0x07, 0x27, 0x08, 0x2c, 0x15, 0x1f, 0x20, 0x12, 0x13, 0x14, 0x18, 0x19, 0x1b, 0x1e, 0x1c, 0x28, 0x25, 0xff
-};
-
-static const u8 gUnknown_845B83E[] = {
-    0x1f, 0x01, 0x02, 0x06, 0x0a, 0x0b, 0x0c, 0x11, 0xff
-};
-
-static const u8 gUnknown_845B847[] = {
-    0x09, 0x01, 0x02, 0x0a, 0x0b, 0x0c, 0x0d, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B850[] = {
-    0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x15, 0x17, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B85D[] = {
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x09, 0x2b, 0xff
-};
-
-static const u8 gUnknown_845B866[] = {
-    0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B878[] = {
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
-};
-
-static const u8 gUnknown_845B89C[] = {
-    0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B8A7[] = {
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x2b, 0xff
-};
-
-static const u8 gUnknown_845B8AF[] = {
-    0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B8C1[] = {
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
-};
-
-static const u8 gUnknown_845B8E5[] = {
-    0x0f, 0x1b, 0x1d, 0x11, 0x12, 0x16, 0x1f, 0x20, 0x13, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B8F0[] = {
-    0x20, 0x21, 0x22, 0x23, 0x24, 0x07, 0x2b, 0xff
-};
-
-static const u8 gUnknown_845B8F8[] = {
-    0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0x27, 0x15, 0xff
-};
-
-static const u8 gUnknown_845B90A[] = {
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
-};
-
-static const u8 gUnknown_845B92E[] = {
-    0x29, 0x2a, 0x2b, 0xff
-};
-
-static const u8 gUnknown_845B932[] = {
-    0x2d, 0x2e, 0x2f, 0x2b, 0xff
-};
-
-static const u8 gUnknown_845B937[] = {
-    0x09, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0f, 0x12, 0x13, 0x14, 0xff
-};
-
-static const u8 gUnknown_845B947[] = {
-    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22, 0x23, 0xff
-};
-
-static const u8 gUnknown_845B96B[] = {
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
-};
-
-static const u8 gUnknown_845B978[] = {
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
-};
-
-static const u8 gUnknown_845B985[] = {
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
-};
-
-static const u8 gUnknown_845B992[] = {
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
-};
-
-static const u8 gUnknown_845B99F[] = {
-    0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x30, 0xff
-};
-
-static const u8 gUnknown_845B9AC[] = {
-    0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
-};
-
-static const u8 gUnknown_845B9B2[] = {
-    0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
-};
-
-static const u8 gUnknown_845B9B8[] = {
-    0x26, 0x27, 0x28, 0x29, 0x2a, 0xff
-};
-
-static const u8 gUnknown_845B9BE[] = {
-    0x09, 0x01, 0x02, 0x03, 0x23, 0x25, 0x24, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0b, 0x0c, 0x0d, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x27, 0x15, 0x26, 0x16, 0x17, 0x18, 0x1a, 0x0e, 0x1b, 0xff
-};
-
-static const u8 *const gUnknown_845B9E0[] = {
-    NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, gUnknown_845B660, NULL,
-    NULL, NULL, NULL, gUnknown_845B664, NULL,
-    NULL, gUnknown_845B668, NULL, gUnknown_845B66A, NULL,
-    NULL, gUnknown_845B66E, NULL, NULL, NULL,
-    NULL, gUnknown_845B671, gUnknown_845B677, NULL, NULL,
-    NULL, gUnknown_845B67A, gUnknown_845B67D, NULL, NULL,
-    NULL, NULL, gUnknown_845B684, NULL, NULL,
-    NULL, NULL, gUnknown_845B68E, NULL, NULL,
-    NULL, gUnknown_845B696, gUnknown_845B6A1, NULL, NULL,
-    NULL, gUnknown_845B6A5, gUnknown_845B6A7, NULL, NULL,
-    NULL, gUnknown_845B6AD, NULL, NULL, NULL,
-    NULL, gUnknown_845B6AF, gUnknown_845B6B1, NULL, NULL,
-    NULL, gUnknown_845B6B5, gUnknown_845B6B7, NULL, NULL,
-    gUnknown_845B6BF, NULL, NULL, gUnknown_845B6C3, NULL,
-    gUnknown_845B6C8, gUnknown_845B6CE, gUnknown_845B6E2, NULL, NULL,
-    gUnknown_845B6E9, gUnknown_845B6F2, gUnknown_845B707, gUnknown_845B70E, NULL,
-    gUnknown_845B714, gUnknown_845B71D, gUnknown_845B731, NULL, NULL,
-    gUnknown_845B73D, gUnknown_845B744, gUnknown_845B758, NULL, gUnknown_845B75F,
-    gUnknown_845B783, gUnknown_845B7A7, gUnknown_845B7BB, NULL, NULL,
-    gUnknown_845B7C4, gUnknown_845B7E8, gUnknown_845B7F1, NULL, NULL,
-    gUnknown_845B7FB, gUnknown_845B81A, gUnknown_845B823, NULL, NULL,
-    gUnknown_845B82C, gUnknown_845B83E, gUnknown_845B847, NULL, NULL,
-    gUnknown_845B850, gUnknown_845B85D, gUnknown_845B866, NULL, gUnknown_845B878,
-    gUnknown_845B89C, gUnknown_845B8A7, gUnknown_845B8AF, NULL, gUnknown_845B8C1,
-    gUnknown_845B8E5, gUnknown_845B8F0, gUnknown_845B8F8, NULL, gUnknown_845B90A,
-    gUnknown_845B92E, gUnknown_845B932, gUnknown_845B937, NULL, gUnknown_845B947,
-    NULL, gUnknown_845B96B, NULL, NULL, NULL,
-    NULL, gUnknown_845B978, NULL, NULL, NULL,
-    NULL, gUnknown_845B985, NULL, NULL, NULL,
-    NULL, gUnknown_845B992, NULL, NULL, NULL,
-    NULL, gUnknown_845B99F, NULL, NULL, NULL,
-    NULL, gUnknown_845B9AC, NULL, NULL, NULL,
-    NULL, gUnknown_845B9B2, NULL, NULL, NULL,
-    NULL, gUnknown_845B9B8, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL
+static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+static bool8 HelpSystem_ShouldShowBasicTerms(void);
+static bool8 IsHelpSystemSubmenuEnabled(u8);
+static bool8 HasGottenAtLeastOneHM(void);
+
+static void PrintWelcomeMessageOnPanel1(void);
+static void PrintTextOnPanel2Row52RightAlign(const u8 *);
+static void ResetHelpSystemCursor(struct HelpSystemListMenu * a0);
+static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);
+
+#define HELP_NONE  0
+#define HELP_END   0xFF
+
+// Help Main Topics
+enum
+{
+    TOPIC_WHAT_TO_DO,
+    TOPIC_HOW_TO_DO,
+    TOPIC_TERMS,
+    TOPIC_ABOUT_GAME,
+    TOPIC_TYPE_MATCHUP,
+    TOPIC_EXIT,
+    TOPIC_COUNT
+};
+
+static const u8 *const sHelpSystemTopicPtrs[TOPIC_COUNT] = {
+    [TOPIC_WHAT_TO_DO]   = Help_Text_WhatShouldIDo,
+    [TOPIC_HOW_TO_DO]    = Help_Text_HowDoIDoThis,
+    [TOPIC_TERMS]        = Help_Text_WhatDoesThisTermMean,
+    [TOPIC_ABOUT_GAME]   = Help_Text_AboutThisGame,
+    [TOPIC_TYPE_MATCHUP] = Help_Text_TypeMatchupList,
+    [TOPIC_EXIT]         = Help_Text_Exit
+};
+
+static const u8 *const sHelpSystemTopicMouseoverDescriptionPtrs[TOPIC_COUNT] = {
+    [TOPIC_WHAT_TO_DO]   = Help_Text_DescWhatShouldIDo,
+    [TOPIC_HOW_TO_DO]    = Help_Text_DescHowDoIDoThis,
+    [TOPIC_TERMS]        = Help_Text_DescWhatDoesThisTermMean,
+    [TOPIC_ABOUT_GAME]   = Help_Text_DescAboutThisGame,
+    [TOPIC_TYPE_MATCHUP] = Help_Text_DescTypeMatchupList,
+    [TOPIC_EXIT]         = Help_Text_DescExit
+};
+
+// Submenu IDs for TOPIC_WHAT_TO_DO
+enum
+{
+    HELP_PLAYING_FOR_FIRST_TIME = 1,
+    HELP_WHAT_SHOULD_I_BE_DOING,
+    HELP_CANT_GET_OUT_OF_ROOM,
+    HELP_CANT_FIND_PERSON_I_WANT,
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT,
+    HELP_SOMEONE_BLOCKING_MY_WAY,
+    HELP_I_CANT_GO_ON,
+    HELP_OUT_OF_THINGS_TO_DO,
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT,
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS,
+    HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT,
+    HELP_HOW_ARE_CAVES_DIFFERENT,
+    HELP_HOW_DO_I_PROGRESS,
+    HELP_WHEN_CAN_I_USE_ITEM,
+    HELP_WHATS_A_BATTLE,
+    HELP_HOW_DO_I_PREPARE_FOR_BATTLE,
+    HELP_WHAT_IS_A_MONS_VITALITY,
+    HELP_MY_MONS_ARE_HURT,
+    HELP_WHAT_IS_STATUS_PROBLEM,
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT,
+    HELP_CANT_CATCH_MONS,
+    HELP_RAN_OUT_OF_POTIONS,
+    HELP_CAN_I_BUY_POKEBALLS,
+    HELP_WHATS_A_TRAINER,
+    HELP_HOW_DO_I_WIN_AGAINST_TRAINER,
+    HELP_WHERE_DO_MONS_APPEAR,
+    HELP_WHAT_ARE_MOVES,
+    HELP_WHAT_ARE_HIDDEN_MOVES,
+    HELP_WHAT_MOVES_SHOULD_I_USE,
+    HELP_WANT_TO_ADD_MORE_MOVES,
+    HELP_WANT_TO_MAKE_MON_STRONGER,
+    HELP_FOE_MONS_TOO_STRONG,
+    HELP_WHAT_DO_I_DO_IN_CAVE,
+    HELP_NOTHING_I_WANT_TO_KNOW,
+    HELP_WHATS_POKEMON_CENTER,
+    HELP_WHATS_POKEMON_MART,
+    HELP_WANT_TO_END_GAME,
+    HELP_WHATS_A_MON,
+    HELP_WHAT_IS_THAT_PERSON_LIKE,
+    HELP_WHAT_DOES_HIDDEN_MOVE_DO,
+    HELP_WHAT_DO_I_DO_IN_SAFARI,
+    HELP_WHAT_ARE_SAFARI_RULES,
+    HELP_WANT_TO_END_SAFARI,
+    HELP_WHAT_IS_A_GYM,
+};
+
+static const u8 *const sHelpSystemSpecializedQuestionTextPtrs[] = {
+    [HELP_NONE]                              = NULL,
+    [HELP_PLAYING_FOR_FIRST_TIME]            = Help_Text_PlayingForFirstTime,
+    [HELP_WHAT_SHOULD_I_BE_DOING]            = Help_Text_WhatShouldIBeDoing,
+    [HELP_CANT_GET_OUT_OF_ROOM]              = Help_Text_CantGetOutOfRoom,
+    [HELP_CANT_FIND_PERSON_I_WANT]           = Help_Text_CantFindPersonIWant,
+    [HELP_TALKED_TO_EVERYONE_NOW_WHAT]       = Help_Text_TalkedToEveryoneNowWhat,
+    [HELP_SOMEONE_BLOCKING_MY_WAY]           = Help_Text_SomeoneBlockingMyWay,
+    [HELP_I_CANT_GO_ON]                      = Help_Text_ICantGoOn,
+    [HELP_OUT_OF_THINGS_TO_DO]               = Help_Text_OutOfThingsToDo,
+    [HELP_WHAT_HAPPENED_TO_ITEM_I_GOT]       = Help_Text_WhatHappenedToItemIGot,
+    [HELP_WHAT_ARE_MY_ADVENTURE_BASICS]      = Help_Text_WhatAreMyAdventureBasics,
+    [HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT]   = Help_Text_HowAreRoadsForestsDifferent,
+    [HELP_HOW_ARE_CAVES_DIFFERENT]           = Help_Text_HowAreCavesDifferent,
+    [HELP_HOW_DO_I_PROGRESS]                 = Help_Text_HowDoIProgress,
+    [HELP_WHEN_CAN_I_USE_ITEM]               = Help_Text_WhenCanIUseItem,
+    [HELP_WHATS_A_BATTLE]                    = Help_Text_WhatsABattle,
+    [HELP_HOW_DO_I_PREPARE_FOR_BATTLE]       = Help_Text_HowDoIPrepareForBattle,
+    [HELP_WHAT_IS_A_MONS_VITALITY]           = Help_Text_WhatIsAMonsVitality,
+    [HELP_MY_MONS_ARE_HURT]                  = Help_Text_MyMonsAreHurt,
+    [HELP_WHAT_IS_STATUS_PROBLEM]            = Help_Text_WhatIsStatusProblem,
+    [HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT] = Help_Text_WhatHappensIfAllMyMonsFaint,
+    [HELP_CANT_CATCH_MONS]                   = Help_Text_CantCatchMons,
+    [HELP_RAN_OUT_OF_POTIONS]                = Help_Text_RanOutOfPotions,
+    [HELP_CAN_I_BUY_POKEBALLS]               = Help_Text_CanIBuyPokeBalls,
+    [HELP_WHATS_A_TRAINER]                   = Help_Text_WhatsATrainer,
+    [HELP_HOW_DO_I_WIN_AGAINST_TRAINER]      = Help_Text_HowDoIWinAgainstTrainer,
+    [HELP_WHERE_DO_MONS_APPEAR]              = Help_Text_WhereDoMonsAppear,
+    [HELP_WHAT_ARE_MOVES]                    = Help_Text_WhatAreMoves,
+    [HELP_WHAT_ARE_HIDDEN_MOVES]             = Help_Text_WhatAreHiddenMoves,
+    [HELP_WHAT_MOVES_SHOULD_I_USE]           = Help_Text_WhatMovesShouldIUse,
+    [HELP_WANT_TO_ADD_MORE_MOVES]            = Help_Text_WantToAddMoreMoves,
+    [HELP_WANT_TO_MAKE_MON_STRONGER]         = Help_Text_WantToMakeMonStronger,
+    [HELP_FOE_MONS_TOO_STRONG]               = Help_Text_FoeMonsTooStrong,
+    [HELP_WHAT_DO_I_DO_IN_CAVE]              = Help_Text_WhatDoIDoInCave,
+    [HELP_NOTHING_I_WANT_TO_KNOW]            = Help_Text_NothingIWantToKnow,
+    [HELP_WHATS_POKEMON_CENTER]              = Help_Text_WhatsPokemonCenter,
+    [HELP_WHATS_POKEMON_MART]                = Help_Text_WhatsPokemonMart,
+    [HELP_WANT_TO_END_GAME]                  = Help_Text_WantToEndGame,
+    [HELP_WHATS_A_MON]                       = Help_Text_WhatsAMon,
+    [HELP_WHAT_IS_THAT_PERSON_LIKE]          = Help_Text_WhatIsThatPersonLike,
+    [HELP_WHAT_DOES_HIDDEN_MOVE_DO]          = Help_Text_WhatDoesHiddenMoveDo,
+    [HELP_WHAT_DO_I_DO_IN_SAFARI]            = Help_Text_WhatDoIDoInSafari,
+    [HELP_WHAT_ARE_SAFARI_RULES]             = Help_Text_WhatAreSafariRules,
+    [HELP_WANT_TO_END_SAFARI]                = Help_Text_WantToEndSafari,
+    [HELP_WHAT_IS_A_GYM]                     = Help_Text_WhatIsAGym
+};
+
+static const u8 *const sHelpSystemSpecializedAnswerTextPtrs[] = {
+    [HELP_NONE]                              = NULL,
+    [HELP_PLAYING_FOR_FIRST_TIME]            = Help_Text_AnswerPlayingForFirstTime,
+    [HELP_WHAT_SHOULD_I_BE_DOING]            = Help_Text_AnswerWhatShouldIBeDoing,
+    [HELP_CANT_GET_OUT_OF_ROOM]              = Help_Text_AnswerCantGetOutOfRoom,
+    [HELP_CANT_FIND_PERSON_I_WANT]           = Help_Text_AnswerCantFindPersonIWant,
+    [HELP_TALKED_TO_EVERYONE_NOW_WHAT]       = Help_Text_AnswerTalkedToEveryoneNowWhat,
+    [HELP_SOMEONE_BLOCKING_MY_WAY]           = Help_Text_AnswerSomeoneBlockingMyWay,
+    [HELP_I_CANT_GO_ON]                      = Help_Text_AnswerICantGoOn,
+    [HELP_OUT_OF_THINGS_TO_DO]               = Help_Text_AnswerOutOfThingsToDo,
+    [HELP_WHAT_HAPPENED_TO_ITEM_I_GOT]       = Help_Text_AnswerWhatHappenedToItemIGot,
+    [HELP_WHAT_ARE_MY_ADVENTURE_BASICS]      = Help_Text_AnswerWhatAreMyAdventureBasics,
+    [HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT]   = Help_Text_AnswerHowAreRoadsForestsDifferent,
+    [HELP_HOW_ARE_CAVES_DIFFERENT]           = Help_Text_AnswerHowAreCavesDifferent,
+    [HELP_HOW_DO_I_PROGRESS]                 = Help_Text_AnswerHowDoIProgress,
+    [HELP_WHEN_CAN_I_USE_ITEM]               = Help_Text_AnswerWhenCanIUseItem,
+    [HELP_WHATS_A_BATTLE]                    = Help_Text_AnswerWhatsABattle,
+    [HELP_HOW_DO_I_PREPARE_FOR_BATTLE]       = Help_Text_AnswerHowDoIPrepareForBattle,
+    [HELP_WHAT_IS_A_MONS_VITALITY]           = Help_Text_AnswerWhatIsAMonsVitality,
+    [HELP_MY_MONS_ARE_HURT]                  = Help_Text_AnswerMyMonsAreHurt,
+    [HELP_WHAT_IS_STATUS_PROBLEM]            = Help_Text_AnswerWhatIsStatusProblem,
+    [HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT] = Help_Text_AnswerWhatHappensIfAllMyMonsFaint,
+    [HELP_CANT_CATCH_MONS]                   = Help_Text_AnswerCantCatchMons,
+    [HELP_RAN_OUT_OF_POTIONS]                = Help_Text_AnswerRanOutOfPotions,
+    [HELP_CAN_I_BUY_POKEBALLS]               = Help_Text_AnswerCanIBuyPokeBalls,
+    [HELP_WHATS_A_TRAINER]                   = Help_Text_AnswerWhatsATrainer,
+    [HELP_HOW_DO_I_WIN_AGAINST_TRAINER]      = Help_Text_AnswerHowDoIWinAgainstTrainer,
+    [HELP_WHERE_DO_MONS_APPEAR]              = Help_Text_AnswerWhereDoMonsAppear,
+    [HELP_WHAT_ARE_MOVES]                    = Help_Text_AnswerWhatAreMoves,
+    [HELP_WHAT_ARE_HIDDEN_MOVES]             = Help_Text_AnswerWhatAreHiddenMoves,
+    [HELP_WHAT_MOVES_SHOULD_I_USE]           = Help_Text_AnswerWhatMovesShouldIUse,
+    [HELP_WANT_TO_ADD_MORE_MOVES]            = Help_Text_AnswerWantToAddMoreMoves,
+    [HELP_WANT_TO_MAKE_MON_STRONGER]         = Help_Text_AnswerWantToMakeMonStronger,
+    [HELP_FOE_MONS_TOO_STRONG]               = Help_Text_AnswerFoeMonsTooStrong,
+    [HELP_WHAT_DO_I_DO_IN_CAVE]              = Help_Text_AnswerWhatDoIDoInCave,
+    [HELP_NOTHING_I_WANT_TO_KNOW]            = Help_Text_AnswerNothingIWantToKnow,
+    [HELP_WHATS_POKEMON_CENTER]              = Help_Text_AnswerWhatsPokemonCenter,
+    [HELP_WHATS_POKEMON_MART]                = Help_Text_AnswerWhatsPokemonMart,
+    [HELP_WANT_TO_END_GAME]                  = Help_Text_AnswerWantToEndGame,
+    [HELP_WHATS_A_MON]                       = Help_Text_AnswerWhatsAMon,
+    [HELP_WHAT_IS_THAT_PERSON_LIKE]          = Help_Text_AnswerWhatIsThatPersonLike,
+    [HELP_WHAT_DOES_HIDDEN_MOVE_DO]          = Help_Text_AnswerWhatDoesHiddenMoveDo,
+    [HELP_WHAT_DO_I_DO_IN_SAFARI]            = Help_Text_AnswerWhatDoIDoInSafari,
+    [HELP_WHAT_ARE_SAFARI_RULES]             = Help_Text_AnswerWhatAreSafariRules,
+    [HELP_WANT_TO_END_SAFARI]                = Help_Text_AnswerWantToEndSafari,
+    [HELP_WHAT_IS_A_GYM]                     = Help_Text_AnswerWhatIsAGym
+};
+
+// Submenu IDs for TOPIC_HOW_TO_DO
+enum
+{
+    HELP_USING_POKEDEX = 1,
+    HELP_USING_POKEMON,
+    HELP_USING_SUMMARY,
+    HELP_USING_SWITCH,
+    HELP_USING_ITEM,
+    HELP_USING_BAG,
+    HELP_USING_AN_ITEM,
+    HELP_USING_KEYITEM,
+    HELP_USING_POKEBALL,
+    HELP_USING_PLAYER,
+    HELP_USING_SAVE,
+    HELP_USING_OPTION,
+    HELP_USING_POTION,
+    HELP_USING_TOWN_MAP,
+    HELP_USING_TM,
+    HELP_USING_HM,
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE,
+    HELP_RIDING_BICYCLE,
+    HELP_ENTERING_NAME,
+    HELP_USING_PC,
+    HELP_USING_BILLS_PC,
+    HELP_USING_WITHDRAW,
+    HELP_USING_DEPOSIT,
+    HELP_USING_MOVE,
+    HELP_MOVING_ITEMS,
+    HELP_USING_PLAYERS_PC,
+    HELP_USING_WITHDRAW_ITEM,
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX,
+    HELP_USING_PROF_OAKS_PC,
+    HELP_OPENING_MENU,
+    HELP_USING_FIGHT,
+    HELP_USING_POKEMON2,
+    HELP_USING_SHIFT,
+    HELP_USING_SUMMARY2,
+    HELP_USING_BAG2,
+    HELP_READING_POKEDEX,
+    HELP_USING_HOME_PC,
+    HELP_USING_ITEM_STORAGE,
+    HELP_USING_WITHDRAW_ITEM2,
+    HELP_USING_DEPOSIT_ITEM2,
+    HELP_USING_MAILBOX2,
+    HELP_USING_RUN,
+    HELP_REGISTER_KEY_ITEM,
+    HELP_USING_BALL,
+    HELP_USING_BAIT,
+    HELP_USING_ROCK,
+    HELP_USING_HALL_OF_FAME,
+};
+
+static const u8 *const sHelpSystemMenuTopicTextPtrs[] = {
+    [HELP_NONE]                         = NULL,
+    [HELP_USING_POKEDEX]                = Help_Text_UsingPokedex,
+    [HELP_USING_POKEMON]                = Help_Text_UsingPokemon,
+    [HELP_USING_SUMMARY]                = Help_Text_UsingSummary,
+    [HELP_USING_SWITCH]                 = Help_Text_UsingSwitch,
+    [HELP_USING_ITEM]                   = Help_Text_UsingItem,
+    [HELP_USING_BAG]                    = Help_Text_UsingBag,
+    [HELP_USING_AN_ITEM]                = Help_Text_UsingAnItem,
+    [HELP_USING_KEYITEM]                = Help_Text_UsingKeyItem,
+    [HELP_USING_POKEBALL]               = Help_Text_UsingPokeBall,
+    [HELP_USING_PLAYER]                 = Help_Text_UsingPlayer,
+    [HELP_USING_SAVE]                   = Help_Text_UsingSave,
+    [HELP_USING_OPTION]                 = Help_Text_UsingOption,
+    [HELP_USING_POTION]                 = Help_Text_UsingPotion,
+    [HELP_USING_TOWN_MAP]               = Help_Text_UsingTownMap,
+    [HELP_USING_TM]                     = Help_Text_UsingTM,
+    [HELP_USING_HM]                     = Help_Text_UsingHM,
+    [HELP_USING_MOVE_OUTSIDE_OF_BATTLE] = Help_Text_UsingMoveOutsideOfBattle,
+    [HELP_RIDING_BICYCLE]               = Help_Text_RidingBicycle,
+    [HELP_ENTERING_NAME]                = Help_Text_EnteringName,
+    [HELP_USING_PC]                     = Help_Text_UsingPC,
+    [HELP_USING_BILLS_PC]               = Help_Text_UsingBillsPC,
+    [HELP_USING_WITHDRAW]               = Help_Text_UsingWithdraw,
+    [HELP_USING_DEPOSIT]                = Help_Text_UsingDeposit,
+    [HELP_USING_MOVE]                   = Help_Text_UsingMove,
+    [HELP_MOVING_ITEMS]                 = Help_Text_MovingItems,
+    [HELP_USING_PLAYERS_PC]             = Help_Text_UsingPlayersPC,
+    [HELP_USING_WITHDRAW_ITEM]          = Help_Text_UsingWithdrawItem,
+    [HELP_USING_DEPOSIT_ITEM]           = Help_Text_UsingDepositItem,
+    [HELP_USING_MAILBOX]                = Help_Text_UsingMailbox,
+    [HELP_USING_PROF_OAKS_PC]           = Help_Text_UsingProfOaksPC,
+    [HELP_OPENING_MENU]                 = Help_Text_OpeningMenu,
+    [HELP_USING_FIGHT]                  = Help_Text_UsingFight,
+    [HELP_USING_POKEMON2]               = Help_Text_UsingPokemon2,
+    [HELP_USING_SHIFT]                  = Help_Text_UsingShift,
+    [HELP_USING_SUMMARY2]               = Help_Text_UsingSummary2,
+    [HELP_USING_BAG2]                   = Help_Text_UsingBag2,
+    [HELP_READING_POKEDEX]              = Help_Text_ReadingPokedex,
+    [HELP_USING_HOME_PC]                = Help_Text_UsingHomePC,
+    [HELP_USING_ITEM_STORAGE]           = Help_Text_UsingItemStorage,
+    [HELP_USING_WITHDRAW_ITEM2]         = Help_Text_UsingWithdrawItem2,
+    [HELP_USING_DEPOSIT_ITEM2]          = Help_Text_UsingDepositItem2,
+    [HELP_USING_MAILBOX2]               = Help_Text_UsingMailbox2,
+    [HELP_USING_RUN]                    = Help_Text_UsingRun,
+    [HELP_REGISTER_KEY_ITEM]            = Help_Text_RegisterKeyItem,
+    [HELP_USING_BALL]                   = Help_Text_UsingBall,
+    [HELP_USING_BAIT]                   = Help_Text_UsingBait,
+    [HELP_USING_ROCK]                   = Help_Text_UsingRock,
+    [HELP_USING_HALL_OF_FAME]           = Help_Text_UsingHallOfFame
+};
+
+static const u8 *const sHelpSystemHowToUseMenuTextPtrs[] = {
+    [HELP_NONE]                         = NULL,
+    [HELP_USING_POKEDEX]                = Help_Text_HowToUsePokedex,
+    [HELP_USING_POKEMON]                = Help_Text_HowToUsePokemon,
+    [HELP_USING_SUMMARY]                = Help_Text_HowToUseSummary,
+    [HELP_USING_SWITCH]                 = Help_Text_HowToUseSwitch,
+    [HELP_USING_ITEM]                   = Help_Text_HowToUseItem,
+    [HELP_USING_BAG]                    = Help_Text_HowToUseBag,
+    [HELP_USING_AN_ITEM]                = Help_Text_HowToUseAnItem,
+    [HELP_USING_KEYITEM]                = Help_Text_HowToUseKeyItem,
+    [HELP_USING_POKEBALL]               = Help_Text_HowToUsePokeBall,
+    [HELP_USING_PLAYER]                 = Help_Text_HowToUsePlayer,
+    [HELP_USING_SAVE]                   = Help_Text_HowToUseSave,
+    [HELP_USING_OPTION]                 = Help_Text_HowToUseOption,
+    [HELP_USING_POTION]                 = Help_Text_HowToUsePotion,
+    [HELP_USING_TOWN_MAP]               = Help_Text_HowToUseTownMap,
+    [HELP_USING_TM]                     = Help_Text_HowToUseTM,
+    [HELP_USING_HM]                     = Help_Text_HowToUseHM,
+    [HELP_USING_MOVE_OUTSIDE_OF_BATTLE] = Help_Text_HowToUseMoveOutsideOfBattle,
+    [HELP_RIDING_BICYCLE]               = Help_Text_HowToRideBicycle,
+    [HELP_ENTERING_NAME]                = Help_Text_HowToEnterName,
+    [HELP_USING_PC]                     = Help_Text_HowToUsePC,
+    [HELP_USING_BILLS_PC]               = Help_Text_HowToUseBillsPC,
+    [HELP_USING_WITHDRAW]               = Help_Text_HowToUseWithdraw,
+    [HELP_USING_DEPOSIT]                = Help_Text_HowToUseDeposit,
+    [HELP_USING_MOVE]                   = Help_Text_HowToUseMove,
+    [HELP_MOVING_ITEMS]                 = Help_Text_HowToMoveItems,
+    [HELP_USING_PLAYERS_PC]             = Help_Text_HowToUsePlayersPC,
+    [HELP_USING_WITHDRAW_ITEM]          = Help_Text_HowToUseWithdrawItem,
+    [HELP_USING_DEPOSIT_ITEM]           = Help_Text_HowToUseDepositItem,
+    [HELP_USING_MAILBOX]                = Help_Text_HowToUseMailbox,
+    [HELP_USING_PROF_OAKS_PC]           = Help_Text_HowToUseProfOaksPC,
+    [HELP_OPENING_MENU]                 = Help_Text_HowToOpenMenu,
+    [HELP_USING_FIGHT]                  = Help_Text_HowToUseFight,
+    [HELP_USING_POKEMON2]               = Help_Text_HowToUsePokemon2,
+    [HELP_USING_SHIFT]                  = Help_Text_HowToUseShift,
+    [HELP_USING_SUMMARY2]               = Help_Text_HowToUseSummary2,
+    [HELP_USING_BAG2]                   = Help_Text_HowToUseBag2,
+    [HELP_READING_POKEDEX]              = Help_Text_HowToReadPokedex,
+    [HELP_USING_HOME_PC]                = Help_Text_HowToUseHomePC,
+    [HELP_USING_ITEM_STORAGE]           = Help_Text_HowToUseItemStorage,
+    [HELP_USING_WITHDRAW_ITEM2]         = Help_Text_HowToUseWithdrawItem2,
+    [HELP_USING_DEPOSIT_ITEM2]          = Help_Text_HowToUseDepositItem2,
+    [HELP_USING_MAILBOX2]               = Help_Text_HowToUseMailbox2,
+    [HELP_USING_RUN]                    = Help_Text_HowToUseRun,
+    [HELP_REGISTER_KEY_ITEM]            = Help_Text_HowToRegisterKeyItem,
+    [HELP_USING_BALL]                   = Help_Text_HowToUseBall,
+    [HELP_USING_BAIT]                   = Help_Text_HowToUseBait,
+    [HELP_USING_ROCK]                   = Help_Text_HowToUseRock,
+    [HELP_USING_HALL_OF_FAME]           = Help_Text_HowToUseHallOfFame
+};
+
+// Submenu IDs for TOPIC_TERMS
+enum
+{
+    HELP_TERM_HP = 1,
+    HELP_TERM_EXP,
+    HELP_TERM_MOVES,
+    HELP_TERM_ATTACK,
+    HELP_TERM_DEFENSE,
+    HELP_TERM_SPATK,
+    HELP_TERM_SPDEF,
+    HELP_TERM_SPEED,
+    HELP_TERM_LEVEL,
+    HELP_TERM_TYPE,
+    HELP_TERM_OT,
+    HELP_TERM_ITEM,
+    HELP_TERM_ABILITY,
+    HELP_TERM_MONEY,
+    HELP_TERM_MOVE_TYPE,
+    HELP_TERM_NATURE,
+    HELP_TERM_ID_NO,
+    HELP_TERM_PP,
+    HELP_TERM_POWER,
+    HELP_TERM_ACCURACY,
+    HELP_TERM_FNT,
+    HELP_TERM_ITEMS,
+    HELP_TERM_KEYITEMS,
+    HELP_TERM_POKEBALLS,
+    HELP_TERM_POKEDEX,
+    HELP_TERM_PLAY_TIME,
+    HELP_TERM_BADGES,
+    HELP_TERM_TEXT_SPEED,
+    HELP_TERM_BATTLE_SCENE,
+    HELP_TERM_BATTLE_STYLE,
+    HELP_TERM_SOUND,
+    HELP_TERM_BUTTON_MODE,
+    HELP_TERM_FRAME,
+    HELP_TERM_CANCEL,
+    HELP_TERM_TM,
+    HELP_TERM_HM,
+    HELP_TERM_HM_MOVE,
+    HELP_TERM_EVOLUTION,
+    HELP_TERM_STATUS_PROBLEM,
+    HELP_TERM_POKEMON,
+    HELP_TERM_ID_NO2,
+    HELP_TERM_MONEY2,
+    HELP_TERM_BADGES2,
+};
+
+static const u8 *const sHelpSystemTermTextPtrs[] = {
+    [HELP_NONE]                = NULL,
+    [HELP_TERM_HP]             = Help_Text_HP,
+    [HELP_TERM_EXP]            = Help_Text_EXP,
+    [HELP_TERM_MOVES]          = Help_Text_Moves,
+    [HELP_TERM_ATTACK]         = Help_Text_Attack,
+    [HELP_TERM_DEFENSE]        = Help_Text_Defense,
+    [HELP_TERM_SPATK]          = Help_Text_SpAtk,
+    [HELP_TERM_SPDEF]          = Help_Text_SpDef,
+    [HELP_TERM_SPEED]          = Help_Text_Speed,
+    [HELP_TERM_LEVEL]          = Help_Text_Level,
+    [HELP_TERM_TYPE]           = Help_Text_Type,
+    [HELP_TERM_OT]             = Help_Text_OT,
+    [HELP_TERM_ITEM]           = Help_Text_Item,
+    [HELP_TERM_ABILITY]        = Help_Text_Ability,
+    [HELP_TERM_MONEY]          = Help_Text_Money,
+    [HELP_TERM_MOVE_TYPE]      = Help_Text_MoveType,
+    [HELP_TERM_NATURE]         = Help_Text_Nature,
+    [HELP_TERM_ID_NO]          = Help_Text_IDNo,
+    [HELP_TERM_PP]             = Help_Text_PP,
+    [HELP_TERM_POWER]          = Help_Text_Power,
+    [HELP_TERM_ACCURACY]       = Help_Text_Accuracy,
+    [HELP_TERM_FNT]            = Help_Text_FNT,
+    [HELP_TERM_ITEMS]          = Help_Text_Items,
+    [HELP_TERM_KEYITEMS]       = Help_Text_KeyItems,
+    [HELP_TERM_POKEBALLS]      = Help_Text_PokeBalls,
+    [HELP_TERM_POKEDEX]        = Help_Text_Pokedex,
+    [HELP_TERM_PLAY_TIME]      = Help_Text_PlayTime,
+    [HELP_TERM_BADGES]         = Help_Text_Badges,
+    [HELP_TERM_TEXT_SPEED]     = Help_Text_TextSpeed,
+    [HELP_TERM_BATTLE_SCENE]   = Help_Text_BattleScene,
+    [HELP_TERM_BATTLE_STYLE]   = Help_Text_BattleStyle,
+    [HELP_TERM_SOUND]          = Help_Text_Sound,
+    [HELP_TERM_BUTTON_MODE]    = Help_Text_ButtonMode,
+    [HELP_TERM_FRAME]          = Help_Text_Frame,
+    [HELP_TERM_CANCEL]         = Help_Text_Cancel2,
+    [HELP_TERM_TM]             = Help_Text_TM,
+    [HELP_TERM_HM]             = Help_Text_HM,
+    [HELP_TERM_HM_MOVE]        = Help_Text_HMMove,
+    [HELP_TERM_EVOLUTION]      = Help_Text_Evolution,
+    [HELP_TERM_STATUS_PROBLEM] = Help_Text_StatusProblem,
+    [HELP_TERM_POKEMON]        = Help_Text_Pokemon,
+    [HELP_TERM_ID_NO2]         = Help_Text_IDNo2,
+    [HELP_TERM_MONEY2]         = Help_Text_Money2,
+    [HELP_TERM_BADGES2]        = Help_Text_Badges2
+};
+
+static const u8 *const sHelpSystemTermDefinitionsTextPtrs[] = {
+    [HELP_NONE]                = NULL,
+    [HELP_TERM_HP]             = Help_Text_DefineHP,
+    [HELP_TERM_EXP]            = Help_Text_DefineEXP,
+    [HELP_TERM_MOVES]          = Help_Text_DefineMoves,
+    [HELP_TERM_ATTACK]         = Help_Text_DefineAttack,
+    [HELP_TERM_DEFENSE]        = Help_Text_DefineDefense,
+    [HELP_TERM_SPATK]          = Help_Text_DefineSpAtk,
+    [HELP_TERM_SPDEF]          = Help_Text_DefineSpDef,
+    [HELP_TERM_SPEED]          = Help_Text_DefineSpeed,
+    [HELP_TERM_LEVEL]          = Help_Text_DefineLevel,
+    [HELP_TERM_TYPE]           = Help_Text_DefineType,
+    [HELP_TERM_OT]             = Help_Text_DefineOT,
+    [HELP_TERM_ITEM]           = Help_Text_DefineItem,
+    [HELP_TERM_ABILITY]        = Help_Text_DefineAbility,
+    [HELP_TERM_MONEY]          = Help_Text_DefineMoney,
+    [HELP_TERM_MOVE_TYPE]      = Help_Text_DefineMoveType,
+    [HELP_TERM_NATURE]         = Help_Text_DefineNature,
+    [HELP_TERM_ID_NO]          = Help_Text_DefineIDNo,
+    [HELP_TERM_PP]             = Help_Text_DefinePP,
+    [HELP_TERM_POWER]          = Help_Text_DefinePower,
+    [HELP_TERM_ACCURACY]       = Help_Text_DefineAccuracy,
+    [HELP_TERM_FNT]            = Help_Text_DefineFNT,
+    [HELP_TERM_ITEMS]          = Help_Text_DefineItems,
+    [HELP_TERM_KEYITEMS]       = Help_Text_DefineKeyItems,
+    [HELP_TERM_POKEBALLS]      = Help_Text_DefinePokeBalls,
+    [HELP_TERM_POKEDEX]        = Help_Text_DefinePokedex,
+    [HELP_TERM_PLAY_TIME]      = Help_Text_DefinePlayTime,
+    [HELP_TERM_BADGES]         = Help_Text_DefineBadges,
+    [HELP_TERM_TEXT_SPEED]     = Help_Text_DefineTextSpeed,
+    [HELP_TERM_BATTLE_SCENE]   = Help_Text_DefineBattleScene,
+    [HELP_TERM_BATTLE_STYLE]   = Help_Text_DefineBattleStyle,
+    [HELP_TERM_SOUND]          = Help_Text_DefineSound,
+    [HELP_TERM_BUTTON_MODE]    = Help_Text_DefineButtonMode,
+    [HELP_TERM_FRAME]          = Help_Text_DefineFrame,
+    [HELP_TERM_CANCEL]         = Help_Text_DefineCancel2,
+    [HELP_TERM_TM]             = Help_Text_DefineTM,
+    [HELP_TERM_HM]             = Help_Text_DefineHM,
+    [HELP_TERM_HM_MOVE]        = Help_Text_DefineHMMove,
+    [HELP_TERM_EVOLUTION]      = Help_Text_DefineEvolution,
+    [HELP_TERM_STATUS_PROBLEM] = Help_Text_DefineStatusProblem,
+    [HELP_TERM_POKEMON]        = Help_Text_DefinePokemon,
+    [HELP_TERM_ID_NO2]         = Help_Text_DefineIDNo2,
+    [HELP_TERM_MONEY2]         = Help_Text_DefineMoney2,
+    [HELP_TERM_BADGES2]        = Help_Text_DefineBadges2
+};
+
+// Submenu IDs for TOPIC_ABOUT_GAME
+enum
+{
+    HELP_THE_HELP_SYSTEM = 1,
+    HELP_THE_GAME,
+    HELP_WIRELESS_ADAPTER,
+    HELP_GAME_FUNDAMENTALS_1,
+    HELP_GAME_FUNDAMENTALS_2,
+    HELP_GAME_FUNDAMENTALS_3,
+    HELP_WHAT_ARE_POKEMON,
+};
+
+static const u8 *const sHelpSystemGeneralTopicTextPtrs[] = {
+    [HELP_NONE]                = NULL,
+    [HELP_THE_HELP_SYSTEM]     = Help_Text_TheHelpSystem,
+    [HELP_THE_GAME]            = Help_Text_TheGame,
+    [HELP_WIRELESS_ADAPTER]    = Help_Text_WirelessAdapter,
+    [HELP_GAME_FUNDAMENTALS_1] = Help_Text_GameFundamentals1,
+    [HELP_GAME_FUNDAMENTALS_2] = Help_Text_GameFundamentals2,
+    [HELP_GAME_FUNDAMENTALS_3] = Help_Text_GameFundamentals3,
+    [HELP_WHAT_ARE_POKEMON]    = Help_Text_WhatArePokemon
+};
+
+static const u8 *const sHelpSystemGeneralTopicDescriptionTextPtrs[] = {
+    [HELP_NONE]                = NULL,
+    [HELP_THE_HELP_SYSTEM]     = Help_Text_DescTheHelpSystem,
+    [HELP_THE_GAME]            = Help_Text_DescTheGame,
+    [HELP_WIRELESS_ADAPTER]    = Help_Text_DescWirelessAdapter,
+    [HELP_GAME_FUNDAMENTALS_1] = Help_Text_DescGameFundamentals1,
+    [HELP_GAME_FUNDAMENTALS_2] = Help_Text_DescGameFundamentals2,
+    [HELP_GAME_FUNDAMENTALS_3] = Help_Text_DescGameFundamentals3,
+    [HELP_WHAT_ARE_POKEMON]    = Help_Text_DescWhatArePokemon
+};
+
+// An enum for the type matchups isn't necessary, when used they're always used in their entirety
+// Macro below is used to reference the entire group at once
+#define HELP_TYPE_MATCHUPS  \
+    1,                      \
+    2, 3,                   \
+    4, 5,                   \
+    6, 7,                   \
+    8, 9,                   \
+    10, 11,                 \
+    12, 13,                 \
+    14, 15,                 \
+    16, 17,                 \
+    18, 19,                 \
+    20, 21,                 \
+    22, 23,                 \
+    24, 25,                 \
+    26, 27,                 \
+    28, 29,                 \
+    30, 31,                 \
+    32, 33,                 \
+    34, 35                  \
+
+static const u8 *const sHelpSystemTypeMatchupTextPtrs[] = {
+    [HELP_NONE] = NULL,
+    [1]  = Help_Text_UsingTypeMatchupList,
+    [2]  = Help_Text_OwnMoveDark,
+    [3]  = Help_Text_OwnPokemonDark,
+    [4]  = Help_Text_OwnMoveRock,
+    [5]  = Help_Text_OwnPokemonRock,
+    [6]  = Help_Text_OwnMovePsychic,
+    [7]  = Help_Text_OwnPokemonPsychic,
+    [8]  = Help_Text_OwnMoveFighting,
+    [9]  = Help_Text_OwnPokemonFighting,
+    [10] = Help_Text_OwnMoveGrass,
+    [11] = Help_Text_OwnPokemonGrass,
+    [12] = Help_Text_OwnMoveGhost,
+    [13] = Help_Text_OwnPokemonGhost,
+    [14] = Help_Text_OwnMoveIce,
+    [15] = Help_Text_OwnPokemonIce,
+    [16] = Help_Text_OwnMoveGround,
+    [17] = Help_Text_OwnPokemonGround,
+    [18] = Help_Text_OwnMoveElectric,
+    [19] = Help_Text_OwnPokemonElectric,
+    [20] = Help_Text_OwnMovePoison,
+    [21] = Help_Text_OwnPokemonPoison,
+    [22] = Help_Text_OwnMoveDragon,
+    [23] = Help_Text_OwnPokemonDragon,
+    [24] = Help_Text_OwnMoveNormal,
+    [25] = Help_Text_OwnPokemonNormal,
+    [26] = Help_Text_OwnMoveSteel,
+    [27] = Help_Text_OwnPokemonSteel,
+    [28] = Help_Text_OwnMoveFlying,
+    [29] = Help_Text_OwnPokemonFlying,
+    [30] = Help_Text_OwnMoveFire,
+    [31] = Help_Text_OwnPokemonFire,
+    [32] = Help_Text_OwnMoveWater,
+    [33] = Help_Text_OwnPokemonWater,
+    [34] = Help_Text_OwnMoveBug,
+    [35] = Help_Text_OwnPokemonBug
+};
+
+static const u8 *const sHelpSystemTypeMatchupDescriptionTextPtrs[] = {
+    [HELP_NONE] = NULL,
+    [1]  = Help_Text_HowToUseTypeMatchupList,
+    [2]  = Help_Text_TypeMatchupOwnMoveDark,
+    [3]  = Help_Text_TypeMatchupOwnPokemonDark,
+    [4]  = Help_Text_TypeMatchupOwnMoveRock,
+    [5]  = Help_Text_TypeMatchupOwnPokemonRock,
+    [6]  = Help_Text_TypeMatchupOwnMovePsychic,
+    [7]  = Help_Text_TypeMatchupOwnPokemonPsychic,
+    [8]  = Help_Text_TypeMatchupOwnMoveFighting,
+    [9]  = Help_Text_TypeMatchupOwnPokemonFighting,
+    [10] = Help_Text_TypeMatchupOwnMoveGrass,
+    [11] = Help_Text_TypeMatchupOwnPokemonGrass,
+    [12] = Help_Text_TypeMatchupOwnMoveGhost,
+    [13] = Help_Text_TypeMatchupOwnPokemonGhost,
+    [14] = Help_Text_TypeMatchupOwnMoveIce,
+    [15] = Help_Text_TypeMatchupOwnPokemonIce,
+    [16] = Help_Text_TypeMatchupOwnMoveGround,
+    [17] = Help_Text_TypeMatchupOwnPokemonGround,
+    [18] = Help_Text_TypeMatchupOwnMoveElectric,
+    [19] = Help_Text_TypeMatchupOwnPokemonElectric,
+    [20] = Help_Text_TypeMatchupOwnMovePoison,
+    [21] = Help_Text_TypeMatchupOwnPokemonPoison,
+    [22] = Help_Text_TypeMatchupOwnMoveDragon,
+    [23] = Help_Text_TypeMatchupOwnPokemonDragon,
+    [24] = Help_Text_TypeMatchupOwnMoveNormal,
+    [25] = Help_Text_TypeMatchupOwnPokemonNormal,
+    [26] = Help_Text_TypeMatchupOwnMoveSteel,
+    [27] = Help_Text_TypeMatchupOwnPokemonSteel,
+    [28] = Help_Text_TypeMatchupOwnMoveFlying,
+    [29] = Help_Text_TypeMatchupOwnPokemonFlying,
+    [30] = Help_Text_TypeMatchupOwnMoveFire,
+    [31] = Help_Text_TypeMatchupOwnPokemonFire,
+    [32] = Help_Text_TypeMatchupOwnMoveWater,
+    [33] = Help_Text_TypeMatchupOwnPokemonWater,
+    [34] = Help_Text_TypeMatchupOwnMoveBug,
+    [35] = Help_Text_TypeMatchupOwnPokemonBug
+};
+
+static const u8 sAboutGame_TitleScreen[] = {
+    HELP_THE_HELP_SYSTEM, 
+    HELP_THE_GAME, 
+    HELP_WIRELESS_ADAPTER, 
+    HELP_END
+};
+
+static const u8 sAboutGame_NewGame[] = {
+    HELP_THE_HELP_SYSTEM, 
+    HELP_THE_GAME, 
+    HELP_WIRELESS_ADAPTER, 
+    HELP_END
+};
+
+static const u8 sHowTo_NamingScreen[] = {
+    HELP_ENTERING_NAME, 
+    HELP_END
+};
+
+static const u8 sAboutGame_NamingScreen[] = {
+    HELP_THE_HELP_SYSTEM, 
+    HELP_THE_GAME, 
+    HELP_WIRELESS_ADAPTER, 
+    HELP_END
+};
+
+static const u8 sHowTo_Pokedex[] = {
+    HELP_USING_POKEDEX, 
+    HELP_READING_POKEDEX, 
+    HELP_END
+};
+
+static const u8 sHowTo_PartyMenu[] = {
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY,
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE,
+    HELP_END
+};
+
+static const u8 sTerms_PartyMenu[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_END
+};
+
+static const u8 sHowTo_PokemonInfo[] = {
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_END
+};
+
+static const u8 sTerms_PokemonInfo[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ID_NO, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_NATURE, 
+    HELP_END
+};
+
+static const u8 sTerms_PokemonSkills[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_EXP, 
+    HELP_TERM_ABILITY, 
+    HELP_END
+};
+
+static const u8 sTerms_PokemonMoves[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_END
+};
+
+static const u8 sHowTo_Bag[] = {
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_RIDING_BICYCLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Bag[] = {
+    HELP_TERM_ITEMS, 
+    HELP_TERM_KEYITEMS, 
+    HELP_TERM_POKEBALLS, 
+    HELP_END
+};
+
+static const u8 sHowTo_TrainerCardFront[] = {
+    HELP_USING_PLAYER, 
+    HELP_END
+};
+
+static const u8 sTerms_TrainerCardFront[] = {
+    HELP_TERM_ID_NO, 
+    HELP_TERM_MONEY, 
+    HELP_TERM_POKEDEX, 
+    HELP_TERM_PLAY_TIME, 
+    HELP_TERM_BADGES, 
+    HELP_END
+};
+
+static const u8 sHowTo_TrainerCardBack[] = {
+    HELP_USING_PLAYER, 
+    HELP_END
+};
+
+static const u8 sHowTo_Save[] = {
+    HELP_USING_SAVE, 
+    HELP_END
+};
+
+static const u8 sTerms_Save[] = {
+    HELP_TERM_BADGES2, 
+    HELP_TERM_POKEDEX, 
+    HELP_TERM_PLAY_TIME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Options[] = {
+    HELP_USING_OPTION, 
+    HELP_END
+};
+
+static const u8 sTerms_Options[] = {
+    HELP_TERM_TEXT_SPEED, 
+    HELP_TERM_BATTLE_SCENE, 
+    HELP_TERM_BATTLE_STYLE, 
+    HELP_TERM_SOUND, 
+    HELP_TERM_BUTTON_MODE, 
+    HELP_TERM_FRAME, 
+    HELP_TERM_CANCEL, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_PlayersHouse[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_CANT_GET_OUT_OF_ROOM, 
+    HELP_CANT_FIND_PERSON_I_WANT, 
+    HELP_END
+};
+
+static const u8 sAboutGame_PlayersHouse[] = {
+    HELP_THE_HELP_SYSTEM, 
+    HELP_THE_GAME, 
+    HELP_WIRELESS_ADAPTER, 
+    HELP_WHAT_ARE_POKEMON, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_OaksLab[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_CANT_FIND_PERSON_I_WANT, 
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_OaksLab[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM,
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_OaksLab[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_POKEMON, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_PokeCenter[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT, 
+    HELP_SOMEONE_BLOCKING_MY_WAY, 
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_PokeCenter[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_USING_PC, 
+    HELP_END
+};
+
+static const u8 sTerms_PokeCenter[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_POKEMON, 
+    HELP_END
+};
+
+static const u8 sAboutGame_PokeCenter[] = {
+    HELP_WIRELESS_ADAPTER, 
+    HELP_WHAT_ARE_POKEMON, 
+    HELP_GAME_FUNDAMENTALS_1, 
+    HELP_GAME_FUNDAMENTALS_2, 
+    HELP_GAME_FUNDAMENTALS_3, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_Mart[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT, 
+    HELP_SOMEONE_BLOCKING_MY_WAY, 
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Mart[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Mart[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_MONEY, 
+    HELP_TERM_ITEMS, 
+    HELP_TERM_KEYITEMS, 
+    HELP_TERM_POKEBALLS, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_Gym[] = {
+    HELP_SOMEONE_BLOCKING_MY_WAY, 
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Gym[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Gym[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sTypeMatchups_Gym[] = {
+    HELP_TYPE_MATCHUPS,
+    HELP_END
+};
+
+static const u8 sWhatToDo_Indoors[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_CANT_FIND_PERSON_I_WANT, 
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT, 
+    HELP_SOMEONE_BLOCKING_MY_WAY, 
+    HELP_I_CANT_GO_ON, 
+    HELP_HOW_DO_I_PROGRESS, 
+    HELP_WHAT_IS_THAT_PERSON_LIKE, 
+    HELP_OUT_OF_THINGS_TO_DO, 
+    HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT, 
+    HELP_WHAT_DO_I_DO_IN_CAVE, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_IS_A_GYM, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WHEN_CAN_I_USE_ITEM, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_CAN_I_BUY_POKEBALLS, 
+    HELP_WHATS_A_BATTLE, 
+    HELP_HOW_DO_I_PREPARE_FOR_BATTLE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_WHERE_DO_MONS_APPEAR, 
+    HELP_CANT_CATCH_MONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_WHATS_A_TRAINER, 
+    HELP_HOW_DO_I_WIN_AGAINST_TRAINER, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WANT_TO_ADD_MORE_MOVES, 
+    HELP_WHAT_ARE_HIDDEN_MOVES, 
+    HELP_WHAT_DOES_HIDDEN_MOVE_DO, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Indoors[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_SUMMARY, 
+    HELP_USING_SWITCH, 
+    HELP_USING_ITEM, 
+    HELP_USING_BAG, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_KEYITEM, 
+    HELP_REGISTER_KEY_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_POTION, 
+    HELP_USING_TOWN_MAP, 
+    HELP_USING_TM, 
+    HELP_USING_HM, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Indoors[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_ABILITY,
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_Overworld[] = {
+    HELP_WHAT_SHOULD_I_BE_DOING, 
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_CANT_FIND_PERSON_I_WANT, 
+    HELP_TALKED_TO_EVERYONE_NOW_WHAT, 
+    HELP_SOMEONE_BLOCKING_MY_WAY, 
+    HELP_I_CANT_GO_ON, 
+    HELP_HOW_DO_I_PROGRESS, 
+    HELP_WHAT_IS_THAT_PERSON_LIKE, 
+    HELP_OUT_OF_THINGS_TO_DO, 
+    HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT, 
+    HELP_WHAT_DO_I_DO_IN_CAVE, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_IS_A_GYM, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WHEN_CAN_I_USE_ITEM, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_CAN_I_BUY_POKEBALLS, 
+    HELP_WHATS_A_BATTLE, 
+    HELP_HOW_DO_I_PREPARE_FOR_BATTLE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_WHERE_DO_MONS_APPEAR, 
+    HELP_CANT_CATCH_MONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_WHATS_A_TRAINER, 
+    HELP_HOW_DO_I_WIN_AGAINST_TRAINER, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WANT_TO_ADD_MORE_MOVES, 
+    HELP_WHAT_ARE_HIDDEN_MOVES, 
+    HELP_WHAT_DOES_HIDDEN_MOVE_DO, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Overworld[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_BAG, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Overworld[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_FNT, 
+    HELP_TERM_POKEMON, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_Dungeon[] = {
+    HELP_WHAT_ARE_MY_ADVENTURE_BASICS, 
+    HELP_I_CANT_GO_ON, 
+    HELP_HOW_DO_I_PROGRESS, 
+    HELP_WHAT_IS_THAT_PERSON_LIKE, 
+    HELP_OUT_OF_THINGS_TO_DO, 
+    HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT, 
+    HELP_WHAT_DO_I_DO_IN_CAVE, 
+    HELP_WHATS_POKEMON_CENTER, 
+    HELP_WHATS_POKEMON_MART, 
+    HELP_WHAT_IS_A_GYM, 
+    HELP_WHAT_HAPPENED_TO_ITEM_I_GOT, 
+    HELP_WHEN_CAN_I_USE_ITEM, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_WHATS_A_BATTLE, 
+    HELP_HOW_DO_I_PREPARE_FOR_BATTLE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_WHERE_DO_MONS_APPEAR, 
+    HELP_CANT_CATCH_MONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_WHATS_A_TRAINER, 
+    HELP_HOW_DO_I_WIN_AGAINST_TRAINER, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WANT_TO_ADD_MORE_MOVES, 
+    HELP_WHAT_ARE_HIDDEN_MOVES, 
+    HELP_WHAT_DOES_HIDDEN_MOVE_DO, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Dungeon[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_BAG, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Dungeon[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_Surfing[] = {
+    HELP_I_CANT_GO_ON, 
+    HELP_WHAT_IS_THAT_PERSON_LIKE, 
+    HELP_OUT_OF_THINGS_TO_DO, 
+    HELP_WHAT_IS_A_GYM, 
+    HELP_CANT_CATCH_MONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_WHATS_A_TRAINER, 
+    HELP_HOW_DO_I_WIN_AGAINST_TRAINER, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WANT_TO_ADD_MORE_MOVES, 
+    HELP_WHAT_ARE_HIDDEN_MOVES, 
+    HELP_WHAT_DOES_HIDDEN_MOVE_DO, 
+    HELP_WANT_TO_END_GAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_Surfing[] = {
+    HELP_OPENING_MENU, 
+    HELP_USING_POKEDEX, 
+    HELP_USING_POKEMON, 
+    HELP_USING_BAG, 
+    HELP_USING_PLAYER, 
+    HELP_USING_SAVE, 
+    HELP_USING_OPTION, 
+    HELP_USING_MOVE_OUTSIDE_OF_BATTLE, 
+    HELP_END
+};
+
+static const u8 sTerms_Surfing[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP,
+    HELP_TERM_EXP, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_WildBattle[] = {
+    HELP_WHATS_A_BATTLE, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WHAT_MOVES_SHOULD_I_USE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_CANT_CATCH_MONS, 
+    HELP_CAN_I_BUY_POKEBALLS, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_END
+};
+
+static const u8 sHowTo_WildBattle[] = {
+    HELP_USING_FIGHT, 
+    HELP_USING_POKEMON2, 
+    HELP_USING_SHIFT, 
+    HELP_USING_SUMMARY2, 
+    HELP_USING_BAG2, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_POKEBALL, 
+    HELP_USING_RUN, 
+    HELP_END
+};
+
+static const u8 sTerms_WildBattle[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_TERM_STATUS_PROBLEM, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sTypeMatchups_WildBattle[] = {
+    HELP_TYPE_MATCHUPS,
+    HELP_END
+};
+
+static const u8 sWhatToDo_TrainerBattleSingle[] = {
+    HELP_WHATS_A_BATTLE, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WHAT_MOVES_SHOULD_I_USE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT,
+    HELP_END
+};
+
+static const u8 sHowTo_TrainerBattleSingle[] = {
+    HELP_USING_FIGHT, 
+    HELP_USING_POKEMON2, 
+    HELP_USING_SHIFT, 
+    HELP_USING_SUMMARY2, 
+    HELP_USING_BAG2, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_RUN, 
+    HELP_END
+};
+
+static const u8 sTerms_TrainerBattleSingle[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_TERM_STATUS_PROBLEM, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sTypeMatchups_TrainerBattleSingle[] = {
+    HELP_TYPE_MATCHUPS, 
+    HELP_END
+};
+
+static const u8 sWhatToDo_TrainerBattleDouble[] = {
+    HELP_WHATS_A_BATTLE, 
+    HELP_WHAT_ARE_MOVES, 
+    HELP_WHAT_MOVES_SHOULD_I_USE, 
+    HELP_WHAT_IS_A_MONS_VITALITY, 
+    HELP_MY_MONS_ARE_HURT, 
+    HELP_RAN_OUT_OF_POTIONS, 
+    HELP_WANT_TO_MAKE_MON_STRONGER, 
+    HELP_FOE_MONS_TOO_STRONG, 
+    HELP_WHAT_IS_STATUS_PROBLEM, 
+    HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT, 
+    HELP_END
+};
+
+static const u8 sHowTo_TrainerBattleDouble[] = {
+    HELP_USING_FIGHT, 
+    HELP_USING_POKEMON2, 
+    HELP_USING_SHIFT, 
+    HELP_USING_SUMMARY2, 
+    HELP_USING_BAG2, 
+    HELP_USING_AN_ITEM, 
+    HELP_USING_RUN, 
+    HELP_END
+};
+
+static const u8 sTerms_TrainerBattleDouble[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_TERM_STATUS_PROBLEM, 
+    HELP_TERM_FNT, 
+    HELP_END
+};
+
+static const u8 sTypeMatchups_TrainerBattleDouble[] = {
+    HELP_TYPE_MATCHUPS,
+    HELP_END
+};
+
+static const u8 sWhatToDo_SafariBattle[] = {
+    HELP_WHAT_DO_I_DO_IN_SAFARI, 
+    HELP_WHAT_ARE_SAFARI_RULES, 
+    HELP_WANT_TO_END_SAFARI, 
+    HELP_END
+};
+
+static const u8 sHowTo_SafariBattle[] = {
+    HELP_USING_BALL, 
+    HELP_USING_BAIT, 
+    HELP_USING_ROCK, 
+    HELP_USING_RUN, 
+    HELP_END
+};
+
+static const u8 sTerms_SafariBattle[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_END
+};
+
+static const u8 sTypeMatchups_SafariBattle[] = {
+    HELP_TYPE_MATCHUPS,
+    HELP_END
+};
+
+static const u8 sHowTo_PC[] = {
+    HELP_USING_PC, 
+    HELP_USING_BILLS_PC, 
+    HELP_USING_WITHDRAW, 
+    HELP_USING_DEPOSIT, 
+    HELP_USING_MOVE, 
+    HELP_MOVING_ITEMS, 
+    HELP_USING_PLAYERS_PC, 
+    HELP_USING_WITHDRAW_ITEM, 
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX, 
+    HELP_USING_PROF_OAKS_PC, 
+    HELP_USING_HALL_OF_FAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_BillsPC[] = {
+    HELP_USING_PC, 
+    HELP_USING_BILLS_PC, 
+    HELP_USING_WITHDRAW, 
+    HELP_USING_DEPOSIT, 
+    HELP_USING_MOVE, 
+    HELP_MOVING_ITEMS, 
+    HELP_USING_PLAYERS_PC, 
+    HELP_USING_WITHDRAW_ITEM, 
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX, 
+    HELP_USING_PROF_OAKS_PC, 
+    HELP_USING_HALL_OF_FAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_PlayersPCItems[] = {
+    HELP_USING_PC, 
+    HELP_USING_BILLS_PC, 
+    HELP_USING_WITHDRAW, 
+    HELP_USING_DEPOSIT, 
+    HELP_USING_MOVE, 
+    HELP_MOVING_ITEMS, 
+    HELP_USING_PLAYERS_PC, 
+    HELP_USING_WITHDRAW_ITEM, 
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX, 
+    HELP_USING_PROF_OAKS_PC, 
+    HELP_USING_HALL_OF_FAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_PlayersPCMailbox[] = {
+    HELP_USING_PC, 
+    HELP_USING_BILLS_PC, 
+    HELP_USING_WITHDRAW, 
+    HELP_USING_DEPOSIT, 
+    HELP_USING_MOVE, 
+    HELP_MOVING_ITEMS, 
+    HELP_USING_PLAYERS_PC, 
+    HELP_USING_WITHDRAW_ITEM, 
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX, 
+    HELP_USING_PROF_OAKS_PC, 
+    HELP_USING_HALL_OF_FAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_PCMisc[] = {
+    HELP_USING_PC, 
+    HELP_USING_BILLS_PC, 
+    HELP_USING_WITHDRAW, 
+    HELP_USING_DEPOSIT, 
+    HELP_USING_MOVE, 
+    HELP_MOVING_ITEMS, 
+    HELP_USING_PLAYERS_PC, 
+    HELP_USING_WITHDRAW_ITEM, 
+    HELP_USING_DEPOSIT_ITEM,
+    HELP_USING_MAILBOX, 
+    HELP_USING_PROF_OAKS_PC, 
+    HELP_USING_HALL_OF_FAME, 
+    HELP_END
+};
+
+static const u8 sHowTo_BedroomPC[] = {
+    HELP_USING_HOME_PC, 
+    HELP_USING_ITEM_STORAGE, 
+    HELP_USING_WITHDRAW_ITEM2, 
+    HELP_USING_DEPOSIT_ITEM2, 
+    HELP_USING_MAILBOX2, 
+    HELP_END
+};
+
+static const u8 sHowTo_BedroomPCItems[] = {
+    HELP_USING_HOME_PC, 
+    HELP_USING_ITEM_STORAGE, 
+    HELP_USING_WITHDRAW_ITEM2, 
+    HELP_USING_DEPOSIT_ITEM2, 
+    HELP_USING_MAILBOX2, 
+    HELP_END
+};
+
+static const u8 sHowTo_BedroomPCMailbox[] = {
+    HELP_USING_HOME_PC, 
+    HELP_USING_ITEM_STORAGE, 
+    HELP_USING_WITHDRAW_ITEM2, 
+    HELP_USING_DEPOSIT_ITEM2, 
+    HELP_USING_MAILBOX2, 
+    HELP_END
+};
+
+static const u8 sTerms_Basic[] = {
+    HELP_TERM_LEVEL, 
+    HELP_TERM_HP, 
+    HELP_TERM_EXP, 
+    HELP_TERM_MOVES, 
+    HELP_TERM_TM, 
+    HELP_TERM_HM_MOVE, 
+    HELP_TERM_HM, 
+    HELP_TERM_ATTACK, 
+    HELP_TERM_DEFENSE, 
+    HELP_TERM_SPATK, 
+    HELP_TERM_SPDEF, 
+    HELP_TERM_SPEED, 
+    HELP_TERM_TYPE, 
+    HELP_TERM_OT, 
+    HELP_TERM_ITEM, 
+    HELP_TERM_ABILITY, 
+    HELP_TERM_MOVE_TYPE, 
+    HELP_TERM_NATURE, 
+    HELP_TERM_ID_NO, 
+    HELP_TERM_PP, 
+    HELP_TERM_POWER, 
+    HELP_TERM_ACCURACY, 
+    HELP_TERM_STATUS_PROBLEM, 
+    HELP_TERM_FNT, 
+    HELP_TERM_EVOLUTION, 
+    HELP_TERM_ITEMS, 
+    HELP_TERM_KEYITEMS, 
+    HELP_TERM_POKEBALLS, 
+    HELP_TERM_PLAY_TIME, 
+    HELP_TERM_MONEY, 
+    HELP_TERM_BADGES, 
+    HELP_END
+};
+
+
+// Cant get this to match as a 2D array but it probably should be one, [HELPCONTEXT_COUNT][TOPIC_COUNT - 1] (Excludes TOPIC_EXIT)
+static const u8 *const sHelpSystemSubmenuItemLists[HELPCONTEXT_COUNT * (TOPIC_COUNT - 1)] = {
+    NULL,                          NULL,                       NULL,                       NULL,                    NULL, // HELPCONTEXT_NONE
+    NULL,                          NULL,                       NULL,                       sAboutGame_TitleScreen,  NULL, // HELPCONTEXT_TITLE_SCREEN
+    NULL,                          NULL,                       NULL,                       sAboutGame_NewGame,      NULL, // HELPCONTEXT_NEW_GAME
+    NULL,                          sHowTo_NamingScreen,        NULL,                       sAboutGame_NamingScreen, NULL, // HELPCONTEXT_NAMING_SCREEN
+    NULL,                          sHowTo_Pokedex,             NULL,                       NULL,                    NULL, // HELPCONTEXT_POKEDEX
+    NULL,                          sHowTo_PartyMenu,           sTerms_PartyMenu,           NULL,                    NULL, // HELPCONTEXT_PARTY_MENU
+    NULL,                          sHowTo_PokemonInfo,         sTerms_PokemonInfo,         NULL,                    NULL, // HELPCONTEXT_POKEMON_INFO
+    NULL,                          NULL,                       sTerms_PokemonSkills,       NULL,                    NULL, // HELPCONTEXT_POKEMON_SKILLS
+    NULL,                          NULL,                       sTerms_PokemonMoves,        NULL,                    NULL, // HELPCONTEXT_POKEMON_MOVES
+    NULL,                          sHowTo_Bag,                 sTerms_Bag,                 NULL,                    NULL, // HELPCONTEXT_BAG
+    NULL,                          sHowTo_TrainerCardFront,    sTerms_TrainerCardFront,    NULL,                    NULL, // HELPCONTEXT_TRAINER_CARD_FRONT
+    NULL,                          sHowTo_TrainerCardBack,     NULL,                       NULL,                    NULL, // HELPCONTEXT_TRAINER_CARD_BACK
+    NULL,                          sHowTo_Save,                sTerms_Save,                NULL,                    NULL, // HELPCONTEXT_SAVE
+    NULL,                          sHowTo_Options,             sTerms_Options,             NULL,                    NULL, // HELPCONTEXT_OPTIONS
+    sWhatToDo_PlayersHouse,        NULL,                       NULL,                       sAboutGame_PlayersHouse, NULL, // HELPCONTEXT_PLAYERS_HOUSE
+    sWhatToDo_OaksLab,             sHowTo_OaksLab,             sTerms_OaksLab,             NULL,                    NULL, // HELPCONTEXT_OAKS_LAB
+    sWhatToDo_PokeCenter,          sHowTo_PokeCenter,          sTerms_PokeCenter,          sAboutGame_PokeCenter,   NULL, // HELPCONTEXT_POKECENTER
+    sWhatToDo_Mart,                sHowTo_Mart,                sTerms_Mart,                NULL,                    NULL, // HELPCONTEXT_MART
+    sWhatToDo_Gym,                 sHowTo_Gym,                 sTerms_Gym,                 NULL,                    sTypeMatchups_Gym, // HELPCONTEXT_GYM
+    sWhatToDo_Indoors,             sHowTo_Indoors,             sTerms_Indoors,             NULL,                    NULL, // HELPCONTEXT_INDOORS
+    sWhatToDo_Overworld,           sHowTo_Overworld,           sTerms_Overworld,           NULL,                    NULL, // HELPCONTEXT_OVERWORLD
+    sWhatToDo_Dungeon,             sHowTo_Dungeon,             sTerms_Dungeon,             NULL,                    NULL, // HELPCONTEXT_DUNGEON
+    sWhatToDo_Surfing,             sHowTo_Surfing,             sTerms_Surfing,             NULL,                    NULL, // HELPCONTEXT_SURFING
+    sWhatToDo_WildBattle,          sHowTo_WildBattle,          sTerms_WildBattle,          NULL,                    sTypeMatchups_WildBattle, // HELPCONTEXT_WILD_BATTLE
+    sWhatToDo_TrainerBattleSingle, sHowTo_TrainerBattleSingle, sTerms_TrainerBattleSingle, NULL,                    sTypeMatchups_TrainerBattleSingle, // HELPCONTEXT_TRAINER_BATTLE_SINGLE
+    sWhatToDo_TrainerBattleDouble, sHowTo_TrainerBattleDouble, sTerms_TrainerBattleDouble, NULL,                    sTypeMatchups_TrainerBattleDouble, // HELPCONTEXT_TRAINER_BATTLE_DOUBLE
+    sWhatToDo_SafariBattle,        sHowTo_SafariBattle,        sTerms_SafariBattle,        NULL,                    sTypeMatchups_SafariBattle, // HELPCONTEXT_SAFARI_BATTLE
+    NULL,                          sHowTo_PC,                  NULL,                       NULL,                    NULL, // HELPCONTEXT_PC
+    NULL,                          sHowTo_BillsPC,             NULL,                       NULL,                    NULL, // HELPCONTEXT_BILLS_PC
+    NULL,                          sHowTo_PlayersPCItems,      NULL,                       NULL,                    NULL, // HELPCONTEXT_PLAYERS_PC_ITEMS
+    NULL,                          sHowTo_PlayersPCMailbox,    NULL,                       NULL,                    NULL, // HELPCONTEXT_PLAYERS_PC_MAILBOX
+    NULL,                          sHowTo_PCMisc,              NULL,                       NULL,                    NULL, // HELPCONTEXT_PC_MISC
+    NULL,                          sHowTo_BedroomPC,           NULL,                       NULL,                    NULL, // HELPCONTEXT_BEDROOM_PC
+    NULL,                          sHowTo_BedroomPCItems,      NULL,                       NULL,                    NULL, // HELPCONTEXT_BEDROOM_PC_ITEMS
+    NULL,                          sHowTo_BedroomPCMailbox,    NULL,                       NULL,                    NULL, // HELPCONTEXT_BEDROOM_PC_MAILBOX
+    NULL,                          NULL,                       NULL,                       NULL,                    NULL  // HELPCONTEXT_UNUSED
 };
 
 static const u16 unref_845BCB0[] = INCBIN_U16("graphics/help_system/unk_845BCB0.bin");
 
-static const u8 gUnknown_845C4B0[] = {
-    3, 0, 1, 2, 4, 5
+static const u8 sHelpSystemContextTopicOrder[TOPIC_COUNT] = {
+    TOPIC_ABOUT_GAME, 
+    TOPIC_WHAT_TO_DO, 
+    TOPIC_HOW_TO_DO, 
+    TOPIC_TERMS, 
+    TOPIC_TYPE_MATCHUP, 
+    TOPIC_EXIT
 };
 
-static const u8 gUnknown_845C4B6[][6] = {
-    {0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 1, 0, 1},
-    {0, 0, 0, 1, 0, 1},
-    {0, 1, 0, 1, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 0, 1, 0, 0, 1},
-    {0, 0, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {0, 1, 1, 0, 0, 1},
-    {1, 0, 0, 1, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 1, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 0, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {1, 1, 1, 0, 1, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 1, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0}
+#define CONTEXT_TOPIC_FLAGS(whatToDo, howToDo, terms, aboutGame, typeMatchup, exit)     \
+    {                                                                                   \
+        [TOPIC_WHAT_TO_DO]   = whatToDo,                                                \
+        [TOPIC_HOW_TO_DO]    = howToDo,                                                 \
+        [TOPIC_TERMS]        = terms,                                                   \
+        [TOPIC_ABOUT_GAME]   = aboutGame,                                               \
+        [TOPIC_TYPE_MATCHUP] = typeMatchup,                                             \
+        [TOPIC_EXIT]         = exit                                                     \
+    }                                                                                   \
+
+static const bool8 sHelpSystemContextTopicFlags[HELPCONTEXT_COUNT + 1][TOPIC_COUNT] = {
+    [HELPCONTEXT_NONE]                  = CONTEXT_TOPIC_FLAGS(FALSE, FALSE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_TITLE_SCREEN]          = CONTEXT_TOPIC_FLAGS(FALSE, FALSE, FALSE,  TRUE, FALSE,  TRUE),
+    [HELPCONTEXT_NEW_GAME]              = CONTEXT_TOPIC_FLAGS(FALSE, FALSE, FALSE,  TRUE, FALSE,  TRUE),
+    [HELPCONTEXT_NAMING_SCREEN]         = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE,  TRUE, FALSE,  TRUE),
+    [HELPCONTEXT_POKEDEX]               = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_PARTY_MENU]            = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_POKEMON_INFO]          = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_POKEMON_SKILLS]        = CONTEXT_TOPIC_FLAGS(FALSE, FALSE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_POKEMON_MOVES]         = CONTEXT_TOPIC_FLAGS(FALSE, FALSE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_BAG]                   = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_TRAINER_CARD_FRONT]    = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_TRAINER_CARD_BACK]     = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_SAVE]                  = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_OPTIONS]               = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_PLAYERS_HOUSE]         = CONTEXT_TOPIC_FLAGS( TRUE, FALSE, FALSE,  TRUE, FALSE,  TRUE),
+    [HELPCONTEXT_OAKS_LAB]              = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_POKECENTER]            = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE,  TRUE, FALSE,  TRUE),
+    [HELPCONTEXT_MART]                  = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_GYM]                   = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE,  TRUE,  TRUE),
+    [HELPCONTEXT_INDOORS]               = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_OVERWORLD]             = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_DUNGEON]               = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_SURFING]               = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_WILD_BATTLE]           = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE,  TRUE,  TRUE),
+    [HELPCONTEXT_TRAINER_BATTLE_SINGLE] = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE,  TRUE,  TRUE),
+    [HELPCONTEXT_TRAINER_BATTLE_DOUBLE] = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE,  TRUE,  TRUE),
+    [HELPCONTEXT_SAFARI_BATTLE]         = CONTEXT_TOPIC_FLAGS( TRUE,  TRUE,  TRUE, FALSE,  TRUE,  TRUE),
+    [HELPCONTEXT_PC]                    = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_BILLS_PC]              = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_PLAYERS_PC_ITEMS]      = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_PLAYERS_PC_MAILBOX]    = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_PC_MISC]               = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_BEDROOM_PC]            = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_BEDROOM_PC_ITEMS]      = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_BEDROOM_PC_MAILBOX]    = CONTEXT_TOPIC_FLAGS(FALSE,  TRUE, FALSE, FALSE, FALSE,  TRUE),
+    [HELPCONTEXT_UNUSED]                = {},
+    [HELPCONTEXT_COUNT]                 = {}
 };
 
 static const u16 sMartMaps[] = {
@@ -878,41 +1744,45 @@ static const u8 sDungeonMaps[][3] = {
     { MAP_GROUP(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER), MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER), 7 }
 };
 
-void HelpSystem_SetSomeVariable(u8 a0)
+void SetHelpContextDontCheckBattle(u8 contextId)
 {
-    sSomeVariable = a0;
+    sHelpSystemContextId = contextId;
 }
 
-void HelpSystem_SetSomeVariable2(u8 a0)
+void SetHelpContext(u8 contextId)
 {
-    switch (sSomeVariable)
+    switch (sHelpSystemContextId)
     {
-    case 23:
-    case 24:
-    case 25:
-    case 26:
-        if (a0 == 9 || a0 == 5 || a0 == 6 || a0 == 7 || a0 == 8)
+    case HELPCONTEXT_WILD_BATTLE:
+    case HELPCONTEXT_TRAINER_BATTLE_SINGLE:
+    case HELPCONTEXT_TRAINER_BATTLE_DOUBLE:
+    case HELPCONTEXT_SAFARI_BATTLE:
+        if (contextId == HELPCONTEXT_BAG 
+         || contextId == HELPCONTEXT_PARTY_MENU 
+         || contextId == HELPCONTEXT_POKEMON_INFO 
+         || contextId == HELPCONTEXT_POKEMON_SKILLS 
+         || contextId == HELPCONTEXT_POKEMON_MOVES)
             break;
         // fallthrough
     default:
-        sSomeVariable = a0;
+        sHelpSystemContextId = contextId;
         break;
     }
 }
 
-void Special_SetSomeVariable(void)
+void Script_SetHelpContext(void)
 {
-    sSomeVariable = gSpecialVar_0x8004;
+    sHelpSystemContextId = gSpecialVar_0x8004;
 }
 
-void HelpSystem_BackupSomeVariable(void)
+void BackupHelpContext(void)
 {
-    gSomeVariableBackup = sSomeVariable;
+    gHelpContextIdBackup = sHelpSystemContextId;
 }
 
-void HelpSystem_RestoreSomeVariable(void)
+void RestoreHelpContext(void)
 {
-    sSomeVariable = gSomeVariableBackup;
+    sHelpSystemContextId = gHelpContextIdBackup;
 }
 
 static bool32 IsInMartMap(void)
@@ -943,7 +1813,7 @@ static bool8 IsInDungeonMap(void)
 {
     u8 i, j;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < NELEMS(sDungeonMaps); i++)
     {
         for (j = 0; j < sDungeonMaps[i][2]; j++)
         {
@@ -959,42 +1829,52 @@ static bool8 IsInDungeonMap(void)
     return FALSE;
 }
 
-void sub_812B35C(void)
+#define IN_PLAYERS_HOUSE \
+    ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F) \
+  && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F))     \
+ || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F)  \
+  && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F)))    \
+
+ #define IN_OAKS_LAB \
+    (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB) \
+  && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB))    \
+
+void SetHelpContextForMap(void)
 {
-    sub_812B4B8();
+    HelpSystem_EnableToggleWithRButton();
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-        HelpSystem_SetSomeVariable2(0x16);
+        SetHelpContext(HELPCONTEXT_SURFING);
     else if (IsInDungeonMap())
-        HelpSystem_SetSomeVariable2(0x15);
-    else if (is_light_level_8_or_9(gMapHeader.mapType))
+        SetHelpContext(HELPCONTEXT_DUNGEON);
+    else if (IsMapTypeIndoors(gMapHeader.mapType))
     {
-        if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F)))
-            HelpSystem_SetSomeVariable2(0x0E);
-        else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB))
-            HelpSystem_SetSomeVariable2(0x0F);
+        if (IN_PLAYERS_HOUSE)
+            SetHelpContext(HELPCONTEXT_PLAYERS_HOUSE);
+        else if (IN_OAKS_LAB)
+            SetHelpContext(HELPCONTEXT_OAKS_LAB);
         else if (IsCurMapPokeCenter() == TRUE)
-            HelpSystem_SetSomeVariable2(0x10);
+            SetHelpContext(HELPCONTEXT_POKECENTER);
         else if (IsInMartMap() == TRUE)
-            HelpSystem_SetSomeVariable2(0x11);
+            SetHelpContext(HELPCONTEXT_MART);
         else if (IsInGymMap() == TRUE)
-            HelpSystem_SetSomeVariable2(0x12);
+            SetHelpContext(HELPCONTEXT_GYM);
         else
-            HelpSystem_SetSomeVariable2(0x13);
+            SetHelpContext(HELPCONTEXT_INDOORS);
     }
     else
-        HelpSystem_SetSomeVariable2(0x14);
+        SetHelpContext(HELPCONTEXT_OVERWORLD);
 }
 
-bool8 sub_812B40C(void)
+bool8 HelpSystem_UpdateHasntSeenIntro(void)
 {
-    if (gUnknown_203B0EE == 1)
+    if (sSeenHelpSystemIntro == TRUE)
         return FALSE;
 
     if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveFileStatus != SAVE_STATUS_INVALID && FlagGet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO))
         return FALSE;
 
     FlagSet(FLAG_SYS_SAW_HELP_SYSTEM_INTRO);
-    gUnknown_203B0EE = 1;
+    sSeenHelpSystemIntro = TRUE;
     return TRUE;
 }
 
@@ -1015,323 +1895,326 @@ void HelpSystem_Enable(void)
     if (gQuestLogState != 2 && gQuestLogState != 3)
     {
         gHelpSystemEnabled = TRUE;
-        sub_812B4B8();
+        HelpSystem_EnableToggleWithRButton();
     }
 }
 
-void sub_812B4AC(void)
+void HelpSystem_DisableToggleWithRButton(void)
 {
-    gUnknown_203F175 = 1;
+    gHelpSystemToggleWithRButtonDisabled = TRUE;
 }
 
-void sub_812B4B8(void)
+void HelpSystem_EnableToggleWithRButton(void)
 {
-    gUnknown_203F175 = 0;
+    gHelpSystemToggleWithRButtonDisabled = FALSE;
 }
 
-static void sub_812B4C4(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void ResetHelpSystemListMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    a0->sub.items = a1;
-    a0->sub.totalItems = 1;
-    a0->sub.maxShowed = 1;
-    a0->sub.left = 1;
-    a0->sub.top = 4;
+    helpListMenu->sub.items = listMenuItemsBuffer;
+    helpListMenu->sub.totalItems = 1;
+    helpListMenu->sub.maxShowed = 1;
+    helpListMenu->sub.left = 1;
+    helpListMenu->sub.top = 4;
 }
 
-static void sub_812B4D8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildAndPrintMainTopicsListMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_812B4C4(a0, a1);
-    sub_812B520(a0, a1);
-    sub_812BF74(gUnknown_841DFAC);
-    HelpSystem_InitListMenuController(a0, 0, gUnknown_3005E9C[2]);
-    sub_812BF9C(a0, a1);
+    ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
+    BuildMainTopicsListAndMoveToH00(helpListMenu, listMenuItemsBuffer);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFAC);
+    HelpSystem_InitListMenuController(helpListMenu, 0, gHelpSystemState[2]);
+    PrintHelpSystemTopicMouseoverDescription(helpListMenu, listMenuItemsBuffer);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B520(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     u8 i;
-    u8 r4 = 0;
-    for (i = 0; i < 6; i++)
+    u8 totalItems = 0;
+    for (i = 0; i < TOPIC_COUNT; i++)
     {
-        if (gUnknown_845C4B6[sSomeVariable][gUnknown_845C4B0[i]] == 1)
+        if (sHelpSystemContextTopicFlags[sHelpSystemContextId][sHelpSystemContextTopicOrder[i]] == TRUE)
         {
-            a1[r4].label = gUnknown_845B080[gUnknown_845C4B0[i]];
-            a1[r4].index = gUnknown_845C4B0[i];
-            r4++;
+            listMenuItemsBuffer[totalItems].label = sHelpSystemTopicPtrs[sHelpSystemContextTopicOrder[i]];
+            listMenuItemsBuffer[totalItems].index = sHelpSystemContextTopicOrder[i];
+            totalItems++;
         }
     }
-    a1[r4 - 1].index = -2;
-    a0->sub.totalItems = r4;
-    a0->sub.maxShowed = r4;
-    a0->sub.left = 0;
+    listMenuItemsBuffer[totalItems - 1].index = -2;
+    helpListMenu->sub.totalItems = totalItems;
+    helpListMenu->sub.maxShowed = totalItems;
+    helpListMenu->sub.left = 0;
 }
 
-static void sub_812B5A8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void BuildAndPrintSubmenuList(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     sub_813BDE8(0);
     sub_813BFC0(0);
     sub_813BE78(1);
-    sub_812B4C4(a0, a1);
-    sub_812B614(a0, a1);
-    sub_812BF74(gUnknown_841DFC9);
-    HelpSystem_InitListMenuController(a0, a0->field_0C, a0->field_0D);
-    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    ResetHelpSystemListMenu(helpListMenu, listMenuItemsBuffer);
+    SetHelpSystemSubmenuItems(helpListMenu, listMenuItemsBuffer);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFC9);
+    HelpSystem_InitListMenuController(helpListMenu, helpListMenu->itemsAbove, helpListMenu->cursorPos);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState[1]], 0, 0);
     sub_813BDA4(1);
     sub_813BD5C(1);
 }
 
-static void sub_812B614(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    u8 r6 = 0;
-    const u8 * r3 = gUnknown_845B9E0[sSomeVariable * 5 + gUnknown_3005E9C[1]];
+    u8 totalItems = 0;
+    const u8 * submenuItems = sHelpSystemSubmenuItemLists[sHelpSystemContextId * 5 + gHelpSystemState[1]]; // accessing as 2D array
     u8 i;
-    for (i = 0; r3[i] != 0xFF; i++)
+    for (i = 0; submenuItems[i] != HELP_END; i++)
     {
-        if (sub_812B780(r3[i]) == TRUE)
+        if (IsHelpSystemSubmenuEnabled(submenuItems[i]) == TRUE)
         {
-            if (gUnknown_3005E9C[1] == 0)
-                a1[r6].label = gUnknown_845B0B0[r3[i]];
-            else if (gUnknown_3005E9C[1] == 1)
-                a1[r6].label = gUnknown_845B218[r3[i]];
-            else if (gUnknown_3005E9C[1] == 2)
-                a1[r6].label = gUnknown_845B3A0[r3[i]];
-            else if (gUnknown_3005E9C[1] == 3)
-                a1[r6].label = gUnknown_845B500[r3[i]];
-            else
-                a1[r6].label = gUnknown_845B540[r3[i]];
-            a1[r6].index = r3[i];
-            r6++;
+            if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedQuestionTextPtrs[submenuItems[i]];
+            else if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemMenuTopicTextPtrs[submenuItems[i]];
+            else if (gHelpSystemState[1] == TOPIC_TERMS)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemTermTextPtrs[submenuItems[i]];
+            else if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
+                listMenuItemsBuffer[totalItems].label = sHelpSystemGeneralTopicTextPtrs[submenuItems[i]];
+            else // TOPIC_TYPE_MATCHUP
+                listMenuItemsBuffer[totalItems].label = sHelpSystemTypeMatchupTextPtrs[submenuItems[i]];
+            listMenuItemsBuffer[totalItems].index = submenuItems[i];
+            totalItems++;
         }
     }
-    if (sub_812B754() == TRUE)
+    if (HelpSystem_ShouldShowBasicTerms() == TRUE)
     {
-        for (i = 0, r3 = gUnknown_845B9BE; r3[i] != 0xFF; i++)
+        for (i = 0, submenuItems = sTerms_Basic; submenuItems[i] != HELP_END; i++)
         {
-            a1[r6].label = gUnknown_845B3A0[r3[i]];
-            a1[r6].index = r3[i];
-            r6++;
+            listMenuItemsBuffer[totalItems].label = sHelpSystemTermTextPtrs[submenuItems[i]];
+            listMenuItemsBuffer[totalItems].index = submenuItems[i];
+            totalItems++;
         }
     }
-    a1[r6].label = gUnknown_81B2E6F;
-    a1[r6].index = -2;
-    r6++;
-    a0->sub.totalItems = r6;
-    a0->sub.maxShowed = 7;
-    a0->sub.left = 0;
-    a0->sub.top = 21;
+    listMenuItemsBuffer[totalItems].label = Help_Text_Cancel;
+    listMenuItemsBuffer[totalItems].index = -2;
+    totalItems++;
+    helpListMenu->sub.totalItems = totalItems;
+    helpListMenu->sub.maxShowed = 7;
+    helpListMenu->sub.left = 0;
+    helpListMenu->sub.top = 21;
 }
 
-static bool8 sub_812B754(void)
+static bool8 HelpSystem_ShouldShowBasicTerms(void)
 {
-    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gUnknown_3005E9C[1] == 2)
+    if (FlagGet(FLAG_DEFEATED_BROCK) == TRUE && gHelpSystemState[1] == TOPIC_TERMS)
         return TRUE;
     return FALSE;
 }
 
-static bool8 sub_812B780(u8 id)
+static bool8 IsHelpSystemSubmenuEnabled(u8 id)
 {
     u8 i = 0;
 
-    if (gUnknown_3005E9C[1] == 0)
+    if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
     {
         switch (id)
         {
-        case 1:
-        case 2:
-        case 3:
-        case 5:
-        case 8:
-        case 34:
-        case 38:
-        case 41:
-        case 42:
-        case 43:
+        case HELP_PLAYING_FOR_FIRST_TIME:
+        case HELP_WHAT_SHOULD_I_BE_DOING:
+        case HELP_CANT_GET_OUT_OF_ROOM:
+        case HELP_TALKED_TO_EVERYONE_NOW_WHAT:
+        case HELP_OUT_OF_THINGS_TO_DO:
+        case HELP_NOTHING_I_WANT_TO_KNOW:
+        case HELP_WHATS_A_MON:
+        case HELP_WHAT_DO_I_DO_IN_SAFARI:
+        case HELP_WHAT_ARE_SAFARI_RULES:
+        case HELP_WANT_TO_END_SAFARI:
             return TRUE;
-        case 4:
+        case HELP_CANT_FIND_PERSON_I_WANT:
             return FlagGet(FLAG_VISITED_OAKS_LAB);
-        case 6:
-        case 10:
-        case 16:
-        case 19:
-        case 22:
-        case 35:
-        case 36:
+        case HELP_SOMEONE_BLOCKING_MY_WAY:
+        case HELP_WHAT_ARE_MY_ADVENTURE_BASICS:
+        case HELP_HOW_DO_I_PREPARE_FOR_BATTLE:
+        case HELP_WHAT_IS_STATUS_PROBLEM:
+        case HELP_RAN_OUT_OF_POTIONS:
+        case HELP_WHATS_POKEMON_CENTER:
+        case HELP_WHATS_POKEMON_MART:
             return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_CITY);
-        case 7:
+        case HELP_I_CANT_GO_ON:
             return FlagGet(FLAG_WORLD_MAP_VERMILION_CITY);
-        case 11:
-        case 24:
+        case HELP_HOW_ARE_ROADS_FORESTS_DIFFERENT:
+        case HELP_WHATS_A_TRAINER:
             return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
-        case 9:
-        case 13:
-        case 14:
-        case 15:
-        case 17:
-        case 18:
-        case 20:
-        case 26:
-        case 29:
-        case 31:
-        case 37:
+        case HELP_WHAT_HAPPENED_TO_ITEM_I_GOT:
+        case HELP_WHEN_CAN_I_USE_ITEM:
+        case HELP_HOW_DO_I_PROGRESS:
+        case HELP_WHATS_A_BATTLE:
+        case HELP_WHAT_IS_A_MONS_VITALITY:
+        case HELP_MY_MONS_ARE_HURT:
+        case HELP_WHAT_HAPPENS_IF_ALL_MY_MONS_FAINT:
+        case HELP_WHERE_DO_MONS_APPEAR:
+        case HELP_WHAT_MOVES_SHOULD_I_USE:
+        case HELP_WANT_TO_MAKE_MON_STRONGER:
+        case HELP_WANT_TO_END_GAME:
             return FlagGet(FLAG_SYS_POKEMON_GET);
-        case 21:
-        case 23:
+        case HELP_CANT_CATCH_MONS:
+        case HELP_CAN_I_BUY_POKEBALLS:
             return FlagGet(FLAG_SYS_POKEDEX_GET);
-        case 12:
-        case 25:
-        case 27:
-        case 30:
-        case 32:
-        case 33:
+        case HELP_HOW_ARE_CAVES_DIFFERENT:
+        case HELP_WHAT_DO_I_DO_IN_CAVE:
+        case HELP_HOW_DO_I_WIN_AGAINST_TRAINER:
+        case HELP_FOE_MONS_TOO_STRONG:
+        case HELP_WHAT_ARE_MOVES:
+        case HELP_WANT_TO_ADD_MORE_MOVES:
             return FlagGet(FLAG_BADGE01_GET);
-        case 28:
-        case 40:
-            return sub_812BB10();
-        case 39:
+        case HELP_WHAT_ARE_HIDDEN_MOVES:
+        case HELP_WHAT_DOES_HIDDEN_MOVE_DO:
+            return HasGottenAtLeastOneHM();
+        case HELP_WHAT_IS_THAT_PERSON_LIKE:
             return FlagGet(FLAG_GOT_FAME_CHECKER);
-        case 44:
+        case HELP_WHAT_IS_A_GYM:
             return FlagGet(FLAG_WORLD_MAP_PEWTER_CITY);
         }
         return FALSE;
     }
-    if (gUnknown_3005E9C[1] == 1)
+    if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
     {
         switch (id)
         {
-        case 06:
-        case 10:
-        case 11:
-        case 12:
-        case 19:
-        case 20:
-        case 21:
-        case 22:
-        case 23:
-        case 24:
-        case 25:
-        case 26:
-        case 27:
-        case 28:
-        case 29:
-        case 31:
-        case 36:
-        case 38:
-        case 39:
-        case 40:
-        case 41:
-        case 42:
-        case 45:
-        case 46:
-        case 47:
+        case HELP_USING_BAG:
+        case HELP_USING_PLAYER:
+        case HELP_USING_SAVE:
+        case HELP_USING_OPTION:
+        case HELP_ENTERING_NAME:
+        case HELP_USING_PC:
+        case HELP_USING_BILLS_PC:
+        case HELP_USING_WITHDRAW:
+        case HELP_USING_DEPOSIT:
+        case HELP_USING_MOVE:
+        case HELP_MOVING_ITEMS:
+        case HELP_USING_PLAYERS_PC:
+        case HELP_USING_WITHDRAW_ITEM:
+        case HELP_USING_DEPOSIT_ITEM:
+        case HELP_USING_MAILBOX:
+        case HELP_OPENING_MENU:
+        case HELP_USING_BAG2:
+        case HELP_USING_HOME_PC:
+        case HELP_USING_ITEM_STORAGE:
+        case HELP_USING_WITHDRAW_ITEM2:
+        case HELP_USING_DEPOSIT_ITEM2:
+        case HELP_USING_MAILBOX2:
+        case HELP_USING_BALL:
+        case HELP_USING_BAIT:
+        case HELP_USING_ROCK:
             return TRUE;
-        case 1:
-        case 30:
-        case 37:
+        case HELP_USING_POKEDEX:
+        case HELP_USING_PROF_OAKS_PC:
+        case HELP_READING_POKEDEX:
             return FlagGet(FLAG_SYS_POKEDEX_GET);
-        case 14:
+        case HELP_USING_TOWN_MAP:
             return CheckBagHasItem(ITEM_TOWN_MAP, 1);
-        case 2:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 9:
-        case 13:
-        case 32:
-        case 33:
-        case 35:
-        case 43:
-        case 44:
+        case HELP_USING_POKEMON:
+        case HELP_USING_SUMMARY:
+        case HELP_USING_ITEM:
+        case HELP_USING_AN_ITEM:
+        case HELP_USING_KEYITEM:
+        case HELP_USING_POKEBALL:
+        case HELP_USING_POTION:
+        case HELP_USING_FIGHT:
+        case HELP_USING_POKEMON2:
+        case HELP_USING_SUMMARY2:
+        case HELP_USING_RUN:
+        case HELP_REGISTER_KEY_ITEM:
             return FlagGet(FLAG_SYS_POKEMON_GET);
-        case 4:
-        case 34:
+        case HELP_USING_SWITCH:
+        case HELP_USING_SHIFT:
+            // Only show if player has caught mon after starter
             if (GetKantoPokedexCount(1) > 1)
                 return TRUE;
             return FALSE;
-        case 15:
+        case HELP_USING_TM:
             return FlagGet(FLAG_BADGE01_GET);
-        case 16:
-        case 17:
-            return sub_812BB10();
-        case 18:
+        case HELP_USING_HM:
+        case HELP_USING_MOVE_OUTSIDE_OF_BATTLE:
+            return HasGottenAtLeastOneHM();
+        case HELP_RIDING_BICYCLE:
             return FlagGet(FLAG_GOT_BICYCLE);
-        case 48:
+        case HELP_USING_HALL_OF_FAME:
             return FlagGet(FLAG_SYS_GAME_CLEAR);
         }
         return FALSE;
     }
-    if (gUnknown_3005E9C[1] == 2)
+    if (gHelpSystemState[1] == TOPIC_TERMS)
     {
-        if (sub_812B754() == TRUE)
+        if (HelpSystem_ShouldShowBasicTerms() == TRUE)
         {
-            for (i = 0; gUnknown_845B9BE[i] != 0xFF; i++)
+            // After defeating Brock, all basic terms are added
+            // This checks to make sure they arent added twice
+            for (i = 0; sTerms_Basic[i] != HELP_END; i++)
             {
-                if (gUnknown_845B9BE[i] == id)
+                if (sTerms_Basic[i] == id)
                     return FALSE;
             }
         }
         switch (id)
         {
-        case 14:
-        case 17:
-        case 22:
-        case 23:
-        case 24:
-        case 25:
-        case 26:
-        case 27:
-        case 28:
-        case 29:
-        case 30:
-        case 31:
-        case 32:
-        case 33:
-        case 34:
-        case 35:
-        case 38:
+        case HELP_TERM_MONEY:
+        case HELP_TERM_ID_NO:
+        case HELP_TERM_ITEMS:
+        case HELP_TERM_KEYITEMS:
+        case HELP_TERM_POKEBALLS:
+        case HELP_TERM_POKEDEX:
+        case HELP_TERM_PLAY_TIME:
+        case HELP_TERM_BADGES:
+        case HELP_TERM_TEXT_SPEED:
+        case HELP_TERM_BATTLE_SCENE:
+        case HELP_TERM_BATTLE_STYLE:
+        case HELP_TERM_SOUND:
+        case HELP_TERM_BUTTON_MODE:
+        case HELP_TERM_FRAME:
+        case HELP_TERM_CANCEL:
+        case HELP_TERM_TM:
+        case HELP_TERM_EVOLUTION:
             return TRUE;
-        case 1:
-        case 2:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-        case 16:
-        case 19:
-        case 20:
-        case 21:
+        case HELP_TERM_HP:
+        case HELP_TERM_EXP:
+        case HELP_TERM_ATTACK:
+        case HELP_TERM_DEFENSE:
+        case HELP_TERM_SPATK:
+        case HELP_TERM_SPDEF:
+        case HELP_TERM_SPEED:
+        case HELP_TERM_LEVEL:
+        case HELP_TERM_TYPE:
+        case HELP_TERM_OT:
+        case HELP_TERM_ITEM:
+        case HELP_TERM_ABILITY:
+        case HELP_TERM_NATURE:
+        case HELP_TERM_POWER:
+        case HELP_TERM_ACCURACY:
+        case HELP_TERM_FNT:
             return FlagGet(FLAG_SYS_POKEMON_GET);
-        case 36:
-        case 37:
-            return sub_812BB10();
-        case 3:
-        case 15:
-        case 18:
-        case 39:
+        case HELP_TERM_HM:
+        case HELP_TERM_HM_MOVE:
+            return HasGottenAtLeastOneHM();
+        case HELP_TERM_MOVES:
+        case HELP_TERM_MOVE_TYPE:
+        case HELP_TERM_PP:
+        case HELP_TERM_STATUS_PROBLEM:
             return FlagGet(FLAG_WORLD_MAP_VIRIDIAN_FOREST);
         }
         return TRUE;
     }
-    if (gUnknown_3005E9C[1] == 3)
+    if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
     {
         switch (id)
         {
-        case 5:
+        case HELP_GAME_FUNDAMENTALS_2:
             return FlagGet(FLAG_BADGE01_GET);
-        case 6:
+        case HELP_GAME_FUNDAMENTALS_3:
             return FlagGet(FLAG_BADGE02_GET);
         }
         return TRUE;
     }
-    if (gUnknown_3005E9C[1] == 4)
+    if (gHelpSystemState[1] == TOPIC_TYPE_MATCHUP)
     {
         return TRUE;
     }
@@ -1339,7 +2222,7 @@ static bool8 sub_812B780(u8 id)
     return FALSE;
 }
 
-static bool8 sub_812BB10(void)
+static bool8 HasGottenAtLeastOneHM(void)
 {
     if (FlagGet(FLAG_GOT_HM01) == TRUE)
         return TRUE;
@@ -1358,117 +2241,117 @@ static bool8 sub_812BB10(void)
     return FALSE;
 }
 
-bool8 sub_812BB9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 RunHelpMenuSubroutine(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    switch (a0->field_0E)
+    switch (helpListMenu->state)
     {
     case  8:
-        return sub_812BC54(a0, a1);
+        return HelpSystemSubroutine_PrintWelcomeMessage(helpListMenu, listMenuItemsBuffer);
     case  9:
-        return sub_812BC80(a0, a1);
+        return HelpSystemSubroutine_WelcomeWaitButton(helpListMenu, listMenuItemsBuffer);
     case 10:
-        return sub_812BCA8(a0, a1);
+        return HelpSystemSubroutine_WelcomeEndGotoMenu(helpListMenu, listMenuItemsBuffer);
     case  0:
-        return sub_812BCD0(a0, a1);
+        return HelpSystemSubroutine_MenuInputHandlerMain(helpListMenu, listMenuItemsBuffer);
     case  1:
-        return sub_812BD2C(a0, a1);
+        return HelpMenuSubroutine_InitSubmenu(helpListMenu, listMenuItemsBuffer);
     case  2:
-        return sub_812BD64(a0, a1);
+        return HelpMenuSubroutine_ReturnFromSubmenu(helpListMenu, listMenuItemsBuffer);
     case  3:
-        return sub_812BD98(a0, a1);
+        return HelpMenuSubroutine_SubmenuInputHandler(helpListMenu, listMenuItemsBuffer);
     case  4:
-        return sub_812BE10(a0, a1);
+        return HelpMenuSubroutine_HelpItemPrint(helpListMenu, listMenuItemsBuffer);
     case  5:
-        return sub_812BEEC(a0, a1);
+        return HelpMenuSubroutine_ReturnFromHelpItem(helpListMenu, listMenuItemsBuffer);
     case  6:
-        return sub_812BF18(a0, a1);
+        return HelpMenuSubroutine_HelpItemWaitButton(helpListMenu, listMenuItemsBuffer);
     }
     return FALSE;
 }
 
-bool8 sub_812BC54(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_PrintWelcomeMessage(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    sub_812BF74(gUnknown_841DFA5);
-    sub_812BF5C();
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFA5);
+    PrintWelcomeMessageOnPanel1();
     sub_813BDA4(1);
     sub_813BD5C(1);
-    a0->field_0E = 9;
+    helpListMenu->state = 9;
     return TRUE;
 }
 
-bool8 sub_812BC80(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_WelcomeWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        a0->field_0E = 10;
+        helpListMenu->state = 10;
     }
     return TRUE;
 }
 
-bool8 sub_812BCA8(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_WelcomeEndGotoMenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[2] = 0;
-    sub_812BF94(a0);
-    sub_812B4D8(a0, a1);
-    a0->field_0E = 0;
+    gHelpSystemState[2] = 0;
+    ResetHelpSystemCursor(helpListMenu);
+    BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
+    helpListMenu->state = 0;
     return TRUE;
 }
 
-bool8 sub_812BCD0(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpSystemSubroutine_MenuInputHandlerMain(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    s32 v0 = HelpSystem_GetMenuInput();
-    switch (v0)
+    s32 input = HelpSystem_GetMenuInput();
+    switch (input)
     {
     case -6:
     case -2:
         return FALSE;
     case -5:
     case -4:
-        sub_812BF9C(a0, a1);
+        PrintHelpSystemTopicMouseoverDescription(helpListMenu, listMenuItemsBuffer);
         break;
     case -3:
     case -1:
         break;
     default:
-        gUnknown_3005E9C[1] = v0;
-        a0->field_0E = 1;
+        gHelpSystemState[1] = input;
+        helpListMenu->state = 1;
         break;
     }
     return TRUE;
 }
 
-bool8 sub_812BD2C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_InitSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 1;
-    gUnknown_3005E9C[2] = a0->field_0D;
-    sub_812BF94(a0);
-    sub_812B5A8(a0, a1);
+    gHelpSystemState[0] = 1;
+    gHelpSystemState[2] = helpListMenu->cursorPos;
+    ResetHelpSystemCursor(helpListMenu);
+    BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
     sub_813C75C();
     HelpSystem_SetInputDelay(2);
-    a0->field_0E = 3;
+    helpListMenu->state = 3;
     return TRUE;
 }
 
-bool8 sub_812BD64(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_ReturnFromSubmenu(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     sub_813C004(0, 0);
     sub_813C004(1, 0);
-    gUnknown_3005E9C[0] = 0;
-    sub_812B4D8(a0, a1);
-    a0->field_0E = 0;
+    gHelpSystemState[0] = 0;
+    BuildAndPrintMainTopicsListMenu(helpListMenu, listMenuItemsBuffer);
+    helpListMenu->state = 0;
     return TRUE;
 }
 
-bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_SubmenuInputHandler(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    s32 v0 = HelpSystem_GetMenuInput();
-    switch (v0)
+    s32 input = HelpSystem_GetMenuInput();
+    switch (input)
     {
     case -6:
         return FALSE;
     case -2:
-        a0->field_0E = 2;
+        helpListMenu->state = 2;
         break;
     case -5:
     case -4:
@@ -1476,69 +2359,69 @@ bool8 sub_812BD98(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
     case -1:
         break;
     default:
-        gUnknown_3005E9C[3] = v0;
-        a0->field_0E = 4;
+        gHelpSystemState[3] = input;
+        helpListMenu->state = 4;
         break;
     }
     return TRUE;
 }
 
-void sub_812BDEC(void)
+void HelpSystem_PrintTopicLabel(void)
 {
-    HelpSystem_PrintTextAt(gUnknown_845B080[gUnknown_3005E9C[1]], 0, 0);
+    HelpSystem_PrintTextAt(sHelpSystemTopicPtrs[gHelpSystemState[1]], 0, 0);
 }
 
-bool8 sub_812BE10(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_HelpItemPrint(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 2;
+    gHelpSystemState[0] = 2;
     sub_813BDA4(0);
     HelpSystem_FillPanel1();
-    sub_812BF74(gUnknown_841DFBE);
+    PrintTextOnPanel2Row52RightAlign(gUnknown_841DFBE);
     sub_813BDE8(1);
     sub_813BEE4(1);
 
-    if (gUnknown_3005E9C[1] == 0)
+    if (gHelpSystemState[1] == TOPIC_WHAT_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B0B0[gUnknown_3005E9C[3]], gUnknown_845B164[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemSpecializedQuestionTextPtrs[gHelpSystemState[3]], sHelpSystemSpecializedAnswerTextPtrs[gHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 1)
+    else if (gHelpSystemState[1] == TOPIC_HOW_TO_DO)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B218[gUnknown_3005E9C[3]], gUnknown_845B2DC[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemMenuTopicTextPtrs[gHelpSystemState[3]], sHelpSystemHowToUseMenuTextPtrs[gHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 2)
+    else if (gHelpSystemState[1] == TOPIC_TERMS)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B3A0[gUnknown_3005E9C[3]], gUnknown_845B450[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemTermTextPtrs[gHelpSystemState[3]], sHelpSystemTermDefinitionsTextPtrs[gHelpSystemState[3]]);
     }
-    else if (gUnknown_3005E9C[1] == 3)
+    else if (gHelpSystemState[1] == TOPIC_ABOUT_GAME)
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B500[gUnknown_3005E9C[3]], gUnknown_845B520[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemGeneralTopicTextPtrs[gHelpSystemState[3]], sHelpSystemGeneralTopicDescriptionTextPtrs[gHelpSystemState[3]]);
     }
-    else
+    else // TOPIC_TYPE_MATCHUP
     {
-        HelpSystem_PrintTwoStrings(gUnknown_845B540[gUnknown_3005E9C[3]], gUnknown_845B5D0[gUnknown_3005E9C[3]]);
+        HelpSystem_PrintTwoStrings(sHelpSystemTypeMatchupTextPtrs[gHelpSystemState[3]], sHelpSystemTypeMatchupDescriptionTextPtrs[gHelpSystemState[3]]);
     }
     sub_813BDA4(1);
     sub_813BD5C(1);
-    a0->field_0E = 6;
+    helpListMenu->state = 6;
     return TRUE;
 }
 
-bool8 sub_812BEEC(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_ReturnFromHelpItem(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    gUnknown_3005E9C[0] = 1;
-    sub_812B5A8(a0, a1);
+    gHelpSystemState[0] = 1;
+    BuildAndPrintSubmenuList(helpListMenu, listMenuItemsBuffer);
     sub_813C75C();
     HelpSystem_SetInputDelay(2);
-    a0->field_0E = 3;
+    helpListMenu->state = 3;
     return TRUE;
 }
 
-bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+bool8 HelpMenuSubroutine_HelpItemWaitButton(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
     if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        a0->field_0E = 5;
+        helpListMenu->state = 5;
         return TRUE;
     }
     if (JOY_NEW(L_BUTTON | R_BUTTON))
@@ -1546,13 +2429,13 @@ bool8 sub_812BF18(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
     return TRUE;
 }
 
-static void sub_812BF5C(void)
+static void PrintWelcomeMessageOnPanel1(void)
 {
     HelpSystem_FillPanel1();
-    HelpSystem_PrintTextAt(gUnknown_81B2FC9, 0, 0);
+    HelpSystem_PrintTextAt(Help_Text_Greetings, 0, 0);
 }
 
-static void sub_812BF74(const u8 * str)
+static void PrintTextOnPanel2Row52RightAlign(const u8 * str)
 {
     HelpSystem_FillPanel2();
     HelpSystem_PrintTextRightAlign_Row52(str);
@@ -1560,21 +2443,21 @@ static void sub_812BF74(const u8 * str)
 
 u8 sub_812BF88(void)
 {
-    return gUnknown_3005E9C[0];
+    return gHelpSystemState[0];
 }
 
-static void sub_812BF94(struct HelpSystemListMenu * a0)
+static void ResetHelpSystemCursor(struct HelpSystemListMenu * helpListMenu)
 {
-    a0->field_0C = 0;
-    a0->field_0D = 0;
+    helpListMenu->itemsAbove = 0;
+    helpListMenu->cursorPos = 0;
 }
 
-static void sub_812BF9C(struct HelpSystemListMenu * a0, struct ListMenuItem * a1)
+static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    s32 index = a1[a0->field_0C + a0->field_0D].index;
+    s32 index = listMenuItemsBuffer[helpListMenu->itemsAbove + helpListMenu->cursorPos].index;
     if (index == -2)
-        HelpSystem_PrintText_813C584(gUnknown_845B098[5]);
+        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
     else
-        HelpSystem_PrintText_813C584(gUnknown_845B098[index]);
+        HelpSystem_PrintText_813C584(sHelpSystemTopicMouseoverDescriptionPtrs[index]);
     sub_813BE30(1);
 }

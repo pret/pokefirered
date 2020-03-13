@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_17",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE16",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 4,
       "y": 18,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 6,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB319",
+      "script": "Route17_EventScript_Virgil",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 11,
       "y": 15,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 5,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB221",
+      "script": "Route17_EventScript_Isaiah",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 15,
       "y": 24,
       "elevation": 3,
@@ -60,11 +62,11 @@
       "movement_range_y": 2,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB1E3",
+      "script": "Route17_EventScript_Raul",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 18,
       "y": 41,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 5,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB129",
+      "script": "Route17_EventScript_Nikolas",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 7,
       "y": 38,
       "elevation": 3,
@@ -86,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route17_EventScript_1AB0EB",
+      "script": "Route17_EventScript_Billy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 2,
       "y": 61,
       "elevation": 3,
@@ -99,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route17_EventScript_1AB29D",
+      "script": "Route17_EventScript_Jamal",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 21,
       "y": 61,
       "elevation": 3,
@@ -112,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route17_EventScript_1AB25F",
+      "script": "Route17_EventScript_Zeek",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 18,
       "y": 94,
       "elevation": 3,
@@ -125,11 +127,11 @@
       "movement_range_y": 5,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB2DB",
+      "script": "Route17_EventScript_Corey",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 16,
       "y": 134,
       "elevation": 3,
@@ -138,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB1A5",
+      "script": "Route17_EventScript_William",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 4,
       "y": 116,
       "elevation": 3,
@@ -151,7 +153,7 @@
       "movement_range_y": 5,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route17_EventScript_1AB167",
+      "script": "Route17_EventScript_Jaxon",
       "flag": "0"
     }
   ],
@@ -159,46 +161,52 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 97,
       "elevation": 0,
-      "script": "Route17_EventScript_1681DB"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_RouteSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 83,
       "elevation": 0,
-      "script": "Route17_EventScript_1681D2"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_TrainerTips2"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 68,
       "elevation": 0,
-      "script": "Route17_EventScript_1681C9"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_TrainerTips1"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 53,
       "elevation": 0,
-      "script": "Route17_EventScript_1681C0"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_ItemsNotice"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 125,
       "elevation": 3,
-      "script": "Route17_EventScript_1681E4"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_BallsNotice"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 11,
       "y": 157,
       "elevation": 0,
-      "script": "Route17_EventScript_1681ED"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route17_EventScript_CyclingRoadSign"
     },
     {
       "type": "hidden_item",

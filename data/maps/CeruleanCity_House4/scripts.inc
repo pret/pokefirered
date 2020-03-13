@@ -5,7 +5,7 @@ CeruleanCity_House4_EventScript_WonderNewsBerryMan:: @ 816ACEF
 	goto_if_questlog EventScript_ReleaseEnd
 	special sub_8112364
 	lock
-	specialvar VAR_0x8004, Special_GetMENewsJisanItemAndState
+	specialvar VAR_0x8004, GetMENewsJisanItemAndState
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8004, 0
 	goto_if_eq CeruleanCity_House4_EventScript_NoNews

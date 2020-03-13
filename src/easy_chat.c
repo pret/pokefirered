@@ -1,33 +1,18 @@
 #include "global.h"
 #include "malloc.h"
-#include "bg.h"
 #include "data.h"
-#include "decompress.h"
-#include "dynamic_placeholder_text_util.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "field_message_box.h"
-#include "field_weather.h"
-#include "gpu_regs.h"
-#include "graphics.h"
-#include "main.h"
 #include "mevent.h"
 #include "menu.h"
 #include "mail.h"
-#include "overworld.h"
-#include "palette.h"
 #include "pokedex.h"
 #include "random.h"
-#include "sound.h"
 #include "string_util.h"
 #include "strings.h"
-#include "task.h"
-#include "text_window.h"
-#include "window.h"
 #include "constants/easy_chat.h"
-#include "constants/object_events.h"
 #include "constants/flags.h"
-#include "constants/songs.h"
 #include "constants/species.h"
 
 struct Unk203A120
@@ -291,7 +276,7 @@ static u16 GetRandomWordFromAnyGroup(u16 groupId)
     return GetRandomWordFromGroup(groupId);
 }
 
-void Special_BufferEasyChatMessage(void)
+void ShowEasyChatMessage(void)
 {
     u16 *easyChatWords;
     int columns, rows;

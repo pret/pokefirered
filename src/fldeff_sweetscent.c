@@ -3,7 +3,6 @@
 #include "field_effect.h"
 #include "party_menu.h"
 #include "malloc.h"
-#include "event_data.h"
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
@@ -44,7 +43,7 @@ bool8 FldEff_SweetScent(void)
     u8 taskId;
 
     SetWeatherScreenFadeOut();
-    taskId = oei_task_add();
+    taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(StartSweetScentFieldEffect);
     return FALSE;
 }

@@ -8,7 +8,7 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
 	setvar VAR_0x8004, LISTMENU_BADGES
-	special Special_ListMenu
+	special ListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, CeruleanCity_House1_EventScript_DescribeBoulderBadge
@@ -26,7 +26,7 @@ CeruleanCity_House1_EventScript_BadgeGuy:: @ 816A7F0
 CeruleanCity_House1_EventScript_DescribeAnotherBadge:: @ 816A87D
 	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
-	special Special_ReturnToListMenu
+	special ReturnToListMenu
 	waitstate
 	switch VAR_RESULT
 	case 0, CeruleanCity_House1_EventScript_DescribeBoulderBadge

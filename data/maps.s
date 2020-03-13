@@ -1,7 +1,6 @@
 #include "constants/layouts.h"
-@#include "constants/map_types.h"
 #include "constants/maps.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/weather.h"

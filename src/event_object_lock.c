@@ -3,9 +3,7 @@
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
 #include "script_movement.h"
-#include "event_object_80688E4.h"
 #include "event_data.h"
-#include "event_object_lock.h"
 
 bool8 walkrun_is_standing_still(void)
 {
@@ -89,18 +87,18 @@ void sub_80696C0(void)
 {
     u8 objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
 }
 
-void sub_80696F0(void)
+void UnionRoom_UnlockPlayerAndChatPartner(void)
 {
     u8 objectEventId;
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
     objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
-    sub_80974D8();
+    ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
 }
 

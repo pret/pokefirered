@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_DAISY",
+      "graphics_id": "OBJ_EVENT_GFX_DAISY",
       "x": 10,
       "y": 6,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 3,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168D56",
+      "script": "PalletTown_GarysHouse_EventScript_Daisy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_TOWN_MAP",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_MAP",
       "x": 6,
       "y": 4,
       "elevation": 3,
@@ -36,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F63",
+      "script": "PalletTown_GarysHouse_EventScript_TownMap",
       "flag": "FLAG_HIDE_TOWN_MAP"
     }
   ],
@@ -66,25 +68,28 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PalletTown_GarysHouse_EventScript_Bookshelf"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 11,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F6C"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PalletTown_GarysHouse_EventScript_Bookshelf"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 9,
       "y": 1,
       "elevation": 0,
-      "script": "PalletTown_GarysHouse_EventScript_168F75"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PalletTown_GarysHouse_EventScript_Picture"
     }
   ]
 }

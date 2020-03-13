@@ -748,7 +748,7 @@ static void BerryPouchSetArrowCursorAt(u8 y, u8 colorIdx)
     }
     else
     {
-        BerryPouchPrint(0, 2, gFameCheckerText_ListMenuCursor, 1, y, 0, 0, 0, colorIdx);
+        BerryPouchPrint(0, 2, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
     }
 }
 
@@ -1027,7 +1027,7 @@ static void CreateNormalContextMenu(u8 taskId)
     Menu_InitCursor(windowId, 2, 0, 2, GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, 0);
     windowId2 = GetOrCreateVariableWindow(6);
     CopySelectedListMenuItemName(data[1], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gOtherText_StrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
     BerryPouchPrint(windowId2, 2, gStringVar4, 0, 2, 1, 2, 0, 1);
 }
 

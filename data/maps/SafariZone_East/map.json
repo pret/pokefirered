@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 12,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_MAX_POTION"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 37,
       "y": 15,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_FULL_RESTORE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 31,
       "y": 18,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_EAST_TM11"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 36,
       "y": 17,
       "elevation": 4,
@@ -120,24 +122,27 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 18,
       "y": 27,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_East_EventScript_AreaSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 43,
       "y": 15,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_East_EventScript_RestHouseSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 17,
       "y": 8,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_East_EventScript_TrainerTips"
     }
   ]

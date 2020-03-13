@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_20",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_CINNABAR_ISLAND",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 8,
       "y": 11,
       "elevation": 1,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route20_EventScript_1AB83F",
+      "script": "Route20_EventScript_Melissa",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 16,
       "y": 14,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB8F9",
+      "script": "Route20_EventScript_Missy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 34,
       "y": 7,
       "elevation": 1,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route20_EventScript_1AB801",
+      "script": "Route20_EventScript_Nora",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 43,
       "y": 9,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB8BB",
+      "script": "Route20_EventScript_Roger",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 23,
       "y": 10,
       "elevation": 1,
@@ -86,11 +88,11 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB747",
+      "script": "Route20_EventScript_Dean",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PICNICKER",
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 73,
       "y": 16,
       "elevation": 3,
@@ -99,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route20_EventScript_1AB937",
+      "script": "Route20_EventScript_Irene",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 111,
       "y": 9,
       "elevation": 1,
@@ -112,11 +114,11 @@
       "movement_range_y": 3,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB709",
+      "script": "Route20_EventScript_Barry",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 106,
       "y": 11,
       "elevation": 1,
@@ -125,11 +127,11 @@
       "movement_range_y": 3,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB785",
+      "script": "Route20_EventScript_Darrin",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 93,
       "y": 10,
       "elevation": 1,
@@ -138,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route20_EventScript_1AB87D",
+      "script": "Route20_EventScript_Shirley",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 54,
       "y": 11,
       "elevation": 1,
@@ -151,11 +153,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route20_EventScript_1AB7C3",
+      "script": "Route20_EventScript_Tiffany",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 69,
       "y": 3,
       "elevation": 3,
@@ -164,7 +166,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route20_EventScript_1ACE36",
+      "script": "Route20_EventScript_Camper",
       "flag": "0"
     }
   ],
@@ -187,18 +189,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 68,
       "y": 14,
       "elevation": 0,
-      "script": "Route20_EventScript_168280"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route20_EventScript_SeafoamIslandsSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 64,
       "y": 8,
       "elevation": 0,
-      "script": "Route20_EventScript_168280"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route20_EventScript_SeafoamIslandsSign"
     },
     {
       "type": "hidden_item",

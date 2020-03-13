@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_RESORT_GORGEOUS",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_FIVE_ISLAND_WATER_LABYRINTH",
@@ -20,7 +22,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 44,
       "y": 10,
       "elevation": 3,
@@ -29,11 +31,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC127",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Daisy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 33,
       "y": 12,
       "elevation": 3,
@@ -42,11 +44,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC165",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Celina",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 12,
       "y": 10,
       "elevation": 3,
@@ -55,11 +57,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC1A3",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Rayna",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 23,
       "y": 9,
       "elevation": 3,
@@ -68,11 +70,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC1E1",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Jacki",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 33,
       "y": 8,
       "elevation": 3,
@@ -81,11 +83,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC21F",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Gillian",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 33,
       "y": 3,
       "elevation": 3,
@@ -94,11 +96,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC25D",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Destin",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 56,
       "y": 7,
       "elevation": 1,
@@ -107,11 +109,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_ResortGorgeous_EventScript_1AC29B",
+      "script": "FiveIsland_ResortGorgeous_EventScript_Toby",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 39,
       "y": 9,
       "elevation": 3,
@@ -183,11 +185,12 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 42,
       "y": 9,
       "elevation": 0,
-      "script": "FiveIsland_ResortGorgeous_EventScript_168844"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign"
     }
   ]
 }

@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 4,
-  "elevator_flag": 127,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "floor_number": 127,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_M",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 9,
       "y": 5,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C022",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_CooltrainerM",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 5,
       "y": 4,
       "elevation": 3,
@@ -36,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16BCCD",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl",
       "flag": "0"
     }
   ],
@@ -52,32 +54,36 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 14,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C02B"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_FloorSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 10,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 11,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 3,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_Roof_EventScript_16C034"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_DepartmentStore_Roof_EventScript_VendingMachine"
     }
   ]
 }

@@ -4,7 +4,6 @@
 #include "dynamic_placeholder_text_util.h"
 #include "gba/macro.h"
 #include "gpu_regs.h"
-#include "gpu_regs.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
@@ -19,7 +18,6 @@
 #include "task.h"
 #include "text.h"
 #include "window.h"
-#include "diploma.h"
 
 struct Diploma
 {

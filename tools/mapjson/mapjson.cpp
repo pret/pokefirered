@@ -104,24 +104,22 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << map_data["weather"].string_value() << "\n"
          << "\t.byte "  << map_data["map_type"].string_value() << "\n";
 
-    if (version == "firered")
-        text << "\t.byte " << map_data["unknown_18"].int_value() << "\n"
-             << "\t.byte " << map_data["unknown_19"].int_value() << "\n";
-    else
+    if (version != "firered")
         text << "\t.2byte 0\n";
 
     if (version == "ruby") {
         text << "\t.byte " << map_data["show_map_name"].bool_value() << "\n";
     }
-    else if (version == "emerald") {
+    else if (version == "emerald" || version == "firered") {
         text << "\tmap_header_flags "
-             << "allow_bike=" << map_data["allow_bike"].bool_value() << ", "
-             << "allow_escape_rope=" << map_data["allow_escape_rope"].bool_value() << ", "
-             << "allow_run=" << map_data["allow_running"].bool_value() << ", "
+             << "allow_cycling=" << map_data["allow_cycling"].bool_value() << ", "
+             << "allow_escaping=" << map_data["allow_escaping"].bool_value() << ", "
+             << "allow_running=" << map_data["allow_running"].bool_value() << ", "
              << "show_map_name=" << map_data["show_map_name"].bool_value() << "\n";
     }
-    else if (version == "firered") {
-        text << "\t.byte " << map_data["elevator_flag"].int_value() << "\n";
+
+    if (version == "firered") {
+        text << "\t.byte " << map_data["floor_number"].int_value() << "\n";
     }
 
      text << "\t.byte " << map_data["battle_scene"].string_value() << "\n\n";
@@ -276,6 +274,7 @@ string generate_firered_map_events_text(Json map_data) {
             auto obj_event = map_data["object_events"].array_items()[i];
             text << "\tobject_event " << i + 1 << ", "
                  << obj_event["graphics_id"].string_value() << ", "
+                 << (obj_event["in_connection"].bool_value() ? 255 : 0) << ", "
                  << obj_event["x"].int_value() << ", "
                  << obj_event["y"].int_value() << ", "
                  << obj_event["elevation"].int_value() << ", "
@@ -338,7 +337,15 @@ string generate_firered_map_events_text(Json map_data) {
         bgs_label = map_data["name"].string_value() + "_MapBGEvents";
         text << bgs_label << "::\n";
         for (auto &bg_event : map_data["bg_events"].array_items()) {
-            if (bg_event["type"] == "hidden_item") {
+            if (bg_event["type"] == "sign") {
+                text << "\tbg_event "
+                     << bg_event["x"].int_value() << ", "
+                     << bg_event["y"].int_value() << ", "
+                     << bg_event["elevation"].int_value() << ", "
+                     << bg_event["player_facing_dir"].string_value() << ", 0,"
+                     << bg_event["script"].string_value() << "\n";
+            }
+            else if (bg_event["type"] == "hidden_item") {
                 text << "\tbg_hidden_item_event "
                      << bg_event["x"].int_value() << ", "
                      << bg_event["y"].int_value() << ", "
@@ -347,17 +354,6 @@ string generate_firered_map_events_text(Json map_data) {
                      << bg_event["flag"].string_value() << ", "
                      << bg_event["quantity"].int_value() << ", "
                      << bg_event["underfoot"].bool_value() << "\n";
-            }
-            else {
-                string type_string = bg_event["type"].string_value();
-                type_string.erase(0, 14);
-                int type = std::stoi(type_string);
-                text << "\tbg_event "
-                     << bg_event["x"].int_value() << ", "
-                     << bg_event["y"].int_value() << ", "
-                     << bg_event["elevation"].int_value() << ", "
-                     << type << ", 0, "
-                     << bg_event["script"].string_value() << "\n";
             }
         }
         text << "\n";

@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_7",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_CELADON_CITY",
@@ -18,15 +20,16 @@
       "direction": "left"
     },
     {
-      "map": "MAP_SAFFRON_CITY_CLASSIC",
+      "map": "MAP_SAFFRON_CITY_CONNECTION",
       "offset": -10,
       "direction": "right"
     }
   ],
   "object_events": [
     {
-      "graphics_id": "65375",
-      "x": 65528,
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
+      "in_connection": true,
+      "x": -8,
       "y": 12,
       "elevation": 10,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -57,11 +60,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 5,
       "y": 14,
       "elevation": 0,
-      "script": "Route7_EventScript_167FBC"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route7_EventScript_UndergroundPathSign"
     },
     {
       "type": "hidden_item",

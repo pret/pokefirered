@@ -16,7 +16,7 @@
 #include "field_weather.h"
 #include "constants/songs.h"
 #include "constants/maps.h"
-#include "seagallop.h"
+#include "constants/seagallop.h"
 
 #define TILESTAG_FERRY 3000
 #define TILESTAG_WAKE  4000
@@ -295,7 +295,7 @@ static void Task_Seagallop_1(u8 taskId)
     if (++task->data[1] == 140)
     {
         Overworld_FadeOutMapMusic();
-        sub_807DC18();
+        WarpFadeOutScreen();
         task->func = Task_Seagallop_2;
     }
 }

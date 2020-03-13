@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_MT_EMBER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_4",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_RUBY",
+      "graphics_id": "OBJ_EVENT_GFX_RUBY",
       "x": 7,
       "y": 7,
       "elevation": 0,
@@ -39,10 +41,11 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 7,
       "y": 2,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "MtEmber_RubyPath_B5F_EventScript_BrailleMessage"
     }
   ]

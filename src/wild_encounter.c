@@ -367,11 +367,11 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId != 0xFFFF)
     {
-        if (sub_8058F1C(currMetatileBehavior, 4) == TRUE)
+        if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 4) == TRUE)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
-            else if (previousMetatileBehavior != sub_8058F1C(currMetatileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
+            else if (previousMetatileBehavior != GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
             if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
             {
@@ -387,7 +387,7 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                     return FALSE;
                 }
 
-                BattleSetup_StartRoamerBattle();
+                StartRoamerBattle();
                 return TRUE;
             }
             else
@@ -396,7 +396,7 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                 // try a regular wild land encounter
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL) == TRUE)
                 {
-                    BattleSetup_StartWildBattle();
+                    StartWildBattle();
                     return TRUE;
                 }
                 else
@@ -405,12 +405,12 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                 }
             }
         }
-        else if (sub_8058F1C(currMetatileBehavior, 4) == 2
-                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(sub_8058F1C(currMetatileBehavior, 0)) == TRUE))
+        else if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 4) == 2
+                 || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0)) == TRUE))
         {
             if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
                 return FALSE;
-            else if (previousMetatileBehavior != sub_8058F1C(currMetatileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
+            else if (previousMetatileBehavior != GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0) && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
             else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
             {
@@ -426,14 +426,14 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
                     return FALSE;
                 }
 
-                BattleSetup_StartRoamerBattle();
+                StartRoamerBattle();
                 return TRUE;
             }
             else // try a regular surfing encounter
             {
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL) == TRUE)
                 {
-                    BattleSetup_StartWildBattle();
+                    StartWildBattle();
                     return TRUE;
                 }
                 else
@@ -447,7 +447,7 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
     return FALSE;
 }
 
-void ScrSpecial_RockSmashWildEncounter(void)
+void RockSmashWildEncounter(void)
 {
     u16 headerIdx = GetCurrentMapWildMonHeaderId();
     if (headerIdx == 0xFFFF)
@@ -458,7 +458,7 @@ void ScrSpecial_RockSmashWildEncounter(void)
         gSpecialVar_Result = FALSE;
     else if (TryGenerateWildMon(gWildMonHeaders[headerIdx].rockSmashMonsInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL) == TRUE)
     {
-        BattleSetup_StartWildBattle();
+        StartWildBattle();
         gSpecialVar_Result = TRUE;
     }
     else
@@ -474,11 +474,11 @@ bool8 SweetScentWildEncounter(void)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId != 0xFFFF)
     {
-        if (sub_8058F48(x, y, 4) == 1)
+        if (MapGridGetMetatileAttributeAt(x, y, 4) == 1)
         {
             if (TryStartRoamerEncounter() == TRUE)
             {
-                BattleSetup_StartRoamerBattle();
+                StartRoamerBattle();
                 return TRUE;
             }
 
@@ -487,14 +487,14 @@ bool8 SweetScentWildEncounter(void)
 
             TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
 
-            BattleSetup_StartWildBattle();
+            StartWildBattle();
             return TRUE;
         }
-        else if (sub_8058F48(x, y, 4) == 2)
+        else if (MapGridGetMetatileAttributeAt(x, y, 4) == 2)
         {
             if (TryStartRoamerEncounter() == TRUE)
             {
-                BattleSetup_StartRoamerBattle();
+                StartRoamerBattle();
                 return TRUE;
             }
 
@@ -502,7 +502,7 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
 
             TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, 0);
-            BattleSetup_StartWildBattle();
+            StartWildBattle();
             return TRUE;
         }
     }
@@ -524,7 +524,7 @@ void FishingWildEncounter(u8 rod)
 {
     GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
-    BattleSetup_StartWildBattle();
+    StartWildBattle();
 }
 
 u16 GetLocalWildMon(bool8 *isWaterMon)
@@ -711,7 +711,7 @@ void ResetEncounterRateModifiers(void)
 
 static bool8 HandleWildEncounterCooldown(u32 currMetatileBehavior)
 {
-    u8 unk = sub_8058F1C(currMetatileBehavior, 4);
+    u8 unk = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 4);
     u32 minSteps;
     u32 encRate;
     if (unk == 0)
@@ -763,19 +763,19 @@ bool8 TryStandardWildEncounter(u32 currMetatileBehavior)
 {
     if (!HandleWildEncounterCooldown(currMetatileBehavior))
     {
-        sWildEncounterData.prevMetatileBehavior = sub_8058F1C(currMetatileBehavior, 0);
+        sWildEncounterData.prevMetatileBehavior = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0);
         return FALSE;
     }
     else if (StandardWildEncounter(currMetatileBehavior, sWildEncounterData.prevMetatileBehavior) == TRUE)
     {
         sWildEncounterData.encounterRateBuff = 0;
         sWildEncounterData.stepsSinceLastEncounter = 0;
-        sWildEncounterData.prevMetatileBehavior = sub_8058F1C(currMetatileBehavior, 0);
+        sWildEncounterData.prevMetatileBehavior = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0);
         return TRUE;
     }
     else
     {
-        sWildEncounterData.prevMetatileBehavior = sub_8058F1C(currMetatileBehavior, 0);
+        sWildEncounterData.prevMetatileBehavior = GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, 0);
         return FALSE;
     }
 }

@@ -2,11 +2,9 @@
 #include "main.h"
 #include "task.h"
 #include "malloc.h"
-#include "save.h"
 #include "util.h"
 #include "string_util.h"
 #include "event_data.h"
-#include "random.h"
 #include "cereader_tool.h"
 #include "easy_chat.h"
 #include "text.h"
@@ -20,25 +18,26 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "sound.h"
-#include "renewable_hidden_items.h"
-#include "constants/flags.h"
 #include "constants/vars.h"
 #include "constants/items.h"
 #include "constants/species.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
 #include "constants/layouts.h"
 #include "constants/trainers.h"
 #include "constants/facility_trainer_classes.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
+#include "constants/trainer_tower.h"
+
+#define CURR_FLOOR sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx]
+#define TRAINER_TOWER gSaveBlock1Ptr->trainerTower[gSaveBlock1Ptr->towerChallengeId]
 
 struct UnkStruct_203F458
 {
     /* 0x0000 */ u8 floorIdx;
-    /* 0x0004 */ struct EReaderTrainerHillSet unk_0004;
+    /* 0x0004 */ struct EReaderTrainerTowerSet unk_0004;
 };
 
-struct UnkStruct_203F45C
+struct TrainerTowerOpponent
 {
     /* 0x00 */ u8 name[11];
     /* 0x0C */ u16 speechWin[6];
@@ -52,15 +51,15 @@ struct UnkStruct_203F45C
 
 struct SinglesTrainerInfo
 {
-    u8 mapObjGfx;
+    u8 objGfx;
     u8 facilityClass;
     bool8 gender;
 };
 
 struct DoublesTrainerInfo
 {
-    u8 mapObjGfx1;
-    u8 mapObjGfx2;
+    u8 objGfx1;
+    u8 objGfx2;
     u8 facilityClass;
     bool8 gender1;
     bool8 gender2;
@@ -68,147 +67,147 @@ struct DoublesTrainerInfo
 
 struct TrainerEncounterMusicPairs
 {
-    u8 unk0;
-    u8 unk1;
+    u8 facilityClass;
+    u8 musicId;
 };
 
 static EWRAM_DATA struct UnkStruct_203F458 * sTrainerTowerState = NULL;
-static EWRAM_DATA struct UnkStruct_203F45C * sTrainerTowerOpponent = NULL;
+static EWRAM_DATA struct TrainerTowerOpponent * sTrainerTowerOpponent = NULL;
 static EWRAM_DATA u8 sUnused_203F460 = 0;
 
-static void sub_815DC8C(void);  // setup
-static void sub_815DD2C(void);  // teardown
-static void sub_815DD44(void);
+static void SetUpTrainerTowerDataStruct(void);
+static void FreeTrainerTowerDataStruct(void);
+static void InitTrainerTowerFloor(void);
 static void SetTrainerTowerNPCGraphics(void);
 static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest);
-static void sub_815DF54(void);
+static void BufferTowerOpponentSpeech(void);
 static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass);
-static void sub_815E160(void);
-static void sub_815E1C0(void);
-static void sub_815E1F0(void);
-static void TTSpecial_HasReachedTheRoof(void);
-static void sub_815E28C(void);
-static void sub_815E394(void);
-static void sub_815E408(void);
-static void sub_815E4B0(void);
-static void TTSpecial_StartTimer(void);
-static void sub_815E5C4(void);
-static void sub_815E5F0(void);
-static void sub_815E658(void);
-static void sub_815E720(void);
-static void sub_815E88C(void);
-static void sub_815E8B4(void);
-static void sub_815E8CC(void);
-static void sub_815E908(void);
-static void sub_815E948(void);
-static void sub_815E9C8(void);
+static void DoTrainerTowerBattle(void);
+static void TrainerTowerGetChallengeType(void);
+static void TrainerTowerAddFloorCleared(void);
+static void GetFloorAlreadyCleared(void);
+static void StartTrainerTowerChallenge(void);
+static void GetOwnerState(void);
+static void GiveChallengePrize(void);
+static void CheckFinalTime(void);
+static void TrainerTowerResumeTimer(void);
+static void TrainerTowerSetPlayerLost(void);
+static void GetTrainerTowerChallengeStatus(void);
+static void GetCurrentTime(void);
+static void ShowResultsBoard(void);
+static void CloseResultsBoard(void);
+static void TrainerTowerGetDoublesEligiblity(void);
+static void TrainerTowerGetNumFloors(void);
+static void ShouldWarpToCounter(void);
+static void PlayTrainerTowerEncounterMusic(void);
+static void HasSpokenToOwner(void);
 static void BuildEnemyParty(void);
 static s32 GetPartyMaxLevel(void);
 static void ValidateOrResetCurTrainerTowerRecord(void);
 static u32 GetTrainerTowerRecordTime(u32 *);
 static void SetTrainerTowerRecordTime(u32 *, u32);
 
-extern const u8 gUnknown_83FE982[];
-extern const u8 gUnknown_83FE998[];
-extern const u8 *const gUnknown_83FE9C4[];
+extern const u8 gText_TimeBoard[];
+extern const u8 gText_XMinYZSec[];
+extern const u8 *const gTrainerTowerChallengeTypeTexts[];
 
 static const struct SinglesTrainerInfo sSingleBattleTrainerInfo[] = {
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY,       FEMALE},
-    {OBJECT_EVENT_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC,      MALE},
-    {OBJECT_EVENT_GFX_TUBER_F,        FACILITY_CLASS_TUBER,            FEMALE},
-    {OBJECT_EVENT_GFX_TUBER_M_2,      FACILITY_CLASS_TUBER_2,          MALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER,      MALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_2,    FEMALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_HEX_MANIAC,       MALE},
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_LADY,             FEMALE},
-    {OBJECT_EVENT_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY,           FEMALE},
-    {OBJECT_EVENT_GFX_BOY,            FACILITY_CLASS_RICH_BOY,         MALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC,       MALE},
-    {OBJECT_EVENT_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE,     MALE},
-    {OBJECT_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT,       MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_GUITARIST,        MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_KINDLER,          MALE},
-    {OBJECT_EVENT_GFX_CAMPER,         FACILITY_CLASS_CAMPER,           MALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_BUG_MANIAC,       MALE},
-    {OBJECT_EVENT_GFX_BOY,            FACILITY_CLASS_PSYCHIC,          MALE},
-    {OBJECT_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_2,        FEMALE},
-    {OBJECT_EVENT_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN,        MALE},
-    {OBJECT_EVENT_GFX_BOY,            FACILITY_CLASS_SCHOOL_KID,       MALE},
-    {OBJECT_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_SCHOOL_KID_2,     FEMALE},
-    {OBJECT_EVENT_GFX_BALDING_MAN,    FACILITY_CLASS_POKEFAN,          MALE},
-    {OBJECT_EVENT_GFX_WOMAN_3,        FACILITY_CLASS_POKEFAN_2,        FEMALE},
-    {OBJECT_EVENT_GFX_OLD_MAN_1,      FACILITY_CLASS_EXPERT,           MALE},
-    {OBJECT_EVENT_GFX_OLD_WOMAN,      FACILITY_CLASS_EXPERT_2,         FEMALE},
-    {OBJECT_EVENT_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER,        MALE},
-    {OBJECT_EVENT_GFX_FISHER,         FACILITY_CLASS_FISHERMAN,        MALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_DRAGON_TAMER,     MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER,      MALE},
-    {OBJECT_EVENT_GFX_LITTLE_BOY,     FACILITY_CLASS_NINJA_BOY,        MALE},
-    {OBJECT_EVENT_GFX_BATTLE_GIRL,    FACILITY_CLASS_BATTLE_GIRL,      FEMALE},
-    {OBJECT_EVENT_GFX_BEAUTY,         FACILITY_CLASS_PARASOL_LADY,     FEMALE},
-    {OBJECT_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE,   FEMALE},
-    {OBJECT_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER,        FEMALE},
-    {OBJECT_EVENT_GFX_SAILOR,         FACILITY_CLASS_SAILOR,           MALE},
-    {OBJECT_EVENT_GFX_FAT_MAN,        FACILITY_CLASS_COLLECTOR,        MALE},
-    {OBJECT_EVENT_GFX_MAN,            FACILITY_CLASS_PKMN_BREEDER,     MALE},
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_2,   FEMALE},
-    {OBJECT_EVENT_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER,      MALE},
-    {OBJECT_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_2,    FEMALE},
-    {OBJECT_EVENT_GFX_LASS,           FACILITY_CLASS_LASS,             FEMALE},
-    {OBJECT_EVENT_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER,      MALE},
-    {OBJECT_EVENT_GFX_HIKER,          FACILITY_CLASS_HIKER,            MALE},
-    {OBJECT_EVENT_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER_2,      MALE},
-    {OBJECT_EVENT_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER_2,    MALE},
-    {OBJECT_EVENT_GFX_LASS,           FACILITY_CLASS_LASS_2,           FEMALE},
-    {OBJECT_EVENT_GFX_SAILOR,         FACILITY_CLASS_SAILOR_2,         MALE},
-    {OBJECT_EVENT_GFX_CAMPER,         FACILITY_CLASS_CAMPER_2,         MALE},
-    {OBJECT_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER_2,      FEMALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC_2,     MALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_SUPER_NERD,       MALE},
-    {OBJECT_EVENT_GFX_HIKER,          FACILITY_CLASS_HIKER_2,          MALE},
-    {OBJECT_EVENT_GFX_BIKER,          FACILITY_CLASS_BIKER,            MALE},
-    {OBJECT_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_BURGLAR,          MALE},
-    {OBJECT_EVENT_GFX_BALDING_MAN,    FACILITY_CLASS_ENGINEER,         MALE},
-    {OBJECT_EVENT_GFX_FISHER,         FACILITY_CLASS_FISHERMAN_2,      MALE},
-    {OBJECT_EVENT_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE_2,   MALE},
-    {OBJECT_EVENT_GFX_BIKER,          FACILITY_CLASS_CUE_BALL,         MALE},
-    {OBJECT_EVENT_GFX_OLD_MAN_1,      FACILITY_CLASS_GAMER,            MALE},
-    {OBJECT_EVENT_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY_2,         FEMALE},
-    {OBJECT_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE_2, FEMALE},
-    {OBJECT_EVENT_GFX_BOY,            FACILITY_CLASS_PSYCHIC_3,        MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_ROCKER,           MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_JUGGLER,          MALE},
-    {OBJECT_EVENT_GFX_MAN,            FACILITY_CLASS_TAMER,            MALE},
-    {OBJECT_EVENT_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER_2,    MALE},
-    {OBJECT_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT_2,     MALE},
-    {OBJECT_EVENT_GFX_SCIENTIST,      FACILITY_CLASS_SCIENTIST,        MALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER_3,    MALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_4,    FEMALE},
-    {OBJECT_EVENT_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN_2,      MALE},
-    {OBJECT_EVENT_GFX_CHANNELER,      FACILITY_CLASS_CHANNELER,        FEMALE},
-    {OBJECT_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_4,        FEMALE},
-    {OBJECT_EVENT_GFX_BATTLE_GIRL,    FACILITY_CLASS_CRUSH_GIRL,       FEMALE},
-    {OBJECT_EVENT_GFX_TUBER_F,        FACILITY_CLASS_TUBER_3,          FEMALE},
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_3,   FEMALE},
-    {OBJECT_EVENT_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER_3,    MALE},
-    {OBJECT_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_4,    FEMALE},
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY_2,     FEMALE},
-    {OBJECT_EVENT_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC_2,    MALE},
-    {OBJECT_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_LADY_2,           FEMALE},
-    {OBJECT_EVENT_GFX_LASS,           FACILITY_CLASS_PAINTER,          FEMALE}
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY,       FEMALE},
+    {OBJ_EVENT_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC,      MALE},
+    {OBJ_EVENT_GFX_TUBER_F,        FACILITY_CLASS_TUBER,            FEMALE},
+    {OBJ_EVENT_GFX_TUBER_M_2,      FACILITY_CLASS_TUBER_2,          MALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER,      MALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_2,    FEMALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_HEX_MANIAC,       MALE},
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_LADY,             FEMALE},
+    {OBJ_EVENT_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY,           FEMALE},
+    {OBJ_EVENT_GFX_BOY,            FACILITY_CLASS_RICH_BOY,         MALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC,       MALE},
+    {OBJ_EVENT_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE,     MALE},
+    {OBJ_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT,       MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_GUITARIST,        MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_KINDLER,          MALE},
+    {OBJ_EVENT_GFX_CAMPER,         FACILITY_CLASS_CAMPER,           MALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_BUG_MANIAC,       MALE},
+    {OBJ_EVENT_GFX_BOY,            FACILITY_CLASS_PSYCHIC,          MALE},
+    {OBJ_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_2,        FEMALE},
+    {OBJ_EVENT_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN,        MALE},
+    {OBJ_EVENT_GFX_BOY,            FACILITY_CLASS_SCHOOL_KID,       MALE},
+    {OBJ_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_SCHOOL_KID_2,     FEMALE},
+    {OBJ_EVENT_GFX_BALDING_MAN,    FACILITY_CLASS_POKEFAN,          MALE},
+    {OBJ_EVENT_GFX_WOMAN_3,        FACILITY_CLASS_POKEFAN_2,        FEMALE},
+    {OBJ_EVENT_GFX_OLD_MAN_1,      FACILITY_CLASS_EXPERT,           MALE},
+    {OBJ_EVENT_GFX_OLD_WOMAN,      FACILITY_CLASS_EXPERT_2,         FEMALE},
+    {OBJ_EVENT_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER,        MALE},
+    {OBJ_EVENT_GFX_FISHER,         FACILITY_CLASS_FISHERMAN,        MALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_DRAGON_TAMER,     MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER,      MALE},
+    {OBJ_EVENT_GFX_LITTLE_BOY,     FACILITY_CLASS_NINJA_BOY,        MALE},
+    {OBJ_EVENT_GFX_BATTLE_GIRL,    FACILITY_CLASS_BATTLE_GIRL,      FEMALE},
+    {OBJ_EVENT_GFX_BEAUTY,         FACILITY_CLASS_PARASOL_LADY,     FEMALE},
+    {OBJ_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE,   FEMALE},
+    {OBJ_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER,        FEMALE},
+    {OBJ_EVENT_GFX_SAILOR,         FACILITY_CLASS_SAILOR,           MALE},
+    {OBJ_EVENT_GFX_FAT_MAN,        FACILITY_CLASS_COLLECTOR,        MALE},
+    {OBJ_EVENT_GFX_MAN,            FACILITY_CLASS_PKMN_BREEDER,     MALE},
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_2,   FEMALE},
+    {OBJ_EVENT_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER,      MALE},
+    {OBJ_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_2,    FEMALE},
+    {OBJ_EVENT_GFX_LASS,           FACILITY_CLASS_LASS,             FEMALE},
+    {OBJ_EVENT_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER,      MALE},
+    {OBJ_EVENT_GFX_HIKER,          FACILITY_CLASS_HIKER,            MALE},
+    {OBJ_EVENT_GFX_YOUNGSTER,      FACILITY_CLASS_YOUNGSTER_2,      MALE},
+    {OBJ_EVENT_GFX_BUG_CATCHER,    FACILITY_CLASS_BUG_CATCHER_2,    MALE},
+    {OBJ_EVENT_GFX_LASS,           FACILITY_CLASS_LASS_2,           FEMALE},
+    {OBJ_EVENT_GFX_SAILOR,         FACILITY_CLASS_SAILOR_2,         MALE},
+    {OBJ_EVENT_GFX_CAMPER,         FACILITY_CLASS_CAMPER_2,         MALE},
+    {OBJ_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PICNICKER_2,      FEMALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_POKEMANIAC_2,     MALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_SUPER_NERD,       MALE},
+    {OBJ_EVENT_GFX_HIKER,          FACILITY_CLASS_HIKER_2,          MALE},
+    {OBJ_EVENT_GFX_BIKER,          FACILITY_CLASS_BIKER,            MALE},
+    {OBJ_EVENT_GFX_SUPER_NERD,     FACILITY_CLASS_BURGLAR,          MALE},
+    {OBJ_EVENT_GFX_BALDING_MAN,    FACILITY_CLASS_ENGINEER,         MALE},
+    {OBJ_EVENT_GFX_FISHER,         FACILITY_CLASS_FISHERMAN_2,      MALE},
+    {OBJ_EVENT_GFX_SWIMMER_M_LAND, FACILITY_CLASS_SWIMMER_MALE_2,   MALE},
+    {OBJ_EVENT_GFX_BIKER,          FACILITY_CLASS_CUE_BALL,         MALE},
+    {OBJ_EVENT_GFX_OLD_MAN_1,      FACILITY_CLASS_GAMER,            MALE},
+    {OBJ_EVENT_GFX_BEAUTY,         FACILITY_CLASS_BEAUTY_2,         FEMALE},
+    {OBJ_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SWIMMER_FEMALE_2, FEMALE},
+    {OBJ_EVENT_GFX_BOY,            FACILITY_CLASS_PSYCHIC_3,        MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_ROCKER,           MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_JUGGLER,          MALE},
+    {OBJ_EVENT_GFX_MAN,            FACILITY_CLASS_TAMER,            MALE},
+    {OBJ_EVENT_GFX_ROCKER,         FACILITY_CLASS_BIRD_KEEPER_2,    MALE},
+    {OBJ_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_BLACK_BELT_2,     MALE},
+    {OBJ_EVENT_GFX_SCIENTIST,      FACILITY_CLASS_SCIENTIST,        MALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_M,  FACILITY_CLASS_COOLTRAINER_3,    MALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOLTRAINER_4,    FEMALE},
+    {OBJ_EVENT_GFX_GENTLEMAN,      FACILITY_CLASS_GENTLEMAN_2,      MALE},
+    {OBJ_EVENT_GFX_CHANNELER,      FACILITY_CLASS_CHANNELER,        FEMALE},
+    {OBJ_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_PSYCHIC_4,        FEMALE},
+    {OBJ_EVENT_GFX_BATTLE_GIRL,    FACILITY_CLASS_CRUSH_GIRL,       FEMALE},
+    {OBJ_EVENT_GFX_TUBER_F,        FACILITY_CLASS_TUBER_3,          FEMALE},
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_PKMN_BREEDER_3,   FEMALE},
+    {OBJ_EVENT_GFX_CAMPER,         FACILITY_CLASS_PKMN_RANGER_3,    MALE},
+    {OBJ_EVENT_GFX_PICNICKER,      FACILITY_CLASS_PKMN_RANGER_4,    FEMALE},
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_AROMA_LADY_2,     FEMALE},
+    {OBJ_EVENT_GFX_HIKER,          FACILITY_CLASS_RUIN_MANIAC_2,    MALE},
+    {OBJ_EVENT_GFX_WOMAN_2,        FACILITY_CLASS_LADY_2,           FEMALE},
+    {OBJ_EVENT_GFX_LASS,           FACILITY_CLASS_PAINTER,          FEMALE}
 };
 
 static const struct DoublesTrainerInfo sDoubleBattleTrainerInfo[] = {
-    {OBJECT_EVENT_GFX_BEAUTY,         OBJECT_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_SR_AND_JR,      FEMALE, FEMALE},
-    {OBJECT_EVENT_GFX_LITTLE_GIRL,    OBJECT_EVENT_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS,          FEMALE, FEMALE},
-    {OBJECT_EVENT_GFX_BEAUTY,         OBJECT_EVENT_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE,   FEMALE, MALE},
-    {OBJECT_EVENT_GFX_OLD_MAN_1,      OBJECT_EVENT_GFX_OLD_WOMAN,      FACILITY_CLASS_OLD_COUPLE,     MALE, FEMALE},
-    {OBJECT_EVENT_GFX_TUBER_M_2,      OBJECT_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SIS_AND_BRO,    MALE, FEMALE},
-    {OBJECT_EVENT_GFX_LITTLE_GIRL,    OBJECT_EVENT_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS_2,        FEMALE, FEMALE},
-    {OBJECT_EVENT_GFX_COOLTRAINER_M,  OBJECT_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOL_COUPLE,    MALE, FEMALE},
-    {OBJECT_EVENT_GFX_BEAUTY,         OBJECT_EVENT_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE_2, FEMALE, MALE},
-    {OBJECT_EVENT_GFX_BATTLE_GIRL,    OBJECT_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_CRUSH_KIN,      FEMALE, MALE},
-    {OBJECT_EVENT_GFX_SWIMMER_F_LAND, OBJECT_EVENT_GFX_TUBER_M_2,      FACILITY_CLASS_SIS_AND_BRO_2,  FEMALE, MALE}
+    {OBJ_EVENT_GFX_BEAUTY,         OBJ_EVENT_GFX_WOMAN_1,        FACILITY_CLASS_SR_AND_JR,      FEMALE, FEMALE},
+    {OBJ_EVENT_GFX_LITTLE_GIRL,    OBJ_EVENT_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS,          FEMALE, FEMALE},
+    {OBJ_EVENT_GFX_BEAUTY,         OBJ_EVENT_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE,   FEMALE, MALE},
+    {OBJ_EVENT_GFX_OLD_MAN_1,      OBJ_EVENT_GFX_OLD_WOMAN,      FACILITY_CLASS_OLD_COUPLE,     MALE, FEMALE},
+    {OBJ_EVENT_GFX_TUBER_M_2,      OBJ_EVENT_GFX_SWIMMER_F_LAND, FACILITY_CLASS_SIS_AND_BRO,    MALE, FEMALE},
+    {OBJ_EVENT_GFX_LITTLE_GIRL,    OBJ_EVENT_GFX_LITTLE_GIRL,    FACILITY_CLASS_TWINS_2,        FEMALE, FEMALE},
+    {OBJ_EVENT_GFX_COOLTRAINER_M,  OBJ_EVENT_GFX_COOLTRAINER_F,  FACILITY_CLASS_COOL_COUPLE,    MALE, FEMALE},
+    {OBJ_EVENT_GFX_BEAUTY,         OBJ_EVENT_GFX_MAN,            FACILITY_CLASS_YOUNG_COUPLE_2, FEMALE, MALE},
+    {OBJ_EVENT_GFX_BATTLE_GIRL,    OBJ_EVENT_GFX_BLACKBELT,      FACILITY_CLASS_CRUSH_KIN,      FEMALE, MALE},
+    {OBJ_EVENT_GFX_SWIMMER_F_LAND, OBJ_EVENT_GFX_TUBER_M_2,      FACILITY_CLASS_SIS_AND_BRO_2,  FEMALE, MALE}
 };
 
 static const struct TrainerEncounterMusicPairs sTrainerEncounterMusicLUT[105] = {
@@ -319,51 +318,52 @@ static const struct TrainerEncounterMusicPairs sTrainerEncounterMusicLUT[105] = 
     {FACILITY_CLASS_ELITE_FOUR_2,     TRAINER_ENCOUNTER_MUSIC_MALE}
 };
 
-static const struct WindowTemplate gUnknown_847A218[] = {
+static const struct WindowTemplate sTimeBoardWindowTemplate[] = {
     {0, 3, 1, 27, 18, 15, 0x001},
     DUMMY_WIN_TEMPLATE
 };
 
-static const u32 gUnknown_847A228 = 0x70;  // unused
+static const u32 sUnused_847A228 = 0x70;
 
-static const u8 gUnknown_847A22C[3] = {0, 2, 3};
+static const u8 sTextColors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY};
 
-static void (*const gUnknown_847A230[])(void) = {
-    sub_815DD44,
-    sub_815DF54,
-    sub_815E160,
-    sub_815E1C0,
-    sub_815E1F0,
-    TTSpecial_HasReachedTheRoof,
-    sub_815E28C,
-    sub_815E394,
-    sub_815E408,
-    sub_815E4B0,
-    TTSpecial_StartTimer,
-    sub_815E5C4,
-    sub_815E5F0,
-    sub_815E658,
-    sub_815E720,
-    sub_815E88C,
-    sub_815E8B4,
-    sub_815E8CC,
-    sub_815E908,
-    sub_815E948,
-    sub_815E9C8
+static void (*const sTrainerTowerFunctions[])(void) = {
+    [TRAINER_TOWER_FUNC_INIT_FLOOR]             = InitTrainerTowerFloor,
+    [TRAINER_TOWER_FUNC_GET_SPEECH]             = BufferTowerOpponentSpeech,
+    [TRAINER_TOWER_FUNC_DO_BATTLE]              = DoTrainerTowerBattle,
+    [TRAINER_TOWER_FUNC_GET_CHALLENGE_TYPE]     = TrainerTowerGetChallengeType,
+    [TRAINER_TOWER_FUNC_CLEARED_FLOOR]          = TrainerTowerAddFloorCleared,
+    [TRAINER_TOWER_FUNC_GET_FLOOR_CLEARED]      = GetFloorAlreadyCleared,
+    [TRAINER_TOWER_FUNC_START_CHALLENGE]        = StartTrainerTowerChallenge,
+    [TRAINER_TOWER_FUNC_GET_OWNER_STATE]        = GetOwnerState,
+    [TRAINER_TOWER_FUNC_GIVE_PRIZE]             = GiveChallengePrize,
+    [TRAINER_TOWER_FUNC_CHECK_FINAL_TIME]       = CheckFinalTime,
+    [TRAINER_TOWER_FUNC_RESUME_TIMER]           = TrainerTowerResumeTimer,
+    [TRAINER_TOWER_FUNC_SET_LOST]               = TrainerTowerSetPlayerLost,
+    [TRAINER_TOWER_FUNC_GET_CHALLENGE_STATUS]   = GetTrainerTowerChallengeStatus,
+    [TRAINER_TOWER_FUNC_GET_TIME]               = GetCurrentTime,
+    [TRAINER_TOWER_FUNC_SHOW_RESULTS]           = ShowResultsBoard,
+    [TRAINER_TOWER_FUNC_CLOSE_RESULTS]          = CloseResultsBoard,
+    [TRAINER_TOWER_FUNC_CHECK_DOUBLES]          = TrainerTowerGetDoublesEligiblity,
+    [TRAINER_TOWER_FUNC_GET_NUM_FLOORS]         = TrainerTowerGetNumFloors,
+    [TRAINER_TOWER_FUNC_SHOULD_WARP_TO_COUNTER] = ShouldWarpToCounter,
+    [TRAINER_TOWER_FUNC_ENCOUNTER_MUSIC]        = PlayTrainerTowerEncounterMusic,
+    [TRAINER_TOWER_FUNC_GET_BEAT_CHALLENGE]     = HasSpokenToOwner
 };
 
-static const u16 sFloorLayouts[8][3] = {
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F, LAYOUT_UNUSED_LAYOUT_834BC2C, LAYOUT_UNUSED_LAYOUT_834D06C},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_2F, LAYOUT_UNUSED_LAYOUT_834BEB4, LAYOUT_UNUSED_LAYOUT_834D2F4},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_3F, LAYOUT_UNUSED_LAYOUT_834C13C, LAYOUT_UNUSED_LAYOUT_834D57C},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_4F, LAYOUT_UNUSED_LAYOUT_834C3C4, LAYOUT_UNUSED_LAYOUT_834D804},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_5F, LAYOUT_UNUSED_LAYOUT_834C64C, LAYOUT_UNUSED_LAYOUT_834DA8C},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_6F, LAYOUT_UNUSED_LAYOUT_834C8D4, LAYOUT_UNUSED_LAYOUT_834DD14},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_7F, LAYOUT_UNUSED_LAYOUT_834CB5C, LAYOUT_UNUSED_LAYOUT_834DF9C},
-    {LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_8F, LAYOUT_UNUSED_LAYOUT_834CDE4, LAYOUT_UNUSED_LAYOUT_834E224}
+// - 1 excludes Mixed challenge, which just uses one of the 3 other types
+static const u16 sFloorLayouts[MAX_TRAINER_TOWER_FLOORS][NUM_TOWER_CHALLENGE_TYPES - 1] = {
+    {LAYOUT_TRAINER_TOWER_1F, LAYOUT_TRAINER_TOWER_1F_DOUBLES, LAYOUT_TRAINER_TOWER_1F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_2F, LAYOUT_TRAINER_TOWER_2F_DOUBLES, LAYOUT_TRAINER_TOWER_2F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_3F, LAYOUT_TRAINER_TOWER_3F_DOUBLES, LAYOUT_TRAINER_TOWER_3F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_4F, LAYOUT_TRAINER_TOWER_4F_DOUBLES, LAYOUT_TRAINER_TOWER_4F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_5F, LAYOUT_TRAINER_TOWER_5F_DOUBLES, LAYOUT_TRAINER_TOWER_5F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_6F, LAYOUT_TRAINER_TOWER_6F_DOUBLES, LAYOUT_TRAINER_TOWER_6F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_7F, LAYOUT_TRAINER_TOWER_7F_DOUBLES, LAYOUT_TRAINER_TOWER_7F_KNOCKOUT},
+    {LAYOUT_TRAINER_TOWER_8F, LAYOUT_TRAINER_TOWER_8F_DOUBLES, LAYOUT_TRAINER_TOWER_8F_KNOCKOUT}
 };
 
-static const u16 gUnknown_847A2B4[] = {
+static const u16 sPrizeList[] = {
     ITEM_HP_UP,
     ITEM_PROTEIN,
     ITEM_IRON,
@@ -381,21 +381,21 @@ static const u16 gUnknown_847A2B4[] = {
     ITEM_UP_GRADE
 };
 
-static const u16 gUnknown_847A2D2[] = {
-    MUS_SHOUNEN,
-    MUS_SHOUJO,
-    MUS_SHOUJO,
-    MUS_ROCKET,
-    MUS_SHOUNEN,
-    MUS_SHOUNEN,
-    MUS_ROCKET,
-    MUS_ROCKET,
-    MUS_SHOUNEN,
-    MUS_SHOUJO,
-    MUS_SHOUNEN,
-    MUS_SHOUNEN,
-    MUS_SHOUNEN,
-    MUS_SHOUNEN
+static const u16 sTrainerTowerEncounterMusic[] = {
+    [TRAINER_ENCOUNTER_MUSIC_MALE]        = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_FEMALE]      = MUS_SHOUJO,
+    [TRAINER_ENCOUNTER_MUSIC_GIRL]        = MUS_SHOUJO,
+    [TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS]  = MUS_ROCKET,
+    [TRAINER_ENCOUNTER_MUSIC_INTENSE]     = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_COOL]        = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_AQUA]        = MUS_ROCKET,
+    [TRAINER_ENCOUNTER_MUSIC_MAGMA]       = MUS_ROCKET,
+    [TRAINER_ENCOUNTER_MUSIC_SWIMMER]     = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_TWINS]       = MUS_SHOUJO,
+    [TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR]  = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_HIKER]       = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_INTERVIEWER] = MUS_SHOUNEN,
+    [TRAINER_ENCOUNTER_MUSIC_RICH]        = MUS_SHOUNEN
 };
 
 static const u8 sSingleBattleChallengeMonIdxs[][2] = {
@@ -431,22 +431,22 @@ static const u8 sKnockoutChallengeMonIdxs[][3] = {
     {0x01, 0x04, 0x05}
 };
 
-extern const struct EReaderTrainerHillSetSubstruct gUnknown_84827AC;
-extern const struct TrainerTowerFloor *const gUnknown_84827B4[][8];
+extern const struct EReaderTrainerTowerSetSubstruct gUnknown_84827AC;
+extern const struct TrainerTowerFloor *const gUnknown_84827B4[][MAX_TRAINER_TOWER_FLOORS];
 
-void sub_815D9E8(void)
+void CallTrainerTowerFunc(void)
 {
-    sub_815DC8C();
-    gUnknown_847A230[gSpecialVar_0x8004]();
-    sub_815DD2C();
+    SetUpTrainerTowerDataStruct();
+    sTrainerTowerFunctions[gSpecialVar_0x8004]();
+    FreeTrainerTowerDataStruct();
 }
 
-u8 sub_815DA10(void)
+u8 GetTrainerTowerOpponentClass(void)
 {
     return gFacilityClassToTrainerClass[sTrainerTowerOpponent->facilityClass];
 }
 
-void sub_815DA28(u8 *dest)
+void GetTrainerTowerOpponentName(u8 *dest)
 {
     StringCopyN(dest, sTrainerTowerOpponent->name, 11);
 }
@@ -458,41 +458,39 @@ u8 GetTrainerTowerTrainerFrontSpriteId(void)
 
 void InitTrainerTowerBattleStruct(void)
 {
-    u16 r10;
-    s32 r9;
+    u16 trainerId;
+    int i;
 
-    sub_815DC8C();
+    SetUpTrainerTowerDataStruct();
     sTrainerTowerOpponent = AllocZeroed(sizeof(*sTrainerTowerOpponent));
-    r10 = VarGet(VAR_TEMP_1);
-    StringCopyN(sTrainerTowerOpponent->name, sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].name, 11);
+    trainerId = VarGet(VAR_TEMP_1);
+    StringCopyN(sTrainerTowerOpponent->name, CURR_FLOOR.trainers[trainerId].name, 11);
 
-    for (r9 = 0; r9 < 6; r9++)
+    for (i = 0; i < 6; i++)
     {
-        sTrainerTowerOpponent->speechWin[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].speechWin[r9];
-        sTrainerTowerOpponent->speechLose[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].speechLose[r9];
+        sTrainerTowerOpponent->speechWin[i] = CURR_FLOOR.trainers[trainerId].speechWin[i];
+        sTrainerTowerOpponent->speechLose[i] = CURR_FLOOR.trainers[trainerId].speechLose[i];
 
-        if (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType == 1)
+        if (CURR_FLOOR.challengeType == CHALLENGE_TYPE_DOUBLE)
         {
-            sTrainerTowerOpponent->speechWin2[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10 + 1].speechWin[r9];
-            sTrainerTowerOpponent->speechLose2[r9] = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10 + 1].speechLose[r9];
+            sTrainerTowerOpponent->speechWin2[i] = CURR_FLOOR.trainers[trainerId + 1].speechWin[i];
+            sTrainerTowerOpponent->speechLose2[i] = CURR_FLOOR.trainers[trainerId + 1].speechLose[i];
         }
     }
 
-    sTrainerTowerOpponent->battleType = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
-    sTrainerTowerOpponent->facilityClass = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].facilityClass;
-    sTrainerTowerOpponent->gender = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r10].gender;
-    SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
-    sub_815DD2C();
+    sTrainerTowerOpponent->battleType = CURR_FLOOR.challengeType;
+    sTrainerTowerOpponent->facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
+    sTrainerTowerOpponent->gender = CURR_FLOOR.trainers[trainerId].gender;
+    SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
+    FreeTrainerTowerDataStruct();
 }
 
 void FreeTrainerTowerBattleStruct(void)
 {
-    Free(sTrainerTowerOpponent);
-    sTrainerTowerOpponent = NULL;
+    FREE_AND_SET_NULL(sTrainerTowerOpponent);
 }
 
-void sub_815DBF4(u8 *dest, u8 opponentIdx)
-// TTower_GetBeforeBattleMessage?
+void GetTrainerTowerOpponentWinText(u8 *dest, u8 opponentIdx)
 {
     VarSet(VAR_TEMP_3, opponentIdx);
     TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
@@ -502,8 +500,7 @@ void sub_815DBF4(u8 *dest, u8 opponentIdx)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechWin2, dest);
 }
 
-void sub_815DC40(u8 *dest, u8 opponentIdx)
-// TTower_GetAfterBattleMessage?
+void GetTrainerTowerOpponentLoseText(u8 *dest, u8 opponentIdx)
 {
     VarSet(VAR_TEMP_3, opponentIdx);
     TrainerTowerGetOpponentTextColor(sTrainerTowerOpponent->battleType, sTrainerTowerOpponent->facilityClass);
@@ -513,23 +510,23 @@ void sub_815DC40(u8 *dest, u8 opponentIdx)
         TT_ConvertEasyChatMessageToString(sTrainerTowerOpponent->speechLose2, dest);
 }
 
-static void sub_815DC8C(void) // fakematching
+static void SetUpTrainerTowerDataStruct(void) // fakematching
 {
-    u32 whichTimer = gSaveBlock1Ptr->unkArrayIdx;
+    u32 challengeType = gSaveBlock1Ptr->towerChallengeId;
     s32 r4;
     const struct TrainerTowerFloor *const * r7;
 
     sTrainerTowerState = AllocZeroed(sizeof(*sTrainerTowerState));
     sTrainerTowerState->floorIdx = gMapHeader.mapLayoutId - 42;
-    if (sub_815D834() == TRUE)
+    if (ReadTrainerTowerAndValidate() == TRUE)
         CEReaderTool_LoadTrainerTower(&sTrainerTowerState->unk_0004);
     else
     {
         struct UnkStruct_203F458 * r0_ = sTrainerTowerState;
-        const struct EReaderTrainerHillSetSubstruct * r1 = &gUnknown_84827AC;
-        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerHillSetSubstruct));
-        r7 = gUnknown_84827B4[whichTimer];
-        for (r4 = 0; r4 < 8; r4++)
+        const struct EReaderTrainerTowerSetSubstruct * r1 = &gUnknown_84827AC;
+        memcpy(&r0_->unk_0004, r1, sizeof(struct EReaderTrainerTowerSetSubstruct));
+        r7 = gUnknown_84827B4[challengeType];
+        for (r4 = 0; r4 < MAX_TRAINER_TOWER_FLOORS; r4++)
         {
         #ifndef NONMATCHING
             void * r5;
@@ -547,22 +544,21 @@ static void sub_815DC8C(void) // fakematching
     }
 }
 
-static void sub_815DD2C(void)
+static void FreeTrainerTowerDataStruct(void)
 {
-    Free(sTrainerTowerState);
-    sTrainerTowerState = NULL;
+    FREE_AND_SET_NULL(sTrainerTowerState);
 }
 
-static void sub_815DD44(void)
+static void InitTrainerTowerFloor(void)
 {
-    if (gMapHeader.mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.count)
+    if (gMapHeader.mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY > sTrainerTowerState->unk_0004.numFloors)
     {
-        gSpecialVar_Result = 3;
-        SetCurrentMapLayout(LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_ROOF);
+        gSpecialVar_Result = 3; // Skip past usable challenge types
+        SetCurrentMapLayout(LAYOUT_TRAINER_TOWER_ROOF);
     }
     else
     {
-        gSpecialVar_Result = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
+        gSpecialVar_Result = CURR_FLOOR.challengeType;
         SetCurrentMapLayout(sFloorLayouts[sTrainerTowerState->floorIdx][gSpecialVar_Result]);
         SetTrainerTowerNPCGraphics();
     }
@@ -570,66 +566,70 @@ static void sub_815DD44(void)
 
 static void SetTrainerTowerNPCGraphics(void)
 {
-    s32 r3, r4;
-    u8 r1, r2, r4_;
-    switch (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType)
+    s32 i, j;
+    u8 trainerGfx1, trainerGfx2, facilityClass;
+    switch (CURR_FLOOR.challengeType)
     {
-    case 0:
-        r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].facilityClass;
-        for (r3 = 0; r3 < NELEMS(sSingleBattleTrainerInfo); r3++)
+    case CHALLENGE_TYPE_SINGLE:
+        facilityClass = CURR_FLOOR.trainers[0].facilityClass;
+        for (i = 0; i < NELEMS(sSingleBattleTrainerInfo); i++)
         {
-            if (sSingleBattleTrainerInfo[r3].facilityClass == r2)
+            if (sSingleBattleTrainerInfo[i].facilityClass == facilityClass)
                 break;
         }
-        if (r3 != NELEMS(sSingleBattleTrainerInfo))
-            r1 = sSingleBattleTrainerInfo[r3].mapObjGfx;
+
+        if (i != NELEMS(sSingleBattleTrainerInfo))
+            trainerGfx1 = sSingleBattleTrainerInfo[i].objGfx;
         else
-            r1 = 18;
-        VarSet(VAR_OBJ_GFX_ID_1, r1);
+            trainerGfx1 = OBJ_EVENT_GFX_YOUNGSTER;
+
+        VarSet(VAR_OBJ_GFX_ID_1, trainerGfx1);
         break;
-    case 1:
-        r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].facilityClass;
-        for (r3 = 0; r3 < NELEMS(sDoubleBattleTrainerInfo); r3++)
+    case CHALLENGE_TYPE_DOUBLE:
+        facilityClass = CURR_FLOOR.trainers[0].facilityClass;
+        for (i = 0; i < NELEMS(sDoubleBattleTrainerInfo); i++)
         {
-            if (sDoubleBattleTrainerInfo[r3].facilityClass == r2)
+            if (sDoubleBattleTrainerInfo[i].facilityClass == facilityClass)
                 break;
         }
-        if (r3 != NELEMS(sDoubleBattleTrainerInfo))
+        if (i != NELEMS(sDoubleBattleTrainerInfo))
         {
-            r1  = sDoubleBattleTrainerInfo[r3].mapObjGfx1;
-            r4_ = sDoubleBattleTrainerInfo[r3].mapObjGfx2;
+            trainerGfx1  = sDoubleBattleTrainerInfo[i].objGfx1;
+            trainerGfx2 = sDoubleBattleTrainerInfo[i].objGfx2;
         }
         else
         {
-            r1  = OBJECT_EVENT_GFX_YOUNGSTER;
-            r4_ = OBJECT_EVENT_GFX_YOUNGSTER;
+            trainerGfx1  = OBJ_EVENT_GFX_YOUNGSTER;
+            trainerGfx2 = OBJ_EVENT_GFX_YOUNGSTER;
         }
-        VarSet(VAR_OBJ_GFX_ID_0, r1);
-        VarSet(VAR_OBJ_GFX_ID_3, r4_);
+        VarSet(VAR_OBJ_GFX_ID_0, trainerGfx1);
+        VarSet(VAR_OBJ_GFX_ID_3, trainerGfx2);
         break;
-    case 2:
-        for (r4 = 0; r4 < 3; r4++)
+    case CHALLENGE_TYPE_KNOCKOUT:
+        for (j = 0; j < MAX_TRAINERS_PER_FLOOR; j++)
         {
-            r2 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].facilityClass;
-            for (r3 = 0; r3 < NELEMS(sSingleBattleTrainerInfo); r3++)
+            facilityClass = CURR_FLOOR.trainers[j].facilityClass;
+            for (i = 0; i < NELEMS(sSingleBattleTrainerInfo); i++)
             {
-                if (sSingleBattleTrainerInfo[r3].facilityClass == r2)
+                if (sSingleBattleTrainerInfo[i].facilityClass == facilityClass)
                     break;
             }
-            if (r3 != NELEMS(sSingleBattleTrainerInfo))
-                r1 = sSingleBattleTrainerInfo[r3].mapObjGfx;
+
+            if (i != NELEMS(sSingleBattleTrainerInfo))
+                trainerGfx1 = sSingleBattleTrainerInfo[i].objGfx;
             else
-                r1 = OBJECT_EVENT_GFX_YOUNGSTER;
-            switch (r4)
+                trainerGfx1 = OBJ_EVENT_GFX_YOUNGSTER;
+
+            switch (j)
             {
             case 0:
-                VarSet(VAR_OBJ_GFX_ID_2, r1);
+                VarSet(VAR_OBJ_GFX_ID_2, trainerGfx1);
                 break;
             case 1:
-                VarSet(VAR_OBJ_GFX_ID_0, r1);
+                VarSet(VAR_OBJ_GFX_ID_0, trainerGfx1);
                 break;
             case 2:
-                VarSet(VAR_OBJ_GFX_ID_1, r1);
+                VarSet(VAR_OBJ_GFX_ID_1, trainerGfx1);
                 break;
             }
         }
@@ -652,207 +652,224 @@ static void TT_ConvertEasyChatMessageToString(u16 *ecWords, u8 *dest)
     }
 }
 
-static void sub_815DF54(void)
+static void BufferTowerOpponentSpeech(void)
 {
-    u16 r4 = gSpecialVar_0x8006;
-    u8 r1;
-    u8 r5 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
+    u16 trainerId = gSpecialVar_0x8006;
+    u8 facilityClass;
+    u8 challengeType = CURR_FLOOR.challengeType;
     
-    if (r5 != 1)
-        r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].facilityClass;
+    if (challengeType != CHALLENGE_TYPE_DOUBLE)
+        facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
     else
-        r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].facilityClass;
+        facilityClass = CURR_FLOOR.trainers[0].facilityClass;
+
     switch (gSpecialVar_0x8005)
     {
-    case 2:
-        TrainerTowerGetOpponentTextColor(r5, r1);
-        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechBefore, gStringVar4);
+    case TRAINER_TOWER_TEXT_INTRO:
+        TrainerTowerGetOpponentTextColor(challengeType, facilityClass);
+        TT_ConvertEasyChatMessageToString(CURR_FLOOR.trainers[trainerId].speechBefore, gStringVar4);
         break;
-    case 3:
-        TrainerTowerGetOpponentTextColor(r5, r1);
-        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechWin, gStringVar4);
+    case TRAINER_TOWER_TEXT_PLAYER_LOST:
+        TrainerTowerGetOpponentTextColor(challengeType, facilityClass);
+        TT_ConvertEasyChatMessageToString(CURR_FLOOR.trainers[trainerId].speechWin, gStringVar4);
         break;
-    case 4:
-        TrainerTowerGetOpponentTextColor(r5, r1);
-        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechLose, gStringVar4);
+    case TRAINER_TOWER_TEXT_PLAYER_WON:
+        TrainerTowerGetOpponentTextColor(challengeType, facilityClass);
+        TT_ConvertEasyChatMessageToString(CURR_FLOOR.trainers[trainerId].speechLose, gStringVar4);
         break;
-    case 5:
-        TT_ConvertEasyChatMessageToString(sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[r4].speechAfter, gStringVar4);
+    case TRAINER_TOWER_TEXT_AFTER:
+        TT_ConvertEasyChatMessageToString(CURR_FLOOR.trainers[trainerId].speechAfter, gStringVar4);
         break;
     }
 }
 
-static void TrainerTowerGetOpponentTextColor(u8 battleType, u8 facilityClass)
+static void TrainerTowerGetOpponentTextColor(u8 challengeType, u8 facilityClass)
 {
-    u16 r5 = FALSE;
-    s32 r4;
-    switch (battleType)
+    u16 gender = MALE;
+    int i;
+    switch (challengeType)
     {
-    case 0:
-    case 2:
-        for (r4 = 0; r4 < NELEMS(sSingleBattleTrainerInfo); r4++)
+    case CHALLENGE_TYPE_SINGLE:
+    case CHALLENGE_TYPE_KNOCKOUT:
+        for (i = 0; i < NELEMS(sSingleBattleTrainerInfo); i++)
         {
-            if (sSingleBattleTrainerInfo[r4].facilityClass == facilityClass)
+            if (sSingleBattleTrainerInfo[i].facilityClass == facilityClass)
                 break;
         }
-        if (r4 != NELEMS(sSingleBattleTrainerInfo))
-            r5 = sSingleBattleTrainerInfo[r4].gender;
+        if (i != NELEMS(sSingleBattleTrainerInfo))
+            gender = sSingleBattleTrainerInfo[i].gender;
         break;
-    case 1:
-        for (r4 = 0; r4 < NELEMS(sDoubleBattleTrainerInfo); r4++)
+    case CHALLENGE_TYPE_DOUBLE:
+        for (i = 0; i < NELEMS(sDoubleBattleTrainerInfo); i++)
         {
-            if (sDoubleBattleTrainerInfo[r4].facilityClass == facilityClass)
+            if (sDoubleBattleTrainerInfo[i].facilityClass == facilityClass)
                 break;
         }
-        if (r4 != NELEMS(sDoubleBattleTrainerInfo))
+        if (i != NELEMS(sDoubleBattleTrainerInfo))
         {
             if (VarGet(VAR_TEMP_3))
-                r5 = sDoubleBattleTrainerInfo[r4].gender2;
+                gender = sDoubleBattleTrainerInfo[i].gender2;
             else
-                r5 = sDoubleBattleTrainerInfo[r4].gender1;
+                gender = sDoubleBattleTrainerInfo[i].gender1;
         }
         break;
     }
     gSpecialVar_PrevTextColor = gSpecialVar_TextColor;
-    gSpecialVar_TextColor = r5;
+    gSpecialVar_TextColor = gender;
 }
 
-static void sub_815E114(void)
+static void CB2_EndTrainerTowerBattle(void)
 {
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-static void sub_815E124(u8 taskId)
+static void Task_DoTrainerTowerBattle(u8 taskId)
 {
     if (BT_IsDone() == TRUE)
     {
-        gMain.savedCallback = sub_815E114;
+        gMain.savedCallback = CB2_EndTrainerTowerBattle;
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_InitBattle);
         DestroyTask(taskId);
     }
 }
 
-static void sub_815E160(void)
+static void DoTrainerTowerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_TRAINER_TOWER;
-    if (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType == 1)
+
+    if (CURR_FLOOR.challengeType == CHALLENGE_TYPE_DOUBLE)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
+
     gTrainerBattleOpponent_A = 0;
     BuildEnemyParty();
-    CreateTask(sub_815E124, 1);
+    CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);
     BT_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
 }
 
-static void sub_815E1C0(void)
+static void TrainerTowerGetChallengeType(void)
 {
     if (!gSpecialVar_0x8005)
-        gSpecialVar_Result = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType;
+        gSpecialVar_Result = CURR_FLOOR.challengeType;
 }
 
-static void sub_815E1F0(void)
+static void TrainerTowerAddFloorCleared(void)
 {
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8++;
+    TRAINER_TOWER.floorsCleared++;
 }
 
-static void TTSpecial_HasReachedTheRoof(void)
+// So the player can safely go back through defeated floors to use the Poke Center (or exit challenge)
+static void GetFloorAlreadyCleared(void)
 {
     u16 mapLayoutId = gMapHeader.mapLayoutId;
-    if (mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_1F == gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 && mapLayoutId - LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY <= sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].floorIdx)
+    if (mapLayoutId - LAYOUT_TRAINER_TOWER_1F == TRAINER_TOWER.floorsCleared 
+     && mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY <= CURR_FLOOR.floorIdx)
         gSpecialVar_Result = FALSE;
     else
         gSpecialVar_Result = TRUE;
 }
 
-static void sub_815E28C(void)
+static void StartTrainerTowerChallenge(void)
 {
-    gSaveBlock1Ptr->unkArrayIdx = gSpecialVar_0x8005;
-    if (gSaveBlock1Ptr->unkArrayIdx >= NELEMS(gSaveBlock1Ptr->unkArray))
-        gSaveBlock1Ptr->unkArrayIdx = 0;
+    gSaveBlock1Ptr->towerChallengeId = gSpecialVar_0x8005;
+    if (gSaveBlock1Ptr->towerChallengeId >= NUM_TOWER_CHALLENGE_TYPES)
+        gSaveBlock1Ptr->towerChallengeId = 0;
     ValidateOrResetCurTrainerTowerRecord();
-    if (!sub_815D834())
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_5 = TRUE;
+    if (!ReadTrainerTowerAndValidate())
+        TRAINER_TOWER.validated = TRUE;
     else
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_5 = FALSE;
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8 = 0;
-    SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 0;
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2 = FALSE;
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = FALSE;
+        TRAINER_TOWER.validated = FALSE;
+    TRAINER_TOWER.floorsCleared = 0;
+    SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
+    TRAINER_TOWER.timer = 0;
+    TRAINER_TOWER.spokeToOwner = FALSE;
+    TRAINER_TOWER.checkedFinalTime = FALSE;
 }
 
-static void sub_815E394(void)
+static void GetOwnerState(void)
 {
     DisableVBlankCounter1();
     gSpecialVar_Result = 0;
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
+
+    if (TRAINER_TOWER.spokeToOwner)
         gSpecialVar_Result++;
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 && gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1)
+    if (TRAINER_TOWER.receivedPrize && TRAINER_TOWER.checkedFinalTime)
         gSpecialVar_Result++;
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2 = TRUE;
+
+    TRAINER_TOWER.spokeToOwner = TRUE;
 }
 
-static void sub_815E408(void)
+static void GiveChallengePrize(void)
 {
-    u16 itemId = gUnknown_847A2B4[sTrainerTowerState->unk_0004.floors->prize];
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0)
+    u16 itemId = sPrizeList[sTrainerTowerState->unk_0004.floors->prize];
+
+    if (TRAINER_TOWER.receivedPrize)
+    {
         gSpecialVar_Result = 2;
-    else if (AddBagItem(itemId, 1) == 1)
+    }
+    else if (AddBagItem(itemId, 1) == TRUE)
     {
         CopyItemName(itemId, gStringVar2);
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = TRUE;
+        TRAINER_TOWER.receivedPrize = TRUE;
         gSpecialVar_Result = 0;
     }
     else
+    {
         gSpecialVar_Result = 1;
+    }
 }
 
-static void sub_815E4B0(void)
+static void CheckFinalTime(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1)
+    if (TRAINER_TOWER.checkedFinalTime)
+    {
         gSpecialVar_Result = 2;
-    else if (GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4) > gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0)
+    }
+    else if (GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime) > TRAINER_TOWER.timer)
     {
-        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+        SetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime, TRAINER_TOWER.timer);
         gSpecialVar_Result = 0;
     }
     else
+    {
         gSpecialVar_Result = 1;
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_1 = TRUE;
+    }
+
+    TRAINER_TOWER.checkedFinalTime = TRUE;
 }
 
-static void TTSpecial_StartTimer(void)
+static void TrainerTowerResumeTimer(void)
 {
-    if (!gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2)
+    if (!TRAINER_TOWER.spokeToOwner)
     {
-        if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 >= 215999)
-            gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 215999;
+        if (TRAINER_TOWER.timer >= TRAINER_TOWER_MAX_TIME)
+            TRAINER_TOWER.timer = TRAINER_TOWER_MAX_TIME;
         else
-            SetVBlankCounter1Ptr(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+            SetVBlankCounter1Ptr(&TRAINER_TOWER.timer);
     }
 }
 
-static void sub_815E5C4(void)
+static void TrainerTowerSetPlayerLost(void)
 {
-    gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = 1;
+    TRAINER_TOWER.hasLost = TRUE;
 }
 
-static void sub_815E5F0(void)
+static void GetTrainerTowerChallengeStatus(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3)
+    if (TRAINER_TOWER.hasLost)
     {
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_3 = FALSE;
-        gSpecialVar_Result = 0;
+        TRAINER_TOWER.hasLost = FALSE;
+        gSpecialVar_Result = CHALLENGE_STATUS_LOST;
     }
-    else if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_4)
+    else if (TRAINER_TOWER.unkA_4)
     {
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_4 = FALSE;
-        gSpecialVar_Result = 1;
+        TRAINER_TOWER.unkA_4 = FALSE;
+        gSpecialVar_Result = CHALLENGE_STATUS_UNK;
     }
     else
     {
-        gSpecialVar_Result = 2;
+        gSpecialVar_Result = CHALLENGE_STATUS_NORMAL;
     }
 }
 
@@ -861,8 +878,8 @@ static void sub_815E5F0(void)
                                                                                            \
     frames = (src);                                                                        \
                                                                                            \
-    minutes = frames / 3600;                                                               \
-    frames %= 3600;                                                                        \
+    minutes = frames / (60 * 60);                                                          \
+    frames %= (60 * 60);                                                                   \
     seconds = frames / 60;                                                                 \
     frames %= 60;                                                                          \
     centiseconds = frames * 168 / 100;                                                     \
@@ -872,34 +889,34 @@ static void sub_815E5F0(void)
     ConvertIntToDecimalStringN(gStringVar3, centiseconds, STR_CONV_MODE_LEADING_ZEROS, 2); \
 })
 
-static void sub_815E658(void)
+static void GetCurrentTime(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 >= 215999)
+    if (TRAINER_TOWER.timer >= TRAINER_TOWER_MAX_TIME)
     {
         DisableVBlankCounter1();
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0 = 215999;
+        TRAINER_TOWER.timer = TRAINER_TOWER_MAX_TIME;
     }
 
-    PRINT_TOWER_TIME(gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk0);
+    PRINT_TOWER_TIME(TRAINER_TOWER.timer);
 }
 
-static void sub_815E720(void)
+static void ShowResultsBoard(void)
 {
     u8 windowId;
     s32 i;
 
     ValidateOrResetCurTrainerTowerRecord();
-    windowId = AddWindow(gUnknown_847A218);
+    windowId = AddWindow(sTimeBoardWindowTemplate);
     LoadStdWindowFrameGfx();
     DrawStdWindowFrame(windowId, FALSE);
-    AddTextPrinterParameterized(windowId, 2, gUnknown_83FE982, 0x4A, 0, 0xFF, NULL);
+    AddTextPrinterParameterized(windowId, 2, gText_TimeBoard, 0x4A, 0, 0xFF, NULL);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
-        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4));
+        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime));
 
-        StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
-        AddTextPrinterParameterized(windowId, 2, gUnknown_83FE9C4[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
+        StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
+        AddTextPrinterParameterized(windowId, 2, gTrainerTowerChallengeTypeTexts[i - 1], 0x18, 0x24 + 0x14 * i, 0xFF, NULL);
         AddTextPrinterParameterized(windowId, 2, gStringVar4, 0x60, 0x2E + 0x14 * i, 0xFF, NULL);
     }
 
@@ -908,23 +925,24 @@ static void sub_815E720(void)
     VarSet(VAR_TEMP_1, windowId);
 }
 
-static void sub_815E88C(void)
+static void CloseResultsBoard(void)
 {
     u8 windowId = VarGet(VAR_TEMP_1);
     ClearStdWindowAndFrameToTransparent(windowId, TRUE);
     RemoveWindow(windowId);
 }
 
-static void sub_815E8B4(void)
+static void TrainerTowerGetDoublesEligiblity(void)
 {
     gSpecialVar_Result = GetMonsStateToDoubles();
 }
 
-static void sub_815E8CC(void)
+
+static void TrainerTowerGetNumFloors(void)
 {
-    if (sTrainerTowerState->unk_0004.count != sTrainerTowerState->unk_0004.floors[0].floorIdx)
+    if (sTrainerTowerState->unk_0004.numFloors != sTrainerTowerState->unk_0004.floors[0].floorIdx)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->unk_0004.count, STR_CONV_MODE_LEFT_ALIGN, 1);
+        ConvertIntToDecimalStringN(gStringVar1, sTrainerTowerState->unk_0004.numFloors, STR_CONV_MODE_LEFT_ALIGN, 1);
         gSpecialVar_Result = TRUE;
     }
     else
@@ -933,79 +951,78 @@ static void sub_815E8CC(void)
     }
 }
 
-static void sub_815E908(void)
+// Dummied? equivalent to gSpecialVar_Result = FALSE
+// If it were to return TRUE the player would be warped back to the lobby
+static void ShouldWarpToCounter(void)
 {
-    if (gMapHeader.mapLayoutId == LAYOUT_SEVEN_ISLAND_TRAINER_TOWER_LOBBY && VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 0)
-    {
+    if (gMapHeader.mapLayoutId == LAYOUT_TRAINER_TOWER_LOBBY && VarGet(VAR_MAP_SCENE_TRAINER_TOWER) == 0)
         gSpecialVar_Result = FALSE;
-    }
     else
-    {
         gSpecialVar_Result = FALSE;
-    }
 }
 
-static void sub_815E948(void)
+static void PlayTrainerTowerEncounterMusic(void)
 {
     s32 i;
-    u16 var_4001 = VarGet(VAR_TEMP_1);
-    u8 r1 = sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[var_4001].facilityClass;
+    u16 idx = VarGet(VAR_TEMP_1);
+    u8 facilityClass = CURR_FLOOR.trainers[idx].facilityClass;
 
     for (i = 0; i < NELEMS(sTrainerEncounterMusicLUT); i++)
     {
-        if (sTrainerEncounterMusicLUT[i].unk0 == gFacilityClassToTrainerClass[r1])
+        if (sTrainerEncounterMusicLUT[i].facilityClass == gFacilityClassToTrainerClass[facilityClass])
             break;
     }
+
     if (i != NELEMS(sTrainerEncounterMusicLUT))
     {
-        var_4001 = sTrainerEncounterMusicLUT[i].unk1;
+        idx = sTrainerEncounterMusicLUT[i].musicId;
     }
     else
     {
-        var_4001 = 0;
+        idx = 0;
     }
-    PlayNewMapMusic(gUnknown_847A2D2[var_4001]);
+    PlayNewMapMusic(sTrainerTowerEncounterMusic[idx]);
 }
 
-static void sub_815E9C8(void)
+static void HasSpokenToOwner(void)
 {
-    gSpecialVar_Result = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_2;
+    gSpecialVar_Result = TRAINER_TOWER.spokeToOwner;
 }
 
 static void BuildEnemyParty(void)
 {
     u16 trainerIdx = VarGet(VAR_TEMP_1);
     s32 level = GetPartyMaxLevel();
-    u8 floorIdx = gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk8;
+    u8 floorIdx = TRAINER_TOWER.floorsCleared;
     s32 i;
     u8 monIdx;
 
     ZeroEnemyPartyMons();
 
-    switch (sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].challengeType)
+    switch (CURR_FLOOR.challengeType)
     {
-    case 0:
+    case CHALLENGE_TYPE_SINGLE:
     default:
         for (i = 0; i < 2; i++)
         {
             monIdx = sSingleBattleChallengeMonIdxs[floorIdx][i];
-            sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx].level = level;
-            CreateBattleTowerMon(&gEnemyParty[i], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx]);
+            CURR_FLOOR.trainers[trainerIdx].mons[monIdx].level = level;
+            CreateBattleTowerMon(&gEnemyParty[i], &CURR_FLOOR.trainers[trainerIdx].mons[monIdx]);
         }
         break;
-    case 1:
+    case CHALLENGE_TYPE_DOUBLE:
         monIdx = sDoubleBattleChallengeMonIdxs[floorIdx][0];
-        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].mons[monIdx].level = level;
-        CreateBattleTowerMon(&gEnemyParty[0], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[0].mons[monIdx]);
+        CURR_FLOOR.trainers[0].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[0], &CURR_FLOOR.trainers[0].mons[monIdx]);
 
         monIdx = sDoubleBattleChallengeMonIdxs[floorIdx][1];
-        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[1].mons[monIdx].level = level;
-        CreateBattleTowerMon(&gEnemyParty[1], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[1].mons[monIdx]);
+        CURR_FLOOR.trainers[1].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[1], &CURR_FLOOR.trainers[1].mons[monIdx]);
         break;
-    case 2:
+    case CHALLENGE_TYPE_KNOCKOUT:
         monIdx = sKnockoutChallengeMonIdxs[floorIdx][trainerIdx];
-        sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx].level = level;
-        CreateBattleTowerMon(&gEnemyParty[0], &sTrainerTowerState->unk_0004.floors[sTrainerTowerState->floorIdx].trainers[trainerIdx].mons[monIdx]);
+        CURR_FLOOR.trainers[trainerIdx].mons[monIdx].level = level;
+        CreateBattleTowerMon(&gEnemyParty[0], &CURR_FLOOR.trainers[trainerIdx].mons[monIdx]);
         break;
     }
 }
@@ -1030,11 +1047,11 @@ static s32 GetPartyMaxLevel(void)
 
 static void ValidateOrResetCurTrainerTowerRecord(void)
 {
-    if (gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 != sTrainerTowerState->unk_0004.id)
+    if (TRAINER_TOWER.unk9 != sTrainerTowerState->unk_0004.id)
     {
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk9 = sTrainerTowerState->unk_0004.id;
-        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unk4, 215999);
-        gSaveBlock1Ptr->unkArray[gSaveBlock1Ptr->unkArrayIdx].unkA_0 = FALSE;
+        TRAINER_TOWER.unk9 = sTrainerTowerState->unk_0004.id;
+        SetTrainerTowerRecordTime(&TRAINER_TOWER.bestTime, TRAINER_TOWER_MAX_TIME);
+        TRAINER_TOWER.receivedPrize = FALSE;
     }
 }
 
@@ -1043,22 +1060,22 @@ void PrintTrainerTowerRecords(void)
     s32 i;
     u8 windowId = 0;
 
-    sub_815DC8C();
+    SetUpTrainerTowerDataStruct();
     FillWindowPixelRect(0, 0, 0, 0, 0xd8, 0x90);
     ValidateOrResetCurTrainerTowerRecord();
-    AddTextPrinterParameterized3(0, 2, 0x4a, 0, gUnknown_847A22C, 0, gUnknown_83FE982);
+    AddTextPrinterParameterized3(0, 2, 0x4a, 0, sTextColors, 0, gText_TimeBoard);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
-        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[i].unk4));
-        StringExpandPlaceholders(gStringVar4, gUnknown_83FE998);
-        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gUnknown_83FE9C4[i]);
-        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, gUnknown_847A22C, 0, gStringVar4);
+        PRINT_TOWER_TIME(GetTrainerTowerRecordTime(&gSaveBlock1Ptr->trainerTower[i].bestTime));
+        StringExpandPlaceholders(gStringVar4, gText_XMinYZSec);
+        AddTextPrinterParameterized3(windowId, 2, 0x18, 0x24 + 0x14 * i, sTextColors, 0, gTrainerTowerChallengeTypeTexts[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0x60, 0x24 + 0x14 * i, sTextColors, 0, gStringVar4);
     }
 
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, 3);
-    sub_815DD2C();
+    FreeTrainerTowerDataStruct();
 }
 
 static u32 GetTrainerTowerRecordTime(u32 *counter)
@@ -1075,8 +1092,8 @@ void ResetTrainerTowerResults(void)
 {
     s32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
     {
-        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->unkArray[i].unk4, 215999);
+        SetTrainerTowerRecordTime(&gSaveBlock1Ptr->trainerTower[i].bestTime, TRAINER_TOWER_MAX_TIME);
     }
 }

@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_FOUR_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_1",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 16,
       "y": 13,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_DODUO",
+      "graphics_id": "OBJ_EVENT_GFX_DODUO",
       "x": 12,
       "y": 9,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_F",
       "x": 13,
       "y": 7,
       "elevation": 3,
@@ -53,7 +55,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_M",
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
       "x": 14,
       "y": 7,
       "elevation": 3,
@@ -66,7 +68,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PSYDUCK",
+      "graphics_id": "OBJ_EVENT_GFX_PSYDUCK",
       "x": 17,
       "y": 9,
       "elevation": 3,
@@ -79,7 +81,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_167E2E",
+      "script": "FourIsland_EventScript_OldWoman",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCK_SMASH_ROCK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCK_SMASH_ROCK",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithRockSmashRockObject",
+      "script": "EventScript_RockSmash",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -118,7 +120,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STAR_PIECE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 32,
       "y": 19,
       "elevation": 3,
@@ -131,7 +133,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_STARDUST"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BLUE",
+      "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 8,
       "y": 25,
       "elevation": 3,
@@ -144,7 +146,7 @@
       "flag": "FLAG_HIDE_FOUR_ISLAND_RIVAL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 36,
       "y": 13,
       "elevation": 3,
@@ -153,11 +155,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_167E73",
+      "script": "FourIsland_EventScript_FatMan",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 31,
       "y": 21,
       "elevation": 3,
@@ -166,7 +168,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_EventScript_167E5A",
+      "script": "FourIsland_EventScript_LittleGirl",
       "flag": "0"
     }
   ],
@@ -231,11 +233,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 13,
       "y": 19,
       "elevation": 0,
-      "script": "FourIsland_EventScript_167E7C"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FourIsland_EventScript_IslandSign"
     },
     {
       "type": "hidden_item",
@@ -258,11 +261,12 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 31,
       "y": 23,
       "elevation": 0,
-      "script": "FourIsland_EventScript_167E85"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FourIsland_EventScript_LoreleisHouseSign"
     }
   ]
 }

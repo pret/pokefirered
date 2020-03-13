@@ -224,7 +224,7 @@ void CB2_OptionsMenuFromStartMenu(void)
         if (sOptionMenuPtr->option[i] > (sOptionMenuItemCounts[i]) - 1)
             sOptionMenuPtr->option[i] = 0;
     }
-    HelpSystem_SetSomeVariable2(0xD);
+    SetHelpContext(HELPCONTEXT_OPTIONS);
     SetMainCallback2(CB2_OptionMenu);
 }
 

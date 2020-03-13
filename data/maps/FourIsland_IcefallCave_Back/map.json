@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_ICEFALL_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_4",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 11,
       "y": 14,
       "elevation": 3,
@@ -27,7 +29,7 @@
       "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 13,
       "y": 14,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LORELEI",
+      "graphics_id": "OBJ_EVENT_GFX_LORELEI",
       "x": 12,
       "y": 16,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_IcefallCave_Back_EventScript_163F25",
+      "script": "FourIsland_IcefallCave_Back_EventScript_Lorelei",
       "flag": "FLAG_HIDE_ICEFALL_CAVE_LORELEI"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 10,
       "y": 15,
       "elevation": 3,
@@ -83,7 +85,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
-      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
     },
     {
       "type": "trigger",
@@ -92,7 +94,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
-      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
     },
     {
       "type": "trigger",
@@ -101,7 +103,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ICEFALL_CAVE_BACK",
       "var_value": 0,
-      "script": "FourIsland_IcefallCave_Back_EventScript_163D98"
+      "script": "FourIsland_IcefallCave_Back_EventScript_LoreleiRocketsScene"
     }
   ],
   "bg_events": []

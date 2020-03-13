@@ -3,5 +3,5 @@ SevenIsland_TanobyRuins_RixyChamber_MapScripts:: @ 8164D0E
 	.byte 0
 
 SevenIsland_TanobyRuins_RixyChamber_OnTransition:: @ 8164D14
-	call EventScript_1A925E
+	call EventScript_TryDarkenRuins
 	end

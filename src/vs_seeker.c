@@ -18,18 +18,21 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "random.h"
-#include "event_object_movement.h"
 #include "field_player_avatar.h"
-#include "event_object_80688E4.h"
-#include "event_object_8097404.h"
-#include "unk_810c3a4.h"
 #include "vs_seeker.h"
-#include "constants/movement_commands.h"
-#include "constants/object_events.h"
+#include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/trainers.h"
 #include "constants/maps.h"
 #include "constants/items.h"
 #include "constants/quest_log.h"
+
+enum
+{
+   VSSEEKER_NOT_CHARGED,
+   VSSEEKER_NO_ONE_IN_RANGE,
+   VSSEEKER_CAN_USE,
+};
 
 typedef enum
 {
@@ -548,29 +551,35 @@ static const VsSeekerData sVsSeekerData[] = {
 };
 
 static const u8 gUnknown_8453F5C[] = {
-    delay_16,
-    delay_16,
-    delay_16,
-    step_end
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 gUnknown_8453F60[] = {
-    emote_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerNoRematch[] = {
-    emote_x,
-    step_end
+    MOVEMENT_ACTION_EMOTE_X,
+    MOVEMENT_ACTION_STEP_END
 };
 
 static const u8 sMovementScript_TrainerRematch[] = {
-    walk_in_place_fastest_down,
-    emote_double_exclamation_mark,
-    step_end
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_EMOTE_DOUBLE_EXCL_MARK,
+    MOVEMENT_ACTION_STEP_END
 };
 
-static const u8 gUnknown_8453F67[] = { 0x08, 0x08, 0x07, 0x09, 0x0a };
+static const u8 gUnknown_8453F67[] = {
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_DOWN,
+    MOVEMENT_TYPE_FACE_UP,
+    MOVEMENT_TYPE_FACE_LEFT,
+    MOVEMENT_TYPE_FACE_RIGHT
+};
 
 
 // text
@@ -733,20 +742,20 @@ void Task_VsSeeker_0(u8 taskId)
     sVsSeeker = AllocZeroed(sizeof(struct VsSeekerStruct));
     GatherNearbyTrainerInfo();
     respval = CanUseVsSeeker();
-    if (respval == 0)
+    if (respval == VSSEEKER_NOT_CHARGED)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, gUnknown_81C137C, sub_80A1E0C);
+        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_BatteryNotChargedNeedXSteps, sub_80A1E0C);
     }
-    else if (respval == 1)
+    else if (respval == VSSEEKER_NO_ONE_IN_RANGE)
     {
         Free(sVsSeeker);
-        DisplayItemMessageOnField(taskId, 2, gUnknown_81C13D6, sub_80A1E0C);
+        DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_NoTrainersWithinRange, sub_80A1E0C);
     }
-    else if (respval == 2)
+    else if (respval == VSSEEKER_CAN_USE)
     {
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, 0, gSpecialVar_ItemId, 0xffff);
-        FieldEffectStart(FLDEFF_UNK_41); // TODO: name this enum
+        FieldEffectStart(FLDEFF_USE_VS_SEEKER);
         gTasks[taskId].func = Task_VsSeeker_1;
         gTasks[taskId].data[0] = 15;
     }
@@ -772,7 +781,7 @@ static void Task_VsSeeker_2(u8 taskId)
         data[2]++;
     }
 
-    if (!FieldEffectActiveListContains(FLDEFF_UNK_41))
+    if (!FieldEffectActiveListContains(FLDEFF_USE_VS_SEEKER))
     {
         data[1] = 0;
         data[2] = 0;
@@ -812,13 +821,13 @@ static void Task_VsSeeker_3(u8 taskId)
 {
     if (ScriptMovement_IsObjectMovementFinished(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup))
     {
-        if (sVsSeeker->responseCode == 0)
+        if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_NO_RESPONSE)
         {
-            DisplayItemMessageOnField(taskId, 2, gUnknown_81C1429, sub_80A1E0C);
+            DisplayItemMessageOnField(taskId, 2, VSSeeker_Text_TrainersNotReady, sub_80A1E0C);
         }
         else
         {
-            if (sVsSeeker->responseCode == 2)
+            if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_FOUND_REMATCHES)
                 StartAllRespondantIdleMovements();
             ClearDialogWindowAndFrame(0, 1);
             sub_80696C0();
@@ -829,20 +838,20 @@ static void Task_VsSeeker_3(u8 taskId)
     }
 }
 
-u8 CanUseVsSeeker(void)
+static u8 CanUseVsSeeker(void)
 {
     u8 vsSeekerChargeSteps = gSaveBlock1Ptr->trainerRematchStepCounter;
     if (vsSeekerChargeSteps == 100)
     {
         if (GetRematchableTrainerLocalId() == 0xFF)
-            return 1;
+            return VSSEEKER_NO_ONE_IN_RANGE;
         else
-            return 2;
+            return VSSEEKER_CAN_USE;
     }
     else
     {
         TV_PrintIntToStringVar(0, 100 - vsSeekerChargeSteps);
-        return 0;
+        return VSSEEKER_NOT_CHARGED;
     }
 }
 
@@ -926,11 +935,11 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
         PlaySE(SE_PIN);
         FlagSet(FLAG_SYS_VS_SEEKER_CHARGING);
         sub_810C640();
-        return 2;
+        return VSSEEKER_RESPONSE_FOUND_REMATCHES;
     }
     if (sVsSeeker->trainerHasNotYetBeenFought)
-        return 1;
-    return 0;
+        return VSSEEKER_RESPONSE_UNFOUGHT_TRAINERS;
+    return VSSEEKER_RESPONSE_NO_RESPONSE;
 }
 
 void sub_810CB90(void)
@@ -957,7 +966,7 @@ void sub_810CB90(void)
                 if (gSelectedObjectEvent == sp0)
                     r4_2->movementType = gUnknown_8453F67[r4_2->facingDirection];
                 else
-                    r4_2->movementType = 0x08;
+                    r4_2->movementType = MOVEMENT_TYPE_FACE_DOWN;
             }
         }
     }
@@ -1077,7 +1086,7 @@ s32 GetRematchTrainerId(u16 a0)
     return sVsSeekerData[i].trainerIdxs[j];
 }
 
-u8 ScrSpecial_GetTrainerEyeRematchFlag(void) // unreferenced, or reference not disassembled
+u8 IsTrainerReadyForRematch(void)
 {
     return sub_810CED0(sVsSeekerData, gTrainerBattleOpponent_A);
 }
@@ -1127,32 +1136,32 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
 {
     switch (graphicsId)
     {
-        case OBJECT_EVENT_GFX_LITTLE_GIRL:
-        case OBJECT_EVENT_GFX_YOUNGSTER:
-        case OBJECT_EVENT_GFX_BOY:
-        case OBJECT_EVENT_GFX_BUG_CATCHER:
-        case OBJECT_EVENT_GFX_LASS:
-        case OBJECT_EVENT_GFX_WOMAN_1:
-        case OBJECT_EVENT_GFX_BATTLE_GIRL:
-        case OBJECT_EVENT_GFX_MAN:
-        case OBJECT_EVENT_GFX_ROCKER:
-        case OBJECT_EVENT_GFX_WOMAN_2:
-        case OBJECT_EVENT_GFX_BEAUTY:
-        case OBJECT_EVENT_GFX_BALDING_MAN:
-        case OBJECT_EVENT_GFX_TUBER_F:
-        case OBJECT_EVENT_GFX_CAMPER:
-        case OBJECT_EVENT_GFX_PICNICKER:
-        case OBJECT_EVENT_GFX_COOLTRAINER_M:
-        case OBJECT_EVENT_GFX_COOLTRAINER_F:
-        case OBJECT_EVENT_GFX_SWIMMER_M_LAND:
-        case OBJECT_EVENT_GFX_SWIMMER_F_LAND:
-        case OBJECT_EVENT_GFX_BLACKBELT:
-        case OBJECT_EVENT_GFX_HIKER:
-        case OBJECT_EVENT_GFX_SAILOR:
+        case OBJ_EVENT_GFX_LITTLE_GIRL:
+        case OBJ_EVENT_GFX_YOUNGSTER:
+        case OBJ_EVENT_GFX_BOY:
+        case OBJ_EVENT_GFX_BUG_CATCHER:
+        case OBJ_EVENT_GFX_LASS:
+        case OBJ_EVENT_GFX_WOMAN_1:
+        case OBJ_EVENT_GFX_BATTLE_GIRL:
+        case OBJ_EVENT_GFX_MAN:
+        case OBJ_EVENT_GFX_ROCKER:
+        case OBJ_EVENT_GFX_WOMAN_2:
+        case OBJ_EVENT_GFX_BEAUTY:
+        case OBJ_EVENT_GFX_BALDING_MAN:
+        case OBJ_EVENT_GFX_TUBER_F:
+        case OBJ_EVENT_GFX_CAMPER:
+        case OBJ_EVENT_GFX_PICNICKER:
+        case OBJ_EVENT_GFX_COOLTRAINER_M:
+        case OBJ_EVENT_GFX_COOLTRAINER_F:
+        case OBJ_EVENT_GFX_SWIMMER_M_LAND:
+        case OBJ_EVENT_GFX_SWIMMER_F_LAND:
+        case OBJ_EVENT_GFX_BLACKBELT:
+        case OBJ_EVENT_GFX_HIKER:
+        case OBJ_EVENT_GFX_SAILOR:
             return 0x4e;
-        case OBJECT_EVENT_GFX_TUBER_M_1:
-        case OBJECT_EVENT_GFX_SWIMMER_M_WATER:
-        case OBJECT_EVENT_GFX_SWIMMER_F_WATER:
+        case OBJ_EVENT_GFX_TUBER_M_1:
+        case OBJ_EVENT_GFX_SWIMMER_M_WATER:
+        case OBJ_EVENT_GFX_SWIMMER_F_WATER:
             return 0x4f;
         default:
             return 0x4d;

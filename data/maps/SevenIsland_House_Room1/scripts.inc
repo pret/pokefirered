@@ -1,3 +1,7 @@
+.equ LOCALID_OLD_WOMAN, 1
+
+.equ TRAINER_VISITING, VAR_TEMP_1
+
 SevenIsland_House_Room1_MapScripts:: @ 817088A
 	map_script MAP_SCRIPT_ON_TRANSITION, SevenIsland_House_Room1_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SevenIsland_House_Room1_OnFrame
@@ -6,178 +10,178 @@ SevenIsland_House_Room1_MapScripts:: @ 817088A
 SevenIsland_House_Room1_OnTransition:: @ 8170895
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 0
-	call_if_eq EventScript_1708AF
+	call_if_eq SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
-	call_if_ne EventScript_1708C3
+	call_if_ne SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor
 	end
 
-EventScript_1708AF:: @ 81708AF
-	setvar VAR_TEMP_1, 1
-	setobjectxyperm 1, 4, 2
-	setobjectmovementtype 1, 8
-	setmaplayoutindex LAYOUT_UNUSED_LAYOUT_8338B4C
+SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout:: @ 81708AF
+	setvar TRAINER_VISITING, TRUE
+	setobjectxyperm LOCALID_OLD_WOMAN, 4, 2
+	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
+	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
 	return
 
-EventScript_1708C3:: @ 81708C3
-	setobjectxyperm 1, 3, 2
-	setobjectmovementtype 1, 10
+SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor:: @ 81708C3
+	setobjectxyperm LOCALID_OLD_WOMAN, 3, 2
+	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SevenIsland_House_Room1_OnFrame:: @ 81708CF
-	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, EventScript_1708E9
-	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, EventScript_1708E9
-	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, EventScript_1708E9
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
+	map_script_2 VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3, SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle
 	.2byte 0
 
-EventScript_1708E9:: @ 1708E9
+SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle:: @ 1708E9
 	lockall
 	textcolor 1
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170953
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
 	waitmovement 0
-	applymovement 1, Movement_170955
+	applymovement LOCALID_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
 	waitmovement 0
-	moveobjectoffscreen 1
+	moveobjectoffscreen LOCALID_OLD_WOMAN
 	applymovement OBJ_EVENT_ID_PLAYER, Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1
-	call_if_eq EventScript_170938
+	call_if_eq SevenIsland_House_Room1_EventScript_BattleWonComment
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2
-	call_if_eq EventScript_170941
+	call_if_eq SevenIsland_House_Room1_EventScript_BattleLostComment
 	compare VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 3
-	call_if_eq EventScript_17094A
+	call_if_eq SevenIsland_House_Room1_EventScript_BattleTiedComment
 	special LoadPlayerParty
 	setvar VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 0
 	releaseall
 	end
 
-EventScript_170938:: @ 8170938
-	msgbox gUnknown_81A088C
+SevenIsland_House_Room1_EventScript_BattleWonComment:: @ 8170938
+	msgbox SevenIsland_House_Room1_Text_AstoundingBattle
 	return
 
-EventScript_170941:: @ 8170941
-	msgbox gUnknown_81A0971
+SevenIsland_House_Room1_EventScript_BattleLostComment:: @ 8170941
+	msgbox SevenIsland_House_Room1_Text_FeelYourDisappointment
 	return
 
-EventScript_17094A:: @ 817094A
-	msgbox gUnknown_81A0807
+SevenIsland_House_Room1_EventScript_BattleTiedComment:: @ 817094A
+	msgbox SevenIsland_House_Room1_Text_DrawWasIt
 	return
 
-Movement_170953:: @ 8170953
+SevenIsland_House_Room1_Movement_PlayerReEnterRoom:: @ 8170953
 	walk_down
 	step_end
 
-Movement_170955:: @ 8170955
+SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer:: @ 8170955
 	walk_right
 	walk_in_place_fastest_down
 	step_end
 
-SevenIsland_House_Room1_EventScript_170958:: @ 8170958
+SevenIsland_House_Room1_EventScript_OldWoman:: @ 8170958
 	lock
 	faceplayer
 	special ValidateEReaderTrainer
 	compare VAR_RESULT, 1
-	call_if_eq EventScript_17097D
-	compare VAR_TEMP_1, 1
-	goto_if_eq EventScript_170987
-	msgbox gUnknown_81A049B
+	call_if_eq SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer
+	compare TRAINER_VISITING, TRUE
+	goto_if_eq SevenIsland_House_Room1_EventScript_TrainerVisiting
+	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
 	release
 	end
 
-EventScript_17097D:: @ 817097D
-	msgbox gUnknown_81A049B
+SevenIsland_House_Room1_EventScript_InvalidVisitingTrainer:: @ 817097D
+	msgbox SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles
 	release
 	end
 
-EventScript_170987:: @ 8170987
+SevenIsland_House_Room1_EventScript_TrainerVisiting:: @ 8170987
 	special SavePlayerParty
-	special Special_BufferEReaderTrainerName5
-	msgbox gUnknown_81A0598, MSGBOX_YESNO
+	special BufferEReaderTrainerName
+	msgbox SevenIsland_House_Room1_Text_ChallengeVisitingTrainer, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_170A11
-	call EventScript_170A1E
+	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	call SevenIsland_House_Room1_EventScript_ChooseParty
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
-	msgbox gUnknown_81A0788, MSGBOX_YESNO
+	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
+	msgbox SevenIsland_House_Room1_Text_SaveProgressBeforeBattle, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq EventScript_170A11
+	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
 	special LoadPlayerParty
 	call EventScript_AskSaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq EventScript_170A11
+	goto_if_eq SevenIsland_House_Room1_EventScript_DeclineBattle
 	special SavePlayerParty
 	special ReducePlayerPartyToThree
-	msgbox gUnknown_81A07C4
+	msgbox SevenIsland_House_Room1_Text_DontHoldAnythingBack
 	closemessage
 	compare VAR_FACING, DIR_NORTH
-	call_if_eq EventScript_170A2D
+	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth
 	compare VAR_FACING, DIR_EAST
-	call_if_eq EventScript_170A3F
+	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomEast
 	compare VAR_FACING, DIR_WEST
-	call_if_eq EventScript_170A51
+	call_if_eq SevenIsland_House_Room1_EventScript_EnterBattleRoomWest
 	warp MAP_SEVEN_ISLAND_HOUSE_ROOM2, 255, 3, 1
 	waitstate
 	release
 	end
 
-EventScript_170A11:: @ 8170A11
+SevenIsland_House_Room1_EventScript_DeclineBattle:: @ 8170A11
 	special LoadPlayerParty
-	msgbox gUnknown_81A064E
+	msgbox SevenIsland_House_Room1_Text_OhYouWontBattle
 	release
 	end
 
-EventScript_170A1E:: @ 8170A1E
-	msgbox gUnknown_81A06AB
+SevenIsland_House_Room1_EventScript_ChooseParty:: @ 8170A1E
+	msgbox SevenIsland_House_Room1_Text_LimitThreeMonsPerSide
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
 	return
 
-EventScript_170A2D:: @ 8170A2D
-	applymovement VAR_LAST_TALKED, Movement_170A6F
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A63
+SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth:: @ 8170A2D
+	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth
 	waitmovement 0
 	return
 
-EventScript_170A3F:: @ 8170A3F
-	applymovement VAR_LAST_TALKED, Movement_170A72
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A67
+SevenIsland_House_Room1_EventScript_EnterBattleRoomEast:: @ 8170A3F
+	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast
 	waitmovement 0
 	return
 
-EventScript_170A51:: @ 8170A51
-	applymovement VAR_LAST_TALKED, Movement_170A6F
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_170A6B
+SevenIsland_House_Room1_EventScript_EnterBattleRoomWest:: @ 8170A51
+	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
+	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest
 	waitmovement 0
 	return
 
-Movement_170A63:: @ 8170A63
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth:: @ 8170A63
 	delay_16
 	walk_up
 	walk_up
 	step_end
 
-Movement_170A67:: @ 8170A67
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast:: @ 8170A67
 	delay_16
 	walk_right
 	walk_up
 	step_end
 
-Movement_170A6B:: @ 8170A6B
+SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest:: @ 8170A6B
 	delay_16
 	walk_left
 	walk_up
 	step_end
 
-Movement_170A6F:: @ 8170A6F
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft:: @ 8170A6F
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-Movement_170A72:: @ 8170A72
+SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight:: @ 8170A72
 	walk_right
 	walk_in_place_fastest_left
 	step_end
 
-SevenIsland_House_Room1_EventScript_170A75:: @ 8170A75
-	msgbox gUnknown_81A0567, MSGBOX_SIGN
+SevenIsland_House_Room1_EventScript_Box:: @ 8170A75
+	msgbox SevenIsland_House_Room1_Text_SlightBreezeAroundBox, MSGBOX_SIGN
 	end

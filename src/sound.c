@@ -5,8 +5,8 @@
 #include "quest_log.h"
 #include "m4a.h"
 #include "main.h"
-#include "pokemon.h"
 #include "constants/songs.h"
+#include "constants/fanfares.h"
 #include "task.h"
 
 struct Fanfare
@@ -42,20 +42,20 @@ extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] = {
-    { MUS_FANFA1,      80 },
-    { MUS_FANFA4,     160 },
-    { MUS_FANFA5,     220 },
-    { MUS_ME_WAZA,    220 },
-    { MUS_ME_ASA,     160 },
-    { MUS_ME_BACHI,   340 },
-    { MUS_ME_WASURE,  180 },
-    { MUS_ME_KINOMI,  120 },
-    { MUS_ME_B_BIG,   250 },
-    { MUS_ME_B_SMALL, 150 },
-    { MUS_ME_ZANNEN,  160 },
-    { MUS_POKEFUE,    450 },
-    { MUS_FAN5,       170 },
-    { MUS_FAN2,       196 }
+    [FANFARE_00]        = { MUS_FANFA1,      80 },
+    [FANFARE_01]        = { MUS_FANFA4,     160 },
+    [FANFARE_02]        = { MUS_FANFA5,     220 },
+    [FANFARE_03]        = { MUS_ME_WAZA,    220 },
+    [FANFARE_04]        = { MUS_ME_ASA,     160 },
+    [FANFARE_05]        = { MUS_ME_BACHI,   340 },
+    [FANFARE_06]        = { MUS_ME_WASURE,  180 },
+    [FANFARE_07]        = { MUS_ME_KINOMI,  120 },
+    [FANFARE_08]        = { MUS_ME_B_BIG,   250 },
+    [FANFARE_09]        = { MUS_ME_B_SMALL, 150 },
+    [FANFARE_10]        = { MUS_ME_ZANNEN,  160 },
+    [FANFARE_POKEFLUTE] = { MUS_POKEFUE,    450 },
+    [FANFARE_KEY_ITEM]  = { MUS_FAN5,       170 },
+    [FANFARE_DEX_EVAL]  = { MUS_FAN2,       196 }
 };
 
 extern u16 SpeciesToCryId(u16);

@@ -106,8 +106,8 @@ _081345D0:
 	cmp r0, 0x5
 	beq _08134604
 _081345D4:
-	movs r0, 0x6
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x6 @ HELPCONTEXT_POKEMON_INFO
+	bl SetHelpContext
 	ldr r2, _081345F8 @ =gUnknown_203B140
 	ldr r0, [r2]
 	ldr r3, _081345FC @ =0x00003214
@@ -127,8 +127,8 @@ _081345F8: .4byte gUnknown_203B140
 _081345FC: .4byte 0x00003214
 _08134600: .4byte 0x00003234
 _08134604:
-	movs r0, 0x6
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x6 @ HELPCONTEXT_POKEMON_INFO
+	bl SetHelpContext
 	ldr r0, [r4]
 	ldr r3, _08134628 @ =0x00003214
 	adds r0, r3
@@ -148,8 +148,8 @@ _08134628: .4byte 0x00003214
 _0813462C: .4byte 0x0000321c
 _08134630: .4byte 0x00003234
 _08134634:
-	movs r0, 0x8
-	bl HelpSystem_SetSomeVariable2
+	movs r0, 0x8 @ HELPCONTEXT_POKEMON_MOVES
+	bl SetHelpContext
 	ldr r0, [r4]
 	ldr r3, _08134710 @ =0x00003214
 	adds r0, r3
@@ -3187,7 +3187,7 @@ _08135FC8: .4byte gUnknown_8E9B310
 _08135FCC:
 	movs r0, 0x60
 	movs r1, 0x1
-	bl sub_8107D38
+	bl ListMenuLoadStdPalAt
 	ldr r0, _08135FE0 @ =gUnknown_84636C0
 	movs r1, 0x70
 _08135FD8:
@@ -7600,15 +7600,15 @@ _08138460: .4byte 0x00003214
 _08138464:
 	cmp r0, 0x3
 	bgt _08138476
-	movs r0, 0x8
+	movs r0, 0x8 @ HELPCONTEXT_POKEMON_MOVES
 	b _08138472
 _0813846C:
-	movs r0, 0x6
+	movs r0, 0x6 @ HELPCONTEXT_POKEMON_INFO
 	b _08138472
 _08138470:
-	movs r0, 0x7
+	movs r0, 0x7 @ HELPCONTEXT_POKEMON_SKILLS
 _08138472:
-	bl HelpSystem_SetSomeVariable2
+	bl SetHelpContext
 _08138476:
 	pop {r0}
 	bx r0

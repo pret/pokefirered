@@ -3,7 +3,6 @@
 #include "task.h"
 #include "decompress.h"
 #include "palette.h"
-#include "strings.h"
 #include "sprite.h"
 #include "trig.h"
 #include "list_menu.h"

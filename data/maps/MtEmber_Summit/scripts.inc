@@ -8,7 +8,7 @@ MtEmber_Summit_OnResume:: @ 8163B07
 	end
 
 MtEmber_Summit_EventScript_TryRemoveMoltres:: @ 8163B11
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
@@ -37,10 +37,10 @@ MtEmber_Summit_EventScript_Moltres:: @ 8163B33
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq MtEmber_Summit_EventScript_DefeatedMoltres
 	compare VAR_RESULT, B_OUTCOME_RAN

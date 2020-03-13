@@ -2759,8 +2759,8 @@ GetPlayerAvatarGraphicsIdByStateIdAndGender: @ 805C7E0
 _0805C7F4: .4byte gUnknown_835B874
 	thumb_func_end GetPlayerAvatarGraphicsIdByStateIdAndGender
 
-	thumb_func_start sub_805C7F8
-sub_805C7F8: @ 805C7F8
+	thumb_func_start GetHoennLinkPartnerGraphicsIdByGender
+GetHoennLinkPartnerGraphicsIdByGender: @ 805C7F8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0805C804 @ =gUnknown_835B880
@@ -2769,10 +2769,10 @@ sub_805C7F8: @ 805C7F8
 	bx lr
 	.align 2, 0
 _0805C804: .4byte gUnknown_835B880
-	thumb_func_end sub_805C7F8
+	thumb_func_end GetHoennLinkPartnerGraphicsIdByGender
 
-	thumb_func_start sub_805C808
-sub_805C808: @ 805C808
+	thumb_func_start GetPlayerAvatarGraphicsIdByStateId
+GetPlayerAvatarGraphicsIdByStateId: @ 805C808
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2785,7 +2785,7 @@ sub_805C808: @ 805C808
 	bx r1
 	.align 2, 0
 _0805C820: .4byte gPlayerAvatar
-	thumb_func_end sub_805C808
+	thumb_func_end GetPlayerAvatarGraphicsIdByStateId
 
 	thumb_func_start GetPlayerAvatarGenderByGraphicsId
 GetPlayerAvatarGenderByGraphicsId: @ 805C824
@@ -2921,7 +2921,7 @@ IsPlayerFacingSurfableFishableWater: @ 805C8B0
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r5, r2]
-	bl sub_805C938
+	bl MetatileAtCoordsIsWaterTile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2940,24 +2940,24 @@ _0805C92E:
 	bx r1
 	thumb_func_end IsPlayerFacingSurfableFishableWater
 
-	thumb_func_start sub_805C938
-sub_805C938: @ 805C938
+	thumb_func_start MetatileAtCoordsIsWaterTile
+MetatileAtCoordsIsWaterTile: @ 805C938
 	push {lr}
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, 16
 	asrs r1, 16
 	movs r2, 0x1
-	bl sub_8058F48
+	bl MapGridGetMetatileAttributeAt
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl sub_805A2BC
+	bl TestMetatileAttributeBit
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C938
+	thumb_func_end MetatileAtCoordsIsWaterTile
 
 	thumb_func_start ClearPlayerAvatarInfo
 ClearPlayerAvatarInfo: @ 805C95C
@@ -3252,7 +3252,7 @@ sub_805CB70: @ 805CB70
 	ldr r0, _0805CBB0 @ =gObjectEvents
 	adds r4, r0
 	movs r0, 0x3
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3285,7 +3285,7 @@ sub_805CBB8: @ 805CBB8
 	cmp r0, 0
 	bne _0805CBD8
 	movs r0, 0x5
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805CBE0
@@ -3403,7 +3403,7 @@ _0805CC62:
 	movs r1, 0
 	ldrsh r3, [r7, r1]
 	adds r1, r6, 0
-	bl sub_80DB134
+	bl ShowWarpArrowSprite
 	b _0805CCC2
 	.align 2, 0
 _0805CCA4: .4byte gUnknown_835B890
@@ -3419,7 +3419,7 @@ _0805CCA8:
 	cmp r1, 0x3
 	ble _0805CC62
 	ldrb r0, [r5, 0x1B]
-	bl objid_set_invisible
+	bl SetSpriteInvisible
 _0805CCC2:
 	add sp, 0x4
 	pop {r3,r4}
@@ -4129,7 +4129,7 @@ sub_805D240: @ 805D240
 	cmp r0, 0
 	beq _0805D2AE
 	movs r0, 0
-	bl sub_805C808
+	bl GetPlayerAvatarGraphicsIdByStateId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4157,7 +4157,7 @@ sub_805D240: @ 805D240
 	bl DestroySprite
 	adds r0, r5, 0
 	bl DestroyTask
-	bl sub_812B35C
+	bl SetHelpContextForMap
 _0805D2AE:
 	pop {r4-r6}
 	pop {r0}

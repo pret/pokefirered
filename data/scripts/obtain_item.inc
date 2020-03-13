@@ -1,18 +1,19 @@
-EventScript_1A666F:: @ 81A666F
-	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
+@ Unused, handled by textcolor script cmd
+EventScript_SaveTextColor:: @ 81A666F
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	return
 
-EventScript_1A6675:: @ 81A6675
-	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
+EventScript_RestorePrevTextColor:: @ 81A6675
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
 Std_ObtainItem:: @ 81A667B
-	copyvar VAR_MON_BOX_POS, VAR_MON_BOX_ID
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
 	textcolor 3
 	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
-	copyvar VAR_MON_BOX_ID, VAR_MON_BOX_POS
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	return
 
 EventScript_ObtainItemMessage:: @ 81A6697
@@ -132,7 +133,7 @@ Std_FindItem:: @ 81A67B3
 EventScript_PickUpItem:: @ 81A67EE
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
-	specialvar VAR_RESULT, Special_ItemIsTM_GetMoveName
+	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
 	compare VAR_0x8008, TRUE
 	call_if_eq EventScript_FoundTMHM
@@ -186,7 +187,7 @@ EventScript_PickedUpHiddenItem::
 	waitfanfare
 	waitmessage
 	msgbox Text_PutItemAway
-	special Special_SetHiddenItemFlag
+	special SetHiddenItemFlag
 	releaseall
 	end
 
@@ -214,7 +215,7 @@ EventScript_NoRoomForHiddenItem::
 EventScript_TryPickUpHiddenCoins::
 	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_NoCaseForHiddenCoins
 	checkcoins VAR_RESULT
-	specialvar VAR_RESULT, Special_CheckAddCoins
+	specialvar VAR_RESULT, CheckAddCoins
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_HiddenCoinsButCaseIsFull
 	addcoins VAR_0x8006
@@ -224,7 +225,7 @@ EventScript_TryPickUpHiddenCoins::
 	waitfanfare
 	waitmessage
 	msgbox Text_PutCoinsAwayInCoinCase
-	special Special_SetHiddenItemFlag
+	special SetHiddenItemFlag
 	releaseall
 	end
 

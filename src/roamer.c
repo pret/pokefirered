@@ -1,11 +1,10 @@
 #include "global.h"
-#include "roamer.h"
 #include "random.h"
 #include "overworld.h"
 #include "field_specials.h"
 #include "constants/species.h"
 #include "constants/maps.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 
 EWRAM_DATA u8 sLocationHistory[3][2] = {};
 EWRAM_DATA u8 sRoamerLocation[2] = {};
@@ -62,7 +61,7 @@ void ClearRoamerData(void)
 
 #define GetRoamerSpecies() ({\
     u16 a;\
-    switch (ScrSpecial_GetStarter())\
+    switch (GetStarterSpecies())\
     {\
     default:\
         a = SPECIES_RAIKOU;\

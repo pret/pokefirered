@@ -718,7 +718,7 @@ StartTransitionToFlipBikeState: @ 80BD5C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, _080BD5F0 @ =gUnknown_2036E2C
+	ldr r1, _080BD5F0 @ =gUnusedBikeCameraAheadPanback
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _080BD5F4 @ =gPlayerAvatar
@@ -733,7 +733,7 @@ StartTransitionToFlipBikeState: @ 80BD5C8
 	bl Overworld_PlaySpecialMapMusic
 	b _080BD618
 	.align 2, 0
-_080BD5F0: .4byte gUnknown_2036E2C
+_080BD5F0: .4byte gUnusedBikeCameraAheadPanback
 _080BD5F4: .4byte gPlayerAvatar
 _080BD5F8:
 	adds r0, r2, 0

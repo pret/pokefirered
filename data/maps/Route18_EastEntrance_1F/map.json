@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_ROUTE_18",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 1,
-  "unknown_19": 2,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_POLICEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -23,7 +25,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_170391",
+      "script": "Route18_EastEntrance_1F_EventScript_Guard",
       "flag": "0"
     }
   ],
@@ -58,7 +60,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77C1"
+      "script": "EventScript_SetEnteringCyclingRoad"
     },
     {
       "type": "trigger",
@@ -67,7 +69,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_17039A"
+      "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerTop"
     },
     {
       "type": "trigger",
@@ -76,7 +78,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1703A6"
+      "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidTop"
     },
     {
       "type": "trigger",
@@ -85,7 +87,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1703B2"
+      "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMid"
     },
     {
       "type": "trigger",
@@ -94,7 +96,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1703BE"
+      "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidBottom"
     },
     {
       "type": "trigger",
@@ -103,7 +105,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_1",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1703CA"
+      "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerBottom"
     },
     {
       "type": "trigger",
@@ -112,7 +114,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 1,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77B6"
+      "script": "EventScript_SetExitingCyclingRoad"
     },
     {
       "type": "trigger",
@@ -121,7 +123,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 1,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77B6"
+      "script": "EventScript_SetExitingCyclingRoad"
     },
     {
       "type": "trigger",
@@ -130,7 +132,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 1,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77B6"
+      "script": "EventScript_SetExitingCyclingRoad"
     },
     {
       "type": "trigger",
@@ -139,7 +141,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77C1"
+      "script": "EventScript_SetEnteringCyclingRoad"
     },
     {
       "type": "trigger",
@@ -148,7 +150,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
       "var_value": 0,
-      "script": "Route18_EastEntrance_1F_EventScript_1A77C1"
+      "script": "EventScript_SetEnteringCyclingRoad"
     }
   ],
   "bg_events": []

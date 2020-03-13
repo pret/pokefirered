@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_TANOBY_RUINS",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_SEVEN_ISLAND_SEVAULT_CANYON",
@@ -20,7 +22,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 35,
       "y": 7,
       "elevation": 3,
@@ -29,11 +31,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TanobyRuins_EventScript_1ACC4D",
+      "script": "SevenIsland_TanobyRuins_EventScript_Brandon",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 121,
       "y": 11,
       "elevation": 3,
@@ -42,11 +44,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TanobyRuins_EventScript_1ACC8B",
+      "script": "SevenIsland_TanobyRuins_EventScript_Benjamin",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 85,
       "y": 8,
       "elevation": 3,
@@ -55,11 +57,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TanobyRuins_EventScript_1ACCC9",
+      "script": "SevenIsland_TanobyRuins_EventScript_Edna",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 85,
       "y": 5,
       "elevation": 3,
@@ -68,7 +70,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SevenIsland_TanobyRuins_EventScript_1ACD07",
+      "script": "SevenIsland_TanobyRuins_EventScript_Clifford",
       "flag": "0"
     }
   ],

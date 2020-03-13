@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_KANTO_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 24,
       "y": 15,
       "elevation": 3,
@@ -123,17 +125,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 30,
       "y": 26,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_RestHouseSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 25,
       "y": 27,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_TrainerTips"
     },
     {
@@ -147,10 +151,11 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 33,
       "y": 20,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SafariZone_Center_EventScript_AreaSign"
     }
   ]

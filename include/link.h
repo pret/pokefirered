@@ -77,6 +77,10 @@
 #define LINKTYPE_BATTLE_TOWER_50     0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN   0x2277
 #define LINKTYPE_BATTLE_TOWER        0x2288
+#define LINKTYPE_0x3311              0x3311
+#define LINKTYPE_0x3322              0x3322
+#define LINKTYPE_0x4411              0x4411
+#define LINKTYPE_0x6601              0x6601
 
 #define MASTER_HANDSHAKE 0x8FFF
 #define SLAVE_HANDSHAKE  0xB9A0
@@ -199,6 +203,7 @@ extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkVSyncDisabled;
 extern u8 gWirelessCommType;
+extern struct LinkPlayer gLocalLinkPlayer;
 
 extern u8 gShouldAdvanceLinkState;
 extern u16 gLinkPartnersHeldKeys[6];
@@ -246,38 +251,43 @@ void sub_800E0E8(void);
 bool8 sub_800A520(void);
 bool8 sub_8010500(void);
 void sub_800DFB4(u8, u8);
-void sub_800AB9C(void);
-void sub_800B1F4(void);
+void PrepareSendLinkCmd2FFE_or_RfuCmd6600(void);
+void SetWirelessCommType1(void);
 void sub_8009734(void);
 void sub_800A620(void);
-void sub_80FBB4C(void);
+void LinkRfu_DestroyIdleTask(void);
 u8 sub_800ABAC(void);
 u8 sub_800ABBC(void);
-void sub_800AAC0(void);
+void Link_TryStartSend5FFF(void);
 void OpenLink(void);
 bool8 IsLinkMaster(void);
 void CheckShouldAdvanceLinkState(void);
-void sub_800AA80(u16 a0);
+void Link_StartSend5FFFwithParam(u16 a0);
 void sub_80098D8(void);
 void CloseLink(void);
 bool8 IsLinkTaskFinished(void);
 bool32 sub_800B270(void);
 void ResetSerial(void);
 void sub_8054A28(void);
-void sub_800B1F4(void);
+void SetWirelessCommType1(void);
 void LoadWirelessStatusIndicatorSpriteGfx(void);
 void CreateWirelessStatusIndicatorSprite(u8, u8);
 void sub_8009FE8(void);
 void ClearLinkCallback_2(void);
-void sub_80FA42C(void);
-void sub_800B284(struct LinkPlayer * linkPlayer);
+void LinkRfu_SetRfuFuncToSend6600(void);
+void IntlConvertLinkPlayerName(struct LinkPlayer * linkPlayer);
 bool8 IsWirelessAdapterConnected(void);
-bool8 sub_800A474(u8 a0);
+bool8 sub_800A474(u8 blockRequestType);
 void LinkVSync(void);
 bool8 HandleLinkConnection(void);
-void sub_800B0B4(void);
-void sub_800B110(u32 who);
-void sub_800ACBC(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
+void PrepareLocalLinkPlayerBlock(void);
+void LinkPlayerFromBlock(u32 who);
+void SetLinkErrorFromRfu(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount, u8 unk_06);
 u8 sub_800A8D4(void);
+void sub_800AA24(void);
+void sub_800A900(u8 a0);
+u8 sub_800A8A4(void);
+void sub_800A9A4(void);
+void SetLocalLinkPlayerId(u8 playerId);
 
 #endif // GUARD_LINK_H

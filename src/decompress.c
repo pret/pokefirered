@@ -2,7 +2,6 @@
 #include "malloc.h"
 #include "decompress.h"
 #include "pokemon.h"
-#include "text.h"
 #include "constants/species.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];

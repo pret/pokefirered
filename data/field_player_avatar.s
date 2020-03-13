@@ -1,3 +1,4 @@
+#include "constants/event_objects.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 	.section .rodata
@@ -36,11 +37,11 @@ gUnknown_835B820:: @ 835B820
 
 	.align 2
 gUnknown_835B828:: @ 835B828
-	.4byte MetatileBehavior_ReturnFalse_14
-	.4byte MetatileBehavior_ReturnFalse_15
-	.4byte MetatileBehavior_ReturnFalse_16
-	.4byte MetatileBehavior_ReturnFalse_17
-	.4byte MetatileBehavior_ReturnFalse_18
+	.4byte MetatileBehavior_ReturnFalse_14 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_15 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_16 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_17 // Related to Acro Bike
+	.4byte MetatileBehavior_ReturnFalse_18 // Related to Acro Bike
 
 gUnknown_835B83C:: @ 835B83C
 	.byte 0x09, 0x0a, 0x0b, 0x0c, 0x0d
@@ -63,16 +64,30 @@ gUnknown_835B864:: @ 835B864
 	.4byte MetatileBehavior_IsEastArrowWarp
 
 gUnknown_835B874:: @ 835B874
-	.byte 0x00, 0x07, 0x01, 0x08, 0x02, 0x09, 0x03, 0x0a, 0x04, 0x0b, 0x05, 0x0c
+	.byte OBJ_EVENT_GFX_RED_NORMAL,    OBJ_EVENT_GFX_GREEN_NORMAL
+	.byte OBJ_EVENT_GFX_RED_BIKE,      OBJ_EVENT_GFX_GREEN_BIKE
+	.byte OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF
+	.byte OBJ_EVENT_GFX_RED_ITEM,      OBJ_EVENT_GFX_GREEN_ITEM
+	.byte OBJ_EVENT_GFX_RED_FISH,      OBJ_EVENT_GFX_GREEN_FISH
+	.byte OBJ_EVENT_GFX_RED_ITEM_COPY, OBJ_EVENT_GFX_GREEN_ITEM_COPY
 
 gUnknown_835B880:: @ 835B880
-	.byte 0x0e, 0x0f
+	.byte OBJ_EVENT_GFX_RS_BRENDAN
+	.byte OBJ_EVENT_GFX_RS_MAY
 
 gUnknown_835B882:: @ 835B882
-	.byte 0x00, 0x01, 0x01, 0x02, 0x02, 0x08, 0x07, 0x01, 0x08, 0x02, 0x09, 0x08
+	@ Male
+	.byte OBJ_EVENT_GFX_RED_NORMAL, 0x01
+	.byte OBJ_EVENT_GFX_RED_BIKE, 0x02
+	.byte OBJ_EVENT_GFX_RED_SURF, 0x08
+	@ Female
+	.byte OBJ_EVENT_GFX_GREEN_NORMAL, 0x01
+	.byte OBJ_EVENT_GFX_GREEN_BIKE, 0x02
+	.byte OBJ_EVENT_GFX_GREEN_SURF, 0x08
 
 gUnknown_835B88E:: @ 835B88E
-	.byte 0x06, 0x0d
+	.byte OBJ_EVENT_GFX_RED_VS_SEEKER
+	.byte OBJ_EVENT_GFX_GREEN_VS_SEEKER
 
 gUnknown_835B890:: @ 835B890
 	.4byte MetatileBehavior_IsSouthArrowWarp

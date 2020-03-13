@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [],
   "warp_events": [
@@ -39,18 +41,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_Roof_EventScript_16C45A"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Condominiums_Roof_EventScript_Sign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 3,
       "y": 12,
       "elevation": 0,
-      "script": "CeladonCity_Condominiums_Roof_EventScript_16C45A"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_Condominiums_Roof_EventScript_Sign"
     }
   ]
 }

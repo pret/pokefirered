@@ -2,7 +2,6 @@
 #include "data.h"
 #include "script.h"
 #include "overworld.h"
-#include "battle.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "party_menu.h"
@@ -14,7 +13,7 @@
 
 static void sub_80BF97C(u8 taskId);
 
-void Special_ChooseMonFromParty(void)
+void ChoosePartyMon(void)
 {
     u8 taskId;
 
@@ -24,7 +23,7 @@ void Special_ChooseMonFromParty(void)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
 }
 
-void Special_SelectMoveTutorMon(void)
+void SelectMoveTutorMon(void)
 {
     u8 taskId;
 
@@ -44,14 +43,14 @@ static void sub_80BF97C(u8 taskId)
     }
 }
 
-void Special_SelectMove(void)
+void SelectMoveDeleterMove(void)
 {
     ShowSelectMovePokemonSummaryScreen(gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField, 0);
     sub_8138B38(3);
     gFieldCallback = FieldCallback_ReturnToEventScript2;
 }
 
-void Special_GetNumMovesSelectedMonHas(void)
+void GetNumMovesSelectedMonHas(void)
 {
     u8 i;
 
@@ -61,7 +60,7 @@ void Special_GetNumMovesSelectedMonHas(void)
             ++gSpecialVar_Result;
 }
 
-void Special_BufferMoveDeleterNicknameAndMove(void)
+void BufferMoveDeleterNicknameAndMove(void)
 {
     struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
@@ -92,7 +91,7 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-void Special_MoveDeleterForgetMove(void)
+void MoveDeleterForgetMove(void)
 {
     u16 i;
 
@@ -102,7 +101,7 @@ void Special_MoveDeleterForgetMove(void)
         ShiftMoveSlot(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
 }
 
-void Special_IsSelectedMonEgg(void)
+void IsSelectedMonEgg(void)
 {
     if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG))
         gSpecialVar_Result = TRUE;

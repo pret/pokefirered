@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 4,
-  "elevator_flag": 4,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": true,
+  "floor_number": 4,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 6,
       "y": 6,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BBEF",
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_Man",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 10,
       "y": 11,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BBF8",
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_Youngster",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
+      "graphics_id": "OBJ_EVENT_GFX_CLERK",
       "x": 3,
       "y": 13,
       "elevation": 0,
@@ -49,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BC0A",
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_Clerk",
       "flag": "0"
     }
   ],
@@ -79,11 +81,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 4,
       "y": 1,
       "elevation": 0,
-      "script": "CeladonCity_DepartmentStore_4F_EventScript_16BC01"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeladonCity_DepartmentStore_4F_EventScript_FloorSign"
     }
   ]
 }

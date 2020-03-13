@@ -948,7 +948,7 @@ void sub_8071898(void)
     while (TRUE)
     {
         taskId = FindTaskIdByFunc(sub_80718B8);
-        if (taskId == TASK_NONE)
+        if (taskId == TAIL_SENTINEL)
             break;
         DestroyTask(taskId);
     }

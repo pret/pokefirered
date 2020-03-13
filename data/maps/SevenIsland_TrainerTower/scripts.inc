@@ -6,10 +6,10 @@ SevenIsland_TrainerTower_OnTransition:: @ 8168BDB
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	end
 
-SevenIsland_TrainerTower_EventScript_168BE1:: @ 8168BE1
-	msgbox gUnknown_818C338, MSGBOX_SIGN
+SevenIsland_TrainerTower_EventScript_TrainerTowerSign:: @ 8168BE1
+	msgbox SevenIsland_TrainerTower_Text_TrainerTowerSign, MSGBOX_SIGN
 	end
 
-SevenIsland_TrainerTower_EventScript_168BEA:: @ 8168BEA
-	msgbox gUnknown_818C370, MSGBOX_SIGN
+SevenIsland_TrainerTower_EventScript_TrainerTowerAheadSign:: @ 8168BEA
+	msgbox SevenIsland_TrainerTower_Text_TrainerTowerAhead, MSGBOX_SIGN
 	end

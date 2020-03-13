@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_11",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_VERMILION_CITY",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 19,
       "y": 8,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9B0D",
+      "script": "Route11_EventScript_Eddie",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 16,
       "y": 17,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9C81",
+      "script": "Route11_EventScript_Hugo",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 31,
       "y": 8,
       "elevation": 3,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9B4B",
+      "script": "Route11_EventScript_Dillon",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 28,
       "y": 10,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9BC7",
+      "script": "Route11_EventScript_Dave",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 38,
       "y": 15,
       "elevation": 3,
@@ -86,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9CBF",
+      "script": "Route11_EventScript_Jasper",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 50,
       "y": 4,
       "elevation": 3,
@@ -99,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9D3B",
+      "script": "Route11_EventScript_Darian",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BALDING_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
       "x": 42,
       "y": 8,
       "elevation": 3,
@@ -112,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route11_EventScript_1A9C05",
+      "script": "Route11_EventScript_Braxton",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 50,
       "y": 14,
       "elevation": 3,
@@ -125,11 +127,11 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9B89",
+      "script": "Route11_EventScript_Yasu",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 57,
       "y": 16,
       "elevation": 3,
@@ -138,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route11_EventScript_1A9CFD",
+      "script": "Route11_EventScript_Dirk",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BALDING_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
       "x": 32,
       "y": 18,
       "elevation": 3,
@@ -151,11 +153,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 6,
-      "script": "Route11_EventScript_1A9C43",
+      "script": "Route11_EventScript_Bernie",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 42,
       "y": 12,
       "elevation": 3,
@@ -168,7 +170,7 @@
       "flag": "FLAG_HIDE_ROUTE11_X_DEFEND"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 63,
       "y": 13,
       "elevation": 3,
@@ -181,7 +183,7 @@
       "flag": "FLAG_HIDE_ROUTE11_GREAT_BALL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 13,
       "y": 3,
       "elevation": 3,
@@ -220,11 +222,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 3,
       "y": 7,
       "elevation": 3,
-      "script": "Route11_EventScript_167FF7"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route11_EventScript_DiglettsCaveSign"
     },
     {
       "type": "hidden_item",

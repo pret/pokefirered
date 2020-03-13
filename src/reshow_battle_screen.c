@@ -6,7 +6,6 @@
 #include "link.h"
 #include "data.h"
 #include "sprite.h"
-#include "text.h"
 #include "gpu_regs.h"
 #include "scanline_effect.h"
 #include "help_system.h"
@@ -14,8 +13,6 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
-#include "reshow_battle_screen.h"
-#include "constants/species.h"
 
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static void sub_8077AAC(void);
@@ -39,17 +36,17 @@ void ReshowBattleScreenAfterMenu(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                HelpSystem_SetSomeVariable2(0x19);
+                SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_DOUBLE);
             else
-                HelpSystem_SetSomeVariable2(0x18);
+                SetHelpContext(HELPCONTEXT_TRAINER_BATTLE_SINGLE);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         {
-            HelpSystem_SetSomeVariable2(0x1A);
+            SetHelpContext(HELPCONTEXT_SAFARI_BATTLE);
         }
         else
         {
-            HelpSystem_SetSomeVariable2(0x17);
+            SetHelpContext(HELPCONTEXT_WILD_BATTLE);
         }
     }
     SetMainCallback2(CB2_ReshowBattleScreenAfterMenu);

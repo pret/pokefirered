@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_18",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE17",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 46,
       "y": 14,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route18_EventScript_1AB3D3",
+      "script": "Route18_EventScript_Jacob",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 41,
       "y": 15,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route18_EventScript_1AB395",
+      "script": "Route18_EventScript_Ramiro",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 39,
       "y": 12,
       "elevation": 3,
@@ -60,7 +62,7 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 6,
-      "script": "Route18_EventScript_1AB357",
+      "script": "Route18_EventScript_Wilton",
       "flag": "0"
     }
   ],
@@ -83,18 +85,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 37,
       "y": 7,
       "elevation": 0,
-      "script": "Route18_EventScript_168228"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route18_EventScript_CyclingRoadSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 52,
       "y": 7,
       "elevation": 0,
-      "script": "Route18_EventScript_16821F"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route18_EventScript_RouteSign"
     }
   ]
 }

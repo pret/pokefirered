@@ -5,7 +5,6 @@
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
-#include "fldeff.h"
 
 static void sub_80E57E8(u8 taskId);
 static void sub_80E583C(u8 taskId);

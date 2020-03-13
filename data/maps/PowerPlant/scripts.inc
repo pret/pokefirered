@@ -8,7 +8,7 @@ PowerPlant_OnResume:: @ 816376F
 	end
 
 PowerPlant_EventScript_TryRemoveStaticMon:: @ 8163779
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_ne EventScript_Return
 	removeobject VAR_LAST_TALKED
@@ -48,10 +48,10 @@ PowerPlant_EventScript_Zapdos:: @ 81637B8
 	playbgm MUS_EXEYE, 0
 	waitbuttonpress
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special Special_StartLegendaryBattle
+	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq PowerPlant_EventScript_DefeatedZapdos
 	compare VAR_RESULT, B_OUTCOME_RAN
@@ -85,7 +85,7 @@ PowerPlant_EventScript_Electrode1:: @ 816382F
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq PowerPlant_EventScript_FoughtElectrode1
 	compare VAR_RESULT, B_OUTCOME_RAN
@@ -114,7 +114,7 @@ PowerPlant_EventScript_Electrode2:: @ 816388D
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special sub_8112364
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq PowerPlant_EventScript_FoughtElectrode2
 	compare VAR_RESULT, B_OUTCOME_RAN

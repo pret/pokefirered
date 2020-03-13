@@ -72,6 +72,6 @@ struct UnkStruct_0858AB24 {
     u16 unk1;
 };
 
-extern const struct UnkStruct_0858AB24 gUnknown_0858AB24[];
+extern const struct UnkStruct_0858AB24 gUnknown_83DFC9C[];
 
 #endif // GUARD_BERRY_H

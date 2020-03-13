@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_24",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_CERULEAN_CITY",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 12,
       "y": 15,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route24_EventScript_168620",
+      "script": "Route24_EventScript_Rocket",
       "flag": "FLAG_HIDE_NUGGET_BRIDGE_ROCKET"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 12,
       "y": 19,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A972D",
+      "script": "Route24_EventScript_Ethan",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 10,
       "y": 22,
       "elevation": 3,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A9673",
+      "script": "Route24_EventScript_Reli",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 12,
       "y": 25,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A95F7",
+      "script": "Route24_EventScript_Timmy",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 10,
       "y": 28,
       "elevation": 3,
@@ -86,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A96B1",
+      "script": "Route24_EventScript_Ali",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
       "x": 12,
       "y": 31,
       "elevation": 3,
@@ -99,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 2,
-      "script": "Route24_EventScript_1A9635",
+      "script": "Route24_EventScript_Cale",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CAMPER",
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 5,
       "y": 21,
       "elevation": 3,
@@ -112,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "Route24_EventScript_1A96EF",
+      "script": "Route24_EventScript_Shane",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 4,
       "elevation": 3,
@@ -138,7 +140,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
-      "script": "Route24_EventScript_168660"
+      "script": "Route24_EventScript_RocketTriggerLeft"
     },
     {
       "type": "trigger",
@@ -147,7 +149,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
       "var_value": 0,
-      "script": "Route24_EventScript_16866C"
+      "script": "Route24_EventScript_RocketTriggerRight"
     }
   ],
   "bg_events": [

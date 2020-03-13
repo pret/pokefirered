@@ -1,5 +1,4 @@
 #include "global.h"
-#include "util.h"
 
 const u32 gBitTable[] =
 {

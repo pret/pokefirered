@@ -2879,7 +2879,7 @@ extern const u16 gTMCaseMainWindowPalette[];
 
 // egg_hatch
 extern const u32 gBattleTextboxTiles[];
-extern const u32 gFile_graphics_interface_menu_map_tilemap[];
+extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleTextboxPalette[];
 extern const u32 gTradeGba2_Pal[];
 extern const u32 gTradeGba_Gfx[];
@@ -4314,7 +4314,7 @@ extern const u32 gHealthboxSafariGfx[];
 extern const u32 gBlankGfxCompressed[];
 extern const u16 gBattleInterface_BallStatusBarPal[];
 extern const u16 gBattleInterface_BallDisplayPal[];
-extern const u32 gFile_graphics_interface_hp_numbers[];
+extern const u32 gInterfaceGfx_HPNumbers[];
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
 extern const u32 gSubstituteDollGfx[];
@@ -4845,10 +4845,10 @@ extern const u32 gBuyMenuFrame_Pal[];
 extern const u16 gUnknown_8D2FBB4[];
 
 // trainer card
-extern const u16 gFireRedTrainerCard_Pal[];
-extern const u32 gFireRedTrainerCard_Gfx[];
-extern const u16 gEmeraldTrainerCard_Pal[];
-extern const u32 gEmeraldTrainerCard_Gfx[];
+extern const u16 gKantoTrainerCard_Pal[];
+extern const u32 gKantoTrainerCard_Gfx[];
+extern const u16 gHoennTrainerCard_Pal[];
+extern const u32 gHoennTrainerCard_Gfx[];
 
 // battle_interface
 extern const u32 gFile_graphics_battle_interface_ball_status_bar_sheet[];
@@ -4874,5 +4874,47 @@ extern const u32 gLinkMiscMenu_Tilemap[];
 
 // union_room_chat_objects
 extern const u32 gUnionRoomChatIcons[];
+
+// battle_bg
+extern const u32 gFile_graphics_battle_transitions_vs_frame_sheet[];
+extern const u32 gVsLettersGfx[];
+extern const u32 gFile_graphics_battle_transitions_vs_frame_palette[];
+extern const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[];
+
+// berry_crush
+extern const u16 gUnknown_8EAFEA0[];
+extern const u32 gUnknown_8EAFFC0[];
+extern const u32 gUnknown_8EB0ADC[];
+
+// easy_chat_3
+extern const u32 gEasyChatWindow_Gfx[];
+extern const u32 gEasyChatWindow_Tilemap[];
+extern const u32 gEasyChatMode_Pal[];
+extern const u16 gUnknown_8E99F24[];
+extern const u32 gEasyChatRedRectangularCursor_Tiles[];
+extern const u32 gEasyChatSelectGroupHelp_Tiles[];
+extern const u32 gEasyChatModeIcons_Tiles[];
+
+// naming_screen
+extern const u32 gUnknown_8E982BC[];
+extern const u32 gUnknown_8E98458[];
+extern const u32 gUnknown_8E98398[];
+extern const u32 gUnknown_8E98518[];
+extern const u32 gNamingScreenMenu_Gfx[];
+extern const u16 gUnknown_8E98004[];
+extern const u16 gUnknown_8E97FE4[];
+extern const u16 gNamingScreenMenu_Pal[];
+extern const u16 gUnknown_8E98858[];
+extern const u16 gUnknown_8E98A38[];
+extern const u16 gUnknown_8E985D8[];
+extern const u16 gUnknown_8E98FD8[];
+extern const u16 gUnknown_8E98C18[];
+extern const u16 gUnknown_8E98CB8[];
+extern const u16 gUnknown_8E98D58[];
+extern const u16 gUnknown_8E98DF8[];
+extern const u16 gUnknown_8E98E98[];
+extern const u16 gUnknown_8E98F38[];
+extern const u16 gUnknown_8E990D8[];
+extern const u16 gUnknown_8E990F8[];
 
 #endif //GUARD_GRAPHICS_H

@@ -7,21 +7,21 @@ CeladonCity_PokemonCenter_1F_OnTransition:: @ 816C5F7
 	setrespawn SPAWN_CELADON_CITY
 	end
 
-CeladonCity_PokemonCenter_1F_EventScript_16C5FB:: @ 816C5FB
+CeladonCity_PokemonCenter_1F_EventScript_Nurse:: @ 816C5FB
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-CeladonCity_PokemonCenter_1F_EventScript_16C604:: @ 816C604
-	msgbox gUnknown_819685B, MSGBOX_NPC
+CeladonCity_PokemonCenter_1F_EventScript_Gentleman:: @ 816C604
+	msgbox CeladonCity_PokemonCenter_1F_Text_PokeFluteAwakensSleepingMons, MSGBOX_NPC
 	end
 
-CeladonCity_PokemonCenter_1F_EventScript_16C60D:: @ 816C60D
-	msgbox gUnknown_81968C2, MSGBOX_NPC
+CeladonCity_PokemonCenter_1F_EventScript_CooltrainerF:: @ 816C60D
+	msgbox CeladonCity_PokemonCenter_1F_Text_RodeHereFromFuchsia, MSGBOX_NPC
 	end
 
-CeladonCity_PokemonCenter_1F_EventScript_16C616:: @ 816C616
-	msgbox gUnknown_8196913, MSGBOX_NPC
+CeladonCity_PokemonCenter_1F_EventScript_Youngster:: @ 816C616
+	msgbox CeladonCity_PokemonCenter_1F_Text_GoToCyclingRoadIfIHadBike, MSGBOX_NPC
 	end

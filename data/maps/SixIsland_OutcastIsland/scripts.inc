@@ -1,7 +1,7 @@
 SixIsland_OutcastIsland_MapScripts:: @ 8168B15
 	.byte 0
 
-SixIsland_OutcastIsland_EventScript_168B16:: @ 8168B16
-	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_46, Text_18B35A, Text_18B3C2
-	msgbox gUnknown_818B3C8, MSGBOX_AUTOCLOSE
+SixIsland_OutcastIsland_EventScript_Rocket:: @ 8168B16
+	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_46, SixIsland_OutcastIsland_Text_RocketIntro, SixIsland_OutcastIsland_Text_RocketDefeat
+	msgbox SixIsland_OutcastIsland_Text_RocketPostBattle, MSGBOX_AUTOCLOSE
 	end

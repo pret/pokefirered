@@ -24,7 +24,7 @@
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/vars.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 
 static EWRAM_DATA u16 sSpecialVar_0x8004_Copy = 0;
 
@@ -177,7 +177,7 @@ static const u16 sLongStreakPrizes[] = {
     ITEM_CHOICE_BAND
 };
 
-void ScrSpecial_BattleTowerMapScript2(void)
+void BattleTowerMapScript2(void)
 {
     u8 count = 0;
     s32 levelType;
@@ -389,7 +389,7 @@ void ChooseNextBattleTowerTrainer(void)
 
 static void SetBattleTowerTrainerGfxId(u8 trainerClass)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_YOUNGSTER);
+    VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_YOUNGSTER);
 }
 
 void SetEReaderTrainerGfxId(void)
@@ -825,7 +825,7 @@ void CheckPartyBattleTowerBanlist(void)
     }
 }
 
-static void PrintBattleTowerTrainerMessage(const u16 *greeting)
+static void BufferBattleTowerTrainerMessage(const u16 *greeting)
 {
     s32 i;
     if (EC_DoesEasyChatStringFitOnLine(greeting, 3, 2, 18))
@@ -847,11 +847,11 @@ static void PrintBattleTowerTrainerMessage(const u16 *greeting)
 void PrintBattleTowerTrainerGreeting(void)
 {
     if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
-        PrintBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.greeting);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.greeting);
     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-        PrintBattleTowerTrainerMessage(gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].greeting);
+        BufferBattleTowerTrainerMessage(gBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].greeting);
     else
-        PrintBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting);
 }
 
 static void CB2_FinishEReaderBattle(void)
@@ -1395,9 +1395,9 @@ void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
         ((u32 *)ereaderTrainer)[i] = 0;
 }
 
-void PrintEReaderTrainerGreeting(void)
+void BufferEReaderTrainerGreeting(void)
 {
-    PrintBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.greeting);
+    BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.greeting);
 }
 
 static void PrintEReaderTrainerFarewellMessage(void)
@@ -1405,9 +1405,9 @@ static void PrintEReaderTrainerFarewellMessage(void)
     if (gBattleOutcome == B_OUTCOME_DREW)
         gStringVar4[0] = EOS;
     else if (gBattleOutcome == B_OUTCOME_WON)
-        PrintBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.farewellPlayerWon);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.farewellPlayerWon);
     else
-        PrintBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.farewellPlayerLost);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->battleTower.ereaderTrainer.farewellPlayerLost);
 }
 
 void Dummy_TryEnableBravoTrainerBattleTower(void)

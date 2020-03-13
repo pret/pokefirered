@@ -1,3 +1,5 @@
+.equ LOCALID_RIVAL, 2
+
 SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
 	map_script MAP_SCRIPT_ON_TRANSITION, SixIsland_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
@@ -7,73 +9,73 @@ SixIsland_PokemonCenter_1F_MapScripts:: @ 8171D6A
 SixIsland_PokemonCenter_1F_OnTransition:: @ 8171D7A
 	setrespawn SPAWN_SIX_ISLAND
 	compare VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0
-	call_if_eq EventScript_171D89
+	call_if_eq SixIsland_PokemonCenter_1F_EventScript_ShowRival
 	end
 
-EventScript_171D89:: @ 8171D89
+SixIsland_PokemonCenter_1F_EventScript_ShowRival:: @ 8171D89
 	clearflag FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL
 	return
 
 SixIsland_PokemonCenter_1F_OnFrame:: @ 8171D8D
-	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, EventScript_171D97
+	map_script_2 VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_RivalScene
 	.2byte 0
 
-EventScript_171D97:: @ 8171D97
+SixIsland_PokemonCenter_1F_EventScript_RivalScene:: @ 8171D97
 	lockall
 	textcolor 0
-	applymovement 2, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 2, Movement_ExclamationMark
+	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 2, Movement_Delay48
+	applymovement LOCALID_RIVAL, Movement_Delay48
 	waitmovement 0
 	delay 25
-	applymovement 2, Movement_171DF9
+	applymovement LOCALID_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalApproach
 	waitmovement 0
-	msgbox gUnknown_81A3F30
+	msgbox SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_171E02
-	applymovement 2, Movement_171DFE
+	applymovement OBJ_EVENT_ID_PLAYER, SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
 	playse SE_KAIDAN
 	delay 35
-	removeobject 2
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 1
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end
 
-Movement_171DF9:: @ 8171DF9
+SixIsland_PokemonCenter_1F_Movement_RivalApproach:: @ 8171DF9
 	walk_right
 	walk_right
 	walk_down
 	walk_down
 	step_end
 
-Movement_171DFE:: @ 8171DFE
+SixIsland_PokemonCenter_1F_Movement_RivalExit:: @ 8171DFE
 	delay_16
 	delay_4
 	walk_down
 	step_end
 
-Movement_171E02:: @ 8171E02
+SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit:: @ 8171E02
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-SixIsland_PokemonCenter_1F_EventScript_171E05:: @ 8171E05
+SixIsland_PokemonCenter_1F_EventScript_Nurse:: @ 8171E05
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
 	release
 	end
 
-SixIsland_PokemonCenter_1F_EventScript_171E0E:: @ 8171E0E
-	msgbox gUnknown_81A3E02, MSGBOX_NPC
+SixIsland_PokemonCenter_1F_EventScript_Hiker:: @ 8171E0E
+	msgbox SixIsland_PokemonCenter_1F_Text_SomethingHiddenOnThisIsland, MSGBOX_NPC
 	end
 
-SixIsland_PokemonCenter_1F_EventScript_171E17:: @ 8171E17
-	msgbox gUnknown_81A3E87, MSGBOX_NPC
+SixIsland_PokemonCenter_1F_EventScript_OldMan:: @ 8171E17
+	msgbox SixIsland_PokemonCenter_1F_Text_SomeMonsEvolveByTradingWithHeldItem, MSGBOX_NPC
 	end

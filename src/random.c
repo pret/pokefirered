@@ -1,5 +1,4 @@
 #include "global.h"
-#include "random.h"
 
 // The number 1103515245 comes from the example implementation
 // of rand and srand in the ISO C standard.

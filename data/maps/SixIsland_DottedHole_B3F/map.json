@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_DOTTED_HOLE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_4",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [],
   "warp_events": [
@@ -53,11 +55,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_1",
+      "type": "sign",
       "x": 6,
       "y": 5,
       "elevation": 0,
-      "script": "SixIsland_DottedHole_B3F_EventScript_16419E"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "SixIsland_DottedHole_B3F_EventScript_BrailleRight"
     }
   ]
 }

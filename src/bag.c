@@ -1,5 +1,4 @@
 #include "global.h"
-#include "task.h"
 #include "palette.h"
 #include "item_menu.h"
 #include "text.h"
@@ -9,7 +8,6 @@
 #include "new_menu_helpers.h"
 #include "menu.h"
 #include "money.h"
-#include "bag.h"
 #include "strings.h"
 
 static const u16 sBagWindowPalF[] = INCBIN_U16("data/bag/bag_window_pal.gbapal");

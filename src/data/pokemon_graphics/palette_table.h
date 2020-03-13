@@ -1,4 +1,5 @@
-const struct CompressedSpritePalette gMonPaletteTable[] =
+// A dirty hack because field_effect.c requires this not be const
+__attribute__((section(".rodata"))) struct CompressedSpritePalette gMonPaletteTable[] =
 {
     SPECIES_PAL(NONE, gMonPalette_CircledQuestionMark),
     SPECIES_PAL(BULBASAUR, gMonPalette_Bulbasaur),

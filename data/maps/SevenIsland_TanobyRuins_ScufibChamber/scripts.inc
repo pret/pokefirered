@@ -3,5 +3,5 @@ SevenIsland_TanobyRuins_ScufibChamber_MapScripts:: @ 8164D02
 	.byte 0
 
 SevenIsland_TanobyRuins_ScufibChamber_OnTransition:: @ 8164D08
-	call EventScript_1A925E
+	call EventScript_TryDarkenRuins
 	end

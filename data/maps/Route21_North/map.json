@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_21",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_PALLET_TOWN",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 7,
       "y": 27,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_North_EventScript_1AB975",
+      "script": "Route21_North_EventScript_Ronald",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 16,
       "y": 26,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_North_EventScript_1AB9F1",
+      "script": "Route21_North_EventScript_Wade",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 12,
       "y": 44,
       "elevation": 1,
@@ -60,11 +62,11 @@
       "movement_range_y": 2,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABA6D",
+      "script": "Route21_North_EventScript_Spencer",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 14,
       "y": 35,
       "elevation": 1,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABB65",
+      "script": "Route21_North_EventScript_Lil",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_TUBER_M_1",
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_M_1",
       "x": 15,
       "y": 35,
       "elevation": 1,
@@ -86,13 +88,14 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route21_North_EventScript_1ABBAB",
+      "script": "Route21_North_EventScript_Ian",
       "flag": "0"
     },
     {
-      "graphics_id": "65307",
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "in_connection": true,
       "x": 13,
-      "y": 65533,
+      "y": -3,
       "elevation": 2,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,

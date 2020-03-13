@@ -12,23 +12,23 @@ FuchsiaCity_House3_EventScript_MoveDeleter:: @ 816D895
 
 FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter:: @ 816D8B0
 	msgbox FuchsiaCity_House3_Text_WhichMonShouldForgetMove
-	special Special_ChooseMonFromParty
+	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
 	goto_if_ge FuchsiaCity_House3_EventScript_CancelForgetMove
-	special Special_IsSelectedMonEgg
+	special IsSelectedMonEgg
 	compare VAR_RESULT, TRUE
 	goto_if_eq FuchsiaCity_House3_EventScript_CantForgetMoveEgg
-	special Special_GetNumMovesSelectedMonHas
+	special GetNumMovesSelectedMonHas
 	compare VAR_RESULT, 1
 	goto_if_eq FuchsiaCity_House3_EventScript_CantForgetOnlyMove
 	msgbox FuchsiaCity_House3_Text_WhichMoveShouldBeForgotten
 	fadescreen FADE_TO_BLACK
-	special Special_SelectMove
+	special SelectMoveDeleterMove
 	fadescreen FADE_FROM_BLACK
 	compare VAR_0x8005, MAX_MON_MOVES
 	goto_if_eq FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter
-	special Special_BufferMoveDeleterNicknameAndMove
+	special BufferMoveDeleterNicknameAndMove
 	msgbox FuchsiaCity_House3_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FuchsiaCity_House3_EventScript_ForgetMove
@@ -36,7 +36,7 @@ FuchsiaCity_House3_EventScript_ChooseMonForMoveDeleter:: @ 816D8B0
 	end
 
 FuchsiaCity_House3_EventScript_ForgetMove:: @ 816D919
-	special Special_MoveDeleterForgetMove
+	special MoveDeleterForgetMove
 	playfanfare MUS_ME_WASURE
 	waitfanfare
 	msgbox FuchsiaCity_House3_Text_MonHasForgottenMoveCompletely
@@ -44,7 +44,7 @@ FuchsiaCity_House3_EventScript_ForgetMove:: @ 816D919
 	end
 
 FuchsiaCity_House3_EventScript_CantForgetOnlyMove:: @ 816D92A
-	special Special_BufferMoveDeleterNicknameAndMove
+	special BufferMoveDeleterNicknameAndMove
 	msgbox FuchsiaCity_House3_Text_MonOnlyKnowsOneMove
 	release
 	end

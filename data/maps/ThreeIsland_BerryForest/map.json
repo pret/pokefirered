@@ -5,16 +5,18 @@
   "music": "MUS_T_MORI",
   "region_map_section": "MAPSEC_BERRY_FOREST",
   "requires_flash": false,
-  "weather": "WEATHER_CLOUDY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 7,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "weather": "WEATHER_SHADE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 4,
       "y": 8,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163C83",
+      "script": "ThreeIsland_BerryForest_EventScript_Lostelle",
       "flag": "FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 12,
       "y": 11,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 19,
       "y": 7,
       "elevation": 3,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 23,
       "y": 17,
       "elevation": 3,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 38,
       "y": 23,
       "elevation": 3,
@@ -75,11 +77,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 44,
       "y": 23,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 44,
       "y": 29,
       "elevation": 3,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 16,
       "y": 43,
       "elevation": 3,
@@ -114,11 +116,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_18"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 17,
       "y": 39,
       "elevation": 3,
@@ -127,11 +129,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_19"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 14,
       "y": 39,
       "elevation": 3,
@@ -140,11 +142,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_1A"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 11,
       "y": 39,
       "elevation": 3,
@@ -153,11 +155,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_1B"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 5,
       "elevation": 3,
@@ -170,7 +172,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ETHER"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 27,
       "y": 11,
       "elevation": 3,
@@ -183,7 +185,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 43,
       "elevation": 3,
@@ -222,18 +224,20 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 7,
       "y": 27,
       "elevation": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163D31"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThreeIsland_BerryForest_EventScript_BewareSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 39,
       "y": 35,
       "elevation": 0,
-      "script": "ThreeIsland_BerryForest_EventScript_163D28"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "ThreeIsland_BerryForest_EventScript_WelcomeSign"
     },
     {
       "type": "hidden_item",

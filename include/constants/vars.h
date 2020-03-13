@@ -90,7 +90,7 @@
 #define VAR_0x402F                         0x402F
 
 #define VAR_ICE_STEP_COUNT                 0x4030
-#define VAR_STARTER_MON                    0x4031
+#define VAR_STARTER_MON                    0x4031 // 0: Bulbasaur, 1: Squirtle, 2: Charmander
 #define VAR_0x4032                         0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
 
@@ -323,11 +323,11 @@
 #define VAR_RESULT                 0x800D
 #define VAR_ITEM_ID                0x800E
 #define VAR_LAST_TALKED            0x800F
-#define VAR_CONTEST_RANK           0x8010
-#define VAR_CONTEST_CATEGORY       0x8011
-#define VAR_MON_BOX_ID             0x8012
-#define VAR_MON_BOX_POS            0x8013
-#define VAR_TEXT_COLOR             0x8014
+#define VAR_MON_BOX_ID             0x8010
+#define VAR_MON_BOX_POS            0x8011
+#define VAR_TEXT_COLOR             0x8012
+#define VAR_PREV_TEXT_COLOR        0x8013
+#define VAR_0x8014                 0x8014 // Unknown/unused
 
 #define SPECIAL_VARS_END           0x8014
 

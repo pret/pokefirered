@@ -11,12 +11,11 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "strings.h"
-#include "menu.h"
-#include "field_weather.h"
 #include "trainer_pokemon_sprites.h"
 #include "sound.h"
 #include "constants/species.h"
 #include "constants/maps.h"
+#include "constants/field_weather.h"
 
 #if defined(FIRERED)
 #define TITLE_TEXT gString_PokemonFireRed_Staff
@@ -716,7 +715,7 @@ static const struct CreditsTextHeader sCreditsTexts[] = {
     { gString_Dummy, gString_Dummy, FALSE }
 };
 
-void Special_Credits(void)
+void DoCredits(void)
 {
     sCreditsMgr = AllocZeroed(sizeof(*sCreditsMgr));
     ResetTasks();
@@ -920,7 +919,7 @@ static s32 RollCredits(void)
             case CREDITSSCRCMD_MON:
                 sCreditsMgr->mainseqno = CREDITSSCENE_MON_DESTROY_ASSETS;
                 sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                FadeScreen(1, 0);
+                FadeScreen(FADE_TO_BLACK, 0);
                 break;
             case CREDITSSCRCMD_THEENDGFX:
                 sCreditsMgr->mainseqno = CREDITSSCENE_THEEND_DESTROY_ASSETS;

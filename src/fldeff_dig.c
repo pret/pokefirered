@@ -5,8 +5,6 @@
 #include "item_use.h"
 #include "overworld.h"
 #include "party_menu.h"
-#include "sprite.h"
-#include "constants/object_events.h"
 
 static void FieldCallback_Dig(void);
 static void sub_80C9AFC(void);
@@ -31,7 +29,7 @@ static void FieldCallback_Dig(void)
 
 bool8 FldEff_UseDig(void)
 {
-    u8 taskId = oei_task_add();
+    u8 taskId = CreateFieldEffectShowMon();
 
     FLDEFF_SET_FUNC_TO_DATA(sub_80C9AFC);
     SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);

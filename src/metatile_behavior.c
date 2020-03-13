@@ -16,39 +16,12 @@ static const bool8 sTileSurfable[METATILE_COUNT] = {
     [MB_SOUTHWARD_CURRENT] = TRUE
 };
 
-static const u8 sTileBitAttributes[] = {
-    0x00,
-    0x01,
-    0x02,
-    0x04,
-    0x08,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x00
+static const u8 sTileBitAttributes[32] = {
+    [0] = 0x00,
+    [1] = 0x01,
+    [2] = 0x02,
+    [3] = 0x04,
+    [4] = 0x08,
 };
 
 bool8 MetatileBehavior_UnusedReturnTrue(u8 metatileBehavior)
@@ -769,7 +742,7 @@ bool8 MetatileBehavior_UnusedReturnFalse_11(u8 metatileBehavior) { return FALSE;
 bool8 MetatileBehavior_UnusedReturnFalse_12(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_13(u8 metatileBehavior) { return FALSE; }
 
-bool8 sub_805A2BC(u8 arg1, u8 arg2)
+bool8 TestMetatileAttributeBit(u8 arg1, u8 arg2)
 {
     if(sTileBitAttributes[arg1] & arg2)
         return TRUE;

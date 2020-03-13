@@ -14,19 +14,19 @@ Route16_EventScript_RemoveSnorlax:: @ 81680FF
 
 Route16_OnTransition:: @ 8168103
 	compare VAR_MAP_SCENE_ROUTE16, 1
-	call_if_eq Route16_EventScript_EnterCyclingRoad
+	call_if_eq Route16_OnTransitionCyclingRoad
 	end
 
-Route16_EventScript_EnterCyclingRoad:: @ 816810F
+Route16_OnTransitionCyclingRoad:: @ 816810F
 	setflag FLAG_SYS_ON_CYCLING_ROAD
 	return
 
 Route16_OnWarp:: @ 8168113
-	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_EventScript_WarpIntoCyclingRoad
+	map_script_2 VAR_MAP_SCENE_ROUTE16, 1, Route16_OnWarpCyclingRoad
 	.2byte 0
 
-Route16_EventScript_WarpIntoCyclingRoad:: @ 816811D
-	special Special_ForcePlayerOntoBike
+Route16_OnWarpCyclingRoad:: @ 816811D
+	special ForcePlayerOntoBike
 	end
 
 Route16_EventScript_Snorlax:: @ 8168121
@@ -48,7 +48,7 @@ Route16_EventScript_Snorlax:: @ 8168121
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	specialvar VAR_RESULT, Special_GetBattleOutcome
+	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq Route16_EventScript_FoughtSnorlax
 	compare VAR_RESULT, B_OUTCOME_RAN

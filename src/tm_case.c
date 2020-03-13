@@ -25,7 +25,6 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
-#include "tm_case.h"
 #include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -613,7 +612,7 @@ static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1)
     }
     else
     {
-        AddTextPrinterParameterized_ColorByIndex(0, 2, gFameCheckerText_ListMenuCursor, 0, a0, 0, 0, 0, a1);
+        AddTextPrinterParameterized_ColorByIndex(0, 2, gText_SelectorArrow2, 0, a0, 0, 0, 0, a1);
     }
 }
 
@@ -798,7 +797,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
     Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, 2, 0, 2, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, 0);
     strbuf = Alloc(256);
     GetTMNumberAndMoveString(strbuf, gSpecialVar_ItemId);
-    StringAppend(strbuf, gText_IsSelected);
+    StringAppend(strbuf, gText_Var1IsSelected + 2); // +2 skips over the stringvar
     AddTextPrinterParameterized_ColorByIndex(2, 2, strbuf, 0, 2, 1, 0, 0, 1);
     Free(strbuf);
     if (itemid_is_unique(gSpecialVar_ItemId))
@@ -1304,7 +1303,7 @@ static void InitWindowTemplatesAndPals(void)
     LoadPalette(gTMCaseMainWindowPalette, 0xA0, 0x20);
     LoadPalette(sPal3Override, 0xF6, 0x04);
     LoadPalette(sPal3Override, 0xD6, 0x04);
-    sub_8107D38(0xc0, 0x01);
+    ListMenuLoadStdPalAt(0xc0, 0x01);
     for (i = 0; i < 9; i++)
         FillWindowPixelBuffer(i, 0x00);
     PutWindowTilemap(0);

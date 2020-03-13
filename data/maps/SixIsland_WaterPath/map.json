@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_WATER_PATH",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_SIX_ISLAND_GREEN_PATH",
@@ -30,7 +32,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 12,
       "y": 13,
       "elevation": 3,
@@ -39,11 +41,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SixIsland_WaterPath_EventScript_1AC555",
+      "script": "SixIsland_WaterPath_EventScript_Rose",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKER",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKER",
       "x": 11,
       "y": 52,
       "elevation": 3,
@@ -52,11 +54,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "SixIsland_WaterPath_EventScript_1AC593",
+      "script": "SixIsland_WaterPath_EventScript_Edward",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 13,
       "y": 35,
       "elevation": 1,
@@ -65,11 +67,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SixIsland_WaterPath_EventScript_1AC5D1",
+      "script": "SixIsland_WaterPath_EventScript_Samir",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 15,
       "y": 45,
       "elevation": 1,
@@ -78,11 +80,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC60F",
+      "script": "SixIsland_WaterPath_EventScript_Denise",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 6,
       "y": 21,
       "elevation": 3,
@@ -91,11 +93,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC64D",
+      "script": "SixIsland_WaterPath_EventScript_Miu",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 7,
       "y": 21,
       "elevation": 3,
@@ -104,11 +106,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_WaterPath_EventScript_1AC693",
+      "script": "SixIsland_WaterPath_EventScript_Mia",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 11,
       "y": 76,
       "elevation": 3,
@@ -117,11 +119,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "SixIsland_WaterPath_EventScript_1AC6D9",
+      "script": "SixIsland_WaterPath_EventScript_Earl",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 19,
       "elevation": 0,
@@ -134,7 +136,7 @@
       "flag": "FLAG_HIDE_SIX_ISLAND_WATER_PATH_ELIXIR"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
       "y": 87,
       "elevation": 3,
@@ -166,11 +168,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 8,
       "y": 14,
       "elevation": 0,
-      "script": "SixIsland_WaterPath_EventScript_168B41"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SixIsland_WaterPath_EventScript_HornWantedSign"
     },
     {
       "type": "hidden_item",
@@ -203,11 +206,12 @@
       "underfoot": false
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 54,
       "elevation": 0,
-      "script": "SixIsland_WaterPath_EventScript_168B4A"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SixIsland_WaterPath_EventScript_RouteSign"
     }
   ]
 }

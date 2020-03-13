@@ -1536,7 +1536,7 @@ static void PlaceListMenuCursor(bool8 isActive)
 {
     u16 cursorY = ListMenuGetYCoordForPrintingArrowCursor(sFameCheckerData->listMenuTaskId);
     if (isActive == TRUE)
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_DkGrey, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_DkGrey, 0, gText_SelectorArrow2);
     else
-        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_White, 0, gFameCheckerText_ListMenuCursor);
+        AddTextPrinterParameterized4(FCWINDOWID_LIST, 2, 0, cursorY, 0, 0, sTextColor_White, 0, gText_SelectorArrow2);
 }

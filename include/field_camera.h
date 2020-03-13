@@ -8,9 +8,9 @@
 struct CameraObject
 {
     void (*callback)(struct CameraObject *);
-    u32 unk4;
-    s32 unk8;
-    s32 unkC;
+    u32 spriteId;
+    s32 movementSpeedX;
+    s32 movementSpeedY;
     s32 x;
     s32 y;
 };
@@ -28,6 +28,7 @@ void CurrentMapDrawMetatileAt(int x, int y);
 void sub_805A658(s16 *x, s16 *y);
 void SetCameraPanningCallback(void (*cb)(void));
 void SetCameraPanning(s16 x, s16 y);
+void UpdateCameraPanning(void);
 void InstallCameraPanAheadCallback(void);
 void DrawDoorMetatileAt(int x, int y, const u16 *data);
 

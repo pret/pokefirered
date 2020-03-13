@@ -17,11 +17,11 @@ Text_SwordsDanceTaught:: @ 818300D
     .string "If only we could keep getting\n"
     .string "stronger and stronger, eh?$"
 
-gUnknown_8183046:: @ 8183046
+SevenIsland_Text_IslandSign:: @ 8183046
     .string "SEVEN ISLAND\n"
     .string "Quest Island of Infinity$"
 
-gUnknown_818306C:: @ 818306C
+SevenIsland_Text_IslandsMadeInSevenDays:: @ 818306C
     .string "These islands are called the SEVII\n"
     .string "ISLANDS because there are seven.\p"
     .string "…Or at least that's what the young\n"
@@ -30,7 +30,7 @@ gUnknown_818306C:: @ 818306C
     .string "named because they are said to\l"
     .string "have been made in seven days.$"
 
-gUnknown_8183143:: @ 8183143
+SevenIsland_Text_IslandVirtuallyUntouched:: @ 8183143
     .string "This island has been left virtually\n"
     .string "untouched in its natural state.\p"
     .string "It could be a little difficult to\n"

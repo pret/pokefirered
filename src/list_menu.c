@@ -8,9 +8,7 @@
 #include "main.h"
 #include "task.h"
 #include "graphics.h"
-#include "decompress.h"
 #include "palette.h"
-#include "malloc.h"
 #include "strings.h"
 #include "sound.h"
 #include "pokemon_icon.h"
@@ -258,7 +256,7 @@ void DestroyListMenuTask(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove)
     if (itemsAbove != NULL)
         *itemsAbove = list->itemsAbove;
 
-    if (list->taskId != TASK_NONE)
+    if (list->taskId != TAIL_SENTINEL)
         ListMenuRemoveCursorObject(list->taskId, list->template.cursorKind - 2);
 
     DestroyTask(listTaskId);
@@ -348,7 +346,7 @@ static u8 ListMenuInitInternal(const struct ListMenuTemplate *listMenuTemplate, 
     list->itemsAbove = itemsAbove;
     list->unk_1C = 0;
     list->unk_1D = 0;
-    list->taskId = TASK_NONE;
+    list->taskId = TAIL_SENTINEL;
     list->unk_1F = 0;
     gListMenuOverride.cursorPal = list->template.cursorPal;
     gListMenuOverride.fillValue = list->template.fillValue;
@@ -415,17 +413,17 @@ static void ListMenuDrawCursor(struct ListMenu *list)
     switch (list->template.cursorKind)
     {
     case 0:
-        ListMenuPrint(list, gFameCheckerText_ListMenuCursor, x, y);
+        ListMenuPrint(list, gText_SelectorArrow2, x, y);
         break;
     case 1:
         break;
     case 2:
-        if (list->taskId == TASK_NONE)
+        if (list->taskId == TAIL_SENTINEL)
             list->taskId = ListMenuAddCursorObject(list, 0);
         ListMenuUpdateCursorObject(list->taskId, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 - 1, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y - 1, 0);
         break;
     case 3:
-        if (list->taskId == TASK_NONE)
+        if (list->taskId == TAIL_SENTINEL)
             list->taskId = ListMenuAddCursorObject(list, 1);
         ListMenuUpdateCursorObject(list->taskId, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT) * 8 + x, GetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP) * 8 + y, 1);
         break;
@@ -763,7 +761,7 @@ void sub_8107CF8(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
     BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality, 1), x, y, 32, 32);
 }
 
-void sub_8107D38(u8 palOffset, u8 palId)
+void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
 {
     const u16 *palette;
 

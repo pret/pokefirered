@@ -10,7 +10,6 @@
 #include "palette.h"
 #include "trade.h"
 #include "link.h"
-#include "librfu.h"
 #include "link_rfu.h"
 #include "text.h"
 #include "mevent.h"
@@ -31,7 +30,6 @@
 #include "quest_log.h"
 #include "help_system.h"
 #include "new_menu_helpers.h"
-#include "battle_interface.h"
 #include "pokedex.h"
 #include "save.h"
 #include "load_save.h"
@@ -41,7 +39,7 @@
 #include "constants/items.h"
 #include "constants/easy_chat.h"
 #include "constants/songs.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 #include "constants/moves.h"
 
 #define TAG_GLOW1_TILES      5550
@@ -948,13 +946,13 @@ static void TradeAnimInit_LoadGfx(void)
     DeactivateAllTextPrinters();
     // Doing the graphics load...
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gFile_graphics_interface_menu_map_tilemap, gDecompressionBuffer);
+    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
     InitWindows(gUnknown_826D1BC);
     // ... and doing the same load again
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gFile_graphics_interface_menu_map_tilemap, gDecompressionBuffer);
+    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadCompressedPalette(gBattleTextboxPalette, 0x000, 0x20);
 }
@@ -2556,7 +2554,7 @@ static void sub_8053E8C(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
-        sub_800AB9C();
+        PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         gMain.state = 100;
         sTradeData->timer = 0;
         break;
@@ -2594,7 +2592,7 @@ static void sub_8053E8C(void)
         }
         if (gWirelessCommType)
         {
-            sub_8144714(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
+            MEvent_RecordIdOfWonderCardSenderByEventType(2, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
         }
         SetContinueGameWarpStatusToDynamicWarp();
         sub_80DA3AC();
@@ -2641,7 +2639,7 @@ static void sub_8053E8C(void)
     case 41:
         if (sTradeData->timer == 0)
         {
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             gMain.state = 42;
         }
         else
@@ -2660,7 +2658,7 @@ static void sub_8053E8C(void)
         if (++sTradeData->timer > 60)
         {
             gMain.state++;
-            sub_800AB9C();
+            PrepareSendLinkCmd2FFE_or_RfuCmd6600();
         }
         break;
     case 6:
@@ -2682,11 +2680,11 @@ static void sub_8053E8C(void)
         {
             if (gWirelessCommType && gMain.savedCallback == CB2_ReturnFromLinkTrade)
             {
-                sub_800AB9C();
+                PrepareSendLinkCmd2FFE_or_RfuCmd6600();
             }
             else
             {
-                sub_800AAC0();
+                Link_TryStartSend5FFF();
             }
             gMain.state++;
         }

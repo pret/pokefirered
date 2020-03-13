@@ -332,7 +332,7 @@ sub_806CAC8: @ 806CAC8
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	movs r2, 0xFF
-	bl sub_8058F48
+	bl MapGridGetMetatileAttributeAt
 	mov r8, r0
 	mov r0, sp
 	movs r1, 0
@@ -798,7 +798,7 @@ sub_806CEA0: @ 806CEA0
 	movs r0, 0
 	b _0806CED2
 _0806CEB8:
-	ldr r0, _0806CED8 @ =gUnknown_8168CE4
+	ldr r0, _0806CED8 @ =PalletTown_PlayersHouse_2F_EventScript_PC
 	cmp r4, r0
 	beq _0806CECA
 	ldr r0, _0806CEDC @ =EventScript_PC
@@ -815,7 +815,7 @@ _0806CED2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806CED8: .4byte gUnknown_8168CE4
+_0806CED8: .4byte PalletTown_PlayersHouse_2F_EventScript_PC
 _0806CEDC: .4byte EventScript_PC
 	thumb_func_end sub_806CEA0
 
@@ -1330,10 +1330,10 @@ _0806D2F0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D308
-	ldr r0, _0806D304 @ =EventScript_1C549C
+	ldr r0, _0806D304 @ =TrainerTower_EventScript_ShowTime
 	b _0806D53E
 	.align 2, 0
-_0806D304: .4byte EventScript_1C549C
+_0806D304: .4byte TrainerTower_EventScript_ShowTime
 _0806D308:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -1530,10 +1530,10 @@ _0806D4A0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D4B8
-	ldr r0, _0806D4B4 @ =gUnknown_81A7702
+	ldr r0, _0806D4B4 @ =EventScript_Questionnaire
 	b _0806D53E
 	.align 2, 0
-_0806D4B4: .4byte gUnknown_81A7702
+_0806D4B4: .4byte EventScript_Questionnaire
 _0806D4B8:
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -1664,16 +1664,16 @@ _0806D5A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D5D8
-	ldr r0, _0806D5D4 @ =EventScript_InteractWithWaterfall
+	ldr r0, _0806D5D4 @ =EventScript_Waterfall
 	b _0806D5E2
 	.align 2, 0
 _0806D5D0: .4byte 0x00000826
-_0806D5D4: .4byte EventScript_InteractWithWaterfall
+_0806D5D4: .4byte EventScript_Waterfall
 _0806D5D8:
-	ldr r0, _0806D5DC @ =EventScript_81BE2FF
+	ldr r0, _0806D5DC @ =EventScript_CantUseWaterfall
 	b _0806D5E2
 	.align 2, 0
-_0806D5DC: .4byte EventScript_81BE2FF
+_0806D5DC: .4byte EventScript_CantUseWaterfall
 _0806D5E0:
 	movs r0, 0
 _0806D5E2:
@@ -1822,11 +1822,11 @@ _0806D6EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806D704
-	ldr r0, _0806D700 @ =EventScript_PoisonWhiteOut
+	ldr r0, _0806D700 @ =EventScript_FieldPoison
 	bl ScriptContext1_SetupScript
 	b _0806D730
 	.align 2, 0
-_0806D700: .4byte EventScript_PoisonWhiteOut
+_0806D700: .4byte EventScript_FieldPoison
 _0806D704:
 	bl ShouldEggHatch
 	lsls r0, 24

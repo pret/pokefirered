@@ -39,7 +39,7 @@ Std_ReceivedItem:: @ 81A4E66
 	compare VAR_0x8002, MUS_FANFA1
 	call_if_eq EventScript_ReceivedItemWaitFanfare
 	putitemaway VAR_0x8000, VAR_0x8001
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	return
 
 EventScript_ReceivedItemFanfare1:: @ 81A4EA2

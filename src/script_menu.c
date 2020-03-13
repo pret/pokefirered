@@ -944,7 +944,7 @@ static void Hask_MultichoiceGridMenu_HandleInput(u8 taskId)
     EnableBothScriptContexts();
 }
 
-bool8 ScrSpecial_CreatePCMenu(void)
+bool8 CreatePCMenu(void)
 {
     if (FuncIsActiveTask(Task_MultichoiceMenu_HandleInput) == TRUE)
         return FALSE;
@@ -1022,7 +1022,7 @@ static void Task_ScriptShowMonPic(u8 taskId)
     case 1:
         break;
     case 2:
-        sub_8083A5C(&gSprites[task->data[2]], task->data[2]);
+        FreeResourcesAndDestroySprite(&gSprites[task->data[2]], task->data[2]);
         task->data[0]++;
         break;
     case 3:
@@ -1040,7 +1040,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
         return TRUE;
     if (FindTaskIdByFunc(Task_ScriptShowMonPic) != 0xFF)
         return FALSE;
-    spriteId = sub_8083970(species, 8 * x + 40, 8 * y + 40, FALSE);
+    spriteId = CreateMonSprite_PicBox(species, 8 * x + 40, 8 * y + 40, FALSE);
     taskId = CreateTask(Task_ScriptShowMonPic, 80);
     gTasks[taskId].data[5] = CreateWindowFromRect(x, y, 8, 8);
     gTasks[taskId].data[0] = 0;
@@ -1082,7 +1082,7 @@ void sub_809D424(void)
         case 0:
         case 1:
         case 2:
-            sub_8083A5C(&gSprites[task->data[2]], task->data[2]);
+            FreeResourcesAndDestroySprite(&gSprites[task->data[2]], task->data[2]);
             DestroyScriptMenuWindow(task->data[5]);
             DestroyTask(taskId);
             break;
@@ -1116,7 +1116,7 @@ void Task_WaitMuseumFossilPic(u8 taskId)
     }
 }
 
-bool8 Special_OpenMuseumFossilPic(void)
+bool8 OpenMuseumFossilPic(void)
 {
     u8 spriteId;
     u8 taskId;
@@ -1149,7 +1149,7 @@ bool8 Special_OpenMuseumFossilPic(void)
     return TRUE;
 }
 
-bool8 Special_CloseMuseumFossilPic(void)
+bool8 CloseMuseumFossilPic(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_WaitMuseumFossilPic);
     if (taskId == 0xFF)
@@ -1183,7 +1183,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
     {
         data = gTasks[taskId].data;
         if (data[0] < 2)
-            sub_8083A5C(&gSprites[data[2]], data[2]);
+            FreeResourcesAndDestroySprite(&gSprites[data[2]], data[2]);
     }
     taskId = FindTaskIdByFunc(Task_WaitMuseumFossilPic);
     if (taskId != 0xFF)
@@ -1197,7 +1197,7 @@ void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void)
     }
 }
 
-void Special_DrawSeagallopDestinationMenu(void)
+void DrawSeagallopDestinationMenu(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)
@@ -1249,7 +1249,7 @@ void Special_DrawSeagallopDestinationMenu(void)
     }
 }
 
-u16 Special_GetSelectedSeagallopDestination(void)
+u16 GetSelectedSeagallopDestination(void)
 {
     // 8004 = Starting location
     // 8005 = Page (0: Verm, One, Two, Three, Four, Other, Exit; 1: Four, Five, Six, Seven, Other, Exit)

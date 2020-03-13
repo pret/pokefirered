@@ -59,7 +59,7 @@ VermilionCity_EventScript_FerrySailor:: @ 8166941
 	end
 
 VermilionCity_EventScript_CheckHasMysticTicket:: @ 8166958
-	goto_if_unset FLAG_SYS_GOT_MYSTIC_TICKET, EventScript_SetResultFalse
+	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
 	checkitem ITEM_MYSTIC_TICKET, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SetResultFalse
@@ -67,7 +67,7 @@ VermilionCity_EventScript_CheckHasMysticTicket:: @ 8166958
 	end
 
 VermilionCity_EventScript_CheckHasAuroraTicket:: @ 8166977
-	goto_if_unset FLAG_SYS_GOT_AURORA_TICKET, EventScript_SetResultFalse
+	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
 	checkitem ITEM_AURORA_TICKET, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_SetResultFalse
@@ -103,7 +103,7 @@ VermilionCity_EventScript_HasMysticTicket:: @ 81669FD
 	call VermilionCity_EventScript_CheckHasAuroraTicket
 	compare VAR_RESULT, TRUE
 	goto_if_eq VermilionCity_EventScript_HasMysticAndAuroraTickets
-	call_if_unset FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN, VermilionCity_EventScript_ShowMysticTicket
+	call_if_unset FLAG_SHOWN_MYSTIC_TICKET, VermilionCity_EventScript_ShowMysticTicket
 	message VermilionCity_Text_BoardSeagallopFerry
 	waitmessage
 	multichoice 17, 6, MULTICHOICE_SEVII_NAVEL, FALSE
@@ -115,12 +115,12 @@ VermilionCity_EventScript_HasMysticTicket:: @ 81669FD
 	end
 
 VermilionCity_EventScript_ShowMysticTicket:: @ 8166A53
-	setflag FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN
+	setflag FLAG_SHOWN_MYSTIC_TICKET
 	msgbox VermilionCity_Text_OhMysticTicketTakeYouToNavelRock
 	return
 
 VermilionCity_EventScript_HasAuroraTicket:: @ 8166A5F
-	call_if_unset FLAG_SHOWED_AURORATICKET_TO_CAPTAIN, VermilionCity_EventScript_ShowAuroraTicket
+	call_if_unset FLAG_SHOWN_AURORA_TICKET, VermilionCity_EventScript_ShowAuroraTicket
 	message VermilionCity_Text_BoardSeagallopFerry
 	waitmessage
 	multichoice 13, 6, MULTICHOICE_SEVII_BIRTH, FALSE
@@ -132,13 +132,13 @@ VermilionCity_EventScript_HasAuroraTicket:: @ 8166A5F
 	end
 
 VermilionCity_EventScript_ShowAuroraTicket:: @ 8166AA5
-	setflag FLAG_SHOWED_AURORATICKET_TO_CAPTAIN
+	setflag FLAG_SHOWN_AURORA_TICKET
 	msgbox VermilionCity_Text_OhAuroraTicketTakeYouToBirthIsland
 	return
 
 VermilionCity_EventScript_HasMysticAndAuroraTickets:: @ 8166AB1
-	call_if_unset FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN, VermilionCity_EventScript_ShowMysticTicket
-	call_if_unset FLAG_SHOWED_AURORATICKET_TO_CAPTAIN, VermilionCity_EventScript_ShowAuroraTicket
+	call_if_unset FLAG_SHOWN_MYSTIC_TICKET, VermilionCity_EventScript_ShowMysticTicket
+	call_if_unset FLAG_SHOWN_AURORA_TICKET, VermilionCity_EventScript_ShowAuroraTicket
 	message VermilionCity_Text_BoardSeagallopFerry
 	waitmessage
 	multichoice 13, 5, MULTICHOICE_SEVII_NAVEL_BIRTH, FALSE

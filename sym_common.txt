@@ -20,13 +20,14 @@
 	.include "load_save.o"
 
 	.align 2
-gUnknown_3005014: @ 3005014
+	@ .include "overworld.o"
+gBGTilemapBuffers1: @ 3005014
 	.space 0x4
 
-gUnknown_3005018: @ 3005018
+gBGTilemapBuffers2: @ 3005018
 	.space 0x4
 
-gUnknown_300501C: @ 300501C
+gBGTilemapBuffers3: @ 300501C
 	.space 0x4
 
 gFieldCallback: @ 3005020
@@ -44,23 +45,17 @@ gLocalLinkPlayerId: @ 300502C
 gFieldLinkPlayerCount: @ 3005030
 	.space 0x10
 
-	.align 2
+	.align 4
 	.include "fieldmap.o"
 
 	.align 4
-gFieldCamera: @ 3005050
-	.space 0x18
-
-gTotalCameraPixelOffsetY: @ 3005068
-	.space 0x4
-
-gTotalCameraPixelOffsetX: @ 300506C
-	.space 0x4
+	.include "field_camera.o"
 
 	.align 2
 	.include "scrcmd.o"
 
 	.align 2
+	@ .include "field_control_avatar.o"
 gSelectedObjectEvent: @ 3005074
 	.space 0x4
 
@@ -73,9 +68,8 @@ gUnknown_3005078: @ 3005078
 	.include "sound.o"
 	.align 2
 	.include "task.o"
-	
-	@ what is this?
-	.space 0x20
+	.align 2
+	.include "cable_club.o"
 	.align 2
 	.include "image_processing_effects.o"
 	.align 2
@@ -91,7 +85,7 @@ gUnknown_3005078: @ 3005078
 	.align 4
 	.include "link_rfu_2.o"
 	.align 4
-	.include "link_rfu.o"
+	.include "AgbRfu_LinkManager.o"
 	.align 4
 	.include "list_menu.o"
 	.align 2

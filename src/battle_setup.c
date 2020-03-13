@@ -13,7 +13,7 @@
 #include "strings.h"
 #include "string_util.h"
 #include "event_data.h"
-#include "event_object_80688E4.h"
+#include "event_object_movement.h"
 #include "metatile_behavior.h"
 #include "event_scripts.h"
 #include "fldeff.h"
@@ -22,10 +22,8 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_message_box.h"
-#include "event_object_movement.h"
 #include "vs_seeker.h"
 #include "battle.h"
-#include "battle_setup.h"
 #include "battle_transition.h"
 #include "battle_controllers.h"
 #include "constants/battle_setup.h"
@@ -37,7 +35,6 @@
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/trainer_classes.h"
-#include "constants/map_types.h"
 
 enum
 {
@@ -224,7 +221,7 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
         return FALSE;
 }
 
-void BattleSetup_StartWildBattle(void)
+void StartWildBattle(void)
 {
     if (GetSafariZoneFlag())
         DoSafariBattle();
@@ -246,7 +243,7 @@ static void DoStandardWildBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void BattleSetup_StartRoamerBattle(void)
+void StartRoamerBattle(void)
 {
     ScriptContext2_Enable();
     FreezeObjectEvents();
@@ -288,7 +285,7 @@ static void DoTrainerBattle(void)
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
 }
 
-void ScrSpecial_StartOldManTutorialBattle(void)
+void StartOldManTutorialBattle(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
     ScriptContext2_Enable();
@@ -297,7 +294,7 @@ void ScrSpecial_StartOldManTutorialBattle(void)
     CreateBattleStartTask(B_TRANSITION_SLICED_SCREEN, 0);
 }
 
-void BattleSetup_StartScriptedWildBattle(void)
+void StartScriptedWildBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -307,7 +304,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void ScrSpecial_StartMarowakBattle(void)
+void StartMarowakBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndMarowakBattle;
@@ -326,7 +323,7 @@ void ScrSpecial_StartMarowakBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void ScrSpecial_StartSouthernIslandBattle(void)
+void StartSouthernIslandBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -336,7 +333,7 @@ void ScrSpecial_StartSouthernIslandBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartLegendaryBattle(void)
+void StartLegendaryBattle(void)
 {
     u16 species;
     
@@ -367,7 +364,7 @@ void Special_StartLegendaryBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartGroudonKyogreBattle(void)
+void StartGroudonKyogreBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -380,7 +377,7 @@ void Special_StartGroudonKyogreBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-void Special_StartRegiBattle(void)
+void StartRegiBattle(void)
 {
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
@@ -781,7 +778,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     {
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
-        return EventScript_DoTrainerBattle;
+        return EventScript_DoNoIntroTrainerBattle;
     case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
@@ -810,7 +807,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         return EventScript_TryDoRematchBattle;
     case TRAINER_BATTLE_EARLY_RIVAL:
         TrainerBattleLoadArgs(sEarlyRivalBattleParams, data);
-        return EventScript_DoTrainerBattle;
+        return EventScript_DoNoIntroTrainerBattle;
     default:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
@@ -823,7 +820,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerSc
     gSelectedObjectEvent = trainerEventObjId;
     gSpecialVar_LastTalked = gObjectEvents[trainerEventObjId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext1_SetupScript(gUnknown_81A4EB4);
+    ScriptContext1_SetupScript(EventScript_DoTrainerBattleFromApproach);
     ScriptContext2_Enable();
 }
 
@@ -841,7 +838,7 @@ void SetUpTrainerMovement(void)
     SetTrainerMovementType(objectEvent, GetTrainerFacingDirectionMovementType(objectEvent->facingDirection));
 }
 
-u8 ScrSpecial_GetTrainerBattleMode(void)
+u8 GetTrainerBattleMode(void)
 {
     return sTrainerBattleMode;
 }
@@ -851,7 +848,7 @@ u16 GetRivalBattleFlags(void)
     return sRivalBattleFlags;
 }
 
-u16 ScrSpecial_HasTrainerBeenFought(void)
+u16 Script_HasTrainerBeenFought(void)
 {
     return FlagGet(GetTrainerAFlag());
 }
@@ -882,10 +879,10 @@ void ClearTrainerFlag(u16 trainerId)
     FlagClear(FLAG_TRAINER_FLAG_START + trainerId);
 }
 
-void BattleSetup_StartTrainerBattle(void)
+void StartTrainerBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    if (ScrSpecial_GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
+    if (GetTrainerBattleMode() == TRAINER_BATTLE_EARLY_RIVAL && GetRivalBattleFlags() & RIVAL_BATTLE_TUTORIAL)
         gBattleTypeFlags |= BATTLE_TYPE_FIRST_BATTLE;
     gMain.savedCallback = CB2_EndTrainerBattle;
     DoTrainerBattle();
@@ -959,7 +956,7 @@ static void CB2_EndRematchBattle(void)
     }
 }
 
-void ScrSpecial_StartTrainerEyeRematch(void)
+void StartRematchBattle(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.savedCallback = CB2_EndRematchBattle;
@@ -967,7 +964,7 @@ void ScrSpecial_StartTrainerEyeRematch(void)
     ScriptContext1_Stop();
 }
 
-void ScrSpecial_ShowTrainerIntroSpeech(void)
+void ShowTrainerIntroSpeech(void)
 {
     ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
 }
@@ -988,7 +985,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
         return Test_EventScript_Sign;
 }
 
-void ScrSpecial_ShowTrainerNonBattlingSpeech(void)
+void ShowTrainerCantBattleSpeech(void)
 {
     ShowFieldMessage(GetTrainerCantBattleSpeech());
 }

@@ -1,4 +1,4 @@
-gUnknown_81A3D5E:: @ 81A3D5E
+FiveIsland_House2_Text_MeadowBelongedToFamily:: @ 81A3D5E
     .string "That MEADOW has belonged to our\n"
     .string "family for generations.\p"
     .string "I should have had a giant mansion\n"

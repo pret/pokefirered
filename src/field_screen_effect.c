@@ -212,7 +212,7 @@ void WriteFlashScanlineEffectBuffer(u8 flashLevel)
     }
 }
 
-void sub_807F0B0(void)
+void Script_FadeOutMapMusic(void)
 {
     Overworld_FadeOutMapMusic();
     CreateTask(Task_EnableScriptAfterMusicFade, 80);
@@ -430,7 +430,7 @@ static void sub_807F45C(u8 taskId)
         CopyWindowToVram(windowId, 1);
         RemoveWindow(windowId);
         palette_bg_faded_fill_black();
-        sub_807DC00();
+        FadeInFromBlack();
         ++gTasks[taskId].data[0];
         break;
     case 3:
@@ -444,7 +444,7 @@ static void sub_807F45C(u8 taskId)
         if (sub_807E418() == TRUE)
         {
             DestroyTask(taskId);
-            ScriptContext1_SetupScript(EventScript_MomHeal);
+            ScriptContext1_SetupScript(EventScript_AfterWhiteOutMomHeal);
         }
         break;
     }

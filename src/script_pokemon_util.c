@@ -1,9 +1,7 @@
 #include "global.h"
-#include "battle.h"
 #include "berry.h"
 #include "daycare.h"
 #include "event_data.h"
-#include "event_object_movement.h"
 #include "load_save.h"
 #include "malloc.h"
 #include "overworld.h"
@@ -119,7 +117,7 @@ static bool8 CheckPartyMonHasHeldItem(u16 item)
     return FALSE;
 }
 
-bool8 GetNameOfEnigmaBerryInPlayerParty(void)
+bool8 DoesPartyHaveEnigmaBerry(void)
 {
     bool8 hasItem = CheckPartyMonHasHeldItem(ITEM_ENIGMA_BERRY);
     if (hasItem == TRUE)

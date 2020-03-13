@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_FOUR_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LORELEI",
+      "graphics_id": "OBJ_EVENT_GFX_LORELEI",
       "x": 7,
       "y": 4,
       "elevation": 3,
@@ -23,11 +25,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C58",
+      "script": "FourIsland_LoreleisHouse_EventScript_Lorelei",
       "flag": "FLAG_HIDE_LORELEI_IN_HER_HOUSE"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_WIGGLYTUFF",
+      "graphics_id": "OBJ_EVENT_GFX_WIGGLYTUFF",
       "x": 0,
       "y": 2,
       "elevation": 3,
@@ -36,11 +38,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SEEL",
+      "graphics_id": "OBJ_EVENT_GFX_SEEL",
       "x": 10,
       "y": 3,
       "elevation": 0,
@@ -49,11 +51,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PIKACHU",
+      "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
       "x": 9,
       "y": 3,
       "elevation": 0,
@@ -62,11 +64,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SLOWPOKE",
+      "graphics_id": "OBJ_EVENT_GFX_SLOWPOKE",
       "x": 7,
       "y": 2,
       "elevation": 3,
@@ -75,11 +77,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SLOWBRO",
+      "graphics_id": "OBJ_EVENT_GFX_SLOWBRO",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -88,11 +90,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PSYDUCK",
+      "graphics_id": "OBJ_EVENT_GFX_PSYDUCK",
       "x": 6,
       "y": 4,
       "elevation": 0,
@@ -101,11 +103,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MEOWTH",
+      "graphics_id": "OBJ_EVENT_GFX_MEOWTH",
       "x": 9,
       "y": 4,
       "elevation": 0,
@@ -114,11 +116,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEI_HOUSE_MEOWTH_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CHANSEY",
+      "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
       "x": 10,
       "y": 4,
       "elevation": 0,
@@ -127,11 +129,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEI_HOUSE_CHANSEY_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_JIGGLYPUFF",
+      "graphics_id": "OBJ_EVENT_GFX_JIGGLYPUFF",
       "x": 0,
       "y": 3,
       "elevation": 3,
@@ -140,11 +142,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEI_HOUSE_JIGGLYPUFF_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_F",
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_F",
       "x": 0,
       "y": 5,
       "elevation": 3,
@@ -153,11 +155,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_F_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_NIDORAN_M",
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -166,11 +168,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_M_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_PIDGEOT",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEOT",
       "x": 9,
       "y": 0,
       "elevation": 3,
@@ -179,11 +181,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEIS_HOUSE_PIDGEOT_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FEAROW",
+      "graphics_id": "OBJ_EVENT_GFX_FEAROW",
       "x": 10,
       "y": 0,
       "elevation": 3,
@@ -192,11 +194,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEIS_HOUSE_FEAROW_DOLL"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_LAPRAS_DOLL",
+      "graphics_id": "OBJ_EVENT_GFX_LAPRAS_DOLL",
       "x": 9,
       "y": 6,
       "elevation": 3,
@@ -205,7 +207,7 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "FourIsland_LoreleisHouse_EventScript_171C8D",
+      "script": "FourIsland_LoreleisHouse_EventScript_Doll",
       "flag": "FLAG_HIDE_LORELEIS_HOUSE_LAPRAS_DOLL"
     }
   ],

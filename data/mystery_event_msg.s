@@ -17,9 +17,9 @@
 MysteryEventScript_StampCard:: @ 8488E28
 	setvaddress MysteryEventScript_StampCard
 	setorcopyvar VAR_RESULT, 1
-	specialvar VAR_0x8008, Special_BattleCardAction
+	specialvar VAR_0x8008, BattleCardAction
 	setorcopyvar VAR_RESULT, 0
-	specialvar VAR_0x8009, Special_BattleCardAction
+	specialvar VAR_0x8009, BattleCardAction
 	subvar VAR_0x8008, VAR_0x8009
 	getnumberstring 0, VAR_0x8008
 	lock
@@ -169,7 +169,7 @@ MysteryEventScript_BattleCard:: @ 84892B9
 	setvaddress MysteryEventScript_BattleCard
 	vgoto_if_set FLAG_MYSTERY_EVENT_DONE, MysteryEventScript_BattleCardInfo
 	setorcopyvar VAR_RESULT, 2
-	specialvar VAR_0x8008, Special_BattleCardAction
+	specialvar VAR_0x8008, BattleCardAction
 	compare VAR_0x8008, 3
 	vgoto_if_ne MysteryEventScript_BattleCardInfo
 	lock
@@ -228,7 +228,7 @@ MysteryEventScript_AuroraTicket:: @ 84894B9
 	compare VAR_RESULT, FALSE
 	vgoto_if_eq AuroraTicket_NoBagSpace
 	giveitem ITEM_AURORA_TICKET
-	setflag FLAG_SYS_GOT_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_GOT_AURORA_TICKET
 	vmessage sText_AuroraTicket2
 	waitmessage
@@ -289,7 +289,7 @@ MysteryEventScript_MysticTicket:: @ 8489689
 	compare VAR_RESULT, FALSE
 	vgoto_if_eq MysticTicket_NoBagSpace
 	giveitem ITEM_MYSTIC_TICKET
-	setflag FLAG_SYS_GOT_MYSTIC_TICKET
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_GOT_MYSTIC_TICKET
 	vmessage sText_MysticTicket1
 	waitmessage

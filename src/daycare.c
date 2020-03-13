@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle.h"
-#include "daycare.h"
 #include "constants/species.h"
 #include "constants/items.h"
 #include "mail_data.h"
@@ -29,7 +28,7 @@
 #include "field_fadetransition.h"
 #include "trade.h"
 #include "constants/daycare.h"
-#include "constants/region_map.h"
+#include "constants/region_map_sections.h"
 
 // Combination of RSE's Day-Care (re-used on Four Island), FRLG's Day-Care, and egg_hatch.c
 
@@ -1816,7 +1815,7 @@ static void CB2_EggHatch_0(void)
         break;
     case 2:
         DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-        CopyToBgTilemapBuffer(0, gFile_graphics_interface_menu_map_tilemap, 0, 0);
+        CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
         LoadCompressedPalette(gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
@@ -1968,7 +1967,7 @@ static void CB2_EggHatch_1(void)
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyID]);
             personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_PERSONALITY, 0);
-            DoNamingScreen(3, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
+            DoNamingScreen(NAMING_SCREEN_NAME_RATER, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
             break;
         case 1:
         case -1:

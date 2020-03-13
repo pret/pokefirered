@@ -5,7 +5,6 @@
 #include "script.h"
 #include "script_menu.h"
 #include "task.h"
-#include "hall_of_fame.h"
 #include "bg.h"
 #include "window.h"
 
@@ -40,7 +39,7 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    ScrSpecial_CreatePCMenu();
+    CreatePCMenu();
     ScriptMenu_DisplayPCStartupPrompt();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
     CreateTask(Task_WaitForPaletteFade, 10);

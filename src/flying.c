@@ -178,7 +178,7 @@ const struct SpriteTemplate gUnknown_83E6C00 =
 };
 
 // not used
-static const u16 gUnknown_83E6C18[] = INCBIN_U16("graphics/battle_anims/sprites/unk_83E6C18.gbapal");
+static const u16 gUnknown_83E6C18[] = INCBIN_U16("graphics/battle_anims/unk_83E6C18.gbapal");
 
 const struct SpriteTemplate gUnknown_83E6C38 =
 {

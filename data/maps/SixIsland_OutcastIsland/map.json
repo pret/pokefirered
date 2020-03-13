@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_OUTCAST_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_SIX_ISLAND_GREEN_PATH",
@@ -20,7 +22,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 9,
       "y": 24,
       "elevation": 3,
@@ -29,11 +31,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_168B16",
+      "script": "SixIsland_OutcastIsland_EventScript_Rocket",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 12,
       "y": 15,
       "elevation": 3,
@@ -42,11 +44,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_1AC3D1",
+      "script": "SixIsland_OutcastIsland_EventScript_Tylor",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 13,
       "y": 34,
       "elevation": 1,
@@ -55,11 +57,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_1AC40F",
+      "script": "SixIsland_OutcastIsland_EventScript_Mymo",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 14,
       "y": 61,
       "elevation": 1,
@@ -68,11 +70,11 @@
       "movement_range_y": 4,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_1AC44D",
+      "script": "SixIsland_OutcastIsland_EventScript_Nicole",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_F_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F_WATER",
       "x": 10,
       "y": 44,
       "elevation": 1,
@@ -81,11 +83,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_1AC48B",
+      "script": "SixIsland_OutcastIsland_EventScript_Ava",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_TUBER_M_1",
+      "graphics_id": "OBJ_EVENT_GFX_TUBER_M_1",
       "x": 11,
       "y": 44,
       "elevation": 1,
@@ -94,11 +96,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "SixIsland_OutcastIsland_EventScript_1AC4D1",
+      "script": "SixIsland_OutcastIsland_EventScript_Geb",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 11,
       "y": 16,
       "elevation": 3,

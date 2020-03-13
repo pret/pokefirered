@@ -6,15 +6,14 @@
 #include "script.h"
 #include "fldeff.h"
 #include "event_scripts.h"
-#include "constants/songs.h"
-#include "constants/object_events.h"
+#include "constants/event_objects.h"
 
-static void FldEff_UseStrength(void);
-static void sub_80D08A8(void);
+static void FieldCB_UseStrength(void);
+static void ShowMonCB_UseStrength(void);
 
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJECT_EVENT_GFX_STRENGTH_BOULDER) != TRUE)
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_STRENGTH_BOULDER) != TRUE)
     {
     	return FALSE;
     }
@@ -22,25 +21,25 @@ bool8 SetUpFieldMove_Strength(void)
     {
         gSpecialVar_Result = GetCursorSelectionMonId();
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-        gPostMenuFieldCallback = FldEff_UseStrength;
+        gPostMenuFieldCallback = FieldCB_UseStrength;
         return TRUE;
     }
 }
-static void FldEff_UseStrength(void)
+static void FieldCB_UseStrength(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
     ScriptContext1_SetupScript(EventScript_FldEffStrength);
 }
 
-bool8 sub_80D0860(void)
+bool8 FldEff_UseStrength(void)
 {
-    u8 taskId = oei_task_add();
-    FLDEFF_SET_FUNC_TO_DATA(sub_80D08A8);
+    u8 taskId = CreateFieldEffectShowMon();
+    FLDEFF_SET_FUNC_TO_DATA(ShowMonCB_UseStrength);
     GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);
     return FALSE;
 }
 
-static void sub_80D08A8(void)
+static void ShowMonCB_UseStrength(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
     EnableBothScriptContexts();

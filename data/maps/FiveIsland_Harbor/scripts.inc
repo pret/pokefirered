@@ -1,7 +1,7 @@
 FiveIsland_Harbor_MapScripts:: @ 8171D42
 	.byte 0
 
-FiveIsland_Harbor_EventScript_171D43:: @ 8171D43
+FiveIsland_Harbor_EventScript_Sailor:: @ 8171D43
 	lock
 	faceplayer
 	message Text_WhereDoYouWantToSail

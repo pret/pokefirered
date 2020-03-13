@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_FIVE_ISLE_MEADOW",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_FIVE_ISLAND",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_F",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
       "x": 18,
       "y": 18,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "FiveIsland_Meadow_EventScript_1689BB",
+      "script": "FiveIsland_Meadow_EventScript_Rocket3",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 17,
       "y": 5,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 5,
-      "script": "FiveIsland_Meadow_EventScript_16898D",
+      "script": "FiveIsland_Meadow_EventScript_Rocket1",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 11,
       "y": 27,
       "elevation": 3,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "FiveIsland_Meadow_EventScript_1689A4",
+      "script": "FiveIsland_Meadow_EventScript_Rocket2",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 8,
       "y": 9,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 19,
       "y": 12,
       "elevation": 3,
@@ -86,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 11,
       "elevation": 3,
@@ -103,7 +105,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_MEADOW_MAX_POTION"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,
       "y": 22,
       "elevation": 3,
@@ -128,11 +130,12 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 12,
       "y": 21,
       "elevation": 0,
-      "script": "FiveIsland_Meadow_EventScript_168942"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FiveIsland_Meadow_EventScript_WarehouseDoor"
     }
   ]
 }

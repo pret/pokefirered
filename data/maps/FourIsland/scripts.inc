@@ -1,3 +1,6 @@
+.equ LOCALID_DAYCARE_MAN, 1
+.equ LOCALID_RIVAL, 10
+
 FourIsland_MapScripts:: @ 8167CAE
 	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
@@ -6,65 +9,64 @@ FourIsland_MapScripts:: @ 8167CAE
 FourIsland_OnTransition:: @ 8167CB9
 	setworldmapflag FLAG_WORLD_MAP_FOUR_ISLAND
 	compare VAR_MAP_SCENE_FOUR_ISLAND, 0
-	call_if_eq EventScript_167CCD
-	call EventScript_167CD1
+	call_if_eq FourIsland_EventScript_ShowRival
+	call FourIsland_EventScript_TrySetDayCareManPos
 	end
 
-EventScript_167CCD:: @ 8167CCD
+FourIsland_EventScript_ShowRival:: @ 8167CCD
 	clearflag FLAG_HIDE_FOUR_ISLAND_RIVAL
 	return
 
-EventScript_167CD1:: @ 8167CD1
-	goto_if_unset FLAG_PENDING_DAYCARE_EGG, EventScript_167CE1
-	setobjectxyperm 1, 16, 14
-
-EventScript_167CE1:: @ 8167CE1
+FourIsland_EventScript_TrySetDayCareManPos:: @ 8167CD1
+	goto_if_unset FLAG_PENDING_DAYCARE_EGG, FourIsland_EventScript_EndSetDayCareManPos
+	setobjectxyperm LOCALID_DAYCARE_MAN, 16, 14
+FourIsland_EventScript_EndSetDayCareManPos:: @ 8167CE1
 	return
 
 FourIsland_OnFrame:: @ 8167CE2
-	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, EventScript_167CEC
+	map_script_2 VAR_MAP_SCENE_FOUR_ISLAND, 0, FourIsland_EventScript_RivalScene
 	.2byte 0
 
-EventScript_167CEC:: @ 8167CEC
+FourIsland_EventScript_RivalScene:: @ 8167CEC
 	lockall
 	textcolor 0
-	applymovement 10, Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	playbgm MUS_RIVAL1, 0
-	applymovement 10, Movement_ExclamationMark
+	applymovement LOCALID_RIVAL, Movement_ExclamationMark
 	waitmovement 0
-	applymovement 10, Movement_Delay48
+	applymovement LOCALID_RIVAL, Movement_Delay48
 	waitmovement 0
 	delay 25
-	applymovement 10, Movement_167D49
+	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalApproach
 	waitmovement 0
-	msgbox gUnknown_8182B37
+	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_167D52
-	applymovement 10, Movement_167D4E
+	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
 	playse SE_KAIDAN
 	delay 35
-	removeobject 10
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end
 
-Movement_167D49:: @ 8167D49
+FourIsland_Movement_RivalApproach:: @ 8167D49
 	walk_right
 	walk_right
 	walk_down
 	walk_down
 	step_end
 
-Movement_167D4E:: @ 8167D4E
+FourIsland_Movement_RivalExit:: @ 8167D4E
 	delay_16
 	delay_4
 	walk_down
 	step_end
 
-Movement_167D52:: @ 8167D52
+FourIsland_Movement_PlayerWatchRivalExit:: @ 8167D52
 	walk_left
 	walk_in_place_fastest_right
 	step_end
@@ -110,7 +112,7 @@ FourIsland_EventScript_DaycareAcceptEgg:: @ 8167DD1
 FourIsland_EventScript_DaycareReceivedEgg:: @ 8167DEB
 	textcolor 3
 	message DayCare_Text_ReceivedEgg
-	call EventScript_1A6675
+	call EventScript_RestorePrevTextColor
 	playfanfare MUS_FANFA1
 	waitfanfare
 	waitbuttonpress
@@ -130,42 +132,42 @@ FourIsland_EventScript_CheckOnTwoMons:: @ 8167E19
 	special GetDaycareMonNicknames
 	msgbox DayCare_Text_YourMonsAreDoingFine
 	special SetDaycareCompatibilityString
-	special Special_ShowStringVar4AsFieldMessage
+	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-FourIsland_EventScript_167E2E:: @ 8167E2E
+FourIsland_EventScript_OldWoman:: @ 8167E2E
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_167E43
-	msgbox gUnknown_8182A2B
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, FourIsland_EventScript_OldWomanLoreleiLeft
+	msgbox FourIsland_Text_LoreleiHasReturned
 	release
 	end
 
-EventScript_167E43:: @ 8167E43
+FourIsland_EventScript_OldWomanLoreleiLeft:: @ 8167E43
 	famechecker FAMECHECKER_LORELEI, 5
-	msgbox gUnknown_8182A75
+	msgbox FourIsland_Text_LoreleiMetLaprasAsChild
 	release
 	end
 
-FourIsland_EventScript_167E5A:: @ 8167E5A
+FourIsland_EventScript_LittleGirl:: @ 8167E5A
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LORELEI, 4
-	msgbox gUnknown_8182CE3
+	msgbox FourIsland_Text_LoreleiHasLotsOfStuffedDolls
 	release
 	end
 
-FourIsland_EventScript_167E73:: @ 8167E73
-	msgbox gUnknown_8182D8E, MSGBOX_NPC
+FourIsland_EventScript_FatMan:: @ 8167E73
+	msgbox FourIsland_Text_MadeSlushieUsingIcefallCaveIce, MSGBOX_NPC
 	end
 
-FourIsland_EventScript_167E7C:: @ 8167E7C
-	msgbox gUnknown_8182A03, MSGBOX_SIGN
+FourIsland_EventScript_IslandSign:: @ 8167E7C
+	msgbox FourIsland_Text_IslandSign, MSGBOX_SIGN
 	end
 
-FourIsland_EventScript_167E85:: @ 8167E85
-	msgbox gUnknown_8182DEB, MSGBOX_SIGN
+FourIsland_EventScript_LoreleisHouseSign:: @ 8167E85
+	msgbox FourIsland_Text_LoreleisHouse, MSGBOX_SIGN
 	end

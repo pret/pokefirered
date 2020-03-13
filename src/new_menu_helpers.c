@@ -3,7 +3,6 @@
 #include "dma3.h"
 #include "task.h"
 #include "bg.h"
-#include "gpu_regs.h"
 #include "window.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -13,7 +12,6 @@
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
-#include "graphics.h"
 #include "palette.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
@@ -718,7 +716,7 @@ void DestroyHelpMessageWindow_(void)
     DestroyHelpMessageWindow(2);
 }
 
-void sub_80F79A4(void)
+void LoadSignPostWindowFrameGfx(void)
 {
     Menu_LoadStdPal();
     sub_814FEEC(0, DLG_WINDOW_BASE_TILE_NUM, 0x10 * DLG_WINDOW_PALETTE_NUM);

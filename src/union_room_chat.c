@@ -14,7 +14,7 @@
 #include "task.h"
 #include "union_room_chat.h"
 #include "union_room_chat_display.h"
-#include "data_8479668.h"
+#include "keyboard_text.h"
 #include "constants/songs.h"
 
 #define MESSAGE_BUFFER_NCHAR 15
@@ -207,7 +207,7 @@ void EnterUnionRoomChat(void)
     sWork = Alloc(sizeof(struct UnionRoomChat));
     InitChatWork(sWork);
     gKeyRepeatStartDelay = 20;
-    sub_812B4AC();
+    HelpSystem_DisableToggleWithRButton();
     SetVBlankCallback(NULL);
     SetMainCallback2(CB2_LoadInterface);
 }
@@ -587,7 +587,7 @@ static void ChatEntryRoutine_ExitChat(void)
     case 5:
         if (IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }
@@ -622,7 +622,7 @@ static void ChatEntryRoutine_Drop(void)
     case 1:
         if (!RunDisplaySubtask(0) && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }
@@ -668,7 +668,7 @@ static void ChatEntryRoutine_Disbanded(void)
     case 2:
         if (RunDisplaySubtask(0) != TRUE && IsLinkTaskFinished() && !GetRfuUnkCE8())
         {
-            sub_800AAC0();
+            Link_TryStartSend5FFF();
             sWork->exitDelayTimer = 0;
             sWork->routineState++;
         }
@@ -893,7 +893,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
     case 13:
         if (!gPaletteFade.active)
         {
-            sub_812B4B8();
+            HelpSystem_EnableToggleWithRButton();
             UnionRoomChat_FreeGraphicsWork();
             FreeChatWork();
             SetMainCallback2(CB2_ReturnToField);
@@ -914,7 +914,7 @@ static bool32 TypeChatMessage_HandleDPad(void)
     {
         if (JOY_REPT(DPAD_UP))
         {
-            if (sWork->currentRow)
+            if (sWork->currentRow > 0)
                 sWork->currentRow--;
             else
                 sWork->currentRow = sKeyboardPageMaxRow[sWork->currentPage];
@@ -938,7 +938,7 @@ static bool32 TypeChatMessage_HandleDPad(void)
         {
             if (JOY_REPT(DPAD_LEFT))
             {
-                if (sWork->currentCol)
+                if (sWork->currentCol > 0)
                     sWork->currentCol--;
                 else
                     sWork->currentCol = 4;

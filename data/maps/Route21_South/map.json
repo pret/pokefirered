@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_21",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE21_NORTH",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 11,
       "y": 8,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_South_EventScript_1AB9B3",
+      "script": "Route21_South_EventScript_Claude",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 14,
       "y": 15,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "Route21_South_EventScript_1ABA2F",
+      "script": "Route21_South_EventScript_Nolan",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 15,
       "y": 24,
       "elevation": 1,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route21_South_EventScript_1ABAAB",
+      "script": "Route21_South_EventScript_Jack",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 15,
       "y": 38,
       "elevation": 1,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 3,
-      "script": "Route21_South_EventScript_1ABAE9",
+      "script": "Route21_South_EventScript_Jerome",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SWIMMER_M_WATER",
+      "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M_WATER",
       "x": 10,
       "y": 29,
       "elevation": 1,
@@ -86,7 +88,7 @@
       "movement_range_y": 2,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 4,
-      "script": "Route21_South_EventScript_1ABB27",
+      "script": "Route21_South_EventScript_Roland",
       "flag": "0"
     }
   ],

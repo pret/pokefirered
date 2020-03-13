@@ -45,7 +45,7 @@ VermilionCity_Gym_OnTransition:: @ 816B772
 
 VermilionCity_Gym_EventScript_InitTrashCans:: @ 816B778
 	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, EventScript_Return
-	special Special_SetVermilionTrashCans
+	special SetVermilionTrashCans
 	copyvar VAR_TEMP_0, SWITCH1_ID
 	copyvar VAR_TEMP_1, SWITCH2_ID
 	return
@@ -168,7 +168,7 @@ VermilionCity_Gym_EventScript_TrySwitchTwo:: @ 816B89E
 	goto_if_eq VermilionCity_Gym_EventScript_FoundSwitchTwo
 	msgbox VermilionCity_Gym_Text_OnlyTrashLocksWereReset
 	clearflag FOUND_FIRST_SWITCH
-	special Special_SetVermilionTrashCans
+	special SetVermilionTrashCans
 	copyvar VAR_TEMP_0, SWITCH1_ID
 	copyvar VAR_TEMP_1, SWITCH2_ID
 	call VermilionCity_Gym_EventScript_SetBeamsOn

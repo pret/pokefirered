@@ -19,7 +19,6 @@
 #include "mail.h"
 #include "main.h"
 #include "malloc.h"
-#include "event_object_80688E4.h"
 #include "event_object_lock.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
@@ -42,7 +41,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/map_types.h"
+#include "constants/field_weather.h"
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -172,7 +171,7 @@ static void sub_80A103C(u8 taskId)
 
 static void sub_80A1084(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(sub_80A109C, 8);
 }
 
@@ -225,7 +224,7 @@ static bool8 sub_80A1194(void)
 {
     FreezeObjectEvents();
     ScriptContext2_Enable();
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(sub_80A11C0, 10);
     gUnknown_2031DE0 = 0;
     return TRUE;
@@ -458,7 +457,7 @@ void FieldUseFunc_TmCase(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitTMCaseFromField;
     }
 }
@@ -489,7 +488,7 @@ void FieldUseFunc_BerryPouch(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitBerryPouchFromField;
     }
 }
@@ -532,7 +531,7 @@ void FieldUseFunc_TeachyTv(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_InitTeachyTvFromField;
     }
 }
@@ -648,7 +647,7 @@ static void sub_80A1C08(u8 taskId)
 void sub_80A1C44(u8 taskId)
 {
     ResetInitialPlayerAvatarState();
-    sub_8085620();
+    StartEscapeRopeFieldEffect();
     DestroyTask(taskId);
 }
 
@@ -662,7 +661,7 @@ void FieldUseFunc_TownMap(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = sub_80A1CC0;
     }
 }
@@ -694,7 +693,7 @@ void FieldUseFunc_FameChecker(u8 taskId)
     else
     {
         StopPokemonLeagueLightingEffectTask();
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = sub_80A1D68;
     }
 }

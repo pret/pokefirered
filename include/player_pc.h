@@ -13,7 +13,7 @@ struct PlayerPCItemPageStruct
     u8 pageItems;
     u8 count;
     u8 filler_6[3];
-    u8 unk_9;
+    bool8 notInRoom;
     u8 scrollIndicatorId;
     u8 filler_B[5];
 };

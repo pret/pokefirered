@@ -6,15 +6,17 @@
   "region_map_section": "MAPSEC_FUCHSIA_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_8",
-  "unknown_18": 0,
-  "unknown_19": 0,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CLERK",
+      "graphics_id": "OBJ_EVENT_GFX_CLERK",
       "x": 2,
       "y": 3,
       "elevation": 0,
@@ -27,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 6,
       "y": 3,
       "elevation": 3,
@@ -40,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_COOLTRAINER_F",
+      "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 9,
       "y": 5,
       "elevation": 3,

@@ -4,24 +4,24 @@
 #include "field_message_box.h"
 #include "constants/species.h"
 
-extern const u8 gUnknown_81A6D17[];
-extern const u8 gUnknown_81A6D6D[];
-extern const u8 gUnknown_81A6DDF[];
-extern const u8 gUnknown_81A6E36[];
-extern const u8 gUnknown_81A6EA4[];
-extern const u8 gUnknown_81A6F0B[];
-extern const u8 gUnknown_81A6F71[];
-extern const u8 gUnknown_81A6FAB[];
-extern const u8 gUnknown_81A6FF1[];
-extern const u8 gUnknown_81A7031[];
-extern const u8 gUnknown_81A7063[];
-extern const u8 gUnknown_81A70A5[];
-extern const u8 gUnknown_81A70D8[];
-extern const u8 gUnknown_81A7108[];
-extern const u8 gUnknown_81A7137[];
-extern const u8 gUnknown_81A7175[];
+extern const u8 PokedexRating_Text_LessThan10[];
+extern const u8 PokedexRating_Text_LessThan20[];
+extern const u8 PokedexRating_Text_LessThan30[];
+extern const u8 PokedexRating_Text_LessThan40[];
+extern const u8 PokedexRating_Text_LessThan50[];
+extern const u8 PokedexRating_Text_LessThan60[];
+extern const u8 PokedexRating_Text_LessThan70[];
+extern const u8 PokedexRating_Text_LessThan80[];
+extern const u8 PokedexRating_Text_LessThan90[];
+extern const u8 PokedexRating_Text_LessThan100[];
+extern const u8 PokedexRating_Text_LessThan110[];
+extern const u8 PokedexRating_Text_LessThan120[];
+extern const u8 PokedexRating_Text_LessThan130[];
+extern const u8 PokedexRating_Text_LessThan140[];
+extern const u8 PokedexRating_Text_LessThan150[];
+extern const u8 PokedexRating_Text_Complete[];
 
-u16 Special_GetPokedexCount(void)
+u16 GetPokedexCount(void)
 {
     if (gSpecialVar_0x8004 == 0)
     {
@@ -41,68 +41,70 @@ static const u8 *GetProfOaksRatingMessageByCount(u16 count)
     gSpecialVar_Result = FALSE;
 
     if (count < 10)
-        return gUnknown_81A6D17;
+        return PokedexRating_Text_LessThan10;
 
     if (count < 20)
-        return gUnknown_81A6D6D;
+        return PokedexRating_Text_LessThan20;
 
     if (count < 30)
-        return gUnknown_81A6DDF;
+        return PokedexRating_Text_LessThan30;
 
     if (count < 40)
-        return gUnknown_81A6E36;
+        return PokedexRating_Text_LessThan40;
 
     if (count < 50)
-        return gUnknown_81A6EA4;
+        return PokedexRating_Text_LessThan50;
 
     if (count < 60)
-        return gUnknown_81A6F0B;
+        return PokedexRating_Text_LessThan60;
 
     if (count < 70)
-        return gUnknown_81A6F71;
+        return PokedexRating_Text_LessThan70;
 
     if (count < 80)
-        return gUnknown_81A6FAB;
+        return PokedexRating_Text_LessThan80;
 
     if (count < 90)
-        return gUnknown_81A6FF1;
+        return PokedexRating_Text_LessThan90;
 
     if (count < 100)
-        return gUnknown_81A7031;
+        return PokedexRating_Text_LessThan100;
 
     if (count < 110)
-        return gUnknown_81A7063;
+        return PokedexRating_Text_LessThan110;
 
     if (count < 120)
-        return gUnknown_81A70A5;
+        return PokedexRating_Text_LessThan120;
 
     if (count < 130)
-        return gUnknown_81A70D8;
+        return PokedexRating_Text_LessThan130;
 
     if (count < 140)
-        return gUnknown_81A7108;
+        return PokedexRating_Text_LessThan140;
 
     if (count < 150)
-        return gUnknown_81A7137;
+        return PokedexRating_Text_LessThan150;
 
     if (count == 150)
     {
+        // Mew doesn't count for completing the pokedex
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MEW), 1))
-            return gUnknown_81A7137;
+            return PokedexRating_Text_LessThan150;
+
         gSpecialVar_Result = TRUE;
-        return gUnknown_81A7175;
+        return PokedexRating_Text_Complete;
     }
 
     if (count == 151)
     {
         gSpecialVar_Result = TRUE;
-        return gUnknown_81A7175;
+        return PokedexRating_Text_Complete;
     }
 
-    return gUnknown_81A6D17;
+    return PokedexRating_Text_LessThan10;
 }
 
-void Special_GetProfOaksRatingMessage(void)
+void GetProfOaksRatingMessage(void)
 {
     ShowFieldMessage(GetProfOaksRatingMessageByCount(gSpecialVar_0x8004));
 }

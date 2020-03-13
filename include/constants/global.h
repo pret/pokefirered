@@ -35,6 +35,8 @@
 
 #define QUEST_LOG_SCENE_COUNT 4
 
+#define NUM_TOWER_CHALLENGE_TYPES 4
+
 #define MALE   0
 #define FEMALE 1
 #define GENDER_COUNT 2

@@ -670,7 +670,7 @@
 #define FLAG_SILPH_11F_DOOR                              0x28D
 #define FLAG_0x28E                                       0x28E
 #define FLAG_0x28F                                       0x28F
-#define FLAG_MET_STICKER_LADY                            0x290
+#define FLAG_MET_STICKER_MAN                             0x290
 #define FLAG_PALLET_LADY_NOT_BLOCKING_SIGN               0x291
 #define FLAG_GOT_VS_SEEKER                               0x292
 #define FLAG_GOT_TM19_FROM_ERIKA                         0x293
@@ -766,8 +766,8 @@
 #define FLAG_REVIVED_HELIX                               0x2ED
 #define FLAG_REVIVED_AMBER                               0x2EE
 #define FLAG_GOT_HM06                                    0x2EF
-#define FLAG_SHOWED_MYSTICTICKET_TO_CAPTAIN              0x2F0
-#define FLAG_SHOWED_AURORATICKET_TO_CAPTAIN              0x2F1
+#define FLAG_SHOWN_MYSTIC_TICKET                         0x2F0
+#define FLAG_SHOWN_AURORA_TICKET                         0x2F1
 #define FLAG_FOUGHT_LUGIA                                0x2F2
 #define FLAG_FOUGHT_HO_OH                                0x2F3
 #define FLAG_OAK_SAW_DEX_COMPLETION                      0x2F4
@@ -1046,7 +1046,7 @@
 #define HIDDEN_ITEM_SAFARI_ZONE_WEST_REVIVE                            23
 #define HIDDEN_ITEM_SILPH_CO_5F_ELIXIR                                 24
 #define HIDDEN_ITEM_SILPH_CO_9F_MAX_POTION                             25
-#define HIDDEN_ITEM_SAFFRON_CITY_HOUSE1_2F_NUGGET                      26
+#define HIDDEN_ITEM_SAFFRON_CITY_COPYCATS_HOUSE_2F_NUGGET              26
 #define HIDDEN_ITEM_POWER_PLANT_MAX_ELIXIR                             27
 #define HIDDEN_ITEM_POWER_PLANT_THUNDER_STONE                          28
 #define HIDDEN_ITEM_SEAFOAM_ISLANDS_B3F_NUGGET                         29
@@ -1327,6 +1327,7 @@
 #define FLAG_0x808 (SYS_FLAGS + 0x8)
 
 #define PERMA_SYS_FLAGS_START 0x820
+
 #define FLAG_BADGE01_GET (SYS_FLAGS + 0x20)
 #define FLAG_BADGE02_GET (SYS_FLAGS + 0x21)
 #define FLAG_BADGE03_GET (SYS_FLAGS + 0x22)
@@ -1335,6 +1336,8 @@
 #define FLAG_BADGE06_GET (SYS_FLAGS + 0x25)
 #define FLAG_BADGE07_GET (SYS_FLAGS + 0x26)
 #define FLAG_BADGE08_GET (SYS_FLAGS + 0x27)
+#define NUM_BADGES       (1 + FLAG_BADGE08_GET - FLAG_BADGE01_GET)
+
 #define FLAG_SYS_POKEMON_GET (SYS_FLAGS + 0x28)
 #define FLAG_SYS_POKEDEX_GET (SYS_FLAGS + 0x29)
 #define FLAG_0x82A (SYS_FLAGS + 0x2A)
@@ -1369,8 +1372,8 @@
 #define FLAG_SYS_GOT_BERRY_POUCH (SYS_FLAGS + 0x47)
 #define FLAG_SYS_DEOXYS_AWAKENED (SYS_FLAGS + 0x48)
 #define FLAG_SYS_UNLOCKED_TANOBY_RUINS (SYS_FLAGS + 0x49)
-#define FLAG_SYS_GOT_MYSTIC_TICKET (SYS_FLAGS + 0x4A)
-#define FLAG_SYS_GOT_AURORA_TICKET (SYS_FLAGS + 0x4B)
+#define FLAG_ENABLE_SHIP_NAVEL_ROCK (SYS_FLAGS + 0x4A)
+#define FLAG_ENABLE_SHIP_BIRTH_ISLAND (SYS_FLAGS + 0x4B)
 
 // World Map Flags
 #define FLAG_WORLD_MAP_PALLET_TOWN                                  (SYS_FLAGS + 0x90)
@@ -1415,7 +1418,7 @@
 #define FLAG_WORLD_MAP_THREE_ISLAND_BERRY_FOREST                    (SYS_FLAGS + 0xB7)
 #define FLAG_WORLD_MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE            (SYS_FLAGS + 0xB8)
 #define FLAG_WORLD_MAP_FIVE_ISLAND_ROCKET_WAREHOUSE                 (SYS_FLAGS + 0xB9)
-#define FLAG_WORLD_MAP_SEVEN_ISLAND_TRAINER_TOWER_LOBBY             (SYS_FLAGS + 0xBA)
+#define FLAG_WORLD_MAP_TRAINER_TOWER_LOBBY                          (SYS_FLAGS + 0xBA)
 #define FLAG_WORLD_MAP_SIX_ISLAND_DOTTED_HOLE_1F                    (SYS_FLAGS + 0xBB)
 #define FLAG_WORLD_MAP_FIVE_ISLAND_LOST_CAVE_ENTRANCE               (SYS_FLAGS + 0xBC)
 #define FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH                      (SYS_FLAGS + 0xBD)

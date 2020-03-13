@@ -9,11 +9,11 @@ FuchsiaCity_OnTransition:: @ 8166D7B
 	end
 
 FuchsicaCity_EventScript_SetOmanyteGfx:: @ 8166D91
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_OMANYTE
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_OMANYTE
 	return
 
 FuchsiaCity_EventScript_SetKabutoGfx:: @ 8166D97
-	setvar VAR_OBJ_GFX_ID_0, OBJECT_EVENT_GFX_KABUTO
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_KABUTO
 	return
 
 FuchsiaCity_EventScript_LittleBoy:: @ 8166D9D
@@ -71,7 +71,7 @@ FuchsiaCity_EventScript_GymSign:: @ 8166E07
 FuchsiaCity_EventScript_ChanseySign:: @ 8166E1F
 	lockall
 	setvar VAR_0x8004, SPECIES_CHANSEY
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_CHANSEY, 10, 3
 	msgbox FuchsiaCity_Text_ChanseySign
 	erasemonpic
@@ -81,7 +81,7 @@ FuchsiaCity_EventScript_ChanseySign:: @ 8166E1F
 FuchsiaCity_EventScript_VoltorbSign:: @ 8166E38
 	lockall
 	setvar VAR_0x8004, SPECIES_VOLTORB
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_VOLTORB, 10, 3
 	msgbox FuchsiaCity_Text_VoltorbSign
 	erasemonpic
@@ -91,7 +91,7 @@ FuchsiaCity_EventScript_VoltorbSign:: @ 8166E38
 FuchsiaCity_EventScript_KangaskhanSign:: @ 8166E51
 	lockall
 	setvar VAR_0x8004, SPECIES_KANGASKHAN
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_KANGASKHAN, 10, 3
 	msgbox FuchsiaCity_Text_KangaskhanSign
 	erasemonpic
@@ -101,7 +101,7 @@ FuchsiaCity_EventScript_KangaskhanSign:: @ 8166E51
 FuchsiaCity_EventScript_SlowpokeSign:: @ 8166E6A
 	lockall
 	setvar VAR_0x8004, SPECIES_SLOWPOKE
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_SLOWPOKE, 10, 3
 	msgbox FuchsiaCity_Text_SlowpokeSign
 	erasemonpic
@@ -111,7 +111,7 @@ FuchsiaCity_EventScript_SlowpokeSign:: @ 8166E6A
 FuchsiaCity_EventScript_LaprasSign:: @ 8166E83
 	lockall
 	setvar VAR_0x8004, SPECIES_LAPRAS
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_LAPRAS, 10, 3
 	msgbox FuchsiaCity_Text_LaprasSign
 	erasemonpic
@@ -122,7 +122,7 @@ FuchsiaCity_EventScript_FossilMonSign:: @ 8166E9C
 	lockall
 	goto_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_OmanyteSign
 	setvar VAR_0x8004, SPECIES_KABUTO
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_KABUTO, 10, 3
 	msgbox FuchsiaCity_Text_KabutoSign
 	erasemonpic
@@ -131,7 +131,7 @@ FuchsiaCity_EventScript_FossilMonSign:: @ 8166E9C
 
 FuchsiaCity_EventScript_OmanyteSign:: @ 8166EBE
 	setvar VAR_0x8004, SPECIES_OMANYTE
-	special Special_SetSeenMon
+	special SetSeenMon
 	drawmonpic SPECIES_OMANYTE, 10, 3
 	msgbox FuchsiaCity_Text_OmanyteSign
 	erasemonpic

@@ -113,8 +113,6 @@ u8 sub_80DA45C(void);
 bool8 sub_80DA4A0(void);
 u8 Save_LoadGameData(u8 saveType);
 u32 TryCopySpecialSaveSection(u8 sector, u8* dst);
-u32 sub_8153634(u8 sector, u8* src);
-void sub_8153688(u8 taskId);
 u32 TryWriteSpecialSaveSection(u8 sector, u8* src);
 void sub_80DA634(u8 taskId);
 

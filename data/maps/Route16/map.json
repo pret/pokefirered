@@ -6,11 +6,13 @@
   "region_map_section": "MAPSEC_ROUTE_16",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
-  "map_type": "MAP_TYPE_3",
-  "unknown_18": 1,
-  "unknown_19": 6,
-  "elevator_flag": 0,
-  "battle_scene": "BATTLE_SCENE_0",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
       "map": "MAP_ROUTE17",
@@ -25,7 +27,7 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 16,
       "y": 12,
       "elevation": 3,
@@ -34,11 +36,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AAEEB",
+      "script": "Route16_EventScript_Lao",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 14,
       "y": 14,
       "elevation": 3,
@@ -47,11 +49,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AAFA5",
+      "script": "Route16_EventScript_Koji",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 12,
       "y": 12,
       "elevation": 3,
@@ -60,11 +62,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AAFE3",
+      "script": "Route16_EventScript_Luke",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 8,
       "y": 12,
       "elevation": 3,
@@ -73,11 +75,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AAF67",
+      "script": "Route16_EventScript_Ruben",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 10,
       "y": 14,
       "elevation": 3,
@@ -86,11 +88,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AAF29",
+      "script": "Route16_EventScript_Hideo",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BIKER",
+      "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 6,
       "y": 14,
       "elevation": 3,
@@ -99,11 +101,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AB021",
+      "script": "Route16_EventScript_Camron",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_CUT_TREE",
+      "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 41,
       "y": 11,
       "elevation": 3,
@@ -112,11 +114,11 @@
       "movement_range_y": 1,
       "trainer_type": 0,
       "trainer_sight_or_berry_tree_id": 0,
-      "script": "EventScript_InteractWithCutTreeObject",
+      "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_BEAUTY",
+      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 30,
       "y": 5,
       "elevation": 3,
@@ -125,11 +127,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AB0A5",
+      "script": "Route16_EventScript_Lea",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 31,
       "y": 5,
       "elevation": 3,
@@ -138,11 +140,11 @@
       "movement_range_y": 1,
       "trainer_type": 1,
       "trainer_sight_or_berry_tree_id": 1,
-      "script": "Route16_EventScript_1AB05F",
+      "script": "Route16_EventScript_Jed",
       "flag": "0"
     },
     {
-      "graphics_id": "OBJECT_EVENT_GFX_SNORLAX",
+      "graphics_id": "OBJ_EVENT_GFX_SNORLAX",
       "x": 31,
       "y": 13,
       "elevation": 3,
@@ -195,17 +197,19 @@
   "coord_events": [],
   "bg_events": [
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 6,
       "y": 17,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route16_EventScript_RouteSign"
     },
     {
-      "type": "bg_event_type_0",
+      "type": "sign",
       "x": 33,
       "y": 11,
       "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route16_EventScript_CyclingRoadSign"
     },
     {

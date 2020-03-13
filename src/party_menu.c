@@ -1,5 +1,5 @@
 #include "global.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -7,21 +7,17 @@
 #include "battle_interface.h"
 #include "battle_tower.h"
 #include "berry_pouch.h"
-#include "bg.h"
 #include "data.h"
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "evolution_scene.h"
-#include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
-#include "field_screen_effect.h"
-#include "field_specials.h"
+#include "field_fadetransition.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "fldeff.h"
-#include "gpu_regs.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "item.h"
@@ -38,7 +34,6 @@
 #include "new_menu_helpers.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
-#include "palette.h"
 #include "party_menu.h"
 #include "player_pc.h"
 #include "pokedex.h"
@@ -46,26 +41,21 @@
 #include "pokemon_icon.h"
 #include "pokemon_jump.h"
 #include "pokemon_special_anim.h"
-#include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "quest_log.h"
 #include "region_map.h"
 #include "reshow_battle_screen.h"
 #include "scanline_effect.h"
 #include "script.h"
-#include "sound.h"
-#include "sprite.h"
 #include "start_menu.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "teachy_tv.h"
-#include "text.h"
 #include "text_window.h"
 #include "tm_case.h"
 #include "trade.h"
 #include "union_room.h"
-#include "window.h"
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
@@ -78,7 +68,6 @@
 #include "constants/quest_log.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "constants/vars.h"
 
 #define PARTY_PAL_SELECTED     (1 << 0)
 #define PARTY_PAL_FAINTED      (1 << 1)
@@ -577,7 +566,7 @@ static bool8 ShowPartyMenu(void)
         ++gMain.state;
         break;
     case 19:
-        HelpSystem_SetSomeVariable2(5);
+        SetHelpContext(HELPCONTEXT_PARTY_MENU);
         ++gMain.state;
         break;
     case 20:
@@ -3881,7 +3870,7 @@ static void CursorCB_Register(u8 taskId)
     u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_OBEDIENCE);
 
-    switch (CanRegisterMonForTradingBoard(*(struct GFtgtGnameSub *)sub_80F9800(), species2, species, obedience))
+    switch (CanRegisterMonForTradingBoard(*(struct GFtgtGnameSub *)GetHostRFUtgtGname(), species2, species, obedience))
     {
     case CANT_REGISTER_MON:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
@@ -3907,7 +3896,7 @@ static void CursorCB_Trade1(u8 taskId)
     u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
     u8 obedience = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_OBEDIENCE);
-    u32 stringId = GetUnionRoomTradeMessageId(*(struct GFtgtGnameSub *)sub_80F9800(), gUnknown_203B064, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, obedience);
+    u32 stringId = GetUnionRoomTradeMessageId(*(struct GFtgtGnameSub *)GetHostRFUtgtGname(), gPartnerTgtGnameSub, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, obedience);
 
     if (stringId != UR_TRADE_MSG_NONE)
     {
@@ -4048,7 +4037,7 @@ static void Task_HandleFieldMoveExitAreaYesNoInput(u8 taskId)
 
 bool8 FieldCallback_PrepareFadeInFromMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_FieldMoveWaitForFade, 8);
     return TRUE;
 }
@@ -6365,7 +6354,7 @@ void ChoosePartyMonByMenuType(u8 menuType)
 
 static bool8 CB2_FadeFromPartyMenu(void)
 {
-    sub_807DC00();
+    FadeInFromBlack();
     CreateTask(Task_PartyMenuWaitForFade, 10);
     return TRUE;
 }

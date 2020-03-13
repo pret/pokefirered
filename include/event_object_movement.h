@@ -3,9 +3,6 @@
 
 #include "global.h"
 
-#define NUM_OBJECT_GRAPHICS_INFO 239
-#define SPRITE_VAR 240
-
 // Exported struct declarations
 
 enum SpinnerRunnerFollowPatterns {
@@ -60,9 +57,8 @@ void SpawnObjectEventsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoObjectEvent(u16, SpriteCallback, s16, s16, u8);
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
-u8 SpawnSpecialObjectEventParameterized(u8, u8, u8, s16, s16, u8);
+int SpawnSpecialObjectEventParameterized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
-void SetSpritePosToMapCoords(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
 void CameraObjectReset2(void);
 void ObjectEventSetGraphicsId(struct ObjectEvent *, u8);
@@ -114,7 +110,6 @@ u8 GetFaceDirectionMovementAction(u32);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 void UnfreezeObjectEvents(void);
 void sub_8069058(u8, u8);
-void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 u8 GetSlideMovementAction(u32);
 u8 GetJumpInPlaceMovementAction(u32);
 u8 GetJumpMovementAction(u32);
@@ -123,7 +118,48 @@ bool8 sub_8068BCC(struct Sprite *sprite);
 void sub_8068D1C(struct Sprite *, u8, u8, u8);
 u8 sub_8068D3C(struct Sprite *);
 u8 sub_8068DC4(struct Sprite *);
-
+void TurnObjectEvent(u8, u8);
+const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId);
+u8 GetFirstInactiveObjectEventId(void);
+u8 GetCollisionFlagsAtCoords(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction);
+u8 sub_8063FB0(u8 direction);
+void OverrideTemplateCoordsForObjectEvent(const struct ObjectEvent *objectEvent);void sub_805C774(void);
+void FreezeObjectEvents(void);
+bool8 FreezeObjectEvent(struct ObjectEvent *);
+void UnfreezeObjectEvent(struct ObjectEvent *);
+void FreezeObjectEventsExceptOne(u8 objEventId);
+void RfuUnionObjectSetFacingDirection(u8 objectEventId, u8 direction);
+void RfuUnionObjectToggleInvisibility(u8 objectEventId, bool32 invisible);
+bool32 RfuUnionObjectIsInvisible(u8 objectEventId);
+void RfuUnionObjectStartWarp(u8 objectEventId, u8 animNo);
+bool32 RfuUnionObjectIsWarping(u8 objectEventId);
+u8 sub_80641C0(u32 direction);
+void sub_805F378(s16 x, s16 y);
+void MoveObjectEventToMapCoords(struct ObjectEvent *objectEvent, s16 x, s16 y);
+u8 CreateCopySpriteAt(struct Sprite * sprite, s16 x, s16 y, u8 subpriority);
+u16 GetObjectPaletteTag(u8 paletteIndex);
+void SetSpritePosToMapCoords(s16 x, s16 y, s16 *x2, s16 *y2);
+void UpdateObjectEventSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+u8 ZCoordToPriority(u8 z);
+void SetObjectSubpriorityByZCoord(u8 z, struct Sprite * sprite, u8 offset);
+void MakeObjectTemplateFromObjectEventGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
+u8 AddCameraObject(u8 trackedSpriteId);
+void UpdateObjectEventsForCameraUpdate(s16 x, s16 y);
+void UpdateObjectEventSpriteSubpriorityAndVisibility(struct Sprite *);
+void SetMovementDelay(struct Sprite *, s16);
+bool8 WaitForMovementDelay(struct Sprite *);
+void oamt_npc_ministep_reset(struct Sprite *, u8, u8);
+bool8 obj_npc_ministep(struct Sprite *sprite);
+void sub_8068BBC(struct Sprite *, u8);
+void sub_8068C58(struct Sprite *, u8);
+bool8 sub_8068C68(struct Sprite *sprite);
+void sub_8068C08(struct Sprite *, u8);
+bool8 sub_8068C18(struct Sprite *sprite);
+void DoShadowFieldEffect(struct ObjectEvent *);
+void sub_8068CA4(struct Sprite *, u8);
+bool8 sub_8068CB4(struct Sprite *sprite);
+void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
+bool8 SpriteAnimEnded(struct Sprite *);
 
 // Exported data declarations
 
@@ -131,5 +167,9 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
 extern const struct OamData gObjectEventBaseOam_32x32;
+extern const struct Coords16 sDirectionToVectors[];
+extern const u16 gUnknown_8398648[];
+extern const u16 gUnknown_8398688[];
+extern const u8 gReflectionEffectPaletteMap[];
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

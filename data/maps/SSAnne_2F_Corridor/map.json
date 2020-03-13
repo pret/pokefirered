@@ -114,7 +114,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerLeft"
     },
     {
@@ -123,7 +123,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerMid"
     },
     {
@@ -132,7 +132,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR",
-      "var_value": 0,
+      "var_value": "0",
       "script": "SSAnne_2F_Corridor_EventScript_RivalTriggerRight"
     }
   ],

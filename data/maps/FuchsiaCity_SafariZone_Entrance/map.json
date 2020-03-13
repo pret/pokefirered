@@ -79,7 +79,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerMid"
     },
     {
@@ -88,7 +88,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerRight"
     },
     {
@@ -97,7 +97,7 @@
       "y": 3,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerLeft"
     }
   ],

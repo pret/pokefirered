@@ -123,7 +123,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1"
     },
     {
@@ -132,7 +132,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_7",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch7"
     },
     {
@@ -141,7 +141,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_6",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch6"
     },
     {
@@ -150,7 +150,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_5",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch5"
     },
     {
@@ -159,7 +159,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_4",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch4"
     },
     {
@@ -168,7 +168,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_3",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch3"
     },
     {
@@ -177,7 +177,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 99,
+      "var_value": "99",
       "script": "SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch2"
     }
   ],

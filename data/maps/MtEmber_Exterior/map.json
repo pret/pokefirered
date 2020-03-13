@@ -327,7 +327,7 @@
       "y": 43,
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     },
     {
@@ -336,7 +336,7 @@
       "y": 43,
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     },
     {
@@ -345,7 +345,7 @@
       "y": 43,
       "elevation": 0,
       "var": "VAR_MAP_SCENE_MT_EMBER_EXTERIOR",
-      "var_value": 1,
+      "var_value": "1",
       "script": "MtEmber_Exterior_EventScript_RocketPasswordScene"
     }
   ],

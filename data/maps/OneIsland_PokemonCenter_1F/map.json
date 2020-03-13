@@ -117,7 +117,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F",
-      "var_value": 2,
+      "var_value": "2",
       "script": "OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerTop"
     },
     {
@@ -126,7 +126,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F",
-      "var_value": 2,
+      "var_value": "2",
       "script": "OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerMidTop"
     },
     {
@@ -135,7 +135,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F",
-      "var_value": 2,
+      "var_value": "2",
       "script": "OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerMidBottom"
     },
     {
@@ -144,7 +144,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F",
-      "var_value": 2,
+      "var_value": "2",
       "script": "OneIsland_PokemonCenter_1F_EventScript_LeaveOneIslandTriggerBottom"
     }
   ],

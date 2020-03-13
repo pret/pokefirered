@@ -139,7 +139,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route24_EventScript_RocketTriggerLeft"
     },
     {
@@ -148,7 +148,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE24",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route24_EventScript_RocketTriggerRight"
     }
   ],

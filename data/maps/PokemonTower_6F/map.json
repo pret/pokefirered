@@ -104,7 +104,7 @@
       "y": 15,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_6F_EventScript_MarowakGhost"
     },
     {
@@ -113,7 +113,7 @@
       "y": 16,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_POKEMON_TOWER_6F",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_6F_EventScript_MarowakGhost"
     }
   ],

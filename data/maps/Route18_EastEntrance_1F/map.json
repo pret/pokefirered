@@ -59,7 +59,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EventScript_SetEnteringCyclingRoad"
     },
     {
@@ -68,7 +68,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerTop"
     },
     {
@@ -77,7 +77,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidTop"
     },
     {
@@ -86,7 +86,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMid"
     },
     {
@@ -95,7 +95,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerMidBottom"
     },
     {
@@ -104,7 +104,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route18_EastEntrance_1F_EventScript_NeedBikeTriggerBottom"
     },
     {
@@ -113,7 +113,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 1,
+      "var_value": "1",
       "script": "EventScript_SetExitingCyclingRoad"
     },
     {
@@ -122,7 +122,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 1,
+      "var_value": "1",
       "script": "EventScript_SetExitingCyclingRoad"
     },
     {
@@ -131,7 +131,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 1,
+      "var_value": "1",
       "script": "EventScript_SetExitingCyclingRoad"
     },
     {
@@ -140,7 +140,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EventScript_SetEnteringCyclingRoad"
     },
     {
@@ -149,7 +149,7 @@
       "y": 7,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE16",
-      "var_value": 0,
+      "var_value": "0",
       "script": "EventScript_SetEnteringCyclingRoad"
     }
   ],

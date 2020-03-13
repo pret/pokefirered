@@ -145,7 +145,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerLeft"
     },
     {
@@ -154,7 +154,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerMid"
     },
     {
@@ -163,7 +163,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PewterCity_Museum_1F_EventScript_EntranceTriggerRight"
     }
   ],

@@ -96,7 +96,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PalletTown_EventScript_OakTriggerLeft"
     },
     {
@@ -105,7 +105,7 @@
       "y": 1,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_OAK",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PalletTown_EventScript_OakTriggerRight"
     },
     {
@@ -114,7 +114,7 @@
       "y": 2,
       "elevation": 3,
       "var": "VAR_TEMP_2",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PalletTown_EventScript_SignLadyTrigger"
     }
   ],

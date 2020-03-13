@@ -130,7 +130,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -139,7 +139,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -148,7 +148,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -157,7 +157,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -166,7 +166,7 @@
       "y": 8,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -175,7 +175,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -184,7 +184,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -193,7 +193,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -202,7 +202,7 @@
       "y": 10,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "PokemonTower_5F_EventScript_PurifiedZone"
     },
     {
@@ -211,7 +211,7 @@
       "y": 9,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -220,7 +220,7 @@
       "y": 10,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -229,7 +229,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -238,7 +238,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -247,7 +247,7 @@
       "y": 11,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -256,7 +256,7 @@
       "y": 8,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -265,7 +265,7 @@
       "y": 9,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     },
     {
@@ -274,7 +274,7 @@
       "y": 10,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 1,
+      "var_value": "1",
       "script": "PokemonTower_5F_EventScript_ExitPurifiedZone"
     }
   ],

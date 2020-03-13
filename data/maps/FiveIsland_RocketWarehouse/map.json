@@ -162,7 +162,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     },
     {
@@ -171,7 +171,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     },
     {
@@ -180,7 +180,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     }
   ],

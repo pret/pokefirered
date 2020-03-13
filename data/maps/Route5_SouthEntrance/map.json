@@ -66,7 +66,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route5_SouthEntrance_EventScript_GuardTriggerLeft"
     },
     {
@@ -75,7 +75,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route5_SouthEntrance_EventScript_GuardTriggerMid"
     },
     {
@@ -84,7 +84,7 @@
       "y": 5,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": 0,
+      "var_value": "0",
       "script": "Route5_SouthEntrance_EventScript_GuardTriggerRight"
     }
   ],

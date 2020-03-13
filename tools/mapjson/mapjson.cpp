@@ -317,7 +317,7 @@ string generate_firered_map_events_text(Json map_data) {
                      << coord_event["y"].int_value() << ", "
                      << coord_event["elevation"].int_value() << ", 0, "
                      << coord_event["var"].string_value() << ", "
-                     << coord_event["var_value"].int_value() << ", 0, "
+                     << coord_event["var_value"].string_value() << ", 0, "
                      << coord_event["script"].string_value() << "\n";
             }
             else if (coord_event["type"] == "weather") {

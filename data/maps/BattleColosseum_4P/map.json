@@ -52,7 +52,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleColosseum_4P_EventScript_PlayerSpot0"
     },
     {
@@ -61,7 +61,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleColosseum_4P_EventScript_PlayerSpot2"
     },
     {
@@ -70,7 +70,7 @@
       "y": 4,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleColosseum_4P_EventScript_PlayerSpot1"
     },
     {
@@ -79,7 +79,7 @@
       "y": 6,
       "elevation": 3,
       "var": "VAR_TEMP_0",
-      "var_value": 0,
+      "var_value": "0",
       "script": "BattleColosseum_4P_EventScript_PlayerSpot3"
     }
   ],

@@ -50,6 +50,18 @@ enum
 
 enum
 {
+    PC_TEXT_FMT_NORMAL,
+    PC_TEXT_FMT_MON_NAME_1,
+    PC_TEXT_FMT_MON_NAME_2,
+    PC_TEXT_FMT_MON_NAME_3,
+    PC_TEXT_FMT_MON_NAME_4,
+    PC_TEXT_FMT_MON_NAME_5,
+    PC_TEXT_FMT_MON_NAME_6,
+    PC_TEXT_FMT_ITEM_NAME,
+};
+
+enum
+{
     CURSOR_AREA_IN_BOX,
     CURSOR_AREA_IN_PARTY,
     CURSOR_AREA_BOX,
@@ -84,6 +96,12 @@ enum
 #define TAG_TILE_7          0x7
 #define TAG_TILE_0          0x0
 #define TAG_TILE_1          0x1
+
+struct StorageAction
+{
+    const u8 *text;
+    u8 format;
+};
 
 struct UnkPSSStruct_2002370
 {
@@ -136,10 +154,10 @@ struct UnkStorageStruct
 
 struct PssQuestLogBuffer
 {
-    u16 a0;
-    u16 a2;
-    u8 a4;
-    u8 a5;
+    u16 species;
+    u16 species2;
+    u8 fromBox;
+    u8 toBox;
 };
 
 struct PokemonStorageSystemData
@@ -157,7 +175,7 @@ struct PokemonStorageSystemData
     u8 field_2C4;
     u8 field_2C5;
     u8 showPartyMenuState;
-    u8 unk_02C7;
+    bool8 unk_02C7;
     u8 unk_02C8;
     bool8 unk_02C9;
     s16 newCurrBoxId;
@@ -248,10 +266,7 @@ struct PokemonStorageSystemData
     /* 0ce8 */ u8 cursorMonLevel;
     /* 0ce9 */ bool8 cursorMonIsEgg;
     /* 0cea */ u8 cursorMonNick[POKEMON_NAME_LENGTH + 1];
-    /* 0cf5 */ u8 cursorMonNickText[36];
-    /* 0d19 */ u8 cursorMonSpeciesName[36];
-    /* 0d3d */ u8 cursorMonGenderLvlText[36];
-    /* 0d61 */ u8 cursorMonItemName[36];
+    /* 0cf5 */ u8 cursorMonTexts[4][36];
     /* 0d88 */ bool8 (*monPlaceChangeFunc)(void);
     /* 0d8c */ u8 monPlaceChangeState;
     /* 0d8d */ u8 field_D91;
@@ -289,8 +304,9 @@ struct PokemonStorageSystemData
     /* 21f4 */ struct UnkStorageStruct field_2204[3];
     /* 2224 */ u16 movingItem;
     /* 2226 */ u16 field_2236;
-    /* 2228 */ struct PssQuestLogBuffer field_2238;
-    /* 2230 */ u16 field_223A;
+    /* 2228 */ struct PssQuestLogBuffer qlogBuffer;
+    /* 2230 */ u16 field_2238;
+    /* 2232 */ u16 field_223A;
     /* 2234 */ u16 *field_223C;
     /* 2238 */ struct Sprite *cursorMonSprite;
     /* 223c */ u16 field_2244[0x40];
@@ -310,5 +326,75 @@ void sub_808C950(void);
 u8 HandleBoxChooseSelectionInput(void);
 void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
+u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
+
+void sub_80922C0(void);
+void sub_8092340(void);
+bool8 sub_80924A8(void);
+void sub_8092AE4(void);
+void sub_8092B3C(u8 a0);
+void sub_8092B50(void);
+void sub_8092B5C(void);
+u8 sub_8092B70(void);
+void sub_8092F54(void);
+void sub_8093174(void);
+void sub_8093194(void);
+bool8 sub_80931EC(void);
+void sub_8093264(void);
+void sub_8093630(void);
+void sub_8093660(void);
+void sub_80936B8(void);
+void sub_80937B4(void);
+void sub_8094D14(u8 a0);
+u8 sub_8094D34(void);
+void sub_8094D60(void);
+void sub_8094D84(void);
+bool8 sub_8094F90(void);
+s16 sub_8094F94(void);
+void sub_8095024(void);
+bool8 sub_8095050(void);
+void sub_80950A4(void);
+void sub_80950BC(u8 a0);
+bool8 sub_80950D0(void);
+void sub_8095B5C(void);
+void sub_8096088(void);
+void sub_80960C0(void);
+bool8 sub_809610C(void);
+const u8 *GetMovingItemName(void);
+void sub_80966F4(void);
+bool8 sub_8096728(void);
+bool8 sub_80967C0(void);
+void sub_8096BE4(struct UnkStruct_2000020 *arg0, struct UnkStruct_2000028 *arg1, u32 arg2);
+void sub_8096BF8(void);
+void AddMenu(void);
+bool8 CanMovePartyMon(void);
+bool8 CanShiftMon(void);
+bool8 DoMonPlaceChange(void);
+bool8 DoWallpaperGfxChange(void);
+u8 GetBoxCursorPosition(void);
+u16 GetMovingItem(void);
+u8 HandleInput(void);
+void InitCanReleaseMonVars(void);
+void InitMonPlaceChange(u8 a0);
+bool8 IsActiveItemMoving(void);
+bool8 IsCursorOnCloseBox(void);
+bool8 IsMonBeingMoved(void);
+void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos);
+void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos);
+void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos);
+void Item_TakeMons(u8 cursorArea, u8 cursorPos);
+void PrintItemDescription(void);
+void ReleaseMon(void);
+s8 RunCanReleaseMon(void);
+bool8 ScrollToBox(void);
+void SetMonMarkings(u8 markings);
+void SetMovingMonPriority(u8 priority);
+void SetUpScrollToBox(u8 targetBox);
+void SetWallpaperForCurrentBox(u8 wallpaper);
+bool8 TryStorePartyMonInBox(u8 boxId);
+void InitMenu(void);
+void SetMenuText(u8 textId);
+void sub_8095C84(u8 cursorArea, u8 cursorPos);
+void sub_8095E2C(u16 itemId);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

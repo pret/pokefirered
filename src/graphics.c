@@ -1247,10 +1247,10 @@ const u32 gUnknown_8E9BF48[] = INCBIN_U32("graphics/interface/link_rfu_status.4b
 const u16 gUnknown_8E9C14C[] = INCBIN_U16("graphics/interface/pokedex_abc.gbapal");
 const u32 gUnknown_8E9C16C[] = INCBIN_U32("graphics/interface/pokedex_abc.4bpp.lz");
 
-const u16 gUnknown_8E9C3D8[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
+const u16 gPSSMenu_Pal[] = INCBIN_U16("graphics/interface/box_tiles_pal1.gbapal");
 const u16 gUnknown_8E9C3F8[] = INCBIN_U16("graphics/interface/box_tiles_pal2.gbapal");
 const u16 gUnknown_8E9C418[] = INCBIN_U16("graphics/interface/box_tiles_pal3.gbapal");
-const u32 gUnknown_8E9C438[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
+const u32 gPSSMenu_Gfx[] = INCBIN_U32("graphics/interface/box_tiles.4bpp.lz");
 
 const u32 gUnknown_8E9CAEC[] = INCBIN_U32("graphics/unknown/unknown_E9CAEC.bin.lz");
 

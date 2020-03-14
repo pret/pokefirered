@@ -421,4 +421,17 @@ u8 GetBoxWallpaper(u8 boxId);
 bool8 IsCursorOnBox(void);
 bool8 IsCursorInBox(void);
 
+void sub_808FFAC(void);
+struct Sprite * CreateMonIconSprite(u16 species, u32 pid, s16 x, s16 y, u8 priority, u8 subpriority);
+void CreatePartyMonsSprites(bool8 species);
+void sub_80909F4(void);
+bool8 sub_8090A60(void);
+void sub_8090B98(s16 yDelta);
+void DestroyAllPartyMonIcons(void);
+void sub_8091114(void);
+bool8 sub_8091150(void);
+void sub_80913DC(u8 box);
+bool8 sub_809140C(void);
+void sub_80920FC(bool8 species);
+
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

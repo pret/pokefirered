@@ -6,25 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83CEBF0:: @ 83CEBF0 spr_template
-	spr_template 18, 56000, gUnknown_83CEC08, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-gUnknown_83CEC08::
-	.4byte 0x80000000, 0x00000000
-
-gUnknown_83CEC10::
-	obj_rot_scal_anim_frame -2, -2, 0, 120
-	obj_rot_scal_anim_end
-
-gUnknown_83CEC20::
-	obj_rot_scal_anim_frame 16, 16, 0, 0
-	obj_rot_scal_anim_frame 16, 16, 0, 15
-	obj_rot_scal_anim_end
-
-gUnknown_83CEC38:: @ 83CEC38 dataptr
-	.4byte gUnknown_83CEC10
-	.4byte gUnknown_83CEC20
-
 gUnknown_83CEC40:: @ 83CEC40
 	.incbin "graphics/interface/pss_unk_83CEC40.gbapal"
 

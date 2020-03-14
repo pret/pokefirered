@@ -4,6 +4,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "item.h"
@@ -13,15 +14,19 @@
 #include "naming_screen.h"
 #include "new_menu_helpers.h"
 #include "pc_screen_effect.h"
+#include "pokemon_icon.h"
 #include "pokemon_storage_system_internal.h"
 #include "pokemon_summary_screen.h"
 #include "quest_log.h"
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
+#include "trig.h"
 #include "constants/items.h"
 #include "constants/help_system.h"
 #include "constants/songs.h"
+#include "constants/flags.h"
+#include "constants/vars.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *sPSSData = NULL;
 EWRAM_DATA bool8 sInPartyMenu = 0;
@@ -99,16 +104,25 @@ void AddWallpaperSetsMenu(void);
 void AddWallpapersMenu(u8 wallpaperSet);
 void sub_808FDFC(void);
 void sub_808FE54(u8 species);
-bool8 IsCursorOnBox(void);
 void sub_808FF70(void);
+
 void sub_808FFAC(void);
+struct Sprite * CreateMonIconSprite(u16 species, u32 pid, s16 x, s16 y, u8 priority, u8 subpriority);
+void sub_8090324(struct Sprite * sprite);
+void SetBoxSpeciesAndPersonalities(u8 boxId);
 void CreatePartyMonsSprites(bool8 species);
 void sub_80909F4(void);
 bool8 sub_8090A60(void);
+void sub_8090A74(struct Sprite * sprite, u16 idx);
+void sub_8090AE0(struct Sprite * sprite);
 void sub_8090B98(s16 yDelta);
 void DestroyAllPartyMonIcons(void);
 void sub_8091114(void);
 bool8 sub_8091150(void);
+void DestroyBoxMonIcon(struct Sprite * sprite);
+bool8 IsCursorOnBox(void);
+bool8 IsCursorInBox(void);
+void sub_80911B0(struct Sprite * sprite);
 void sub_80913DC(u8 box);
 bool8 sub_809140C(void);
 void sub_80920FC(bool8 species);
@@ -352,6 +366,49 @@ const struct SpriteTemplate sSpriteTemplate_Waveform = {
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+const struct OamData gUnknown_83CEC08;
+
+const struct SpriteTemplate gUnknown_83CEBF0 = {
+    .tileTag = TAG_TILE_12,
+    .paletteTag = TAG_PAL_DAC0,
+    .oam = &gUnknown_83CEC08,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+const struct OamData gUnknown_83CEC08 = {
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0x000,
+    .priority = 0,
+    .paletteNum = 0
+};
+
+const union AffineAnimCmd gUnknown_83CEC10[] = {
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gUnknown_83CEC20[] = {
+    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gUnknown_83CEC38[] = {
+    gUnknown_83CEC10,
+    gUnknown_83CEC20
 };
 
 void VblankCb_PSS(void)
@@ -2694,7 +2751,7 @@ void sub_808FE54(u8 action)
     struct PssQuestLogBuffer * qlogBuffer;
     if (sInPartyMenu)
     {
-        toBox = 14;
+        toBox = TOTAL_BOXES_COUNT;
         species2 = GetMonData(&gPlayerParty[GetBoxCursorPosition()], MON_DATA_SPECIES2);
     }
     else
@@ -2711,14 +2768,14 @@ void sub_808FE54(u8 action)
     case 0:
         if (sInPartyMenu)
         {
-            if (fromBox == 14)
+            if (fromBox == TOTAL_BOXES_COUNT)
                 return;
             else
                 event = QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON;
         }
         else
         {
-            if (fromBox == 14)
+            if (fromBox == TOTAL_BOXES_COUNT)
                 // Should upmerge but doesn't
                 event = QL_EVENT_SWITCHED_PARTY_MON_FOR_PC_MON;
             else
@@ -2736,14 +2793,14 @@ void sub_808FE54(u8 action)
         qlogBuffer->toBox = 0xFF;
         if (sInPartyMenu)
         {
-            if (fromBox == 14)
+            if (fromBox == TOTAL_BOXES_COUNT)
                 return;
             else
                 event = QL_EVENT_WITHDREW_MON_PC;
         }
         else
         {
-            if (fromBox == 14)
+            if (fromBox == TOTAL_BOXES_COUNT)
             {
                 event = QL_EVENT_DEPOSITED_MON_PC;
                 qlogBuffer->fromBox = toBox;
@@ -2773,4 +2830,607 @@ void sub_808FE54(u8 action)
         break;
     }
     SetQuestLogEvent(event, (const void *)qlogBuffer);
+}
+
+void sub_808FF70(void)
+{
+    if (sLastUsedBox != StorageGetCurrentBox())
+    {
+        FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
+        VarSet(VAR_PC_BOX_TO_SEND_MON, StorageGetCurrentBox());
+    }
+}
+
+void sub_808FFAC(void)
+{
+    u16 i;
+
+    LoadMonIconPalettes();
+    for (i = 0; i < 40; i++)
+        sPSSData->field_B08[i] = 0;
+    for (i = 0; i < 40; i++)
+        sPSSData->field_B58[i] = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+        sPSSData->partySprites[i] = NULL;
+    for (i = 0; i < IN_BOX_COUNT; i++)
+        sPSSData->boxMonsSprites[i] = NULL;
+
+    sPSSData->movingMonSprite = NULL;
+    sPSSData->field_78C = 0;
+}
+
+// ******************************************************************
+// Mon icons
+// ******************************************************************
+
+u8 sub_8090058(void)
+{
+    return (IsCursorInBox() ? 2 : 1);
+}
+
+void CreateMovingMonIcon(void)
+{
+    u32 personality = GetMonData(&sPSSData->movingMon, MON_DATA_PERSONALITY);
+    u16 species = GetMonData(&sPSSData->movingMon, MON_DATA_SPECIES2);
+    u8 priority = sub_8090058();
+
+    sPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
+    sPSSData->movingMonSprite->callback = sub_80911B0;
+}
+
+void sub_80900D4(u8 boxId)
+{
+    u8 boxPosition;
+    u16 i, j, count;
+    u16 species;
+    u32 personality;
+
+    count = 0;
+    boxPosition = 0;
+    for (i = 0; i < IN_BOX_COLUMNS; i++)
+    {
+        for (j = 0; j < IN_BOX_ROWS; j++)
+        {
+            species = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            if (species != SPECIES_NONE)
+            {
+                personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
+                sPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+            }
+            else
+            {
+                sPSSData->boxMonsSprites[count] = NULL;
+            }
+            boxPosition++;
+            count++;
+        }
+    }
+
+    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    {
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
+                sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+        }
+    }
+}
+
+void sub_80901EC(u8 boxPosition)
+{
+    u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES2);
+
+    if (species != SPECIES_NONE)
+    {
+        s16 x = 8 * (3 * (boxPosition % IN_BOX_ROWS)) + 100;
+        s16 y = 8 * (3 * (boxPosition / IN_BOX_ROWS)) + 44;
+        u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
+
+        sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
+        if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+            sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+    }
+}
+
+void sub_809029C(s16 arg0)
+{
+    u16 i;
+
+    for (i = 0; i < IN_BOX_COUNT; i++)
+    {
+        if (sPSSData->boxMonsSprites[i] != NULL)
+        {
+            sPSSData->boxMonsSprites[i]->data[2] = arg0;
+            sPSSData->boxMonsSprites[i]->data[4] = 1;
+            sPSSData->boxMonsSprites[i]->callback = sub_8090324;
+        }
+    }
+}
+
+void sub_80902E0(struct Sprite *sprite)
+{
+    if (sprite->data[1] != 0)
+    {
+        sprite->data[1]--;
+        sprite->pos1.x += sprite->data[2];
+    }
+    else
+    {
+        sPSSData->field_C66--;
+        sprite->pos1.x = sprite->data[3];
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void sub_8090324(struct Sprite *sprite)
+{
+    if (sprite->data[4] != 0)
+    {
+        sprite->data[4]--;
+    }
+    else
+    {
+        sprite->pos1.x += sprite->data[2];
+        sprite->data[5] = sprite->pos1.x + sprite->pos2.x;
+        if (sprite->data[5] <= 68 || sprite->data[5] >= 252)
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+void DestroyAllIconsInRow(u8 row)
+{
+    u16 column;
+    u8 boxPosition = row;
+
+    for (column = 0; column < IN_BOX_COLUMNS; column++)
+    {
+        if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+        {
+            DestroyBoxMonIcon(sPSSData->boxMonsSprites[boxPosition]);
+            sPSSData->boxMonsSprites[boxPosition] = NULL;
+        }
+        boxPosition += IN_BOX_ROWS;
+    }
+}
+
+u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
+{
+    s32 i;
+    u16 y = 44;
+    s16 xDest = 8 * (3 * row) + 100;
+    u16 x = xDest - ((times + 1) * xDelta);
+    u8 subpriority = 19 - row;
+    u8 count = 0;
+    u8 boxPosition = row;
+
+    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    {
+        for (i = 0; i < IN_BOX_COLUMNS; i++)
+        {
+            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            {
+                sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
+                                                                            sPSSData->boxPersonalities[boxPosition],
+                                                                            x, y, 2, subpriority);
+                if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+                {
+                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
+                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    count++;
+                }
+            }
+            boxPosition += IN_BOX_ROWS;
+            y += 24;
+        }
+    }
+    else
+    {
+        for (i = 0; i < IN_BOX_COLUMNS; i++)
+        {
+            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            {
+                sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
+                                                                            sPSSData->boxPersonalities[boxPosition],
+                                                                            x, y, 2, subpriority);
+                if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+                {
+                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
+                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    if (GetBoxMonDataAt(sPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == 0)
+                        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                    count++;
+                }
+            }
+            boxPosition += IN_BOX_ROWS;
+            y += 24;
+        }
+    }
+
+    return count;
+}
+
+void sub_8090574(u8 boxId, s8 direction)
+{
+    sPSSData->field_C6A = 0;
+    sPSSData->field_C6B = boxId;
+    sPSSData->field_C69 = direction;
+    sPSSData->field_C60 = 32;
+    sPSSData->field_C64 = -(6 * direction);
+    sPSSData->field_C66 = 0;
+    SetBoxSpeciesAndPersonalities(boxId);
+    if (direction > 0)
+        sPSSData->field_C68 = 0;
+    else
+        sPSSData->field_C68 = IN_BOX_ROWS - 1;
+
+    sPSSData->field_C62 = (24 * sPSSData->field_C68) + 100;
+    sub_809029C(sPSSData->field_C64);
+}
+
+bool8 sub_809062C(void)
+{
+    if (sPSSData->field_C60 != 0)
+        sPSSData->field_C60--;
+
+    switch (sPSSData->field_C6A)
+    {
+    case 0:
+        sPSSData->field_C62 += sPSSData->field_C64;
+        if (sPSSData->field_C62 <= 64 || sPSSData->field_C62 >= 252)
+        {
+            DestroyAllIconsInRow(sPSSData->field_C68);
+            sPSSData->field_C62 += sPSSData->field_C69 * 24;
+            sPSSData->field_C6A++;
+        }
+        break;
+    case 1:
+        sPSSData->field_C62 += sPSSData->field_C64;
+        sPSSData->field_C66 += sub_80903A4(sPSSData->field_C68, sPSSData->field_C60, sPSSData->field_C64);
+        if ((sPSSData->field_C69 > 0 && sPSSData->field_C68 == IN_BOX_ROWS - 1)
+            || (sPSSData->field_C69 < 0 && sPSSData->field_C68 == 0))
+        {
+            sPSSData->field_C6A++;
+        }
+        else
+        {
+            sPSSData->field_C68 += sPSSData->field_C69;
+            sPSSData->field_C6A = 0;
+        }
+        break;
+    case 2:
+        if (sPSSData->field_C66 == 0)
+        {
+            sPSSData->field_C60++;
+            return FALSE;
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void SetBoxSpeciesAndPersonalities(u8 boxId)
+{
+    s32 i, j, boxPosition;
+
+    boxPosition = 0;
+    for (i = 0; i < IN_BOX_COLUMNS; i++)
+    {
+        for (j = 0; j < IN_BOX_ROWS; j++)
+        {
+            sPSSData->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+                sPSSData->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
+            boxPosition++;
+        }
+    }
+
+    sPSSData->field_C5C = boxId;
+}
+
+void DestroyBoxMonIconAtPosition(u8 boxPosition)
+{
+    if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+    {
+        DestroyBoxMonIcon(sPSSData->boxMonsSprites[boxPosition]);
+        sPSSData->boxMonsSprites[boxPosition] = NULL;
+    }
+}
+
+void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
+{
+    if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+    {
+        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = objMode;
+    }
+}
+
+void CreatePartyMonsSprites(bool8 arg0)
+{
+    u16 i, count;
+    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
+    u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
+
+    sPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    count = 1;
+    for (i = 1; i < PARTY_SIZE; i++)
+    {
+        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        if (species != SPECIES_NONE)
+        {
+            personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+            sPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            count++;
+        }
+        else
+        {
+            sPSSData->partySprites[i] = NULL;
+        }
+    }
+
+    if (!arg0)
+    {
+        for (i = 0; i < count; i++)
+        {
+            sPSSData->partySprites[i]->pos1.y -= 160;
+            sPSSData->partySprites[i]->invisible = TRUE;
+        }
+    }
+
+    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (sPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
+                sPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
+        }
+    }
+}
+
+void sub_80909F4(void)
+{
+    u16 i, count;
+
+    sPSSData->field_C5E = 0;
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        if (sPSSData->partySprites[i] != NULL)
+        {
+            if (i != count)
+            {
+                sub_8090A74(sPSSData->partySprites[i], count);
+                sPSSData->partySprites[i] = NULL;
+                sPSSData->field_C5E++;
+            }
+            count++;
+        }
+    }
+}
+
+u8 sub_8090A60(void)
+{
+    return sPSSData->field_C5E;
+}
+
+void sub_8090A74(struct Sprite *sprite, u16 partyId)
+{
+    s16 x, y;
+
+    sprite->data[1] = partyId;
+    if (partyId == 0)
+        x = 104, y = 64;
+    else
+        x = 152, y = 8 * (3 * (partyId - 1)) + 16;
+
+    sprite->data[2] = (u16)(sprite->pos1.x) * 8;
+    sprite->data[3] = (u16)(sprite->pos1.y) * 8;
+    sprite->data[4] = ((x * 8) - sprite->data[2]) / 8;
+    sprite->data[5] = ((y * 8) - sprite->data[3]) / 8;
+    sprite->data[6] = 8;
+    sprite->callback = sub_8090AE0;
+}
+
+void sub_8090AE0(struct Sprite *sprite)
+{
+    if (sprite->data[6] != 0)
+    {
+        s16 x = sprite->data[2] += sprite->data[4];
+        s16 y = sprite->data[3] += sprite->data[5];
+        sprite->pos1.x = x / 8u;
+        sprite->pos1.y = y / 8u;
+        sprite->data[6]--;
+    }
+    else
+    {
+        if (sprite->data[1] == 0)
+        {
+            sprite->pos1.x = 104;
+            sprite->pos1.y = 64;
+        }
+        else
+        {
+            sprite->pos1.x = 152;
+            sprite->pos1.y = 8 * (3 * (sprite->data[1] - 1)) + 16;
+        }
+        sprite->callback = SpriteCallbackDummy;
+        sPSSData->partySprites[sprite->data[1]] = sprite;
+        sPSSData->field_C5E--;
+    }
+}
+
+void DestroyMovingMonIcon(void)
+{
+    if (sPSSData->movingMonSprite != NULL)
+    {
+        DestroyBoxMonIcon(sPSSData->movingMonSprite);
+        sPSSData->movingMonSprite = NULL;
+    }
+}
+
+void sub_8090B98(s16 yDelta)
+{
+    u16 i, posY;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (sPSSData->partySprites[i] != NULL)
+        {
+            sPSSData->partySprites[i]->pos1.y += yDelta;
+            posY = sPSSData->partySprites[i]->pos1.y + sPSSData->partySprites[i]->pos2.y + sPSSData->partySprites[i]->centerToCornerVecY;
+            posY += 16;
+            if (posY > 192)
+                sPSSData->partySprites[i]->invisible = TRUE;
+            else
+                sPSSData->partySprites[i]->invisible = FALSE;
+        }
+    }
+}
+
+void DestroyPartyMonIcon(u8 partyId)
+{
+    if (sPSSData->partySprites[partyId] != NULL)
+    {
+        DestroyBoxMonIcon(sPSSData->partySprites[partyId]);
+        sPSSData->partySprites[partyId] = NULL;
+    }
+}
+
+void DestroyAllPartyMonIcons(void)
+{
+    u16 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (sPSSData->partySprites[i] != NULL)
+        {
+            DestroyBoxMonIcon(sPSSData->partySprites[i]);
+            sPSSData->partySprites[i] = NULL;
+        }
+    }
+}
+
+void SetPartyMonIconObjMode(u8 partyId, u8 objMode)
+{
+    if (sPSSData->partySprites[partyId] != NULL)
+    {
+        sPSSData->partySprites[partyId]->oam.objMode = objMode;
+    }
+}
+
+void sub_8090CC0(u8 mode, u8 id)
+{
+    if (mode == MODE_PARTY)
+    {
+        sPSSData->movingMonSprite = sPSSData->partySprites[id];
+        sPSSData->partySprites[id] = NULL;
+    }
+    else if (mode == MODE_BOX)
+    {
+        sPSSData->movingMonSprite = sPSSData->boxMonsSprites[id];
+        sPSSData->boxMonsSprites[id] = NULL;
+    }
+    else
+    {
+        return;
+    }
+
+    sPSSData->movingMonSprite->callback = sub_80911B0;
+    sPSSData->movingMonSprite->oam.priority = sub_8090058();
+    sPSSData->movingMonSprite->subpriority = 7;
+}
+
+void sub_8090D58(u8 boxId, u8 position)
+{
+    if (boxId == TOTAL_BOXES_COUNT) // party mon
+    {
+        sPSSData->partySprites[position] = sPSSData->movingMonSprite;
+        sPSSData->partySprites[position]->oam.priority = 1;
+        sPSSData->partySprites[position]->subpriority = 12;
+    }
+    else
+    {
+        sPSSData->boxMonsSprites[position] = sPSSData->movingMonSprite;
+        sPSSData->boxMonsSprites[position]->oam.priority = 2;
+        sPSSData->boxMonsSprites[position]->subpriority = 19 - (position % IN_BOX_ROWS);
+    }
+    sPSSData->movingMonSprite->callback = SpriteCallbackDummy;
+    sPSSData->movingMonSprite = NULL;
+}
+
+void sub_8090E08(u8 boxId, u8 position)
+{
+    if (boxId == TOTAL_BOXES_COUNT) // party mon
+        sPSSData->field_B00 = &sPSSData->partySprites[position];
+    else
+        sPSSData->field_B00 = &sPSSData->boxMonsSprites[position];
+
+    sPSSData->movingMonSprite->callback = SpriteCallbackDummy;
+    sPSSData->field_C5D = 0;
+}
+
+bool8 sub_8090E74(void)
+{
+    if (sPSSData->field_C5D == 16)
+        return FALSE;
+
+    sPSSData->field_C5D++;
+    if (sPSSData->field_C5D & 1)
+    {
+        (*sPSSData->field_B00)->pos1.y--;
+        sPSSData->movingMonSprite->pos1.y++;
+    }
+
+    (*sPSSData->field_B00)->pos2.x = gSineTable[sPSSData->field_C5D * 8] / 16;
+    sPSSData->movingMonSprite->pos2.x = -(gSineTable[sPSSData->field_C5D * 8] / 16);
+    if (sPSSData->field_C5D == 8)
+    {
+        sPSSData->movingMonSprite->oam.priority = (*sPSSData->field_B00)->oam.priority;
+        sPSSData->movingMonSprite->subpriority = (*sPSSData->field_B00)->subpriority;
+        (*sPSSData->field_B00)->oam.priority = sub_8090058();
+        (*sPSSData->field_B00)->subpriority = 7;
+    }
+
+    if (sPSSData->field_C5D == 16)
+    {
+        struct Sprite *sprite = sPSSData->movingMonSprite;
+        sPSSData->movingMonSprite = (*sPSSData->field_B00);
+        *sPSSData->field_B00 = sprite;
+
+        sPSSData->movingMonSprite->callback = sub_80911B0;
+        (*sPSSData->field_B00)->callback = SpriteCallbackDummy;
+    }
+
+    return TRUE;
+}
+
+void sub_8090FC4(u8 mode, u8 position)
+{
+    switch (mode)
+    {
+    case MODE_PARTY:
+        sPSSData->field_B04 = &sPSSData->partySprites[position];
+        break;
+    case MODE_BOX:
+        sPSSData->field_B04 = &sPSSData->boxMonsSprites[position];
+        break;
+    case MODE_2:
+        sPSSData->field_B04 = &sPSSData->movingMonSprite;
+        break;
+    default:
+        return;
+    }
+
+    if (*sPSSData->field_B04 != NULL)
+    {
+        InitSpriteAffineAnim(*sPSSData->field_B04);
+        (*sPSSData->field_B04)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+        (*sPSSData->field_B04)->affineAnims = gUnknown_83CEC38;
+        StartSpriteAffineAnim(*sPSSData->field_B04, 0);
+    }
 }

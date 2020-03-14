@@ -4,6 +4,16 @@
 #include "pokemon_storage_system.h"
 #include "mon_markings.h"
 
+#define IN_BOX_COLUMNS 5
+#define IN_BOX_ROWS    6
+
+enum
+{
+    MODE_PARTY,
+    MODE_BOX,
+    MODE_2,
+};
+
 enum
 {
     BOX_OPTION_WITHDRAW,

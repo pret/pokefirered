@@ -1,7 +1,6 @@
 #include "global.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
-#include "field_ground_effect.h"
 
 // This is part of evobjmv.c (see assert statement in DoObjectUnionRoomWarpYDisplacement).
 
@@ -627,7 +626,7 @@ bool32 RfuUnionObjectIsWarping(u8 objectEventId)
 #undef tZCoord
 #undef tObjectEventId
 
-u32 oe_exec_and_other_stuff(u8 fieldEffectId, struct ObjectEvent * objectEvent)
+u32 StartFieldEffectForObjectEvent(u8 fieldEffectId, struct ObjectEvent * objectEvent)
 {
     ObjectEventGetLocalIdAndMap(objectEvent, (u8 *)&gFieldEffectArguments[0], (u8 *)&gFieldEffectArguments[1], (u8 *)&gFieldEffectArguments[2]);
     return FieldEffectStart(fieldEffectId);
@@ -638,7 +637,7 @@ void DoShadowFieldEffect(struct ObjectEvent *objectEvent)
     if (!objectEvent->hasShadow)
     {
         objectEvent->hasShadow = TRUE;
-        oe_exec_and_other_stuff(FLDEFF_SHADOW, objectEvent);
+        StartFieldEffectForObjectEvent(FLDEFF_SHADOW, objectEvent);
     }
 }
 

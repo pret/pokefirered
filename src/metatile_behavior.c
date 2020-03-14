@@ -24,7 +24,7 @@ static const u8 sTileBitAttributes[32] = {
     [4] = 0x08,
 };
 
-bool8 MetatileBehavior_UnusedReturnTrue(u8 metatileBehavior)
+bool8 MetatileBehavior_IsATile(u8 metatileBehavior)
 {
     return TRUE;
 }
@@ -69,7 +69,7 @@ bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB21OrSand(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_21 || metatileBehavior == MB_SAND)
         return TRUE;
@@ -77,7 +77,7 @@ bool8 MetatileBehavior_IsMB21OrSand(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
+bool8 MetatileBehavior_IsMB21OrWaterfallBottom(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_21 || metatileBehavior == MB_WATERFALL_BOTTOM)
         return TRUE;
@@ -85,7 +85,7 @@ bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsDeepSand(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
 {
@@ -412,7 +412,7 @@ bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsPondWaterOrPuddle(u8 metatileBehavior)
+bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_POND_WATER || metatileBehavior == MB_PUDDLE)
         return TRUE;
@@ -438,7 +438,7 @@ bool8 MetatileBehavior_IsTallGrass_2(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsLongGrass(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_4(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_5(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsFootprints(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_IsBridge(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_GetBridgeType(u8 metatileBehavior) { return FALSE; }
 
@@ -580,7 +580,7 @@ bool8 MetatileBehavior_IsSouthBlocked(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse_8(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsShortGrass(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsHotSprings(u8 metatileBehavior)
 {
@@ -603,7 +603,7 @@ bool8 MetatileBehavior_UnusedReturnFalse(u8 metatileBehavior){ return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_2(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_3(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_UnusedReturnFalse_4(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_10(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsPacifidlogLog(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_11(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
@@ -683,7 +683,7 @@ bool8 MetatileBehavior_ReturnFalse_16(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_17(u8 metatileBehavior) { return FALSE; }
 bool8 MetatileBehavior_ReturnFalse_18(u8 metatileBehavior) { return FALSE; }
 
-bool8 MetatileBehavior_IsMB22(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_22)
         return TRUE;

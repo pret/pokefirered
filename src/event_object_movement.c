@@ -6,7 +6,6 @@
 #include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
-#include "field_ground_effect.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
@@ -34,6 +33,32 @@ static bool8 IsMetatileDirectionallyImpassable(struct ObjectEvent *, s16, s16, u
 static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *, s16, s16);
 static void sub_8067A10(struct ObjectEvent *, struct Sprite *);
 static void UpdateObjEventSpriteVisibility(struct ObjectEvent *, struct Sprite *);
+static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent*);
+static void GetGroundEffectFlags_Reflection(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_SandHeap(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_HotSprings(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_Tracks(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_Puddle(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_Ripple(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_Seaweed(struct ObjectEvent*, u32*);
+static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent*, u32*);
+static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent*);
+static u8 GetReflectionTypeByMetatileBehavior(u32);
+static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
+static void ObjectEventUpdateSubpriority(struct ObjectEvent*, struct Sprite*);
+static void DoTracksGroundEffect_None(struct ObjectEvent*, struct Sprite*, u8);
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent*, struct Sprite*, u8);
+static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent*, struct Sprite*, u8);
+/*static*/ void DoRippleFieldEffect(struct ObjectEvent*, struct Sprite*);
+static void DoGroundEffects_OnSpawn(struct ObjectEvent*, struct Sprite*);
+static void DoGroundEffects_OnBeginStep(struct ObjectEvent*, struct Sprite*);
+static void DoGroundEffects_OnFinishStep(struct ObjectEvent*, struct Sprite*);
 static void CreateReflectionEffectSprites(void);
 static u8 GetObjectEventIdByLocalId(u8);
 static u8 GetObjectEventIdByLocalIdAndMapInternal(u8, u8, u8);
@@ -64,7 +89,6 @@ static u8 sub_805E238(struct ObjectEventTemplate *, u8, s16, s16);
 static u8 sub_805E27C(struct ObjectEventTemplate *, s16, s16);
 static u8 sub_805E2E8(struct ObjectEventTemplate *, s16, s16);
 static void sub_805E384(struct ObjectEventTemplate *);
-/*static*/ void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static bool8 MovementType_Disguise_Callback(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_Hidden_Callback(struct ObjectEvent *, struct Sprite *);
 static u8 sub_8063304(struct ObjectEvent *, struct Sprite *);
@@ -7432,5 +7456,917 @@ static void UpdateObjEventSpriteVisibility(struct ObjectEvent *objectEvent, stru
     if (objectEvent->invisible || objectEvent->offScreen)
     {
         sprite->invisible = TRUE;
+    }
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnSpawn(struct ObjectEvent *objEvent, u32 *flags)
+{
+    ObjectEventUpdateMetatileBehaviors(objEvent);
+    GetGroundEffectFlags_Reflection(objEvent, flags);
+    GetGroundEffectFlags_TallGrassOnSpawn(objEvent, flags);
+    GetGroundEffectFlags_LongGrassOnSpawn(objEvent, flags);
+    GetGroundEffectFlags_SandHeap(objEvent, flags);
+    GetGroundEffectFlags_ShallowFlowingWater(objEvent, flags);
+    GetGroundEffectFlags_ShortGrass(objEvent, flags);
+    GetGroundEffectFlags_HotSprings(objEvent, flags);
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnBeginStep(struct ObjectEvent *objEvent, u32 *flags)
+{
+    ObjectEventUpdateMetatileBehaviors(objEvent);
+    GetGroundEffectFlags_Reflection(objEvent, flags);
+    GetGroundEffectFlags_TallGrassOnBeginStep(objEvent, flags);
+    GetGroundEffectFlags_LongGrassOnBeginStep(objEvent, flags);
+    GetGroundEffectFlags_Tracks(objEvent, flags);
+    GetGroundEffectFlags_SandHeap(objEvent, flags);
+    GetGroundEffectFlags_ShallowFlowingWater(objEvent, flags);
+    GetGroundEffectFlags_Puddle(objEvent, flags);
+    GetGroundEffectFlags_ShortGrass(objEvent, flags);
+    GetGroundEffectFlags_HotSprings(objEvent, flags);
+}
+
+/*static*/ void GetAllGroundEffectFlags_OnFinishStep(struct ObjectEvent *objEvent, u32 *flags)
+{
+    ObjectEventUpdateMetatileBehaviors(objEvent);
+    GetGroundEffectFlags_ShallowFlowingWater(objEvent, flags);
+    GetGroundEffectFlags_SandHeap(objEvent, flags);
+    GetGroundEffectFlags_Puddle(objEvent, flags);
+    GetGroundEffectFlags_Ripple(objEvent, flags);
+    GetGroundEffectFlags_ShortGrass(objEvent, flags);
+    GetGroundEffectFlags_HotSprings(objEvent, flags);
+    GetGroundEffectFlags_Seaweed(objEvent, flags);
+    GetGroundEffectFlags_JumpLanding(objEvent, flags);
+}
+
+static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
+{
+    objEvent->previousMetatileBehavior = MapGridGetMetatileBehaviorAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+    objEvent->currentMetatileBehavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+}
+
+static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
+{
+    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
+    u8 type = ObjectEventCheckForReflectiveSurface(objEvent);
+
+    if (type)
+    {
+        if (!objEvent->hasReflection)
+        {
+            objEvent->hasReflection = 0;
+            objEvent->hasReflection = 1;
+            *flags |= reflectionFlags[type - 1];
+        }
+    }
+    else
+    {
+        objEvent->hasReflection = 0;
+    }
+}
+
+static void GetGroundEffectFlags_TallGrassOnSpawn(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsTallGrass_2(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN;
+}
+
+static void GetGroundEffectFlags_TallGrassOnBeginStep(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsTallGrass_2(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE;
+}
+
+static void GetGroundEffectFlags_LongGrassOnSpawn(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsLongGrass(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN;
+}
+
+static void GetGroundEffectFlags_LongGrassOnBeginStep(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsLongGrass(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE;
+}
+
+static void GetGroundEffectFlags_Tracks(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsDeepSand(objEvent->previousMetatileBehavior))
+    {
+        *flags |= GROUND_EFFECT_FLAG_DEEP_SAND;
+    }
+    else if (MetatileBehavior_IsSandOrDeepSand(objEvent->previousMetatileBehavior)
+             || MetatileBehavior_IsFootprints(objEvent->previousMetatileBehavior))
+    {
+        *flags |= GROUND_EFFECT_FLAG_SAND;
+    }
+}
+
+static void GetGroundEffectFlags_SandHeap(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsDeepSand(objEvent->currentMetatileBehavior)
+        && MetatileBehavior_IsDeepSand(objEvent->previousMetatileBehavior))
+    {
+        if (!objEvent->inSandPile)
+        {
+            objEvent->inSandPile = 0;
+            objEvent->inSandPile = 1;
+            *flags |= GROUND_EFFECT_FLAG_SAND_PILE;
+        }
+    }
+    else
+    {
+        objEvent->inSandPile = 0;
+    }
+}
+
+static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if ((MetatileBehavior_IsWaterfallBottom(objEvent->currentMetatileBehavior)
+         && MetatileBehavior_IsWaterfallBottom(objEvent->previousMetatileBehavior))
+        || (MetatileBehavior_IsPacifidlogLog(objEvent->currentMetatileBehavior)
+            && MetatileBehavior_IsPacifidlogLog(objEvent->previousMetatileBehavior)))
+    {
+        if (!objEvent->inShallowFlowingWater)
+        {
+            objEvent->inShallowFlowingWater = 0;
+            objEvent->inShallowFlowingWater = 1;
+            *flags |= GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER;
+        }
+    }
+    else
+    {
+        objEvent->inShallowFlowingWater = 0;
+    }
+}
+
+static void GetGroundEffectFlags_Puddle(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsPuddle(objEvent->currentMetatileBehavior)
+        && MetatileBehavior_IsPuddle(objEvent->previousMetatileBehavior))
+    {
+        *flags |= GROUND_EFFECT_FLAG_PUDDLE;
+    }
+}
+
+static void GetGroundEffectFlags_Ripple(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_HasRipples(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_RIPPLES;
+}
+
+static void GetGroundEffectFlags_ShortGrass(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsShortGrass(objEvent->currentMetatileBehavior)
+        && MetatileBehavior_IsShortGrass(objEvent->previousMetatileBehavior))
+    {
+        if (!objEvent->inShortGrass)
+        {
+            objEvent->inShortGrass = 0;
+            objEvent->inShortGrass = 1;
+            *flags |= GROUND_EFFECT_FLAG_SHORT_GRASS;
+        }
+    }
+    else
+    {
+        objEvent->inShortGrass = 0;
+    }
+}
+
+static void GetGroundEffectFlags_HotSprings(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsHotSprings(objEvent->currentMetatileBehavior)
+        && MetatileBehavior_IsHotSprings(objEvent->previousMetatileBehavior))
+    {
+        if (!objEvent->inHotSprings)
+        {
+            objEvent->inHotSprings = 0;
+            objEvent->inHotSprings = 1;
+            *flags |= GROUND_EFFECT_FLAG_HOT_SPRINGS;
+        }
+    }
+    else
+    {
+        objEvent->inHotSprings = 0;
+    }
+}
+
+static void GetGroundEffectFlags_Seaweed(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (MetatileBehavior_IsSeaweed(objEvent->currentMetatileBehavior))
+        *flags |= GROUND_EFFECT_FLAG_SEAWEED;
+}
+
+static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *flags)
+{
+    typedef bool8 (*MetatileFunc)(u8);
+
+    static const MetatileFunc metatileFuncs[] = {
+        MetatileBehavior_IsTallGrass_2,
+        MetatileBehavior_IsLongGrass,
+        MetatileBehavior_IsPuddle,
+        MetatileBehavior_IsSurfable,
+        MetatileBehavior_IsWaterfallBottom,
+        MetatileBehavior_IsATile,
+    };
+
+    static const u32 jumpLandingFlags[] = {
+        GROUND_EFFECT_FLAG_LAND_IN_TALL_GRASS,
+        GROUND_EFFECT_FLAG_LAND_IN_LONG_GRASS,
+        GROUND_EFFECT_FLAG_LAND_IN_SHALLOW_WATER,
+        GROUND_EFFECT_FLAG_LAND_IN_DEEP_WATER,
+        GROUND_EFFECT_FLAG_LAND_IN_SHALLOW_WATER,
+        GROUND_EFFECT_FLAG_LAND_ON_NORMAL_GROUND,
+    };
+
+    if (objEvent->landingJump && !objEvent->disableJumpLandingGroundEffect)
+    {
+        u8 i;
+
+        for (i = 0; i < ARRAY_COUNT(metatileFuncs); i++)
+        {
+            if (metatileFuncs[i](objEvent->currentMetatileBehavior))
+            {
+                *flags |= jumpLandingFlags[i];
+                return;
+            }
+        }
+    }
+}
+
+#ifdef NONMATCHING
+static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
+
+    // ceil div by tile width?
+    s16 width;
+    s16 height;
+    s16 i;
+    s16 j;
+    u8 result;
+    u8 b;
+
+#define RETURN_REFLECTION_TYPE_AT(x, y)              \
+    b = MapGridGetMetatileBehaviorAt(x, y);          \
+    result = GetReflectionTypeByMetatileBehavior(b); \
+    if (result != 0)                                 \
+        return result;
+
+    for (i = 0, height = 1; i < height && height < 2;)
+    {
+        RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, (u16) (objEvent->currentCoords.y + 1 + i))
+        RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x, (u16) (objEvent->previousCoords.y + 1 + i))
+        for (j = 1; j < width && width < 2; j++)
+        {
+            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x + j, objEvent->currentCoords.y + 1 + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x - j, objEvent->currentCoords.y + 1 + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x + j, objEvent->previousCoords.y + 1 + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x - j, objEvent->previousCoords.y + 1 + i)
+        }
+    }
+    return 0;
+
+#undef RETURN_REFLECTION_TYPE_AT
+}
+#else
+NAKED
+static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
+{
+    asm_unified("\n\
+    	push {r4-r7,lr}                          \n\
+        mov r7, r10                              \n\
+        mov r6, r9                               \n\
+        mov r5, r8                               \n\
+        push {r5-r7}                             \n\
+        adds r5, r0, 0                           \n\
+        ldrb r0, [r5, 0x5]                       \n\
+        bl GetObjectEventGraphicsInfo            \n\
+        movs r4, 0                               \n\
+        movs r0, 0x1                             \n\
+        mov r10, r0                              \n\
+    _08067FA0:                                   \n\
+        movs r1, 0x10                            \n\
+        ldrsh r0, [r5, r1]                       \n\
+        ldrh r1, [r5, 0x12]                      \n\
+        add r1, r10                              \n\
+        lsls r4, 16                              \n\
+        asrs r6, r4, 16                          \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        mov r9, r4                               \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        movs r3, 0x14                            \n\
+        ldrsh r0, [r5, r3]                       \n\
+        ldrh r1, [r5, 0x16]                      \n\
+        add r1, r10                              \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        movs r2, 0x1                             \n\
+        lsls r0, r2, 16                          \n\
+        asrs r1, r0, 16                          \n\
+        mov r8, r0                               \n\
+        cmp r2, r1                               \n\
+        bge _080680A8                            \n\
+        movs r0, 0x80                            \n\
+        lsls r0, 9                               \n\
+        asrs r7, r0, 16                          \n\
+    _08067FFC:                                   \n\
+        ldrh r0, [r5, 0x10]                      \n\
+        lsls r1, r2, 16                          \n\
+        asrs r4, r1, 16                          \n\
+        adds r0, r4, r0                          \n\
+        lsls r0, 16                              \n\
+        asrs r0, 16                              \n\
+        ldrh r1, [r5, 0x12]                      \n\
+        adds r1, r7, r1                          \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        ldrh r0, [r5, 0x10]                      \n\
+        subs r0, r4                              \n\
+        lsls r0, 16                              \n\
+        asrs r0, 16                              \n\
+        ldrh r1, [r5, 0x12]                      \n\
+        adds r1, r7, r1                          \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        ldrh r0, [r5, 0x14]                      \n\
+        adds r0, r4, r0                          \n\
+        lsls r0, 16                              \n\
+        asrs r0, 16                              \n\
+        ldrh r1, [r5, 0x16]                      \n\
+        adds r1, r7, r1                          \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        ldrh r0, [r5, 0x14]                      \n\
+        subs r0, r4                              \n\
+        lsls r0, 16                              \n\
+        asrs r0, 16                              \n\
+        ldrh r1, [r5, 0x16]                      \n\
+        adds r1, r7, r1                          \n\
+        adds r1, r6, r1                          \n\
+        lsls r1, 16                              \n\
+        asrs r1, 16                              \n\
+        bl MapGridGetMetatileBehaviorAt          \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        bl GetReflectionTypeByMetatileBehavior   \n\
+        lsls r0, 24                              \n\
+        lsrs r0, 24                              \n\
+        cmp r0, 0                                \n\
+        bne _080680BA                            \n\
+        adds r0, r4, 0x1                         \n\
+        lsls r0, 16                              \n\
+        lsrs r2, r0, 16                          \n\
+        asrs r0, 16                              \n\
+        mov r3, r8                               \n\
+        asrs r1, r3, 16                          \n\
+        cmp r0, r1                               \n\
+        blt _08067FFC                            \n\
+    _080680A8:                                   \n\
+        movs r0, 0x80                            \n\
+        lsls r0, 9                               \n\
+        add r0, r9                               \n\
+        lsrs r4, r0, 16                          \n\
+        asrs r0, 16                              \n\
+        cmp r0, 0x2                              \n\
+        bge _080680B8                            \n\
+        b _08067FA0                              \n\
+    _080680B8:                                   \n\
+        movs r0, 0                               \n\
+    _080680BA:                                   \n\
+        pop {r3-r5}                              \n\
+        mov r8, r3                               \n\
+        mov r9, r4                               \n\
+        mov r10, r5                              \n\
+        pop {r4-r7}                              \n\
+        pop {r1}                                 \n\
+        bx r1                                    \n\
+    ");
+}
+#endif
+
+static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
+{
+    if (MetatileBehavior_IsIce(behavior))
+        return 1;
+    else if (MetatileBehavior_IsReflective(behavior))
+        return 2;
+    else
+        return 0;
+}
+
+u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
+{
+    static bool8 (*const gUnknown_83A705C[])(u8) = {
+        MetatileBehavior_IsJumpSouth,
+        MetatileBehavior_IsJumpNorth,
+        MetatileBehavior_IsJumpWest,
+        MetatileBehavior_IsJumpEast,
+    };
+
+    u8 b;
+    u8 index = z;
+
+    if (index == 0)
+        return 0;
+    else if (index > 4)
+        index -= 4;
+
+    index--;
+    b = MapGridGetMetatileBehaviorAt(x, y);
+
+    if (gUnknown_83A705C[index](b) == 1)
+        return index + 1;
+
+    return 0;
+}
+
+/*static*/ void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    if (objEvent->disableCoveringGroundEffects)
+        return;
+
+    if (!MetatileBehavior_IsLongGrass(objEvent->currentMetatileBehavior))
+        return;
+
+    if (!MetatileBehavior_IsLongGrass(objEvent->previousMetatileBehavior))
+        return;
+
+    sprite->subspriteTableNum = 4;
+
+    if (ZCoordToPriority(objEvent->previousElevation) == 1)
+        sprite->subspriteTableNum = 5;
+}
+
+bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y)
+{
+    u8 mapZ;
+
+    if (z == 0)
+        return FALSE;
+
+    mapZ = MapGridGetZCoordAt(x, y);
+
+    if (mapZ == 0 || mapZ == 0xF)
+        return FALSE;
+
+    if (mapZ != z)
+        return TRUE;
+
+    return FALSE;
+}
+
+static const u8 sUnknown_083A706C[] = {
+    0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
+};
+
+// Each byte corresponds to a sprite priority for an object event.
+// This is directly the inverse of sObjectEventPriorities_083A708C.
+static const u8 sObjectEventPriorities_083A707C[] = {
+    2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
+};
+
+// Each byte corresponds to a sprite priority for an object event.
+// This is the inverse of sObjectEventPriorities_083A707C.
+// 1 = Above player sprite
+// 2 = Below player sprite
+static const u8 sObjectEventPriorities_083A708C[] = {
+    1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
+};
+
+void UpdateObjectEventZCoordAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    if (objEvent->fixedPriority)
+        return;
+
+    ObjectEventUpdateZCoord(objEvent);
+
+    sprite->subspriteTableNum = sObjectEventPriorities_083A708C[objEvent->previousElevation];
+    sprite->oam.priority = sObjectEventPriorities_083A707C[objEvent->previousElevation];
+}
+
+static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z)
+{
+    sprite->subspriteTableNum = sObjectEventPriorities_083A708C[z];
+    sprite->oam.priority = sObjectEventPriorities_083A707C[z];
+}
+
+u8 ZCoordToPriority(u8 z)
+{
+    return sObjectEventPriorities_083A707C[z];
+}
+
+void ObjectEventUpdateZCoord(struct ObjectEvent *objEvent)
+{
+    u8 z = MapGridGetZCoordAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
+    u8 z2 = MapGridGetZCoordAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
+
+    if (z == 0xF || z2 == 0xF)
+        return;
+
+    objEvent->currentElevation = z;
+
+    if (z != 0 && z != 0xF)
+        objEvent->previousElevation = z;
+}
+
+void SetObjectSubpriorityByZCoord(u8 a, struct Sprite *sprite, u8 b)
+{
+    s32 tmp = sprite->centerToCornerVecY;
+    u32 tmpa = *(u16 *)&sprite->pos1.y;
+    u32 tmpb = *(u16 *)&gSpriteCoordOffsetY;
+    s32 tmp2 = (tmpa - tmp) + tmpb;
+    u16 tmp3 = (0x10 - ((((u32)tmp2 + 8) & 0xFF) >> 4)) * 2;
+    sprite->subpriority = tmp3 + sUnknown_083A706C[a] + b;
+}
+
+static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    if (objEvent->fixedPriority)
+        return;
+
+    SetObjectSubpriorityByZCoord(objEvent->previousElevation, sprite, 1);
+}
+
+bool8 AreZCoordsCompatible(u8 a, u8 b)
+{
+    if (a == 0 || b == 0)
+        return TRUE;
+
+    if (a != b)
+        return FALSE;
+
+    return TRUE;
+}
+
+void GroundEffect_SpawnOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->localId << 8 | objEvent->mapNum;
+    gFieldEffectArguments[5] = objEvent->mapGroup;
+    gFieldEffectArguments[6] = (u8)gSaveBlock1Ptr->location.mapNum << 8 | (u8)gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[7] = 1;
+    FieldEffectStart(FLDEFF_TALL_GRASS);
+}
+
+void GroundEffect_StepOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->localId << 8 | objEvent->mapNum;
+    gFieldEffectArguments[5] = objEvent->mapGroup;
+    gFieldEffectArguments[6] = (u8)gSaveBlock1Ptr->location.mapNum << 8 | (u8)gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[7] = 0;
+    FieldEffectStart(FLDEFF_TALL_GRASS);
+}
+
+void GroundEffect_SpawnOnLongGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->localId << 8 | objEvent->mapNum;
+    gFieldEffectArguments[5] = objEvent->mapGroup;
+    gFieldEffectArguments[6] = (u8)gSaveBlock1Ptr->location.mapNum << 8 | (u8)gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[7] = 1;
+    FieldEffectStart(FLDEFF_LONG_GRASS);
+}
+
+void GroundEffect_StepOnLongGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = (objEvent->localId << 8) | objEvent->mapNum;
+    gFieldEffectArguments[5] = objEvent->mapGroup;
+    gFieldEffectArguments[6] = (u8)gSaveBlock1Ptr->location.mapNum << 8 | (u8)gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[7] = 0;
+    FieldEffectStart(FLDEFF_LONG_GRASS);
+}
+
+void GroundEffect_WaterReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    SetUpReflection(objEvent, sprite, 0);
+}
+
+void GroundEffect_IceReflection(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    SetUpReflection(objEvent, sprite, 1);
+}
+
+void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objEvent);
+}
+
+static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a) = {
+    DoTracksGroundEffect_None,
+    DoTracksGroundEffect_Footprints,
+    DoTracksGroundEffect_BikeTireTracks,
+};
+
+void GroundEffect_SandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 0);
+}
+
+void GroundEffect_DeepSandTracks(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
+    sGroundEffectTracksFuncs[info->tracks](objEvent, sprite, 1);
+}
+
+static void DoTracksGroundEffect_None(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+{
+}
+
+static void DoTracksGroundEffect_Footprints(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+{
+    // First half-word is a Field Effect script id. (gFieldEffectScriptPointers)
+    u16 sandFootprints_FieldEffectData[2] = {
+        FLDEFF_SAND_FOOTPRINTS,
+        FLDEFF_DEEP_SAND_FOOTPRINTS
+    };
+
+    gFieldEffectArguments[0] = objEvent->previousCoords.x;
+    gFieldEffectArguments[1] = objEvent->previousCoords.y;
+    gFieldEffectArguments[2] = 149;
+    gFieldEffectArguments[3] = 2;
+    gFieldEffectArguments[4] = objEvent->facingDirection;
+    FieldEffectStart(sandFootprints_FieldEffectData[a]);
+}
+
+static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, struct Sprite *sprite, u8 a)
+{
+    //  Specifies which bike track shape to show next.
+    //  For example, when the bike turns from up to right, it will show
+    //  a track that curves to the right.
+    //  Each 4-byte row corresponds to the initial direction of the bike, and
+    //  each byte in that row is for the next direction of the bike in the order
+    //  of down, up, left, right.
+    static const u8 bikeTireTracks_Transitions[4][4] = {
+        1, 2, 7, 8,
+        1, 2, 6, 5,
+        5, 8, 3, 4,
+        6, 7, 3, 4,
+    };
+
+    if (objEvent->currentCoords.x != objEvent->previousCoords.x || objEvent->currentCoords.y != objEvent->previousCoords.y)
+    {
+        gFieldEffectArguments[0] = objEvent->previousCoords.x;
+        gFieldEffectArguments[1] = objEvent->previousCoords.y;
+        gFieldEffectArguments[2] = 149;
+        gFieldEffectArguments[3] = 2;
+        gFieldEffectArguments[4] =
+            bikeTireTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5];
+        FieldEffectStart(FLDEFF_BIKE_TIRE_TRACKS);
+    }
+}
+
+void GroundEffect_Ripple(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    DoRippleFieldEffect(objEvent, sprite);
+}
+
+void GroundEffect_StepOnPuddle(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    StartFieldEffectForObjectEvent(FLDEFF_SPLASH, objEvent);
+}
+
+void GroundEffect_SandHeap(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    StartFieldEffectForObjectEvent(FLDEFF_SAND_PILE, objEvent);
+}
+
+void GroundEffect_JumpOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    u8 spriteId;
+
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    FieldEffectStart(FLDEFF_JUMP_TALL_GRASS);
+
+    spriteId = FindTallGrassFieldEffectSpriteId(
+        objEvent->localId,
+        objEvent->mapNum,
+        objEvent->mapGroup,
+        objEvent->currentCoords.x,
+        objEvent->currentCoords.y);
+
+    if (spriteId == MAX_SPRITES)
+        GroundEffect_SpawnOnTallGrass(objEvent, sprite);
+}
+
+void GroundEffect_JumpOnLongGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = 2;
+    FieldEffectStart(FLDEFF_JUMP_LONG_GRASS);
+}
+
+void GroundEffect_JumpOnShallowWater(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_JUMP_SMALL_SPLASH);
+}
+
+void GroundEffect_JumpOnWater(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_JUMP_BIG_SPLASH);
+}
+
+void GroundEffect_JumpLandingDust(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objEvent->previousElevation;
+    gFieldEffectArguments[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_DUST);
+}
+
+void GroundEffect_ShortGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    StartFieldEffectForObjectEvent(FLDEFF_SHORT_GRASS, objEvent);
+}
+
+void GroundEffect_HotSprings(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    StartFieldEffectForObjectEvent(FLDEFF_HOT_SPRINGS_WATER, objEvent);
+}
+
+void GroundEffect_Seaweed(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    gFieldEffectArguments[0] = objEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objEvent->currentCoords.y;
+    FieldEffectStart(FLDEFF_BUBBLES);
+}
+
+static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite) = {
+    GroundEffect_SpawnOnTallGrass,
+    GroundEffect_StepOnTallGrass,
+    GroundEffect_SpawnOnLongGrass,
+    GroundEffect_StepOnLongGrass,
+    GroundEffect_WaterReflection,
+    GroundEffect_IceReflection,
+    GroundEffect_FlowingWater,
+    GroundEffect_SandTracks,
+    GroundEffect_DeepSandTracks,
+    GroundEffect_Ripple,
+    GroundEffect_StepOnPuddle,
+    GroundEffect_SandHeap,
+    GroundEffect_JumpOnTallGrass,
+    GroundEffect_JumpOnLongGrass,
+    GroundEffect_JumpOnShallowWater,
+    GroundEffect_JumpOnWater,
+    GroundEffect_JumpLandingDust,
+    GroundEffect_ShortGrass,
+    GroundEffect_HotSprings,
+    GroundEffect_Seaweed
+};
+
+/*static*/ void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 flags)
+{
+    u8 i;
+
+    if (objEvent->localId == OBJ_EVENT_ID_CAMERA && objEvent->invisible)
+        return;
+
+    for (i = 0; i < ARRAY_COUNT(sGroundEffectFuncs); i++, flags >>= 1)
+        if (flags & 1)
+            sGroundEffectFuncs[i](objEvent, sprite);
+}
+
+void filters_out_some_ground_effects(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (objEvent->disableCoveringGroundEffects)
+    {
+        objEvent->inShortGrass = 0;
+        objEvent->inSandPile = 0;
+        objEvent->inShallowFlowingWater = 0;
+        objEvent->inHotSprings = 0;
+        *flags &= ~(GROUND_EFFECT_FLAG_HOT_SPRINGS
+                  | GROUND_EFFECT_FLAG_SHORT_GRASS
+                  | GROUND_EFFECT_FLAG_SAND_PILE
+                  | GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER
+                  | GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE);
+    }
+}
+
+void FilterOutStepOnPuddleGroundEffectIfJumping(struct ObjectEvent *objEvent, u32 *flags)
+{
+    if (objEvent->landingJump)
+        *flags &= ~GROUND_EFFECT_FLAG_PUDDLE;
+}
+
+static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    u32 flags;
+
+    if (objEvent->triggerGroundEffectsOnMove)
+    {
+        flags = 0;
+        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
+        SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
+        DoFlaggedGroundEffects(objEvent, sprite, flags);
+        objEvent->triggerGroundEffectsOnMove = 0;
+        objEvent->disableCoveringGroundEffects = 0;
+    }
+}
+
+static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    u32 flags;
+
+    if (objEvent->triggerGroundEffectsOnMove)
+    {
+        flags = 0;
+        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
+        SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
+        filters_out_some_ground_effects(objEvent, &flags);
+        DoFlaggedGroundEffects(objEvent, sprite, flags);
+        objEvent->triggerGroundEffectsOnMove = 0;
+        objEvent->disableCoveringGroundEffects = 0;
+    }
+}
+
+static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sprite *sprite)
+{
+    u32 flags;
+
+    if (objEvent->triggerGroundEffectsOnStop)
+    {
+        flags = 0;
+        UpdateObjectEventZCoordAndPriority(objEvent, sprite);
+        GetAllGroundEffectFlags_OnFinishStep(objEvent, &flags);
+        SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
+        FilterOutStepOnPuddleGroundEffectIfJumping(objEvent, &flags);
+        DoFlaggedGroundEffects(objEvent, sprite, flags);
+        objEvent->triggerGroundEffectsOnStop = 0;
+        objEvent->landingJump = 0;
     }
 }

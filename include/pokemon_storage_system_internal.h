@@ -7,6 +7,8 @@
 #define IN_BOX_COLUMNS 5
 #define IN_BOX_ROWS    6
 
+#define MAX_MON_ICONS 40
+
 enum
 {
     MODE_PARTY,
@@ -106,6 +108,14 @@ enum
 #define TAG_TILE_7          0x7
 #define TAG_TILE_0          0x0
 #define TAG_TILE_1          0x1
+#define TAG_TILE_6          0x6
+
+struct WallpaperTable
+{
+    const u32 *tiles;
+    const u32 *tileMap;
+    const u16 *palettes;
+};
 
 struct StorageAction
 {
@@ -202,7 +212,8 @@ struct PokemonStorageSystemData
     u16 field_2DE;
     u16 field_2E0;
     u8 filler[22];
-    u8 field_2F8[1024];
+    u8 field_2F8[512];
+    u8 field_4F8[512];
     u8 field_6F8;
     u8 field_6F9;
     u8 field_6FA;
@@ -229,8 +240,8 @@ struct PokemonStorageSystemData
     /* 0a84 */ struct Sprite *boxMonsSprites[IN_BOX_COUNT];
     /* 0afc */ struct Sprite **field_B00;
     /* 0b00 */ struct Sprite **field_B04;
-    /* 0b04 */ u16 field_B08[40];
-    /* 0b54 */ u16 field_B58[40];
+    /* 0b04 */ u16 field_B08[MAX_MON_ICONS];
+    /* 0b54 */ u16 field_B58[MAX_MON_ICONS];
     /* 0ba4 */ u16 boxSpecies[IN_BOX_COUNT];
     /* 0be0 */ u32 boxPersonalities[IN_BOX_COUNT];
     /* 0c58 */ u8 field_C5C;
@@ -406,5 +417,8 @@ void InitMenu(void);
 void SetMenuText(u8 textId);
 void sub_8095C84(u8 cursorArea, u8 cursorPos);
 void sub_8095E2C(u16 itemId);
+u8 GetBoxWallpaper(u8 boxId);
+bool8 IsCursorOnBox(void);
+bool8 IsCursorInBox(void);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

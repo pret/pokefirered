@@ -36,7 +36,7 @@ void ZeroBoxMonAt(u8 boxId, u8 monPosition);
 void Cb2_ReturnToPSS(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
-void DrawTextWindowAndBufferTiles(const u8 *name, void *a1, u8 a2, u8 a3, u8 *buffer, s32 a5);
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer);
 void SetCurrentBox(u8 boxId);
 void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
 struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);

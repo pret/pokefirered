@@ -7,7 +7,7 @@
 	.align 2
 
 gUnknown_83D3478:: @ 83D3478
-	.4byte sub_8093F98
+	.4byte HandleInput_InBox
 	.byte 0
 	.align 2
 	.4byte sub_809448C

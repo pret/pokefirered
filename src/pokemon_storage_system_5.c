@@ -1,6 +1,10 @@
 #include "global.h"
 #include "gflib.h"
+#include "data.h"
+#include "item.h"
 #include "pokemon_storage_system_internal.h"
+#include "pokemon_summary_screen.h"
+#include "strings.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 
@@ -28,10 +32,16 @@ void SetPlacedMonData(u8 boxId, u8 cursorPos);
 void PurgeMonOrBoxMon(u8 boxId, u8 cursorPos);
 void SetShiftedMonData(u8 boxId, u8 cursorPos);
 void sub_8093A10(void);
-void SetCursorMonData(struct Pokemon * cursorMon, u8 mode);
-void sub_8094AD8(void);
+void SetCursorMonData(void * cursorMon, u8 mode);
 void sub_8093AAC(void);
+u8 InBoxInput_Normal(void);
+u8 InBoxInput_GrabbingMultiple(void);
+u8 InBoxInput_MovingMultiple(void);
+void sub_8094AD8(void);
 void sub_8095D44(u8 cursorArea, u8 cursorPos);
+bool8 sub_8094924(void);
+s8 sub_8094E50(u8 a0);
+void sub_8094C84(void);
 
 const u16 gUnknown_83D2BCC[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
 const u16 gUnknown_83D2BEC[] = INCBIN_U16("graphics/interface/pss_unk_83D2BEC.4bpp");
@@ -821,3 +831,777 @@ s8 RunCanReleaseMon(void)
 
     return -1;
 }
+
+void sub_8093630(void)
+{
+    if (sIsMonBeingMoved)
+        gUnknown_20397BC = sPSSData->movingMon;
+}
+
+void sub_8093660(void)
+{
+    if (sIsMonBeingMoved)
+    {
+        if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
+            sPSSData->movingMon = gUnknown_20397BC;
+        else
+            sPSSData->movingMon.box = gUnknown_20397BC.box;
+    }
+}
+
+void sub_80936B8(void)
+{
+    if (sIsMonBeingMoved)
+    {
+        sub_8093630();
+        sPSSData->field_218C.mon = &gUnknown_20397BC;
+        sPSSData->field_2187 = 0;
+        sPSSData->field_2186 = 0;
+        sPSSData->field_2188 = 0;
+    }
+    else if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
+    {
+        sPSSData->field_218C.mon = gPlayerParty;
+        sPSSData->field_2187 = sBoxCursorPosition;
+        sPSSData->field_2186 = CountPartyMons() - 1;
+        sPSSData->field_2188 = 0;
+    }
+    else
+    {
+        sPSSData->field_218C.box = GetBoxedMonPtr(StorageGetCurrentBox(), 0);
+        sPSSData->field_2187 = sBoxCursorPosition;
+        sPSSData->field_2186 = IN_BOX_COUNT - 1;
+        sPSSData->field_2188 = 5;
+    }
+}
+
+void sub_80937B4(void)
+{
+    if (sIsMonBeingMoved)
+        sub_8093660();
+    else
+        sBoxCursorPosition = GetLastViewedMonIndex();
+}
+
+// file boundary maybe?
+
+s16 CompactPartySlots(void)
+{
+    s16 retVal = -1;
+    u16 i, last;
+
+    for (i = 0, last = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        if (species != SPECIES_NONE)
+        {
+            if (i != last)
+                gPlayerParty[last] = gPlayerParty[i];
+            last++;
+        }
+        else if (retVal == -1)
+        {
+            retVal = i;
+        }
+    }
+    for (; last < PARTY_SIZE; last++)
+        ZeroMonData(gPlayerParty + last);
+
+    return retVal;
+}
+
+void SetMonMarkings(u8 markings)
+{
+    sPSSData->cursorMonMarkings = markings;
+    if (sIsMonBeingMoved)
+    {
+        SetMonData(&sPSSData->movingMon, MON_DATA_MARKINGS, &markings);
+    }
+    else
+    {
+        if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
+            SetMonData(gPlayerParty + sBoxCursorPosition, MON_DATA_MARKINGS, &markings);
+        if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
+            SetCurrentBoxMonData(sBoxCursorPosition, MON_DATA_MARKINGS, &markings);
+    }
+}
+
+bool8 CanMovePartyMon(void)
+{
+    if (sBoxCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonEggMonsExcept(sBoxCursorPosition) == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 CanShiftMon(void)
+{
+    if (sIsMonBeingMoved)
+    {
+        if (sBoxCursorArea == CURSOR_AREA_IN_PARTY && CountPartyAliveNonEggMonsExcept(sBoxCursorPosition) == 0)
+        {
+            if (sPSSData->cursorMonIsEgg || GetMonData(&sPSSData->movingMon, MON_DATA_HP) == 0)
+                return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 IsMonBeingMoved(void)
+{
+    return sIsMonBeingMoved;
+}
+
+bool8 IsCursorOnBox(void)
+{
+    return (sBoxCursorArea == CURSOR_AREA_BOX);
+}
+
+bool8 IsCursorOnCloseBox(void)
+{
+    return (sBoxCursorArea == CURSOR_AREA_BUTTONS && sBoxCursorPosition == 1);
+}
+
+bool8 IsCursorInBox(void)
+{
+    return (sBoxCursorArea == CURSOR_AREA_IN_BOX);
+}
+
+void sub_8093A10(void)
+{
+    sPSSData->setMosaic = (sIsMonBeingMoved == FALSE);
+    if (!sIsMonBeingMoved)
+    {
+        switch (sBoxCursorArea)
+        {
+        case CURSOR_AREA_IN_PARTY:
+            if (sBoxCursorPosition < PARTY_SIZE)
+            {
+                SetCursorMonData(&gPlayerParty[sBoxCursorPosition], MODE_PARTY);
+                break;
+            }
+            // fallthrough
+        case CURSOR_AREA_BUTTONS:
+        case CURSOR_AREA_BOX:
+            SetCursorMonData(NULL, MODE_2);
+            break;
+        case CURSOR_AREA_IN_BOX:
+            SetCursorMonData(GetBoxedMonPtr(StorageGetCurrentBox(), sBoxCursorPosition), MODE_BOX);
+            break;
+        }
+    }
+}
+
+void sub_8093AAC(void)
+{
+    if (sIsMonBeingMoved)
+        SetCursorMonData(&gUnknown_20397BC, MODE_PARTY);
+    else
+        sub_8093A10();
+}
+
+void SetCursorMonData(void *pokemon, u8 mode)
+{
+    u8 *txtPtr;
+    u16 gender;
+    bool8 sanityIsBagEgg;
+
+    sPSSData->cursorMonItem = 0;
+    gender = MON_MALE;
+    sanityIsBagEgg = FALSE;
+    if (mode == MODE_PARTY)
+    {
+        struct Pokemon *mon = (struct Pokemon *)pokemon;
+
+        sPSSData->cursorMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
+        if (sPSSData->cursorMonSpecies != SPECIES_NONE)
+        {
+            sanityIsBagEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
+            if (sanityIsBagEgg)
+                sPSSData->cursorMonIsEgg = TRUE;
+            else
+                sPSSData->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
+
+            GetMonData(mon, MON_DATA_NICKNAME, sPSSData->cursorMonNick);
+            StringGetEnd10(sPSSData->cursorMonNick);
+            sPSSData->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
+            sPSSData->cursorMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
+            sPSSData->cursorMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+            sPSSData->cursorMonPalette = GetMonFrontSpritePal(mon);
+            gender = GetMonGender(mon);
+            sPSSData->cursorMonItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+        }
+    }
+    else if (mode == MODE_BOX)
+    {
+        struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
+
+        sPSSData->cursorMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES2);
+        if (sPSSData->cursorMonSpecies != SPECIES_NONE)
+        {
+            u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+            sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
+            if (sanityIsBagEgg)
+                sPSSData->cursorMonIsEgg = TRUE;
+            else
+                sPSSData->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
+
+
+            GetBoxMonData(boxMon, MON_DATA_NICKNAME, sPSSData->cursorMonNick);
+            StringGetEnd10(sPSSData->cursorMonNick);
+            sPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
+            sPSSData->cursorMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
+            sPSSData->cursorMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
+            sPSSData->cursorMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, otId, sPSSData->cursorMonPersonality);
+            gender = GetGenderFromSpeciesAndPersonality(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
+            sPSSData->cursorMonItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+        }
+    }
+    else
+    {
+        sPSSData->cursorMonSpecies = SPECIES_NONE;
+        sPSSData->cursorMonItem = 0;
+    }
+
+    if (sPSSData->cursorMonSpecies == SPECIES_NONE)
+    {
+        StringFill(sPSSData->cursorMonNick, CHAR_SPACE, 5);
+        StringFill(sPSSData->cursorMonTexts[0], CHAR_SPACE, 8);
+        StringFill(sPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+    }
+    else if (sPSSData->cursorMonIsEgg)
+    {
+        if (sanityIsBagEgg)
+            StringCopyPadded(sPSSData->cursorMonTexts[0], sPSSData->cursorMonNick, CHAR_SPACE, 5);
+        else
+            StringCopyPadded(sPSSData->cursorMonTexts[0], gText_EggNickname, CHAR_SPACE, 8);
+
+        StringFill(sPSSData->cursorMonTexts[1], CHAR_SPACE, 8);
+        StringFill(sPSSData->cursorMonTexts[2], CHAR_SPACE, 8);
+        StringFill(sPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+    }
+    else
+    {
+        if (sPSSData->cursorMonSpecies == SPECIES_NIDORAN_F || sPSSData->cursorMonSpecies == SPECIES_NIDORAN_M)
+            gender = MON_GENDERLESS;
+
+        StringCopyPadded(sPSSData->cursorMonTexts[0], sPSSData->cursorMonNick, CHAR_SPACE, 5);
+
+        txtPtr = sPSSData->cursorMonTexts[1];
+        *(txtPtr)++ = CHAR_SLASH;
+        StringCopyPadded(txtPtr, gSpeciesNames[sPSSData->cursorMonSpecies], CHAR_SPACE, 5);
+
+        txtPtr = sPSSData->cursorMonTexts[2];
+        *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
+        *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        switch (gender)
+        {
+        case MON_MALE:
+            *(txtPtr)++ = TEXT_COLOR_RED;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
+            *(txtPtr)++ = CHAR_MALE;
+            break;
+        case MON_FEMALE:
+            *(txtPtr)++ = TEXT_COLOR_GREEN;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;
+            *(txtPtr)++ = CHAR_FEMALE;
+            break;
+        default:
+            *(txtPtr)++ = TEXT_COLOR_DARK_GREY;
+            *(txtPtr)++ = TEXT_COLOR_WHITE;
+            *(txtPtr)++ = TEXT_COLOR_LIGHT_GREY;
+            *(txtPtr)++ = CHAR_SPACE;
+            break;
+        }
+
+        *(txtPtr++) = EXT_CTRL_CODE_BEGIN;
+        *(txtPtr++) = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *(txtPtr++) = TEXT_COLOR_DARK_GREY;
+        *(txtPtr++) = TEXT_COLOR_WHITE;
+        *(txtPtr++) = TEXT_COLOR_LIGHT_GREY;
+        *(txtPtr++) = CHAR_SPACE;
+        *(txtPtr++) = CHAR_EXTRA_EMOJI;
+        *(txtPtr++) = 5; // LV_2
+
+        txtPtr = ConvertIntToDecimalStringN(txtPtr, sPSSData->cursorMonLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        txtPtr[0] = CHAR_SPACE;
+        txtPtr[1] = EOS;
+
+        if (sPSSData->cursorMonItem != 0)
+            StringCopyPadded(sPSSData->cursorMonTexts[3], ItemId_GetName(sPSSData->cursorMonItem), CHAR_SPACE, 8);
+        else
+            StringFill(sPSSData->cursorMonTexts[3], CHAR_SPACE, 8);
+    }
+}
+
+u8 HandleInput_InBox(void)
+{
+    switch (sPSSData->inBoxMovingMode)
+    {
+    case 0:
+    default:
+        return InBoxInput_Normal();
+    case 1:
+        return InBoxInput_GrabbingMultiple();
+    case 2:
+        return InBoxInput_MovingMultiple();
+    }
+}
+
+#ifdef NONMATCHING
+u8 InBoxInput_Normal(void)
+{
+    u8 retVal;
+    s8 cursorArea = sBoxCursorArea;
+    s8 cursorPosition = sBoxCursorPosition;
+
+    sPSSData->field_CD2 = 0;
+    sPSSData->field_CD3 = 0;
+    sPSSData->field_CD7 = 0;
+
+    do
+    {
+        if (JOY_REPT(DPAD_UP))
+        {
+            retVal = TRUE;
+            if (sBoxCursorPosition >= IN_BOX_ROWS)
+            {
+                cursorPosition -= IN_BOX_ROWS;
+            }
+            else
+            {
+                cursorArea = CURSOR_AREA_BOX;
+                cursorPosition = 0;
+            }
+            break;
+        }
+        else if (JOY_REPT(DPAD_DOWN))
+        {
+            retVal = TRUE;
+            cursorPosition += IN_BOX_ROWS;
+            if (cursorPosition >= IN_BOX_COUNT)
+            {
+                cursorArea = CURSOR_AREA_BUTTONS;
+                cursorPosition -= IN_BOX_COUNT;
+                cursorPosition /= 3;
+                sPSSData->field_CD2 = 1;
+                sPSSData->field_CD7 = 1;
+            }
+            break;
+        }
+        else if (JOY_REPT(DPAD_LEFT))
+        {
+            retVal = TRUE;
+            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            {
+                cursorPosition--;
+            }
+            else
+            {
+                sPSSData->field_CD3 = -1;
+                cursorPosition += (IN_BOX_ROWS - 1);
+            }
+            break;
+        }
+        else if (JOY_REPT(DPAD_RIGHT))
+        {
+            retVal = TRUE;
+            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            {
+                cursorPosition++;
+            }
+            else
+            {
+                sPSSData->field_CD3 = 1;
+                cursorPosition -= (IN_BOX_ROWS - 1);
+            }
+            break;
+        }
+        else if (JOY_NEW(START_BUTTON))
+        {
+            retVal = TRUE;
+            cursorArea = CURSOR_AREA_BOX;
+            cursorPosition = 0;
+            break;
+        }
+
+        if ((JOY_NEW(A_BUTTON)) && sub_8094924())
+        {
+            if (!sCanOnlyMove)
+                return 8;
+
+            if (sPSSData->boxOption != BOX_OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
+            {
+                switch (sub_8094E50(0))
+                {
+                case 1:
+                    return 11;
+                case 2:
+                    return 12;
+                case 3:
+                    return 13;
+                case 4:
+                    return 14;
+                case 5:
+                    return 15;
+                case 12:
+                    return 16;
+                case 13:
+                    return 17;
+                case 15:
+                    return 18;
+                }
+            }
+            else
+            {
+                sPSSData->inBoxMovingMode = 1;
+                return 20;
+            }
+        }
+
+        if (JOY_NEW(B_BUTTON))
+            return 19;
+
+        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        {
+            if (JOY_HELD(L_BUTTON))
+                return 10;
+            if (JOY_HELD(R_BUTTON))
+                return 9;
+        }
+
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            sub_8094C84();
+            return 0;
+        }
+
+        retVal = 0;
+
+    } while (0);
+
+    if (retVal)
+        sub_80927E8(cursorArea, cursorPosition);
+
+    return retVal;
+}
+#else
+NAKED
+u8 InBoxInput_Normal(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tldr r0, _08094058 @ =sBoxCursorArea\n"
+                "\tldrb r0, [r0]\n"
+                "\tmov r8, r0\n"
+                "\tldr r2, _0809405C @ =sBoxCursorPosition\n"
+                "\tldrb r4, [r2]\n"
+                "\tldr r5, _08094060 @ =sPSSData\n"
+                "\tldr r0, [r5]\n"
+                "\tldr r1, _08094064 @ =0x00000cce\n"
+                "\tmov r10, r1\n"
+                "\tadd r0, r10\n"
+                "\tmovs r1, 0\n"
+                "\tstrb r1, [r0]\n"
+                "\tldr r0, [r5]\n"
+                "\tldr r7, _08094068 @ =0x00000ccf\n"
+                "\tadds r0, r7\n"
+                "\tstrb r1, [r0]\n"
+                "\tldr r0, [r5]\n"
+                "\tldr r3, _0809406C @ =0x00000cd3\n"
+                "\tmov r9, r3\n"
+                "\tadd r0, r9\n"
+                "\tstrb r1, [r0]\n"
+                "\tldr r6, _08094070 @ =gMain\n"
+                "\tldrh r1, [r6, 0x30]\n"
+                "\tmovs r0, 0x40\n"
+                "\tands r0, r1\n"
+                "\tadds r3, r2, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08094018\n"
+                "\tb _08094208\n"
+                "_08094018:\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08094074\n"
+                "\tmovs r6, 0x1\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r1, 0xC0\n"
+                "\tlsls r1, 19\n"
+                "\tadds r0, r1\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0x1D\n"
+                "\tbgt _08094034\n"
+                "\tb _08094224\n"
+                "_08094034:\n"
+                "\tmovs r2, 0x3\n"
+                "\tmov r8, r2\n"
+                "\tsubs r0, 0x1E\n"
+                "\tlsls r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tmovs r1, 0x3\n"
+                "\tbl __divsi3\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tldr r0, [r5]\n"
+                "\tadd r0, r10\n"
+                "\tstrb r6, [r0]\n"
+                "\tldr r0, [r5]\n"
+                "\tadd r0, r9\n"
+                "\tstrb r6, [r0]\n"
+                "\tb _08094224\n"
+                "\t.align 2, 0\n"
+                "_08094058: .4byte sBoxCursorArea\n"
+                "_0809405C: .4byte sBoxCursorPosition\n"
+                "_08094060: .4byte sPSSData\n"
+                "_08094064: .4byte 0x00000cce\n"
+                "_08094068: .4byte 0x00000ccf\n"
+                "_0809406C: .4byte 0x00000cd3\n"
+                "_08094070: .4byte gMain\n"
+                "_08094074:\n"
+                "\tmovs r0, 0x20\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080940AA\n"
+                "\tmovs r6, 0x1\n"
+                "\tmovs r0, 0\n"
+                "\tldrsb r0, [r3, r0]\n"
+                "\tmovs r1, 0x6\n"
+                "\tbl __modsi3\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08094096\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r3, 0xFF\n"
+                "\tlsls r3, 24\n"
+                "\tb _08094218\n"
+                "_08094096:\n"
+                "\tldr r0, [r5]\n"
+                "\tadds r0, r7\n"
+                "\tmovs r1, 0xFF\n"
+                "\tstrb r1, [r0]\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r1, 0xA0\n"
+                "\tlsls r1, 19\n"
+                "\tadds r0, r1\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tb _08094224\n"
+                "_080940AA:\n"
+                "\tmovs r0, 0x10\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080940DE\n"
+                "\tmovs r6, 0x1\n"
+                "\tmovs r0, 0\n"
+                "\tldrsb r0, [r3, r0]\n"
+                "\tadds r0, 0x1\n"
+                "\tmovs r1, 0x6\n"
+                "\tbl __modsi3\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080940D0\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r2, 0x80\n"
+                "\tlsls r2, 17\n"
+                "\tadds r0, r2\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tb _08094224\n"
+                "_080940D0:\n"
+                "\tldr r0, [r5]\n"
+                "\tadds r0, r7\n"
+                "\tstrb r6, [r0]\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r3, 0xFB\n"
+                "\tlsls r3, 24\n"
+                "\tb _08094218\n"
+                "_080940DE:\n"
+                "\tldrh r1, [r6, 0x2E]\n"
+                "\tmovs r0, 0x8\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080940EC\n"
+                "\tmovs r6, 0x1\n"
+                "\tb _0809421E\n"
+                "_080940EC:\n"
+                "\tmovs r4, 0x1\n"
+                "\tmovs r0, 0x1\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080941B0\n"
+                "\tbl sub_8094924\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080941B0\n"
+                "\tldr r0, _0809410C @ =sCanOnlyMove\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _08094110\n"
+                "\tmovs r0, 0x8\n"
+                "\tb _08094232\n"
+                "\t.align 2, 0\n"
+                "_0809410C: .4byte sCanOnlyMove\n"
+                "_08094110:\n"
+                "\tldr r1, [r5]\n"
+                "\tldrb r0, [r1, 0x1]\n"
+                "\tcmp r0, 0x2\n"
+                "\tbne _08094120\n"
+                "\tldr r0, _0809413C @ =sIsMonBeingMoved\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _080941A0\n"
+                "_08094120:\n"
+                "\tmovs r0, 0\n"
+                "\tbl sub_8094E50\n"
+                "\tsubs r0, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0xE\n"
+                "\tbhi _080941B0\n"
+                "\tlsls r0, 2\n"
+                "\tldr r1, _08094140 @ =_08094144\n"
+                "\tadds r0, r1\n"
+                "\tldr r0, [r0]\n"
+                "\tmov pc, r0\n"
+                "\t.align 2, 0\n"
+                "_0809413C: .4byte sIsMonBeingMoved\n"
+                "_08094140: .4byte _08094144\n"
+                "\t.align 2, 0\n"
+                "_08094144:\n"
+                "\t.4byte _08094180\n"
+                "\t.4byte _08094184\n"
+                "\t.4byte _08094188\n"
+                "\t.4byte _0809418C\n"
+                "\t.4byte _08094190\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _08094194\n"
+                "\t.4byte _08094198\n"
+                "\t.4byte _080941B0\n"
+                "\t.4byte _0809419C\n"
+                "_08094180:\n"
+                "\tmovs r0, 0xB\n"
+                "\tb _08094232\n"
+                "_08094184:\n"
+                "\tmovs r0, 0xC\n"
+                "\tb _08094232\n"
+                "_08094188:\n"
+                "\tmovs r0, 0xD\n"
+                "\tb _08094232\n"
+                "_0809418C:\n"
+                "\tmovs r0, 0xE\n"
+                "\tb _08094232\n"
+                "_08094190:\n"
+                "\tmovs r0, 0xF\n"
+                "\tb _08094232\n"
+                "_08094194:\n"
+                "\tmovs r0, 0x10\n"
+                "\tb _08094232\n"
+                "_08094198:\n"
+                "\tmovs r0, 0x11\n"
+                "\tb _08094232\n"
+                "_0809419C:\n"
+                "\tmovs r0, 0x12\n"
+                "\tb _08094232\n"
+                "_080941A0:\n"
+                "\tldr r2, _080941AC @ =0x000021ef\n"
+                "\tadds r0, r1, r2\n"
+                "\tstrb r4, [r0]\n"
+                "\tmovs r0, 0x14\n"
+                "\tb _08094232\n"
+                "\t.align 2, 0\n"
+                "_080941AC: .4byte 0x000021ef\n"
+                "_080941B0:\n"
+                "\tldr r2, _080941C0 @ =gMain\n"
+                "\tldrh r1, [r2, 0x2E]\n"
+                "\tmovs r0, 0x2\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080941C4\n"
+                "\tmovs r0, 0x13\n"
+                "\tb _08094232\n"
+                "\t.align 2, 0\n"
+                "_080941C0: .4byte gMain\n"
+                "_080941C4:\n"
+                "\tldr r0, _080941E0 @ =gSaveBlock2Ptr\n"
+                "\tldr r0, [r0]\n"
+                "\tldrb r0, [r0, 0x13]\n"
+                "\tcmp r0, 0x1\n"
+                "\tbne _080941F2\n"
+                "\tldrh r1, [r2, 0x2C]\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 2\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080941E4\n"
+                "\tmovs r0, 0xA\n"
+                "\tb _08094232\n"
+                "\t.align 2, 0\n"
+                "_080941E0: .4byte gSaveBlock2Ptr\n"
+                "_080941E4:\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 1\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080941F2\n"
+                "\tmovs r0, 0x9\n"
+                "\tb _08094232\n"
+                "_080941F2:\n"
+                "\tldrh r1, [r2, 0x2E]\n"
+                "\tmovs r0, 0x4\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _08094204\n"
+                "\tbl sub_8094C84\n"
+                "\tmovs r0, 0\n"
+                "\tb _08094232\n"
+                "_08094204:\n"
+                "\tmovs r6, 0\n"
+                "\tb _08094230\n"
+                "_08094208:\n"
+                "\tmovs r6, 0x1\n"
+                "\tmovs r0, 0\n"
+                "\tldrsb r0, [r2, r0]\n"
+                "\tcmp r0, 0x5\n"
+                "\tble _0809421E\n"
+                "\tlsls r0, r4, 24\n"
+                "\tmovs r3, 0xFA\n"
+                "\tlsls r3, 24\n"
+                "_08094218:\n"
+                "\tadds r0, r3\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tb _08094224\n"
+                "_0809421E:\n"
+                "\tmovs r0, 0x2\n"
+                "\tmov r8, r0\n"
+                "\tmovs r4, 0\n"
+                "_08094224:\n"
+                "\tcmp r6, 0\n"
+                "\tbeq _08094230\n"
+                "\tmov r0, r8\n"
+                "\tadds r1, r4, 0\n"
+                "\tbl sub_80927E8\n"
+                "_08094230:\n"
+                "\tadds r0, r6, 0\n"
+                "_08094232:\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif

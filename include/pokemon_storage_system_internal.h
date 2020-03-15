@@ -454,5 +454,7 @@ void sub_80901EC(u8 boxPosition);
 void sub_8090FC4(u8 mode, u8 position);
 bool8 sub_8091084(void);
 void sub_80910CC(void);
+u8 CountPartyMons(void);
+u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

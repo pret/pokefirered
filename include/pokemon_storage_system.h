@@ -30,7 +30,7 @@ enum
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
 void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);
-void CompactPartySlots(void);
+s16 CompactPartySlots(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, s32 request);
 void ZeroBoxMonAt(u8 boxId, u8 monPosition);
 void Cb2_ReturnToPSS(void);

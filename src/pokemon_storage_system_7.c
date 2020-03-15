@@ -26,30 +26,30 @@ struct MoveMons
     struct BoxPokemon boxMons[IN_BOX_COUNT];
 };
 
-EWRAM_DATA struct MoveMons *sMoveMonsPtr = NULL;
+static EWRAM_DATA struct MoveMons *sMoveMonsPtr = NULL;
 
-bool8 sub_8095138(void);
-bool8 sub_8095234(void);
-bool8 sub_80952A0(void);
-bool8 sub_8095314(void);
-bool8 sub_8095394(void);
-bool8 sub_80953BC(void);
-void sub_8095520(void);
-void sub_80955C4(u8 arg0, u8 arg1, u8 arg2);
-void sub_80955FC(u8 arg0, u8 arg1, u8 arg2);
-void sub_8095634(u8 arg0, u8 arg1, u8 arg2);
-void sub_809566C(u8 arg0, u8 arg1, u8 arg2);
-void sub_80956A4(u8 x, u8 y);
-void sub_809572C(u8 x, u8 y);
-void sub_8095780(u16 bgX, u16 bgY, u16 duration);
-u8 sub_8095790(void);
-void sub_80957C8(void);
-void sub_80958A0(void);
-void sub_8095918(void);
-void sub_80959A8(void);
-void sub_8095A58(void);
+static bool8 sub_8095138(void);
+static bool8 sub_8095234(void);
+static bool8 sub_80952A0(void);
+static bool8 sub_8095314(void);
+static bool8 sub_8095394(void);
+static bool8 sub_80953BC(void);
+static void sub_8095520(void);
+static void sub_80955C4(u8 arg0, u8 arg1, u8 arg2);
+static void sub_80955FC(u8 arg0, u8 arg1, u8 arg2);
+static void sub_8095634(u8 arg0, u8 arg1, u8 arg2);
+static void sub_809566C(u8 arg0, u8 arg1, u8 arg2);
+static void sub_80956A4(u8 x, u8 y);
+static void sub_809572C(u8 x, u8 y);
+static void sub_8095780(u16 bgX, u16 bgY, u16 duration);
+static u8 sub_8095790(void);
+static void sub_80957C8(void);
+static void sub_80958A0(void);
+static void sub_8095918(void);
+static void sub_80959A8(void);
+static void sub_8095A58(void);
 
-const struct WindowTemplate gUnknown_83D35D4 = {
+static const struct WindowTemplate gUnknown_83D35D4 = {
     .bg = 0,
     .tilemapLeft = 10,
     .tilemapTop = 3,
@@ -108,7 +108,7 @@ bool8 sub_80950D0(void)
     return FALSE;
 }
 
-bool8 sub_8095138(void)
+static bool8 sub_8095138(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -146,7 +146,7 @@ bool8 sub_8095138(void)
     return TRUE;
 }
 
-bool8 sub_8095234(void)
+static bool8 sub_8095234(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -173,7 +173,7 @@ bool8 sub_8095234(void)
     return TRUE;
 }
 
-bool8 sub_80952A0(void)
+static bool8 sub_80952A0(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -195,7 +195,7 @@ bool8 sub_80952A0(void)
     return TRUE;
 }
 
-bool8 sub_8095314(void)
+static bool8 sub_8095314(void)
 {
     u8 var1, var2;
 
@@ -227,7 +227,7 @@ bool8 sub_8095314(void)
     return TRUE;
 }
 
-bool8 sub_8095394(void)
+static bool8 sub_8095394(void)
 {
     u8 var1 = sub_80924A8();
     u8 var2 = sub_8095790();
@@ -238,7 +238,7 @@ bool8 sub_8095394(void)
         return TRUE;
 }
 
-bool8 sub_80953BC(void)
+static bool8 sub_80953BC(void)
 {
     switch (sMoveMonsPtr->state)
     {
@@ -313,7 +313,7 @@ bool8 sub_8095474(u8 arg0)
     return TRUE;
 }
 
-void sub_8095520(void)
+static void sub_8095520(void)
 {
     s16 var = (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->field_6)) - (abs(sMoveMonsPtr->fromRow - sMoveMonsPtr->toRow));
     s16 var2 = (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->field_7)) - (abs(sMoveMonsPtr->fromColumn - sMoveMonsPtr->toColumn));
@@ -337,7 +337,7 @@ void sub_8095520(void)
     }
 }
 
-void sub_80955C4(u8 arg0, u8 arg1, u8 arg2)
+static void sub_80955C4(u8 arg0, u8 arg1, u8 arg2)
 {
     u8 var1 = arg1;
 
@@ -351,7 +351,7 @@ void sub_80955C4(u8 arg0, u8 arg1, u8 arg2)
         sub_80956A4(arg0, arg1++);
 }
 
-void sub_80955FC(u8 arg0, u8 arg1, u8 arg2)
+static void sub_80955FC(u8 arg0, u8 arg1, u8 arg2)
 {
     u8 var1 = arg1;
 
@@ -365,7 +365,7 @@ void sub_80955FC(u8 arg0, u8 arg1, u8 arg2)
         sub_80956A4(arg1++, arg0);
 }
 
-void sub_8095634(u8 arg0, u8 arg1, u8 arg2)
+static void sub_8095634(u8 arg0, u8 arg1, u8 arg2)
 {
     u8 var1 = arg1;
 
@@ -379,7 +379,7 @@ void sub_8095634(u8 arg0, u8 arg1, u8 arg2)
         sub_809572C(arg0, arg1++);
 }
 
-void sub_809566C(u8 arg0, u8 arg1, u8 arg2)
+static void sub_809566C(u8 arg0, u8 arg1, u8 arg2)
 {
     u8 var1 = arg1;
 
@@ -393,7 +393,7 @@ void sub_809566C(u8 arg0, u8 arg1, u8 arg2)
         sub_809572C(arg1++, arg0);
 }
 
-void sub_80956A4(u8 x, u8 y)
+static void sub_80956A4(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_ROWS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
@@ -418,7 +418,7 @@ void sub_80956A4(u8 x, u8 y)
     }
 }
 
-void sub_809572C(u8 x, u8 y)
+static void sub_809572C(u8 x, u8 y)
 {
     u8 position = x + (IN_BOX_ROWS * y);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
@@ -434,14 +434,14 @@ void sub_809572C(u8 x, u8 y)
     }
 }
 
-void sub_8095780(u16 bgX, u16 bgY, u16 duration)
+static void sub_8095780(u16 bgX, u16 bgY, u16 duration)
 {
     sMoveMonsPtr->bgX = bgX;
     sMoveMonsPtr->bgY = bgY;
     sMoveMonsPtr->field_10 = duration;
 }
 
-u8 sub_8095790(void)
+static u8 sub_8095790(void)
 {
     if (sMoveMonsPtr->field_10 != 0)
     {
@@ -453,7 +453,7 @@ u8 sub_8095790(void)
     return sMoveMonsPtr->field_10;
 }
 
-void sub_80957C8(void)
+static void sub_80957C8(void)
 {
     s32 i, j;
     s32 rowCount, columnCount;
@@ -482,7 +482,7 @@ void sub_80957C8(void)
     }
 }
 
-void sub_80958A0(void)
+static void sub_80958A0(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -501,7 +501,7 @@ void sub_80958A0(void)
     }
 }
 
-void sub_8095918(void)
+static void sub_8095918(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -521,7 +521,7 @@ void sub_8095918(void)
     }
 }
 
-void sub_80959A8(void)
+static void sub_80959A8(void)
 {
     s32 i, j;
     s32 rowCount = sMoveMonsPtr->minRow + sMoveMonsPtr->rowsTotal;
@@ -542,7 +542,7 @@ void sub_80959A8(void)
     }
 }
 
-void sub_8095A58(void)
+static void sub_8095A58(void)
 {
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);

@@ -29,123 +29,123 @@
 #include "constants/vars.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *sPSSData = NULL;
-EWRAM_DATA bool8 sInPartyMenu = 0;
-EWRAM_DATA u8 sCurrentBoxOption = 0;
-EWRAM_DATA u8 gUnknown_20397B6 = 0;
-EWRAM_DATA u8 sWhichToReshow = 0;
-EWRAM_DATA u8 sLastUsedBox = 0;
-EWRAM_DATA u16 gUnknown_20397BA = ITEM_NONE;
+static EWRAM_DATA bool8 sInPartyMenu = 0;
+static EWRAM_DATA u8 sCurrentBoxOption = 0;
+static EWRAM_DATA u8 gUnknown_20397B6 = 0;
+static EWRAM_DATA u8 sWhichToReshow = 0;
+static EWRAM_DATA u8 sLastUsedBox = 0;
+static EWRAM_DATA u16 gUnknown_20397BA = ITEM_NONE;
 
-void Cb_InitPSS(u8 taskId);
-void Cb_ShowPSS(u8 taskId);
-void Cb_ReshowPSS(u8 taskId);
-void Cb_MainPSS(u8 taskId);
-void Cb_ShowPartyPokemon(u8 taskId);
-void Cb_HidePartyPokemon(u8 taskId);
-void Cb_OnSelectedMon(u8 taskId);
-void Cb_MoveMon(u8 taskId);
-void Cb_PlaceMon(u8 taskId);
-void Cb_ShiftMon(u8 taskId);
-void Cb_WithdrawMon(u8 taskId);
-void Cb_DepositMenu(u8 taskId);
-void Cb_ReleaseMon(u8 taskId);
-void Cb_ShowMarkMenu(u8 taskId);
-void Cb_TakeItemForMoving(u8 taskId);
-void Cb_GiveMovingItemToMon(u8 taskId);
-void Cb_ItemToBag(u8 taskId);
-void Cb_SwitchSelectedItem(u8 taskId);
-void Cb_ShowItemInfo(u8 taskId);
-void Cb_HandleMovingMonFromParty(u8 taskId);
-void Cb_PrintCantStoreMail(u8 taskId);
-void Cb_HandleBoxOptions(u8 taskId);
-void Cb_HandleWallpapers(u8 taskId);
-void Cb_JumpBox(u8 taskId);
-void Cb_NameBox(u8 taskId);
-void Cb_ShowMonSummary(u8 taskId);
-void Cb_GiveItemFromBag(u8 taskId);
-void Cb_OnCloseBoxPressed(u8 taskId);
-void Cb_OnBPressed(u8 taskId);
-void Cb_ChangeScreen(u8 taskId);
-void GiveChosenBagItem(void);
-void FreePSSData(void);
-void SetScrollingBackground(void);
-void ScrollBackground(void);
-void LoadPSSMenuGfx(void);
-bool8 InitPSSWindows(void);
-void LoadWaveformSpritePalette(void);
-void sub_808F078(void);
-void sub_808F0F4(void);
-void sub_808F164(void);
-void RefreshCursorMonData(void);
-void BoxSetMosaic(void);
-void SpriteCB_CursorMon_Mosaic(struct Sprite * sprite);
-bool8 BoxGetMosaic(void);
-void LoadCursorMonSprite(void);
-void LoadCursorMonGfx(u16 species, u32 pid);
-void PrintCursorMonInfo(void);
-void sub_808F5E8(void);
-void sub_808F68C(void);
-void SetUpHidePartyMenu(void);
-bool8 HidePartyMenu(void);
-void sub_808F90C(bool8 species);
-void sub_808F948(void);
-void sub_808F974(void);
-void sub_808F99C(void);
-void sub_808F9FC(void);
-void sub_808FA30(u8 pos, bool8 isPartyMon);
-void sub_808FAA8(void);
-void SetUpDoShowPartyMenu(void);
-bool8 DoShowPartyMenu(void);
-void sub_808FB68(void);
-void PrintStorageActionText(u8 textId);
-void ShowYesNoWindow(s8 species);
-void ClearBottomWindow(void);
-void AddWallpaperSetsMenu(void);
-void AddWallpapersMenu(u8 wallpaperSet);
-void sub_808FDFC(void);
-void sub_808FE54(u8 species);
-void sub_808FF70(void);
+static void Cb_InitPSS(u8 taskId);
+static void Cb_ShowPSS(u8 taskId);
+static void Cb_ReshowPSS(u8 taskId);
+static void Cb_MainPSS(u8 taskId);
+static void Cb_ShowPartyPokemon(u8 taskId);
+static void Cb_HidePartyPokemon(u8 taskId);
+static void Cb_OnSelectedMon(u8 taskId);
+static void Cb_MoveMon(u8 taskId);
+static void Cb_PlaceMon(u8 taskId);
+static void Cb_ShiftMon(u8 taskId);
+static void Cb_WithdrawMon(u8 taskId);
+static void Cb_DepositMenu(u8 taskId);
+static void Cb_ReleaseMon(u8 taskId);
+static void Cb_ShowMarkMenu(u8 taskId);
+static void Cb_TakeItemForMoving(u8 taskId);
+static void Cb_GiveMovingItemToMon(u8 taskId);
+static void Cb_ItemToBag(u8 taskId);
+static void Cb_SwitchSelectedItem(u8 taskId);
+static void Cb_ShowItemInfo(u8 taskId);
+static void Cb_HandleMovingMonFromParty(u8 taskId);
+static void Cb_PrintCantStoreMail(u8 taskId);
+static void Cb_HandleBoxOptions(u8 taskId);
+static void Cb_HandleWallpapers(u8 taskId);
+static void Cb_JumpBox(u8 taskId);
+static void Cb_NameBox(u8 taskId);
+static void Cb_ShowMonSummary(u8 taskId);
+static void Cb_GiveItemFromBag(u8 taskId);
+static void Cb_OnCloseBoxPressed(u8 taskId);
+static void Cb_OnBPressed(u8 taskId);
+static void Cb_ChangeScreen(u8 taskId);
+static void GiveChosenBagItem(void);
+static void FreePSSData(void);
+static void SetScrollingBackground(void);
+static void ScrollBackground(void);
+static void LoadPSSMenuGfx(void);
+static bool8 InitPSSWindows(void);
+static void LoadWaveformSpritePalette(void);
+static void sub_808F078(void);
+static void sub_808F0F4(void);
+static void sub_808F164(void);
+static void RefreshCursorMonData(void);
+static void BoxSetMosaic(void);
+static void SpriteCB_CursorMon_Mosaic(struct Sprite * sprite);
+static bool8 BoxGetMosaic(void);
+static void LoadCursorMonSprite(void);
+static void LoadCursorMonGfx(u16 species, u32 pid);
+static void PrintCursorMonInfo(void);
+static void sub_808F5E8(void);
+static void sub_808F68C(void);
+static void SetUpHidePartyMenu(void);
+static bool8 HidePartyMenu(void);
+static void sub_808F90C(bool8 species);
+static void sub_808F948(void);
+static void sub_808F974(void);
+static void sub_808F99C(void);
+static void sub_808F9FC(void);
+static void sub_808FA30(u8 pos, bool8 isPartyMon);
+static void sub_808FAA8(void);
+static void SetUpDoShowPartyMenu(void);
+static bool8 DoShowPartyMenu(void);
+static void sub_808FB68(void);
+static void PrintStorageActionText(u8 textId);
+static void ShowYesNoWindow(s8 species);
+static void ClearBottomWindow(void);
+static void AddWallpaperSetsMenu(void);
+static void AddWallpapersMenu(u8 wallpaperSet);
+static void sub_808FDFC(void);
+static void sub_808FE54(u8 species);
+static void sub_808FF70(void);
 
-const u32 gPokemonStorageScrollingBGTileset[] = INCBIN_U32("graphics/interface/pss_unk_83CE438.4bpp.lz");
-const u32 gPokemonStorageScrollingBGTilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE4D0.bin.lz");
-const u16 gPokemonStorageScrollingBGPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CE5DC.gbapal");
-const u32 gUnknown_83CE5FC[] = INCBIN_U32("graphics/interface/pss_unk_83CE5FC.bin.lz");
+static const u32 gPokemonStorageScrollingBGTileset[] = INCBIN_U32("graphics/interface/pss_unk_83CE438.4bpp.lz");
+static const u32 gPokemonStorageScrollingBGTilemap[] = INCBIN_U32("graphics/interface/pss_unk_83CE4D0.bin.lz");
+static const u16 gPokemonStorageScrollingBGPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CE5DC.gbapal");
+static const u32 gUnknown_83CE5FC[] = INCBIN_U32("graphics/interface/pss_unk_83CE5FC.bin.lz");
 
-const u16 gUnknown_83CE6F8[] = {
+static const u16 gUnknown_83CE6F8[] = {
     0x0101, 0x0102, 0x0103, 0x0104, 0x0105, 0x0106, 0x0107, 0x0108,
     0x0111, 0x0112, 0x0113, 0x0114, 0x0115, 0x0116, 0x0117, 0x0118,
     0x2101, 0x2102, 0x2103, 0x2104, 0x2105, 0x2106, 0x2107, 0x2108,
     0x2111, 0x2112, 0x2113, 0x2114, 0x2115, 0x2116, 0x2117, 0x2118,
 };
 
-const u16 gUnknown_83CE738[] = INCBIN_U16("graphics/interface/pss_unk_83CE738.gbapal");
-const u16 gUnknown_83CE758[] = INCBIN_U16("graphics/interface/pss_unk_83CE758.gbapal");
+static const u16 gUnknown_83CE738[] = INCBIN_U16("graphics/interface/pss_unk_83CE738.gbapal");
+static const u16 gUnknown_83CE758[] = INCBIN_U16("graphics/interface/pss_unk_83CE758.gbapal");
 
-const u16 gUnknown_83CE778[] = {
+static const u16 gUnknown_83CE778[] = {
     0x014c, 0x014d, 0x014e, 0x014f, 0x0170, 0x0171, 0x0172, 0x0173, 0x0174,
     0x015c, 0x015d, 0x015e, 0x015f, 0x0180, 0x0181, 0x0182, 0x0183, 0x0184,
     0x0175, 0x0176, 0x0177, 0x0178, 0x0179, 0x017a, 0x017b, 0x017c, 0x017d,
     0x0185, 0x0186, 0x0187, 0x0188, 0x0189, 0x018a, 0x018b, 0x018c, 0x018d,
 };
 
-const u16 gUnknown_83CE7C0[] = {
+static const u16 gUnknown_83CE7C0[] = {
     0x1140, 0x1141, 0x1141, 0x1142,
     0x1150, 0x1151, 0x1151, 0x1152,
     0x1160, 0x1161, 0x1161, 0x1162,
 };
 
-const u16 gUnknown_83CE7D8[] = {
+static const u16 gUnknown_83CE7D8[] = {
     0x1143, 0x1144, 0x1144, 0x1145,
     0x1153, 0x1154, 0x1154, 0x1155,
     0x1163, 0x1164, 0x1164, 0x1165,
 };
 
-const u16 gUnknown_83CE7F0[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.gbapal");
-const u16 gUnknown_83CE810[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.4bpp");
-const u16 gUnknown_83CE9D0[] = INCBIN_U16("graphics/interface/pss_unk_83CE9D0.gbapal");
-const u16 gUnknown_83CEA10[] = INCBIN_U16("graphics/interface/pss_unk_83CEA10.gbapal");
+static const u16 gUnknown_83CE7F0[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.gbapal");
+static const u16 gUnknown_83CE810[] = INCBIN_U16("graphics/interface/pss_unk_83CE810.4bpp");
+static const u16 gUnknown_83CE9D0[] = INCBIN_U16("graphics/interface/pss_unk_83CE9D0.gbapal");
+static const u16 gUnknown_83CEA10[] = INCBIN_U16("graphics/interface/pss_unk_83CEA10.gbapal");
 
-const struct WindowTemplate gUnknown_83CEA30[] = {
+static const struct WindowTemplate gUnknown_83CEA30[] = {
     {
         .bg = 1,
         .tilemapLeft = 0,
@@ -173,7 +173,7 @@ const struct WindowTemplate gUnknown_83CEA30[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const struct BgTemplate gUnknown_83CEA50[] = {
+static const struct BgTemplate gUnknown_83CEA50[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -209,17 +209,17 @@ const struct BgTemplate gUnknown_83CEA50[] = {
     }
 };
 
-const struct SpritePalette gWaveformSpritePalette = {
+static const struct SpritePalette gWaveformSpritePalette = {
     gUnknown_83CE7F0, TAG_PAL_WAVEFORM
 };
 
-const struct SpriteSheet gWaveformSpriteSheet = {
+static const struct SpriteSheet gWaveformSpriteSheet = {
     gUnknown_83CE810, 0x01c0, TAG_TILE_WAVEFORM
 };
 
-const struct OamData gUnknown_83CEB88;
+static const struct OamData gUnknown_83CEB88;
 
-const struct SpriteTemplate sSpriteTemplate_CursorMon = {
+static const struct SpriteTemplate sSpriteTemplate_CursorMon = {
     .tileTag = TAG_TILE_2,
     .paletteTag = TAG_PAL_DAC6,
     .oam = &gUnknown_83CEB88,
@@ -229,7 +229,7 @@ const struct SpriteTemplate sSpriteTemplate_CursorMon = {
     .callback = SpriteCallbackDummy
 };
 
-const struct StorageAction gPCStorageActionTexts[] = {
+static const struct StorageAction gPCStorageActionTexts[] = {
     [PC_TEXT_EXIT_BOX] = {gText_ExitFromBox, PC_TEXT_FMT_NORMAL},
     [PC_TEXT_WHAT_YOU_DO] = {gText_WhatDoYouWantToDo, PC_TEXT_FMT_NORMAL},
     [PC_TEXT_PICK_A_THEME] = {gText_PleasePickATheme, PC_TEXT_FMT_NORMAL},
@@ -264,7 +264,7 @@ const struct StorageAction gPCStorageActionTexts[] = {
 };
 
 // Yes/No menu
-const struct WindowTemplate sYesNoWindowTemplate = {
+static const struct WindowTemplate sYesNoWindowTemplate = {
     .bg = 0,
     .tilemapLeft = 24,
     .tilemapTop = 11,
@@ -274,7 +274,7 @@ const struct WindowTemplate sYesNoWindowTemplate = {
     .baseBlock = 0x05c
 };
 
-const struct OamData gUnknown_83CEB88 = {
+static const struct OamData gUnknown_83CEB88 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -291,7 +291,7 @@ const struct OamData gUnknown_83CEB88 = {
 
 // Waveform
 
-const struct OamData gUnknown_83CEB90 = {
+static const struct OamData gUnknown_83CEB90 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -306,38 +306,38 @@ const struct OamData gUnknown_83CEB90 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_83CEB98[] = {
+static const union AnimCmd gUnknown_83CEB98[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83CEBA0[] = {
+static const union AnimCmd gUnknown_83CEBA0[] = {
     ANIMCMD_FRAME(2, 8),
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(6, 8),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd gUnknown_83CEBB0[] = {
+static const union AnimCmd gUnknown_83CEBB0[] = {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83CEBB8[] = {
+static const union AnimCmd gUnknown_83CEBB8[] = {
     ANIMCMD_FRAME(10, 8),
     ANIMCMD_FRAME(4, 8),
     ANIMCMD_FRAME(12, 8),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd *const gUnknown_83CEBC8[] = {
+static const union AnimCmd *const gUnknown_83CEBC8[] = {
     gUnknown_83CEB98,
     gUnknown_83CEBA0,
     gUnknown_83CEBB0,
     gUnknown_83CEBB8
 };
 
-const struct SpriteTemplate sSpriteTemplate_Waveform = {
+static const struct SpriteTemplate sSpriteTemplate_Waveform = {
     .tileTag = TAG_TILE_WAVEFORM,
     .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &gUnknown_83CEB90,
@@ -347,7 +347,7 @@ const struct SpriteTemplate sSpriteTemplate_Waveform = {
     .callback = SpriteCallbackDummy,
 };
 
-void VblankCb_PSS(void)
+static void VblankCb_PSS(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -356,7 +356,7 @@ void VblankCb_PSS(void)
     SetGpuReg(REG_OFFSET_BG2HOFS, sPSSData->bg2_X);
 }
 
-void Cb2_PSS(void)
+static void Cb2_PSS(void)
 {
     RunTasks();
     DoScheduledBgTilemapCopiesToVram();
@@ -403,7 +403,7 @@ void Cb2_ReturnToPSS(void)
     }
 }
 
-void ResetAllBgCoords(void)
+static void ResetAllBgCoords(void)
 {
     SetGpuReg(REG_OFFSET_BG0HOFS, 0);
     SetGpuReg(REG_OFFSET_BG0VOFS, 0);
@@ -415,7 +415,7 @@ void ResetAllBgCoords(void)
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
 }
 
-void sub_808CF10(void)
+static void sub_808CF10(void)
 {
     ResetPaletteFade();
     ResetSpriteData();
@@ -432,14 +432,14 @@ void sub_808CF10(void)
     sPSSData->unk_02C7 = FALSE;
 }
 
-void sub_808CF94(void)
+static void sub_808CF94(void)
 {
     sub_8092B50();
     sInPartyMenu = sPSSData->boxOption == BOX_OPTION_DEPOSIT;
     gUnknown_20397B6 = 0;
 }
 
-void sub_808CFC4(void)
+static void sub_808CFC4(void)
 {
     if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
@@ -449,13 +449,13 @@ void sub_808CFC4(void)
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 }
 
-void SetPSSCallback(TaskFunc newFunc)
+static void SetPSSCallback(TaskFunc newFunc)
 {
     gTasks[sPSSData->taskId].func = newFunc;
     sPSSData->state = 0;
 }
 
-void Cb_InitPSS(u8 taskId)
+static void Cb_InitPSS(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -565,7 +565,7 @@ void Cb_InitPSS(u8 taskId)
     sPSSData->state++;
 }
 
-void Cb_ShowPSS(u8 taskId)
+static void Cb_ShowPSS(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -581,7 +581,7 @@ void Cb_ShowPSS(u8 taskId)
     }
 }
 
-void Cb_ReshowPSS(u8 taskId)
+static void Cb_ReshowPSS(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -598,7 +598,7 @@ void Cb_ReshowPSS(u8 taskId)
     }
 }
 
-void Cb_MainPSS(u8 taskId)
+static void Cb_MainPSS(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -861,7 +861,7 @@ void Cb_MainPSS(u8 taskId)
     }
 }
 
-void Cb_ShowPartyPokemon(u8 taskId)
+static void Cb_ShowPartyPokemon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -876,7 +876,7 @@ void Cb_ShowPartyPokemon(u8 taskId)
     }
 }
 
-void Cb_HidePartyPokemon(u8 taskId)
+static void Cb_HidePartyPokemon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -903,7 +903,7 @@ void Cb_HidePartyPokemon(u8 taskId)
     }
 }
 
-void Cb_OnSelectedMon(u8 taskId)
+static void Cb_OnSelectedMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1058,7 +1058,7 @@ void Cb_OnSelectedMon(u8 taskId)
     }
 }
 
-void Cb_MoveMon(u8 taskId)
+static void Cb_MoveMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1078,7 +1078,7 @@ void Cb_MoveMon(u8 taskId)
     }
 }
 
-void Cb_PlaceMon(u8 taskId)
+static void Cb_PlaceMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1099,7 +1099,7 @@ void Cb_PlaceMon(u8 taskId)
     }
 }
 
-void Cb_ShiftMon(u8 taskId)
+static void Cb_ShiftMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1118,7 +1118,7 @@ void Cb_ShiftMon(u8 taskId)
     }
 }
 
-void Cb_WithdrawMon(u8 taskId)
+static void Cb_WithdrawMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1171,7 +1171,7 @@ void Cb_WithdrawMon(u8 taskId)
     }
 }
 
-void Cb_DepositMenu(u8 taskId)
+static void Cb_DepositMenu(u8 taskId)
 {
     u8 boxId;
 
@@ -1238,7 +1238,7 @@ void Cb_DepositMenu(u8 taskId)
     }
 }
 
-void Cb_ReleaseMon(u8 taskId)
+static void Cb_ReleaseMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1368,7 +1368,7 @@ void Cb_ReleaseMon(u8 taskId)
     }
 }
 
-void Cb_ShowMarkMenu(u8 taskId)
+static void Cb_ShowMarkMenu(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1391,7 +1391,7 @@ void Cb_ShowMarkMenu(u8 taskId)
     }
 }
 
-void Cb_TakeItemForMoving(u8 taskId)
+static void Cb_TakeItemForMoving(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1428,7 +1428,7 @@ void Cb_TakeItemForMoving(u8 taskId)
     }
 }
 
-void Cb_GiveMovingItemToMon(u8 taskId)
+static void Cb_GiveMovingItemToMon(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1465,7 +1465,7 @@ void Cb_GiveMovingItemToMon(u8 taskId)
     }
 }
 
-void Cb_ItemToBag(u8 taskId)
+static void Cb_ItemToBag(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1513,7 +1513,7 @@ void Cb_ItemToBag(u8 taskId)
     }
 }
 
-void Cb_SwitchSelectedItem(u8 taskId)
+static void Cb_SwitchSelectedItem(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1557,7 +1557,7 @@ void Cb_SwitchSelectedItem(u8 taskId)
     }
 }
 
-void Cb_ShowItemInfo(u8 taskId)
+static void Cb_ShowItemInfo(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1600,7 +1600,7 @@ void Cb_ShowItemInfo(u8 taskId)
     }
 }
 
-void Cb_CloseBoxWhileHoldingItem(u8 taskId)
+static void Cb_CloseBoxWhileHoldingItem(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1657,7 +1657,7 @@ void Cb_CloseBoxWhileHoldingItem(u8 taskId)
     }
 }
 
-void Cb_HandleMovingMonFromParty(u8 taskId)
+static void Cb_HandleMovingMonFromParty(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1676,7 +1676,7 @@ void Cb_HandleMovingMonFromParty(u8 taskId)
     }
 }
 
-void Cb_PrintCantStoreMail(u8 taskId)
+static void Cb_PrintCantStoreMail(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1702,7 +1702,7 @@ void Cb_PrintCantStoreMail(u8 taskId)
     }
 }
 
-void Cb_HandleBoxOptions(u8 taskId)
+static void Cb_HandleBoxOptions(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1743,7 +1743,7 @@ void Cb_HandleBoxOptions(u8 taskId)
     }
 }
 
-void Cb_HandleWallpapers(u8 taskId)
+static void Cb_HandleWallpapers(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1810,7 +1810,7 @@ void Cb_HandleWallpapers(u8 taskId)
     }
 }
 
-void Cb_JumpBox(u8 taskId)
+static void Cb_JumpBox(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1856,7 +1856,7 @@ void Cb_JumpBox(u8 taskId)
     }
 }
 
-void Cb_NameBox(u8 taskId)
+static void Cb_NameBox(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1876,7 +1876,7 @@ void Cb_NameBox(u8 taskId)
     }
 }
 
-void Cb_ShowMonSummary(u8 taskId)
+static void Cb_ShowMonSummary(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1896,7 +1896,7 @@ void Cb_ShowMonSummary(u8 taskId)
     }
 }
 
-void Cb_GiveItemFromBag(u8 taskId)
+static void Cb_GiveItemFromBag(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1915,7 +1915,7 @@ void Cb_GiveItemFromBag(u8 taskId)
     }
 }
 
-void Cb_OnCloseBoxPressed(u8 taskId)
+static void Cb_OnCloseBoxPressed(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -1976,7 +1976,7 @@ void Cb_OnCloseBoxPressed(u8 taskId)
     }
 }
 
-void Cb_OnBPressed(u8 taskId)
+static void Cb_OnBPressed(u8 taskId)
 {
     switch (sPSSData->state)
     {
@@ -2037,7 +2037,7 @@ void Cb_OnBPressed(u8 taskId)
     }
 }
 
-void Cb_ChangeScreen(u8 taskId)
+static void Cb_ChangeScreen(u8 taskId)
 {
     struct Pokemon * partyMon;
     u8 mode, monIndex, maxMonIndex;
@@ -2076,7 +2076,7 @@ void Cb_ChangeScreen(u8 taskId)
     DestroyTask(taskId);
 }
 
-void GiveChosenBagItem(void)
+static void GiveChosenBagItem(void)
 {
     u16 item = gSpecialVar_ItemId;
 
@@ -2093,7 +2093,7 @@ void GiveChosenBagItem(void)
     }
 }
 
-void FreePSSData(void)
+static void FreePSSData(void)
 {
     FreeBoxPartyPokemonDropdowns();
     sub_80950A4();
@@ -2105,20 +2105,20 @@ void FreePSSData(void)
 // Graphics util
 // ******************************************************************
 
-void SetScrollingBackground(void)
+static void SetScrollingBackground(void)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
     DecompressAndLoadBgGfxUsingHeap(3, gPokemonStorageScrollingBGTileset, 0, 0, 0);
     LZ77UnCompVram(gPokemonStorageScrollingBGTilemap, (void *)BG_SCREEN_ADDR(31));
 }
 
-void ScrollBackground(void)
+static void ScrollBackground(void)
 {
     ChangeBgX(3, 128, 1);
     ChangeBgY(3, 128, 2);
 }
 
-void LoadPSSMenuGfx(void)
+static void LoadPSSMenuGfx(void)
 {
     InitBgsFromTemplates(0, gUnknown_83CEA50, NELEMS(gUnknown_83CEA50));
     DecompressAndLoadBgGfxUsingHeap(1, gPSSMenu_Gfx, 0, 0, 0);
@@ -2128,7 +2128,7 @@ void LoadPSSMenuGfx(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-bool8 InitPSSWindows(void)
+static bool8 InitPSSWindows(void)
 {
     if (!InitWindows(gUnknown_83CEA30))
     {
@@ -2141,12 +2141,12 @@ bool8 InitPSSWindows(void)
     }
 }
 
-void LoadWaveformSpritePalette(void)
+static void LoadWaveformSpritePalette(void)
 {
     LoadSpritePalette(&gWaveformSpritePalette);
 }
 
-void sub_808F078(void)
+static void sub_808F078(void)
 {
     LoadPalette(gUnknown_8E9C3F8, 0, 0x20);
     LoadPalette(gUnknown_8E9C418, 0x20, 0x20);
@@ -2163,7 +2163,7 @@ void sub_808F078(void)
     RefreshCursorMonData();
 }
 
-void sub_808F0F4(void)
+static void sub_808F0F4(void)
 {
     sPSSData->field_D94 = CreateMonMarkingSprite_AllOff(TAG_TILE_10, TAG_PAL_DAC8, NULL);
     sPSSData->field_D94->oam.priority = 1;
@@ -2173,7 +2173,7 @@ void sub_808F0F4(void)
     sPSSData->field_DA0 = (void *)OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(TAG_TILE_10);
 }
 
-void sub_808F164(void)
+static void sub_808F164(void)
 {
     u16 i;
     struct SpriteSheet sheet = gWaveformSpriteSheet;
@@ -2186,7 +2186,7 @@ void sub_808F164(void)
     }
 }
 
-void RefreshCursorMonData(void)
+static void RefreshCursorMonData(void)
 {
     LoadCursorMonGfx(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
     PrintCursorMonInfo();
@@ -2194,7 +2194,7 @@ void RefreshCursorMonData(void)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void BoxSetMosaic(void)
+static void BoxSetMosaic(void)
 {
     RefreshCursorMonData();
     if (sPSSData->cursorMonSprite)
@@ -2207,12 +2207,12 @@ void BoxSetMosaic(void)
     }
 }
 
-u8 BoxGetMosaic(void)
+static u8 BoxGetMosaic(void)
 {
     return sPSSData->cursorMonSprite->oam.mosaic;
 }
 
-void SpriteCB_CursorMon_Mosaic(struct Sprite *sprite)
+static void SpriteCB_CursorMon_Mosaic(struct Sprite *sprite)
 {
     sprite->data[0] -= sprite->data[1];
     if (sprite->data[0] < 0)
@@ -2225,7 +2225,7 @@ void SpriteCB_CursorMon_Mosaic(struct Sprite *sprite)
     }
 }
 
-void LoadCursorMonSprite(void)
+static void LoadCursorMonSprite(void)
 {
     u16 i;
     u16 tileStart;
@@ -2268,7 +2268,7 @@ void LoadCursorMonSprite(void)
     }
 }
 
-void LoadCursorMonGfx(u16 species, u32 pid)
+static void LoadCursorMonGfx(u16 species, u32 pid)
 {
     if (sPSSData->cursorMonSprite == NULL)
         return;
@@ -2287,7 +2287,7 @@ void LoadCursorMonGfx(u16 species, u32 pid)
     }
 }
 
-void PrintCursorMonInfo(void)
+static void PrintCursorMonInfo(void)
 {
     u16 i;
     u16 y;
@@ -2321,7 +2321,7 @@ void PrintCursorMonInfo(void)
     }
 }
 
-void sub_808F5E8(void)
+static void sub_808F5E8(void)
 {
     u16 i;
 
@@ -2342,7 +2342,7 @@ void sub_808F5E8(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-void sub_808F68C(void)
+static void sub_808F68C(void)
 {
     LZ77UnCompWram(gUnknown_8E9CAEC, sPSSData->field_B0);
     LoadPalette(gPSSMenu_Pal, 0x10, 0x20);
@@ -2370,7 +2370,7 @@ void sub_808F68C(void)
     sPSSData->unk_02C7 = FALSE;
 }
 
-void SetUpShowPartyMenu(void)
+static void SetUpShowPartyMenu(void)
 {
     sPSSData->field_2C0 = 20;
     sPSSData->field_2C2 = 2;
@@ -2378,7 +2378,7 @@ void SetUpShowPartyMenu(void)
     CreatePartyMonsSprites(FALSE);
 }
 
-bool8 ShowPartyMenu(void)
+static bool8 ShowPartyMenu(void)
 {
     if (sPSSData->field_2C5 == 20)
         return FALSE;
@@ -2400,7 +2400,7 @@ bool8 ShowPartyMenu(void)
     }
 }
 
-void SetUpHidePartyMenu(void)
+static void SetUpHidePartyMenu(void)
 {
     sPSSData->field_2C0 = 0;
     sPSSData->field_2C2 = 22;
@@ -2409,7 +2409,7 @@ void SetUpHidePartyMenu(void)
         sub_80960C0();
 }
 
-bool8 HidePartyMenu(void)
+static bool8 HidePartyMenu(void)
 {
     if (sPSSData->field_2C5 != 20)
     {
@@ -2439,7 +2439,7 @@ bool8 HidePartyMenu(void)
     return FALSE;
 }
 
-void sub_808F90C(bool8 arg0)
+static void sub_808F90C(bool8 arg0)
 {
     if (arg0)
         SetBoxPartyPokemonDropdownMap2Rect(2, 0, 0, 9, 2);
@@ -2450,14 +2450,14 @@ void sub_808F90C(bool8 arg0)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-void sub_808F948(void)
+static void sub_808F948(void)
 {
     sPSSData->unk_02C7 = TRUE;
     sPSSData->unk_02C8 = 30;
     sPSSData->unk_02C9 = TRUE;
 }
 
-void sub_808F974(void)
+static void sub_808F974(void)
 {
     if (sPSSData->unk_02C7)
     {
@@ -2466,7 +2466,7 @@ void sub_808F974(void)
     }
 }
 
-void sub_808F99C(void)
+static void sub_808F99C(void)
 {
     if (sPSSData->unk_02C7 && ++sPSSData->unk_02C8 > 30)
     {
@@ -2476,7 +2476,7 @@ void sub_808F99C(void)
     }
 }
 
-void sub_808F9FC(void)
+static void sub_808F9FC(void)
 {
     u8 i;
 
@@ -2487,7 +2487,7 @@ void sub_808F9FC(void)
     }
 }
 
-void sub_808FA30(u8 pos, bool8 isPartyMon)
+static void sub_808FA30(u8 pos, bool8 isPartyMon)
 {
     u16 i, j, index;
     const u16 *data;
@@ -2511,7 +2511,7 @@ void sub_808FA30(u8 pos, bool8 isPartyMon)
     }
 }
 
-void sub_808FAA8(void)
+static void sub_808FAA8(void)
 {
     sub_808F9FC();
     SetBoxPartyPokemonDropdownMap2Rect(1, 0, 0, 12, 22);
@@ -2519,14 +2519,14 @@ void sub_808FAA8(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-void SetUpDoShowPartyMenu(void)
+static void SetUpDoShowPartyMenu(void)
 {
     sPSSData->showPartyMenuState = 0;
     PlaySE(SE_WIN_OPEN);
     SetUpShowPartyMenu();
 }
 
-bool8 DoShowPartyMenu(void)
+static bool8 DoShowPartyMenu(void)
 {
     switch (sPSSData->showPartyMenuState)
     {
@@ -2551,7 +2551,7 @@ bool8 DoShowPartyMenu(void)
     return TRUE;
 }
 
-void sub_808FB68(void)
+static void sub_808FB68(void)
 {
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29));
     TextWindow_SetStdFrame0_WithPal(1, 2, 208);
@@ -2559,7 +2559,7 @@ void sub_808FB68(void)
     CopyBgTilemapBufferToVram(0);
 }
 
-void PrintStorageActionText(u8 id)
+static void PrintStorageActionText(u8 id)
 {
     u8 *txtPtr;
 
@@ -2601,19 +2601,19 @@ void PrintStorageActionText(u8 id)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void ShowYesNoWindow(s8 cursorPos)
+static void ShowYesNoWindow(s8 cursorPos)
 {
     CreateYesNoMenu(&sYesNoWindowTemplate, 1, 0, 2, 0x00b, 14, 1);
     Menu_MoveCursorNoWrapAround(cursorPos);
 }
 
-void ClearBottomWindow(void)
+static void ClearBottomWindow(void)
 {
     ClearStdWindowAndFrameToTransparent(1, FALSE);
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void AddWallpaperSetsMenu(void)
+static void AddWallpaperSetsMenu(void)
 {
     InitMenu();
     SetMenuText(PC_TEXT_SCENERY1);
@@ -2623,7 +2623,7 @@ void AddWallpaperSetsMenu(void)
     AddMenu();
 }
 
-void AddWallpapersMenu(u8 wallpaperSet)
+static void AddWallpapersMenu(u8 wallpaperSet)
 {
     InitMenu();
     switch (wallpaperSet)
@@ -2661,7 +2661,7 @@ u8 GetCurrentBoxOption(void)
     return sCurrentBoxOption;
 }
 
-void sub_808FDFC(void)
+static void sub_808FDFC(void)
 {
     if (!IsCursorOnBox())
     {
@@ -2678,7 +2678,7 @@ void sub_808FDFC(void)
     }
 }
 
-void sub_808FE54(u8 action)
+static void sub_808FE54(u8 action)
 {
     u16 event;
     u8 fromBox = sub_8094D34();
@@ -2769,7 +2769,7 @@ void sub_808FE54(u8 action)
     SetQuestLogEvent(event, (const void *)qlogBuffer);
 }
 
-void sub_808FF70(void)
+static void sub_808FF70(void)
 {
     if (sLastUsedBox != StorageGetCurrentBox())
     {

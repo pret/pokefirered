@@ -15,7 +15,7 @@ void InitMenu(void)
     sPSSData->menuWindow.baseBlock = 92;
 }
 
-const u8 *const sMenuTexts[] = {
+static const u8 *const sMenuTexts[] = {
     [PC_TEXT_CANCEL]     = gPCText_Cancel,
     [PC_TEXT_STORE]      = gPCText_Store,
     [PC_TEXT_WITHDRAW]   = gPCText_Withdraw,

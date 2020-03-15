@@ -206,14 +206,14 @@ struct UnkStruct_2000020
     u8 unk_05;
 };
 
-struct UnkStorageStruct
+struct PSS_ItemIconSprite
 {
     struct Sprite *sprite;
     u8 *tiles;
     u16 palIndex;
-    u8 unk8;
-    u8 unk9;
-    u8 unk10;
+    u8 cursorArea;
+    u8 cursorPos;
+    u8 active;
 };
 
 struct PssQuestLogBuffer
@@ -366,7 +366,7 @@ struct PokemonStorageSystemData
     /* 21db */ u8 itemName[20];
     /* 21ef */ u8 inBoxMovingMode;
     /* 21f0 */ u16 field_2200;
-    /* 21f4 */ struct UnkStorageStruct field_2204[MAX_ITEM_ICONS];
+    /* 21f4 */ struct PSS_ItemIconSprite itemIconSprites[MAX_ITEM_ICONS];
     /* 2224 */ u16 movingItem;
     /* 2226 */ u16 field_2236;
     /* 2228 */ struct PssQuestLogBuffer qlogBuffer;

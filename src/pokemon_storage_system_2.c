@@ -22,25 +22,25 @@ struct PSS_MenuStringPtrs
     const u8 *desc;
 };
 
-EWRAM_DATA u8 sPreviousBoxOption = 0;
-EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_20397AC = NULL;
+static EWRAM_DATA u8 sPreviousBoxOption = 0;
+static EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_20397AC = NULL;
 
-void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
-void sub_808C9C4(u8 curBox);
-void sub_808CBA4(void);
-void sub_808CC10(void);
-void sub_808CC44(void);
-void sub_808CC74(void);
-void sub_808CCFC(const u8 *a0, u16 x, u16 y);
-void sub_808CD64(struct Sprite * sprite);
+static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
+static void sub_808C9C4(u8 curBox);
+static void sub_808CBA4(void);
+static void sub_808CC10(void);
+static void sub_808CC44(void);
+static void sub_808CC74(void);
+static void sub_808CCFC(const u8 *a0, u16 x, u16 y);
+static void sub_808CD64(struct Sprite * sprite);
 
 // Forward declarations
 
-const u16 gBoxSelectionPopupPalette[];
-const u16 gBoxSelectionPopupCenterTiles[];
-const u16 gBoxSelectionPopupSidesTiles[];
+static const u16 gBoxSelectionPopupPalette[];
+static const u16 gBoxSelectionPopupCenterTiles[];
+static const u16 gBoxSelectionPopupSidesTiles[];
 
-const struct PSS_MenuStringPtrs gUnknown_83CDA20[] = {
+static const struct PSS_MenuStringPtrs gUnknown_83CDA20[] = {
     {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     {gText_DepositPokemon,  gText_DepositMonDescription },
     {gText_MovePokemon,     gText_MoveMonDescription    },
@@ -94,7 +94,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     RemoveWindow(windowId);
 }
 
-void sub_808BFE0(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3, u8 *buffer)
+static void sub_808BFE0(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3, u8 *buffer)
 {
     u32 var;
     u8 windowId;
@@ -118,7 +118,7 @@ void sub_808BFE0(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr
     RemoveWindow(windowId);
 }
 
-u8 CountMonsInBox(u8 boxId)
+static u8 CountMonsInBox(u8 boxId)
 {
     u16 i, count;
 
@@ -198,7 +198,7 @@ u8 CountPartyMons(void)
     return count;
 }
 
-u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
+static u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
 {
     u8 *str;
 
@@ -209,7 +209,7 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-void sub_808C25C(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
+static void sub_808C25C(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src_left, u16 src_top, u16 dest_width, u16 dest_height, u16 src_width)
 {
     u16 i;
 
@@ -224,7 +224,7 @@ void sub_808C25C(u16 *dest, u16 dest_left, u16 dest_top, const u16 *src, u16 src
     }
 }
 
-void sub_808C2D8(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
+static void sub_808C2D8(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
 {
     u16 i;
 
@@ -234,7 +234,7 @@ void sub_808C2D8(u16 *dest, u16 dest_left, u16 dest_top, u16 width, u16 height)
         Dma3FillLarge16_(0, dest, width);
 }
 
-void Task_PokemonStorageSystemPC(u8 taskId)
+static void Task_PokemonStorageSystemPC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -351,7 +351,7 @@ void ShowPokemonStorageSystemPC(void)
     ScriptContext2_Enable();
 }
 
-void FieldCb_ReturnToPcMenu(void)
+static void FieldCb_ReturnToPcMenu(void)
 {
     u8 taskId;
     MainCallback vblankCb = gMain.vblankCallback;
@@ -365,7 +365,7 @@ void FieldCb_ReturnToPcMenu(void)
     FadeInFromBlack();
 }
 
-const struct WindowTemplate gUnknown_83CDA48 = {
+static const struct WindowTemplate gUnknown_83CDA48 = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
@@ -375,7 +375,7 @@ const struct WindowTemplate gUnknown_83CDA48 = {
     .baseBlock = 0x001
 };
 
-void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
+static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
 {
     s16 windowId;
     windowId = AddWindow(&gUnknown_83CDA48);
@@ -479,43 +479,43 @@ u8 HandleBoxChooseSelectionInput(void)
     return 200;
 }
 
-const union AnimCmd gUnknown_83CDA50[] = {
+static const union AnimCmd gUnknown_83CDA50[] = {
     ANIMCMD_FRAME( 0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83CDA58[] = {
+static const union AnimCmd gUnknown_83CDA58[] = {
     ANIMCMD_FRAME( 4, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83CDA60[] = {
+static const union AnimCmd gUnknown_83CDA60[] = {
     ANIMCMD_FRAME( 6, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83CDA68[] = {
+static const union AnimCmd gUnknown_83CDA68[] = {
     ANIMCMD_FRAME(10, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83CDA70[] = {
+static const union AnimCmd *const gUnknown_83CDA70[] = {
     gUnknown_83CDA50,
     gUnknown_83CDA58,
     gUnknown_83CDA60,
     gUnknown_83CDA68
 };
 
-const union AffineAnimCmd gUnknown_83CDA80[] = {
+static const union AffineAnimCmd gUnknown_83CDA80[] = {
     AFFINEANIMCMD_FRAME(224, 224, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_83CDA90[] = {
+static const union AffineAnimCmd *const gUnknown_83CDA90[] = {
     gUnknown_83CDA80
 };
 
-void sub_808C9C4(u8 curBox)
+static void sub_808C9C4(u8 curBox)
 {
     u16 i;
     u8 spriteId;
@@ -573,7 +573,7 @@ void sub_808C9C4(u8 curBox)
     }
 }
 
-void sub_808CBA4(void)
+static void sub_808CBA4(void)
 {
     u16 i;
     if (gUnknown_20397AC->unk_0000)
@@ -596,20 +596,20 @@ void sub_808CBA4(void)
     }
 }
 
-void sub_808CC10(void)
+static void sub_808CC10(void)
 {
     if (++gUnknown_20397AC->curBox >= TOTAL_BOXES_COUNT)
         gUnknown_20397AC->curBox = 0;
     sub_808CC74();
 }
 
-void sub_808CC44(void)
+static void sub_808CC44(void)
 {
     gUnknown_20397AC->curBox = (gUnknown_20397AC->curBox == 0 ? TOTAL_BOXES_COUNT - 1 : gUnknown_20397AC->curBox - 1);
     sub_808CC74();
 }
 
-void sub_808CC74(void)
+static void sub_808CC74(void)
 {
     u8 nPokemonInBox = CountMonsInBox(gUnknown_20397AC->curBox);
     u8 *boxName = StringCopy(gUnknown_20397AC->unk_0228, GetBoxNamePtr(gUnknown_20397AC->curBox));
@@ -625,13 +625,13 @@ void sub_808CC74(void)
     sub_808CCFC(gUnknown_20397AC->unk_0228, 3, 3);
 }
 
-void sub_808CCFC(const u8 *str, u16 x, u16 y)
+static void sub_808CCFC(const u8 *str, u16 x, u16 y)
 {
     u16 tileStart = GetSpriteTileStartByTag(gUnknown_20397AC->unk_0240);
     sub_808BFE0(str, (void *)(OBJ_VRAM0 + tileStart * 32 + 256 * y + 32 * x), 0x100, 4, 15, 14, gUnknown_20397AC->filler_0028);
 }
 
-void sub_808CD64(struct Sprite *sprite)
+static void sub_808CD64(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 3)
     {
@@ -647,6 +647,6 @@ void sub_808CD64(struct Sprite *sprite)
 
 // Forward-declared rodata
 
-const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
-const u16 gBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
-const u16 gBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");
+static const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
+static const u16 gBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
+static const u16 gBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");

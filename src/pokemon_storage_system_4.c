@@ -12,33 +12,33 @@
 #include "constants/vars.h"
 #include "constants/flags.h"
 
-void sub_8090324(struct Sprite * sprite);
-void SetBoxSpeciesAndPersonalities(u8 boxId);
-void sub_8090A74(struct Sprite * sprite, u16 idx);
-void sub_8090AE0(struct Sprite * sprite);
-void DestroyBoxMonIcon(struct Sprite * sprite);
-void sub_80911B0(struct Sprite * sprite);
-void sub_8091420(u8 taskId);
-s8 sub_80916F4(u8 boxId);
-void LoadWallpaperGfx(u8 wallpaperId, s8 direction);
-bool32 WaitForWallpaperGfxLoad(void);
-void sub_8091984(void *buffer, const void *buffer2, s8 direction, u8 baseBlock);
-void sub_8091A24(void *buffer);
-void sub_8091A94(u8 wallpaperId);
-void sub_8091C48(u8 wallpaperId, s8 direction);
-void sub_8091E84(struct Sprite * sprite);
-void sub_8091EB8(struct Sprite * sprite);
-s16 sub_8091F60(const u8 *boxName);
-void sub_8091E34(void);
-void sub_8091EF0(void);
-void sub_8091F80(void);
-void sub_809200C(s8 direction);
-void sub_80920AC(void);
-void sub_8092164(struct Sprite * sprite);
+static void sub_8090324(struct Sprite * sprite);
+static void SetBoxSpeciesAndPersonalities(u8 boxId);
+static void sub_8090A74(struct Sprite * sprite, u16 idx);
+static void sub_8090AE0(struct Sprite * sprite);
+static void DestroyBoxMonIcon(struct Sprite * sprite);
+static void sub_80911B0(struct Sprite * sprite);
+static void sub_8091420(u8 taskId);
+static s8 sub_80916F4(u8 boxId);
+static void LoadWallpaperGfx(u8 wallpaperId, s8 direction);
+static bool32 WaitForWallpaperGfxLoad(void);
+static void sub_8091984(void *buffer, const void *buffer2, s8 direction, u8 baseBlock);
+static void sub_8091A24(void *buffer);
+static void sub_8091A94(u8 wallpaperId);
+static void sub_8091C48(u8 wallpaperId, s8 direction);
+static void sub_8091E84(struct Sprite * sprite);
+static void sub_8091EB8(struct Sprite * sprite);
+static s16 sub_8091F60(const u8 *boxName);
+static void sub_8091E34(void);
+static void sub_8091EF0(void);
+static void sub_8091F80(void);
+static void sub_809200C(s8 direction);
+static void sub_80920AC(void);
+static void sub_8092164(struct Sprite * sprite);
 
-const struct OamData gUnknown_83CEC08;
+static const struct OamData gUnknown_83CEC08;
 
-const struct SpriteTemplate gUnknown_83CEBF0 = {
+static const struct SpriteTemplate gUnknown_83CEBF0 = {
     .tileTag = TAG_TILE_12,
     .paletteTag = TAG_PAL_DAC0,
     .oam = &gUnknown_83CEC08,
@@ -48,7 +48,7 @@ const struct SpriteTemplate gUnknown_83CEBF0 = {
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_83CEC08 = {
+static const struct OamData gUnknown_83CEC08 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -63,75 +63,75 @@ const struct OamData gUnknown_83CEC08 = {
     .paletteNum = 0
 };
 
-const union AffineAnimCmd gUnknown_83CEC10[] = {
+static const union AffineAnimCmd gUnknown_83CEC10[] = {
     AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83CEC20[] = {
+static const union AffineAnimCmd gUnknown_83CEC20[] = {
     AFFINEANIMCMD_FRAME(16, 16, 0,  0),
     AFFINEANIMCMD_FRAME(16, 16, 0, 15),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_83CEC38[] = {
+static const union AffineAnimCmd *const gUnknown_83CEC38[] = {
     gUnknown_83CEC10,
     gUnknown_83CEC20
 };
 
-const u16 gUnknown_83CEC40[] = INCBIN_U16("graphics/interface/pss_unk_83CEC40.gbapal");
-const u32 gUnknown_83CEC80[] = INCBIN_U32("graphics/interface/pss_unk_83CEC80.4bpp.lz");
-const u32 gUnknown_83CF050[] = INCBIN_U32("graphics/interface/pss_unk_83CF050.bin.lz");
-const u16 gUnknown_83CF12C[] = INCBIN_U16("graphics/interface/pss_unk_83CF12C.gbapal");
-const u32 gUnknown_83CF16C[] = INCBIN_U32("graphics/interface/pss_unk_83CF16C.4bpp.lz");
-const u32 gUnknown_83CF374[] = INCBIN_U32("graphics/interface/pss_unk_83CF374.bin.lz");
-const u16 gUnknown_83CF424[] = INCBIN_U16("graphics/interface/pss_unk_83CF424.gbapal");
-const u32 gUnknown_83CF464[] = INCBIN_U32("graphics/interface/pss_unk_83CF464.4bpp.lz");
-const u32 gUnknown_83CF750[] = INCBIN_U32("graphics/interface/pss_unk_83CF750.bin.lz");
-const u16 gUnknown_83CF834[] = INCBIN_U16("graphics/interface/pss_unk_83CF834.gbapal");
-const u32 gUnknown_83CF874[] = INCBIN_U32("graphics/interface/pss_unk_83CF874.4bpp.lz");
-const u32 gUnknown_83CFA94[] = INCBIN_U32("graphics/interface/pss_unk_83CFA94.bin.lz");
-const u16 gUnknown_83CFB60[] = INCBIN_U16("graphics/interface/pss_unk_83CFB60.gbapal");
-const u32 gUnknown_83CFBA0[] = INCBIN_U32("graphics/interface/pss_unk_83CFBA0.4bpp.lz");
-const u32 gUnknown_83CFEF0[] = INCBIN_U32("graphics/interface/pss_unk_83CFEF0.bin.lz");
-const u16 gUnknown_83CFFC8[] = INCBIN_U16("graphics/interface/pss_unk_83CFFC8.gbapal");
-const u32 gUnknown_83D0008[] = INCBIN_U32("graphics/interface/pss_unk_83D0008.4bpp.lz");
-const u8 sSpace_83D0338[4] = {};
-const u32 gUnknown_83D033C[] = INCBIN_U32("graphics/interface/pss_unk_83D033C.bin.lz");
-const u16 gUnknown_83D0414[] = INCBIN_U16("graphics/interface/pss_unk_83D0414.gbapal");
-const u32 gUnknown_83D0454[] = INCBIN_U32("graphics/interface/pss_unk_83D0454.4bpp.lz");
-const u32 gUnknown_83D070C[] = INCBIN_U32("graphics/interface/pss_unk_83D070C.bin.lz");
-const u16 gUnknown_83D07D8[] = INCBIN_U16("graphics/interface/pss_unk_83D07D8.gbapal");
-const u32 gUnknown_83D0818[] = INCBIN_U32("graphics/interface/pss_unk_83D0818.4bpp.lz");
-const u32 gUnknown_83D0B5C[] = INCBIN_U32("graphics/interface/pss_unk_83D0B5C.bin.lz");
-const u16 gUnknown_83D0C38[] = INCBIN_U16("graphics/interface/pss_unk_83D0C38.gbapal");
-const u32 gUnknown_83D0C78[] = INCBIN_U32("graphics/interface/pss_unk_83D0C78.4bpp.lz");
-const u32 gUnknown_83D0FFC[] = INCBIN_U32("graphics/interface/pss_unk_83D0FFC.bin.lz");
-const u16 gUnknown_83D10E4[] = INCBIN_U16("graphics/interface/pss_unk_83D10E4.gbapal");
-const u32 gUnknown_83D1124[] = INCBIN_U32("graphics/interface/pss_unk_83D1124.4bpp.lz");
-const u32 gUnknown_83D13D8[] = INCBIN_U32("graphics/interface/pss_unk_83D13D8.bin.lz");
-const u16 gUnknown_83D14B4[] = INCBIN_U16("graphics/interface/pss_unk_83D14B4.gbapal");
-const u32 gUnknown_83D14F4[] = INCBIN_U32("graphics/interface/pss_unk_83D14F4.4bpp.lz");
-const u32 gUnknown_83D1788[] = INCBIN_U32("graphics/interface/pss_unk_83D1788.bin.lz");
-const u16 gUnknown_83D1874[] = INCBIN_U16("graphics/interface/pss_unk_83D1874.gbapal");
-const u32 gUnknown_83D18B4[] = INCBIN_U32("graphics/interface/pss_unk_83D18B4.4bpp.lz");
-const u32 gUnknown_83D1B4C[] = INCBIN_U32("graphics/interface/pss_unk_83D1B4C.bin.lz");
-const u16 gUnknown_83D1C2C[] = INCBIN_U16("graphics/interface/pss_unk_83D1C2C.gbapal");
-const u8 sSpace_83D1C6C[32] = {};
-const u32 gUnknown_83D1C8C[] = INCBIN_U32("graphics/interface/pss_unk_83D1C8C.4bpp.lz");
-const u32 gUnknown_83D1EC4[] = INCBIN_U32("graphics/interface/pss_unk_83D1EC4.bin.lz");
-const u16 gUnknown_83D1F94[] = INCBIN_U16("graphics/interface/pss_unk_83D1F94.gbapal");
-const u32 gUnknown_83D1FD4[] = INCBIN_U32("graphics/interface/pss_unk_83D1FD4.4bpp.lz");
-const u32 gUnknown_83D22B8[] = INCBIN_U32("graphics/interface/pss_unk_83D22B8.bin.lz");
-const u16 gUnknown_83D239C[] = INCBIN_U16("graphics/interface/pss_unk_83D239C.gbapal");
-const u32 gUnknown_83D23DC[] = INCBIN_U32("graphics/interface/pss_unk_83D23DC.4bpp.lz");
-const u32 gUnknown_83D256C[] = INCBIN_U32("graphics/interface/pss_unk_83D256C.bin.lz");
-const u16 gUnknown_83D2614[] = INCBIN_U16("graphics/interface/pss_unk_83D2614.gbapal");
-const u32 gUnknown_83D2654[] = INCBIN_U32("graphics/interface/pss_unk_83D2654.4bpp.lz");
-const u32 gUnknown_83D277C[] = INCBIN_U32("graphics/interface/pss_unk_83D277C.bin.lz");
-const u16 gUnknown_83D2820[] = INCBIN_U16("graphics/interface/pss_unk_83D2820.bin");
+static const u16 gUnknown_83CEC40[] = INCBIN_U16("graphics/interface/pss_unk_83CEC40.gbapal");
+static const u32 gUnknown_83CEC80[] = INCBIN_U32("graphics/interface/pss_unk_83CEC80.4bpp.lz");
+static const u32 gUnknown_83CF050[] = INCBIN_U32("graphics/interface/pss_unk_83CF050.bin.lz");
+static const u16 gUnknown_83CF12C[] = INCBIN_U16("graphics/interface/pss_unk_83CF12C.gbapal");
+static const u32 gUnknown_83CF16C[] = INCBIN_U32("graphics/interface/pss_unk_83CF16C.4bpp.lz");
+static const u32 gUnknown_83CF374[] = INCBIN_U32("graphics/interface/pss_unk_83CF374.bin.lz");
+static const u16 gUnknown_83CF424[] = INCBIN_U16("graphics/interface/pss_unk_83CF424.gbapal");
+static const u32 gUnknown_83CF464[] = INCBIN_U32("graphics/interface/pss_unk_83CF464.4bpp.lz");
+static const u32 gUnknown_83CF750[] = INCBIN_U32("graphics/interface/pss_unk_83CF750.bin.lz");
+static const u16 gUnknown_83CF834[] = INCBIN_U16("graphics/interface/pss_unk_83CF834.gbapal");
+static const u32 gUnknown_83CF874[] = INCBIN_U32("graphics/interface/pss_unk_83CF874.4bpp.lz");
+static const u32 gUnknown_83CFA94[] = INCBIN_U32("graphics/interface/pss_unk_83CFA94.bin.lz");
+static const u16 gUnknown_83CFB60[] = INCBIN_U16("graphics/interface/pss_unk_83CFB60.gbapal");
+static const u32 gUnknown_83CFBA0[] = INCBIN_U32("graphics/interface/pss_unk_83CFBA0.4bpp.lz");
+static const u32 gUnknown_83CFEF0[] = INCBIN_U32("graphics/interface/pss_unk_83CFEF0.bin.lz");
+static const u16 gUnknown_83CFFC8[] = INCBIN_U16("graphics/interface/pss_unk_83CFFC8.gbapal");
+static const u32 gUnknown_83D0008[] = INCBIN_U32("graphics/interface/pss_unk_83D0008.4bpp.lz");
+static const u8 sSpace_83D0338[4] = {};
+static const u32 gUnknown_83D033C[] = INCBIN_U32("graphics/interface/pss_unk_83D033C.bin.lz");
+static const u16 gUnknown_83D0414[] = INCBIN_U16("graphics/interface/pss_unk_83D0414.gbapal");
+static const u32 gUnknown_83D0454[] = INCBIN_U32("graphics/interface/pss_unk_83D0454.4bpp.lz");
+static const u32 gUnknown_83D070C[] = INCBIN_U32("graphics/interface/pss_unk_83D070C.bin.lz");
+static const u16 gUnknown_83D07D8[] = INCBIN_U16("graphics/interface/pss_unk_83D07D8.gbapal");
+static const u32 gUnknown_83D0818[] = INCBIN_U32("graphics/interface/pss_unk_83D0818.4bpp.lz");
+static const u32 gUnknown_83D0B5C[] = INCBIN_U32("graphics/interface/pss_unk_83D0B5C.bin.lz");
+static const u16 gUnknown_83D0C38[] = INCBIN_U16("graphics/interface/pss_unk_83D0C38.gbapal");
+static const u32 gUnknown_83D0C78[] = INCBIN_U32("graphics/interface/pss_unk_83D0C78.4bpp.lz");
+static const u32 gUnknown_83D0FFC[] = INCBIN_U32("graphics/interface/pss_unk_83D0FFC.bin.lz");
+static const u16 gUnknown_83D10E4[] = INCBIN_U16("graphics/interface/pss_unk_83D10E4.gbapal");
+static const u32 gUnknown_83D1124[] = INCBIN_U32("graphics/interface/pss_unk_83D1124.4bpp.lz");
+static const u32 gUnknown_83D13D8[] = INCBIN_U32("graphics/interface/pss_unk_83D13D8.bin.lz");
+static const u16 gUnknown_83D14B4[] = INCBIN_U16("graphics/interface/pss_unk_83D14B4.gbapal");
+static const u32 gUnknown_83D14F4[] = INCBIN_U32("graphics/interface/pss_unk_83D14F4.4bpp.lz");
+static const u32 gUnknown_83D1788[] = INCBIN_U32("graphics/interface/pss_unk_83D1788.bin.lz");
+static const u16 gUnknown_83D1874[] = INCBIN_U16("graphics/interface/pss_unk_83D1874.gbapal");
+static const u32 gUnknown_83D18B4[] = INCBIN_U32("graphics/interface/pss_unk_83D18B4.4bpp.lz");
+static const u32 gUnknown_83D1B4C[] = INCBIN_U32("graphics/interface/pss_unk_83D1B4C.bin.lz");
+static const u16 gUnknown_83D1C2C[] = INCBIN_U16("graphics/interface/pss_unk_83D1C2C.gbapal");
+static const u8 sSpace_83D1C6C[32] = {};
+static const u32 gUnknown_83D1C8C[] = INCBIN_U32("graphics/interface/pss_unk_83D1C8C.4bpp.lz");
+static const u32 gUnknown_83D1EC4[] = INCBIN_U32("graphics/interface/pss_unk_83D1EC4.bin.lz");
+static const u16 gUnknown_83D1F94[] = INCBIN_U16("graphics/interface/pss_unk_83D1F94.gbapal");
+static const u32 gUnknown_83D1FD4[] = INCBIN_U32("graphics/interface/pss_unk_83D1FD4.4bpp.lz");
+static const u32 gUnknown_83D22B8[] = INCBIN_U32("graphics/interface/pss_unk_83D22B8.bin.lz");
+static const u16 gUnknown_83D239C[] = INCBIN_U16("graphics/interface/pss_unk_83D239C.gbapal");
+static const u32 gUnknown_83D23DC[] = INCBIN_U32("graphics/interface/pss_unk_83D23DC.4bpp.lz");
+static const u32 gUnknown_83D256C[] = INCBIN_U32("graphics/interface/pss_unk_83D256C.bin.lz");
+static const u16 gUnknown_83D2614[] = INCBIN_U16("graphics/interface/pss_unk_83D2614.gbapal");
+static const u32 gUnknown_83D2654[] = INCBIN_U32("graphics/interface/pss_unk_83D2654.4bpp.lz");
+static const u32 gUnknown_83D277C[] = INCBIN_U32("graphics/interface/pss_unk_83D277C.bin.lz");
+static const u16 gUnknown_83D2820[] = INCBIN_U16("graphics/interface/pss_unk_83D2820.bin");
 
-const u16 gUnknown_83D29D0[][2] = {
+static const u16 gUnknown_83D29D0[][2] = {
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
     {RGB( 7,  7,  7), RGB(31, 31, 31)},
@@ -150,7 +150,7 @@ const u16 gUnknown_83D29D0[][2] = {
     {RGB( 7,  7,  7), RGB(31, 31, 31)}
 };
 
-const struct WallpaperTable gWallpaperTable[] = {
+static const struct WallpaperTable gWallpaperTable[] = {
     {gUnknown_83CEC80, gUnknown_83CF050, gUnknown_83CEC40},
     {gUnknown_83CF16C, gUnknown_83CF374, gUnknown_83CF12C},
     {gUnknown_83CF464, gUnknown_83CF750, gUnknown_83CF424},
@@ -169,14 +169,14 @@ const struct WallpaperTable gWallpaperTable[] = {
     {gUnknown_83D2654, gUnknown_83D277C, gUnknown_83D2614},
 };
 
-const u16 gUnknown_83D2AD0[] = INCBIN_U16("graphics/interface/pss_unk_83D2AD0.4bpp");
-const u8 sUnref_83D2B50[] = {0xba, 0x23};
+static const u16 gUnknown_83D2AD0[] = INCBIN_U16("graphics/interface/pss_unk_83D2AD0.4bpp");
+static const u8 sUnref_83D2B50[] = {0xba, 0x23};
 
-const struct SpriteSheet gUnknown_83D2B54 = {
+static const struct SpriteSheet gUnknown_83D2B54 = {
     gUnknown_83D2AD0, 0x0080, TAG_TILE_6
 };
 
-const struct OamData gUnknown_83D2B5C = {
+static const struct OamData gUnknown_83D2B5C = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -191,22 +191,22 @@ const struct OamData gUnknown_83D2B5C = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_83D2B64[] = {
+static const union AnimCmd gUnknown_83D2B64[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83D2B6C[] = {
+static const union AnimCmd gUnknown_83D2B6C[] = {
     ANIMCMD_FRAME(8, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83D2B74[] = {
+static const union AnimCmd *const gUnknown_83D2B74[] = {
     gUnknown_83D2B64,
     gUnknown_83D2B6C
 };
 
-const struct SpriteTemplate gUnknown_83D2B7C = {
+static const struct SpriteTemplate gUnknown_83D2B7C = {
     .tileTag = TAG_TILE_3,
     .paletteTag = TAG_PAL_DAC9,
     .oam = &gUnknown_83D2B5C,
@@ -216,7 +216,7 @@ const struct SpriteTemplate gUnknown_83D2B7C = {
     .callback = SpriteCallbackDummy
 };
 
-const struct OamData gUnknown_83D2B94 = {
+static const struct OamData gUnknown_83D2B94 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -231,22 +231,22 @@ const struct OamData gUnknown_83D2B94 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_83D2B9C[] = {
+static const union AnimCmd gUnknown_83D2B9C[] = {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_83D2BA4[] = {
+static const union AnimCmd gUnknown_83D2BA4[] = {
     ANIMCMD_FRAME(2, 5),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_83D2BAC[] = {
+static const union AnimCmd *const gUnknown_83D2BAC[] = {
     gUnknown_83D2B9C,
     gUnknown_83D2BA4
 };
 
-const struct SpriteTemplate gUnknown_83D2BB4 = {
+static const struct SpriteTemplate gUnknown_83D2BB4 = {
     .tileTag = TAG_TILE_6,
     .paletteTag = TAG_PAL_WAVEFORM,
     .oam = &gUnknown_83D2B94,
@@ -274,7 +274,7 @@ void sub_808FFAC(void)
     sPSSData->field_78C = 0;
 }
 
-u8 sub_8090058(void)
+static u8 sub_8090058(void)
 {
     return (IsCursorInBox() ? 2 : 1);
 }
@@ -289,7 +289,7 @@ void CreateMovingMonIcon(void)
     sPSSData->movingMonSprite->callback = sub_80911B0;
 }
 
-void sub_80900D4(u8 boxId)
+static void sub_80900D4(u8 boxId)
 {
     u8 boxPosition;
     u16 i, j, count;
@@ -343,7 +343,7 @@ void sub_80901EC(u8 boxPosition)
     }
 }
 
-void sub_809029C(s16 arg0)
+static void sub_809029C(s16 arg0)
 {
     u16 i;
 
@@ -358,7 +358,7 @@ void sub_809029C(s16 arg0)
     }
 }
 
-void sub_80902E0(struct Sprite *sprite)
+static void sub_80902E0(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {
@@ -373,7 +373,7 @@ void sub_80902E0(struct Sprite *sprite)
     }
 }
 
-void sub_8090324(struct Sprite *sprite)
+static void sub_8090324(struct Sprite *sprite)
 {
     if (sprite->data[4] != 0)
     {
@@ -388,7 +388,7 @@ void sub_8090324(struct Sprite *sprite)
     }
 }
 
-void DestroyAllIconsInRow(u8 row)
+static void DestroyAllIconsInRow(u8 row)
 {
     u16 column;
     u8 boxPosition = row;
@@ -404,7 +404,7 @@ void DestroyAllIconsInRow(u8 row)
     }
 }
 
-u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
+static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
 {
     s32 i;
     u16 y = 44;
@@ -464,7 +464,7 @@ u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     return count;
 }
 
-void sub_8090574(u8 boxId, s8 direction)
+static void sub_8090574(u8 boxId, s8 direction)
 {
     sPSSData->field_C6A = 0;
     sPSSData->field_C6B = boxId;
@@ -482,7 +482,7 @@ void sub_8090574(u8 boxId, s8 direction)
     sub_809029C(sPSSData->field_C64);
 }
 
-bool8 sub_809062C(void)
+static bool8 sub_809062C(void)
 {
     if (sPSSData->field_C60 != 0)
         sPSSData->field_C60--;
@@ -526,7 +526,7 @@ bool8 sub_809062C(void)
     return TRUE;
 }
 
-void SetBoxSpeciesAndPersonalities(u8 boxId)
+static void SetBoxSpeciesAndPersonalities(u8 boxId)
 {
     s32 i, j, boxPosition;
 
@@ -629,7 +629,7 @@ u8 sub_8090A60(void)
     return sPSSData->field_C5E;
 }
 
-void sub_8090A74(struct Sprite *sprite, u16 partyId)
+static void sub_8090A74(struct Sprite *sprite, u16 partyId)
 {
     s16 x, y;
 
@@ -647,7 +647,7 @@ void sub_8090A74(struct Sprite *sprite, u16 partyId)
     sprite->callback = sub_8090AE0;
 }
 
-void sub_8090AE0(struct Sprite *sprite)
+static void sub_8090AE0(struct Sprite *sprite)
 {
     if (sprite->data[6] != 0)
     {
@@ -892,13 +892,13 @@ void SetMovingMonPriority(u8 priority)
     sPSSData->movingMonSprite->oam.priority = priority;
 }
 
-void sub_80911B0(struct Sprite *sprite)
+static void sub_80911B0(struct Sprite *sprite)
 {
     sprite->pos1.x = sPSSData->field_CB4->pos1.x;
     sprite->pos1.y = sPSSData->field_CB4->pos1.y + sPSSData->field_CB4->pos2.y + 4;
 }
 
-u16 sub_80911D4(u16 species)
+static u16 sub_80911D4(u16 species)
 {
     u16 i, var;
 
@@ -929,7 +929,7 @@ u16 sub_80911D4(u16 species)
     return var;
 }
 
-void sub_8091290(u16 species)
+static void sub_8091290(u16 species)
 {
     u16 i;
 
@@ -969,7 +969,7 @@ struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u
     return &gSprites[spriteId];
 }
 
-void DestroyBoxMonIcon(struct Sprite *sprite)
+static void DestroyBoxMonIcon(struct Sprite *sprite)
 {
     sub_8091290(sprite->data[0]);
     DestroySprite(sprite);
@@ -987,7 +987,7 @@ bool8 sub_809140C(void)
     return FuncIsActiveTask(sub_8091420);
 }
 
-void sub_8091420(u8 taskId)
+static void sub_8091420(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1081,7 +1081,7 @@ bool8 ScrollToBox(void)
     return TRUE;
 }
 
-s8 sub_80916F4(u8 boxId)
+static s8 sub_80916F4(u8 boxId)
 {
     u8 i;
     u8 currentBox = StorageGetCurrentBox();
@@ -1138,7 +1138,7 @@ bool8 DoWallpaperGfxChange(void)
     return TRUE;
 }
 
-void LoadWallpaperGfx(u8 boxId, s8 direction)
+static void LoadWallpaperGfx(u8 boxId, s8 direction)
 {
     u8 wallpaperId;
     const struct WallpaperTable *wallpaperGfx;
@@ -1169,7 +1169,7 @@ void LoadWallpaperGfx(u8 boxId, s8 direction)
     CopyBgTilemapBufferToVram(2);
 }
 
-bool32 WaitForWallpaperGfxLoad(void)
+static bool32 WaitForWallpaperGfxLoad(void)
 {
     if (IsDma3ManagerBusyWithBgCopy() == TRUE)
         return FALSE;
@@ -1177,7 +1177,7 @@ bool32 WaitForWallpaperGfxLoad(void)
     return TRUE;
 }
 
-void sub_8091984(void *buffer, const void *tilemap, s8 direction, u8 arg2)
+static void sub_8091984(void *buffer, const void *tilemap, s8 direction, u8 arg2)
 {
     s16 var = (arg2 * 2) + 3;
     s16 x = ((sPSSData->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
@@ -1194,7 +1194,7 @@ void sub_8091984(void *buffer, const void *tilemap, s8 direction, u8 arg2)
     FillBgTilemapBufferRect(2, 0, x, 2, 4, 0x12, 0x11);
 }
 
-void sub_8091A24(void *arg0)
+static void sub_8091A24(void *arg0)
 {
     u16 i;
     u16 *dest = arg0;
@@ -1216,7 +1216,7 @@ void sub_8091A24(void *arg0)
     }
 }
 
-void sub_8091A94(u8 boxId)
+static void sub_8091A94(u8 boxId)
 {
     u8 tagIndex;
     s16 r6;
@@ -1257,7 +1257,7 @@ void sub_8091A94(u8 boxId)
     sPSSData->field_6F8 = 0;
 }
 
-void sub_8091C48(u8 boxId, s8 direction)
+static void sub_8091C48(u8 boxId, s8 direction)
 {
     u16 r8;
     s16 x, x2;
@@ -1304,7 +1304,7 @@ void sub_8091C48(u8 boxId, s8 direction)
     }
 }
 
-void sub_8091E34(void)
+static void sub_8091E34(void)
 {
     if (sPSSData->field_6F8 == 0)
         FreeSpriteTilesByTag(TAG_TILE_4);
@@ -1315,7 +1315,7 @@ void sub_8091E34(void)
     sPSSData->field_720[1] = sPSSData->field_728[1];
 }
 
-void sub_8091E84(struct Sprite *sprite)
+static void sub_8091E84(struct Sprite *sprite)
 {
     if (sprite->data[2] != 0)
         sprite->data[2]--;
@@ -1323,7 +1323,7 @@ void sub_8091E84(struct Sprite *sprite)
         sprite->callback = SpriteCallbackDummy;
 }
 
-void sub_8091EB8(struct Sprite *sprite)
+static void sub_8091EB8(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {
@@ -1338,7 +1338,7 @@ void sub_8091EB8(struct Sprite *sprite)
     }
 }
 
-void sub_8091EF0(void)
+static void sub_8091EF0(void)
 {
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
@@ -1348,12 +1348,12 @@ void sub_8091EF0(void)
         CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71E, 4);
 }
 
-s16 sub_8091F60(const u8 *string)
+static s16 sub_8091F60(const u8 *string)
 {
     return 0xB0 - GetStringWidth(1, string, 0) / 2;
 }
 
-void sub_8091F80(void)
+static void sub_8091F80(void)
 {
     u16 i;
 
@@ -1373,7 +1373,7 @@ void sub_8091F80(void)
         sub_80920FC(TRUE);
 }
 
-void sub_809200C(s8 direction)
+static void sub_809200C(s8 direction)
 {
     u16 i;
 
@@ -1400,7 +1400,7 @@ void sub_809200C(s8 direction)
     sPSSData->field_730[1]->data[7] = 1;
 }
 
-void sub_80920AC(void)
+static void sub_80920AC(void)
 {
     u16 i;
 
@@ -1436,7 +1436,7 @@ void sub_80920FC(bool8 a0)
     }
 }
 
-void sub_8092164(struct Sprite *sprite)
+static void sub_8092164(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {

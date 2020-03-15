@@ -9,28 +9,28 @@
 #include "trig.h"
 #include "constants/items.h"
 
-u8 sub_80961D8(void);
-bool32 sub_8096210(u8 cursorArea, u8 cursorPos);
-u8 sub_8096258(u8 cursorArea, u8 cursorPos);
-void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos);
-void sub_8096408(u8 id, const u32 * tiles, const u32 * pal);
-void sub_80964B8(u8 id, u8 affineAnimNo);
-void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
-void sub_8096624(u8 id, bool8 show);
-const u32 *GetItemIconPic(u16 itemId);
-const u32 *GetItemIconPalette(u16 itemId);
-void sub_8096898(u32 x);
-void sub_809692C(struct Sprite * sprite);
-void sub_8096958(struct Sprite * sprite);
-void sub_80969BC(struct Sprite * sprite);
-void sub_80969F4(struct Sprite * sprite);
-void sub_8096A74(struct Sprite * sprite);
-void sub_8096B10(struct Sprite * sprite);
-void sub_8096BAC(struct Sprite * sprite);
+static u8 sub_80961D8(void);
+static bool32 sub_8096210(u8 cursorArea, u8 cursorPos);
+static u8 sub_8096258(u8 cursorArea, u8 cursorPos);
+static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos);
+static void sub_8096408(u8 id, const u32 * tiles, const u32 * pal);
+static void sub_80964B8(u8 id, u8 affineAnimNo);
+static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
+static void sub_8096624(u8 id, bool8 show);
+static const u32 *GetItemIconPic(u16 itemId);
+static const u32 *GetItemIconPalette(u16 itemId);
+static void sub_8096898(u32 x);
+static void sub_809692C(struct Sprite * sprite);
+static void sub_8096958(struct Sprite * sprite);
+static void sub_80969BC(struct Sprite * sprite);
+static void sub_80969F4(struct Sprite * sprite);
+static void sub_8096A74(struct Sprite * sprite);
+static void sub_8096B10(struct Sprite * sprite);
+static void sub_8096BAC(struct Sprite * sprite);
 
-const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
+static const u32 gUnknown_83D35DC[] = INCBIN_U32("graphics/interface/pss_unk_83D35DC.4bpp");
 
-const struct OamData gUnknown_83D365C = {
+static const struct OamData gUnknown_83D365C = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -46,49 +46,49 @@ const struct OamData gUnknown_83D365C = {
     .affineParam = 0
 };
 
-const union AffineAnimCmd gUnknown_83D3664[] = {
+static const union AffineAnimCmd gUnknown_83D3664[] = {
     AFFINEANIMCMD_FRAME(128, 128, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D3674[] = {
+static const union AffineAnimCmd gUnknown_83D3674[] = {
     AFFINEANIMCMD_FRAME(88, 88, 0, 0),
     AFFINEANIMCMD_FRAME(5, 5, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D368C[] = {
+static const union AffineAnimCmd gUnknown_83D368C[] = {
     AFFINEANIMCMD_FRAME(128, 128, 0, 0),
     AFFINEANIMCMD_FRAME(-5, -5, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D36A4[] = {
+static const union AffineAnimCmd gUnknown_83D36A4[] = {
     AFFINEANIMCMD_FRAME(128, 128, 0, 0),
     AFFINEANIMCMD_FRAME(10, 10, 0, 12),
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D36C4[] = {
+static const union AffineAnimCmd gUnknown_83D36C4[] = {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_FRAME(-10, -10, 0, 12),
     AFFINEANIMCMD_FRAME(128, 128, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D36E4[] = {
+static const union AffineAnimCmd gUnknown_83D36E4[] = {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_FRAME(-5, -5, 0, 16),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_83D36FC[] = {
+static const union AffineAnimCmd gUnknown_83D36FC[] = {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_83D370C[] = {
+static const union AffineAnimCmd *const gUnknown_83D370C[] = {
     gUnknown_83D3664,
     gUnknown_83D3674,
     gUnknown_83D368C,
@@ -98,7 +98,7 @@ const union AffineAnimCmd *const gUnknown_83D370C[] = {
     gUnknown_83D36FC
 };
 
-const struct SpriteTemplate gUnknown_83D3728 = {
+static const struct SpriteTemplate gUnknown_83D3728 = {
     .tileTag = TAG_TILE_7,
     .paletteTag = TAG_PAL_DACB,
     .oam = &gUnknown_83D365C,
@@ -126,16 +126,16 @@ void sub_8095B5C(void)
         {
             spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
-            sPSSData->field_2204[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
-            sPSSData->field_2204[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
-            sPSSData->field_2204[i].palIndex *= 16;
-            sPSSData->field_2204[i].palIndex += 0x100;
+            sPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
+            sPSSData->itemIconSprites[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
+            sPSSData->itemIconSprites[i].palIndex *= 16;
+            sPSSData->itemIconSprites[i].palIndex += 0x100;
             spriteTemplate.tileTag = TAG_TILE_7 + i;
             spriteTemplate.paletteTag = TAG_PAL_DACB + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
-            sPSSData->field_2204[i].sprite = &gSprites[spriteId];
-            sPSSData->field_2204[i].sprite->invisible = TRUE;
-            sPSSData->field_2204[i].unk10 = 0;
+            sPSSData->itemIconSprites[i].sprite = &gSprites[spriteId];
+            sPSSData->itemIconSprites[i].sprite->invisible = TRUE;
+            sPSSData->itemIconSprites[i].active = 0;
         }
     }
     sPSSData->movingItem = ITEM_NONE;
@@ -326,7 +326,7 @@ void sub_80960C0(void)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->field_2204[i].unk10 && sPSSData->field_2204[i].unk8 == 1)
+        if (sPSSData->itemIconSprites[i].active && sPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_IN_PARTY)
             sub_80964E8(i, 7, CURSOR_AREA_BOX, 0);
     }
 }
@@ -337,11 +337,11 @@ bool8 sub_809610C(void)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->field_2204[i].unk10)
+        if (sPSSData->itemIconSprites[i].active)
         {
-            if (!sPSSData->field_2204[i].sprite->affineAnimEnded && sPSSData->field_2204[i].sprite->affineAnimBeginning)
+            if (!sPSSData->itemIconSprites[i].sprite->affineAnimEnded && sPSSData->itemIconSprites[i].sprite->affineAnimBeginning)
                 return TRUE;
-            if (sPSSData->field_2204[i].sprite->callback != SpriteCallbackDummy && sPSSData->field_2204[i].sprite->callback != sub_80969BC)
+            if (sPSSData->itemIconSprites[i].sprite->callback != SpriteCallbackDummy && sPSSData->itemIconSprites[i].sprite->callback != sub_80969BC)
                 return TRUE;
         }
     }
@@ -357,7 +357,7 @@ bool8 IsActiveItemMoving(void)
     {
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
-            if (sPSSData->field_2204[i].unk10 && sPSSData->field_2204[i].unk8 == 2)
+            if (sPSSData->itemIconSprites[i].active && sPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_BOX)
                 return TRUE;
         }
     }
@@ -375,15 +375,15 @@ u16 GetMovingItem(void)
     return sPSSData->movingItem;
 }
 
-u8 sub_80961D8(void)
+static u8 sub_80961D8(void)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (!sPSSData->field_2204[i].unk10)
+        if (!sPSSData->itemIconSprites[i].active)
         {
-            sPSSData->field_2204[i].unk10 = TRUE;
+            sPSSData->itemIconSprites[i].active = TRUE;
             return i;
         }
     }
@@ -391,51 +391,51 @@ u8 sub_80961D8(void)
     return MAX_ITEM_ICONS;
 }
 
-bool32 sub_8096210(u8 cursorArea, u8 cursorPos)
+static bool32 sub_8096210(u8 cursorArea, u8 cursorPos)
 {
     s32 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->field_2204[i].unk10
-            && sPSSData->field_2204[i].unk8 == cursorArea
-            && sPSSData->field_2204[i].unk9 == cursorPos)
+        if (sPSSData->itemIconSprites[i].active
+            && sPSSData->itemIconSprites[i].cursorArea == cursorArea
+            && sPSSData->itemIconSprites[i].cursorPos == cursorPos)
             return TRUE;
     }
 
     return FALSE;
 }
 
-u8 sub_8096258(u8 cursorArea, u8 cursorPos)
+static u8 sub_8096258(u8 cursorArea, u8 cursorPos)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->field_2204[i].unk10
-            && sPSSData->field_2204[i].unk8 == cursorArea
-            && sPSSData->field_2204[i].unk9 == cursorPos)
+        if (sPSSData->itemIconSprites[i].active
+            && sPSSData->itemIconSprites[i].cursorArea == cursorArea
+            && sPSSData->itemIconSprites[i].cursorPos == cursorPos)
             return i;
     }
 
     return MAX_ITEM_ICONS;
 }
 
-u8 sub_80962A8(struct Sprite *sprite)
+static u8 sub_80962A8(struct Sprite *sprite)
 {
     u8 i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->field_2204[i].unk10
-            && sPSSData->field_2204[i].sprite == sprite)
+        if (sPSSData->itemIconSprites[i].active
+            && sPSSData->itemIconSprites[i].sprite == sprite)
             return i;
     }
 
     return MAX_ITEM_ICONS;
 }
 
-void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
+static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
 {
     u8 row, column;
 
@@ -447,30 +447,30 @@ void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
     case CURSOR_AREA_IN_BOX:
         row = cursorPos % IN_BOX_ROWS;
         column = cursorPos / IN_BOX_ROWS;
-        sPSSData->field_2204[id].sprite->pos1.x = (24 * row) + 112;
-        sPSSData->field_2204[id].sprite->pos1.y = (24 * column) + 56;
-        sPSSData->field_2204[id].sprite->oam.priority = 2;
+        sPSSData->itemIconSprites[id].sprite->pos1.x = (24 * row) + 112;
+        sPSSData->itemIconSprites[id].sprite->pos1.y = (24 * column) + 56;
+        sPSSData->itemIconSprites[id].sprite->oam.priority = 2;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPos == 0)
         {
-            sPSSData->field_2204[id].sprite->pos1.x = 116;
-            sPSSData->field_2204[id].sprite->pos1.y = 76;
+            sPSSData->itemIconSprites[id].sprite->pos1.x = 116;
+            sPSSData->itemIconSprites[id].sprite->pos1.y = 76;
         }
         else
         {
-            sPSSData->field_2204[id].sprite->pos1.x = 164;
-            sPSSData->field_2204[id].sprite->pos1.y = 24 * (cursorPos - 1) + 28;
+            sPSSData->itemIconSprites[id].sprite->pos1.x = 164;
+            sPSSData->itemIconSprites[id].sprite->pos1.y = 24 * (cursorPos - 1) + 28;
         }
-        sPSSData->field_2204[id].sprite->oam.priority = 1;
+        sPSSData->itemIconSprites[id].sprite->oam.priority = 1;
         break;
     }
 
-    sPSSData->field_2204[id].unk8 = cursorArea;
-    sPSSData->field_2204[id].unk9 = cursorPos;
+    sPSSData->itemIconSprites[id].cursorArea = cursorArea;
+    sPSSData->itemIconSprites[id].cursorPos = cursorPos;
 }
 
-void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
+static void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
 {
     s32 i;
 
@@ -482,20 +482,20 @@ void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
     for (i = 0; i < 3; i++)
         CpuFastCopy(sPSSData->field_22C4 + (i * 0x60), sPSSData->field_42C4 + (i * 0x80), 0x60);
 
-    CpuFastCopy(sPSSData->field_42C4, sPSSData->field_2204[id].tiles, 0x200);
+    CpuFastCopy(sPSSData->field_42C4, sPSSData->itemIconSprites[id].tiles, 0x200);
     LZ77UnCompWram(itemPal, sPSSData->field_42C4);
-    LoadPalette(sPSSData->field_42C4, sPSSData->field_2204[id].palIndex, 0x20);
+    LoadPalette(sPSSData->field_42C4, sPSSData->itemIconSprites[id].palIndex, 0x20);
 }
 
-void sub_80964B8(u8 id, u8 animNum)
+static void sub_80964B8(u8 id, u8 animNum)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    StartSpriteAffineAnim(sPSSData->field_2204[id].sprite, animNum);
+    StartSpriteAffineAnim(sPSSData->itemIconSprites[id].sprite, animNum);
 }
 
-void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
+static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
@@ -503,52 +503,52 @@ void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
     switch (command)
     {
     case 0:
-        sPSSData->field_2204[id].sprite->data[0] = id;
-        sPSSData->field_2204[id].sprite->callback = sub_809692C;
+        sPSSData->itemIconSprites[id].sprite->data[0] = id;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_809692C;
         break;
     case 1:
-        sPSSData->field_2204[id].sprite->data[0] = 0;
-        sPSSData->field_2204[id].sprite->callback = sub_8096958;
+        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_8096958;
         break;
     case 2:
-        sPSSData->field_2204[id].sprite->data[0] = 0;
-        sPSSData->field_2204[id].sprite->data[6] = cursorArea;
-        sPSSData->field_2204[id].sprite->data[7] = cursorPos;
-        sPSSData->field_2204[id].sprite->callback = sub_80969F4;
+        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_80969F4;
         break;
     case 3:
-        sPSSData->field_2204[id].sprite->data[0] = 0;
-        sPSSData->field_2204[id].sprite->callback = sub_8096A74;
-        sPSSData->field_2204[id].sprite->data[6] = cursorArea;
-        sPSSData->field_2204[id].sprite->data[7] = cursorPos;
+        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_8096A74;
+        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
         break;
     case 4:
-        sPSSData->field_2204[id].sprite->data[0] = 0;
-        sPSSData->field_2204[id].sprite->data[6] = cursorArea;
-        sPSSData->field_2204[id].sprite->data[7] = cursorPos;
-        sPSSData->field_2204[id].sprite->callback = sub_8096B10;
+        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_8096B10;
         break;
     case 7:
-        sPSSData->field_2204[id].sprite->callback = sub_8096BAC;
+        sPSSData->itemIconSprites[id].sprite->callback = sub_8096BAC;
         break;
     }
 }
 
-void sub_8096624(u8 id, bool8 show)
+static void sub_8096624(u8 id, bool8 show)
 {
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    sPSSData->field_2204[id].unk10 = show;
-    sPSSData->field_2204[id].sprite->invisible = (show == FALSE);
+    sPSSData->itemIconSprites[id].active = show;
+    sPSSData->itemIconSprites[id].sprite->invisible = (show == FALSE);
 }
 
-const u32 *GetItemIconPic(u16 itemId)
+static const u32 *GetItemIconPic(u16 itemId)
 {
     return GetItemIconGfxPtr(itemId, 0);
 }
 
-const u32 *GetItemIconPalette(u16 itemId)
+static const u32 *GetItemIconPalette(u16 itemId)
 {
     return GetItemIconGfxPtr(itemId, 1);
 }
@@ -614,7 +614,7 @@ bool8 sub_80967C0(void)
     return (sPSSData->field_2236 != 25);
 }
 
-void sub_8096898(u32 x)
+static void sub_8096898(u32 x)
 {
     if (x != 0)
     {
@@ -627,7 +627,7 @@ void sub_8096898(u32 x)
     ScheduleBgCopyTilemapToVram(0);
 }
 
-void sub_809692C(struct Sprite *sprite)
+static void sub_809692C(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -636,7 +636,7 @@ void sub_809692C(struct Sprite *sprite)
     }
 }
 
-void sub_8096958(struct Sprite *sprite)
+static void sub_8096958(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -658,14 +658,14 @@ void sub_8096958(struct Sprite *sprite)
     }
 }
 
-void sub_80969BC(struct Sprite *sprite)
+static void sub_80969BC(struct Sprite *sprite)
 {
     sprite->pos1.x = sPSSData->field_CB4->pos1.x + 4;
     sprite->pos1.y = sPSSData->field_CB4->pos1.y + sPSSData->field_CB4->pos2.y + 8;
     sprite->oam.priority = sPSSData->field_CB4->oam.priority;
 }
 
-void sub_80969F4(struct Sprite *sprite)
+static void sub_80969F4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -690,7 +690,7 @@ void sub_80969F4(struct Sprite *sprite)
     }
 }
 
-void sub_8096A74(struct Sprite *sprite)
+static void sub_8096A74(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -717,7 +717,7 @@ void sub_8096A74(struct Sprite *sprite)
     }
 }
 
-void sub_8096B10(struct Sprite *sprite)
+static void sub_8096B10(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -744,7 +744,7 @@ void sub_8096B10(struct Sprite *sprite)
     }
 }
 
-void sub_8096BAC(struct Sprite *sprite)
+static void sub_8096BAC(struct Sprite *sprite)
 {
     sprite->pos1.y -= 8;
     if (sprite->pos1.y + sprite->pos2.y < -16)

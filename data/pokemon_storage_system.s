@@ -6,50 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83D34A0:: @ 83D34A0
-	obj_tiles gUnknown_83D2BEC, 0x0800, 0
-	obj_tiles gUnknown_83D33EC, 0x0080, 1
-	null_obj_tiles
-
-gUnknown_83D34B8:: @ 83D34B8
-	obj_pal gUnknown_83D2BCC, 56007
-	null_obj_pal
-
-gUnknown_83D34C8::
-	.4byte 0x80000000, 0x00000400
-
-gUnknown_83D34D0::
-	.4byte 0x40000000, 0x00000400
-
-gUnknown_83D34D8::
-	obj_image_anim_frame 0x0000, 30
-	obj_image_anim_frame 0x0010, 30
-	obj_image_anim_jump 0
-
-gUnknown_83D34E4::
-	obj_image_anim_frame 0x0000, 5
-	obj_image_anim_end
-
-gUnknown_83D34EC::
-	obj_image_anim_frame 0x0020, 5
-	obj_image_anim_end
-
-gUnknown_83D34F4::
-	obj_image_anim_frame 0x0030, 5
-	obj_image_anim_end
-
-gUnknown_83D34FC::
-	.4byte gUnknown_83D34D8
-	.4byte gUnknown_83D34E4
-	.4byte gUnknown_83D34EC
-	.4byte gUnknown_83D34F4
-
-gUnknown_83D350C:: @ 83D350C
-	spr_template 0, 56010, gUnknown_83D34C8, gUnknown_83D34FC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-gUnknown_83D3524:: @ 83D3524
-	spr_template 1, 56010, gUnknown_83D34D0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_8094AB8
-
 gUnknown_83D353C:: @ 83D353C
 	.4byte gUnknown_8418468
 	.4byte gUnknown_841846F

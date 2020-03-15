@@ -2616,10 +2616,10 @@ void ClearBottomWindow(void)
 void AddWallpaperSetsMenu(void)
 {
     InitMenu();
-    SetMenuText(18);
-    SetMenuText(19);
-    SetMenuText(20);
-    SetMenuText(21);
+    SetMenuText(PC_TEXT_SCENERY1);
+    SetMenuText(PC_TEXT_SCENERY2);
+    SetMenuText(PC_TEXT_SCENERY3);
+    SetMenuText(PC_TEXT_ETCETERA);
     AddMenu();
 }
 
@@ -2629,28 +2629,28 @@ void AddWallpapersMenu(u8 wallpaperSet)
     switch (wallpaperSet)
     {
     case 0:
-        SetMenuText(22);
-        SetMenuText(23);
-        SetMenuText(24);
-        SetMenuText(25);
+        SetMenuText(PC_TEXT_FOREST);
+        SetMenuText(PC_TEXT_CITY);
+        SetMenuText(PC_TEXT_DESERT);
+        SetMenuText(PC_TEXT_SAVANNA);
         break;
     case 1:
-        SetMenuText(26);
-        SetMenuText(27);
-        SetMenuText(28);
-        SetMenuText(29);
+        SetMenuText(PC_TEXT_CRAG);
+        SetMenuText(PC_TEXT_VOLCANO);
+        SetMenuText(PC_TEXT_SNOW);
+        SetMenuText(PC_TEXT_CAVE);
         break;
     case 2:
-        SetMenuText(30);
-        SetMenuText(31);
-        SetMenuText(32);
-        SetMenuText(33);
+        SetMenuText(PC_TEXT_BEACH);
+        SetMenuText(PC_TEXT_SEAFLOOR);
+        SetMenuText(PC_TEXT_RIVER);
+        SetMenuText(PC_TEXT_SKY);
         break;
     case 3:
-        SetMenuText(34);
-        SetMenuText(35);
-        SetMenuText(36);
-        SetMenuText(37);
+        SetMenuText(PC_TEXT_POLKADOT);
+        SetMenuText(PC_TEXT_POKECENTER);
+        SetMenuText(PC_TEXT_MACHINE);
+        SetMenuText(PC_TEXT_SIMPLE);
         break;
     }
     AddMenu();

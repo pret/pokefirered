@@ -2,10 +2,11 @@
 #include "gflib.h"
 #include "data.h"
 #include "item.h"
+#include "mail_data.h"
 #include "pokemon_storage_system_internal.h"
 #include "pokemon_summary_screen.h"
 #include "strings.h"
-#include "constants/species.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 
 EWRAM_DATA struct Pokemon gUnknown_20397BC = {};
@@ -39,12 +40,14 @@ u8 InBoxInput_GrabbingMultiple(void);
 u8 InBoxInput_MovingMultiple(void);
 void AddBoxMenu(void);
 bool8 sub_8094924(void);
+bool8 sub_809494C(void);
+bool8 sub_8094A0C(void);
 void sub_8094AD8(void);
 void sub_8094C84(void);
 
-const u16 gUnknown_83D2BCC[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
-const u16 gUnknown_83D2BEC[] = INCBIN_U16("graphics/interface/pss_unk_83D2BEC.4bpp");
-const u16 gUnknown_83D33EC[] = INCBIN_U16("graphics/interface/pss_unk_83D33EC.4bpp");
+const u16 gHandCursorPalette[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
+const u16 gHandCursorTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D2BEC.4bpp");
+const u16 gHandCursorShadowTiles[] = INCBIN_U16("graphics/interface/pss_unk_83D33EC.4bpp");
 
 void sub_80922C0(void)
 {
@@ -1720,14 +1723,13 @@ u8 HandleInput(void)
         u8 (*func)(void);
         s8 area;
     }
-    static const inputFuncs[] =
-        {
-            {HandleInput_InBox, CURSOR_AREA_IN_BOX},
-            {HandleInput_InParty, CURSOR_AREA_IN_PARTY},
-            {HandleInput_OnBox, CURSOR_AREA_BOX},
-            {HandleInput_OnButtons, CURSOR_AREA_BUTTONS},
-            {NULL, 0},
-        };
+    static const inputFuncs[] = {
+        {HandleInput_InBox, CURSOR_AREA_IN_BOX},
+        {HandleInput_InParty, CURSOR_AREA_IN_PARTY},
+        {HandleInput_OnBox, CURSOR_AREA_BOX},
+        {HandleInput_OnButtons, CURSOR_AREA_BUTTONS},
+        {NULL, 0},
+    };
 
     u16 i = 0;
     while (inputFuncs[i].func != NULL)
@@ -1738,4 +1740,297 @@ u8 HandleInput(void)
     }
 
     return 0;
+}
+
+void AddBoxMenu(void)
+{
+    InitMenu();
+    SetMenuText(PC_TEXT_JUMP);
+    SetMenuText(PC_TEXT_WALLPAPER);
+    SetMenuText(PC_TEXT_NAME);
+    SetMenuText(PC_TEXT_CANCEL);
+}
+
+bool8 sub_8094924(void)
+{
+    InitMenu();
+    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+        return sub_809494C();
+    else
+        return sub_8094A0C();
+}
+
+bool8 sub_809494C(void)
+{
+    u16 var0 = sub_8092458();
+
+    switch (sPSSData->boxOption)
+    {
+    case BOX_OPTION_DEPOSIT:
+        if (var0)
+            SetMenuText(PC_TEXT_STORE);
+        else
+            return FALSE;
+        break;
+    case BOX_OPTION_WITHDRAW:
+        if (var0)
+            SetMenuText(PC_TEXT_WITHDRAW);
+        else
+            return FALSE;
+        break;
+    case BOX_OPTION_MOVE_MONS:
+        if (sIsMonBeingMoved)
+        {
+            if (var0)
+                SetMenuText(PC_TEXT_SHIFT);
+            else
+                SetMenuText(PC_TEXT_PLACE);
+        }
+        else
+        {
+            if (var0)
+                SetMenuText(PC_TEXT_MOVE);
+            else
+                return FALSE;
+        }
+        break;
+    case BOX_OPTION_MOVE_ITEMS:
+    default:
+        return FALSE;
+    }
+
+    SetMenuText(PC_TEXT_SUMMARY);
+    if (sPSSData->boxOption == BOX_OPTION_MOVE_MONS)
+    {
+        if (!sBoxCursorArea)
+            SetMenuText(PC_TEXT_WITHDRAW);
+        else
+            SetMenuText(PC_TEXT_STORE);
+    }
+
+    SetMenuText(PC_TEXT_MARK);
+    SetMenuText(PC_TEXT_RELEASE);
+    SetMenuText(PC_TEXT_CANCEL);
+    return TRUE;
+}
+
+bool8 sub_8094A0C(void)
+{
+    if (sPSSData->cursorMonSpecies == SPECIES_EGG)
+        return FALSE;
+
+    if (!IsActiveItemMoving())
+    {
+        if (sPSSData->cursorMonItem == ITEM_NONE)
+        {
+            if (sPSSData->cursorMonSpecies == SPECIES_NONE)
+                return FALSE;
+
+            SetMenuText(PC_TEXT_GIVE2);
+        }
+        else
+        {
+            if (!ItemIsMail(sPSSData->cursorMonItem))
+            {
+                SetMenuText(PC_TEXT_TAKE);
+                SetMenuText(PC_TEXT_BAG);
+            }
+            SetMenuText(PC_TEXT_INFO);
+        }
+    }
+    else
+    {
+        if (sPSSData->cursorMonItem == ITEM_NONE)
+        {
+            if (sPSSData->cursorMonSpecies == SPECIES_NONE)
+                return FALSE;
+
+            SetMenuText(PC_TEXT_GIVE);
+        }
+        else
+        {
+            if (ItemIsMail(sPSSData->cursorMonItem) == TRUE)
+                return FALSE;
+
+            SetMenuText(PC_TEXT_SWITCH);
+        }
+    }
+
+    SetMenuText(PC_TEXT_CANCEL);
+    return TRUE;
+}
+
+void sub_8094AB8(struct Sprite *sprite)
+{
+    sprite->pos1.x = sPSSData->field_CB4->pos1.x;
+    sprite->pos1.y = sPSSData->field_CB4->pos1.y + 20;
+}
+
+void sub_8094AD8(void)
+{
+    u16 x, y;
+    u8 spriteId;
+    u8 priority, subpriority;
+    struct SpriteSheet spriteSheets[] = {
+        {gHandCursorTiles, 0x800, TAG_TILE_0},
+        {gHandCursorShadowTiles, 0x80, TAG_TILE_1},
+        {}
+    };
+
+    struct SpritePalette spritePalettes[] = {
+        {gHandCursorPalette, TAG_PAL_DAC7},
+        {}
+    };
+
+    static const struct OamData sOamData_857BA0C = {
+        .shape = SPRITE_SHAPE(32x32),
+        .size = SPRITE_SIZE(32x32),
+        .priority = 1,
+    };
+    static const struct OamData sOamData_857BA14 = {
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .priority = 1,
+    };
+
+    static const union AnimCmd sSpriteAnim_857BA1C[] = {
+        ANIMCMD_FRAME(0, 30),
+        ANIMCMD_FRAME(16, 30),
+        ANIMCMD_JUMP(0)
+    };
+    static const union AnimCmd sSpriteAnim_857BA28[] = {
+        ANIMCMD_FRAME(0, 5),
+        ANIMCMD_END
+    };
+    static const union AnimCmd sSpriteAnim_857BA30[] = {
+        ANIMCMD_FRAME(32, 5),
+        ANIMCMD_END
+    };
+    static const union AnimCmd sSpriteAnim_857BA38[] = {
+        ANIMCMD_FRAME(48, 5),
+        ANIMCMD_END
+    };
+
+    static const union AnimCmd *const sSpriteAnimTable_857BA40[] = {
+        sSpriteAnim_857BA1C,
+        sSpriteAnim_857BA28,
+        sSpriteAnim_857BA30,
+        sSpriteAnim_857BA38
+    };
+
+    static const struct SpriteTemplate gSpriteTemplate_857BA50 = {
+        .tileTag = TAG_TILE_0,
+        .paletteTag = TAG_PAL_WAVEFORM,
+        .oam = &sOamData_857BA0C,
+        .anims = sSpriteAnimTable_857BA40,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    static const struct SpriteTemplate gSpriteTemplate_857BA68 = {
+        .tileTag = TAG_TILE_1,
+        .paletteTag = TAG_PAL_WAVEFORM,
+        .oam = &sOamData_857BA14,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8094AB8,
+    };
+
+    LoadSpriteSheets(spriteSheets);
+    LoadSpritePalettes(spritePalettes);
+    sPSSData->field_CD8[0] = IndexOfSpritePaletteTag(TAG_PAL_WAVEFORM);
+    sPSSData->field_CD8[1] = IndexOfSpritePaletteTag(TAG_PAL_DAC7);
+
+    sub_8092398(sBoxCursorArea, sBoxCursorPosition, &x, &y);
+    spriteId = CreateSprite(&gSpriteTemplate_857BA50, x, y, 6);
+    if (spriteId != MAX_SPRITES)
+    {
+        sPSSData->field_CB4 = &gSprites[spriteId];
+        sPSSData->field_CB4->oam.paletteNum = sPSSData->field_CD8[sCanOnlyMove];
+        sPSSData->field_CB4->oam.priority = 1;
+        if (sIsMonBeingMoved)
+            StartSpriteAnim(sPSSData->field_CB4, 3);
+    }
+    else
+    {
+        sPSSData->field_CB4 = NULL;
+    }
+
+    if (sBoxCursorArea == CURSOR_AREA_IN_PARTY)
+    {
+        subpriority = 13;
+        priority = 1;
+    }
+    else
+    {
+        subpriority = 21;
+        priority = 2;
+    }
+
+    spriteId = CreateSprite(&gSpriteTemplate_857BA68, 0, 0, subpriority);
+    if (spriteId != MAX_SPRITES)
+    {
+        sPSSData->field_CB8 = &gSprites[spriteId];
+        sPSSData->field_CB8->oam.priority = priority;
+        if (sBoxCursorArea)
+            sPSSData->field_CB8->invisible = 1;
+    }
+    else
+    {
+        sPSSData->field_CB8 = NULL;
+    }
+}
+
+void sub_8094C84(void)
+{
+    sCanOnlyMove = !sCanOnlyMove;
+    sPSSData->field_CB4->oam.paletteNum = sPSSData->field_CD8[sCanOnlyMove];
+}
+
+u8 GetBoxCursorPosition(void)
+{
+    return sBoxCursorPosition;
+}
+
+void sub_8094CD4(u8 *arg0, u8 *arg1)
+{
+    if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
+    {
+        *arg0 = sBoxCursorPosition % IN_BOX_ROWS;
+        *arg1 = sBoxCursorPosition / IN_BOX_ROWS;
+    }
+    else
+    {
+        *arg0 = 0;
+        *arg1 = 0;
+    }
+}
+
+void sub_8094D14(u8 animNum)
+{
+    StartSpriteAnim(sPSSData->field_CB4, animNum);
+}
+
+u8 sub_8094D34(void)
+{
+    return sMovingMonOrigBoxId;
+}
+
+void sub_8094D40(void)
+{
+    sPSSData->field_CB4->oam.priority = 1;
+}
+
+void sub_8094D60(void)
+{
+    if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
+        sub_8095D44(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
+}
+
+void sub_8094D84(void)
+{
+    if (sBoxCursorArea == CURSOR_AREA_IN_BOX)
+        sub_8095C84(CURSOR_AREA_IN_BOX, sBoxCursorPosition);
 }

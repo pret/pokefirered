@@ -16,10 +16,8 @@
 // Define the game version for use elsewhere
 #if defined(FIRERED)
 #define GAME_VERSION VERSION_FIRE_RED
-#elif defined(LEAFGREEN)
+#else // Default version seems to be LeafGreen
 #define GAME_VERSION VERSION_LEAF_GREEN
-#else
-#error unknown version
 #endif
 
 // rev1 renamed the source folder for reasons

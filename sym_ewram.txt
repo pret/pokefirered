@@ -160,32 +160,10 @@ gUnknown_20386A8: @ 20386A8
 	.include "src/pokemon_storage_system_2.o"
 	.align 2
 	.include "src/pokemon_storage_system_3.o"
+	.align 2
+	.include "src/pokemon_storage_system_5.o"
 
 	.align 2
-gUnknown_20397BC: @ 20397BC
-	.space 0x64
-
-sBoxCursorArea: @ 2039820
-	.space 0x1
-
-sBoxCursorPosition: @ 2039821
-	.space 0x1
-
-sIsMonBeingMoved: @ 2039822
-	.space 0x1
-
-sMovingMonOrigBoxId: @ 2039823
-	.space 0x1
-
-sMovingMonOrigBoxPos: @ 2039824
-	.space 0x1
-
-sCanOnlyMove: @ 2039825
-	.space 0x1
-
-gUnknown_2039826: @ 2039826
-	.space 0x2
-
 gUnknown_2039828: @ 2039828
 	.space 0x4
 

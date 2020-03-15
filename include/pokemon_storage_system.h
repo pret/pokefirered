@@ -37,11 +37,5 @@ void Cb2_ReturnToPSS(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer);
-void SetCurrentBox(u8 boxId);
-void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
-struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
-
-void Cb2_EnterPSS(u8 a0);
-u8 GetCurrentBoxOption(void);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

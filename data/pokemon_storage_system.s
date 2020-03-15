@@ -6,20 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83D2BCC::
-	.incbin "graphics/interface/pss_unk_83D2BCC.gbapal"
-
-gUnknown_83D2BEC::
-	.incbin "graphics/interface/pss_unk_83D2BEC.4bpp"
-
-gUnknown_83D33EC::
-	.incbin "graphics/interface/pss_unk_83D33EC.4bpp"
-
-gUnknown_83D346C:: @ 83D346C
-	.4byte sub_8092C18
-	.4byte sub_8092CA4
-	.4byte sub_8092D20
-
 gUnknown_83D3478:: @ 83D3478
 	.4byte sub_8093F98
 	.byte 0

@@ -298,15 +298,15 @@ struct PokemonStorageSystemData
     /* 1e58 */ struct UnkPSSStruct_2002370 field_1E5C;
     /* 20a0 */ struct Pokemon movingMon;
     /* 2104 */ struct Pokemon field_2108;
-    /* 2168 */ s8 field_216C;
+    /* 2168 */ u8 field_216C;
     /* 2169 */ u8 field_216D;
+    /* 216c */ bool8 isSurfMon;
+    /* 216d */ bool8 isDiveMon;
     /* 216a */ s8 field_216E;
     /* 216b */ s8 field_216F;
-    /* 216c */ s8 field_2170;
-    /* 216d */ s8 field_2171;
-    /* 216e */ u8 field_2172;
-    /* 216f */ u8 field_2173;
-    /* 2170 */ u16 field_2174;
+    /* 216e */ s8 field_2170;
+    /* 216f */ s8 field_2171;
+    /* 2170 */ u16 field_2172;
     /* 2172 */ u16 field_2176[3];
     /* 2178 */ u8 field_2186;
     /* 2179 */ u8 field_2187;
@@ -340,6 +340,14 @@ struct PokemonStorageSystemData
 
 extern struct PokemonStorageSystemData *sPSSData;
 
+void Cb2_EnterPSS(u8 a0);
+u8 GetCurrentBoxOption(void);
+struct Sprite *sub_809223C(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority);
+void SetBoxWallpaper(u8 boxId, u8 wallpaperId);
+void SetCurrentBox(u8 boxId);
+void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
+void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src);
+
 void Cb2_ExitPSS(void);
 void sub_808C8FC(void);
 void sub_808C940(u8 curBox);
@@ -348,6 +356,7 @@ u8 HandleBoxChooseSelectionInput(void);
 void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
 u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
+u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst);
 
 void sub_80922C0(void);
 void sub_8092340(void);
@@ -433,5 +442,17 @@ bool8 sub_8091150(void);
 void sub_80913DC(u8 box);
 bool8 sub_809140C(void);
 void sub_80920FC(bool8 species);
+void CreateMovingMonIcon(void);
+void sub_8090E08(u8 boxId, u8 cursorPos);
+bool8 sub_8090E74(void);
+void sub_8090CC0(u8 cursorArea, u8 cursorPos);
+void sub_8090D58(u8 cursorArea, u8 cursorPos);
+void DestroyPartyMonIcon(u8 partyId);
+void DestroyMovingMonIcon(void);
+s16 GetFirstFreeBoxSpot(u8 boxId);
+void sub_80901EC(u8 boxPosition);
+void sub_8090FC4(u8 mode, u8 position);
+bool8 sub_8091084(void);
+void sub_80910CC(void);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

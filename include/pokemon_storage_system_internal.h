@@ -9,6 +9,8 @@
 
 #define MAX_MON_ICONS 40
 
+#define MAX_MENU_ITEMS 7
+
 enum
 {
     MODE_PARTY,
@@ -298,7 +300,7 @@ struct PokemonStorageSystemData
     /* 0c66 */ u8 field_C6A;
     /* 0c67 */ u8 field_C6B;
     /* 0c68 */ struct WindowTemplate menuWindow;
-    /* 0c70 */ struct StorageMenu menuItems[7];
+    /* 0c70 */ struct StorageMenu menuItems[MAX_MENU_ITEMS];
     /* 0ca8 */ u8 menuItemsCount;
     /* 0ca9 */ u8 menuWidth;
     /* 0caa */ u8 field_CAE;

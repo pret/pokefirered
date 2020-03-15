@@ -6,46 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83D353C:: @ 83D353C
-	.4byte gUnknown_8418468
-	.4byte gUnknown_841846F
-	.4byte gUnknown_8418475
-	.4byte gUnknown_8418484
-	.4byte gUnknown_841847E
-	.4byte gUnknown_8418489
-	.4byte gUnknown_841848F
-	.4byte gUnknown_8418497
-	.4byte gUnknown_841849F
-	.4byte gUnknown_84184A9
-	.4byte gUnknown_84184AE
-	.4byte gUnknown_84184A4
-	.4byte gUnknown_84184B8
-	.4byte gUnknown_84184BD
-	.4byte gUnknown_84184BD
-	.4byte gUnknown_84184C2
-	.4byte gUnknown_84184C9
-	.4byte gUnknown_84184CD
-	.4byte gUnknown_84184D2
-	.4byte gUnknown_84184DC
-	.4byte gUnknown_84184E6
-	.4byte gUnknown_84184F0
-	.4byte gUnknown_84184F9
-	.4byte gUnknown_8418500
-	.4byte gUnknown_8418505
-	.4byte gUnknown_841850C
-	.4byte gUnknown_8418514
-	.4byte gUnknown_8418519
-	.4byte gUnknown_8418521
-	.4byte gUnknown_8418526
-	.4byte gUnknown_841852B
-	.4byte gUnknown_8418531
-	.4byte gUnknown_841853A
-	.4byte gUnknown_8418540
-	.4byte gUnknown_8418544
-	.4byte gUnknown_841854A
-	.4byte gUnknown_8418555
-	.4byte gUnknown_841855B
-
 gUnknown_83D35D4:: @ 83D35D4
 	.byte 0, 10, 3, 20, 18, 9
 	.2byte 0x000a

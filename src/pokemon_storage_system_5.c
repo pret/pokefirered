@@ -1241,21 +1241,21 @@ u8 InBoxInput_Normal(void)
             {
                 switch (sub_8094E50(0))
                 {
-                case 1:
+                case PC_TEXT_STORE:
                     return 11;
-                case 2:
+                case PC_TEXT_WITHDRAW:
                     return 12;
-                case 3:
+                case PC_TEXT_MOVE:
                     return 13;
-                case 4:
+                case PC_TEXT_SHIFT:
                     return 14;
-                case 5:
+                case PC_TEXT_PLACE:
                     return 15;
-                case 12:
+                case PC_TEXT_TAKE:
                     return 16;
-                case 13:
+                case PC_TEXT_GIVE:
                     return 17;
-                case 15:
+                case PC_TEXT_SWITCH:
                     return 18;
                 }
             }
@@ -1521,21 +1521,21 @@ u8 HandleInput_InParty(void)
 
                 switch (sub_8094E50(0))
                 {
-                case 1:
+                case PC_TEXT_STORE:
                     return 11;
-                case 2:
+                case PC_TEXT_WITHDRAW:
                     return 12;
-                case 3:
+                case PC_TEXT_MOVE:
                     return 13;
-                case 4:
+                case PC_TEXT_SHIFT:
                     return 14;
-                case 5:
+                case PC_TEXT_PLACE:
                     return 15;
-                case 12:
+                case PC_TEXT_TAKE:
                     return 16;
-                case 13:
+                case PC_TEXT_GIVE:
                     return 17;
-                case 15:
+                case PC_TEXT_SWITCH:
                     return 18;
                 }
             }

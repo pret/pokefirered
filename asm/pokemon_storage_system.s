@@ -5,245 +5,6 @@
 
 	.text
 
-	@ file boundary?
-
-	thumb_func_start InitMenu
-InitMenu: @ 8094DA8
-	ldr r2, _08094DDC @ =sPSSData
-	ldr r0, [r2]
-	ldr r1, _08094DE0 @ =0x00000ca8
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r3, _08094DE4 @ =0x00000ca9
-	adds r0, r3
-	strb r1, [r0]
-	ldr r0, [r2]
-	subs r3, 0x41
-	adds r0, r3
-	strb r1, [r0]
-	ldr r0, [r2]
-	ldr r1, _08094DE8 @ =0x00000c6d
-	adds r0, r1
-	movs r1, 0xF
-	strb r1, [r0]
-	ldr r0, [r2]
-	adds r3, 0x6
-	adds r0, r3
-	movs r1, 0x5C
-	strh r1, [r0]
-	bx lr
-	.align 2, 0
-_08094DDC: .4byte sPSSData
-_08094DE0: .4byte 0x00000ca8
-_08094DE4: .4byte 0x00000ca9
-_08094DE8: .4byte 0x00000c6d
-	thumb_func_end InitMenu
-
-	thumb_func_start SetMenuText
-SetMenuText: @ 8094DEC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r4, _08094E40 @ =sPSSData
-	ldr r2, [r4]
-	ldr r5, _08094E44 @ =0x00000ca8
-	adds r1, r2, r5
-	ldrb r0, [r1]
-	cmp r0, 0x6
-	bhi _08094E38
-	adds r1, r0, 0
-	lsls r1, 3
-	movs r0, 0xC7
-	lsls r0, 4
-	adds r1, r0
-	adds r1, r2, r1
-	ldr r2, _08094E48 @ =gUnknown_83D353C
-	lsls r0, r3, 2
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r1]
-	str r3, [r1, 0x4]
-	bl StringLength
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, [r4]
-	ldr r2, _08094E4C @ =0x00000ca9
-	adds r0, r2
-	ldrb r2, [r0]
-	cmp r1, r2
-	bls _08094E2E
-	strb r1, [r0]
-_08094E2E:
-	ldr r1, [r4]
-	adds r1, r5
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_08094E38:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08094E40: .4byte sPSSData
-_08094E44: .4byte 0x00000ca8
-_08094E48: .4byte gUnknown_83D353C
-_08094E4C: .4byte 0x00000ca9
-	thumb_func_end SetMenuText
-
-	thumb_func_start sub_8094E50
-sub_8094E50: @ 8094E50
-	push {lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, _08094E74 @ =sPSSData
-	ldr r1, [r0]
-	ldr r3, _08094E78 @ =0x00000ca8
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	cmp r2, r0
-	bcs _08094E80
-	lsls r0, r2, 3
-	ldr r2, _08094E7C @ =0x00000c74
-	adds r1, r2
-	adds r1, r0
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	b _08094E84
-	.align 2, 0
-_08094E74: .4byte sPSSData
-_08094E78: .4byte 0x00000ca8
-_08094E7C: .4byte 0x00000c74
-_08094E80:
-	movs r0, 0x1
-	negs r0, r0
-_08094E84:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8094E50
-
-	thumb_func_start AddMenu
-AddMenu: @ 8094E88
-	push {r4-r6,lr}
-	mov r6, r10
-	mov r5, r9
-	mov r4, r8
-	push {r4-r6}
-	sub sp, 0xC
-	ldr r5, _08094F6C @ =sPSSData
-	ldr r1, [r5]
-	ldr r2, _08094F70 @ =0x00000ca9
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	adds r0, 0x2
-	subs r2, 0x3E
-	adds r1, r2
-	movs r3, 0
-	mov r10, r3
-	strb r0, [r1]
-	ldr r1, [r5]
-	ldr r0, _08094F74 @ =0x00000ca8
-	mov r8, r0
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	lsls r0, 1
-	ldr r3, _08094F78 @ =0x00000c6c
-	adds r1, r3
-	strb r0, [r1]
-	ldr r1, [r5]
-	adds r2, r1, r2
-	ldrb r2, [r2]
-	movs r0, 0x1D
-	subs r0, r2
-	ldr r2, _08094F7C @ =0x00000c69
-	adds r1, r2
-	strb r0, [r1]
-	ldr r1, [r5]
-	adds r3, r1, r3
-	ldrb r2, [r3]
-	movs r0, 0xF
-	subs r0, r2
-	ldr r3, _08094F80 @ =0x00000c6a
-	adds r1, r3
-	strb r0, [r1]
-	ldr r0, [r5]
-	ldr r1, _08094F84 @ =0x00000c68
-	adds r0, r1
-	bl AddWindow
-	ldr r1, [r5]
-	ldr r4, _08094F88 @ =0x00000cac
-	adds r1, r4
-	movs r2, 0
-	mov r9, r2
-	strh r0, [r1]
-	lsls r0, 24
-	lsrs r0, 24
-	bl ClearWindowTilemap
-	ldr r0, [r5]
-	adds r0, r4
-	ldrb r0, [r0]
-	movs r1, 0
-	movs r2, 0xB
-	movs r3, 0xE
-	bl DrawStdFrameWithCustomTileAndPalette
-	ldr r2, [r5]
-	adds r0, r2, r4
-	ldrb r0, [r0]
-	movs r6, 0x10
-	str r6, [sp]
-	mov r3, r8
-	adds r1, r2, r3
-	ldrb r1, [r1]
-	str r1, [sp, 0x4]
-	movs r1, 0xC7
-	lsls r1, 4
-	adds r2, r1
-	str r2, [sp, 0x8]
-	movs r1, 0x1
-	movs r2, 0x8
-	movs r3, 0x2
-	bl PrintTextArray
-	ldr r1, [r5]
-	adds r4, r1, r4
-	ldrb r0, [r4]
-	str r6, [sp]
-	add r1, r8
-	ldrb r1, [r1]
-	str r1, [sp, 0x4]
-	mov r2, r10
-	str r2, [sp, 0x8]
-	movs r1, 0x1
-	movs r2, 0
-	movs r3, 0x2
-	bl Menu_InitCursor
-	movs r0, 0
-	bl ScheduleBgCopyTilemapToVram
-	ldr r0, [r5]
-	ldr r3, _08094F8C @ =0x00000caa
-	adds r0, r3
-	mov r1, r9
-	strb r1, [r0]
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08094F6C: .4byte sPSSData
-_08094F70: .4byte 0x00000ca9
-_08094F74: .4byte 0x00000ca8
-_08094F78: .4byte 0x00000c6c
-_08094F7C: .4byte 0x00000c69
-_08094F80: .4byte 0x00000c6a
-_08094F84: .4byte 0x00000c68
-_08094F88: .4byte 0x00000cac
-_08094F8C: .4byte 0x00000caa
-	thumb_func_end AddMenu
-
 	thumb_func_start sub_8094F90
 sub_8094F90: @ 8094F90
 	movs r0, 0
@@ -344,6 +105,8 @@ sub_8095024: @ 8095024
 _08095048: .4byte sPSSData
 _0809504C: .4byte 0x00000cac
 	thumb_func_end sub_8095024
+
+	@ file boundary?
 
 	thumb_func_start sub_8095050
 sub_8095050: @ 8095050
@@ -1821,6 +1584,8 @@ _08095B4C:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8095ABC
+
+	@ file boundary?
 
 	thumb_func_start sub_8095B5C
 sub_8095B5C: @ 8095B5C
@@ -3976,6 +3741,8 @@ _08096BDC:
 	.align 2, 0
 _08096BE0: .4byte SpriteCallbackDummy
 	thumb_func_end sub_8096BAC
+
+	@ file boundary?
 
 	thumb_func_start sub_8096BE4
 sub_8096BE4: @ 8096BE4

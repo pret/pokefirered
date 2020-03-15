@@ -460,7 +460,7 @@ u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr)
     return GetBehaviorByMetatileIdAndMapLayout(gMapHeader.mapLayout, metatileId, attr);
 }
 
-u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
+u32 MapGridGetMetatileBehaviorAt(s16 x, s16 y)
 {
     return MapGridGetMetatileAttributeAt(x, y, 0);
 }

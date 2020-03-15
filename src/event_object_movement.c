@@ -7432,7 +7432,7 @@ static void sub_8067A10(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     x2 = graphicsInfo->width + (s16)x;
     y2 = graphicsInfo->height + (s16)y;
     
-    if (*((u16 *)(&gSaveBlock1Ptr->location.mapGroup)) == 1025 && objectEvent->localId == 1)
+    if (gSaveBlock1Ptr->location.mapGroup == 1 && gSaveBlock1Ptr->location.mapNum == 4 && objectEvent->localId == 1)
     {
         var = 65504;
     }
@@ -7693,18 +7693,18 @@ static void GetGroundEffectFlags_JumpLanding(struct ObjectEvent *objEvent, u32 *
     }
 }
 
-#ifdef NONMATCHING
 static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
 {
     const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(objEvent->graphicsId);
 
     // ceil div by tile width?
-    s16 width;
-    s16 height;
+    s16 width = 1;
+    s16 height = 2;
     s16 i;
     s16 j;
     u8 result;
     u8 b;
+    s16 one;
 
 #define RETURN_REFLECTION_TYPE_AT(x, y)              \
     b = MapGridGetMetatileBehaviorAt(x, y);          \
@@ -7712,182 +7712,22 @@ static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
     if (result != 0)                                 \
         return result;
 
-    for (i = 0, height = 1; i < height && height < 2;)
+    for (i = 0, one = 1; i < height; i++)
     {
-        RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, (u16) (objEvent->currentCoords.y + 1 + i))
-        RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x, (u16) (objEvent->previousCoords.y + 1 + i))
-        for (j = 1; j < width && width < 2; j++)
+        RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x, objEvent->currentCoords.y + one + i)
+        RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x, objEvent->previousCoords.y + one + i)
+        for (j = 1; j < width; j++)
         {
-            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x + j, objEvent->currentCoords.y + 1 + i)
-            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x - j, objEvent->currentCoords.y + 1 + i)
-            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x + j, objEvent->previousCoords.y + 1 + i)
-            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x - j, objEvent->previousCoords.y + 1 + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x + j, objEvent->currentCoords.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->currentCoords.x - j, objEvent->currentCoords.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x + j, objEvent->previousCoords.y + one + i)
+            RETURN_REFLECTION_TYPE_AT(objEvent->previousCoords.x - j, objEvent->previousCoords.y + one + i)
         }
     }
     return 0;
 
 #undef RETURN_REFLECTION_TYPE_AT
 }
-#else
-NAKED
-static u8 ObjectEventCheckForReflectiveSurface(struct ObjectEvent *objEvent)
-{
-    asm_unified("\n\
-    	push {r4-r7,lr}                          \n\
-        mov r7, r10                              \n\
-        mov r6, r9                               \n\
-        mov r5, r8                               \n\
-        push {r5-r7}                             \n\
-        adds r5, r0, 0                           \n\
-        ldrb r0, [r5, 0x5]                       \n\
-        bl GetObjectEventGraphicsInfo            \n\
-        movs r4, 0                               \n\
-        movs r0, 0x1                             \n\
-        mov r10, r0                              \n\
-    _08067FA0:                                   \n\
-        movs r1, 0x10                            \n\
-        ldrsh r0, [r5, r1]                       \n\
-        ldrh r1, [r5, 0x12]                      \n\
-        add r1, r10                              \n\
-        lsls r4, 16                              \n\
-        asrs r6, r4, 16                          \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        mov r9, r4                               \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        movs r3, 0x14                            \n\
-        ldrsh r0, [r5, r3]                       \n\
-        ldrh r1, [r5, 0x16]                      \n\
-        add r1, r10                              \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        movs r2, 0x1                             \n\
-        lsls r0, r2, 16                          \n\
-        asrs r1, r0, 16                          \n\
-        mov r8, r0                               \n\
-        cmp r2, r1                               \n\
-        bge _080680A8                            \n\
-        movs r0, 0x80                            \n\
-        lsls r0, 9                               \n\
-        asrs r7, r0, 16                          \n\
-    _08067FFC:                                   \n\
-        ldrh r0, [r5, 0x10]                      \n\
-        lsls r1, r2, 16                          \n\
-        asrs r4, r1, 16                          \n\
-        adds r0, r4, r0                          \n\
-        lsls r0, 16                              \n\
-        asrs r0, 16                              \n\
-        ldrh r1, [r5, 0x12]                      \n\
-        adds r1, r7, r1                          \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        ldrh r0, [r5, 0x10]                      \n\
-        subs r0, r4                              \n\
-        lsls r0, 16                              \n\
-        asrs r0, 16                              \n\
-        ldrh r1, [r5, 0x12]                      \n\
-        adds r1, r7, r1                          \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        ldrh r0, [r5, 0x14]                      \n\
-        adds r0, r4, r0                          \n\
-        lsls r0, 16                              \n\
-        asrs r0, 16                              \n\
-        ldrh r1, [r5, 0x16]                      \n\
-        adds r1, r7, r1                          \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        ldrh r0, [r5, 0x14]                      \n\
-        subs r0, r4                              \n\
-        lsls r0, 16                              \n\
-        asrs r0, 16                              \n\
-        ldrh r1, [r5, 0x16]                      \n\
-        adds r1, r7, r1                          \n\
-        adds r1, r6, r1                          \n\
-        lsls r1, 16                              \n\
-        asrs r1, 16                              \n\
-        bl MapGridGetMetatileBehaviorAt          \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        bl GetReflectionTypeByMetatileBehavior   \n\
-        lsls r0, 24                              \n\
-        lsrs r0, 24                              \n\
-        cmp r0, 0                                \n\
-        bne _080680BA                            \n\
-        adds r0, r4, 0x1                         \n\
-        lsls r0, 16                              \n\
-        lsrs r2, r0, 16                          \n\
-        asrs r0, 16                              \n\
-        mov r3, r8                               \n\
-        asrs r1, r3, 16                          \n\
-        cmp r0, r1                               \n\
-        blt _08067FFC                            \n\
-    _080680A8:                                   \n\
-        movs r0, 0x80                            \n\
-        lsls r0, 9                               \n\
-        add r0, r9                               \n\
-        lsrs r4, r0, 16                          \n\
-        asrs r0, 16                              \n\
-        cmp r0, 0x2                              \n\
-        bge _080680B8                            \n\
-        b _08067FA0                              \n\
-    _080680B8:                                   \n\
-        movs r0, 0                               \n\
-    _080680BA:                                   \n\
-        pop {r3-r5}                              \n\
-        mov r8, r3                               \n\
-        mov r9, r4                               \n\
-        mov r10, r5                              \n\
-        pop {r4-r7}                              \n\
-        pop {r1}                                 \n\
-        bx r1                                    \n\
-    ");
-}
-#endif
 
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {

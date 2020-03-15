@@ -15,7 +15,7 @@ extern struct BackupMapLayout gBackupMapLayout;
 extern const struct MapLayout Route1_Layout;
 
 u32 MapGridGetMetatileIdAt(int, int);
-u32 MapGridGetMetatileBehaviorAt(int, int);
+u32 MapGridGetMetatileBehaviorAt(s16, s16);
 u8 MapGridGetMetatileLayerTypeAt(s16 x, s16 y);
 void MapGridSetMetatileIdAt(int, int, u16);
 void MapGridSetMetatileEntryAt(int, int, u16);

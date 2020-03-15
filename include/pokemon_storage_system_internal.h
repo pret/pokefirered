@@ -457,4 +457,10 @@ void sub_80910CC(void);
 u8 CountPartyMons(void);
 u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);
 
+s8 sub_8094E50(u8 a0);
+bool8 sub_8095474(u8 action);
+u8 sub_8095AA0(void);
+bool8 sub_8095ABC(void);
+void sub_8095D44(u8 cursorArea, u8 cursorPos);
+
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

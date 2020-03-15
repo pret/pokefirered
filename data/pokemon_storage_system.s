@@ -6,23 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83D3478:: @ 83D3478
-	.4byte HandleInput_InBox
-	.byte 0
-	.align 2
-	.4byte sub_809448C
-	.byte 1
-	.align 2
-	.4byte sub_80946AC
-	.byte 2
-	.align 2
-	.4byte sub_80947A0
-	.byte 3
-	.align 2
-	.4byte NULL
-	.byte 0
-	.align 2
-
 gUnknown_83D34A0:: @ 83D34A0
 	obj_tiles gUnknown_83D2BEC, 0x0800, 0
 	obj_tiles gUnknown_83D33EC, 0x0080, 1

@@ -37,10 +37,9 @@ void sub_8093AAC(void);
 u8 InBoxInput_Normal(void);
 u8 InBoxInput_GrabbingMultiple(void);
 u8 InBoxInput_MovingMultiple(void);
-void sub_8094AD8(void);
-void sub_8095D44(u8 cursorArea, u8 cursorPos);
+void AddBoxMenu(void);
 bool8 sub_8094924(void);
-s8 sub_8094E50(u8 a0);
+void sub_8094AD8(void);
 void sub_8094C84(void);
 
 const u16 gUnknown_83D2BCC[] = INCBIN_U16("graphics/interface/pss_unk_83D2BCC.gbapal");
@@ -1289,4 +1288,454 @@ u8 InBoxInput_Normal(void)
         sub_80927E8(cursorArea, cursorPosition);
 
     return retVal;
+}
+
+u8 InBoxInput_GrabbingMultiple(void)
+{
+    if (JOY_HELD(A_BUTTON))
+    {
+        if (JOY_REPT(DPAD_UP))
+        {
+            if (sBoxCursorPosition / IN_BOX_ROWS != 0)
+            {
+                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
+                return 21;
+            }
+            else
+            {
+                return 24;
+            }
+        }
+        else if (JOY_REPT(DPAD_DOWN))
+        {
+            if (sBoxCursorPosition + IN_BOX_ROWS < IN_BOX_COUNT)
+            {
+                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
+                return 21;
+            }
+            else
+            {
+                return 24;
+            }
+        }
+        else if (JOY_REPT(DPAD_LEFT))
+        {
+            if (sBoxCursorPosition % IN_BOX_ROWS != 0)
+            {
+                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
+                return 21;
+            }
+            else
+            {
+                return 24;
+            }
+        }
+        else if (JOY_REPT(DPAD_RIGHT))
+        {
+            if ((sBoxCursorPosition + 1) % IN_BOX_ROWS != 0)
+            {
+                sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
+                return 21;
+            }
+            else
+            {
+                return 24;
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        if (sub_8095AA0() == sBoxCursorPosition)
+        {
+            sPSSData->inBoxMovingMode = 0;
+            sPSSData->field_CB8->invisible = FALSE;
+            return 22;
+        }
+        else
+        {
+            sIsMonBeingMoved = (sPSSData->cursorMonSpecies != SPECIES_NONE);
+            sPSSData->inBoxMovingMode = 2;
+            sMovingMonOrigBoxId = StorageGetCurrentBox();
+            return 23;
+        }
+    }
+}
+
+u8 InBoxInput_MovingMultiple(void)
+{
+    if (JOY_REPT(DPAD_UP))
+    {
+        if (sub_8095474(0))
+        {
+            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - IN_BOX_ROWS);
+            return 25;
+        }
+        else
+        {
+            return 24;
+        }
+    }
+    else if (JOY_REPT(DPAD_DOWN))
+    {
+        if (sub_8095474(1))
+        {
+            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + IN_BOX_ROWS);
+            return 25;
+        }
+        else
+        {
+            return 24;
+        }
+    }
+    else if (JOY_REPT(DPAD_LEFT))
+    {
+        if (sub_8095474(2))
+        {
+            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition - 1);
+            return 25;
+        }
+        else
+        {
+            return 10;
+        }
+    }
+    else if (JOY_REPT(DPAD_RIGHT))
+    {
+        if (sub_8095474(3))
+        {
+            sub_80927E8(CURSOR_AREA_IN_BOX, sBoxCursorPosition + 1);
+            return 25;
+        }
+        else
+        {
+            return 9;
+        }
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        if (sub_8095ABC())
+        {
+            sIsMonBeingMoved = FALSE;
+            sPSSData->inBoxMovingMode = 0;
+            return 26;
+        }
+        else
+        {
+            return 24;
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        return 24;
+    }
+    else
+    {
+        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        {
+            if (JOY_HELD(L_BUTTON))
+                return 10;
+            if (JOY_HELD(R_BUTTON))
+                return 9;
+        }
+
+        return 0;
+    }
+}
+
+u8 HandleInput_InParty(void)
+{
+    u8 retVal;
+    bool8 gotoBox;
+    s8 cursorArea;
+    s8 cursorPosition;
+
+    do
+    {
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+        gotoBox = FALSE;
+        retVal = 0;
+
+        if (JOY_REPT(DPAD_UP))
+        {
+            if (--cursorPosition < 0)
+                cursorPosition = PARTY_SIZE;
+            if (cursorPosition != sBoxCursorPosition)
+                retVal = 1;
+            break;
+        }
+        else if (JOY_REPT(DPAD_DOWN))
+        {
+            if (++cursorPosition > PARTY_SIZE)
+                cursorPosition = 0;
+            if (cursorPosition != sBoxCursorPosition)
+                retVal = 1;
+            break;
+        }
+        else if (JOY_REPT(DPAD_LEFT) && sBoxCursorPosition != 0)
+        {
+            retVal = 1;
+            sPSSData->field_CD6 = sBoxCursorPosition;
+            cursorPosition = 0;
+            break;
+        }
+        else if (JOY_REPT(DPAD_RIGHT))
+        {
+            if (sBoxCursorPosition == 0)
+            {
+                retVal = 1;
+                cursorPosition = sPSSData->field_CD6;
+            }
+            else
+            {
+                retVal = 6;
+                cursorArea = CURSOR_AREA_IN_BOX;
+                cursorPosition = 0;
+            }
+            break;
+        }
+
+        if (JOY_NEW(A_BUTTON))
+        {
+            if (sBoxCursorPosition == PARTY_SIZE)
+            {
+                if (sPSSData->boxOption == BOX_OPTION_DEPOSIT)
+                    return 4;
+
+                gotoBox = TRUE;
+            }
+            else if (sub_8094924())
+            {
+                if (!sCanOnlyMove)
+                    return 8;
+
+                switch (sub_8094E50(0))
+                {
+                case 1:
+                    return 11;
+                case 2:
+                    return 12;
+                case 3:
+                    return 13;
+                case 4:
+                    return 14;
+                case 5:
+                    return 15;
+                case 12:
+                    return 16;
+                case 13:
+                    return 17;
+                case 15:
+                    return 18;
+                }
+            }
+        }
+
+        if (JOY_NEW(B_BUTTON))
+        {
+            if (sPSSData->boxOption == BOX_OPTION_DEPOSIT)
+                return 19;
+
+            gotoBox = TRUE;
+        }
+
+        if (gotoBox)
+        {
+            retVal = 6;
+            cursorArea = CURSOR_AREA_IN_BOX;
+            cursorPosition = 0;
+        }
+        else if (JOY_NEW(SELECT_BUTTON))
+        {
+            sub_8094C84();
+            return 0;
+        }
+
+    } while (0);
+
+    if (retVal != 0)
+    {
+        if (retVal != 6)
+            sub_80927E8(cursorArea, cursorPosition);
+    }
+
+    return retVal;
+}
+
+u8 HandleInput_OnBox(void)
+{
+    u8 retVal;
+    s8 cursorArea;
+    s8 cursorPosition;
+
+    do
+    {
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+
+        if (JOY_REPT(DPAD_UP))
+        {
+            retVal = 1;
+            cursorArea = CURSOR_AREA_BUTTONS;
+            cursorPosition = 0;
+            sPSSData->field_CD7 = 1;
+            break;
+        }
+        else if (JOY_REPT(DPAD_DOWN))
+        {
+            retVal = 1;
+            cursorArea = CURSOR_AREA_IN_BOX;
+            cursorPosition = 2;
+            break;
+        }
+
+        if (JOY_HELD(DPAD_LEFT))
+            return 10;
+        if (JOY_HELD(DPAD_RIGHT))
+            return 9;
+
+        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
+        {
+            if (JOY_HELD(L_BUTTON))
+                return 10;
+            if (JOY_HELD(R_BUTTON))
+                return 9;
+        }
+
+        if (JOY_NEW(A_BUTTON))
+        {
+            sub_80920FC(FALSE);
+            AddBoxMenu();
+            return 7;
+        }
+
+        if (JOY_NEW(B_BUTTON))
+            return 19;
+
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            sub_8094C84();
+            return 0;
+        }
+
+        retVal = 0;
+
+    } while (0);
+
+    if (retVal)
+    {
+        if (cursorArea != CURSOR_AREA_BOX)
+            sub_80920FC(FALSE);
+        sub_80927E8(cursorArea, cursorPosition);
+    }
+
+    return retVal;
+}
+
+u8 HandleInput_OnButtons(void)
+{
+    u8 retVal;
+    s8 cursorArea;
+    s8 cursorPosition;
+    s8 prevPos;
+
+    do
+    {
+        cursorArea = sBoxCursorArea;
+        cursorPosition = sBoxCursorPosition;
+        sPSSData->field_CD3 = 0;
+        sPSSData->field_CD2 = 0;
+        sPSSData->field_CD7 = 0;
+
+        if (JOY_REPT(DPAD_UP))
+        {
+            retVal = 1;
+            cursorArea = CURSOR_AREA_IN_BOX;
+            sPSSData->field_CD2 = -1;
+            if (sBoxCursorPosition == 0)
+                cursorPosition = IN_BOX_COUNT - 1 - 5;
+            else
+                cursorPosition = IN_BOX_COUNT - 1;
+            sPSSData->field_CD7 = 1;
+            break;
+        }
+        else if (JOY_REPT(DPAD_DOWN | START_BUTTON))
+        {
+            retVal = 1;
+            cursorArea = CURSOR_AREA_BOX;
+            cursorPosition = 0;
+            sPSSData->field_CD7 = 1;
+            break;
+        }
+
+        if (JOY_REPT(DPAD_LEFT))
+        {
+            retVal = 1;
+            if (--cursorPosition < 0)
+                cursorPosition = 1;
+            break;
+        }
+        else if (JOY_REPT(DPAD_RIGHT))
+        {
+            retVal = 1;
+            if (++cursorPosition > 1)
+                cursorPosition = 0;
+            break;
+        }
+
+        if (JOY_NEW(A_BUTTON))
+        {
+            return cursorPosition == 0 ? 5 : 4;
+        }
+        if (JOY_NEW(B_BUTTON))
+            return 19;
+
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            sub_8094C84();
+            return 0;
+        }
+
+        retVal = 0;
+    } while (0);
+
+    if (retVal != 0)
+        sub_80927E8(cursorArea, cursorPosition);
+
+    return retVal;
+}
+
+u8 HandleInput(void)
+{
+    struct
+    {
+        u8 (*func)(void);
+        s8 area;
+    }
+    static const inputFuncs[] =
+        {
+            {HandleInput_InBox, CURSOR_AREA_IN_BOX},
+            {HandleInput_InParty, CURSOR_AREA_IN_PARTY},
+            {HandleInput_OnBox, CURSOR_AREA_BOX},
+            {HandleInput_OnButtons, CURSOR_AREA_BUTTONS},
+            {NULL, 0},
+        };
+
+    u16 i = 0;
+    while (inputFuncs[i].func != NULL)
+    {
+        if (inputFuncs[i].area == sBoxCursorArea)
+            return inputFuncs[i].func();
+        i++;
+    }
+
+    return 0;
 }

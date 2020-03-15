@@ -6,10 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_83D35D4:: @ 83D35D4
-	.byte 0, 10, 3, 20, 18, 9
-	.2byte 0x000a
-
 gUnknown_83D35DC:: @ 83D35DC
 	.incbin "graphics/interface/pss_unk_83D35DC.4bpp"
 

@@ -506,5 +506,9 @@ bool8 sub_8095474(u8 action);
 u8 sub_8095AA0(void);
 bool8 sub_8095ABC(void);
 void sub_8095D44(u8 cursorArea, u8 cursorPos);
+void sub_8094CD4(u8 *arg0, u8 *arg1);
+void sub_8094D40(void);
+void sub_8092BAC(bool8 arg0);
+void DestroyBoxMonIconAtPosition(u8 boxPosition);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

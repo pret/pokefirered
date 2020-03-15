@@ -162,11 +162,10 @@ gUnknown_20386A8: @ 20386A8
 	.include "src/pokemon_storage_system_3.o"
 	.align 2
 	.include "src/pokemon_storage_system_5.o"
+	.align 2
+	.include "src/pokemon_storage_system_7.o"
 
 	.align 2
-gUnknown_2039828: @ 2039828
-	.space 0x4
-
 gUnknown_203982C: @ 203982C
 	.space 0x4
 

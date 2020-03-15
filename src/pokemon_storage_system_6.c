@@ -4,6 +4,7 @@
 #include "new_menu_helpers.h"
 #include "pokemon_storage_system_internal.h"
 #include "strings.h"
+#include "constants/songs.h"
 
 void InitMenu(void)
 {
@@ -93,4 +94,54 @@ void AddMenu(void)
     Menu_InitCursor(sPSSData->field_CB0, 1, 0, 2, 16, sPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
     sPSSData->field_CAE = 0;
+}
+
+bool8 sub_8094F90(void)
+{
+    // Some debug flag?
+    return FALSE;
+}
+
+s16 sub_8094F94(void)
+{
+    s32 textId = -2;
+
+    do
+    {
+        if (JOY_NEW(A_BUTTON))
+        {
+            textId = Menu_GetCursorPos();
+            break;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            textId = -1;
+        }
+
+        if (JOY_NEW(DPAD_UP))
+        {
+            PlaySE(SE_SELECT);
+            Menu_MoveCursor(-1);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            PlaySE(SE_SELECT);
+            Menu_MoveCursor(1);
+        }
+    } while (0);
+
+    if (textId != -2)
+        sub_8095024();
+
+    if (textId >= 0)
+        textId = sPSSData->menuItems[textId].textId;
+
+    return textId;
+}
+
+void sub_8095024(void)
+{
+    ClearStdWindowAndFrameToTransparent(sPSSData->field_CB0, TRUE);
+    RemoveWindow(sPSSData->field_CB0);
 }

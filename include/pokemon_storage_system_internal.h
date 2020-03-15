@@ -8,7 +8,7 @@
 #define IN_BOX_ROWS    6
 
 #define MAX_MON_ICONS 40
-
+#define MAX_ITEM_ICONS 3
 #define MAX_MENU_ITEMS 7
 
 enum
@@ -366,7 +366,7 @@ struct PokemonStorageSystemData
     /* 21db */ u8 itemName[20];
     /* 21ef */ u8 inBoxMovingMode;
     /* 21f0 */ u16 field_2200;
-    /* 21f4 */ struct UnkStorageStruct field_2204[3];
+    /* 21f4 */ struct UnkStorageStruct field_2204[MAX_ITEM_ICONS];
     /* 2224 */ u16 movingItem;
     /* 2226 */ u16 field_2236;
     /* 2228 */ struct PssQuestLogBuffer qlogBuffer;
@@ -510,5 +510,7 @@ void sub_8094CD4(u8 *arg0, u8 *arg1);
 void sub_8094D40(void);
 void sub_8092BAC(bool8 arg0);
 void DestroyBoxMonIconAtPosition(u8 boxPosition);
+void SetBoxMonIconObjMode(u8 cursorPos, u8 objMode);
+void SetPartyMonIconObjMode(u8 cursorPos, u8 objMode);
 
 #endif //GUARD_POKEMON_STORAGE_SYSTEM_INTERNAL_H

@@ -135,6 +135,7 @@ SECTIONS {
         src/pokemon_storage_system_5.o(.text);
         src/pokemon_storage_system_6.o(.text);
         src/pokemon_storage_system_7.o(.text);
+        src/pokemon_storage_system_8.o(.text);
         asm/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
@@ -461,7 +462,7 @@ SECTIONS {
         src/pokemon_storage_system_5.o(.rodata);
         src/pokemon_storage_system_6.o(.rodata);
         src/pokemon_storage_system_7.o(.rodata);
-        data/pokemon_storage_system.o(.rodata);
+        src/pokemon_storage_system_8.o(.rodata);
         src/pokemon_icon.o(.rodata);
         src/fldeff_cut.o(.rodata);
         src/map_name_popup.o(.rodata);

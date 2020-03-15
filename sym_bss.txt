@@ -47,12 +47,8 @@ gUnknown_3000E89: @ 3000E89
 	.include "src/sound.o"
 	.align 2
 	.include "src/field_effect.o"
-
 	.align 2
-	@ .include "src/pokemon_storage_system.o"
-gUnknown_3000FE8: @ 3000FE8
-	.space 0x184
-
+	.include "src/pokemon_storage_system_8.o"
 	.align 2
 	.include "src/easy_chat.o"
 	.align 2

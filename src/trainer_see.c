@@ -154,7 +154,7 @@ static u8 GetTrainerApproachDistanceSouth(struct ObjectEvent *trainerObj, s16 ra
         && y > trainerObj->currentCoords.y
         && y <= trainerObj->currentCoords.y + range)
     {
-        if (range > 3 && GetIndexOfFirstInactiveObjectEvent() == OBJECT_EVENTS_COUNT)
+        if (range > 3 && GetFirstInactiveObjectEventId() == OBJECT_EVENTS_COUNT)
             return 0;
         return (y - trainerObj->currentCoords.y);
     }
@@ -315,9 +315,9 @@ static bool8 TrainerSeeFunc_WaitExclMark(u8 taskId, struct Task * task, struct O
     else
     {
         task->tFuncId++;
-        if (trainerObj->animPattern == MOVEMENT_TYPE_TREE_DISGUISE || trainerObj->animPattern == MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
+        if (trainerObj->movementType == MOVEMENT_TYPE_TREE_DISGUISE || trainerObj->movementType == MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
             task->tFuncId = 6;
-        if (trainerObj->animPattern == MOVEMENT_TYPE_HIDDEN)
+        if (trainerObj->movementType == MOVEMENT_TYPE_HIDDEN)
             task->tFuncId = 8;
         return TRUE;
     }
@@ -349,7 +349,7 @@ static bool8 TrainerSeeFunc_PrepareToEngage(u8 taskId, struct Task * task, struc
         return FALSE;
 
     SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-    TryOverrideTemplateCoordsForObjectEvent(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    OverrideMovementTypeForObjectEvent(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
     OverrideTemplateCoordsForObjectEvent(trainerObj);
 
     playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -468,7 +468,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveUp(u8 taskId, stru
 
     if (task->tData5 != task->tTrainerRange - 1)
     {
-        ObjectEventSetHeldMovement(&gObjectEvents[specialObjectId], sub_8063FB0(DIR_NORTH));
+        ObjectEventSetHeldMovement(&gObjectEvents[specialObjectId], GetWalkFastMovementAction(DIR_NORTH));
         task->tData5++;
     }
     else
@@ -494,7 +494,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown(u8 taskId, st
 
     if (task->tData5 != task->tTrainerRange - 1)
     {
-        ObjectEventSetHeldMovement(&gObjectEvents[specialObjectId], sub_8063FB0(DIR_SOUTH));
+        ObjectEventSetHeldMovement(&gObjectEvents[specialObjectId], GetWalkFastMovementAction(DIR_SOUTH));
         task->tData5++;
     }
     else
@@ -523,14 +523,14 @@ static void Task_RevealTrainer_RunTrainerSeeFuncList(u8 taskId)
     LoadWordFromTwoHalfwords((u16 *)&task->data[1], (uintptr_t *)&trainerObj);
     if (!task->data[7])
     {
-        ObjectEventClearAnim(trainerObj);
+        ObjectEventClearHeldMovement(trainerObj);
         task->data[7]++;
     }
     sTrainerSeeFuncList2[task->data[0]](taskId, task, trainerObj);
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
         SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-        TryOverrideTemplateCoordsForObjectEvent(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+        OverrideMovementTypeForObjectEvent(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
         DestroyTask(taskId);
     }
     else

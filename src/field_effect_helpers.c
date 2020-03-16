@@ -253,7 +253,7 @@ void UpdateShadowFieldEffect(struct Sprite * sprite)
         sprite->pos1.x = linkedSprite->pos1.x;
         sprite->pos1.y = linkedSprite->pos1.y + sprite->data[3];
         if (!objectEvent->active || !objectEvent->hasShadow
-         || MetatileBehavior_IsTallGrass(objectEvent->currentMetatileBehavior)
+         || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfable(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfable(objectEvent->previousMetatileBehavior)
          || MetatileBehavior_IsReflective(objectEvent->currentMetatileBehavior)

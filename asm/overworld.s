@@ -4637,11 +4637,11 @@ sub_8057024: @ 8057024
 	cmp r4, 0
 	bne _08057050
 	movs r0, 0
-	bl npc_paltag_set_load
+	bl InitObjectEventPalettes
 	b _08057056
 _08057050:
 	movs r0, 0x1
-	bl npc_paltag_set_load
+	bl InitObjectEventPalettes
 _08057056:
 	bl FieldEffectActiveListClear
 	bl sub_8079C08
@@ -4664,10 +4664,10 @@ sub_8057074: @ 8057074
 	strh r1, [r0]
 	ldr r0, _08057098 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
-	bl sub_805DE74
+	bl ResetObjectEvents
 	movs r0, 0
 	movs r1, 0
-	bl sub_805EC30
+	bl TrySpawnObjectEvents
 	bl mapheader_run_first_tag4_script_list_match
 	pop {r0}
 	bx r0
@@ -4685,7 +4685,7 @@ mli4_mapscripts_and_other: @ 805709C
 	strh r1, [r0]
 	ldr r0, _080570F8 @ =gTotalCameraPixelOffsetY
 	strh r1, [r0]
-	bl sub_805DE74
+	bl ResetObjectEvents
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
@@ -4708,7 +4708,7 @@ mli4_mapscripts_and_other: @ 805709C
 	bl ResetInitialPlayerAvatarState
 	movs r0, 0
 	movs r1, 0
-	bl sub_805EC30
+	bl TrySpawnObjectEvents
 	bl mapheader_run_first_tag4_script_list_match
 	add sp, 0x4
 	pop {r4,r5}
@@ -6611,7 +6611,7 @@ sub_8057F84: @ 8057F84
 	movs r0, 0x1
 _08057F96:
 	strb r0, [r6, 0x1]
-	ldr r1, _08057FE8 @ =gUnknown_2031DEC
+	ldr r1, _08057FE8 @ =gLinkPlayerObjectEvents
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
@@ -6647,7 +6647,7 @@ _08057F96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057FE8: .4byte gUnknown_2031DEC
+_08057FE8: .4byte gLinkPlayerObjectEvents
 	thumb_func_end sub_8057F84
 
 	thumb_func_start sub_8057FEC
@@ -7143,18 +7143,18 @@ ZeroLinkPlayerObjectEvent: @ 8058370
 	bx lr
 	thumb_func_end ZeroLinkPlayerObjectEvent
 
-	thumb_func_start strange_npc_table_clear
-strange_npc_table_clear: @ 8058378
+	thumb_func_start ClearLinkPlayerObjectEvents
+ClearLinkPlayerObjectEvents: @ 8058378
 	push {lr}
-	ldr r0, _08058388 @ =gUnknown_2031DEC
+	ldr r0, _08058388 @ =gLinkPlayerObjectEvents
 	movs r1, 0
 	movs r2, 0x10
 	bl memset
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058388: .4byte gUnknown_2031DEC
-	thumb_func_end strange_npc_table_clear
+_08058388: .4byte gLinkPlayerObjectEvents
+	thumb_func_end ClearLinkPlayerObjectEvents
 
 	thumb_func_start ZeroObjectEvent
 ZeroObjectEvent: @ 805838C
@@ -7190,12 +7190,12 @@ SpawnLinkPlayerObjectEvent: @ 805839C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	bl GetIndexOfFirstInactiveObjectEvent
+	bl GetFirstInactiveObjectEventId
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
 	lsls r4, r7, 2
-	ldr r0, _08058440 @ =gUnknown_2031DEC
+	ldr r0, _08058440 @ =gLinkPlayerObjectEvents
 	adds r4, r0
 	lsls r5, r6, 3
 	adds r5, r6
@@ -7247,7 +7247,7 @@ SpawnLinkPlayerObjectEvent: @ 805839C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058440: .4byte gUnknown_2031DEC
+_08058440: .4byte gLinkPlayerObjectEvents
 _08058444: .4byte gObjectEvents
 	thumb_func_end SpawnLinkPlayerObjectEvent
 
@@ -7290,7 +7290,7 @@ sub_8058488: @ 8058488
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r2, r1, 24
-	ldr r1, _080584B0 @ =gUnknown_2031DEC
+	ldr r1, _080584B0 @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r1, r0, r1
 	ldrb r0, [r1]
@@ -7307,7 +7307,7 @@ _080584AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080584B0: .4byte gUnknown_2031DEC
+_080584B0: .4byte gLinkPlayerObjectEvents
 _080584B4: .4byte gObjectEvents
 	thumb_func_end sub_8058488
 
@@ -7316,7 +7316,7 @@ sub_80584B8: @ 80584B8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _080584F8 @ =gUnknown_2031DEC
+	ldr r1, _080584F8 @ =gLinkPlayerObjectEvents
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -7345,7 +7345,7 @@ _080584E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080584F8: .4byte gUnknown_2031DEC
+_080584F8: .4byte gLinkPlayerObjectEvents
 _080584FC: .4byte gObjectEvents
 _08058500: .4byte gSprites
 	thumb_func_end sub_80584B8
@@ -7353,7 +7353,7 @@ _08058500: .4byte gSprites
 	thumb_func_start sub_8058504
 sub_8058504: @ 8058504
 	lsls r0, 24
-	ldr r1, _0805851C @ =gUnknown_2031DEC
+	ldr r1, _0805851C @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -7365,14 +7365,14 @@ sub_8058504: @ 8058504
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
-_0805851C: .4byte gUnknown_2031DEC
+_0805851C: .4byte gLinkPlayerObjectEvents
 _08058520: .4byte gObjectEvents
 	thumb_func_end sub_8058504
 
 	thumb_func_start sub_8058524
 sub_8058524: @ 8058524
 	lsls r0, 24
-	ldr r3, _08058544 @ =gUnknown_2031DEC
+	ldr r3, _08058544 @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r0, r3
 	ldrb r3, [r0, 0x2]
@@ -7387,14 +7387,14 @@ sub_8058524: @ 8058524
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_08058544: .4byte gUnknown_2031DEC
+_08058544: .4byte gLinkPlayerObjectEvents
 _08058548: .4byte gObjectEvents
 	thumb_func_end sub_8058524
 
 	thumb_func_start sub_805854C
 sub_805854C: @ 805854C
 	lsls r0, 24
-	ldr r1, _08058564 @ =gUnknown_2031DEC
+	ldr r1, _08058564 @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -7406,14 +7406,14 @@ sub_805854C: @ 805854C
 	ldrb r0, [r0, 0x19]
 	bx lr
 	.align 2, 0
-_08058564: .4byte gUnknown_2031DEC
+_08058564: .4byte gLinkPlayerObjectEvents
 _08058568: .4byte gObjectEvents
 	thumb_func_end sub_805854C
 
 	thumb_func_start sub_805856C
 sub_805856C: @ 805856C
 	lsls r0, 24
-	ldr r1, _08058588 @ =gUnknown_2031DEC
+	ldr r1, _08058588 @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -7427,14 +7427,14 @@ sub_805856C: @ 805856C
 	lsrs r0, 28
 	bx lr
 	.align 2, 0
-_08058588: .4byte gUnknown_2031DEC
+_08058588: .4byte gLinkPlayerObjectEvents
 _0805858C: .4byte gObjectEvents
 	thumb_func_end sub_805856C
 
 	thumb_func_start sub_8058590
 sub_8058590: @ 8058590
 	lsls r0, 24
-	ldr r1, _080585B0 @ =gUnknown_2031DEC
+	ldr r1, _080585B0 @ =gLinkPlayerObjectEvents
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -7450,7 +7450,7 @@ sub_8058590: @ 8058590
 	subs r0, r1
 	bx lr
 	.align 2, 0
-_080585B0: .4byte gUnknown_2031DEC
+_080585B0: .4byte gLinkPlayerObjectEvents
 _080585B4: .4byte gObjectEvents
 	thumb_func_end sub_8058590
 
@@ -7458,7 +7458,7 @@ _080585B4: .4byte gObjectEvents
 GetLinkPlayerIdAt: @ 80585B8
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r5, _080585FC @ =gUnknown_2031DEC
+	ldr r5, _080585FC @ =gLinkPlayerObjectEvents
 	lsls r0, 16
 	asrs r4, r0, 16
 	lsls r1, 16
@@ -7492,7 +7492,7 @@ _080585DA:
 	adds r0, r2, 0
 	b _08058610
 	.align 2, 0
-_080585FC: .4byte gUnknown_2031DEC
+_080585FC: .4byte gLinkPlayerObjectEvents
 _08058600: .4byte gObjectEvents
 _08058604:
 	adds r0, r2, 0x1
@@ -7515,7 +7515,7 @@ sub_8058618: @ 8058618
 	lsrs r3, r1, 24
 	adds r2, r3, 0
 	lsrs r0, 22
-	ldr r1, _08058648 @ =gUnknown_2031DEC
+	ldr r1, _08058648 @ =gLinkPlayerObjectEvents
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -7534,7 +7534,7 @@ sub_8058618: @ 8058618
 	strb r0, [r6]
 	b _08058674
 	.align 2, 0
-_08058648: .4byte gUnknown_2031DEC
+_08058648: .4byte gLinkPlayerObjectEvents
 _0805864C: .4byte gObjectEvents
 _08058650:
 	ldr r4, _0805867C @ =gUnknown_826D374
@@ -7651,7 +7651,7 @@ sub_80586CC: @ 80586CC
 	movs r3, 0
 	ldrsh r2, [r6, r3]
 	adds r0, r5, 0
-	bl npc_coords_shift
+	bl ShiftObjectEventCoords
 	adds r0, r5, 0
 	bl ObjectEventUpdateZCoord
 	movs r0, 0x1
@@ -7708,7 +7708,7 @@ sub_8058754: @ 8058754
 	cmp r0, 0
 	bne _08058784
 	adds r0, r4, 0
-	bl npc_coords_shift_still
+	bl ShiftStillObjectEventCoords
 	movs r0, 0x2
 	strb r0, [r6, 0x3]
 _08058784:
@@ -7851,7 +7851,7 @@ sub_8058878: @ 8058878
 	lsls r1, 24
 	lsrs r3, r1, 24
 	lsls r2, r5, 2
-	ldr r0, _080588B4 @ =gUnknown_2031DEC
+	ldr r0, _080588B4 @ =gLinkPlayerObjectEvents
 	adds r2, r0
 	ldrb r1, [r2, 0x2]
 	lsls r0, r1, 3
@@ -7874,7 +7874,7 @@ sub_8058878: @ 8058878
 	bl sub_805C7C8
 	b _080588C6
 	.align 2, 0
-_080588B4: .4byte gUnknown_2031DEC
+_080588B4: .4byte gLinkPlayerObjectEvents
 _080588B8: .4byte gObjectEvents
 _080588BC:
 	ldrb r0, [r4]
@@ -7925,7 +7925,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
 	lsls r4, 2
-	ldr r0, _08058970 @ =gUnknown_2031DEC
+	ldr r0, _08058970 @ =gLinkPlayerObjectEvents
 	adds r4, r0
 	ldrb r1, [r4, 0x2]
 	lsls r0, r1, 3
@@ -7958,7 +7958,7 @@ SpriteCB_LinkPlayer: @ 805890C
 	cmp r0, 0
 	bne _08058978
 	ldrb r0, [r6, 0x19]
-	bl ObjectEventDirectionToImageAnimId
+	bl GetFaceDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7966,11 +7966,11 @@ SpriteCB_LinkPlayer: @ 805890C
 	bl StartSpriteAnim
 	b _0805898A
 	.align 2, 0
-_08058970: .4byte gUnknown_2031DEC
+_08058970: .4byte gLinkPlayerObjectEvents
 _08058974: .4byte gObjectEvents
 _08058978:
 	ldrb r0, [r6, 0x19]
-	bl get_go_image_anim_num
+	bl GetMoveDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

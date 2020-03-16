@@ -207,13 +207,13 @@ struct ObjectEvent
              /*27*/ u32 hideReflection:1;
     /*0x04*/        u8 spriteId;
     /*0x05*/        u8 graphicsId;
-    /*0x06*/        u8 animPattern;
+    /*0x06*/        u8 movementType;
     /*0x07*/        u8 trainerType;
     /*0x08*/        u8 localId;
     /*0x09*/        u8 mapNum;
     /*0x0A*/        u8 mapGroup;
-    /*0x0B*/        u8 mapobj_unk_0B_0:4;
-                    u8 elevation:4;
+    /*0x0B*/        u8 currentElevation:4;
+                    u8 previousElevation:4;
     /*0x0C*/        struct Coords16 initialCoords;
     /*0x10*/        struct Coords16 currentCoords;
     /*0x14*/        struct Coords16 previousCoords;
@@ -221,14 +221,14 @@ struct ObjectEvent
     /*0x18*/        u8 movementDirection:4;
     /*0x19*/        union ObjectEventRange range;
     /*0x1A*/        u8 fieldEffectSpriteId;
-    /*0x1B*/        u8 mapobj_unk_1B;
-    /*0x1C*/        u8 mapobj_unk_1C;
+    /*0x1B*/        u8 warpArrowSpriteId;
+    /*0x1C*/        u8 movementActionId;
     /*0x1D*/        u8 trainerRange_berryTreeId;
     /*0x1E*/        u8 currentMetatileBehavior;
     /*0x1F*/        u8 previousMetatileBehavior;
-    /*0x20*/        u8 mapobj_unk_20;
+    /*0x20*/        u8 previousMovementDirection;
     /*0x21*/        u8 directionSequenceIndex;
-    /*0x22*/        u8 animId;
+    /*0x22*/        u8 playerCopyableMovement;
     /*size = 0x24*/
 };
 
@@ -274,7 +274,28 @@ enum
 
 enum
 {
-    COLLISION_LEDGE_JUMP = 6
+    COLLISION_NONE,
+    COLLISION_OUTSIDE_RANGE,
+    COLLISION_IMPASSABLE,
+    COLLISION_ELEVATION_MISMATCH,
+    COLLISION_OBJECT_EVENT,
+    COLLISION_STOP_SURFING,
+    COLLISION_LEDGE_JUMP,
+    COLLISION_PUSHED_BOULDER,
+    COLLISION_ROTATING_GATE,
+    COLLISION_WHEELIE_HOP,
+    COLLISION_ISOLATED_VERTICAL_RAIL,
+    COLLISION_ISOLATED_HORIZONTAL_RAIL,
+    COLLISION_VERTICAL_RAIL,
+    COLLISION_HORIZONTAL_RAIL,
+};
+
+// player tile transition states
+enum
+{
+    T_NOT_MOVING,
+    T_TILE_TRANSITION,
+    T_TILE_CENTER, // player is on a frame in which they are centered on a tile during which the player either stops or keeps their momentum and keeps going, changing direction if necessary.
 };
 
 struct PlayerAvatar /* 0x202E858 */

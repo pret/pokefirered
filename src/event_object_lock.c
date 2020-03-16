@@ -109,5 +109,5 @@ void Script_FacePlayer(void)
 
 void Script_ClearHeldMovement(void)
 {
-    ObjectEventClearAnimIfSpecialAnimActive(&gObjectEvents[gSelectedObjectEvent]);
+    ObjectEventClearHeldMovementIfActive(&gObjectEvents[gSelectedObjectEvent]);
 }

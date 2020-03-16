@@ -37,7 +37,7 @@ struct LinkPlayerObjectEvent
 {
     u8 active;
     u8 linkPlayerId;
-    u8 mapObjId;
+    u8 objEventId;
     u8 mode;
 };
 
@@ -99,7 +99,7 @@ void Overworld_ChangeMusicTo(u16);
 
 bool32 IsUpdateLinkStateCBActive(void);
 
-void strange_npc_table_clear(void);
+void ClearLinkPlayerObjectEvents(void);
 const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16, u16);
 void ObjectEventMoveDestCoords(struct ObjectEvent *, u32, s16 *, s16 *);
 void sub_8086230(void);
@@ -145,6 +145,7 @@ void sub_8055864(u8 mapGroup, u8 mapNum);
 void CB2_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_NewGame(void);
+bool8 IsMapTypeOutdoors(u8 mapType);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType);
 void Overworld_ResetStateAfterTeleport(void);
 

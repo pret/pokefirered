@@ -633,7 +633,7 @@ void sub_810C444(void)
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
+        if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT))
         {
             r6 = sub_810CF54();
             TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
@@ -696,7 +696,7 @@ static void sub_810C594(void)
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
-        if (objectEvent->animPattern == 0x4D || objectEvent->animPattern == 0x4E || objectEvent->animPattern == 0x4F)
+        if (objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT)
         {
             u8 r3 = sub_810CF54();
             if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)
@@ -918,7 +918,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
                     else
                     {
                         gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[vsSeekerIdx].localId] = r7;
-                        npc_coords_shift_still(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
+                        ShiftStillObjectEventCoords(&gObjectEvents[sVsSeeker->trainerInfo[vsSeekerIdx].objectEventId]);
                         StartTrainerObjectMovementScript(&sVsSeeker->trainerInfo[vsSeekerIdx], sMovementScript_TrainerRematch);
                         sVsSeeker->trainerIdxArray[sVsSeeker->numRematchableTrainers] = r8;
                         sVsSeeker->runningBehaviourEtcArray[sVsSeeker->numRematchableTrainers] = GetRunningBehaviorFromGraphicsId(sVsSeeker->trainerInfo[vsSeekerIdx].graphicsId);
@@ -961,12 +961,12 @@ void sub_810CB90(void)
                 TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
                 r4_2 = &gObjectEvents[sp0];
                 sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
-                TryOverrideTemplateCoordsForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
+                OverrideMovementTypeForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
                 if (gSelectedObjectEvent == sp0)
-                    r4_2->animPattern = gUnknown_8453F67[r4_2->facingDirection];
+                    r4_2->movementType = gUnknown_8453F67[r4_2->facingDirection];
                 else
-                    r4_2->animPattern = MOVEMENT_TYPE_FACE_DOWN;
+                    r4_2->movementType = MOVEMENT_TYPE_FACE_DOWN;
             }
         }
     }
@@ -1322,7 +1322,7 @@ static void StartAllRespondantIdleMovements(void)
 
                 if (sub_810CF04(sVsSeeker->trainerInfo[j].objectEventId) == 1)
                     SetTrainerMovementType(r4, sVsSeeker->runningBehaviourEtcArray[i]);
-                TryOverrideTemplateCoordsForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
+                OverrideMovementTypeForObjectEvent(r4, sVsSeeker->runningBehaviourEtcArray[i]);
                 gSaveBlock1Ptr->trainerRematches[sVsSeeker->trainerInfo[j].localId] = GetNextAvailableRematchTrainer(sVsSeekerData, sVsSeeker->trainerInfo[j].trainerIdx, &dummy);
             }
         }

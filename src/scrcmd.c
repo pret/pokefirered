@@ -1082,7 +1082,7 @@ bool8 ScrCmd_setobjectxy(struct ScriptContext * ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_805F7C4(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
+    TryMoveObjectEventToMapCoords(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
     return FALSE;
 }
 
@@ -1100,7 +1100,7 @@ bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext * ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    sub_805FE94(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    TryOverrideObjectEventTemplateCoords(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
 

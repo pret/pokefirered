@@ -549,7 +549,7 @@ static void CameraPanningCB_PanAhead(void)
             gUnknown_3000E9C = 0;
         }
 
-        var = player_get_direction_upper_nybble();
+        var = GetPlayerMovementDirection();
         if (var == 2)
         {
             if (sVerticalCameraPan > -8)

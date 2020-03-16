@@ -12,10 +12,15 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
-u8 sub_8154228(void);
-bool8 sub_80DCBE0(struct ObjectEvent *);
+
+u8 CreateWarpArrowSprite(void);
 void sub_80DC44C(u8, u8);
 void sub_80DC478(u8, u8);
 void StartAshFieldEffect(s16, s16, u16, s16);
+void sub_80DCBB8(struct ObjectEvent *);
+bool8 sub_80DCBE0(struct ObjectEvent *);
+void SetUpReflection(struct ObjectEvent*, struct Sprite*, u8);
+u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent*);
+u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

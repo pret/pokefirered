@@ -923,7 +923,7 @@ _0806CFA4: .4byte gDirectionToVectors
 _0806CFA8: .4byte gObjectEvents
 _0806CFAC:
 	movs r4, 0
-	ldr r1, _0806CFE4 @ =gUnknown_2031DEC
+	ldr r1, _0806CFE4 @ =gLinkPlayerObjectEvents
 _0806CFB0:
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -953,7 +953,7 @@ _0806CFDE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806CFE4: .4byte gUnknown_2031DEC
+_0806CFE4: .4byte gLinkPlayerObjectEvents
 _0806CFE8: .4byte gSelectedObjectEvent
 _0806CFEC: .4byte gSpecialVar_LastTalked
 _0806CFF0: .4byte gSpecialVar_Facing
@@ -3083,7 +3083,7 @@ _0806E046:
 GetObjectEventScriptPointerForComparison: @ 806E050
 	push {r4,r5,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3112,7 +3112,7 @@ GetObjectEventScriptPointerForComparison: @ 806E050
 SetCableClubWarp: @ 806E08C
 	push {r4,lr}
 	sub sp, 0x8
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	mov r4, sp
 	mov r0, sp
 	bl player_get_pos_to_and_height

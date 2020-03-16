@@ -15,10 +15,9 @@ struct CameraObject
     s32 y;
 };
 
-extern struct CameraObject gFieldCamera;
-
 // Exported RAM declarations
 
+extern struct CameraObject gFieldCamera;
 extern u16 gTotalCameraPixelOffsetX;
 extern u16 gTotalCameraPixelOffsetY;
 

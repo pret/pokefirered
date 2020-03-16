@@ -17,7 +17,7 @@ sub_805B3B8: @ 805B3B8
 	ldr r2, _0805B3D4 @ =gObjectEvents
 	adds r0, r2
 	ldr r2, _0805B3D8 @ =sub_805B3DC
-	bl ObjectEventStep
+	bl UpdateObjectEventCurrentMovement
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -104,7 +104,7 @@ sub_805B45C: @ 805B45C
 	cmp r0, 0
 	bne _0805B4A6
 	adds r0, r4, 0
-	bl ObjectEventGetSpecialAnim
+	bl ObjectEventGetHeldMovementActionId
 	lsls r0, 24
 	movs r1, 0xDF
 	lsls r1, 24
@@ -119,7 +119,7 @@ sub_805B45C: @ 805B45C
 	cmp r0, r5
 	beq _0805B4A2
 	adds r0, r4, 0
-	bl ObjectEventClearAnim
+	bl ObjectEventClearHeldMovement
 	b _0805B4A6
 _0805B4A2:
 	movs r0, 0x1
@@ -245,7 +245,7 @@ sub_805B528: @ 805B528
 	strh r0, [r5, 0x1C]
 _0805B57A:
 	ldr r0, [r4]
-	bl ObjectEventClearAnim
+	bl ObjectEventClearHeldMovement
 	ldrb r0, [r5, 0x1C]
 	bl sub_805C2CC
 _0805B586:
@@ -374,7 +374,7 @@ ForcedMovement_None: @ 805B644
 	ldrb r1, [r0, 0x18]
 	lsls r1, 28
 	lsrs r1, 28
-	bl ObjectEventSetDirection
+	bl SetObjectEventDirection
 	ldrb r1, [r4]
 	movs r0, 0xBF
 	ands r0, r1
@@ -816,7 +816,7 @@ CheckMovementInputNotOnBike: @ 805B96C
 	.align 2, 0
 _0805B980: .4byte gPlayerAvatar
 _0805B984:
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -1678,8 +1678,8 @@ _0805BFD8: .4byte gObjectEvents
 _0805BFDC: .4byte gPlayerAvatar
 	thumb_func_end player_set_x22
 
-	thumb_func_start player_get_x22
-player_get_x22: @ 805BFE0
+	thumb_func_start PlayerGetCopyableMovement
+PlayerGetCopyableMovement: @ 805BFE0
 	ldr r2, _0805BFF4 @ =gObjectEvents
 	ldr r0, _0805BFF8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -1693,7 +1693,7 @@ player_get_x22: @ 805BFE0
 	.align 2, 0
 _0805BFF4: .4byte gObjectEvents
 _0805BFF8: .4byte gPlayerAvatar
-	thumb_func_end player_get_x22
+	thumb_func_end PlayerGetCopyableMovement
 
 	thumb_func_start sub_805BFFC
 sub_805BFFC: @ 805BFFC
@@ -1708,7 +1708,7 @@ sub_805BFFC: @ 805BFFC
 	lsls r0, 2
 	ldr r2, _0805C020 @ =gObjectEvents
 	adds r0, r2
-	bl ObjectEventForceSetSpecialAnim
+	bl ObjectEventForceSetHeldMovement
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1854,7 +1854,7 @@ sub_805C11C: @ 805C11C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063FB0
+	bl GetWalkFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1896,7 +1896,7 @@ sub_805C164: @ 805C164
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8064034
+	bl GetWalkFastestMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1942,7 +1942,7 @@ PlayerOnBikeCollide: @ 805C1AC
 	adds r0, r4, 0
 	bl sub_805C438
 	adds r0, r4, 0
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
@@ -1990,7 +1990,7 @@ sub_805C20C: @ 805C20C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063EE4
+	bl GetWalkSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2004,7 +2004,7 @@ sub_805C224: @ 805C224
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8064270
+	bl GetWalkInPlaceSlowMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -2022,7 +2022,7 @@ sub_805C23C: @ 805C23C
 	movs r0, 0xA
 	bl PlaySE
 	adds r0, r4, 0
-	bl GetJumpLedgeAnimId
+	bl GetJump2MovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
@@ -2600,8 +2600,8 @@ _0805C6DC: .4byte gObjectEvents
 _0805C6E0: .4byte gPlayerAvatar
 	thumb_func_end GetPlayerFacingDirection
 
-	thumb_func_start player_get_direction_upper_nybble
-player_get_direction_upper_nybble: @ 805C6E4
+	thumb_func_start GetPlayerMovementDirection
+GetPlayerMovementDirection: @ 805C6E4
 	ldr r2, _0805C6F8 @ =gObjectEvents
 	ldr r0, _0805C6FC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -2615,7 +2615,7 @@ player_get_direction_upper_nybble: @ 805C6E4
 	.align 2, 0
 _0805C6F8: .4byte gObjectEvents
 _0805C6FC: .4byte gPlayerAvatar
-	thumb_func_end player_get_direction_upper_nybble
+	thumb_func_end GetPlayerMovementDirection
 
 	thumb_func_start PlayerGetZCoord
 PlayerGetZCoord: @ 805C700
@@ -2651,7 +2651,7 @@ sub_805C71C: @ 805C71C
 	lsls r2, 16
 	asrs r2, 16
 	adds r1, r3, 0
-	bl sub_805F724
+	bl MoveObjectEventToMapCoords
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2712,7 +2712,7 @@ sub_805C780: @ 805C780
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl ObjectEventSetDirection
+	bl SetObjectEventDirection
 	movs r0, 0x6
 	bl TestPlayerAvatarFlags
 	lsls r0, 24
@@ -2787,8 +2787,8 @@ GetPlayerAvatarGraphicsIdByStateId: @ 805C808
 _0805C820: .4byte gPlayerAvatar
 	thumb_func_end GetPlayerAvatarGraphicsIdByStateId
 
-	thumb_func_start sub_805C824
-sub_805C824: @ 805C824
+	thumb_func_start GetPlayerAvatarGenderByGraphicsId
+GetPlayerAvatarGenderByGraphicsId: @ 805C824
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2803,7 +2803,7 @@ _0805C836:
 _0805C838:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C824
+	thumb_func_end GetPlayerAvatarGenderByGraphicsId
 
 	thumb_func_start PartyHasMonWithSurf
 PartyHasMonWithSurf: @ 805C83C
@@ -2854,7 +2854,7 @@ _0805C888: .4byte gPlayerParty
 	thumb_func_start IsPlayerSurfingNorth
 IsPlayerSurfingNorth: @ 805C88C
 	push {lr}
-	bl player_get_direction_upper_nybble
+	bl GetPlayerMovementDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -3546,7 +3546,7 @@ sub_805CD84: @ 805CD84
 	adds r0, r4, 0
 	bl ObjectEventClearHeldMovementIfFinished
 	ldrb r0, [r6, 0xC]
-	bl GetStepInPlaceDelay16AnimId
+	bl GetWalkInPlaceNormalMovementAction
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4296,7 +4296,7 @@ fish1: @ 805D35C
 	lsls r4, 2
 	adds r4, r3
 	adds r0, r4, 0
-	bl ObjectEventClearAnimIfSpecialAnimActive
+	bl ObjectEventClearHeldMovementIfActive
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x8
 	orrs r0, r1
@@ -4830,7 +4830,7 @@ sub_805D7C0: @ 805D7C0
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063500
+	bl GetFishingBiteDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4886,7 +4886,7 @@ sub_805D838: @ 805D838
 	bl GetPlayerFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8063500
+	bl GetFishingBiteDirectionAnimNum
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5455,7 +5455,7 @@ _0805DC9A:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl ObjectEventForceSetSpecialAnim
+	bl ObjectEventForceSetHeldMovement
 	movs r0, 0
 	mov r9, r0
 	strh r6, [r5, 0x2]
@@ -5623,7 +5623,7 @@ _0805DDE4:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl ObjectEventForceSetSpecialAnim
+	bl ObjectEventForceSetHeldMovement
 	movs r0, 0
 	strh r0, [r6]
 	ldrb r0, [r5, 0x18]

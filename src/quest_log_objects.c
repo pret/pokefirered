@@ -28,10 +28,10 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
         questLog->unk_008[i].disableJumpLandingGroundEffect = gObjectEvents[i].disableJumpLandingGroundEffect;
         questLog->unk_008[i].fixedPriority = gObjectEvents[i].fixedPriority;
         questLog->unk_008[i].mapobj_unk_18 = gObjectEvents[i].facingDirection;
-        questLog->unk_008[i].mapobj_unk_0B_0 = gObjectEvents[i].mapobj_unk_0B_0;
-        questLog->unk_008[i].elevation = gObjectEvents[i].elevation;
+        questLog->unk_008[i].mapobj_unk_0B_0 = gObjectEvents[i].currentElevation;
+        questLog->unk_008[i].elevation = gObjectEvents[i].previousElevation;
         questLog->unk_008[i].graphicsId = gObjectEvents[i].graphicsId;
-        questLog->unk_008[i].animPattern = gObjectEvents[i].animPattern;
+        questLog->unk_008[i].animPattern = gObjectEvents[i].movementType;
         questLog->unk_008[i].trainerType = gObjectEvents[i].trainerType;
         questLog->unk_008[i].localId = gObjectEvents[i].localId;
         questLog->unk_008[i].mapNum = gObjectEvents[i].mapNum;
@@ -41,7 +41,7 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
         questLog->unk_008[i].trainerRange_berryTreeId = gObjectEvents[i].trainerRange_berryTreeId;
         questLog->unk_008[i].previousMetatileBehavior = gObjectEvents[i].previousMetatileBehavior;
         questLog->unk_008[i].directionSequenceIndex = gObjectEvents[i].directionSequenceIndex;
-        questLog->unk_008[i].animId = gObjectEvents[i].animId;
+        questLog->unk_008[i].animId = gObjectEvents[i].playerCopyableMovement;
     }
 }
 
@@ -72,10 +72,10 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         gObjectEvents[i].disableJumpLandingGroundEffect = questLogObjectEvents[i].disableJumpLandingGroundEffect;
         gObjectEvents[i].fixedPriority = questLogObjectEvents[i].fixedPriority;
         gObjectEvents[i].facingDirection = questLogObjectEvents[i].mapobj_unk_18;
-        gObjectEvents[i].mapobj_unk_0B_0 = questLogObjectEvents[i].mapobj_unk_0B_0;
-        gObjectEvents[i].elevation = questLogObjectEvents[i].elevation;
+        gObjectEvents[i].currentElevation = questLogObjectEvents[i].mapobj_unk_0B_0;
+        gObjectEvents[i].previousElevation = questLogObjectEvents[i].elevation;
         gObjectEvents[i].graphicsId = questLogObjectEvents[i].graphicsId;
-        gObjectEvents[i].animPattern = questLogObjectEvents[i].animPattern;
+        gObjectEvents[i].movementType = questLogObjectEvents[i].animPattern;
         gObjectEvents[i].trainerType = questLogObjectEvents[i].trainerType;
         gObjectEvents[i].localId = questLogObjectEvents[i].localId;
         gObjectEvents[i].mapNum = questLogObjectEvents[i].mapNum;
@@ -85,7 +85,7 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
         gObjectEvents[i].trainerRange_berryTreeId = questLogObjectEvents[i].trainerRange_berryTreeId;
         gObjectEvents[i].previousMetatileBehavior = questLogObjectEvents[i].previousMetatileBehavior;
         gObjectEvents[i].directionSequenceIndex = questLogObjectEvents[i].directionSequenceIndex;
-        gObjectEvents[i].animId = questLogObjectEvents[i].animId;
+        gObjectEvents[i].playerCopyableMovement = questLogObjectEvents[i].animId;
 
         for (j = 0; j < 0x40; j++)
         {

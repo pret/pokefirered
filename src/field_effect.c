@@ -1863,7 +1863,7 @@ static bool8 LavaridgeGymB1FWarpExitEffect_3(struct Task * task, struct ObjectEv
         objectEvent->invisible = FALSE;
         CameraObjectReset1();
         PlaySE(SE_W091);
-        ObjectEventSetHeldMovement(objectEvent, sub_8064194(DIR_EAST));
+        ObjectEventSetHeldMovement(objectEvent, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
 }
@@ -1949,7 +1949,7 @@ static bool8 LavaridgeGym1FWarpEffect_2(struct Task * task, struct ObjectEvent *
         } else
         {
             task->data[1]++;
-            ObjectEventSetHeldMovement(objectEvent, GetStepInPlaceDelay4AnimId(objectEvent->facingDirection));
+            ObjectEventSetHeldMovement(objectEvent, GetWalkInPlaceFastMovementAction(objectEvent->facingDirection));
             PlaySE(SE_FU_ZUZUZU);
         }
     }
@@ -2063,7 +2063,7 @@ static void EscapeRopeFieldEffect_Step1(struct Task * task)
     }
     if (data[4] == 1 && !gPaletteFade.active && BGMusicStopped() == TRUE)
     {
-        ObjectEventSetDirection(playerObj, task->data[15]);
+        SetObjectEventDirection(playerObj, task->data[15]);
         sub_80555E0();
         WarpIntoMap();
         gFieldCallback = FieldCallback_EscapeRopeExit;
@@ -3025,7 +3025,7 @@ static void UseVsSeekerEffect_3(struct Task * task)
             ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(2));
         else
             ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(0));
-        ObjectEventForceSetSpecialAnim(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
+        ObjectEventForceSetHeldMovement(playerObj, GetFaceDirectionMovementAction(playerObj->facingDirection));
         task->data[0]++;
     }
 }
@@ -3202,7 +3202,7 @@ static void UseFlyEffect_7(struct Task * task)
     if ((++task->data[2]) >= 10)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        ObjectEventClearAnimIfSpecialAnimActive(objectEvent);
+        ObjectEventClearHeldMovementIfActive(objectEvent);
         objectEvent->inanimate = FALSE;
         objectEvent->hasShadow = FALSE;
         sub_8087204(task->data[1], objectEvent->spriteId);
@@ -3511,7 +3511,7 @@ static void FlyInEffect_4(struct Task * task)
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         sprite = &gSprites[objectEvent->spriteId];
         objectEvent->inanimate = FALSE;
-        sub_805F724(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
+        MoveObjectEventToMapCoords(objectEvent, objectEvent->currentCoords.x, objectEvent->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = TRUE;
@@ -3642,7 +3642,7 @@ u32 FldEff_MoveDeoxysRock(void)
         y = objectEvent->currentCoords.y - 7;
         x = (gFieldEffectArguments[3] - x) * 16;
         y = (gFieldEffectArguments[4] - y) * 16;
-        npc_coords_shift(objectEvent, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
+        ShiftObjectEventCoords(objectEvent, gFieldEffectArguments[3] + 7, gFieldEffectArguments[4] + 7);
         taskId = CreateTask(Task_MoveDeoxysRock_Step, 0x50);
         gTasks[taskId].data[1] = objectEvent->spriteId;
         gTasks[taskId].data[2] = gSprites[objectEvent->spriteId].pos1.x + x;
@@ -3681,7 +3681,7 @@ static void Task_MoveDeoxysRock_Step(u8 taskId)
             objectEvent = &gObjectEvents[data[9]];
             sprite->pos1.x = data[2];
             sprite->pos1.y = data[3];
-            npc_coords_shift_still(objectEvent);
+            ShiftStillObjectEventCoords(objectEvent);
             objectEvent->triggerGroundEffectsOnStop = TRUE;
             FieldEffectActiveListRemove(FLDEFF_MOVE_DEOXYS_ROCK);
             DestroyTask(taskId);

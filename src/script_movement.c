@@ -205,7 +205,7 @@ static void ScriptMovement_TakeStep(u8 taskId, u8 moveScrId, u8 objEventId, cons
 
     if (IsMovementScriptFinished(taskId, moveScrId) == TRUE)
         return;
-    if (ObjectEventIsSpecialAnimActive(&gObjectEvents[objEventId])
+    if (ObjectEventIsHeldMovementActive(&gObjectEvents[objEventId])
         && !ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))
         return;
 

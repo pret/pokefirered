@@ -28,7 +28,7 @@ static bool8 sub_8059658(u8 direction, s32 x, s32 y, struct MapConnection *conne
 static bool8 sub_80596BC(s32 x, s32 src_width, s32 dest_width, s32 offset);
 
 struct BackupMapLayout VMap;
-static EWRAM_DATA u16 gBackupMapLayout[VIRTUAL_MAP_SIZE] = {};
+EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
@@ -79,8 +79,8 @@ void InitMapFromSavedGame(void)
 static void InitMapLayoutData(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
-    CpuFastFill(0x03FF03FF, gBackupMapLayout, sizeof(gBackupMapLayout));
-    VMap.map = gBackupMapLayout;
+    CpuFastFill(0x03FF03FF, gBackupMapData, sizeof(gBackupMapData));
+    VMap.map = gBackupMapData;
     VMap.Xsize = mapLayout->width + 15;
     VMap.Ysize = mapLayout->height + 14;
     AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, ABSPATH("fieldmap.c"), 158);
@@ -458,7 +458,7 @@ u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr)
     return GetBehaviorByMetatileIdAndMapLayout(gMapHeader.mapLayout, metatileId, attr);
 }
 
-u32 MapGridGetMetatileBehaviorAt(s32 x, s32 y)
+u32 MapGridGetMetatileBehaviorAt(s16 x, s16 y)
 {
     return MapGridGetMetatileAttributeAt(x, y, 0);
 }
@@ -540,7 +540,7 @@ void save_serialize_map(void)
     {
         for (j = x; j < x + 15; j++)
         {
-            *mapView++ = gBackupMapLayout[width * i + j];
+            *mapView++ = gBackupMapData[width * i + j];
         }
     }
 }
@@ -581,7 +581,7 @@ static void LoadSavedMapView(void)
         {
             for (j = x; j < x + 15; j++)
             {
-                gBackupMapLayout[j + width * i] = *mapView;
+                gBackupMapData[j + width * i] = *mapView;
                 mapView++;
             }
         }
@@ -636,7 +636,7 @@ static void sub_8059250(u8 a1)
             desti = width * (y + y0);
             srci = (y + r8) * 15 + r9;
             src = &mapView[srci + i];
-            dest = &gBackupMapLayout[x0 + desti + j];
+            dest = &gBackupMapData[x0 + desti + j];
             *dest = *src;
             i++;
             j++;

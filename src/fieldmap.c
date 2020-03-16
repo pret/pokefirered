@@ -365,48 +365,27 @@ union Block
     u16 value;
 };
 
-#define MapGridGetBorderTileAt(x, y) ({                        \
-    u16 block;                                                 \
-    s32 xprime;                                                \
-    s32 yprime;                                                \
-                                                               \
-    struct MapLayout *mapLayout = gMapHeader.mapLayout;              \
-                                                               \
-    xprime = x - 7;                                            \
-    xprime += 8 * mapLayout->unk18;                              \
-    xprime %= mapLayout->unk18;                                  \
-                                                               \
-    yprime = y - 7;                                            \
-    yprime += 8 * mapLayout->unk19;                              \
-    yprime %= mapLayout->unk19;                                  \
-                                                               \
-    block = mapLayout->border[xprime + yprime * mapLayout->unk18]; \
-    block |= 0xC00;                                            \
-    block;                                                     \
-})
-
-#define MapGridGetBorderTileAt2(x, y) ({                               \
-    u16 block;                                                         \
-    s32 xprime;                                                        \
-    s32 yprime;                                                        \
-                                                                       \
-    struct MapLayout *mapLayout = gMapHeader.mapLayout;                      \
-                                                                       \
-    xprime = x - 7;                                                    \
-    xprime += 8 * mapLayout->unk18;                                      \
-    xprime %= mapLayout->unk18;                                          \
-                                                                       \
-    yprime = y - 7;                                                    \
-    yprime += 8 * mapLayout->unk19;                                      \
-    yprime %= mapLayout->unk19;                                          \
-                                                                       \
-    block = mapLayout->border[xprime + yprime * mapLayout->unk18] | 0xC00; \
-    block;                                                             \
+#define MapGridGetBorderTileAt(x, y) ({                                                            \
+    u16 block;                                                                                     \
+    s32 xprime;                                                                                    \
+    s32 yprime;                                                                                    \
+                                                                                                   \
+    struct MapLayout *mapLayout = gMapHeader.mapLayout;                                            \
+                                                                                                   \
+    xprime = x - 7;                                                                                \
+    xprime += 8 * mapLayout->borderWidth;                                                          \
+    xprime %= mapLayout->borderWidth;                                                              \
+                                                                                                   \
+    yprime = y - 7;                                                                                \
+    yprime += 8 * mapLayout->borderHeight;                                                         \
+    yprime %= mapLayout->borderHeight;                                                             \
+                                                                                                   \
+    block = mapLayout->border[xprime + yprime * mapLayout->borderWidth] | METATILE_COLLISION_MASK; \
 })
 
 #define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize)
 
-#define MapGridGetTileAt(x, y) (AreCoordsWithinMapGridBounds(x, y) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt2(x, y))
+#define MapGridGetTileAt(x, y) (AreCoordsWithinMapGridBounds(x, y) ? VMap.map[x + VMap.Xsize * y] : MapGridGetBorderTileAt(x, y))
 
 u8 MapGridGetZCoordAt(s32 x, s32 y)
 {

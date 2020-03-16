@@ -23,8 +23,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "FiveIsland_RocketWarehouse_EventScript_Grunt2",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
@@ -36,8 +36,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "FiveIsland_RocketWarehouse_EventScript_Grunt3",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
@@ -49,8 +49,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin1",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
@@ -62,8 +62,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
@@ -75,8 +75,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "FiveIsland_RocketWarehouse_EventScript_Grunt1",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
@@ -88,8 +88,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Gideon",
       "flag": "0"
     },
@@ -101,8 +101,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_ItemBigPearl",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_BIG_PEARL"
     },
@@ -114,8 +114,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_ItemTM36",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_TM36"
     },
@@ -127,8 +127,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_ItemPearl",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_PEARL"
     },
@@ -140,8 +140,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_ItemUpGrade",
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_UP_GRADE"
     }
@@ -162,7 +162,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     },
     {
@@ -171,7 +171,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     },
     {
@@ -180,7 +180,7 @@
       "y": 11,
       "elevation": 3,
       "var": "VAR_MAP_SCENE_ROCKET_WAREHOUSE",
-      "var_value": 0,
+      "var_value": "0",
       "script": "FiveIsland_RocketWarehouse_EventScript_Admin2Trigger"
     }
   ],

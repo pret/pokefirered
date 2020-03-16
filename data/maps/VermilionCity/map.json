@@ -34,8 +34,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_Woman",
       "flag": "0"
     },
@@ -47,8 +47,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_OldMan1",
       "flag": "0"
     },
@@ -60,8 +60,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_OldMan2",
       "flag": "0"
     },
@@ -73,8 +73,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 2,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_Machop",
       "flag": "0"
     },
@@ -86,8 +86,8 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_Sailor",
       "flag": "0"
     },
@@ -99,8 +99,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_FerrySailor",
       "flag": "0"
     },
@@ -112,8 +112,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
     },
@@ -125,8 +125,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "VermilionCity_EventScript_OaksAide",
       "flag": "FLAG_HIDE_VERMILION_CITY_OAKS_AIDE"
     }
@@ -210,7 +210,7 @@
       "y": 33,
       "elevation": 0,
       "var": "VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VermilionCity_EventScript_CheckTicketLeft"
     },
     {
@@ -219,7 +219,7 @@
       "y": 33,
       "elevation": 0,
       "var": "VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VermilionCity_EventScript_CheckTicketRight"
     },
     {
@@ -228,7 +228,7 @@
       "y": 32,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VermilionCity_EventScript_ExitedTicketCheck"
     },
     {
@@ -237,7 +237,7 @@
       "y": 32,
       "elevation": 0,
       "var": "VAR_TEMP_1",
-      "var_value": 0,
+      "var_value": "0",
       "script": "VermilionCity_EventScript_ExitedTicketCheck"
     }
   ],

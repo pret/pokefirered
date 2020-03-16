@@ -34,8 +34,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route21_North_EventScript_Ronald",
       "flag": "0"
     },
@@ -47,8 +47,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route21_North_EventScript_Wade",
       "flag": "0"
     },
@@ -60,8 +60,8 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
       "movement_range_x": 4,
       "movement_range_y": 2,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "Route21_North_EventScript_Spencer",
       "flag": "0"
     },
@@ -73,8 +73,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "Route21_North_EventScript_Lil",
       "flag": "0"
     },
@@ -86,8 +86,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 1,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "1",
       "script": "Route21_North_EventScript_Ian",
       "flag": "0"
     },
@@ -100,8 +100,8 @@
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "0x0",
       "flag": "0"
     }

@@ -34,8 +34,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 5,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "5",
       "script": "Route6_EventScript_Keigo",
       "flag": "0"
     },
@@ -47,8 +47,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route6_EventScript_Ricky",
       "flag": "0"
     },
@@ -60,8 +60,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "Route6_EventScript_Nancy",
       "flag": "0"
     },
@@ -73,8 +73,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route6_EventScript_Elijah",
       "flag": "0"
     },
@@ -86,8 +86,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route6_EventScript_Isabelle",
       "flag": "0"
     },
@@ -99,8 +99,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route6_EventScript_Jeff",
       "flag": "0"
     }

@@ -23,8 +23,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 3,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "SilphCo_3F_EventScript_Grunt",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
@@ -36,8 +36,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SilphCo_3F_EventScript_WorkerM",
       "flag": "0"
     },
@@ -49,8 +49,8 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 1,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SilphCo_3F_EventScript_Jose",
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
@@ -62,8 +62,8 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": 0,
-      "trainer_sight_or_berry_tree_id": 0,
+      "trainer_type": "0",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "SilphCo_3F_EventScript_ItemHyperPotion",
       "flag": "FLAG_HIDE_SILPH_CO_3F_HYPER_POTION"
     }

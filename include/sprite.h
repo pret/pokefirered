@@ -254,6 +254,7 @@ extern const struct SpriteTemplate gDummySpriteTemplate;
 extern struct Sprite gSprites[];
 extern struct OamMatrix gOamMatrices[];
 extern bool8 gAffineAnimsDisabled;
+extern u16 gReservedSpriteTileCount;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);

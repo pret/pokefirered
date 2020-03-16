@@ -68,7 +68,7 @@ gSpecials:: @ 815FD60
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch
 	def_special StartRematchBattle
-	def_special ShowPokemonStorageSystem
+	def_special ShowPokemonStorageSystemPC
 	def_special HasEnoughMonsForDoubleBattle
 	def_special NullFieldSpecial  @ Hoenn TV specials
 	def_special NullFieldSpecial

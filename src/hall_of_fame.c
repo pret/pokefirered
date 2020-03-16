@@ -738,7 +738,7 @@ void CB2_InitHofPC(void)
     case 3:
         if (!DrawHofBackground())
         {
-            sub_80A0A48(0, 0, 0);
+            BeginPCScreenEffect_TurnOn(0, 0, 0);
             SetVBlankCallback(VBlankCB_HofIdle);
             gMain.state++;
         }
@@ -748,7 +748,7 @@ void CB2_InitHofPC(void)
         AnimateSprites();
         BuildOamBuffer();
         UpdatePaletteFade();
-        if (!sub_80A0A98())
+        if (!IsPCScreenEffectRunning_TurnOn())
             gMain.state++;
         break;
     case 5:
@@ -946,13 +946,13 @@ static void Task_HofPC_HandlePaletteOnExit(u8 taskId)
     struct HallofFameTeam* fameTeam;
 
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
-    sub_80A0A70(0, 0, 0);
+    BeginPCScreenEffect_TurnOff(0, 0, 0);
     gTasks[taskId].func = Task_HofPC_HandleExit;
 }
 
 static void Task_HofPC_HandleExit(u8 taskId)
 {
-    if (!sub_80A0AAC())
+    if (!IsPCScreenEffectRunning_TurnOff())
     {
         HideBg(0);
         HideBg(1);

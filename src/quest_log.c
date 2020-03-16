@@ -752,7 +752,7 @@ void sub_8111438(void)
     {
         for (r3 = 0; r3 < 5; r3++)
         {
-            sub_808BCB4(0, r3);
+            ZeroBoxMonAt(0, r3);
         }
         for (r3 = r5; r3 < r9->sanePartyCount; r3++)
         {
@@ -767,9 +767,9 @@ void sub_8111438(void)
         {
             for (r6 = 0; r6 < 30; r6++)
             {
-                if (GetBoxMonDataFromAnyBox(r3, r6, MON_DATA_SANITY_HAS_SPECIES))
+                if (GetBoxMonDataAt(r3, r6, MON_DATA_SANITY_HAS_SPECIES))
                 {
-                    sub_808BCB4(r3, r6);
+                    ZeroBoxMonAt(r3, r6);
                     r5--;
                     if (r5 == r9->saneBoxesCount)
                         break;
@@ -832,7 +832,7 @@ static u16 QuestLog_GetSaneBoxCount(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SANITY_HAS_SPECIES))
+            if (GetBoxMonDataAt(i, j, MON_DATA_SANITY_HAS_SPECIES))
                 count++;
         }
     }

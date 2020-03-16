@@ -378,7 +378,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         }
         else
         {
-            sub_80A0A48(0, 0, 0);
+            BeginPCScreenEffect_TurnOn(0, 0, 0);
             ItemPc_SetInitializedFlag(1);
             PlaySE(SE_PC_LOGIN);
         }
@@ -642,7 +642,7 @@ static void Task_ItemPcTurnOff1(u8 taskId)
     }
     else
     {
-        sub_80A0A70(0, 0, 0);
+        BeginPCScreenEffect_TurnOff(0, 0, 0);
         PlaySE(SE_PC_OFF);
     }
     gTasks[taskId].func = Task_ItemPcTurnOff2;
@@ -652,7 +652,7 @@ static void Task_ItemPcTurnOff2(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (!gPaletteFade.active && !sub_80A0AAC())
+    if (!gPaletteFade.active && !IsPCScreenEffectRunning_TurnOff())
     {
         DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (sStateDataPtr->savedCallback != NULL)
@@ -726,7 +726,7 @@ static void Task_ItemPcMain(u8 taskId)
     u16 row;
     s32 input;
 
-    if (!gPaletteFade.active && !sub_80A0A98())
+    if (!gPaletteFade.active && !IsPCScreenEffectRunning_TurnOn())
     {
         if (JOY_NEW(SELECT_BUTTON))
         {

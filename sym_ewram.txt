@@ -150,66 +150,16 @@ gUnknown_20386A8: @ 20386A8
 	.include "src/option_menu.o"
 	.align 2
 	.include "src/trainer_card.o"
-
 	.align 2
-	@ .include "src/pokemon_storage_system.o"
-sPreviousBoxOption: @ 20397A8
-	.space 0x4
-
-gUnknown_20397AC: @ 20397AC
-	.space 0x4
-
-sPSSData: @ 20397B0
-	.space 0x4
-
-sInPartyMenu: @ 20397B4
-	.space 0x1
-
-sCurrentBoxOption: @ 20397B5
-	.space 0x1
-
-gUnknown_20397B6: @ 20397B6
-	.space 0x1
-
-sWhichToReshow: @ 20397B7
-	.space 0x1
-
-sLastUsedBox: @ 20397B8
-	.space 0x2
-
-gUnknown_20397BA: @ 20397BA
-	.space 0x2
-
-gUnknown_20397BC: @ 20397BC
-	.space 0x64
-
-sBoxCursorArea: @ 2039820
-	.space 0x1
-
-sBoxCursorPosition: @ 2039821
-	.space 0x1
-
-sIsMonBeingMoved: @ 2039822
-	.space 0x1
-
-sMovingMonOrigBoxId: @ 2039823
-	.space 0x1
-
-sMovingMonOrigBoxPos: @ 2039824
-	.space 0x1
-
-sCanOnlyMove: @ 2039825
-	.space 0x1
-
-gUnknown_2039826: @ 2039826
-	.space 0x2
-
-gUnknown_2039828: @ 2039828
-	.space 0x4
-
-gUnknown_203982C: @ 203982C
-	.space 0x4
-
+	.include "src/pokemon_storage_system_2.o"
+	.align 2
+	.include "src/pokemon_storage_system_3.o"
+	.align 2
+	.include "src/pokemon_storage_system_5.o"
+	.align 2
+	.include "src/pokemon_storage_system_7.o"
+	.align 2
+	.include "src/pokemon_storage_system_9.o"
 	.align 2
 	.include "src/script_movement.o"
 	.align 2

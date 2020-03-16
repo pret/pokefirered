@@ -13235,7 +13235,7 @@ _0813B16C:
 	ldrb r2, [r0]
 	adds r3, r5, 0
 	adds r0, r4, 0
-	bl sub_808BDE8
+	bl SeekToNextMonInBox
 	b _0813B1CC
 	.align 2, 0
 _0813B190: .4byte 0x000032f4

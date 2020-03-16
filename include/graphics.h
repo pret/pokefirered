@@ -4917,4 +4917,11 @@ extern const u16 gUnknown_8E98F38[];
 extern const u16 gUnknown_8E990D8[];
 extern const u16 gUnknown_8E990F8[];
 
+// pokemon_storage_system
+extern const u32 gPSSMenu_Gfx[];
+extern const u32 gUnknown_8E9CAEC[];
+extern const u16 gPSSMenu_Pal[];
+extern const u16 gUnknown_8E9C3F8[];
+extern const u16 gUnknown_8E9C418[];
+
 #endif //GUARD_GRAPHICS_H

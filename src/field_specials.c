@@ -442,7 +442,7 @@ bool8 IsThereRoomInAnyBoxForMorePokemon(void)
     {
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
-            if (GetBoxMonDataFromAnyBox(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
+            if (GetBoxMonDataAt(i, j, MON_DATA_SPECIES) == SPECIES_NONE)
                 return TRUE;
         }
     }
@@ -1642,7 +1642,7 @@ void ChangeBoxPokemonNickname(void)
 
 static void ChangeBoxPokemonNickname_CB(void)
 {
-    SetBoxMonNickFromAnyBox(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
+    SetBoxMonNickAt(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos, gStringVar2);
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
@@ -1980,11 +1980,11 @@ u16 GetPCBoxToSendMon(void)
 
 bool8 ShouldShowBoxWasFullMessage(void)
 {
-    if (FlagGet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON))
+    if (FlagGet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE))
         return FALSE;
     if (StorageGetCurrentBox() == VarGet(VAR_PC_BOX_TO_SEND_MON))
         return FALSE;
-    FlagSet(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
+    FlagSet(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
     return TRUE;
 }
 
@@ -2001,7 +2001,7 @@ bool8 IsDestinationBoxFull(void)
             if (GetBoxMonData(GetBoxedMonPtr(i, j), MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
                 if (GetPCBoxToSendMon() != i)
-                    FlagClear(FLAG_SYS_CHANGED_BOX_TO_STORE_MON);
+                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
                 VarSet(VAR_PC_BOX_TO_SEND_MON, i);
                 return ShouldShowBoxWasFullMessage();
             }

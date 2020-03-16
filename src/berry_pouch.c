@@ -1258,7 +1258,7 @@ static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
 
 static void Task_ContextMenu_FromPokemonPC(u8 taskId)
 {
-    sResources->exitCallback = sub_808CE60;
+    sResources->exitCallback = Cb2_ReturnToPSS;
     gTasks[taskId].func = BerryPouch_StartFadeToExitCallback;
 }
 

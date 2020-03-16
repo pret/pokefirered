@@ -6,15 +6,36 @@
 #define TOTAL_BOXES_COUNT       14
 #define IN_BOX_COUNT            30
 
+enum
+{
+    WALLPAPER_FOREST,
+    WALLPAPER_CITY,
+    WALLPAPER_DESERT,
+    WALLPAPER_SAVANNA,
+    WALLPAPER_CRAG,
+    WALLPAPER_VOLCANO,
+    WALLPAPER_SNOW,
+    WALLPAPER_CAVE,
+    WALLPAPER_BEACH,
+    WALLPAPER_SEAFLOOR,
+    WALLPAPER_RIVER,
+    WALLPAPER_SKY,
+    WALLPAPER_POLKADOT,
+    WALLPAPER_POKECENTER,
+    WALLPAPER_MACHINE,
+    WALLPAPER_PLAIN,
+    WALLPAPER_COUNT
+};
+
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
-void SetBoxMonNickFromAnyBox(u8 boxId, u8 monPosition, u8 * newNick);
-void CompactPartySlots(void);
-u32 GetBoxMonDataFromAnyBox(u8 boxId, u8 monPosition, u32 request);
-void sub_808BCB4(u8 boxId, u8 monPosition);
-void sub_808CE60(void);
+void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);
+s16 CompactPartySlots(void);
+u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, s32 request);
+void ZeroBoxMonAt(u8 boxId, u8 monPosition);
+void Cb2_ReturnToPSS(void);
 void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
-void PSS_RenderTextToVramViaBuffer(const u8 *name, u8 *a1, u8 a2, u8 a3, u8 *buffer, u8 a5);
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

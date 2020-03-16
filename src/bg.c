@@ -553,21 +553,21 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
 {
     switch (attributeId)
     {
-        case 1:
+        case BG_ATTR_CHARBASEINDEX:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX);
-        case 2:
+        case BG_ATTR_MAPBASEINDEX:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_MAPBASEINDEX);
-        case 3:
+        case BG_ATTR_SCREENSIZE:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
-        case 4:
+        case BG_ATTR_PALETTEMODE:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE);
-        case 7:
+        case BG_ATTR_PRIORITY:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_PRIORITY);
-        case 5:
+        case BG_ATTR_MOSAIC:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
-        case 6:
+        case BG_ATTR_WRAPAROUND:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
-        case 8:
+        case BG_ATTR_TEXTORAFFINEMODE:
             switch (GetBgType(bg))
             {
                 case 0:
@@ -577,9 +577,9 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
                 default:
                     return 0;
             }
-        case 9:
+        case BG_ATTR_BGTYPE:
             return GetBgType(bg);
-        case 10:
+        case BG_ATTR_BASETILE:
             return sGpuBgConfigs2[bg].baseTile;
         default:
             return -1;

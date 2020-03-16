@@ -959,7 +959,7 @@ static void Task_SelectTMAction_Type3(u8 taskId)
 
     if (!itemid_is_unique(BagGetItemIdByPocketPosition(POCKET_TM_CASE, data[1])))
     {
-        sTMCaseDynamicResources->savedCallback = sub_808CE60;
+        sTMCaseDynamicResources->savedCallback = Cb2_ReturnToPSS;
         Task_BeginFadeOutFromTMCase(taskId);
     }
     else

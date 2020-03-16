@@ -633,7 +633,7 @@ void sub_810C444(void)
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == 0x4D || templates[i].movementType == 0x4E || templates[i].movementType == 0x4F))
+        if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT))
         {
             r6 = sub_810CF54();
             TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
@@ -696,7 +696,7 @@ static void sub_810C594(void)
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
-        if (objectEvent->movementType == 0x4D || objectEvent->movementType == 0x4E || objectEvent->movementType == 0x4F)
+        if (objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT)
         {
             u8 r3 = sub_810CF54();
             if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)

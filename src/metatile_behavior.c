@@ -7,7 +7,7 @@ static const bool8 sTileSurfable[METATILE_COUNT] = {
     [MB_SEMI_DEEP_WATER] = TRUE,
     [MB_DEEP_WATER] = TRUE,
     [MB_WATERFALL] = TRUE,
-    [MB_SPLASHING_WATER] = TRUE,
+    [MB_OCEAN_WATER] = TRUE,
     [MB_1A] = TRUE,
     [MB_1B] = TRUE,
     [MB_EASTWARD_CURRENT] = TRUE,
@@ -69,17 +69,17 @@ bool8 MetatileBehavior_IsPokeGrass(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsSandOrDeepSand(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSand(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_21 || metatileBehavior == MB_SAND)
+    if(metatileBehavior == MB_SAND || metatileBehavior == MB_SAND_CAVE)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB21OrWaterfallBottom(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSandOrShallowFlowingWater(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_21 || metatileBehavior == MB_WATERFALL_BOTTOM)
+    if(metatileBehavior == MB_SAND || metatileBehavior == MB_SHALLOW_WATER)
         return TRUE;
     else
         return FALSE;
@@ -490,9 +490,9 @@ bool8 MetatileBehavior_IsMB19(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsWaterfallBottom(u8 metatileBehavior)
+bool8 MetatileBehavior_IsShallowFlowingWater(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_WATERFALL_BOTTOM)
+    if(metatileBehavior == MB_SHALLOW_WATER)
         return TRUE;
     else
         return FALSE;
@@ -517,7 +517,7 @@ bool8 MetatileBehavior_IsCrackedIce(u8 metatileBehavior)
 bool8 MetatileBehavior_IsDeepSemiDeepOrSplashingWater(u8 metatileBehavior)
 {
     if((metatileBehavior >= MB_SEMI_DEEP_WATER && metatileBehavior <= MB_DEEP_WATER)
-        || metatileBehavior == MB_SPLASHING_WATER)
+        || metatileBehavior == MB_OCEAN_WATER)
         return TRUE;
     else
         return FALSE;
@@ -647,7 +647,7 @@ bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
 bool8 MetatileBehavior_IsWater(u8 metatileBehavior)
 {
     if((metatileBehavior >= MB_POND_WATER && metatileBehavior <= MB_DEEP_WATER)
-        || metatileBehavior == MB_SPLASHING_WATER
+        || metatileBehavior == MB_OCEAN_WATER
         || (metatileBehavior >= MB_EASTWARD_CURRENT && metatileBehavior <= MB_SOUTHWARD_CURRENT))
             return TRUE;
     else

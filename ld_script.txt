@@ -94,7 +94,6 @@ SECTIONS {
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         src/event_object_movement.o(.text);
-        src/event_object_80688E4.o(.text); /* event_object_movement */
         src/field_message_box.o(.text);
         src/event_object_lock.o(.text);
         src/text_window_graphics.o(.text);
@@ -427,7 +426,6 @@ SECTIONS {
         data/field_player_avatar.o(.rodata);
         data/event_object_movement.o(.rodata);
         src/event_object_movement.o(.rodata);
-        src/event_object_80688E4.o(.rodata); /* event_object_movement */
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
         src/field_tasks.o(.rodata);

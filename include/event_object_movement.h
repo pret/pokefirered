@@ -5,7 +5,8 @@
 
 // Exported struct declarations
 
-enum SpinnerRunnerFollowPatterns {
+enum SpinnerRunnerFollowPatterns
+{
     RUNFOLLOW_ANY,
     RUNFOLLOW_NORTH_SOUTH,
     RUNFOLLOW_EAST_WEST,
@@ -191,7 +192,6 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gUnknown_83A5348;
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
 extern const struct OamData gObjectEventBaseOam_32x32;
-extern const struct Coords16 sDirectionToVectors[];
 extern const u16 gUnknown_8398648[];
 extern const u16 gUnknown_8398688[];
 extern const u8 gReflectionEffectPaletteMap[];

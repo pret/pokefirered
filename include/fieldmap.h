@@ -11,7 +11,7 @@
 #define NUM_PALS_TOTAL 13
 #define VIRTUAL_MAP_SIZE 0x2800
 
-extern struct BackupMapLayout gBackupMapLayout;
+extern struct BackupMapLayout VMap;
 extern const struct MapLayout Route1_Layout;
 
 u32 MapGridGetMetatileIdAt(int, int);

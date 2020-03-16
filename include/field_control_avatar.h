@@ -11,5 +11,4 @@ void SetCableClubWarp(void);
 void sub_806DE28(struct ObjectEvent *);
 void dive_warp(struct MapPosition * pos, u16 behavior);
 
-
 #endif //GUARD_FIELD_CONTROL_AVATAR_H

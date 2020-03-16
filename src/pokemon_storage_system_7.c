@@ -64,10 +64,10 @@ bool8 sub_8095050(void)
     sMoveMonsPtr = Alloc(sizeof(*sMoveMonsPtr));
     if (sMoveMonsPtr != NULL)
     {
-        sPSSData->field_2200 = AddWindow8Bit(&gUnknown_83D35D4);
-        if (sPSSData->field_2200 != 0xFF)
+        gPSSData->field_2200 = AddWindow8Bit(&gUnknown_83D35D4);
+        if (gPSSData->field_2200 != 0xFF)
         {
-            FillWindowPixelBuffer(sPSSData->field_2200, PIXEL_FILL(0));
+            FillWindowPixelBuffer(gPSSData->field_2200, PIXEL_FILL(0));
             return TRUE;
         }
     }
@@ -124,11 +124,11 @@ static bool8 sub_8095138(void)
         ChangeBgX(0, -1024, 0);
         ChangeBgY(0, -1024, 0);
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
-        FillWindowPixelBuffer8Bit(sPSSData->field_2200, PIXEL_FILL(0));
+        FillWindowPixelBuffer8Bit(gPSSData->field_2200, PIXEL_FILL(0));
         sub_80956A4(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
-        PutWindowTilemap(sPSSData->field_2200);
-        CopyWindowToVram8Bit(sPSSData->field_2200, 3);
+        PutWindowTilemap(gPSSData->field_2200);
+        CopyWindowToVram8Bit(gPSSData->field_2200, 3);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
         sub_8094D14(2);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
@@ -184,7 +184,7 @@ static bool8 sub_80952A0(void)
             sub_8095520();
             sMoveMonsPtr->toRow = sMoveMonsPtr->field_6;
             sMoveMonsPtr->toColumn = sMoveMonsPtr->field_7;
-            CopyWindowToVram8Bit(sPSSData->field_2200, 2);
+            CopyWindowToVram8Bit(gPSSData->field_2200, 2);
             sMoveMonsPtr->state++;
         }
         break;
@@ -404,7 +404,7 @@ static void sub_80956A4(u8 x, u8 y)
         const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
         u8 index = GetValidMonIconPalIndex(species) + 8;
 
-        BlitBitmapRectToWindow4BitTo8Bit(sPSSData->field_2200,
+        BlitBitmapRectToWindow4BitTo8Bit(gPSSData->field_2200,
                                          iconGfx,
                                          0,
                                          0,
@@ -425,7 +425,7 @@ static void sub_809572C(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        FillWindowPixelRect8Bit(sPSSData->field_2200,
+        FillWindowPixelRect8Bit(gPSSData->field_2200,
                                 PIXEL_FILL(0),
                                 24 * x,
                                 24 * y,

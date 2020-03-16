@@ -8,11 +8,11 @@
 
 void InitMenu(void)
 {
-    sPSSData->menuItemsCount = 0;
-    sPSSData->menuWidth = 0;
-    sPSSData->menuWindow.bg = 0;
-    sPSSData->menuWindow.paletteNum = 15;
-    sPSSData->menuWindow.baseBlock = 92;
+    gPSSData->menuItemsCount = 0;
+    gPSSData->menuWidth = 0;
+    gPSSData->menuWindow.bg = 0;
+    gPSSData->menuWindow.paletteNum = 15;
+    gPSSData->menuWindow.baseBlock = 92;
 }
 
 static const u8 *const sMenuTexts[] = {
@@ -58,42 +58,42 @@ static const u8 *const sMenuTexts[] = {
 
 void SetMenuText(u8 textId)
 {
-    if (sPSSData->menuItemsCount < MAX_MENU_ITEMS)
+    if (gPSSData->menuItemsCount < MAX_MENU_ITEMS)
     {
         u8 len;
-        struct StorageMenu *menu = &sPSSData->menuItems[sPSSData->menuItemsCount];
+        struct StorageMenu *menu = &gPSSData->menuItems[gPSSData->menuItemsCount];
 
         menu->text = sMenuTexts[textId];
         menu->textId = textId;
         len = StringLength(menu->text);
-        if (len > sPSSData->menuWidth)
-            sPSSData->menuWidth = len;
+        if (len > gPSSData->menuWidth)
+            gPSSData->menuWidth = len;
 
-        sPSSData->menuItemsCount++;
+        gPSSData->menuItemsCount++;
     }
 }
 
 s8 sub_8094E50(u8 arg0)
 {
-    if (arg0 >= sPSSData->menuItemsCount)
+    if (arg0 >= gPSSData->menuItemsCount)
         return -1;
     else
-        return sPSSData->menuItems[arg0].textId;
+        return gPSSData->menuItems[arg0].textId;
 }
 
 void AddMenu(void)
 {
-    sPSSData->menuWindow.width = sPSSData->menuWidth + 2;
-    sPSSData->menuWindow.height = 2 * sPSSData->menuItemsCount;
-    sPSSData->menuWindow.tilemapLeft = 29 - sPSSData->menuWindow.width;
-    sPSSData->menuWindow.tilemapTop = 15 - sPSSData->menuWindow.height;
-    sPSSData->field_CB0 = AddWindow(&sPSSData->menuWindow);
-    ClearWindowTilemap(sPSSData->field_CB0);
-    DrawStdFrameWithCustomTileAndPalette(sPSSData->field_CB0, FALSE, 0x00b, 14);
-    PrintTextArray(sPSSData->field_CB0, 1, 8, 2, 16, sPSSData->menuItemsCount, (void*)sPSSData->menuItems);
-    Menu_InitCursor(sPSSData->field_CB0, 1, 0, 2, 16, sPSSData->menuItemsCount, 0);
+    gPSSData->menuWindow.width = gPSSData->menuWidth + 2;
+    gPSSData->menuWindow.height = 2 * gPSSData->menuItemsCount;
+    gPSSData->menuWindow.tilemapLeft = 29 - gPSSData->menuWindow.width;
+    gPSSData->menuWindow.tilemapTop = 15 - gPSSData->menuWindow.height;
+    gPSSData->field_CB0 = AddWindow(&gPSSData->menuWindow);
+    ClearWindowTilemap(gPSSData->field_CB0);
+    DrawStdFrameWithCustomTileAndPalette(gPSSData->field_CB0, FALSE, 0x00b, 14);
+    PrintTextArray(gPSSData->field_CB0, 1, 8, 2, 16, gPSSData->menuItemsCount, (void*)gPSSData->menuItems);
+    Menu_InitCursor(gPSSData->field_CB0, 1, 0, 2, 16, gPSSData->menuItemsCount, 0);
     ScheduleBgCopyTilemapToVram(0);
-    sPSSData->field_CAE = 0;
+    gPSSData->field_CAE = 0;
 }
 
 bool8 sub_8094F90(void)
@@ -135,13 +135,13 @@ s16 sub_8094F94(void)
         sub_8095024();
 
     if (textId >= 0)
-        textId = sPSSData->menuItems[textId].textId;
+        textId = gPSSData->menuItems[textId].textId;
 
     return textId;
 }
 
 void sub_8095024(void)
 {
-    ClearStdWindowAndFrameToTransparent(sPSSData->field_CB0, TRUE);
-    RemoveWindow(sPSSData->field_CB0);
+    ClearStdWindowAndFrameToTransparent(gPSSData->field_CB0, TRUE);
+    RemoveWindow(gPSSData->field_CB0);
 }

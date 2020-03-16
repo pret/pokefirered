@@ -36,11 +36,11 @@ static void sub_808CD64(struct Sprite * sprite);
 
 // Forward declarations
 
-static const u16 gBoxSelectionPopupPalette[];
-static const u16 gBoxSelectionPopupCenterTiles[];
-static const u16 gBoxSelectionPopupSidesTiles[];
+static const u16 sBoxSelectionPopupPalette[];
+static const u16 sBoxSelectionPopupCenterTiles[];
+static const u16 sBoxSelectionPopupSidesTiles[];
 
-static const struct PSS_MenuStringPtrs gUnknown_83CDA20[] = {
+static const struct PSS_MenuStringPtrs sUnknown_83CDA20[] = {
     {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     {gText_DepositPokemon,  gText_DepositMonDescription },
     {gText_MovePokemon,     gText_MoveMonDescription    },
@@ -60,7 +60,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
-    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
 
     if (!zero1)
@@ -107,7 +107,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
-    tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
+    tileData1 = (u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
     txtColor[0] = bgClr;
     txtColor[1] = fgClr;
@@ -246,7 +246,7 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, 2, gUnknown_83CDA20[task->data[1]].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+        AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, TEXT_SPEED_FF, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
         CopyWindowToVram(0, 3);
         CopyWindowToVram(task->data[15], 3);
         task->data[0]++;
@@ -263,16 +263,16 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         {
         case MENU_NOTHING_CHOSEN:
             task->data[3] = task->data[1];
-            if (gMain.newKeys & DPAD_UP && --task->data[3] < 0)
+            if (JOY_NEW(DPAD_UP) && --task->data[3] < 0)
                 task->data[3] = 4;
 
-            if (gMain.newKeys & DPAD_DOWN && ++task->data[3] > 4)
+            if (JOY_NEW(DPAD_DOWN) && ++task->data[3] > 4)
                 task->data[3] = 0;
             if (task->data[1] != task->data[3])
             {
                 task->data[1] = task->data[3];
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, 2, gUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+                AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
             }
             break;
         case MENU_B_PRESSED:
@@ -305,30 +305,30 @@ static void Task_PokemonStorageSystemPC(u8 taskId)
         }
         break;
     case 3:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, gUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
             task->data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_UP)
+        else if (JOY_NEW(DPAD_UP))
         {
             if (--task->data[1] < 0)
                 task->data[1] = 4;
             Menu_MoveCursor(-1);
             task->data[1] = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, gUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
             task->data[0] = 2;
         }
-        else if (gMain.newKeys & DPAD_DOWN)
+        else if (JOY_NEW(DPAD_DOWN))
         {
             if (++task->data[1] > 3)
                 task->data[1] = 0;
             Menu_MoveCursor(1);
             task->data[1] = Menu_GetCursorPos();
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
-            AddTextPrinterParameterized2(0, 2, gUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+            AddTextPrinterParameterized2(0, 2, sUnknown_83CDA20[task->data[1]].desc, 0, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
             task->data[0] = 2;
         }
         break;
@@ -365,7 +365,7 @@ static void FieldCb_ReturnToPcMenu(void)
     FadeInFromBlack();
 }
 
-static const struct WindowTemplate gUnknown_83CDA48 = {
+static const struct WindowTemplate sUnknown_83CDA48 = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
@@ -378,11 +378,11 @@ static const struct WindowTemplate gUnknown_83CDA48 = {
 static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr)
 {
     s16 windowId;
-    windowId = AddWindow(&gUnknown_83CDA48);
+    windowId = AddWindow(&sUnknown_83CDA48);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(gUnknown_83CDA20), (void *)gUnknown_83CDA20);
-    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(gUnknown_83CDA20), whichMenu);
+    PrintTextArray(windowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 16, NELEMS(sUnknown_83CDA20), (void *)sUnknown_83CDA20);
+    Menu_InitCursor(windowId, 2, 0, 2, 16, NELEMS(sUnknown_83CDA20), whichMenu);
     *windowIdPtr = windowId;
 }
 
@@ -417,11 +417,11 @@ void ResetPokemonStorageSystem(void)
 void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
 {
     struct SpritePalette palette = {
-        gBoxSelectionPopupPalette, palTag
+        sBoxSelectionPopupPalette, palTag
     };
     struct SpriteSheet sheets[] = {
-        {gBoxSelectionPopupCenterTiles, 0x800, tileTag},
-        {gBoxSelectionPopupSidesTiles,  0x180, tileTag + 1},
+        {sBoxSelectionPopupCenterTiles, 0x800, tileTag},
+        {sBoxSelectionPopupSidesTiles,  0x180, tileTag + 1},
         {}
     };
 
@@ -456,22 +456,22 @@ void sub_808C950(void)
 
 u8 HandleBoxChooseSelectionInput(void)
 {
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
         return 201;
     }
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         return sBoxSelectionPopupSpriteManager->curBox;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         PlaySE(SE_SELECT);
         UpdateBoxNameAndCountSprite_WraparoundLeft();
     }
-    else if (gMain.newKeys & DPAD_RIGHT)
+    else if (JOY_NEW(DPAD_RIGHT))
     {
         PlaySE(SE_SELECT);
         UpdateBoxNameAndCountSprite_WraparoundRight();
@@ -648,6 +648,6 @@ static void sub_808CD64(struct Sprite *sprite)
 
 // Forward-declared rodata
 
-static const u16 gBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
-static const u16 gBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
-static const u16 gBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");
+static const u16 sBoxSelectionPopupPalette[] = INCBIN_U16("graphics/interface/pss_unk_83CDA98.gbapal");
+static const u16 sBoxSelectionPopupCenterTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CDAB8.4bpp");
+static const u16 sBoxSelectionPopupSidesTiles[] = INCBIN_U16("graphics/interface/pss_unk_83CE2B8.4bpp");

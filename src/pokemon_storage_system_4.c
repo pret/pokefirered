@@ -150,7 +150,7 @@ static const u16 gUnknown_83D29D0[][2] = {
     {RGB( 7,  7,  7), RGB(31, 31, 31)}
 };
 
-static const struct WallpaperTable gWallpaperTable[] = {
+static const struct WallpaperTable sWallpaperTable[] = {
     {gUnknown_83CEC80, gUnknown_83CF050, gUnknown_83CEC40},
     {gUnknown_83CF16C, gUnknown_83CF374, gUnknown_83CF12C},
     {gUnknown_83CF464, gUnknown_83CF750, gUnknown_83CF424},
@@ -262,16 +262,16 @@ void sub_808FFAC(void)
 
     LoadMonIconPalettes();
     for (i = 0; i < MAX_MON_ICONS; i++)
-        sPSSData->field_B08[i] = 0;
+        gPSSData->field_B08[i] = 0;
     for (i = 0; i < MAX_MON_ICONS; i++)
-        sPSSData->field_B58[i] = 0;
+        gPSSData->field_B58[i] = 0;
     for (i = 0; i < PARTY_SIZE; i++)
-        sPSSData->partySprites[i] = NULL;
+        gPSSData->partySprites[i] = NULL;
     for (i = 0; i < IN_BOX_COUNT; i++)
-        sPSSData->boxMonsSprites[i] = NULL;
+        gPSSData->boxMonsSprites[i] = NULL;
 
-    sPSSData->movingMonSprite = NULL;
-    sPSSData->field_78C = 0;
+    gPSSData->movingMonSprite = NULL;
+    gPSSData->field_78C = 0;
 }
 
 static u8 sub_8090058(void)
@@ -281,12 +281,12 @@ static u8 sub_8090058(void)
 
 void CreateMovingMonIcon(void)
 {
-    u32 personality = GetMonData(&sPSSData->movingMon, MON_DATA_PERSONALITY);
-    u16 species = GetMonData(&sPSSData->movingMon, MON_DATA_SPECIES2);
+    u32 personality = GetMonData(&gPSSData->movingMon, MON_DATA_PERSONALITY);
+    u16 species = GetMonData(&gPSSData->movingMon, MON_DATA_SPECIES2);
     u8 priority = sub_8090058();
 
-    sPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
-    sPSSData->movingMonSprite->callback = sub_80911B0;
+    gPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
+    gPSSData->movingMonSprite->callback = sub_80911B0;
 }
 
 static void sub_80900D4(u8 boxId)
@@ -306,23 +306,23 @@ static void sub_80900D4(u8 boxId)
             if (species != SPECIES_NONE)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
-                sPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+                gPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
             }
             else
             {
-                sPSSData->boxMonsSprites[count] = NULL;
+                gPSSData->boxMonsSprites[count] = NULL;
             }
             boxPosition++;
             count++;
         }
     }
 
-    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
         {
             if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
@@ -337,9 +337,9 @@ void sub_80901EC(u8 boxPosition)
         s16 y = 8 * (3 * (boxPosition / IN_BOX_ROWS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
-        sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
-        if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
-            sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+        gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
+        if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+            gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
 
@@ -349,11 +349,11 @@ static void sub_809029C(s16 arg0)
 
     for (i = 0; i < IN_BOX_COUNT; i++)
     {
-        if (sPSSData->boxMonsSprites[i] != NULL)
+        if (gPSSData->boxMonsSprites[i] != NULL)
         {
-            sPSSData->boxMonsSprites[i]->data[2] = arg0;
-            sPSSData->boxMonsSprites[i]->data[4] = 1;
-            sPSSData->boxMonsSprites[i]->callback = sub_8090324;
+            gPSSData->boxMonsSprites[i]->data[2] = arg0;
+            gPSSData->boxMonsSprites[i]->data[4] = 1;
+            gPSSData->boxMonsSprites[i]->callback = sub_8090324;
         }
     }
 }
@@ -367,7 +367,7 @@ static void sub_80902E0(struct Sprite *sprite)
     }
     else
     {
-        sPSSData->field_C66--;
+        gPSSData->field_C66--;
         sprite->pos1.x = sprite->data[3];
         sprite->callback = SpriteCallbackDummy;
     }
@@ -395,10 +395,10 @@ static void DestroyAllIconsInRow(u8 row)
 
     for (column = 0; column < IN_BOX_COLUMNS; column++)
     {
-        if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+        if (gPSSData->boxMonsSprites[boxPosition] != NULL)
         {
-            DestroyBoxMonIcon(sPSSData->boxMonsSprites[boxPosition]);
-            sPSSData->boxMonsSprites[boxPosition] = NULL;
+            DestroyBoxMonIcon(gPSSData->boxMonsSprites[boxPosition]);
+            gPSSData->boxMonsSprites[boxPosition] = NULL;
         }
         boxPosition += IN_BOX_ROWS;
     }
@@ -414,21 +414,21 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     u8 count = 0;
     u8 boxPosition = row;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < IN_BOX_COLUMNS; i++)
         {
-            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
             {
-                sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
-                                                                            sPSSData->boxPersonalities[boxPosition],
+                gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(gPSSData->boxSpecies[boxPosition],
+                                                                            gPSSData->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
-                if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+                if (gPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
-                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    gPSSData->boxMonsSprites[boxPosition]->data[1] = times;
+                    gPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    gPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    gPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
                     count++;
                 }
             }
@@ -440,19 +440,19 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
     {
         for (i = 0; i < IN_BOX_COLUMNS; i++)
         {
-            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
             {
-                sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
-                                                                            sPSSData->boxPersonalities[boxPosition],
+                gPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(gPSSData->boxSpecies[boxPosition],
+                                                                            gPSSData->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
-                if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+                if (gPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
-                    sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
-                    sPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
-                    sPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
-                    sPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
-                    if (GetBoxMonDataAt(sPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == 0)
-                        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
+                    gPSSData->boxMonsSprites[boxPosition]->data[1] = times;
+                    gPSSData->boxMonsSprites[boxPosition]->data[2] = xDelta;
+                    gPSSData->boxMonsSprites[boxPosition]->data[3] = xDest;
+                    gPSSData->boxMonsSprites[boxPosition]->callback = sub_80902E0;
+                    if (GetBoxMonDataAt(gPSSData->field_C5C, boxPosition, MON_DATA_HELD_ITEM) == 0)
+                        gPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
                     count++;
                 }
             }
@@ -466,56 +466,56 @@ static u8 sub_80903A4(u8 row, u16 times, s16 xDelta)
 
 static void sub_8090574(u8 boxId, s8 direction)
 {
-    sPSSData->field_C6A = 0;
-    sPSSData->field_C6B = boxId;
-    sPSSData->field_C69 = direction;
-    sPSSData->field_C60 = 32;
-    sPSSData->field_C64 = -(6 * direction);
-    sPSSData->field_C66 = 0;
+    gPSSData->field_C6A = 0;
+    gPSSData->field_C6B = boxId;
+    gPSSData->field_C69 = direction;
+    gPSSData->field_C60 = 32;
+    gPSSData->field_C64 = -(6 * direction);
+    gPSSData->field_C66 = 0;
     SetBoxSpeciesAndPersonalities(boxId);
     if (direction > 0)
-        sPSSData->field_C68 = 0;
+        gPSSData->field_C68 = 0;
     else
-        sPSSData->field_C68 = IN_BOX_ROWS - 1;
+        gPSSData->field_C68 = IN_BOX_ROWS - 1;
 
-    sPSSData->field_C62 = (24 * sPSSData->field_C68) + 100;
-    sub_809029C(sPSSData->field_C64);
+    gPSSData->field_C62 = (24 * gPSSData->field_C68) + 100;
+    sub_809029C(gPSSData->field_C64);
 }
 
 static bool8 sub_809062C(void)
 {
-    if (sPSSData->field_C60 != 0)
-        sPSSData->field_C60--;
+    if (gPSSData->field_C60 != 0)
+        gPSSData->field_C60--;
 
-    switch (sPSSData->field_C6A)
+    switch (gPSSData->field_C6A)
     {
     case 0:
-        sPSSData->field_C62 += sPSSData->field_C64;
-        if (sPSSData->field_C62 <= 64 || sPSSData->field_C62 >= 252)
+        gPSSData->field_C62 += gPSSData->field_C64;
+        if (gPSSData->field_C62 <= 64 || gPSSData->field_C62 >= 252)
         {
-            DestroyAllIconsInRow(sPSSData->field_C68);
-            sPSSData->field_C62 += sPSSData->field_C69 * 24;
-            sPSSData->field_C6A++;
+            DestroyAllIconsInRow(gPSSData->field_C68);
+            gPSSData->field_C62 += gPSSData->field_C69 * 24;
+            gPSSData->field_C6A++;
         }
         break;
     case 1:
-        sPSSData->field_C62 += sPSSData->field_C64;
-        sPSSData->field_C66 += sub_80903A4(sPSSData->field_C68, sPSSData->field_C60, sPSSData->field_C64);
-        if ((sPSSData->field_C69 > 0 && sPSSData->field_C68 == IN_BOX_ROWS - 1)
-            || (sPSSData->field_C69 < 0 && sPSSData->field_C68 == 0))
+        gPSSData->field_C62 += gPSSData->field_C64;
+        gPSSData->field_C66 += sub_80903A4(gPSSData->field_C68, gPSSData->field_C60, gPSSData->field_C64);
+        if ((gPSSData->field_C69 > 0 && gPSSData->field_C68 == IN_BOX_ROWS - 1)
+            || (gPSSData->field_C69 < 0 && gPSSData->field_C68 == 0))
         {
-            sPSSData->field_C6A++;
+            gPSSData->field_C6A++;
         }
         else
         {
-            sPSSData->field_C68 += sPSSData->field_C69;
-            sPSSData->field_C6A = 0;
+            gPSSData->field_C68 += gPSSData->field_C69;
+            gPSSData->field_C6A = 0;
         }
         break;
     case 2:
-        if (sPSSData->field_C66 == 0)
+        if (gPSSData->field_C66 == 0)
         {
-            sPSSData->field_C60++;
+            gPSSData->field_C60++;
             return FALSE;
         }
         break;
@@ -535,30 +535,30 @@ static void SetBoxSpeciesAndPersonalities(u8 boxId)
     {
         for (j = 0; j < IN_BOX_ROWS; j++)
         {
-            sPSSData->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
-            if (sPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
-                sPSSData->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
+            gPSSData->boxSpecies[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            if (gPSSData->boxSpecies[boxPosition] != SPECIES_NONE)
+                gPSSData->boxPersonalities[boxPosition] = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
             boxPosition++;
         }
     }
 
-    sPSSData->field_C5C = boxId;
+    gPSSData->field_C5C = boxId;
 }
 
 void DestroyBoxMonIconAtPosition(u8 boxPosition)
 {
-    if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+    if (gPSSData->boxMonsSprites[boxPosition] != NULL)
     {
-        DestroyBoxMonIcon(sPSSData->boxMonsSprites[boxPosition]);
-        sPSSData->boxMonsSprites[boxPosition] = NULL;
+        DestroyBoxMonIcon(gPSSData->boxMonsSprites[boxPosition]);
+        gPSSData->boxMonsSprites[boxPosition] = NULL;
     }
 }
 
 void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
 {
-    if (sPSSData->boxMonsSprites[boxPosition] != NULL)
+    if (gPSSData->boxMonsSprites[boxPosition] != NULL)
     {
-        sPSSData->boxMonsSprites[boxPosition]->oam.objMode = objMode;
+        gPSSData->boxMonsSprites[boxPosition]->oam.objMode = objMode;
     }
 }
 
@@ -568,7 +568,7 @@ void CreatePartyMonsSprites(bool8 arg0)
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
-    sPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    gPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
@@ -576,12 +576,12 @@ void CreatePartyMonsSprites(bool8 arg0)
         if (species != SPECIES_NONE)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            gPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
             count++;
         }
         else
         {
-            sPSSData->partySprites[i] = NULL;
+            gPSSData->partySprites[i] = NULL;
         }
     }
 
@@ -589,17 +589,17 @@ void CreatePartyMonsSprites(bool8 arg0)
     {
         for (i = 0; i < count; i++)
         {
-            sPSSData->partySprites[i]->pos1.y -= 160;
-            sPSSData->partySprites[i]->invisible = TRUE;
+            gPSSData->partySprites[i]->pos1.y -= 160;
+            gPSSData->partySprites[i]->invisible = TRUE;
         }
     }
 
-    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (sPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
-                sPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
+            if (gPSSData->partySprites[i] != NULL && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == 0)
+                gPSSData->partySprites[i]->oam.objMode = ST_OAM_OBJ_BLEND;
         }
     }
 }
@@ -608,16 +608,16 @@ void sub_80909F4(void)
 {
     u16 i, count;
 
-    sPSSData->field_C5E = 0;
+    gPSSData->field_C5E = 0;
     for (i = 0, count = 0; i < PARTY_SIZE; i++)
     {
-        if (sPSSData->partySprites[i] != NULL)
+        if (gPSSData->partySprites[i] != NULL)
         {
             if (i != count)
             {
-                sub_8090A74(sPSSData->partySprites[i], count);
-                sPSSData->partySprites[i] = NULL;
-                sPSSData->field_C5E++;
+                sub_8090A74(gPSSData->partySprites[i], count);
+                gPSSData->partySprites[i] = NULL;
+                gPSSData->field_C5E++;
             }
             count++;
         }
@@ -626,7 +626,7 @@ void sub_80909F4(void)
 
 u8 sub_8090A60(void)
 {
-    return sPSSData->field_C5E;
+    return gPSSData->field_C5E;
 }
 
 static void sub_8090A74(struct Sprite *sprite, u16 partyId)
@@ -670,17 +670,17 @@ static void sub_8090AE0(struct Sprite *sprite)
             sprite->pos1.y = 8 * (3 * (sprite->data[1] - 1)) + 16;
         }
         sprite->callback = SpriteCallbackDummy;
-        sPSSData->partySprites[sprite->data[1]] = sprite;
-        sPSSData->field_C5E--;
+        gPSSData->partySprites[sprite->data[1]] = sprite;
+        gPSSData->field_C5E--;
     }
 }
 
 void DestroyMovingMonIcon(void)
 {
-    if (sPSSData->movingMonSprite != NULL)
+    if (gPSSData->movingMonSprite != NULL)
     {
-        DestroyBoxMonIcon(sPSSData->movingMonSprite);
-        sPSSData->movingMonSprite = NULL;
+        DestroyBoxMonIcon(gPSSData->movingMonSprite);
+        gPSSData->movingMonSprite = NULL;
     }
 }
 
@@ -690,25 +690,25 @@ void sub_8090B98(s16 yDelta)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (sPSSData->partySprites[i] != NULL)
+        if (gPSSData->partySprites[i] != NULL)
         {
-            sPSSData->partySprites[i]->pos1.y += yDelta;
-            posY = sPSSData->partySprites[i]->pos1.y + sPSSData->partySprites[i]->pos2.y + sPSSData->partySprites[i]->centerToCornerVecY;
+            gPSSData->partySprites[i]->pos1.y += yDelta;
+            posY = gPSSData->partySprites[i]->pos1.y + gPSSData->partySprites[i]->pos2.y + gPSSData->partySprites[i]->centerToCornerVecY;
             posY += 16;
             if (posY > 192)
-                sPSSData->partySprites[i]->invisible = TRUE;
+                gPSSData->partySprites[i]->invisible = TRUE;
             else
-                sPSSData->partySprites[i]->invisible = FALSE;
+                gPSSData->partySprites[i]->invisible = FALSE;
         }
     }
 }
 
 void DestroyPartyMonIcon(u8 partyId)
 {
-    if (sPSSData->partySprites[partyId] != NULL)
+    if (gPSSData->partySprites[partyId] != NULL)
     {
-        DestroyBoxMonIcon(sPSSData->partySprites[partyId]);
-        sPSSData->partySprites[partyId] = NULL;
+        DestroyBoxMonIcon(gPSSData->partySprites[partyId]);
+        gPSSData->partySprites[partyId] = NULL;
     }
 }
 
@@ -718,19 +718,19 @@ void DestroyAllPartyMonIcons(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (sPSSData->partySprites[i] != NULL)
+        if (gPSSData->partySprites[i] != NULL)
         {
-            DestroyBoxMonIcon(sPSSData->partySprites[i]);
-            sPSSData->partySprites[i] = NULL;
+            DestroyBoxMonIcon(gPSSData->partySprites[i]);
+            gPSSData->partySprites[i] = NULL;
         }
     }
 }
 
 void SetPartyMonIconObjMode(u8 partyId, u8 objMode)
 {
-    if (sPSSData->partySprites[partyId] != NULL)
+    if (gPSSData->partySprites[partyId] != NULL)
     {
-        sPSSData->partySprites[partyId]->oam.objMode = objMode;
+        gPSSData->partySprites[partyId]->oam.objMode = objMode;
     }
 }
 
@@ -738,83 +738,83 @@ void sub_8090CC0(u8 mode, u8 id)
 {
     if (mode == MODE_PARTY)
     {
-        sPSSData->movingMonSprite = sPSSData->partySprites[id];
-        sPSSData->partySprites[id] = NULL;
+        gPSSData->movingMonSprite = gPSSData->partySprites[id];
+        gPSSData->partySprites[id] = NULL;
     }
     else if (mode == MODE_BOX)
     {
-        sPSSData->movingMonSprite = sPSSData->boxMonsSprites[id];
-        sPSSData->boxMonsSprites[id] = NULL;
+        gPSSData->movingMonSprite = gPSSData->boxMonsSprites[id];
+        gPSSData->boxMonsSprites[id] = NULL;
     }
     else
     {
         return;
     }
 
-    sPSSData->movingMonSprite->callback = sub_80911B0;
-    sPSSData->movingMonSprite->oam.priority = sub_8090058();
-    sPSSData->movingMonSprite->subpriority = 7;
+    gPSSData->movingMonSprite->callback = sub_80911B0;
+    gPSSData->movingMonSprite->oam.priority = sub_8090058();
+    gPSSData->movingMonSprite->subpriority = 7;
 }
 
 void sub_8090D58(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
     {
-        sPSSData->partySprites[position] = sPSSData->movingMonSprite;
-        sPSSData->partySprites[position]->oam.priority = 1;
-        sPSSData->partySprites[position]->subpriority = 12;
+        gPSSData->partySprites[position] = gPSSData->movingMonSprite;
+        gPSSData->partySprites[position]->oam.priority = 1;
+        gPSSData->partySprites[position]->subpriority = 12;
     }
     else
     {
-        sPSSData->boxMonsSprites[position] = sPSSData->movingMonSprite;
-        sPSSData->boxMonsSprites[position]->oam.priority = 2;
-        sPSSData->boxMonsSprites[position]->subpriority = 19 - (position % IN_BOX_ROWS);
+        gPSSData->boxMonsSprites[position] = gPSSData->movingMonSprite;
+        gPSSData->boxMonsSprites[position]->oam.priority = 2;
+        gPSSData->boxMonsSprites[position]->subpriority = 19 - (position % IN_BOX_ROWS);
     }
-    sPSSData->movingMonSprite->callback = SpriteCallbackDummy;
-    sPSSData->movingMonSprite = NULL;
+    gPSSData->movingMonSprite->callback = SpriteCallbackDummy;
+    gPSSData->movingMonSprite = NULL;
 }
 
 void sub_8090E08(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
-        sPSSData->field_B00 = &sPSSData->partySprites[position];
+        gPSSData->field_B00 = &gPSSData->partySprites[position];
     else
-        sPSSData->field_B00 = &sPSSData->boxMonsSprites[position];
+        gPSSData->field_B00 = &gPSSData->boxMonsSprites[position];
 
-    sPSSData->movingMonSprite->callback = SpriteCallbackDummy;
-    sPSSData->field_C5D = 0;
+    gPSSData->movingMonSprite->callback = SpriteCallbackDummy;
+    gPSSData->field_C5D = 0;
 }
 
 bool8 sub_8090E74(void)
 {
-    if (sPSSData->field_C5D == 16)
+    if (gPSSData->field_C5D == 16)
         return FALSE;
 
-    sPSSData->field_C5D++;
-    if (sPSSData->field_C5D & 1)
+    gPSSData->field_C5D++;
+    if (gPSSData->field_C5D & 1)
     {
-        (*sPSSData->field_B00)->pos1.y--;
-        sPSSData->movingMonSprite->pos1.y++;
+        (*gPSSData->field_B00)->pos1.y--;
+        gPSSData->movingMonSprite->pos1.y++;
     }
 
-    (*sPSSData->field_B00)->pos2.x = gSineTable[sPSSData->field_C5D * 8] / 16;
-    sPSSData->movingMonSprite->pos2.x = -(gSineTable[sPSSData->field_C5D * 8] / 16);
-    if (sPSSData->field_C5D == 8)
+    (*gPSSData->field_B00)->pos2.x = gSineTable[gPSSData->field_C5D * 8] / 16;
+    gPSSData->movingMonSprite->pos2.x = -(gSineTable[gPSSData->field_C5D * 8] / 16);
+    if (gPSSData->field_C5D == 8)
     {
-        sPSSData->movingMonSprite->oam.priority = (*sPSSData->field_B00)->oam.priority;
-        sPSSData->movingMonSprite->subpriority = (*sPSSData->field_B00)->subpriority;
-        (*sPSSData->field_B00)->oam.priority = sub_8090058();
-        (*sPSSData->field_B00)->subpriority = 7;
+        gPSSData->movingMonSprite->oam.priority = (*gPSSData->field_B00)->oam.priority;
+        gPSSData->movingMonSprite->subpriority = (*gPSSData->field_B00)->subpriority;
+        (*gPSSData->field_B00)->oam.priority = sub_8090058();
+        (*gPSSData->field_B00)->subpriority = 7;
     }
 
-    if (sPSSData->field_C5D == 16)
+    if (gPSSData->field_C5D == 16)
     {
-        struct Sprite *sprite = sPSSData->movingMonSprite;
-        sPSSData->movingMonSprite = (*sPSSData->field_B00);
-        *sPSSData->field_B00 = sprite;
+        struct Sprite *sprite = gPSSData->movingMonSprite;
+        gPSSData->movingMonSprite = (*gPSSData->field_B00);
+        *gPSSData->field_B00 = sprite;
 
-        sPSSData->movingMonSprite->callback = sub_80911B0;
-        (*sPSSData->field_B00)->callback = SpriteCallbackDummy;
+        gPSSData->movingMonSprite->callback = sub_80911B0;
+        (*gPSSData->field_B00)->callback = SpriteCallbackDummy;
     }
 
     return TRUE;
@@ -825,77 +825,77 @@ void sub_8090FC4(u8 mode, u8 position)
     switch (mode)
     {
     case MODE_PARTY:
-        sPSSData->field_B04 = &sPSSData->partySprites[position];
+        gPSSData->field_B04 = &gPSSData->partySprites[position];
         break;
     case MODE_BOX:
-        sPSSData->field_B04 = &sPSSData->boxMonsSprites[position];
+        gPSSData->field_B04 = &gPSSData->boxMonsSprites[position];
         break;
     case MODE_2:
-        sPSSData->field_B04 = &sPSSData->movingMonSprite;
+        gPSSData->field_B04 = &gPSSData->movingMonSprite;
         break;
     default:
         return;
     }
 
-    if (*sPSSData->field_B04 != NULL)
+    if (*gPSSData->field_B04 != NULL)
     {
-        InitSpriteAffineAnim(*sPSSData->field_B04);
-        (*sPSSData->field_B04)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        (*sPSSData->field_B04)->affineAnims = gUnknown_83CEC38;
-        StartSpriteAffineAnim(*sPSSData->field_B04, 0);
+        InitSpriteAffineAnim(*gPSSData->field_B04);
+        (*gPSSData->field_B04)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+        (*gPSSData->field_B04)->affineAnims = gUnknown_83CEC38;
+        StartSpriteAffineAnim(*gPSSData->field_B04, 0);
     }
 }
 
 bool8 sub_8091084(void)
 {
-    if (*sPSSData->field_B04 == NULL || (*sPSSData->field_B04)->invisible)
+    if (*gPSSData->field_B04 == NULL || (*gPSSData->field_B04)->invisible)
         return FALSE;
 
-    if ((*sPSSData->field_B04)->affineAnimEnded)
-        (*sPSSData->field_B04)->invisible = TRUE;
+    if ((*gPSSData->field_B04)->affineAnimEnded)
+        (*gPSSData->field_B04)->invisible = TRUE;
 
     return TRUE;
 }
 
 void sub_80910CC(void)
 {
-    if (*sPSSData->field_B04 != NULL)
+    if (*gPSSData->field_B04 != NULL)
     {
-        FreeOamMatrix((*sPSSData->field_B04)->oam.matrixNum);
-        DestroyBoxMonIcon(*sPSSData->field_B04);
-        *sPSSData->field_B04 = NULL;
+        FreeOamMatrix((*gPSSData->field_B04)->oam.matrixNum);
+        DestroyBoxMonIcon(*gPSSData->field_B04);
+        *gPSSData->field_B04 = NULL;
     }
 }
 
 void sub_8091114(void)
 {
-    if (*sPSSData->field_B04 != NULL)
+    if (*gPSSData->field_B04 != NULL)
     {
-        (*sPSSData->field_B04)->invisible = FALSE;
-        StartSpriteAffineAnim(*sPSSData->field_B04, 1);
+        (*gPSSData->field_B04)->invisible = FALSE;
+        StartSpriteAffineAnim(*gPSSData->field_B04, 1);
     }
 }
 
 bool8 sub_8091150(void)
 {
-    if (sPSSData->field_B04 == NULL)
+    if (gPSSData->field_B04 == NULL)
         return FALSE;
 
-    if ((*sPSSData->field_B04)->affineAnimEnded)
-        sPSSData->field_B04 = NULL;
+    if ((*gPSSData->field_B04)->affineAnimEnded)
+        gPSSData->field_B04 = NULL;
 
     return TRUE;
 }
 
 void SetMovingMonPriority(u8 priority)
 {
-    sPSSData->movingMonSprite->oam.priority = priority;
+    gPSSData->movingMonSprite->oam.priority = priority;
 }
 
 static void sub_80911B0(struct Sprite *sprite)
 {
-    sprite->pos1.x = sPSSData->field_CB4->pos1.x;
-    sprite->pos1.y = sPSSData->field_CB4->pos1.y + sPSSData->field_CB4->pos2.y + 4;
+    sprite->pos1.x = gPSSData->field_CB4->pos1.x;
+    sprite->pos1.y = gPSSData->field_CB4->pos1.y + gPSSData->field_CB4->pos2.y + 4;
 }
 
 static u16 sub_80911D4(u16 species)
@@ -905,7 +905,7 @@ static u16 sub_80911D4(u16 species)
     // Find the currently-allocated slot
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (sPSSData->field_B58[i] == species)
+        if (gPSSData->field_B58[i] == species)
             break;
     }
 
@@ -914,15 +914,15 @@ static u16 sub_80911D4(u16 species)
         // Find the first empty slot
         for (i = 0; i < MAX_MON_ICONS; i++)
         {
-            if (sPSSData->field_B58[i] == SPECIES_NONE)
+            if (gPSSData->field_B58[i] == SPECIES_NONE)
                 break;
         }
         if (i == MAX_MON_ICONS)
             return 0xFFFF;
     }
 
-    sPSSData->field_B58[i] = species;
-    sPSSData->field_B08[i]++;
+    gPSSData->field_B58[i] = species;
+    gPSSData->field_B08[i]++;
     var = 16 * i;
     CpuCopy32(GetMonIconTiles(species, TRUE), (void*)(OBJ_VRAM0) + var * 32, 0x200);
 
@@ -935,10 +935,10 @@ static void sub_8091290(u16 species)
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (sPSSData->field_B58[i] == species)
+        if (gPSSData->field_B58[i] == species)
         {
-            if (--sPSSData->field_B08[i] == 0)
-                sPSSData->field_B58[i] = 0;
+            if (--gPSSData->field_B08[i] == 0)
+                gPSSData->field_B58[i] = 0;
             break;
         }
     }
@@ -994,15 +994,15 @@ static void sub_8091420(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        sPSSData->field_2D2 = 0;
-        sPSSData->bg2_X = 0;
-        task->data[1] = RequestDma3Fill(0, sPSSData->field_4AC4, 0x1000, 1);
+        gPSSData->field_2D2 = 0;
+        gPSSData->bg2_X = 0;
+        task->data[1] = RequestDma3Fill(0, gPSSData->field_4AC4, 0x1000, 1);
         break;
     case 1:
         if (CheckForSpaceForDma3Request(task->data[1]) == -1)
             return;
 
-        SetBgTilemapBuffer(2, sPSSData->field_4AC4);
+        SetBgTilemapBuffer(2, gPSSData->field_4AC4);
         ShowBg(2);
         break;
     case 2:
@@ -1032,44 +1032,44 @@ void SetUpScrollToBox(u8 boxId)
 {
     s8 direction = sub_80916F4(boxId);
 
-    sPSSData->field_2CE = (direction > 0) ? 6 : -6;
-    sPSSData->field_2D3 = (direction > 0) ? 1 : 2;
-    sPSSData->field_2D0 = 32;
-    sPSSData->field_2D4 = boxId;
-    sPSSData->field_2D6 = (direction <= 0) ? 5 : 0;
-    sPSSData->field_2D8 = direction;
-    sPSSData->field_2DA = (direction > 0) ? 264 : 56;
-    sPSSData->field_2DC = (direction <= 0) ? 5 : 0;
-    sPSSData->field_2DE = 0;
-    sPSSData->field_2E0 = 2;
-    sPSSData->field_A64 = boxId;
-    sPSSData->field_A65 = direction;
-    sPSSData->field_A63 = 0;
+    gPSSData->field_2CE = (direction > 0) ? 6 : -6;
+    gPSSData->field_2D3 = (direction > 0) ? 1 : 2;
+    gPSSData->field_2D0 = 32;
+    gPSSData->field_2D4 = boxId;
+    gPSSData->field_2D6 = (direction <= 0) ? 5 : 0;
+    gPSSData->field_2D8 = direction;
+    gPSSData->field_2DA = (direction > 0) ? 264 : 56;
+    gPSSData->field_2DC = (direction <= 0) ? 5 : 0;
+    gPSSData->field_2DE = 0;
+    gPSSData->field_2E0 = 2;
+    gPSSData->field_A64 = boxId;
+    gPSSData->field_A65 = direction;
+    gPSSData->field_A63 = 0;
 }
 
 bool8 ScrollToBox(void)
 {
     bool8 var;
 
-    switch (sPSSData->field_A63)
+    switch (gPSSData->field_A63)
     {
     case 0:
-        LoadWallpaperGfx(sPSSData->field_A64, sPSSData->field_A65);
-        sPSSData->field_A63++;
+        LoadWallpaperGfx(gPSSData->field_A64, gPSSData->field_A65);
+        gPSSData->field_A63++;
     case 1:
         if (!WaitForWallpaperGfxLoad())
             return TRUE;
 
-        sub_8090574(sPSSData->field_A64, sPSSData->field_A65);
-        sub_8091C48(sPSSData->field_A64, sPSSData->field_A65);
-        sub_809200C(sPSSData->field_A65);
+        sub_8090574(gPSSData->field_A64, gPSSData->field_A65);
+        sub_8091C48(gPSSData->field_A64, gPSSData->field_A65);
+        sub_809200C(gPSSData->field_A65);
         break;
     case 2:
         var = sub_809062C();
-        if (sPSSData->field_2D0 != 0)
+        if (gPSSData->field_2D0 != 0)
         {
-            sPSSData->bg2_X += sPSSData->field_2CE;
-            if (--sPSSData->field_2D0 != 0)
+            gPSSData->bg2_X += gPSSData->field_2CE;
+            if (--gPSSData->field_2D0 != 0)
                 return TRUE;
             sub_8091E34();
             sub_80920AC();
@@ -1077,7 +1077,7 @@ bool8 ScrollToBox(void)
         return var;
     }
 
-    sPSSData->field_A63++;
+    gPSSData->field_A63++;
     return TRUE;
 }
 
@@ -1100,36 +1100,36 @@ void SetWallpaperForCurrentBox(u8 wallpaperId)
 {
     u8 boxId = StorageGetCurrentBox();
     SetBoxWallpaper(boxId, wallpaperId);
-    sPSSData->wallpaperChangeState = 0;
+    gPSSData->wallpaperChangeState = 0;
 }
 
 bool8 DoWallpaperGfxChange(void)
 {
-    switch (sPSSData->wallpaperChangeState)
+    switch (gPSSData->wallpaperChangeState)
     {
     case 0:
-        BeginNormalPaletteFade(sPSSData->field_738, 1, 0, 16, RGB_WHITEALPHA);
-        sPSSData->wallpaperChangeState++;
+        BeginNormalPaletteFade(gPSSData->field_738, 1, 0, 16, RGB_WHITEALPHA);
+        gPSSData->wallpaperChangeState++;
         break;
     case 1:
         if (!UpdatePaletteFade())
         {
             u8 curBox = StorageGetCurrentBox();
             LoadWallpaperGfx(curBox, 0);
-            sPSSData->wallpaperChangeState++;
+            gPSSData->wallpaperChangeState++;
         }
         break;
     case 2:
         if (WaitForWallpaperGfxLoad() == TRUE)
         {
             sub_8091EF0();
-            BeginNormalPaletteFade(sPSSData->field_738, 1, 16, 0, RGB_WHITEALPHA);
-            sPSSData->wallpaperChangeState++;
+            BeginNormalPaletteFade(gPSSData->field_738, 1, 16, 0, RGB_WHITEALPHA);
+            gPSSData->wallpaperChangeState++;
         }
         break;
     case 3:
         if (!UpdatePaletteFade())
-            sPSSData->wallpaperChangeState++;
+            gPSSData->wallpaperChangeState++;
         break;
     case 4:
         return FALSE;
@@ -1145,26 +1145,26 @@ static void LoadWallpaperGfx(u8 boxId, s8 direction)
     void *iconGfx;
     u32 size1, size2;
 
-    sPSSData->field_6F9 = 0;
-    sPSSData->field_6FA = boxId;
-    sPSSData->field_6FB = direction;
-    if (sPSSData->field_6FB != 0)
+    gPSSData->field_6F9 = 0;
+    gPSSData->field_6FA = boxId;
+    gPSSData->field_6FB = direction;
+    if (gPSSData->field_6FB != 0)
     {
-        sPSSData->field_2D2 = (sPSSData->field_2D2 == 0);
-        sub_8091A24(sPSSData->field_4AC4);
+        gPSSData->field_2D2 = (gPSSData->field_2D2 == 0);
+        sub_8091A24(gPSSData->field_4AC4);
     }
 
-    wallpaperId = GetBoxWallpaper(sPSSData->field_6FA);
-    wallpaperGfx = &gWallpaperTable[wallpaperId];
-    LZ77UnCompWram(wallpaperGfx->tileMap, sPSSData->field_792);
-    sub_8091984(sPSSData->field_4AC4, sPSSData->field_792, sPSSData->field_6FB, sPSSData->field_2D2);
+    wallpaperId = GetBoxWallpaper(gPSSData->field_6FA);
+    wallpaperGfx = &sWallpaperTable[wallpaperId];
+    LZ77UnCompWram(wallpaperGfx->tileMap, gPSSData->field_792);
+    sub_8091984(gPSSData->field_4AC4, gPSSData->field_792, gPSSData->field_6FB, gPSSData->field_2D2);
 
-    if (sPSSData->field_6FB != 0)
-        LoadPalette(wallpaperGfx->palettes, (sPSSData->field_2D2 * 32) + 0x40, 0x40);
+    if (gPSSData->field_6FB != 0)
+        LoadPalette(wallpaperGfx->palettes, (gPSSData->field_2D2 * 32) + 0x40, 0x40);
     else
-        CpuCopy16(wallpaperGfx->palettes, &gPlttBufferUnfaded[(sPSSData->field_2D2 * 32) + 0x40], 0x40);
+        CpuCopy16(wallpaperGfx->palettes, &gPlttBufferUnfaded[(gPSSData->field_2D2 * 32) + 0x40], 0x40);
 
-    DecompressAndLoadBgGfxUsingHeap(2, wallpaperGfx->tiles, 0, 256 * sPSSData->field_2D2, 0);
+    DecompressAndLoadBgGfxUsingHeap(2, wallpaperGfx->tiles, 0, 256 * gPSSData->field_2D2, 0);
 
     CopyBgTilemapBufferToVram(2);
 }
@@ -1180,7 +1180,7 @@ static bool32 WaitForWallpaperGfxLoad(void)
 static void sub_8091984(void *buffer, const void *tilemap, s8 direction, u8 arg2)
 {
     s16 var = (arg2 * 2) + 3;
-    s16 x = ((sPSSData->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
+    s16 x = ((gPSSData->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
 
     CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 0x14, 0x12, x, 2, 0x14, 0x12, 0x11, arg2 << 8, var);
 
@@ -1198,7 +1198,7 @@ static void sub_8091A24(void *arg0)
 {
     u16 i;
     u16 *dest = arg0;
-    s16 r3 = ((sPSSData->bg2_X / 8) + 30) & 0x3F;
+    s16 r3 = ((gPSSData->bg2_X / 8) + 30) & 0x3F;
 
     if (r3 <= 31)
         dest += r3 + 0x260;
@@ -1222,39 +1222,39 @@ static void sub_8091A94(u8 boxId)
     s16 r6;
     u16 i;
 
-    struct SpriteSheet spriteSheet = {sPSSData->field_2F8, 0x200, TAG_TILE_3};
+    struct SpriteSheet spriteSheet = {gPSSData->field_2F8, 0x200, TAG_TILE_3};
     struct SpritePalette palettes[] = {
-        {sPSSData->field_6FC, TAG_PAL_DAC9},
+        {gPSSData->field_6FC, TAG_PAL_DAC9},
         {}
     };
 
     u16 wallpaperId = GetBoxWallpaper(boxId);
 
-    sPSSData->field_6FC[14] = gUnknown_83D29D0[wallpaperId][0];
-    sPSSData->field_6FC[15] = gUnknown_83D29D0[wallpaperId][1];
+    gPSSData->field_6FC[14] = gUnknown_83D29D0[wallpaperId][0];
+    gPSSData->field_6FC[15] = gUnknown_83D29D0[wallpaperId][1];
     LoadSpritePalettes(palettes);
-    sPSSData->field_738 = 0x3f0;
+    gPSSData->field_738 = 0x3f0;
 
     tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    sPSSData->field_71C = 0x10e + 16 * tagIndex;
-    sPSSData->field_738 |= 0x10000 << tagIndex;
+    gPSSData->field_71C = 0x10e + 16 * tagIndex;
+    gPSSData->field_738 |= 0x10000 << tagIndex;
 
     tagIndex = IndexOfSpritePaletteTag(TAG_PAL_DAC9);
-    sPSSData->field_71E = 0x10e + 16 * tagIndex;
-    sPSSData->field_738 |= 0x10000 << tagIndex;
+    gPSSData->field_71E = 0x10e + 16 * tagIndex;
+    gPSSData->field_738 |= 0x10000 << tagIndex;
 
-    StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, sPSSData->field_4F8, 2);
+    StringCopyPadded(gPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(gPSSData->field_21B8, gPSSData->field_2F8, 0, 0, gPSSData->field_4F8, 2);
     LoadSpriteSheet(&spriteSheet);
     r6 = sub_8091F60(GetBoxNamePtr(boxId));
 
     for (i = 0; i < 2; i++)
     {
         u8 spriteId = CreateSprite(&gUnknown_83D2B7C, r6 + i * 32, 28, 24);
-        sPSSData->field_720[i] = &gSprites[spriteId];
-        StartSpriteAnim(sPSSData->field_720[i], i);
+        gPSSData->field_720[i] = &gSprites[spriteId];
+        StartSpriteAnim(gPSSData->field_720[i], i);
     }
-    sPSSData->field_6F8 = 0;
+    gPSSData->field_6F8 = 0;
 }
 
 static void sub_8091C48(u8 boxId, s8 direction)
@@ -1262,25 +1262,25 @@ static void sub_8091C48(u8 boxId, s8 direction)
     u16 r8;
     s16 x, x2;
     u16 i;
-    struct SpriteSheet spriteSheet = {sPSSData->field_2F8, 0x200, TAG_TILE_3};
+    struct SpriteSheet spriteSheet = {gPSSData->field_2F8, 0x200, TAG_TILE_3};
     struct SpriteTemplate template = gUnknown_83D2B7C;
 
-    sPSSData->field_6F8 = (sPSSData->field_6F8 == 0);
-    if (sPSSData->field_6F8 == 0)
+    gPSSData->field_6F8 = (gPSSData->field_6F8 == 0);
+    if (gPSSData->field_6F8 == 0)
     {
         spriteSheet.tag = TAG_TILE_3;
-        r8 = sPSSData->field_71C;
+        r8 = gPSSData->field_71C;
     }
     else
     {
         spriteSheet.tag = TAG_TILE_4;
-        r8 = sPSSData->field_71C;
+        r8 = gPSSData->field_71C;
         template.tileTag = TAG_TILE_4;
         template.paletteTag = TAG_PAL_DAC9;
     }
 
-    StringCopyPadded(sPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
-    DrawTextWindowAndBufferTiles(sPSSData->field_21B8, sPSSData->field_2F8, 0, 0, sPSSData->field_4F8, 2);
+    StringCopyPadded(gPSSData->field_21B8, GetBoxNamePtr(boxId), 0, 8);
+    DrawTextWindowAndBufferTiles(gPSSData->field_21B8, gPSSData->field_2F8, 0, 0, gPSSData->field_4F8, 2);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_83D29D0[GetBoxWallpaper(boxId)], r8, 4);
     x = sub_8091F60(GetBoxNamePtr(boxId));
@@ -1291,28 +1291,28 @@ static void sub_8091C48(u8 boxId, s8 direction)
     {
         u8 spriteId = CreateSprite(&template, i * 32 + x2, 28, 24);
 
-        sPSSData->field_728[i] = &gSprites[spriteId];
-        sPSSData->field_728[i]->data[0] = (-direction) * 6;
-        sPSSData->field_728[i]->data[1] = i * 32 + x;
-        sPSSData->field_728[i]->data[2] = 0;
-        sPSSData->field_728[i]->callback = sub_8091E84;
-        StartSpriteAnim(sPSSData->field_728[i], i);
+        gPSSData->field_728[i] = &gSprites[spriteId];
+        gPSSData->field_728[i]->data[0] = (-direction) * 6;
+        gPSSData->field_728[i]->data[1] = i * 32 + x;
+        gPSSData->field_728[i]->data[2] = 0;
+        gPSSData->field_728[i]->callback = sub_8091E84;
+        StartSpriteAnim(gPSSData->field_728[i], i);
 
-        sPSSData->field_720[i]->data[0] = (-direction) * 6;
-        sPSSData->field_720[i]->data[1] = 1;
-        sPSSData->field_720[i]->callback = sub_8091EB8;
+        gPSSData->field_720[i]->data[0] = (-direction) * 6;
+        gPSSData->field_720[i]->data[1] = 1;
+        gPSSData->field_720[i]->callback = sub_8091EB8;
     }
 }
 
 static void sub_8091E34(void)
 {
-    if (sPSSData->field_6F8 == 0)
+    if (gPSSData->field_6F8 == 0)
         FreeSpriteTilesByTag(TAG_TILE_4);
     else
         FreeSpriteTilesByTag(TAG_TILE_3);
 
-    sPSSData->field_720[0] = sPSSData->field_728[0];
-    sPSSData->field_720[1] = sPSSData->field_728[1];
+    gPSSData->field_720[0] = gPSSData->field_728[0];
+    gPSSData->field_720[1] = gPSSData->field_728[1];
 }
 
 static void sub_8091E84(struct Sprite *sprite)
@@ -1342,10 +1342,10 @@ static void sub_8091EF0(void)
 {
     u8 boxId = StorageGetCurrentBox();
     u8 wallpaperId = GetBoxWallpaper(boxId);
-    if (sPSSData->field_6F8 == 0)
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71C, 4);
+    if (gPSSData->field_6F8 == 0)
+        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->field_71C, 4);
     else
-        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + sPSSData->field_71E, 4);
+        CpuCopy16(gUnknown_83D29D0[wallpaperId], gPlttBufferUnfaded + gPSSData->field_71E, 4);
 }
 
 static s16 sub_8091F60(const u8 *string)
@@ -1366,7 +1366,7 @@ static void sub_8091F80(void)
             struct Sprite *sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, i);
             sprite->data[3] = (i == 0) ? -1 : 1;
-            sPSSData->field_730[i] = sprite;
+            gPSSData->field_730[i] = sprite;
         }
     }
     if (IsCursorOnBox())
@@ -1379,25 +1379,25 @@ static void sub_809200C(s8 direction)
 
     for (i = 0; i < 2; i++)
     {
-        sPSSData->field_730[i]->pos2.x = 0;
-        sPSSData->field_730[i]->data[0] = 2;
+        gPSSData->field_730[i]->pos2.x = 0;
+        gPSSData->field_730[i]->data[0] = 2;
     }
     if (direction < 0)
     {
-        sPSSData->field_730[0]->data[1] = 29;
-        sPSSData->field_730[1]->data[1] = 5;
-        sPSSData->field_730[0]->data[2] = 0x48;
-        sPSSData->field_730[1]->data[2] = 0x48;
+        gPSSData->field_730[0]->data[1] = 29;
+        gPSSData->field_730[1]->data[1] = 5;
+        gPSSData->field_730[0]->data[2] = 0x48;
+        gPSSData->field_730[1]->data[2] = 0x48;
     }
     else
     {
-        sPSSData->field_730[0]->data[1] = 5;
-        sPSSData->field_730[1]->data[1] = 29;
-        sPSSData->field_730[0]->data[2] = 0xF8;
-        sPSSData->field_730[1]->data[2] = 0xF8;
+        gPSSData->field_730[0]->data[1] = 5;
+        gPSSData->field_730[1]->data[1] = 29;
+        gPSSData->field_730[0]->data[2] = 0xF8;
+        gPSSData->field_730[1]->data[2] = 0xF8;
     }
-    sPSSData->field_730[0]->data[7] = 0;
-    sPSSData->field_730[1]->data[7] = 1;
+    gPSSData->field_730[0]->data[7] = 0;
+    gPSSData->field_730[1]->data[7] = 1;
 }
 
 static void sub_80920AC(void)
@@ -1406,9 +1406,9 @@ static void sub_80920AC(void)
 
     for (i = 0; i < 2; i++)
     {
-        sPSSData->field_730[i]->pos1.x = 0x88 * i + 0x5c;
-        sPSSData->field_730[i]->pos2.x = 0;
-        sPSSData->field_730[i]->invisible = FALSE;
+        gPSSData->field_730[i]->pos1.x = 0x88 * i + 0x5c;
+        gPSSData->field_730[i]->pos2.x = 0;
+        gPSSData->field_730[i]->invisible = FALSE;
     }
     sub_80920FC(TRUE);
 }
@@ -1421,17 +1421,17 @@ void sub_80920FC(bool8 a0)
     {
         for (i = 0; i < 2; i++)
         {
-            sPSSData->field_730[i]->data[0] = 1;
-            sPSSData->field_730[i]->data[1] = 0;
-            sPSSData->field_730[i]->data[2] = 0;
-            sPSSData->field_730[i]->data[4] = 0;
+            gPSSData->field_730[i]->data[0] = 1;
+            gPSSData->field_730[i]->data[1] = 0;
+            gPSSData->field_730[i]->data[2] = 0;
+            gPSSData->field_730[i]->data[4] = 0;
         }
     }
     else
     {
         for (i = 0; i < 2; i++)
         {
-            sPSSData->field_730[i]->data[0] = 0;
+            gPSSData->field_730[i]->data[0] = 0;
         }
     }
 }
@@ -1459,7 +1459,7 @@ static void sub_8092164(struct Sprite *sprite)
         sprite->data[0] = 3;
         break;
     case 3:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= gPSSData->field_2CE;
         if (sprite->pos1.x < 73 || sprite->pos1.x > 247)
             sprite->invisible = TRUE;
         if (--sprite->data[1] == 0)
@@ -1470,7 +1470,7 @@ static void sub_8092164(struct Sprite *sprite)
         }
         break;
     case 4:
-        sprite->pos1.x -= sPSSData->field_2CE;
+        sprite->pos1.x -= gPSSData->field_2CE;
         break;
     }
 }

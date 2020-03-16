@@ -34,13 +34,13 @@ static const struct OamData gUnknown_83D365C = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
     .size = SPRITE_SIZE(32x32),
-    .tileNum = 0,
+    .tileNum = 0x000,
     .priority = 1,
     .paletteNum = 0,
     .affineParam = 0
@@ -116,7 +116,7 @@ void sub_8095B5C(void)
     struct SpriteTemplate spriteTemplate;
     static u32 gUnknown_3000FE8[0x61];
 
-    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         spriteSheet.data = gUnknown_3000FE8;
         spriteSheet.size = 0x200;
@@ -126,26 +126,26 @@ void sub_8095B5C(void)
         {
             spriteSheet.tag = TAG_TILE_7 + i;
             LoadCompressedSpriteSheet(&spriteSheet);
-            sPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
-            sPSSData->itemIconSprites[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
-            sPSSData->itemIconSprites[i].palIndex *= 16;
-            sPSSData->itemIconSprites[i].palIndex += 0x100;
+            gPSSData->itemIconSprites[i].tiles = GetSpriteTileStartByTag(spriteSheet.tag) * 32 + (void*)(OBJ_VRAM0);
+            gPSSData->itemIconSprites[i].palIndex = AllocSpritePalette(TAG_PAL_DACB + i);
+            gPSSData->itemIconSprites[i].palIndex *= 16;
+            gPSSData->itemIconSprites[i].palIndex += 0x100;
             spriteTemplate.tileTag = TAG_TILE_7 + i;
             spriteTemplate.paletteTag = TAG_PAL_DACB + i;
             spriteId = CreateSprite(&spriteTemplate, 0, 0, 11);
-            sPSSData->itemIconSprites[i].sprite = &gSprites[spriteId];
-            sPSSData->itemIconSprites[i].sprite->invisible = TRUE;
-            sPSSData->itemIconSprites[i].active = 0;
+            gPSSData->itemIconSprites[i].sprite = &gSprites[spriteId];
+            gPSSData->itemIconSprites[i].sprite->invisible = TRUE;
+            gPSSData->itemIconSprites[i].active = 0;
         }
     }
-    sPSSData->movingItem = ITEM_NONE;
+    gPSSData->movingItem = ITEM_NONE;
 }
 
 void sub_8095C84(u8 cursorArea, u8 cursorPos)
 {
     u16 heldItem;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
     if (sub_8096210(cursorArea, cursorPos))
         return;
@@ -183,7 +183,7 @@ void sub_8095D44(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     id = sub_8096258(cursorArea, cursorPos);
@@ -196,7 +196,7 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     id = sub_8096258(cursorArea, cursorPos);
@@ -215,7 +215,7 @@ void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_BLEND);
     }
 
-    sPSSData->movingItem = sPSSData->cursorMonItem;
+    gPSSData->movingItem = gPSSData->cursorMonItem;
 }
 
 void sub_8095E2C(u16 item)
@@ -229,7 +229,7 @@ void sub_8095E2C(u16 item)
     sub_80964E8(id, 1, CURSOR_AREA_IN_BOX, 0);
     sub_80962F0(id, CURSOR_AREA_BOX, 0);
     sub_8096624(id, TRUE);
-    sPSSData->movingItem = item;
+    gPSSData->movingItem = item;
 }
 
 void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
@@ -237,7 +237,7 @@ void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     id = sub_8096258(cursorArea, cursorPos);
@@ -246,14 +246,14 @@ void Item_SwitchMonsWithMoving(u8 cursorArea, u8 cursorPos)
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         item = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &sPSSData->movingItem);
-        sPSSData->movingItem = item;
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        gPSSData->movingItem = item;
     }
     else
     {
         item = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &sPSSData->movingItem);
-        sPSSData->movingItem = item;
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
+        gPSSData->movingItem = item;
     }
 
     id = sub_8096258(2, 0);
@@ -265,7 +265,7 @@ void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
 {
     u8 id;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     id = sub_8096258(2, 0);
@@ -273,12 +273,12 @@ void Item_GiveMovingToMon(u8 cursorArea, u8 cursorPos)
     sub_80964E8(id, 2, cursorArea, cursorPos);
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
-        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &sPSSData->movingItem);
+        SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &gPSSData->movingItem);
         SetBoxMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
     else
     {
-        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &sPSSData->movingItem);
+        SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &gPSSData->movingItem);
         SetPartyMonIconObjMode(cursorPos, ST_OAM_OBJ_NORMAL);
     }
 }
@@ -288,7 +288,7 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
     u8 id;
     u16 item;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     item = 0;
@@ -309,7 +309,7 @@ void Item_TakeMons(u8 cursorArea, u8 cursorPos)
 
 void sub_8096088(void)
 {
-    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         u8 id = sub_8096258(2, 0);
         sub_80964B8(id, 5);
@@ -321,12 +321,12 @@ void sub_80960C0(void)
 {
     s32 i;
 
-    if (sPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption != BOX_OPTION_MOVE_ITEMS)
         return;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->itemIconSprites[i].active && sPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_IN_PARTY)
+        if (gPSSData->itemIconSprites[i].active && gPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_IN_PARTY)
             sub_80964E8(i, 7, CURSOR_AREA_BOX, 0);
     }
 }
@@ -337,11 +337,11 @@ bool8 sub_809610C(void)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->itemIconSprites[i].active)
+        if (gPSSData->itemIconSprites[i].active)
         {
-            if (!sPSSData->itemIconSprites[i].sprite->affineAnimEnded && sPSSData->itemIconSprites[i].sprite->affineAnimBeginning)
+            if (!gPSSData->itemIconSprites[i].sprite->affineAnimEnded && gPSSData->itemIconSprites[i].sprite->affineAnimBeginning)
                 return TRUE;
-            if (sPSSData->itemIconSprites[i].sprite->callback != SpriteCallbackDummy && sPSSData->itemIconSprites[i].sprite->callback != sub_80969BC)
+            if (gPSSData->itemIconSprites[i].sprite->callback != SpriteCallbackDummy && gPSSData->itemIconSprites[i].sprite->callback != sub_80969BC)
                 return TRUE;
         }
     }
@@ -353,11 +353,11 @@ bool8 IsActiveItemMoving(void)
 {
     s32 i;
 
-    if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
+    if (gPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
     {
         for (i = 0; i < MAX_ITEM_ICONS; i++)
         {
-            if (sPSSData->itemIconSprites[i].active && sPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_BOX)
+            if (gPSSData->itemIconSprites[i].active && gPSSData->itemIconSprites[i].cursorArea == CURSOR_AREA_BOX)
                 return TRUE;
         }
     }
@@ -367,12 +367,12 @@ bool8 IsActiveItemMoving(void)
 
 const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(sPSSData->movingItem);
+    return ItemId_GetName(gPSSData->movingItem);
 }
 
 u16 GetMovingItem(void)
 {
-    return sPSSData->movingItem;
+    return gPSSData->movingItem;
 }
 
 static u8 sub_80961D8(void)
@@ -381,9 +381,9 @@ static u8 sub_80961D8(void)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (!sPSSData->itemIconSprites[i].active)
+        if (!gPSSData->itemIconSprites[i].active)
         {
-            sPSSData->itemIconSprites[i].active = TRUE;
+            gPSSData->itemIconSprites[i].active = TRUE;
             return i;
         }
     }
@@ -397,9 +397,9 @@ static bool32 sub_8096210(u8 cursorArea, u8 cursorPos)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->itemIconSprites[i].active
-            && sPSSData->itemIconSprites[i].cursorArea == cursorArea
-            && sPSSData->itemIconSprites[i].cursorPos == cursorPos)
+        if (gPSSData->itemIconSprites[i].active
+            && gPSSData->itemIconSprites[i].cursorArea == cursorArea
+            && gPSSData->itemIconSprites[i].cursorPos == cursorPos)
             return TRUE;
     }
 
@@ -412,9 +412,9 @@ static u8 sub_8096258(u8 cursorArea, u8 cursorPos)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->itemIconSprites[i].active
-            && sPSSData->itemIconSprites[i].cursorArea == cursorArea
-            && sPSSData->itemIconSprites[i].cursorPos == cursorPos)
+        if (gPSSData->itemIconSprites[i].active
+            && gPSSData->itemIconSprites[i].cursorArea == cursorArea
+            && gPSSData->itemIconSprites[i].cursorPos == cursorPos)
             return i;
     }
 
@@ -427,8 +427,8 @@ static u8 sub_80962A8(struct Sprite *sprite)
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
-        if (sPSSData->itemIconSprites[i].active
-            && sPSSData->itemIconSprites[i].sprite == sprite)
+        if (gPSSData->itemIconSprites[i].active
+            && gPSSData->itemIconSprites[i].sprite == sprite)
             return i;
     }
 
@@ -447,27 +447,27 @@ static void sub_80962F0(u8 id, u8 cursorArea, u8 cursorPos)
     case CURSOR_AREA_IN_BOX:
         row = cursorPos % IN_BOX_ROWS;
         column = cursorPos / IN_BOX_ROWS;
-        sPSSData->itemIconSprites[id].sprite->pos1.x = (24 * row) + 112;
-        sPSSData->itemIconSprites[id].sprite->pos1.y = (24 * column) + 56;
-        sPSSData->itemIconSprites[id].sprite->oam.priority = 2;
+        gPSSData->itemIconSprites[id].sprite->pos1.x = (24 * row) + 112;
+        gPSSData->itemIconSprites[id].sprite->pos1.y = (24 * column) + 56;
+        gPSSData->itemIconSprites[id].sprite->oam.priority = 2;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPos == 0)
         {
-            sPSSData->itemIconSprites[id].sprite->pos1.x = 116;
-            sPSSData->itemIconSprites[id].sprite->pos1.y = 76;
+            gPSSData->itemIconSprites[id].sprite->pos1.x = 116;
+            gPSSData->itemIconSprites[id].sprite->pos1.y = 76;
         }
         else
         {
-            sPSSData->itemIconSprites[id].sprite->pos1.x = 164;
-            sPSSData->itemIconSprites[id].sprite->pos1.y = 24 * (cursorPos - 1) + 28;
+            gPSSData->itemIconSprites[id].sprite->pos1.x = 164;
+            gPSSData->itemIconSprites[id].sprite->pos1.y = 24 * (cursorPos - 1) + 28;
         }
-        sPSSData->itemIconSprites[id].sprite->oam.priority = 1;
+        gPSSData->itemIconSprites[id].sprite->oam.priority = 1;
         break;
     }
 
-    sPSSData->itemIconSprites[id].cursorArea = cursorArea;
-    sPSSData->itemIconSprites[id].cursorPos = cursorPos;
+    gPSSData->itemIconSprites[id].cursorArea = cursorArea;
+    gPSSData->itemIconSprites[id].cursorPos = cursorPos;
 }
 
 static void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
@@ -477,14 +477,14 @@ static void sub_8096408(u8 id, const u32 *itemTiles, const u32 *itemPal)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    CpuFastFill(0, sPSSData->field_42C4, 0x200);
-    LZ77UnCompWram(itemTiles, sPSSData->field_22C4);
+    CpuFastFill(0, gPSSData->field_42C4, 0x200);
+    LZ77UnCompWram(itemTiles, gPSSData->field_22C4);
     for (i = 0; i < 3; i++)
-        CpuFastCopy(sPSSData->field_22C4 + (i * 0x60), sPSSData->field_42C4 + (i * 0x80), 0x60);
+        CpuFastCopy(gPSSData->field_22C4 + (i * 0x60), gPSSData->field_42C4 + (i * 0x80), 0x60);
 
-    CpuFastCopy(sPSSData->field_42C4, sPSSData->itemIconSprites[id].tiles, 0x200);
-    LZ77UnCompWram(itemPal, sPSSData->field_42C4);
-    LoadPalette(sPSSData->field_42C4, sPSSData->itemIconSprites[id].palIndex, 0x20);
+    CpuFastCopy(gPSSData->field_42C4, gPSSData->itemIconSprites[id].tiles, 0x200);
+    LZ77UnCompWram(itemPal, gPSSData->field_42C4);
+    LoadPalette(gPSSData->field_42C4, gPSSData->itemIconSprites[id].palIndex, 0x20);
 }
 
 static void sub_80964B8(u8 id, u8 animNum)
@@ -492,7 +492,7 @@ static void sub_80964B8(u8 id, u8 animNum)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    StartSpriteAffineAnim(sPSSData->itemIconSprites[id].sprite, animNum);
+    StartSpriteAffineAnim(gPSSData->itemIconSprites[id].sprite, animNum);
 }
 
 static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
@@ -503,33 +503,33 @@ static void sub_80964E8(u8 id, u8 command, u8 cursorArea, u8 cursorPos)
     switch (command)
     {
     case 0:
-        sPSSData->itemIconSprites[id].sprite->data[0] = id;
-        sPSSData->itemIconSprites[id].sprite->callback = sub_809692C;
+        gPSSData->itemIconSprites[id].sprite->data[0] = id;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_809692C;
         break;
     case 1:
-        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        sPSSData->itemIconSprites[id].sprite->callback = sub_8096958;
+        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_8096958;
         break;
     case 2:
-        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
-        sPSSData->itemIconSprites[id].sprite->callback = sub_80969F4;
+        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_80969F4;
         break;
     case 3:
-        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        sPSSData->itemIconSprites[id].sprite->callback = sub_8096A74;
-        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_8096A74;
+        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
         break;
     case 4:
-        sPSSData->itemIconSprites[id].sprite->data[0] = 0;
-        sPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
-        sPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
-        sPSSData->itemIconSprites[id].sprite->callback = sub_8096B10;
+        gPSSData->itemIconSprites[id].sprite->data[0] = 0;
+        gPSSData->itemIconSprites[id].sprite->data[6] = cursorArea;
+        gPSSData->itemIconSprites[id].sprite->data[7] = cursorPos;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_8096B10;
         break;
     case 7:
-        sPSSData->itemIconSprites[id].sprite->callback = sub_8096BAC;
+        gPSSData->itemIconSprites[id].sprite->callback = sub_8096BAC;
         break;
     }
 }
@@ -539,8 +539,8 @@ static void sub_8096624(u8 id, bool8 show)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    sPSSData->itemIconSprites[id].active = show;
-    sPSSData->itemIconSprites[id].sprite->invisible = (show == FALSE);
+    gPSSData->itemIconSprites[id].active = show;
+    gPSSData->itemIconSprites[id].sprite->invisible = (show == FALSE);
 }
 
 static const u32 *GetItemIconPic(u16 itemId)
@@ -558,9 +558,9 @@ void PrintItemDescription(void)
     const u8 *description;
 
     if (IsActiveItemMoving())
-        description = ItemId_GetDescription(sPSSData->movingItem);
+        description = ItemId_GetDescription(gPSSData->movingItem);
     else
-        description = ItemId_GetDescription(sPSSData->cursorMonItem);
+        description = ItemId_GetDescription(gPSSData->cursorMonItem);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
     AddTextPrinterParameterized5(2, 2, description, 2, 0, 0, NULL, 0, 0);
@@ -568,7 +568,7 @@ void PrintItemDescription(void)
 
 void sub_80966F4(void)
 {
-    sPSSData->field_2236 = 25;
+    gPSSData->field_2236 = 25;
     LoadBgTiles(0, gUnknown_83D35DC, 0x80, 0x1A4);
     sub_8096898(0);
 }
@@ -577,41 +577,41 @@ bool8 sub_8096728(void)
 {
     s32 i, var;
 
-    if (sPSSData->field_2236 == 0)
+    if (gPSSData->field_2236 == 0)
         return FALSE;
 
-    sPSSData->field_2236--;
-    var = 25 - sPSSData->field_2236;
+    gPSSData->field_2236--;
+    var = 25 - gPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
     }
 
     sub_8096898(var);
-    return (sPSSData->field_2236 != 0);
+    return (gPSSData->field_2236 != 0);
 }
 
 bool8 sub_80967C0(void)
 {
     s32 i, var;
 
-    if (sPSSData->field_2236 == 25)
+    if (gPSSData->field_2236 == 25)
         return FALSE;
 
-    if (sPSSData->field_2236 == 0)
+    if (gPSSData->field_2236 == 0)
         FillBgTilemapBufferRect(0, 0, 25, 11, 1, 10, 17);
 
-    sPSSData->field_2236++;
-    var = 25 - sPSSData->field_2236;
+    gPSSData->field_2236++;
+    var = 25 - gPSSData->field_2236;
     for (i = 0; i < var; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + gPSSData->field_2236 + i, i, 12, 1, 8, 15, 25);
     }
 
     sub_8096898(var);
 
     FillBgTilemapBufferRect(0, 0, var, 11, 1, 10, 0x11);
-    return (sPSSData->field_2236 != 25);
+    return (gPSSData->field_2236 != 25);
 }
 
 static void sub_8096898(u32 x)
@@ -660,9 +660,9 @@ static void sub_8096958(struct Sprite *sprite)
 
 static void sub_80969BC(struct Sprite *sprite)
 {
-    sprite->pos1.x = sPSSData->field_CB4->pos1.x + 4;
-    sprite->pos1.y = sPSSData->field_CB4->pos1.y + sPSSData->field_CB4->pos2.y + 8;
-    sprite->oam.priority = sPSSData->field_CB4->oam.priority;
+    sprite->pos1.x = gPSSData->field_CB4->pos1.x + 4;
+    sprite->pos1.y = gPSSData->field_CB4->pos1.y + gPSSData->field_CB4->pos2.y + 8;
+    sprite->oam.priority = gPSSData->field_CB4->oam.priority;
 }
 
 static void sub_80969F4(struct Sprite *sprite)

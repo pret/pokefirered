@@ -382,7 +382,7 @@ struct PokemonStorageSystemData
     /* 5abc */ u8 field_5AC4[0x800];
 }; // size=62bc
 
-extern struct PokemonStorageSystemData *sPSSData;
+extern struct PokemonStorageSystemData *gPSSData;
 
 void Cb2_EnterPSS(u8 a0);
 u8 GetCurrentBoxOption(void);

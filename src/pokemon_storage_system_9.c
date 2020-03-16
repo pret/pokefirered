@@ -54,7 +54,7 @@ static void sub_8096CDC(struct UnkStruct_2000028 *unkStruct)
 
     for (i = 0; i < unkStruct->newField; i++)
     {
-        CpuSet(unkStruct->unk_00, unkStruct->unk_04, (unkStruct->unk_08 / 2));
+        CpuCopy16(unkStruct->unk_00, unkStruct->unk_04, unkStruct->unk_08);
         unkStruct->unk_04 += 64;
         unkStruct->unk_00 += (unkStruct->unk_0a * 2);
     }

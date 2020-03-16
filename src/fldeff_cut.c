@@ -111,7 +111,7 @@ static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {
 
 static u8 MetatileAtCoordsIsGrassTile(s16 x, s16 y)
 {
-    return TestMetatileAttributeBit(MapGridGetMetatileAttributeAt(x, y, 1), 1);
+    return TestMetatileAttributeBit(MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_TERRAIN), TILE_TERRAIN_GRASS);
 }
 
 bool8 SetUpFieldMove_Cut(void)

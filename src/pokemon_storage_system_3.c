@@ -1179,7 +1179,7 @@ static void Cb_DepositMenu(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_DEPOSIT_IN_WHICH_BOX);
-        sub_808C854(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        LoadBoxSelectionPopupSpriteGfx(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_808C940(gUnknown_20397B6);
         sPSSData->state++;
         break;
@@ -1193,7 +1193,7 @@ static void Cb_DepositMenu(u8 taskId)
         {
             ClearBottomWindow();
             sub_808C950();
-            sub_808C8FC();
+            FreeBoxSelectionPopupSpriteGfx();
             SetPSSCallback(Cb_MainPSS);
         }
         else
@@ -1204,7 +1204,7 @@ static void Cb_DepositMenu(u8 taskId)
                 sub_808FE54(2);
                 ClearBottomWindow();
                 sub_808C950();
-                sub_808C8FC();
+                FreeBoxSelectionPopupSpriteGfx();
                 sPSSData->state = 2;
             }
             else
@@ -1816,7 +1816,7 @@ static void Cb_JumpBox(u8 taskId)
     {
     case 0:
         PrintStorageActionText(PC_TEXT_JUMP_TO_WHICH_BOX);
-        sub_808C854(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
+        LoadBoxSelectionPopupSpriteGfx(&sPSSData->field_1E5C, TAG_TILE_A, TAG_PAL_DAC7, 3, FALSE);
         sub_808C940(StorageGetCurrentBox());
         sPSSData->state++;
         break;
@@ -1829,7 +1829,7 @@ static void Cb_JumpBox(u8 taskId)
         default:
             ClearBottomWindow();
             sub_808C950();
-            sub_808C8FC();
+            FreeBoxSelectionPopupSpriteGfx();
             if (sPSSData->newCurrBoxId == 201 || sPSSData->newCurrBoxId == StorageGetCurrentBox())
             {
                 sub_80920FC(TRUE);

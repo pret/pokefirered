@@ -171,16 +171,16 @@ struct UnkPSSStruct_2002370
 {
     struct Sprite *unk_0000;
     struct Sprite *unk_0004[4];
-    u32 unk_0014[3];
+    u32 unk_0014[3]; // unused
     struct Sprite *unk_0020[2];
-    u8 filler_0028[0x200];
-    u8 unk_0228[20];
-    u32 unk_023c;
-    u16 unk_0240;
-    u16 unk_0242;
+    u8 buffer[0x200]; // passed but not used
+    u8 strbuf[20];
+    bool32 loadPal;
+    u16 tilesTag;
+    u16 paletteTag;
     u8 curBox;
-    u8 unk_0245;
-    u8 unk_0246;
+    u8 unk_0245; // unused
+    u8 subpriority;
 };
 
 struct StorageMenu
@@ -393,11 +393,11 @@ void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
 void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src);
 
 void Cb2_ExitPSS(void);
-void sub_808C8FC(void);
+void FreeBoxSelectionPopupSpriteGfx(void);
 void sub_808C940(u8 curBox);
 void sub_808C950(void);
 u8 HandleBoxChooseSelectionInput(void);
-void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
+void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal);
 void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
 u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
 u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst);

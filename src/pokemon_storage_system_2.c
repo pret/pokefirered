@@ -23,15 +23,15 @@ struct PSS_MenuStringPtrs
 };
 
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
-static EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_20397AC = NULL;
+static EWRAM_DATA struct UnkPSSStruct_2002370 *sBoxSelectionPopupSpriteManager = NULL;
 
 static void PSS_CreatePCMenu(u8 whichMenu, s16 *windowIdPtr);
 static void sub_808C9C4(u8 curBox);
 static void sub_808CBA4(void);
-static void sub_808CC10(void);
-static void sub_808CC44(void);
-static void sub_808CC74(void);
-static void sub_808CCFC(const u8 *a0, u16 x, u16 y);
+static void UpdateBoxNameAndCountSprite_WraparoundRight(void);
+static void UpdateBoxNameAndCountSprite_WraparoundLeft(void);
+static void PrintBoxNameAndCountToSprite(void);
+static void PrintToSpriteWithTagUnk0240(const u8 *a0, u16 x, u16 y);
 static void sub_808CD64(struct Sprite * sprite);
 
 // Forward declarations
@@ -94,7 +94,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     RemoveWindow(windowId);
 }
 
-static void sub_808BFE0(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2, u8 clr3, u8 *buffer)
+static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 rise, u8 bgClr, u8 fgClr, u8 shClr, u8 *buffer)
 {
     u32 var;
     u8 windowId;
@@ -106,15 +106,15 @@ static void sub_808BFE0(const u8 *string, void *dst, u16 arg2, u8 arg3, u8 clr2,
     winTemplate.height = 2;
     var = winTemplate.width * 32;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(arg3));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgClr));
     tileData1 = (u8*) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * 32) + tileData1;
-    txtColor[0] = arg3;
-    txtColor[1] = clr2;
-    txtColor[2] = clr3;
+    txtColor[0] = bgClr;
+    txtColor[1] = fgClr;
+    txtColor[2] = shClr;
     AddTextPrinterParameterized4(windowId, 1, 0, 2, 0, 0, txtColor, -1, string);
     CpuCopy16(tileData1, dst, var);
-    CpuCopy16(tileData2, dst + arg2, var);
+    CpuCopy16(tileData2, dst + rise, var);
     RemoveWindow(windowId);
 }
 
@@ -414,7 +414,7 @@ void ResetPokemonStorageSystem(void)
     }
 }
 
-void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
+void LoadBoxSelectionPopupSpriteGfx(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3, bool32 loadPal)
 {
     struct SpritePalette palette = {
         gBoxSelectionPopupPalette, palTag
@@ -429,19 +429,19 @@ void sub_808C854(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3
         LoadSpritePalette(&palette);
 
     LoadSpriteSheets(sheets);
-    gUnknown_20397AC = a0;
-    a0->unk_0240 = tileTag;
-    a0->unk_0242 = palTag;
-    a0->unk_0246 = a3;
-    a0->unk_023c = loadPal;
+    sBoxSelectionPopupSpriteManager = a0;
+    a0->tilesTag = tileTag;
+    a0->paletteTag = palTag;
+    a0->subpriority = a3;
+    a0->loadPal = loadPal;
 }
 
-void sub_808C8FC(void)
+void FreeBoxSelectionPopupSpriteGfx(void)
 {
-    if (gUnknown_20397AC->unk_023c)
-        FreeSpritePaletteByTag(gUnknown_20397AC->unk_0242);
-    FreeSpriteTilesByTag(gUnknown_20397AC->unk_0240);
-    FreeSpriteTilesByTag(gUnknown_20397AC->unk_0240 + 1);
+    if (sBoxSelectionPopupSpriteManager->loadPal)
+        FreeSpritePaletteByTag(sBoxSelectionPopupSpriteManager->paletteTag);
+    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tilesTag);
+    FreeSpriteTilesByTag(sBoxSelectionPopupSpriteManager->tilesTag + 1);
 }
 
 void sub_808C940(u8 curBox)
@@ -464,17 +464,17 @@ u8 HandleBoxChooseSelectionInput(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_20397AC->curBox;
+        return sBoxSelectionPopupSpriteManager->curBox;
     }
     if (gMain.newKeys & DPAD_LEFT)
     {
         PlaySE(SE_SELECT);
-        sub_808CC44();
+        UpdateBoxNameAndCountSprite_WraparoundLeft();
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
         PlaySE(SE_SELECT);
-        sub_808CC10();
+        UpdateBoxNameAndCountSprite_WraparoundRight();
     }
     return 200;
 }
@@ -527,108 +527,109 @@ static void sub_808C9C4(u8 curBox)
         0, 0, &oamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
     };
     {
-        const u8 gUnknown_83CDA94[] = _("/30");
+    const u8 gUnknown_83CDA94[] = _("/30");
 
-        gUnknown_20397AC->curBox = curBox;
-        template.tileTag = gUnknown_20397AC->unk_0240;
-        template.paletteTag = gUnknown_20397AC->unk_0242;
+    sBoxSelectionPopupSpriteManager->curBox = curBox;
+    template.tileTag = sBoxSelectionPopupSpriteManager->tilesTag;
+    template.paletteTag = sBoxSelectionPopupSpriteManager->paletteTag;
 
-        spriteId = CreateSprite(&template, 160, 96, 0);
-        gUnknown_20397AC->unk_0000 = gSprites + spriteId;
+    spriteId = CreateSprite(&template, 160, 96, 0);
+    sBoxSelectionPopupSpriteManager->unk_0000 = gSprites + spriteId;
 
-        oamData.shape = SPRITE_SHAPE(8x32);
-        oamData.size = SPRITE_SIZE(8x32);
-        template.tileTag = gUnknown_20397AC->unk_0240 + 1;
-        template.anims = gUnknown_83CDA70;
-        for (i = 0; i < 4; i++)
+    // Manual subsprites
+    oamData.shape = SPRITE_SHAPE(8x32);
+    oamData.size = SPRITE_SIZE(8x32);
+    template.tileTag = sBoxSelectionPopupSpriteManager->tilesTag + 1;
+    template.anims = gUnknown_83CDA70;
+    for (i = 0; i < 4; i++)
+    {
+        u16 r5;
+        spriteId = CreateSprite(&template, 124, 80, sBoxSelectionPopupSpriteManager->subpriority);
+        sBoxSelectionPopupSpriteManager->unk_0004[i] = gSprites + spriteId;
+        r5 = 0;
+        if (i & 2)
         {
-            u16 r5;
-            spriteId = CreateSprite(&template, 124, 80, gUnknown_20397AC->unk_0246);
-            gUnknown_20397AC->unk_0004[i] = gSprites + spriteId;
-            r5 = 0;
-            if (i & 2)
-            {
-                gUnknown_20397AC->unk_0004[i]->pos1.x = 196;
-                r5 = 2;
-            }
-            if (i & 1)
-            {
-                gUnknown_20397AC->unk_0004[i]->pos1.y = 112;
-                gUnknown_20397AC->unk_0004[i]->oam.size = 0;
-                r5++;
-            }
-            StartSpriteAnim(gUnknown_20397AC->unk_0004[i], r5);
+            sBoxSelectionPopupSpriteManager->unk_0004[i]->pos1.x = 196;
+            r5 = 2;
         }
-        for (i = 0; i < 2; i++)
+        if (i & 1)
         {
-            gUnknown_20397AC->unk_0020[i] = sub_809223C(72 * i + 0x7c, 0x58, i, 0, gUnknown_20397AC->unk_0246);
-            if (gUnknown_20397AC->unk_0020[i])
-            {
-                gUnknown_20397AC->unk_0020[i]->data[0] = (i == 0 ? -1 : 1);
-                gUnknown_20397AC->unk_0020[i]->callback = sub_808CD64;
-            }
+            sBoxSelectionPopupSpriteManager->unk_0004[i]->pos1.y = 112;
+            sBoxSelectionPopupSpriteManager->unk_0004[i]->oam.size = SPRITE_SIZE(8x16);
+            r5++;
         }
-        sub_808CC74();
-        sub_808CCFC(gUnknown_83CDA94, 5, 3);
+        StartSpriteAnim(sBoxSelectionPopupSpriteManager->unk_0004[i], r5);
+    }
+    for (i = 0; i < 2; i++)
+    {
+        sBoxSelectionPopupSpriteManager->unk_0020[i] = sub_809223C(72 * i + 0x7c, 0x58, i, 0, sBoxSelectionPopupSpriteManager->subpriority);
+        if (sBoxSelectionPopupSpriteManager->unk_0020[i])
+        {
+            sBoxSelectionPopupSpriteManager->unk_0020[i]->data[0] = (i == 0 ? -1 : 1);
+            sBoxSelectionPopupSpriteManager->unk_0020[i]->callback = sub_808CD64;
+        }
+    }
+    PrintBoxNameAndCountToSprite();
+    PrintToSpriteWithTagUnk0240(gUnknown_83CDA94, 5, 3);
     }
 }
 
 static void sub_808CBA4(void)
 {
     u16 i;
-    if (gUnknown_20397AC->unk_0000)
+    if (sBoxSelectionPopupSpriteManager->unk_0000)
     {
-        DestroySprite(gUnknown_20397AC->unk_0000);
-        gUnknown_20397AC->unk_0000 = NULL;
+        DestroySprite(sBoxSelectionPopupSpriteManager->unk_0000);
+        sBoxSelectionPopupSpriteManager->unk_0000 = NULL;
     }
     for (i = 0; i < 4; i++)
     {
-        if (gUnknown_20397AC->unk_0004[i])
+        if (sBoxSelectionPopupSpriteManager->unk_0004[i])
         {
-            DestroySprite(gUnknown_20397AC->unk_0004[i]);
-            gUnknown_20397AC->unk_0004[i] = NULL;
+            DestroySprite(sBoxSelectionPopupSpriteManager->unk_0004[i]);
+            sBoxSelectionPopupSpriteManager->unk_0004[i] = NULL;
         }
     }
     for (i = 0; i < 2; i++)
     {
-        if (gUnknown_20397AC->unk_0020[i])
-            DestroySprite(gUnknown_20397AC->unk_0020[i]);
+        if (sBoxSelectionPopupSpriteManager->unk_0020[i])
+            DestroySprite(sBoxSelectionPopupSpriteManager->unk_0020[i]);
     }
 }
 
-static void sub_808CC10(void)
+static void UpdateBoxNameAndCountSprite_WraparoundRight(void)
 {
-    if (++gUnknown_20397AC->curBox >= TOTAL_BOXES_COUNT)
-        gUnknown_20397AC->curBox = 0;
-    sub_808CC74();
+    if (++sBoxSelectionPopupSpriteManager->curBox >= TOTAL_BOXES_COUNT)
+        sBoxSelectionPopupSpriteManager->curBox = 0;
+    PrintBoxNameAndCountToSprite();
 }
 
-static void sub_808CC44(void)
+static void UpdateBoxNameAndCountSprite_WraparoundLeft(void)
 {
-    gUnknown_20397AC->curBox = (gUnknown_20397AC->curBox == 0 ? TOTAL_BOXES_COUNT - 1 : gUnknown_20397AC->curBox - 1);
-    sub_808CC74();
+    sBoxSelectionPopupSpriteManager->curBox = (sBoxSelectionPopupSpriteManager->curBox == 0 ? TOTAL_BOXES_COUNT - 1 : sBoxSelectionPopupSpriteManager->curBox - 1);
+    PrintBoxNameAndCountToSprite();
 }
 
-static void sub_808CC74(void)
+static void PrintBoxNameAndCountToSprite(void)
 {
-    u8 nPokemonInBox = CountMonsInBox(gUnknown_20397AC->curBox);
-    u8 *boxName = StringCopy(gUnknown_20397AC->unk_0228, GetBoxNamePtr(gUnknown_20397AC->curBox));
+    u8 nPokemonInBox = CountMonsInBox(sBoxSelectionPopupSpriteManager->curBox);
+    u8 *boxName = StringCopy(sBoxSelectionPopupSpriteManager->strbuf, GetBoxNamePtr(sBoxSelectionPopupSpriteManager->curBox));
 
-    while (boxName < gUnknown_20397AC->unk_0228 + BOX_NAME_LENGTH)
+    while (boxName < sBoxSelectionPopupSpriteManager->strbuf + BOX_NAME_LENGTH)
         *boxName++ = CHAR_SPACE;
     *boxName = EOS;
 
-    sub_808CCFC(gUnknown_20397AC->unk_0228, 0, 1);
+    PrintToSpriteWithTagUnk0240(sBoxSelectionPopupSpriteManager->strbuf, 0, 1);
 
-    ConvertIntToDecimalStringN(gUnknown_20397AC->unk_0228, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    ConvertIntToDecimalStringN(sBoxSelectionPopupSpriteManager->strbuf, nPokemonInBox, STR_CONV_MODE_RIGHT_ALIGN, 2);
 
-    sub_808CCFC(gUnknown_20397AC->unk_0228, 3, 3);
+    PrintToSpriteWithTagUnk0240(sBoxSelectionPopupSpriteManager->strbuf, 3, 3);
 }
 
-static void sub_808CCFC(const u8 *str, u16 x, u16 y)
+static void PrintToSpriteWithTagUnk0240(const u8 *str, u16 x, u16 y)
 {
-    u16 tileStart = GetSpriteTileStartByTag(gUnknown_20397AC->unk_0240);
-    sub_808BFE0(str, (void *)(OBJ_VRAM0 + tileStart * 32 + 256 * y + 32 * x), 0x100, 4, 15, 14, gUnknown_20397AC->filler_0028);
+    u16 tileStart = GetSpriteTileStartByTag(sBoxSelectionPopupSpriteManager->tilesTag);
+    PrintStringToBufferCopyNow(str, (void *)(OBJ_VRAM0 + tileStart * 32 + 256 * y + 32 * x), 0x100, TEXT_COLOR_RED, TEXT_DYNAMIC_COLOR_6, TEXT_DYNAMIC_COLOR_5, sBoxSelectionPopupSpriteManager->buffer);
 }
 
 static void sub_808CD64(struct Sprite *sprite)

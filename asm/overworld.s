@@ -1728,7 +1728,7 @@ sub_8055864: @ 8055864
 _080558D4:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl sub_807AB74
+	bl ApplyWeatherGammaShiftToPal
 	adds r4, 0x1
 	cmp r4, 0xC
 	ble _080558D4
@@ -4644,7 +4644,7 @@ _08057050:
 	bl InitObjectEventPalettes
 _08057056:
 	bl FieldEffectActiveListClear
-	bl sub_8079C08
+	bl StartWeather
 	bl sub_807B1B8
 	cmp r4, 0
 	bne _0805706A
@@ -5400,7 +5400,7 @@ _0805769C:
 	bl ResetCameraUpdateInfo
 	bl InstallCameraPanAheadCallback
 	bl FieldEffectActiveListClear
-	bl sub_8079C08
+	bl StartWeather
 	bl sub_807B1B8
 	bl SetUpFieldTasks
 	bl mapheader_run_script_with_tag_x5
@@ -5451,7 +5451,7 @@ _08057712:
 	ldr r2, _08057738 @ =0x3fffffff
 	movs r0, 0
 	movs r1, 0
-	bl FieldWeather_StartFadingOutCreditsMap
+	bl FadeSelectedPals
 _0805772A:
 	ldrb r0, [r4]
 	adds r0, 0x1

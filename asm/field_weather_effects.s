@@ -8,7 +8,7 @@
 	thumb_func_start Clouds_InitVars
 Clouds_InitVars: @ 807B2DC
 	push {lr}
-	ldr r0, _0807B314 @ =gUnknown_83C2BBC
+	ldr r0, _0807B314 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r2, _0807B318 @ =0x000006c1
 	adds r1, r0, r2
@@ -36,7 +36,7 @@ _0807B310:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B314: .4byte gUnknown_83C2BBC
+_0807B314: .4byte gWeatherPtr
 _0807B318: .4byte 0x000006c1
 _0807B31C: .4byte 0x000006c2
 _0807B320: .4byte 0x000006d2
@@ -47,7 +47,7 @@ _0807B324: .4byte 0x000006de
 Clouds_InitAll: @ 807B328
 	push {r4,lr}
 	bl Clouds_InitVars
-	ldr r0, _0807B350 @ =gUnknown_83C2BBC
+	ldr r0, _0807B350 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B354 @ =0x000006d2
 	adds r0, r1, r2
@@ -65,14 +65,14 @@ _0807B348:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B350: .4byte gUnknown_83C2BBC
+_0807B350: .4byte gWeatherPtr
 _0807B354: .4byte 0x000006d2
 	thumb_func_end Clouds_InitAll
 
 	thumb_func_start Clouds_Main
 Clouds_Main: @ 807B358
 	push {r4,r5,lr}
-	ldr r0, _0807B374 @ =gUnknown_83C2BBC
+	ldr r0, _0807B374 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807B378 @ =0x000006cc
 	adds r4, r5, r0
@@ -85,7 +85,7 @@ Clouds_Main: @ 807B358
 	beq _0807B382
 	b _0807B3AC
 	.align 2, 0
-_0807B374: .4byte gUnknown_83C2BBC
+_0807B374: .4byte gWeatherPtr
 _0807B378: .4byte 0x000006cc
 _0807B37C:
 	cmp r0, 0x2
@@ -124,7 +124,7 @@ _0807B3B4: .4byte 0x000006d2
 	thumb_func_start Clouds_Finish
 Clouds_Finish: @ 807B3B8
 	push {r4,lr}
-	ldr r0, _0807B3D0 @ =gUnknown_83C2BBC
+	ldr r0, _0807B3D0 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807B3D4 @ =0x000006ce
 	adds r4, r0, r1
@@ -136,7 +136,7 @@ Clouds_Finish: @ 807B3B8
 	movs r0, 0
 	b _0807B3FA
 	.align 2, 0
-_0807B3D0: .4byte gUnknown_83C2BBC
+_0807B3D0: .4byte gWeatherPtr
 _0807B3D4: .4byte 0x000006ce
 _0807B3D8:
 	movs r0, 0
@@ -164,7 +164,7 @@ _0807B3FA:
 
 	thumb_func_start Weather2_InitVars
 Weather2_InitVars: @ 807B400
-	ldr r0, _0807B418 @ =gUnknown_83C2BBC
+	ldr r0, _0807B418 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807B41C @ =0x000006c1
 	adds r2, r1, r0
@@ -176,7 +176,7 @@ Weather2_InitVars: @ 807B400
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_0807B418: .4byte gUnknown_83C2BBC
+_0807B418: .4byte gWeatherPtr
 _0807B41C: .4byte 0x000006c1
 _0807B420: .4byte 0x000006c2
 	thumb_func_end Weather2_InitVars
@@ -203,7 +203,7 @@ sub_807B434: @ 807B434
 	thumb_func_start CreateCloudSprites
 CreateCloudSprites: @ 807B438
 	push {r4,r5,lr}
-	ldr r0, _0807B4B0 @ =gUnknown_83C2BBC
+	ldr r0, _0807B4B0 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807B4B4 @ =0x000006de
 	adds r0, r1
@@ -213,7 +213,7 @@ CreateCloudSprites: @ 807B438
 	ldr r0, _0807B4B8 @ =gUnknown_83C65D4
 	bl LoadSpriteSheet
 	ldr r0, _0807B4BC @ =gUnknown_83C2D00
-	bl sub_807ABC0
+	bl LoadCustomWeatherSpritePalette
 	movs r5, 0
 _0807B456:
 	ldr r0, _0807B4C0 @ =gUnknown_83C65F0
@@ -225,7 +225,7 @@ _0807B456:
 	lsrs r3, r0, 24
 	cmp r3, 0x40
 	beq _0807B4CC
-	ldr r0, _0807B4B0 @ =gUnknown_83C2BBC
+	ldr r0, _0807B4B0 @ =gWeatherPtr
 	ldr r1, [r0]
 	lsls r2, r5, 2
 	movs r0, 0xFA
@@ -260,7 +260,7 @@ _0807B456:
 	strb r0, [r4]
 	b _0807B4DE
 	.align 2, 0
-_0807B4B0: .4byte gUnknown_83C2BBC
+_0807B4B0: .4byte gWeatherPtr
 _0807B4B4: .4byte 0x000006de
 _0807B4B8: .4byte gUnknown_83C65D4
 _0807B4BC: .4byte gUnknown_83C2D00
@@ -268,7 +268,7 @@ _0807B4C0: .4byte gUnknown_83C65F0
 _0807B4C4: .4byte gSprites
 _0807B4C8: .4byte gUnknown_83C65C8
 _0807B4CC:
-	ldr r0, _0807B4FC @ =gUnknown_83C2BBC
+	ldr r0, _0807B4FC @ =gWeatherPtr
 	ldr r1, [r0]
 	lsls r0, r5, 2
 	movs r2, 0xFA
@@ -283,7 +283,7 @@ _0807B4DE:
 	lsrs r5, r0, 16
 	cmp r5, 0x2
 	bls _0807B456
-	ldr r0, _0807B4FC @ =gUnknown_83C2BBC
+	ldr r0, _0807B4FC @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807B500 @ =0x000006de
 	adds r0, r1
@@ -294,14 +294,14 @@ _0807B4F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B4FC: .4byte gUnknown_83C2BBC
+_0807B4FC: .4byte gWeatherPtr
 _0807B500: .4byte 0x000006de
 	thumb_func_end CreateCloudSprites
 
 	thumb_func_start sub_807B504
 sub_807B504: @ 807B504
 	push {r4,r5,lr}
-	ldr r0, _0807B550 @ =gUnknown_83C2BBC
+	ldr r0, _0807B550 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B554 @ =0x000006de
 	adds r0, r1, r2
@@ -328,7 +328,7 @@ _0807B52A:
 	movs r0, 0x90
 	lsls r0, 5
 	bl FreeSpriteTilesByTag
-	ldr r0, _0807B550 @ =gUnknown_83C2BBC
+	ldr r0, _0807B550 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807B554 @ =0x000006de
 	adds r0, r1
@@ -339,7 +339,7 @@ _0807B548:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B550: .4byte gUnknown_83C2BBC
+_0807B550: .4byte gWeatherPtr
 _0807B554: .4byte 0x000006de
 	thumb_func_end sub_807B504
 
@@ -364,7 +364,7 @@ _0807B570:
 
 	thumb_func_start Drought_InitVars
 Drought_InitVars: @ 807B574
-	ldr r0, _0807B598 @ =gUnknown_83C2BBC
+	ldr r0, _0807B598 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807B59C @ =0x000006cc
 	adds r3, r1, r0
@@ -382,7 +382,7 @@ Drought_InitVars: @ 807B574
 	strb r2, [r1]
 	bx lr
 	.align 2, 0
-_0807B598: .4byte gUnknown_83C2BBC
+_0807B598: .4byte gWeatherPtr
 _0807B59C: .4byte 0x000006cc
 _0807B5A0: .4byte 0x000006d2
 _0807B5A4: .4byte 0x000006c2
@@ -392,7 +392,7 @@ _0807B5A4: .4byte 0x000006c2
 Drought_InitAll: @ 807B5A8
 	push {r4,lr}
 	bl Drought_InitVars
-	ldr r0, _0807B5D0 @ =gUnknown_83C2BBC
+	ldr r0, _0807B5D0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B5D4 @ =0x000006d2
 	adds r0, r1, r2
@@ -410,14 +410,14 @@ _0807B5C8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B5D0: .4byte gUnknown_83C2BBC
+_0807B5D0: .4byte gWeatherPtr
 _0807B5D4: .4byte 0x000006d2
 	thumb_func_end Drought_InitAll
 
 	thumb_func_start Drought_Main
 Drought_Main: @ 807B5D8
 	push {lr}
-	ldr r1, _0807B5F4 @ =gUnknown_83C2BBC
+	ldr r1, _0807B5F4 @ =gWeatherPtr
 	ldr r0, [r1]
 	ldr r2, _0807B5F8 @ =0x000006cc
 	adds r0, r2
@@ -431,7 +431,7 @@ Drought_Main: @ 807B5D8
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807B5F4: .4byte gUnknown_83C2BBC
+_0807B5F4: .4byte gWeatherPtr
 _0807B5F8: .4byte 0x000006cc
 _0807B5FC: .4byte _0807B600
 	.align 2, 0
@@ -455,41 +455,41 @@ _0807B614:
 _0807B628: .4byte 0x000006c6
 _0807B62C: .4byte 0x000006cc
 _0807B630:
-	bl sub_807ABF4
-	ldr r0, _0807B640 @ =gUnknown_83C2BBC
+	bl ResetDroughtWeatherPaletteLoading
+	ldr r0, _0807B640 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B644 @ =0x000006cc
 	adds r1, r2
 	b _0807B69C
 	.align 2, 0
-_0807B640: .4byte gUnknown_83C2BBC
+_0807B640: .4byte gWeatherPtr
 _0807B644: .4byte 0x000006cc
 _0807B648:
-	bl sub_807AC14
+	bl LoadDroughtWeatherPalettes
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807B6B8
-	ldr r0, _0807B65C @ =gUnknown_83C2BBC
+	ldr r0, _0807B65C @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807B660 @ =0x000006cc
 	adds r1, r0
 	b _0807B69C
 	.align 2, 0
-_0807B65C: .4byte gUnknown_83C2BBC
+_0807B65C: .4byte gWeatherPtr
 _0807B660: .4byte 0x000006cc
 _0807B664:
 	bl sub_807AC60
-	ldr r0, _0807B674 @ =gUnknown_83C2BBC
+	ldr r0, _0807B674 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B678 @ =0x000006cc
 	adds r1, r2
 	b _0807B69C
 	.align 2, 0
-_0807B674: .4byte gUnknown_83C2BBC
+_0807B674: .4byte gWeatherPtr
 _0807B678: .4byte 0x000006cc
 _0807B67C:
 	bl sub_807AC98
-	ldr r0, _0807B6A4 @ =gUnknown_83C2BBC
+	ldr r0, _0807B6A4 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r1, _0807B6A8 @ =0x0000073c
 	adds r0, r2, r1
@@ -509,7 +509,7 @@ _0807B69C:
 	strh r0, [r1]
 	b _0807B6B8
 	.align 2, 0
-_0807B6A4: .4byte gUnknown_83C2BBC
+_0807B6A4: .4byte gWeatherPtr
 _0807B6A8: .4byte 0x0000073c
 _0807B6AC: .4byte 0x000006d2
 _0807B6B0: .4byte 0x000006cc
@@ -660,7 +660,7 @@ _0807B7C2:
 	thumb_func_start LightRain_InitVars
 LightRain_InitVars: @ 807B7C8
 	push {r4,lr}
-	ldr r0, _0807B818 @ =gUnknown_83C2BBC
+	ldr r0, _0807B818 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B81C @ =0x000006cc
 	adds r0, r1, r2
@@ -698,7 +698,7 @@ LightRain_InitVars: @ 807B7C8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B818: .4byte gUnknown_83C2BBC
+_0807B818: .4byte gWeatherPtr
 _0807B81C: .4byte 0x000006cc
 _0807B820: .4byte 0x000006d2
 _0807B824: .4byte 0x000006db
@@ -711,7 +711,7 @@ _0807B830: .4byte 0x000006c2
 LightRain_InitAll: @ 807B834
 	push {r4,lr}
 	bl LightRain_InitVars
-	ldr r0, _0807B85C @ =gUnknown_83C2BBC
+	ldr r0, _0807B85C @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807B860 @ =0x000006d2
 	adds r0, r1, r2
@@ -729,14 +729,14 @@ _0807B854:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B85C: .4byte gUnknown_83C2BBC
+_0807B85C: .4byte gWeatherPtr
 _0807B860: .4byte 0x000006d2
 	thumb_func_end LightRain_InitAll
 
 	thumb_func_start LightRain_Main
 LightRain_Main: @ 807B864
 	push {r4,r5,lr}
-	ldr r0, _0807B880 @ =gUnknown_83C2BBC
+	ldr r0, _0807B880 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807B884 @ =0x000006cc
 	adds r4, r5, r0
@@ -749,7 +749,7 @@ LightRain_Main: @ 807B864
 	beq _0807B88E
 	b _0807B8B8
 	.align 2, 0
-_0807B880: .4byte gUnknown_83C2BBC
+_0807B880: .4byte gWeatherPtr
 _0807B884: .4byte 0x000006cc
 _0807B888:
 	cmp r0, 0x2
@@ -788,7 +788,7 @@ _0807B8C0: .4byte 0x000006d2
 	thumb_func_start LightRain_Finish
 LightRain_Finish: @ 807B8C4
 	push {r4,r5,lr}
-	ldr r0, _0807B8E0 @ =gUnknown_83C2BBC
+	ldr r0, _0807B8E0 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r1, _0807B8E4 @ =0x000006ce
 	adds r3, r2, r1
@@ -801,7 +801,7 @@ LightRain_Finish: @ 807B8C4
 	movs r0, 0
 	b _0807B94A
 	.align 2, 0
-_0807B8E0: .4byte gUnknown_83C2BBC
+_0807B8E0: .4byte gWeatherPtr
 _0807B8E4: .4byte 0x000006ce
 _0807B8E8:
 	ldr r5, _0807B908 @ =0x000006d1
@@ -837,7 +837,7 @@ _0807B91C:
 	cmp r0, 0
 	bne _0807B948
 	bl DestroyRainSprites
-	ldr r0, _0807B940 @ =gUnknown_83C2BBC
+	ldr r0, _0807B940 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r5, _0807B944 @ =0x000006ce
 	adds r1, r5
@@ -848,7 +848,7 @@ _0807B91C:
 	b _0807B94A
 	.align 2, 0
 _0807B93C: .4byte 0x000006d9
-_0807B940: .4byte gUnknown_83C2BBC
+_0807B940: .4byte gWeatherPtr
 _0807B944: .4byte 0x000006ce
 _0807B948:
 	movs r0, 0x1
@@ -886,7 +886,7 @@ _0807B964:
 	mov r8, r1
 	strh r0, [r7, 0x30]
 	ldr r1, _0807BA14 @ =gUnknown_83C66C4
-	ldr r0, _0807BA18 @ =gUnknown_83C2BBC
+	ldr r0, _0807BA18 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r2, _0807BA1C @ =0x000006dc
 	adds r5, r2
@@ -953,7 +953,7 @@ _0807BA08: .4byte 0x00000169
 _0807BA0C: .4byte 0x41c64e6d
 _0807BA10: .4byte 0x00003039
 _0807BA14: .4byte gUnknown_83C66C4
-_0807BA18: .4byte gUnknown_83C2BBC
+_0807BA18: .4byte gWeatherPtr
 _0807BA1C: .4byte 0x000006dc
 _0807BA20: .4byte gUnknown_83C66BC
 	thumb_func_end sub_807B950
@@ -967,7 +967,7 @@ sub_807BA24: @ 807BA24
 	cmp r0, 0
 	bne _0807BB00
 	ldr r3, _0807BA98 @ =gUnknown_83C66BC
-	ldr r4, _0807BA9C @ =gUnknown_83C2BBC
+	ldr r4, _0807BA9C @ =gWeatherPtr
 	ldr r2, [r4]
 	ldr r0, _0807BAA0 @ =0x000006dc
 	adds r2, r0
@@ -1020,7 +1020,7 @@ sub_807BA24: @ 807BA24
 	b _0807BAAE
 	.align 2, 0
 _0807BA98: .4byte gUnknown_83C66BC
-_0807BA9C: .4byte gUnknown_83C2BBC
+_0807BA9C: .4byte gWeatherPtr
 _0807BAA0: .4byte 0x000006dc
 _0807BAA4:
 	adds r0, r5, 0
@@ -1123,7 +1123,7 @@ sub_807BB54: @ 807BB54
 	lsls r5, r1, 16
 	lsrs r5, 16
 	ldr r2, _0807BBD8 @ =gUnknown_83C66C4
-	ldr r0, _0807BBDC @ =gUnknown_83C2BBC
+	ldr r0, _0807BBDC @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807BBE0 @ =0x000006dc
 	adds r0, r1
@@ -1184,7 +1184,7 @@ _0807BBD4:
 	b _0807BBFC
 	.align 2, 0
 _0807BBD8: .4byte gUnknown_83C66C4
-_0807BBDC: .4byte gUnknown_83C2BBC
+_0807BBDC: .4byte gWeatherPtr
 _0807BBE0: .4byte 0x000006dc
 _0807BBE4: .4byte 0x0000ffff
 _0807BBE8:
@@ -1225,7 +1225,7 @@ CreateRainSprite: @ 807BC18
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _0807BCC4 @ =gUnknown_83C2BBC
+	ldr r0, _0807BCC4 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r0, _0807BCC8 @ =0x000006da
 	adds r2, r4, r0
@@ -1301,13 +1301,13 @@ _0807BC96:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, _0807BCC4 @ =gUnknown_83C2BBC
+	ldr r0, _0807BCC4 @ =gWeatherPtr
 	ldr r0, [r0]
 	add r0, r10
 	str r4, [r0]
 	b _0807BCE6
 	.align 2, 0
-_0807BCC4: .4byte gUnknown_83C2BBC
+_0807BCC4: .4byte gWeatherPtr
 _0807BCC8: .4byte 0x000006da
 _0807BCCC: .4byte gUnknown_83C66A4
 _0807BCD0: .4byte gUnknown_83C6608
@@ -1319,7 +1319,7 @@ _0807BCE0:
 	movs r0, 0
 	str r0, [r1]
 _0807BCE6:
-	ldr r0, _0807BD1C @ =gUnknown_83C2BBC
+	ldr r0, _0807BD1C @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r6, _0807BD20 @ =0x000006da
 	adds r1, r2, r6
@@ -1347,7 +1347,7 @@ _0807BD04:
 	str r5, [r2, 0x1C]
 	b _0807BD2E
 	.align 2, 0
-_0807BD1C: .4byte gUnknown_83C2BBC
+_0807BD1C: .4byte gWeatherPtr
 _0807BD20: .4byte 0x000006da
 _0807BD24: .4byte sub_807BA24
 _0807BD28: .4byte sub_807BB28
@@ -1377,7 +1377,7 @@ _0807BD3E:
 	thumb_func_start sub_807BD4C
 sub_807BD4C: @ 807BD4C
 	push {r4-r7,lr}
-	ldr r0, _0807BD68 @ =gUnknown_83C2BBC
+	ldr r0, _0807BD68 @ =gWeatherPtr
 	ldr r3, [r0]
 	movs r0, 0xDB
 	lsls r0, 3
@@ -1391,7 +1391,7 @@ sub_807BD4C: @ 807BD4C
 	movs r0, 0
 	b _0807BDD2
 	.align 2, 0
-_0807BD68: .4byte gUnknown_83C2BBC
+_0807BD68: .4byte gWeatherPtr
 _0807BD6C: .4byte 0x000006d9
 _0807BD70:
 	ldr r0, _0807BDA8 @ =0x000006d6
@@ -1453,7 +1453,7 @@ _0807BDD2:
 DestroyRainSprites: @ 807BDD8
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r0, _0807BE20 @ =gUnknown_83C2BBC
+	ldr r0, _0807BE20 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r3, _0807BE24 @ =0x000006da
 	adds r1, r2, r3
@@ -1489,7 +1489,7 @@ _0807BE0A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BE20: .4byte gUnknown_83C2BBC
+_0807BE20: .4byte gWeatherPtr
 _0807BE24: .4byte 0x000006da
 _0807BE28: .4byte 0x00001206
 	thumb_func_end DestroyRainSprites
@@ -1497,7 +1497,7 @@ _0807BE28: .4byte 0x00001206
 	thumb_func_start Snow_InitVars
 Snow_InitVars: @ 807BE2C
 	push {r4,lr}
-	ldr r0, _0807BE68 @ =gUnknown_83C2BBC
+	ldr r0, _0807BE68 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807BE6C @ =0x000006cc
 	adds r0, r1, r2
@@ -1527,7 +1527,7 @@ Snow_InitVars: @ 807BE2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BE68: .4byte gUnknown_83C2BBC
+_0807BE68: .4byte gWeatherPtr
 _0807BE6C: .4byte 0x000006cc
 _0807BE70: .4byte 0x000006d2
 _0807BE74: .4byte 0x000006c1
@@ -1540,7 +1540,7 @@ Snow_InitAll: @ 807BE7C
 	mov r7, r8
 	push {r7}
 	bl Snow_InitVars
-	ldr r2, _0807BEDC @ =gUnknown_83C2BBC
+	ldr r2, _0807BEDC @ =gWeatherPtr
 	ldr r1, [r2]
 	ldr r3, _0807BEE0 @ =0x000006d2
 	adds r0, r1, r3
@@ -1559,7 +1559,7 @@ _0807BE98:
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0807BECC
-	ldr r0, _0807BEDC @ =gUnknown_83C2BBC
+	ldr r0, _0807BEDC @ =gWeatherPtr
 	ldr r5, [r0]
 	adds r6, r5, r3
 _0807BEB2:
@@ -1586,7 +1586,7 @@ _0807BED2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BEDC: .4byte gUnknown_83C2BBC
+_0807BEDC: .4byte gWeatherPtr
 _0807BEE0: .4byte 0x000006d2
 _0807BEE4: .4byte 0x000006e4
 	thumb_func_end Snow_InitAll
@@ -1594,7 +1594,7 @@ _0807BEE4: .4byte 0x000006e4
 	thumb_func_start snowflakes_progress2
 snowflakes_progress2: @ 807BEE8
 	push {r4,r5,lr}
-	ldr r0, _0807BF18 @ =gUnknown_83C2BBC
+	ldr r0, _0807BF18 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807BF1C @ =0x000006cc
 	adds r4, r5, r0
@@ -1617,7 +1617,7 @@ _0807BF10:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BF18: .4byte gUnknown_83C2BBC
+_0807BF18: .4byte gWeatherPtr
 _0807BF1C: .4byte 0x000006cc
 _0807BF20: .4byte 0x000006d2
 	thumb_func_end snowflakes_progress2
@@ -1625,7 +1625,7 @@ _0807BF20: .4byte 0x000006d2
 	thumb_func_start Snow_Finish
 Snow_Finish: @ 807BF24
 	push {r4,lr}
-	ldr r0, _0807BF3C @ =gUnknown_83C2BBC
+	ldr r0, _0807BF3C @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r0, _0807BF40 @ =0x000006ce
 	adds r3, r2, r0
@@ -1637,7 +1637,7 @@ Snow_Finish: @ 807BF24
 	movs r0, 0
 	b _0807BF82
 	.align 2, 0
-_0807BF3C: .4byte gUnknown_83C2BBC
+_0807BF3C: .4byte gWeatherPtr
 _0807BF40: .4byte 0x000006ce
 _0807BF44:
 	ldr r4, _0807BF74 @ =0x000006e5
@@ -1654,7 +1654,7 @@ _0807BF56:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807BF80
-	ldr r0, _0807BF78 @ =gUnknown_83C2BBC
+	ldr r0, _0807BF78 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807BF7C @ =0x000006ce
 	adds r1, r0
@@ -1665,7 +1665,7 @@ _0807BF56:
 	b _0807BF82
 	.align 2, 0
 _0807BF74: .4byte 0x000006e5
-_0807BF78: .4byte gUnknown_83C2BBC
+_0807BF78: .4byte gWeatherPtr
 _0807BF7C: .4byte 0x000006ce
 _0807BF80:
 	movs r0, 0x1
@@ -1678,7 +1678,7 @@ _0807BF82:
 	thumb_func_start snowflakes_progress
 snowflakes_progress: @ 807BF88
 	push {r4,lr}
-	ldr r0, _0807BFA4 @ =gUnknown_83C2BBC
+	ldr r0, _0807BFA4 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807BFA8 @ =0x000006e4
 	adds r3, r1, r0
@@ -1691,7 +1691,7 @@ snowflakes_progress: @ 807BF88
 	movs r0, 0
 	b _0807BFF2
 	.align 2, 0
-_0807BFA4: .4byte gUnknown_83C2BBC
+_0807BFA4: .4byte gWeatherPtr
 _0807BFA8: .4byte 0x000006e4
 _0807BFAC: .4byte 0x000006e5
 _0807BFB0:
@@ -1716,7 +1716,7 @@ _0807BFB0:
 _0807BFD6:
 	bl snowflake_remove
 _0807BFDA:
-	ldr r0, _0807BFF8 @ =gUnknown_83C2BBC
+	ldr r0, _0807BFF8 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r2, _0807BFFC @ =0x000006e4
 	adds r1, r0, r2
@@ -1733,7 +1733,7 @@ _0807BFF2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807BFF8: .4byte gUnknown_83C2BBC
+_0807BFF8: .4byte gWeatherPtr
 _0807BFFC: .4byte 0x000006e4
 _0807C000: .4byte 0x000006e5
 	thumb_func_end snowflakes_progress
@@ -1755,7 +1755,7 @@ snowflake_add: @ 807C004
 	adds r4, r1
 	lsls r4, 2
 	adds r4, r0
-	ldr r0, _0807C060 @ =gUnknown_83C2BBC
+	ldr r0, _0807C060 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807C064 @ =0x000006e4
 	adds r6, r5, r0
@@ -1782,7 +1782,7 @@ snowflake_add: @ 807C004
 	.align 2, 0
 _0807C058: .4byte gUnknown_83C6704
 _0807C05C: .4byte gSprites
-_0807C060: .4byte gUnknown_83C2BBC
+_0807C060: .4byte gWeatherPtr
 _0807C064: .4byte 0x000006e4
 _0807C068:
 	movs r0, 0
@@ -1795,7 +1795,7 @@ _0807C06A:
 	thumb_func_start snowflake_remove
 snowflake_remove: @ 807C070
 	push {lr}
-	ldr r0, _0807C084 @ =gUnknown_83C2BBC
+	ldr r0, _0807C084 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807C088 @ =0x000006e4
 	adds r2, r1, r0
@@ -1805,7 +1805,7 @@ snowflake_remove: @ 807C070
 	movs r0, 0
 	b _0807C0A0
 	.align 2, 0
-_0807C084: .4byte gUnknown_83C2BBC
+_0807C084: .4byte gWeatherPtr
 _0807C088: .4byte 0x000006e4
 _0807C08C:
 	subs r0, 0x1
@@ -1911,7 +1911,7 @@ _0807C14C: .4byte gSpriteCoordOffsetX
 sub_807C150: @ 807C150
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, _0807C19C @ =gUnknown_83C2BBC
+	ldr r0, _0807C19C @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807C1A0 @ =0x000006e2
 	adds r4, r0, r1
@@ -1949,7 +1949,7 @@ _0807C196:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C19C: .4byte gUnknown_83C2BBC
+_0807C19C: .4byte gWeatherPtr
 _0807C1A0: .4byte 0x000006e2
 _0807C1A4: .4byte sub_807C1AC
 _0807C1A8: .4byte gSpriteCoordOffsetY
@@ -2120,7 +2120,7 @@ _0807C2E0: .4byte sub_807C150
 	thumb_func_start sub_807C2E4
 sub_807C2E4: @ 807C2E4
 	push {r4,r5,lr}
-	ldr r0, _0807C33C @ =gUnknown_83C2BBC
+	ldr r0, _0807C33C @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C340 @ =0x000006cc
 	adds r0, r1, r2
@@ -2162,7 +2162,7 @@ sub_807C2E4: @ 807C2E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C33C: .4byte gUnknown_83C2BBC
+_0807C33C: .4byte gWeatherPtr
 _0807C340: .4byte 0x000006cc
 _0807C344: .4byte 0x000006d2
 _0807C348: .4byte 0x000006db
@@ -2175,7 +2175,7 @@ _0807C354: .4byte 0x000006ed
 sub_807C358: @ 807C358
 	push {r4,lr}
 	bl sub_807C2E4
-	ldr r0, _0807C380 @ =gUnknown_83C2BBC
+	ldr r0, _0807C380 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C384 @ =0x000006d2
 	adds r0, r1, r2
@@ -2193,14 +2193,14 @@ _0807C378:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C380: .4byte gUnknown_83C2BBC
+_0807C380: .4byte gWeatherPtr
 _0807C384: .4byte 0x000006d2
 	thumb_func_end sub_807C358
 
 	thumb_func_start sub_807C388
 sub_807C388: @ 807C388
 	push {r4,r5,lr}
-	ldr r0, _0807C3DC @ =gUnknown_83C2BBC
+	ldr r0, _0807C3DC @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C3E0 @ =0x000006cc
 	adds r0, r1, r2
@@ -2240,7 +2240,7 @@ sub_807C388: @ 807C388
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C3DC: .4byte gUnknown_83C2BBC
+_0807C3DC: .4byte gWeatherPtr
 _0807C3E0: .4byte 0x000006cc
 _0807C3E4: .4byte 0x000006d2
 _0807C3E8: .4byte 0x000006db
@@ -2252,7 +2252,7 @@ _0807C3F0: .4byte 0x000006c2
 sub_807C3F4: @ 807C3F4
 	push {r4,lr}
 	bl sub_807C388
-	ldr r0, _0807C41C @ =gUnknown_83C2BBC
+	ldr r0, _0807C41C @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C420 @ =0x000006d2
 	adds r0, r1, r2
@@ -2270,7 +2270,7 @@ _0807C414:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C41C: .4byte gUnknown_83C2BBC
+_0807C41C: .4byte gWeatherPtr
 _0807C420: .4byte 0x000006d2
 	thumb_func_end sub_807C3F4
 
@@ -2278,7 +2278,7 @@ _0807C420: .4byte 0x000006d2
 Rain_Main: @ 807C424
 	push {r4,r5,lr}
 	bl UpdateThunderSound
-	ldr r0, _0807C444 @ =gUnknown_83C2BBC
+	ldr r0, _0807C444 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807C448 @ =0x000006cc
 	adds r0, r1
@@ -2293,7 +2293,7 @@ _0807C43A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807C444: .4byte gUnknown_83C2BBC
+_0807C444: .4byte gWeatherPtr
 _0807C448: .4byte 0x000006cc
 _0807C44C: .4byte _0807C450
 	.align 2, 0
@@ -2315,7 +2315,7 @@ _0807C450:
 	.4byte _0807C77C
 _0807C48C:
 	bl LoadRainSpriteSheet
-	ldr r0, _0807C4A0 @ =gUnknown_83C2BBC
+	ldr r0, _0807C4A0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C4A4 @ =0x000006cc
 	adds r1, r2
@@ -2323,7 +2323,7 @@ _0807C48C:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C4A0: .4byte gUnknown_83C2BBC
+_0807C4A0: .4byte gWeatherPtr
 _0807C4A4: .4byte 0x000006cc
 _0807C4A8:
 	bl CreateRainSprite
@@ -2332,7 +2332,7 @@ _0807C4A8:
 	beq _0807C4B4
 	b _0807C79A
 _0807C4B4:
-	ldr r0, _0807C4C4 @ =gUnknown_83C2BBC
+	ldr r0, _0807C4C4 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r3, _0807C4C8 @ =0x000006cc
 	adds r1, r3
@@ -2340,7 +2340,7 @@ _0807C4B4:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C4C4: .4byte gUnknown_83C2BBC
+_0807C4C4: .4byte gWeatherPtr
 _0807C4C8: .4byte 0x000006cc
 _0807C4CC:
 	bl sub_807BD4C
@@ -2349,7 +2349,7 @@ _0807C4CC:
 	beq _0807C4D8
 	b _0807C79A
 _0807C4D8:
-	ldr r0, _0807C4F0 @ =gUnknown_83C2BBC
+	ldr r0, _0807C4F0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807C4F4 @ =0x000006d2
 	adds r2, r1, r0
@@ -2361,11 +2361,11 @@ _0807C4D8:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C4F0: .4byte gUnknown_83C2BBC
+_0807C4F0: .4byte gWeatherPtr
 _0807C4F4: .4byte 0x000006d2
 _0807C4F8: .4byte 0x000006cc
 _0807C4FC:
-	ldr r0, _0807C514 @ =gUnknown_83C2BBC
+	ldr r0, _0807C514 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r3, _0807C518 @ =0x000006c6
 	adds r0, r1, r3
@@ -2379,11 +2379,11 @@ _0807C50C:
 	movs r0, 0x6
 	b _0807C798
 	.align 2, 0
-_0807C514: .4byte gUnknown_83C2BBC
+_0807C514: .4byte gWeatherPtr
 _0807C518: .4byte 0x000006c6
 _0807C51C: .4byte 0x000006cc
 _0807C520:
-	ldr r0, _0807C570 @ =gUnknown_83C2BBC
+	ldr r0, _0807C570 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r2, _0807C574 @ =0x000006ea
 	adds r1, r4, r2
@@ -2406,7 +2406,7 @@ _0807C520:
 	adds r0, 0x1
 	strh r0, [r4]
 _0807C550:
-	ldr r0, _0807C570 @ =gUnknown_83C2BBC
+	ldr r0, _0807C570 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r3, _0807C578 @ =0x000006e6
 	adds r1, r2, r3
@@ -2424,12 +2424,12 @@ _0807C566:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C570: .4byte gUnknown_83C2BBC
+_0807C570: .4byte gWeatherPtr
 _0807C574: .4byte 0x000006ea
 _0807C578: .4byte 0x000006e6
 _0807C57C: .4byte 0x000006cc
 _0807C580:
-	ldr r0, _0807C5A0 @ =gUnknown_83C2BBC
+	ldr r0, _0807C5A0 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r1, _0807C5A4 @ =0x000006ea
 	adds r0, r4, r1
@@ -2444,12 +2444,12 @@ _0807C580:
 	strb r0, [r1]
 	b _0807C608
 	.align 2, 0
-_0807C5A0: .4byte gUnknown_83C2BBC
+_0807C5A0: .4byte gWeatherPtr
 _0807C5A4: .4byte 0x000006ea
 _0807C5A8: .4byte 0x000006eb
 _0807C5AC:
 	bl Random
-	ldr r1, _0807C614 @ =gUnknown_83C2BBC
+	ldr r1, _0807C614 @ =gWeatherPtr
 	ldr r2, [r1]
 	movs r1, 0x1
 	ands r1, r0
@@ -2465,7 +2465,7 @@ _0807C5AC:
 _0807C5CA:
 	movs r0, 0x13
 	bl sub_807A790
-	ldr r0, _0807C614 @ =gUnknown_83C2BBC
+	ldr r0, _0807C614 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C620 @ =0x000006eb
 	adds r0, r1, r2
@@ -2481,7 +2481,7 @@ _0807C5CA:
 	bl SetThunderCounter
 _0807C5EE:
 	bl Random
-	ldr r1, _0807C614 @ =gUnknown_83C2BBC
+	ldr r1, _0807C614 @ =gWeatherPtr
 	ldr r4, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -2499,13 +2499,13 @@ _0807C608:
 	strh r0, [r4]
 	b _0807C79A
 	.align 2, 0
-_0807C614: .4byte gUnknown_83C2BBC
+_0807C614: .4byte gWeatherPtr
 _0807C618: .4byte 0x000006ec
 _0807C61C: .4byte 0x000006cc
 _0807C620: .4byte 0x000006eb
 _0807C624: .4byte 0x000006e6
 _0807C628:
-	ldr r0, _0807C674 @ =gUnknown_83C2BBC
+	ldr r0, _0807C674 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r0, _0807C678 @ =0x000006e6
 	adds r5, r4, r0
@@ -2543,7 +2543,7 @@ _0807C63E:
 	movs r0, 0xA
 	b _0807C798
 	.align 2, 0
-_0807C674: .4byte gUnknown_83C2BBC
+_0807C674: .4byte gWeatherPtr
 _0807C678: .4byte 0x000006e6
 _0807C67C: .4byte 0x000006ea
 _0807C680: .4byte 0x000006ec
@@ -2568,7 +2568,7 @@ _0807C6A0:
 	.align 2, 0
 _0807C6A8: .4byte 0x000006cc
 _0807C6AC:
-	ldr r0, _0807C6C8 @ =gUnknown_83C2BBC
+	ldr r0, _0807C6C8 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r0, _0807C6CC @ =0x000006e6
 	adds r1, r2, r0
@@ -2583,12 +2583,12 @@ _0807C6AC:
 	movs r0, 0x8
 	b _0807C798
 	.align 2, 0
-_0807C6C8: .4byte gUnknown_83C2BBC
+_0807C6C8: .4byte gWeatherPtr
 _0807C6CC: .4byte 0x000006e6
 _0807C6D0: .4byte 0x000006cc
 _0807C6D4:
 	bl Random
-	ldr r1, _0807C6F8 @ =gUnknown_83C2BBC
+	ldr r1, _0807C6F8 @ =gWeatherPtr
 	ldr r2, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -2605,11 +2605,11 @@ _0807C6D4:
 	strh r0, [r2]
 	b _0807C79A
 	.align 2, 0
-_0807C6F8: .4byte gUnknown_83C2BBC
+_0807C6F8: .4byte gWeatherPtr
 _0807C6FC: .4byte 0x000006e6
 _0807C700: .4byte 0x000006cc
 _0807C704:
-	ldr r0, _0807C73C @ =gUnknown_83C2BBC
+	ldr r0, _0807C73C @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r1, _0807C740 @ =0x000006e6
 	adds r4, r5, r1
@@ -2634,11 +2634,11 @@ _0807C704:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C73C: .4byte gUnknown_83C2BBC
+_0807C73C: .4byte gWeatherPtr
 _0807C740: .4byte 0x000006e6
 _0807C744: .4byte 0x000006cc
 _0807C748:
-	ldr r0, _0807C770 @ =gUnknown_83C2BBC
+	ldr r0, _0807C770 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r3, _0807C774 @ =0x000006e6
 	adds r1, r4, r3
@@ -2658,11 +2658,11 @@ _0807C748:
 	adds r0, 0x1
 	b _0807C798
 	.align 2, 0
-_0807C770: .4byte gUnknown_83C2BBC
+_0807C770: .4byte gWeatherPtr
 _0807C774: .4byte 0x000006e6
 _0807C778: .4byte 0x000006cc
 _0807C77C:
-	ldr r0, _0807C7A0 @ =gUnknown_83C2BBC
+	ldr r0, _0807C7A0 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r1, _0807C7A4 @ =0x000006c6
 	adds r0, r2, r1
@@ -2684,7 +2684,7 @@ _0807C79A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C7A0: .4byte gUnknown_83C2BBC
+_0807C7A0: .4byte gWeatherPtr
 _0807C7A4: .4byte 0x000006c6
 _0807C7A8: .4byte 0x000006ea
 _0807C7AC: .4byte 0x000006cc
@@ -2693,7 +2693,7 @@ _0807C7AC: .4byte 0x000006cc
 	thumb_func_start Rain_Finish
 Rain_Finish: @ 807C7B0
 	push {r4-r6,lr}
-	ldr r0, _0807C7CC @ =gUnknown_83C2BBC
+	ldr r0, _0807C7CC @ =gWeatherPtr
 	ldr r6, [r0]
 	ldr r0, _0807C7D0 @ =0x000006ce
 	adds r5, r6, r0
@@ -2706,7 +2706,7 @@ Rain_Finish: @ 807C7B0
 	beq _0807C7DA
 	b _0807C84C
 	.align 2, 0
-_0807C7CC: .4byte gUnknown_83C2BBC
+_0807C7CC: .4byte gWeatherPtr
 _0807C7D0: .4byte 0x000006ce
 _0807C7D4:
 	cmp r1, 0x2
@@ -2721,7 +2721,7 @@ _0807C7DA:
 	strh r0, [r5]
 _0807C7E6:
 	bl Rain_Main
-	ldr r0, _0807C824 @ =gUnknown_83C2BBC
+	ldr r0, _0807C824 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r1, _0807C820 @ =0x000006ea
 	adds r0, r2, r1
@@ -2749,7 +2749,7 @@ _0807C7E6:
 	b _0807C854
 	.align 2, 0
 _0807C820: .4byte 0x000006ea
-_0807C824: .4byte gUnknown_83C2BBC
+_0807C824: .4byte gWeatherPtr
 _0807C828: .4byte 0x000006d9
 _0807C82C: .4byte 0x000006ce
 _0807C830:
@@ -2783,7 +2783,7 @@ SetThunderCounter: @ 807C85C
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r0, _0807C890 @ =gUnknown_83C2BBC
+	ldr r0, _0807C890 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r0, _0807C894 @ =0x000006ed
 	adds r5, r4, r0
@@ -2806,14 +2806,14 @@ _0807C88A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C890: .4byte gUnknown_83C2BBC
+_0807C890: .4byte gWeatherPtr
 _0807C894: .4byte 0x000006ed
 	thumb_func_end SetThunderCounter
 
 	thumb_func_start UpdateThunderSound
 UpdateThunderSound: @ 807C898
 	push {r4,lr}
-	ldr r0, _0807C8D0 @ =gUnknown_83C2BBC
+	ldr r0, _0807C8D0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C8D4 @ =0x000006ed
 	adds r0, r1, r2
@@ -2838,13 +2838,13 @@ UpdateThunderSound: @ 807C898
 	bl PlaySE
 	b _0807C8DE
 	.align 2, 0
-_0807C8D0: .4byte gUnknown_83C2BBC
+_0807C8D0: .4byte gWeatherPtr
 _0807C8D4: .4byte 0x000006ed
 _0807C8D8:
 	movs r0, 0x51
 	bl PlaySE
 _0807C8DE:
-	ldr r0, _0807C8EC @ =gUnknown_83C2BBC
+	ldr r0, _0807C8EC @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807C8F0 @ =0x000006ed
 	adds r0, r1
@@ -2852,7 +2852,7 @@ _0807C8DE:
 	strb r1, [r0]
 	b _0807C8F8
 	.align 2, 0
-_0807C8EC: .4byte gUnknown_83C2BBC
+_0807C8EC: .4byte gWeatherPtr
 _0807C8F0: .4byte 0x000006ed
 _0807C8F4:
 	subs r0, 0x1
@@ -2866,7 +2866,7 @@ _0807C8F8:
 	thumb_func_start Fog1_InitVars
 Fog1_InitVars: @ 807C900
 	push {lr}
-	ldr r0, _0807C94C @ =gUnknown_83C2BBC
+	ldr r0, _0807C94C @ =gWeatherPtr
 	ldr r3, [r0]
 	ldr r0, _0807C950 @ =0x000006cc
 	adds r1, r3, r0
@@ -2904,7 +2904,7 @@ _0807C948:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C94C: .4byte gUnknown_83C2BBC
+_0807C94C: .4byte gWeatherPtr
 _0807C950: .4byte 0x000006cc
 _0807C954: .4byte 0x000006d2
 _0807C958: .4byte 0x000006c2
@@ -2915,7 +2915,7 @@ _0807C95C: .4byte 0x000006fb
 Fog1_InitAll: @ 807C960
 	push {r4,lr}
 	bl Fog1_InitVars
-	ldr r0, _0807C988 @ =gUnknown_83C2BBC
+	ldr r0, _0807C988 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807C98C @ =0x000006d2
 	adds r0, r1, r2
@@ -2933,14 +2933,14 @@ _0807C980:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C988: .4byte gUnknown_83C2BBC
+_0807C988: .4byte gWeatherPtr
 _0807C98C: .4byte 0x000006d2
 	thumb_func_end Fog1_InitAll
 
 	thumb_func_start Fog1_Main
 Fog1_Main: @ 807C990
 	push {r4-r6,lr}
-	ldr r0, _0807C9DC @ =gUnknown_83C2BBC
+	ldr r0, _0807C9DC @ =gWeatherPtr
 	ldr r6, [r0]
 	ldr r0, _0807C9E0 @ =gSpriteCoordOffsetX
 	ldr r1, _0807C9E4 @ =0x000006f2
@@ -2978,7 +2978,7 @@ _0807C9CA:
 	beq _0807CA30
 	b _0807CA46
 	.align 2, 0
-_0807C9DC: .4byte gUnknown_83C2BBC
+_0807C9DC: .4byte gWeatherPtr
 _0807C9E0: .4byte gSpriteCoordOffsetX
 _0807C9E4: .4byte 0x000006f2
 _0807C9E8: .4byte 0x000006ee
@@ -3002,7 +3002,7 @@ _0807CA0C:
 	movs r2, 0
 	bl Weather_SetTargetBlendCoeffs
 _0807CA16:
-	ldr r0, _0807CA28 @ =gUnknown_83C2BBC
+	ldr r0, _0807CA28 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807CA2C @ =0x000006cc
 	adds r1, r0
@@ -3011,7 +3011,7 @@ _0807CA16:
 	strh r0, [r1]
 	b _0807CA46
 	.align 2, 0
-_0807CA28: .4byte gUnknown_83C2BBC
+_0807CA28: .4byte gWeatherPtr
 _0807CA2C: .4byte 0x000006cc
 _0807CA30:
 	bl Weather_UpdateBlend
@@ -3035,7 +3035,7 @@ _0807CA4C: .4byte 0x000006d2
 	thumb_func_start Fog1_Finish
 Fog1_Finish: @ 807CA50
 	push {r4,lr}
-	ldr r0, _0807CAA0 @ =gUnknown_83C2BBC
+	ldr r0, _0807CAA0 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r0, _0807CAA4 @ =gSpriteCoordOffsetX
 	ldr r1, _0807CAA8 @ =0x000006f2
@@ -3075,7 +3075,7 @@ _0807CA8A:
 	beq _0807CABA
 	b _0807CADE
 	.align 2, 0
-_0807CAA0: .4byte gUnknown_83C2BBC
+_0807CAA0: .4byte gWeatherPtr
 _0807CAA4: .4byte gSpriteCoordOffsetX
 _0807CAA8: .4byte 0x000006f2
 _0807CAAC: .4byte 0x000006ee
@@ -3121,7 +3121,7 @@ Fog1SpriteCallback: @ 807CAEC
 	ldr r0, _0807CB38 @ =gSpriteCoordOffsetY
 	ldrb r0, [r0]
 	strh r0, [r3, 0x26]
-	ldr r0, _0807CB3C @ =gUnknown_83C2BBC
+	ldr r0, _0807CB3C @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807CB40 @ =0x000006ee
 	adds r2, r0, r1
@@ -3156,7 +3156,7 @@ _0807CB30:
 	bx r0
 	.align 2, 0
 _0807CB38: .4byte gSpriteCoordOffsetY
-_0807CB3C: .4byte gUnknown_83C2BBC
+_0807CB3C: .4byte gWeatherPtr
 _0807CB40: .4byte 0x000006ee
 _0807CB44: .4byte 0x010f0000
 _0807CB48: .4byte 0x000001ff
@@ -3166,7 +3166,7 @@ _0807CB48: .4byte 0x000001ff
 CreateFog1Sprites: @ 807CB4C
 	push {r4,r5,lr}
 	sub sp, 0x8
-	ldr r0, _0807CBC0 @ =gUnknown_83C2BBC
+	ldr r0, _0807CBC0 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807CBC4 @ =0x000006fb
 	adds r0, r1
@@ -3211,7 +3211,7 @@ _0807CB70:
 	lsrs r0, 10
 	adds r0, 0x20
 	strh r0, [r4, 0x22]
-	ldr r2, _0807CBC0 @ =gUnknown_83C2BBC
+	ldr r2, _0807CBC0 @ =gWeatherPtr
 	ldr r0, [r2]
 	lsls r1, r5, 2
 	adds r0, 0xA0
@@ -3219,13 +3219,13 @@ _0807CB70:
 	str r4, [r0]
 	b _0807CBE2
 	.align 2, 0
-_0807CBC0: .4byte gUnknown_83C2BBC
+_0807CBC0: .4byte gWeatherPtr
 _0807CBC4: .4byte 0x000006fb
 _0807CBC8: .4byte gUnknown_83C67A8
 _0807CBCC: .4byte gUnknown_83C6790
 _0807CBD0: .4byte gSprites
 _0807CBD4:
-	ldr r2, _0807CC00 @ =gUnknown_83C2BBC
+	ldr r2, _0807CC00 @ =gWeatherPtr
 	ldr r1, [r2]
 	lsls r0, r5, 2
 	adds r1, 0xA0
@@ -3249,14 +3249,14 @@ _0807CBF6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CC00: .4byte gUnknown_83C2BBC
+_0807CC00: .4byte gWeatherPtr
 _0807CC04: .4byte 0x000006fb
 	thumb_func_end CreateFog1Sprites
 
 	thumb_func_start DestroyFog1Sprites
 DestroyFog1Sprites: @ 807CC08
 	push {r4,r5,lr}
-	ldr r0, _0807CC50 @ =gUnknown_83C2BBC
+	ldr r0, _0807CC50 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807CC54 @ =0x000006fb
 	adds r0, r1, r2
@@ -3281,7 +3281,7 @@ _0807CC2C:
 	bls _0807CC1E
 	ldr r0, _0807CC58 @ =0x00001201
 	bl FreeSpriteTilesByTag
-	ldr r0, _0807CC50 @ =gUnknown_83C2BBC
+	ldr r0, _0807CC50 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807CC54 @ =0x000006fb
 	adds r0, r1
@@ -3292,7 +3292,7 @@ _0807CC48:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CC50: .4byte gUnknown_83C2BBC
+_0807CC50: .4byte gWeatherPtr
 _0807CC54: .4byte 0x000006fb
 _0807CC58: .4byte 0x00001201
 	thumb_func_end DestroyFog1Sprites
@@ -3300,7 +3300,7 @@ _0807CC58: .4byte 0x00001201
 	thumb_func_start Ash_InitVars
 Ash_InitVars: @ 807CC5C
 	push {lr}
-	ldr r0, _0807CCA8 @ =gUnknown_83C2BBC
+	ldr r0, _0807CCA8 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807CCAC @ =0x000006cc
 	adds r2, r1, r0
@@ -3337,7 +3337,7 @@ _0807CCA4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CCA8: .4byte gUnknown_83C2BBC
+_0807CCA8: .4byte gWeatherPtr
 _0807CCAC: .4byte 0x000006cc
 _0807CCB0: .4byte 0x000006d2
 _0807CCB4: .4byte 0x000006c2
@@ -3347,7 +3347,7 @@ _0807CCB4: .4byte 0x000006c2
 Ash_InitAll: @ 807CCB8
 	push {r4,lr}
 	bl Ash_InitVars
-	ldr r0, _0807CCE0 @ =gUnknown_83C2BBC
+	ldr r0, _0807CCE0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807CCE4 @ =0x000006d2
 	adds r0, r1, r2
@@ -3365,14 +3365,14 @@ _0807CCD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CCE0: .4byte gUnknown_83C2BBC
+_0807CCE0: .4byte gWeatherPtr
 _0807CCE4: .4byte 0x000006d2
 	thumb_func_end Ash_InitAll
 
 	thumb_func_start Ash_Main
 Ash_Main: @ 807CCE8
 	push {r4,r5,lr}
-	ldr r2, _0807CD2C @ =gUnknown_83C2BBC
+	ldr r2, _0807CD2C @ =gWeatherPtr
 	ldr r1, [r2]
 	ldr r0, _0807CD30 @ =gSpriteCoordOffsetX
 	ldrh r0, [r0]
@@ -3407,7 +3407,7 @@ _0807CD14:
 	beq _0807CD46
 	b _0807CD88
 	.align 2, 0
-_0807CD2C: .4byte gUnknown_83C2BBC
+_0807CD2C: .4byte gWeatherPtr
 _0807CD30: .4byte gSpriteCoordOffsetX
 _0807CD34: .4byte 0x000001ff
 _0807CD38: .4byte 0x000006fc
@@ -3460,7 +3460,7 @@ _0807CD8C:
 	thumb_func_start Ash_Finish
 Ash_Finish: @ 807CD94
 	push {r4,lr}
-	ldr r0, _0807CDB0 @ =gUnknown_83C2BBC
+	ldr r0, _0807CDB0 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807CDB4 @ =0x000006ce
 	adds r4, r0, r1
@@ -3473,7 +3473,7 @@ Ash_Finish: @ 807CD94
 	beq _0807CDBE
 	b _0807CDEE
 	.align 2, 0
-_0807CDB0: .4byte gUnknown_83C2BBC
+_0807CDB0: .4byte gWeatherPtr
 _0807CDB4: .4byte 0x000006ce
 _0807CDB8:
 	cmp r0, 0x2
@@ -3528,7 +3528,7 @@ _0807CE08: .4byte gUnknown_83C67B0
 	thumb_func_start CreateAshSprites
 CreateAshSprites: @ 807CE0C
 	push {r4,r5,lr}
-	ldr r0, _0807CE78 @ =gUnknown_83C2BBC
+	ldr r0, _0807CE78 @ =gWeatherPtr
 	ldr r0, [r0]
 	movs r1, 0xE0
 	lsls r1, 3
@@ -3571,7 +3571,7 @@ _0807CE20:
 	lsls r0, 6
 	adds r0, 0x20
 	strh r0, [r4, 0x2E]
-	ldr r2, _0807CE78 @ =gUnknown_83C2BBC
+	ldr r2, _0807CE78 @ =gWeatherPtr
 	ldr r0, [r2]
 	lsls r1, r5, 2
 	adds r0, 0xF0
@@ -3579,11 +3579,11 @@ _0807CE20:
 	str r4, [r0]
 	b _0807CE92
 	.align 2, 0
-_0807CE78: .4byte gUnknown_83C2BBC
+_0807CE78: .4byte gWeatherPtr
 _0807CE7C: .4byte gUnknown_83C67D0
 _0807CE80: .4byte gSprites
 _0807CE84:
-	ldr r2, _0807CEB0 @ =gUnknown_83C2BBC
+	ldr r2, _0807CEB0 @ =gWeatherPtr
 	ldr r1, [r2]
 	lsls r0, r5, 2
 	adds r1, 0xF0
@@ -3607,13 +3607,13 @@ _0807CEA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CEB0: .4byte gUnknown_83C2BBC
+_0807CEB0: .4byte gWeatherPtr
 	thumb_func_end CreateAshSprites
 
 	thumb_func_start DestroyAshSprites
 DestroyAshSprites: @ 807CEB4
 	push {r4,r5,lr}
-	ldr r0, _0807CF00 @ =gUnknown_83C2BBC
+	ldr r0, _0807CF00 @ =gWeatherPtr
 	ldr r1, [r0]
 	movs r2, 0xE0
 	lsls r2, 3
@@ -3639,7 +3639,7 @@ _0807CEDA:
 	bls _0807CECC
 	ldr r0, _0807CF04 @ =0x00001202
 	bl FreeSpriteTilesByTag
-	ldr r0, _0807CF00 @ =gUnknown_83C2BBC
+	ldr r0, _0807CF00 @ =gWeatherPtr
 	ldr r0, [r0]
 	movs r1, 0xE0
 	lsls r1, 3
@@ -3651,7 +3651,7 @@ _0807CEF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CF00: .4byte gUnknown_83C2BBC
+_0807CF00: .4byte gWeatherPtr
 _0807CF04: .4byte 0x00001202
 	thumb_func_end DestroyAshSprites
 
@@ -3677,7 +3677,7 @@ _0807CF24:
 	ldrh r1, [r1]
 	adds r0, r1
 	strh r0, [r3, 0x22]
-	ldr r0, _0807CF74 @ =gUnknown_83C2BBC
+	ldr r0, _0807CF74 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807CF78 @ =0x000006fc
 	adds r2, r0, r1
@@ -3712,7 +3712,7 @@ _0807CF68:
 	bx r0
 	.align 2, 0
 _0807CF70: .4byte gSpriteCoordOffsetY
-_0807CF74: .4byte gUnknown_83C2BBC
+_0807CF74: .4byte gWeatherPtr
 _0807CF78: .4byte 0x000006fc
 _0807CF7C: .4byte 0x010f0000
 _0807CF80: .4byte 0x000001ff
@@ -3721,7 +3721,7 @@ _0807CF80: .4byte 0x000001ff
 	thumb_func_start Fog2_InitVars
 Fog2_InitVars: @ 807CF84
 	push {r4,lr}
-	ldr r0, _0807CFF4 @ =gUnknown_83C2BBC
+	ldr r0, _0807CFF4 @ =gWeatherPtr
 	ldr r3, [r0]
 	ldr r1, _0807CFF8 @ =0x000006cc
 	adds r0, r3, r1
@@ -3777,7 +3777,7 @@ _0807CFEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807CFF4: .4byte gUnknown_83C2BBC
+_0807CFF4: .4byte gWeatherPtr
 _0807CFF8: .4byte 0x000006cc
 _0807CFFC: .4byte 0x000006d2
 _0807D000: .4byte 0x000006c2
@@ -3788,7 +3788,7 @@ _0807D004: .4byte 0x00000724
 Fog2_InitAll: @ 807D008
 	push {r4,lr}
 	bl Fog2_InitVars
-	ldr r0, _0807D030 @ =gUnknown_83C2BBC
+	ldr r0, _0807D030 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D034 @ =0x000006d2
 	adds r0, r1, r2
@@ -3806,7 +3806,7 @@ _0807D028:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D030: .4byte gUnknown_83C2BBC
+_0807D030: .4byte gWeatherPtr
 _0807D034: .4byte 0x000006d2
 	thumb_func_end Fog2_InitAll
 
@@ -3814,7 +3814,7 @@ _0807D034: .4byte 0x000006d2
 Fog2_Main: @ 807D038
 	push {r4,r5,lr}
 	bl sub_807D0FC
-	ldr r0, _0807D058 @ =gUnknown_83C2BBC
+	ldr r0, _0807D058 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807D05C @ =0x000006cc
 	adds r4, r5, r0
@@ -3827,7 +3827,7 @@ Fog2_Main: @ 807D038
 	beq _0807D066
 	b _0807D090
 	.align 2, 0
-_0807D058: .4byte gUnknown_83C2BBC
+_0807D058: .4byte gWeatherPtr
 _0807D05C: .4byte 0x000006cc
 _0807D060:
 	cmp r0, 0x2
@@ -3867,7 +3867,7 @@ _0807D098: .4byte 0x000006d2
 Fog2_Finish: @ 807D09C
 	push {r4,lr}
 	bl sub_807D0FC
-	ldr r0, _0807D0BC @ =gUnknown_83C2BBC
+	ldr r0, _0807D0BC @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D0C0 @ =0x000006ce
 	adds r4, r0, r1
@@ -3880,7 +3880,7 @@ Fog2_Finish: @ 807D09C
 	beq _0807D0CA
 	b _0807D0EE
 	.align 2, 0
-_0807D0BC: .4byte gUnknown_83C2BBC
+_0807D0BC: .4byte gWeatherPtr
 _0807D0C0: .4byte 0x000006ce
 _0807D0C4:
 	cmp r0, 0x2
@@ -3919,7 +3919,7 @@ _0807D0F4:
 	thumb_func_start sub_807D0FC
 sub_807D0FC: @ 807D0FC
 	push {r4,r5,lr}
-	ldr r0, _0807D174 @ =gUnknown_83C2BBC
+	ldr r0, _0807D174 @ =gWeatherPtr
 	ldr r3, [r0]
 	ldr r0, _0807D178 @ =0x0000071c
 	adds r2, r3, r0
@@ -3981,7 +3981,7 @@ _0807D144:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D174: .4byte gUnknown_83C2BBC
+_0807D174: .4byte gWeatherPtr
 _0807D178: .4byte 0x0000071c
 _0807D17C: .4byte 0x0000ffff
 _0807D180: .4byte 0x0000071e
@@ -3994,7 +3994,7 @@ _0807D18C: .4byte gSpriteCoordOffsetY
 CreateFog2Sprites: @ 807D190
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r0, _0807D1FC @ =gUnknown_83C2BBC
+	ldr r0, _0807D1FC @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D200 @ =0x00000724
 	adds r0, r1
@@ -4034,7 +4034,7 @@ _0807D1B4:
 	bl __umodsi3
 	strh r0, [r4, 0x2E]
 	strh r5, [r4, 0x30]
-	ldr r2, _0807D1FC @ =gUnknown_83C2BBC
+	ldr r2, _0807D1FC @ =gWeatherPtr
 	ldr r0, [r2]
 	lsls r1, r6, 2
 	movs r3, 0xA0
@@ -4044,13 +4044,13 @@ _0807D1B4:
 	str r4, [r0]
 	b _0807D222
 	.align 2, 0
-_0807D1FC: .4byte gUnknown_83C2BBC
+_0807D1FC: .4byte gWeatherPtr
 _0807D200: .4byte 0x00000724
 _0807D204: .4byte gUnknown_83C67E8
 _0807D208: .4byte gUnknown_83C6804
 _0807D20C: .4byte gSprites
 _0807D210:
-	ldr r2, _0807D240 @ =gUnknown_83C2BBC
+	ldr r2, _0807D240 @ =gWeatherPtr
 	ldr r1, [r2]
 	lsls r0, r6, 2
 	movs r3, 0xA0
@@ -4076,14 +4076,14 @@ _0807D236:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D240: .4byte gUnknown_83C2BBC
+_0807D240: .4byte gWeatherPtr
 _0807D244: .4byte 0x00000724
 	thumb_func_end CreateFog2Sprites
 
 	thumb_func_start DestroyFog2Sprites
 DestroyFog2Sprites: @ 807D248
 	push {r4,r5,lr}
-	ldr r0, _0807D290 @ =gUnknown_83C2BBC
+	ldr r0, _0807D290 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D294 @ =0x00000724
 	adds r0, r1, r2
@@ -4109,7 +4109,7 @@ _0807D26E:
 	bls _0807D260
 	ldr r0, _0807D298 @ =0x00001203
 	bl FreeSpriteTilesByTag
-	ldr r0, _0807D290 @ =gUnknown_83C2BBC
+	ldr r0, _0807D290 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D294 @ =0x00000724
 	adds r0, r1
@@ -4120,7 +4120,7 @@ _0807D28A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D290: .4byte gUnknown_83C2BBC
+_0807D290: .4byte gWeatherPtr
 _0807D294: .4byte 0x00000724
 _0807D298: .4byte 0x00001203
 	thumb_func_end DestroyFog2Sprites
@@ -4129,7 +4129,7 @@ _0807D298: .4byte 0x00001203
 Fog2SpriteCallback: @ 807D29C
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, _0807D2EC @ =gUnknown_83C2BBC
+	ldr r0, _0807D2EC @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D2F0 @ =0x0000071a
 	adds r0, r1, r2
@@ -4168,7 +4168,7 @@ _0807D2E4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D2EC: .4byte gUnknown_83C2BBC
+_0807D2EC: .4byte gWeatherPtr
 _0807D2F0: .4byte 0x0000071a
 _0807D2F4: .4byte 0x010f0000
 _0807D2F8: .4byte 0x000001ff
@@ -4177,7 +4177,7 @@ _0807D2F8: .4byte 0x000001ff
 	thumb_func_start Sandstorm_InitVars
 Sandstorm_InitVars: @ 807D2FC
 	push {r4,lr}
-	ldr r0, _0807D360 @ =gUnknown_83C2BBC
+	ldr r0, _0807D360 @ =gWeatherPtr
 	ldr r3, [r0]
 	ldr r0, _0807D364 @ =0x000006cc
 	adds r1, r3, r0
@@ -4227,7 +4227,7 @@ _0807D358:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D360: .4byte gUnknown_83C2BBC
+_0807D360: .4byte gWeatherPtr
 _0807D364: .4byte 0x000006cc
 _0807D368: .4byte 0x000006d2
 _0807D36C: .4byte 0x000006c1
@@ -4240,7 +4240,7 @@ _0807D378: .4byte 0x00000712
 Sandstorm_InitAll: @ 807D37C
 	push {r4,lr}
 	bl Sandstorm_InitVars
-	ldr r0, _0807D3A4 @ =gUnknown_83C2BBC
+	ldr r0, _0807D3A4 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D3A8 @ =0x000006d2
 	adds r0, r1, r2
@@ -4258,7 +4258,7 @@ _0807D39C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D3A4: .4byte gUnknown_83C2BBC
+_0807D3A4: .4byte gWeatherPtr
 _0807D3A8: .4byte 0x000006d2
 	thumb_func_end Sandstorm_InitAll
 
@@ -4267,7 +4267,7 @@ Sandstorm_Main: @ 807D3AC
 	push {r4,r5,lr}
 	bl sub_807D4C4
 	bl sub_807D48C
-	ldr r0, _0807D3DC @ =gUnknown_83C2BBC
+	ldr r0, _0807D3DC @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807D3E0 @ =0x00000712
 	adds r1, r5, r0
@@ -4288,7 +4288,7 @@ _0807D3C8:
 	beq _0807D3EE
 	b _0807D41C
 	.align 2, 0
-_0807D3DC: .4byte gUnknown_83C2BBC
+_0807D3DC: .4byte gWeatherPtr
 _0807D3E0: .4byte 0x00000712
 _0807D3E4: .4byte 0x000006cc
 _0807D3E8:
@@ -4331,7 +4331,7 @@ Sandstorm_Finish: @ 807D428
 	push {r4,lr}
 	bl sub_807D4C4
 	bl sub_807D48C
-	ldr r0, _0807D44C @ =gUnknown_83C2BBC
+	ldr r0, _0807D44C @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D450 @ =0x000006ce
 	adds r4, r0, r1
@@ -4344,7 +4344,7 @@ Sandstorm_Finish: @ 807D428
 	beq _0807D45A
 	b _0807D47E
 	.align 2, 0
-_0807D44C: .4byte gUnknown_83C2BBC
+_0807D44C: .4byte gWeatherPtr
 _0807D450: .4byte 0x000006ce
 _0807D454:
 	cmp r0, 0x2
@@ -4383,7 +4383,7 @@ _0807D484:
 	thumb_func_start sub_807D48C
 sub_807D48C: @ 807D48C
 	push {lr}
-	ldr r0, _0807D4B8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D4B8 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r0, _0807D4BC @ =0x00000714
 	adds r3, r2, r0
@@ -4405,7 +4405,7 @@ _0807D4B2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D4B8: .4byte gUnknown_83C2BBC
+_0807D4B8: .4byte gWeatherPtr
 _0807D4BC: .4byte 0x00000714
 _0807D4C0: .4byte 0x00000712
 	thumb_func_end sub_807D48C
@@ -4413,7 +4413,7 @@ _0807D4C0: .4byte 0x00000712
 	thumb_func_start sub_807D4C4
 sub_807D4C4: @ 807D4C4
 	push {r4-r6,lr}
-	ldr r0, _0807D528 @ =gUnknown_83C2BBC
+	ldr r0, _0807D528 @ =gWeatherPtr
 	ldr r2, [r0]
 	ldr r0, _0807D52C @ =0x00000704
 	adds r4, r2, r0
@@ -4463,7 +4463,7 @@ sub_807D4C4: @ 807D4C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D528: .4byte gUnknown_83C2BBC
+_0807D528: .4byte gWeatherPtr
 _0807D52C: .4byte 0x00000704
 _0807D530: .4byte gSineTable
 _0807D534: .4byte 0x00000712
@@ -4475,7 +4475,7 @@ _0807D540: .4byte gSpriteCoordOffsetY
 	thumb_func_start sub_807D544
 sub_807D544: @ 807D544
 	push {r4,r5,lr}
-	ldr r0, _0807D5C8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D5C8 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D5CC @ =0x00000716
 	adds r0, r1, r2
@@ -4499,7 +4499,7 @@ _0807D56A:
 	lsrs r4, r0, 16
 	cmp r4, 0x13
 	bls _0807D55C
-	ldr r0, _0807D5C8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D5C8 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D5CC @ =0x00000716
 	adds r0, r1
@@ -4508,7 +4508,7 @@ _0807D56A:
 	ldr r0, _0807D5D0 @ =0x00001204
 	bl FreeSpriteTilesByTag
 _0807D586:
-	ldr r0, _0807D5C8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D5C8 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D5D4 @ =0x00000717
 	adds r0, r1, r2
@@ -4532,7 +4532,7 @@ _0807D5AA:
 	lsrs r4, r0, 16
 	cmp r4, 0x4
 	bls _0807D59C
-	ldr r0, _0807D5C8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D5C8 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D5D4 @ =0x00000717
 	adds r0, r1
@@ -4543,7 +4543,7 @@ _0807D5C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D5C8: .4byte gUnknown_83C2BBC
+_0807D5C8: .4byte gWeatherPtr
 _0807D5CC: .4byte 0x00000716
 _0807D5D0: .4byte 0x00001204
 _0807D5D4: .4byte 0x00000717
@@ -4553,7 +4553,7 @@ _0807D5D4: .4byte 0x00000717
 CreateSandstormSprites_1: @ 807D5D8
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r0, _0807D648 @ =gUnknown_83C2BBC
+	ldr r0, _0807D648 @ =gWeatherPtr
 	ldr r0, [r0]
 	ldr r1, _0807D64C @ =0x00000716
 	adds r0, r1
@@ -4563,7 +4563,7 @@ CreateSandstormSprites_1: @ 807D5D8
 	ldr r0, _0807D650 @ =gUnknown_83C6854
 	bl LoadSpriteSheet
 	ldr r0, _0807D654 @ =gUnknown_83C2D20
-	bl sub_807ABC0
+	bl LoadCustomWeatherSpritePalette
 	movs r7, 0
 _0807D5F8:
 	adds r0, r7, 0
@@ -4580,7 +4580,7 @@ _0807D5F8:
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _0807D660
-	ldr r2, _0807D648 @ =gUnknown_83C2BBC
+	ldr r2, _0807D648 @ =gWeatherPtr
 	ldr r5, [r2]
 	lsls r0, r7, 2
 	movs r3, 0xC8
@@ -4603,14 +4603,14 @@ _0807D5F8:
 	ldr r2, [sp]
 	b _0807D672
 	.align 2, 0
-_0807D648: .4byte gUnknown_83C2BBC
+_0807D648: .4byte gWeatherPtr
 _0807D64C: .4byte 0x00000716
 _0807D650: .4byte gUnknown_83C6854
 _0807D654: .4byte gUnknown_83C2D20
 _0807D658: .4byte gUnknown_83C683C
 _0807D65C: .4byte gSprites
 _0807D660:
-	ldr r2, _0807D690 @ =gUnknown_83C2BBC
+	ldr r2, _0807D690 @ =gWeatherPtr
 	ldr r1, [r2]
 	lsls r0, r7, 2
 	movs r3, 0xC8
@@ -4636,7 +4636,7 @@ _0807D686:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D690: .4byte gUnknown_83C2BBC
+_0807D690: .4byte gWeatherPtr
 _0807D694: .4byte 0x00000716
 	thumb_func_end CreateSandstormSprites_1
 
@@ -4647,7 +4647,7 @@ CreateSandstormSprites_2: @ 807D698
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r4, _0807D740 @ =gUnknown_83C2BBC
+	ldr r4, _0807D740 @ =gWeatherPtr
 	ldr r0, [r4]
 	ldr r1, _0807D744 @ =0x00000717
 	adds r0, r1
@@ -4724,7 +4724,7 @@ _0807D6B8:
 	str r0, [r1, 0x1C]
 	b _0807D76E
 	.align 2, 0
-_0807D740: .4byte gUnknown_83C2BBC
+_0807D740: .4byte gWeatherPtr
 _0807D744: .4byte 0x00000717
 _0807D748: .4byte gUnknown_83C683C
 _0807D74C: .4byte gSprites
@@ -4769,7 +4769,7 @@ _0807D794: .4byte 0x00000717
 SandstormSpriteCallback1: @ 807D798
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, _0807D7E8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D7E8 @ =gWeatherPtr
 	ldr r1, [r0]
 	movs r2, 0xE2
 	lsls r2, 3
@@ -4808,7 +4808,7 @@ _0807D7E0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D7E8: .4byte gUnknown_83C2BBC
+_0807D7E8: .4byte gWeatherPtr
 _0807D7EC: .4byte 0x0000070e
 _0807D7F0: .4byte 0x010f0000
 _0807D7F4: .4byte 0x000001ff
@@ -4902,7 +4902,7 @@ _0807D88C: .4byte gSineTable
 
 	thumb_func_start Weather11_InitVars
 Weather11_InitVars: @ 807D890
-	ldr r0, _0807D8B0 @ =gUnknown_83C2BBC
+	ldr r0, _0807D8B0 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807D8B4 @ =0x000006cc
 	adds r2, r1, r0
@@ -4918,7 +4918,7 @@ Weather11_InitVars: @ 807D890
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_0807D8B0: .4byte gUnknown_83C2BBC
+_0807D8B0: .4byte gWeatherPtr
 _0807D8B4: .4byte 0x000006cc
 _0807D8B8: .4byte 0x000006c1
 _0807D8BC: .4byte 0x000006c2
@@ -4947,7 +4947,7 @@ sub_807D8D0: @ 807D8D0
 Bubbles_InitVars: @ 807D8D4
 	push {r4,r5,lr}
 	bl Fog1_InitVars
-	ldr r0, _0807D914 @ =gUnknown_83C2BBC
+	ldr r0, _0807D914 @ =gWeatherPtr
 	ldr r4, [r0]
 	ldr r1, _0807D918 @ =0x0000072e
 	adds r0, r4, r1
@@ -4976,7 +4976,7 @@ _0807D90C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D914: .4byte gUnknown_83C2BBC
+_0807D914: .4byte gWeatherPtr
 _0807D918: .4byte 0x0000072e
 _0807D91C: .4byte gUnknown_83C6870
 _0807D920: .4byte gUnknown_83C6868
@@ -4987,7 +4987,7 @@ _0807D924: .4byte 0x0000072a
 Bubbles_InitAll: @ 807D928
 	push {r4,lr}
 	bl Bubbles_InitVars
-	ldr r0, _0807D950 @ =gUnknown_83C2BBC
+	ldr r0, _0807D950 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r2, _0807D954 @ =0x000006d2
 	adds r0, r1, r2
@@ -5005,7 +5005,7 @@ _0807D948:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D950: .4byte gUnknown_83C2BBC
+_0807D950: .4byte gWeatherPtr
 _0807D954: .4byte 0x000006d2
 	thumb_func_end Bubbles_InitAll
 
@@ -5013,7 +5013,7 @@ _0807D954: .4byte 0x000006d2
 Bubbles_Main: @ 807D958
 	push {r4-r7,lr}
 	bl Fog1_Main
-	ldr r0, _0807D9B8 @ =gUnknown_83C2BBC
+	ldr r0, _0807D9B8 @ =gWeatherPtr
 	ldr r5, [r0]
 	ldr r0, _0807D9BC @ =0x00000726
 	adds r4, r5, r0
@@ -5059,7 +5059,7 @@ _0807D9B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807D9B8: .4byte gUnknown_83C2BBC
+_0807D9B8: .4byte gWeatherPtr
 _0807D9BC: .4byte 0x00000726
 _0807D9C0: .4byte 0x0000ffff
 _0807D9C4: .4byte gUnknown_83C6868
@@ -5129,7 +5129,7 @@ sub_807D9E8: @ 807D9E8
 	strh r0, [r1, 0x2E]
 	strh r0, [r1, 0x30]
 	strh r0, [r1, 0x32]
-	ldr r0, _0807DA68 @ =gUnknown_83C2BBC
+	ldr r0, _0807DA68 @ =gWeatherPtr
 	ldr r1, [r0]
 	ldr r0, _0807DA6C @ =0x0000072c
 	adds r1, r0
@@ -5145,7 +5145,7 @@ _0807DA58: .4byte gUnknown_83C6878
 _0807DA5C: .4byte gSpriteCoordOffsetY
 _0807DA60: .4byte gUnknown_83C68BC
 _0807DA64: .4byte gSprites
-_0807DA68: .4byte gUnknown_83C2BBC
+_0807DA68: .4byte gWeatherPtr
 _0807DA6C: .4byte 0x0000072c
 	thumb_func_end sub_807D9E8
 

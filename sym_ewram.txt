@@ -117,27 +117,8 @@ gPlayerAvatar: @ 2037078
 	.include "src/battle_anim_mons.o"
 	.align 2
 	.include "src/title_screen.o"
-
 	.align 2
-	@ .include "src/field_weather.o"
-gUnknown_2037F34: @ 2037F34
-	.space 0x200
-
-gUnknown_2038134: @ 2038134
-	.space 0x260
-
-gUnknown_2038394: @ 2038394
-	.space 0x2F0
-
-gUnknown_2038684: @ 2038684
-	.space 0x20
-
-gUnknown_20386A4: @ 20386A4
-	.space 0x4
-
-gUnknown_20386A8: @ 20386A8
-	.space 0x4
-
+	.include "src/field_weather.o"
 	.align 2
 	.include "src/battle_setup.o"
 	.align 2

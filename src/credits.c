@@ -910,7 +910,7 @@ static s32 RollCredits(void)
             case CREDITSSCRCMD_MAPNEXT:
                 sCreditsMgr->mainseqno = CREDITSSCENE_MAPNEXT_DESTROYWINDOW;
                 sCreditsMgr->whichMon = sCreditsScript[sCreditsMgr->scrcmdidx].param;
-                FieldWeather_StartFadingOutCreditsMap(1, 0, 0x3FFFFFFF);
+                FadeSelectedPals(1, 0, 0x3FFFFFFF);
                 break;
             case CREDITSSCRCMD_MAP:
                 sCreditsMgr->mainseqno = CREDITSSCENE_MAP_LOADMAP_CREATESPRITES;
@@ -1305,7 +1305,7 @@ static s32 RollCredits(void)
                 "\tldr r2, _080F3E0C @ =0x3fffffff\n"
                 "\tmovs r0, 0x1\n"
                 "\tmovs r1, 0\n"
-                "\tbl FieldWeather_StartFadingOutCreditsMap\n"
+                "\tbl FadeSelectedPals\n"
                 "\tb _080F3E94\n"
                 "\t.align 2, 0\n"
                 "_080F3E04: .4byte sCreditsMgr\n"

@@ -36,7 +36,7 @@ $(TILESETGFXDIR)/secondary/viridian_forest/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/seafoam_islands/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 318
 
-$(TILESETGFXDIR)/secondary/generic_building2/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/generic_building_2/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 152
 
 $(TILESETGFXDIR)/secondary/underground_path/tiles.4bpp: %.4bpp: %.png
@@ -81,10 +81,10 @@ $(TILESETGFXDIR)/secondary/cerulean_gym/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/cinnabar_gym/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 146
 
-$(TILESETGFXDIR)/secondary/unused_gatehouse1/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/unused_gatehouse_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 144
 
-$(TILESETGFXDIR)/secondary/unused_gatehouse2/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/unused_gatehouse_2/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 144
 
 $(TILESETGFXDIR)/secondary/power_plant/tiles.4bpp: %.4bpp: %.png
@@ -96,7 +96,7 @@ $(TILESETGFXDIR)/secondary/pokemon_tower/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/school/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 50
 
-$(TILESETGFXDIR)/secondary/dummy3/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/dummy_3/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2
 
 $(TILESETGFXDIR)/secondary/navel_rock/tiles.4bpp: %.4bpp: %.png
@@ -117,10 +117,10 @@ $(TILESETGFXDIR)/secondary/celadon_city/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/saffron_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 262
 
-$(TILESETGFXDIR)/secondary/dummy1/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/dummy_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2
 
-$(TILESETGFXDIR)/secondary/generic_building1/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/generic_building_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
 
 $(TILESETGFXDIR)/secondary/hoenn_building/tiles.4bpp: %.4bpp: %.png
@@ -147,7 +147,7 @@ $(TILESETGFXDIR)/secondary/safari_zone_building/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/fan_club_daycare/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 85
 
-$(TILESETGFXDIR)/secondary/dummy4/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/dummy_4/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2
 
 $(TILESETGFXDIR)/secondary/tanoby_ruins/tiles.4bpp: %.4bpp: %.png
@@ -177,7 +177,7 @@ $(TILESETGFXDIR)/secondary/game_corner/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/secondary/celadon_gym/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 103
 
-$(TILESETGFXDIR)/secondary/dummy2/tiles.4bpp: %.4bpp: %.png
+$(TILESETGFXDIR)/secondary/dummy_2/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2
 
 $(TILESETGFXDIR)/secondary/digletts_cave/tiles.4bpp: %.4bpp: %.png

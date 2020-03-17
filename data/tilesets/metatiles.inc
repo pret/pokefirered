@@ -168,11 +168,11 @@ gMetatileAttributes_Building:: @ Building
 
 	.align 1
 gMetatiles_Dummy1:: @ 82B09B4
-	.incbin "data/tilesets/secondary/dummy1/metatiles.bin"
+	.incbin "data/tilesets/secondary/dummy_1/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_Dummy1:: @ 82B09D4
-	.incbin "data/tilesets/secondary/dummy1/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/dummy_1/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_HoennBuilding:: @ 82B09DC
@@ -208,11 +208,11 @@ gMetatileAttributes_PokemonCenter:: @ 82B4A50
 
 	.align 1
 gMetatiles_GenericBuilding1:: @ 82B4E4C
-	.incbin "data/tilesets/secondary/generic_building1/metatiles.bin"
+	.incbin "data/tilesets/secondary/generic_building_1/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_GenericBuilding1:: @ 82B4FCC
-	.incbin "data/tilesets/secondary/generic_building1/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/generic_building_1/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_Cave:: @ 82B502C
@@ -248,11 +248,11 @@ gMetatileAttributes_SSAnne:: @ 82B8B4C
 
 	.align 1
 gMetatiles_Dummy2:: @ 82B908C
-	.incbin "data/tilesets/secondary/dummy2/metatiles.bin"
+	.incbin "data/tilesets/secondary/dummy_2/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_Dummy2:: @ 82B90AC
-	.incbin "data/tilesets/secondary/dummy2/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/dummy_2/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_ViridianForest:: @ 82B90B4
@@ -264,11 +264,11 @@ gMetatileAttributes_ViridianForest:: @ 82B9364
 
 	.align 1
 gMetatiles_UnusedGatehouse1:: @ 82B9410
-	.incbin "data/tilesets/secondary/unused_gatehouse1/metatiles.bin"
+	.incbin "data/tilesets/secondary/unused_gatehouse_1/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_UnusedGatehouse1:: @ 82B9B30
-	.incbin "data/tilesets/secondary/unused_gatehouse1/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/unused_gatehouse_1/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_RockTunnel:: @ 82B9CF8
@@ -296,11 +296,11 @@ gMetatileAttributes_SeafoamIslands:: @ 82BC49C
 
 	.align 1
 gMetatiles_UnusedGatehouse2:: @ 82BC87C
-	.incbin "data/tilesets/secondary/unused_gatehouse2/metatiles.bin"
+	.incbin "data/tilesets/secondary/unused_gatehouse_2/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_UnusedGatehouse2:: @ 82BCF9C
-	.incbin "data/tilesets/secondary/unused_gatehouse2/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/unused_gatehouse_2/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_CeruleanCave:: @ 82BD164
@@ -320,11 +320,11 @@ gMetatileAttributes_DepartmentStore:: @ 82BEB3C
 
 	.align 1
 gMetatiles_GenericBuilding2:: @ 82BEF14
-	.incbin "data/tilesets/secondary/generic_building2/metatiles.bin"
+	.incbin "data/tilesets/secondary/generic_building_2/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_GenericBuilding2:: @ 82BFA94
-	.incbin "data/tilesets/secondary/generic_building2/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/generic_building_2/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_PowerPlant:: @ 82BFD74
@@ -440,19 +440,19 @@ gMetatileAttributes_BurgledHouse:: @ 82CA320
 
 	.align 1
 gMetatiles_Dummy3:: @ 82CA404
-	.incbin "data/tilesets/secondary/dummy3/metatiles.bin"
+	.incbin "data/tilesets/secondary/dummy_3/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_Dummy3:: @ 82CA424
-	.incbin "data/tilesets/secondary/dummy3/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/dummy_3/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_Dummy4:: @ 82CA42C
-	.incbin "data/tilesets/secondary/dummy4/metatiles.bin"
+	.incbin "data/tilesets/secondary/dummy_4/metatiles.bin"
 
 	.align 1
 gMetatileAttributes_Dummy4:: @ 82CA44C
-	.incbin "data/tilesets/secondary/dummy4/metatile_attributes.bin"
+	.incbin "data/tilesets/secondary/dummy_4/metatile_attributes.bin"
 
 	.align 1
 gMetatiles_MtEmber:: @ 82CA454

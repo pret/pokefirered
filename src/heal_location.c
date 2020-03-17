@@ -3,39 +3,18 @@
 #include "event_data.h"
 #include "constants/vars.h"
 #include "constants/maps.h"
-#include "constants/spawn_points.h"
+#include "constants/heal_locations.h"
 
-void SetBlackoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx);
+static void SetBlackoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx);
 
-// This array defines the fly points for unlocked spawns.
-static const struct HealLocation sSpawnPoints[] = {
-    [SPAWN_PALLET_TOWN     - 1] = {MAP_GROUP(PALLET_TOWN),             MAP_NUM(PALLET_TOWN),             0x06, 0x08},
-    [SPAWN_VIRIDIAN_CITY   - 1] = {MAP_GROUP(VIRIDIAN_CITY),           MAP_NUM(VIRIDIAN_CITY),           0x1a, 0x1b},
-    [SPAWN_PEWTER_CITY     - 1] = {MAP_GROUP(PEWTER_CITY),             MAP_NUM(PEWTER_CITY),             0x11, 0x1a},
-    [SPAWN_CERULEAN_CITY   - 1] = {MAP_GROUP(CERULEAN_CITY),           MAP_NUM(CERULEAN_CITY),           0x16, 0x14},
-    [SPAWN_LAVENDER_TOWN   - 1] = {MAP_GROUP(LAVENDER_TOWN),           MAP_NUM(LAVENDER_TOWN),           0x06, 0x06},
-    [SPAWN_VERMILION_CITY  - 1] = {MAP_GROUP(VERMILION_CITY),          MAP_NUM(VERMILION_CITY),          0x0f, 0x07},
-    [SPAWN_CELADON_CITY    - 1] = {MAP_GROUP(CELADON_CITY),            MAP_NUM(CELADON_CITY),            0x30, 0x0c},
-    [SPAWN_FUCHSIA_CITY    - 1] = {MAP_GROUP(FUCHSIA_CITY),            MAP_NUM(FUCHSIA_CITY),            0x19, 0x20},
-    [SPAWN_CINNABAR_ISLAND - 1] = {MAP_GROUP(CINNABAR_ISLAND),         MAP_NUM(CINNABAR_ISLAND),         0x0e, 0x0c},
-    [SPAWN_INDIGO_PLATEAU  - 1] = {MAP_GROUP(INDIGO_PLATEAU_EXTERIOR), MAP_NUM(INDIGO_PLATEAU_EXTERIOR), 0x0b, 0x07},
-    [SPAWN_SAFFRON_CITY    - 1] = {MAP_GROUP(SAFFRON_CITY),            MAP_NUM(SAFFRON_CITY),            0x18, 0x27},
-    [SPAWN_ROUTE4          - 1] = {MAP_GROUP(ROUTE4),                  MAP_NUM(ROUTE4),                  0x0c, 0x06},
-    [SPAWN_ROUTE10         - 1] = {MAP_GROUP(ROUTE10),                 MAP_NUM(ROUTE10),                 0x0d, 0x15},
-    [SPAWN_ONE_ISLAND      - 1] = {MAP_GROUP(ONE_ISLAND),              MAP_NUM(ONE_ISLAND),              0x0e, 0x06},
-    [SPAWN_TWO_ISLAND      - 1] = {MAP_GROUP(TWO_ISLAND),              MAP_NUM(TWO_ISLAND),              0x15, 0x08},
-    [SPAWN_THREE_ISLAND    - 1] = {MAP_GROUP(THREE_ISLAND),            MAP_NUM(THREE_ISLAND),            0x0e, 0x1c},
-    [SPAWN_FOUR_ISLAND     - 1] = {MAP_GROUP(FOUR_ISLAND),             MAP_NUM(FOUR_ISLAND),             0x12, 0x15},
-    [SPAWN_FIVE_ISLAND     - 1] = {MAP_GROUP(FIVE_ISLAND),             MAP_NUM(FIVE_ISLAND),             0x12, 0x07},
-    [SPAWN_SEVEN_ISLAND    - 1] = {MAP_GROUP(SEVEN_ISLAND),            MAP_NUM(SEVEN_ISLAND),            0x0c, 0x04},
-    [SPAWN_SIX_ISLAND      - 1] = {MAP_GROUP(SIX_ISLAND),              MAP_NUM(SIX_ISLAND),              0x0b, 0x0c},
-};
+// The array in the below file defines the fly points for unlocked spawns.
+#include "data/heal_locations.h"
 
 // This array defines the map where you actually respawn when you black out,
 // based on where you last checkpointed.
 // This is either the player's house or a Pokémon Center.
 // The data are u16 instead of u8 for reasons unknown.
-const u16 sBlackoutRespawnHealCenterMapIdxs[][2] = {
+static const u16 sBlackoutRespawnHealCenterMapIdxs[][2] = {
     [SPAWN_PALLET_TOWN     - 1] = {MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F), MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F)},
     [SPAWN_VIRIDIAN_CITY   - 1] = {MAP_GROUP(VIRIDIAN_CITY_POKEMON_CENTER_1F), MAP_NUM(VIRIDIAN_CITY_POKEMON_CENTER_1F)},
     [SPAWN_PEWTER_CITY     - 1] = {MAP_GROUP(PEWTER_CITY_POKEMON_CENTER_1F), MAP_NUM(PEWTER_CITY_POKEMON_CENTER_1F)},
@@ -170,7 +149,7 @@ void SetBlackoutRespawnWarpAndHealerNpc(struct WarpData * warp)
     }
 }
 
-void SetBlackoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx)
+static void SetBlackoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx)
 {
     gSpecialVar_LastTalked = sBlackoutRespawnHealerNpcIds[healLocationIdx - 1];
 }

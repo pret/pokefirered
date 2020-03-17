@@ -62,25 +62,24 @@ bool8 FadeInScreen_FogHorizontal(void);
 void DoNothing(void);
 void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
 bool8 LightenSpritePaletteInFog(u8 paletteIndex);
-void Weather_SetBlendCoeffs(u8, u8);
 
 struct Weather *const gWeatherPtr = &gWeather;
 
 const struct WeatherCallbacks sWeatherFuncs[] = {
     {None_Init, None_Main, None_Init, None_Finish},
     {Clouds_InitVars, Clouds_Main, Clouds_InitAll, Clouds_Finish},
-    {Weather2_InitVars, nullsub_48, Weather2_InitAll, sub_807B434},
-    {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},
-    {Snow_InitVars, snowflakes_progress2, Snow_InitAll, Snow_Finish},
-    {sub_807C2E4, Rain_Main, sub_807C358, Rain_Finish},
-    {Fog1_InitVars, Fog1_Main, Fog1_InitAll, Fog1_Finish},
+    {Sunny_InitVars, Sunny_Main, Sunny_InitAll, Sunny_Finish},
+    {Rain_InitVars, Rain_Main, Rain_InitAll, Rain_Finish},
+    {Snow_InitVars, Snow_Main, Snow_InitAll, Snow_Finish},
+    {Thunderstorm_InitVars, Thunderstorm_Main, Thunderstorm_InitAll, Thunderstorm_Finish},
+    {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
     {Ash_InitVars, Ash_Main, Ash_InitAll, Ash_Finish},
     {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
-    {Fog2_InitVars, Fog2_Main, Fog2_InitAll, Fog2_Finish},
-    {Fog1_InitVars, Fog1_Main, Fog1_InitAll, Fog1_Finish},
-    {Weather11_InitVars, nullsub_49, Weather11_InitAll, sub_807D8D0},
-    {Drought_InitVars, Drought_Main, Drought_InitAll, sub_807B6BC},
-    {sub_807C388, Rain_Main, sub_807C3F4, Rain_Finish},
+    {FogDiagonal_InitVars, FogDiagonal_Main, FogDiagonal_InitAll, FogDiagonal_Finish},
+    {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
+    {Shade_InitVars, Shade_Main, Shade_InitAll, Shade_Finish},
+    {Drought_InitVars, Drought_Main, Drought_InitAll, Drought_Finish},
+    {Downpour_InitVars, Thunderstorm_Main, Downpour_InitAll, Thunderstorm_Finish},
     {Bubbles_InitVars, Bubbles_Main, Bubbles_InitAll, Bubbles_Finish},
 };
 
@@ -129,6 +128,17 @@ const u8 sBasePaletteGammaTypes[32] = {
 };
 
 const u16 gUnknown_83C2CE0[] = INCBIN_U16("graphics/field_effects/unk_83C2CE0.gbapal");
+const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
+const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
+const u8 gWeatherFogDiagonalTiles[] = INCBIN_U8("graphics/weather/fog_diagonal.4bpp");
+const u8 gWeatherFogHorizontalTiles[] = INCBIN_U8("graphics/weather/fog_horizontal.4bpp");
+const u8 gWeatherCloudTiles[] = INCBIN_U8("graphics/weather/cloud.4bpp");
+const u8 gWeatherSnow1Tiles[] = INCBIN_U8("graphics/weather/snow0.4bpp");
+const u8 gWeatherSnow2Tiles[] = INCBIN_U8("graphics/weather/snow1.4bpp");
+const u8 gWeatherBubbleTiles[] = INCBIN_U8("graphics/weather/bubble.4bpp");
+const u8 gWeatherAshTiles[] = INCBIN_U8("graphics/weather/ash.4bpp");
+const u8 gWeatherRainTiles[] = INCBIN_U8("graphics/weather/rain.4bpp");
+const u8 gWeatherSandstormTiles[] = INCBIN_U8("graphics/weather/sandstorm.4bpp");
 
 // code
 void StartWeather(void)

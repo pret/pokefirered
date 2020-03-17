@@ -944,7 +944,7 @@ void AnimTask_Haze1(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80752A0(&animBg);
-    LoadBgTiles(animBg.bgId, gWeatherFog1Tiles, 0x800, animBg.tilesOffset);
+    LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
     LoadPalette(&gUnknown_83C2CE0, animBg.paletteId * 16, 32);
     if (IsContest())
@@ -1042,7 +1042,7 @@ void AnimTask_LoadMistTiles(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     sub_80752A0(&animBg);
-    LoadBgTiles(animBg.bgId, gWeatherFog1Tiles, 0x800, animBg.tilesOffset);
+    LoadBgTiles(animBg.bgId, gWeatherFogHorizontalTiles, 0x800, animBg.tilesOffset);
     AnimLoadCompressedBgTilemap(animBg.bgId, gBattleAnimFogTilemap);
     LoadPalette(&gUnknown_83C2CE0, animBg.paletteId * 16, 32);
     if (IsContest())

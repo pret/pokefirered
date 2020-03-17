@@ -137,5 +137,28 @@ void PreservePaletteInWeather(u8 palIdx);
 
 void SetNextWeather(u8 weather);
 void SetCurrentAndNextWeather(u8 weather);
+void Weather_SetBlendCoeffs(u8 eva, u8 evb);
+void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
+bool8 Weather_UpdateBlend(void);
+void LoadCustomWeatherSpritePalette(const u16 *palette);
+void ResetDroughtWeatherPaletteLoading(void);
+bool8 LoadDroughtWeatherPalettes(void);
+void sub_807AC60(void);
+void sub_807AC98(void);
+void SetRainStrengthFromSoundEffect(u16 soundEffect);
+void sub_807A790(s8 gammaIndex);
+void sub_807A7C4(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
+
+extern const u16 gCloudsWeatherPalette[];
+extern const u16 gSandstormWeatherPalette[];
+extern const u8 gWeatherFogDiagonalTiles[];
+extern const u8 gWeatherFogHorizontalTiles[];
+extern const u8 gWeatherCloudTiles[];
+extern const u8 gWeatherSnow1Tiles[];
+extern const u8 gWeatherSnow2Tiles[];
+extern const u8 gWeatherBubbleTiles[];
+extern const u8 gWeatherAshTiles[];
+extern const u8 gWeatherRainTiles[];
+extern const u8 gWeatherSandstormTiles[];
 
 #endif // GUARD_WEATHER_H

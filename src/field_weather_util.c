@@ -3,8 +3,8 @@
 #include "overworld.h"
 #include "constants/weather.h"
 
-u8 TranslateWeatherNum(u8 weather);
-void UpdateRainCounter(u8 newWeather, u8 oldWeather);
+static u8 TranslateWeatherNum(u8 weather);
+static void UpdateRainCounter(u8 newWeather, u8 oldWeather);
 
 void SetSav1Weather(u32 weather)
 {
@@ -66,7 +66,7 @@ const u8 sWeatherCycleRoute123[] =
         WEATHER_SUNNY,
     };
 
-u8 TranslateWeatherNum(u8 weather)
+static u8 TranslateWeatherNum(u8 weather)
 {
     switch (weather)
     {
@@ -98,7 +98,7 @@ void UpdateWeatherPerDay(u16 increment)
     gSaveBlock1Ptr->weatherCycleStage = weatherStage;
 }
 
-void UpdateRainCounter(u8 newWeather, u8 oldWeather)
+static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
         && (newWeather == WEATHER_RAIN || newWeather == WEATHER_RAIN_THUNDERSTORM))

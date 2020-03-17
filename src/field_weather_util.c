@@ -51,20 +51,19 @@ void ResumePausedWeather(void)
     SetCurrentAndNextWeather(weather);
 }
 
-const u8 sWeatherCycleRoute119[] =
-    {
-        WEATHER_SUNNY,
-        WEATHER_RAIN,
-        WEATHER_RAIN_THUNDERSTORM,
-        WEATHER_RAIN,
-    };
-const u8 sWeatherCycleRoute123[] =
-    {
-        WEATHER_SUNNY,
-        WEATHER_SUNNY,
-        WEATHER_RAIN,
-        WEATHER_SUNNY,
-    };
+static const u8 sWeatherCycleRoute119[] = {
+    WEATHER_SUNNY,
+    WEATHER_RAIN,
+    WEATHER_RAIN_THUNDERSTORM,
+    WEATHER_RAIN,
+};
+
+static const u8 sWeatherCycleRoute123[] = {
+    WEATHER_SUNNY,
+    WEATHER_SUNNY,
+    WEATHER_RAIN,
+    WEATHER_SUNNY,
+};
 
 static u8 TranslateWeatherNum(u8 weather)
 {

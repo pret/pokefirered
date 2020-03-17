@@ -40,7 +40,7 @@ struct WeatherCallbacks
     bool8 (*finish)(void);
 };
 
-static EWRAM_DATA struct Weather gWeather = {};
+static EWRAM_DATA struct Weather sWeather = {};
 static EWRAM_DATA u8 sFieldEffectPaletteGammaTypes[32] = {};
 static EWRAM_DATA const u8 *sPaletteGammaTypes = NULL;
 static EWRAM_DATA u16 gUnknown_20386A8 = 0;
@@ -63,7 +63,7 @@ static void DoNothing(void);
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
 static bool8 LightenSpritePaletteInFog(u8 paletteIndex);
 
-struct Weather *const gWeatherPtr = &gWeather;
+struct Weather *const gWeatherPtr = &sWeather;
 
 static const struct WeatherCallbacks sWeatherFuncs[] = {
     {None_Init, None_Main, None_Init, None_Finish},
@@ -83,7 +83,7 @@ static const struct WeatherCallbacks sWeatherFuncs[] = {
     {Bubbles_InitVars, Bubbles_Main, Bubbles_InitAll, Bubbles_Finish},
 };
 
-static void (*const gWeatherPalStateFuncs[])(void) = {
+static void (*const sWeatherPalStateFuncs[])(void) = {
     UpdateWeatherGammaShift,
     FadeInScreenWithWeather,
     DoNothing,
@@ -153,17 +153,17 @@ void StartWeather(void)
         gWeatherPtr->weatherPicSpritePalIndex = index;
         gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->curRainSpriteIndex = 0;
-        gWeatherPtr->cloudSpritesCreated = 0;
+        gWeatherPtr->cloudSpritesCreated = FALSE;
         gWeatherPtr->snowflakeSpriteCount = 0;
-        gWeatherPtr->ashSpritesCreated = 0;
-        gWeatherPtr->fogHSpritesCreated = 0;
-        gWeatherPtr->fogDSpritesCreated = 0;
-        gWeatherPtr->sandstormSpritesCreated = 0;
-        gWeatherPtr->sandstormSwirlSpritesCreated = 0;
-        gWeatherPtr->bubblesSpritesCreated = 0;
+        gWeatherPtr->ashSpritesCreated = FALSE;
+        gWeatherPtr->fogHSpritesCreated = FALSE;
+        gWeatherPtr->fogDSpritesCreated = FALSE;
+        gWeatherPtr->sandstormSpritesCreated = FALSE;
+        gWeatherPtr->sandstormSwirlSpritesCreated = FALSE;
+        gWeatherPtr->bubblesSpritesCreated = FALSE;
         gWeatherPtr->lightenedFogSpritePalsCount = 0;
         Weather_SetBlendCoeffs(16, 0);
-        gWeatherPtr->currWeather = 0;
+        gWeatherPtr->currWeather = WEATHER_NONE;
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         gWeatherPtr->readyForInit = FALSE;
         gWeatherPtr->weatherChangeComplete = TRUE;
@@ -236,7 +236,7 @@ static void Task_WeatherMain(u8 taskId)
         sWeatherFuncs[gWeatherPtr->currWeather].main();
     }
 
-    gWeatherPalStateFuncs[gWeatherPtr->palProcessingState]();
+    sWeatherPalStateFuncs[gWeatherPtr->palProcessingState]();
 }
 
 

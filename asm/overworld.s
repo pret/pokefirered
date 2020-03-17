@@ -4645,7 +4645,7 @@ _08057050:
 _08057056:
 	bl FieldEffectActiveListClear
 	bl StartWeather
-	bl sub_807B1B8
+	bl ResumePausedWeather
 	cmp r4, 0
 	bne _0805706A
 	bl SetUpFieldTasks
@@ -5401,7 +5401,7 @@ _0805769C:
 	bl InstallCameraPanAheadCallback
 	bl FieldEffectActiveListClear
 	bl StartWeather
-	bl sub_807B1B8
+	bl ResumePausedWeather
 	bl SetUpFieldTasks
 	bl mapheader_run_script_with_tag_x5
 	b _0805772A

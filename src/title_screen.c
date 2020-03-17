@@ -305,6 +305,22 @@ static const u16 gUnknown_LG_83BFA10[] = {
 };
 #endif
 
+const u32 gUnknown_83BFBE4[] = INCBIN_U32("graphics/field_effects/unk_83BFBE4.bin.lz");
+const u32 gUnknown_83C0408[] = INCBIN_U32("graphics/field_effects/unk_83C0408.bin.lz");
+const u32 gUnknown_83C0C00[] = INCBIN_U32("graphics/field_effects/unk_83C0C00.bin.lz");
+const u32 gUnknown_83C139C[] = INCBIN_U32("graphics/field_effects/unk_83C139C.bin.lz");
+const u32 gUnknown_83C1BB8[] = INCBIN_U32("graphics/field_effects/unk_83C1BB8.bin.lz");
+const u32 gUnknown_83C2380[] = INCBIN_U32("graphics/field_effects/unk_83C2380.bin.lz");
+
+const u32 *const gUnknown_83C2BA4[] = {
+    gUnknown_83BFBE4,
+    gUnknown_83C0408,
+    gUnknown_83C0C00,
+    gUnknown_83C139C,
+    gUnknown_83C1BB8,
+    gUnknown_83C2380
+};
+
 void CB2_InitTitleScreen(void)
 {
     switch (gMain.state)

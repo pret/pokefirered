@@ -4,6 +4,7 @@
 #include "field_effect.h"
 #include "field_weather.h"
 #include "field_weather_util.h"
+#include "field_weather_effects.h"
 #include "task.h"
 #include "trig.h"
 #include "constants/field_weather.h"
@@ -39,116 +40,6 @@ struct WeatherCallbacks
     bool8 (*finish)(void);
 };
 
-struct Weather
-{
-    union
-    {
-        struct
-        {
-            struct Sprite *rainSprites[MAX_RAIN_SPRITES];
-            struct Sprite *snowflakeSprites[101];
-            struct Sprite *cloudSprites[NUM_CLOUD_SPRITES];
-        } s1;
-        struct
-        {
-            u8 filler0[0xA0];
-            struct Sprite *fogHSprites[NUM_FOG_HORIZONTAL_SPRITES];
-            struct Sprite *ashSprites[NUM_ASH_SPRITES];
-            struct Sprite *fogDSprites[NUM_FOG_DIAGONAL_SPRITES];
-            struct Sprite *sandstormSprites1[NUM_SANDSTORM_SPRITES];
-            struct Sprite *sandstormSprites2[NUM_SWIRL_SANDSTORM_SPRITES];
-        } s2;
-    } sprites;
-    u8 gammaShifts[19][32];
-    u8 altGammaShifts[19][32];
-    s8 gammaIndex;
-    s8 gammaTargetIndex;
-    u8 gammaStepDelay;
-    u8 gammaStepFrameCounter;
-    u16 fadeDestColor;
-    /*0x6C6*/ u8 palProcessingState;
-    /*0x6C7*/ u8 fadeScreenCounter;
-    /*0x6C8*/ bool8 readyForInit;
-    /*0x6C9*/ u8 taskId;
-    /*0x6CA*/ u8 unknown_6CA;
-    u8 unknown_6CB;
-    u16 initStep;
-    u16 finishStep;
-    u8 currWeather;
-    u8 nextWeather;
-    u8 weatherGfxLoaded;
-    bool8 weatherChangeComplete;
-    u8 weatherPicSpritePalIndex;
-    u8 altGammaSpritePalIndex;
-    u16 rainSpriteVisibleCounter;
-    u8 curRainSpriteIndex;
-    u8 targetRainSpriteCount;
-    u8 rainSpriteCount;
-    u8 rainSpriteVisibleDelay;
-    u8 isDownpour;
-    u8 rainStrength;
-    /*0x6DE*/ u8 cloudSpritesCreated;
-    u8 filler_6DF[1];
-    u16 snowflakeVisibleCounter;
-    u16 unknown_6E2;
-    u8 snowflakeSpriteCount;
-    u8 targetSnowflakeSpriteCount;
-    u16 unknown_6E6;
-    u16 thunderCounter;
-    u8 unknown_6EA;
-    u8 unknown_6EB;
-    u8 unknown_6EC;
-    u8 thunderTriggered;
-    u16 fogHScrollPosX;
-    u16 fogHScrollCounter;
-    u16 fogHScrollOffset;
-    u8 lightenedFogSpritePals[6];
-    u8 lightenedFogSpritePalsCount;
-    u8 fogHSpritesCreated;
-    u16 ashBaseSpritesX;
-    u16 unknown_6FE;
-    u8 ashSpritesCreated;
-    u8 filler_701[3];
-    u32 sandstormXOffset;
-    u32 sandstormYOffset;
-    u8 filler_70C[2];
-    u16 sandstormBaseSpritesX;
-    u16 sandstormPosY;
-    u16 sandstormWaveIndex;
-    u16 sandstormWaveCounter;
-    u8 sandstormSpritesCreated;
-    u8 sandstormSwirlSpritesCreated;
-    u16 fogDBaseSpritesX;
-    u16 fogDPosY;
-    u16 fogDScrollXCounter;
-    u16 fogDScrollYCounter;
-    u16 fogDXOffset;
-    u16 fogDYOffset;
-    u8 fogDSpritesCreated;
-    u8 filler_725[1];
-    u16 bubblesDelayCounter;
-    u16 bubblesDelayIndex;
-    u16 bubblesCoordsIndex;
-    u16 bubblesSpriteCount;
-    u8 bubblesSpritesCreated;
-    u8 filler_72F;
-    u16 currBlendEVA;
-    u16 currBlendEVB;
-    u16 targetBlendEVA;
-    u16 targetBlendEVB;
-    u8 blendUpdateCounter;
-    u8 blendFrameCounter;
-    u8 blendDelay;
-    u8 filler_73B[0x3C-0x3B];
-    s16 unknown_73C;
-    s16 unknown_73E;
-    s16 unknown_740;
-    s16 unknown_742;
-    u8 filler_744[0xD-4];
-    s8 loadDroughtPalsIndex;
-    u8 loadDroughtPalsOffset;
-};
-
 EWRAM_DATA struct Weather gWeather = {};
 EWRAM_DATA u8 sFieldEffectPaletteGammaTypes[32] = {};
 EWRAM_DATA const u8 *sPaletteGammaTypes = NULL;
@@ -172,72 +63,6 @@ void DoNothing(void);
 void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
 bool8 LightenSpritePaletteInFog(u8 paletteIndex);
 void Weather_SetBlendCoeffs(u8, u8);
-bool8 Ash_Finish(void);
-bool8 Bubbles_Finish(void);
-bool8 Clouds_Finish(void);
-bool8 Fog1_Finish(void);
-bool8 Fog2_Finish(void);
-bool8 LightRain_Finish(void);
-bool8 Rain_Finish(void);
-bool8 Sandstorm_Finish(void);
-bool8 Snow_Finish(void);
-bool8 sub_807B434(void);
-bool8 sub_807B6BC(void);
-bool8 sub_807D8D0(void);
-void Ash_InitAll(void);
-void Ash_InitVars(void);
-void Ash_Main(void);
-void Bubbles_InitAll(void);
-void Bubbles_InitVars(void);
-void Bubbles_Main(void);
-void Clouds_InitAll(void);
-void Clouds_InitVars(void);
-void Clouds_Main(void);
-void Drought_InitAll(void);
-void Drought_InitVars(void);
-void Drought_Main(void);
-void Fog1_InitAll(void);
-void Fog1_InitVars(void);
-void Fog1_Main(void);
-void Fog2_InitAll(void);
-void Fog2_InitVars(void);
-void Fog2_Main(void);
-void LightRain_InitAll(void);
-void LightRain_InitVars(void);
-void LightRain_Main(void);
-void Rain_Main(void);
-void Sandstorm_InitAll(void);
-void Sandstorm_InitVars(void);
-void Sandstorm_Main(void);
-void Snow_InitAll(void);
-void Snow_InitVars(void);
-void Weather11_InitAll(void);
-void Weather11_InitVars(void);
-void Weather2_InitAll(void);
-void Weather2_InitVars(void);
-void nullsub_48(void);
-void nullsub_49(void);
-void snowflakes_progress2(void);
-void sub_807C2E4(void);
-void sub_807C358(void);
-void sub_807C388(void);
-void sub_807C3F4(void);
-
-const u32 gUnknown_83BFBE4[] = INCBIN_U32("graphics/field_effects/unk_83BFBE4.bin.lz");
-const u32 gUnknown_83C0408[] = INCBIN_U32("graphics/field_effects/unk_83C0408.bin.lz");
-const u32 gUnknown_83C0C00[] = INCBIN_U32("graphics/field_effects/unk_83C0C00.bin.lz");
-const u32 gUnknown_83C139C[] = INCBIN_U32("graphics/field_effects/unk_83C139C.bin.lz");
-const u32 gUnknown_83C1BB8[] = INCBIN_U32("graphics/field_effects/unk_83C1BB8.bin.lz");
-const u32 gUnknown_83C2380[] = INCBIN_U32("graphics/field_effects/unk_83C2380.bin.lz");
-
-const u32 *const gUnknown_83C2BA4[] = {
-    gUnknown_83BFBE4,
-    gUnknown_83C0408,
-    gUnknown_83C0C00,
-    gUnknown_83C139C,
-    gUnknown_83C1BB8,
-    gUnknown_83C2380
-};
 
 struct Weather *const gWeatherPtr = &gWeather;
 
@@ -1317,4 +1142,18 @@ void PreservePaletteInWeather(u8 preservedPalIndex)
 void ResetPreservedPalettesInWeather(void)
 {
     sPaletteGammaTypes = sBasePaletteGammaTypes;
+}
+
+void sub_807B0C4(u16 *palbuf, u16 *unused, u32 size)
+{
+    switch (gWeatherPtr->currWeather)
+    {
+    case WEATHER_RAIN:
+    case WEATHER_SNOW:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_SHADE:
+    case WEATHER_DOWNPOUR:
+        sub_8045314(palbuf, RGB_BLACK, 3, size);
+        break;
+    }
 }

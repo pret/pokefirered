@@ -4322,7 +4322,7 @@ extern const u32 gSubstituteDollTilemap[];
 extern const u32 gSubstituteDollPal[];
 
 // ice
-extern const u8 gWeatherFog1Tiles[];
+extern const u8 gWeatherFogHorizontalTiles[];
 extern const u32 gBattleAnimFogTilemap[];
 extern const u16 gUnknown_83C2CE0[];
 

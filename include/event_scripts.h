@@ -1257,5 +1257,6 @@ extern const u8 EventScript_CantUseWaterfall[];
 extern const u8 gUnknown_81A8CED[];
 extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
+extern const u8 EventScript_1C1361[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

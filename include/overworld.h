@@ -194,6 +194,7 @@ void SetMainCallback1(MainCallback cb);
 void CB1_Overworld(void);
 void sub_80568C4(void);
 u8 GetLastUsedWarpMapSectionId(void);
+void StoreInitialPlayerAvatarState(void);
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;

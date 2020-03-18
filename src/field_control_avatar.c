@@ -7,6 +7,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
+#include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "field_poison.h"
 #include "field_specials.h"
@@ -47,13 +48,20 @@ bool8 TryStartMiscWalkingScripts(u16 metatileBehavior);
 bool8 TryStartStepCountScript(u16 metatileBehavior);
 void UpdateHappinessStepCounter(void);
 bool8 UpdatePoisonStepCounter(void);
-u8 sub_806D898(u8 metatileBehvaior, u8 direction);
-const u8 *GetCoordEventScriptAtPosition(struct MapHeader * mapHeader, u16 x, u16 y, u8 z);
-bool8 TryStartWarpEventScript(struct MapPosition * position, u16 metatileBehavior);
-bool8 TryArrowWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
-bool8 TryDoorWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
-bool8 sub_806D804(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 bool8 CheckStandardWildEncounter(u32 encounter);
+bool8 sub_806D804(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
+void sub_806D908(const u8 *script, u8 playerDirection);
+u8 sub_806D898(u16 metatileBehvaior, u8 direction);
+const u8 *sub_806D928(struct MapPosition * position);
+bool8 TryArrowWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
+bool8 TryStartWarpEventScript(struct MapPosition * position, u16 metatileBehavior);
+bool8 IsWarpMetatileBehavior(u16 metatileBehavior);
+bool8 sub_806DB84(u16 metatileBehavior, u8 playerDirection);
+void SetupWarp(struct MapHeader * mapHeader, s8 warpId, struct MapPosition * position);
+bool8 IsArrowWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection);
+s8 GetWarpEventAtMapPosition(struct MapHeader * mapHeader, struct MapPosition * mapPosition);
+const u8 *GetCoordEventScriptAtPosition(struct MapHeader * mapHeader, u16 x, u16 y, u8 z);
+bool8 TryDoorWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 
 struct FieldInput gUnknown_3005078;
 
@@ -724,4 +732,160 @@ void RestartWildEncounterImmunitySteps(void)
 bool8 CheckStandardWildEncounter(u32 encounter)
 {
     return TryStandardWildEncounter(encounter);
+}
+
+bool8 sub_806D804(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection)
+{
+    u8 r4;
+    const u8 * script;
+    if (JOY_HELD(DPAD_LEFT | DPAD_RIGHT))
+        return FALSE;
+    if (playerDirection == DIR_EAST || playerDirection == DIR_WEST)
+        return FALSE;
+
+    r4 = sub_806D898(metatileBehavior, playerDirection);
+    if (r4 == 0)
+    {
+        sub_806D908(gUnknown_81A76E7, playerDirection);
+        return TRUE;
+    }
+    else if (r4 == 1)
+    {
+        sub_806D908(gUnknown_81A76DE, playerDirection);
+        return TRUE;
+    }
+    else if (r4 == 2)
+    {
+        sub_806D908(gUnknown_81A76F0, playerDirection);
+        return TRUE;
+    }
+    else if (r4 == 3)
+    {
+        sub_806D908(gUnknown_81A76F9, playerDirection);
+        return TRUE;
+    }
+    else
+    {
+        script = sub_806D928(position);
+        if (script == NULL)
+            return FALSE;
+        if (r4 != 0xF0)
+            return FALSE;
+        sub_806D908(script, playerDirection);
+        return TRUE;
+    }
+}
+
+u8 sub_806D898(u16 metatileBehavior, u8 playerDirection)
+{
+    if (MetatileBehavior_IsPlayerFacingPokemonCenterSign(metatileBehavior, playerDirection) == TRUE)
+        return 0;
+
+    if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, playerDirection) == TRUE)
+        return 1;
+
+    if (MetatileBehavior_IsIndigoPlateauMark(metatileBehavior) == TRUE)
+        return 2;
+
+    if (MetatileBehavior_IsIndigoPlateauMark2(metatileBehavior) == TRUE)
+        return 3;
+
+    if (MetatileBehavior_IsSignpost(metatileBehavior) == TRUE)
+        return 0xF0;
+
+    return 0xFF;
+}
+
+void sub_806D908(const u8 *script, u8 playerDirection)
+{
+    gSpecialVar_Facing = playerDirection;
+    ScriptContext1_SetupScript(script);
+    sub_80699E0();
+    sub_8069A20();
+}
+
+const u8 *sub_806D928(struct MapPosition * position)
+{
+    const struct BgEvent * event = GetBackgroundEventAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
+    if (event == NULL)
+        return NULL;
+    if (event->bgUnion.script != NULL)
+        return event->bgUnion.script;
+    return EventScript_TestSignpostMsg;
+}
+
+bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8 direction)
+{
+    s8 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
+    u16 delay;
+
+    if (warpEventId != -1)
+    {
+        if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
+        {
+            StoreInitialPlayerAvatarState();
+            SetupWarp(&gMapHeader, warpEventId, position);
+            DoWarp();
+            return TRUE;
+        }
+        else if (sub_806DB84(metatileBehavior, direction) == TRUE)
+        {
+            delay = 0;
+            if (gPlayerAvatar.flags & 6)
+            {
+                SetPlayerAvatarTransitionFlags(1);
+                delay = 12;
+            }
+            StoreInitialPlayerAvatarState();
+            SetupWarp(&gMapHeader, warpEventId, position);
+            sub_807E4A0(metatileBehavior, delay);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior)
+{
+    s8 warpEventId = GetWarpEventAtMapPosition(&gMapHeader, position);
+
+    if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
+    {
+        StoreInitialPlayerAvatarState();
+        SetupWarp(&gMapHeader, warpEventId, position);
+        if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
+        {
+            DoEscalatorWarp(metatileBehavior);
+            return TRUE;
+        }
+        if (MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) == TRUE)
+        {
+            DoLavaridgeGymB1FWarp();
+            return TRUE;
+        }
+        if (MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) == TRUE)
+        {
+            DoLavaridgeGym1FWarp();
+            return TRUE;
+        }
+        if (MetatileBehavior_IsWarpPad(metatileBehavior) == TRUE)
+        {
+            DoTeleportWarp();
+            return TRUE;
+        }
+        if (MetatileBehavior_IsUnionRoomWarp(metatileBehavior) == TRUE)
+        {
+            DoUnionRoomWarp();
+            return TRUE;
+        }
+        if (MetatileBehavior_IsFallWarp(metatileBehavior) == TRUE)
+        {
+            ResetInitialPlayerAvatarState();
+            ScriptContext1_SetupScript(EventScript_1C1361);
+            return TRUE;
+        }
+        DoWarp();
+        return TRUE;
+    }
+    return FALSE;
 }

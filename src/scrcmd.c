@@ -789,7 +789,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext * ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_807E59C();
+    DoTeleportWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }

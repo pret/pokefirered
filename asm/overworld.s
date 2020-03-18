@@ -1855,8 +1855,8 @@ sub_80559F8: @ 80559F8
 _08055A04: .4byte gUnknown_2031DD4
 	thumb_func_end sub_80559F8
 
-	thumb_func_start sub_8055A08
-sub_8055A08: @ 8055A08
+	thumb_func_start StoreInitialPlayerAvatarState
+StoreInitialPlayerAvatarState: @ 8055A08
 	push {r4,lr}
 	bl GetPlayerFacingDirection
 	ldr r4, _08055A24 @ =gUnknown_2031DD4
@@ -1906,7 +1906,7 @@ _08055A5A:
 	bx r0
 	.align 2, 0
 _08055A68: .4byte gUnknown_2031DD4
-	thumb_func_end sub_8055A08
+	thumb_func_end StoreInitialPlayerAvatarState
 
 	thumb_func_start sub_8055A6C
 sub_8055A6C: @ 8055A6C

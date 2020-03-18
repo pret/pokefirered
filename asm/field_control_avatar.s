@@ -5,387 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806D804
-sub_806D804: @ 806D804
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	lsls r1, 16
-	lsrs r3, r1, 16
-	lsls r2, 24
-	lsrs r5, r2, 24
-	adds r7, r5, 0
-	ldr r0, _0806D840 @ =gMain
-	ldrh r1, [r0, 0x2C]
-	movs r0, 0x30
-	ands r0, r1
-	cmp r0, 0
-	bne _0806D890
-	subs r0, r5, 0x3
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _0806D890
-	adds r0, r3, 0
-	adds r1, r5, 0
-	bl sub_806D898
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _0806D848
-	ldr r0, _0806D844 @ =gUnknown_81A76E7
-	adds r1, r5, 0
-	b _0806D888
-	.align 2, 0
-_0806D840: .4byte gMain
-_0806D844: .4byte gUnknown_81A76E7
-_0806D848:
-	cmp r4, 0x1
-	bne _0806D858
-	ldr r0, _0806D854 @ =gUnknown_81A76DE
-	adds r1, r5, 0
-	b _0806D888
-	.align 2, 0
-_0806D854: .4byte gUnknown_81A76DE
-_0806D858:
-	cmp r4, 0x2
-	bne _0806D868
-	ldr r0, _0806D864 @ =gUnknown_81A76F0
-	adds r1, r5, 0
-	b _0806D888
-	.align 2, 0
-_0806D864: .4byte gUnknown_81A76F0
-_0806D868:
-	cmp r4, 0x3
-	bne _0806D878
-	ldr r0, _0806D874 @ =gUnknown_81A76F9
-	adds r1, r5, 0
-	b _0806D888
-	.align 2, 0
-_0806D874: .4byte gUnknown_81A76F9
-_0806D878:
-	adds r0, r6, 0
-	bl sub_806D928
-	cmp r0, 0
-	beq _0806D890
-	cmp r4, 0xF0
-	bne _0806D890
-	adds r1, r7, 0
-_0806D888:
-	bl sub_806D908
-	movs r0, 0x1
-	b _0806D892
-_0806D890:
-	movs r0, 0
-_0806D892:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_806D804
-
-	thumb_func_start sub_806D898
-sub_806D898: @ 806D898
-	push {r4,r5,lr}
-	lsls r1, 24
-	lsrs r5, r1, 24
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl MetatileBehavior_IsPlayerFacingPokemonCenterSign
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806D8B6
-	movs r0, 0
-	b _0806D902
-_0806D8B6:
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl MetatileBehavior_IsPlayerFacingPokeMartSign
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806D8CA
-	movs r0, 0x1
-	b _0806D902
-_0806D8CA:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsIndigoPlateauMark
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806D8DC
-	movs r0, 0x2
-	b _0806D902
-_0806D8DC:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsIndigoPlateauMark2
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806D8EE
-	movs r0, 0x3
-	b _0806D902
-_0806D8EE:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsSignpost
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _0806D900
-	movs r0, 0xFF
-	b _0806D902
-_0806D900:
-	movs r0, 0xF0
-_0806D902:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_806D898
-
-	thumb_func_start sub_806D908
-sub_806D908: @ 806D908
-	push {lr}
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r2, _0806D924 @ =gSpecialVar_Facing
-	strh r1, [r2]
-	bl ScriptContext1_SetupScript
-	bl sub_80699E0
-	bl sub_8069A20
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806D924: .4byte gSpecialVar_Facing
-	thumb_func_end sub_806D908
-
-	thumb_func_start sub_806D928
-sub_806D928: @ 806D928
-	push {r4,lr}
-	ldr r4, _0806D94C @ =gMapHeader
-	ldrh r1, [r0]
-	subs r1, 0x7
-	lsls r1, 16
-	lsrs r1, 16
-	ldrh r2, [r0, 0x2]
-	subs r2, 0x7
-	lsls r2, 16
-	lsrs r2, 16
-	ldrb r3, [r0, 0x4]
-	adds r0, r4, 0
-	bl GetBackgroundEventAtPosition
-	cmp r0, 0
-	bne _0806D950
-	movs r0, 0
-	b _0806D958
-	.align 2, 0
-_0806D94C: .4byte gMapHeader
-_0806D950:
-	ldr r0, [r0, 0x8]
-	cmp r0, 0
-	bne _0806D958
-	ldr r0, _0806D960 @ =EventScript_TestSignpostMsg
-_0806D958:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0806D960: .4byte EventScript_TestSignpostMsg
-	thumb_func_end sub_806D928
-
-	thumb_func_start TryArrowWarp
-TryArrowWarp: @ 806D964
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	adds r7, r0, 0
-	lsls r1, 16
-	lsrs r4, r1, 16
-	mov r10, r4
-	lsls r2, 24
-	lsrs r6, r2, 24
-	mov r9, r6
-	ldr r0, _0806D9B8 @ =gMapHeader
-	mov r8, r0
-	adds r1, r7, 0
-	bl map_warp_check_packed
-	lsls r0, 24
-	asrs r5, r0, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r5, r0
-	beq _0806DA00
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl is_non_stair_warp_tile
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806D9BC
-	bl sub_8055A08
-	mov r0, r8
-	adds r1, r5, 0
-	adds r2, r7, 0
-	bl sub_806DC54
-	bl DoWarp
-	movs r0, 0x1
-	b _0806DA02
-	.align 2, 0
-_0806D9B8: .4byte gMapHeader
-_0806D9BC:
-	adds r0, r4, 0
-	mov r1, r9
-	bl sub_806DB84
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DA00
-	movs r4, 0
-	ldr r0, _0806D9FC @ =gPlayerAvatar
-	ldrb r1, [r0]
-	movs r0, 0x6
-	ands r0, r1
-	cmp r0, 0
-	beq _0806D9E2
-	movs r0, 0x1
-	bl SetPlayerAvatarTransitionFlags
-	movs r4, 0xC
-_0806D9E2:
-	bl sub_8055A08
-	mov r0, r8
-	adds r1, r5, 0
-	adds r2, r7, 0
-	bl sub_806DC54
-	mov r0, r10
-	adds r1, r4, 0
-	bl sub_807E4A0
-	movs r0, 0x1
-	b _0806DA02
-	.align 2, 0
-_0806D9FC: .4byte gPlayerAvatar
-_0806DA00:
-	movs r0, 0
-_0806DA02:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end TryArrowWarp
-
-	thumb_func_start TryStartWarpEventScript
-TryStartWarpEventScript: @ 806DA10
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	ldr r7, _0806DA68 @ =gMapHeader
-	adds r0, r7, 0
-	adds r1, r6, 0
-	bl map_warp_check_packed
-	lsls r0, 24
-	asrs r4, r0, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	beq _0806DAEC
-	adds r0, r5, 0
-	bl sub_806DAF4
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DAEC
-	bl sub_8055A08
-	adds r0, r7, 0
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl sub_806DC54
-	lsls r0, r5, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl MetatileBehavior_IsEscalator
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DA6C
-	adds r0, r4, 0
-	bl sub_807E560
-	movs r0, 0x1
-	b _0806DAEE
-	.align 2, 0
-_0806DA68: .4byte gMapHeader
-_0806DA6C:
-	adds r0, r4, 0
-	bl MetatileBehavior_ReturnFalse_12
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DA82
-	bl sub_807E57C
-	movs r0, 0x1
-	b _0806DAEE
-_0806DA82:
-	adds r0, r4, 0
-	bl MetatileBheavior_IsMB_68
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DA98
-	bl sub_807E58C
-	movs r0, 0x1
-	b _0806DAEE
-_0806DA98:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsRegularWarp
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DAAE
-	bl sub_807E59C
-	movs r0, 0x1
-	b _0806DAEE
-_0806DAAE:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsUnionRoomWarp
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DAC4
-	bl sub_807E524
-	movs r0, 0x1
-	b _0806DAEE
-_0806DAC4:
-	adds r0, r4, 0
-	bl MetatileBehavior_IsFallWarp
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806DAE4
-	bl ResetInitialPlayerAvatarState
-	ldr r0, _0806DAE0 @ =EventScript_1C1361
-	bl ScriptContext1_SetupScript
-	movs r0, 0x1
-	b _0806DAEE
-	.align 2, 0
-_0806DAE0: .4byte EventScript_1C1361
-_0806DAE4:
-	bl DoWarp
-	movs r0, 0x1
-	b _0806DAEE
-_0806DAEC:
-	movs r0, 0
-_0806DAEE:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end TryStartWarpEventScript
-
-	thumb_func_start sub_806DAF4
-sub_806DAF4: @ 806DAF4
+	thumb_func_start IsWarpMetatileBehavior
+IsWarpMetatileBehavior: @ 806DAF4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -414,19 +35,19 @@ sub_806DAF4: @ 806DAF4
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl MetatileBehavior_ReturnFalse_12
+	bl MetatileBehavior_IsLavaridgeB1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl MetatileBheavior_IsMB_68
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0806DB7C
 	adds r0, r4, 0
-	bl MetatileBehavior_IsRegularWarp
+	bl MetatileBehavior_IsWarpPad
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -451,7 +72,7 @@ _0806DB7E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DAF4
+	thumb_func_end IsWarpMetatileBehavior
 
 	thumb_func_start sub_806DB84
 sub_806DB84: @ 806DB84
@@ -501,8 +122,8 @@ _0806DBD2:
 	bx r1
 	thumb_func_end sub_806DB84
 
-	thumb_func_start is_non_stair_warp_tile
-is_non_stair_warp_tile: @ 806DBD8
+	thumb_func_start IsArrowWarpMetatileBehavior
+IsArrowWarpMetatileBehavior: @ 806DBD8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -550,10 +171,10 @@ _0806DC28:
 _0806DC2A:
 	pop {r1}
 	bx r1
-	thumb_func_end is_non_stair_warp_tile
+	thumb_func_end IsArrowWarpMetatileBehavior
 
-	thumb_func_start map_warp_check_packed
-map_warp_check_packed: @ 806DC30
+	thumb_func_start GetWarpEventAtMapPosition
+GetWarpEventAtMapPosition: @ 806DC30
 	push {lr}
 	adds r3, r1, 0
 	ldrh r1, [r3]
@@ -570,10 +191,10 @@ map_warp_check_packed: @ 806DC30
 	asrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end map_warp_check_packed
+	thumb_func_end GetWarpEventAtMapPosition
 
-	thumb_func_start sub_806DC54
-sub_806DC54: @ 806DC54
+	thumb_func_start SetupWarp
+SetupWarp: @ 806DC54
 	push {r4-r7,lr}
 	adds r5, r2, 0
 	ldr r0, _0806DC74 @ =gMapHeader
@@ -632,7 +253,7 @@ _0806DCC4:
 	bx r0
 	.align 2, 0
 _0806DCCC: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_806DC54
+	thumb_func_end SetupWarp
 
 	thumb_func_start TryDoorWarp
 TryDoorWarp: @ 806DCD0
@@ -654,7 +275,7 @@ TryDoorWarp: @ 806DCD0
 	ldr r7, _0806DD2C @ =gMapHeader
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl map_warp_check_packed
+	bl GetWarpEventAtMapPosition
 	lsls r0, 24
 	asrs r4, r0, 24
 	movs r0, 0x1
@@ -662,16 +283,16 @@ TryDoorWarp: @ 806DCD0
 	cmp r4, r0
 	beq _0806DD30
 	adds r0, r5, 0
-	bl sub_806DAF4
+	bl IsWarpMetatileBehavior
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806DD30
-	bl sub_8055A08
+	bl StoreInitialPlayerAvatarState
 	adds r0, r7, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
-	bl sub_806DC54
+	bl SetupWarp
 	bl DoDoorWarp
 	movs r0, 0x1
 	b _0806DD32
@@ -1023,7 +644,7 @@ _0806DF98:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806DFB0
-	bl sub_8055A08
+	bl StoreInitialPlayerAvatarState
 	bl DoDiveWarp
 	movs r0, 0xE2
 	bl PlaySE
@@ -1159,13 +780,13 @@ SetCableClubWarp: @ 806E08C
 	ldr r4, _0806E0CC @ =gMapHeader
 	adds r0, r4, 0
 	mov r1, sp
-	bl map_warp_check_packed
+	bl GetWarpEventAtMapPosition
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
 	mov r2, sp
-	bl sub_806DC54
+	bl SetupWarp
 	movs r0, 0
 	add sp, 0x8
 	pop {r4}

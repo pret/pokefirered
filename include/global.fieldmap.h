@@ -318,6 +318,14 @@ enum
     COLLISION_HORIZONTAL_RAIL,
 };
 
+// player running states
+enum
+{
+    NOT_MOVING,
+    TURN_DIRECTION, // not the same as turning! turns your avatar without moving. also known as a turn frame in some circles
+    MOVING,
+};
+
 // player tile transition states
 enum
 {

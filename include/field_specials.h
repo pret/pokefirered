@@ -28,5 +28,8 @@ u8 GetUnlockedSeviiAreas(void);
 u32 GetPlayerTrainerId(void);
 bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);
+void RunMassageCooldownStepCounter(void);
+void IncrementResortGorgeousStepCounter(void);
+void IncrementBirthIslandRockStepCount(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

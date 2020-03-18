@@ -21,18 +21,18 @@ enum
 EWRAM_DATA u8 gUnknown_20370A0 = 0;
 EWRAM_DATA const u8 *gRAMScriptPtr = NULL;
 
-// ewram bss
-/*IWRAM_DATA*/ static u8 sScriptContext1Status;
-/*IWRAM_DATA*/ static u32 sUnusedVariable1;
-/*IWRAM_DATA*/ static struct ScriptContext sScriptContext1;
-/*IWRAM_DATA*/ static u32 sUnusedVariable2;
-/*IWRAM_DATA*/ static struct ScriptContext sScriptContext2;
-/*IWRAM_DATA*/ static bool8 sScriptContext2Enabled;
-/*IWRAM_DATA*/ static u8 gUnknown_3000F9D;
-/*IWRAM_DATA*/ static u8 gUnknown_3000F9E;
-/*IWRAM_DATA*/ static u8 gUnknown_3000F9F;
-/*IWRAM_DATA*/ static u8 gUnknown_3000FA0;
-/*IWRAM_DATA*/ static u8 gUnknown_3000FA1;
+// iwram bss
+static u8 sScriptContext1Status;
+static u32 sUnusedVariable1;
+static struct ScriptContext sScriptContext1;
+static u32 sUnusedVariable2;
+static struct ScriptContext sScriptContext2;
+static bool8 sScriptContext2Enabled;
+static u8 gUnknown_3000F9D;
+static u8 gUnknown_3000F9E;
+static u8 gUnknown_3000F9F;
+static u8 gUnknown_3000FA0;
+static u8 gUnknown_3000FA1;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -431,7 +431,7 @@ void mapheader_run_script_with_tag_x6(void)
     mapheader_run_script_by_tag(6);
 }
 
-bool8 mapheader_run_first_tag2_script_list_match(void)
+bool8 TryRunOnFrameMapScript(void)
 {
     u8 *ptr;
 
@@ -482,7 +482,7 @@ bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objec
     return TRUE;
 }
 
-u8 *GetRamScript(u8 objectId, u8 *script)
+const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     gRAMScriptPtr = NULL;

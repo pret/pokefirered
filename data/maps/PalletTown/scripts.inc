@@ -18,7 +18,7 @@ PalletTown_OnTransition:: @ 8165465
 	end
 
 PalletTown_EventScript_TryReadySignLady:: @ 8165488
-	goto_if_unset FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN, EventScript_Return
+	goto_if_unset FLAG_OPENED_START_MENU, EventScript_Return
 	compare VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	goto_if_ge EventScript_Return
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
@@ -447,7 +447,7 @@ PalletTown_EventScript_SignLadyShowSign:: @ 8165894
 	closemessage
 	delay 20
 	textcolor 3
-	setflag FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN
+	setflag FLAG_OPENED_START_MENU
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	setvar SIGN_LADY_READY, FALSE
 	special sub_80699E0

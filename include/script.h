@@ -53,12 +53,12 @@ void mapheader_run_script_with_tag_x3(void);
 void mapheader_run_script_with_tag_x5(void);
 void mapheader_run_script_with_tag_x7(void);
 void mapheader_run_script_with_tag_x6(void);
-bool8 mapheader_run_first_tag2_script_list_match(void);
+bool8 TryRunOnFrameMapScript(void);
 void mapheader_run_first_tag4_script_list_match(void);
 u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
-u8 *GetRamScript(u8 objectId, u8 *script);
+const u8 *GetRamScript(u8 objectId, const u8 *script);
 bool32 sub_80991F8(void);
 u8 *sub_8099244(void);
 void sub_80992A0(u8 *script, u16 scriptSize);
@@ -73,7 +73,12 @@ void sub_8069970(void);
 void sub_8069A20(void);
 void sub_8069A2C(void);
 bool8 IsMsgSignPost(void);
+bool8 sub_806997C(void);
+u8 sub_80699B0(void);
+void sub_8069A54(void);
+bool8 sub_8069A04(void);
 
 extern const u8 *gRAMScriptPtr;
+extern u8 gUnknown_20370A0;
 
 #endif // GUARD_SCRIPT_H

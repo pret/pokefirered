@@ -1212,4 +1212,8 @@ extern const u8 CableClub_Text_PleaseWaitBCancel[];
 // fldeff_flash
 extern const u8 EventScript_FldEffFlash[];
 
+// field_control_avatar
+extern const u8 gUnknown_81A7ADB[];
+extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

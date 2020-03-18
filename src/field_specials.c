@@ -2435,7 +2435,7 @@ static void Task_WaitDeoxysFieldEffect(u8 taskId)
     }
 }
 
-void BirthIslandDeoxysStepCounter(void)
+void IncrementBirthIslandRockStepCount(void)
 {
     u16 count = VarGet(VAR_DEOXYS_INTERACTION_STEP_COUNTER);
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR))

@@ -3259,7 +3259,7 @@ sub_805644C: @ 805644C
 	bl sub_805BEB8
 	mov r6, sp
 	mov r0, sp
-	bl sub_806C888
+	bl FieldClearPlayerInput
 	mov r0, sp
 	adds r1, r5, 0
 	adds r2, r4, 0
@@ -3271,7 +3271,7 @@ sub_805644C: @ 805644C
 	cmp r0, 0
 	bne _080564BA
 	mov r0, sp
-	bl sub_806CAC8
+	bl ProcessPlayerFieldInput
 	cmp r0, 0x1
 	bne _080564B0
 	ldr r0, _080564A8 @ =gUnknown_3005E88
@@ -3308,7 +3308,7 @@ sub_80564C8: @ 80564C8
 	bl sub_805BEB8
 	bl sub_8111C68
 	mov r0, sp
-	bl sub_806C888
+	bl FieldClearPlayerInput
 	ldr r0, _08056508 @ =gUnknown_3005E90
 	ldr r0, [r0]
 	str r0, [sp]
@@ -3319,7 +3319,7 @@ sub_80564C8: @ 80564C8
 	cmp r0, 0
 	bne _08056512
 	mov r0, sp
-	bl sub_806CAC8
+	bl ProcessPlayerFieldInput
 	cmp r0, 0x1
 	bne _0805650C
 	bl ScriptContext2_Enable
@@ -3339,7 +3339,7 @@ _08056512:
 	bl RunQuestLogCB
 _08056522:
 	ldr r0, _08056530 @ =gUnknown_3005E90
-	bl sub_806C888
+	bl FieldClearPlayerInput
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -6825,7 +6825,7 @@ _08058118:
 	ldrb r1, [r4, 0xC]
 	ldrb r2, [r4, 0x3]
 	mov r0, sp
-	bl sub_806CF38
+	bl GetInteractedLinkPlayerScript
 _08058122:
 	add sp, 0x8
 	pop {r4}

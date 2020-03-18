@@ -1,12 +1,14 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
+#include "field_poison.h"
 #include "field_specials.h"
 #include "item_menu.h"
 #include "link.h"
@@ -15,11 +17,16 @@
 #include "overworld.h"
 #include "renewable_hidden_items.h"
 #include "quest_log.h"
+#include "safari_zone.h"
 #include "script.h"
 #include "start_menu.h"
 #include "trainer_see.h"
+#include "vs_seeker.h"
+#include "wild_encounter.h"
 #include "constants/songs.h"
+#include "constants/event_bg.h"
 #include "constants/event_objects.h"
+#include "constants/maps.h"
 
 void sub_806CA4C(struct FieldInput *input, u16 *newKeys, u16 *heldKeys);
 bool8 sub_80699D4(void);
@@ -27,15 +34,24 @@ void sub_806CDF8(u8 taskId);
 void GetPlayerPosition(struct MapPosition * position);
 void GetInFrontOfPlayerPosition(struct MapPosition * position);
 u16 GetPlayerCurMetatileBehavior(void);
-bool8 TryStartStepBasedScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
-bool8 TryArrowWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
-bool8 TryDoorWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 bool8 TryStartInteractionScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 const u8 *GetInteractionScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
 const u8 *GetInteractedObjectEventScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
 const u8 *GetInteractedBackgroundEventScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
+const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *, u16, u16, u8);
 const u8 *GetInteractedMetatileScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
 const u8 *GetInteractedWaterScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
+bool8 TryStartStepBasedScript(struct MapPosition * position, u16 metatileBehavior, u16 playerDirection);
+bool8 TryStartCoordEventScript(struct MapPosition * position);
+bool8 TryStartMiscWalkingScripts(u16 metatileBehavior);
+bool8 TryStartStepCountScript(u16 metatileBehavior);
+void UpdateHappinessStepCounter(void);
+bool8 UpdatePoisonStepCounter(void);
+u8 sub_806D898(u8 metatileBehvaior, u8 direction);
+const u8 *GetCoordEventScriptAtPosition(struct MapHeader * mapHeader, u16 x, u16 y, u8 z);
+bool8 TryStartWarpEventScript(struct MapPosition * position, u16 metatileBehavior);
+bool8 TryArrowWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
+bool8 TryDoorWarp(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 bool8 sub_806D804(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 bool8 CheckStandardWildEncounter(u32 encounter);
 
@@ -425,4 +441,287 @@ const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8 metati
 
     script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
+}
+
+const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+{
+    u8 r2;
+    const struct BgEvent *bgEvent = GetBackgroundEventAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
+
+    if (bgEvent == NULL)
+        return NULL;
+    if (bgEvent->bgUnion.script == NULL)
+        return EventScript_TestSignpostMsg;
+
+    r2 = sub_806D898(metatileBehavior, direction);
+
+    switch (bgEvent->kind)
+    {
+    case BG_EVENT_PLAYER_FACING_ANY:
+    default:
+        break;
+    case BG_EVENT_PLAYER_FACING_NORTH:
+        if (direction != DIR_NORTH)
+            return NULL;
+        break;
+    case BG_EVENT_PLAYER_FACING_SOUTH:
+        if (direction != DIR_SOUTH)
+            return NULL;
+        break;
+    case BG_EVENT_PLAYER_FACING_EAST:
+        if (direction != DIR_EAST)
+            return NULL;
+        break;
+    case BG_EVENT_PLAYER_FACING_WEST:
+        if (direction != DIR_WEST)
+            return NULL;
+        break;
+    case 5:
+    case 6:
+    case BG_EVENT_HIDDEN_ITEM:
+        if (GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_UNDERFOOT) == TRUE)
+            return NULL;
+        gSpecialVar_0x8005 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_ID);
+        gSpecialVar_0x8004 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_FLAG);
+        gSpecialVar_0x8006 = GetHiddenItemAttr((u32)bgEvent->bgUnion.script, HIDDEN_ITEM_QUANTITY);
+        if (FlagGet(gSpecialVar_0x8004) == TRUE)
+            return NULL;
+        gSpecialVar_Facing = direction;
+        return EventScript_HiddenItemScript;
+    }
+
+    if (r2 != 0xFF)
+        sub_8069A20();
+    gSpecialVar_Facing = direction;
+    return bgEvent->bgUnion.script;
+}
+
+const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+{
+    gSpecialVar_Facing = direction;
+    if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
+        return EventScript_PC;
+    if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
+        return EventScript_WallTownMap;
+    if (MetatileBehavior_IsBookshelf(metatileBehavior) == TRUE)
+        return gUnknown_81A7606;
+    if (MetatileBehavior_IsPokeMartShelf(metatileBehavior) == TRUE)
+        return gUnknown_81A760F;
+    if (MetatileBehavior_IsFood(metatileBehavior) == TRUE)
+        return gUnknown_81A7618;
+    if (MetatileBehavior_IsImpressiveMachine(metatileBehavior) == TRUE)
+        return gUnknown_81A7633;
+    if (MetatileBehavior_IsBlueprints(metatileBehavior) == TRUE)
+        return gUnknown_81A763C;
+    if (MetatileBehavior_IsVideoGame(metatileBehavior) == TRUE)
+        return gUnknown_81A7621;
+    if (MetatileBehavior_IsBurglary(metatileBehavior) == TRUE)
+        return gUnknown_81A7645;
+    if (MetatileBehavior_IsComputer(metatileBehavior) == TRUE)
+        return gUnknown_81A762A;
+    if (MetatileBehavior_IsMBA3(metatileBehavior) == TRUE)
+        return TrainerTower_EventScript_ShowTime;
+    if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
+        return gUnknown_81A764E;
+    if (MetatileBehavior_IsCabinet(metatileBehavior) == TRUE)
+        return gUnknown_81A7657;
+    if (MetatileBehavior_IsKitchen(metatileBehavior) == TRUE)
+        return gUnknown_81A7660;
+    if (MetatileBehavior_IsDresser(metatileBehavior) == TRUE)
+        return gUnknown_81A7669;
+    if (MetatileBehavior_IsSnacks(metatileBehavior) == TRUE)
+        return gUnknown_81A7672;
+    if (MetatileBehavior_IsPainting(metatileBehavior) == TRUE)
+        return gUnknown_81A767B;
+    if (MetatileBehavior_IsPowerPlantMachine(metatileBehavior) == TRUE)
+        return gUnknown_81A7684;
+    if (MetatileBehavior_IsTelephone(metatileBehavior) == TRUE)
+        return gUnknown_81A768D;
+    if (MetatileBehavior_IsAdvertisingPoster(metatileBehavior) == TRUE)
+        return gUnknown_81A7696;
+    if (MetatileBehavior_IsTastyFood(metatileBehavior) == TRUE)
+        return gUnknown_81A769F;
+    if (MetatileBehavior_IsTrashBin(metatileBehavior) == TRUE)
+        return gUnknown_81A76A8;
+    if (MetatileBehavior_IsCup(metatileBehavior) == TRUE)
+        return gUnknown_81A76B1;
+    if (MetatileBehavior_ReturnFalse_19(metatileBehavior) == TRUE)
+        return gUnknown_81A76BA;
+    if (MetatileBehavior_ReturnFalse_20(metatileBehavior) == TRUE)
+        return gUnknown_81A76C3;
+    if (MetatileBehavior_IsBlinkingLights(metatileBehavior) == TRUE)
+        return gUnknown_81A76CC;
+    if (MetatileBehavior_IsMB9F(metatileBehavior) == TRUE)
+        return gUnknown_81A76D5;
+    if (MetatileBehavior_IsPlayerFacingMB_8D(metatileBehavior, direction) == TRUE)
+        return CableClub_EventScript_81BBFD8;
+    if (MetatileBehavior_IsQuestionnaire(metatileBehavior) == TRUE)
+        return EventScript_Questionnaire;
+    if (MetatileBehavior_IsPlayerFacingBattleRecords(metatileBehavior, direction) == TRUE)
+        return CableClub_EventScript_ShowBattleRecords;
+    if (MetatileBehavior_IsIndigoPlateauMark(metatileBehavior) == TRUE)
+    {
+        sub_8069A20();
+        return gUnknown_81A76F0;
+    }
+    if (MetatileBehavior_IsIndigoPlateauMark2(metatileBehavior) == TRUE)
+    {
+        sub_8069A20();
+        return gUnknown_81A76F9;
+    }
+    if (MetatileBehavior_IsPlayerFacingPokeMartSign(metatileBehavior, direction) == TRUE)
+    {
+        sub_8069A20();
+        return gUnknown_81A76DE;
+    }
+    if (MetatileBehavior_IsPlayerFacingPokemonCenterSign(metatileBehavior, direction) == TRUE)
+    {
+        sub_8069A20();
+        return gUnknown_81A76E7;
+    }
+    return NULL;
+}
+
+const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
+{
+    if (MetatileBehavior_IsSemiDeepWater(metatileBehavior) == TRUE &&PartyHasMonWithSurf() == TRUE)
+        return EventScript_CurrentTooFast;
+    if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+        return EventScript_UseSurf;
+
+    if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
+    {
+        if (FlagGet(FLAG_BADGE07_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
+            return EventScript_Waterfall;
+        else
+            return EventScript_CantUseWaterfall;
+    }
+    return NULL;
+}
+
+bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior, u16 direction)
+{
+    if (TryStartCoordEventScript(position) == TRUE)
+        return TRUE;
+    if (TryStartWarpEventScript(position, metatileBehavior) == TRUE)
+        return TRUE;
+    if (TryStartMiscWalkingScripts(metatileBehavior) == TRUE)
+        return TRUE;
+    if (TryStartStepCountScript(metatileBehavior) == TRUE)
+        return TRUE;
+    if (!(gPlayerAvatar.flags & 0x40) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 TryStartCoordEventScript(struct MapPosition *position)
+{
+    const u8 *script = GetCoordEventScriptAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
+
+    if (script == NULL)
+        return FALSE;
+    ScriptContext1_SetupScript(script);
+    return TRUE;
+}
+
+bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
+{
+    // Dummied
+    return FALSE;
+}
+
+bool8 TryStartStepCountScript(u16 metatileBehavior)
+{
+    if (InUnionRoom() == TRUE)
+        return FALSE;
+    if (gQuestLogState == QL_STATE_2)
+        return FALSE;
+
+    UpdateHappinessStepCounter();
+
+    if (!(gPlayerAvatar.flags & 0x40) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
+    {
+        if (sub_810C4EC() == TRUE)
+        {
+            ScriptContext1_SetupScript(gUnknown_81A8CED);
+            return TRUE;
+        }
+        else if (UpdatePoisonStepCounter() == TRUE)
+        {
+            ScriptContext1_SetupScript(EventScript_FieldPoison);
+            return TRUE;
+        }
+        else if (ShouldEggHatch())
+        {
+            IncrementGameStat(GAME_STAT_HATCHED_EGGS);
+            ScriptContext1_SetupScript(EventScript_EggHatch);
+            return TRUE;
+        }
+    }
+    if (SafariZoneTakeStep() == TRUE)
+        return TRUE;
+    return FALSE;
+}
+
+void Unref_ClearHappinessStepCounter(void)
+{
+    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
+}
+
+void UpdateHappinessStepCounter(void)
+{
+    u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
+    int i;
+
+    (*ptr)++;
+    (*ptr) %= 128;
+    if (*ptr == 0)
+    {
+        struct Pokemon *mon = gPlayerParty;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            AdjustFriendship(mon, FRIENDSHIP_EVENT_WALKING);
+            mon++;
+        }
+    }
+}
+
+void ClearPoisonStepCounter(void)
+{
+    VarSet(VAR_POISON_STEP_COUNTER, 0);
+}
+
+bool8 UpdatePoisonStepCounter(void)
+{
+    u16 *ptr;
+
+    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE)
+    {
+        ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
+        (*ptr)++;
+        (*ptr) %= 5;
+        if (*ptr == 0)
+        {
+            switch (DoPoisonFieldEffect())
+            {
+            case FLDPSN_NONE:
+                return FALSE;
+            case FLDPSN_PSN:
+                return FALSE;
+            case FLDPSN_FNT:
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+void RestartWildEncounterImmunitySteps(void)
+{
+    ResetEncounterRateModifiers();
+}
+
+bool8 CheckStandardWildEncounter(u32 encounter)
+{
+    return TryStandardWildEncounter(encounter);
 }

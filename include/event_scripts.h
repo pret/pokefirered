@@ -1161,7 +1161,7 @@ extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 EventScript_DoTrainerBattleFromApproach[];
-extern const u8 Test_EventScript_Sign[];
+extern const u8 EventScript_TestSignpostMsg[];
 
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -1215,5 +1215,47 @@ extern const u8 EventScript_FldEffFlash[];
 // field_control_avatar
 extern const u8 gUnknown_81A7ADB[];
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
+extern const u8 EventScript_HiddenItemScript[];
+extern const u8 EventScript_PC[];
+extern const u8 EventScript_WallTownMap[];
+extern const u8 gUnknown_81A7606[];
+extern const u8 gUnknown_81A760F[];
+extern const u8 gUnknown_81A7618[];
+extern const u8 gUnknown_81A7633[];
+extern const u8 gUnknown_81A763C[];
+extern const u8 gUnknown_81A7621[];
+extern const u8 gUnknown_81A7645[];
+extern const u8 gUnknown_81A762A[];
+extern const u8 TrainerTower_EventScript_ShowTime[];
+extern const u8 gUnknown_81A764E[];
+extern const u8 gUnknown_81A7657[];
+extern const u8 gUnknown_81A7660[];
+extern const u8 gUnknown_81A7669[];
+extern const u8 gUnknown_81A7672[];
+extern const u8 gUnknown_81A767B[];
+extern const u8 gUnknown_81A7684[];
+extern const u8 gUnknown_81A768D[];
+extern const u8 gUnknown_81A7696[];
+extern const u8 gUnknown_81A769F[];
+extern const u8 gUnknown_81A76A8[];
+extern const u8 gUnknown_81A76B1[];
+extern const u8 gUnknown_81A76BA[];
+extern const u8 gUnknown_81A76C3[];
+extern const u8 gUnknown_81A76CC[];
+extern const u8 gUnknown_81A76D5[];
+extern const u8 CableClub_EventScript_81BBFD8[];
+extern const u8 EventScript_Questionnaire[];
+extern const u8 CableClub_EventScript_ShowBattleRecords[];
+extern const u8 gUnknown_81A76F0[];
+extern const u8 gUnknown_81A76F9[];
+extern const u8 gUnknown_81A76DE[];
+extern const u8 gUnknown_81A76E7[];
+extern const u8 EventScript_CurrentTooFast[];
+extern const u8 EventScript_UseSurf[];
+extern const u8 EventScript_Waterfall[];
+extern const u8 EventScript_CantUseWaterfall[];
+extern const u8 gUnknown_81A8CED[];
+extern const u8 EventScript_FieldPoison[];
+extern const u8 EventScript_EggHatch[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

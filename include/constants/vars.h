@@ -49,10 +49,10 @@
 // Counts up every step. Wraps around at 128.
 // When wraparound occurs, the friendship of
 // every party poke gets a slight boost.
-#define VAR_FRIENDSHIP_STEP_COUNT           0x4021
+#define VAR_HAPPINESS_STEP_COUNTER          0x4021
 
 // Maybe unused?
-#define VAR_0x4022                          0x4022
+#define VAR_POISON_STEP_COUNTER             0x4022
 
 // Step counter. Caps at 1500. If you enter a map with
 // renewable hidden items and this counter is capped,
@@ -81,8 +81,8 @@
 #define VAR_QUEST_LOG_MON_COUNTS           0x4027
 #define VAR_MENEWS_JISAN_STEP_COUNTER      0x4028
 #define VAR_0x4029                         0x4029
-#define VAR_HAPPINESS_STEP_COUNTER         0x402A
-#define VAR_POISON_STEP_COUNTER            0x402B
+#define VAR_0x402A                         0x402A
+#define VAR_0x402B                         0x402B
 #define VAR_RESET_RTC_ENABLE               0x402C
 #define VAR_0x402D                         0x402D
 #define VAR_0x402E                         0x402E

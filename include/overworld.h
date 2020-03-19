@@ -72,7 +72,7 @@ void Overworld_SetMapObjTemplateMovementType(u8, u8);
 
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
-void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
+void SetDynamicWarp(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
@@ -110,9 +110,9 @@ void WarpIntoMap(void);
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 void sub_8086194(void);
 void sub_8084CCC(u8 spawn);
-void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpNum);
+void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpNum);
 void c2_load_new_map(void);
-void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
+void SetWarpDestinationToDynamicWarp(u8 unused);
 void mapldr_default(void);
 
 u32 GetGameStat(u8 statId);
@@ -195,6 +195,9 @@ void CB1_Overworld(void);
 void sub_80568C4(void);
 u8 GetLastUsedWarpMapSectionId(void);
 void StoreInitialPlayerAvatarState(void);
+void UpdateEscapeWarp(s16 x, s16 y);
+bool8 SetDiveWarpEmerge(u16 x, u16 y);
+bool8 SetDiveWarpDive(u16 x, u16 y);
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;

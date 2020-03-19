@@ -47,21 +47,12 @@ gFieldLinkPlayerCount: @ 3005030
 
 	.align 4
 	.include "fieldmap.o"
-
 	.align 4
 	.include "field_camera.o"
-
 	.align 2
 	.include "scrcmd.o"
-
 	.align 2
-	@ .include "field_control_avatar.o"
-gSelectedObjectEvent: @ 3005074
-	.space 0x4
-
-gUnknown_3005078: @ 3005078
-	.space 0x4
-
+	.include "field_control_avatar.o"
 	.align 2
 	.include "event_data.o"
 	.align 2

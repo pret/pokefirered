@@ -1036,8 +1036,8 @@ SetWarpDestination: @ 805538C
 _080553C4: .4byte gUnknown_2031DBC
 	thumb_func_end SetWarpDestination
 
-	thumb_func_start warp1_set_2
-warp1_set_2: @ 80553C8
+	thumb_func_start SetWarpDestinationToMapWarp
+SetWarpDestinationToMapWarp: @ 80553C8
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1053,10 +1053,10 @@ warp1_set_2: @ 80553C8
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end warp1_set_2
+	thumb_func_end SetWarpDestinationToMapWarp
 
-	thumb_func_start saved_warp2_set
-saved_warp2_set: @ 80553E8
+	thumb_func_start SetDynamicWarp
+SetDynamicWarp: @ 80553E8
 	push {r4,r5,lr}
 	sub sp, 0x8
 	ldr r0, _08055418 @ =gSaveBlock1Ptr
@@ -1082,7 +1082,7 @@ saved_warp2_set: @ 80553E8
 	bx r0
 	.align 2, 0
 _08055418: .4byte gSaveBlock1Ptr
-	thumb_func_end saved_warp2_set
+	thumb_func_end SetDynamicWarp
 
 	thumb_func_start SetDynamicWarpWithCoords
 SetDynamicWarpWithCoords: @ 805541C
@@ -1114,8 +1114,8 @@ SetDynamicWarpWithCoords: @ 805541C
 _08055450: .4byte gSaveBlock1Ptr
 	thumb_func_end SetDynamicWarpWithCoords
 
-	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
-copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8055454
+	thumb_func_start SetWarpDestinationToDynamicWarp
+SetWarpDestinationToDynamicWarp: @ 8055454
 	ldr r2, _08055464 @ =gUnknown_2031DBC
 	ldr r0, _08055468 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -1127,7 +1127,7 @@ copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8055454
 	.align 2, 0
 _08055464: .4byte gUnknown_2031DBC
 _08055468: .4byte gSaveBlock1Ptr
-	thumb_func_end copy_saved_warp2_bank_and_enter_x_to_warp1
+	thumb_func_end SetWarpDestinationToDynamicWarp
 
 	thumb_func_start sub_805546C
 sub_805546C: @ 805546C
@@ -1220,8 +1220,8 @@ _08055500:
 _08055508: .4byte gSaveBlock1Ptr
 	thumb_func_end SetLastHealLocationWarp
 
-	thumb_func_start sub_805550C
-sub_805550C: @ 805550C
+	thumb_func_start UpdateEscapeWarp
+UpdateEscapeWarp: @ 805550C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -1290,7 +1290,7 @@ _08055590:
 	.align 2, 0
 _08055598: .4byte gUnknown_2031DBC
 _0805559C: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_805550C
+	thumb_func_end UpdateEscapeWarp
 
 	thumb_func_start SetEscapeWarp
 SetEscapeWarp: @ 80555A0
@@ -1650,8 +1650,8 @@ _0805581A:
 	bx r1
 	thumb_func_end sub_80557C4
 
-	thumb_func_start sub_8055824
-sub_8055824: @ 8055824
+	thumb_func_start SetDiveWarpEmerge
+SetDiveWarpEmerge: @ 8055824
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -1666,10 +1666,10 @@ sub_8055824: @ 8055824
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055824
+	thumb_func_end SetDiveWarpEmerge
 
-	thumb_func_start sub_8055844
-sub_8055844: @ 8055844
+	thumb_func_start SetDiveWarpDive
+SetDiveWarpDive: @ 8055844
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -1684,7 +1684,7 @@ sub_8055844: @ 8055844
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055844
+	thumb_func_end SetDiveWarpDive
 
 	thumb_func_start sub_8055864
 sub_8055864: @ 8055864
@@ -6694,7 +6694,7 @@ sub_805801C: @ 805801C
 	cmp r0, 0x2
 	bne _0805802E
 	adds r0, r1, 0x4
-	bl sub_806DEC4
+	bl GetCoordEventScriptAtMapPosition
 	b _08058030
 _0805802E:
 	movs r0, 0

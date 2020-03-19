@@ -4393,7 +4393,7 @@ static void sub_80C527C(u16 mapsec)
     }
     else
     {
-        warp1_set_2(sMapsecToSpawn[idx][0], sMapsecToSpawn[idx][1], -1);
+        SetWarpDestinationToMapWarp(sMapsecToSpawn[idx][0], sMapsecToSpawn[idx][1], -1);
     }
     ReturnToFieldFromFlyMapSelect();
 }

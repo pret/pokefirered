@@ -1,0 +1,2 @@
+gSelectedObjectEvent
+gUnknown_3005078

@@ -110,20 +110,18 @@ struct ObjectEventTemplate
 struct WarpEvent
 {
     s16 x, y;
-    s8 warpId;
-    u8 mapGroup;
+    u8 elevation;
+    u8 warpId;
     u8 mapNum;
-    u8 unk7;
+    u8 mapGroup;
 };
 
 struct CoordEvent
 {
-    s16 x, y;
-    u8 unk4;
-    u8 filler_5;
+    u16 x, y;
+    u8 elevation;
     u16 trigger;
     u16 index;
-    u8 filler_A[0x2];
     u8 *script;
 };
 
@@ -152,7 +150,7 @@ union BgUnion
 struct BgEvent
 {
     u16 x, y;
-    u8 unk4;
+    u8 elevation;
     u8 kind;
     // 0x2 padding for the union beginning.
     union BgUnion bgUnion;

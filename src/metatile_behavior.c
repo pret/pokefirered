@@ -474,7 +474,7 @@ bool8 MetatileBehavior_IsMountain(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsDeepOrSemiDeepWater(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
     if(metatileBehavior >= MB_SEMI_DEEP_WATER && metatileBehavior <= MB_DEEP_WATER)
         return TRUE;
@@ -482,7 +482,7 @@ bool8 MetatileBehavior_IsDeepOrSemiDeepWater(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsMB19(u8 metatileBehavior)
+bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_19)
         return TRUE;

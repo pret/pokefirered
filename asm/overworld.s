@@ -1178,7 +1178,7 @@ _080554B8: .4byte gSaveBlock1Ptr
 sub_80554BC: @ 80554BC
 	push {lr}
 	ldr r0, _080554C8 @ =gUnknown_2031DBC
-	bl SetBlackoutRespawnWarpAndHealerNpc
+	bl SetWhiteoutRespawnWarpAndHealerNpc
 	pop {r0}
 	bx r0
 	.align 2, 0

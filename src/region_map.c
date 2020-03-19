@@ -20,7 +20,7 @@
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
-#include "constants/spawn_points.h"
+#include "constants/heal_locations.h"
 #include "constants/maps.h"
 
 #define FREE_IF_NOT_NULL(ptr) ({ \

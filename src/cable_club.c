@@ -762,7 +762,7 @@ void CleanupLinkRoomState(void)
         LoadPlayerParty();
         SavePlayerBag();
     }
-    copy_saved_warp2_bank_and_enter_x_to_warp1(127);
+    SetWarpDestinationToDynamicWarp(127);
 }
 
 void ExitLinkRoom(void)

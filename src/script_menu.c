@@ -1070,7 +1070,7 @@ static bool8 PicboxWait(void)
         return FALSE;
 }
 
-void sub_809D424(void)
+void PicboxCancel(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
     struct Task * task;

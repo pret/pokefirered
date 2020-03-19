@@ -2,7 +2,7 @@ Test_EventScript_NPC:: @ 81C5552
 	msgbox Test_Text_WelcomeToWorldOfPokemon, MSGBOX_NPC
 	end
 
-Test_EventScript_Sign:: @ 81C555B
+EventScript_TestSignpostMsg:: @ 81C555B
 	msgbox Test_Text_ThisIsASignpost, MSGBOX_SIGN
 	end
 

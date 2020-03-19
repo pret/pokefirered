@@ -55,8 +55,7 @@ static EWRAM_DATA u16 sMovingNpcMapId = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 struct ScriptContext * gUnknown_3005070;
-
-extern u8 gSelectedObjectEvent;
+u8 gSelectedObjectEvent;
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -789,7 +788,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext * ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_807E59C();
+    DoTeleportWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -1315,32 +1314,32 @@ bool8 ScrCmd_closemessage(struct ScriptContext * ctx)
 
 static bool8 WaitForAorBPress(void)
 {
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
         return TRUE;
-    if (gMain.newKeys & B_BUTTON)
+    if (JOY_NEW(B_BUTTON))
         return TRUE;
 
     if (sub_806B93C(gUnknown_3005070) == TRUE)
     {
         u8 r4 = sub_806B96C(gUnknown_3005070);
-        sub_8069998(r4);
-        if (r4)
+        RegisterQuestLogInput(r4);
+        if (r4 != QL_INPUT_OFF)
         {
-            if (gQuestLogState != 2)
+            if (gQuestLogState != QL_STATE_2)
             {
-                sub_80699F8();
-                if (r4 < 9 || r4 > 10)
-                    sub_8069964();
+                ClearMsgBoxCancelableState();
+                if (r4 != QL_INPUT_A && r4 != QL_INPUT_B)
+                    SetQuestLogInputIsDpadFlag();
                 else
                 {
-                    sub_80699A4();
-                    sub_8069970();
+                    ClearQuestLogInput();
+                    ClearQuestLogInputIsDpadFlag();
                 }
                 return TRUE;
             }
         }
     }
-    if (sub_8112CAC() == 1 || gQuestLogState == 2)
+    if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_2)
     {
         if (gUnknown_20370AC == 120)
             return TRUE;
@@ -1368,37 +1367,37 @@ static bool8 sub_806B93C(struct ScriptContext * ctx)
 
 static u8 sub_806B96C(struct ScriptContext * ctx)
 {
-    if (gMain.heldKeys & DPAD_UP && gSpecialVar_Facing != 2)
-        return 1;
+    if (JOY_HELD(DPAD_UP) && gSpecialVar_Facing != DIR_NORTH)
+        return QL_INPUT_UP;
 
-    if (gMain.heldKeys & DPAD_DOWN && gSpecialVar_Facing != 1)
-        return 2;
+    if (JOY_HELD(DPAD_DOWN) && gSpecialVar_Facing != DIR_SOUTH)
+        return QL_INPUT_DOWN;
 
-    if (gMain.heldKeys & DPAD_LEFT && gSpecialVar_Facing != 3)
-        return 3;
+    if (JOY_HELD(DPAD_LEFT) && gSpecialVar_Facing != DIR_WEST)
+        return QL_INPUT_LEFT;
 
-    if (gMain.heldKeys & DPAD_RIGHT && gSpecialVar_Facing != 4)
-        return 4;
+    if (JOY_HELD(DPAD_RIGHT) && gSpecialVar_Facing != DIR_EAST)
+        return QL_INPUT_RIGHT;
 
-    if (gMain.newKeys & L_BUTTON)
-        return 5;
+    if (JOY_NEW(L_BUTTON))
+        return QL_INPUT_L;
 
-    if (gMain.heldKeys & R_BUTTON)
-        return 6;
+    if (JOY_HELD(R_BUTTON))
+        return QL_INPUT_R;
 
-    if (gMain.heldKeys & START_BUTTON)
-        return 7;
+    if (JOY_HELD(START_BUTTON))
+        return QL_INPUT_START;
 
-    if (gMain.heldKeys & SELECT_BUTTON)
-        return 8;
+    if (JOY_HELD(SELECT_BUTTON))
+        return QL_INPUT_SELECT;
 
-    if (gMain.newKeys & A_BUTTON)
-        return 9;
+    if (JOY_NEW(A_BUTTON))
+        return QL_INPUT_A;
 
-    if (gMain.newKeys & B_BUTTON)
-        return 10;
+    if (JOY_NEW(B_BUTTON))
+        return QL_INPUT_B;
 
-    return 0;
+    return QL_INPUT_OFF;
 }
 
 bool8 ScrCmd_waitbuttonpress(struct ScriptContext * ctx)
@@ -2224,13 +2223,13 @@ bool8 ScrCmd_removecoins(struct ScriptContext * ctx)
 
 bool8 ScrCmd_signmsg(struct ScriptContext * ctx)
 {
-    sub_8069A20();
+    MsgSetSignPost();
     return FALSE;
 }
 
 bool8 ScrCmd_normalmsg(struct ScriptContext * ctx)
 {
-    sub_8069A2C();
+    MsgSetNotSignPost();
     return FALSE;
 }
 

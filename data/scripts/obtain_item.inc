@@ -158,7 +158,7 @@ EventScript_NoRoomToPickUpItem:: @ 81A682D
 	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_FoundHiddenItem:: @ 81A6843
+EventScript_HiddenItemScript:: @ 81A6843
 	lockall
 	textcolor 3
 	waitse

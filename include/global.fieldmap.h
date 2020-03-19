@@ -110,20 +110,18 @@ struct ObjectEventTemplate
 struct WarpEvent
 {
     s16 x, y;
-    s8 warpId;
-    u8 mapGroup;
+    u8 elevation;
+    u8 warpId;
     u8 mapNum;
-    u8 unk7;
+    u8 mapGroup;
 };
 
 struct CoordEvent
 {
-    s16 x, y;
-    u8 unk4;
-    u8 filler_5;
+    u16 x, y;
+    u8 elevation;
     u16 trigger;
     u16 index;
-    u8 filler_A[0x2];
     u8 *script;
 };
 
@@ -152,7 +150,7 @@ union BgUnion
 struct BgEvent
 {
     u16 x, y;
-    u8 unk4;
+    u8 elevation;
     u8 kind;
     // 0x2 padding for the union beginning.
     union BgUnion bgUnion;
@@ -316,6 +314,14 @@ enum
     COLLISION_ISOLATED_HORIZONTAL_RAIL,
     COLLISION_VERTICAL_RAIL,
     COLLISION_HORIZONTAL_RAIL,
+};
+
+// player running states
+enum
+{
+    NOT_MOVING,
+    TURN_DIRECTION, // not the same as turning! turns your avatar without moving. also known as a turn frame in some circles
+    MOVING,
 };
 
 // player tile transition states

@@ -1274,7 +1274,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter:: @ 8169D2F
 	playfanfare MUS_FAN5
 	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
-	call_if_set FLAG_PALLET_TOWN_LADY_MOVED_FROM_SIGN, PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene
+	call_if_set FLAG_OPENED_START_MENU, PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene
 	release
 	end
 

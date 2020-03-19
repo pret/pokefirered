@@ -3,12 +3,37 @@
 
 #include "global.h"
 
-extern u32 gUnknown_3005078;
+struct FieldInput
+{
+    bool8 pressedAButton:1;
+    bool8 checkStandardWildEncounter:1;
+    bool8 pressedStartButton:1;
+    bool8 pressedSelectButton:1;
+    bool8 heldDirection:1;
+    bool8 heldDirection2:1;
+    bool8 tookStep:1;
+    bool8 pressedBButton:1;
+    bool8 pressedRButton:1;
+    bool8 input_field_1_0:1;
+    bool8 input_field_1_1:1;
+    bool8 input_field_1_2:1;
+    bool8 input_field_1_3:1;
+    u8 dpadDirection;
+};
+
+extern struct FieldInput gInputToStoreInQuestLogMaybe;
 
 void RestartWildEncounterImmunitySteps(void);
 void ClearPoisonStepCounter(void);
-void SetCableClubWarp(void);
+int SetCableClubWarp(void);
 void sub_806DE28(struct ObjectEvent *);
-void dive_warp(struct MapPosition * pos, u16 behavior);
+bool8 dive_warp(struct MapPosition * pos, u16 behavior);
+bool8 sub_806DB84(u16 metatileBehavior, u8 playerDirection);
+const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction);
+const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
+void FieldClearPlayerInput(struct FieldInput *input);
+int ProcessPlayerFieldInput(struct FieldInput *input);
+void FieldInput_HandleCancelSignpost(struct FieldInput * input);
+void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys);
 
 #endif //GUARD_FIELD_CONTROL_AVATAR_H

@@ -1,46 +1,48 @@
 #include "global.h"
+#include "constants/weather.h"
 
-void nullsub_27(void) {}
-void nullsub_28(void) {}
-void nullsub_29(void) {}
-void nullsub_30(void) {}
-void nullsub_31(void) {}
-void nullsub_32(void) {}
-void nullsub_33(void) {}
-void nullsub_34(void) {}
-void nullsub_35(void) {}
-void nullsub_36(void) {}
-void nullsub_37(void) {}
-void nullsub_38(void) {}
-void nullsub_39(void) {}
+// These were all dummied out because it's always sunny in Viridian
+void WeatherCoordEvent_SunnyClouds(void) {}
+void WeatherCoordEvent_Sunny(void) {}
+void WeatherCoordEvent_Rain(void) {}
+void WeatherCoordEvent_Snow(void) {}
+void WeatherCoordEvent_RainThunderstorm(void) {}
+void WeatherCoordEvent_FogHorizontal(void) {}
+void WeatherCoordEvent_VolcanicAsh(void) {}
+void WeatherCoordEvent_Sandstorm(void) {}
+void WeatherCoordEvent_FogDiagonal(void) {}
+void WeatherCoordEvent_Underwater(void) {}
+void WeatherCoordEvent_Shade(void) {}
+void WeatherCoordEvent_Route119Cycle(void) {}
+void WeatherCoordEvent_Route123Cycle(void) {}
 
-struct {
+static struct {
     u8 weatherId;
     void (*callback)(void);
-} const gUnknown_83A72A8[] = {
-    {0x01, nullsub_27},
-    {0x02, nullsub_28},
-    {0x03, nullsub_29},
-    {0x04, nullsub_30},
-    {0x05, nullsub_31},
-    {0x06, nullsub_32},
-    {0x07, nullsub_33},
-    {0x08, nullsub_34},
-    {0x09, nullsub_35},
-    {0x0a, nullsub_36},
-    {0x0b, nullsub_37},
-    {0x14, nullsub_38},
-    {0x15, nullsub_39}
+} const sWeatherCoordEventFuncs[] = {
+    {WEATHER_SUNNY_CLOUDS,      WeatherCoordEvent_SunnyClouds     },
+    {WEATHER_SUNNY,             WeatherCoordEvent_Sunny           },
+    {WEATHER_RAIN,              WeatherCoordEvent_Rain            },
+    {WEATHER_SNOW,              WeatherCoordEvent_Snow            },
+    {WEATHER_RAIN_THUNDERSTORM, WeatherCoordEvent_RainThunderstorm},
+    {WEATHER_FOG_HORIZONTAL,    WeatherCoordEvent_FogHorizontal   },
+    {WEATHER_VOLCANIC_ASH,      WeatherCoordEvent_VolcanicAsh     },
+    {WEATHER_SANDSTORM,         WeatherCoordEvent_Sandstorm       },
+    {WEATHER_FOG_DIAGONAL,      WeatherCoordEvent_FogDiagonal     },
+    {WEATHER_UNDERWATER,        WeatherCoordEvent_Underwater      },
+    {WEATHER_SHADE,             WeatherCoordEvent_Shade           },
+    {WEATHER_ROUTE119_CYCLE,    WeatherCoordEvent_Route119Cycle   },
+    {WEATHER_ROUTE123_CYCLE,    WeatherCoordEvent_Route123Cycle   }
 };
 
-void trigger_activate_weather(u8 weatherId)
+void DoCoordEventWeather(u8 weatherId)
 {
     u8 i;
-    for (i = 0; i < NELEMS(gUnknown_83A72A8); i++)
+    for (i = 0; i < NELEMS(sWeatherCoordEventFuncs); i++)
     {
-        if (gUnknown_83A72A8[i].weatherId == weatherId)
+        if (sWeatherCoordEventFuncs[i].weatherId == weatherId)
         {
-            gUnknown_83A72A8[i].callback();
+            sWeatherCoordEventFuncs[i].callback();
             return;
         }
     }

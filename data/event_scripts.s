@@ -1161,8 +1161,8 @@ EventScript_GetElevatorFloor:: @ 81A7AB9
 
 	.include "data/scripts/aide.inc"
 
-gUnknown_81A7ADB:: @ 81A7ADB
-	special sub_80CADC4
+EventScript_CancelMessageBox:: @ 81A7ADB
+	special DoPicboxCancel
 	release
 	end
 

@@ -549,11 +549,11 @@ void DoDiveWarp(void)
     CreateTask(sub_807E718, 10);
 }
 
-void sub_807E4A0(u16 a, u16 b)
+void sub_807E4A0(u16 metatileBehavior, u16 delay)
 {
     u8 taskId = CreateTask(sub_807E980, 10);
-    gTasks[taskId].data[1] = a;
-    gTasks[taskId].data[15] = b;
+    gTasks[taskId].data[1] = metatileBehavior;
+    gTasks[taskId].data[15] = delay;
     sub_807E980(taskId);
 }
 
@@ -571,7 +571,7 @@ void sub_807E500(void)
     gFieldCallback = sub_807DF94;
 }
 
-void sub_807E524(void)
+void DoUnionRoomWarp(void)
 {
     ScriptContext2_Enable();
     gFieldCallback = sub_807DF64;
@@ -584,25 +584,25 @@ void DoFallWarp(void)
     gFieldCallback = FieldCB_FallWarpExit;
 }
 
-void sub_807E560(u8 a0)
+void DoEscalatorWarp(u8 metatileBehavior)
 {
     ScriptContext2_Enable();
-    StartEscalatorWarp(a0, 10);
+    StartEscalatorWarp(metatileBehavior, 10);
 }
 
-void sub_807E57C(void)
+void DoLavaridgeGymB1FWarp(void)
 {
     ScriptContext2_Enable();
     StartLavaridgeGymB1FWarp(10);
 }
 
-void sub_807E58C(void)
+void DoLavaridgeGym1FWarp(void)
 {
     ScriptContext2_Enable();
     StartLavaridgeGym1FWarp(10);
 }
 
-void sub_807E59C(void)
+void DoTeleportWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();

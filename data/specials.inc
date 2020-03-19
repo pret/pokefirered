@@ -354,7 +354,7 @@ gSpecials:: @ 815FD60
 	def_special ForcePlayerOntoBike
 	def_special ListMenu
 	def_special ReturnToListMenu
-	def_special sub_80CADC4
+	def_special DoPicboxCancel
 	def_special SetVermilionTrashCans
 	def_special sub_805D1A8
 	def_special SampleResortGorgeousMonAndReward
@@ -376,7 +376,7 @@ gSpecials:: @ 815FD60
 	def_special UnionRoomSpecial
 	def_special ShowWirelessCommunicationScreen
 	def_special EnableNationalPokedex
-	def_special sub_80699E0
+	def_special SetWalkingIntoSignVars
 	def_special sub_80699BC
 	def_special sub_810C3A4
 	def_special SetFlavorTextFlagFromSpecialVars

@@ -1213,7 +1213,7 @@ extern const u8 CableClub_Text_PleaseWaitBCancel[];
 extern const u8 EventScript_FldEffFlash[];
 
 // field_control_avatar
-extern const u8 gUnknown_81A7ADB[];
+extern const u8 EventScript_CancelMessageBox[];
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
 extern const u8 EventScript_HiddenItemScript[];
 extern const u8 EventScript_PC[];
@@ -1246,10 +1246,10 @@ extern const u8 gUnknown_81A76D5[];
 extern const u8 CableClub_EventScript_81BBFD8[];
 extern const u8 EventScript_Questionnaire[];
 extern const u8 CableClub_EventScript_ShowBattleRecords[];
-extern const u8 gUnknown_81A76F0[];
-extern const u8 gUnknown_81A76F9[];
-extern const u8 gUnknown_81A76DE[];
-extern const u8 gUnknown_81A76E7[];
+extern const u8 EventScript_Indigo_UltimateGoal[];
+extern const u8 EventScript_Indigo_HighestAuthority[];
+extern const u8 EventScript_PokemartSign[];
+extern const u8 EventScript_PokecenterSign[];
 extern const u8 EventScript_CurrentTooFast[];
 extern const u8 EventScript_UseSurf[];
 extern const u8 EventScript_Waterfall[];

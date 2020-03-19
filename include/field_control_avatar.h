@@ -21,7 +21,7 @@ struct FieldInput
     u8 dpadDirection;
 };
 
-extern struct FieldInput gUnknown_3005078;
+extern struct FieldInput gInputToStoreInQuestLogMaybe;
 
 void RestartWildEncounterImmunitySteps(void);
 void ClearPoisonStepCounter(void);
@@ -33,7 +33,7 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
 const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void FieldClearPlayerInput(struct FieldInput *input);
 int ProcessPlayerFieldInput(struct FieldInput *input);
-void sub_806CD30(struct FieldInput * input);
+void FieldInput_HandleCancelSignpost(struct FieldInput * input);
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys);
 
 #endif //GUARD_FIELD_CONTROL_AVATAR_H

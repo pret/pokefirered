@@ -1,2 +1,1 @@
-gSelectedObjectEvent
-gUnknown_3005078
+gInputToStoreInQuestLogMaybe

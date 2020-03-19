@@ -547,11 +547,11 @@ void NullFieldSpecial(void)
 
 }
 
-void sub_80CADC4(void)
+void DoPicboxCancel(void)
 {
     u8 t = EOS;
     AddTextPrinterParameterized(0, 2, &t, 0, 1, 0, NULL);
-    sub_809D424();
+    PicboxCancel();
 }
 
 void SetVermilionTrashCans(void)
@@ -1545,7 +1545,7 @@ void SetSeenMon(void)
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), 2);
 }
 
-void sub_80CBDE8(void)
+void ResetContextNpcTextColor(void)
 {
     gSelectedObjectEvent = 0;
     gSpecialVar_TextColor = 0xFF;

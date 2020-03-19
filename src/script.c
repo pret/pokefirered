@@ -7,7 +7,7 @@
 #define SCRIPT_STACK_SIZE 20
 
 
-extern void sub_80CBDE8(void); // field_specials
+extern void ResetContextNpcTextColor(void); // field_specials
 extern u16 CalcCRC16WithTable(u8 *data, int length); // util
 extern bool32 ValidateReceivedWonderCard(void); // mevent
 
@@ -18,7 +18,7 @@ enum
     SCRIPT_MODE_NATIVE,
 };
 
-EWRAM_DATA u8 gUnknown_20370A0 = 0;
+EWRAM_DATA u8 gWalkAwayFromSignInhibitTimer = 0;
 EWRAM_DATA const u8 *gRAMScriptPtr = NULL;
 
 // iwram bss
@@ -29,10 +29,10 @@ static u32 sUnusedVariable2;
 static struct ScriptContext sScriptContext2;
 static bool8 sScriptContext2Enabled;
 static u8 gUnknown_3000F9D;
-static u8 gUnknown_3000F9E;
-static u8 gUnknown_3000F9F;
-static u8 gUnknown_3000FA0;
-static u8 gUnknown_3000FA1;
+static u8 sMsgBoxIsCancelable;
+static u8 sQuestLogInput;
+static u8 sQuestLogInputIsDpad;
+static u8 sMsgIsSignPost;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -202,95 +202,95 @@ bool8 ScriptContext2_IsEnabled(void)
     return sScriptContext2Enabled;
 }
 
-void sub_8069964(void)
+void SetQuestLogInputIsDpadFlag(void)
 {
-    gUnknown_3000FA0 = 1;
+    sQuestLogInputIsDpad = TRUE;
 }
 
-void sub_8069970(void)
+void ClearQuestLogInputIsDpadFlag(void)
 {
-    gUnknown_3000FA0 = 0;
+    sQuestLogInputIsDpad = FALSE;
 }
 
-bool8 sub_806997C(void)
+bool8 IsQuestLogInputDpad(void)
 {
-    if(gUnknown_3000FA0 == TRUE)
+    if(sQuestLogInputIsDpad == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8069998(u8 var)
+void RegisterQuestLogInput(u8 var)
 {
-    gUnknown_3000F9F = var;
+    sQuestLogInput = var;
 }
 
-void sub_80699A4(void)
+void ClearQuestLogInput(void)
 {
-    gUnknown_3000F9F = 0;
+    sQuestLogInput = 0;
 }
 
-u8 sub_80699B0(void)
+u8 GetRegisteredQuestLogInput(void)
 {
-    return gUnknown_3000F9F;
+    return sQuestLogInput;
 }
 
 void sub_80699BC(void)
 {
-    gUnknown_3000F9D = 1;
+    gUnknown_3000F9D = TRUE;
 }
 
 void sub_80699C8(void)
 {
-    gUnknown_3000F9D = 0;
+    gUnknown_3000F9D = FALSE;
 }
 
-u8 sub_80699D4(void)
+bool8 sub_80699D4(void)
 {
     return gUnknown_3000F9D;
 }
 
-void sub_80699E0(void)
+void SetWalkingIntoSignVars(void)
 {
-    gUnknown_20370A0 = 6;
-    gUnknown_3000F9E = 1;
+    gWalkAwayFromSignInhibitTimer = 6;
+    sMsgBoxIsCancelable = TRUE;
 }
 
-void sub_80699F8(void)
+void ClearMsgBoxCancelableState(void)
 {
-    gUnknown_3000F9E = 0;
+    sMsgBoxIsCancelable = FALSE;
 }
 
-bool8 sub_8069A04(void)
+bool8 CanWalkAwayToCancelMsgBox(void)
 {
-    if(gUnknown_3000F9E == TRUE)
+    if(sMsgBoxIsCancelable == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8069A20(void)
+void MsgSetSignPost(void)
 {
-    gUnknown_3000FA1 = 1;
+    sMsgIsSignPost = TRUE;
 }
 
-void sub_8069A2C(void)
+void MsgSetNotSignPost(void)
 {
-    gUnknown_3000FA1 = 0;
+    sMsgIsSignPost = FALSE;
 }
 
 bool8 IsMsgSignPost(void)
 {
-    if(gUnknown_3000FA1 == TRUE)
+    if(sMsgIsSignPost == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8069A54(void)
+void ResetFacingNpcOrSignPostVars(void)
 {
-    sub_80CBDE8();
-    sub_8069A2C();
+    ResetContextNpcTextColor();
+    MsgSetNotSignPost();
 }
 
 bool8 ScriptContext1_IsScriptSetUp(void)
@@ -329,9 +329,9 @@ bool8 ScriptContext2_RunScript(void)
 
 void ScriptContext1_SetupScript(const u8 *ptr)
 {
-    sub_80699F8();
+    ClearMsgBoxCancelableState();
     sub_80699C8();
-    sub_8069970();
+    ClearQuestLogInputIsDpadFlag();
     InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext1, ptr);
     ScriptContext2_Enable();

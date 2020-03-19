@@ -51,7 +51,12 @@
 // every party poke gets a slight boost.
 #define VAR_HAPPINESS_STEP_COUNTER          0x4021
 
-// Maybe unused?
+// Counts up every step while a party Pokemon is
+// poisoned. Wraps around at 5. When wraparound
+// occurs, every party Pokemon with the PSN status
+// takes 1 point of damage.
+// This is a deviation from the typical rate in
+// the series, which is 1 damage every 4 steps.
 #define VAR_POISON_STEP_COUNTER             0x4022
 
 // Step counter. Caps at 1500. If you enter a map with

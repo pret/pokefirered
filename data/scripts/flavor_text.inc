@@ -96,18 +96,18 @@ gUnknown_81A76D5:: @ 81A76D5
 	msgbox gUnknown_81C124B, MSGBOX_SIGN
 	end
 
-gUnknown_81A76DE:: @ 81A76DE
-	msgbox gUnknown_81C0ECB, MSGBOX_SIGN
+EventScript_PokemartSign:: @ 81A76DE
+	msgbox Text_PokemartSign, MSGBOX_SIGN
 	end
 
-gUnknown_81A76E7:: @ 81A76E7
-	msgbox gUnknown_81C0EF7, MSGBOX_SIGN
+EventScript_PokecenterSign:: @ 81A76E7
+	msgbox Text_PokecenterSign, MSGBOX_SIGN
 	end
 
-gUnknown_81A76F0:: @ 81A76F0
-	msgbox gUnknown_81C0F19, MSGBOX_SIGN
+EventScript_Indigo_UltimateGoal:: @ 81A76F0
+	msgbox Text_Indigo_UltimateGoal, MSGBOX_SIGN
 	end
 
-gUnknown_81A76F9:: @ 81A76F9
-	msgbox gUnknown_81C0F59, MSGBOX_SIGN
+EventScript_Indigo_HighestAuthority:: @ 81A76F9
+	msgbox Text_Indigo_HighestAuthority, MSGBOX_SIGN
 	end

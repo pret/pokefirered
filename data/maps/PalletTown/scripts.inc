@@ -450,7 +450,7 @@ PalletTown_EventScript_SignLadyShowSign:: @ 8165894
 	setflag FLAG_OPENED_START_MENU
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	setvar SIGN_LADY_READY, FALSE
-	special sub_80699E0
+	special SetWalkingIntoSignVars
 	special sub_80699BC
 	signmsg
 	msgbox PalletTown_Text_PressStartToOpenMenuCopy

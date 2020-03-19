@@ -30,20 +30,20 @@ gUnknown_81C0E73:: @ 81C0E73
 gUnknown_81C0EAC:: @ 81C0EAC
 	.string "There's a pile of snacks here.$"
 
-gUnknown_81C0ECB:: @ 81C0ECB
+Text_PokemartSign:: @ 81C0ECB
 	.string "All your item needs fulfilled!\n"
 	.string "POKéMON MART$"
 
-gUnknown_81C0EF7:: @ 81C0EF7
+Text_PokecenterSign:: @ 81C0EF7
 	.string "Heal Your POKéMON!\n"
 	.string "POKéMON CENTER$"
 
-gUnknown_81C0F19:: @ 81C0F19
+Text_Indigo_UltimateGoal:: @ 81C0F19
 	.string "INDIGO PLATEAU\p"
 	.string "The ultimate goal of TRAINERS!\n"
 	.string "POKéMON LEAGUE HQ$"
 
-gUnknown_81C0F59:: @ 81C0F59
+Text_Indigo_HighestAuthority:: @ 81C0F59
 	.string "INDIGO PLATEAU\p"
 	.string "The highest POKéMON authority!\n"
 	.string "POKéMON LEAGUE HQ$"

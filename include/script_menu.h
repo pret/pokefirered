@@ -15,6 +15,6 @@ void ScriptMenu_DisplayPCStartupPrompt(void);
 
 bool8 (*ScriptMenu_GetPicboxWaitFunc(void))(void);
 void QLPlaybackCB_DestroyScriptMenuMonPicSprites(void);
-void sub_809D424(void);
+void PicboxCancel(void);
 
 #endif //GUARD_SCRIPT_MENU_H

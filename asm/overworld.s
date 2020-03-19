@@ -3265,7 +3265,7 @@ sub_805644C: @ 805644C
 	adds r2, r4, 0
 	bl FieldGetPlayerInput
 	mov r0, sp
-	bl sub_806CD30
+	bl FieldInput_HandleCancelSignpost
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
@@ -3278,7 +3278,7 @@ sub_805644C: @ 805644C
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0805649E
-	ldr r0, _080564AC @ =gUnknown_3005078
+	ldr r0, _080564AC @ =gInputToStoreInQuestLogMaybe
 	bl sub_81127F8
 _0805649E:
 	bl ScriptContext2_Enable
@@ -3286,7 +3286,7 @@ _0805649E:
 	b _080564BA
 	.align 2, 0
 _080564A8: .4byte gUnknown_3005E88
-_080564AC: .4byte gUnknown_3005078
+_080564AC: .4byte gInputToStoreInQuestLogMaybe
 _080564B0:
 	ldrb r0, [r6, 0x2]
 	adds r1, r5, 0
@@ -3313,7 +3313,7 @@ sub_80564C8: @ 80564C8
 	ldr r0, [r0]
 	str r0, [sp]
 	mov r0, sp
-	bl sub_806CD30
+	bl FieldInput_HandleCancelSignpost
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0

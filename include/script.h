@@ -65,22 +65,22 @@ void sub_80992A0(u8 *script, u16 scriptSize);
 bool32 ValidateRamScript(void);
 void MEventSetRamScript(u8 * script, u16 scriptSize);
 u8 * sub_8069E48(void);
-void sub_8069998(u8 var);
-void sub_80699F8(void);
-void sub_8069964(void);
-void sub_80699A4(void);
-void sub_8069970(void);
-void sub_8069A20(void);
-void sub_8069A2C(void);
+void RegisterQuestLogInput(u8 var);
+void ClearMsgBoxCancelableState(void);
+void SetQuestLogInputIsDpadFlag(void);
+void ClearQuestLogInput(void);
+void ClearQuestLogInputIsDpadFlag(void);
+void MsgSetSignPost(void);
+void MsgSetNotSignPost(void);
 bool8 IsMsgSignPost(void);
-bool8 sub_806997C(void);
-u8 sub_80699B0(void);
-void sub_8069A54(void);
-bool8 sub_8069A04(void);
-void sub_80699E0(void);
+bool8 IsQuestLogInputDpad(void);
+u8 GetRegisteredQuestLogInput(void);
+void ResetFacingNpcOrSignPostVars(void);
+bool8 CanWalkAwayToCancelMsgBox(void);
+void SetWalkingIntoSignVars(void);
 bool8 sub_80699D4(void);
 
 extern const u8 *gRAMScriptPtr;
-extern u8 gUnknown_20370A0;
+extern u8 gWalkAwayFromSignInhibitTimer;
 
 #endif // GUARD_SCRIPT_H

@@ -78,6 +78,7 @@ u8 sub_80699B0(void);
 void sub_8069A54(void);
 bool8 sub_8069A04(void);
 void sub_80699E0(void);
+bool8 sub_80699D4(void);
 
 extern const u8 *gRAMScriptPtr;
 extern u8 gUnknown_20370A0;

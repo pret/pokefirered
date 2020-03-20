@@ -30,6 +30,7 @@ struct PokemonSpecialAnim
     /*0x00a8*/ u8 field_00a8[0x2834];
 }; // size=0x28dc
 
+EWRAM_DATA bool32 gUnknown_203B090 = FALSE;
 EWRAM_DATA u8 gUnknown_203B094 = 0;
 
 struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback callback);
@@ -54,11 +55,17 @@ void sub_811D4D4(void);
 bool8 sub_811D4EC(void);
 void sub_811D4FC(void);
 bool8 sub_811D530(void);
+void sub_811D5A0(void);
+void sub_811D5B0(void);
+bool8 sub_811D5C0(void);
+void sub_811D6EC(void);
+bool8 sub_811D6FC(void);
 bool8 sub_811D754(void);
 void sub_811D830(u8 a0);
 void sub_811D948(u8 closeness);
 bool8 sub_811D9A8(void);
 void sub_811DC54(u16 itemId, u8 closeness, u8 a2);
+void sub_811DCF0(u16 itemId);
 bool8 sub_811DD90(void);
 void sub_811E040(void);
 
@@ -407,6 +414,227 @@ void sub_811CA20(u8 taskId)
         break;
     case 13:
         sub_811C718(taskId, sub_811CE4C);
+        break;
+    }
+}
+
+void sub_811CBE4(u8 taskId)
+{
+    struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
+
+    if (!ptr->cancelDisabled && JOY_HELD(B_BUTTON))
+    {
+        sub_811C718(taskId, sub_811CF88);
+        return;
+    }
+
+    switch (ptr->state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D830(0);
+        ptr->state++;
+        break;
+    case 1:
+        if (!sub_811D280())
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            ptr->state++;
+            SetVBlankCallback(sub_811C6E8);
+        }
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+        {
+            ptr->state++;
+        }
+        break;
+    case 3:
+        sub_811D948(ptr->closeness);
+        ptr->state++;
+        break;
+    case 4:
+        sub_811DC54(ptr->itemId, ptr->closeness, 0);
+        ptr->state++;
+        break;
+    case 5:
+        if (!sub_811DD90())
+        {
+            sub_811D2A8();
+            ptr->state++;
+        }
+        break;
+    case 6:
+        sub_811D2EC(8);
+        ptr->state++;
+        break;
+    case 7:
+        if (!sub_811D4EC())
+        {
+            ptr->cancelDisabled = TRUE;
+            ptr->state++;
+        }
+        break;
+    case 8:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+            ptr->state++;
+        }
+        break;
+    case 9:
+        if (!gPaletteFade.active)
+        {
+            SetMainCallback2(ptr->savedCallback);
+            sub_811D29C();
+            Free(ptr);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_811CD68(u8 taskId)
+{
+    struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        sub_811C718(taskId, sub_811CF88);
+        return;
+    }
+
+    switch (ptr->state)
+    {
+    case 0:
+        SetVBlankCallback(NULL);
+        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D830(3);
+        ptr->state++;
+        break;
+    case 1:
+        if (!sub_811D280())
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            ptr->state++;
+            SetVBlankCallback(sub_811C6E8);
+        }
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+        {
+            ptr->field_009e = 0;
+            ptr->state++;
+        }
+        break;
+    case 3:
+        ptr->field_009e++;
+        if (ptr->field_009e > 20)
+        {
+            sub_811C718(taskId, sub_811CE4C);
+        }
+        break;
+    }
+}
+
+void sub_811CE4C(u8 taskId)
+{
+    struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
+
+    if (!ptr->cancelDisabled && JOY_NEW(B_BUTTON))
+    {
+        sub_811D5B0();
+        sub_811C718(taskId, sub_811CF88);
+        return;
+    }
+
+    switch (ptr->state)
+    {
+    case 0:
+        sub_811DCF0(ptr->itemId);
+        ptr->field_009e = 0;
+        ptr->state++;
+        break;
+    case 1:
+        sub_811D2A8();
+        sub_811D2EC(7);
+        ptr->state++;
+        break;
+    case 2:
+        if (!sub_811D4EC())
+        {
+            sub_811D2D0();
+            ptr->state++;
+        }
+        break;
+    case 3:
+        sub_811D6EC();
+        ptr->state++;
+        break;
+    case 4:
+        if (!sub_811D6FC())
+        {
+            ptr->state++;
+        }
+        break;
+    case 5:
+        sub_811D5A0();
+        ptr->state++;
+        break;
+    case 6:
+        if (!sub_811D5C0())
+        {
+            ptr->field_009e = 0;
+            ptr->state++;
+        }
+        break;
+    case 7:
+        ptr->field_009e++;
+        if (ptr->field_009e > 30)
+        {
+            sub_811D2A8();
+            sub_811D2EC(9);
+            ptr->state++;
+        }
+        break;
+    case 8:
+        if (!sub_811D4EC())
+        {
+            PlayFanfare(MUS_FANFA1);
+            ptr->cancelDisabled = TRUE;
+            ptr->state++;
+        }
+        break;
+    case 9:
+        if (IsFanfareTaskInactive())
+        {
+            sub_811C718(taskId, sub_811CF88);
+        }
+        break;
+    }
+}
+
+void sub_811CF88(u8 taskId)
+{
+    struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
+
+    switch (ptr->state)
+    {
+    case 0:
+        SetVBlankCallback(sub_811C6E8);
+        BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
+        ptr->state++;
+        break;
+    case 1:
+        if (!gPaletteFade.active && (ptr->field_00a4 != 1 || IsCryFinished()))
+        {
+            gUnknown_203B090 = ptr->cancelDisabled;
+            SetMainCallback2(ptr->savedCallback);
+            DestroyTask(taskId);
+            sub_811D29C();
+            Free(ptr);
+        }
         break;
     }
 }

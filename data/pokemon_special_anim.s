@@ -6,10 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_8459634:: @ 8459634 data16 2x2
-	.2byte 0x0044, 0x0000
-	.2byte 0x000d, 0x0001
-
 gUnknown_845963C:: @ 845963C gbapal
 	.incbin "graphics/pokemon_special_anim/unk_845963C.gbapal"
 

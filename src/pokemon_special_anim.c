@@ -2,36 +2,18 @@
 #include "gflib.h"
 #include "data.h"
 #include "party_menu.h"
+#include "pokemon_special_anim_internal.h"
 #include "item_use.h"
 #include "task.h"
 #include "constants/songs.h"
+#include "constants/items.h"
 
 // Functions related to the special anims Pokemon
 // make when using an item on them in the field.
 
-struct PokemonSpecialAnim
-{
-    /*0x0000*/ u8 filler_0000[0x4];
-    /*0x0004*/ MainCallback savedCallback;
-    /*0x0008*/ struct Pokemon pokemon;
-    /*0x006c*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0077*/ u8 nameOfMoveForgotten[13];
-    /*0x0084*/ u8 nameOfMoveToTeach[13];
-    /*0x0091*/ bool8 cancelDisabled;
-    /*0x0092*/ u16 state;
-    /*0x0094*/ u16 species;
-    /*0x0096*/ u16 itemId;
-    /*0x0098*/ u16 animType;
-    /*0x009a*/ u16 slotId;
-    /*0x009c*/ u16 closeness;
-    /*0x009e*/ u16 field_009e;
-    /*0x00a0*/ u32 personality;
-    /*0x00a4*/ u32 field_00a4;
-    /*0x00a8*/ u8 field_00a8[0x2834];
-}; // size=0x28dc
-
 EWRAM_DATA bool32 gUnknown_203B090 = FALSE;
 EWRAM_DATA u8 gUnknown_203B094 = 0;
+EWRAM_DATA struct PokemonSpecialAnim * gUnknown_203B098 = NULL;
 
 struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback callback);
 void sub_811C748(struct PokemonSpecialAnim * ptr);
@@ -45,29 +27,6 @@ void sub_811CE4C(u8 taskId);
 void sub_811CF88(u8 taskId);
 u8 sub_811D058(u16 friendship);
 u16 sub_811D018(u16 itemId);
-void sub_811D184(u8 *buffer, u16 animType);
-bool8 sub_811D280(void);
-void sub_811D29C(void);
-void sub_811D2A8(void);
-void sub_811D2D0(void);
-void sub_811D2EC(u8 a0);
-void sub_811D4D4(void);
-bool8 sub_811D4EC(void);
-void sub_811D4FC(void);
-bool8 sub_811D530(void);
-void sub_811D5A0(void);
-void sub_811D5B0(void);
-bool8 sub_811D5C0(void);
-void sub_811D6EC(void);
-bool8 sub_811D6FC(void);
-bool8 sub_811D754(void);
-void sub_811D830(u8 a0);
-void sub_811D948(u8 closeness);
-bool8 sub_811D9A8(void);
-void sub_811DC54(u16 itemId, u8 closeness, u8 a2);
-void sub_811DCF0(u16 itemId);
-bool8 sub_811DD90(void);
-void sub_811E040(void);
 
 void sub_811C540(u8 slotId, u16 itemId, MainCallback callback)
 {
@@ -637,4 +596,113 @@ void sub_811CF88(u8 taskId)
         }
         break;
     }
+}
+
+const struct {
+    u16 itemId;
+    u16 animType;
+} gUnknown_8459634[2] = {
+    {ITEM_RARE_CANDY, 0},
+    {ITEM_POTION,     1}
+};
+
+u16 sub_811D018(u16 itemId)
+{
+    int i;
+
+    for (i = 0; i < NELEMS(gUnknown_8459634); i++)
+    {
+        if (gUnknown_8459634[i].itemId == itemId)
+            return gUnknown_8459634[i].animType;
+    }
+
+    if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
+    {
+        return 4;
+    }
+
+    return 0;
+}
+
+u8 sub_811D058(u16 friendship)
+{
+    if (friendship <= 100)
+        return 0;
+    else if (friendship <= 150)
+        return 1;
+    else if (friendship <= 200)
+        return 2;
+    else
+        return 3;
+}
+
+struct PokemonSpecialAnim * sub_811D080(void)
+{
+    return (void *)GetWordTaskArg(gUnknown_203B094, 0);
+}
+
+struct Pokemon * sub_811D094(void)
+{
+    gUnknown_203B098 = sub_811D080();
+    return &gUnknown_203B098->pokemon;
+}
+
+u8 *sub_811D0A8(void)
+{
+    return sub_811D080()->field_00a8;
+}
+
+u16 sub_811D0B4(void)
+{
+    return sub_811D080()->itemId;
+}
+
+u8 *sub_811D0C4(void)
+{
+    return sub_811D080()->nameOfMoveForgotten;
+}
+
+u8 *sub_811D0D0(void)
+{
+    return sub_811D080()->nameOfMoveToTeach;
+}
+
+u8 *sub_811D0DC(u8 *dest)
+{
+    return StringCopy(dest, sub_811D080()->nickname);
+}
+
+u8 *sub_811D0F4(void)
+{
+    return sub_811D080()->nickname;
+}
+
+u8 sub_811D100(void)
+{
+    return sub_811D080()->animType;
+}
+
+u16 sub_811D110(void)
+{
+    return sub_811D080()->species;
+}
+
+u32 sub_811D120(void)
+{
+    return sub_811D080()->personality;
+}
+
+void BufferMonStatsToTaskData(struct Pokemon * pokemon, u16 *data)
+{
+    data[0] = GetMonData(pokemon, MON_DATA_MAX_HP);
+    data[1] = GetMonData(pokemon, MON_DATA_ATK);
+    data[2] = GetMonData(pokemon, MON_DATA_DEF);
+    data[3] = GetMonData(pokemon, MON_DATA_SPEED);
+    data[4] = GetMonData(pokemon, MON_DATA_SPATK);
+    data[5] = GetMonData(pokemon, MON_DATA_SPDEF);
+}
+
+bool32 sub_811D178(void)
+{
+    return gUnknown_203B090;
 }

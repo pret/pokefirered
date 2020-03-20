@@ -261,18 +261,8 @@ gPlayerAvatar: @ 2037078
 	.include "src/rfu_union_tool.o"
 	.align 2
 	.include "src/union_room_battle.o"
-
 	.align 2
-	@ .include "src/pokemon_special_anim.o"
-gUnknown_203B090: @ 203B090
-	.space 0x4
-
-gUnknown_203B094: @ 203B094
-	.space 0x4
-
-gUnknown_203B098: @ 203B098
-	.space 0x4
-
+	.include "src/pokemon_special_anim.o"
 	.align 2
 	.include "src/party_menu.o"
 	.align 2

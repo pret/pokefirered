@@ -1,12 +1,23 @@
 #include "global.h"
 #include "gflib.h"
+#include "dynamic_placeholder_text_util.h"
+#include "item.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "pokemon_special_anim_internal.h"
 #include "strings.h"
 #include "text_window.h"
+#include "constants/songs.h"
 
 void sub_811D7D4(u16 animType);
+void sub_811DB7C(struct PokemonSpecialAnimScene * scene, u8 a1, u8 a2, u8 a3);
+void sub_811DBA8(struct PokemonSpecialAnimScene * scene);
+void sub_811E194(u8 a0);
+void sub_811E204(struct PokemonSpecialAnimScene * scene);
+bool8 sub_811E2F4(void);
+void sub_811E348(struct PokemonSpecialAnimScene * scene);
+void sub_811E388(void);
+bool32 sub_811E5A4(void);
 
 const u16 gUnknown_845963C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845963C.gbapal");
 const u16 gUnknown_845965C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845965C.gbapal");
@@ -113,4 +124,195 @@ void sub_811D2D0(void)
     ClearWindowTilemap(0);
     ClearStdWindowAndFrameToTransparent(0, FALSE);
     CopyWindowToVram(0, 1);
+}
+
+void sub_811D2EC(u8 a0)
+{
+    // a0 --> r5
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8(); // r4
+    u16 itemId = sub_811D0B4(); // r7
+    u16 strWidth = 0; // r8
+    u8 textSpeed = GetTextSpeedSetting(); // r9
+    struct Pokemon * pokemon = sub_811D094(); // r6
+    u16 level;
+    u8 *str;
+
+    switch (a0)
+    {
+    case 0: // Item was used on Mon
+        str = StringCopy(scene->field_0014, ItemId_GetName(itemId));
+        str = StringCopy(str, gUnknown_841B285);
+        GetMonData(pokemon, MON_DATA_NICKNAME, str);
+        StringAppend(scene->field_0014, gUnknown_841B293);
+        break;
+    case 1: // Mon's level was elevated to level
+        level = GetMonData(pokemon, MON_DATA_LEVEL);
+        GetMonData(pokemon, MON_DATA_NICKNAME, scene->field_0014);
+        str = StringAppend(scene->field_0014, gUnknown_841B295);
+        if (level < MAX_LEVEL)
+            level++;
+        str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, level < MAX_LEVEL ? 2 : 3);
+        StringAppend(str, gUnknown_841B2A7);
+        break;
+    case 9: // Mon learned move
+        DynamicPlaceholderTextUtil_Reset();
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sub_811D0F4());
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sub_811D0D0());
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->field_0014, gUnknown_841B32E);
+        break;
+    case 4: //  poof!
+        strWidth += GetStringWidth(2, gUnknown_841B2F1, -1);
+        // fallthrough
+    case 3: // 2 and...
+        strWidth += GetStringWidth(2, gUnknown_841B2ED, -1);
+        // fallthrough
+    case 2: // 1
+        StringCopy(scene->field_0014, gUnknown_8459998[a0 - 2]);
+        textSpeed = 1;
+        break;
+    case 5: // Mon forgot move
+        DynamicPlaceholderTextUtil_Reset();
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sub_811D0F4());
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sub_811D0C4());
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->field_0014, gUnknown_841B306);
+        break;
+    case 6: // And...
+        StringCopy(scene->field_0014, gUnknown_841B315);
+        break;
+    case 7: // Machine set!
+        StringCopy(scene->field_0014, gUnknown_841B31B);
+        break;
+    case 8: // Huh?
+        StringCopy(scene->field_0014, gUnknown_841B329);
+        break;
+    default:
+        return;
+    }
+
+    AddTextPrinterParameterized5(0, 2, scene->field_0014, strWidth, 0, textSpeed, NULL, 0, 4);
+}
+
+void sub_811D4D4(void)
+{
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    CopyWindowToVram(0, 2);
+}
+
+bool8 sub_811D4EC(void)
+{
+    return IsTextPrinterActive(0);
+}
+
+void sub_811D4FC(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    scene->field_0000 = 0;
+    BlendPalettes((0x10000 << IndexOfSpritePaletteTag(0)) | 4, 16, RGB_BLACK);
+    sub_811E204(scene);
+}
+
+bool8 sub_811D530(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+
+    switch (scene->field_0000)
+    {
+    case 0:
+        if (!sub_811E2F4())
+        {
+            BeginNormalPaletteFade((0x10000 << IndexOfSpritePaletteTag(0)) | 4, -1, 16, 0, RGB_BLACK);
+            scene->field_0000++;
+        }
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+            return FALSE;
+        break;
+    }
+    return TRUE;
+}
+
+void sub_811D5A0(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    scene->field_0000 = 0;
+}
+
+void sub_811D5B0(void)
+{
+    sub_811E388();
+    ResetPaletteFadeControl();
+}
+
+bool8 sub_811D5C0(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    switch (scene->field_0000)
+    {
+    case 0:
+        sub_811E194(0);
+        scene->field_0000++;
+        break;
+    case 1:
+        if (!sub_811D9A8())
+        {
+            scene->field_0004 = 0;
+            scene->field_0000++;
+        }
+        break;
+    case 2:
+        scene->field_0004++;
+        if (scene->field_0004 > 20)
+            scene->field_0000++;
+        break;
+    case 3:
+        sub_811DB7C(scene, 1, 0, 1);
+        scene->field_0004 = 0;
+        scene->field_0000++;
+        break;
+    case 4:
+        scene->field_0004++;
+        if (scene->field_0004 > 0)
+        {
+            scene->field_0004 = 0;
+            PlaySE(SE_W025);
+            BeginNormalPaletteFade(0x00000001, 2, 0, 12, RGB(8, 13, 31));
+            sub_811E348(scene);
+            scene->field_0000++;
+        }
+        break;
+    case 5:
+        scene->field_0004++;
+        if (scene->field_0004 > 70)
+        {
+            sub_811DBA8(scene);
+            BeginNormalPaletteFade(0x00000001, 6, 12, 0, RGB(8, 13, 31));
+            scene->field_0004 = 0;
+            scene->field_0000++;
+        }
+        break;
+    case 6:
+        scene->field_0004++;
+        if (!sub_811E5A4() && scene->field_0004 > 40)
+        {
+            scene->field_0004 = 0;
+            scene->field_0000++;
+        }
+        break;
+    case 7:
+        scene->field_0004++;
+        if (scene->field_0004 > 20)
+        {
+            scene->field_0000++;
+        }
+        break;
+    case 8:
+        PlaySE(SE_EXPMAX);
+        DestroySprite(scene->field_0010);
+        scene->field_0000++;
+        break;
+    default:
+        return FALSE;
+    }
+    return TRUE;
 }

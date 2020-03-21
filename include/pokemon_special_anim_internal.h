@@ -5,7 +5,12 @@
 
 struct PokemonSpecialAnimScene
 {
-    u8 filler_0000[0x914];
+    u16 field_0000;
+    u8 filler_0002[2];
+    u16 field_0004;
+    u8 filler_0006[0xA];
+    struct Sprite * field_0010;
+    u8 field_0014[0x900];
     u8 field_0914[BG_SCREEN_SIZE];
     u8 field_1114[BG_SCREEN_SIZE];
     u8 field_1914[BG_SCREEN_SIZE];
@@ -32,6 +37,20 @@ struct PokemonSpecialAnim
     /*0x00a4*/ u32 field_00a4;
     /*0x00a8*/ struct PokemonSpecialAnimScene field_00a8;
 }; // size=0x28dc
+
+struct PokemonSpecialAnim * sub_811D080(void);
+struct Pokemon * sub_811D094(void);
+struct PokemonSpecialAnimScene * sub_811D0A8(void);
+u16 sub_811D0B4(void);
+u8 *sub_811D0C4(void);
+u8 *sub_811D0D0(void);
+u8 *sub_811D0DC(u8 *dest);
+u8 *sub_811D0F4(void);
+u8 sub_811D100(void);
+u16 sub_811D110(void);
+u32 sub_811D120(void);
+void BufferMonStatsToTaskData(struct Pokemon * pokemon, u16 *data);
+bool32 sub_811D178(void);
 
 void sub_811D184(struct PokemonSpecialAnimScene * buffer, u16 animType);
 bool8 sub_811D280(void);

@@ -6,7 +6,7 @@
 struct PokemonSpecialAnimScene
 {
     u16 field_0000;
-    u8 filler_0002[2];
+    u16 field_0002;
     u16 field_0004;
     u16 field_0006;
     u16 field_0008;

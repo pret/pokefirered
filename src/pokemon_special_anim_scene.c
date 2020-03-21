@@ -30,16 +30,22 @@ void sub_811DF14(u8 taskId, s16 *data, struct Sprite * sprite);
 void sub_811DFC0(struct Sprite * sprite);
 void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness);
 void sub_811E10C(void);
+void sub_811E128(struct Sprite * sprite);
 bool8 sub_811E138(void);
+void sub_811E154(struct Sprite * sprite);
 void sub_811E194(u8 a0);
 void sub_811E204(struct PokemonSpecialAnimScene * scene);
 bool8 sub_811E2F4(void);
 void sub_811E300(struct Sprite * sprite);
 void sub_811E348(struct PokemonSpecialAnimScene * scene);
 void sub_811E388(void);
+void sub_811E3B4(u8 taskId);
+u16 sub_811E4EC(u8 taskId);
 void sub_811E520(struct Sprite * sprite);
 void sub_811E588(void);
 bool32 sub_811E5A4(void);
+void sub_811E694(u8 taskId);
+void sub_811E710(u8 taskId, s16 *data);
 void sub_811E7B4(struct Sprite * sprite);
 
 const u16 gUnknown_845963C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845963C.gbapal");
@@ -102,8 +108,10 @@ const u16 gUnknown_84599AA[] = {
     0x200
 };
 
-const s8 gUnknown_84599B2[] = {
-    -8, -8, 6, -13, 8, -8
+const s8 gUnknown_84599B2[][2] = {
+    {-8,  -8},
+    { 6, -13},
+    { 8,  -8}
 };
 
 const struct CompressedSpriteSheet gUnknown_84599B8 = {
@@ -996,5 +1004,411 @@ void sub_811E040(void)
     if (taskId != 0xFF)
     {
         gTasks[taskId].data[11] = TRUE;
+    }
+}
+
+void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
+{
+    u16 species;
+    u32 personality;
+    register int r4 asm("r4"); // FIXME
+    u8 r0;
+    if (closeness == 3)
+    {
+        sprite->pos1.x = 120;
+        sprite->pos1.y = scene->field_0008;
+    }
+    else
+    {
+        sprite->pos1.x = 120;
+        sprite->pos1.y = scene->field_0006;
+    }
+    sprite->pos1.x += 4;
+    sprite->pos1.y += 4;
+    species = sub_811D110();
+    personality = sub_811D120();
+    if (sub_811D100() == 4)
+    {
+        r4 = sub_812EA78(species, personality, 0);
+        r0 = sub_812EA78(species, personality, 1);
+    }
+    else
+    {
+        r4 = sub_812EA78(species, personality, 3);
+        r0 = sub_812EA78(species, personality, 4);
+    }
+    if (r4 == 0xFF)
+        r4 = 0;
+    if (r0 == 0xFF)
+        r0 = 0;
+    sprite->data[6] = r4;
+    sprite->data[7] = r0;
+    sub_811DB48(sprite, closeness);
+}
+
+void sub_811E10C(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    sub_811E128(scene->field_000c);
+    sub_811E128(scene->field_0010);
+}
+
+void sub_811E128(struct Sprite * sprite)
+{
+    sprite->data[0] = 0;
+    sprite->data[1] = 0;
+    sprite->callback = sub_811E154;
+}
+
+bool8 sub_811E138(void)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    return scene->field_000c->callback != SpriteCallbackDummy;
+}
+
+void sub_811E154(struct Sprite * sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        sprite->pos1.x += 3;
+        sprite->data[0]++;
+        break;
+    case 1:
+        sprite->data[1]++;
+        if (sprite->data[1] > 30)
+        {
+            sprite->pos1.x -= 3;
+            sprite->callback = SpriteCallbackDummy;
+        }
+        break;
+    }
+}
+
+void sub_811E194(u8 a0)
+{
+    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    u8 taskId;
+    if (a0 != scene->field_000a)
+    {
+        taskId = CreateTask(sub_811D9BC, 1);
+        SetWordTaskArg(taskId, 6, (uintptr_t)scene->field_000c);
+        SetWordTaskArg(taskId, 9, (uintptr_t)scene->field_0010);
+        gTasks[taskId].data[1] = scene->field_000a;
+        gTasks[taskId].data[2] = a0;
+        gTasks[taskId].data[8] = 1;
+        gTasks[taskId].data[5] = 6;
+        if (a0 > scene->field_000a)
+            gTasks[taskId].data[3] = 1;
+        else
+            gTasks[taskId].data[3] = -1;
+    }
+}
+
+void sub_811E204(struct PokemonSpecialAnimScene * scene)
+{
+    int i;
+    u8 spriteId;
+    u16 species;
+    u32 personality;
+    LoadCompressedSpriteSheet(&gUnknown_84599B8);
+    LoadSpritePalette(&gUnknown_84599C0);
+    scene->field_0002 = 0;
+    for (i = 0; i < 3; i++)
+    {
+        spriteId = CreateSprite(&gUnknown_8459AEC, 120 + gUnknown_84599B2[i][0],  scene->field_0008 + gUnknown_84599B2[i][1], 2);
+        if (spriteId != MAX_SPRITES)
+        {
+            species = sub_811D110();
+            personality = sub_811D120();
+            gSprites[spriteId].data[3] = gUnknown_84599B2[i][0] * 8;
+            gSprites[spriteId].data[4] = gUnknown_84599B2[i][1] * 8;
+            gSprites[spriteId].pos1.x += sub_811DAC0(sub_812EAE4(species, personality, 0), 3);
+            gSprites[spriteId].pos1.y += sub_811DAC0(sub_812EAE4(species, personality, 1), 3);
+            scene->field_0002++;
+        }
+    }
+}
+
+u8 sub_811E2F4(void)
+{
+    return sub_811D0A8()->field_0002;
+}
+
+void sub_811E300(struct Sprite * sprite)
+{
+    sprite->data[0]++;
+    if (sprite->data[0] < 10)
+    {
+        sprite->data[1] += sprite->data[3];
+        sprite->data[2] += sprite->data[4];
+        sprite->pos2.x = sprite->data[1] >> 4;
+        sprite->pos2.y = sprite->data[2] >> 4;
+    }
+    else
+    {
+        sub_811D0A8()->field_0002--;
+        DestroySprite(sprite);
+    }
+}
+
+void sub_811E348(struct PokemonSpecialAnimScene * scene)
+{
+    u8 taskId;
+    sub_811E588();
+    taskId = CreateTask(sub_811E3B4, 1);
+    SetWordTaskArg(taskId, 3, 2022069025);
+    gTasks[taskId].data[5] = 224;
+}
+
+void sub_811E388(void)
+{
+    u8 taskId = FindTaskIdByFunc(sub_811E3B4);
+    if (taskId != 0xFF)
+        gTasks[taskId].data[0] = 1;
+}
+
+void sub_811E3B4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Sprite * sprite;
+    int x;
+    register int y asm("r10"); // FIXME
+    int x2;
+    int y2;
+    int r0;
+    u8 spriteId;
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] == 0)
+        {
+            sprite = sub_811D0A8()->field_0010;
+            x = sprite->pos1.x + sprite->pos2.x;
+            y = sprite->pos1.y + sprite->pos2.y;
+            r0 = (sub_811E4EC(taskId) % 21) + 70;
+            x2 = x + ((u32)(gSineTable[data[5] + 0x40] * r0) >> 8);
+            y2 = y + ((u32)(gSineTable[data[5]       ] * r0) >> 8);
+            data[5] += 76;
+            data[5] &= 0xFF;
+            spriteId = CreateSprite(&gUnknown_8459B30, x2, y2, 0);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].data[0] = 0;
+                gSprites[spriteId].data[1] = (sub_811E4EC(taskId) & 1) + 6;
+                gSprites[spriteId].data[2] = x2;
+                gSprites[spriteId].data[3] = y2;
+                gSprites[spriteId].data[4] = x;
+                gSprites[spriteId].data[5] = y;
+                gSprites[spriteId].data[6] = taskId;
+                data[2]++;
+            }
+            data[6]++;
+            if (data[6] > 47)
+                data[0]++;
+        }
+        else
+            data[1]--;
+        break;
+    case 1:
+        if (data[2] == 0)
+            DestroyTask(taskId);
+        break;
+    }
+}
+
+u16 sub_811E4EC(u8 taskId)
+{
+    u32 state = GetWordTaskArg(taskId, 3);
+    state = state * 1103515245 + 24691;
+    SetWordTaskArg(taskId, 3, state);
+    return state >> 16;
+}
+
+void sub_811E520(struct Sprite * sprite)
+{
+    int x;
+    int y;
+    sprite->data[0] += sprite->data[1];
+    if (sprite->data[0] > 255)
+    {
+        gTasks[sprite->data[6]].data[2]--;
+        DestroySprite(sprite);
+    }
+    else
+    {
+        x = (sprite->data[4] - sprite->data[2]) * sprite->data[0];
+        y = (sprite->data[5] - sprite->data[3]) * sprite->data[0];
+        sprite->pos1.x = (x >> 8) + sprite->data[2];
+        sprite->pos1.y = (y >> 8) + sprite->data[3];
+    }
+}
+
+void sub_811E588(void)
+{
+    LoadCompressedSpriteSheet(&gUnknown_84599C8);
+    LoadSpritePalette(&gUnknown_84599D0);
+}
+
+bool32 sub_811E5A4(void)
+{
+    return FuncIsActiveTask(sub_811E3B4);
+}
+
+void sub_811E5B8(u16 a0, u16 a1, u16 a2, u16 a3, u16 a4, u16 a5)
+{
+    static struct CompressedSpriteSheet gUnknown_3002030;
+    static struct SpritePalette gUnknown_3002038;
+    u8 taskId;
+    gUnknown_3002030.tag = a2;
+    gUnknown_3002030.data = gUnknown_8459888;
+    gUnknown_3002030.size = gUnknown_8459888[0] >> 8;
+    gUnknown_3002038.data = gUnknown_8459868;
+    gUnknown_3002038.tag = a3;
+    LoadCompressedSpriteSheet(&gUnknown_3002030);
+    LoadSpritePalette(&gUnknown_3002038);
+    taskId = CreateTask(sub_811E694, 0);
+    gTasks[taskId].data[4] = a0 - 32;
+    gTasks[taskId].data[5] = a1 + 32;
+    gTasks[taskId].data[6] = a2;
+    gTasks[taskId].data[7] = a3;
+    gTasks[taskId].data[8] = a4;
+    gTasks[taskId].data[9] = a5;
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_NONE  | BLDCNT_TGT2_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
+}
+
+bool8 sub_811E680(void)
+{
+    return FuncIsActiveTask(sub_811E694);
+}
+
+void sub_811E694(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    switch (data[0])
+    {
+    case 0:
+        if (data[3] == 0)
+        {
+            data[3]++;
+            sub_811E710(taskId, data);
+            if (data[2] > 17)
+                data[0]++;
+        }
+        else
+        {
+            data[3]++;
+            if (data[3] == 2)
+                data[3] = 0;
+        }
+        break;
+    case 1:
+        if (data[1] == 0)
+        {
+            FreeSpriteTilesByTag(data[6]);
+            FreeSpritePaletteByTag(data[7]);
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+void sub_811E710(u8 taskId, s16 *data)
+{
+    u8 spriteId;
+    struct SpriteTemplate template = gUnknown_8459ACC;
+    template.tileTag = data[6];
+    template.paletteTag = data[7];
+    data[2]++;
+    spriteId = CreateSprite(&template, ((data[2] * 219) & 0x3F) + data[4], data[5], data[9]);
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].oam.priority = data[8];
+        gSprites[spriteId].data[1] = 0;
+        gSprites[spriteId].data[2] = ((data[2] * 1103515245 + 24691) & 0x3F) + 0x20;
+        gSprites[spriteId].data[7] = taskId;
+        data[1]++;
+    }
+}
+
+void sub_811E7B4(struct Sprite * sprite)
+{
+    sprite->data[1] -= sprite->data[2];
+    sprite->pos2.y = sprite->data[1] >> 4;
+    if (sprite->pos2.y < -0x40)
+    {
+        gTasks[sprite->data[7]].data[1]--;
+        DestroySprite(sprite);
+    }
+}
+
+void DrawLevelUpWindowPg1(u16 windowId, u16 *beforeStats, u16 *afterStats, u8 bgColor, u8 fgColor, u8 shadowColor)
+{
+    s16 diffStats[6];
+    u8 textbuf[12];
+    u8 textColor[3];
+    u16 i;
+    u8 x;
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
+
+    diffStats[0] = afterStats[0] - beforeStats[0];
+    diffStats[1] = afterStats[1] - beforeStats[1];
+    diffStats[2] = afterStats[2] - beforeStats[2];
+    diffStats[3] = afterStats[4] - beforeStats[4];
+    diffStats[4] = afterStats[5] - beforeStats[5];
+    diffStats[5] = afterStats[3] - beforeStats[3];
+
+    textColor[0] = bgColor;
+    textColor[1] = fgColor;
+    textColor[2] = shadowColor;
+
+    for (i = 0; i < 6; i++)
+    {
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, gUnknown_8459B48[i]);
+        StringCopy(textbuf, diffStats[i] >= 0 ? gUnknown_841B2DC : gUnknown_841B2E5);
+        AddTextPrinterParameterized3(windowId, 2, 56, i * 15, textColor, TEXT_SPEED_FF, textbuf);
+        textbuf[0] = CHAR_SPACE;
+        x = abs(diffStats[i]) < 10 ? 12 : 6;
+        ConvertIntToDecimalStringN(textbuf + 1, abs(diffStats[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
+        AddTextPrinterParameterized3(windowId, 2, x + 56, i * 15, textColor, TEXT_SPEED_FF, textbuf);
+    }
+}
+
+void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgColor, u8 fgColor, u8 shadowColor)
+{
+    s16 statsRearrange[6];
+    u8 textbuf[12];
+    u8 textColor[3];
+    u16 i;
+    u8 ndigits;
+    u16 x;
+
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(bgColor));
+
+    statsRearrange[0] = currStats[0];
+    statsRearrange[1] = currStats[1];
+    statsRearrange[2] = currStats[2];
+    statsRearrange[3] = currStats[4];
+    statsRearrange[4] = currStats[5];
+    statsRearrange[5] = currStats[3];
+
+    textColor[0] = bgColor;
+    textColor[1] = fgColor;
+    textColor[2] = shadowColor;
+
+    for (i = 0; i < 6; i++)
+    {
+        if (statsRearrange[i] >= 100)
+            ndigits = 3;
+        else if (statsRearrange[i] >= 10)
+            ndigits = 2;
+        else
+            ndigits = 1;
+        ConvertIntToDecimalStringN(textbuf, statsRearrange[i], STR_CONV_MODE_LEFT_ALIGN, ndigits);
+        x = 6 * (4 - ndigits);
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, gUnknown_8459B48[i]);
+        AddTextPrinterParameterized3(windowId, 2, 56 + x, i * 15, textColor, TEXT_SPEED_FF, textbuf);
     }
 }

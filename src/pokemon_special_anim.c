@@ -172,7 +172,7 @@ void sub_811C834(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D184(&ptr->field_00a8, ptr->animType);
         sub_811D830(0);
         ptr->state++;
         break;
@@ -282,7 +282,7 @@ void sub_811CA20(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D184(&ptr->field_00a8, ptr->animType);
         sub_811D830(3);
         ptr->state++;
         break;
@@ -391,7 +391,7 @@ void sub_811CBE4(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D184(&ptr->field_00a8, ptr->animType);
         sub_811D830(0);
         ptr->state++;
         break;
@@ -468,7 +468,7 @@ void sub_811CD68(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(ptr->field_00a8, ptr->animType);
+        sub_811D184(&ptr->field_00a8, ptr->animType);
         sub_811D830(3);
         ptr->state++;
         break;
@@ -647,9 +647,9 @@ struct Pokemon * sub_811D094(void)
     return &gUnknown_203B098->pokemon;
 }
 
-u8 *sub_811D0A8(void)
+struct PokemonSpecialAnimScene * sub_811D0A8(void)
 {
-    return sub_811D080()->field_00a8;
+    return &sub_811D080()->field_00a8;
 }
 
 u16 sub_811D0B4(void)

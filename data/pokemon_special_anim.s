@@ -6,69 +6,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_845963C:: @ 845963C gbapal
-	.incbin "graphics/pokemon_special_anim/unk_845963C.gbapal"
-
-gUnknown_845965C:: @ 845965C gbapal
-	.incbin "graphics/pokemon_special_anim/unk_845965C.gbapal"
-
-gUnknown_845967C:: @ 845967C 4bpp.lz
-	.incbin "graphics/pokemon_special_anim/unk_845967C.4bpp.lz"
-
-gUnknown_845973C:: @ 845973C bin.lz
-	.incbin "graphics/pokemon_special_anim/unk_845973C.bin.lz"
-
-gUnknown_8459868:: @ 8459868 gbapal
-	.incbin "graphics/pokemon_special_anim/unk_8459868.gbapal"
-
-gUnknown_8459888:: @ 8459888 4bpp.lz
-	.incbin "graphics/pokemon_special_anim/unk_8459888.4bpp.lz"
-
-gUnknown_84598A4:: @ 84598A4 gbapal
-	.incbin "graphics/pokemon_special_anim/unk_84598A4.gbapal"
-
-gUnknown_84598C4:: @ 84598C4 4bpp.lz
-	.incbin "graphics/pokemon_special_anim/unk_84598C4.4bpp.lz"
-
-gUnknown_8459940:: @ 8459940 gbapal
-	.incbin "graphics/pokemon_special_anim/unk_8459940.gbapal"
-
-gUnknown_8459960:: @ 8459960 4bpp.lz
-	.incbin "graphics/pokemon_special_anim/unk_8459960.4bpp.lz"
-
-gUnknown_8459980:: @ 8459980 bg_template
-	.4byte 0x000041f0
-	@ {
-	@ 	.bg = 0,
-	@ 	.charBaseIndex = 0,
-	@ 	.mapBaseIndex = 31,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 0,
-	@ 	.baseTile = 0x0001
-	@ }
-	.4byte 0x000031cf
-	@ {
-	@ 	.bg = 3,
-	@ 	.charBaseIndex = 3,
-	@ 	.mapBaseIndex = 28,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 3,
-	@ 	.baseTile = 0x0000
-	@ }
-
-gUnknown_8459988:: @ 8459988 window_template
-	.byte 0, 1, 15, 28, 4, 15
-	.2byte 0x000a
-	.byte 255, 0, 0, 0, 0, 0
-	.2byte 0x0000
-
-gUnknown_8459998:: @ 8459998 dataptr
-	.4byte gUnknown_841B2ED @ 1,
-	.4byte gUnknown_841B2F1 @ 2, and ‥ ‥ ‥
-	.4byte gUnknown_841B2FF @ Poof!
-
 gUnknown_84599A4:: @ 84599A4
 	.2byte 0x0000, 0x0010
 

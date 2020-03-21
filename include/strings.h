@@ -1441,4 +1441,10 @@ extern const u8 gPCText_Pokecenter[];
 extern const u8 gPCText_Machine[];
 extern const u8 gPCText_Simple[];
 
+// pokemon_special_anim
+
+extern const u8 gUnknown_841B2ED[];
+extern const u8 gUnknown_841B2F1[];
+extern const u8 gUnknown_841B2FF[];
+
 #endif //GUARD_STRINGS_H

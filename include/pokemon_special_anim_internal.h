@@ -3,6 +3,15 @@
 
 #include "pokemon_special_anim.h"
 
+struct PokemonSpecialAnimScene
+{
+    u8 filler_0000[0x914];
+    u8 field_0914[BG_SCREEN_SIZE];
+    u8 field_1114[BG_SCREEN_SIZE];
+    u8 field_1914[BG_SCREEN_SIZE];
+    u8 field_2114[0x720];
+}; // size=0x2834
+
 struct PokemonSpecialAnim
 {
     /*0x0000*/ u8 filler_0000[0x4];
@@ -21,10 +30,10 @@ struct PokemonSpecialAnim
     /*0x009e*/ u16 field_009e;
     /*0x00a0*/ u32 personality;
     /*0x00a4*/ u32 field_00a4;
-    /*0x00a8*/ u8 field_00a8[0x2834];
+    /*0x00a8*/ struct PokemonSpecialAnimScene field_00a8;
 }; // size=0x28dc
 
-void sub_811D184(u8 *buffer, u16 animType);
+void sub_811D184(struct PokemonSpecialAnimScene * buffer, u16 animType);
 bool8 sub_811D280(void);
 void sub_811D29C(void);
 void sub_811D2A8(void);

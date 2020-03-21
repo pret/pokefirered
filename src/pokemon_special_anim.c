@@ -208,7 +208,7 @@ void sub_811C834(u8 taskId)
         }
         break;
     case 6:
-        sub_811DC54(ptr->itemId, ptr->closeness, 1);
+        sub_811DC54(ptr->itemId, ptr->closeness, TRUE);
         ptr->state++;
         break;
     case 7:
@@ -414,7 +414,7 @@ void sub_811CBE4(u8 taskId)
         ptr->state++;
         break;
     case 4:
-        sub_811DC54(ptr->itemId, ptr->closeness, 0);
+        sub_811DC54(ptr->itemId, ptr->closeness, FALSE);
         ptr->state++;
         break;
     case 5:

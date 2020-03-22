@@ -4309,7 +4309,7 @@ static void sub_8124DE0(void)
 static void sub_8124E48(void)
 {
     if (ItemId_GetPocket(gSpecialVar_ItemId) == POCKET_TM_CASE
-     && PSA_IsCancelDisabled() == 1)
+     && PSA_IsCancelDisabled() == TRUE)
     {
         GiveMoveToMon(&gPlayerParty[gPartyMenu.slotId], ItemIdToBattleMoveId(gSpecialVar_ItemId));
         AdjustFriendship(&gPlayerParty[gPartyMenu.slotId], 4);
@@ -4325,7 +4325,7 @@ static void sub_8124E48(void)
 
 static void sub_8124EFC(void)
 {
-    if (PSA_IsCancelDisabled() == 1)
+    if (PSA_IsCancelDisabled() == TRUE)
     {
         struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
         u8 moveIdx = GetMoveSlotToReplace();

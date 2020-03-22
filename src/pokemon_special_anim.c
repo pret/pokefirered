@@ -15,14 +15,14 @@ static EWRAM_DATA bool32 sCancelDisabled = FALSE;
 static EWRAM_DATA u8 sPSATaskId = 0;
 static EWRAM_DATA struct PokemonSpecialAnim * sPSAWork = NULL;
 
-struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback);
+static struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback);
 static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr);
 static void SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(struct PokemonSpecialAnim * ptr);
 static void SetUpUseItemAnim_CantEvolve(struct PokemonSpecialAnim * ptr);
-static void sub_811C834(u8 taskId);
+static void Task_UseItem_Normal(u8 taskId);
 static void Task_ForgetMove(u8 taskId);
-static void sub_811CBE4(u8 taskId);
-static void sub_811CD68(u8 taskId);
+static void Task_EvoStone_CantEvolve(u8 taskId);
+static void Task_UseTM_NoForget(u8 taskId);
 static void Task_MachineSet(u8 taskId);
 static void Task_CleanUp(u8 taskId);
 static u8 GetClosenessFromFriendship(u16 friendship);
@@ -58,7 +58,7 @@ void StartUseItemAnim_CantEvolve(u8 slotId, u16 itemId, MainCallback callback)
         SetUpUseItemAnim_CantEvolve(ptr);
 }
 
-struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback)
+static struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback)
 {
     struct PokemonSpecialAnim * ptr;
     struct Pokemon * pokemon;
@@ -125,10 +125,10 @@ static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr)
     case 0:
     case 1:
     case 3:
-        taskId = CreateTask(sub_811C834, 0);
+        taskId = CreateTask(Task_UseItem_Normal, 0);
         break;
     case 4:
-        taskId = CreateTask(sub_811CD68, 0);
+        taskId = CreateTask(Task_UseTM_NoForget, 0);
         break;
     default:
         SetMainCallback2(ptr->savedCallback);
@@ -152,28 +152,28 @@ static void SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(struct PokemonSpecialAnim 
 
 static void SetUpUseItemAnim_CantEvolve(struct PokemonSpecialAnim * ptr)
 {
-    u8 taskId = CreateTask(sub_811CBE4, 0);
+    u8 taskId = CreateTask(Task_EvoStone_CantEvolve, 0);
     SetWordTaskArg(taskId, 0, (uintptr_t)ptr);
     SetMainCallback2(CB2_PSA);
     sPSATaskId = taskId;
 }
 
-static void sub_811C834(u8 taskId)
+static void Task_UseItem_Normal(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
     if (!ptr->cancelDisabled && JOY_HELD(A_BUTTON | B_BUTTON))
     {
-        sub_811E040();
+        PSA_UseItem_CleanUpForCancel();
         SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
-    
+
     switch (ptr->state)
     {
     case 0:
         SetVBlankCallback(NULL);
         InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
-        sub_811D830(0);
+        PSA_CreateMonSpriteAtCloseness(0);
         ptr->state++;
         break;
     case 1:
@@ -195,31 +195,31 @@ static void sub_811C834(u8 taskId)
         ptr->state++;
         break;
     case 4:
-        if (!sub_811D9A8())
+        if (!PSA_IsZoomTaskActive())
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 5:
-        if (!sub_811D754())
+        if (!PSA_LevelUpVerticalSpritesTaskIsRunning())
         {
             ptr->state++;
         }
         break;
     case 6:
-        PSA_SetUpZoomOutMonTask(ptr->itemId, ptr->closeness, TRUE);
+        PSA_SetUpItemUseOnMonAnim(ptr->itemId, ptr->closeness, TRUE);
         ptr->state++;
         break;
     case 7:
-        if (!PSA_IsZoomOutMonTaskRunning())
+        if (!PSA_IsItemUseOnMonAnimActive())
         {
             ptr->cancelDisabled = TRUE;
             if (ptr->closeness == 3)
             {
                 PlayCry1(ptr->species, 0);
             }
-            sub_811D2A8();
+            PSA_ShowMessageWindow();
             ptr->state++;
         }
         break;
@@ -238,7 +238,7 @@ static void sub_811C834(u8 taskId)
         ptr->state++;
         break;
     case 11:
-        if (!sub_811D9A8())
+        if (!PSA_IsZoomTaskActive())
         {
             ptr->cancelDisabled = TRUE;
             ptr->state++;
@@ -283,7 +283,7 @@ static void Task_ForgetMove(u8 taskId)
     case 0:
         SetVBlankCallback(NULL);
         InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
-        sub_811D830(3);
+        PSA_CreateMonSpriteAtCloseness(3);
         ptr->state++;
         break;
     case 1:
@@ -297,15 +297,15 @@ static void Task_ForgetMove(u8 taskId)
     case 2:
         if (!gPaletteFade.active)
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 3:
-        ptr->field_009e++;
-        if (ptr->field_009e > 30)
+        ptr->delayTimer++;
+        if (ptr->delayTimer > 30)
         {
-            sub_811D2A8();
+            PSA_ShowMessageWindow();
             ptr->state++;
         }
         break;
@@ -316,13 +316,13 @@ static void Task_ForgetMove(u8 taskId)
     case 5:
         if (!PSA_IsMessagePrintTaskActive())
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 6:
-        ptr->field_009e++;
-        if (ptr->field_009e > 30)
+        ptr->delayTimer++;
+        if (ptr->delayTimer > 30)
         {
             PSA_PrintMessage(PSA_TEXT_FORGET_2_AND);
             ptr->state++;
@@ -331,25 +331,25 @@ static void Task_ForgetMove(u8 taskId)
     case 7:
         if (!PSA_IsMessagePrintTaskActive())
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 8:
-        ptr->field_009e++;
-        if (ptr->field_009e > 30)
+        ptr->delayTimer++;
+        if (ptr->delayTimer > 30)
         {
             PlaySE(SE_W255);
             PSA_PrintMessage(PSA_TEXT_FORGET_POOF);
-            sub_811D4FC();
+            PSA_DarkenMonSprite();
             ptr->state++;
         }
         break;
     case 9:
-        r4 = sub_811D530();
+        r4 = PSA_RunPoofAnim();
         if (!(r4 | PSA_IsMessagePrintTaskActive()))
         {
-            sub_811D4D4();
+            PSA_AfterPoof_ClearMessageWindow();
             ptr->state++;
         }
         break;
@@ -367,7 +367,7 @@ static void Task_ForgetMove(u8 taskId)
     case 12:
         if (!PSA_IsMessagePrintTaskActive())
         {
-            sub_811D2D0();
+            PSA_HideMessageWindow();
             ptr->state++;
         }
         break;
@@ -377,7 +377,7 @@ static void Task_ForgetMove(u8 taskId)
     }
 }
 
-static void sub_811CBE4(u8 taskId)
+static void Task_EvoStone_CantEvolve(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
@@ -392,7 +392,7 @@ static void sub_811CBE4(u8 taskId)
     case 0:
         SetVBlankCallback(NULL);
         InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
-        sub_811D830(0);
+        PSA_CreateMonSpriteAtCloseness(0);
         ptr->state++;
         break;
     case 1:
@@ -414,13 +414,13 @@ static void sub_811CBE4(u8 taskId)
         ptr->state++;
         break;
     case 4:
-        PSA_SetUpZoomOutMonTask(ptr->itemId, ptr->closeness, FALSE);
+        PSA_SetUpItemUseOnMonAnim(ptr->itemId, ptr->closeness, FALSE);
         ptr->state++;
         break;
     case 5:
-        if (!PSA_IsZoomOutMonTaskRunning())
+        if (!PSA_IsItemUseOnMonAnimActive())
         {
-            sub_811D2A8();
+            PSA_ShowMessageWindow();
             ptr->state++;
         }
         break;
@@ -454,7 +454,7 @@ static void sub_811CBE4(u8 taskId)
     }
 }
 
-static void sub_811CD68(u8 taskId)
+static void Task_UseTM_NoForget(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
@@ -469,7 +469,7 @@ static void sub_811CD68(u8 taskId)
     case 0:
         SetVBlankCallback(NULL);
         InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
-        sub_811D830(3);
+        PSA_CreateMonSpriteAtCloseness(3);
         ptr->state++;
         break;
     case 1:
@@ -483,13 +483,13 @@ static void sub_811CD68(u8 taskId)
     case 2:
         if (!gPaletteFade.active)
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 3:
-        ptr->field_009e++;
-        if (ptr->field_009e > 20)
+        ptr->delayTimer++;
+        if (ptr->delayTimer > 20)
         {
             SetUseItemAnimCallback(taskId, Task_MachineSet);
         }
@@ -503,7 +503,7 @@ static void Task_MachineSet(u8 taskId)
 
     if (!ptr->cancelDisabled && JOY_NEW(B_BUTTON))
     {
-        sub_811D5B0();
+        PSA_UseTM_CleanUpForCancel();
         SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
@@ -511,48 +511,48 @@ static void Task_MachineSet(u8 taskId)
     switch (ptr->state)
     {
     case 0:
-        sub_811DCF0(ptr->itemId);
-        ptr->field_009e = 0;
+        CreateItemIconSpriteAtMaxCloseness(ptr->itemId);
+        ptr->delayTimer = 0;
         ptr->state++;
         break;
     case 1:
-        sub_811D2A8();
+        PSA_ShowMessageWindow();
         PSA_PrintMessage(PSA_TEXT_MACHINE_SET);
         ptr->state++;
         break;
     case 2:
         if (!PSA_IsMessagePrintTaskActive())
         {
-            sub_811D2D0();
+            PSA_HideMessageWindow();
             ptr->state++;
         }
         break;
     case 3:
-        sub_811D6EC();
+        PSA_UseTM_SetUpMachineSetWobble();
         ptr->state++;
         break;
     case 4:
-        if (!sub_811D6FC())
+        if (!PSA_UseTM_RunMachineSetWobble())
         {
             ptr->state++;
         }
         break;
     case 5:
-        sub_811D5A0();
+        PSA_UseTM_SetUpZoomOutAnim();
         ptr->state++;
         break;
     case 6:
-        if (!sub_811D5C0())
+        if (!PSA_UseTM_RunZoomOutAnim())
         {
-            ptr->field_009e = 0;
+            ptr->delayTimer = 0;
             ptr->state++;
         }
         break;
     case 7:
-        ptr->field_009e++;
-        if (ptr->field_009e > 30)
+        ptr->delayTimer++;
+        if (ptr->delayTimer > 30)
         {
-            sub_811D2A8();
+            PSA_ShowMessageWindow();
             PSA_PrintMessage(PSA_TEXT_LEARNED_MOVE);
             ptr->state++;
         }

@@ -11,54 +11,54 @@
 // Functions related to the special anims Pokemon
 // make when using an item on them in the field.
 
-EWRAM_DATA bool32 gUnknown_203B090 = FALSE;
-EWRAM_DATA u8 gUnknown_203B094 = 0;
-EWRAM_DATA struct PokemonSpecialAnim * gUnknown_203B098 = NULL;
+static EWRAM_DATA bool32 sCancelDisabled = FALSE;
+static EWRAM_DATA u8 sPSATaskId = 0;
+static EWRAM_DATA struct PokemonSpecialAnim * sPSAWork = NULL;
 
-struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback callback);
-void sub_811C748(struct PokemonSpecialAnim * ptr);
-void sub_811C7BC(struct PokemonSpecialAnim * ptr);
-void sub_811C7FC(struct PokemonSpecialAnim * ptr);
-void sub_811C834(u8 taskId);
-void sub_811CA20(u8 taskId);
-void sub_811CBE4(u8 taskId);
-void sub_811CD68(u8 taskId);
-void sub_811CE4C(u8 taskId);
-void sub_811CF88(u8 taskId);
-u8 sub_811D058(u16 friendship);
-u16 sub_811D018(u16 itemId);
+struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback);
+static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr);
+static void SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(struct PokemonSpecialAnim * ptr);
+static void SetUpUseItemAnim_CantEvolve(struct PokemonSpecialAnim * ptr);
+static void sub_811C834(u8 taskId);
+static void Task_ForgetMove(u8 taskId);
+static void sub_811CBE4(u8 taskId);
+static void sub_811CD68(u8 taskId);
+static void Task_MachineSet(u8 taskId);
+static void Task_CleanUp(u8 taskId);
+static u8 GetClosenessFromFriendship(u16 friendship);
+static u16 GetAnimTypeByItemId(u16 itemId);
 
-void sub_811C540(u8 slotId, u16 itemId, MainCallback callback)
+void StartUseItemAnim_Normal(u8 slotId, u16 itemId, MainCallback callback)
 {
-    struct PokemonSpecialAnim * ptr = sub_811C5D4(slotId, itemId, callback);
+    struct PokemonSpecialAnim * ptr = AllocPSA(slotId, itemId, callback);
     if (ptr == NULL)
         SetMainCallback2(callback);
     else
-        sub_811C748(ptr);
+        SetUpUseItemAnim_Normal(ptr);
 }
 
-void sub_811C568(u8 slotId, u16 itemId, u16 moveId, MainCallback callback)
+void StartUseItemAnim_ForgetMoveAndLearnTMorHM(u8 slotId, u16 itemId, u16 moveId, MainCallback callback)
 {
-    struct PokemonSpecialAnim * ptr = sub_811C5D4(slotId, itemId, callback);
+    struct PokemonSpecialAnim * ptr = AllocPSA(slotId, itemId, callback);
     if (ptr == NULL)
         SetMainCallback2(callback);
     else
     {
         StringCopy(ptr->nameOfMoveForgotten, gMoveNames[moveId]);
-        sub_811C7BC(ptr);
+        SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(ptr);
     }
 }
 
-void sub_811C5AC(u8 slotId, u16 itemId, MainCallback callback)
+void StartUseItemAnim_CantEvolve(u8 slotId, u16 itemId, MainCallback callback)
 {
-    struct PokemonSpecialAnim * ptr = sub_811C5D4(slotId, itemId, callback);
+    struct PokemonSpecialAnim * ptr = AllocPSA(slotId, itemId, callback);
     if (ptr == NULL)
         SetMainCallback2(callback);
     else
-        sub_811C7FC(ptr);
+        SetUpUseItemAnim_CantEvolve(ptr);
 }
 
-struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback callback)
+struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback)
 {
     struct PokemonSpecialAnim * ptr;
     struct Pokemon * pokemon;
@@ -78,11 +78,11 @@ struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback call
     ptr->state = 0;
     ptr->savedCallback = callback;
     ptr->species = GetMonData(pokemon, MON_DATA_SPECIES);
-    ptr->closeness = sub_811D058(GetMonData(pokemon, MON_DATA_FRIENDSHIP));
+    ptr->closeness = GetClosenessFromFriendship(GetMonData(pokemon, MON_DATA_FRIENDSHIP));
     ptr->personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
     ptr->slotId = slotId;
     ptr->itemId = itemId;
-    ptr->animType = sub_811D018(itemId);
+    ptr->animType = GetAnimTypeByItemId(itemId);
     ptr->pokemon = *pokemon;
     ptr->field_00a4 = 0;
     GetMonData(pokemon, MON_DATA_NICKNAME, ptr->nickname);
@@ -94,14 +94,14 @@ struct PokemonSpecialAnim * sub_811C5D4(u8 slotId, u16 itemId, MainCallback call
     return ptr;
 }
 
-void sub_811C6E8(void)
+static void VBlankCB_PSA(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-void sub_811C6FC(void)
+static void CB2_PSA(void)
 {
     RunTextPrinters();
     RunTasks();
@@ -110,14 +110,14 @@ void sub_811C6FC(void)
     UpdatePaletteFade();
 }
 
-void sub_811C718(u8 taskId, TaskFunc func)
+static void SetUseItemAnimCallback(u8 taskId, TaskFunc func)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
     ptr->state = 0;
     gTasks[taskId].func = func;
 }
 
-void sub_811C748(struct PokemonSpecialAnim * ptr)
+static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr)
 {
     u8 taskId;
     switch (ptr->animType)
@@ -137,34 +137,34 @@ void sub_811C748(struct PokemonSpecialAnim * ptr)
     }
     ptr->cancelDisabled = FALSE;
     SetWordTaskArg(taskId, 0, (uintptr_t)ptr);
-    SetMainCallback2(sub_811C6FC);
-    gUnknown_203B094 = taskId;
+    SetMainCallback2(CB2_PSA);
+    sPSATaskId = taskId;
 }
 
-void sub_811C7BC(struct PokemonSpecialAnim * ptr)
+static void SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(struct PokemonSpecialAnim * ptr)
 {
-    u8 taskId = CreateTask(sub_811CA20, 0);
+    u8 taskId = CreateTask(Task_ForgetMove, 0);
     SetWordTaskArg(taskId, 0, (uintptr_t)ptr);
-    SetMainCallback2(sub_811C6FC);
-    gUnknown_203B094 = taskId;
+    SetMainCallback2(CB2_PSA);
+    sPSATaskId = taskId;
     ptr->cancelDisabled = FALSE;
 }
 
-void sub_811C7FC(struct PokemonSpecialAnim * ptr)
+static void SetUpUseItemAnim_CantEvolve(struct PokemonSpecialAnim * ptr)
 {
     u8 taskId = CreateTask(sub_811CBE4, 0);
     SetWordTaskArg(taskId, 0, (uintptr_t)ptr);
-    SetMainCallback2(sub_811C6FC);
-    gUnknown_203B094 = taskId;
+    SetMainCallback2(CB2_PSA);
+    sPSATaskId = taskId;
 }
 
-void sub_811C834(u8 taskId)
+static void sub_811C834(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
     if (!ptr->cancelDisabled && JOY_HELD(A_BUTTON | B_BUTTON))
     {
         sub_811E040();
-        sub_811C718(taskId, sub_811CF88);
+        SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
     
@@ -172,16 +172,16 @@ void sub_811C834(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(&ptr->field_00a8, ptr->animType);
+        InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
         sub_811D830(0);
         ptr->state++;
         break;
     case 1:
-        if (!sub_811D280())
+        if (!PokemonSpecialAnimSceneInitIsNotFinished())
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
             ptr->state++;
-            SetVBlankCallback(sub_811C6E8);
+            SetVBlankCallback(VBlankCB_PSA);
         }
         break;
     case 2:
@@ -191,7 +191,7 @@ void sub_811C834(u8 taskId)
         }
         break;
     case 3:
-        sub_811D948(ptr->closeness);
+        PSA_SetUpZoomAnim(ptr->closeness);
         ptr->state++;
         break;
     case 4:
@@ -208,11 +208,11 @@ void sub_811C834(u8 taskId)
         }
         break;
     case 6:
-        sub_811DC54(ptr->itemId, ptr->closeness, TRUE);
+        PSA_SetUpZoomOutMonTask(ptr->itemId, ptr->closeness, TRUE);
         ptr->state++;
         break;
     case 7:
-        if (!sub_811DD90())
+        if (!PSA_IsZoomOutMonTaskRunning())
         {
             ptr->cancelDisabled = TRUE;
             if (ptr->closeness == 3)
@@ -224,17 +224,17 @@ void sub_811C834(u8 taskId)
         }
         break;
     case 8:
-        sub_811D2EC(0);
+        PSA_PrintMessage(PSA_TEXT_ITEM_USED);
         ptr->state++;
         break;
     case 9:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             ptr->state++;
         }
         break;
     case 10:
-        sub_811D948(0);
+        PSA_SetUpZoomAnim(0);
         ptr->state++;
         break;
     case 11:
@@ -266,14 +266,14 @@ void sub_811C834(u8 taskId)
         break;
     case 14:
         SetMainCallback2(ptr->savedCallback);
-        sub_811D29C();
+        PSA_FreeWindowBuffers();
         Free(ptr);
         DestroyTask(taskId);
         break;
     }
 }
 
-void sub_811CA20(u8 taskId)
+static void Task_ForgetMove(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
     u8 r4;
@@ -282,16 +282,16 @@ void sub_811CA20(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(&ptr->field_00a8, ptr->animType);
+        InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
         sub_811D830(3);
         ptr->state++;
         break;
     case 1:
-        if (!sub_811D280())
+        if (!PokemonSpecialAnimSceneInitIsNotFinished())
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
             ptr->state++;
-            SetVBlankCallback(sub_811C6E8);
+            SetVBlankCallback(VBlankCB_PSA);
         }
         break;
     case 2:
@@ -310,11 +310,11 @@ void sub_811CA20(u8 taskId)
         }
         break;
     case 4:
-        sub_811D2EC(2);
+        PSA_PrintMessage(PSA_TEXT_FORGET_1);
         ptr->state++;
         break;
     case 5:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             ptr->field_009e = 0;
             ptr->state++;
@@ -324,12 +324,12 @@ void sub_811CA20(u8 taskId)
         ptr->field_009e++;
         if (ptr->field_009e > 30)
         {
-            sub_811D2EC(3);
+            PSA_PrintMessage(PSA_TEXT_FORGET_2_AND);
             ptr->state++;
         }
         break;
     case 7:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             ptr->field_009e = 0;
             ptr->state++;
@@ -340,50 +340,50 @@ void sub_811CA20(u8 taskId)
         if (ptr->field_009e > 30)
         {
             PlaySE(SE_W255);
-            sub_811D2EC(4);
+            PSA_PrintMessage(PSA_TEXT_FORGET_POOF);
             sub_811D4FC();
             ptr->state++;
         }
         break;
     case 9:
         r4 = sub_811D530();
-        if (!(r4 | sub_811D4EC()))
+        if (!(r4 | PSA_IsMessagePrintTaskActive()))
         {
             sub_811D4D4();
             ptr->state++;
         }
         break;
     case 10:
-        sub_811D2EC(5);
+        PSA_PrintMessage(PSA_TEXT_FORGET_FORGOT);
         ptr->state++;
         break;
     case 11:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
-            sub_811D2EC(6);
+            PSA_PrintMessage(PSA_TEXT_FORGET_AND);
             ptr->state++;
         }
         break;
     case 12:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             sub_811D2D0();
             ptr->state++;
         }
         break;
     case 13:
-        sub_811C718(taskId, sub_811CE4C);
+        SetUseItemAnimCallback(taskId, Task_MachineSet);
         break;
     }
 }
 
-void sub_811CBE4(u8 taskId)
+static void sub_811CBE4(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
     if (!ptr->cancelDisabled && JOY_HELD(B_BUTTON))
     {
-        sub_811C718(taskId, sub_811CF88);
+        SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
 
@@ -391,16 +391,16 @@ void sub_811CBE4(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(&ptr->field_00a8, ptr->animType);
+        InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
         sub_811D830(0);
         ptr->state++;
         break;
     case 1:
-        if (!sub_811D280())
+        if (!PokemonSpecialAnimSceneInitIsNotFinished())
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
             ptr->state++;
-            SetVBlankCallback(sub_811C6E8);
+            SetVBlankCallback(VBlankCB_PSA);
         }
         break;
     case 2:
@@ -410,26 +410,26 @@ void sub_811CBE4(u8 taskId)
         }
         break;
     case 3:
-        sub_811D948(ptr->closeness);
+        PSA_SetUpZoomAnim(ptr->closeness);
         ptr->state++;
         break;
     case 4:
-        sub_811DC54(ptr->itemId, ptr->closeness, FALSE);
+        PSA_SetUpZoomOutMonTask(ptr->itemId, ptr->closeness, FALSE);
         ptr->state++;
         break;
     case 5:
-        if (!sub_811DD90())
+        if (!PSA_IsZoomOutMonTaskRunning())
         {
             sub_811D2A8();
             ptr->state++;
         }
         break;
     case 6:
-        sub_811D2EC(8);
+        PSA_PrintMessage(PSA_TEXT_HUH);
         ptr->state++;
         break;
     case 7:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             ptr->cancelDisabled = TRUE;
             ptr->state++;
@@ -446,7 +446,7 @@ void sub_811CBE4(u8 taskId)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(ptr->savedCallback);
-            sub_811D29C();
+            PSA_FreeWindowBuffers();
             Free(ptr);
             DestroyTask(taskId);
         }
@@ -454,13 +454,13 @@ void sub_811CBE4(u8 taskId)
     }
 }
 
-void sub_811CD68(u8 taskId)
+static void sub_811CD68(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
     if (JOY_NEW(B_BUTTON))
     {
-        sub_811C718(taskId, sub_811CF88);
+        SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
 
@@ -468,16 +468,16 @@ void sub_811CD68(u8 taskId)
     {
     case 0:
         SetVBlankCallback(NULL);
-        sub_811D184(&ptr->field_00a8, ptr->animType);
+        InitPokemonSpecialAnimScene(&ptr->sceneResources, ptr->animType);
         sub_811D830(3);
         ptr->state++;
         break;
     case 1:
-        if (!sub_811D280())
+        if (!PokemonSpecialAnimSceneInitIsNotFinished())
         {
             BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
             ptr->state++;
-            SetVBlankCallback(sub_811C6E8);
+            SetVBlankCallback(VBlankCB_PSA);
         }
         break;
     case 2:
@@ -491,20 +491,20 @@ void sub_811CD68(u8 taskId)
         ptr->field_009e++;
         if (ptr->field_009e > 20)
         {
-            sub_811C718(taskId, sub_811CE4C);
+            SetUseItemAnimCallback(taskId, Task_MachineSet);
         }
         break;
     }
 }
 
-void sub_811CE4C(u8 taskId)
+static void Task_MachineSet(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
     if (!ptr->cancelDisabled && JOY_NEW(B_BUTTON))
     {
         sub_811D5B0();
-        sub_811C718(taskId, sub_811CF88);
+        SetUseItemAnimCallback(taskId, Task_CleanUp);
         return;
     }
 
@@ -517,11 +517,11 @@ void sub_811CE4C(u8 taskId)
         break;
     case 1:
         sub_811D2A8();
-        sub_811D2EC(7);
+        PSA_PrintMessage(PSA_TEXT_MACHINE_SET);
         ptr->state++;
         break;
     case 2:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             sub_811D2D0();
             ptr->state++;
@@ -553,12 +553,12 @@ void sub_811CE4C(u8 taskId)
         if (ptr->field_009e > 30)
         {
             sub_811D2A8();
-            sub_811D2EC(9);
+            PSA_PrintMessage(PSA_TEXT_LEARNED_MOVE);
             ptr->state++;
         }
         break;
     case 8:
-        if (!sub_811D4EC())
+        if (!PSA_IsMessagePrintTaskActive())
         {
             PlayFanfare(MUS_FANFA1);
             ptr->cancelDisabled = TRUE;
@@ -568,37 +568,37 @@ void sub_811CE4C(u8 taskId)
     case 9:
         if (IsFanfareTaskInactive())
         {
-            sub_811C718(taskId, sub_811CF88);
+            SetUseItemAnimCallback(taskId, Task_CleanUp);
         }
         break;
     }
 }
 
-void sub_811CF88(u8 taskId)
+static void Task_CleanUp(u8 taskId)
 {
     struct PokemonSpecialAnim * ptr = (void *)GetWordTaskArg(taskId, 0);
 
     switch (ptr->state)
     {
     case 0:
-        SetVBlankCallback(sub_811C6E8);
+        SetVBlankCallback(VBlankCB_PSA);
         BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
         ptr->state++;
         break;
     case 1:
         if (!gPaletteFade.active && (ptr->field_00a4 != 1 || IsCryFinished()))
         {
-            gUnknown_203B090 = ptr->cancelDisabled;
+            sCancelDisabled = ptr->cancelDisabled;
             SetMainCallback2(ptr->savedCallback);
             DestroyTask(taskId);
-            sub_811D29C();
+            PSA_FreeWindowBuffers();
             Free(ptr);
         }
         break;
     }
 }
 
-const struct {
+static const struct {
     u16 itemId;
     u16 animType;
 } gUnknown_8459634[2] = {
@@ -606,7 +606,7 @@ const struct {
     {ITEM_POTION,     1}
 };
 
-u16 sub_811D018(u16 itemId)
+static u16 GetAnimTypeByItemId(u16 itemId)
 {
     int i;
 
@@ -624,7 +624,7 @@ u16 sub_811D018(u16 itemId)
     return 0;
 }
 
-u8 sub_811D058(u16 friendship)
+static u8 GetClosenessFromFriendship(u16 friendship)
 {
     if (friendship <= 100)
         return 0;
@@ -636,63 +636,63 @@ u8 sub_811D058(u16 friendship)
         return 3;
 }
 
-struct PokemonSpecialAnim * sub_811D080(void)
+struct PokemonSpecialAnim * GetPSAStruct(void)
 {
-    return (void *)GetWordTaskArg(gUnknown_203B094, 0);
+    return (void *)GetWordTaskArg(sPSATaskId, 0);
 }
 
-struct Pokemon * sub_811D094(void)
+struct Pokemon * PSA_GetPokemon(void)
 {
-    gUnknown_203B098 = sub_811D080();
-    return &gUnknown_203B098->pokemon;
+    sPSAWork = GetPSAStruct();
+    return &sPSAWork->pokemon;
 }
 
-struct PokemonSpecialAnimScene * sub_811D0A8(void)
+struct PokemonSpecialAnimScene * PSA_GetSceneWork(void)
 {
-    return &sub_811D080()->field_00a8;
+    return &GetPSAStruct()->sceneResources;
 }
 
-u16 sub_811D0B4(void)
+u16 PSA_GetItemId(void)
 {
-    return sub_811D080()->itemId;
+    return GetPSAStruct()->itemId;
 }
 
-u8 *sub_811D0C4(void)
+u8 *PSA_GetNameOfMoveForgotten(void)
 {
-    return sub_811D080()->nameOfMoveForgotten;
+    return GetPSAStruct()->nameOfMoveForgotten;
 }
 
-u8 *sub_811D0D0(void)
+u8 *PSA_GetNameOfMoveToTeach(void)
 {
-    return sub_811D080()->nameOfMoveToTeach;
+    return GetPSAStruct()->nameOfMoveToTeach;
 }
 
-u8 *sub_811D0DC(u8 *dest)
+u8 *PSA_CopyMonNickname(u8 *dest)
 {
-    return StringCopy(dest, sub_811D080()->nickname);
+    return StringCopy(dest, GetPSAStruct()->nickname);
 }
 
-u8 *sub_811D0F4(void)
+u8 *PSA_GetMonNickname(void)
 {
-    return sub_811D080()->nickname;
+    return GetPSAStruct()->nickname;
 }
 
-u8 sub_811D100(void)
+u8 PSA_GetAnimType(void)
 {
-    return sub_811D080()->animType;
+    return GetPSAStruct()->animType;
 }
 
-u16 sub_811D110(void)
+u16 PSA_GetMonSpecies(void)
 {
-    return sub_811D080()->species;
+    return GetPSAStruct()->species;
 }
 
-u32 sub_811D120(void)
+u32 PSA_GetMonPersonality(void)
 {
-    return sub_811D080()->personality;
+    return GetPSAStruct()->personality;
 }
 
-void BufferMonStatsToTaskData(struct Pokemon * pokemon, u16 *data)
+void GetMonLevelUpWindowStats(struct Pokemon * pokemon, u16 *data)
 {
     data[0] = GetMonData(pokemon, MON_DATA_MAX_HP);
     data[1] = GetMonData(pokemon, MON_DATA_ATK);
@@ -702,7 +702,7 @@ void BufferMonStatsToTaskData(struct Pokemon * pokemon, u16 *data)
     data[5] = GetMonData(pokemon, MON_DATA_SPDEF);
 }
 
-bool32 sub_811D178(void)
+bool32 PSA_IsCancelDisabled(void)
 {
-    return gUnknown_203B090;
+    return sCancelDisabled;
 }

@@ -13,53 +13,53 @@
 #include "trig.h"
 #include "constants/songs.h"
 
-void sub_811D7D4(u16 animType);
-void sub_811D9BC(u8 taskId);
-void sub_811DA9C(struct Sprite * sprite, u8 closeness);
-bool8 sub_811DAAC(struct Sprite * sprite);
-void sub_811DB14(struct Sprite * sprite, u8 closeness);
-void sub_811DB48(struct Sprite * sprite, u8 closeness);
-void sub_811DB7C(struct PokemonSpecialAnimScene * scene, u8 a1, u8 a2, u8 a3);
-void sub_811DBA8(struct PokemonSpecialAnimScene * scene);
-void sub_811DBBC(struct Sprite * sprite);
-void sub_811DC14(u16 *tilees, u16 *palette);
-struct Sprite * sub_811DD20(u16 itemId);
-u16 sub_811DCE8(u16 itemId);
-void sub_811DDA4(u8 taskId);
-void sub_811DF14(u8 taskId, s16 *data, struct Sprite * sprite);
-void sub_811DFC0(struct Sprite * sprite);
-void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness);
-void sub_811E10C(void);
-void sub_811E128(struct Sprite * sprite);
-bool8 sub_811E138(void);
-void sub_811E154(struct Sprite * sprite);
-void sub_811E194(u8 a0);
-void sub_811E204(struct PokemonSpecialAnimScene * scene);
-bool8 sub_811E2F4(void);
-void sub_811E300(struct Sprite * sprite);
-void sub_811E348(struct PokemonSpecialAnimScene * scene);
-void sub_811E388(void);
-void sub_811E3B4(u8 taskId);
-u16 sub_811E4EC(u8 taskId);
-void sub_811E520(struct Sprite * sprite);
-void sub_811E588(void);
-bool32 sub_811E5A4(void);
-void sub_811E694(u8 taskId);
-void sub_811E710(u8 taskId, s16 *data);
-void sub_811E7B4(struct Sprite * sprite);
+static void sub_811D7D4(u16 animType);
+static void sub_811D9BC(u8 taskId);
+static void sub_811DA9C(struct Sprite * sprite, u8 closeness);
+static bool8 sub_811DAAC(struct Sprite * sprite);
+static void sub_811DB14(struct Sprite * sprite, u8 closeness);
+static void sub_811DB48(struct Sprite * sprite, u8 closeness);
+static void StartMonWiggleAnim(struct PokemonSpecialAnimScene * scene, u8 frameLen, u8 niter, u8 amplitude);
+static void StopMonWiggleAnim(struct PokemonSpecialAnimScene * scene);
+static void SpriteCallback_MonSpriteWiggle(struct Sprite * sprite);
+static void LoadMonSpriteGraphics(u16 *tilees, u16 *palette);
+struct Sprite * PSA_CreateItemIconObject(u16 itemId);
+static u16 GetBlendColorByItemId(u16 itemId);
+static void Task_ZoomOutMon(u8 taskId);
+static void CreateSprites_UseItem_OutwardSpiralDots(u8 taskId, s16 *data, struct Sprite * sprite);
+static void sub_811DFC0(struct Sprite * sprite);
+static void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness);
+static void sub_811E10C(void);
+static void sub_811E128(struct Sprite * sprite);
+static bool8 sub_811E138(void);
+static void sub_811E154(struct Sprite * sprite);
+static void sub_811E194(u8 a0);
+static void sub_811E204(struct PokemonSpecialAnimScene * scene);
+static bool8 sub_811E2F4(void);
+static void sub_811E300(struct Sprite * sprite);
+static void sub_811E348(struct PokemonSpecialAnimScene * scene);
+static void sub_811E388(void);
+static void sub_811E3B4(u8 taskId);
+static u16 sub_811E4EC(u8 taskId);
+static void SpriteCallback_UseItem_OutwardSpiralDots(struct Sprite * sprite);
+static void sub_811E588(void);
+static bool32 sub_811E5A4(void);
+static void sub_811E694(u8 taskId);
+static void sub_811E710(u8 taskId, s16 *data);
+static void sub_811E7B4(struct Sprite * sprite);
 
-const u16 gUnknown_845963C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845963C.gbapal");
-const u16 gUnknown_845965C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845965C.gbapal");
-const u32 gUnknown_845967C[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845967C.4bpp.lz");
-const u32 gUnknown_845973C[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845973C.bin.lz");
-const u16 gUnknown_8459868[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459868.gbapal");
-const u32 gUnknown_8459888[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459888.4bpp.lz");
-const u16 gUnknown_84598A4[] = INCBIN_U16("graphics/pokemon_special_anim/unk_84598A4.gbapal");
-const u32 gUnknown_84598C4[] = INCBIN_U32("graphics/pokemon_special_anim/unk_84598C4.4bpp.lz");
-const u16 gUnknown_8459940[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459940.gbapal");
-const u32 gUnknown_8459960[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459960.4bpp.lz");
+static const u16 gUnknown_845963C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845963C.gbapal");
+static const u16 gUnknown_845965C[] = INCBIN_U16("graphics/pokemon_special_anim/unk_845965C.gbapal");
+static const u32 gUnknown_845967C[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845967C.4bpp.lz");
+static const u32 gUnknown_845973C[] = INCBIN_U32("graphics/pokemon_special_anim/unk_845973C.bin.lz");
+static const u16 gUnknown_8459868[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459868.gbapal");
+static const u32 gUnknown_8459888[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459888.4bpp.lz");
+static const u16 gUnknown_84598A4[] = INCBIN_U16("graphics/pokemon_special_anim/unk_84598A4.gbapal");
+static const u32 gUnknown_84598C4[] = INCBIN_U32("graphics/pokemon_special_anim/unk_84598C4.4bpp.lz");
+static const u16 sSpritePals_UseItem_OutwardSpiralDots[] = INCBIN_U16("graphics/pokemon_special_anim/unk_8459940.gbapal");
+static const u32 sSpriteTiles_UseItem_OutwardSpiralDots[] = INCBIN_U32("graphics/pokemon_special_anim/unk_8459960.4bpp.lz");
 
-const struct BgTemplate gUnknown_8459980[] = {
+static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -79,7 +79,7 @@ const struct BgTemplate gUnknown_8459980[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_8459988[] = {
+static const struct WindowTemplate sWindowTemplates[] = {
     {
         .bg = 0,
         .tilemapLeft = 1,
@@ -91,52 +91,52 @@ const struct WindowTemplate gUnknown_8459988[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-const u8 *const gUnknown_8459998[] = {
+static const u8 *const s1_2_and_Poof_textPtrs[] = {
     gUnknown_841B2ED, // 1,
     gUnknown_841B2F1, // 2, and ‥ ‥ ‥
     gUnknown_841B2FF, // Poof!
 };
 
-const u16 sUnref_84599A4[] = {
+static const u16 sUnref_84599A4[] = {
     0, 16, 68
 };
 
-const u16 gUnknown_84599AA[] = {
+static const u16 sAffineScales[] = {
     0x100,
     0x155,
     0x1AA,
     0x200
 };
 
-const s8 gUnknown_84599B2[][2] = {
+static const s8 gUnknown_84599B2[][2] = {
     {-8,  -8},
     { 6, -13},
     { 8,  -8}
 };
 
-const struct CompressedSpriteSheet gUnknown_84599B8 = {
+static const struct CompressedSpriteSheet gUnknown_84599B8 = {
     gUnknown_84598C4,
     0x80,
     2
 };
 
-const struct SpritePalette gUnknown_84599C0 = {
+static const struct SpritePalette gUnknown_84599C0 = {
     gUnknown_84598A4,
     2
 };
 
-const struct CompressedSpriteSheet gUnknown_84599C8 = {
-    gUnknown_8459960,
+static const struct CompressedSpriteSheet sSpriteSheet_UseItem_OutwardSpiralDots = {
+    sSpriteTiles_UseItem_OutwardSpiralDots,
     0x60,
     5
 };
 
-const struct SpritePalette gUnknown_84599D0 = {
-    gUnknown_8459940,
+static const struct SpritePalette sSpritePalette_UseItem_OutwardSpiralDots = {
+    sSpritePals_UseItem_OutwardSpiralDots,
     5
 };
 
-const struct OamData gUnknown_84599D8 = {
+static const struct OamData sOamData_MonSprite = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -152,75 +152,75 @@ const struct OamData gUnknown_84599D8 = {
 };
 
 
-const union AffineAnimCmd gUnknown_84599E0[] = {
+static const union AffineAnimCmd gUnknown_84599E0[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_84599F0[] = {
+static const union AffineAnimCmd gUnknown_84599F0[] = {
     AFFINEANIMCMD_FRAME(0x155, 0x155, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_8459A00[] = {
+static const union AffineAnimCmd gUnknown_8459A00[] = {
     AFFINEANIMCMD_FRAME(0x1AA, 0x1AA, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_8459A10[] = {
+static const union AffineAnimCmd gUnknown_8459A10[] = {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_8459A20[] = {
+static const union AffineAnimCmd *const sAffineAnimTable_Zoom[] = {
     gUnknown_84599E0,
     gUnknown_84599F0,
     gUnknown_8459A00,
     gUnknown_8459A10
 };
 
-const struct SpriteTemplate gUnknown_8459A30 = {
+static const struct SpriteTemplate sSpriteTemplate_MonSprite = {
     .tileTag = 0,
     .paletteTag = 0,
-    .oam = &gUnknown_84599D8,
+    .oam = &sOamData_MonSprite,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gUnknown_8459A20,
+    .affineAnims = sAffineAnimTable_Zoom,
     .callback = SpriteCallbackDummy
 };
 
-const union AffineAnimCmd gUnknown_8459A48[] = {
+static const union AffineAnimCmd gUnknown_8459A48[] = {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_FRAME(-28, -28, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_8459A60[] = {
+static const union AffineAnimCmd gUnknown_8459A60[] = {
     AFFINEANIMCMD_FRAME(0x155, 0x155, 0, 0),
     AFFINEANIMCMD_FRAME(-37, -37, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_8459A78[] = {
+static const union AffineAnimCmd gUnknown_8459A78[] = {
     AFFINEANIMCMD_FRAME(0x1AA, 0x1AA, 0, 0),
     AFFINEANIMCMD_FRAME(-47, -47, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd gUnknown_8459A90[] = {
+static const union AffineAnimCmd gUnknown_8459A90[] = {
     AFFINEANIMCMD_FRAME(0x200, 0x200, 0, 0),
     AFFINEANIMCMD_FRAME(-56, -56, 0, 8),
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gUnknown_8459AA8[] = {
+static const union AffineAnimCmd *const gUnknown_8459AA8[] = {
     gUnknown_8459A48,
     gUnknown_8459A60,
     gUnknown_8459A78,
     gUnknown_8459A90
 };
 
-const struct OamData gUnknown_8459AB8 = {
+static const struct OamData gUnknown_8459AB8 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
@@ -235,16 +235,16 @@ const struct OamData gUnknown_8459AB8 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_8459AC0[] = {
+static const union AnimCmd gUnknown_8459AC0[] = {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_8459AC8[] = {
+static const union AnimCmd *const gUnknown_8459AC8[] = {
     gUnknown_8459AC0
 };
 
-const struct SpriteTemplate gUnknown_8459ACC = {
+static const struct SpriteTemplate gUnknown_8459ACC = {
     .tileTag = 0,
     .paletteTag = 0,
     .oam = &gUnknown_8459AB8,
@@ -254,7 +254,7 @@ const struct SpriteTemplate gUnknown_8459ACC = {
     .callback = sub_811E7B4
 };
 
-const struct OamData gUnknown_8459AE4 = {
+static const struct OamData gUnknown_8459AE4 = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -269,7 +269,7 @@ const struct OamData gUnknown_8459AE4 = {
     .paletteNum = 0
 };
 
-const struct SpriteTemplate gUnknown_8459AEC = {
+static const struct SpriteTemplate gUnknown_8459AEC = {
     .tileTag = 2,
     .paletteTag = 2,
     .oam = &gUnknown_8459AE4,
@@ -279,7 +279,7 @@ const struct SpriteTemplate gUnknown_8459AEC = {
     .callback = sub_811E300
 };
 
-const struct OamData gUnknown_8459B04 = {
+static const struct OamData sOamData_UseItem_OutwardSpiralDots = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -294,51 +294,42 @@ const struct OamData gUnknown_8459B04 = {
     .paletteNum = 0
 };
 
-const union AnimCmd gUnknown_8459B0C[] = {
+static const union AnimCmd gUnknown_8459B0C[] = {
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_FRAME(1,  8),
     ANIMCMD_FRAME(2,  4),
     ANIMCMD_END
 };
 
-const union AnimCmd gUnknown_8459B1C[] = {
+static const union AnimCmd gUnknown_8459B1C[] = {
     ANIMCMD_FRAME(1, 4),
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gUnknown_8459B28[] = {
+static const union AnimCmd *const sAnimTable_UseItem_OutwardSpiralDots[] = {
     gUnknown_8459B0C,
     gUnknown_8459B1C
 };
 
-const struct SpriteTemplate gUnknown_8459B30 = {
+static const struct SpriteTemplate sSpriteTemplate_UseItem_OutwardSpiralDots = {
     .tileTag = 5,
     .paletteTag = 5,
-    .oam = &gUnknown_8459B04,
-    .anims = gUnknown_8459B28,
+    .oam = &sOamData_UseItem_OutwardSpiralDots,
+    .anims = sAnimTable_UseItem_OutwardSpiralDots,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_811E520
+    .callback = SpriteCallback_UseItem_OutwardSpiralDots
 };
 
-const u8 *const gUnknown_8459B48[] = {
-    gUnknown_841B2A9,
-    gUnknown_841B2B7,
-    gUnknown_841B2BE,
-    gUnknown_841B2CC,
-    gUnknown_841B2D4,
-    gUnknown_841B2C6
-};
-
-void sub_811D184(struct PokemonSpecialAnimScene * buffer, u16 animType)
+void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 animType)
 {
     FreeAllWindowBuffers();
     ResetTempTileDataBuffers();
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(FALSE);
-    InitBgsFromTemplates(0, gUnknown_8459980, NELEMS(gUnknown_8459980));
-    InitWindows(gUnknown_8459988);
+    InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
+    InitWindows(sWindowTemplates);
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(3, 0, 0);
@@ -361,7 +352,7 @@ void sub_811D184(struct PokemonSpecialAnimScene * buffer, u16 animType)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
 }
 
-bool8 sub_811D280(void)
+bool8 PokemonSpecialAnimSceneInitIsNotFinished(void)
 {
     if (!FreeTempTileDataBuffersIfPossible())
         return IsDma3ManagerBusyWithBgCopy();
@@ -369,7 +360,7 @@ bool8 sub_811D280(void)
         return TRUE;
 }
 
-void sub_811D29C(void)
+void PSA_FreeWindowBuffers(void)
 {
     FreeAllWindowBuffers();
 }
@@ -389,28 +380,28 @@ void sub_811D2D0(void)
     CopyWindowToVram(0, 1);
 }
 
-void sub_811D2EC(u8 messageId)
+void PSA_PrintMessage(u8 messageId)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    u16 itemId = sub_811D0B4();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    u16 itemId = PSA_GetItemId();
     u16 strWidth = 0;
     u8 textSpeed = GetTextSpeedSetting();
-    struct Pokemon * pokemon = sub_811D094();
+    struct Pokemon * pokemon = PSA_GetPokemon();
     u16 level;
     u8 *str;
 
     switch (messageId)
     {
     case 0: // Item was used on Mon
-        str = StringCopy(scene->field_0014, ItemId_GetName(itemId));
+        str = StringCopy(scene->textBuf, ItemId_GetName(itemId));
         str = StringCopy(str, gUnknown_841B285);
         GetMonData(pokemon, MON_DATA_NICKNAME, str);
-        StringAppend(scene->field_0014, gUnknown_841B293);
+        StringAppend(scene->textBuf, gUnknown_841B293);
         break;
     case 1: // Mon's level was elevated to level
         level = GetMonData(pokemon, MON_DATA_LEVEL);
-        GetMonData(pokemon, MON_DATA_NICKNAME, scene->field_0014);
-        str = StringAppend(scene->field_0014, gUnknown_841B295);
+        GetMonData(pokemon, MON_DATA_NICKNAME, scene->textBuf);
+        str = StringAppend(scene->textBuf, gUnknown_841B295);
         if (level < MAX_LEVEL)
             level++;
         str = ConvertIntToDecimalStringN(str, level, STR_CONV_MODE_LEFT_ALIGN, level < MAX_LEVEL ? 2 : 3);
@@ -418,9 +409,9 @@ void sub_811D2EC(u8 messageId)
         break;
     case 9: // Mon learned move
         DynamicPlaceholderTextUtil_Reset();
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sub_811D0F4());
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sub_811D0D0());
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->field_0014, gUnknown_841B32E);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, PSA_GetMonNickname());
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, PSA_GetNameOfMoveToTeach());
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->textBuf, gUnknown_841B32E);
         break;
     case 4: //  poof!
         strWidth += GetStringWidth(2, gUnknown_841B2F1, -1);
@@ -429,29 +420,29 @@ void sub_811D2EC(u8 messageId)
         strWidth += GetStringWidth(2, gUnknown_841B2ED, -1);
         // fallthrough
     case 2: // 1
-        StringCopy(scene->field_0014, gUnknown_8459998[messageId - 2]);
+        StringCopy(scene->textBuf, s1_2_and_Poof_textPtrs[messageId - 2]);
         textSpeed = 1;
         break;
     case 5: // Mon forgot move
         DynamicPlaceholderTextUtil_Reset();
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sub_811D0F4());
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sub_811D0C4());
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->field_0014, gUnknown_841B306);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, PSA_GetMonNickname());
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, PSA_GetNameOfMoveForgotten());
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(scene->textBuf, gUnknown_841B306);
         break;
     case 6: // And...
-        StringCopy(scene->field_0014, gUnknown_841B315);
+        StringCopy(scene->textBuf, gUnknown_841B315);
         break;
     case 7: // Machine set!
-        StringCopy(scene->field_0014, gUnknown_841B31B);
+        StringCopy(scene->textBuf, gUnknown_841B31B);
         break;
     case 8: // Huh?
-        StringCopy(scene->field_0014, gUnknown_841B329);
+        StringCopy(scene->textBuf, gUnknown_841B329);
         break;
     default:
         return;
     }
 
-    AddTextPrinterParameterized5(0, 2, scene->field_0014, strWidth, 0, textSpeed, NULL, 0, 4);
+    AddTextPrinterParameterized5(0, 2, scene->textBuf, strWidth, 0, textSpeed, NULL, 0, 4);
 }
 
 void sub_811D4D4(void)
@@ -460,30 +451,30 @@ void sub_811D4D4(void)
     CopyWindowToVram(0, 2);
 }
 
-bool8 sub_811D4EC(void)
+bool8 PSA_IsMessagePrintTaskActive(void)
 {
     return IsTextPrinterActive(0);
 }
 
 void sub_811D4FC(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    scene->field_0000 = 0;
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    scene->state = 0;
     BlendPalettes((0x10000 << IndexOfSpritePaletteTag(0)) | 4, 16, RGB_BLACK);
     sub_811E204(scene);
 }
 
 bool8 sub_811D530(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
 
-    switch (scene->field_0000)
+    switch (scene->state)
     {
     case 0:
         if (!sub_811E2F4())
         {
             BeginNormalPaletteFade((0x10000 << IndexOfSpritePaletteTag(0)) | 4, -1, 16, 0, RGB_BLACK);
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 1:
@@ -496,8 +487,8 @@ bool8 sub_811D530(void)
 
 void sub_811D5A0(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    scene->field_0000 = 0;
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    scene->state = 0;
 }
 
 void sub_811D5B0(void)
@@ -508,29 +499,29 @@ void sub_811D5B0(void)
 
 bool8 sub_811D5C0(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    switch (scene->field_0000)
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    switch (scene->state)
     {
     case 0:
         sub_811E194(0);
-        scene->field_0000++;
+        scene->state++;
         break;
     case 1:
         if (!sub_811D9A8())
         {
             scene->field_0004 = 0;
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 2:
         scene->field_0004++;
         if (scene->field_0004 > 20)
-            scene->field_0000++;
+            scene->state++;
         break;
     case 3:
-        sub_811DB7C(scene, 1, 0, 1);
+        StartMonWiggleAnim(scene, 1, 0, 1);
         scene->field_0004 = 0;
-        scene->field_0000++;
+        scene->state++;
         break;
     case 4:
         scene->field_0004++;
@@ -540,17 +531,17 @@ bool8 sub_811D5C0(void)
             PlaySE(SE_W025);
             BeginNormalPaletteFade(0x00000001, 2, 0, 12, RGB(8, 13, 31));
             sub_811E348(scene);
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 5:
         scene->field_0004++;
         if (scene->field_0004 > 70)
         {
-            sub_811DBA8(scene);
+            StopMonWiggleAnim(scene);
             BeginNormalPaletteFade(0x00000001, 6, 12, 0, RGB(8, 13, 31));
             scene->field_0004 = 0;
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 6:
@@ -558,20 +549,20 @@ bool8 sub_811D5C0(void)
         if (!sub_811E5A4() && scene->field_0004 > 40)
         {
             scene->field_0004 = 0;
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 7:
         scene->field_0004++;
         if (scene->field_0004 > 20)
         {
-            scene->field_0000++;
+            scene->state++;
         }
         break;
     case 8:
         PlaySE(SE_EXPMAX);
-        DestroySprite(scene->field_0010);
-        scene->field_0000++;
+        DestroySprite(scene->itemIconSprite);
+        scene->state++;
         break;
     default:
         return FALSE;
@@ -581,20 +572,20 @@ bool8 sub_811D5C0(void)
 
 void sub_811D6EC(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    scene->field_0000 = 0;
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    scene->state = 0;
 }
 
 bool8 sub_811D6FC(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
 
-    switch (scene->field_0000)
+    switch (scene->state)
     {
     case 0:
         sub_811E10C();
         PlaySE(SE_MU_PACHI);
-        scene->field_0000++;
+        scene->state++;
         break;
     case 1:
         return sub_811E138();
@@ -602,7 +593,7 @@ bool8 sub_811D6FC(void)
     return TRUE;
 }
 
-void sub_811D734(void)
+static void sub_811D734(void)
 {
     sub_811E5B8(120, 56, 4, 4, 2, 0);
 }
@@ -612,25 +603,25 @@ bool8 sub_811D754(void)
     return sub_811E680();
 }
 
-void sub_811D764(u16 *statsBefore, u16 *statsAfter)
+static void sub_811D764(u16 *statsBefore, u16 *statsAfter)
 {
     DrawTextBorderOuter(1, 0x001, 0xE);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(1);
     CopyWindowToVram(1, 3);
 }
-void sub_811D7A0(u16 *currStats)
+static void sub_811D7A0(u16 *currStats)
 {
     DrawLevelUpWindowPg2(1, currStats, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     CopyWindowToVram(1, 2);
 }
 
-bool8 sub_811D7C4(void)
+static bool8 sub_811D7C4(void)
 {
     return IsDma3ManagerBusyWithBgCopy();
 }
 
-void sub_811D7D4(u16 animType)
+static void sub_811D7D4(u16 animType)
 {
     CopyToBgTilemapBuffer(3, gUnknown_845973C, 0, 0x000);
     DecompressAndCopyTileDataToVram(3, gUnknown_845967C, 0, 0x000, 0);
@@ -642,8 +633,8 @@ void sub_811D7D4(u16 animType)
 
 void sub_811D830(u8 closeness)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    struct Pokemon * pokemon = sub_811D094();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    struct Pokemon * pokemon = PSA_GetPokemon();
     u16 species = GetMonData(pokemon, MON_DATA_SPECIES);
     u32 personality = GetMonData(pokemon, MON_DATA_PERSONALITY);
     u8 r1 = sub_812EA78(species, personality, 2);
@@ -670,15 +661,15 @@ void sub_811D830(u8 closeness)
     {
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], r6, species, personality);
         LZ77UnCompWram(GetMonFrontSpritePal(pokemon), r4);
-        sub_811DC14(r6, r4);
-        spriteId = CreateSprite(&gUnknown_8459A30, 120, scene->field_0006, 4);
+        LoadMonSpriteGraphics(r6, r4);
+        spriteId = CreateSprite(&sSpriteTemplate_MonSprite, 120, scene->field_0006, 4);
         if (spriteId != MAX_SPRITES)
         {
-            scene->field_000c = &gSprites[spriteId];
-            sub_811DB14(scene->field_000c, closeness);
+            scene->monSprite = &gSprites[spriteId];
+            sub_811DB14(scene->monSprite, closeness);
         }
         else
-            scene->field_000c = NULL;
+            scene->monSprite = NULL;
         scene->field_000a = closeness;
     }
     if (r6 != NULL) Free(r6);
@@ -686,14 +677,14 @@ void sub_811D830(u8 closeness)
     if (r4 != NULL) Free(r4);
 }
 
-void sub_811D948(u8 closeness)
+void PSA_SetUpZoomAnim(u8 closeness)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
     u8 taskId;
     if (closeness != scene->field_000a)
     {
         taskId = CreateTask(sub_811D9BC, 4);
-        SetWordTaskArg(taskId, 6, (uintptr_t)scene->field_000c);
+        SetWordTaskArg(taskId, 6, (uintptr_t)scene->monSprite);
         gTasks[taskId].data[1] = scene->field_000a;
         gTasks[taskId].data[2] = closeness;
         gTasks[taskId].data[5] = 6;
@@ -709,7 +700,7 @@ bool8 sub_811D9A8(void)
     return FuncIsActiveTask(sub_811D9BC);
 }
 
-void sub_811D9BC(u8 taskId)
+static void sub_811D9BC(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite * sprite = (void *)GetWordTaskArg(taskId, 6);
@@ -731,7 +722,7 @@ void sub_811D9BC(u8 taskId)
                 sub_811DB48((void *)GetWordTaskArg(taskId, 9), data[1]);
             if (data[1] == data[2])
             {
-                sub_811D0A8()->field_000a = data[2];
+                PSA_GetSceneWork()->field_000a = data[2];
                 DestroyTask(taskId);
             }
             else
@@ -749,62 +740,64 @@ void sub_811D9BC(u8 taskId)
     }
 }
 
-void sub_811DA9C(struct Sprite * sprite, u8 closeness)
+static void sub_811DA9C(struct Sprite * sprite, u8 closeness)
 {
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = closeness;
 }
 
-bool8 sub_811DAAC(struct Sprite * sprite)
+static bool8 sub_811DAAC(struct Sprite * sprite)
 {
     return sprite->callback != SpriteCallbackDummy;
 }
 
-s16 sub_811DAC0(s16 pos, u8 closeness)
+static s16 sub_811DAC0(s16 pos, u8 closeness)
 {
-    return (pos * gUnknown_84599AA[closeness]) >> 8;
+    return (pos * sAffineScales[closeness]) >> 8;
 }
 
 // FIXME: better math
-u16 sub_811DADC(u16 pos)
+static u16 sub_811DADC(u16 pos)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
     s32 v = ((((((scene->field_0008 - scene->field_0006) << 16) >> 8) / 256 * (pos - 256)) << 8) >> 16);
     return v += scene->field_0006;
 }
 
-void sub_811DB14(struct Sprite * sprite, u8 closeness)
+static void sub_811DB14(struct Sprite * sprite, u8 closeness)
 {
     if (closeness > 3)
         closeness = 3;
-    sub_811D0A8(); // return value not used
+    PSA_GetSceneWork(); // return value not used
     StartSpriteAffineAnim(sprite, closeness);
-    sprite->pos1.y = sub_811DADC(gUnknown_84599AA[closeness]);
+    sprite->pos1.y = sub_811DADC(sAffineScales[closeness]);
 }
 
-void sub_811DB48(struct Sprite * sprite, u8 closeness)
+static void sub_811DB48(struct Sprite * sprite, u8 closeness)
 {
     sub_811DB14(sprite, closeness);
     sprite->pos2.x = sub_811DAC0(sprite->data[6] - 32, closeness);
     sprite->pos2.y = sub_811DAC0(sprite->data[7] - 32, closeness);
 }
 
-void sub_811DB7C(struct PokemonSpecialAnimScene * scene, u8 a1, u8 a2, u8 a3)
+static void StartMonWiggleAnim(struct PokemonSpecialAnimScene * scene, u8 frameLen, u8 niter, u8 amplitude)
 {
-    scene->field_000c->data[0] = a1;
-    scene->field_000c->data[1] = a2;
-    scene->field_000c->data[2] = a3;
-    scene->field_000c->callback = sub_811DBBC;
+    // frameLen: frame duration
+    // niter = 0: iterate ad infinitum
+    scene->monSprite->data[0] = frameLen;
+    scene->monSprite->data[1] = niter;
+    scene->monSprite->data[2] = amplitude;
+    scene->monSprite->callback = SpriteCallback_MonSpriteWiggle;
 }
 
-void sub_811DBA8(struct PokemonSpecialAnimScene * scene)
+static void StopMonWiggleAnim(struct PokemonSpecialAnimScene * scene)
 {
-    scene->field_000c->pos2.x = 0;
-    scene->field_000c->callback = SpriteCallbackDummy;
+    scene->monSprite->pos2.x = 0;
+    scene->monSprite->callback = SpriteCallbackDummy;
 }
 
-void sub_811DBBC(struct Sprite * sprite)
+static void SpriteCallback_MonSpriteWiggle(struct Sprite * sprite)
 {
     sprite->data[7]++;
     if (sprite->data[7] > sprite->data[0])
@@ -823,7 +816,7 @@ void sub_811DBBC(struct Sprite * sprite)
     }
 }
 
-void sub_811DC14(u16 *tiles, u16 *palette)
+static void LoadMonSpriteGraphics(u16 *tiles, u16 *palette)
 {
     struct SpriteSheet spriteSheet;
     struct SpritePalette spritePalette;
@@ -837,42 +830,42 @@ void sub_811DC14(u16 *tiles, u16 *palette)
     LoadSpritePalette(&spritePalette);
 }
 
-void sub_811DC54(u16 itemId, u8 closeness, bool32 a2)
+void PSA_SetUpZoomOutMonTask(u16 itemId, u8 closeness, bool32 a2)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
     u8 taskId;
-    scene->field_0010 = sub_811DD20(itemId);
-    if (scene->field_0010 != NULL)
+    scene->itemIconSprite = PSA_CreateItemIconObject(itemId);
+    if (scene->itemIconSprite != NULL)
     {
-        sub_811E06C(scene, scene->field_0010, closeness);
-        StartSpriteAffineAnim(scene->field_0010, closeness);
-        scene->field_0010->invisible = TRUE;
-        taskId = CreateTask(sub_811DDA4, 2);
-        SetWordTaskArg(taskId, 4, (uintptr_t)scene->field_0010);
+        sub_811E06C(scene, scene->itemIconSprite, closeness);
+        StartSpriteAffineAnim(scene->itemIconSprite, closeness);
+        scene->itemIconSprite->invisible = TRUE;
+        taskId = CreateTask(Task_ZoomOutMon, 2);
+        SetWordTaskArg(taskId, 4, (uintptr_t)scene->itemIconSprite);
         gTasks[taskId].data[2] = closeness;
-        gTasks[taskId].data[3] = sub_811DADC(gUnknown_84599AA[closeness]);
+        gTasks[taskId].data[3] = sub_811DADC(sAffineScales[closeness]);
         gTasks[taskId].data[6] = a2;
-        gTasks[taskId].data[9] = sub_811DCE8(itemId);
+        gTasks[taskId].data[9] = GetBlendColorByItemId(itemId);
     }
 }
 
-u16 sub_811DCE8(u16 itemId)
+static u16 GetBlendColorByItemId(u16 itemId)
 {
     return RGB_WHITE;
 }
 
 void sub_811DCF0(u16 itemId)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    scene->field_0010 = sub_811DD20(itemId);
-    if (scene->field_0010 != NULL)
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    scene->itemIconSprite = PSA_CreateItemIconObject(itemId);
+    if (scene->itemIconSprite != NULL)
     {
-        StartSpriteAffineAnim(scene->field_0010, 3);
-        sub_811E06C(scene, scene->field_0010, 3);
+        StartSpriteAffineAnim(scene->itemIconSprite, 3);
+        sub_811E06C(scene, scene->itemIconSprite, 3);
     }
 }
 
-struct Sprite * sub_811DD20(u16 itemId)
+struct Sprite * PSA_CreateItemIconObject(u16 itemId)
 {
     u8 spriteId;
     struct Sprite * sprite;
@@ -882,18 +875,18 @@ struct Sprite * sub_811DD20(u16 itemId)
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].subpriority = 1;
-    gSprites[spriteId].affineAnims = gUnknown_8459A20;
+    gSprites[spriteId].affineAnims = sAffineAnimTable_Zoom;
     gSprites[spriteId].callback = SpriteCallbackDummy;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     return &gSprites[spriteId];
 }
 
-bool8 sub_811DD90(void)
+bool8 PSA_IsZoomOutMonTaskRunning(void)
 {
-    return FuncIsActiveTask(sub_811DDA4);
+    return FuncIsActiveTask(Task_ZoomOutMon);
 }
 
-void sub_811DDA4(u8 taskId)
+static void Task_ZoomOutMon(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite * sprite = (void *)GetWordTaskArg(taskId, 4);
@@ -937,7 +930,7 @@ void sub_811DDA4(u8 taskId)
         {
             data[1] = 0;
             if (!data[11])
-                sub_811DF14(taskId, data, sprite);
+                CreateSprites_UseItem_OutwardSpiralDots(taskId, data, sprite);
             if (data[7] == 0)
                 PlaySE(SE_W179);
             data[7]++;
@@ -958,7 +951,7 @@ void sub_811DDA4(u8 taskId)
     }
 }
 
-void sub_811DF14(u8 taskId, s16 *data, struct Sprite * sprite)
+static void CreateSprites_UseItem_OutwardSpiralDots(u8 taskId, s16 *data, struct Sprite * sprite)
 {
     int x = sprite->pos1.x + sprite->pos2.x - 4;
     int y = sprite->pos1.y + sprite->pos2.y - 4;
@@ -967,7 +960,7 @@ void sub_811DF14(u8 taskId, s16 *data, struct Sprite * sprite)
     BlendPalettes(0x10000 << IndexOfSpritePaletteTag(5), 16, data[9]);
     for (i = 0; i < 15; i++)
     {
-        spriteId = CreateSprite(&gUnknown_8459B30, x, y, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_UseItem_OutwardSpiralDots, x, y, 0);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[1] = i << 4;
@@ -979,7 +972,7 @@ void sub_811DF14(u8 taskId, s16 *data, struct Sprite * sprite)
     }
 }
 
-void sub_811DFC0(struct Sprite * sprite)
+static void sub_811DFC0(struct Sprite * sprite)
 {
     s16 *data = sprite->data;
     if (data[0] < 16)
@@ -1000,14 +993,14 @@ void sub_811DFC0(struct Sprite * sprite)
 
 void sub_811E040(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_811DDA4);
+    u8 taskId = FindTaskIdByFunc(Task_ZoomOutMon);
     if (taskId != 0xFF)
     {
         gTasks[taskId].data[11] = TRUE;
     }
 }
 
-void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
+static void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite, u8 closeness)
 {
     u16 species;
     u32 personality;
@@ -1025,9 +1018,9 @@ void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite,
     }
     sprite->pos1.x += 4;
     sprite->pos1.y += 4;
-    species = sub_811D110();
-    personality = sub_811D120();
-    if (sub_811D100() == 4)
+    species = PSA_GetMonSpecies();
+    personality = PSA_GetMonPersonality();
+    if (PSA_GetAnimType() == 4)
     {
         r4 = sub_812EA78(species, personality, 0);
         r0 = sub_812EA78(species, personality, 1);
@@ -1046,27 +1039,27 @@ void sub_811E06C(struct PokemonSpecialAnimScene * scene, struct Sprite * sprite,
     sub_811DB48(sprite, closeness);
 }
 
-void sub_811E10C(void)
+static void sub_811E10C(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    sub_811E128(scene->field_000c);
-    sub_811E128(scene->field_0010);
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    sub_811E128(scene->monSprite);
+    sub_811E128(scene->itemIconSprite);
 }
 
-void sub_811E128(struct Sprite * sprite)
+static void sub_811E128(struct Sprite * sprite)
 {
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->callback = sub_811E154;
 }
 
-bool8 sub_811E138(void)
+static bool8 sub_811E138(void)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
-    return scene->field_000c->callback != SpriteCallbackDummy;
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
+    return scene->monSprite->callback != SpriteCallbackDummy;
 }
 
-void sub_811E154(struct Sprite * sprite)
+static void sub_811E154(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -1085,15 +1078,15 @@ void sub_811E154(struct Sprite * sprite)
     }
 }
 
-void sub_811E194(u8 a0)
+static void sub_811E194(u8 a0)
 {
-    struct PokemonSpecialAnimScene * scene = sub_811D0A8();
+    struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
     u8 taskId;
     if (a0 != scene->field_000a)
     {
         taskId = CreateTask(sub_811D9BC, 1);
-        SetWordTaskArg(taskId, 6, (uintptr_t)scene->field_000c);
-        SetWordTaskArg(taskId, 9, (uintptr_t)scene->field_0010);
+        SetWordTaskArg(taskId, 6, (uintptr_t)scene->monSprite);
+        SetWordTaskArg(taskId, 9, (uintptr_t)scene->itemIconSprite);
         gTasks[taskId].data[1] = scene->field_000a;
         gTasks[taskId].data[2] = a0;
         gTasks[taskId].data[8] = 1;
@@ -1105,7 +1098,7 @@ void sub_811E194(u8 a0)
     }
 }
 
-void sub_811E204(struct PokemonSpecialAnimScene * scene)
+static void sub_811E204(struct PokemonSpecialAnimScene * scene)
 {
     int i;
     u8 spriteId;
@@ -1119,8 +1112,8 @@ void sub_811E204(struct PokemonSpecialAnimScene * scene)
         spriteId = CreateSprite(&gUnknown_8459AEC, 120 + gUnknown_84599B2[i][0],  scene->field_0008 + gUnknown_84599B2[i][1], 2);
         if (spriteId != MAX_SPRITES)
         {
-            species = sub_811D110();
-            personality = sub_811D120();
+            species = PSA_GetMonSpecies();
+            personality = PSA_GetMonPersonality();
             gSprites[spriteId].data[3] = gUnknown_84599B2[i][0] * 8;
             gSprites[spriteId].data[4] = gUnknown_84599B2[i][1] * 8;
             gSprites[spriteId].pos1.x += sub_811DAC0(sub_812EAE4(species, personality, 0), 3);
@@ -1130,12 +1123,12 @@ void sub_811E204(struct PokemonSpecialAnimScene * scene)
     }
 }
 
-u8 sub_811E2F4(void)
+static u8 sub_811E2F4(void)
 {
-    return sub_811D0A8()->field_0002;
+    return PSA_GetSceneWork()->field_0002;
 }
 
-void sub_811E300(struct Sprite * sprite)
+static void sub_811E300(struct Sprite * sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] < 10)
@@ -1147,12 +1140,12 @@ void sub_811E300(struct Sprite * sprite)
     }
     else
     {
-        sub_811D0A8()->field_0002--;
+        PSA_GetSceneWork()->field_0002--;
         DestroySprite(sprite);
     }
 }
 
-void sub_811E348(struct PokemonSpecialAnimScene * scene)
+static void sub_811E348(struct PokemonSpecialAnimScene * scene)
 {
     u8 taskId;
     sub_811E588();
@@ -1161,14 +1154,14 @@ void sub_811E348(struct PokemonSpecialAnimScene * scene)
     gTasks[taskId].data[5] = 224;
 }
 
-void sub_811E388(void)
+static void sub_811E388(void)
 {
     u8 taskId = FindTaskIdByFunc(sub_811E3B4);
     if (taskId != 0xFF)
         gTasks[taskId].data[0] = 1;
 }
 
-void sub_811E3B4(u8 taskId)
+static void sub_811E3B4(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     struct Sprite * sprite;
@@ -1183,7 +1176,7 @@ void sub_811E3B4(u8 taskId)
     case 0:
         if (data[1] == 0)
         {
-            sprite = sub_811D0A8()->field_0010;
+            sprite = PSA_GetSceneWork()->itemIconSprite;
             x = sprite->pos1.x + sprite->pos2.x;
             y = sprite->pos1.y + sprite->pos2.y;
             r0 = (sub_811E4EC(taskId) % 21) + 70;
@@ -1191,7 +1184,7 @@ void sub_811E3B4(u8 taskId)
             y2 = y + ((u32)(gSineTable[data[5]       ] * r0) >> 8);
             data[5] += 76;
             data[5] &= 0xFF;
-            spriteId = CreateSprite(&gUnknown_8459B30, x2, y2, 0);
+            spriteId = CreateSprite(&sSpriteTemplate_UseItem_OutwardSpiralDots, x2, y2, 0);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].data[0] = 0;
@@ -1217,7 +1210,7 @@ void sub_811E3B4(u8 taskId)
     }
 }
 
-u16 sub_811E4EC(u8 taskId)
+static u16 sub_811E4EC(u8 taskId)
 {
     u32 state = GetWordTaskArg(taskId, 3);
     state = state * 1103515245 + 24691;
@@ -1225,7 +1218,7 @@ u16 sub_811E4EC(u8 taskId)
     return state >> 16;
 }
 
-void sub_811E520(struct Sprite * sprite)
+static void SpriteCallback_UseItem_OutwardSpiralDots(struct Sprite * sprite)
 {
     int x;
     int y;
@@ -1244,13 +1237,13 @@ void sub_811E520(struct Sprite * sprite)
     }
 }
 
-void sub_811E588(void)
+static void sub_811E588(void)
 {
-    LoadCompressedSpriteSheet(&gUnknown_84599C8);
-    LoadSpritePalette(&gUnknown_84599D0);
+    LoadCompressedSpriteSheet(&sSpriteSheet_UseItem_OutwardSpiralDots);
+    LoadSpritePalette(&sSpritePalette_UseItem_OutwardSpiralDots);
 }
 
-bool32 sub_811E5A4(void)
+static bool32 sub_811E5A4(void)
 {
     return FuncIsActiveTask(sub_811E3B4);
 }
@@ -1283,7 +1276,7 @@ bool8 sub_811E680(void)
     return FuncIsActiveTask(sub_811E694);
 }
 
-void sub_811E694(u8 taskId)
+static void sub_811E694(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -1314,7 +1307,7 @@ void sub_811E694(u8 taskId)
     }
 }
 
-void sub_811E710(u8 taskId, s16 *data)
+static void sub_811E710(u8 taskId, s16 *data)
 {
     u8 spriteId;
     struct SpriteTemplate template = gUnknown_8459ACC;
@@ -1332,7 +1325,7 @@ void sub_811E710(u8 taskId, s16 *data)
     }
 }
 
-void sub_811E7B4(struct Sprite * sprite)
+static void sub_811E7B4(struct Sprite * sprite)
 {
     sprite->data[1] -= sprite->data[2];
     sprite->pos2.y = sprite->data[1] >> 4;
@@ -1342,6 +1335,15 @@ void sub_811E7B4(struct Sprite * sprite)
         DestroySprite(sprite);
     }
 }
+
+static const u8 *const sLevelUpWindowStatNames[] = {
+    gUnknown_841B2A9,
+    gUnknown_841B2B7,
+    gUnknown_841B2BE,
+    gUnknown_841B2CC,
+    gUnknown_841B2D4,
+    gUnknown_841B2C6
+};
 
 void DrawLevelUpWindowPg1(u16 windowId, u16 *beforeStats, u16 *afterStats, u8 bgColor, u8 fgColor, u8 shadowColor)
 {
@@ -1366,7 +1368,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *beforeStats, u16 *afterStats, u8 bg
 
     for (i = 0; i < 6; i++)
     {
-        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, gUnknown_8459B48[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, sLevelUpWindowStatNames[i]);
         StringCopy(textbuf, diffStats[i] >= 0 ? gUnknown_841B2DC : gUnknown_841B2E5);
         AddTextPrinterParameterized3(windowId, 2, 56, i * 15, textColor, TEXT_SPEED_FF, textbuf);
         textbuf[0] = CHAR_SPACE;
@@ -1408,7 +1410,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgColor, u8 fgColor, 
             ndigits = 1;
         ConvertIntToDecimalStringN(textbuf, statsRearrange[i], STR_CONV_MODE_LEFT_ALIGN, ndigits);
         x = 6 * (4 - ndigits);
-        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, gUnknown_8459B48[i]);
+        AddTextPrinterParameterized3(windowId, 2, 0, i * 15, textColor, TEXT_SPEED_FF, sLevelUpWindowStatNames[i]);
         AddTextPrinterParameterized3(windowId, 2, 56 + x, i * 15, textColor, TEXT_SPEED_FF, textbuf);
     }
 }

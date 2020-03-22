@@ -59,15 +59,8 @@ gUnknown_3000E89: @ 3000E89
 	.include "src/quest_log.o"
 	.align 2
 	.include "src/union_room.o"
-
 	.align 2
-	@ .include "src/pokemon_special_anim.o"
-gUnknown_3002030: @ 3002030
-	.space 0x8
-
-gUnknown_3002038: @ 3002038
-	.space 0x8
-
+	.include "src/pokemon_special_anim_scene.o"
 	.align 2
 	.include "src/wireless_communication_status_screen.o"
 	.align 2

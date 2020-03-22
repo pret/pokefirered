@@ -380,7 +380,7 @@ static void sub_8125898(u8 taskId, UNUSED TaskFunc func);
 static void sub_8125F4C(u8 taskId, UNUSED TaskFunc func);
 static void sub_8125F5C(u8 taskId);
 static void sub_8126BD4(void);
-static bool8 sub_8126C24(void);
+static bool8 MonCanEvolve(void);
 
 static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
 EWRAM_DATA struct PartyMenu gPartyMenu = {0};
@@ -4295,21 +4295,21 @@ static void sub_8124DE0(void)
 {
     if (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId) == 2) // Evolution stone
     {
-        if (sub_8126C24() == TRUE)
-            sub_811C540(gPartyMenu.slotId, gSpecialVar_ItemId, sub_8126BD4);
+        if (MonCanEvolve() == TRUE)
+            StartUseItemAnim_Normal(gPartyMenu.slotId, gSpecialVar_ItemId, sub_8126BD4);
         else
-            sub_811C5AC(gPartyMenu.slotId, gSpecialVar_ItemId, gPartyMenu.exitCallback);
+            StartUseItemAnim_CantEvolve(gPartyMenu.slotId, gSpecialVar_ItemId, gPartyMenu.exitCallback);
     }
     else
     {
-        sub_811C540(gPartyMenu.slotId, gSpecialVar_ItemId, sub_8124E48);
+        StartUseItemAnim_Normal(gPartyMenu.slotId, gSpecialVar_ItemId, sub_8124E48);
     }
 }
 
 static void sub_8124E48(void)
 {
     if (ItemId_GetPocket(gSpecialVar_ItemId) == POCKET_TM_CASE
-     && sub_811D178() == 1)
+     && PSA_IsCancelDisabled() == TRUE)
     {
         GiveMoveToMon(&gPlayerParty[gPartyMenu.slotId], ItemIdToBattleMoveId(gSpecialVar_ItemId));
         AdjustFriendship(&gPlayerParty[gPartyMenu.slotId], 4);
@@ -4325,7 +4325,7 @@ static void sub_8124E48(void)
 
 static void sub_8124EFC(void)
 {
-    if (sub_811D178() == 1)
+    if (PSA_IsCancelDisabled() == TRUE)
     {
         struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
         u8 moveIdx = GetMoveSlotToReplace();
@@ -4919,7 +4919,7 @@ static void CB2_ReturnToPartyMenuWhileLearningMove(void)
     if (learnMoveState == 0 && moveIdx != MAX_MON_MOVES)
     {
         move = GetMonData(&gPlayerParty[gPartyMenu.slotId], moveIdx + MON_DATA_MOVE1);
-        sub_811C568(gPartyMenu.slotId, gSpecialVar_ItemId, move, sub_8124EFC);
+        StartUseItemAnim_ForgetMoveAndLearnTMorHM(gPartyMenu.slotId, gSpecialVar_ItemId, move, sub_8124EFC);
         gItemUseCB = sub_8125F4C;
         gPartyMenu.action = learnMoveState;
     }
@@ -5075,9 +5075,9 @@ static void ItemUseCB_RareCandyStep(u8 taskId, UNUSED TaskFunc func)
     s16 *arrayPtr = ptr->data;
     u8 level;
 
-    BufferMonStatsToTaskData(mon, arrayPtr);
+    GetMonLevelUpWindowStats(mon, arrayPtr);
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
-    BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
+    GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(0);
@@ -5347,7 +5347,7 @@ static void sub_8126BD4(void)
     RemoveBagItem(gSpecialVar_ItemId, 1);
 }
 
-static bool8 sub_8126C24(void)
+static bool8 MonCanEvolve(void)
 {
     if (!IsNationalPokedexEnabled()
      && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], 2, gSpecialVar_ItemId) > KANTO_DEX_COUNT)

@@ -1226,7 +1226,7 @@ static void sub_80303A8(u8 taskId)
     case 2:
         PlaySE(SE_REGI);
         if (IsMonGettingExpSentOut())
-            sub_811E5B8(sprite->pos1.x + sprite->pos2.x,
+            CreateLevelUpVerticalSpritesTask(sprite->pos1.x + sprite->pos2.x,
                         sprite->pos1.y + sprite->pos2.y,
                         10000,
                         10000,
@@ -1235,7 +1235,7 @@ static void sub_80303A8(u8 taskId)
         ++data[15];
         break;
     case 3:
-        if (!sub_811E680())
+        if (!LevelUpVerticalSpritesTaskIsRunning())
         {
             sprite->invisible = FALSE;
             ++data[15];

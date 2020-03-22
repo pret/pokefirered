@@ -5,8 +5,6 @@
 #include "text.h"
 #include "window.h"
 
-#define MON_COORD_
-
 #define MENU_NOTHING_CHOSEN -2
 #define MENU_B_PRESSED -1
 

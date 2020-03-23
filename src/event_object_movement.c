@@ -291,6 +291,525 @@ extern const s16 gUnknown_83A695E[3];
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
+const u8 gFaceDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x00,
+    [DIR_SOUTH]     = 0x00,
+    [DIR_NORTH]     = 0x01,
+    [DIR_WEST]      = 0x02,
+    [DIR_EAST]      = 0x03,
+    [DIR_SOUTHWEST] = 0x00,
+    [DIR_SOUTHEAST] = 0x00,
+    [DIR_NORTHWEST] = 0x01,
+    [DIR_NORTHEAST] = 0x01,
+};
+
+const u8 gMoveDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x4,
+    [DIR_SOUTH]     = 0x4,
+    [DIR_NORTH]     = 0x5,
+    [DIR_WEST]      = 0x6,
+    [DIR_EAST]      = 0x7,
+    [DIR_SOUTHWEST] = 0x4,
+    [DIR_SOUTHEAST] = 0x4,
+    [DIR_NORTHWEST] = 0x5,
+    [DIR_NORTHEAST] = 0x5,
+};
+
+const u8 gMoveDirectionFastAnimNums[] = {
+    [DIR_NONE]      = 0x8,
+    [DIR_SOUTH]     = 0x8,
+    [DIR_NORTH]     = 0x9,
+    [DIR_WEST]      = 0xA,
+    [DIR_EAST]      = 0xB,
+    [DIR_SOUTHWEST] = 0x8,
+    [DIR_SOUTHEAST] = 0x8,
+    [DIR_NORTHWEST] = 0x9,
+    [DIR_NORTHEAST] = 0x9,
+};
+
+const u8 gMoveDirectionFasterAnimNums[] = {
+    [DIR_NONE]      = 0xC,
+    [DIR_SOUTH]     = 0xC,
+    [DIR_NORTH]     = 0xD,
+    [DIR_WEST]      = 0xE,
+    [DIR_EAST]      = 0xF,
+    [DIR_SOUTHWEST] = 0xC,
+    [DIR_SOUTHEAST] = 0xC,
+    [DIR_NORTHWEST] = 0xD,
+    [DIR_NORTHEAST] = 0xD,
+};
+
+const u8 gMoveDirectionFastestAnimNums[] = {
+    [DIR_NONE]      = 0x10,
+    [DIR_SOUTH]     = 0x10,
+    [DIR_NORTH]     = 0x11,
+    [DIR_WEST]      = 0x12,
+    [DIR_EAST]      = 0x13,
+    [DIR_SOUTHWEST] = 0x10,
+    [DIR_SOUTHEAST] = 0x10,
+    [DIR_NORTHWEST] = 0x11,
+    [DIR_NORTHEAST] = 0x11,
+};
+
+const u8 gJumpSpecialDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x14,
+    [DIR_SOUTH]     = 0x14,
+    [DIR_NORTH]     = 0x15,
+    [DIR_WEST]      = 0x16,
+    [DIR_EAST]      = 0x17,
+    [DIR_SOUTHWEST] = 0x14,
+    [DIR_SOUTHEAST] = 0x14,
+    [DIR_NORTHWEST] = 0x15,
+    [DIR_NORTHEAST] = 0x15,
+};
+
+const u8 gAcroWheelieDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x14,
+    [DIR_SOUTH]     = 0x14,
+    [DIR_NORTH]     = 0x15,
+    [DIR_WEST]      = 0x16,
+    [DIR_EAST]      = 0x17,
+    [DIR_SOUTHWEST] = 0x14,
+    [DIR_SOUTHEAST] = 0x14,
+    [DIR_NORTHWEST] = 0x15,
+    [DIR_NORTHEAST] = 0x15,
+};
+
+const u8 gUnrefAnimNums_080634A0[] = {
+    [DIR_NONE]      = 0x18,
+    [DIR_SOUTH]     = 0x18,
+    [DIR_NORTH]     = 0x19,
+    [DIR_WEST]      = 0x1A,
+    [DIR_EAST]      = 0x1B,
+    [DIR_SOUTHWEST] = 0x18,
+    [DIR_SOUTHEAST] = 0x18,
+    [DIR_NORTHWEST] = 0x19,
+    [DIR_NORTHEAST] = 0x19,
+};
+
+const u8 gAcroEndWheelieDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x1C,
+    [DIR_SOUTH]     = 0x1C,
+    [DIR_NORTH]     = 0x1D,
+    [DIR_WEST]      = 0x1E,
+    [DIR_EAST]      = 0x1F,
+    [DIR_SOUTHWEST] = 0x1C,
+    [DIR_SOUTHEAST] = 0x1C,
+    [DIR_NORTHWEST] = 0x1D,
+    [DIR_NORTHEAST] = 0x1D,
+};
+
+const u8 gAcroUnusedActionDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x18,
+    [DIR_SOUTH]     = 0x18,
+    [DIR_NORTH]     = 0x19,
+    [DIR_WEST]      = 0x1A,
+    [DIR_EAST]      = 0x1B,
+    [DIR_SOUTHWEST] = 0x18,
+    [DIR_SOUTHEAST] = 0x19,
+    [DIR_NORTHWEST] = 0x1A,
+    [DIR_NORTHEAST] = 0x1B,
+};
+
+const u8 gAcroWheeliePedalDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x20,
+    [DIR_SOUTH]     = 0x20,
+    [DIR_NORTH]     = 0x21,
+    [DIR_WEST]      = 0x22,
+    [DIR_EAST]      = 0x23,
+    [DIR_SOUTHWEST] = 0x20,
+    [DIR_SOUTHEAST] = 0x20,
+    [DIR_NORTHWEST] = 0x21,
+    [DIR_NORTHEAST] = 0x21,
+};
+
+const u8 gFishingDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x24,
+    [DIR_SOUTH]     = 0x24,
+    [DIR_NORTH]     = 0x25,
+    [DIR_WEST]      = 0x26,
+    [DIR_EAST]      = 0x27,
+    [DIR_SOUTHWEST] = 0x24,
+    [DIR_SOUTHEAST] = 0x24,
+    [DIR_NORTHWEST] = 0x25,
+    [DIR_NORTHEAST] = 0x25,
+};
+
+const u8 gFishingNoCatchDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x0,
+    [DIR_SOUTH]     = 0x0,
+    [DIR_NORTH]     = 0x1,
+    [DIR_WEST]      = 0x2,
+    [DIR_EAST]      = 0x3,
+    [DIR_SOUTHWEST] = 0x0,
+    [DIR_SOUTHEAST] = 0x0,
+    [DIR_NORTHWEST] = 0x1,
+    [DIR_NORTHEAST] = 0x1,
+};
+
+const u8 gFishingBiteDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x4,
+    [DIR_SOUTH]     = 0x4,
+    [DIR_NORTH]     = 0x5,
+    [DIR_WEST]      = 0x6,
+    [DIR_EAST]      = 0x7,
+    [DIR_SOUTHWEST] = 0x4,
+    [DIR_SOUTHEAST] = 0x4,
+    [DIR_NORTHWEST] = 0x5,
+    [DIR_NORTHEAST] = 0x5,
+};
+
+const u8 gUnknown_83A648A[] = {
+    [DIR_NONE]      = 0x8,
+    [DIR_SOUTH]     = 0x8,
+    [DIR_NORTH]     = 0x9,
+    [DIR_WEST]      = 0xA,
+    [DIR_EAST]      = 0xB,
+    [DIR_SOUTHWEST] = 0x8,
+    [DIR_SOUTHEAST] = 0x8,
+    [DIR_NORTHWEST] = 0x9,
+    [DIR_NORTHEAST] = 0x9,
+};
+
+const u8 gRunningDirectionAnimNums[] = {
+    [DIR_NONE]      = 0x14,
+    [DIR_SOUTH]     = 0x14,
+    [DIR_NORTH]     = 0x15,
+    [DIR_WEST]      = 0x16,
+    [DIR_EAST]      = 0x17,
+    [DIR_SOUTHWEST] = 0x14,
+    [DIR_SOUTHEAST] = 0x14,
+    [DIR_NORTHWEST] = 0x15,
+    [DIR_NORTHEAST] = 0x15,
+};
+
+const u8 gTrainerFacingDirectionMovementTypes[] = {
+    [DIR_NONE]      = 0x08,
+    [DIR_SOUTH]     = 0x08,
+    [DIR_NORTH]     = 0x07,
+    [DIR_WEST]      = 0x09,
+    [DIR_EAST]      = 0x0A,
+    [DIR_SOUTHWEST] = 0x08,
+    [DIR_SOUTHEAST] = 0x08,
+    [DIR_NORTHWEST] = 0x07,
+    [DIR_NORTHEAST] = 0x07,
+};
+
+bool8 (*const gOppositeDirectionBlockedMetatileFuncs[])(u8) = {
+    MetatileBehavior_IsSouthBlocked,
+    MetatileBehavior_IsNorthBlocked,
+    MetatileBehavior_IsWestBlocked,
+    MetatileBehavior_IsEastBlocked
+};
+
+bool8 (*const gDirectionBlockedMetatileFuncs[])(u8) = {
+    MetatileBehavior_IsNorthBlocked,
+    MetatileBehavior_IsSouthBlocked,
+    MetatileBehavior_IsEastBlocked,
+    MetatileBehavior_IsWestBlocked
+};
+
+static const struct Coords16 sDirectionToVectors[] = {
+    [DIR_NONE]      = { 0,  0},
+    [DIR_SOUTH]     = { 0,  1},
+    [DIR_NORTH]     = { 0, -1},
+    [DIR_WEST]      = {-1,  0},
+    [DIR_EAST]      = { 1,  0},
+    [DIR_SOUTHWEST] = {-1,  1},
+    [DIR_SOUTHEAST] = { 1,  1},
+    [DIR_NORTHWEST] = {-1, -1},
+    [DIR_NORTHEAST] = { 1, -1},
+};
+
+const u8 gFaceDirectionMovementActions[] = {
+    [DIR_NONE]  = 0x0,
+    [DIR_SOUTH] = 0x0,
+    [DIR_NORTH] = 0x1,
+    [DIR_WEST]  = 0x2,
+    [DIR_EAST]  = 0x3,
+};
+
+const u8 gWalkSlowMovementActions[] = {
+    [DIR_NONE]  = 0x4,
+    [DIR_SOUTH] = 0x4,
+    [DIR_NORTH] = 0x5,
+    [DIR_WEST]  = 0x6,
+    [DIR_EAST]  = 0x7,
+};
+
+const u8 gUnknown_83A64F6[] = {
+    [DIR_NONE]  = 0x9B,
+    [DIR_SOUTH] = 0x9B,
+    [DIR_NORTH] = 0x9C,
+    [DIR_WEST]  = 0x9D,
+    [DIR_EAST]  = 0x9E,
+};
+
+const u8 gUnknown_83A64FB[] = {
+    [DIR_NONE]  = 0x8,
+    [DIR_SOUTH] = 0x8,
+    [DIR_NORTH] = 0x9,
+    [DIR_WEST]  = 0xA,
+    [DIR_EAST]  = 0xB,
+};
+
+const u8 gUnknown_83A6500[] = {
+    [DIR_NONE]  = 0xC,
+    [DIR_SOUTH] = 0xC,
+    [DIR_NORTH] = 0xD,
+    [DIR_WEST]  = 0xE,
+    [DIR_EAST]  = 0xF,
+};
+
+const u8 gUnknown_83A6505[] = {
+    [DIR_NONE]  = 0x10,
+    [DIR_SOUTH] = 0x10,
+    [DIR_NORTH] = 0x11,
+    [DIR_WEST]  = 0x12,
+    [DIR_EAST]  = 0x13,
+};
+
+const u8 gUnknown_83A650A[] = {
+    [DIR_NONE]  = 0x1D,
+    [DIR_SOUTH] = 0x1D,
+    [DIR_NORTH] = 0x1E,
+    [DIR_WEST]  = 0x1F,
+    [DIR_EAST]  = 0x20,
+};
+
+const u8 gUnknown_83A650F[] = {
+    [DIR_NONE]  = 0xA0,
+    [DIR_SOUTH] = 0xA0,
+    [DIR_NORTH] = 0xA1,
+    [DIR_WEST]  = 0xA2,
+    [DIR_EAST]  = 0xA3,
+};
+
+const u8 gUnknown_83A6514[] = {
+    [DIR_NONE]  = 0x31,
+    [DIR_SOUTH] = 0x31,
+    [DIR_NORTH] = 0x32,
+    [DIR_WEST]  = 0x33,
+    [DIR_EAST]  = 0x34,
+};
+
+const u8 gUnknown_83A6519[] = {
+    [DIR_NONE]  = 0x35,
+    [DIR_SOUTH] = 0x35,
+    [DIR_NORTH] = 0x36,
+    [DIR_WEST]  = 0x37,
+    [DIR_EAST]  = 0x38,
+};
+
+const u8 gUnknown_83A651E[] = {
+    [DIR_NONE]  = 0x39,
+    [DIR_SOUTH] = 0x39,
+    [DIR_NORTH] = 0x3A,
+    [DIR_WEST]  = 0x3B,
+    [DIR_EAST]  = 0x3C,
+};
+
+const u8 gUnknown_83A6523[] = {
+    [DIR_NONE]  = 0x3D,
+    [DIR_SOUTH] = 0x3D,
+    [DIR_NORTH] = 0x3E,
+    [DIR_WEST]  = 0x3F,
+    [DIR_EAST]  = 0x40,
+};
+
+const u8 gUnknown_83A6528[] = {
+    [DIR_NONE]  = 0x41,
+    [DIR_SOUTH] = 0x41,
+    [DIR_NORTH] = 0x42,
+    [DIR_WEST]  = 0x43,
+    [DIR_EAST]  = 0x44,
+};
+
+const u8 gUnknown_83A652D[] = {
+    [DIR_NONE]  = 0x94,
+    [DIR_SOUTH] = 0x94,
+    [DIR_NORTH] = 0x95,
+    [DIR_WEST]  = 0x96,
+    [DIR_EAST]  = 0x97,
+};
+
+const u8 gUnknown_83A6532[] = {
+    [DIR_NONE]  = 0x14,
+    [DIR_SOUTH] = 0x14,
+    [DIR_NORTH] = 0x15,
+    [DIR_WEST]  = 0x16,
+    [DIR_EAST]  = 0x17,
+};
+
+const u8 gUnknown_83A6537[] = {
+    [DIR_NONE]  = 0x52,
+    [DIR_SOUTH] = 0x52,
+    [DIR_NORTH] = 0x53,
+    [DIR_WEST]  = 0x54,
+    [DIR_EAST]  = 0x55,
+};
+
+const u8 gUnknown_83A653C[] = {
+    [DIR_NONE]  = 0x57,
+    [DIR_SOUTH] = 0x57,
+    [DIR_NORTH] = 0x56,
+    [DIR_WEST]  = 0x59,
+    [DIR_EAST]  = 0x58,
+};
+
+const u8 gUnknown_83A6541[] = {
+    [DIR_NONE]  = 0x4E,
+    [DIR_SOUTH] = 0x4E,
+    [DIR_NORTH] = 0x4F,
+    [DIR_WEST]  = 0x50,
+    [DIR_EAST]  = 0x51,
+};
+
+const u8 gUnknown_83A6546[] = {
+    [DIR_NONE]  = 0x46,
+    [DIR_SOUTH] = 0x46,
+    [DIR_NORTH] = 0x47,
+    [DIR_WEST]  = 0x48,
+    [DIR_EAST]  = 0x49,
+};
+
+const u8 gUnknown_83A654B[] = {
+    [DIR_NONE]  = 0xA6,
+    [DIR_SOUTH] = 0xA6,
+    [DIR_NORTH] = 0xA7,
+    [DIR_WEST]  = 0xA8,
+    [DIR_EAST]  = 0xA9,
+};
+
+const u8 gUnknown_83A6550[] = {
+    [DIR_NONE]  = 0x21,
+    [DIR_SOUTH] = 0x21,
+    [DIR_NORTH] = 0x22,
+    [DIR_WEST]  = 0x23,
+    [DIR_EAST]  = 0x24,
+};
+
+const u8 gUnknown_83A6555[] = {
+    [DIR_NONE]  = 0x25,
+    [DIR_SOUTH] = 0x25,
+    [DIR_NORTH] = 0x26,
+    [DIR_WEST]  = 0x27,
+    [DIR_EAST]  = 0x28,
+};
+
+const u8 gUnknown_83A655A[] = {
+    [DIR_NONE]  = 0x29,
+    [DIR_SOUTH] = 0x29,
+    [DIR_NORTH] = 0x2A,
+    [DIR_WEST]  = 0x2B,
+    [DIR_EAST]  = 0x2C,
+};
+
+const u8 gUnknown_83A655F[] = {
+    [DIR_NONE]  = 0x2D,
+    [DIR_SOUTH] = 0x2D,
+    [DIR_NORTH] = 0x2E,
+    [DIR_WEST]  = 0x2F,
+    [DIR_EAST]  = 0x30,
+};
+
+const u8 gUnknown_83A6564[] = {
+    [DIR_NONE]  = 0x70,
+    [DIR_SOUTH] = 0x70,
+    [DIR_NORTH] = 0x71,
+    [DIR_WEST]  = 0x72,
+    [DIR_EAST]  = 0x73,
+};
+
+const u8 gUnknown_83A6569[] = {
+    [DIR_NONE]  = 0x74,
+    [DIR_SOUTH] = 0x74,
+    [DIR_NORTH] = 0x75,
+    [DIR_WEST]  = 0x76,
+    [DIR_EAST]  = 0x77,
+};
+
+const u8 gUnknown_83A656E[] = {
+    [DIR_NONE]  = 0x78,
+    [DIR_SOUTH] = 0x78,
+    [DIR_NORTH] = 0x79,
+    [DIR_WEST]  = 0x7A,
+    [DIR_EAST]  = 0x7B,
+};
+
+const u8 gUnknown_83A6573[] = {
+    [DIR_NONE]  = 0x7C,
+    [DIR_SOUTH] = 0x7C,
+    [DIR_NORTH] = 0x7D,
+    [DIR_WEST]  = 0x7E,
+    [DIR_EAST]  = 0x7F,
+};
+
+const u8 gUnknown_83A6578[] = {
+    [DIR_NONE]  = 0x80,
+    [DIR_SOUTH] = 0x80,
+    [DIR_NORTH] = 0x81,
+    [DIR_WEST]  = 0x82,
+    [DIR_EAST]  = 0x83,
+};
+
+const u8 gUnknown_83A657D[] = {
+    [DIR_NONE]  = 0x84,
+    [DIR_SOUTH] = 0x84,
+    [DIR_NORTH] = 0x85,
+    [DIR_WEST]  = 0x86,
+    [DIR_EAST]  = 0x87,
+};
+
+const u8 gUnknown_83A6582[] = {
+    [DIR_NONE]  = 0x88,
+    [DIR_SOUTH] = 0x88,
+    [DIR_NORTH] = 0x89,
+    [DIR_WEST]  = 0x8A,
+    [DIR_EAST]  = 0x8B,
+};
+
+const u8 gUnknown_83A6587[] = {
+    [DIR_NONE]  = 0x8C,
+    [DIR_SOUTH] = 0x8C,
+    [DIR_NORTH] = 0x8D,
+    [DIR_WEST]  = 0x8E,
+    [DIR_EAST]  = 0x8F,
+};
+
+const u8 gUnknown_83A658C[] = {
+    [DIR_NONE]  = 0x90,
+    [DIR_SOUTH] = 0x90,
+    [DIR_NORTH] = 0x91,
+    [DIR_WEST]  = 0x92,
+    [DIR_EAST]  = 0x93,
+};
+
+const u8 gOppositeDirections[] = {
+    DIR_NORTH,
+    DIR_SOUTH,
+    DIR_EAST,
+    DIR_WEST,
+    DIR_NORTHEAST,
+    DIR_NORTHWEST,
+    DIR_SOUTHEAST,
+    DIR_SOUTHWEST,
+};
+
+const u8 gUnknown_83A6599[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {3, 4, 2, 1},
+    {4, 3, 1, 2}
+};
+
+const u8 gUnknown_83A65A9[][4] = {
+    {2, 1, 4, 3},
+    {1, 2, 3, 4},
+    {4, 3, 1, 2},
+    {3, 4, 2, 1}
+};
+
 #include "data/object_events/movement_action_func_tables.h"
 
 static void ClearObjectEvent(struct ObjectEvent *objectEvent)

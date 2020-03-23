@@ -7,6 +7,6 @@ void StartTransitionToFlipBikeState(u8 flags);
 s16 GetPlayerSpeed(void);
 
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys);
-void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
+bool32 IsRunningDisallowed(u8 metatileBehavior);
 
 #endif //GUARD_BIKE_H

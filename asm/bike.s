@@ -357,7 +357,7 @@ _080BD334:
 	cmp r1, 0xE
 	beq _080BD342
 	adds r0, r4, 0
-	bl sub_805BAAC
+	bl PlayerIsMovingOnRockStairs
 	cmp r0, 0
 	beq _080BD34A
 _080BD342:
@@ -481,7 +481,7 @@ sub_80BD40C: @ 80BD40C
 	lsls r2, 16
 	asrs r2, 16
 	str r5, [sp]
-	bl sub_805BBA8
+	bl CheckForObjectEventCollision
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x4

@@ -11,6 +11,7 @@ void PlayerGetDestCoords(s16 *, s16 *);
 u8 GetPlayerFacingDirection(void);
 u8 GetPlayerMovementDirection(void);
 u8 PlayerGetCopyableMovement(void);
+void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
 
 void sub_808D074(u8);
 void sub_805C270(void);

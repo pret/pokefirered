@@ -5,357 +5,8 @@
 
 	.text
 
-	thumb_func_start PlayerNotOnBikeNotMoving
-PlayerNotOnBikeNotMoving: @ 805B9B0
-	push {lr}
-	bl GetPlayerFacingDirection
-	lsls r0, 24
-	lsrs r0, 24
-	bl PlayerFaceDirection
-	pop {r0}
-	bx r0
-	thumb_func_end PlayerNotOnBikeNotMoving
-
-	thumb_func_start PlayerNotOnBikeTurningInPlace
-PlayerNotOnBikeTurningInPlace: @ 805B9C4
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl PlayerTurnInPlace
-	pop {r0}
-	bx r0
-	thumb_func_end PlayerNotOnBikeTurningInPlace
-
-	thumb_func_start PlayerNotOnBikeMoving
-PlayerNotOnBikeMoving: @ 805B9D4
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 16
-	lsrs r5, r1, 16
-	adds r0, r4, 0
-	bl CheckForPlayerAvatarCollision
-	lsls r0, 24
-	lsrs r0, 24
-	adds r1, r0, 0
-	cmp r0, 0
-	beq _0805BA18
-	cmp r0, 0x6
-	bne _0805B9FA
-	adds r0, r4, 0
-	bl PlayerJumpLedge
-	b _0805BAA4
-_0805B9FA:
-	cmp r0, 0x8
-	bne _0805BA06
-	adds r0, r4, 0
-	bl PlayerFaceDirection
-	b _0805BAA4
-_0805BA06:
-	subs r0, r1, 0x5
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bls _0805BAA4
-	adds r0, r4, 0
-	bl PlayerNotOnBikeCollide
-	b _0805BAA4
-_0805BA18:
-	ldr r6, _0805BA2C @ =gPlayerAvatar
-	ldrb r1, [r6]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0805BA30
-	adds r0, r4, 0
-	bl PlayerGoSpeed2
-	b _0805BAA4
-	.align 2, 0
-_0805BA2C: .4byte gPlayerAvatar
-_0805BA30:
-	movs r0, 0x2
-	ands r5, r0
-	cmp r5, 0
-	beq _0805BA8C
-	ldr r0, _0805BA6C @ =0x0000082f
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BA8C
-	ldr r2, _0805BA70 @ =gObjectEvents
-	ldrb r1, [r6, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1E]
-	bl IsRunningDisallowed
-	cmp r0, 0
-	bne _0805BA8C
-	adds r0, r4, 0
-	bl sub_805BAAC
-	cmp r0, 0
-	beq _0805BA74
-	adds r0, r4, 0
-	bl PlayerRunSlow
-	b _0805BA7A
-	.align 2, 0
-_0805BA6C: .4byte 0x0000082f
-_0805BA70: .4byte gObjectEvents
-_0805BA74:
-	adds r0, r4, 0
-	bl PlayerRun
-_0805BA7A:
-	ldr r2, _0805BA88 @ =gPlayerAvatar
-	ldrb r1, [r2]
-	movs r0, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-	b _0805BAA4
-	.align 2, 0
-_0805BA88: .4byte gPlayerAvatar
-_0805BA8C:
-	adds r0, r4, 0
-	bl sub_805BAAC
-	cmp r0, 0
-	beq _0805BA9E
-	adds r0, r4, 0
-	bl sub_805C0EC
-	b _0805BAA4
-_0805BA9E:
-	adds r0, r4, 0
-	bl PlayerGoSpeed1
-_0805BAA4:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end PlayerNotOnBikeMoving
-
-	thumb_func_start sub_805BAAC
-sub_805BAAC: @ 805BAAC
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r0, _0805BAE4 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805BAE8 @ =gObjectEvents
-	adds r0, r1
-	ldrh r2, [r0, 0x10]
-	mov r1, sp
-	strh r2, [r1]
-	ldrh r1, [r0, 0x12]
-	mov r4, sp
-	adds r4, 0x2
-	strh r1, [r4]
-	cmp r3, 0x1
-	beq _0805BAEC
-	cmp r3, 0x2
-	bne _0805BB12
-	mov r0, sp
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	lsls r1, 16
-	asrs r1, 16
-	b _0805BB00
-	.align 2, 0
-_0805BAE4: .4byte gPlayerAvatar
-_0805BAE8: .4byte gObjectEvents
-_0805BAEC:
-	movs r0, 0x1
-	mov r1, sp
-	adds r2, r4, 0
-	bl MoveCoords
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-_0805BB00:
-	bl MapGridGetMetatileBehaviorAt
-	lsls r0, 24
-	lsrs r0, 24
-	bl MetatileBehavior_IsRockStairs
-	lsls r0, 24
-	lsrs r0, 24
-	b _0805BB14
-_0805BB12:
-	movs r0, 0
-_0805BB14:
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805BAAC
-
-	thumb_func_start CheckForPlayerAvatarCollision
-CheckForPlayerAvatarCollision: @ 805BB1C
-	push {r4-r6,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r0, _0805BB94 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805BB98 @ =gObjectEvents
-	adds r5, r0, r1
-	ldrh r1, [r5, 0x10]
-	add r0, sp, 0x4
-	strh r1, [r0]
-	ldrh r1, [r5, 0x12]
-	mov r4, sp
-	adds r4, 0x6
-	strh r1, [r4]
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	lsls r1, 16
-	asrs r1, 16
-	bl MapGridGetMetatileBehaviorAt
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r6, 0
-	bl sub_806DB84
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BB9C
-	adds r0, r6, 0
-	add r1, sp, 0x4
-	adds r2, r4, 0
-	bl MoveCoords
-	add r0, sp, 0x4
-	movs r3, 0
-	ldrsh r0, [r0, r3]
-	movs r2, 0
-	ldrsh r1, [r4, r2]
-	bl MapGridGetMetatileBehaviorAt
-	lsls r0, 24
-	lsrs r0, 24
-	add r1, sp, 0x4
-	movs r3, 0
-	ldrsh r1, [r1, r3]
-	movs r3, 0
-	ldrsh r2, [r4, r3]
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r3, r6, 0
-	bl sub_805BBA8
-	lsls r0, 24
-	lsrs r0, 24
-	b _0805BB9E
-	.align 2, 0
-_0805BB94: .4byte gPlayerAvatar
-_0805BB98: .4byte gObjectEvents
-_0805BB9C:
-	movs r0, 0x8
-_0805BB9E:
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end CheckForPlayerAvatarCollision
-
-	thumb_func_start sub_805BBA8
-sub_805BBA8: @ 805BBA8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	ldr r4, [sp, 0x24]
-	lsls r1, 16
-	lsls r2, 16
-	lsls r3, 24
-	lsrs r6, r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	mov r10, r4
-	lsrs r7, r1, 16
-	asrs r5, r1, 16
-	lsrs r1, r2, 16
-	mov r9, r1
-	asrs r4, r2, 16
-	adds r1, r5, 0
-	adds r2, r4, 0
-	adds r3, r6, 0
-	bl GetCollisionAtCoords
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, sp
-	strb r0, [r1]
-	cmp r0, 0x3
-	bne _0805BBF8
-	adds r0, r5, 0
-	adds r1, r4, 0
-	adds r2, r6, 0
-	bl sub_805BC60
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BBF8
-	movs r0, 0x5
-	b _0805BC50
-_0805BBF8:
-	lsls r5, r7, 16
-	asrs r0, r5, 16
-	mov r8, r0
-	mov r1, r9
-	lsls r4, r1, 16
-	asrs r7, r4, 16
-	adds r1, r7, 0
-	adds r2, r6, 0
-	bl sub_805BCC8
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BC1C
-	movs r0, 0x2B
-	bl IncrementGameStat
-	movs r0, 0x6
-	b _0805BC50
-_0805BC1C:
-	mov r0, sp
-	ldrb r0, [r0]
-	cmp r0, 0x4
-	bne _0805BC38
-	mov r0, r8
-	adds r1, r7, 0
-	adds r2, r6, 0
-	bl sub_805BCEC
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BC38
-	movs r0, 0x7
-	b _0805BC50
-_0805BC38:
-	mov r0, sp
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0805BC4C
-	asrs r0, r5, 16
-	asrs r1, r4, 16
-	mov r2, r10
-	mov r3, sp
-	bl check_acro_bike_metatile
-_0805BC4C:
-	mov r0, sp
-	ldrb r0, [r0]
-_0805BC50:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805BBA8
-
-	thumb_func_start sub_805BC60
-sub_805BC60: @ 805BC60
+	thumb_func_start CanStopSurfing
+CanStopSurfing: @ 805BC60
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -404,10 +55,10 @@ _0805BCC2:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805BC60
+	thumb_func_end CanStopSurfing
 
-	thumb_func_start sub_805BCC8
-sub_805BCC8: @ 805BCC8
+	thumb_func_start ShouldJumpLedge
+ShouldJumpLedge: @ 805BCC8
 	push {lr}
 	lsls r2, 24
 	lsrs r2, 24
@@ -426,10 +77,10 @@ _0805BCE4:
 _0805BCE6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805BCC8
+	thumb_func_end ShouldJumpLedge
 
-	thumb_func_start sub_805BCEC
-sub_805BCEC: @ 805BCEC
+	thumb_func_start TryPushBoulder
+TryPushBoulder: @ 805BCEC
 	push {r4-r7,lr}
 	sub sp, 0x4
 	mov r3, sp
@@ -518,10 +169,10 @@ _0805BDA2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805BCEC
+	thumb_func_end TryPushBoulder
 
-	thumb_func_start check_acro_bike_metatile
-check_acro_bike_metatile: @ 805BDAC
+	thumb_func_start CheckAcroBikeCollision
+CheckAcroBikeCollision: @ 805BDAC
 	push {r4-r7,lr}
 	adds r6, r3, 0
 	lsls r2, 24
@@ -555,7 +206,7 @@ _0805BDE6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end check_acro_bike_metatile
+	thumb_func_end CheckAcroBikeCollision
 
 	thumb_func_start SetPlayerAvatarTransitionFlags
 SetPlayerAvatarTransitionFlags: @ 805BDEC
@@ -984,8 +635,8 @@ sub_805C0D4: @ 805C0D4
 	bx r0
 	thumb_func_end sub_805C0D4
 
-	thumb_func_start sub_805C0EC
-sub_805C0EC: @ 805C0EC
+	thumb_func_start PlayerGoSlow
+PlayerGoSlow: @ 805C0EC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -996,7 +647,7 @@ sub_805C0EC: @ 805C0EC
 	bl PlayerSetAnimId
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C0EC
+	thumb_func_end PlayerGoSlow
 
 	thumb_func_start PlayerGoSpeed1
 PlayerGoSpeed1: @ 805C104

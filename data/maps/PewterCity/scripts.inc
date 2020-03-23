@@ -744,7 +744,7 @@ PewterCity_EventScript_AideGiveRunningShoes:: @ 81662DE
 	msgbox PewterCity_Text_RunningShoesLetterFromMom
 	closemessage
 	removeobject LOCALID_AIDE
-	setflag FLAG_SYS_RUNNING_SHOES
+	setflag FLAG_SYS_B_DASH
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
 	return
 

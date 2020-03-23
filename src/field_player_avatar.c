@@ -1,11 +1,16 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "event_data.h"
 #include "event_object_movement.h"
+#include "fieldmap.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
+#include "overworld.h"
 #include "constants/event_object_movement.h"
 #include "constants/songs.h"
+#include "constants/flags.h"
 
 EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
 EWRAM_DATA bool8 gUnknown_2036E34 = FALSE;
@@ -21,8 +26,6 @@ bool8 TryDoMetatileBehaviorForcedMovement(void);
 void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys);
 void PlayerAllowForcedMovementIfMovingSameDirection(void);
 bool8 ForcedMovement_None(void);
-void PlayerJumpLedge(u8 direction);
-u8 CheckForPlayerAvatarCollision(u8 direction);
 bool8 ForcedMovement_Slip(void);
 bool8 ForcedMovement_WalkSouth(void);
 bool8 ForcedMovement_WalkNorth(void);
@@ -47,8 +50,22 @@ u8 CheckMovementInputNotOnBike(u8 direction);
 void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
 void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
 void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys);
+bool32 PlayerIsMovingOnRockStairs(u8 direction);
+u8 CheckForPlayerAvatarCollision(u8 direction);
+u8 CheckForObjectEventCollision(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
+bool8 CanStopSurfing(s16 x, s16 y, u8 direction);
+bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction);
+bool8 TryPushBoulder(s16 x, s16 y, u8 direction);
+bool8 CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collision);
+void PlayerNotOnBikeCollide(u8 direction);
+void PlayerRun(u8 direction);
+void PlayerRunSlow(u8 direction);
+void PlayerFaceDirection(u8 direction);
+void PlayerTurnInPlace(u8 direction);
 void PlayerGoSpeed2(u8 direction);
 void PlayerGoSpeed1(u8 direction);
+void PlayerJumpLedge(u8 direction);
+void PlayerGoSlow(u8 direction);
 void PlayerGoSpin(u8 direction);
 void PlayerRideWaterCurrent(u8 direction);
 void sub_805C2CC(u8 metatileBehavior);
@@ -402,4 +419,115 @@ u8 CheckMovementInputNotOnBike(u8 direction)
         gPlayerAvatar.runningState = MOVING;
         return 2;
     }
+}
+
+void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
+{
+    PlayerFaceDirection(GetPlayerFacingDirection());
+}
+
+void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
+{
+    PlayerTurnInPlace(direction);
+}
+
+void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
+{
+    u8 collision = CheckForPlayerAvatarCollision(direction);
+
+    if (collision != COLLISION_NONE)
+    {
+        if (collision == COLLISION_LEDGE_JUMP)
+        {
+            PlayerJumpLedge(direction);
+        }
+        else if (collision == COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        {
+            PlayerFaceDirection(direction);
+        }
+        else if (collision != COLLISION_STOP_SURFING && collision != COLLISION_LEDGE_JUMP && collision != COLLISION_PUSHED_BOULDER && collision != COLLISION_UNKNOWN_WARP_6C_6D_6E_6F)
+        {
+            PlayerNotOnBikeCollide(direction);
+        }
+        return;
+    }
+
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+    {
+        // speed 2 is fast, same speed as running
+        PlayerGoSpeed2(direction);
+        return;
+    }
+
+    if ((heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
+        && !IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
+    {
+        if (PlayerIsMovingOnRockStairs(direction))
+            PlayerRunSlow(direction);
+        else
+            PlayerRun(direction);
+        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        return;
+    }
+    else
+    {
+        if (PlayerIsMovingOnRockStairs(direction))
+            PlayerGoSlow(direction);
+        else
+            PlayerGoSpeed1(direction);
+    }
+}
+
+bool32 PlayerIsMovingOnRockStairs(u8 direction)
+{
+    struct ObjectEvent * objectEvent;
+    s16 x, y;
+
+    objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    x = objectEvent->currentCoords.x;
+    y = objectEvent->currentCoords.y;
+    switch (direction)
+    {
+    case DIR_NORTH:
+        return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x, y));
+    case DIR_SOUTH:
+        MoveCoords(DIR_SOUTH, &x, &y);
+        return MetatileBehavior_IsRockStairs(MapGridGetMetatileBehaviorAt(x, y));
+    default:
+        return FALSE;
+    }
+}
+
+u8 CheckForPlayerAvatarCollision(u8 direction)
+{
+    s16 x, y;
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    x = playerObjEvent->currentCoords.x;
+    y = playerObjEvent->currentCoords.y;
+    if (sub_806DB84(MapGridGetMetatileBehaviorAt(x, y), direction))
+        return 8;
+    MoveCoords(direction, &x, &y);
+    return CheckForObjectEventCollision(playerObjEvent, x, y, direction, MapGridGetMetatileBehaviorAt(x, y));
+}
+
+u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior)
+{
+    u8 collision = GetCollisionAtCoords(objectEvent, x, y, direction);
+    if (collision == COLLISION_ELEVATION_MISMATCH && CanStopSurfing(x, y, direction))
+        return COLLISION_STOP_SURFING;
+
+    if (ShouldJumpLedge(x, y, direction))
+    {
+        IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
+        return COLLISION_LEDGE_JUMP;
+    }
+    if (collision == COLLISION_OBJECT_EVENT && TryPushBoulder(x, y, direction))
+        return COLLISION_PUSHED_BOULDER;
+
+    if (collision == COLLISION_NONE)
+    {
+        CheckAcroBikeCollision(x, y, metatileBehavior, &collision);
+    }
+    return collision;
 }

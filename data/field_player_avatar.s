@@ -3,35 +3,6 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-gUnknown_835B764:: @ 835B764
-	.4byte MetatileBehavior_IsUnknownMovement48, ForcedMovement_Slip
-	.4byte MetatileBehavior_IsIce_2, ForcedMovement_Slip
-	.4byte MetatileBehavior_IsWalkSouth, sub_805B750
-	.4byte MetatileBehavior_IsWalkNorth, sub_805B768
-	.4byte MetatileBehavior_IsWalkWest, sub_805B780
-	.4byte MetatileBehavior_IsWalkEast, sub_805B798
-	.4byte MetatileBehavior_IsSouthwardCurrent, sub_805B82C
-	.4byte MetatileBehavior_IsNorthwardCurrent, sub_805B844
-	.4byte MetatileBehavior_IsWestwardCurrent, sub_805B85C
-	.4byte MetatileBehavior_IsEastwardCurrent, sub_805B874
-	.4byte MetatileBehavior_UnusedIsSpinRight, sub_805B7B0
-	.4byte MetatileBehavior_UnusedIsSpinLeft, sub_805B7CC
-	.4byte MetatileBehavior_UnusedIsSpinUp, sub_805B7E8
-	.4byte MetatileBehavior_UnusedIsSpinDown, sub_805B804
-	.4byte MetatileBehavior_IsSlideSouth, ForcedMovement_SlideSouth
-	.4byte MetatileBehavior_IsSlideNorth, ForcedMovement_SlideNorth
-	.4byte MetatileBehavior_IsSlideWest, ForcedMovement_SlideWest
-	.4byte MetatileBehavior_IsSlideEast, ForcedMovement_SlideEast
-	.4byte MetatileBehavior_IsWaterfall, sub_805B82C
-	.4byte MetatileBehavior_UnusedReturnFalse_7, sub_805B924
-	.4byte MetatileBehavior_UnusedReturnFalse_8, sub_805B930
-	.4byte NULL, ForcedMovement_None
-
-gUnknown_835B814:: @ 835B814
-	.4byte PlayerNotOnBikeNotMoving
-	.4byte sub_805B9C4
-	.4byte sub_805B9D4
-
 gUnknown_835B820:: @ 835B820
 	.byte 0x04, 0x04, 0x05, 0x06, 0x07
 

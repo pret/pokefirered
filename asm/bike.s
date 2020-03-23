@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80BD09C
-sub_80BD09C: @ 80BD09C
+	thumb_func_start MovePlayerOnBike
+MovePlayerOnBike: @ 80BD09C
 	push {r4,lr}
 	sub sp, 0x4
 	mov r3, sp
@@ -32,7 +32,7 @@ sub_80BD09C: @ 80BD09C
 	bx r0
 	.align 2, 0
 _080BD0D0: .4byte gUnknown_83E7CFC
-	thumb_func_end sub_80BD09C
+	thumb_func_end MovePlayerOnBike
 
 	thumb_func_start sub_80BD0D4
 sub_80BD0D4: @ 80BD0D4
@@ -342,7 +342,7 @@ _080BD300:
 	cmp r1, 0x6
 	bne _080BD322
 	adds r0, r4, 0
-	bl sub_805C23C
+	bl PlayerJumpLedge
 	b _080BD350
 _080BD322:
 	subs r0, r1, 0x5
@@ -362,11 +362,11 @@ _080BD334:
 	beq _080BD34A
 _080BD342:
 	adds r0, r4, 0
-	bl sub_805C11C
+	bl PlayerGoSpeed2
 	b _080BD350
 _080BD34A:
 	adds r0, r6, 0
-	bl sub_805C14C
+	bl PlayerRideWaterCurrent
 _080BD350:
 	pop {r4-r6}
 	pop {r0}
@@ -389,7 +389,7 @@ _080BD370:
 	cmp r0, 0x6
 	bne _080BD37A
 	movs r0, 0x1
-	bl sub_805C23C
+	bl PlayerJumpLedge
 _080BD37A:
 	pop {r0}
 	bx r0
@@ -406,7 +406,7 @@ sub_80BD380: @ 80BD380
 	cmp r0, 0
 	bne _080BD398
 	adds r0, r4, 0
-	bl sub_805C104
+	bl PlayerGoSpeed1
 _080BD398:
 	pop {r4}
 	pop {r0}
@@ -537,8 +537,8 @@ _080BD482:
 	bx r1
 	thumb_func_end sub_80BD460
 
-	thumb_func_start sub_80BD488
-sub_80BD488: @ 80BD488
+	thumb_func_start IsRunningDisallowed
+IsRunningDisallowed: @ 80BD488
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -564,7 +564,7 @@ _080BD4B0:
 _080BD4B2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80BD488
+	thumb_func_end IsRunningDisallowed
 
 	thumb_func_start sub_80BD4B8
 sub_80BD4B8: @ 80BD4B8

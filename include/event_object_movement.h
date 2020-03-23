@@ -26,6 +26,8 @@ struct UnkStruct_083A3698
     u8 animPos[4];
 };
 
+typedef void (*MovementAction)(u8 direction);
+
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
 #define GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN   (1 << 2)
@@ -186,6 +188,7 @@ void sub_8068CA4(struct Sprite *, u8);
 bool8 sub_8068CB4(struct Sprite *sprite);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
+u8 ObjectEventGetHeldMovementActionId(struct ObjectEvent *objectEvent);
 
 // Exported data declarations
 

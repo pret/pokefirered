@@ -750,7 +750,7 @@ bool8 TestMetatileAttributeBit(u8 arg1, u8 arg2)
         return FALSE;
 }
 
-bool8 MetatileBehavior_UnusedIsSpinRight(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSpinRight(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_SPIN_RIGHT)
         return TRUE;
@@ -758,7 +758,7 @@ bool8 MetatileBehavior_UnusedIsSpinRight(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_UnusedIsSpinLeft(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSpinLeft(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_SPIN_LEFT)
         return TRUE;
@@ -766,7 +766,7 @@ bool8 MetatileBehavior_UnusedIsSpinLeft(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_UnusedIsSpinUp(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSpinUp(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_SPIN_UP)
         return TRUE;
@@ -774,7 +774,7 @@ bool8 MetatileBehavior_UnusedIsSpinUp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_UnusedIsSpinDown(u8 metatileBehavior)
+bool8 MetatileBehavior_IsSpinDown(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_SPIN_DOWN)
         return TRUE;

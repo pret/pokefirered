@@ -283,8 +283,8 @@ struct ObjectEventGraphicsInfo
 #define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
 #define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
 #define PLAYER_AVATAR_FLAG_4         (1 << 4)
-#define PLAYER_AVATAR_FLAG_5         (1 << 5)
-#define PLAYER_AVATAR_FLAG_6         (1 << 6)
+#define PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED         (1 << 5)
+#define PLAYER_AVATAR_FLAG_MVMT_IS_FORCED         (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
 
 enum
@@ -349,7 +349,7 @@ struct PlayerAvatar /* 0x202E858 */
     u32 unkC;
     u32 unk10;
     u8 unk14[8];
-    u8 unk1C[8];
+    u16 unk1C;
     // TODO: rest of struct
 };
 

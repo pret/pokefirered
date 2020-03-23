@@ -3291,7 +3291,7 @@ _080564B0:
 	ldrb r0, [r6, 0x2]
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_805B3E0
+	bl player_step
 _080564BA:
 	bl RunQuestLogCB
 	add sp, 0x4

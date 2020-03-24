@@ -330,10 +330,10 @@ extern const struct OamData gObjectEventBaseOam_16x16;
 extern const struct OamData gObjectEventBaseOam_16x32;
 extern const struct OamData gObjectEventBaseOam_32x16;
 extern const struct OamData gObjectEventBaseOam_64x64;
-extern const struct OamData gObjectEventBaseOam_128x64;
-extern const struct OamData gObjectEventBaseOam_Unknown1;
-extern const struct OamData gObjectEventBaseOam_Unknown2;
-extern const struct OamData gObjectEventBaseOam_Unknown3;
+extern const struct OamData gObjectEventBaseOam_8x8;
+extern const struct OamData gObjectEventBaseOam_16x8;
+extern const struct OamData gObjectEventBaseOam_32x8;
+extern const struct OamData gObjectEventBaseOam_64x32;
 extern const u16 gUnknown_836D828[];
 extern const u16 gUnknown_836D848[];
 extern const u16 gUnknown_836D868[];
@@ -717,8 +717,8 @@ extern const union AffineAnimCmd * const gDummySpriteAffineAnimTable[];
 /*#include "data/object_events/object_event_graphics_info_pointers.h"
 #include "data/field_effects/field_effect_object_template_pointers.h"
 #include "data/object_events/object_event_pic_tables.h"
-#include "data/object_events/object_event_anims.h"
-#include "data/object_events/base_oam.h"*/
+#include "data/object_events/object_event_anims.h"*/
+#include "data/object_events/base_oam.h"
 #include "data/object_events/object_event_subsprites.h"
 #include "data/object_events/object_event_graphics_info.h"
 

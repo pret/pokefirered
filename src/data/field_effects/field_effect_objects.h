@@ -21,7 +21,7 @@ const struct SpriteTemplate gUnknown_83A537C =
 {
     .tileTag = 65535,
     .paletteTag = 65535,
-    .oam = &gObjectEventBaseOam_128x64,
+    .oam = &gObjectEventBaseOam_8x8,
     .anims = gUnknown_83A5358,
     .images = gUnknown_83A535C,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -32,7 +32,7 @@ const struct SpriteTemplate gUnknown_83A5394 =
 {
     .tileTag = 65535,
     .paletteTag = 65535,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A5358,
     .images = gUnknown_83A5364,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -43,7 +43,7 @@ const struct SpriteTemplate gUnknown_83A53AC =
 {
     .tileTag = 65535,
     .paletteTag = 65535,
-    .oam = &gObjectEventBaseOam_Unknown2,
+    .oam = &gObjectEventBaseOam_32x8,
     .anims = gUnknown_83A5358,
     .images = gUnknown_83A536C,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -54,7 +54,7 @@ const struct SpriteTemplate gUnknown_83A53C4 =
 {
     .tileTag = 65535,
     .paletteTag = 65535,
-    .oam = &gObjectEventBaseOam_Unknown3,
+    .oam = &gObjectEventBaseOam_64x32,
     .anims = gUnknown_83A5358,
     .images = gUnknown_83A5374,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -309,7 +309,7 @@ const struct SpriteTemplate gUnknown_83A5648 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1004,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A5644,
     .images = gUnknown_83A561C,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -342,7 +342,7 @@ const struct SpriteTemplate gUnknown_83A5698 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1005,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A5694,
     .images = gUnknown_83A5660,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -598,7 +598,7 @@ const struct SpriteTemplate gUnknown_83A589C =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1004,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A5894,
     .images = gUnknown_83A5854,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -629,7 +629,7 @@ const struct SpriteTemplate gUnknown_83A58E0 =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1004,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A58DC,
     .images = gUnknown_83A58B4,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -844,7 +844,7 @@ const struct SpriteTemplate gUnknown_83A5B1C =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1004,
-    .oam = &gObjectEventBaseOam_Unknown1,
+    .oam = &gObjectEventBaseOam_16x8,
     .anims = gUnknown_83A5B18,
     .images = gUnknown_83A5AF0,
     .affineAnims = gDummySpriteAffineAnimTable,

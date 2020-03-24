@@ -3940,31 +3940,4 @@ gUnknown_83A3698:: @ 83A3698
 	.byte 3, 7, 0, 4
 	.4byte 0x00000000, 0x00000000
 
-gObjectEventBaseOam_128x64::
-	.4byte 0x00000000, 0x00000800
-
-gObjectEventBaseOam_Unknown1::
-	.4byte 0x00004000, 0x00000800
-
-gObjectEventBaseOam_16x16::
-	.4byte 0x40000000, 0x00000800
-
-gObjectEventBaseOam_32x16::
-	.4byte 0x80004000, 0x00000800
-
-gObjectEventBaseOam_Unknown2::
-	.4byte 0x40004000, 0x00000800
-
-gObjectEventBaseOam_Unknown3::
-	.4byte 0xc0004000, 0x00000800
-
-gObjectEventBaseOam_16x32::
-	.4byte 0x80008000, 0x00000800
-
-gObjectEventBaseOam_32x32:: @ 83A3718
-	.4byte 0x80000000, 0x00000800
-
-gObjectEventBaseOam_64x64:: @ 83A3720
-	.4byte 0xc0000000, 0x00000800
-
 @9186

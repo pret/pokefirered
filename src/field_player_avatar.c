@@ -71,19 +71,20 @@ bool8 PlayerIsAnimActive(void);
 bool8 PlayerCheckIfAnimFinishedOrInactive(void);
 bool8 player_is_anim_in_certain_ranges(void);
 bool8 sub_805BF58(void);
+void PlayerRun(u8 direction);
+void PlayerRunSlow(u8 direction);
+void PlayerGoSpeed2(u8 direction);
+void PlayerGoSpeed1(u8 direction);
+void PlayerGoSlow(u8 direction);
+void PlayerRideWaterCurrent(u8 direction);
+void sub_805C438(u8 direction);
 void CreateStopSurfingTask(u8 direction);
 void StartStrengthAnim(u8 objectEventId, u8 direction);
 void PlayerNotOnBikeCollide(u8 direction);
-void PlayerRun(u8 direction);
-void PlayerRunSlow(u8 direction);
 void PlayerFaceDirection(u8 direction);
 void PlayerTurnInPlace(u8 direction);
-void PlayerGoSpeed2(u8 direction);
-void PlayerGoSpeed1(u8 direction);
 void PlayerJumpLedge(u8 direction);
-void PlayerGoSlow(u8 direction);
 void PlayerGoSpin(u8 direction);
-void PlayerRideWaterCurrent(u8 direction);
 void sub_805C2CC(u8 metatileBehavior);
 void sub_805CC40(struct ObjectEvent * playerObjEvent);
 void DoPlayerMatJump(void);
@@ -778,4 +779,88 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
         if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementActionId))
             sub_8112628(movementActionId);
     }
+}
+
+void sub_805C06C(struct ObjectEvent * objectEvent, u8 movementAction)
+{
+    if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementAction))
+        sub_81126AC(movementAction, 0);
+}
+
+void sub_805C0A4(struct ObjectEvent * objectEvent, u8 movementAction)
+{
+    if (!ObjectEventSetHeldMovement(objectEvent, movementAction))
+        sub_8112588(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementAction, 32);
+}
+
+void sub_805C0D4(u8 direction)
+{
+    PlayerSetAnimId(sub_8063F2C(direction), 2);
+}
+
+void PlayerGoSlow(u8 direction)
+{
+    PlayerSetAnimId(sub_8063F58(direction), 2);
+}
+
+void PlayerGoSpeed1(u8 direction)
+{
+    PlayerSetAnimId(GetWalkNormalMovementAction(direction), 2);
+}
+
+void PlayerGoSpeed2(u8 direction)
+{
+    PlayerSetAnimId(GetWalkFastMovementAction(direction), 2);
+}
+
+void sub_805C134(u8 direction)
+{
+    PlayerSetAnimId(sub_8063FDC(direction), 2);
+}
+
+void PlayerRideWaterCurrent(u8 direction)
+{
+    PlayerSetAnimId(sub_8064008(direction), 2);
+}
+
+void sub_805C164(u8 direction)
+{
+    PlayerSetAnimId(GetWalkFastestMovementAction(direction), 2);
+}
+
+void PlayerRun(u8 direction)
+{
+    PlayerSetAnimId(GetPlayerRunMovementAction(direction), 2);
+}
+
+void PlayerRunSlow(u8 direction)
+{
+    PlayerSetAnimId(GetPlayerRunSlowMovementAction(direction), 2);
+}
+
+void PlayerOnBikeCollide(u8 direction)
+{
+    sub_805C438(direction);
+    PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(direction), 2);
+}
+
+void PlayerNotOnBikeCollide(u8 direction)
+{
+    sub_805C438(direction);
+    PlayerSetAnimId(GetStepInPlaceDelay32AnimId(direction), 2);
+}
+
+void PlayerFaceDirection(u8 direction)
+{
+    PlayerSetAnimId(GetFaceDirectionMovementAction(direction), 1);
+}
+
+void sub_805C20C(u8 direction)
+{
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), 1);
+}
+
+void PlayerTurnInPlace(u8 direction)
+{
+    PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), 1);
 }

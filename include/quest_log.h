@@ -56,5 +56,7 @@ void sub_81128BC(u8 a0);
 void sub_811278C(u8 movementActionId, u8 duration);
 void Special_UpdateTrainerFansAfterLinkBattle(void);
 void sub_8112628(u8 movementActionId);
+void sub_81126AC(u8 movementActionId, u8 duration);
+void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
 
 #endif //GUARD_QUEST_LOG_H

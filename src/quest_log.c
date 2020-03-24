@@ -43,6 +43,7 @@
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
+#include "constants/event_object_movement.h"
 
 u8 gUnknown_3005E88;
 
@@ -1448,7 +1449,7 @@ void sub_811246C(struct Sprite *sprite)
     }
 }
 
-void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3)
+void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 movementActionId)
 {
     if (!sub_8112CEC())
     {
@@ -1457,37 +1458,37 @@ void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3)
         sCurQuestLogEntry[sQuestLogCursor].unk_0 = a0;
         sCurQuestLogEntry[sQuestLogCursor].unk_1 = a1;
         sCurQuestLogEntry[sQuestLogCursor].unk_2 = a2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = a3;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = 0;
     }
 }
 
-void sub_8112588(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
+void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
         sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = a0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_1 = a1;
-        sCurQuestLogEntry[sQuestLogCursor].unk_2 = a2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = a3;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = localId;
+        sCurQuestLogEntry[sQuestLogCursor].unk_1 = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].unk_2 = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
         sQuestLogCursor++;
-        sNextStepDelay = a4;
+        sNextStepDelay = duration;
     }
 }
 
-void sub_8112628(u8 a0)
+void sub_8112628(u8 movementActionId)
 {
     if (!sub_8112CEC())
     {
-        if (a0 != sCurQuestLogEntry[gUnknown_203B01C].unk_3 || a0 > 3)
+        if (movementActionId != sCurQuestLogEntry[gUnknown_203B01C].unk_3 || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
         {
             sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
             sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
             sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = a0;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
             gUnknown_203B01C = sQuestLogCursor;
             sQuestLogCursor++;
             sNextStepDelay = 0;
@@ -1495,17 +1496,17 @@ void sub_8112628(u8 a0)
     }
 }
 
-void sub_81126AC(u8 a0, u8 a1)
+void sub_81126AC(u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
         sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
         sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
         sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = a0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
         gUnknown_203B01C = sQuestLogCursor;
         sQuestLogCursor++;
-        sNextStepDelay = a1;
+        sNextStepDelay = duration;
     }
 }
 
@@ -1637,16 +1638,16 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         {
         case DIR_NONE:
         case DIR_SOUTH:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = DIR_SOUTH - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_DOWN;
             break;
         case DIR_EAST:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = DIR_EAST - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_RIGHT;
             break;
         case DIR_NORTH:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = DIR_NORTH - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_UP;
             break;
         case DIR_WEST:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = DIR_WEST - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_LEFT;
             break;
         }
         gUnknown_203B01C = 0;

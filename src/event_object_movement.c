@@ -333,10 +333,255 @@ extern const struct OamData gObjectEventBaseOam_128x64;
 extern const struct OamData gObjectEventBaseOam_Unknown1;
 extern const struct OamData gObjectEventBaseOam_Unknown2;
 extern const struct OamData gObjectEventBaseOam_Unknown3;
+extern const u16 gUnknown_836D828[];
+extern const u16 gUnknown_836D848[];
+extern const u16 gUnknown_836D868[];
+extern const u16 gUnknown_836D888[];
+extern const u16 gUnknown_836D8A8[];
+extern const u16 gUnknown_836D8C8[];
+extern const u16 gUnknown_836D8E8[];
+extern const u16 gUnknown_836D908[];
+extern const u16 gUnknown_835B968[];
+extern const u16 gUnknown_835E968[];
+extern const u16 gUnknown_835E988[];
+extern const u16 gUnknown_8398008[];
+extern const u16 gUnknown_8398028[];
+extern const u16 gUnknown_835B968[];
+extern const u16 gUnknown_835E968[];
+extern const u16 gUnknown_8394EA8[];
+extern const u16 gUnknown_8395AE8[];
+extern const u16 gUnknown_83952C8[];
 
-
+#define OBJ_EVENT_PAL_TAG_0  0x1103
+#define OBJ_EVENT_PAL_TAG_1  0x1104
+#define OBJ_EVENT_PAL_TAG_2  0x1105
+#define OBJ_EVENT_PAL_TAG_3  0x1106
+#define OBJ_EVENT_PAL_TAG_4  0x1107
+#define OBJ_EVENT_PAL_TAG_5  0x1108
+#define OBJ_EVENT_PAL_TAG_6  0x1109
+#define OBJ_EVENT_PAL_TAG_7  0x110A
+#define OBJ_EVENT_PAL_TAG_8  0x1100
+#define OBJ_EVENT_PAL_TAG_9  0x1101
+#define OBJ_EVENT_PAL_TAG_10 0x1102
+#define OBJ_EVENT_PAL_TAG_11 0x1115
+#define OBJ_EVENT_PAL_TAG_12 0x110B
+#define OBJ_EVENT_PAL_TAG_13 0x110C
+#define OBJ_EVENT_PAL_TAG_14 0x110D
+#define OBJ_EVENT_PAL_TAG_15 0x110E
+#define OBJ_EVENT_PAL_TAG_16 0x110F
+#define OBJ_EVENT_PAL_TAG_17 0x1110
+#define OBJ_EVENT_PAL_TAG_18 0x1111
+#define OBJ_EVENT_PAL_TAG_19 0x1112
+#define OBJ_EVENT_PAL_TAG_20 0x1113
+#define OBJ_EVENT_PAL_TAG_21 0x1114
+#define OBJ_EVENT_PAL_TAG_22 0x1116
+#define OBJ_EVENT_PAL_TAG_23 0x1117
+#define OBJ_EVENT_PAL_TAG_24 0x1118
+#define OBJ_EVENT_PAL_TAG_25 0x1119
+#define OBJ_EVENT_PAL_TAG_26 0x111B
+#define OBJ_EVENT_PAL_TAG_27 0x111C
+#define OBJ_EVENT_PAL_TAG_28 0x111D
+#define OBJ_EVENT_PAL_TAG_29 0x111E
+#define OBJ_EVENT_PAL_TAG_30 0x111F
+#define OBJ_EVENT_PAL_TAG_31 0x1120
+#define OBJ_EVENT_PAL_TAG_32 0x1121
+#define OBJ_EVENT_PAL_TAG_33 0x1122
+#define OBJ_EVENT_PAL_TAG_34 0x1123
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
+const struct SpritePalette sObjectEventSpritePalettes[] = {
+    {gUnknown_836D828, OBJ_EVENT_PAL_TAG_0},
+    {gUnknown_836D848, OBJ_EVENT_PAL_TAG_1},
+    {gUnknown_836D868, OBJ_EVENT_PAL_TAG_2},
+    {gUnknown_836D888, OBJ_EVENT_PAL_TAG_3},
+    {gUnknown_836D8A8, OBJ_EVENT_PAL_TAG_4},
+    {gUnknown_836D8C8, OBJ_EVENT_PAL_TAG_5},
+    {gUnknown_836D8E8, OBJ_EVENT_PAL_TAG_6},
+    {gUnknown_836D908, OBJ_EVENT_PAL_TAG_7},
+    {gUnknown_835B968, OBJ_EVENT_PAL_TAG_8},
+    {gUnknown_835E968, OBJ_EVENT_PAL_TAG_9},
+    {gUnknown_835E988, OBJ_EVENT_PAL_TAG_10},
+    {gUnknown_8398008, OBJ_EVENT_PAL_TAG_12},
+    {gUnknown_8398028, OBJ_EVENT_PAL_TAG_13},
+    {gUnknown_835B968, OBJ_EVENT_PAL_TAG_17},
+    {gUnknown_835E968, OBJ_EVENT_PAL_TAG_18},
+    {gUnknown_8394EA8, OBJ_EVENT_PAL_TAG_20},
+    {gUnknown_8395AE8, OBJ_EVENT_PAL_TAG_11},
+    {gUnknown_83952C8, OBJ_EVENT_PAL_TAG_21},
+    {},
+};
+
+const u16 gPlayerReflectionPaletteTags[] = {
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+    OBJ_EVENT_PAL_TAG_18,
+};
+
+const u16 gUnknownPaletteTags_83A5200[] = {
+    OBJ_EVENT_PAL_TAG_22,
+    OBJ_EVENT_PAL_TAG_22,
+    OBJ_EVENT_PAL_TAG_22,
+    OBJ_EVENT_PAL_TAG_22,
+};
+
+const struct PairedPalettes gPlayerReflectionPaletteSets[] = {
+    {OBJ_EVENT_PAL_TAG_8,    gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_17,   gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_22,   gUnknownPaletteTags_83A5200},
+    {OBJ_EVENT_PAL_TAG_NONE, NULL},
+};
+
+const u16 gUnknownPaletteTags_83A5228[] = {
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+    OBJ_EVENT_PAL_TAG_13,
+};
+
+const u16 gUnknownPaletteTags_83A5230[] = {
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+    OBJ_EVENT_PAL_TAG_14,
+};
+
+const u16 gUnknownPaletteTags_83A5238[] = {
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+    OBJ_EVENT_PAL_TAG_15,
+};
+
+const u16 gUnknownPaletteTags_83A5240[] = {
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+    OBJ_EVENT_PAL_TAG_19,
+};
+
+const u16 gUnknownPaletteTags_83A5248[] = {
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+    OBJ_EVENT_PAL_TAG_20,
+};
+
+const u16 gUnknownPaletteTags_83A5250[] = {
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+    OBJ_EVENT_PAL_TAG_21,
+};
+
+const u16 gUnknownPaletteTags_83A5258[] = {
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+    OBJ_EVENT_PAL_TAG_26,
+};
+
+const u16 gUnknownPaletteTags_83A5260[] = {
+    OBJ_EVENT_PAL_TAG_24,
+    OBJ_EVENT_PAL_TAG_24,
+    OBJ_EVENT_PAL_TAG_24,
+    OBJ_EVENT_PAL_TAG_24,
+};
+
+const u16 gUnknownPaletteTags_83A5268[] = {
+    0x111a,
+    0x111a,
+    0x111a,
+    0x111a,
+};
+
+const u16 gUnknownPaletteTags_83A5270[] = {
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_6,
+};
+
+const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
+    {OBJ_EVENT_PAL_TAG_8,    gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_17,   gPlayerReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_12,   gUnknownPaletteTags_83A5228},
+    {OBJ_EVENT_PAL_TAG_14,   gUnknownPaletteTags_83A5230},
+    {OBJ_EVENT_PAL_TAG_15,   gUnknownPaletteTags_83A5238},
+    {OBJ_EVENT_PAL_TAG_19,   gUnknownPaletteTags_83A5240},
+    {OBJ_EVENT_PAL_TAG_20,   gUnknownPaletteTags_83A5248},
+    {OBJ_EVENT_PAL_TAG_21,   gUnknownPaletteTags_83A5250},
+    {OBJ_EVENT_PAL_TAG_23,   gUnknownPaletteTags_83A5260},
+    {OBJ_EVENT_PAL_TAG_25,   gUnknownPaletteTags_83A5268},
+    {OBJ_EVENT_PAL_TAG_2,    gUnknownPaletteTags_83A5270},
+    {OBJ_EVENT_PAL_TAG_26,   gUnknownPaletteTags_83A5258},
+    {OBJ_EVENT_PAL_TAG_NONE, NULL},
+};
+
+const u16 gUnknownPaletteTags_83A52E0[] = {
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
+};
+
+const u16 gUnknownPaletteTags_83A52F4[] = {
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_17,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
+};
+
+const u16 gUnknownPaletteTags_83A5308[] = {
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
+};
+
+const u16 gUnknownPaletteTags_83A531C[] = {
+    OBJ_EVENT_PAL_TAG_8,
+    OBJ_EVENT_PAL_TAG_9,
+    OBJ_EVENT_PAL_TAG_0,
+    OBJ_EVENT_PAL_TAG_1,
+    OBJ_EVENT_PAL_TAG_2,
+    OBJ_EVENT_PAL_TAG_3,
+    OBJ_EVENT_PAL_TAG_4,
+    OBJ_EVENT_PAL_TAG_5,
+    OBJ_EVENT_PAL_TAG_6,
+    OBJ_EVENT_PAL_TAG_7,
+};
+
+const u16 *const gObjectPaletteTagSets[] = {
+    gUnknownPaletteTags_83A52E0,
+    gUnknownPaletteTags_83A52F4,
+    gUnknownPaletteTags_83A5308,
+    gUnknownPaletteTags_83A531C,
+};
+
+//#include "data/object_events/berry_tree_graphics_tables.h"
 #include "data/field_effects/field_effect_objects.h"
 
 const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};

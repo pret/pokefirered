@@ -291,6 +291,8 @@ extern const s16 gUnknown_83A695E[3];
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
+#include "data/object_events/movement_type_func_tables.h"
+
 const u8 gFaceDirectionAnimNums[] = {
     [DIR_NONE]      = 0x00,
     [DIR_SOUTH]     = 0x00,

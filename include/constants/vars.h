@@ -221,11 +221,10 @@
 #define VAR_0x40A7                 0x40A7
 #define VAR_0x40A8                 0x40A8
 #define VAR_0x40A9                 0x40A9
-#define VAR_0x40AA                 0x40AA
-#define VAR_0x40AB                 0x40AB
-#define VAR_0x40AC                 0x40AC
-#define VAR_0x40AD                 0x40AD
-#define VAR_0x40AE                 0x40AE
+
+#define VAR_QLBAK_TRAINER_REMATCHES 0x40AA // array of 4
+#define VAR_QLBAK_MAP_LAYOUT        0x40AE
+
 #define VAR_0x40AF                 0x40AF
 #define VAR_0x40B0                 0x40B0
 #define VAR_0x40B1                 0x40B1

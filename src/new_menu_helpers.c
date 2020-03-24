@@ -496,7 +496,7 @@ void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
     if (copyToVram == TRUE)
         CopyWindowToVram(windowId, 3);
     if (gQuestLogState == 2)
-        sub_8111134();
+        CommitQuestLogWindow1();
 }
 
 void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)

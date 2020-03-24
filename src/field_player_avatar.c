@@ -764,3 +764,18 @@ u8 PlayerGetCopyableMovement(void)
 {
     return gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement;
 }
+
+void PlayerForceSetHeldMovement(u8 a)
+{
+    ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], a);
+}
+
+void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
+{
+    if (!PlayerIsAnimActive())
+    {
+        PlayerSetCopyableMovement(copyableMovement);
+        if (!ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], movementActionId))
+            sub_8112628(movementActionId);
+    }
+}

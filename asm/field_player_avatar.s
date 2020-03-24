@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_805BFFC
-sub_805BFFC: @ 805BFFC
-	push {lr}
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, _0805C01C @ =gPlayerAvatar
-	ldrb r2, [r0, 0x5]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, _0805C020 @ =gObjectEvents
-	adds r0, r2
-	bl ObjectEventForceSetHeldMovement
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805C01C: .4byte gPlayerAvatar
-_0805C020: .4byte gObjectEvents
-	thumb_func_end sub_805BFFC
-
-	thumb_func_start PlayerSetAnimId
-PlayerSetAnimId: @ 805C024
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r4, r1, 24
-	bl PlayerIsAnimActive
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805C05E
-	adds r0, r4, 0
-	bl PlayerSetCopyableMovement
-	ldr r0, _0805C064 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805C068 @ =gObjectEvents
-	adds r0, r1
-	adds r1, r5, 0
-	bl ObjectEventSetHeldMovement
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805C05E
-	adds r0, r5, 0
-	bl sub_8112628
-_0805C05E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805C064: .4byte gPlayerAvatar
-_0805C068: .4byte gObjectEvents
-	thumb_func_end PlayerSetAnimId
-
 	thumb_func_start sub_805C06C
 sub_805C06C: @ 805C06C
 	push {r4,lr}
@@ -378,7 +321,7 @@ _0805C27E:
 	bl GetFaceDirectionMovementAction
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_805BFFC
+	bl PlayerForceSetHeldMovement
 _0805C2A6:
 	pop {r4}
 	pop {r0}

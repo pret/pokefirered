@@ -18,9 +18,9 @@ struct UnkStruct_3005E90
 
 extern u8 gQuestLogState;
 extern u8 gUnknown_3005E88;
-extern u16 sNumQuestLogs;
+extern u16 sNumEventsInLogEntry;
 extern struct UnkStruct_3005E90 gUnknown_3005E90;
-extern struct UnkStruct_203AE98 * gUnknown_3005E94;
+extern struct QuestLogEntry * sCurQuestLogEntry;
 extern const u16 gUnknown_84566A8[];
 
 void sub_8112720(u8);
@@ -30,7 +30,7 @@ void QuestLog_RecordEnteredMap(u16);
 u8 sub_8112CAC(void);
 bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
 void sub_8111F38(u16 offset, u16 idx);
-void sub_8111134(void);
+void CommitQuestLogWindow1(void);
 void DestroyHelpMessageWindow(u8 a0);
 u8 CreateHelpMessageWindow(void);
 void PrintTextOnHelpMessageWindow(const u8 * text, u8 mode);
@@ -53,7 +53,8 @@ void sub_811246C(struct Sprite *sprite);
 void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3);
 bool8 sub_8111C2C(void);
 void sub_81128BC(u8 a0);
-void sub_811278C(u8, u8);
+void sub_811278C(u8 movementActionId, u8 duration);
 void Special_UpdateTrainerFansAfterLinkBattle(void);
+void sub_8112628(u8 movementActionId);
 
 #endif //GUARD_QUEST_LOG_H

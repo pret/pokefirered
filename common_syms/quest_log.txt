@@ -1,4 +1,4 @@
 gUnknown_3005E88
-sNumQuestLogs
+sNumEventsInLogEntry
 gUnknown_3005E90
-gUnknown_3005E94
+sCurQuestLogEntry

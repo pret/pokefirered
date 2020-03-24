@@ -288,8 +288,60 @@ extern u8 (*const *const gMovementActionFuncs[])(struct ObjectEvent *, struct Sp
 extern u8 (*const gUnknown_83A6884[5])(u8);
 extern const s16 gUnknown_83A6958[3];
 extern const s16 gUnknown_83A695E[3];
+extern const u16 gUnknown_8398FA8[];
+extern const u16 gUnknown_8398FC8[];
+extern const u32 gUnknown_8398048[8];
+extern const u32 gUnknown_8398068[16];
+extern const u32 gUnknown_83980A8[32];
+extern const u32 gUnknown_8398128[256];
+extern const u32 gUnknown_839A008[];
+extern const u32 gUnknown_83986A8[];
+extern const u32 gUnknown_8398928[];
+extern const u32 gUnknown_8396B08[];
+extern const u32 gUnknown_8398BA8[];
+extern const u32 gUnknown_8399008[];
+extern const u32 gUnknown_8399188[];
+extern const u32 gUnknown_839A388[];
+extern const u32 gUnknown_839A488[];
+extern const u32 gUnknown_839A588[];
+extern const u32 gUnknown_839AA48[];
+extern const u32 gUnknown_839AC48[];
+extern const u32 gUnknown_839ACC8[];
+extern const u32 gUnknown_8399E08[];
+extern const u32 gUnknown_8399488[];
+extern const u32 gUnknown_8399788[];
+extern const u32 gUnknown_8399C08[];
+extern const u32 gUnknown_839A788[];
+extern const u32 gUnknown_839A988[];
+extern const u32 gUnknown_839AD88[];
+extern const u32 gUnknown_839B008[];
+extern const u32 gUnknown_839B708[];
+extern const u32 gUnknown_839BE08[];
+extern const u32 gUnknown_839D3C8[];
+extern const u32 gUnknown_839A288[];
+extern const u32 gUnknown_839C508[];
+extern const u32 gUnknown_839C5A8[];
+extern const u16 gUnknown_839C588[];
+extern const u32 gUnknown_839C828[];
+extern const u32 gUnknown_839CAA8[];
+extern const u32 gUnknown_839D2A8[];
+extern const u16 gUnknown_839D3A8[];
+extern const struct OamData gObjectEventBaseOam_16x16;
+extern const struct OamData gObjectEventBaseOam_16x32;
+extern const struct OamData gObjectEventBaseOam_64x64;
+extern const struct OamData gObjectEventBaseOam_128x64;
+extern const struct OamData gObjectEventBaseOam_Unknown1;
+extern const struct OamData gObjectEventBaseOam_Unknown2;
+extern const struct OamData gObjectEventBaseOam_Unknown3;
+
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
+
+#include "data/field_effects/field_effect_objects.h"
+
+const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
+const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
+const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
 #include "data/object_events/movement_type_func_tables.h"
 

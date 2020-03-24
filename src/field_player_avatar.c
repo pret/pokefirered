@@ -583,6 +583,7 @@ bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
 bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
 {
     u8 objectEventId;
+    u8 direction_ = direction;
     if (!FlagGet(FLAG_SYS_USE_STRENGTH))
         return FALSE;
 
@@ -595,16 +596,14 @@ bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
 
     x = gObjectEvents[objectEventId].currentCoords.x;
     y = gObjectEvents[objectEventId].currentCoords.y;
-    MoveCoords(direction, &x, &y);
-    if (MapGridGetMetatileBehaviorAt(x, y) == MB_FALL_WARP || (GetCollisionAtCoords(&gObjectEvents[objectEventId], x, y, direction) == COLLISION_NONE && !MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y))))
+    MoveCoords(direction_, &x, &y);
+    if (MapGridGetMetatileBehaviorAt(x, y) == MB_FALL_WARP || (GetCollisionAtCoords(&gObjectEvents[objectEventId], x, y, direction_) == COLLISION_NONE && !MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        StartStrengthAnim(objectEventId, direction);
+        StartStrengthAnim(objectEventId, direction_);
         return TRUE;
     }
     else
     {
-        direction++;
-        direction--;
         return FALSE;
     }
 }

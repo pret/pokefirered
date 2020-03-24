@@ -199,5 +199,6 @@ extern const struct OamData gObjectEventBaseOam_32x32;
 extern const u16 gUnknown_8398648[];
 extern const u16 gUnknown_8398688[];
 extern const u8 gReflectionEffectPaletteMap[];
+u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

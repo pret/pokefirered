@@ -5,510 +5,6 @@
 
 	.text
 
-	thumb_func_start CanStopSurfing
-CanStopSurfing: @ 805BC60
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 16
-	lsrs r4, r1, 16
-	lsls r2, 24
-	lsrs r6, r2, 24
-	ldr r0, _0805BCB8 @ =gPlayerAvatar
-	ldrb r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0805BCC0
-	lsls r5, r3, 16
-	asrs r0, r5, 16
-	lsls r4, 16
-	asrs r1, r4, 16
-	bl MapGridGetZCoordAt
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bne _0805BCC0
-	lsrs r0, r5, 16
-	lsrs r1, r4, 16
-	movs r2, 0x3
-	bl GetObjectEventIdByXYZ
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x10
-	bne _0805BCC0
-	ldr r0, _0805BCBC @ =gUnknown_835B820
-	adds r0, r6, r0
-	ldrb r0, [r0]
-	movs r1, 0x10
-	bl sub_811278C
-	adds r0, r6, 0
-	bl sub_805D0F8
-	movs r0, 0x1
-	b _0805BCC2
-	.align 2, 0
-_0805BCB8: .4byte gPlayerAvatar
-_0805BCBC: .4byte gUnknown_835B820
-_0805BCC0:
-	movs r0, 0
-_0805BCC2:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end CanStopSurfing
-
-	thumb_func_start ShouldJumpLedge
-ShouldJumpLedge: @ 805BCC8
-	push {lr}
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r0, 16
-	asrs r0, 16
-	lsls r1, 16
-	asrs r1, 16
-	bl GetLedgeJumpDirection
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BCE4
-	movs r0, 0
-	b _0805BCE6
-_0805BCE4:
-	movs r0, 0x1
-_0805BCE6:
-	pop {r1}
-	bx r1
-	thumb_func_end ShouldJumpLedge
-
-	thumb_func_start TryPushBoulder
-TryPushBoulder: @ 805BCEC
-	push {r4-r7,lr}
-	sub sp, 0x4
-	mov r3, sp
-	strh r0, [r3]
-	mov r5, sp
-	adds r5, 0x2
-	strh r1, [r5]
-	lsls r2, 24
-	lsrs r7, r2, 24
-	ldr r0, _0805BD98 @ =0x00000805
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BDA0
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r2, 0
-	ldrsh r1, [r5, r2]
-	bl GetObjectEventIdByXY
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0x10
-	beq _0805BDA0
-	ldr r0, _0805BD9C @ =gObjectEvents
-	lsls r1, r6, 3
-	adds r1, r6
-	lsls r1, 2
-	adds r4, r1, r0
-	ldrb r0, [r4, 0x5]
-	cmp r0, 0x61
-	bne _0805BDA0
-	ldrh r1, [r4, 0x10]
-	mov r0, sp
-	strh r1, [r0]
-	ldrh r0, [r4, 0x12]
-	strh r0, [r5]
-	adds r0, r7, 0
-	mov r1, sp
-	adds r2, r5, 0
-	bl MoveCoords
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r2, 0
-	ldrsh r1, [r5, r2]
-	bl MapGridGetMetatileBehaviorAt
-	cmp r0, 0x66
-	beq _0805BD8A
-	mov r0, sp
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	movs r0, 0
-	ldrsh r2, [r5, r0]
-	adds r0, r4, 0
-	adds r3, r7, 0
-	bl GetCollisionAtCoords
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BDA0
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	movs r2, 0
-	ldrsh r1, [r5, r2]
-	bl MapGridGetMetatileBehaviorAt
-	lsls r0, 24
-	lsrs r0, 24
-	bl MetatileBehavior_IsCaveDoor
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BDA0
-_0805BD8A:
-	adds r0, r6, 0
-	adds r1, r7, 0
-	bl task_add_bump_boulder
-	movs r0, 0x1
-	b _0805BDA2
-	.align 2, 0
-_0805BD98: .4byte 0x00000805
-_0805BD9C: .4byte gObjectEvents
-_0805BDA0:
-	movs r0, 0
-_0805BDA2:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end TryPushBoulder
-
-	thumb_func_start CheckAcroBikeCollision
-CheckAcroBikeCollision: @ 805BDAC
-	push {r4-r7,lr}
-	adds r6, r3, 0
-	lsls r2, 24
-	lsrs r5, r2, 24
-	movs r4, 0
-	ldr r7, _0805BDD4 @ =gUnknown_835B828
-_0805BDB8:
-	lsls r0, r4, 2
-	adds r0, r7
-	ldr r1, [r0]
-	adds r0, r5, 0
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BDDC
-	ldr r0, _0805BDD8 @ =gUnknown_835B83C
-	adds r0, r4, r0
-	ldrb r0, [r0]
-	strb r0, [r6]
-	b _0805BDE6
-	.align 2, 0
-_0805BDD4: .4byte gUnknown_835B828
-_0805BDD8: .4byte gUnknown_835B83C
-_0805BDDC:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x4
-	bls _0805BDB8
-_0805BDE6:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end CheckAcroBikeCollision
-
-	thumb_func_start SetPlayerAvatarTransitionFlags
-SetPlayerAvatarTransitionFlags: @ 805BDEC
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r2, _0805BE04 @ =gPlayerAvatar
-	ldrb r1, [r2, 0x1]
-	orrs r0, r1
-	strb r0, [r2, 0x1]
-	bl DoPlayerAvatarTransition
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805BE04: .4byte gPlayerAvatar
-	thumb_func_end SetPlayerAvatarTransitionFlags
-
-	thumb_func_start DoPlayerAvatarTransition
-DoPlayerAvatarTransition: @ 805BE08
-	push {r4,r5,lr}
-	ldr r0, _0805BE50 @ =gPlayerAvatar
-	ldrb r4, [r0, 0x1]
-	cmp r4, 0
-	beq _0805BE48
-	movs r5, 0
-_0805BE14:
-	movs r0, 0x1
-	ands r0, r4
-	cmp r0, 0
-	beq _0805BE36
-	ldr r0, _0805BE54 @ =gUnknown_835B844
-	lsls r2, r5, 2
-	adds r2, r0
-	ldr r0, _0805BE50 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805BE58 @ =gObjectEvents
-	adds r0, r1
-	ldr r1, [r2]
-	bl _call_via_r1
-_0805BE36:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsrs r4, 1
-	cmp r5, 0x7
-	bls _0805BE14
-	ldr r1, _0805BE50 @ =gPlayerAvatar
-	movs r0, 0
-	strb r0, [r1, 0x1]
-_0805BE48:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805BE50: .4byte gPlayerAvatar
-_0805BE54: .4byte gUnknown_835B844
-_0805BE58: .4byte gObjectEvents
-	thumb_func_end DoPlayerAvatarTransition
-
-	thumb_func_start nullsub_22
-nullsub_22: @ 805BE5C
-	bx lr
-	thumb_func_end nullsub_22
-
-	thumb_func_start sub_805BE60
-sub_805BE60: @ 805BE60
-	push {lr}
-	movs r0, 0
-	bl sub_8150474
-	movs r0, 0
-	bl sub_8150498
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805BE60
-
-	thumb_func_start sub_805BE74
-sub_805BE74: @ 805BE74
-	push {lr}
-	movs r0, 0x1
-	bl sub_8150474
-	movs r0, 0x1
-	bl sub_8150498
-	movs r0, 0
-	movs r1, 0
-	bl sub_80BD620
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805BE74
-
-	thumb_func_start sub_805BE90
-sub_805BE90: @ 805BE90
-	push {lr}
-	movs r0, 0x3
-	bl sub_8150474
-	movs r0, 0x3
-	bl sub_8150498
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805BE90
-
-	thumb_func_start nullsub_23
-nullsub_23: @ 805BEA4
-	bx lr
-	thumb_func_end nullsub_23
-
-	thumb_func_start PlayerAvatarTransition_ReturnToField
-PlayerAvatarTransition_ReturnToField: @ 805BEA8
-	ldr r2, _0805BEB4 @ =gPlayerAvatar
-	ldrb r1, [r2]
-	movs r0, 0x20
-	orrs r0, r1
-	strb r0, [r2]
-	bx lr
-	.align 2, 0
-_0805BEB4: .4byte gPlayerAvatar
-	thumb_func_end PlayerAvatarTransition_ReturnToField
-
-	thumb_func_start sub_805BEB8
-sub_805BEB8: @ 805BEB8
-	push {r4,lr}
-	ldr r4, _0805BEE4 @ =gPlayerAvatar
-	movs r0, 0
-	strb r0, [r4, 0x3]
-	bl PlayerIsAnimActive
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BEF6
-	bl PlayerCheckIfAnimFinishedOrInactive
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BEE8
-	bl player_is_anim_in_certain_ranges
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BEF6
-	movs r0, 0x1
-	b _0805BEF4
-	.align 2, 0
-_0805BEE4: .4byte gPlayerAvatar
-_0805BEE8:
-	bl sub_805BF58
-	lsls r0, 24
-	cmp r0, 0
-	bne _0805BEF6
-	movs r0, 0x2
-_0805BEF4:
-	strb r0, [r4, 0x3]
-_0805BEF6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_805BEB8
-
-	thumb_func_start player_is_anim_in_certain_ranges
-player_is_anim_in_certain_ranges: @ 805BEFC
-	push {lr}
-	ldr r2, _0805BF48 @ =gObjectEvents
-	ldr r0, _0805BF4C @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x1C]
-	cmp r1, 0x7
-	bls _0805BF42
-	adds r0, r1, 0
-	subs r0, 0x18
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x4
-	bls _0805BF42
-	adds r0, r1, 0
-	subs r0, 0x21
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xF
-	bls _0805BF42
-	adds r0, r1, 0
-	subs r0, 0x70
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xB
-	bls _0805BF42
-	adds r0, r1, 0
-	adds r0, 0x78
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bhi _0805BF50
-_0805BF42:
-	movs r0, 0x1
-	b _0805BF52
-	.align 2, 0
-_0805BF48: .4byte gObjectEvents
-_0805BF4C: .4byte gPlayerAvatar
-_0805BF50:
-	movs r0, 0
-_0805BF52:
-	pop {r1}
-	bx r1
-	thumb_func_end player_is_anim_in_certain_ranges
-
-	thumb_func_start sub_805BF58
-sub_805BF58: @ 805BF58
-	push {lr}
-	bl player_is_anim_in_certain_ranges
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805BF74
-	ldr r0, _0805BF70 @ =gPlayerAvatar
-	ldrb r0, [r0, 0x2]
-	cmp r0, 0x1
-	beq _0805BF74
-	movs r0, 0x1
-	b _0805BF76
-	.align 2, 0
-_0805BF70: .4byte gPlayerAvatar
-_0805BF74:
-	movs r0, 0
-_0805BF76:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_805BF58
-
-	thumb_func_start PlayerIsAnimActive
-PlayerIsAnimActive: @ 805BF7C
-	push {lr}
-	ldr r0, _0805BF98 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805BF9C @ =gObjectEvents
-	adds r0, r1
-	bl ObjectEventIsMovementOverridden
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805BF98: .4byte gPlayerAvatar
-_0805BF9C: .4byte gObjectEvents
-	thumb_func_end PlayerIsAnimActive
-
-	thumb_func_start PlayerCheckIfAnimFinishedOrInactive
-PlayerCheckIfAnimFinishedOrInactive: @ 805BFA0
-	push {lr}
-	ldr r0, _0805BFBC @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _0805BFC0 @ =gObjectEvents
-	adds r0, r1
-	bl ObjectEventCheckHeldMovementStatus
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0805BFBC: .4byte gPlayerAvatar
-_0805BFC0: .4byte gObjectEvents
-	thumb_func_end PlayerCheckIfAnimFinishedOrInactive
-
-	thumb_func_start player_set_x22
-player_set_x22: @ 805BFC4
-	ldr r3, _0805BFD8 @ =gObjectEvents
-	ldr r1, _0805BFDC @ =gPlayerAvatar
-	ldrb r2, [r1, 0x5]
-	lsls r1, r2, 3
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r3
-	adds r1, 0x22
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_0805BFD8: .4byte gObjectEvents
-_0805BFDC: .4byte gPlayerAvatar
-	thumb_func_end player_set_x22
-
-	thumb_func_start PlayerGetCopyableMovement
-PlayerGetCopyableMovement: @ 805BFE0
-	ldr r2, _0805BFF4 @ =gObjectEvents
-	ldr r0, _0805BFF8 @ =gPlayerAvatar
-	ldrb r1, [r0, 0x5]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x22
-	ldrb r0, [r0]
-	bx lr
-	.align 2, 0
-_0805BFF4: .4byte gObjectEvents
-_0805BFF8: .4byte gPlayerAvatar
-	thumb_func_end PlayerGetCopyableMovement
-
 	thumb_func_start sub_805BFFC
 sub_805BFFC: @ 805BFFC
 	push {lr}
@@ -542,7 +38,7 @@ PlayerSetAnimId: @ 805C024
 	cmp r0, 0
 	bne _0805C05E
 	adds r0, r4, 0
-	bl player_set_x22
+	bl PlayerSetCopyableMovement
 	ldr r0, _0805C064 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2244,8 +1740,8 @@ _0805CCC2:
 	bx r0
 	thumb_func_end sub_805CC40
 
-	thumb_func_start task_add_bump_boulder
-task_add_bump_boulder: @ 805CCD0
+	thumb_func_start StartStrengthAnim
+StartStrengthAnim: @ 805CCD0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -2273,7 +1769,7 @@ task_add_bump_boulder: @ 805CCD0
 	.align 2, 0
 _0805CD04: .4byte taskFF_bump_boulder
 _0805CD08: .4byte gTasks
-	thumb_func_end task_add_bump_boulder
+	thumb_func_end StartStrengthAnim
 
 	thumb_func_start taskFF_bump_boulder
 taskFF_bump_boulder: @ 805CD0C
@@ -2771,8 +2267,8 @@ _0805D0F0: .4byte gPlayerAvatar
 _0805D0F4: .4byte sub_805CF78
 	thumb_func_end sub_805D0A4
 
-	thumb_func_start sub_805D0F8
-sub_805D0F8: @ 805D0F8
+	thumb_func_start CreateStopSurfingTask
+CreateStopSurfingTask: @ 805D0F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2810,7 +2306,7 @@ sub_805D0F8: @ 805D0F8
 _0805D148: .4byte gPlayerAvatar
 _0805D14C: .4byte taskFF_0805D1D4
 _0805D150: .4byte gTasks
-	thumb_func_end sub_805D0F8
+	thumb_func_end CreateStopSurfingTask
 
 	thumb_func_start sub_805D154
 sub_805D154: @ 805D154
@@ -2865,7 +2361,7 @@ sub_805D1A8: @ 805D1A8
 	movs r1, 0x10
 	bl sub_811278C
 	movs r0, 0x2
-	bl sub_805D0F8
+	bl CreateStopSurfingTask
 _0805D1C6:
 	pop {r0}
 	bx r0

@@ -8,9 +8,13 @@
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "quest_log.h"
+#include "quest_log_player.h"
 #include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 #include "constants/flags.h"
+#include "constants/metatile_behaviors.h"
 
 EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
 EWRAM_DATA bool8 gUnknown_2036E34 = FALSE;
@@ -21,7 +25,6 @@ u8 ObjectEventCB2_NoMovement2(struct ObjectEvent * object, struct Sprite * sprit
 bool8 sub_805B528(void);
 bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent * playerObjEvent, u8 direction);
 void npc_clear_strange_bits(struct ObjectEvent * playerObjEvent);
-void DoPlayerAvatarTransition(void);
 bool8 TryDoMetatileBehaviorForcedMovement(void);
 void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys);
 void PlayerAllowForcedMovementIfMovingSameDirection(void);
@@ -56,7 +59,20 @@ u8 CheckForObjectEventCollision(struct ObjectEvent * objectEvent, s16 x, s16 y, 
 bool8 CanStopSurfing(s16 x, s16 y, u8 direction);
 bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction);
 bool8 TryPushBoulder(s16 x, s16 y, u8 direction);
-bool8 CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collision);
+void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collision);
+void DoPlayerAvatarTransition(void);
+void PlayerAvatarTransition_Dummy(struct ObjectEvent * playerObject);
+void PlayerAvatarTransition_Normal(struct ObjectEvent * playerObject);
+void PlayerAvatarTransition_Bike(struct ObjectEvent * playerObject);
+void PlayerAvatarTransition_Surfing(struct ObjectEvent * playerObject);
+void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObject);
+void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObject);
+bool8 PlayerIsAnimActive(void);
+bool8 PlayerCheckIfAnimFinishedOrInactive(void);
+bool8 player_is_anim_in_certain_ranges(void);
+bool8 sub_805BF58(void);
+void CreateStopSurfingTask(u8 direction);
+void StartStrengthAnim(u8 objectEventId, u8 direction);
 void PlayerNotOnBikeCollide(u8 direction);
 void PlayerRun(u8 direction);
 void PlayerRunSlow(u8 direction);
@@ -530,4 +546,222 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         CheckAcroBikeCollision(x, y, metatileBehavior, &collision);
     }
     return collision;
+}
+
+const u8 gUnknown_835B820[] = {
+    MOVEMENT_ACTION_FACE_DOWN_FAST,
+    MOVEMENT_ACTION_FACE_DOWN_FAST,
+    MOVEMENT_ACTION_FACE_UP_FAST,
+    MOVEMENT_ACTION_FACE_LEFT_FAST,
+    MOVEMENT_ACTION_FACE_RIGHT_FAST
+};
+
+bool8 CanStopSurfing(s16 x, s16 y, u8 direction)
+{
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+        && MapGridGetZCoordAt(x, y) == 3
+        && GetObjectEventIdByXYZ(x, y, 3) == OBJECT_EVENTS_COUNT)
+    {
+        sub_811278C(gUnknown_835B820[direction], 16);
+        CreateStopSurfingTask(direction);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+bool8 ShouldJumpLedge(s16 x, s16 y, u8 z)
+{
+    if (GetLedgeJumpDirection(x, y, z) != 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
+{
+    u8 objectEventId;
+    if (!FlagGet(FLAG_SYS_USE_STRENGTH))
+        return FALSE;
+
+    objectEventId = GetObjectEventIdByXY(x, y);
+    if (objectEventId == OBJECT_EVENTS_COUNT)
+        return FALSE;
+
+    if (gObjectEvents[objectEventId].graphicsId != OBJ_EVENT_GFX_PUSHABLE_BOULDER)
+        return FALSE;
+
+    x = gObjectEvents[objectEventId].currentCoords.x;
+    y = gObjectEvents[objectEventId].currentCoords.y;
+    MoveCoords(direction, &x, &y);
+    if (MapGridGetMetatileBehaviorAt(x, y) == MB_FALL_WARP || (GetCollisionAtCoords(&gObjectEvents[objectEventId], x, y, direction) == COLLISION_NONE && !MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        StartStrengthAnim(objectEventId, direction);
+        return TRUE;
+    }
+    else
+    {
+        direction++;
+        direction--;
+        return FALSE;
+    }
+}
+
+bool8 (*const gUnknown_835B828[])(u8) = {
+    MetatileBehavior_IsBumpySlope,
+    MetatileBehavior_IsIsolatedVerticalRail,
+    MetatileBehavior_IsIsolatedHorizontalRail,
+    MetatileBehavior_IsVerticalRail,
+    MetatileBehavior_IsHorizontalRail
+};
+
+const u8 gUnknown_835B83C[] = {
+    COLLISION_WHEELIE_HOP,
+    COLLISION_ISOLATED_VERTICAL_RAIL,
+    COLLISION_ISOLATED_HORIZONTAL_RAIL,
+    COLLISION_VERTICAL_RAIL,
+    COLLISION_HORIZONTAL_RAIL,
+};
+
+void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collision)
+{
+    u8 i;
+
+    for (i = 0; i < NELEMS(gUnknown_835B828); i++)
+    {
+        if (gUnknown_835B828[i](metatileBehavior))
+        {
+            *collision = gUnknown_835B83C[i];
+            return;
+        }
+    }
+}
+
+void SetPlayerAvatarTransitionFlags(bool16 flags)
+{
+    gPlayerAvatar.unk1 |= flags;
+    DoPlayerAvatarTransition();
+}
+
+void (*const gUnknown_835B844[])(struct ObjectEvent *) = {
+    PlayerAvatarTransition_Normal,
+    PlayerAvatarTransition_Bike,
+    PlayerAvatarTransition_Bike,
+    PlayerAvatarTransition_Surfing,
+    PlayerAvatarTransition_Underwater,
+    PlayerAvatarTransition_ReturnToField,
+    PlayerAvatarTransition_Dummy,
+    PlayerAvatarTransition_Dummy
+};
+
+void DoPlayerAvatarTransition(void)
+{
+    u8 i;
+    u8 flags = gPlayerAvatar.unk1;
+
+    if (flags != 0)
+    {
+        for (i = 0; i < NELEMS(gUnknown_835B844); i++, flags >>= 1)
+        {
+            if (flags & 1)
+                gUnknown_835B844[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
+        }
+        gPlayerAvatar.unk1 = 0;
+    }
+}
+
+void PlayerAvatarTransition_Dummy(struct ObjectEvent * playerObjEvent)
+{
+
+}
+
+void PlayerAvatarTransition_Normal(struct ObjectEvent * playerObjEvent)
+{
+    sub_8150474(0);
+    sub_8150498(0);
+}
+
+void PlayerAvatarTransition_Bike(struct ObjectEvent * playerObjEvent)
+{
+    sub_8150474(1);
+    sub_8150498(1);
+    sub_80BD620(0, 0);
+}
+
+void PlayerAvatarTransition_Surfing(struct ObjectEvent * playerObjEvent)
+{
+    sub_8150474(3);
+    sub_8150498(3);
+}
+
+void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObjEvent)
+{
+
+}
+
+void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObjEvent)
+{
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED;
+}
+
+void sub_805BEB8(void)
+{
+    gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
+    if (PlayerIsAnimActive())
+    {
+        if (!PlayerCheckIfAnimFinishedOrInactive())
+        {
+            if (!player_is_anim_in_certain_ranges())
+                gPlayerAvatar.tileTransitionState = T_TILE_TRANSITION;
+        }
+        else
+        {
+            if (!sub_805BF58())
+                gPlayerAvatar.tileTransitionState = T_TILE_CENTER;
+        }
+    }
+}
+
+bool8 player_is_anim_in_certain_ranges(void)
+{
+    u8 movementActionId = gObjectEvents[gPlayerAvatar.objectEventId].movementActionId;
+
+    if (movementActionId <= MOVEMENT_ACTION_FACE_RIGHT_FAST
+        || (movementActionId >= MOVEMENT_ACTION_DELAY_1 && movementActionId <= MOVEMENT_ACTION_DELAY_16)
+        || (movementActionId >= MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN && movementActionId <= MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT)
+        || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT)
+        || (movementActionId >= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN && movementActionId <= MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 sub_805BF58(void)
+{
+    if (player_is_anim_in_certain_ranges() && gPlayerAvatar.runningState != TURN_DIRECTION)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 PlayerIsAnimActive(void)
+{
+    return ObjectEventIsMovementOverridden(&gObjectEvents[gPlayerAvatar.objectEventId]);
+}
+
+bool8 PlayerCheckIfAnimFinishedOrInactive(void)
+{
+    return ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]);
+}
+
+void PlayerSetCopyableMovement(u8 a)
+{
+    gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement = a;
+}
+
+u8 PlayerGetCopyableMovement(void)
+{
+    return gObjectEvents[gPlayerAvatar.objectEventId].playerCopyableMovement;
 }

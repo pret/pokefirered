@@ -906,7 +906,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
         return TRUE;
     if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         return TRUE;
-    if (MetatileBehavior_IsCaveDoor(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsNonAnimDoor(metatileBehavior) == TRUE)
         return TRUE;
     if (MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) == TRUE)
         return TRUE;

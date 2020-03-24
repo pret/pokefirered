@@ -144,7 +144,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 13,
       "y": 47,
       "elevation": 3,
@@ -209,7 +209,7 @@
       "flag": "FLAG_TEMP_17"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 17,
       "y": 47,
       "elevation": 3,

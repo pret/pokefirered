@@ -125,7 +125,7 @@ EventScript_StrengthBoulder:: @ 81BE11D
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantMoveBoulder
-	goto_if_set FLAG_SYS_STRENGTH_ACTIVE, EventScript_AlreadyUsedStrength
+	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_AlreadyUsedStrength
 	checkpartymove MOVE_STRENGTH
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantMoveBoulder
@@ -147,7 +147,7 @@ EventScript_FldEffStrength:: @ 81BE16E
 	end
 
 EventScript_UseStrength:: @ 81BE179
-	setflag FLAG_SYS_STRENGTH_ACTIVE
+	setflag FLAG_SYS_USE_STRENGTH
 	msgbox Text_MonUsedStrengthCanMoveBoulders, MSGBOX_SIGN
 	end
 

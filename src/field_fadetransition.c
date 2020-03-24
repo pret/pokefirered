@@ -260,7 +260,7 @@ static void sub_807DE78(bool8 a0)
     else
     {
         sub_807DF4C(a0);
-        if (MetatileBehavior_IsCaveDoor(behavior) == TRUE)
+        if (MetatileBehavior_IsNonAnimDoor(behavior) == TRUE)
             func = task_map_chg_seq_0807E20C;
         else if (MetatileBehavior_IsUnknownWarp6C_to_6F(behavior) == TRUE)
         {

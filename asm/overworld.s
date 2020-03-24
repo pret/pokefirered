@@ -2073,7 +2073,7 @@ _08055B94:
 	cmp r0, 0x1
 	beq _08055BD0
 	adds r0, r5, 0
-	bl MetatileBehavior_IsCaveDoor
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

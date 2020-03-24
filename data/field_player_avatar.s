@@ -3,31 +3,6 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-gUnknown_835B820:: @ 835B820
-	.byte 0x04, 0x04, 0x05, 0x06, 0x07
-
-	.align 2
-gUnknown_835B828:: @ 835B828
-	.4byte MetatileBehavior_ReturnFalse_14 // Related to Acro Bike
-	.4byte MetatileBehavior_ReturnFalse_15 // Related to Acro Bike
-	.4byte MetatileBehavior_ReturnFalse_16 // Related to Acro Bike
-	.4byte MetatileBehavior_ReturnFalse_17 // Related to Acro Bike
-	.4byte MetatileBehavior_ReturnFalse_18 // Related to Acro Bike
-
-gUnknown_835B83C:: @ 835B83C
-	.byte 0x09, 0x0a, 0x0b, 0x0c, 0x0d
-
-	.align 2
-gUnknown_835B844:: @ 835B844
-	.4byte sub_805BE60
-	.4byte sub_805BE74
-	.4byte sub_805BE74
-	.4byte sub_805BE90
-	.4byte nullsub_23
-	.4byte PlayerAvatarTransition_ReturnToField
-	.4byte nullsub_22
-	.4byte nullsub_22
-
 gUnknown_835B864:: @ 835B864
 	.4byte MetatileBehavior_IsSouthArrowWarp
 	.4byte MetatileBehavior_IsNorthArrowWarp

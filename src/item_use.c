@@ -263,10 +263,10 @@ void FieldUseFunc_MachBike(u8 taskId)
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
     if (FlagGet(FLAG_SYS_ON_CYCLING_ROAD) == TRUE
-     || MetatileBehavior_ReturnFalse_17(behavior) == TRUE
-     || MetatileBehavior_ReturnFalse_18(behavior) == TRUE
-     || MetatileBehavior_ReturnFalse_15(behavior) == TRUE
-     || MetatileBehavior_ReturnFalse_16(behavior) == TRUE)
+     || MetatileBehavior_IsVerticalRail(behavior) == TRUE
+     || MetatileBehavior_IsHorizontalRail(behavior) == TRUE
+     || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE
+     || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
         sub_80A10C4(taskId, gTasks[taskId].data[3], 2, gUnknown_8416451);
     else if (sub_8055C9C() == TRUE && !sub_80BD540())
     {

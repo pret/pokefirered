@@ -133,7 +133,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_2F_TM37"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
       "y": 7,
       "elevation": 3,
@@ -146,7 +146,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
       "y": 17,
       "elevation": 3,
@@ -159,7 +159,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_STRENGTH_BOULDER",
+      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 33,
       "y": 19,
       "elevation": 3,

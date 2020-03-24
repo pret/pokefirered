@@ -191,7 +191,7 @@ bool8 MetatileBehavior_IsLadder(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsCaveDoor(u8 metatileBehavior)
+bool8 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior)
 {
     if(metatileBehavior == MB_CAVE_DOOR)
         return TRUE;
@@ -677,11 +677,11 @@ bool8 MetatileBehavior_IsCyclingRoadPullDownTileGrass(u8 metatileBehavior)
     return metatileBehavior == MB_CYCLING_ROAD_PULL_DOWN_GRASS;
 }
 
-bool8 MetatileBehavior_ReturnFalse_14(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_15(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_16(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_17(u8 metatileBehavior) { return FALSE; }
-bool8 MetatileBehavior_ReturnFalse_18(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsBumpySlope(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsIsolatedHorizontalRail(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsVerticalRail(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 {

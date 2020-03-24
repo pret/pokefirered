@@ -611,21 +611,21 @@ sub_80BD4F0: @ 80BD4F0
 	cmp r0, 0x1
 	bhi _080BD51A
 	adds r0, r4, 0
-	bl MetatileBehavior_ReturnFalse_15
+	bl MetatileBehavior_IsIsolatedVerticalRail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD532
 	adds r0, r4, 0
-	bl MetatileBehavior_ReturnFalse_17
+	bl MetatileBehavior_IsVerticalRail
 	b _080BD52C
 _080BD51A:
 	adds r0, r5, 0
-	bl MetatileBehavior_ReturnFalse_16
+	bl MetatileBehavior_IsIsolatedHorizontalRail
 	lsls r0, 24
 	cmp r0, 0
 	bne _080BD532
 	adds r0, r5, 0
-	bl MetatileBehavior_ReturnFalse_18
+	bl MetatileBehavior_IsHorizontalRail
 _080BD52C:
 	lsls r0, 24
 	cmp r0, 0
@@ -697,7 +697,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 80BD58C
 	lsls r0, 2
 	adds r0, r2
 	ldrb r0, [r0, 0x1E]
-	bl MetatileBehavior_ReturnFalse_14
+	bl MetatileBehavior_IsBumpySlope
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD5C0
@@ -875,7 +875,7 @@ Bike_HandleBumpySlopeJump: @ 80BD6C4
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r0, 24
-	bl MetatileBehavior_ReturnFalse_14
+	bl MetatileBehavior_IsBumpySlope
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BD70C

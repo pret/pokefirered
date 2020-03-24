@@ -718,8 +718,8 @@ extern const union AffineAnimCmd * const gDummySpriteAffineAnimTable[];
 #include "data/field_effects/field_effect_object_template_pointers.h"
 #include "data/object_events/object_event_pic_tables.h"
 #include "data/object_events/object_event_anims.h"
-#include "data/object_events/base_oam.h"
-#include "data/object_events/object_event_subsprites.h"*/
+#include "data/object_events/base_oam.h"*/
+#include "data/object_events/object_event_subsprites.h"
 #include "data/object_events/object_event_graphics_info.h"
 
 const struct SpritePalette sObjectEventSpritePalettes[] = {

@@ -39,5 +39,25 @@ u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
 void sub_805CBE8(void);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
 u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
+u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
+void sub_805C0D4(u8 direction);
+void PlayerGoSlow(u8 direction);
+void PlayerGoSpeed1(u8 direction);
+void PlayerGoSpeed2(u8 direction);
+void sub_805C134(u8 direction);
+void PlayerRideWaterCurrent(u8 direction);
+void sub_805C164(u8 direction);
+void PlayerRun(u8 direction);
+void PlayerRunSlow(u8 direction);
+void PlayerOnBikeCollide(u8 direction);
+void PlayerNotOnBikeCollide(u8 direction);
+void PlayerFaceDirection(u8 direction);
+void sub_805C20C(u8 direction);
+void PlayerTurnInPlace(u8 direction);
+void PlayerJumpLedge(u8 direction);
+void sub_805C260(void);
+void player_step(u8 direction, u16 newKeys, u16 heldKeys);
+bool32 PlayerIsMovingOnRockStairs(u8 direction);
+void sub_805BEB8(void);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

@@ -96,6 +96,63 @@ static u8 sub_8063324(struct ObjectEvent *, struct Sprite *);
 static u8 sub_8063344(struct ObjectEvent *, struct Sprite *);
 static void sub_8064544(struct ObjectEvent *, struct Sprite *);
 static void DoObjectUnionRoomWarpYDisplacement(struct Sprite * sprite);
+void MovementType_None(struct Sprite *);
+void MovementType_LookAround(struct Sprite *);
+void MovementType_WanderAround(struct Sprite *);
+void MovementType_WanderUpAndDown(struct Sprite *);
+void MovementType_WanderLeftAndRight(struct Sprite *);
+void MovementType_FaceDirection(struct Sprite *);
+void sub_805B3B8(struct Sprite *);
+void MovementType_FaceDownAndUp(struct Sprite *);
+void MovementType_FaceLeftAndRight(struct Sprite *);
+void MovementType_FaceUpAndLeft(struct Sprite *);
+void MovementType_FaceUpAndRight(struct Sprite *);
+void MovementType_FaceDownAndLeft(struct Sprite *);
+void MovementType_FaceDownAndRight(struct Sprite *);
+void MovementType_FaceDownUpAndLeft(struct Sprite *);
+void MovementType_FaceDownUpAndRight(struct Sprite *);
+void MovementType_FaceUpRightAndLeft(struct Sprite *);
+void MovementType_FaceDownRightAndLeft(struct Sprite *);
+void MovementType_RotateCounterclockwise(struct Sprite *);
+void MovementType_RotateClockwise(struct Sprite *);
+void MovementType_WalkBackAndForth(struct Sprite *);
+void MovementType_WalkSequenceUpRightLeftDown(struct Sprite *);
+void MovementType_WalkSequenceRightLeftDownUp(struct Sprite *);
+void MovementType_WalkSequenceDownUpRightLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftDownUpRight(struct Sprite *);
+void MovementType_WalkSequenceUpLeftRightDown(struct Sprite *);
+void MovementType_WalkSequenceLeftRightDownUp(struct Sprite *);
+void MovementType_WalkSequenceDownUpLeftRight(struct Sprite *);
+void MovementType_WalkSequenceRightDownUpLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftUpDownRight(struct Sprite *);
+void MovementType_WalkSequenceUpDownRightLeft(struct Sprite *);
+void MovementType_WalkSequenceRightLeftUpDown(struct Sprite *);
+void MovementType_WalkSequenceDownRightLeftUp(struct Sprite *);
+void MovementType_WalkSequenceRightUpDownLeft(struct Sprite *);
+void MovementType_WalkSequenceUpDownLeftRight(struct Sprite *);
+void MovementType_WalkSequenceLeftRightUpDown(struct Sprite *);
+void MovementType_WalkSequenceDownLeftRightUp(struct Sprite *);
+void MovementType_WalkSequenceUpLeftDownRight(struct Sprite *);
+void MovementType_WalkSequenceDownRightUpLeft(struct Sprite *);
+void MovementType_WalkSequenceLeftDownRightUp(struct Sprite *);
+void MovementType_WalkSequenceRightUpLeftDown(struct Sprite *);
+void MovementType_WalkSequenceUpRightDownLeft(struct Sprite *);
+void MovementType_WalkSequenceDownLeftUpRight(struct Sprite *);
+void MovementType_WalkSequenceLeftUpRightDown(struct Sprite *);
+void MovementType_WalkSequenceRightDownLeftUp(struct Sprite *);
+void MovementType_CopyPlayer(struct Sprite *);
+void MovementType_TreeDisguise(struct Sprite *);
+void MovementType_MountainDisguise(struct Sprite *);
+void MovementType_CopyPlayerInGrass(struct Sprite *);
+void MovementType_Hidden(struct Sprite *);
+void MovementType_WalkInPlace(struct Sprite *);
+void MovementType_WalkSlowlyInPlace(struct Sprite *);
+void MovementType_JogInPlace(struct Sprite *);
+void MovementType_Invisible(struct Sprite *);
+void sub_8063298(struct Sprite *);
+void sub_80632BC(struct Sprite *);
+void sub_80632E0(struct Sprite *);
+void MovementType_WanderAroundDuplicate(struct Sprite *);
 
 #define movement_type_def(setup, table)                                                          \
 static u8 setup##_callback(struct ObjectEvent *, struct Sprite *);                               \
@@ -845,7 +902,257 @@ extern const u32 gUnknown_8394E28[];
 
 //#include "data/object_events/object_event_graphics.h"
 
-// TODO: some data
+static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
+    MovementType_None,
+    MovementType_LookAround,
+    MovementType_WanderAround,
+    MovementType_WanderUpAndDown,
+    MovementType_WanderUpAndDown,
+    MovementType_WanderLeftAndRight,
+    MovementType_WanderLeftAndRight,
+    MovementType_FaceDirection,
+    MovementType_FaceDirection,
+    MovementType_FaceDirection,
+    MovementType_FaceDirection,
+    sub_805B3B8,
+    NULL,
+    MovementType_FaceDownAndUp,
+    MovementType_FaceLeftAndRight,
+    MovementType_FaceUpAndLeft,
+    MovementType_FaceUpAndRight,
+    MovementType_FaceDownAndLeft,
+    MovementType_FaceDownAndRight,
+    MovementType_FaceDownUpAndLeft,
+    MovementType_FaceDownUpAndRight,
+    MovementType_FaceUpRightAndLeft,
+    MovementType_FaceDownRightAndLeft,
+    MovementType_RotateCounterclockwise,
+    MovementType_RotateClockwise,
+    MovementType_WalkBackAndForth,
+    MovementType_WalkBackAndForth,
+    MovementType_WalkBackAndForth,
+    MovementType_WalkBackAndForth,
+    MovementType_WalkSequenceUpRightLeftDown,
+    MovementType_WalkSequenceRightLeftDownUp,
+    MovementType_WalkSequenceDownUpRightLeft,
+    MovementType_WalkSequenceLeftDownUpRight,
+    MovementType_WalkSequenceUpLeftRightDown,
+    MovementType_WalkSequenceLeftRightDownUp,
+    MovementType_WalkSequenceDownUpLeftRight,
+    MovementType_WalkSequenceRightDownUpLeft,
+    MovementType_WalkSequenceLeftUpDownRight,
+    MovementType_WalkSequenceUpDownRightLeft,
+    MovementType_WalkSequenceRightLeftUpDown,
+    MovementType_WalkSequenceDownRightLeftUp,
+    MovementType_WalkSequenceRightUpDownLeft,
+    MovementType_WalkSequenceUpDownLeftRight,
+    MovementType_WalkSequenceLeftRightUpDown,
+    MovementType_WalkSequenceDownLeftRightUp,
+    MovementType_WalkSequenceUpLeftDownRight,
+    MovementType_WalkSequenceDownRightUpLeft,
+    MovementType_WalkSequenceLeftDownRightUp,
+    MovementType_WalkSequenceRightUpLeftDown,
+    MovementType_WalkSequenceUpRightDownLeft,
+    MovementType_WalkSequenceDownLeftUpRight,
+    MovementType_WalkSequenceLeftUpRightDown,
+    MovementType_WalkSequenceRightDownLeftUp,
+    MovementType_CopyPlayer,
+    MovementType_CopyPlayer,
+    MovementType_CopyPlayer,
+    MovementType_CopyPlayer,
+    MovementType_TreeDisguise,
+    MovementType_MountainDisguise,
+    MovementType_CopyPlayerInGrass,
+    MovementType_CopyPlayerInGrass,
+    MovementType_CopyPlayerInGrass,
+    MovementType_CopyPlayerInGrass,
+    MovementType_Hidden,
+    MovementType_WalkInPlace,
+    MovementType_WalkInPlace,
+    MovementType_WalkInPlace,
+    MovementType_WalkInPlace,
+    MovementType_WalkSlowlyInPlace,
+    MovementType_WalkSlowlyInPlace,
+    MovementType_WalkSlowlyInPlace,
+    MovementType_WalkSlowlyInPlace,
+    MovementType_JogInPlace,
+    MovementType_JogInPlace,
+    MovementType_JogInPlace,
+    MovementType_JogInPlace,
+    MovementType_Invisible,
+    sub_8063298,
+    sub_80632BC,
+    sub_80632E0,
+    MovementType_WanderAroundDuplicate,
+};
+
+const u8 gRangedMovementTypes[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+    [MOVEMENT_TYPE_NONE] = FALSE,
+    [MOVEMENT_TYPE_LOOK_AROUND] = FALSE,
+    [MOVEMENT_TYPE_WANDER_AROUND] = TRUE,
+    [MOVEMENT_TYPE_WANDER_UP_AND_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WANDER_DOWN_AND_UP] = TRUE,
+    [MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT] = TRUE,
+    [MOVEMENT_TYPE_FACE_UP] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_FACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_FACE_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_PLAYER] = FALSE,
+    [MOVEMENT_TYPE_BERRY_TREE_GROWTH] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_UP] = FALSE,
+    [MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_FACE_UP_AND_LEFT] = FALSE,
+    [MOVEMENT_TYPE_FACE_UP_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_LEFT] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE] = FALSE,
+    [MOVEMENT_TYPE_ROTATE_CLOCKWISE] = FALSE,
+    [MOVEMENT_TYPE_WALK_UP_AND_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_DOWN_AND_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN] = TRUE,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE] = TRUE,
+    [MOVEMENT_TYPE_TREE_DISGUISE] = FALSE,
+    [MOVEMENT_TYPE_MOUNTAIN_DISGUISE] = FALSE,
+    [MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = TRUE,
+    [MOVEMENT_TYPE_HIDDEN] = FALSE,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = FALSE,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_UP] = FALSE,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_UP] = FALSE,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT] = FALSE,
+    [MOVEMENT_TYPE_INVISIBLE] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = FALSE,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = TRUE,
+};
+
+const u8 gInitialMovementTypeFacingDirections[NUM_FIELD_MAP_OBJECT_TEMPLATES] = {
+    [MOVEMENT_TYPE_NONE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_LOOK_AROUND] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WANDER_AROUND] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WANDER_UP_AND_DOWN] = DIR_NORTH,
+    [MOVEMENT_TYPE_WANDER_DOWN_AND_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT] = DIR_WEST,
+    [MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT] = DIR_EAST,
+    [MOVEMENT_TYPE_FACE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_FACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_FACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_PLAYER] = DIR_SOUTH,
+    [MOVEMENT_TYPE_BERRY_TREE_GROWTH] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT] = DIR_WEST,
+    [MOVEMENT_TYPE_FACE_UP_AND_LEFT] = DIR_NORTH,
+    [MOVEMENT_TYPE_FACE_UP_AND_RIGHT] = DIR_NORTH,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_LEFT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT] = DIR_NORTH,
+    [MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_ROTATE_CLOCKWISE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_UP_AND_DOWN] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_DOWN_AND_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN] = DIR_EAST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP] = DIR_EAST,
+    [MOVEMENT_TYPE_COPY_PLAYER] = DIR_NORTH,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE] = DIR_WEST,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE] = DIR_EAST,
+    [MOVEMENT_TYPE_TREE_DISGUISE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_MOUNTAIN_DISGUISE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS] = DIR_NORTH,
+    [MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS] = DIR_SOUTH,
+    [MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS] = DIR_WEST,
+    [MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS] = DIR_EAST,
+    [MOVEMENT_TYPE_HIDDEN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_UP] = DIR_NORTH,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_LEFT] = DIR_WEST,
+    [MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT] = DIR_EAST,
+    [MOVEMENT_TYPE_INVISIBLE] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT] = DIR_SOUTH,
+    [MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT] = DIR_SOUTH,
+};
 
 #define OBJ_EVENT_PAL_TAG_0  0x1103
 #define OBJ_EVENT_PAL_TAG_1  0x1104

@@ -3,37 +3,6 @@
 	.include "constants/constants.inc"
 	.section .rodata
 	.align 2
-gUnknown_835B864:: @ 835B864
-	.4byte MetatileBehavior_IsSouthArrowWarp
-	.4byte MetatileBehavior_IsNorthArrowWarp
-	.4byte MetatileBehavior_IsWestArrowWarp
-	.4byte MetatileBehavior_IsEastArrowWarp
-
-gUnknown_835B874:: @ 835B874
-	.byte OBJ_EVENT_GFX_RED_NORMAL,    OBJ_EVENT_GFX_GREEN_NORMAL
-	.byte OBJ_EVENT_GFX_RED_BIKE,      OBJ_EVENT_GFX_GREEN_BIKE
-	.byte OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF
-	.byte OBJ_EVENT_GFX_RED_ITEM,      OBJ_EVENT_GFX_GREEN_ITEM
-	.byte OBJ_EVENT_GFX_RED_FISH,      OBJ_EVENT_GFX_GREEN_FISH
-	.byte OBJ_EVENT_GFX_RED_ITEM_COPY, OBJ_EVENT_GFX_GREEN_ITEM_COPY
-
-gUnknown_835B880:: @ 835B880
-	.byte OBJ_EVENT_GFX_RS_BRENDAN
-	.byte OBJ_EVENT_GFX_RS_MAY
-
-gUnknown_835B882:: @ 835B882
-	@ Male
-	.byte OBJ_EVENT_GFX_RED_NORMAL, 0x01
-	.byte OBJ_EVENT_GFX_RED_BIKE, 0x02
-	.byte OBJ_EVENT_GFX_RED_SURF, 0x08
-	@ Female
-	.byte OBJ_EVENT_GFX_GREEN_NORMAL, 0x01
-	.byte OBJ_EVENT_GFX_GREEN_BIKE, 0x02
-	.byte OBJ_EVENT_GFX_GREEN_SURF, 0x08
-
-gUnknown_835B88E:: @ 835B88E
-	.byte OBJ_EVENT_GFX_RED_VS_SEEKER
-	.byte OBJ_EVENT_GFX_GREEN_VS_SEEKER
 
 gUnknown_835B890:: @ 835B890
 	.4byte MetatileBehavior_IsSouthArrowWarp

@@ -7871,7 +7871,7 @@ sub_8058878: @ 8058878
 	lsls r1, 30
 	lsrs r1, 31
 	movs r0, 0
-	bl sub_805C7C8
+	bl GetRivalAvatarGraphicsIdByStateIdAndGender
 	b _080588C6
 	.align 2, 0
 _080588B4: .4byte gLinkPlayerObjectEvents

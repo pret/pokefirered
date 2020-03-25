@@ -4628,7 +4628,7 @@ dirn_to_anim(GetPlayerRunSlowMovementAction, gUnknown_83A6528);
 dirn_to_anim(sub_80640E4, gUnknown_83A652D);
 dirn_to_anim(GetJump2MovementAction, gUnknown_83A6532);
 dirn_to_anim(GetJumpInPlaceMovementAction, gUnknown_83A6537);
-dirn_to_anim(sub_8064168, gUnknown_83A653C);
+dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, gUnknown_83A653C);
 dirn_to_anim(GetJumpMovementAction, gUnknown_83A6541);
 dirn_to_anim(sub_80641C0, gUnknown_83A6546);
 dirn_to_anim(sub_80641EC, gUnknown_83A654B);
@@ -4642,15 +4642,15 @@ bool8 ObjectEventFaceOppositeDirection(struct ObjectEvent *objectEvent, u8 direc
     return ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(GetOppositeDirection(direction)));
 }
 
-dirn_to_anim(sub_80642F4, gUnknown_83A6564);
-dirn_to_anim(sub_8064320, gUnknown_83A6569);
-dirn_to_anim(sub_806434C, gUnknown_83A656E);
-dirn_to_anim(sub_8064378, gUnknown_83A6573);
-dirn_to_anim(sub_80643A4, gUnknown_83A6578);
-dirn_to_anim(sub_80643D0, gUnknown_83A657D);
-dirn_to_anim(sub_80643FC, gUnknown_83A6582);
-dirn_to_anim(sub_8064428, gUnknown_83A6587);
-dirn_to_anim(sub_8064454, gUnknown_83A658C);
+dirn_to_anim(GetAcroWheelieFaceDirectionMovementAction, gUnknown_83A6564);
+dirn_to_anim(GetAcroPopWheelieFaceDirectionMovementAction, gUnknown_83A6569);
+dirn_to_anim(GetAcroEndWheelieFaceDirectionMovementAction, gUnknown_83A656E);
+dirn_to_anim(GetAcroWheelieHopFaceDirectionMovementAction, gUnknown_83A6573);
+dirn_to_anim(GetAcroWheelieHopDirectionMovementAction, gUnknown_83A6578);
+dirn_to_anim(GetAcroWheelieJumpDirectionMovementAction, gUnknown_83A657D);
+dirn_to_anim(GetAcroWheelieInPlaceDirectionMovementAction, gUnknown_83A6582);
+dirn_to_anim(GetAcroPopWheelieMoveDirectionMovementAction, gUnknown_83A6587);
+dirn_to_anim(GetAcroWheelieMoveDirectionMovementAction, gUnknown_83A658C);
 
 u8 GetOppositeDirection(u8 direction)
 {

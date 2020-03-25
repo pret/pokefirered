@@ -36,8 +36,9 @@ bool32 sub_805DAD0(void);
 bool32 sub_805DC24(void);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerSurfingNorth(void);
-void player_get_pos_including_state_based_drift(s16 *x, s16 *y);
+u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y);
 void sub_805CBE8(void);
-u8 sub_805C7C8(u8 state, u8 gender);
+u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
+u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

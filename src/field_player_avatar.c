@@ -5,9 +5,11 @@
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
+#include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
+#include "party_menu.h"
 #include "quest_log.h"
 #include "quest_log_player.h"
 #include "constants/event_object_movement.h"
@@ -15,6 +17,8 @@
 #include "constants/songs.h"
 #include "constants/flags.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/species.h"
+#include "constants/moves.h"
 
 EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
 EWRAM_DATA bool8 gUnknown_2036E34 = FALSE;
@@ -77,15 +81,17 @@ void PlayerGoSpeed2(u8 direction);
 void PlayerGoSpeed1(u8 direction);
 void PlayerGoSlow(u8 direction);
 void PlayerRideWaterCurrent(u8 direction);
-void sub_805C438(u8 direction);
-void CreateStopSurfingTask(u8 direction);
-void StartStrengthAnim(u8 objectEventId, u8 direction);
 void PlayerNotOnBikeCollide(u8 direction);
 void PlayerFaceDirection(u8 direction);
 void PlayerTurnInPlace(u8 direction);
 void PlayerJumpLedge(u8 direction);
+void PlayCollisionSoundIfNotFacingWarp(u8 direction);
 void PlayerGoSpin(u8 direction);
 void sub_805C2CC(u8 metatileBehavior);
+bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
+bool8 player_should_look_direction_be_enforced_upon_movement(void);
+void CreateStopSurfingTask(u8 direction);
+void StartStrengthAnim(u8 objectEventId, u8 direction);
 void sub_805CC40(struct ObjectEvent * playerObjEvent);
 void DoPlayerMatJump(void);
 void DoPlayerMatSpin(void);
@@ -840,13 +846,13 @@ void PlayerRunSlow(u8 direction)
 
 void PlayerOnBikeCollide(u8 direction)
 {
-    sub_805C438(direction);
+    PlayCollisionSoundIfNotFacingWarp(direction);
     PlayerSetAnimId(GetWalkInPlaceNormalMovementAction(direction), 2);
 }
 
 void PlayerNotOnBikeCollide(u8 direction)
 {
-    sub_805C438(direction);
+    PlayCollisionSoundIfNotFacingWarp(direction);
     PlayerSetAnimId(GetStepInPlaceDelay32AnimId(direction), 2);
 }
 
@@ -863,4 +869,422 @@ void sub_805C20C(u8 direction)
 void PlayerTurnInPlace(u8 direction)
 {
     PlayerSetAnimId(GetWalkInPlaceSlowMovementAction(direction), 1);
+}
+
+void PlayerJumpLedge(u8 direction)
+{
+    PlaySE(SE_DANSA);
+    PlayerSetAnimId(GetJump2MovementAction(direction), 8);
+}
+
+void sub_805C260(void)
+{
+    PlayerSetAnimId(MOVEMENT_ACTION_0x9F, 0);
+}
+
+void sub_805C270(void)
+{
+    if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
+    {
+        if (player_should_look_direction_be_enforced_upon_movement())
+            PlayerForceSetHeldMovement(GetFaceDirectionMovementAction(gObjectEvents[gPlayerAvatar.objectEventId].facingDirection));
+    }
+}
+
+void PlayerGoSpin(u8 direction)
+{
+    PlayerSetAnimId(sub_80640E4(direction), 3);
+}
+
+void sub_805C2CC(u8 metatileBehavior)
+{
+    int i;
+
+    for (i = 0; sForcedMovementFuncs[i].unk0 != NULL; i++)
+    {
+        if (sForcedMovementFuncs[i].unk0(metatileBehavior))
+            sForcedMovementFuncs[i].unk4();
+    }
+}
+
+void PlayerIdleWheelie(u8 direction)
+{
+    PlayerSetAnimId(GetAcroWheelieFaceDirectionMovementAction(direction), 1);
+}
+
+void PlayerStartWheelie(u8 direction)
+{
+    PlayerSetAnimId(GetAcroPopWheelieFaceDirectionMovementAction(direction), 1);
+}
+
+void PlayerEndWheelie(u8 direction)
+{
+    PlayerSetAnimId(GetAcroEndWheelieFaceDirectionMovementAction(direction), 1);
+}
+
+void PlayerStandingHoppingWheelie(u8 direction)
+{
+    PlaySE(SE_JITE_PYOKO);
+    PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(direction), 1);
+}
+
+void PlayerMovingHoppingWheelie(u8 direction)
+{
+    PlaySE(SE_JITE_PYOKO);
+    PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(direction), 2);
+}
+
+void PlayerLedgeHoppingWheelie(u8 direction)
+{
+    PlaySE(SE_JITE_PYOKO);
+    PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(direction), 8);
+}
+
+void PlayerAcroTurnJump(u8 direction)
+{
+    PlaySE(SE_JITE_PYOKO);
+    PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
+}
+
+void PlayerAcroWheelieCollide(u8 direction)
+{
+    PlaySE(SE_WALL_HIT);
+    PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
+}
+
+void sub_805C408(u8 direction)
+{
+    PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
+}
+
+void sub_805C420(u8 direction)
+{
+    PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
+}
+
+bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) = {
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp
+};
+
+void PlayCollisionSoundIfNotFacingWarp(u8 direction)
+{
+    s16 x, y;
+    u8 metatileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
+
+    if (!sArrowWarpMetatileBehaviorChecks[direction - 1](metatileBehavior))
+    {
+        if (direction == DIR_WEST)
+        {
+            if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior) || MetatileBehavior_IsUnknownWarp6F(metatileBehavior))
+                return;
+        }
+        if (direction == DIR_EAST)
+        {
+            if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior) || MetatileBehavior_IsUnknownWarp6E(metatileBehavior))
+                return;
+        }
+        if (direction == DIR_NORTH)
+        {
+            PlayerGetDestCoords(&x, &y);
+            MoveCoords(DIR_NORTH, &x, &y);
+            metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+            if (MetatileBehavior_IsWarpDoor(metatileBehavior))
+                return;
+        }
+        PlaySE(SE_WALL_HIT);
+    }
+}
+
+void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)
+{
+    *x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    *y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+    MoveCoords(GetPlayerFacingDirection(), x, y);
+}
+
+void PlayerGetDestCoords(s16 *x, s16 *y)
+{
+    *x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+    *y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+}
+
+u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y)
+{
+    struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (object->heldMovementActive && !object->heldMovementFinished && !gSprites[object->spriteId].data[2])
+    {
+        *x = object->currentCoords.x;
+        *y = object->currentCoords.y;
+
+        switch (object->movementActionId)
+        {
+        case MOVEMENT_ACTION_WALK_NORMAL_DOWN:
+        case MOVEMENT_ACTION_PLAYER_RUN_DOWN:
+            (*y)++;
+            return TRUE;
+        case MOVEMENT_ACTION_WALK_NORMAL_UP:
+        case MOVEMENT_ACTION_PLAYER_RUN_UP:
+            (*y)--;
+            return TRUE;
+        case MOVEMENT_ACTION_WALK_NORMAL_LEFT:
+        case MOVEMENT_ACTION_PLAYER_RUN_LEFT:
+            (*x)--;
+            return TRUE;
+        case MOVEMENT_ACTION_WALK_NORMAL_RIGHT:
+        case MOVEMENT_ACTION_PLAYER_RUN_RIGHT:
+            (*x)++;
+            return TRUE;
+        }
+    }
+
+    *x = -1;
+    *y = -1;
+    return FALSE;
+}
+
+u8 GetPlayerFacingDirection(void)
+{
+    return gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
+}
+
+u8 GetPlayerMovementDirection(void)
+{
+    return gObjectEvents[gPlayerAvatar.objectEventId].movementDirection;
+}
+
+u8 PlayerGetZCoord(void)
+{
+    return gObjectEvents[gPlayerAvatar.objectEventId].previousElevation;
+}
+
+void MovePlayerToMapCoords(s16 x, s16 y)
+{
+    MoveObjectEventToMapCoords(&gObjectEvents[gPlayerAvatar.objectEventId], x, y);
+}
+
+u8 TestPlayerAvatarFlags(u8 bm)
+{
+    return gPlayerAvatar.flags & bm;
+}
+
+u8 GetPlayerAvatarFlags(void)
+{
+    return gPlayerAvatar.flags;
+}
+
+u8 GetPlayerAvatarObjectId(void)
+{
+    return gPlayerAvatar.spriteId;
+}
+
+void sub_805C774(void)
+{
+    ForcedMovement_None();
+}
+
+void sub_805C780(void)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    npc_clear_strange_bits(playerObjEvent);
+    SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    {
+        Bike_HandleBumpySlopeJump();
+        Bike_UpdateBikeCounterSpeed(0);
+    }
+}
+
+const u8 sPlayerAvatarGfxIds[][2] = {
+    {OBJ_EVENT_GFX_RED_NORMAL,    OBJ_EVENT_GFX_GREEN_NORMAL},
+    {OBJ_EVENT_GFX_RED_BIKE,      OBJ_EVENT_GFX_GREEN_BIKE},
+    {OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF},
+    {OBJ_EVENT_GFX_RED_ITEM,      OBJ_EVENT_GFX_GREEN_ITEM},
+    {OBJ_EVENT_GFX_RED_FISH,      OBJ_EVENT_GFX_GREEN_FISH},
+    {OBJ_EVENT_GFX_RED_ITEM_COPY, OBJ_EVENT_GFX_GREEN_ITEM_COPY},
+};
+
+const u8 sHoennLinkPartnerGfxIds[] = {
+    OBJ_EVENT_GFX_RS_BRENDAN,
+    OBJ_EVENT_GFX_RS_MAY
+};
+
+u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
+{
+    return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gender);
+}
+
+u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
+{
+    return sPlayerAvatarGfxIds[state][gender];
+}
+
+u8 GetHoennLinkPartnerGraphicsIdByGender(u8 gender)
+{
+    return sHoennLinkPartnerGfxIds[gender];
+}
+
+u8 GetPlayerAvatarGraphicsIdByStateId(u8 state)
+{
+    return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
+}
+
+u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
+{
+    switch (gfxId)
+    {
+    case OBJ_EVENT_GFX_GREEN_NORMAL:
+    case OBJ_EVENT_GFX_GREEN_BIKE:
+    case OBJ_EVENT_GFX_GREEN_SURF:
+    case OBJ_EVENT_GFX_GREEN_ITEM:
+    case OBJ_EVENT_GFX_GREEN_FISH:
+        return FEMALE;
+    default:
+        return MALE;
+    }
+}
+
+bool8 PartyHasMonWithSurf(void)
+{
+    u8 i;
+
+    if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+                break;
+            if (MonKnowsMove(&gPlayerParty[i], MOVE_SURF))
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 IsPlayerSurfingNorth(void)
+{
+    if (GetPlayerMovementDirection() == DIR_NORTH && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsPlayerFacingSurfableFishableWater(void)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    MoveCoords(playerObjEvent->facingDirection, &x, &y);
+    if (GetCollisionAtCoords(playerObjEvent, x, y, playerObjEvent->facingDirection) == COLLISION_ELEVATION_MISMATCH
+        && PlayerGetZCoord() == 3
+        && MetatileAtCoordsIsWaterTile(x, y) == TRUE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y)
+{
+    return TestMetatileAttributeBit(MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_TERRAIN), TILE_TERRAIN_WATER);
+}
+
+void ClearPlayerAvatarInfo(void)
+{
+    gPlayerAvatar = (struct PlayerAvatar){};
+}
+
+void SetPlayerAvatarStateMask(u8 flags)
+{
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_MVMT_IS_FORCED | PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED);
+    gPlayerAvatar.flags |= flags;
+}
+
+const u8 gUnknown_835B882[][3][2] = {
+    // Male
+    {
+        {OBJ_EVENT_GFX_RED_NORMAL, PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_RED_BIKE,   PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_RED_SURF,   PLAYER_AVATAR_FLAG_SURFING},
+    },
+    // Female
+    {
+        {OBJ_EVENT_GFX_GREEN_NORMAL, PLAYER_AVATAR_FLAG_ON_FOOT},
+        {OBJ_EVENT_GFX_GREEN_BIKE,   PLAYER_AVATAR_FLAG_MACH_BIKE},
+        {OBJ_EVENT_GFX_GREEN_SURF,   PLAYER_AVATAR_FLAG_SURFING},
+    }
+};
+
+u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
+{
+    u8 i;
+
+    for (i = 0; i < NELEMS(*gUnknown_835B882); i++)
+    {
+        if (gUnknown_835B882[gender][i][0] == graphicsId)
+            return gUnknown_835B882[gender][i][1];
+    }
+    return 1;
+}
+
+u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
+{
+    u8 i;
+    u8 r5 = gPlayerAvatar.flags;
+
+    for (i = 0; i < NELEMS(*gUnknown_835B882); i++)
+    {
+        if (gUnknown_835B882[gPlayerAvatar.gender][i][1] & r5)
+            return gUnknown_835B882[gPlayerAvatar.gender][i][0];
+    }
+    return 0;
+}
+
+const u8 gUnknown_835B88E[] = {
+    OBJ_EVENT_GFX_RED_VS_SEEKER,
+    OBJ_EVENT_GFX_GREEN_VS_SEEKER
+};
+
+void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
+{
+    u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
+
+    gPlayerAvatar.unk1 |= unk | b;
+    DoPlayerAvatarTransition();
+}
+
+void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
+{
+    struct ObjectEventTemplate playerObjEventTemplate;
+    u8 objectEventId;
+    struct ObjectEvent *objectEvent;
+
+    playerObjEventTemplate.localId = OBJ_EVENT_ID_PLAYER;
+    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
+    playerObjEventTemplate.x = x - 7;
+    playerObjEventTemplate.y = y - 7;
+    playerObjEventTemplate.elevation = 0;
+    playerObjEventTemplate.movementType = MOVEMENT_TYPE_PLAYER;
+    playerObjEventTemplate.movementRangeX = 0;
+    playerObjEventTemplate.movementRangeY = 0;
+    playerObjEventTemplate.trainerType = 0;
+    playerObjEventTemplate.trainerRange_berryTreeId = 0;
+    playerObjEventTemplate.script = NULL;
+    playerObjEventTemplate.flagId = 0;
+    objectEventId = SpawnSpecialObjectEvent(&playerObjEventTemplate);
+    objectEvent = &gObjectEvents[objectEventId];
+    objectEvent->isPlayer = 1;
+    objectEvent->warpArrowSpriteId = CreateWarpArrowSprite();
+    ObjectEventTurn(objectEvent, direction);
+    ClearPlayerAvatarInfo();
+    gPlayerAvatar.runningState = NOT_MOVING;
+    gPlayerAvatar.tileTransitionState = T_NOT_MOVING;
+    gPlayerAvatar.objectEventId = objectEventId;
+    gPlayerAvatar.spriteId = objectEvent->spriteId;
+    gPlayerAvatar.gender = gender;
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED | PLAYER_AVATAR_FLAG_ON_FOOT);
 }

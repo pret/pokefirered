@@ -206,5 +206,16 @@ u8 sub_8064008(u32 direction);
 u8 GetPlayerRunMovementAction(u32 direction);
 u8 GetPlayerRunSlowMovementAction(u32 direction);
 u8 GetWalkSlowMovementAction(u32 direction);
+u8 sub_80640E4(u32 direction);
+u8 GetAcroWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroPopWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroEndWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieHopFaceDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieHopDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieJumpDirectionMovementAction(u32 direction);
+u8 GetJumpInPlaceTurnAroundMovementAction(u32 direction);
+u8 GetAcroWheelieInPlaceDirectionMovementAction(u32 direction);
+u8 GetAcroPopWheelieMoveDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieMoveDirectionMovementAction(u32 direction);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

@@ -8,5 +8,7 @@ s16 GetPlayerSpeed(void);
 
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 IsRunningDisallowed(u8 metatileBehavior);
+void Bike_HandleBumpySlopeJump(void);
+void Bike_UpdateBikeCounterSpeed(u8 counter);
 
 #endif //GUARD_BIKE_H

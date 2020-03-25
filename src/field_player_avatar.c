@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
+#include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
@@ -28,7 +29,7 @@
 #include "constants/moves.h"
 
 EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
-EWRAM_DATA bool8 gUnknown_2036E34 = FALSE;
+EWRAM_DATA u8 gUnknown_2036E34 = DIR_NONE;
 EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 
@@ -131,7 +132,9 @@ bool8 Fishing13(struct Task * task);
 bool8 Fishing14(struct Task * task);
 bool8 Fishing15(struct Task * task);
 bool8 Fishing16(struct Task * task);
-bool8 player_should_look_direction_be_enforced_upon_movement(void);
+void sub_805DB04(u8 taskId);
+void sub_805DC38(u8 taskId);
+u8 sub_805DDC8(struct ObjectEvent * object, s16 *timer);
 
 void MovementType_Player(struct Sprite *sprite)
 {
@@ -1988,4 +1991,160 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
         playerSprite->pos2.y = 8;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
+}
+
+void sub_805DAB0(void)
+{
+    u8 taskId = CreateTask(sub_805DB04, 0);
+    sub_805DB04(taskId);
+}
+
+bool32 sub_805DAD0(void)
+{
+    return FuncIsActiveTask(sub_805DB04);
+}
+
+void sub_805DAE4(u8 direction)
+{
+    gUnknown_2036E34 = direction;
+}
+
+u8 sub_805DAF0(void)
+{
+    if (gUnknown_2036E34 == DIR_NONE)
+        return DIR_SOUTH;
+    else
+        return gUnknown_2036E34;
+}
+
+void sub_805DB04(u8 taskId)
+{
+    struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *sprite = &gSprites[object->spriteId];
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        if (!ObjectEventClearHeldMovementIfFinished(object))
+        {
+            return;
+        }
+
+        sub_805DAE4(object->facingDirection);
+        data[1] = 0;
+        data[2] = 1;
+        data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
+        sprite->pos2.y = 0;
+        CameraObjectReset2();
+        object->fixedPriority = TRUE;
+        sprite->oam.priority = 0;
+        sprite->subpriority = 0;
+        sprite->subspriteMode = SUBSPRITES_OFF;
+        data[0]++;
+    case 1:
+        sub_805DDC8(object, &data[1]);
+        data[3] -= data[2];
+        data[2] += 3;
+        sprite->pos1.y = data[3] >> 4;
+        if (sprite->pos1.y + (s16)gTotalCameraPixelOffsetY < -32)
+        {
+            data[0]++;
+        }
+        break;
+    case 2:
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_805DC04(void)
+{
+    u8 taskId = CreateTask(sub_805DC38, 0);
+    sub_805DC38(taskId);
+}
+
+bool32 sub_805DC24(void)
+{
+    return FuncIsActiveTask(sub_805DC38);
+}
+
+const u8 gUnknown_835B92C[] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
+
+void sub_805DC38(u8 taskId)
+{
+    struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *sprite = &gSprites[object->spriteId];
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        data[5] = sub_805DAF0();
+        ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(gUnknown_835B92C[data[5]]));
+        data[1] = 0;
+        data[2] = 116;
+        data[4] = sprite->pos1.y;
+        data[6] = sprite->oam.priority;
+        data[7] = sprite->subpriority;
+        data[3] = -((u16)sprite->pos2.y + 32) * 16;
+        sprite->pos2.y = 0;
+        CameraObjectReset2();
+        object->fixedPriority = TRUE;
+        sprite->oam.priority = 1;
+        sprite->subpriority = 0;
+        sprite->subspriteMode = SUBSPRITES_OFF;
+        data[0]++;
+    case 1:
+        sub_805DDC8(object, &data[1]);
+        data[3] += data[2];
+        data[2] -= 3;
+        if (data[2] < 4)
+        {
+            data[2] = 4;
+        }
+        sprite->pos1.y = data[3] >> 4;
+        if (sprite->pos1.y >= data[4])
+        {
+            sprite->pos1.y = data[4];
+            data[8] = 0;
+            data[0]++;
+        }
+        break;
+    case 2:
+        sub_805DDC8(object, &data[1]);
+        data[8]++;
+        if (data[8] > 8)
+        {
+            data[0]++;
+        }
+        break;
+    case 3:
+        if (data[5] == sub_805DDC8(object, &data[1]))
+        {
+            object->fixedPriority = 0;
+            sprite->oam.priority = data[6];
+            sprite->subpriority = data[7];
+            CameraObjectReset1();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+u8 sub_805DDC8(struct ObjectEvent *object, s16 *a1)
+{
+    if (*a1 < 8 && ++(*a1) < 8)
+    {
+        return object->facingDirection;
+    }
+
+    if (!ObjectEventCheckHeldMovementStatus(object))
+    {
+        return object->facingDirection;
+    }
+
+    ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(gUnknown_835B92C[object->facingDirection]));
+    *a1 = 0;
+    return gUnknown_835B92C[object->facingDirection];
 }

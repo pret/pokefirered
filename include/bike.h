@@ -10,5 +10,6 @@ void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 IsRunningDisallowed(u8 metatileBehavior);
 void Bike_HandleBumpySlopeJump(void);
 void Bike_UpdateBikeCounterSpeed(u8 counter);
+bool8 player_should_look_direction_be_enforced_upon_movement(void);
 
 #endif //GUARD_BIKE_H

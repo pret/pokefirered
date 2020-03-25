@@ -900,7 +900,7 @@ extern const u32 gUnknown_8394E28[];
 
 // TODO: some data
 
-//#include "data/object_events/object_event_graphics.h"
+#include "data/object_events/object_event_graphics.h"
 
 static void (*const sMovementTypeCallbacks[])(struct Sprite *) = {
     MovementType_None,

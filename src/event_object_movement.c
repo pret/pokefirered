@@ -326,6 +326,20 @@ extern const u32 gUnknown_839C828[];
 extern const u32 gUnknown_839CAA8[];
 extern const u32 gUnknown_839D2A8[];
 extern const u16 gUnknown_839D3A8[];
+extern const u32 gUnknown_835BB68[];
+extern const u32 gUnknown_8391B28[];
+extern const u32 gUnknown_83934A8[];
+extern const u32 gUnknown_8393628[];
+extern const u32 gUnknown_8394428[];
+extern const u32 gUnknown_83942A8[];
+extern const u32 gUnknown_8394128[];
+extern const u32 gUnknown_8393FA8[];
+extern const u32 gUnknown_8393E28[];
+extern const u32 gUnknown_8393CA8[];
+extern const u32 gUnknown_8393B28[];
+extern const u32 gUnknown_83902A8[];
+extern const u32 gUnknown_838FEA8[];
+extern const u32 gUnknown_838FAA8[];
 extern const struct OamData gObjectEventBaseOam_16x16;
 extern const struct OamData gObjectEventBaseOam_16x32;
 extern const struct OamData gObjectEventBaseOam_32x16;
@@ -676,6 +690,162 @@ extern const struct SpriteFrameImage gSpriteImages_83A2908[];
 extern const struct SpriteFrameImage gSpriteImages_83A1CA8[];
 extern const struct SpriteFrameImage gSpriteImages_83A1CF0[];
 extern const union AffineAnimCmd * const gDummySpriteAffineAnimTable[];
+extern const u32 gUnknown_835BB68[];
+extern const u32 gUnknown_835C468[];
+extern const u32 gUnknown_8361FA8[];
+extern const u32 gUnknown_835D268[];
+extern const u32 gUnknown_835DB68[];
+extern const u32 gUnknown_8363DA8[];
+extern const u32 gUnknown_835E9A8[];
+extern const u32 gUnknown_835F2A8[];
+extern const u32 gUnknown_83631A8[];
+extern const u32 gUnknown_8364FA8[];
+extern const u32 gUnknown_8365BA8[];
+extern const u32 gUnknown_83664A8[];
+extern const u32 gUnknown_8397708[];
+extern const u32 gUnknown_836D928[];
+extern const u32 gUnknown_836DDA8[];
+extern const u32 gUnknown_836E2A8[];
+extern const u32 gUnknown_836E5A8[];
+extern const u32 gUnknown_836EFA8[];
+extern const u32 gUnknown_83703A8[];
+extern const u32 gUnknown_8370DA8[];
+extern const u32 gUnknown_83720A8[];
+extern const u32 gUnknown_83716A8[];
+extern const u32 gUnknown_83733A8[];
+extern const u32 gUnknown_8373CA8[];
+extern const u32 gUnknown_83746A8[];
+extern const u32 gUnknown_83750A8[];
+extern const u32 gUnknown_8375CA8[];
+extern const u32 gUnknown_83766A8[];
+extern const u32 gUnknown_83770A8[];
+extern const u32 gUnknown_8377AA8[];
+extern const u32 gUnknown_83783A8[];
+extern const u32 gUnknown_8378CA8[];
+extern const u32 gUnknown_83795A8[];
+extern const u32 gUnknown_8379FA8[];
+extern const u32 gUnknown_837A9A8[];
+extern const u32 gUnknown_837B3A8[];
+extern const u32 gUnknown_836F9A8[];
+extern const u32 gUnknown_837BF28[];
+extern const u32 gUnknown_837C928[];
+extern const u32 gUnknown_837D328[];
+extern const u32 gUnknown_837DC28[];
+extern const u32 gUnknown_837E628[];
+extern const u32 gUnknown_837F028[];
+extern const u32 gUnknown_837FA28[];
+extern const u32 gUnknown_8380428[];
+extern const u32 gUnknown_8380E28[];
+extern const u32 gUnknown_8381828[];
+extern const u32 gUnknown_8382228[];
+extern const u32 gUnknown_8382C28[];
+extern const u32 gUnknown_8383528[];
+extern const u32 gUnknown_8383F28[];
+extern const u32 gUnknown_8384828[];
+extern const u32 gUnknown_8385128[];
+extern const u32 gUnknown_8385628[];
+extern const u32 gUnknown_8385B28[];
+extern const u32 gUnknown_8386028[];
+extern const u32 gUnknown_8386A28[];
+extern const u32 gUnknown_8387E28[];
+extern const u32 gUnknown_838AD28[];
+extern const u32 gUnknown_838B728[];
+extern const u32 gUnknown_8389B28[];
+extern const u32 gUnknown_8388728[];
+extern const u32 gUnknown_8389128[];
+extern const u32 gUnknown_838BAA8[];
+extern const u32 gUnknown_838C3A8[];
+extern const u32 gUnknown_83945A8[];
+extern const u32 gUnknown_838C6A8[];
+extern const u32 gUnknown_838CFA8[];
+extern const u32 gUnknown_838D2A8[];
+extern const u32 gUnknown_838B128[];
+extern const u32 gUnknown_838B428[];
+extern const u32 gUnknown_83947A8[];
+extern const u32 gUnknown_838DEA8[];
+extern const u32 gUnknown_838E7A8[];
+extern const u32 gUnknown_8390F28[];
+extern const u32 gUnknown_836C928[];
+extern const u32 gUnknown_8391228[];
+extern const u32 gUnknown_836CC28[];
+extern const u32 gUnknown_836C328[];
+extern const u32 gUnknown_836C628[];
+extern const u32 gUnknown_836A228[];
+extern const u32 gUnknown_836AB28[];
+extern const u32 gUnknown_836AE28[];
+extern const u32 gUnknown_836CF28[];
+extern const u32 gUnknown_836B128[];
+extern const u32 gUnknown_836BA28[];
+extern const u32 gUnknown_8391528[];
+extern const u32 gUnknown_838A428[];
+extern const u32 gUnknown_8366DA8[];
+extern const u32 gUnknown_83685A8[];
+extern const u32 gUnknown_8391828[];
+extern const u32 gUnknown_83939A8[];
+extern const u32 gUnknown_8391E28[];
+extern const u32 gUnknown_8391FA8[];
+extern const u32 gUnknown_8392128[];
+extern const u32 gUnknown_837BDA8[];
+extern const u32 gUnknown_83922A8[];
+extern const u32 gUnknown_8392428[];
+extern const u32 gUnknown_83925A8[];
+extern const u32 gUnknown_8392728[];
+extern const u32 gUnknown_83928A8[];
+extern const u32 gUnknown_8392A28[];
+extern const u32 gUnknown_8392BA8[];
+extern const u32 gUnknown_8392D28[];
+extern const u32 gUnknown_8392EA8[];
+extern const u32 gUnknown_8393028[];
+extern const u32 gUnknown_83931A8[];
+extern const u32 gUnknown_8393328[];
+extern const u32 gUnknown_838F0A8[];
+extern const u32 gUnknown_8390328[];
+extern const u32 gUnknown_8390728[];
+extern const u32 gUnknown_8390B28[];
+extern const u32 gUnknown_838FAA8[];
+extern const u32 gUnknown_838FEA8[];
+extern const u32 gUnknown_8393B28[];
+extern const u32 gUnknown_8393CA8[];
+extern const u32 gUnknown_8393E28[];
+extern const u32 gUnknown_8393FA8[];
+extern const u32 gUnknown_8394128[];
+extern const u32 gUnknown_83942A8[];
+extern const u32 gUnknown_8394428[];
+extern const u32 gUnknown_8393628[];
+extern const u32 gUnknown_83934A8[];
+extern const u32 gUnknown_8391B28[];
+extern const u32 gUnknown_8375AA8[];
+extern const u32 gUnknown_838BA28[];
+extern const u32 gUnknown_83949A8[];
+extern const u32 gUnknown_8369E28[];
+extern const u32 gUnknown_8369DA8[];
+extern const u32 gUnknown_8394A28[];
+extern const u32 gUnknown_8394AA8[];
+extern const u32 gUnknown_8394B28[];
+extern const u32 gUnknown_8394BA8[];
+extern const u32 gUnknown_8394C28[];
+extern const u32 gUnknown_8394D28[];
+extern const u32 gUnknown_8394DA8[];
+extern const u32 gUnknown_838FA28[];
+extern const u32 gUnknown_838F9A8[];
+extern const u32 gUnknown_838F928[];
+extern const u32 gUnknown_838F8A8[];
+extern const u32 gUnknown_838F828[];
+extern const u32 gUnknown_838F628[];
+extern const u32 gUnknown_838F428[];
+extern const u32 gUnknown_838F228[];
+extern const u32 gUnknown_83937A8[];
+extern const u32 gUnknown_8395B08[];
+extern const u32 gUnknown_83952E8[];
+extern const u32 gUnknown_83950C8[];
+extern const u32 gUnknown_8394EC8[];
+extern const u32 gUnknown_8394E28[];
+
+// TODO: some data
+
+//#include "data/object_events/object_event_graphics.h"
+
+// TODO: some data
 
 #define OBJ_EVENT_PAL_TAG_0  0x1103
 #define OBJ_EVENT_PAL_TAG_1  0x1104
@@ -715,8 +885,8 @@ extern const union AffineAnimCmd * const gDummySpriteAffineAnimTable[];
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
 /*#include "data/object_events/object_event_graphics_info_pointers.h"
-#include "data/field_effects/field_effect_object_template_pointers.h"
-#include "data/object_events/object_event_pic_tables.h"*/
+#include "data/field_effects/field_effect_object_template_pointers.h"*/
+#include "data/object_events/object_event_pic_tables.h"
 #include "data/object_events/object_event_anims.h"
 #include "data/object_events/base_oam.h"
 #include "data/object_events/object_event_subsprites.h"

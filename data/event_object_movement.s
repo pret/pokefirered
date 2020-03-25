@@ -1161,42 +1161,4 @@ gObjectEventGraphicsInfoPointers:: @ 839FDB0
 	.4byte gObjectEventGraphicsInfo_83A4E40
 	.4byte gObjectEventGraphicsInfo_83A5134
 
-gFieldEffectObjectTemplatePointers:: @ 83A0010
-	.4byte gUnknown_83A537C
-	.4byte gUnknown_83A5394
-	.4byte gUnknown_83A53AC
-	.4byte gUnknown_83A53C4
-	.4byte gUnknown_83A5420
-	.4byte gUnknown_83A5488
-	.4byte gUnknown_83A54E4
-	.4byte gUnknown_83A556C
-	.4byte gUnknown_83A5604
-	.4byte gUnknown_83A5648
-	.4byte gUnknown_83A5698
-	.4byte gUnknown_83A56F4
-	.4byte gUnknown_83A583C
-	.4byte gUnknown_83A589C
-	.4byte gUnknown_83A58E0
-	.4byte gUnknown_83A593C
-	.4byte gUnknown_83A59A4
-	.4byte gUnknown_83A5A30
-	.4byte gUnknown_83A5A88
-	.4byte gUnknown_83A5AD8
-	.4byte gUnknown_83A5B74
-	.4byte gUnknown_83A5C34
-	.4byte NULL
-	.4byte gUnknown_83A5750
-	.4byte gUnknown_83A5CB4
-	.4byte gUnknown_83A5D34
-	.4byte gUnknown_83A5E00
-	.4byte gUnknown_83A57EC
-	.4byte gUnknown_83A5D84
-	.4byte gUnknown_83A5B1C
-	.4byte gUnknown_83A5E38
-	.4byte gUnknown_83A5E64
-	.4byte gUnknown_83A5EC0
-	.4byte gUnknown_83A5F24
-	.4byte gUnknown_83A5FA4
-	.4byte gUnknown_83A5FE0
-
 @9186

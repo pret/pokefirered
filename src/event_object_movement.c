@@ -884,8 +884,8 @@ extern const u32 gUnknown_8394E28[];
 #define OBJ_EVENT_PAL_TAG_34 0x1123
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF
 
-/*#include "data/object_events/object_event_graphics_info_pointers.h"
-#include "data/field_effects/field_effect_object_template_pointers.h"*/
+/*#include "data/object_events/object_event_graphics_info_pointers.h"*/
+#include "data/field_effects/field_effect_object_template_pointers.h"
 #include "data/object_events/object_event_pic_tables.h"
 #include "data/object_events/object_event_anims.h"
 #include "data/object_events/base_oam.h"

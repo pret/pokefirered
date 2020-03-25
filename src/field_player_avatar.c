@@ -29,7 +29,7 @@
 #include "constants/moves.h"
 
 static EWRAM_DATA struct ObjectEvent * gUnknown_2036E30 = NULL;
-static EWRAM_DATA u8 gUnknown_2036E34 = DIR_NONE;
+static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
 EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
 
@@ -121,9 +121,9 @@ static bool8 Fishing13(struct Task * task);
 static bool8 Fishing14(struct Task * task);
 static bool8 Fishing15(struct Task * task);
 static bool8 Fishing16(struct Task * task);
-static void sub_805DB04(u8 taskId);
-static void sub_805DC38(u8 taskId);
-static u8 sub_805DDC8(struct ObjectEvent * object, s16 *timer);
+static void Task_TeleportWarpOutPlayerAnim(u8 taskId);
+static void Task_TeleportWarpInPlayerAnim(u8 taskId);
+static u8 TeleportAnim_RotatePlayer(struct ObjectEvent * object, s16 *timer);
 
 void MovementType_Player(struct Sprite *sprite)
 {
@@ -1982,37 +1982,54 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
         sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
 }
 
-void sub_805DAB0(void)
+#define tState data[0]
+#define tRotationTimer data[1]
+#define tDeltaY data[2]
+#define tYdeflection data[3]
+#define tYpos data[4]
+#define tFinalFacingDirection data[5]
+#define tPriority data[6]
+#define tSubpriority data[7]
+
+static const u8 sTeleportFacingDirectionSequence[] = {
+    [DIR_SOUTH] = DIR_WEST,
+    [DIR_WEST] = DIR_NORTH,
+    [DIR_NORTH] = DIR_EAST,
+    [DIR_EAST] = DIR_SOUTH,
+    [DIR_NONE] = DIR_SOUTH,
+};
+
+void StartTeleportWarpOutPlayerAnim(void)
 {
-    u8 taskId = CreateTask(sub_805DB04, 0);
-    sub_805DB04(taskId);
+    u8 taskId = CreateTask(Task_TeleportWarpOutPlayerAnim, 0);
+    Task_TeleportWarpOutPlayerAnim(taskId);
 }
 
-bool32 sub_805DAD0(void)
+bool32 WaitTeleportWarpOutPlayerAnim(void)
 {
-    return FuncIsActiveTask(sub_805DB04);
+    return FuncIsActiveTask(Task_TeleportWarpOutPlayerAnim);
 }
 
-void sub_805DAE4(u8 direction)
+void SavePlayerFacingDirectionForTeleport(u8 direction)
 {
-    gUnknown_2036E34 = direction;
+    sTeleportSavedFacingDirection = direction;
 }
 
-static u8 sub_805DAF0(void)
+static u8 GetTeleportSavedFacingDirection(void)
 {
-    if (gUnknown_2036E34 == DIR_NONE)
+    if (sTeleportSavedFacingDirection == DIR_NONE)
         return DIR_SOUTH;
     else
-        return gUnknown_2036E34;
+        return sTeleportSavedFacingDirection;
 }
 
-static void sub_805DB04(u8 taskId)
+static void Task_TeleportWarpOutPlayerAnim(u8 taskId)
 {
     struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[object->spriteId];
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
         if (!ObjectEventClearHeldMovementIfFinished(object))
@@ -2020,25 +2037,25 @@ static void sub_805DB04(u8 taskId)
             return;
         }
 
-        sub_805DAE4(object->facingDirection);
-        data[1] = 0;
-        data[2] = 1;
-        data[3] = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
+        SavePlayerFacingDirectionForTeleport(object->facingDirection);
+        tRotationTimer = 0;
+        tDeltaY = 1;
+        tYdeflection = (u16)(sprite->pos1.y + sprite->pos2.y) * 16;
         sprite->pos2.y = 0;
         CameraObjectReset2();
         object->fixedPriority = TRUE;
         sprite->oam.priority = 0;
         sprite->subpriority = 0;
         sprite->subspriteMode = SUBSPRITES_OFF;
-        data[0]++;
+        tState++;
     case 1:
-        sub_805DDC8(object, &data[1]);
-        data[3] -= data[2];
-        data[2] += 3;
-        sprite->pos1.y = data[3] >> 4;
+        TeleportAnim_RotatePlayer(object, &tRotationTimer);
+        tYdeflection -= tDeltaY;
+        tDeltaY += 3;
+        sprite->pos1.y = tYdeflection >> 4;
         if (sprite->pos1.y + (s16)gTotalCameraPixelOffsetY < -32)
         {
-            data[0]++;
+            tState++;
         }
         break;
     case 2:
@@ -2047,73 +2064,71 @@ static void sub_805DB04(u8 taskId)
     }
 }
 
-void sub_805DC04(void)
+void StartTeleportInPlayerAnim(void)
 {
-    u8 taskId = CreateTask(sub_805DC38, 0);
-    sub_805DC38(taskId);
+    u8 taskId = CreateTask(Task_TeleportWarpInPlayerAnim, 0);
+    Task_TeleportWarpInPlayerAnim(taskId);
 }
 
-bool32 sub_805DC24(void)
+bool32 WaitTeleportInPlayerAnim(void)
 {
-    return FuncIsActiveTask(sub_805DC38);
+    return FuncIsActiveTask(Task_TeleportWarpInPlayerAnim);
 }
 
-static const u8 gUnknown_835B92C[] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-
-static void sub_805DC38(u8 taskId)
+static void Task_TeleportWarpInPlayerAnim(u8 taskId)
 {
     struct ObjectEvent *object = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[object->spriteId];
     s16 *data = gTasks[taskId].data;
 
-    switch (data[0])
+    switch (tState)
     {
     case 0:
-        data[5] = sub_805DAF0();
-        ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(gUnknown_835B92C[data[5]]));
-        data[1] = 0;
-        data[2] = 116;
-        data[4] = sprite->pos1.y;
-        data[6] = sprite->oam.priority;
-        data[7] = sprite->subpriority;
-        data[3] = -((u16)sprite->pos2.y + 32) * 16;
+        tFinalFacingDirection = GetTeleportSavedFacingDirection();
+        ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sTeleportFacingDirectionSequence[tFinalFacingDirection]));
+        tRotationTimer = 0;
+        tDeltaY = 116;
+        tYpos = sprite->pos1.y;
+        tPriority = sprite->oam.priority;
+        tSubpriority = sprite->subpriority;
+        tYdeflection = -((u16)sprite->pos2.y + 32) * 16;
         sprite->pos2.y = 0;
         CameraObjectReset2();
         object->fixedPriority = TRUE;
         sprite->oam.priority = 1;
         sprite->subpriority = 0;
         sprite->subspriteMode = SUBSPRITES_OFF;
-        data[0]++;
+        tState++;
     case 1:
-        sub_805DDC8(object, &data[1]);
-        data[3] += data[2];
-        data[2] -= 3;
-        if (data[2] < 4)
+        TeleportAnim_RotatePlayer(object, &tRotationTimer);
+        tYdeflection += tDeltaY;
+        tDeltaY -= 3;
+        if (tDeltaY < 4)
         {
-            data[2] = 4;
+            tDeltaY = 4;
         }
-        sprite->pos1.y = data[3] >> 4;
-        if (sprite->pos1.y >= data[4])
+        sprite->pos1.y = tYdeflection >> 4;
+        if (sprite->pos1.y >= tYpos)
         {
-            sprite->pos1.y = data[4];
+            sprite->pos1.y = tYpos;
             data[8] = 0;
-            data[0]++;
+            tState++;
         }
         break;
     case 2:
-        sub_805DDC8(object, &data[1]);
+        TeleportAnim_RotatePlayer(object, &tRotationTimer);
         data[8]++;
         if (data[8] > 8)
         {
-            data[0]++;
+            tState++;
         }
         break;
     case 3:
-        if (data[5] == sub_805DDC8(object, &data[1]))
+        if (tFinalFacingDirection == TeleportAnim_RotatePlayer(object, &tRotationTimer))
         {
             object->fixedPriority = 0;
-            sprite->oam.priority = data[6];
-            sprite->subpriority = data[7];
+            sprite->oam.priority = tPriority;
+            sprite->subpriority = tSubpriority;
             CameraObjectReset1();
             DestroyTask(taskId);
         }
@@ -2121,7 +2136,7 @@ static void sub_805DC38(u8 taskId)
     }
 }
 
-static u8 sub_805DDC8(struct ObjectEvent *object, s16 *a1)
+static u8 TeleportAnim_RotatePlayer(struct ObjectEvent *object, s16 *a1)
 {
     if (*a1 < 8 && ++(*a1) < 8)
     {
@@ -2133,7 +2148,16 @@ static u8 sub_805DDC8(struct ObjectEvent *object, s16 *a1)
         return object->facingDirection;
     }
 
-    ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(gUnknown_835B92C[object->facingDirection]));
+    ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sTeleportFacingDirectionSequence[object->facingDirection]));
     *a1 = 0;
-    return gUnknown_835B92C[object->facingDirection];
+    return sTeleportFacingDirectionSequence[object->facingDirection];
 }
+
+#undef tSubpriority
+#undef tPriority
+#undef tFinalFacingDirection
+#undef tYpos
+#undef tYdeflection
+#undef tDeltaY
+#undef tRotationTimer
+#undef tState

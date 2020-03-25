@@ -802,7 +802,7 @@ bool8 ScrCmd_warpteleport2(struct ScriptContext * ctx)
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    sub_805DAE4(GetPlayerFacingDirection());
+    SavePlayerFacingDirectionForTeleport(GetPlayerFacingDirection());
     sub_807E500();
     ResetInitialPlayerAvatarState();
     return TRUE;

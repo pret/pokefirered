@@ -434,14 +434,14 @@ static void sub_807F45C(u8 taskId)
         ++gTasks[taskId].data[0];
         break;
     case 3:
-        if (sub_807E418() == TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             DestroyTask(taskId);
             ScriptContext1_SetupScript(EventScript_AfterWhiteOutHeal);
         }
         break;
     case 6:
-        if (sub_807E418() == TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             DestroyTask(taskId);
             ScriptContext1_SetupScript(EventScript_AfterWhiteOutMomHeal);

@@ -3472,7 +3472,7 @@ _08056618:
 	.align 2, 0
 _08056628: .4byte gFieldCallback
 _0805662C:
-	bl sub_807DF64
+	bl FieldCB_UnionRoomWarp
 _08056630:
 	ldr r1, _08056640 @ =gFieldCallback
 	movs r0, 0

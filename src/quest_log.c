@@ -600,7 +600,7 @@ bool8 sub_8111000(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_2);
-    sub_807DF64();
+    FieldCB_UnionRoomWarp();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
     return 1;

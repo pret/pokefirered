@@ -4,7 +4,7 @@
 #include "global.h"
 
 void sub_8150454(void);
-bool8 sub_8150474(u8 a0);
+bool32 sub_8150474(u8 a0);
 void sub_8150498(u8 a0);
 
 #endif //GUARD_QUEST_LOG_PLAYER_H

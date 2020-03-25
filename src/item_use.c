@@ -327,7 +327,7 @@ static bool8 ItemUseCheckFunc_Rod(void)
 
 static void ItemUseOnFieldCB_Rod(u8 taskId)
 {
-    sub_805D2C0(ItemId_GetSecondaryId(gSpecialVar_ItemId));
+    StartFishing(ItemId_GetSecondaryId(gSpecialVar_ItemId));
     DestroyTask(taskId);
 }
 

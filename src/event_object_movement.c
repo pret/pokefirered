@@ -4084,6 +4084,8 @@ static void ClearObjectEventMovement(struct ObjectEvent *objectEvent, struct Spr
     sprite->data[1] = 0;
 }
 
+// Off by one error
+
 u8 GetFaceDirectionAnimNum(u8 direction)
 {
     return gFaceDirectionAnimNums[direction];

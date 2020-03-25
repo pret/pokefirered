@@ -217,5 +217,7 @@ u8 GetJumpInPlaceTurnAroundMovementAction(u32 direction);
 u8 GetAcroWheelieInPlaceDirectionMovementAction(u32 direction);
 u8 GetAcroPopWheelieMoveDirectionMovementAction(u32 direction);
 u8 GetAcroWheelieMoveDirectionMovementAction(u32 direction);
+u8 sub_80641EC(u32 direction);
+u8 sub_8063510(u8 direction);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

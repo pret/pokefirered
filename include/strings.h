@@ -1463,4 +1463,9 @@ extern const u8 gUnknown_841B2C6[];
 extern const u8 gUnknown_841B2E5[];
 extern const u8 gUnknown_841B2DC[];
 
+// field_player_avatar
+extern const u8 gText_PokemonOnHook[];
+extern const u8 gText_NotEvenANibble[];
+extern const u8 gText_ItGotAway[];
+
 #endif //GUARD_STRINGS_H

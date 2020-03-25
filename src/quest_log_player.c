@@ -39,7 +39,7 @@ void sub_8150454(u8 a0)
         gUnknown_8471EDC[a0]();
 }
 
-bool8 sub_8150474(u8 a0)
+bool32 sub_8150474(u8 a0)
 {
     if (gUnknown_3005E88 == 2)
     {
@@ -107,7 +107,7 @@ static void sub_81505C4(u8 taskId)
             gTasks[taskId].data[1] = 0;
             break;
         case 1:
-            sub_805D9C4(sprite);
+            AlignFishingAnimationFrames(sprite);
             if (gTasks[taskId].data[1] < 60)
                 gTasks[taskId].data[1]++;
             else
@@ -118,7 +118,7 @@ static void sub_81505C4(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 3:
-            sub_805D9C4(sprite);
+            AlignFishingAnimationFrames(sprite);
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))

@@ -24,5 +24,6 @@ u32 StartFieldEffectForObjectEvent(u8, struct ObjectEvent*);
 u8 FindTallGrassFieldEffectSpriteId(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
 void ShowWarpArrowSprite(u8 spriteId, u8 direction, s16 x, s16 y);
 void SetSpriteInvisible(u8 spriteId);
+void sub_80DC4A4(u8 spriteId, u8 value, s16 data1);
 
 #endif //GUARD_FIELD_EFFECT_HELPERS_H

@@ -8,12 +8,17 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
+#include "help_system.h"
 #include "metatile_behavior.h"
+#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "quest_log.h"
 #include "quest_log_player.h"
+#include "random.h"
 #include "script.h"
+#include "strings.h"
+#include "wild_encounter.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
@@ -108,6 +113,24 @@ bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task * task, struct ObjectEvent
 bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task * task, struct ObjectEvent * playerObj);
 void CreateStopSurfingTask(u8 direction);
 void Task_StopSurfingInit(u8 taskId);
+void Task_WaitStopSurfing(u8 taskId);
+void Task_Fishing(u8 taskId);
+bool8 Fishing1(struct Task * task);
+bool8 Fishing2(struct Task * task);
+bool8 Fishing3(struct Task * task);
+bool8 Fishing4(struct Task * task);
+bool8 Fishing5(struct Task * task);
+bool8 Fishing6(struct Task * task);
+bool8 Fishing7(struct Task * task);
+bool8 Fishing8(struct Task * task);
+bool8 Fishing9(struct Task * task);
+bool8 Fishing10(struct Task * task);
+bool8 Fishing11(struct Task * task);
+bool8 Fishing12(struct Task * task);
+bool8 Fishing13(struct Task * task);
+bool8 Fishing14(struct Task * task);
+bool8 Fishing15(struct Task * task);
+bool8 Fishing16(struct Task * task);
 bool8 player_should_look_direction_be_enforced_upon_movement(void);
 
 void MovementType_Player(struct Sprite *sprite)
@@ -1330,7 +1353,7 @@ void sub_805CBE8(void)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-void sub_805CC2C(void)
+void sub_805CC2C(u8 direction)
 {
     sub_8150498(2);
 }
@@ -1589,4 +1612,380 @@ void sub_805D1A8(void)
         sub_811278C(gUnknown_835B820[DIR_NORTH], 16);
         CreateStopSurfingTask(DIR_NORTH);
     }
+}
+
+void Task_StopSurfingInit(u8 taskId)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (ObjectEventIsMovementOverridden(playerObjEvent))
+    {
+        if (!ObjectEventClearHeldMovementIfFinished(playerObjEvent))
+            return;
+    }
+    sub_80DC44C(playerObjEvent->fieldEffectSpriteId, 2);
+    sub_805C06C(playerObjEvent, sub_80641EC((u8)gTasks[taskId].data[0]));
+    gTasks[taskId].func = Task_WaitStopSurfing;
+}
+
+void Task_WaitStopSurfing(u8 taskId)
+{
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (ObjectEventClearHeldMovementIfFinished(playerObjEvent))
+    {
+        ObjectEventSetGraphicsId(playerObjEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+        sub_805C06C(playerObjEvent, GetFaceDirectionMovementAction(playerObjEvent->facingDirection));
+        gPlayerAvatar.preventStep = FALSE;
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+        DestroyTask(taskId);
+        SetHelpContextForMap();
+    }
+}
+
+bool8 (*const sFishingStateFuncs[])(struct Task *) =
+{
+    Fishing1,
+    Fishing2,
+    Fishing3,
+    Fishing4,
+    Fishing5,
+    Fishing6,
+    Fishing7,
+    Fishing8,
+    Fishing9,
+    Fishing10,
+    Fishing11,
+    Fishing12,
+    Fishing13,
+    Fishing14,
+    Fishing15,
+    Fishing16,
+};
+
+#define tStep              data[0]
+#define tFrameCounter      data[1]
+#define tNumDots           data[2]
+#define tDotsRequired      data[3]
+#define tRoundsPlayed      data[12]
+#define tMinRoundsRequired data[13]
+#define tPlayerGfxId       data[14]
+#define tFishingRod        data[15]
+
+#define FISHING_START_ROUND 3
+#define FISHING_GOT_BITE 6
+#define FISHING_ON_HOOK 9
+#define FISHING_NO_BITE 11
+#define FISHING_GOT_AWAY 12
+#define FISHING_SHOW_RESULT 13
+
+void StartFishing(u8 rod)
+{
+    u8 taskId = CreateTask(Task_Fishing, 0xFF);
+
+    gTasks[taskId].tFishingRod = rod;
+    Task_Fishing(taskId);
+    if (sub_8150474(2) == TRUE)
+        sub_8112C9C();
+}
+
+
+void Task_Fishing(u8 taskId)
+{
+    while (sFishingStateFuncs[gTasks[taskId].tStep](&gTasks[taskId]))
+        ;
+}
+
+bool8 Fishing1(struct Task *task)
+{
+    ScriptContext2_Enable();
+    gPlayerAvatar.preventStep = TRUE;
+    task->tStep++;
+    return FALSE;
+}
+
+bool8 Fishing2(struct Task *task)
+{
+    struct ObjectEvent *playerObjEvent;
+    const s16 arr1[] = {1, 1, 1};
+    const s16 arr2[] = {1, 3, 6};
+
+    task->tRoundsPlayed = 0;
+    task->tMinRoundsRequired = arr1[task->tFishingRod] + (Random() % arr2[task->tFishingRod]);
+    task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
+    playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    ObjectEventClearHeldMovementIfActive(playerObjEvent);
+    playerObjEvent->enableAnim = 1;
+    sub_805CC2C(playerObjEvent->facingDirection);
+    task->tStep++;
+    return FALSE;
+}
+
+bool8 Fishing3(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+
+    // Wait one second
+    task->tFrameCounter++;
+    if (task->tFrameCounter >= 60)
+        task->tStep++;
+    return FALSE;
+}
+
+bool8 Fishing4(struct Task *task)
+{
+    u32 randVal;
+
+    sub_80F7768(0, TRUE);
+    task->tStep++;
+    task->tFrameCounter = 0;
+    task->tNumDots = 0;
+    randVal = Random();
+    randVal %= 10;
+    task->tDotsRequired = randVal + 1;
+    if (task->tRoundsPlayed == 0)
+        task->tDotsRequired = randVal + 4;
+    if (task->tDotsRequired >= 10)
+        task->tDotsRequired = 10;
+    return TRUE;
+}
+
+// Play a round of the dot game
+bool8 Fishing5(struct Task *task)
+{
+    static const u8 dot[] = _("·");
+
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    task->tFrameCounter++;
+    if (task->tFrameCounter >= 20)
+    {
+        task->tFrameCounter = 0;
+        if (task->tNumDots >= task->tDotsRequired)
+        {
+            task->tStep++;
+            if (task->tRoundsPlayed != 0)
+                task->tStep++;
+            task->tRoundsPlayed++;
+        }
+        else
+        {
+            AddTextPrinterParameterized(0, 2, dot, task->tNumDots * 12, 1, 0, NULL);
+            task->tNumDots++;
+        }
+    }
+    return FALSE;
+}
+
+// Determine if fish bites
+bool8 Fishing6(struct Task *task)
+{
+    bool8 bite;
+
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    task->tStep++;
+    bite = FALSE;
+
+    if (!DoesCurrentMapHaveFishingMons() || Random() & 1)
+    {
+        task->tStep = FISHING_NO_BITE;
+    }
+    else
+    {
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_8063510(GetPlayerFacingDirection()));
+    }
+    return TRUE;
+}
+
+// Oh! A Bite!
+bool8 Fishing7(struct Task *task)
+{
+    task->tStep += 3;
+    return FALSE;
+}
+
+// We have a bite. Now, wait for the player to press A, or the timer to expire.
+bool8 Fishing8(struct Task *task)
+{
+    const s16 reelTimeouts[3] = {36, 33, 30};
+
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    task->tFrameCounter++;
+    if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
+        task->tStep = FISHING_GOT_AWAY;
+    else if (gMain.newKeys & A_BUTTON)
+        task->tStep++;
+    return FALSE;
+}
+
+// Determine if we're going to play the dot game again
+bool8 Fishing9(struct Task *task)
+{
+    const s16 arr[][2] =
+    {
+    {0, 0},
+    {40, 10},
+    {70, 30}
+    };
+
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    task->tStep++;
+    if (task->tRoundsPlayed < task->tMinRoundsRequired)
+    {
+        task->tStep = FISHING_START_ROUND;
+    }
+    else if (task->tRoundsPlayed < 2)
+    {
+        // probability of having to play another round
+        s16 probability = Random() % 100;
+
+        if (arr[task->tFishingRod][task->tRoundsPlayed] > probability)
+            task->tStep = FISHING_START_ROUND;
+    }
+    return FALSE;
+}
+
+bool8 Fishing10(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    AddTextPrinterParameterized2(0, 2, gText_PokemonOnHook, 1, 0, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+    task->tStep++;
+    task->tFrameCounter = 0;
+    return FALSE;
+}
+
+bool8 Fishing11(struct Task *task)
+{
+    if (task->tFrameCounter == 0)
+        AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+
+    RunTextPrinters();
+
+    if (task->tFrameCounter == 0)
+    {
+        if (!IsTextPrinterActive(0))
+        {
+            struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+            ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
+            ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
+            if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+                sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+            gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
+            gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+            ClearDialogWindowAndFrame(0, TRUE);
+            task->tFrameCounter++;
+            return FALSE;
+        }
+    }
+
+    if (task->tFrameCounter != 0)
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        ScriptContext2_Disable();
+        FishingWildEncounter(task->tFishingRod);
+        DestroyTask(FindTaskIdByFunc(Task_Fishing));
+    }
+    return FALSE;
+}
+
+// Not even a nibble
+bool8 Fishing12(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    AddTextPrinterParameterized2(0, 2, gText_NotEvenANibble, 1, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+    task->tStep = FISHING_SHOW_RESULT;
+    return TRUE;
+}
+
+// It got away
+bool8 Fishing13(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
+    AddTextPrinterParameterized2(0, 2, gText_ItGotAway, 1, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
+    task->tStep++;
+    return TRUE;
+}
+
+// Wait one second
+bool8 Fishing14(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    task->tStep++;
+    return FALSE;
+}
+
+bool8 Fishing15(struct Task *task)
+{
+    AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
+    if (gSprites[gPlayerAvatar.spriteId].animEnded)
+    {
+        struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+        ObjectEventSetGraphicsId(playerObjEvent, task->tPlayerGfxId);
+        ObjectEventTurn(playerObjEvent, playerObjEvent->movementDirection);
+        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+            sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 0, 0);
+        gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
+        gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+        task->tStep++;
+    }
+    return FALSE;
+}
+
+bool8 Fishing16(struct Task *task)
+{
+    RunTextPrinters();
+    if (!IsTextPrinterActive(0))
+    {
+        gPlayerAvatar.preventStep = FALSE;
+        ScriptContext2_Disable();
+        UnfreezeObjectEvents();
+        ClearDialogWindowAndFrame(0, TRUE);
+        DestroyTask(FindTaskIdByFunc(Task_Fishing));
+    }
+    return FALSE;
+}
+
+#undef tStep
+#undef tFrameCounter
+#undef tFishingRod
+
+void AlignFishingAnimationFrames(struct Sprite * playerSprite)
+{
+    u8 animCmdIndex;
+    u8 animType;
+
+    AnimateSprite(playerSprite);
+    playerSprite->pos2.x = 0;
+    playerSprite->pos2.y = 0;
+    animCmdIndex = playerSprite->animCmdIndex;
+    if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
+    {
+        animCmdIndex--;
+    }
+    else
+    {
+        playerSprite->animDelayCounter++;
+        if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
+            animCmdIndex--;
+    }
+    animType = playerSprite->anims[playerSprite->animNum][animCmdIndex].type;
+    if (animType == 1 || animType == 2 || animType == 3)
+    {
+        playerSprite->pos2.x = 8;
+        if (GetPlayerFacingDirection() == 3)
+            playerSprite->pos2.x = -8;
+    }
+    if (animType == 5)
+        playerSprite->pos2.y = -8;
+    if (animType == 10 || animType == 11)
+        playerSprite->pos2.y = 8;
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
+        sub_80DC4A4(gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId, 1, playerSprite->pos2.y);
 }

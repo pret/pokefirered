@@ -186,6 +186,7 @@ void sub_8068CA4(struct Sprite *, u8);
 bool8 sub_8068CB4(struct Sprite *sprite);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
+u8 GetMoveDirectionAnimNum(u8 direction);
 
 // Exported data declarations
 

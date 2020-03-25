@@ -177,20 +177,20 @@ static void sub_81507BC(struct ObjectEvent * a0, u8 a1)
 
 static void sub_81507CC(void)
 {
-    sub_805D154(1);
+    CreateStopSurfingTask_NoMusicChange(1);
 }
 
 static void sub_81507D8(void)
 {
-    sub_805D154(2);
+    CreateStopSurfingTask_NoMusicChange(2);
 }
 
 static void sub_81507E4(void)
 {
-    sub_805D154(3);
+    CreateStopSurfingTask_NoMusicChange(3);
 }
 
 static void sub_81507F0(void)
 {
-    sub_805D154(4);
+    CreateStopSurfingTask_NoMusicChange(4);
 }

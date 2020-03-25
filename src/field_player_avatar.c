@@ -5,6 +5,7 @@
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
+#include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
@@ -12,6 +13,7 @@
 #include "party_menu.h"
 #include "quest_log.h"
 #include "quest_log_player.h"
+#include "script.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
@@ -89,12 +91,24 @@ void PlayCollisionSoundIfNotFacingWarp(u8 direction);
 void PlayerGoSpin(u8 direction);
 void sub_805C2CC(u8 metatileBehavior);
 bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
-bool8 player_should_look_direction_be_enforced_upon_movement(void);
-void CreateStopSurfingTask(u8 direction);
-void StartStrengthAnim(u8 objectEventId, u8 direction);
 void sub_805CC40(struct ObjectEvent * playerObjEvent);
+void StartStrengthAnim(u8 objectEventId, u8 direction);
+void Task_BumpBoulder(u8 taskId);
+bool8 sub_805CD64(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+bool8 do_boulder_dust(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
+bool8 sub_805CE20(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj);
 void DoPlayerMatJump(void);
+void DoPlayerAvatarSecretBaseMatJump(u8 taskId);
+bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task * task, struct ObjectEvent * playerObj);
 void DoPlayerMatSpin(void);
+void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId);
+bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task * task, struct ObjectEvent * playerObj);
+bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task * task, struct ObjectEvent * playerObj);
+bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task * task, struct ObjectEvent * playerObj);
+bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task * task, struct ObjectEvent * playerObj);
+void CreateStopSurfingTask(u8 direction);
+void Task_StopSurfingInit(u8 taskId);
+bool8 player_should_look_direction_be_enforced_upon_movement(void);
 
 void MovementType_Player(struct Sprite *sprite)
 {
@@ -1244,11 +1258,6 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
     return 0;
 }
 
-const u8 gUnknown_835B88E[] = {
-    OBJ_EVENT_GFX_RED_VS_SEEKER,
-    OBJ_EVENT_GFX_GREEN_VS_SEEKER
-};
-
 void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
@@ -1287,4 +1296,297 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.spriteId = objectEvent->spriteId;
     gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED | PLAYER_AVATAR_FLAG_ON_FOOT);
+}
+
+void SetPlayerInvisibility(bool8 invisible)
+{
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = invisible;
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        gSprites[gObjectEvents[gPlayerAvatar.objectEventId].fieldEffectSpriteId].invisible = invisible;
+}
+
+void sub_805CB70(void)
+{
+    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+}
+
+const u8 gUnknown_835B88E[] = {
+    OBJ_EVENT_GFX_RED_FIELD_MOVE_BIKE,
+    OBJ_EVENT_GFX_GREEN_FIELD_MOVE_BIKE
+};
+
+u8 sub_805CBB8(void)
+{
+    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+        return gUnknown_835B88E[gPlayerAvatar.gender];
+    else
+        return GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE);
+}
+
+void sub_805CBE8(void)
+{
+    ObjectEventSetGraphicsId(&gObjectEvents[gPlayerAvatar.objectEventId], sub_805CBB8());
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
+}
+
+void sub_805CC2C(void)
+{
+    sub_8150498(2);
+}
+
+void nullsub_24(void)
+{
+
+}
+
+void nullsub_25(void)
+{
+
+}
+
+bool8 (*const sArrowWarpMetatileBehaviorChecks2[])(u8) = {
+    MetatileBehavior_IsSouthArrowWarp,
+    MetatileBehavior_IsNorthArrowWarp,
+    MetatileBehavior_IsWestArrowWarp,
+    MetatileBehavior_IsEastArrowWarp
+};
+
+void sub_805CC40(struct ObjectEvent *objectEvent)
+{
+    s16 x;
+    s16 y;
+    u8 direction;
+    u8 metatileBehavior = objectEvent->currentMetatileBehavior;
+
+    for (x = 0, direction = DIR_SOUTH; x < 4; x++, direction++)
+    {
+        if (sArrowWarpMetatileBehaviorChecks2[x](metatileBehavior) && direction == objectEvent->movementDirection)
+        {
+            x = objectEvent->currentCoords.x;
+            y = objectEvent->currentCoords.y;
+            MoveCoords(direction, &x, &y);
+            ShowWarpArrowSprite(objectEvent->warpArrowSpriteId, direction, x, y);
+            return;
+        }
+    }
+    SetSpriteInvisible(objectEvent->warpArrowSpriteId);
+}
+
+bool8 (*const gUnknown_835B8A0[])(struct Task * task, struct ObjectEvent * playerObj, struct ObjectEvent * boulderObj) = {
+    sub_805CD64,
+    do_boulder_dust,
+    sub_805CE20
+};
+
+void StartStrengthAnim(u8 a, u8 b)
+{
+    u8 taskId = CreateTask(Task_BumpBoulder, 0xFF);
+
+    gTasks[taskId].data[1] = a;
+    gTasks[taskId].data[2] = b;
+    Task_BumpBoulder(taskId);
+}
+
+void Task_BumpBoulder(u8 taskId)
+{
+    while (gUnknown_835B8A0[gTasks[taskId].data[0]](&gTasks[taskId],
+                                                     &gObjectEvents[gPlayerAvatar.objectEventId],
+                                                     &gObjectEvents[gTasks[taskId].data[1]]))
+        ;
+}
+
+bool8 sub_805CD64(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+{
+    ScriptContext2_Enable();
+    gPlayerAvatar.preventStep = TRUE;
+    task->data[0]++;
+    return FALSE;
+}
+
+bool8 do_boulder_dust(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+{
+    if (!ObjectEventIsMovementOverridden(playerObject)
+        && !ObjectEventIsMovementOverridden(strengthObject))
+    {
+        ObjectEventClearHeldMovementIfFinished(playerObject);
+        ObjectEventClearHeldMovementIfFinished(strengthObject);
+        sub_805C06C(playerObject, GetWalkInPlaceNormalMovementAction((u8)task->data[2]));
+        sub_805C0A4(strengthObject, sub_8063F2C((u8)task->data[2]));
+        gFieldEffectArguments[0] = strengthObject->currentCoords.x;
+        gFieldEffectArguments[1] = strengthObject->currentCoords.y;
+        gFieldEffectArguments[2] = strengthObject->previousElevation;
+        gFieldEffectArguments[3] = gSprites[strengthObject->spriteId].oam.priority;
+        FieldEffectStart(FLDEFF_DUST);
+        PlaySE(SE_W070);
+        task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 sub_805CE20(struct Task *task, struct ObjectEvent *playerObject, struct ObjectEvent *strengthObject)
+{
+    if (ObjectEventCheckHeldMovementStatus(playerObject)
+        && ObjectEventCheckHeldMovementStatus(strengthObject))
+    {
+        ObjectEventClearHeldMovementIfFinished(playerObject);
+        ObjectEventClearHeldMovementIfFinished(strengthObject);
+        sub_806DE28(strengthObject);
+        sub_806DE70(strengthObject->currentCoords.x, strengthObject->currentCoords.y);
+        gPlayerAvatar.preventStep = FALSE;
+        ScriptContext2_Disable();
+        DestroyTask(FindTaskIdByFunc(Task_BumpBoulder));
+    }
+    return FALSE;
+}
+
+bool8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct ObjectEvent *) = {
+    PlayerAvatar_DoSecretBaseMatJump
+};
+
+void DoPlayerMatJump(void)
+{
+    DoPlayerAvatarSecretBaseMatJump(CreateTask(DoPlayerAvatarSecretBaseMatJump, 0xFF));
+}
+
+void DoPlayerAvatarSecretBaseMatJump(u8 taskId)
+{
+    while (sPlayerAvatarSecretBaseMatJump[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]))
+        ;
+}
+
+// because data[0] is used to call this, it can be inferred that there may have been multiple mat jump functions at one point, so the name for these groups of functions is appropriate in assuming the sole use of mat jump.
+bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEvent *objectEvent)
+{
+    gPlayerAvatar.preventStep = TRUE;
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        PlaySE(SE_DANSA);
+        sub_805C06C(objectEvent, GetJumpInPlaceMovementAction(objectEvent->facingDirection));
+        task->data[1]++;
+        if (task->data[1] > 1)
+        {
+            gPlayerAvatar.preventStep = FALSE;
+            gPlayerAvatar.unk1 |= 0x20;
+            DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
+        }
+    }
+    return FALSE;
+}
+
+bool8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task * task, struct ObjectEvent * playerObj) = {
+    PlayerAvatar_SecretBaseMatSpinStep0,
+    PlayerAvatar_SecretBaseMatSpinStep1,
+    PlayerAvatar_SecretBaseMatSpinStep2,
+    PlayerAvatar_SecretBaseMatSpinStep3,
+};
+
+void DoPlayerMatSpin(void)
+{
+    u8 taskId = CreateTask(PlayerAvatar_DoSecretBaseMatSpin, 0xFF);
+
+    PlayerAvatar_DoSecretBaseMatSpin(taskId);
+}
+
+void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId)
+{
+    while (sPlayerAvatarSecretBaseMatSpin[gTasks[taskId].data[0]](&gTasks[taskId], &gObjectEvents[gPlayerAvatar.objectEventId]))
+        ;
+}
+
+bool8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct ObjectEvent *objectEvent)
+{
+    task->data[0]++;
+    task->data[1] = objectEvent->movementDirection;
+    gPlayerAvatar.preventStep = TRUE;
+    ScriptContext2_Enable();
+    PlaySE(SE_TK_WARPIN);
+    return TRUE;
+}
+
+bool8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct ObjectEvent *objectEvent)
+{
+    u8 directions[] = {DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
+
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        u8 direction;
+
+        sub_805C06C(objectEvent, GetFaceDirectionMovementAction(direction = directions[objectEvent->movementDirection - 1]));
+        if (direction == (u8)task->data[1])
+            task->data[2]++;
+        task->data[0]++;
+        if (task->data[2] > 3 && direction == GetOppositeDirection(task->data[1]))
+            task->data[0]++;
+    }
+    return FALSE;
+}
+
+bool8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct ObjectEvent *objectEvent)
+{
+    const u8 actions[] = {
+        MOVEMENT_ACTION_DELAY_1,
+        MOVEMENT_ACTION_DELAY_1,
+        MOVEMENT_ACTION_DELAY_2,
+        MOVEMENT_ACTION_DELAY_4,
+        MOVEMENT_ACTION_DELAY_8,
+    };
+
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        sub_805C06C(objectEvent, actions[task->data[2]]);
+        task->data[0] = 1;
+    }
+    return FALSE;
+}
+
+bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct ObjectEvent *objectEvent)
+{
+    if (ObjectEventClearHeldMovementIfFinished(objectEvent))
+    {
+        sub_805C06C(objectEvent, sub_8063F2C(GetOppositeDirection(task->data[1])));
+        ScriptContext2_Disable();
+        gPlayerAvatar.preventStep = FALSE;
+        DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
+    }
+    return FALSE;
+}
+
+void CreateStopSurfingTask(u8 direction)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    Overworld_ClearSavedMusic();
+    Overworld_ChangeMusicToDefault();
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
+    gPlayerAvatar.preventStep = TRUE;
+    taskId = CreateTask(Task_StopSurfingInit, 0xFF);
+    gTasks[taskId].data[0] = direction;
+    Task_StopSurfingInit(taskId);
+}
+
+void CreateStopSurfingTask_NoMusicChange(u8 direction)
+{
+    u8 taskId;
+
+    ScriptContext2_Enable();
+    FreezeObjectEvents();
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
+    gPlayerAvatar.preventStep = TRUE;
+    taskId = CreateTask(Task_StopSurfingInit, 0xFF);
+    gTasks[taskId].data[0] = direction;
+    Task_StopSurfingInit(taskId);
+}
+
+void sub_805D1A8(void)
+{
+    if (gUnknown_3005E88 != 1 && gUnknown_3005E88 != 3)
+    {
+        sub_811278C(gUnknown_835B820[DIR_NORTH], 16);
+        CreateStopSurfingTask(DIR_NORTH);
+    }
 }

@@ -4,32 +4,6 @@
 	.section .rodata
 	.align 2
 
-gUnknown_835B890:: @ 835B890
-	.4byte MetatileBehavior_IsSouthArrowWarp
-	.4byte MetatileBehavior_IsNorthArrowWarp
-	.4byte MetatileBehavior_IsWestArrowWarp
-	.4byte MetatileBehavior_IsEastArrowWarp
-
-gUnknown_835B8A0:: @ 835B8A0
-	.4byte sub_805CD64
-	.4byte sub_805CD84
-	.4byte sub_805CE20
-
-gUnknown_835B8AC:: @ 835B8AC
-	.4byte PlayerAvatar_DoSecretBaseMatJump
-
-gUnknown_835B8B0:: @ 835B8B0
-	.4byte sub_805CFC4
-	.4byte sub_805CFEC
-	.4byte sub_805D064
-	.4byte sub_805D0A4
-
-gUnknown_835B8C0:: @ 835B8C0
-	.byte 0x03, 0x04, 0x02, 0x01
-
-gUnknown_835B8C4:: @ 835B8C4
-	.byte 0x18, 0x18, 0x19, 0x1a, 0x1b
-
 	.align 2
 gUnknown_835B8CC:: @ 835B8CC
 	.4byte sub_805D33C

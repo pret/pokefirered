@@ -126,7 +126,7 @@ static void sub_807DC70(void)
 
 static void sub_807DCB0(bool8 arg)
 {
-    sub_805CB04(!arg);
+    SetPlayerInvisibility(!arg);
 }
 
 static void task0A_nop_for_a_while(u8 taskId)

@@ -179,9 +179,9 @@ static bool8 TryInterruptObjectEventSpecialAnim(struct ObjectEvent *playerObjEve
 
 static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
 {
-    objEvent->inanimate = 0;
-    objEvent->disableAnim = 0;
-    objEvent->facingDirectionLocked = 0;
+    objEvent->inanimate = FALSE;
+    objEvent->disableAnim = FALSE;
+    objEvent->facingDirectionLocked = FALSE;
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_WATERING;
 }
 

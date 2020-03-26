@@ -1715,7 +1715,7 @@ sub_8055864: @ 8055864
 	bl SetSav1WeatherFromCurrMapHeader
 	bl sub_805610C
 	bl sub_8055CB8
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl mapheader_run_script_with_tag_x3
 	bl TryRegenerateRenewableHiddenItems
 	bl InitMap
@@ -1792,7 +1792,7 @@ sub_8055920: @ 8055920
 	bl FlagClear
 _08055974:
 	bl sub_8055CB8
-	bl sav1_reset_battle_music_maybe
+	bl Overworld_ClearSavedMusic
 	bl mapheader_run_script_with_tag_x3
 	bl TryRegenerateRenewableHiddenItems
 	bl UpdateLocationHistoryForRoamer
@@ -2073,7 +2073,7 @@ _08055B94:
 	cmp r0, 0x1
 	beq _08055BD0
 	adds r0, r5, 0
-	bl MetatileBehavior_IsCaveDoor
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2474,8 +2474,8 @@ Overworld_SetSavedMusic: @ 8055E78
 _08055E80: .4byte gSaveBlock1Ptr
 	thumb_func_end Overworld_SetSavedMusic
 
-	thumb_func_start sav1_reset_battle_music_maybe
-sav1_reset_battle_music_maybe: @ 8055E84
+	thumb_func_start Overworld_ClearSavedMusic
+Overworld_ClearSavedMusic: @ 8055E84
 	ldr r0, _08055E90 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0
@@ -2483,7 +2483,7 @@ sav1_reset_battle_music_maybe: @ 8055E84
 	bx lr
 	.align 2, 0
 _08055E90: .4byte gSaveBlock1Ptr
-	thumb_func_end sav1_reset_battle_music_maybe
+	thumb_func_end Overworld_ClearSavedMusic
 
 	thumb_func_start sub_8055E94
 sub_8055E94: @ 8055E94
@@ -3291,7 +3291,7 @@ _080564B0:
 	ldrb r0, [r6, 0x2]
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_805B3E0
+	bl player_step
 _080564BA:
 	bl RunQuestLogCB
 	add sp, 0x4
@@ -3472,7 +3472,7 @@ _08056618:
 	.align 2, 0
 _08056628: .4byte gFieldCallback
 _0805662C:
-	bl sub_807DF64
+	bl FieldCB_UnionRoomWarp
 _08056630:
 	ldr r1, _08056640 @ =gFieldCallback
 	movs r0, 0
@@ -7871,7 +7871,7 @@ sub_8058878: @ 8058878
 	lsls r1, 30
 	lsrs r1, 31
 	movs r0, 0
-	bl sub_805C7C8
+	bl GetRivalAvatarGraphicsIdByStateIdAndGender
 	b _080588C6
 	.align 2, 0
 _080588B4: .4byte gLinkPlayerObjectEvents

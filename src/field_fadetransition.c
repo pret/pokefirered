@@ -29,9 +29,9 @@ static void sub_807DF4C(u8 a0);
 static void sub_807DFBC(u8 taskId);
 static void task_map_chg_seq_0807E20C(u8 taskId);
 static void task_map_chg_seq_0807E2CC(u8 taskId);
-static void sub_807E31C(u8 taskId);
+static void Task_TeleportWarpIn(u8 taskId);
 static void sub_807E718(u8 taskId);
-static void sub_807E784(u8 taskId);
+static void Task_TeleportWarp(u8 taskId);
 static void sub_807E80C(u8 taskId);
 static void sub_807E980(u8 taskId);
 static void sub_807EB64(u16, s16*, s16*);
@@ -126,12 +126,12 @@ static void sub_807DC70(void)
 
 static void sub_807DCB0(bool8 arg)
 {
-    sub_805CB04(!arg);
+    SetPlayerInvisibility(!arg);
 }
 
 static void task0A_nop_for_a_while(u8 taskId)
 {
-    if (sub_807E418() == TRUE)
+    if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         DestroyTask(taskId);
 }
 
@@ -145,7 +145,7 @@ void sub_807DCE4(void)
 
 static void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskId)
 {
-    if (sub_807E418() == TRUE)
+    if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();
@@ -184,7 +184,7 @@ static void task_mpl_807DD60(u8 taskId)
         }
         break;
     case 2:
-        if (sub_807E418() == TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             ScriptContext2_Disable();
             DestroyTask(taskId);
@@ -218,7 +218,7 @@ static void sub_807DDF0(u8 taskId)
         }
         break;
     case 2:
-        if (sub_807E418() == TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             sub_8009FE8();
             ScriptContext2_Disable();
@@ -260,7 +260,7 @@ static void sub_807DE78(bool8 a0)
     else
     {
         sub_807DF4C(a0);
-        if (MetatileBehavior_IsCaveDoor(behavior) == TRUE)
+        if (MetatileBehavior_IsNonAnimDoor(behavior) == TRUE)
             func = task_map_chg_seq_0807E20C;
         else if (MetatileBehavior_IsUnknownWarp6C_to_6F(behavior) == TRUE)
         {
@@ -284,7 +284,7 @@ static void sub_807DF4C(bool8 a0)
         FadeInFromBlack();
 }
 
-void sub_807DF64(void)
+void FieldCB_UnionRoomWarp(void)
 {
     Overworld_PlaySpecialMapMusic();
     sub_8111CF0();
@@ -300,13 +300,13 @@ void sub_807DF7C(void)
     ScriptContext2_Enable();
 }
 
-static void sub_807DF94(void)
+static void FieldCB_TeleportWarpIn(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     sub_8111CF0();
     PlaySE(SE_TK_WARPOUT);
-    CreateTask(sub_807E31C, 10);
+    CreateTask(Task_TeleportWarpIn, 10);
     ScriptContext2_Enable();
 }
 
@@ -363,7 +363,7 @@ static void sub_807DFBC(u8 taskId)
         }
         break;
     case 9:
-        if (sub_807E418() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
+        if (FieldFadeTransitionBackgroundEffectIsFinished() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
         {
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)]);
             task->data[0] = 4;
@@ -371,7 +371,7 @@ static void sub_807DFBC(u8 taskId)
         break;
     // Legacy RS
     case 1:
-        if (sub_807E418())
+        if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             sub_807DCB0(TRUE);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
@@ -413,7 +413,7 @@ static void task_map_chg_seq_0807E20C(u8 taskId)
         task->data[0] = 1;
         break;
     case 1:
-        if (sub_807E418())
+        if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             sub_807DCB0(TRUE);
             ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
@@ -444,7 +444,7 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        if (sub_807E418())
+        if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             UnfreezeObjectEvents();
             ScriptContext2_Disable();
@@ -454,18 +454,18 @@ static void task_map_chg_seq_0807E2CC(u8 taskId)
     }
 }
 
-static void sub_807E31C(u8 taskId)
+static void Task_TeleportWarpIn(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
     case 0:
         FreezeObjectEvents();
         ScriptContext2_Enable();
-        sub_805DC04();
+        StartTeleportInPlayerAnim();
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        if (sub_807E418() && sub_805DC24() != TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() && WaitTeleportInPlayerAnim() != TRUE)
         {
             UnfreezeObjectEvents();
             ScriptContext2_Disable();
@@ -477,7 +477,7 @@ static void sub_807E31C(u8 taskId)
 
 static void Task_WaitFadeAndCreateStartMenuTask(u8 taskId)
 {
-    if (sub_807E418() == TRUE)
+    if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
         DestroyTask(taskId);
         CreateTask(Task_StartMenuHandleInput, 80);
@@ -499,7 +499,7 @@ bool8 FieldCB2_ReturnToStartMenuInit(void)
 
 static void task_mpl_807E3C8(u8 taskId)
 {
-    if (sub_807E418() == TRUE)
+    if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
         ScriptContext2_Disable();
         DestroyTask(taskId);
@@ -515,12 +515,12 @@ void sub_807E3EC(void)
     CreateTask(task_mpl_807E3C8, 10);
 }
 
-static bool32 sub_807E40C(void)
+static bool32 WaitWarpFadeOutScreen(void)
 {
     return gPaletteFade.active;
 }
 
-bool32 sub_807E418(void)
+bool32 FieldFadeTransitionBackgroundEffectIsFinished(void)
 {
     if (IsWeatherNotFadingIn() == TRUE && ForestMapPreviewScreenIsRunning())
         return TRUE;
@@ -535,7 +535,7 @@ void DoWarp(void)
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
-    gFieldCallback = sub_807DF64;
+    gFieldCallback = FieldCB_UnionRoomWarp;
     CreateTask(sub_807E718, 10);
 }
 
@@ -545,7 +545,7 @@ void DoDiveWarp(void)
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
-    gFieldCallback = sub_807DF64;
+    gFieldCallback = FieldCB_UnionRoomWarp;
     CreateTask(sub_807E718, 10);
 }
 
@@ -560,7 +560,7 @@ void sub_807E4A0(u16 metatileBehavior, u16 delay)
 void DoDoorWarp(void)
 {
     ScriptContext2_Enable();
-    gFieldCallback = sub_807DF64;
+    gFieldCallback = FieldCB_UnionRoomWarp;
     CreateTask(sub_807E80C, 10);
 }
 
@@ -568,14 +568,14 @@ void sub_807E500(void)
 {
     ScriptContext2_Enable();
     CreateTask(sub_807E718, 10);
-    gFieldCallback = sub_807DF94;
+    gFieldCallback = FieldCB_TeleportWarpIn;
 }
 
 void DoUnionRoomWarp(void)
 {
     ScriptContext2_Enable();
-    gFieldCallback = sub_807DF64;
-    CreateTask(sub_807E784, 10);
+    gFieldCallback = FieldCB_UnionRoomWarp;
+    CreateTask(Task_TeleportWarp, 10);
 }
 
 void DoFallWarp(void)
@@ -606,8 +606,8 @@ void DoTeleportWarp(void)
 {
     ScriptContext2_Enable();
     TryFadeOutOldMapMusic();
-    CreateTask(sub_807E784, 10);
-    gFieldCallback = sub_807DF94;
+    CreateTask(Task_TeleportWarp, 10);
+    gFieldCallback = FieldCB_TeleportWarpIn;
 }
 
 void sub_807E5C4(void)
@@ -628,7 +628,7 @@ static void sub_807E5EC(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && BGMusicStopped())
+        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -661,7 +661,7 @@ static void sub_807E678(u8 taskId)
         data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && BGMusicStopped())
+        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
         {
             Link_TryStartSend5FFF();
             data[0]++;
@@ -694,7 +694,7 @@ static void sub_807E718(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_807E40C() && BGMusicStopped())
+        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
             task->data[0]++;
         break;
     case 2:
@@ -705,7 +705,7 @@ static void sub_807E718(u8 taskId)
     }
 }
 
-static void sub_807E784(u8 taskId)
+static void Task_TeleportWarp(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
@@ -714,18 +714,18 @@ static void sub_807E784(u8 taskId)
         FreezeObjectEvents();
         ScriptContext2_Enable();
         PlaySE(SE_TK_WARPIN);
-        sub_805DAB0();
+        StartTeleportWarpOutPlayerAnim();
         task->data[0]++;
         break;
     case 1:
-        if (!sub_805DAD0())
+        if (!WaitTeleportWarpOutPlayerAnim())
         {
             WarpFadeOutScreen();
             task->data[0]++;
         }
         break;
     case 2:
-        if (!sub_807E40C() && BGMusicStopped())
+        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
             task->data[0]++;
         break;
     case 3:
@@ -829,11 +829,11 @@ static void sub_807E980(u8 taskId)
         break;
     case 3:
         sub_807EAC4(data[2], data[3], &data[4], &data[5], &data[6]);
-        if (!sub_807E40C() && BGMusicStopped())
+        if (!WaitWarpFadeOutScreen() && BGMusicStopped())
             data[0]++;
         break;
     default:
-        gFieldCallback = sub_807DF64;
+        gFieldCallback = FieldCB_UnionRoomWarp;
         WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
@@ -898,7 +898,7 @@ static void sub_807EC34(u8 taskId)
     switch (data[0])
     {
     default:
-        if (sub_807E418() == TRUE)
+        if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
         {
             CameraObjectReset1();
             ScriptContext2_Disable();

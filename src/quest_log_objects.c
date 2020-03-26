@@ -45,7 +45,7 @@ void SetQuestLogObjectEventsData(struct QuestLog * questLog)
     }
 }
 
-void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTemplate * templates)
+void SetSav1ObjectEventsFromQuestLog(const struct QuestLog * questLog, const struct ObjectEventTemplate * templates)
 {
     u32 i, j;
     const struct QuestLogObjectEvent * questLogObjectEvents = questLog->unk_008;
@@ -131,7 +131,7 @@ void sub_815A1F8(const struct QuestLog * questLog, const struct ObjectEventTempl
 
 void sub_815A540(void)
 {
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_2)
     {
         s16 x, y;
 

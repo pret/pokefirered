@@ -43,6 +43,7 @@
 #include "constants/species.h"
 #include "constants/items.h"
 #include "constants/field_weather.h"
+#include "constants/event_object_movement.h"
 
 u8 gUnknown_3005E88;
 
@@ -69,7 +70,7 @@ struct UnkStruct_203AE94
     u8 unk_3;
 };
 
-struct UnkStruct_203AE98
+struct QuestLogEntry
 {
     u8 unk_0;
     u8 unk_1;
@@ -94,9 +95,9 @@ struct UnkStruct_203B044
 };
 
 u8 gUnknown_3005E88;
-u16 sNumQuestLogs;
+u16 sNumEventsInLogEntry;
 struct UnkStruct_3005E90 gUnknown_3005E90;
-struct UnkStruct_203AE98 * gUnknown_3005E94;
+struct QuestLogEntry * sCurQuestLogEntry;
 
 static struct UnkStruct_300201C * sFlagOrVarRecords;
 static u16 sNumFlagsOrVars;
@@ -105,44 +106,44 @@ static EWRAM_DATA u8 sCurrentSceneNum = 0;
 static EWRAM_DATA u8 sNumScenes = 0;
 EWRAM_DATA u8 gQuestLogState = 0;
 static EWRAM_DATA u16 gUnknown_203ADFC = 0;
-static EWRAM_DATA u8 gUnknown_203ADFE[3] = {0};
+static EWRAM_DATA u8 sQuestLogHeaderWindowIds[3] = {0};
 static EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE08 = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE0C[32] = {NULL};
 static EWRAM_DATA void (* sQuestLogCB)(void) = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
 static EWRAM_DATA struct UnkStruct_203AE94 gUnknown_203AE94 = {0};
-static EWRAM_DATA struct UnkStruct_203AE98 gUnknown_203AE98[32] = {0};
-static EWRAM_DATA u16 sQuestLogIdx = 0;
+static EWRAM_DATA struct QuestLogEntry sQuestLogSceneRecordBuffer[32] = {0};
+static EWRAM_DATA u16 sQuestLogCursor = 0;
 static EWRAM_DATA u8 sMovementScripts[64][2] = {{0}};
-static EWRAM_DATA u16 gUnknown_203B01A = 0;
+static EWRAM_DATA u16 sNextStepDelay = 0;
 static EWRAM_DATA u16 gUnknown_203B01C = 0;
 static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;
 static EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
 static EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
 static EWRAM_DATA u8 gUnknown_203B048 = 0;
-static EWRAM_DATA u8 gUnknown_203B049 = 0;
+static EWRAM_DATA bool8 sNewlyEnteredMap = FALSE;
 static EWRAM_DATA u8 gUnknown_203B04A = 0;
-static EWRAM_DATA bool8 gUnknown_203B04B = 0;
+static EWRAM_DATA bool8 gUnknown_203B04B = FALSE;
 
 static void sub_8110A00(void);
 static void sub_8110A3C(void);
-static void sub_8110BB0(u8);
-static void sub_8110BE8(u8);
+static void SetPlayerInitialCoordsAtScene(u8);
+static void SetNPCInitialCoordsAtScene(u8);
 static void sub_8110E3C(void);
-static void sub_8110D94(void);
-static void sub_8110E20(void);
-static void sub_8110D48(u8);
-static u8 sub_8110E68(struct UnkStruct_203AE98 *);
+static void BackUpTrainerRematchesToVars(void);
+static void BackUpMapLayoutToVar(void);
+static void SetGameStateAtScene(u8);
+static u8 TryRecordQuestLogEntrySequence(struct QuestLogEntry *);
 static void sub_8110F90(u8);
-static void sub_8111150(u8);
+static void QuestLogPlaybackSetObjectEventTemplates(u8);
 static void sub_8111368(void);
 static void QuestLog_GetSaneMonCounts(void);
 static u16 QuestLog_GetSanePartyCount(void);
 static u16 QuestLog_GetSaneBoxCount(void);
 static void sub_8111688(void);
-static void sub_811175C(u8, struct UnkStruct_203AE98 *);
+static void sub_811175C(u8, struct QuestLogEntry *);
 static void sub_81118F4(s8);
 static void QuestLog_AdvancePlayhead(void);
 static void QuestLog_StartFinalScene(void);
@@ -163,9 +164,9 @@ static void Task_EndQuestLog(u8);
 static bool8 sub_81121D8(u8);
 static void sub_811229C(void);
 static void sub_8112888(u8);
-static void sub_8112940(u8, struct UnkStruct_203AE98 *, u16);
+static void SetUpQuestLogEntry(u8, struct QuestLogEntry *, u16);
 static bool8 sub_8112CEC(void);
-static bool8 sub_8112D1C(void);
+static bool8 RecordHeadAtEndOfEntry(void);
 static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *);
 static void UpdateTrainerFanClubGameClear(struct TrainerFanClub *);
 static u8 PlayerGainRandomTrainerFan(struct TrainerFanClub *);
@@ -194,13 +195,13 @@ static void sub_8113B88(void);
 static void sub_8113B94(u16);
 static void sub_8113BD8(void);
 static u16 *sub_8113BF4(u16 *);
-static u16 *sub_8113C20(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113C20(u16 *, struct QuestLogEntry *);
 static u16 *sub_8113C5C(u16 *, u16);
-static u16 *sub_8113C8C(u16 *, struct UnkStruct_203AE98 *);
-static u16 *sub_8113CC8(u16 *, struct UnkStruct_203AE98 *);
-static u16 *sub_8113D08(u16 *, struct UnkStruct_203AE98 *);
-static u16 *sub_8113D48(u16 *, struct UnkStruct_203AE98 *);
-static u16 *sub_8113D94(u16 *, struct UnkStruct_203AE98 *);
+static u16 *sub_8113C8C(u16 *, struct QuestLogEntry *);
+static u16 *sub_8113CC8(u16 *, struct QuestLogEntry *);
+static u16 *sub_8113D08(u16 *, struct QuestLogEntry *);
+static u16 *sub_8113D48(u16 *, struct QuestLogEntry *);
+static u16 *sub_8113D94(u16 *, struct QuestLogEntry *);
 static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *, const u16 *);
 static u16 *BufferQuestLogData_UsedItem(u16 *, const u16 *);
 static u16 *BufferQuestLogData_GaveHeldItemFromPartyMenu(u16 *, const u16 *);
@@ -282,7 +283,7 @@ static bool8 sub_81153A8(u16, const u16 *);
 static bool8 sub_81153E4(u16, const u16 *);
 static void BufferLinkPartnersName(u8 *);
 
-static const struct WindowTemplate gUnknown_845661C[3] = {
+static const struct WindowTemplate sQuestLogHeaderWindowTemplates[3] = {
     { 0, 0,  0, 30, 2, 15, 0x0e9 },
     { 0, 0, 18, 30, 2, 15, 0x0ad },
     { 0, 0, 14, 30, 6, 15, 0x14c }
@@ -303,7 +304,7 @@ void sub_8110840(void * oldPointer)
     {
         if (gUnknown_203AE08)
             gUnknown_203AE08 = (void *)gUnknown_203AE08 + offset;
-        if (gQuestLogState == 2)
+        if (gQuestLogState == QL_STATE_2)
         {
             int r3;
             for (r3 = 0; r3 < (int)NELEMS(gUnknown_203AE0C); r3++)
@@ -325,7 +326,7 @@ void ResetQuestLog(void)
     sub_81138F8();
 }
 
-void sub_81108F0(u8 a0)
+static void DestroySav1QuestLogEntry(u8 a0)
 {
     memset(gSaveBlock1Ptr->questLog + a0, 0, sizeof(struct QuestLog));
     gUnknown_203AE04 = NULL;
@@ -373,7 +374,7 @@ static void SetQuestLogState(u8 state)
 
 static void sub_8110A00(void)
 {
-    if (sub_8110E68(gUnknown_203AE98) != 1)
+    if (TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer) != 1)
     {
         gUnknown_3005E88 = 0;
         sub_8110E3C();
@@ -389,7 +390,7 @@ static void sub_8110A3C(void)
 
     if (gUnknown_203AE94.unk_0_6 == 0)
     {
-        if (gUnknown_3005E88 || gUnknown_203AE94.unk_0_0 == 1 || (gUnknown_203AE94.unk_1 < 32 && gUnknown_203AE0C[gUnknown_203AE94.unk_1]))
+        if (gUnknown_3005E88 || gUnknown_203AE94.unk_0_0 == 1 || (gUnknown_203AE94.unk_1 < NELEMS(gUnknown_203AE0C) && gUnknown_203AE0C[gUnknown_203AE94.unk_1] != NULL))
             sub_8111AD8();
         else
         {
@@ -410,12 +411,12 @@ u8 sub_8110AC8(void)
     return gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000;
 }
 
-void sub_8110AEC(u16 eventId)
+static void StartRecordingQuestLogEntry(u16 eventId)
 {
     if (sCurrentSceneNum >= QUEST_LOG_SCENE_COUNT)
         sCurrentSceneNum = 0;
 
-    sub_81108F0(sCurrentSceneNum);
+    DestroySav1QuestLogEntry(sCurrentSceneNum);
     sub_8113B88();
     gUnknown_203AE08 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
     if (IS_LINK_QL_EVENT(eventId) || eventId == QL_EVENT_DEPARTED)
@@ -423,18 +424,18 @@ void sub_8110AEC(u16 eventId)
     else
         gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 = 1;
     QuestLog_GetSaneMonCounts();
-    sub_8110BB0(sCurrentSceneNum);
-    sub_8110BE8(sCurrentSceneNum);
-    sub_8110D94();
-    sub_8110E20();
-    sub_8110D48(sCurrentSceneNum);
+    SetPlayerInitialCoordsAtScene(sCurrentSceneNum);
+    SetNPCInitialCoordsAtScene(sCurrentSceneNum);
+    BackUpTrainerRematchesToVars();
+    BackUpMapLayoutToVar();
+    SetGameStateAtScene(sCurrentSceneNum);
     gUnknown_203ADFC = 0;
-    sub_8112940(2, gUnknown_203AE98, 0x100);
-    sub_8110E68(gUnknown_203AE98);
-    SetQuestLogState(1);
+    SetUpQuestLogEntry(2, sQuestLogSceneRecordBuffer, 0x100);
+    TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
+    SetQuestLogState(QL_STATE_1);
 }
 
-static void sub_8110BB0(u8 sceneNum)
+static void SetPlayerInitialCoordsAtScene(u8 sceneNum)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     questLog->mapGroup = gSaveBlock1Ptr->location.mapGroup;
@@ -444,7 +445,7 @@ static void sub_8110BB0(u8 sceneNum)
     questLog->y = gSaveBlock1Ptr->pos.y;
 }
 
-static void sub_8110BE8(u8 sceneNum)
+static void SetNPCInitialCoordsAtScene(u8 sceneNum)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
@@ -478,7 +479,7 @@ static void sub_8110BE8(u8 sceneNum)
     }
 }
 
-static void sub_8110D48(u8 sceneNum)
+static void SetGameStateAtScene(u8 sceneNum)
 {
     struct QuestLog * questLog = &gSaveBlock1Ptr->questLog[sceneNum];
 
@@ -486,7 +487,7 @@ static void sub_8110D48(u8 sceneNum)
     CpuCopy16(gSaveBlock1Ptr->vars, questLog->vars, VARS_COUNT * sizeof(u16));
 }
 
-static void sub_8110D94(void)
+static void BackUpTrainerRematchesToVars(void)
 {
     u16 i, j;
     u16 sp0[4];
@@ -501,13 +502,13 @@ static void sub_8110D94(void)
                 sp0[i] += (1 << j);
             }
         }
-        VarSet(VAR_0x40AA + i, sp0[i]);
+        VarSet(VAR_QLBAK_TRAINER_REMATCHES + i, sp0[i]);
     }
 }
 
-static void sub_8110E20(void)
+static void BackUpMapLayoutToVar(void)
 {
-    VarSet(VAR_0x40AE, gSaveBlock1Ptr->mapLayoutId);
+    VarSet(VAR_QLBAK_MAP_LAYOUT, gSaveBlock1Ptr->mapLayoutId);
 }
 
 static void sub_8110E3C(void)
@@ -517,22 +518,22 @@ static void sub_8110E3C(void)
         sCurrentSceneNum = 0;
 }
 
-static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
+static bool8 TryRecordQuestLogEntrySequence(struct QuestLogEntry * entry)
 {
     u16 i;
 
-    for (i = gUnknown_203ADFC; i < sQuestLogIdx; i++)
+    for (i = gUnknown_203ADFC; i < sQuestLogCursor; i++)
     {
         if (gUnknown_203AE08 == NULL)
             return FALSE;
-        switch (a0[i].unk_6)
+        switch (entry[i].unk_6)
         {
         case 0:
         case 1:
-            gUnknown_203AE08 = sub_8113D48(gUnknown_203AE08, &a0[i]);
+            gUnknown_203AE08 = sub_8113D48(gUnknown_203AE08, &entry[i]);
             break;
         default:
-            gUnknown_203AE08 = sub_8113CC8(gUnknown_203AE08, &a0[i]);
+            gUnknown_203AE08 = sub_8113CC8(gUnknown_203AE08, &entry[i]);
             break;
         }
         if (gUnknown_203AE08 == NULL)
@@ -547,7 +548,7 @@ static bool8 sub_8110E68(struct UnkStruct_203AE98 * a0)
         gUnknown_203AE08 = sub_8113BF4(gUnknown_203AE08);
         return FALSE;
     }
-    gUnknown_203ADFC = sQuestLogIdx;
+    gUnknown_203ADFC = sQuestLogCursor;
     return TRUE;
 }
 
@@ -589,17 +590,17 @@ static void sub_8110F90(u8 unused)
 
 void sub_8110FCC(void)
 {
-    sub_811175C(sCurrentSceneNum, gUnknown_203AE98);
+    sub_811175C(sCurrentSceneNum, sQuestLogSceneRecordBuffer);
     sub_8113B88();
-    sub_8112940(1, gUnknown_203AE98, 0x100);
-    sub_8111150(sCurrentSceneNum);
+    SetUpQuestLogEntry(1, sQuestLogSceneRecordBuffer, 0x100);
+    QuestLogPlaybackSetObjectEventTemplates(sCurrentSceneNum);
 }
 
 bool8 sub_8111000(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
-    SetQuestLogState(2);
-    sub_807DF64();
+    SetQuestLogState(QL_STATE_2);
+    FieldCB_UnionRoomWarp();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
     return 1;
@@ -608,7 +609,7 @@ bool8 sub_8111000(void)
 bool8 sub_8111038(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
-    SetQuestLogState(2);
+    SetQuestLogState(QL_STATE_2);
     sub_807DF7C();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
@@ -619,10 +620,10 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
 {
     u8 i;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NELEMS(sQuestLogHeaderWindowTemplates); i++)
     {
-        gUnknown_203ADFE[i] = AddWindow(&gUnknown_845661C[i]);
-        FillWindowPixelRect(gUnknown_203ADFE[i], 15, 0, 0, gUnknown_845661C[i].width * 8, gUnknown_845661C[i].height * 8);
+        sQuestLogHeaderWindowIds[i] = AddWindow(&sQuestLogHeaderWindowTemplates[i]);
+        FillWindowPixelRect(sQuestLogHeaderWindowIds[i], 15, 0, 0, sQuestLogHeaderWindowTemplates[i].width * 8, sQuestLogHeaderWindowTemplates[i].height * 8);
     }
 
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_PreviouslyOnYourQuest);
@@ -634,21 +635,21 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
         StringAppend(gStringVar4, gStringVar1);
     }
 
-    AddTextPrinterParameterized4(gUnknown_203ADFE[0], 2, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
-    PutWindowTilemap(gUnknown_203ADFE[0]);
-    PutWindowTilemap(gUnknown_203ADFE[1]);
-    CopyWindowToVram(gUnknown_203ADFE[0], 2);
-    CopyWindowToVram(gUnknown_203ADFE[2], 2);
-    CopyWindowToVram(gUnknown_203ADFE[1], 3);
+    AddTextPrinterParameterized4(sQuestLogHeaderWindowIds[0], 2, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
+    PutWindowTilemap(sQuestLogHeaderWindowIds[0]);
+    PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[0], 2);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[2], 2);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 3);
 }
 
-void sub_8111134(void)
+void CommitQuestLogWindow1(void)
 {
-    PutWindowTilemap(gUnknown_203ADFE[1]);
-    CopyWindowToVram(gUnknown_203ADFE[1], 1);
+    PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 1);
 }
 
-static void sub_8111150(u8 sceneNum)
+static void QuestLogPlaybackSetObjectEventTemplates(u8 sceneNum)
 {
     struct QuestLog *questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
@@ -667,7 +668,7 @@ static void sub_8111150(u8 sceneNum)
         gSaveBlock1Ptr->objectEventTemplates[i].movementType = questLog->npcData[i].movementType;
     }
 
-    sub_815A1F8(questLog, gSaveBlock1Ptr->objectEventTemplates);
+    SetSav1ObjectEventsFromQuestLog(questLog, gSaveBlock1Ptr->objectEventTemplates);
 }
 
 void sub_8111274(u8 sceneNum, bool8 a1)
@@ -695,7 +696,7 @@ void sub_8111274(u8 sceneNum, bool8 a1)
 
 static void sub_8111368(void)
 {
-    gQuestLogState = 2;
+    gQuestLogState = QL_STATE_2;
     ResetSpecialVars();
     ClearBag();
     ClearPCItemSlots();
@@ -847,7 +848,7 @@ static void sub_8111688(void)
 
     for (i = 0; i < 4; i++)
     {
-        sp0[i] = VarGet(VAR_0x40AA + i);
+        sp0[i] = VarGet(VAR_QLBAK_TRAINER_REMATCHES + i);
 
         for (j = 0; j < 16; j++)
         {
@@ -864,7 +865,7 @@ void sub_8111708(void)
 {
     struct MapHeader sp0;
 
-    gSaveBlock1Ptr->mapLayoutId = VarGet(VAR_0x40AE);
+    gSaveBlock1Ptr->mapLayoutId = VarGet(VAR_QLBAK_MAP_LAYOUT);
     if (gSaveBlock1Ptr->mapLayoutId == 0)
     {
         sp0 = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
@@ -872,14 +873,14 @@ void sub_8111708(void)
     }
 }
 
-static void sub_811175C(u8 sceneNum, struct UnkStruct_203AE98 * a1)
+static void sub_811175C(u8 sceneNum, struct QuestLogEntry * a1)
 {
     u16 i;
     u16 *r4;
     u16 r6 = 0;
     u16 r9 = 0;
 
-    memset(a1, 0, 32 * sizeof(struct UnkStruct_203AE98));
+    memset(a1, 0, 32 * sizeof(struct QuestLogEntry));
     for (i = 0; i < NELEMS(gUnknown_203AE0C); i++)
     {
         gUnknown_203AE0C[i] = NULL;
@@ -951,7 +952,7 @@ static void QuestLog_StartFinalScene(void)
     SetMainCallback2(sub_8057430);
     gFieldCallback2 = sub_8111F60;
     FreeAllWindowBuffers();
-    gQuestLogState = 3;
+    gQuestLogState = QL_STATE_3;
     sQuestLogCB = NULL;
 }
 
@@ -1077,7 +1078,7 @@ static u8 sub_8111BD4(void)
 
 bool8 sub_8111C2C(void)
 {
-    if (gQuestLogState != 2)
+    if (gQuestLogState != QL_STATE_2)
         return FALSE;
     if (gUnknown_3005E88 == 0 || gUnknown_203AE94.unk_0_0 == 1 || gUnknown_203AE94.unk_0_0 == 2)
         return TRUE;
@@ -1112,7 +1113,7 @@ bool8 sub_8111CD0(void)
 
 void sub_8111CF0(void)
 {
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_2)
         DrawPreviouslyOnQuestHeader(sNumScenes);
 }
 
@@ -1127,9 +1128,9 @@ static void DrawQuestLogSceneDescription(void)
             numLines++;
     }
 
-    PutWindowTilemap(gUnknown_203ADFE[2]);
-    sub_8111D90(gUnknown_203ADFE[2]);
-    AddTextPrinterParameterized4(gUnknown_203ADFE[2], 2, 2, sQuestLogTextLineYCoords[numLines], 1, 0, sTextColors, 0, gStringVar4);
+    PutWindowTilemap(sQuestLogHeaderWindowIds[2]);
+    sub_8111D90(sQuestLogHeaderWindowIds[2]);
+    AddTextPrinterParameterized4(sQuestLogHeaderWindowIds[2], 2, 2, sQuestLogTextLineYCoords[numLines], 1, 0, sTextColors, 0, gStringVar4);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1172,11 +1173,11 @@ static void sub_8111D90(u8 a0)
 
 static void QuestLog_CloseTextWindow(void)
 {
-    ClearWindowTilemap(gUnknown_203ADFE[2]);
-    FillWindowPixelRect(gUnknown_203ADFE[2], 15, 0, 0, 0xf0, 0x30);
-    CopyWindowToVram(gUnknown_203ADFE[2], 2);
-    PutWindowTilemap(gUnknown_203ADFE[1]);
-    CopyWindowToVram(gUnknown_203ADFE[1], 1);
+    ClearWindowTilemap(sQuestLogHeaderWindowIds[2]);
+    FillWindowPixelRect(sQuestLogHeaderWindowIds[2], 15, 0, 0, 0xf0, 0x30);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[2], 2);
+    PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 1);
 }
 
 static void QuestLog_SkipToEndOfPlayback(s8 delay)
@@ -1194,7 +1195,7 @@ static void QuestLog_WaitFadeAndCancelPlayback(void)
         {
             if (gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 == 0)
                 break;
-            sub_811175C(sCurrentSceneNum, gUnknown_203AE98);
+            sub_811175C(sCurrentSceneNum, sQuestLogSceneRecordBuffer);
         }
         gUnknown_3005E88 = 0;
         QuestLog_StartFinalScene();
@@ -1203,7 +1204,7 @@ static void QuestLog_WaitFadeAndCancelPlayback(void)
 
 void sub_8111F14(void)
 {
-    if (gQuestLogState == 3)
+    if (gQuestLogState == QL_STATE_3)
         gUnknown_203AE90 = AllocZeroed(0x200 * sizeof(u16));
 }
 
@@ -1288,7 +1289,7 @@ static void Task_EndQuestLog(u8 taskId)
         gDisableMapMusicChangeOnMapLoad = 0;
         Overworld_PlaySpecialMapMusic();
         sub_811229C();
-        FillWindowPixelRect(gUnknown_203ADFE[0], 0xF, 0, 0, gUnknown_845661C[0].width * 8, gUnknown_845661C[0].height * 8);
+        FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0xF, 0, 0, sQuestLogHeaderWindowTemplates[0].width * 8, sQuestLogHeaderWindowTemplates[0].height * 8);
         tState++;
         break;
     case 1:
@@ -1296,9 +1297,9 @@ static void Task_EndQuestLog(u8 taskId)
         {
             for (i = 0; i < 3; i++)
             {
-                ClearWindowTilemap(gUnknown_203ADFE[i]);
-                CopyWindowToVram(gUnknown_203ADFE[i], 1);
-                RemoveWindow(gUnknown_203ADFE[i]);
+                ClearWindowTilemap(sQuestLogHeaderWindowIds[i]);
+                CopyWindowToVram(sQuestLogHeaderWindowIds[i], 1);
+                RemoveWindow(sQuestLogHeaderWindowIds[i]);
             }
             tTimer = 0;
             tState++;
@@ -1339,10 +1340,10 @@ static bool8 sub_81121D8(u8 taskId)
 
     sub_80716F8(gPlttBufferUnfaded + 0x01, gPlttBufferFaded + 0x01, 0xDF, 0x0F - data[1]);
     sub_80716F8(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
-    FillWindowPixelRect(gUnknown_203ADFE[0], 0x00, 0, gUnknown_845661C[0].height * 8 - 1 - data[1], gUnknown_845661C[0].width * 8, 1);
-    FillWindowPixelRect(gUnknown_203ADFE[1], 0x00, 0, data[1], gUnknown_845661C[1].width * 8, 1);
-    CopyWindowToVram(gUnknown_203ADFE[0], 2);
-    CopyWindowToVram(gUnknown_203ADFE[1], 2);
+    FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0x00, 0, sQuestLogHeaderWindowTemplates[0].height * 8 - 1 - data[1], sQuestLogHeaderWindowTemplates[0].width * 8, 1);
+    FillWindowPixelRect(sQuestLogHeaderWindowIds[1], 0x00, 0, data[1], sQuestLogHeaderWindowTemplates[1].width * 8, 1);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[0], 2);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 2);
     data[1]++;
     return FALSE;
 }
@@ -1362,9 +1363,9 @@ static void sub_811229C(void)
 
 void sub_811231C(void)
 {
-    if (gQuestLogState == 1)
+    if (gQuestLogState == QL_STATE_1)
     {
-        sub_8110E68(gUnknown_203AE98);
+        TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
         sub_8110E3C();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
@@ -1376,9 +1377,9 @@ void sub_811231C(void)
 
 void sub_8112364(void)
 {
-    if (gUnknown_3005E88 && gQuestLogState == 1)
+    if (gUnknown_3005E88 && gQuestLogState == QL_STATE_1)
     {
-        sub_8110E68(gUnknown_203AE98);
+        TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
         sub_8113A1C(1);
         sub_8110E3C();
         gUnknown_3005E88 = 0;
@@ -1448,109 +1449,109 @@ void sub_811246C(struct Sprite *sprite)
     }
 }
 
-void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 a3)
+void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 movementActionId)
 {
     if (!sub_8112CEC())
     {
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
-        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
-        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
-        sQuestLogIdx++;
-        gUnknown_203B01A = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = a0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_1 = a1;
+        sCurQuestLogEntry[sQuestLogCursor].unk_2 = a2;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sQuestLogCursor++;
+        sNextStepDelay = 0;
     }
 }
 
-void sub_8112588(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
+void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration)
 {
-    if (!sub_8112D1C())
+    if (!RecordHeadAtEndOfEntry())
     {
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = a0;
-        gUnknown_3005E94[sQuestLogIdx].unk_1 = a1;
-        gUnknown_3005E94[sQuestLogIdx].unk_2 = a2;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = a3;
-        sQuestLogIdx++;
-        gUnknown_203B01A = a4;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = localId;
+        sCurQuestLogEntry[sQuestLogCursor].unk_1 = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].unk_2 = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sQuestLogCursor++;
+        sNextStepDelay = duration;
     }
 }
 
-void sub_8112628(u8 a0)
+void sub_8112628(u8 movementActionId)
 {
     if (!sub_8112CEC())
     {
-        if (a0 != gUnknown_3005E94[gUnknown_203B01C].unk_3 || a0 > 3)
+        if (movementActionId != sCurQuestLogEntry[gUnknown_203B01C].unk_3 || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
         {
-            gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-            gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
-            gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
-            gUnknown_203B01C = sQuestLogIdx;
-            sQuestLogIdx++;
-            gUnknown_203B01A = 0;
+            sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+            sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
+            sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+            gUnknown_203B01C = sQuestLogCursor;
+            sQuestLogCursor++;
+            sNextStepDelay = 0;
         }
     }
 }
 
-void sub_81126AC(u8 a0, u8 a1)
+void sub_81126AC(u8 movementActionId, u8 duration)
 {
-    if (!sub_8112D1C())
+    if (!RecordHeadAtEndOfEntry())
     {
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
-        gUnknown_203B01C = sQuestLogIdx;
-        sQuestLogIdx++;
-        gUnknown_203B01A = a1;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        gUnknown_203B01C = sQuestLogCursor;
+        sQuestLogCursor++;
+        sNextStepDelay = duration;
     }
 }
 
-void sub_8112720(u8 a0)
+void sub_8112720(u8 movementActionId)
 {
-    if (!sub_8112D1C())
+    if (!RecordHeadAtEndOfEntry())
     {
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
-        sQuestLogIdx++;
-        gUnknown_203B01A = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 1;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sQuestLogCursor++;
+        sNextStepDelay = 0;
     }
 }
 
-void sub_811278C(u8 a0, u8 a1)
+void sub_811278C(u8 movementActionId, u8 duration)
 {
-    if (!sub_8112D1C())
+    if (!RecordHeadAtEndOfEntry())
     {
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 1;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = a0;
-        sQuestLogIdx++;
-        gUnknown_203B01A = a1;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 1;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sQuestLogCursor++;
+        sNextStepDelay = duration;
     }
 }
 
 void sub_81127F8(struct UnkStruct_3005E90 * a0)
 {
-    if (sQuestLogIdx < sNumQuestLogs)
+    if (sQuestLogCursor < sNumEventsInLogEntry)
     {
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = r2;
-        gUnknown_3005E94[sQuestLogIdx].unk_1 = r2 >> 8;
-        gUnknown_3005E94[sQuestLogIdx].unk_2 = r2 >> 16;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = r2 >> 24;
-        sQuestLogIdx++;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 2;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = r2;
+        sCurQuestLogEntry[sQuestLogCursor].unk_1 = r2 >> 8;
+        sCurQuestLogEntry[sQuestLogCursor].unk_2 = r2 >> 16;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = r2 >> 24;
+        sQuestLogCursor++;
         if (ScriptContext2_IsEnabled())
-            gUnknown_203B01A = TRUE;
+            sNextStepDelay = TRUE;
         else
-            gUnknown_203B01A = FALSE;
+            sNextStepDelay = FALSE;
     }
 }
 
@@ -1580,10 +1581,10 @@ void sub_81128BC(u8 a0)
             gUnknown_3005E88 = 3;
         else if (r1 == 2)
         {
-            gUnknown_3005E94[sQuestLogIdx].unk_4 = gUnknown_203B01A;
-            gUnknown_3005E94[sQuestLogIdx].unk_6 = 3;
-            sQuestLogIdx++;
-            gUnknown_203B01A = 0;
+            sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
+            sCurQuestLogEntry[sQuestLogCursor].unk_6 = 3;
+            sQuestLogCursor++;
+            sNextStepDelay = 0;
             gUnknown_3005E88 = 4;
         }
         break;
@@ -1596,68 +1597,68 @@ void sub_81128BC(u8 a0)
     }
 }
 
-static void sub_8112940(u8 a0, struct UnkStruct_203AE98 *a1, u16 a2)
+static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
 {
-    s32 i;
+    int i;
 
-    switch (a0)
+    switch (kind)
     {
     default:
         gUnknown_3005E88 = 0;
         break;
     case 1:
-        gUnknown_3005E94 = a1;
-        sNumQuestLogs = a2 / 8;
-        for (i = 0; i < 0x40; i++)
+        sCurQuestLogEntry = entry;
+        sNumEventsInLogEntry = size / sizeof(*sCurQuestLogEntry);
+        for (i = 0; i < (s32)NELEMS(sMovementScripts); i++)
         {
             sMovementScripts[i][0] |= 0xFF;
             sMovementScripts[i][1] |= 0xFF;
         }
-        sQuestLogIdx = 0;
+        sQuestLogCursor = 0;
         gUnknown_203B01C = 0;
         gUnknown_3005E90 = (struct UnkStruct_3005E90){};
-        gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
-        sMovementScripts[0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+        sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
+        sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
         sMovementScripts[0][1] = 0xFF;
         gUnknown_3005E88 = 1;
         break;
     case 2:
-        gUnknown_3005E94 = a1;
-        sNumQuestLogs = a2 / 8;
-        for (i = 0; i < sNumQuestLogs; i++)
+        sCurQuestLogEntry = entry;
+        sNumEventsInLogEntry = size / sizeof(*sCurQuestLogEntry);
+        for (i = 0; i < sNumEventsInLogEntry; i++)
         {
-            gUnknown_3005E94[i] = (struct UnkStruct_203AE98){ 0, 0, 0, 0, 0xFFFF, 0xFF };
+            sCurQuestLogEntry[i] = (struct QuestLogEntry){ 0, 0, 0, 0, 0xFFFF, 0xFF };
         }
-        sQuestLogIdx = 0;
-        gUnknown_203B01A = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
+        sQuestLogCursor = 0;
+        sNextStepDelay = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
         switch (GetPlayerFacingDirection())
         {
         case DIR_NONE:
         case DIR_SOUTH:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_SOUTH - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_DOWN;
             break;
         case DIR_EAST:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_EAST - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_RIGHT;
             break;
         case DIR_NORTH:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_NORTH - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_UP;
             break;
         case DIR_WEST:
-            gUnknown_3005E94[sQuestLogIdx].unk_3 = DIR_WEST - 1;
+            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_LEFT;
             break;
         }
         gUnknown_203B01C = 0;
-        sQuestLogIdx++;
-        gUnknown_3005E94[sQuestLogIdx].unk_4 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_6 = 2;
-        gUnknown_3005E94[sQuestLogIdx].unk_0 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_1 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_2 = 0;
-        gUnknown_3005E94[sQuestLogIdx].unk_3 = 0;
-        sQuestLogIdx++;
+        sQuestLogCursor++;
+        sCurQuestLogEntry[sQuestLogCursor].unk_4 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 2;
+        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_1 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_2 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].unk_3 = 0;
+        sQuestLogCursor++;
         gUnknown_3005E88 = 2;
         break;
     }
@@ -1672,22 +1673,22 @@ void sub_8112B3C(void)
     case 1:
         if (!sub_8112CEC())
         {
-            if (gUnknown_203B01A != 0)
-                gUnknown_203B01A--;
+            if (sNextStepDelay != 0)
+                sNextStepDelay--;
             else
             {
                 do
                 {
-                    switch (gUnknown_3005E94[sQuestLogIdx].unk_6)
+                    switch (sCurQuestLogEntry[sQuestLogCursor].unk_6)
                     {
                     case 0:
-                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][0] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
                         break;
                     case 1:
-                        sMovementScripts[gUnknown_3005E94[sQuestLogIdx].unk_0][1] = gUnknown_3005E94[sQuestLogIdx].unk_3;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][1] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
                         break;
                     case 2:
-                        *(u32 *)&gUnknown_3005E90 = ((gUnknown_3005E94[sQuestLogIdx].unk_3 << 24) | (gUnknown_3005E94[sQuestLogIdx].unk_2 << 16) | (gUnknown_3005E94[sQuestLogIdx].unk_1 << 8) | (gUnknown_3005E94[sQuestLogIdx].unk_0 << 0));
+                        *(u32 *)&gUnknown_3005E90 = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
                         break;
                     case 3:
                         gUnknown_3005E88 = 3;
@@ -1700,17 +1701,17 @@ void sub_8112B3C(void)
                     }
                     if (gUnknown_3005E88 == 0)
                         break;
-                    if (++sQuestLogIdx >= sNumQuestLogs)
+                    if (++sQuestLogCursor >= sNumEventsInLogEntry)
                     {
                         gUnknown_3005E88 = 0;
                         break;
                     }
-                    gUnknown_203B01A = gUnknown_3005E94[sQuestLogIdx].unk_4;
+                    sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
                 } while (gUnknown_3005E88 != 3
-                      && (gUnknown_203B01A == 0 || gUnknown_203B01A == 0xFFFF));
+                      && (sNextStepDelay == 0 || sNextStepDelay == 0xFFFF));
             }
         }
-        else if (sQuestLogIdx >= sNumQuestLogs)
+        else if (sQuestLogCursor >= sNumEventsInLogEntry)
         {
             gUnknown_3005E88 = 0;
         }
@@ -1718,8 +1719,8 @@ void sub_8112B3C(void)
     case 2:
         if (ScriptContext2_IsEnabled() != TRUE)
         {
-            gUnknown_203B01A++;
-            if (sQuestLogIdx >= sNumQuestLogs)
+            sNextStepDelay++;
+            if (sQuestLogCursor >= sNumEventsInLogEntry)
                 gUnknown_3005E88 = 0;
         }
         break;
@@ -1732,7 +1733,7 @@ void sub_8112B3C(void)
 
 void sub_8112C9C(void)
 {
-    gUnknown_203B01A++;
+    sNextStepDelay++;
 }
 
 u8 sub_8112CAC(void)
@@ -1753,14 +1754,14 @@ u8 sub_8112CAC(void)
 
 static bool8 sub_8112CEC(void)
 {
-    if (sQuestLogIdx >= sNumQuestLogs || ScriptContext2_IsEnabled() == TRUE)
+    if (sQuestLogCursor >= sNumEventsInLogEntry || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
     return FALSE;
 }
 
-static bool8 sub_8112D1C(void)
+static bool8 RecordHeadAtEndOfEntry(void)
 {
-    if (sQuestLogIdx >= sNumQuestLogs)
+    if (sQuestLogCursor >= sNumEventsInLogEntry)
         return TRUE;
     return FALSE;
 }
@@ -1774,9 +1775,9 @@ static const struct UnkStruct_300201C gUnknown_84566A4 = {
 void * QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx)
 {
     void * response;
-    if (sQuestLogIdx == 0)
+    if (sQuestLogCursor == 0)
         return NULL;
-    if (sQuestLogIdx >= sNumQuestLogs)
+    if (sQuestLogCursor >= sNumEventsInLogEntry)
         return NULL;
     if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return NULL;
@@ -1792,9 +1793,9 @@ void * QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx)
 
 void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value)
 {
-    if (sQuestLogIdx == 0)
+    if (sQuestLogCursor == 0)
         return;
-    if (sQuestLogIdx >= sNumQuestLogs)
+    if (sQuestLogCursor >= sNumEventsInLogEntry)
         return;
     if (sFlagOrVarPlayhead >= sNumFlagsOrVars)
         return;
@@ -1817,7 +1818,7 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
         sFlagOrVarPlayhead = 0;
         if (a0 == 2)
         {
-            for (i = 0; i < sNumQuestLogs; i++)
+            for (i = 0; i < sNumEventsInLogEntry; i++)
             {
                 sFlagOrVarRecords[i] = gUnknown_84566A4;
             }
@@ -2395,7 +2396,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
         return;
     }
     sub_811381C();
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_2)
         return;
 
     if (!IS_VALID_QL_EVENT(eventId))
@@ -2431,7 +2432,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
         {
             if (sub_81153A8(eventId, eventData) == FALSE)
                 return;
-            sub_8110AEC(eventId);
+            StartRecordingQuestLogEntry(eventId);
         }
     }
     else if (eventId == QL_EVENT_OBTAINED_ITEM)
@@ -2513,10 +2514,10 @@ bool8 sub_8113748(void)
     if (InQuestLogDisabledLocation() != TRUE)
         return FALSE;
 
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_2)
         return TRUE;
 
-    if (gQuestLogState == 1)
+    if (gQuestLogState == QL_STATE_1)
         sub_8112364();
 
     return FALSE;
@@ -2579,7 +2580,7 @@ static u16 *sub_8113828(u16 eventId, const u16 *eventData)
     if (sub_81153A8(eventId, eventData) == FALSE)
         return NULL;
 
-    sub_8110AEC(eventId);
+    StartRecordingQuestLogEntry(eventId);
     sub_8113B94(eventId);
 
     if (eventId == QL_EVENT_DEFEATED_WILD_MON)
@@ -2619,7 +2620,7 @@ void sub_811390C(void)
     {
         u16 *resp;
         gUnknown_203B04A = 0;
-        sub_8110AEC(gUnknown_203B024.unk_00);
+        StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
         resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
         gUnknown_203AE08 = resp;
         sub_81138F8();
@@ -2651,7 +2652,7 @@ void sub_81139BC(void)
         if (gUnknown_3005E88 == 0)
         {
             gUnknown_203B04A = 0;
-            sub_8110AEC(gUnknown_203B024.unk_00);
+            StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
         resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
@@ -2665,7 +2666,7 @@ void sub_81139BC(void)
 static void sub_8113A1C(u16 a0)
 {
     gUnknown_203AE08 = sub_8113C5C(gUnknown_203AE08, a0);
-    sQuestLogIdx++;
+    sQuestLogCursor++;
 }
 
 static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16 eventId, const u16 *eventData)
@@ -2806,7 +2807,7 @@ static bool8 sub_8113AE8(const u16 *a0)
     const u16 *r0 = a0;
 #endif
     
-    if (r0 == NULL || r0[1] > sQuestLogIdx)
+    if (r0 == NULL || r0[1] > sQuestLogCursor)
         return FALSE;
 
     sQuestLogEventTextBufferCBs[a0[0] & 0xFFF](a0);
@@ -2836,11 +2837,11 @@ static void sub_8113B88(void)
 
 static void sub_8113B94(u16 eventId)
 {
-    if (gUnknown_203B044.unk_0 != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogIdx)
+    if (gUnknown_203B044.unk_0 != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogCursor)
     {
         gUnknown_203B044.unk_0 = eventId;
         gUnknown_203B044.unk_1 = 0;
-        gUnknown_203B044.unk_2 = sQuestLogIdx;
+        gUnknown_203B044.unk_2 = sQuestLogCursor;
     }
     else if (gUnknown_203B044.unk_1 < 5)
         gUnknown_203B044.unk_1++;
@@ -2848,7 +2849,7 @@ static void sub_8113B94(u16 eventId)
 
 static void sub_8113BD8(void)
 {
-    gUnknown_203B049 = 0;
+    sNewlyEnteredMap = FALSE;
     gUnknown_203B04A = 0;
     gUnknown_203B04B = FALSE;
 }
@@ -2861,7 +2862,7 @@ static u16 *sub_8113BF4(u16 *a0)
     return a0 + 1;
 }
 
-static u16 *sub_8113C20(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113C20(u16 *a0, struct QuestLogEntry * a1)
 {
     if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
@@ -2883,7 +2884,7 @@ static u16 *sub_8113C5C(u16 *a0, u16 a1)
     return a0 + 2;
 }
 
-static u16 *sub_8113C8C(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113C8C(u16 *a0, struct QuestLogEntry * a1)
 {
     if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
@@ -2896,7 +2897,7 @@ static u16 *sub_8113C8C(u16 *a0, struct UnkStruct_203AE98 * a1)
     return a0 + 2;
 }
 
-static u16 *sub_8113CC8(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113CC8(u16 *a0, struct QuestLogEntry * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
@@ -2911,7 +2912,7 @@ static u16 *sub_8113CC8(u16 *a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 *sub_8113D08(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D08(u16 *a0, struct QuestLogEntry * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
@@ -2926,7 +2927,7 @@ static u16 *sub_8113D08(u16 *a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 *sub_8113D48(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D48(u16 *a0, struct QuestLogEntry * a1)
 {
     u16 *r4 = a0;
     u8 *r6 = (u8 *)a0 + 4;
@@ -2945,7 +2946,7 @@ static u16 *sub_8113D48(u16 *a0, struct UnkStruct_203AE98 * a1)
     return (u16 *)(r6 + 4);
 }
 
-static u16 *sub_8113D94(u16 *a0, struct UnkStruct_203AE98 * a1)
+static u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
 {
     u16 *r5 = a0;
     u8 *r6 = (u8 *)a0 + 4;
@@ -2999,7 +3000,7 @@ u16 *sub_8113DE0(u16 eventId, u16 *a1)
         r1 = gUnknown_203B044.unk_1;
 
     r5[0] = eventId + (r1 << 12);
-    r5[1] = sQuestLogIdx;
+    r5[1] = sQuestLogCursor;
     r5 = (void *)r5 + (r1 * cmdSize + 4);
     return r5;
 }
@@ -3244,7 +3245,7 @@ static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *a0, const u16 *eventData)
         return NULL;
 
     r4[0] = QL_EVENT_USED_PKMN_CENTER;
-    r4[1] = sQuestLogIdx;
+    r4[1] = sQuestLogCursor;
     return r4 + 2;
 }
 
@@ -3260,7 +3261,7 @@ static u16 *BufferQuestLogData_LinkTraded(u16 *a0, const u16 *eventData)
     u16 *r4 = a0 + 4;
 
     a0[0] = QL_EVENT_LINK_TRADED;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     a0[2] = eventData[0];
     a0[3] = eventData[1];
     eventData += 2;
@@ -3305,7 +3306,7 @@ static const u8 *const sBattleOutcomeTexts[] = {
 static u16 *BufferQuestLogData_LinkBattledSingle(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_LINK_BATTLED_SINGLE;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
@@ -3329,7 +3330,7 @@ static const u16 *BufferQuestLogText_LinkBattledSingle(const u16 *a0)
 static u16 *BufferQuestLogData_LinkBattledDouble(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_LINK_BATTLED_DOUBLE;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
     memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
@@ -3353,7 +3354,7 @@ static const u16 *BufferQuestLogText_LinkBattledDouble(const u16 *a0)
 static u16 *BufferQuestLogData_LinkBattledMulti(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_LINK_BATTLED_MULTI;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     *((u8 *)a0 + 4) = *((const u8 *)eventData + 0);
     memcpy((u8 *)a0 +  5, (const u8 *)eventData +  1, PLAYER_NAME_LENGTH);
     memcpy((u8 *)a0 + 12, (const u8 *)eventData +  8, PLAYER_NAME_LENGTH);
@@ -3388,7 +3389,7 @@ static const u16 *BufferQuestLogText_LinkBattledMulti(const u16 *a0)
 static u16 *BufferQuestLogData_UsedUnionRoom(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_USED_UNION_ROOM;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     return a0 + 2;
 }
 
@@ -3402,7 +3403,7 @@ static const u16 *BufferQuestLogText_UsedUnionRoom(const u16 *a0)
 static u16 *BufferQuestLogData_UsedUnionRoomChat(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_USED_UNION_ROOM_CHAT;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     return a0 + 2;
 }
 
@@ -3417,7 +3418,7 @@ static u16 *BufferQuestLogData_LinkTradedUnionRoom(u16 *a0, const u16 *eventData
 {
     u8 *r4 = (u8 *)(a0 + 4);
     a0[0] = QL_EVENT_LINK_TRADED_UNION;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     a0[2] = eventData[0];
     a0[3] = eventData[1];
     memcpy(r4, eventData + 2, PLAYER_NAME_LENGTH);
@@ -3441,7 +3442,7 @@ static const u16 *BufferQuestLogText_LinkTradedUnionRoom(const u16 *a0)
 static u16 *BufferQuestLogData_LinkBattledUnionRoom(u16 *a0, const u16 *eventData)
 {
     a0[0] = QL_EVENT_LINK_BATTLED_UNION;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     *(u8 *)&a0[2] = *(const u8 *)&eventData[0];
     memcpy((u8 *)a0 + 5, (const u8 *)eventData + 1, PLAYER_NAME_LENGTH);
     a0 += 6;
@@ -3743,7 +3744,7 @@ static u16 *BufferQuestLogData_DefeatedWildMon(u16 *a0, const u16 *eventData)
     if (r5[0] == 0 && r5[1] == 0)
     {
         r4[0] = QL_EVENT_DEFEATED_WILD_MON;
-        r4[1] = sQuestLogIdx;
+        r4[1] = sQuestLogCursor;
     }
     if (eventData[0])
         r4[2] = eventData[0];
@@ -3847,7 +3848,7 @@ static u16 *BufferQuestLogData_DefeatedChampion(u16 *a0, const u16 *eventData)
     if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
     a0[0] = 0x2021;
-    a0[1] = sQuestLogIdx;
+    a0[1] = sQuestLogCursor;
     a0[2] = eventData[1];
     a0[3] = eventData[2];
     *((u8 *)a0 + 8) = *((const u8 *)eventData + 6);
@@ -4299,7 +4300,7 @@ void QuestLog_RecordEnteredMap(u16 worldMapFlag)
 {
     s32 i;
 
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (gQuestLogState == QL_STATE_2 || gQuestLogState == QL_STATE_3)
         return;
 
     for (i = 0; i < (int)NELEMS(sQuestLogWorldMapFlags); i++)
@@ -4308,13 +4309,13 @@ void QuestLog_RecordEnteredMap(u16 worldMapFlag)
         {
             if (!FlagGet(worldMapFlag))
             {
-                gUnknown_203B049 = TRUE;
+                sNewlyEnteredMap = TRUE;
                 break;
             }
             else
             {
-                gUnknown_203B049 += 0;
-                gUnknown_203B049 = FALSE;
+                sNewlyEnteredMap += 0;
+                sNewlyEnteredMap = FALSE;
                 break;
             }
         }
@@ -4324,13 +4325,13 @@ void QuestLog_RecordEnteredMap(u16 worldMapFlag)
 void sub_8115798(void)
 {
     u16 sp0;
-    if (gQuestLogState != 2 && gQuestLogState != 3)
+    if (gQuestLogState != QL_STATE_2 && gQuestLogState != QL_STATE_3)
     {
-        if (gUnknown_203B049)
+        if (sNewlyEnteredMap)
         {
             sp0 = gMapHeader.regionMapSectionId;
             SetQuestLogEvent(QL_EVENT_ARRIVED, &sp0);
-            gUnknown_203B049 = FALSE;
+            sNewlyEnteredMap = FALSE;
         }
     }
 }

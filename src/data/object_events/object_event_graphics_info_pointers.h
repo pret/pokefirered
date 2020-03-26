@@ -250,7 +250,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_POKEDEX]                  = &gObjectEventGraphicsInfo_Pokedex,
     [OBJ_EVENT_GFX_CUT_TREE]                 = &gObjectEventGraphicsInfo_CutTree,
     [OBJ_EVENT_GFX_ROCK_SMASH_ROCK]          = &gObjectEventGraphicsInfo_RockSmashRock,
-    [OBJ_EVENT_GFX_STRENGTH_BOULDER]         = &gObjectEventGraphicsInfo_StrengthBoulder,
+    [OBJ_EVENT_GFX_PUSHABLE_BOULDER]         = &gObjectEventGraphicsInfo_StrengthBoulder,
     [OBJ_EVENT_GFX_FOSSIL]                   = &gObjectEventGraphicsInfo_Fossil,
     [OBJ_EVENT_GFX_RUBY]                     = &gObjectEventGraphicsInfo_Ruby,
     [OBJ_EVENT_GFX_SAPPHIRE]                 = &gObjectEventGraphicsInfo_Sapphire,

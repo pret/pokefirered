@@ -35,5 +35,6 @@ void FieldClearPlayerInput(struct FieldInput *input);
 int ProcessPlayerFieldInput(struct FieldInput *input);
 void FieldInput_HandleCancelSignpost(struct FieldInput * input);
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys);
+void sub_806DE70(u16 x, u16 y);
 
 #endif //GUARD_FIELD_CONTROL_AVATAR_H

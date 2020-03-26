@@ -26,6 +26,8 @@ struct UnkStruct_083A3698
     u8 animPos[4];
 };
 
+typedef void (*MovementAction)(u8 direction);
+
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
 #define GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN   (1 << 2)
@@ -117,8 +119,8 @@ bool8 ObjectEventSetHeldMovement(struct ObjectEvent *, u8);
 void ShiftStillObjectEventCoords(struct ObjectEvent *);
 void OverrideMovementTypeForObjectEvent(const struct ObjectEvent *, u8);
 void SetTrainerMovementType(struct ObjectEvent *, u8);
-u8 GetFishingNoCatchDirectionAnimNum(u8 direction);
-u8 GetFishingBiteDirectionAnimNum(u8 a0);
+u8 GetFishingDirectionAnimNum(u8 direction);
+u8 GetFishingNoCatchDirectionAnimNum(u8 a0);
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 a1);
 u8 sub_805EB44(u8, u8, s16, s16);
 void InitObjectEventPalettes(u8 mode);
@@ -130,6 +132,7 @@ u8 GetWalkFastestMovementAction(u32);
 u8 sub_8063F2C(u32 direction);
 u8 GetTrainerFacingDirectionMovementType(u8 direction);
 u8 GetFaceDirectionMovementAction(u32);
+u8 GetFaceDirectionFastMovementAction(u32);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 void UnfreezeObjectEvents(void);
 void sub_8069058(u8, u8);
@@ -186,6 +189,7 @@ void sub_8068CA4(struct Sprite *, u8);
 bool8 sub_8068CB4(struct Sprite *sprite);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
+u8 ObjectEventGetHeldMovementActionId(struct ObjectEvent *objectEvent);
 u8 GetMoveDirectionAnimNum(u8 direction);
 
 // Exported data declarations
@@ -197,5 +201,25 @@ extern const struct OamData gObjectEventBaseOam_32x32;
 extern const u16 gUnknown_8398648[];
 extern const u16 gUnknown_8398688[];
 extern const u8 gReflectionEffectPaletteMap[];
+u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z);
+u8 sub_8063F58(u32 direction);
+u8 sub_8063FDC(u32 direction);
+u8 sub_8064008(u32 direction);
+u8 GetPlayerRunMovementAction(u32 direction);
+u8 GetPlayerRunSlowMovementAction(u32 direction);
+u8 GetWalkSlowMovementAction(u32 direction);
+u8 sub_80640E4(u32 direction);
+u8 GetAcroWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroPopWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroEndWheelieFaceDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieHopFaceDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieHopDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieJumpDirectionMovementAction(u32 direction);
+u8 GetJumpInPlaceTurnAroundMovementAction(u32 direction);
+u8 GetAcroWheelieInPlaceDirectionMovementAction(u32 direction);
+u8 GetAcroPopWheelieMoveDirectionMovementAction(u32 direction);
+u8 GetAcroWheelieMoveDirectionMovementAction(u32 direction);
+u8 sub_80641EC(u32 direction);
+u8 GetFishingBiteDirectionAnimNum(u8 direction);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

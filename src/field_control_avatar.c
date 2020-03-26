@@ -105,11 +105,11 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     {
         if (GetPlayerSpeed() != 4)
         {
-            if ((newKeys & START_BUTTON) && !(gPlayerAvatar.flags & 0x40))
+            if ((newKeys & START_BUTTON) && !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
                 input->pressedStartButton = TRUE;
             if (gQuestLogState != QL_STATE_2 && gQuestLogState != QL_STATE_3)
             {
-                if (!(gPlayerAvatar.flags & 0x40))
+                if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
                 {
                     if (newKeys & SELECT_BUTTON)
                         input->pressedSelectButton = TRUE;
@@ -625,7 +625,7 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
         return TRUE;
     if (TryStartStepCountScript(metatileBehavior) == TRUE)
         return TRUE;
-    if (!(gPlayerAvatar.flags & 0x40) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior) && UpdateRepelCounter() == TRUE)
         return TRUE;
     return FALSE;
 }
@@ -655,7 +655,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 
     UpdateHappinessStepCounter();
 
-    if (!(gPlayerAvatar.flags & 0x40) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
         if (sub_810C4EC() == TRUE)
         {
@@ -839,7 +839,7 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8
         else if (sub_806DB84(metatileBehavior, direction) == TRUE)
         {
             delay = 0;
-            if (gPlayerAvatar.flags & 6)
+            if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
             {
                 SetPlayerAvatarTransitionFlags(1);
                 delay = 12;
@@ -906,7 +906,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
         return TRUE;
     if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         return TRUE;
-    if (MetatileBehavior_IsCaveDoor(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsNonAnimDoor(metatileBehavior) == TRUE)
         return TRUE;
     if (MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) == TRUE)
         return TRUE;

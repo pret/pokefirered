@@ -39,7 +39,7 @@ void sub_8150454(u8 a0)
         gUnknown_8471EDC[a0]();
 }
 
-bool8 sub_8150474(u8 a0)
+bool32 sub_8150474(u8 a0)
 {
     if (gUnknown_3005E88 == 2)
     {
@@ -87,7 +87,7 @@ static void sub_8150530(void)
     else
     {
         sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
-        StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
+        StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
     }
 }
 
@@ -102,23 +102,23 @@ static void sub_81505C4(u8 taskId)
             ObjectEventClearHeldMovementIfActive(objectEvent);
             objectEvent->enableAnim = TRUE;
             sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
-            StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
+            StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
             break;
         case 1:
-            sub_805D9C4(sprite);
+            AlignFishingAnimationFrames(sprite);
             if (gTasks[taskId].data[1] < 60)
                 gTasks[taskId].data[1]++;
             else
                 gTasks[taskId].data[0]++;
             break;
         case 2:
-            StartSpriteAnim(sprite, GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
+            StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
             gTasks[taskId].data[0]++;
             break;
         case 3:
-            sub_805D9C4(sprite);
+            AlignFishingAnimationFrames(sprite);
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))
@@ -177,20 +177,20 @@ static void sub_81507BC(struct ObjectEvent * a0, u8 a1)
 
 static void sub_81507CC(void)
 {
-    sub_805D154(1);
+    CreateStopSurfingTask_NoMusicChange(1);
 }
 
 static void sub_81507D8(void)
 {
-    sub_805D154(2);
+    CreateStopSurfingTask_NoMusicChange(2);
 }
 
 static void sub_81507E4(void)
 {
-    sub_805D154(3);
+    CreateStopSurfingTask_NoMusicChange(3);
 }
 
 static void sub_81507F0(void)
 {
-    sub_805D154(4);
+    CreateStopSurfingTask_NoMusicChange(4);
 }

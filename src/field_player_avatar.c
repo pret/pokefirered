@@ -182,7 +182,7 @@ static void npc_clear_strange_bits(struct ObjectEvent *objEvent)
     objEvent->inanimate = 0;
     objEvent->disableAnim = 0;
     objEvent->facingDirectionLocked = 0;
-    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_WATERING;
 }
 
 static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 heldKeys)
@@ -197,12 +197,12 @@ static void MovePlayerAvatarUsingKeypadInput(u8 direction, u16 newKeys, u16 held
 static void PlayerAllowForcedMovementIfMovingSameDirection(void)
 {
     if (gPlayerAvatar.runningState == MOVING)
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FIELD_MOVE;
 }
 
 static bool8 sub_805B528(void)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MVMT_IS_FORCED) && MetatileBehavior_IsSpinTile(gPlayerAvatar.unk1C))
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && MetatileBehavior_IsSpinTile(gPlayerAvatar.lastSpinTile))
     {
         gUnknown_2036E30 = &gObjectEvents[gPlayerAvatar.objectEventId];
         if (gUnknown_2036E30->heldMovementFinished)
@@ -213,10 +213,10 @@ static bool8 sub_805B528(void)
             }
             if (MetatileBehavior_IsSpinTile(gUnknown_2036E30->currentMetatileBehavior))
             {
-                gPlayerAvatar.unk1C = gUnknown_2036E30->currentMetatileBehavior;
+                gPlayerAvatar.lastSpinTile = gUnknown_2036E30->currentMetatileBehavior;
             }
             ObjectEventClearHeldMovement(gUnknown_2036E30);
-            sub_805C2CC(gPlayerAvatar.unk1C);
+            sub_805C2CC(gPlayerAvatar.lastSpinTile);
         }
         return TRUE;
     }
@@ -255,14 +255,14 @@ static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
     int i;
     u8 behavior;
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FIELD_MOVE))
     {
         behavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
         for (i = 0; sForcedMovementFuncs[i].unk0 != NULL; i++)
         {
             if (sForcedMovementFuncs[i].unk0(behavior))
             {
-                gPlayerAvatar.unk1C = behavior;
+                gPlayerAvatar.lastSpinTile = behavior;
                 return sForcedMovementFuncs[i].unk4();
             }
         }
@@ -278,14 +278,14 @@ static bool8 TryDoMetatileBehaviorForcedMovement(void)
 
 static bool8 ForcedMovement_None(void)
 {
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MVMT_IS_FORCED)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING)
     {
         struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
         playerObjEvent->facingDirectionLocked = FALSE;
         playerObjEvent->enableAnim = TRUE;
         SetObjectEventDirection(playerObjEvent, playerObjEvent->facingDirection);
-        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_MVMT_IS_FORCED;
+        gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_FISHING;
     }
     return FALSE;
 }
@@ -295,7 +295,7 @@ static u8 DoForcedMovement(u8 direction, MovementAction movementAction)
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 collision = CheckForPlayerAvatarCollision(direction);
 
-    playerAvatar->flags |= PLAYER_AVATAR_FLAG_MVMT_IS_FORCED;
+    playerAvatar->flags |= PLAYER_AVATAR_FLAG_FISHING;
     if (collision)
     {
         ForcedMovement_None();
@@ -307,7 +307,7 @@ static u8 DoForcedMovement(u8 direction, MovementAction movementAction)
         {
             if (collision == COLLISION_LEDGE_JUMP)
                 PlayerJumpLedge(direction);
-            playerAvatar->flags |= PLAYER_AVATAR_FLAG_MVMT_IS_FORCED;
+            playerAvatar->flags |= PLAYER_AVATAR_FLAG_FISHING;
             playerAvatar->runningState = MOVING;
             return 1;
         }
@@ -518,7 +518,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             PlayerRunSlow(direction);
         else
             PlayerRun(direction);
-        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_WATERING;
         return;
     }
     else
@@ -676,25 +676,25 @@ static void CheckAcroBikeCollision(s16 x, s16 y, u8 metatileBehavior, u8 *collis
 
 void SetPlayerAvatarTransitionFlags(bool16 flags)
 {
-    gPlayerAvatar.unk1 |= flags;
+    gPlayerAvatar.transitionFlags |= flags;
     DoPlayerAvatarTransition();
 }
 
 static void (*const gUnknown_835B844[])(struct ObjectEvent *) = {
-    PlayerAvatarTransition_Normal,
-    PlayerAvatarTransition_Bike,
-    PlayerAvatarTransition_Bike,
-    PlayerAvatarTransition_Surfing,
-    PlayerAvatarTransition_Underwater,
-    PlayerAvatarTransition_ReturnToField,
-    PlayerAvatarTransition_Dummy,
-    PlayerAvatarTransition_Dummy
+    [PLAYER_AVATAR_STATE_NORMAL]     = PlayerAvatarTransition_Normal,
+    [PLAYER_AVATAR_STATE_MACH_BIKE]  = PlayerAvatarTransition_Bike,
+    [PLAYER_AVATAR_STATE_ACRO_BIKE]  = PlayerAvatarTransition_Bike,
+    [PLAYER_AVATAR_STATE_SURFING]    = PlayerAvatarTransition_Surfing,
+    [PLAYER_AVATAR_STATE_UNDERWATER] = PlayerAvatarTransition_Underwater,
+    [PLAYER_AVATAR_STATE_FIELD_MOVE] = PlayerAvatarTransition_ReturnToField,
+    [PLAYER_AVATAR_STATE_FISHING]    = PlayerAvatarTransition_Dummy,
+    [PLAYER_AVATAR_STATE_WATERING]   = PlayerAvatarTransition_Dummy
 };
 
 static void DoPlayerAvatarTransition(void)
 {
     u8 i;
-    u8 flags = gPlayerAvatar.unk1;
+    u8 flags = gPlayerAvatar.transitionFlags;
 
     if (flags != 0)
     {
@@ -703,7 +703,7 @@ static void DoPlayerAvatarTransition(void)
             if (flags & 1)
                 gUnknown_835B844[i](&gObjectEvents[gPlayerAvatar.objectEventId]);
         }
-        gPlayerAvatar.unk1 = 0;
+        gPlayerAvatar.transitionFlags = 0;
     }
 }
 
@@ -738,7 +738,7 @@ static void PlayerAvatarTransition_Underwater(struct ObjectEvent * playerObjEven
 
 static void PlayerAvatarTransition_ReturnToField(struct ObjectEvent * playerObjEvent)
 {
-    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_FIELD_MOVE;
 }
 
 void sub_805BEB8(void)
@@ -1229,7 +1229,7 @@ void ClearPlayerAvatarInfo(void)
 
 void SetPlayerAvatarStateMask(u8 flags)
 {
-    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_DASH | PLAYER_AVATAR_FLAG_MVMT_IS_FORCED | PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED);
+    gPlayerAvatar.flags &= (PLAYER_AVATAR_FLAG_WATERING | PLAYER_AVATAR_FLAG_FISHING | PLAYER_AVATAR_FLAG_FIELD_MOVE);
     gPlayerAvatar.flags |= flags;
 }
 
@@ -1277,7 +1277,7 @@ void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 b)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
-    gPlayerAvatar.unk1 |= unk | b;
+    gPlayerAvatar.transitionFlags |= unk | b;
     DoPlayerAvatarTransition();
 }
 
@@ -1310,7 +1310,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.objectEventId = objectEventId;
     gPlayerAvatar.spriteId = objectEvent->spriteId;
     gPlayerAvatar.gender = gender;
-    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED | PLAYER_AVATAR_FLAG_ON_FOOT);
+    SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_FIELD_MOVE | PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 void SetPlayerInvisibility(bool8 invisible)
@@ -1482,7 +1482,7 @@ static bool8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct ObjectEv
         if (task->data[1] > 1)
         {
             gPlayerAvatar.preventStep = FALSE;
-            gPlayerAvatar.unk1 |= 0x20;
+            gPlayerAvatar.transitionFlags |= PLAYER_AVATAR_FLAG_FIELD_MOVE;
             DestroyTask(FindTaskIdByFunc(DoPlayerAvatarSecretBaseMatJump));
         }
     }
@@ -1990,6 +1990,7 @@ void AlignFishingAnimationFrames(struct Sprite * playerSprite)
 #define tFinalFacingDirection data[5]
 #define tPriority data[6]
 #define tSubpriority data[7]
+#define tLandingDelay data[8]
 
 static const u8 sTeleportFacingDirectionSequence[] = {
     [DIR_SOUTH] = DIR_WEST,
@@ -2111,14 +2112,14 @@ static void Task_TeleportWarpInPlayerAnim(u8 taskId)
         if (sprite->pos1.y >= tYpos)
         {
             sprite->pos1.y = tYpos;
-            data[8] = 0;
+            tLandingDelay = 0;
             tState++;
         }
         break;
     case 2:
         TeleportAnim_RotatePlayer(object, &tRotationTimer);
-        data[8]++;
-        if (data[8] > 8)
+        tLandingDelay++;
+        if (tLandingDelay > 8)
         {
             tState++;
         }
@@ -2153,6 +2154,7 @@ static u8 TeleportAnim_RotatePlayer(struct ObjectEvent *object, s16 *a1)
     return sTeleportFacingDirectionSequence[object->facingDirection];
 }
 
+#undef tLandingDelay
 #undef tSubpriority
 #undef tPriority
 #undef tFinalFacingDirection

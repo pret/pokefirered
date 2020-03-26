@@ -289,14 +289,14 @@ enum {
     PLAYER_AVATAR_STATE_WATERING,
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT              (1 << PLAYER_AVATAR_STATE_NORMAL)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE            (1 << PLAYER_AVATAR_STATE_MACH_BIKE)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE            (1 << PLAYER_AVATAR_STATE_ACRO_BIKE)
-#define PLAYER_AVATAR_FLAG_SURFING              (1 << PLAYER_AVATAR_STATE_SURFING)
-#define PLAYER_AVATAR_FLAG_4                    (1 << PLAYER_AVATAR_STATE_UNDERWATER)
-#define PLAYER_AVATAR_FLAG_FORCED_MVMT_DISABLED (1 << PLAYER_AVATAR_STATE_FIELD_MOVE)
-#define PLAYER_AVATAR_FLAG_MVMT_IS_FORCED       (1 << PLAYER_AVATAR_STATE_FISHING)
-#define PLAYER_AVATAR_FLAG_DASH                 (1 << PLAYER_AVATAR_STATE_WATERING)
+#define PLAYER_AVATAR_FLAG_ON_FOOT    (1 << PLAYER_AVATAR_STATE_NORMAL)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE  (1 << PLAYER_AVATAR_STATE_MACH_BIKE)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE  (1 << PLAYER_AVATAR_STATE_ACRO_BIKE)
+#define PLAYER_AVATAR_FLAG_SURFING    (1 << PLAYER_AVATAR_STATE_SURFING)
+#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << PLAYER_AVATAR_STATE_UNDERWATER)
+#define PLAYER_AVATAR_FLAG_FIELD_MOVE (1 << PLAYER_AVATAR_STATE_FIELD_MOVE)
+#define PLAYER_AVATAR_FLAG_FISHING    (1 << PLAYER_AVATAR_STATE_FISHING)
+#define PLAYER_AVATAR_FLAG_WATERING   (1 << PLAYER_AVATAR_STATE_WATERING)
 
 enum
 {
@@ -346,22 +346,23 @@ enum
 struct PlayerAvatar /* 0x202E858 */
 {
     /*0x00*/ u8 flags;
-    /*0x01*/ u8 unk1; // used to be bike, but it's not that in Emerald and probably isn't here either. maybe transition flags?
+    /*0x01*/ u8 transitionFlags; // used to be bike, but it's not that in Emerald and probably isn't here either. maybe transition flags?
     /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 objectEventId;
     /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
+    // These are not used in FRLG
     u8 acroBikeState;
-    u8 unk9;
+    u8 newDirBackup;
     u8 bikeFrameCounter;
-    u8 unkB;
-    u32 unkC;
-    u32 unk10;
-    u8 unk14[8];
-    u16 unk1C;
-    // TODO: rest of struct
+    u8 bikeSpeed;
+    u32 directionHistory;
+    u32 abStartSelectHistory;
+    u8 dirTimerHistory[8];
+    // For the Rocket mazes
+    u16 lastSpinTile;
 };
 
 struct Camera

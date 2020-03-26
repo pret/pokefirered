@@ -2207,7 +2207,7 @@ bool8 ObjectEventIsTrainerAndCloseToPlayer(struct ObjectEvent *objectEvent)
     s16 minY;
     s16 maxY;
 
-    if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+    if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_WATERING))
     {
         return FALSE;
     }

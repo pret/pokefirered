@@ -308,7 +308,7 @@ static bool8 ItemUseCheckFunc_Rod(void)
 
     if (MetatileBehavior_IsWaterfall(behavior))
         return FALSE;
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
         return FALSE;
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {

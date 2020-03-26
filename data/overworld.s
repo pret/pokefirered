@@ -5,28 +5,6 @@
 	.section .rodata
 	.align 2, 0
 
-sWhiteOutMoneyLossMultipliers:: @ 826D294
-	.byte  2
-	.byte  4
-	.byte  6
-	.byte  9
-	.byte 12
-	.byte 16
-	.byte 20
-	.byte 25
-	.byte 30
-
-	.align 1
-sWhiteOutMoneyLossBadgeFlagIDs:: @ 826D29E
-	.2byte FLAG_BADGE01_GET
-    .2byte FLAG_BADGE02_GET
-    .2byte FLAG_BADGE03_GET
-    .2byte FLAG_BADGE04_GET
-    .2byte FLAG_BADGE05_GET
-    .2byte FLAG_BADGE06_GET
-    .2byte FLAG_BADGE07_GET
-    .2byte FLAG_BADGE08_GET
-
 	.align 2
 sDummyWarpData:: @ 826D2B0
 	map MAP_UNDEFINED

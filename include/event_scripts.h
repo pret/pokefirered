@@ -1259,4 +1259,8 @@ extern const u8 EventScript_FieldPoison[];
 extern const u8 EventScript_EggHatch[];
 extern const u8 EventScript_1C1361[];
 
+// overworld
+
+extern const u8 EventScript_ResetEliteFourEnd[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

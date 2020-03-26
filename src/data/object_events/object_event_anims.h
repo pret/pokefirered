@@ -988,7 +988,7 @@ const union AffineAnimCmd gUnknown_83A32DC[] = {
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gAnimTable_83A3314[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_Inanimate[] = {
     gAnimCmd_83A2950
 };
 
@@ -1015,7 +1015,7 @@ const union AnimCmd *const gAnimTable_83A3318[] = {
     gAnimCmd_83A2AB0,
 };
 
-const union AnimCmd *const gAnimTable_83A3368[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_Standard[] = {
     gAnimCmd_83A2AC4,
     gAnimCmd_83A2ACC,
     gAnimCmd_83A2AD4,
@@ -1039,7 +1039,7 @@ const union AnimCmd *const gAnimTable_83A3368[] = {
     gAnimCmd_83A2C24,
 };
 
-const union AnimCmd *const gAnimTable_83A33BC[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_HoOh[] = {
     gAnimCmd_83A2AC4,
     gAnimCmd_83A2ACC,
     gAnimCmd_83A2AD4,
@@ -1090,7 +1090,7 @@ const union AnimCmd *const gAnimTable_83A3410[] = {
     gAnimCmd_83A2F7C,
 };
 
-const union AnimCmd *const gAnimTable_83A3470[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenNormal[] = {
     gAnimCmd_83A2AC4,
     gAnimCmd_83A2ACC,
     gAnimCmd_83A2AD4,
@@ -1165,7 +1165,7 @@ const union AnimCmd *const gAnimTable_83A34E4[] = {
     gAnimCmd_83A3128,
 };
 
-const union AnimCmd *const gAnimTable_83A3584[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenSurf[] = {
     gAnimCmd_83A2C48,
     gAnimCmd_83A2C50,
     gAnimCmd_83A2C58,
@@ -1192,7 +1192,7 @@ const union AnimCmd *const gAnimTable_83A3584[] = {
     gAnimCmd_83A3024,
 };
 
-const union AnimCmd *const gAnimTable_83A35E4[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_Nurse[] = {
     gAnimCmd_83A2AC4,
     gAnimCmd_83A2ACC,
     gAnimCmd_83A2AD4,
@@ -1216,15 +1216,15 @@ const union AnimCmd *const gAnimTable_83A35E4[] = {
     gAnimCmd_83A3184,
 };
 
-const union AnimCmd *const gAnimTable_83A3638[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenItem[] = {
     gAnimCmd_83A2F90,
 };
 
-const union AnimCmd *const gAnimTable_83A363C[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenVSSeeker[] = {
     gAnimCmd_83A2FA8,
 };
 
-const union AnimCmd *const gAnimTable_83A3640[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenVSSeekerBike[] = {
     gAnimCmd_83A2FD8,
     gAnimCmd_83A313C,
     gAnimCmd_83A3144,
@@ -1233,17 +1233,17 @@ const union AnimCmd *const gAnimTable_83A3640[] = {
     gAnimCmd_83A3170,
 };
 
-const union AnimCmd *const gAnimTable_83A3658[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RockSmashRock[] = {
     gAnimCmd_83A2950,
     gAnimCmd_83A3194,
 };
 
-const union AnimCmd *const gAnimTable_83A3660[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_CutTree[] = {
     gAnimCmd_83A2950,
     gAnimCmd_83A31A8,
 };
 
-const union AnimCmd *const gAnimTable_83A3668[] = {
+const union AnimCmd *const gObjectEventImageAnimTable_RedGreenFish[] = {
     gAnimCmd_83A31BC,
     gAnimCmd_83A31D0,
     gAnimCmd_83A31E4,
@@ -1264,11 +1264,11 @@ const struct UnkStruct_083A3698 gUnknown_83A3698[] = {
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gAnimTable_83A3368,
+        .anims = gObjectEventImageAnimTable_Standard,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gAnimTable_83A3470,
+        .anims = gObjectEventImageAnimTable_RedGreenNormal,
         .animPos = {1, 3, 0, 2},
     },
     {
@@ -1276,15 +1276,15 @@ const struct UnkStruct_083A3698 gUnknown_83A3698[] = {
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gAnimTable_83A3584,
+        .anims = gObjectEventImageAnimTable_RedGreenSurf,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gAnimTable_83A35E4,
+        .anims = gObjectEventImageAnimTable_Nurse,
         .animPos = {1, 3, 0, 2},
     },
     {
-        .anims = gAnimTable_83A3668,
+        .anims = gObjectEventImageAnimTable_RedGreenFish,
         .animPos = {1, 3, 0, 2},
     },
     {

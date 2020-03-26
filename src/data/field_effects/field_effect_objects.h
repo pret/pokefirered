@@ -169,14 +169,14 @@ const struct SpriteTemplate gUnknown_83A54E4 =
     .callback = UpdateAshFieldEffect,
 };
 
-const struct SpriteFrameImage gUnknown_83A54FC[] =
+const struct SpriteFrameImage gObjectEventPicTable_SurfBlob[] =
 {
-    overworld_frame(gUnknown_8396B08, 2, 8, 0),
-    overworld_frame(gUnknown_8396B08, 2, 8, 1),
-    overworld_frame(gUnknown_8396B08, 2, 8, 2),
-    overworld_frame(gUnknown_8396B08, 2, 8, 3),
-    overworld_frame(gUnknown_8396B08, 2, 8, 4),
-    overworld_frame(gUnknown_8396B08, 2, 8, 5),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 0),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 1),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 2),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 3),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 4),
+    overworld_frame(gObjectEventPic_SurfBlob, 2, 8, 5),
 };
 
 const union AnimCmd gUnknown_83A552C[] =
@@ -221,7 +221,7 @@ const struct SpriteTemplate gUnknown_83A556C =
     .paletteTag = SPRITE_INVALID_TAG,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = gUnknown_83A555C,
-    .images = gUnknown_83A54FC,
+    .images = gObjectEventPicTable_SurfBlob,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSurfBlobFieldEffect,
 };

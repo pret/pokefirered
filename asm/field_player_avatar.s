@@ -1990,7 +1990,7 @@ sub_805C20C: @ 805C20C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetWalkSlowMovementAction
+	bl GetFaceDirectionFastMovementAction
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1

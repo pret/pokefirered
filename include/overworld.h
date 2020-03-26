@@ -116,7 +116,7 @@ void SetWarpDestinationToDynamicWarp(u8 unused);
 void mapldr_default(void);
 
 u32 GetGameStat(u8 statId);
-u32 SetGameStat(u8 statId, u32 value);
+void SetGameStat(u8 statId, u32 value);
 
 void CB2_ContinueSavedGame(void);
 void sub_8055D5C(struct WarpData *);

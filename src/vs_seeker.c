@@ -1159,7 +1159,7 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
         case OBJ_EVENT_GFX_HIKER:
         case OBJ_EVENT_GFX_SAILOR:
             return 0x4e;
-        case OBJ_EVENT_GFX_TUBER_M_1:
+        case OBJ_EVENT_GFX_TUBER_M_WATER:
         case OBJ_EVENT_GFX_SWIMMER_M_WATER:
         case OBJ_EVENT_GFX_SWIMMER_F_WATER:
             return 0x4f;

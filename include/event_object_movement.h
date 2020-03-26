@@ -132,6 +132,7 @@ u8 GetWalkFastestMovementAction(u32);
 u8 sub_8063F2C(u32 direction);
 u8 GetTrainerFacingDirectionMovementType(u8 direction);
 u8 GetFaceDirectionMovementAction(u32);
+u8 GetFaceDirectionFastMovementAction(u32);
 void CameraObjectSetFollowedObjectId(u8 objectId);
 void UnfreezeObjectEvents(void);
 void sub_8069058(u8, u8);
@@ -189,6 +190,7 @@ bool8 sub_8068CB4(struct Sprite *sprite);
 void SetAndStartSpriteAnim(struct Sprite *, u8, u8);
 bool8 SpriteAnimEnded(struct Sprite *);
 u8 ObjectEventGetHeldMovementActionId(struct ObjectEvent *objectEvent);
+u8 GetMoveDirectionAnimNum(u8 direction);
 
 // Exported data declarations
 

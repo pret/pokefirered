@@ -835,7 +835,7 @@ void sub_805C0D4(u8 direction)
 
 void PlayerGoSlow(u8 direction)
 {
-    PlayerSetAnimId(sub_8063F58(direction), 2);
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
 }
 
 void PlayerGoSpeed1(u8 direction)
@@ -890,9 +890,9 @@ void PlayerFaceDirection(u8 direction)
     PlayerSetAnimId(GetFaceDirectionMovementAction(direction), 1);
 }
 
-void sub_805C20C(u8 direction)
+void PlayerFaceDirectionFast(u8 direction)
 {
-    PlayerSetAnimId(GetWalkSlowMovementAction(direction), 1);
+    PlayerSetAnimId(GetFaceDirectionFastMovementAction(direction), 1);
 }
 
 void PlayerTurnInPlace(u8 direction)
@@ -1134,7 +1134,7 @@ static const u8 sPlayerAvatarGfxIds[][2] = {
     {OBJ_EVENT_GFX_RED_SURF,      OBJ_EVENT_GFX_GREEN_SURF},
     {OBJ_EVENT_GFX_RED_ITEM,      OBJ_EVENT_GFX_GREEN_ITEM},
     {OBJ_EVENT_GFX_RED_FISH,      OBJ_EVENT_GFX_GREEN_FISH},
-    {OBJ_EVENT_GFX_RED_ITEM_COPY, OBJ_EVENT_GFX_GREEN_ITEM_COPY},
+    {OBJ_EVENT_GFX_RED_VS_SEEKER, OBJ_EVENT_GFX_GREEN_VS_SEEKER},
 };
 
 static const u8 sHoennLinkPartnerGfxIds[] = {
@@ -1327,8 +1327,8 @@ void sub_805CB70(void)
 }
 
 static const u8 gUnknown_835B88E[] = {
-    OBJ_EVENT_GFX_RED_FIELD_MOVE_BIKE,
-    OBJ_EVENT_GFX_GREEN_FIELD_MOVE_BIKE
+    OBJ_EVENT_GFX_RED_VS_SEEKER_BIKE,
+    OBJ_EVENT_GFX_GREEN_VS_SEEKER_BIKE
 };
 
 u8 sub_805CBB8(void)

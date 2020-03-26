@@ -1098,7 +1098,7 @@ const struct Subsprite gSubsprites_83A3A40[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_8x8[] = {
+const struct SubspriteTable gObjectEventSpriteOamTables_128x64[] = {
     {4, gSubsprites_83A3A20},
     {4, gSubsprites_83A3A20},
     {4, gSubsprites_83A3A30},

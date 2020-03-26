@@ -13,6 +13,7 @@ u8 GetPlayerMovementDirection(void);
 u8 PlayerGetCopyableMovement(void);
 void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
 
+void MovementType_Player(struct Sprite * sprite);
 void sub_805C270(void);
 void sub_805C780(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);

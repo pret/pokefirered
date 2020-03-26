@@ -87,7 +87,7 @@ static void sub_8150530(void)
     else
     {
         sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
-        StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
+        StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
     }
 }
 
@@ -102,7 +102,7 @@ static void sub_81505C4(u8 taskId)
             ObjectEventClearHeldMovementIfActive(objectEvent);
             objectEvent->enableAnim = TRUE;
             sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(4));
-            StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(objectEvent->facingDirection));
+            StartSpriteAnim(sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
             gTasks[taskId].data[0]++;
             gTasks[taskId].data[1] = 0;
             break;
@@ -114,7 +114,7 @@ static void sub_81505C4(u8 taskId)
                 gTasks[taskId].data[0]++;
             break;
         case 2:
-            StartSpriteAnim(sprite, GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
+            StartSpriteAnim(sprite, GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
             gTasks[taskId].data[0]++;
             break;
         case 3:

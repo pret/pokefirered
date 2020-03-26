@@ -119,8 +119,8 @@ bool8 ObjectEventSetHeldMovement(struct ObjectEvent *, u8);
 void ShiftStillObjectEventCoords(struct ObjectEvent *);
 void OverrideMovementTypeForObjectEvent(const struct ObjectEvent *, u8);
 void SetTrainerMovementType(struct ObjectEvent *, u8);
-u8 GetFishingNoCatchDirectionAnimNum(u8 direction);
-u8 GetFishingBiteDirectionAnimNum(u8 a0);
+u8 GetFishingDirectionAnimNum(u8 direction);
+u8 GetFishingNoCatchDirectionAnimNum(u8 a0);
 void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 a1);
 u8 sub_805EB44(u8, u8, s16, s16);
 void InitObjectEventPalettes(u8 mode);
@@ -220,6 +220,6 @@ u8 GetAcroWheelieInPlaceDirectionMovementAction(u32 direction);
 u8 GetAcroPopWheelieMoveDirectionMovementAction(u32 direction);
 u8 GetAcroWheelieMoveDirectionMovementAction(u32 direction);
 u8 sub_80641EC(u32 direction);
-u8 sub_8063510(u8 direction);
+u8 GetFishingBiteDirectionAnimNum(u8 direction);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

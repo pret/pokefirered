@@ -153,8 +153,6 @@ static void sub_80632BC(struct Sprite *);
 static void sub_80632E0(struct Sprite *);
 static void MovementType_WanderAroundDuplicate(struct Sprite *);
 
-extern void MovementType_Player(struct Sprite *);
-
 #define movement_type_def(setup, table)                                                          \
 static u8 setup##_callback(struct ObjectEvent *, struct Sprite *);                               \
 void setup(struct Sprite *sprite)                                                                \
@@ -806,7 +804,7 @@ const u8 gAcroEndWheelieDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x1D,
 };
 
-const u8 gAcroUnusedActionDirectionAnimNums[] = {
+const u8 gUnknown_83A6465[] = {
     [DIR_NONE]      = 0x18,
     [DIR_SOUTH]     = 0x18,
     [DIR_NORTH]     = 0x19,
@@ -818,7 +816,7 @@ const u8 gAcroUnusedActionDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x1B,
 };
 
-const u8 gAcroWheeliePedalDirectionAnimNums[] = {
+const u8 gAcroUnusedActionDirectionAnimNums[] = {
     [DIR_NONE]      = 0x20,
     [DIR_SOUTH]     = 0x20,
     [DIR_NORTH]     = 0x21,
@@ -830,7 +828,7 @@ const u8 gAcroWheeliePedalDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x21,
 };
 
-const u8 gFishingDirectionAnimNums[] = {
+const u8 gAcroWheeliePedalDirectionAnimNums[] = {
     [DIR_NONE]      = 0x24,
     [DIR_SOUTH]     = 0x24,
     [DIR_NORTH]     = 0x25,
@@ -842,7 +840,7 @@ const u8 gFishingDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x25,
 };
 
-const u8 gFishingNoCatchDirectionAnimNums[] = {
+const u8 gFishingDirectionAnimNums[] = {
     [DIR_NONE]      = 0x0,
     [DIR_SOUTH]     = 0x0,
     [DIR_NORTH]     = 0x1,
@@ -854,7 +852,7 @@ const u8 gFishingNoCatchDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x1,
 };
 
-const u8 gFishingBiteDirectionAnimNums[] = {
+const u8 gFishingNoCatchDirectionAnimNums[] = {
     [DIR_NONE]      = 0x4,
     [DIR_SOUTH]     = 0x4,
     [DIR_NORTH]     = 0x5,
@@ -866,7 +864,7 @@ const u8 gFishingBiteDirectionAnimNums[] = {
     [DIR_NORTHEAST] = 0x5,
 };
 
-const u8 gUnknown_83A648A[] = {
+const u8 gFishingBiteDirectionAnimNums[] = {
     [DIR_NONE]      = 0x8,
     [DIR_SOUTH]     = 0x8,
     [DIR_NORTH]     = 0x9,
@@ -4917,8 +4915,6 @@ static void ClearObjectEventMovement(struct ObjectEvent *objectEvent, struct Spr
     sprite->data[1] = 0;
 }
 
-// Off by one error
-
 u8 GetFaceDirectionAnimNum(u8 direction)
 {
     return gFaceDirectionAnimNums[direction];
@@ -4964,6 +4960,11 @@ u8 GetAcroEndWheelieDirectionAnimNum(u8 direction)
     return gAcroEndWheelieDirectionAnimNums[direction];
 }
 
+u8 sub_80634C0(u8 direction)
+{
+    return gUnknown_83A6465[direction];
+}
+
 u8 GetAcroUnusedActionDirectionAnimNum(u8 direction)
 {
     return gAcroUnusedActionDirectionAnimNums[direction];
@@ -4987,11 +4988,6 @@ u8 GetFishingNoCatchDirectionAnimNum(u8 direction)
 u8 GetFishingBiteDirectionAnimNum(u8 direction)
 {
     return gFishingBiteDirectionAnimNums[direction];
-}
-
-u8 sub_8063510(u8 direction)
-{
-    return gUnknown_83A648A[direction];
 }
 
 u8 GetRunningDirectionAnimNum(u8 direction)
@@ -7539,7 +7535,7 @@ void sub_8066C70(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 dire
 {
     SetObjectEventDirection(objectEvent, direction);
     ShiftStillObjectEventCoords(objectEvent);
-    obj_npc_animation_step(objectEvent, sprite, GetFishingDirectionAnimNum(direction));
+    obj_npc_animation_step(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(direction));
     sprite->animPaused = TRUE;
     sprite->data[2] = 1;
 }
@@ -7618,25 +7614,25 @@ static bool8 MovementAction_AcroEndWheelieFaceRight_Step0(struct ObjectEvent *ob
 
 static bool8 MovementAction_UnusedAcroActionDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, GetAcroWheeliePedalDirectionAnimNum(DIR_SOUTH));
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_SOUTH, GetAcroUnusedActionDirectionAnimNum(DIR_SOUTH));
     return FALSE;
 }
 
 static bool8 MovementAction_UnusedAcroActionUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_NORTH, GetAcroWheeliePedalDirectionAnimNum(DIR_NORTH));
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_NORTH, GetAcroUnusedActionDirectionAnimNum(DIR_NORTH));
     return FALSE;
 }
 
 static bool8 MovementAction_UnusedAcroActionLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_WEST, GetAcroWheeliePedalDirectionAnimNum(DIR_WEST));
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_WEST, GetAcroUnusedActionDirectionAnimNum(DIR_WEST));
     return FALSE;
 }
 
 static bool8 MovementAction_UnusedAcroActionRight_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(objectEvent, sprite, DIR_EAST, GetAcroWheeliePedalDirectionAnimNum(DIR_EAST));
+    StartSpriteAnimInDirection(objectEvent, sprite, DIR_EAST, GetAcroUnusedActionDirectionAnimNum(DIR_EAST));
     return FALSE;
 }
 
@@ -7853,25 +7849,25 @@ static bool8 MovementAction_AcroWheelieJumpRight_Step1(struct ObjectEvent *objec
 
 static bool8 MovementActionFunc_x88_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_80656C4(objectEvent, sprite, DIR_SOUTH, GetFishingDirectionAnimNum(DIR_SOUTH), 8);
+    sub_80656C4(objectEvent, sprite, DIR_SOUTH, GetAcroWheeliePedalDirectionAnimNum(DIR_SOUTH), 8);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x89_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_80656C4(objectEvent, sprite, DIR_NORTH, GetFishingDirectionAnimNum(DIR_NORTH), 8);
+    sub_80656C4(objectEvent, sprite, DIR_NORTH, GetAcroWheeliePedalDirectionAnimNum(DIR_NORTH), 8);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x8A_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_80656C4(objectEvent, sprite, DIR_WEST, GetFishingDirectionAnimNum(DIR_WEST), 8);
+    sub_80656C4(objectEvent, sprite, DIR_WEST, GetAcroWheeliePedalDirectionAnimNum(DIR_WEST), 8);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
 static bool8 MovementActionFunc_x8B_0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    sub_80656C4(objectEvent, sprite, DIR_EAST, GetFishingDirectionAnimNum(DIR_EAST), 8);
+    sub_80656C4(objectEvent, sprite, DIR_EAST, GetAcroWheeliePedalDirectionAnimNum(DIR_EAST), 8);
     return MovementAction_WalkInPlace_Step1(objectEvent, sprite);
 }
 
@@ -7949,7 +7945,7 @@ static bool8 MovementAction_AcroPopWheelieMoveRight_Step1(struct ObjectEvent *ob
 void sub_806751C(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
     npc_apply_direction(objectEvent, sprite, direction, speed);
-    npc_apply_anim_looping(objectEvent, sprite, GetFishingDirectionAnimNum(objectEvent->facingDirection));
+    npc_apply_anim_looping(objectEvent, sprite, GetAcroWheeliePedalDirectionAnimNum(objectEvent->facingDirection));
 }
 
 static bool8 MovementAction_AcroWheelieMoveDown_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
@@ -8019,7 +8015,7 @@ static bool8 MovementAction_AcroWheelieMoveRight_Step1(struct ObjectEvent *objec
 void sub_806764C(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 speed)
 {
     npc_apply_direction(objectEvent, sprite, direction, speed);
-    npc_apply_anim_looping(objectEvent, sprite, GetAcroUnusedActionDirectionAnimNum(objectEvent->facingDirection));
+    npc_apply_anim_looping(objectEvent, sprite, sub_80634C0(objectEvent->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
 

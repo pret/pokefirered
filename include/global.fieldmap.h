@@ -185,10 +185,10 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ struct MapLayout *mapLayout;
-    /* 0x04 */ struct MapEvents *events;
-    /* 0x08 */ u8 *mapScripts;
-    /* 0x0C */ struct MapConnections *connections;
+    /* 0x00 */ const struct MapLayout *mapLayout;
+    /* 0x04 */ const struct MapEvents *events;
+    /* 0x08 */ const u8 *mapScripts;
+    /* 0x0C */ const struct MapConnections *connections;
     /* 0x10 */ u16 music;
     /* 0x12 */ u16 mapLayoutId;
     /* 0x14 */ u8 regionMapSectionId;

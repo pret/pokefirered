@@ -24,7 +24,7 @@ void GetCameraCoords(u16*, u16*);
 bool8 MapGridIsImpassableAt(s32, s32);
 s32 GetMapBorderIdAt(s32, s32);
 bool32 CanCameraMoveInDirection(s32);
-u32 GetBehaviorByMetatileIdAndMapLayout(struct MapLayout *mapLayout, u16 metatile, u8 attr);
+u32 GetBehaviorByMetatileIdAndMapLayout(const struct MapLayout *mapLayout, u16 metatile, u8 attr);
 const struct MapHeader * mapconnection_get_mapheader(struct MapConnection * connection);
 struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
 void sub_8059948(u8 a0, u8 a1);
@@ -34,5 +34,7 @@ u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr);
 void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2);
 bool8 CameraMove(s32 x, s32 y);
+void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
+void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
 
 #endif //GUARD_FIELDMAP_H

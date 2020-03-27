@@ -5,498 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8054F68
-sub_8054F68: @ 8054F68
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	movs r0, 0
-	mov r9, r0
-	mov r8, r0
-	ldr r1, _08055040 @ =gMapHeader
-	ldr r0, [r1, 0x4]
-	ldrb r0, [r0]
-	cmp r9, r0
-	bcc _08054F86
-	b _08055092
-_08054F86:
-	ldr r2, _08055044 @ =gSaveBlock1Ptr
-	mov r10, r2
-_08054F8A:
-	ldr r3, _08055040 @ =gMapHeader
-	ldr r0, [r3, 0x4]
-	ldr r1, [r0, 0x4]
-	mov r4, r9
-	lsls r0, r4, 1
-	add r0, r9
-	lsls r7, r0, 3
-	adds r2, r7, r1
-	ldrb r0, [r2, 0x2]
-	cmp r0, 0xFF
-	bne _08055054
-	ldrb r4, [r2, 0x8]
-	ldrb r5, [r2, 0xC]
-	str r5, [sp]
-	ldrb r2, [r2, 0xE]
-	str r2, [sp, 0x4]
-	adds r0, r2, 0
-	adds r1, r5, 0
-	bl Overworld_GetMapHeaderByGroupAndId
-	mov r6, r10
-	ldr r1, [r6]
-	mov r2, r8
-	lsls r3, r2, 1
-	add r3, r8
-	lsls r3, 3
-	adds r1, r3
-	ldr r0, [r0, 0x4]
-	ldr r2, [r0, 0x4]
-	lsls r0, r4, 1
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r2
-	movs r5, 0x8E
-	lsls r5, 4
-	adds r1, r5
-	subs r0, 0x18
-	ldm r0!, {r2,r5,r6}
-	stm r1!, {r2,r5,r6}
-	ldm r0!, {r2,r5,r6}
-	stm r1!, {r2,r5,r6}
-	mov r6, r10
-	ldr r1, [r6]
-	adds r1, r3
-	ldr r2, _08055040 @ =gMapHeader
-	ldr r0, [r2, 0x4]
-	ldr r0, [r0, 0x4]
-	adds r0, r7, r0
-	ldrb r0, [r0]
-	movs r5, 0x8E
-	lsls r5, 4
-	adds r1, r5
-	strb r0, [r1]
-	ldr r1, [r6]
-	adds r1, r3
-	ldr r0, [r2, 0x4]
-	ldr r0, [r0, 0x4]
-	adds r0, r7, r0
-	ldrh r2, [r0, 0x4]
-	ldr r6, _08055048 @ =0x000008e4
-	adds r0, r1, r6
-	strh r2, [r0]
-	ldr r2, _08055040 @ =gMapHeader
-	ldr r0, [r2, 0x4]
-	ldr r0, [r0, 0x4]
-	adds r0, r7, r0
-	ldrh r2, [r0, 0x6]
-	adds r5, 0x6
-	adds r0, r1, r5
-	strh r2, [r0]
-	adds r6, 0x4
-	adds r1, r6
-	strb r4, [r1]
-	mov r1, r10
-	ldr r0, [r1]
-	adds r0, r3
-	ldr r2, _0805504C @ =0x000008ec
-	adds r1, r0, r2
-	mov r3, sp
-	ldrh r3, [r3]
-	strh r3, [r1]
-	ldr r4, _08055050 @ =0x000008ee
-	adds r1, r0, r4
-	mov r5, sp
-	ldrh r5, [r5, 0x4]
-	strh r5, [r1]
-	subs r6, 0x6
-	adds r0, r6
-	movs r1, 0xFF
-	strb r1, [r0]
-	b _08055072
-	.align 2, 0
-_08055040: .4byte gMapHeader
-_08055044: .4byte gSaveBlock1Ptr
-_08055048: .4byte 0x000008e4
-_0805504C: .4byte 0x000008ec
-_08055050: .4byte 0x000008ee
-_08055054:
-	mov r0, r10
-	ldr r1, [r0]
-	mov r3, r8
-	lsls r0, r3, 1
-	add r0, r8
-	lsls r0, 3
-	adds r1, r0
-	movs r4, 0x8E
-	lsls r4, 4
-	adds r1, r4
-	adds r0, r2, 0
-	ldm r0!, {r2,r5,r6}
-	stm r1!, {r2,r5,r6}
-	ldm r0!, {r3-r5}
-	stm r1!, {r3-r5}
-_08055072:
-	mov r0, r8
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	mov r0, r9
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	ldr r6, _080550A4 @ =gMapHeader
-	ldr r0, [r6, 0x4]
-	ldrb r0, [r0]
-	cmp r9, r0
-	bcs _08055092
-	b _08054F8A
-_08055092:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080550A4: .4byte gMapHeader
-	thumb_func_end sub_8054F68
-
-	thumb_func_start sub_80550A8
-sub_80550A8: @ 80550A8
-	push {lr}
-	ldr r0, _080550D0 @ =gMapHeader
-	ldr r1, [r0, 0x4]
-	ldr r0, _080550D4 @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, [r1, 0x4]
-	movs r3, 0x8E
-	lsls r3, 4
-	adds r1, r0, r3
-	movs r3, 0x3F
-_080550BC:
-	ldr r0, [r2, 0x10]
-	str r0, [r1, 0x10]
-	adds r2, 0x18
-	adds r1, 0x18
-	subs r3, 0x1
-	cmp r3, 0
-	bge _080550BC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080550D0: .4byte gMapHeader
-_080550D4: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_80550A8
-
-	thumb_func_start Overworld_SetMapObjTemplateCoords
-Overworld_SetMapObjTemplateCoords: @ 80550D8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 16
-	lsrs r4, r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r0, _08055100 @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	movs r1, 0
-	movs r6, 0x8E
-	lsls r6, 4
-	adds r3, r0, r6
-_080550F2:
-	ldrb r0, [r3]
-	cmp r0, r5
-	bne _08055104
-	strh r4, [r3, 0x4]
-	strh r2, [r3, 0x6]
-	b _0805510C
-	.align 2, 0
-_08055100: .4byte gSaveBlock1Ptr
-_08055104:
-	adds r3, 0x18
-	adds r1, 0x1
-	cmp r1, 0x3F
-	ble _080550F2
-_0805510C:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end Overworld_SetMapObjTemplateCoords
-
-	thumb_func_start Overworld_SetMapObjTemplateMovementType
-Overworld_SetMapObjTemplateMovementType: @ 8055114
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, _08055134 @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	movs r3, 0
-	movs r5, 0x8E
-	lsls r5, 4
-	adds r2, r0, r5
-_0805512A:
-	ldrb r0, [r2]
-	cmp r0, r4
-	bne _08055138
-	strb r1, [r2, 0x9]
-	b _08055140
-	.align 2, 0
-_08055134: .4byte gSaveBlock1Ptr
-_08055138:
-	adds r2, 0x18
-	adds r3, 0x1
-	cmp r3, 0x3F
-	ble _0805512A
-_08055140:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end Overworld_SetMapObjTemplateMovementType
-
-	thumb_func_start mapdata_load_assets_to_gpu_and_full_redraw
-mapdata_load_assets_to_gpu_and_full_redraw: @ 8055148
-	push {r4,lr}
-	bl move_tilemap_camera_to_upper_left_corner
-	ldr r4, _0805516C @ =gMapHeader
-	ldr r0, [r4]
-	bl copy_map_tileset1_tileset2_to_vram
-	ldr r0, [r4]
-	bl apply_map_tileset1_tileset2_palette
-	bl DrawWholeMapView
-	bl InitTilesetAnimations
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805516C: .4byte gMapHeader
-	thumb_func_end mapdata_load_assets_to_gpu_and_full_redraw
-
-	thumb_func_start get_mapdata_header
-get_mapdata_header: @ 8055170
-	push {lr}
-	ldr r0, _08055180 @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrh r1, [r0, 0x32]
-	cmp r1, 0
-	bne _08055184
-	movs r0, 0
-	b _0805518E
-	.align 2, 0
-_08055180: .4byte gSaveBlock1Ptr
-_08055184:
-	ldr r0, _08055194 @ =gMapLayouts
-	subs r1, 0x1
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-_0805518E:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08055194: .4byte gMapLayouts
-	thumb_func_end get_mapdata_header
-
-	thumb_func_start warp_shift
-warp_shift: @ 8055198
-	ldr r3, _080551C4 @ =gUnknown_2031DB4
-	ldr r0, _080551C8 @ =gSaveBlock1Ptr
-	ldr r2, [r0]
-	ldr r0, [r2, 0x4]
-	ldr r1, [r2, 0x8]
-	str r0, [r3]
-	str r1, [r3, 0x4]
-	ldr r0, _080551CC @ =gUnknown_2031DBC
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r2, 0x4]
-	str r1, [r2, 0x8]
-	ldr r2, _080551D0 @ =gUnknown_2031DC4
-	ldr r0, _080551D4 @ =sDummyWarpData
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	ldr r2, _080551D8 @ =gUnknown_2031DCC
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	bx lr
-	.align 2, 0
-_080551C4: .4byte gUnknown_2031DB4
-_080551C8: .4byte gSaveBlock1Ptr
-_080551CC: .4byte gUnknown_2031DBC
-_080551D0: .4byte gUnknown_2031DC4
-_080551D4: .4byte sDummyWarpData
-_080551D8: .4byte gUnknown_2031DCC
-	thumb_func_end warp_shift
-
-	thumb_func_start warp_set
-warp_set: @ 80551DC
-	push {r4,r5,lr}
-	ldr r4, [sp, 0xC]
-	ldr r5, [sp, 0x10]
-	strb r1, [r0]
-	strb r2, [r0, 0x1]
-	strb r3, [r0, 0x2]
-	lsls r4, 24
-	asrs r4, 24
-	strh r4, [r0, 0x4]
-	lsls r5, 24
-	asrs r5, 24
-	strh r5, [r0, 0x6]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end warp_set
-
-	thumb_func_start warp_data_is_not_neg_1
-warp_data_is_not_neg_1: @ 80551FC
-	push {lr}
-	adds r1, r0, 0
-	movs r2, 0
-	ldrsb r2, [r1, r2]
-	movs r0, 0x1
-	negs r0, r0
-	cmp r2, r0
-	bne _08055230
-	movs r0, 0x1
-	ldrsb r0, [r1, r0]
-	cmp r0, r2
-	bne _08055230
-	movs r2, 0x2
-	ldrsb r2, [r1, r2]
-	cmp r2, r0
-	bne _08055230
-	movs r0, 0x4
-	ldrsh r3, [r1, r0]
-	cmp r3, r2
-	bne _08055230
-	movs r2, 0x6
-	ldrsh r0, [r1, r2]
-	cmp r0, r3
-	bne _08055230
-	movs r0, 0x1
-	b _08055232
-_08055230:
-	movs r0, 0
-_08055232:
-	pop {r1}
-	bx r1
-	thumb_func_end warp_data_is_not_neg_1
-
-	thumb_func_start Overworld_GetMapHeaderByGroupAndId
-Overworld_GetMapHeaderByGroupAndId: @ 8055238
-	lsls r0, 16
-	lsls r1, 16
-	ldr r2, _0805524C @ =gMapGroups
-	lsrs r0, 14
-	adds r0, r2
-	ldr r0, [r0]
-	lsrs r1, 14
-	adds r1, r0
-	ldr r0, [r1]
-	bx lr
-	.align 2, 0
-_0805524C: .4byte gMapGroups
-	thumb_func_end Overworld_GetMapHeaderByGroupAndId
-
-	thumb_func_start warp1_get_mapheader
-warp1_get_mapheader: @ 8055250
-	push {lr}
-	ldr r1, _08055270 @ =gUnknown_2031DBC
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x1]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl Overworld_GetMapHeaderByGroupAndId
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08055270: .4byte gUnknown_2031DBC
-	thumb_func_end warp1_get_mapheader
-
-	thumb_func_start set_current_map_header_from_sav1_save_old_name
-set_current_map_header_from_sav1_save_old_name: @ 8055274
-	push {r4-r6,lr}
-	ldr r4, _080552B4 @ =gMapHeader
-	ldr r5, _080552B8 @ =gSaveBlock1Ptr
-	ldr r1, [r5]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl Overworld_GetMapHeaderByGroupAndId
-	adds r1, r4, 0
-	ldm r0!, {r2,r3,r6}
-	stm r1!, {r2,r3,r6}
-	ldm r0!, {r2,r3,r6}
-	stm r1!, {r2,r3,r6}
-	ldr r0, [r0]
-	str r0, [r1]
-	ldr r1, [r5]
-	ldrh r0, [r4, 0x12]
-	strh r0, [r1, 0x32]
-	bl get_mapdata_header
-	str r0, [r4]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080552B4: .4byte gMapHeader
-_080552B8: .4byte gSaveBlock1Ptr
-	thumb_func_end set_current_map_header_from_sav1_save_old_name
-
-	thumb_func_start set_current_map_header_from_sav1
-set_current_map_header_from_sav1: @ 80552BC
-	push {r4,r5,lr}
-	ldr r4, _080552F4 @ =gMapHeader
-	ldr r0, _080552F8 @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl Overworld_GetMapHeaderByGroupAndId
-	adds r1, r4, 0
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldm r0!, {r2,r3,r5}
-	stm r1!, {r2,r3,r5}
-	ldr r0, [r0]
-	str r0, [r1]
-	bl get_mapdata_header
-	str r0, [r4]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080552F4: .4byte gMapHeader
-_080552F8: .4byte gSaveBlock1Ptr
-	thumb_func_end set_current_map_header_from_sav1
-
 	thumb_func_start update_camera_pos_from_warpid
 update_camera_pos_from_warpid: @ 80552FC
 	push {r4,r5,lr}
@@ -567,8 +75,8 @@ _08055374: .4byte gMapHeader
 	thumb_func_start WarpIntoMap
 WarpIntoMap: @ 8055378
 	push {lr}
-	bl warp_shift
-	bl set_current_map_header_from_sav1_save_old_name
+	bl ApplyCurrentWarp
+	bl LoadCurrentMapData
 	bl update_camera_pos_from_warpid
 	pop {r0}
 	bx r0
@@ -582,7 +90,7 @@ SetWarpDestination: @ 805538C
 	adds r5, r1, 0
 	adds r6, r2, 0
 	ldr r1, [sp, 0x18]
-	ldr r0, _080553C4 @ =gUnknown_2031DBC
+	ldr r0, _080553C4 @ =sWarpDestination
 	lsls r4, 24
 	asrs r4, 24
 	lsls r5, 24
@@ -598,13 +106,13 @@ SetWarpDestination: @ 805538C
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080553C4: .4byte gUnknown_2031DBC
+_080553C4: .4byte sWarpDestination
 	thumb_func_end SetWarpDestination
 
 	thumb_func_start SetWarpDestinationToMapWarp
@@ -646,7 +154,7 @@ SetDynamicWarp: @ 80553E8
 	movs r4, 0x2
 	ldrsb r4, [r5, r4]
 	str r4, [sp, 0x4]
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -676,7 +184,7 @@ SetDynamicWarpWithCoords: @ 805541C
 	lsls r5, 24
 	asrs r5, 24
 	str r5, [sp, 0x4]
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -687,7 +195,7 @@ _08055450: .4byte gSaveBlock1Ptr
 
 	thumb_func_start SetWarpDestinationToDynamicWarp
 SetWarpDestinationToDynamicWarp: @ 8055454
-	ldr r2, _08055464 @ =gUnknown_2031DBC
+	ldr r2, _08055464 @ =sWarpDestination
 	ldr r0, _08055468 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x18]
@@ -696,7 +204,7 @@ SetWarpDestinationToDynamicWarp: @ 8055454
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08055464: .4byte gUnknown_2031DBC
+_08055464: .4byte sWarpDestination
 _08055468: .4byte gSaveBlock1Ptr
 	thumb_func_end SetWarpDestinationToDynamicWarp
 
@@ -732,7 +240,7 @@ _0805549A:
 
 	thumb_func_start copy_saved_warp3_bank_and_enter_x_to_warp1
 copy_saved_warp3_bank_and_enter_x_to_warp1: @ 80554A4
-	ldr r2, _080554B4 @ =gUnknown_2031DBC
+	ldr r2, _080554B4 @ =sWarpDestination
 	ldr r0, _080554B8 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x20]
@@ -741,19 +249,19 @@ copy_saved_warp3_bank_and_enter_x_to_warp1: @ 80554A4
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_080554B4: .4byte gUnknown_2031DBC
+_080554B4: .4byte sWarpDestination
 _080554B8: .4byte gSaveBlock1Ptr
 	thumb_func_end copy_saved_warp3_bank_and_enter_x_to_warp1
 
 	thumb_func_start Overworld_SetWhiteoutRespawnPoint
 Overworld_SetWhiteoutRespawnPoint: @ 80554BC
 	push {lr}
-	ldr r0, _080554C8 @ =gUnknown_2031DBC
+	ldr r0, _080554C8 @ =sWarpDestination
 	bl SetWhiteoutRespawnWarpAndHealerNpc
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080554C8: .4byte gUnknown_2031DBC
+_080554C8: .4byte sWarpDestination
 	thumb_func_end Overworld_SetWhiteoutRespawnPoint
 
 	thumb_func_start SetLastHealLocationWarp
@@ -781,7 +289,7 @@ SetLastHealLocationWarp: @ 80554CC
 	movs r4, 0x4
 	ldrsb r4, [r5, r4]
 	str r4, [sp, 0x4]
-	bl warp_set
+	bl SetWarpData
 _08055500:
 	add sp, 0x8
 	pop {r4,r5}
@@ -803,7 +311,7 @@ UpdateEscapeWarp: @ 805550C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _08055598 @ =gUnknown_2031DBC
+	ldr r1, _08055598 @ =sWarpDestination
 	movs r0, 0
 	ldrsb r0, [r1, r0]
 	ldrb r1, [r1, 0x1]
@@ -859,7 +367,7 @@ _08055590:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055598: .4byte gUnknown_2031DBC
+_08055598: .4byte sWarpDestination
 _0805559C: .4byte gSaveBlock1Ptr
 	thumb_func_end UpdateEscapeWarp
 
@@ -889,7 +397,7 @@ SetEscapeWarp: @ 80555A0
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -900,7 +408,7 @@ _080555DC: .4byte gSaveBlock1Ptr
 
 	thumb_func_start sub_80555E0
 sub_80555E0: @ 80555E0
-	ldr r2, _080555F0 @ =gUnknown_2031DBC
+	ldr r2, _080555F0 @ =sWarpDestination
 	ldr r0, _080555F4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x28]
@@ -909,7 +417,7 @@ sub_80555E0: @ 80555E0
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_080555F0: .4byte gUnknown_2031DBC
+_080555F0: .4byte sWarpDestination
 _080555F4: .4byte gSaveBlock1Ptr
 	thumb_func_end sub_80555E0
 
@@ -921,7 +429,7 @@ SetFixedDiveWarp: @ 80555F8
 	adds r5, r1, 0
 	adds r6, r2, 0
 	ldr r1, [sp, 0x18]
-	ldr r0, _08055630 @ =gUnknown_2031DC4
+	ldr r0, _08055630 @ =gFixedDiveWarp
 	lsls r4, 24
 	asrs r4, 24
 	lsls r5, 24
@@ -937,27 +445,27 @@ SetFixedDiveWarp: @ 80555F8
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055630: .4byte gUnknown_2031DC4
+_08055630: .4byte gFixedDiveWarp
 	thumb_func_end SetFixedDiveWarp
 
 	thumb_func_start warp1_set_to_warp2
 warp1_set_to_warp2: @ 8055634
-	ldr r2, _08055644 @ =gUnknown_2031DBC
-	ldr r0, _08055648 @ =gUnknown_2031DC4
+	ldr r2, _08055644 @ =sWarpDestination
+	ldr r0, _08055648 @ =gFixedDiveWarp
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08055644: .4byte gUnknown_2031DBC
-_08055648: .4byte gUnknown_2031DC4
+_08055644: .4byte sWarpDestination
+_08055648: .4byte gFixedDiveWarp
 	thumb_func_end warp1_set_to_warp2
 
 	thumb_func_start SetFixedHoleWarp
@@ -968,7 +476,7 @@ SetFixedHoleWarp: @ 805564C
 	adds r5, r1, 0
 	adds r6, r2, 0
 	ldr r1, [sp, 0x18]
-	ldr r0, _08055684 @ =gUnknown_2031DCC
+	ldr r0, _08055684 @ =gFixedHoleWarp
 	lsls r4, 24
 	asrs r4, 24
 	lsls r5, 24
@@ -984,13 +492,13 @@ SetFixedHoleWarp: @ 805564C
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055684: .4byte gUnknown_2031DCC
+_08055684: .4byte gFixedHoleWarp
 	thumb_func_end SetFixedHoleWarp
 
 	thumb_func_start SetWarpDestinationToFixedHoleWarp
@@ -1001,22 +509,22 @@ SetWarpDestinationToFixedHoleWarp: @ 8055688
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r4, _080556B0 @ =gUnknown_2031DCC
+	ldr r4, _080556B0 @ =gFixedHoleWarp
 	adds r0, r4, 0
-	bl warp_data_is_not_neg_1
+	bl IsDummyWarp
 	cmp r0, 0x1
 	bne _080556BC
-	ldr r2, _080556B4 @ =gUnknown_2031DBC
-	ldr r0, _080556B8 @ =gUnknown_2031DB4
+	ldr r2, _080556B4 @ =sWarpDestination
+	ldr r0, _080556B8 @ =gLastUsedWarp
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	b _080556D6
 	.align 2, 0
-_080556B0: .4byte gUnknown_2031DCC
-_080556B4: .4byte gUnknown_2031DBC
-_080556B8: .4byte gUnknown_2031DB4
+_080556B0: .4byte gFixedHoleWarp
+_080556B4: .4byte sWarpDestination
+_080556B8: .4byte gLastUsedWarp
 _080556BC:
 	movs r0, 0
 	ldrsb r0, [r4, r0]
@@ -1039,7 +547,7 @@ _080556D6:
 
 	thumb_func_start warp1_set_to_sav1w
 warp1_set_to_sav1w: @ 80556E0
-	ldr r2, _080556F0 @ =gUnknown_2031DBC
+	ldr r2, _080556F0 @ =sWarpDestination
 	ldr r0, _080556F4 @ =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x10]
@@ -1048,7 +556,7 @@ warp1_set_to_sav1w: @ 80556E0
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_080556F0: .4byte gUnknown_2031DBC
+_080556F0: .4byte sWarpDestination
 _080556F4: .4byte gSaveBlock1Ptr
 	thumb_func_end warp1_set_to_sav1w
 
@@ -1078,7 +586,7 @@ sub_80556F8: @ 80556F8
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl warp_set
+	bl SetWarpData
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1112,7 +620,7 @@ sub_8055738: @ 8055738
 	movs r4, 0x4
 	ldrsb r4, [r5, r4]
 	str r4, [sp, 0x4]
-	bl warp_set
+	bl SetWarpData
 _0805576C:
 	add sp, 0x8
 	pop {r4,r5}
@@ -1202,14 +710,14 @@ sub_80557C4: @ 80557C4
 	b _08055818
 _080557FC:
 	bl mapheader_run_script_with_tag_x6
-	ldr r0, _08055810 @ =gUnknown_2031DC4
-	bl warp_data_is_not_neg_1
+	ldr r0, _08055810 @ =gFixedDiveWarp
+	bl IsDummyWarp
 	cmp r0, 0
 	beq _08055814
 	movs r0, 0
 	b _0805581A
 	.align 2, 0
-_08055810: .4byte gUnknown_2031DC4
+_08055810: .4byte gFixedDiveWarp
 _08055814:
 	bl warp1_set_to_warp2
 _08055818:
@@ -1273,8 +781,8 @@ sub_8055864: @ 8055864
 	adds r2, r3, 0
 	bl SetWarpDestination
 	bl sub_8055E94
-	bl warp_shift
-	bl set_current_map_header_from_sav1_save_old_name
+	bl ApplyCurrentWarp
+	bl LoadCurrentMapData
 	bl sub_8054F68
 	bl TrySetMapSaveWarpStatus
 	bl sub_806E110
@@ -1331,7 +839,7 @@ _0805591C: .4byte gMapHeader
 	thumb_func_start sub_8055920
 sub_8055920: @ 8055920
 	push {r4,lr}
-	bl set_current_map_header_from_sav1_save_old_name
+	bl LoadCurrentMapData
 	bl sub_8054F68
 	ldr r0, _0805599C @ =gMapHeader
 	ldrb r0, [r0, 0x17]
@@ -1382,7 +890,7 @@ _080559A4: .4byte 0x00000806
 	thumb_func_start sub_80559A8
 sub_80559A8: @ 80559A8
 	push {lr}
-	bl set_current_map_header_from_sav1_save_old_name
+	bl LoadCurrentMapData
 	bl sub_8054F68
 	ldr r0, _080559E0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
@@ -1393,7 +901,7 @@ sub_80559A8: @ 80559A8
 	bl sub_8055CB8
 	bl sub_8110920
 	bl sub_8111708
-	bl set_current_map_header_from_sav1
+	bl LoadSaveblockMapHeader
 	bl InitMap
 	pop {r0}
 	bx r0
@@ -1872,7 +1380,7 @@ SetCurrentMapLayout: @ 8055D40
 	ldr r1, _08055D54 @ =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x32]
-	bl get_mapdata_header
+	bl GetMapLayout
 	ldr r1, _08055D58 @ =gMapHeader
 	str r0, [r1]
 	pop {r0}
@@ -1884,14 +1392,14 @@ _08055D58: .4byte gMapHeader
 
 	thumb_func_start sub_8055D5C
 sub_8055D5C: @ 8055D5C
-	ldr r2, _08055D68 @ =gUnknown_2031DBC
+	ldr r2, _08055D68 @ =sWarpDestination
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08055D68: .4byte gUnknown_2031DBC
+_08055D68: .4byte sWarpDestination
 	thumb_func_end sub_8055D5C
 
 	thumb_func_start sub_8055D6C
@@ -1931,14 +1439,14 @@ _08055DA0: .4byte gSaveBlock1Ptr
 	thumb_func_start sub_8055DA4
 sub_8055DA4: @ 8055DA4
 	push {lr}
-	ldr r0, _08055DB4 @ =gUnknown_2031DBC
+	ldr r0, _08055DB4 @ =sWarpDestination
 	bl sub_8055D6C
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08055DB4: .4byte gUnknown_2031DBC
+_08055DB4: .4byte sWarpDestination
 	thumb_func_end sub_8055DA4
 
 	thumb_func_start sub_8055DB8
@@ -2166,7 +1674,7 @@ _08055F62:
 	thumb_func_start GetMapMusicFadeoutSpeed
 GetMapMusicFadeoutSpeed: @ 8055F68
 	push {lr}
-	bl warp1_get_mapheader
+	bl GetDestinationWarpMapHeader
 	ldrb r0, [r0, 0x17]
 	bl IsMapTypeIndoors
 	lsls r0, 24
@@ -2473,20 +1981,20 @@ _0805619C: .4byte gSaveBlock1Ptr
 	thumb_func_start GetLastUsedWarpMapType
 GetLastUsedWarpMapType: @ 80561A0
 	push {lr}
-	ldr r0, _080561B0 @ =gUnknown_2031DB4
+	ldr r0, _080561B0 @ =gLastUsedWarp
 	bl get_map_light_level_from_warp
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080561B0: .4byte gUnknown_2031DB4
+_080561B0: .4byte gLastUsedWarp
 	thumb_func_end GetLastUsedWarpMapType
 
 	thumb_func_start GetLastUsedWarpMapSectionId
 GetLastUsedWarpMapSectionId: @ 80561B4
 	push {lr}
-	ldr r1, _080561D4 @ =gUnknown_2031DB4
+	ldr r1, _080561D4 @ =gLastUsedWarp
 	movs r0, 0
 	ldrsb r0, [r1, r0]
 	lsls r0, 16
@@ -2501,7 +2009,7 @@ GetLastUsedWarpMapSectionId: @ 80561B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080561D4: .4byte gUnknown_2031DB4
+_080561D4: .4byte gLastUsedWarp
 	thumb_func_end GetLastUsedWarpMapSectionId
 
 	thumb_func_start IsMapTypeOutdoors
@@ -3410,7 +2918,7 @@ CB2_ContinueSavedGame: @ 8056938
 	bl FieldClearVBlankHBlankCallbacks
 	bl StopMapMusic
 	bl sub_8056420
-	bl set_current_map_header_from_sav1
+	bl LoadSaveblockMapHeader
 	bl sub_80550A8
 	bl UnfreezeObjectEvents
 	bl sub_8054E40
@@ -4514,7 +4022,7 @@ sub_80572A8: @ 80572A8
 	ldr r0, _080572D0 @ =gUnknown_2036E28
 	movs r1, 0x1
 	strb r1, [r0]
-	bl set_current_map_header_from_sav1
+	bl LoadSaveblockMapHeader
 	bl ScriptContext1_Init
 	bl ScriptContext2_Disable
 	movs r0, 0
@@ -4695,7 +4203,7 @@ sub_8057430: @ 8057430
 	movs r0, 0x3
 	strb r0, [r1]
 	bl sub_8056420
-	bl set_current_map_header_from_sav1
+	bl LoadSaveblockMapHeader
 	bl sub_80550A8
 	bl UnfreezeObjectEvents
 	bl sub_8054E40
@@ -4865,7 +4373,7 @@ _08057560:
 	ands r0, r2
 	adds r6, r0, 0
 	orrs r6, r1
-	ldr r0, _08057608 @ =gUnknown_2031DBC
+	ldr r0, _08057608 @ =sWarpDestination
 	str r5, [r0]
 	str r6, [r0, 0x4]
 	ldr r1, _0805760C @ =gUnknown_2031DE8
@@ -4902,7 +4410,7 @@ _080575F8: .4byte 0xffffff00
 _080575FC: .4byte 0xffff00ff
 _08057600: .4byte 0xffff0000
 _08057604: .4byte 0x0000ffff
-_08057608: .4byte gUnknown_2031DBC
+_08057608: .4byte sWarpDestination
 _0805760C: .4byte gUnknown_2031DE8
 _08057610: .4byte gPaletteFade
 _08057614: .4byte gFieldCallback2

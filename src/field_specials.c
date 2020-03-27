@@ -2040,7 +2040,7 @@ const u16 sPokeCenter1FMaps[] = {
 bool8 sub_80CC87C(void)
 {
     s32 i;
-    u16 mapno = (gUnknown_2031DB4.mapGroup << 8) + gUnknown_2031DB4.mapNum;
+    u16 mapno = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
     for (i = 0; sPokeCenter1FMaps[i] != MAP_UNDEFINED; i++)
     {
         if (sPokeCenter1FMaps[i] == mapno)

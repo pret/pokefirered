@@ -58,8 +58,8 @@ extern struct UCoords32 gDirectionToVectors[];
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern MainCallback gFieldCallback;
 
-extern struct WarpData gUnknown_2031DB4;
-extern struct WarpData gUnknown_2031DBC;
+extern struct WarpData gLastUsedWarp;
+extern struct WarpData sWarpDestination;
 
 extern u8 gUnknown_2031DE0;
 extern u8 gFieldLinkPlayerCount;
@@ -68,7 +68,7 @@ extern u8 gLocalLinkPlayerId;
 void IncrementGameStat(u8 index);
 
 void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
-void Overworld_SetMapObjTemplateMovementType(u8, u8);
+void Overworld_SetObjEventTemplateMovementType(u8, u8);
 
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
@@ -100,7 +100,7 @@ void Overworld_ChangeMusicTo(u16);
 bool32 IsUpdateLinkStateCBActive(void);
 
 void ClearLinkPlayerObjectEvents(void);
-const struct MapHeader *Overworld_GetMapHeaderByGroupAndId(u16, u16);
+const struct MapHeader *const Overworld_GetMapHeaderByGroupAndId(u16, u16);
 void ObjectEventMoveDestCoords(struct ObjectEvent *, u32, s16 *, s16 *);
 void sub_8086230(void);
 void CB2_ReturnToField(void);
@@ -159,7 +159,7 @@ bool32 sub_8058244(void);
 u8 GetCurrentMapType(void);
 
 u8 GetLastUsedWarpMapType(void);
-const struct MapHeader *warp1_get_mapheader(void);
+const struct MapHeader *const GetDestinationWarpMapHeader(void);
 void TryFadeOutOldMapMusic(void);
 void CB2_ReturnToFieldCableClub(void);
 void ResetGameStats(void);
@@ -172,7 +172,7 @@ bool32 sub_8058318(void);
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
 void c2_8056854(void);
-void sub_8054F38(u32 newKey);
+void ApplyNewEncryptionKeyToGameStats(u32 newKey);
 void sub_8055778(int);
 
 void sub_8055738(u8 loc);

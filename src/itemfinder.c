@@ -15,7 +15,7 @@
 static void Task_NoResponse_CleanUp(u8 taskId);
 static void Task_ItemfinderResponseSoundsAndAnims(u8 taskId);
 static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId);
-static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskId);
+static bool8 HiddenItemIsWithinRangeOfPlayer(const struct MapEvents * events, u8 taskId);
 static void SetUnderfootHiddenItem(u8 taskId, u32 hiddenItem);
 static void SetNormalHiddenItem(u8 taskId);
 static void FindHiddenItemsInConnectedMaps(u8 taskId);
@@ -199,7 +199,7 @@ static void Task_ItemfinderUnderfootSoundsAndAnims(u8 taskId)
     tDingTimer++;
 }
 
-static bool8 HiddenItemIsWithinRangeOfPlayer(struct MapEvents * events, u8 taskId)
+static bool8 HiddenItemIsWithinRangeOfPlayer(const struct MapEvents * events, u8 taskId)
 {
     s16 x, y, i, dx, dy;
     PlayerGetDestCoords(&x, &y);
@@ -284,7 +284,7 @@ static void SetNormalHiddenItem(u8 taskId)
     }
 }
 
-static bool8 HiddenItemAtPos(struct MapEvents * events, s16 x, s16 y)
+static bool8 HiddenItemAtPos(const struct MapEvents * events, s16 x, s16 y)
 {
     u8 bgEventCount = events->bgEventCount;
     struct BgEvent * bgEvents = events->bgEvents;

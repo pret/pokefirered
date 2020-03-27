@@ -286,7 +286,7 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
     for(i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->trainerTower[i].bestTime, encryptionKey);
 
-    sub_8054F38(encryptionKey);
+    ApplyNewEncryptionKeyToGameStats(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);
     ApplyNewEncryptionKeyToBerryPowder(encryptionKey);
     ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);

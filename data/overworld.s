@@ -5,13 +5,6 @@
 	.section .rodata
 	.align 2, 0
 
-	.align 2
-sDummyWarpData:: @ 826D2B0
-	map MAP_UNDEFINED
-	.byte 0xFF
-	.align 1
-	.2byte 0xFFFF, 0xFFFF
-
 sUnusedData:: @ 826D2B8
 	.4byte 1200
 	.4byte 3600

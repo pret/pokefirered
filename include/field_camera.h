@@ -31,5 +31,6 @@ void SetCameraPanning(s16 x, s16 y);
 void UpdateCameraPanning(void);
 void InstallCameraPanAheadCallback(void);
 void DrawDoorMetatileAt(int x, int y, const u16 *data);
+void move_tilemap_camera_to_upper_left_corner(void);
 
 #endif //GUARD_FIELD_CAMERA_H

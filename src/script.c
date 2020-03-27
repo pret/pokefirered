@@ -358,7 +358,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
 
 u8 *mapheader_get_tagged_pointer(u8 tag)
 {
-    u8 *mapScripts = gMapHeader.mapScripts;
+    const u8 *mapScripts = gMapHeader.mapScripts;
 
     if (mapScripts == NULL)
         return NULL;
@@ -370,7 +370,7 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return (u8 *)(mapScripts[0] + (mapScripts[1] << 8) + (mapScripts[2] << 16) + (mapScripts[3] << 24));
+            return T2_READ_PTR(mapScripts);
         }
         mapScripts += 5;
     }

@@ -399,7 +399,7 @@ static void sub_807F45C(u8 taskId)
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, 3);
-        loc = GetHealLocationPointer(1);
+        loc = GetHealLocation(1);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
          && gSaveBlock1Ptr->lastHealLocation.warpId == -1

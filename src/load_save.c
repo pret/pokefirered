@@ -144,7 +144,7 @@ void sub_804C1AC(void)
 
 void SetContinueGameWarpStatusToDynamicWarp(void)
 {
-    sub_8055778(0);
+    SetContinueGameWarpToDynamicWarp(0);
     gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 

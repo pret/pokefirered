@@ -2064,7 +2064,7 @@ static void EscapeRopeFieldEffect_Step1(struct Task * task)
     if (data[4] == 1 && !gPaletteFade.active && BGMusicStopped() == TRUE)
     {
         SetObjectEventDirection(playerObj, task->data[15]);
-        sub_80555E0();
+        SetWarpDestinationToEscapeWarp();
         WarpIntoMap();
         gFieldCallback = FieldCallback_EscapeRopeExit;
         SetMainCallback2(CB2_LoadMap);
@@ -2331,7 +2331,7 @@ static void TeleportFieldEffectTask4(struct Task * task)
     {
         if (BGMusicStopped() == TRUE)
         {
-            copy_saved_warp3_bank_and_enter_x_to_warp1();
+            SetWarpDestinationToLastHealLocation();
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = FieldCallback_TeleportIn;

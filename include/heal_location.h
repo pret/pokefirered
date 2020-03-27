@@ -11,7 +11,7 @@ struct HealLocation
     s16 y;
 };
 
-const struct HealLocation *GetHealLocationPointer(u32 loc);
+const struct HealLocation *GetHealLocation(u32 loc);
 void SetWhiteoutRespawnWarpAndHealerNpc(struct WarpData * warp);
 
 #endif // GUARD_HEAL_LOCATION_H

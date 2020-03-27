@@ -50,7 +50,7 @@ static const struct HealLocation * GetHealLocationPointerFromMapGroupAndNum(u16 
     return &sSpawnPoints[i - 1];
 }
 
-const struct HealLocation * GetHealLocationPointer(u32 idx)
+const struct HealLocation * GetHealLocation(u32 idx)
 {
     if (idx == 0)
         return NULL;

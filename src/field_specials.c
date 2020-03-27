@@ -840,9 +840,9 @@ static const u8 sElevatorWindowAnimDuration[] = {
 void GetElevatorFloor(void)
 {
     u16 floor = 4;
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_B1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_B1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(SILPH_CO_1F):
             floor = 4;
@@ -888,9 +888,9 @@ void GetElevatorFloor(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_1F):
             floor = 4;
@@ -909,9 +909,9 @@ void GetElevatorFloor(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(TRAINER_TOWER_1F):
         case MAP_NUM(TRAINER_TOWER_2F):
@@ -937,9 +937,9 @@ u16 InitElevatorFloorSelectMenuPos(void)
     sElevatorScroll = 0;
     sElevatorCursorPos = 0;
 
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_B1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_B1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(SILPH_CO_11F):
             sElevatorScroll = 0;
@@ -999,9 +999,9 @@ u16 InitElevatorFloorSelectMenuPos(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_5F):
             sElevatorScroll = 0;
@@ -1025,9 +1025,9 @@ u16 InitElevatorFloorSelectMenuPos(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->warp2.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(TRAINER_TOWER_1F))
     {
-        switch (gSaveBlock1Ptr->warp2.mapNum)
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
         case MAP_NUM(TRAINER_TOWER_1F):
         case MAP_NUM(TRAINER_TOWER_2F):

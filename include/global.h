@@ -743,8 +743,8 @@ struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
     /*0x0004*/ struct WarpData location;
-    /*0x000C*/ struct WarpData warp1;
-    /*0x0014*/ struct WarpData warp2;
+    /*0x000C*/ struct WarpData continueGameWarp;
+    /*0x0014*/ struct WarpData dynamicWarp;
     /*0x001C*/ struct WarpData lastHealLocation;
     /*0x0024*/ struct WarpData escapeWarp;
     /*0x002C*/ u16 savedMusic;

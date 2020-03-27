@@ -3,8 +3,10 @@
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_camera.h"
+#include "field_player_avatar.h"
 #include "field_specials.h"
 #include "fieldmap.h"
+#include "heal_location.h"
 #include "load_save.h"
 #include "money.h"
 #include "overworld.h"
@@ -14,6 +16,7 @@
 #include "tileset_anims.h"
 #include "constants/maps.h"
 #include "constants/flags.h"
+#include "constants/species.h"
 
 struct InitialPlayerAvatarState
 {
@@ -27,6 +30,18 @@ EWRAM_DATA struct WarpData sWarpDestination = {};
 EWRAM_DATA struct WarpData gFixedDiveWarp = {};
 EWRAM_DATA struct WarpData gFixedHoleWarp = {};
 EWRAM_DATA struct InitialPlayerAvatarState gUnknown_2031DD4 = {};
+EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = FALSE;
+EWRAM_DATA u16 gUnknown_2031DDA = SPECIES_NONE;
+EWRAM_DATA bool8 gUnknown_2031DDC = FALSE;
+
+// File boundary perhaps?
+ALIGNED(4) EWRAM_DATA bool8 gUnknown_2031DE0 = FALSE;
+EWRAM_DATA const struct CreditsOverworldCmd *gUnknown_2031DE4 = NULL;
+EWRAM_DATA s16 gUnknown_2031DE8 = 0;
+EWRAM_DATA s16 gUnknown_2031DEA = 0;
+
+// File boundary perhaps?
+EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
 
 u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
 void Overworld_ResetStateAfterWhitingOut(void);
@@ -366,4 +381,146 @@ void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gMapHeader.mapLayout = GetMapLayout();
+}
+
+void SetPlayerCoordsFromWarp(void)
+{
+    if (gSaveBlock1Ptr->location.warpId >= 0 && gSaveBlock1Ptr->location.warpId < gMapHeader.events->warpCount)
+    {
+        gSaveBlock1Ptr->pos.x = gMapHeader.events->warps[gSaveBlock1Ptr->location.warpId].x;
+        gSaveBlock1Ptr->pos.y = gMapHeader.events->warps[gSaveBlock1Ptr->location.warpId].y;
+    }
+    else if (gSaveBlock1Ptr->location.x >= 0 && gSaveBlock1Ptr->location.y >= 0)
+    {
+        gSaveBlock1Ptr->pos.x = gSaveBlock1Ptr->location.x;
+        gSaveBlock1Ptr->pos.y = gSaveBlock1Ptr->location.y;
+    }
+    else
+    {
+        gSaveBlock1Ptr->pos.x = gMapHeader.mapLayout->width / 2;
+        gSaveBlock1Ptr->pos.y = gMapHeader.mapLayout->height / 2;
+    }
+}
+
+void WarpIntoMap(void)
+{
+    ApplyCurrentWarp();
+    LoadCurrentMapData();
+    SetPlayerCoordsFromWarp();
+}
+
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&sWarpDestination, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpId)
+{
+    SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
+}
+
+void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
+{
+    SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+}
+
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetWarpDestinationToDynamicWarp(u8 unusedWarpId)
+{
+    sWarpDestination = gSaveBlock1Ptr->dynamicWarp;
+}
+
+void SetWarpDestinationToHealLocation(u8 healLocationId)
+{
+    const struct HealLocation *warp = GetHealLocation(healLocationId);
+    if (warp)
+        SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+}
+
+void SetWarpDestinationToLastHealLocation(void)
+{
+    sWarpDestination = gSaveBlock1Ptr->lastHealLocation;
+}
+
+void Overworld_SetWhiteoutRespawnPoint(void)
+{
+    SetWhiteoutRespawnWarpAndHealerNpc(&sWarpDestination);
+}
+
+void SetLastHealLocationWarp(u8 healLocationId)
+{
+    const struct HealLocation *healLocation = GetHealLocation(healLocationId);
+    if (healLocation)
+        SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
+}
+
+void UpdateEscapeWarp(s16 x, s16 y)
+{
+    u8 currMapType = GetCurrentMapType();
+    u8 destMapType = GetMapTypeByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
+    u8 delta;
+    if (IsMapTypeOutdoors(currMapType) && IsMapTypeOutdoors(destMapType) != TRUE && !(gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VIRIDIAN_FOREST) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(VIRIDIAN_FOREST)))
+    {
+        delta = GetPlayerFacingDirection() != DIR_SOUTH;
+        SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x - 7, y - 7 + delta);
+    }
+}
+
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&gSaveBlock1Ptr->escapeWarp, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetWarpDestinationToEscapeWarp(void)
+{
+    sWarpDestination = gSaveBlock1Ptr->escapeWarp;
+}
+
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&gFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetWarpDestinationToDiveWarp(void)
+{
+    sWarpDestination = gFixedDiveWarp;
+}
+
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&gFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y)
+{
+    if (IsDummyWarp(&gFixedHoleWarp) == TRUE)
+        sWarpDestination = gLastUsedWarp;
+    else
+        SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
+}
+
+void SetWarpDestinationToContinueGameWarp(void)
+{
+    sWarpDestination = gSaveBlock1Ptr->continueGameWarp;
+}
+
+void SetContinueGameWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+{
+    SetWarpData(&gSaveBlock1Ptr->continueGameWarp, mapGroup, mapNum, warpId, x, y);
+}
+
+void SetContinueGameWarpToHealLocation(u8 healLocationId)
+{
+    const struct HealLocation *warp = GetHealLocation(healLocationId);
+    if (warp)
+        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, -1, warp->x, warp->y);
+}
+
+void SetContinueGameWarpToDynamicWarp(int unused)
+{
+    gSaveBlock1Ptr->continueGameWarp = gSaveBlock1Ptr->dynamicWarp;
 }

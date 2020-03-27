@@ -23,7 +23,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PokemonTower_7F_EventScript_MrFuji",
       "flag": "FLAG_HIDE_TOWER_FUJI"
@@ -36,7 +36,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "PokemonTower_7F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_TOWER_ROCKET_1"
@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "PokemonTower_7F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_TOWER_ROCKET_2"
@@ -62,7 +62,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "PokemonTower_7F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_TOWER_ROCKET_3"

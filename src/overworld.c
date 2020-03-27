@@ -3,17 +3,25 @@
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_camera.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
+#include "field_weather.h"
 #include "fieldmap.h"
 #include "heal_location.h"
 #include "load_save.h"
+#include "map_name_popup.h"
+#include "metatile_behavior.h"
 #include "money.h"
 #include "overworld.h"
+#include "quest_log.h"
+#include "renewable_hidden_items.h"
 #include "roamer.h"
+#include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "tileset_anims.h"
+#include "vs_seeker.h"
 #include "constants/maps.h"
 #include "constants/flags.h"
 #include "constants/species.h"
@@ -22,14 +30,14 @@ struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
     u8 direction;
-    u8 unk2;
+    bool8 unk2;
 };
 
 EWRAM_DATA struct WarpData gLastUsedWarp = {};
 EWRAM_DATA struct WarpData sWarpDestination = {};
 EWRAM_DATA struct WarpData gFixedDiveWarp = {};
 EWRAM_DATA struct WarpData gFixedHoleWarp = {};
-EWRAM_DATA struct InitialPlayerAvatarState gUnknown_2031DD4 = {};
+EWRAM_DATA struct InitialPlayerAvatarState gInitialPlayerAvatarState = {};
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = FALSE;
 EWRAM_DATA u16 gUnknown_2031DDA = SPECIES_NONE;
 EWRAM_DATA bool8 gUnknown_2031DDC = FALSE;
@@ -46,7 +54,12 @@ EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
 u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
 void Overworld_ResetStateAfterWhitingOut(void);
 void Overworld_SetWhiteoutRespawnPoint(void);
-void sub_805610C(void);
+u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType);
+u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType);
+u16 GetCenterScreenMetatileBehavior(void);
+void sub_8055E94(void);
+void SetDefaultFlashLevel(void);
+void ChooseAmbientCrySpecies(void);
 
 extern const struct MapLayout * gMapLayouts[];
 extern const struct MapHeader *const *gMapGroups[];
@@ -118,7 +131,7 @@ void Overworld_ResetStateAfterFly(void)
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_ON_CYCLING_ROAD);
     VarSet(VAR_MAP_SCENE_ROUTE16, 0);
-    FlagClear(FLAG_SYS_UNK_802);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -132,7 +145,7 @@ void Overworld_ResetStateAfterTeleport(void)
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_ON_CYCLING_ROAD);
     VarSet(VAR_MAP_SCENE_ROUTE16, 0);
-    FlagClear(FLAG_SYS_UNK_802);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -146,7 +159,7 @@ void Overworld_ResetStateAfterDigEscRope(void)
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_ON_CYCLING_ROAD);
     VarSet(VAR_MAP_SCENE_ROUTE16, 0);
-    FlagClear(FLAG_SYS_UNK_802);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -160,7 +173,7 @@ void Overworld_ResetStateAfterWhitingOut(void)
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_ON_CYCLING_ROAD);
     VarSet(VAR_MAP_SCENE_ROUTE16, 0);
-    FlagClear(FLAG_SYS_UNK_802);
+    FlagClear(FLAG_SYS_CRUISE_MODE);
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -173,7 +186,7 @@ void sub_8054E40(void)
 {
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
-    sub_805610C();
+    ChooseAmbientCrySpecies();
     UpdateLocationHistoryForRoamer();
     RoamerMoveToOtherLocationSet();
 }
@@ -523,4 +536,203 @@ void SetContinueGameWarpToHealLocation(u8 healLocationId)
 void SetContinueGameWarpToDynamicWarp(int unused)
 {
     gSaveBlock1Ptr->continueGameWarp = gSaveBlock1Ptr->dynamicWarp;
+}
+
+const struct MapConnection * GetMapConnection(u8 dir)
+{
+    s32 i;
+    s32 count = gMapHeader.connections->count;
+    const struct MapConnection *connection = gMapHeader.connections->connections;
+
+    if (connection == NULL)
+        return NULL;
+
+    for(i = 0; i < count; i++, connection++)
+        if (connection->direction == dir)
+            return connection;
+
+    return NULL;
+}
+
+bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
+{
+    const struct MapConnection *connection = GetMapConnection(dir);
+
+    if (connection != NULL)
+    {
+        SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
+    }
+    else
+    {
+        RunOnDiveWarpMapScript();
+        if (IsDummyWarp(&gFixedDiveWarp))
+            return FALSE;
+        SetWarpDestinationToDiveWarp();
+    }
+    return TRUE;
+}
+
+bool8 SetDiveWarpEmerge(u16 x, u16 y)
+{
+    return SetDiveWarp(CONNECTION_EMERGE, x, y);
+}
+
+bool8 SetDiveWarpDive(u16 x, u16 y)
+{
+    return SetDiveWarp(CONNECTION_DIVE, x, y);
+}
+
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
+{
+    int paletteIndex;
+
+    SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
+    sub_8055E94();
+    ApplyCurrentWarp();
+    LoadCurrentMapData();
+    sub_8054F68();
+    TrySetMapSaveWarpStatus();
+    ClearTempFieldEventData();
+    ResetCyclingRoadChallengeData();
+    RestartWildEncounterImmunitySteps();
+    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
+    SetSav1WeatherFromCurrMapHeader();
+    ChooseAmbientCrySpecies();
+    SetDefaultFlashLevel();
+    Overworld_ClearSavedMusic();
+    RunOnTransitionMapScript();
+    TryRegenerateRenewableHiddenItems();
+    InitMap();
+    copy_map_tileset2_to_vram_2(gMapHeader.mapLayout);
+    apply_map_tileset2_palette(gMapHeader.mapLayout);
+    for (paletteIndex = 7; paletteIndex < 13; paletteIndex++)
+        ApplyWeatherGammaShiftToPal(paletteIndex);
+    InitSecondaryTilesetAnimation();
+    UpdateLocationHistoryForRoamer();
+    RoamerMove();
+    sub_8110920();
+    DoCurrentWeather();
+    ResetFieldTasksArgs();
+    mapheader_run_script_with_tag_x5();
+    if (GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
+        CreateMapNamePopupIfNotAlreadyRunning(TRUE);
+}
+
+void mli0_load_map(bool32 a1)
+{
+    bool8 isOutdoors;
+
+    LoadCurrentMapData();
+    sub_8054F68();
+    isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
+
+    TrySetMapSaveWarpStatus();
+    ClearTempFieldEventData();
+    ResetCyclingRoadChallengeData();
+    RestartWildEncounterImmunitySteps();
+    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    SetSav1WeatherFromCurrMapHeader();
+    ChooseAmbientCrySpecies();
+    if (isOutdoors)
+        FlagClear(FLAG_SYS_FLASH_ACTIVE);
+    SetDefaultFlashLevel();
+    Overworld_ClearSavedMusic();
+    RunOnTransitionMapScript();
+    TryRegenerateRenewableHiddenItems();
+    UpdateLocationHistoryForRoamer();
+    RoamerMoveToOtherLocationSet();
+    sub_8110920();
+    InitMap();
+}
+
+void sub_80559A8(void)
+{
+    bool8 isOutdoors;
+
+    LoadCurrentMapData();
+    sub_8054F68();
+    isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
+    TrySetMapSaveWarpStatus();
+    SetSav1WeatherFromCurrMapHeader();
+    ChooseAmbientCrySpecies();
+    SetDefaultFlashLevel();
+    sub_8110920();
+    sub_8111708();
+    LoadSaveblockMapHeader();
+    InitMap();
+}
+
+void ResetInitialPlayerAvatarState(void)
+{
+    gInitialPlayerAvatarState.direction = DIR_SOUTH;
+    gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gInitialPlayerAvatarState.unk2 = FALSE;
+}
+
+void sub_80559F8(u8 dirn)
+{
+    gInitialPlayerAvatarState.direction = dirn;
+    gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gInitialPlayerAvatarState.unk2 = TRUE;
+}
+
+void StoreInitialPlayerAvatarState(void)
+{
+    gInitialPlayerAvatarState.direction = GetPlayerFacingDirection();
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
+        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_MACH_BIKE;
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
+        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ACRO_BIKE;
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_SURFING;
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
+        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_UNDERWATER;
+    else
+        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    gInitialPlayerAvatarState.unk2 = FALSE;
+}
+
+struct InitialPlayerAvatarState *GetInitialPlayerAvatarState(void)
+{
+    struct InitialPlayerAvatarState playerStruct;
+    u8 mapType = GetCurrentMapType();
+    u16 metatileBehavior = GetCenterScreenMetatileBehavior();
+    u8 transitionFlags = GetAdjustedInitialTransitionFlags(&gInitialPlayerAvatarState, metatileBehavior, mapType);
+    playerStruct.transitionFlags = transitionFlags;
+    playerStruct.direction = GetAdjustedInitialDirection(&gInitialPlayerAvatarState, transitionFlags, metatileBehavior, mapType);
+    playerStruct.unk2 = FALSE;
+    gInitialPlayerAvatarState = playerStruct;
+    return &gInitialPlayerAvatarState;
+}
+
+bool8 sub_8055B38(u16 metatileBehavior);
+
+u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType)
+{
+    if (mapType != MAP_TYPE_INDOOR && FlagGet(FLAG_SYS_CRUISE_MODE))
+        return PLAYER_AVATAR_FLAG_ON_FOOT;
+    else if (mapType == MAP_TYPE_UNDERWATER)
+        return PLAYER_AVATAR_FLAG_UNDERWATER;
+    else if (sub_8055B38(metatileBehavior) == TRUE)
+        return PLAYER_AVATAR_FLAG_ON_FOOT;
+    else if (MetatileBehavior_IsSurfable(metatileBehavior) == TRUE)
+        return PLAYER_AVATAR_FLAG_SURFING;
+    else if (Overworld_IsBikingAllowed() != TRUE)
+        return PLAYER_AVATAR_FLAG_ON_FOOT;
+    else if (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_MACH_BIKE)
+        return PLAYER_AVATAR_FLAG_MACH_BIKE;
+    else if (playerStruct->transitionFlags != PLAYER_AVATAR_FLAG_ACRO_BIKE)
+        return PLAYER_AVATAR_FLAG_ON_FOOT;
+    else
+        return PLAYER_AVATAR_FLAG_ACRO_BIKE;
+}
+
+bool8 sub_8055B38(u16 metatileBehavior)
+{
+    if (MetatileBehavior_IsSurfable(metatileBehavior) != TRUE)
+        return FALSE;
+    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B3F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B3F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B4F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B4F)))
+        return TRUE;
+    return FALSE;
 }

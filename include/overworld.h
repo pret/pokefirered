@@ -141,7 +141,7 @@ extern u8 gUnknown_2036E28;
 extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);
-void sub_8055864(u8 mapGroup, u8 mapNum);
+void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 void CB2_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_NewGame(void);
@@ -153,7 +153,7 @@ void Overworld_FadeOutMapMusic(void);
 void CB2_LoadMap(void);
 bool8 BGMusicStopped(void);
 bool8 IsMapTypeIndoors(u8 mapType);
-bool32 sub_8055C9C(void);
+bool32 Overworld_IsBikingAllowed(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 bool32 sub_8058244(void);
 u8 GetCurrentMapType(void);

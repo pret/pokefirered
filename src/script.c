@@ -411,7 +411,7 @@ void RunOnLoadMapScript(void)
     mapheader_run_script_by_tag(1);
 }
 
-void mapheader_run_script_with_tag_x3(void)
+void RunOnTransitionMapScript(void)
 {
     mapheader_run_script_by_tag(3);
 }
@@ -426,7 +426,7 @@ void mapheader_run_script_with_tag_x7(void)
     mapheader_run_script_by_tag(7);
 }
 
-void mapheader_run_script_with_tag_x6(void)
+void RunOnDiveWarpMapScript(void)
 {
     mapheader_run_script_by_tag(6);
 }

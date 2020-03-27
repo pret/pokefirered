@@ -143,6 +143,7 @@ void sub_807AC98(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
 void sub_807A790(s8 gammaIndex);
 void sub_807A7C4(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
+void ApplyWeatherGammaShiftToPal(u8 paletteIndex);
 
 extern const u16 gCloudsWeatherPalette[];
 extern const u16 gSandstormWeatherPalette[];

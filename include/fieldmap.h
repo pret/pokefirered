@@ -34,7 +34,10 @@ u32 GetMetatileAttributeFromRawMetatileBehavior(u32 original, u8 bit);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attr);
 void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2);
 bool8 CameraMove(s32 x, s32 y);
-void copy_map_tileset1_tileset2_to_vram(struct MapLayout const *mapLayout);
-void apply_map_tileset1_tileset2_palette(struct MapLayout const *mapLayout);
+void copy_map_tileset1_tileset2_to_vram(struct MapLayout const * mapLayout);
+void apply_map_tileset1_tileset2_palette(struct MapLayout const * mapLayout);
+void InitMap(void);
+void copy_map_tileset2_to_vram_2(const struct MapLayout * mapLayout);
+void apply_map_tileset2_palette(const struct MapLayout * mapLayout);
 
 #endif //GUARD_FIELDMAP_H

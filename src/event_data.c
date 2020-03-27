@@ -38,7 +38,7 @@ void InitEventData(void)
     memset(sSpecialFlags, 0, SPECIAL_FLAGS_COUNT);
 }
 
-void sub_806E110(void)
+void ClearTempFieldEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, 4);
     memset(gSaveBlock1Ptr->vars, 0, 16 * 2);

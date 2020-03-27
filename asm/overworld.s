@@ -5,490 +5,8 @@
 
 	.text
 
-	thumb_func_start GetMapConnection
-GetMapConnection: @ 805578C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _080557A0 @ =gMapHeader
-	ldr r0, [r0, 0xC]
-	ldr r3, [r0]
-	ldr r1, [r0, 0x4]
-	cmp r1, 0
-	bne _080557A8
-	b _080557BC
-	.align 2, 0
-_080557A0: .4byte gMapHeader
-_080557A4:
-	adds r0, r1, 0
-	b _080557BE
-_080557A8:
-	movs r2, 0
-	cmp r2, r3
-	bge _080557BC
-_080557AE:
-	ldrb r0, [r1]
-	cmp r0, r4
-	beq _080557A4
-	adds r2, 0x1
-	adds r1, 0xC
-	cmp r2, r3
-	blt _080557AE
-_080557BC:
-	movs r0, 0
-_080557BE:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end GetMapConnection
-
-	thumb_func_start sub_80557C4
-sub_80557C4: @ 80557C4
-	push {r4,r5,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 16
-	lsrs r4, r1, 16
-	lsls r2, 16
-	lsrs r5, r2, 16
-	bl GetMapConnection
-	adds r1, r0, 0
-	cmp r1, 0
-	beq _080557FC
-	movs r0, 0x8
-	ldrsb r0, [r1, r0]
-	ldrb r1, [r1, 0x9]
-	lsls r1, 24
-	asrs r1, 24
-	movs r2, 0x1
-	negs r2, r2
-	lsls r3, r4, 24
-	asrs r3, 24
-	lsls r4, r5, 24
-	asrs r4, 24
-	str r4, [sp]
-	bl SetWarpDestination
-	b _08055818
-_080557FC:
-	bl mapheader_run_script_with_tag_x6
-	ldr r0, _08055810 @ =gFixedDiveWarp
-	bl IsDummyWarp
-	cmp r0, 0
-	beq _08055814
-	movs r0, 0
-	b _0805581A
-	.align 2, 0
-_08055810: .4byte gFixedDiveWarp
-_08055814:
-	bl SetWarpDestinationToDiveWarp
-_08055818:
-	movs r0, 0x1
-_0805581A:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80557C4
-
-	thumb_func_start SetDiveWarpEmerge
-SetDiveWarpEmerge: @ 8055824
-	push {lr}
-	adds r3, r0, 0
-	adds r2, r1, 0
-	lsls r3, 16
-	lsrs r3, 16
-	lsls r2, 16
-	lsrs r2, 16
-	movs r0, 0x6
-	adds r1, r3, 0
-	bl sub_80557C4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end SetDiveWarpEmerge
-
-	thumb_func_start SetDiveWarpDive
-SetDiveWarpDive: @ 8055844
-	push {lr}
-	adds r3, r0, 0
-	adds r2, r1, 0
-	lsls r3, 16
-	lsrs r3, 16
-	lsls r2, 16
-	lsrs r2, 16
-	movs r0, 0x5
-	adds r1, r3, 0
-	bl sub_80557C4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end SetDiveWarpDive
-
-	thumb_func_start sub_8055864
-sub_8055864: @ 8055864
-	push {r4,r5,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r5, r0, 24
-	asrs r0, 24
-	lsrs r4, r1, 24
-	asrs r1, 24
-	movs r3, 0x1
-	negs r3, r3
-	str r3, [sp]
-	adds r2, r3, 0
-	bl SetWarpDestination
-	bl sub_8055E94
-	bl ApplyCurrentWarp
-	bl LoadCurrentMapData
-	bl sub_8054F68
-	bl TrySetMapSaveWarpStatus
-	bl sub_806E110
-	bl nullsub_74
-	bl RestartWildEncounterImmunitySteps
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_810C578
-	bl SetSav1WeatherFromCurrMapHeader
-	bl sub_805610C
-	bl sub_8055CB8
-	bl Overworld_ClearSavedMusic
-	bl mapheader_run_script_with_tag_x3
-	bl TryRegenerateRenewableHiddenItems
-	bl InitMap
-	ldr r4, _0805591C @ =gMapHeader
-	ldr r0, [r4]
-	bl copy_map_tileset2_to_vram_2
-	ldr r0, [r4]
-	bl apply_map_tileset2_palette
-	movs r4, 0x7
-_080558D4:
-	lsls r0, r4, 24
-	lsrs r0, 24
-	bl ApplyWeatherGammaShiftToPal
-	adds r4, 0x1
-	cmp r4, 0xC
-	ble _080558D4
-	bl InitSecondaryTilesetAnimation
-	bl UpdateLocationHistoryForRoamer
-	bl RoamerMove
-	bl sub_8110920
-	bl DoCurrentWeather
-	bl ResetFieldTasksArgs
-	bl mapheader_run_script_with_tag_x5
-	bl GetLastUsedWarpMapSectionId
-	ldr r1, _0805591C @ =gMapHeader
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1, 0x14]
-	cmp r0, r1
-	beq _08055914
-	movs r0, 0x1
-	bl CreateMapNamePopupIfNotAlreadyRunning
-_08055914:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805591C: .4byte gMapHeader
-	thumb_func_end sub_8055864
-
-	thumb_func_start sub_8055920
-sub_8055920: @ 8055920
-	push {r4,lr}
-	bl LoadCurrentMapData
-	bl sub_8054F68
-	ldr r0, _0805599C @ =gMapHeader
-	ldrb r0, [r0, 0x17]
-	bl IsMapTypeOutdoors
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl TrySetMapSaveWarpStatus
-	bl sub_806E110
-	bl nullsub_74
-	bl RestartWildEncounterImmunitySteps
-	ldr r0, _080559A0 @ =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	lsls r0, 16
-	lsrs r0, 16
-	ldrb r1, [r1, 0x5]
-	lsls r1, 24
-	asrs r1, 24
-	lsls r1, 16
-	lsrs r1, 16
-	bl sub_810C578
-	bl SetSav1WeatherFromCurrMapHeader
-	bl sub_805610C
-	cmp r4, 0
-	beq _08055974
-	ldr r0, _080559A4 @ =0x00000806
-	bl FlagClear
-_08055974:
-	bl sub_8055CB8
-	bl Overworld_ClearSavedMusic
-	bl mapheader_run_script_with_tag_x3
-	bl TryRegenerateRenewableHiddenItems
-	bl UpdateLocationHistoryForRoamer
-	bl RoamerMoveToOtherLocationSet
-	bl sub_8110920
-	bl InitMap
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0805599C: .4byte gMapHeader
-_080559A0: .4byte gSaveBlock1Ptr
-_080559A4: .4byte 0x00000806
-	thumb_func_end sub_8055920
-
-	thumb_func_start sub_80559A8
-sub_80559A8: @ 80559A8
-	push {lr}
-	bl LoadCurrentMapData
-	bl sub_8054F68
-	ldr r0, _080559E0 @ =gMapHeader
-	ldrb r0, [r0, 0x17]
-	bl IsMapTypeOutdoors
-	bl TrySetMapSaveWarpStatus
-	bl SetSav1WeatherFromCurrMapHeader
-	bl sub_805610C
-	bl sub_8055CB8
-	bl sub_8110920
-	bl sub_8111708
-	bl LoadSaveblockMapHeader
-	bl InitMap
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080559E0: .4byte gMapHeader
-	thumb_func_end sub_80559A8
-
-	thumb_func_start ResetInitialPlayerAvatarState
-ResetInitialPlayerAvatarState: @ 80559E4
-	ldr r0, _080559F4 @ =gUnknown_2031DD4
-	movs r2, 0
-	movs r1, 0x1
-	strb r1, [r0, 0x1]
-	strb r1, [r0]
-	strb r2, [r0, 0x2]
-	bx lr
-	.align 2, 0
-_080559F4: .4byte gUnknown_2031DD4
-	thumb_func_end ResetInitialPlayerAvatarState
-
-	thumb_func_start sub_80559F8
-sub_80559F8: @ 80559F8
-	ldr r1, _08055A04 @ =gUnknown_2031DD4
-	strb r0, [r1, 0x1]
-	movs r0, 0x1
-	strb r0, [r1]
-	strb r0, [r1, 0x2]
-	bx lr
-	.align 2, 0
-_08055A04: .4byte gUnknown_2031DD4
-	thumb_func_end sub_80559F8
-
-	thumb_func_start StoreInitialPlayerAvatarState
-StoreInitialPlayerAvatarState: @ 8055A08
-	push {r4,lr}
-	bl GetPlayerFacingDirection
-	ldr r4, _08055A24 @ =gUnknown_2031DD4
-	strb r0, [r4, 0x1]
-	movs r0, 0x2
-	bl TestPlayerAvatarFlags
-	lsls r0, 24
-	cmp r0, 0
-	beq _08055A28
-	movs r0, 0x2
-	b _08055A5A
-	.align 2, 0
-_08055A24: .4byte gUnknown_2031DD4
-_08055A28:
-	movs r0, 0x4
-	bl TestPlayerAvatarFlags
-	lsls r0, 24
-	cmp r0, 0
-	beq _08055A38
-	movs r0, 0x4
-	b _08055A5A
-_08055A38:
-	movs r0, 0x8
-	bl TestPlayerAvatarFlags
-	lsls r0, 24
-	cmp r0, 0
-	beq _08055A48
-	movs r0, 0x8
-	b _08055A5A
-_08055A48:
-	movs r0, 0x10
-	bl TestPlayerAvatarFlags
-	lsls r0, 24
-	cmp r0, 0
-	beq _08055A58
-	movs r0, 0x10
-	b _08055A5A
-_08055A58:
-	movs r0, 0x1
-_08055A5A:
-	strb r0, [r4]
-	ldr r1, _08055A68 @ =gUnknown_2031DD4
-	movs r0, 0
-	strb r0, [r1, 0x2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08055A68: .4byte gUnknown_2031DD4
-	thumb_func_end StoreInitialPlayerAvatarState
-
-	thumb_func_start sub_8055A6C
-sub_8055A6C: @ 8055A6C
-	push {r4-r7,lr}
-	bl GetCurrentMapType
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	bl sub_8055C74
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r6, _08055ABC @ =gUnknown_2031DD4
-	adds r0, r6, 0
-	adds r1, r4, 0
-	adds r2, r5, 0
-	bl sub_8055ACC
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, _08055AC0 @ =0xffffff00
-	ands r7, r0
-	orrs r7, r1
-	adds r0, r6, 0
-	adds r2, r4, 0
-	adds r3, r5, 0
-	bl sub_8055B74
-	lsls r0, 24
-	lsrs r0, 16
-	ldr r1, _08055AC4 @ =0xffff00ff
-	ands r7, r1
-	orrs r7, r0
-	ldr r0, _08055AC8 @ =0xff00ffff
-	ands r7, r0
-	str r7, [r6]
-	adds r0, r6, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08055ABC: .4byte gUnknown_2031DD4
-_08055AC0: .4byte 0xffffff00
-_08055AC4: .4byte 0xffff00ff
-_08055AC8: .4byte 0xff00ffff
-	thumb_func_end sub_8055A6C
-
-	thumb_func_start sub_8055ACC
-sub_8055ACC: @ 8055ACC
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	lsls r2, 24
-	lsrs r4, r2, 24
-	cmp r4, 0x8
-	beq _08055AE8
-	ldr r0, _08055AF0 @ =0x00000802
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	bne _08055B30
-_08055AE8:
-	cmp r4, 0x5
-	bne _08055AF4
-	movs r0, 0x10
-	b _08055B32
-	.align 2, 0
-_08055AF0: .4byte 0x00000802
-_08055AF4:
-	adds r0, r5, 0
-	bl sub_8055B38
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08055B30
-	lsls r0, r5, 24
-	lsrs r0, 24
-	bl MetatileBehavior_IsSurfable
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08055B16
-	movs r0, 0x8
-	b _08055B32
-_08055B16:
-	bl sub_8055C9C
-	cmp r0, 0x1
-	bne _08055B30
-	ldrb r0, [r6]
-	cmp r0, 0x2
-	bne _08055B28
-	movs r0, 0x2
-	b _08055B32
-_08055B28:
-	cmp r0, 0x4
-	bne _08055B30
-	movs r0, 0x4
-	b _08055B32
-_08055B30:
-	movs r0, 0x1
-_08055B32:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8055ACC
-
-	thumb_func_start sub_8055B38
-sub_8055B38: @ 8055B38
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl MetatileBehavior_IsSurfable
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08055B6C
-	ldr r0, _08055B60 @ =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrh r1, [r0, 0x4]
-	ldr r0, _08055B64 @ =0x00005601
-	cmp r1, r0
-	beq _08055B5C
-	ldr r0, _08055B68 @ =0x00005701
-	cmp r1, r0
-	bne _08055B6C
-_08055B5C:
-	movs r0, 0x1
-	b _08055B6E
-	.align 2, 0
-_08055B60: .4byte gSaveBlock1Ptr
-_08055B64: .4byte 0x00005601
-_08055B68: .4byte 0x00005701
-_08055B6C:
-	movs r0, 0
-_08055B6E:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8055B38
-
-	thumb_func_start sub_8055B74
-sub_8055B74: @ 8055B74
+	thumb_func_start GetAdjustedInitialDirection
+GetAdjustedInitialDirection: @ 8055B74
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -616,10 +134,10 @@ _08055C6E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055B74
+	thumb_func_end GetAdjustedInitialDirection
 
-	thumb_func_start sub_8055C74
-sub_8055C74: @ 8055C74
+	thumb_func_start GetCenterScreenMetatileBehavior
+GetCenterScreenMetatileBehavior: @ 8055C74
 	push {lr}
 	ldr r0, _08055C98 @ =gSaveBlock1Ptr
 	ldr r1, [r0]
@@ -638,10 +156,10 @@ sub_8055C74: @ 8055C74
 	bx r1
 	.align 2, 0
 _08055C98: .4byte gSaveBlock1Ptr
-	thumb_func_end sub_8055C74
+	thumb_func_end GetCenterScreenMetatileBehavior
 
-	thumb_func_start sub_8055C9C
-sub_8055C9C: @ 8055C9C
+	thumb_func_start Overworld_IsBikingAllowed
+Overworld_IsBikingAllowed: @ 8055C9C
 	push {lr}
 	ldr r0, _08055CAC @ =gMapHeader
 	ldrb r0, [r0, 0x18]
@@ -656,10 +174,10 @@ _08055CB0:
 _08055CB2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055C9C
+	thumb_func_end Overworld_IsBikingAllowed
 
-	thumb_func_start sub_8055CB8
-sub_8055CB8: @ 8055CB8
+	thumb_func_start SetDefaultFlashLevel
+SetDefaultFlashLevel: @ 8055CB8
 	push {lr}
 	ldr r0, _08055CC8 @ =gMapHeader
 	ldrb r1, [r0, 0x15]
@@ -699,7 +217,7 @@ _08055CFA:
 	.align 2, 0
 _08055D00: .4byte gSaveBlock1Ptr
 _08055D04: .4byte gMaxFlashLevel
-	thumb_func_end sub_8055CB8
+	thumb_func_end SetDefaultFlashLevel
 
 	thumb_func_start Overworld_SetFlashLevel
 Overworld_SetFlashLevel: @ 8055D08
@@ -1248,8 +766,8 @@ _08056106:
 	bx r0
 	thumb_func_end sub_8056078
 
-	thumb_func_start sub_805610C
-sub_805610C: @ 805610C
+	thumb_func_start ChooseAmbientCrySpecies
+ChooseAmbientCrySpecies: @ 805610C
 	push {lr}
 	ldr r0, _0805611C @ =gUnknown_2031DDC
 	bl GetLocalWildMon
@@ -1260,7 +778,7 @@ sub_805610C: @ 805610C
 	.align 2, 0
 _0805611C: .4byte gUnknown_2031DDC
 _08056120: .4byte gUnknown_2031DDA
-	thumb_func_end sub_805610C
+	thumb_func_end ChooseAmbientCrySpecies
 
 	thumb_func_start sub_8056124
 sub_8056124: @ 8056124
@@ -2442,7 +1960,7 @@ _08056AB0:
 	b _08056B62
 _08056ABE:
 	movs r0, 0x1
-	bl sub_8055920
+	bl mli0_load_map
 	b _08056B62
 _08056AC6:
 	movs r0, 0x1
@@ -2565,7 +2083,7 @@ _08056BD0:
 	bl InitOverworldBgs
 	bl FieldClearVBlankHBlankCallbacks
 	adds r0, r5, 0
-	bl sub_8055920
+	bl mli0_load_map
 	b _08056CCA
 _08056BE0:
 	bl sub_8111F14
@@ -3132,7 +2650,7 @@ mli4_mapscripts_and_other: @ 805709C
 	mov r0, sp
 	adds r1, r4, 0
 	bl GetCameraFocusCoords
-	bl sub_8055A6C
+	bl GetInitialPlayerAvatarState
 	adds r5, r0, 0
 	mov r0, sp
 	movs r1, 0
@@ -3474,7 +2992,7 @@ _0805735C:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
-	bl sub_8055920
+	bl mli0_load_map
 	b _08057412
 	.align 2, 0
 _0805738C: .4byte gUnknown_2031DE0
@@ -3833,7 +3351,7 @@ _0805766C:
 _08057690:
 	bl sub_8056354
 	movs r0, 0
-	bl sub_8055920
+	bl mli0_load_map
 	b _0805772A
 _0805769C:
 	bl ScanlineEffect_Clear

@@ -59,5 +59,7 @@ void sub_8112628(u8 movementActionId);
 void sub_81126AC(u8 movementActionId, u8 duration);
 void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 duration);
 void sub_8112C9C(void);
+void sub_8110920(void);
+void sub_8111708(void);
 
 #endif //GUARD_QUEST_LOG_H

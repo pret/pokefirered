@@ -31,5 +31,7 @@ void CutMoveOpenDottedHoleDoor(void);
 void RunMassageCooldownStepCounter(void);
 void IncrementResortGorgeousStepCounter(void);
 void IncrementBirthIslandRockStepCount(void);
+void ResetCyclingRoadChallengeData(void);
+void ResetFieldTasksArgs(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

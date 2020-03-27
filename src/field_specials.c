@@ -108,7 +108,7 @@ void ForcePlayerOntoBike(void)
     Overworld_ChangeMusicTo(MUS_CYCLING);
 }
 
-void nullsub_74(void)
+void ResetCyclingRoadChallengeData(void)
 {
 
 }

@@ -664,7 +664,7 @@ bool8 MetatileBehavior_IsFallWarp(u8 metatileBehavior)
 
 bool8 MetatileBehavior_ReturnFalse_13(u8 metatileBehavior){ return FALSE; }
 
-bool8 MetatileBehavior_IsCyclingRoadPullDownTile(u8 metatileBehavior)
+bool32 MetatileBehavior_IsCyclingRoadPullDownTile(u8 metatileBehavior)
 {
     if(metatileBehavior >= MB_CYCLING_ROAD_PULL_DOWN && metatileBehavior <= MB_CYCLING_ROAD_PULL_DOWN_GRASS)
         return TRUE;

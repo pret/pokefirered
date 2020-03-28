@@ -20,6 +20,7 @@ struct CameraObject
 extern struct CameraObject gFieldCamera;
 extern u16 gTotalCameraPixelOffsetX;
 extern u16 gTotalCameraPixelOffsetY;
+extern bool8 gBikeCameraAheadPanback;
 
 // Exported ROM declarations
 

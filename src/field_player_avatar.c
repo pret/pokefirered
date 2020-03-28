@@ -1350,7 +1350,7 @@ void sub_805CC2C(u8 direction)
     sub_8150498(2);
 }
 
-void nullsub_24(void)
+void nullsub_24(u8 direction)
 {
 
 }

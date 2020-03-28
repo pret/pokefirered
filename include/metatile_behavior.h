@@ -96,7 +96,7 @@ bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior);
 bool8 MetatileBehavior_IsWater(u8 metatileBehavior);
 bool8 MetatileBehavior_IsFallWarp(u8 metatileBehavior);
 bool8 MetatileBehavior_ReturnFalse_13(u8 metatileBehavior);
-bool8 MetatileBehavior_IsCyclingRoadPullDownTile(u8 metatileBehavior);
+bool32 MetatileBehavior_IsCyclingRoadPullDownTile(u8 metatileBehavior);
 bool8 MetatileBehavior_IsCyclingRoadPullDownTileGrass(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBumpySlope(u8 metatileBehavior);
 bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 metatileBehavior);

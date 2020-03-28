@@ -152,7 +152,7 @@ static void task0A_asap_script_env_2_enable_and_set_ctx_running(u8 taskId)
     }
 }
 
-void FieldCallback_ReturnToEventScript2(void)
+void FieldCB_ContinueScriptHandleMusic(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
@@ -160,7 +160,7 @@ void FieldCallback_ReturnToEventScript2(void)
     CreateTask(task0A_asap_script_env_2_enable_and_set_ctx_running, 10);
 }
 
-void sub_807DD44(void)
+void FieldCB_ContinueScript(void)
 {
     ScriptContext2_Enable();
     FadeInFromBlack();
@@ -193,7 +193,7 @@ static void task_mpl_807DD60(u8 taskId)
     }
 }
 
-void FieldCB_ReturnToFieldWiredLink(void)
+void FieldCB_ReturnToFieldCableLink(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
@@ -284,7 +284,7 @@ static void sub_807DF4C(bool8 a0)
         FadeInFromBlack();
 }
 
-void FieldCB_UnionRoomWarp(void)
+void FieldCB_DefaultWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
     sub_8111CF0();
@@ -292,7 +292,7 @@ void FieldCB_UnionRoomWarp(void)
     ScriptContext2_Enable();
 }
 
-void sub_807DF7C(void)
+void FieldCB_WarpExitFadeFromBlack(void)
 {
     Overworld_PlaySpecialMapMusic();
     sub_8111CF0();
@@ -491,7 +491,7 @@ void FadeTransition_FadeInOnReturnToStartMenu(void)
     ScriptContext2_Enable();
 }
 
-bool8 FieldCB2_ReturnToStartMenuInit(void)
+bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
 {
     SetUpReturnToStartMenu();
     return FALSE;
@@ -535,7 +535,7 @@ void DoWarp(void)
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
     PlaySE(SE_KAIDAN);
-    gFieldCallback = FieldCB_UnionRoomWarp;
+    gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(sub_807E718, 10);
 }
 
@@ -545,7 +545,7 @@ void DoDiveWarp(void)
     TryFadeOutOldMapMusic();
     WarpFadeOutScreen();
     PlayRainStoppingSoundEffect();
-    gFieldCallback = FieldCB_UnionRoomWarp;
+    gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(sub_807E718, 10);
 }
 
@@ -560,7 +560,7 @@ void sub_807E4A0(u16 metatileBehavior, u16 delay)
 void DoDoorWarp(void)
 {
     ScriptContext2_Enable();
-    gFieldCallback = FieldCB_UnionRoomWarp;
+    gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(sub_807E80C, 10);
 }
 
@@ -574,7 +574,7 @@ void sub_807E500(void)
 void DoUnionRoomWarp(void)
 {
     ScriptContext2_Enable();
-    gFieldCallback = FieldCB_UnionRoomWarp;
+    gFieldCallback = FieldCB_DefaultWarpExit;
     CreateTask(Task_TeleportWarp, 10);
 }
 
@@ -833,7 +833,7 @@ static void sub_807E980(u8 taskId)
             data[0]++;
         break;
     default:
-        gFieldCallback = FieldCB_UnionRoomWarp;
+        gFieldCallback = FieldCB_DefaultWarpExit;
         WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);

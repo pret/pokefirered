@@ -750,7 +750,7 @@ void CB2_ReturnFromCableClubBattle(void)
     }
     else
     {
-        gMain.savedCallback = c2_8056854;
+        gMain.savedCallback = CB2_ReturnToFieldFromMultiplayer;
     }
     SetMainCallback2(CB2_SetUpSaveAfterLinkBattle);
 }

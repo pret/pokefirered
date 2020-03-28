@@ -509,7 +509,7 @@ static void BufferOptionMenuString(u8 selection)
 
 static void CloseAndSaveOptionMenu(u8 taskId)
 {
-    gFieldCallback = FieldCB_UnionRoomWarp;
+    gFieldCallback = FieldCB_DefaultWarpExit;
     SetMainCallback2(gMain.savedCallback);
     FreeAllWindowBuffers();
     gSaveBlock2Ptr->optionsTextSpeed = sOptionMenuPtr->option[MENUITEM_TEXTSPEED];

@@ -279,7 +279,7 @@ void ShowEasyChatScreen(void)
     default:
         return;
     }
-    DoEasyChatScreen(gSpecialVar_0x8004, words, sub_80568C4);
+    DoEasyChatScreen(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript);
 }
 
 static const u16 sECPhrase_MysteryEventIsExciting[] = {

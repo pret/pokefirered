@@ -9,7 +9,7 @@ void sub_80B0244(void);
 void sub_807E3EC(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
-void sub_807F5F0(void);
+void FieldCB_RushInjuredPokemonToCenter(void);
 
 extern const s32 gMaxFlashLevel;
 

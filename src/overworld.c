@@ -4,6 +4,7 @@
 #include "event_scripts.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_fadetransition.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -11,13 +12,16 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "heal_location.h"
+#include "link.h"
 #include "load_save.h"
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "metatile_behavior.h"
 #include "money.h"
+#include "new_game.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "play_time.h"
 #include "quest_log.h"
 #include "random.h"
 #include "renewable_hidden_items.h"
@@ -84,9 +88,22 @@ void SetDefaultFlashLevel(void);
 void Overworld_TryMapConnectionMusicTransition(void);
 void ChooseAmbientCrySpecies(void);
 
+void CB2_Overworld(void);
+void CB2_DoChangeMap(void);
+void CB2_LoadMap2(void);
+void c2_80567AC(void);
+void CB2_ReturnToFieldLocal(void);
+void CB2_ReturnToFieldLink(void);
 void MoveSaveBlocks_ResetHeap_(void);
 void sub_8056E80(void);
 void CB1_UpdateLinkState(void);
+void SetFieldVBlankCallback(void);
+void FieldClearVBlankHBlankCallbacks(void);
+void ResetAllMultiplayerState(void);
+void do_load_map_stuff_loop(u8 *state);
+bool32 sub_8056CD8(u8 *state);
+bool32 map_loading_iteration_3(u8 *state);
+bool32 map_loading_iteration_2_link(u8 *state);
 
 extern const struct MapLayout * gMapLayouts[];
 extern const struct MapHeader *const *gMapGroups[];
@@ -116,7 +133,7 @@ const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
     FLAG_BADGE08_GET
 };
 
-void sub_8054BC8(void)
+void DoWhiteOut(void)
 {
     ScriptContext2_RunNewScript(EventScript_ResetEliteFourEnd);
     RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
@@ -654,7 +671,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
     if (GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
-        CreateMapNamePopupIfNotAlreadyRunning(TRUE);
+        ShowMapNamePopup(TRUE);
 }
 
 void mli0_load_map(bool32 a1)
@@ -710,7 +727,7 @@ void ResetInitialPlayerAvatarState(void)
     gInitialPlayerAvatarState.unk2 = FALSE;
 }
 
-void sub_80559F8(u8 dirn)
+void SetInitialPlayerAvatarStateWithDirection(u8 dirn)
 {
     gInitialPlayerAvatarState.direction = dirn;
     gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
@@ -1264,7 +1281,7 @@ bool32 IsUpdateLinkStateCBActive(void)
         return FALSE;
 }
 
-void sub_805644C(u16 newKeys, u16 heldKeys)
+void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 {
     struct FieldInput fieldInput;
 
@@ -1288,4 +1305,270 @@ void sub_805644C(u16 newKeys, u16 heldKeys)
         }
     }
     RunQuestLogCB();
+}
+
+void DoCB1_Overworld_QuestLogPlayback(void)
+{
+    struct FieldInput fieldInput;
+
+    sub_8112B3C();
+    sub_805BEB8();
+    sub_8111C68();
+    FieldClearPlayerInput(&fieldInput);
+    fieldInput = gUnknown_3005E90;
+    FieldInput_HandleCancelSignpost(&fieldInput);
+    if (!ScriptContext2_IsEnabled())
+    {
+        if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
+        {
+            ScriptContext2_Enable();
+            DismissMapNamePopup();
+        }
+        else
+        {
+            RunQuestLogCB();
+        }
+    }
+    else if (sub_8111CD0() == TRUE)
+    {
+        RunQuestLogCB();
+    }
+    FieldClearPlayerInput(&gUnknown_3005E90);
+}
+
+void CB1_Overworld(void)
+{
+    if (gMain.callback2 == CB2_Overworld)
+    {
+        if (sub_8112CAC() == TRUE || gQuestLogState == QL_STATE_2)
+            DoCB1_Overworld_QuestLogPlayback();
+        else
+            DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
+    }
+}
+
+void OverworldBasic(void)
+{
+    ScriptContext2_RunScript();
+    RunTasks();
+    AnimateSprites();
+    CameraUpdate();
+    sub_8115798();
+    UpdateCameraPanning();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    UpdateTilesetAnimations();
+    DoScheduledBgTilemapCopiesToVram();
+}
+
+// This CB2 is used when starting
+void CB2_OverworldBasic(void)
+{
+    OverworldBasic();
+}
+
+void CB2_Overworld(void)
+{
+    bool32 fading = !!gPaletteFade.active;
+    if (fading)
+        SetVBlankCallback(NULL);
+    OverworldBasic();
+    if (fading)
+        SetFieldVBlankCallback();
+}
+
+void SetMainCallback1(MainCallback cb)
+{
+    gMain.callback1 = cb;
+}
+
+bool8 map_post_load_hook_exec(void)
+{
+    if (gFieldCallback2)
+    {
+        if (!gFieldCallback2())
+        {
+            return FALSE;
+        }
+        else
+        {
+            gFieldCallback2 = NULL;
+            gFieldCallback = NULL;
+        }
+    }
+    else
+    {
+        if (gFieldCallback)
+            gFieldCallback();
+        else
+            FieldCB_DefaultWarpExit();
+
+        gFieldCallback = NULL;
+    }
+
+    return TRUE;
+}
+
+void CB2_NewGame(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    NewGameInitData();
+    ResetInitialPlayerAvatarState();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    gFieldCallback2 = NULL;
+    do_load_map_stuff_loop(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+}
+
+void CB2_WhiteOut(void)
+{
+    u8 val;
+
+    if (++gMain.state >= 120)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        StopMapMusic();
+        ResetSafariZoneFlag_();
+        DoWhiteOut();
+        SetInitialPlayerAvatarStateWithDirection(DIR_NORTH);
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
+        val = 0;
+        do_load_map_stuff_loop(&val);
+        sub_8112364();
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_LoadMap(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    SetMainCallback1(NULL);
+    SetMainCallback2(CB2_DoChangeMap);
+    gMain.savedCallback = CB2_LoadMap2;
+}
+
+void CB2_LoadMap2(void)
+{
+    do_load_map_stuff_loop(&gMain.state);
+    if (sub_8113748() == TRUE)
+    {
+        sub_81119C8();
+    }
+    else
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_ReturnToFieldCableClub(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
+    SetMainCallback2(c2_80567AC);
+}
+
+void c2_80567AC(void)
+{
+    if (map_loading_iteration_3(&gMain.state))
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_UpdateLinkState);
+        ResetAllMultiplayerState();
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_ReturnToField(void)
+{
+    if (IsUpdateLinkStateCBActive() == TRUE)
+    {
+        SetMainCallback2(CB2_ReturnToFieldLink);
+    }
+    else
+    {
+        FieldClearVBlankHBlankCallbacks();
+        SetMainCallback2(CB2_ReturnToFieldLocal);
+    }
+}
+
+void CB2_ReturnToFieldLocal(void)
+{
+    if (sub_8056CD8(&gMain.state))
+    {
+        SetFieldVBlankCallback();
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_ReturnToFieldLink(void)
+{
+    if (!sub_8058244() && map_loading_iteration_2_link(&gMain.state))
+        SetMainCallback2(CB2_Overworld);
+}
+
+void CB2_ReturnToFieldFromMultiplayer(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    SetMainCallback1(CB1_UpdateLinkState);
+    ResetAllMultiplayerState();
+
+    if (gWirelessCommType != 0)
+        gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
+    else
+        gFieldCallback = FieldCB_ReturnToFieldCableLink;
+
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    CB2_ReturnToField();
+}
+
+void CB2_ReturnToFieldWithOpenMenu(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback2 = FieldCB_ReturnToFieldOpenStartMenu;
+    CB2_ReturnToField();
+}
+
+void CB2_ReturnToFieldContinueScript(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = FieldCB_ContinueScript;
+    CB2_ReturnToField();
+}
+
+void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = FieldCB_ContinueScriptHandleMusic;
+    CB2_ReturnToField();
+}
+
+void sub_80568FC(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    CB2_ReturnToField();
+}
+
+void sub_8056918(void)
+{
+    if (SHOW_MAP_NAME_ENABLED)
+        ShowMapNamePopup(FALSE);
+    FieldCB_WarpExitFadeFromBlack();
 }

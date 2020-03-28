@@ -9,6 +9,7 @@
 extern u8 gQuestLogState;
 extern u8 gUnknown_3005E88;
 extern const u16 gUnknown_84566A8[];
+extern struct FieldInput gUnknown_3005E90;
 
 void sub_8112720(u8);
 void SetQuestLogEvent(u16, const u16 *);
@@ -51,5 +52,10 @@ void sub_8111708(void);
 void sub_81127F8(struct FieldInput * a0);
 void sub_8112B3C(void);
 void RunQuestLogCB(void);
+void sub_8111C68(void);
+bool8 sub_8111CD0(void);
+void sub_8115798(void);
+bool8 sub_8113748(void);
+void sub_81119C8(void);
 
 #endif //GUARD_QUEST_LOG_H

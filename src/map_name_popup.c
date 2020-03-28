@@ -18,7 +18,7 @@ static u16 MapNamePopupCreateWindow(bool32 palIntoFadedBuffer);
 static void MapNamePopupPrintMapNameOnWindow(u16 windowId);
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 
-void CreateMapNamePopupIfNotAlreadyRunning(bool32 palIntoFadedBuffer)
+void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
     if (FlagGet(FLAG_SPECIAL_FLAG_0x4000) != TRUE && !(gQuestLogState == 2 || gQuestLogState == 3))

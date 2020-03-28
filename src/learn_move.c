@@ -286,7 +286,7 @@ static void Task_InitMoveRelearnerMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(CB2_MoveRelearner_Init);
-        gFieldCallback = FieldCallback_ReturnToEventScript2;
+        gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
 }

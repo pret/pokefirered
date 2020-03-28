@@ -2022,7 +2022,7 @@ static void sub_804E944(void)
             Free(sTradeMenuResourcesPtr);
             FreeAllWindowBuffers();
             DestroyWirelessStatusIndicatorSprite();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
     else
@@ -2032,7 +2032,7 @@ static void sub_804E944(void)
             Free(sSpriteTextTileBuffer);
             Free(sTradeMenuResourcesPtr);
             FreeAllWindowBuffers();
-            SetMainCallback2(c2_8056854);
+            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
         }
     }
 }

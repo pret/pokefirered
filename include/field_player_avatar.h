@@ -60,5 +60,6 @@ void sub_805C260(void);
 void player_step(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 PlayerIsMovingOnRockStairs(u8 direction);
 void sub_805BEB8(void);
+void nullsub_24(u8 direction);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

@@ -7,7 +7,7 @@
 #include "new_menu_helpers.h"
 #include "overworld.h"
 
-EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
+EWRAM_DATA bool8 gBikeCameraAheadPanback = FALSE;
 
 // Static type declarations
 struct FieldCameraOffset
@@ -531,7 +531,7 @@ static void CameraPanningCB_PanAhead(void)
 {
     u8 var;
 
-    if (gUnusedBikeCameraAheadPanback == FALSE)
+    if (gBikeCameraAheadPanback == FALSE)
     {
         InstallCameraPanAheadCallback();
     }

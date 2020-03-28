@@ -29,6 +29,7 @@
 #include "constants/maps.h"
 #include "constants/flags.h"
 #include "constants/species.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
 struct InitialPlayerAvatarState
@@ -42,7 +43,11 @@ EWRAM_DATA struct WarpData gLastUsedWarp = {};
 EWRAM_DATA struct WarpData sWarpDestination = {};
 EWRAM_DATA struct WarpData gFixedDiveWarp = {};
 EWRAM_DATA struct WarpData gFixedHoleWarp = {};
+
+// File boundary perhaps?
 EWRAM_DATA struct InitialPlayerAvatarState gInitialPlayerAvatarState = {};
+
+// File boundary perhaps?
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = FALSE;
 EWRAM_DATA u16 sAmbientCrySpecies = SPECIES_NONE;
 EWRAM_DATA bool8 sIsAmbientCryWaterMon = FALSE;
@@ -69,6 +74,8 @@ void ChooseAmbientCrySpecies(void);
 
 extern const struct MapLayout * gMapLayouts[];
 extern const struct MapHeader *const *gMapGroups[];
+
+// Routines related to game state on warping in
 
 static const u8 sWhiteOutMoneyLossMultipliers[] = {
      2,
@@ -197,6 +204,8 @@ void sub_8054E40(void)
     RoamerMoveToOtherLocationSet();
 }
 
+// Routines related to game stats
+
 void ResetGameStats(void)
 {
     int i;
@@ -243,6 +252,8 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->gameStats[i], newKey);
     }
 }
+
+// Routines related to object events
 
 void sub_8054F68(void)
 {
@@ -321,6 +332,8 @@ void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
+// Routines related to the map layout
+
 void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
@@ -337,6 +350,8 @@ const struct MapLayout *GetMapLayout(void)
         return gMapLayouts[mapLayoutId - 1];
     return NULL;
 }
+
+// Routines related to warps
 
 const struct WarpData sDummyWarpData = {
     .mapGroup = MAP_GROUP(UNDEFINED),
@@ -588,6 +603,8 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
     return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
+// Map loaders
+
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     int paletteIndex;
@@ -667,6 +684,8 @@ void sub_80559A8(void)
     LoadSaveblockMapHeader();
     InitMap();
 }
+
+// Routines related to the initial player avatar state
 
 void ResetInitialPlayerAvatarState(void)
 {
@@ -777,6 +796,8 @@ u16 GetCenterScreenMetatileBehavior(void)
     return MapGridGetMetatileBehaviorAt(gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7);
 }
 
+// Routines related to flash level and map perms
+
 bool32 Overworld_IsBikingAllowed(void)
 {
     if (!gMapHeader.bikingAllowed)
@@ -817,6 +838,8 @@ void sub_8055D5C(struct WarpData * warp)
 {
     sWarpDestination = *warp;
 }
+
+// Routines related to map music
 
 u16 GetLocationMusic(struct WarpData * warp)
 {
@@ -1023,4 +1046,14 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 void ChooseAmbientCrySpecies(void)
 {
     sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
+}
+
+bool32 sub_8056124(u16 music)
+{
+    if (music == MUS_CYCLING || music == MUS_NAMINORI)
+    {
+        if (gMapHeader.regionMapSectionId == MAPSEC_KANTO_VICTORY_ROAD || gMapHeader.regionMapSectionId == MAPSEC_ROUTE_23 || gMapHeader.regionMapSectionId == MAPSEC_INDIGO_PLATEAU)
+            return FALSE;
+    }
+    return TRUE;
 }

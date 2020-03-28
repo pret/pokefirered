@@ -5,39 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8056124
-sub_8056124: @ 8056124
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	movs r0, 0x8D
-	lsls r0, 1
-	cmp r1, r0
-	beq _08056138
-	adds r0, 0x17
-	cmp r1, r0
-	bne _08056150
-_08056138:
-	ldr r0, _0805614C @ =gMapHeader
-	ldrb r0, [r0, 0x14]
-	cmp r0, 0x84
-	beq _08056148
-	cmp r0, 0x7B
-	beq _08056148
-	cmp r0, 0x61
-	bne _08056150
-_08056148:
-	movs r0, 0
-	b _08056152
-	.align 2, 0
-_0805614C: .4byte gMapHeader
-_08056150:
-	movs r0, 0x1
-_08056152:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8056124
-
 	thumb_func_start GetMapTypeByGroupAndId
 GetMapTypeByGroupAndId: @ 8056158
 	push {lr}

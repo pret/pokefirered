@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SeafoamIslands_B2F_EventScript_ItemBigPearl",
       "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B2F_BIG_PEARL"

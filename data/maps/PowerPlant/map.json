@@ -23,7 +23,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_ItemMaxPotion",
       "flag": "FLAG_HIDE_POWER_PLANT_MAX_POTION"
@@ -36,7 +36,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_ItemTM17",
       "flag": "FLAG_HIDE_POWER_PLANT_TM17"
@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_ItemTM25",
       "flag": "FLAG_HIDE_POWER_PLANT_TM25"
@@ -62,7 +62,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_ItemThunderStone",
       "flag": "FLAG_HIDE_POWER_PLANT_THUNDER_STONE"
@@ -75,7 +75,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_ItemElixir",
       "flag": "FLAG_HIDE_POWER_PLANT_ELIXIR"
@@ -88,7 +88,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_Zapdos",
       "flag": "FLAG_HIDE_ZAPDOS"
@@ -101,7 +101,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_Electrode2",
       "flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_2"
@@ -114,7 +114,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PowerPlant_EventScript_Electrode1",
       "flag": "FLAG_HIDE_POWER_PLANT_ELECTRODE_1"

@@ -40,5 +40,9 @@ void InitMap(void);
 void copy_map_tileset2_to_vram_2(const struct MapLayout * mapLayout);
 void apply_map_tileset2_palette(const struct MapLayout * mapLayout);
 void InitMapFromSavedGame(void);
+void copy_map_tileset1_to_vram(const struct MapLayout *mapLayout);
+void copy_map_tileset2_to_vram(const struct MapLayout *mapLayout);
+void GetCameraFocusCoords(u16 *x, u16 *y);
+void SetCameraFocusCoords(u16 x, u16 y);
 
 #endif //GUARD_FIELDMAP_H

@@ -416,12 +416,12 @@ void RunOnTransitionMapScript(void)
     mapheader_run_script_by_tag(3);
 }
 
-void mapheader_run_script_with_tag_x5(void)
+void RunOnResumeMapScript(void)
 {
     mapheader_run_script_by_tag(5);
 }
 
-void mapheader_run_script_with_tag_x7(void)
+void RunOnReturnToFieldMapScript(void)
 {
     mapheader_run_script_by_tag(7);
 }
@@ -447,7 +447,7 @@ bool8 TryRunOnFrameMapScript(void)
     return 1;
 }
 
-void mapheader_run_first_tag4_script_list_match(void)
+void TryRunOnWarpIntoMapScript(void)
 {
     u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
     if (ptr)

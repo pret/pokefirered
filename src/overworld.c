@@ -1,22 +1,27 @@
 #include "global.h"
 #include "gflib.h"
+#include "bg_regs.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_effect.h"
 #include "field_fadetransition.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
+#include "field_tasks.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "heal_location.h"
+#include "help_system.h"
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
 #include "map_name_popup.h"
+#include "map_preview_screen.h"
 #include "metatile_behavior.h"
 #include "money.h"
 #include "new_game.h"
@@ -24,6 +29,7 @@
 #include "overworld.h"
 #include "play_time.h"
 #include "quest_log.h"
+#include "quest_log_objects.h"
 #include "random.h"
 #include "renewable_hidden_items.h"
 #include "roamer.h"
@@ -33,6 +39,7 @@
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "tileset_anims.h"
+#include "trainer_pokemon_sprites.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "constants/maps.h"
@@ -99,14 +106,39 @@ void CB2_ReturnToFieldLink(void);
 void FieldClearVBlankHBlankCallbacks(void);
 void SetFieldVBlankCallback(void);
 void VBlankCB_Field(void);
+
+bool32 map_loading_iteration_3(u8 *state);
+bool32 sub_8056CD8(u8 *state);
+bool32 map_loading_iteration_2_link(u8 *state);
+void do_load_map_stuff_loop(u8 *state);
 void MoveSaveBlocks_ResetHeap_(void);
 void sub_8056E80(void);
+void sub_8056F08(void);
+void InitOverworldGraphicsRegisters(void);
+void sub_8057024(bool32 a0);
+void sub_8057074(void);
+void mli4_mapscripts_and_other(void);
+void sub_8057100(void);
+void sub_8057114(void);
+void SetCameraToTrackGuestPlayer(void);
+void SetCameraToTrackGuestPlayer_2(void);
+void sub_8057178(void);
+void sub_80571A8(void);
+void CreateLinkPlayerSprites(void);
+void sub_80572D8(void);
+void sub_8057300(u8 *state);
+bool32 sub_8057314(u8 *state);
+bool32 sub_8057528(u8 *state, u8 unused);
+bool8 sub_8057650(void);
+void sub_8057748(struct CameraObject * camera);
+void sub_805781C(u8 taskId);
+void sub_8057854(u8 taskId);
+void SpawnLinkPlayerObjectEvent(u8 i, s16 x, s16 y, u8 gender);
+void CreateLinkPlayerSprite(u8 i, u8 version);
+void ClearAllPlayerKeys(void);
+u8 GetSpriteForLinkedPlayer(u8 linkPlayerId);
 void CB1_UpdateLinkState(void);
 void ResetAllMultiplayerState(void);
-void do_load_map_stuff_loop(u8 *state);
-bool32 sub_8056CD8(u8 *state);
-bool32 map_loading_iteration_3(u8 *state);
-bool32 map_loading_iteration_2_link(u8 *state);
 
 extern const struct MapLayout * gMapLayouts[];
 extern const struct MapHeader *const *gMapGroups[];
@@ -672,7 +704,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     sub_8110920();
     DoCurrentWeather();
     ResetFieldTasksArgs();
-    mapheader_run_script_with_tag_x5();
+    RunOnResumeMapScript();
     if (GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId)
         ShowMapNamePopup(TRUE);
 }
@@ -1653,5 +1685,781 @@ void InitCurrentFlashLevelScanlineEffect(void)
             .initState = 1,
             .unused9 = 0
         });
+    }
+}
+
+bool32 map_loading_iteration_3(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs();
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        (*state)++;
+        break;
+    case 1:
+        mli0_load_map(TRUE);
+        (*state)++;
+        break;
+    case 2:
+        sub_8057024(TRUE);
+        (*state)++;
+        break;
+    case 3:
+        sub_8057178();
+        sub_8057074();
+        sub_80571A8();
+        SetCameraToTrackGuestPlayer();
+        SetHelpContextForMap();
+        (*state)++;
+        break;
+    case 4:
+        InitCurrentFlashLevelScanlineEffect();
+        InitOverworldGraphicsRegisters();
+        (*state)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 7:
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 8:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            (*state)++;
+        }
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 10:
+        InitTilesetAnimations();
+        (*state)++;
+        break;
+    case 11:
+        if (gWirelessCommType != 0)
+        {
+            LoadWirelessStatusIndicatorSpriteGfx();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+        }
+        (*state)++;
+        break;
+    case 12:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 13:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 load_map_stuff(u8 *state, bool32 a1)
+{
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs();
+        FieldClearVBlankHBlankCallbacks();
+        mli0_load_map(a1);
+        (*state)++;
+        break;
+    case 1:
+        sub_8111F14();
+        (*state)++;
+        break;
+    case 2:
+        sub_8057024(a1);
+        (*state)++;
+        break;
+    case 3:
+        if (sub_8113748() == TRUE)
+            return TRUE;
+        (*state)++;
+        break;
+    case 4:
+        mli4_mapscripts_and_other();
+        sub_8057114();
+        if (gQuestLogState != QL_STATE_2)
+        {
+            sub_80CC534();
+            sub_80CC59C();
+        }
+        SetHelpContextForMap();
+        (*state)++;
+        break;
+    case 5:
+        InitCurrentFlashLevelScanlineEffect();
+        InitOverworldGraphicsRegisters();
+        (*state)++;
+        break;
+    case 6:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 7:
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 8:
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 9:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            (*state)++;
+        }
+        break;
+    case 10:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 11:
+        InitTilesetAnimations();
+        (*state)++;
+        break;
+    case 12:
+        if (GetLastUsedWarpMapSectionId() != gMapHeader.regionMapSectionId && MapHasPreviewScreen_HandleQLState2(gMapHeader.regionMapSectionId, MPS_TYPE_FOREST) == TRUE)
+        {
+            MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
+            MapPreview_StartForestTransition(gMapHeader.regionMapSectionId);
+        }
+        else if (SHOW_MAP_NAME_ENABLED)
+        {
+            ShowMapNamePopup(FALSE);
+        }
+        (*state)++;
+        break;
+    case 13:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 14:
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 sub_8056CD8(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs();
+        sub_8111F14();
+        sub_8057024(FALSE);
+        sub_8057100();
+        sub_8057114();
+        (*state)++;
+        break;
+    case 1:
+        (*state)++;
+        break;
+    case 2:
+        sub_8056F08();
+        SetHelpContextForMap();
+        (*state)++;
+        break;
+    case 3:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 4:
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 map_loading_iteration_2_link(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs();
+        FieldClearVBlankHBlankCallbacks();
+        (*state)++;
+        break;
+    case 1:
+        sub_8111F14();
+        sub_8057024(1);
+        (*state)++;
+        break;
+    case 2:
+        CreateLinkPlayerSprites();
+        sub_8057100();
+        SetCameraToTrackGuestPlayer_2();
+        SetHelpContextForMap();
+        (*state)++;
+        break;
+    case 3:
+        InitCurrentFlashLevelScanlineEffect();
+        InitOverworldGraphicsRegisters();
+        (*state)++;
+        break;
+    case 4:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 5:
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 7:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            (*state)++;
+        }
+        break;
+    case 8:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 9:
+        InitTilesetAnimations();
+        (*state)++;
+        break;
+    case 10:
+        (*state)++;
+        break;
+    case 11:
+        if (gWirelessCommType != 0)
+        {
+            LoadWirelessStatusIndicatorSpriteGfx();
+            CreateWirelessStatusIndicatorSprite(0, 0);
+        }
+        (*state)++;
+        break;
+    case 12:
+        if (map_post_load_hook_exec())
+            (*state)++;
+        break;
+    case 13:
+        SetFieldVBlankCallback();
+        (*state)++;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void do_load_map_stuff_loop(u8 *state)
+{
+    while (!load_map_stuff(state, FALSE))
+        ;
+}
+
+void MoveSaveBlocks_ResetHeap_(void)
+{
+    MoveSaveBlocks_ResetHeap();
+}
+
+void sub_8056E80(void)
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    ScanlineEffect_Stop();
+
+    DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
+    DmaFillLarge16(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
+    ResetOamRange(0, 128);
+    LoadOam();
+}
+
+void sub_8056F08(void)
+{
+    InitCurrentFlashLevelScanlineEffect();
+    InitOverworldGraphicsRegisters();
+    mapdata_load_assets_to_gpu_and_full_redraw();
+}
+
+void InitOverworldGraphicsRegisters(void)
+{
+    ClearScheduledBgCopiesToVram();
+    ResetTempTileDataBuffers();
+    SetGpuReg(REG_OFFSET_MOSAIC, 0);
+    SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 255));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
+    SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(255, 255));
+    SetGpuReg(REG_OFFSET_WIN1V, WIN_RANGE(255, 255));
+    SetGpuReg(REG_OFFSET_BLDCNT, gOverworldBackgroundLayerFlags[1] | gOverworldBackgroundLayerFlags[2] | gOverworldBackgroundLayerFlags[3]
+                                 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(13, 7));
+    ScheduleBgCopyTilemapToVram(1);
+    ScheduleBgCopyTilemapToVram(2);
+    ScheduleBgCopyTilemapToVram(3);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | 0x20 | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    ChangeBgX(0, 0, 0);
+    ChangeBgY(0, 0, 0);
+    ChangeBgX(1, 0, 0);
+    ChangeBgY(1, 0, 0);
+    ChangeBgX(2, 0, 0);
+    ChangeBgY(2, 0, 0);
+    ChangeBgX(3, 0, 0);
+    ChangeBgY(3, 0, 0);
+}
+
+void sub_8057024(u32 a1)
+{
+    ResetTasks();
+    ResetSpriteData();
+    ResetPaletteFade();
+    ScanlineEffect_Clear();
+    ResetAllPicSprites();
+    ResetCameraUpdateInfo();
+    InstallCameraPanAheadCallback();
+    if (!a1)
+        InitObjectEventPalettes(0);
+    else
+        InitObjectEventPalettes(1);
+
+    FieldEffectActiveListClear();
+    StartWeather();
+    ResumePausedWeather();
+    if (!a1)
+        SetUpFieldTasks();
+    RunOnResumeMapScript();
+}
+
+void sub_8057074(void)
+{
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
+    ResetObjectEvents();
+    TrySpawnObjectEvents(0, 0);
+    TryRunOnWarpIntoMapScript();
+}
+
+void mli4_mapscripts_and_other(void)
+{
+    s16 x, y;
+    struct InitialPlayerAvatarState *player;
+
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
+    ResetObjectEvents();
+    GetCameraFocusCoords(&x, &y);
+    player = GetInitialPlayerAvatarState();
+    InitPlayerAvatar(x, y, player->direction, gSaveBlock2Ptr->playerGender);
+    SetPlayerAvatarTransitionFlags(player->transitionFlags);
+    ResetInitialPlayerAvatarState();
+    TrySpawnObjectEvents(0, 0);
+    TryRunOnWarpIntoMapScript();
+}
+
+void sub_8057100(void)
+{
+    sub_805EDF0(0, 0);
+    RunOnReturnToFieldMapScript();
+}
+
+void sub_8057114(void)
+{
+    gObjectEvents[gPlayerAvatar.objectEventId].trackedByCamera = 1;
+    InitCameraUpdateCallback(gPlayerAvatar.spriteId);
+}
+
+void SetCameraToTrackGuestPlayer(void)
+{
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
+}
+
+// Duplicate function.
+void SetCameraToTrackGuestPlayer_2(void)
+{
+    InitCameraUpdateCallback(GetSpriteForLinkedPlayer(gLocalLinkPlayerId));
+}
+
+void sub_8057178(void)
+{
+    u16 x, y;
+    GetCameraFocusCoords(&x, &y);
+
+    // This is a hack of some kind; it's undone in sub_8086B14, which is called
+    // soon after this function.
+    SetCameraFocusCoords(x + gLocalLinkPlayerId, y);
+}
+
+void sub_80571A8(void)
+{
+    u16 i;
+    u16 x, y;
+
+    GetCameraFocusCoords(&x, &y);
+    x -= gLocalLinkPlayerId;
+
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+    {
+        SpawnLinkPlayerObjectEvent(i, i + x, y, gLinkPlayers[i].gender);
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+    }
+
+    ClearAllPlayerKeys();
+}
+
+void CreateLinkPlayerSprites(void)
+{
+    u16 i;
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+}
+
+// Credits
+
+void sub_805726C(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gUnknown_2036E28 = 1;
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    SetMainCallback1(NULL);
+    SetMainCallback2(CB2_DoChangeMap);
+    gMain.savedCallback = sub_80572D8;
+}
+
+void sub_80572A8(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    gUnknown_2036E28 = 1;
+    LoadSaveblockMapHeader();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    SetMainCallback1(NULL);
+    SetMainCallback2(sub_80572D8);
+}
+
+void sub_80572D8(void)
+{
+    sub_8057300(&gMain.state);
+    SetFieldVBlankCallback();
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
+}
+
+void sub_8057300(u8 *state)
+{
+    while (!sub_8057314(state))
+        ;
+}
+
+bool32 sub_8057314(u8 *state)
+{
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs();
+        FieldClearVBlankHBlankCallbacks();
+        sub_8111F14();
+        sub_81113E4();
+        sub_8111438();
+        if (sub_8110AC8() == 2)
+        {
+            gUnknown_2031DE0 = 0;
+            mli0_load_map(FALSE);
+        }
+        else
+        {
+            gUnknown_2031DE0 = 1;
+            sub_80559A8();
+        }
+        (*state)++;
+        break;
+    case 1:
+        sub_8110FCC();
+        (*state)++;
+        break;
+    case 2:
+        sub_8057024(0);
+        (*state)++;
+        break;
+    case 3:
+        sub_8057100();
+        sub_8057114();
+        (*state)++;
+        break;
+    case 4:
+        InitCurrentFlashLevelScanlineEffect();
+        InitOverworldGraphicsRegisters();
+        (*state)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 6:
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 7:
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 8:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            (*state)++;
+        }
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 10:
+        InitTilesetAnimations();
+        sub_815A540();
+        (*state)++;
+        break;
+    default:
+        if (map_post_load_hook_exec())
+            return TRUE;
+        break;
+    }
+    return FALSE;
+}
+
+void sub_8057430(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    gUnknown_2036E28 = 3;
+    ResetSafariZoneFlag_();
+    LoadSaveblockMapHeader();
+    LoadSaveblockObjEventScripts();
+    UnfreezeObjectEvents();
+    sub_8054E40();
+    InitMapFromSavedGame();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    gUnknown_2031DE0 = TRUE;
+    if (UseContinueGameWarp() == TRUE)
+    {
+        ClearContinueGameWarpStatus();
+        SetWarpDestinationToContinueGameWarp();
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMap);
+    }
+    else
+    {
+        SetMainCallback1(CB1_Overworld);
+        CB2_ReturnToField();
+    }
+}
+
+void Overworld_CreditsMainCB(void)
+{
+    bool8 fading = !!gPaletteFade.active;
+    if (fading)
+        SetVBlankCallback(NULL);
+    RunTasks();
+    AnimateSprites();
+    sub_805ACF0();
+    UpdateCameraPanning();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    UpdateTilesetAnimations();
+    DoScheduledBgTilemapCopiesToVram();
+    if (fading)
+        SetFieldVBlankCallback();
+}
+
+bool8 sub_80574EC(void)
+{
+    if (gPaletteFade.active)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool32 Overworld_DoScrollSceneForCredits(u8 *state_p, const struct CreditsOverworldCmd * script, u8 a2)
+{
+    gUnknown_2031DE4 = script;
+    gUnknown_2036E28 = a2;
+    return sub_8057528(state_p, 0);
+}
+
+bool32 sub_8057528(u8 *state, u8 unused)
+{
+    struct WarpData warp;
+    switch (*state)
+    {
+    case 0:
+        gUnknown_2031DEA = 0;
+        gUnknown_2031DE8 = 0;
+        (*state)++;
+        return FALSE;
+    case 1:
+        warp.mapGroup = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
+        warp.mapNum = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
+        warp.warpId = -1;
+        gUnknown_2031DEA++;
+        warp.x = gUnknown_2031DE4[gUnknown_2031DEA].unk_0;
+        warp.y = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
+        sWarpDestination = warp;
+        gUnknown_2031DE8 = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
+        WarpIntoMap();
+        gPaletteFade.bufferTransferDisabled = TRUE;
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        SetMainCallback1(NULL);
+        gFieldCallback2 = sub_80574EC;
+        gMain.state = 0;
+        (*state)++;
+        return FALSE;
+    case 2:
+        if (sub_8057650())
+        {
+            (*state)++;
+            return FALSE;
+        }
+        break;
+    case 3:
+        gFieldCamera.callback = sub_8057748;
+        SetFieldVBlankCallback();
+        *state = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8057650(void)
+{
+    u8 *state = &gMain.state;
+    switch (*state)
+    {
+    case 0:
+        InitOverworldBgs_NoResetHeap();
+        mli0_load_map(FALSE);
+        (*state)++;
+        break;
+    case 1:
+        ScanlineEffect_Clear();
+        ResetAllPicSprites();
+        ResetCameraUpdateInfo();
+        InstallCameraPanAheadCallback();
+        FieldEffectActiveListClear();
+        StartWeather();
+        ResumePausedWeather();
+        SetUpFieldTasks();
+        RunOnResumeMapScript();
+        (*state)++;
+        break;
+    case 2:
+        InitCurrentFlashLevelScanlineEffect();
+        InitOverworldGraphicsRegisters();
+        (*state)++;
+        break;
+    case 3:
+        move_tilemap_camera_to_upper_left_corner();
+        (*state)++;
+        break;
+    case 4:
+        copy_map_tileset1_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 5:
+        copy_map_tileset2_to_vram(gMapHeader.mapLayout);
+        (*state)++;
+        break;
+    case 6:
+        if (FreeTempTileDataBuffersIfPossible() != TRUE)
+        {
+            apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
+            (*state)++;
+        }
+        break;
+    case 7:
+        DrawWholeMapView();
+        (*state)++;
+        break;
+    case 8:
+        InitTilesetAnimations();
+        gPaletteFade.bufferTransferDisabled = FALSE;
+        FadeSelectedPals(FADE_FROM_BLACK, 0, 0x3FFFFFFF);
+        (*state)++;
+        break;
+    default:
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void sub_8057748(struct CameraObject * camera)
+{
+    if (gUnknown_2031DE8 == 0)
+    {
+        gUnknown_2031DEA++;
+        switch (gUnknown_2031DE4[gUnknown_2031DEA].unk_0)
+        {
+        case 0xFC:
+        case 0xFE:
+            return;
+        case 0xFF:
+            camera->movementSpeedX = 0;
+            camera->movementSpeedY = 0;
+            camera->callback = NULL;
+            CreateTask(sub_805781C, 0);
+            return;
+        case 0xFB:
+            camera->movementSpeedX = 0;
+            camera->movementSpeedY = 0;
+            camera->callback = NULL;
+            break;
+        case 0xFD:
+            camera->movementSpeedX = 0;
+            camera->movementSpeedY = 0;
+            camera->callback = NULL;
+            return;
+        default:
+            gUnknown_2031DE8 = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
+            camera->movementSpeedX = gUnknown_2031DE4[gUnknown_2031DEA].unk_0;
+            camera->movementSpeedY = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
+            break;
+        }
+    }
+    if (gUnknown_2031DE4[gUnknown_2031DEA].unk_0 == 0xFF)
+    {
+        camera->movementSpeedX = 0;
+        camera->movementSpeedY = 0;
+    }
+    else
+        gUnknown_2031DE8--;
+}
+
+void sub_805781C(u8 taskId)
+{
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
+    gTasks[taskId].func = sub_8057854;
+}
+
+void sub_8057854(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_LoadMap);
+        DestroyTask(taskId);
     }
 }

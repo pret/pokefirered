@@ -59,5 +59,6 @@ void MapPreview_InitBgs(void);
 void MapPreview_LoadGfx(u8 mapsec);
 bool32 MapPreview_IsGfxLoadFinished(void);
 void MapPreview_Unload(s32 windowId);
+void MapPreview_StartForestTransition(u8 mapsec);
 
 #endif //GUARD_MAP_PREVIEW_SCREEN_H

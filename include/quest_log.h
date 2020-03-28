@@ -57,5 +57,10 @@ bool8 sub_8111CD0(void);
 void sub_8115798(void);
 bool8 sub_8113748(void);
 void sub_81119C8(void);
+void sub_8111F14(void);
+void sub_8110FCC(void);
+u8 sub_8110AC8(void);
+void sub_81113E4(void);
+void sub_8111438(void);
 
 #endif //GUARD_QUEST_LOG_H

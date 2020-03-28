@@ -39,7 +39,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_Erik",
       "flag": "0"
@@ -52,7 +52,7 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -65,7 +65,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -78,7 +78,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_Youngster",
       "flag": "0"
@@ -91,7 +91,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 3,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -104,7 +104,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 3,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_LittleBoy",
       "flag": "0"
@@ -117,7 +117,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -130,7 +130,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_OldMan",
       "flag": "0"
@@ -143,7 +143,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -156,7 +156,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 4,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
       "flag": "0"
@@ -169,7 +169,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_12"
@@ -182,7 +182,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_13"
@@ -195,7 +195,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_14"
@@ -208,7 +208,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_15"
@@ -221,7 +221,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_SubstituteTutor",
       "flag": "0"
@@ -234,7 +234,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FuchsiaCity_EventScript_Lass",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"

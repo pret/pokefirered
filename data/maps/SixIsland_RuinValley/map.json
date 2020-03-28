@@ -29,7 +29,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SixIsland_RuinValley_EventScript_Scientist",
       "flag": "FLAG_HIDE_RUIN_VALLEY_SCIENTIST"
@@ -42,7 +42,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "SixIsland_RuinValley_EventScript_Stanly",
       "flag": "0"
@@ -55,7 +55,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_RuinValley_EventScript_Foster",
       "flag": "0"
@@ -68,7 +68,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "SixIsland_RuinValley_EventScript_Larry",
       "flag": "0"
@@ -81,7 +81,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_RuinValley_EventScript_Daryl",
       "flag": "0"
@@ -94,7 +94,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 3,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "SixIsland_RuinValley_EventScript_Hector",
       "flag": "0"
@@ -107,7 +107,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -120,7 +120,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -133,7 +133,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -146,7 +146,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -159,7 +159,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -172,7 +172,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -185,7 +185,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -198,7 +198,7 @@
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "0"
@@ -211,7 +211,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SixIsland_RuinValley_EventScript_ItemHPUp",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP"
@@ -224,7 +224,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SixIsland_RuinValley_EventScript_ItemFullRestore",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE"
@@ -237,7 +237,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SixIsland_RuinValley_EventScript_ItemSunStone",
       "flag": "FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE"

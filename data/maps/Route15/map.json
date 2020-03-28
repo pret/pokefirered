@@ -34,7 +34,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Yazmin",
       "flag": "0"
@@ -47,7 +47,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
       "script": "Route15_EventScript_Edwin",
       "flag": "0"
@@ -60,7 +60,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route15_EventScript_Chester",
       "flag": "0"
@@ -73,7 +73,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Kindra",
       "flag": "0"
@@ -86,7 +86,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route15_EventScript_Olivia",
       "flag": "0"
@@ -99,7 +99,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route15_EventScript_Alex",
       "flag": "0"
@@ -112,7 +112,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Ernest",
       "flag": "0"
@@ -125,7 +125,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 4,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Becky",
       "flag": "0"
@@ -138,7 +138,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "Route15_EventScript_Grace",
       "flag": "0"
@@ -151,7 +151,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 4,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Celia",
       "flag": "0"
@@ -164,7 +164,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route15_EventScript_ItemTM18",
       "flag": "FLAG_HIDE_ROUTE15_TM18"
@@ -177,7 +177,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Ron",
       "flag": "0"
@@ -190,7 +190,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "Route15_EventScript_Mya",
       "flag": "0"

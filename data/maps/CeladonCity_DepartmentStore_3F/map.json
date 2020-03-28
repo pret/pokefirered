@@ -23,7 +23,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_CounterTutor",
       "flag": "0"
@@ -36,7 +36,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_GBAKid1",
       "flag": "0"
@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_GBAKid3",
       "flag": "0"
@@ -62,7 +62,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_GBAKid2",
       "flag": "0"
@@ -75,7 +75,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_LittleGirl",
       "flag": "0"

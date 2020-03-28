@@ -34,7 +34,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route21_South_EventScript_Claude",
       "flag": "0"
@@ -47,7 +47,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route21_South_EventScript_Nolan",
       "flag": "0"
@@ -60,7 +60,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route21_South_EventScript_Jack",
       "flag": "0"
@@ -73,7 +73,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route21_South_EventScript_Jerome",
       "flag": "0"
@@ -86,7 +86,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 2,
       "movement_range_y": 2,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "Route21_South_EventScript_Roland",
       "flag": "0"

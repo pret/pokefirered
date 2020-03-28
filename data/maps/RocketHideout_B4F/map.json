@@ -23,7 +23,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_Giovanni",
       "flag": "FLAG_HIDE_HIDEOUT_GIOVANNI"
@@ -36,7 +36,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_SilphScope",
       "flag": "FLAG_HIDE_SILPH_SCOPE"
@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "RocketHideout_B4F_EventScript_Grunt1",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
@@ -62,7 +62,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_LiftKey",
       "flag": "FLAG_HIDE_LIFT_KEY"
@@ -75,7 +75,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_Grunt3",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
@@ -88,7 +88,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_Grunt2",
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
@@ -101,7 +101,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_ItemTM49",
       "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_TM49"
@@ -114,7 +114,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_ItemMaxEther",
       "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_MAX_ETHER"
@@ -127,7 +127,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "RocketHideout_B4F_EventScript_ItemCalcium",
       "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B4F_CALCIUM"

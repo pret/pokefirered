@@ -23,7 +23,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "SixIsland_PatternBush_EventScript_Bethany",
       "flag": "0"
@@ -36,7 +36,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_PatternBush_EventScript_Allison",
       "flag": "0"
@@ -49,7 +49,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_PatternBush_EventScript_Garret",
       "flag": "0"
@@ -62,7 +62,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 2,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_PatternBush_EventScript_Jonah",
       "flag": "0"
@@ -75,7 +75,7 @@
       "movement_type": "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN",
       "movement_range_x": 2,
       "movement_range_y": 5,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "SixIsland_PatternBush_EventScript_Vance",
       "flag": "0"
@@ -88,7 +88,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "SixIsland_PatternBush_EventScript_Nash",
       "flag": "0"
@@ -101,7 +101,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
       "script": "SixIsland_PatternBush_EventScript_Cordell",
       "flag": "0"
@@ -114,7 +114,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "5",
       "script": "SixIsland_PatternBush_EventScript_Dalia",
       "flag": "0"
@@ -127,7 +127,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "SixIsland_PatternBush_EventScript_Joana",
       "flag": "0"
@@ -140,7 +140,7 @@
       "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 2,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "SixIsland_PatternBush_EventScript_Riley",
       "flag": "0"
@@ -153,7 +153,7 @@
       "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
       "movement_range_x": 5,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
       "script": "SixIsland_PatternBush_EventScript_Marcy",
       "flag": "0"
@@ -166,7 +166,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
-      "trainer_type": "1",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
       "script": "SixIsland_PatternBush_EventScript_Layton",
       "flag": "0"

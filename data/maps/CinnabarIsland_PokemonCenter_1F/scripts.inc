@@ -36,7 +36,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill:: @ 816E90A
 	closemessage
 	playbgm MUS_ANNAI, 1
 	savebgm MUS_ANNAI
-	setflag FLAG_SPECIAL_FLAG_0x4001
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	delay 20
 	compare VAR_FACING, DIR_SOUTH

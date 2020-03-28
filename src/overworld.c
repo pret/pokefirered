@@ -5,16 +5,19 @@
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
+#include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "heal_location.h"
 #include "load_save.h"
+#include "m4a.h"
 #include "map_name_popup.h"
 #include "metatile_behavior.h"
 #include "money.h"
 #include "overworld.h"
 #include "quest_log.h"
+#include "random.h"
 #include "renewable_hidden_items.h"
 #include "roamer.h"
 #include "save_location.h"
@@ -22,9 +25,11 @@
 #include "script_pokemon_util.h"
 #include "tileset_anims.h"
 #include "vs_seeker.h"
+#include "wild_encounter.h"
 #include "constants/maps.h"
 #include "constants/flags.h"
 #include "constants/species.h"
+#include "constants/songs.h"
 
 struct InitialPlayerAvatarState
 {
@@ -39,8 +44,8 @@ EWRAM_DATA struct WarpData gFixedDiveWarp = {};
 EWRAM_DATA struct WarpData gFixedHoleWarp = {};
 EWRAM_DATA struct InitialPlayerAvatarState gInitialPlayerAvatarState = {};
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = FALSE;
-EWRAM_DATA u16 gUnknown_2031DDA = SPECIES_NONE;
-EWRAM_DATA bool8 gUnknown_2031DDC = FALSE;
+EWRAM_DATA u16 sAmbientCrySpecies = SPECIES_NONE;
+EWRAM_DATA bool8 sIsAmbientCryWaterMon = FALSE;
 
 // File boundary perhaps?
 ALIGNED(4) EWRAM_DATA bool8 gUnknown_2031DE0 = FALSE;
@@ -57,8 +62,9 @@ void Overworld_SetWhiteoutRespawnPoint(void);
 u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType);
 u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType);
 u16 GetCenterScreenMetatileBehavior(void);
-void sub_8055E94(void);
+bool8 sub_8055B38(u16 metatileBehavior);
 void SetDefaultFlashLevel(void);
+void Overworld_TryMapConnectionMusicTransition(void);
 void ChooseAmbientCrySpecies(void);
 
 extern const struct MapLayout * gMapLayouts[];
@@ -587,7 +593,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     int paletteIndex;
 
     SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
-    sub_8055E94();
+    Overworld_TryMapConnectionMusicTransition();
     ApplyCurrentWarp();
     LoadCurrentMapData();
     sub_8054F68();
@@ -706,8 +712,6 @@ struct InitialPlayerAvatarState *GetInitialPlayerAvatarState(void)
     return &gInitialPlayerAvatarState;
 }
 
-bool8 sub_8055B38(u16 metatileBehavior);
-
 u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType)
 {
     if (mapType != MAP_TYPE_INDOOR && FlagGet(FLAG_SYS_CRUISE_MODE))
@@ -735,4 +739,288 @@ bool8 sub_8055B38(u16 metatileBehavior)
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B3F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B3F)) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEAFOAM_ISLANDS_B4F) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEAFOAM_ISLANDS_B4F)))
         return TRUE;
     return FALSE;
+}
+
+u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStruct, u8 transitionFlags, u16 metatileBehavior, u8 mapType)
+{
+    if (FlagGet(FLAG_SYS_CRUISE_MODE) && mapType == MAP_TYPE_OCEAN_ROUTE)
+        return DIR_EAST;
+    else if (MetatileBehavior_IsDeepSouthWarp(metatileBehavior) == TRUE)
+        return DIR_NORTH;
+    else if (MetatileBehavior_IsNonAnimDoor(metatileBehavior) == TRUE || MetatileBehavior_IsWarpDoor_2(metatileBehavior) == TRUE)
+        return DIR_SOUTH;
+    else if (MetatileBehavior_IsSouthArrowWarp(metatileBehavior) == TRUE)
+        return DIR_NORTH;
+    else if (MetatileBehavior_IsNorthArrowWarp(metatileBehavior) == TRUE)
+        return DIR_SOUTH;
+    else if (MetatileBehavior_IsWestArrowWarp(metatileBehavior) == TRUE)
+        return DIR_EAST;
+    else if (MetatileBehavior_IsEastArrowWarp(metatileBehavior) == TRUE)
+        return DIR_WEST;
+    else if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6E(metatileBehavior) == TRUE)
+        return DIR_WEST;
+    else if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6F(metatileBehavior) == TRUE)
+        return DIR_EAST;
+    else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
+             || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
+        return playerStruct->direction;
+    else if (MetatileBehavior_IsLadder(metatileBehavior) == TRUE)
+        return playerStruct->direction;
+    else if (playerStruct->unk2)
+        return playerStruct->direction;
+    else
+        return DIR_SOUTH;
+}
+
+u16 GetCenterScreenMetatileBehavior(void)
+{
+    return MapGridGetMetatileBehaviorAt(gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7);
+}
+
+bool32 Overworld_IsBikingAllowed(void)
+{
+    if (!gMapHeader.bikingAllowed)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void SetDefaultFlashLevel(void)
+{
+    if (!gMapHeader.cave)
+        gSaveBlock1Ptr->flashLevel = 0;
+    else if (FlagGet(FLAG_SYS_FLASH_ACTIVE))
+        gSaveBlock1Ptr->flashLevel = 0;
+    else
+        gSaveBlock1Ptr->flashLevel = gMaxFlashLevel;
+}
+
+void Overworld_SetFlashLevel(s32 flashLevel)
+{
+    if (flashLevel < 0 || flashLevel > gMaxFlashLevel)
+        flashLevel = 0;
+    gSaveBlock1Ptr->flashLevel = flashLevel;
+}
+
+u8 Overworld_GetFlashLevel(void)
+{
+    return gSaveBlock1Ptr->flashLevel;
+}
+
+void SetCurrentMapLayout(u16 mapLayoutId)
+{
+    gSaveBlock1Ptr->mapLayoutId = mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout();
+}
+
+void sub_8055D5C(struct WarpData * warp)
+{
+    sWarpDestination = *warp;
+}
+
+u16 GetLocationMusic(struct WarpData * warp)
+{
+    return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
+}
+
+u16 GetCurrLocationDefaultMusic(void)
+{
+    u16 music;
+    music = GetLocationMusic(&gSaveBlock1Ptr->location);
+    return music;
+}
+
+u16 GetWarpDestinationMusic(void)
+{
+    u16 music = GetLocationMusic(&sWarpDestination);
+    return music;
+}
+
+void Overworld_ResetMapMusic(void)
+{
+    ResetMapMusic();
+}
+
+void Overworld_PlaySpecialMapMusic(void)
+{
+    u16 music;
+    s16 x, y;
+
+    if (gDisableMapMusicChangeOnMapLoad == 1)
+    {
+        StopMapMusic();
+        return;
+    }
+    if (gDisableMapMusicChangeOnMapLoad == 2)
+    {
+        return;
+    }
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
+    {
+        PlayerGetDestCoords(&x, &y);
+        if (y - 7 < 11 && gMPlayInfo_BGM.songHeader == &mus_win_gym)
+        {
+            FadeInBGM(4);
+            return;
+        }
+    }
+
+    music = GetCurrLocationDefaultMusic();
+
+    if (gSaveBlock1Ptr->savedMusic)
+        music = gSaveBlock1Ptr->savedMusic;
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) &&sub_8056124(MUS_NAMINORI))
+        music = MUS_NAMINORI;
+
+    if (music != GetCurrentMapMusic())
+        PlayNewMapMusic(music);
+}
+
+void Overworld_SetSavedMusic(u16 songNum)
+{
+    gSaveBlock1Ptr->savedMusic = songNum;
+}
+
+void Overworld_ClearSavedMusic(void)
+{
+    gSaveBlock1Ptr->savedMusic = 0;
+}
+
+void Overworld_TryMapConnectionMusicTransition(void)
+{
+    u16 newMusic;
+    u16 currentMusic;
+
+    if (gDisableMapMusicChangeOnMapLoad == 1)
+    {
+        StopMapMusic();
+        return;
+    }
+    if (gDisableMapMusicChangeOnMapLoad == 2)
+    {
+        return;
+    }
+
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
+    {
+        newMusic = GetWarpDestinationMusic();
+        currentMusic = GetCurrentMapMusic();
+        if (currentMusic == MUS_NAMINORI)
+            return;
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && sub_8056124(MUS_NAMINORI))
+            newMusic = MUS_NAMINORI;
+        if (newMusic != currentMusic)
+        {
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+                FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
+            else
+                FadeOutAndPlayNewMapMusic(newMusic, 8);
+        }
+    }
+}
+
+void Overworld_ChangeMusicToDefault(void)
+{
+    u16 currentMusic = GetCurrentMapMusic();
+    if (currentMusic != GetCurrLocationDefaultMusic())
+        FadeOutAndPlayNewMapMusic(GetCurrLocationDefaultMusic(), 8);
+}
+
+void Overworld_ChangeMusicTo(u16 newMusic)
+{
+    u16 currentMusic = GetCurrentMapMusic();
+    if (currentMusic != newMusic)
+        FadeOutAndPlayNewMapMusic(newMusic, 8);
+}
+
+u8 GetMapMusicFadeoutSpeed(void)
+{
+    const struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
+    if (IsMapTypeIndoors(mapHeader->mapType) == TRUE)
+        return 2;
+    else
+        return 4;
+}
+
+void TryFadeOutOldMapMusic(void)
+{
+    u16 warpMusic = GetWarpDestinationMusic();
+    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
+    {
+        FadeOutMapMusic(GetMapMusicFadeoutSpeed());
+    }
+}
+
+bool8 BGMusicStopped(void)
+{
+    return IsNotWaitingForBGMStop();
+}
+
+void Overworld_FadeOutMapMusic(void)
+{
+    FadeOutMapMusic(4);
+}
+
+void PlayAmbientCry(void)
+{
+    s16 x, y;
+    s8 pan;
+    s8 volume;
+
+    PlayerGetDestCoords(&x, &y);
+    if (sIsAmbientCryWaterMon == TRUE
+        && !MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)))
+        return;
+    pan = (Random() % 88) + 212;
+    volume = (Random() % 30) + 50;
+
+    if (gDisableMapMusicChangeOnMapLoad == 1)
+    {
+        StopMapMusic();
+        return;
+    }
+    if (gDisableMapMusicChangeOnMapLoad == 2)
+    {
+        return;
+    }
+
+    PlayCry2(sAmbientCrySpecies, pan, volume, 1);
+}
+
+void UpdateAmbientCry(s16 *state, u16 *delayCounter)
+{
+    u8 i, monsCount, divBy;
+
+    switch (*state)
+    {
+    case 0:
+        if (sAmbientCrySpecies == SPECIES_NONE)
+            *state = 4;
+        else
+            *state = 1;
+        break;
+    case 1:
+        *delayCounter = (Random() % 2400) + 1200;
+        *state = 3;
+        break;
+    case 2:
+        *delayCounter = (Random() % 1200) + 1200;
+        *state = 3;
+        break;
+    case 3:
+        (*delayCounter)--;
+        if (*delayCounter == 0)
+        {
+            PlayAmbientCry();
+            *state = 2;
+        }
+        break;
+    case 4:
+        break;
+    }
+}
+
+void ChooseAmbientCrySpecies(void)
+{
+    sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
 }

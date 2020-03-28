@@ -199,7 +199,7 @@ bool8 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_ReturnFalse_2(u8 metatileBehavior) { return FALSE; }
+bool8 MetatileBehavior_IsDeepSouthWarp(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsSurfable(u8 metatileBehavior)
 {

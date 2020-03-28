@@ -177,14 +177,14 @@ void SetContinueGameWarpToDynamicWarp(int);
 
 void SetContinueGameWarpToHealLocation(u8 loc);
 
-void sub_8056078(void *, void *);
+void UpdateAmbientCry(s16 *state, u16 *delayCounter);
 void SetWarpDestinationToHealLocation(u8 a0);
 bool32 sub_80582E0(void);
 bool32 sub_8058274(void);
 u8 GetCurrentMapBattleScene(void);
 void Overworld_ResetStateAfterFly(void);
 bool8 sub_8055B38(u16 metatileBehavior);
-void sub_8055DB8(void);
+void Overworld_ResetMapMusic(void);
 void sub_8057F5C(void);
 void sub_8057F34(void);
 u32 sub_8057EC0(void);

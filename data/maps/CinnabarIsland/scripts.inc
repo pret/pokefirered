@@ -60,7 +60,7 @@ CinnabarIsland_OnFrame:: @ 8166F6E
 
 CinnabarIsland_EventScript_ExitPokeCenterForOneIsland:: @ 8166F88
 	lockall
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	savebgm MUS_DUMMY
 	textcolor 0
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 2

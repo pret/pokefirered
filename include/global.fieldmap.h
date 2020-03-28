@@ -195,11 +195,20 @@ struct MapHeader
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
     /* 0x17 */ u8 mapType;
-    /* 0x18 */ u8 filler_18;
+    /* 0x18 */ u8 bikingAllowed;
     /* 0x19 */ u8 escapeRope;
     /* 0x1A */ s8 flags;
     /* 0x1B */ u8 battleType;
 };
+
+// Flags for gMapHeader.flags, as defined in the map_header_flags macro
+#define MAP_ALLOW_BIKE         (1 << 0)
+#define MAP_ALLOW_ESCAPE_ROPE  (1 << 1)
+#define MAP_ALLOW_RUN          (1 << 2)
+#define MAP_SHOW_MAP_NAME      (1 << 3)
+#define UNUSED_MAP_FLAGS       (1 << 4 | 1 << 5 | 1 << 6 | 1 << 7)
+
+#define SHOW_MAP_NAME_ENABLED  ((gMapHeader.flags & (MAP_SHOW_MAP_NAME | UNUSED_MAP_FLAGS)) == MAP_SHOW_MAP_NAME)
 
 struct ObjectEvent
 {

@@ -224,7 +224,7 @@ PalletTown_EventScript_OakTrigger:: @ 8165605
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
-	setflag FLAG_SPECIAL_FLAG_0x4001
+	setflag FLAG_DONT_TRANSITION_MUSIC
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 255, 6, 12
 	waitstate
 	releaseall

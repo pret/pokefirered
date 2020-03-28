@@ -11,4 +11,6 @@ void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
 void sub_807F5F0(void);
 
+extern const s32 gMaxFlashLevel;
+
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

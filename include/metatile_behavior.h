@@ -24,7 +24,7 @@ bool8 MetatileBehavior_IsUnknownWarp6F(u8 metatileBehavior);
 bool8 MetatileBehavior_IsUnknownWarp6C_to_6F(u8 metatileBehavior);
 bool8 MetatileBehavior_IsLadder(u8 metatileBehavior);
 bool8 MetatileBehavior_IsNonAnimDoor(u8 metatileBehavior);
-bool8 MetatileBehavior_ReturnFalse_2(u8 metatileBehavior);
+bool8 MetatileBehavior_IsDeepSouthWarp(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSurfable(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSemiDeepWater(u8 metatileBehavior);
 bool8 MetatileBehavior_IsEastArrowWarp(u8 metatileBehavior);

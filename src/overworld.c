@@ -4,6 +4,7 @@
 #include "event_scripts.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
+#include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
@@ -15,11 +16,13 @@
 #include "map_name_popup.h"
 #include "metatile_behavior.h"
 #include "money.h"
+#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "quest_log.h"
 #include "random.h"
 #include "renewable_hidden_items.h"
 #include "roamer.h"
+#include "safari_zone.h"
 #include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -61,6 +64,15 @@ EWRAM_DATA s16 gUnknown_2031DEA = 0;
 // File boundary perhaps?
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
 
+u16 *gBGTilemapBuffers1;
+u16 *gBGTilemapBuffers2;
+u16 *gBGTilemapBuffers3;
+void (*gFieldCallback)(void);
+bool8 (*gFieldCallback2)(void);
+u16 gHeldKeyCodeToSend;
+u8 gLocalLinkPlayerId;
+u8 gFieldLinkPlayerCount;
+
 u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
 void Overworld_ResetStateAfterWhitingOut(void);
 void Overworld_SetWhiteoutRespawnPoint(void);
@@ -71,6 +83,10 @@ bool8 sub_8055B38(u16 metatileBehavior);
 void SetDefaultFlashLevel(void);
 void Overworld_TryMapConnectionMusicTransition(void);
 void ChooseAmbientCrySpecies(void);
+
+void MoveSaveBlocks_ResetHeap_(void);
+void sub_8056E80(void);
+void CB1_UpdateLinkState(void);
 
 extern const struct MapLayout * gMapLayouts[];
 extern const struct MapHeader *const *gMapGroups[];
@@ -1056,4 +1072,220 @@ bool32 sub_8056124(u16 music)
             return FALSE;
     }
     return TRUE;
+}
+
+u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum)
+{
+    return Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->mapType;
+}
+
+u8 GetMapTypeByWarpData(struct WarpData *warp)
+{
+    return GetMapTypeByGroupAndId(warp->mapGroup, warp->mapNum);
+}
+
+u8 GetCurrentMapType(void)
+{
+    return GetMapTypeByWarpData(&gSaveBlock1Ptr->location);
+}
+
+u8 GetLastUsedWarpMapType(void)
+{
+    return GetMapTypeByWarpData(&gLastUsedWarp);
+}
+
+u8 GetLastUsedWarpMapSectionId(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gLastUsedWarp.mapGroup, gLastUsedWarp.mapNum)->regionMapSectionId;
+}
+
+bool8 IsMapTypeOutdoors(u8 mapType)
+{
+    if (mapType == MAP_TYPE_ROUTE
+        || mapType == MAP_TYPE_TOWN
+        || mapType == MAP_TYPE_UNDERWATER
+        || mapType == MAP_TYPE_CITY
+        || mapType == MAP_TYPE_OCEAN_ROUTE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
+{
+    if (mapType == MAP_TYPE_ROUTE
+        || mapType == MAP_TYPE_TOWN
+        || mapType == MAP_TYPE_OCEAN_ROUTE
+        || mapType == MAP_TYPE_CITY)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 IsMapTypeIndoors(u8 mapType)
+{
+    if (mapType == MAP_TYPE_INDOOR
+        || mapType == MAP_TYPE_SECRET_BASE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u8 GetSavedWarpRegionMapSectionId(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->dynamicWarp.mapGroup, gSaveBlock1Ptr->dynamicWarp.mapNum)->regionMapSectionId;
+}
+
+u8 GetCurrentRegionMapSectionId(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
+}
+
+u8 GetCurrentMapBattleScene(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->battleType;
+}
+
+const int sUnusedData[] = {
+    1200,
+    3600,
+    1200,
+    2400,
+      50,
+      80,
+     -44,
+      44
+};
+
+const struct UCoords32 gDirectionToVectors[] = {
+    { 0u,  0u},
+    { 0u,  1u},
+    { 0u, -1u},
+    {-1u,  0u},
+    { 1u,  0u},
+    {-1u,  1u},
+    { 1u,  1u},
+    {-1u, -1u},
+    { 1u, -1u},
+};
+
+const struct BgTemplate sOverworldBgTemplates[] = {
+    {
+        .bg = 0,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0x000
+    }, {
+        .bg = 1,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0x000
+    }, {
+        .bg = 2,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 28,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0x000
+    }, {
+        .bg = 3,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0x000
+    }
+};
+
+void InitOverworldBgs(void)
+{
+    MoveSaveBlocks_ResetHeap_();
+    sub_8056E80();
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, sOverworldBgTemplates, NELEMS(sOverworldBgTemplates));
+    SetBgAttribute(1, BG_ATTR_MOSAIC, TRUE);
+    SetBgAttribute(2, BG_ATTR_MOSAIC, TRUE);
+    SetBgAttribute(3, BG_ATTR_MOSAIC, TRUE);
+    gBGTilemapBuffers2 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers1 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers3 = AllocZeroed(BG_SCREEN_SIZE);
+    SetBgTilemapBuffer(1, gBGTilemapBuffers2);
+    SetBgTilemapBuffer(2, gBGTilemapBuffers1);
+    SetBgTilemapBuffer(3, gBGTilemapBuffers3);
+    InitStandardTextBoxWindows();
+    ResetBg0();
+    sub_8069348();
+}
+
+void InitOverworldBgs_NoResetHeap(void)
+{
+    ResetBgsAndClearDma3BusyFlags(FALSE);
+    InitBgsFromTemplates(0, sOverworldBgTemplates, NELEMS(sOverworldBgTemplates));
+    SetBgAttribute(1, BG_ATTR_MOSAIC, TRUE);
+    SetBgAttribute(2, BG_ATTR_MOSAIC, TRUE);
+    SetBgAttribute(3, BG_ATTR_MOSAIC, TRUE);
+    gBGTilemapBuffers2 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers1 = AllocZeroed(BG_SCREEN_SIZE);
+    gBGTilemapBuffers3 = AllocZeroed(BG_SCREEN_SIZE);
+    SetBgTilemapBuffer(1, gBGTilemapBuffers2);
+    SetBgTilemapBuffer(2, gBGTilemapBuffers1);
+    SetBgTilemapBuffer(3, gBGTilemapBuffers3);
+    InitStandardTextBoxWindows();
+    ResetBg0();
+    sub_8069348();
+}
+
+void CleanupOverworldWindowsAndTilemaps(void)
+{
+    FreeAllOverworldWindowBuffers();
+    Free(gBGTilemapBuffers3);
+    Free(gBGTilemapBuffers1);
+    Free(gBGTilemapBuffers2);
+}
+
+void ResetSafariZoneFlag_(void)
+{
+    ResetSafariZoneFlag();
+}
+
+bool32 IsUpdateLinkStateCBActive(void)
+{
+    if (gMain.callback1 == CB1_UpdateLinkState)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void sub_805644C(u16 newKeys, u16 heldKeys)
+{
+    struct FieldInput fieldInput;
+
+    sub_8112B3C();
+    sub_805BEB8();
+    FieldClearPlayerInput(&fieldInput);
+    FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
+    FieldInput_HandleCancelSignpost(&fieldInput);
+    if (!ScriptContext2_IsEnabled())
+    {
+        if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
+        {
+            if (gUnknown_3005E88 == 2)
+                sub_81127F8(&gInputToStoreInQuestLogMaybe);
+            ScriptContext2_Enable();
+            DismissMapNamePopup();
+        }
+        else
+        {
+            player_step(fieldInput.dpadDirection, newKeys, heldKeys);
+        }
+    }
+    RunQuestLogCB();
 }

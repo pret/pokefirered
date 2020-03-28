@@ -53,7 +53,7 @@ struct CreditsOverworldCmd
 #define MUSIC_DISABLE_STOP 1
 #define MUSIC_DISABLE_KEEP 2
 
-extern struct UCoords32 gDirectionToVectors[];
+extern const struct UCoords32 gDirectionToVectors[];
 
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern MainCallback gFieldCallback;

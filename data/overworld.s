@@ -5,69 +5,6 @@
 	.section .rodata
 	.align 2, 0
 
-sUnusedData:: @ 826D2B8
-	.4byte 1200
-	.4byte 3600
-	.4byte 1200
-	.4byte 2400
-	.4byte   50
-	.4byte   80
-	.4byte  -44
-	.4byte   44
-
-gDirectionToVectors:: @ 826D2D8
-	.4byte  0,  0
-	.4byte  0,  1
-	.4byte  0, -1
-	.4byte -1,  0
-	.4byte  1,  0
-	.4byte -1,  1
-	.4byte  1,  1
-	.4byte -1, -1
-	.4byte  1, -1
-
-gUnknown_826D320:: @ 826D320
-	.4byte 0x000001f8
-	@ {
-	@ 	.bg = 0,
-	@ 	.charBaseIndex = 2,
-	@ 	.mapBaseIndex = 31,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 0,
-	@ 	.baseTile = 0x0000
-	@ }
-	.4byte 0x000011d1
-	@ {
-	@ 	.bg = 1,
-	@ 	.charBaseIndex = 0,
-	@ 	.mapBaseIndex = 29,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 1,
-	@ 	.baseTile = 0x0000
-	@ }
-	.4byte 0x000021c2
-	@ {
-	@ 	.bg = 2,
-	@ 	.charBaseIndex = 0,
-	@ 	.mapBaseIndex = 28,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 2,
-	@ 	.baseTile = 0x0000
-	@ }
-	.4byte 0x000031e3
-	@ {
-	@ 	.bg = 3,
-	@ 	.charBaseIndex = 0,
-	@ 	.mapBaseIndex = 30,
-	@ 	.screenSize = 0,
-	@ 	.paletteMode = 0,
-	@ 	.priority = 3,
-	@ 	.baseTile = 0x0000
-	@ }
-
 gFlashEffectParams:: @ 826D330
 	.4byte REG_WIN0H
 	.4byte (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16)

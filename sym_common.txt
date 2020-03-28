@@ -18,33 +18,8 @@
 	.include "random.o"
 	.align 2
 	.include "load_save.o"
-
 	.align 2
-	@ .include "overworld.o"
-gBGTilemapBuffers1: @ 3005014
-	.space 0x4
-
-gBGTilemapBuffers2: @ 3005018
-	.space 0x4
-
-gBGTilemapBuffers3: @ 300501C
-	.space 0x4
-
-gFieldCallback: @ 3005020
-	.space 0x4
-
-gFieldCallback2: @ 3005024
-	.space 0x4
-
-gHeldKeyCodeToSend: @ 3005028
-	.space 0x4
-
-gLocalLinkPlayerId: @ 300502C
-	.space 0x4
-
-gFieldLinkPlayerCount: @ 3005030
-	.space 0x10
-
+	.include "overworld.o"
 	.align 4
 	.include "fieldmap.o"
 	.align 4

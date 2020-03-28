@@ -39,5 +39,6 @@ void apply_map_tileset1_tileset2_palette(struct MapLayout const * mapLayout);
 void InitMap(void);
 void copy_map_tileset2_to_vram_2(const struct MapLayout * mapLayout);
 void apply_map_tileset2_palette(const struct MapLayout * mapLayout);
+void InitMapFromSavedGame(void);
 
 #endif //GUARD_FIELDMAP_H

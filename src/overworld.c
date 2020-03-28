@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
@@ -28,6 +29,7 @@
 #include "roamer.h"
 #include "safari_zone.h"
 #include "save_location.h"
+#include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "tileset_anims.h"
@@ -94,11 +96,12 @@ void CB2_LoadMap2(void);
 void c2_80567AC(void);
 void CB2_ReturnToFieldLocal(void);
 void CB2_ReturnToFieldLink(void);
+void FieldClearVBlankHBlankCallbacks(void);
+void SetFieldVBlankCallback(void);
+void VBlankCB_Field(void);
 void MoveSaveBlocks_ResetHeap_(void);
 void sub_8056E80(void);
 void CB1_UpdateLinkState(void);
-void SetFieldVBlankCallback(void);
-void FieldClearVBlankHBlankCallbacks(void);
 void ResetAllMultiplayerState(void);
 void do_load_map_stuff_loop(u8 *state);
 bool32 sub_8056CD8(u8 *state);
@@ -322,7 +325,7 @@ void sub_8054F68(void)
     }
 }
 
-void sub_80550A8(void)
+void LoadSaveblockObjEventScripts(void)
 {
     int i;
     const struct ObjectEventTemplate * src = gMapHeader.events->objectEvents;
@@ -1571,4 +1574,84 @@ void sub_8056918(void)
     if (SHOW_MAP_NAME_ENABLED)
         ShowMapNamePopup(FALSE);
     FieldCB_WarpExitFadeFromBlack();
+}
+
+void CB2_ContinueSavedGame(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    LoadSaveblockMapHeader();
+    LoadSaveblockObjEventScripts();
+    UnfreezeObjectEvents();
+    sub_8054E40();
+    InitMapFromSavedGame();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+    gFieldCallback2 = NULL;
+    gUnknown_2031DE0 = TRUE;
+    if (UseContinueGameWarp() == TRUE)
+    {
+        ClearContinueGameWarpStatus();
+        SetWarpDestinationToContinueGameWarp();
+        WarpIntoMap();
+        SetMainCallback2(CB2_LoadMap);
+    }
+    else
+    {
+        gFieldCallback = sub_8056918;
+        SetMainCallback1(CB1_Overworld);
+        CB2_ReturnToField();
+    }
+}
+
+void FieldClearVBlankHBlankCallbacks(void)
+{
+    if (UsedPokemonCenterWarp() == TRUE)
+        CloseLink();
+
+    if (gWirelessCommType != 0)
+    {
+        EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+        DisableInterrupts(INTR_FLAG_HBLANK);
+    }
+    else
+    {
+        DisableInterrupts(INTR_FLAG_HBLANK);
+        EnableInterrupts(INTR_FLAG_VBLANK);
+    }
+
+    SetVBlankCallback(NULL);
+    SetHBlankCallback(NULL);
+}
+
+void SetFieldVBlankCallback(void)
+{
+    SetVBlankCallback(VBlankCB_Field);
+}
+
+void VBlankCB_Field(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    ScanlineEffect_InitHBlankDmaTransfer();
+    FieldUpdateBgTilemapScroll();
+    TransferPlttBuffer();
+    TransferTilesetAnimsBuffer();
+}
+
+void InitCurrentFlashLevelScanlineEffect(void)
+{
+    u8 flashLevel = Overworld_GetFlashLevel();
+    if (flashLevel != 0)
+    {
+        WriteFlashScanlineEffectBuffer(flashLevel);
+        ScanlineEffect_SetParams((struct ScanlineEffectParams){
+            .dmaDest = &REG_WIN0H,
+            .dmaControl = (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16),
+            .initState = 1,
+            .unused9 = 0
+        });
+    }
 }

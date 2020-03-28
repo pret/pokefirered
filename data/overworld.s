@@ -5,11 +5,6 @@
 	.section .rodata
 	.align 2, 0
 
-gFlashEffectParams:: @ 826D330
-	.4byte REG_WIN0H
-	.4byte (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16)
-	.byte 1, 0
-
 	.align 2
 gUnknown_826D33C:: @ 826D33C
 	.4byte sub_8058684

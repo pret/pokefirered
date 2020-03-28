@@ -127,17 +127,17 @@ void MoveSaveBlocks_ResetHeap(void)
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
 
-u32 sav2_x1_query_bit1(void)
+u32 UseContinueGameWarp(void)
 {
     return gSaveBlock2Ptr->specialSaveWarpFlags & CONTINUE_GAME_WARP;
 }
 
-void sav2_x9_clear_bit1(void)
+void ClearContinueGameWarpStatus(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
-void sub_804C1AC(void)
+void SetContinueGameWarpStatus(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }

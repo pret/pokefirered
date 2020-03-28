@@ -10,6 +10,7 @@ void sub_807E3EC(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
 void FieldCB_RushInjuredPokemonToCenter(void);
+void WriteFlashScanlineEffectBuffer(u8 flashLevel);
 
 extern const s32 gMaxFlashLevel;
 

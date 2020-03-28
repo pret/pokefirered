@@ -2037,7 +2037,7 @@ const u16 sPokeCenter1FMaps[] = {
     MAP_UNDEFINED
 };
 
-bool8 sub_80CC87C(void)
+bool8 UsedPokemonCenterWarp(void)
 {
     s32 i;
     u16 mapno = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;

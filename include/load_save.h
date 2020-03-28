@@ -30,6 +30,8 @@ void ApplyNewEncryptionKeyToWord(u32 * word, u32 encryptionKey);
 void ApplyNewEncryptionKeyToHword(u16 * hword, u32 encryptionKey);
 void ClearContinueGameWarpStatus2(void);
 void SetContinueGameWarpStatusToDynamicWarp(void);
-void sub_804C1AC(void);
+void SetContinueGameWarpStatus(void);
+bool32 UseContinueGameWarp(void);
+void ClearContinueGameWarpStatus();
 
 #endif // GUARD_LOAD_SAVE_H

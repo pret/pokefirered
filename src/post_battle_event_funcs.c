@@ -28,7 +28,7 @@ bool8 EnterHallOfFame(void)
     {
         SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlock2Ptr->playTimeHours << 16) | (gSaveBlock2Ptr->playTimeMinutes << 8) | gSaveBlock2Ptr->playTimeSeconds);
     }
-    sub_804C1AC();
+    SetContinueGameWarpStatus();
     SetContinueGameWarpToHealLocation(SPAWN_PALLET_TOWN);
     gaveAtLeastOneRibbon = FALSE;
     for (i = 0, r7 = &ribbonState; i < PARTY_SIZE; i++)

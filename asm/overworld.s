@@ -5,135 +5,6 @@
 
 	.text
 
-	thumb_func_start CB2_ContinueSavedGame
-CB2_ContinueSavedGame: @ 8056938
-	push {lr}
-	bl FieldClearVBlankHBlankCallbacks
-	bl StopMapMusic
-	bl ResetSafariZoneFlag_
-	bl LoadSaveblockMapHeader
-	bl sub_80550A8
-	bl UnfreezeObjectEvents
-	bl sub_8054E40
-	bl InitMapFromSavedGame
-	bl PlayTimeCounter_Start
-	bl ScriptContext1_Init
-	bl ScriptContext2_Disable
-	ldr r1, _08056990 @ =gFieldCallback2
-	movs r0, 0
-	str r0, [r1]
-	ldr r1, _08056994 @ =gUnknown_2031DE0
-	movs r0, 0x1
-	strb r0, [r1]
-	bl sav2_x1_query_bit1
-	cmp r0, 0x1
-	bne _0805699C
-	bl sav2_x9_clear_bit1
-	bl SetWarpDestinationToContinueGameWarp
-	bl WarpIntoMap
-	ldr r0, _08056998 @ =CB2_LoadMap
-	bl SetMainCallback2
-	b _080569AC
-	.align 2, 0
-_08056990: .4byte gFieldCallback2
-_08056994: .4byte gUnknown_2031DE0
-_08056998: .4byte CB2_LoadMap
-_0805699C:
-	ldr r0, _080569B0 @ =gFieldCallback
-	ldr r1, _080569B4 @ =sub_8056918
-	str r1, [r0]
-	ldr r0, _080569B8 @ =CB1_Overworld
-	bl SetMainCallback1
-	bl CB2_ReturnToField
-_080569AC:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080569B0: .4byte gFieldCallback
-_080569B4: .4byte sub_8056918
-_080569B8: .4byte CB1_Overworld
-	thumb_func_end CB2_ContinueSavedGame
-
-	thumb_func_start FieldClearVBlankHBlankCallbacks
-FieldClearVBlankHBlankCallbacks: @ 80569BC
-	push {lr}
-	bl sub_80CC87C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080569CE
-	bl CloseLink
-_080569CE:
-	ldr r0, _080569E4 @ =gWirelessCommType
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080569E8
-	movs r0, 0xC5
-	bl EnableInterrupts
-	movs r0, 0x2
-	bl DisableInterrupts
-	b _080569F4
-	.align 2, 0
-_080569E4: .4byte gWirelessCommType
-_080569E8:
-	movs r0, 0x2
-	bl DisableInterrupts
-	movs r0, 0x1
-	bl EnableInterrupts
-_080569F4:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	bl SetHBlankCallback
-	pop {r0}
-	bx r0
-	thumb_func_end FieldClearVBlankHBlankCallbacks
-
-	thumb_func_start SetFieldVBlankCallback
-SetFieldVBlankCallback: @ 8056A04
-	push {lr}
-	ldr r0, _08056A10 @ =VBlankCB_Field
-	bl SetVBlankCallback
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08056A10: .4byte VBlankCB_Field
-	thumb_func_end SetFieldVBlankCallback
-
-	thumb_func_start VBlankCB_Field
-VBlankCB_Field: @ 8056A14
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl ScanlineEffect_InitHBlankDmaTransfer
-	bl FieldUpdateBgTilemapScroll
-	bl TransferPlttBuffer
-	bl TransferTilesetAnimsBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end VBlankCB_Field
-
-	thumb_func_start InitCurrentFlashLevelScanlineEffect
-InitCurrentFlashLevelScanlineEffect: @ 8056A34
-	push {lr}
-	bl Overworld_GetFlashLevel
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _08056A52
-	bl WriteFlashScanlineEffectBuffer
-	ldr r2, _08056A58 @ =gFlashEffectParams
-	ldr r0, [r2]
-	ldr r1, [r2, 0x4]
-	ldr r2, [r2, 0x8]
-	bl ScanlineEffect_SetParams
-_08056A52:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08056A58: .4byte gFlashEffectParams
-	thumb_func_end InitCurrentFlashLevelScanlineEffect
-
 	thumb_func_start map_loading_iteration_3
 map_loading_iteration_3: @ 8056A5C
 	push {r4,lr}
@@ -1297,7 +1168,7 @@ sub_8057430: @ 8057430
 	strb r0, [r1]
 	bl ResetSafariZoneFlag_
 	bl LoadSaveblockMapHeader
-	bl sub_80550A8
+	bl LoadSaveblockObjEventScripts
 	bl UnfreezeObjectEvents
 	bl sub_8054E40
 	bl InitMapFromSavedGame
@@ -1306,10 +1177,10 @@ sub_8057430: @ 8057430
 	ldr r1, _08057488 @ =gUnknown_2031DE0
 	movs r0, 0x1
 	strb r0, [r1]
-	bl sav2_x1_query_bit1
+	bl UseContinueGameWarp
 	cmp r0, 0x1
 	bne _08057490
-	bl sav2_x9_clear_bit1
+	bl ClearContinueGameWarpStatus
 	bl SetWarpDestinationToContinueGameWarp
 	bl WarpIntoMap
 	ldr r0, _0805748C @ =CB2_LoadMap

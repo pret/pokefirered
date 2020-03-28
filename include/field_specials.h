@@ -33,5 +33,6 @@ void IncrementResortGorgeousStepCounter(void);
 void IncrementBirthIslandRockStepCount(void);
 void ResetCyclingRoadChallengeData(void);
 void ResetFieldTasksArgs(void);
+bool8 UsedPokemonCenterWarp(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

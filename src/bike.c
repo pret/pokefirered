@@ -397,34 +397,30 @@ void Bike_HandleBumpySlopeJump(void)
     }
 }
 
-static const u8 gUnknown_83E7D22 = 4;
+// R/S leftover
 
-// unused
-static const struct
+// the struct below is used for checking button combinations of the last input so that the acro can potentially perform a side/turn jump.
+// its possible that at some point Game Freak intended for the acro bike to have more complex tricks: but only the acro jump combinations can be seen in the final ROM.
+struct BikeHistoryInputInfo
 {
-    u32 unk00, unk04, unk08, unk0C;
-    const void *unk10, *unk14;
-    u32 unk18;
-} gUnknown_83E7D24[] =
+    u32 dirHistoryMatch; // the direction you need to press
+    u32 abStartSelectHistoryMatch; // the button you need to press
+    u32 dirHistoryMask; // mask applied so that way only the recent nybble (the recent input) is checked
+    u32 abStartSelectHistoryMask; // mask applied so that way only the recent nybble (the recent input) is checked
+    const u8 *dirTimerHistoryList; // list of timers to check for direction before the button+dir combination can be verified.
+    const u8 *abStartSelectHistoryList; // list of timers to check for buttons before the button+dir combination can be verified.
+    u32 direction; // direction to jump
+};
+
+// this is a list of timers to compare against later, terminated with 0. the only timer being compared against is 4 frames in this list.
+static const u8 sAcroBikeJumpTimerList[] = {4, 0};
+
+// this is a list of history inputs to do in order to do the check to retrieve a jump direction for acro bike. it seems to be an extensible list, so its possible that Game Freak may have intended for the Acro Bike to have more complex tricks at some point. The final list only has the acro jump.
+static const struct BikeHistoryInputInfo sAcroBikeTricksList[] =
 {
-    {
-        1, 2, 15, 15,
-        &gUnknown_83E7D22, &gUnknown_83E7D22,
-        1,
-    },
-    {
-        2, 2, 15, 15,
-        &gUnknown_83E7D22, &gUnknown_83E7D22,
-        2,
-    },
-    {
-        3, 2, 15, 15,
-        &gUnknown_83E7D22, &gUnknown_83E7D22,
-        3,
-    },
-    {
-        4, 2, 15, 15,
-        &gUnknown_83E7D22, &gUnknown_83E7D22,
-        4,
-    },
+    // the 0xF is a mask performed with each byte of the array in order to perform the check on only the last entry of the history list, otherwise the check wouldn't work as there can be 0xF0 as opposed to 0x0F.
+    {DIR_SOUTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_SOUTH},
+    {DIR_NORTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_NORTH},
+    {DIR_WEST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_WEST},
+    {DIR_EAST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_EAST},
 };

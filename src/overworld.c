@@ -120,7 +120,7 @@ u8 gFieldLinkPlayerCount;
 
 static u8 sPlayerTradingStates[4];
 static KeyInterCB sPlayerKeyInterceptCallback;
-static bool8 gUnknown_3000E88;
+static bool8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
 static u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
@@ -1629,7 +1629,7 @@ static void CB2_ReturnToFieldLocal(void)
 
 static void CB2_ReturnToFieldLink(void)
 {
-    if (!sub_8058244() && map_loading_iteration_2_link(&gMain.state))
+    if (!Overworld_LinkRecvQueueLengthMoreThan2() && map_loading_iteration_2_link(&gMain.state))
         SetMainCallback2(CB2_Overworld);
 }
 
@@ -3181,15 +3181,15 @@ static void sub_8058230(void)
     ScriptContext2_Enable();
 }
 
-bool32 sub_8058244(void)
+bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
 {
     if (!IsUpdateLinkStateCBActive())
         return FALSE;
     if (GetLinkRecvQueueLength() >= 3)
-        gUnknown_3000E88 = TRUE;
+        sReceivingFromLink = TRUE;
     else
-        gUnknown_3000E88 = FALSE;
-    return gUnknown_3000E88;
+        sReceivingFromLink = FALSE;
+    return sReceivingFromLink;
 }
 
 bool32 sub_8058274(void)
@@ -3207,8 +3207,8 @@ bool32 sub_8058274(void)
     else if (sPlayerKeyInterceptCallback != KeyInterCB_DeferToEventScript)
         return FALSE;
 
-    temp = gUnknown_3000E88;
-    gUnknown_3000E88 = FALSE;
+    temp = sReceivingFromLink;
+    sReceivingFromLink = FALSE;
 
     if (temp == TRUE)
         return TRUE;

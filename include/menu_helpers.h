@@ -15,7 +15,7 @@ struct YesNoFuncTable
 };
 
 bool16 RunTextPrinters_CheckActive(u8 textPrinterId);
-bool32 sub_80BF72C(void);
+bool32 MenuHelpers_CallLinkSomething(void);
 bool8 sub_80BF748(void);
 bool8 MenuHelpers_LinkSomething(void);
 void SetVBlankHBlankCallbacksToNull(void);

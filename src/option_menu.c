@@ -43,11 +43,10 @@ enum
 struct OptionMenu
 {
     /*0x00*/ u16 option[MENUITEM_COUNT];
-    /*0x0E*/ u16 unkE;
-    /*0x10*/ u8 state3;
+    /*0x0E*/ u16 cursorPos;
+    /*0x10*/ u8 loadState;
     /*0x11*/ u8 state;
-    /*0x12*/ u8 state2;
-    /*0x13*/ u8 unk13;
+    /*0x12*/ u8 loadPaletteState;
 };
 
 static EWRAM_DATA struct OptionMenu *sOptionMenuPtr = NULL;
@@ -68,9 +67,9 @@ static u8 OptionMenu_ProcessInput(void);
 static void BufferOptionMenuString(u8 selection);
 static void CloseAndSaveOptionMenu(u8 taskId);
 static void PrintOptionMenuHeader(void);
-static void sub_8088C0C(void);
+static void DrawOptionMenuBg(void);
 static void LoadOptionMenuItemNames(void);
-static void sub_8088DE0(u16 selection);
+static void UpdateSettingSelectionDisplay(u16 selection);
 
 // Data Definitions
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
@@ -208,10 +207,10 @@ void CB2_OptionsMenuFromStartMenu(void)
     if (gMain.savedCallback == NULL)
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
     sOptionMenuPtr = AllocZeroed(sizeof(struct OptionMenu));
-    sOptionMenuPtr->state3 = 0;
-    sOptionMenuPtr->state2 = 0;
+    sOptionMenuPtr->loadState = 0;
+    sOptionMenuPtr->loadPaletteState = 0;
     sOptionMenuPtr->state = 0;
-    sOptionMenuPtr->unkE = 0;
+    sOptionMenuPtr->cursorPos = 0;
     sOptionMenuPtr->option[MENUITEM_TEXTSPEED] = gSaveBlock2Ptr->optionsTextSpeed;
     sOptionMenuPtr->option[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
     sOptionMenuPtr->option[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
@@ -262,7 +261,7 @@ static void CB2_OptionMenu(void)
         PrintOptionMenuHeader();
         break;
     case 5:
-        sub_8088C0C();
+        DrawOptionMenuBg();
         break;
     case 6:
         LoadOptionMenuItemNames();
@@ -272,7 +271,7 @@ static void CB2_OptionMenu(void)
             BufferOptionMenuString(i);
         break;
     case 8:
-        sub_8088DE0(sOptionMenuPtr->unkE);
+        UpdateSettingSelectionDisplay(sOptionMenuPtr->cursorPos);
         break;
     case 9:
         OptionMenu_PickSwitchCancel();
@@ -340,7 +339,7 @@ static void OptionMenu_ResetSpriteData(void)
 
 static bool8 LoadOptionMenuPalette(void)
 {
-    switch (sOptionMenuPtr->state2)
+    switch (sOptionMenuPtr->loadPaletteState)
     {
     case 0:
         LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
@@ -358,51 +357,55 @@ static bool8 LoadOptionMenuPalette(void)
     default:
         return TRUE;
     }
-    sOptionMenuPtr->state2++;
+    sOptionMenuPtr->loadPaletteState++;
     return FALSE;
 }
 
 static void Task_OptionMenu(u8 taskId)
 {
-    switch (sOptionMenuPtr->state3)
+    switch (sOptionMenuPtr->loadState)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_BLACK);
         OptionMenu_SetVBlankCallback();
-        sOptionMenuPtr->state3++;
+        sOptionMenuPtr->loadState++;
+        break;
+    case 1:
+        if (gPaletteFade.active)
+            return;
+        sOptionMenuPtr->loadState++;
         break;
     case 2:
-        if (sub_80BF72C() == TRUE)
+        if (MenuHelpers_CallLinkSomething() == TRUE)
             break;
         switch (OptionMenu_ProcessInput())
         {
         case 0:
             break;
         case 1:
-            sOptionMenuPtr->state3++;
+            sOptionMenuPtr->loadState++;
             break;
         case 2:
             LoadBgTiles(1, GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->tiles, 0x120, 0x1AA);
             LoadPalette(GetUserFrameGraphicsInfo(sOptionMenuPtr->option[MENUITEM_FRAMETYPE])->palette, 0x20, 0x20);
-            BufferOptionMenuString(sOptionMenuPtr->unkE);
+            BufferOptionMenuString(sOptionMenuPtr->cursorPos);
             break;
         case 3:
-            sub_8088DE0(sOptionMenuPtr->unkE);
+            UpdateSettingSelectionDisplay(sOptionMenuPtr->cursorPos);
             break;
         case 4:
-            BufferOptionMenuString(sOptionMenuPtr->unkE);
+            BufferOptionMenuString(sOptionMenuPtr->cursorPos);
             break;
         }
         break;
     case 3:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
-        sOptionMenuPtr->state3++;
+        sOptionMenuPtr->loadState++;
         break;
-    case 1:
     case 4:
         if (gPaletteFade.active)
             return;
-        sOptionMenuPtr->state3++;
+        sOptionMenuPtr->loadState++;
         break;
     case 5:
         CloseAndSaveOptionMenu(taskId);
@@ -416,43 +419,43 @@ static u8 OptionMenu_ProcessInput(void)
     u16* curr;
     if (JOY_REPT(DPAD_RIGHT))
     {
-        current = sOptionMenuPtr->option[(sOptionMenuPtr->unkE)];
-        if (current == (sOptionMenuItemCounts[sOptionMenuPtr->unkE] - 1))
-            sOptionMenuPtr->option[sOptionMenuPtr->unkE] = 0;
+        current = sOptionMenuPtr->option[(sOptionMenuPtr->cursorPos)];
+        if (current == (sOptionMenuItemCounts[sOptionMenuPtr->cursorPos] - 1))
+            sOptionMenuPtr->option[sOptionMenuPtr->cursorPos] = 0;
         else
-            sOptionMenuPtr->option[sOptionMenuPtr->unkE] = current + 1;
-        if (sOptionMenuPtr->unkE == MENUITEM_FRAMETYPE)
+            sOptionMenuPtr->option[sOptionMenuPtr->cursorPos] = current + 1;
+        if (sOptionMenuPtr->cursorPos == MENUITEM_FRAMETYPE)
             return 2;
         else
             return 4;
     }
     else if (JOY_REPT(DPAD_LEFT))
     {
-        curr = &sOptionMenuPtr->option[sOptionMenuPtr->unkE];
+        curr = &sOptionMenuPtr->option[sOptionMenuPtr->cursorPos];
         if (*curr == 0)
-            *curr = sOptionMenuItemCounts[sOptionMenuPtr->unkE] - 1;
+            *curr = sOptionMenuItemCounts[sOptionMenuPtr->cursorPos] - 1;
         else
             --*curr;
         
-        if (sOptionMenuPtr->unkE == MENUITEM_FRAMETYPE)
+        if (sOptionMenuPtr->cursorPos == MENUITEM_FRAMETYPE)
             return 2;
         else
             return 4;
     }
     else if (JOY_REPT(DPAD_UP))
     {
-        if (sOptionMenuPtr->unkE == MENUITEM_TEXTSPEED)
-            sOptionMenuPtr->unkE = MENUITEM_CANCEL;
+        if (sOptionMenuPtr->cursorPos == MENUITEM_TEXTSPEED)
+            sOptionMenuPtr->cursorPos = MENUITEM_CANCEL;
         else
-            sOptionMenuPtr->unkE = sOptionMenuPtr->unkE - 1;
+            sOptionMenuPtr->cursorPos = sOptionMenuPtr->cursorPos - 1;
         return 3;        
     }
     else if (JOY_REPT(DPAD_DOWN))
     {
-        if (sOptionMenuPtr->unkE == MENUITEM_CANCEL)
-            sOptionMenuPtr->unkE = MENUITEM_TEXTSPEED;
+        if (sOptionMenuPtr->cursorPos == MENUITEM_CANCEL)
+            sOptionMenuPtr->cursorPos = MENUITEM_TEXTSPEED;
         else
-            sOptionMenuPtr->unkE = sOptionMenuPtr->unkE + 1;
+            sOptionMenuPtr->cursorPos = sOptionMenuPtr->cursorPos + 1;
         return 3;
     }
     else if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
@@ -531,7 +534,7 @@ static void PrintOptionMenuHeader(void)
     CopyWindowToVram(0, 3);
 }
 
-static void sub_8088C0C(void)
+static void DrawOptionMenuBg(void)
 {
     u8 h;
     h = 2;
@@ -566,12 +569,12 @@ static void LoadOptionMenuItemNames(void)
     }
 }
 
-static void sub_8088DE0(u16 selection)
+static void UpdateSettingSelectionDisplay(u16 selection)
 {
-    u16 v1, v2;
+    u16  maxLetterHeight, y;
     
-    v1 = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
-    v2 = selection * (v1 - 1) + 0x3A;
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(v2, v2 + v1));
+     maxLetterHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+    y = selection * ( maxLetterHeight - 1) + 0x3A;
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(y, y +  maxLetterHeight));
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0x10, 0xE0));
 }

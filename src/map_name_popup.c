@@ -151,9 +151,9 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     };
     u16 windowId;
     u16 r6 = 0x01D;
-    if (gMapHeader.flags != 0)
+    if (gMapHeader.floorNum != 0)
     {
-        if (gMapHeader.flags != 0x7F)
+        if (gMapHeader.floorNum != 0x7F)
         {
             windowTemplate.width += 5;
             r6 = 0x027;
@@ -187,29 +187,29 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     u32 maxWidth = 112;
     u32 xpos;
     u8 *ptr = GetMapName(mapName, gMapHeader.regionMapSectionId, 0);
-    if (gMapHeader.flags != 0)
+    if (gMapHeader.floorNum != 0)
     {
-        ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.flags);
-        maxWidth = gMapHeader.flags != 0x7F ? 152 : 176;
+        ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);
+        maxWidth = gMapHeader.floorNum != 0x7F ? 152 : 176;
     }
     xpos = (maxWidth - GetStringWidth(2, mapName, -1)) / 2;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, 2, mapName, xpos, 2, 0xFF, NULL);
 }
 
-static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags)
+static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)
 {
-    if (flags == 0)
+    if (floorNum == 0)
         return dest;
     *dest++ = CHAR_SPACE;
-    if (flags == 0x7F)
+    if (floorNum == 0x7F)
         return StringCopy(dest, gUnknown_841D18D);
-    if (flags < 0)
+    if (floorNum < 0)
     {
         *dest++ = CHAR_B;
-        flags *= -1;
+        floorNum *= -1;
     }
-    dest = ConvertIntToDecimalStringN(dest, flags, STR_CONV_MODE_LEFT_ALIGN, 2);
+    dest = ConvertIntToDecimalStringN(dest, floorNum, STR_CONV_MODE_LEFT_ALIGN, 2);
     *dest++ = CHAR_F;
     *dest = EOS;
     return dest;

@@ -379,7 +379,7 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
 void mapheader_run_script_by_tag(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
-    if (ptr)
+    if (ptr != NULL)
         ScriptContext2_RunNewScript(ptr);
 }
 
@@ -387,7 +387,7 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
 
-    if (!ptr)
+    if (ptr == NULL)
         return NULL;
 
     while (1)

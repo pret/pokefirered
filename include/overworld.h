@@ -59,7 +59,6 @@ extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern MainCallback gFieldCallback;
 
 extern struct WarpData gLastUsedWarp;
-extern struct WarpData sWarpDestination;
 
 extern u8 gUnknown_2031DE0;
 extern u8 gFieldLinkPlayerCount;

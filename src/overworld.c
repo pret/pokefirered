@@ -80,7 +80,7 @@ struct InitialPlayerAvatarState
 struct TradeRoomPlayer
 {
     u8 playerId;
-    u8 isLocalPlayer;
+    bool8 isLocalPlayer;
     u8 c;
     u8 facing;
     struct MapPosition pos;
@@ -88,12 +88,12 @@ struct TradeRoomPlayer
 };
 
 EWRAM_DATA struct WarpData gLastUsedWarp = {};
-EWRAM_DATA struct WarpData sWarpDestination = {};
-static EWRAM_DATA struct WarpData gFixedDiveWarp = {};
-static EWRAM_DATA struct WarpData gFixedHoleWarp = {};
+static EWRAM_DATA struct WarpData sWarpDestination = {};
+static EWRAM_DATA struct WarpData sFixedDiveWarp = {};
+static EWRAM_DATA struct WarpData sFixedHoleWarp = {};
 
 // File boundary perhaps?
-static EWRAM_DATA struct InitialPlayerAvatarState gInitialPlayerAvatarState = {};
+static EWRAM_DATA struct InitialPlayerAvatarState sInitialPlayerAvatarState = {};
 
 // File boundary perhaps?
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = FALSE;
@@ -510,8 +510,8 @@ static void ApplyCurrentWarp(void)
 {
     gLastUsedWarp = gSaveBlock1Ptr->location;
     gSaveBlock1Ptr->location = sWarpDestination;
-    gFixedDiveWarp = sDummyWarpData;
-    gFixedHoleWarp = sDummyWarpData;
+    sFixedDiveWarp = sDummyWarpData;
+    sFixedHoleWarp = sDummyWarpData;
 }
 
 static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
@@ -661,25 +661,25 @@ void SetWarpDestinationToEscapeWarp(void)
 
 void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&sFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
 }
 
 static void SetWarpDestinationToDiveWarp(void)
 {
-    sWarpDestination = gFixedDiveWarp;
+    sWarpDestination = sFixedDiveWarp;
 }
 
 void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
-    SetWarpData(&gFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
+    SetWarpData(&sFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
 }
 
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y)
 {
-    if (IsDummyWarp(&gFixedHoleWarp) == TRUE)
+    if (IsDummyWarp(&sFixedHoleWarp) == TRUE)
         sWarpDestination = gLastUsedWarp;
     else
-        SetWarpDestination(gFixedHoleWarp.mapGroup, gFixedHoleWarp.mapNum, -1, x, y);
+        SetWarpDestination(sFixedHoleWarp.mapGroup, sFixedHoleWarp.mapNum, -1, x, y);
 }
 
 static void SetWarpDestinationToContinueGameWarp(void)
@@ -731,7 +731,7 @@ static bool8 SetDiveWarp(u8 dir, u16 x, u16 y)
     else
     {
         RunOnDiveWarpMapScript();
-        if (IsDummyWarp(&gFixedDiveWarp))
+        if (IsDummyWarp(&sFixedDiveWarp))
             return FALSE;
         SetWarpDestinationToDiveWarp();
     }
@@ -834,33 +834,33 @@ static void sub_80559A8(void)
 
 void ResetInitialPlayerAvatarState(void)
 {
-    gInitialPlayerAvatarState.direction = DIR_SOUTH;
-    gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
-    gInitialPlayerAvatarState.unk2 = FALSE;
+    sInitialPlayerAvatarState.direction = DIR_SOUTH;
+    sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    sInitialPlayerAvatarState.unk2 = FALSE;
 }
 
 static void SetInitialPlayerAvatarStateWithDirection(u8 dirn)
 {
-    gInitialPlayerAvatarState.direction = dirn;
-    gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
-    gInitialPlayerAvatarState.unk2 = TRUE;
+    sInitialPlayerAvatarState.direction = dirn;
+    sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    sInitialPlayerAvatarState.unk2 = TRUE;
 }
 
 void StoreInitialPlayerAvatarState(void)
 {
-    gInitialPlayerAvatarState.direction = GetPlayerFacingDirection();
+    sInitialPlayerAvatarState.direction = GetPlayerFacingDirection();
 
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
-        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_MACH_BIKE;
+        sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_MACH_BIKE;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
-        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ACRO_BIKE;
+        sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ACRO_BIKE;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_SURFING;
+        sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_SURFING;
     else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
-        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_UNDERWATER;
+        sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_UNDERWATER;
     else
-        gInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
-    gInitialPlayerAvatarState.unk2 = FALSE;
+        sInitialPlayerAvatarState.transitionFlags = PLAYER_AVATAR_FLAG_ON_FOOT;
+    sInitialPlayerAvatarState.unk2 = FALSE;
 }
 
 struct InitialPlayerAvatarState *GetInitialPlayerAvatarState(void)
@@ -868,12 +868,12 @@ struct InitialPlayerAvatarState *GetInitialPlayerAvatarState(void)
     struct InitialPlayerAvatarState playerStruct;
     u8 mapType = GetCurrentMapType();
     u16 metatileBehavior = GetCenterScreenMetatileBehavior();
-    u8 transitionFlags = GetAdjustedInitialTransitionFlags(&gInitialPlayerAvatarState, metatileBehavior, mapType);
+    u8 transitionFlags = GetAdjustedInitialTransitionFlags(&sInitialPlayerAvatarState, metatileBehavior, mapType);
     playerStruct.transitionFlags = transitionFlags;
-    playerStruct.direction = GetAdjustedInitialDirection(&gInitialPlayerAvatarState, transitionFlags, metatileBehavior, mapType);
+    playerStruct.direction = GetAdjustedInitialDirection(&sInitialPlayerAvatarState, transitionFlags, metatileBehavior, mapType);
     playerStruct.unk2 = FALSE;
-    gInitialPlayerAvatarState = playerStruct;
-    return &gInitialPlayerAvatarState;
+    sInitialPlayerAvatarState = playerStruct;
+    return &sInitialPlayerAvatarState;
 }
 
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *playerStruct, u16 metatileBehavior, u8 mapType)
@@ -2154,7 +2154,7 @@ static void sub_8057100(void)
 
 static void sub_8057114(void)
 {
-    gObjectEvents[gPlayerAvatar.objectEventId].trackedByCamera = 1;
+    gObjectEvents[gPlayerAvatar.objectEventId].trackedByCamera = TRUE;
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
 }
 
@@ -2545,14 +2545,14 @@ static void Task_OvwldCredits_WaitFade(u8 taskId)
 
 // Link related
 
-static u8 (*const gLinkPlayerMovementModes[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) = {
+static u8 (*const sLinkPlayerMovementModes[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) = {
     MovementEventModeCB_Normal, // MOVEMENT_MODE_FREE
     MovementEventModeCB_Ignored, // MOVEMENT_MODE_FROZEN
     MovementEventModeCB_Normal_2, // MOVEMENT_MODE_SCRIPTED
 };
 
 // These handlers return TRUE if the movement was scripted and successful, and FALSE otherwise.
-static bool8 (*const gLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) = {
+static bool8 (*const sLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) = {
     FacingHandler_DoNothing,
     FacingHandler_DpadMovement,
     FacingHandler_DpadMovement,
@@ -2567,7 +2567,7 @@ static bool8 (*const gLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *
 };
 
 // These handlers are run after an attempted movement.
-static void (*const gMovementStatusHandler[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *) = {
+static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *) = {
     // FALSE:
     MovementStatusHandler_EnterFreeMode,
     // TRUE:
@@ -3033,7 +3033,7 @@ static void LoadTradeRoomPlayer(s32 linkPlayerId, s32 myPlayerId, struct TradeRo
     s16 x, y;
 
     trainer->playerId = linkPlayerId;
-    trainer->isLocalPlayer = (linkPlayerId == myPlayerId) ? 1 : 0;
+    trainer->isLocalPlayer = (linkPlayerId == myPlayerId) ? TRUE : FALSE;
     trainer->c = gLinkPlayerObjectEvents[linkPlayerId].movementMode;
     trainer->facing = GetLinkPlayerFacingDirection(linkPlayerId);
     GetLinkPlayerCoords(linkPlayerId, &x, &y);
@@ -3274,15 +3274,15 @@ static void SpawnLinkPlayerObjectEvent(u8 linkPlayerId, s16 x, s16 y, u8 a4)
     ZeroLinkPlayerObjectEvent(linkPlayerObjEvent);
     ZeroObjectEvent(objEvent);
 
-    linkPlayerObjEvent->active = 1;
+    linkPlayerObjEvent->active = TRUE;
     linkPlayerObjEvent->linkPlayerId = linkPlayerId;
     linkPlayerObjEvent->objEventId = objEventId;
     linkPlayerObjEvent->movementMode = MOVEMENT_MODE_FREE;
 
-    objEvent->active = 1;
+    objEvent->active = TRUE;
     objEvent->singleMovementActive = a4;
     objEvent->range.as_byte = 2;
-    objEvent->spriteId = 64;
+    objEvent->spriteId = MAX_SPRITES;
 
     InitLinkPlayerObjectEventPos(objEvent, x, y);
 }
@@ -3315,8 +3315,8 @@ static void sub_80584B8(u8 linkPlayerId)
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
     if (objEvent->spriteId != MAX_SPRITES)
         DestroySprite(&gSprites[objEvent->spriteId]);
-    linkPlayerObjEvent->active = 0;
-    objEvent->active = 0;
+    linkPlayerObjEvent->active = FALSE;
+    objEvent->active = FALSE;
 }
 
 // Returns the spriteId corresponding to this player.
@@ -3382,15 +3382,15 @@ static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
     {
         if (facing > FACING_FORCED_RIGHT)
         {
-            objEvent->triggerGroundEffectsOnMove = 1;
+            objEvent->triggerGroundEffectsOnMove = TRUE;
         }
         else
         {
             // This is a hack to split this code onto two separate lines, without declaring a local variable.
             // C++ style inline variables would be nice here.
-#define TEMP gLinkPlayerMovementModes[linkPlayerObjEvent->movementMode](linkPlayerObjEvent, objEvent, facing)
+#define TEMP sLinkPlayerMovementModes[linkPlayerObjEvent->movementMode](linkPlayerObjEvent, objEvent, facing)
 
-            gMovementStatusHandler[TEMP](linkPlayerObjEvent, objEvent);
+            sMovementStatusHandler[TEMP](linkPlayerObjEvent, objEvent);
 
             // Clean up the hack.
 #undef TEMP
@@ -3400,7 +3400,7 @@ static void SetPlayerFacingDirection(u8 linkPlayerId, u8 facing)
 
 static u8 MovementEventModeCB_Normal(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 a3)
 {
-    return gLinkPlayerFacingHandlers[a3](linkPlayerObjEvent, objEvent, a3);
+    return sLinkPlayerFacingHandlers[a3](linkPlayerObjEvent, objEvent, a3);
 }
 
 static u8 MovementEventModeCB_Ignored(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 a3)
@@ -3411,7 +3411,7 @@ static u8 MovementEventModeCB_Ignored(struct LinkPlayerObjectEvent *linkPlayerOb
 // Duplicate Function
 static u8 MovementEventModeCB_Normal_2(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 a3)
 {
-    return gLinkPlayerFacingHandlers[a3](linkPlayerObjEvent, objEvent, a3);
+    return sLinkPlayerFacingHandlers[a3](linkPlayerObjEvent, objEvent, a3);
 }
 
 static bool8 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 a3)
@@ -3486,7 +3486,7 @@ static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
     return oldFacing;
 }
 
-static u8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
+static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 16; i++)
@@ -3496,7 +3496,7 @@ static u8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 a2, s16 x, s16 y)
             if ((gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
                 || (gObjectEvents[i].previousCoords.x == x && gObjectEvents[i].previousCoords.y == y))
             {
-                return 1;
+                return TRUE;
             }
         }
     }
@@ -3526,7 +3526,7 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         sprite = &gSprites[objEvent->spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = linkPlayerId;
-        objEvent->triggerGroundEffectsOnMove = 0;
+        objEvent->triggerGroundEffectsOnMove = FALSE;
     }
 }
 

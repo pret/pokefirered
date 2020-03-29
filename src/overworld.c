@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "bg_regs.h"
 #include "cable_club.h"
+#include "credits.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -101,9 +102,9 @@ static EWRAM_DATA bool8 sIsAmbientCryWaterMon = FALSE;
 
 // File boundary perhaps?
 ALIGNED(4) EWRAM_DATA bool8 gUnknown_2031DE0 = FALSE;
-static EWRAM_DATA const struct CreditsOverworldCmd *gUnknown_2031DE4 = NULL;
-static EWRAM_DATA s16 gUnknown_2031DE8 = 0;
-static EWRAM_DATA s16 gUnknown_2031DEA = 0;
+static EWRAM_DATA const struct CreditsOverworldCmd *sCreditsOverworld_Script = NULL;
+static EWRAM_DATA s16 sCreditsOverworld_CmdLength = 0;
+static EWRAM_DATA s16 sCreditsOverworld_CmdIndex = 0;
 
 // File boundary perhaps?
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
@@ -162,11 +163,11 @@ static void CreateLinkPlayerSprites(void);
 static void sub_80572D8(void);
 static void sub_8057300(u8 *state);
 static bool32 sub_8057314(u8 *state);
-static bool32 sub_8057528(u8 *state, u8 unused);
-static bool8 sub_8057650(void);
-static void sub_8057748(struct CameraObject * camera);
-static void sub_805781C(u8 taskId);
-static void sub_8057854(u8 taskId);
+static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused);
+static bool8 MapLdr_Credits(void);
+static void CameraCB_CreditsPan(struct CameraObject * camera);
+static void Task_OvwldCredits_FadeOut(u8 taskId);
+static void Task_OvwldCredits_WaitFade(u8 taskId);
 
 static void CB1_UpdateLinkState(void);
 static void ResetAllMultiplayerState(void);
@@ -2202,7 +2203,7 @@ static void CreateLinkPlayerSprites(void)
         CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
 }
 
-// Credits
+// Quest Log
 
 void sub_805726C(void)
 {
@@ -2252,12 +2253,12 @@ static bool32 sub_8057314(u8 *state)
         sub_8111438();
         if (sub_8110AC8() == 2)
         {
-            gUnknown_2031DE0 = 0;
+            gUnknown_2031DE0 = FALSE;
             mli0_load_map(FALSE);
         }
         else
         {
-            gUnknown_2031DE0 = 1;
+            gUnknown_2031DE0 = TRUE;
             sub_80559A8();
         }
         (*state)++;
@@ -2344,6 +2345,8 @@ void sub_8057430(void)
     }
 }
 
+// Credits
+
 void Overworld_CreditsMainCB(void)
 {
     bool8 fading = !!gPaletteFade.active;
@@ -2361,7 +2364,7 @@ void Overworld_CreditsMainCB(void)
         SetFieldVBlankCallback();
 }
 
-static bool8 sub_80574EC(void)
+static bool8 FieldCB2_Credits_WaitFade(void)
 {
     if (gPaletteFade.active)
         return TRUE;
@@ -2371,48 +2374,48 @@ static bool8 sub_80574EC(void)
 
 bool32 Overworld_DoScrollSceneForCredits(u8 *state_p, const struct CreditsOverworldCmd * script, u8 a2)
 {
-    gUnknown_2031DE4 = script;
+    sCreditsOverworld_Script = script;
     gUnknown_2036E28 = a2;
-    return sub_8057528(state_p, 0);
+    return SetUpScrollSceneForCredits(state_p, 0);
 }
 
-static bool32 sub_8057528(u8 *state, u8 unused)
+static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused)
 {
     struct WarpData warp;
     switch (*state)
     {
     case 0:
-        gUnknown_2031DEA = 0;
-        gUnknown_2031DE8 = 0;
+        sCreditsOverworld_CmdIndex = 0;
+        sCreditsOverworld_CmdLength = 0;
         (*state)++;
         return FALSE;
     case 1:
-        warp.mapGroup = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
-        warp.mapNum = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
+        warp.mapGroup = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_2;
+        warp.mapNum = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_4;
         warp.warpId = -1;
-        gUnknown_2031DEA++;
-        warp.x = gUnknown_2031DE4[gUnknown_2031DEA].unk_0;
-        warp.y = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
+        sCreditsOverworld_CmdIndex++;
+        warp.x = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_0;
+        warp.y = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_2;
         sWarpDestination = warp;
-        gUnknown_2031DE8 = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
+        sCreditsOverworld_CmdLength = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_4;
         WarpIntoMap();
         gPaletteFade.bufferTransferDisabled = TRUE;
         ScriptContext1_Init();
         ScriptContext2_Disable();
         SetMainCallback1(NULL);
-        gFieldCallback2 = sub_80574EC;
+        gFieldCallback2 = FieldCB2_Credits_WaitFade;
         gMain.state = 0;
         (*state)++;
         return FALSE;
     case 2:
-        if (sub_8057650())
+        if (MapLdr_Credits())
         {
             (*state)++;
             return FALSE;
         }
         break;
     case 3:
-        gFieldCamera.callback = sub_8057748;
+        gFieldCamera.callback = CameraCB_CreditsPan;
         SetFieldVBlankCallback();
         *state = 0;
         return TRUE;
@@ -2420,7 +2423,7 @@ static bool32 sub_8057528(u8 *state, u8 unused)
     return FALSE;
 }
 
-static bool8 sub_8057650(void)
+static bool8 MapLdr_Credits(void)
 {
     u8 *state = &gMain.state;
     switch (*state)
@@ -2482,55 +2485,55 @@ static bool8 sub_8057650(void)
     return FALSE;
 }
 
-static void sub_8057748(struct CameraObject * camera)
+static void CameraCB_CreditsPan(struct CameraObject * camera)
 {
-    if (gUnknown_2031DE8 == 0)
+    if (sCreditsOverworld_CmdLength == 0)
     {
-        gUnknown_2031DEA++;
-        switch (gUnknown_2031DE4[gUnknown_2031DEA].unk_0)
+        sCreditsOverworld_CmdIndex++;
+        switch (sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_0)
         {
-        case 0xFC:
-        case 0xFE:
+        case CREDITSOVWLDCMD_FC:
+        case CREDITSOVWLDCMD_LOADMAP:
             return;
-        case 0xFF:
+        case CREDITSOVWLDCMD_FF:
             camera->movementSpeedX = 0;
             camera->movementSpeedY = 0;
             camera->callback = NULL;
-            CreateTask(sub_805781C, 0);
+            CreateTask(Task_OvwldCredits_FadeOut, 0);
             return;
-        case 0xFB:
+        case CREDITSOVWLDCMD_FB:
             camera->movementSpeedX = 0;
             camera->movementSpeedY = 0;
             camera->callback = NULL;
             break;
-        case 0xFD:
+        case CREDITSOVWLDCMD_END:
             camera->movementSpeedX = 0;
             camera->movementSpeedY = 0;
             camera->callback = NULL;
             return;
         default:
-            gUnknown_2031DE8 = gUnknown_2031DE4[gUnknown_2031DEA].unk_4;
-            camera->movementSpeedX = gUnknown_2031DE4[gUnknown_2031DEA].unk_0;
-            camera->movementSpeedY = gUnknown_2031DE4[gUnknown_2031DEA].unk_2;
+            sCreditsOverworld_CmdLength = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_4;
+            camera->movementSpeedX = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_0;
+            camera->movementSpeedY = sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_2;
             break;
         }
     }
-    if (gUnknown_2031DE4[gUnknown_2031DEA].unk_0 == 0xFF)
+    if (sCreditsOverworld_Script[sCreditsOverworld_CmdIndex].unk_0 == 0xFF)
     {
         camera->movementSpeedX = 0;
         camera->movementSpeedY = 0;
     }
     else
-        gUnknown_2031DE8--;
+        sCreditsOverworld_CmdLength--;
 }
 
-static void sub_805781C(u8 taskId)
+static void Task_OvwldCredits_FadeOut(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
-    gTasks[taskId].func = sub_8057854;
+    gTasks[taskId].func = Task_OvwldCredits_WaitFade;
 }
 
-static void sub_8057854(u8 taskId)
+static void Task_OvwldCredits_WaitFade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {

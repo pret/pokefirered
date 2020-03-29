@@ -173,6 +173,7 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter);
 void SetWarpDestinationToHealLocation(u8 a0);
 bool32 sub_80582E0(void);
 bool32 sub_8058274(void);
+void OverworldWhiteOutGetMoneyLoss(void);
 u8 GetCurrentMapBattleScene(void);
 void Overworld_ResetStateAfterFly(void);
 bool8 sub_8055B38(u16 metatileBehavior);

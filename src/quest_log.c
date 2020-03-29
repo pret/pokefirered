@@ -1313,7 +1313,7 @@ static void Task_EndQuestLog(u8 taskId)
         break;
     default:
         if (gUnknown_203AE94.unk_0_6 == 1)
-            ShowMapNamePopup(1);
+            ShowMapNamePopup(TRUE);
         CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
         Free(gUnknown_203AE90);
         gUnknown_203AE94 = (struct UnkStruct_203AE94){};

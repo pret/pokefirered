@@ -1037,7 +1037,7 @@ void Overworld_PlaySpecialMapMusic(void)
 
     if (gSaveBlock1Ptr->savedMusic)
         music = gSaveBlock1Ptr->savedMusic;
-    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) &&sub_8056124(MUS_NAMINORI))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
         music = MUS_NAMINORI;
 
     if (music != GetCurrentMapMusic())
@@ -1075,7 +1075,7 @@ static void Overworld_TryMapConnectionMusicTransition(void)
         currentMusic = GetCurrentMapMusic();
         if (currentMusic == MUS_NAMINORI)
             return;
-        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && sub_8056124(MUS_NAMINORI))
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
             newMusic = MUS_NAMINORI;
         if (newMusic != currentMusic)
         {
@@ -1193,7 +1193,7 @@ static void ChooseAmbientCrySpecies(void)
     sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
 }
 
-bool32 sub_8056124(u16 music)
+bool32 Overworld_MusicCanOverrideMapMusic(u16 music)
 {
     if (music == MUS_CYCLING || music == MUS_NAMINORI)
     {

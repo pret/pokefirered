@@ -66,7 +66,6 @@ static void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
 static void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
 static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys);
 static u8 CheckForPlayerAvatarCollision(u8 direction);
-u8 CheckForObjectEventCollision(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction, u8 metatileBehavior);
 static bool8 CanStopSurfing(s16 x, s16 y, u8 direction);
 static bool8 ShouldJumpLedge(s16 x, s16 y, u8 direction);
 static bool8 TryPushBoulder(s16 x, s16 y, u8 direction);
@@ -722,7 +721,7 @@ static void PlayerAvatarTransition_Bike(struct ObjectEvent * playerObjEvent)
 {
     sub_8150474(1);
     sub_8150498(1);
-    sub_80BD620(0, 0);
+    InitPlayerAvatarBikeState(0, 0);
 }
 
 static void PlayerAvatarTransition_Surfing(struct ObjectEvent * playerObjEvent)

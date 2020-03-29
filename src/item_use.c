@@ -268,7 +268,7 @@ void FieldUseFunc_MachBike(u8 taskId)
      || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE
      || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
         sub_80A10C4(taskId, gTasks[taskId].data[3], 2, gUnknown_8416451);
-    else if (Overworld_IsBikingAllowed() == TRUE && !sub_80BD540())
+    else if (Overworld_IsBikingAllowed() == TRUE && !MetatileAtPlayerPositionForbidsBiking())
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Bicycle;
         sub_80A103C(taskId);

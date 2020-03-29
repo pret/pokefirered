@@ -289,5 +289,7 @@ void sub_800A900(u8 a0);
 u8 sub_800A8A4(void);
 void sub_800A9A4(void);
 void SetLocalLinkPlayerId(u8 playerId);
+bool32 IsSendingKeysToLink(void);
+u32 GetLinkRecvQueueLength(void);
 
 #endif // GUARD_LINK_H

@@ -767,7 +767,7 @@ void CleanupLinkRoomState(void)
 
 void ExitLinkRoom(void)
 {
-    sub_8057F5C();
+    QueueExitLinkRoomKey();
 }
 
 static void Task_EnterCableClubSeat(u8 taskId)

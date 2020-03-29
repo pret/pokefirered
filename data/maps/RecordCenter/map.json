@@ -67,7 +67,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot"
+      "script": "RecordCenter_EventScript_Spot0"
     },
     {
       "type": "trigger",
@@ -76,7 +76,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot"
+      "script": "RecordCenter_EventScript_Spot1"
     },
     {
       "type": "trigger",
@@ -85,7 +85,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot"
+      "script": "RecordCenter_EventScript_Spot2"
     },
     {
       "type": "trigger",
@@ -94,7 +94,7 @@
       "elevation": 3,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "RecordCenter_EventScript_Spot"
+      "script": "RecordCenter_EventScript_Spot3"
     }
   ],
   "bg_events": []

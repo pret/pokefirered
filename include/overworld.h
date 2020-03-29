@@ -38,7 +38,7 @@ struct LinkPlayerObjectEvent
     u8 active;
     u8 linkPlayerId;
     u8 objEventId;
-    u8 mode;
+    u8 movementMode;
 };
 
 struct CreditsOverworldCmd
@@ -177,11 +177,11 @@ u8 GetCurrentMapBattleScene(void);
 void Overworld_ResetStateAfterFly(void);
 bool8 sub_8055B38(u16 metatileBehavior);
 void Overworld_ResetMapMusic(void);
-void sub_8057F5C(void);
-void sub_8057F34(void);
+u16 QueueExitLinkRoomKey(void);
+u16 sub_8057F34(void);
 u32 sub_8057EC0(void);
-void sub_8057F70(void);
-void sub_8057F48(void);
+u16 sub_8057F70(void);
+u16 sub_8057F48(void);
 void SetMainCallback1(MainCallback cb);
 void CB1_Overworld(void);
 void CB2_ReturnToFieldContinueScript(void);

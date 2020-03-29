@@ -45,8 +45,6 @@
 #include "constants/field_weather.h"
 #include "constants/event_object_movement.h"
 
-u8 gUnknown_3005E88;
-
 struct TrainerFanClub
 {
     u8 timer:7;
@@ -96,7 +94,7 @@ struct UnkStruct_203B044
 
 u8 gUnknown_3005E88;
 u16 sNumEventsInLogEntry;
-struct FieldInput gUnknown_3005E90;
+struct FieldInput gQuestLogFieldInput;
 struct QuestLogEntry * sCurQuestLogEntry;
 
 static struct UnkStruct_300201C * sFlagOrVarRecords;
@@ -1089,13 +1087,13 @@ void sub_8111C68(void)
 {
     if (gUnknown_203AE94.unk_0_6 == 0)
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gUnknown_203AE94.unk_0_6 = 2;
             gUnknown_3005E88 = 0;
             sub_81118F4(-3);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             gUnknown_203AE94.unk_0_6 = 1;
             gUnknown_3005E88 = 0;
@@ -1262,7 +1260,7 @@ static void Task_WaitAtEndOfQuestLog(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON) || task->tTimer >= 127 || gUnknown_203AE94.unk_0_6 == 1)
+    if (JOY_NEW(A_BUTTON | B_BUTTON) || task->tTimer >= 127 || gUnknown_203AE94.unk_0_6 == 1)
     {
         QuestLog_CloseTextWindow();
         task->tTimer = 0;
@@ -1616,7 +1614,7 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         }
         sQuestLogCursor = 0;
         gUnknown_203B01C = 0;
-        gUnknown_3005E90 = (struct FieldInput){};
+        gQuestLogFieldInput = (struct FieldInput){};
         sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
         sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
         sMovementScripts[0][1] = 0xFF;
@@ -1688,7 +1686,8 @@ void sub_8112B3C(void)
                         sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][1] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
                         break;
                     case 2:
-                        *(u32 *)&gUnknown_3005E90 = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
+                        // Player input command
+                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
                         break;
                     case 3:
                         gUnknown_3005E88 = 3;

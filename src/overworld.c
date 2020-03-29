@@ -1427,7 +1427,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     sub_805BEB8();
     sub_8111C68();
     FieldClearPlayerInput(&fieldInput);
-    fieldInput = gUnknown_3005E90;
+    fieldInput = gQuestLogFieldInput;
     FieldInput_HandleCancelSignpost(&fieldInput);
     if (!ScriptContext2_IsEnabled())
     {
@@ -1445,7 +1445,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     {
         RunQuestLogCB();
     }
-    FieldClearPlayerInput(&gUnknown_3005E90);
+    FieldClearPlayerInput(&gQuestLogFieldInput);
 }
 
 void CB1_Overworld(void)

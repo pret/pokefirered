@@ -1,4 +1,4 @@
 gUnknown_3005E88
 sNumEventsInLogEntry
-gUnknown_3005E90
+gQuestLogFieldInput
 sCurQuestLogEntry

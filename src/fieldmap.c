@@ -370,7 +370,7 @@ union Block
     s32 xprime;                                                                                    \
     s32 yprime;                                                                                    \
                                                                                                    \
-    struct MapLayout *mapLayout = gMapHeader.mapLayout;                                            \
+    const struct MapLayout *mapLayout = gMapHeader.mapLayout;                                      \
                                                                                                    \
     xprime = x - 7;                                                                                \
     xprime += 8 * mapLayout->borderWidth;                                                          \
@@ -485,7 +485,7 @@ void MapGridSetMetatileImpassabilityAt(s32 x, s32 y, bool32 arg2)
     }
 }
 
-u32 GetBehaviorByMetatileIdAndMapLayout(struct MapLayout *mapLayout, u16 metatile, u8 attr)
+u32 GetBehaviorByMetatileIdAndMapLayout(const struct MapLayout *mapLayout, u16 metatile, u8 attr)
 {
     u32 * attributes;
 
@@ -732,7 +732,7 @@ bool8 CameraMove(s32 x, s32 y)
         old_y = gSaveBlock1Ptr->pos.y;
         connection = sub_8059600(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
         sub_80594AC(connection, direction, x, y);
-        sub_8055864(connection->mapGroup, connection->mapNum);
+        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
         gCamera.active = TRUE;
         gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
         gCamera.y = old_y - gSaveBlock1Ptr->pos.y;

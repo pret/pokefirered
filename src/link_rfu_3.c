@@ -184,7 +184,7 @@ void RFU_queue_20_70_reset(struct UnkRfuStruct_2_Sub_124 *queue)
     queue->full = 0;
 }
 
-void RFU_queue_40_14_reset(struct UnkRfuStruct_2_Sub_9e8 *ptr)
+void RFU_queue_40_14_reset(struct RfuSendQueue *ptr)
 {
     s32 i;
     s32 j;
@@ -260,7 +260,7 @@ void RFU_queue_20_70_recv(struct UnkRfuStruct_2_Sub_124 *queue, u8 *data)
     }
 }
 
-void RFU_queue_40_14_recv(struct UnkRfuStruct_2_Sub_9e8 *queue, u8 *data)
+void RFU_queue_40_14_recv(struct RfuSendQueue *queue, u8 *data)
 {
     s32 i;
     u16 imeBak;
@@ -325,7 +325,7 @@ bool8 RFU_queue_20_70_send(struct UnkRfuStruct_2_Sub_124 *queue, u8 *dest)
     return TRUE;
 }
 
-bool8 RFU_queue_40_14_send(struct UnkRfuStruct_2_Sub_9e8 *queue, u8 *dest)
+bool8 RFU_queue_40_14_send(struct RfuSendQueue *queue, u8 *dest)
 {
     s32 i;
     u16 imeBak;

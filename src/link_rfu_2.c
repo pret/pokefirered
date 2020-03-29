@@ -201,7 +201,7 @@ void ResetLinkRfuGFLayer(void)
     }
     ResetSendDataManager(&Rfu.cmd_8800_sendbuf);
     RFU_queue_20_70_reset(&Rfu.unk_124);
-    RFU_queue_40_14_reset(&Rfu.unk_9e8);
+    RFU_queue_40_14_reset(&Rfu.sendQueue);
     CpuFill16(0, gSendCmd, sizeof gSendCmd);
     CpuFill16(0, gRecvCmds, sizeof gRecvCmds);
     CpuFill16(0, gLinkPlayers, sizeof gLinkPlayers);
@@ -659,7 +659,7 @@ static void sub_80F906C(void)
     }
     if (Rfu.unk_c3c == 0)
     {
-        RFU_queue_40_14_send(&Rfu.unk_9e8, Rfu.unk_4c);
+        RFU_queue_40_14_send(&Rfu.sendQueue, Rfu.unk_4c);
         RFU_queue_2_14_recv(&Rfu.unk_c1c, Rfu.unk_4c);
     }
 }
@@ -881,7 +881,7 @@ static bool32 RfuProcessEnqueuedRecvBlock(void)
         Rfu.unk_cd0--;
         CallRfuFunc();
         sub_80F94BC(gSendCmd, sp48);
-        RFU_queue_40_14_recv(&Rfu.unk_9e8, sp48);
+        RFU_queue_40_14_recv(&Rfu.sendQueue, sp48);
         for (i = 0; i < CMD_LENGTH - 1; i++)
             gSendCmd[i] = 0;
     }
@@ -909,7 +909,7 @@ static void HandleSendFailure(u8 unused, u32 flags)
 
                 j++;j--; // Needed to match;
             }
-            RFU_queue_40_14_recv(&Rfu.unk_9e8, sResendBlock8);
+            RFU_queue_40_14_recv(&Rfu.sendQueue, sResendBlock8);
             Rfu.cmd_8800_sendbuf.failedFlags |= (1 << i);
         }
         flags >>= 1;
@@ -1853,11 +1853,11 @@ static void RfuCheckErrorStatus(void)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
-        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.count, Rfu.unk_9e8.count, RfuGetErrorStatus() == 2);
+        SetLinkErrorFromRfu((Rfu.linkman_msg << 16) | (Rfu.linkman_param[0] << 8) | Rfu.linkman_param[1], Rfu.unk_124.count, Rfu.sendQueue.count, RfuGetErrorStatus() == 2);
         Rfu.errorState = 2;
         CloseLink();
     }
-    else if (Rfu.unk_9e8.full == 1 || Rfu.unk_124.full == 1)
+    else if (Rfu.sendQueue.full == 1 || Rfu.unk_124.full == 1)
     {
         if (lman.childClockSlave_flag)
             rfu_LMAN_requestChangeAgbClockMaster();
@@ -2851,7 +2851,7 @@ static const char gUnknown_843EEA8[][8] = {
 
 static u32 sub_80FC44C(void)
 {
-    return Rfu.unk_9e8.count;
+    return Rfu.sendQueue.count;
 }
 
 u32 GetRfuRecvQueueLength(void)

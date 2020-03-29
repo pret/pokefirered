@@ -268,7 +268,7 @@ void FieldUseFunc_MachBike(u8 taskId)
      || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE
      || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
         sub_80A10C4(taskId, gTasks[taskId].data[3], 2, gUnknown_8416451);
-    else if (sub_8055C9C() == TRUE && !sub_80BD540())
+    else if (Overworld_IsBikingAllowed() == TRUE && !sub_80BD540())
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Bicycle;
         sub_80A103C(taskId);
@@ -618,7 +618,7 @@ static void sub_80A1B48(u8 taskId)
 
 bool8 CanUseEscapeRopeOnCurrMap(void)
 {
-    if (gMapHeader.escapeRope & 1)
+    if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
         return TRUE;
     else
         return FALSE;

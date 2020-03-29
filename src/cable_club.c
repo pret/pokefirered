@@ -724,7 +724,7 @@ static void sub_8081624(void)
 void CB2_ReturnFromCableClubBattle(void)
 {
     gBattleTypeFlags &= (u16)~BATTLE_TYPE_20;
-    sub_8055DB8();
+    Overworld_ResetMapMusic();
     LoadPlayerParty();
     SavePlayerBag();
     Special_UpdateTrainerFansAfterLinkBattle();
@@ -750,7 +750,7 @@ void CB2_ReturnFromCableClubBattle(void)
     }
     else
     {
-        gMain.savedCallback = c2_8056854;
+        gMain.savedCallback = CB2_ReturnToFieldFromMultiplayer;
     }
     SetMainCallback2(CB2_SetUpSaveAfterLinkBattle);
 }
@@ -767,7 +767,7 @@ void CleanupLinkRoomState(void)
 
 void ExitLinkRoom(void)
 {
-    sub_8057F5C();
+    QueueExitLinkRoomKey();
 }
 
 static void Task_EnterCableClubSeat(u8 taskId)

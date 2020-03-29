@@ -63,7 +63,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
     {
         if (gQuestLogState != 2 && gQuestLogState != 3)
         {
-            sub_8056078(&data[1], &data[2]);
+            UpdateAmbientCry(&data[1], &data[2]);
         }
     }
 }

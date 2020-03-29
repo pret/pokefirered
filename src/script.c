@@ -358,7 +358,7 @@ void ScriptContext2_RunNewScript(const u8 *ptr)
 
 u8 *mapheader_get_tagged_pointer(u8 tag)
 {
-    u8 *mapScripts = gMapHeader.mapScripts;
+    const u8 *mapScripts = gMapHeader.mapScripts;
 
     if (mapScripts == NULL)
         return NULL;
@@ -370,7 +370,7 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return (u8 *)(mapScripts[0] + (mapScripts[1] << 8) + (mapScripts[2] << 16) + (mapScripts[3] << 24));
+            return T2_READ_PTR(mapScripts);
         }
         mapScripts += 5;
     }
@@ -379,7 +379,7 @@ u8 *mapheader_get_tagged_pointer(u8 tag)
 void mapheader_run_script_by_tag(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
-    if (ptr)
+    if (ptr != NULL)
         ScriptContext2_RunNewScript(ptr);
 }
 
@@ -387,7 +387,7 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
 
-    if (!ptr)
+    if (ptr == NULL)
         return NULL;
 
     while (1)
@@ -411,22 +411,22 @@ void RunOnLoadMapScript(void)
     mapheader_run_script_by_tag(1);
 }
 
-void mapheader_run_script_with_tag_x3(void)
+void RunOnTransitionMapScript(void)
 {
     mapheader_run_script_by_tag(3);
 }
 
-void mapheader_run_script_with_tag_x5(void)
+void RunOnResumeMapScript(void)
 {
     mapheader_run_script_by_tag(5);
 }
 
-void mapheader_run_script_with_tag_x7(void)
+void RunOnReturnToFieldMapScript(void)
 {
     mapheader_run_script_by_tag(7);
 }
 
-void mapheader_run_script_with_tag_x6(void)
+void RunOnDiveWarpMapScript(void)
 {
     mapheader_run_script_by_tag(6);
 }
@@ -447,7 +447,7 @@ bool8 TryRunOnFrameMapScript(void)
     return 1;
 }
 
-void mapheader_run_first_tag4_script_list_match(void)
+void TryRunOnWarpIntoMapScript(void)
 {
     u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
     if (ptr)

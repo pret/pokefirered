@@ -238,7 +238,7 @@ PalletTown_ProfessorOaksLab_ChooseStarterScene:: @ 816923E
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Movement_WalkInPlaceFastestUp
 	waitmovement 0
-	clearflag FLAG_SPECIAL_FLAG_0x4001
+	clearflag FLAG_DONT_TRANSITION_MUSIC
 	savebgm SE_STOP
 	fadedefaultbgm
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting

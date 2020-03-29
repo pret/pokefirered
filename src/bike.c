@@ -260,7 +260,7 @@ bool8 sub_80BD460(u8 r0)
 
 bool32 IsRunningDisallowed(u8 metatileBehavior)
 {
-    if (!(gMapHeader.escapeRope & 2)) // wrong name? probably a bitfield. 
+    if (!(gMapHeader.flags & MAP_ALLOW_RUN))
         return TRUE;
     if (sub_80BD4B8(metatileBehavior) != TRUE)
         return FALSE;

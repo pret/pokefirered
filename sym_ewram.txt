@@ -32,48 +32,8 @@
 	.include "src/trade_scene.o"
 	.align 2
 	.include "src/new_game.o"
-
 	.align 2
-	@ .include "src/overworld.o"
-gUnknown_2031DB4: @ 2031DB4
-	.space 0x8
-
-gUnknown_2031DBC: @ 2031DBC
-	.space 0x8
-
-gUnknown_2031DC4: @ 2031DC4
-	.space 0x8
-
-gUnknown_2031DCC: @ 2031DCC
-	.space 0x8
-
-gUnknown_2031DD4: @ 2031DD4
-	.space 0x4
-
-gDisableMapMusicChangeOnMapLoad: @ 2031DD8
-	.space 0x2
-
-gUnknown_2031DDA: @ 2031DDA
-	.space 0x2
-
-gUnknown_2031DDC: @ 2031DDC
-	.space 0x4
-
-gUnknown_2031DE0: @ 2031DE0
-	.space 0x4
-
-gUnknown_2031DE4: @ 2031DE4
-	.space 0x4
-
-gUnknown_2031DE8: @ 2031DE8
-	.space 0x2
-
-gUnknown_2031DEA: @ 2031DEA
-	.space 0x2
-
-gLinkPlayerObjectEvents: @ 2031DEC
-	.space 0x10
-
+	.include "src/overworld.o"
 	.align 2
 	.include "src/fieldmap.o"
 	.align 2

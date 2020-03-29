@@ -1152,7 +1152,7 @@ u8 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
     return sPlayerAvatarGfxIds[state][gender];
 }
 
-u8 GetHoennLinkPartnerGraphicsIdByGender(u8 gender)
+u8 GetRSAvatarGraphicsIdByGender(u8 gender)
 {
     return sHoennLinkPartnerGfxIds[gender];
 }

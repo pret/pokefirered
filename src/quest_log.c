@@ -96,7 +96,7 @@ struct UnkStruct_203B044
 
 u8 gUnknown_3005E88;
 u16 sNumEventsInLogEntry;
-struct UnkStruct_3005E90 gUnknown_3005E90;
+struct FieldInput gUnknown_3005E90;
 struct QuestLogEntry * sCurQuestLogEntry;
 
 static struct UnkStruct_300201C * sFlagOrVarRecords;
@@ -600,7 +600,7 @@ bool8 sub_8111000(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_2);
-    FieldCB_UnionRoomWarp();
+    FieldCB_DefaultWarpExit();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
     return 1;
@@ -610,7 +610,7 @@ bool8 sub_8111038(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
     SetQuestLogState(QL_STATE_2);
-    sub_807DF7C();
+    FieldCB_WarpExitFadeFromBlack();
     gUnknown_203AE94 = (struct UnkStruct_203AE94){};
     gUnknown_203AE94.unk_0_0 = 2;
     return 1;
@@ -1217,7 +1217,7 @@ static bool8 sub_8111F60(void)
 {
     LoadPalette(stdpal_get(4), 0xF0, 0x20);
     DrawPreviouslyOnQuestHeader(0);
-    sub_807DF7C();
+    FieldCB_WarpExitFadeFromBlack();
     CreateTask(sub_8111F8C, 0xFF);
     return TRUE;
 }
@@ -1313,7 +1313,7 @@ static void Task_EndQuestLog(u8 taskId)
         break;
     default:
         if (gUnknown_203AE94.unk_0_6 == 1)
-            CreateMapNamePopupIfNotAlreadyRunning(1);
+            ShowMapNamePopup(1);
         CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
         Free(gUnknown_203AE90);
         gUnknown_203AE94 = (struct UnkStruct_203AE94){};
@@ -1536,7 +1536,7 @@ void sub_811278C(u8 movementActionId, u8 duration)
     }
 }
 
-void sub_81127F8(struct UnkStruct_3005E90 * a0)
+void sub_81127F8(struct FieldInput * a0)
 {
     if (sQuestLogCursor < sNumEventsInLogEntry)
     {
@@ -1616,7 +1616,7 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         }
         sQuestLogCursor = 0;
         gUnknown_203B01C = 0;
-        gUnknown_3005E90 = (struct UnkStruct_3005E90){};
+        gUnknown_3005E90 = (struct FieldInput){};
         sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
         sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
         sMovementScripts[0][1] = 0xFF;

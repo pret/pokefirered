@@ -127,24 +127,24 @@ void MoveSaveBlocks_ResetHeap(void)
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
 }
 
-u32 sav2_x1_query_bit1(void)
+u32 UseContinueGameWarp(void)
 {
     return gSaveBlock2Ptr->specialSaveWarpFlags & CONTINUE_GAME_WARP;
 }
 
-void sav2_x9_clear_bit1(void)
+void ClearContinueGameWarpStatus(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags &= ~CONTINUE_GAME_WARP;
 }
 
-void sub_804C1AC(void)
+void SetContinueGameWarpStatus(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
 void SetContinueGameWarpStatusToDynamicWarp(void)
 {
-    sub_8055778(0);
+    SetContinueGameWarpToDynamicWarp(0);
     gSaveBlock2Ptr->specialSaveWarpFlags |= CONTINUE_GAME_WARP;
 }
 
@@ -286,7 +286,7 @@ void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey)
     for(i = 0; i < NUM_TOWER_CHALLENGE_TYPES; i++)
         ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->trainerTower[i].bestTime, encryptionKey);
 
-    sub_8054F38(encryptionKey);
+    ApplyNewEncryptionKeyToGameStats(encryptionKey);
     ApplyNewEncryptionKeyToBagItems_(encryptionKey);
     ApplyNewEncryptionKeyToBerryPowder(encryptionKey);
     ApplyNewEncryptionKeyToWord(&gSaveBlock1Ptr->money, encryptionKey);

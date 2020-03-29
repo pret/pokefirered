@@ -71,7 +71,7 @@ void LoadPlayerObjectReflectionPalette(u16, u8);
 void LoadSpecialObjectReflectionPalette(u16, u8);
 void TryMoveObjectEventToMapCoords(u8, u8, u8, s16, s16);
 void PatchObjectPalette(u16, u8);
-void sub_808E16C(s16, s16);
+void sub_805EDF0(s16, s16);
 void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 decorCat);
 void sub_8063AD4(s16, s16, s16 *, s16 *);
 u8 GetFaceDirectionAnimNum(u8);
@@ -221,5 +221,7 @@ u8 GetAcroPopWheelieMoveDirectionMovementAction(u32 direction);
 u8 GetAcroWheelieMoveDirectionMovementAction(u32 direction);
 u8 sub_80641EC(u32 direction);
 u8 GetFishingBiteDirectionAnimNum(u8 direction);
+void TrySpawnObjectEvents(s16 cameraX, s16 cameraY);
+void ResetObjectEvents(void);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

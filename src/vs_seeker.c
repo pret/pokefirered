@@ -681,7 +681,7 @@ bool8 sub_810C4EC(void)
     return FALSE;
 }
 
-void sub_810C578(void)
+void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
     FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
     sub_810C640();

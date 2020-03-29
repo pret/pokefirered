@@ -88,7 +88,7 @@ struct UnkRfuStruct_2_Sub_124
     /* 0x57b */ vu8 full;
 };
 
-struct UnkRfuStruct_2_Sub_9e8
+struct RfuSendQueue
 {
     /* 0x000 */ u8 slots[40][14];
     /* 0x230 */ vu8 recv_slot;
@@ -148,7 +148,7 @@ typedef struct UnkRfuStruct_2
     /* 0x102 */ u8 unk_102;
     /* 0x104 */ struct RfuTgtData unk_104;
     /* 0x124 */ struct UnkRfuStruct_2_Sub_124 unk_124;
-    /* 0x6a0 */ struct UnkRfuStruct_2_Sub_9e8 unk_9e8;
+    /* 0x6a0 */ struct RfuSendQueue sendQueue;
     /* 0x8d4 */ struct UnkRfuStruct_2_Sub_c1c unk_c1c;
     /* 0x8f4 */ vu8 unk_c3c;
     /* 0x8f5 */ u8 reconnectedParentIdx;
@@ -227,16 +227,16 @@ void InitRFU(void);
 bool32 RfuIsErrorStatus1or2(void);
 
 void RFU_queue_20_70_reset(struct UnkRfuStruct_2_Sub_124 *ptr);
-void RFU_queue_40_14_reset(struct UnkRfuStruct_2_Sub_9e8 *ptr);
+void RFU_queue_40_14_reset(struct RfuSendQueue *ptr);
 
 void RfuSetErrorStatus(u8 a0, u16 msg);
 u8 RfuGetErrorStatus(void);
 void RFU_queue_20_70_recv(struct UnkRfuStruct_2_Sub_124 *q1, u8 *q2);
-bool8 RFU_queue_40_14_send(struct UnkRfuStruct_2_Sub_9e8 *q1, u8 *q2);
+bool8 RFU_queue_40_14_send(struct RfuSendQueue *q1, u8 *q2);
 bool8 RFU_queue_2_14_send(struct UnkRfuStruct_2_Sub_c1c *q1, u8 *q2);
 void RFU_queue_2_14_recv(struct UnkRfuStruct_2_Sub_c1c *q1, const u8 *q2);
 bool8 RFU_queue_20_70_send(struct UnkRfuStruct_2_Sub_124 * a0, u8 *a1);
-void RFU_queue_40_14_recv(struct UnkRfuStruct_2_Sub_9e8 * a0, u8 *a1);
+void RFU_queue_40_14_recv(struct RfuSendQueue * a0, u8 *a1);
 void InitHostRFUtgtGname(struct GFtgtGname *data, u8 activity, bool32 started, s32 child_sprite_genders);
 void UpdateGameData_GroupLockedIn(bool8 started);
 bool32 RfuSerialNumberIsValid(u32 a0);

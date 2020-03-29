@@ -9,6 +9,9 @@ void sub_80B0244(void);
 void sub_807E3EC(void);
 void DoOutwardBarnDoorWipe(void);
 void Task_BarnDoorWipe(u8 taskId);
-void sub_807F5F0(void);
+void FieldCB_RushInjuredPokemonToCenter(void);
+void WriteFlashScanlineEffectBuffer(u8 flashLevel);
+
+extern const s32 gMaxFlashLevel;
 
 #endif // GUARD_FIELD_SCREEN_EFFECT_H

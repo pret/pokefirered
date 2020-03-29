@@ -15,5 +15,6 @@ u8 sub_810CF54();
 void sub_810D0D0(void);
 void sub_810CB90(void);
 bool8 sub_810C4EC(void);
+void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum);
 
 #endif //GUARD_VS_SEEKER_H

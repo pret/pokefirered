@@ -360,7 +360,7 @@ static void Task_BarnDoorWipeChild(u8 taskId)
 #undef DIR_WIPE_OUT
 #undef tChildOffset
 
-static bool8 sub_807F3A4(u8 taskId, const u8 *text, u8 x, u8 y)
+static bool8 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u8 x, u8 y)
 {
     u8 windowId = gTasks[taskId].data[1];
 
@@ -385,7 +385,7 @@ static bool8 sub_807F3A4(u8 taskId, const u8 *text, u8 x, u8 y)
     return FALSE;
 }
 
-static void sub_807F45C(u8 taskId)
+static void Task_RushInjuredPokemonToCenter(u8 taskId)
 {
     u8 windowId;
     const struct HealLocation *loc;
@@ -399,7 +399,7 @@ static void sub_807F45C(u8 taskId)
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, 3);
-        loc = GetHealLocationPointer(1);
+        loc = GetHealLocation(1);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
          && gSaveBlock1Ptr->lastHealLocation.warpId == -1
@@ -410,14 +410,14 @@ static void sub_807F45C(u8 taskId)
             gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        if (sub_807F3A4(taskId, gUnknown_841B554, 2, 8))
+        if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedToCenter, 2, 8))
         {
             ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
             ++gTasks[taskId].data[0];
         }
         break;
     case 4:
-        if (sub_807F3A4(taskId, gUnknown_841B5B6, 2, 8))
+        if (PrintWhiteOutRecoveryMessage(taskId, gText_PlayerScurriedBackHome, 2, 8))
         {
             ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], 2);
             ++gTasks[taskId].data[0];
@@ -450,12 +450,12 @@ static void sub_807F45C(u8 taskId)
     }
 }
 
-void sub_807F5F0(void)
+void FieldCB_RushInjuredPokemonToCenter(void)
 {
     u8 taskId;
 
     ScriptContext2_Enable();
     palette_bg_faded_fill_black();
-    taskId = CreateTask(sub_807F45C, 10);
+    taskId = CreateTask(Task_RushInjuredPokemonToCenter, 10);
     gTasks[taskId].data[0] = 0;
 }

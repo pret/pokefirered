@@ -193,7 +193,7 @@ static void Task_DiplomaReturnToOverworld(u8 taskId)
     DestroyTask(taskId);
     FreeAllWindowBuffers();
     FREE_AND_SET_NULL(gDiploma);
-    SetMainCallback2(CB2_Overworld);
+    SetMainCallback2(sub_80568FC);
 }
 
 static void DiplomaBgInit(void)

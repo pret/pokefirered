@@ -1037,8 +1037,8 @@ extern const u8 gText_RegionMap_AreaDesc_PatternBush[];
 extern const u8 gText_RegionMap_AreaDesc_DottedHole[];
 
 // field_screen_effect
-extern const u8 gUnknown_841B554[];
-extern const u8 gUnknown_841B5B6[];
+extern const u8 gText_PlayerScurriedToCenter[];
+extern const u8 gText_PlayerScurriedBackHome[];
 
 // save_failed_screen
 extern const u8 gText_SaveFailedScreen_CheckingBackupMemory[];

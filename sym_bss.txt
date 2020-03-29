@@ -20,21 +20,8 @@
 	.include "src/trade.o"
 	.align 2
 	.include "src/play_time.o"
-
 	.align 2
-	@ .include "src/overworld.o"
-gUnknown_3000E80: @ 3000E80
-	.space 0x4
-
-gUnknown_3000E84: @ 3000E84
-	.space 0x4
-
-gUnknown_3000E88: @ 3000E88
-	.space 0x1
-
-gUnknown_3000E89: @ 3000E89
-	.space 0x7
-
+	.include "src/overworld.o"
 	.align 3
 	.include "src/field_camera.o"
 	.align 3

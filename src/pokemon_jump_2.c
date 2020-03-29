@@ -1883,7 +1883,7 @@ static int sub_81497A8(void)
 
 static bool32 sub_8149804(void)
 {
-    return !Rfu.unk_124.count && !Rfu.unk_9e8.count;
+    return !Rfu.unk_124.count && !Rfu.sendQueue.count;
 }
 
 static int sub_8149834(u8 *arg0)

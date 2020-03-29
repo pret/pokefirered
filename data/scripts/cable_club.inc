@@ -702,7 +702,11 @@ TradeCenter_EventScript_Chair3:: @ 81BB974
 	end
 
 @ Nop in FRLG
-RecordCenter_EventScript_Spot:: @ 81BB980
+@ Separate labels to match GetDirectionForEventScript
+RecordCenter_EventScript_Spot0:: @ 81BB980
+RecordCenter_EventScript_Spot1:: @ 81BB980
+RecordCenter_EventScript_Spot2:: @ 81BB980
+RecordCenter_EventScript_Spot3:: @ 81BB980
 	end
 
 CableClub_EventScript_ReadTrainerCard:: @ 81BB981

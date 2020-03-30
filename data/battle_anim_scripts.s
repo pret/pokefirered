@@ -5,6 +5,11 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_anim_script.inc"
 
+#define RGB(r, g, b) ((r) | ((g) << 5) | ((b) << 10))
+#define RGB_BLACK 0x0000
+#define RGB_WHITE 0x7FFF
+#define RGB_WHITEALPHA 0xFFFF
+
 	.section script_data, "aw", %progbits
 
 	.align 2
@@ -786,14 +791,14 @@ Move_TAKE_DOWN:: @ 81C7886
 Move_DOUBLE_EDGE:: @ 81C791A
 	loadspritegfx 10135
 	playsewithpan SE_W129, 192
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 4, 2, 32767, 10, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 4, 2, RGB_WHITE, 10, 0, 0
 	waitforvisualfinish
 	delay 10
 	playsewithpan SE_W207, 192
 	waitplaysewithpan SE_W207, 192, 8
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, 0, 18, 6, 2, 4
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 16, 16, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 16, 16, RGB_WHITE
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, 0, 0, 4
 	delay 3
 	waitforvisualfinish
@@ -805,7 +810,7 @@ Move_DOUBLE_EDGE:: @ 81C791A
 	createvisualtask sub_8099980, 2, 8, -256, 1, 0
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 0, 4, 0, 12, 1
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 1, 4, 0, 12, 1
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 16, 0, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 16, 0, RGB_WHITE
 	waitforvisualfinish
 	createvisualtask sub_8099980, 2, 8, -256, 0, 1
 	createvisualtask sub_8099980, 2, 8, -256, 1, 1
@@ -863,7 +868,7 @@ Move_FIRE_BLAST:: @ 81C7AF5
 	call gUnknown_81C7B89
 	call gUnknown_81C7B89
 	delay 24
-	createvisualtask sub_80BA7F8, 10, 1, 3, 0, 8, 0
+	createvisualtask sub_80BA7F8, 10, 1, 3, 0, 8, RGB_BLACK
 	waitforvisualfinish
 	delay 19
 	createvisualtask AnimTask_ShakeMon, 2, 1, 5, 0, 20, 1
@@ -885,7 +890,7 @@ Move_FIRE_BLAST:: @ 81C7AF5
 	delay 3
 	call gUnknown_81C7BCD
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1, 2, 8, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 2, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -950,12 +955,12 @@ Move_MEGA_PUNCH:: @ 81C7CED
 	setalpha 12, 8
 	playsewithpan SE_W025, 63
 	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 50
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, RGB_WHITE
 	delay 50
 	call gUnknown_81C7D89
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 22, 1
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, RGB_WHITE
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 0, 8, 0, 0
 	playsewithpan SE_W233B, 63
 	waitforvisualfinish
@@ -998,13 +1003,13 @@ Move_MEGA_KICK:: @ 81C7DC7
 	setalpha 12, 8
 	playsewithpan SE_W025, 63
 	createsprite gMegaPunchKickSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 50
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, RGB_WHITE
 	delay 50
 	playsewithpan SE_W025B, 63
 	call gUnknown_81C7D89
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 22, 1
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, RGB_WHITE
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 0, 8, 0, 0
 	waitforvisualfinish
 	clearmonbg 1
@@ -1069,21 +1074,21 @@ gUnknown_81C7F2A:: @ 81C7F2A
 Move_THUNDER_SHOCK:: @ 81C7F3C
 	loadspritegfx 10001
 	loadspritegfx 10011
-	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 10
 	createvisualtask sub_80AE220, 5, 0, -44, 0
 	playsewithpan SE_W085, 63
 	delay 9
-	createvisualtask sub_80BA7F8, 10, 4, 0, 0, 13, 0
+	createvisualtask sub_80BA7F8, 10, 4, 0, 0, 13, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 4, 0, 13, 0, 0
+	createvisualtask sub_80BA7F8, 10, 4, 0, 13, 0, RGB_BLACK
 	waitforvisualfinish
 	delay 20
 	call gUnknown_81D58D4
 	waitforvisualfinish
 	delay 20
-	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1091,7 +1096,7 @@ Move_THUNDERBOLT:: @ 81C7FAA
 	loadspritegfx 10001
 	loadspritegfx 10282
 	loadspritegfx 10011
-	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 10
 	createvisualtask sub_80AE220, 5, 24, -52, 0
@@ -1103,9 +1108,9 @@ Move_THUNDERBOLT:: @ 81C7FAA
 	createvisualtask sub_80AE220, 5, 0, -60, 1
 	playsewithpan SE_W085, 63
 	delay 9
-	createvisualtask sub_80BA7F8, 10, 4, 0, 0, 13, 0
+	createvisualtask sub_80BA7F8, 10, 4, 0, 0, 13, RGB_BLACK
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 4, 0, 13, 0, 0
+	createvisualtask sub_80BA7F8, 10, 4, 0, 13, 0, RGB_BLACK
 	waitforvisualfinish
 	delay 20
 	createsprite gUnknown_83E6058, ANIM_TARGET, 3, 44, 0, 0, 3
@@ -1119,20 +1124,20 @@ Move_THUNDERBOLT:: @ 81C7FAA
 	createsprite gUnknown_83E6070, ANIM_TARGET, 4, 0, 0, 16, 44, 224, 40, 2, -32765
 	playsewithpan SE_W063, 63
 	delay 0
-	createvisualtask sub_80BA7F8, 10, 1, 0, 2, 2, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 2, 2, RGB_BLACK
 	delay 6
-	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 6, RGB_BLACK
 	delay 6
-	createvisualtask sub_80BA7F8, 10, 1, 0, 2, 2, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 2, 2, RGB_BLACK
 	delay 6
-	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 20
 	waitplaysewithpan SE_W085B, 63, 19
 	call gUnknown_81D58D4
 	waitforvisualfinish
 	delay 20
-	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1140,7 +1145,7 @@ Move_THUNDER_WAVE:: @ 81C8160
 	loadspritegfx 10001
 	loadspritegfx 10011
 	loadspritegfx 10173
-	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	delay 10
 	createvisualtask sub_80AE220, 5, 0, -48, 0
@@ -1153,7 +1158,7 @@ Move_THUNDER_WAVE:: @ 81C8160
 	delay 4
 	createsprite gUnknown_83E60B8, ANIM_TARGET, 2, -16, 16
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 6, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -1265,10 +1270,10 @@ Move_REVERSAL:: @ 81C8445
 	loadspritegfx 10143
 	loadspritegfx 10135
 	playsewithpan SE_W197, 192
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 3, 32767, 8, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 3, RGB_WHITE, 8, 0, 0
 	waitforvisualfinish
 	delay 30
-	createvisualtask sub_80B9BDC, 2, 31, 3, 2, 0, 10, 32767
+	createvisualtask sub_80B9BDC, 2, 31, 3, 2, 0, 10, RGB_WHITE
 	delay 10
 	playsewithpan SE_W179, 192
 	createsprite gReversalOrbSpriteTemplate, ANIM_ATTACKER, 2, 26, 0
@@ -1282,7 +1287,7 @@ Move_REVERSAL:: @ 81C8445
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, 4
 	delay 8
 	playsewithpan SE_W233B, 63
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 32767, 8, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, RGB_WHITE, 8, 0, 0
 	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 10, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
 	createvisualtask sub_8099BD4, 5, 0, 1, 8, 1, 0
@@ -1369,7 +1374,7 @@ Move_PSYCH_UP:: @ 81C868A
 	delay 4
 	playsewithpan SE_W060, 192
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 10, 0, 1
-	createvisualtask sub_80BA7F8, 9, 2, 2, 10, 0, 1023
+	createvisualtask sub_80BA7F8, 9, 2, 2, 10, 0, RGB(31, 31, 0)
 	delay 30
 	clearmonbg 2
 	blendoff
@@ -1486,7 +1491,7 @@ gUnknown_81C899F:: @ 81C899F
 
 Move_SELF_DESTRUCT:: @ 81C89B9
 	loadspritegfx 10198
-	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 9, 31
+	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 9, RGB(31, 0, 0)
 	createvisualtask AnimTask_ShakeMon2, 5, 4, 6, 0, 38, 1
 	createvisualtask AnimTask_ShakeMon2, 5, 5, 6, 0, 38, 1
 	createvisualtask AnimTask_ShakeMon2, 5, 6, 6, 0, 38, 1
@@ -1495,7 +1500,7 @@ Move_SELF_DESTRUCT:: @ 81C89B9
 	call gUnknown_81C8A3F
 	call gUnknown_81C8A3F
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 2, 1, 9, 0, 31
+	createvisualtask sub_80BA7F8, 10, 2, 1, 9, 0, RGB(31, 0, 0)
 	end
 
 gUnknown_81C8A3F:: @ 81C8A3F
@@ -1662,9 +1667,9 @@ Move_EXPLOSION:: @ 81C8E15
 	call gUnknown_81C8EB2
 	call gUnknown_81C8EB2
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1, 1, 16, 16, 32767
+	createvisualtask sub_80BA7F8, 10, 1, 1, 16, 16, RGB_WHITE
 	delay 50
-	createvisualtask sub_80BA7F8, 10, 1, 3, 16, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 1, 3, 16, 0, RGB_WHITE
 	end
 
 gUnknown_81C8EB2:: @ 81C8EB2
@@ -1711,14 +1716,14 @@ Move_DETECT:: @ 81C8F72
 	loadspritegfx 10071
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 9, 0
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 9, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 9, RGB_WHITE
 	delay 18
 	playsewithpan SE_W197, 192
 	createsprite gSpriteTemplate_83BF480, ANIM_ATTACKER, 13, 20, -20
 	waitforvisualfinish
 	delay 10
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 9, 0, 0
-	createvisualtask sub_80BA7F8, 10, 2, 2, 9, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 2, 9, 0, RGB_WHITE
 	waitforvisualfinish
 	end
 
@@ -1742,7 +1747,7 @@ gUnknown_81C8FFF:: @ 81C8FFF
 gUnknown_81C9004:: @ 81C9004
 	playsewithpan SE_W082, 192
 	createvisualtask AnimTask_ShakeMon2, 5, 0, 1, 0, 15, 1
-	createvisualtask sub_80BA7F8, 10, 2, 3, 0, 9, 31
+	createvisualtask sub_80BA7F8, 10, 2, 3, 0, 9, RGB(31, 0, 0)
 	waitforvisualfinish
 	delay 20
 	playsewithpan SE_W207B, 192
@@ -1773,13 +1778,13 @@ gUnknown_81C9004:: @ 81C9004
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 18, -18, 1, 0
 	playsewithpan SE_W004, 63
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 2, 3, 9, 0, 31
+	createvisualtask sub_80BA7F8, 10, 2, 3, 9, 0, RGB(31, 0, 0)
 	goto gUnknown_81C8FFF
 
 gUnknown_81C910A:: @ 81C910A
 	playsewithpan SE_W082, 192
 	createvisualtask AnimTask_ShakeMon2, 5, 0, 1, 0, 15, 1
-	createvisualtask sub_80BA7F8, 10, 2, 3, 0, 9, 31
+	createvisualtask sub_80BA7F8, 10, 2, 3, 0, 9, RGB(31, 0, 0)
 	waitforvisualfinish
 	delay 20
 	playsewithpan SE_W207B, 192
@@ -1800,7 +1805,7 @@ gUnknown_81C910A:: @ 81C910A
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, -12, -6, 1, 1
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 4, 0, 6, 1
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 2, 3, 9, 0, 31
+	createvisualtask sub_80BA7F8, 10, 2, 3, 9, 0, RGB(31, 0, 0)
 	goto gUnknown_81C8FFF
 
 gUnknown_81C91D7:: @ 81C91D7
@@ -1844,7 +1849,7 @@ Move_SAFEGUARD:: @ 81C9297
 	createsprite gGuardRingSpriteTemplate, ANIM_ATTACKER, 2, 
 	waitforvisualfinish
 	playsewithpan SE_REAPOKE, 192
-	createvisualtask sub_80B9BDC, 2, 10, 0, 2, 0, 10, 32767
+	createvisualtask sub_80B9BDC, 2, 10, 0, 2, 0, 10, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg 2
 	blendoff
@@ -1900,7 +1905,7 @@ Move_GUILLOTINE:: @ 81C93C9
 	playsewithpan SE_W011, 63
 	createsprite gGuillotineSpriteTemplate, ANIM_ATTACKER, 2, 0
 	createsprite gGuillotineSpriteTemplate, ANIM_ATTACKER, 2, 1
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 16, 0
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 16, RGB_BLACK
 	delay 9
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 2, 0, 23, 1
 	delay 46
@@ -2062,7 +2067,7 @@ Move_GROWTH:: @ 81C9953
 	end
 
 gUnknown_81C9960:: @ 81C9960
-	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, RGB_WHITE
 	playsewithpan SE_W036, 192
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -3, -3, 16, 0, 0
 	return
@@ -2268,7 +2273,7 @@ Move_ICY_WIND:: @ 81C9DF0
 	loadspritegfx 10141
 	loadspritegfx 10142
 	monbg 3
-	createvisualtask sub_80BA7F8, 10, 11, 4, 0, 4, 0
+	createvisualtask sub_80BA7F8, 10, 11, 4, 0, 4, RGB_BLACK
 	fadetobg 15
 	waitbgfadeout
 	playsewithpan SE_W196, 0
@@ -2285,7 +2290,7 @@ Move_ICY_WIND:: @ 81C9DF0
 	clearmonbg 3
 	restorebg
 	waitbgfadeout
-	createvisualtask sub_80BA7F8, 10, 11, 4, 4, 0, 0
+	createvisualtask sub_80BA7F8, 10, 11, 4, 4, 0, RGB_BLACK
 	waitbgfadein
 	end
 
@@ -2643,9 +2648,9 @@ Move_EARTHQUAKE:: @ 81CA6D1
 	createvisualtask sub_80B94B4, 5, 4, 10, 50
 	playsewithpan SE_W089, 0
 	delay 10
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	delay 16
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	end
 
 Move_FISSURE:: @ 81CA71E
@@ -2656,11 +2661,11 @@ Move_FISSURE:: @ 81CA71E
 	delay 8
 	call gUnknown_81CA79F
 	delay 15
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	delay 15
 	call gUnknown_81CA7F0
 	delay 15
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	delay 15
 	call gUnknown_81CA79F
 	delay 50
@@ -2896,7 +2901,7 @@ gUnknown_81CAB86:: @ 81CAB86
 	playsewithpan SE_W036, 192
 	waitforvisualfinish
 	playse SE_BAN
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 0, 2, 0, 40, 1
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 1, 10, 0, 40, 1
 	createsprite gUnknown_83E7C98, ANIM_TARGET, 4, 0, 0, 1, 0
@@ -2942,7 +2947,7 @@ Move_GLARE:: @ 81CAC6A
 	createvisualtask AnimTask_GlareEyeDots, 5, 0
 	playsewithpan SE_W060B, 192
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 5, 1, 0, 0, 16, 0
+	createvisualtask sub_80BA7F8, 5, 1, 0, 0, 16, RGB_BLACK
 	waitforvisualfinish
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, -16, -8
 	createsprite gEyeSparkleSpriteTemplate, ANIM_ATTACKER, 0, 16, -8
@@ -2951,7 +2956,7 @@ Move_GLARE:: @ 81CAC6A
 	delay 2
 	createvisualtask sub_80ADAD8, 3, 20, 1, 0
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 5, 1, 0, 16, 0, 0
+	createvisualtask sub_80BA7F8, 5, 1, 0, 16, 0, RGB_BLACK
 	end
 
 Move_BARRAGE:: @ 81CACD3
@@ -2979,17 +2984,17 @@ gUnknown_81CAD25:: @ 81CAD25
 	goto gUnknown_81CADB7
 
 gUnknown_81CAD40:: @ 81CAD40
-	createvisualtask sub_80BA7F8, 10, 27, 1, 0, 12, 0
+	createvisualtask sub_80BA7F8, 10, 27, 1, 0, 12, RGB_BLACK
 	waitforvisualfinish
 	delay 12
-	createvisualtask sub_80BA7F8, 10, 2, 1, 8, 0, 0
+	createvisualtask sub_80BA7F8, 10, 2, 1, 8, 0, RGB_BLACK
 	createvisualtask sub_80B94B4, 5, 0, 2, 16
 	loopsewithpan SE_W287, 192, 4, 8
-	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 15, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 15, RGB_WHITE
 	delay 20
-	createvisualtask sub_80BA7F8, 10, 2, 1, 15, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 1, 15, 0, RGB_WHITE
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 25, 1, 8, 0, 0
+	createvisualtask sub_80BA7F8, 10, 25, 1, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg 3
 	blendoff
@@ -2999,13 +3004,13 @@ gUnknown_81CADB7:: @ 81CADB7
 	createvisualtask sub_80BA83C, 10, 1, 1, 0, 12, 0
 	waitforvisualfinish
 	delay 12
-	createvisualtask sub_80BA7F8, 10, 2, 1, 8, 0, 0
+	createvisualtask sub_80BA7F8, 10, 2, 1, 8, 0, RGB_BLACK
 	createvisualtask sub_80B94B4, 5, 0, 2, 16
 	playsewithpan SE_W287, 192
 	delay 8
-	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 15, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 1, 0, 15, RGB_WHITE
 	delay 20
-	createvisualtask sub_80BA7F8, 10, 2, 1, 15, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 1, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	createvisualtask sub_80BA83C, 10, 4, 1, 8, 0, 0
 	waitforvisualfinish
@@ -3018,7 +3023,7 @@ gUnknown_81CAE2E:: @ 81CAE2E
 	loadspritegfx 10284
 	call gUnknown_81D59CF
 	monbg 0
-	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 16, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 16, RGB_WHITE
 	delay 4
 	createvisualtask sub_80B78E0, 5, 0
 	waitforvisualfinish
@@ -3030,7 +3035,7 @@ gUnknown_81CAE2E:: @ 81CAE2E
 	delay 20
 	createvisualtask sub_80B79DC, 5, 1
 	delay 2
-	createvisualtask sub_80BA7F8, 10, 2, 0, 15, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 0, 15, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg 0
 	call gUnknown_81D59FF
@@ -3080,7 +3085,7 @@ Move_SUPER_FANG:: @ 81CAEFA
 	createsprite gSuperFangSpriteTemplate, ANIM_TARGET, 2, 
 	playsewithpan SE_W044, 63
 	delay 8
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 2143, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 2143, 14, RGB_WHITE, 14
 	createvisualtask AnimTask_ShakeMon, 2, 1, 0, 7, 12, 1
 	waitforvisualfinish
 	blendoff
@@ -3141,7 +3146,7 @@ Move_NIGHTMARE:: @ 81CB043
 	end
 
 gUnknown_81CB06F:: @ 81CB06F
-	createvisualtask AnimTask_BlendMonInAndOut, 2, 0, 32767, 10, 2, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 2, 0, RGB_WHITE, 10, 2, 1
 	createvisualtask AnimTask_ShakeMon, 2, 0, 3, 0, 32, 1
 	playsewithpan SE_W171, 63
 	waitforvisualfinish
@@ -3169,7 +3174,7 @@ Move_SPITE:: @ 81CB0D6
 	playsewithpan SE_W060, 192
 	waitbgfadein
 	monbg 3
-	createvisualtask sub_80B9BDC, 2, 2, 2, 6, 0, 8, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 2, 6, 0, 8, RGB_WHITE
 	createvisualtask sub_80B5AAC, 2, 
 	loopsewithpan SE_W060, 63, 20, 3
 	waitforvisualfinish
@@ -3224,7 +3229,7 @@ Move_FORESIGHT:: @ 81CB18D
 	delay 24
 	playsewithpan SE_W166, 63
 	delay 10
-	createvisualtask AnimTask_BlendMonInAndOut, 5, 1, 32767, 12, 2, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, 1, RGB_WHITE, 12, 2, 1
 	playsewithpan SE_W197, 63
 	waitforvisualfinish
 	blendoff
@@ -3393,9 +3398,9 @@ gUnknown_81CB48E:: @ 81CB48E
 	createvisualtask sub_80B94B4, 5, 4, 0, 50
 	loopsewithpan SE_W070, 63, 8, 10
 	delay 10
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	delay 16
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, 32767, 14
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 1, 0, 14, RGB_WHITE, 14
 	goto gUnknown_81CB468
 
 Move_RAPID_SPIN:: @ 81CB4E1
@@ -3546,12 +3551,12 @@ Move_HEAT_WAVE:: @ 81CB766
 Move_HAIL:: @ 81CB816
 	loadspritegfx 10263
 	loadspritegfx 10141
-	createvisualtask sub_80BA7F8, 10, 1, 3, 0, 6, 0
+	createvisualtask sub_80BA7F8, 10, 1, 3, 0, 6, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask AnimTask_Hail1, 5, 
 	loopsewithpan SE_W258, 0, 8, 10
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1, 3, 6, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 3, 6, 0, RGB_BLACK
 	end
 
 Move_TORMENT:: @ 81CB84E
@@ -3754,7 +3759,7 @@ Move_RECYCLE:: @ 81CBBFE
 	createsprite gRecycleSpriteTemplate, ANIM_ATTACKER, 2, 
 	loopsewithpan SE_W036, 192, 24, 3
 	waitforvisualfinish
-	createvisualtask AnimTask_BlendMonInAndOut, 5, 0, 32767, 12, 2, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, 0, RGB_WHITE, 12, 2, 1
 	playsewithpan SE_W036, 192
 	waitforvisualfinish
 	blendoff
@@ -3893,11 +3898,11 @@ Move_SKILL_SWAP:: @ 81CBFBC
 	loadspritegfx 10251
 	call gUnknown_81D59BB
 	createvisualtask sub_80B3834, 3, 1
-	createvisualtask AnimTask_BlendMonInAndOut, 5, 1, 32767, 12, 3, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, 1, RGB_WHITE, 12, 3, 1
 	loopsewithpan SE_W179, 192, 24, 3
 	delay 16
 	createvisualtask sub_80B3834, 3, 0
-	createvisualtask AnimTask_BlendMonInAndOut, 5, 0, 32767, 12, 3, 1
+	createvisualtask AnimTask_BlendMonInAndOut, 5, 0, RGB_WHITE, 12, 3, 1
 	waitforvisualfinish
 	call gUnknown_81D59C7
 	end
@@ -4023,15 +4028,15 @@ Move_MIST_BALL:: @ 81CC212
 	waitforvisualfinish
 	playsewithpan SE_W028, 63
 	createvisualtask AnimTask_ShakeMon, 2, 1, 5, 0, 10, 0
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 1, 1, 32279, 16, 32767, 16
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, 1, 1, 1, 32279, 16, RGB_WHITE, 16
 	delay 0
 	playsewithpan SE_W114, 0
 	createvisualtask AnimTask_LoadMistTiles, 5, 
-	createvisualtask sub_80BA7F8, 10, 4, 3, 0, 16, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 3, 0, 16, RGB_WHITE
 	delay 8
 	createvisualtask AnimTask_ShakeMon, 2, 1, 4, 0, 70, 0
 	delay 70
-	createvisualtask sub_80BA7F8, 10, 4, 2, 16, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 16, 0, RGB_WHITE
 	end
 
 Move_FEATHER_DANCE:: @ 81CC2A1
@@ -4483,7 +4488,7 @@ Move_VOLT_TACKLE:: @ 81CCD79
 	loadspritegfx 10213
 	monbg 0
 	setalpha 12, 8
-	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 8, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 0, 8, RGB_BLACK
 	waitforvisualfinish
 	createsprite gUnknown_83E621C, ANIM_ATTACKER, 1, 
 	playsewithpan SE_W268, 192
@@ -4520,7 +4525,7 @@ Move_VOLT_TACKLE:: @ 81CCD79
 	delay 2
 	createsprite gUnknown_83E6204, ANIM_ATTACKER, 2, 0, -16, -16
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1, 0, 8, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 8, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -4631,10 +4636,10 @@ Move_SHOCK_WAVE:: @ 81CD009
 	playsewithpan SE_W161B, 63
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, 1, 0, 6, 18, 1
-	createvisualtask sub_80BA7F8, 5, 1, 3, 16, 0, 32767
-	createvisualtask sub_80BA7F8, 5, 4, 0, 16, 16, 0
+	createvisualtask sub_80BA7F8, 5, 1, 3, 16, 0, RGB_WHITE
+	createvisualtask sub_80BA7F8, 5, 4, 0, 16, 16, RGB_BLACK
 	delay 4
-	createvisualtask sub_80BA7F8, 5, 4, 0, 0, 0, 0
+	createvisualtask sub_80BA7F8, 5, 4, 0, 0, 0, RGB_BLACK
 	waitforvisualfinish
 	clearmonbg 0
 	blendoff
@@ -4736,7 +4741,7 @@ Move_ICE_PUNCH:: @ 81CD2E0
 	loadspritegfx 10135
 	loadspritegfx 10143
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, 0
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 9, 32588
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 9, RGB(12, 26, 31)
 	delay 20
 	playsewithpan SE_W081, 63
 	createsprite gUnknown_83E6360, ANIM_ATTACKER, 2, 0
@@ -4758,7 +4763,7 @@ Move_ICE_PUNCH:: @ 81CD2E0
 	delay 15
 	call gUnknown_81D540A
 	delay 5
-	createvisualtask sub_80BA7F8, 10, 4, 2, 9, 0, 32588
+	createvisualtask sub_80BA7F8, 10, 4, 2, 9, 0, RGB(12, 26, 31)
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7, 0, 0
 	waitforvisualfinish
@@ -4782,7 +4787,7 @@ Move_CONFUSION:: @ 81CD40B
 	call gUnknown_81D59BB
 	setalpha 8, 8
 	createvisualtask AnimTask_ShakeMon2, 2, 0, 1, 0, 10, 1
-	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, RGB_WHITE
 	waitforvisualfinish
 	playsewithpan SE_W048, 63
 	createvisualtask AnimTask_ShakeMon, 2, 1, 3, 0, 15, 1
@@ -4826,7 +4831,7 @@ gUnknown_81CD4DD:: @ 81CD4DD
 	call gUnknown_81D59BB
 	setalpha 8, 8
 	playsewithpan SE_W048, 192
-	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 8, RGB_WHITE
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -4, -4, 15, 0, 1
 	waitforvisualfinish
 	clearmonbg 2
@@ -5017,7 +5022,7 @@ Move_DRAGON_BREATH:: @ 81CD9AC
 	delay 2
 	createsprite gUnknown_83E77A4, ANIM_TARGET, 2, 0, 0, 0, 0, 20
 	delay 2
-	createvisualtask sub_80BA7F8, 10, 4, 1, 0, 9, 31
+	createvisualtask sub_80BA7F8, 10, 4, 1, 0, 9, RGB(31, 0, 0)
 	createsprite gUnknown_83E77A4, ANIM_TARGET, 2, 0, 0, 0, 0, 20
 	delay 2
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 2, 0, 21, 1
@@ -5037,7 +5042,7 @@ Move_DRAGON_BREATH:: @ 81CD9AC
 	delay 2
 	createsprite gUnknown_83E77A4, ANIM_TARGET, 2, 0, 0, 0, 0, 20
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 4, 1, 9, 0, 31
+	createvisualtask sub_80BA7F8, 10, 4, 1, 9, 0, RGB(31, 0, 0)
 	waitforvisualfinish
 	clearmonbg 3
 	end
@@ -5359,14 +5364,14 @@ Move_DRAGON_RAGE:: @ 81CE068
 Move_RAIN_DANCE:: @ 81CE145
 	loadspritegfx 10115
 	playsewithpan SE_W240, 192
-	createvisualtask sub_80BA7F8, 10, 1921, 2, 0, 4, 0
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 2, 0, 4, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_80AABC0, 2, 0, 3, 120
 	createvisualtask sub_80AABC0, 2, 0, 3, 120
 	delay 120
 	delay 30
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1921, 2, 4, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -5578,7 +5583,7 @@ gUnknown_81CE61E:: @ 81CE61E
 	delay 4
 	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 1
 	delay 4
-	createvisualtask sub_80BA7F8, 10, 4, 1, 0, 10, 1017
+	createvisualtask sub_80BA7F8, 10, 4, 1, 0, 10, RGB(25, 31, 0)
 	createsprite gSolarbeamBigOrbSpriteTemplate, ANIM_TARGET, 3, 15, 0, 20, 2
 	delay 4
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 2, 0, 65, 1
@@ -5593,7 +5598,7 @@ gUnknown_81CE61E:: @ 81CE61E
 	call gUnknown_81CE6F0
 	call gUnknown_81CE6F0
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 4, 1, 10, 0, 1017
+	createvisualtask sub_80BA7F8, 10, 4, 1, 10, 0, RGB(25, 31, 0)
 	call gUnknown_81D5A41
 	goto gUnknown_81CE51F
 
@@ -6229,7 +6234,7 @@ gUnknown_81CF57D:: @ 81CF57D
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -16, 4, 1, 4
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMonInPlace, 2, 1, -4, 1, 12, 1
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 7, 5, 1, 32767, 10, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 7, 5, 1, RGB_WHITE, 10, 0, 0
 	delay 10
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 11
 	delay 3
@@ -6578,7 +6583,7 @@ Move_CROSS_CHOP:: @ 81CFD3C
 	createsprite gUnknown_83E6740, ANIM_ATTACKER, 2, 0, 0, 1
 	delay 40
 	playsewithpan SE_W013, 63
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 32767, 10, 0, 10
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, RGB_WHITE, 10, 0, 10
 	createsprite gUnknown_83E7C80, ANIM_ATTACKER, 3, 0, 0, 1, 20
 	createvisualtask AnimTask_ShakeMon, 5, 1, 7, 0, 9, 1
 	waitforvisualfinish
@@ -6831,7 +6836,7 @@ Move_SUNNY_DAY:: @ 81D033F
 	loadspritegfx 10157
 	monbg 2
 	setalpha 13, 3
-	createvisualtask sub_80BA7F8, 10, 1921, 1, 0, 6, 32767
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 1, 0, 6, RGB_WHITE
 	waitforvisualfinish
 	panse_26 SE_W080, 192, 63, 1, 0
 	call gUnknown_81D038B
@@ -6839,7 +6844,7 @@ Move_SUNNY_DAY:: @ 81D033F
 	call gUnknown_81D038B
 	call gUnknown_81D038B
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1921, 1, 6, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 1, 6, 0, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg 2
 	blendoff
@@ -7036,7 +7041,7 @@ Move_MIST:: @ 81D0821
 	call gUnknown_81D086C
 	call gUnknown_81D086C
 	delay 32
-	createvisualtask sub_80B9BDC, 2, 10, 8, 2, 0, 14, 32767
+	createvisualtask sub_80B9BDC, 2, 10, 8, 2, 0, 14, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg 2
 	blendoff
@@ -7052,9 +7057,9 @@ Move_HAZE:: @ 81D0882
 	playsewithpan SE_W114, 0
 	createvisualtask AnimTask_Haze1, 5, 
 	delay 30
-	createvisualtask sub_80BA7F8, 10, 1920, 2, 0, 16, 0
+	createvisualtask sub_80BA7F8, 10, 0 | (0xF << 7), 2, 0, 16, RGB_BLACK
 	delay 90
-	createvisualtask sub_80BA7F8, 10, 1920, 1, 16, 0, 0
+	createvisualtask sub_80BA7F8, 10, 0 | (0xF << 7), 1, 16, 0, RGB_BLACK
 	end
 
 Move_FIRE_PUNCH:: @ 81D08B5
@@ -7063,7 +7068,7 @@ Move_FIRE_PUNCH:: @ 81D08B5
 	loadspritegfx 10135
 	monbg 3
 	setalpha 12, 8
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 9, 31
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 9, RGB(31, 0, 0)
 	createsprite gUnknown_83E5BE0, ANIM_TARGET, 1, 0
 	createsprite gUnknown_83E5BE0, ANIM_TARGET, 1, 64
 	createsprite gUnknown_83E5BE0, ANIM_TARGET, 1, 128
@@ -7077,7 +7082,7 @@ Move_FIRE_PUNCH:: @ 81D08B5
 	delay 4
 	playsewithpan SE_W007, 63
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 4, 0, 9, 0, 31
+	createvisualtask sub_80BA7F8, 10, 4, 0, 9, 0, RGB(31, 0, 0)
 	waitforvisualfinish
 	clearmonbg 3
 	blendoff
@@ -7488,7 +7493,7 @@ Move_FOCUS_ENERGY:: @ 81D1307
 	playsewithpan SE_W082, 192
 	call gUnknown_81CB267
 	delay 8
-	createvisualtask sub_80B9BDC, 2, 2, 2, 2, 0, 11, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 2, 2, 0, 11, RGB_WHITE
 	createvisualtask AnimTask_ShakeMon2, 2, 0, 1, 0, 32, 1
 	call gUnknown_81CB267
 	delay 8
@@ -7512,7 +7517,7 @@ gUnknown_81D137D:: @ 81D137D
 	monbg 3
 	setalpha 12, 8
 	loopsewithpan SE_W036, 192, 9, 2
-	createvisualtask sub_80BA7F8, 10, 2, 2, 0, 11, 31
+	createvisualtask sub_80BA7F8, 10, 2, 2, 0, 11, RGB(31, 0, 0)
 	createvisualtask AnimTask_ShakeMon2, 2, 0, 1, 0, 32, 1
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, 0, 0, 4
@@ -7531,7 +7536,7 @@ gUnknown_81D137D:: @ 81D137D
 	delay 5
 	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 7
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 2, 2, 11, 0, 31
+	createvisualtask sub_80BA7F8, 10, 2, 2, 11, 0, RGB(31, 0, 0)
 	waitforvisualfinish
 	clearmonbg 3
 	blendoff
@@ -7721,7 +7726,7 @@ Move_MIMIC:: @ 81D1777
 	setarg 7, 65535
 	waitforvisualfinish
 	playsewithpan SE_W036, 192
-	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 11, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 0, 2, 0, 11, RGB_WHITE
 	waitforvisualfinish
 	clearmonbg_23 3
 	blendoff
@@ -7820,7 +7825,7 @@ Move_HEAL_BELL:: @ 81D196B
 	loadspritegfx 10205
 	loadspritegfx 10206
 	loadspritegfx 10203
-	createvisualtask sub_80BA7F8, 10, 10, 0, 0, 10, 32767
+	createvisualtask sub_80BA7F8, 10, 10, 0, 0, 10, RGB_WHITE
 	waitforvisualfinish
 	createvisualtask sub_80A96B4, 5, 
 	createsprite gBellSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, 0, 1
@@ -7858,13 +7863,13 @@ Move_HEAL_BELL:: @ 81D196B
 	loadspritegfx 10203
 	playsewithpan SE_REAPOKE, 192
 	createvisualtask sub_80BA83C, 10, 4, 3, 10, 0, 31500
-	createvisualtask sub_80BA7F8, 10, 10, 3, 10, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 10, 3, 10, 0, RGB_WHITE
 	createsprite gBlendThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 16, 0, 0, 0, 1
 	end
 
 gUnknown_81D1B2F:: @ 81D1B2F
 	createvisualtask sub_80BA83C, 10, 4, 3, 8, 0, 31500
-	createvisualtask sub_80BA7F8, 10, 10, 3, 2, 10, 32767
+	createvisualtask sub_80BA7F8, 10, 10, 3, 2, 10, RGB_WHITE
 	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 0, 1
 	playsewithpan SE_W215, 192
 	return
@@ -7877,7 +7882,7 @@ Move_FAKE_OUT:: @ 81D1B65
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 5, 1
 	createvisualtask sub_80A9A20, 3, 
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_WHITE
 	end
 
 Move_SCARY_FACE:: @ 81D1BA0
@@ -8287,12 +8292,12 @@ Move_WISH:: @ 81D2523
 Move_STOCKPILE:: @ 81D256B
 	loadspritegfx 10235
 	playsewithpan SE_W025, 192
-	createvisualtask sub_80B9BDC, 2, 2, 8, 1, 0, 12, 32767
+	createvisualtask sub_80B9BDC, 2, 2, 8, 1, 0, 12, RGB_WHITE
 	createvisualtask AnimTask_StockpileDeformMon, 5, 
 	call gUnknown_81D25A9
 	call gUnknown_81D25A9
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 0, 12, 0, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 2, 0, 12, 0, RGB_WHITE
 	end
 
 gUnknown_81D25A9:: @ 81D25A9
@@ -8418,7 +8423,7 @@ Move_MORNING_SUN:: @ 81D2829
 	loadspritegfx 10031
 	createvisualtask AnimTask_MorningSunLightBeam, 5, 
 	delay 8
-	createvisualtask sub_80BA7F8, 10, 1921, 8, 0, 12, 32767
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 8, 0, 12, RGB_WHITE
 	delay 14
 	call gUnknown_81D28AF
 	call gUnknown_81D28AF
@@ -8435,7 +8440,7 @@ Move_MORNING_SUN:: @ 81D2829
 	call gUnknown_81D28AF
 	call gUnknown_81D28AF
 	call gUnknown_81D28AF
-	createvisualtask sub_80BA7F8, 10, 1921, 3, 12, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 3, 12, 0, RGB_WHITE
 	waitforvisualfinish
 	waitsound
 	call gUnknown_81D56C9
@@ -8503,7 +8508,7 @@ Move_HYPER_BEAM:: @ 81D29A7
 	call gUnknown_81D2AD8
 	call gUnknown_81D2AD8
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 4, 0, 50, 1
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 11, 26425
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 11, RGB(25, 25, 25)
 	call gUnknown_81D2AD8
 	call gUnknown_81D2AD8
 	call gUnknown_81D2AD8
@@ -8525,7 +8530,7 @@ Move_HYPER_BEAM:: @ 81D29A7
 	call gUnknown_81D2AD8
 	call gUnknown_81D2AD8
 	call gUnknown_81D2AD8
-	createvisualtask sub_80BA7F8, 10, 4, 2, 11, 0, 26425
+	createvisualtask sub_80BA7F8, 10, 4, 2, 11, 0, RGB(25, 25, 25)
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 4, 16, 0, 0
 	end
@@ -8584,7 +8589,7 @@ gUnknown_81D2BD2:: @ 81D2BD2
 
 Move_ROLE_PLAY:: @ 81D2BE5
 	monbg 2
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 16, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 16, RGB_WHITE
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 0, 10, 0
 	waitforvisualfinish
 	playsewithpan SE_W161, 192
@@ -8592,7 +8597,7 @@ Move_ROLE_PLAY:: @ 81D2BE5
 	createvisualtask AnimTask_RolePlaySilhouette, 2, 
 	waitforvisualfinish
 	clearmonbg 2
-	createvisualtask sub_80BA7F8, 10, 4, 2, 16, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 16, 0, RGB_WHITE
 	delay 8
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 2, 10, 0, 0
 	end
@@ -8619,12 +8624,12 @@ Move_BLAZE_KICK:: @ 81D2C85
 	setalpha 12, 8
 	playsewithpan SE_W172, 63
 	createsprite gUnknown_83E678C, ANIM_TARGET, 3, 0, 0, 1, 30
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 7, RGB_WHITE
 	delay 30
 	playsewithpan SE_W007, 63
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1, 0
 	createvisualtask AnimTask_ShakeMon2, 2, 1, 3, 0, 14, 1
-	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 4, 2, 0, 0, RGB_WHITE
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 3, 1, 0, 8, 0, 0
 	call gUnknown_81D0950
 	waitforvisualfinish
@@ -8763,7 +8768,7 @@ Move_DRAGON_CLAW:: @ 81D2FD0
 	loadspritegfx 10029
 	loadspritegfx 10039
 	playsewithpan SE_W221B, 192
-	createvisualtask sub_80BA7F8, 10, 2, 4, 0, 8, 639
+	createvisualtask sub_80BA7F8, 10, 2, 4, 0, 8, RGB(31, 19, 0)
 	createvisualtask AnimTask_ShakeMon, 5, 0, 0, 2, 15, 1
 	call gUnknown_81D31AD
 	call gUnknown_81D31AD
@@ -8800,7 +8805,7 @@ Move_DRAGON_CLAW:: @ 81D2FD0
 	createsprite gUnknown_83E7438, ANIM_ATTACKER, 2, 0, 28, 512, 25, 16, 46, 0
 	delay 2
 	createsprite gUnknown_83E7438, ANIM_ATTACKER, 2, 0, 33, 464, 30, 15, -50, 0
-	createvisualtask sub_80BA7F8, 10, 2, 4, 8, 0, 639
+	createvisualtask sub_80BA7F8, 10, 2, 4, 8, 0, RGB(31, 19, 0)
 	waitforvisualfinish
 	end
 
@@ -9322,7 +9327,7 @@ Move_SILVER_WIND:: @ 81D3F37
 
 gUnknown_81D3F7E:: @ 81D3F7E
 	delay 0
-	createvisualtask sub_80BA7F8, 10, 1, 0, 4, 4, 0
+	createvisualtask sub_80BA7F8, 10, 1, 0, 4, 4, RGB_BLACK
 	waitbgfadein
 	createsprite gSilverWindBigSparkSpriteTemplate, ANIM_TARGET, 66, -32, 16, 0, 6, 2, 3, 1
 	createsprite gSilverWindBigSparkSpriteTemplate, ANIM_TARGET, 66, -8, 18, 64, 3, 2, 2, 1
@@ -9722,7 +9727,7 @@ Move_KNOCK_OFF:: @ 81D4A0F
 	playsewithpan SE_W233, 63
 	createsprite gKnockOffStrikeSpriteTemplate, ANIM_TARGET, 2, -16, -16
 	delay 8
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 5, 1, 32767, 10, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 5, 1, RGB_WHITE, 10, 0, 0
 	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 2
 	playsewithpan SE_W004, 63
 	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -12, 10, 0, 3
@@ -9754,7 +9759,7 @@ Move_DOOM_DESIRE:: @ 81D4A9F
 	blendoff
 	end
 	loadspritegfx 10198
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_DoomDesireLightBeam, 5, 
@@ -9781,7 +9786,7 @@ Move_DOOM_DESIRE:: @ 81D4A9F
 	playsewithpan SE_W120, 63
 	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_WHITE
 	waitforvisualfinish
 	end
 
@@ -10042,7 +10047,7 @@ Move_WEATHER_BALL:: @ 81D515D
 	waitforvisualfinish
 	delay 15
 	playsewithpan SE_W197, 0
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 5, 1, 32767, 10, 0, 0
+	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 31, 5, 1, RGB_WHITE, 10, 0, 0
 	waitforvisualfinish
 	createvisualtask AnimTask_GetWeather, 2, 
 	delay 1
@@ -10538,13 +10543,13 @@ General_StatsChange:: @ 81D5BBE
 General_SubstituteFade:: @ 81D5BC7
 	monbg 0
 	createvisualtask sub_80F15C8, 5, 
-	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 16, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 1
 	clearmonbg 0
 	delay 2
 	blendoff
-	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 0, 32767
+	createvisualtask sub_80BA7F8, 10, 2, 0, 0, 0, RGB_WHITE
 	createvisualtask sub_80F1420, 2, 1
 	end
 
@@ -10724,13 +10729,13 @@ General_HangedOn:: @ 81D5F42
 General_Rain:: @ 81D5F8F
 	loadspritegfx 10115
 	playsewithpan SE_W240, 192
-	createvisualtask sub_80BA7F8, 10, 1921, 2, 0, 4, 0
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 2, 0, 4, RGB_BLACK
 	waitforvisualfinish
 	createvisualtask sub_80AABC0, 2, 0, 3, 60
 	createvisualtask sub_80AABC0, 2, 0, 3, 60
 	delay 50
 	waitforvisualfinish
-	createvisualtask sub_80BA7F8, 10, 1921, 2, 4, 0, 0
+	createvisualtask sub_80BA7F8, 10, 1 | (0xF << 7), 2, 4, 0, RGB_BLACK
 	waitforvisualfinish
 	end
 
@@ -10817,7 +10822,7 @@ General_FutureSightHit:: @ 81D60A9
 General_DoomDesireHit:: @ 81D6108
 	createvisualtask sub_80BC0DC, 2, 
 	loadspritegfx 10198
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 0, 16, RGB_WHITE
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_DoomDesireLightBeam, 5, 
@@ -10844,7 +10849,7 @@ General_DoomDesireHit:: @ 81D6108
 	playsewithpan SE_W120, 63
 	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, 32767
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 3, 16, 0, RGB_WHITE
 	waitforvisualfinish
 	end
 

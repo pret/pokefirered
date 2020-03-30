@@ -1240,7 +1240,7 @@ void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
     }
 }
 
-u32 sub_8075BE8(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7)
+u32 SelectBattleAnimSpriteAndBgPalettes(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 a6, bool8 a7)
 {
     u32 selectedPalettes = 0;
     u32 shift;
@@ -1286,19 +1286,19 @@ u32 sub_8075BE8(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner,
     return selectedPalettes;
 }
 
-u32 sub_8075CB8(u8 a1, u8 a2, u8 a3, u8 a4)
+u32 SelectBattlerSpritePalettes(bool8 playerLeft, bool8 playerRight, bool8 foeLeft, bool8 foeRight)
 {
     u32 var = 0;
     u32 shift;
 
-    if (a1)
+    if (playerLeft)
     {
         if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)))
         {
             var |= 1 << (GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) + 16);
         }
     }
-    if (a2)
+    if (playerRight)
     {
         if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)))
         {
@@ -1306,7 +1306,7 @@ u32 sub_8075CB8(u8 a1, u8 a2, u8 a3, u8 a4)
             var |= 1 << shift;
         }
     }
-    if (a3)
+    if (foeLeft)
     {
         if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)))
         {
@@ -1314,7 +1314,7 @@ u32 sub_8075CB8(u8 a1, u8 a2, u8 a3, u8 a4)
             var |= 1 << shift;
         }
     }
-    if (a4)
+    if (foeRight)
     {
         if (IsBattlerSpriteVisible(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         {

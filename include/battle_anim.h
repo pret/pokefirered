@@ -412,8 +412,8 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
 void sub_8075AD8(struct Sprite *sprite);
 u16 ArcTan2Neg(s16 a, s16 b);
 void SetGreyscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor);
-u32 sub_8075BE8(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7);
-u32 sub_8075CB8(u8 a1, u8 a2, u8 a3, u8 a4);
+u32 SelectBattleAnimSpriteAndBgPalettes(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 a6, bool8 a7);
+u32 SelectBattlerSpritePalettes(bool8 playerLeft, bool8 playerRight, bool8 foeLeft, bool8 foeRight);
 u8 sub_8075D80(u8 a1);
 void AnimSpriteOnMonPos(struct Sprite *sprite);
 void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);

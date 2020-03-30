@@ -47,7 +47,7 @@ void ShowMapNamePopup(bool32 palIntoFadedBuffer)
         {
             if (gTasks[taskId].tState != 4)
                 gTasks[taskId].tState = 4;
-            gTasks[taskId].tReshow = 1;
+            gTasks[taskId].tReshow = TRUE;
         }
     }
 }
@@ -59,7 +59,7 @@ static void Task_MapNamePopup(u8 taskId)
     {
     case 0:
         task->tWindowId = MapNamePopupCreateWindow(task->tPalIntoFadedBuffer);
-        task->tWindowExists = 1;
+        task->tWindowExists = TRUE;
         task->tState = 1;
         break;
     case 1:
@@ -91,7 +91,7 @@ static void Task_MapNamePopup(u8 taskId)
                 MapNamePopupPrintMapNameOnWindow(task->tWindowId);
                 CopyWindowToVram(task->tWindowId, 2);
                 task->tState = 1;
-                task->tReshow = 0;
+                task->tReshow = FALSE;
             }
             else
             {
@@ -117,7 +117,7 @@ static void Task_MapNamePopup(u8 taskId)
             {
                 RemoveWindow(task->tWindowId);
                 task->tWindowExists = FALSE;
-                task->tWindowDestroyed = 1;
+                task->tWindowDestroyed = TRUE;
             }
             task->tState = 8;
             ChangeBgY(0, 0x00000000, 0);

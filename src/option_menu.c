@@ -571,10 +571,10 @@ static void LoadOptionMenuItemNames(void)
 
 static void UpdateSettingSelectionDisplay(u16 selection)
 {
-    u16  maxLetterHeight, y;
+    u16 maxLetterHeight, y;
     
-     maxLetterHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
-    y = selection * ( maxLetterHeight - 1) + 0x3A;
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(y, y +  maxLetterHeight));
+    maxLetterHeight = GetFontAttribute(2, FONTATTR_MAX_LETTER_HEIGHT);
+    y = selection * (maxLetterHeight - 1) + 0x3A;
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(y, y + maxLetterHeight));
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0x10, 0xE0));
 }

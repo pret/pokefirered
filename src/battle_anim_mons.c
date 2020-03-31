@@ -1325,13 +1325,13 @@ u32 SelectBattlerSpritePalettes(bool8 playerLeft, bool8 playerRight, bool8 foeLe
     return var;
 }
 
-u8 sub_8075D80(u8 a1)
+u8 GetSpritePalIdxByBattler(u8 a1)
 {
     return a1;
 }
 
 // not used
-static u8 GetBattlerAtPosition_(u8 position)
+static u8 GetSpritePalIdxByPosition(u8 position)
 {
     return GetBattlerAtPosition(position);
 }

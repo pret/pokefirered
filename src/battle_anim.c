@@ -1970,6 +1970,11 @@ static void ScriptCmd_unloadspritegfx(void)
     ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
 }
 
+// Create sprite from template and init data array with varargs
+// args: template, flags, va_args
+// flags:
+//  - bits 0-6: subpriority mod (signed)
+//  - bit 7: target if set else attacker
 static void ScriptCmd_createsprite(void)
 {
     s32 i;

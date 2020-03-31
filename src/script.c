@@ -28,7 +28,7 @@ static struct ScriptContext sScriptContext1;
 static u32 sUnusedVariable2;
 static struct ScriptContext sScriptContext2;
 static bool8 sScriptContext2Enabled;
-static u8 gUnknown_3000F9D;
+static u8 sMsgBoxWalkawayDisabled;
 static u8 sMsgBoxIsCancelable;
 static u8 sQuestLogInput;
 static u8 sQuestLogInputIsDpad;
@@ -235,19 +235,19 @@ u8 GetRegisteredQuestLogInput(void)
     return sQuestLogInput;
 }
 
-void sub_80699BC(void)
+void DisableMsgBoxWalkaway(void)
 {
-    gUnknown_3000F9D = TRUE;
+    sMsgBoxWalkawayDisabled = TRUE;
 }
 
-void sub_80699C8(void)
+void EnableMsgBoxWalkaway(void)
 {
-    gUnknown_3000F9D = FALSE;
+    sMsgBoxWalkawayDisabled = FALSE;
 }
 
-bool8 sub_80699D4(void)
+bool8 IsMsgBoxWalkawayDisabled(void)
 {
-    return gUnknown_3000F9D;
+    return sMsgBoxWalkawayDisabled;
 }
 
 void SetWalkingIntoSignVars(void)
@@ -330,7 +330,7 @@ bool8 ScriptContext2_RunScript(void)
 void ScriptContext1_SetupScript(const u8 *ptr)
 {
     ClearMsgBoxCancelableState();
-    sub_80699C8();
+    EnableMsgBoxWalkaway();
     ClearQuestLogInputIsDpadFlag();
     InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
     SetupBytecodeScript(&sScriptContext1, ptr);

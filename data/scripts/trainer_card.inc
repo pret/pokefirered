@@ -92,7 +92,7 @@ FourIsland_House2_EventScript_StickerManAskForBrag:: @ 81B2994
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	compare VAR_0x8008, 0
 	goto_if_eq FourIsland_House2_EventScript_NothingToBragAbout
 	message FourIsland_House2_Text_BragAboutWhatToday

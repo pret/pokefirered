@@ -80,7 +80,9 @@ extern u8 gSelectedObjectEvent;
 // static declarations
 static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
 
-static void sub_810C3B8(u8 taskId);
+static void VsSeekerResetInBagStepCounter(void);
+static void VsSeekerResetChargingStepCounter(void);
+static void Task_ResetObjectsRematchWantedState(u8 taskId);
 static void sub_810C594(void);
 static void Task_VsSeeker_1(u8 taskId);
 static void Task_VsSeeker_2(u8 taskId);
@@ -103,6 +105,7 @@ static u8 GetRematchableTrainerLocalId(void);
 static void StartTrainerObjectMovementScript(struct VsSeekerTrainerInfo *, const u8 *);
 static u8 GetCurVsSeekerResponse(s32, u16);
 static void StartAllRespondantIdleMovements(void);
+static u8 GetRandomFaceDirectionMovementType();
 
 // rodata
 static const VsSeekerData sVsSeekerData[] = {
@@ -581,16 +584,14 @@ static const u8 gUnknown_8453F67[] = {
     MOVEMENT_TYPE_FACE_RIGHT
 };
 
-
 // text
 
-
-void sub_810C3A4(void)
+void VsSeekerFreezeObjectsAfterChargeComplete(void)
 {
-    CreateTask(sub_810C3B8, 80);
+    CreateTask(Task_ResetObjectsRematchWantedState, 80);
 }
 
-static void sub_810C3B8(u8 taskId)
+static void Task_ResetObjectsRematchWantedState(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
     u8 i;
@@ -618,36 +619,36 @@ static void sub_810C3B8(u8 taskId)
     if (task->data[0] != 0)
     {
         DestroyTask(taskId);
-        sub_805C780();
+        StopPlayerAvatar();
         EnableBothScriptContexts();
     }
 }
 
-void sub_810C444(void)
+void VsSeekerResetObjectMovementAfterChargeComplete(void)
 {
     struct ObjectEventTemplate * templates = gSaveBlock1Ptr->objectEventTemplates;
     u8 i;
-    u8 r6;
-    u8 sp0;
+    u8 movementType;
+    u8 objEventId;
     struct ObjectEvent * objectEvent;
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
         if ((templates[i].trainerType == 1 || templates[i].trainerType == 3) && (templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || templates[i].movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT))
         {
-            r6 = sub_810CF54();
-            TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
-            objectEvent = &gObjectEvents[sp0];
-            if (sub_810CF04(sp0) == TRUE)
+            movementType = GetRandomFaceDirectionMovementType();
+            TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+            objectEvent = &gObjectEvents[objEventId];
+            if (sub_810CF04(objEventId) == TRUE)
             {
-                SetTrainerMovementType(objectEvent, r6);
+                SetTrainerMovementType(objectEvent, movementType);
             }
-            templates[i].movementType = r6;
+            templates[i].movementType = movementType;
         }
     }
 }
 
-bool8 sub_810C4EC(void)
+bool8 UpdateVsSeekerStepCounter(void)
 {
     if (CheckBagHasItem(ITEM_VS_SEEKER, 1) == TRUE)
     {
@@ -672,7 +673,7 @@ bool8 sub_810C4EC(void)
         if (x == 100)
         {
             FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
-            sub_810C640();
+            VsSeekerResetChargingStepCounter();
             sub_810D0D0();
             return TRUE;
         }
@@ -684,7 +685,7 @@ bool8 sub_810C4EC(void)
 void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
 {
     FlagClear(FLAG_SYS_VS_SEEKER_CHARGING);
-    sub_810C640();
+    VsSeekerResetChargingStepCounter();
     sub_810D0D0();
     sub_810C594();
 }
@@ -698,34 +699,34 @@ static void sub_810C594(void)
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
         if (objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_DOWN || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_UP || objectEvent->movementType == MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_LEFT)
         {
-            u8 r3 = sub_810CF54();
+            u8 movementType = GetRandomFaceDirectionMovementType();
             if (objectEvent->active && gSprites[objectEvent->spriteId].data[0] == i)
             {
                 gSprites[objectEvent->spriteId].pos2.x = 0;
                 gSprites[objectEvent->spriteId].pos2.y = 0;
-                SetTrainerMovementType(objectEvent, r3);
+                SetTrainerMovementType(objectEvent, movementType);
             }
         }
     }
 }
 
-void sub_810C604(void)
+static void VsSeekerResetInBagStepCounter(void)
 {
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
 }
 
-void sub_810C620(void)
+static void VsSeekerSetStepCounterInBagFull(void)
 {
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
     gSaveBlock1Ptr->trainerRematchStepCounter |= 100;
 }
 
-void sub_810C640(void)
+static void VsSeekerResetChargingStepCounter(void)
 {
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
 }
 
-void sub_810C654(void)
+static void VsSeekerSetStepCounterFullyCharged(void)
 {
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
     gSaveBlock1Ptr->trainerRematchStepCounter |= (100 << 8);
@@ -785,7 +786,7 @@ static void Task_VsSeeker_2(u8 taskId)
     {
         data[1] = 0;
         data[2] = 0;
-        sub_810C604();
+        VsSeekerResetInBagStepCounter();
         sVsSeeker->responseCode = GetVsSeekerResponseInArea(sVsSeekerData);
         ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gUnknown_8453F5C);
         gTasks[taskId].func = Task_VsSeeker_3;
@@ -934,7 +935,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
     {
         PlaySE(SE_PIN);
         FlagSet(FLAG_SYS_VS_SEEKER_CHARGING);
-        sub_810C640();
+        VsSeekerResetChargingStepCounter();
         return VSSEEKER_RESPONSE_FOUND_REMATCHES;
     }
     if (sVsSeeker->trainerHasNotYetBeenFought)
@@ -944,7 +945,7 @@ static u8 GetVsSeekerResponseInArea(const VsSeekerData * a0)
 
 void sub_810CB90(void)
 {
-    u8 sp0 = 0;
+    u8 objEventId = 0;
     struct ObjectEventTemplate *r4 = gSaveBlock1Ptr->objectEventTemplates;
     s32 r9 = sub_810CE10(sVsSeekerData, gTrainerBattleOpponent_A);
 
@@ -958,12 +959,12 @@ void sub_810CB90(void)
             {
                 struct ObjectEvent *r4_2;
 
-                TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &sp0);
-                r4_2 = &gObjectEvents[sp0];
-                sub_810CF54(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
+                TryGetObjectEventIdByLocalIdAndMap(r4[r8].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+                r4_2 = &gObjectEvents[objEventId];
+                GetRandomFaceDirectionMovementType(&r4[r8]); // You are using this function incorrectly.  Please consult the manual.
                 OverrideMovementTypeForObjectEvent(r4_2, gUnknown_8453F67[r4_2->facingDirection]);
                 gSaveBlock1Ptr->trainerRematches[r4[r8].localId] = 0;
-                if (gSelectedObjectEvent == sp0)
+                if (gSelectedObjectEvent == objEventId)
                     r4_2->movementType = gUnknown_8453F67[r4_2->facingDirection];
                 else
                     r4_2->movementType = MOVEMENT_TYPE_FACE_DOWN;
@@ -1113,22 +1114,22 @@ bool8 sub_810CF04(u8 a0)
     return FALSE;
 }
 
-u8 sub_810CF54()
+static u8 GetRandomFaceDirectionMovementType()
 {
     u16 r1 = Random() % 4;
 
     switch (r1)
     {
         case 0:
-            return 7;
+            return MOVEMENT_TYPE_FACE_UP;
         case 1:
-            return 8;
+            return MOVEMENT_TYPE_FACE_DOWN;
         case 2:
-            return 9;
+            return MOVEMENT_TYPE_FACE_LEFT;
         case 3:
-            return 10;
+            return MOVEMENT_TYPE_FACE_RIGHT;
         default:
-            return 8;
+            return MOVEMENT_TYPE_FACE_DOWN;
     }
 }
 

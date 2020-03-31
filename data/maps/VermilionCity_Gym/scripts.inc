@@ -142,7 +142,7 @@ VermilionCity_Gym_EventScript_TrashCan15:: @ 816B837
 
 VermilionCity_Gym_EventScript_TrashCan:: @ 816B843
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	copyvar SWITCH1_ID, VAR_TEMP_0
 	copyvar SWITCH2_ID, VAR_TEMP_1
 	goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_LocksAlreadyOpen

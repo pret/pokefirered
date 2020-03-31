@@ -100,7 +100,7 @@ gSpecials:: @ 815FD60
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
-	def_special sub_8081128
+	def_special TryContestLinkup
 	def_special Field_AskSaveTheGame
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
@@ -349,14 +349,14 @@ gSpecials:: @ 815FD60
 	def_special Dummy_TryEnableBravoTrainerBattleTower
 	def_special DoesPartyHaveEnigmaBerry
 	def_special NullFieldSpecial
-	def_special sub_810B82C
+	def_special SetPostgameFlags
 	def_special StartMarowakBattle
 	def_special ForcePlayerOntoBike
 	def_special ListMenu
 	def_special ReturnToListMenu
 	def_special DoPicboxCancel
 	def_special SetVermilionTrashCans
-	def_special sub_805D1A8
+	def_special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
 	def_special SampleResortGorgeousMonAndReward
 	def_special CheckAddCoins
 	def_special GetDaycarePokemonCount
@@ -364,7 +364,7 @@ gSpecials:: @ 815FD60
 	def_special ForcePlayerToStartSurfing
 	def_special GetStarterSpecies
 	def_special SetSeenMon
-	def_special sub_810C444
+	def_special VsSeekerResetObjectMovementAfterChargeComplete
 	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
 	def_special UpdateTrainerCardPhotoIcons
@@ -377,8 +377,8 @@ gSpecials:: @ 815FD60
 	def_special ShowWirelessCommunicationScreen
 	def_special EnableNationalPokedex
 	def_special SetWalkingIntoSignVars
-	def_special sub_80699BC
-	def_special sub_810C3A4
+	def_special DisableMsgBoxWalkaway
+	def_special VsSeekerFreezeObjectsAfterChargeComplete
 	def_special SetFlavorTextFlagFromSpecialVars
 	def_special UpdatePickStateFromSpecialVar8005
 	def_special OverworldWhiteOutGetMoneyLoss
@@ -393,14 +393,14 @@ gSpecials:: @ 815FD60
 	def_special BackupHelpContext
 	def_special RestoreHelpContext
 	def_special ValidateReceivedWonderCard
-	def_special sub_810B810
+	def_special SetUnlockedPokedexFlags
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
-	def_special sub_811390C
+	def_special QuestLog_StartRecordingInputsAfterDeferredEvent
 	def_special GetMartClerkObjectId
 	def_special BattleCardAction
 	def_special GetQuestLogState
-	def_special sub_8112364
+	def_special QuestLog_OnInteractionWithSpecialNpc
 	def_special GetMENewsJisanItemAndState
 	def_special GetPCBoxToSendMon
 	def_special OpenMuseumFossilPic
@@ -418,7 +418,7 @@ gSpecials:: @ 815FD60
 	def_special DaisyMassageServices
 	def_special HelpSystem_Disable
 	def_special HelpSystem_Enable
-	def_special sub_810B82C
+	def_special SetPostgameFlags
 	def_special CheckHasAtLeastOneBerry
 	def_special DisplayBerryPowderVendorMenu
 	def_special RemoveBerryPowderVendorMenu

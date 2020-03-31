@@ -1555,7 +1555,7 @@ void CB2_WhiteOut(void)
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         do_load_map_stuff_loop(&val);
-        sub_8112364();
+        QuestLog_OnInteractionWithSpecialNpc();
         SetFieldVBlankCallback();
         SetMainCallback1(CB1_Overworld);
         SetMainCallback2(CB2_Overworld);

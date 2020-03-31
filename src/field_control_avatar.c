@@ -308,7 +308,7 @@ void FieldInput_HandleCancelSignpost(struct FieldInput * input)
         {
             if (input->dpadDirection != 0 && GetPlayerFacingDirection() != input->dpadDirection)
             {
-                if (sub_80699D4() == TRUE)
+                if (IsMsgBoxWalkawayDisabled() == TRUE)
                     return;
                 if (input->dpadDirection == DIR_NORTH)
                     RegisterQuestLogInput(QL_INPUT_UP);
@@ -657,9 +657,9 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
-        if (sub_810C4EC() == TRUE)
+        if (UpdateVsSeekerStepCounter() == TRUE)
         {
-            ScriptContext1_SetupScript(gUnknown_81A8CED);
+            ScriptContext1_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
         else if (UpdatePoisonStepCounter() == TRUE)
@@ -1086,7 +1086,7 @@ void sub_806DE70(u16 x, u16 y)
         {
             if (events[i].x + 7 == x && events[i].y + 7 == y)
             {
-                sub_8112364();
+                QuestLog_OnInteractionWithSpecialNpc();
                 ScriptContext1_SetupScript(events[i].script);
                 ScriptContext2_Enable();
             }

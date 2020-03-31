@@ -29,7 +29,7 @@ EventScript_EnableMysteryGift:: @ 81A774D
 	msgbox Text_YouKnowThoseWords
 	setflag FLAG_SYS_MYSTERY_GIFT_ENABLED
 	textcolor 3
-	special sub_80699BC
+	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox Text_YouCanAccessMysteryGift
 	normalmsg

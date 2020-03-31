@@ -30,7 +30,7 @@ NavelRock_Base_EventScript_TryRemoveLugia:: @ 8165120
 
 NavelRock_Base_EventScript_Lugia:: @ 8165134
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	waitse

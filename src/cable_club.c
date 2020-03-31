@@ -402,7 +402,7 @@ static void Task_Linkup_6a(u8 taskId)
         if (gSpecialVar_Result == 1)
         {
             // Dumb trick required to match
-            if (gLinkType == LINKTYPE_0x4411)
+            if (gLinkType == LINKTYPE_BERRY_BLENDER_SETUP)
                 *UnusedVarNeededToMatch += 0;
             DestroyLinkPlayerCountDisplayWindow(gTasks[taskId].data[5]);
             EnableBothScriptContexts();
@@ -493,9 +493,9 @@ void TryRecordMixLinkup(void)
     CreateLinkupTask(2, 4);
 }
 
-void sub_8081128(void)
+void TryContestLinkup(void)
 {
-    gLinkType = LINKTYPE_0x6601;
+    gLinkType = LINKTYPE_CONTEST_GMODE;
     gBattleTypeFlags = 0;
     CreateLinkupTask(4, 4);
 }

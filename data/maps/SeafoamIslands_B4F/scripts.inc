@@ -100,7 +100,7 @@ SeafoamIslands_B4F_EventScript_EnterByFalling:: @ 8163121
 	call_if_lt SeafoamIslands_B4F_EventScript_RideCurrentFar
 	compare VAR_0x8008, 9
 	call_if_ge SeafoamIslands_B4F_EventScript_RideCurrentClose
-	special sub_805D1A8
+	special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand
 	setvar VAR_TEMP_1, 0
 	releaseall
 	end
@@ -159,7 +159,7 @@ SeafoamIslands_B4F_Movement_WalkUp:: @ 81631AA
 
 SeafoamIslands_B4F_EventScript_Articuno:: @ 81631AC
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	setwildbattle SPECIES_ARTICUNO, 50, ITEM_NONE

@@ -95,7 +95,7 @@ static u8 *const sStringVarPtrs[] = {
 
 void ShowDiploma(void)
 {
-    sub_8112364();
+    QuestLog_OnInteractionWithSpecialNpc();
     SetMainCallback2(CB2_ShowDiploma);
     ScriptContext2_Enable();
 }
@@ -187,7 +187,7 @@ u8 GetLeadMonFriendship(void)
 
 void ShowTownMap(void)
 {
-    sub_8112364();
+    QuestLog_OnInteractionWithSpecialNpc();
     sub_80BFF50(1, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 

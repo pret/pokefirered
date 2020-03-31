@@ -395,7 +395,7 @@ void ShowStartMenu(void)
     {
         FreezeObjectEvents();
         sub_805C270();
-        sub_805C780();
+        StopPlayerAvatar();
     }
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
     ScriptContext2_Enable();

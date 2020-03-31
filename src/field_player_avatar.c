@@ -1114,7 +1114,7 @@ void sub_805C774(void)
     ForcedMovement_None();
 }
 
-void sub_805C780(void)
+void StopPlayerAvatar(void)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -1596,7 +1596,7 @@ void CreateStopSurfingTask_NoMusicChange(u8 direction)
     Task_StopSurfingInit(taskId);
 }
 
-void sub_805D1A8(void)
+void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
 {
     if (gUnknown_3005E88 != 1 && gUnknown_3005E88 != 3)
     {

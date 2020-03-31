@@ -19,7 +19,7 @@ SaffronCity_CopycatsHouse_2F_EventScript_Doll:: @ 816EB70
 
 SaffronCity_CopycatsHouse_2F_EventScript_Copycat:: @ 816EB7B
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	checkitem ITEM_POKE_DOLL, 1

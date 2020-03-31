@@ -93,16 +93,16 @@ void TrySetMapSaveWarpStatus(void)
     sub_810B7CC();
 }
 
-void sub_810B810(void)
+void SetUnlockedPokedexFlags(void)
 {
     gSaveBlock2Ptr->field_A8 |= 0x1;
     gSaveBlock2Ptr->field_A8 |= 0x10;
     gSaveBlock2Ptr->field_A8 |= 0x20;
 }
 
-void sub_810B82C(void)
+void SetPostgameFlags(void)
 {
-    gSaveBlock2Ptr->specialSaveWarpFlags |= 0x80;
+    gSaveBlock2Ptr->specialSaveWarpFlags |= CHAMPION_SAVEWARP;
     gSaveBlock2Ptr->field_A8 |= 0x2;
     gSaveBlock2Ptr->field_A8 |= 0x4;
     gSaveBlock2Ptr->field_A8 |= 0x8;

@@ -188,7 +188,7 @@ u8 GetLeadMonFriendship(void)
 void ShowTownMap(void)
 {
     sub_8112364();
-    sub_80BFF50(1, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    InitRegionMapWithExitCB(REGIONMAP_TYPE_WALL, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 bool8 PlayerHasGrassPokemonInParty(void)

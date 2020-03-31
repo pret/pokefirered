@@ -7,35 +7,51 @@
 
 // Exported type declarations
 
-enum
-{
-    INPUT_EVENT_NONE,
-    INPUT_EVENT_MOVE_START,
-    INPUT_EVENT_MOVE_CONT,
-    INPUT_EVENT_MOVE_END,
-    INPUT_EVENT_A_BUTTON,
-    INPUT_EVENT_B_BUTTON,
+enum {
+    MAP_INPUT_NONE,
+    MAP_INPUT_MOVE_START,
+    MAP_INPUT_MOVE_CONT,
+    MAP_INPUT_MOVE_END,
+    MAP_INPUT_A_BUTTON,
+    MAP_INPUT_SWITCH,
+    MAP_INPUT_CANCEL
 };
 
 enum {
     MAPSECTYPE_NONE,
-    MAPSECTYPE_PLAIN,
-    MAPSECTYPE_CITY_CANFLY,
-    MAPSECTYPE_CITY_CANTFLY,
+    MAPSECTYPE_ROUTE,
+    MAPSECTYPE_VISITED,
+    MAPSECTYPE_NOT_VISITED,
+    MAPSECTYPE_UNKNOWN, // Checked but never used
 };
 
 enum {
-    MAPPERM_0,
-    MAPPERM_1,
-    MAPPERM_2,
-    MAPPERM_3
+    LAYER_MAP,
+    LAYER_DUNGEON,
+    LAYER_COUNT
+};
+
+enum {
+    MAPPERM_HAS_SWITCH_BUTTON,
+    MAPPERM_HAS_MAP_PREVIEW,
+    MAPPERM_HAS_OPEN_ANIM,
+    MAPPERM_HAS_FLY_DESTINATIONS,
+    MAPPERM_COUNT
 };
 
 enum {
     REGIONMAP_KANTO,
     REGIONMAP_SEVII123,
     REGIONMAP_SEVII45,
-    REGIONMAP_SEVII67
+    REGIONMAP_SEVII67,
+    REGIONMAP_COUNT
+};
+
+enum {
+    REGIONMAP_TYPE_NORMAL,
+    REGIONMAP_TYPE_WALL,
+    REGIONMAP_TYPE_FLY,
+    REGIONMAP_TYPE_COUNT
 };
 
 // Exported RAM declarations
@@ -43,7 +59,7 @@ enum {
 // Exported ROM declarations
 u8 *GetMapName(u8 *dest, u16 mapsec, u16 fill);
 u8 *GetMapNameGeneric(u8 *dest, u16 mapsec);
-void sub_80BFF50(u8 a0, void (*a1)(void));
-void MCB2_FlyMap(void);
+void InitRegionMapWithExitCB(u8 a0, void (*a1)(void));
+void CB2_OpenFlyMap(void);
 
-#endif //GUARD_REGION_MAP_H
+#endif // GUARD_REGION_MAP_H

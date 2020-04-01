@@ -1388,7 +1388,7 @@ void QuestLog_OnInteractionWithSpecialNpc(void)
     sEventRecordingPointer = NULL;
 }
 
-void sub_81123BC(void)
+static void SortQuestLogInSav1(void)
 {
     struct QuestLog * buffer = AllocZeroed(QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
     u8 i;
@@ -1410,12 +1410,12 @@ void sub_81123BC(void)
     Free(buffer);
 }
 
-void sub_8112450(void)
+void SaveQuestLogData(void)
 {
     if (MenuHelpers_LinkSomething() != TRUE)
     {
         QuestLog_OnInteractionWithSpecialNpc();
-        sub_81123BC();
+        SortQuestLogInSav1();
     }
 }
 

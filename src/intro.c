@@ -21,29 +21,33 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
+struct IntroSequenceData;
+
+typedef void (*IntroCallback)(struct IntroSequenceData *);
+
 struct IntroSequenceData
 {
-    void (*field_0000)(struct IntroSequenceData *);
-    u8 field_0004;
+    IntroCallback callback;
+    u8 state;
     u8 field_0005;
     u8 field_0006;
     u16 field_0008;
     u16 field_000A;
     u8 filler_000C[6];
-    u16 field_0012;
-    struct Sprite * field_0014;
-    struct Sprite * field_0018;
-    struct Sprite * field_001C;
-    struct Sprite * field_0020;
-    struct Sprite * field_0024;
-    struct Sprite * field_0028[4];
+    u16 timer;
+    struct Sprite * gameFreakLogoArtSprite;
+    struct Sprite * nidorinoAnimSprite;
+    struct Sprite * gengarStaticSprite;
+    struct Sprite * nidorinoStaticSprite;
+    struct Sprite * grassSprite;
+    struct Sprite * gengarBackSpriteArray[4];
     u8 filler_0038[0x4];
     u8 field_003C[0x400];
     u8 field_043C[0x400];
     u8 filler_083C[0x2080];
 }; // size: 0x28BC
 
-static EWRAM_DATA struct GcmbStruct gUnknown_203AAD4 = {0};
+static EWRAM_DATA struct GcmbStruct sGcmb = {0};
 static EWRAM_DATA u16 gUnknown_203AB00 = 0;
 static EWRAM_DATA u16 gUnknown_203AB02 = 0;
 static EWRAM_DATA u16 gUnknown_203AB04 = 0;
@@ -69,43 +73,43 @@ static EWRAM_DATA s16 gUnknown_203AB2C = 0;
 static EWRAM_DATA u16 gUnknown_203AB2E = 0;
 static EWRAM_DATA u32 gUnknown_203AB30 = 0;
 
-static void sub_80EC870(void);
-static void sub_80EC9D4(void);
-static void sub_80EC9EC(void);
-static void sub_80ECA00(void);
-static void sub_80ECA70(void);
-static void sub_80ECAB0(u8 taskId);
-static void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *));
-static void sub_80ECAF0(struct IntroSequenceData * ptr);
-static void sub_80ECB98(struct IntroSequenceData * ptr);
-static void sub_80ECC3C(struct IntroSequenceData * ptr);
-static void sub_80ECCA8(struct IntroSequenceData * ptr);
-static void sub_80ECD60(struct IntroSequenceData * ptr);
-static void sub_80ECEA4(struct IntroSequenceData * ptr);
+static void CB2_SetUpIntro(void);
+static void CB2_Intro(void);
+static void VBlankCB_Intro(void);
+static void Intro_ResetGpuRegs(void);
+static void StartIntroSequence(void);
+static void Task_CallIntroCallback(u8 taskId);
+static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb);
+static void IntroCB_Init(struct IntroSequenceData * ptr);
+static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * ptr);
+static void IntroCB_GameFreakStar(struct IntroSequenceData * ptr);
+static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData * ptr);
+static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData * ptr);
+static void IntroCB_FightScene1_Init(struct IntroSequenceData * ptr);
 static void sub_80ED0AC(u8 taskId);
 static void sub_80ED118(void);
 static void sub_80ED140(u8 taskId);
 static void sub_80ED188(struct IntroSequenceData * ptr);
 static void sub_80ED40C(u8 taskId);
 static void sub_80ED428(u8 taskId);
-static void sub_80ED444(struct IntroSequenceData * ptr);
+static void CreateMonStaticSprites(struct IntroSequenceData * ptr);
 static void sub_80ED4A0(struct IntroSequenceData * ptr);
 static void sub_80ED4C0(struct IntroSequenceData * ptr);
 static void sub_80ED6D8(void);
 static void sub_80ED714(u8 taskId);
-static void sub_80ED7D4(struct IntroSequenceData * ptr);
-static void sub_80ED818(struct Sprite * sprite);
+static void CreateGrassSprite(struct IntroSequenceData * ptr);
+static void SpriteCB_Grass(struct Sprite * sprite);
 static void sub_80ED898(struct IntroSequenceData * ptr);
-static void sub_80EDAF0(struct IntroSequenceData * ptr);
+static void CreateGengarBackSprite(struct IntroSequenceData * ptr);
 static void sub_80EDB70(struct IntroSequenceData * ptr);
 static void sub_80EDBAC(struct IntroSequenceData * ptr);
 static void sub_80EDBE8(struct IntroSequenceData * ptr);
-static void sub_80EDC40(void);
-static void sub_80EDDF0(void);
-static void sub_80EDE04(u8 taskId);
-static void sub_80EDED8(void);
-static void sub_80EDEEC(u8 taskId);
-static struct Sprite * sub_80EDF68(void);
+static void GameFreakScene_LoadGfxCreateStar(void);
+static void GameFreakScene_StartTrailingSparkleSpawner(void);
+static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId);
+static void GameFreakScene_StartRevealGameFreakTextSparklesSpawner(void);
+static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId);
+static struct Sprite * CreateGameFreakLogoArtSprite(void);
 static void sub_80EDF94(struct IntroSequenceData * ptr);
 static void sub_80EE024(u8 taskId);
 static void sub_80EE160(void);
@@ -115,7 +119,7 @@ static void sub_80EE29C(struct Sprite * sprite);
 static void sub_80EE350(struct Sprite * sprite);
 static void sub_80EE40C(struct Sprite * sprite);
 static void sub_80EE4DC(struct Sprite * sprite);
-static void sub_80EE4F8(struct IntroSequenceData * ptr);
+static void CreateNidorinoAnimSprite(struct IntroSequenceData * ptr);
 static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3);
 static void sub_80EE580(struct Sprite * sprite);
 static bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
@@ -124,7 +128,7 @@ static void sub_80EE610(struct Sprite * sprite);
 static void sub_80EE6A4(struct IntroSequenceData * ptr);
 static void sub_80EE704(struct Sprite * sprite);
 static bool8 sub_80EE850(struct IntroSequenceData * ptr);
-static void sub_80EE864(s16 a1, s16 a2, s16 a3);
+static void CreateNidorinoRecoilDustSprites(s16 a1, s16 a2, s16 a3);
 static void sub_80EE8E4(struct Sprite * sprite);
 static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
 static void sub_80EE9D4(struct Sprite * sprite);
@@ -132,28 +136,28 @@ static void sub_80EEA94(struct IntroSequenceData * ptr);
 static void sub_80EEB08(struct Sprite * sprite);
 static void sub_80EEBE4(void);
 #if REVISION >= 1
-static void sub_rev1_80EDFAC(void);
+static void Rev1_GameFreakScene_CreatePresentsText(void);
 #else
-#define sub_rev1_80EDFAC()
+#define Rev1_GameFreakScene_CreatePresentsText()
 #endif
 
 extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 
-static const u16 gUnknown_8402260[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
-static const u8 gUnknown_8402280[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
-static const u8 gUnknown_84024E4[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
+static const u16 sCopyrightGraphicsPal[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
+static const u8 sCopyrightGraphicsTiles[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
+static const u8 sCopyrightGraphicsMap[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
 static const u16 gUnknown_8402630[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
 static const u8 gUnknown_8402650[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
 static const u8 gUnknown_8402668[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
-static const u16 gUnknown_840270C[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
+static const u16 sSpritePals_GameFreakPresents[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
 static const u8 gUnknown_840272C[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
-static const u32 gUnknown_84028F8[] = INCBIN_U32("graphics/intro/unk_84028F8.bin.lz");
-static const u16 gUnknown_8402A44[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
-static const u32 gUnknown_8402A64[] = INCBIN_U32("graphics/intro/unk_8402A64.4bpp.lz");
-static const u16 gUnknown_8402ABC[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
-static const u32 gUnknown_8402ADC[] = INCBIN_U32("graphics/intro/unk_8402ADC.4bpp.lz");
-static const u32 gUnknown_8402B2C[] = INCBIN_U32("graphics/intro/unk_8402B2C.4bpp.lz");
-static const u32 gUnknown_8402CD4[] = INCBIN_U32("graphics/intro/unk_8402CD4.4bpp.lz");
+static const u32 sSpriteTiles_GameFreakLogoArt[] = INCBIN_U32("graphics/intro/unk_84028F8.4bpp.lz");
+static const u16 sSpritePals_LargeStar[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
+static const u32 sSpriteTiles_LargeStar[] = INCBIN_U32("graphics/intro/unk_8402A64.4bpp.lz");
+static const u16 sSpritePals_Sparkles[] = INCBIN_U16("graphics/intro/unk_8402ADC.gbapal");
+static const u32 sSpriteTiles_TrailingSparkles[] = INCBIN_U32("graphics/intro/unk_8402ADC.4bpp.lz");
+static const u32 sSpriteTiles_RevealGameFreakTextSparkles[] = INCBIN_U32("graphics/intro/unk_8402B2C.4bpp.lz");
+static const u32 sSpriteTiles_PresentsText[] = INCBIN_U32("graphics/intro/unk_8402CD4.4bpp.lz");
 static const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
 static const u8 gUnknown_8402D54[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
 static const u8 gUnknown_8403FE8[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
@@ -166,7 +170,7 @@ static const u8 gUnknown_8405890[] = INCBIN_U8("graphics/intro/unk_8405890.bin.l
 static const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
 static const u8 gUnknown_8405B28[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
 static const u8 gUnknown_8405CDC[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
-static const u16 gUnknown_8405DA4[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
+static const u16 sSpritePals_Gengar[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
 static const u8 gUnknown_8405DC4[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
 static const u8 gUnknown_840644C[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
 static const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
@@ -177,24 +181,24 @@ static const u8 gUnknown_8407470[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.
 static const u8 gUnknown_8407A50[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
 static const u8 gUnknown_8407B9C[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
 static const u8 gUnknown_8408D98[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
-static const u32 gUnknown_840926C[] = INCBIN_U32("graphics/intro/unk_840926C.4bpp.lz");
-static const u16 gUnknown_84096AC[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
-static const u32 gUnknown_84096CC[] = INCBIN_U32("graphics/intro/unk_84096CC.4bpp.lz");
-static const u16 gUnknown_8409A1C[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
-static const u32 gUnknown_8409A3C[] = INCBIN_U32("graphics/intro/unk_8409A3C.4bpp.lz");
-static const u32 gUnknown_8409D20[] = INCBIN_U32("graphics/intro/unk_8409D20.4bpp.lz");
-static const u32 gUnknown_840A3E4[] = INCBIN_U32("graphics/intro/unk_840A3E4.4bpp.lz");
-static const u16 gUnknown_840B834[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
-static const u16 gUnknown_840B854[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
-static const u32 gUnknown_840B874[] = INCBIN_U32("graphics/intro/unk_840B874.4bpp.lz");
-static const u32 gUnknown_840BAE0[] = INCBIN_U32("graphics/intro/unk_840BAE0.4bpp.lz");
+static const u32 sSpriteTiles_GengarStatic[] = INCBIN_U32("graphics/intro/unk_840926C.4bpp.lz");
+static const u16 sSpritePals_Nidorino[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
+static const u32 sSpriteTiles_NidorinoStatic[] = INCBIN_U32("graphics/intro/unk_84096CC.4bpp.lz");
+static const u16 sSpritePals_Grass[] = INCBIN_U16("graphics/intro/unk_8409A1C.gbapal");
+static const u32 sSpriteTiles_Grass[] = INCBIN_U32("graphics/intro/unk_8409A3C.4bpp.lz");
+static const u32 sSpriteTiles_GengarBack[] = INCBIN_U32("graphics/intro/unk_8409D20.4bpp.lz");
+static const u32 sSpriteTiles_NidorinoAnim[] = INCBIN_U32("graphics/intro/unk_840A3E4.4bpp.lz");
+static const u16 sSpritePals_GengarSwipe[] = INCBIN_U16("graphics/intro/unk_840B834.gbapal");
+static const u16 sSpritePals_NidorinoRecoilDust[] = INCBIN_U16("graphics/intro/unk_840B854.gbapal");
+static const u32 sSpriteTiles_GengarSwipe[] = INCBIN_U32("graphics/intro/unk_840B874.4bpp.lz");
+static const u32 sSpriteTiles_NidorinoRecoilDust[] = INCBIN_U32("graphics/intro/unk_840BAE0.4bpp.lz");
 
-static const struct BgTemplate gUnknown_840BB80[] = {
+static const struct BgTemplate sBgTemplates_GameFreakScene[] = {
 	{ 3, 3, 31, 0, 0, 3, 0x000 },
 	{ 2, 3, 30, 0, 0, 2, 0x010 }
 };
 
-static const struct BgTemplate gUnknown_840BB88[] = {
+static const struct BgTemplate sBgTemplates_FightScene1[] = {
 	{ 0, 0, 28, 2, 0, 0, 0x000 },
 	{ 1, 1, 30, 2, 0, 0, 0x000 }
 };
@@ -211,7 +215,7 @@ static const struct BgTemplate gUnknown_840BBA0[] = {
 	{ 0, 1, 30, 2, 0, 0, 0x000 }
 };
 
-static const struct WindowTemplate gUnknown_840BBA8[] = {
+static const struct WindowTemplate sWindowTemplate[] = {
 	{ 2, 6, 4, 18, 9, 0xD, 0x000 },
 	DUMMY_WIN_TEMPLATE
 };
@@ -223,22 +227,22 @@ static const u8 gUnknown_840BBB8[][2] = {
 	{0x00, 0x00}
 };
 
-static const struct CompressedSpriteSheet gUnknown_840BBC0[] = {
-	{gUnknown_8402A64, 0x0080, 0},
-	{gUnknown_8402ADC, 0x0080, 1},
-	{gUnknown_8402B2C, 0x0800, 2},
-	{gUnknown_84028F8, 0x0400, 3},
-	{gUnknown_8402CD4, 0x0100, 4}
+static const struct CompressedSpriteSheet sSpriteSheets_GameFreakScene[] = {
+	{sSpriteTiles_LargeStar, 0x0080, 0},
+	{sSpriteTiles_TrailingSparkles, 0x0080, 1},
+	{sSpriteTiles_RevealGameFreakTextSparkles, 0x0800, 2},
+	{sSpriteTiles_GameFreakLogoArt, 0x0400, 3},
+	{sSpriteTiles_PresentsText, 0x0100, 4}
 };
 
-static const struct SpritePalette gUnknown_840BBE8[] = {
-	{gUnknown_8402A44, 0},
-	{gUnknown_8402ABC, 1},
-	{gUnknown_840270C, 3},
+static const struct SpritePalette sSpritePalettes_GameFreakScene[] = {
+	{sSpritePals_LargeStar, 0},
+	{sSpritePals_Sparkles, 1},
+	{sSpritePals_GameFreakPresents, 3},
 	{0}
 };
 
-static const struct Coords16 gUnknown_840BC08[] = {
+static const struct Coords16 sTrailingSparkleCoords[] = {
 	{0x0048, 0x0050},
 	{0x0088, 0x004a},
 	{0x00a8, 0x0050},
@@ -275,9 +279,9 @@ static const union AnimCmd *const gAnimCmdTable_840BC64[] = {
 	gAnimCmd_840BC50
 };
 
-static const struct SpriteTemplate gUnknown_840BC6C = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
+static const struct SpriteTemplate sSpriteTemplate_LargeStar = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
 
-static const struct SpriteTemplate gUnknown_840BC84 = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
+static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
 
 static const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
 
@@ -293,15 +297,15 @@ static const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
 	gAnimCmd_840BCA4
 };
 
-static const struct SpriteTemplate gUnknown_840BCBC = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
+static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
 
 static const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
 
-static const struct SpriteTemplate gUnknown_840BCDC = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GameFreakLogoArt = {3, 3, &gOamData_840BCD4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BCF4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
 
-static const struct SpriteTemplate gUnknown_840BCFC = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_PresentsText = {4, 3, &gOamData_840BCF4, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BD14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -354,13 +358,13 @@ static const union AffineAnimCmd *const gAffineAnimCmdTable_840BD80[] = {
 	gAffineAnimCmd_840BD68
 };
 
-static const struct SpriteTemplate gUnknown_840BD88 = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
-static const struct SpriteTemplate gUnknown_840BDA8 = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoStatic = {7, 7, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
-static const struct SpriteTemplate gUnknown_840BDC0 = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GengarStatic = {6, 6, &gOamData_840BDA0, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BDD8 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_H_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 0, .paletteNum = 0 };
 
@@ -380,7 +384,7 @@ static const union AnimCmd *const gAnimCmdTable_840BDF4[] = {
 	gAnimCmds_840BDE8
 };
 
-static const struct SpriteTemplate gUnknown_840BDFC = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_Grass = {8, 8, &gOamData_840BDD8, gAnimCmdTable_840BDF4, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BE14 = { .affineMode = ST_OAM_AFFINE_DOUBLE, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -411,7 +415,7 @@ static const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
 	gAnimCmd_840BE34
 };
 
-static const struct SpriteTemplate gUnknown_840BE4C = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GengarBack = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -432,7 +436,7 @@ static const union AnimCmd *const gAnimCmdTable_840BE84[] = {
 	gAnimCmd_840BE78
 };
 
-static const struct SpriteTemplate gUnknown_840BE8C = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
+static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
 
 static const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -448,16 +452,16 @@ static const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
 	gAnimCmd_840BEAC
 };
 
-static const struct SpriteTemplate gUnknown_840BEC4 = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
 
-static const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
-	{gUnknown_840926C, 0x0800, 6},
-	{gUnknown_84096CC, 0x0800, 7},
-	{gUnknown_840A3E4, 0x2800, 5},
-	{gUnknown_8409A3C, 0x0800, 8},
-	{gUnknown_8409D20, 0x1800, 9},
-	{gUnknown_840B874, 0x0a00, 10},
-	{gUnknown_840BAE0, 0x0200, 11}
+static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
+	{sSpriteTiles_GengarStatic, 0x0800, 6},
+	{sSpriteTiles_NidorinoStatic, 0x0800, 7},
+	{sSpriteTiles_NidorinoAnim, 0x2800, 5},
+	{sSpriteTiles_Grass, 0x0800, 8},
+	{sSpriteTiles_GengarBack, 0x1800, 9},
+	{sSpriteTiles_GengarSwipe, 0x0a00, 10},
+	{sSpriteTiles_NidorinoRecoilDust, 0x0200, 11}
 };
 
 // POTENTIAL UB
@@ -465,12 +469,12 @@ static const struct CompressedSpriteSheet gUnknown_840BEDC[] = {
 // LoadSpritePalettes uses a {0} entry to signal end of array.
 // Because such an entry is absent in this case, the function
 // continues reading into the next .rodata section.
-static const struct SpritePalette gUnknown_840BF14[] = {
-	{gUnknown_8405DA4, 6},
-	{gUnknown_84096AC, 7},
-	{gUnknown_8409A1C, 8},
-	{gUnknown_840B834, 10},
-	{gUnknown_840B854, 11},
+static const struct SpritePalette sFightSceneSpritePalettes[] = {
+	{sSpritePals_Gengar, 6},
+	{sSpritePals_Nidorino, 7},
+	{sSpritePals_Grass, 8},
+	{sSpritePals_GengarSwipe, 10},
+	{sSpritePals_NidorinoRecoilDust, 11},
     // {0}
 };
 
@@ -481,25 +485,25 @@ static void sub_80EC5A4(void)
     TransferPlttBuffer();
 }
 
-static void sub_80EC5B8(void)
+static void CB2_WaitFadeBeforeSetUpIntro(void)
 {
     if (!UpdatePaletteFade())
-        SetMainCallback2(sub_80EC870);
+        SetMainCallback2(CB2_SetUpIntro);
 }
 
-static void load_copyright_graphics(u16 a, u16 b, u16 c)
+static void load_copyright_graphics(u16 charBase, u16 screenBase, u16 palOffset)
 {
-    LZ77UnCompVram(gUnknown_8402280, (void *)BG_VRAM + a);
-    LZ77UnCompVram(gUnknown_84024E4, (void *)BG_VRAM + b);
-    LoadPalette(gUnknown_8402260, c, 0x20);
+    LZ77UnCompVram(sCopyrightGraphicsTiles, (void *)BG_VRAM + charBase);
+    LZ77UnCompVram(sCopyrightGraphicsMap, (void *)BG_VRAM + screenBase);
+    LoadPalette(sCopyrightGraphicsPal, palOffset, 0x20);
 }
 
 static void SerialCb_CopyrightScreen(void)
 {
-    GameCubeMultiBoot_HandleSerialInterrupt(&gUnknown_203AAD4);
+    GameCubeMultiBoot_HandleSerialInterrupt(&sGcmb);
 }
 
-static bool8 sub_80EC62C(void)
+static bool8 RunCopyrightScreen(void)
 {
     switch (gMain.state)
     {
@@ -516,26 +520,26 @@ static bool8 sub_80EC62C(void)
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT + sizeof(vu16), PLTT_SIZE - sizeof(vu16));
         ResetPaletteFade();
-        load_copyright_graphics(0, 0x3800, 0);
+        load_copyright_graphics(0 * BG_CHAR_SIZE, 7 * BG_SCREEN_SIZE, 0);
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
-        SetGpuReg(REG_OFFSET_BG0CNT, 0x700);
+        SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(sub_80EC5A4);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetSerialCallback(SerialCb_CopyrightScreen);
-        GameCubeMultiBoot_Init(&gUnknown_203AAD4);
+        GameCubeMultiBoot_Init(&sGcmb);
         // fallthrough
     default:
         UpdatePaletteFade();
         gMain.state++;
-        GameCubeMultiBoot_Main(&gUnknown_203AAD4);
+        GameCubeMultiBoot_Main(&sGcmb);
         break;
     case 140:
-        GameCubeMultiBoot_Main(&gUnknown_203AAD4);
-        if (gUnknown_203AAD4.gcmb_field_2 != 1)
+        GameCubeMultiBoot_Main(&sGcmb);
+        if (sGcmb.gcmb_field_2 != 1)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
             gMain.state++;
@@ -545,16 +549,17 @@ static bool8 sub_80EC62C(void)
         if (!UpdatePaletteFade())
         {
             gMain.state++;
-            if (gUnknown_203AAD4.gcmb_field_2 != 0)
+            if (sGcmb.gcmb_field_2 != 0)
             {
-                if (gUnknown_203AAD4.gcmb_field_2 == 2)
+                if (sGcmb.gcmb_field_2 == 2)
                 {
+                    // Gc6e
                     if (*((u32 *)0x020000AC) == 0x65366347)
                     {
                         CpuCopy16(gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, 0x28000);
                         *((u32 *)0x020000AC) = 0x65366347;
                     }
-                    GameCubeMultiBoot_ExecuteProgram(&gUnknown_203AAD4);
+                    GameCubeMultiBoot_ExecuteProgram(&sGcmb);
                 }
             }
             else
@@ -567,7 +572,7 @@ static bool8 sub_80EC62C(void)
         break;
     case 142:
         ResetSerial();
-        SetMainCallback2(sub_80EC5B8);
+        SetMainCallback2(CB2_WaitFadeBeforeSetUpIntro);
         break;
     }
     return TRUE;
@@ -575,7 +580,7 @@ static bool8 sub_80EC62C(void)
 
 void c2_copyright_1(void)
 {
-    if (!sub_80EC62C())
+    if (!RunCopyrightScreen())
     {
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
@@ -586,12 +591,12 @@ void c2_copyright_1(void)
     }
 }
 
-void sub_80EC864(void)
+void CB2_CopyrightScreen(void)
 {
-    sub_80EC62C();
+    RunCopyrightScreen();
 }
 
-static void sub_80EC870(void)
+static void CB2_SetUpIntro(void)
 {
     switch (gMain.state)
     {
@@ -606,34 +611,34 @@ static void sub_80EC870(void)
         ResetSpriteData();
         ResetPaletteFade();
         ResetTempTileDataBuffers();
-        sub_80ECA00();
+        Intro_ResetGpuRegs();
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
         FillPalette(0, 0, 0x400);
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, gUnknown_840BB80, NELEMS(gUnknown_840BB80));
+        InitBgsFromTemplates(0, sBgTemplates_GameFreakScene, NELEMS(sBgTemplates_GameFreakScene));
         break;
     case 1:
         LoadPalette(gUnknown_8402630, 0x00, 0x20);
         DecompressAndCopyTileDataToVram(3, gUnknown_8402650, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, gUnknown_8402668, 0, 0, 1);
-        LoadPalette(gUnknown_840270C, 0xD0, 0x20);
+        LoadPalette(sSpritePals_GameFreakPresents, 0xD0, 0x20);
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            sub_80ECA70();
+            StartIntroSequence();
             BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            SetMainCallback2(sub_80EC9D4);
-            SetVBlankCallback(sub_80EC9EC);
+            SetMainCallback2(CB2_Intro);
+            SetVBlankCallback(VBlankCB_Intro);
         }
         return;
     }
     gMain.state++;
 }
 
-static void sub_80EC9D4(void)
+static void CB2_Intro(void)
 {
     RunTasks();
     AnimateSprites();
@@ -641,14 +646,14 @@ static void sub_80EC9D4(void)
     UpdatePaletteFade();
 }
 
-static void sub_80EC9EC(void)
+static void VBlankCB_Intro(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-static void sub_80ECA00(void)
+static void Intro_ResetGpuRegs(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -665,53 +670,53 @@ static void sub_80ECA00(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
 }
 
-static void sub_80ECA70(void)
+static void StartIntroSequence(void)
 {
     struct IntroSequenceData * ptr = Alloc(sizeof(struct IntroSequenceData));
-    sub_80ECAA8(ptr, sub_80ECAF0);
-    ptr->field_0005 = CreateTask(sub_80ECAB0, 3);
+    SetIntroCB(ptr, IntroCB_Init);
+    ptr->field_0005 = CreateTask(Task_CallIntroCallback, 3);
     SetWordTaskArg(ptr->field_0005, 0, (uintptr_t)ptr);
 }
 
-static void sub_80ECAA8(struct IntroSequenceData * ptr, void (*cb)(struct IntroSequenceData *))
+static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb)
 {
-    ptr->field_0000 = cb;
-    ptr->field_0004 = 0;
+    ptr->callback = cb;
+    ptr->state = 0;
 }
 
-static void sub_80ECAB0(u8 taskId)
+static void Task_CallIntroCallback(u8 taskId)
 {
     struct IntroSequenceData * ptr = (void *)GetWordTaskArg(taskId, 0);
-    if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->field_0000 != sub_80EDBE8)
-        sub_80ECAA8(ptr, sub_80EDBE8);
-    ptr->field_0000(ptr);
+    if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->callback != sub_80EDBE8)
+        SetIntroCB(ptr, sub_80EDBE8);
+    ptr->callback(ptr);
 }
 
-static void sub_80ECAF0(struct IntroSequenceData * this)
+static void IntroCB_Init(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
-        InitWindows(gUnknown_840BBA8);
+        InitWindows(sWindowTemplate);
         LZ77UnCompWram(gUnknown_840272C, this->field_043C);
-        LZ77UnCompWram(gUnknown_84028F8, this->field_003C);
+        LZ77UnCompWram(sSpriteTiles_GameFreakLogoArt, this->field_003C);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
         FillWindowPixelBuffer(0, 0x00);
         BlitBitmapToWindow(0, this->field_043C, 0, 40, 144, 16);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
-        this->field_0004++;
+        this->state++;
         break;
     case 1:
         if (!IsDma3ManagerBusyWithBgCopy())
-            sub_80ECAA8(this, sub_80ECB98);
+            SetIntroCB(this, IntroCB_OpenWin1ToTheaterDimensions);
         break;
     }
 }
 
-static void sub_80ECB98(struct IntroSequenceData * this)
+static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN1_ON);
@@ -719,106 +724,106 @@ static void sub_80ECB98(struct IntroSequenceData * this)
         SetGpuReg(REG_OFFSET_WINOUT, 0x0000);
         SetGpuReg(REG_OFFSET_WIN1H, 0x00F0);
         SetGpuReg(REG_OFFSET_WIN1V, 0x0000);
-        this->field_0012 = 0;
-        this->field_0004++;
+        this->timer = 0;
+        this->state++;
         break;
     case 1:
         ShowBg(3);
         BlendPalettes(0xFFFFFFFF, 0x00, RGB_BLACK);
-        this->field_0004++;
+        this->state++;
         break;
     case 2:
-        this->field_0012 += 8;
-        if (this->field_0012 >= 0x30)
-            this->field_0012 = 0x30;
-        SetGpuReg(REG_OFFSET_WIN1V, ((0x50 - this->field_0012) << 8) | (0x50 + this->field_0012));
-        if (this->field_0012 == 0x30)
-            sub_80ECAA8(this, sub_80ECC3C);
+        this->timer += 8;
+        if (this->timer >= 0x30)
+            this->timer = 0x30;
+        SetGpuReg(REG_OFFSET_WIN1V, ((0x50 - this->timer) << 8) | (0x50 + this->timer));
+        if (this->timer == 0x30)
+            SetIntroCB(this, IntroCB_GameFreakStar);
         break;
     }
 }
 
-static void sub_80ECC3C(struct IntroSequenceData * this)
+static void IntroCB_GameFreakStar(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         PlaySE(MUS_TITLEROG);
-        sub_80EDC40();
-        this->field_0012 = 0;
-        this->field_0004++;
+        GameFreakScene_LoadGfxCreateStar();
+        this->timer = 0;
+        this->state++;
         break;
     case 1:
-        this->field_0012++;
-        if (this->field_0012 == 30)
+        this->timer++;
+        if (this->timer == 30)
         {
-            sub_80EDDF0();
-            this->field_0012 = 0;
-            this->field_0004++;
+            GameFreakScene_StartTrailingSparkleSpawner();
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 2:
-        this->field_0012++;
-        if (this->field_0012 == 90)
-            sub_80ECAA8(this, sub_80ECCA8);
+        this->timer++;
+        if (this->timer == 90)
+            SetIntroCB(this, IntroCB_GameFreakScene_RevealGameFreakText);
         break;
     }
 }
 
-static void sub_80ECCA8(struct IntroSequenceData * this)
+static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
-        sub_80EDED8();
-        this->field_0012 = 0;
-        this->field_0004++;
+        GameFreakScene_StartRevealGameFreakTextSparklesSpawner();
+        this->timer = 0;
+        this->state++;
         break;
     case 1:
-        this->field_0012++;
-        if (this->field_0012 >= 40)
-            this->field_0004++;
+        this->timer++;
+        if (this->timer >= 40)
+            this->state++;
         break;
     case 2:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
         StartBlendTask(0, 16, 16, 0, 48, 0);
-        this->field_0004++;
+        this->state++;
         break;
     case 3:
         ShowBg(2);
-        this->field_0004++;
+        this->state++;
         break;
     case 4:
         if (!IsBlendTaskActive())
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 5:
-        this->field_0012++;
-        if (this->field_0012 > 50)
-            sub_80ECAA8(this, sub_80ECD60);
+        this->timer++;
+        if (this->timer > 50)
+            SetIntroCB(this, IntroCB_GameFreakScene_CreateGameFreakLogo);
         break;
     }
 }
 
-static void sub_80ECD60(struct IntroSequenceData * this)
+static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
         StartBlendTask(0, 16, 16, 0, 16, 0);
         this->field_0008 = 0;
         this->field_000A = 16;
-        this->field_0012 = 0;
-        this->field_0004++;
+        this->timer = 0;
+        this->state++;
         break;
     case 1:
-        this->field_0014 = sub_80EDF68();
-        this->field_0004++;
+        this->gameFreakLogoArtSprite = CreateGameFreakLogoArtSprite();
+        this->state++;
         break;
     case 2:
         if (!IsBlendTaskActive())
@@ -826,61 +831,61 @@ static void sub_80ECD60(struct IntroSequenceData * this)
             BlitBitmapToWindow(0, this->field_003C, 0x38, 0x06, 0x20, 0x40);
             BlitBitmapToWindow(0, this->field_043C, 0x00, 0x28, 0x90, 0x10);
             CopyWindowToVram(0, 2);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 3:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            DestroySprite(this->field_0014);
-            sub_rev1_80EDFAC();
-            this->field_0012 = 0;
-            this->field_0004++;
+            DestroySprite(this->gameFreakLogoArtSprite);
+            Rev1_GameFreakScene_CreatePresentsText();
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 4:
-        this->field_0012++;
-        if (this->field_0012 > 90)
+        this->timer++;
+        if (this->timer > 90)
         {
             SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2);
             StartBlendTask(16, 0, 0, 16, 20, 0);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 5:
         if (!IsBlendTaskActive())
         {
             HideBg(2);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 6:
         ResetSpriteData();
         FreeAllSpritePalettes();
-        this->field_0012 = 0;
-        this->field_0004++;
+        this->timer = 0;
+        this->state++;
         break;
     case 7:
-        this->field_0012++;
-        if (this->field_0012 > 20)
+        this->timer++;
+        if (this->timer > 20)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            sub_80ECAA8(this, sub_80ECEA4);
+            SetIntroCB(this, IntroCB_FightScene1_Init);
         }
         break;
     }
 }
 
-static void sub_80ECEA4(struct IntroSequenceData * this)
+static void IntroCB_FightScene1_Init(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         SetVBlankCallback(NULL);
         LoadPalette(gUnknown_8402D34, 0x10, 0x20);
         LoadPalette(gUnknown_84048CC, 0x20, 0x20);
         BlendPalettes(0x06, 0x10, RGB_WHITE);
-        InitBgsFromTemplates(0, gUnknown_840BB88, NELEMS(gUnknown_840BB88));
+        InitBgsFromTemplates(0, sBgTemplates_FightScene1, NELEMS(sBgTemplates_FightScene1));
         DecompressAndCopyTileDataToVram(1, gUnknown_84048EC, 0, 0, 0);
         DecompressAndCopyTileDataToVram(1, gUnknown_8404F7C, 0, 0, 1);
         ShowBg(1);
@@ -888,8 +893,8 @@ static void sub_80ECEA4(struct IntroSequenceData * this)
         HideBg(2);
         HideBg(3);
         sub_80EEBE4();
-        SetVBlankCallback(sub_80EC9EC);
-        this->field_0004++;
+        SetVBlankCallback(VBlankCB_Intro);
+        this->state++;
         break;
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
@@ -898,7 +903,7 @@ static void sub_80ECEA4(struct IntroSequenceData * this)
             DecompressAndCopyTileDataToVram(0, gUnknown_8403FE8, 0, 0, 1);
             ResetBgPositions();
             ShowBg(1);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 2:
@@ -907,30 +912,30 @@ static void sub_80ECEA4(struct IntroSequenceData * this)
             ShowBg(0);
             CreateTask(sub_80ED0AC, 0);
             BeginNormalPaletteFade(0x00000006, -2, 16, 0, RGB_WHITE);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 3:
         if (!gPaletteFade.active)
         {
             m4aSongNumStart(MUS_DEMO);
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 4:
-        this->field_0012++;
-        if (this->field_0012 == 20)
+        this->timer++;
+        if (this->timer == 20)
         {
             CreateTask(sub_80ED140, 0);
             sub_80ED118();
         }
-        if (this->field_0012 >= 30)
+        if (this->timer >= 30)
         {
             BlendPalettes(-2, 16, RGB_WHITE);
             DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
             DestroyTask(FindTaskIdByFunc(sub_80ED140));
-            sub_80ECAA8(this, sub_80ED188);
+            SetIntroCB(this, sub_80ED188);
         }
         break;
     case 5:
@@ -938,7 +943,7 @@ static void sub_80ECEA4(struct IntroSequenceData * this)
         {
             DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
             DestroyTask(FindTaskIdByFunc(sub_80ED140));
-            sub_80ECAA8(this, sub_80ED188);
+            SetIntroCB(this, sub_80ED188);
         }
         break;
     }
@@ -986,7 +991,7 @@ static void sub_80ED140(u8 taskId)
 
 static void sub_80ED188(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
@@ -994,14 +999,14 @@ static void sub_80ED188(struct IntroSequenceData * this)
         DecompressAndCopyTileDataToVram(3, gUnknown_8405414, 0, 0, 0);
         DecompressAndCopyTileDataToVram(3, gUnknown_8405890, 0, 0, 1);
         ShowBg(3);
-        this->field_0004++;
+        this->state++;
         break;
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
             SetVBlankCallback(NULL);
             LoadPalette(gUnknown_84053B4, 0x10, 0x60);
-            LoadPalette(gUnknown_8405DA4, 0x50, 0x20);
+            LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
             LoadPalette(gUnknown_8406634, 0x60, 0x20);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
             DecompressAndCopyTileDataToVram(0, gUnknown_8405B28, 0, 0, 0);
@@ -1017,31 +1022,31 @@ static void sub_80ED188(struct IntroSequenceData * this)
             ChangeBgY(2, 0x0001CE00, 0);
             ChangeBgY(1, 0x00002800, 0);
             CreateTask(sub_80ED40C, 0);
-            sub_80ED444(this);
+            CreateMonStaticSprites(this);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-            SetVBlankCallback(sub_80EC9EC);
-            this->field_0004++;
+            SetVBlankCallback(VBlankCB_Intro);
+            this->state++;
         }
         break;
     case 2:
         if (!FreeTempTileDataBuffersIfPossible())
         {
             BeginNormalPaletteFade(0xFFFFFFFE, -2, 16, 0, RGB_WHITE);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 3:
         if (!gPaletteFade.active)
         {
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 4:
-        this->field_0012++;
-        if (this->field_0012 >= 60)
+        this->timer++;
+        if (this->timer >= 60)
         {
-            this->field_0012 = 0;
+            this->timer = 0;
             DestroyTask(FindTaskIdByFunc(sub_80ED40C));
             sub_80ED4A0(this);
             CreateTask(sub_80ED428, 0);
@@ -1050,22 +1055,22 @@ static void sub_80ED188(struct IntroSequenceData * this)
             ShowBg(3);
             ShowBg(1);
             ShowBg(2);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 5:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 6:
-        this->field_0012++;
-        if (this->field_0012 >= 60)
+        this->timer++;
+        if (this->timer >= 60)
         {
             DestroyTask(FindTaskIdByFunc(sub_80ED428));
-            sub_80ECAA8(this, sub_80ED4C0);
+            SetIntroCB(this, sub_80ED4C0);
         }
         break;
     }
@@ -1083,37 +1088,37 @@ static void sub_80ED428(u8 taskId)
     ChangeBgY(1, 0x024, 2);
 }
 
-static void sub_80ED444(struct IntroSequenceData * this)
+static void CreateMonStaticSprites(struct IntroSequenceData * this)
 {
     u8 spriteId;
 
-    this->field_001C = NULL;
-    this->field_0020 = NULL;
+    this->gengarStaticSprite = NULL;
+    this->nidorinoStaticSprite = NULL;
 
-    spriteId = CreateSprite(&gUnknown_840BDA8, 168, 80, 11);
+    spriteId = CreateSprite(&sSpriteTemplate_NidorinoStatic, 168, 80, 11);
     if (spriteId != MAX_SPRITES)
-        this->field_0020 = &gSprites[spriteId];
+        this->nidorinoStaticSprite = &gSprites[spriteId];
 
-    spriteId = CreateSprite(&gUnknown_840BDC0, 72, 80, 12);
+    spriteId = CreateSprite(&sSpriteTemplate_GengarStatic, 72, 80, 12);
     if (spriteId != MAX_SPRITES)
-        this->field_001C = &gSprites[spriteId];
+        this->gengarStaticSprite = &gSprites[spriteId];
 }
 
 static void sub_80ED4A0(struct IntroSequenceData * this)
 {
-    if (this->field_001C != NULL)
-        DestroySprite(this->field_001C);
-    if (this->field_0020 != NULL)
-        DestroySprite(this->field_0020);
+    if (this->gengarStaticSprite != NULL)
+        DestroySprite(this->gengarStaticSprite);
+    if (this->nidorinoStaticSprite != NULL)
+        DestroySprite(this->nidorinoStaticSprite);
 }
 
 static void sub_80ED4C0(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         LoadPalette(gUnknown_8407430, 0x10, 0x40);
-        LoadPalette(gUnknown_8405DA4, 0x50, 0x20);
+        LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
         InitBgsFromTemplates(0, gUnknown_840BBA0, NELEMS(gUnknown_840BBA0));
         DecompressAndCopyTileDataToVram(1, gUnknown_8407470, 0, 0, 0);
@@ -1123,7 +1128,7 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
         HideBg(2);
         HideBg(3);
         ResetBgPositions();
-        this->field_0004++;
+        this->state++;
         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
         SetGpuRegBits(REG_OFFSET_WININ, 0x12);
         ClearGpuRegBits(REG_OFFSET_WININ, 0x01);
@@ -1140,7 +1145,7 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
             gUnknown_203AB02 = 52;
             ChangeBgX(0, 0x00001800, 0);
             ChangeBgY(0, 0x0001F000, 0);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 2:
@@ -1149,20 +1154,20 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
             BlendPalettes(0xFFFFFFFE, 0, RGB_WHITE);
             ShowBg(0);
             CreateTask(sub_80ED714, 0);
-            sub_80EE4F8(this);
-            sub_80EE528(this->field_0018, 0, 0xB4, 0x34);
+            CreateNidorinoAnimSprite(this);
+            sub_80EE528(this->nidorinoAnimSprite, 0, 0xB4, 0x34);
             CreateTask(sub_80EE200, 0);
             sub_80ED6D8();
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 3:
-        this->field_0012++;
-        if (this->field_0012 == 16)
-            sub_80ED7D4(this);
+        this->timer++;
+        if (this->timer == 16)
+            CreateGrassSprite(this);
         if (!sub_80EE5C8(this) && !FuncIsActiveTask(sub_80EE200))
-            sub_80ECAA8(this, sub_80ED898);
+            SetIntroCB(this, sub_80ED898);
         break;
     }
 }
@@ -1219,19 +1224,19 @@ static u8 sub_80ED7B0(void)
     return gTasks[taskId].data[2];
 }
 
-static void sub_80ED7D4(struct IntroSequenceData * this)
+static void CreateGrassSprite(struct IntroSequenceData * this)
 {
-    u8 spriteId = CreateSprite(&gUnknown_840BDFC, 296, 112, 7);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_Grass, 296, 112, 7);
     if (spriteId != MAX_SPRITES)
     {
-        this->field_0024 = &gSprites[spriteId];
-        this->field_0024->callback = sub_80ED818;
+        this->grassSprite = &gSprites[spriteId];
+        this->grassSprite->callback = SpriteCB_Grass;
     }
     else
-        this->field_0024 = NULL;
+        this->grassSprite = NULL;
 }
 
-static void sub_80ED818(struct Sprite * sprite)
+static void SpriteCB_Grass(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
 
@@ -1266,137 +1271,137 @@ static void sub_80ED818(struct Sprite * sprite)
 
 static void sub_80ED898(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
-        this->field_0012 = 0;
-        this->field_0004++;
+        this->timer = 0;
+        this->state++;
         break;
     case 1:
-        this->field_0012++;
-        if (this->field_0012 > 30)
+        this->timer++;
+        if (this->timer > 30)
         {
             sub_80EE5E4(this);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 2:
         if (!sub_80EE850(this))
         {
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 3:
-        this->field_0012++;
-        if (this->field_0012 > 30)
+        this->timer++;
+        if (this->timer > 30)
         {
             sub_80ED760();
             sub_80EDF94(this);
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 4:
         if (this->field_0006)
         {
             sub_80EE6A4(this);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 5:
         if (!sub_80EE850(this))
         {
             sub_80ED788();
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 6:
-        this->field_0012++;
-        if (this->field_0012 > 16)
+        this->timer++;
+        if (this->timer > 16)
         {
-            sub_80EE970(this->field_0018, 8, 12, 5);
-            this->field_0004++;
+            sub_80EE970(this->nidorinoAnimSprite, 8, 12, 5);
+            this->state++;
         }
         break;
     case 7:
         if (!sub_80EE850(this))
         {
-            sub_80EE970(this->field_0018, 8, 12, 5);
-            this->field_0004++;
+            sub_80EE970(this->nidorinoAnimSprite, 8, 12, 5);
+            this->state++;
         }
         break;
     case 8:
         if (!sub_80EE850(this))
         {
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 9:
-        this->field_0012++;
-        if (this->field_0012 > 20)
+        this->timer++;
+        if (this->timer > 20)
         {
             sub_80EEA94(this);
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 10:
         if (!sub_80ED7B0())
         {
             sub_80ED760();
-            sub_80EDAF0(this);
-            this->field_0004++;
+            CreateGengarBackSprite(this);
+            this->state++;
         }
         break;
     case 11:
         HideBg(0);
-        this->field_0012 = 0;
-        this->field_0004++;
+        this->timer = 0;
+        this->state++;
         break;
     case 12:
-        this->field_0012++;
-        if (this->field_0012 == 48)
+        this->timer++;
+        if (this->timer == 48)
             BeginNormalPaletteFade(0x00000006, 2, 0, 16, RGB_WHITE);
-        if (this->field_0012 > 120)
+        if (this->timer > 120)
         {
             sub_80EDB70(this);
             sub_80EDBAC(this);
-            this->field_0004++;
-            this->field_0012 = 0;
+            this->state++;
+            this->timer = 0;
         }
         break;
     case 13:
-        this->field_0012++;
-        if (this->field_0012 > 8)
+        this->timer++;
+        if (this->timer > 8)
         {
             CpuFill16(RGB_WHITE, gPlttBufferUnfaded + 16, 64);
             BeginNormalPaletteFade(0xFFFFFFFE, -2, 0, 16, RGB_BLACK);
-            this->field_0004++;
+            this->state++;
         }
         break;
     case 14:
         if (!gPaletteFade.active)
         {
-            this->field_0012 = 0;
-            this->field_0004++;
+            this->timer = 0;
+            this->state++;
         }
         break;
     case 15:
-        this->field_0012++;
-        if (this->field_0012 > 60)
-            sub_80ECAA8(this, sub_80EDBE8);
+        this->timer++;
+        if (this->timer > 60)
+            SetIntroCB(this, sub_80EDBE8);
         break;
     default:
         if (JOY_NEW(R_BUTTON))
         {
             BlendPalettes(0xFFFF0064, 0, RGB_WHITE);
-            this->field_0018->pos2.x = 0;
-            this->field_0018->pos1.x = 0xB4;
-            this->field_0004 = 1;
-            this->field_0012 = 30;
+            this->nidorinoAnimSprite->pos2.x = 0;
+            this->nidorinoAnimSprite->pos1.x = 0xB4;
+            this->state = 1;
+            this->timer = 30;
         }
         break;
     }
@@ -1407,33 +1412,34 @@ static void sub_80EDAD8(struct Sprite * sprite)
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
 
-static void sub_80EDAF0(struct IntroSequenceData * this)
+static void CreateGengarBackSprite(struct IntroSequenceData * this)
 {
     int i;
 
+    // Not using a subsprite table for this
     for (i = 0; i < 4; i++)
     {
         int x = (i & 1) * 48 + 49;
         int y = (i / 2) * 64 + 72;
-        u8 spriteId = CreateSprite(&gUnknown_840BE4C, x, y, 8);
+        u8 spriteId = CreateSprite(&sSpriteTemplate_GengarBack, x, y, 8);
         if (spriteId != MAX_SPRITES)
         {
             StartSpriteAnim(&gSprites[spriteId], i);
-            this->field_0028[i] = &gSprites[spriteId];
+            this->gengarBackSpriteArray[i] = &gSprites[spriteId];
             if (i & 1)
-                this->field_0028[i]->oam.shape = ST_OAM_V_RECTANGLE;
-            sub_80EDAD8(this->field_0028[i]);
+                this->gengarBackSpriteArray[i]->oam.shape = ST_OAM_V_RECTANGLE;
+            sub_80EDAD8(this->gengarBackSpriteArray[i]);
         }
     }
 }
 
 static void sub_80EDB70(struct IntroSequenceData * this)
 {
-    this->field_0018->pos1.x += this->field_0018->pos2.x;
-    this->field_0018->pos1.y += this->field_0018->pos2.y;
-    obj_pos2_update_enable(this->field_0018, 0, 0x2A);
-    this->field_0018->callback = SpriteCallbackDummy;
-    StartSpriteAffineAnim(this->field_0018, 1);
+    this->nidorinoAnimSprite->pos1.x += this->nidorinoAnimSprite->pos2.x;
+    this->nidorinoAnimSprite->pos1.y += this->nidorinoAnimSprite->pos2.y;
+    obj_pos2_update_enable(this->nidorinoAnimSprite, 0, 0x2A);
+    this->nidorinoAnimSprite->callback = SpriteCallbackDummy;
+    StartSpriteAffineAnim(this->nidorinoAnimSprite, 1);
 }
 
 static void nullsub_83(struct Sprite * sprite)
@@ -1446,19 +1452,19 @@ static void sub_80EDBAC(struct IntroSequenceData * this)
 
     for (i = 0; i < 4; i++)
     {
-        StartSpriteAffineAnim(this->field_0028[i], 1);
-        this->field_0028[i]->callback = nullsub_83;
-        obj_pos2_update_enable(this->field_0028[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
+        StartSpriteAffineAnim(this->gengarBackSpriteArray[i], 1);
+        this->gengarBackSpriteArray[i]->callback = nullsub_83;
+        obj_pos2_update_enable(this->gengarBackSpriteArray[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
     }
 }
 
 static void sub_80EDBE8(struct IntroSequenceData * this)
 {
-    switch (this->field_0004)
+    switch (this->state)
     {
     case 0:
         FillPalette(RGB_BLACK, 0, 0x400);
-        this->field_0004++;
+        this->state++;
         break;
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
@@ -1473,16 +1479,16 @@ static void sub_80EDBE8(struct IntroSequenceData * this)
     }
 }
 
-static void sub_80EDC40(void)
+static void GameFreakScene_LoadGfxCreateStar(void)
 {
     int i;
     u8 spriteId;
 
-    for (i = 0; i < NELEMS(gUnknown_840BBC0); i++)
+    for (i = 0; i < NELEMS(sSpriteSheets_GameFreakScene); i++)
     {
-        LoadCompressedSpriteSheet(&gUnknown_840BBC0[i]);
+        LoadCompressedSpriteSheet(&sSpriteSheets_GameFreakScene[i]);
     }
-    LoadSpritePalettes(gUnknown_840BBE8);
+    LoadSpritePalettes(sSpritePalettes_GameFreakScene);
     gUnknown_203AB0E = 0x60;
     gUnknown_203AB10 = 0x10;
     gUnknown_203AB12 = 0x07;
@@ -1496,18 +1502,18 @@ static void sub_80EDC40(void)
     gUnknown_203AB24 = 0x05;
     if (gUnknown_203AB28 == 0)
         gUnknown_203AB28 = 354128453;
-    spriteId = CreateSprite(&gUnknown_840BC6C, 0xF8, 0x37, 0);
+    spriteId = CreateSprite(&sSpriteTemplate_LargeStar, 0xF8, 0x37, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].data[0] = 0xF80;
         gSprites[spriteId].data[1] = 0x370;
         gSprites[spriteId].data[2] = gUnknown_203AB0E;
         gSprites[spriteId].data[3] = gUnknown_203AB10;
-        StoreWordInTwoHalfwords(&gSprites[spriteId].data[6], gUnknown_203AB28);
+        StoreWordInTwoHalfwords((u16 *)&gSprites[spriteId].data[6], gUnknown_203AB28);
     }
 }
 
-static void sub_80EDD28(s16 x, s16 y, u16 a2)
+static void GameFreakScene_TrailingSparklesGen(s16 x, s16 y, u16 a2)
 {
     u8 spriteId;
     s16 r4 = (a2 & gUnknown_203AB12) + 2;
@@ -1519,7 +1525,7 @@ static void sub_80EDD28(s16 x, s16 y, u16 a2)
     y += r2;
     if (x >= 1 && x <= 0xEF)
     {
-        spriteId = CreateSprite(&gUnknown_840BC84, x, y, 1);
+        spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, x, y, 1);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].data[0] = x << gUnknown_203AB22;
@@ -1530,12 +1536,12 @@ static void sub_80EDD28(s16 x, s16 y, u16 a2)
     }
 }
 
-static void sub_80EDDF0(void)
+static void GameFreakScene_StartTrailingSparkleSpawner(void)
 {
-    CreateTask(sub_80EDE04, 1);
+    CreateTask(Task_GameFreakScene_TrailingSparkleSpawner, 1);
 }
 
-static void sub_80EDE04(u8 taskId)
+static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 r6;
@@ -1546,16 +1552,16 @@ static void sub_80EDE04(u8 taskId)
     {
         data[2] = 0;
         r6 = data[0];
-        spriteId = CreateSprite(&gUnknown_840BC84, gUnknown_840BC08[r6].x, gUnknown_840BC08[r6].y, 2);
+        spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, sTrailingSparkleCoords[r6].x, sTrailingSparkleCoords[r6].y, 2);
         StartSpriteAnim(&gSprites[spriteId], 1);
         gSprites[spriteId].callback = sub_80EE40C;
-        gSprites[spriteId].data[1] = gUnknown_840BC08[r6].y << 4;
+        gSprites[spriteId].data[1] = sTrailingSparkleCoords[r6].y << 4;
         gSprites[spriteId].data[2] = 120;
         gSprites[spriteId].data[3] = data[1];
         if (gSprites[spriteId].data[3] < 0)
             gSprites[spriteId].data[3] = 1;
         data[0]++;
-        if (data[0] < 0 || data[0] > 8)
+        if (data[0] >= NELEMS(sTrailingSparkleCoords))
         {
             data[1]++;
             if (data[1] > 1)
@@ -1566,12 +1572,12 @@ static void sub_80EDE04(u8 taskId)
     }
 }
 
-static void sub_80EDED8(void)
+static void GameFreakScene_StartRevealGameFreakTextSparklesSpawner(void)
 {
-    CreateTask(sub_80EDEEC, 2);
+    CreateTask(Task_RevealGameFreakTextSparklesSpawner, 2);
 }
 
-static void sub_80EDEEC(u8 taskId)
+static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     u8 r2;
@@ -1580,9 +1586,9 @@ static void sub_80EDEEC(u8 taskId)
     {
         r2 = data[1];
         data[1] += 4;
-        if (data[1] < 0 || data[1] > 8)
-            data[1] -= 9;
-        CreateSprite(&gUnknown_840BCBC, gUnknown_840BC08[r2].x, gUnknown_840BC08[r2].y, 3);
+        if (data[1] >= NELEMS(sTrailingSparkleCoords))
+            data[1] -= NELEMS(sTrailingSparkleCoords);
+        CreateSprite(&sSpriteTemplate_RevealGameFreakTextSparkles, sTrailingSparkleCoords[r2].x, sTrailingSparkleCoords[r2].y, 3);
         data[2]++;
         if (data[2] > 8)
             DestroyTask(taskId);
@@ -1592,19 +1598,19 @@ static void sub_80EDEEC(u8 taskId)
         data[0] = 0;
 }
 
-static struct Sprite * sub_80EDF68(void)
+static struct Sprite * CreateGameFreakLogoArtSprite(void)
 {
-    u8 spriteId = CreateSprite(&gUnknown_840BCDC, 120, 70, 4);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_GameFreakLogoArt, 120, 70, 4);
     return &gSprites[spriteId];
 }
 
 #if REVISION >= 1
-static void sub_rev1_80EDFAC(void)
+static void Rev1_GameFreakScene_CreatePresentsText(void)
 {
     int i;
     for (i = 0; i < 2; i++)
     {
-        gSprites[CreateSprite(&gUnknown_840BCFC, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
+        gSprites[CreateSprite(&sSpriteTemplate_PresentsText, 0x68 + 32 * i, 0x6c, 5)].oam.tileNum += i * 4;
     }
 }
 #endif
@@ -1701,8 +1707,8 @@ static void sub_80EE160(void)
 {
     u8 spriteId;
     
-    spriteId = CreateSprite(&gUnknown_840BE8C, 132,  78, 6);
-    spriteId = CreateSprite(&gUnknown_840BE8C, 132, 118, 6);
+    spriteId = CreateSprite(&sSpriteTemplate_GengarSwipe, 132,  78, 6);
+    spriteId = CreateSprite(&sSpriteTemplate_GengarSwipe, 132, 118, 6);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.shape = ST_OAM_H_RECTANGLE;
@@ -1761,7 +1767,7 @@ static void sub_80EE29C(struct Sprite * sprite)
         v = v * 1103515245 + 24691;
         StoreWordInTwoHalfwords(&sprite->data[6], v);
         v >>= 16;
-        sub_80EDD28(sprite->pos1.x, sprite->pos1.y + sprite->pos2.y, v);
+        GameFreakScene_TrailingSparklesGen(sprite->pos1.x, sprite->pos1.y + sprite->pos2.y, v);
     }
     if (sprite->pos1.x < -8)
         DestroySprite(sprite);
@@ -1845,10 +1851,10 @@ static void sub_80EE4DC(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-static void sub_80EE4F8(struct IntroSequenceData * this)
+static void CreateNidorinoAnimSprite(struct IntroSequenceData * this)
 {
-    u8 spriteId = CreateSprite(&gUnknown_840BD88, 0, 0, 9);
-    this->field_0018 = &gSprites[spriteId];
+    u8 spriteId = CreateSprite(&sSpriteTemplate_NidorinoAnim, 0, 0, 9);
+    this->nidorinoAnimSprite = &gSprites[spriteId];
 }
 
 static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
@@ -1882,16 +1888,16 @@ static void sub_80EE580(struct Sprite * sprite)
 
 static bool32 sub_80EE5C8(struct IntroSequenceData * ptr)
 {
-    return ptr->field_0018->callback == sub_80EE580 ? TRUE : FALSE;
+    return ptr->nidorinoAnimSprite->callback == sub_80EE580 ? TRUE : FALSE;
 }
 
 static void sub_80EE5E4(struct IntroSequenceData * ptr)
 {
-    StartSpriteAnim(ptr->field_0018, 2);
-    ptr->field_0018->data[0] = 0;
-    ptr->field_0018->data[1] = 0;
-    ptr->field_0018->pos2.y = 3;
-    ptr->field_0018->callback = sub_80EE610;
+    StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
+    ptr->nidorinoAnimSprite->data[0] = 0;
+    ptr->nidorinoAnimSprite->data[1] = 0;
+    ptr->nidorinoAnimSprite->pos2.y = 3;
+    ptr->nidorinoAnimSprite->callback = sub_80EE610;
 }
 
 static void sub_80EE610(struct Sprite * sprite)
@@ -1936,14 +1942,14 @@ static void sub_80EE6A4(struct IntroSequenceData * ptr)
     gUnknown_203AB04 = 3;
     gUnknown_203AB08 = 5;
     gUnknown_203AB06 = 0;
-    StartSpriteAnim(ptr->field_0018, 2);
-    ptr->field_0018->data[0] = 0;
-    ptr->field_0018->data[1] = 0;
-    ptr->field_0018->data[2] = 0;
-    ptr->field_0018->data[3] = 0;
-    ptr->field_0018->data[4] = 0;
-    ptr->field_0018->data[7] = 40;
-    ptr->field_0018->callback = sub_80EE704;
+    StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
+    ptr->nidorinoAnimSprite->data[0] = 0;
+    ptr->nidorinoAnimSprite->data[1] = 0;
+    ptr->nidorinoAnimSprite->data[2] = 0;
+    ptr->nidorinoAnimSprite->data[3] = 0;
+    ptr->nidorinoAnimSprite->data[4] = 0;
+    ptr->nidorinoAnimSprite->data[7] = 40;
+    ptr->nidorinoAnimSprite->callback = sub_80EE704;
 }
 
 static void sub_80EE704(struct Sprite * sprite)
@@ -1985,7 +1991,7 @@ static void sub_80EE704(struct Sprite * sprite)
         sprite->data[1]++;
         if (sprite->data[1] > 6)
         {
-            sub_80EE864(sprite->pos1.x + sprite->pos2.x, sprite->pos1.y + sprite->pos2.y, sprite->data[6]);
+            CreateNidorinoRecoilDustSprites(sprite->pos1.x + sprite->pos2.x, sprite->pos1.y + sprite->pos2.y, sprite->data[6]);
             sprite->data[6] *= 1103515245;
         }
         if (sprite->data[1] > 12)
@@ -2007,23 +2013,23 @@ static void sub_80EE704(struct Sprite * sprite)
 
 static bool8 sub_80EE850(struct IntroSequenceData * ptr)
 {
-    return ptr->field_0018->callback == SpriteCallbackDummy ? FALSE : TRUE;
+    return ptr->nidorinoAnimSprite->callback == SpriteCallbackDummy ? FALSE : TRUE;
 }
 
-static void sub_80EE864(s16 a1, s16 a2, s16 a3)
+static void CreateNidorinoRecoilDustSprites(s16 x, s16 y, s16 seed)
 {
     int i;
     u8 spriteId;
 
     for (i = 0; i < 2; i++)
     {
-        spriteId = CreateSprite(&gUnknown_840BEC4, a1 - 22, a2 + 24, 10);
+        spriteId = CreateSprite(&sSpriteTemplate_NidorinoRecoilDust, x - 22, y + 24, 10);
         if (spriteId != MAX_SPRITES)
         {
-            gSprites[spriteId].data[3] = (a3 % 13) + 8;
-            gSprites[spriteId].data[4] = a3 % 3;
+            gSprites[spriteId].data[3] = (seed % 13) + 8;
+            gSprites[spriteId].data[4] = seed % 3;
             gSprites[spriteId].data[7] = i;
-            a3 *= 1103515245;
+            seed *= 1103515245;
         }
     }
 }
@@ -2119,21 +2125,21 @@ static void sub_80EE9D4(struct Sprite * sprite)
 
 static void sub_80EEA94(struct IntroSequenceData * ptr)
 {
-    ptr->field_0018->data[0] = 0;
-    ptr->field_0018->data[1] = 0;
-    ptr->field_0018->data[2] = 0;
-    ptr->field_0018->data[3] = 0;
-    ptr->field_0018->data[4] = 0;
-    ptr->field_0018->data[5] = 0;
-    ptr->field_0018->pos1.x += ptr->field_0018->pos2.x;
-    ptr->field_0018->pos2.x = 0;
+    ptr->nidorinoAnimSprite->data[0] = 0;
+    ptr->nidorinoAnimSprite->data[1] = 0;
+    ptr->nidorinoAnimSprite->data[2] = 0;
+    ptr->nidorinoAnimSprite->data[3] = 0;
+    ptr->nidorinoAnimSprite->data[4] = 0;
+    ptr->nidorinoAnimSprite->data[5] = 0;
+    ptr->nidorinoAnimSprite->pos1.x += ptr->nidorinoAnimSprite->pos2.x;
+    ptr->nidorinoAnimSprite->pos2.x = 0;
     gUnknown_203AB0C = 0x24;
     gUnknown_203AB06 = 0x28;
     gUnknown_203AB04 = 0x03;
     gUnknown_203AB08 = 0x04;
-    ptr->field_0018->data[7] = 36;
-    StartSpriteAnim(ptr->field_0018, 2);
-    ptr->field_0018->callback = sub_80EEB08;
+    ptr->nidorinoAnimSprite->data[7] = 36;
+    StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
+    ptr->nidorinoAnimSprite->callback = sub_80EEB08;
 }
 
 static void sub_80EEB08(struct Sprite * sprite)
@@ -2182,11 +2188,11 @@ static void sub_80EEBE4(void)
 {
     int i;
     
-    for (i = 0; i < NELEMS(gUnknown_840BEDC); i++)
+    for (i = 0; i < NELEMS(sFightSceneSpriteSheets); i++)
     {
-        LoadCompressedSpriteSheet(&gUnknown_840BEDC[i]);
+        LoadCompressedSpriteSheet(&sFightSceneSpriteSheets[i]);
     }
-    // gUnknown_840BF14 is not properly terminated, so this
+    // sFightSceneSpritePalettes is not properly terminated, so this
     // call exhibits undefined behavior.
-    LoadSpritePalettes(gUnknown_840BF14);
+    LoadSpritePalettes(sFightSceneSpritePalettes);
 }

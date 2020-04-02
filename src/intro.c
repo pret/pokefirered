@@ -85,56 +85,56 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * ptr);
 static void IntroCB_GameFreakStar(struct IntroSequenceData * ptr);
 static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData * ptr);
 static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData * ptr);
-static void IntroCB_FightScene1_Init(struct IntroSequenceData * ptr);
-static void sub_80ED0AC(u8 taskId);
-static void sub_80ED118(void);
-static void sub_80ED140(u8 taskId);
-static void sub_80ED188(struct IntroSequenceData * ptr);
-static void sub_80ED40C(u8 taskId);
-static void sub_80ED428(u8 taskId);
+static void IntroCB_FightScene(struct IntroSequenceData * ptr);
+static void Task_FightScene1_GrassyFieldAnim(u8 taskId);
+static void FightScene1_SignalEndGrassyFieldAnim(void);
+static void Task_FightScene1_ZoomEffect(u8 taskId);
+static void IntroCB_FightScene2(struct IntroSequenceData * ptr);
+static void Task_FightScene2_CameraHorizPanEffect(u8 taskId);
+static void Task_FightScene2_CameraVertPanEffect(u8 taskId);
 static void CreateMonStaticSprites(struct IntroSequenceData * ptr);
-static void sub_80ED4A0(struct IntroSequenceData * ptr);
-static void sub_80ED4C0(struct IntroSequenceData * ptr);
-static void sub_80ED6D8(void);
-static void sub_80ED714(u8 taskId);
+static void DestroyStaticMonSprites(struct IntroSequenceData * ptr);
+static void IntroCB_FightScene3(struct IntroSequenceData * ptr);
+static void FightScene3_StartBg1Scroll(void);
+static void Task_FightScene3_ForestBgScroll(u8 taskId);
 static void CreateGrassSprite(struct IntroSequenceData * ptr);
 static void SpriteCB_Grass(struct Sprite * sprite);
-static void sub_80ED898(struct IntroSequenceData * ptr);
+static void IntroCB_FightScene4(struct IntroSequenceData * ptr);
 static void CreateGengarBackSprite(struct IntroSequenceData * ptr);
-static void sub_80EDB70(struct IntroSequenceData * ptr);
-static void sub_80EDBAC(struct IntroSequenceData * ptr);
-static void sub_80EDBE8(struct IntroSequenceData * ptr);
+static void FightScene4_StartNidorinoAffineAnim(struct IntroSequenceData * ptr);
+static void FightScene4_StartGengarAffineAnim(struct IntroSequenceData * ptr);
+static void IntroCB_CleanUp(struct IntroSequenceData * ptr);
 static void GameFreakScene_LoadGfxCreateStar(void);
 static void GameFreakScene_StartTrailingSparkleSpawner(void);
 static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId);
 static void GameFreakScene_StartRevealGameFreakTextSparklesSpawner(void);
 static void Task_RevealGameFreakTextSparklesSpawner(u8 taskId);
 static struct Sprite * CreateGameFreakLogoArtSprite(void);
-static void sub_80EDF94(struct IntroSequenceData * ptr);
-static void sub_80EE024(u8 taskId);
-static void sub_80EE160(void);
-static void sub_80EE1C4(struct Sprite * sprite);
-static void sub_80EE200(u8 taskId);
-static void sub_80EE29C(struct Sprite * sprite);
-static void sub_80EE350(struct Sprite * sprite);
-static void sub_80EE40C(struct Sprite * sprite);
-static void sub_80EE4DC(struct Sprite * sprite);
+static void FightScene4_StartGengarAttack(struct IntroSequenceData * ptr);
+static void Task_FightScene4_GengarAttack(u8 taskId);
+static void FightScene4_CreateGengarSwipeSprites(void);
+static void SpriteCB_GengarSwipe(struct Sprite * sprite);
+static void Task_FightScene3_Bg0Scroll(u8 taskId);
+static void SpriteCB_LargeStar(struct Sprite * sprite);
+static void SpriteCB_TrailingSparkles(struct Sprite * sprite);
+static void SpriteCB_TrailingSparkles2(struct Sprite * sprite);
+static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite * sprite);
 static void CreateNidorinoAnimSprite(struct IntroSequenceData * ptr);
-static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3);
-static void sub_80EE580(struct Sprite * sprite);
-static bool32 sub_80EE5C8(struct IntroSequenceData * ptr);
-static void sub_80EE5E4(struct IntroSequenceData * ptr);
-static void sub_80EE610(struct Sprite * sprite);
-static void sub_80EE6A4(struct IntroSequenceData * ptr);
-static void sub_80EE704(struct Sprite * sprite);
-static bool8 sub_80EE850(struct IntroSequenceData * ptr);
+static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x1, u16 speed);
+static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite * sprite);
+static bool32 IsNidorinoAnimSpriteSlideInRunning(struct IntroSequenceData * ptr);
+static void FightScene4_NidorinoRearsUp(struct IntroSequenceData * ptr);
+static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite);
+static void FightScene4_StartNidorinoRecoilAnim(struct IntroSequenceData * ptr);
+static void SpriteCB_NidorinoRecoil(struct Sprite * sprite);
+static bool8 FightScene4_NidorinoAnimIsRunning(struct IntroSequenceData * ptr);
 static void CreateNidorinoRecoilDustSprites(s16 a1, s16 a2, s16 a3);
-static void sub_80EE8E4(struct Sprite * sprite);
-static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
-static void sub_80EE9D4(struct Sprite * sprite);
-static void sub_80EEA94(struct IntroSequenceData * ptr);
-static void sub_80EEB08(struct Sprite * sprite);
-static void sub_80EEBE4(void);
+static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite);
+static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a3);
+static void SpriteCB_HopToPos(struct Sprite * sprite);
+static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * ptr);
+static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite);
+static void LoadFightSceneSpriteTilesAndPals(void);
 #if REVISION >= 1
 static void Rev1_GameFreakScene_CreatePresentsText(void);
 #else
@@ -159,28 +159,28 @@ static const u32 sSpriteTiles_TrailingSparkles[] = INCBIN_U32("graphics/intro/un
 static const u32 sSpriteTiles_RevealGameFreakTextSparkles[] = INCBIN_U32("graphics/intro/unk_8402B2C.4bpp.lz");
 static const u32 sSpriteTiles_PresentsText[] = INCBIN_U32("graphics/intro/unk_8402CD4.4bpp.lz");
 static const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
-static const u8 gUnknown_8402D54[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
-static const u8 gUnknown_8403FE8[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
+static const u8 sBg0Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
+static const u8 sBg0Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
 static const u16 gUnknown_84048CC[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
-static const u8 gUnknown_84048EC[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
-static const u8 gUnknown_8404F7C[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
+static const u8 sBg1Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
+static const u8 sBg1Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
 static const u16 gUnknown_84053B4[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
-static const u8 gUnknown_8405414[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
-static const u8 gUnknown_8405890[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
+static const u8 sBg3Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
+static const u8 sBg3Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
 static const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
-static const u8 gUnknown_8405B28[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
-static const u8 gUnknown_8405CDC[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
+static const u8 sBg0Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
+static const u8 sBg0Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
 static const u16 sSpritePals_Gengar[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
-static const u8 gUnknown_8405DC4[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
-static const u8 gUnknown_840644C[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
+static const u8 sBg2Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
+static const u8 sBg2Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
 static const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
-static const u8 gUnknown_8406654[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
-static const u8 gUnknown_84071D0[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
+static const u8 sBg1Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
+static const u8 sBg1Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
 static const u16 gUnknown_8407430[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
-static const u8 gUnknown_8407470[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
-static const u8 gUnknown_8407A50[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
-static const u8 gUnknown_8407B9C[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
-static const u8 gUnknown_8408D98[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
+static const u8 sBg1Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
+static const u8 sBg1Map_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
+static const u8 sBg0Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
+static const u8 sBg0Map_FightScene3[] = INCBIN_U8("graphics/intro/unk_8408D98.bin.lz");
 static const u32 sSpriteTiles_GengarStatic[] = INCBIN_U32("graphics/intro/unk_840926C.4bpp.lz");
 static const u16 sSpritePals_Nidorino[] = INCBIN_U16("graphics/intro/unk_84096AC.gbapal");
 static const u32 sSpriteTiles_NidorinoStatic[] = INCBIN_U32("graphics/intro/unk_84096CC.4bpp.lz");
@@ -203,14 +203,14 @@ static const struct BgTemplate sBgTemplates_FightScene1[] = {
 	{ 1, 1, 30, 2, 0, 0, 0x000 }
 };
 
-static const struct BgTemplate gUnknown_840BB90[] = {
+static const struct BgTemplate sBgTemplates_FightScene2[] = {
 	{ 3, 1, 30, 2, 0, 3, 0x000 },
 	{ 0, 0, 29, 0, 0, 0, 0x000 },
 	{ 2, 3, 27, 0, 0, 2, 0x000 },
 	{ 1, 2, 28, 0, 0, 1, 0x000 }
 };
 
-static const struct BgTemplate gUnknown_840BBA0[] = {
+static const struct BgTemplate sBgTemplates_FightScene3[] = {
 	{ 1, 0, 29, 0, 0, 1, 0x000 },
 	{ 0, 1, 30, 2, 0, 0, 0x000 }
 };
@@ -279,9 +279,9 @@ static const union AnimCmd *const gAnimCmdTable_840BC64[] = {
 	gAnimCmd_840BC50
 };
 
-static const struct SpriteTemplate sSpriteTemplate_LargeStar = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80EE29C};
+static const struct SpriteTemplate sSpriteTemplate_LargeStar = {0, 0, &gOamData_840BC2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCB_LargeStar};
 
-static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, sub_80EE350};
+static const struct SpriteTemplate sSpriteTemplate_TrailingSparkles = {1, 1, &gOamData_840BC34, gAnimCmdTable_840BC64, NULL, gDummySpriteAffineAnimTable, SpriteCB_TrailingSparkles};
 
 static const struct OamData gOamData_840BC9C = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_2, .tileNum = 0x000, .priority = 2, .paletteNum = 0 };
 
@@ -297,7 +297,7 @@ static const union AnimCmd *const gAnimCmdTable_840BCB8[] = {
 	gAnimCmd_840BCA4
 };
 
-static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, sub_80EE4DC};
+static const struct SpriteTemplate sSpriteTemplate_RevealGameFreakTextSparkles = {2, 1, &gOamData_840BC9C, gAnimCmdTable_840BCB8, NULL, gDummySpriteAffineAnimTable, SpriteCB_RevealGameFreakTextSparkles};
 
 static const struct OamData gOamData_840BCD4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_BLEND, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 3, .paletteNum = 0 };
 
@@ -334,7 +334,7 @@ static const union AnimCmd gAnimCmd_840BD3C[] = {
 	ANIMCMD_END
 };
 
-static const union AnimCmd *const gAnimCmdTable_840BD44[] = {
+static const union AnimCmd *const sAnimTable_NidorinoAnim[] = {
 	gAnimCmd_840BD1C,
 	gAnimCmd_840BD24,
 	gAnimCmd_840BD2C,
@@ -353,12 +353,12 @@ static const union AffineAnimCmd gAffineAnimCmd_840BD68[] = {
 	AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const gAffineAnimCmdTable_840BD80[] = {
+static const union AffineAnimCmd *const sAffineAnimTable_NidorinoAnim[] = {
 	gAffineAnimCmd_840BD58,
 	gAffineAnimCmd_840BD68
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {5, 7, &gOamData_840BD14, gAnimCmdTable_840BD44, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoAnim = {5, 7, &gOamData_840BD14, sAnimTable_NidorinoAnim, NULL, sAffineAnimTable_NidorinoAnim, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BDA0 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -415,7 +415,7 @@ static const union AnimCmd *const gAnimCmdTable_840BE3C[] = {
 	gAnimCmd_840BE34
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarBack = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, gAffineAnimCmdTable_840BD80, SpriteCallbackDummy};
+static const struct SpriteTemplate sSpriteTemplate_GengarBack = {9, 6, &gOamData_840BE14, gAnimCmdTable_840BE3C, NULL, sAffineAnimTable_NidorinoAnim, SpriteCallbackDummy};
 
 static const struct OamData gOamData_840BE64 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_V_RECTANGLE, .matrixNum = 0, .size = ST_OAM_SIZE_3, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -436,7 +436,7 @@ static const union AnimCmd *const gAnimCmdTable_840BE84[] = {
 	gAnimCmd_840BE78
 };
 
-static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, sub_80EE1C4};
+static const struct SpriteTemplate sSpriteTemplate_GengarSwipe = {10, 10, &gOamData_840BE64, gAnimCmdTable_840BE84, NULL, gDummySpriteAffineAnimTable, SpriteCB_GengarSwipe};
 
 static const struct OamData gOamData_840BEA4 = { .affineMode = ST_OAM_AFFINE_OFF, .objMode = ST_OAM_OBJ_NORMAL, .mosaic = FALSE, .bpp = ST_OAM_4BPP, .shape = ST_OAM_SQUARE, .matrixNum = 0, .size = ST_OAM_SIZE_1, .tileNum = 0x000, .priority = 1, .paletteNum = 0 };
 
@@ -452,7 +452,7 @@ static const union AnimCmd *const gAnimCmdTable_840BEC0[] = {
 	gAnimCmd_840BEAC
 };
 
-static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, sub_80EE8E4};
+static const struct SpriteTemplate sSpriteTemplate_NidorinoRecoilDust = {11, 11, &gOamData_840BEA4, gAnimCmdTable_840BEC0, NULL, gDummySpriteAffineAnimTable, SpriteCB_NidorinoRecoilDust};
 
 static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
 	{sSpriteTiles_GengarStatic, 0x0800, 6},
@@ -465,7 +465,7 @@ static const struct CompressedSpriteSheet sFightSceneSpriteSheets[] = {
 };
 
 // POTENTIAL UB
-// This array is passed to LoadSpritePalettes in sub_80EEBE4.
+// This array is passed to LoadSpritePalettes in LoadFightSceneSpriteTilesAndPals.
 // LoadSpritePalettes uses a {0} entry to signal end of array.
 // Because such an entry is absent in this case, the function
 // continues reading into the next .rodata section.
@@ -478,7 +478,7 @@ static const struct SpritePalette sFightSceneSpritePalettes[] = {
     // {0}
 };
 
-static void sub_80EC5A4(void)
+static void VBlankCB_Copyright(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -527,7 +527,7 @@ static bool8 RunCopyrightScreen(void)
         FreeAllSpritePalettes();BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
-        SetVBlankCallback(sub_80EC5A4);
+        SetVBlankCallback(VBlankCB_Copyright);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON);
         SetSerialCallback(SerialCb_CopyrightScreen);
         GameCubeMultiBoot_Init(&sGcmb);
@@ -687,8 +687,8 @@ static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb)
 static void Task_CallIntroCallback(u8 taskId)
 {
     struct IntroSequenceData * ptr = (void *)GetWordTaskArg(taskId, 0);
-    if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->callback != sub_80EDBE8)
-        SetIntroCB(ptr, sub_80EDBE8);
+    if (JOY_NEW(A_BUTTON | START_BUTTON | SELECT_BUTTON) && ptr->callback != IntroCB_CleanUp)
+        SetIntroCB(ptr, IntroCB_CleanUp);
     ptr->callback(ptr);
 }
 
@@ -870,13 +870,13 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         if (this->timer > 20)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            SetIntroCB(this, IntroCB_FightScene1_Init);
+            SetIntroCB(this, IntroCB_FightScene);
         }
         break;
     }
 }
 
-static void IntroCB_FightScene1_Init(struct IntroSequenceData * this)
+static void IntroCB_FightScene(struct IntroSequenceData * this)
 {
     switch (this->state)
     {
@@ -886,21 +886,21 @@ static void IntroCB_FightScene1_Init(struct IntroSequenceData * this)
         LoadPalette(gUnknown_84048CC, 0x20, 0x20);
         BlendPalettes(0x06, 0x10, RGB_WHITE);
         InitBgsFromTemplates(0, sBgTemplates_FightScene1, NELEMS(sBgTemplates_FightScene1));
-        DecompressAndCopyTileDataToVram(1, gUnknown_84048EC, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, gUnknown_8404F7C, 0, 0, 1);
+        DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene1, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene1, 0, 0, 1);
         ShowBg(1);
         HideBg(0);
         HideBg(2);
         HideBg(3);
-        sub_80EEBE4();
+        LoadFightSceneSpriteTilesAndPals();
         SetVBlankCallback(VBlankCB_Intro);
         this->state++;
         break;
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            DecompressAndCopyTileDataToVram(0, gUnknown_8402D54, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, gUnknown_8403FE8, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene1, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene1, 0, 0, 1);
             ResetBgPositions();
             ShowBg(1);
             this->state++;
@@ -910,7 +910,7 @@ static void IntroCB_FightScene1_Init(struct IntroSequenceData * this)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             ShowBg(0);
-            CreateTask(sub_80ED0AC, 0);
+            CreateTask(Task_FightScene1_GrassyFieldAnim, 0);
             BeginNormalPaletteFade(0x00000006, -2, 16, 0, RGB_WHITE);
             this->state++;
         }
@@ -927,29 +927,29 @@ static void IntroCB_FightScene1_Init(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer == 20)
         {
-            CreateTask(sub_80ED140, 0);
-            sub_80ED118();
+            CreateTask(Task_FightScene1_ZoomEffect, 0);
+            FightScene1_SignalEndGrassyFieldAnim();
         }
         if (this->timer >= 30)
         {
             BlendPalettes(-2, 16, RGB_WHITE);
-            DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
-            DestroyTask(FindTaskIdByFunc(sub_80ED140));
-            SetIntroCB(this, sub_80ED188);
+            DestroyTask(FindTaskIdByFunc(Task_FightScene1_GrassyFieldAnim));
+            DestroyTask(FindTaskIdByFunc(Task_FightScene1_ZoomEffect));
+            SetIntroCB(this, IntroCB_FightScene2);
         }
         break;
     case 5:
         if (!gPaletteFade.active)
         {
-            DestroyTask(FindTaskIdByFunc(sub_80ED0AC));
-            DestroyTask(FindTaskIdByFunc(sub_80ED140));
-            SetIntroCB(this, sub_80ED188);
+            DestroyTask(FindTaskIdByFunc(Task_FightScene1_GrassyFieldAnim));
+            DestroyTask(FindTaskIdByFunc(Task_FightScene1_ZoomEffect));
+            SetIntroCB(this, IntroCB_FightScene2);
         }
         break;
     }
 }
 
-static void sub_80ED0AC(u8 taskId)
+static void Task_FightScene1_GrassyFieldAnim(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -969,13 +969,13 @@ static void sub_80ED0AC(u8 taskId)
     }
 }
 
-static void sub_80ED118(void)
+static void FightScene1_SignalEndGrassyFieldAnim(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80ED0AC);
+    u8 taskId = FindTaskIdByFunc(Task_FightScene1_GrassyFieldAnim);
     gTasks[taskId].data[2] = TRUE;
 }
 
-static void sub_80ED140(u8 taskId)
+static void Task_FightScene1_ZoomEffect(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -989,15 +989,15 @@ static void sub_80ED140(u8 taskId)
     }
 }
 
-static void sub_80ED188(struct IntroSequenceData * this)
+static void IntroCB_FightScene2(struct IntroSequenceData * this)
 {
     switch (this->state)
     {
     case 0:
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-        InitBgsFromTemplates(0, gUnknown_840BB90, NELEMS(gUnknown_840BB90));
-        DecompressAndCopyTileDataToVram(3, gUnknown_8405414, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, gUnknown_8405890, 0, 0, 1);
+        InitBgsFromTemplates(0, sBgTemplates_FightScene2, NELEMS(sBgTemplates_FightScene2));
+        DecompressAndCopyTileDataToVram(3, sBg3Tiles_FightScene2, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, sBg3Map_FightScene2, 0, 0, 1);
         ShowBg(3);
         this->state++;
         break;
@@ -1009,19 +1009,19 @@ static void sub_80ED188(struct IntroSequenceData * this)
             LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
             LoadPalette(gUnknown_8406634, 0x60, 0x20);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-            DecompressAndCopyTileDataToVram(0, gUnknown_8405B28, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, gUnknown_8405CDC, 0, 0, 1);
-            DecompressAndCopyTileDataToVram(1, gUnknown_8406654, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(1, gUnknown_84071D0, 0, 0, 1);
-            DecompressAndCopyTileDataToVram(2, gUnknown_8405DC4, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(2, gUnknown_840644C, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene2, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene2, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene2, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene2, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(2, sBg2Tiles_FightScene2, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(2, sBg2Map_FightScene2, 0, 0, 1);
             ResetBgPositions();
             ShowBg(0);
             HideBg(1);
             HideBg(2);
             ChangeBgY(2, 0x0001CE00, 0);
             ChangeBgY(1, 0x00002800, 0);
-            CreateTask(sub_80ED40C, 0);
+            CreateTask(Task_FightScene2_CameraHorizPanEffect, 0);
             CreateMonStaticSprites(this);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
             SetVBlankCallback(VBlankCB_Intro);
@@ -1047,9 +1047,9 @@ static void sub_80ED188(struct IntroSequenceData * this)
         if (this->timer >= 60)
         {
             this->timer = 0;
-            DestroyTask(FindTaskIdByFunc(sub_80ED40C));
-            sub_80ED4A0(this);
-            CreateTask(sub_80ED428, 0);
+            DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraHorizPanEffect));
+            DestroyStaticMonSprites(this);
+            CreateTask(Task_FightScene2_CameraVertPanEffect, 0);
             ChangeBgY(3, 0x00010000, 0);
             HideBg(0);
             ShowBg(3);
@@ -1069,20 +1069,20 @@ static void sub_80ED188(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer >= 60)
         {
-            DestroyTask(FindTaskIdByFunc(sub_80ED428));
-            SetIntroCB(this, sub_80ED4C0);
+            DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraVertPanEffect));
+            SetIntroCB(this, IntroCB_FightScene3);
         }
         break;
     }
 }
 
-static void sub_80ED40C(u8 taskId)
+static void Task_FightScene2_CameraHorizPanEffect(u8 taskId)
 {
     ChangeBgX(3, 0x0E0, 2);
     ChangeBgX(0, 0x110, 1);
 }
 
-static void sub_80ED428(u8 taskId)
+static void Task_FightScene2_CameraVertPanEffect(u8 taskId)
 {
     ChangeBgY(2, 0x020, 1);
     ChangeBgY(1, 0x024, 2);
@@ -1104,7 +1104,7 @@ static void CreateMonStaticSprites(struct IntroSequenceData * this)
         this->gengarStaticSprite = &gSprites[spriteId];
 }
 
-static void sub_80ED4A0(struct IntroSequenceData * this)
+static void DestroyStaticMonSprites(struct IntroSequenceData * this)
 {
     if (this->gengarStaticSprite != NULL)
         DestroySprite(this->gengarStaticSprite);
@@ -1112,7 +1112,7 @@ static void sub_80ED4A0(struct IntroSequenceData * this)
         DestroySprite(this->nidorinoStaticSprite);
 }
 
-static void sub_80ED4C0(struct IntroSequenceData * this)
+static void IntroCB_FightScene3(struct IntroSequenceData * this)
 {
     switch (this->state)
     {
@@ -1120,9 +1120,9 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
         LoadPalette(gUnknown_8407430, 0x10, 0x40);
         LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
-        InitBgsFromTemplates(0, gUnknown_840BBA0, NELEMS(gUnknown_840BBA0));
-        DecompressAndCopyTileDataToVram(1, gUnknown_8407470, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(1, gUnknown_8407A50, 0, 0, 1);
+        InitBgsFromTemplates(0, sBgTemplates_FightScene3, NELEMS(sBgTemplates_FightScene3));
+        DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene3, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene3, 0, 0, 1);
         ShowBg(1);
         HideBg(0);
         HideBg(2);
@@ -1139,8 +1139,8 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            DecompressAndCopyTileDataToVram(0, gUnknown_8407B9C, 0, 0, 0);
-            DecompressAndCopyTileDataToVram(0, gUnknown_8408D98, 0, 0, 1);
+            DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene3, 0, 0, 0);
+            DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene3, 0, 0, 1);
             gUnknown_203AB00 = 4;
             gUnknown_203AB02 = 52;
             ChangeBgX(0, 0x00001800, 0);
@@ -1153,11 +1153,11 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
         {
             BlendPalettes(0xFFFFFFFE, 0, RGB_WHITE);
             ShowBg(0);
-            CreateTask(sub_80ED714, 0);
+            CreateTask(Task_FightScene3_ForestBgScroll, 0);
             CreateNidorinoAnimSprite(this);
-            sub_80EE528(this->nidorinoAnimSprite, 0, 0xB4, 0x34);
-            CreateTask(sub_80EE200, 0);
-            sub_80ED6D8();
+            StartNidorinoAnimSpriteSlideIn(this->nidorinoAnimSprite, 0, 0xB4, 0x34);
+            CreateTask(Task_FightScene3_Bg0Scroll, 0);
+            FightScene3_StartBg1Scroll();
             this->timer = 0;
             this->state++;
         }
@@ -1166,13 +1166,13 @@ static void sub_80ED4C0(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer == 16)
             CreateGrassSprite(this);
-        if (!sub_80EE5C8(this) && !FuncIsActiveTask(sub_80EE200))
-            SetIntroCB(this, sub_80ED898);
+        if (!IsNidorinoAnimSpriteSlideInRunning(this) && !FuncIsActiveTask(Task_FightScene3_Bg0Scroll))
+            SetIntroCB(this, IntroCB_FightScene4);
         break;
     }
 }
 
-static void sub_80ED69C(u8 taskId)
+static void Task_FightScene3_Bg1Scroll(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
         ChangeBgX(1, 0x400, 2);
@@ -1180,18 +1180,18 @@ static void sub_80ED69C(u8 taskId)
         ChangeBgX(1, 0x020, 2);
 }
 
-static void sub_80ED6D8(void)
+static void FightScene3_StartBg1Scroll(void)
 {
-    CreateTask(sub_80ED69C, 0);
+    CreateTask(Task_FightScene3_Bg1Scroll, 0);
 }
 
-static void sub_80ED6EC(void)
+static void FightScene3_SlowBg1Scroll(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80ED69C);
+    u8 taskId = FindTaskIdByFunc(Task_FightScene3_Bg1Scroll);
     gTasks[taskId].data[0] = 1;
 }
 
-static void sub_80ED714(u8 taskId)
+static void Task_FightScene3_ForestBgScroll(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     if (data[0] == 0)
@@ -1206,21 +1206,21 @@ static void sub_80ED714(u8 taskId)
     }
 }
 
-static void sub_80ED760(void)
+static void FightScene3_PauseForestBgScroll(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    u8 taskId = FindTaskIdByFunc(Task_FightScene3_ForestBgScroll);
     gTasks[taskId].data[0] = 1;
 }
 
-static void sub_80ED788(void)
+static void FightScene3_ResumeForestBgScroll(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    u8 taskId = FindTaskIdByFunc(Task_FightScene3_ForestBgScroll);
     gTasks[taskId].data[0] = 0;
 }
 
-static u8 sub_80ED7B0(void)
+static bool8 FightScene3_GetForestBgScrollState(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_80ED714);
+    u8 taskId = FindTaskIdByFunc(Task_FightScene3_ForestBgScroll);
     return gTasks[taskId].data[2];
 }
 
@@ -1252,7 +1252,7 @@ static void SpriteCB_Grass(struct Sprite * sprite)
         sprite->pos1.x = data[1] >> 5;
         if (sprite->pos1.x <= 52)
         {
-            sub_80ED6EC();
+            FightScene3_SlowBg1Scroll();
             data[0]++;
         }
         break;
@@ -1269,7 +1269,7 @@ static void SpriteCB_Grass(struct Sprite * sprite)
     }
 }
 
-static void sub_80ED898(struct IntroSequenceData * this)
+static void IntroCB_FightScene4(struct IntroSequenceData * this)
 {
     switch (this->state)
     {
@@ -1281,12 +1281,12 @@ static void sub_80ED898(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer > 30)
         {
-            sub_80EE5E4(this);
+            FightScene4_NidorinoRearsUp(this);
             this->state++;
         }
         break;
     case 2:
-        if (!sub_80EE850(this))
+        if (!FightScene4_NidorinoAnimIsRunning(this))
         {
             this->timer = 0;
             this->state++;
@@ -1296,8 +1296,8 @@ static void sub_80ED898(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer > 30)
         {
-            sub_80ED760();
-            sub_80EDF94(this);
+            FightScene3_PauseForestBgScroll();
+            FightScene4_StartGengarAttack(this);
             this->timer = 0;
             this->state++;
         }
@@ -1305,14 +1305,14 @@ static void sub_80ED898(struct IntroSequenceData * this)
     case 4:
         if (this->field_0006)
         {
-            sub_80EE6A4(this);
+            FightScene4_StartNidorinoRecoilAnim(this);
             this->state++;
         }
         break;
     case 5:
-        if (!sub_80EE850(this))
+        if (!FightScene4_NidorinoAnimIsRunning(this))
         {
-            sub_80ED788();
+            FightScene3_ResumeForestBgScroll();
             this->timer = 0;
             this->state++;
         }
@@ -1321,19 +1321,19 @@ static void sub_80ED898(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer > 16)
         {
-            sub_80EE970(this->nidorinoAnimSprite, 8, 12, 5);
+            StartSpriteHopToPosAnim(this->nidorinoAnimSprite, 8, 12, 5);
             this->state++;
         }
         break;
     case 7:
-        if (!sub_80EE850(this))
+        if (!FightScene4_NidorinoAnimIsRunning(this))
         {
-            sub_80EE970(this->nidorinoAnimSprite, 8, 12, 5);
+            StartSpriteHopToPosAnim(this->nidorinoAnimSprite, 8, 12, 5);
             this->state++;
         }
         break;
     case 8:
-        if (!sub_80EE850(this))
+        if (!FightScene4_NidorinoAnimIsRunning(this))
         {
             this->timer = 0;
             this->state++;
@@ -1343,15 +1343,15 @@ static void sub_80ED898(struct IntroSequenceData * this)
         this->timer++;
         if (this->timer > 20)
         {
-            sub_80EEA94(this);
+            StartNidorinoAnim_LaunchSelfAtGengarAnim(this);
             this->timer = 0;
             this->state++;
         }
         break;
     case 10:
-        if (!sub_80ED7B0())
+        if (!FightScene3_GetForestBgScrollState())
         {
-            sub_80ED760();
+            FightScene3_PauseForestBgScroll();
             CreateGengarBackSprite(this);
             this->state++;
         }
@@ -1367,8 +1367,8 @@ static void sub_80ED898(struct IntroSequenceData * this)
             BeginNormalPaletteFade(0x00000006, 2, 0, 16, RGB_WHITE);
         if (this->timer > 120)
         {
-            sub_80EDB70(this);
-            sub_80EDBAC(this);
+            FightScene4_StartNidorinoAffineAnim(this);
+            FightScene4_StartGengarAffineAnim(this);
             this->state++;
             this->timer = 0;
         }
@@ -1392,7 +1392,7 @@ static void sub_80ED898(struct IntroSequenceData * this)
     case 15:
         this->timer++;
         if (this->timer > 60)
-            SetIntroCB(this, sub_80EDBE8);
+            SetIntroCB(this, IntroCB_CleanUp);
         break;
     default:
         if (JOY_NEW(R_BUTTON))
@@ -1407,7 +1407,7 @@ static void sub_80ED898(struct IntroSequenceData * this)
     }
 }
 
-static void sub_80EDAD8(struct Sprite * sprite)
+static void FightScene_CalcCenterToCornerVec(struct Sprite * sprite)
 {
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
 }
@@ -1428,12 +1428,12 @@ static void CreateGengarBackSprite(struct IntroSequenceData * this)
             this->gengarBackSpriteArray[i] = &gSprites[spriteId];
             if (i & 1)
                 this->gengarBackSpriteArray[i]->oam.shape = ST_OAM_V_RECTANGLE;
-            sub_80EDAD8(this->gengarBackSpriteArray[i]);
+            FightScene_CalcCenterToCornerVec(this->gengarBackSpriteArray[i]);
         }
     }
 }
 
-static void sub_80EDB70(struct IntroSequenceData * this)
+static void FightScene4_StartNidorinoAffineAnim(struct IntroSequenceData * this)
 {
     this->nidorinoAnimSprite->pos1.x += this->nidorinoAnimSprite->pos2.x;
     this->nidorinoAnimSprite->pos1.y += this->nidorinoAnimSprite->pos2.y;
@@ -1442,23 +1442,23 @@ static void sub_80EDB70(struct IntroSequenceData * this)
     StartSpriteAffineAnim(this->nidorinoAnimSprite, 1);
 }
 
-static void nullsub_83(struct Sprite * sprite)
+static void SpriteCB_DummyButNotDummy(struct Sprite * sprite)
 {
 }
 
-static void sub_80EDBAC(struct IntroSequenceData * this)
+static void FightScene4_StartGengarAffineAnim(struct IntroSequenceData * this)
 {
     int i;
 
     for (i = 0; i < 4; i++)
     {
         StartSpriteAffineAnim(this->gengarBackSpriteArray[i], 1);
-        this->gengarBackSpriteArray[i]->callback = nullsub_83;
+        this->gengarBackSpriteArray[i]->callback = SpriteCB_DummyButNotDummy;
         obj_pos2_update_enable(this->gengarBackSpriteArray[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
     }
 }
 
-static void sub_80EDBE8(struct IntroSequenceData * this)
+static void IntroCB_CleanUp(struct IntroSequenceData * this)
 {
     switch (this->state)
     {
@@ -1554,7 +1554,7 @@ static void Task_GameFreakScene_TrailingSparkleSpawner(u8 taskId)
         r6 = data[0];
         spriteId = CreateSprite(&sSpriteTemplate_TrailingSparkles, sTrailingSparkleCoords[r6].x, sTrailingSparkleCoords[r6].y, 2);
         StartSpriteAnim(&gSprites[spriteId], 1);
-        gSprites[spriteId].callback = sub_80EE40C;
+        gSprites[spriteId].callback = SpriteCB_TrailingSparkles2;
         gSprites[spriteId].data[1] = sTrailingSparkleCoords[r6].y << 4;
         gSprites[spriteId].data[2] = 120;
         gSprites[spriteId].data[3] = data[1];
@@ -1615,17 +1615,17 @@ static void Rev1_GameFreakScene_CreatePresentsText(void)
 }
 #endif
 
-static void sub_80EDF94(struct IntroSequenceData * this)
+static void FightScene4_StartGengarAttack(struct IntroSequenceData * this)
 {
     u8 taskId;
     this->field_0006 = 0;
-    taskId = CreateTask(sub_80EE024, 4);
+    taskId = CreateTask(Task_FightScene4_GengarAttack, 4);
     SetWordTaskArg(taskId, 5, (uintptr_t)this);
     gTasks[taskId].data[3] = 64;
     gTasks[taskId].data[4] = GetBgX(0);
 }
 
-static void sub_80EDFD8(int a, int b, int c, int d)
+static void FightScene4_ApplyGengarAnim(int a, int b, int c, int d)
 {
     ChangeBgY(0, (a << 15) + 0x1F000, 0);
     ChangeBgX(0, d, 0);
@@ -1633,7 +1633,7 @@ static void sub_80EDFD8(int a, int b, int c, int d)
     ChangeBgY(0, c << 8, 2);
 }
 
-static void sub_80EE024(u8 taskId)
+static void Task_FightScene4_GengarAttack(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     int b, c;
@@ -1671,7 +1671,7 @@ static void sub_80EE024(u8 taskId)
         data[1]++;
         if (data[1] == 4)
         {
-            sub_80EE160();
+            FightScene4_CreateGengarSwipeSprites();
             data[8] = 32;
             data[9] = 48;
             data[7] = 3;
@@ -1700,10 +1700,10 @@ static void sub_80EE024(u8 taskId)
     angle = data[3];
     b = -((gSineTable[angle + 0x40] * data[9]) >> 8);
     c = data[8] - ((gSineTable[angle] * data[8]) >> 8);
-    sub_80EDFD8(data[7], b, c, data[4]);
+    FightScene4_ApplyGengarAnim(data[7], b, c, data[4]);
 }
 
-static void sub_80EE160(void)
+static void FightScene4_CreateGengarSwipeSprites(void)
 {
     u8 spriteId;
     
@@ -1713,19 +1713,19 @@ static void sub_80EE160(void)
     {
         gSprites[spriteId].oam.shape = ST_OAM_H_RECTANGLE;
         gSprites[spriteId].oam.size = ST_OAM_SIZE_2;
-        sub_80EDAD8(&gSprites[spriteId]);
+        FightScene_CalcCenterToCornerVec(&gSprites[spriteId]);
         StartSpriteAnim(&gSprites[spriteId], 1);
     }
 }
 
-static void sub_80EE1C4(struct Sprite * sprite)
+static void SpriteCB_GengarSwipe(struct Sprite * sprite)
 {
     sprite->invisible ^= TRUE;
     if (sprite->animEnded)
         DestroySprite(sprite);
 }
 
-static void sub_80EE200(u8 taskId)
+static void Task_FightScene3_Bg0Scroll(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
@@ -1751,7 +1751,7 @@ static void sub_80EE200(u8 taskId)
     }
 }
 
-static void sub_80EE29C(struct Sprite * sprite)
+static void SpriteCB_LargeStar(struct Sprite * sprite)
 {
     u32 v;
     sprite->data[0] -= sprite->data[2];
@@ -1773,7 +1773,7 @@ static void sub_80EE29C(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-static void sub_80EE350(struct Sprite * sprite)
+static void SpriteCB_TrailingSparkles(struct Sprite * sprite)
 {
     u32 v;
 
@@ -1796,7 +1796,7 @@ static void sub_80EE350(struct Sprite * sprite)
         DestroySprite(sprite);
 }
 
-static void sub_80EE40C(struct Sprite * sprite)
+static void SpriteCB_TrailingSparkles2(struct Sprite * sprite)
 {
     if (sprite->data[2])
     {
@@ -1845,7 +1845,7 @@ static void sub_80EE40C(struct Sprite * sprite)
     }
 }
 
-static void sub_80EE4DC(struct Sprite * sprite)
+static void SpriteCB_RevealGameFreakTextSparkles(struct Sprite * sprite)
 {
     if (sprite->animEnded)
         DestroySprite(sprite);
@@ -1857,19 +1857,19 @@ static void CreateNidorinoAnimSprite(struct IntroSequenceData * this)
     this->nidorinoAnimSprite = &gSprites[spriteId];
 }
 
-static void sub_80EE528(struct Sprite * sprite, s16 a1, s16 a2, u16 a3)
+static void StartNidorinoAnimSpriteSlideIn(struct Sprite * sprite, s16 x0, s16 x1, u16 speed)
 {
-    sprite->data[0] = a1 << 4;
-    sprite->data[1] = ((a2 - a1) << 4) / a3;
-    sprite->data[2] = a3;
-    sprite->data[3] = a2;
+    sprite->data[0] = x0 << 4;
+    sprite->data[1] = ((x1 - x0) << 4) / speed;
+    sprite->data[2] = speed;
+    sprite->data[3] = x1;
     sprite->data[4] = 0;
-    sprite->pos1.x = a1;
+    sprite->pos1.x = x0;
     sprite->pos1.y = 100;
-    sprite->callback = sub_80EE580;
+    sprite->callback = SpriteCB_NidorinoAnimSpriteSlideIn;
 }
 
-static void sub_80EE580(struct Sprite * sprite)
+static void SpriteCB_NidorinoAnimSpriteSlideIn(struct Sprite * sprite)
 {
     sprite->data[4]++;
     if (sprite->data[4] >= 40)
@@ -1886,21 +1886,21 @@ static void sub_80EE580(struct Sprite * sprite)
     }
 }
 
-static bool32 sub_80EE5C8(struct IntroSequenceData * ptr)
+static bool32 IsNidorinoAnimSpriteSlideInRunning(struct IntroSequenceData * ptr)
 {
-    return ptr->nidorinoAnimSprite->callback == sub_80EE580 ? TRUE : FALSE;
+    return ptr->nidorinoAnimSprite->callback == SpriteCB_NidorinoAnimSpriteSlideIn ? TRUE : FALSE;
 }
 
-static void sub_80EE5E4(struct IntroSequenceData * ptr)
+static void FightScene4_NidorinoRearsUp(struct IntroSequenceData * ptr)
 {
     StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
     ptr->nidorinoAnimSprite->data[0] = 0;
     ptr->nidorinoAnimSprite->data[1] = 0;
     ptr->nidorinoAnimSprite->pos2.y = 3;
-    ptr->nidorinoAnimSprite->callback = sub_80EE610;
+    ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoRearsUp;
 }
 
-static void sub_80EE610(struct Sprite * sprite)
+static void SpriteCB_NidorinoRearsUp(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -1936,7 +1936,7 @@ static void sub_80EE610(struct Sprite * sprite)
     }
 }
 
-static void sub_80EE6A4(struct IntroSequenceData * ptr)
+static void FightScene4_StartNidorinoRecoilAnim(struct IntroSequenceData * ptr)
 {
     gUnknown_203AB0A = 16;
     gUnknown_203AB04 = 3;
@@ -1949,10 +1949,10 @@ static void sub_80EE6A4(struct IntroSequenceData * ptr)
     ptr->nidorinoAnimSprite->data[3] = 0;
     ptr->nidorinoAnimSprite->data[4] = 0;
     ptr->nidorinoAnimSprite->data[7] = 40;
-    ptr->nidorinoAnimSprite->callback = sub_80EE704;
+    ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoRecoil;
 }
 
-static void sub_80EE704(struct Sprite * sprite)
+static void SpriteCB_NidorinoRecoil(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -2005,13 +2005,13 @@ static void sub_80EE704(struct Sprite * sprite)
         sprite->data[1]++;
         if (sprite->data[1] > 16)
         {
-            sub_80EE970(sprite, gUnknown_203AB0A, -sprite->pos2.x, 4);
+            StartSpriteHopToPosAnim(sprite, gUnknown_203AB0A, -sprite->pos2.x, 4);
         }
         break;
     }
 }
 
-static bool8 sub_80EE850(struct IntroSequenceData * ptr)
+static bool8 FightScene4_NidorinoAnimIsRunning(struct IntroSequenceData * ptr)
 {
     return ptr->nidorinoAnimSprite->callback == SpriteCallbackDummy ? FALSE : TRUE;
 }
@@ -2034,7 +2034,7 @@ static void CreateNidorinoRecoilDustSprites(s16 x, s16 y, s16 seed)
     }
 }
 
-static void sub_80EE8E4(struct Sprite * sprite)
+static void SpriteCB_NidorinoRecoilDust(struct Sprite * sprite)
 {
     s16 * data = sprite->data;
 
@@ -2062,7 +2062,7 @@ static void sub_80EE8E4(struct Sprite * sprite)
     }
 }
 
-static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
+static void StartSpriteHopToPosAnim(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
 {
     sprite->data[0] = 0;
     sprite->data[1] = a1;
@@ -2073,10 +2073,10 @@ static void sub_80EE970(struct Sprite * sprite, u16 a1, s16 a2, u8 a3)
     sprite->data[6] = 0;
     sprite->data[7] = a3;
     StartSpriteAnim(sprite, 2);
-    sprite->callback = sub_80EE9D4;
+    sprite->callback = SpriteCB_HopToPos;
 }
 
-static void sub_80EE9D4(struct Sprite * sprite)
+static void SpriteCB_HopToPos(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -2123,7 +2123,7 @@ static void sub_80EE9D4(struct Sprite * sprite)
     }
 }
 
-static void sub_80EEA94(struct IntroSequenceData * ptr)
+static void StartNidorinoAnim_LaunchSelfAtGengarAnim(struct IntroSequenceData * ptr)
 {
     ptr->nidorinoAnimSprite->data[0] = 0;
     ptr->nidorinoAnimSprite->data[1] = 0;
@@ -2139,10 +2139,10 @@ static void sub_80EEA94(struct IntroSequenceData * ptr)
     gUnknown_203AB08 = 0x04;
     ptr->nidorinoAnimSprite->data[7] = 36;
     StartSpriteAnim(ptr->nidorinoAnimSprite, 2);
-    ptr->nidorinoAnimSprite->callback = sub_80EEB08;
+    ptr->nidorinoAnimSprite->callback = SpriteCB_NidorinoAnim_LaunchSelfAtGengar;
 }
 
-static void sub_80EEB08(struct Sprite * sprite)
+static void SpriteCB_NidorinoAnim_LaunchSelfAtGengar(struct Sprite * sprite)
 {
     switch (sprite->data[0])
     {
@@ -2184,7 +2184,7 @@ static void sub_80EEB08(struct Sprite * sprite)
     }
 }
 
-static void sub_80EEBE4(void)
+static void LoadFightSceneSpriteTilesAndPals(void)
 {
     int i;
     

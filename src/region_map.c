@@ -32,6 +32,14 @@
 #define SWITCH_BUTTON_X 21
 #define SWITCH_BUTTON_Y 11
 
+#define WIN_MAP_NAME     0
+#define WIN_DUNGEON_NAME 1
+#define WIN_MAP_PREVIEW  2
+#define WIN_TOPBAR_LEFT  3
+#define WIN_TOPBAR_RIGHT 4
+
+#define CLEAR_NAME 2
+
 #define FREE_IF_NOT_NULL(ptr) ({ \
     if (ptr) {                   \
         FREE_AND_SET_NULL(ptr);  \
@@ -47,8 +55,8 @@ struct RegionMap
     u16 bgTilemapBuffers[3][BG_SCREEN_SIZE];
     u8 type; // REGIONMAP_TYPE_*
     bool8 permissions[MAPPERM_COUNT];
-    u8 region; // REGIONMAP_KANTO, REGIONMAP_SEVII*
-    u8 field_479C; // also a region map id
+    u8 selectedRegion; // REGIONMAP_KANTO, REGIONMAP_SEVII*
+    u8 playersRegion;
     u8 ALIGNED(4) mainState;
     u8 ALIGNED(4) openState;
     u8 ALIGNED(4) loadGfxState;
@@ -61,39 +69,39 @@ struct RegionMap
     MainCallback savedCallback;
 }; // size = 0x47C0
 
-struct SelectionCursorSubspriteData
+struct GpuWindowParams
+{
+    u16 left;
+    u16 top;
+    u16 right;
+    u16 bottom;
+};
+
+struct SwitchMapMenuCursorSubsprite
 {
     u8 tiles[0x400];
     struct Sprite * sprite;
     u16 tileTag;
-    u16 paletteTag;
-    s16 xCoord;
+    u16 palTag;
+    s16 x;
 };
 
-struct UnkStruct_20399D8
+struct SwitchMapMenu
 {
-    u8 bgTiles[0x1000];
-    u16 tileMap[0x258];
-    struct SelectionCursorSubspriteData selectionCursorSubspriteData[2];
-    u8 field_1CC8;
-    u8 selectionCursorLoadState;
-    u8 field_1CCA;
-    u8 field_1CCB;
-    u8 field_1CCC;
+    u8 switchMapTiles[0x1000];
+    u16 switchMapTilemap[600];
+    struct SwitchMapMenuCursorSubsprite cursorSubsprite[2];
+    u8 mainState;
+    u8 cursorLoadState;
+    u8 currentSelection;
+    u8 chosenRegion;
+    u8 maxSelection;
     u8 alpha;
-    u16 field_1CCE;
-    TaskFunc field_1CD0;
-    u16 field_1CD4[4];
+    u16 yOffset;
+    TaskFunc exitTask;
+    struct GpuWindowParams highlight;
     u16 blendY;
 }; // size = 0x1CE0
-
-struct GpuWindowParams
-{
-    u16 v0;
-    u16 v2;
-    u16 v4;
-    u16 v6;
-};
 
 struct DungeonMapInfo
 {
@@ -102,31 +110,31 @@ struct DungeonMapInfo
     const u8 *desc;
 };
 
-struct DungeonMapPreviewManagerStruct
+struct DungeonMapPreview
 {
-    u16 tiles[0x1C20];
-    u16 tilemap[0x280];
+    u16 tiles[7200];
+    u16 tilemap[640];
     const struct MapPreviewScreen * mapPreviewInfo;
     TaskFunc savedTask;
     u8 mainState;
     u8 drawState;
-    u8 field_3D4A;
-    u8 field_3D4B;
+    u8 loadState;
+    u8 updateCounter;
     u8 timer;
-    u16 field_3D4E[0x30];
-    u8 filler_3DAE[0x60];
-    u16 field_3E0E;
-    u16 field_3E10;
-    u16 field_3E12;
+    u16 palette[0x30];
+    u8 filler[0x60];
+    u16 red;
+    u16 green;
+    u16 blue;
     u16 blendY;
-    u16 field_3E16;
-    u16 field_3E18;
-    u16 field_3E1A;
-    u16 field_3E1C;
-    u16 field_3E1E;
-    u16 field_3E20;
-    u16 field_3E22;
-    u16 field_3E24;
+    u16 left;
+    u16 top;
+    u16 right;
+    u16 bottom;
+    u16 leftIncrement;
+    u16 topIncrement;
+    u16 rightIncrement;
+    u16 bottomIncrement;
 }; // size = 0x3E28
 
 struct MapEdge
@@ -143,7 +151,7 @@ struct MapOpenCloseAnim
 {
     struct MapEdge * mapEdges[6];
     u16 tiles[0x400];
-    u16 tilemap[0x258];
+    u16 tilemap[600];
     TaskFunc exitTask;
     u8 openState;
     u8 loadGfxState;
@@ -225,8 +233,8 @@ struct FlyMap
 };
 
 static EWRAM_DATA struct RegionMap * sRegionMap = NULL;
-static EWRAM_DATA struct UnkStruct_20399D8 * gUnknown_20399D8 = NULL;
-static EWRAM_DATA struct DungeonMapPreviewManagerStruct * sDungeonMapPreviewManager = NULL;
+static EWRAM_DATA struct SwitchMapMenu * sSwitchMapMenu = NULL;
+static EWRAM_DATA struct DungeonMapPreview * sDungeonMapPreview = NULL;
 static EWRAM_DATA struct MapOpenCloseAnim * sMapOpenCloseAnim = NULL;
 static EWRAM_DATA struct MapCursor * sMapCursor = NULL;
 static EWRAM_DATA struct PlayerIcon * sPlayerIcon = NULL;
@@ -248,34 +256,34 @@ static void InitRegionMapBgs(void);
 static void SetBgTilemapBuffers(void);
 static void ResetOamForRegionMap(void);
 static void SetBg0andBg3Hidden(bool8);
-static void sub_80C0AB8(void);
-static void DisplayCurrentMapsecName(void);
-static void sub_80C0B9C(void);
+static void UpdateMapsecNameBox(void);
+static void DisplayCurrentMapName(void);
+static void DrawDungeonNameBox(void);
 static void DisplayCurrentDungeonName(void);
-static void sub_80C0CC8(u8, u16 *);
+static void BufferRegionMapBg(u8, u16 *);
 static bool8 GetRegionMapPermission(u8);
-static u8 GetWhichRegionMap(void);
-static void sub_80C0E70(u8, u8, TaskFunc);
-static void sub_80C1098(u8);
-static void sub_80C1280(u8);
+static u8 GetSelectedRegionMap(void);
+static void InitSwitchMapMenu(u8, u8, TaskFunc);
+static void Task_SwitchMapMenu(u8);
+static void FreeSwitchMapMenu(u8);
 static bool8 sub_80C12EC(void);
-static void sub_80C1324(u8, u16 *);
-static void sub_80C1390(void);
-static bool8 sub_80C144C(void);
-static bool8 sub_80C1478(void);
-static bool8 LoadAndCreateSelectionCursorSpriteGfx(void);
-static void CreateSelectionCursorSubsprite(u8, u16, u16);
-static void RealCreateSelectionCursorSubsprite(u8, u16, u16);
-static void DestroySelectionCursorSprites(void);
-static void RegionMapCreateDungeonMapPreview(u8, u8, TaskFunc);
-static void Task_PrepDungeonMapPreviewAndFlavorText(u8);
-static void Task_DrawDungeonMapPreviewAndFlavorText(u8);
-static void DestroyMapPreviewAssets(u8);
-static void sub_80C1E94(void);
+static void LoadSwitchMapTilemap(u8, u16 *);
+static void DrawSwitchMapSelectionHighlight(void);
+static bool8 DimScreenForSwitchMapMenu(void);
+static bool8 HandleSwitchMapInput(void);
+static bool8 CreateSwitchMapCursor(void);
+static void CreateSwitchMapCursorSubsprite(u8, u16, u16);
+static void _CreateSwitchMapCursorSubsprite(u8, u16, u16);
+static void FreeSwitchMapCursor(void);
+static void InitDungeonMapPreview(u8, u8, TaskFunc);
+static void Task_DungeonMapPreview(u8);
+static void Task_DrawDungeonMapPreviewFlavorText(u8);
+static void FreeDungeonMapPreview(u8);
+static void InitScreenForDungeonMapPreview(void);
 static void CopyMapPreviewTilemapToBgTilemapBuffer(u8, const u16 *);
-static bool8 sub_80C1F80(bool8);
+static bool8 UpdateDungeonMapPreview(bool8);
 static void InitMapOpenAnim(u8, TaskFunc);
-static void sub_80C24BC(void);
+static void InitScreenForMapOpenAnim(void);
 static void Task_MapOpenAnim(u8);
 static void FreeMapOpenCloseAnim(void);
 static void FreeMapEdgeSprites(void);
@@ -337,36 +345,36 @@ static void SetFlyWarpDestination(u16);
 
 #include "data/text/map_section_names.h"
 
-static const u16 gUnknown_83EF23C[] = INCBIN_U16("graphics/region_map/unk_83EF23C.gbapal");
+static const u16 sTopBar_Pal[] = INCBIN_U16("graphics/region_map/top_bar.gbapal"); // Palette for the top bar and dynamic text color
 static const u16 sMapCursor_Pal[] = INCBIN_U16("graphics/region_map/cursor.gbapal");
 static const u16 sPlayerIcon_RedPal[] = INCBIN_U16("graphics/region_map/player_icon_red.gbapal");
 static const u16 sPlayerIcon_LeafPal[] = INCBIN_U16("graphics/region_map/player_icon_leaf.gbapal");
 static const u16 sMiscIcon_Pal[] = INCBIN_U16("graphics/region_map/misc_icon.gbapal"); // For dungeon and fly icons
-static const u16 gUnknown_83EF2DC[] = INCBIN_U16("graphics/region_map/unk_83EF2DC.gbapal");
+static const u16 sRegionMap_Pal[] = INCBIN_U16("graphics/region_map/region_map.gbapal");
 static const u16 unref_83EF37C[] = {
     RGB(0, 0, 31),
     RGB(0, 12, 31),
     RGB_WHITE,
     RGB_WHITE
 };
-static const u16 sSelectionCursorPals[] = INCBIN_U16("graphics/region_map/unk_83EF384.gbapal");
+static const u16 sSwitchMapCursor_Pal[] = INCBIN_U16("graphics/region_map/switch_map_cursor.gbapal");
 static const u16 sMapEdge_Pal[] = INCBIN_U16("graphics/region_map/map_edge.gbapal");
-static const u32 sSelectionCursorLeftTiles[] = INCBIN_U32("graphics/region_map/unk_83EF3C4.4bpp.lz");
-static const u32 sSelectionCursorRightTiles[] = INCBIN_U32("graphics/region_map/unk_83EF450.4bpp.lz");
+static const u32 sSwitchMapCursorLeft_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_cursor_left.4bpp.lz");
+static const u32 sSwitchMapCursorRight_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_cursor_right.4bpp.lz");
 static const u32 sMapCursor_Gfx[] = INCBIN_U32("graphics/region_map/cursor.4bpp.lz");
 static const u32 sPlayerIcon_Red[] = INCBIN_U32("graphics/region_map/player_icon_red.4bpp.lz");
 static const u32 sPlayerIcon_Leaf[] = INCBIN_U32("graphics/region_map/player_icon_leaf.4bpp.lz");
 static const u32 sRegionMap_Gfx[] = INCBIN_U32("graphics/region_map/region_map.4bpp.lz");
 static const u32 sMapEdge_Gfx[] = INCBIN_U32("graphics/region_map/map_edge.4bpp.lz");
-static const u32 gUnknown_83F0580[] = INCBIN_U32("graphics/region_map/unk_83F0580.bin.lz");
-static const u32 sRegionMapLayout_Kanto[] = INCBIN_U32("graphics/region_map/kanto.bin.lz");
-static const u32 sRegionMapLayout_Sevii123[] = INCBIN_U32("graphics/region_map/sevii_123.bin.lz");
-static const u32 sRegionMapLayout_Sevii45[] = INCBIN_U32("graphics/region_map/sevii_45.bin.lz");
-static const u32 sRegionMapLayout_Sevii67[] = INCBIN_U32("graphics/region_map/sevii_67.bin.lz");
+static const u32 sSwitchMapMenu_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_menu.bin.lz");
+static const u32 sKanto_Tilemap[] = INCBIN_U32("graphics/region_map/kanto.bin.lz");
+static const u32 sSevii123_Tilemap[] = INCBIN_U32("graphics/region_map/sevii_123.bin.lz");
+static const u32 sSevii45_Tilemap[] = INCBIN_U32("graphics/region_map/sevii_45.bin.lz");
+static const u32 sSevii67_Tilemap[] = INCBIN_U32("graphics/region_map/sevii_67.bin.lz");
 static const u32 sMapEdge_Tilemap[] = INCBIN_U32("graphics/region_map/map_edge.bin.lz");
-static const u32 gUnknown_83F0F1C[] = INCBIN_U32("graphics/region_map/unk_83F0F1C.bin.lz");
-static const u32 gUnknown_83F1084[] = INCBIN_U32("graphics/region_map/unk_83F1084.bin.lz");
-static const u32 gUnknown_83F1190[] = INCBIN_U32("graphics/region_map/unk_83F1190.bin.lz");
+static const u32 sSwitchMap_KantoSeviiAll_Tilemap[] = INCBIN_U32("graphics/region_map/switch_map_kanto_sevii_all.bin.lz");
+static const u32 sSwitchMap_KantoSevii123_Tilemap[] = INCBIN_U32("graphics/region_map/switch_map_kanto_sevii_123.bin.lz");
+static const u32 sSwitchMap_KantoSeviiAll2_Tilemap[] = INCBIN_U32("graphics/region_map/switch_map_kanto_sevii_all2.bin.lz");
 static const u32 sMapEdge_TopLeft[] = INCBIN_U32("graphics/region_map/map_edge_top_left.4bpp.lz");
 static const u32 sMapEdge_TopRight[] = INCBIN_U32("graphics/region_map/map_edge_top_right.4bpp.lz");
 static const u32 sMapEdge_MidLeft[] = INCBIN_U32("graphics/region_map/map_edge_mid_left.4bpp.lz");
@@ -375,8 +383,8 @@ static const u32 sMapEdge_BottomLeft[] = INCBIN_U32("graphics/region_map/map_edg
 static const u32 sMapEdge_BottomRight[] = INCBIN_U32("graphics/region_map/map_edge_bottom_right.4bpp.lz");
 static const u32 sDungeonIcon[] = INCBIN_U32("graphics/region_map/dungeon_icon.4bpp.lz");
 static const u32 sFlyIcon[] = INCBIN_U32("graphics/region_map/fly_icon.4bpp.lz");
-static const u32 gUnknown_83F1978[] = INCBIN_U32("graphics/region_map/unk_83F1978.4bpp.lz");
-static const u32 gUnknown_83F19A0[] = INCBIN_U32("graphics/region_map/unk_83F19A0.bin.lz");
+static const u32 sBackground_Gfx[] = INCBIN_U32("graphics/region_map/background.4bpp.lz");
+static const u32 sBackground_Tilemap[] = INCBIN_U32("graphics/region_map/background.bin.lz");
 
 static const struct BgTemplate sRegionMapBgTemplates[] = {
     {
@@ -415,6 +423,7 @@ static const struct BgTemplate sRegionMapBgTemplates[] = {
 };
 
 static const struct WindowTemplate sRegionMapWindowTemplates[] = {
+    [WIN_MAP_NAME] = 
     {
         .bg = 3,
         .tilemapLeft = 3,
@@ -423,7 +432,9 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x001
-    }, {
+    }, 
+    [WIN_DUNGEON_NAME] =
+    {
         .bg = 3,
         .tilemapLeft = 3,
         .tilemapTop = 4,
@@ -431,7 +442,9 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x01f
-    }, {
+    }, 
+    [WIN_MAP_PREVIEW] =
+    {
         .bg = 3,
         .tilemapLeft = 3,
         .tilemapTop = 6,
@@ -439,7 +452,9 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 11,
         .paletteNum = 12,
         .baseBlock = 0x03d
-    }, {
+    },
+    [WIN_TOPBAR_LEFT] =
+    {
         .bg = 3,
         .tilemapLeft = 18,
         .tilemapTop = 0,
@@ -447,7 +462,9 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x150
-    }, {
+    }, 
+    [WIN_TOPBAR_RIGHT] =
+    {
         .bg = 3,
         .tilemapLeft = 24,
         .tilemapTop = 0,
@@ -538,46 +555,46 @@ static const u8 sSeviiMapsecs[3][30] = {
 ALIGNED(4) static const bool8 sRegionMapPermissions[REGIONMAP_TYPE_COUNT][MAPPERM_COUNT] = {
     [REGIONMAP_TYPE_NORMAL] = 
     {
-        [MAPPERM_HAS_SWITCH_BUTTON] = TRUE, 
-        [MAPPERM_HAS_MAP_PREVIEW] = TRUE, 
-        [MAPPERM_HAS_OPEN_ANIM] = TRUE, 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = TRUE, 
+        [MAPPERM_HAS_MAP_PREVIEW]      = TRUE, 
+        [MAPPERM_HAS_OPEN_ANIM]        = TRUE, 
         [MAPPERM_HAS_FLY_DESTINATIONS] = FALSE
     },
-    [REGIONMAP_TYPE_WALL]   = 
+    [REGIONMAP_TYPE_WALL] = 
     {
-        [MAPPERM_HAS_SWITCH_BUTTON] = FALSE, 
-        [MAPPERM_HAS_MAP_PREVIEW] = FALSE, 
-        [MAPPERM_HAS_OPEN_ANIM] = FALSE, 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE, 
+        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE, 
+        [MAPPERM_HAS_OPEN_ANIM]        = FALSE, 
         [MAPPERM_HAS_FLY_DESTINATIONS] = FALSE
     },
-    [REGIONMAP_TYPE_FLY]    = 
+    [REGIONMAP_TYPE_FLY] = 
     {
-        [MAPPERM_HAS_SWITCH_BUTTON] = FALSE, 
-        [MAPPERM_HAS_MAP_PREVIEW] = FALSE, 
-        [MAPPERM_HAS_OPEN_ANIM] = FALSE, 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE, 
+        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE, 
+        [MAPPERM_HAS_OPEN_ANIM]        = FALSE, 
         [MAPPERM_HAS_FLY_DESTINATIONS] = TRUE 
     }
 };
 
-static const struct GpuWindowParams sStdWindowDims[3] = {
-    {0x18, 0x10, 0x90, 0x20},
-    {0x18, 0x20, 0x90, 0x30},
-    {0x00, 0x00, 0x00, 0x00}
+static const struct GpuWindowParams sMapsecNameWindowDims[3] = {
+    [WIN_MAP_NAME]     = {.left = 24, .top = 16, .right = 144, .bottom = 32},
+    [WIN_DUNGEON_NAME] = {.left = 24, .top = 32, .right = 144, .bottom = 48},
+    [CLEAR_NAME]       = {.left =  0, .top =  0, .right =   0, .bottom =  0}
 };
 
-static const struct OamData sSelectionCursorOam = {
+static const struct OamData sOamData_SwitchMapCursor = {
     .shape = SPRITE_SHAPE(32x32),
     .size = SPRITE_SIZE(32x32)
 };
 
-static const union AnimCmd gUnknown_83F1B2C[] = {
-    ANIMCMD_FRAME(0x00, 20),
-    ANIMCMD_FRAME(0x10, 20),
+static const union AnimCmd sAnim_SwitchMapCursor[] = {
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(16, 20),
     ANIMCMD_JUMP(0)
 };
 
-static const union AnimCmd *const sSelectionCursorAnims[] = {
-    gUnknown_83F1B2C
+static const union AnimCmd *const sAnims_SwitchMapCursor[] = {
+    sAnim_SwitchMapCursor
 };
 
 static const struct DungeonMapInfo sDungeonInfo[] = {
@@ -675,7 +692,10 @@ static const union AnimCmd *const sAnims_MapEdge[] = {
 };
 
 static const struct GpuWindowParams gUnknown_83F1C34 = {
-    0x18, 0x10, 0xD8, 0xA0
+    .left = 24, 
+    .top = 16, 
+    .right = 216, 
+    .bottom = 160
 };
 
 static const struct OamData sOamData_MapCursor = {
@@ -1345,10 +1365,10 @@ static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 static void sub_80BFEA0(void)
 {
     u16 pal[16];
-    CpuCopy16(&gUnknown_83EF2DC[0x20], pal, sizeof(pal));
+    CpuCopy16(&sRegionMap_Pal[0x20], pal, sizeof(pal));
     RegionMap_DarkenPalette(pal, NELEMS(pal), 95);
     LoadPalette(pal, 0x20, 0x20);
-    LoadPalette(&gUnknown_83EF2DC[0x2F], 0x2F, sizeof(u16));
+    LoadPalette(&sRegionMap_Pal[0x2F], 0x2F, sizeof(u16));
 }
 
 static void InitRegionMap(u8 type)
@@ -1431,8 +1451,8 @@ static void InitRegionMapType(void)
             j++;
         }
     }
-    sRegionMap->region = region;
-    sRegionMap->field_479C = region;
+    sRegionMap->selectedRegion = region;
+    sRegionMap->playersRegion = region;
 }
 
 static void CB2_OpenRegionMap(void)
@@ -1457,21 +1477,21 @@ static void CB2_OpenRegionMap(void)
         CopyBgTilemapBufferToVram(1);
         break;
     case 5:
-        sub_80C0CC8(0, sRegionMap->layouts[sRegionMap->region]);
+        BufferRegionMapBg(0, sRegionMap->layouts[sRegionMap->selectedRegion]);
         CopyBgTilemapBufferToVram(0);
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
         {
-            sub_80C0CC8(1, sRegionMap->layouts[REGIONMAP_COUNT]);
+            BufferRegionMapBg(1, sRegionMap->layouts[REGIONMAP_COUNT]);
             CopyBgTilemapBufferToVram(1);
         }
         break;
     case 6:
-        DisplayCurrentMapsecName();
-        PutWindowTilemap(0);
+        DisplayCurrentMapName();
+        PutWindowTilemap(WIN_MAP_NAME);
         break;
     case 7:
         DisplayCurrentDungeonName();
-        PutWindowTilemap(1);
+        PutWindowTilemap(WIN_DUNGEON_NAME);
         break;
     case 8:
         if (GetRegionMapPermission(MAPPERM_HAS_OPEN_ANIM) == TRUE)
@@ -1491,18 +1511,18 @@ static bool8 LoadRegionMapGfx(void)
     switch (sRegionMap->loadGfxState)
     {
     case 0:
-        LoadPalette(gUnknown_83EF23C, 0xC0, 0x20);
+        LoadPalette(sTopBar_Pal, 0xC0, 0x20);
         break;
     case 1:
-        LoadPalette(gUnknown_83EF2DC, 0x00, 0xA0);
+        LoadPalette(sRegionMap_Pal, 0x00, 0xA0);
         sub_80BFEA0();
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
         {
-            LoadPalette(&gUnknown_83EF23C[15], 0x00, 0x02);
-            LoadPalette(&gUnknown_83EF23C[15], 16, 0x02);
-            LoadPalette(&gUnknown_83EF23C[15], 0x20, 0x02);
-            LoadPalette(&gUnknown_83EF23C[15], 0x30, 0x02);
-            LoadPalette(&gUnknown_83EF23C[15], 0x40, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 0x00, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 0x10, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 0x20, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 0x30, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 0x40, 0x02);
         }
         break;
     case 2:
@@ -1511,28 +1531,26 @@ static bool8 LoadRegionMapGfx(void)
     case 3:
         DecompressAndCopyTileDataToVram(0, sRegionMap_Gfx, 0, 0, 0);
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
-        {
-            DecompressAndCopyTileDataToVram(1, gUnknown_83F1978, 0, 0, 0);
-        }
+            DecompressAndCopyTileDataToVram(1, sBackground_Gfx, 0, 0, 0);
         break;
     case 4:
         if (FreeTempTileDataBuffersIfPossible() == TRUE)
             return FALSE;
         break;
     case 5:
-        LZ77UnCompWram(sRegionMapLayout_Kanto, sRegionMap->layouts[REGIONMAP_KANTO]);
+        LZ77UnCompWram(sKanto_Tilemap, sRegionMap->layouts[REGIONMAP_KANTO]);
         break;
     case 6:
-        LZ77UnCompWram(sRegionMapLayout_Sevii123, sRegionMap->layouts[REGIONMAP_SEVII123]);
+        LZ77UnCompWram(sSevii123_Tilemap, sRegionMap->layouts[REGIONMAP_SEVII123]);
         break;
     case 7:
-        LZ77UnCompWram(sRegionMapLayout_Sevii45, sRegionMap->layouts[REGIONMAP_SEVII45]);
+        LZ77UnCompWram(sSevii45_Tilemap, sRegionMap->layouts[REGIONMAP_SEVII45]);
         break;
     case 8:
-        LZ77UnCompWram(sRegionMapLayout_Sevii67, sRegionMap->layouts[REGIONMAP_SEVII67]);
+        LZ77UnCompWram(sSevii67_Tilemap, sRegionMap->layouts[REGIONMAP_SEVII67]);
         break;
     default:
-        LZ77UnCompWram(gUnknown_83F19A0, sRegionMap->layouts[REGIONMAP_COUNT]);
+        LZ77UnCompWram(sBackground_Tilemap, sRegionMap->layouts[REGIONMAP_COUNT]);
         return TRUE;
     }
     sRegionMap->loadGfxState++;
@@ -1547,7 +1565,7 @@ static void CreateMainMapTask(void)
 
 static bool32 SelectedMapsecSEEnabled(void)
 {
-    if (GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, GetMapCursorY(), GetMapCursorX()) == MAPSEC_ROUTE_4_POKECENTER)
+    if (GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, GetMapCursorY(), GetMapCursorX()) == MAPSEC_ROUTE_4_POKECENTER)
         return FALSE;
     else
         return TRUE;
@@ -1572,7 +1590,7 @@ static void Task_RegionMap(u8 taskId)
     switch (sRegionMap->mainState)
     {
     case 0:
-        InitMapIcons(GetWhichRegionMap(), taskId, sRegionMap->mainTask);
+        InitMapIcons(GetSelectedRegionMap(), taskId, sRegionMap->mainTask);
         CreateMapCursor(0, 0);
         CreatePlayerIcon(1, 1);
         sRegionMap->mainState++;
@@ -1592,18 +1610,18 @@ static void Task_RegionMap(u8 taskId)
             ClearOrDrawTopBar(FALSE);
             SetPlayerIconInvisibility(FALSE);
             SetMapCursorInvisibility(FALSE);
-            SetFlyIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
-            SetDungeonIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
+            SetFlyIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
+            SetDungeonIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
         }
         sRegionMap->mainState++;
         break;
     case 2:
         if (!gPaletteFade.active && !IsDma3ManagerBusyWithBgCopy())
         {
-            DisplayCurrentMapsecName();
-            PutWindowTilemap(0);
+            DisplayCurrentMapName();
+            PutWindowTilemap(WIN_MAP_NAME);
             DisplayCurrentDungeonName();
-            PutWindowTilemap(1);
+            PutWindowTilemap(WIN_DUNGEON_NAME);
             sRegionMap->mainState++;
         }
         break;
@@ -1616,9 +1634,9 @@ static void Task_RegionMap(u8 taskId)
         case MAP_INPUT_MOVE_CONT:
             break;
         case MAP_INPUT_MOVE_END:
-            DisplayCurrentMapsecName();
+            DisplayCurrentMapName();
             DisplayCurrentDungeonName();
-            sub_80C0B9C();
+            DrawDungeonNameBox();
             PlaySEForSelectedMapsec();
             if (GetDungeonMapsecUnderCursor() != MAPSEC_NONE)
             {
@@ -1652,10 +1670,10 @@ static void Task_RegionMap(u8 taskId)
             break;
         case MAP_INPUT_A_BUTTON:
             if (GetSelectedMapsecType(LAYER_DUNGEON) == MAPSECTYPE_VISITED && sRegionMap->permissions[MAPPERM_HAS_MAP_PREVIEW] == TRUE)
-                RegionMapCreateDungeonMapPreview(0, taskId, SaveMainMapTask);
+                InitDungeonMapPreview(0, taskId, SaveMainMapTask);
             break;
         case MAP_INPUT_SWITCH:
-            sub_80C0E70(sRegionMap->region, taskId, SaveMainMapTask);
+            InitSwitchMapMenu(sRegionMap->selectedRegion, taskId, SaveMainMapTask);
             break;
         case MAP_INPUT_CANCEL:
             sRegionMap->mainState++;
@@ -1773,7 +1791,7 @@ static void InitRegionMapBgs(void)
     DeactivateAllTextPrinters();
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
     SetBgTilemapBuffers();
-    sub_80C0AB8();
+    UpdateMapsecNameBox();
 }
 
 static void SetBgTilemapBuffers(void)
@@ -1807,41 +1825,41 @@ static void SetBg0andBg3Hidden(bool8 hide)
     }
 }
 
-static void sub_80C0AB8(void)
+static void UpdateMapsecNameBox(void)
 {
     ResetGpuRegs();
     SetBldCnt(0, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ, BLDCNT_EFFECT_DARKEN);
     SetBldY(BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2);
     SetWinIn(57, 57);
     SetWinOut(WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
-    SetGpuWindowDims(0, &sStdWindowDims[0]);
-    SetGpuWindowDims(1, &sStdWindowDims[1]);
-    SetDispCnt(0, FALSE);
+    SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
+    SetGpuWindowDims(WIN_DUNGEON_NAME, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
+    SetDispCnt(WIN_MAP_NAME, FALSE);
     if (GetDungeonMapsecUnderCursor() != MAPSEC_NONE)
-        SetDispCnt(1, FALSE);
+        SetDispCnt(WIN_DUNGEON_NAME, FALSE);
 }
 
-static void DisplayCurrentMapsecName(void)
+static void DisplayCurrentMapName(void)
 {
-    ClearWindowTilemap(0);
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
+    ClearWindowTilemap(WIN_MAP_NAME);
+    FillWindowPixelBuffer(WIN_MAP_NAME, PIXEL_FILL(0));
     if (GetMapsecUnderCursor() == MAPSEC_NONE)
     {
-        SetGpuWindowDims(0, &sStdWindowDims[2]);
+        SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[CLEAR_NAME]);
     }
     else
     {
         GetMapName(sRegionMap->mapName, GetMapsecUnderCursor(), 0);
-        AddTextPrinterParameterized3(0, 2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
-        PutWindowTilemap(0);
-        CopyWindowToVram(0, 2);
-        SetGpuWindowDims(0, &sStdWindowDims[0]);
+        AddTextPrinterParameterized3(WIN_MAP_NAME, 2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
+        PutWindowTilemap(WIN_MAP_NAME);
+        CopyWindowToVram(WIN_MAP_NAME, 2);
+        SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
     }
 }
 
-static void sub_80C0B9C(void)
+static void DrawDungeonNameBox(void)
 {
-    SetGpuWindowDims(1, &sStdWindowDims[1]);
+    SetGpuWindowDims(WIN_DUNGEON_NAME, &sMapsecNameWindowDims[WIN_DUNGEON_NAME]);
 }
 
 static void DisplayCurrentDungeonName(void)
@@ -1851,34 +1869,34 @@ static void DisplayCurrentDungeonName(void)
     sRegionMap->field_47AC = FALSE;
     sRegionMap->field_47AE = 24;
     sRegionMap->field_47B0 = 32;
-    SetDispCnt(1, TRUE);
-    ClearWindowTilemap(1);
+    SetDispCnt(WIN_DUNGEON_NAME, TRUE);
+    ClearWindowTilemap(WIN_DUNGEON_NAME);
     mapsecId = GetDungeonMapsecUnderCursor();
     if (mapsecId != MAPSEC_NONE)
     {
          descOffset = mapsecId - MAPSECS_KANTO;
-         SetDispCnt(1, FALSE);
+         SetDispCnt(WIN_DUNGEON_NAME, FALSE);
          sRegionMap->field_47AC = TRUE;
          sRegionMap->mapNameLength = StringLength(sMapNames[descOffset]);
          sRegionMap->field_47AE = sRegionMap->mapNameLength * 10 + 50;
          sRegionMap->field_47B0 = 48;
-         FillWindowPixelBuffer(1, PIXEL_FILL(0));
+         FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
          StringCopy(sRegionMap->dungeonName, sMapNames[descOffset]);
-         AddTextPrinterParameterized3(1, 2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
-         PutWindowTilemap(1);
-         CopyWindowToVram(1, 3);
+         AddTextPrinterParameterized3(WIN_DUNGEON_NAME, 2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
+         PutWindowTilemap(WIN_DUNGEON_NAME);
+         CopyWindowToVram(WIN_DUNGEON_NAME, 3);
     }
 }
 
-static void sub_80C0CA0(void)
+static void ClearMapsecNameText(void)
 {
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    CopyWindowToVram(0, 3);
-    FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    CopyWindowToVram(1, 3);
+    FillWindowPixelBuffer(WIN_MAP_NAME, PIXEL_FILL(0));
+    CopyWindowToVram(WIN_MAP_NAME, 3);
+    FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
+    CopyWindowToVram(WIN_DUNGEON_NAME, 3);
 }
 
-static void sub_80C0CC8(u8 bg, u16 *map)
+static void BufferRegionMapBg(u8 bg, u16 *map)
 {
     s16 i;
     s16 j;
@@ -1900,10 +1918,10 @@ static void sub_80C0CC8(u8 bg, u16 *map)
         WriteSequenceToBgTilemapBuffer(0, 0x100, 0x18, 15, 3, 1, 0x3, 0x001);
         WriteSequenceToBgTilemapBuffer(0, 0x110, 0x18, 16, 3, 1, 0x3, 0x001);
     }
-    if (gUnknown_20399D8 != NULL)
-        whichMap = gUnknown_20399D8->field_1CCA;
+    if (sSwitchMapMenu != NULL)
+        whichMap = sSwitchMapMenu->currentSelection;
     else
-        whichMap = sRegionMap->region;
+        whichMap = sRegionMap->selectedRegion;
     if (whichMap == REGIONMAP_SEVII45 && !FlagGet(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR))
         FillBgTilemapBufferRect_Palette0(0, 0x003, 13, 11, 3, 2);
     if (whichMap == REGIONMAP_SEVII67 && !FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR))
@@ -1915,78 +1933,78 @@ static bool8 GetRegionMapPermission(u8 attr)
     return sRegionMap->permissions[attr];
 }
 
-static u8 GetWhichRegionMap(void)
+static u8 GetSelectedRegionMap(void)
 {
-    return sRegionMap->region;
+    return sRegionMap->selectedRegion;
 }
 
-// Also a region id
-static u8 sub_80C0E34(void)
+static u8 GetRegionMapPlayerIsOn(void)
 {
-    return sRegionMap->field_479C;
+    return sRegionMap->playersRegion;
 }
 
-static void SetWhichRegionMap(u8 region)
+static void SetSelectedRegionMap(u8 region)
 {
-    sRegionMap->region = region;
+    sRegionMap->selectedRegion = region;
 }
 
 // Unused
-static void sub_80C0E5C(u8 region)
+static void SetRegionMapPlayerIsOn(u8 region)
 {
-    sRegionMap->field_479C = region;
+    sRegionMap->playersRegion = region;
 }
 
-static void sub_80C0E70(u8 whichMap, u8 taskId, TaskFunc taskFunc)
+static void InitSwitchMapMenu(u8 whichMap, u8 taskId, TaskFunc taskFunc)
 {
-    gUnknown_20399D8 = AllocZeroed(sizeof(struct UnkStruct_20399D8));
+    sSwitchMapMenu = AllocZeroed(sizeof(struct SwitchMapMenu));
     if (FlagGet(FLAG_SYS_SEVII_MAP_4567))
-        gUnknown_20399D8->field_1CCC = 3;
+        sSwitchMapMenu->maxSelection = 3;
     else if (FlagGet(FLAG_SYS_SEVII_MAP_123))
-        gUnknown_20399D8->field_1CCC = 1;
+        sSwitchMapMenu->maxSelection = 1;
     else
-        gUnknown_20399D8->field_1CCC = 0;
-    gUnknown_20399D8->selectionCursorSubspriteData[0].xCoord = 0x58;
-    gUnknown_20399D8->selectionCursorSubspriteData[1].xCoord = 0x98;
-    switch (gUnknown_20399D8->field_1CCC)
+        sSwitchMapMenu->maxSelection = 0;
+    sSwitchMapMenu->cursorSubsprite[0].x = 88;
+    sSwitchMapMenu->cursorSubsprite[1].x = 152;
+
+    switch (sSwitchMapMenu->maxSelection)
     {
     case 1:
-        LZ77UnCompWram(gUnknown_83F1084, gUnknown_20399D8->tileMap);
-        gUnknown_20399D8->field_1CCE = 6;
+        LZ77UnCompWram(sSwitchMap_KantoSevii123_Tilemap, sSwitchMapMenu->switchMapTilemap);
+        sSwitchMapMenu->yOffset = 6;
         break;
     case 2: // never reached
-        LZ77UnCompWram(gUnknown_83F1190, gUnknown_20399D8->tileMap);
-        gUnknown_20399D8->field_1CCE = 4;
+        LZ77UnCompWram(sSwitchMap_KantoSeviiAll2_Tilemap, sSwitchMapMenu->switchMapTilemap);
+        sSwitchMapMenu->yOffset = 4;
         break;
     case 3:
     default:
-        gUnknown_20399D8->field_1CCE = 3;
-        LZ77UnCompWram(gUnknown_83F0F1C, gUnknown_20399D8->tileMap);
+        sSwitchMapMenu->yOffset = 3;
+        LZ77UnCompWram(sSwitchMap_KantoSeviiAll_Tilemap, sSwitchMapMenu->switchMapTilemap);
         break;
     }
-    LZ77UnCompWram(gUnknown_83F0580, gUnknown_20399D8->bgTiles);
-    gUnknown_20399D8->field_1CC8 = 0;
-    gUnknown_20399D8->field_1CCA = whichMap;
-    gUnknown_20399D8->field_1CD0 = taskFunc;
-    gUnknown_20399D8->field_1CCB = sub_80C0E34();
+    LZ77UnCompWram(sSwitchMapMenu_Gfx, sSwitchMapMenu->switchMapTiles);
+    sSwitchMapMenu->mainState = 0;
+    sSwitchMapMenu->currentSelection = whichMap;
+    sSwitchMapMenu->exitTask = taskFunc;
+    sSwitchMapMenu->chosenRegion = GetRegionMapPlayerIsOn();
     SaveRegionMapGpuRegs(0);
     PrintTopBarTextRight(gText_RegionMap_AButtonOK);
-    gTasks[taskId].func = sub_80C1098;
+    gTasks[taskId].func = Task_SwitchMapMenu;
 }
 
-static void sub_80C0FE0(void)
+static void ResetGpuRegsForSwitchMapMenu(void)
 {
     ResetGpuRegs();
     SetBldCnt((BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ) >> 8, BLDCNT_TGT1_BG2, BLDCNT_EFFECT_BLEND);
-    SetBldAlpha(16 - gUnknown_20399D8->alpha, gUnknown_20399D8->alpha);
+    SetBldAlpha(16 - sSwitchMapMenu->alpha, sSwitchMapMenu->alpha);
 }
 
 static bool8 sub_80C1014(void)
 {
-    if (gUnknown_20399D8->alpha < 16)
+    if (sSwitchMapMenu->alpha < 16)
     {
-        SetBldAlpha(16 - gUnknown_20399D8->alpha, gUnknown_20399D8->alpha);
-        gUnknown_20399D8->alpha += 2;
+        SetBldAlpha(16 - sSwitchMapMenu->alpha, sSwitchMapMenu->alpha);
+        sSwitchMapMenu->alpha += 2;
         return FALSE;
     }
     else
@@ -1997,10 +2015,10 @@ static bool8 sub_80C1014(void)
 
 static bool8 sub_80C1058(void)
 {
-    if (gUnknown_20399D8->alpha >= 2)
+    if (sSwitchMapMenu->alpha >= 2)
     {
-        gUnknown_20399D8->alpha -= 2;
-        SetBldAlpha(16 - gUnknown_20399D8->alpha, gUnknown_20399D8->alpha);
+        sSwitchMapMenu->alpha -= 2;
+        SetBldAlpha(16 - sSwitchMapMenu->alpha, sSwitchMapMenu->alpha);
         return FALSE;
     }
     else
@@ -2009,111 +2027,111 @@ static bool8 sub_80C1058(void)
     }
 }
 
-static void sub_80C1098(u8 taskId)
+static void Task_SwitchMapMenu(u8 taskId)
 {
-    switch (gUnknown_20399D8->field_1CC8)
+    switch (sSwitchMapMenu->mainState)
     {
     case 0:
         NullVBlankHBlankCallbacks();
         PrintTopBarTextLeft(gText_RegionMap_UpDownPick);
-        gUnknown_20399D8->field_1CC8++;
+        sSwitchMapMenu->mainState++;
         break;
     case 1:
-        LoadBgTiles(2, gUnknown_20399D8->bgTiles, 0x1000, 0);
-        gUnknown_20399D8->field_1CC8++;
+        LoadBgTiles(2, sSwitchMapMenu->switchMapTiles, 0x1000, 0);
+        sSwitchMapMenu->mainState++;
         break;
     case 2:
-        sub_80C1324(2, gUnknown_20399D8->tileMap);
+        LoadSwitchMapTilemap(2, sSwitchMapMenu->switchMapTilemap);
         CopyBgTilemapBufferToVram(2);
-        gUnknown_20399D8->field_1CC8++;
+        sSwitchMapMenu->mainState++;
         break;
     case 3:
-        sub_80C0CA0();
-        gUnknown_20399D8->field_1CC8++;
+        ClearMapsecNameText();
+        sSwitchMapMenu->mainState++;
         break;
     case 4:
-        sub_80C0FE0();
+        ResetGpuRegsForSwitchMapMenu();
         ShowBg(2);
-        gUnknown_20399D8->field_1CC8++;
+        sSwitchMapMenu->mainState++;
         break;
     case 5:
         SetRegionMapVBlankCB();
-        gUnknown_20399D8->field_1CC8++;
+        sSwitchMapMenu->mainState++;
         break;
     case 6:
         if (sub_80C1014() == TRUE)
         {
-            sub_80C1390();
-            gUnknown_20399D8->field_1CC8++;
+            DrawSwitchMapSelectionHighlight();
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 7:
-        if (sub_80C144C() == TRUE)
+        if (DimScreenForSwitchMapMenu() == TRUE)
         {
-            gUnknown_20399D8->field_1CC8++;
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 8:
-        if (LoadAndCreateSelectionCursorSpriteGfx() == TRUE)
+        if (CreateSwitchMapCursor() == TRUE)
         {
-            gUnknown_20399D8->field_1CC8++;
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 9:
-        if (sub_80C1478() == TRUE)
+        if (HandleSwitchMapInput() == TRUE)
         {
-            SetWhichRegionMap(gUnknown_20399D8->field_1CCA);
-            if (sub_80C0E34() == gUnknown_20399D8->field_1CCA)
+            SetSelectedRegionMap(sSwitchMapMenu->currentSelection);
+            if (GetRegionMapPlayerIsOn() == sSwitchMapMenu->currentSelection)
             {
                 SetPlayerIconInvisibility(FALSE);
-                SetFlyIconInvisibility(gUnknown_20399D8->field_1CCA, NELEMS(sMapIcons->flyIcons), FALSE);
-                SetDungeonIconInvisibility(gUnknown_20399D8->field_1CCA, NELEMS(sMapIcons->dungeonIcons), FALSE);
+                SetFlyIconInvisibility(sSwitchMapMenu->currentSelection, NELEMS(sMapIcons->flyIcons), FALSE);
+                SetDungeonIconInvisibility(sSwitchMapMenu->currentSelection, NELEMS(sMapIcons->dungeonIcons), FALSE);
             }
-            gUnknown_20399D8->field_1CC8++;
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 10:
         if (sub_80C12EC() == TRUE)
         {
-            DestroySelectionCursorSprites();
-            sub_80C0FE0();
-            gUnknown_20399D8->field_1CC8++;
+            FreeSwitchMapCursor();
+            ResetGpuRegsForSwitchMapMenu();
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 11:
         if (sub_80C1058() == TRUE)
         {
-            gUnknown_20399D8->field_1CC8++;
+            sSwitchMapMenu->mainState++;
         }
         break;
     case 12:
         SetMapCursorInvisibility(FALSE);
-        gUnknown_20399D8->field_1CC8++;
+        sSwitchMapMenu->mainState++;
         break;
     default:
-        sub_80C1280(taskId);
+        FreeSwitchMapMenu(taskId);
         break;
     }
 }
 
-static void sub_80C1280(u8 taskId)
+static void FreeSwitchMapMenu(u8 taskId)
 {
-    gTasks[taskId].func = gUnknown_20399D8->field_1CD0;
+    gTasks[taskId].func = sSwitchMapMenu->exitTask;
     HideBg(2);
     PrintTopBarTextLeft(gText_RegionMap_DPadMove);
     PrintTopBarTextRight(gText_RegionMap_AButtonSwitch);
-    sub_80C0AB8();
-    sub_80C0B9C();
-    SetGpuWindowDims(0, &sStdWindowDims[2]);
-    FREE_IF_NOT_NULL(gUnknown_20399D8);
+    UpdateMapsecNameBox();
+    DrawDungeonNameBox();
+    SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[CLEAR_NAME]);
+    FREE_IF_NOT_NULL(sSwitchMapMenu);
 }
 
 static bool8 sub_80C12EC(void)
 {
-    if (gUnknown_20399D8->blendY != 0)
+    if (sSwitchMapMenu->blendY != 0)
     {
-        gUnknown_20399D8->blendY--;
-        SetGpuReg(REG_OFFSET_BLDY, gUnknown_20399D8->blendY);
+        sSwitchMapMenu->blendY--;
+        SetGpuReg(REG_OFFSET_BLDY, sSwitchMapMenu->blendY);
         return FALSE;
     }
     else
@@ -2123,7 +2141,7 @@ static bool8 sub_80C12EC(void)
     }
 }
 
-static void sub_80C1324(u8 bg, u16 *map)
+static void LoadSwitchMapTilemap(u8 bg, u16 *map)
 {
     s16 i;
     s16 j;
@@ -2140,13 +2158,13 @@ static void sub_80C1324(u8 bg, u16 *map)
     }
 }
 
-static void sub_80C1390(void)
+static void DrawSwitchMapSelectionHighlight(void)
 {
     struct GpuWindowParams data;
-    data.v0 = gUnknown_20399D8->field_1CD4[0] = 0x48;
-    data.v2 = gUnknown_20399D8->field_1CD4[1] = 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA);
-    data.v4 = gUnknown_20399D8->field_1CD4[2] = 0xA8;
-    data.v6 = gUnknown_20399D8->field_1CD4[3] = gUnknown_20399D8->field_1CD4[1] + 32;
+    data.left = sSwitchMapMenu->highlight.left = 72;
+    data.top = sSwitchMapMenu->highlight.top = 8 * (sSwitchMapMenu->yOffset + 4 * sSwitchMapMenu->currentSelection);
+    data.right = sSwitchMapMenu->highlight.right = 168;
+    data.bottom = sSwitchMapMenu->highlight.bottom = sSwitchMapMenu->highlight.top + 32;
     ResetGpuRegs();
     SetBldCnt(0, (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ), BLDCNT_EFFECT_DARKEN);
     SetWinIn(31, 21);
@@ -2155,12 +2173,12 @@ static void sub_80C1390(void)
     SetGpuWindowDims(1, &data);
 }
 
-static bool8 sub_80C144C(void)
+static bool8 DimScreenForSwitchMapMenu(void)
 {
-    if (gUnknown_20399D8->blendY < (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
+    if (sSwitchMapMenu->blendY < (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
     {
-        gUnknown_20399D8->blendY++;
-        SetBldY(gUnknown_20399D8->blendY);
+        sSwitchMapMenu->blendY++;
+        SetBldY(sSwitchMapMenu->blendY);
         return FALSE;
     }
     else
@@ -2169,53 +2187,53 @@ static bool8 sub_80C144C(void)
     }
 }
 
-static bool8 sub_80C1478(void)
+static bool8 HandleSwitchMapInput(void)
 {
-    bool8 r6 = FALSE;
+    bool8 changedSelection = FALSE;
     struct GpuWindowParams data;
-    data.v0 = gUnknown_20399D8->field_1CD4[0] = 0x48;
-    data.v2 = gUnknown_20399D8->field_1CD4[1] = 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA);
-    data.v4 = gUnknown_20399D8->field_1CD4[2] = 0xA8;
-    data.v6 = gUnknown_20399D8->field_1CD4[3] = gUnknown_20399D8->field_1CD4[1] + 32;
-    if (JOY_NEW(DPAD_UP) && gUnknown_20399D8->field_1CCA != 0)
+    data.left = sSwitchMapMenu->highlight.left = 72;
+    data.top = sSwitchMapMenu->highlight.top = 8 * (sSwitchMapMenu->yOffset + 4 * sSwitchMapMenu->currentSelection);
+    data.right = sSwitchMapMenu->highlight.right = 168;
+    data.bottom = sSwitchMapMenu->highlight.bottom = sSwitchMapMenu->highlight.top + 32;
+    if (JOY_NEW(DPAD_UP) && sSwitchMapMenu->currentSelection != 0)
     {
         PlaySE(SE_BAG1);
-        gUnknown_20399D8->field_1CCA--;
-        r6 = TRUE;
+        sSwitchMapMenu->currentSelection--;
+        changedSelection = TRUE;
     }
-    if (JOY_NEW(DPAD_DOWN) && gUnknown_20399D8->field_1CCA < gUnknown_20399D8->field_1CCC)
+    if (JOY_NEW(DPAD_DOWN) && sSwitchMapMenu->currentSelection < sSwitchMapMenu->maxSelection)
     {
         PlaySE(SE_BAG1);
-        gUnknown_20399D8->field_1CCA++;
-        r6 = TRUE;
+        sSwitchMapMenu->currentSelection++;
+        changedSelection = TRUE;
     }
-    if (JOY_NEW(A_BUTTON) && gUnknown_20399D8->blendY == (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
+    if (JOY_NEW(A_BUTTON) && sSwitchMapMenu->blendY == (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
     {
         PlaySE(SE_W129);
-        gUnknown_20399D8->field_1CCB = gUnknown_20399D8->field_1CCA;
+        sSwitchMapMenu->chosenRegion = sSwitchMapMenu->currentSelection;
         return TRUE;
     }
     if (JOY_NEW(B_BUTTON))
     {
-        gUnknown_20399D8->field_1CCA = gUnknown_20399D8->field_1CCB;
-        sub_80C0CC8(0, sRegionMap->layouts[gUnknown_20399D8->field_1CCA]);
+        sSwitchMapMenu->currentSelection = sSwitchMapMenu->chosenRegion;
+        BufferRegionMapBg(0, sRegionMap->layouts[sSwitchMapMenu->currentSelection]);
         CopyBgTilemapBufferToVram(0);
         SetFlyIconInvisibility(0xFF, NELEMS(sMapIcons->flyIcons), TRUE);
         SetDungeonIconInvisibility(0xFF, NELEMS(sMapIcons->dungeonIcons), TRUE);
         return TRUE;
     }
-    if (r6)
+    if (changedSelection)
     {
-        sub_80C0CC8(0, sRegionMap->layouts[gUnknown_20399D8->field_1CCA]);
+        BufferRegionMapBg(0, sRegionMap->layouts[sSwitchMapMenu->currentSelection]);
         PrintTopBarTextRight(gText_RegionMap_AButtonOK);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);
         SetFlyIconInvisibility(0xFF, NELEMS(sMapIcons->flyIcons), TRUE);
         SetDungeonIconInvisibility(0xFF, NELEMS(sMapIcons->dungeonIcons), TRUE);
-        SetFlyIconInvisibility(gUnknown_20399D8->field_1CCA, NELEMS(sMapIcons->flyIcons), FALSE);
-        SetDungeonIconInvisibility(gUnknown_20399D8->field_1CCA, NELEMS(sMapIcons->dungeonIcons), FALSE);
+        SetFlyIconInvisibility(sSwitchMapMenu->currentSelection, NELEMS(sMapIcons->flyIcons), FALSE);
+        SetDungeonIconInvisibility(sSwitchMapMenu->currentSelection, NELEMS(sMapIcons->dungeonIcons), FALSE);
     }
-    if (gUnknown_20399D8->field_1CCA != sub_80C0E34())
+    if (sSwitchMapMenu->currentSelection != GetRegionMapPlayerIsOn())
         SetPlayerIconInvisibility(TRUE);
     else
         SetPlayerIconInvisibility(FALSE);
@@ -2223,81 +2241,81 @@ static bool8 sub_80C1478(void)
     return FALSE;
 }
 
-static void SpriteCB_SelectionCursor(struct Sprite * sprite)
+static void SpriteCB_SwitchMapCursor(struct Sprite * sprite)
 {
-    sprite->pos1.y = gUnknown_20399D8->field_1CD4[1] + 16;
+    sprite->pos1.y = sSwitchMapMenu->highlight.top + 16;
 }
 
-static bool8 LoadAndCreateSelectionCursorSpriteGfx(void)
+static bool8 CreateSwitchMapCursor(void)
 {
-    switch (gUnknown_20399D8->selectionCursorLoadState)
+    switch (sSwitchMapMenu->cursorLoadState)
     {
     case 0:
-        LZ77UnCompWram(sSelectionCursorLeftTiles, gUnknown_20399D8->selectionCursorSubspriteData[0].tiles);
+        LZ77UnCompWram(sSwitchMapCursorLeft_Gfx, sSwitchMapMenu->cursorSubsprite[0].tiles);
         break;
     case 1:
-        LZ77UnCompWram(sSelectionCursorRightTiles, gUnknown_20399D8->selectionCursorSubspriteData[1].tiles);
+        LZ77UnCompWram(sSwitchMapCursorRight_Gfx, sSwitchMapMenu->cursorSubsprite[1].tiles);
         break;
     case 2:
-        CreateSelectionCursorSubsprite(0, 2, 2);
-        CreateSelectionCursorSubsprite(1, 3, 3);
+        CreateSwitchMapCursorSubsprite(0, 2, 2);
+        CreateSwitchMapCursorSubsprite(1, 3, 3);
         break;
     default:
         return TRUE;
     }
-    gUnknown_20399D8->selectionCursorLoadState++;
+    sSwitchMapMenu->cursorLoadState++;
     return FALSE;
 }
 
-static void CreateSelectionCursorSubsprite(u8 whichSprite, u16 tileTag, u16 paletteTag)
+static void CreateSwitchMapCursorSubsprite(u8 whichSprite, u16 tileTag, u16 palTag)
 {
-    RealCreateSelectionCursorSubsprite(whichSprite, tileTag, paletteTag);
+    _CreateSwitchMapCursorSubsprite(whichSprite, tileTag, palTag);
 }
 
-static void RealCreateSelectionCursorSubsprite(u8 whichSprite, u16 tileTag, u16 paletteTag)
+static void _CreateSwitchMapCursorSubsprite(u8 whichSprite, u16 tileTag, u16 palTag)
 {
     u8 spriteId;
 
     struct SpriteSheet spriteSheet = {
-        .data = gUnknown_20399D8->selectionCursorSubspriteData[whichSprite].tiles,
+        .data = sSwitchMapMenu->cursorSubsprite[whichSprite].tiles,
         .size = 0x400,
         .tag = tileTag
     };
     struct SpritePalette spritePalette = {
-        .data = sSelectionCursorPals,
-        .tag = paletteTag
+        .data = sSwitchMapCursor_Pal,
+        .tag = palTag
     };
     struct SpriteTemplate template = {
         .tileTag = tileTag,
-        .paletteTag = paletteTag,
-        .oam = &sSelectionCursorOam,
-        .anims = sSelectionCursorAnims,
+        .paletteTag = palTag,
+        .oam = &sOamData_SwitchMapCursor,
+        .anims = sAnims_SwitchMapCursor,
         .images = NULL,
         .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCB_SelectionCursor
+        .callback = SpriteCB_SwitchMapCursor
     };
 
-    gUnknown_20399D8->selectionCursorSubspriteData[whichSprite].tileTag = tileTag;
-    gUnknown_20399D8->selectionCursorSubspriteData[whichSprite].paletteTag = paletteTag;
+    sSwitchMapMenu->cursorSubsprite[whichSprite].tileTag = tileTag;
+    sSwitchMapMenu->cursorSubsprite[whichSprite].palTag = palTag;
 
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
 
-    spriteId = CreateSprite(&template, gUnknown_20399D8->selectionCursorSubspriteData[whichSprite].xCoord, 8 * (gUnknown_20399D8->field_1CCE + 4 * gUnknown_20399D8->field_1CCA), 0);
-    gUnknown_20399D8->selectionCursorSubspriteData[whichSprite].sprite = &gSprites[spriteId];
+    spriteId = CreateSprite(&template, sSwitchMapMenu->cursorSubsprite[whichSprite].x, 8 * (sSwitchMapMenu->yOffset + 4 * sSwitchMapMenu->currentSelection), 0);
+    sSwitchMapMenu->cursorSubsprite[whichSprite].sprite = &gSprites[spriteId];
     gSprites[spriteId].invisible = FALSE;
 }
 
-static void DestroySelectionCursorSprites(void)
+static void FreeSwitchMapCursor(void)
 {
     u8 i;
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < NELEMS(sSwitchMapMenu->cursorSubsprite); i++)
     {
-        if (gUnknown_20399D8->selectionCursorSubspriteData[i].sprite != NULL)
+        if (sSwitchMapMenu->cursorSubsprite[i].sprite != NULL)
         {
-            DestroySprite(gUnknown_20399D8->selectionCursorSubspriteData[i].sprite);
-            FreeSpriteTilesByTag(gUnknown_20399D8->selectionCursorSubspriteData[i].tileTag);
-            FreeSpritePaletteByTag(gUnknown_20399D8->selectionCursorSubspriteData[i].paletteTag);
+            DestroySprite(sSwitchMapMenu->cursorSubsprite[i].sprite);
+            FreeSpriteTilesByTag(sSwitchMapMenu->cursorSubsprite[i].tileTag);
+            FreeSpritePaletteByTag(sSwitchMapMenu->cursorSubsprite[i].palTag);
         }
     }
 }
@@ -2324,167 +2342,171 @@ static const u8 *GetDungeonName(u16 mapsec)
     return gText_RegionMap_NoData;
 }
 
-static void RegionMapCreateDungeonMapPreview(u8 unused, u8 taskId, TaskFunc taskFunc)
+static void InitDungeonMapPreview(u8 unused, u8 taskId, TaskFunc taskFunc)
 {
     u8 mapsec;
-    sDungeonMapPreviewManager = AllocZeroed(sizeof(struct DungeonMapPreviewManagerStruct));
+    sDungeonMapPreview = AllocZeroed(sizeof(struct DungeonMapPreview));
     mapsec = GetDungeonMapsecUnderCursor();
     if (mapsec == MAPSEC_TANOBY_CHAMBERS)
         mapsec = MAPSEC_MONEAN_CHAMBER;
-    sDungeonMapPreviewManager->mapPreviewInfo = GetDungeonMapPreviewScreenInfo(mapsec);
-    if (sDungeonMapPreviewManager->mapPreviewInfo == NULL)
-        sDungeonMapPreviewManager->mapPreviewInfo = GetDungeonMapPreviewScreenInfo(MAPSEC_ROCK_TUNNEL);
-    sDungeonMapPreviewManager->mainState = 0;
-    sDungeonMapPreviewManager->field_3D4A = 0;
-    sDungeonMapPreviewManager->savedTask = taskFunc;
-    sDungeonMapPreviewManager->blendY = 0;
+    sDungeonMapPreview->mapPreviewInfo = GetDungeonMapPreviewScreenInfo(mapsec);
+    if (sDungeonMapPreview->mapPreviewInfo == NULL)
+        sDungeonMapPreview->mapPreviewInfo = GetDungeonMapPreviewScreenInfo(MAPSEC_ROCK_TUNNEL);
+    sDungeonMapPreview->mainState = 0;
+    sDungeonMapPreview->loadState = 0;
+    sDungeonMapPreview->savedTask = taskFunc;
+    sDungeonMapPreview->blendY = 0;
     SaveRegionMapGpuRegs(0);
     ResetGpuRegs();
-    sub_80C0CA0();
-    gTasks[taskId].func = Task_PrepDungeonMapPreviewAndFlavorText;
+    ClearMapsecNameText();
+    gTasks[taskId].func = Task_DungeonMapPreview;
 }
 
-static bool8 HandleLoadMapPreviewScreenGfx(void)
+static bool8 LoadMapPreviewGfx(void)
 {
-    switch (sDungeonMapPreviewManager->field_3D4A)
+    switch (sDungeonMapPreview->loadState)
     {
     case 0:
-        LZ77UnCompWram(sDungeonMapPreviewManager->mapPreviewInfo->tilesptr, sDungeonMapPreviewManager->tiles);
+        LZ77UnCompWram(sDungeonMapPreview->mapPreviewInfo->tilesptr, sDungeonMapPreview->tiles);
         break;
     case 1:
-        LZ77UnCompWram(sDungeonMapPreviewManager->mapPreviewInfo->tilemapptr, sDungeonMapPreviewManager->tilemap);
+        LZ77UnCompWram(sDungeonMapPreview->mapPreviewInfo->tilemapptr, sDungeonMapPreview->tilemap);
         break;
     case 2:
-        LoadBgTiles(2, sDungeonMapPreviewManager->tiles, 0x3840, 0x000);
+        LoadBgTiles(2, sDungeonMapPreview->tiles, 0x3840, 0x000);
         break;
     case 3:
-        LoadPalette(sDungeonMapPreviewManager->mapPreviewInfo->palptr, 0xD0, 0x60);
+        LoadPalette(sDungeonMapPreview->mapPreviewInfo->palptr, 0xD0, 0x60);
         break;
     default:
         return TRUE;
     }
-    sDungeonMapPreviewManager->field_3D4A++;
+    sDungeonMapPreview->loadState++;
     return FALSE;
 }
 
-static void Task_PrepDungeonMapPreviewAndFlavorText(u8 taskId)
+static void Task_DungeonMapPreview(u8 taskId)
 {
-    switch (sDungeonMapPreviewManager->mainState)
+    switch (sDungeonMapPreview->mainState)
     {
     case 0:
         NullVBlankHBlankCallbacks();
-        sDungeonMapPreviewManager->mainState++;
+        sDungeonMapPreview->mainState++;
         break;
     case 1:
-        if (HandleLoadMapPreviewScreenGfx() == TRUE)
-            sDungeonMapPreviewManager->mainState++;
+        if (LoadMapPreviewGfx() == TRUE)
+            sDungeonMapPreview->mainState++;
         break;
     case 2:
-        sub_80C1E94();
+        InitScreenForDungeonMapPreview();
         PrintTopBarTextRight(gText_RegionMap_AButtonCancel2);
-        sDungeonMapPreviewManager->mainState++;
+        sDungeonMapPreview->mainState++;
         break;
     case 3:
-        CopyMapPreviewTilemapToBgTilemapBuffer(2, sDungeonMapPreviewManager->tilemap);
+        CopyMapPreviewTilemapToBgTilemapBuffer(2, sDungeonMapPreview->tilemap);
         CopyBgTilemapBufferToVram(2);
-        sDungeonMapPreviewManager->mainState++;
+        sDungeonMapPreview->mainState++;
         break;
     case 4:
         ShowBg(2);
-        sDungeonMapPreviewManager->mainState++;
+        sDungeonMapPreview->mainState++;
         break;
     case 5:
         SetRegionMapVBlankCB();
-        sDungeonMapPreviewManager->mainState++;
+        sDungeonMapPreview->mainState++;
         break;
     case 6:
-        if (sub_80C1F80(FALSE) == TRUE)
-            sDungeonMapPreviewManager->mainState++;
+        if (UpdateDungeonMapPreview(FALSE) == TRUE)
+            sDungeonMapPreview->mainState++;
         break;
     case 7:
-        gTasks[taskId].func = Task_DrawDungeonMapPreviewAndFlavorText;
+        gTasks[taskId].func = Task_DrawDungeonMapPreviewFlavorText;
         break;
     case 8:
-        if (sub_80C1F80(TRUE) == TRUE)
+        if (UpdateDungeonMapPreview(TRUE) == TRUE)
         {
-            sDungeonMapPreviewManager->mainState++;
+            sDungeonMapPreview->mainState++;
         }
         break;
     case 9:
-        DestroyMapPreviewAssets(taskId);
-        sDungeonMapPreviewManager->mainState++;
+        FreeDungeonMapPreview(taskId);
+        sDungeonMapPreview->mainState++;
         break;
     }
 }
 
-static void Task_DrawDungeonMapPreviewAndFlavorText(u8 taskId)
+// Tints the dungeon preview image in the background and overlays the name and description of the dungeon
+static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
 {
-    switch (sDungeonMapPreviewManager->drawState)
+    switch (sDungeonMapPreview->drawState)
     {
     case 0:
-        sDungeonMapPreviewManager->field_3E0E = 0x0133;
-        sDungeonMapPreviewManager->field_3E10 = 0x0100;
-        sDungeonMapPreviewManager->field_3E12 = 0x00F0;
-        sDungeonMapPreviewManager->drawState++;
+        sDungeonMapPreview->red = 0x0133;
+        sDungeonMapPreview->green = 0x0100;
+        sDungeonMapPreview->blue = 0x00F0;
+        sDungeonMapPreview->drawState++;
         break;
     case 1:
-        if (sDungeonMapPreviewManager->timer++ > 40)
+        // Delay
+        if (sDungeonMapPreview->timer++ > 40)
         {
-            sDungeonMapPreviewManager->timer = 0;
-            sDungeonMapPreviewManager->drawState++;
+            sDungeonMapPreview->timer = 0;
+            sDungeonMapPreview->drawState++;
         }
         break;
     case 2:
-        FillWindowPixelBuffer(2, PIXEL_FILL(0));
-        CopyWindowToVram(2, 3);
-        PutWindowTilemap(2);
-        sDungeonMapPreviewManager->drawState++;
+        FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
+        CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+        PutWindowTilemap(WIN_MAP_PREVIEW);
+        sDungeonMapPreview->drawState++;
         break;
     case 3:
-        if (sDungeonMapPreviewManager->timer > 25)
+        // Draw text
+        if (sDungeonMapPreview->timer > 25)
         {
-            AddTextPrinterParameterized3(2, 2, 4, 0, sTextColor_Green, -1, GetDungeonName(GetDungeonMapsecUnderCursor()));
-            AddTextPrinterParameterized3(2, 2, 2, 14, sTextColor_White, -1, GetDungeonFlavorText(GetDungeonMapsecUnderCursor()));
-            CopyWindowToVram(2, 3);
-            sDungeonMapPreviewManager->drawState++;
+            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 4, 0, sTextColor_Green, -1, GetDungeonName(GetDungeonMapsecUnderCursor()));
+            AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 2, 14, sTextColor_White, -1, GetDungeonFlavorText(GetDungeonMapsecUnderCursor()));
+            CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+            sDungeonMapPreview->drawState++;
         }
-        else if (sDungeonMapPreviewManager->timer > 20)
+        // Tint image
+        else if (sDungeonMapPreview->timer > 20)
         {
-            sDungeonMapPreviewManager->field_3E0E -= 6;
-            sDungeonMapPreviewManager->field_3E10 -= 5;
-            sDungeonMapPreviewManager->field_3E12 -= 5;
-            CpuCopy16(sDungeonMapPreviewManager->mapPreviewInfo->palptr, sDungeonMapPreviewManager->field_3D4E, 0x60);
-            TintPalette_CustomTone(sDungeonMapPreviewManager->field_3D4E, 0x30, sDungeonMapPreviewManager->field_3E0E, sDungeonMapPreviewManager->field_3E10, sDungeonMapPreviewManager->field_3E12);
-            LoadPalette(sDungeonMapPreviewManager->field_3D4E, 0xD0, 0x60);
+            sDungeonMapPreview->red -= 6;
+            sDungeonMapPreview->green -= 5;
+            sDungeonMapPreview->blue -= 5;
+            CpuCopy16(sDungeonMapPreview->mapPreviewInfo->palptr, sDungeonMapPreview->palette, 0x60);
+            TintPalette_CustomTone(sDungeonMapPreview->palette, 48, sDungeonMapPreview->red, sDungeonMapPreview->green, sDungeonMapPreview->blue);
+            LoadPalette(sDungeonMapPreview->palette, 0xD0, 0x60);
         }
-        sDungeonMapPreviewManager->timer++;
+        sDungeonMapPreview->timer++;
         break;
     case 4:
         if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
         {
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
-            CopyWindowToVram(2, 3);
-            sDungeonMapPreviewManager->mainState++;
-            sDungeonMapPreviewManager->drawState++;
+            FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
+            CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+            sDungeonMapPreview->mainState++;
+            sDungeonMapPreview->drawState++;
         }
         break;
     default:
-        gTasks[taskId].func = Task_PrepDungeonMapPreviewAndFlavorText;
+        gTasks[taskId].func = Task_DungeonMapPreview;
         break;
     }
 }
 
-static void DestroyMapPreviewAssets(u8 taskId)
+static void FreeDungeonMapPreview(u8 taskId)
 {
-    gTasks[taskId].func = sDungeonMapPreviewManager->savedTask;
+    gTasks[taskId].func = sDungeonMapPreview->savedTask;
     HideBg(2);
     SetRegionMapGpuRegs(0);
-    DisplayCurrentMapsecName();
+    DisplayCurrentMapName();
     DisplayCurrentDungeonName();
-    sub_80C0AB8();
-    sub_80C0B9C();
+    UpdateMapsecNameBox();
+    DrawDungeonNameBox();
     PrintTopBarTextRight(gText_RegionMap_AButtonGuide);
-    FREE_IF_NOT_NULL(sDungeonMapPreviewManager);
+    FREE_IF_NOT_NULL(sDungeonMapPreview);
 }
 
 static void CopyMapPreviewTilemapToBgTilemapBuffer(u8 bgId, const u16 * tilemap)
@@ -2492,43 +2514,43 @@ static void CopyMapPreviewTilemapToBgTilemapBuffer(u8 bgId, const u16 * tilemap)
     CopyToBgTilemapBufferRect(2, tilemap, 0, 0, 32, 20);
 }
 
-static void sub_80C1E94(void)
+static void InitScreenForDungeonMapPreview(void)
 {
     u16 x;
     u16 y;
     ResetGpuRegs();
     SetBldCnt(0, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ, BLDCNT_EFFECT_DARKEN);
-    SetBldY(sDungeonMapPreviewManager->blendY);
+    SetBldY(sDungeonMapPreview->blendY);
     SetWinIn(0, 13);
     SetWinOut(WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
     SetDispCnt(1, FALSE);
     x = GetMapCursorX();
     y = GetMapCursorY();
-    sDungeonMapPreviewManager->field_3E16 = 8 * x + 32;
-    sDungeonMapPreviewManager->field_3E18 = 8 * y + 24;
-    sDungeonMapPreviewManager->field_3E1A = sDungeonMapPreviewManager->field_3E16 + 8;
-    sDungeonMapPreviewManager->field_3E1C = sDungeonMapPreviewManager->field_3E18 + 8;
-    sDungeonMapPreviewManager->field_3E1E = (0x10 - sDungeonMapPreviewManager->field_3E16) / 8;
-    sDungeonMapPreviewManager->field_3E20 = (0x20 - sDungeonMapPreviewManager->field_3E18) / 8;
-    sDungeonMapPreviewManager->field_3E22 = (0xE0 - sDungeonMapPreviewManager->field_3E1A) / 8;
-    sDungeonMapPreviewManager->field_3E24 = (0x88 - sDungeonMapPreviewManager->field_3E1C) / 8;
+    sDungeonMapPreview->left = 8 * x + 32;
+    sDungeonMapPreview->top = 8 * y + 24;
+    sDungeonMapPreview->right = sDungeonMapPreview->left + 8;
+    sDungeonMapPreview->bottom = sDungeonMapPreview->top + 8;
+    sDungeonMapPreview->leftIncrement = (16 - sDungeonMapPreview->left) / 8;
+    sDungeonMapPreview->topIncrement = (32 - sDungeonMapPreview->top) / 8;
+    sDungeonMapPreview->rightIncrement = (224 - sDungeonMapPreview->right) / 8;
+    sDungeonMapPreview->bottomIncrement = (136 - sDungeonMapPreview->bottom) / 8;
 }
 
-static bool8 sub_80C1F80(bool8 a0)
+static bool8 UpdateDungeonMapPreview(bool8 a0)
 {
     struct GpuWindowParams data;
 
     if (!a0)
     {
-        if (sDungeonMapPreviewManager->field_3D4B < 8)
+        if (sDungeonMapPreview->updateCounter < 8)
         {
-            sDungeonMapPreviewManager->field_3E16 += sDungeonMapPreviewManager->field_3E1E;
-            sDungeonMapPreviewManager->field_3E18 += sDungeonMapPreviewManager->field_3E20;
-            sDungeonMapPreviewManager->field_3E1A += sDungeonMapPreviewManager->field_3E22;
-            sDungeonMapPreviewManager->field_3E1C += sDungeonMapPreviewManager->field_3E24;
-            sDungeonMapPreviewManager->field_3D4B++;
-            if (sDungeonMapPreviewManager->blendY < (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
-                sDungeonMapPreviewManager->blendY++;
+            sDungeonMapPreview->left += sDungeonMapPreview->leftIncrement;
+            sDungeonMapPreview->top += sDungeonMapPreview->topIncrement;
+            sDungeonMapPreview->right += sDungeonMapPreview->rightIncrement;
+            sDungeonMapPreview->bottom += sDungeonMapPreview->bottomIncrement;
+            sDungeonMapPreview->updateCounter++;
+            if (sDungeonMapPreview->blendY < (BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2))
+                sDungeonMapPreview->blendY++;
         }
         else
         {
@@ -2537,27 +2559,27 @@ static bool8 sub_80C1F80(bool8 a0)
     }
     else
     {
-        if (sDungeonMapPreviewManager->field_3D4B == 0)
+        if (sDungeonMapPreview->updateCounter == 0)
         {
             return TRUE;
         }
         else
         {
-            sDungeonMapPreviewManager->field_3E16 -= sDungeonMapPreviewManager->field_3E1E;
-            sDungeonMapPreviewManager->field_3E18 -= sDungeonMapPreviewManager->field_3E20;
-            sDungeonMapPreviewManager->field_3E1A -= sDungeonMapPreviewManager->field_3E22;
-            sDungeonMapPreviewManager->field_3E1C -= sDungeonMapPreviewManager->field_3E24;
-            sDungeonMapPreviewManager->field_3D4B--;
-            if (sDungeonMapPreviewManager->blendY > 0)
-                sDungeonMapPreviewManager->blendY--;
+            sDungeonMapPreview->left -= sDungeonMapPreview->leftIncrement;
+            sDungeonMapPreview->top -= sDungeonMapPreview->topIncrement;
+            sDungeonMapPreview->right -= sDungeonMapPreview->rightIncrement;
+            sDungeonMapPreview->bottom -= sDungeonMapPreview->bottomIncrement;
+            sDungeonMapPreview->updateCounter--;
+            if (sDungeonMapPreview->blendY > 0)
+                sDungeonMapPreview->blendY--;
         }
     }
-    data.v0 = sDungeonMapPreviewManager->field_3E16;
-    data.v2 = sDungeonMapPreviewManager->field_3E18;
-    data.v4 = sDungeonMapPreviewManager->field_3E1A;
-    data.v6 = sDungeonMapPreviewManager->field_3E1C;
+    data.left = sDungeonMapPreview->left;
+    data.top = sDungeonMapPreview->top;
+    data.right = sDungeonMapPreview->right;
+    data.bottom = sDungeonMapPreview->bottom;
     SetGpuWindowDims(1, &data);
-    SetBldY(sDungeonMapPreviewManager->blendY);
+    SetBldY(sDungeonMapPreview->blendY);
     return FALSE;
 }
 
@@ -2605,12 +2627,12 @@ static void InitMapOpenAnim(u8 taskId, TaskFunc taskFunc)
     for (i = 0; i < NELEMS(sMapOpenCloseAnim->mapEdges); i++)
     {
         sMapOpenCloseAnim->mapEdges[i] = AllocZeroed(sizeof(struct MapEdge));
-        sMapOpenCloseAnim->mapEdges[i]->x = 32 * (i / 3) + 0x68;
-        sMapOpenCloseAnim->mapEdges[i]->y = 64 * (i % 3) + 0x28;
+        sMapOpenCloseAnim->mapEdges[i]->x = 32 * (i / 3) + 104;
+        sMapOpenCloseAnim->mapEdges[i]->y = 64 * (i % 3) + 40;
     }
     SaveRegionMapGpuRegs(0);
     ResetGpuRegs();
-    sub_80C24BC();
+    InitScreenForMapOpenAnim();
     SetBg0andBg3Hidden(TRUE);
     sMapOpenCloseAnim->exitTask = taskFunc;
     gTasks[taskId].func = Task_MapOpenAnim;
@@ -2676,13 +2698,13 @@ static bool8 LoadMapEdgeGfx(void)
     return FALSE;
 }
 
-static void sub_80C24BC(void)
+static void InitScreenForMapOpenAnim(void)
 {
     struct GpuWindowParams data;
-    data.v0 = sMapOpenCloseAnim->mapEdges[0]->x + 8;
-    data.v2 = 0x10;
-    data.v4 = sMapOpenCloseAnim->mapEdges[3]->x - 8;
-    data.v6 = 0xA0;
+    data.left = sMapOpenCloseAnim->mapEdges[0]->x + 8;
+    data.top = 16;
+    data.right = sMapOpenCloseAnim->mapEdges[3]->x - 8;
+    data.bottom = 160;
     SetBldCnt(0, BLDCNT_TGT1_BG1, BLDCNT_EFFECT_NONE);
     SetWinIn(18, 0);
     SetWinOut(WINOUT_WIN01_OBJ);
@@ -2785,8 +2807,8 @@ static void Task_MapOpenAnim(u8 taskId)
         sMapOpenCloseAnim->blendY = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3);
         sub_80C253C();
         SetBg0andBg3Hidden(FALSE);
-        SetFlyIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
-        SetDungeonIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
+        SetFlyIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
+        SetDungeonIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
         sMapOpenCloseAnim->openState++;
         break;
     case 9:
@@ -2799,11 +2821,11 @@ static void Task_MapOpenAnim(u8 taskId)
         sMapOpenCloseAnim->openState++;
         break;
     case 10:
-        LoadPalette(&gUnknown_83EF23C[15], 0x00, 2);
-        LoadPalette(&gUnknown_83EF23C[15], 16, 2);
-        LoadPalette(&gUnknown_83EF23C[15], 0x20, 2);
-        LoadPalette(&gUnknown_83EF23C[15], 0x30, 2);
-        LoadPalette(&gUnknown_83EF23C[15], 0x40, 2);
+        LoadPalette(&sTopBar_Pal[15], 0x00, 2);
+        LoadPalette(&sTopBar_Pal[15], 0x10, 2);
+        LoadPalette(&sTopBar_Pal[15], 0x20, 2);
+        LoadPalette(&sTopBar_Pal[15], 0x30, 2);
+        LoadPalette(&sTopBar_Pal[15], 0x40, 2);
         sMapOpenCloseAnim->openState++;
         break;
     case 11:
@@ -2901,20 +2923,20 @@ static bool8 MoveMapEdgesOutward(void)
 static void sub_80C2B48(void)
 {
     struct GpuWindowParams data;
-    data.v0 = sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x;
-    data.v2 = 0x10;
-    data.v4 = sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x;
-    data.v6 = 0xA0;
+    data.left = sMapOpenCloseAnim->mapEdges[0]->sprite->pos1.x;
+    data.top = 16;
+    data.right = sMapOpenCloseAnim->mapEdges[3]->sprite->pos1.x;
+    data.bottom = 160;
     SetGpuWindowDims(0, &data);
 }
 
 static void sub_80C2B9C(void)
 {
     struct GpuWindowParams data;
-    data.v0 = sMapOpenCloseAnim->mapEdges[0]->x + 16;
-    data.v2 = 0x10;
-    data.v4 = sMapOpenCloseAnim->mapEdges[3]->x - 16;
-    data.v6 = 0xA0;
+    data.left = sMapOpenCloseAnim->mapEdges[0]->x + 16;
+    data.top = 16;
+    data.right = sMapOpenCloseAnim->mapEdges[3]->x - 16;
+    data.bottom = 160;
     SetBldCnt(0, BLDCNT_TGT1_BG1, BLDCNT_EFFECT_NONE);
     SetWinIn(18, 0);
     SetWinOut(WINOUT_WIN01_OBJ);
@@ -2943,8 +2965,8 @@ static void Task_MapCloseAnim(u8 taskId)
     {
     case 0:
         ClearOrDrawTopBar(TRUE);
-        CopyWindowToVram(3, 3);
-        CopyWindowToVram(4, 3);
+        CopyWindowToVram(WIN_TOPBAR_LEFT, 3);
+        CopyWindowToVram(WIN_TOPBAR_RIGHT, 3);
         sMapOpenCloseAnim->closeState++;
         break;
     case 1:
@@ -2952,7 +2974,7 @@ static void Task_MapCloseAnim(u8 taskId)
         sMapOpenCloseAnim->closeState++;
         break;
     case 2:
-        LoadPalette(gUnknown_83EF2DC, 0x00, 0xA0);
+        LoadPalette(sRegionMap_Pal, 0x00, 0xA0);
         sMapOpenCloseAnim->closeState++;
         break;
     case 3:
@@ -3080,7 +3102,7 @@ static void CreateMapCursor(u16 tileTag, u16 palTag)
     sMapCursor->spriteY = 8 * sMapCursor->y + 36;
     sMapCursor->inputHandler = HandleRegionMapInput;
     sMapCursor->selectedMapsecType = GetMapsecType(sMapCursor->selectedMapsec);
-    sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetWhichRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
+    sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetSelectedRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
     CreateMapCursorSprite();
 }
 
@@ -3194,9 +3216,9 @@ static u8 HandleRegionMapInput(void)
         if (JOY_REPT(START_BUTTON))
         {
             SnapToIconOrButton();
-            sMapCursor->selectedMapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
+            sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
             sMapCursor->selectedMapsecType = GetMapsecType(sMapCursor->selectedMapsec);
-            sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetWhichRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
+            sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetSelectedRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
             return MAP_INPUT_MOVE_END;
         }
         else if (JOY_NEW(SELECT_BUTTON) && sRegionMap->savedCallback == CB2_ReturnToField)
@@ -3228,9 +3250,9 @@ static u8 MoveMapCursor(void)
         sMapCursor->y++;
     if (sMapCursor->verticalMove < 0)
         sMapCursor->y--;
-    sMapCursor->selectedMapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
+    sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
     sMapCursor->selectedMapsecType = GetMapsecType(sMapCursor->selectedMapsec);
-    sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetWhichRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
+    sMapCursor->selectedDungeonType = GetDungeonMapsecType(GetSelectedMapSection(GetSelectedRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x));
     sMapCursor->inputHandler = HandleRegionMapInput;
     return MAP_INPUT_MOVE_END;
 }
@@ -3248,7 +3270,7 @@ static void SnapToIconOrButton(void)
     {
         sMapCursor->snapId++;
         sMapCursor->snapId %= 3;
-        if (sMapCursor->snapId == 0 && GetWhichRegionMap() != sub_80C0E34())
+        if (sMapCursor->snapId == 0 && GetSelectedRegionMap() != GetRegionMapPlayerIsOn())
         {
             sMapCursor->snapId++;
         }
@@ -3288,7 +3310,7 @@ static void SnapToIconOrButton(void)
     }
     sMapCursor->sprite->pos1.x = 8 * sMapCursor->x + 36;
     sMapCursor->sprite->pos1.y = 8 * sMapCursor->y + 36;
-    sMapCursor->selectedMapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
+    sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
 }
 
 static u16 GetMapCursorX(void)
@@ -3310,7 +3332,7 @@ static u16 GetMapsecUnderCursor(void)
      || sMapCursor->x >= MAP_WIDTH)
         return MAPSEC_NONE;
 
-    mapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
+    mapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
     if ((mapsec == MAPSEC_NAVEL_ROCK || mapsec == MAPSEC_BIRTH_ISLAND) && !FlagGet(FLAG_WORLD_MAP_NAVEL_ROCK_EXTERIOR))
         mapsec = MAPSEC_NONE;
     return mapsec;
@@ -3325,7 +3347,7 @@ static u16 GetDungeonMapsecUnderCursor(void)
      || sMapCursor->x >= MAP_WIDTH)
         return MAPSEC_NONE;
 
-    mapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x);
+    mapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_DUNGEON, sMapCursor->y, sMapCursor->x);
     if (mapsec == MAPSEC_CERULEAN_CAVE && !FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
         mapsec = MAPSEC_NONE;
     return mapsec;
@@ -3482,7 +3504,7 @@ static void GetPlayerPositionOnRegionMap(void)
     u16 height;
     u16 x;
     u16 y;
-    u32 r6;
+
     const struct MapHeader * mapHeader;
     struct WarpData * warp;
 
@@ -3730,7 +3752,7 @@ static void GetPlayerPositionOnRegionMap_HandleOverrides(void)
         GetPlayerPositionOnRegionMap();
         break;
     }
-    sMapCursor->selectedMapsec = GetSelectedMapSection(GetWhichRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
+    sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);
 }
 
 static u8 GetSelectedMapSection(u8 whichMap, u8 layer, s16 y, s16 x)
@@ -3903,7 +3925,7 @@ static void CreateDungeonIconSprite(u8 whichMap, u8 numIcons, u16 x, u16 y, u8 t
 {
     u8 spriteId;
     u8 mapsec;
-    s16 r7 = 0;
+    s16 offset = 0;
     struct SpriteSheet spriteSheet = {
         .data = sMapIcons->dungeonIconTiles,
         .size = 0x40,
@@ -3926,9 +3948,12 @@ static void CreateDungeonIconSprite(u8 whichMap, u8 numIcons, u16 x, u16 y, u8 t
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
     mapsec = GetSelectedMapSection(whichMap, LAYER_MAP, y, x);
+
+    // If mapsec has a town, push dungeon icon to bottom right corner
     if ((GetMapsecType(mapsec) == MAPSECTYPE_VISITED || GetMapsecType(mapsec) == MAPSECTYPE_NOT_VISITED) && mapsec != MAPSEC_ROUTE_10_POKECENTER)
-        r7 = 2;
-    spriteId = CreateSprite(&template, 8 * x + 36 + r7, 8 * y + 36 + r7, 3);
+        offset = 2;
+
+    spriteId = CreateSprite(&template, 8 * x + 36 + offset, 8 * y + 36 + offset, 3);
     sMapIcons->dungeonIcons[numIcons].sprite = &gSprites[spriteId];
     gSprites[spriteId].invisible = TRUE;
     sMapIcons->dungeonIcons[numIcons].region = whichMap;
@@ -4148,8 +4173,8 @@ static void SetDispCnt(u8 idx, bool8 clear)
 
 static void SetGpuWindowDims(u8 winIdx, const struct GpuWindowParams *data)
 {
-    SetGpuReg(sWinRegs[winIdx][0], (data->v2 << 8) | data->v6);
-    SetGpuReg(sWinRegs[winIdx][1], (data->v0 << 8) | data->v4);
+    SetGpuReg(sWinRegs[winIdx][0], WIN_RANGE(data->top, data->bottom));
+    SetGpuReg(sWinRegs[winIdx][1], WIN_RANGE(data->left, data->right));
 }
 
 static void FreeAndResetGpuRegs(void)
@@ -4217,34 +4242,34 @@ u8 *sub_80C4E08(u8 *dest, u16 mapsec)
 static void PrintTopBarTextLeft(const u8 *str)
 {
     if (sRegionMap->permissions[MAPPERM_HAS_OPEN_ANIM] == TRUE)
-        FillWindowPixelBuffer(3, PIXEL_FILL(0));
+        FillWindowPixelBuffer(WIN_TOPBAR_LEFT, PIXEL_FILL(0));
     else
-        FillWindowPixelBuffer(3, PIXEL_FILL(15));
-    AddTextPrinterParameterized3(3, 0, 0, 0, sTextColors, 0, str);
-    CopyWindowToVram(3, 2);
+        FillWindowPixelBuffer(WIN_TOPBAR_LEFT, PIXEL_FILL(15));
+    AddTextPrinterParameterized3(WIN_TOPBAR_LEFT, 0, 0, 0, sTextColors, 0, str);
+    CopyWindowToVram(WIN_TOPBAR_LEFT, 2);
 }
 
 static void PrintTopBarTextRight(const u8 *str)
 {
     if (sRegionMap->permissions[MAPPERM_HAS_OPEN_ANIM] == TRUE)
-        FillWindowPixelBuffer(4, PIXEL_FILL(0));
+        FillWindowPixelBuffer(WIN_TOPBAR_RIGHT, PIXEL_FILL(0));
     else
-        FillWindowPixelBuffer(4, PIXEL_FILL(15));
-    AddTextPrinterParameterized3(4, 0, 0, 0, sTextColors, 0, str);
-    CopyWindowToVram(4, 3);
+        FillWindowPixelBuffer(WIN_TOPBAR_RIGHT, PIXEL_FILL(15));
+    AddTextPrinterParameterized3(WIN_TOPBAR_RIGHT, 0, 0, 0, sTextColors, 0, str);
+    CopyWindowToVram(WIN_TOPBAR_RIGHT, 3);
 }
 
 static void ClearOrDrawTopBar(bool8 clear)
 {
     if (!clear)
     {
-        PutWindowTilemap(3);
-        PutWindowTilemap(4);
+        PutWindowTilemap(WIN_TOPBAR_LEFT);
+        PutWindowTilemap(WIN_TOPBAR_RIGHT);
     }
     else
     {
-        ClearWindowTilemap(3);
-        ClearWindowTilemap(4);
+        ClearWindowTilemap(WIN_TOPBAR_LEFT);
+        ClearWindowTilemap(WIN_TOPBAR_RIGHT);
     }
 }
 
@@ -4260,7 +4285,7 @@ static void Task_FlyMap(u8 taskId)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-        InitMapIcons(GetWhichRegionMap(), taskId, GetMainMapTask());
+        InitMapIcons(GetSelectedRegionMap(), taskId, GetMainMapTask());
         CreateMapCursor(0, 0);
         CreatePlayerIcon(1, 1);
         SetMapCursorInvisibility(FALSE);
@@ -4278,8 +4303,8 @@ static void Task_FlyMap(u8 taskId)
             ShowBg(3);
             ShowBg(1);
             PrintTopBarTextLeft(gText_RegionMap_DPadMove);
-            SetFlyIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
-            SetDungeonIconInvisibility(GetWhichRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
+            SetFlyIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->flyIcons), FALSE);
+            SetDungeonIconInvisibility(GetSelectedRegionMap(), NELEMS(sMapIcons->dungeonIcons), FALSE);
         }
         sFlyMap->state++;
         break;
@@ -4291,10 +4316,10 @@ static void Task_FlyMap(u8 taskId)
     case 3:
         if (!gPaletteFade.active)
         {
-            DisplayCurrentMapsecName();
-            PutWindowTilemap(0);
+            DisplayCurrentMapName();
+            PutWindowTilemap(WIN_MAP_NAME);
             DisplayCurrentDungeonName();
-            PutWindowTilemap(1);
+            PutWindowTilemap(WIN_DUNGEON_NAME);
             sFlyMap->state++;
         }
         break;
@@ -4313,9 +4338,9 @@ static void Task_FlyMap(u8 taskId)
             else
                 PlaySEForSelectedMapsec();
             ResetCursorSnap();
-            DisplayCurrentMapsecName();
+            DisplayCurrentMapName();
             DisplayCurrentDungeonName();
-            sub_80C0B9C();
+            DrawDungeonNameBox();
             if (GetMapCursorX() == CANCEL_BUTTON_X && GetMapCursorY() == CANCEL_BUTTON_Y)
             {
                 PlaySE(SE_W255);
@@ -4349,7 +4374,7 @@ static void Task_FlyMap(u8 taskId)
             }
             break;
         case MAP_INPUT_SWITCH:
-            sub_80C0E70(GetWhichRegionMap(), taskId, SaveMainMapTask);
+            InitSwitchMapMenu(GetSelectedRegionMap(), taskId, SaveMainMapTask);
             break;
         }
         break;

@@ -29,12 +29,9 @@ struct IntroSequenceData
 {
     IntroCallback callback;
     u8 state;
-    u8 field_0005;
-    u8 field_0006;
-    u16 field_0008;
-    u16 field_000A;
-    u8 filler_000C[6];
-    u16 timer;
+    u8 taskId;
+    bool8 gengarAttackLanded;
+    u16 data[6];
     struct Sprite * gameFreakLogoArtSprite;
     struct Sprite * nidorinoAnimSprite;
     struct Sprite * gengarStaticSprite;
@@ -42,8 +39,8 @@ struct IntroSequenceData
     struct Sprite * grassSprite;
     struct Sprite * gengarBackSpriteArray[4];
     u8 filler_0038[0x4];
-    u8 field_003C[0x400];
-    u8 field_043C[0x400];
+    u8 gamefreakLogoArtSpriteTiles[0x400];
+    u8 gamefreakTextBitmap[0x400];
     u8 filler_083C[0x2080];
 }; // size: 0x28BC
 
@@ -67,11 +64,6 @@ static EWRAM_DATA u16 gUnknown_203AB1E = 0;
 static EWRAM_DATA u16 gUnknown_203AB20 = 0;
 static EWRAM_DATA u16 gUnknown_203AB22 = 0;
 static EWRAM_DATA u16 gUnknown_203AB24 = 0;
-static EWRAM_DATA u16 gUnknown_203AB26 = 0;
-static EWRAM_DATA u32 gUnknown_203AB28 = 0;
-static EWRAM_DATA s16 gUnknown_203AB2C = 0;
-static EWRAM_DATA u16 gUnknown_203AB2E = 0;
-static EWRAM_DATA u32 gUnknown_203AB30 = 0;
 
 static void CB2_SetUpIntro(void);
 static void CB2_Intro(void);
@@ -146,11 +138,11 @@ extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 static const u16 sCopyrightGraphicsPal[] = INCBIN_U16("graphics/intro/unk_8402260.gbapal");
 static const u8 sCopyrightGraphicsTiles[] = INCBIN_U8("graphics/intro/unk_8402280.4bpp.lz");
 static const u8 sCopyrightGraphicsMap[] = INCBIN_U8("graphics/intro/unk_84024E4.bin.lz");
-static const u16 gUnknown_8402630[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
-static const u8 gUnknown_8402650[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
-static const u8 gUnknown_8402668[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
+static const u16 sBg3Pal_GameFreakPresents[] = INCBIN_U16("graphics/intro/unk_8402630.gbapal");
+static const u8 sBg3Tiles_GameFreakPresents[] = INCBIN_U8("graphics/intro/unk_8402650.4bpp.lz");
+static const u8 sBg3Map_GameFreakPresents[] = INCBIN_U8("graphics/intro/unk_8402668.bin.lz");
 static const u16 sSpritePals_GameFreakPresents[] = INCBIN_U16("graphics/intro/unk_840270C.gbapal");
-static const u8 gUnknown_840272C[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
+static const u8 sBlit_GameFreakText[] = INCBIN_U8("graphics/intro/unk_840272C.4bpp.lz");
 static const u32 sSpriteTiles_GameFreakLogoArt[] = INCBIN_U32("graphics/intro/unk_84028F8.4bpp.lz");
 static const u16 sSpritePals_LargeStar[] = INCBIN_U16("graphics/intro/unk_8402A64.gbapal");
 static const u32 sSpriteTiles_LargeStar[] = INCBIN_U32("graphics/intro/unk_8402A64.4bpp.lz");
@@ -158,25 +150,25 @@ static const u16 sSpritePals_Sparkles[] = INCBIN_U16("graphics/intro/unk_8402ADC
 static const u32 sSpriteTiles_TrailingSparkles[] = INCBIN_U32("graphics/intro/unk_8402ADC.4bpp.lz");
 static const u32 sSpriteTiles_RevealGameFreakTextSparkles[] = INCBIN_U32("graphics/intro/unk_8402B2C.4bpp.lz");
 static const u32 sSpriteTiles_PresentsText[] = INCBIN_U32("graphics/intro/unk_8402CD4.4bpp.lz");
-static const u16 gUnknown_8402D34[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
+static const u16 sBg0Pal_FightScene1[] = INCBIN_U16("graphics/intro/unk_8402D34.gbapal");
 static const u8 sBg0Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_8402D54.4bpp.lz");
 static const u8 sBg0Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8403FE8.bin.lz");
-static const u16 gUnknown_84048CC[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
+static const u16 sBg1Pal_FightScene1[] = INCBIN_U16("graphics/intro/unk_84048CC.gbapal");
 static const u8 sBg1Tiles_FightScene1[] = INCBIN_U8("graphics/intro/unk_84048EC.4bpp.lz");
 static const u8 sBg1Map_FightScene1[] = INCBIN_U8("graphics/intro/unk_8404F7C.bin.lz");
-static const u16 gUnknown_84053B4[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
+static const u16 sBg3Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_84053B4.gbapal");
 static const u8 sBg3Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405414.4bpp.lz");
 static const u8 sBg3Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405890.bin.lz");
-static const u16 gUnknown_8405B08[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
+static const u16 sBg0Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_8405B08.gbapal");
 static const u8 sBg0Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405B28.4bpp.lz");
 static const u8 sBg0Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405CDC.bin.lz");
 static const u16 sSpritePals_Gengar[] = INCBIN_U16("graphics/intro/unk_8405DA4.gbapal");
 static const u8 sBg2Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8405DC4.4bpp.lz");
 static const u8 sBg2Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_840644C.bin.lz");
-static const u16 gUnknown_8406634[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
+static const u16 sBg1Pal_FightScene2[] = INCBIN_U16("graphics/intro/unk_8406634.gbapal");
 static const u8 sBg1Tiles_FightScene2[] = INCBIN_U8("graphics/intro/unk_8406654.4bpp.lz");
 static const u8 sBg1Map_FightScene2[] = INCBIN_U8("graphics/intro/unk_84071D0.bin.lz");
-static const u16 gUnknown_8407430[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
+static const u16 sBg1Pal_FightScene3[] = INCBIN_U16("graphics/intro/unk_8407430.gbapal");
 static const u8 sBg1Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407470.4bpp.lz");
 static const u8 sBg1Map_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407A50.bin.lz");
 static const u8 sBg0Tiles_FightScene3[] = INCBIN_U8("graphics/intro/unk_8407B9C.4bpp.lz");
@@ -220,7 +212,7 @@ static const struct WindowTemplate sWindowTemplate[] = {
 	DUMMY_WIN_TEMPLATE
 };
 
-static const u8 gUnknown_840BBB8[][2] = {
+static const u8 sGengarBackSpritePos2UpdateMods[][2] = {
 	{0x3f, 0x3f},
 	{0x00, 0x3f},
 	{0x3f, 0x00},
@@ -620,9 +612,9 @@ static void CB2_SetUpIntro(void)
         InitBgsFromTemplates(0, sBgTemplates_GameFreakScene, NELEMS(sBgTemplates_GameFreakScene));
         break;
     case 1:
-        LoadPalette(gUnknown_8402630, 0x00, 0x20);
-        DecompressAndCopyTileDataToVram(3, gUnknown_8402650, 0, 0, 0);
-        DecompressAndCopyTileDataToVram(3, gUnknown_8402668, 0, 0, 1);
+        LoadPalette(sBg3Pal_GameFreakPresents, 0x00, 0x20);
+        DecompressAndCopyTileDataToVram(3, sBg3Tiles_GameFreakPresents, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(3, sBg3Map_GameFreakPresents, 0, 0, 1);
         LoadPalette(sSpritePals_GameFreakPresents, 0xD0, 0x20);
         break;
     case 2:
@@ -674,8 +666,8 @@ static void StartIntroSequence(void)
 {
     struct IntroSequenceData * ptr = Alloc(sizeof(struct IntroSequenceData));
     SetIntroCB(ptr, IntroCB_Init);
-    ptr->field_0005 = CreateTask(Task_CallIntroCallback, 3);
-    SetWordTaskArg(ptr->field_0005, 0, (uintptr_t)ptr);
+    ptr->taskId = CreateTask(Task_CallIntroCallback, 3);
+    SetWordTaskArg(ptr->taskId, 0, (uintptr_t)ptr);
 }
 
 static void SetIntroCB(struct IntroSequenceData * ptr, IntroCallback cb)
@@ -698,11 +690,11 @@ static void IntroCB_Init(struct IntroSequenceData * this)
     {
     case 0:
         InitWindows(sWindowTemplate);
-        LZ77UnCompWram(gUnknown_840272C, this->field_043C);
-        LZ77UnCompWram(sSpriteTiles_GameFreakLogoArt, this->field_003C);
+        LZ77UnCompWram(sBlit_GameFreakText, this->gamefreakTextBitmap);
+        LZ77UnCompWram(sSpriteTiles_GameFreakLogoArt, this->gamefreakLogoArtSpriteTiles);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
         FillWindowPixelBuffer(0, 0x00);
-        BlitBitmapToWindow(0, this->field_043C, 0, 40, 144, 16);
+        BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);
         this->state++;
@@ -724,7 +716,7 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
         SetGpuReg(REG_OFFSET_WINOUT, 0x0000);
         SetGpuReg(REG_OFFSET_WIN1H, 0x00F0);
         SetGpuReg(REG_OFFSET_WIN1V, 0x0000);
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 1:
@@ -733,11 +725,11 @@ static void IntroCB_OpenWin1ToTheaterDimensions(struct IntroSequenceData * this)
         this->state++;
         break;
     case 2:
-        this->timer += 8;
-        if (this->timer >= 0x30)
-            this->timer = 0x30;
-        SetGpuReg(REG_OFFSET_WIN1V, ((0x50 - this->timer) << 8) | (0x50 + this->timer));
-        if (this->timer == 0x30)
+        this->data[5] += 8;
+        if (this->data[5] >= 0x30)
+            this->data[5] = 0x30;
+        SetGpuReg(REG_OFFSET_WIN1V, ((0x50 - this->data[5]) << 8) | (0x50 + this->data[5]));
+        if (this->data[5] == 0x30)
             SetIntroCB(this, IntroCB_GameFreakStar);
         break;
     }
@@ -750,21 +742,21 @@ static void IntroCB_GameFreakStar(struct IntroSequenceData * this)
     case 0:
         PlaySE(MUS_TITLEROG);
         GameFreakScene_LoadGfxCreateStar();
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 1:
-        this->timer++;
-        if (this->timer == 30)
+        this->data[5]++;
+        if (this->data[5] == 30)
         {
             GameFreakScene_StartTrailingSparkleSpawner();
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 2:
-        this->timer++;
-        if (this->timer == 90)
+        this->data[5]++;
+        if (this->data[5] == 90)
             SetIntroCB(this, IntroCB_GameFreakScene_RevealGameFreakText);
         break;
     }
@@ -776,12 +768,12 @@ static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData 
     {
     case 0:
         GameFreakScene_StartRevealGameFreakTextSparklesSpawner();
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 1:
-        this->timer++;
-        if (this->timer >= 40)
+        this->data[5]++;
+        if (this->data[5] >= 40)
             this->state++;
         break;
     case 2:
@@ -797,13 +789,13 @@ static void IntroCB_GameFreakScene_RevealGameFreakText(struct IntroSequenceData 
         if (!IsBlendTaskActive())
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 5:
-        this->timer++;
-        if (this->timer > 50)
+        this->data[5]++;
+        if (this->data[5] > 50)
             SetIntroCB(this, IntroCB_GameFreakScene_CreateGameFreakLogo);
         break;
     }
@@ -816,9 +808,9 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
     case 0:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
         StartBlendTask(0, 16, 16, 0, 16, 0);
-        this->field_0008 = 0;
-        this->field_000A = 16;
-        this->timer = 0;
+        this->data[0] = 0;
+        this->data[1] = 16;
+        this->data[5] = 0;
         this->state++;
         break;
     case 1:
@@ -828,8 +820,8 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
     case 2:
         if (!IsBlendTaskActive())
         {
-            BlitBitmapToWindow(0, this->field_003C, 0x38, 0x06, 0x20, 0x40);
-            BlitBitmapToWindow(0, this->field_043C, 0x00, 0x28, 0x90, 0x10);
+            BlitBitmapToWindow(0, this->gamefreakLogoArtSpriteTiles, 0x38, 0x06, 0x20, 0x40);
+            BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0x00, 0x28, 0x90, 0x10);
             CopyWindowToVram(0, 2);
             this->state++;
         }
@@ -839,13 +831,13 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         {
             DestroySprite(this->gameFreakLogoArtSprite);
             Rev1_GameFreakScene_CreatePresentsText();
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 4:
-        this->timer++;
-        if (this->timer > 90)
+        this->data[5]++;
+        if (this->data[5] > 90)
         {
             SetGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2);
             StartBlendTask(16, 0, 0, 16, 20, 0);
@@ -862,12 +854,12 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
     case 6:
         ResetSpriteData();
         FreeAllSpritePalettes();
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 7:
-        this->timer++;
-        if (this->timer > 20)
+        this->data[5]++;
+        if (this->data[5] > 20)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
             SetIntroCB(this, IntroCB_FightScene);
@@ -882,9 +874,9 @@ static void IntroCB_FightScene(struct IntroSequenceData * this)
     {
     case 0:
         SetVBlankCallback(NULL);
-        LoadPalette(gUnknown_8402D34, 0x10, 0x20);
-        LoadPalette(gUnknown_84048CC, 0x20, 0x20);
-        BlendPalettes(0x06, 0x10, RGB_WHITE);
+        LoadPalette(sBg0Pal_FightScene1, 0x10, 0x20);
+        LoadPalette(sBg1Pal_FightScene1, 0x20, 0x20);
+        BlendPalettes(0x00000006, 0x10, RGB_WHITE);
         InitBgsFromTemplates(0, sBgTemplates_FightScene1, NELEMS(sBgTemplates_FightScene1));
         DecompressAndCopyTileDataToVram(1, sBg1Tiles_FightScene1, 0, 0, 0);
         DecompressAndCopyTileDataToVram(1, sBg1Map_FightScene1, 0, 0, 1);
@@ -919,20 +911,20 @@ static void IntroCB_FightScene(struct IntroSequenceData * this)
         if (!gPaletteFade.active)
         {
             m4aSongNumStart(MUS_DEMO);
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 4:
-        this->timer++;
-        if (this->timer == 20)
+        this->data[5]++;
+        if (this->data[5] == 20)
         {
             CreateTask(Task_FightScene1_ZoomEffect, 0);
             FightScene1_SignalEndGrassyFieldAnim();
         }
-        if (this->timer >= 30)
+        if (this->data[5] >= 30)
         {
-            BlendPalettes(-2, 16, RGB_WHITE);
+            BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
             DestroyTask(FindTaskIdByFunc(Task_FightScene1_GrassyFieldAnim));
             DestroyTask(FindTaskIdByFunc(Task_FightScene1_ZoomEffect));
             SetIntroCB(this, IntroCB_FightScene2);
@@ -1005,9 +997,9 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
         if (!FreeTempTileDataBuffersIfPossible())
         {
             SetVBlankCallback(NULL);
-            LoadPalette(gUnknown_84053B4, 0x10, 0x60);
+            LoadPalette(sBg3Pal_FightScene2, 0x10, 0x60);
             LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
-            LoadPalette(gUnknown_8406634, 0x60, 0x20);
+            LoadPalette(sBg1Pal_FightScene2, 0x60, 0x20);
             BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
             DecompressAndCopyTileDataToVram(0, sBg0Tiles_FightScene2, 0, 0, 0);
             DecompressAndCopyTileDataToVram(0, sBg0Map_FightScene2, 0, 0, 1);
@@ -1038,15 +1030,15 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
     case 3:
         if (!gPaletteFade.active)
         {
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 4:
-        this->timer++;
-        if (this->timer >= 60)
+        this->data[5]++;
+        if (this->data[5] >= 60)
         {
-            this->timer = 0;
+            this->data[5] = 0;
             DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraHorizPanEffect));
             DestroyStaticMonSprites(this);
             CreateTask(Task_FightScene2_CameraVertPanEffect, 0);
@@ -1061,13 +1053,13 @@ static void IntroCB_FightScene2(struct IntroSequenceData * this)
     case 5:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 6:
-        this->timer++;
-        if (this->timer >= 60)
+        this->data[5]++;
+        if (this->data[5] >= 60)
         {
             DestroyTask(FindTaskIdByFunc(Task_FightScene2_CameraVertPanEffect));
             SetIntroCB(this, IntroCB_FightScene3);
@@ -1117,7 +1109,7 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        LoadPalette(gUnknown_8407430, 0x10, 0x40);
+        LoadPalette(sBg1Pal_FightScene3, 0x10, 0x40);
         LoadPalette(sSpritePals_Gengar, 0x50, 0x20);
         BlendPalettes(0xFFFFFFFE, 16, RGB_WHITE);
         InitBgsFromTemplates(0, sBgTemplates_FightScene3, NELEMS(sBgTemplates_FightScene3));
@@ -1158,13 +1150,13 @@ static void IntroCB_FightScene3(struct IntroSequenceData * this)
             StartNidorinoAnimSpriteSlideIn(this->nidorinoAnimSprite, 0, 0xB4, 0x34);
             CreateTask(Task_FightScene3_Bg0Scroll, 0);
             FightScene3_StartBg1Scroll();
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 3:
-        this->timer++;
-        if (this->timer == 16)
+        this->data[5]++;
+        if (this->data[5] == 16)
             CreateGrassSprite(this);
         if (!IsNidorinoAnimSpriteSlideInRunning(this) && !FuncIsActiveTask(Task_FightScene3_Bg0Scroll))
             SetIntroCB(this, IntroCB_FightScene4);
@@ -1274,12 +1266,12 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
     switch (this->state)
     {
     case 0:
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 1:
-        this->timer++;
-        if (this->timer > 30)
+        this->data[5]++;
+        if (this->data[5] > 30)
         {
             FightScene4_NidorinoRearsUp(this);
             this->state++;
@@ -1288,22 +1280,22 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
     case 2:
         if (!FightScene4_NidorinoAnimIsRunning(this))
         {
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 3:
-        this->timer++;
-        if (this->timer > 30)
+        this->data[5]++;
+        if (this->data[5] > 30)
         {
             FightScene3_PauseForestBgScroll();
             FightScene4_StartGengarAttack(this);
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 4:
-        if (this->field_0006)
+        if (this->gengarAttackLanded)
         {
             FightScene4_StartNidorinoRecoilAnim(this);
             this->state++;
@@ -1313,13 +1305,13 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         if (!FightScene4_NidorinoAnimIsRunning(this))
         {
             FightScene3_ResumeForestBgScroll();
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 6:
-        this->timer++;
-        if (this->timer > 16)
+        this->data[5]++;
+        if (this->data[5] > 16)
         {
             StartSpriteHopToPosAnim(this->nidorinoAnimSprite, 8, 12, 5);
             this->state++;
@@ -1335,16 +1327,16 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
     case 8:
         if (!FightScene4_NidorinoAnimIsRunning(this))
         {
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 9:
-        this->timer++;
-        if (this->timer > 20)
+        this->data[5]++;
+        if (this->data[5] > 20)
         {
             StartNidorinoAnim_LaunchSelfAtGengarAnim(this);
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
@@ -1358,24 +1350,24 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
         break;
     case 11:
         HideBg(0);
-        this->timer = 0;
+        this->data[5] = 0;
         this->state++;
         break;
     case 12:
-        this->timer++;
-        if (this->timer == 48)
+        this->data[5]++;
+        if (this->data[5] == 48)
             BeginNormalPaletteFade(0x00000006, 2, 0, 16, RGB_WHITE);
-        if (this->timer > 120)
+        if (this->data[5] > 120)
         {
             FightScene4_StartNidorinoAffineAnim(this);
             FightScene4_StartGengarAffineAnim(this);
             this->state++;
-            this->timer = 0;
+            this->data[5] = 0;
         }
         break;
     case 13:
-        this->timer++;
-        if (this->timer > 8)
+        this->data[5]++;
+        if (this->data[5] > 8)
         {
             CpuFill16(RGB_WHITE, gPlttBufferUnfaded + 16, 64);
             BeginNormalPaletteFade(0xFFFFFFFE, -2, 0, 16, RGB_BLACK);
@@ -1385,13 +1377,13 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
     case 14:
         if (!gPaletteFade.active)
         {
-            this->timer = 0;
+            this->data[5] = 0;
             this->state++;
         }
         break;
     case 15:
-        this->timer++;
-        if (this->timer > 60)
+        this->data[5]++;
+        if (this->data[5] > 60)
             SetIntroCB(this, IntroCB_CleanUp);
         break;
     default:
@@ -1401,7 +1393,7 @@ static void IntroCB_FightScene4(struct IntroSequenceData * this)
             this->nidorinoAnimSprite->pos2.x = 0;
             this->nidorinoAnimSprite->pos1.x = 0xB4;
             this->state = 1;
-            this->timer = 30;
+            this->data[5] = 30;
         }
         break;
     }
@@ -1454,7 +1446,7 @@ static void FightScene4_StartGengarAffineAnim(struct IntroSequenceData * this)
     {
         StartSpriteAffineAnim(this->gengarBackSpriteArray[i], 1);
         this->gengarBackSpriteArray[i]->callback = SpriteCB_DummyButNotDummy;
-        obj_pos2_update_enable(this->gengarBackSpriteArray[i], gUnknown_840BBB8[i][0], gUnknown_840BBB8[i][1]);
+        obj_pos2_update_enable(this->gengarBackSpriteArray[i], sGengarBackSpritePos2UpdateMods[i][0], sGengarBackSpritePos2UpdateMods[i][1]);
     }
 }
 
@@ -1469,7 +1461,7 @@ static void IntroCB_CleanUp(struct IntroSequenceData * this)
     case 1:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            DestroyTask(this->field_0005);
+            DestroyTask(this->taskId);
             Free(this);
             DisableInterrupts(INTR_FLAG_HBLANK);
             SetHBlankCallback(NULL);
@@ -1483,6 +1475,7 @@ static void GameFreakScene_LoadGfxCreateStar(void)
 {
     int i;
     u8 spriteId;
+    static EWRAM_DATA u32 gUnknown_203AB28 = 0;
 
     for (i = 0; i < NELEMS(sSpriteSheets_GameFreakScene); i++)
     {
@@ -1515,6 +1508,8 @@ static void GameFreakScene_LoadGfxCreateStar(void)
 
 static void GameFreakScene_TrailingSparklesGen(s16 x, s16 y, u16 a2)
 {
+    static EWRAM_DATA s16 gUnknown_203AB2C = 0;
+
     u8 spriteId;
     s16 r4 = (a2 & gUnknown_203AB12) + 2;
     s16 r2 = gUnknown_203AB2C;
@@ -1618,7 +1613,7 @@ static void Rev1_GameFreakScene_CreatePresentsText(void)
 static void FightScene4_StartGengarAttack(struct IntroSequenceData * this)
 {
     u8 taskId;
-    this->field_0006 = 0;
+    this->gengarAttackLanded = FALSE;
     taskId = CreateTask(Task_FightScene4_GengarAttack, 4);
     SetWordTaskArg(taskId, 5, (uintptr_t)this);
     gTasks[taskId].data[3] = 64;
@@ -1659,7 +1654,7 @@ static void Task_FightScene4_GengarAttack(u8 taskId)
     case 2:
         data[1]++;
         if (data[1] == 14)
-            ((struct IntroSequenceData *)GetWordTaskArg(taskId, 5))->field_0006 = 1;
+            ((struct IntroSequenceData *)GetWordTaskArg(taskId, 5))->gengarAttackLanded = TRUE;
         if (data[1] > 15)
         {
             data[1] = 0;
@@ -1728,6 +1723,7 @@ static void SpriteCB_GengarSwipe(struct Sprite * sprite)
 static void Task_FightScene3_Bg0Scroll(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
+    static EWRAM_DATA u32 gUnknown_203AB30 = 0;
 
     switch (data[0])
     {

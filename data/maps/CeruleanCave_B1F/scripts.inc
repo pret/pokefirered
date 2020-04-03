@@ -24,7 +24,7 @@ CeruleanCave_B1F_EventScript_ShowMewtwo:: @ 81624F1
 
 CeruleanCave_B1F_EventScript_Mewtwo:: @ 81624F5
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	waitse

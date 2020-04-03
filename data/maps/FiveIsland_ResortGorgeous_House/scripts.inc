@@ -8,7 +8,7 @@ FiveIsland_ResortGorgeous_House_MapScripts:: @ 8171EBD
 
 FiveIsland_ResortGorgeous_House_EventScript_Selphy:: @ 8171EBE
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	goto_if_set SHOWN_REQUESTED_MON, FiveIsland_ResortGorgeous_House_EventScript_JustFulfilledRequest

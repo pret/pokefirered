@@ -10,7 +10,7 @@
 
 void TrySetMapSaveWarpStatus(void);
 bool32 IsCurMapPokeCenter(void);
-void sub_810B810(void);
-void sub_810B82C(void);
+void SetUnlockedPokedexFlags(void);
+void SetPostgameFlags(void);
 
 #endif // GUARD_SAVE_LOCATION_H

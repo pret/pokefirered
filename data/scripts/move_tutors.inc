@@ -448,7 +448,7 @@ EventScript_BodySlamTaught:: @ 81C4DE2
 
 TwoIsland_CapeBrink_House_EventScript_StarterTutor:: @ 81C4DEC
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	goto_if_set FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK, CapeBrinkTutor_EventScript_TaughtAllMoves
@@ -556,7 +556,7 @@ EventScript_ChooseMoveTutorMon:: @ 81C4F30
 
 EventScript_CanOnlyBeLearnedOnce:: @ 81C4F37
 	textcolor 3
-	special sub_80699BC
+	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox Text_MoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
 	normalmsg

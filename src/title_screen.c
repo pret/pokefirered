@@ -668,7 +668,7 @@ static void SetTitleScreenScene_Restart(s16 * data)
     case 4:
         HelpSystem_Disable();
         DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
-        SetMainCallback2(sub_80EC864);
+        SetMainCallback2(CB2_CopyrightScreen);
         break;
     }
 }

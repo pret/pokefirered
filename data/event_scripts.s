@@ -1223,10 +1223,10 @@ EventScript_DoInGameTrade:: @ 81A8CD9
 	faceplayer
 	return
 
-gUnknown_81A8CED:: @ 81A8CED
-	special sub_810C3A4
+EventScript_VsSeekerChargingDone:: @ 81A8CED
+	special VsSeekerFreezeObjectsAfterChargeComplete
 	waitstate
-	special sub_810C444
+	special VsSeekerResetObjectMovementAfterChargeComplete
 	releaseall
 	end
 

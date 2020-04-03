@@ -546,7 +546,7 @@ SECTIONS {
         src/vs_seeker.o(.rodata);
         src/item_pc.o(.rodata);
         src/mailbox_pc.o(.rodata);
-        data/decorations.o(.rodata);
+        src/decoration.o(.rodata);
         src/menu.o(.rodata);
         src/quest_log.o(.rodata);
         src/union_room.o(.rodata);

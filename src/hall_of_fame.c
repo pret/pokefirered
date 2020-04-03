@@ -431,7 +431,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     u16 i;
     struct HallofFameTeam* lastSavedTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
 
-    sub_8112450();
+    SaveQuestLogData();
     if (!gHasHallOfFameRecords)
     {
         memset(gDecompressionBuffer, 0, 0x2000);
@@ -706,7 +706,7 @@ static void Task_Hof_HandleExit(u8 taskId)
 static void SetWarpsToRollCredits(void)
 {
     VarSet(VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1);
-    FlagSet(FLAG_SPECIAL_FLAG_0x4000);
+    FlagSet(FLAG_DONT_SHOW_MAP_NAME_POPUP);
     gDisableMapMusicChangeOnMapLoad = 2;
     SetWarpDestination(MAP_GROUP(INDIGO_PLATEAU_EXTERIOR), MAP_NUM(INDIGO_PLATEAU_EXTERIOR), -1, 11, 6);
     DoWarp();

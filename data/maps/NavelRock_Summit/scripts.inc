@@ -33,7 +33,7 @@ NavelRock_Summit_EventScript_TryRemoveHoOh:: @ 8164FE7
 
 NavelRock_Summit_EventScript_HoOh:: @ 8164FFB
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject

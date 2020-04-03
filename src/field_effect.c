@@ -2889,7 +2889,7 @@ u8 FldEff_UseSurf(void)
     u8 taskId = CreateTask(Task_FldEffUseSurf, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    if (sub_8056124(MUS_NAMINORI))
+    if (Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
         Overworld_ChangeMusicTo(MUS_NAMINORI);
     return FALSE;
 }

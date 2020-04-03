@@ -1,10 +1,8 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
-#include "gpu_regs.h"
-#include "palette.h"
 #include "random.h"
-#include "sound.h"
 #include "trig.h"
 #include "util.h"
 #include "constants/songs.h"
@@ -4321,7 +4319,7 @@ static void AnimLockOnTargetStep4(struct Sprite* sprite)
         sprite->data[1] = 0;
     }
 
-    BlendPalettes(sub_8075BE8(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB_WHITE);
+    BlendPalettes(SelectBattleAnimSpriteAndBgPalettes(1, 1, 1, 1, 1, 0, 0), sprite->data[1], RGB_WHITE);
     if (sprite->data[1] == 16)
     {
         int pal;
@@ -4981,7 +4979,7 @@ void AnimTask_FadeScreenBlueStep(u8);
 
 void AnimTask_FadeScreenBlue(u8 taskId)
 {
-    int a = sub_8075BE8(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    int a = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     int b;
     int c;
     int d;
@@ -4996,7 +4994,7 @@ void AnimTask_FadeScreenBlue(u8 taskId)
     gTasks[taskId].data[7] = 13;
     gTasks[taskId].data[8] = 14;
     gTasks[taskId].data[9] = 15;
-    b = sub_8075CB8(1, 1, 1, 1);
+    b = SelectBattlerSpritePalettes(1, 1, 1, 1);
     c = a | b;
     StorePointerInVars(&gTasks[taskId].data[14], &gTasks[taskId].data[15], (void*)c);
     b = b | (0x10000 << IndexOfSpritePaletteTag(ANIM_TAG_MOON));

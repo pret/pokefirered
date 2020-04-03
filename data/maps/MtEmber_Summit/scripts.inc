@@ -24,7 +24,7 @@ MtEmber_Summit_EventScript_ShowMoltres:: @ 8163B2F
 
 MtEmber_Summit_EventScript_Moltres:: @ 8163B33
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	setwildbattle SPECIES_MOLTRES, 50, ITEM_NONE

@@ -78,7 +78,7 @@ u8 GetRegisteredQuestLogInput(void);
 void ResetFacingNpcOrSignPostVars(void);
 bool8 CanWalkAwayToCancelMsgBox(void);
 void SetWalkingIntoSignVars(void);
-bool8 sub_80699D4(void);
+bool8 IsMsgBoxWalkawayDisabled(void);
 
 extern const u8 *gRAMScriptPtr;
 extern u8 gWalkAwayFromSignInhibitTimer;

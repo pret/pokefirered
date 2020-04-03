@@ -588,7 +588,7 @@ static bool8 DoInitMailView(void)
         }
         break;
     case 15:
-        if (sub_8058244() == TRUE)
+        if (Overworld_LinkRecvQueueLengthMoreThan2() == TRUE)
             return FALSE;
         break;
     case 16:

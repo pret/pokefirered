@@ -81,7 +81,7 @@ void SetWarpDestinationToEscapeWarp(void);
 void SetWarpDestinationToLastHealLocation(void);
 u8 IsMapTypeOutdoors(u8 mapType);
 void Overworld_ClearSavedMusic(void);
-bool32 sub_8056124(u16 song);
+bool32 Overworld_MusicCanOverrideMapMusic(u16 song);
 
 void player_avatar_init_params_reset(void);
 
@@ -146,7 +146,7 @@ bool8 BGMusicStopped(void);
 bool8 IsMapTypeIndoors(u8 mapType);
 bool32 Overworld_IsBikingAllowed(void);
 void Overworld_ResetStateAfterDigEscRope(void);
-bool32 sub_8058244(void);
+bool32 Overworld_LinkRecvQueueLengthMoreThan2(void);
 u8 GetCurrentMapType(void);
 
 u8 GetLastUsedWarpMapType(void);

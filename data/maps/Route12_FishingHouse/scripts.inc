@@ -31,7 +31,7 @@ Route12_FishingHouse_EventScript_NoRoomForSuperRod:: @ 816FF75
 
 Route12_FishingHouse_EventScript_CheckMagikarpRecord:: @ 816FF7F
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	setvar VAR_0x8004, SPECIES_MAGIKARP
 	specialvar VAR_RESULT, DoesPlayerPartyContainSpecies
 	compare VAR_RESULT, FALSE

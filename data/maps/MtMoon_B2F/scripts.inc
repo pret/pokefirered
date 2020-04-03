@@ -63,7 +63,7 @@ MtMoon_B2F_EventScript_DomeFossil:: @ 816071B
 	removeobject LOCALID_DOME_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_FAN5
 	closemessage
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
@@ -95,7 +95,7 @@ MtMoon_B2F_EventScript_HelixFossil:: @ 816077F
 	removeobject LOCALID_HELIX_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_FAN5
 	closemessage
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	delay 10
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0

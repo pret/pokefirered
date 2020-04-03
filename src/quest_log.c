@@ -45,8 +45,6 @@
 #include "constants/field_weather.h"
 #include "constants/event_object_movement.h"
 
-u8 gUnknown_3005E88;
-
 struct TrainerFanClub
 {
     u8 timer:7;
@@ -96,7 +94,7 @@ struct UnkStruct_203B044
 
 u8 gUnknown_3005E88;
 u16 sNumEventsInLogEntry;
-struct FieldInput gUnknown_3005E90;
+struct FieldInput gQuestLogFieldInput;
 struct QuestLogEntry * sCurQuestLogEntry;
 
 static struct UnkStruct_300201C * sFlagOrVarRecords;
@@ -108,7 +106,7 @@ EWRAM_DATA u8 gQuestLogState = 0;
 static EWRAM_DATA u16 gUnknown_203ADFC = 0;
 static EWRAM_DATA u8 sQuestLogHeaderWindowIds[3] = {0};
 static EWRAM_DATA u16 *gUnknown_203AE04 = NULL;
-static EWRAM_DATA u16 *gUnknown_203AE08 = NULL;
+static EWRAM_DATA u16 *sEventRecordingPointer = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE0C[32] = {NULL};
 static EWRAM_DATA void (* sQuestLogCB)(void) = NULL;
 static EWRAM_DATA u16 *gUnknown_203AE90 = NULL;
@@ -131,7 +129,7 @@ static void sub_8110A00(void);
 static void sub_8110A3C(void);
 static void SetPlayerInitialCoordsAtScene(u8);
 static void SetNPCInitialCoordsAtScene(u8);
-static void sub_8110E3C(void);
+static void TryRecordEvent39_GoToNextScene(void);
 static void BackUpTrainerRematchesToVars(void);
 static void BackUpMapLayoutToVar(void);
 static void SetGameStateAtScene(u8);
@@ -184,7 +182,7 @@ static bool8 sub_81137E4(u16, const u16 *);
 static u16 *sub_8113828(u16, const u16 *);
 static bool8 TrySetLinkQuestLogEvent(u16, const u16 *);
 static bool8 TrySetTrainerBattleQuestLogEvent(u16, const u16 *);
-static void sub_8113A1C(u16);
+static void TryRecordEvent41_IncCursor(u16);
 static void sub_811381C(void);
 static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16, const u16 *);
 static u16 *QuestLog_SkipCommand(u16 *, u16 **);
@@ -194,9 +192,9 @@ static bool8 sub_8113B44(const u16 *);
 static void sub_8113B88(void);
 static void sub_8113B94(u16);
 static void sub_8113BD8(void);
-static u16 *sub_8113BF4(u16 *);
+static u16 *TryRecordEvent39_NoParams(u16 *);
 static u16 *sub_8113C20(u16 *, struct QuestLogEntry *);
-static u16 *sub_8113C5C(u16 *, u16);
+static u16 *TryRecordEvent41(u16 *, u16);
 static u16 *sub_8113C8C(u16 *, struct QuestLogEntry *);
 static u16 *sub_8113CC8(u16 *, struct QuestLogEntry *);
 static u16 *sub_8113D08(u16 *, struct QuestLogEntry *);
@@ -302,8 +300,8 @@ void sub_8110840(void * oldPointer)
         gUnknown_203AE04 = (void *)gUnknown_203AE04 + offset;
     if (gQuestLogState != 0)
     {
-        if (gUnknown_203AE08)
-            gUnknown_203AE08 = (void *)gUnknown_203AE08 + offset;
+        if (sEventRecordingPointer)
+            sEventRecordingPointer = (void *)sEventRecordingPointer + offset;
         if (gQuestLogState == QL_STATE_2)
         {
             int r3;
@@ -320,7 +318,7 @@ void ResetQuestLog(void)
     sCurrentSceneNum = 0;
     gQuestLogState = 0;
     sQuestLogCB = NULL;
-    gUnknown_203AE08 = NULL;
+    sEventRecordingPointer = NULL;
     gUnknown_203AE04 = NULL;
     sub_8113BD8();
     sub_81138F8();
@@ -353,12 +351,12 @@ bool8 sub_8110944(const void * a0, size_t cmdSize)
     return TRUE;
 }
 
-bool8 sub_8110988(u16 *a0, size_t a1)
+static bool8 WillCommandOfSizeFitInSav1Record(u16 *cursor, size_t size)
 {
-    void * r2 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
-    void * r0 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
-    r0 -= a1;
-    if ((void *)a0 < r2 || (void *)a0 > r0)
+    void * start = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
+    void * end = gSaveBlock1Ptr->questLog[sCurrentSceneNum].end;
+    end -= size;
+    if ((void *)cursor < start || (void *)cursor > end)
         return FALSE;
     return TRUE;
 }
@@ -377,7 +375,7 @@ static void sub_8110A00(void)
     if (TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer) != 1)
     {
         gUnknown_3005E88 = 0;
-        sub_8110E3C();
+        TryRecordEvent39_GoToNextScene();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
@@ -418,7 +416,7 @@ static void StartRecordingQuestLogEntry(u16 eventId)
 
     DestroySav1QuestLogEntry(sCurrentSceneNum);
     sub_8113B88();
-    gUnknown_203AE08 = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
+    sEventRecordingPointer = gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_568;
     if (IS_LINK_QL_EVENT(eventId) || eventId == QL_EVENT_DEPARTED)
         gSaveBlock1Ptr->questLog[sCurrentSceneNum].unk_000 = 2;
     else
@@ -511,9 +509,9 @@ static void BackUpMapLayoutToVar(void)
     VarSet(VAR_QLBAK_MAP_LAYOUT, gSaveBlock1Ptr->mapLayoutId);
 }
 
-static void sub_8110E3C(void)
+static void TryRecordEvent39_GoToNextScene(void)
 {
-    sub_8113BF4(gUnknown_203AE08);
+    TryRecordEvent39_NoParams(sEventRecordingPointer);
     if (++sCurrentSceneNum >= QUEST_LOG_SCENE_COUNT)
         sCurrentSceneNum = 0;
 }
@@ -524,19 +522,19 @@ static bool8 TryRecordQuestLogEntrySequence(struct QuestLogEntry * entry)
 
     for (i = gUnknown_203ADFC; i < sQuestLogCursor; i++)
     {
-        if (gUnknown_203AE08 == NULL)
+        if (sEventRecordingPointer == NULL)
             return FALSE;
         switch (entry[i].unk_6)
         {
         case 0:
         case 1:
-            gUnknown_203AE08 = sub_8113D48(gUnknown_203AE08, &entry[i]);
+            sEventRecordingPointer = sub_8113D48(sEventRecordingPointer, &entry[i]);
             break;
         default:
-            gUnknown_203AE08 = sub_8113CC8(gUnknown_203AE08, &entry[i]);
+            sEventRecordingPointer = sub_8113CC8(sEventRecordingPointer, &entry[i]);
             break;
         }
-        if (gUnknown_203AE08 == NULL)
+        if (sEventRecordingPointer == NULL)
         {
             gUnknown_3005E88 = 0;
             return FALSE;
@@ -545,7 +543,7 @@ static bool8 TryRecordQuestLogEntrySequence(struct QuestLogEntry * entry)
 
     if (gUnknown_3005E88 == 0)
     {
-        gUnknown_203AE08 = sub_8113BF4(gUnknown_203AE08);
+        sEventRecordingPointer = TryRecordEvent39_NoParams(sEventRecordingPointer);
         return FALSE;
     }
     gUnknown_203ADFC = sQuestLogCursor;
@@ -968,7 +966,7 @@ bool8 QuestLog_SchedulePlaybackCB(void (*callback)(void))
     switch (gQuestLogState)
     {
         case 1:
-            sub_8112364();
+            QuestLog_OnInteractionWithSpecialNpc();
             break;
         case 2:
             gUnknown_3005E88 = 3;
@@ -1089,13 +1087,13 @@ void sub_8111C68(void)
 {
     if (gUnknown_203AE94.unk_0_6 == 0)
     {
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             gUnknown_203AE94.unk_0_6 = 2;
             gUnknown_3005E88 = 0;
             sub_81118F4(-3);
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             gUnknown_203AE94.unk_0_6 = 1;
             gUnknown_3005E88 = 0;
@@ -1230,7 +1228,7 @@ static void sub_8111F8C(u8 taskId)
     {
         FreezeObjectEvents();
         sub_805C270();
-        sub_805C780();
+        StopPlayerAvatar();
         ScriptContext2_Enable();
         task->func = Task_QuestLogScene_SavedGame;
     }
@@ -1262,7 +1260,7 @@ static void Task_WaitAtEndOfQuestLog(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (gMain.newKeys & (A_BUTTON | B_BUTTON) || task->tTimer >= 127 || gUnknown_203AE94.unk_0_6 == 1)
+    if (JOY_NEW(A_BUTTON | B_BUTTON) || task->tTimer >= 127 || gUnknown_203AE94.unk_0_6 == 1)
     {
         QuestLog_CloseTextWindow();
         task->tTimer = 0;
@@ -1313,7 +1311,7 @@ static void Task_EndQuestLog(u8 taskId)
         break;
     default:
         if (gUnknown_203AE94.unk_0_6 == 1)
-            ShowMapNamePopup(1);
+            ShowMapNamePopup(TRUE);
         CpuCopy16(gUnknown_203AE90, gPlttBufferUnfaded, 0x400);
         Free(gUnknown_203AE90);
         gUnknown_203AE94 = (struct UnkStruct_203AE94){};
@@ -1366,31 +1364,31 @@ void sub_811231C(void)
     if (gQuestLogState == QL_STATE_1)
     {
         TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
-        sub_8110E3C();
+        TryRecordEvent39_GoToNextScene();
         gQuestLogState = 0;
         sQuestLogCB = NULL;
         gUnknown_203AE04 = NULL;
-        gUnknown_203AE08 = NULL;
+        sEventRecordingPointer = NULL;
         gUnknown_3005E88 = 0;
     }
 }
 
-void sub_8112364(void)
+void QuestLog_OnInteractionWithSpecialNpc(void)
 {
     if (gUnknown_3005E88 && gQuestLogState == QL_STATE_1)
     {
         TryRecordQuestLogEntrySequence(sQuestLogSceneRecordBuffer);
-        sub_8113A1C(1);
-        sub_8110E3C();
+        TryRecordEvent41_IncCursor(1);
+        TryRecordEvent39_GoToNextScene();
         gUnknown_3005E88 = 0;
         gQuestLogState = 0;
         sQuestLogCB = NULL;
     }
     gUnknown_203AE04 = NULL;
-    gUnknown_203AE08 = NULL;
+    sEventRecordingPointer = NULL;
 }
 
-void sub_81123BC(void)
+static void SortQuestLogInSav1(void)
 {
     struct QuestLog * buffer = AllocZeroed(QUEST_LOG_SCENE_COUNT * sizeof(struct QuestLog));
     u8 i;
@@ -1412,12 +1410,12 @@ void sub_81123BC(void)
     Free(buffer);
 }
 
-void sub_8112450(void)
+void SaveQuestLogData(void)
 {
     if (MenuHelpers_LinkSomething() != TRUE)
     {
-        sub_8112364();
-        sub_81123BC();
+        QuestLog_OnInteractionWithSpecialNpc();
+        SortQuestLogInSav1();
     }
 }
 
@@ -1616,7 +1614,7 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         }
         sQuestLogCursor = 0;
         gUnknown_203B01C = 0;
-        gUnknown_3005E90 = (struct FieldInput){};
+        gQuestLogFieldInput = (struct FieldInput){};
         sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
         sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
         sMovementScripts[0][1] = 0xFF;
@@ -1688,7 +1686,8 @@ void sub_8112B3C(void)
                         sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][1] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
                         break;
                     case 2:
-                        *(u32 *)&gUnknown_3005E90 = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
+                        // Player input command
+                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
                         break;
                     case 3:
                         gUnknown_3005E88 = 3;
@@ -2443,7 +2442,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     {
         if (gUnknown_203AE04 == NULL)
         {
-            gUnknown_203AE04 = gUnknown_203AE08;
+            gUnknown_203AE04 = sEventRecordingPointer;
             r1 = sQuestLogStorageCBs[eventId](gUnknown_203AE04, eventData);
         }
         else
@@ -2455,7 +2454,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     else
     {
         gUnknown_203AE04 = NULL;
-        r1 = sQuestLogStorageCBs[eventId](gUnknown_203AE08, eventData);
+        r1 = sQuestLogStorageCBs[eventId](sEventRecordingPointer, eventData);
     }
 
     if (r1 == NULL)
@@ -2466,7 +2465,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
             return;
     }
 
-    gUnknown_203AE08 = r1;
+    sEventRecordingPointer = r1;
     if (gUnknown_203B048 == 0)
         return;
     sub_811231C();
@@ -2518,7 +2517,7 @@ bool8 sub_8113748(void)
         return TRUE;
 
     if (gQuestLogState == QL_STATE_1)
-        sub_8112364();
+        QuestLog_OnInteractionWithSpecialNpc();
 
     return FALSE;
 }
@@ -2584,11 +2583,11 @@ static u16 *sub_8113828(u16 eventId, const u16 *eventData)
     sub_8113B94(eventId);
 
     if (eventId == QL_EVENT_DEFEATED_WILD_MON)
-        gUnknown_203AE04 = gUnknown_203AE08;
+        gUnknown_203AE04 = sEventRecordingPointer;
     else
         gUnknown_203AE04 = NULL;
 
-    return sQuestLogStorageCBs[eventId](gUnknown_203AE08, eventData);
+    return sQuestLogStorageCBs[eventId](sEventRecordingPointer, eventData);
 }
 
 static bool8 TrySetLinkQuestLogEvent(u16 eventId, const u16 *eventData)
@@ -2614,15 +2613,15 @@ void sub_81138F8(void)
     gUnknown_203B024 = (struct UnkStruct_203B024){};
 }
 
-void sub_811390C(void)
+void QuestLog_StartRecordingInputsAfterDeferredEvent(void)
 {
     if (gUnknown_203B024.unk_00 != QL_EVENT_0)
     {
         u16 *resp;
         gUnknown_203B04A = 0;
         StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
-        gUnknown_203AE08 = resp;
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](sEventRecordingPointer, gUnknown_203B024.unk_04);
+        sEventRecordingPointer = resp;
         sub_81138F8();
     }
 }
@@ -2655,17 +2654,17 @@ void sub_81139BC(void)
             StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
         }
         sub_8113B94(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](gUnknown_203AE08, gUnknown_203B024.unk_04);
-        gUnknown_203AE08 = resp;
-        sub_8113A1C(1);
+        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](sEventRecordingPointer, gUnknown_203B024.unk_04);
+        sEventRecordingPointer = resp;
+        TryRecordEvent41_IncCursor(1);
         sub_81138F8();
         sub_811231C();
     }
 }
 
-static void sub_8113A1C(u16 a0)
+static void TryRecordEvent41_IncCursor(u16 a0)
 {
-    gUnknown_203AE08 = sub_8113C5C(gUnknown_203AE08, a0);
+    sEventRecordingPointer = TryRecordEvent41(sEventRecordingPointer, a0);
     sQuestLogCursor++;
 }
 
@@ -2854,9 +2853,9 @@ static void sub_8113BD8(void)
     gUnknown_203B04B = FALSE;
 }
 
-static u16 *sub_8113BF4(u16 *a0)
+static u16 *TryRecordEvent39_NoParams(u16 *a0)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
     a0[0] = QL_EVENT_39;
     return a0 + 1;
@@ -2864,7 +2863,7 @@ static u16 *sub_8113BF4(u16 *a0)
 
 static u16 *sub_8113C20(u16 *a0, struct QuestLogEntry * a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
     a1->unk_6 = 0xFF;
     a1->unk_4 = 0;
@@ -2875,9 +2874,9 @@ static u16 *sub_8113C20(u16 *a0, struct QuestLogEntry * a1)
     return a0 + 1;
 }
 
-static u16 *sub_8113C5C(u16 *a0, u16 a1)
+static u16 *TryRecordEvent41(u16 *a0, u16 a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
     a0[0] = QL_EVENT_41;
     a0[1] = a1;
@@ -2886,7 +2885,7 @@ static u16 *sub_8113C5C(u16 *a0, u16 a1)
 
 static u16 *sub_8113C8C(u16 *a0, struct QuestLogEntry * a1)
 {
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
     a1->unk_6 = 0xFE;
     a1->unk_4 = a0[1];
@@ -2901,7 +2900,7 @@ static u16 *sub_8113CC8(u16 *a0, struct QuestLogEntry * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
     a0[0] = 0;
     a0[1] = a1->unk_4;
@@ -2916,7 +2915,7 @@ static u16 *sub_8113D08(u16 *a0, struct QuestLogEntry * a1)
 {
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
+    if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
     a1->unk_6 = 2;
     a1->unk_4 = a0[1];
@@ -2932,7 +2931,7 @@ static u16 *sub_8113D48(u16 *a0, struct QuestLogEntry * a1)
     u16 *r4 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(r4, sQuestLogEventCmdSizes[QL_EVENT_2]))
+    if (!WillCommandOfSizeFitInSav1Record(r4, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (a1->unk_6 == 0)
         r4[0] = 2;
@@ -2951,7 +2950,7 @@ static u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
     u16 *r5 = a0;
     u8 *r6 = (u8 *)a0 + 4;
 
-    if (!sub_8110988(r5, sQuestLogEventCmdSizes[QL_EVENT_2]))
+    if (!WillCommandOfSizeFitInSav1Record(r5, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (r5[0] == 2)
         a1->unk_6 = 0;

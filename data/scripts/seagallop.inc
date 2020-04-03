@@ -111,7 +111,7 @@ EventScript_SetSail:: @ 81A90DA
     closemessage
     delay 20
     goto_if_questlog EventScript_ReleaseEnd
-    special sub_8112364
+    special QuestLog_OnInteractionWithSpecialNpc
     fadescreen FADE_TO_BLACK
     special DoSeagallopFerryScene
     waitstate

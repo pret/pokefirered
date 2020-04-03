@@ -35,7 +35,7 @@ PowerPlant_EventScript_ShowElectrode2:: @ 81637B4
 
 PowerPlant_EventScript_Zapdos:: @ 81637B8
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	setwildbattle SPECIES_ZAPDOS, 50, ITEM_NONE
@@ -84,7 +84,7 @@ PowerPlant_EventScript_Electrode1:: @ 816382F
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq PowerPlant_EventScript_FoughtElectrode1
@@ -113,7 +113,7 @@ PowerPlant_EventScript_Electrode2:: @ 816388D
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	dowildbattle
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	specialvar VAR_RESULT, GetBattleOutcome
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq PowerPlant_EventScript_FoughtElectrode2

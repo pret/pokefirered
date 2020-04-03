@@ -377,7 +377,7 @@ static void CB2_OpenBagMenu(void)
 {
     while (1)
     {
-        if ((u8)sub_80BF72C() == TRUE)
+        if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
             break;
         if (LoadBagMenuGraphics() == TRUE)
             break;
@@ -1050,7 +1050,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
         return;
     if (FuncIsActiveTask(Task_AnimateWin0v) == TRUE)
         return;
-    if ((u8)sub_80BF72C() == TRUE)
+    if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
         return;
     switch (ProcessPocketSwitchInput(taskId, gBagMenuState.pocket))
     {
@@ -1244,7 +1244,7 @@ static void Task_MoveItemInPocket_HandleInput(u8 taskId)
     s32 input;
     u16 itemsAbove;
     u16 cursorPos;
-    if ((u8)sub_80BF72C() == TRUE)
+    if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
         return;
     input = ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
@@ -1447,7 +1447,7 @@ static void Task_ItemContext_FieldOrBattle(u8 taskId)
 static void Task_FieldItemContextMenuHandleInput(u8 taskId)
 {
     s8 input;
-    if ((u8)sub_80BF72C() != TRUE)
+    if ((u8)MenuHelpers_CallLinkSomething() != TRUE)
     {
         input = Menu_ProcessInputNoWrapAround();
         switch (input)
@@ -2036,7 +2036,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             ScriptContext2_Enable();
             FreezeObjectEvents();
             sub_805C270();
-            sub_805C780();
+            StopPlayerAvatar();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
             gTasks[taskId].data[3] = 1;

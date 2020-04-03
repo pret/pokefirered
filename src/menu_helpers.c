@@ -125,17 +125,17 @@ bool8 MenuHelpers_LinkSomething(void)
         return FALSE;
 }
 
-bool32 sub_80BF72C(void)
+bool32 MenuHelpers_CallLinkSomething(void)
 {
     if (!MenuHelpers_LinkSomething())
         return FALSE;
     else
-        return (u8)sub_8058244();
+        return (u8)Overworld_LinkRecvQueueLengthMoreThan2();
 }
 
 bool8 sub_80BF748(void)
 {
-    if ((u8)sub_80BF72C() == TRUE)
+    if ((u8)MenuHelpers_CallLinkSomething() == TRUE)
         return TRUE;
     else if (sub_800B270() != TRUE)
         return FALSE;

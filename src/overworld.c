@@ -120,7 +120,7 @@ u8 gFieldLinkPlayerCount;
 
 static u8 sPlayerTradingStates[4];
 static KeyInterCB sPlayerKeyInterceptCallback;
-static bool8 gUnknown_3000E88;
+static bool8 sReceivingFromLink;
 static u8 sRfuKeepAliveTimer;
 
 static u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
@@ -1037,7 +1037,7 @@ void Overworld_PlaySpecialMapMusic(void)
 
     if (gSaveBlock1Ptr->savedMusic)
         music = gSaveBlock1Ptr->savedMusic;
-    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) &&sub_8056124(MUS_NAMINORI))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
         music = MUS_NAMINORI;
 
     if (music != GetCurrentMapMusic())
@@ -1075,7 +1075,7 @@ static void Overworld_TryMapConnectionMusicTransition(void)
         currentMusic = GetCurrentMapMusic();
         if (currentMusic == MUS_NAMINORI)
             return;
-        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && sub_8056124(MUS_NAMINORI))
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && Overworld_MusicCanOverrideMapMusic(MUS_NAMINORI))
             newMusic = MUS_NAMINORI;
         if (newMusic != currentMusic)
         {
@@ -1193,7 +1193,7 @@ static void ChooseAmbientCrySpecies(void)
     sAmbientCrySpecies = GetLocalWildMon(&sIsAmbientCryWaterMon);
 }
 
-bool32 sub_8056124(u16 music)
+bool32 Overworld_MusicCanOverrideMapMusic(u16 music)
 {
     if (music == MUS_CYCLING || music == MUS_NAMINORI)
     {
@@ -1427,7 +1427,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     sub_805BEB8();
     sub_8111C68();
     FieldClearPlayerInput(&fieldInput);
-    fieldInput = gUnknown_3005E90;
+    fieldInput = gQuestLogFieldInput;
     FieldInput_HandleCancelSignpost(&fieldInput);
     if (!ScriptContext2_IsEnabled())
     {
@@ -1445,7 +1445,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     {
         RunQuestLogCB();
     }
-    FieldClearPlayerInput(&gUnknown_3005E90);
+    FieldClearPlayerInput(&gQuestLogFieldInput);
 }
 
 void CB1_Overworld(void)
@@ -1555,7 +1555,7 @@ void CB2_WhiteOut(void)
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         do_load_map_stuff_loop(&val);
-        sub_8112364();
+        QuestLog_OnInteractionWithSpecialNpc();
         SetFieldVBlankCallback();
         SetMainCallback1(CB1_Overworld);
         SetMainCallback2(CB2_Overworld);
@@ -1629,7 +1629,7 @@ static void CB2_ReturnToFieldLocal(void)
 
 static void CB2_ReturnToFieldLink(void)
 {
-    if (!sub_8058244() && map_loading_iteration_2_link(&gMain.state))
+    if (!Overworld_LinkRecvQueueLengthMoreThan2() && map_loading_iteration_2_link(&gMain.state))
         SetMainCallback2(CB2_Overworld);
 }
 
@@ -3181,15 +3181,15 @@ static void sub_8058230(void)
     ScriptContext2_Enable();
 }
 
-bool32 sub_8058244(void)
+bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
 {
     if (!IsUpdateLinkStateCBActive())
         return FALSE;
     if (GetLinkRecvQueueLength() >= 3)
-        gUnknown_3000E88 = TRUE;
+        sReceivingFromLink = TRUE;
     else
-        gUnknown_3000E88 = FALSE;
-    return gUnknown_3000E88;
+        sReceivingFromLink = FALSE;
+    return sReceivingFromLink;
 }
 
 bool32 sub_8058274(void)
@@ -3207,8 +3207,8 @@ bool32 sub_8058274(void)
     else if (sPlayerKeyInterceptCallback != KeyInterCB_DeferToEventScript)
         return FALSE;
 
-    temp = gUnknown_3000E88;
-    gUnknown_3000E88 = FALSE;
+    temp = sReceivingFromLink;
+    sReceivingFromLink = FALSE;
 
     if (temp == TRUE)
         return TRUE;

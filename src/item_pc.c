@@ -385,7 +385,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 20:
-        if ((u8)sub_80BF72C() != TRUE)
+        if ((u8)MenuHelpers_CallLinkSomething() != TRUE)
             gMain.state++;
         break;
     default:

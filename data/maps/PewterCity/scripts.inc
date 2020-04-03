@@ -724,7 +724,7 @@ PewterCity_EventScript_AideGiveRunningShoes:: @ 81662DE
 	waitmessage
 	waitfanfare
 	msgbox PewterCity_Text_SwitchedShoesWithRunningShoes
-	special sub_80699BC
+	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox PewterCity_Text_ExplainRunningShoes
 	normalmsg

@@ -1,7 +1,7 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "sound.h"
 #include "task.h"
 #include "constants/battle_anim.h"
 #include "constants/species.h"

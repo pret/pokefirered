@@ -1,6 +1,6 @@
 #include "global.h"
 #include "librfu.h"
-#include "link_rfu.h"
+#include "AgbRfu_LinkManager.h"
 
 #define RN_ACCEPT           0x01
 #define RN_NAME_TIMER_CLEAR 0x02

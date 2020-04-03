@@ -66,7 +66,7 @@ const struct WildPokemon {{ encounter.base_label }}_FishingMons[] =
 
 const struct WildPokemonInfo {{ encounter.base_label }}_FishingMonsInfo = { {{encounter.fishing_mons.encounter_rate}}, {{ encounter.base_label }}_FishingMons };
 {% endif %}
-#endif
+{% if contains(encounter.base_label, "FireRed") or contains(encounter.base_label, "LeafGreen") %}#endif{% endif %}
 
 ## endfor
 
@@ -83,7 +83,7 @@ const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
         .rockSmashMonsInfo = {% if existsIn(encounter, "rock_smash_mons") %}&{{ encounter.base_label }}_RockSmashMonsInfo{% else %}NULL{% endif %},
         .fishingMonsInfo = {% if existsIn(encounter, "fishing_mons") %}&{{ encounter.base_label }}_FishingMonsInfo{% else %}NULL{% endif %},
     },
-#endif
+{% if contains(encounter.base_label, "FireRed") or contains(encounter.base_label, "LeafGreen") %}#endif{% endif %}
 ## endfor
     {
         .mapGroup = MAP_GROUP(UNDEFINED),

@@ -462,7 +462,9 @@ static const struct SpritePalette sFightSceneSpritePalettes[] = {
 	{sSpritePals_Grass, 8},
 	{sSpritePals_GengarSwipe, 10},
 	{sSpritePals_NidorinoRecoilDust, 11},
-    // {0}
+#ifdef BUGFIX
+    {0}
+#endif
 };
 
 static void VBlankCB_Copyright(void)
@@ -511,7 +513,8 @@ static bool8 RunCopyrightScreen(void)
         ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
-        FreeAllSpritePalettes();BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
+        FreeAllSpritePalettes();
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(7));
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB_Copyright);
@@ -602,8 +605,8 @@ static void CB2_SetUpIntro(void)
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
-        FillPalette(0, 0, 0x400);
-        ResetBgsAndClearDma3BusyFlags(0);
+        FillPalette(RGB_BLACK, 0, 0x400);
+        ResetBgsAndClearDma3BusyFlags(FALSE);
         InitBgsFromTemplates(0, sBgTemplates_GameFreakScene, NELEMS(sBgTemplates_GameFreakScene));
         break;
     case 1:
@@ -688,7 +691,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         LZ77UnCompWram(sBlit_GameFreakText, this->gamefreakTextBitmap);
         LZ77UnCompWram(sSpriteTiles_GameFreakLogoArt, this->gamefreakLogoArtSpriteTiles);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 0x11);
-        FillWindowPixelBuffer(0, 0x00);
+        FillWindowPixelBuffer(0, PIXEL_FILL(0));
         BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
         CopyWindowToVram(0, 3);

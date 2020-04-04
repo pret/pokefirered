@@ -47,7 +47,7 @@ static void RfuFunc_SendNextBlock(void);
 static void RfuFunc_SendLastBlock(void);
 static void CallRfuFunc(void);
 static void sub_80FA738(void);
-static int sub_80FA788(void);
+static s32 sub_80FA788(void);
 static void sub_80FA834(u8 taskId);
 static void sub_80FA9D0(u16 a0);
 static void ValidateAndReceivePokemonSioInfo(void * a0);

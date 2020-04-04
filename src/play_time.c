@@ -1,6 +1,6 @@
 #include "play_time.h"
 
-static IWRAM_DATA u8 sPlayTimeCounterState;
+static u8 sPlayTimeCounterState;
 
 enum
 {

@@ -1,0 +1,91 @@
+gNumMusicPlayers = 4;
+gMaxLines = 0;
+
+SECTIONS {
+    . = 0x2000000;
+
+    ewram (NOLOAD) :
+    ALIGN(4)
+    {
+        gHeap = .;
+
+        . = 0x1C000;
+
+        *(ewram_data);
+        /* pokemon_summary_screen.o */
+        gUnknown_203B140 = .; . += 0x4;
+        gUnknown_203B144 = .; . += 0x4;
+        gUnknown_203B148 = .; . += 0x10;
+        gUnknown_203B158 = .; . += 0x4;
+        gUnknown_203B15C = .; . += 0x4;
+        gUnknown_203B160 = .; . += 0x4;
+        gUnknown_203B164 = .; . += 0x4;
+        gUnknown_203B168 = .; . += 0x4;
+        gLastViewedMonIndex = .; . += 0x1;
+        gUnknown_203B16D = .; . += 0x1;
+        gUnknown_203B16E = .; . += 0x2;
+        gUnknown_203B170 = .; . += 0x4;
+
+        . = 0x40000;
+}
+
+    . = 0x3000000;
+
+    iwram (NOLOAD) :
+    ALIGN(4)
+    {
+        /* .bss starts at 0x3000000 */
+        *(.bss*);
+        /* .bss.code starts at 0x3001AA8 */
+        src/m4a.o(.bss.code);
+
+        /* COMMON starts at 0x30022A8 */
+        *(COMMON);
+        end = .;
+        . = 0x8000;
+    }
+
+    . = 0x8000000;
+
+    .text :
+    ALIGN(4)
+    {
+        asm/crt0.o(.text);
+        *(.text*);
+    } =0
+
+    script_data :
+    ALIGN(4)
+    {
+    	*(script_data);
+    } =0
+
+    .data :
+    ALIGN(4)
+    {
+    	*(.data*);
+    } =0
+
+    .rodata :
+    ALIGN(4)
+    {
+    	*(.rodata*);
+    } =0
+
+    /* DWARF 2 sections */
+    .debug_aranges  0 : { *(.debug_aranges) }
+    .debug_pubnames 0 : { *(.debug_pubnames) }
+    .debug_info     0 : { *(.debug_info) }
+    .debug_abbrev   0 : { *(.debug_abbrev) }
+    .debug_line     0 : { *(.debug_line) }
+    .debug_frame    0 : { *(.debug_frame) }
+    .debug_str      0 : { *(.debug_str) }
+    .debug_loc      0 : { *(.debug_loc) }
+    .debug_macinfo  0 : { *(.debug_macinfo) }
+
+    /* Discard everything not specifically mentioned above. */
+    /DISCARD/ :
+    {
+        *(*);
+    }
+}

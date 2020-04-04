@@ -13,7 +13,7 @@ enum HiddenItemAttr
 
 u8 GetLeadMonIndex(void);
 s32 CountDigits(s32 number);
-void TV_PrintIntToStringVar(u8, int);
+void TV_PrintIntToStringVar(u8 varidx, s32 number);
 u16 GetStarterSpecies(void);
 void StopPokemonLeagueLightingEffectTask(void);
 void nullsub_60(void);

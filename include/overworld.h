@@ -71,8 +71,8 @@ void Overworld_SetObjEventTemplateMovementType(u8, u8);
 
 void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 
-void SetDynamicWarp(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
-void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
+void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId);
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);

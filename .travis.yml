@@ -36,5 +36,9 @@ matrix:
         - make -j2 compare_leafgreen
         - make -j2 compare_firered_rev1
         - make -j2 compare_leafgreen_rev1
+        - make -j2 modern
+        - make -j2 leafgreen_modern
+        - make -j2 firered_rev1_modern
+        - make -j2 leafgreen_rev1_modern
 after_success:
   - .travis/calcrom/webhook.sh pokefirered

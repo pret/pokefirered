@@ -13,6 +13,7 @@ SECTIONS {
 
         *(ewram_data);
         /* pokemon_summary_screen.o */
+        . = ALIGN(4);
         gUnknown_203B140 = .; . += 0x4;
         gUnknown_203B144 = .; . += 0x4;
         gUnknown_203B148 = .; . += 0x10;

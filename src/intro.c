@@ -2045,7 +2045,7 @@ static void Task_FightScene3_Bg0Scroll(u8 taskId)
 
 static void SpriteCB_LargeStar(struct Sprite * sprite)
 {
-    u32 v;
+    unsigned v;
     sprite->data[0] -= sprite->data[2];
     sprite->data[1] += sprite->data[3];
     sprite->data[4] += 48;

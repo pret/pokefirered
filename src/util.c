@@ -120,13 +120,13 @@ u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
     return sprite;
 }
 
-void StoreWordInTwoHalfwords(u16 *h, u32 w)
+void StoreWordInTwoHalfwords(u16 *h, unsigned w)
 {
     h[0] = (u16)(w);
     h[1] = (u16)(w >> 16);
 }
 
-void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
+void LoadWordFromTwoHalfwords(u16 *h, unsigned *w)
 {
     *w = h[0] | (s16)h[1] << 16;
 }

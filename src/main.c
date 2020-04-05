@@ -105,6 +105,13 @@ void AgbMain()
         "\tmov\tr5, r0\n"
         ".LCU0:\n"
         "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
+        "\tstmia r1!, {r0, r3, r4, r5}\n"
         "\tcmp\tr1, r2\n"
         "\tbcc\t.LCU0\n"
     );

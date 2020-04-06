@@ -16,6 +16,7 @@
     destWidth - w;                                               \
 })
 
+#undef abs
 #define abs(a) ((a) < 0 ? -(a) : (a))
 
 #define Q_24_8(n)  ((s32)((n) * 256))

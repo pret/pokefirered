@@ -5791,7 +5791,7 @@ _081375B2:
 	add r4, sp, 0x1C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80C4E08
+	bl GetMapNameGeneric_
 	b _08137626
 	.align 2, 0
 _081375E8: .4byte gUnknown_203B140
@@ -6067,7 +6067,7 @@ _08137830:
 	add r4, sp, 0x1C
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80C4E08
+	bl GetMapNameGeneric_
 	b _08137850
 _08137846:
 	add r4, sp, 0x1C

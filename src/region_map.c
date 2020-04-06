@@ -32,13 +32,55 @@
 #define SWITCH_BUTTON_X 21
 #define SWITCH_BUTTON_Y 11
 
-#define WIN_MAP_NAME     0
-#define WIN_DUNGEON_NAME 1
-#define WIN_MAP_PREVIEW  2
-#define WIN_TOPBAR_LEFT  3
-#define WIN_TOPBAR_RIGHT 4
+enum {
+    REGIONMAP_KANTO,
+    REGIONMAP_SEVII123,
+    REGIONMAP_SEVII45,
+    REGIONMAP_SEVII67,
+    REGIONMAP_COUNT
+};
+
+enum {
+    MAPSECTYPE_NONE,
+    MAPSECTYPE_ROUTE,
+    MAPSECTYPE_VISITED,
+    MAPSECTYPE_NOT_VISITED,
+    MAPSECTYPE_UNKNOWN, // Checked but never used
+};
+
+enum {
+    LAYER_MAP,
+    LAYER_DUNGEON,
+    LAYER_COUNT
+};
+
+enum {
+    WIN_MAP_NAME,
+    WIN_DUNGEON_NAME,
+    WIN_MAP_PREVIEW,
+    WIN_TOPBAR_LEFT,
+    WIN_TOPBAR_RIGHT,
+};
 
 #define CLEAR_NAME 2
+
+enum {
+    MAP_INPUT_NONE,
+    MAP_INPUT_MOVE_START,
+    MAP_INPUT_MOVE_CONT,
+    MAP_INPUT_MOVE_END,
+    MAP_INPUT_A_BUTTON,
+    MAP_INPUT_SWITCH,
+    MAP_INPUT_CANCEL
+};
+
+enum {
+    MAPPERM_HAS_SWITCH_BUTTON,
+    MAPPERM_HAS_MAP_PREVIEW,
+    MAPPERM_HAS_OPEN_ANIM,
+    MAPPERM_HAS_FLY_DESTINATIONS,
+    MAPPERM_COUNT
+};
 
 #define FREE_IF_NOT_NULL(ptr) ({ \
     if (ptr) {                   \
@@ -60,10 +102,10 @@ struct RegionMap
     u8 ALIGNED(4) mainState;
     u8 ALIGNED(4) openState;
     u8 ALIGNED(4) loadGfxState;
-    u16 mapNameLength;
-    bool16 field_47AC; // Never read
-    u16 field_47AE;    // Never read
-    u16 field_47B0;    // Never read
+    u16 dungeonWinLeft;   // Used by a field that's never read
+    u16 dungeonWinTop;    // Never read
+    u16 dungeonWinRight;  // Never read
+    u16 dungeonWinBottom; // Never read
     u8 filler[6]; 
     TaskFunc mainTask;
     MainCallback savedCallback;
@@ -273,7 +315,7 @@ static bool8 DimScreenForSwitchMapMenu(void);
 static bool8 HandleSwitchMapInput(void);
 static bool8 CreateSwitchMapCursor(void);
 static void CreateSwitchMapCursorSubsprite(u8, u16, u16);
-static void _CreateSwitchMapCursorSubsprite(u8, u16, u16);
+static void CreateSwitchMapCursorSubsprite_(u8, u16, u16);
 static void FreeSwitchMapCursor(void);
 static void InitDungeonMapPreview(u8, u8, TaskFunc);
 static void Task_DungeonMapPreview(u8);
@@ -1365,10 +1407,10 @@ static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
 static void sub_80BFEA0(void)
 {
     u16 pal[16];
-    CpuCopy16(&sRegionMap_Pal[0x20], pal, sizeof(pal));
+    CpuCopy16(&sRegionMap_Pal[32], pal, sizeof(pal));
     RegionMap_DarkenPalette(pal, NELEMS(pal), 95);
-    LoadPalette(pal, 0x20, 0x20);
-    LoadPalette(&sRegionMap_Pal[0x2F], 0x2F, sizeof(u16));
+    LoadPalette(pal, 32, sizeof(pal));
+    LoadPalette(&sRegionMap_Pal[0x2F], 0x2F, sizeof(sRegionMap_Pal[0x2F]));
 }
 
 static void InitRegionMap(u8 type)
@@ -1511,18 +1553,18 @@ static bool8 LoadRegionMapGfx(void)
     switch (sRegionMap->loadGfxState)
     {
     case 0:
-        LoadPalette(sTopBar_Pal, 0xC0, 0x20);
+        LoadPalette(sTopBar_Pal, 0xC0, sizeof(sTopBar_Pal));
         break;
     case 1:
-        LoadPalette(sRegionMap_Pal, 0x00, 0xA0);
+        LoadPalette(sRegionMap_Pal, 0, sizeof(sRegionMap_Pal));
         sub_80BFEA0();
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
         {
-            LoadPalette(&sTopBar_Pal[15], 0x00, 0x02);
-            LoadPalette(&sTopBar_Pal[15], 0x10, 0x02);
-            LoadPalette(&sTopBar_Pal[15], 0x20, 0x02);
-            LoadPalette(&sTopBar_Pal[15], 0x30, 0x02);
-            LoadPalette(&sTopBar_Pal[15], 0x40, 0x02);
+            LoadPalette(&sTopBar_Pal[15], 16 * 0, sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], 16 * 1, sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], 16 * 2, sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], 16 * 3, sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], 16 * 4, sizeof(sTopBar_Pal[15]));
         }
         break;
     case 2:
@@ -1866,9 +1908,9 @@ static void DisplayCurrentDungeonName(void)
 {
     u16 mapsecId;
     u16 descOffset;
-    sRegionMap->field_47AC = FALSE;
-    sRegionMap->field_47AE = 24;
-    sRegionMap->field_47B0 = 32;
+    sRegionMap->dungeonWinTop = FALSE;
+    sRegionMap->dungeonWinRight = 24;
+    sRegionMap->dungeonWinBottom = 32;
     SetDispCnt(WIN_DUNGEON_NAME, TRUE);
     ClearWindowTilemap(WIN_DUNGEON_NAME);
     mapsecId = GetDungeonMapsecUnderCursor();
@@ -1876,10 +1918,10 @@ static void DisplayCurrentDungeonName(void)
     {
          descOffset = mapsecId - MAPSECS_KANTO;
          SetDispCnt(WIN_DUNGEON_NAME, FALSE);
-         sRegionMap->field_47AC = TRUE;
-         sRegionMap->mapNameLength = StringLength(sMapNames[descOffset]);
-         sRegionMap->field_47AE = sRegionMap->mapNameLength * 10 + 50;
-         sRegionMap->field_47B0 = 48;
+         sRegionMap->dungeonWinTop = TRUE;
+         sRegionMap->dungeonWinLeft = StringLength(sMapNames[descOffset]);
+         sRegionMap->dungeonWinRight = sRegionMap->dungeonWinLeft * 10 + 50;
+         sRegionMap->dungeonWinBottom = 48;
          FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
          StringCopy(sRegionMap->dungeonName, sMapNames[descOffset]);
          AddTextPrinterParameterized3(WIN_DUNGEON_NAME, 2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
@@ -2037,7 +2079,7 @@ static void Task_SwitchMapMenu(u8 taskId)
         sSwitchMapMenu->mainState++;
         break;
     case 1:
-        LoadBgTiles(2, sSwitchMapMenu->switchMapTiles, 0x1000, 0);
+        LoadBgTiles(2, sSwitchMapMenu->switchMapTiles, sizeof(sSwitchMapMenu->switchMapTiles), 0);
         sSwitchMapMenu->mainState++;
         break;
     case 2:
@@ -2269,16 +2311,16 @@ static bool8 CreateSwitchMapCursor(void)
 
 static void CreateSwitchMapCursorSubsprite(u8 whichSprite, u16 tileTag, u16 palTag)
 {
-    _CreateSwitchMapCursorSubsprite(whichSprite, tileTag, palTag);
+    CreateSwitchMapCursorSubsprite_(whichSprite, tileTag, palTag);
 }
 
-static void _CreateSwitchMapCursorSubsprite(u8 whichSprite, u16 tileTag, u16 palTag)
+static void CreateSwitchMapCursorSubsprite_(u8 whichSprite, u16 tileTag, u16 palTag)
 {
     u8 spriteId;
 
     struct SpriteSheet spriteSheet = {
         .data = sSwitchMapMenu->cursorSubsprite[whichSprite].tiles,
-        .size = 0x400,
+        .size = sizeof(sSwitchMapMenu->cursorSubsprite[whichSprite].tiles),
         .tag = tileTag
     };
     struct SpritePalette spritePalette = {
@@ -2373,7 +2415,7 @@ static bool8 LoadMapPreviewGfx(void)
         LZ77UnCompWram(sDungeonMapPreview->mapPreviewInfo->tilemapptr, sDungeonMapPreview->tilemap);
         break;
     case 2:
-        LoadBgTiles(2, sDungeonMapPreview->tiles, 0x3840, 0x000);
+        LoadBgTiles(2, sDungeonMapPreview->tiles, sizeof(sDungeonMapPreview->tiles), 0);
         break;
     case 3:
         LoadPalette(sDungeonMapPreview->mapPreviewInfo->palptr, 0xD0, 0x60);
@@ -2477,7 +2519,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
             sDungeonMapPreview->blue -= 5;
             CpuCopy16(sDungeonMapPreview->mapPreviewInfo->palptr, sDungeonMapPreview->palette, 0x60);
             TintPalette_CustomTone(sDungeonMapPreview->palette, 48, sDungeonMapPreview->red, sDungeonMapPreview->green, sDungeonMapPreview->blue);
-            LoadPalette(sDungeonMapPreview->palette, 0xD0, 0x60);
+            LoadPalette(sDungeonMapPreview->palette, 0xD0, sizeof(sDungeonMapPreview->palette));
         }
         sDungeonMapPreview->timer++;
         break;
@@ -2689,7 +2731,7 @@ static bool8 LoadMapEdgeGfx(void)
         LZ77UnCompWram(sMapEdge_Tilemap, sMapOpenCloseAnim->tilemap);
         break;
     case 8:
-        LoadBgTiles(1, sMapOpenCloseAnim->tiles, BG_SCREEN_SIZE, 0x000);
+        LoadBgTiles(1, sMapOpenCloseAnim->tiles, BG_SCREEN_SIZE, 0);
         break;
     default:
         return TRUE;
@@ -2821,11 +2863,11 @@ static void Task_MapOpenAnim(u8 taskId)
         sMapOpenCloseAnim->openState++;
         break;
     case 10:
-        LoadPalette(&sTopBar_Pal[15], 0x00, 2);
-        LoadPalette(&sTopBar_Pal[15], 0x10, 2);
-        LoadPalette(&sTopBar_Pal[15], 0x20, 2);
-        LoadPalette(&sTopBar_Pal[15], 0x30, 2);
-        LoadPalette(&sTopBar_Pal[15], 0x40, 2);
+        LoadPalette(&sTopBar_Pal[15], 16 * 0, sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], 16 * 1, sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], 16 * 2, sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], 16 * 3, sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], 16 * 4, sizeof(sTopBar_Pal[15]));
         sMapOpenCloseAnim->openState++;
         break;
     case 11:
@@ -2974,7 +3016,7 @@ static void Task_MapCloseAnim(u8 taskId)
         sMapOpenCloseAnim->closeState++;
         break;
     case 2:
-        LoadPalette(sRegionMap_Pal, 0x00, 0xA0);
+        LoadPalette(sRegionMap_Pal, 0, sizeof(sRegionMap_Pal));
         sMapOpenCloseAnim->closeState++;
         break;
     case 3:
@@ -3111,7 +3153,7 @@ static void CreateMapCursorSprite(void)
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
         .data = sMapCursor->tiles,
-        .size = 0x100,
+        .size = sizeof(sMapCursor->tiles),
         .tag = sMapCursor->tileTag
     };
     struct SpritePalette spritePalette = {
@@ -3272,6 +3314,7 @@ static void SnapToIconOrButton(void)
         sMapCursor->snapId %= 3;
         if (sMapCursor->snapId == 0 && GetSelectedRegionMap() != GetRegionMapPlayerIsOn())
         {
+            // Player icon not present on this map, skip it
             sMapCursor->snapId++;
         }
         switch (sMapCursor->snapId)
@@ -3791,7 +3834,7 @@ static void CreatePlayerIconSprite(void)
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
         .data = sPlayerIcon->tiles,
-        .size = 0x80,
+        .size = sizeof(sPlayerIcon->tiles),
         .tag = sPlayerIcon->tileTag
     };
     struct SpritePalette spritePalette = {
@@ -3896,7 +3939,7 @@ static void CreateFlyIconSprite(u8 whichMap, u8 numIcons, u16 x, u16 y, u8 tileT
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
         .data = sMapIcons->flyIconTiles,
-        .size = 0x100,
+        .size = sizeof(sMapIcons->flyIconTiles),
         .tag = tileTag
     };
     struct SpritePalette spritePalette = {
@@ -3928,7 +3971,7 @@ static void CreateDungeonIconSprite(u8 whichMap, u8 numIcons, u16 x, u16 y, u8 t
     s16 offset = 0;
     struct SpriteSheet spriteSheet = {
         .data = sMapIcons->dungeonIconTiles,
-        .size = 0x40,
+        .size = sizeof(sMapIcons->dungeonIconTiles),
         .tag = tileTag
     };
     struct SpritePalette spritePalette = {
@@ -4234,7 +4277,8 @@ u8 *GetMapNameGeneric(u8 *dest, u16 mapsec)
     return GetMapName(dest, mapsec, 0);
 }
 
-u8 *sub_80C4E08(u8 *dest, u16 mapsec)
+// Unclear why this function is used over GetMapNameGeneric
+u8 *GetMapNameGeneric_(u8 *dest, u16 mapsec)
 {
     return GetMapNameGeneric(dest, mapsec);
 }

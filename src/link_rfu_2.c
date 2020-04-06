@@ -499,7 +499,7 @@ void LinkRfu_Shutdown(void)
 {
     u8 i;
 
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
 
     rfu_LMAN_powerDownRFU();
@@ -538,7 +538,7 @@ void LinkRfu_Shutdown(void)
 
 static void CreateTask_LinkLeaderSearchForChildren(void)
 {
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
     Rfu.unk_67 = CreateTask(Task_LinkLeaderSearchForChildren, 1);
 }
@@ -564,7 +564,7 @@ static bool32 IsParentSuccessfullyReconnected(void)
 
 static void CreateTask_JoinGroupSearchForParent(void)
 {
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
     Rfu.unk_67 = CreateTask(Task_JoinGroupSearchForParent, 1);
 }
@@ -2481,7 +2481,7 @@ void InitializeRfuLinkManager_JoinGroup(void)
 
 void InitializeRfuLinkManager_EnterUnionRoom(void)
 {
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
     Rfu.parent_child = 2;
     CopyPlayerNameToUnameBuffer();

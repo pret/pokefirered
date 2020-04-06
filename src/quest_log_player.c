@@ -41,7 +41,7 @@ void sub_8150454(u8 a0)
 
 bool32 sub_8150474(u8 a0)
 {
-    if (gUnknown_3005E88 == 2)
+    if (gQuestLogPlaybackState == 2)
     {
         sub_8112720(a0);
         return TRUE;
@@ -76,7 +76,7 @@ static void sub_8150530(void)
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
 
-    if (gUnknown_3005E88 == 1 || gUnknown_3005E88 == 3)
+    if (gQuestLogPlaybackState == 1 || gQuestLogPlaybackState == 3)
     {
         u8 taskId;
         ScriptContext2_Enable();

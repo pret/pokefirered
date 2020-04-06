@@ -2,9 +2,14 @@
 #define GUARD_CONSTANTS_QUEST_LOG_H
 
 // TODO: Name and use state constants
-#define QL_STATE_1  1
-#define QL_STATE_2  2
-#define QL_STATE_3  3
+#define QL_STATE_RECORDING     1
+#define QL_STATE_PLAYBACK      2
+#define QL_STATE_PLAYBACK_LAST 3
+
+#define QL_START_NORMAL 1
+#define QL_START_WARP   2
+
+#define QL_IS_PLAYBACK_STATE (gQuestLogState == QL_STATE_PLAYBACK || gQuestLogState == QL_STATE_PLAYBACK_LAST)
 
 #define QL_EVENT_0                              0 // Null
 #define QL_EVENT_1                              1 // Null

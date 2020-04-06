@@ -176,7 +176,7 @@ static void InitMainCallbacks(void)
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
-    gUnknown_3005E88 = 0;
+    gQuestLogPlaybackState = 0;
 }
 
 static void CallCallbacks(void)

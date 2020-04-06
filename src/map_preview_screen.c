@@ -366,7 +366,7 @@ bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
 
 bool32 MapHasPreviewScreen_HandleQLState2(u8 mapsec, u8 type)
 {
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         return FALSE;
     }

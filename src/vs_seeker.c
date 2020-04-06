@@ -598,7 +598,7 @@ static void Task_ResetObjectsRematchWantedState(u8 taskId)
 
     if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)
     {
-        sub_805C270();
+        HandleEnforcedLookDirectionOnPlayerStopMoving();
         task->data[0] = 1;
     }
 

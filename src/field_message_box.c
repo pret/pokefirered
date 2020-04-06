@@ -24,7 +24,7 @@ static void Task_RunFieldMessageBoxPrinter(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        if (gQuestLogState == QL_STATE_2)
+        if (gQuestLogState == QL_STATE_PLAYBACK)
         {
             gTextFlags.autoScroll = TRUE;
             TextWindow_LoadTilesStdFrame1(0, 0x200);

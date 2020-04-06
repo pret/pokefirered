@@ -619,7 +619,7 @@ struct QuestLogObjectEvent
 
 struct QuestLog
 {
-    /*0x0000*/ u8 unk_000;
+    /*0x0000*/ u8 startType;
     /*0x0001*/ u8 mapGroup;
     /*0x0002*/ u8 mapNum;
     /*0x0003*/ u8 warpId;
@@ -632,7 +632,7 @@ struct QuestLog
     /*0x0148*/ u8 flags[FLAGS_COUNT];
     /*0x02c8*/ u16 vars[VARS_COUNT];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
-    /*0x0568*/ u16 unk_568[128];
+    /*0x0568*/ u16 script[128];
     /*0x0668*/ u16 end[0];
 };
 

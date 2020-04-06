@@ -1892,7 +1892,7 @@ void HelpSystem_Disable(void)
 
 void HelpSystem_Enable(void)
 {
-    if (gQuestLogState != 2 && gQuestLogState != 3)
+    if (!QL_IS_PLAYBACK_STATE)
     {
         gHelpSystemEnabled = TRUE;
         HelpSystem_EnableToggleWithRButton();

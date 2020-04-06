@@ -61,7 +61,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 
     if (!ScriptContext2_IsEnabled())
     {
-        if (gQuestLogState != 2 && gQuestLogState != 3)
+        if (!QL_IS_PLAYBACK_STATE)
         {
             UpdateAmbientCry(&data[1], &data[2]);
         }

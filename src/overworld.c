@@ -921,9 +921,9 @@ static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *playerStr
         return DIR_EAST;
     else if (MetatileBehavior_IsEastArrowWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
-    else if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6E(metatileBehavior) == TRUE)
+    else if (MetatileBehavior_IsDirectionalUpRightStairWarp(metatileBehavior) == TRUE || MetatileBehavior_IsDirectionalDownRightStairWarp(metatileBehavior) == TRUE)
         return DIR_WEST;
-    else if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior) == TRUE || MetatileBehavior_IsUnknownWarp6F(metatileBehavior) == TRUE)
+    else if (MetatileBehavior_IsDirectionalUpLeftStairWarp(metatileBehavior) == TRUE || MetatileBehavior_IsDirectionalDownLeftStairWarp(metatileBehavior) == TRUE)
         return DIR_EAST;
     else if ((playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER  && transitionFlags == PLAYER_AVATAR_FLAG_SURFING)
              || (playerStruct->transitionFlags == PLAYER_AVATAR_FLAG_SURFING && transitionFlags == PLAYER_AVATAR_FLAG_UNDERWATER ))
@@ -1406,7 +1406,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
-            if (gUnknown_3005E88 == 2)
+            if (gQuestLogPlaybackState == 2)
                 sub_81127F8(&gInputToStoreInQuestLogMaybe);
             ScriptContext2_Enable();
             DismissMapNamePopup();
@@ -1452,7 +1452,7 @@ void CB1_Overworld(void)
 {
     if (gMain.callback2 == CB2_Overworld)
     {
-        if (sub_8112CAC() == TRUE || gQuestLogState == QL_STATE_2)
+        if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_PLAYBACK)
             DoCB1_Overworld_QuestLogPlayback();
         else
             DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
@@ -1868,7 +1868,7 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
     case 4:
         mli4_mapscripts_and_other();
         sub_8057114();
-        if (gQuestLogState != QL_STATE_2)
+        if (gQuestLogState != QL_STATE_PLAYBACK)
         {
             sub_80CC534();
             sub_80CC59C();
@@ -2251,7 +2251,7 @@ static bool32 sub_8057314(u8 *state)
         sub_8111F14();
         sub_81113E4();
         sub_8111438();
-        if (sub_8110AC8() == 2)
+        if (GetQuestLogStartType() == QL_START_WARP)
         {
             gUnknown_2031DE0 = FALSE;
             mli0_load_map(FALSE);

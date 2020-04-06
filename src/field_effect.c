@@ -2984,7 +2984,7 @@ static void (*const sUseVsSeekerEffectFuncs[])(struct Task * task) = {
 
 u32 FldEff_UseVsSeeker(void)
 {
-    if (gQuestLogState == QL_STATE_1)
+    if (gQuestLogState == QL_STATE_RECORDING)
         sub_811278C(8, 89);
     CreateTask(Task_FldEffUseVsSeeker, 0xFF);
     return 0;

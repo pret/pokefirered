@@ -3,9 +3,9 @@
 
 #include "global.h"
 
-bool8 sub_8069590(void);
+bool8 NativeScript_WaitPlayerStopMoving(void);
 void ScriptFreezeObjectEvents(void);
-bool8 sub_8069648(void);
+bool8 NativeScript_WaitPlayerAndTargetNPCStopMoving(void);
 void LockSelectedObjectEvent(void);
 void sub_8098630(void);
 bool8 sub_8098734(void);

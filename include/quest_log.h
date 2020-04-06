@@ -7,7 +7,7 @@
 #include "field_control_avatar.h"
 
 extern u8 gQuestLogState;
-extern u8 gUnknown_3005E88;
+extern u8 gQuestLogPlaybackState;
 extern const u16 gUnknown_84566A8[];
 extern struct FieldInput gQuestLogFieldInput;
 
@@ -59,7 +59,7 @@ bool8 sub_8113748(void);
 void sub_81119C8(void);
 void sub_8111F14(void);
 void sub_8110FCC(void);
-u8 sub_8110AC8(void);
+u8 GetQuestLogStartType(void);
 void sub_81113E4(void);
 void sub_8111438(void);
 

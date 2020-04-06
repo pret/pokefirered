@@ -569,7 +569,7 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_RUN] = HandleAction_Run,
     [B_ACTION_SAFARI_WATCH_CAREFULLY] = HandleAction_WatchesCarefully,
     [B_ACTION_SAFARI_BALL] = HandleAction_SafariZoneBallThrow,
-    [B_ACTION_SAFARI_POKEBLOCK] = HandleAction_ThrowBait,
+    [B_ACTION_SAFARI_BAIT] = HandleAction_ThrowBait,
     [B_ACTION_SAFARI_GO_NEAR] = HandleAction_ThrowRock,
     [B_ACTION_SAFARI_RUN] = HandleAction_SafariZoneRun,
     [B_ACTION_OLDMAN_THROW] = HandleAction_OldManBallThrow,
@@ -3260,7 +3260,7 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_SAFARI_BALL:
                     ++gBattleCommunication[gActiveBattler];
                     break;
-                case B_ACTION_SAFARI_POKEBLOCK:
+                case B_ACTION_SAFARI_BAIT:
                 case B_ACTION_SAFARI_GO_NEAR:
                     ++gBattleCommunication[gActiveBattler];
                     break;

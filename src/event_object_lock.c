@@ -4,6 +4,8 @@
 #include "event_object_movement.h"
 #include "script_movement.h"
 #include "event_data.h"
+#include "constants/maps.h"
+#include "constants/event_objects.h"
 
 bool8 walkrun_is_standing_still(void)
 {
@@ -13,18 +15,18 @@ bool8 walkrun_is_standing_still(void)
         return TRUE;
 }
 
-void sub_8069570(u8 taskId)
+void Task_WaitPlayerStopMoving(u8 taskId)
 {
     if (walkrun_is_standing_still())
     {
-        sub_805C270();
+        HandleEnforcedLookDirectionOnPlayerStopMoving();
         DestroyTask(taskId);
     }
 }
 
-bool8 sub_8069590(void)
+bool8 NativeScript_WaitPlayerStopMoving(void)
 {
-    if (FuncIsActiveTask(sub_8069570))
+    if (FuncIsActiveTask(Task_WaitPlayerStopMoving))
         return FALSE;
     else
     {
@@ -36,16 +38,16 @@ bool8 sub_8069590(void)
 void ScriptFreezeObjectEvents(void)
 {
     FreezeObjectEvents();
-    CreateTask(sub_8069570, 80);
+    CreateTask(Task_WaitPlayerStopMoving, 80);
 }
 
-void sub_80695CC(u8 taskId)
+void Task_WaitPlayerAndTargetNPCStopMoving(u8 taskId)
 {
     struct Task * task = &gTasks[taskId];
 
     if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)
     {
-        sub_805C270();
+        HandleEnforcedLookDirectionOnPlayerStopMoving();
         task->data[0] = 1;
     }
 
@@ -59,9 +61,9 @@ void sub_80695CC(u8 taskId)
         DestroyTask(taskId);
 }
 
-bool8 sub_8069648(void)
+bool8 NativeScript_WaitPlayerAndTargetNPCStopMoving(void)
 {
-    if (FuncIsActiveTask(sub_80695CC))
+    if (FuncIsActiveTask(Task_WaitPlayerAndTargetNPCStopMoving))
         return FALSE;
     else
     {
@@ -75,7 +77,7 @@ void LockSelectedObjectEvent(void)
     u8 taskId;
 
     FreezeObjectEventsExceptOne(gSelectedObjectEvent);
-    taskId = CreateTask(sub_80695CC, 80);
+    taskId = CreateTask(Task_WaitPlayerAndTargetNPCStopMoving, 80);
     if (!gObjectEvents[gSelectedObjectEvent].singleMovementActive)
     {
         FreezeObjectEvent(&gObjectEvents[gSelectedObjectEvent]);
@@ -85,7 +87,7 @@ void LockSelectedObjectEvent(void)
 
 void sub_80696C0(void)
 {
-    u8 objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    u8 objectEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -96,7 +98,7 @@ void UnionRoom_UnlockPlayerAndChatPartner(void)
     u8 objectEventId;
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    objectEventId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    objectEventId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();

@@ -3461,7 +3461,7 @@ void InitUnionRoom(void)
     struct UnkStruct_URoom * ptr;
 
     sUnionRoomPlayerName[0] = EOS;
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
     CreateTask(Task_InitUnionRoom, 0);
     sUnionRoomMain.uRoom = sUnionRoomMain.uRoom; // Needed to match.

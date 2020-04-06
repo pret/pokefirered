@@ -107,7 +107,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         {
             if ((newKeys & START_BUTTON) && !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
                 input->pressedStartButton = TRUE;
-            if (gQuestLogState != QL_STATE_2 && gQuestLogState != QL_STATE_3)
+            if (!QL_IS_PLAYBACK_STATE)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FISHING))
                 {
@@ -123,7 +123,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             }
         }
 
-        if (gQuestLogState != QL_STATE_2 && gQuestLogState != QL_STATE_3)
+        if (!QL_IS_PLAYBACK_STATE)
         {
             if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
             {
@@ -142,7 +142,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->checkStandardWildEncounter = TRUE;
     }
 
-    if (gQuestLogState != QL_STATE_2 && gQuestLogState != QL_STATE_3)
+    if (!QL_IS_PLAYBACK_STATE)
     {
         if (heldKeys & DPAD_UP)
             input->dpadDirection = DIR_NORTH;
@@ -650,7 +650,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
 {
     if (InUnionRoom() == TRUE)
         return FALSE;
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
         return FALSE;
 
     UpdateHappinessStepCounter();
@@ -836,17 +836,17 @@ static bool8 TryArrowWarp(struct MapPosition *position, u16 metatileBehavior, u8
             DoWarp();
             return TRUE;
         }
-        else if (sub_806DB84(metatileBehavior, direction) == TRUE)
+        else if (IsDirectionalStairWarpMetatileBehavior(metatileBehavior, direction) == TRUE)
         {
             delay = 0;
             if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
             {
-                SetPlayerAvatarTransitionFlags(1);
+                SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
                 delay = 12;
             }
             StoreInitialPlayerAvatarState();
             SetupWarp(&gMapHeader, warpEventId, position);
-            sub_807E4A0(metatileBehavior, delay);
+            DoStairWarp(metatileBehavior, delay);
             return TRUE;
         }
     }
@@ -921,20 +921,20 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
     return FALSE;
 }
 
-bool8 sub_806DB84(u16 metatileBehavior, u8 playerDirection)
+bool8 IsDirectionalStairWarpMetatileBehavior(u16 metatileBehavior, u8 playerDirection)
 {
     switch (playerDirection)
     {
     case DIR_WEST:
-        if (MetatileBehavior_IsUnknownWarp6D(metatileBehavior))
+        if (MetatileBehavior_IsDirectionalUpLeftStairWarp(metatileBehavior))
             return TRUE;
-        if (MetatileBehavior_IsUnknownWarp6F(metatileBehavior))
+        if (MetatileBehavior_IsDirectionalDownLeftStairWarp(metatileBehavior))
             return TRUE;
         break;
     case DIR_EAST:
-        if (MetatileBehavior_IsUnknownWarp6C(metatileBehavior))
+        if (MetatileBehavior_IsDirectionalUpRightStairWarp(metatileBehavior))
             return TRUE;
-        if (MetatileBehavior_IsUnknownWarp6E(metatileBehavior))
+        if (MetatileBehavior_IsDirectionalDownRightStairWarp(metatileBehavior))
             return TRUE;
         break;
     }
@@ -1063,18 +1063,17 @@ static const u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 
     return NULL;
 }
 
-void sub_806DE28(struct ObjectEvent * object)
+void HandleBoulderFallThroughHole(struct ObjectEvent * object)
 {
     if (MapGridGetMetatileBehaviorAt(object->currentCoords.x, object->currentCoords.y) == MB_FALL_WARP)
     {
         PlaySE(SE_RU_HYUU);
-        // w-why?!
         RemoveObjectEventByLocalIdAndMap(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-        FlagClear(sub_805FCD8(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
+        FlagClear(GetObjectEventFlagByLocalIdAndMap(object->localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup));
     }
 }
 
-void sub_806DE70(u16 x, u16 y)
+void HandleBoulderActivateVictoryRoadSwitch(u16 x, u16 y)
 {
     int i;
     const struct CoordEvent * events = gMapHeader.events->coordEvents;

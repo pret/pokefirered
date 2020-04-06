@@ -102,8 +102,8 @@ void ShowDiploma(void)
 
 void ForcePlayerOntoBike(void)
 {
-    if (gPlayerAvatar.flags & 1)
-        SetPlayerAvatarTransitionFlags(2);
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT)
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
     Overworld_SetSavedMusic(MUS_CYCLING);
     Overworld_ChangeMusicTo(MUS_CYCLING);
 }
@@ -1519,7 +1519,7 @@ static void Task_ListMenuRemoveScrollIndicatorArrowPair(u8 taskId)
 void ForcePlayerToStartSurfing(void)
 {
     SetHelpContext(HELPCONTEXT_SURFING);
-    SetPlayerAvatarTransitionFlags(8);
+    SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
 }
 
 static const u16 sStarterSpecies[] = {
@@ -2481,7 +2481,7 @@ void BrailleCursorToggle(void)
     // 8005 = y
     // 8006 = action (0 = create, 1 = delete)
     u16 x;
-    if (gQuestLogState != 2)
+    if (gQuestLogState != QL_STATE_PLAYBACK)
     {
         x = gSpecialVar_0x8004 + 27;
         if (gSpecialVar_0x8006 == 0)

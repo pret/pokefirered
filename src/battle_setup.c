@@ -417,7 +417,7 @@ static void CB2_EndWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToField);
-        gFieldCallback = sub_807E3EC;
+        gFieldCallback = FieldCB_SafariZoneRanOutOfBalls;
     }
 }
 
@@ -994,8 +994,7 @@ void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
-    if (gQuestLogState != 2
-     && gQuestLogState != 3
+    if (!QL_IS_PLAYBACK_STATE
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
      && sTrainerBattleMode != TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
     {

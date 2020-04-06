@@ -2805,7 +2805,7 @@ u8 sub_805FC9C(u8 localId, u8 mapNum, u8 mapGroup)
     return gObjectEvents[objectEventId].trainerType;
 }
 
-u16 sub_805FCD8(u8 localId, u8 mapNum, u8 mapGroup)
+u16 GetObjectEventFlagByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     return GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->trainerType;
 }
@@ -5530,7 +5530,7 @@ static void sub_8064544(struct ObjectEvent *objectEvent, struct Sprite *sprite)
     {
         objectEvent->heldMovementFinished = TRUE;
         if (objectEvent->graphicsId == 0x61)
-            sub_806DE28(objectEvent);
+            HandleBoulderFallThroughHole(objectEvent);
     }
 }
 
@@ -5550,7 +5550,7 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *objectEvent, struct
     objectEvent->movementActionId = animId;
     sprite->data[2] = 0;
     
-    if (gUnknown_3005E88 == 2)
+    if (gQuestLogPlaybackState == 2)
     {
         sub_81124EC(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, animId);
     }

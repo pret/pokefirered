@@ -131,51 +131,51 @@ bool8 MetatileBehavior_IsEscalator(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsUnknownWarp6C(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDirectionalUpRightStairWarp(u8 metatileBehavior)
 {
     u8 result = FALSE;
 
-    if(metatileBehavior == MB_UNKNOWN_WARP_6C)
+    if(metatileBehavior == MB_UP_RIGHT_STAIR_WARP)
         result = TRUE;
 
     return result;
 }
 
-bool8 MetatileBehavior_IsUnknownWarp6D(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDirectionalUpLeftStairWarp(u8 metatileBehavior)
 {
     u8 result = FALSE;
 
-    if(metatileBehavior == MB_UNKNOWN_WARP_6D)
+    if(metatileBehavior == MB_UP_LEFT_STAIR_WARP)
         result = TRUE;
 
     return result;
 }
 
-bool8 MetatileBehavior_IsUnknownWarp6E(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDirectionalDownRightStairWarp(u8 metatileBehavior)
 {
     u8 result = FALSE;
 
-    if(metatileBehavior == MB_UNKNOWN_WARP_6E)
+    if(metatileBehavior == MB_DOWN_RIGHT_STAIR_WARP)
         result = TRUE;
 
     return result;
 }
 
-bool8 MetatileBehavior_IsUnknownWarp6F(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDirectionalDownLeftStairWarp(u8 metatileBehavior)
 {
     u8 result = FALSE;
 
-    if(metatileBehavior == MB_UNKNOWN_WARP_6F)
+    if(metatileBehavior == MB_DOWN_LEFT_STAIR_WARP)
         result = TRUE;
 
     return result;
 }
 
-bool8 MetatileBehavior_IsUnknownWarp6C_to_6F(u8 metatileBehavior)
+bool8 MetatileBehavior_IsDirectionalStairWarp(u8 metatileBehavior)
 {
     bool8 result = FALSE;
 
-    if(metatileBehavior >= MB_UNKNOWN_WARP_6C && metatileBehavior <= MB_UNKNOWN_WARP_6F)
+    if(metatileBehavior >= MB_UP_RIGHT_STAIR_WARP && metatileBehavior <= MB_DOWN_LEFT_STAIR_WARP)
         result = TRUE;
     else
         result = FALSE;
@@ -484,7 +484,7 @@ bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 
 bool8 MetatileBehavior_IsUnableToEmerge(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_19)
+    if(metatileBehavior == MB_UNDERWATER_BLOCKED_ABOVE)
         return TRUE;
     else
         return FALSE;
@@ -622,7 +622,7 @@ bool8 MetatileBehavior_IsLavaridgeB1FWarp(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsLavaridge1FWarp(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_68)
+    if(metatileBehavior == MB_LAVARIDGE_1F_WARP)
         return TRUE;
     else
         return FALSE;
@@ -685,7 +685,7 @@ bool8 MetatileBehavior_IsHorizontalRail(u8 metatileBehavior) { return FALSE; }
 
 bool8 MetatileBehavior_IsSeaweed(u8 metatileBehavior)
 {
-    if(metatileBehavior == MB_22)
+    if(metatileBehavior == MB_SEAWEED)
         return TRUE;
     else
         return FALSE;

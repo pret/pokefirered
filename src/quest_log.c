@@ -289,7 +289,7 @@ static const struct WindowTemplate sQuestLogHeaderWindowTemplates[3] = {
 
 static const u8 sTextColors[3] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_3};
 
-static const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
+static const u16 gUnknown_8456638[] = INCBIN_U16("graphics/unknown/unknown_8456638.bin");
 
 static const u8 sQuestLogTextLineYCoords[] = {17, 10, 3};
 
@@ -1829,7 +1829,7 @@ void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
 // Probable file boundary, help_message.c below, quest_log.c above
 
 
-const u16 gUnknown_84566A8[] = INCBIN_U16("data/graphics/unknown_84566a8.bin");
+const u16 gUnknown_84566A8[] = INCBIN_U16("graphics/unknown/unknown_84566a8.bin");
 
 static const struct WindowTemplate sHelpMessageWindowTemplate = {
     0x00, 0, 15, 30, 5, 15, 0x008F

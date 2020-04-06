@@ -8,7 +8,7 @@
 #include "money.h"
 #include "strings.h"
 
-static const u16 sBagWindowPalF[] = INCBIN_U16("data/bag/bag_window_pal.gbapal");
+static const u16 sBagWindowPalF[] = INCBIN_U16("graphics/item_menu/bag_window_pal.gbapal");
 
 static const u8 sTextColors[][3] = {
     {0, 1, 2},

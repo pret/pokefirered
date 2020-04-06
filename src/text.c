@@ -18,12 +18,12 @@ static void DecompressGlyphFont4(u16 glyphId, bool32 isJapanese);
 
 TextFlags gTextFlags;
 
-const u8 gDownArrowTiles[]         = INCBIN_U8("data/graphics/fonts/down_arrow.4bpp");
-const u8 gDarkDownArrowTiles[]     = INCBIN_U8("data/graphics/fonts/down_arrow_RS.4bpp");
-const u8 gTinyArrowTiles[]         = INCBIN_U8("data/graphics/fonts/down_arrow_2.4bpp");
-const u8 gTinyDarkDownArrowTiles[] = INCBIN_U8("data/graphics/fonts/down_arrow_RS_2.4bpp");
-const u8 gDoubleArrowTiles1[]       = INCBIN_U8("data/graphics/fonts/down_arrow_3.4bpp");
-const u8 gDoubleArrowTiles2[]       = INCBIN_U8("data/graphics/fonts/down_arrow_4.4bpp");
+const u8 gDownArrowTiles[]         = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
+const u8 gDarkDownArrowTiles[]     = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
+const u8 gTinyArrowTiles[]         = INCBIN_U8("graphics/fonts/down_arrow_2.4bpp");
+const u8 gTinyDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS_2.4bpp");
+const u8 gDoubleArrowTiles1[]       = INCBIN_U8("graphics/fonts/down_arrow_3.4bpp");
+const u8 gDoubleArrowTiles2[]       = INCBIN_U8("graphics/fonts/down_arrow_4.4bpp");
 
 const u8 gDownArrowYCoords[]           = { 0x0, 0x10, 0x20, 0x10 };
 const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2 , 0x4 , 0x0 };
@@ -78,10 +78,10 @@ const struct KeypadIcon gKeypadIcons[] = {
     { 0x22,  0x8, 0xC },
 };
 
-const u8 gKeypadIconTiles[] = INCBIN_U8("data/graphics/fonts/keypad_icons.4bpp");
+const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
 
 // Font 0
-const u16 gFont0LatinGlyphs[] = INCBIN_U16("data/graphics/fonts/font0_latin.latfont");
+const u16 gFont0LatinGlyphs[] = INCBIN_U16("graphics/fonts/font0_latin.latfont");
 const u8 gFont0LatinGlyphWidths[] = 
 {
     0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x04, 0x05, 0x04, 0x04, 0x05, 
@@ -122,10 +122,10 @@ const u8 gFont0LatinGlyphWidths[] =
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x05
 };
-const u16 gFont0JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font0_jap.fwjpnfont");
+const u16 gFont0JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font0_jap.fwjpnfont");
 
 // Font 1
-const u16 gFont1LatinGlyphs[] = INCBIN_U16("data/graphics/fonts/font1_latin.latfont");
+const u16 gFont1LatinGlyphs[] = INCBIN_U16("graphics/fonts/font1_latin.latfont");
 const u8 gFont1LatinGlyphWidths[] =
 {
     0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
@@ -166,10 +166,10 @@ const u8 gFont1LatinGlyphWidths[] =
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x06
 };
-const u16 gFont1JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font1_jap.fwjpnfont");
+const u16 gFont1JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font1_jap.fwjpnfont");
 
 // Font 2
-const u16 gFont2LatinGlyphs[] = INCBIN_U16("data/graphics/fonts/font2_latin.latfont");
+const u16 gFont2LatinGlyphs[] = INCBIN_U16("graphics/fonts/font2_latin.latfont");
 const u8 gFont2LatinGlyphWidths[] =
 {
     0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
@@ -210,7 +210,7 @@ const u8 gFont2LatinGlyphWidths[] =
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x06
 };
-const u16 gFont2JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font2_jap.fwjpnfont");
+const u16 gFont2JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font2_jap.fwjpnfont");
 const u8 gFont2JapaneseGlyphWidths[] =
 {
     0x00, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A,
@@ -236,7 +236,7 @@ const u8 gFont2JapaneseGlyphWidths[] =
 };
 
 // Font 4
-const u16 gFont4LatinGlyphs[] = INCBIN_U16("data/graphics/fonts/font4_latin.latfont");
+const u16 gFont4LatinGlyphs[] = INCBIN_U16("graphics/fonts/font4_latin.latfont");
 const u8 gFont4LatinGlyphWidths[] =
 {
     0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
@@ -277,7 +277,7 @@ const u8 gFont4LatinGlyphWidths[] =
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x06
 };
-const u16 gFont4JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font4_jap.fwjpnfont");
+const u16 gFont4JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font4_jap.fwjpnfont");
 const u8 gFont4JapaneseGlyphWidths[] = 
 {
     0x00, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A,
@@ -303,7 +303,7 @@ const u8 gFont4JapaneseGlyphWidths[] =
 };
 
 // Font 5
-const u16 gFont5LatinGlyphs[] = INCBIN_U16("data/graphics/fonts/font5_latin.latfont");
+const u16 gFont5LatinGlyphs[] = INCBIN_U16("graphics/fonts/font5_latin.latfont");
 const u8 gFont5LatinGlyphWidths[] =
 {
     0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06, 0x06,
@@ -344,7 +344,7 @@ const u8 gFont5LatinGlyphWidths[] =
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
     0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x06
 };
-const u16 gFont5JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font5_jap.fwjpnfont");
+const u16 gFont5JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font5_jap.fwjpnfont");
 const u8 gFont5JapaneseGlyphWidths[] =
 {
     0x00, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A,
@@ -370,7 +370,7 @@ const u8 gFont5JapaneseGlyphWidths[] =
 };
 
 // Font 9
-const u16 gFont9JapaneseGlyphs[] = INCBIN_U16("data/graphics/fonts/font9_jap.fwjpnfont");
+const u16 gFont9JapaneseGlyphs[] = INCBIN_U16("graphics/fonts/font9_jap.fwjpnfont");
 
 u16 Font0Func(struct TextPrinter *textPrinter)
 {

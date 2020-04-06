@@ -1,7 +1,6 @@
 TILESETGFXDIR := data/tilesets
-GLOBALGFXDIR := data/graphics
-FONTGFXDIR := $(GLOBALGFXDIR)/fonts
-FAMECHECKERGFXDIR := data/fame_checker
+FONTGFXDIR := graphics/fonts
+FAMECHECKERGFXDIR := graphics/fame_checker
 INTERFACEGFXDIR := graphics/interface
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
@@ -13,8 +12,6 @@ TYPESGFXDIR := graphics/types
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
-PKNAVGFXDIR := graphics/pokenav
-PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 PSSGFXDIR := graphics/pokemon_storage
 EVENTOBJGFXDIR := graphics/event_objects
 MISCGFXDIR := graphics/misc
@@ -97,9 +94,6 @@ graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
 
 graphics/link_games/pkmnjump_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63
-
-graphics/pokenav/region_map.8bpp: %.8bpp: %.png
-	$(GFX) $< $@ -num_tiles 233
 
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29
@@ -440,21 +434,6 @@ $(BATTRANSGFXDIR)/frontier_transition.4bpp: %.4bpp: %.png
 
 graphics/tm_case/unk_8E845D8.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 91
-	
-$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/condition.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/party.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/search.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cool.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cute.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/smart.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/tough.4bpp \
-								$(PKNAVOPTIONSGFXDIR)/cancel.4bpp
-	@cat $^ >$@
 
 $(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53
@@ -474,13 +453,13 @@ $(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
 $(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
 	@cat $^ >$@
 	
-$(FAMECHECKERGFXDIR)/img_845cf00.4bpp: %.4bpp: %.png
+$(FAMECHECKERGFXDIR)/spinning_pokeball.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 15
 
-$(GLOBALGFXDIR)/fame_checker_bg.4bpp: %.4bpp: %.png
+$(FAMECHECKERGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 165
 
-data/seagallop/water.4bpp: %.4bpp: %.png
+graphics/seagallop/water.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 41
 
 $(MISCGFXDIR)/unk_846B008.4bpp: %.4bpp: %.png
@@ -513,7 +492,7 @@ $(TITLESCREENGFXDIR)/unk_lg_8ead788.4bpp: %.4bpp: %.png
 $(CREDITSGFXDIR)/unk_8EAE548.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 77
 
-POKEDEXAREAMARKERSDATADIR := data/pokedex_area_markers
+POKEDEXAREAMARKERSDATADIR := graphics/pokedex/area_markers
 
 POKEDEXAREAMARKERFILES := \
 	$(POKEDEXAREAMARKERSDATADIR)/marker_0.4bpp \

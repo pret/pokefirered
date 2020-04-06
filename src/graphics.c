@@ -1265,10 +1265,10 @@ const u16 gUnknown_8E9E9DC[] = INCBIN_U16("graphics/unused/unused_DDCEE4.bin");
 const u16 gUnknown_8E9E9FC[] = INCBIN_U16("graphics/trade/unknown_DDCF04.bin");
 const u16 gTradeMenuMonBox_Tilemap[] = INCBIN_U16("graphics/trade/menu_mon_box.bin");
 
-const u16 gFameCheckerBgPals[] = INCBIN_U16("data/graphics/fame_checker_bg.gbapal");
-const u16 gFameCheckerBgTiles[] = INCBIN_U16("data/graphics/fame_checker_bg.4bpp");
-const u16 gFameCheckerBg3Tilemap[] = INCBIN_U16("data/graphics/fame_checker_tilemap3.bin");
-const u16 gFameCheckerBg2Tilemap[] = INCBIN_U16("data/graphics/fame_checker_tilemap2.bin");
+const u16 gFameCheckerBgPals[] = INCBIN_U16("graphics/fame_checker/bg.gbapal");
+const u16 gFameCheckerBgTiles[] = INCBIN_U16("graphics/fame_checker/bg.4bpp");
+const u16 gFameCheckerBg3Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap3.bin");
+const u16 gFameCheckerBg2Tilemap[] = INCBIN_U16("graphics/fame_checker/tilemap2.bin");
 
 const u16 gLinkMiscMenu_Pal[] = INCBIN_U16("graphics/interface/union_room_chat.gbapal");
 const u32 gLinkMiscMenu_Gfx[] = INCBIN_U32("graphics/interface/union_room_chat.4bpp.lz");

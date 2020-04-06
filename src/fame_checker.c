@@ -125,22 +125,22 @@ static void Task_FCOpenOrCloseInfoBox(u8 taskId);
 static void UpdateInfoBoxTilemap(u8 bg, s16 state);
 static void PlaceListMenuCursor(bool8 isActive);
 
-static const u16 sFameCheckerTilemap[] = INCBIN_U16("data/fame_checker/tilemap_845c600.bin");
-static const u8 sQuestionMarkSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845ce00.4bpp");
-static const u8 sSpinningPokeballSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845cf00.4bpp");
-static const u16 sSpinningPokeballSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845d0e0.gbapal");
-static const u8 sSelectorCursorSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845d100.4bpp");
-static const u16 sSelectorCursorSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845d500.gbapal");
-static const u8 sFujiSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845d520.4bpp");
-static const u16 sFujiSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845dd20.gbapal");
-static const u8 sBillSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845dd40.4bpp");
-static const u16 sBillSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845e540.gbapal");
-static const u8 sDaisySpriteGfx[] = INCBIN_U8("data/fame_checker/img_845e560.4bpp");
-static const u16 sDaisySpritePalette[] = INCBIN_U16("data/fame_checker/pal_845ed60.gbapal");
-static const u8 sOakSpriteGfx[] = INCBIN_U8("data/fame_checker/img_845ed80.4bpp");
-static const u16 sOakSpritePalette[] = INCBIN_U16("data/fame_checker/pal_845f580.gbapal");
-static const u16 gUnknown_845F5A0[] = INCBIN_U16("data/fame_checker/pal_845f5a0.gbapal"); // unused?
-static const u16 sSilhouettePalette[] = INCBIN_U16("data/fame_checker/pal_845f5c0.gbapal");
+static const u16 sFameCheckerTilemap[] = INCBIN_U16("graphics/fame_checker/tilemap1.bin");
+static const u8 sQuestionMarkSpriteGfx[] = INCBIN_U8("graphics/fame_checker/question_mark.4bpp");
+static const u8 sSpinningPokeballSpriteGfx[] = INCBIN_U8("graphics/fame_checker/spinning_pokeball.4bpp");
+static const u16 sSpinningPokeballSpritePalette[] = INCBIN_U16("graphics/fame_checker/spinning_pokeball.gbapal");
+static const u8 sSelectorCursorSpriteGfx[] = INCBIN_U8("graphics/fame_checker/cursor.4bpp");
+static const u16 sSelectorCursorSpritePalette[] = INCBIN_U16("graphics/fame_checker/cursor.gbapal");
+static const u8 sFujiSpriteGfx[] = INCBIN_U8("graphics/fame_checker/mr_fuji.4bpp");
+static const u16 sFujiSpritePalette[] = INCBIN_U16("graphics/fame_checker/mr_fuji.gbapal");
+static const u8 sBillSpriteGfx[] = INCBIN_U8("graphics/fame_checker/bill.4bpp");
+static const u16 sBillSpritePalette[] = INCBIN_U16("graphics/fame_checker/bill.gbapal");
+static const u8 sDaisySpriteGfx[] = INCBIN_U8("graphics/fame_checker/daisy.4bpp");
+static const u16 sDaisySpritePalette[] = INCBIN_U16("graphics/fame_checker/daisy.gbapal");
+static const u8 sOakSpriteGfx[] = INCBIN_U8("graphics/fame_checker/prof_oak.4bpp");
+static const u16 sOakSpritePalette[] = INCBIN_U16("graphics/fame_checker/prof_oak.gbapal");
+static const u16 gUnknown_845F5A0[] = INCBIN_U16("graphics/fame_checker/pal_845f5a0.gbapal"); // unused?
+static const u16 sSilhouettePalette[] = INCBIN_U16("graphics/fame_checker/silhouette.gbapal");
 
 static const u8 sTextColor_White[3]  = {0, 1, 2};
 static const u8 sTextColor_DkGrey[3] = {0, 2, 3};

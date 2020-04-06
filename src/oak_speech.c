@@ -109,27 +109,27 @@ extern const u8 gText_ABUTTONNext_BBUTTONBack[];
 extern const u8 gText_Boy[];
 extern const u8 gText_Girl[];
 
-ALIGNED(4) static const u16 sHelpDocsPalette[] = INCBIN_U16("data/oak_speech/help_docs_palette.gbapal");
-static const u32 sOakSpeechGfx_GameStartHelpUI[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_game_start_help_u_i.4bpp.lz");
-static const u32 sNewGameAdventureIntroTilemap[] = INCBIN_U32("data/oak_speech/new_game_adventure_intro_tilemap.bin.lz");
-static const u32 sOakSpeechGfx_SolidColors[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_solid_colors.4bpp.lz");
-static const u32 sOakSpeech_BackgroundTilemap[] = INCBIN_U32("data/oak_speech/oak_speech_background_tilemap.bin.lz");
-static const u16 sHelpDocsPage2Tilemap[] = INCBIN_U16("data/oak_speech/help_docs_page2_tilemap.bin");
-static const u16 sHelpDocsPage3Tilemap[] = INCBIN_U16("data/oak_speech/help_docs_page3_tilemap.bin");
-static const u16 sOakSpeechGfx_LeafPal[] = INCBIN_U16("data/oak_speech/oak_speech_gfx_leaf_pal.gbapal");
-static const u32 sOakSpeechGfx_LeafPic[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_leaf_pic.8bpp.lz");
-static const u16 sOakSpeechGfx_RedPal[] = INCBIN_U16("data/oak_speech/oak_speech_gfx_red_pal.gbapal");
-static const u32 sOakSpeechGfx_RedPic[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_red_pic.8bpp.lz");
-static const u16 sOakSpeechGfx_OakPal[] = INCBIN_U16("data/oak_speech/oak_speech_gfx_oak_pal.gbapal");
-static const u32 sOakSpeechGfx_OakPic[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_oak_pic.8bpp.lz");
-static const u16 sOakSpeechGfx_RivalPal[] = INCBIN_U16("data/oak_speech/oak_speech_gfx_rival_pal.gbapal");
-static const u32 sOakSpeechGfx_RivalPic[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_rival_pic.8bpp.lz");
-static const u16 sOakSpeech_GrassPlatformPalette[] = INCBIN_U16("data/oak_speech/oak_speech_grass_platform_palette.gbapal");
-static const u16 sOakSpeech_PikaPalette[] = INCBIN_U16("data/oak_speech/oak_speech_pika_palette.gbapal");
-static const u32 sOakSpeechGfx_GrassPlatform[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_grass_platform.4bpp.lz");
-static const u32 sOakSpeechGfx_Pika1[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_pika1.4bpp.lz");
-static const u32 sOakSpeechGfx_Pika2[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_pika2.4bpp.lz");
-static const u32 sOakSpeechGfx_PikaEyes[] = INCBIN_U32("data/oak_speech/oak_speech_gfx_pika_eyes.4bpp.lz");
+ALIGNED(4) static const u16 sHelpDocsPalette[] = INCBIN_U16("graphics/oak_speech/help_docs_palette.gbapal");
+static const u32 sOakSpeechGfx_GameStartHelpUI[] = INCBIN_U32("graphics/oak_speech/game_start_help_ui.4bpp.lz");
+static const u32 sNewGameAdventureIntroTilemap[] = INCBIN_U32("graphics/oak_speech/new_game_adventure_intro_tilemap.bin.lz");
+static const u32 sOakSpeechGfx_SolidColors[] = INCBIN_U32("graphics/oak_speech/solid_colors.4bpp.lz");
+static const u32 sOakSpeech_BackgroundTilemap[] = INCBIN_U32("graphics/oak_speech/oak_speech_background_tilemap.bin.lz");
+static const u16 sHelpDocsPage2Tilemap[] = INCBIN_U16("graphics/oak_speech/help_docs_page2_tilemap.bin");
+static const u16 sHelpDocsPage3Tilemap[] = INCBIN_U16("graphics/oak_speech/help_docs_page3_tilemap.bin");
+static const u16 sOakSpeechGfx_LeafPal[] = INCBIN_U16("graphics/oak_speech/leaf_pal.gbapal");
+static const u32 sOakSpeechGfx_LeafPic[] = INCBIN_U32("graphics/oak_speech/leaf_pic.8bpp.lz");
+static const u16 sOakSpeechGfx_RedPal[] = INCBIN_U16("graphics/oak_speech/red_pal.gbapal");
+static const u32 sOakSpeechGfx_RedPic[] = INCBIN_U32("graphics/oak_speech/red_pic.8bpp.lz");
+static const u16 sOakSpeechGfx_OakPal[] = INCBIN_U16("graphics/oak_speech/oak_pal.gbapal");
+static const u32 sOakSpeechGfx_OakPic[] = INCBIN_U32("graphics/oak_speech/oak_pic.8bpp.lz");
+static const u16 sOakSpeechGfx_RivalPal[] = INCBIN_U16("graphics/oak_speech/rival_pal.gbapal");
+static const u32 sOakSpeechGfx_RivalPic[] = INCBIN_U32("graphics/oak_speech/rival_pic.8bpp.lz");
+static const u16 sOakSpeech_GrassPlatformPalette[] = INCBIN_U16("graphics/oak_speech/oak_speech_grass_platform_palette.gbapal");
+static const u16 sOakSpeech_PikaPalette[] = INCBIN_U16("graphics/oak_speech/oak_speech_pika_palette.gbapal");
+static const u32 sOakSpeechGfx_GrassPlatform[] = INCBIN_U32("graphics/oak_speech/grass_platform.4bpp.lz");
+static const u32 sOakSpeechGfx_Pika1[] = INCBIN_U32("graphics/oak_speech/pika1.4bpp.lz");
+static const u32 sOakSpeechGfx_Pika2[] = INCBIN_U32("graphics/oak_speech/pika2.4bpp.lz");
+static const u32 sOakSpeechGfx_PikaEyes[] = INCBIN_U32("graphics/oak_speech/pika_eyes.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates[3] = {
     {

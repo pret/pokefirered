@@ -326,7 +326,7 @@ u32 UnpackSelectedBattleAnimPalettes(s16 selector)
     u8 arg5 = (selector >> 5) & 1;
     u8 arg6 = (selector >> 6) & 1;
 
-    return sub_8075BE8(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
+    return SelectBattleAnimSpriteAndBgPalettes(battleBackground, attacker, target, attackerPartner, targetPartner, arg5, arg6);
 }
 
 static void AnimSimplePaletteBlendStep(struct Sprite *sprite)
@@ -406,7 +406,7 @@ static void sub_80B9B8C(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-void sub_80B9BDC(u8 taskId)
+void AnimTask_CurseBlendEffect(u8 taskId)
 {
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
@@ -659,7 +659,7 @@ void sub_80BA0E8(u8 taskId)
     u8 targetBattler = gBattleAnimTarget;
 
     if (gBattleAnimArgs[0] & 0x100)
-        selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
     if (gBattleAnimArgs[1] & 0x100)
         selectedPalettes |= (0x10000 << attackerBattler);
     if (gBattleAnimArgs[2] & 0x100)

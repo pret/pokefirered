@@ -25,8 +25,8 @@ enum
     ACRO_STATE_TURN_JUMP,
 };
 
-void sub_80BD620(u32 directionHistory, u32 abStartSelectHistory);
-bool8 sub_80BD540(void);
+void InitPlayerAvatarBikeState(u32 directionHistory, u32 abStartSelectHistory);
+bool8 MetatileAtPlayerPositionForbidsBiking(void);
 void StartTransitionToFlipBikeState(u8 flags);
 s16 GetPlayerSpeed(void);
 bool8 sub_80BD460(u8);

@@ -4,7 +4,6 @@
 #include "util.h"
 #include "item.h"
 #include "random.h"
-#include "pokemon.h"
 #include "battle_ai_script_commands.h"
 #include "constants/species.h"
 #include "constants/abilities.h"

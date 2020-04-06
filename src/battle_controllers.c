@@ -10,7 +10,6 @@
 #include "link_rfu.h"
 #include "cable_club.h"
 #include "party_menu.h"
-#include "pokemon.h"
 #include "task.h"
 #include "util.h"
 #include "constants/abilities.h"

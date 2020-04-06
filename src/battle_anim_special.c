@@ -1,19 +1,14 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_main.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "decompress.h"
-#include "dma3.h"
-#include "gpu_regs.h"
 #include "graphics.h"
 #include "m4a.h"
-#include "main.h"
-#include "palette.h"
 #include "pokeball.h"
-#include "sound.h"
-#include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "util.h"
@@ -666,7 +661,7 @@ void sub_80EF344(u8 taskId)
         priority = gSprites[spriteId].oam.priority;
         subpriority = gSprites[spriteId].subpriority;
         gTasks[taskId].data[10] = LaunchBallStarsTask(x, y + 32, priority, subpriority, ballId);
-        selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
         gTasks[taskId].data[11] = LaunchBallFadeMonTask(0, gBattleAnimAttacker, selectedPalettes, ballId);
         gTasks[taskId].data[0]++;
         break;

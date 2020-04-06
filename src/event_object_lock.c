@@ -28,7 +28,7 @@ bool8 sub_8069590(void)
         return FALSE;
     else
     {
-        sub_805C780();
+        StopPlayerAvatar();
         return TRUE;
     }
 }
@@ -65,7 +65,7 @@ bool8 sub_8069648(void)
         return FALSE;
     else
     {
-        sub_805C780();
+        StopPlayerAvatar();
         return TRUE;
     }
 }

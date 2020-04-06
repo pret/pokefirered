@@ -984,7 +984,7 @@ static void sub_80B6468(u8 taskId)
         right = 240;
         top = 0;
         bottom = 112;
-        selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_80B65F0;
     }

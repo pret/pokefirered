@@ -1,12 +1,8 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "gpu_regs.h"
 #include "graphics.h"
-#include "malloc.h"
-#include "palette.h"
-#include "sound.h"
-#include "sprite.h"
 #include "task.h"
 #include "util.h"
 #include "constants/songs.h"
@@ -22,9 +18,9 @@ struct AnimStatsChangeData
 
 static void StartBlendAnimSpriteColor(u8 taskId, u32 selectedPalettes);
 static void AnimTask_BlendSpriteColor_Step2(u8 taskId);
-static void sub_80BAB78(u8 taskId);
-static void sub_80BABD0(u8 taskId);
-static void sub_80BACA8(struct Sprite *sprite);
+static void Task_WaitHardwarePaletteFade(u8 taskId);
+static void Task_DoCloneBattlerSpriteWithBlend(u8 taskId);
+static void Task_FinishCloneBattlerSpriteWithBlend(struct Sprite *sprite);
 static void sub_80BAF38(u8 taskId);
 static void sub_80BB0D8(u8 taskId);
 static void sub_80BB2A0(u8 taskId);
@@ -41,18 +37,42 @@ static const u16 gUnknown_83E7CC8[] = { RGB(31, 31, 31) };
 const u8 gUnknown_83E7CCA[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
 const u8 gUnknown_83E7CCE[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };
 
-void sub_80BA7F8(u8 taskId)
+// gBattleAnimArgs[0] is a bitfield.
+// Bits 0-10 result in the following palettes being selected:
+//   0: battle background palettes (BG palettes 1, 2, and 3)
+//   1: gBattleAnimAttacker OBJ palette
+//   2: gBattleAnimTarget OBJ palette
+//   3: gBattleAnimAttacker partner OBJ palette
+//   4: gBattleAnimTarget partner OBJ palette
+//   5: BG palette 4
+//   6: BG palette 5
+//   7: Player battler left
+//   8: Player battler right
+//   9: Enemy battler left
+//  10: Enemy battler right
+void AnimTask_BlendSelected(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattleAnimPalettes(gBattleAnimArgs[0]);
     
-    selectedPalettes |= sub_8075CB8((gBattleAnimArgs[0] >>  7) & 1,
-                                    (gBattleAnimArgs[0] >>  8) & 1,
-                                    (gBattleAnimArgs[0] >>  9) & 1,
-                                    (gBattleAnimArgs[0] >> 10) & 1);
+    selectedPalettes |= SelectBattlerSpritePalettes(
+        (gBattleAnimArgs[0] >>  7) & 1,
+        (gBattleAnimArgs[0] >>  8) & 1,
+        (gBattleAnimArgs[0] >>  9) & 1,
+        (gBattleAnimArgs[0] >> 10) & 1);
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
 
-void sub_80BA83C(u8 taskId)
+// gBattleAnimArgs[0] is a command ID
+// This command will blend bg and battlers except as commanded:
+// 0: Not attacker
+// 1: Not target
+// 2: Not attacker nor bg
+// 3: Not target nor bg
+// 4: Neither attacker nor target
+// 5: Blend all
+// 6: Neither bg nor attacker's partner
+// 7: Neither bg nor target's partner
+void AnimTask_BlendExcept(u8 taskId)
 {
     u8 battler;
     u32 selectedPalettes;
@@ -95,7 +115,7 @@ void sub_80BA83C(u8 taskId)
         if (battler != animBattlers[0] 
          && battler != animBattlers[1]
          && IsBattlerSpriteVisible(battler))
-            selectedPalettes |= 0x10000 << sub_8075D80(battler);
+            selectedPalettes |= 0x10000 << GetSpritePalIdxByBattler(battler);
     }
     StartBlendAnimSpriteColor(taskId, selectedPalettes);
 }
@@ -190,23 +210,23 @@ static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
     }
 }
 
-void sub_80BAB38(u8 taskId)
+void AnimTask_HardwarePaletteFade(u8 taskId)
 {
     BeginHardwarePaletteFade(gBattleAnimArgs[0],
                              gBattleAnimArgs[1],
                              gBattleAnimArgs[2],
                              gBattleAnimArgs[3],
                              gBattleAnimArgs[4]);
-    gTasks[taskId].func = sub_80BAB78;
+    gTasks[taskId].func = Task_WaitHardwarePaletteFade;
 }
 
-static void sub_80BAB78(u8 taskId)
+static void Task_WaitHardwarePaletteFade(u8 taskId)
 {
     if (!gPaletteFade.active)
         DestroyAnimVisualTask(taskId);
 }
 
-void sub_80BAB98(u8 taskId)
+void AnimTask_CloneBattlerSpriteWithBlend(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -216,9 +236,9 @@ void sub_80BAB98(u8 taskId)
     task->data[3] = gBattleAnimArgs[2];
     task->data[4] = gBattleAnimArgs[3];
     task->data[5] = 0;
-    task->func = sub_80BABD0;
+    task->func = Task_DoCloneBattlerSpriteWithBlend;
 }
-static void sub_80BABD0(u8 taskId)
+static void Task_DoCloneBattlerSpriteWithBlend(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -237,7 +257,7 @@ static void sub_80BABD0(u8 taskId)
                 gSprites[task->data[6]].data[0] = task->data[3];
                 gSprites[task->data[6]].data[1] = taskId;
                 gSprites[task->data[6]].data[2] = 5;
-                gSprites[task->data[6]].callback = sub_80BACA8;
+                gSprites[task->data[6]].callback = Task_FinishCloneBattlerSpriteWithBlend;
                 ++task->data[5];
             }
             --task->data[4];
@@ -250,7 +270,7 @@ static void sub_80BABD0(u8 taskId)
     }
 }
 
-static void sub_80BACA8(struct Sprite *sprite)
+static void Task_FinishCloneBattlerSpriteWithBlend(struct Sprite *sprite)
 {
     if (sprite->data[0])
     {
@@ -263,7 +283,7 @@ static void sub_80BACA8(struct Sprite *sprite)
     }
 }
 
-void sub_80BACEC(u8 taskId)
+void AnimTask_SetUpCurseBackground(u8 taskId)
 {
     u16 species;
     s32 newSpriteId;
@@ -559,11 +579,11 @@ static void sub_80BB4B8(u8 taskId)
 
 void sub_80BB660(u8 taskId)
 {
-    u32 selectedPalettes = sub_8075CB8(1, 1, 1, 1);
+    u32 selectedPalettes = SelectBattlerSpritePalettes(1, 1, 1, 1);
 
     sub_80BB790(selectedPalettes, 0);
     gTasks[taskId].data[14] = selectedPalettes >> 16;
-    selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
+    selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0) & 0xFFFF;
     sub_80BB790(selectedPalettes, 0xFFFF);
     gTasks[taskId].data[15] = selectedPalettes;
     gTasks[taskId].data[0] = 0;
@@ -835,7 +855,7 @@ void sub_80BBE6C(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;
@@ -853,7 +873,7 @@ void sub_80BBF08(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;
@@ -871,7 +891,7 @@ void sub_80BBFA4(u8 taskId)
     s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
-        for (selectedPalettes = sub_8075BE8(1, 0, 0, 0, 0, 0, 0);
+        for (selectedPalettes = SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0);
              (selectedPalettes & 1) == 0;
              ++paletteIndex)
             selectedPalettes >>= 1;

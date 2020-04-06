@@ -451,7 +451,7 @@ PalletTown_EventScript_SignLadyShowSign:: @ 8165894
 	setvar VAR_MAP_SCENE_PALLET_TOWN_SIGN_LADY, 1
 	setvar SIGN_LADY_READY, FALSE
 	special SetWalkingIntoSignVars
-	special sub_80699BC
+	special DisableMsgBoxWalkaway
 	signmsg
 	msgbox PalletTown_Text_PressStartToOpenMenuCopy
 	normalmsg

@@ -9,7 +9,7 @@
 extern u8 gQuestLogState;
 extern u8 gUnknown_3005E88;
 extern const u16 gUnknown_84566A8[];
-extern struct FieldInput gUnknown_3005E90;
+extern struct FieldInput gQuestLogFieldInput;
 
 void sub_8112720(u8);
 void SetQuestLogEvent(u16, const u16 *);
@@ -27,8 +27,8 @@ void sub_8111CF0(void);
 void ResetQuestLog(void);
 void ResetTrainerFanClub(void);
 void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId);
-void sub_8112450(void);
-void sub_8112364(void);
+void SaveQuestLogData(void);
+void QuestLog_OnInteractionWithSpecialNpc(void);
 u8 sub_8112CAC(void);
 void sub_81138F8(void);
 void sub_811231C(void);

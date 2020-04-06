@@ -43,7 +43,7 @@ BirthIsland_Exterior_EventScript_Triangle:: @ 8165271
 	lock
 	faceplayer
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	special DoDeoxysTriangleInteraction
 	waitstate
 	switch VAR_RESULT

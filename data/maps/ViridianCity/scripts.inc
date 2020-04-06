@@ -146,7 +146,7 @@ ViridianCity_EventScript_WatchToLearnBasics:: @ 8165A5B
 ViridianCity_EventScript_TutorialUnused:: @ 8165A65
 	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	special StartOldManTutorialBattle
 	waitstate
 	release
@@ -239,7 +239,7 @@ ViridianCity_EventScript_DoTutorialBattle:: @ 8165B4C
 	msgbox ViridianCity_Text_ShowYouHowToCatchMons
 	closemessage
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	special StartOldManTutorialBattle
 	waitstate
 	lock

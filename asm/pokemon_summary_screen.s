@@ -490,7 +490,7 @@ _081348D6:
 	.align 2, 0
 _081348E0: .4byte 0x00003270
 _081348E4:
-	bl sub_80BF72C
+	bl MenuHelpers_CallLinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -786,7 +786,7 @@ _08134B38:
 _08134B58: .4byte gUnknown_203B140
 _08134B5C: .4byte 0x00003270
 _08134B60:
-	bl sub_8058244
+	bl Overworld_LinkRecvQueueLengthMoreThan2
 	cmp r0, 0x1
 	beq _08134B9A
 	bl sub_800B270
@@ -8687,7 +8687,7 @@ _08138D0A:
 _08138D10:
 	b _08139094
 _08138D12:
-	bl sub_80BF72C
+	bl MenuHelpers_CallLinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9080,7 +9080,7 @@ _08139024:
 	.align 2, 0
 _08139030: .4byte gUnknown_203B16D
 _08139034:
-	bl sub_80BF72C
+	bl MenuHelpers_CallLinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9800,7 +9800,7 @@ _08139604:
 _08139620: .4byte gUnknown_203B140
 _08139624: .4byte 0x00003288
 _08139628:
-	bl sub_80BF72C
+	bl MenuHelpers_CallLinkSomething
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -13905,7 +13905,7 @@ _0813B700: .4byte 0x00003003
 _0813B704: .4byte 0x00003004
 _0813B708: .4byte 0x0000328c
 _0813B70C:
-	bl sub_8058244
+	bl Overworld_LinkRecvQueueLengthMoreThan2
 	cmp r0, 0
 	bne _0813B746
 	bl sub_800B270

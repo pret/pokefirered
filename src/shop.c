@@ -120,7 +120,7 @@ static void CB2_InitBuyMenu(void);
 static bool8 InitShopData(void);
 static void BuyMenuInitBgs(void);
 static void BuyMenuDecompressBgGraphics(void);
-static void sub_809B10C(bool32 a0);
+static void RecolorItemDescriptionBox(bool32 a0);
 static void BuyMenuDrawGraphics(void);
 static bool8 BuyMenuBuildListMenuTemplate(void);
 static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8* dst);
@@ -134,7 +134,7 @@ static void SetShopExitCallback(void);
 static void BuyMenuAddScrollIndicatorArrows(void);
 static void BuyQuantityAddScrollIndicatorArrows(void);
 static void BuyMenuRemoveScrollIndicatorArrows(void);
-static void sub_809B764(void);
+static void BuyMenuDrawMapView(void);
 static void BuyMenuDrawMapBg(void);
 static void BuyMenuDrawMapMetatile(s16 x, s16 y, const u16 *src, u8 metatileLayerType);
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
@@ -152,8 +152,8 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId);
 static void BuyMenuReturnToItemList(u8 taskId);
 static void ExitBuyMenu(u8 taskId);
 static void Task_ExitBuyMenu(u8 taskId);
-static void nullsub_52(u8 taskId);
-static void nullsub_53(void);
+static void DebugFunc_PrintPurchaseDetails(u8 taskId);
+static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void);
 static void RecordQuestLogItemPurchase(void);
 
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
@@ -496,26 +496,26 @@ static void BuyMenuDecompressBgGraphics(void)
     Free(pal);
 }
 
-static void sub_809B10C(bool32 a0)
+static void RecolorItemDescriptionBox(bool32 a0)
 {
-    u8 v;
+    u8 paletteNum;
     
     if (a0 == FALSE)
-        v = 0xB;
+        paletteNum = 0xB;
     else 
-        v = 6;
+        paletteNum = 0x6;
     
     if ((gShopData.martType) != MART_TYPE_TMHM)
-        SetBgTilemapPalette(1, 0, 0xE, 0x1E, 6, v);
+        SetBgTilemapPalette(1, 0, 14, 30, 6, paletteNum);
     else
-        SetBgTilemapPalette(1, 0, 0xC, 0x1E, 8, v);
+        SetBgTilemapPalette(1, 0, 12, 30, 8, paletteNum);
     
     ScheduleBgCopyTilemapToVram(1);
 }
 
 static void BuyMenuDrawGraphics(void)
 {
-    sub_809B764();
+    BuyMenuDrawMapView();
     BuyMenuCopyTilemapData();
     BuyMenuDrawMoneyBox();
     ScheduleBgCopyTilemapToVram(0);
@@ -732,7 +732,7 @@ static void BuyMenuRemoveScrollIndicatorArrows(void)
     gShopData.unk16_11 = 0x1F;
 }
 
-static void sub_809B764(void)
+static void BuyMenuDrawMapView(void)
 {
     BuyMenuCollectObjectEventData();
     BuyMenuDrawObjectEvents();
@@ -913,7 +913,7 @@ static void Task_BuyMenu(u8 taskId)
             ClearWindowTilemap(5);
             BuyMenuRemoveScrollIndicatorArrows();
             BuyMenuPrintCursor(tListTaskId, 2);
-            sub_809B10C(1);
+            RecolorItemDescriptionBox(1);
             gShopData.itemPrice = itemid_get_market_price(itemId);
             if (!IsEnoughMoney(&gSaveBlock1Ptr->money, gShopData.itemPrice))
             {
@@ -1006,7 +1006,7 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     if (AddBagItem(tItemId, tItemCount) == TRUE)
     {
         BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
-        nullsub_52(taskId);
+        DebugFunc_PrintPurchaseDetails(taskId);
         RecordItemPurchase(tItemId, tItemCount, 1);
     }
     else
@@ -1039,7 +1039,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 
     ClearDialogWindowAndFrameToTransparent(2, 0);
     BuyMenuPrintCursor(tListTaskId, 1);
-    sub_809B10C(0);
+    RecolorItemDescriptionBox(0);
     PutWindowTilemap(4);
     PutWindowTilemap(5);
     if (gShopData.martType == MART_TYPE_TMHM)
@@ -1070,11 +1070,11 @@ static void Task_ExitBuyMenu(u8 taskId)
     }
 }
 
-static void nullsub_52(u8 taskId)
+static void DebugFunc_PrintPurchaseDetails(u8 taskId)
 {
 }
 
-static void nullsub_53(void)
+static void DebugFunc_PrintShopMenuHistoryBeforeClearMaybe(void)
 {
 }
 
@@ -1138,7 +1138,7 @@ void CreatePokemartMenu(const u16 *itemsForSale)
     SetShopItemsForSale(itemsForSale);
     CreateShopMenu(MART_TYPE_REGULAR);
     SetShopMenuCallback(EnableBothScriptContexts);
-    nullsub_53();
+    DebugFunc_PrintShopMenuHistoryBeforeClearMaybe();
     memset(&gShopMenuHistory, 0, sizeof(gShopMenuHistory));
     gShopMenuHistory[0].unk8 = gMapHeader.regionMapSectionId;
     gShopMenuHistory[1].unk8 = gMapHeader.regionMapSectionId;

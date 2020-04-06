@@ -1,15 +1,12 @@
 #include "global.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "decompress.h"
-#include "gpu_regs.h"
 #include "graphics.h"
 #include "math_util.h"
-#include "palette.h"
 #include "random.h"
 #include "scanline_effect.h"
-#include "sound.h"
 #include "trig.h"
 #include "util.h"
 #include "constants/songs.h"
@@ -3090,7 +3087,7 @@ static void FakeOutStep2(u8 taskId)
     {
         gTasks[taskId].data[11] = 0x88;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN);
-        BlendPalettes(sub_8075BE8(1, 0, 0, 0, 0, 0, 0), 16, RGB_WHITE);
+        BlendPalettes(SelectBattleAnimSpriteAndBgPalettes(1, 0, 0, 0, 0, 0, 0), 16, RGB_WHITE);
     }
     else if (gTasks[taskId].data[10] > 4)
     {

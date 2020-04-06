@@ -916,7 +916,7 @@ extern const u8 gText_GiveUpTryingToTeachNewMove[];
 extern const u8 gText_DecimalPoint[];
 
 // map_name_popup
-extern const u8 gUnknown_841D18D[];
+extern const u8 gText_Rooftop2[];
 
 // option menu
 extern const u8 gText_TextSpeed[];

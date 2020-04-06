@@ -1,20 +1,13 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_bg.h"
-#include "bg.h"
 #include "decompress.h"
-#include "dma3.h"
-#include "gpu_regs.h"
 #include "graphics.h"
-#include "main.h"
 #include "m4a.h"
-#include "palette.h"
-#include "pokemon.h"
-#include "sound.h"
-#include "sprite.h"
 #include "task.h"
 #include "constants/battle_anim.h"
 
@@ -1970,6 +1963,11 @@ static void ScriptCmd_unloadspritegfx(void)
     ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
 }
 
+// Create sprite from template and init data array with varargs
+// args: template, flags, va_args
+// flags:
+//  - bits 0-6: subpriority mod (signed)
+//  - bit 7: target if set else attacker
 static void ScriptCmd_createsprite(void)
 {
     s32 i;

@@ -1,7 +1,5 @@
 #include "global.h"
-#include "palette.h"
-#include "bg.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "scanline_effect.h"
 #include "overworld.h"
 #include "link.h"
@@ -17,7 +15,6 @@
 #include "menu.h"
 #include "load_save.h"
 #include "strings.h"
-#include "string_util.h"
 #include "menu_helpers.h"
 #include "text_window.h"
 #include "field_fadetransition.h"
@@ -26,7 +23,6 @@
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "script.h"
-#include "sound.h"
 #include "quest_log.h"
 #include "new_game.h"
 #include "event_scripts.h"
@@ -395,7 +391,7 @@ void ShowStartMenu(void)
     {
         FreezeObjectEvents();
         sub_805C270();
-        sub_805C780();
+        StopPlayerAvatar();
     }
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
     ScriptContext2_Enable();
@@ -779,7 +775,7 @@ static u8 SaveDialogCB_AskOverwriteOrReplacePreviousFileHandleInput(void)
 
 static u8 SaveDialogCB_PrintSavingDontTurnOffPower(void)
 {
-    sub_8112450();
+    SaveQuestLogData();
     PrintSaveTextWithFollowupFunc(gText_SavingDontTurnOffThePower, SaveDialogCB_DoSave);
     return SAVECB_RETURN_CONTINUE;
 }

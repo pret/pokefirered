@@ -15,7 +15,7 @@ EventScript_HideMysteryGiftMan:: @ 81BB1CE
 
 CableClub_EventScript_MysteryGiftMan:: @ 81BB1D2
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	execram
 
 @ Unused
@@ -111,7 +111,7 @@ CableClub_EventScript_ExitMinigameRoom:: @ 81BB2FD
 CableClub_EventScript_CloseLinkAndExitLinkRoom:: @ 81BB315
 	special CloseLink
 	special HelpSystem_Enable
-	special sub_811390C
+	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
@@ -137,7 +137,7 @@ CableClub_EventScript_ExitTradeCenter:: @ 81BB34F
 CableClub_EventScript_PlayerExitTradeCenter:: @ 81BB367
 	special CloseLink
 	special HelpSystem_Enable
-	special sub_811390C
+	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
@@ -161,7 +161,7 @@ CableClub_EventScript_ExitUnionRoom:: @ 81BB39C
 
 CableClub_EventScript_PlayerExitUnionRoom:: @ 81BB3B4
 	special HelpSystem_Enable
-	special sub_811390C
+	special QuestLog_StartRecordingInputsAfterDeferredEvent
 	setvar VAR_CABLE_CLUB_STATE, 0
 	textcolor 1
 	compare VAR_0x8007, 0
@@ -775,7 +775,7 @@ CableClub_EventScript_DoLinkRoomExit:: @ 81BB9FC
 
 CableClub_EventScript_UnionRoomAttendant:: @ 81BBA04
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
@@ -885,7 +885,7 @@ CableClub_EventScript_DontAskAboutLinking:: @ 81BBB92
 
 CableClub_EventScript_DirectCornerAttendant:: @ 81BBB9C
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
@@ -1195,7 +1195,7 @@ CableClub_OnResume:: @ 81BC05C
 
 JoyfulGameCorner_EventScript_InfoMan2:: @ 81BC060
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	message Text_DescribeWhichGame
@@ -1225,7 +1225,7 @@ CableClub_EventScript_MinigameInfoExit:: @ 81BC0C4
 
 JoyfulGameCorner_EventScript_MinigameAttendant:: @ 81BC0CE
 	goto_if_questlog EventScript_ReleaseEnd
-	special sub_8112364
+	special QuestLog_OnInteractionWithSpecialNpc
 	lock
 	faceplayer
 	message Text_WelcomeCanYouWait

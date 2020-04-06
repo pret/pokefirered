@@ -68,7 +68,7 @@ static void sub_81504E8(void)
     sub_81507BC(objectEvent, GetPlayerAvatarGraphicsIdByStateId(1));
     ObjectEventTurn(objectEvent, objectEvent->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
-    sub_80BD620(0, 0);
+    InitPlayerAvatarBikeState(0, 0);
 }
 
 static void sub_8150530(void)

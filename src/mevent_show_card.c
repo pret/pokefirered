@@ -80,14 +80,14 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .baseBlock = 0x130}
 };
 
-static const u16 gCard0Pal[] = INCBIN_U16("graphics/mevent/pal_46708C.gbapal");
+static const u16 sCard0Pal[] = INCBIN_U16("graphics/mevent/pal_46708C.gbapal");
 const u16 gCard1Pal[] = INCBIN_U16("graphics/mevent/pal_4670AC.gbapal");
 const u16 gCard2Pal[] = INCBIN_U16("graphics/mevent/pal_4670CC.gbapal");
 const u16 gCard3Pal[] = INCBIN_U16("graphics/mevent/pal_4670EC.gbapal");
 const u16 gCard4Pal[] = INCBIN_U16("graphics/mevent/pal_46710C.gbapal");
 const u16 gCard5Pal[] = INCBIN_U16("graphics/mevent/pal_46712C.gbapal");
-static const u16 gCard6Pal[] = INCBIN_U16("graphics/mevent/pal_46714C.gbapal");
-static const u16 gCard7Pal[] = INCBIN_U16("graphics/mevent/pal_46716C.gbapal");
+static const u16 sCard6Pal[] = INCBIN_U16("graphics/mevent/pal_46714C.gbapal");
+static const u16 sCard7Pal[] = INCBIN_U16("graphics/mevent/pal_46716C.gbapal");
 static const u8 sCard0Gfx[] = INCBIN_U8("graphics/mevent/gfx_46718C.4bpp.lz");
 static const u8 sCard0Map[] = INCBIN_U8("graphics/mevent/tilemap_467288.bin.lz");
 static const u8 sCard1Gfx[] = INCBIN_U8("graphics/mevent/gfx_46737C.4bpp.lz");
@@ -98,29 +98,29 @@ static const u8 sCard6Gfx[] = INCBIN_U8("graphics/mevent/gfx_467700.4bpp.lz");
 static const u8 sCard6Map[] = INCBIN_U8("graphics/mevent/tilemap_467934.bin.lz");
 static const u8 sCard7Gfx[] = INCBIN_U8("graphics/mevent/gfx_467A7C.4bpp.lz");
 static const u8 sCard7Map[] = INCBIN_U8("graphics/mevent/tilemap_467CAC.bin.lz");
-static const u16 gUnknown_8467DF4[] = INCBIN_U16("graphics/mevent/pal_467DF4.gbapal");
-static const u16 gUnknown_8467E14[] = INCBIN_U16("graphics/mevent/pal_467E14.gbapal");
-static const u16 gUnknown_8467E34[] = INCBIN_U16("graphics/mevent/pal_467E34.gbapal");
-static const u16 gUnknown_8467E54[] = INCBIN_U16("graphics/mevent/pal_467E54.gbapal");
-static const u16 gUnknown_8467E74[] = INCBIN_U16("graphics/mevent/pal_467E74.gbapal");
-static const u16 gUnknown_8467E94[] = INCBIN_U16("graphics/mevent/pal_467E94.gbapal");
-static const u16 gUnknown_8467EB4[] = INCBIN_U16("graphics/mevent/pal_467EB4.gbapal");
-static const u16 gUnknown_8467ED4[] = INCBIN_U16("graphics/mevent/pal_467ED4.gbapal");
-static const u32 gUnknown_8467EF4[] = INCBIN_U32("graphics/mevent/gfx_467EF4.4bpp.lz");
+static const u16 sUnknown_8467DF4[] = INCBIN_U16("graphics/mevent/pal_467DF4.gbapal");
+static const u16 sUnknown_8467E14[] = INCBIN_U16("graphics/mevent/pal_467E14.gbapal");
+static const u16 sUnknown_8467E34[] = INCBIN_U16("graphics/mevent/pal_467E34.gbapal");
+static const u16 sUnknown_8467E54[] = INCBIN_U16("graphics/mevent/pal_467E54.gbapal");
+static const u16 sUnknown_8467E74[] = INCBIN_U16("graphics/mevent/pal_467E74.gbapal");
+static const u16 sUnknown_8467E94[] = INCBIN_U16("graphics/mevent/pal_467E94.gbapal");
+static const u16 sUnknown_8467EB4[] = INCBIN_U16("graphics/mevent/pal_467EB4.gbapal");
+static const u16 sUnknown_8467ED4[] = INCBIN_U16("graphics/mevent/pal_467ED4.gbapal");
+static const u32 sUnknown_8467EF4[] = INCBIN_U32("graphics/mevent/gfx_467EF4.4bpp.lz");
 
 static const struct CompressedSpriteSheet sShadowSpriteSheet = {
-    gUnknown_8467EF4, 0x100, 0x8000
+    sUnknown_8467EF4, 0x100, 0x8000
 };
 
 static const struct SpritePalette sShadowSpritePalettes[] = {
-    {gUnknown_8467DF4, 0x8000},
-    {gUnknown_8467E14, 0x8000},
-    {gUnknown_8467E34, 0x8000},
-    {gUnknown_8467E54, 0x8000},
-    {gUnknown_8467E74, 0x8000},
-    {gUnknown_8467E94, 0x8000},
-    {gUnknown_8467EB4, 0x8000},
-    {gUnknown_8467ED4, 0x8000}
+    {sUnknown_8467DF4, 0x8000},
+    {sUnknown_8467E14, 0x8000},
+    {sUnknown_8467E34, 0x8000},
+    {sUnknown_8467E54, 0x8000},
+    {sUnknown_8467E74, 0x8000},
+    {sUnknown_8467E94, 0x8000},
+    {sUnknown_8467EB4, 0x8000},
+    {sUnknown_8467ED4, 0x8000}
 };
 
 static const struct SpriteTemplate sShadowSpriteTemplate = {
@@ -128,14 +128,14 @@ static const struct SpriteTemplate sShadowSpriteTemplate = {
 };
 
 static const struct UnkStruct_8467FB8 sCardGfxPtrs[8] = {
-    {1, 0, 0, 0, sCard0Gfx, sCard0Map, gCard0Pal},
+    {1, 0, 0, 0, sCard0Gfx, sCard0Map, sCard0Pal},
     {1, 0, 0, 1, sCard1Gfx, sCard1Map, gCard1Pal},
     {1, 0, 0, 2, sCard2Gfx, sCard2Map, gCard2Pal},
     {1, 0, 0, 3, sCard2Gfx, sCard2Map, gCard3Pal},
     {1, 0, 0, 4, sCard2Gfx, sCard2Map, gCard4Pal},
     {1, 0, 0, 5, sCard2Gfx, sCard2Map, gCard5Pal},
-    {1, 0, 0, 6, sCard6Gfx, sCard6Map, gCard6Pal},
-    {1, 0, 0, 7, sCard7Gfx, sCard7Map, gCard7Pal}
+    {1, 0, 0, 6, sCard6Gfx, sCard6Map, sCard6Pal},
+    {1, 0, 0, 7, sCard7Gfx, sCard7Map, sCard7Pal}
 };
 
 bool32 InitWonderCardResources(struct MEWonderCardData * card, struct MEventBuffer_3430_Sub * b3430sub)

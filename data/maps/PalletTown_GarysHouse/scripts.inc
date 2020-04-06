@@ -50,7 +50,7 @@ PalletTown_GarysHouse_EventScript_HeardBattledRival:: @ 8168DAF
 
 PalletTown_GarysHouse_EventScript_GroomMon:: @ 8168DB9
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	compare VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 500
 	goto_if_lt PalletTown_GarysHouse_EventScript_RateMonFriendship
 	msgbox PalletTown_GarysHouse_Text_LikeMeToGroomMon, MSGBOX_YESNO

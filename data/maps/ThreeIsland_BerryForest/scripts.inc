@@ -23,7 +23,7 @@ ThreeIsland_BerryForest_EventScript_Lostelle:: @ 8163C83
 	waitmoncry
 	setwildbattle SPECIES_HYPNO, 30, ITEM_NONE
 	dowildbattle
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	applymovement 1, Movement_FacePlayer
 	waitmovement 0
 	msgbox ThreeIsland_BerryForest_Text_ThankYouHaveThis

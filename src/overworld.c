@@ -160,9 +160,9 @@ static void SetCameraToTrackGuestPlayer_2(void);
 static void sub_8057178(void);
 static void sub_80571A8(void);
 static void CreateLinkPlayerSprites(void);
-static void sub_80572D8(void);
-static void sub_8057300(u8 *state);
-static bool32 sub_8057314(u8 *state);
+static void CB2_LoadMapForQLPlayback(void);
+static void DoLoadMap_QLPlayback(u8 *state);
+static bool32 LoadMap_QLPlayback(u8 *state);
 static bool32 SetUpScrollSceneForCredits(u8 *state, u8 unused);
 static bool8 MapLdr_Credits(void);
 static void CameraCB_CreditsPan(struct CameraObject * camera);
@@ -340,7 +340,7 @@ static void Overworld_ResetStateAfterWhitingOut(void)
     VarSet(VAR_0x404D, 0);
 }
 
-static void sub_8054E40(void)
+static void Overworld_ResetStateOnContinue(void)
 {
     FlagClear(FLAG_SYS_SAFARI_MODE);
     VarSet(VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0);
@@ -979,7 +979,7 @@ void SetCurrentMapLayout(u16 mapLayoutId)
     gMapHeader.mapLayout = GetMapLayout();
 }
 
-void sub_8055D5C(struct WarpData * warp)
+void Overworld_SetWarpDestinationFromWarp(struct WarpData * warp)
 {
     sWarpDestination = *warp;
 }
@@ -1441,7 +1441,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
             RunQuestLogCB();
         }
     }
-    else if (sub_8111CD0() == TRUE)
+    else if (QuestLogScenePlaybackIsEnding() == TRUE)
     {
         RunQuestLogCB();
     }
@@ -1555,7 +1555,7 @@ void CB2_WhiteOut(void)
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         do_load_map_stuff_loop(&val);
-        QuestLog_OnInteractionWithSpecialNpc();
+        QuestLog_CutRecording();
         SetFieldVBlankCallback();
         SetMainCallback1(CB1_Overworld);
         SetMainCallback2(CB2_Overworld);
@@ -1575,9 +1575,9 @@ void CB2_LoadMap(void)
 static void CB2_LoadMap2(void)
 {
     do_load_map_stuff_loop(&gMain.state);
-    if (sub_8113748() == TRUE)
+    if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
     {
-        sub_81119C8();
+        QuestLog_AdvancePlayhead_();
     }
     else
     {
@@ -1671,14 +1671,14 @@ void CB2_ReturnToFieldContinueScriptPlayMapMusic(void)
     CB2_ReturnToField();
 }
 
-void sub_80568FC(void)
+void CB2_ReturnToFieldFromDiploma(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     CB2_ReturnToField();
 }
 
-static void sub_8056918(void)
+static void FieldCB_ShowMapNameOnContinue(void)
 {
     if (SHOW_MAP_NAME_ENABLED)
         ShowMapNamePopup(FALSE);
@@ -1693,7 +1693,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
-    sub_8054E40();
+    Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext1_Init();
@@ -1709,7 +1709,7 @@ void CB2_ContinueSavedGame(void)
     }
     else
     {
-        gFieldCallback = sub_8056918;
+        gFieldCallback = FieldCB_ShowMapNameOnContinue;
         SetMainCallback1(CB1_Overworld);
         CB2_ReturnToField();
     }
@@ -1861,7 +1861,7 @@ static bool32 load_map_stuff(u8 *state, bool32 a1)
         (*state)++;
         break;
     case 3:
-        if (sub_8113748() == TRUE)
+        if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
             return TRUE;
         (*state)++;
         break;
@@ -2205,7 +2205,7 @@ static void CreateLinkPlayerSprites(void)
 
 // Quest Log
 
-void sub_805726C(void)
+void CB2_SetUpOverworldForQLPlaybackWithWarpExit(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gUnknown_2036E28 = 1;
@@ -2213,10 +2213,10 @@ void sub_805726C(void)
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
     SetMainCallback2(CB2_DoChangeMap);
-    gMain.savedCallback = sub_80572D8;
+    gMain.savedCallback = CB2_LoadMapForQLPlayback;
 }
 
-void sub_80572A8(void)
+void CB2_SetUpOverworldForQLPlayback(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gUnknown_2036E28 = 1;
@@ -2224,24 +2224,24 @@ void sub_80572A8(void)
     ScriptContext1_Init();
     ScriptContext2_Disable();
     SetMainCallback1(NULL);
-    SetMainCallback2(sub_80572D8);
+    SetMainCallback2(CB2_LoadMapForQLPlayback);
 }
 
-static void sub_80572D8(void)
+static void CB2_LoadMapForQLPlayback(void)
 {
-    sub_8057300(&gMain.state);
+    DoLoadMap_QLPlayback(&gMain.state);
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
 }
 
-static void sub_8057300(u8 *state)
+static void DoLoadMap_QLPlayback(u8 *state)
 {
-    while (!sub_8057314(state))
+    while (!LoadMap_QLPlayback(state))
         ;
 }
 
-static bool32 sub_8057314(u8 *state)
+static bool32 LoadMap_QLPlayback(u8 *state)
 {
     switch (*state)
     {
@@ -2317,7 +2317,7 @@ static bool32 sub_8057314(u8 *state)
     return FALSE;
 }
 
-void sub_8057430(void)
+void CB2_EnterFieldFromQuestLog(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
@@ -2326,7 +2326,7 @@ void sub_8057430(void)
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
-    sub_8054E40();
+    Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext1_Init();

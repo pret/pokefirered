@@ -203,6 +203,10 @@
 	.align 2
 	.include "src/quest_log.o"
 	.align 2
+	.include "src/help_message.o"
+	.align 2
+	.include "src/quest_log_events.o"
+	.align 2
 	.include "src/union_room.o"
 	.align 2
 	.include "src/rfu_union_tool.o"

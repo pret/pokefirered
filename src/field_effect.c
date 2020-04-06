@@ -1105,7 +1105,7 @@ void FieldCB_FallWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
-    sub_8111CF0();
+    QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     ScriptContext2_Enable();
     FreezeObjectEvents();
     CreateTask(Task_FallWarpFieldEffect, 0);
@@ -1409,7 +1409,7 @@ static void FieldCB_EscalatorWarpIn(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
-    sub_8111CF0();
+    QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     ScriptContext2_Enable();
     FreezeObjectEvents();
     CreateTask(Task_EscalatorWarpInFieldEffect, 0);
@@ -1819,7 +1819,7 @@ static void FieldCB_LavaridgeGymB1FWarpExit(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
-    sub_8111CF0();
+    QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     ScriptContext2_Enable();
     gFieldCallback = NULL;
     CreateTask(Task_LavaridgeGymB1FWarpExit, 0);
@@ -2186,7 +2186,7 @@ static void FieldCallback_EscapeRopeExit(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
-    sub_8111CF0();
+    QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     ScriptContext2_Enable();
     FreezeObjectEvents();
     gFieldCallback = NULL;
@@ -2350,7 +2350,7 @@ static void FieldCallback_TeleportIn(void)
 {
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
-    sub_8111CF0();
+    QuestLog_DrawPreviouslyOnQuestHeaderIfInPlaybackMode();
     ScriptContext2_Enable();
     FreezeObjectEvents();
     gFieldCallback = NULL;

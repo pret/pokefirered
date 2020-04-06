@@ -8,7 +8,7 @@ TwoIsland_House_MapScripts:: @ 8171618
 
 TwoIsland_House_EventScript_MoveManiac:: @ 8171619
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	lock
 	faceplayer
 	clearflag HAS_BIG_MUSHROOM

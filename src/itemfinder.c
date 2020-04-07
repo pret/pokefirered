@@ -36,7 +36,7 @@ static void SpriteCallback_DestroyStar(struct Sprite * sprite);
 
 #define ARROW_TILE_TAG 2000
 
-static const u16 sArrowAndStarSpriteTiles[] = INCBIN_U16("data/itemfinder/spr_tiles.4bpp");
+static const u16 sArrowAndStarSpriteTiles[] = INCBIN_U16("graphics/itemfinder/spr_tiles.4bpp");
 
 static const union AnimCmd sArrowAnim0[] = {
     ANIMCMD_FRAME( 0, 10),

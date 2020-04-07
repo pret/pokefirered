@@ -7,7 +7,7 @@
 extern u8 gGlyphInfo[];
 
 static const u8 gUnknown_846FB08[] = {1, 2, 4};
-static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("data/graphics/fonts/font6.fwjpnfont");
+static const u16 sFont6BrailleGlyphs[] = INCBIN_U16("graphics/fonts/font6.fwjpnfont");
 
 static void DecompressGlyphFont6(u16);
 

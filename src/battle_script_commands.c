@@ -6342,16 +6342,13 @@ static void atk7B_tryhealhalfhealth(void)
         gBattlescriptCurrInstr += 6;
 }
 
-#ifdef NONMATCHING
 static void atk7C_trymirrormove(void)
 {
     s32 validMovesCount;
     s32 i;
     u16 move;
-    u16 movesArray[4];
+    u16 movesArray[3];
 
-    // incorrect pointer load sequence
-    // and incorrect layout in data pools
     for (i = 0; i < 3; ++i)
         movesArray[i] = 0;
     for (validMovesCount = 0, i = 0; i < gBattlersCount; ++i)
@@ -6359,14 +6356,13 @@ static void atk7C_trymirrormove(void)
 
         if (i != gBattlerAttacker)
         {
-            move = *(i * 2 + gBattlerAttacker * 8 + gBattleStruct->lastTakenMoveFrom + 0)
-                | (*(i * 2 + gBattlerAttacker * 8 + gBattleStruct->lastTakenMoveFrom + 1) << 8);
+            move = T1_READ_16(i * 2 + gBattlerAttacker * 8 + gBattleStruct->lastTakenMoveFrom);
             if (move != MOVE_NONE && move != 0xFFFF)
                 movesArray[validMovesCount++] = move;
         }
     }
-    move = *(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 0)
-        | (*(gBattleStruct->lastTakenMove + gBattlerAttacker * 2 + 1) << 8);
+    move = T1_READ_16(gBattleStruct->lastTakenMove + gBattlerAttacker * 2);
+    move++;move--;
     if (move != MOVE_NONE && move != 0xFFFF)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
@@ -6374,7 +6370,7 @@ static void atk7C_trymirrormove(void)
         gBattlerTarget = GetMoveTarget(gCurrentMove, 0);
         gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
     }
-    else if (validMovesCount)
+    else if (validMovesCount != 0)
     {
         gHitMarker &= ~(HITMARKER_ATTACKSTRING_PRINTED);
         i = Random() % validMovesCount;
@@ -6388,183 +6384,6 @@ static void atk7C_trymirrormove(void)
         ++gBattlescriptCurrInstr;
     }
 }
-#else
-NAKED
-static void atk7C_trymirrormove(void)
-{
-    asm_unified("\n\
-        push {r4-r7,lr}\n\
-        mov r7, r10\n\
-        mov r6, r9\n\
-        mov r5, r8\n\
-        push {r5-r7}\n\
-        sub sp, 0x8\n\
-        ldr r2, _080273E0 @ =gBattlersCount\n\
-        ldr r0, _080273E4 @ =gBattleStruct\n\
-        mov r10, r0\n\
-        movs r1, 0\n\
-        add r0, sp, 0x4\n\
-    _08027356:\n\
-        strh r1, [r0]\n\
-        subs r0, 0x2\n\
-        cmp r0, sp\n\
-        bge _08027356\n\
-        movs r1, 0\n\
-        mov r8, r1\n\
-        movs r5, 0\n\
-        ldrb r1, [r2]\n\
-        cmp r5, r1\n\
-        bge _080273AC\n\
-        ldr r0, _080273E8 @ =gBattlerAttacker\n\
-        ldrb r6, [r0]\n\
-        ldr r2, _080273EC @ =0x0000ffff\n\
-        mov r9, r2\n\
-        lsls r4, r6, 3\n\
-        mov r2, sp\n\
-        ldr r0, _080273E4 @ =gBattleStruct\n\
-        mov r12, r0\n\
-        adds r7, r1, 0\n\
-    _0802737C:\n\
-        cmp r5, r6\n\
-        beq _080273A4\n\
-        mov r1, r12\n\
-        ldr r0, [r1]\n\
-        adds r0, r4, r0\n\
-        adds r1, r0, 0\n\
-        adds r1, 0xE0\n\
-        ldrb r3, [r1]\n\
-        adds r0, 0xE1\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 8\n\
-        orrs r3, r0\n\
-        cmp r3, 0\n\
-        beq _080273A4\n\
-        cmp r3, r9\n\
-        beq _080273A4\n\
-        strh r3, [r2]\n\
-        adds r2, 0x2\n\
-        movs r0, 0x1\n\
-        add r8, r0\n\
-    _080273A4:\n\
-        adds r4, 0x2\n\
-        adds r5, 0x1\n\
-        cmp r5, r7\n\
-        blt _0802737C\n\
-    _080273AC:\n\
-        ldr r1, _080273E8 @ =gBattlerAttacker\n\
-        ldrb r0, [r1]\n\
-        mov r2, r10\n\
-        ldr r1, [r2]\n\
-        lsls r0, 1\n\
-        adds r0, r1\n\
-        adds r1, r0, 0\n\
-        adds r1, 0x98\n\
-        ldrb r3, [r1]\n\
-        adds r0, 0x99\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 8\n\
-        orrs r3, r0\n\
-        cmp r3, 0\n\
-        beq _080273FC\n\
-        ldr r0, _080273EC @ =0x0000ffff\n\
-        cmp r3, r0\n\
-        beq _080273FC\n\
-        ldr r2, _080273F0 @ =gHitMarker\n\
-        ldr r0, [r2]\n\
-        ldr r1, _080273F4 @ =0xfffffbff\n\
-        ands r0, r1\n\
-        str r0, [r2]\n\
-        ldr r4, _080273F8 @ =gCurrentMove\n\
-        strh r3, [r4]\n\
-        b _08027426\n\
-        .align 2, 0\n\
-    _080273E0: .4byte gBattlersCount\n\
-    _080273E4: .4byte gBattleStruct\n\
-    _080273E8: .4byte gBattlerAttacker\n\
-    _080273EC: .4byte 0x0000ffff\n\
-    _080273F0: .4byte gHitMarker\n\
-    _080273F4: .4byte 0xfffffbff\n\
-    _080273F8: .4byte gCurrentMove\n\
-    _080273FC:\n\
-        mov r0, r8\n\
-        cmp r0, 0\n\
-        beq _0802746C\n\
-        ldr r2, _08027450 @ =gHitMarker\n\
-        ldr r0, [r2]\n\
-        ldr r1, _08027454 @ =0xfffffbff\n\
-        ands r0, r1\n\
-        str r0, [r2]\n\
-        bl Random\n\
-        lsls r0, 16\n\
-        lsrs r0, 16\n\
-        mov r1, r8\n\
-        bl __modsi3\n\
-        adds r5, r0, 0\n\
-        ldr r4, _08027458 @ =gCurrentMove\n\
-        lsls r0, r5, 1\n\
-        add r0, sp\n\
-        ldrh r0, [r0]\n\
-        strh r0, [r4]\n\
-    _08027426:\n\
-        ldrh r0, [r4]\n\
-        movs r1, 0\n\
-        bl GetMoveTarget\n\
-        ldr r1, _0802745C @ =gBattlerTarget\n\
-        strb r0, [r1]\n\
-        ldr r5, _08027460 @ =gBattlescriptCurrInstr\n\
-        ldr r3, _08027464 @ =gBattleScriptsForMoveEffects\n\
-        ldr r2, _08027468 @ =gBattleMoves\n\
-        ldrh r1, [r4]\n\
-        lsls r0, r1, 1\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        ldrb r0, [r0]\n\
-        lsls r0, 2\n\
-        adds r0, r3\n\
-        ldr r0, [r0]\n\
-        str r0, [r5]\n\
-        b _0802748A\n\
-        .align 2, 0\n\
-    _08027450: .4byte gHitMarker\n\
-    _08027454: .4byte 0xfffffbff\n\
-    _08027458: .4byte gCurrentMove\n\
-    _0802745C: .4byte gBattlerTarget\n\
-    _08027460: .4byte gBattlescriptCurrInstr\n\
-    _08027464: .4byte gBattleScriptsForMoveEffects\n\
-    _08027468: .4byte gBattleMoves\n\
-    _0802746C:\n\
-        ldr r2, _0802749C @ =gSpecialStatuses\n\
-        ldr r0, _080274A0 @ =gBattlerAttacker\n\
-        ldrb r1, [r0]\n\
-        lsls r0, r1, 2\n\
-        adds r0, r1\n\
-        lsls r0, 2\n\
-        adds r0, r2\n\
-        ldrb r1, [r0]\n\
-        movs r2, 0x20\n\
-        orrs r1, r2\n\
-        strb r1, [r0]\n\
-        ldr r1, _080274A4 @ =gBattlescriptCurrInstr\n\
-        ldr r0, [r1]\n\
-        adds r0, 0x1\n\
-        str r0, [r1]\n\
-    _0802748A:\n\
-        add sp, 0x8\n\
-        pop {r3-r5}\n\
-        mov r8, r3\n\
-        mov r9, r4\n\
-        mov r10, r5\n\
-        pop {r4-r7}\n\
-        pop {r0}\n\
-        bx r0\n\
-        .align 2, 0\n\
-    _0802749C: .4byte gSpecialStatuses\n\
-    _080274A0: .4byte gBattlerAttacker\n\
-    _080274A4: .4byte gBattlescriptCurrInstr\n\
-        ");
-}
-#endif
 
 static void atk7D_setrain(void)
 {

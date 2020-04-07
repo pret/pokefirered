@@ -18,7 +18,7 @@ struct QuestLogEntry
 
 struct UnkStruct_203B044
 {
-    u8 unk_0;
+    u8 id;
     u8 unk_1;
     u16 unk_2;
 };
@@ -34,7 +34,7 @@ extern u16 sQuestLogCursor;
 
 void sub_8112720(u8);
 void SetQuestLogEvent(u16, const u16 *);
-void sub_811539C(void);
+void SetQLPlayedTheSlots(void);
 void QuestLog_RecordEnteredMap(u16);
 u8 sub_8112CAC(void);
 bool8 QuestLog_SchedulePlaybackCB(void (*func)(void));
@@ -47,7 +47,7 @@ void TrySetUpQuestLogScenes_ElseContinueFromSave(u8 taskId);
 void SaveQuestLogData(void);
 void QuestLog_CutRecording(void);
 u8 sub_8112CAC(void);
-void sub_81138F8(void);
+void ResetDeferredLinkEvent(void);
 void FinishRecordingQuestLogScene(void);
 void sub_81139BC(void);
 void *QuestLogGetFlagOrVarPtr(bool8 isFlag, u16 idx);

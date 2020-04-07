@@ -20,21 +20,27 @@
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
 
-static EWRAM_DATA struct UnkStruct_203B024 gUnknown_203B024 = {0};
+struct DeferredLinkEvent
+{
+    u16 id;
+    u16 ALIGNED(4) data[14];
+};
+
+static EWRAM_DATA struct DeferredLinkEvent sDeferredEvent = {0};
 EWRAM_DATA struct UnkStruct_203B044 gUnknown_203B044 = {0};
-static EWRAM_DATA u8 gUnknown_203B048 = 0;
+static EWRAM_DATA u8 sEventShouldNotRecordSteps = 0;
 static EWRAM_DATA bool8 sNewlyEnteredMap = FALSE;
-static EWRAM_DATA u8 gUnknown_203B04A = 0;
-static EWRAM_DATA bool8 gUnknown_203B04B = FALSE;
+static EWRAM_DATA u8 sLastDepartedMap = 0;
+static EWRAM_DATA bool8 sPlayedTheSlots = FALSE;
 
 static bool8 InQuestLogDisabledLocation(void);
-static bool8 sub_8113778(u16, const u16 *);
-static bool8 sub_81137E4(u16, const u16 *);
-static u16 *sub_8113828(u16, const u16 *);
+static bool8 ShouldRegisterEvent_HandlePartyActions(u16, const u16 *);
+static bool8 ShouldRegisterEvent_HandleBeatStoryTrainer(u16, const u16 *);
+static u16 *ShouldRegisterEvent(u16, const u16 *);
 static bool8 TrySetLinkQuestLogEvent(u16, const u16 *);
 static bool8 TrySetTrainerBattleQuestLogEvent(u16, const u16 *);
 static bool8 IsQuestLogEventWithSpecialEncounterSpecies(u16, const u16 *);
-static void sub_8113B94(u16);
+static void SetQuestLogEventToActive(u16);
 static u16 *TryRecordEvent41(u16 *, u16);
 static u16 *BufferQuestLogData_SwitchedPartyOrder(u16 *, const u16 *);
 static u16 *BufferQuestLogData_UsedItem(u16 *, const u16 *);
@@ -113,8 +119,8 @@ static const u16 *BufferQuestLogText_SoldItem(const u16 *);
 static const u16 *BufferQuestLogText_ObtainedItem(const u16 *);
 static const u16 *BufferQuestLogText_ArrivedInLocation(const u16 *);
 static bool8 IsSpeciesFromSpecialEncounter(u16);
-static bool8 sub_81153A8(u16, const u16 *);
-static bool8 sub_81153E4(u16, const u16 *);
+static bool8 ShouldRegisterEvent_HandleDeparted(u16, const u16 *);
+static bool8 ShouldRegisterEvent_HandleGameCorner(u16, const u16 *);
 static void BufferLinkPartnersName(u8 *);
 
 static u16 *(*const sQuestLogStorageCBs[])(u16 *, const u16 *) = {
@@ -167,7 +173,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
 {
     u16 *r1;
 
-    if (eventId == QL_EVENT_DEPARTED && gUnknown_203B048 == 2)
+    if (eventId == QL_EVENT_DEPARTED && sEventShouldNotRecordSteps == 2)
     {
         sub_811381C();
         return;
@@ -197,17 +203,17 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     if (IsQuestLogEventWithSpecialEncounterSpecies(eventId, eventData) == TRUE)
         return;
 
-    if (sub_81153E4(eventId, eventData) == FALSE)
+    if (ShouldRegisterEvent_HandleGameCorner(eventId, eventData) == FALSE)
         return;
 
     if (gQuestLogPlaybackState == 0)
     {
-        if (sub_8113778(eventId, eventData) == TRUE)
+        if (ShouldRegisterEvent_HandlePartyActions(eventId, eventData) == TRUE)
             return;
 
         if (eventId != QL_EVENT_DEFEATED_WILD_MON || gUnknown_203AE04 == NULL)
         {
-            if (sub_81153A8(eventId, eventData) == FALSE)
+            if (ShouldRegisterEvent_HandleDeparted(eventId, eventData) == FALSE)
                 return;
             StartRecordingQuestLogEntry(eventId);
         }
@@ -215,7 +221,7 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     else if (eventId == QL_EVENT_OBTAINED_ITEM)
         return;
 
-    sub_8113B94(eventId);
+    SetQuestLogEventToActive(eventId);
     if (eventId == QL_EVENT_DEFEATED_WILD_MON)
     {
         if (gUnknown_203AE04 == NULL)
@@ -238,13 +244,13 @@ void SetQuestLogEvent(u16 eventId, const u16 *eventData)
     if (r1 == NULL)
     {
         FinishRecordingQuestLogScene();
-        r1 = sub_8113828(eventId, eventData);
+        r1 = ShouldRegisterEvent(eventId, eventData);
         if (r1 == NULL)
             return;
     }
 
     sEventRecordingPointer = r1;
-    if (gUnknown_203B048 == 0)
+    if (sEventShouldNotRecordSteps == 0)
         return;
     FinishRecordingQuestLogScene();
 }
@@ -300,14 +306,14 @@ bool8 QuestLog_ShouldEndSceneOnMapChange(void)
     return FALSE;
 }
 
-static bool8 sub_8113778(u16 eventId, const u16 *eventData)
+static bool8 ShouldRegisterEvent_HandlePartyActions(u16 eventId, const u16 *eventData)
 {
     if (eventId == QL_EVENT_USED_FIELD_MOVE || eventId == QL_EVENT_USED_PKMN_CENTER)
         return TRUE;
 
     if (!FlagGet(FLAG_SYS_GAME_CLEAR))
     {
-        if (eventId == QL_EVENT_SWITCHED_PARTY_ORDER || eventId == QL_EVENT_DEFEATED_WILD_MON || sub_81137E4(eventId, eventData) == TRUE)
+        if (eventId == QL_EVENT_SWITCHED_PARTY_ORDER || eventId == QL_EVENT_DEFEATED_WILD_MON || ShouldRegisterEvent_HandleBeatStoryTrainer(eventId, eventData) == TRUE)
             return TRUE;
     }
 
@@ -329,7 +335,7 @@ static bool8 sub_8113778(u16 eventId, const u16 *eventData)
     return FALSE;
 }
 
-static bool8 sub_81137E4(u16 eventId, const u16 *eventData)
+static bool8 ShouldRegisterEvent_HandleBeatStoryTrainer(u16 eventId, const u16 *eventData)
 {
     if (eventId == QL_EVENT_DEFEATED_TRAINER)
     {
@@ -346,19 +352,19 @@ static bool8 sub_81137E4(u16 eventId, const u16 *eventData)
 
 void sub_811381C(void)
 {
-    gUnknown_203B048 = 0;
+    sEventShouldNotRecordSteps = 0;
 }
 
-static u16 *sub_8113828(u16 eventId, const u16 *eventData)
+static u16 *ShouldRegisterEvent(u16 eventId, const u16 *eventData)
 {
-    if (sub_8113778(eventId, eventData) == TRUE)
+    if (ShouldRegisterEvent_HandlePartyActions(eventId, eventData) == TRUE)
         return NULL;
 
-    if (sub_81153A8(eventId, eventData) == FALSE)
+    if (ShouldRegisterEvent_HandleDeparted(eventId, eventData) == FALSE)
         return NULL;
 
     StartRecordingQuestLogEntry(eventId);
-    sub_8113B94(eventId);
+    SetQuestLogEventToActive(eventId);
 
     if (eventId == QL_EVENT_DEFEATED_WILD_MON)
         gUnknown_203AE04 = sEventRecordingPointer;
@@ -373,34 +379,34 @@ static bool8 TrySetLinkQuestLogEvent(u16 eventId, const u16 *eventData)
     if (!IS_LINK_QL_EVENT(eventId))
         return FALSE;
 
-    sub_81138F8();
-    gUnknown_203B024.unk_00 = eventId;
+    ResetDeferredLinkEvent();
+    sDeferredEvent.id = eventId;
 
     if (eventId != QL_EVENT_USED_UNION_ROOM && eventId != QL_EVENT_USED_UNION_ROOM_CHAT)
     {
         if (eventId == QL_EVENT_LINK_TRADED || eventId == QL_EVENT_LINK_TRADED_UNION)
-            memcpy(gUnknown_203B024.unk_04, eventData, 12);
+            memcpy(sDeferredEvent.data, eventData, 12);
         else
-            memcpy(gUnknown_203B024.unk_04, eventData, 24);
+            memcpy(sDeferredEvent.data, eventData, 24);
     }
     return TRUE;
 }
 
-void sub_81138F8(void)
+void ResetDeferredLinkEvent(void)
 {
-    gUnknown_203B024 = (struct UnkStruct_203B024){};
+    sDeferredEvent = (struct DeferredLinkEvent){};
 }
 
 void QuestLog_StartRecordingInputsAfterDeferredEvent(void)
 {
-    if (gUnknown_203B024.unk_00 != QL_EVENT_0)
+    if (sDeferredEvent.id != QL_EVENT_0)
     {
         u16 *resp;
-        gUnknown_203B04A = 0;
-        StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](sEventRecordingPointer, gUnknown_203B024.unk_04);
+        sLastDepartedMap = 0;
+        StartRecordingQuestLogEntry(sDeferredEvent.id);
+        resp = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
         sEventRecordingPointer = resp;
-        sub_81138F8();
+        ResetDeferredLinkEvent();
     }
 }
 
@@ -412,30 +418,30 @@ static bool8 TrySetTrainerBattleQuestLogEvent(u16 eventId, const u16 *eventData)
         && eventId != QL_EVENT_DEFEATED_CHAMPION)
         return FALSE;
 
-    sub_81138F8();
-    if (gQuestLogPlaybackState != 0 || FlagGet(FLAG_SYS_GAME_CLEAR) || sub_81137E4(eventId, eventData) != TRUE)
+    ResetDeferredLinkEvent();
+    if (gQuestLogPlaybackState != 0 || FlagGet(FLAG_SYS_GAME_CLEAR) || ShouldRegisterEvent_HandleBeatStoryTrainer(eventId, eventData) != TRUE)
     {
-        gUnknown_203B024.unk_00 = eventId;
-        memcpy(gUnknown_203B024.unk_04, eventData, 8);
+        sDeferredEvent.id = eventId;
+        memcpy(sDeferredEvent.data, eventData, 8);
     }
     return TRUE;
 }
 
 void sub_81139BC(void)
 {
-    if (gUnknown_203B024.unk_00 != QL_EVENT_0)
+    if (sDeferredEvent.id != QL_EVENT_0)
     {
         u16 *resp;
         if (gQuestLogPlaybackState == 0)
         {
-            gUnknown_203B04A = 0;
-            StartRecordingQuestLogEntry(gUnknown_203B024.unk_00);
+            sLastDepartedMap = 0;
+            StartRecordingQuestLogEntry(sDeferredEvent.id);
         }
-        sub_8113B94(gUnknown_203B024.unk_00);
-        resp = sQuestLogStorageCBs[gUnknown_203B024.unk_00](sEventRecordingPointer, gUnknown_203B024.unk_04);
+        SetQuestLogEventToActive(sDeferredEvent.id);
+        resp = sQuestLogStorageCBs[sDeferredEvent.id](sEventRecordingPointer, sDeferredEvent.data);
         sEventRecordingPointer = resp;
         TryRecordEvent41_IncCursor(1);
-        sub_81138F8();
+        ResetDeferredLinkEvent();
         FinishRecordingQuestLogScene();
     }
 }
@@ -571,9 +577,9 @@ void sub_8113ABC(const u16 *a0)
 {
     const u8 *r2 = (const u8 *)(a0 + 2);
     if ((a0[0] & 0xFFF) != QL_EVENT_DEPARTED)
-        gUnknown_203B04A = 0;
+        sLastDepartedMap = 0;
     else
-        gUnknown_203B04A = r2[1] + 1;
+        sLastDepartedMap = r2[1] + 1;
 }
 
 bool8 sub_8113AE8(const u16 *a0)
@@ -588,7 +594,7 @@ bool8 sub_8113AE8(const u16 *a0)
         return FALSE;
 
     sQuestLogEventTextBufferCBs[a0[0] & 0xFFF](a0);
-    gUnknown_203B044.unk_0 = a0[0];
+    gUnknown_203B044.id = a0[0];
     gUnknown_203B044.unk_1 = (a0[0] & 0xF000) >> 12;
     if (gUnknown_203B044.unk_1 != 0)
         gUnknown_203B044.unk_2 = 1;
@@ -600,7 +606,7 @@ bool8 sub_8113B44(const u16 *a0)
     if (gUnknown_203B044.unk_2 == 0)
         return FALSE;
 
-    sQuestLogEventTextBufferCBs[gUnknown_203B044.unk_0](a0);
+    sQuestLogEventTextBufferCBs[gUnknown_203B044.id](a0);
     gUnknown_203B044.unk_2++;
     if (gUnknown_203B044.unk_2 > gUnknown_203B044.unk_1)
         ResetUnk203B044();
@@ -612,11 +618,11 @@ void ResetUnk203B044(void)
     gUnknown_203B044 = (struct UnkStruct_203B044){};
 }
 
-static void sub_8113B94(u16 eventId)
+static void SetQuestLogEventToActive(u16 eventId)
 {
-    if (gUnknown_203B044.unk_0 != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogCursor)
+    if (gUnknown_203B044.id != (u8)eventId || gUnknown_203B044.unk_2 != sQuestLogCursor)
     {
-        gUnknown_203B044.unk_0 = eventId;
+        gUnknown_203B044.id = eventId;
         gUnknown_203B044.unk_1 = 0;
         gUnknown_203B044.unk_2 = sQuestLogCursor;
     }
@@ -627,8 +633,8 @@ static void sub_8113B94(u16 eventId)
 void sub_8113BD8(void)
 {
     sNewlyEnteredMap = FALSE;
-    gUnknown_203B04A = 0;
-    gUnknown_203B04B = FALSE;
+    sLastDepartedMap = 0;
+    sPlayedTheSlots = FALSE;
 }
 
 u16 *TryRecordEvent39_NoParams(u16 *a0)
@@ -838,7 +844,7 @@ static u16 *BufferQuestLogData_UsedItem(u16 *a0, const u16 *eventData)
     r2[2] = eventData[3];
 
     if (eventData[0] == ITEM_ESCAPE_ROPE)
-        gUnknown_203B048 = 2;
+        sEventShouldNotRecordSteps = 2;
 
     return r2 + 3;
 }
@@ -1015,7 +1021,7 @@ static const u16 *BufferQuestLogText_SwappedHeldItemFromPC(const u16 *eventData)
 static u16 *BufferQuestLogData_UsedPkmnCenter(u16 *a0, const u16 *eventData)
 {
     u16 *r4 = a0;
-    if (gUnknown_203B044.unk_0 == QL_EVENT_USED_PKMN_CENTER && gUnknown_203B044.unk_1 != 0)
+    if (gUnknown_203B044.id == QL_EVENT_USED_PKMN_CENTER && gUnknown_203B044.unk_1 != 0)
         return r4;
 
     if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_USED_PKMN_CENTER]))
@@ -1492,7 +1498,7 @@ u16 *BufferQuestLogData_DefeatedTrainer_(u16 eventId, u16 *a1, const u16 *a2)
 
 static u16 *BufferQuestLogData_DefeatedGymLeader(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = 1;
+    sEventShouldNotRecordSteps = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_GYM_LEADER, a0, eventData);
 }
 
@@ -1602,7 +1608,7 @@ static bool8 IsSpeciesFromSpecialEncounter(u16 species)
 
 static u16 *BufferQuestLogData_DefeatedEliteFourMember(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = 1;
+    sEventShouldNotRecordSteps = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_E4_MEMBER, a0, eventData);
 }
 
@@ -1624,12 +1630,12 @@ static u16 *BufferQuestLogData_DefeatedChampion(u16 *a0, const u16 *eventData)
 {
     if (!sub_8110944(a0, sQuestLogEventCmdSizes[QL_EVENT_DEFEATED_CHAMPION]))
         return NULL;
-    a0[0] = 0x2021;
+    a0[0] = QL_EVENT_DEFEATED_CHAMPION | (2 << 12);
     a0[1] = sQuestLogCursor;
     a0[2] = eventData[1];
     a0[3] = eventData[2];
     *((u8 *)a0 + 8) = *((const u8 *)eventData + 6);
-    gUnknown_203B048 = 1;
+    sEventShouldNotRecordSteps = 1;
     return a0 + 5;
 }
 
@@ -1666,7 +1672,7 @@ static const u16 *BufferQuestLogText_DefeatedChampion(const u16 *a0)
 
 static u16 *BufferQuestLogData_DefeatedTrainer(u16 *a0, const u16 *eventData)
 {
-    gUnknown_203B048 = 1;
+    sEventShouldNotRecordSteps = 1;
     return BufferQuestLogData_DefeatedTrainer_(QL_EVENT_DEFEATED_TRAINER, a0, eventData);
 }
 
@@ -1850,7 +1856,7 @@ static u16 *BufferQuestLogData_DepartedLocation(u16 *a0, const u16 *eventData)
         return NULL;
     *((u8 *)r2 + 0) = *((const u8 *)eventData + 0);
     if ((*((u8 *)r2 + 1) = *((const u8 *)eventData + 1)) == QL_LOCATION_SAFARI_ZONE)
-        gUnknown_203B048 = 1;
+        sEventShouldNotRecordSteps = 1;
     return r2 + 1;
 }
 
@@ -1883,33 +1889,34 @@ static const u16 *BufferQuestLogText_DepartedLocation(const u16 *eventData)
     return (const u16 *)(r5_2 + 2);
 }
 
-void sub_811539C(void)
+void SetQLPlayedTheSlots(void)
 {
-    gUnknown_203B04B = TRUE;
+    sPlayedTheSlots = TRUE;
 }
 
-static bool8 sub_81153A8(u16 eventId, const u16 *eventData)
+static bool8 ShouldRegisterEvent_HandleDeparted(u16 eventId, const u16 *eventData)
 {
     if (eventId != QL_EVENT_DEPARTED)
     {
-        gUnknown_203B04A = 0;
+        sLastDepartedMap = 0;
         return TRUE;
     }
-    if (gUnknown_203B04A == *((u8 *)eventData + 1) + 1)
+    if (sLastDepartedMap == *((u8 *)eventData + 1) + 1)
         return FALSE;
-    gUnknown_203B04A = *((u8 *)eventData + 1) + 1;
+    sLastDepartedMap = *((u8 *)eventData + 1) + 1;
     return TRUE;
 }
 
-static bool8 sub_81153E4(u16 eventId, const u16 *eventData)
+static bool8 ShouldRegisterEvent_HandleGameCorner(u16 eventId, const u16 *eventData)
 {
     if (eventId != QL_EVENT_DEPARTED)
         return TRUE;
 
-    if (*((u8 *)eventData + 1) == 32 && !gUnknown_203B04B)
+    // Bug: should be QL_LOCATION_GAME_CORNER + 1
+    if (*((u8 *)eventData + 1) == QL_LOCATION_GAME_CORNER && !sPlayedTheSlots)
         return FALSE;
 
-    gUnknown_203B04B = FALSE;
+    sPlayedTheSlots = FALSE;
     return TRUE;
 }
 
@@ -1924,9 +1931,9 @@ static u16 *BufferQuestLogData_UsedFieldMove(u16 *a0, const u16 *eventData)
     r3[0] = *((const u8 *)eventData + 2);
     r3[1] = *((const u8 *)eventData + 3);
     if (r3[0] == FIELD_MOVE_TELEPORT || r3[0] == FIELD_MOVE_DIG)
-        gUnknown_203B048 = 2;
+        sEventShouldNotRecordSteps = 2;
     else
-        gUnknown_203B048 = 1;
+        sEventShouldNotRecordSteps = 1;
     return (u16 *)(r3 + 2);
 }
 

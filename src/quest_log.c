@@ -65,8 +65,8 @@ struct UnkStruct_203AE94
     u8 playingEvent:2;
     u8 sceneEndMode:2;
     u8 cursor;
-    u8 unk_2;
-    u8 unk_3;
+    u8 timer;
+    u8 overlapTimer;
 };
 
 struct UnkStruct_300201C
@@ -124,8 +124,8 @@ static void QuestLog_AdvancePlayhead(void);
 static void QuestLog_StartFinalScene(void);
 static void Task_RunPlaybackCB(u8);
 static void QuestLog_PlayCurrentEvent(void);
-static void sub_8111B80(void);
-static u8 sub_8111BD4(void);
+static void HandleShowQuestLogMessage(void);
+static u8 GetQuestLogTextDisplayDuration(void);
 static void DrawQuestLogSceneDescription(void);
 static void sub_8111D90(u8);
 static void QuestLog_CloseTextWindow(void);
@@ -138,7 +138,7 @@ static void Task_WaitAtEndOfQuestLog(u8);
 static void Task_EndQuestLog(u8);
 static bool8 sub_81121D8(u8);
 static void sub_811229C(void);
-static void sub_8112888(u8);
+static void TogglePlaybackStateForOverworldLock(u8);
 static void SetUpQuestLogEntry(u8, struct QuestLogEntry *, u16);
 static bool8 sub_8112CEC(void);
 static bool8 RecordHeadAtEndOfEntry(void);
@@ -200,7 +200,7 @@ void ResetQuestLog(void)
     sEventRecordingPointer = NULL;
     gUnknown_203AE04 = NULL;
     sub_8113BD8();
-    sub_81138F8();
+    ResetDeferredLinkEvent();
 }
 
 static void DestroySav1QuestLogEntry(u8 a0)
@@ -894,49 +894,49 @@ static void QuestLog_PlayCurrentEvent(void)
 {
     if (sQuestLogCurrentScene.playbackSubstate == 1)
     {
-        if (--sQuestLogCurrentScene.unk_2 != 0)
+        if (--sQuestLogCurrentScene.timer != 0)
             return;
         sQuestLogCurrentScene.playbackSubstate = 0;
         sQuestLogCurrentScene.playingEvent = 1;
-        sub_8112888(2);
+        TogglePlaybackStateForOverworldLock(2);
     }
 
     if (sQuestLogCurrentScene.playingEvent == 1)
     {
-        if (++sQuestLogCurrentScene.unk_3 > 15)
+        if (++sQuestLogCurrentScene.overlapTimer > 15)
         {
             QuestLog_CloseTextWindow();
             sQuestLogCurrentScene.playingEvent = 0;
-            sQuestLogCurrentScene.unk_3 = 0;
+            sQuestLogCurrentScene.overlapTimer = 0;
         }
     }
     if (sQuestLogCurrentScene.cursor < NELEMS(gUnknown_203AE0C))
     {
         if (sub_8113B44(gUnknown_203AE0C[sQuestLogCurrentScene.cursor]) == 1)
-            sub_8111B80();
+            HandleShowQuestLogMessage();
         else if (sub_8113AE8(gUnknown_203AE0C[sQuestLogCurrentScene.cursor]) == 1)
-            sub_8111B80();
+            HandleShowQuestLogMessage();
     }
 }
 
-static void sub_8111B80(void)
+static void HandleShowQuestLogMessage(void)
 {
     if (sQuestLogCurrentScene.playbackSubstate == 0)
     {
         sQuestLogCurrentScene.playbackSubstate = 1;
         sQuestLogCurrentScene.playingEvent = 0;
-        sQuestLogCurrentScene.unk_3 = 0;
-        sQuestLogCurrentScene.unk_2 = sub_8111BD4();
+        sQuestLogCurrentScene.overlapTimer = 0;
+        sQuestLogCurrentScene.timer = GetQuestLogTextDisplayDuration();
         if (gUnknown_203B044.unk_2 == 0)
             sQuestLogCurrentScene.cursor++;
         if (sQuestLogCurrentScene.cursor > 32)
             return;
         DrawQuestLogSceneDescription();
     }
-    sub_8112888(1);
+    TogglePlaybackStateForOverworldLock(1); // lock
 }
 
-static u8 sub_8111BD4(void)
+static u8 GetQuestLogTextDisplayDuration(void)
 {
     u16 i;
     u16 count = 0;
@@ -1435,17 +1435,17 @@ void sub_81127F8(struct FieldInput * a0)
     }
 }
 
-static void sub_8112888(u8 a0)
+static void TogglePlaybackStateForOverworldLock(u8 a0)
 {
     switch (a0)
     {
     case 1:
         if (gQuestLogPlaybackState == 1)
-            gQuestLogPlaybackState = 3;
+            gQuestLogPlaybackState = 3; // Message visible, overworld locked
         break;
     case 2:
         if (gQuestLogPlaybackState == 3)
-            gQuestLogPlaybackState = 1;
+            gQuestLogPlaybackState = 1; // Overworld unlocked
         break;
     }
 }

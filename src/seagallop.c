@@ -44,13 +44,13 @@ static void CreateWakeSprite(s16 x);
 static void SpriteCB_Wake(struct Sprite * sprite);
 static bool8 GetDirectionOfTravel(void);
 
-static const u16 sWaterTiles[] = INCBIN_U16("data/seagallop/water.4bpp");
-static const u16 sWaterPal[] = INCBIN_U16("data/seagallop/water.gbapal");
-static const u16 sWaterTilemap_WB[] = INCBIN_U16("data/seagallop/wb_tilemap.bin");
-static const u16 sWaterTilemap_EB[] = INCBIN_U16("data/seagallop/eb_tilemap.bin");
-static const u16 sFerrySpriteTiles[] = INCBIN_U16("data/seagallop/ferry_sprite.4bpp");
-static const u16 sFerryAndWakePal[] = INCBIN_U16("data/seagallop/ferry_and_wake.gbapal");
-static const u16 sWakeSpriteTiles[] = INCBIN_U16("data/seagallop/wake.4bpp");
+static const u16 sWaterTiles[] = INCBIN_U16("graphics/seagallop/water.4bpp");
+static const u16 sWaterPal[] = INCBIN_U16("graphics/seagallop/water.gbapal");
+static const u16 sWaterTilemap_WB[] = INCBIN_U16("graphics/seagallop/wb_tilemap.bin");
+static const u16 sWaterTilemap_EB[] = INCBIN_U16("graphics/seagallop/eb_tilemap.bin");
+static const u16 sFerrySpriteTiles[] = INCBIN_U16("graphics/seagallop/ferry_sprite.4bpp");
+static const u16 sFerryAndWakePal[] = INCBIN_U16("graphics/seagallop/ferry_and_wake.gbapal");
+static const u16 sWakeSpriteTiles[] = INCBIN_U16("graphics/seagallop/wake.4bpp");
 
 static const struct BgTemplate sBGTemplates[] = {
     {

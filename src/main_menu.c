@@ -127,8 +127,8 @@ static const struct WindowTemplate sWindowTemplate[] = {
     [MAIN_MENU_WINDOW_COUNT] = DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sBgPal00[] = INCBIN_U16("data/main_menu/unk_8234648.gbapal");
-static const u16 sBgPal15[] = INCBIN_U16("data/main_menu/unk_8234668.gbapal");
+static const u16 sBgPal00[] = INCBIN_U16("graphics/main_menu/unk_8234648.gbapal");
+static const u16 sBgPal15[] = INCBIN_U16("graphics/main_menu/unk_8234668.gbapal");
 
 static const u8 sTextColor1[] = { 10, 11, 12 };
 

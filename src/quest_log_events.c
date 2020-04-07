@@ -649,12 +649,12 @@ u16 *sub_8113C20(u16 *a0, struct QuestLogEntry * a1)
 {
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_39]))
         return NULL;
-    a1->unk_6 = 0xFF;
-    a1->unk_4 = 0;
-    a1->unk_0 = 0;
-    a1->unk_1 = 0;
-    a1->unk_2 = 0;
-    a1->unk_3 = 0;
+    a1->command = 0xFF;
+    a1->duration = 0;
+    a1->localId = 0;
+    a1->mapNum = 0;
+    a1->mapGroup = 0;
+    a1->animId = 0;
     return a0 + 1;
 }
 
@@ -671,12 +671,12 @@ u16 *sub_8113C8C(u16 *a0, struct QuestLogEntry * a1)
 {
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_41]))
         return NULL;
-    a1->unk_6 = 0xFE;
-    a1->unk_4 = a0[1];
-    a1->unk_0 = 0;
-    a1->unk_1 = 0;
-    a1->unk_2 = 0;
-    a1->unk_3 = 0;
+    a1->command = 0xFE;
+    a1->duration = a0[1];
+    a1->localId = 0;
+    a1->mapNum = 0;
+    a1->mapGroup = 0;
+    a1->animId = 0;
     return a0 + 2;
 }
 
@@ -687,11 +687,11 @@ u16 *sub_8113CC8(u16 *a0, struct QuestLogEntry * a1)
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
     a0[0] = 0;
-    a0[1] = a1->unk_4;
-    r6[0] = a1->unk_0;
-    r6[1] = a1->unk_1;
-    r6[2] = a1->unk_2;
-    r6[3] = a1->unk_3;
+    a0[1] = a1->duration;
+    r6[0] = a1->localId;
+    r6[1] = a1->mapNum;
+    r6[2] = a1->mapGroup;
+    r6[3] = a1->animId;
     return (u16 *)(r6 + 4);
 }
 
@@ -701,12 +701,12 @@ u16 *sub_8113D08(u16 *a0, struct QuestLogEntry * a1)
 
     if (!WillCommandOfSizeFitInSav1Record(a0, sQuestLogEventCmdSizes[QL_EVENT_0]))
         return NULL;
-    a1->unk_6 = 2;
-    a1->unk_4 = a0[1];
-    a1->unk_0 = r6[0];
-    a1->unk_1 = r6[1];
-    a1->unk_2 = r6[2];
-    a1->unk_3 = r6[3];
+    a1->command = 2;
+    a1->duration = a0[1];
+    a1->localId = r6[0];
+    a1->mapNum = r6[1];
+    a1->mapGroup = r6[2];
+    a1->animId = r6[3];
     return (u16 *)(r6 + 4);
 }
 
@@ -717,15 +717,15 @@ u16 *sub_8113D48(u16 *a0, struct QuestLogEntry * a1)
 
     if (!WillCommandOfSizeFitInSav1Record(r4, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
-    if (a1->unk_6 == 0)
+    if (a1->command == 0)
         r4[0] = 2;
     else
         r4[0] = 1;
-    r4[1] = a1->unk_4;
-    r6[0] = a1->unk_0;
-    r6[1] = a1->unk_1;
-    r6[2] = a1->unk_2;
-    r6[3] = a1->unk_3;
+    r4[1] = a1->duration;
+    r6[0] = a1->localId;
+    r6[1] = a1->mapNum;
+    r6[2] = a1->mapGroup;
+    r6[3] = a1->animId;
     return (u16 *)(r6 + 4);
 }
 
@@ -737,14 +737,14 @@ u16 *sub_8113D94(u16 *a0, struct QuestLogEntry * a1)
     if (!WillCommandOfSizeFitInSav1Record(r5, sQuestLogEventCmdSizes[QL_EVENT_2]))
         return NULL;
     if (r5[0] == 2)
-        a1->unk_6 = 0;
+        a1->command = 0;
     else
-        a1->unk_6 = 1;
-    a1->unk_4 = r5[1];
-    a1->unk_0 = r6[0];
-    a1->unk_1 = r6[1];
-    a1->unk_2 = r6[2];
-    a1->unk_3 = r6[3];
+        a1->command = 1;
+    a1->duration = r5[1];
+    a1->localId = r6[0];
+    a1->mapNum = r6[1];
+    a1->mapGroup = r6[2];
+    a1->animId = r6[3];
     return (u16 *)(r6 + 4);
 }
 

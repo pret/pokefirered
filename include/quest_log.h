@@ -8,12 +8,12 @@
 
 struct QuestLogEntry
 {
-    u8 unk_0;
-    u8 unk_1;
-    u8 unk_2;
-    u8 unk_3;
-    u16 unk_4;
-    u8 unk_6;
+    u8 localId;
+    u8 mapNum;
+    u8 mapGroup;
+    u8 animId;
+    u16 duration;
+    u8 command;
 };
 
 struct UnkStruct_203B044

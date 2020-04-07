@@ -69,7 +69,7 @@ struct UnkStruct_203AE94
     u8 overlapTimer;
 };
 
-struct UnkStruct_300201C
+struct FlagOrVarRecord
 {
     u16 idx:15;
     u16 isFlag:1;
@@ -81,7 +81,7 @@ u16 sNumEventsInLogEntry;
 struct FieldInput gQuestLogFieldInput;
 struct QuestLogEntry * sCurQuestLogEntry;
 
-static struct UnkStruct_300201C * sFlagOrVarRecords;
+static struct FlagOrVarRecord * sFlagOrVarRecords;
 static u16 sNumFlagsOrVars;
 
 static EWRAM_DATA u8 sCurrentSceneNum = 0;
@@ -99,7 +99,7 @@ static EWRAM_DATA struct QuestLogEntry sQuestLogSceneRecordBuffer[32] = {0};
 EWRAM_DATA u16 sQuestLogCursor = 0;
 static EWRAM_DATA u8 sMovementScripts[64][2] = {{0}};
 static EWRAM_DATA u16 sNextStepDelay = 0;
-static EWRAM_DATA u16 gUnknown_203B01C = 0;
+static EWRAM_DATA u16 sLastQuestLogCursor = 0;
 static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
 
 static void QLogCB_Recording(void);
@@ -140,7 +140,7 @@ static bool8 sub_81121D8(u8);
 static void sub_811229C(void);
 static void TogglePlaybackStateForOverworldLock(u8);
 static void SetUpQuestLogEntry(u8, struct QuestLogEntry *, u16);
-static bool8 sub_8112CEC(void);
+static bool8 RecordHeadAtEndOfEntryOrScriptContext2Enabled(void);
 static bool8 RecordHeadAtEndOfEntry(void);
 static void TryLoseFansFromPlayTimeAfterLinkBattle(struct TrainerFanClub *);
 static void UpdateTrainerFanClubGameClear(struct TrainerFanClub *);
@@ -406,7 +406,7 @@ static bool8 TryRecordQuestLogEntrySequence(struct QuestLogEntry * entry)
     {
         if (sEventRecordingPointer == NULL)
             return FALSE;
-        switch (entry[i].unk_6)
+        switch (entry[i].command)
         {
         case 0:
         case 1:
@@ -1329,16 +1329,16 @@ void sub_811246C(struct Sprite *sprite)
     }
 }
 
-void sub_81124EC(u8 a0, u8 a1, u8 a2, u8 movementActionId)
+void sub_81124EC(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId)
 {
-    if (!sub_8112CEC())
+    if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
     {
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = a0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_1 = a1;
-        sCurQuestLogEntry[sQuestLogCursor].unk_2 = a2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 0;
+        sCurQuestLogEntry[sQuestLogCursor].localId = localId;
+        sCurQuestLogEntry[sQuestLogCursor].mapNum = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].mapGroup = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = 0;
     }
@@ -1348,12 +1348,12 @@ void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 dur
 {
     if (!RecordHeadAtEndOfEntry())
     {
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = localId;
-        sCurQuestLogEntry[sQuestLogCursor].unk_1 = mapNum;
-        sCurQuestLogEntry[sQuestLogCursor].unk_2 = mapGroup;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 0;
+        sCurQuestLogEntry[sQuestLogCursor].localId = localId;
+        sCurQuestLogEntry[sQuestLogCursor].mapNum = mapNum;
+        sCurQuestLogEntry[sQuestLogCursor].mapGroup = mapGroup;
+        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
@@ -1361,15 +1361,15 @@ void sub_8112588(u8 localId, u8 mapNum, u8 mapGroup, u8 movementActionId, u8 dur
 
 void sub_8112628(u8 movementActionId)
 {
-    if (!sub_8112CEC())
+    if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
     {
-        if (movementActionId != sCurQuestLogEntry[gUnknown_203B01C].unk_3 || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
+        if (movementActionId != sCurQuestLogEntry[sLastQuestLogCursor].animId || movementActionId > MOVEMENT_ACTION_FACE_RIGHT)
         {
-            sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-            sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-            sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
-            gUnknown_203B01C = sQuestLogCursor;
+            sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+            sCurQuestLogEntry[sQuestLogCursor].command = 0;
+            sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+            sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+            sLastQuestLogCursor = sQuestLogCursor;
             sQuestLogCursor++;
             sNextStepDelay = 0;
         }
@@ -1380,11 +1380,11 @@ void sub_81126AC(u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
-        gUnknown_203B01C = sQuestLogCursor;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 0;
+        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
+        sLastQuestLogCursor = sQuestLogCursor;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
@@ -1394,10 +1394,10 @@ void sub_8112720(u8 movementActionId)
 {
     if (!RecordHeadAtEndOfEntry())
     {
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 1;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 1;
+        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = 0;
     }
@@ -1407,10 +1407,10 @@ void sub_811278C(u8 movementActionId, u8 duration)
 {
     if (!RecordHeadAtEndOfEntry())
     {
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 1;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = movementActionId;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 1;
+        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].animId = movementActionId;
         sQuestLogCursor++;
         sNextStepDelay = duration;
     }
@@ -1421,12 +1421,12 @@ void sub_81127F8(struct FieldInput * a0)
     if (sQuestLogCursor < sNumEventsInLogEntry)
     {
         u32 r2 = *(u32 *)a0 & 0x00FF00F3;
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = r2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_1 = r2 >> 8;
-        sCurQuestLogEntry[sQuestLogCursor].unk_2 = r2 >> 16;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = r2 >> 24;
+        sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+        sCurQuestLogEntry[sQuestLogCursor].command = 2;
+        sCurQuestLogEntry[sQuestLogCursor].localId = r2;
+        sCurQuestLogEntry[sQuestLogCursor].mapNum = r2 >> 8;
+        sCurQuestLogEntry[sQuestLogCursor].mapGroup = r2 >> 16;
+        sCurQuestLogEntry[sQuestLogCursor].animId = r2 >> 24;
         sQuestLogCursor++;
         if (ScriptContext2_IsEnabled())
             sNextStepDelay = TRUE;
@@ -1461,8 +1461,8 @@ void sub_81128BC(u8 a0)
             gQuestLogPlaybackState = 3;
         else if (r1 == 2)
         {
-            sCurQuestLogEntry[sQuestLogCursor].unk_4 = sNextStepDelay;
-            sCurQuestLogEntry[sQuestLogCursor].unk_6 = 3;
+            sCurQuestLogEntry[sQuestLogCursor].duration = sNextStepDelay;
+            sCurQuestLogEntry[sQuestLogCursor].command = 3;
             sQuestLogCursor++;
             sNextStepDelay = 0;
             gQuestLogPlaybackState = 4;
@@ -1495,10 +1495,10 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
             sMovementScripts[i][1] |= 0xFF;
         }
         sQuestLogCursor = 0;
-        gUnknown_203B01C = 0;
+        sLastQuestLogCursor = 0;
         gQuestLogFieldInput = (struct FieldInput){};
-        sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
-        sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
+        sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].duration;
+        sMovementScripts[0][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
         sMovementScripts[0][1] = 0xFF;
         gQuestLogPlaybackState = 1;
         break;
@@ -1511,33 +1511,33 @@ static void SetUpQuestLogEntry(u8 kind, struct QuestLogEntry *entry, u16 size)
         }
         sQuestLogCursor = 0;
         sNextStepDelay = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].duration = 0;
+        sCurQuestLogEntry[sQuestLogCursor].command = 0;
+        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
         switch (GetPlayerFacingDirection())
         {
         case DIR_NONE:
         case DIR_SOUTH:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_DOWN;
+            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_DOWN;
             break;
         case DIR_EAST:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_RIGHT;
+            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_RIGHT;
             break;
         case DIR_NORTH:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_UP;
+            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_UP;
             break;
         case DIR_WEST:
-            sCurQuestLogEntry[sQuestLogCursor].unk_3 = MOVEMENT_ACTION_FACE_LEFT;
+            sCurQuestLogEntry[sQuestLogCursor].animId = MOVEMENT_ACTION_FACE_LEFT;
             break;
         }
-        gUnknown_203B01C = 0;
+        sLastQuestLogCursor = 0;
         sQuestLogCursor++;
-        sCurQuestLogEntry[sQuestLogCursor].unk_4 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_6 = 2;
-        sCurQuestLogEntry[sQuestLogCursor].unk_0 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_1 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_2 = 0;
-        sCurQuestLogEntry[sQuestLogCursor].unk_3 = 0;
+        sCurQuestLogEntry[sQuestLogCursor].duration = 0;
+        sCurQuestLogEntry[sQuestLogCursor].command = 2;
+        sCurQuestLogEntry[sQuestLogCursor].localId = 0;
+        sCurQuestLogEntry[sQuestLogCursor].mapNum = 0;
+        sCurQuestLogEntry[sQuestLogCursor].mapGroup = 0;
+        sCurQuestLogEntry[sQuestLogCursor].animId = 0;
         sQuestLogCursor++;
         gQuestLogPlaybackState = 2;
         break;
@@ -1551,7 +1551,7 @@ void sub_8112B3C(void)
     case 0:
         break;
     case 1:
-        if (!sub_8112CEC())
+        if (!RecordHeadAtEndOfEntryOrScriptContext2Enabled())
         {
             if (sNextStepDelay != 0)
                 sNextStepDelay--;
@@ -1559,17 +1559,17 @@ void sub_8112B3C(void)
             {
                 do
                 {
-                    switch (sCurQuestLogEntry[sQuestLogCursor].unk_6)
+                    switch (sCurQuestLogEntry[sQuestLogCursor].command)
                     {
                     case 0:
-                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][0] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][0] = sCurQuestLogEntry[sQuestLogCursor].animId;
                         break;
                     case 1:
-                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].unk_0][1] = sCurQuestLogEntry[sQuestLogCursor].unk_3;
+                        sMovementScripts[sCurQuestLogEntry[sQuestLogCursor].localId][1] = sCurQuestLogEntry[sQuestLogCursor].animId;
                         break;
                     case 2:
                         // Player input command
-                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].unk_3 << 24) | (sCurQuestLogEntry[sQuestLogCursor].unk_2 << 16) | (sCurQuestLogEntry[sQuestLogCursor].unk_1 << 8) | (sCurQuestLogEntry[sQuestLogCursor].unk_0 << 0));
+                        *(u32 *)&gQuestLogFieldInput = ((sCurQuestLogEntry[sQuestLogCursor].animId << 24) | (sCurQuestLogEntry[sQuestLogCursor].mapGroup << 16) | (sCurQuestLogEntry[sQuestLogCursor].mapNum << 8) | (sCurQuestLogEntry[sQuestLogCursor].localId << 0));
                         break;
                     case 3:
                         gQuestLogPlaybackState = 3;
@@ -1587,7 +1587,7 @@ void sub_8112B3C(void)
                         gQuestLogPlaybackState = 0;
                         break;
                     }
-                    sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].unk_4;
+                    sNextStepDelay = sCurQuestLogEntry[sQuestLogCursor].duration;
                 } while (gQuestLogPlaybackState != 3
                       && (sNextStepDelay == 0 || sNextStepDelay == 0xFFFF));
             }
@@ -1633,7 +1633,7 @@ u8 sub_8112CAC(void)
     }
 }
 
-static bool8 sub_8112CEC(void)
+static bool8 RecordHeadAtEndOfEntryOrScriptContext2Enabled(void)
 {
     if (sQuestLogCursor >= sNumEventsInLogEntry || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
@@ -1647,7 +1647,7 @@ static bool8 RecordHeadAtEndOfEntry(void)
     return FALSE;
 }
 
-static const struct UnkStruct_300201C gUnknown_84566A4 = {
+static const struct FlagOrVarRecord sDummyFlagOrVarRecord = {
     0,
     FALSE,
     0x7FFF
@@ -1686,22 +1686,22 @@ void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value)
     sFlagOrVarPlayhead++;
 }
 
-void sub_8112E3C(u8 a0, struct UnkStruct_300201C * a1, u16 a2)
+void sub_8112E3C(u8 state, struct FlagOrVarRecord * records, u16 size)
 {
     s32 i;
 
-    if (a0 == 0 || a0 > 2)
+    if (state == 0 || state > QL_STATE_PLAYBACK)
         gQuestLogPlaybackState = 0;
     else
     {
-        sFlagOrVarRecords = a1;
-        sNumFlagsOrVars = a2 >> 2;
+        sFlagOrVarRecords = records;
+        sNumFlagsOrVars = size >> 2;
         sFlagOrVarPlayhead = 0;
-        if (a0 == 2)
+        if (state == QL_STATE_PLAYBACK)
         {
             for (i = 0; i < sNumEventsInLogEntry; i++)
             {
-                sFlagOrVarRecords[i] = gUnknown_84566A4;
+                sFlagOrVarRecords[i] = sDummyFlagOrVarRecord;
             }
         }
     }

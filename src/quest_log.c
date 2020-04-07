@@ -168,7 +168,7 @@ static const struct WindowTemplate sQuestLogHeaderWindowTemplates[3] = {
 
 static const u8 sTextColors[3] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_3};
 
-static const u16 gUnknown_8456638[] = INCBIN_U16("data/graphics/unknown_8456638.bin");
+static const u16 sUnknown_8456638[] = INCBIN_U16("graphics/unknown/unknown_8456638.bin");
 
 static const u8 sQuestLogTextLineYCoords[] = {17, 10, 3};
 
@@ -1016,7 +1016,7 @@ static void DrawQuestLogSceneDescription(void)
 
 static void sub_8111D90(u8 a0)
 {
-    const u16 *src = gUnknown_8456638;
+    const u16 *src = sUnknown_8456638;
     u16 *buffer = Alloc(0x1680);
     u8 i, j, y;
 

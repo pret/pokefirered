@@ -337,24 +337,24 @@ static const struct WindowTemplate sWindowTemplates_Pikachu[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
-static const u16 sPalette_OneBlackThenAllWhite[] = INCBIN_U16("data/credits/unk_840C630.gbapal");
-static const u32 sAffineCircleGfx[] = INCBIN_U32("data/credits/unk_840C650.8bpp.lz");
-static const u32 sAffineCircleMap[] = INCBIN_U32("data/credits/unk_840CA54.bin.lz");
-static const u32 sWindow1Map_Charizard[] = INCBIN_U32("data/credits/unk_840CB8C.bin.lz");
-static const u32 sWindow2Map_Charizard[] = INCBIN_U32("data/credits/unk_840D228.bin.lz");
-static const u32 sUnusedTilemap[] = INCBIN_U32("data/credits/unk_840DC0C.bin.lz");
-static const u32 sWindow1Map_Venusaur[] = INCBIN_U32("data/credits/unk_840E158.bin.lz");
-static const u32 sWindow2Map_Venusaur[] = INCBIN_U32("data/credits/unk_840E904.bin.lz");
-static const u32 sWindow1Map_Blastoise[] = INCBIN_U32("data/credits/unk_840F240.bin.lz");
-static const u32 sWindow2Map_Blastoise[] = INCBIN_U32("data/credits/unk_840F944.bin.lz");
-static const u32 sWindow1Map_Pikachu[] = INCBIN_U32("data/credits/unk_8410198.bin.lz");
-static const u32 sWindow2Map_Pikachu[] = INCBIN_U32("data/credits/unk_84105B4.bin.lz");
+static const u16 sPalette_OneBlackThenAllWhite[] = INCBIN_U16("graphics/credits/unk_840C630.gbapal");
+static const u32 sAffineCircleGfx[] = INCBIN_U32("graphics/credits/unk_840C650.8bpp.lz");
+static const u32 sAffineCircleMap[] = INCBIN_U32("graphics/credits/unk_840CA54.bin.lz");
+static const u32 sWindow1Map_Charizard[] = INCBIN_U32("graphics/credits/unk_840CB8C.bin.lz");
+static const u32 sWindow2Map_Charizard[] = INCBIN_U32("graphics/credits/unk_840D228.bin.lz");
+static const u32 sUnusedTilemap[] = INCBIN_U32("graphics/credits/unk_840DC0C.bin.lz");
+static const u32 sWindow1Map_Venusaur[] = INCBIN_U32("graphics/credits/unk_840E158.bin.lz");
+static const u32 sWindow2Map_Venusaur[] = INCBIN_U32("graphics/credits/unk_840E904.bin.lz");
+static const u32 sWindow1Map_Blastoise[] = INCBIN_U32("graphics/credits/unk_840F240.bin.lz");
+static const u32 sWindow2Map_Blastoise[] = INCBIN_U32("graphics/credits/unk_840F944.bin.lz");
+static const u32 sWindow1Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_8410198.bin.lz");
+static const u32 sWindow2Map_Pikachu[] = INCBIN_U32("graphics/credits/unk_84105B4.bin.lz");
 
 static const u32 filler_8410AFC = 0xF0;
 
-static const u16 sTheEndGfxPal[] = INCBIN_U16("data/credits/unk_8410B20.gbapal");
-static const u8 sTheEndGfxTiles[] = INCBIN_U8("data/credits/unk_8410B20.4bpp.lz");
-static const u8 sTheEndGfxMap[] = INCBIN_U8("data/credits/unk_8410B20.bin.lz");
+static const u16 sTheEndGfxPal[] = INCBIN_U16("graphics/credits/unk_8410B20.gbapal");
+static const u8 sTheEndGfxTiles[] = INCBIN_U8("graphics/credits/unk_8410B20.4bpp.lz");
+static const u8 sTheEndGfxMap[] = INCBIN_U8("graphics/credits/unk_8410B20.bin.lz");
 
 static const struct CompressedGraphicsHeader sCopyrightOrTheEndGfxHeaders[] = {
     {
@@ -458,18 +458,18 @@ static const struct WindowTemplate sCreditsWindowTemplate = {
     .baseBlock = 0x008
 };
 
-static const u16 sMalePlayerSpritePal[] = INCBIN_U16("data/credits/unk_8410E10.gbapal");
-static const u32 sMalePlayerSpriteGfx[] = INCBIN_U32("data/credits/unk_8410E30.4bpp.lz");
-static const u16 sFemalePlayerSpritePal[] = INCBIN_U16("data/credits/unk_8411BF8.gbapal");
-static const u32 sFemalePlayerSpriteGfx[] = INCBIN_U32("data/credits/unk_8411C18.4bpp.lz");
-static const u16 sRivalSpritePal[] = INCBIN_U16("data/credits/unk_84129A0.gbapal");
-static const u32 sRivalSpriteGfx[] = INCBIN_U32("data/credits/unk_84129C0.4bpp.lz");
-static const u16 sGroundSpritePal_Grass[] = INCBIN_U16("data/credits/unk_8413318.gbapal");
-static const u32 sGroundSpriteGfx_Grass[] = INCBIN_U32("data/credits/unk_8413338.4bpp.lz");
-static const u16 sGroundSpritePal_Dirt[] = INCBIN_U16("data/credits/unk_8413854.gbapal");
-static const u32 sGroundSpriteGfx_Dirt[] = INCBIN_U32("data/credits/unk_8413874.4bpp.lz");
-static const u16 sGroundSpritePal_City[] = INCBIN_U16("data/credits/unk_8413D98.gbapal");
-static const u32 sGroundSpriteGfx_City[] = INCBIN_U32("data/credits/unk_8413DB8.4bpp.lz");
+static const u16 sMalePlayerSpritePal[] = INCBIN_U16("graphics/credits/unk_8410E10.gbapal");
+static const u32 sMalePlayerSpriteGfx[] = INCBIN_U32("graphics/credits/unk_8410E30.4bpp.lz");
+static const u16 sFemalePlayerSpritePal[] = INCBIN_U16("graphics/credits/unk_8411BF8.gbapal");
+static const u32 sFemalePlayerSpriteGfx[] = INCBIN_U32("graphics/credits/unk_8411C18.4bpp.lz");
+static const u16 sRivalSpritePal[] = INCBIN_U16("graphics/credits/unk_84129A0.gbapal");
+static const u32 sRivalSpriteGfx[] = INCBIN_U32("graphics/credits/unk_84129C0.4bpp.lz");
+static const u16 sGroundSpritePal_Grass[] = INCBIN_U16("graphics/credits/unk_8413318.gbapal");
+static const u32 sGroundSpriteGfx_Grass[] = INCBIN_U32("graphics/credits/unk_8413338.4bpp.lz");
+static const u16 sGroundSpritePal_Dirt[] = INCBIN_U16("graphics/credits/unk_8413854.gbapal");
+static const u32 sGroundSpriteGfx_Dirt[] = INCBIN_U32("graphics/credits/unk_8413874.4bpp.lz");
+static const u16 sGroundSpritePal_City[] = INCBIN_U16("graphics/credits/unk_8413D98.gbapal");
+static const u32 sGroundSpriteGfx_City[] = INCBIN_U32("graphics/credits/unk_8413DB8.4bpp.lz");
 
 static const u16 sPlayerRivalSpriteParams[][3] = {
     { 0, 3, 1 },

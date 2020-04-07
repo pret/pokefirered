@@ -47,19 +47,19 @@ static const struct ScrollArrowsTemplate sScrollArrowsTemplate = {
     0x0000, 0x0002, 0x1000, 0x1000, 0x0,
 };
 
-static const u16 sNews1Pal[] = INCBIN_U16("data/graphics/mevent/pal_468060.gbapal");
-static const u16 sNews6Pal[] = INCBIN_U16("data/graphics/mevent/pal_468080.gbapal");
-static const u16 sNews7Pal[] = INCBIN_U16("data/graphics/mevent/pal_4680A0.gbapal");
-static const u8 sNews0Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4680C0.4bpp.lz");
-static const u8 sNews0Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468140.bin.lz");
-static const u8 sNews1Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46821C.4bpp.lz");
-static const u8 sNews1Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46824C.bin.lz");
-static const u8 sNews2Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_46830C.4bpp.lz");
-static const u8 sNews2Map[] = INCBIN_U8("data/graphics/mevent/tilemap_46837C.bin.lz");
-static const u8 sNews6Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_468448.4bpp.lz");
-static const u8 sNews6Map[] = INCBIN_U8("data/graphics/mevent/tilemap_4684D8.bin.lz");
-static const u8 sNews7Gfx[] = INCBIN_U8("data/graphics/mevent/gfx_4685B4.4bpp.lz");
-static const u8 sNews7Map[] = INCBIN_U8("data/graphics/mevent/tilemap_468644.bin.lz");
+static const u16 sNews1Pal[] = INCBIN_U16("graphics/mevent/pal_468060.gbapal");
+static const u16 sNews6Pal[] = INCBIN_U16("graphics/mevent/pal_468080.gbapal");
+static const u16 sNews7Pal[] = INCBIN_U16("graphics/mevent/pal_4680A0.gbapal");
+static const u8 sNews0Gfx[] = INCBIN_U8("graphics/mevent/gfx_4680C0.4bpp.lz");
+static const u8 sNews0Map[] = INCBIN_U8("graphics/mevent/tilemap_468140.bin.lz");
+static const u8 sNews1Gfx[] = INCBIN_U8("graphics/mevent/gfx_46821C.4bpp.lz");
+static const u8 sNews1Map[] = INCBIN_U8("graphics/mevent/tilemap_46824C.bin.lz");
+static const u8 sNews2Gfx[] = INCBIN_U8("graphics/mevent/gfx_46830C.4bpp.lz");
+static const u8 sNews2Map[] = INCBIN_U8("graphics/mevent/tilemap_46837C.bin.lz");
+static const u8 sNews6Gfx[] = INCBIN_U8("graphics/mevent/gfx_468448.4bpp.lz");
+static const u8 sNews6Map[] = INCBIN_U8("graphics/mevent/tilemap_4684D8.bin.lz");
+static const u8 sNews7Gfx[] = INCBIN_U8("graphics/mevent/gfx_4685B4.4bpp.lz");
+static const u8 sNews7Map[] = INCBIN_U8("graphics/mevent/tilemap_468644.bin.lz");
 
 static const struct UnkStruct_8467FB8 sBgSpecs[] = {
     {1, 0, 0, 0, sNews0Gfx, sNews0Map, sNews1Pal},

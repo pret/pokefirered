@@ -367,7 +367,7 @@ bool8 StandardWildEncounter(u32 currMetatileBehavior, u16 previousMetatileBehavi
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId != 0xFFFF)
     {
-        if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_GRASS)
+        if (GetMetatileAttributeFromRawMetatileBehavior(currMetatileBehavior, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
@@ -474,7 +474,7 @@ bool8 SweetScentWildEncounter(void)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId != 0xFFFF)
     {
-        if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_GRASS)
+        if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
             if (TryStartRoamerEncounter() == TRUE)
             {
@@ -680,7 +680,7 @@ static u8 GetMapBaseEncounterCooldown(u8 encounterType)
     u16 headerIdx = GetCurrentMapWildMonHeaderId();
     if (headerIdx == 0xFFFF)
         return 0xFF;
-    if (encounterType == TILE_ENCOUNTER_GRASS)
+    if (encounterType == TILE_ENCOUNTER_LAND)
     {
         if (gWildMonHeaders[headerIdx].landMonsInfo == NULL)
             return 0xFF;

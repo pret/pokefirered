@@ -9,7 +9,7 @@ PokemonTower_6F_EventScript_MarowakGhost:: @ 81634B8
 	setwildbattle SPECIES_MAROWAK, 30, ITEM_NONE
 	special StartMarowakBattle
 	waitstate
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	compare VAR_RESULT, FALSE  @ Set by CB2_EndMarowakBattle
 	goto_if_eq PokemonTower_6F_EventScript_DefeatedMarowakGhost
 	applymovement OBJ_EVENT_ID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp

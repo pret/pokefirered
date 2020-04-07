@@ -814,7 +814,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         }
         break;
     case 2:
-        sub_811539C();
+        SetQLPlayedTheSlots();
         sub_81409B4();
         sub_8140148();
         sSlotMachineState->field_06 = 0;

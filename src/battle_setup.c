@@ -794,13 +794,13 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         SetMapVarsToTrainer();
         return EventScript_TryDoDoubleTrainerBattle;
     case TRAINER_BATTLE_REMATCH_DOUBLE:
-        sub_811231C();
+        FinishRecordingQuestLogScene();
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
         return EventScript_TryDoDoubleRematchBattle;
     case TRAINER_BATTLE_REMATCH:
-        sub_811231C();
+        FinishRecordingQuestLogScene();
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
@@ -952,7 +952,7 @@ static void CB2_EndRematchBattle(void)
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         SetBattledTrainerFlag();
         sub_810CDE8();
-        sub_81138F8();
+        ResetDeferredLinkEvent();
     }
 }
 

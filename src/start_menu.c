@@ -8,6 +8,7 @@
 #include "party_menu.h"
 #include "save.h"
 #include "link_rfu.h"
+#include "help_message.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "safari_zone.h"

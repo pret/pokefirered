@@ -1085,7 +1085,7 @@ void HandleBoulderActivateVictoryRoadSwitch(u16 x, u16 y)
         {
             if (events[i].x + 7 == x && events[i].y + 7 == y)
             {
-                QuestLog_OnInteractionWithSpecialNpc();
+                QuestLog_CutRecording();
                 ScriptContext1_SetupScript(events[i].script);
                 ScriptContext2_Enable();
             }

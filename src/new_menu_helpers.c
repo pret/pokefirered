@@ -1,18 +1,13 @@
 #include "global.h"
-#include "malloc.h"
-#include "dma3.h"
-#include "task.h"
-#include "bg.h"
-#include "window.h"
+#include "gflib.h"
+#include "help_message.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "quest_log.h"
-#include "text.h"
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
-#include "palette.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200

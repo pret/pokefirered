@@ -3,7 +3,7 @@ CeladonCity_DepartmentStore_Roof_MapScripts:: @ 816BCCC
 
 CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl:: @ 816BCCD
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	lock
 	faceplayer
 	call CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks

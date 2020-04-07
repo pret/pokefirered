@@ -19,6 +19,7 @@
 #include "fieldmap.h"
 #include "fldeff.h"
 #include "graphics.h"
+#include "help_message.h"
 #include "help_system.h"
 #include "item.h"
 #include "item_menu.h"

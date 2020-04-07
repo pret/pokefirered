@@ -95,7 +95,7 @@ static u8 *const sStringVarPtrs[] = {
 
 void ShowDiploma(void)
 {
-    QuestLog_OnInteractionWithSpecialNpc();
+    QuestLog_CutRecording();
     SetMainCallback2(CB2_ShowDiploma);
     ScriptContext2_Enable();
 }
@@ -187,7 +187,7 @@ u8 GetLeadMonFriendship(void)
 
 void ShowTownMap(void)
 {
-    QuestLog_OnInteractionWithSpecialNpc();
+    QuestLog_CutRecording();
     InitRegionMapWithExitCB(REGIONMAP_TYPE_WALL, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -1775,18 +1775,18 @@ bool8 DoesPlayerPartyContainSpecies(void)
 }
 
 static const u8 sMartMaps[][3] = {
-    {MAP_GROUP(VIRIDIAN_CITY_MART),   MAP_NUM(VIRIDIAN_CITY_MART),   1},
-    {MAP_GROUP(PEWTER_CITY_MART),     MAP_NUM(PEWTER_CITY_MART),     3},
-    {MAP_GROUP(CERULEAN_CITY_MART),   MAP_NUM(CERULEAN_CITY_MART),   1},
-    {MAP_GROUP(LAVENDER_TOWN_MART),   MAP_NUM(LAVENDER_TOWN_MART),   1},
-    {MAP_GROUP(VERMILION_CITY_MART),  MAP_NUM(VERMILION_CITY_MART),  1},
-    {MAP_GROUP(FUCHSIA_CITY_MART),    MAP_NUM(FUCHSIA_CITY_MART),    1},
-    {MAP_GROUP(CINNABAR_ISLAND_MART), MAP_NUM(CINNABAR_ISLAND_MART), 1},
-    {MAP_GROUP(SAFFRON_CITY_MART),    MAP_NUM(SAFFRON_CITY_MART),    1},
-    {MAP_GROUP(THREE_ISLAND_MART),    MAP_NUM(THREE_ISLAND_MART),    1},
-    {MAP_GROUP(FOUR_ISLAND_MART),     MAP_NUM(FOUR_ISLAND_MART),     1},
-    {MAP_GROUP(SEVEN_ISLAND_MART),    MAP_NUM(SEVEN_ISLAND_MART),    1},
-    {MAP_GROUP(SIX_ISLAND_MART),      MAP_NUM(SIX_ISLAND_MART),      1}
+    {MAP(VIRIDIAN_CITY_MART),   1},
+    {MAP(PEWTER_CITY_MART),     3},
+    {MAP(CERULEAN_CITY_MART),   1},
+    {MAP(LAVENDER_TOWN_MART),   1},
+    {MAP(VERMILION_CITY_MART),  1},
+    {MAP(FUCHSIA_CITY_MART),    1},
+    {MAP(CINNABAR_ISLAND_MART), 1},
+    {MAP(SAFFRON_CITY_MART),    1},
+    {MAP(THREE_ISLAND_MART),    1},
+    {MAP(FOUR_ISLAND_MART),     1},
+    {MAP(SEVEN_ISLAND_MART),    1},
+    {MAP(SIX_ISLAND_MART),      1}
 };
 
 u8 GetMartClerkObjectId(void)
@@ -1811,57 +1811,57 @@ static const struct {
     u16 grp2;
     u16 num2;
 } sInsideOutsidePairs[51] = {
-    {MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP_GROUP(PALLET_TOWN),                           MAP_NUM(PALLET_TOWN)},
-    {MAP_GROUP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP_NUM(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP_GROUP(PALLET_TOWN),                           MAP_NUM(PALLET_TOWN)},
-    {MAP_GROUP(VIRIDIAN_CITY_GYM),                     MAP_NUM(VIRIDIAN_CITY_GYM),                     MAP_GROUP(VIRIDIAN_CITY),                         MAP_NUM(VIRIDIAN_CITY)},
-    {MAP_GROUP(ROUTE22_NORTH_ENTRANCE),                MAP_NUM(ROUTE22_NORTH_ENTRANCE),                MAP_GROUP(ROUTE22),                               MAP_NUM(ROUTE22)},
-    {MAP_GROUP(ROUTE22_NORTH_ENTRANCE),                MAP_NUM(ROUTE22_NORTH_ENTRANCE),                MAP_GROUP(ROUTE23),                               MAP_NUM(ROUTE23)},
-    {MAP_GROUP(VIRIDIAN_FOREST),                       MAP_NUM(VIRIDIAN_FOREST),                       MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE), MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)},
-    {MAP_GROUP(VIRIDIAN_FOREST),                       MAP_NUM(VIRIDIAN_FOREST),                       MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE), MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)},
-    {MAP_GROUP(PEWTER_CITY_MUSEUM_1F),                 MAP_NUM(PEWTER_CITY_MUSEUM_1F),                 MAP_GROUP(PEWTER_CITY),                           MAP_NUM(PEWTER_CITY)},
-    {MAP_GROUP(PEWTER_CITY_GYM),                       MAP_NUM(PEWTER_CITY_GYM),                       MAP_GROUP(PEWTER_CITY),                           MAP_NUM(PEWTER_CITY)},
-    {MAP_GROUP(MT_MOON_1F),                            MAP_NUM(MT_MOON_1F),                            MAP_GROUP(ROUTE4),                                MAP_NUM(ROUTE4)},
-    {MAP_GROUP(MT_MOON_B1F),                           MAP_NUM(MT_MOON_B1F),                           MAP_GROUP(ROUTE4),                                MAP_NUM(ROUTE4)},
-    {MAP_GROUP(CERULEAN_CITY_GYM),                     MAP_NUM(CERULEAN_CITY_GYM),                     MAP_GROUP(CERULEAN_CITY),                         MAP_NUM(CERULEAN_CITY)},
-    {MAP_GROUP(CERULEAN_CITY_BIKE_SHOP),               MAP_NUM(CERULEAN_CITY_BIKE_SHOP),               MAP_GROUP(CERULEAN_CITY),                         MAP_NUM(CERULEAN_CITY)},
-    {MAP_GROUP(ROUTE25_SEA_COTTAGE),                   MAP_NUM(ROUTE25_SEA_COTTAGE),                   MAP_GROUP(ROUTE25),                               MAP_NUM(ROUTE25)},
-    {MAP_GROUP(ROUTE5_POKEMON_DAY_CARE),               MAP_NUM(ROUTE5_POKEMON_DAY_CARE),               MAP_GROUP(ROUTE5),                                MAP_NUM(ROUTE5)},
-    {MAP_GROUP(UNDERGROUND_PATH_NORTH_ENTRANCE),       MAP_NUM(UNDERGROUND_PATH_NORTH_ENTRANCE),       MAP_GROUP(ROUTE5),                                MAP_NUM(ROUTE5)},
-    {MAP_GROUP(UNDERGROUND_PATH_SOUTH_ENTRANCE),       MAP_NUM(UNDERGROUND_PATH_SOUTH_ENTRANCE),       MAP_GROUP(ROUTE6),                                MAP_NUM(ROUTE6)},
-    {MAP_GROUP(VERMILION_CITY_POKEMON_FAN_CLUB),       MAP_NUM(VERMILION_CITY_POKEMON_FAN_CLUB),       MAP_GROUP(VERMILION_CITY),                        MAP_NUM(VERMILION_CITY)},
-    {MAP_GROUP(VERMILION_CITY_GYM),                    MAP_NUM(VERMILION_CITY_GYM),                    MAP_GROUP(VERMILION_CITY),                        MAP_NUM(VERMILION_CITY)},
-    {MAP_GROUP(SSANNE_1F_CORRIDOR),                    MAP_NUM(SSANNE_1F_CORRIDOR),                    MAP_GROUP(VERMILION_CITY),                        MAP_NUM(VERMILION_CITY)},
-    {MAP_GROUP(DIGLETTS_CAVE_NORTH_ENTRANCE),          MAP_NUM(DIGLETTS_CAVE_NORTH_ENTRANCE),          MAP_GROUP(ROUTE2),                                MAP_NUM(ROUTE2)},
-    {MAP_GROUP(DIGLETTS_CAVE_SOUTH_ENTRANCE),          MAP_NUM(DIGLETTS_CAVE_SOUTH_ENTRANCE),          MAP_GROUP(ROUTE11),                               MAP_NUM(ROUTE11)},
-    {MAP_GROUP(ROCK_TUNNEL_1F),                        MAP_NUM(ROCK_TUNNEL_1F),                        MAP_GROUP(ROUTE10),                               MAP_NUM(ROUTE10)},
-    {MAP_GROUP(ROCK_TUNNEL_1F),                        MAP_NUM(ROCK_TUNNEL_1F),                        MAP_GROUP(ROUTE10),                               MAP_NUM(ROUTE10)},
-    {MAP_GROUP(POWER_PLANT),                           MAP_NUM(POWER_PLANT),                           MAP_GROUP(ROUTE10),                               MAP_NUM(ROUTE10)},
-    {MAP_GROUP(POKEMON_TOWER_1F),                      MAP_NUM(POKEMON_TOWER_1F),                      MAP_GROUP(LAVENDER_TOWN),                         MAP_NUM(LAVENDER_TOWN)},
-    {MAP_GROUP(LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE), MAP_NUM(LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE), MAP_GROUP(LAVENDER_TOWN),                         MAP_NUM(LAVENDER_TOWN)},
-    {MAP_GROUP(LAVENDER_TOWN_HOUSE2),                  MAP_NUM(LAVENDER_TOWN_HOUSE2),                  MAP_GROUP(LAVENDER_TOWN),                         MAP_NUM(LAVENDER_TOWN)},
-    {MAP_GROUP(UNDERGROUND_PATH_EAST_ENTRANCE),        MAP_NUM(UNDERGROUND_PATH_EAST_ENTRANCE),        MAP_GROUP(ROUTE8),                                MAP_NUM(ROUTE8)},
-    {MAP_GROUP(UNDERGROUND_PATH_WEST_ENTRANCE),        MAP_NUM(UNDERGROUND_PATH_WEST_ENTRANCE),        MAP_GROUP(ROUTE7),                                MAP_NUM(ROUTE7)},
-    {MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_1F),      MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_1F),      MAP_GROUP(CELADON_CITY),                          MAP_NUM(CELADON_CITY)},
-    {MAP_GROUP(CELADON_CITY_CONDOMINIUMS_1F),          MAP_NUM(CELADON_CITY_CONDOMINIUMS_1F),          MAP_GROUP(CELADON_CITY),                          MAP_NUM(CELADON_CITY)},
-    {MAP_GROUP(CELADON_CITY_GAME_CORNER),              MAP_NUM(CELADON_CITY_GAME_CORNER),              MAP_GROUP(CELADON_CITY),                          MAP_NUM(CELADON_CITY)},
-    {MAP_GROUP(CELADON_CITY_GYM),                      MAP_NUM(CELADON_CITY_GYM),                      MAP_GROUP(CELADON_CITY),                          MAP_NUM(CELADON_CITY)},
-    {MAP_GROUP(CELADON_CITY_RESTAURANT),               MAP_NUM(CELADON_CITY_RESTAURANT),               MAP_GROUP(CELADON_CITY),                          MAP_NUM(CELADON_CITY)},
-    {MAP_GROUP(ROCKET_HIDEOUT_B1F),                    MAP_NUM(ROCKET_HIDEOUT_B1F),                    MAP_GROUP(CELADON_CITY_GAME_CORNER),              MAP_NUM(CELADON_CITY_GAME_CORNER)},
-    {MAP_GROUP(SAFARI_ZONE_CENTER),                    MAP_NUM(SAFARI_ZONE_CENTER),                    MAP_GROUP(FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE),     MAP_NUM(FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE)},
-    {MAP_GROUP(FUCHSIA_CITY_GYM),                      MAP_NUM(FUCHSIA_CITY_GYM),                      MAP_GROUP(FUCHSIA_CITY),                          MAP_NUM(FUCHSIA_CITY)},
-    {MAP_GROUP(FUCHSIA_CITY_WARDENS_HOUSE),            MAP_NUM(FUCHSIA_CITY_WARDENS_HOUSE),            MAP_GROUP(FUCHSIA_CITY),                          MAP_NUM(FUCHSIA_CITY)},
-    {MAP_GROUP(SAFFRON_CITY_DOJO),                     MAP_NUM(SAFFRON_CITY_DOJO),                     MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},
-    {MAP_GROUP(SAFFRON_CITY_GYM),                      MAP_NUM(SAFFRON_CITY_GYM),                      MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},
-    {MAP_GROUP(SILPH_CO_1F),                           MAP_NUM(SILPH_CO_1F),                           MAP_GROUP(SAFFRON_CITY),                          MAP_NUM(SAFFRON_CITY)},
-    {MAP_GROUP(SEAFOAM_ISLANDS_1F),                    MAP_NUM(SEAFOAM_ISLANDS_1F),                    MAP_GROUP(ROUTE20),                               MAP_NUM(ROUTE20)},
-    {MAP_GROUP(SEAFOAM_ISLANDS_1F),                    MAP_NUM(SEAFOAM_ISLANDS_1F),                    MAP_GROUP(ROUTE20),                               MAP_NUM(ROUTE20)},
-    {MAP_GROUP(POKEMON_MANSION_1F),                    MAP_NUM(POKEMON_MANSION_1F),                    MAP_GROUP(CINNABAR_ISLAND),                       MAP_NUM(CINNABAR_ISLAND)},
-    {MAP_GROUP(CINNABAR_ISLAND_GYM),                   MAP_NUM(CINNABAR_ISLAND_GYM),                   MAP_GROUP(CINNABAR_ISLAND),                       MAP_NUM(CINNABAR_ISLAND)},
-    {MAP_GROUP(CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE),  MAP_NUM(CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE),  MAP_GROUP(CINNABAR_ISLAND),                       MAP_NUM(CINNABAR_ISLAND)},
-    {MAP_GROUP(VICTORY_ROAD_1F),                       MAP_NUM(VICTORY_ROAD_1F),                       MAP_GROUP(ROUTE23),                               MAP_NUM(ROUTE23)},
-    {MAP_GROUP(VICTORY_ROAD_2F),                       MAP_NUM(VICTORY_ROAD_2F),                       MAP_GROUP(ROUTE23),                               MAP_NUM(ROUTE23)},
-    {MAP_GROUP(INDIGO_PLATEAU_POKEMON_CENTER_1F),      MAP_NUM(INDIGO_PLATEAU_POKEMON_CENTER_1F),      MAP_GROUP(INDIGO_PLATEAU_EXTERIOR),               MAP_NUM(INDIGO_PLATEAU_EXTERIOR)},
-    {MAP_GROUP(CERULEAN_CAVE_1F),                      MAP_NUM(CERULEAN_CAVE_1F),                      MAP_GROUP(CERULEAN_CITY),                         MAP_NUM(CERULEAN_CITY)}
+    [QL_LOCATION_HOME]               = {MAP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP(PALLET_TOWN)},
+    [QL_LOCATION_OAKS_LAB]           = {MAP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP(PALLET_TOWN)},
+    [QL_LOCATION_VIRIDIAN_GYM]       = {MAP(VIRIDIAN_CITY_GYM),                     MAP(VIRIDIAN_CITY)},
+    [QL_LOCATION_LEAGUE_GATE_1]      = {MAP(ROUTE22_NORTH_ENTRANCE),                MAP(ROUTE22)},
+    [QL_LOCATION_LEAGUE_GATE_2]      = {MAP(ROUTE22_NORTH_ENTRANCE),                MAP(ROUTE23)},
+    [QL_LOCATION_VIRIDIAN_FOREST_1]  = {MAP(VIRIDIAN_FOREST),                       MAP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)},
+    [QL_LOCATION_VIRIDIAN_FOREST_2]  = {MAP(VIRIDIAN_FOREST),                       MAP(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)},
+    [QL_LOCATION_PEWTER_MUSEUM]      = {MAP(PEWTER_CITY_MUSEUM_1F),                 MAP(PEWTER_CITY)},
+    [QL_LOCATION_PEWTER_GYM]         = {MAP(PEWTER_CITY_GYM),                       MAP(PEWTER_CITY)},
+    [QL_LOCATION_MT_MOON_1]          = {MAP(MT_MOON_1F),                            MAP(ROUTE4)},
+    [QL_LOCATION_MT_MOON_2]          = {MAP(MT_MOON_B1F),                           MAP(ROUTE4)},
+    [QL_LOCATION_CERULEAN_GYM]       = {MAP(CERULEAN_CITY_GYM),                     MAP(CERULEAN_CITY)},
+    [QL_LOCATION_BIKE_SHOP]          = {MAP(CERULEAN_CITY_BIKE_SHOP),               MAP(CERULEAN_CITY)},
+    [QL_LOCATION_BILLS_HOUSE]        = {MAP(ROUTE25_SEA_COTTAGE),                   MAP(ROUTE25)},
+    [QL_LOCATION_DAY_CARE]           = {MAP(ROUTE5_POKEMON_DAY_CARE),               MAP(ROUTE5)},
+    [QL_LOCATION_UNDERGROUND_PATH_1] = {MAP(UNDERGROUND_PATH_NORTH_ENTRANCE),       MAP(ROUTE5)},
+    [QL_LOCATION_UNDERGROUND_PATH_2] = {MAP(UNDERGROUND_PATH_SOUTH_ENTRANCE),       MAP(ROUTE6)},
+    [QL_LOCATION_PKMN_FAN_CLUB]      = {MAP(VERMILION_CITY_POKEMON_FAN_CLUB),       MAP(VERMILION_CITY)},
+    [QL_LOCATION_VERMILION_GYM]      = {MAP(VERMILION_CITY_GYM),                    MAP(VERMILION_CITY)},
+    [QL_LOCATION_SS_ANNE]            = {MAP(SSANNE_1F_CORRIDOR),                    MAP(VERMILION_CITY)},
+    [QL_LOCATION_DIGLETTS_CAVE_1]    = {MAP(DIGLETTS_CAVE_NORTH_ENTRANCE),          MAP(ROUTE2)},
+    [QL_LOCATION_DIGLETTS_CAVE_2]    = {MAP(DIGLETTS_CAVE_SOUTH_ENTRANCE),          MAP(ROUTE11)},
+    [QL_LOCATION_ROCK_TUNNEL_1]      = {MAP(ROCK_TUNNEL_1F),                        MAP(ROUTE10)},
+    [QL_LOCATION_ROCK_TUNNEL_2]      = {MAP(ROCK_TUNNEL_1F),                        MAP(ROUTE10)},
+    [QL_LOCATION_POWER_PLANT]        = {MAP(POWER_PLANT),                           MAP(ROUTE10)},
+    [QL_LOCATION_PKMN_TOWER]         = {MAP(POKEMON_TOWER_1F),                      MAP(LAVENDER_TOWN)},
+    [QL_LOCATION_VOLUNTEER_HOUSE]    = {MAP(LAVENDER_TOWN_VOLUNTEER_POKEMON_HOUSE), MAP(LAVENDER_TOWN)},
+    [QL_LOCATION_NAME_RATERS_HOUSE]  = {MAP(LAVENDER_TOWN_HOUSE2),                  MAP(LAVENDER_TOWN)},
+    [QL_LOCATION_UNDERGROUND_PATH_3] = {MAP(UNDERGROUND_PATH_EAST_ENTRANCE),        MAP(ROUTE8)},
+    [QL_LOCATION_UNDERGROUND_PATH_4] = {MAP(UNDERGROUND_PATH_WEST_ENTRANCE),        MAP(ROUTE7)},
+    [QL_LOCATION_CELADON_DEPT_STORE] = {MAP(CELADON_CITY_DEPARTMENT_STORE_1F),      MAP(CELADON_CITY)},
+    [QL_LOCATION_CELADON_MANSION]    = {MAP(CELADON_CITY_CONDOMINIUMS_1F),          MAP(CELADON_CITY)},
+    [QL_LOCATION_GAME_CORNER]        = {MAP(CELADON_CITY_GAME_CORNER),              MAP(CELADON_CITY)},
+    [QL_LOCATION_CELADON_GYM]        = {MAP(CELADON_CITY_GYM),                      MAP(CELADON_CITY)},
+    [QL_LOCATION_CELADON_RESTAURANT] = {MAP(CELADON_CITY_RESTAURANT),               MAP(CELADON_CITY)},
+    [QL_LOCATION_ROCKET_HIDEOUT]     = {MAP(ROCKET_HIDEOUT_B1F),                    MAP(CELADON_CITY_GAME_CORNER)},
+    [QL_LOCATION_SAFARI_ZONE]        = {MAP(SAFARI_ZONE_CENTER),                    MAP(FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE)},
+    [QL_LOCATION_FUCHSIA_GYM]        = {MAP(FUCHSIA_CITY_GYM),                      MAP(FUCHSIA_CITY)},
+    [QL_LOCATION_WARDENS_HOME]       = {MAP(FUCHSIA_CITY_WARDENS_HOUSE),            MAP(FUCHSIA_CITY)},
+    [QL_LOCATION_FIGHTING_DOJO]      = {MAP(SAFFRON_CITY_DOJO),                     MAP(SAFFRON_CITY)},
+    [QL_LOCATION_SAFFRON_GYM]        = {MAP(SAFFRON_CITY_GYM),                      MAP(SAFFRON_CITY)},
+    [QL_LOCATION_SILPH_CO]           = {MAP(SILPH_CO_1F),                           MAP(SAFFRON_CITY)},
+    [QL_LOCATION_SEAFOAM_ISLANDS_1]  = {MAP(SEAFOAM_ISLANDS_1F),                    MAP(ROUTE20)},
+    [QL_LOCATION_SEAFOAM_ISLANDS_2]  = {MAP(SEAFOAM_ISLANDS_1F),                    MAP(ROUTE20)},
+    [QL_LOCATION_PKMN_MANSION]       = {MAP(POKEMON_MANSION_1F),                    MAP(CINNABAR_ISLAND)},
+    [QL_LOCATION_CINNABAR_GYM]       = {MAP(CINNABAR_ISLAND_GYM),                   MAP(CINNABAR_ISLAND)},
+    [QL_LOCATION_CINNABAR_LAB]       = {MAP(CINNABAR_ISLAND_POKEMON_LAB_ENTRANCE),  MAP(CINNABAR_ISLAND)},
+    [QL_LOCATION_VICTORY_ROAD_1]     = {MAP(VICTORY_ROAD_1F),                       MAP(ROUTE23)},
+    [QL_LOCATION_VICTORY_ROAD_2]     = {MAP(VICTORY_ROAD_2F),                       MAP(ROUTE23)},
+    [QL_LOCATION_PKMN_LEAGUE]        = {MAP(INDIGO_PLATEAU_POKEMON_CENTER_1F),      MAP(INDIGO_PLATEAU_EXTERIOR)},
+    [QL_LOCATION_CERULEAN_CAVE]      = {MAP(CERULEAN_CAVE_1F),                      MAP(CERULEAN_CITY)}
 };
 
 void sub_80CC534(void)
@@ -1871,7 +1871,7 @@ void sub_80CC534(void)
     {
         if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[i].grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[i].num)
         {
-            if (VarGet(VAR_0x404D) != 35 || i != 32)
+            if (VarGet(VAR_0x404D) != QL_LOCATION_ROCKET_HIDEOUT || i != QL_LOCATION_GAME_CORNER)
             {
                 VarSet(VAR_0x404D, i);
                 FlagSet(FLAG_0x808);
@@ -1893,7 +1893,7 @@ void sub_80CC59C(void)
     sp0.unk1 = 0;
     if (FlagGet(FLAG_0x808))
     {
-        if (r5 == 5)
+        if (r5 == QL_LOCATION_VIRIDIAN_FOREST_1)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
             {
@@ -1907,7 +1907,7 @@ void sub_80CC59C(void)
                 return;
             }
         }
-        else if (r5 == 3)
+        else if (r5 == QL_LOCATION_LEAGUE_GATE_1)
         {
             if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
@@ -1925,13 +1925,13 @@ void sub_80CC59C(void)
         {
             sp0.unk0 = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[r5].grp, sInsideOutsidePairs[r5].num)->regionMapSectionId;
             sp0.unk1 = r5;
-            if (r5 == 22)
+            if (r5 == QL_LOCATION_ROCK_TUNNEL_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 15 || y != 26)
                     sp0.unk1++;
             }
-            else if (r5 == 42)
+            else if (r5 == QL_LOCATION_SEAFOAM_ISLANDS_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 67 || y != 15)
@@ -1939,9 +1939,9 @@ void sub_80CC59C(void)
             }
             SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&sp0);
             FlagClear(FLAG_0x808);
-            if (r5 == 35)
+            if (r5 == QL_LOCATION_ROCKET_HIDEOUT)
             {
-                VarSet(VAR_0x404D, 32);
+                VarSet(VAR_0x404D, QL_LOCATION_GAME_CORNER);
                 FlagSet(FLAG_0x808);
             }
         }

@@ -1,6 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "battle_anim.h"
-#include "gpu_regs.h"
 #include "random.h"
 #include "task.h"
 #include "trig.h"

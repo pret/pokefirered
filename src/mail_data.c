@@ -1,5 +1,5 @@
 #include "global.h"
-#include "text.h"
+#include "gflib.h"
 #include "mail.h"
 #include "mail_data.h"
 #include "constants/species.h"

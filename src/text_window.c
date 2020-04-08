@@ -1,7 +1,5 @@
 #include "global.h"
-#include "bg.h"
-#include "palette.h"
-#include "window.h"
+#include "gflib.h"
 #include "text_window.h"
 #include "text_window_graphics.h"
 #include "quest_log.h"

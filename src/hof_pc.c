@@ -1,12 +1,10 @@
 #include "global.h"
+#include "gflib.h"
 #include "hall_of_fame.h"
-#include "palette.h"
 #include "overworld.h"
 #include "script.h"
 #include "script_menu.h"
 #include "task.h"
-#include "bg.h"
-#include "window.h"
 
 static void ReshowPCMenuAfterHallOfFamePC(void);
 static void Task_WaitForPaletteFade(u8 taskId);

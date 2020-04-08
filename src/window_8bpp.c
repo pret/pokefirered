@@ -1,8 +1,5 @@
 #include "global.h"
-#include "window.h"
-#include "malloc.h"
-#include "bg.h"
-#include "blit.h"
+#include "gflib.h"
 
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;

@@ -4,7 +4,6 @@
 #include "event_object_movement.h"
 #include "script_movement.h"
 #include "event_data.h"
-#include "constants/maps.h"
 #include "constants/event_objects.h"
 
 bool8 walkrun_is_standing_still(void)

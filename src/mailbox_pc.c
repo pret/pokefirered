@@ -1,14 +1,11 @@
 #include "global.h"
-#include "malloc.h"
-#include "window.h"
+#include "gflib.h"
 #include "menu.h"
-#include "string_util.h"
 #include "new_menu_helpers.h"
 #include "list_menu.h"
 #include "player_pc.h"
 #include "strings.h"
 #include "menu_indicators.h"
-#include "sound.h"
 #include "constants/songs.h"
 
 static EWRAM_DATA u8 sWindowIds[3] = {};

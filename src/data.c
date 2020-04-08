@@ -1,5 +1,5 @@
 #include "global.h"
-#include "malloc.h"
+#include "gflib.h"
 #include "battle.h"
 #include "data.h"
 #include "graphics.h"

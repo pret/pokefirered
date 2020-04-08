@@ -1,12 +1,10 @@
 #include "global.h"
-#include "main.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "m4a.h"
 #include "load_save.h"
 #include "save.h"
 #include "new_game.h"
 #include "overworld.h"
-#include "malloc.h"
 
 void ResetSaveHeap(void)
 {

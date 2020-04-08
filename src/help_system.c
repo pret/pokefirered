@@ -1,15 +1,10 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
-#include "gpu_regs.h"
-#include "main.h"
 #include "m4a.h"
-#include "dma3.h"
 #include "help_system.h"
 #include "list_menu.h"
-#include "sound.h"
 #include "strings.h"
-#include "text.h"
-#include "blit.h"
 #include "constants/songs.h"
 
 extern u8 gGlyphInfo[];

@@ -1,10 +1,7 @@
 #include "global.h"
-#include "text.h"
-#include "blit.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "task.h"
 #include "wild_encounter.h"
-#include "string_util.h"
 #include "constants/species.h"
 
 static void Task_SmoothBlendLayers(u8 taskId);

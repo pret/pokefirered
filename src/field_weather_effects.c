@@ -4,7 +4,6 @@
 #include "event_object_movement.h"
 #include "field_weather.h"
 #include "field_weather_effects.h"
-#include "overworld.h"
 #include "random.h"
 #include "script.h"
 #include "constants/weather.h"

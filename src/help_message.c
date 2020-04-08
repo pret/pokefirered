@@ -1,5 +1,4 @@
 #include "global.h"
-#include "gflib.h"
 #include "menu.h"
 
 static EWRAM_DATA u8 sHelpMessageWindowId = 0;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gflib.h"
 #include "bike.h"
 #include "event_data.h"
 #include "field_camera.h"
@@ -9,7 +10,6 @@
 #include "overworld.h"
 #include "quest_log.h"
 #include "script.h"
-#include "sound.h"
 #include "task.h"
 #include "constants/field_tasks.h"
 #include "constants/flags.h"

@@ -1,16 +1,11 @@
 #include "global.h"
-#include "bg.h"
-#include "gpu_regs.h"
-#include "window.h"
-#include "palette.h"
+#include "gflib.h"
 #include "task.h"
 #include "event_data.h"
 #include "text_window.h"
 #include "quest_log.h"
 #include "region_map.h"
-#include "text.h"
 #include "strings.h"
-#include "string_util.h"
 #include "constants/flags.h"
 
 static void Task_MapNamePopup(u8 taskId);

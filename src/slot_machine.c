@@ -31,12 +31,12 @@ struct SlotMachineState
     u8 field_10;
     u8 field_11;
     bool32 field_14[3];
-    s16 field_20[3];
+    s16 reelPositions[3];
     s16 field_26[3];
     s16 field_2C[3];
     s16 field_32[3];
     u32 field_38;
-    u32 field_3C[5];
+    bool32 winFlags[5];
     u16 payout;
 };
 
@@ -52,14 +52,14 @@ struct SlotMachineGfxManager
 
 struct SlotMachineSetupTaskDataSub_0000
 {
-    u16 unk0;
-    u8 unk2;
-    u8 unk3;
+    u16 funcno;
+    u8 state;
+    bool8 active;
 };
 
 struct SlotMachineSetupTaskData
 {
-    struct SlotMachineSetupTaskDataSub_0000 field_0000[8];
+    struct SlotMachineSetupTaskDataSub_0000 tasks[8];
     u8 field_0020;
     // align 2
     s32 field_0024;
@@ -70,7 +70,7 @@ struct SlotMachineSetupTaskData
     u8 field_085C[0x800];
     u8 field_105C[0x800];
     u8 field_185C[0x800];
-    u8 field_205C[0x800];
+    u8 reelPositions5C[0x800];
 }; // size: 285C
 
 struct UnkStruct_8466C0C
@@ -106,15 +106,15 @@ static bool32 sub_81406E8(s32, s32, s32);
 static bool32 sub_81408F4(s32, s32);
 static void sub_81409B4(void);
 static void sub_8140A70(void);
-static u16 sub_8140A80(void);
+static u16 CalcPayout(void);
 static void sub_8140C6C(struct SlotMachineGfxManager * manager);
 static void sub_8140D7C(const s16 *, const s16 *);
 static bool32 sub_814104C(void);
 static void sub_8141094(void);
-static struct SlotMachineSetupTaskData * sub_814112C(void);
+static struct SlotMachineSetupTaskData * GetSlotMachineSetupTaskDataPtr(void);
 static void sub_81410CC(u8 taskId);
-static void sub_8141148(u16 a0, u8 a1);
-static bool32 sub_8141180(u8 a0);
+static void SetSlotMachineSetupTask(u16 a0, u8 a1);
+static bool32 IsSlotMachineSetupTaskActive(u8 a0);
 static bool8 sub_8141198(u8 *, struct SlotMachineSetupTaskData *);
 static bool8 sub_8141460(u8 *, struct SlotMachineSetupTaskData *);
 static bool8 sub_81414AC(u8 *, struct SlotMachineSetupTaskData *);
@@ -197,7 +197,7 @@ static const u8 gUnknown_8464926[][21] = {
     {0x00, 0x03, 0x06, 0x05, 0x02, 0x03, 0x06, 0x05, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x02, 0x03, 0x05, 0x06, 0x01},
 };
 
-static const u16 gUnknown_8464966[] = {
+static const u16 sPayoutTable[] = {
       0,
       2,
       6,
@@ -207,37 +207,37 @@ static const u16 gUnknown_8464966[] = {
     300
 };
 
-static const u16 gUnknown_8464974[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
+static const u16 sSpritePal_ReelIcons[] = INCBIN_U16("graphics/slot_machine/unk_8464974.gbapal");
 static const u16 gUnknown_8464994[] = INCBIN_U16("graphics/slot_machine/unk_8464994.gbapal");
 static const u16 gUnknown_84649B4[] = INCBIN_U16("graphics/slot_machine/unk_84649b4.gbapal");
 static const u16 gUnknown_84649D4[] = INCBIN_U16("graphics/slot_machine/unk_84649d4.gbapal");
 static const u16 gUnknown_84649F4[] = INCBIN_U16("graphics/slot_machine/unk_84649f4.gbapal");
 #if defined(FIRERED)
-static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
-static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_846506c.gbapal");
-static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
+static const u32 sSpriteTiles_ReelIcons[] = INCBIN_U32("graphics/slot_machine/unk_8464a14.4bpp.lz");
+static const u16 sSpritePal_Clefairy[] = INCBIN_U16("graphics/slot_machine/unk_846506c.gbapal");
+static const u32 sSpriteTiles_Clefairy[] = INCBIN_U32("graphics/slot_machine/unk_846506c.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u32 gUnknown_8464A14[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464434.4bpp.lz");
-static const u16 gUnknown_846504C[] = INCBIN_U16("graphics/slot_machine/unk_lg_8464a3c.gbapal");
-static const u32 gUnknown_846506C[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464a3c.4bpp.lz");
+static const u32 sSpriteTiles_ReelIcons[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464434.4bpp.lz");
+static const u16 sSpritePal_Clefairy[] = INCBIN_U16("graphics/slot_machine/unk_lg_8464a3c.gbapal");
+static const u32 sSpriteTiles_Clefairy[] = INCBIN_U32("graphics/slot_machine/unk_lg_8464a3c.4bpp.lz");
 #endif
-static const u16 gUnknown_8465524[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
-static const u32 gUnknown_8465544[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
+static const u16 sSpritePal_Digits[] = INCBIN_U16("graphics/slot_machine/unk_8465524.gbapal");
+static const u32 sSpriteTiles_Digits[] = INCBIN_U32("graphics/slot_machine/unk_8465544.4bpp.lz");
 
-static const struct CompressedSpriteSheet gUnknown_84655B0[] = {
-    {(const void *)gUnknown_8464A14, 0xe00, 0},
-    {(const void *)gUnknown_846506C, 0xc00, 1},
-    {(const void *)gUnknown_8465544, 0x280, 2},
+static const struct CompressedSpriteSheet sSpriteSheets[] = {
+    {(const void *)sSpriteTiles_ReelIcons, 0xe00, 0},
+    {(const void *)sSpriteTiles_Clefairy, 0xc00, 1},
+    {(const void *)sSpriteTiles_Digits, 0x280, 2},
 };
 
-static const struct SpritePalette gUnknown_84655C8[] = {
-    {gUnknown_8464974, 0},
+static const struct SpritePalette sSpritePalettes[] = {
+    {sSpritePal_ReelIcons, 0},
     {gUnknown_8464994, 1},
     {gUnknown_84649B4, 2},
     {gUnknown_84649D4, 3},
     {gUnknown_84649F4, 4},
-    {gUnknown_846504C, 5},
-    {gUnknown_8465524, 6},
+    {sSpritePal_Clefairy, 5},
+    {sSpritePal_Digits, 6},
     {NULL}
 };
 
@@ -278,7 +278,7 @@ static const u8 gUnknown_84656D6[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x03, 0x04, 0x05, 0x06, 0x06, 0x07, 0x08, 0x09, 0x09, 0x0a, 0x0b, 0x0c, 0x0c, 0x0d, 0x0e, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f
 };
 
-static const struct OamData gUnknown_8465738 = {
+static const struct OamData sOamData_ReelIcons = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_NORMAL,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -294,79 +294,79 @@ static const struct OamData gUnknown_8465738 = {
     .affineParam = 0
 };
 
-static const union AnimCmd gUnknown_8465740[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_7[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465748[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Rocket[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465750[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Pikachu[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465758[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Psyduck[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465760[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Cherries[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465768[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Magnemite[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465770[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Shellder[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465778[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Pikachu_2[] = {
     ANIMCMD_FRAME(0x20, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465780[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Psyduck_2[] = {
     ANIMCMD_FRAME(0x30, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465788[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Cherries_2[] = {
     ANIMCMD_FRAME(0x40, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465790[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Magnemite_2[] = {
     ANIMCMD_FRAME(0x50, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465798[] = {
+static const union AnimCmd sAnimCmd_ReelIcon_Shellder_2[] = {
     ANIMCMD_FRAME(0x60, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_84657A0[] = {
-    gUnknown_8465740,
-    gUnknown_8465748,
-    gUnknown_8465750,
-    gUnknown_8465758,
-    gUnknown_8465760,
-    gUnknown_8465768,
-    gUnknown_8465770,
-    gUnknown_8465778,
-    gUnknown_8465780,
-    gUnknown_8465788,
-    gUnknown_8465790,
-    gUnknown_8465798
+static const union AnimCmd *const sAnimTable_ReelIcons[] = {
+    sAnimCmd_ReelIcon_7,
+    sAnimCmd_ReelIcon_Rocket,
+    sAnimCmd_ReelIcon_Pikachu,
+    sAnimCmd_ReelIcon_Psyduck,
+    sAnimCmd_ReelIcon_Cherries,
+    sAnimCmd_ReelIcon_Magnemite,
+    sAnimCmd_ReelIcon_Shellder,
+    sAnimCmd_ReelIcon_Pikachu_2,
+    sAnimCmd_ReelIcon_Psyduck_2,
+    sAnimCmd_ReelIcon_Cherries_2,
+    sAnimCmd_ReelIcon_Magnemite_2,
+    sAnimCmd_ReelIcon_Shellder_2
 };
 
 static const union AffineAnimCmd gUnknown_84657D0[] = {
@@ -378,11 +378,17 @@ static const union AffineAnimCmd *const gUnknown_84657E0[] = {
     gUnknown_84657D0
 };
 
-static const struct SpriteTemplate gUnknown_84657E4 = {
-    0, 0, &gUnknown_8465738, gUnknown_84657A0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+static const struct SpriteTemplate sSpriteTemplate_ReelIcons = {
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &sOamData_ReelIcons,
+    .anims = sAnimTable_ReelIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
-static const struct OamData gUnknown_84657FC = {
+static const struct OamData sOamData_Digits = {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -398,71 +404,77 @@ static const struct OamData gUnknown_84657FC = {
     .affineParam = 0
 };
 
-static const union AnimCmd gUnknown_8465804[] = {
+static const union AnimCmd sSpriteAnim_Digit0[] = {
     ANIMCMD_FRAME(0x00, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846580C[] = {
+static const union AnimCmd sSpriteAnim_Digit1[] = {
     ANIMCMD_FRAME(0x02, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465814[] = {
+static const union AnimCmd sSpriteAnim_Digit2[] = {
     ANIMCMD_FRAME(0x04, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846581C[] = {
+static const union AnimCmd sSpriteAnim_Digit3[] = {
     ANIMCMD_FRAME(0x06, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465824[] = {
+static const union AnimCmd sSpriteAnim_Digit4[] = {
     ANIMCMD_FRAME(0x08, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846582C[] = {
+static const union AnimCmd sSpriteAnim_Digit5[] = {
     ANIMCMD_FRAME(0x0a, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465834[] = {
+static const union AnimCmd sSpriteAnim_Digit6[] = {
     ANIMCMD_FRAME(0x0c, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846583C[] = {
+static const union AnimCmd sSpriteAnim_Digit7[] = {
     ANIMCMD_FRAME(0x0e, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_8465844[] = {
+static const union AnimCmd sSpriteAnim_Digit8[] = {
     ANIMCMD_FRAME(0x10, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd gUnknown_846584C[] = {
+static const union AnimCmd sSpriteAnim_Digit9[] = {
     ANIMCMD_FRAME(0x12, 4),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const gUnknown_8465854[] = {
-    gUnknown_8465804,
-    gUnknown_846580C,
-    gUnknown_8465814,
-    gUnknown_846581C,
-    gUnknown_8465824,
-    gUnknown_846582C,
-    gUnknown_8465834,
-    gUnknown_846583C,
-    gUnknown_8465844,
-    gUnknown_846584C
+static const union AnimCmd *const sAnimTable_Digits[] = {
+    sSpriteAnim_Digit0,
+    sSpriteAnim_Digit1,
+    sSpriteAnim_Digit2,
+    sSpriteAnim_Digit3,
+    sSpriteAnim_Digit4,
+    sSpriteAnim_Digit5,
+    sSpriteAnim_Digit6,
+    sSpriteAnim_Digit7,
+    sSpriteAnim_Digit8,
+    sSpriteAnim_Digit9
 };
 
-static const struct SpriteTemplate gUnknown_846587C = {
-    2, 6, &gUnknown_84657FC, gUnknown_8465854, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+static const struct SpriteTemplate sSpriteTemplate_Digits = {
+    .tileTag = 2,
+    .paletteTag = 6,
+    .oam = &sOamData_Digits,
+    .anims = sAnimTable_Digits,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 static const struct OamData gUnknown_8465894 = {
@@ -512,7 +524,13 @@ static const union AnimCmd *const gUnknown_84658C8[] = {
 };
 
 static const struct SpriteTemplate gUnknown_84658D8 = {
-    1, 5, &gUnknown_8465894, gUnknown_84658C8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+    .tileTag = 1,
+    .paletteTag = 5,
+    .oam = &gUnknown_8465894,
+    .anims = gUnknown_84658C8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 bool8 (*const gUnknown_84658F0[])(u8 *, struct SlotMachineSetupTaskData *) = {
@@ -698,7 +716,7 @@ static void sub_813F84C(struct SlotMachineState * ptr)
     for (i = 0; i < 3; i++)
     {
         sSlotMachineState->field_14[i] = FALSE;
-        sSlotMachineState->field_20[i] =     0;
+        sSlotMachineState->reelPositions[i] =     0;
         sSlotMachineState->field_26[i] =     0;
         sSlotMachineState->field_2C[i] =    21;
     }
@@ -720,12 +738,12 @@ static void sub_813F898(void)
         }
         else
         {
-            sub_8141148(0, 0);
+            SetSlotMachineSetupTask(0, 0);
             gMain.state++;
         }
         break;
     case 1:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
         {
             sSlotMachineState->field_10 = CreateTask(MainTask_SlotsGameLoop, 0);
             sSlotMachineState->field_11 = CreateTask(sub_8140060, 1);
@@ -760,6 +778,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
     switch (data[0])
     {
     case 0:
+        // Betting Phase
         if (GetCoins() == 0)
         {
             SetMainTask(MainTask_NoCoinsGameOver);
@@ -769,8 +788,8 @@ static void MainTask_SlotsGameLoop(u8 taskId)
             sSlotMachineState->bet++;
             RemoveCoins(1);
             PlaySE(SE_REGI);
-            sub_8141148(8, 0);
-            sub_8141148(2, 1);
+            SetSlotMachineSetupTask(8, 0);
+            SetSlotMachineSetupTask(2, 1);
             data[0] = 1;
         }
         else if (JOY_NEW(R_BUTTON))
@@ -787,8 +806,8 @@ static void MainTask_SlotsGameLoop(u8 taskId)
                 SetCoins(0);
             }
             PlaySE(SE_REGI);
-            sub_8141148(8, 0);
-            sub_8141148(2, 1);
+            SetSlotMachineSetupTask(8, 0);
+            SetSlotMachineSetupTask(2, 1);
             data[0] = 1;
         }
         else if (JOY_NEW(A_BUTTON) && sSlotMachineState->bet != 0)
@@ -805,7 +824,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         }
         break;
     case 1:
-        if (!sub_8141180(0) && !sub_8141180(1))
+        if (!IsSlotMachineSetupTaskActive(0) && !IsSlotMachineSetupTaskActive(1))
         {
             if (sSlotMachineState->bet == 3 || GetCoins() == 0)
                 data[0] = 2;
@@ -818,11 +837,11 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         sub_81409B4();
         sub_8140148();
         sSlotMachineState->field_06 = 0;
-        sub_8141148(3, 0);
+        SetSlotMachineSetupTask(3, 0);
         data[0] = 3;
         break;
     case 3:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
         {
             if (JOY_NEW(A_BUTTON))
             {
@@ -834,12 +853,12 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         }
         break;
     case 4:
-        if (sub_81401A0(sSlotMachineState->field_06) == 0 && !sub_8141180(0))
+        if (sub_81401A0(sSlotMachineState->field_06) == 0 && !IsSlotMachineSetupTaskActive(0))
         {
             sSlotMachineState->field_06++;
             if (sSlotMachineState->field_06 >= 3)
             {
-                sSlotMachineState->slotRewardClass = sub_8140A80();
+                sSlotMachineState->slotRewardClass = CalcPayout();
                 sSlotMachineState->bet = 0;
                 sSlotMachineState->field_06 = 0;
                 if (sSlotMachineState->slotRewardClass == 0)
@@ -866,11 +885,11 @@ static void MainTask_NoCoinsGameOver(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8141148(9, 0);
+        SetSlotMachineSetupTask(9, 0);
         data[0]++;
         break;
     case 1:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             data[0]++;
         break;
     case 2:
@@ -887,22 +906,22 @@ static void MainTask_ShowHelp(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8141148(14, 0);
+        SetSlotMachineSetupTask(14, 0);
         data[0]++;
         break;
     case 1:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             data[0]++;
         break;
     case 2:
         if (JOY_NEW(DPAD_LEFT))
         {
-            sub_8141148(15, 0);
+            SetSlotMachineSetupTask(15, 0);
             data[0]++;
         }
         break;
     case 3:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             SetMainTask(MainTask_SlotsGameLoop);
         break;
     }
@@ -915,11 +934,11 @@ static void MainTask_ConfirmExitGame(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8141148(10, 0);
+        SetSlotMachineSetupTask(10, 0);
         data[0]++;
         break;
     case 1:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             data[0]++;
         break;
     case 2:
@@ -927,22 +946,22 @@ static void MainTask_ConfirmExitGame(u8 taskId)
         {
         case 0:
             AddCoins(sSlotMachineState->bet);
-            sub_8141148(8, 0);
+            SetSlotMachineSetupTask(8, 0);
             data[0] = 3;
             break;
         case 1:
         case -1:
-            sub_8141148(11, 0);
+            SetSlotMachineSetupTask(11, 0);
             data[0] = 4;
             break;
         }
         break;
     case 3:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             SetMainTask(MainTask_ExitSlots);
         break;
     case 4:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
             SetMainTask(MainTask_SlotsGameLoop);
         break;
     }
@@ -955,7 +974,7 @@ static void MainTask_DarnNoPayout(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8141148(6, 0);
+        SetSlotMachineSetupTask(6, 0);
         data[1] = 0;
         data[0]++;
         break;
@@ -963,14 +982,14 @@ static void MainTask_DarnNoPayout(u8 taskId)
         data[1]++;
         if (data[1] > 60)
         {
-            sub_8141148(7, 0);
-            sub_8141148(2, 1);
-            sub_8141148(13, 2);
+            SetSlotMachineSetupTask(7, 0);
+            SetSlotMachineSetupTask(2, 1);
+            SetSlotMachineSetupTask(13, 2);
             data[0]++;
         }
         break;
     case 2:
-        if (!sub_8141180(0) && !sub_8141180(1) && !sub_8141180(2))
+        if (!IsSlotMachineSetupTaskActive(0) && !IsSlotMachineSetupTaskActive(1) && !IsSlotMachineSetupTaskActive(2))
             SetMainTask(MainTask_SlotsGameLoop);
         break;
     }
@@ -987,8 +1006,8 @@ static void MainTask_WinHandlePayout(u8 taskId)
             PlayFanfare(MUS_ME_B_BIG);
         else
             PlayFanfare(MUS_ME_B_SMALL);
-        sub_8141148(8, 0);
-        sub_8141148(4, 1);
+        SetSlotMachineSetupTask(8, 0);
+        SetSlotMachineSetupTask(4, 1);
         data[1] = 8;
         data[0]++;
         break;
@@ -1003,7 +1022,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
         }
         break;
     case 2:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
         {
             if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
             {
@@ -1027,28 +1046,28 @@ static void MainTask_WinHandlePayout(u8 taskId)
                         data[1] = 2;
                 }
             }
-            sub_8141148(8, 0);
+            SetSlotMachineSetupTask(8, 0);
             if (sSlotMachineState->payout == 0)
                 data[0]++;
         }
         break;
     case 3:
-        if (IsFanfareTaskInactive() && !sub_8141180(0))
+        if (IsFanfareTaskInactive() && !IsSlotMachineSetupTaskActive(0))
         {
-            sub_8141148(5, 0);
+            SetSlotMachineSetupTask(5, 0);
             data[0]++;
         }
         break;
     case 4:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
         {
-            sub_8141148(2, 0);
-            sub_8141148(13, 1);
+            SetSlotMachineSetupTask(2, 0);
+            SetSlotMachineSetupTask(13, 1);
             data[0]++;
         }
         break;
     case 5:
-        if (!sub_8141180(0) && !sub_8141180(1))
+        if (!IsSlotMachineSetupTaskActive(0) && !IsSlotMachineSetupTaskActive(1))
             SetMainTask(MainTask_SlotsGameLoop);
         break;
     }
@@ -1061,11 +1080,11 @@ static void MainTask_ExitSlots(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8141148(1, 0);
+        SetSlotMachineSetupTask(1, 0);
         data[0]++;
         break;
     case 1:
-        if (!sub_8141180(0))
+        if (!IsSlotMachineSetupTaskActive(0))
         {
             SetMainCallback2(sSlotMachineState->savedCallback);
             sub_813F92C();
@@ -1090,24 +1109,24 @@ static void sub_8140060(u8 taskId)
     {
         if (sSlotMachineState->field_14[i] || sSlotMachineState->field_26[i] != 0)
         {
-            if (sSlotMachineState->field_26[i] != 0 || sSlotMachineState->field_20[i] != sSlotMachineState->field_2C[i])
+            if (sSlotMachineState->field_26[i] != 0 || sSlotMachineState->reelPositions[i] != sSlotMachineState->field_2C[i])
             {
                 sSlotMachineState->field_26[i]++;
                 if (sSlotMachineState->field_26[i] > 2)
                 {
                     sSlotMachineState->field_26[i] = 0;
-                    sSlotMachineState->field_20[i]--;
-                    if (sSlotMachineState->field_20[i] < 0)
-                        sSlotMachineState->field_20[i] = 20;
+                    sSlotMachineState->reelPositions[i]--;
+                    if (sSlotMachineState->reelPositions[i] < 0)
+                        sSlotMachineState->reelPositions[i] = 20;
                 }
-                if (sSlotMachineState->field_20[i] != sSlotMachineState->field_2C[i])
+                if (sSlotMachineState->reelPositions[i] != sSlotMachineState->field_2C[i])
                     continue;
             }
             sSlotMachineState->field_2C[i] = 21;
             sSlotMachineState->field_14[i] = FALSE;
         }
     }
-    sub_8140D7C(sSlotMachineState->field_20, sSlotMachineState->field_26);
+    sub_8140D7C(sSlotMachineState->reelPositions, sSlotMachineState->field_26);
 }
 
 static void sub_8140148(void)
@@ -1143,7 +1162,7 @@ static bool32 sub_81401A0(u16 whichReel)
 
 static s16 sub_81401B4(u16 whichReel)
 {
-    s16 position = sSlotMachineState->field_20[whichReel];
+    s16 position = sSlotMachineState->reelPositions[whichReel];
     if (sSlotMachineState->field_26[whichReel] != 0)
     {
         position--;
@@ -1226,7 +1245,7 @@ static void sub_81403BC(u16 whichReel)
     u8 sp4[5];
 
     r7 = sSlotMachineState->field_32[0];
-    r4 = sSlotMachineState->field_20[r7] + 1;
+    r4 = sSlotMachineState->reelPositions[r7] + 1;
     if (r4 >= 21)
         r4 = 0;
     sp10 = sub_81401B4(whichReel);
@@ -1384,8 +1403,8 @@ static bool32 sub_81406E8(s32 a0, s32 a1, s32 a2)
     s32 i;
 
     r6++; r6--;
-    r6 = sSlotMachineState->field_20[sSlotMachineState->field_32[0]] + 1;
-    r3 = sSlotMachineState->field_20[sSlotMachineState->field_32[1]] + 1;
+    r6 = sSlotMachineState->reelPositions[sSlotMachineState->field_32[0]] + 1;
+    r3 = sSlotMachineState->reelPositions[sSlotMachineState->field_32[1]] + 1;
     a1++;
     if (r6 >= 21)
         r6 = 0;
@@ -1521,81 +1540,82 @@ static void sub_8140A70(void)
     sSlotMachineState->field_08 = 0;
 }
 
-static u16 sub_8140A80(void)
+static u16 CalcPayout(void)
 {
     u8 sp0[9] = {};
     s32 i;
-    s32 r4, r3, r2;
-    s32 r9;
+    s32 reel1pos, reel2pos, reel3pos;
+    s32 bestMatch;
 
     for (i = 0; i < 5; i++)
-        sSlotMachineState->field_3C[i] = 0;
+        sSlotMachineState->winFlags[i] = FALSE;
 
-    r9 = 0;
-    r4 = sSlotMachineState->field_20[0];
-    r3 = sSlotMachineState->field_20[1];
-    r2 = sSlotMachineState->field_20[2];
+    bestMatch = 0;
+    reel1pos = sSlotMachineState->reelPositions[0];
+    reel2pos = sSlotMachineState->reelPositions[1];
+    reel3pos = sSlotMachineState->reelPositions[2];
 
     for (i = 0; i < 3; i++)
     {
-        r4++;
-        if (r4 >= 21)
-            r4 = 0;
-        r3++;
-        if (r3 >= 21)
-            r3 = 0;
-        r2++;
-        if (r2 >= 21)
-            r2 = 0;
-        sp0[0 * 3 + i] = gUnknown_8464926[0][r4];
-        sp0[1 * 3 + i] = gUnknown_8464926[1][r3];
-        sp0[2 * 3 + i] = gUnknown_8464926[2][r2];
+        reel1pos++;
+        if (reel1pos >= 21)
+            reel1pos = 0;
+        reel2pos++;
+        if (reel2pos >= 21)
+            reel2pos = 0;
+        reel3pos++;
+        if (reel3pos >= 21)
+            reel3pos = 0;
+        sp0[0 * 3 + i] = gUnknown_8464926[0][reel1pos];
+        sp0[1 * 3 + i] = gUnknown_8464926[1][reel2pos];
+        sp0[2 * 3 + i] = gUnknown_8464926[2][reel3pos];
     }
     sSlotMachineState->payout = 0;
     for (i = 0; i < 5; i++)
     {
         if (sSlotMachineState->bet >= gUnknown_84648BD[i][3])
         {
+            int curMatch;
             if (sub_81408F4(1, sp0[gUnknown_84648BD[i][0]]))
-                r3 = sub_81408F4(2, sp0[gUnknown_84648BD[i][1]]) ? 2 : 1;
+                curMatch = sub_81408F4(2, sp0[gUnknown_84648BD[i][1]]) ? 2 : 1;
             else if (sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][1]] && sp0[gUnknown_84648BD[i][0]] == sp0[gUnknown_84648BD[i][2]])
-                r3 = sub_814096C(sp0[gUnknown_84648BD[i][0]]);
+                curMatch = sub_814096C(sp0[gUnknown_84648BD[i][0]]);
             else
-                r3 = 0;
-            if (r3 != 0)
+                curMatch = 0;
+            if (curMatch != 0)
             {
-                sSlotMachineState->field_3C[i] = 1;
-                sSlotMachineState->payout += gUnknown_8464966[r3];
+                sSlotMachineState->winFlags[i] = TRUE;
+                sSlotMachineState->payout += sPayoutTable[curMatch];
             }
-            if (r3 > r9)
-                r9 = r3;
+            if (curMatch > bestMatch)
+                bestMatch = curMatch;
         }
     }
-    return r9;
+    return bestMatch;
 }
 
-static u16 sub_8140BDC(void)
+static u16 GetPayout(void)
 {
     return sSlotMachineState->payout;
 }
 
-static u8 sub_8140BEC(void)
+static u8 GetPlayerBet(void)
 {
     return sSlotMachineState->bet;
 }
 
-static bool32 sub_8140BF8(s32 a0)
+static bool32 GetWinFlagByLine(int a0)
 {
-    return sSlotMachineState->field_3C[a0];
+    return sSlotMachineState->winFlags[a0];
 }
 
 static bool32 sub_8140C0C(void)
 {
     s32 i;
 
-    for (i = 0; i < NELEMS(gUnknown_84655B0); i++)
-        LoadCompressedSpriteSheet(&gUnknown_84655B0[i]);
-    LoadSpritePalettes(gUnknown_84655C8);
+    for (i = 0; i < NELEMS(sSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sSpriteSheets[i]);
+    LoadSpritePalettes(sSpritePalettes);
     sSlotMachineGfxManager = Alloc(sizeof(*sSlotMachineGfxManager));
     if (sSlotMachineGfxManager == NULL)
         return FALSE;
@@ -1636,7 +1656,7 @@ static void sub_8140CA0(void)
     {
         for (j = 0; j < 5; j++)
         {
-            spriteId = CreateSprite(&gUnknown_84657E4, 80 + 40 * i, 44 + 24 * j, 2);
+            spriteId = CreateSprite(&sSpriteTemplate_ReelIcons, 80 + 40 * i, 44 + 24 * j, 2);
             animId =  gUnknown_8464926[i][j];
             sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, animId);
@@ -1684,7 +1704,7 @@ static void sub_8140D7C(const s16 * a0, const s16 * a1)
     }
 }
 
-static void sub_8140E40(void)
+static void HBlankCB_SlotMachine(void)
 {
     s32 vcount = REG_VCOUNT - 0x2B;
     if (vcount >= 0 && vcount < 0x54)
@@ -1706,9 +1726,9 @@ static void sub_8140E9C(void)
 
     for (i = 0; i < 4; i++)
     {
-        spriteId = CreateSprite(&gUnknown_846587C, 0x55 + 7 * i, 30, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_Digits, 0x55 + 7 * i, 30, 0);
         sSlotMachineGfxManager->field_48[i] = &gSprites[spriteId];
-        spriteId = CreateSprite(&gUnknown_846587C, 0x85 + 7 * i, 30, 0);
+        spriteId = CreateSprite(&sSpriteTemplate_Digits, 0x85 + 7 * i, 30, 0);
         sSlotMachineGfxManager->field_58[i] = &gSprites[spriteId];
     }
 }
@@ -1716,7 +1736,7 @@ static void sub_8140E9C(void)
 static void sub_8140F2C(void)
 {
     s32 coins = GetCoins();
-    s32 payout = sub_8140BDC();
+    s32 payout = GetPayout();
     s32 i;
     s32 divisor = 1000;
     s32 quotient;
@@ -1761,7 +1781,7 @@ static bool32 sub_814104C(void)
     if (ptr == NULL)
         return FALSE;
     for (i = 0; i < 8; i++)
-        ptr->field_0000[i].unk3 = 0;
+        ptr->tasks[i].active = 0;
     ptr->field_0028 = 0;
     SetWordTaskArg(CreateTask(sub_81410CC, 2), 0, (uintptr_t)ptr);
     return FALSE;
@@ -1771,7 +1791,7 @@ static void sub_8141094(void)
 {
     if (FuncIsActiveTask(sub_81410CC))
     {
-        Free(sub_814112C());
+        Free(GetSlotMachineSetupTaskDataPtr());
         DestroyTask(FindTaskIdByFunc(sub_81410CC));
     }
     sub_8140C50();
@@ -1785,34 +1805,34 @@ static void sub_81410CC(u8 taskId)
 
     for (i = 0; i < 8; i++)
     {
-        if (ptr->field_0000[i].unk3)
-            ptr->field_0000[i].unk3 = gUnknown_84658F0[ptr->field_0000[i].unk0](&ptr->field_0000[i].unk2, ptr);
+        if (ptr->tasks[i].active)
+            ptr->tasks[i].active = gUnknown_84658F0[ptr->tasks[i].funcno](&ptr->tasks[i].state, ptr);
     }
 }
 
-static void sub_8141118(void)
+static void VBlankCB_SlotMachine(void)
 {
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
 }
 
-static struct SlotMachineSetupTaskData * sub_814112C(void)
+static struct SlotMachineSetupTaskData * GetSlotMachineSetupTaskDataPtr(void)
 {
     return (void *)GetWordTaskArg(FindTaskIdByFunc(sub_81410CC), 0);
 }
 
-static void sub_8141148(u16 a0, u8 a1)
+static void SetSlotMachineSetupTask(u16 funcno, u8 taskId)
 {
-    struct SlotMachineSetupTaskData * ptr = sub_814112C();
-    ptr->field_0000[a1].unk0 = a0;
-    ptr->field_0000[a1].unk2 = 0;
-    ptr->field_0000[a1].unk3 = gUnknown_84658F0[a0](&ptr->field_0000[a1].unk2, ptr);
+    struct SlotMachineSetupTaskData * ptr = GetSlotMachineSetupTaskDataPtr();
+    ptr->tasks[taskId].funcno = funcno;
+    ptr->tasks[taskId].state = 0;
+    ptr->tasks[taskId].active = gUnknown_84658F0[funcno](&ptr->tasks[taskId].state, ptr);
 }
 
-static bool32 sub_8141180(u8 a0)
+static bool32 IsSlotMachineSetupTaskActive(u8 taskId)
 {
-    return sub_814112C()->field_0000[a0].unk3;
+    return GetSlotMachineSetupTaskDataPtr()->tasks[taskId].active;
 }
 
 static inline void LoadColor(u16 color, u16 *pal)
@@ -1846,7 +1866,7 @@ static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         InitBgsFromTemplates(0, gUnknown_8466B10, NELEMS(gUnknown_8466B10));
         InitWindows(gUnknown_8466B20);
 
-        SetBgTilemapBuffer(3, ptr->field_205C);
+        SetBgTilemapBuffer(3, ptr->reelPositions5C);
         FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 32, 32);
         CopyBgTilemapBufferToVram(3);
 
@@ -1888,8 +1908,8 @@ static bool8 sub_8141198(u8 * state, struct SlotMachineSetupTaskData * ptr)
         sub_8140FC4();
         sub_8140F2C();
         BlendPalettes(0xFFFFFFFF, 0x10, RGB_BLACK);
-        SetVBlankCallback(sub_8141118);
-        SetHBlankCallback(sub_8140E40);
+        SetVBlankCallback(VBlankCB_SlotMachine);
+        SetHBlankCallback(HBlankCB_SlotMachine);
         (*state)++;
         break;
     case 2:
@@ -2160,7 +2180,7 @@ static void sub_8141828(void)
 
 static void sub_8141834(u16 * bgTilemapBuffer)
 {
-    switch (sub_8140BEC())
+    switch (GetPlayerBet())
     {
     case 0:
         sub_81418C4(bgTilemapBuffer, 0, 4);
@@ -2206,7 +2226,7 @@ static void sub_814191C(u8 taskId)
         LoadPalette(gUnknown_84664BC, 0x60, 0x20);
         for (i = 0; i < 5; i++)
         {
-            if (sub_8140BF8(i))
+            if (GetWinFlagByLine(i))
                 sub_81418C4(GetBgTilemapBuffer(2), i, 6);
         }
         CopyBgTilemapBufferToVram(2);
@@ -2251,7 +2271,7 @@ static void sub_814191C(u8 taskId)
     case 2:
         for (i = 0; i < 5; i++)
         {
-            if (sub_8140BF8(i))
+            if (GetWinFlagByLine(i))
                 sub_81418C4(GetBgTilemapBuffer(2), i, 4);
         }
         LoadPalette(gUnknown_8465950, 0x10, 0x20);
@@ -2274,12 +2294,12 @@ static void sub_8141AD8(u8 cursorPos)
 {
     CreateYesNoMenu(&gUnknown_8466C38, 2, 0, 2, 10, 13, cursorPos);
     Menu_MoveCursorNoWrapAround(cursorPos);
-    sub_814112C()->field_0028 = TRUE;
+    GetSlotMachineSetupTaskDataPtr()->field_0028 = TRUE;
 }
 
 static void sub_8141B18(void)
 {
-    struct SlotMachineSetupTaskData * data = sub_814112C();
+    struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
     if (data->field_0028)
     {
         DestroyYesNoMenu();
@@ -2290,7 +2310,7 @@ static void sub_8141B18(void)
 static void sub_8141B34(void)
 {
     s32 i, j;
-    struct SlotMachineSetupTaskData * data = sub_814112C();
+    struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
     u16 * buffer = GetBgTilemapBuffer(2);
 
     for (i = 0; i < 3; i++)
@@ -2309,7 +2329,7 @@ static void sub_8141BA0(u8 reel)
     if (reel < 3)
     {
         s32 i;
-        struct SlotMachineSetupTaskData * data = sub_814112C();
+        struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
         u16 * buffer = GetBgTilemapBuffer(2);
         for (i = 0; i < 4; i++)
         {
@@ -2322,7 +2342,7 @@ static void sub_8141BA0(u8 reel)
 static void sub_8141BE4(void)
 {
     s32 i, j;
-    struct SlotMachineSetupTaskData * data = sub_814112C();
+    struct SlotMachineSetupTaskData * data = GetSlotMachineSetupTaskDataPtr();
     u16 * buffer = GetBgTilemapBuffer(2);
 
     for (i = 0; i < 3; i++)
@@ -2337,6 +2357,6 @@ static void sub_8141BE4(void)
 
 static void sub_8141C30(u8 a0, u8 a1)
 {
-    sub_814112C()->field_0020 = a0;
-    sub_8141148(12, a1);
+    GetSlotMachineSetupTaskDataPtr()->field_0020 = a0;
+    SetSlotMachineSetupTask(12, a1);
 }

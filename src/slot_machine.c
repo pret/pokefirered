@@ -1,13 +1,7 @@
 #include "global.h"
-#include "gpu_regs.h"
-#include "dma3.h"
-#include "bg.h"
-#include "palette.h"
+#include "gflib.h"
 #include "decompress.h"
 #include "task.h"
-#include "main.h"
-#include "malloc.h"
-#include "sound.h"
 #include "coins.h"
 #include "quest_log.h"
 #include "overworld.h"
@@ -40,22 +34,22 @@
 #define ROWATTR_COL3POS 2
 #define ROWATTR_MINBET  3
 
-#define SLOTTASK_GFX_INIT      0
-#define SLOTTASK_FADEOUT_EXIT      1
-#define SLOTTASK_UPDATE_LINE_LIGHTS      2
-#define SLOTTASK_CLEFAIRY_BOUNCE      3
-#define SLOTTASK_ANIM_WIN      4
-#define SLOTTASK_END_ANIM_WIN      5
-#define SLOTTASK_ANIM_LOSE      6
-#define SLOTTASK_ANIM_BETTING      7
-#define SLOTTASK_SHOW_AMOUNTS      8
-#define SLOTTASK_MSG_NO_COINS      9
-#define SLOTTASK_ASK_QUIT     10
-#define SLOTTASK_DESTROY_YESNO     11
-#define SLOTTASK_PRESS_BUTTON     12
-#define SLOTTASK_RELEASE_BUTTONS     13
-#define SLOTTASK_SHOWHELP     14
-#define SLOTTASK_HIDEHELP     15
+#define SLOTTASK_GFX_INIT            0
+#define SLOTTASK_FADEOUT_EXIT        1
+#define SLOTTASK_UPDATE_LINE_LIGHTS  2
+#define SLOTTASK_CLEFAIRY_BOUNCE     3
+#define SLOTTASK_ANIM_WIN            4
+#define SLOTTASK_END_ANIM_WIN        5
+#define SLOTTASK_ANIM_LOSE           6
+#define SLOTTASK_ANIM_BETTING        7
+#define SLOTTASK_SHOW_AMOUNTS        8
+#define SLOTTASK_MSG_NO_COINS        9
+#define SLOTTASK_ASK_QUIT           10
+#define SLOTTASK_DESTROY_YESNO      11
+#define SLOTTASK_PRESS_BUTTON       12
+#define SLOTTASK_RELEASE_BUTTONS    13
+#define SLOTTASK_SHOWHELP           14
+#define SLOTTASK_HIDEHELP           15
 
 struct SlotMachineState
 {

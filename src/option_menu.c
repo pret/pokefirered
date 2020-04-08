@@ -352,7 +352,7 @@ static bool8 LoadOptionMenuPalette(void)
         LoadPalette(stdpal_get(2), 0xF0, 0x20);
         break;
     case 3:
-        sub_814FDA0(1, 0x1B3, 0x30);
+        DrawWindowBorderWithStdpal3(1, 0x1B3, 0x30);
         break;
     default:
         return TRUE;

@@ -398,7 +398,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         SetBgTilemapBuffer(0, Alloc(0x800));
 
         LoadUserWindowBorderGfx(0, 10, 0xE0);
-        sub_814FDA0(0,  1, 0xF0);
+        DrawWindowBorderWithStdpal3(0,  1, 0xF0);
         DecompressAndLoadBgGfxUsingHeap(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();

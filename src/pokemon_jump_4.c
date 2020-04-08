@@ -220,7 +220,7 @@ static void sub_8149DC8(void)
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         sub_814A84C();
         sub_814AA24(0);
-        sub_814FDA0(0, 1, 0xE0);
+        DrawWindowBorderWithStdpal3(0, 1, 0xE0);
         LoadUserWindowBorderGfx(0, 0x00A, 0xD0);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(2);

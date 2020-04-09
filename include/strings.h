@@ -861,7 +861,7 @@ extern const u8 gUnknown_841E1C5[];
 extern const u8 gText_PkmnCantBeTradedNow[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OtherTrainersPkmnCantBeTraded[];
-extern const u8 gUnknown_841E09F[];
+extern const u8 gText_4Qmark[];
 
 extern const u8 gEasyChatGroupName_Pokemon[];
 extern const u8 gEasyChatGroupName_Trainer[];

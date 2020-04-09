@@ -21,7 +21,7 @@ bool8 MenuHelpers_LinkSomething(void);
 void SetVBlankHBlankCallbacksToNull(void);
 void ResetAllBgsCoordinatesAndBgCntRegs(void);
 u8 GetDialogBoxFontId(void);
-bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1);
+bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax);
 void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc);
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo);
 u8 GetLRKeysState(void);

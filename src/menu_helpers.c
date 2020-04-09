@@ -174,17 +174,17 @@ void ResetAllBgsCoordinatesAndBgCntRegs(void)
     ChangeBgY(3, 0, 0);
 }
 
-bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
+bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
 {
-    s16 valBefore = (*arg0);
+    s16 valBefore = (*quantity_p);
 
     if (JOY_REPT(DPAD_ANY) == DPAD_UP)
     {
-        (*arg0)++;
-        if ((*arg0) > arg1)
-            (*arg0) = 1;
+        (*quantity_p)++;
+        if ((*quantity_p) > qmax)
+            (*quantity_p) = 1;
 
-        if ((*arg0) == valBefore)
+        if ((*quantity_p) == valBefore)
         {
             return FALSE;
         }
@@ -196,10 +196,10 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
     {
-        (*arg0)--;
-        if ((*arg0) <= 0)
-            (*arg0) = arg1;
-        if ((*arg0) == valBefore)
+        (*quantity_p)--;
+        if ((*quantity_p) <= 0)
+            (*quantity_p) = qmax;
+        if ((*quantity_p) == valBefore)
         {
             return FALSE;
         }
@@ -211,10 +211,10 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
     {
-        (*arg0) += 10;
-        if ((*arg0) > arg1)
-            (*arg0) = arg1;
-        if ((*arg0) == valBefore)
+        (*quantity_p) += 10;
+        if ((*quantity_p) > qmax)
+            (*quantity_p) = qmax;
+        if ((*quantity_p) == valBefore)
         {
             return FALSE;
         }
@@ -226,10 +226,10 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *arg0, u16 arg1)
     }
     else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
     {
-        (*arg0) -= 10;
-        if ((*arg0) <= 0)
-            (*arg0) = 1;
-        if ((*arg0) == valBefore)
+        (*quantity_p) -= 10;
+        if ((*quantity_p) <= 0)
+            (*quantity_p) = 1;
+        if ((*quantity_p) == valBefore)
         {
             return FALSE;
         }

@@ -14,60 +14,7 @@
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
-      "x": 8,
-      "y": 18,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_SEAFOAM_B4F_BOULDER_1"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
-      "x": 9,
-      "y": 18,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_SEAFOAM_B4F_BOULDER_2"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ARTICUNO",
-      "x": 9,
-      "y": 2,
-      "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SeafoamIslands_B4F_EventScript_Articuno",
-      "flag": "FLAG_HIDE_ARTICUNO"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 22,
-      "y": 19,
-      "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SeafoamIslands_B4F_EventScript_ItemUltraBall",
-      "flag": "FLAG_HIDE_SEAFOAM_ISLANDS_B4F_ULTRA_BALL"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 15,
@@ -98,46 +45,8 @@
       "dest_warp_id": 8
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 26,
-      "y": 19,
-      "elevation": 1,
-      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
-      "var_value": "0",
-      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
-    },
-    {
-      "type": "trigger",
-      "x": 27,
-      "y": 19,
-      "elevation": 1,
-      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
-      "var_value": "0",
-      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
-    },
-    {
-      "type": "trigger",
-      "x": 28,
-      "y": 19,
-      "elevation": 1,
-      "var": "VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F",
-      "var_value": "0",
-      "script": "SeafoamIslands_B4F_EventScript_UpwardCurrent"
-    }
-  ],
+  "coord_events": [],
   "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 13,
-      "y": 8,
-      "elevation": 0,
-      "item": "ITEM_WATER_STONE",
-      "flag": "HIDDEN_ITEM_SEAFOAM_ISLANDS_B4F_WATER_STONE",
-      "quantity": 1,
-      "underfoot": false
-    },
     {
       "type": "sign",
       "x": 30,

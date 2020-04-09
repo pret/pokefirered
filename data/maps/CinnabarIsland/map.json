@@ -25,60 +25,7 @@
       "direction": "right"
     }
   ],
-  "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
-      "x": 14,
-      "y": 6,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "CinnabarIsland_EventScript_Woman",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
-      "x": 11,
-      "y": 11,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "CinnabarIsland_EventScript_OldMan",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BILL",
-      "x": 20,
-      "y": 7,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_CINNABAR_BILL"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SEAGALLOP",
-      "x": 23,
-      "y": 7,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_CINNABAR_SEAGALLOP"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 8,
@@ -116,17 +63,7 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 20,
-      "y": 5,
-      "elevation": 3,
-      "var": "VAR_TEMP_1",
-      "var_value": "0",
-      "script": "CinnabarIsland_EventScript_GymDoorLocked"
-    }
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

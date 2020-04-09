@@ -14,99 +14,7 @@
   "floor_number": -1,
   "battle_scene": "MAP_BATTLE_SCENE_INDOOR_2",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 4,
-      "y": 9,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "5",
-      "script": "RocketHideout_B1F_EventScript_Grunt2",
-      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 24,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "2",
-      "script": "RocketHideout_B1F_EventScript_Grunt1",
-      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 6,
-      "y": 32,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
-      "script": "RocketHideout_B1F_EventScript_Grunt4",
-      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 10,
-      "y": 22,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "RocketHideout_B1F_EventScript_Grunt3",
-      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 21,
-      "y": 27,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
-      "script": "RocketHideout_B1F_EventScript_Grunt5",
-      "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 5,
-      "y": 16,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "RocketHideout_B1F_EventScript_ItemEscapeRope",
-      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 1,
-      "y": 22,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "RocketHideout_B1F_EventScript_ItemHyperPotion",
-      "flag": "FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 12,
@@ -152,16 +60,5 @@
     }
   ],
   "coord_events": [],
-  "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 16,
-      "y": 17,
-      "elevation": 0,
-      "item": "ITEM_PP_UP",
-      "flag": "HIDDEN_ITEM_ROCKET_HIDEOUT_B1F_PP_UP",
-      "quantity": 1,
-      "underfoot": false
-    }
-  ]
+  "bg_events": []
 }

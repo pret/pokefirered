@@ -14,34 +14,7 @@
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "0",
-      "x": 6,
-      "y": 6,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika",
-      "flag": "FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS"
-    },
-    {
-      "graphics_id": "0",
-      "x": 5,
-      "y": 6,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_INVISIBLE",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "CeladonCity_Condominiums_2F_EventScript_PokemonJournalErika",
-      "flag": "FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 4,

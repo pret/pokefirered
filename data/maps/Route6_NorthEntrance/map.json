@@ -14,21 +14,7 @@
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
-      "x": 7,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route6_NorthEntrance_EventScript_Guard",
-      "flag": "0"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 4,
@@ -59,34 +45,6 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 3,
-      "y": 5,
-      "elevation": 3,
-      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": "0",
-      "script": "Route6_NorthEntrance_EventScript_GuardTriggerLeft"
-    },
-    {
-      "type": "trigger",
-      "x": 4,
-      "y": 5,
-      "elevation": 3,
-      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": "0",
-      "script": "Route6_NorthEntrance_EventScript_GuardTriggerMid"
-    },
-    {
-      "type": "trigger",
-      "x": 5,
-      "y": 5,
-      "elevation": 3,
-      "var": "VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES",
-      "var_value": "0",
-      "script": "Route6_NorthEntrance_EventScript_GuardTriggerRight"
-    }
-  ],
+  "coord_events": [],
   "bg_events": []
 }

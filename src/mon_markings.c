@@ -507,8 +507,8 @@ static struct Sprite * CreateMonMarkingSprite(u16 tileTag, u16 paletteTag, const
         return NULL;
 }
 
-void sub_80BEBD0(u8 markings, void * dest)
+void RequestDma3LoadMonMarking(u8 markings, void * dest)
 {
-    RequestDma3Copy(&sMonMarkingsTiles[64 * markings], dest, 0x80, 1);
+    RequestDma3Copy(&sMonMarkingsTiles[64 * markings], dest, 0x80, DMA3_32BIT);
 }
 

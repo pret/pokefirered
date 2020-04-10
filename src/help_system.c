@@ -74,9 +74,9 @@ u8 RunHelpSystemCallback(void)
         sVideoState.state = 2;
         break;
     case 2:
-        RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
-        RequestDma3Copy(sPals, (void *)PLTT, sizeof(sPals), 0);
-        RequestDma3Copy(sTiles, gDecompressionBuffer + 0x3EE0, sizeof(sTiles), 0);
+        RequestDma3Fill(0, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, DMA3_16BIT);
+        RequestDma3Copy(sPals, (void *)PLTT, sizeof(sPals), DMA3_16BIT);
+        RequestDma3Copy(sTiles, gDecompressionBuffer + 0x3EE0, sizeof(sTiles), DMA3_16BIT);
         sVideoState.state = 3;
         break;
     case 3:
@@ -160,7 +160,7 @@ void SaveMapGPURegs(void)
 
 void SaveMapTiles(void)
 {
-    RequestDma3Copy((void *)BG_CHAR_ADDR(3), sMapTilesBackup, BG_CHAR_SIZE, 0);
+    RequestDma3Copy((void *)BG_CHAR_ADDR(3), sMapTilesBackup, BG_CHAR_SIZE, DMA3_16BIT);
 }
 
 void SaveMapTextColors(void)
@@ -189,7 +189,7 @@ void RestoreGPURegs(void)
 
 void RestoreMapTiles(void)
 {
-    RequestDma3Copy(sMapTilesBackup, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
+    RequestDma3Copy(sMapTilesBackup, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, DMA3_16BIT);
 }
 
 void RestoreMapTextColors(void)
@@ -203,7 +203,7 @@ void RestoreMapTextColors(void)
 
 void CommitTilemap(void)
 {
-    RequestDma3Copy(gDecompressionBuffer, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, 0);
+    RequestDma3Copy(gDecompressionBuffer, (void *)BG_CHAR_ADDR(3), BG_CHAR_SIZE, DMA3_16BIT);
 }
 
 void HS_DrawBgTilemapRect(u16 baseTile, u8 left, u8 top, u8 width, u8 height, u16 increment)

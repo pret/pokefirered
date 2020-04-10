@@ -1952,9 +1952,9 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         SetVBlankCallback(NULL);
         ResetSpriteData();
         FreeAllSpritePalettes();
-        RequestDma3Fill(0, (void *)OAM, OAM_SIZE, 1);
-        RequestDma3Fill(0, (void *)VRAM, 0x20, 1);
-        RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, 1);
+        RequestDma3Fill(0, (void *)OAM, OAM_SIZE, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)VRAM, 0x20, DMA3_32BIT);
+        RequestDma3Fill(0, (void *)(VRAM + 0xC000), 0x20, DMA3_32BIT);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgPositions();
         ResetBgsAndClearDma3BusyFlags(FALSE);

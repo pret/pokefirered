@@ -299,7 +299,7 @@ void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 of
 
 static void TaskFreeBufAfterCopyingTileDataToVram(u8 taskId)
 {
-    if (!CheckForSpaceForDma3Request(gTasks[taskId].data[0]))
+    if (!WaitDma3Request(gTasks[taskId].data[0]))
     {
         Free((void *)GetWordTaskArg(taskId, 1));
         DestroyTask(taskId);

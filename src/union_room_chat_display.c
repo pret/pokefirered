@@ -1252,7 +1252,7 @@ static void SetBgTilemapWorkBuffers(void)
 
 static void ClearBg0(void)
 {
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, 1);
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(0), 0x20, DMA3_32BIT);
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
 }
@@ -1279,7 +1279,7 @@ static void LoadLinkMiscMenuGfx(void)
 static void LoadBg1Pal8(void)
 {
     LoadPalette(sBg1Pal8, 0x80, 0x20);
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, 1);
+    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + 0x20, 0x20, DMA3_32BIT);
 }
 
 static void LoadWin0(void)

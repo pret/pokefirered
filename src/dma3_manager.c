@@ -3,12 +3,7 @@
 
 #define MAX_DMA_REQUESTS 128
 
-#define DMA_REQUEST_COPY32 1
-#define DMA_REQUEST_FILL32 2
-#define DMA_REQUEST_COPY16 3
-#define DMA_REQUEST_FILL16 4
-
-static /*IWRAM_DATA*/ struct {
+static struct {
     /* 0x00 */ const u8 *src;
     /* 0x04 */ u8 *dest;
     /* 0x08 */ u16 size;
@@ -26,7 +21,7 @@ void ClearDma3Requests(void)
     gDma3ManagerLocked = TRUE;
     gDma3RequestCursor = 0;
 
-    for(i = 0; i < (u8)ARRAY_COUNT(gDma3Requests); i++)
+    for(i = 0; i < (u8)NELEMS(gDma3Requests); i++)
     {
         gDma3Requests[i].size = 0;
         gDma3Requests[i].src = 0;
@@ -108,10 +103,10 @@ s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
             gDma3Requests[cursor].dest = dest;
             gDma3Requests[cursor].size = size;
 
-            if(mode == 1)
-                gDma3Requests[cursor].mode = mode;
+            if(mode == DMA3_32BIT)
+                gDma3Requests[cursor].mode = DMA_REQUEST_COPY32;
             else
-                gDma3Requests[cursor].mode = 3;
+                gDma3Requests[cursor].mode = DMA_REQUEST_COPY16;
 
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
@@ -146,10 +141,10 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
             gDma3Requests[cursor].mode = mode;
             gDma3Requests[cursor].value = value;
 
-            if(mode == 1)
-                gDma3Requests[cursor].mode = 2;
+            if(mode == DMA3_32BIT)
+                gDma3Requests[cursor].mode = DMA_REQUEST_FILL32;
             else
-                gDma3Requests[cursor].mode = 4;
+                gDma3Requests[cursor].mode = DMA_REQUEST_FILL16;
 
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
@@ -167,7 +162,7 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
     return -1;
 }
 
-s16 CheckForSpaceForDma3Request(s16 index)
+s16 WaitDma3Request(s16 index)
 {
     int current = 0;
 

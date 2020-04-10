@@ -336,7 +336,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     ChangeBgY(3, 0, 0);
     SetBgTilemapBuffer(0, buffer->field_0914);
     SetBgTilemapBuffer(3, buffer->field_1914);
-    RequestDma3Fill(0, (void *)BG_VRAM, 0x20, TRUE);
+    RequestDma3Fill(0, (void *)BG_VRAM, 0x20, DMA3_32BIT);
     FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 32, 32);
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));

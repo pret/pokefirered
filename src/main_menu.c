@@ -392,7 +392,7 @@ static void Task_PrintMainMenuText(u8 taskId)
 
 static void Task_WaitDma3AndFadeIn(u8 taskId)
 {
-    if (CheckForSpaceForDma3Request(-1) != -1)
+    if (WaitDma3Request(-1) != -1)
     {
         gTasks[taskId].func = Task_UpdateVisualSelection;
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0xFFFF);

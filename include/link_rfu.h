@@ -139,7 +139,7 @@ typedef struct UnkRfuStruct_2
     /* 0x0e4 */ u8 cmd5f00Ack[5];
     /* 0x0e9 */ u8 cmd_6600_recvd[5];
     /* 0x0ee */ vu8 errorState;
-    /* 0x0ef */ u8 isShuttingDown;
+    /* 0x0ef */ bool8 isShuttingDown;
     /* 0x0f0 */ u8 linkLossRecoveryState;
     /* 0x0f1 */ u8 unk_f1;
     /* 0x0f2 */ u16 unk_f2[6];

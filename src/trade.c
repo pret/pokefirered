@@ -43,7 +43,6 @@ struct TradeMenuResources
     /*0x006A*/ u8 filler_6A[0x6F - 0x6A];
     /*0x006F*/ u8 tradeMenuCBnum;
     /*0x0070*/ u8 unk_70;
-    /*0x0071*/ u8 filler_71;
     /*0x0072*/ u16 cursorStartTile;
     /*0x0074*/ u8 menuRedrawState[2];
     /*0x0076*/ u8 menuRedrawCursorPos[2];
@@ -53,7 +52,6 @@ struct TradeMenuResources
     /*0x007B*/ u8 unk_7B;
     /*0x007C*/ u8 filler_7C[0x7E - 0x7C];
     /*0x007E*/ u8 otherPlayerCursorPosition;
-    /*0x007F*/ u8 filler_7F;
     /*0x0080*/ u16 linkData[20];
     /*0x00A8*/ u8 loadUiSpritesState;
     /*0x00A9*/ u8 giftRibbons[NUM_TRADED_GIFT_RIBBONS];

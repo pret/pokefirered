@@ -584,7 +584,7 @@ bool8 UpdateRepelCounter(void)
     if (InUnionRoom() == TRUE)
         return FALSE;
 
-    if (gQuestLogState == 2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
         return FALSE;
 
     steps = VarGet(VAR_REPEL_STEP_COUNT);

@@ -3657,7 +3657,7 @@ sub_8136350: @ 8136350
 	ldr r1, _0813650C @ =0x000032f8
 	adds r0, r2, r1
 	ldr r1, [r0]
-	ldr r0, _08136510 @ =sub_804CF14
+	ldr r0, _08136510 @ =CB2_ReturnToTradeMenuFromSummary
 	cmp r1, r0
 	beq _081363DA
 	b _08136518
@@ -3797,7 +3797,7 @@ _08136500: .4byte 0x00003090
 _08136504: .4byte gText_Slash
 _08136508: .4byte gUnknown_203B144
 _0813650C: .4byte 0x000032f8
-_08136510: .4byte sub_804CF14
+_08136510: .4byte CB2_ReturnToTradeMenuFromSummary
 _08136514: .4byte 0x00003024
 _08136518:
 	ldr r4, _0813677C @ =gUnknown_203B140
@@ -10237,7 +10237,7 @@ sub_813995C: @ 813995C
 	ldr r1, _081399D8 @ =0x000032f8
 	adds r0, r5, r1
 	ldr r1, [r0]
-	ldr r0, _081399DC @ =sub_804CF14
+	ldr r0, _081399DC @ =CB2_ReturnToTradeMenuFromSummary
 	cmp r1, r0
 	bne _081399E8
 	ldr r1, _081399E0 @ =0x00003024
@@ -10265,7 +10265,7 @@ _081399CC: .4byte gUnknown_203B170
 _081399D0: .4byte gUnknown_203B140
 _081399D4: .4byte 0x00003290
 _081399D8: .4byte 0x000032f8
-_081399DC: .4byte sub_804CF14
+_081399DC: .4byte CB2_ReturnToTradeMenuFromSummary
 _081399E0: .4byte 0x00003024
 _081399E4: .4byte 0x0000ffff
 _081399E8:
@@ -10764,7 +10764,7 @@ sub_8139DBC: @ 8139DBC
 	ldr r1, _08139E10 @ =0x000032f8
 	adds r0, r2, r1
 	ldr r1, [r0]
-	ldr r0, _08139E14 @ =sub_804CF14
+	ldr r0, _08139E14 @ =CB2_ReturnToTradeMenuFromSummary
 	cmp r1, r0
 	bne _08139E2C
 	ldr r1, _08139E18 @ =0x00003024
@@ -10781,7 +10781,7 @@ sub_8139DBC: @ 8139DBC
 _08139E08: .4byte gUnknown_203B140
 _08139E0C: .4byte 0x00003290
 _08139E10: .4byte 0x000032f8
-_08139E14: .4byte sub_804CF14
+_08139E14: .4byte CB2_ReturnToTradeMenuFromSummary
 _08139E18: .4byte 0x00003024
 _08139E1C: .4byte SpriteCallbackDummy
 _08139E20:

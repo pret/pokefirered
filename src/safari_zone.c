@@ -67,7 +67,7 @@ void CB2_EndSafariBattle(void)
     {
         ScriptContext2_RunNewScript(SafariZone_EventScript_OutOfBallsMidBattle);
         WarpIntoMap();
-        gFieldCallback = sub_807E3EC;
+        gFieldCallback = FieldCB_SafariZoneRanOutOfBalls;
         SetMainCallback2(CB2_LoadMap);
     }
     else if (gBattleOutcome == B_OUTCOME_CAUGHT)

@@ -1,20 +1,14 @@
 #include "global.h"
-#include "bg.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
-#include "main.h"
 #include "m4a.h"
 #include "random.h"
-#include "dma3.h"
 #include "gba/flash_internal.h"
 #include "help_system.h"
-#include "sound.h"
 #include "new_menu_helpers.h"
-#include "malloc.h"
 #include "overworld.h"
-#include "sprite.h"
 #include "play_time.h"
 #include "intro.h"
 #include "battle_controllers.h"
@@ -176,7 +170,7 @@ static void InitMainCallbacks(void)
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
-    gUnknown_3005E88 = 0;
+    gQuestLogPlaybackState = 0;
 }
 
 static void CallCallbacks(void)

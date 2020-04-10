@@ -1,4 +1,5 @@
 #include "global.h"
+#include "gflib.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_player_avatar.h"
@@ -10,7 +11,6 @@
 #include "quest_log.h"
 #include "save.h"
 #include "save_location.h"
-#include "sound.h"
 #include "strings.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -1892,7 +1892,7 @@ void HelpSystem_Disable(void)
 
 void HelpSystem_Enable(void)
 {
-    if (gQuestLogState != 2 && gQuestLogState != 3)
+    if (!QL_IS_PLAYBACK_STATE)
     {
         gHelpSystemEnabled = TRUE;
         HelpSystem_EnableToggleWithRButton();

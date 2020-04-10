@@ -8,7 +8,7 @@
 // Exported RAM declarations
 
 // Exported ROM declarations
-void sub_8081A90(u8 taskId);
+void Task_WaitForReceivedRemoteLinkPlayers5SecondTimeout(u8 taskId);
 u8 CreateTask_ReestablishLinkInCableClubRoom(void);
 void CB2_ReturnFromCableClubBattle(void);
 bool32 GetSeeingLinkPlayerCardMsg(u8 who);

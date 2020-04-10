@@ -544,41 +544,11 @@ struct QuestLogNPCData
     u32 movementType:8;
 };
 
-struct UnkStruct_203B024
-{
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04[14];
-};
-
-union QuestLogScene
-{
-    u8 allocation[32];
-    u16 ident;
-};
-
-typedef union QuestLogScene QuestLogScene;
-
-// This name is a complete guess and may change.
-
 #define BERRY_TREES_COUNT  128
 #define FLAGS_COUNT        288 // 300
 #define VARS_COUNT         256
 #define MAIL_COUNT         (PARTY_SIZE + 10)
 #define PC_MAIL_NUM(i)     (PARTY_SIZE + (i))
-
-// Declare here so that it can be recursively referenced.
-union QuestLogMovement;
-
-// Define here
-union QuestLogMovement
-{
-    u16 ident_raw;
-    struct {
-        u16 ident:12;
-        u16 flags:4;
-    } ident_struct;
-};
 
 struct QuestLogObjectEvent
 {
@@ -619,7 +589,7 @@ struct QuestLogObjectEvent
 
 struct QuestLog
 {
-    /*0x0000*/ u8 unk_000;
+    /*0x0000*/ u8 startType;
     /*0x0001*/ u8 mapGroup;
     /*0x0002*/ u8 mapNum;
     /*0x0003*/ u8 warpId;
@@ -632,7 +602,7 @@ struct QuestLog
     /*0x0148*/ u8 flags[FLAGS_COUNT];
     /*0x02c8*/ u16 vars[VARS_COUNT];
     /*0x0468*/ struct QuestLogNPCData npcData[64];
-    /*0x0568*/ u16 unk_568[128];
+    /*0x0568*/ u16 script[128];
     /*0x0668*/ u16 end[0];
 };
 

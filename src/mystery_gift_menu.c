@@ -1,21 +1,14 @@
 #include "global.h"
-#include "palette.h"
-#include "gpu_regs.h"
-#include "bg.h"
+#include "gflib.h"
 #include "task.h"
 #include "scanline_effect.h"
-#include "malloc.h"
-#include "text.h"
-#include "window.h"
 #include "text_window.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
-#include "sound.h"
 #include "mystery_gift_menu.h"
 #include "title_screen.h"
 #include "list_menu.h"
 #include "link_rfu.h"
-#include "string_util.h"
 #include "mevent.h"
 #include "save.h"
 #include "link.h"
@@ -398,7 +391,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 mg_or_ereader)
         SetBgTilemapBuffer(0, Alloc(0x800));
 
         LoadUserWindowBorderGfx(0, 10, 0xE0);
-        sub_814FDA0(0,  1, 0xF0);
+        DrawWindowBorderWithStdpal3(0,  1, 0xF0);
         DecompressAndLoadBgGfxUsingHeap(3, gUnkTextboxBorderGfx, 0x100, 0, 0);
         InitWindows(sMainWindows);
         DeactivateAllTextPrinters();

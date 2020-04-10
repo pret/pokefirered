@@ -1,6 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "constants/species.h"
-#include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "link.h"

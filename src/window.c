@@ -1,8 +1,5 @@
 #include "global.h"
-#include "window.h"
-#include "malloc.h"
-#include "bg.h"
-#include "blit.h"
+#include "gflib.h"
 
 u8 gWindowClearTile;
 void *gWindowBgTilemapBuffers[4];

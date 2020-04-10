@@ -1,6 +1,5 @@
 #include "global.h"
-#include "gba/isagbprint.h"
-#include "palette.h"
+#include "gflib.h"
 #include "script.h"
 #include "mystery_event_script.h"
 #include "event_data.h"
@@ -14,15 +13,12 @@
 #include "field_tasks.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
-#include "sound.h"
 #include "script_movement.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "field_message_box.h"
 #include "new_menu_helpers.h"
-#include "window.h"
 #include "script_menu.h"
-#include "string_util.h"
 #include "data.h"
 #include "field_specials.h"
 #include "constants/items.h"
@@ -37,24 +33,25 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "field_door.h"
+#include "constants/event_objects.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
 extern const u8 *const gStdScripts[];
 extern const u8 *const gStdScriptsEnd[];
 
-static bool8 sub_806B93C(struct ScriptContext * ctx);
-static u8 sub_806B96C(struct ScriptContext * ctx);
+static bool8 ScriptContext_NextCommandEndsScript(struct ScriptContext * ctx);
+static u8 ScriptContext_GetQuestLogInput(struct ScriptContext * ctx);
 
 static EWRAM_DATA ptrdiff_t gVScriptOffset = 0;
-static EWRAM_DATA u8 gUnknown_20370AC = 0;
+static EWRAM_DATA u8 sQuestLogWaitButtonPressTimer = 0;
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
 static EWRAM_DATA u16 sMovingNpcMapBank = 0;
 static EWRAM_DATA u16 sMovingNpcMapId = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
-struct ScriptContext * gUnknown_3005070;
+struct ScriptContext * sQuestLogScriptContextPtr;
 u8 gSelectedObjectEvent;
 
 // This is defined in here so the optimizer can't see its value when compiling
@@ -803,7 +800,7 @@ bool8 ScrCmd_warpteleport2(struct ScriptContext * ctx)
 
     SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     SavePlayerFacingDirectionForTeleport(GetPlayerFacingDirection());
-    sub_807E500();
+    DoTeleport2Warp();
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
@@ -926,7 +923,7 @@ bool8 ScrCmd_playbgm(struct ScriptContext * ctx)
     u16 songId = ScriptReadHalfword(ctx);
     bool8 val = ScriptReadByte(ctx);
 
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
     if (val == TRUE)
         Overworld_SetSavedMusic(songId);
@@ -942,7 +939,7 @@ bool8 ScrCmd_savebgm(struct ScriptContext * ctx)
 
 bool8 ScrCmd_fadedefaultbgm(struct ScriptContext * ctx)
 {
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
     Overworld_ChangeMusicToDefault();
     return FALSE;
@@ -951,7 +948,7 @@ bool8 ScrCmd_fadedefaultbgm(struct ScriptContext * ctx)
 bool8 ScrCmd_fadenewbgm(struct ScriptContext * ctx)
 {
     u16 music = ScriptReadHalfword(ctx);
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
     Overworld_ChangeMusicTo(music);
     return FALSE;
@@ -961,7 +958,7 @@ bool8 ScrCmd_fadeoutbgm(struct ScriptContext * ctx)
 {
     u8 speed = ScriptReadByte(ctx);
 
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
     if (speed != 0)
         FadeOutBGMTemporarily(4 * speed);
@@ -975,7 +972,7 @@ bool8 ScrCmd_fadeinbgm(struct ScriptContext * ctx)
 {
     u8 speed = ScriptReadByte(ctx);
 
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return FALSE;
     if (speed != 0)
         FadeInBGM(4 * speed);
@@ -1203,7 +1200,7 @@ bool8 ScrCmd_lockall(struct ScriptContext * ctx)
     else
     {
         ScriptFreezeObjectEvents();
-        SetupNativeScript(ctx, sub_8069590);
+        SetupNativeScript(ctx, NativeScript_WaitPlayerStopMoving);
         return TRUE;
     }
 }
@@ -1219,12 +1216,12 @@ bool8 ScrCmd_lock(struct ScriptContext * ctx)
         if (gObjectEvents[gSelectedObjectEvent].active)
         {
             LockSelectedObjectEvent();
-            SetupNativeScript(ctx, sub_8069648);
+            SetupNativeScript(ctx, NativeScript_WaitPlayerAndTargetNPCStopMoving);
         }
         else
         {
             ScriptFreezeObjectEvents();
-            SetupNativeScript(ctx, sub_8069590);
+            SetupNativeScript(ctx, NativeScript_WaitPlayerStopMoving);
         }
         return TRUE;
     }
@@ -1235,7 +1232,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext * ctx)
     u8 playerObjectId;
 
     HideFieldMessageBox();
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -1249,7 +1246,7 @@ bool8 ScrCmd_release(struct ScriptContext * ctx)
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(0xFF, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -1319,16 +1316,16 @@ static bool8 WaitForAorBPress(void)
     if (JOY_NEW(B_BUTTON))
         return TRUE;
 
-    if (sub_806B93C(gUnknown_3005070) == TRUE)
+    if (ScriptContext_NextCommandEndsScript(sQuestLogScriptContextPtr) == TRUE)
     {
-        u8 r4 = sub_806B96C(gUnknown_3005070);
-        RegisterQuestLogInput(r4);
-        if (r4 != QL_INPUT_OFF)
+        u8 qlogInput = ScriptContext_GetQuestLogInput(sQuestLogScriptContextPtr);
+        RegisterQuestLogInput(qlogInput);
+        if (qlogInput != QL_INPUT_OFF)
         {
-            if (gQuestLogState != QL_STATE_2)
+            if (gQuestLogState != QL_STATE_PLAYBACK)
             {
                 ClearMsgBoxCancelableState();
-                if (r4 != QL_INPUT_A && r4 != QL_INPUT_B)
+                if (qlogInput != QL_INPUT_A && qlogInput != QL_INPUT_B)
                     SetQuestLogInputIsDpadFlag();
                 else
                 {
@@ -1339,18 +1336,18 @@ static bool8 WaitForAorBPress(void)
             }
         }
     }
-    if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_2)
+    if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_PLAYBACK)
     {
-        if (gUnknown_20370AC == 120)
+        if (sQuestLogWaitButtonPressTimer == 120)
             return TRUE;
         else
-            gUnknown_20370AC++;
+            sQuestLogWaitButtonPressTimer++;
     }
 
     return FALSE;
 }
 
-static bool8 sub_806B93C(struct ScriptContext * ctx)
+static bool8 ScriptContext_NextCommandEndsScript(struct ScriptContext * ctx)
 {
     const u8 * script = ctx->scriptPtr;
     u8 nextCmd = *script;
@@ -1365,7 +1362,7 @@ static bool8 sub_806B93C(struct ScriptContext * ctx)
         return TRUE;
 }
 
-static u8 sub_806B96C(struct ScriptContext * ctx)
+static u8 ScriptContext_GetQuestLogInput(struct ScriptContext * ctx)
 {
     if (JOY_HELD(DPAD_UP) && gSpecialVar_Facing != DIR_NORTH)
         return QL_INPUT_UP;
@@ -1402,10 +1399,10 @@ static u8 sub_806B96C(struct ScriptContext * ctx)
 
 bool8 ScrCmd_waitbuttonpress(struct ScriptContext * ctx)
 {
-    gUnknown_3005070 = ctx;
+    sQuestLogScriptContextPtr = ctx;
 
-    if (sub_8112CAC() == 1 || gQuestLogState == 2)
-        gUnknown_20370AC = 0;
+    if (sub_8112CAC() == 1 || gQuestLogState == QL_STATE_PLAYBACK)
+        sQuestLogWaitButtonPressTimer = 0;
     SetupNativeScript(ctx, WaitForAorBPress);
     return TRUE;
 }

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "save.h"
 #include "decompress.h"
-#include "main.h"
 #include "overworld.h"
 #include "load_save.h"
 #include "task.h"

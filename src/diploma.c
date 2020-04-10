@@ -1,23 +1,14 @@
 #include "global.h"
-#include "bg.h"
-#include "constants/fanfares.h"
+#include "gflib.h"
 #include "dynamic_placeholder_text_util.h"
-#include "gba/macro.h"
-#include "gpu_regs.h"
-#include "main.h"
-#include "malloc.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
-#include "palette.h"
 #include "pokedex.h"
 #include "scanline_effect.h"
-#include "sound.h"
-#include "sprite.h"
 #include "strings.h"
 #include "task.h"
-#include "text.h"
-#include "window.h"
+#include "constants/fanfares.h"
 
 struct Diploma
 {
@@ -193,7 +184,7 @@ static void Task_DiplomaReturnToOverworld(u8 taskId)
     DestroyTask(taskId);
     FreeAllWindowBuffers();
     FREE_AND_SET_NULL(gDiploma);
-    SetMainCallback2(sub_80568FC);
+    SetMainCallback2(CB2_ReturnToFieldFromDiploma);
 }
 
 static void DiplomaBgInit(void)

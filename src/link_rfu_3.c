@@ -1,12 +1,10 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
 #include "event_data.h"
 #include "link.h"
 #include "link_rfu.h"
-#include "malloc.h"
 #include "random.h"
-#include "string_util.h"
-#include "text.h"
 #include "constants/flags.h"
 
 static EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;

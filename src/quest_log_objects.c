@@ -131,7 +131,7 @@ void SetSav1ObjectEventsFromQuestLog(const struct QuestLog * questLog, const str
 
 void sub_815A540(void)
 {
-    if (gQuestLogState == QL_STATE_2)
+    if (gQuestLogState == QL_STATE_PLAYBACK)
     {
         s16 x, y;
 
@@ -139,7 +139,7 @@ void sub_815A540(void)
         if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)) && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         {
             struct ObjectEvent * objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-            SetPlayerAvatarTransitionFlags(0x01);
+            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
             DestroySprite(&gSprites[objectEvent->fieldEffectSpriteId]);
         }
     }

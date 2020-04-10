@@ -1,6 +1,6 @@
 #include "global.h"
+#include "gflib.h"
 #include "decompress.h"
-#include "sound.h"
 #include "task.h"
 #include "trig.h"
 #include "constants/songs.h"

@@ -1,4 +1,3 @@
-#include "global.h"
 #include "librfu.h"
 
 static void sio32intr_clock_master(void);

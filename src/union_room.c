@@ -1789,7 +1789,7 @@ static void Task_ExchangeCards(u8 taskId)
     {
     case 0:
         if (GetMultiplayerId() == 0)
-            sub_800A474(2);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(2);
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -3461,7 +3461,7 @@ void InitUnionRoom(void)
     struct UnkStruct_URoom * ptr;
 
     sUnionRoomPlayerName[0] = EOS;
-    if (gQuestLogState == 2 || gQuestLogState == 3)
+    if (QL_IS_PLAYBACK_STATE)
         return;
     CreateTask(Task_InitUnionRoom, 0);
     sUnionRoomMain.uRoom = sUnionRoomMain.uRoom; // Needed to match.

@@ -1,20 +1,13 @@
 #include "global.h"
-#include "gpu_regs.h"
+#include "gflib.h"
 #include "scanline_effect.h"
 #include "text_window_graphics.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "task.h"
-#include "palette.h"
 #include "overworld.h"
-#include "malloc.h"
 #include "help_system.h"
-#include "main.h"
-#include "bg.h"
-#include "window.h"
-#include "text.h"
 #include "text_window.h"
-#include "string_util.h"
 #include "strings.h"
 #include "field_fadetransition.h"
 #include "gba/m4a_internal.h"
@@ -352,7 +345,7 @@ static bool8 LoadOptionMenuPalette(void)
         LoadPalette(stdpal_get(2), 0xF0, 0x20);
         break;
     case 3:
-        sub_814FDA0(1, 0x1B3, 0x30);
+        DrawWindowBorderWithStdpal3(1, 0x1B3, 0x30);
         break;
     default:
         return TRUE;

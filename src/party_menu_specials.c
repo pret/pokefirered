@@ -1,14 +1,12 @@
 #include "global.h"
+#include "gflib.h"
 #include "data.h"
 #include "script.h"
 #include "overworld.h"
-#include "palette.h"
-#include "pokemon.h"
 #include "party_menu.h"
 #include "field_fadetransition.h"
 #include "pokemon_summary_screen.h"
 #include "event_data.h"
-#include "string_util.h"
 #include "constants/moves.h"
 
 static void sub_80BF97C(u8 taskId);

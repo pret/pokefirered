@@ -1,7 +1,6 @@
 #include "global.h"
-#include "dma3.h"
+#include "gflib.h"
 #include "text_window_graphics.h"
-#include "sound.h"
 #include "mon_markings.h"
 #include "graphics.h"
 #include "constants/songs.h"

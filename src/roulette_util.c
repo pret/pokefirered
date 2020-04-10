@@ -1,5 +1,5 @@
 #include "global.h"
-#include "palette.h"
+#include "gflib.h"
 #include "roulette_util.h"
 #include "util.h"
 

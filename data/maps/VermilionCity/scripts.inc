@@ -86,7 +86,7 @@ VermilionCity_EventScript_CheckSeagallopPresent:: @ 8166996
 
 VermilionCity_EventScript_ChooseSeagallopDestRainbowPass:: @ 81669BB
 	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_OnInteractionWithSpecialNpc
+	special QuestLog_CutRecording
 	call VermilionCity_EventScript_CheckHasMysticTicket
 	compare VAR_RESULT, TRUE
 	goto_if_eq VermilionCity_EventScript_HasMysticTicket

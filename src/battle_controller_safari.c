@@ -171,7 +171,7 @@ static void HandleInputChooseAction(void)
             BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_POKEBLOCK, 0);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BAIT, 0);
             break;
         case 2:
             BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_GO_NEAR, 0);

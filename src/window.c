@@ -21,11 +21,11 @@ bool16 InitWindows(const struct WindowTemplate *templates)
     void *bgTilemapBuffer;
     int j;
     u8 bgLayer;
-    u16 attrib;
+    u16 bgSize;
     u8* allocatedTilemapBuffer;
     int allocatedBaseBlock;
 
-    for (i = 0; i < 0x4; ++i)
+    for (i = 0; i < 4; ++i)
     {
         bgTilemapBuffer = GetBgTilemapBuffer(i);
         if (bgTilemapBuffer != NULL)
@@ -34,13 +34,13 @@ bool16 InitWindows(const struct WindowTemplate *templates)
             gWindowBgTilemapBuffers[i] = bgTilemapBuffer;
     }
 
-    for (i = 0; i < 0x20; ++i)
+    for (i = 0; i < WINDOWS_MAX; ++i)
     {
         gWindows[i].window = sDummyWindowTemplate;
         gWindows[i].tileData = NULL;
     }
 
-    for (i = 0, allocatedBaseBlock = 0, bgLayer = templates[i].bg; bgLayer != 0xFF && i < 0x20; ++i, bgLayer = templates[i].bg)
+    for (i = 0, allocatedBaseBlock = 0, bgLayer = templates[i].bg; bgLayer != 0xFF && i < WINDOWS_MAX; ++i, bgLayer = templates[i].bg)
     {
         if (gWindowTileAutoAllocEnabled == TRUE)
         {
@@ -51,11 +51,11 @@ bool16 InitWindows(const struct WindowTemplate *templates)
 
         if (gWindowBgTilemapBuffers[bgLayer] == NULL)
         {
-            attrib = GetBgAttribute(bgLayer, 0x8);
+            bgSize = GetBgAttribute(bgLayer, BG_ATTR_MAPSIZE);
 
-            if (attrib != 0xFFFF)
+            if (bgSize != 0xFFFF)
             {
-                allocatedTilemapBuffer = Alloc(attrib);
+                allocatedTilemapBuffer = Alloc(bgSize);
 
                 if (allocatedTilemapBuffer == NULL)
                 {
@@ -63,7 +63,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
                     return FALSE;
                 }
 
-                for (j = 0; j < attrib; ++j)
+                for (j = 0; j < bgSize; ++j)
                     allocatedTilemapBuffer[j] = 0;
 
                 gWindowBgTilemapBuffers[bgLayer] = allocatedTilemapBuffer;
@@ -103,17 +103,17 @@ u16 AddWindow(const struct WindowTemplate *template)
     u16 win;
     u8 bgLayer;
     int allocatedBaseBlock;
-    u16 attrib;
+    u16 bgSize;
     u8 *allocatedTilemapBuffer;
     int i;
 
-    for (win = 0; win < 0x20; ++win)
+    for (win = 0; win < WINDOWS_MAX; ++win)
     {
         if ((bgLayer = gWindows[win].window.bg) == 0xFF)
             break;
     }
 
-    if (win == 0x20)
+    if (win == WINDOWS_MAX)
         return 0xFF;
 
     bgLayer = template->bg;
@@ -129,16 +129,16 @@ u16 AddWindow(const struct WindowTemplate *template)
 
     if (gWindowBgTilemapBuffers[bgLayer] == NULL)
     {
-        attrib = GetBgAttribute(bgLayer, 0x8);
+        bgSize = GetBgAttribute(bgLayer, BG_ATTR_MAPSIZE);
 
-        if (attrib != 0xFFFF)
+        if (bgSize != 0xFFFF)
         {
-            allocatedTilemapBuffer = Alloc(attrib);
+            allocatedTilemapBuffer = Alloc(bgSize);
 
             if (allocatedTilemapBuffer == NULL)
                 return 0xFF;
 
-            for (i = 0; i < attrib; ++i)
+            for (i = 0; i < bgSize; ++i)
                 allocatedTilemapBuffer[i] = 0;
 
             gWindowBgTilemapBuffers[bgLayer] = allocatedTilemapBuffer;
@@ -210,7 +210,7 @@ void FreeAllWindowBuffers(void)
         }
     }
 
-    for (i = 0; i < 0x20; ++i)
+    for (i = 0; i < WINDOWS_MAX; ++i)
     {
         if (gWindows[i].tileData != NULL)
         {
@@ -246,7 +246,7 @@ void PutWindowTilemap(u8 windowId)
 
     WriteSequenceToBgTilemapBuffer(
         windowLocal.window.bg,
-        GetBgAttribute(windowLocal.window.bg, 0xA) + windowLocal.window.baseBlock,
+        GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE) + windowLocal.window.baseBlock,
         windowLocal.window.tilemapLeft,
         windowLocal.window.tilemapTop,
         windowLocal.window.width,
@@ -258,7 +258,7 @@ void PutWindowTilemap(u8 windowId)
 void PutWindowRectTilemapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette)
 {
     struct Window windowLocal = gWindows[windowId];
-    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, 0xA);
+    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE);
     int i;
 
     for (i = 0; i < height; ++i)
@@ -294,7 +294,7 @@ void ClearWindowTilemap(u8 windowId)
 void PutWindowRectTilemap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
 {
     struct Window windowLocal = gWindows[windowId];
-    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, 0xA);
+    u16 currentRow = windowLocal.window.baseBlock + (y * windowLocal.window.width) + x + GetBgAttribute(windowLocal.window.bg, BG_ATTR_BASETILE);
     int i;
 
     for (i = 0; i < height; ++i)

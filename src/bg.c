@@ -567,7 +567,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
         case BG_ATTR_WRAPAROUND:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
-        case BG_ATTR_TEXTORAFFINEMODE:
+        case BG_ATTR_MAPSIZE:
             switch (GetBgType(bg))
             {
                 case 0:

@@ -1145,7 +1145,7 @@ static void RfuPrepareSendBuffer(u16 command)
         break;
     case RFU_COMMAND_0xa100:
         if (Cmd8000recvIsFinished())
-            gSendCmd[1] = Rfu.unk_5a;
+            gSendCmd[1] = Rfu.cmdA100_blockRequestType;
         break;
     case RFU_COMMAND_0x7700:
     case RFU_COMMAND_0x7800:
@@ -1272,9 +1272,9 @@ static void RfuFunc_SendLastBlock(void)
         Rfu.RfuFunc = NULL;
 }
 
-bool8 sub_80FA0F8(u8 a0)
+bool8 LinkRfu_PrepareCmd0xA100(u8 blockRequestType)
 {
-    Rfu.unk_5a = a0;
+    Rfu.cmdA100_blockRequestType = blockRequestType;
     RfuPrepareSendBuffer(RFU_COMMAND_0xa100);
     return TRUE;
 }
@@ -1284,7 +1284,7 @@ static void RfuFunc_End5F00_PowerDownRfu(void)
     rfu_clearAllSlot();
     rfu_LMAN_powerDownRFU();
     gReceivedRemoteLinkPlayers = 0;
-    Rfu.unk_ef = 1;
+    Rfu.isShuttingDown = TRUE;
     Rfu.RfuFunc = NULL;
 }
 
@@ -1660,7 +1660,7 @@ static void sub_80FA834(u8 taskId)
         {
             if (Cmd8000recvIsFinished())
             {
-                Rfu.unk_5a = 0;
+                Rfu.cmdA100_blockRequestType = 0;
                 RfuPrepareSendBuffer(RFU_COMMAND_0xa100);
                 gTasks[taskId].data[0]++;
             }
@@ -1879,7 +1879,7 @@ bool32 LinkRfuMain1(void)
     bool32 retval = FALSE;
     Rfu.parentId = 0;
     rfu_LMAN_manager_entity(Random());
-    if (Rfu.unk_ef == 0)
+    if (!Rfu.isShuttingDown)
     {
         switch (Rfu.parent_child)
         {
@@ -1900,7 +1900,7 @@ bool32 LinkRfuMain1(void)
 bool32 LinkRfuMain2(void)
 {
     bool32 retval = FALSE;
-    if (Rfu.unk_ef == 0)
+    if (!Rfu.isShuttingDown)
     {
         if (Rfu.parent_child == MODE_PARENT)
             retval = sub_80F9204();
@@ -2091,7 +2091,7 @@ static void LmanCallback_Parent2(u8 msg, u8 param_count)
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetErrorStatus(1, msg);
         GetLinkmanErrorParams(msg);
-        Rfu.unk_ef = 1;
+        Rfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:
@@ -2164,7 +2164,7 @@ static void LmanCallback_Child(u8 msg, u8 param_count)
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetErrorStatus(1, msg);
         GetLinkmanErrorParams(msg);
-        Rfu.unk_ef = 1;
+        Rfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:
@@ -2341,7 +2341,7 @@ static void LmanCallback_Parent(u8 msg, u8 param_count)
     case LMAN_MSG_LMAN_API_ERROR_RETURN:
         RfuSetErrorStatus(1, msg);
         GetLinkmanErrorParams(msg);
-        Rfu.unk_ef = 1;
+        Rfu.isShuttingDown = TRUE;
         break;
     case LMAN_MSG_REQ_API_ERROR:
     case LMAN_MSG_WATCH_DOG_TIMER_ERROR:

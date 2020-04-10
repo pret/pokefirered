@@ -999,11 +999,11 @@ bool8 SendBlock(u8 unused, const void *src, u16 size)
     return InitBlockSend(src, size);
 }
 
-bool8 sub_800A474(u8 blockRequestType)
+bool8 Link_PrepareCmd0xCCCC_Rfu0xA100(u8 blockRequestType)
 {
     if (gWirelessCommType == 1)
     {
-        return sub_80FA0F8(blockRequestType);
+        return LinkRfu_PrepareCmd0xA100(blockRequestType);
     }
     if (gLinkCallback == NULL)
     {

@@ -24,6 +24,8 @@
 #include "constants/songs.h"
 #include "constants/moves.h"
 
+#define NUM_TRADED_GIFT_RIBBONS 11
+
 struct TradeMenuResources
 {
     /*0x0000*/ u8 bg2hofs;
@@ -54,7 +56,7 @@ struct TradeMenuResources
     /*0x007F*/ u8 filler_7F;
     /*0x0080*/ u16 linkData[20];
     /*0x00A8*/ u8 loadUiSpritesState;
-    /*0x00A9*/ u8 giftRibbons[11];
+    /*0x00A9*/ u8 giftRibbons[NUM_TRADED_GIFT_RIBBONS];
     /*0x00B4*/ u8 filler_B4[0x8D0-0xB4];
     /*0x08D0*/ struct {
         bool8 active;
@@ -1357,7 +1359,7 @@ static bool8 shedinja_maker_maybe(void)
     case 3:
         if (id == 0)
         {
-            sub_800A474(1);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
         }
         sTradeMenuResourcesPtr->state++;
         break;
@@ -1376,71 +1378,71 @@ static bool8 shedinja_maker_maybe(void)
     case 7:
         if (id == 0)
         {
-            sub_800A474(1);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
         }
         sTradeMenuResourcesPtr->state++;
         break;
     case 8:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[id ^ 1], 200);
+            Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }
         break;
     case 9:
-        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 200);
+        Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 2 * sizeof(struct Pokemon));
         sTradeMenuResourcesPtr->state++;
         break;
     case 11:
         if (id == 0)
         {
-            sub_800A474(1);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(1);
         }
         sTradeMenuResourcesPtr->state++;
         break;
     case 12:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[id ^ 1], 200);
+            Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }
         break;
     case 13:
-        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, 220);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct MailStruct) + 4); // why the extra 4 bytes?
         sTradeMenuResourcesPtr->state++;
         break;
     case 15:
         if (id == 0)
         {
-            sub_800A474(3);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(3);
         }
         sTradeMenuResourcesPtr->state++;
         break;
     case 16:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(gLinkPartnerMail, gBlockRecvBuffer[id ^ 1], 216);
+            Trade_Memcpy(gLinkPartnerMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct MailStruct));
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }
         break;
     case 17:
-        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, 11);
+        Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, NUM_TRADED_GIFT_RIBBONS);
         sTradeMenuResourcesPtr->state++;
         break;
     case 19:
         if (id == 0)
         {
-            sub_800A474(4);
+            Link_PrepareCmd0xCCCC_Rfu0xA100(4);
         }
         sTradeMenuResourcesPtr->state++;
         break;
     case 20:
         if (GetBlockReceivedStatus() == 3)
         {
-            Trade_Memcpy(sTradeMenuResourcesPtr->giftRibbons, gBlockRecvBuffer[id ^ 1], 11);
+            Trade_Memcpy(sTradeMenuResourcesPtr->giftRibbons, gBlockRecvBuffer[id ^ 1], NUM_TRADED_GIFT_RIBBONS);
             ResetBlockReceivedFlags();
             sTradeMenuResourcesPtr->state++;
         }
@@ -2185,7 +2187,7 @@ static void HandleRedrawTradeMenuOnSide(u8 side)
 
 static u8 GetNicknameStringWidthByPartyAndMonIdx(u8 *dest, u8 whichParty, u8 partyIdx)
 {
-    u8 nickname[11];
+    u8 nickname[POKEMON_NAME_LENGTH];
     if (whichParty == 0)
         GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
     else

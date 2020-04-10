@@ -127,7 +127,7 @@ typedef struct UnkRfuStruct_2
     /* 0x010 */ u16 linkman_param[2];
     /* 0x014 */ u8 unk_14[RFU_CHILD_MAX][14];
     /* 0x04c */ u8 unk_4c[14];
-    /* 0x05a */ u8 unk_5a;
+    /* 0x05a */ u8 cmdA100_blockRequestType;
     /* 0x05b */ u8 unk_5b;
     /* 0x05c */ u8 unk_5c[5];
     /* 0x061 */ u8 unk_61[5];
@@ -139,7 +139,7 @@ typedef struct UnkRfuStruct_2
     /* 0x0e4 */ u8 cmd5f00Ack[5];
     /* 0x0e9 */ u8 cmd_6600_recvd[5];
     /* 0x0ee */ vu8 errorState;
-    /* 0x0ef */ u8 unk_ef;
+    /* 0x0ef */ u8 isShuttingDown;
     /* 0x0f0 */ u8 linkLossRecoveryState;
     /* 0x0f1 */ u8 unk_f1;
     /* 0x0f2 */ u16 unk_f2[6];
@@ -207,7 +207,7 @@ u8 GetRfuPlayerCount(void);
 void StartSendingKeysToRfu(void);
 u8 LinkRfu_GetMultiplayerId(void);
 bool32 Rfu_InitBlockSend(const u8 * src, size_t size);
-bool8 sub_80FA0F8(u8 a0);
+bool8 LinkRfu_PrepareCmd0xA100(u8 blockRequestType);
 u8 Rfu_GetBlockReceivedStatus(void);
 void Rfu_SetBlockReceivedFlag(u8 who);
 void Rfu_ResetBlockReceivedFlag(u8 who);

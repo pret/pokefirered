@@ -687,7 +687,7 @@ static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 count)
         break;
     }
 
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static void PrintPlayerNameAndIdOnWindow(u8 windowId)
@@ -770,7 +770,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
         UR_AddTextPrinterParameterized(data->bButtonCancelWindowId, 0, gUnknown_845747C, 8, 2, UR_COLOR_WHT_DKE_LTE);
         PutWindowTilemap(data->bButtonCancelWindowId);
-        CopyWindowToVram(data->bButtonCancelWindowId, 2);
+        CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
         DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = sListMenuTemplate_PossibleGroupMembers;
@@ -779,7 +779,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
 
         DrawStdWindowFrame(data->nPlayerModeWindowId, FALSE);
         PutWindowTilemap(data->nPlayerModeWindowId);
-        CopyWindowToVram(data->nPlayerModeWindowId, 2);
+        CopyWindowToVram(data->nPlayerModeWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->playerCount = 1;
@@ -1312,7 +1312,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
         UR_AddTextPrinterParameterized(data->bButtonCancelWindowId, 0, gUnknown_8458FC8, 8, 2, UR_COLOR_WHT_DKE_LTE);
         PutWindowTilemap(data->bButtonCancelWindowId);
-        CopyWindowToVram(data->bButtonCancelWindowId, 2);
+        CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
         DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = sListMenuTemplate_UnionRoomGroups;
@@ -1322,7 +1322,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         DrawStdWindowFrame(data->playerNameAndIdWindowId, FALSE);
         PutWindowTilemap(data->playerNameAndIdWindowId);
         PrintPlayerNameAndIdOnWindow(data->playerNameAndIdWindowId);
-        CopyWindowToVram(data->playerNameAndIdWindowId, 2);
+        CopyWindowToVram(data->playerNameAndIdWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->leaderId = 0;
@@ -2313,7 +2313,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         FillWindowPixelBuffer(data->playerNameAndIdWindowId, PIXEL_FILL(1));
         PutWindowTilemap(data->playerNameAndIdWindowId);
         PrintPlayerNameAndIdOnWindow(data->playerNameAndIdWindowId);
-        CopyWindowToVram(data->playerNameAndIdWindowId, 2);
+        CopyWindowToVram(data->playerNameAndIdWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->leaderId = 0;
@@ -3859,7 +3859,7 @@ static u8 CreateTradeBoardWindow(const struct WindowTemplate * template)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     UR_AddTextPrinterParameterized(windowId, 0, gUnknown_8459378, 8, 1, UR_COLOR_DN5_DN6_LTB);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     return windowId;
 }
 

@@ -503,15 +503,15 @@ void DrawPreviouslyOnQuestHeader(u8 sceneNum)
     AddTextPrinterParameterized4(sQuestLogHeaderWindowIds[0], 2, 2, 2, 1, 2, sTextColors, 0, gStringVar4);
     PutWindowTilemap(sQuestLogHeaderWindowIds[0]);
     PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[0], 2);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[2], 2);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 3);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[2], COPYWIN_GFX);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_BOTH);
 }
 
 void CommitQuestLogWindow1(void)
 {
     PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 1);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_MAP);
 }
 
 static void QuestLogPlaybackSetObjectEventTemplates(u8 sceneNum)
@@ -1040,9 +1040,9 @@ static void QuestLog_CloseTextWindow(void)
 {
     ClearWindowTilemap(sQuestLogHeaderWindowIds[2]);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[2], 15, 0, 0, 0xf0, 0x30);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[2], 2);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[2], COPYWIN_GFX);
     PutWindowTilemap(sQuestLogHeaderWindowIds[1]);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 1);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_MAP);
 }
 
 static void QuestLog_SkipToEndOfPlayback(s8 delay)
@@ -1163,7 +1163,7 @@ static void Task_EndQuestLog(u8 taskId)
             for (i = 0; i < 3; i++)
             {
                 ClearWindowTilemap(sQuestLogHeaderWindowIds[i]);
-                CopyWindowToVram(sQuestLogHeaderWindowIds[i], 1);
+                CopyWindowToVram(sQuestLogHeaderWindowIds[i], COPYWIN_MAP);
                 RemoveWindow(sQuestLogHeaderWindowIds[i]);
             }
             tTimer = 0;
@@ -1207,8 +1207,8 @@ static bool8 sub_81121D8(u8 taskId)
     sub_80716F8(gPlttBufferUnfaded + 0x100, gPlttBufferFaded + 0x100, 0x100, 0x0F - data[1]);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[0], 0x00, 0, sQuestLogHeaderWindowTemplates[0].height * 8 - 1 - data[1], sQuestLogHeaderWindowTemplates[0].width * 8, 1);
     FillWindowPixelRect(sQuestLogHeaderWindowIds[1], 0x00, 0, data[1], sQuestLogHeaderWindowTemplates[1].width * 8, 1);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[0], 2);
-    CopyWindowToVram(sQuestLogHeaderWindowIds[1], 2);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[0], COPYWIN_GFX);
+    CopyWindowToVram(sQuestLogHeaderWindowIds[1], COPYWIN_GFX);
     data[1]++;
     return FALSE;
 }

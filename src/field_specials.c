@@ -1104,7 +1104,7 @@ void DrawElevatorCurrentFloorWindow(void)
         strwidth = GetStringWidth(2, floorname, 0);
         AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, 2, floorname, 56 - strwidth, 16, 0xFF, NULL);
         PutWindowTilemap(sElevatorCurrentFloorWindowId);
-        CopyWindowToVram(sElevatorCurrentFloorWindowId, 3);
+        CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_BOTH);
     }
 }
 
@@ -1365,7 +1365,7 @@ static void Task_CreateScriptListMenu(u8 taskId)
     Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
     task->data[14] = ListMenuInit(&sFieldSpecialsListMenuTemplate, task->data[7], task->data[8]);
     PutWindowTilemap(task->data[13]);
-    CopyWindowToVram(task->data[13], 3);
+    CopyWindowToVram(task->data[13], COPYWIN_BOTH);
     gTasks[taskId].func = Task_ListMenuHandleInput;
 }
 
@@ -1448,7 +1448,7 @@ static void Task_DestroyListMenu(u8 taskId)
     ClearStdWindowAndFrameToTransparent(task->data[13], TRUE);
     FillWindowPixelBuffer(task->data[13], PIXEL_FILL(0));
     ClearWindowTilemap(task->data[13]);
-    CopyWindowToVram(task->data[13], 2);
+    CopyWindowToVram(task->data[13], COPYWIN_GFX);
     RemoveWindow(task->data[13]);
     DestroyTask(taskId);
     EnableBothScriptContexts();

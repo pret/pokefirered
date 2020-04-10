@@ -128,7 +128,7 @@ static bool8 sub_8095138(void)
         sub_80956A4(sMoveMonsPtr->fromRow, sMoveMonsPtr->fromColumn);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(gPSSData->field_2200);
-        CopyWindowToVram8Bit(gPSSData->field_2200, 3);
+        CopyWindowToVram8Bit(gPSSData->field_2200, COPYWIN_BOTH);
         BlendPalettes(0x3F00, 8, RGB_WHITE);
         sub_8094D14(2);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
@@ -184,7 +184,7 @@ static bool8 sub_80952A0(void)
             sub_8095520();
             sMoveMonsPtr->toRow = sMoveMonsPtr->field_6;
             sMoveMonsPtr->toColumn = sMoveMonsPtr->field_7;
-            CopyWindowToVram8Bit(gPSSData->field_2200, 2);
+            CopyWindowToVram8Bit(gPSSData->field_2200, COPYWIN_GFX);
             sMoveMonsPtr->state++;
         }
         break;

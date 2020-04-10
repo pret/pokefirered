@@ -341,7 +341,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     TextWindow_SetUserSelectedFrame(0, 0x000, 0xe0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
     ShowBg(0);
     ShowBg(3);
     HideBg(1);
@@ -370,14 +370,14 @@ void PSA_ShowMessageWindow(void)
     PutWindowTilemap(0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     DrawTextBorderOuter(0, 0x001, 0xE);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_BOTH);
 }
 
 void PSA_HideMessageWindow(void)
 {
     ClearWindowTilemap(0);
     ClearStdWindowAndFrameToTransparent(0, FALSE);
-    CopyWindowToVram(0, 1);
+    CopyWindowToVram(0, COPYWIN_MAP);
 }
 
 void PSA_PrintMessage(u8 messageId)
@@ -448,7 +448,7 @@ void PSA_PrintMessage(u8 messageId)
 void PSA_AfterPoof_ClearMessageWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
 }
 
 bool8 PSA_IsMessagePrintTaskActive(void)
@@ -612,12 +612,12 @@ UNUSED void PSA_DrawLevelUpWindowPg1(u16 *statsBefore, u16 *statsAfter)
     DrawTextBorderOuter(1, 0x001, 0xE);
     DrawLevelUpWindowPg1(1, statsBefore, statsAfter, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 3);
+    CopyWindowToVram(1, COPYWIN_BOTH);
 }
 UNUSED void PSA_DrawLevelUpWindowPg2(u16 *currStats)
 {
     DrawLevelUpWindowPg2(1, currStats, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
 }
 
 UNUSED bool8 PSA_IsCopyingLevelUpWindowToVram(void)

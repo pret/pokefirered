@@ -397,7 +397,7 @@ static void sub_8145D18(u8 whichWindow)
             }
             break;
     }
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void sub_8146060(void)

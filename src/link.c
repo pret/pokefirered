@@ -1513,7 +1513,7 @@ void sub_800AE1C(void)
     PutWindowTilemap(0);
     PutWindowTilemap(2);
     CopyWindowToVram(0, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
     ShowBg(0);
     ShowBg(1);
 }
@@ -1526,7 +1526,7 @@ void sub_800AED0(void)
     PutWindowTilemap(1);
     PutWindowTilemap(2);
     CopyWindowToVram(1, 0);
-    CopyWindowToVram(2, 3);
+    CopyWindowToVram(2, COPYWIN_BOTH);
     ShowBg(0);
 }
 

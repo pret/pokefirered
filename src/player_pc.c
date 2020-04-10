@@ -401,7 +401,7 @@ static void Task_PlayerPcCancel(u8 taskId)
     s16 *data = gTasks[taskId].data;
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     ClearWindowTilemap(tWindowId);
-    CopyWindowToVram(tWindowId, 1);
+    CopyWindowToVram(tWindowId, COPYWIN_MAP);
     RemoveWindow(tWindowId);
     Task_ReturnToTopMenu(taskId);
 }

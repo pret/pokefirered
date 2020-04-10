@@ -1540,7 +1540,7 @@ void ShowDaycareLevelMenu(void)
     menuTemplate.windowId = windowId;
     listMenuTaskId = ListMenuInit(&menuTemplate, 0, 0);
 
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 
     daycareMenuTaskId = CreateTask(Task_HandleDaycareLevelMenuInput, 3);
     gTasks[daycareMenuTaskId].tMenuListTaskId = listMenuTaskId;
@@ -1935,7 +1935,7 @@ static void CB2_EggHatch_1(void)
         PlayFanfare(MUS_FANFA5);
         sEggHatchData->CB2_state++;
         PutWindowTilemap(sEggHatchData->windowId);
-        CopyWindowToVram(sEggHatchData->windowId, 3);
+        CopyWindowToVram(sEggHatchData->windowId, COPYWIN_BOTH);
         break;
     case 6:
         if (IsFanfareTaskInactive())

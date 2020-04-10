@@ -101,13 +101,13 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
 
     switch (mode)
     {
-        case 1:
+        case COPYWIN_MAP:
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;
-        case 2:
+        case COPYWIN_GFX:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             break;
-        case 3:
+        case COPYWIN_BOTH:
             LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
             CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
             break;

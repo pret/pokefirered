@@ -992,7 +992,7 @@ static void IntroCB_Init(struct IntroSequenceData * this)
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
         BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0, 40, 144, 16);
         PutWindowTilemap(0);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         this->state++;
         break;
     case 1:
@@ -1118,7 +1118,7 @@ static void IntroCB_GameFreakScene_CreateGameFreakLogo(struct IntroSequenceData 
         {
             BlitBitmapToWindow(0, this->gamefreakLogoArtSpriteTiles, 0x38, 0x06, 0x20, 0x40);
             BlitBitmapToWindow(0, this->gamefreakTextBitmap, 0x00, 0x28, 0x90, 0x10);
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             this->state++;
         }
         break;

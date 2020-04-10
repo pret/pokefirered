@@ -915,7 +915,7 @@ static void ShowResultsBoard(void)
     }
 
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
     VarSet(VAR_TEMP_1, windowId);
 }
 
@@ -1068,7 +1068,7 @@ void PrintTrainerTowerRecords(void)
     }
 
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
     FreeTrainerTowerDataStruct();
 }
 

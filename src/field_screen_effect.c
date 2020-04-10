@@ -396,7 +396,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         Menu_LoadStdPalAt(0xF0);
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, 3);
+        CopyWindowToVram(windowId, COPYWIN_BOTH);
         loc = GetHealLocation(1);
         if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
          && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
@@ -425,7 +425,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
     case 5:
         windowId = gTasks[taskId].data[1];
         ClearWindowTilemap(windowId);
-        CopyWindowToVram(windowId, 1);
+        CopyWindowToVram(windowId, COPYWIN_MAP);
         RemoveWindow(windowId);
         palette_bg_faded_fill_black();
         FadeInFromBlack();

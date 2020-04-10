@@ -2309,7 +2309,7 @@ static void PrintCursorMonInfo(void)
         }
     }
 
-    CopyWindowToVram(0, 2);
+    CopyWindowToVram(0, COPYWIN_GFX);
     if (gPSSData->cursorMonSpecies != SPECIES_NONE)
     {
         RequestDma3LoadMonMarking(gPSSData->cursorMonMarkings, gPSSData->monMarkingSpriteTileStart);
@@ -2597,7 +2597,7 @@ static void PrintStorageActionText(u8 id)
     AddTextPrinterParameterized(1, 1, gPSSData->field_2190, 0, 2, TEXT_SPEED_FF, NULL);
     DrawTextBorderOuter(1, 2, 13);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, 2);
+    CopyWindowToVram(1, COPYWIN_GFX);
     ScheduleBgCopyTilemapToVram(0);
 }
 

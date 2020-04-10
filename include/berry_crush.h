@@ -112,7 +112,7 @@ struct BerryCrushGame
     u8 unk8;
     u8 unk9;
     u8 unkA;
-    u8 unkB;
+    u8 textSpeed;
     u8 unkC;
     u8 unkD;
     u8 unkE;

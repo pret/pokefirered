@@ -198,7 +198,7 @@ static void ClearWindowCommitAndRemove(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     RemoveWindow(windowId);
 }
 
@@ -557,7 +557,7 @@ static void PrintBattleRecords(void)
 static void CommitWindow(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_BOTH);
 }
 
 static void LoadFrameGfxOnBg(u8 bg)

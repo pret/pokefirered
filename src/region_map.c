@@ -1889,7 +1889,7 @@ static void DisplayCurrentMapName(void)
         GetMapName(sRegionMap->mapName, GetMapsecUnderCursor(), 0);
         AddTextPrinterParameterized3(WIN_MAP_NAME, 2, 2, 2, sTextColor_White, 0, sRegionMap->mapName);
         PutWindowTilemap(WIN_MAP_NAME);
-        CopyWindowToVram(WIN_MAP_NAME, 2);
+        CopyWindowToVram(WIN_MAP_NAME, COPYWIN_GFX);
         SetGpuWindowDims(WIN_MAP_NAME, &sMapsecNameWindowDims[WIN_MAP_NAME]);
     }
 }
@@ -1921,16 +1921,16 @@ static void DisplayCurrentDungeonName(void)
          StringCopy(sRegionMap->dungeonName, sMapNames[descOffset]);
          AddTextPrinterParameterized3(WIN_DUNGEON_NAME, 2, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
          PutWindowTilemap(WIN_DUNGEON_NAME);
-         CopyWindowToVram(WIN_DUNGEON_NAME, 3);
+         CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_BOTH);
     }
 }
 
 static void ClearMapsecNameText(void)
 {
     FillWindowPixelBuffer(WIN_MAP_NAME, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_MAP_NAME, 3);
+    CopyWindowToVram(WIN_MAP_NAME, COPYWIN_BOTH);
     FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_DUNGEON_NAME, 3);
+    CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_BOTH);
 }
 
 static void BufferRegionMapBg(u8 bg, u16 *map)
@@ -2493,7 +2493,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         break;
     case 2:
         FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
-        CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+        CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
         PutWindowTilemap(WIN_MAP_PREVIEW);
         sDungeonMapPreview->drawState++;
         break;
@@ -2503,7 +2503,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         {
             AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 4, 0, sTextColor_Green, -1, GetDungeonName(GetDungeonMapsecUnderCursor()));
             AddTextPrinterParameterized3(WIN_MAP_PREVIEW, 2, 2, 14, sTextColor_White, -1, GetDungeonFlavorText(GetDungeonMapsecUnderCursor()));
-            CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
             sDungeonMapPreview->drawState++;
         }
         // Tint image
@@ -2522,7 +2522,7 @@ static void Task_DrawDungeonMapPreviewFlavorText(u8 taskId)
         if (JOY_NEW(B_BUTTON) || JOY_NEW(A_BUTTON))
         {
             FillWindowPixelBuffer(WIN_MAP_PREVIEW, PIXEL_FILL(0));
-            CopyWindowToVram(WIN_MAP_PREVIEW, 3);
+            CopyWindowToVram(WIN_MAP_PREVIEW, COPYWIN_BOTH);
             sDungeonMapPreview->mainState++;
             sDungeonMapPreview->drawState++;
         }
@@ -3002,8 +3002,8 @@ static void Task_MapCloseAnim(u8 taskId)
     {
     case 0:
         ClearOrDrawTopBar(TRUE);
-        CopyWindowToVram(WIN_TOPBAR_LEFT, 3);
-        CopyWindowToVram(WIN_TOPBAR_RIGHT, 3);
+        CopyWindowToVram(WIN_TOPBAR_LEFT, COPYWIN_BOTH);
+        CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_BOTH);
         sMapOpenCloseAnim->closeState++;
         break;
     case 1:
@@ -4285,7 +4285,7 @@ static void PrintTopBarTextLeft(const u8 *str)
     else
         FillWindowPixelBuffer(WIN_TOPBAR_LEFT, PIXEL_FILL(15));
     AddTextPrinterParameterized3(WIN_TOPBAR_LEFT, 0, 0, 0, sTextColors, 0, str);
-    CopyWindowToVram(WIN_TOPBAR_LEFT, 2);
+    CopyWindowToVram(WIN_TOPBAR_LEFT, COPYWIN_GFX);
 }
 
 static void PrintTopBarTextRight(const u8 *str)
@@ -4295,7 +4295,7 @@ static void PrintTopBarTextRight(const u8 *str)
     else
         FillWindowPixelBuffer(WIN_TOPBAR_RIGHT, PIXEL_FILL(15));
     AddTextPrinterParameterized3(WIN_TOPBAR_RIGHT, 0, 0, 0, sTextColors, 0, str);
-    CopyWindowToVram(WIN_TOPBAR_RIGHT, 3);
+    CopyWindowToVram(WIN_TOPBAR_RIGHT, COPYWIN_BOTH);
 }
 
 static void ClearOrDrawTopBar(bool8 clear)

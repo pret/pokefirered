@@ -216,13 +216,13 @@ void sub_814BABC(struct BerryCrushGame *arg0)
     switch (gSaveBlock2Ptr->optionsTextSpeed)
     {
     case OPTIONS_TEXT_SPEED_SLOW:
-        arg0->unkB = 8;
+        arg0->textSpeed = 8;
         break;
     case OPTIONS_TEXT_SPEED_MID:
-        arg0->unkB = 4;
+        arg0->textSpeed = 4;
         break;
     case OPTIONS_TEXT_SPEED_FAST:
-        arg0->unkB = 1;
+        arg0->textSpeed = 1;
         break;
     }
 }

@@ -352,7 +352,7 @@ static void Task_PrintMainMenuText(u8 taskId)
         AddTextPrinterParameterized3(MAIN_MENU_WINDOW_NEWGAME_ONLY, 2, 2, 2, sTextColor1, -1, gText_NewGame);
         MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME_ONLY]);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME_ONLY);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME_ONLY, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME_ONLY, COPYWIN_BOTH);
         break;
     case MAIN_MENU_CONTINUE:
         FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
@@ -364,8 +364,8 @@ static void Task_PrintMainMenuText(u8 taskId)
         MainMenu_DrawWindow(&sWindowTemplate[MAIN_MENU_WINDOW_NEWGAME]);
         PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
-        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, COPYWIN_BOTH);
         break;
     case MAIN_MENU_MYSTERYGIFT:
         FillWindowPixelBuffer(MAIN_MENU_WINDOW_CONTINUE, PIXEL_FILL(10));
@@ -382,9 +382,9 @@ static void Task_PrintMainMenuText(u8 taskId)
         PutWindowTilemap(MAIN_MENU_WINDOW_CONTINUE);
         PutWindowTilemap(MAIN_MENU_WINDOW_NEWGAME);
         PutWindowTilemap(MAIN_MENU_WINDOW_MYSTERYGIFT);
-        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, 2);
-        CopyWindowToVram(MAIN_MENU_WINDOW_MYSTERYGIFT, 3);
+        CopyWindowToVram(MAIN_MENU_WINDOW_CONTINUE, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_NEWGAME, COPYWIN_GFX);
+        CopyWindowToVram(MAIN_MENU_WINDOW_MYSTERYGIFT, COPYWIN_BOTH);
         break;
     }
     gTasks[taskId].func = Task_WaitDma3AndFadeIn;
@@ -602,7 +602,7 @@ static void PrintMessageOnWindow4(const u8 *str)
     MainMenu_DrawWindow(&sWindowTemplate[4]);
     AddTextPrinterParameterized3(MAIN_MENU_WINDOW_ERROR, 2, 0, 2, sTextColor1, 2, str);
     PutWindowTilemap(MAIN_MENU_WINDOW_ERROR);
-    CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, 2);
+    CopyWindowToVram(MAIN_MENU_WINDOW_ERROR, COPYWIN_GFX);
     SetGpuReg(REG_OFFSET_WIN0H, 0x13DD);
     SetGpuReg(REG_OFFSET_WIN0V, 0x739D);
 }

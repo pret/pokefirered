@@ -218,13 +218,13 @@ static u32 sub_814BC74(struct BerryCrushGame * r7, u8 *r5)
         if (r5[1] & 2)
         {
             StringExpandPlaceholders(gStringVar4, gUnknown_846E328[r5[0]]);
-            AddTextPrinterParameterized2(0, 2, gStringVar4, r7->unkB, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 2, gStringVar4, r7->textSpeed, 0, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
         }
         else
         {
-            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[r5[0]], r7->unkB, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[r5[0]], r7->textSpeed, NULL, TEXT_COLOR_DARK_GREY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GREY);
         }
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         break;
     case 1:
         if (!IsTextPrinterActive(0))
@@ -1170,7 +1170,7 @@ static u32 sub_814D094(struct BerryCrushGame * r5, u8 *r4)
             return 0;
         DrawDialogueFrame(0, 0);
         AddTextPrinterParameterized2(0, 2, gText_SavingDontTurnOffThePower2, 0, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         CreateTask(sub_80DA634, 0);
         break;
     case 3:
@@ -1313,10 +1313,10 @@ static u32 sub_814D3A4(struct BerryCrushGame * r5, UNUSED u8 *r1)
     case 0:
         DrawDialogueFrame(0, 0);
         if (r5->unk14 == 3)
-            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[5], r5->unkB, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[5], r5->textSpeed, 0, 2, 1, 3);
         else
-            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[6], r5->unkB, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
+            AddTextPrinterParameterized2(0, 2, gUnknown_846E328[6], r5->textSpeed, 0, 2, 1, 3);
+        CopyWindowToVram(0, COPYWIN_BOTH);
         break;
     case 1:
         if (IsTextPrinterActive(0))
